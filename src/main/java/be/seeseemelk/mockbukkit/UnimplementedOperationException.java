@@ -1,4 +1,4 @@
-package be.seeseemelk.bukkitmock;
+package be.seeseemelk.mockbukkit;
 
 public class UnimplementedOperationException extends UnsupportedOperationException
 {

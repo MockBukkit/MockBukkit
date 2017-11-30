@@ -1,4 +1,4 @@
-package be.seeseemelk.bukkitmock.inventory;
+package be.seeseemelk.mockbukkit.inventory;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -9,8 +9,8 @@ import org.bukkit.inventory.ItemFactory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import be.seeseemelk.bukkitmock.UnimplementedOperationException;
-import be.seeseemelk.bukkitmock.inventory.meta.ItemMetaMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
 
 public class ItemFactoryMock implements ItemFactory
 {

@@ -1,8 +1,8 @@
-package be.seeseemelk.bukkitmock;
+package be.seeseemelk.mockbukkit;
 
 import org.bukkit.Bukkit;
 
-public class BukkitMock
+public class MockBukkit
 {
 	/**
 	 * Start mocking the <code>Bukkit</code> singleton.

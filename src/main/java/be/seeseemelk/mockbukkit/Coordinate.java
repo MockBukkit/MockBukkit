@@ -1,4 +1,4 @@
-package be.seeseemelk.bukkitmock;
+package be.seeseemelk.mockbukkit;
 
 /**
  * A simple class that contains an x, y and z coordinate as integers.

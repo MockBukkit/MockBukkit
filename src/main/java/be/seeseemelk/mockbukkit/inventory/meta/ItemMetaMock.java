@@ -1,206 +1,220 @@
-package be.seeseemelk.bukkitmock.block;
+package be.seeseemelk.mockbukkit.inventory.meta;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-import org.bukkit.Chunk;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
-import org.bukkit.material.MaterialData;
-import org.bukkit.metadata.MetadataValue;
-import org.bukkit.plugin.Plugin;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
+import org.bukkit.inventory.meta.ItemMeta;
 
-import be.seeseemelk.bukkitmock.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
-public class BlockStateMock implements BlockState
+public class ItemMetaMock implements ItemMeta
 {
-	private MaterialData data;
+	private String displayName = null;
 	
-	public BlockStateMock()
+	public ItemMetaMock()
 	{
+		
 	}
 	
-	public BlockStateMock(MaterialData data)
+	public ItemMetaMock(ItemMeta meta)
 	{
-		this.data = data;
+		if (meta.hasDisplayName())
+		{
+			displayName = meta.getDisplayName();
+		}
 	}
 
 	@Override
-	public void setMetadata(String metadataKey, MetadataValue newMetadataValue)
+	public Map<String, Object> serialize()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public List<MetadataValue> getMetadata(String metadataKey)
+	public boolean hasDisplayName()
+	{
+		return displayName != null;
+	}
+
+	@Override
+	public String getDisplayName()
+	{
+		return displayName;
+	}
+
+	@Override
+	public void setDisplayName(String name)
+	{
+		displayName = name;
+	}
+
+	@Override
+	public boolean hasLocalizedName()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean hasMetadata(String metadataKey)
+	public String getLocalizedName()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void removeMetadata(String metadataKey, Plugin owningPlugin)
+	public void setLocalizedName(String name)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Block getBlock()
+	public boolean hasLore()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public MaterialData getData()
-	{
-		return data;
-	}
-
-	@Override
-	public Material getType()
+	public List<String> getLore()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	@Deprecated
-	public int getTypeId()
+	public void setLore(List<String> lore)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public byte getLightLevel()
+	public boolean hasEnchants()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public World getWorld()
+	public boolean hasEnchant(Enchantment ench)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public int getX()
+	public int getEnchantLevel(Enchantment ench)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public int getY()
+	public Map<Enchantment, Integer> getEnchants()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public int getZ()
+	public boolean addEnchant(Enchantment ench, int level, boolean ignoreLevelRestriction)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Location getLocation()
+	public boolean removeEnchant(Enchantment ench)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Location getLocation(Location loc)
+	public boolean hasConflictingEnchant(Enchantment ench)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Chunk getChunk()
+	public void addItemFlags(ItemFlag... itemFlags)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void setData(MaterialData data)
-	{
-		this.data = data;
-	}
-
-	@Override
-	public void setType(Material type)
+	public void removeItemFlags(ItemFlag... itemFlags)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	@Deprecated
-	public boolean setTypeId(int type)
+	public Set<ItemFlag> getItemFlags()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean update()
+	public boolean hasItemFlag(ItemFlag flag)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean update(boolean force)
+	public boolean isUnbreakable()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean update(boolean force, boolean applyPhysics)
+	public void setUnbreakable(boolean unbreakable)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	@Deprecated
-	public byte getRawData()
+	public ItemMeta clone()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		try
+		{
+			ItemMetaMock meta = (ItemMetaMock) super.clone();
+			meta.displayName = displayName;
+			return meta;
+		}
+		catch (CloneNotSupportedException e)
+		{
+			throw new Error(e);
+		}
 	}
 
-	@Override
-	@Deprecated
-	public void setRawData(byte data)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean isPlaced()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

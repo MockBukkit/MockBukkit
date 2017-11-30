@@ -1,4 +1,4 @@
-package be.seeseemelk.bukkitmock;
+package be.seeseemelk.mockbukkit;
 
 import java.io.File;
 import java.util.Collection;
@@ -41,7 +41,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Consumer;
 import org.bukkit.util.Vector;
 
-import be.seeseemelk.bukkitmock.block.BlockMock;
+import be.seeseemelk.mockbukkit.block.BlockMock;
 
 /**
  * A mock world object. Note that it is made to be as simple as possible. It is

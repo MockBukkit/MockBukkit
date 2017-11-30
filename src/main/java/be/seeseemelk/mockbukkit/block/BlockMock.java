@@ -1,4 +1,4 @@
-package be.seeseemelk.bukkitmock.block;
+package be.seeseemelk.mockbukkit.block;
 
 import java.util.Collection;
 import java.util.List;
@@ -16,7 +16,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 
-import be.seeseemelk.bukkitmock.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
 public class BlockMock implements org.bukkit.block.Block
 {

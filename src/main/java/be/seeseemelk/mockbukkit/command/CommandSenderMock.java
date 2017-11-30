@@ -1,4 +1,4 @@
-package be.seeseemelk.bukkitmock.command;
+package be.seeseemelk.mockbukkit.command;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -14,7 +14,7 @@ import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
 
-import be.seeseemelk.bukkitmock.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
 public class CommandSenderMock implements CommandSender
 {

@@ -1,4 +1,4 @@
-package be.seeseemelk.bukkitmock;
+package be.seeseemelk.mockbukkit;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -49,7 +49,7 @@ import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.util.CachedServerIcon;
 
-import be.seeseemelk.bukkitmock.inventory.ItemFactoryMock;
+import be.seeseemelk.mockbukkit.inventory.ItemFactoryMock;
 
 @SuppressWarnings("deprecation")
 public class ServerMock implements Server
