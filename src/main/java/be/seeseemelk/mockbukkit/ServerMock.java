@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -49,6 +50,7 @@ import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.util.CachedServerIcon;
 
+import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
 import be.seeseemelk.mockbukkit.inventory.ItemFactoryMock;
 
 @SuppressWarnings("deprecation")
@@ -56,6 +58,39 @@ public class ServerMock implements Server
 {
 	private final Logger logger = Logger.getLogger("ServerMock");
 	private final ItemFactory factory = new ItemFactoryMock();
+	private final PlayerMockFactory playerFactory = new PlayerMockFactory();
+	private final Set<Player> players = new HashSet<>();
+	
+	/**
+	 * Add a specific player to the set.
+	 * @param player The player to add.
+	 */
+	public void addPlayer(Player player)
+	{
+		players.add(player);
+	}
+	
+	/**
+	 * Creates a random player and adds it.
+	 */
+	public void addPlayer()
+	{
+		addPlayer(playerFactory.createRandomPlayer());
+	}
+	
+	/**
+	 * Set the numbers of mock players that are on this server.
+	 * Note that it will remove all players that are already on this server. 
+	 * @param players The number of players that are on this server.
+	 */
+	public void setPlayers(int num)
+	{
+		players.clear();
+		for (int i = 0; i < num; i++)
+		{
+			addPlayer();
+		}
+	}
 	
 	@Override
 	public void sendPluginMessage(Plugin source, String channel, byte[] message)
@@ -92,8 +127,7 @@ public class ServerMock implements Server
 	@Override
 	public Collection<? extends Player> getOnlinePlayers()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return players;
 	}
 
 	@Override
@@ -260,8 +294,14 @@ public class ServerMock implements Server
 	@Override
 	public Player getPlayer(UUID id)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		for (Player player : getOnlinePlayers())
+		{
+			if (id.equals(player.getUniqueId()))
+			{
+				return player;
+			}
+		}
+		return null;
 	}
 
 	@Override
@@ -560,8 +600,7 @@ public class ServerMock implements Server
 	@Override
 	public OfflinePlayer[] getOfflinePlayers()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return players.toArray(new OfflinePlayer[0]);
 	}
 
 	@Override

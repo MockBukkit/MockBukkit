@@ -61,12 +61,19 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 @SuppressWarnings("deprecation")
 public class PlayerMock implements Player
 {
+	private final String name;
+	private final UUID uuid;
+	
+	public PlayerMock(String name, UUID uuid)
+	{
+		this.name = name;
+		this.uuid = uuid;
+	}
 
 	@Override
 	public String getName()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return name;
 	}
 
 	@Override
@@ -787,8 +794,7 @@ public class PlayerMock implements Player
 	@Override
 	public UUID getUniqueId()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return uuid;
 	}
 
 	@Override
