@@ -1,0 +1,12 @@
+# Ignore hidden files.
+.*
+**/.*
+!.gitignore
+
+# Ignore compiled files
+/bin/
+/build/
+/*.jar
+
+# Ignore server folder
+/server
