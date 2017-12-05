@@ -18,5 +18,5 @@ public void init()
 }
 ```
 
-One can easily populate the server with several fake players by calling ```server.setPlayers(number of players);```.
+One can easily populate the server with several fake players by calling ```server.setPlayers(number of players)```.
 This will automatically created several mock players.
