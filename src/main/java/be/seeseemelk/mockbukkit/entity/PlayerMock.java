@@ -4,8 +4,10 @@ import java.net.InetSocketAddress;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.LinkedTransferQueue;
 
 import org.bukkit.Achievement;
 import org.bukkit.Effect;
@@ -57,12 +59,14 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.util.Vector;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.command.MessageTarget;
 
 @SuppressWarnings("deprecation")
-public class PlayerMock implements Player
+public class PlayerMock implements Player, MessageTarget
 {
 	private final String name;
 	private final UUID uuid;
+	private final Queue<String> messages = new LinkedTransferQueue<>();
 	
 	public PlayerMock(String name, UUID uuid)
 	{
@@ -990,15 +994,17 @@ public class PlayerMock implements Player
 	@Override
 	public void sendMessage(String message)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		System.out.format("To %s: %s%n", getName(), message);
+		messages.add(message);
 	}
 
 	@Override
 	public void sendMessage(String[] messages)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		for (String message : messages)
+		{
+			sendMessage(message);
+		}
 	}
 
 	@Override
@@ -2190,6 +2196,26 @@ public class PlayerMock implements Player
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void hidePlayer(Plugin plugin, Player player)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void showPlayer(Plugin plugin, Player player)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public String nextMessage()
+	{
+		return messages.poll();
 	}
 
 }

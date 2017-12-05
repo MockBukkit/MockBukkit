@@ -2,8 +2,8 @@ package be.seeseemelk.mockbukkit;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +26,7 @@ import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarFlag;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
+import org.bukkit.command.Command;
 import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
@@ -43,29 +44,78 @@ import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.ServicesManager;
 import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.util.CachedServerIcon;
 
+import be.seeseemelk.mockbukkit.command.CommandResult;
+import be.seeseemelk.mockbukkit.command.ConsoleCommandSenderMock;
+import be.seeseemelk.mockbukkit.command.MessageTarget;
+import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
 import be.seeseemelk.mockbukkit.inventory.ItemFactoryMock;
+import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 
 @SuppressWarnings("deprecation")
 public class ServerMock implements Server
 {
 	private final Logger logger = Logger.getLogger("ServerMock");
+	
+	private final List<PlayerMock> players = new ArrayList<>();
+
 	private final ItemFactory factory = new ItemFactoryMock();
 	private final PlayerMockFactory playerFactory = new PlayerMockFactory();
-	private final Set<Player> players = new HashSet<>();
+	private final PluginManagerMock pluginManager = new PluginManagerMock(this);
+	private ConsoleCommandSender consoleSender;
+	
+	
+	
+	/*public void init()
+	{
+		try
+		{
+			InputStreamReader reader = new InputStreamReader(ClassLoader.getSystemResourceAsStream("plugin.yml"));
+			YamlConfiguration configuration = YamlConfiguration.loadConfiguration(reader);
+			loadCommands(configuration);
+			reader.close();
+		}
+		catch (IOException e)
+		{
+			throw new RuntimeException(e);
+		}
+	}
+	
+	/**
+	 * Load all commands from the configuration file.
+	 * @param configuration The commands to load.
+	 */
+	/*private void loadCommands(Configuration configuration)
+	{
+		ConfigurationSection section = configuration.getConfigurationSection("commands");
+		for (String name : section.getKeys(false))
+		{
+			loadCommand(section, name);
+		}
+	}
+	
+	/**
+	 * Load a command from the configuration.
+	 * @param configuration The configuration file that contains the information about the command.
+	 * @param name The name of the command.
+	 */
+	/*private void loadCommand(Configuration configuration, String name)
+	{
+		PluginCommand command = new PluginCommand();
+		
+	}*/
 	
 	/**
 	 * Add a specific player to the set.
 	 * @param player The player to add.
 	 */
-	public void addPlayer(Player player)
+	public void addPlayer(PlayerMock player)
 	{
 		players.add(player);
 	}
@@ -89,6 +139,24 @@ public class ServerMock implements Server
 		for (int i = 0; i < num; i++)
 		{
 			addPlayer();
+		}
+	}
+	
+	/**
+	 * Get a specific mock player.
+	 * A player's number will never change between invocations of {@link setPlayers}.
+	 * @param num The number of the player to retrieve.
+	 * @return The chosen player.
+	 */
+	public PlayerMock getPlayer(int num)
+	{
+		if (num < 0 || num >= players.size())
+		{
+			throw new ArrayIndexOutOfBoundsException();
+		}
+		else
+		{
+			return players.get(num);
 		}
 	}
 	
@@ -135,6 +203,54 @@ public class ServerMock implements Server
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+	
+	/**
+	 * Executes a command as the console.
+	 * @param command The command to execute.
+	 * @param args The arguments to pass to the commands.
+	 * @return The value returned by {@link Command#execute}.
+	 */
+	public CommandResult executeConsole(Command command, String... args)
+	{
+		return execute(command, getConsoleSender(), args);
+	}
+	
+	/**
+	 * Executes a command as a player.
+	 * @param command The command to execute.
+	 * @param args The arguments to pass to the commands.
+	 * @return The value returned by {@link Command#execute}.
+	 */
+	public CommandResult executePlayer(Command command, String... args)
+	{
+		if (players.size() > 0)
+		{
+			return execute(command, players.get(0), args);
+		}
+		else
+		{
+			throw new IllegalStateException("Need at least one player to run the command");
+		}
+	}
+	
+	/**
+	 * Executes a command.
+	 * @param command The command to execute.
+	 * @param sender The person that executed the command.
+	 * @param args The arguments to pass to the commands.
+	 * @return The value returned by {@link Command#execute}.
+	 */
+	public CommandResult execute(Command command, CommandSender sender, String... args)
+	{
+		if (!(sender instanceof MessageTarget))
+		{
+			throw new IllegalArgumentException("Only a MessageTarget can be the sender of the command");
+		}
+		
+		boolean status = command.execute(sender, command.getName(), args);
+		CommandResult result = new CommandResult(status, (MessageTarget) sender);
+		return result;
 	}
 
 	@Override
@@ -305,10 +421,9 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public PluginManager getPluginManager()
+	public PluginManagerMock getPluginManager()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return pluginManager;
 	}
 
 	@Override
@@ -404,8 +519,25 @@ public class ServerMock implements Server
 	@Override
 	public PluginCommand getPluginCommand(String name)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		for (PluginCommand command : getPluginManager().getCommands())
+		{
+			if (name.equals(command.getName()))
+			{
+				return command;
+			}
+			else
+			{
+				for (String alias : command.getAliases())
+				{
+					if (name.equals(alias))
+					{
+						return command;
+					}
+				}
+			}
+		}
+		
+		throw new IllegalArgumentException("No such command");
 	}
 
 	@Override
@@ -586,8 +718,11 @@ public class ServerMock implements Server
 	@Override
 	public ConsoleCommandSender getConsoleSender()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (consoleSender == null)
+		{
+			consoleSender = new ConsoleCommandSenderMock();
+		}
+		return consoleSender;
 	}
 
 	@Override

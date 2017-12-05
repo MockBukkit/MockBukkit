@@ -8,7 +8,9 @@ import java.util.Queue;
 import java.util.Set;
 
 import org.bukkit.Server;
-import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.conversations.Conversation;
+import org.bukkit.conversations.ConversationAbandonedEvent;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
@@ -16,7 +18,7 @@ import org.bukkit.plugin.Plugin;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
-public class CommandSenderMock implements CommandSender
+public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTarget
 {
 	public Queue<String> messages = new LinkedList<>();
 
@@ -151,5 +153,52 @@ public class CommandSenderMock implements CommandSender
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isConversing()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void acceptConversationInput(String input)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean beginConversation(Conversation conversation)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void abandonConversation(Conversation conversation)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void abandonConversation(Conversation conversation, ConversationAbandonedEvent details)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void sendRawMessage(String message)
+	{
+		messages.add(message);
+	}
+
+	@Override
+	public String nextMessage()
+	{
+		return messages.poll();
 	}
 }
