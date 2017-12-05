@@ -47,6 +47,7 @@ import be.seeseemelk.mockbukkit.block.BlockMock;
  * A mock world object. Note that it is made to be as simple as possible. It is
  * by no means an efficient implementation.
  */
+@SuppressWarnings("deprecation")
 public class WorldMock implements World
 {
 	private Map<Coordinate, Block> blocks = new HashMap<>();

@@ -56,6 +56,7 @@ import be.seeseemelk.mockbukkit.command.MessageTarget;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
 import be.seeseemelk.mockbukkit.inventory.ItemFactoryMock;
+import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
 import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 
 @SuppressWarnings("deprecation")
@@ -755,8 +756,14 @@ public class ServerMock implements Server
 	@Override
 	public Inventory createInventory(InventoryHolder owner, InventoryType type)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		switch (type)
+		{
+			case PLAYER:
+				PlayerInventoryMock inventory = new PlayerInventoryMock("Inventory");
+				return inventory;
+			default:
+				throw new UnimplementedOperationException("Inventory type not yet supported");
+		}
 	}
 
 	@Override

@@ -10,6 +10,7 @@ import java.util.UUID;
 import java.util.concurrent.LinkedTransferQueue;
 
 import org.bukkit.Achievement;
+import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.EntityEffect;
 import org.bukkit.GameMode;
@@ -38,6 +39,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.entity.Villager;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.Inventory;
@@ -60,6 +62,7 @@ import org.bukkit.util.Vector;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.command.MessageTarget;
+import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
 
 @SuppressWarnings("deprecation")
 public class PlayerMock implements Player, MessageTarget
@@ -67,6 +70,8 @@ public class PlayerMock implements Player, MessageTarget
 	private final String name;
 	private final UUID uuid;
 	private final Queue<String> messages = new LinkedTransferQueue<>();
+	
+	private PlayerInventoryMock inventory = null;
 	
 	public PlayerMock(String name, UUID uuid)
 	{
@@ -83,8 +88,11 @@ public class PlayerMock implements Player, MessageTarget
 	@Override
 	public PlayerInventory getInventory()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (inventory == null)
+		{
+			inventory = (PlayerInventoryMock) Bukkit.createInventory(this, InventoryType.PLAYER);
+		}
+		return inventory;
 	}
 
 	@Override
