@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.bukkit.BanList;
@@ -62,7 +63,7 @@ import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 @SuppressWarnings("deprecation")
 public class ServerMock implements Server
 {
-	private final Logger logger = Logger.getLogger("ServerMock");
+	private final Logger logger;
 	
 	private final List<PlayerMock> players = new ArrayList<>();
 
@@ -70,6 +71,12 @@ public class ServerMock implements Server
 	private final PlayerMockFactory playerFactory = new PlayerMockFactory();
 	private final PluginManagerMock pluginManager = new PluginManagerMock(this);
 	private ConsoleCommandSender consoleSender;
+	
+	public ServerMock()
+	{
+		logger = Logger.getLogger("ServerMock");
+		logger.setLevel(Level.WARNING);
+	}
 	
 	/**
 	 * Add a specific player to the set.
@@ -143,7 +150,7 @@ public class ServerMock implements Server
 	@Override
 	public String getVersion()
 	{
-		return "0.0.1";
+		return "0.1.0";
 	}
 
 	@Override
@@ -496,8 +503,7 @@ public class ServerMock implements Server
 				}
 			}
 		}
-		
-		throw new IllegalArgumentException("No such command");
+		return null;
 	}
 
 	@Override
