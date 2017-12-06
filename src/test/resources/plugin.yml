@@ -1,0 +1,6 @@
+name: MockBukkitTest
+main: be.seeseemelk.mockbukkit.Test
+version: 0.1.0
+commands:
+  testcommand:
+    aliases: ["tc"]

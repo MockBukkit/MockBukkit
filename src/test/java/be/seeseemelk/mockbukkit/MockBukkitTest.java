@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assume.assumeNotNull;
 
 import org.bukkit.Bukkit;
@@ -12,7 +13,7 @@ import org.junit.Test;
 public class MockBukkitTest
 {
 	@Before
-	public void init()
+	public void setUp()
 	{
 		MockBukkit.setServerInstanceToNull();
 	}
@@ -28,10 +29,20 @@ public class MockBukkitTest
 	}
 	
 	@Test
-	public void mock()
+	public void mock_ServerMocked()
 	{
 		ServerMock server = MockBukkit.mock();
 		assertNotNull(server);
 		assertEquals(server, MockBukkit.getMock());
+		assertEquals(server, Bukkit.getServer());
+	}
+	
+	@Test
+	public void load_MyPlugin()
+	{
+		MockBukkit.mock();
+		TestPlugin plugin = (TestPlugin) MockBukkit.load(TestPlugin.class);
+		assertTrue("Plugin not enabled", plugin.isEnabled());
+		assertTrue("Plugin's onEnable method not executed", plugin.onEnableExecuted);
 	}
 }

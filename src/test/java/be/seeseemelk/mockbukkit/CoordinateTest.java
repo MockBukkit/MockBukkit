@@ -13,7 +13,7 @@ public class CoordinateTest
 	private Coordinate coordinate;
 	
 	@Before
-	public void init()
+	public void setUp()
 	{
 		coordinate = new Coordinate();
 	}
