@@ -12,7 +12,7 @@ public class MockBukkit
 	/**
 	 * Sets the global server singleton in {@link Bukkit} back to zero.
 	 */
-	private static void setServerInstanceToNull()
+	protected static void setServerInstanceToNull()
 	{
 		try
 		{

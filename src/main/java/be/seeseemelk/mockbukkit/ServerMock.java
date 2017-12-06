@@ -71,47 +71,6 @@ public class ServerMock implements Server
 	private final PluginManagerMock pluginManager = new PluginManagerMock(this);
 	private ConsoleCommandSender consoleSender;
 	
-	
-	
-	/*public void init()
-	{
-		try
-		{
-			InputStreamReader reader = new InputStreamReader(ClassLoader.getSystemResourceAsStream("plugin.yml"));
-			YamlConfiguration configuration = YamlConfiguration.loadConfiguration(reader);
-			loadCommands(configuration);
-			reader.close();
-		}
-		catch (IOException e)
-		{
-			throw new RuntimeException(e);
-		}
-	}
-	
-	/**
-	 * Load all commands from the configuration file.
-	 * @param configuration The commands to load.
-	 */
-	/*private void loadCommands(Configuration configuration)
-	{
-		ConfigurationSection section = configuration.getConfigurationSection("commands");
-		for (String name : section.getKeys(false))
-		{
-			loadCommand(section, name);
-		}
-	}
-	
-	/**
-	 * Load a command from the configuration.
-	 * @param configuration The configuration file that contains the information about the command.
-	 * @param name The name of the command.
-	 */
-	/*private void loadCommand(Configuration configuration, String name)
-	{
-		PluginCommand command = new PluginCommand();
-		
-	}*/
-	
 	/**
 	 * Add a specific player to the set.
 	 * @param player The player to add.
