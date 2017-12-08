@@ -24,4 +24,17 @@ public class ConsoleCommandSenderMockTest
 		assertEquals("Other", sender.nextMessage());
 	}
 
+	@Test
+	public void assertSaid_CorrectMessage_DoesNotAssert()
+	{
+		sender.sendMessage("A hello world");
+		sender.assertSaid("A hello world");
+	}
+	
+	@Test
+	public void assertSaid_WrongMessage_Asserts()
+	{
+		sender.sendMessage("My message");
+		sender.assertSaid("Some other message");
+	}
 }
