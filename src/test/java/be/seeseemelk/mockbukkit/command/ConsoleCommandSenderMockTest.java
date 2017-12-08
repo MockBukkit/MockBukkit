@@ -31,7 +31,7 @@ public class ConsoleCommandSenderMockTest
 		sender.assertSaid("A hello world");
 	}
 	
-	@Test
+	@Test(expected = AssertionError.class)
 	public void assertSaid_WrongMessage_Asserts()
 	{
 		sender.sendMessage("My message");

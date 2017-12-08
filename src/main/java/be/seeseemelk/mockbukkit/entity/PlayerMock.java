@@ -94,6 +94,41 @@ public class PlayerMock implements Player, MessageTarget
 		}
 		return inventory;
 	}
+	
+	@Override
+	public void sendMessage(String message)
+	{
+		System.out.format("To %s: %s%n", getName(), message);
+		messages.add(message);
+	}
+
+	@Override
+	public void sendMessage(String[] messages)
+	{
+		for (String message : messages)
+		{
+			sendMessage(message);
+		}
+	}
+
+	@Override
+	public String nextMessage()
+	{
+		return messages.poll();
+	}
+	
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (obj instanceof Player)
+		{
+			return uuid.equals(((Player) obj).getUniqueId());
+		}
+		else
+		{
+			return false;
+		}
+	}
 
 	@Override
 	public Inventory getEnderChest()
@@ -997,22 +1032,6 @@ public class PlayerMock implements Player, MessageTarget
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void sendMessage(String message)
-	{
-		System.out.format("To %s: %s%n", getName(), message);
-		messages.add(message);
-	}
-
-	@Override
-	public void sendMessage(String[] messages)
-	{
-		for (String message : messages)
-		{
-			sendMessage(message);
-		}
 	}
 
 	@Override
@@ -2218,12 +2237,6 @@ public class PlayerMock implements Player, MessageTarget
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public String nextMessage()
-	{
-		return messages.poll();
 	}
 
 }
