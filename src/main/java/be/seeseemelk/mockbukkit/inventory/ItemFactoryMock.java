@@ -101,8 +101,14 @@ public class ItemFactoryMock implements ItemFactory
 	@Override
 	public boolean equals(ItemMeta meta1, ItemMeta meta2) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (meta1 != null && meta2 != null)
+		{
+			return meta1.equals(meta2);
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	@Override
