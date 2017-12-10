@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit;
 import java.lang.reflect.Field;
 
 import org.bukkit.Bukkit;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class MockBukkit
@@ -19,6 +20,7 @@ public class MockBukkit
 			Field server = Bukkit.class.getDeclaredField("server");
 			server.setAccessible(true);
 			server.set(null, null);
+			mock = null;
 		}
 		catch (NoSuchFieldException | IllegalArgumentException | IllegalAccessException e)
 		{
@@ -36,7 +38,7 @@ public class MockBukkit
 	{
 		if (mock != null)
 		{
-			setServerInstanceToNull();
+			throw new IllegalStateException("Already mocking");
 		}
 
 		mock = new ServerMock();
@@ -72,6 +74,18 @@ public class MockBukkit
 		{
 			throw new IllegalStateException("Not mocking");
 		}
+	}
+
+	/**
+	 * Unload all loaded plugins.
+	 */
+	public static void unload()
+	{
+		for (Plugin plugin : mock.getPluginManager().getPlugins())
+		{
+			plugin.onDisable();
+		}
+		setServerInstanceToNull();
 	}
 }
 
