@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.plugin;
 import java.io.File;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -15,6 +16,7 @@ import java.util.Set;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.PluginCommandUtils;
 import org.bukkit.event.Event;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.permissions.Permissible;
@@ -39,7 +41,6 @@ public class PluginManagerMock implements PluginManager
 	private final ServerMock server;
 	private final List<Plugin> plugins = new ArrayList<>();
 	private final JavaPluginLoader loader;
-	//private final JavaPluginLoader loader = new JavaPluginLoader(MockBukkit.getMock());
 	private final List<PluginCommand> commands = new ArrayList<>();
 	private final Map<Plugin, Listener> eventListeners = new HashMap<>();
 
@@ -49,7 +50,7 @@ public class PluginManagerMock implements PluginManager
 		this.server = server;
 		loader = new JavaPluginLoader(this.server);
 	}
-	
+
 	@Override
 	public void registerInterface(Class<? extends PluginLoader> loader) throws IllegalArgumentException
 	{
@@ -89,18 +90,20 @@ public class PluginManagerMock implements PluginManager
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 	/**
 	 * Get a collection of all available commands.
+	 * 
 	 * @return A collection of all available commands.
 	 */
 	public Collection<PluginCommand> getCommands()
 	{
 		return Collections.unmodifiableList(commands);
 	}
-	
+
 	/**
 	 * Add commands from a certain plugin to the internal list of commands.
+	 * 
 	 * @param plugin The plugin from which to read commands.
 	 */
 	@SuppressWarnings("unchecked")
@@ -150,8 +153,9 @@ public class PluginManagerMock implements PluginManager
 	}
 
 	/**
-	 * Load a plugin from a class.
-	 * It will use the system resource {@code plugin.yml} as the resource file.
+	 * Load a plugin from a class. It will use the system resource
+	 * {@code plugin.yml} as the resource file.
+	 * 
 	 * @param class1 The plugin to load.
 	 * @return The loaded plugin.
 	 */
@@ -162,7 +166,8 @@ public class PluginManagerMock implements PluginManager
 			Constructor<? extends JavaPlugin> plugin = class1.getDeclaredConstructor(JavaPluginLoader.class,
 					PluginDescriptionFile.class, File.class, File.class);
 			plugin.setAccessible(true);
-			PluginDescriptionFile description = new PluginDescriptionFile(ClassLoader.getSystemResourceAsStream("plugin.yml"));
+			PluginDescriptionFile description = new PluginDescriptionFile(
+					ClassLoader.getSystemResourceAsStream("plugin.yml"));
 			JavaPlugin obj = plugin.newInstance(loader, description, null, null);
 			plugins.add(obj);
 			addCommandsFrom(obj);
@@ -179,7 +184,7 @@ public class PluginManagerMock implements PluginManager
 			throw new RuntimeException(e.getTargetException());
 		}
 	}
-	
+
 	@Override
 	public Plugin loadPlugin(File file)
 			throws InvalidPluginException, InvalidDescriptionException, UnknownDependencyException
@@ -212,8 +217,24 @@ public class PluginManagerMock implements PluginManager
 	@Override
 	public void callEvent(Event event) throws IllegalStateException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		for (Listener listener : eventListeners.values())
+		{
+			for (Method method : listener.getClass().getMethods())
+			{
+				if (method.isAnnotationPresent(EventHandler.class) && method.getParameterCount() == 1
+						&& method.getParameters()[0].getType().isInstance(event))
+				{
+					try
+					{
+						method.invoke(listener, event);
+					}
+					catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
+					{
+						throw new RuntimeException(e);
+					}
+				}
+			}
+		}
 	}
 
 	@Override
