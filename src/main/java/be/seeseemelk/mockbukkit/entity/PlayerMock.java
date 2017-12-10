@@ -98,7 +98,6 @@ public class PlayerMock implements Player, MessageTarget
 	@Override
 	public void sendMessage(String message)
 	{
-		System.out.format("To %s: %s%n", getName(), message);
 		messages.add(message);
 	}
 
