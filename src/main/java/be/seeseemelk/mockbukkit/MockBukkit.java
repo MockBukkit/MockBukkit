@@ -62,13 +62,14 @@ public class MockBukkit
 	 * 
 	 * @param class1 The plugin to load for mocking.
 	 */
-	public static JavaPlugin load(Class<? extends JavaPlugin> plugin)
+	@SuppressWarnings("unchecked")
+	public static <T extends JavaPlugin> T load(Class<T> plugin)
 	{
 		if (mock != null)
 		{
 			JavaPlugin instance = mock.getPluginManager().loadPlugin(plugin);
 			mock.getPluginManager().enablePlugin(instance);
-			return instance;
+			return (T) instance;
 		}
 		else
 		{
