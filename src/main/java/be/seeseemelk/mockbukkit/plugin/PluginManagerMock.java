@@ -6,6 +6,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -40,6 +41,7 @@ public class PluginManagerMock implements PluginManager
 	private final JavaPluginLoader loader;
 	//private final JavaPluginLoader loader = new JavaPluginLoader(MockBukkit.getMock());
 	private final List<PluginCommand> commands = new ArrayList<>();
+	private final Map<Plugin, Listener> eventListeners = new HashMap<>();
 
 	@SuppressWarnings("deprecation")
 	public PluginManagerMock(ServerMock server)
@@ -217,8 +219,7 @@ public class PluginManagerMock implements PluginManager
 	@Override
 	public void registerEvents(Listener listener, Plugin plugin)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		eventListeners.put(plugin, listener);
 	}
 
 	@Override
