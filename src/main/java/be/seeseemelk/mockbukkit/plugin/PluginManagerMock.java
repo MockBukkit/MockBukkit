@@ -105,42 +105,45 @@ public class PluginManagerMock implements PluginManager
 	protected void addCommandsFrom(JavaPlugin plugin)
 	{
 		Map<String, Map<String, Object>> commands = plugin.getDescription().getCommands();
-		for (Entry<String, Map<String, Object>> entry : commands.entrySet())
+		if (commands != null)
 		{
-			PluginCommand command = PluginCommandUtils.createPluginCommand(entry.getKey(), plugin);
-			for (Entry<String, Object> section : entry.getValue().entrySet())
+			for (Entry<String, Map<String, Object>> entry : commands.entrySet())
 			{
-				switch (section.getKey())
+				PluginCommand command = PluginCommandUtils.createPluginCommand(entry.getKey(), plugin);
+				for (Entry<String, Object> section : entry.getValue().entrySet())
 				{
-					case "description":
-						command.setDescription((String) section.getValue());
-						break;
-					case "aliases":
-						List<String> aliases = new ArrayList<>();
-						if (section.getValue() instanceof String)
-						{
-							aliases.add((String) section.getValue());
-						}
-						else
-						{
-							aliases.addAll((List<String>) section.getValue());
-						}
-						command.setAliases(aliases);
-						break;
-					case "permission":
-						command.setPermission((String) section.getValue());
-						break;
-					case "permission-message":
-						command.setPermissionMessage((String) section.getValue());
-						break;
-					case "usage":
-						command.setUsage((String) section.getValue());
-						break;
-					default:
-						throw new UnsupportedOperationException("Unknown section " + section.getKey());
+					switch (section.getKey())
+					{
+						case "description":
+							command.setDescription((String) section.getValue());
+							break;
+						case "aliases":
+							List<String> aliases = new ArrayList<>();
+							if (section.getValue() instanceof String)
+							{
+								aliases.add((String) section.getValue());
+							}
+							else
+							{
+								aliases.addAll((List<String>) section.getValue());
+							}
+							command.setAliases(aliases);
+							break;
+						case "permission":
+							command.setPermission((String) section.getValue());
+							break;
+						case "permission-message":
+							command.setPermissionMessage((String) section.getValue());
+							break;
+						case "usage":
+							command.setUsage((String) section.getValue());
+							break;
+						default:
+							throw new UnsupportedOperationException("Unknown section " + section.getKey());
+					}
 				}
+				this.commands.add(command);
 			}
-			this.commands.add(command);
 		}
 	}
 
@@ -161,6 +164,7 @@ public class PluginManagerMock implements PluginManager
 			JavaPlugin obj = plugin.newInstance(loader, description, null, null);
 			plugins.add(obj);
 			addCommandsFrom(obj);
+			obj.onLoad();
 			return obj;
 		}
 		catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
