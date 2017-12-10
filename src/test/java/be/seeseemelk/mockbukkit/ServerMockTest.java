@@ -15,6 +15,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.PlayerInventory;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -30,6 +31,12 @@ public class ServerMockTest
 	public void setUp()
 	{
 		server = MockBukkit.mock();
+	}
+	
+	@After
+	public void tearDown()
+	{
+		MockBukkit.unload();
 	}
 	
 	@Test
