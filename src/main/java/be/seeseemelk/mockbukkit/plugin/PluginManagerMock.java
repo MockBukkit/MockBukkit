@@ -243,7 +243,6 @@ public class PluginManagerMock implements PluginManager
 		if (plugin instanceof JavaPlugin)
 		{
 			JavaPluginUtils.setEnabled((JavaPlugin) plugin, true);
-			plugin.onEnable();
 		}
 		else
 		{
