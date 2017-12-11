@@ -51,7 +51,7 @@ public class PlayerInventoryMock implements PlayerInventory
 	@Override
 	public void setItem(int index, ItemStack item)
 	{
-		items[index] = item;
+		items[index] = item.clone();
 	}
 
 	/**
@@ -64,24 +64,25 @@ public class PlayerInventoryMock implements PlayerInventory
 	 */
 	public ItemStack addItem(ItemStack item)
 	{
+		item = item.clone();
 		for (int i = 0; i < items.length; i++)
 		{
 			ItemStack oItem = items[i];
-			if (item.isSimilar(oItem) && oItem.getAmount() < oItem.getMaxStackSize())
-			{
-				int toAdd = Math.min(item.getAmount() + oItem.getAmount(), item.getMaxStackSize()) - oItem.getAmount();
-				oItem.setAmount(oItem.getAmount() + toAdd);
-				item.setAmount(item.getAmount() - toAdd);
-			}
-			else if (oItem == null)
+			if (oItem == null)
 			{
 				int toAdd = Math.min(item.getAmount(), item.getMaxStackSize());
 				items[i] = item.clone();
 				items[i].setAmount(toAdd);
 				item.setAmount(item.getAmount() - toAdd);
 			}
+			else if (item.isSimilar(oItem) && oItem.getAmount() < oItem.getMaxStackSize())
+			{
+				int toAdd = Math.min(item.getAmount(), item.getMaxStackSize() - oItem.getAmount());
+				oItem.setAmount(oItem.getAmount() + toAdd);
+				item.setAmount(item.getAmount() - toAdd);
+			}
 			
-			if (item.getAmount() <= 0)
+			if (item.getAmount() == 0)
 			{
 				return null;
 			}
@@ -119,7 +120,7 @@ public class PlayerInventoryMock implements PlayerInventory
 		{
 			if (i < items.length)
 			{
-				this.items[i] = items[i];
+				this.items[i] = items[i].clone();
 			}
 			else
 			{
