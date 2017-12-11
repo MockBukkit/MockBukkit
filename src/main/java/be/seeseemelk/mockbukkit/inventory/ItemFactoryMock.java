@@ -80,8 +80,7 @@ public class ItemFactoryMock implements ItemFactory
 	@Override
 	public boolean isApplicable(ItemMeta meta, ItemStack stack) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return isApplicable(meta, stack.getType());
 	}
 
 	@Override
@@ -114,8 +113,7 @@ public class ItemFactoryMock implements ItemFactory
 	@Override
 	public ItemMeta asMetaFor(ItemMeta meta, ItemStack stack) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return asMetaFor(meta, stack.getType());
 	}
 
 	@Override
