@@ -24,5 +24,30 @@ public void tearDown()
 }
 ```
 
-One can easily populate the server with several fake players by calling ```server.setPlayers(number of players)```.
-This will automatically created several mock players.
+## Features
+### Mock Plugins
+MockBukkit contains several functions that make the unit testing of Bukkit plugins a lot easier.
+
+It is possible to create a mock plugin.
+This is useful when the plugin you are testing may be looking at other loaded plugins.
+The following piece of code creates a placeholder plugin that extends JavaPlugin.
+```java
+MockPlugin plugin = MockBukkit.createMockPlugin()
+```
+
+### Mock Players
+MockBukkit makes it easy to create several mock players to use in unit testing.
+By running ```server.setPlayers(int numberOfPlayers)``` one can set the number of online players.
+From then on it's possible to get a certain player using ```server.getPlayer(int i)```.
+
+### Mock Worlds
+Another feature is the easy creation of mock worlds.
+One can make a superflat world using one simple command:
+```java
+World world = new WorldMock(Material material, int heightUntilAir)
+```
+Using Material.DIRT and 3 as heightUntilAir will create a superflat world with a height of a 128.
+At y=0 everything will be Material.BEDROCK, and from 1 until 3 (inclusive) will be Material.DIRT
+and everything else will be Material.AIR.
+Each block is created the moment it is first accessed, so if only one block is only ever touched only one
+block will ever be created in-memory.
