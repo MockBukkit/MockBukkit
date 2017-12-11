@@ -84,18 +84,17 @@ public class PluginManagerMock implements PluginManager
 	 * Load a plugin from a class. It will use the system resource
 	 * {@code plugin.yml} as the resource file.
 	 * 
+	 * @param description The {@link PluginDescriptionFile} that contains information about the plugin.
 	 * @param class1 The plugin to load.
 	 * @return The loaded plugin.
 	 */
-	public JavaPlugin loadPlugin(Class<? extends JavaPlugin> class1)
+	public JavaPlugin loadPlugin(Class<? extends JavaPlugin> class1, PluginDescriptionFile description)
 	{
 		try
 		{
 			Constructor<? extends JavaPlugin> plugin = class1.getDeclaredConstructor(JavaPluginLoader.class,
 					PluginDescriptionFile.class, File.class, File.class);
 			plugin.setAccessible(true);
-			PluginDescriptionFile description = new PluginDescriptionFile(
-					ClassLoader.getSystemResourceAsStream("plugin.yml"));
 			JavaPlugin obj = plugin.newInstance(loader, description, null, null);
 			plugins.add(obj);
 			addCommandsFrom(obj);
@@ -103,13 +102,32 @@ public class PluginManagerMock implements PluginManager
 			return obj;
 		}
 		catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
-				| IllegalArgumentException | InvalidDescriptionException e)
+				| IllegalArgumentException e)
 		{
 			throw new RuntimeException(e);
 		}
 		catch (InvocationTargetException e)
 		{
 			throw new RuntimeException(e.getTargetException());
+		}
+	}
+	
+	/**
+	 * Load a plugin from a class. It will use the system resource
+	 * {@code plugin.yml} as the resource file.
+	 * 
+	 * @param class1 The plugin to load.
+	 * @return The loaded plugin.
+	 */
+	public JavaPlugin loadPlugin(Class<? extends JavaPlugin> class1)
+	{
+		try
+		{
+			return loadPlugin(class1, new PluginDescriptionFile(ClassLoader.getSystemResourceAsStream("plugin.yml")));
+		}
+		catch (InvalidDescriptionException e)
+		{
+			throw new RuntimeException(e);
 		}
 	}
 

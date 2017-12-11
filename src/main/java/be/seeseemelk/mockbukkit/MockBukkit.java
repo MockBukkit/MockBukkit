@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class MockBukkit
@@ -90,6 +91,24 @@ public class MockBukkit
 			}
 		}
 		setServerInstanceToNull();
+	}
+	
+	/**
+	 * Creates a mock instance of a {@link JavaPlugin} implementation.
+	 */
+	public static MockPlugin createMockPlugin()
+	{
+		if (mock != null)
+		{
+			PluginDescriptionFile description = new PluginDescriptionFile("MockPlugin", "1.0.0", MockPlugin.class.getName());
+			JavaPlugin instance = mock.getPluginManager().loadPlugin(MockPlugin.class, description);
+			mock.getPluginManager().enablePlugin(instance);
+			return (MockPlugin) instance;
+		}
+		else
+		{
+			throw new IllegalStateException("Not mocking");
+		}
 	}
 }
 

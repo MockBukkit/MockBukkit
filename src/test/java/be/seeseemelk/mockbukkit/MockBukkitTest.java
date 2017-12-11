@@ -20,7 +20,7 @@ public class MockBukkitTest
 	}
 	
 	@After
-	public void tearDOwn()
+	public void tearDown()
 	{
 		MockBukkit.unload();
 	}
@@ -52,4 +52,33 @@ public class MockBukkitTest
 		assertTrue("Plugin not enabled", plugin.isEnabled());
 		assertTrue("Plugin's onEnable method not executed", plugin.onEnableExecuted);
 	}
+	
+	@Test
+	public void createMockPlugin_CreatesMockPlugin()
+	{
+		MockBukkit.mock();
+		MockPlugin plugin = MockBukkit.createMockPlugin();
+		assertEquals("MockPlugin", plugin.getName());
+		assertEquals("1.0.0", plugin.getDescription().getVersion());
+		assertTrue(plugin.isEnabled());
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
