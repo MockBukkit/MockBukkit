@@ -2,7 +2,11 @@ package be.seeseemelk.mockbukkit.plugin;
 
 import static org.junit.Assert.*;
 
+import java.util.Collection;
+
+import org.bukkit.command.PluginCommand;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.plugin.Plugin;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -51,5 +55,52 @@ public class PluginManagerMockTest
 		assertFalse(plugin.annotatedBlockBreakEventExecuted);
 		assertTrue(plugin.annotatedPlayerInteractEventExecuted);
 	}
+	
+	@Test
+	public void getPlugin_PluginName_Plugin()
+	{
+		Plugin plugin = pluginManager.getPlugin("MockBukkitTest");
+		assertNotNull(plugin);
+		assertTrue(plugin instanceof TestPlugin);
+	}
+
+	@Test
+	public void getPlugin_UnknownName_Nothing()
+	{
+		Plugin plugin = pluginManager.getPlugin("NoPlugin");
+		assertNull(plugin);
+	}
+	
+	@Test
+	public void getCommands_Default_PluginCommand()
+	{
+		Collection<PluginCommand> commands = pluginManager.getCommands();
+		assertEquals(1, commands.size());
+		assertEquals("testcommand", commands.iterator().next().getName());
+	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

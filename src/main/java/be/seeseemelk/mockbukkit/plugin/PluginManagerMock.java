@@ -52,13 +52,6 @@ public class PluginManagerMock implements PluginManager
 	}
 
 	@Override
-	public void registerInterface(Class<? extends PluginLoader> loader) throws IllegalArgumentException
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public Plugin getPlugin(String name)
 	{
 		for (Plugin plugin : plugins)
@@ -68,27 +61,13 @@ public class PluginManagerMock implements PluginManager
 				return plugin;
 			}
 		}
-		throw new IllegalArgumentException("No plugin called " + name.toString());
+		return null;
 	}
 
 	@Override
 	public Plugin[] getPlugins()
 	{
 		return plugins.toArray(new Plugin[plugins.size()]);
-	}
-
-	@Override
-	public boolean isPluginEnabled(String name)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean isPluginEnabled(Plugin plugin)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	/**
@@ -99,6 +78,81 @@ public class PluginManagerMock implements PluginManager
 	public Collection<PluginCommand> getCommands()
 	{
 		return Collections.unmodifiableList(commands);
+	}
+
+	/**
+	 * Load a plugin from a class. It will use the system resource
+	 * {@code plugin.yml} as the resource file.
+	 * 
+	 * @param class1 The plugin to load.
+	 * @return The loaded plugin.
+	 */
+	public JavaPlugin loadPlugin(Class<? extends JavaPlugin> class1)
+	{
+		try
+		{
+			Constructor<? extends JavaPlugin> plugin = class1.getDeclaredConstructor(JavaPluginLoader.class,
+					PluginDescriptionFile.class, File.class, File.class);
+			plugin.setAccessible(true);
+			PluginDescriptionFile description = new PluginDescriptionFile(
+					ClassLoader.getSystemResourceAsStream("plugin.yml"));
+			JavaPlugin obj = plugin.newInstance(loader, description, null, null);
+			plugins.add(obj);
+			addCommandsFrom(obj);
+			obj.onLoad();
+			return obj;
+		}
+		catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
+				| IllegalArgumentException | InvalidDescriptionException e)
+		{
+			throw new RuntimeException(e);
+		}
+		catch (InvocationTargetException e)
+		{
+			throw new RuntimeException(e.getTargetException());
+		}
+	}
+
+	@Override
+	public void callEvent(Event event) throws IllegalStateException
+	{
+		for (Listener listener : eventListeners.values())
+		{
+			for (Method method : listener.getClass().getMethods())
+			{
+				if (method.isAnnotationPresent(EventHandler.class) && method.getParameterCount() == 1
+						&& method.getParameters()[0].getType().isInstance(event))
+				{
+					try
+					{
+						method.invoke(listener, event);
+					}
+					catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
+					{
+						throw new RuntimeException(e);
+					}
+				}
+			}
+		}
+	}
+
+	@Override
+	public void registerEvents(Listener listener, Plugin plugin)
+	{
+		eventListeners.put(plugin, listener);
+	}
+
+	@Override
+	public void enablePlugin(Plugin plugin)
+	{
+		if (plugin instanceof JavaPlugin)
+		{
+			JavaPluginUtils.setEnabled((JavaPlugin) plugin, true);
+		}
+		else
+		{
+			throw new IllegalArgumentException("Not a JavaPlugin");
+		}
 	}
 
 	/**
@@ -152,37 +206,25 @@ public class PluginManagerMock implements PluginManager
 		}
 	}
 
-	/**
-	 * Load a plugin from a class. It will use the system resource
-	 * {@code plugin.yml} as the resource file.
-	 * 
-	 * @param class1 The plugin to load.
-	 * @return The loaded plugin.
-	 */
-	public JavaPlugin loadPlugin(Class<? extends JavaPlugin> class1)
+	@Override
+	public void registerInterface(Class<? extends PluginLoader> loader) throws IllegalArgumentException
 	{
-		try
-		{
-			Constructor<? extends JavaPlugin> plugin = class1.getDeclaredConstructor(JavaPluginLoader.class,
-					PluginDescriptionFile.class, File.class, File.class);
-			plugin.setAccessible(true);
-			PluginDescriptionFile description = new PluginDescriptionFile(
-					ClassLoader.getSystemResourceAsStream("plugin.yml"));
-			JavaPlugin obj = plugin.newInstance(loader, description, null, null);
-			plugins.add(obj);
-			addCommandsFrom(obj);
-			obj.onLoad();
-			return obj;
-		}
-		catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
-				| IllegalArgumentException | InvalidDescriptionException e)
-		{
-			throw new RuntimeException(e);
-		}
-		catch (InvocationTargetException e)
-		{
-			throw new RuntimeException(e.getTargetException());
-		}
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isPluginEnabled(String name)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isPluginEnabled(Plugin plugin)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -215,35 +257,6 @@ public class PluginManagerMock implements PluginManager
 	}
 
 	@Override
-	public void callEvent(Event event) throws IllegalStateException
-	{
-		for (Listener listener : eventListeners.values())
-		{
-			for (Method method : listener.getClass().getMethods())
-			{
-				if (method.isAnnotationPresent(EventHandler.class) && method.getParameterCount() == 1
-						&& method.getParameters()[0].getType().isInstance(event))
-				{
-					try
-					{
-						method.invoke(listener, event);
-					}
-					catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
-					{
-						throw new RuntimeException(e);
-					}
-				}
-			}
-		}
-	}
-
-	@Override
-	public void registerEvents(Listener listener, Plugin plugin)
-	{
-		eventListeners.put(plugin, listener);
-	}
-
-	@Override
 	public void registerEvent(Class<? extends Event> event, Listener listener, EventPriority priority,
 			EventExecutor executor, Plugin plugin)
 	{
@@ -257,19 +270,6 @@ public class PluginManagerMock implements PluginManager
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void enablePlugin(Plugin plugin)
-	{
-		if (plugin instanceof JavaPlugin)
-		{
-			JavaPluginUtils.setEnabled((JavaPlugin) plugin, true);
-		}
-		else
-		{
-			throw new IllegalArgumentException("Not a JavaPlugin");
-		}
 	}
 
 	@Override
