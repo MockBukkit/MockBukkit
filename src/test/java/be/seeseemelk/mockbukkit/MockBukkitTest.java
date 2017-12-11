@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assume.assumeNotNull;
 
 import org.bukkit.Bukkit;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,6 +17,12 @@ public class MockBukkitTest
 	public void setUp()
 	{
 		MockBukkit.setServerInstanceToNull();
+	}
+	
+	@After
+	public void tearDOwn()
+	{
+		MockBukkit.unload();
 	}
 	
 	@Test

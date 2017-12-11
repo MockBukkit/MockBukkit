@@ -82,9 +82,12 @@ public class MockBukkit
 	 */
 	public static void unload()
 	{
-		for (Plugin plugin : mock.getPluginManager().getPlugins())
+		if (mock != null && mock.getPluginManager() != null)
 		{
-			plugin.onDisable();
+			for (Plugin plugin : mock.getPluginManager().getPlugins())
+			{
+				plugin.onDisable();
+			}
 		}
 		setServerInstanceToNull();
 	}
