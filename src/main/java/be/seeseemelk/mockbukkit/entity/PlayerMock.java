@@ -128,6 +128,12 @@ public class PlayerMock implements Player, MessageTarget
 			return false;
 		}
 	}
+	
+	@Override
+	public UUID getUniqueId()
+	{
+		return uuid;
+	}
 
 	@Override
 	public Inventory getEnderChest()
@@ -835,12 +841,6 @@ public class PlayerMock implements Player, MessageTarget
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public UUID getUniqueId()
-	{
-		return uuid;
 	}
 
 	@Override
