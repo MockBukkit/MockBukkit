@@ -74,6 +74,14 @@ public class CommandResultTest
 		CommandResult result = new CommandResult(true, sender);
 		result.assertResponse("Hello %d world", 6);
 	}
+	
+	@Test(expected = AssertionError.class)
+	public void assertResponse_NoMessages_Asserts()
+	{
+		ConsoleCommandSenderMock sender = new ConsoleCommandSenderMock();
+		CommandResult result = new CommandResult(true, sender);
+		result.assertResponse("Hello world");
+	}
 }
 
 
