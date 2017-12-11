@@ -26,14 +26,7 @@ public class ItemMetaMock implements ItemMeta
 			displayName = meta.getDisplayName();
 		}
 	}
-
-	@Override
-	public Map<String, Object> serialize()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
+	
 	@Override
 	public boolean hasDisplayName()
 	{
@@ -50,6 +43,49 @@ public class ItemMetaMock implements ItemMeta
 	public void setDisplayName(String name)
 	{
 		displayName = name;
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (obj instanceof ItemMeta)
+		{
+			ItemMeta meta = (ItemMeta) obj;
+			if (displayName != null)
+			{
+				return displayName.equals(meta.getDisplayName());
+			}
+			else
+			{
+				return !meta.hasDisplayName();
+			}
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	@Override
+	public ItemMeta clone()
+	{
+		try
+		{
+			ItemMetaMock meta = (ItemMetaMock) super.clone();
+			meta.displayName = displayName;
+			return meta;
+		}
+		catch (CloneNotSupportedException e)
+		{
+			throw new Error(e);
+		}
+	}
+
+	@Override
+	public Map<String, Object> serialize()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -183,21 +219,6 @@ public class ItemMetaMock implements ItemMeta
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public ItemMeta clone()
-	{
-		try
-		{
-			ItemMetaMock meta = (ItemMetaMock) super.clone();
-			meta.displayName = displayName;
-			return meta;
-		}
-		catch (CloneNotSupportedException e)
-		{
-			throw new Error(e);
-		}
 	}
 
 }
