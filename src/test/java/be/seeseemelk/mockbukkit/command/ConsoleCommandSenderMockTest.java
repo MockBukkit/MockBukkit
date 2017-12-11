@@ -23,6 +23,14 @@ public class ConsoleCommandSenderMockTest
 		assertEquals("Hello", sender.nextMessage());
 		assertEquals("Other", sender.nextMessage());
 	}
+	
+	@Test
+	public void sendMessageVararg_SomeStrings_StringsInRightOrder()
+	{
+		sender.sendMessage(new String[]{"Hello", "world"});
+		sender.assertSaid("Hello");
+		sender.assertSaid("world");
+	}
 
 	@Test
 	public void assertSaid_CorrectMessage_DoesNotAssert()
@@ -36,5 +44,11 @@ public class ConsoleCommandSenderMockTest
 	{
 		sender.sendMessage("My message");
 		sender.assertSaid("Some other message");
+	}
+	
+	@Test(expected = AssertionError.class)
+	public void assertaid_NoMessages_Asserts()
+	{
+		sender.assertSaid("A message");
 	}
 }

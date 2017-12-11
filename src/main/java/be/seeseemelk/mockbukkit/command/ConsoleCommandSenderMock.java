@@ -36,6 +36,27 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	}
 	
 	@Override
+	public void sendMessage(String message)
+	{
+		messages.add(message);
+	}
+
+	@Override
+	public void sendMessage(String[] messages)
+	{
+		for (String message : messages)
+		{
+			sendMessage(message);
+		}
+	}
+
+	@Override
+	public String nextMessage()
+	{
+		return messages.poll();
+	}
+
+	@Override
 	public boolean isPermissionSet(String name)
 	{
 		// TODO Auto-generated method stub
@@ -127,21 +148,6 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	}
 
 	@Override
-	public void sendMessage(String message)
-	{
-		messages.add(message);
-	}
-
-	@Override
-	public void sendMessage(String[] messages)
-	{
-		for (String message : messages)
-		{
-			sendMessage(message);
-		}
-	}
-
-	@Override
 	public Server getServer()
 	{
 		// TODO Auto-generated method stub
@@ -194,11 +200,5 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	public void sendRawMessage(String message)
 	{
 		messages.add(message);
-	}
-
-	@Override
-	public String nextMessage()
-	{
-		return messages.poll();
 	}
 }
