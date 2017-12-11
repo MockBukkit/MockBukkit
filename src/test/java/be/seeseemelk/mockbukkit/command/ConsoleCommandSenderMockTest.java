@@ -25,6 +25,12 @@ public class ConsoleCommandSenderMockTest
 	}
 	
 	@Test
+	public void getMessage_NoMessages_Null()
+	{
+		assertNull(sender.nextMessage());
+	}
+	
+	@Test
 	public void sendMessageVararg_SomeStrings_StringsInRightOrder()
 	{
 		sender.sendMessage(new String[]{"Hello", "world"});
