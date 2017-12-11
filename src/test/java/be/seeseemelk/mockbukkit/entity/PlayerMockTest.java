@@ -48,7 +48,7 @@ public class PlayerMockTest
 	}
 	
 	@Test
-	public void getUniqueIdDefault_CorrectUuid()
+	public void getUniqueId_Default_CorrectUuid()
 	{
 		assertEquals(uuid, player.getUniqueId());
 	}
