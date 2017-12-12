@@ -82,6 +82,23 @@ public class CommandResultTest
 		CommandResult result = new CommandResult(true, sender);
 		result.assertResponse("Hello world");
 	}
+	
+	@Test
+	public void assertNoResponse_NoMoreMessage_DoesNotAssert()
+	{
+		ConsoleCommandSenderMock sender = new ConsoleCommandSenderMock();
+		CommandResult result = new CommandResult(true, sender);
+		result.assertNoResponse();
+	}
+	
+	@Test(expected = AssertionError.class)
+	public void assertNoResponse_MoreMessage_Asserts()
+	{
+		ConsoleCommandSenderMock sender = new ConsoleCommandSenderMock();
+		sender.sendMessage("More hello world");
+		CommandResult result = new CommandResult(true, sender);
+		result.assertNoResponse();
+	}
 }
 
 

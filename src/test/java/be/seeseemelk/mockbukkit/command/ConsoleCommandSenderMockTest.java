@@ -57,4 +57,35 @@ public class ConsoleCommandSenderMockTest
 	{
 		sender.assertSaid("A message");
 	}
+	
+	@Test
+	public void assertNoMore_NoMessages_DoesNotAssert()
+	{
+		sender.assertNoMoreSaid();
+	}
+	
+	@Test(expected = AssertionError.class)
+	public void assertNoMore_MoreMessages_Asserts()
+	{
+		sender.sendMessage("Some message");
+		sender.assertNoMoreSaid();
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

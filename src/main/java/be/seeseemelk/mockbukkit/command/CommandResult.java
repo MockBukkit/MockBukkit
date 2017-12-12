@@ -67,4 +67,15 @@ public class CommandResult
 	{
 		assertResponse(String.format(format, objects));
 	}
+	
+	/**
+	 * Asserts if more messages have been sent to the command sender. 
+	 */
+	public void assertNoResponse()
+	{
+		if (sender.nextMessage() != null)
+		{
+			fail("More messages");
+		}
+	}
 }

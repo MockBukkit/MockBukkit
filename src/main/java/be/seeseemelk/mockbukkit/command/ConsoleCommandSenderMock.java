@@ -24,7 +24,7 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 
 	public void assertSaid(String expected)
 	{
-		String message = messages.poll();
+		String message = nextMessage();
 		if (message == null)
 		{
 			fail("No more messages were sent");
@@ -35,6 +35,14 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 		}
 	}
 	
+	public void assertNoMoreSaid()
+	{
+		if (nextMessage() != null)
+		{
+			fail("More messages were available");
+		}
+	}
+
 	@Override
 	public void sendMessage(String message)
 	{
