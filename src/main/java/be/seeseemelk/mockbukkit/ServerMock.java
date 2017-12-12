@@ -128,20 +128,6 @@ public class ServerMock implements Server
 	}
 	
 	@Override
-	public void sendPluginMessage(Plugin source, String channel, byte[] message)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public Set<String> getListeningPluginChannels()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public String getName()
 	{
 		return "ServerMock";
@@ -165,13 +151,6 @@ public class ServerMock implements Server
 		return players;
 	}
 
-	@Override
-	public int getMaxPlayers()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-	
 	/**
 	 * Executes a command as the console.
 	 * @param command The command to execute.
@@ -182,7 +161,7 @@ public class ServerMock implements Server
 	{
 		return execute(command, getConsoleSender(), args);
 	}
-	
+
 	/**
 	 * Executes a command as a player.
 	 * @param command The command to execute.
@@ -200,7 +179,7 @@ public class ServerMock implements Server
 			throw new IllegalStateException("Need at least one player to run the command");
 		}
 	}
-	
+
 	/**
 	 * Executes a command.
 	 * @param command The command to execute.
@@ -220,6 +199,110 @@ public class ServerMock implements Server
 		return result;
 	}
 
+	@Override
+	public Player getPlayer(UUID id)
+	{
+		for (Player player : getOnlinePlayers())
+		{
+			if (id.equals(player.getUniqueId()))
+			{
+				return player;
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public PluginManagerMock getPluginManager()
+	{
+		return pluginManager;
+	}
+
+	@Override
+	public PluginCommand getPluginCommand(String name)
+	{
+		for (PluginCommand command : getPluginManager().getCommands())
+		{
+			if (name.equals(command.getName()))
+			{
+				return command;
+			}
+			else
+			{
+				for (String alias : command.getAliases())
+				{
+					if (name.equals(alias))
+					{
+						return command;
+					}
+				}
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public Logger getLogger()
+	{
+		return logger;
+	}
+
+	@Override
+	public ConsoleCommandSender getConsoleSender()
+	{
+		if (consoleSender == null)
+		{
+			consoleSender = new ConsoleCommandSenderMock();
+		}
+		return consoleSender;
+	}
+
+	@Override
+	public OfflinePlayer[] getOfflinePlayers()
+	{
+		return players.toArray(new OfflinePlayer[0]);
+	}
+
+	@Override
+	public Inventory createInventory(InventoryHolder owner, InventoryType type)
+	{
+		switch (type)
+		{
+			case PLAYER:
+				PlayerInventoryMock inventory = new PlayerInventoryMock("Inventory");
+				return inventory;
+			default:
+				throw new UnimplementedOperationException("Inventory type not yet supported");
+		}
+	}
+
+	@Override
+	public ItemFactory getItemFactory()
+	{
+		return factory;
+	}
+
+	@Override
+	public void sendPluginMessage(Plugin source, String channel, byte[] message)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public Set<String> getListeningPluginChannels()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getMaxPlayers()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+	
 	@Override
 	public int getPort()
 	{
@@ -375,25 +458,6 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public Player getPlayer(UUID id)
-	{
-		for (Player player : getOnlinePlayers())
-		{
-			if (id.equals(player.getUniqueId()))
-			{
-				return player;
-			}
-		}
-		return null;
-	}
-
-	@Override
-	public PluginManagerMock getPluginManager()
-	{
-		return pluginManager;
-	}
-
-	@Override
 	public BukkitScheduler getScheduler()
 	{
 		// TODO Auto-generated method stub
@@ -475,35 +539,6 @@ public class ServerMock implements Server
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public Logger getLogger()
-	{
-		return logger;
-	}
-
-	@Override
-	public PluginCommand getPluginCommand(String name)
-	{
-		for (PluginCommand command : getPluginManager().getCommands())
-		{
-			if (name.equals(command.getName()))
-			{
-				return command;
-			}
-			else
-			{
-				for (String alias : command.getAliases())
-				{
-					if (name.equals(alias))
-					{
-						return command;
-					}
-				}
-			}
-		}
-		return null;
 	}
 
 	@Override
@@ -682,26 +717,10 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public ConsoleCommandSender getConsoleSender()
-	{
-		if (consoleSender == null)
-		{
-			consoleSender = new ConsoleCommandSenderMock();
-		}
-		return consoleSender;
-	}
-
-	@Override
 	public File getWorldContainer()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public OfflinePlayer[] getOfflinePlayers()
-	{
-		return players.toArray(new OfflinePlayer[0]);
 	}
 
 	@Override
@@ -716,19 +735,6 @@ public class ServerMock implements Server
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public Inventory createInventory(InventoryHolder owner, InventoryType type)
-	{
-		switch (type)
-		{
-			case PLAYER:
-				PlayerInventoryMock inventory = new PlayerInventoryMock("Inventory");
-				return inventory;
-			default:
-				throw new UnimplementedOperationException("Inventory type not yet supported");
-		}
 	}
 
 	@Override
@@ -813,12 +819,6 @@ public class ServerMock implements Server
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public ItemFactory getItemFactory()
-	{
-		return factory;
 	}
 
 	@Override
