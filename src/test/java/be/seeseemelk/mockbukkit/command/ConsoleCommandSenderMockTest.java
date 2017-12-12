@@ -53,7 +53,7 @@ public class ConsoleCommandSenderMockTest
 	}
 	
 	@Test(expected = AssertionError.class)
-	public void assertaid_NoMessages_Asserts()
+	public void assertSaid_NoMessages_Asserts()
 	{
 		sender.assertSaid("A message");
 	}
