@@ -168,6 +168,33 @@ public class ServerMockTest
 	}
 	
 	@Test
+	public void executeCommand_ConsoleAndFalseReturnValue_Fails()
+	{
+		TestPlugin plugin = (TestPlugin) MockBukkit.load(TestPlugin.class);
+		plugin.commandReturns = false;
+		
+		Command command = server.getPluginCommand("testcommand");
+		CommandResult result = server.executeConsole(command, "a", "b");
+		result.assertFailed();
+		assertEquals(server.getConsoleSender(), plugin.commandSender);
+		assertEquals(command, plugin.command);
+		
+		assertEquals(2, plugin.commandArguments.length);
+		assertEquals("a", plugin.commandArguments[0]);
+		assertEquals("b", plugin.commandArguments[1]);
+	}
+	
+	@Test
+	public void executeCommand_CommandAsStringAndTrueReturnValue_Succeeds()
+	{
+		TestPlugin plugin = (TestPlugin) MockBukkit.load(TestPlugin.class);
+		plugin.commandReturns = true;
+		
+		CommandResult result = server.executeConsole("testcommand");
+		result.assertSucceeded();
+	}
+	
+	@Test
 	public void getConsoleSender_NotNull()
 	{
 		assertNotNull(server.getConsoleSender());

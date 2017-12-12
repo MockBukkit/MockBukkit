@@ -161,6 +161,17 @@ public class ServerMock implements Server
 	{
 		return execute(command, getConsoleSender(), args);
 	}
+	
+	/**
+	 * Executes a command as the console.
+	 * @param command The command to execute.
+	 * @param args The arguments to pass to the commands.
+	 * @return The value returned by {@link Command#execute}.
+	 */
+	public CommandResult executeConsole(String command, String... args)
+	{
+		return executeConsole(getPluginCommand(command), args);
+	}
 
 	/**
 	 * Executes a command as a player.
@@ -178,6 +189,17 @@ public class ServerMock implements Server
 		{
 			throw new IllegalStateException("Need at least one player to run the command");
 		}
+	}
+	
+	/**
+	 * Executes a command as a player.
+	 * @param command The command to execute.
+	 * @param args The arguments to pass to the commands.
+	 * @return The value returned by {@link Command#execute}.
+	 */
+	public CommandResult executePlayer(String command, String... args)
+	{
+		return executePlayer(getPluginCommand(command), args);
 	}
 
 	/**
@@ -197,6 +219,18 @@ public class ServerMock implements Server
 		boolean status = command.execute(sender, command.getName(), args);
 		CommandResult result = new CommandResult(status, (MessageTarget) sender);
 		return result;
+	}
+	
+	/**
+	 * Executes a command.
+	 * @param command The command to execute.
+	 * @param sender The person that executed the command.
+	 * @param args The arguments to pass to the commands.
+	 * @return The value returned by {@link Command#execute}.
+	 */
+	public CommandResult execute(String command, CommandSender sender, String... args)
+	{
+		return execute(getPluginCommand(command), sender, args);
 	}
 
 	@Override
