@@ -56,6 +56,7 @@ public class WorldMock implements World
 	private int grassHeight;
 	private String name = "World";
 	private UUID uuid = UUID.randomUUID();
+	private Location spawnLocation;
 
 	/**
 	 * Creates a new mock world.
@@ -163,6 +164,38 @@ public class WorldMock implements World
 	public UUID getUID()
 	{
 		return uuid;
+	}
+	
+	@Override
+	public Location getSpawnLocation()
+	{
+		if (spawnLocation == null)
+		{
+			setSpawnLocation(0, grassHeight + 1, 0);
+		}
+		return spawnLocation;
+	}
+	
+	@Override
+	public boolean setSpawnLocation(Location location)
+	{
+		return setSpawnLocation(location.getBlockX(), location.getBlockY(), location.getBlockZ());
+	}
+
+	@Override
+	public boolean setSpawnLocation(int x, int y, int z)
+	{
+		if (spawnLocation == null)
+		{
+			spawnLocation = new Location(this, x, y, z);
+		}
+		else
+		{
+			spawnLocation.setX(x);
+			spawnLocation.setY(y);
+			spawnLocation.setZ(z);
+		}
+		return true;
 	}
 
 	@Override
@@ -489,20 +522,6 @@ public class WorldMock implements World
 
 	@Override
 	public Collection<Entity> getNearbyEntities(Location location, double x, double y, double z)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public Location getSpawnLocation()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean setSpawnLocation(int x, int y, int z)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1111,13 +1130,6 @@ public class WorldMock implements World
 	@Override
 	public <T> void spawnParticle(Particle particle, double x, double y, double z, int count, double offsetX,
 			double offsetY, double offsetZ, double extra, T data)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean setSpawnLocation(Location location)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
