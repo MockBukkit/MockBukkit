@@ -54,6 +54,8 @@ public class WorldMock implements World
 	private Material defaultBlock;
 	private int height;
 	private int grassHeight;
+	private String name = "World";
+	private UUID uuid = UUID.randomUUID();
 
 	/**
 	 * Creates a new mock world.
@@ -140,6 +142,27 @@ public class WorldMock implements World
 	public Block getBlockAt(Location location)
 	{
 		return getBlockAt(location.getBlockX(), location.getBlockY(), location.getBlockZ());
+	}
+	
+	@Override
+	public String getName()
+	{
+		return name;
+	}
+	
+	/**
+	 * Give a new name to this world.
+	 * @param name The new name of this world.
+	 */
+	public void setName(String name)
+	{
+		this.name = name;
+	}
+
+	@Override
+	public UUID getUID()
+	{
+		return uuid;
 	}
 
 	@Override
@@ -466,20 +489,6 @@ public class WorldMock implements World
 
 	@Override
 	public Collection<Entity> getNearbyEntities(Location location, double x, double y, double z)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public String getName()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public UUID getUID()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

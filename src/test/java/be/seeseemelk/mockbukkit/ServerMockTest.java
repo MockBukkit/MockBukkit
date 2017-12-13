@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Iterator;
@@ -223,6 +224,16 @@ public class ServerMockTest
 	public void getItemFactory_NotNull()
 	{
 		assertNotNull(server.getItemFactory());
+	}
+	
+	@Test
+	public void addSimpleWorld_Name_WorldWithNameAdded()
+	{
+		WorldMock world = server.addSimpleWorld("MyWorld");
+		assertEquals(1, server.getWorlds().size());
+		assertSame(world, server.getWorlds().get(0));
+		assertSame(world, server.getWorld(world.getName()));
+		assertSame(world, server.getWorld(world.getUID()));
 	}
 }
 

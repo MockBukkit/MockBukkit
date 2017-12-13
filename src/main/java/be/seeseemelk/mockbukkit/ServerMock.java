@@ -66,6 +66,7 @@ public class ServerMock implements Server
 	private final Logger logger;
 	
 	private final List<PlayerMock> players = new ArrayList<>();
+	private final List<World> worlds = new ArrayList<>();
 
 	private final ItemFactory factory = new ItemFactoryMock();
 	private final PlayerMockFactory playerFactory = new PlayerMockFactory();
@@ -125,6 +126,19 @@ public class ServerMock implements Server
 		{
 			return players.get(num);
 		}
+	}
+	
+	/**
+	 * Adds a very simple super flat world with a given name.
+	 * @param name The name to give to the world.
+	 * @return The {@link WorldMock} that has been created.
+	 */
+	public WorldMock addSimpleWorld(String name)
+	{
+		WorldMock world = new WorldMock();
+		world.setName(name);
+		worlds.add(world);
+		return world;
 	}
 	
 	@Override
@@ -317,6 +331,38 @@ public class ServerMock implements Server
 	}
 
 	@Override
+	public List<World> getWorlds()
+	{
+		return worlds;
+	}
+	
+	@Override
+	public World getWorld(String name)
+	{
+		for (World world : worlds)
+		{
+			if (world.getName().equals(name))
+			{
+				return world;
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public World getWorld(UUID uid)
+	{
+		for (World world : worlds)
+		{
+			if (world.getUID().equals(uid))
+			{
+				return world;
+			}
+		}
+		return null;
+	}
+
+	@Override
 	public void sendPluginMessage(Plugin source, String channel, byte[] message)
 	{
 		// TODO Auto-generated method stub
@@ -506,13 +552,6 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public List<World> getWorlds()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public World createWorld(WorldCreator creator)
 	{
 		// TODO Auto-generated method stub
@@ -528,20 +567,6 @@ public class ServerMock implements Server
 
 	@Override
 	public boolean unloadWorld(World world, boolean save)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public World getWorld(String name)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public World getWorld(UUID uid)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
