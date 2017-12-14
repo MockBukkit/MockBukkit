@@ -78,8 +78,8 @@ public class PlayerMock implements Player, MessageTarget
 	private Location location;
 	private boolean teleported;
 	private TeleportCause teleportCause;
-
 	private PlayerInventoryMock inventory = null;
+	private GameMode gamemode = GameMode.SURVIVAL;
 
 	public PlayerMock(String name, UUID uuid)
 	{
@@ -125,6 +125,15 @@ public class PlayerMock implements Player, MessageTarget
 	public void assertNotTeleported()
 	{
 		assertFalse("Player was teleported", teleported);
+	}
+	
+	/**
+	 * Assert that the player is in a specific gamemode.
+	 * @param gamemode The gamemode the player should be in.
+	 */
+	public void assertGameMode(GameMode expectedGamemode)
+	{
+		assertEquals(expectedGamemode, gamemode);
 	}
 	
 	/**
@@ -252,6 +261,19 @@ public class PlayerMock implements Player, MessageTarget
 	{
 		return teleport(destination.getLocation(), cause);
 	}
+	
+	@Override
+	public GameMode getGameMode()
+	{
+		return gamemode;
+	}
+
+	@Override
+	public void setGameMode(GameMode mode)
+	{
+		gamemode = mode;
+	}
+
 
 	@Override
 	public Inventory getEnderChest()
@@ -388,20 +410,6 @@ public class PlayerMock implements Player, MessageTarget
 
 	@Override
 	public int getSleepTicks()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public GameMode getGameMode()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setGameMode(GameMode mode)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

@@ -10,6 +10,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.UUID;
 
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.junit.After;
@@ -199,6 +200,31 @@ public class PlayerMockTest
 		player.teleport(player.getLocation());
 		player.clearTeleported();
 		assertFalse(player.hasTeleported());
+	}
+	
+	@Test
+	public void getGameMode_Default_Survival()
+	{
+		assertEquals(GameMode.SURVIVAL, player.getGameMode());
+	}
+	
+	@Test
+	public void setGameMode_GameModeChanged_GameModeSet()
+	{
+		player.setGameMode(GameMode.CREATIVE);
+		assertEquals(GameMode.CREATIVE, player.getGameMode());
+	}
+	
+	@Test
+	public void assertGameMode_CorrectGameMode_DoesNotAssert()
+	{
+		player.assertGameMode(GameMode.SURVIVAL);
+	}
+	
+	@Test(expected = AssertionError.class)
+	public void assetGameMode_WrongGameMode_Asserts()
+	{
+		player.assertGameMode(GameMode.CREATIVE);
 	}
 	
 }
