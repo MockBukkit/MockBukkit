@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.entity;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -101,6 +102,7 @@ public class PlayerMock implements Player, MessageTarget
 	public void assertLocation(Location expectedLocation, double maximumDistance)
 	{
 		double distance = location.distance(expectedLocation);
+		assertEquals(expectedLocation.getWorld(), location.getWorld());
 		assertTrue(String.format("Distance was <%.3f> but should be less than or equal to <%.3f>", distance,
 				maximumDistance), distance <= maximumDistance);
 	}
