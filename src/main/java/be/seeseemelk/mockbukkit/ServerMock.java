@@ -59,6 +59,7 @@ import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
 import be.seeseemelk.mockbukkit.inventory.ItemFactoryMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
 import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
+import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
 
 @SuppressWarnings("deprecation")
 public class ServerMock implements Server
@@ -72,6 +73,7 @@ public class ServerMock implements Server
 	private final PlayerMockFactory playerFactory = new PlayerMockFactory();
 	private final PluginManagerMock pluginManager = new PluginManagerMock(this);
 	private ConsoleCommandSender consoleSender;
+	private BukkitSchedulerMock scheduler = new BukkitSchedulerMock();
 	
 	public ServerMock()
 	{
@@ -363,6 +365,12 @@ public class ServerMock implements Server
 	}
 
 	@Override
+	public BukkitScheduler getScheduler()
+	{
+		return scheduler;
+	}
+
+	@Override
 	public void sendPluginMessage(Plugin source, String channel, byte[] message)
 	{
 		// TODO Auto-generated method stub
@@ -532,13 +540,6 @@ public class ServerMock implements Server
 
 	@Override
 	public List<Player> matchPlayer(String name)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public BukkitScheduler getScheduler()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

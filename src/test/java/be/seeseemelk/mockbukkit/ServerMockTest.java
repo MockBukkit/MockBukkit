@@ -235,6 +235,12 @@ public class ServerMockTest
 		assertSame(world, server.getWorld(world.getName()));
 		assertSame(world, server.getWorld(world.getUID()));
 	}
+	
+	@Test
+	public void getScheduler_Default_NotNull()
+	{
+		assertNotNull(server.getScheduler());
+	}
 }
 
 
