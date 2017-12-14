@@ -47,7 +47,6 @@ import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.ServicesManager;
 import org.bukkit.plugin.messaging.Messenger;
-import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.util.CachedServerIcon;
 
@@ -365,7 +364,7 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public BukkitScheduler getScheduler()
+	public BukkitSchedulerMock getScheduler()
 	{
 		return scheduler;
 	}
