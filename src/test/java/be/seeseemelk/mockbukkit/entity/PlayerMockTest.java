@@ -153,6 +153,18 @@ public class PlayerMockTest
 	}
 	
 	@Test
+	public void assertNotTeleported_NotTeleported_DoesNotAssert()
+	{
+		player.assertNotTeleported();
+	}
+	
+	@Test(expected = AssertionError.class)
+	public void assertNotTeleported_Teleported_Asserts()
+	{
+		player.assertTeleported(player.getLocation(), 0);
+	}
+	
+	@Test
 	public void teleport_LocationAndCause_LocationSet()
 	{
 		Location location = player.getLocation();
@@ -171,6 +183,22 @@ public class PlayerMockTest
 		player2.teleport(location);
 		player.teleport(player2);
 		player.assertTeleported(location, 0);
+	}
+	
+	@Test
+	public void hasTeleport_Teleportation_CorrectStatus()
+	{
+		assertFalse(player.hasTeleported());
+		player.teleport(player.getLocation());
+		assertTrue(player.hasTeleported());
+	}
+	
+	@Test
+	public void clearTeleport_AfterTeleportation_TeleportStatusReset()
+	{
+		player.teleport(player.getLocation());
+		player.clearTeleported();
+		assertFalse(player.hasTeleported());
 	}
 	
 }

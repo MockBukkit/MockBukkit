@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.entity;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.net.InetSocketAddress;
@@ -113,6 +114,31 @@ public class PlayerMock implements Player, MessageTarget
 	{
 		assertTrue("Player did not teleport", teleported);
 		assertLocation(expectedLocation, maximumDistance);
+		teleported = false;
+	}
+	
+	/**
+	 * Assert that the player hasn't teleported.
+	 */
+	public void assertNotTeleported()
+	{
+		assertFalse("Player was teleported", teleported);
+	}
+	
+	/**
+	 * Checks if the player has been teleported since the last assert or {@link clearTeleported}.
+	 * @return {@code true} if the player has been teleported, {@code false} if he hasn't been teleported.
+	 */
+	public boolean hasTeleported()
+	{
+		return teleported;
+	}
+	
+	/**
+	 * Clear the teleported status.
+	 */
+	public void clearTeleported()
+	{
 		teleported = false;
 	}
 
