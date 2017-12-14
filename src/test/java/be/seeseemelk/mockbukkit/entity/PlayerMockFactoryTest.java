@@ -1,10 +1,14 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 
 import org.bukkit.entity.Player;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import be.seeseemelk.mockbukkit.MockBukkit;
 
 public class PlayerMockFactoryTest
 {
@@ -13,8 +17,15 @@ public class PlayerMockFactoryTest
  	@Before
 	public void setUp() throws Exception
 	{
+ 		MockBukkit.mock();
  		factory = new PlayerMockFactory();
 	}
+ 	
+ 	@After
+ 	public void tearDown()
+ 	{
+ 		MockBukkit.unload();
+ 	}
 
 	@Test
 	public void createRandomPlayer_createsRandomPlayer()

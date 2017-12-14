@@ -1,14 +1,23 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 import java.util.UUID;
 
+import org.bukkit.Location;
+import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.WorldMock;
 
 public class PlayerMockTest
 {
@@ -89,7 +98,88 @@ public class PlayerMockTest
 	{
 		assertFalse(player.equals(null));
 	}
+
+	@Test
+	public void getLocation_TwoInvocations_TwoClones()
+	{
+		Location location1 = player.getLocation();
+		Location location2 = player.getLocation();
+		assertEquals(location1, location2);
+		assertNotSame(location1, location2);
+	}
+	
+	@Test
+	public void getLocation_IntoLocation_LocationCopied()
+	{
+		WorldMock world = MockBukkit.getMock().addSimpleWorld("world");
+		Location location = new Location(world, 0, 0, 0);
+		Location location1 = player.getLocation();
+		assertNotEquals(location, location1);
+		assertEquals(location1, player.getLocation(location));
+		assertEquals(location1, location);
+	}
+	
+	@Test
+	public void assertLocation_CorrectLocation_DoesNotAssert()
+	{
+		Location location = player.getLocation();
+		location.add(0, 10.0, 0);
+		player.teleport(location);
+		player.assertLocation(location, 5.0);
+	}
+	
+	@Test(expected = AssertionError.class)
+	public void assertLocation_WrongLocation_Asserts()
+	{
+		Location location = player.getLocation();
+		location.add(0, 10.0, 0);
+		player.assertLocation(location, 5.0);
+	}
+	
+	@Test
+	public void assertTeleported_Teleported_DoesNotAssert()
+	{
+		Location location = player.getLocation();
+		player.teleport(location);
+		player.assertTeleported(location, 5.0);
+		assertEquals(TeleportCause.PLUGIN, player.getTeleportCause());
+	}
+	
+	@Test(expected = AssertionError.class)
+	public void assertTeleported_NotTeleported_Asserts()
+	{
+		Location location = player.getLocation();
+		player.assertTeleported(location, 5.0);
+	}
+	
+	@Test
+	public void teleport_LocationAndCause_LocationSet()
+	{
+		Location location = player.getLocation();
+		location.add(0, 10.0, 0);
+		player.teleport(location, TeleportCause.CHORUS_FRUIT);
+		player.assertTeleported(location, 0);
+		assertEquals(TeleportCause.CHORUS_FRUIT, player.getTeleportCause());
+	}
+	
+	@Test
+	public void teleport_Entity_LocationSetToEntity()
+	{
+		PlayerMock player2 = new PlayerMockFactory().createRandomPlayer();
+		Location location = player2.getLocation();
+		location.add(0, 5, 0);
+		player2.teleport(location);
+		player.teleport(player2);
+		player.assertTeleported(location, 0);
+	}
+	
 }
+
+
+
+
+
+
 
 
 

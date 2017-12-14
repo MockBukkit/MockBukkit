@@ -1,5 +1,7 @@
 package be.seeseemelk.mockbukkit.entity;
 
+import static org.junit.Assert.assertTrue;
+
 import java.net.InetSocketAddress;
 import java.util.Collection;
 import java.util.List;
@@ -60,6 +62,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.util.Vector;
 
+import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.command.MessageTarget;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
@@ -70,15 +73,58 @@ public class PlayerMock implements Player, MessageTarget
 	private final String name;
 	private final UUID uuid;
 	private final Queue<String> messages = new LinkedTransferQueue<>();
-	
+	private Location location;
+	private boolean teleported;
+	private TeleportCause teleportCause;
+
 	private PlayerInventoryMock inventory = null;
-	
+
 	public PlayerMock(String name, UUID uuid)
 	{
 		this.name = name;
 		this.uuid = uuid;
+
+		if (Bukkit.getWorlds().size() == 0)
+		{
+			MockBukkit.getMock().addSimpleWorld("world");
+		}
+
+		location = Bukkit.getWorlds().get(0).getSpawnLocation().clone();
 	}
 
+	/**
+	 * Assert that the actual location of the player is within a certain distance to a given location.
+	 * @param expectedLocation The location the player should be at.
+	 * @param maximumDistance The distance the player may maximumly be separated from the expected location. 
+	 */
+	public void assertLocation(Location expectedLocation, double maximumDistance)
+	{
+		double distance = location.distance(expectedLocation);
+		assertTrue(String.format("Distance was <%.3f> but should be less than or equal to <%.3f>", distance,
+				maximumDistance), distance <= maximumDistance);
+	}
+	
+	/**
+	 * Assert that the player teleported to a certain location within a certain distance to a given location.
+	 * @param expectedLocation The location the player should be at.
+	 * @param maximumDistance The distance the player may maximumly be separated from the expected location.
+	 */
+	public void assertTeleported(Location expectedLocation, double maximumDistance)
+	{
+		assertTrue("Player did not teleport", teleported);
+		assertLocation(expectedLocation, maximumDistance);
+		teleported = false;
+	}
+
+	/**
+	 * Get the cause of the last teleport.
+	 * @return The cause of the last teleport.
+	 */
+	public TeleportCause getTeleportCause()
+	{
+		return teleportCause;
+	}
+	
 	@Override
 	public String getName()
 	{
@@ -94,7 +140,7 @@ public class PlayerMock implements Player, MessageTarget
 		}
 		return inventory;
 	}
-	
+
 	@Override
 	public void sendMessage(String message)
 	{
@@ -115,7 +161,7 @@ public class PlayerMock implements Player, MessageTarget
 	{
 		return messages.poll();
 	}
-	
+
 	@Override
 	public boolean equals(Object obj)
 	{
@@ -128,11 +174,55 @@ public class PlayerMock implements Player, MessageTarget
 			return false;
 		}
 	}
-	
+
 	@Override
 	public UUID getUniqueId()
 	{
 		return uuid;
+	}
+
+	@Override
+	public Location getLocation()
+	{
+		return location.clone();
+	}
+
+	@Override
+	public Location getLocation(Location loc)
+	{
+		loc.setWorld(location.getWorld());
+		loc.setDirection(location.getDirection());
+		loc.setX(location.getX());
+		loc.setY(location.getY());
+		loc.setZ(location.getZ());
+		return loc;
+	}
+
+	@Override
+	public boolean teleport(Location location)
+	{
+		return teleport(location, TeleportCause.PLUGIN);
+	}
+
+	@Override
+	public boolean teleport(Location location, TeleportCause cause)
+	{
+		this.location = location;
+		teleported = true;
+		teleportCause = cause;
+		return true;
+	}
+
+	@Override
+	public boolean teleport(Entity destination)
+	{
+		return teleport(destination, TeleportCause.PLUGIN);
+	}
+
+	@Override
+	public boolean teleport(Entity destination, TeleportCause cause)
+	{
+		return teleport(destination.getLocation(), cause);
 	}
 
 	@Override
@@ -620,20 +710,6 @@ public class PlayerMock implements Player, MessageTarget
 	}
 
 	@Override
-	public Location getLocation()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public Location getLocation(Location loc)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public void setVelocity(Vector velocity)
 	{
 		// TODO Auto-generated method stub
@@ -670,34 +746,6 @@ public class PlayerMock implements Player, MessageTarget
 
 	@Override
 	public World getWorld()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean teleport(Location location)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean teleport(Location location, TeleportCause cause)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean teleport(Entity destination)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean teleport(Entity destination, TeleportCause cause)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
