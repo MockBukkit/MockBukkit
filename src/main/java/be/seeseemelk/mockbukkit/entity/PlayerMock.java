@@ -109,6 +109,7 @@ public class PlayerMock implements Player, MessageTarget
 	
 	/**
 	 * Assert that the player teleported to a certain location within a certain distance to a given location.
+	 * Also clears the teleported flag.
 	 * @param expectedLocation The location the player should be at.
 	 * @param maximumDistance The distance the player may maximumly be separated from the expected location.
 	 */
@@ -121,10 +122,12 @@ public class PlayerMock implements Player, MessageTarget
 	
 	/**
 	 * Assert that the player hasn't teleported.
+	 * Also clears the teleported flag.
 	 */
 	public void assertNotTeleported()
 	{
 		assertFalse("Player was teleported", teleported);
+		teleported = false;
 	}
 	
 	/**
@@ -146,7 +149,7 @@ public class PlayerMock implements Player, MessageTarget
 	}
 	
 	/**
-	 * Clear the teleported status.
+	 * Clears the teleported flag.
 	 */
 	public void clearTeleported()
 	{

@@ -162,7 +162,16 @@ public class PlayerMockTest
 	@Test(expected = AssertionError.class)
 	public void assertNotTeleported_Teleported_Asserts()
 	{
+		player.teleport(player.getLocation());
+		player.assertNotTeleported();
+	}
+	
+	@Test
+	public void assertNotTeleported_AfterAssertTeleported_DoesNotAssert()
+	{
+		player.teleport(player.getLocation());
 		player.assertTeleported(player.getLocation(), 0);
+		player.assertNotTeleported();
 	}
 	
 	@Test
