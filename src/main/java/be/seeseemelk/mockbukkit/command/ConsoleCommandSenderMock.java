@@ -1,8 +1,5 @@
 package be.seeseemelk.mockbukkit.command;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Set;
@@ -21,27 +18,6 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTarget
 {
 	public Queue<String> messages = new LinkedList<>();
-
-	public void assertSaid(String expected)
-	{
-		String message = nextMessage();
-		if (message == null)
-		{
-			fail("No more messages were sent");
-		}
-		else
-		{
-			assertEquals(expected, message);
-		}
-	}
-	
-	public void assertNoMoreSaid()
-	{
-		if (nextMessage() != null)
-		{
-			fail("More messages were available");
-		}
-	}
 
 	@Override
 	public void sendMessage(String message)
