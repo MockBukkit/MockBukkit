@@ -1,8 +1,12 @@
 package be.seeseemelk.mockbukkit.inventory;
 
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.function.Function;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -28,6 +32,44 @@ public class PlayerInventoryMock implements PlayerInventory
 	public PlayerInventoryMock(String name)
 	{
 		this.name = name;
+	}
+	
+	/**
+	 * Asserts that a certain condition is true for all items, even {@code nulls}, in this inventory.
+	 * @param condition The condition to check for.
+	 */
+	public void assertTrueForAll(Function<ItemStack, Boolean> condition)
+	{
+		for (ItemStack item : items)
+		{
+			assertTrue(condition.apply(item));
+		}
+	}
+	
+	/**
+	 * Assets that a certain condition is true for all items in this inventory that aren't null.
+	 * @param condition The condition to check for.
+	 */
+	public void assertTrueForNonNulls(Function<ItemStack, Boolean> condition)
+	{
+		assertTrueForAll(itemstack -> itemstack == null || condition.apply(itemstack));
+	}
+
+	/**
+	 * Asserts that a certain condition is true for at least one item in this inventory.
+	 * It will skip any null items.
+	 * @param condition The condition to check for.
+	 */
+	public void assertTrueForSome(Function<ItemStack, Boolean> condition)
+	{
+		for (ItemStack item : items)
+		{
+			if (item != null && condition.apply(item))
+			{
+				return;
+			}
+		}
+		fail("Condition was not met for any items");
 	}
 	
 	@Override

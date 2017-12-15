@@ -1,8 +1,12 @@
 package be.seeseemelk.mockbukkit.inventory;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -141,4 +145,59 @@ public class PlayerInventoryMockTest
 			assertNull(inventory.getItem(i));
 		}
 	}
+	
+	@Test
+	public void assertTrueForAll_ChecksIfNullOnEmptyInventory_DoesNotAssert()
+	{
+		inventory.assertTrueForAll(itemstack -> itemstack == null);
+	}
+	
+	@Test(expected = AssertionError.class)
+	public void assertTrueForAll_ChecksIfNullOnNonEmptyInventory_Asserts()
+	{
+		inventory.addItem(new ItemStack(Material.DIRT, 1));
+		inventory.assertTrueForAll(itemstack -> itemstack == null);
+	}
+	
+	@Test
+	public void assertTrueForNonNulls_NumberOfExecutionsOnInventoryOneItem_EqualToOne()
+	{
+		inventory.addItem(new ItemStack(Material.DIRT, 1));
+		AtomicInteger calls = new AtomicInteger(0);
+		inventory.assertTrueForNonNulls(itemstack -> {
+			calls.incrementAndGet();
+			return true;
+		});
+		assertEquals(1, calls.get());
+	}
+	
+	@Test
+	public void assertTrueForSome_OneItemMeetsCondition_DoesNotAssert()
+	{
+		inventory.addItem(new ItemStack(Material.DIRT, 1));
+		inventory.assertTrueForSome(itemstack -> itemstack.getAmount() > 0);
+	}
+	
+	@Test(expected = AssertionError.class)
+	public void assertTrueForSome_NoItemsMeetCondition_Asserts()
+	{
+		inventory.addItem(new ItemStack(Material.DIRT, 1));
+		inventory.assertTrueForSome(itemstack -> itemstack.getAmount() > 16);
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
