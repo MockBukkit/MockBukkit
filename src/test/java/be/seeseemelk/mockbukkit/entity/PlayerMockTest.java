@@ -231,7 +231,7 @@ public class PlayerMockTest
 	}
 	
 	@Test(expected = AssertionError.class)
-	public void assetGameMode_WrongGameMode_Asserts()
+	public void assertGameMode_WrongGameMode_Asserts()
 	{
 		player.assertGameMode(GameMode.CREATIVE);
 	}
