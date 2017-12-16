@@ -184,7 +184,54 @@ public class PlayerInventoryMockTest
 		inventory.addItem(new ItemStack(Material.DIRT, 1));
 		inventory.assertTrueForSome(itemstack -> itemstack.getAmount() > 16);
 	}
+	
+	@Test
+	public void assertContainsAny_ContainsThem_DoesNotAssert()
+	{
+		inventory.addItem(new ItemStack(Material.DIRT, 16));
+		inventory.assertContainsAny(new ItemStack(Material.DIRT));
+	}
+	
+	@Test(expected = AssertionError.class)
+	public void assertContainsAny_DoesNotContainThem_Asserts()
+	{
+		inventory.addItem(new ItemStack(Material.GRASS, 16));
+		inventory.assertContainsAny(new ItemStack(Material.DIRT));
+	}
+	
+	@Test
+	public void assertContainsAtLeast_ContainsExactly_DoesNotAssert()
+	{
+		inventory.addItem(new ItemStack(Material.DIRT, 4));
+		inventory.assertContainsAtLeast(new ItemStack(Material.DIRT), 4);
+	}
+	
+	@Test
+	public void assertContainsAtLeast_ContainsMore_DoesNotAssert()
+	{
+		inventory.addItem(new ItemStack(Material.DIRT, 8));
+		inventory.assertContainsAtLeast(new ItemStack(Material.DIRT), 4);
+	}
+	
+	@Test(expected = AssertionError.class)
+	public void assertContainsAtLeast_DoesNotContainEnough_Asserts()
+	{
+		inventory.addItem(new ItemStack(Material.GRASS, 3));
+		inventory.assertContainsAtLeast(new ItemStack(Material.DIRT), 4);
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
