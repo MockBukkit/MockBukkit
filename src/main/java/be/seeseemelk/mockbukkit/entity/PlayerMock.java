@@ -1,34 +1,11 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import java.net.InetSocketAddress;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Queue;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.LinkedTransferQueue;
-
-import org.bukkit.Achievement;
-import org.bukkit.Bukkit;
-import org.bukkit.Effect;
-import org.bukkit.EntityEffect;
-import org.bukkit.GameMode;
-import org.bukkit.Instrument;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Note;
-import org.bukkit.Particle;
-import org.bukkit.Server;
-import org.bukkit.Sound;
-import org.bukkit.SoundCategory;
-import org.bukkit.Statistic;
-import org.bukkit.WeatherType;
-import org.bukkit.World;
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.command.MessageTarget;
+import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
+import com.google.common.base.Charsets;
+import org.bukkit.*;
 import org.bukkit.advancement.Advancement;
 import org.bukkit.advancement.AdvancementProgress;
 import org.bukkit.attribute.Attribute;
@@ -37,22 +14,12 @@ import org.bukkit.block.Block;
 import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationAbandonedEvent;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Projectile;
-import org.bukkit.entity.Villager;
+import org.bukkit.entity.*;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
-import org.bukkit.inventory.EntityEquipment;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryView;
+import org.bukkit.inventory.*;
 import org.bukkit.inventory.InventoryView.Property;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.MainHand;
-import org.bukkit.inventory.Merchant;
-import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.map.MapView;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.permissions.Permission;
@@ -64,10 +31,11 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.util.Vector;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.command.MessageTarget;
-import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
+import java.net.InetSocketAddress;
+import java.util.*;
+import java.util.concurrent.LinkedTransferQueue;
+
+import static org.junit.Assert.*;
 
 @SuppressWarnings("deprecation")
 public class PlayerMock implements Player, MessageTarget
@@ -77,14 +45,24 @@ public class PlayerMock implements Player, MessageTarget
 	private final Queue<String> messages = new LinkedTransferQueue<>();
 	private Location location;
 	private boolean teleported;
+	private boolean online;
 	private TeleportCause teleportCause;
 	private PlayerInventoryMock inventory = null;
 	private GameMode gamemode = GameMode.SURVIVAL;
+	private boolean whitelisted = true;
+	private boolean operator = false;
+
+	public PlayerMock(String name)
+	{
+		this(name, UUID.nameUUIDFromBytes(("OfflinePlayer:" + name).getBytes(Charsets.UTF_8)));
+		this.online = false;
+	}
 
 	public PlayerMock(String name, UUID uuid)
 	{
 		this.name = name;
 		this.uuid = uuid;
+		this.online = true;
 
 		if (Bukkit.getWorlds().size() == 0)
 		{
@@ -132,7 +110,7 @@ public class PlayerMock implements Player, MessageTarget
 	
 	/**
 	 * Assert that the player is in a specific gamemode.
-	 * @param gamemode The gamemode the player should be in.
+	 * @param expectedGamemode The gamemode the player should be in.
 	 */
 	public void assertGameMode(GameMode expectedGamemode)
 	{
@@ -140,7 +118,7 @@ public class PlayerMock implements Player, MessageTarget
 	}
 	
 	/**
-	 * Checks if the player has been teleported since the last assert or {@link clearTeleported}.
+	 * Checks if the player has been teleported since the last assert or {@link #clearTeleported}.
 	 * @return {@code true} if the player has been teleported, {@code false} if he hasn't been teleported.
 	 */
 	public boolean hasTeleported()
@@ -1200,15 +1178,13 @@ public class PlayerMock implements Player, MessageTarget
 	@Override
 	public boolean isOp()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.operator;
 	}
 
 	@Override
 	public void setOp(boolean value)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.operator = value;
 	}
 
 	@Override
@@ -1326,36 +1302,35 @@ public class PlayerMock implements Player, MessageTarget
 	@Override
 	public boolean isOnline()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.online;
 	}
 
 	@Override
 	public boolean isBanned()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return MockBukkit.getMock().getBanList(BanList.Type.NAME).isBanned(this.name);
 	}
 
 	@Override
 	public boolean isWhitelisted()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.whitelisted;
 	}
 
 	@Override
 	public void setWhitelisted(boolean value)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.whitelisted = value;
 	}
 
 	@Override
 	public Player getPlayer()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (online)
+		{
+			return this;
+		}
+		return null;
 	}
 
 	@Override
