@@ -35,8 +35,11 @@ public class PlayerInventoryMock implements PlayerInventory
 	}
 	
 	/**
-	 * Asserts that a certain condition is true for all items, even {@code nulls}, in this inventory.
-	 * @param condition The condition to check for.
+	 * Asserts that a certain condition is true for all items, even {@code nulls},
+	 * in this inventory.
+	 * 
+	 * @param condition
+	 *            The condition to check for.
 	 */
 	public void assertTrueForAll(Function<ItemStack, Boolean> condition)
 	{
@@ -47,18 +50,23 @@ public class PlayerInventoryMock implements PlayerInventory
 	}
 	
 	/**
-	 * Assets that a certain condition is true for all items in this inventory that aren't null.
-	 * @param condition The condition to check for.
+	 * Assets that a certain condition is true for all items in this inventory that
+	 * aren't null.
+	 * 
+	 * @param condition
+	 *            The condition to check for.
 	 */
 	public void assertTrueForNonNulls(Function<ItemStack, Boolean> condition)
 	{
 		assertTrueForAll(itemstack -> itemstack == null || condition.apply(itemstack));
 	}
-
+	
 	/**
-	 * Asserts that a certain condition is true for at least one item in this inventory.
-	 * It will skip any null items.
-	 * @param condition The condition to check for.
+	 * Asserts that a certain condition is true for at least one item in this
+	 * inventory. It will skip any null items.
+	 * 
+	 * @param condition
+	 *            The condition to check for.
 	 */
 	public void assertTrueForSome(Function<ItemStack, Boolean> condition)
 	{
@@ -70,6 +78,48 @@ public class PlayerInventoryMock implements PlayerInventory
 			}
 		}
 		fail("Condition was not met for any items");
+	}
+	
+	/**
+	 * Asserts that the inventory contains at least one itemstack that is compatible
+	 * with the given itemstack.
+	 * 
+	 * @param item The itemstack to compare everything to.
+	 */
+	public void assertContainsAny(ItemStack item)
+	{
+		assertTrueForSome(itemstack -> item.isSimilar(itemstack));
+	}
+	
+	/**
+	 * Asserts that the inventory contains at least a specific amount of items that are compatible
+	 * with the given itemstack.
+	 * @param item The itemstack to search for.
+	 * @param amount The minimum amount of items that one should have.
+	 */
+	public void assertContainsAtLeast(ItemStack item, int amount)
+	{
+		int n = getNumberOfItems(item);
+		String message = String.format("Inventory contains only <%d> but expected at least <%d>", n, amount);
+		assertTrue(message, n >= amount);
+	}
+	
+	/**
+	 * Get the number of times a certain item is in the inventory.
+	 * @param item The item to check for.
+	 * @return The number of times the item is present in this inventory.
+	 */
+	public int getNumberOfItems(ItemStack item)
+	{
+		int amount = 0;
+		for (ItemStack itemstack : items)
+		{
+			if (itemstack != null && item.isSimilar(itemstack))
+			{
+				amount += itemstack.getAmount();
+			}
+		}
+		return amount;
 	}
 	
 	@Override
@@ -95,7 +145,7 @@ public class PlayerInventoryMock implements PlayerInventory
 	{
 		items[index] = item.clone();
 	}
-
+	
 	/**
 	 * Adds a single item to the inventory. Returns whatever item it couldn't add.
 	 * 
