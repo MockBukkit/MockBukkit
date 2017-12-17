@@ -5,7 +5,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.net.InetSocketAddress;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
@@ -42,7 +44,11 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.entity.Villager;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
+import org.bukkit.event.entity.EntityDamageEvent.DamageModifier;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.inventory.EntityEquipment;
@@ -64,6 +70,8 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.util.Vector;
 
+import com.google.common.base.Function;
+
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.command.MessageTarget;
@@ -72,6 +80,7 @@ import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
 @SuppressWarnings("deprecation")
 public class PlayerMock implements Player, MessageTarget
 {
+	private static final double MAX_HEALTH = 20.0;
 	private final String name;
 	private final UUID uuid;
 	private final Queue<String> messages = new LinkedTransferQueue<>();
@@ -80,6 +89,8 @@ public class PlayerMock implements Player, MessageTarget
 	private TeleportCause teleportCause;
 	private PlayerInventoryMock inventory = null;
 	private GameMode gamemode = GameMode.SURVIVAL;
+	private double maxHealth = MAX_HEALTH;
+	private double health = 20.0;
 
 	public PlayerMock(String name, UUID uuid)
 	{
@@ -276,7 +287,87 @@ public class PlayerMock implements Player, MessageTarget
 	{
 		gamemode = mode;
 	}
+	
+	@Override
+	public double getHealth()
+	{
+		return health;
+	}
 
+	@Override
+	public void setHealth(double health)
+	{
+		if (health < 0)
+		{
+			this.health = 0;
+			PlayerDeathEvent event = new PlayerDeathEvent(this, new ArrayList<>(), 0, name + " got killed");
+			Bukkit.getPluginManager().callEvent(event);
+		}
+		else if (health > maxHealth)
+		{
+			this.health = maxHealth;
+		}
+		else
+		{
+			this.health = health;
+		}
+	}
+
+	@Override
+	public double getMaxHealth()
+	{
+		return maxHealth;
+	}
+
+	@Override
+	public void setMaxHealth(double health)
+	{
+		maxHealth = health;
+		if (this.health > maxHealth)
+		{
+			this.health = maxHealth;
+		}
+	}
+
+	@Override
+	public void resetMaxHealth()
+	{
+		setMaxHealth(MAX_HEALTH);
+	}
+
+	@Override
+	public void damage(double amount)
+	{
+		Map<DamageModifier, Double> modifiers = new EnumMap<>(DamageModifier.class);
+		modifiers.put(DamageModifier.BASE, 1.0);
+		Map<DamageModifier, Function<Double, Double>> modifierFunctions = new EnumMap<>(DamageModifier.class);
+		modifierFunctions.put(DamageModifier.BASE, damage -> damage);
+		
+		EntityDamageEvent event = new EntityDamageEvent(this, DamageCause.CUSTOM, modifiers, modifierFunctions);
+		event.setDamage(amount);
+		Bukkit.getPluginManager().callEvent(event);
+		if (!event.isCancelled())
+		{
+			setHealth(health - amount);
+		}
+	}
+
+	@Override
+	public void damage(double amount, Entity source)
+	{
+		Map<DamageModifier, Double> modifiers = new EnumMap<>(DamageModifier.class);
+		modifiers.put(DamageModifier.BASE, 1.0);
+		Map<DamageModifier, Function<Double, Double>> modifierFunctions = new EnumMap<>(DamageModifier.class);
+		modifierFunctions.put(DamageModifier.BASE, damage -> damage);
+		
+		EntityDamageByEntityEvent event = new EntityDamageByEntityEvent(source, this, DamageCause.ENTITY_ATTACK, modifiers, modifierFunctions);
+		event.setDamage(amount);
+		Bukkit.getPluginManager().callEvent(event);
+		if (!event.isCancelled())
+		{
+			setHealth(health - amount);
+		}
+	}
 
 	@Override
 	public Inventory getEnderChest()
@@ -1220,55 +1311,6 @@ public class PlayerMock implements Player, MessageTarget
 
 	@Override
 	public void setCustomName(String name)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void damage(double amount)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void damage(double amount, Entity source)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public double getHealth()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setHealth(double health)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public double getMaxHealth()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setMaxHealth(double health)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void resetMaxHealth()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

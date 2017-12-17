@@ -12,23 +12,27 @@ import java.util.UUID;
 
 import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.WorldMock;
 
 public class PlayerMockTest
 {
+	private ServerMock server;
 	private UUID uuid;
 	private PlayerMock player;
 
 	@Before
 	public void setUp() throws Exception
 	{
-		MockBukkit.mock();
+		server = MockBukkit.mock();
 		uuid = UUID.randomUUID();
 		player = new PlayerMock("player", uuid);
 	}
@@ -234,6 +238,83 @@ public class PlayerMockTest
 	public void assertGameMode_WrongGameMode_Asserts()
 	{
 		player.assertGameMode(GameMode.CREATIVE);
+	}
+	
+	@Test
+	public void getHealth_Default_EqualsToGetMaxHealth()
+	{
+		assertEquals(player.getMaxHealth(), player.getHealth(), 0);
+	}
+	
+	@Test
+	public void setHealth_SomeValue_HealthSetExactly()
+	{
+		player.setHealth(15.5);
+		assertEquals(15.5, player.getHealth(), 0);
+	}
+	
+	@Test
+	public void setHealth_NegativeValue_ClampedAtZero()
+	{
+		player.setHealth(-10.0);
+		assertEquals(0, player.getHealth(), 0);
+	}
+	
+	@Test
+	public void setHealh_TooHighValue_ClampedAtMaxHealth()
+	{
+		player.setHealth(player.getMaxHealth() + 10.0);
+		assertEquals(player.getMaxHealth(), player.getHealth(), 0);
+	}
+	
+	@Test
+	public void getMaxHealth_Default_20()
+	{
+		assertEquals(20.0, player.getMaxHealth(), 0);
+	}
+	
+	@Test
+	public void setMaxHealth_Decreased_HealthAndMaxHealthSet()
+	{
+		player.setMaxHealth(10.0);
+		assertEquals(10.0, player.getMaxHealth(), 0);
+		assertEquals(10.0, player.getHealth(), 0);
+	}
+	
+	@Test
+	public void setMaxHealth_Increased_MaxHealthSet()
+	{
+		player.setMaxHealth(30.0);
+		assertEquals(30.0, player.getMaxHealth(), 0);
+		assertEquals(20.0, player.getHealth(), 0);
+	}
+	
+	@Test
+	public void resetMaxHealth_MaxHealthChanged_ResetsBackTo20()
+	{
+		player.setMaxHealth(30.0);
+		player.setHealth(30.0);
+		player.resetMaxHealth();
+		assertEquals(20.0, player.getMaxHealth(), 0);
+		assertEquals(20.0, player.getHealth(), 0);
+	}
+	
+	@Test
+	public void damage_SmallAmount_DamageTaken()
+	{
+		double health = player.getHealth();
+		player.damage(5.0);
+		assertEquals(health - 5.0, player.getHealth(), 0);
+		server.getPluginManager().assertEventFired(EntityDamageEvent.class);
+	}
+	
+	@Test
+	public void damage_LargeAmount_ClampedAtZero()
+	{
+		player.damage(50.0, player);
+		assertEquals(0, player.getHealth(), 0);
+		server.getPluginManager().assertEventFired(EntityDamageEvent.class);
+		server.getPluginManager().assertEventFired(PlayerDeathEvent.class);
 	}
 	
 }
