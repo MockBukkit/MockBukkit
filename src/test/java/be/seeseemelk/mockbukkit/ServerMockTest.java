@@ -1,16 +1,9 @@
 package be.seeseemelk.mockbukkit;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.Iterator;
 
-import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
@@ -202,15 +195,10 @@ public class ServerMockTest
 	}
 	
 	@Test
-	public void getOfflinePlayers_AllSame()
+	public void getOfflinePlayers_CorrectArraySize()
 	{
-		server.setPlayers(2);
-		PlayerMock player1 = server.getPlayer(0);
-		PlayerMock player2 = server.getPlayer(1);
-		OfflinePlayer[] players = server.getOfflinePlayers();
-		assertEquals(player1, players[0]);
-		assertEquals(player2, players[1]);
-		assertEquals(2, players.length);
+		server.setOfflinePlayers(2);
+		assertEquals(2, server.getOfflinePlayers().length);
 	}
 	
 	@Test

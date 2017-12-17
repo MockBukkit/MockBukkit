@@ -1,8 +1,11 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.command.MessageTarget;
+import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
 
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
@@ -51,14 +54,8 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageModifier;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
-import org.bukkit.inventory.EntityEquipment;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryView;
+import org.bukkit.inventory.*;
 import org.bukkit.inventory.InventoryView.Property;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.MainHand;
-import org.bukkit.inventory.Merchant;
-import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.map.MapView;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.permissions.Permission;
@@ -69,13 +66,11 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.util.Vector;
+import org.bukkit.BanList;
 
+import com.google.common.base.Charsets;
 import com.google.common.base.Function;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.command.MessageTarget;
-import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
 
 @SuppressWarnings("deprecation")
 public class PlayerMock implements Player, MessageTarget
@@ -86,16 +81,26 @@ public class PlayerMock implements Player, MessageTarget
 	private final Queue<String> messages = new LinkedTransferQueue<>();
 	private Location location;
 	private boolean teleported;
+	private boolean online;
 	private TeleportCause teleportCause;
 	private PlayerInventoryMock inventory = null;
 	private GameMode gamemode = GameMode.SURVIVAL;
 	private double maxHealth = MAX_HEALTH;
 	private double health = 20.0;
+	private boolean whitelisted = true;
+	private boolean operator = false;
+
+	public PlayerMock(String name)
+	{
+		this(name, UUID.nameUUIDFromBytes(("OfflinePlayer:" + name).getBytes(Charsets.UTF_8)));
+		this.online = false;
+	}
 
 	public PlayerMock(String name, UUID uuid)
 	{
 		this.name = name;
 		this.uuid = uuid;
+		this.online = true;
 
 		if (Bukkit.getWorlds().size() == 0)
 		{
@@ -143,7 +148,7 @@ public class PlayerMock implements Player, MessageTarget
 	
 	/**
 	 * Assert that the player is in a specific gamemode.
-	 * @param gamemode The gamemode the player should be in.
+	 * @param expectedGamemode The gamemode the player should be in.
 	 */
 	public void assertGameMode(GameMode expectedGamemode)
 	{
@@ -151,7 +156,7 @@ public class PlayerMock implements Player, MessageTarget
 	}
 	
 	/**
-	 * Checks if the player has been teleported since the last assert or {@link clearTeleported}.
+	 * Checks if the player has been teleported since the last assert or {@link #clearTeleported}.
 	 * @return {@code true} if the player has been teleported, {@code false} if he hasn't been teleported.
 	 */
 	public boolean hasTeleported()
@@ -1291,15 +1296,13 @@ public class PlayerMock implements Player, MessageTarget
 	@Override
 	public boolean isOp()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.operator;
 	}
 
 	@Override
 	public void setOp(boolean value)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.operator = value;
 	}
 
 	@Override
@@ -1368,36 +1371,35 @@ public class PlayerMock implements Player, MessageTarget
 	@Override
 	public boolean isOnline()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.online;
 	}
 
 	@Override
 	public boolean isBanned()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return MockBukkit.getMock().getBanList(BanList.Type.NAME).isBanned(this.name);
 	}
 
 	@Override
 	public boolean isWhitelisted()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.whitelisted;
 	}
 
 	@Override
 	public void setWhitelisted(boolean value)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.whitelisted = value;
 	}
 
 	@Override
 	public Player getPlayer()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (online)
+		{
+			return this;
+		}
+		return null;
 	}
 
 	@Override

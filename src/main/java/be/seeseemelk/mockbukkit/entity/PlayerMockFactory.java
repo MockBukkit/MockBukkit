@@ -46,18 +46,34 @@ public final class PlayerMockFactory
 			}
 		}
 	}
-	
+
 	/**
 	 * Create a random player mock object with a unique name.
 	 * @return A newly created player mock object.
 	 */
 	public PlayerMock createRandomPlayer()
 	{
+		return createRandomPlayer(true);
+	}
+
+	/**
+	 * Create a random mock player
+	 *
+	 * @param generateUUID Whether or not a UUID should be generated,
+	 *                     if false the generated player will be an OfflinePlayer
+	 * @return generated mock player
+	 */
+	public PlayerMock createRandomPlayer(boolean generateUUID)
+	{
 		String name = getUniqueRandomName();
-		// Should preferably be quick, doesn't need to be secure
-		UUID uuid = new UUID(random.nextLong(), random.nextLong());
-		PlayerMock mock = new PlayerMock(name, uuid);
-		return mock;
+		if (generateUUID) {
+			// Should preferably be quick, doesn't need to be secure
+			UUID uuid = new UUID(random.nextLong(), random.nextLong());
+			return new PlayerMock(name, uuid);
+		} else
+		{
+			return new PlayerMock(name);
+		}
 	}
 }
 
