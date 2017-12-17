@@ -300,7 +300,7 @@ public class PlayerMockTest
 	}
 	
 	@Test
-	public void damage_SmallAmount_DamageTaken()
+	public void damage_LessThanHealth_DamageTaken()
 	{
 		double health = player.getHealth();
 		player.damage(5.0);
@@ -309,9 +309,18 @@ public class PlayerMockTest
 	}
 	
 	@Test
-	public void damage_LargeAmount_ClampedAtZero()
+	public void damage_MoreThanHealth_ClampedAtZeroAndDeathEvent()
 	{
 		player.damage(50.0, player);
+		assertEquals(0, player.getHealth(), 0);
+		server.getPluginManager().assertEventFired(EntityDamageEvent.class);
+		server.getPluginManager().assertEventFired(PlayerDeathEvent.class);
+	}
+	
+	@Test
+	public void damage_ExactlyHealth_ZeroAndDeathEvent()
+	{
+		player.damage(player.getHealth());
 		assertEquals(0, player.getHealth(), 0);
 		server.getPluginManager().assertEventFired(EntityDamageEvent.class);
 		server.getPluginManager().assertEventFired(PlayerDeathEvent.class);

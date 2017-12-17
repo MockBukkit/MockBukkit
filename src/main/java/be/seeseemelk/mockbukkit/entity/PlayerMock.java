@@ -302,7 +302,7 @@ public class PlayerMock implements Player, MessageTarget
 	@Override
 	public void setHealth(double health)
 	{
-		if (health < 0)
+		if (health <= 0)
 		{
 			this.health = 0;
 			PlayerDeathEvent event = new PlayerDeathEvent(this, new ArrayList<>(), 0, name + " got killed");
