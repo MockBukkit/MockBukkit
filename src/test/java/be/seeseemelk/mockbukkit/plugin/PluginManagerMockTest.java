@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.util.Collection;
 
 import org.bukkit.command.PluginCommand;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.plugin.Plugin;
 import org.junit.After;
@@ -77,6 +78,20 @@ public class PluginManagerMockTest
 		Collection<PluginCommand> commands = pluginManager.getCommands();
 		assertEquals(1, commands.size());
 		assertEquals("testcommand", commands.iterator().next().getName());
+	}
+	
+	@Test
+	public void assertEventFired_EventWasFired_DoesNotAssert()
+	{
+		BlockBreakEvent event = new BlockBreakEvent(null, null);
+		pluginManager.callEvent(event);
+		pluginManager.assertEventFired(BlockBreakEvent.class);
+	}
+	
+	@Test(expected = AssertionError.class)
+	public void assertEventFired_EventWasNotFired_Asserts()
+	{
+		pluginManager.assertEventFired(BlockBreakEvent.class);
 	}
 
 }

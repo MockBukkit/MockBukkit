@@ -1,5 +1,7 @@
 package be.seeseemelk.mockbukkit.plugin;
 
+import static org.junit.Assert.fail;
+
 import java.io.File;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -43,6 +45,7 @@ public class PluginManagerMock implements PluginManager
 	private final JavaPluginLoader loader;
 	private final List<PluginCommand> commands = new ArrayList<>();
 	private final Map<Plugin, Listener> eventListeners = new HashMap<>();
+	private final List<Event> events = new ArrayList<>();
 
 	@SuppressWarnings("deprecation")
 	public PluginManagerMock(ServerMock server)
@@ -51,6 +54,22 @@ public class PluginManagerMock implements PluginManager
 		loader = new JavaPluginLoader(this.server);
 	}
 
+	/**
+	 * Asserts that a specific event or once of it's sub-events has been fired at least once.
+	 * @param eventClass The class of the event to check for.
+	 */
+	public void assertEventFired(Class<? extends Event> eventClass)
+	{
+		for (Event event : events)
+		{
+			if (eventClass.isInstance(event))
+			{
+				return;
+			}
+		}
+		fail("No event of that type has been fired");
+	}
+	
 	@Override
 	public Plugin getPlugin(String name)
 	{
@@ -134,6 +153,7 @@ public class PluginManagerMock implements PluginManager
 	@Override
 	public void callEvent(Event event) throws IllegalStateException
 	{
+		events.add(event);
 		for (Listener listener : eventListeners.values())
 		{
 			for (Method method : listener.getClass().getMethods())
