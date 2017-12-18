@@ -42,7 +42,7 @@ import java.util.stream.Collectors;
 public class ServerMock implements Server
 {
 	private final Logger logger;
-	
+
 	private final List<PlayerMock> players = new ArrayList<>();
 	private final List<PlayerMock> offlinePlayers = new ArrayList<>();
 	private final List<World> worlds = new ArrayList<>();
@@ -53,22 +53,24 @@ public class ServerMock implements Server
 	private BukkitSchedulerMock scheduler = new BukkitSchedulerMock();
 	private PlayerList playerList = new PlayerList();
 	private GameMode defaultGameMode = GameMode.SURVIVAL;
-	
+
 	public ServerMock()
 	{
 		logger = Logger.getLogger("ServerMock");
 		logger.setLevel(Level.WARNING);
 	}
-	
+
 	/**
 	 * Add a specific player to the set.
+	 * 
 	 * @param player The player to add.
 	 */
 	public void addPlayer(PlayerMock player)
 	{
 		players.add(player);
+		offlinePlayers.add(player);
 	}
-	
+
 	/**
 	 * Creates a random player and adds it.
 	 */
@@ -76,10 +78,11 @@ public class ServerMock implements Server
 	{
 		addPlayer(playerFactory.createRandomPlayer());
 	}
-	
+
 	/**
-	 * Set the numbers of mock players that are on this server.
-	 * Note that it will remove all players that are already on this server. 
+	 * Set the numbers of mock players that are on this server. Note that it
+	 * will remove all players that are already on this server.
+	 * 
 	 * @param num The number of players that are on this server.
 	 */
 	public void setPlayers(int num)
@@ -92,21 +95,28 @@ public class ServerMock implements Server
 	}
 
 	/**
-	 * Set the numbers of mock offline players that are on this server.
+	 * Set the numbers of mock offline players that are on this server. Note
+	 * that even players that are online are also considered offline player
+	 * because an {@link OfflinePlayer} really just refers to anyone that has at
+	 * some point in time played on the server.
+	 * 
 	 * @param num The number of players that are on this server.
 	 */
 	public void setOfflinePlayers(int num)
 	{
 		offlinePlayers.clear();
+		offlinePlayers.addAll(players);
+
 		for (int i = 0; i < num; i++)
 		{
-			offlinePlayers.add(playerFactory.createRandomPlayer(false));
+			offlinePlayers.add(playerFactory.createRandomOfflinePlayer());
 		}
 	}
 
 	/**
-	 * Get a specific mock player.
-	 * A player's number will never change between invocations of {@link #setPlayers(int)}.
+	 * Get a specific mock player. A player's number will never change between
+	 * invocations of {@link #setPlayers(int)}.
+	 * 
 	 * @param num The number of the player to retrieve.
 	 * @return The chosen player.
 	 */
@@ -121,9 +131,10 @@ public class ServerMock implements Server
 			return players.get(num);
 		}
 	}
-	
+
 	/**
 	 * Adds a very simple super flat world with a given name.
+	 * 
 	 * @param name The name to give to the world.
 	 * @return The {@link WorldMock} that has been created.
 	 */
@@ -134,9 +145,10 @@ public class ServerMock implements Server
 		worlds.add(world);
 		return world;
 	}
-	
+
 	/**
 	 * Executes a command as the console.
+	 * 
 	 * @param command The command to execute.
 	 * @param args The arguments to pass to the commands.
 	 * @return The value returned by {@link Command#execute}.
@@ -145,9 +157,10 @@ public class ServerMock implements Server
 	{
 		return execute(command, getConsoleSender(), args);
 	}
-	
+
 	/**
 	 * Executes a command as the console.
+	 * 
 	 * @param command The command to execute.
 	 * @param args The arguments to pass to the commands.
 	 * @return The value returned by {@link Command#execute}.
@@ -159,6 +172,7 @@ public class ServerMock implements Server
 
 	/**
 	 * Executes a command as a player.
+	 * 
 	 * @param command The command to execute.
 	 * @param args The arguments to pass to the commands.
 	 * @return The value returned by {@link Command#execute}.
@@ -174,9 +188,10 @@ public class ServerMock implements Server
 			throw new IllegalStateException("Need at least one player to run the command");
 		}
 	}
-	
+
 	/**
 	 * Executes a command as a player.
+	 * 
 	 * @param command The command to execute.
 	 * @param args The arguments to pass to the commands.
 	 * @return The value returned by {@link Command#execute}.
@@ -188,6 +203,7 @@ public class ServerMock implements Server
 
 	/**
 	 * Executes a command.
+	 * 
 	 * @param command The command to execute.
 	 * @param sender The person that executed the command.
 	 * @param args The arguments to pass to the commands.
@@ -199,14 +215,15 @@ public class ServerMock implements Server
 		{
 			throw new IllegalArgumentException("Only a MessageTarget can be the sender of the command");
 		}
-		
+
 		boolean status = command.execute(sender, command.getName(), args);
 		CommandResult result = new CommandResult(status, (MessageTarget) sender);
 		return result;
 	}
-	
+
 	/**
 	 * Executes a command.
+	 * 
 	 * @param command The command to execute.
 	 * @param sender The person that executed the command.
 	 * @param args The arguments to pass to the commands.
@@ -216,7 +233,7 @@ public class ServerMock implements Server
 	{
 		return execute(getPluginCommand(command), sender, args);
 	}
-	
+
 	@Override
 	public String getName()
 	{
@@ -240,13 +257,13 @@ public class ServerMock implements Server
 	{
 		return players;
 	}
-	
+
 	@Override
 	public OfflinePlayer[] getOfflinePlayers()
 	{
 		return offlinePlayers.toArray(new OfflinePlayer[0]);
 	}
-	
+
 	@Override
 	public Player getPlayer(String name)
 	{
@@ -371,7 +388,7 @@ public class ServerMock implements Server
 	{
 		return new ArrayList<>(worlds);
 	}
-	
+
 	@Override
 	public World getWorld(String name)
 	{
@@ -389,7 +406,7 @@ public class ServerMock implements Server
 	{
 		return scheduler;
 	}
-	
+
 	@Override
 	public int getMaxPlayers()
 	{
@@ -399,8 +416,8 @@ public class ServerMock implements Server
 	@Override
 	public Set<String> getIPBans()
 	{
-		return this.playerList.getIPBans().getBanEntries().stream()
-				.map(BanEntry::getTarget).collect(Collectors.toSet());
+		return this.playerList.getIPBans().getBanEntries().stream().map(BanEntry::getTarget)
+				.collect(Collectors.toSet());
 	}
 
 	@Override
@@ -414,7 +431,7 @@ public class ServerMock implements Server
 	{
 		this.playerList.getIPBans().pardon(address);
 	}
-	
+
 	@Override
 	public BanList getBanList(Type type)
 	{
@@ -448,7 +465,7 @@ public class ServerMock implements Server
 	{
 		this.defaultGameMode = mode;
 	}
-	
+
 	@Override
 	public void sendPluginMessage(Plugin source, String channel, byte[] message)
 	{
@@ -462,7 +479,7 @@ public class ServerMock implements Server
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 	@Override
 	public int getPort()
 	{

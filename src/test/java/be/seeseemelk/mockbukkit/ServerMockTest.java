@@ -123,6 +123,14 @@ public class ServerMockTest
 	}
 	
 	@Test
+	public void getOfflinePlayers_CorrectArraySize()
+	{
+		server.setPlayers(1);
+		server.setOfflinePlayers(2);
+		assertEquals(3, server.getOfflinePlayers().length);
+	}
+
+	@Test
 	public void getPluginCommand_testcommand_Command()
 	{
 		MockBukkit.load(TestPlugin.class);
@@ -192,13 +200,6 @@ public class ServerMockTest
 	public void getConsoleSender_NotNull()
 	{
 		assertNotNull(server.getConsoleSender());
-	}
-	
-	@Test
-	public void getOfflinePlayers_CorrectArraySize()
-	{
-		server.setOfflinePlayers(2);
-		assertEquals(2, server.getOfflinePlayers().length);
 	}
 	
 	@Test
