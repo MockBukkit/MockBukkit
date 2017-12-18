@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -41,11 +42,11 @@ public class PlayerInventoryMock implements PlayerInventory
 	 * @param condition
 	 *            The condition to check for.
 	 */
-	public void assertTrueForAll(Function<ItemStack, Boolean> condition)
+	public void assertTrueForAll(Predicate<ItemStack> condition)
 	{
 		for (ItemStack item : items)
 		{
-			assertTrue(condition.apply(item));
+			assertTrue(condition.test(item));
 		}
 	}
 	
@@ -56,9 +57,9 @@ public class PlayerInventoryMock implements PlayerInventory
 	 * @param condition
 	 *            The condition to check for.
 	 */
-	public void assertTrueForNonNulls(Function<ItemStack, Boolean> condition)
+	public void assertTrueForNonNulls(Predicate<ItemStack> condition)
 	{
-		assertTrueForAll(itemstack -> itemstack == null || condition.apply(itemstack));
+		assertTrueForAll(itemstack -> itemstack == null || condition.test(itemstack));
 	}
 	
 	/**
@@ -68,11 +69,11 @@ public class PlayerInventoryMock implements PlayerInventory
 	 * @param condition
 	 *            The condition to check for.
 	 */
-	public void assertTrueForSome(Function<ItemStack, Boolean> condition)
+	public void assertTrueForSome(Predicate<ItemStack> condition)
 	{
 		for (ItemStack item : items)
 		{
-			if (item != null && condition.apply(item))
+			if (item != null && condition.test(item))
 			{
 				return;
 			}
