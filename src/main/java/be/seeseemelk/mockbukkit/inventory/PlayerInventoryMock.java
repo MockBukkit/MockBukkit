@@ -6,7 +6,6 @@ import static org.junit.Assert.fail;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.function.Function;
 import java.util.function.Predicate;
 
 import org.bukkit.Location;
