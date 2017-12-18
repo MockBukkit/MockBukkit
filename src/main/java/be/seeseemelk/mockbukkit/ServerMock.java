@@ -135,30 +135,6 @@ public class ServerMock implements Server
 		return world;
 	}
 	
-	@Override
-	public String getName()
-	{
-		return "ServerMock";
-	}
-
-	@Override
-	public String getVersion()
-	{
-		return "0.1.0";
-	}
-
-	@Override
-	public String getBukkitVersion()
-	{
-		return "1.12.1";
-	}
-
-	@Override
-	public Collection<? extends Player> getOnlinePlayers()
-	{
-		return players;
-	}
-
 	/**
 	 * Executes a command as the console.
 	 * @param command The command to execute.
@@ -240,6 +216,78 @@ public class ServerMock implements Server
 	{
 		return execute(getPluginCommand(command), sender, args);
 	}
+	
+	@Override
+	public String getName()
+	{
+		return "ServerMock";
+	}
+
+	@Override
+	public String getVersion()
+	{
+		return "0.1.0";
+	}
+
+	@Override
+	public String getBukkitVersion()
+	{
+		return "1.12.1";
+	}
+
+	@Override
+	public Collection<? extends PlayerMock> getOnlinePlayers()
+	{
+		return players;
+	}
+	
+	@Override
+	public OfflinePlayer[] getOfflinePlayers()
+	{
+		return offlinePlayers.toArray(new OfflinePlayer[0]);
+	}
+	
+	@Override
+	public Player getPlayer(String name)
+	{
+		Player player = getPlayerExact(name);
+		if (player != null)
+		{
+			return player;
+		}
+		final String lowercase = name.toLowerCase(Locale.ENGLISH);
+		int delta = Integer.MAX_VALUE;
+		int currentDelta;
+		for (Player namedPlayer : players)
+		{
+			if (namedPlayer.getName().equalsIgnoreCase(lowercase))
+			{
+				return namedPlayer;
+			}
+			if (namedPlayer.getName().toLowerCase(Locale.ENGLISH).startsWith(lowercase))
+			{
+				if ((currentDelta = Math.abs(namedPlayer.getName().length() - lowercase.length())) < delta)
+				{
+					delta = currentDelta;
+					player = namedPlayer;
+				}
+			}
+		}
+		return player;
+	}
+
+	@Override
+	public Player getPlayerExact(String name)
+	{
+		return this.players.stream().filter(playerMock -> playerMock.getName().equals(name)).findFirst().orElse(null);
+	}
+
+	@Override
+	public List<Player> matchPlayer(String name)
+	{
+		return players.stream().filter(player -> player.getName().toLowerCase(Locale.ENGLISH).startsWith(name))
+				.collect(Collectors.toList());
+	}
 
 	@Override
 	public Player getPlayer(UUID id)
@@ -300,12 +348,6 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public OfflinePlayer[] getOfflinePlayers()
-	{
-		return offlinePlayers.toArray(new OfflinePlayer[0]);
-	}
-
-	@Override
 	public Inventory createInventory(InventoryHolder owner, InventoryType type)
 	{
 		switch (type)
@@ -354,6 +396,59 @@ public class ServerMock implements Server
 		return playerList.getMaxPlayers();
 	}
 
+	@Override
+	public Set<String> getIPBans()
+	{
+		return this.playerList.getIPBans().getBanEntries().stream()
+				.map(BanEntry::getTarget).collect(Collectors.toSet());
+	}
+
+	@Override
+	public void banIP(String address)
+	{
+		this.playerList.getIPBans().addBan(address, null, null, null);
+	}
+
+	@Override
+	public void unbanIP(String address)
+	{
+		this.playerList.getIPBans().pardon(address);
+	}
+	
+	@Override
+	public BanList getBanList(Type type)
+	{
+		switch (type)
+		{
+			case IP:
+				return playerList.getIPBans();
+			case NAME:
+			default:
+				return playerList.getProfileBans();
+		}
+	}
+
+	@Override
+	public Set<OfflinePlayer> getOperators()
+	{
+		final Set<OfflinePlayer> players = new HashSet<>();
+		players.addAll(this.offlinePlayers);
+		players.addAll(this.players);
+		return players.stream().filter(OfflinePlayer::isOp).collect(Collectors.toSet());
+	}
+
+	@Override
+	public GameMode getDefaultGameMode()
+	{
+		return this.defaultGameMode;
+	}
+
+	@Override
+	public void setDefaultGameMode(GameMode mode)
+	{
+		this.defaultGameMode = mode;
+	}
+	
 	@Override
 	public void sendPluginMessage(Plugin source, String channel, byte[] message)
 	{
@@ -499,48 +594,6 @@ public class ServerMock implements Server
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public Player getPlayer(String name)
-	{
-		Player player = getPlayerExact(name);
-		if (player != null)
-		{
-			return player;
-		}
-		final String lowercase = name.toLowerCase(Locale.ENGLISH);
-		int delta = Integer.MAX_VALUE;
-		int currentDelta;
-		for (Player namedPlayer : players)
-		{
-			if (namedPlayer.getName().equalsIgnoreCase(lowercase))
-			{
-				return namedPlayer;
-			}
-			if (namedPlayer.getName().toLowerCase(Locale.ENGLISH).startsWith(lowercase))
-			{
-				if ((currentDelta = Math.abs(namedPlayer.getName().length() - lowercase.length())) < delta)
-				{
-					delta = currentDelta;
-					player = namedPlayer;
-				}
-			}
-		}
-		return player;
-	}
-
-	@Override
-	public Player getPlayerExact(String name)
-	{
-		return this.players.stream().filter(playerMock -> playerMock.getName().equals(name)).findFirst().orElse(null);
-	}
-
-	@Override
-	public List<Player> matchPlayer(String name)
-	{
-		return players.stream().filter(player -> player.getName().toLowerCase(Locale.ENGLISH).startsWith(name))
-				.collect(Collectors.toList());
 	}
 
 	@Override
@@ -719,63 +772,10 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public Set<String> getIPBans()
-	{
-		return this.playerList.getIPBans().getBanEntries().stream()
-				.map(BanEntry::getTarget).collect(Collectors.toSet());
-	}
-
-	@Override
-	public void banIP(String address)
-	{
-		this.playerList.getIPBans().addBan(address, null, null, null);
-	}
-
-	@Override
-	public void unbanIP(String address)
-	{
-		this.playerList.getIPBans().pardon(address);
-	}
-
-	@Override
 	public Set<OfflinePlayer> getBannedPlayers()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public BanList getBanList(Type type)
-	{
-		switch (type)
-		{
-			case IP:
-				return playerList.getIPBans();
-			case NAME:
-			default:
-				return playerList.getProfileBans();
-		}
-	}
-
-	@Override
-	public Set<OfflinePlayer> getOperators()
-	{
-		final Set<OfflinePlayer> players = new HashSet<>();
-		players.addAll(this.offlinePlayers);
-		players.addAll(this.players);
-		return players.stream().filter(OfflinePlayer::isOp).collect(Collectors.toSet());
-	}
-
-	@Override
-	public GameMode getDefaultGameMode()
-	{
-		return this.defaultGameMode;
-	}
-
-	@Override
-	public void setDefaultGameMode(GameMode mode)
-	{
-		this.defaultGameMode = mode;
 	}
 
 	@Override
