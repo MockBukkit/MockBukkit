@@ -12,6 +12,7 @@ import java.util.UUID;
 
 import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
@@ -324,6 +325,12 @@ public class PlayerMockTest
 		assertEquals(0, player.getHealth(), 0);
 		server.getPluginManager().assertEventFired(EntityDamageEvent.class);
 		server.getPluginManager().assertEventFired(PlayerDeathEvent.class);
+	}
+	
+	@Test
+	public void getAttribute_HealthAttribute_IsMaximumHealth()
+	{
+		assertEquals(20.0, player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getDefaultValue(), 0);
 	}
 	
 }

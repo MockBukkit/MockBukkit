@@ -1,11 +1,8 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import static org.junit.Assert.*;
-
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.command.MessageTarget;
-import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
@@ -19,6 +16,7 @@ import java.util.UUID;
 import java.util.concurrent.LinkedTransferQueue;
 
 import org.bukkit.Achievement;
+import org.bukkit.BanList;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.EntityEffect;
@@ -54,8 +52,14 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageModifier;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
-import org.bukkit.inventory.*;
+import org.bukkit.inventory.EntityEquipment;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.InventoryView.Property;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.MainHand;
+import org.bukkit.inventory.Merchant;
+import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.map.MapView;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.permissions.Permission;
@@ -66,10 +70,15 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.util.Vector;
-import org.bukkit.BanList;
 
 import com.google.common.base.Charsets;
 import com.google.common.base.Function;
+
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.attribute.AttributeInstanceMock;
+import be.seeseemelk.mockbukkit.command.MessageTarget;
+import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
 
 
 @SuppressWarnings("deprecation")
@@ -89,6 +98,12 @@ public class PlayerMock implements Player, MessageTarget
 	private double health = 20.0;
 	private boolean whitelisted = true;
 	private boolean operator = false;
+	private Map<Attribute, AttributeInstanceMock> attributes;
+	
+	{
+		attributes = new EnumMap<>(Attribute.class);
+		attributes.put(Attribute.GENERIC_MAX_HEALTH, new AttributeInstanceMock(Attribute.GENERIC_MAX_HEALTH, MAX_HEALTH));
+	}
 
 	public PlayerMock(String name)
 	{
@@ -321,16 +336,16 @@ public class PlayerMock implements Player, MessageTarget
 	@Override
 	public double getMaxHealth()
 	{
-		return maxHealth;
+		return getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
 	}
 
 	@Override
 	public void setMaxHealth(double health)
 	{
-		maxHealth = health;
-		if (this.health > maxHealth)
+		getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(health);
+		if (this.health > health)
 		{
-			this.health = maxHealth;
+			this.health = health;
 		}
 	}
 
@@ -418,6 +433,19 @@ public class PlayerMock implements Player, MessageTarget
 	public boolean isBanned()
 	{
 		return MockBukkit.getMock().getBanList(BanList.Type.NAME).isBanned(this.name);
+	}
+	
+	@Override
+	public AttributeInstance getAttribute(Attribute attribute)
+	{
+		if (attributes.containsKey(attribute))
+		{
+			return attributes.get(attribute);
+		}
+		else
+		{
+			throw new UnimplementedOperationException();
+		}
 	}
 
 	@Override
@@ -878,13 +906,6 @@ public class PlayerMock implements Player, MessageTarget
 
 	@Override
 	public boolean isCollidable()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public AttributeInstance getAttribute(Attribute attribute)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
