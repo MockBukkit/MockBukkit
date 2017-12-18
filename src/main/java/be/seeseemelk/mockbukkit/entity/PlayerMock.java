@@ -373,6 +373,52 @@ public class PlayerMock implements Player, MessageTarget
 			setHealth(health - amount);
 		}
 	}
+	
+	@Override
+	public boolean isWhitelisted()
+	{
+		return this.whitelisted;
+	}
+
+	@Override
+	public void setWhitelisted(boolean value)
+	{
+		this.whitelisted = value;
+	}
+
+	@Override
+	public Player getPlayer()
+	{
+		if (online)
+		{
+			return this;
+		}
+		return null;
+	}
+	
+	@Override
+	public boolean isOp()
+	{
+		return this.operator;
+	}
+
+	@Override
+	public void setOp(boolean value)
+	{
+		this.operator = value;
+	}
+	
+	@Override
+	public boolean isOnline()
+	{
+		return this.online;
+	}
+
+	@Override
+	public boolean isBanned()
+	{
+		return MockBukkit.getMock().getBanList(BanList.Type.NAME).isBanned(this.name);
+	}
 
 	@Override
 	public Inventory getEnderChest()
@@ -1294,18 +1340,6 @@ public class PlayerMock implements Player, MessageTarget
 	}
 
 	@Override
-	public boolean isOp()
-	{
-		return this.operator;
-	}
-
-	@Override
-	public void setOp(boolean value)
-	{
-		this.operator = value;
-	}
-
-	@Override
 	public String getCustomName()
 	{
 		// TODO Auto-generated method stub
@@ -1366,40 +1400,6 @@ public class PlayerMock implements Player, MessageTarget
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean isOnline()
-	{
-		return this.online;
-	}
-
-	@Override
-	public boolean isBanned()
-	{
-		return MockBukkit.getMock().getBanList(BanList.Type.NAME).isBanned(this.name);
-	}
-
-	@Override
-	public boolean isWhitelisted()
-	{
-		return this.whitelisted;
-	}
-
-	@Override
-	public void setWhitelisted(boolean value)
-	{
-		this.whitelisted = value;
-	}
-
-	@Override
-	public Player getPlayer()
-	{
-		if (online)
-		{
-			return this;
-		}
-		return null;
 	}
 
 	@Override
