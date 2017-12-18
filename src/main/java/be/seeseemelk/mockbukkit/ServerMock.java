@@ -347,6 +347,12 @@ public class ServerMock implements Server
 	{
 		return scheduler;
 	}
+	
+	@Override
+	public int getMaxPlayers()
+	{
+		return playerList.getMaxPlayers();
+	}
 
 	@Override
 	public void sendPluginMessage(Plugin source, String channel, byte[] message)
@@ -360,12 +366,6 @@ public class ServerMock implements Server
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public int getMaxPlayers()
-	{
-		return playerList.getMaxPlayers();
 	}
 	
 	@Override
