@@ -58,12 +58,14 @@ public class ServerMockTest
 	@Test
 	public void addPlayers_None_TwoUniquePlayers()
 	{
-		server.addPlayer();
-		server.addPlayer();
+		PlayerMock playerA = server.addPlayer();
+		PlayerMock playerB = server.addPlayer();
 		PlayerMock player1 = server.getPlayer(0);
 		PlayerMock player2 = server.getPlayer(1);
 		assertNotNull(player1);
 		assertNotNull(player2);
+		assertEquals(playerA, player1);
+		assertEquals(playerB, player2);
 		assertNotEquals(player1, player2);
 	}
 	
@@ -229,6 +231,16 @@ public class ServerMockTest
 	public void getScheduler_Default_NotNull()
 	{
 		assertNotNull(server.getScheduler());
+	}
+	
+	@Test
+	public void broadcastMessage_TwoPlayers_BothReceivedMessage()
+	{
+		PlayerMock playerA = server.addPlayer();
+		PlayerMock playerB = server.addPlayer();
+		server.broadcastMessage("Hello world");
+		playerA.assertSaid("Hello world");
+		playerB.assertSaid("Hello world");
 	}
 }
 

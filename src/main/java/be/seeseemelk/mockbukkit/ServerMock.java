@@ -74,9 +74,11 @@ public class ServerMock implements Server
 	/**
 	 * Creates a random player and adds it.
 	 */
-	public void addPlayer()
+	public PlayerMock addPlayer()
 	{
-		addPlayer(playerFactory.createRandomPlayer());
+		PlayerMock player = playerFactory.createRandomPlayer();
+		addPlayer(player);
+		return player;
 	}
 
 	/**
@@ -467,6 +469,14 @@ public class ServerMock implements Server
 	}
 
 	@Override
+	public int broadcastMessage(String message)
+	{
+		for (Player player : players)
+			player.sendMessage(message);
+		return players.size();
+	}
+
+	@Override
 	public void sendPluginMessage(Plugin source, String channel, byte[] message)
 	{
 		// TODO Auto-generated method stub
@@ -566,13 +576,6 @@ public class ServerMock implements Server
 
 	@Override
 	public void reloadWhitelist()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public int broadcastMessage(String message)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
