@@ -2,13 +2,35 @@ package be.seeseemelk.mockbukkit;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
+
+import java.util.List;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 public class WorldMockTest
 {
+	private ServerMock server;
+	
+	@Before
+	public void setUp()
+	{
+		server = MockBukkit.mock();
+	}
+	
+	@After
+	public void tearDown()
+	{
+		MockBukkit.unload();
+	}
+	
 	@Test
 	public void getBlockAt_StandardWorld_DefaultBlocks()
 	{
@@ -54,4 +76,50 @@ public class WorldMockTest
 		assertEquals(spawn.getBlockY(), world.getSpawnLocation().getBlockY());
 		assertEquals(spawn.getBlockZ(), world.getSpawnLocation().getBlockZ());
 	}
+	
+	@Test
+	public void getEntities_NoEntities_EmptyList()
+	{
+		WorldMock world = new WorldMock();
+		List<Entity> entities = world.getEntities();
+		assertNotNull(entities);
+		assertEquals(0, entities.size());
+	}
+	
+	@Test
+	public void getEntities_OnePlayerInWorld_ListContainsOnlyPlayer()
+	{
+		World world = server.addSimpleWorld("world");
+		server.addSimpleWorld("otherWorld");
+		Player player = server.addPlayer();
+		player.teleport(world.getSpawnLocation());
+		List<Entity> entities = world.getEntities();
+		assertNotNull(entities);
+		assertEquals(1, entities.size());
+		assertSame(player, entities.get(0));
+	}
+	
+	@Test
+	public void getEntities_OnePlayerInDifferentWorld_EmptyList()
+	{
+		World world = server.addSimpleWorld("world");
+		World otherWorld = server.addSimpleWorld("otherWorld");
+		Player player = server.addPlayer();
+		player.teleport(otherWorld.getSpawnLocation());
+		List<Entity> entities = world.getEntities();
+		assertNotNull(entities);
+		assertEquals(0, entities.size());
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+

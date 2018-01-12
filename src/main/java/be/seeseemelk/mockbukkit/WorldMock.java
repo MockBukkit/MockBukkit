@@ -1,12 +1,14 @@
 package be.seeseemelk.mockbukkit;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.bukkit.BlockChangeDelegate;
 import org.bukkit.Chunk;
@@ -42,6 +44,7 @@ import org.bukkit.util.Consumer;
 import org.bukkit.util.Vector;
 
 import be.seeseemelk.mockbukkit.block.BlockMock;
+import be.seeseemelk.mockbukkit.entity.PlayerMock;
 
 /**
  * A mock world object. Note that it is made to be as simple as possible. It is
@@ -196,6 +199,18 @@ public class WorldMock implements World
 			spawnLocation.setZ(z);
 		}
 		return true;
+	}
+	
+	@Override
+	public List<Entity> getEntities()
+	{
+		//MockBukkit.assertMocking();
+		List<Entity> entities = new ArrayList<>();
+		
+		Collection<? extends PlayerMock> players = MockBukkit.getMock().getOnlinePlayers();
+		players.stream().filter(player -> player.getWorld() == this).collect(Collectors.toCollection(() -> entities));
+		
+		return entities;
 	}
 
 	@Override
@@ -471,13 +486,6 @@ public class WorldMock implements World
 
 	@Override
 	public LightningStrike strikeLightningEffect(Location loc)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public List<Entity> getEntities()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
