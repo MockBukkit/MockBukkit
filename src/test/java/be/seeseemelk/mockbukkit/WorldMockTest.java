@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 
@@ -109,6 +110,24 @@ public class WorldMockTest
 		List<Entity> entities = world.getEntities();
 		assertNotNull(entities);
 		assertEquals(0, entities.size());
+	}
+	
+	@Test
+	public void getChunkAt_DifferentLocations_DifferentChunks()
+	{
+		WorldMock world = server.addSimpleWorld("world");
+		ChunkMock chunk1 = world.getChunkAt(0, 0);
+		ChunkMock chunk2 = world.getChunkAt(1, 0);
+		assertNotEquals(chunk1, chunk2);
+	}
+	
+	@Test
+	public void getChunkAt_SameLocations_EqualsChunks()
+	{
+		WorldMock world = server.addSimpleWorld("world");
+		ChunkMock chunk1 = world.getChunkAt(0, 0);
+		ChunkMock chunk2 = world.getChunkAt(0, 0);
+		assertEquals(chunk1, chunk2);
 	}
 }
 

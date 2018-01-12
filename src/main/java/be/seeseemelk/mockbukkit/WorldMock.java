@@ -214,6 +214,13 @@ public class WorldMock implements World
 	}
 
 	@Override
+	public ChunkMock getChunkAt(int x, int z)
+	{
+		ChunkMock chunk = new ChunkMock(this, x, z);
+		return chunk;
+	}
+	
+	@Override
 	public void sendPluginMessage(Plugin source, String channel, byte[] message)
 	{
 		// TODO Auto-generated method stub
@@ -294,13 +301,6 @@ public class WorldMock implements World
 
 	@Override
 	public Block getHighestBlockAt(Location location)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public Chunk getChunkAt(int x, int z)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
