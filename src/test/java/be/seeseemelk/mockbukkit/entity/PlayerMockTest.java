@@ -333,6 +333,17 @@ public class PlayerMockTest
 		assertEquals(20.0, player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getDefaultValue(), 0);
 	}
 	
+	@Test
+	public void getWorld_LocationSet_GetsWorldSameAsInLocation()
+	{
+		WorldMock world = server.addSimpleWorld("world");
+		WorldMock otherWorld = server.addSimpleWorld("otherWorld");
+		player.teleport(world.getSpawnLocation());
+		assertSame(world, player.getWorld());
+		player.teleport(otherWorld.getSpawnLocation());
+		assertSame(otherWorld, player.getWorld());
+	}
+	
 }
 
 

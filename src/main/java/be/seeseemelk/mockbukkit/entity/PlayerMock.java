@@ -447,6 +447,12 @@ public class PlayerMock implements Player, MessageTarget
 			throw new UnimplementedOperationException();
 		}
 	}
+	
+	@Override
+	public World getWorld()
+	{
+		return location.getWorld();
+	}
 
 	@Override
 	public Inventory getEnderChest()
@@ -941,13 +947,6 @@ public class PlayerMock implements Player, MessageTarget
 
 	@Override
 	public boolean isOnGround()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public World getWorld()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
