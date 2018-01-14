@@ -47,6 +47,8 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			if (task.getScheduledTick() == currentTick)
 			{
 				task.run();
+				if (task instanceof RepeatingTask && !task.isCancelled())
+					tasks.add(task);
 			}
 			else if (!task.isCancelled())
 			{
@@ -85,6 +87,22 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		ScheduledTask scheduledTask = new ScheduledTask(id++, plugin, true, currentTick + delay, task);
 		tasks.add(scheduledTask);
 		return scheduledTask;
+	}
+	
+	@Override
+	public BukkitTask runTaskTimer(Plugin plugin, Runnable task, long delay, long period)
+			throws IllegalArgumentException
+	{
+		RepeatingTask repeatingTask = new RepeatingTask(id++, plugin, true, currentTick + delay, period, task);
+		tasks.add(repeatingTask);
+		return repeatingTask;
+	}
+
+	@Override
+	public BukkitTask runTaskTimer(Plugin plugin, BukkitRunnable task, long delay, long period)
+			throws IllegalArgumentException
+	{
+		return runTaskTimer(plugin, (Runnable) task, delay, period);
 	}
 
 	@Override
@@ -244,20 +262,6 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public BukkitTask runTaskTimer(Plugin plugin, Runnable task, long delay, long period)
-			throws IllegalArgumentException
-	{
-		return null;
-	}
-
-	@Override
-	public BukkitTask runTaskTimer(Plugin plugin, BukkitRunnable task, long delay, long period)
-			throws IllegalArgumentException
-	{
-		return runTaskTimer(plugin, (Runnable) task, delay, period);
 	}
 
 	@Override

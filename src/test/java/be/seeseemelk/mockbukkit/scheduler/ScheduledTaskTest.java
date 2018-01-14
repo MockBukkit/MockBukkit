@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.scheduler;
 
 import static org.junit.Assert.*;
 
+import java.util.concurrent.CancellationException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.junit.Test;
@@ -68,8 +69,8 @@ public class ScheduledTaskTest
 		assertTrue(executed.get());
 	}
 	
-	@Test
-	public void run_Cancelled_NotExecuted()
+	@Test(expected = CancellationException.class)
+	public void run_Cancelled_ThrowsException()
 	{
 		AtomicBoolean executed = new AtomicBoolean(false);
 		ScheduledTask task = new ScheduledTask(0, null, true, 0, () -> {
@@ -77,7 +78,6 @@ public class ScheduledTaskTest
 		});
 		task.cancel();
 		task.run();
-		assertFalse(executed.get());
 	}
 	
 }

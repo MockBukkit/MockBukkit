@@ -1,5 +1,7 @@
 package be.seeseemelk.mockbukkit.scheduler;
 
+import java.util.concurrent.CancellationException;
+
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
 
@@ -54,9 +56,9 @@ public class ScheduledTask implements BukkitTask
 	public void run()
 	{
 		if (!isCancelled())
-		{
 			runnable.run();
-		}
+		else
+			throw new CancellationException("Task is cancelled");
 	}
 
 	@Override
