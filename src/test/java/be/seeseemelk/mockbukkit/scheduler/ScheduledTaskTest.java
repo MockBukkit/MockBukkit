@@ -34,9 +34,18 @@ public class ScheduledTaskTest
 	public void isSync()
 	{
 		ScheduledTask task = new ScheduledTask(0, null, true, 0, null);
-		assertEquals(true, task.isSync());
+		assertTrue(task.isSync());
 		task = new ScheduledTask(0, null, false, 0, null);
-		assertEquals(false, task.isSync());
+		assertFalse(task.isSync());
+	}
+	
+	@Test
+	public void setScheduledTick_OtherTick_TickSetExactly()
+	{
+		ScheduledTask task = new ScheduledTask(0, null, true, 5, null);
+		assertEquals(5, task.getScheduledTick());
+		task.setScheduledtick(20);
+		assertEquals(20, task.getScheduledTick());
 	}
 	
 	@Test

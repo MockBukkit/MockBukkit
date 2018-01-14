@@ -250,16 +250,14 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public BukkitTask runTaskTimer(Plugin plugin, Runnable task, long delay, long period)
 			throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return null;
 	}
 
 	@Override
 	public BukkitTask runTaskTimer(Plugin plugin, BukkitRunnable task, long delay, long period)
 			throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return runTaskTimer(plugin, (Runnable) task, delay, period);
 	}
 
 	@Override
