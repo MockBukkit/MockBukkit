@@ -105,29 +105,54 @@ public class PluginManagerMock implements PluginManager
 	 * 
 	 * @param description The {@link PluginDescriptionFile} that contains information about the plugin.
 	 * @param class1 The plugin to load.
+	 * @param parameters Extra parameters to pass on to the plugin constructor.
 	 * @return The loaded plugin.
 	 */
-	public JavaPlugin loadPlugin(Class<? extends JavaPlugin> class1, PluginDescriptionFile description)
+	public JavaPlugin loadPlugin(Class<? extends JavaPlugin> class1, PluginDescriptionFile description, Object[] parameters)
 	{
 		try
 		{
-			Constructor<? extends JavaPlugin> plugin = class1.getDeclaredConstructor(JavaPluginLoader.class,
-					PluginDescriptionFile.class, File.class, File.class);
-			plugin.setAccessible(true);
-			JavaPlugin obj = plugin.newInstance(loader, description, null, null);
-			plugins.add(obj);
-			addCommandsFrom(obj);
-			obj.onLoad();
-			return obj;
+			List<Class<?>> types = new ArrayList<>(4);
+			types.add(JavaPluginLoader.class);
+			types.add(PluginDescriptionFile.class);
+			types.add(File.class);
+			types.add(File.class);
+			
+			if (parameters != null)
+			{
+				for (Object parameter : parameters)
+				{
+					types.add(parameter.getClass());
+				}
+			}
+			
+			Constructor<? extends JavaPlugin> constructor = class1.getDeclaredConstructor(types.toArray(new Class<?>[0]));
+			constructor.setAccessible(true);
+			
+			Object[] arguments = new Object[types.size()];
+			arguments[0] = loader;
+			arguments[1] = description;
+			arguments[2] = null;
+			arguments[3] = null;
+			if (parameters != null)
+			{
+				System.arraycopy(parameters, 0, arguments, 4, parameters.length);
+			}
+			
+			JavaPlugin plugin = constructor.newInstance(arguments);
+			plugins.add(plugin);
+			addCommandsFrom(plugin);
+			plugin.onLoad();
+			return plugin;
 		}
 		catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
 				| IllegalArgumentException e)
 		{
-			throw new RuntimeException(e);
+			throw new RuntimeException("Failed to instantiate plugin", e);
 		}
 		catch (InvocationTargetException e)
 		{
-			throw new RuntimeException(e.getTargetException());
+			throw new RuntimeException("Failed to instantiate plugin", e.getTargetException());
 		}
 	}
 	
@@ -136,13 +161,14 @@ public class PluginManagerMock implements PluginManager
 	 * {@code plugin.yml} as the resource file.
 	 * 
 	 * @param class1 The plugin to load.
+	 * @param parameters Extra parameters to pass on to the plugin constructor.
 	 * @return The loaded plugin.
 	 */
-	public JavaPlugin loadPlugin(Class<? extends JavaPlugin> class1)
+	public JavaPlugin loadPlugin(Class<? extends JavaPlugin> class1, Object[] parameters)
 	{
 		try
 		{
-			return loadPlugin(class1, new PluginDescriptionFile(ClassLoader.getSystemResourceAsStream("plugin.yml")));
+			return loadPlugin(class1, new PluginDescriptionFile(ClassLoader.getSystemResourceAsStream("plugin.yml")), parameters);
 		}
 		catch (InvalidDescriptionException e)
 		{

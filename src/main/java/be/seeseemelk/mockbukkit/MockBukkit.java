@@ -62,13 +62,14 @@ public class MockBukkit
 	 * Loads and enables a plugin for mocking.
 	 * 
 	 * @param class1 The plugin to load for mocking.
+	 * @param parameters Extra parameters to pass on to the plugin constructor.
 	 */
 	@SuppressWarnings("unchecked")
-	public static <T extends JavaPlugin> T load(Class<T> plugin)
+	public static <T extends JavaPlugin> T load(Class<T> plugin, Object... parameters)
 	{
 		if (mock != null)
 		{
-			JavaPlugin instance = mock.getPluginManager().loadPlugin(plugin);
+			JavaPlugin instance = mock.getPluginManager().loadPlugin(plugin, parameters);
 			mock.getPluginManager().enablePlugin(instance);
 			return (T) instance;
 		}
@@ -76,6 +77,17 @@ public class MockBukkit
 		{
 			throw new IllegalStateException("Not mocking");
 		}
+	}
+	
+	/**
+	 * Loads and enables a plugin for mocking.
+	 * 
+	 * @param class1 The plugin to load for mocking.
+	 * @param parameters Extra parameters to pass on to the plugin constructor.
+	 */
+	public static <T extends JavaPlugin> T load(Class<T> plugin)
+	{
+		return load(plugin, new Object[0]);
 	}
 
 	/**
@@ -101,7 +113,7 @@ public class MockBukkit
 		if (mock != null)
 		{
 			PluginDescriptionFile description = new PluginDescriptionFile("MockPlugin", "1.0.0", MockPlugin.class.getName());
-			JavaPlugin instance = mock.getPluginManager().loadPlugin(MockPlugin.class, description);
+			JavaPlugin instance = mock.getPluginManager().loadPlugin(MockPlugin.class, description, null);
 			mock.getPluginManager().enablePlugin(instance);
 			return (MockPlugin) instance;
 		}

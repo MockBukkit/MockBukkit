@@ -23,15 +23,24 @@ public class TestPlugin extends JavaPlugin implements Listener
 	public boolean unannotatedPlayerInteractEventExecuted = false;
 	public boolean annotatedPlayerInteractEventExecuted = false;
 	public boolean annotatedBlockBreakEventExecuted = false;
+	public final Object extra;
 
 	public TestPlugin()
 	{
 		super();
+		extra = null;
 	}
 
 	protected TestPlugin(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file)
 	{
 		super(loader, description, dataFolder, file);
+		extra = null;
+	}
+	
+	protected TestPlugin(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file, String extra)
+	{
+		super(loader, description, dataFolder, file);
+		this.extra = extra;
 	}
 	
 	@Override
