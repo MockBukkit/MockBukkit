@@ -46,6 +46,7 @@ public class ServerMock implements Server
 	private final List<PlayerMock> players = new ArrayList<>();
 	private final List<PlayerMock> offlinePlayers = new ArrayList<>();
 	private final List<World> worlds = new ArrayList<>();
+	private List<Recipe> recipes = new LinkedList<>();
 	private final ItemFactory factory = new ItemFactoryMock();
 	private final PlayerMockFactory playerFactory = new PlayerMockFactory();
 	private final PluginManagerMock pluginManager = new PluginManagerMock(this);
@@ -475,6 +476,33 @@ public class ServerMock implements Server
 			player.sendMessage(message);
 		return players.size();
 	}
+	
+	@Override
+	public boolean addRecipe(Recipe recipe)
+	{
+		recipes.add(recipe);
+		return true;
+	}
+	
+	@Override
+	public List<Recipe> getRecipesFor(ItemStack result)
+	{
+		return recipes.stream()
+				.filter(recipe -> recipe.getResult().equals(result))
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public Iterator<Recipe> recipeIterator()
+	{
+		return recipes.iterator();
+	}
+
+	@Override
+	public void clearRecipes()
+	{
+		recipes.clear();
+	}
 
 	@Override
 	public void sendPluginMessage(Plugin source, String channel, byte[] message)
@@ -681,34 +709,6 @@ public class ServerMock implements Server
 
 	@Override
 	public boolean dispatchCommand(CommandSender sender, String commandLine) throws CommandException
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean addRecipe(Recipe recipe)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public List<Recipe> getRecipesFor(ItemStack result)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public Iterator<Recipe> recipeIterator()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void clearRecipes()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

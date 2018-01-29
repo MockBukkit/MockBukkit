@@ -1,14 +1,25 @@
 package be.seeseemelk.mockbukkit;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assume.assumeTrue;
 
 import java.util.Iterator;
+import java.util.List;
 
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.Recipe;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -242,9 +253,63 @@ public class ServerMockTest
 		playerA.assertSaid("Hello world");
 		playerB.assertSaid("Hello world");
 	}
+	
+	@Test
+	public void addRecipe_AddsRecipe_ReturnsTrue()
+	{
+		TestRecipe recipe1 = new TestRecipe();
+		TestRecipe recipe2 = new TestRecipe();
+		server.addRecipe(recipe1);
+		server.addRecipe(recipe2);
+		Iterator<Recipe> recipes = server.recipeIterator();
+		assertSame(recipe1, recipes.next());
+		assertSame(recipe2, recipes.next());
+		assertFalse(recipes.hasNext());
+	}
+	
+	@Test
+	public void clearRecipes_SomeRecipes_AllRecipesRemoved()
+	{
+		TestRecipe recipe = new TestRecipe();
+		server.addRecipe(recipe);
+		assumeTrue(server.recipeIterator().hasNext());
+		server.clearRecipes();
+		assertFalse(server.recipeIterator().hasNext());
+	}
+	
+	@Test
+	public void getRecipesFor_ManyRecipes_OnlyCorrectRecipes()
+	{
+		TestRecipe recipe1 = new TestRecipe(new ItemStack(Material.STONE));
+		TestRecipe recipe2 = new TestRecipe(new ItemStack(Material.APPLE));
+		server.addRecipe(recipe1);
+		server.addRecipe(recipe2);
+		List<Recipe> recipes = server.getRecipesFor(new ItemStack(Material.APPLE));
+		assertEquals(1, recipes.size());
+		assertSame(recipe2, recipes.get(0));
+	}
 }
 
-
+class TestRecipe implements Recipe
+{
+	private final ItemStack result;
+	
+	public TestRecipe(ItemStack result)
+	{
+		this.result = result;
+	}
+	
+	public TestRecipe()
+	{
+		this(null);
+	}
+	
+	@Override
+	public ItemStack getResult()
+	{
+		return result;
+	}
+}
 
 
 
