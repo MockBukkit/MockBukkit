@@ -128,7 +128,7 @@ public class PluginManagerMock implements PluginManager
 							break;
 						}
 					}
-					else if (!parameter.isInstance(type))
+					else if (!parameter.isAssignableFrom(type))
 					{
 						compatible = false;
 						break;

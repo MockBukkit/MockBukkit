@@ -57,8 +57,15 @@ public class MockBukkitTest
 	public void load_TestPluginWithExtraParameter_ExtraParameterPassedOn()
 	{
 		MockBukkit.mock();
-		TestPlugin plugin = (TestPlugin) MockBukkit.load(TestPlugin.class, "Hello world");
-		assertEquals("Hello world", plugin.extra);
+		TestPlugin plugin = (TestPlugin) MockBukkit.load(TestPlugin.class, new Integer(5));
+		assertEquals(new Integer(5), plugin.extra);
+	}
+	
+	@Test(expected = RuntimeException.class)
+	public void load_TestPluginWithExtraIncorrectParameter_ExceptionThrown()
+	{
+		MockBukkit.mock();
+		MockBukkit.load(TestPlugin.class, "Hello");
 	}
 	
 	@Test
