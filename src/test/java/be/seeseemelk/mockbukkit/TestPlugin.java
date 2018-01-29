@@ -37,7 +37,7 @@ public class TestPlugin extends JavaPlugin implements Listener
 		extra = null;
 	}
 	
-	protected TestPlugin(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file, String extra)
+	protected TestPlugin(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file, Object extra)
 	{
 		super(loader, description, dataFolder, file);
 		this.extra = extra;

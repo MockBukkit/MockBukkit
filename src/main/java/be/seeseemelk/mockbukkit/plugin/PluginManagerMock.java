@@ -98,6 +98,50 @@ public class PluginManagerMock implements PluginManager
 	{
 		return Collections.unmodifiableList(commands);
 	}
+	
+	/**
+	 * Looks for a compatible constructor of a plugin with a certain constructor.
+	 * @param class1 The plugin class for which a constructor should be found.
+	 * @param types The types of parameters that the constructor should be able to except.
+	 * Note that the first 4 parameters should be an exact match while the rest don't have to be.
+	 * @return A constructor that will take the given types.
+	 * @throws NoSuchMethodException if no compatible constructor could be found.
+	 */
+	@SuppressWarnings("unchecked")
+	private Constructor<? extends JavaPlugin> getCompatibleConstructor(Class<? extends JavaPlugin> class1, Class<?>[] types) throws NoSuchMethodException
+	{
+		for (Constructor<?> constructor : class1.getDeclaredConstructors())
+		{
+			Class<?>[] parameters = constructor.getParameterTypes();
+			if (parameters.length == types.length)
+			{
+				boolean compatible = true;
+				for (int i = 0; i < types.length; i++)
+				{
+					Class<?> type = types[i];
+					Class<?> parameter = parameters[i];
+					if (i < 4)
+					{
+						if (!type.equals(parameter))
+						{
+							compatible = false;
+							break;
+						}
+					}
+					else if (!parameter.isInstance(type))
+					{
+						compatible = false;
+						break;
+					}
+				}
+				if (compatible)
+				{
+					return (Constructor<? extends JavaPlugin>) constructor;
+				}
+			}
+		}
+		throw new NoSuchMethodException("No compatible constructor for " + class1.getName());
+	}
 
 	/**
 	 * Load a plugin from a class. It will use the system resource
@@ -126,7 +170,8 @@ public class PluginManagerMock implements PluginManager
 				}
 			}
 			
-			Constructor<? extends JavaPlugin> constructor = class1.getDeclaredConstructor(types.toArray(new Class<?>[0]));
+			//Constructor<? extends JavaPlugin> constructor = class1.getDeclaredConstructor(types.toArray(new Class<?>[0]));
+			Constructor<? extends JavaPlugin> constructor = getCompatibleConstructor(class1, types.toArray(new Class<?>[0]));
 			constructor.setAccessible(true);
 			
 			Object[] arguments = new Object[types.size()];
