@@ -1,6 +1,11 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -92,7 +97,70 @@ public class ItemMetaMockTest
 		ItemMetaMock cloned = meta.clone();
 		assertTrue(cloned.equals(meta));
 	}
-
+	
+	@Test
+	public void hasLore_NoLore_False()
+	{
+		assertFalse(meta.hasLore());
+	}
+	
+	@Test
+	public void hasLore_HasLore_True()
+	{
+		meta.setLore(Arrays.asList("Hello", "world"));
+		assertTrue(meta.hasLore());
+	}
+	
+	@Test
+	public void getLore_LoreSet_ExactLines()
+	{
+		meta.setLore(Arrays.asList("Hello", "world"));
+		List<String> lore = meta.getLore();
+		assertEquals(2, lore.size());
+		assertEquals("Hello", lore.get(0));
+		assertEquals("world", lore.get(1));
+	}
+	
+	@Test
+	public void getLore_LoreChangedAfterSet_LoreNotChanged()
+	{
+		List<String> originalLore = Arrays.asList("Hello", "world");
+		meta.setLore(originalLore);
+		originalLore.set(0, "Changed");
+		List<String> lore = meta.getLore();
+		lore.set(1, "Also changed");
+		lore = meta.getLore();
+		assertEquals(2, lore.size());
+		assertEquals("Hello", lore.get(0));
+		assertEquals("world", lore.get(1));
+	}
+	
+	@Test
+	public void assertHasNoLore_HasNoLore_Returns()
+	{
+		meta.assertHasNoLore();
+	}
+	
+	@Test(expected = AssertionError.class)
+	public void assertHasNoLore_HasNoLore_Asserts()
+	{
+		meta.setLore(Arrays.asList("Hello", "world"));
+		meta.assertHasNoLore();
+	}
+	
+	@Test
+	public void assertLore_CorrectLore_Returns()
+	{
+		meta.setLore(Arrays.asList("Hello", "world"));
+		meta.assertLore("Hello", "world");
+	}
+	
+	@Test(expected = AssertionError.class)
+	public void assertLore_InorrectLore_Asserts()
+	{
+		meta.setLore(Arrays.asList("Hello", "world"));
+		meta.assertLore("Something", "else");
+	}
 }
 
 

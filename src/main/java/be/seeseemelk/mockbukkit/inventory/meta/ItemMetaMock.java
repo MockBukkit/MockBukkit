@@ -1,5 +1,7 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -13,12 +15,13 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 public class ItemMetaMock implements ItemMeta
 {
 	private String displayName = null;
-	
+	private List<String> lore = null;
+
 	public ItemMetaMock()
 	{
-		
+
 	}
-	
+
 	public ItemMetaMock(ItemMeta meta)
 	{
 		if (meta.hasDisplayName())
@@ -26,7 +29,7 @@ public class ItemMetaMock implements ItemMeta
 			displayName = meta.getDisplayName();
 		}
 	}
-	
+
 	@Override
 	public boolean hasDisplayName()
 	{
@@ -82,6 +85,59 @@ public class ItemMetaMock implements ItemMeta
 	}
 
 	@Override
+	public boolean hasLore()
+	{
+		return lore != null;
+	}
+
+	@Override
+	public List<String> getLore()
+	{
+		return new ArrayList<>(lore);
+	}
+
+	@Override
+	public void setLore(List<String> lore)
+	{
+		this.lore = new ArrayList<>(lore);
+	}
+	
+	/**
+	 * Asserts if the lore contains the given lines in order.
+	 * @param lines The lines the lore should contain 
+	 */
+	public void assertLore(List<String> lines)
+	{
+		if (lore != null && lore.size() == lines.size())
+		{
+			for (int i = 0; i < lore.size(); i++)
+			{
+				if (!lore.get(i).equals(lines.get(i)))
+				{
+					throw new AssertionError(String.format("Line %d should be '%s' but was '%s'", i, lines.get(i), lore.get(i)));
+				}
+			}
+		}
+		else if (lore != null)
+		{
+			throw new AssertionError(String.format("Lore contained %d lines but should contain %d lines", lore.size(), lines.size()));
+		}
+		else
+		{
+			throw new AssertionError("No lore was set");
+		}
+	}
+
+	/**
+	 * Asserts if the lore contains the given lines in order.
+	 * @param lines The lines the lore should contain 
+	 */
+	public void assertLore(String... lines)
+	{
+		assertLore(Arrays.asList(lines));
+	}
+
+	@Override
 	public Map<String, Object> serialize()
 	{
 		// TODO Auto-generated method stub
@@ -104,27 +160,6 @@ public class ItemMetaMock implements ItemMeta
 
 	@Override
 	public void setLocalizedName(String name)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean hasLore()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public List<String> getLore()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setLore(List<String> lore)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -221,15 +256,20 @@ public class ItemMetaMock implements ItemMeta
 		throw new UnimplementedOperationException();
 	}
 
+	/**
+	 * Asserts that the item meta contains no lore.
+	 * 
+	 * @throws AssertionError if the item meta contains some lore.
+	 */
+	public void assertHasNoLore() throws AssertionError
+	{
+		if (lore != null && lore.size() != 0)
+		{
+			throw new AssertionError("Lore was set but shouldn't have been set");
+		}
+	}
+
 }
-
-
-
-
-
-
-
-
 
 
 
