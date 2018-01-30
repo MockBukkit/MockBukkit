@@ -9,6 +9,8 @@ import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assume.assumeTrue;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
@@ -294,6 +296,22 @@ public class ServerMockTest
 		List<Recipe> recipes = server.getRecipesFor(new ItemStack(Material.APPLE));
 		assertEquals(1, recipes.size());
 		assertSame(recipe2, recipes.get(0));
+	}
+	
+	@Test
+	public void getDataFolder_CleanEnvironment_CreatesTemporaryDataDirectory() throws IOException
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		File folder = plugin.getDataFolder();
+		assertNotNull(folder);
+		assertTrue(folder.isDirectory());
+		File file = new File(folder, "data.txt");
+		assertFalse(file.exists());
+		file.createNewFile();
+		assertTrue(file.exists());
+		MockBukkit.unload();
+		MockBukkit.mock();
+		assertFalse(file.exists());
 	}
 }
 

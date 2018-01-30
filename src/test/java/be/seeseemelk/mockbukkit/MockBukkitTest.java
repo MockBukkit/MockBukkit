@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -22,7 +23,10 @@ public class MockBukkitTest
 	@After
 	public void tearDown()
 	{
-		MockBukkit.unload();
+		if (MockBukkit.isMocked())
+		{
+			MockBukkit.unload();
+		}
 	}
 	
 	@Test
@@ -42,6 +46,27 @@ public class MockBukkitTest
 		assertNotNull(server);
 		assertEquals(server, MockBukkit.getMock());
 		assertEquals(server, Bukkit.getServer());
+	}
+	
+	@Test
+	public void isMocked_ServerNotMocked_False()
+	{
+		assertFalse(MockBukkit.isMocked());
+	}
+	
+	@Test
+	public void isMocked_ServerMocked_True()
+	{
+		MockBukkit.mock();
+		assertTrue(MockBukkit.isMocked());
+	}
+	
+	@Test
+	public void isMocked_ServerUnloaded_False()
+	{
+		MockBukkit.mock();
+		MockBukkit.unload();
+		assertFalse(MockBukkit.isMocked());
 	}
 	
 	@Test

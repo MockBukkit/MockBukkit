@@ -59,6 +59,15 @@ public class MockBukkit
 	}
 
 	/**
+	 * Checks if Bukkit is being mocked.
+	 * @return {@code true} if Bukkit is being mocked, {@code false} if it is not.
+	 */
+	public static boolean isMocked()
+	{
+		return mock != null;
+	}
+
+	/**
 	 * Loads and enables a plugin for mocking.
 	 * 
 	 * @param class1 The plugin to load for mocking.
@@ -102,6 +111,7 @@ public class MockBukkit
 				plugin.onDisable();
 			}
 		}
+		mock.getPluginManager().unload();
 		setServerInstanceToNull();
 	}
 	

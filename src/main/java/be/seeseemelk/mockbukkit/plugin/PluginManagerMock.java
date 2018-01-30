@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.plugin;
 import static org.junit.Assert.fail;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -10,11 +11,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Random;
 import java.util.Set;
 
+import org.apache.commons.io.FileUtils;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.PluginCommandUtils;
 import org.bukkit.event.Event;
@@ -46,6 +50,7 @@ public class PluginManagerMock implements PluginManager
 	private final List<PluginCommand> commands = new ArrayList<>();
 	private final Map<Plugin, Listener> eventListeners = new HashMap<>();
 	private final List<Event> events = new ArrayList<>();
+	private final List<File> temporaryFiles = new LinkedList<>();
 
 	@SuppressWarnings("deprecation")
 	public PluginManagerMock(ServerMock server)
@@ -54,6 +59,25 @@ public class PluginManagerMock implements PluginManager
 		loader = new JavaPluginLoader(this.server);
 	}
 
+	/**
+	 * Should be called when the plugin manager is not used anymore.
+	 */
+	public void unload()
+	{
+		for (File file : temporaryFiles)
+		{
+			try
+			{
+				FileUtils.deleteDirectory(file);
+			}
+			catch (IOException e)
+			{
+				System.err.println("Could not remove file");
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	/**
 	 * Asserts that a specific event or once of it's sub-events has been fired at least once.
 	 * @param eventClass The class of the event to check for.
@@ -144,6 +168,24 @@ public class PluginManagerMock implements PluginManager
 	}
 
 	/**
+	 * Tries to create a temporary directory.
+	 * @param name The name of the directory to create.
+	 * @return The created temporary directory.
+	 * @throws IOException when the directory could not be created.
+	 */
+	private File createTemporaryDirectory(String name) throws IOException
+	{
+		Random random = new Random();
+		File directory = File.createTempFile(name + "-" + random.nextInt(), ".d");
+		if (!directory.delete())
+			throw new IOException("Could not create temporary directory: file could not be removed");
+		if (!directory.mkdir())
+			throw new IOException("Could not create temporary directory: directory could not be created");
+		temporaryFiles.add(directory);
+		return directory;
+	}
+	
+	/**
 	 * Load a plugin from a class. It will use the system resource
 	 * {@code plugin.yml} as the resource file.
 	 * 
@@ -177,7 +219,7 @@ public class PluginManagerMock implements PluginManager
 			Object[] arguments = new Object[types.size()];
 			arguments[0] = loader;
 			arguments[1] = description;
-			arguments[2] = null;
+			arguments[2] = createTemporaryDirectory("MockBukkit-" + description.getName() + "-" + description.getVersion());
 			arguments[3] = null;
 			if (parameters != null)
 			{
@@ -191,7 +233,7 @@ public class PluginManagerMock implements PluginManager
 			return plugin;
 		}
 		catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
-				| IllegalArgumentException e)
+				| IllegalArgumentException | IOException e)
 		{
 			throw new RuntimeException("Failed to instantiate plugin", e);
 		}
