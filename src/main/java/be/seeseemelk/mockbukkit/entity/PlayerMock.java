@@ -79,6 +79,7 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.attribute.AttributeInstanceMock;
 import be.seeseemelk.mockbukkit.command.MessageTarget;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
+import be.seeseemelk.mockbukkit.metadata.MetadataTable;
 
 
 @SuppressWarnings("deprecation")
@@ -99,6 +100,7 @@ public class PlayerMock implements Player, MessageTarget
 	private boolean whitelisted = true;
 	private boolean operator = false;
 	private Map<Attribute, AttributeInstanceMock> attributes;
+	private MetadataTable metadataTable;
 	
 	{
 		attributes = new EnumMap<>(Attribute.class);
@@ -452,6 +454,30 @@ public class PlayerMock implements Player, MessageTarget
 	public World getWorld()
 	{
 		return location.getWorld();
+	}
+	
+	@Override
+	public void setMetadata(String metadataKey, MetadataValue newMetadataValue)
+	{
+		metadataTable.setMetadata(metadataKey, newMetadataValue);
+	}
+
+	@Override
+	public List<MetadataValue> getMetadata(String metadataKey)
+	{
+		return metadataTable.getMetadata(metadataKey);
+	}
+
+	@Override
+	public boolean hasMetadata(String metadataKey)
+	{
+		return metadataTable.hasMetadata(metadataKey);
+	}
+
+	@Override
+	public void removeMetadata(String metadataKey, Plugin owningPlugin)
+	{
+		metadataTable.removeMetadata(metadataKey, owningPlugin);
 	}
 
 	@Override
@@ -1249,34 +1275,6 @@ public class PlayerMock implements Player, MessageTarget
 
 	@Override
 	public PistonMoveReaction getPistonMoveReaction()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setMetadata(String metadataKey, MetadataValue newMetadataValue)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public List<MetadataValue> getMetadata(String metadataKey)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean hasMetadata(String metadataKey)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void removeMetadata(String metadataKey, Plugin owningPlugin)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
