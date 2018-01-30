@@ -84,6 +84,13 @@ public class MetadataTableTest
 		MetadataValue value = metadata.get(0);
 		assertEquals(plugin2, value.getOwningPlugin());
 	}
+	
+	@Test
+	public void removeMetadata_NoneSet_NothingHappens()
+	{
+		MockPlugin plugin1 = MockBukkit.createMockPlugin();
+		mt.removeMetadata("MyMetadata", plugin1);
+	}
 
 }
 

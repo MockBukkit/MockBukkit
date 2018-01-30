@@ -100,7 +100,7 @@ public class PlayerMock implements Player, MessageTarget
 	private boolean whitelisted = true;
 	private boolean operator = false;
 	private Map<Attribute, AttributeInstanceMock> attributes;
-	private MetadataTable metadataTable;
+	private MetadataTable metadataTable = new MetadataTable();
 	
 	{
 		attributes = new EnumMap<>(Attribute.class);

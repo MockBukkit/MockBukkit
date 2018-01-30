@@ -16,11 +16,13 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
+import org.bukkit.metadata.FixedMetadataValue;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.MockPlugin;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.WorldMock;
 
@@ -342,6 +344,17 @@ public class PlayerMockTest
 		assertSame(world, player.getWorld());
 		player.teleport(otherWorld.getSpawnLocation());
 		assertSame(otherWorld, player.getWorld());
+	}
+	
+	@Test
+	public void metadataTest()
+	{
+		MockPlugin plugin = MockBukkit.createMockPlugin();
+		assertFalse(player.hasMetadata("metadata"));
+		player.setMetadata("metadata", new FixedMetadataValue(plugin, "value"));
+		assertTrue(player.hasMetadata("metadata"));
+		assertEquals(1, player.getMetadata("metadata").size());
+		player.removeMetadata("metadata", plugin);
 	}
 	
 }
