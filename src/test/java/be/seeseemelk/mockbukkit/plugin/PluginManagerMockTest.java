@@ -1,8 +1,13 @@
 package be.seeseemelk.mockbukkit.plugin;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Collection;
+import java.util.Iterator;
 
 import org.bukkit.command.PluginCommand;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -76,8 +81,12 @@ public class PluginManagerMockTest
 	public void getCommands_Default_PluginCommand()
 	{
 		Collection<PluginCommand> commands = pluginManager.getCommands();
-		assertEquals(1, commands.size());
-		assertEquals("testcommand", commands.iterator().next().getName());
+		assertEquals(3, commands.size());
+		Iterator<PluginCommand> iterator = commands.iterator();
+		assertEquals("mockcommand", iterator.next().getName());
+		assertEquals("testcommand", iterator.next().getName());
+		assertEquals("othercommand", iterator.next().getName());
+		assertFalse(iterator.hasNext());
 	}
 	
 	@Test

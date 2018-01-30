@@ -158,6 +158,13 @@ public class ServerMockTest
 	}
 	
 	@Test
+	public void getPluginCommand_ocWithoutAlias_Command()
+	{
+		MockBukkit.load(TestPlugin.class);
+		assertNotNull(server.getPluginCommand("othercommand"));
+	}
+	
+	@Test
 	public void getPluginCommand_Unknown_Null()
 	{
 		MockBukkit.load(TestPlugin.class);

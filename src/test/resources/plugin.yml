@@ -2,5 +2,7 @@ name: MockBukkitTest
 main: be.seeseemelk.mockbukkit.Test
 version: 0.1.0
 commands:
+  mockcommand:
   testcommand:
     aliases: ["tc"]
+  othercommand:
