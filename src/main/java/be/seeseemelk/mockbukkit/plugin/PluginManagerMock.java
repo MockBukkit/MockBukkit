@@ -311,7 +311,6 @@ public class PluginManagerMock implements PluginManager
 	 * 
 	 * @param plugin The plugin from which to read commands.
 	 */
-	@SuppressWarnings("unchecked")
 	protected void addCommandsFrom(JavaPlugin plugin)
 	{
 		Map<String, Map<String, Object>> commands = plugin.getDescription().getCommands();
@@ -329,13 +328,17 @@ public class PluginManagerMock implements PluginManager
 							break;
 						case "aliases":
 							List<String> aliases = new ArrayList<>();
-							if (section.getValue() instanceof String)
+							if (section.getValue() instanceof List<?>)
 							{
-								aliases.add((String) section.getValue());
+								for (Object o : (List<?>) section.getValue())
+								{
+									aliases.add(o.toString());
+								}
 							}
 							else
 							{
-								aliases.addAll((List<String>) section.getValue());
+								aliases.add(section.getValue().toString());
+								//aliases.addAll((List<String>) section.getValue());
 							}
 							command.setAliases(aliases);
 							break;
