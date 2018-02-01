@@ -21,7 +21,7 @@ public class MyPlugin extends JavaPlugin
 }
 ```
 The plugin is now ready to be tested by MockBukkit.
-A plugin can also be loaded in this initialiser block.
+A plugin can be loaded in this initialiser block.
 
 ```java
 private ServerMock server;
