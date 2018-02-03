@@ -127,6 +127,35 @@ public class PluginManagerMock implements PluginManager
 	}
 	
 	/**
+	 * Checks if a constructor is compatible with an array of types.
+	 * @param constructor The constructor to check.
+	 * @param types The array of parameter types the constructor must support.
+	 * Note that the first 4 parameters should be an exact match while the rest don't have to be.
+	 * @return {@code true} if the constructor is compatible, {@code false} if it isn't.
+	 */
+	private boolean isConstructorCompatible(Constructor<?> constructor, Class<?>[] types)
+	{
+		Class<?>[] parameters = constructor.getParameterTypes();
+		for (int i = 0; i < types.length; i++)
+		{
+			Class<?> type = types[i];
+			Class<?> parameter = parameters[i];
+			if (i < 4)
+			{
+				if (!type.equals(parameter))
+				{
+					return false;
+				}
+			}
+			else if (!parameter.isAssignableFrom(type))
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	/**
 	 * Looks for a compatible constructor of a plugin with a certain constructor.
 	 * @param class1 The plugin class for which a constructor should be found.
 	 * @param types The types of parameters that the constructor should be able to except.
@@ -140,31 +169,9 @@ public class PluginManagerMock implements PluginManager
 		for (Constructor<?> constructor : class1.getDeclaredConstructors())
 		{
 			Class<?>[] parameters = constructor.getParameterTypes();
-			if (parameters.length == types.length)
+			if (parameters.length == types.length && isConstructorCompatible(constructor, types))
 			{
-				boolean compatible = true;
-				for (int i = 0; i < types.length; i++)
-				{
-					Class<?> type = types[i];
-					Class<?> parameter = parameters[i];
-					if (i < 4)
-					{
-						if (!type.equals(parameter))
-						{
-							compatible = false;
-							break;
-						}
-					}
-					else if (!parameter.isAssignableFrom(type))
-					{
-						compatible = false;
-						break;
-					}
-				}
-				if (compatible)
-				{
-					return (Constructor<? extends JavaPlugin>) constructor;
-				}
+				return (Constructor<? extends JavaPlugin>) constructor;
 			}
 		}
 		throw new NoSuchMethodException("No compatible constructor for " + class1.getName());
