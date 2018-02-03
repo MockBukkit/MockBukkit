@@ -294,7 +294,7 @@ public class PluginManagerMock implements PluginManager
 	{
 		try
 		{
-			handler.invoke(handler, event);
+			handler.invoke(listener, event);
 		}
 		catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
 		{
