@@ -54,6 +54,7 @@ public class PluginManagerMock implements PluginManager
 	private final Map<Plugin, Listener> eventListeners = new HashMap<>();
 	private final List<Event> events = new ArrayList<>();
 	private final List<File> temporaryFiles = new LinkedList<>();
+	private final List<Class<?>> pluginConstructorTypes = Arrays.asList(JavaPluginLoader.class, PluginDescriptionFile.class, File.class, File.class);
 
 	@SuppressWarnings("deprecation")
 	public PluginManagerMock(ServerMock server)
@@ -201,28 +202,19 @@ public class PluginManagerMock implements PluginManager
 	 * 
 	 * @param description The {@link PluginDescriptionFile} that contains information about the plugin.
 	 * @param class1 The plugin to load.
-	 * @param parameters Extra parameters to pass on to the plugin constructor.
+	 * @param parameters Extra parameters to pass on to the plugin constructor. Must not be {@code null}.
 	 * @return The loaded plugin.
 	 */
 	public JavaPlugin loadPlugin(Class<? extends JavaPlugin> class1, PluginDescriptionFile description, Object[] parameters)
 	{
 		try
 		{
-			List<Class<?>> types = new ArrayList<>(4);
-			types.add(JavaPluginLoader.class);
-			types.add(PluginDescriptionFile.class);
-			types.add(File.class);
-			types.add(File.class);
-			
-			if (parameters != null)
+			List<Class<?>> types = new ArrayList<>(pluginConstructorTypes);
+			for (Object parameter : parameters)
 			{
-				for (Object parameter : parameters)
-				{
-					types.add(parameter.getClass());
-				}
+				types.add(parameter.getClass());
 			}
 			
-			//Constructor<? extends JavaPlugin> constructor = class1.getDeclaredConstructor(types.toArray(new Class<?>[0]));
 			Constructor<? extends JavaPlugin> constructor = getCompatibleConstructor(class1, types.toArray(new Class<?>[0]));
 			constructor.setAccessible(true);
 			
@@ -230,27 +222,32 @@ public class PluginManagerMock implements PluginManager
 			arguments[0] = loader;
 			arguments[1] = description;
 			arguments[2] = createTemporaryDirectory("MockBukkit-" + description.getName() + "-" + description.getVersion());
-			arguments[3] = null;
-			if (parameters != null)
-			{
-				System.arraycopy(parameters, 0, arguments, 4, parameters.length);
-			}
+			System.arraycopy(parameters, 0, arguments, 4, parameters.length);
 			
 			JavaPlugin plugin = constructor.newInstance(arguments);
-			plugins.add(plugin);
 			addCommandsFrom(plugin);
+			plugins.add(plugin);
 			plugin.onLoad();
 			return plugin;
 		}
 		catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
-				| IllegalArgumentException | IOException e)
+				| IllegalArgumentException | IOException | InvocationTargetException e)
 		{
 			throw new RuntimeException("Failed to instantiate plugin", e);
 		}
-		catch (InvocationTargetException e)
-		{
-			throw new RuntimeException("Failed to instantiate plugin", e.getTargetException());
-		}
+	}
+	
+	/**
+	 * Load a plugin from a class. It will use the system resource
+	 * {@code plugin.yml} as the resource file.
+	 * 
+	 * @param description The {@link PluginDescriptionFile} that contains information about the plugin.
+	 * @param class1 The plugin to load.
+	 * @return The loaded plugin.
+	 */
+	public JavaPlugin loadPlugin(Class<? extends JavaPlugin> class1, PluginDescriptionFile description)
+	{
+		return loadPlugin(class1, description, new Object[0]);
 	}
 	
 	/**

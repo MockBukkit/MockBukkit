@@ -123,7 +123,7 @@ public class MockBukkit
 		if (mock != null)
 		{
 			PluginDescriptionFile description = new PluginDescriptionFile("MockPlugin", "1.0.0", MockPlugin.class.getName());
-			JavaPlugin instance = mock.getPluginManager().loadPlugin(MockPlugin.class, description, null);
+			JavaPlugin instance = mock.getPluginManager().loadPlugin(MockPlugin.class, description);
 			mock.getPluginManager().enablePlugin(instance);
 			return (MockPlugin) instance;
 		}
