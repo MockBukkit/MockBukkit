@@ -215,7 +215,7 @@ public class InventoryMock implements org.bukkit.inventory.Inventory
 	{
 		for (int i = 0; i < getSize(); i++)
 		{
-			if (i < items.length)
+			if (i < items.length && items[i] != null)
 			{
 				this.items[i] = items[i].clone();
 			}
