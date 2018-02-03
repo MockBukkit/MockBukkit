@@ -270,6 +270,38 @@ public class PluginManagerMock implements PluginManager
 		}
 	}
 
+	/**
+	 * Checks if a method is an event handler and is compatible for a given event.
+	 * @param method The event handler method to test.
+	 * @param event The event the handler should be able to handle.
+	 * @return {@code true} if the handler is compatible with the event, {@code false} if it isn't.
+	 */
+	private boolean isEventMethodCompatible(Method handler, Event event)
+	{
+		return handler.isAnnotationPresent(EventHandler.class) && handler.getParameterCount() == 1
+				&& handler.getParameters()[0].getType().isInstance(event);
+	}
+	
+	/**
+	 * Tries to invoke an event handler on a certain listener.
+	 * It will pass on any exceptions the handler throws as
+	 * runtime exception.
+	 * @param listener The listener that owns the handler.
+	 * @param handler The handler to call.
+	 * @param event The event to pass on to the handler.
+	 */
+	private void invokeEventMethod(Listener listener, Method handler, Event event) throws RuntimeException
+	{
+		try
+		{
+			handler.invoke(handler, event);
+		}
+		catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
+		{
+			throw new RuntimeException(e);
+		}
+	}
+	
 	@Override
 	public void callEvent(Event event) throws IllegalStateException
 	{
@@ -278,17 +310,9 @@ public class PluginManagerMock implements PluginManager
 		{
 			for (Method method : listener.getClass().getMethods())
 			{
-				if (method.isAnnotationPresent(EventHandler.class) && method.getParameterCount() == 1
-						&& method.getParameters()[0].getType().isInstance(event))
+				if (isEventMethodCompatible(method, event))
 				{
-					try
-					{
-						method.invoke(listener, event);
-					}
-					catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
-					{
-						throw new RuntimeException(e);
-					}
+					invokeEventMethod(listener, method, event);
 				}
 			}
 		}
