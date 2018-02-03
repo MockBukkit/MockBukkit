@@ -1,11 +1,13 @@
 package be.seeseemelk.mockbukkit.inventory;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.HashMap;
+import java.util.ListIterator;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.bukkit.Material;
@@ -145,6 +147,19 @@ public class InventoryMockTest
 		{
 			assertNull(inventory.getItem(i));
 		}
+	}
+	
+	@Test
+	public void iterator_SeveralItems_IteratorsOverItems()
+	{
+		ItemStack item1 = new ItemStack(Material.COBBLESTONE, 64);
+		ItemStack item2 = new ItemStack(Material.DIRT, 64);
+		inventory.addItem(item1, item2);
+		
+		ListIterator<ItemStack> iterator = inventory.iterator();
+		assertEquals(item1, iterator.next());
+		assertEquals(item2, iterator.next());
+		assertFalse(iterator.hasNext());
 	}
 	
 	@Test

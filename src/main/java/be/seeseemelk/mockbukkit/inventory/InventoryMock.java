@@ -3,10 +3,12 @@ package be.seeseemelk.mockbukkit.inventory;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -231,6 +233,13 @@ public class InventoryMock implements org.bukkit.inventory.Inventory
 	}
 	
 	@Override
+	public ListIterator<ItemStack> iterator()
+	{
+		List<ItemStack> list = Arrays.asList(items).stream().filter(item -> item != null).collect(Collectors.toList());
+		return list.listIterator();
+	}
+	
+	@Override
 	public int getMaxStackSize()
 	{
 		// TODO Auto-generated method stub
@@ -414,13 +423,6 @@ public class InventoryMock implements org.bukkit.inventory.Inventory
 	
 	@Override
 	public InventoryType getType()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-	
-	@Override
-	public ListIterator<ItemStack> iterator()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
