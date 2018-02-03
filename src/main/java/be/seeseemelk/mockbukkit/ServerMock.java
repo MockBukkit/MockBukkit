@@ -1,29 +1,53 @@
 package be.seeseemelk.mockbukkit;
 
-import be.seeseemelk.mockbukkit.command.CommandResult;
-import be.seeseemelk.mockbukkit.command.ConsoleCommandSenderMock;
-import be.seeseemelk.mockbukkit.command.MessageTarget;
-import be.seeseemelk.mockbukkit.entity.PlayerMock;
-import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
-import be.seeseemelk.mockbukkit.inventory.ItemFactoryMock;
-import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
-import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
-import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
-import org.bukkit.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
+
+import org.bukkit.BanEntry;
+import org.bukkit.BanList;
 import org.bukkit.BanList.Type;
+import org.bukkit.GameMode;
+import org.bukkit.NamespacedKey;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.Server;
+import org.bukkit.UnsafeValues;
 import org.bukkit.Warning.WarningState;
+import org.bukkit.World;
+import org.bukkit.WorldCreator;
 import org.bukkit.advancement.Advancement;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarFlag;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
-import org.bukkit.command.*;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandException;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.generator.ChunkGenerator.ChunkData;
 import org.bukkit.help.HelpMap;
-import org.bukkit.inventory.*;
+import org.bukkit.inventory.InventoryHolder;
+import org.bukkit.inventory.ItemFactory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.Merchant;
+import org.bukkit.inventory.Recipe;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.ServicesManager;
@@ -31,12 +55,16 @@ import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.util.CachedServerIcon;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.stream.Collectors;
+import be.seeseemelk.mockbukkit.command.CommandResult;
+import be.seeseemelk.mockbukkit.command.ConsoleCommandSenderMock;
+import be.seeseemelk.mockbukkit.command.MessageTarget;
+import be.seeseemelk.mockbukkit.entity.PlayerMock;
+import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
+import be.seeseemelk.mockbukkit.inventory.InventoryMock;
+import be.seeseemelk.mockbukkit.inventory.ItemFactoryMock;
+import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
+import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
+import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
 
 @SuppressWarnings("deprecation")
 public class ServerMock implements Server
@@ -366,18 +394,45 @@ public class ServerMock implements Server
 		}
 		return consoleSender;
 	}
-
-	@Override
-	public Inventory createInventory(InventoryHolder owner, InventoryType type)
+	
+	public InventoryMock createInventory(InventoryHolder owner, InventoryType type, String title, int size)
 	{
+		InventoryMock inventory;
 		switch (type)
 		{
 			case PLAYER:
-				PlayerInventoryMock inventory = new PlayerInventoryMock("Inventory");
+				inventory = new PlayerInventoryMock((HumanEntity) owner, title);
+				return inventory;
+			case CHEST:
+				inventory = new InventoryMock(owner, title, size > 0 ? size : 9*3);
 				return inventory;
 			default:
 				throw new UnimplementedOperationException("Inventory type not yet supported");
 		}
+	}
+
+	@Override
+	public InventoryMock createInventory(InventoryHolder owner, InventoryType type)
+	{
+		return createInventory(owner, type, "Inventory");
+	}
+	
+	@Override
+	public InventoryMock createInventory(InventoryHolder owner, InventoryType type, String title)
+	{
+		return createInventory(owner, type, title, -1);
+	}
+
+	@Override
+	public InventoryMock createInventory(InventoryHolder owner, int size) throws IllegalArgumentException
+	{
+		return createInventory(owner, size, "Inventory");
+	}
+
+	@Override
+	public InventoryMock createInventory(InventoryHolder owner, int size, String title) throws IllegalArgumentException
+	{
+		return createInventory(owner, InventoryType.CHEST, title, size);
 	}
 
 	@Override
@@ -814,27 +869,6 @@ public class ServerMock implements Server
 
 	@Override
 	public HelpMap getHelpMap()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public Inventory createInventory(InventoryHolder owner, InventoryType type, String title)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public Inventory createInventory(InventoryHolder owner, int size) throws IllegalArgumentException
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public Inventory createInventory(InventoryHolder owner, int size, String title) throws IllegalArgumentException
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

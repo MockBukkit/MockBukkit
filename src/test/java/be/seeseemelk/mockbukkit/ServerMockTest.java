@@ -29,6 +29,7 @@ import org.junit.Test;
 import be.seeseemelk.mockbukkit.command.CommandResult;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
+import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 
 public class ServerMockTest
 {
@@ -312,6 +313,23 @@ public class ServerMockTest
 		MockBukkit.unload();
 		MockBukkit.mock();
 		assertFalse(file.exists());
+	}
+	
+	@Test
+	public void createInventory_WithSize_CreatesInventory()
+	{
+		PlayerMock player = server.addPlayer();
+		InventoryMock inventory = server.createInventory(player, 9, "title");
+		assertEquals("title", inventory.getTitle());
+		assertEquals(9, inventory.getSize());
+		assertSame(player, inventory.getHolder());
+	}
+	
+	@Test
+	public void createInventory_ChestInventoryWithoutSize_CreatesInventoryWithThreeLines()
+	{
+		InventoryMock inventory = server.createInventory(null, InventoryType.CHEST);
+		assertEquals(9*3, inventory.getSize());
 	}
 }
 
