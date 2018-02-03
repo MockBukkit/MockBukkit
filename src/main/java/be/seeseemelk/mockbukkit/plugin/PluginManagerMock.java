@@ -8,6 +8,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -15,12 +16,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 import java.util.Random;
 import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.PluginCommandUtils;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -305,7 +308,41 @@ public class PluginManagerMock implements PluginManager
 			throw new IllegalArgumentException("Not a JavaPlugin");
 		}
 	}
-
+	
+	/**
+	 * Adds a configuration section to a command.
+	 * @param command The command to add it to.
+	 * @param name The name of the section, as read in a configuration file.
+	 * @param value The value of the section, as parsed by {@link YamlConfiguration}
+	 */
+	private void addSection(PluginCommand command, String name, Object value)
+	{
+		switch (name)
+		{
+			case "description":
+				command.setDescription((String) value);
+				break;
+			case "aliases":
+				List<String> aliases = new ArrayList<>();
+				if (value instanceof List<?>)
+					command.setAliases(((List<?>) aliases).stream().map(object -> object.toString()).collect(Collectors.toList()));
+				else
+					command.setAliases(Arrays.asList(value.toString()));
+				break;
+			case "permission":
+				command.setPermission((String) value);
+				break;
+			case "permission-message":
+				command.setPermissionMessage((String) value);
+				break;
+			case "usage":
+				command.setUsage((String) value);
+				break;
+			default:
+				throw new UnsupportedOperationException("Unknown section " + value);
+		}
+	}
+	
 	/**
 	 * Add commands from a certain plugin to the internal list of commands.
 	 * 
@@ -321,39 +358,7 @@ public class PluginManagerMock implements PluginManager
 				PluginCommand command = PluginCommandUtils.createPluginCommand(entry.getKey(), plugin);
 				for (Entry<String, Object> section : entry.getValue().entrySet())
 				{
-					switch (section.getKey())
-					{
-						case "description":
-							command.setDescription((String) section.getValue());
-							break;
-						case "aliases":
-							List<String> aliases = new ArrayList<>();
-							if (section.getValue() instanceof List<?>)
-							{
-								for (Object o : (List<?>) section.getValue())
-								{
-									aliases.add(o.toString());
-								}
-							}
-							else
-							{
-								aliases.add(section.getValue().toString());
-								//aliases.addAll((List<String>) section.getValue());
-							}
-							command.setAliases(aliases);
-							break;
-						case "permission":
-							command.setPermission((String) section.getValue());
-							break;
-						case "permission-message":
-							command.setPermissionMessage((String) section.getValue());
-							break;
-						case "usage":
-							command.setUsage((String) section.getValue());
-							break;
-						default:
-							throw new UnsupportedOperationException("Unknown section " + section.getKey());
-					}
+					addSection(command, section.getKey(), section.getValue());
 				}
 				this.commands.add(command);
 			}
