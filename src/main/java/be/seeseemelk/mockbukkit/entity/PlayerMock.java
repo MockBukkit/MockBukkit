@@ -101,6 +101,7 @@ public class PlayerMock implements Player, MessageTarget
 	private boolean operator = false;
 	private Map<Attribute, AttributeInstanceMock> attributes;
 	private MetadataTable metadataTable = new MetadataTable();
+	private InventoryView inventoryView;
 	
 	{
 		attributes = new EnumMap<>(Attribute.class);
@@ -479,6 +480,18 @@ public class PlayerMock implements Player, MessageTarget
 	{
 		metadataTable.removeMetadata(metadataKey, owningPlugin);
 	}
+	
+	@Override
+	public InventoryView getOpenInventory()
+	{
+		return inventoryView;
+	}
+	
+	@Override
+	public void openInventory(InventoryView inventory)
+	{
+		inventoryView = inventory;
+	}
 
 	@Override
 	public Inventory getEnderChest()
@@ -502,13 +515,6 @@ public class PlayerMock implements Player, MessageTarget
 	}
 
 	@Override
-	public InventoryView getOpenInventory()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public InventoryView openInventory(Inventory inventory)
 	{
 		// TODO Auto-generated method stub
@@ -524,13 +530,6 @@ public class PlayerMock implements Player, MessageTarget
 
 	@Override
 	public InventoryView openEnchanting(Location location, boolean force)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void openInventory(InventoryView inventory)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

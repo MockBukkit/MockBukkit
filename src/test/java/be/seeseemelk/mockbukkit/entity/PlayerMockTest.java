@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
@@ -25,6 +26,7 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.MockPlugin;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.WorldMock;
+import be.seeseemelk.mockbukkit.inventory.InventoryViewMock;
 
 public class PlayerMockTest
 {
@@ -355,6 +357,20 @@ public class PlayerMockTest
 		assertTrue(player.hasMetadata("metadata"));
 		assertEquals(1, player.getMetadata("metadata").size());
 		player.removeMetadata("metadata", plugin);
+	}
+	
+	@Test
+	public void getOpenInventory_NoneOpened_Null()
+	{
+		assertNull(player.getOpenInventory());
+	}
+	
+	@Test
+	public void getOpenInventory_InventorySet_InventorySet()
+	{
+		InventoryViewMock inventory = new InventoryViewMock();
+		player.openInventory(inventory);
+		assertSame(inventory, player.getOpenInventory());
 	}
 	
 }
