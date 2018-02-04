@@ -24,8 +24,11 @@ public class ItemMetaMockTest
 	public void new_CopyConstructor_Copied()
 	{
 		meta.setDisplayName("Some name");
+		meta.setLore(Arrays.asList("lore"));
 		ItemMetaMock meta2 = new ItemMetaMock(meta);
+		meta2.setLore(Arrays.asList("lore"));
 		assertTrue(meta2.equals(meta));
+		assertTrue(meta.equals(meta2));
 	}
 	
 	@Test
