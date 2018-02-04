@@ -25,9 +25,9 @@ public class ItemMetaMock implements ItemMeta
 	public ItemMetaMock(ItemMeta meta)
 	{
 		if (meta.hasDisplayName())
-		{
 			displayName = meta.getDisplayName();
-		}
+		if (meta.hasLore())
+			lore = meta.getLore();
 	}
 
 	@Override
@@ -47,6 +47,51 @@ public class ItemMetaMock implements ItemMeta
 	{
 		displayName = name;
 	}
+	
+	/**
+	 * Checks if this items lore is equal to some other lore.
+	 * @param meta The other item meta whose lore should be compared.
+	 * @return {@code true} if they are the same, {@code false} if they're not.
+	 */
+	private boolean isLoreEquals(ItemMeta meta)
+	{
+		if (lore == null)
+			return !meta.hasLore();
+		else if (!meta.hasLore())
+			return false;
+		
+		List<String> otherLore = meta.getLore();
+		if (lore.size() == otherLore.size())
+		{
+			for (int i = 0; i < lore.size(); i++)
+			{
+				if (!lore.get(i).equals(otherLore.get(i)))
+					return false;
+			}
+		}
+		return true;
+	}
+	
+	/**
+	 * Checks if the display name of this item meta is equal to
+	 * the display name of another one.
+	 * @param meta The other item meta to check against.
+	 * @return {@code true} if both display names are equal, {@code false} if they're not.
+	 */
+	private boolean isDisplayNameEqual(ItemMeta meta)
+	{
+		if (displayName != null)
+		{
+			if (meta.hasDisplayName())
+				return displayName.equals(meta.getDisplayName());
+			else
+				return false;
+		}
+		else
+		{
+			return !meta.hasDisplayName();
+		}
+	}
 
 	@Override
 	public boolean equals(Object obj)
@@ -54,14 +99,7 @@ public class ItemMetaMock implements ItemMeta
 		if (obj instanceof ItemMeta)
 		{
 			ItemMeta meta = (ItemMeta) obj;
-			if (displayName != null)
-			{
-				return displayName.equals(meta.getDisplayName());
-			}
-			else
-			{
-				return !meta.hasDisplayName();
-			}
+			return isLoreEquals(meta) && isDisplayNameEqual(meta);
 		}
 		else
 		{
@@ -76,6 +114,7 @@ public class ItemMetaMock implements ItemMeta
 		{
 			ItemMetaMock meta = (ItemMetaMock) super.clone();
 			meta.displayName = displayName;
+			meta.lore = lore;
 			return meta;
 		}
 		catch (CloneNotSupportedException e)

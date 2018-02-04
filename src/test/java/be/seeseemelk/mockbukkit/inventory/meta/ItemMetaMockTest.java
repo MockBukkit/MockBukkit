@@ -85,6 +85,25 @@ public class ItemMetaMockTest
 	}
 	
 	@Test
+	public void equals_OneWithLoreOneWithout_False()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.setLore(Arrays.asList("lore"));
+		assertFalse(meta.equals(meta2));
+		assertFalse(meta2.equals(meta));
+	}
+	
+	@Test
+	public void equals_SameLore_True()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.setLore(Arrays.asList("lore"));
+		meta2.setLore(Arrays.asList("lore"));
+		assertTrue(meta.equals(meta2));
+		assertTrue(meta2.equals(meta));
+	}
+	
+	@Test
 	public void equals_Null_False()
 	{
 		assertFalse(meta.equals(null));
@@ -95,7 +114,7 @@ public class ItemMetaMockTest
 	{
 		meta.setDisplayName("Some name");
 		ItemMetaMock cloned = meta.clone();
-		assertTrue(cloned.equals(meta));
+		assertEquals(meta, cloned);
 	}
 	
 	@Test
