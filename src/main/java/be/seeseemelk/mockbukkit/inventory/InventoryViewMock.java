@@ -5,11 +5,12 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-
 public class InventoryViewMock extends InventoryView
 {
 	private Inventory topInventory;
+	private Inventory bottomInventory;
+	private HumanEntity player;
+	private InventoryType type = InventoryType.CHEST;
 
 	public InventoryViewMock()
 	{
@@ -24,6 +25,33 @@ public class InventoryViewMock extends InventoryView
 	{
 		topInventory = inventory;
 	}
+	
+	/**
+	 * Sets the bottom inventory.
+	 * @param inventory The bottom inventory.
+	 */
+	public void setBottomInventory(Inventory inventory)
+	{
+		bottomInventory = inventory;
+	}
+	
+	/**
+	 * Sets the player viewing.
+	 * @param player The player viewing.
+	 */
+	public void setPlayer(HumanEntity player)
+	{
+		this.player = player;
+	}
+	
+	/**
+	 * Sets the type of inventory view.
+	 * @param type The new type of inventory view.
+	 */
+	public void setType(InventoryType type)
+	{
+		this.type = type;
+	}
 
 	@Override
 	public Inventory getTopInventory()
@@ -34,22 +62,19 @@ public class InventoryViewMock extends InventoryView
 	@Override
 	public Inventory getBottomInventory()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return bottomInventory;
 	}
 
 	@Override
 	public HumanEntity getPlayer()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return player;
 	}
 
 	@Override
 	public InventoryType getType()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return type;
 	}
 
 }
