@@ -300,21 +300,16 @@ public class ServerMock implements Server
 	{
 		Player player = getPlayerExact(name);
 		if (player != null)
-		{
 			return player;
-		}
+		
 		final String lowercase = name.toLowerCase(Locale.ENGLISH);
 		int delta = Integer.MAX_VALUE;
-		int currentDelta;
 		for (Player namedPlayer : players)
 		{
-			if (namedPlayer.getName().equalsIgnoreCase(lowercase))
-			{
-				return namedPlayer;
-			}
 			if (namedPlayer.getName().toLowerCase(Locale.ENGLISH).startsWith(lowercase))
 			{
-				if ((currentDelta = Math.abs(namedPlayer.getName().length() - lowercase.length())) < delta)
+				int currentDelta = Math.abs(namedPlayer.getName().length() - lowercase.length());
+				if (currentDelta < delta)
 				{
 					delta = currentDelta;
 					player = namedPlayer;
