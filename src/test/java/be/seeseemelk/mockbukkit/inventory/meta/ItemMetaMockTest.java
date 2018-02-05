@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.inventory.meta;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
@@ -29,6 +30,7 @@ public class ItemMetaMockTest
 		meta2.setLore(Arrays.asList("lore"));
 		assertTrue(meta2.equals(meta));
 		assertTrue(meta.equals(meta2));
+		assertEquals(meta.hashCode(), meta2.hashCode());
 	}
 	
 	@Test
@@ -58,6 +60,7 @@ public class ItemMetaMockTest
 	{
 		ItemMetaMock meta2 = new ItemMetaMock();
 		assertTrue(meta.equals(meta2));
+		assertEquals(meta.hashCode(), meta2.hashCode());
 	}
 	
 	@Test
@@ -67,6 +70,18 @@ public class ItemMetaMockTest
 		meta.setDisplayName("Some name");
 		meta2.setDisplayName("Some name");
 		assertTrue(meta.equals(meta2));
+		assertEquals(meta.hashCode(), meta2.hashCode());
+	}
+	
+	@Test
+	public void equals_SameLore_True()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.setLore(Arrays.asList("lore"));
+		meta2.setLore(Arrays.asList("lore"));
+		assertTrue(meta.equals(meta2));
+		assertTrue(meta2.equals(meta));
+		assertEquals(meta.hashCode(), meta2.hashCode());
 	}
 	
 	@Test
@@ -107,16 +122,6 @@ public class ItemMetaMockTest
 	}
 	
 	@Test
-	public void equals_SameLore_True()
-	{
-		ItemMetaMock meta2 = new ItemMetaMock();
-		meta.setLore(Arrays.asList("lore"));
-		meta2.setLore(Arrays.asList("lore"));
-		assertTrue(meta.equals(meta2));
-		assertTrue(meta2.equals(meta));
-	}
-	
-	@Test
 	public void equals_Null_False()
 	{
 		assertFalse(meta.equals(null));
@@ -128,6 +133,7 @@ public class ItemMetaMockTest
 		meta.setDisplayName("Some name");
 		ItemMetaMock cloned = meta.clone();
 		assertEquals(meta, cloned);
+		assertEquals(meta.hashCode(), cloned.hashCode());
 	}
 	
 	@Test

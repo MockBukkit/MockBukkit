@@ -93,6 +93,16 @@ public class ItemMetaMock implements ItemMeta
 			return !meta.hasDisplayName();
 		}
 	}
+	
+	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((displayName == null) ? 0 : displayName.hashCode());
+		result = prime * result + ((lore == null) ? 0 : lore.hashCode());
+		return result;
+	}
 
 	@Override
 	public boolean equals(Object obj)
