@@ -4,7 +4,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 
+import org.bukkit.entity.HumanEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.Inventory;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +18,6 @@ import be.seeseemelk.mockbukkit.entity.PlayerMock;
 
 public class InventoryViewMockTest
 {
-	@SuppressWarnings("unused")
 	private ServerMock server;
 	private InventoryViewMock view;
 
@@ -23,7 +25,7 @@ public class InventoryViewMockTest
 	public void setUp() throws Exception
 	{
 		server = MockBukkit.mock();
-		view = new InventoryViewMock();
+		view = new InventoryViewMockImpl();
 	}
 
 	@After
@@ -31,23 +33,26 @@ public class InventoryViewMockTest
 	{
 		MockBukkit.unload();
 	}
-
+	
 	@Test
-	public void getTopInventory_NoneSet_Null()
+	public void constructorEmpty_AllNull()
 	{
 		assertNull(view.getTopInventory());
-	}
-	
-	@Test
-	public void getBottomInventory_NoneSet_Null()
-	{
 		assertNull(view.getBottomInventory());
+		assertNull(view.getPlayer());
 	}
 	
 	@Test
-	public void getPlayer_NoneSet_Null()
+	public void constructorParameterised_ValuesSet()
 	{
-		assertNull(view.getPlayer());
+		Player player = server.addPlayer();
+		InventoryMock top = new InventoryMock(null, null, 9);
+		InventoryMock bottom = new InventoryMock(null, null, 9);
+		view = new InventoryViewMockImpl(player, top, bottom, InventoryType.DROPPER);
+		assertSame(player, view.getPlayer());
+		assertSame(top, view.getTopInventory());
+		assertSame(bottom, view.getBottomInventory());
+		assertSame(InventoryType.DROPPER, view.getType());
 	}
 	
 	@Test
@@ -89,7 +94,18 @@ public class InventoryViewMockTest
 
 }
 
-
+class InventoryViewMockImpl extends InventoryViewMock
+{
+	public InventoryViewMockImpl(HumanEntity player, Inventory top, Inventory bottom, InventoryType type)
+	{
+		super(player, top, bottom, type);
+	}
+	
+	public InventoryViewMockImpl()
+	{
+		super();
+	}
+}
 
 
 

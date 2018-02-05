@@ -17,6 +17,7 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
+import org.bukkit.inventory.InventoryView;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.junit.After;
 import org.junit.Before;
@@ -26,6 +27,7 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.MockPlugin;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.WorldMock;
+import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryViewMock;
 
 public class PlayerMockTest
@@ -371,6 +373,17 @@ public class PlayerMockTest
 		InventoryViewMock inventory = new InventoryViewMock();
 		player.openInventory(inventory);
 		assertSame(inventory, player.getOpenInventory());
+	}
+	
+	@Test
+	public void openInventory_NothingSet_InventoryViewSet()
+	{
+		InventoryMock inventory = new InventoryMock(null, "Inventory", 9);
+		InventoryView view = player.openInventory(inventory);
+		assertNotNull(view);
+		assertSame(player.getInventory(), view.getBottomInventory());
+		assertSame(inventory, view.getTopInventory());
+		assertSame(player.getOpenInventory(), view);
 	}
 	
 }

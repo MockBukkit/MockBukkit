@@ -5,16 +5,24 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 
-public class InventoryViewMock extends InventoryView
+public abstract class InventoryViewMock extends InventoryView
 {
 	private Inventory topInventory;
 	private Inventory bottomInventory;
 	private HumanEntity player;
-	private InventoryType type = InventoryType.CHEST;
+	private InventoryType type;
 
+	public InventoryViewMock(HumanEntity player, Inventory top, Inventory bottom, InventoryType type)
+	{
+		this.player = player;
+		this.type = type;
+		topInventory = top;
+		bottomInventory = bottom;
+	}
+	
 	public InventoryViewMock()
 	{
-		
+		this(null, null, null, InventoryType.CHEST);
 	}
 	
 	/**
