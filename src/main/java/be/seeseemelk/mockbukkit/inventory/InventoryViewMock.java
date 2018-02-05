@@ -20,11 +20,6 @@ public abstract class InventoryViewMock extends InventoryView
 		bottomInventory = bottom;
 	}
 	
-	public InventoryViewMock()
-	{
-		this(null, null, null, InventoryType.CHEST);
-	}
-	
 	/**
 	 * Sets the top inventory.
 	 * @param inventory The top inventory.

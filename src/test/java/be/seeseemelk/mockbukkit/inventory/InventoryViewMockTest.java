@@ -4,10 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 
-import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.inventory.Inventory;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +23,7 @@ public class InventoryViewMockTest
 	public void setUp() throws Exception
 	{
 		server = MockBukkit.mock();
-		view = new InventoryViewMockImpl();
+		view = new SimpleInventoryViewMock();
 	}
 
 	@After
@@ -46,9 +44,9 @@ public class InventoryViewMockTest
 	public void constructorParameterised_ValuesSet()
 	{
 		Player player = server.addPlayer();
-		InventoryMock top = new InventoryMock(null, null, 9);
-		InventoryMock bottom = new InventoryMock(null, null, 9);
-		view = new InventoryViewMockImpl(player, top, bottom, InventoryType.DROPPER);
+		InventoryMock top = new SimpleInventoryMock();
+		InventoryMock bottom = new SimpleInventoryMock();
+		view = new SimpleInventoryViewMock(player, top, bottom, InventoryType.DROPPER);
 		assertSame(player, view.getPlayer());
 		assertSame(top, view.getTopInventory());
 		assertSame(bottom, view.getBottomInventory());
@@ -64,7 +62,7 @@ public class InventoryViewMockTest
 	@Test
 	public void getTopInventory_TopInventorySet_SameReturned()
 	{
-		InventoryMock inventory = new InventoryMock(null, null, 9);
+		InventoryMock inventory = new SimpleInventoryMock();
 		view.setTopInventory(inventory);
 		assertSame(inventory, view.getTopInventory());
 	}
@@ -72,7 +70,7 @@ public class InventoryViewMockTest
 	@Test
 	public void getBottomInventory_BottomInventorySet_SameReturned()
 	{
-		InventoryMock inventory = new InventoryMock(null, null, 9);
+		InventoryMock inventory = new SimpleInventoryMock();
 		view.setBottomInventory(inventory);
 		assertSame(inventory, view.getBottomInventory());
 	}
@@ -92,19 +90,6 @@ public class InventoryViewMockTest
 		assertEquals(InventoryType.CREATIVE, view.getType());
 	}
 
-}
-
-class InventoryViewMockImpl extends InventoryViewMock
-{
-	public InventoryViewMockImpl(HumanEntity player, Inventory top, Inventory bottom, InventoryType type)
-	{
-		super(player, top, bottom, type);
-	}
-	
-	public InventoryViewMockImpl()
-	{
-		super();
-	}
 }
 
 

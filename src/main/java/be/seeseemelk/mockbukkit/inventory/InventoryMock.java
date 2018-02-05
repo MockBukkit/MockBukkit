@@ -19,16 +19,18 @@ import org.bukkit.inventory.ItemStack;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
-public class InventoryMock implements org.bukkit.inventory.Inventory
+public abstract class InventoryMock implements org.bukkit.inventory.Inventory
 {
 	private final ItemStack[] items;
 	private final String name;
 	private final InventoryHolder holder;
+	private final InventoryType type;
 
-	public InventoryMock(InventoryHolder holder, String name, int size)
+	public InventoryMock(InventoryHolder holder, String name, int size, InventoryType type)
 	{
 		this.holder = holder;
 		this.name = name;
+		this.type = type;
 		
 		items = new ItemStack[size];
 	}
@@ -240,6 +242,12 @@ public class InventoryMock implements org.bukkit.inventory.Inventory
 	}
 	
 	@Override
+	public InventoryType getType()
+	{
+		return type;
+	}
+	
+	@Override
 	public int getMaxStackSize()
 	{
 		// TODO Auto-generated method stub
@@ -416,13 +424,6 @@ public class InventoryMock implements org.bukkit.inventory.Inventory
 	
 	@Override
 	public List<HumanEntity> getViewers()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-	
-	@Override
-	public InventoryType getType()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

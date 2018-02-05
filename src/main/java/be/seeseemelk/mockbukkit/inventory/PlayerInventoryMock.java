@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.inventory;
 
 import org.bukkit.entity.HumanEntity;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
@@ -17,7 +18,7 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	
 	public PlayerInventoryMock(HumanEntity holder, String name)
 	{
-		super(holder, name, 40);
+		super(holder, name, 40, InventoryType.PLAYER);
 	}
 	
 	@Override

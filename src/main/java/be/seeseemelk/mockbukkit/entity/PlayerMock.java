@@ -78,8 +78,8 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.attribute.AttributeInstanceMock;
 import be.seeseemelk.mockbukkit.command.MessageTarget;
-import be.seeseemelk.mockbukkit.inventory.InventoryViewMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.PlayerInventoryViewMock;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
 
 
@@ -497,7 +497,7 @@ public class PlayerMock implements Player, MessageTarget
 	@Override
 	public InventoryView openInventory(Inventory inventory)
 	{
-		inventoryView = new InventoryViewMock(this, this.inventory, inventory, InventoryType.CHEST);
+		inventoryView = new PlayerInventoryViewMock(this, inventory);
 		return inventoryView;
 	}
 

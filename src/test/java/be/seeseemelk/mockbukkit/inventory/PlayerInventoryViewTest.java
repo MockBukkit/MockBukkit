@@ -2,6 +2,9 @@ package be.seeseemelk.mockbukkit.inventory;
 
 import static org.junit.Assert.*;
 
+import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.Inventory;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,9 +31,13 @@ public class PlayerInventoryViewTest
 	@Test
 	public void constructor_SetsProperties()
 	{
-		(§)
+		Player player = server.addPlayer();
+		Inventory inventory = new SimpleInventoryMock(null, null, 9, InventoryType.CHEST);
 		
-		assert 1==1;
+		PlayerInventoryViewMock view = new PlayerInventoryViewMock(player, inventory);
+		assertSame(player, view.getPlayer());
+		assertSame(player.getInventory(), view.getBottomInventory());
+		assertSame(inventory, view.getTopInventory());
 	}
 	
 }

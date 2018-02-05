@@ -27,8 +27,10 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.MockPlugin;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.WorldMock;
+import be.seeseemelk.mockbukkit.inventory.ChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryViewMock;
+import be.seeseemelk.mockbukkit.inventory.SimpleInventoryViewMock;
 
 public class PlayerMockTest
 {
@@ -370,7 +372,7 @@ public class PlayerMockTest
 	@Test
 	public void getOpenInventory_InventorySet_InventorySet()
 	{
-		InventoryViewMock inventory = new InventoryViewMock();
+		InventoryViewMock inventory = new SimpleInventoryViewMock();
 		player.openInventory(inventory);
 		assertSame(inventory, player.getOpenInventory());
 	}
@@ -378,7 +380,7 @@ public class PlayerMockTest
 	@Test
 	public void openInventory_NothingSet_InventoryViewSet()
 	{
-		InventoryMock inventory = new InventoryMock(null, "Inventory", 9);
+		InventoryMock inventory = new ChestInventoryMock(null, "Inventory", 9);
 		InventoryView view = player.openInventory(inventory);
 		assertNotNull(view);
 		assertSame(player.getInventory(), view.getBottomInventory());
@@ -387,8 +389,6 @@ public class PlayerMockTest
 	}
 	
 }
-
-
 
 
 
