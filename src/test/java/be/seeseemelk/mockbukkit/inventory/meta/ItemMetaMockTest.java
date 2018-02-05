@@ -97,6 +97,16 @@ public class ItemMetaMockTest
 	}
 	
 	@Test
+	public void equals_DifferentSizedLore_False()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.setLore(Arrays.asList("lore"));
+		meta2.setLore(Arrays.asList("lore", "more lore"));
+		assertFalse(meta.equals(meta2));
+		assertFalse(meta2.equals(meta));
+	}
+	
+	@Test
 	public void equals_SameLore_True()
 	{
 		ItemMetaMock meta2 = new ItemMetaMock();

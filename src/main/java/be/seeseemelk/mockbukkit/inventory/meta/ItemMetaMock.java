@@ -68,8 +68,9 @@ public class ItemMetaMock implements ItemMeta
 				if (!lore.get(i).equals(otherLore.get(i)))
 					return false;
 			}
+			return true;
 		}
-		return true;
+		return false;
 	}
 	
 	/**
