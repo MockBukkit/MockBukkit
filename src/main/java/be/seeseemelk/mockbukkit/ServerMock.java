@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -566,6 +567,19 @@ public class ServerMock implements Server
 	{
 		recipes.clear();
 	}
+	
+	@Override
+	public boolean dispatchCommand(CommandSender sender, String commandLine) throws CommandException
+	{
+		String[] commands = commandLine.split(" ");
+		String commandLabel = commands[0];
+		String[] args = Arrays.copyOfRange(commands, 1, commands.length);
+		Command command = getPluginCommand(commandLabel);
+		if (command != null)
+			return command.execute(sender, commandLabel, args);
+		else
+			return false;
+	}
 
 	@Override
 	public void sendPluginMessage(Plugin source, String channel, byte[] message)
@@ -765,13 +779,6 @@ public class ServerMock implements Server
 
 	@Override
 	public void savePlayers()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean dispatchCommand(CommandSender sender, String commandLine) throws CommandException
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

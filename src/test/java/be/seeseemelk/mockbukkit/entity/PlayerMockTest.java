@@ -26,6 +26,7 @@ import org.junit.Test;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.MockPlugin;
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.TestPlugin;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.inventory.ChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
@@ -386,6 +387,17 @@ public class PlayerMockTest
 		assertSame(player.getInventory(), view.getBottomInventory());
 		assertSame(inventory, view.getTopInventory());
 		assertSame(player.getOpenInventory(), view);
+	}
+	
+	@Test
+	public void performCommand_PerformsCommand()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		plugin.commandReturns = true;
+		assertTrue(player.performCommand("mockcommand argA argB"));
+		assertEquals("argA", plugin.commandArguments[0]);
+		assertEquals("argB", plugin.commandArguments[1]);
+		assertSame(player, plugin.commandSender);
 	}
 	
 }

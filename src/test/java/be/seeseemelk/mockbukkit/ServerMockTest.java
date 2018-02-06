@@ -331,6 +331,18 @@ public class ServerMockTest
 		InventoryMock inventory = server.createInventory(null, InventoryType.CHEST);
 		assertEquals(9*3, inventory.getSize());
 	}
+	
+	@Test
+	public void performCommand_PerformsCommand()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		plugin.commandReturns = true;
+		Player player = server.addPlayer();
+		assertTrue(server.dispatchCommand(player, "mockcommand argA argB"));
+		assertEquals("argA", plugin.commandArguments[0]);
+		assertEquals("argB", plugin.commandArguments[1]);
+		assertSame(player, plugin.commandSender);
+	}
 }
 
 class TestRecipe implements Recipe

@@ -500,6 +500,12 @@ public class PlayerMock implements Player, MessageTarget
 		inventoryView = new PlayerInventoryViewMock(this, inventory);
 		return inventoryView;
 	}
+	
+	@Override
+	public boolean performCommand(String command)
+	{
+		return Bukkit.dispatchCommand(this, command);
+	}
 
 	@Override
 	public Inventory getEnderChest()
@@ -1527,13 +1533,6 @@ public class PlayerMock implements Player, MessageTarget
 
 	@Override
 	public void chat(String msg)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean performCommand(String command)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
