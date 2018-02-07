@@ -5,7 +5,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
@@ -16,6 +15,7 @@ import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.metadata.FixedMetadataValue;
@@ -367,7 +367,9 @@ public class PlayerMockTest
 	@Test
 	public void getOpenInventory_NoneOpened_Null()
 	{
-		assertNull(player.getOpenInventory());
+		InventoryView view = player.getOpenInventory();
+		assertNotNull(player.getOpenInventory());
+		assertEquals(InventoryType.CRAFTING, view.getType());
 	}
 	
 	@Test
@@ -387,6 +389,14 @@ public class PlayerMockTest
 		assertSame(player.getInventory(), view.getBottomInventory());
 		assertSame(inventory, view.getTopInventory());
 		assertSame(player.getOpenInventory(), view);
+	}
+	
+	@Test
+	public void closeInventory_NoneInventory_CraftingView()
+	{
+		InventoryView view = player.getOpenInventory();
+		assertNotNull(view);
+		assertEquals(InventoryType.CRAFTING, view.getType());
 	}
 	
 	@Test

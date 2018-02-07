@@ -80,6 +80,7 @@ import be.seeseemelk.mockbukkit.attribute.AttributeInstanceMock;
 import be.seeseemelk.mockbukkit.command.MessageTarget;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryViewMock;
+import be.seeseemelk.mockbukkit.inventory.SimpleInventoryViewMock;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
 
 
@@ -127,6 +128,7 @@ public class PlayerMock implements Player, MessageTarget
 		}
 
 		location = Bukkit.getWorlds().get(0).getSpawnLocation().clone();
+		closeInventory();
 	}
 
 	/**
@@ -502,6 +504,12 @@ public class PlayerMock implements Player, MessageTarget
 	}
 	
 	@Override
+	public void closeInventory()
+	{
+		inventoryView = new SimpleInventoryViewMock(this, null, inventory, InventoryType.CRAFTING); 
+	}
+	
+	@Override
 	public boolean performCommand(String command)
 	{
 		return Bukkit.dispatchCommand(this, command);
@@ -551,13 +559,6 @@ public class PlayerMock implements Player, MessageTarget
 
 	@Override
 	public InventoryView openMerchant(Merchant merchant, boolean force)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void closeInventory()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
