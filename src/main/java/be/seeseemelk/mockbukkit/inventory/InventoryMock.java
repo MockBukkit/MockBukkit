@@ -144,6 +144,8 @@ public abstract class InventoryMock implements org.bukkit.inventory.Inventory
 	@Override
 	public ItemStack getItem(int index)
 	{
+		if (items[index] == null)
+			items[index] = new ItemStack(Material.AIR);
 		return items[index];
 	}
 	

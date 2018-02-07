@@ -57,11 +57,13 @@ public class InventoryMockTest
 	}
 
 	@Test
-	public void getItem_Default_AllNull()
+	public void getItem_Default_AllAir()
 	{
 		for (int i = 0; i < inventory.getSize(); i++)
 		{
-			assertNull(inventory.getItem(i));
+			ItemStack item = inventory.getItem(i);
+			assertNotNull(item);
+			assertEquals(Material.AIR, item.getType());
 		}
 	}
 
@@ -74,7 +76,8 @@ public class InventoryMockTest
 		ItemStack stored = inventory.getItem(0);
 		assertEquals(stored.getAmount(), 64);
 		ItemStack next = inventory.getItem(1);
-		assertNull(next);
+		assertNotNull(next);
+		assertEquals(Material.AIR, next.getType());
 	}
 
 	@Test
@@ -153,7 +156,9 @@ public class InventoryMockTest
 		assertTrue(item.isSimilar(inventory.getItem(0)));
 		for (int i = 1; i < inventory.getSize(); i++)
 		{
-			assertNull(inventory.getItem(i));
+			ItemStack emptyItem = inventory.getItem(i);
+			assertNotNull(emptyItem);
+			assertEquals(Material.AIR, emptyItem.getType());
 		}
 	}
 
