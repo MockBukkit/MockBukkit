@@ -55,6 +55,7 @@ public class PluginManagerMock implements PluginManager
 	private final List<Event> events = new ArrayList<>();
 	private final List<File> temporaryFiles = new LinkedList<>();
 	private final List<Class<?>> pluginConstructorTypes = Arrays.asList(JavaPluginLoader.class, PluginDescriptionFile.class, File.class, File.class);
+	private final List<Permission> permissions = new ArrayList<>(); 
 
 	@SuppressWarnings("deprecation")
 	public PluginManagerMock(ServerMock server)
@@ -469,15 +470,13 @@ public class PluginManagerMock implements PluginManager
 	@Override
 	public Permission getPermission(String name)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return permissions.stream().filter(permission -> permission.getName().equals(name)).findFirst().orElse(null);
 	}
 
 	@Override
 	public void addPermission(Permission perm)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		permissions.add(perm);
 	}
 
 	@Override
