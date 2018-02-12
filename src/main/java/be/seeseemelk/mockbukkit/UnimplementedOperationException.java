@@ -1,6 +1,8 @@
 package be.seeseemelk.mockbukkit;
 
-public class UnimplementedOperationException extends UnsupportedOperationException
+import org.junit.AssumptionViolatedException;
+
+public class UnimplementedOperationException extends AssumptionViolatedException
 {
 	private static final long serialVersionUID = 1L;
 
