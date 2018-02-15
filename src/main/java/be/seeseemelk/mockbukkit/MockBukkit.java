@@ -70,8 +70,10 @@ public class MockBukkit
 	/**
 	 * Loads and enables a plugin for mocking.
 	 * 
-	 * @param class1 The plugin to load for mocking.
+	 * @param <T> The plugin's main class to load.
+	 * @param plugin The plugin to load for mocking.
 	 * @param parameters Extra parameters to pass on to the plugin constructor.
+	 * @return An instance of the plugin's main class.
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T extends JavaPlugin> T load(Class<T> plugin, Object... parameters)
@@ -91,8 +93,9 @@ public class MockBukkit
 	/**
 	 * Loads and enables a plugin for mocking.
 	 * 
-	 * @param class1 The plugin to load for mocking.
-	 * @param parameters Extra parameters to pass on to the plugin constructor.
+	 * @param <T> The plugin's main class to load.
+	 * @param plugin The plugin to load for mocking.
+	 * @return An instance of the plugin's main class.
 	 */
 	public static <T extends JavaPlugin> T load(Class<T> plugin)
 	{
@@ -117,6 +120,10 @@ public class MockBukkit
 	
 	/**
 	 * Creates a mock instance of a {@link JavaPlugin} implementation.
+	 * This plugin offers no functionality, but it does allow a plugin
+	 * that might enable and disable other plugins to be tested.
+	 * 
+	 * @return An instance of a mock plugin.
 	 */
 	public static MockPlugin createMockPlugin()
 	{

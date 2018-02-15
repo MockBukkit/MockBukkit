@@ -13,8 +13,8 @@ public class SimpleInventoryViewMock extends InventoryViewMock
 	}
 
 	/**
-	 * Creates a very simple mock {@link IntventoryView} with as player, top,
-	 * and bottom {@code null}, and as type {@link InventoryType.CHEST}.
+	 * Creates a very simple mock {@code IntventoryView} with as player, top,
+	 * and bottom {@code null}, and as type {@code InventoryType.CHEST}.
 	 */
 	public SimpleInventoryViewMock()
 	{

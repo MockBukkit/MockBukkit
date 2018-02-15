@@ -104,6 +104,8 @@ public class ServerMock implements Server
 
 	/**
 	 * Creates a random player and adds it.
+	 * 
+	 * @return The newly created mock player.
 	 */
 	public PlayerMock addPlayer()
 	{
