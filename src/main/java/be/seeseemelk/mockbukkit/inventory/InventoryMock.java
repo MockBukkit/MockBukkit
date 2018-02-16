@@ -215,7 +215,7 @@ public abstract class InventoryMock implements org.bukkit.inventory.Inventory
 	}
 	
 	@Override
-	public void setContents(ItemStack[] items) throws IllegalArgumentException
+	public void setContents(ItemStack[] items)
 	{
 		for (int i = 0; i < getSize(); i++)
 		{
