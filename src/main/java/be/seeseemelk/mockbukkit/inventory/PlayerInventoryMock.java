@@ -10,15 +10,49 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 public class PlayerInventoryMock extends InventoryMock implements PlayerInventory
 {
 	public static final int HOTBAR = 0;
-	public static final int MAIN_INVENTORY = 9;
+	public static final int SLOT_BAR = 9;
 	public static final int BOOTS = 36;
 	public static final int LEGGINGS = 37;
 	public static final int CHESTPLATE = 38;
 	public static final int HELMET = 39;
+	public static final int OFF_HAND = 40;
+	private int mainHandSlot = 0;
+	private ItemStack[] armorContents = new ItemStack[4];
+	private ItemStack[] extraContents = new ItemStack[1];
 	
 	public PlayerInventoryMock(HumanEntity holder, String name)
 	{
-		super(holder, name, 40, InventoryType.PLAYER);
+		super(holder, name, 36, InventoryType.PLAYER);
+	}
+	
+	@Override
+	public int getSize()
+	{
+		return super.getSize() + armorContents.length + extraContents.length;
+	}
+	
+	@Override
+	public ItemStack getItem(int index)
+	{
+		int size = super.getSize();
+		if (index < size)
+			return super.getItem(index);
+		else if (index < size + armorContents.length)
+			return armorContents[index - size];
+		else
+			return extraContents[index - size - armorContents.length];
+	}
+	
+	@Override
+	public void setItem(int index, ItemStack item)
+	{
+		int size = super.getSize();
+		if (index < size)
+			super.setItem(index, item);
+		else if (index < size + armorContents.length)
+			armorContents[index - size] = item;
+		else
+			extraContents[index - size - armorContents.length] = item;
 	}
 	
 	@Override
@@ -30,43 +64,37 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	@Override
 	public ItemStack[] getArmorContents()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return armorContents;
 	}
 	
 	@Override
 	public ItemStack[] getExtraContents()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return extraContents;
 	}
 	
 	@Override
 	public ItemStack getHelmet()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return armorContents[3];
 	}
 	
 	@Override
 	public ItemStack getChestplate()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return armorContents[2];
 	}
 	
 	@Override
 	public ItemStack getLeggings()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return armorContents[1];
 	}
 	
 	@Override
 	public ItemStack getBoots()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return armorContents[0];
 	}
 	
 	@Override
@@ -88,48 +116,37 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	@Override
 	public void setHelmet(ItemStack helmet)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-		
+		armorContents[3] = helmet;
 	}
 	
 	@Override
 	public void setChestplate(ItemStack chestplate)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-		
+		armorContents[2] = chestplate;
 	}
 	
 	@Override
 	public void setLeggings(ItemStack leggings)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-		
+		armorContents[1] = leggings;
 	}
 	
 	@Override
 	public void setBoots(ItemStack boots)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-		
+		armorContents[0] = boots;
 	}
 	
 	@Override
 	public ItemStack getItemInMainHand()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getContents()[SLOT_BAR + mainHandSlot];
 	}
 	
 	@Override
 	public void setItemInMainHand(ItemStack item)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-		
+		getContents()[SLOT_BAR + mainHandSlot] = item;
 	}
 	
 	@Override
@@ -147,34 +164,33 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 		
 	}
 	
+	@Deprecated
 	@Override
 	public ItemStack getItemInHand()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getItemInMainHand();
 	}
 	
+	@Deprecated
 	@Override
 	public void setItemInHand(ItemStack stack)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		setItemInMainHand(stack);
 		
 	}
 	
 	@Override
 	public int getHeldItemSlot()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return mainHandSlot;
 	}
 	
 	@Override
 	public void setHeldItemSlot(int slot)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-		
+		if (slot < 0 || slot > 8)
+			throw new ArrayIndexOutOfBoundsException("Slot should be within [0-8] (was: " + slot + ")");
+		mainHandSlot = slot;
 	}
 	
 	@Override
