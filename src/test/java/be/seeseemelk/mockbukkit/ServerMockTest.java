@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -27,8 +28,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import be.seeseemelk.mockbukkit.command.CommandResult;
+import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
+import be.seeseemelk.mockbukkit.entity.SimpleEntityMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 
 public class ServerMockTest
@@ -67,6 +70,10 @@ public class ServerMockTest
 		
 		assertEquals(player1, server.getPlayer(0));
 		assertEquals(player2, server.getPlayer(1));
+		
+		Set<EntityMock> entities = server.getEntities(); 
+		assertTrue("Player 1 was not registered", entities.contains(player1));
+		assertTrue("Player 2 was not registered", entities.contains(player2));
 	}
 	
 	@Test
@@ -342,6 +349,96 @@ public class ServerMockTest
 		assertEquals("argA", plugin.commandArguments[0]);
 		assertEquals("argB", plugin.commandArguments[1]);
 		assertSame(player, plugin.commandSender);
+	}
+	
+	@Test
+	public void getEntities_NoEntities_EmptySet()
+	{
+		assertTrue("Entities set was not empty", server.getEntities().isEmpty());
+	}
+	
+	@Test
+	public void getEntities_TwoEntitiesRegistered_SetContainsEntities()
+	{
+		EntityMock entity1 = new SimpleEntityMock();
+		EntityMock entity2 = new SimpleEntityMock();
+		server.registerEntity(entity1);
+		server.registerEntity(entity2);
+		Set<EntityMock> entities = server.getEntities();
+		assertTrue("Set did not contain first entity", entities.contains(entity1));
+		assertTrue("Set did not contain second entity", entities.contains(entity2));
+	}
+	
+	@Test
+	public void getPlayer_NameAndPlayerExists_PlayerFound()
+	{
+		PlayerMock player = new PlayerMock("player");
+		server.addPlayer(player);
+		assertSame(player, server.getPlayer("player"));
+	}
+	
+	@Test
+	public void getPlayer_NameAndPlayerExistsButCasingWrong_PlayerNotFound()
+	{
+		PlayerMock player = new PlayerMock("player");
+		server.addPlayer(player);
+		assertSame(player, server.getPlayer("PLAYER"));
+	}
+	
+	@Test
+	public void getPlayer_UUIDAndPlayerExists_PlayerFound()
+	{
+		PlayerMock player = new PlayerMock("player");
+		server.addPlayer(player);
+		assertSame(player, server.getPlayer(player.getUniqueId()));
+	}
+	
+	@Test
+	public void getPlayer_PlayerNamePartiallyCorrect_PlayerFound()
+	{
+		PlayerMock player = new PlayerMock("player_other");
+		server.addPlayer(player);
+		assertSame(player, server.getPlayer("player"));
+	}
+	
+	@Test
+	public void getPlayer_PlayerNameIncorrect_PlayerNotFound()
+	{
+		PlayerMock player = new PlayerMock("player_other");
+		server.addPlayer(player);
+		assertNull(server.getPlayer("other_player"));
+	}
+	
+	@Test
+	public void getPlayer_PlayerNameCasingIncorrect_PlayerFound()
+	{
+		PlayerMock player = new PlayerMock("player");
+		server.addPlayer(player);
+		assertSame(player, server.getPlayer("PLAYER"));
+	}
+	
+	@Test
+	public void getPlayerExact_CasingMatches_PlayerFound()
+	{
+		PlayerMock player = new PlayerMock("player");
+		server.addPlayer(player);
+		assertSame(player, server.getPlayerExact("player"));
+	}
+	
+	@Test
+	public void getPlayerExact_CasingDoesNotMatch_PlayerNotFoundFound()
+	{
+		PlayerMock player = new PlayerMock("player");
+		server.addPlayer(player);
+		assertNull(server.getPlayerExact("PLAYER"));
+	}
+	
+	@Test
+	public void getPlayerExact_PlayerNameIncorrect_PlayerNotFound()
+	{
+		PlayerMock player = new PlayerMock("player_other");
+		server.addPlayer(player);
+		assertNull(server.getPlayerExact("player"));
 	}
 }
 

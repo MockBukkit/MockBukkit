@@ -12,6 +12,8 @@ import java.util.Iterator;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.permissions.Permission;
+import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.Plugin;
 import org.junit.After;
 import org.junit.Before;
@@ -102,7 +104,37 @@ public class PluginManagerMockTest
 	{
 		pluginManager.assertEventFired(BlockBreakEvent.class);
 	}
+	
+	@Test
+	public void getPermission_NoPermission_Null()
+	{
+		assertNull(pluginManager.getPermission("mockbukkit.perm"));
+	}
 
+	@Test
+	public void getPermission_PermissionAdded_NotNull()
+	{
+		Permission permission = new Permission("mockbukkit.perm");
+		pluginManager.addPermission(permission);
+		assertNotNull(pluginManager.getPermission(permission.getName()));
+	}
+	
+	@Test
+	public void getDefaultPermission_OpPermissionAddedAndAsked_ContainsPermission()
+	{
+		Permission permission = new Permission("mockbukkit.perm", PermissionDefault.OP);
+		pluginManager.addPermission(permission);
+		assertTrue(pluginManager.getDefaultPermissions(true).contains(permission));
+	}
+	
+	@Test
+	public void getDefaultPermission_OpPermissionAskedButNotAdded_DoesNotContainPermission()
+	{
+		Permission permission = new Permission("mockbukkit.perm", PermissionDefault.NOT_OP);
+		pluginManager.addPermission(permission);
+		assertFalse(pluginManager.getDefaultPermissions(true).contains(permission));
+	}
+	
 }
 
 

@@ -5,6 +5,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -59,6 +60,7 @@ import org.bukkit.util.CachedServerIcon;
 import be.seeseemelk.mockbukkit.command.CommandResult;
 import be.seeseemelk.mockbukkit.command.ConsoleCommandSenderMock;
 import be.seeseemelk.mockbukkit.command.MessageTarget;
+import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
 import be.seeseemelk.mockbukkit.inventory.ChestInventoryMock;
@@ -75,6 +77,7 @@ public class ServerMock implements Server
 
 	private final List<PlayerMock> players = new ArrayList<>();
 	private final List<PlayerMock> offlinePlayers = new ArrayList<>();
+	private final Set<EntityMock> entities = new HashSet<>();
 	private final List<World> worlds = new ArrayList<>();
 	private List<Recipe> recipes = new LinkedList<>();
 	private final ItemFactory factory = new ItemFactoryMock();
@@ -90,6 +93,24 @@ public class ServerMock implements Server
 		logger = Logger.getLogger("ServerMock");
 		logger.setLevel(Level.WARNING);
 	}
+	
+	/**
+	 * Registers an entity so that the server can track it more easily.
+	 * Should only be used internally.
+	 */
+	public void registerEntity(EntityMock entity)
+	{
+		entities.add(entity);
+	}
+	
+	/**
+	 * Returns a set of entities that exist on the server instance.
+	 * @return A set of entities that exist on this server instance.
+	 */
+	public Set<EntityMock> getEntities()
+	{
+		return Collections.unmodifiableSet(entities);
+	}
 
 	/**
 	 * Add a specific player to the set.
@@ -100,6 +121,7 @@ public class ServerMock implements Server
 	{
 		players.add(player);
 		offlinePlayers.add(player);
+		registerEntity(player);
 	}
 
 	/**
@@ -144,7 +166,9 @@ public class ServerMock implements Server
 
 		for (int i = 0; i < num; i++)
 		{
-			offlinePlayers.add(playerFactory.createRandomOfflinePlayer());
+			PlayerMock player = playerFactory.createRandomOfflinePlayer();
+			offlinePlayers.add(player);
+			registerEntity(player);
 		}
 	}
 
