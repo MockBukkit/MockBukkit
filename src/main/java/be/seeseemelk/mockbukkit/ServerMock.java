@@ -97,6 +97,7 @@ public class ServerMock implements Server
 	/**
 	 * Registers an entity so that the server can track it more easily.
 	 * Should only be used internally.
+	 * @param entity The entity to register
 	 */
 	public void registerEntity(EntityMock entity)
 	{
@@ -126,8 +127,6 @@ public class ServerMock implements Server
 
 	/**
 	 * Creates a random player and adds it.
-	 * 
-	 * @return The newly created mock player.
 	 */
 	public PlayerMock addPlayer()
 	{
