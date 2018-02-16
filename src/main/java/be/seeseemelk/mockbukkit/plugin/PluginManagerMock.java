@@ -31,6 +31,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.permissions.Permissible;
 import org.bukkit.permissions.Permission;
+import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.EventExecutor;
 import org.bukkit.plugin.InvalidDescriptionException;
 import org.bukkit.plugin.InvalidPluginException;
@@ -45,7 +46,6 @@ import org.bukkit.plugin.java.JavaPluginUtils;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.entity.EntityMock;
 
 public class PluginManagerMock implements PluginManager
 {
@@ -544,15 +544,22 @@ public class PluginManagerMock implements PluginManager
 	@Override
 	public Set<Permission> getDefaultPermissions(boolean op)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Set<Permission> permissions = new HashSet<>();
+		for (Permission permission : this.permissions)
+		{
+			PermissionDefault permissionDefault = permission.getDefault();
+			if (permissionDefault == PermissionDefault.TRUE)
+				permissions.add(permission);
+			else if (op && permissionDefault == PermissionDefault.OP)
+				permissions.add(permission);
+		}
+		return permissions;
 	}
 	
 	@Override
 	public void recalculatePermissionDefaults(Permission perm)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		
 	}
 	
 	/**
@@ -592,16 +599,17 @@ public class PluginManagerMock implements PluginManager
 	@Override
 	public Set<Permissible> getPermissionSubscriptions(String permission)
 	{
-		Set<Permissible> 
+		Set<Permissible> subscriptions = new HashSet<>();
 		for (Entry<Permissible, Set<String>> entry : permissionSubscriptions.entrySet())
 		{
 			Permissible permissible = entry.getKey();
-			String permissions = entry.getValue();
+			Set<String> permissions = entry.getValue();
 			if (permissions.contains(permission))
 			{
-				
+				subscriptions.add(permissible);
 			}
 		}
+		return subscriptions;
 	}
 	
 	@Override
@@ -640,4 +648,3 @@ public class PluginManagerMock implements PluginManager
 	}
 	
 }
-()

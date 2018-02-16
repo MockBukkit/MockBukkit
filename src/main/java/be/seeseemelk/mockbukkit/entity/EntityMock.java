@@ -4,7 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 import java.util.UUID;
@@ -41,6 +43,7 @@ public abstract class EntityMock implements Entity, MessageTarget
 	private boolean operator = false;
 	private String name = "entity";
 	private final Queue<String> messages = new LinkedTransferQueue<>();
+	private final Set<PermissionAttachment> permissionAttachments = new HashSet<>();
 	
 	public EntityMock(UUID uuid)
 	{
@@ -284,8 +287,13 @@ public abstract class EntityMock implements Entity, MessageTarget
 	@Override
 	public boolean hasPermission(String name)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		for (PermissionAttachment attachment : permissionAttachments)
+		{
+			Map<String, Boolean> permissions = attachment.getPermissions();
+			if (permissions.containsKey(name) && permissions.get(name) == true)
+				return true;
+		}
+		return false;
 	}
 	
 	@Override
@@ -298,15 +306,17 @@ public abstract class EntityMock implements Entity, MessageTarget
 	@Override
 	public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		PermissionAttachment attachment = addAttachment(plugin);
+		attachment.setPermission(name, value);
+		return attachment;
 	}
 	
 	@Override
 	public PermissionAttachment addAttachment(Plugin plugin)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		PermissionAttachment attachment = new PermissionAttachment(plugin, this);
+		permissionAttachments.add(attachment);
+		return attachment;
 	}
 	
 	@Override
@@ -334,8 +344,6 @@ public abstract class EntityMock implements Entity, MessageTarget
 	@Override
 	public void recalculatePermissions()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
 		
 	}
 	

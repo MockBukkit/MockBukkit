@@ -51,12 +51,6 @@ public class ServerMockTest
 	}
 	
 	@Test
-	public void test()
-	{
-		throw new UnimplementedOperationException();
-	}
-	
-	@Test
 	public void class_NumberOfPlayers_Zero()
 	{
 		assertEquals(0, server.getOnlinePlayers().size());
@@ -416,11 +410,11 @@ public class ServerMockTest
 	}
 	
 	@Test
-	public void getPlayer_PlayerNameCasingIncorrect_PlayerNotFound()
+	public void getPlayer_PlayerNameCasingIncorrect_PlayerFound()
 	{
 		PlayerMock player = new PlayerMock("player");
 		server.addPlayer(player);
-		assertNull(server.getPlayer("PLAYER"));
+		assertSame(player, server.getPlayer("PLAYER"));
 	}
 	
 	@Test
@@ -432,11 +426,11 @@ public class ServerMockTest
 	}
 	
 	@Test
-	public void getPlayerExact_CasingDoesNotMatch_PlayerFound()
+	public void getPlayerExact_CasingDoesNotMatch_PlayerNotFoundFound()
 	{
 		PlayerMock player = new PlayerMock("player");
 		server.addPlayer(player);
-		assertSame(player, server.getPlayerExact("PLAYER"));
+		assertNull(server.getPlayerExact("PLAYER"));
 	}
 	
 	@Test

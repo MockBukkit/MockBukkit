@@ -348,7 +348,7 @@ public class ServerMock implements Server
 	@Override
 	public Player getPlayerExact(String name)
 	{
-		return this.players.stream().filter(playerMock -> playerMock.getName().equalsIgnoreCase(name)).findFirst().orElse(null);
+		return this.players.stream().filter(playerMock -> playerMock.getName().equals(name)).findFirst().orElse(null);
 	}
 
 	@Override

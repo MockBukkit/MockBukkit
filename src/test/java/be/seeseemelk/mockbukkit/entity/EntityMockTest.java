@@ -243,13 +243,12 @@ public class EntityMockTest
 	}
 	
 	@Test
-	public void hasPermission_NotAddedButDefault_DoesNotHavePermission()
+	public void hasPermission_NotAddedButDefault_DoesPermission()
 	{
 		MockPlugin plugin = MockBukkit.createMockPlugin();
 		Permission permission = new Permission("mockbukkit.perm", PermissionDefault.TRUE);
 		server.getPluginManager().addPermission(permission);
-		entity.addAttachment(plugin, "mockbukkkit.perm", true);
-		//player.addPermission(permission);
+		entity.addAttachment(plugin, "mockbukkit.perm", true);
 		assertTrue(entity.hasPermission("mockbukkit.perm"));
 	}
 	
@@ -261,7 +260,7 @@ public class EntityMockTest
 		server.getPluginManager().addPermission(permission);
 		PermissionAttachment attachment = entity.addAttachment(plugin);
 		attachment.setPermission(permission, true);
-		assertFalse(entity.hasPermission("mockbukkit.perm"));
+		assertTrue(entity.hasPermission("mockbukkit.perm"));
 	}
 	
 	@Test
@@ -272,7 +271,7 @@ public class EntityMockTest
 		server.getPluginManager().addPermission(permission);
 		PermissionAttachment attachment = entity.addAttachment(plugin);
 		attachment.setPermission(permission.getName(), true);
-		assertFalse(entity.hasPermission("mockbukkit.perm"));
+		assertTrue(entity.hasPermission("mockbukkit.perm"));
 	}
 	
 	@Test
@@ -283,7 +282,7 @@ public class EntityMockTest
 		server.getPluginManager().addPermission(permission);
 		PermissionAttachment attachment = entity.addAttachment(plugin);
 		attachment.setPermission(permission.getName(), true);
-		assertFalse(entity.hasPermission("mockbukkit.perm"));
+		assertTrue(entity.hasPermission("mockbukkit.perm"));
 	}
 	
 }
