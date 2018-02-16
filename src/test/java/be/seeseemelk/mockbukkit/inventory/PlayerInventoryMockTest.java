@@ -191,6 +191,70 @@ public class PlayerInventoryMockTest
 		inventory.setHelmet(helmet);
 		assertEquals(helmet, inventory.getHelmet());
 	}
+	
+	@Test
+	public void setContent_ResultFromGetContent_Works()
+	{
+		inventory.setContents(inventory.getContents());
+	}
+	
+	@Test
+	public void setArmorContents_NewArray_ArmorSet()
+	{
+		ItemStack boots = new ItemStack(Material.DIAMOND_BOOTS);
+		ItemStack leggings = new ItemStack(Material.DIAMOND_LEGGINGS);
+		ItemStack chestplate = new ItemStack(Material.DIAMOND_CHESTPLATE);
+		ItemStack helmet = new ItemStack(Material.DIAMOND_HELMET);
+		ItemStack[] contents = {boots, leggings, chestplate, helmet};
+		inventory.setArmorContents(contents);
+		assertEquals(boots, inventory.getBoots());
+		assertEquals(leggings, inventory.getLeggings());
+		assertEquals(chestplate, inventory.getChestplate());
+		assertEquals(helmet, inventory.getHelmet());
+	}
+	
+	@Test
+	public void setItemInOffHand_NewItem_ItemSet()
+	{
+		ItemStack item = new ItemStack(Material.STONE);
+		inventory.setItemInOffHand(item);
+		assertEquals(item, inventory.getItemInOffHand());
+		assertEquals(item, inventory.getItem(PlayerInventoryMock.OFF_HAND));
+	}
+	
+	@Test
+	public void setExtraContents_NewItem_OffHandSet()
+	{
+		ItemStack item = new ItemStack(Material.STONE);
+		inventory.setExtraContents(new ItemStack[]{item});
+		ItemStack[] contents = inventory.getExtraContents();
+		assertEquals(item, contents[0]);
+		assertEquals(item, inventory.getItemInOffHand());
+	}
+	
+	@Test(expected = NullPointerException.class)
+	public void setArmorContents_Null_Exception()
+	{
+		inventory.setArmorContents(null);
+	}
+	
+	@Test(expected = NullPointerException.class)
+	public void setExtraContents_Null_Exception()
+	{
+		inventory.setExtraContents(null);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void setArmorContents_TooLarge_Exception()
+	{
+		inventory.setArmorContents(new ItemStack[5]);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void setExtraContents_TooLarge_Exception()
+	{
+		inventory.setExtraContents(new ItemStack[2]);
+	}
 
 }
 
