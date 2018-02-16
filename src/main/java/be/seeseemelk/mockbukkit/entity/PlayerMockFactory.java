@@ -65,7 +65,8 @@ public final class PlayerMockFactory
 	 */
 	public PlayerMock createRandomOfflinePlayer()
 	{
-		return new PlayerMock(getUniqueRandomName());
+		PlayerMock player = new PlayerMock(getUniqueRandomName());
+		return player;
 	}
 }
 

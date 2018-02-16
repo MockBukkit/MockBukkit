@@ -1,8 +1,6 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
@@ -10,10 +8,8 @@ import java.util.Collection;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
 import java.util.Set;
 import java.util.UUID;
-import java.util.concurrent.LinkedTransferQueue;
 
 import org.bukkit.Achievement;
 import org.bukkit.BanList;
@@ -31,7 +27,6 @@ import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.Statistic;
 import org.bukkit.WeatherType;
-import org.bukkit.World;
 import org.bukkit.advancement.Advancement;
 import org.bukkit.advancement.AdvancementProgress;
 import org.bukkit.attribute.Attribute;
@@ -51,7 +46,6 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityDamageEvent.DamageModifier;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
@@ -61,7 +55,6 @@ import org.bukkit.inventory.MainHand;
 import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.map.MapView;
-import org.bukkit.metadata.MetadataValue;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
@@ -77,32 +70,22 @@ import com.google.common.base.Function;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.attribute.AttributeInstanceMock;
-import be.seeseemelk.mockbukkit.command.MessageTarget;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryViewMock;
 import be.seeseemelk.mockbukkit.inventory.SimpleInventoryViewMock;
-import be.seeseemelk.mockbukkit.metadata.MetadataTable;
 
 
 @SuppressWarnings("deprecation")
-public class PlayerMock implements Player, MessageTarget
+public class PlayerMock extends EntityMock implements Player
 {
 	private static final double MAX_HEALTH = 20.0;
-	private final String name;
-	private final UUID uuid;
-	private final Queue<String> messages = new LinkedTransferQueue<>();
-	private Location location;
-	private boolean teleported;
 	private boolean online;
-	private TeleportCause teleportCause;
 	private PlayerInventoryMock inventory = null;
 	private GameMode gamemode = GameMode.SURVIVAL;
 	private double maxHealth = MAX_HEALTH;
 	private double health = 20.0;
 	private boolean whitelisted = true;
-	private boolean operator = false;
 	private Map<Attribute, AttributeInstanceMock> attributes;
-	private MetadataTable metadataTable = new MetadataTable();
 	private InventoryView inventoryView;
 	
 	{
@@ -118,8 +101,8 @@ public class PlayerMock implements Player, MessageTarget
 
 	public PlayerMock(String name, UUID uuid)
 	{
-		this.name = name;
-		this.uuid = uuid;
+		super(uuid);
+		setName(name);
 		this.online = true;
 
 		if (Bukkit.getWorlds().size() == 0)
@@ -127,44 +110,8 @@ public class PlayerMock implements Player, MessageTarget
 			MockBukkit.getMock().addSimpleWorld("world");
 		}
 
-		location = Bukkit.getWorlds().get(0).getSpawnLocation().clone();
+		setLocation(Bukkit.getWorlds().get(0).getSpawnLocation().clone());
 		closeInventory();
-	}
-
-	/**
-	 * Assert that the actual location of the player is within a certain distance to a given location.
-	 * @param expectedLocation The location the player should be at.
-	 * @param maximumDistance The distance the player may maximumly be separated from the expected location. 
-	 */
-	public void assertLocation(Location expectedLocation, double maximumDistance)
-	{
-		double distance = location.distance(expectedLocation);
-		assertEquals(expectedLocation.getWorld(), location.getWorld());
-		assertTrue(String.format("Distance was <%.3f> but should be less than or equal to <%.3f>", distance,
-				maximumDistance), distance <= maximumDistance);
-	}
-	
-	/**
-	 * Assert that the player teleported to a certain location within a certain distance to a given location.
-	 * Also clears the teleported flag.
-	 * @param expectedLocation The location the player should be at.
-	 * @param maximumDistance The distance the player may maximumly be separated from the expected location.
-	 */
-	public void assertTeleported(Location expectedLocation, double maximumDistance)
-	{
-		assertTrue("Player did not teleport", teleported);
-		assertLocation(expectedLocation, maximumDistance);
-		teleported = false;
-	}
-	
-	/**
-	 * Assert that the player hasn't teleported.
-	 * Also clears the teleported flag.
-	 */
-	public void assertNotTeleported()
-	{
-		assertFalse("Player was teleported", teleported);
-		teleported = false;
 	}
 	
 	/**
@@ -175,38 +122,6 @@ public class PlayerMock implements Player, MessageTarget
 	{
 		assertEquals(expectedGamemode, gamemode);
 	}
-	
-	/**
-	 * Checks if the player has been teleported since the last assert or {@link #clearTeleported}.
-	 * @return {@code true} if the player has been teleported, {@code false} if he hasn't been teleported.
-	 */
-	public boolean hasTeleported()
-	{
-		return teleported;
-	}
-	
-	/**
-	 * Clears the teleported flag.
-	 */
-	public void clearTeleported()
-	{
-		teleported = false;
-	}
-
-	/**
-	 * Get the cause of the last teleport.
-	 * @return The cause of the last teleport.
-	 */
-	public TeleportCause getTeleportCause()
-	{
-		return teleportCause;
-	}
-	
-	@Override
-	public String getName()
-	{
-		return name;
-	}
 
 	@Override
 	public PlayerInventory getInventory()
@@ -216,90 +131,6 @@ public class PlayerMock implements Player, MessageTarget
 			inventory = (PlayerInventoryMock) Bukkit.createInventory(this, InventoryType.PLAYER);
 		}
 		return inventory;
-	}
-
-	@Override
-	public void sendMessage(String message)
-	{
-		messages.add(message);
-	}
-
-	@Override
-	public void sendMessage(String[] messages)
-	{
-		for (String message : messages)
-		{
-			sendMessage(message);
-		}
-	}
-
-	@Override
-	public String nextMessage()
-	{
-		return messages.poll();
-	}
-
-	@Override
-	public boolean equals(Object obj)
-	{
-		if (obj instanceof Player)
-		{
-			return uuid.equals(((Player) obj).getUniqueId());
-		}
-		else
-		{
-			return false;
-		}
-	}
-
-	@Override
-	public UUID getUniqueId()
-	{
-		return uuid;
-	}
-
-	@Override
-	public Location getLocation()
-	{
-		return location.clone();
-	}
-
-	@Override
-	public Location getLocation(Location loc)
-	{
-		loc.setWorld(location.getWorld());
-		loc.setDirection(location.getDirection());
-		loc.setX(location.getX());
-		loc.setY(location.getY());
-		loc.setZ(location.getZ());
-		return loc;
-	}
-
-	@Override
-	public boolean teleport(Location location)
-	{
-		return teleport(location, TeleportCause.PLUGIN);
-	}
-
-	@Override
-	public boolean teleport(Location location, TeleportCause cause)
-	{
-		this.location = location;
-		teleported = true;
-		teleportCause = cause;
-		return true;
-	}
-
-	@Override
-	public boolean teleport(Entity destination)
-	{
-		return teleport(destination, TeleportCause.PLUGIN);
-	}
-
-	@Override
-	public boolean teleport(Entity destination, TeleportCause cause)
-	{
-		return teleport(destination.getLocation(), cause);
 	}
 	
 	@Override
@@ -326,7 +157,7 @@ public class PlayerMock implements Player, MessageTarget
 		if (health <= 0)
 		{
 			this.health = 0;
-			PlayerDeathEvent event = new PlayerDeathEvent(this, new ArrayList<>(), 0, name + " got killed");
+			PlayerDeathEvent event = new PlayerDeathEvent(this, new ArrayList<>(), 0, getName() + " got killed");
 			Bukkit.getPluginManager().callEvent(event);
 		}
 		else if (health > maxHealth)
@@ -418,18 +249,6 @@ public class PlayerMock implements Player, MessageTarget
 	}
 	
 	@Override
-	public boolean isOp()
-	{
-		return this.operator;
-	}
-
-	@Override
-	public void setOp(boolean value)
-	{
-		this.operator = value;
-	}
-	
-	@Override
 	public boolean isOnline()
 	{
 		return this.online;
@@ -438,7 +257,7 @@ public class PlayerMock implements Player, MessageTarget
 	@Override
 	public boolean isBanned()
 	{
-		return MockBukkit.getMock().getBanList(BanList.Type.NAME).isBanned(this.name);
+		return MockBukkit.getMock().getBanList(BanList.Type.NAME).isBanned(getName());
 	}
 	
 	@Override
@@ -452,36 +271,6 @@ public class PlayerMock implements Player, MessageTarget
 		{
 			throw new UnimplementedOperationException();
 		}
-	}
-	
-	@Override
-	public World getWorld()
-	{
-		return location.getWorld();
-	}
-	
-	@Override
-	public void setMetadata(String metadataKey, MetadataValue newMetadataValue)
-	{
-		metadataTable.setMetadata(metadataKey, newMetadataValue);
-	}
-
-	@Override
-	public List<MetadataValue> getMetadata(String metadataKey)
-	{
-		return metadataTable.getMetadata(metadataKey);
-	}
-
-	@Override
-	public boolean hasMetadata(String metadataKey)
-	{
-		return metadataTable.hasMetadata(metadataKey);
-	}
-
-	@Override
-	public void removeMetadata(String metadataKey, Plugin owningPlugin)
-	{
-		metadataTable.removeMetadata(metadataKey, owningPlugin);
 	}
 	
 	@Override

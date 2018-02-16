@@ -12,13 +12,14 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.stream.Collectors;
 import java.util.Random;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.commons.io.FileUtils;
 import org.bukkit.command.PluginCommand;
@@ -44,6 +45,7 @@ import org.bukkit.plugin.java.JavaPluginUtils;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.entity.EntityMock;
 
 public class PluginManagerMock implements PluginManager
 {
@@ -54,16 +56,18 @@ public class PluginManagerMock implements PluginManager
 	private final Map<Plugin, Listener> eventListeners = new HashMap<>();
 	private final List<Event> events = new ArrayList<>();
 	private final List<File> temporaryFiles = new LinkedList<>();
-	private final List<Class<?>> pluginConstructorTypes = Arrays.asList(JavaPluginLoader.class, PluginDescriptionFile.class, File.class, File.class);
-	private final List<Permission> permissions = new ArrayList<>(); 
-
+	private final List<Class<?>> pluginConstructorTypes = Arrays.asList(JavaPluginLoader.class,
+			PluginDescriptionFile.class, File.class, File.class);
+	private final List<Permission> permissions = new ArrayList<>();
+	private final Map<Permissible, Set<String>> permissionSubscriptions = new HashMap<>();
+	
 	@SuppressWarnings("deprecation")
 	public PluginManagerMock(ServerMock server)
 	{
 		this.server = server;
 		loader = new JavaPluginLoader(this.server);
 	}
-
+	
 	/**
 	 * Should be called when the plugin manager is not used anymore.
 	 */
@@ -84,8 +88,11 @@ public class PluginManagerMock implements PluginManager
 	}
 	
 	/**
-	 * Asserts that a specific event or once of it's sub-events has been fired at least once.
-	 * @param eventClass The class of the event to check for.
+	 * Asserts that a specific event or once of it's sub-events has been fired at
+	 * least once.
+	 * 
+	 * @param eventClass
+	 *            The class of the event to check for.
 	 */
 	public void assertEventFired(Class<? extends Event> eventClass)
 	{
@@ -111,13 +118,13 @@ public class PluginManagerMock implements PluginManager
 		}
 		return null;
 	}
-
+	
 	@Override
 	public Plugin[] getPlugins()
 	{
 		return plugins.toArray(new Plugin[plugins.size()]);
 	}
-
+	
 	/**
 	 * Get a collection of all available commands.
 	 * 
@@ -130,10 +137,15 @@ public class PluginManagerMock implements PluginManager
 	
 	/**
 	 * Checks if a constructor is compatible with an array of types.
-	 * @param constructor The constructor to check.
-	 * @param types The array of parameter types the constructor must support.
-	 * Note that the first 4 parameters should be an exact match while the rest don't have to be.
-	 * @return {@code true} if the constructor is compatible, {@code false} if it isn't.
+	 * 
+	 * @param constructor
+	 *            The constructor to check.
+	 * @param types
+	 *            The array of parameter types the constructor must support. Note
+	 *            that the first 4 parameters should be an exact match while the
+	 *            rest don't have to be.
+	 * @return {@code true} if the constructor is compatible, {@code false} if it
+	 *         isn't.
 	 */
 	private boolean isConstructorCompatible(Constructor<?> constructor, Class<?>[] types)
 	{
@@ -159,14 +171,20 @@ public class PluginManagerMock implements PluginManager
 	
 	/**
 	 * Looks for a compatible constructor of a plugin with a certain constructor.
-	 * @param class1 The plugin class for which a constructor should be found.
-	 * @param types The types of parameters that the constructor should be able to except.
-	 * Note that the first 4 parameters should be an exact match while the rest don't have to be.
+	 * 
+	 * @param class1
+	 *            The plugin class for which a constructor should be found.
+	 * @param types
+	 *            The types of parameters that the constructor should be able to
+	 *            except. Note that the first 4 parameters should be an exact match
+	 *            while the rest don't have to be.
 	 * @return A constructor that will take the given types.
-	 * @throws NoSuchMethodException if no compatible constructor could be found.
+	 * @throws NoSuchMethodException
+	 *             if no compatible constructor could be found.
 	 */
 	@SuppressWarnings("unchecked")
-	private Constructor<? extends JavaPlugin> getCompatibleConstructor(Class<? extends JavaPlugin> class1, Class<?>[] types) throws NoSuchMethodException
+	private Constructor<? extends JavaPlugin> getCompatibleConstructor(Class<? extends JavaPlugin> class1,
+			Class<?>[] types) throws NoSuchMethodException
 	{
 		for (Constructor<?> constructor : class1.getDeclaredConstructors())
 		{
@@ -178,12 +196,15 @@ public class PluginManagerMock implements PluginManager
 		}
 		throw new NoSuchMethodException("No compatible constructor for " + class1.getName());
 	}
-
+	
 	/**
 	 * Tries to create a temporary directory.
-	 * @param name The name of the directory to create.
+	 * 
+	 * @param name
+	 *            The name of the directory to create.
 	 * @return The created temporary directory.
-	 * @throws IOException when the directory could not be created.
+	 * @throws IOException
+	 *             when the directory could not be created.
 	 */
 	private File createTemporaryDirectory(String name) throws IOException
 	{
@@ -201,12 +222,18 @@ public class PluginManagerMock implements PluginManager
 	 * Load a plugin from a class. It will use the system resource
 	 * {@code plugin.yml} as the resource file.
 	 * 
-	 * @param description The {@link PluginDescriptionFile} that contains information about the plugin.
-	 * @param class1 The plugin to load.
-	 * @param parameters Extra parameters to pass on to the plugin constructor. Must not be {@code null}.
+	 * @param description
+	 *            The {@link PluginDescriptionFile} that contains information about
+	 *            the plugin.
+	 * @param class1
+	 *            The plugin to load.
+	 * @param parameters
+	 *            Extra parameters to pass on to the plugin constructor. Must not be
+	 *            {@code null}.
 	 * @return The loaded plugin.
 	 */
-	public JavaPlugin loadPlugin(Class<? extends JavaPlugin> class1, PluginDescriptionFile description, Object[] parameters)
+	public JavaPlugin loadPlugin(Class<? extends JavaPlugin> class1, PluginDescriptionFile description,
+			Object[] parameters)
 	{
 		try
 		{
@@ -216,13 +243,15 @@ public class PluginManagerMock implements PluginManager
 				types.add(parameter.getClass());
 			}
 			
-			Constructor<? extends JavaPlugin> constructor = getCompatibleConstructor(class1, types.toArray(new Class<?>[0]));
+			Constructor<? extends JavaPlugin> constructor = getCompatibleConstructor(class1,
+					types.toArray(new Class<?>[0]));
 			constructor.setAccessible(true);
 			
 			Object[] arguments = new Object[types.size()];
 			arguments[0] = loader;
 			arguments[1] = description;
-			arguments[2] = createTemporaryDirectory("MockBukkit-" + description.getName() + "-" + description.getVersion());
+			arguments[2] = createTemporaryDirectory(
+					"MockBukkit-" + description.getName() + "-" + description.getVersion());
 			System.arraycopy(parameters, 0, arguments, 4, parameters.length);
 			
 			JavaPlugin plugin = constructor.newInstance(arguments);
@@ -242,8 +271,11 @@ public class PluginManagerMock implements PluginManager
 	 * Load a plugin from a class. It will use the system resource
 	 * {@code plugin.yml} as the resource file.
 	 * 
-	 * @param description The {@link PluginDescriptionFile} that contains information about the plugin.
-	 * @param class1 The plugin to load.
+	 * @param description
+	 *            The {@link PluginDescriptionFile} that contains information about
+	 *            the plugin.
+	 * @param class1
+	 *            The plugin to load.
 	 * @return The loaded plugin.
 	 */
 	public JavaPlugin loadPlugin(Class<? extends JavaPlugin> class1, PluginDescriptionFile description)
@@ -255,27 +287,34 @@ public class PluginManagerMock implements PluginManager
 	 * Load a plugin from a class. It will use the system resource
 	 * {@code plugin.yml} as the resource file.
 	 * 
-	 * @param class1 The plugin to load.
-	 * @param parameters Extra parameters to pass on to the plugin constructor.
+	 * @param class1
+	 *            The plugin to load.
+	 * @param parameters
+	 *            Extra parameters to pass on to the plugin constructor.
 	 * @return The loaded plugin.
 	 */
 	public JavaPlugin loadPlugin(Class<? extends JavaPlugin> class1, Object[] parameters)
 	{
 		try
 		{
-			return loadPlugin(class1, new PluginDescriptionFile(ClassLoader.getSystemResourceAsStream("plugin.yml")), parameters);
+			return loadPlugin(class1, new PluginDescriptionFile(ClassLoader.getSystemResourceAsStream("plugin.yml")),
+					parameters);
 		}
 		catch (InvalidDescriptionException e)
 		{
 			throw new RuntimeException(e);
 		}
 	}
-
+	
 	/**
 	 * Checks if a method is an event handler and is compatible for a given event.
-	 * @param method The event handler method to test.
-	 * @param event The event the handler should be able to handle.
-	 * @return {@code true} if the handler is compatible with the event, {@code false} if it isn't.
+	 * 
+	 * @param method
+	 *            The event handler method to test.
+	 * @param event
+	 *            The event the handler should be able to handle.
+	 * @return {@code true} if the handler is compatible with the event,
+	 *         {@code false} if it isn't.
 	 */
 	private boolean isEventMethodCompatible(Method handler, Event event)
 	{
@@ -284,12 +323,15 @@ public class PluginManagerMock implements PluginManager
 	}
 	
 	/**
-	 * Tries to invoke an event handler on a certain listener.
-	 * It will pass on any exceptions the handler throws as
-	 * runtime exception.
-	 * @param listener The listener that owns the handler.
-	 * @param handler The handler to call.
-	 * @param event The event to pass on to the handler.
+	 * Tries to invoke an event handler on a certain listener. It will pass on any
+	 * exceptions the handler throws as runtime exception.
+	 * 
+	 * @param listener
+	 *            The listener that owns the handler.
+	 * @param handler
+	 *            The handler to call.
+	 * @param event
+	 *            The event to pass on to the handler.
 	 */
 	private void invokeEventMethod(Listener listener, Method handler, Event event) throws RuntimeException
 	{
@@ -318,13 +360,13 @@ public class PluginManagerMock implements PluginManager
 			}
 		}
 	}
-
+	
 	@Override
 	public void registerEvents(Listener listener, Plugin plugin)
 	{
 		eventListeners.put(plugin, listener);
 	}
-
+	
 	@Override
 	public void enablePlugin(Plugin plugin)
 	{
@@ -340,9 +382,13 @@ public class PluginManagerMock implements PluginManager
 	
 	/**
 	 * Adds a configuration section to a command.
-	 * @param command The command to add it to.
-	 * @param name The name of the section, as read in a configuration file.
-	 * @param value The value of the section, as parsed by {@link YamlConfiguration}
+	 * 
+	 * @param command
+	 *            The command to add it to.
+	 * @param name
+	 *            The name of the section, as read in a configuration file.
+	 * @param value
+	 *            The value of the section, as parsed by {@link YamlConfiguration}
 	 */
 	private void addSection(PluginCommand command, String name, Object value)
 	{
@@ -354,7 +400,8 @@ public class PluginManagerMock implements PluginManager
 			case "aliases":
 				List<String> aliases = new ArrayList<>();
 				if (value instanceof List<?>)
-					command.setAliases(((List<?>) aliases).stream().map(object -> object.toString()).collect(Collectors.toList()));
+					command.setAliases(
+							((List<?>) aliases).stream().map(object -> object.toString()).collect(Collectors.toList()));
 				else
 					command.setAliases(Arrays.asList(value.toString()));
 				break;
@@ -375,7 +422,8 @@ public class PluginManagerMock implements PluginManager
 	/**
 	 * Add commands from a certain plugin to the internal list of commands.
 	 * 
-	 * @param plugin The plugin from which to read commands.
+	 * @param plugin
+	 *            The plugin from which to read commands.
 	 */
 	protected void addCommandsFrom(JavaPlugin plugin)
 	{
@@ -393,28 +441,28 @@ public class PluginManagerMock implements PluginManager
 			}
 		}
 	}
-
+	
 	@Override
 	public void registerInterface(Class<? extends PluginLoader> loader) throws IllegalArgumentException
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean isPluginEnabled(String name)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean isPluginEnabled(Plugin plugin)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public Plugin loadPlugin(File file)
 			throws InvalidPluginException, InvalidDescriptionException, UnknownDependencyException
@@ -422,28 +470,28 @@ public class PluginManagerMock implements PluginManager
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public Plugin[] loadPlugins(File directory)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void disablePlugins()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void clearPlugins()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void registerEvent(Class<? extends Event> event, Listener listener, EventPriority priority,
 			EventExecutor executor, Plugin plugin)
@@ -451,7 +499,7 @@ public class PluginManagerMock implements PluginManager
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void registerEvent(Class<? extends Event> event, Listener listener, EventPriority priority,
 			EventExecutor executor, Plugin plugin, boolean ignoreCancelled)
@@ -459,108 +507,137 @@ public class PluginManagerMock implements PluginManager
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void disablePlugin(Plugin plugin)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public Permission getPermission(String name)
 	{
 		return permissions.stream().filter(permission -> permission.getName().equals(name)).findFirst().orElse(null);
 	}
-
+	
 	@Override
 	public void addPermission(Permission perm)
 	{
 		permissions.add(perm);
 	}
-
+	
 	@Override
 	public void removePermission(Permission perm)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void removePermission(String name)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public Set<Permission> getDefaultPermissions(boolean op)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void recalculatePermissionDefaults(Permission perm)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
+	/**
+	 * Gets a set of permissions that a {@link Permissible} is subscribed to.
+	 * 
+	 * @param permissible
+	 *            The {@link Permissible} to check.
+	 * @return A {@link Set} of permissions the permissible is subscribed to. Is the
+	 *         {@link Permissible} isn't subscribed to any, returns an empty set.
+	 */
+	private Set<String> getPermissionSubscriptions(Permissible permissible)
+	{
+		if (permissionSubscriptions.containsKey(permissible))
+		{
+			return permissionSubscriptions.get(permissible);
+		}
+		else
+		{
+			Set<String> subscriptions = new HashSet<>();
+			permissionSubscriptions.put(permissible, subscriptions);
+			return subscriptions;
+		}
+	}
+	
 	@Override
 	public void subscribeToPermission(String permission, Permissible permissible)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		getPermissionSubscriptions(permissible).add(permission);
 	}
-
+	
 	@Override
 	public void unsubscribeFromPermission(String permission, Permissible permissible)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		getPermissionSubscriptions(permissible).remove(permission);
 	}
-
+	
 	@Override
 	public Set<Permissible> getPermissionSubscriptions(String permission)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Set<Permissible> 
+		for (Entry<Permissible, Set<String>> entry : permissionSubscriptions.entrySet())
+		{
+			Permissible permissible = entry.getKey();
+			String permissions = entry.getValue();
+			if (permissions.contains(permission))
+			{
+				
+			}
+		}
 	}
-
+	
 	@Override
 	public void subscribeToDefaultPerms(boolean op, Permissible permissible)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void unsubscribeFromDefaultPerms(boolean op, Permissible permissible)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public Set<Permissible> getDefaultPermSubscriptions(boolean op)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public Set<Permission> getPermissions()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean useTimings()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 }
+()
