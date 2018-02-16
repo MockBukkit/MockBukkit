@@ -102,6 +102,9 @@ public class WorldMock implements World
 	/**
 	 * Makes sure that a certain block exists on the coordinate.
 	 * Returns that block.
+	 * 
+	 * @param c Creates a block on the given coordinate.
+	 * @return A newly created block at that location.
 	 */
 	public Block createBlock(Coordinate c)
 	{
@@ -112,17 +115,11 @@ public class WorldMock implements World
 		
 		Block block;
 		if (c.y == 0)
-		{
 			block = new BlockMock(Material.BEDROCK);
-		}
 		else if (c.y <= grassHeight)
-		{
 			block = new BlockMock(defaultBlock);
-		}
 		else
-		{
 			block = new BlockMock();
-		}
 		
 		blocks.put(c, block);
 		return block;

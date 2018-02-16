@@ -14,7 +14,7 @@ public class SimpleInventoryMock extends InventoryMock
 	/**
 	 * Creates a very simple inventory with no holder, as name
 	 * {@code Inventory}, a size of 9, and an inventory type of
-	 * {@link InventoryType.CHEST}.
+	 * {@code InventoryType.CHEST}.
 	 */
 	public SimpleInventoryMock()
 	{
