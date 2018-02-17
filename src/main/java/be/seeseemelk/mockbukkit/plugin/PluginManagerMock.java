@@ -19,6 +19,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.apache.commons.io.FileUtils;
@@ -29,6 +30,8 @@ import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.server.PluginDisableEvent;
+import org.bukkit.event.server.PluginEnableEvent;
 import org.bukkit.permissions.Permissible;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
@@ -88,6 +91,57 @@ public class PluginManagerMock implements PluginManager
 	}
 	
 	/**
+	 * Asserts that at least one event conforms to the given predicate.
+	 * @param message The message to display when no event conforms.
+	 * @param predicate The predicate to test against.
+	 */
+	public void assertEventFired(String message, Predicate<Event> predicate)
+	{
+		for (Event event : events)
+		{
+			if (predicate.test(event))
+				return;
+		}
+		fail(message);
+	}
+	
+	/**
+	 * Asserts that at least one event conforms to the given predicate.
+	 * @param predicate The predicate to test against.
+	 */
+	public void assertEventFired(Predicate<Event> predicate)
+	{
+		assertEventFired("Event assert failed", predicate);
+	}
+	
+	/**
+	 * Asserts that there is at least one event of a certain class for which the predicate is true.
+	 * @param message The message to display if no event is found.
+	 * @param eventClass The class type that the event should be an instance of.
+	 * @param predicate The predicate to test the event against.
+	 */
+	@SuppressWarnings("unchecked")
+	public <T extends Event> void assertEventFired(String message, Class<T> eventClass, Predicate<T> predicate)
+	{
+		for (Event event : events)
+		{
+			if (eventClass.isInstance(event) && predicate.test((T) event))
+				return;
+		}
+		fail(message);
+	}
+	
+	/**
+	 * Asserts that there is at least one event of a certain class for which the predicate is true.
+	 * @param eventClass The class type that the event should be an instance of.
+	 * @param predicate The predicate to test the event against.
+	 */
+	public <T extends Event> void assertEventFired(Class<T> eventClass, Predicate<T> predicate)
+	{
+		assertEventFired("No event of the correct class tested true", eventClass, predicate);
+	}
+	
+	/**
 	 * Asserts that a specific event or once of it's sub-events has been fired at
 	 * least once.
 	 * 
@@ -96,14 +150,7 @@ public class PluginManagerMock implements PluginManager
 	 */
 	public void assertEventFired(Class<? extends Event> eventClass)
 	{
-		for (Event event : events)
-		{
-			if (eventClass.isInstance(event))
-			{
-				return;
-			}
-		}
-		fail("No event of that type has been fired");
+		assertEventFired("No event of that type has been fired", event -> eventClass.isInstance(event));
 	}
 	
 	@Override
@@ -337,11 +384,28 @@ public class PluginManagerMock implements PluginManager
 	{
 		try
 		{
+			handler.setAccessible(true);
 			handler.invoke(listener, event);
 		}
 		catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
 		{
 			throw new RuntimeException(e);
+		}
+	}
+	
+	/**
+	 * Executes a certain event on a certain event listener.
+	 * @param event The event to execute.
+	 * @param listener The listener on which to execute the event.
+	 */
+	protected void callEventOn(Event event, Listener listener)
+	{
+		for (Method method : listener.getClass().getMethods())
+		{
+			if (isEventMethodCompatible(method, event))
+			{
+				invokeEventMethod(listener, method, event);
+			}
 		}
 	}
 	
@@ -351,13 +415,7 @@ public class PluginManagerMock implements PluginManager
 		events.add(event);
 		for (Listener listener : eventListeners.values())
 		{
-			for (Method method : listener.getClass().getMethods())
-			{
-				if (isEventMethodCompatible(method, event))
-				{
-					invokeEventMethod(listener, method, event);
-				}
-			}
+			callEventOn(event, listener);
 		}
 	}
 	
@@ -372,7 +430,11 @@ public class PluginManagerMock implements PluginManager
 	{
 		if (plugin instanceof JavaPlugin)
 		{
-			JavaPluginUtils.setEnabled((JavaPlugin) plugin, true);
+			if (!plugin.isEnabled())
+			{
+				JavaPluginUtils.setEnabled((JavaPlugin) plugin, true);
+				callEvent(new PluginEnableEvent(plugin));
+			}
 		}
 		else
 		{
@@ -512,9 +574,17 @@ public class PluginManagerMock implements PluginManager
 	public void disablePlugin(Plugin plugin)
 	{
 		if (plugin instanceof JavaPlugin)
-			JavaPluginUtils.setEnabled((JavaPlugin) plugin, false);
+		{
+			if (plugin.isEnabled())
+			{
+				JavaPluginUtils.setEnabled((JavaPlugin) plugin, false);
+				callEvent(new PluginDisableEvent(plugin));
+			}
+		}
 		else
+		{
 			throw new IllegalArgumentException("Not a JavaPlugin");
+		}
 	}
 	
 	@Override

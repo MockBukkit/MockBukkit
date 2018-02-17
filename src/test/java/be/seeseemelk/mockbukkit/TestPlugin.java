@@ -78,7 +78,7 @@ public class TestPlugin extends JavaPlugin implements Listener
 	}
 	
 	@EventHandler
-	public void onBlockEvent(BlockBreakEvent event)
+	public void onBlockBreak(BlockBreakEvent event)
 	{
 		annotatedBlockBreakEventExecuted = true;
 	}

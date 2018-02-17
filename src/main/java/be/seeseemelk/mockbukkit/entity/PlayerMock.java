@@ -37,6 +37,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.entity.Villager;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
@@ -115,6 +116,20 @@ public class PlayerMock extends EntityMock implements Player
 	public void assertGameMode(GameMode expectedGamemode)
 	{
 		assertEquals(expectedGamemode, gamemode);
+	}
+	
+	/**
+	 * Simulates the player breaking a block.
+	 * @param block The block to break.
+	 * @return {@code true} if the block was broken, {@code false} if it wasn't.
+	 */
+	public boolean simulateBlockBreak(Block block)
+	{
+		BlockBreakEvent event = new BlockBreakEvent(block, this);
+		Bukkit.getPluginManager().callEvent(event);
+		if (!event.isCancelled())
+			block.setType(Material.AIR);
+		return !event.isCancelled();
 	}
 
 	@Override

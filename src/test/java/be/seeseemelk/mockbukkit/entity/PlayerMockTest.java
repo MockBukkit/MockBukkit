@@ -1,14 +1,21 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.block.Block;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryType;
@@ -38,7 +45,7 @@ public class PlayerMockTest
 		uuid = UUID.randomUUID();
 		player = new PlayerMock("player", uuid);
 	}
-	
+
 	@After
 	public void tearDown() throws Exception
 	{
@@ -50,7 +57,7 @@ public class PlayerMockTest
 	{
 		assertNotNull(player.getInventory());
 	}
-	
+
 	@Test
 	public void getInventory_Twice_SameInventory()
 	{
@@ -62,7 +69,7 @@ public class PlayerMockTest
 	{
 		assertEquals("player", player.getName());
 	}
-	
+
 	@Test
 	public void getUniqueId_Default_CorrectUuid()
 	{
@@ -74,59 +81,59 @@ public class PlayerMockTest
 	{
 		assertEquals(GameMode.SURVIVAL, player.getGameMode());
 	}
-	
+
 	@Test
 	public void setGameMode_GameModeChanged_GameModeSet()
 	{
 		player.setGameMode(GameMode.CREATIVE);
 		assertEquals(GameMode.CREATIVE, player.getGameMode());
 	}
-	
+
 	@Test
 	public void assertGameMode_CorrectGameMode_DoesNotAssert()
 	{
 		player.assertGameMode(GameMode.SURVIVAL);
 	}
-	
+
 	@Test(expected = AssertionError.class)
 	public void assertGameMode_WrongGameMode_Asserts()
 	{
 		player.assertGameMode(GameMode.CREATIVE);
 	}
-	
+
 	@Test
 	public void getHealth_Default_EqualsToGetMaxHealth()
 	{
 		assertEquals(player.getMaxHealth(), player.getHealth(), 0);
 	}
-	
+
 	@Test
 	public void setHealth_SomeValue_HealthSetExactly()
 	{
 		player.setHealth(15.5);
 		assertEquals(15.5, player.getHealth(), 0);
 	}
-	
+
 	@Test
 	public void setHealth_NegativeValue_ClampedAtZero()
 	{
 		player.setHealth(-10.0);
 		assertEquals(0, player.getHealth(), 0);
 	}
-	
+
 	@Test
 	public void setHealh_TooHighValue_ClampedAtMaxHealth()
 	{
 		player.setHealth(player.getMaxHealth() + 10.0);
 		assertEquals(player.getMaxHealth(), player.getHealth(), 0);
 	}
-	
+
 	@Test
 	public void getMaxHealth_Default_20()
 	{
 		assertEquals(20.0, player.getMaxHealth(), 0);
 	}
-	
+
 	@Test
 	public void setMaxHealth_Decreased_HealthAndMaxHealthSet()
 	{
@@ -134,7 +141,7 @@ public class PlayerMockTest
 		assertEquals(10.0, player.getMaxHealth(), 0);
 		assertEquals(10.0, player.getHealth(), 0);
 	}
-	
+
 	@Test
 	public void setMaxHealth_Increased_MaxHealthSet()
 	{
@@ -142,7 +149,7 @@ public class PlayerMockTest
 		assertEquals(30.0, player.getMaxHealth(), 0);
 		assertEquals(20.0, player.getHealth(), 0);
 	}
-	
+
 	@Test
 	public void resetMaxHealth_MaxHealthChanged_ResetsBackTo20()
 	{
@@ -152,7 +159,7 @@ public class PlayerMockTest
 		assertEquals(20.0, player.getMaxHealth(), 0);
 		assertEquals(20.0, player.getHealth(), 0);
 	}
-	
+
 	@Test
 	public void damage_LessThanHealth_DamageTaken()
 	{
@@ -161,7 +168,7 @@ public class PlayerMockTest
 		assertEquals(health - 5.0, player.getHealth(), 0);
 		server.getPluginManager().assertEventFired(EntityDamageEvent.class);
 	}
-	
+
 	@Test
 	public void damage_MoreThanHealth_ClampedAtZeroAndDeathEvent()
 	{
@@ -170,7 +177,7 @@ public class PlayerMockTest
 		server.getPluginManager().assertEventFired(EntityDamageEvent.class);
 		server.getPluginManager().assertEventFired(PlayerDeathEvent.class);
 	}
-	
+
 	@Test
 	public void damage_ExactlyHealth_ZeroAndDeathEvent()
 	{
@@ -179,13 +186,13 @@ public class PlayerMockTest
 		server.getPluginManager().assertEventFired(EntityDamageEvent.class);
 		server.getPluginManager().assertEventFired(PlayerDeathEvent.class);
 	}
-	
+
 	@Test
 	public void getAttribute_HealthAttribute_IsMaximumHealth()
 	{
 		assertEquals(20.0, player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getDefaultValue(), 0);
 	}
-	
+
 	@Test
 	public void getOpenInventory_NoneOpened_Null()
 	{
@@ -193,7 +200,7 @@ public class PlayerMockTest
 		assertNotNull(player.getOpenInventory());
 		assertEquals(InventoryType.CRAFTING, view.getType());
 	}
-	
+
 	@Test
 	public void getOpenInventory_InventorySet_InventorySet()
 	{
@@ -201,7 +208,7 @@ public class PlayerMockTest
 		player.openInventory(inventory);
 		assertSame(inventory, player.getOpenInventory());
 	}
-	
+
 	@Test
 	public void openInventory_NothingSet_InventoryViewSet()
 	{
@@ -212,7 +219,7 @@ public class PlayerMockTest
 		assertSame(inventory, view.getTopInventory());
 		assertSame(player.getOpenInventory(), view);
 	}
-	
+
 	@Test
 	public void closeInventory_NoneInventory_CraftingView()
 	{
@@ -220,7 +227,7 @@ public class PlayerMockTest
 		assertNotNull(view);
 		assertEquals(InventoryType.CRAFTING, view.getType());
 	}
-	
+
 	@Test
 	public void performCommand_PerformsCommand()
 	{
@@ -231,14 +238,36 @@ public class PlayerMockTest
 		assertEquals("argB", plugin.commandArguments[1]);
 		assertSame(player, plugin.commandSender);
 	}
-	
+
+	@Test
+	public void simulateBlockBreak_Block_BlockBroken()
+	{
+		MockBukkit.load(TestPlugin.class);
+		Block block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
+		block.setType(Material.STONE);
+		assertTrue(player.simulateBlockBreak(block));
+		block.setType(Material.AIR);
+	}
+
+	@Test
+	public void simulateBlockBreak_BlockButCancelled_BlockNotBroken()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		Bukkit.getPluginManager().registerEvents(new Listener()
+		{
+			@EventHandler
+			public void onBlockBreak(BlockBreakEvent event)
+			{
+				event.setCancelled(true);
+			}
+		}, plugin);
+		Block block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
+		block.setType(Material.STONE);
+		assertFalse(player.simulateBlockBreak(block));
+		block.setType(Material.STONE);
+	}
+
 }
-
-
-
-
-
-
 
 
 
