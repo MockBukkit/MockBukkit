@@ -9,6 +9,7 @@ import static org.junit.Assume.assumeFalse;
 import static org.junit.Assume.assumeNotNull;
 
 import org.bukkit.Bukkit;
+import org.bukkit.event.server.PluginEnableEvent;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -73,8 +74,9 @@ public class MockBukkitTest
 	@Test
 	public void load_MyPlugin()
 	{
-		MockBukkit.mock();
+		ServerMock server = MockBukkit.mock();
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		server.getPluginManager().assertEventFired(PluginEnableEvent.class, event -> event.getPlugin().equals(plugin));
 		assertTrue("Plugin not enabled", plugin.isEnabled());
 		assertTrue("Plugin's onEnable method not executed", plugin.onEnableExecuted);
 	}
