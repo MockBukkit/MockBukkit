@@ -4,21 +4,32 @@ MockBukkit is a framework that makes the unit testing of Bukkit plugins a whole 
 It aims to be a complete mock implementation.
 
 ## Usage
+MockBukkit can easily be included in gradle using jitpack.io
+```gradle
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+dependencies {
+    testCompile 'junit:junit:4.12'
+    testCompile 'com.github.seeseemelk:MockBukkit:master-SNAPSHOT'
+}
+```
+
 In order to use MockBukkit the plugin to be tested needs an extra constructor and it has to be initialised before each test.
 The plugin will need both a default constructor and an extra one that will call a super constructor.
 Your plugins constructor will look like this if your plugin was called ```MyPlugin```
 ```java
 public class MyPlugin extends JavaPlugin
 {
-	public MyPlugin()
-	{
-		super();
-	}
+    public MyPlugin()
+    {
+        super();
+    }
 
-	protected MyPlugin(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file)
-	{
-		super(loader, desecription, dataFolder, file);
-	}
+    protected MyPlugin(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file)
+    {
+        super(loader, desecription, dataFolder, file);
+    }
 }
 ```
 The plugin is now ready to be tested by MockBukkit.
@@ -31,14 +42,14 @@ private MyPlugin plugin;
 @Before
 public void setUp()
 {
-	server = MockBukkit.mock();
-	plugin = (MyPlugin) MockBukkit.load(MyPlugin.class);
+    server = MockBukkit.mock();
+    plugin = (MyPlugin) MockBukkit.load(MyPlugin.class);
 }
 
 @After
 public void tearDown()
 {
-	MockBukkit.unload();
+    MockBukkit.unload();
 }
 ```
 
