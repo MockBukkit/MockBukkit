@@ -26,7 +26,6 @@ import be.seeseemelk.mockbukkit.WorldMock;
 
 public class EntityMockTest
 {
-	@SuppressWarnings("unused")
 	private ServerMock server;
 	private WorldMock world;
 	private EntityMock entity;
