@@ -108,8 +108,7 @@ public class BlockMock implements org.bukkit.block.Block
 	@Deprecated
 	public int getTypeId()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return material.getId();
 	}
 
 	@Override

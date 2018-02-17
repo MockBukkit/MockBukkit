@@ -22,6 +22,13 @@ public class BlockMockTest
 		assertEquals(Material.AIR, block.getType());
 	}
 	
+	@SuppressWarnings("deprecation")
+	@Test
+	public void getTypeId_Default_Air()
+	{
+		assertEquals(Material.AIR.getId(), block.getTypeId());
+	}
+	
 	@Test
 	public void setType_Stone_Set()
 	{
