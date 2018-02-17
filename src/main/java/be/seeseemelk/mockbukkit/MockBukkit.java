@@ -3,7 +3,6 @@ package be.seeseemelk.mockbukkit;
 import java.lang.reflect.Field;
 
 import org.bukkit.Bukkit;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -109,10 +108,7 @@ public class MockBukkit
 	{
 		if (mock != null && mock.getPluginManager() != null)
 		{
-			for (Plugin plugin : mock.getPluginManager().getPlugins())
-			{
-				plugin.onDisable();
-			}
+			mock.getPluginManager().disablePlugins();
 		}
 		mock.getPluginManager().unload();
 		setServerInstanceToNull();

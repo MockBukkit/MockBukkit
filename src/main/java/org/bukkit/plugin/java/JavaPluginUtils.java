@@ -10,7 +10,7 @@ public final class JavaPluginUtils
 	 */
 	public static void setEnabled(JavaPlugin plugin, boolean enabled)
 	{
-		plugin.setEnabled(true);
+		plugin.setEnabled(enabled);
 	}
 
 }

@@ -481,15 +481,15 @@ public class PluginManagerMock implements PluginManager
 	@Override
 	public void disablePlugins()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		for (Plugin plugin : plugins)
+			disablePlugin(plugin);
 	}
 	
 	@Override
 	public void clearPlugins()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		disablePlugins();
+		plugins.clear();
 	}
 	
 	@Override
@@ -511,8 +511,10 @@ public class PluginManagerMock implements PluginManager
 	@Override
 	public void disablePlugin(Plugin plugin)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (plugin instanceof JavaPlugin)
+			JavaPluginUtils.setEnabled((JavaPlugin) plugin, false);
+		else
+			throw new IllegalArgumentException("Not a JavaPlugin");
 	}
 	
 	@Override

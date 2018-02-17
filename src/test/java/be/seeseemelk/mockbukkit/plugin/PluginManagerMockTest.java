@@ -67,7 +67,7 @@ public class PluginManagerMockTest
 	@Test
 	public void getPlugin_PluginName_Plugin()
 	{
-		Plugin plugin = pluginManager.getPlugin("MockBukkitTest");
+		Plugin plugin = pluginManager.getPlugin("MockBukkitTestPlugin");
 		assertNotNull(plugin);
 		assertTrue(plugin instanceof TestPlugin);
 	}
@@ -133,6 +133,37 @@ public class PluginManagerMockTest
 		Permission permission = new Permission("mockbukkit.perm", PermissionDefault.NOT_OP);
 		pluginManager.addPermission(permission);
 		assertFalse(pluginManager.getDefaultPermissions(true).contains(permission));
+	}
+	
+	@Test
+	public void disablePlugin_LoadedPlugin_PluginDisabled()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		assertTrue(plugin.isEnabled());
+		pluginManager.disablePlugin(plugin);
+		assertFalse("Plugin was not disabled", plugin.isEnabled());
+		assertTrue(plugin.onDisableExecuted);
+	}
+	
+	@Test
+	public void disablePlugins_LoadedPlugins_AllDisabled()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		assertTrue(plugin.isEnabled());
+		pluginManager.disablePlugins();
+		assertFalse("Plugin was not disabled", plugin.isEnabled());
+		assertTrue(plugin.onDisableExecuted);
+	}
+	
+	@Test
+	public void clearPlugins_LoadedPlugins_AllPluginsRemove()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		assertTrue(plugin.isEnabled());
+		pluginManager.clearPlugins();
+		assertFalse("Plugin was not disabled", plugin.isEnabled());
+		Plugin[] plugins = pluginManager.getPlugins();
+		assertEquals(0, plugins.length);
 	}
 	
 }
