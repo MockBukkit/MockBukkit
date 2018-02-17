@@ -129,6 +129,15 @@ public class WorldMockTest
 		ChunkMock chunk2 = world.getChunkAt(0, 0);
 		assertEquals(chunk1, chunk2);
 	}
+	
+	@Test
+	public void getName_NameSet_NameExactly()
+	{
+		WorldMock world = new WorldMock();
+		world.setName("world name");
+		assertEquals("world name", world.getName());
+	}
+	
 }
 
 

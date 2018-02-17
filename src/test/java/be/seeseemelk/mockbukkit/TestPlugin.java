@@ -15,6 +15,7 @@ import org.bukkit.plugin.java.JavaPluginLoader;
 public class TestPlugin extends JavaPlugin implements Listener
 {
 	public boolean onEnableExecuted = false;
+	public boolean onDisableExecuted = false;
 	public CommandSender commandSender;
 	public Command command;
 	public String commandLabel;
@@ -47,6 +48,12 @@ public class TestPlugin extends JavaPlugin implements Listener
 	public void onEnable()
 	{
 		onEnableExecuted = true;
+	}
+	
+	@Override
+	public void onDisable()
+	{
+		onDisableExecuted = true;
 	}
 	
 	@Override

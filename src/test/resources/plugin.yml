@@ -1,5 +1,5 @@
-name: MockBukkitTest
-main: be.seeseemelk.mockbukkit.Test
+name: MockBukkitTestPlugin
+main: be.seeseemelk.mockbukkit.TestPlugin
 version: 0.1.0
 commands:
   mockcommand:
