@@ -15,6 +15,7 @@ import org.bukkit.plugin.java.JavaPluginLoader;
 public class TestPlugin extends JavaPlugin implements Listener
 {
 	public boolean onEnableExecuted = false;
+	public boolean onDisableExecuted = false;
 	public CommandSender commandSender;
 	public Command command;
 	public String commandLabel;
@@ -50,6 +51,12 @@ public class TestPlugin extends JavaPlugin implements Listener
 	}
 	
 	@Override
+	public void onDisable()
+	{
+		onDisableExecuted = true;
+	}
+	
+	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
 	{
 		this.commandSender = sender;
@@ -71,7 +78,7 @@ public class TestPlugin extends JavaPlugin implements Listener
 	}
 	
 	@EventHandler
-	public void onBlockEvent(BlockBreakEvent event)
+	public void onBlockBreak(BlockBreakEvent event)
 	{
 		annotatedBlockBreakEventExecuted = true;
 	}

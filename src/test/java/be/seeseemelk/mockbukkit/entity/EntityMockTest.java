@@ -5,7 +5,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 import java.util.UUID;
@@ -27,7 +26,6 @@ import be.seeseemelk.mockbukkit.WorldMock;
 
 public class EntityMockTest
 {
-	@SuppressWarnings("unused")
 	private ServerMock server;
 	private WorldMock world;
 	private EntityMock entity;
@@ -218,9 +216,9 @@ public class EntityMockTest
 		WorldMock world = server.addSimpleWorld("world");
 		WorldMock otherWorld = server.addSimpleWorld("otherWorld");
 		entity.teleport(world.getSpawnLocation());
-		assertSame(world, entity.getWorld());
+		assertEquals(world, entity.getWorld());
 		entity.teleport(otherWorld.getSpawnLocation());
-		assertSame(otherWorld, entity.getWorld());
+		assertEquals(otherWorld, entity.getWorld());
 	}
 	
 	@Test

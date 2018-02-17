@@ -10,8 +10,10 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import org.bukkit.command.PluginCommand;
+import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.Plugin;
@@ -67,7 +69,7 @@ public class PluginManagerMockTest
 	@Test
 	public void getPlugin_PluginName_Plugin()
 	{
-		Plugin plugin = pluginManager.getPlugin("MockBukkitTest");
+		Plugin plugin = pluginManager.getPlugin("MockBukkitTestPlugin");
 		assertNotNull(plugin);
 		assertTrue(plugin instanceof TestPlugin);
 	}
@@ -89,6 +91,28 @@ public class PluginManagerMockTest
 		assertEquals("testcommand", iterator.next().getName());
 		assertEquals("othercommand", iterator.next().getName());
 		assertFalse(iterator.hasNext());
+	}
+	
+	@Test
+	public void assertEventFired_PredicateTrue_DoesNotAssert()
+	{
+		Player player = server.addPlayer();
+		BlockBreakEvent eventToFire = new BlockBreakEvent(null, player);
+		pluginManager.callEvent(eventToFire);
+		pluginManager.assertEventFired(event -> {
+			return event instanceof BlockBreakEvent && ((BlockBreakEvent) event).getPlayer().equals(player);
+		});
+	}
+	
+	@Test(expected = AssertionError.class)
+	public void assertEventFired_PredicateFalse_Asserts()
+	{
+		Player player = server.addPlayer();
+		BlockBreakEvent eventToFire = new BlockBreakEvent(null, player);
+		pluginManager.callEvent(eventToFire);
+		pluginManager.assertEventFired(event -> {
+			return false;
+		});
 	}
 	
 	@Test
@@ -133,6 +157,38 @@ public class PluginManagerMockTest
 		Permission permission = new Permission("mockbukkit.perm", PermissionDefault.NOT_OP);
 		pluginManager.addPermission(permission);
 		assertFalse(pluginManager.getDefaultPermissions(true).contains(permission));
+	}
+	
+	@Test
+	public void disablePlugin_LoadedPlugin_PluginDisabled()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		assertTrue(plugin.isEnabled());
+		pluginManager.disablePlugin(plugin);
+		pluginManager.assertEventFired(PluginDisableEvent.class, event -> event.getPlugin().equals(plugin));
+		assertFalse("Plugin was not disabled", plugin.isEnabled());
+		assertTrue(plugin.onDisableExecuted);
+	}
+	
+	@Test
+	public void disablePlugins_LoadedPlugins_AllDisabled()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		assertTrue(plugin.isEnabled());
+		pluginManager.disablePlugins();
+		assertFalse("Plugin was not disabled", plugin.isEnabled());
+		assertTrue(plugin.onDisableExecuted);
+	}
+	
+	@Test
+	public void clearPlugins_LoadedPlugins_AllPluginsRemove()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		assertTrue(plugin.isEnabled());
+		pluginManager.clearPlugins();
+		assertFalse("Plugin was not disabled", plugin.isEnabled());
+		Plugin[] plugins = pluginManager.getPlugins();
+		assertEquals(0, plugins.length);
 	}
 	
 }

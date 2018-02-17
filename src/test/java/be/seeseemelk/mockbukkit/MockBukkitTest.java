@@ -5,9 +5,11 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assume.assumeFalse;
 import static org.junit.Assume.assumeNotNull;
 
 import org.bukkit.Bukkit;
+import org.bukkit.event.server.PluginEnableEvent;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -72,8 +74,9 @@ public class MockBukkitTest
 	@Test
 	public void load_MyPlugin()
 	{
-		MockBukkit.mock();
-		TestPlugin plugin = (TestPlugin) MockBukkit.load(TestPlugin.class);
+		ServerMock server = MockBukkit.mock();
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		server.getPluginManager().assertEventFired(PluginEnableEvent.class, event -> event.getPlugin().equals(plugin));
 		assertTrue("Plugin not enabled", plugin.isEnabled());
 		assertTrue("Plugin's onEnable method not executed", plugin.onEnableExecuted);
 	}
@@ -101,6 +104,17 @@ public class MockBukkitTest
 		assertEquals("MockPlugin", plugin.getName());
 		assertEquals("1.0.0", plugin.getDescription().getVersion());
 		assertTrue(plugin.isEnabled());
+	}
+	
+	@Test
+	public void unload_PluginLoaded_PluginDisabled()
+	{
+		MockBukkit.mock();
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		assumeFalse(plugin.onDisableExecuted);
+		MockBukkit.unload();
+		assertFalse(plugin.isEnabled());
+		assertTrue(plugin.onDisableExecuted);
 	}
 }
 
