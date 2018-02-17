@@ -21,15 +21,15 @@ Your plugins constructor will look like this if your plugin was called ```MyPlug
 ```java
 public class MyPlugin extends JavaPlugin
 {
-	public MyPlugin()
-	{
-		super();
-	}
+    public MyPlugin()
+    {
+        super();
+    }
 
-	protected MyPlugin(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file)
-	{
-		super(loader, desecription, dataFolder, file);
-	}
+    protected MyPlugin(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file)
+    {
+        super(loader, desecription, dataFolder, file);
+    }
 }
 ```
 The plugin is now ready to be tested by MockBukkit.
@@ -42,14 +42,14 @@ private MyPlugin plugin;
 @Before
 public void setUp()
 {
-	server = MockBukkit.mock();
-	plugin = (MyPlugin) MockBukkit.load(MyPlugin.class);
+    server = MockBukkit.mock();
+    plugin = (MyPlugin) MockBukkit.load(MyPlugin.class);
 }
 
 @After
 public void tearDown()
 {
-	MockBukkit.unload();
+    MockBukkit.unload();
 }
 ```
 
