@@ -384,11 +384,28 @@ public class PluginManagerMock implements PluginManager
 	{
 		try
 		{
+			handler.setAccessible(true);
 			handler.invoke(listener, event);
 		}
 		catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
 		{
 			throw new RuntimeException(e);
+		}
+	}
+	
+	/**
+	 * Executes a certain event on a certain event listener.
+	 * @param event The event to execute.
+	 * @param listener The listener on which to execute the event.
+	 */
+	protected void callEventOn(Event event, Listener listener)
+	{
+		for (Method method : listener.getClass().getMethods())
+		{
+			if (isEventMethodCompatible(method, event))
+			{
+				invokeEventMethod(listener, method, event);
+			}
 		}
 	}
 	
@@ -398,13 +415,7 @@ public class PluginManagerMock implements PluginManager
 		events.add(event);
 		for (Listener listener : eventListeners.values())
 		{
-			for (Method method : listener.getClass().getMethods())
-			{
-				if (isEventMethodCompatible(method, event))
-				{
-					invokeEventMethod(listener, method, event);
-				}
-			}
+			callEventOn(event, listener);
 		}
 	}
 	
