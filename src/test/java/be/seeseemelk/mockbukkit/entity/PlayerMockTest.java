@@ -16,6 +16,7 @@ import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryType;
@@ -240,17 +241,54 @@ public class PlayerMockTest
 	}
 
 	@Test
-	public void simulateBlockBreak_Block_BlockBroken()
+	public void simulateBlockBreak_Survival_BlockBroken()
 	{
 		MockBukkit.load(TestPlugin.class);
+		player.setGameMode(GameMode.SURVIVAL);
 		Block block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
 		block.setType(Material.STONE);
 		assertTrue(player.simulateBlockBreak(block));
+		server.getPluginManager().assertEventFired(BlockDamageEvent.class);
+		server.getPluginManager().assertEventFired(BlockBreakEvent.class);
 		block.setType(Material.AIR);
+	}
+	
+	@Test
+	public void simulateBlockBreak_Creative_BlockBroken()
+	{
+		MockBukkit.load(TestPlugin.class);
+		player.setGameMode(GameMode.CREATIVE);
+		Block block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
+		block.setType(Material.STONE);
+		assertTrue(player.simulateBlockBreak(block));
+		server.getPluginManager().assertEventFired(BlockBreakEvent.class);
+		block.setType(Material.AIR);
+	}
+	
+	@Test
+	public void simulateBlockBreak_Spectator_BlockNotBroken()
+	{
+		MockBukkit.load(TestPlugin.class);
+		player.setGameMode(GameMode.SPECTATOR);
+		Block block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
+		assertFalse(player.simulateBlockBreak(block));
+		block.setType(Material.STONE);
+		block.setType(Material.STONE);
+	}
+	
+	@Test
+	public void simulateBlockBreak_Adventure_BlockNotBroken()
+	{
+		MockBukkit.load(TestPlugin.class);
+		player.setGameMode(GameMode.ADVENTURE);
+		Block block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
+		block.setType(Material.STONE);
+		assertFalse(player.simulateBlockBreak(block));
+		block.setType(Material.STONE);
 	}
 
 	@Test
-	public void simulateBlockBreak_BlockButCancelled_BlockNotBroken()
+	public void simulateBlockBreak_BreakCancelled_BlockNotBroken()
 	{
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
 		Bukkit.getPluginManager().registerEvents(new Listener()
@@ -265,6 +303,81 @@ public class PlayerMockTest
 		block.setType(Material.STONE);
 		assertFalse(player.simulateBlockBreak(block));
 		block.setType(Material.STONE);
+	}
+	
+	@Test
+	public void simulateBlockBreak_SurvivalAndDamageCancelled_BlockNotBroken()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		Bukkit.getPluginManager().registerEvents(new Listener()
+		{
+			@EventHandler
+			public void onBlockDamage(BlockDamageEvent event)
+			{
+				event.setCancelled(true);
+			}
+		}, plugin);
+		Block block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
+		block.setType(Material.STONE);
+		assertFalse(player.simulateBlockBreak(block));
+		block.setType(Material.STONE);
+	}
+	
+	@Test
+	public void simulateBlockBreak_CreativeAndBreakCancelled_BlockNotBroken()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		player.setGameMode(GameMode.CREATIVE);
+		Bukkit.getPluginManager().registerEvents(new Listener()
+		{
+			@EventHandler
+			public void onBlockBreak(BlockBreakEvent event)
+			{
+				event.setCancelled(true);
+			}
+		}, plugin);
+		Block block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
+		block.setType(Material.STONE);
+		assertFalse(player.simulateBlockBreak(block));
+		block.setType(Material.STONE);
+	}
+	
+	@Test
+	public void simulateBlockBreak_CreativeAndDamageCancelled_BlockBroken()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		player.setGameMode(GameMode.CREATIVE);
+		Bukkit.getPluginManager().registerEvents(new Listener()
+		{
+			@EventHandler
+			public void onBlockDamage(BlockDamageEvent event)
+			{
+				event.setCancelled(true);
+			}
+		}, plugin);
+		Block block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
+		block.setType(Material.STONE);
+		assertTrue(player.simulateBlockBreak(block));
+		block.setType(Material.AIR);
+	}
+	
+	@Test
+	public void simulateBlockDamage_Survival_BlockDamaged()
+	{
+		player.setGameMode(GameMode.SURVIVAL);
+		Block block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
+		assertTrue(player.simulateBlockDamage(block));
+	}
+	
+	@Test
+	public void simulateBlockDamage_NotSurvival_BlockNotDamaged()
+	{
+		for (GameMode gm : new GameMode[]{GameMode.CREATIVE, GameMode.ADVENTURE, GameMode.SPECTATOR})
+		{
+			player.setGameMode(gm);
+			Block block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
+			assertFalse("Block was damaged while in gamemode " + gm.name(), player.simulateBlockDamage(block));
+		}
 	}
 
 }
