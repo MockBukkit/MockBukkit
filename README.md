@@ -15,6 +15,9 @@ dependencies {
 }
 ```
 
+Note: use v1.8.8-SNAPSHOT to test a Bukkit 1.8.8 plugin or any other version if the branch exists.
+These branches are considered supported and will get updates backported to them.
+
 In order to use MockBukkit the plugin to be tested needs an extra constructor and it has to be initialised before each test.
 The plugin will need both a default constructor and an extra one that will call a super constructor.
 Your plugins constructor will look like this if your plugin was called ```MyPlugin```
@@ -80,3 +83,12 @@ At y=0 everything will be Material.BEDROCK, and from 1 until 3 (inclusive) will 
 and everything else will be Material.AIR.
 Each block is created the moment it is first accessed, so if only one block is only ever touched only one
 block will ever be created in-memory.
+
+## My tests are being skipped!? (UnimplementedOperationException)
+Sometimes your code may use a method that is not yet implemented in MockBukkit.
+When this happens MockBukkit will, instead of returning placeholder values, throw
+an `UnimplementedOperationException`.
+These exception extends `AssumationException` and will cause the test to be skipped.
+
+These exceptions should just be ignored, though pull requests that add functionality to MockBukkit are always welcome!
+If you don't want to add the required methods yourself you can also request the method on the issues page.
