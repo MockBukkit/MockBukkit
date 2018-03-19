@@ -45,27 +45,14 @@ public class PlayerInventoryMockTest
 		assertSame(player, inventory.getHolder());
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Test
 	public void setItemInMainHand_SomeItem_ItemSet()
 	{
 		ItemStack item = new ItemStack(Material.STONE);
 		item.setAmount(25);
-		inventory.setItemInMainHand(item);
-		assertEquals(item, inventory.getItemInMainHand());
+		inventory.setItemInHand(item);
 		assertEquals(item, inventory.getItemInHand());
 		assertEquals(item, inventory.getContents()[PlayerInventoryMock.SLOT_BAR]);
-	}
-	
-	@SuppressWarnings("deprecation")
-	@Test
-	public void setItemInHand_SomeItem_ItemSet()
-	{
-		ItemStack item = new ItemStack(Material.STONE);
-		item.setAmount(25);
-		inventory.setItemInHand(item);
-		assertEquals(item, inventory.getItemInMainHand());
-		assertEquals(item, inventory.getItemInHand());
 	}
 	
 	@Test
@@ -75,8 +62,8 @@ public class PlayerInventoryMockTest
 		assertEquals(1, inventory.getHeldItemSlot());
 		ItemStack item = new ItemStack(Material.STONE);
 		item.setAmount(25);
-		inventory.setItemInMainHand(item);
-		assertEquals(item, inventory.getItemInMainHand());
+		inventory.setItemInHand(item);
+		assertEquals(item, inventory.getItemInHand());
 		assertEquals(item, inventory.getItem(PlayerInventoryMock.SLOT_BAR + 1));
 	}
 	
@@ -109,12 +96,6 @@ public class PlayerInventoryMockTest
 	}
 	
 	@Test
-	public void getExtraContents_Default_Length1()
-	{
-		assertEquals(1, inventory.getExtraContents().length);
-	}
-	
-	@Test
 	public void setItem_InInventory_ItemInContents()
 	{
 		ItemStack item = new ItemStack(Material.STONE);
@@ -128,14 +109,6 @@ public class PlayerInventoryMockTest
 		ItemStack item = new ItemStack(Material.STONE);
 		inventory.setItem(36, item);
 		assertEquals(item, inventory.getArmorContents()[0]);
-	}
-	
-	@Test
-	public void setItem_InExtraInventory_ItemInExtraContents()
-	{
-		ItemStack item = new ItemStack(Material.STONE);
-		inventory.setItem(40, item);
-		assertEquals(item, inventory.getExtraContents()[0]);
 	}
 	
 	@Test
@@ -213,47 +186,16 @@ public class PlayerInventoryMockTest
 		assertEquals(helmet, inventory.getHelmet());
 	}
 	
-	@Test
-	public void setItemInOffHand_NewItem_ItemSet()
-	{
-		ItemStack item = new ItemStack(Material.STONE);
-		inventory.setItemInOffHand(item);
-		assertEquals(item, inventory.getItemInOffHand());
-		assertEquals(item, inventory.getItem(PlayerInventoryMock.OFF_HAND));
-	}
-	
-	@Test
-	public void setExtraContents_NewItem_OffHandSet()
-	{
-		ItemStack item = new ItemStack(Material.STONE);
-		inventory.setExtraContents(new ItemStack[]{item});
-		ItemStack[] contents = inventory.getExtraContents();
-		assertEquals(item, contents[0]);
-		assertEquals(item, inventory.getItemInOffHand());
-	}
-	
 	@Test(expected = NullPointerException.class)
 	public void setArmorContents_Null_Exception()
 	{
 		inventory.setArmorContents(null);
 	}
 	
-	@Test(expected = NullPointerException.class)
-	public void setExtraContents_Null_Exception()
-	{
-		inventory.setExtraContents(null);
-	}
-	
 	@Test(expected = IllegalArgumentException.class)
 	public void setArmorContents_TooLarge_Exception()
 	{
 		inventory.setArmorContents(new ItemStack[5]);
-	}
-	
-	@Test(expected = IllegalArgumentException.class)
-	public void setExtraContents_TooLarge_Exception()
-	{
-		inventory.setExtraContents(new ItemStack[2]);
 	}
 
 }

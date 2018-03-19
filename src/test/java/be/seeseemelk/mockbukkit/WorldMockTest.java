@@ -71,11 +71,6 @@ public class WorldMockTest
 		assertEquals(spawn.getBlockX() + 10, world.getSpawnLocation().getBlockX());
 		assertEquals(spawn.getBlockY() + 10, world.getSpawnLocation().getBlockY());
 		assertEquals(spawn.getBlockZ() + 10, world.getSpawnLocation().getBlockZ());
-		
-		world.setSpawnLocation(spawn);
-		assertEquals(spawn.getBlockX(), world.getSpawnLocation().getBlockX());
-		assertEquals(spawn.getBlockY(), world.getSpawnLocation().getBlockY());
-		assertEquals(spawn.getBlockZ(), world.getSpawnLocation().getBlockZ());
 	}
 	
 	@Test

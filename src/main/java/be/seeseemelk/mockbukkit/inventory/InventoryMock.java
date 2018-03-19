@@ -10,7 +10,6 @@ import java.util.ListIterator;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryType;
@@ -272,21 +271,6 @@ public abstract class InventoryMock implements org.bukkit.inventory.Inventory
 	}
 	
 	@Override
-	public ItemStack[] getStorageContents()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-	
-	@Override
-	public void setStorageContents(ItemStack[] items) throws IllegalArgumentException
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-		
-	}
-	
-	@Override
 	public boolean contains(int materialId)
 	{
 		// TODO Auto-generated method stub
@@ -433,13 +417,6 @@ public abstract class InventoryMock implements org.bukkit.inventory.Inventory
 	
 	@Override
 	public ListIterator<ItemStack> iterator(int index)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-	
-	@Override
-	public Location getLocation()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

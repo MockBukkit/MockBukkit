@@ -118,16 +118,6 @@ public class EntityMockTest
 	}
 	
 	@Test
-	public void teleport_LocationAndCause_LocationSet()
-	{
-		Location location = entity.getLocation();
-		location.add(0, 10.0, 0);
-		entity.teleport(location, TeleportCause.CHORUS_FRUIT);
-		entity.assertTeleported(location, 0);
-		assertEquals(TeleportCause.CHORUS_FRUIT, entity.getTeleportCause());
-	}
-	
-	@Test
 	public void teleport_Entity_LocationSetToEntity()
 	{
 		SimpleEntityMock entity2 = new SimpleEntityMock();

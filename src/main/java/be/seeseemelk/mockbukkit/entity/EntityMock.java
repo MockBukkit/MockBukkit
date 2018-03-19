@@ -17,7 +17,6 @@ import org.bukkit.EntityEffect;
 import org.bukkit.Location;
 import org.bukkit.Server;
 import org.bukkit.World;
-import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -383,20 +382,6 @@ public abstract class EntityMock implements Entity, MessageTarget
 	}
 	
 	@Override
-	public double getHeight()
-	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
-	}
-	
-	@Override
-	public double getWidth()
-	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
-	}
-	
-	@Override
 	public boolean isOnGround()
 	{
 		// TODO Auto-generated constructor stub
@@ -476,27 +461,6 @@ public abstract class EntityMock implements Entity, MessageTarget
 	
 	@Override
 	public boolean setPassenger(Entity passenger)
-	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
-	}
-	
-	@Override
-	public List<Entity> getPassengers()
-	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
-	}
-	
-	@Override
-	public boolean addPassenger(Entity passenger)
-	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
-	}
-	
-	@Override
-	public boolean removePassenger(Entity passenger)
 	{
 		// TODO Auto-generated constructor stub
 		throw new UnimplementedOperationException();
@@ -607,109 +571,6 @@ public abstract class EntityMock implements Entity, MessageTarget
 	
 	@Override
 	public boolean isCustomNameVisible()
-	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
-	}
-	
-	@Override
-	public void setGlowing(boolean flag)
-	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
-		
-	}
-	
-	@Override
-	public boolean isGlowing()
-	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
-	}
-	
-	@Override
-	public void setInvulnerable(boolean flag)
-	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
-		
-	}
-	
-	@Override
-	public boolean isInvulnerable()
-	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
-	}
-	
-	@Override
-	public boolean isSilent()
-	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
-	}
-	
-	@Override
-	public void setSilent(boolean flag)
-	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
-		
-	}
-	
-	@Override
-	public boolean hasGravity()
-	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
-	}
-	
-	@Override
-	public void setGravity(boolean gravity)
-	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
-		
-	}
-	
-	@Override
-	public int getPortalCooldown()
-	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
-	}
-	
-	@Override
-	public void setPortalCooldown(int cooldown)
-	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
-		
-	}
-	
-	@Override
-	public Set<String> getScoreboardTags()
-	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
-	}
-	
-	@Override
-	public boolean addScoreboardTag(String tag)
-	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
-	}
-	
-	@Override
-	public boolean removeScoreboardTag(String tag)
-	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
-	}
-	
-	@Override
-	public PistonMoveReaction getPistonMoveReaction()
 	{
 		// TODO Auto-generated constructor stub
 		throw new UnimplementedOperationException();

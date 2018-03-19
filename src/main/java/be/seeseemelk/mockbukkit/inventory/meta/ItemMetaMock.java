@@ -195,27 +195,6 @@ public class ItemMetaMock implements ItemMeta
 	}
 
 	@Override
-	public boolean hasLocalizedName()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public String getLocalizedName()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setLocalizedName(String name)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public boolean hasEnchants()
 	{
 		// TODO Auto-generated method stub
@@ -291,21 +270,7 @@ public class ItemMetaMock implements ItemMeta
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
-	@Override
-	public boolean isUnbreakable()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setUnbreakable(boolean unbreakable)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
+	
 	/**
 	 * Asserts that the item meta contains no lore.
 	 * 

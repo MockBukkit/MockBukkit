@@ -32,9 +32,6 @@ public class ItemFactoryMock implements ItemFactory
 			case FIREWORK:
 				// TODO Auto-generated method stub
 				throw new UnimplementedOperationException();
-			case KNOWLEDGE_BOOK:
-				// TODO Auto-generated method stub
-				throw new UnimplementedOperationException();
 			case LEATHER_BOOTS:
 			case LEATHER_CHESTPLATE:
 			case LEATHER_HELMET:
@@ -45,8 +42,6 @@ public class ItemFactoryMock implements ItemFactory
 				// TODO Auto-generated method stub
 				throw new UnimplementedOperationException();
 			case POTION:
-			case LINGERING_POTION:
-			case SPLASH_POTION:
 				// TODO Auto-generated method stub
 				throw new UnimplementedOperationException();
 			case SKULL:

@@ -18,7 +18,7 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	protected static final int CHESTPLATE = 38;
 	protected static final int HELMET = 39;
 	protected static final int OFF_HAND = 40;
-	private int mainHandSlot = 0;
+	private int handSlot = 0;
 	
 	public PlayerInventoryMock(HumanEntity holder, String name)
 	{
@@ -35,12 +35,6 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	public ItemStack[] getArmorContents()
 	{
 		return Arrays.copyOfRange(getContents(), BOOTS, BOOTS+4);
-	}
-	
-	@Override
-	public ItemStack[] getExtraContents()
-	{
-		return Arrays.copyOfRange(getContents(), OFF_HAND, OFF_HAND+1);
 	}
 	
 	@Override
@@ -82,17 +76,6 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	}
 	
 	@Override
-	public void setExtraContents(ItemStack[] items)
-	{
-		if (items == null)
-			throw new NullPointerException("ItemStack was null");
-		else if (items.length > 1)
-			throw new IllegalArgumentException("ItemStack array too large (max: 4, was: " + items.length + ")");
-		items = (items.length == 1) ? items : Arrays.copyOf(items, 1);
-		setItem(OFF_HAND, items[0]);
-	}
-	
-	@Override
 	public void setHelmet(ItemStack helmet)
 	{
 		setItem(HELMET, helmet);
@@ -117,49 +100,22 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	}
 	
 	@Override
-	public ItemStack getItemInMainHand()
-	{
-		return getItem(SLOT_BAR + mainHandSlot);
-	}
-	
-	@Override
-	public void setItemInMainHand(ItemStack item)
-	{
-		setItem(SLOT_BAR + mainHandSlot, item);
-	}
-	
-	@Override
-	public ItemStack getItemInOffHand()
-	{
-		return getItem(OFF_HAND);
-	}
-	
-	@Override
-	public void setItemInOffHand(ItemStack item)
-	{
-		setItem(OFF_HAND, item);
-		
-	}
-	
-	@Deprecated
-	@Override
 	public ItemStack getItemInHand()
 	{
-		return getItemInMainHand();
+		return getItem(handSlot);
 	}
 	
-	@Deprecated
 	@Override
 	public void setItemInHand(ItemStack stack)
 	{
-		setItemInMainHand(stack);
+		setItem(handSlot, stack);
 		
 	}
 	
 	@Override
 	public int getHeldItemSlot()
 	{
-		return mainHandSlot;
+		return handSlot;
 	}
 	
 	@Override
@@ -167,7 +123,7 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	{
 		if (slot < 0 || slot > 8)
 			throw new ArrayIndexOutOfBoundsException("Slot should be within [0-8] (was: " + slot + ")");
-		mainHandSlot = slot;
+		handSlot = slot;
 	}
 	
 	@Override

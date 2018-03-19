@@ -111,13 +111,6 @@ public class ChunkMock implements Chunk
 		loaded = false;
 		return true;
 	}
-
-	@Override
-	public boolean isSlimeChunk()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
 	
 	@Override
 	public int hashCode()

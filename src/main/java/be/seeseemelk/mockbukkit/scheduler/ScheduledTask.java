@@ -79,7 +79,6 @@ public class ScheduledTask implements BukkitTask
 		return isSync;
 	}
 
-	@Override
 	public boolean isCancelled()
 	{
 		return isCancelled;
