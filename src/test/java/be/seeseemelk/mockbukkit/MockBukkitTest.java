@@ -85,7 +85,7 @@ public class MockBukkitTest
 	public void load_TestPluginWithExtraParameter_ExtraParameterPassedOn()
 	{
 		MockBukkit.mock();
-		TestPlugin plugin = (TestPlugin) MockBukkit.load(TestPlugin.class, new Integer(5));
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class, new Integer(5));
 		assertEquals(new Integer(5), plugin.extra);
 	}
 	
@@ -94,6 +94,23 @@ public class MockBukkitTest
 	{
 		MockBukkit.mock();
 		MockBukkit.load(TestPlugin.class, "Hello");
+	}
+	
+	@Test
+	public void loadWith_SecondTextPluginAndResourceFileAsString_PluginLoaded()
+	{
+		MockBukkit.mock();
+		SecondTestPlugin plugin = MockBukkit.loadWith(SecondTestPlugin.class, "second_plugin.yml");
+		assertEquals("Name was not loaded correctly", "SecondTestPlugin", plugin.getName());
+	}
+	
+	@Test
+	public void loadSimple_SecondTextPlugin_PluginLoaded()
+	{
+		MockBukkit.mock();
+		SecondTestPlugin plugin = MockBukkit.loadSimple(SecondTestPlugin.class);
+		assertEquals("Name was not set correctly", "SecondTestPlugin", plugin.getName());
+		assertEquals("Version was not set correctly", "1.0.0", plugin.getDescription().getVersion());
 	}
 	
 	@Test
@@ -116,23 +133,5 @@ public class MockBukkitTest
 		assertFalse(plugin.isEnabled());
 		assertTrue(plugin.onDisableExecuted);
 	}
+	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
