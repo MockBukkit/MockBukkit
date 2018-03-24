@@ -241,7 +241,12 @@ public class PluginManagerMock implements PluginManager
 				return (Constructor<? extends JavaPlugin>) constructor;
 			}
 		}
-		throw new NoSuchMethodException("No compatible constructor for " + class1.getName());
+		
+		StringBuilder parameters = new StringBuilder("[");
+		for (Class<?> type : types)
+			parameters.append(type.getName()).append(", ");
+		String str = parameters.substring(0, parameters.length() - 2) + "]";
+		throw new NoSuchMethodException("No compatible constructor for " + class1.getName() + " with parameters " + str);
 	}
 	
 	/**
