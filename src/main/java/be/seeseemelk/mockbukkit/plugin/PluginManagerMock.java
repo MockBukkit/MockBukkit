@@ -19,6 +19,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -56,7 +57,6 @@ public class PluginManagerMock implements PluginManager
 	private final List<Plugin> plugins = new ArrayList<>();
 	private final JavaPluginLoader loader;
 	private final List<PluginCommand> commands = new ArrayList<>();
-	//private final Map<Plugin, Listener> eventListeners = new HashMap<>();
 	private final Map<Plugin, List<ListenerEntry>> eventListeners = new HashMap<>();
 	private final List<Event> events = new ArrayList<>();
 	private final List<File> temporaryFiles = new LinkedList<>();

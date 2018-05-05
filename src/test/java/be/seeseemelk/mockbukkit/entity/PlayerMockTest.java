@@ -5,8 +5,10 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assume.assumeTrue;
 
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -378,6 +380,60 @@ public class PlayerMockTest
 			Block block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
 			assertFalse("Block was damaged while in gamemode " + gm.name(), player.simulateBlockDamage(block));
 		}
+	}
+	
+	@Test
+	public void simulateBlockDamage_NotInstaBreak_NotBroken()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		player.setGameMode(GameMode.SURVIVAL);
+		AtomicBoolean wasBroken = new AtomicBoolean();
+		Bukkit.getPluginManager().registerEvents(new Listener()
+		{
+			@EventHandler
+			public void onBlockDamage(BlockDamageEvent event)
+			{
+				event.setInstaBreak(false);
+			}
+			
+			@EventHandler
+			public void onBlockBreak(BlockBreakEvent event)
+			{
+				wasBroken.set(true);
+			}
+		}, plugin);
+		
+		Block block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
+		block.setType(Material.STONE);
+		assumeTrue(player.simulateBlockDamage(block));
+		assertFalse("BlockBreakEvent was fired", wasBroken.get());
+	}
+	
+	@Test
+	public void simulateBlockDamage_InstaBreak_Broken()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		player.setGameMode(GameMode.SURVIVAL);
+		AtomicBoolean wasBroken = new AtomicBoolean();
+		Bukkit.getPluginManager().registerEvents(new Listener()
+		{
+			@EventHandler
+			public void onBlockDamage(BlockDamageEvent event)
+			{
+				event.setInstaBreak(true);
+			}
+			
+			@EventHandler
+			public void onBlockBreak(BlockBreakEvent event)
+			{
+				wasBroken.set(true);
+			}
+		}, plugin);
+		
+		Block block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
+		block.setType(Material.STONE);
+		assumeTrue(player.simulateBlockDamage(block));
+		assertTrue("BlockBreakEvent was not fired", wasBroken.get());
 	}
 
 }
