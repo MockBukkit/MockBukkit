@@ -56,7 +56,8 @@ public class PluginManagerMock implements PluginManager
 	private final List<Plugin> plugins = new ArrayList<>();
 	private final JavaPluginLoader loader;
 	private final List<PluginCommand> commands = new ArrayList<>();
-	private final Map<Plugin, Listener> eventListeners = new HashMap<>();
+	//private final Map<Plugin, Listener> eventListeners = new HashMap<>();
+	private final Map<Plugin, List<ListenerEntry>> eventListeners = new HashMap<>();
 	private final List<Event> events = new ArrayList<>();
 	private final List<File> temporaryFiles = new LinkedList<>();
 	private final List<Class<?>> pluginConstructorTypes = Arrays.asList(JavaPluginLoader.class,
@@ -358,76 +359,35 @@ public class PluginManagerMock implements PluginManager
 		}
 	}
 	
-	/**
-	 * Checks if a method is an event handler and is compatible for a given event.
-	 * 
-	 * @param method
-	 *            The event handler method to test.
-	 * @param event
-	 *            The event the handler should be able to handle.
-	 * @return {@code true} if the handler is compatible with the event,
-	 *         {@code false} if it isn't.
-	 */
-	private boolean isEventMethodCompatible(Method handler, Event event)
-	{
-		return handler.isAnnotationPresent(EventHandler.class) && handler.getParameterCount() == 1
-				&& handler.getParameters()[0].getType().isInstance(event);
-	}
-	
-	/**
-	 * Tries to invoke an event handler on a certain listener. It will pass on any
-	 * exceptions the handler throws as runtime exception.
-	 * 
-	 * @param listener
-	 *            The listener that owns the handler.
-	 * @param handler
-	 *            The handler to call.
-	 * @param event
-	 *            The event to pass on to the handler.
-	 */
-	private void invokeEventMethod(Listener listener, Method handler, Event event) throws RuntimeException
-	{
-		try
-		{
-			handler.setAccessible(true);
-			handler.invoke(listener, event);
-		}
-		catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
-		{
-			throw new RuntimeException(e);
-		}
-	}
-	
-	/**
-	 * Executes a certain event on a certain event listener.
-	 * @param event The event to execute.
-	 * @param listener The listener on which to execute the event.
-	 */
-	protected void callEventOn(Event event, Listener listener)
-	{
-		for (Method method : listener.getClass().getMethods())
-		{
-			if (isEventMethodCompatible(method, event))
-			{
-				invokeEventMethod(listener, method, event);
-			}
-		}
-	}
-	
 	@Override
 	public void callEvent(Event event) throws IllegalStateException
 	{
 		events.add(event);
-		for (Listener listener : eventListeners.values())
+		for (List<ListenerEntry> listeners : eventListeners.values())
 		{
-			callEventOn(event, listener);
+			for (ListenerEntry entry : listeners)
+			{
+				if (entry.isCompatibleFor(event))
+				{
+					entry.invokeUnsafe(event);
+				}
+			}
 		}
 	}
 	
 	@Override
 	public void registerEvents(Listener listener, Plugin plugin)
 	{
-		eventListeners.put(plugin, listener);
+		if (!eventListeners.containsKey(plugin))
+			eventListeners.put(plugin, new LinkedList<>());
+		
+		List<ListenerEntry> listeners = eventListeners.get(plugin);
+		for (Method method : listener.getClass().getMethods())
+		{
+			EventHandler annotation = method.getAnnotation(EventHandler.class);
+			if (annotation != null)
+				listeners.add(new ListenerEntry(plugin, listener, method));
+		}
 	}
 	
 	@Override
