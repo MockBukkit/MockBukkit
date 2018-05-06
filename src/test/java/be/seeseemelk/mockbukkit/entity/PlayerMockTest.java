@@ -9,6 +9,7 @@ import static org.junit.Assume.assumeTrue;
 
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -416,7 +417,7 @@ public class PlayerMockTest
 	{
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
 		player.setGameMode(GameMode.SURVIVAL);
-		AtomicBoolean wasBroken = new AtomicBoolean();
+		AtomicInteger brokenCount = new AtomicInteger();
 		Bukkit.getPluginManager().registerEvents(new Listener()
 		{
 			@EventHandler
@@ -428,14 +429,42 @@ public class PlayerMockTest
 			@EventHandler
 			public void onBlockBreak(BlockBreakEvent event)
 			{
-				wasBroken.set(true);
+				brokenCount.incrementAndGet();
 			}
 		}, plugin);
 		
 		BlockMock block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
 		block.setType(Material.STONE);
 		assumeTrue(player.simulateBlockDamage(block));
-		assertTrue("BlockBreakEvent was not fired", wasBroken.get());
+		assertEquals("BlockBreakEvent was not fired only once", 1, brokenCount.get());
+		block.assertType(Material.AIR);
+	}
+	
+	@Test
+	public void simulateBlockBreak_InstaBreak_BreakEventOnlyFiredOnce()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		player.setGameMode(GameMode.SURVIVAL);
+		AtomicInteger brokenCount = new AtomicInteger();
+		Bukkit.getPluginManager().registerEvents(new Listener()
+		{
+			@EventHandler
+			public void onBlockDamage(BlockDamageEvent event)
+			{
+				event.setInstaBreak(true);
+			}
+			
+			@EventHandler
+			public void onBlockBreak(BlockBreakEvent event)
+			{
+				brokenCount.incrementAndGet();
+			}
+		}, plugin);
+		
+		BlockMock block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
+		block.setType(Material.STONE);
+		assumeTrue(player.simulateBlockBreak(block));
+		assertEquals("BlockBreakEvent was not fired only once", 1, brokenCount.get());
 		block.assertType(Material.AIR);
 	}
 
