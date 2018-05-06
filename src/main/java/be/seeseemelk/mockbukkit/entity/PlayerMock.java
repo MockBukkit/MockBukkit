@@ -105,6 +105,23 @@ public class PlayerMock extends EntityMock implements Player
 	{
 		assertEquals(expectedGamemode, gamemode);
 	}
+	
+	/**
+	 * Simulates the player damaging a block just like {@link simulateBlockDamage}.
+	 * However, if {@code InstaBreak} is enabled, it will not automatically fire
+	 * a {@link BlockBreakEvent}.
+	 * It will also still fire a {@link BlockDamageEvent} even if the player is not
+	 * in survival mode.
+	 * 
+	 * @param block The block to damage.
+	 * @return The event that has been fired.
+	 */
+	protected BlockDamageEvent simulateBlockDamagePure(Block block)
+	{
+		BlockDamageEvent event = new BlockDamageEvent(this, block, getItemInHand(), false);
+		Bukkit.getPluginManager().callEvent(event);
+		return event;
+	}
 
 	/**
 	 * Simulates the player damaging a block. Note that this method does not
@@ -122,8 +139,7 @@ public class PlayerMock extends EntityMock implements Player
 	{
 		if (gamemode == GameMode.SURVIVAL)
 		{
-			BlockDamageEvent event = new BlockDamageEvent(this, block, getItemInHand(), false);
-			Bukkit.getPluginManager().callEvent(event);
+			BlockDamageEvent event = simulateBlockDamagePure(block);
 			if (event.getInstaBreak())
 			{
 				BlockBreakEvent breakEvent = new BlockBreakEvent(block, this);
@@ -142,7 +158,8 @@ public class PlayerMock extends EntityMock implements Player
 
 	/**
 	 * Simulates the player breaking a block. This method will not break the
-	 * block if the player is in adventure mode.
+	 * block if the player is in adventure or spectator mode.
+	 * If the player is in survival mode, the player will first damage the block.
 	 * 
 	 * @param block The block to break.
 	 * @return {@code true} if the block was broken, {@code false} if it wasn't
@@ -151,7 +168,7 @@ public class PlayerMock extends EntityMock implements Player
 	public boolean simulateBlockBreak(Block block)
 	{
 		if ((gamemode == GameMode.SPECTATOR || gamemode == GameMode.ADVENTURE)
-				|| (gamemode == GameMode.SURVIVAL && !simulateBlockDamage(block)))
+				|| (gamemode == GameMode.SURVIVAL && simulateBlockDamagePure(block).isCancelled()))
 			return false;
 
 		BlockBreakEvent event = new BlockBreakEvent(block, this);
