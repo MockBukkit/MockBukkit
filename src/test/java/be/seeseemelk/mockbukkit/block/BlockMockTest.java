@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.block;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import org.bukkit.Material;
 import org.junit.Before;
@@ -50,6 +51,22 @@ public class BlockMockTest
 	{
 		block.setData((byte) 25);
 		assertEquals(25, block.getData());
+	}
+	
+	@Test
+	public void assertType_CorrectType_DoesNotFail()
+	{
+		block.setType(Material.STONE);
+		block.assertType(Material.STONE);
+		block.setType(Material.DIRT);
+		block.assertType(Material.DIRT);
+	}
+	
+	@Test(expected = AssertionError.class)
+	public void assertType_IncorrectType_Fails()
+	{
+		block.setType(Material.STONE);
+		block.assertType(Material.DIRT);
 	}
 
 }

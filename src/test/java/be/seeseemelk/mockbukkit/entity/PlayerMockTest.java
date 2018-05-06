@@ -30,6 +30,7 @@ import org.junit.Test;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.TestPlugin;
+import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.inventory.ChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryViewMock;
@@ -247,12 +248,12 @@ public class PlayerMockTest
 	{
 		MockBukkit.load(TestPlugin.class);
 		player.setGameMode(GameMode.SURVIVAL);
-		Block block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
+		BlockMock block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
 		block.setType(Material.STONE);
 		assertTrue(player.simulateBlockBreak(block));
 		server.getPluginManager().assertEventFired(BlockDamageEvent.class);
 		server.getPluginManager().assertEventFired(BlockBreakEvent.class);
-		block.setType(Material.AIR);
+		block.assertType(Material.AIR);
 	}
 	
 	@Test
@@ -260,11 +261,11 @@ public class PlayerMockTest
 	{
 		MockBukkit.load(TestPlugin.class);
 		player.setGameMode(GameMode.CREATIVE);
-		Block block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
+		BlockMock block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
 		block.setType(Material.STONE);
 		assertTrue(player.simulateBlockBreak(block));
 		server.getPluginManager().assertEventFired(BlockBreakEvent.class);
-		block.setType(Material.AIR);
+		block.assertType(Material.AIR);
 	}
 	
 	@Test
@@ -272,10 +273,10 @@ public class PlayerMockTest
 	{
 		MockBukkit.load(TestPlugin.class);
 		player.setGameMode(GameMode.SPECTATOR);
-		Block block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
+		BlockMock block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
+		block.setType(Material.STONE);
 		assertFalse(player.simulateBlockBreak(block));
-		block.setType(Material.STONE);
-		block.setType(Material.STONE);
+		block.assertType(Material.STONE);
 	}
 	
 	@Test
@@ -283,10 +284,10 @@ public class PlayerMockTest
 	{
 		MockBukkit.load(TestPlugin.class);
 		player.setGameMode(GameMode.ADVENTURE);
-		Block block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
+		BlockMock block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
 		block.setType(Material.STONE);
 		assertFalse(player.simulateBlockBreak(block));
-		block.setType(Material.STONE);
+		block.assertType(Material.STONE);
 	}
 
 	@Test
@@ -301,10 +302,10 @@ public class PlayerMockTest
 				event.setCancelled(true);
 			}
 		}, plugin);
-		Block block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
+		BlockMock block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
 		block.setType(Material.STONE);
 		assertFalse(player.simulateBlockBreak(block));
-		block.setType(Material.STONE);
+		block.assertType(Material.STONE);
 	}
 	
 	@Test
@@ -319,10 +320,10 @@ public class PlayerMockTest
 				event.setCancelled(true);
 			}
 		}, plugin);
-		Block block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
+		BlockMock block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
 		block.setType(Material.STONE);
 		assertFalse(player.simulateBlockBreak(block));
-		block.setType(Material.STONE);
+		block.assertType(Material.STONE);
 	}
 	
 	@Test
@@ -338,10 +339,10 @@ public class PlayerMockTest
 				event.setCancelled(true);
 			}
 		}, plugin);
-		Block block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
+		BlockMock block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
 		block.setType(Material.STONE);
 		assertFalse(player.simulateBlockBreak(block));
-		block.setType(Material.STONE);
+		block.assertType(Material.STONE);
 	}
 	
 	@Test
@@ -357,17 +358,17 @@ public class PlayerMockTest
 				event.setCancelled(true);
 			}
 		}, plugin);
-		Block block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
+		BlockMock block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
 		block.setType(Material.STONE);
 		assertTrue(player.simulateBlockBreak(block));
-		block.setType(Material.AIR);
+		block.assertType(Material.AIR);
 	}
 	
 	@Test
 	public void simulateBlockDamage_Survival_BlockDamaged()
 	{
 		player.setGameMode(GameMode.SURVIVAL);
-		Block block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
+		BlockMock block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
 		assertTrue(player.simulateBlockDamage(block));
 	}
 	
@@ -403,10 +404,11 @@ public class PlayerMockTest
 			}
 		}, plugin);
 		
-		Block block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
+		BlockMock block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
 		block.setType(Material.STONE);
 		assumeTrue(player.simulateBlockDamage(block));
 		assertFalse("BlockBreakEvent was fired", wasBroken.get());
+		block.assertType(Material.STONE);
 	}
 	
 	@Test
@@ -430,10 +432,11 @@ public class PlayerMockTest
 			}
 		}, plugin);
 		
-		Block block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
+		BlockMock block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
 		block.setType(Material.STONE);
 		assumeTrue(player.simulateBlockDamage(block));
 		assertTrue("BlockBreakEvent was not fired", wasBroken.get());
+		block.assertType(Material.AIR);
 	}
 
 }
