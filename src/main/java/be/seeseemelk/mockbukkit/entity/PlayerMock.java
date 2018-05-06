@@ -109,6 +109,10 @@ public class PlayerMock extends EntityMock implements Player
 	/**
 	 * Simulates the player damaging a block. Note that this method does not
 	 * anything unless the player is in survival mode.
+	 * If {@code InstaBreak} is set to true by an event handler, a 
+	 * {@link BlockBreakEvent} is immediately fired.
+	 * The result will then still be whether or not the {@link BlockDamageEvent} was cancelled
+	 * or not, not the later {@link BlockBreakEvent}.
 	 * 
 	 * @param block The block to damage.
 	 * @return {@code true} if the block was damaged, {@code false} if the event
@@ -120,6 +124,14 @@ public class PlayerMock extends EntityMock implements Player
 		{
 			BlockDamageEvent event = new BlockDamageEvent(this, block, getItemInHand(), false);
 			Bukkit.getPluginManager().callEvent(event);
+			if (event.getInstaBreak())
+			{
+				BlockBreakEvent breakEvent = new BlockBreakEvent(block, this);
+				Bukkit.getPluginManager().callEvent(breakEvent);
+				if (!breakEvent.isCancelled())
+					block.setType(Material.AIR);
+			}
+			
 			return !event.isCancelled();
 		}
 		else
