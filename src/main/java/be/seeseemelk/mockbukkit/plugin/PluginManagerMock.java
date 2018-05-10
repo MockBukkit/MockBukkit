@@ -3,14 +3,17 @@ package be.seeseemelk.mockbukkit.plugin;
 import static org.junit.Assert.fail;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -349,13 +352,41 @@ public class PluginManagerMock implements PluginManager
 	{
 		try
 		{
-			return loadPlugin(class1, new PluginDescriptionFile(ClassLoader.getSystemResourceAsStream("plugin.yml")),
-					parameters);
+			URL pluginUrl = findFileInPluginRoot(class1, "plugin.yml");
+			return loadPlugin(class1, new PluginDescriptionFile(pluginUrl.openStream()), parameters);
 		}
-		catch (InvalidDescriptionException e)
+		catch (InvalidDescriptionException | IOException e)
 		{
 			throw new RuntimeException(e);
 		}
+	}
+	
+	/**
+	 * Finds a file in the system root of a class.
+	 * This is very similar to using {@code ClassLoader.getSystemResource(file)},
+	 * but this method is aware that different subprojects (using Gradle, Eclipse,
+	 * or some other build system) can contain files with similar names and it
+	 * should still get the correct one.
+	 * @param class1 The class that is in a subpackage of where to get the file.
+	 * @param file The name of the file to get.
+	 * @return A URL to get the file or <code>null</code> if no file can be found.
+	 * @throws IOException Thrown when the file wan't be found or loaded.
+	 */
+	private URL findFileInPluginRoot(Class<?> class1, String file) throws IOException
+	{
+		Enumeration<URL> resources = class1.getClassLoader().getResources(file);
+		URL classUrl = class1.getResource(class1.getSimpleName() + ".class");
+		URL pluginUrl = null;
+		while (resources.hasMoreElements())
+		{
+			pluginUrl = resources.nextElement();
+			String rootDirectory = pluginUrl.toString().substring(0, pluginUrl.toString().length() - file.length());
+			if (classUrl.toString().startsWith(rootDirectory))
+				break;
+		}
+		if (pluginUrl == null)
+			throw new FileNotFoundException(String.format("Could not find file '%s'", file));
+		return pluginUrl;
 	}
 	
 	@Override
