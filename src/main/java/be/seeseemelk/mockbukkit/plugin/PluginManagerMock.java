@@ -379,10 +379,13 @@ public class PluginManagerMock implements PluginManager
 		URL pluginUrl = null;
 		while (resources.hasMoreElements())
 		{
-			pluginUrl = resources.nextElement();
-			String rootDirectory = pluginUrl.toString().substring(0, pluginUrl.toString().length() - file.length());
+			URL url = resources.nextElement();
+			String rootDirectory = url.toString().substring(0, url.toString().length() - file.length());
 			if (classUrl.toString().startsWith(rootDirectory))
+			{
+				pluginUrl = url;
 				break;
+			}
 		}
 		if (pluginUrl == null)
 			throw new FileNotFoundException(String.format("Could not find file '%s'", file));

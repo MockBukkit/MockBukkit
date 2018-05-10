@@ -79,6 +79,20 @@ public class MockBukkit
 	 *            The plugin's main class to load.
 	 * @param plugin
 	 *            The plugin to load for mocking.
+	 * @return An instance of the plugin's main class.
+	 */
+	public static <T extends JavaPlugin> T load(Class<T> plugin)
+	{
+		return load(plugin, new Object[0]);
+	}
+
+	/**
+	 * Loads and enables a plugin for mocking.
+	 * 
+	 * @param <T>
+	 *            The plugin's main class to load.
+	 * @param plugin
+	 *            The plugin to load for mocking.
 	 * @param parameters
 	 *            Extra parameters to pass on to the plugin constructor.
 	 * @return An instance of the plugin's main class.
@@ -208,20 +222,6 @@ public class MockBukkit
 		{
 			throw new IllegalStateException("Not mocking");
 		}
-	}
-	
-	/**
-	 * Loads and enables a plugin for mocking.
-	 * 
-	 * @param <T>
-	 *            The plugin's main class to load.
-	 * @param plugin
-	 *            The plugin to load for mocking.
-	 * @return An instance of the plugin's main class.
-	 */
-	public static <T extends JavaPlugin> T load(Class<T> plugin)
-	{
-		return load(plugin, new Object[0]);
 	}
 	
 	/**
