@@ -2,10 +2,14 @@ package be.seeseemelk.mockbukkit.block;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.junit.Before;
 import org.junit.Test;
+
+import be.seeseemelk.mockbukkit.WorldMock;
 
 public class BlockMockTest
 {
@@ -51,6 +55,38 @@ public class BlockMockTest
 	{
 		block.setData((byte) 25);
 		assertEquals(25, block.getData());
+	}
+	
+	@Test
+	public void getLocation_Default_Null()
+	{
+		assertNull(block.getLocation());
+	}
+
+	@Test
+	public void getLocation_CustomLocation_LocationSet()
+	{
+		WorldMock world = new WorldMock();
+		Location location = new Location(world, 5, 2, 1);
+		block = new BlockMock(Material.AIR, location);
+		assertEquals(location, block.getLocation());
+	}
+
+	@Test
+	public void getWorld_AnyWorld_WorldReturned()
+	{
+		WorldMock world = new WorldMock();
+		block = new BlockMock(new Location(world, 0, 0, 0));
+		assertEquals(world, block.getWorld());
+	}
+
+	@Test
+	public void getXYZ_FromLocation_XYZReturned()
+	{
+		block = new BlockMock(new Location(null, 1, 2, 3));
+		assertEquals(1, block.getX());
+		assertEquals(2, block.getY());
+		assertEquals(3, block.getZ());
 	}
 	
 	@Test

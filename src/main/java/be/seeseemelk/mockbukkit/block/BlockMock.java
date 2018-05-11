@@ -23,6 +23,7 @@ import junit.framework.AssertionFailedError;
 
 public class BlockMock implements org.bukkit.block.Block
 {
+	private final Location location;
 	private BlockState state;
 	private Material material;
 	private byte data;
@@ -36,6 +37,15 @@ public class BlockMock implements org.bukkit.block.Block
 	}
 	
 	/**
+	 * Creates a basic block made of air at a certain location.
+	 * @param location The location of the block.
+	 */
+	public BlockMock(Location location)
+	{
+		this(Material.AIR, location);
+	}
+	
+	/**
 	 * Creates a basic block with a given material.
 	 * 
 	 * @param material
@@ -43,7 +53,18 @@ public class BlockMock implements org.bukkit.block.Block
 	 */
 	public BlockMock(Material material)
 	{
+		this(material, null);
+	}
+	
+	/**
+	 * Creates a basic block with a given material that is also linked to a specific location.
+	 * @param material The material of the block.
+	 * @param location The location of the block. Can be {@code null} if not needed.
+	 */
+	public BlockMock(Material material, Location location)
+	{
 		this.material = material;
+		this.location = location;
 		state = new BlockStateMock();
 	}
 	
@@ -158,36 +179,31 @@ public class BlockMock implements org.bukkit.block.Block
 	@Override
 	public World getWorld()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return location.getWorld();
 	}
 	
 	@Override
 	public int getX()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return location.getBlockX();
 	}
 	
 	@Override
 	public int getY()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return location.getBlockY();
 	}
 	
 	@Override
 	public int getZ()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return location.getBlockZ();
 	}
 	
 	@Override
 	public Location getLocation()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return location;
 	}
 	
 	@Override
