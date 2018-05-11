@@ -352,44 +352,37 @@ public class PluginManagerMock implements PluginManager
 	{
 		try
 		{
-			URL pluginUrl = findFileInPluginRoot(class1, "plugin.yml");
-			return loadPlugin(class1, new PluginDescriptionFile(pluginUrl.openStream()), parameters);
+			PluginDescriptionFile description = findPluginDescription(class1);
+			return loadPlugin(class1, description, parameters);
 		}
-		catch (InvalidDescriptionException | IOException e)
+		catch (IOException | InvalidDescriptionException e)
 		{
 			throw new RuntimeException(e);
 		}
 	}
 	
 	/**
-	 * Finds a file in the system root of a class.
-	 * This is very similar to using {@code ClassLoader.getSystemResource(file)},
-	 * but this method is aware that different subprojects (using Gradle, Eclipse,
-	 * or some other build system) can contain files with similar names and it
-	 * should still get the correct one.
+	 * Tries to find the correct plugin.yml for a given plugin.
+	 * It does this by opening each plugin.yml that it finds and
+	 * comparing the 'main' property to the qualified name of the
+	 * plugin class.
 	 * @param class1 The class that is in a subpackage of where to get the file.
-	 * @param file The name of the file to get.
-	 * @return A URL to get the file or <code>null</code> if no file can be found.
+	 * @return The plugin description file.
 	 * @throws IOException Thrown when the file wan't be found or loaded.
+	 * @throws InvalidDescriptionException If the plugin description file is formatted incorrectly.
 	 */
-	private URL findFileInPluginRoot(Class<?> class1, String file) throws IOException
+	private PluginDescriptionFile findPluginDescription(Class<? extends JavaPlugin> class1) throws IOException, InvalidDescriptionException
 	{
-		Enumeration<URL> resources = class1.getClassLoader().getResources(file);
-		URL classUrl = class1.getResource(class1.getSimpleName() + ".class");
-		URL pluginUrl = null;
+		Enumeration<URL> resources = class1.getClassLoader().getResources("plugin.yml");
 		while (resources.hasMoreElements())
 		{
 			URL url = resources.nextElement();
-			String rootDirectory = url.toString().substring(0, url.toString().length() - file.length());
-			if (classUrl.toString().startsWith(rootDirectory))
-			{
-				pluginUrl = url;
-				break;
-			}
+			PluginDescriptionFile description = new PluginDescriptionFile(url.openStream());
+			String mainClass = description.getMain();
+			if (class1.getName().equals(mainClass))
+				return description;
 		}
-		if (pluginUrl == null)
-			throw new FileNotFoundException(String.format("Could not find file '%s'", file));
-		return pluginUrl;
+		throw new FileNotFoundException(String.format("Could not find file plugin.yml. Maybe forgot to add the 'main' property?"));
 	}
 	
 	@Override
