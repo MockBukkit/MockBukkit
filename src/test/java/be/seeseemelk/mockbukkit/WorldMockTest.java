@@ -16,6 +16,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import be.seeseemelk.mockbukkit.block.BlockMock;
+
 public class WorldMockTest
 {
 	private ServerMock server;
@@ -50,6 +52,18 @@ public class WorldMockTest
 		assertEquals(Material.AIR, world.getBlockAt(0, 10, 0).getType());
 		world.getBlockAt(0, 10, 0).setType(Material.WOOD);
 		assertEquals(Material.WOOD, world.getBlockAt(0, 10, 0).getType());
+	}
+	
+	@Test
+	public void getBlockAt_AnyBlock_LocationSet()
+	{
+		WorldMock world = new WorldMock();
+		BlockMock block = world.getBlockAt(1, 2, 3);
+		Location location = block.getLocation();
+		assertEquals(1, location.getBlockX());
+		assertEquals(2, location.getBlockY());
+		assertEquals(3, location.getBlockZ());
+		assertEquals(world, block.getWorld());
 	}
 	
 	@Test
