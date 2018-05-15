@@ -3,14 +3,17 @@ package be.seeseemelk.mockbukkit.plugin;
 import static org.junit.Assert.fail;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -349,13 +352,37 @@ public class PluginManagerMock implements PluginManager
 	{
 		try
 		{
-			return loadPlugin(class1, new PluginDescriptionFile(ClassLoader.getSystemResourceAsStream("plugin.yml")),
-					parameters);
+			PluginDescriptionFile description = findPluginDescription(class1);
+			return loadPlugin(class1, description, parameters);
 		}
-		catch (InvalidDescriptionException e)
+		catch (IOException | InvalidDescriptionException e)
 		{
 			throw new RuntimeException(e);
 		}
+	}
+	
+	/**
+	 * Tries to find the correct plugin.yml for a given plugin.
+	 * It does this by opening each plugin.yml that it finds and
+	 * comparing the 'main' property to the qualified name of the
+	 * plugin class.
+	 * @param class1 The class that is in a subpackage of where to get the file.
+	 * @return The plugin description file.
+	 * @throws IOException Thrown when the file wan't be found or loaded.
+	 * @throws InvalidDescriptionException If the plugin description file is formatted incorrectly.
+	 */
+	private PluginDescriptionFile findPluginDescription(Class<? extends JavaPlugin> class1) throws IOException, InvalidDescriptionException
+	{
+		Enumeration<URL> resources = class1.getClassLoader().getResources("plugin.yml");
+		while (resources.hasMoreElements())
+		{
+			URL url = resources.nextElement();
+			PluginDescriptionFile description = new PluginDescriptionFile(url.openStream());
+			String mainClass = description.getMain();
+			if (class1.getName().equals(mainClass))
+				return description;
+		}
+		throw new FileNotFoundException(String.format("Could not find file plugin.yml. Maybe forgot to add the 'main' property?"));
 	}
 	
 	@Override

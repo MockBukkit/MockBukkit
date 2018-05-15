@@ -113,13 +113,14 @@ public class WorldMock implements World
 		else if (c.y < 0)
 			throw new ArrayIndexOutOfBoundsException("Y smaller than 0");
 		
+		Location location = new Location(this, c.x, c.y, c.z);
 		BlockMock block;
 		if (c.y == 0)
-			block = new BlockMock(Material.BEDROCK);
+			block = new BlockMock(Material.BEDROCK, location);
 		else if (c.y <= grassHeight)
-			block = new BlockMock(defaultBlock);
+			block = new BlockMock(defaultBlock, location);
 		else
-			block = new BlockMock();
+			block = new BlockMock(location);
 		
 		blocks.put(c, block);
 		return block;
