@@ -72,6 +72,19 @@ MockBukkit makes it easy to create several mock players to use in unit testing.
 By running ```server.setPlayers(int numberOfPlayers)``` one can set the number of online players.
 From then on it's possible to get a certain player using ```server.getPlayer(int i)```.
 
+An even easier way to create a player on the fly is by simply using
+```java
+PlayerMock player = server.addPlayer();
+```
+
+A mock player also supports several simulated actions, such as damaging a block or even
+breaking it. This will fire all the required events and will remove the block if the
+events weren't cancelled.
+```java
+Block block = ...;
+player.simulateBlockBreak(block);
+```
+
 ### Mock Worlds
 Another feature is the easy creation of mock worlds.
 One can make a superflat world using one simple command:
