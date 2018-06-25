@@ -31,7 +31,7 @@ public class MyPlugin extends JavaPlugin
 
     protected MyPlugin(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file)
     {
-        super(loader, desecription, dataFolder, file);
+        super(loader, description, dataFolder, file);
     }
 }
 ```
