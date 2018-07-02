@@ -78,6 +78,7 @@ public class PlayerMock extends EntityMock implements Player
 	private PlayerInventoryMock inventory = null;
 	private GameMode gamemode = GameMode.SURVIVAL;
 	private double maxHealth = MAX_HEALTH;
+	private String displayName = null;
 	private double health = 20.0;
 	private boolean whitelisted = true;
 	private Map<Attribute, AttributeInstanceMock> attributes;
@@ -99,6 +100,7 @@ public class PlayerMock extends EntityMock implements Player
 	{
 		super(uuid);
 		setName(name);
+		setDisplayName(name);
 		this.online = true;
 
 		if (Bukkit.getWorlds().size() == 0)
@@ -112,21 +114,21 @@ public class PlayerMock extends EntityMock implements Player
 
 	/**
 	 * Assert that the player is in a specific gamemode.
-	 * 
+	 *
 	 * @param expectedGamemode The gamemode the player should be in.
 	 */
 	public void assertGameMode(GameMode expectedGamemode)
 	{
 		assertEquals(expectedGamemode, gamemode);
 	}
-	
+
 	/**
 	 * Simulates the player damaging a block just like {@link simulateBlockDamage}.
 	 * However, if {@code InstaBreak} is enabled, it will not automatically fire
 	 * a {@link BlockBreakEvent}.
 	 * It will also still fire a {@link BlockDamageEvent} even if the player is not
 	 * in survival mode.
-	 * 
+	 *
 	 * @param block The block to damage.
 	 * @return The event that has been fired.
 	 */
@@ -140,11 +142,11 @@ public class PlayerMock extends EntityMock implements Player
 	/**
 	 * Simulates the player damaging a block. Note that this method does not
 	 * anything unless the player is in survival mode.
-	 * If {@code InstaBreak} is set to true by an event handler, a 
+	 * If {@code InstaBreak} is set to true by an event handler, a
 	 * {@link BlockBreakEvent} is immediately fired.
 	 * The result will then still be whether or not the {@link BlockDamageEvent} was cancelled
 	 * or not, not the later {@link BlockBreakEvent}.
-	 * 
+	 *
 	 * @param block The block to damage.
 	 * @return {@code true} if the block was damaged, {@code false} if the event
 	 *         was cancelled or the player was not in survival gamemode.
@@ -161,7 +163,7 @@ public class PlayerMock extends EntityMock implements Player
 				if (!breakEvent.isCancelled())
 					block.setType(Material.AIR);
 			}
-			
+
 			return !event.isCancelled();
 		}
 		else
@@ -174,7 +176,7 @@ public class PlayerMock extends EntityMock implements Player
 	 * Simulates the player breaking a block. This method will not break the
 	 * block if the player is in adventure or spectator mode.
 	 * If the player is in survival mode, the player will first damage the block.
-	 * 
+	 *
 	 * @param block The block to break.
 	 * @return {@code true} if the block was broken, {@code false} if it wasn't
 	 *         or if the player was in adventure mode or in spectator mode.
@@ -903,13 +905,13 @@ public class PlayerMock extends EntityMock implements Player
 	public String getDisplayName()
 	{
 		// TODO Auto-generated method stub
-		return null;
+		return displayName;
 	}
 
 	@Override
 	public void setDisplayName(String name)
 	{
-		// TODO Auto-generated method stub
+		this.displayName = name;
 
 	}
 
