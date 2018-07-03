@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.entity;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assume.assumeTrue;
@@ -459,6 +460,19 @@ public class PlayerMockTest
 		assumeTrue(player.simulateBlockBreak(block));
 		assertEquals("BlockBreakEvent was not fired only once", 1, brokenCount.get());
 		block.assertType(Material.AIR);
+	}
+	
+	@Test
+	public void getDisplayName_Default_SameAsPlayerUsername()
+	{
+		assertEquals(player.getName(), player.getDisplayName());
+	}
+	
+	@Test
+	public void getDisplayName_NameSet_NameSet()
+	{
+		player.setDisplayName("Some Display Name");
+		assertEquals("Some Display Name", player.getDisplayName());
 	}
 
 }
