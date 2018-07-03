@@ -904,7 +904,6 @@ public class PlayerMock extends EntityMock implements Player
 	@Override
 	public String getDisplayName()
 	{
-		// TODO Auto-generated method stub
 		return displayName;
 	}
 
@@ -912,7 +911,6 @@ public class PlayerMock extends EntityMock implements Player
 	public void setDisplayName(String name)
 	{
 		this.displayName = name;
-
 	}
 
 	@Override
