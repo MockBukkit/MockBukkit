@@ -69,6 +69,7 @@ import be.seeseemelk.mockbukkit.inventory.ItemFactoryMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
 import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
+import be.seeseemelk.mockbukkit.scoreboard.ScoreboardManagerMock;
 
 @SuppressWarnings("deprecation")
 public class ServerMock implements Server
@@ -83,6 +84,7 @@ public class ServerMock implements Server
 	private final ItemFactory factory = new ItemFactoryMock();
 	private final PlayerMockFactory playerFactory = new PlayerMockFactory();
 	private final PluginManagerMock pluginManager = new PluginManagerMock(this);
+	private final ScoreboardManagerMock scoreboardManager = new ScoreboardManagerMock();
 	private ConsoleCommandSender consoleSender;
 	private BukkitSchedulerMock scheduler = new BukkitSchedulerMock();
 	private PlayerList playerList = new PlayerList();
@@ -980,8 +982,7 @@ public class ServerMock implements Server
 	@Override
 	public ScoreboardManager getScoreboardManager()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return scoreboardManager;
 	}
 
 	@Override
