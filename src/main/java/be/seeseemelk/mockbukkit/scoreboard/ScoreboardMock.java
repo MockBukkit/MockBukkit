@@ -150,4 +150,15 @@ public class ScoreboardMock implements Scoreboard
 		objectivesByDisplaySlot.put(slot, objective);
 	}
 
+	/**
+	 * Removes an objective off this scoreboard.
+	 * @param objectiveMock The objective to remove.
+	 */
+	protected void unregister(ObjectiveMock objectiveMock)
+	{
+		objectives.remove(objectiveMock.getName());
+		if (objectiveMock.getDisplaySlot() != null)
+			objectivesByDisplaySlot.remove(objectiveMock.getDisplaySlot());
+	}
+
 }

@@ -1,5 +1,8 @@
 package be.seeseemelk.mockbukkit.scoreboard;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.bukkit.OfflinePlayer;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
@@ -12,6 +15,7 @@ public class ObjectiveMock implements Objective
 	private final ScoreboardMock scoreboard;
 	private final String name;
 	private final String criteria;
+	private final Map<String, ScoreMock> scores = new HashMap<>();
 	private String displayName;
 	private DisplaySlot displaySlot;
 
@@ -19,6 +23,7 @@ public class ObjectiveMock implements Objective
 	{
 		this.scoreboard = scoreboard;
 		this.name = name;
+		this.displayName = name;
 		this.criteria = criteria;
 	}
 
@@ -62,14 +67,14 @@ public class ObjectiveMock implements Objective
 	@Override
 	public void unregister() throws IllegalStateException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		scoreboard.unregister(this);
 	}
 
 	@Override
 	public void setDisplaySlot(DisplaySlot slot) throws IllegalStateException
 	{
 		displaySlot = slot;
+		scoreboard.setDisplaySlot(this, slot);
 	}
 
 	@Override
@@ -81,15 +86,20 @@ public class ObjectiveMock implements Objective
 	@Override
 	public Score getScore(OfflinePlayer player) throws IllegalArgumentException, IllegalStateException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getScore(player.getName());	
 	}
 
 	@Override
 	public Score getScore(String entry) throws IllegalArgumentException, IllegalStateException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (scores.containsKey(entry))
+			return scores.get(entry);
+		else
+		{
+			ScoreMock score = new ScoreMock(entry);
+			scores.put(entry, score);
+			return score;
+		}
 	}
 
 }
