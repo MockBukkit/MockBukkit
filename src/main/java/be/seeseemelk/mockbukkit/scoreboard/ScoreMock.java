@@ -7,13 +7,13 @@ import org.bukkit.scoreboard.Scoreboard;
 
 public class ScoreMock implements Score
 {
-	private final Objective objective;
+	private final ObjectiveMock objective;
 	private final String entry;
 	private OfflinePlayer player = null;
 	private int score = 0;
 	private boolean set = false;
 
-	public ScoreMock(Objective objective, String entry)
+	public ScoreMock(ObjectiveMock objective, String entry)
 	{
 		this.objective = objective;
 		this.entry = entry;
@@ -41,7 +41,7 @@ public class ScoreMock implements Score
 	}
 
 	@Override
-	public Objective getObjective()
+	public ObjectiveMock getObjective()
 	{
 		return objective;
 	}
@@ -49,7 +49,10 @@ public class ScoreMock implements Score
 	@Override
 	public int getScore() throws IllegalStateException
 	{
-		return score;
+		if (objective.isRegistered())
+			return score;
+		else
+			throw new IllegalStateException("Objective is not registered");
 	}
 
 	@Override

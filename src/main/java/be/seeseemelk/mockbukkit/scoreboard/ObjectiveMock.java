@@ -6,7 +6,6 @@ import java.util.Map;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.Score;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
@@ -69,6 +68,15 @@ public class ObjectiveMock implements Objective
 	{
 		scoreboard.unregister(this);
 	}
+	
+	/**
+	 * Checks if the objective is still registered.
+	 * @return {@code true} if the objective is still registered, {@code false} if it has been unregistered.
+	 */
+	public boolean isRegistered()
+	{
+		return scoreboard.getObjectives().contains(this);
+	}
 
 	@Override
 	public void setDisplaySlot(DisplaySlot slot) throws IllegalStateException
@@ -84,19 +92,19 @@ public class ObjectiveMock implements Objective
 	}
 
 	@Override
-	public Score getScore(OfflinePlayer player) throws IllegalArgumentException, IllegalStateException
+	public ScoreMock getScore(OfflinePlayer player) throws IllegalArgumentException, IllegalStateException
 	{
 		return getScore(player.getName());	
 	}
 
 	@Override
-	public Score getScore(String entry) throws IllegalArgumentException, IllegalStateException
+	public ScoreMock getScore(String entry) throws IllegalArgumentException, IllegalStateException
 	{
 		if (scores.containsKey(entry))
 			return scores.get(entry);
 		else
 		{
-			ScoreMock score = new ScoreMock(entry);
+			ScoreMock score = new ScoreMock(this, entry);
 			scores.put(entry, score);
 			return score;
 		}

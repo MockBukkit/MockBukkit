@@ -980,7 +980,7 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public ScoreboardManager getScoreboardManager()
+	public ScoreboardManagerMock getScoreboardManager()
 	{
 		return scoreboardManager;
 	}
