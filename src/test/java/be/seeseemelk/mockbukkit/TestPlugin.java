@@ -1,6 +1,8 @@
 package be.seeseemelk.mockbukkit;
 
 import java.io.File;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -48,6 +50,7 @@ public class TestPlugin extends JavaPlugin implements Listener
 	public void onEnable()
 	{
 		onEnableExecuted = true;
+		getLogger().info("Hello");
 	}
 	
 	@Override

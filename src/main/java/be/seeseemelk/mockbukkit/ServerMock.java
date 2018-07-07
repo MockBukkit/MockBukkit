@@ -2,6 +2,8 @@ package be.seeseemelk.mockbukkit;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -15,6 +17,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Level;
+import java.util.logging.LogManager;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -54,7 +57,6 @@ import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.ServicesManager;
 import org.bukkit.plugin.messaging.Messenger;
-import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.util.CachedServerIcon;
 
 import be.seeseemelk.mockbukkit.command.CommandResult;
@@ -91,9 +93,18 @@ public class ServerMock implements Server
 	private GameMode defaultGameMode = GameMode.SURVIVAL;
 
 	public ServerMock()
-	{
+	{		
 		logger = Logger.getLogger("ServerMock");
-		logger.setLevel(Level.WARNING);
+		try
+		{
+			InputStream stream = ClassLoader.getSystemResourceAsStream("logger.properties");
+			LogManager.getLogManager().readConfiguration(stream);
+		}
+		catch (IOException e)
+		{
+			logger.warning("Could not load file logger.properties");	
+		}
+		logger.setLevel(Level.ALL);
 	}
 	
 	/**
