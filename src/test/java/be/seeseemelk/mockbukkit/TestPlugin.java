@@ -50,7 +50,6 @@ public class TestPlugin extends JavaPlugin implements Listener
 	public void onEnable()
 	{
 		onEnableExecuted = true;
-		getLogger().info("Hello");
 	}
 	
 	@Override
