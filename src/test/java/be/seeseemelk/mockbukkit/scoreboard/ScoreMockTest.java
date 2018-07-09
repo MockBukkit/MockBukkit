@@ -1,7 +1,9 @@
 package be.seeseemelk.mockbukkit.scoreboard;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
 import org.junit.Before;
@@ -34,7 +36,7 @@ public class ScoreMockTest
 	}
 	
 	@Test
-	public void getEntry_ReturnsCorrectValue()
+	public void getEntry_ReturnsEntry()
 	{
 		assertEquals("Entry", score.getEntry());
 	}
@@ -72,4 +74,24 @@ public class ScoreMockTest
 		score.setPlayer(player);
 		assertSame(player, score.getPlayer());
 	}
+	
+	@Test
+	public void isSet_NotSet_ReturnsFalse()
+	{
+		assertFalse(score.isScoreSet());
+	}
+	
+	@Test
+	public void isSet_Set_ReturnsTrue()
+	{
+		score.setScore(5);
+		assertTrue(score.isScoreSet());
+	}
+	
+	@Test
+	public void getScoreboard_ReturnsScoreboard()
+	{
+		assertSame(scoreboard, score.getScoreboard());
+	}
+	
 }
