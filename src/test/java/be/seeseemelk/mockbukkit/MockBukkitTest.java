@@ -34,8 +34,7 @@ public class MockBukkitTest
 	@Test
 	public void setServerInstanceToNull()
 	{
-		ServerMock server = new ServerMock();
-		Bukkit.setServer(server);
+		MockBukkit.mock();
 		assumeNotNull(Bukkit.getServer());
 		MockBukkit.setServerInstanceToNull();
 		assertNull(Bukkit.getServer());
