@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
+import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.InvalidDescriptionException;
@@ -47,7 +48,12 @@ public class MockBukkit
 		}
 		
 		mock = new ServerMock();
+		
+		Level defaultLevel = mock.getLogger().getLevel();
+		mock.getLogger().setLevel(Level.WARNING);
 		Bukkit.setServer(mock);
+		mock.getLogger().setLevel(defaultLevel);
+		
 		return mock;
 	}
 	
