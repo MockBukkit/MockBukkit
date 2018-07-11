@@ -23,6 +23,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.Recipe;
+import org.bukkit.scoreboard.ScoreboardManager;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -439,6 +440,13 @@ public class ServerMockTest
 		PlayerMock player = new PlayerMock("player_other");
 		server.addPlayer(player);
 		assertNull(server.getPlayerExact("player"));
+	}
+	
+	@Test
+	public void getScoreboardManager_NotNull()
+	{
+		ScoreboardManager manager = server.getScoreboardManager();
+		assertNotNull(manager);
 	}
 }
 
