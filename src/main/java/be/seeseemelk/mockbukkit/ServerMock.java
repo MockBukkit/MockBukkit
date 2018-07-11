@@ -2,6 +2,8 @@ package be.seeseemelk.mockbukkit;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -15,6 +17,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Level;
+import java.util.logging.LogManager;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -46,7 +49,6 @@ import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.ServicesManager;
 import org.bukkit.plugin.messaging.Messenger;
-import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.util.CachedServerIcon;
 
 import com.avaje.ebean.config.ServerConfig;
@@ -63,6 +65,7 @@ import be.seeseemelk.mockbukkit.inventory.ItemFactoryMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
 import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
+import be.seeseemelk.mockbukkit.scoreboard.ScoreboardManagerMock;
 
 @SuppressWarnings("deprecation")
 public class ServerMock implements Server
@@ -77,15 +80,25 @@ public class ServerMock implements Server
 	private final ItemFactory factory = new ItemFactoryMock();
 	private final PlayerMockFactory playerFactory = new PlayerMockFactory();
 	private final PluginManagerMock pluginManager = new PluginManagerMock(this);
+	private final ScoreboardManagerMock scoreboardManager = new ScoreboardManagerMock();
 	private ConsoleCommandSender consoleSender;
 	private BukkitSchedulerMock scheduler = new BukkitSchedulerMock();
 	private PlayerList playerList = new PlayerList();
 	private GameMode defaultGameMode = GameMode.SURVIVAL;
 
 	public ServerMock()
-	{
+	{		
 		logger = Logger.getLogger("ServerMock");
-		logger.setLevel(Level.WARNING);
+		try
+		{
+			InputStream stream = ClassLoader.getSystemResourceAsStream("logger.properties");
+			LogManager.getLogManager().readConfiguration(stream);
+		}
+		catch (IOException e)
+		{
+			logger.warning("Could not load file logger.properties");	
+		}
+		logger.setLevel(Level.ALL);
 	}
 	
 	/**
@@ -958,10 +971,9 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public ScoreboardManager getScoreboardManager()
+	public ScoreboardManagerMock getScoreboardManager()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return scoreboardManager;
 	}
 
 	@Override
