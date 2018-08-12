@@ -7,8 +7,6 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-
 public class PlayerInventoryMock extends InventoryMock implements PlayerInventory
 {
 	protected static final int HOTBAR = 0;
@@ -169,12 +167,4 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 			throw new ArrayIndexOutOfBoundsException("Slot should be within [0-8] (was: " + slot + ")");
 		mainHandSlot = slot;
 	}
-	
-	@Override
-	public int clear(int id, int data)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-	
 }

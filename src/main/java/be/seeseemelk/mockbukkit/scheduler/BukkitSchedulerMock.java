@@ -180,7 +180,6 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-
 	}
 
 	@Override
@@ -188,15 +187,6 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-
-	}
-
-	@Override
-	public void cancelAllTasks()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
 	}
 
 	@Override

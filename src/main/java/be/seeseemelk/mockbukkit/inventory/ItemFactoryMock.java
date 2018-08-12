@@ -18,18 +18,10 @@ public class ItemFactoryMock implements ItemFactory
 	{
 		switch (material)
 		{
-			case BANNER:
-			case STANDING_BANNER:
-			case WALL_BANNER:
-				// TODO Auto-generated method stub
-				throw new UnimplementedOperationException();
 			case BOOK:
 				// TODO Auto-generated method stub
 				throw new UnimplementedOperationException();
 			case ENCHANTED_BOOK:
-				// TODO Auto-generated method stub
-				throw new UnimplementedOperationException();
-			case FIREWORK:
 				// TODO Auto-generated method stub
 				throw new UnimplementedOperationException();
 			case KNOWLEDGE_BOOK:
@@ -49,16 +41,8 @@ public class ItemFactoryMock implements ItemFactory
 			case SPLASH_POTION:
 				// TODO Auto-generated method stub
 				throw new UnimplementedOperationException();
-			case SKULL:
-			case SKULL_ITEM:
-				// TODO Auto-generated method stub
-				throw new UnimplementedOperationException();
 			case EGG:
 			case DRAGON_EGG:
-			case MONSTER_EGG:
-			case MONSTER_EGGS:
-				// TODO Auto-generated method stub
-				throw new UnimplementedOperationException();
 			default:
 				return ItemMetaMock.class;
 		}
@@ -145,6 +129,13 @@ public class ItemFactoryMock implements ItemFactory
 
 	@Override
 	public Color getDefaultLeatherColor()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public Material updateMaterial(ItemMeta meta, Material material) throws IllegalArgumentException
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
