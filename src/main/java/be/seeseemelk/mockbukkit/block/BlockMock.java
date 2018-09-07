@@ -14,6 +14,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.PistonMoveReaction;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
@@ -149,13 +150,6 @@ public class BlockMock implements org.bukkit.block.Block
 	}
 	
 	@Override
-	@Deprecated
-	public int getTypeId()
-	{
-		return material.getId();
-	}
-	
-	@Override
 	public byte getLightLevel()
 	{
 		// TODO Auto-generated method stub
@@ -221,21 +215,6 @@ public class BlockMock implements org.bukkit.block.Block
 	}
 	
 	@Override
-	@Deprecated
-	public void setData(byte data)
-	{
-		this.data = data;
-	}
-	
-	@Override
-	@Deprecated
-	public void setData(byte data, boolean applyPhysics)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-	
-	@Override
 	public void setType(Material type)
 	{
 		material = type;
@@ -245,30 +224,6 @@ public class BlockMock implements org.bukkit.block.Block
 	public void setType(Material type, boolean applyPhysics)
 	{
 		setType(material);
-	}
-	
-	@Override
-	@Deprecated
-	public boolean setTypeId(int type)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-	
-	@Override
-	@Deprecated
-	public boolean setTypeId(int type, boolean applyPhysics)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-	
-	@Override
-	@Deprecated
-	public boolean setTypeIdAndData(int type, byte data, boolean applyPhysics)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 	
 	@Override
@@ -399,6 +354,27 @@ public class BlockMock implements org.bukkit.block.Block
 	
 	@Override
 	public Collection<ItemStack> getDrops(ItemStack tool)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public BlockData getBlockData()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setBlockData(BlockData data)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setBlockData(BlockData data, boolean applyPhysics)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
