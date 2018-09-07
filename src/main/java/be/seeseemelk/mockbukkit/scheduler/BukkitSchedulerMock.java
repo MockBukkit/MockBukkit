@@ -3,7 +3,11 @@ package be.seeseemelk.mockbukkit.scheduler;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -18,10 +22,27 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	private long currentTick = 0;
 	private int id = 0;
 	private List<ScheduledTask> tasks = new LinkedList<>();
+	private ExecutorService pool = Executors.newCachedThreadPool();
+	private AtomicInteger asyncTasksRunning = new AtomicInteger();
+	private AtomicReference<Throwable> asyncException = new AtomicReference<>();
+	private int asyncTasksQueued = 0;
 
 	public BukkitSchedulerMock()
 	{
 		
+	}
+	
+	/**
+	 * Shuts the scheduler down.
+	 * Note that this function throws exception from old async tasks.
+	 */
+	public void shutdown() throws RuntimeException
+	{
+		waitAsyncTasksFinished();
+		pool.shutdown();
+		
+		if (asyncException.get() != null)
+			throw new RuntimeException(asyncException.get());
 	}
 	
 	/**
@@ -46,7 +67,15 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		{
 			if (task.getScheduledTick() == currentTick)
 			{
-				task.run();
+				if (task.isSync())
+					task.run();
+				else
+				{
+					asyncTasksRunning.incrementAndGet();
+					pool.execute(task.getRunnable());
+					asyncTasksQueued--;
+				}
+				
 				if (task instanceof RepeatingTask && !task.isCancelled())
 					tasks.add(task);
 			}
@@ -66,6 +95,29 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		for (long i = 0; i < ticks; i++)
 		{
 			performOneTick();
+		}
+	}
+	
+	/**
+	 * Waits until all asynchronous tasks have finished executing.
+	 * If you have an asynchronous task that runs indefinitely,
+	 * this function will never return.
+	 */
+	public void waitAsyncTasksFinished()
+	{
+		// Make sure all tasks (except for repeating async tasks) get to execute.
+		while (asyncTasksQueued > 0)
+			performOneTick();
+		
+		// Wait for all tasks to finish executing.
+		while (asyncTasksRunning.get() > 0)
+		{
+			try
+			{
+				Thread.sleep(1);
+			}
+			catch (InterruptedException e)
+			{}
 		}
 	}
 
@@ -220,8 +272,11 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public BukkitTask runTaskAsynchronously(Plugin plugin, Runnable task) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		ScheduledTask scheduledTask = new ScheduledTask(id++, plugin, false,
+				currentTick, new AsyncRunnable(task));
+		asyncTasksRunning.incrementAndGet();
+		pool.execute(scheduledTask.getRunnable());
+		return scheduledTask;
 	}
 
 	@Override
@@ -242,8 +297,11 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public BukkitTask runTaskLaterAsynchronously(Plugin plugin, Runnable task, long delay)
 			throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		ScheduledTask scheduledTask = new ScheduledTask(id++, plugin, false,
+				currentTick + delay, new AsyncRunnable(task));
+		tasks.add(scheduledTask);
+		asyncTasksQueued++;
+		return scheduledTask;
 	}
 
 	@Override
@@ -258,8 +316,10 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public BukkitTask runTaskTimerAsynchronously(Plugin plugin, Runnable task, long delay, long period)
 			throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		RepeatingTask scheduledTask = new RepeatingTask(id++, plugin, false,
+				currentTick + delay, period, new AsyncRunnable(task));
+		tasks.add(scheduledTask);
+		return scheduledTask;
 	}
 
 	@Override
@@ -270,9 +330,31 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		throw new UnimplementedOperationException();
 	}
 
+	class AsyncRunnable implements Runnable
+	{
+		private final Runnable task;
+		
+		private AsyncRunnable(Runnable runnable)
+		{
+			task = runnable;
+		}
+
+		@Override
+		public void run()
+		{
+			try
+			{
+				task.run();
+			}
+			catch (Throwable t)
+			{
+				asyncException.set(t);
+			}
+			asyncTasksRunning.decrementAndGet();
+		}
+		
+	}
 }
-
-
 
 
 

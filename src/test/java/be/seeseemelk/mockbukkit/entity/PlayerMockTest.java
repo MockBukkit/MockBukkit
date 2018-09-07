@@ -5,9 +5,13 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static org.junit.Assume.assumeTrue;
 
 import java.util.UUID;
+import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -48,7 +52,7 @@ public class PlayerMockTest
 	{
 		server = MockBukkit.mock();
 		uuid = UUID.randomUUID();
-		player = new PlayerMock("player", uuid);
+		player = new PlayerMock(server, "player", uuid);
 	}
 
 	@After
@@ -479,6 +483,25 @@ public class PlayerMockTest
 	{
 		player.setDisplayName("Some Display Name");
 		assertEquals("Some Display Name", player.getDisplayName());
+	}
+	
+	@Test
+	public void chat_AnyMessage_AsyncEventFired()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		Bukkit.getPluginManager().registerEvents(plugin, plugin);
+		player.chat("A message");
+		try
+		{
+			plugin.barrier.await(3, TimeUnit.SECONDS);
+		}
+		catch (InterruptedException | BrokenBarrierException e)
+		{}
+		catch (TimeoutException e)
+		{
+			fail("Async event was not fired");
+		}
+		assertTrue(plugin.asyncEventExecuted);
 	}
 
 }

@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.entity;
 
 import java.util.UUID;
 
+import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
 /**
@@ -16,18 +17,18 @@ public class SimpleEntityMock extends EntityMock
 	 * Creates a {@code SimpleEntityMock} with a specified UUID.
 	 * @param uuid The UUID that the entity should have.
 	 */
-	public SimpleEntityMock(UUID uuid)
+	public SimpleEntityMock(ServerMock server, UUID uuid)
 	{
-		super(uuid);
+		super(server, uuid);
 	}
 	
 	
 	/**
 	 * Creates a {@code SimpleEntityMock} with a random UUID.
 	 */
-	public SimpleEntityMock()
+	public SimpleEntityMock(ServerMock server)
 	{
-		this(UUID.randomUUID());
+		this(server, UUID.randomUUID());
 	}
 
 
