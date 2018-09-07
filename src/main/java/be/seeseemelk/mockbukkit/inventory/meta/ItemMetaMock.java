@@ -6,16 +6,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
+import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
-public class ItemMetaMock implements ItemMeta
+public class ItemMetaMock implements ItemMeta, Damageable
 {
 	private String displayName = null;
 	private List<String> lore = null;
+	private int damage = 0;
 
 	public ItemMetaMock()
 	{
@@ -186,6 +189,30 @@ public class ItemMetaMock implements ItemMeta
 	{
 		assertLore(Arrays.asList(lines));
 	}
+	
+	/**
+	 * Asserts that the item meta contains no lore.
+	 * 
+	 * @throws AssertionError if the item meta contains some lore.
+	 */
+	public void assertHasNoLore() throws AssertionError
+	{
+		if (lore != null && lore.size() != 0)
+		{
+			throw new AssertionError("Lore was set but shouldn't have been set");
+		}
+	}
+
+	/**
+	 * Used internally for the ItemFactoryMock.
+	 * This code is based on `CraftMetaItem#updateMaterial`
+	 * @param material
+	 * @return
+	 */
+	public Material updateMaterial(Material material)
+	{
+		return material;
+	}
 
 	@Override
 	public Map<String, Object> serialize()
@@ -306,17 +333,22 @@ public class ItemMetaMock implements ItemMeta
 		throw new UnimplementedOperationException();
 	}
 
-	/**
-	 * Asserts that the item meta contains no lore.
-	 * 
-	 * @throws AssertionError if the item meta contains some lore.
-	 */
-	public void assertHasNoLore() throws AssertionError
+	@Override
+	public boolean hasDamage()
 	{
-		if (lore != null && lore.size() != 0)
-		{
-			throw new AssertionError("Lore was set but shouldn't have been set");
-		}
+		return damage > 0;
+	}
+
+	@Override
+	public int getDamage()
+	{
+		return damage;
+	}
+
+	@Override
+	public void setDamage(int damage)
+	{
+		this.damage = damage;
 	}
 
 }

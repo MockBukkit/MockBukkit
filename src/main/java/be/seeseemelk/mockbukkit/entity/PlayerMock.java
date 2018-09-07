@@ -429,13 +429,13 @@ public class PlayerMock extends EntityMock implements Player
 	@Override
 	public ItemStack getItemInHand()
 	{
-		return inventory.getItemInMainHand();
+		return getInventory().getItemInMainHand();
 	}
 
 	@Override
 	public void setItemInHand(ItemStack item)
 	{
-		inventory.setItemInMainHand(item);
+		getInventory().setItemInMainHand(item);
 	}
 
 	@Override

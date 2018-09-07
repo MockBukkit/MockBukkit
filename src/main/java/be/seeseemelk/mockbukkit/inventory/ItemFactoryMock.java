@@ -137,8 +137,7 @@ public class ItemFactoryMock implements ItemFactory
 	@Override
 	public Material updateMaterial(ItemMeta meta, Material material) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return ((ItemMetaMock) meta).updateMaterial(material);
 	}
 
 }

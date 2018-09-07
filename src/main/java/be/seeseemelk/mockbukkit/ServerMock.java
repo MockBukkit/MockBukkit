@@ -97,6 +97,7 @@ public class ServerMock implements Server
 	private BukkitSchedulerMock scheduler = new BukkitSchedulerMock();
 	private PlayerList playerList = new PlayerList();
 	private GameMode defaultGameMode = GameMode.SURVIVAL;
+	private final MockUnsafeValues unsafe = new MockUnsafeValues();
 
 	public ServerMock()
 	{		
@@ -1075,8 +1076,7 @@ public class ServerMock implements Server
 	@Override
 	public UnsafeValues getUnsafe()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return unsafe;
 	}
 
 	@Override
