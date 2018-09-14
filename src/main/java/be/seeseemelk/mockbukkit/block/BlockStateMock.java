@@ -8,14 +8,12 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
-import org.bukkit.block.data.BlockData;
 import org.bukkit.material.MaterialData;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
-@SuppressWarnings("deprecation")
 public class BlockStateMock implements BlockState
 {
 	private MaterialData data;
@@ -72,6 +70,14 @@ public class BlockStateMock implements BlockState
 
 	@Override
 	public Material getType()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@Deprecated
+	public int getTypeId()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -147,6 +153,14 @@ public class BlockStateMock implements BlockState
 	}
 
 	@Override
+	@Deprecated
+	public boolean setTypeId(int type)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public boolean update()
 	{
 		// TODO Auto-generated method stub
@@ -185,20 +199,6 @@ public class BlockStateMock implements BlockState
 
 	@Override
 	public boolean isPlaced()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public BlockData getBlockData()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setBlockData(BlockData data)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

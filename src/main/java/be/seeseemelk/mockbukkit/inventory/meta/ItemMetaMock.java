@@ -9,12 +9,11 @@ import java.util.Set;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
-import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
-public class ItemMetaMock implements ItemMeta, Damageable
+public class ItemMetaMock implements ItemMeta
 {
 	private String displayName = null;
 	private List<String> lore = null;
@@ -331,24 +330,6 @@ public class ItemMetaMock implements ItemMeta, Damageable
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean hasDamage()
-	{
-		return damage > 0;
-	}
-
-	@Override
-	public int getDamage()
-	{
-		return damage;
-	}
-
-	@Override
-	public void setDamage(int damage)
-	{
-		this.damage = damage;
 	}
 
 }

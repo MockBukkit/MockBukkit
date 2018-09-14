@@ -3,7 +3,6 @@ package be.seeseemelk.mockbukkit.entity;
 import java.util.UUID;
 
 import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
 /**
  * A very simple class that allows one to create an instance of an entity
@@ -29,21 +28,5 @@ public class SimpleEntityMock extends EntityMock
 	public SimpleEntityMock(ServerMock server)
 	{
 		this(server, UUID.randomUUID());
-	}
-
-
-	@Override
-	public boolean isPersistent()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-
-	@Override
-	public void setPersistent(boolean persistent)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 }

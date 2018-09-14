@@ -15,7 +15,6 @@ import org.bukkit.Chunk;
 import org.bukkit.ChunkSnapshot;
 import org.bukkit.Difficulty;
 import org.bukkit.Effect;
-import org.bukkit.GameRule;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -27,7 +26,6 @@ import org.bukkit.WorldBorder;
 import org.bukkit.WorldType;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
-import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -257,6 +255,22 @@ public class WorldMock implements World
 
 	@Override
 	public void removeMetadata(String metadataKey, Plugin owningPlugin)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@Deprecated
+	public int getBlockTypeIdAt(int x, int y, int z)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@Deprecated
+	public int getBlockTypeIdAt(Location location)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -719,6 +733,15 @@ public class WorldMock implements World
 	}
 
 	@Override
+	@Deprecated
+	public FallingBlock spawnFallingBlock(Location location, int blockId, byte blockData)
+			throws IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public void playEffect(Location location, Effect effect, int data)
 	{
 		// TODO Auto-generated method stub
@@ -1113,34 +1136,6 @@ public class WorldMock implements World
 	@Override
 	public <T> void spawnParticle(Particle particle, double x, double y, double z, int count, double offsetX,
 			double offsetY, double offsetZ, double extra, T data)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public FallingBlock spawnFallingBlock(Location location, BlockData data) throws IllegalArgumentException
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public <T> T getGameRuleValue(GameRule<T> rule)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public <T> T getGameRuleDefault(GameRule<T> rule)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public <T> boolean setGameRule(GameRule<T> rule, T newValue)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

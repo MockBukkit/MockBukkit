@@ -161,12 +161,4 @@ public class ScoreboardMock implements Scoreboard
 			objectivesByDisplaySlot.remove(objectiveMock.getDisplaySlot());
 	}
 
-	@Override
-	public Objective registerNewObjective(String name, String criteria, String displayName)
-			throws IllegalArgumentException
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
 }
