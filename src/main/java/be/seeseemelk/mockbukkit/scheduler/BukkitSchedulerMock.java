@@ -8,6 +8,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.logging.Logger;
 
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -65,10 +66,12 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		
 		for (ScheduledTask task : oldTasks)
 		{
-			if (task.getScheduledTick() == currentTick)
+			if (task.getScheduledTick() == currentTick && !task.isCancelled())
 			{
 				if (task.isSync())
+				{
 					task.run();
+				}
 				else
 				{
 					asyncTasksRunning.incrementAndGet();
@@ -77,7 +80,10 @@ public class BukkitSchedulerMock implements BukkitScheduler
 				}
 				
 				if (task instanceof RepeatingTask && !task.isCancelled())
+				{
+					((RepeatingTask) task).updateScheduledTick();
 					tasks.add(task);
+				}
 			}
 			else if (!task.isCancelled())
 			{
@@ -105,7 +111,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	 */
 	public void waitAsyncTasksFinished()
 	{
-		// Make sure all tasks (except for repeating async tasks) get to execute.
+		// Make sure all tasks (except for repeating async tasks, they only will fire once) get to execute.
 		while (asyncTasksQueued > 0)
 			performOneTick();
 		
@@ -160,64 +166,64 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public int scheduleSyncDelayedTask(Plugin plugin, Runnable task, long delay)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Logger.getLogger("BukkitSchedulerMock").warning("Consider using runTaskLater instead of scheduleSyncDelayTask");
+		return runTaskLater(plugin, task, delay).getTaskId();
 	}
 
 	@Override
 	public int scheduleSyncDelayedTask(Plugin plugin, BukkitRunnable task, long delay)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Logger.getLogger("BukkitSchedulerMock").warning("Consider using runTaskLater instead of scheduleSyncDelayTask");
+		return runTaskLater(plugin, (Runnable) task, delay).getTaskId();
 	}
 
 	@Override
 	public int scheduleSyncDelayedTask(Plugin plugin, Runnable task)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Logger.getLogger("BukkitSchedulerMock").warning("Consider using runTask instead of scheduleSyncDelayTask");
+		return runTask(plugin, task).getTaskId();
 	}
 
 	@Override
 	public int scheduleSyncDelayedTask(Plugin plugin, BukkitRunnable task)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Logger.getLogger("BukkitSchedulerMock").warning("Consider using runTask instead of scheduleSyncDelayTask");
+		return runTask(plugin, (Runnable) task).getTaskId();
 	}
 
 	@Override
 	public int scheduleSyncRepeatingTask(Plugin plugin, Runnable task, long delay, long period)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Logger.getLogger("BukkitSchedulerMock").warning("Consider using runTaskTimer instead of scheduleSyncRepeatingTask");
+		return runTaskTimer(plugin, task, delay, period).getTaskId();
 	}
 
 	@Override
 	public int scheduleSyncRepeatingTask(Plugin plugin, BukkitRunnable task, long delay, long period)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Logger.getLogger("BukkitSchedulerMock").warning("Consider using runTaskTimer instead of scheduleSyncRepeatingTask");
+		return runTaskTimer(plugin, (Runnable) task, delay, period).getTaskId();
 	}
 
 	@Override
 	public int scheduleAsyncDelayedTask(Plugin plugin, Runnable task, long delay)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Logger.getLogger("BukkitSchedulerMock").warning("Consider using runTaskLaterAsynchronously instead of scheduleAsyncDelayedTask");
+		return runTaskLaterAsynchronously(plugin, task, delay).getTaskId();
 	}
 
 	@Override
 	public int scheduleAsyncDelayedTask(Plugin plugin, Runnable task)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Logger.getLogger("BukkitSchedulerMock").warning("Consider using runTaskAsynchronously instead of scheduleAsyncDelayedTask");
+		return runTaskAsynchronously(plugin, task).getTaskId();
 	}
 
 	@Override
 	public int scheduleAsyncRepeatingTask(Plugin plugin, Runnable task, long delay, long period)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Logger.getLogger("BukkitSchedulerMock").warning("Consider using runTaskTimerAsynchronously instead of scheduleAsyncRepeatingTask");
+		return runTaskTimerAsynchronously(plugin, task, delay, period).getTaskId();
 	}
 
 	@Override
@@ -230,15 +236,26 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public void cancelTask(int taskId)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		for (ScheduledTask task : tasks)
+		{
+			if (task.getTaskId() == taskId)
+			{
+				task.cancel();
+				return;
+			}
+		}
 	}
 
 	@Override
 	public void cancelTasks(Plugin plugin)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		for (ScheduledTask task : tasks)
+		{
+			if (task.getOwner().equals(plugin))
+			{
+				task.cancel();
+			}
+		}
 	}
 
 	@Override
@@ -251,8 +268,12 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public boolean isQueued(int taskId)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		for (ScheduledTask task : tasks)
+		{
+			if (task.getTaskId() == taskId)
+				return !task.isCancelled();
+		}
+		return false;
 	}
 
 	@Override
@@ -282,15 +303,13 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public BukkitTask runTaskAsynchronously(Plugin plugin, BukkitRunnable task) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return runTaskAsynchronously(plugin, (Runnable) task);
 	}
 
 	@Override
 	public BukkitTask runTaskLater(Plugin plugin, BukkitRunnable task, long delay) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return runTaskLater(plugin, (Runnable) task, delay);
 	}
 
 	@Override
@@ -308,8 +327,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public BukkitTask runTaskLaterAsynchronously(Plugin plugin, BukkitRunnable task, long delay)
 			throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return runTaskLaterAsynchronously(plugin, (Runnable) task, delay);
 	}
 
 	@Override
@@ -326,8 +344,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public BukkitTask runTaskTimerAsynchronously(Plugin plugin, BukkitRunnable task, long delay, long period)
 			throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return runTaskTimerAsynchronously(plugin, (Runnable) task, delay, period);
 	}
 
 	class AsyncRunnable implements Runnable
