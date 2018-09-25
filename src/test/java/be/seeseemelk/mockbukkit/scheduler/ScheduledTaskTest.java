@@ -45,7 +45,7 @@ public class ScheduledTaskTest
 	{
 		ScheduledTask task = new ScheduledTask(0, null, true, 5, null);
 		assertEquals(5, task.getScheduledTick());
-		task.setScheduledtick(20);
+		task.setScheduledTick(20);
 		assertEquals(20, task.getScheduledTick());
 	}
 	

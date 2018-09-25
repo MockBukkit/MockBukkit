@@ -187,6 +187,19 @@ public class ItemMetaMock implements ItemMeta
 		assertLore(Arrays.asList(lines));
 	}
 
+	/**
+	 * Asserts that the item meta contains no lore.
+	 * 
+	 * @throws AssertionError if the item meta contains some lore.
+	 */
+	public void assertHasNoLore() throws AssertionError
+	{
+		if (lore != null && lore.size() != 0)
+		{
+			throw new AssertionError("Lore was set but shouldn't have been set");
+		}
+	}
+
 	@Override
 	public Map<String, Object> serialize()
 	{
@@ -305,20 +318,6 @@ public class ItemMetaMock implements ItemMeta
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
-	/**
-	 * Asserts that the item meta contains no lore.
-	 * 
-	 * @throws AssertionError if the item meta contains some lore.
-	 */
-	public void assertHasNoLore() throws AssertionError
-	{
-		if (lore != null && lore.size() != 0)
-		{
-			throw new AssertionError("Lore was set but shouldn't have been set");
-		}
-	}
-
 }
 
 

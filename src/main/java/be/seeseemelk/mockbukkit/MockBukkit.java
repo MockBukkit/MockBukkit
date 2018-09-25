@@ -235,12 +235,19 @@ public class MockBukkit
 	 */
 	public static void unload()
 	{
-		if (mock != null && mock.getPluginManager() != null)
+		try
 		{
-			mock.getPluginManager().disablePlugins();
+			mock.getScheduler().shutdown();
 		}
-		mock.getPluginManager().unload();
-		setServerInstanceToNull();
+		finally
+		{
+			if (mock != null && mock.getPluginManager() != null)
+			{
+				mock.getPluginManager().disablePlugins();
+			}
+			mock.getPluginManager().unload();
+			setServerInstanceToNull();
+		}
 	}
 	
 	/**
