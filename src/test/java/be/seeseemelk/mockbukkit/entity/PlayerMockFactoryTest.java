@@ -9,16 +9,18 @@ import org.junit.Before;
 import org.junit.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.ServerMock;
 
 public class PlayerMockFactoryTest
 {
+	private ServerMock server;
 	private PlayerMockFactory factory;
 
  	@Before
 	public void setUp() throws Exception
 	{
- 		MockBukkit.mock();
- 		factory = new PlayerMockFactory();
+ 		server = MockBukkit.mock();
+ 		factory = new PlayerMockFactory(server);
 	}
  	
  	@After

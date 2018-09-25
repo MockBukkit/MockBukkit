@@ -83,6 +83,8 @@ import be.seeseemelk.mockbukkit.scoreboard.ScoreboardManagerMock;
 public class ServerMock implements Server
 {
 	private final Logger logger;
+	private final Thread mainThread;
+	private final MockUnsafeValues unsafe = new MockUnsafeValues();
 
 	private final List<PlayerMock> players = new ArrayList<>();
 	private final List<PlayerMock> offlinePlayers = new ArrayList<>();
@@ -90,17 +92,17 @@ public class ServerMock implements Server
 	private final List<World> worlds = new ArrayList<>();
 	private List<Recipe> recipes = new LinkedList<>();
 	private final ItemFactory factory = new ItemFactoryMock();
-	private final PlayerMockFactory playerFactory = new PlayerMockFactory();
+	private final PlayerMockFactory playerFactory = new PlayerMockFactory(this);
 	private final PluginManagerMock pluginManager = new PluginManagerMock(this);
 	private final ScoreboardManagerMock scoreboardManager = new ScoreboardManagerMock();
 	private ConsoleCommandSender consoleSender;
 	private BukkitSchedulerMock scheduler = new BukkitSchedulerMock();
 	private PlayerList playerList = new PlayerList();
 	private GameMode defaultGameMode = GameMode.SURVIVAL;
-	private final MockUnsafeValues unsafe = new MockUnsafeValues();
 
 	public ServerMock()
-	{		
+	{
+		mainThread = Thread.currentThread();
 		logger = Logger.getLogger("ServerMock");
 		try
 		{
@@ -115,12 +117,33 @@ public class ServerMock implements Server
 	}
 	
 	/**
+	 * Checks if we are on the main thread.
+	 * The main thread is the thread used to create this instance of the mock server.
+	 * @return {@code true} if we are on the main thread, {@code false} if we are running on a different thread.
+	 */
+	public boolean isOnMainThread()
+	{
+		return mainThread.equals(Thread.currentThread());
+	}
+	
+	/**
+	 * Checks if we are running a method on the main thread.
+	 * If not, a `ThreadAccessException` is thrown.
+	 */
+	public void assertMainThread() throws ThreadAccessException
+	{
+		if (!isOnMainThread())
+			throw new ThreadAccessException("The Bukkit API was accessed from asynchronous code.");
+	}
+	
+	/**
 	 * Registers an entity so that the server can track it more easily.
 	 * Should only be used internally.
 	 * @param entity The entity to register
 	 */
 	public void registerEntity(EntityMock entity)
 	{
+		assertMainThread();
 		entities.add(entity);
 	}
 	
@@ -140,6 +163,7 @@ public class ServerMock implements Server
 	 */
 	public void addPlayer(PlayerMock player)
 	{
+		assertMainThread();
 		players.add(player);
 		offlinePlayers.add(player);
 		registerEntity(player);
@@ -150,6 +174,7 @@ public class ServerMock implements Server
 	 */
 	public PlayerMock addPlayer()
 	{
+		assertMainThread();
 		PlayerMock player = playerFactory.createRandomPlayer();
 		addPlayer(player);
 		return player;
@@ -163,6 +188,7 @@ public class ServerMock implements Server
 	 */
 	public void setPlayers(int num)
 	{
+		assertMainThread();
 		players.clear();
 		for (int i = 0; i < num; i++)
 		{
@@ -180,6 +206,7 @@ public class ServerMock implements Server
 	 */
 	public void setOfflinePlayers(int num)
 	{
+		assertMainThread();
 		offlinePlayers.clear();
 		offlinePlayers.addAll(players);
 
@@ -218,6 +245,7 @@ public class ServerMock implements Server
 	 */
 	public WorldMock addSimpleWorld(String name)
 	{
+		assertMainThread();
 		WorldMock world = new WorldMock();
 		world.setName(name);
 		worlds.add(world);
@@ -233,6 +261,7 @@ public class ServerMock implements Server
 	 */
 	public CommandResult executeConsole(Command command, String... args)
 	{
+		assertMainThread();
 		return execute(command, getConsoleSender(), args);
 	}
 
@@ -245,6 +274,7 @@ public class ServerMock implements Server
 	 */
 	public CommandResult executeConsole(String command, String... args)
 	{
+		assertMainThread();
 		return executeConsole(getPluginCommand(command), args);
 	}
 
@@ -257,6 +287,7 @@ public class ServerMock implements Server
 	 */
 	public CommandResult executePlayer(Command command, String... args)
 	{
+		assertMainThread();
 		if (players.size() > 0)
 		{
 			return execute(command, players.get(0), args);
@@ -276,6 +307,7 @@ public class ServerMock implements Server
 	 */
 	public CommandResult executePlayer(String command, String... args)
 	{
+		assertMainThread();
 		return executePlayer(getPluginCommand(command), args);
 	}
 
@@ -289,6 +321,7 @@ public class ServerMock implements Server
 	 */
 	public CommandResult execute(Command command, CommandSender sender, String... args)
 	{
+		assertMainThread();
 		if (!(sender instanceof MessageTarget))
 		{
 			throw new IllegalArgumentException("Only a MessageTarget can be the sender of the command");
@@ -309,6 +342,7 @@ public class ServerMock implements Server
 	 */
 	public CommandResult execute(String command, CommandSender sender, String... args)
 	{
+		assertMainThread();
 		return execute(getPluginCommand(command), sender, args);
 	}
 
@@ -333,6 +367,7 @@ public class ServerMock implements Server
 	@Override
 	public Collection<? extends PlayerMock> getOnlinePlayers()
 	{
+		assertMainThread();
 		return players;
 	}
 
@@ -369,12 +404,14 @@ public class ServerMock implements Server
 	@Override
 	public Player getPlayerExact(String name)
 	{
+		assertMainThread();
 		return this.players.stream().filter(playerMock -> playerMock.getName().equals(name)).findFirst().orElse(null);
 	}
 
 	@Override
 	public List<Player> matchPlayer(String name)
 	{
+		assertMainThread();
 		return players.stream().filter(player -> player.getName().toLowerCase(Locale.ENGLISH).startsWith(name))
 				.collect(Collectors.toList());
 	}
@@ -382,6 +419,7 @@ public class ServerMock implements Server
 	@Override
 	public Player getPlayer(UUID id)
 	{
+		assertMainThread();
 		for (Player player : getOnlinePlayers())
 		{
 			if (id.equals(player.getUniqueId()))
@@ -406,6 +444,7 @@ public class ServerMock implements Server
 	 */
 	private boolean isLabelOfCommand(PluginCommand command, String label)
 	{
+		assertMainThread();
 		if (label.equals(command.getName()))
 		{
 			return true;
@@ -423,6 +462,7 @@ public class ServerMock implements Server
 	@Override
 	public PluginCommand getPluginCommand(String name)
 	{
+		assertMainThread();
 		for (PluginCommand command : getPluginManager().getCommands())
 		{
 			if (isLabelOfCommand(command, name))
@@ -451,6 +491,7 @@ public class ServerMock implements Server
 	
 	public InventoryMock createInventory(InventoryHolder owner, InventoryType type, String title, int size)
 	{
+		assertMainThread();
 		InventoryMock inventory;
 		switch (type)
 		{
@@ -535,12 +576,14 @@ public class ServerMock implements Server
 	@Override
 	public void banIP(String address)
 	{
+		assertMainThread();
 		this.playerList.getIPBans().addBan(address, null, null, null);
 	}
 
 	@Override
 	public void unbanIP(String address)
 	{
+		assertMainThread();
 		this.playerList.getIPBans().pardon(address);
 	}
 
@@ -560,6 +603,7 @@ public class ServerMock implements Server
 	@Override
 	public Set<OfflinePlayer> getOperators()
 	{
+		assertMainThread();
 		final Set<OfflinePlayer> players = new HashSet<>();
 		players.addAll(this.offlinePlayers);
 		players.addAll(this.players);
@@ -575,12 +619,14 @@ public class ServerMock implements Server
 	@Override
 	public void setDefaultGameMode(GameMode mode)
 	{
+		assertMainThread();
 		this.defaultGameMode = mode;
 	}
 
 	@Override
 	public int broadcastMessage(String message)
 	{
+		assertMainThread();
 		for (Player player : players)
 			player.sendMessage(message);
 		return players.size();
@@ -589,6 +635,7 @@ public class ServerMock implements Server
 	@Override
 	public boolean addRecipe(Recipe recipe)
 	{
+		assertMainThread();
 		recipes.add(recipe);
 		return true;
 	}
@@ -596,6 +643,7 @@ public class ServerMock implements Server
 	@Override
 	public List<Recipe> getRecipesFor(ItemStack result)
 	{
+		assertMainThread();
 		return recipes.stream()
 				.filter(recipe -> recipe.getResult().equals(result))
 				.collect(Collectors.toList());
@@ -604,18 +652,21 @@ public class ServerMock implements Server
 	@Override
 	public Iterator<Recipe> recipeIterator()
 	{
+		assertMainThread();
 		return recipes.iterator();
 	}
 
 	@Override
 	public void clearRecipes()
 	{
+		assertMainThread();
 		recipes.clear();
 	}
 	
 	@Override
 	public boolean dispatchCommand(CommandSender sender, String commandLine) throws CommandException
 	{
+		assertMainThread();
 		String[] commands = commandLine.split(" ");
 		String commandLabel = commands[0];
 		String[] args = Arrays.copyOfRange(commands, 1, commands.length);

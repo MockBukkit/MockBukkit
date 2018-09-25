@@ -5,13 +5,21 @@ import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 
+import be.seeseemelk.mockbukkit.ServerMock;
+
 public final class PlayerMockFactory
 {
 	private static final String[] FIRST_NAMES = {"James", "Mary", "John", "Particia", "Robert", "Jennifer", "Michael", "Elizabeth", "William", "Linda"};
 	private static final String[] LAST_NAMES = {"Smith", "Johnson", "Jones", "Brown", "Davis", "Miller", "Wilson", "Moore", "Taylor", "Anderson"};
-	
+
+	private final ServerMock server;
 	private Random random = new Random();
 	private Set<String> usedNames = new HashSet<>();
+	
+	public PlayerMockFactory(ServerMock server)
+	{
+		this.server = server;
+	}
 	
 	/**
 	 * Generates a random name.
@@ -55,7 +63,7 @@ public final class PlayerMockFactory
 	{
 		String name = getUniqueRandomName();
 		UUID uuid = new UUID(random.nextLong(), random.nextLong());
-		return new PlayerMock(name, uuid);
+		return new PlayerMock(server, name, uuid);
 	}
 
 	/**
@@ -65,7 +73,7 @@ public final class PlayerMockFactory
 	 */
 	public PlayerMock createRandomOfflinePlayer()
 	{
-		PlayerMock player = new PlayerMock(getUniqueRandomName());
+		PlayerMock player = new PlayerMock(server, getUniqueRandomName());
 		return player;
 	}
 }

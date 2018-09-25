@@ -21,10 +21,17 @@ public class RepeatingTask extends ScheduledTask
 		return period;
 	}
 	
+	/**
+	 * Updates the scheduled tick for the next run.
+	 */
+	public void updateScheduledTick()
+	{
+		setScheduledTick(getScheduledTick() + period);
+	}
+	
 	@Override
 	public void run()
 	{
 		super.run();
-		setScheduledtick(getScheduledTick() + period);
 	}
 }

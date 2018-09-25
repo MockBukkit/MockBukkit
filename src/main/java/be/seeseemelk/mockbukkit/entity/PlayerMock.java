@@ -6,6 +6,7 @@ import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.EnumMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -46,6 +47,8 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityDamageEvent.DamageModifier;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
@@ -65,6 +68,7 @@ import com.google.common.base.Charsets;
 import com.google.common.base.Function;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.attribute.AttributeInstanceMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
@@ -91,15 +95,15 @@ public class PlayerMock extends EntityMock implements Player
 				new AttributeInstanceMock(Attribute.GENERIC_MAX_HEALTH, MAX_HEALTH));
 	}
 
-	public PlayerMock(String name)
+	public PlayerMock(ServerMock server, String name)
 	{
-		this(name, UUID.nameUUIDFromBytes(("OfflinePlayer:" + name).getBytes(Charsets.UTF_8)));
+		this(server, name, UUID.nameUUIDFromBytes(("OfflinePlayer:" + name).getBytes(Charsets.UTF_8)));
 		this.online = false;
 	}
 
-	public PlayerMock(String name, UUID uuid)
+	public PlayerMock(ServerMock server, String name, UUID uuid)
 	{
-		super(uuid);
+		super(server, uuid);
 		setName(name);
 		setDisplayName(name);
 		this.online = true;
@@ -964,8 +968,13 @@ public class PlayerMock extends EntityMock implements Player
 	@Override
 	public void chat(String msg)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		AsyncPlayerChatEvent eventAsync = new AsyncPlayerChatEvent(false, this, msg,
+				new HashSet<>(Bukkit.getOnlinePlayers()));
+		PlayerChatEvent eventSync = new PlayerChatEvent(this, msg);
+		Bukkit.getScheduler().runTaskAsynchronously(null, () -> {
+			Bukkit.getPluginManager().callEvent(eventAsync);
+		});
+		Bukkit.getPluginManager().callEvent(eventSync);
 	}
 
 	@Override
