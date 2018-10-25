@@ -350,6 +350,40 @@ public class ItemMetaMock implements ItemMeta, Damageable
 	{
 		this.damage = damage;
 	}
+public class Spigot {
+	boolean isUnbreakable;
+
+        /**
+         * Sets the unbreakable tag
+         *
+         * @param unbreakable true if set unbreakable
+         */
+        public void setUnbreakable(boolean unbreakable)
+        {
+            isUnbreakable=unbreakable;
+        }
+
+        /**
+         * Return if the unbreakable tag is true
+         *
+         * @return true if the unbreakable tag is true
+         */
+        public boolean isUnbreakable()
+        {
+            return isUnbreakable;
+        }
+    }
+    private Spigot spigott;
+    
+    public Spigot spigot(){
+    	if(spigott==null){
+		spigott=new Spigot();
+	}
+	
+	return spigott;
+    
+    
+    }
 
 }
 
