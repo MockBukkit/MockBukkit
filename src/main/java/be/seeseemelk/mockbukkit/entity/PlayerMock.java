@@ -1,17 +1,14 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import static org.junit.Assert.assertEquals;
-
-import java.net.InetSocketAddress;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.EnumMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.attribute.AttributeInstanceMock;
+import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.PlayerInventoryViewMock;
+import be.seeseemelk.mockbukkit.inventory.SimpleInventoryViewMock;
+import com.google.common.base.Charsets;
+import com.google.common.base.Function;
 import org.bukkit.Achievement;
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
@@ -64,16 +61,17 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.util.Vector;
 
-import com.google.common.base.Charsets;
-import com.google.common.base.Function;
+import java.net.InetSocketAddress;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.EnumMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.attribute.AttributeInstanceMock;
-import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
-import be.seeseemelk.mockbukkit.inventory.PlayerInventoryViewMock;
-import be.seeseemelk.mockbukkit.inventory.SimpleInventoryViewMock;
+import static org.junit.Assert.assertEquals;
 
 @SuppressWarnings("deprecation")
 public class PlayerMock extends EntityMock implements Player
@@ -1853,5 +1851,10 @@ public class PlayerMock extends EntityMock implements Player
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
+
+    @Override
+    public Player.Spigot spigot() {
+        throw new UnimplementedOperationException();
+    }
 
 }

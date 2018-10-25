@@ -1,9 +1,6 @@
 package be.seeseemelk.mockbukkit.command;
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Set;
-
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.Server;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.conversations.Conversation;
@@ -13,7 +10,9 @@ import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Set;
 
 public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTarget
 {
@@ -144,6 +143,11 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
+
+    @Override
+    public Spigot spigot() {
+        throw new UnimplementedOperationException();
+    }
 
 	@Override
 	public boolean isConversing()
