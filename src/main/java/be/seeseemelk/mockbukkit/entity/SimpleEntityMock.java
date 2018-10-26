@@ -1,5 +1,7 @@
 package be.seeseemelk.mockbukkit.entity;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+
 import java.util.UUID;
 
 /**
@@ -26,5 +28,10 @@ public class SimpleEntityMock extends EntityMock
 	public SimpleEntityMock()
 	{
 		this(UUID.randomUUID());
+	}
+
+	@Override
+	public Spigot spigot() {
+		throw new UnimplementedOperationException();
 	}
 }

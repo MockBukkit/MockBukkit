@@ -1,16 +1,15 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
+import org.bukkit.inventory.meta.ItemMeta;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.inventory.ItemFlag;
-import org.bukkit.inventory.meta.ItemMeta;
-
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
 public class ItemMetaMock implements ItemMeta
 {
@@ -151,10 +150,12 @@ public class ItemMetaMock implements ItemMeta
 	{
 		this.lore = new ArrayList<>(lore);
 	}
-	
+
+	private Spigot spigot;
+
 	/**
 	 * Asserts if the lore contains the given lines in order.
-	 * @param lines The lines the lore should contain 
+	 * @param lines The lines the lore should contain
 	 */
 	public void assertLore(List<String> lines)
 	{
@@ -176,15 +177,6 @@ public class ItemMetaMock implements ItemMeta
 		{
 			throw new AssertionError("No lore was set");
 		}
-	}
-
-	/**
-	 * Asserts if the lore contains the given lines in order.
-	 * @param lines The lines the lore should contain 
-	 */
-	public void assertLore(String... lines)
-	{
-		assertLore(Arrays.asList(lines));
 	}
 
 	@Override
@@ -270,18 +262,34 @@ public class ItemMetaMock implements ItemMeta
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
+	/**
+	 * Asserts if the lore contains the given lines in order.
+	 *
+	 * @param lines The lines the lore should contain
+	 */
+	public void assertLore(String... lines) {
+		assertLore(Arrays.asList(lines));
+	}
+
 	/**
 	 * Asserts that the item meta contains no lore.
-	 * 
+	 *
 	 * @throws AssertionError if the item meta contains some lore.
 	 */
-	public void assertHasNoLore() throws AssertionError
-	{
-		if (lore != null && lore.size() != 0)
-		{
+	public void assertHasNoLore() throws AssertionError {
+		if (lore != null && lore.size() != 0) {
 			throw new AssertionError("Lore was set but shouldn't have been set");
 		}
+	}
+
+	@Override
+	public Spigot spigot() {
+		if (spigot == null)
+			spigot = new Spigot();
+
+		return spigot;
+
 	}
 
 }
