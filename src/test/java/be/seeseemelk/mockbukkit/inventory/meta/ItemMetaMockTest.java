@@ -17,8 +17,7 @@ public class ItemMetaMockTest
 	private ItemMetaMock meta;
 	
 	@Before
-	public void setUp() throws Exception
-	{
+	public void setUp() {
 		meta = new ItemMetaMock();
 	}
 	
@@ -132,7 +131,7 @@ public class ItemMetaMockTest
 	public void clone_WithDisplayName_ClonedExactly()
 	{
 		meta.setDisplayName("Some name");
-		ItemMetaMock cloned = meta.clone();
+		ItemMetaMock cloned = (ItemMetaMock) meta.clone();
 		assertEquals(meta, cloned);
 		assertEquals(meta.hashCode(), cloned.hashCode());
 	}

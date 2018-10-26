@@ -1,16 +1,16 @@
 package be.seeseemelk.mockbukkit.inventory;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.inventory.meta.BookMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFactory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
 public class ItemFactoryMock implements ItemFactory
 {
@@ -19,8 +19,7 @@ public class ItemFactoryMock implements ItemFactory
 		switch (material)
 		{
 			case BOOK:
-				// TODO Auto-generated method stub
-				throw new UnimplementedOperationException();
+				return BookMetaMock.class;
 			case ENCHANTED_BOOK:
 				// TODO Auto-generated method stub
 				throw new UnimplementedOperationException();
@@ -71,14 +70,7 @@ public class ItemFactoryMock implements ItemFactory
 	public boolean isApplicable(ItemMeta meta, Material material) throws IllegalArgumentException
 	{
 		Class<? extends ItemMeta> target = getItemMetaClass(material);
-		if (target.isInstance(meta))
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return target.isInstance(meta);
 	}
 
 	@Override

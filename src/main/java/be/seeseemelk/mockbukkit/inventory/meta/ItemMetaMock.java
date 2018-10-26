@@ -144,7 +144,7 @@ public class ItemMetaMock implements ItemMeta, Damageable
 		}
 		catch (CloneNotSupportedException e)
 		{
-			throw new Error(e);
+			throw new RuntimeException(e);
 		}
 	}
 	
