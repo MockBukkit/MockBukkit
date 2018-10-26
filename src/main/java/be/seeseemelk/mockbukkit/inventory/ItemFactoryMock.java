@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.inventory;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.inventory.meta.BookMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.SkullMetaMock;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFactory;
@@ -39,7 +40,7 @@ public class ItemFactoryMock implements ItemFactory
 			case LINGERING_POTION:
 			case SPLASH_POTION:
 				// TODO Auto-generated method stub
-				throw new UnimplementedOperationException();
+				return SkullMetaMock.class;
 			case EGG:
 			case DRAGON_EGG:
 			default:
