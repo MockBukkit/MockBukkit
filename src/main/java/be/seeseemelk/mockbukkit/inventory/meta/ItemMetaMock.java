@@ -7,6 +7,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -15,7 +17,7 @@ public class ItemMetaMock implements ItemMeta
 {
 	private String displayName = null;
 	private List<String> lore = null;
-
+    private Map<Enchantment, Integer> enchantments = null;
 	public ItemMetaMock()
 	{
 
@@ -186,53 +188,76 @@ public class ItemMetaMock implements ItemMeta
 		throw new UnimplementedOperationException();
 	}
 
+    static boolean checkConflictingEnchants(Map<Enchantment, Integer> enchantments, Enchantment ench) {
+        if (enchantments != null && !enchantments.isEmpty()) {
+            Iterator var2 = enchantments.keySet().iterator();
+
+            Enchantment enchant;
+            do {
+                if (!var2.hasNext()) {
+                    return false;
+                }
+
+                enchant = (Enchantment) var2.next();
+            } while (!enchant.conflictsWith(ench));
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 	@Override
 	public boolean hasEnchants()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+        return enchantments != null && !enchantments.isEmpty();
 	}
 
 	@Override
 	public boolean hasEnchant(Enchantment ench)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+        if (!hasEnchants())
+            return false;
+        return enchantments.containsKey(ench);
 	}
 
 	@Override
 	public int getEnchantLevel(Enchantment ench)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+        if (!hasEnchants())
+            return -1;
+        return enchantments.getOrDefault(ench, -1);
 	}
 
 	@Override
 	public Map<Enchantment, Integer> getEnchants()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+        return enchantments;
 	}
 
 	@Override
-	public boolean addEnchant(Enchantment ench, int level, boolean ignoreLevelRestriction)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+    public boolean addEnchant(Enchantment ench, int level, boolean ignoreRestrictions) {
+        //Copied from CraftItemMeta
+        if (enchantments == null)
+            enchantments = new HashMap<>(4);
+        if (!ignoreRestrictions && (level < ench.getStartLevel() || level > ench.getMaxLevel())) {
+            return false;
+        } else {
+            Integer old = enchantments.put(ench, level);
+            return old == null || old != level;
+        }
 	}
 
 	@Override
 	public boolean removeEnchant(Enchantment ench)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
+        boolean b = this.hasEnchants() && this.enchantments.remove(ench) != null;
+        if (this.enchantments != null && this.enchantments.isEmpty()) {
+            this.enchantments = null;
+        }
 
-	@Override
-	public boolean hasConflictingEnchant(Enchantment ench)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+        return b;
 	}
 
 	@Override
@@ -304,6 +329,11 @@ public class ItemMetaMock implements ItemMeta
         public void setUnbreakable(boolean unbreakable) {
             this.unbreakable = unbreakable;
         }
+    }
+
+    @Override
+    public boolean hasConflictingEnchant(Enchantment ench) {
+        return checkConflictingEnchants(this.enchantments, ench);
     }
 
 }
