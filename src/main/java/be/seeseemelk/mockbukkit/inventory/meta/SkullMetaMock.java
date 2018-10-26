@@ -1,6 +1,6 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
-import jdk.internal.joptsimple.internal.Strings;
+import com.google.common.base.Strings;
 import org.bukkit.inventory.meta.SkullMeta;
 
 /**
