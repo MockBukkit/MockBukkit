@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import com.google.common.collect.ImmutableMap;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -233,7 +234,7 @@ public class ItemMetaMock implements ItemMeta
 	@Override
 	public Map<Enchantment, Integer> getEnchants()
 	{
-        return enchantments;
+        return hasEnchants() ? ImmutableMap.copyOf(enchantments) : ImmutableMap.of();
 	}
 
 	@Override
