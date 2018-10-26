@@ -26,7 +26,7 @@ repositories {
 }
 
 dependencies {
-	compile 'org.spigotmc:spigot:1.13-SNAPSHOT'
+	compile 'org.spigotmc:spigot-api:1.13.2-R0.1-SNAPSHOT'
 	compile 'junit:junit:4.12'
 	compile 'org.apache.commons:commons-io:1.3.2'
 }

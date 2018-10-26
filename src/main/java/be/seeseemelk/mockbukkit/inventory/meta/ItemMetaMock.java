@@ -4,6 +4,7 @@ import static java.util.Objects.nonNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.HashMap;
@@ -13,10 +14,15 @@ import java.util.Map;
 import java.util.Set;
 
 import org.bukkit.Material;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
+
+import com.google.common.collect.Multimap;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
@@ -165,10 +171,12 @@ public class ItemMetaMock implements ItemMeta, Damageable
 	{
 		this.lore = new ArrayList<>(lore);
 	}
-	
+
+	private Spigot spigot;
+
 	/**
 	 * Asserts if the lore contains the given lines in order.
-	 *
+	 * 
 	 * @param lines The lines the lore should contain
 	 */
 	public void assertLore(List<String> lines)
@@ -401,5 +409,76 @@ public class ItemMetaMock implements ItemMeta, Damageable
 	public void setDamage(int damage)
 	{
 		this.damage = damage;
+	}
+
+	@Override
+	public Spigot spigot() {
+		if (spigot == null)
+			spigot = new Spigot();
+
+		return spigot;
+	}
+
+	@Override
+	public boolean hasAttributeModifiers()
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Multimap<Attribute, AttributeModifier> getAttributeModifiers()
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Collection<AttributeModifier> getAttributeModifiers(Attribute attribute)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean addAttributeModifier(Attribute attribute, AttributeModifier modifier)
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setAttributeModifiers(Multimap<Attribute, AttributeModifier> attributeModifiers)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean removeAttributeModifier(Attribute attribute)
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean removeAttributeModifier(EquipmentSlot slot)
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean removeAttributeModifier(Attribute attribute, AttributeModifier modifier)
+	{
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

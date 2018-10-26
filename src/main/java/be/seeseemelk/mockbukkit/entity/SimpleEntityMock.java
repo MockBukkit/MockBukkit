@@ -1,9 +1,12 @@
 package be.seeseemelk.mockbukkit.entity;
 
+import java.util.UUID;
+
+import org.bukkit.block.BlockFace;
+import org.bukkit.util.BoundingBox;
+
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-
-import java.util.UUID;
 
 /**
  * A very simple class that allows one to create an instance of an entity when a
@@ -39,6 +42,25 @@ public class SimpleEntityMock extends EntityMock
 	
 	@Override
 	public void setPersistent(boolean persistent)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public Spigot spigot() {
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public BoundingBox getBoundingBox()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public BlockFace getFacing()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

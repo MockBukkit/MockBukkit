@@ -1,27 +1,38 @@
 package be.seeseemelk.mockbukkit;
 
-import be.seeseemelk.mockbukkit.command.CommandResult;
-import be.seeseemelk.mockbukkit.command.ConsoleCommandSenderMock;
-import be.seeseemelk.mockbukkit.command.MessageTarget;
-import be.seeseemelk.mockbukkit.entity.EntityMock;
-import be.seeseemelk.mockbukkit.entity.PlayerMock;
-import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
-import be.seeseemelk.mockbukkit.inventory.ChestInventoryMock;
-import be.seeseemelk.mockbukkit.inventory.InventoryMock;
-import be.seeseemelk.mockbukkit.inventory.ItemFactoryMock;
-import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
-import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
-import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
-import be.seeseemelk.mockbukkit.scoreboard.ScoreboardManagerMock;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
+import java.util.function.Consumer;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
+
 import org.bukkit.BanEntry;
 import org.bukkit.BanList;
 import org.bukkit.BanList.Type;
 import org.bukkit.GameMode;
 import org.bukkit.Keyed;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Server;
+import org.bukkit.StructureType;
 import org.bukkit.Tag;
 import org.bukkit.UnsafeValues;
 import org.bukkit.Warning.WarningState;
@@ -33,6 +44,7 @@ import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarFlag;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
+import org.bukkit.boss.KeyedBossBar;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
@@ -56,27 +68,19 @@ import org.bukkit.plugin.ServicesManager;
 import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.util.CachedServerIcon;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-import java.util.function.Consumer;
-import java.util.logging.Level;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
-import java.util.stream.Collectors;
+import be.seeseemelk.mockbukkit.command.CommandResult;
+import be.seeseemelk.mockbukkit.command.ConsoleCommandSenderMock;
+import be.seeseemelk.mockbukkit.command.MessageTarget;
+import be.seeseemelk.mockbukkit.entity.EntityMock;
+import be.seeseemelk.mockbukkit.entity.PlayerMock;
+import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
+import be.seeseemelk.mockbukkit.inventory.ChestInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.InventoryMock;
+import be.seeseemelk.mockbukkit.inventory.ItemFactoryMock;
+import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
+import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
+import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
+import be.seeseemelk.mockbukkit.scoreboard.ScoreboardManagerMock;
 
 @SuppressWarnings("deprecation")
 public class ServerMock implements Server
@@ -1148,6 +1152,12 @@ public class ServerMock implements Server
 		throw new UnimplementedOperationException();
 	}
 	
+	public Spigot spigot()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+	
 	@Override
 	public BlockData createBlockData(String data) throws IllegalArgumentException
 	{
@@ -1171,6 +1181,49 @@ public class ServerMock implements Server
 	
 	@Override
 	public LootTable getLootTable(NamespacedKey key)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public ItemStack createExplorerMap(World world, Location location, StructureType structureType)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public ItemStack createExplorerMap(World world, Location location, StructureType structureType, int radius,
+			boolean findUnexplored)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public KeyedBossBar createBossBar(NamespacedKey key, String title, BarColor color, BarStyle style, BarFlag... flags)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public Iterator<KeyedBossBar> getBossBars()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public KeyedBossBar getBossBar(NamespacedKey key)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean removeBossBar(NamespacedKey key)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

@@ -11,12 +11,14 @@ import java.util.stream.Collectors;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.RenderType;
 import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
+@SuppressWarnings("deprecation")
 public class ScoreboardMock implements Scoreboard
 {
 	private Map<String, ObjectiveMock> objectives = new HashMap<>();
@@ -163,6 +165,14 @@ public class ScoreboardMock implements Scoreboard
 
 	@Override
 	public Objective registerNewObjective(String name, String criteria, String displayName)
+			throws IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public Objective registerNewObjective(String name, String criteria, String displayName, RenderType renderType)
 			throws IllegalArgumentException
 	{
 		// TODO Auto-generated method stub

@@ -1,22 +1,27 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.attribute.AttributeInstanceMock;
-import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
-import be.seeseemelk.mockbukkit.inventory.PlayerInventoryViewMock;
-import be.seeseemelk.mockbukkit.inventory.SimpleInventoryViewMock;
-import com.google.common.base.Charsets;
-import com.google.common.base.Function;
+import static org.junit.Assert.assertEquals;
+
+import java.net.InetSocketAddress;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.EnumMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
+
 import org.bukkit.Achievement;
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
+import org.bukkit.FluidCollisionMode;
 import org.bukkit.GameMode;
 import org.bukkit.Instrument;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.Note;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -28,6 +33,7 @@ import org.bukkit.advancement.AdvancementProgress;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationAbandonedEvent;
@@ -59,19 +65,20 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.util.BoundingBox;
+import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 
-import java.net.InetSocketAddress;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.EnumMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import com.google.common.base.Charsets;
+import com.google.common.base.Function;
 
-import static org.junit.Assert.assertEquals;
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.attribute.AttributeInstanceMock;
+import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.PlayerInventoryViewMock;
+import be.seeseemelk.mockbukkit.inventory.SimpleInventoryViewMock;
 
 @SuppressWarnings("deprecation")
 public class PlayerMock extends EntityMock implements Player
@@ -1664,9 +1671,14 @@ public class PlayerMock extends EntityMock implements Player
 	@Override
 	public void spawnParticle(Particle particle, Location location, int count)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		
 	}
+
+    @Override
+    public Player.Spigot spigot()
+    {
+        throw new UnimplementedOperationException();
+    }
 	
 	@Override
 	public void spawnParticle(Particle particle, double x, double y, double z, int count)
@@ -1846,6 +1858,83 @@ public class PlayerMock extends EntityMock implements Player
 	
 	@Override
 	public void updateCommands()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean discoverRecipe(NamespacedKey recipe)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int discoverRecipes(Collection<NamespacedKey> recipes)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean undiscoverRecipe(NamespacedKey recipe)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int undiscoverRecipes(Collection<NamespacedKey> recipes)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public Block getTargetBlockExact(int maxDistance)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public Block getTargetBlockExact(int maxDistance, FluidCollisionMode fluidCollisionMode)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public RayTraceResult rayTraceBlocks(double maxDistance)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public RayTraceResult rayTraceBlocks(double maxDistance, FluidCollisionMode fluidCollisionMode)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public BoundingBox getBoundingBox()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public BlockFace getFacing()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getClientViewDistance()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

@@ -1,15 +1,15 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
-import com.google.common.base.Strings;
-
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import org.apache.commons.lang.Validate;
 import org.bukkit.inventory.meta.BookMeta;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import com.google.common.base.Strings;
+
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
 /**
  * Created by SimplyBallistic on 26/10/2018
@@ -17,6 +17,7 @@ import java.util.List;
  * @author SimplyBallistic
  **/
 public class BookMetaMock extends ItemMetaMock implements BookMeta {
+	private BookMeta.Spigot spigot;
     private String title;
     private List<String> pages = new ArrayList<>();
     private String author;
@@ -154,5 +155,14 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta {
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+	
+
+	@Override
+	public BookMeta.Spigot spigot() {
+		if (spigot == null)
+			spigot = new BookMeta.Spigot();
+
+		return spigot;
 	}
 }
