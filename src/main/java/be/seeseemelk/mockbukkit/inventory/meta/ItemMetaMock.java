@@ -8,6 +8,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -19,6 +20,7 @@ public class ItemMetaMock implements ItemMeta
 	private String displayName = null;
 	private List<String> lore = null;
     private Map<Enchantment, Integer> enchantments = null;
+    private int hideFlag;
 	public ItemMetaMock()
 	{
 
@@ -262,33 +264,43 @@ public class ItemMetaMock implements ItemMeta
 	}
 
 	@Override
-	public void addItemFlags(ItemFlag... itemFlags)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+    public void addItemFlags(ItemFlag... hideFlags) {
+
+        for (ItemFlag f : hideFlags) {
+            this.hideFlag |= this.getBitModifier(f);
+        }
+
 	}
 
-	@Override
-	public void removeItemFlags(ItemFlag... itemFlags)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+    public void removeItemFlags(ItemFlag... hideFlags) {
+
+        for (ItemFlag f : hideFlags) {
+            this.hideFlag &= ~this.getBitModifier(f);
+        }
+
 	}
 
-	@Override
-	public Set<ItemFlag> getItemFlags()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
+    public Set<ItemFlag> getItemFlags() {
+        Set<ItemFlag> currentFlags = EnumSet.noneOf(ItemFlag.class);
+        ItemFlag[] enumValues = ItemFlag.values();
 
-	@Override
-	public boolean hasItemFlag(ItemFlag flag)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
+        for (ItemFlag f : enumValues) {
+            if (this.hasItemFlag(f)) {
+                currentFlags.add(f);
+            }
+        }
 
+        return currentFlags;
+    }
+
+    public boolean hasItemFlag(ItemFlag flag) {
+        int bitModifier = this.getBitModifier(flag);
+        return (this.hideFlag & bitModifier) == bitModifier;
+    }
+
+    private byte getBitModifier(ItemFlag hideFlag) {
+        return (byte) (1 << hideFlag.ordinal());
+    }
 	/**
 	 * Asserts if the lore contains the given lines in order.
 	 *
