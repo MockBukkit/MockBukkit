@@ -123,7 +123,7 @@ public class ItemMetaMock implements ItemMeta
 	}
 
 	@Override
-	public ItemMetaMock clone()
+	public ItemMeta clone()
 	{
 		try
 		{
