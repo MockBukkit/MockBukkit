@@ -292,6 +292,20 @@ public class ItemMetaMock implements ItemMeta
 
 	}
 
+    public class Spigot extends ItemMeta.Spigot {
+        private boolean unbreakable;
+
+        @Override
+        public boolean isUnbreakable() {
+            return unbreakable;
+        }
+
+        @Override
+        public void setUnbreakable(boolean unbreakable) {
+            this.unbreakable = unbreakable;
+        }
+    }
+
 }
 
 
