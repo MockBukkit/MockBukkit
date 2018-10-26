@@ -7,7 +7,14 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import static java.util.Objects.nonNull;
 
@@ -81,7 +88,7 @@ public class ItemMetaMock implements ItemMeta, Damageable
 	 *
 	 * @param meta The other item meta to check against.
 	 * @return {@code true} if both display names are equal, {@code false} if
-	 * they're not.
+	 *         they're not.
 	 */
 	private boolean isDisplayNameEqual(ItemMeta meta)
 	{
@@ -227,6 +234,32 @@ public class ItemMetaMock implements ItemMeta, Damageable
 		throw new UnimplementedOperationException();
 	}
 	
+	static boolean checkConflictingEnchants(Map<Enchantment, Integer> enchantments, Enchantment ench)
+	{
+		if (enchantments != null && !enchantments.isEmpty())
+		{
+			Iterator<Enchantment> var2 = enchantments.keySet().iterator();
+			
+			Enchantment enchant;
+			do
+			{
+				if (!var2.hasNext())
+				{
+					return false;
+				}
+				
+				enchant = (Enchantment) var2.next();
+			}
+			while (!enchant.conflictsWith(ench));
+			
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
 	@Override
 	public boolean hasLocalizedName()
 	{
@@ -251,25 +284,25 @@ public class ItemMetaMock implements ItemMeta, Damageable
 	@Override
 	public boolean hasEnchants()
 	{
-		return !this.enchants.keySet().isEmpty();
+		return !enchants.isEmpty();
 	}
 	
 	@Override
 	public boolean hasEnchant(Enchantment ench)
 	{
-		return this.enchants.containsKey(ench);
+		return enchants.containsKey(ench);
 	}
 	
 	@Override
 	public int getEnchantLevel(Enchantment ench)
 	{
-		return hasEnchant(ench) ? this.enchants.get(ench) : 0;
+		return hasEnchant(ench) ? enchants.get(ench) : 0;
 	}
 	
 	@Override
 	public Map<Enchantment, Integer> getEnchants()
 	{
-		return Collections.unmodifiableMap(this.enchants);
+		return Collections.unmodifiableMap(enchants);
 	}
 	
 	@Override
@@ -302,8 +335,13 @@ public class ItemMetaMock implements ItemMeta, Damageable
 	@Override
 	public boolean hasConflictingEnchant(Enchantment ench)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		boolean b = this.hasEnchants() && enchants.remove(ench) != null;
+		if (enchants != null && enchants.isEmpty())
+		{
+			enchants = null;
+		}
+		
+		return b;
 	}
 	
 	@Override
