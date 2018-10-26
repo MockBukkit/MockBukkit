@@ -1,22 +1,24 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.inventory.ItemFlag;
-import org.bukkit.inventory.meta.Damageable;
-import org.bukkit.inventory.meta.ItemMeta;
+import static java.util.Objects.nonNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static java.util.Objects.nonNull;
+import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
+import org.bukkit.inventory.meta.Damageable;
+import org.bukkit.inventory.meta.ItemMeta;
+
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
 public class ItemMetaMock implements ItemMeta, Damageable
 {
@@ -24,6 +26,7 @@ public class ItemMetaMock implements ItemMeta, Damageable
 	private List<String> lore = null;
 	private int damage = 0;
 	private Map<Enchantment, Integer> enchants = new HashMap<>();
+	private Set<ItemFlag> hideFlags = EnumSet.noneOf(ItemFlag.class);
 	
 	public ItemMetaMock()
 	{
@@ -347,29 +350,25 @@ public class ItemMetaMock implements ItemMeta, Damageable
 	@Override
 	public void addItemFlags(ItemFlag... itemFlags)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		hideFlags.addAll(Arrays.asList(itemFlags));
 	}
 	
 	@Override
 	public void removeItemFlags(ItemFlag... itemFlags)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		hideFlags.removeAll(Arrays.asList(itemFlags));
 	}
 	
 	@Override
 	public Set<ItemFlag> getItemFlags()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return Collections.unmodifiableSet(hideFlags);
 	}
 	
 	@Override
 	public boolean hasItemFlag(ItemFlag flag)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return hideFlags.contains(flag);
 	}
 	
 	@Override
