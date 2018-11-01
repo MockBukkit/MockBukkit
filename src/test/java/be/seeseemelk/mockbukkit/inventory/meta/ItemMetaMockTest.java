@@ -1,22 +1,21 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class ItemMetaMockTest
 {
 	private ItemMetaMock meta;
 
 	@Before
-	public void setUp() throws Exception
-	{
+	public void setUp() {
 		meta = new ItemMetaMock();
 	}
 
@@ -130,7 +129,7 @@ public class ItemMetaMockTest
 	public void clone_WithDisplayName_ClonedExactly()
 	{
 		meta.setDisplayName("Some name");
-		ItemMetaMock cloned = meta.clone();
+		ItemMetaMock cloned = (ItemMetaMock) meta.clone();
 		assertEquals(meta, cloned);
 		assertEquals(meta.hashCode(), cloned.hashCode());
 	}

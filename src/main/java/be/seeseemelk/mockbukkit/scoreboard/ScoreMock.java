@@ -60,6 +60,11 @@ public class ScoreMock implements Score
 	}
 
 	@Override
+	public boolean isScoreSet() throws IllegalStateException {
+		return false;
+	}
+
+	@Override
 	public Scoreboard getScoreboard()
 	{
 		return objective.getScoreboard();
