@@ -1,30 +1,29 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class ItemMetaMock implements ItemMeta, Damageable
 {
 	private String displayName = null;
 	private List<String> lore = null;
 	private int damage = 0;
-
+	
 	public ItemMetaMock()
 	{
-
+		
 	}
-
+	
 	public ItemMetaMock(ItemMeta meta)
 	{
 		if (meta.hasDisplayName())
@@ -32,19 +31,19 @@ public class ItemMetaMock implements ItemMeta, Damageable
 		if (meta.hasLore())
 			lore = meta.getLore();
 	}
-
+	
 	@Override
 	public boolean hasDisplayName()
 	{
 		return displayName != null;
 	}
-
+	
 	@Override
 	public String getDisplayName()
 	{
 		return displayName;
 	}
-
+	
 	@Override
 	public void setDisplayName(String name)
 	{
@@ -53,6 +52,7 @@ public class ItemMetaMock implements ItemMeta, Damageable
 	
 	/**
 	 * Checks if this items lore is equal to some other lore.
+	 *
 	 * @param meta The other item meta whose lore should be compared.
 	 * @return {@code true} if they are the same, {@code false} if they're not.
 	 */
@@ -77,10 +77,12 @@ public class ItemMetaMock implements ItemMeta, Damageable
 	}
 	
 	/**
-	 * Checks if the display name of this item meta is equal to
-	 * the display name of another one.
+	 * Checks if the display name of this item meta is equal to the display name of
+	 * another one.
+	 *
 	 * @param meta The other item meta to check against.
-	 * @return {@code true} if both display names are equal, {@code false} if they're not.
+	 * @return {@code true} if both display names are equal, {@code false} if
+	 *         they're not.
 	 */
 	private boolean isDisplayNameEqual(ItemMeta meta)
 	{
@@ -106,7 +108,7 @@ public class ItemMetaMock implements ItemMeta, Damageable
 		result = prime * result + ((lore == null) ? 0 : lore.hashCode());
 		return result;
 	}
-
+	
 	@Override
 	public boolean equals(Object obj)
 	{
@@ -120,7 +122,7 @@ public class ItemMetaMock implements ItemMeta, Damageable
 			return false;
 		}
 	}
-
+	
 	@Override
 	public ItemMetaMock clone()
 	{
@@ -136,19 +138,19 @@ public class ItemMetaMock implements ItemMeta, Damageable
 			throw new Error(e);
 		}
 	}
-
+	
 	@Override
 	public boolean hasLore()
 	{
 		return lore != null;
 	}
-
+	
 	@Override
 	public List<String> getLore()
 	{
 		return new ArrayList<>(lore);
 	}
-
+	
 	@Override
 	public void setLore(List<String> lore)
 	{
@@ -157,7 +159,8 @@ public class ItemMetaMock implements ItemMeta, Damageable
 	
 	/**
 	 * Asserts if the lore contains the given lines in order.
-	 * @param lines The lines the lore should contain 
+	 *
+	 * @param lines The lines the lore should contain
 	 */
 	public void assertLore(List<String> lines)
 	{
@@ -167,23 +170,26 @@ public class ItemMetaMock implements ItemMeta, Damageable
 			{
 				if (!lore.get(i).equals(lines.get(i)))
 				{
-					throw new AssertionError(String.format("Line %d should be '%s' but was '%s'", i, lines.get(i), lore.get(i)));
+					throw new AssertionError(
+							String.format("Line %d should be '%s' but was '%s'", i, lines.get(i), lore.get(i)));
 				}
 			}
 		}
 		else if (lore != null)
 		{
-			throw new AssertionError(String.format("Lore contained %d lines but should contain %d lines", lore.size(), lines.size()));
+			throw new AssertionError(
+					String.format("Lore contained %d lines but should contain %d lines", lore.size(), lines.size()));
 		}
 		else
 		{
 			throw new AssertionError("No lore was set");
 		}
 	}
-
+	
 	/**
 	 * Asserts if the lore contains the given lines in order.
-	 * @param lines The lines the lore should contain 
+	 *
+	 * @param lines The lines the lore should contain
 	 */
 	public void assertLore(String... lines)
 	{
@@ -192,7 +198,7 @@ public class ItemMetaMock implements ItemMeta, Damageable
 	
 	/**
 	 * Asserts that the item meta contains no lore.
-	 * 
+	 *
 	 * @throws AssertionError if the item meta contains some lore.
 	 */
 	public void assertHasNoLore() throws AssertionError
@@ -202,10 +208,11 @@ public class ItemMetaMock implements ItemMeta, Damageable
 			throw new AssertionError("Lore was set but shouldn't have been set");
 		}
 	}
-
+	
 	/**
-	 * Used internally for the ItemFactoryMock.
-	 * This code is based on `CraftMetaItem#updateMaterial`
+	 * Used internally for the ItemFactoryMock. This code is based on
+	 * `CraftMetaItem#updateMaterial`
+	 *
 	 * @param material
 	 * @return
 	 */
@@ -213,151 +220,142 @@ public class ItemMetaMock implements ItemMeta, Damageable
 	{
 		return material;
 	}
-
+	
 	@Override
 	public Map<String, Object> serialize()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean hasLocalizedName()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public String getLocalizedName()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setLocalizedName(String name)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean hasEnchants()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean hasEnchant(Enchantment ench)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public int getEnchantLevel(Enchantment ench)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public Map<Enchantment, Integer> getEnchants()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean addEnchant(Enchantment ench, int level, boolean ignoreLevelRestriction)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean removeEnchant(Enchantment ench)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean hasConflictingEnchant(Enchantment ench)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void addItemFlags(ItemFlag... itemFlags)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void removeItemFlags(ItemFlag... itemFlags)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public Set<ItemFlag> getItemFlags()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean hasItemFlag(ItemFlag flag)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean isUnbreakable()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setUnbreakable(boolean unbreakable)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean hasDamage()
 	{
 		return damage > 0;
 	}
-
+	
 	@Override
 	public int getDamage()
 	{
 		return damage;
 	}
-
+	
 	@Override
 	public void setDamage(int damage)
 	{
 		this.damage = damage;
 	}
-
+	
 }
-
-
-
-
-
-
-
-
-
