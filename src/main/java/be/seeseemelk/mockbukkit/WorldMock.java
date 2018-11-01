@@ -60,12 +60,11 @@ public class WorldMock implements World
 	/**
 	 * Creates a new mock world.
 	 * 
-	 * @param defaultBlock
-	 *            The block that is spawned at locations 1 to {@code grassHeight}
-	 * @param height
-	 *            The height of the world.
-	 * @param grassHeight
-	 *            The last {@code y} at which {@code defaultBlock} will spawn.
+	 * @param defaultBlock The block that is spawned at locations 1 to
+	 *            {@code grassHeight}
+	 * @param height The height of the world.
+	 * @param grassHeight The last {@code y} at which {@code defaultBlock} will
+	 *            spawn.
 	 */
 	public WorldMock(Material defaultBlock, int height, int grassHeight)
 	{
@@ -77,10 +76,10 @@ public class WorldMock implements World
 	/**
 	 * Creates a new mock world with a height of 128.
 	 * 
-	 * @param defaultBlock
-	 *            The block that is spawned at locations 1 to {@code grassHeight}
-	 * @param grassHeight
-	 *            The last {@code y} at which {@code defaultBlock} will spawn.
+	 * @param defaultBlock The block that is spawned at locations 1 to
+	 *            {@code grassHeight}
+	 * @param grassHeight The last {@code y} at which {@code defaultBlock} will
+	 *            spawn.
 	 */
 	public WorldMock(Material defaultBlock, int grassHeight)
 	{
@@ -99,8 +98,7 @@ public class WorldMock implements World
 	/**
 	 * Makes sure that a certain block exists on the coordinate. Returns that block.
 	 * 
-	 * @param c
-	 *            Creates a block on the given coordinate.
+	 * @param c Creates a block on the given coordinate.
 	 * @return A newly created block at that location.
 	 */
 	public BlockMock createBlock(Coordinate c)
@@ -152,8 +150,7 @@ public class WorldMock implements World
 	/**
 	 * Give a new name to this world.
 	 * 
-	 * @param name
-	 *            The new name of this world.
+	 * @param name The new name of this world.
 	 */
 	public void setName(String name)
 	{
@@ -990,13 +987,14 @@ public class WorldMock implements World
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
-    @Override
-    public Spigot spigot() {
-        throw new UnimplementedOperationException();
-    }
-
-    @Override
+	
+	@Override
+	public Spigot spigot()
+	{
+		throw new UnimplementedOperationException();
+	}
+	
+	@Override
 	public WorldBorder getWorldBorder()
 	{
 		// TODO Auto-generated method stub

@@ -58,7 +58,7 @@ public class ItemFactoryMock implements ItemFactory
 				return ItemMetaMock.class;
 		}
 	}
-
+	
 	@Override
 	public ItemMeta getItemMeta(Material material)
 	{
@@ -71,20 +71,20 @@ public class ItemFactoryMock implements ItemFactory
 			throw new UnsupportedOperationException("Can't instantiate class");
 		}
 	}
-
+	
 	@Override
 	public boolean isApplicable(ItemMeta meta, ItemStack stack) throws IllegalArgumentException
 	{
 		return isApplicable(meta, stack.getType());
 	}
-
+	
 	@Override
 	public boolean isApplicable(ItemMeta meta, Material material) throws IllegalArgumentException
 	{
 		Class<? extends ItemMeta> target = getItemMetaClass(material);
 		return target.isInstance(meta);
 	}
-
+	
 	@Override
 	public boolean equals(ItemMeta meta1, ItemMeta meta2) throws IllegalArgumentException
 	{
@@ -97,13 +97,13 @@ public class ItemFactoryMock implements ItemFactory
 			return false;
 		}
 	}
-
+	
 	@Override
 	public ItemMeta asMetaFor(ItemMeta meta, ItemStack stack) throws IllegalArgumentException
 	{
 		return asMetaFor(meta, stack.getType());
 	}
-
+	
 	@Override
 	public ItemMeta asMetaFor(ItemMeta meta, Material material) throws IllegalArgumentException
 	{
@@ -124,35 +124,19 @@ public class ItemFactoryMock implements ItemFactory
 				Constructor<? extends ItemMeta> constructor = target.getDeclaredConstructor(ItemMeta.class);
 				return constructor.newInstance(meta);
 			}
-			catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | InvocationTargetException e1)
+			catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
+					| InvocationTargetException e1)
 			{
 				throw new Error(e);
 			}
 		}
 	}
-
+	
 	@Override
 	public Color getDefaultLeatherColor()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
