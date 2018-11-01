@@ -1,16 +1,17 @@
 package be.seeseemelk.mockbukkit.inventory;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.inventory.meta.BookMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.SkullMetaMock;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFactory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
 public class ItemFactoryMock implements ItemFactory
 {
@@ -24,8 +25,7 @@ public class ItemFactoryMock implements ItemFactory
 				// TODO Auto-generated method stub
 				throw new UnimplementedOperationException();
 			case BOOK:
-				// TODO Auto-generated method stub
-				throw new UnimplementedOperationException();
+				return BookMetaMock.class;
 			case ENCHANTED_BOOK:
 				// TODO Auto-generated method stub
 				throw new UnimplementedOperationException();
@@ -47,7 +47,7 @@ public class ItemFactoryMock implements ItemFactory
 			case SKULL:
 			case SKULL_ITEM:
 				// TODO Auto-generated method stub
-				throw new UnimplementedOperationException();
+				return SkullMetaMock.class;
 			case EGG:
 			case DRAGON_EGG:
 			case MONSTER_EGG:
@@ -58,7 +58,7 @@ public class ItemFactoryMock implements ItemFactory
 				return ItemMetaMock.class;
 		}
 	}
-
+	
 	@Override
 	public ItemMeta getItemMeta(Material material)
 	{
@@ -71,27 +71,20 @@ public class ItemFactoryMock implements ItemFactory
 			throw new UnsupportedOperationException("Can't instantiate class");
 		}
 	}
-
+	
 	@Override
 	public boolean isApplicable(ItemMeta meta, ItemStack stack) throws IllegalArgumentException
 	{
 		return isApplicable(meta, stack.getType());
 	}
-
+	
 	@Override
 	public boolean isApplicable(ItemMeta meta, Material material) throws IllegalArgumentException
 	{
 		Class<? extends ItemMeta> target = getItemMetaClass(material);
-		if (target.isInstance(meta))
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return target.isInstance(meta);
 	}
-
+	
 	@Override
 	public boolean equals(ItemMeta meta1, ItemMeta meta2) throws IllegalArgumentException
 	{
@@ -104,13 +97,13 @@ public class ItemFactoryMock implements ItemFactory
 			return false;
 		}
 	}
-
+	
 	@Override
 	public ItemMeta asMetaFor(ItemMeta meta, ItemStack stack) throws IllegalArgumentException
 	{
 		return asMetaFor(meta, stack.getType());
 	}
-
+	
 	@Override
 	public ItemMeta asMetaFor(ItemMeta meta, Material material) throws IllegalArgumentException
 	{
@@ -131,35 +124,19 @@ public class ItemFactoryMock implements ItemFactory
 				Constructor<? extends ItemMeta> constructor = target.getDeclaredConstructor(ItemMeta.class);
 				return constructor.newInstance(meta);
 			}
-			catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | InvocationTargetException e1)
+			catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
+					| InvocationTargetException e1)
 			{
 				throw new Error(e);
 			}
 		}
 	}
-
+	
 	@Override
 	public Color getDefaultLeatherColor()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
