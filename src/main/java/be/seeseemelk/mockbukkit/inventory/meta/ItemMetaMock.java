@@ -3,21 +3,22 @@ package be.seeseemelk.mockbukkit.inventory.meta;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.enchantments.EnchantmentWrapper;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+
+import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
 
 public class ItemMetaMock implements ItemMeta, Damageable
 {
 	private String displayName = null;
 	private List<String> lore = null;
 	private int damage = 0;
+	private Map<Enchantment, Integer> enchants = new HashMap<>();
 	
 	public ItemMetaMock()
 	{
@@ -35,7 +36,7 @@ public class ItemMetaMock implements ItemMeta, Damageable
 	@Override
 	public boolean hasDisplayName()
 	{
-		return displayName != null;
+		return nonNull(displayName);
 	}
 	
 	@Override
@@ -252,50 +253,55 @@ public class ItemMetaMock implements ItemMeta, Damageable
 	@Override
 	public boolean hasEnchants()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+	     return !this.enchants.keySet().isEmpty();
 	}
 	
 	@Override
 	public boolean hasEnchant(Enchantment ench)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.enchants.containsKey(ench);
 	}
 	
 	@Override
 	public int getEnchantLevel(Enchantment ench)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return hasEnchant(ench) ? this.enchants.get(ench) : 0;
 	}
 	
 	@Override
 	public Map<Enchantment, Integer> getEnchants()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return Collections.unmodifiableMap(this.enchants);
 	}
 	
 	@Override
 	public boolean addEnchant(Enchantment ench, int level, boolean ignoreLevelRestriction)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+	    Integer existingLevel = this.enchants.get(ench);
+	    if(nonNull(existingLevel) && existingLevel.equals(level)) {
+	        return false; // Already exists with the same level
+        }
+
+        if(ignoreLevelRestriction) {
+            this.enchants.put(ench, level);
+            return true;
+        } else {
+            // TODO Auto-generated method stub
+           throw new UnimplementedOperationException();
+        }
 	}
 	
 	@Override
 	public boolean removeEnchant(Enchantment ench)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+	   return nonNull(this.enchants.remove(ench));
 	}
 	
 	@Override
 	public boolean hasConflictingEnchant(Enchantment ench)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+        // TODO Auto-generated method stub
+        throw new UnimplementedOperationException();
 	}
 	
 	@Override
