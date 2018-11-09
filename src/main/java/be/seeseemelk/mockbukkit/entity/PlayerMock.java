@@ -1,12 +1,17 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
-import be.seeseemelk.mockbukkit.inventory.PlayerInventoryViewMock;
-import be.seeseemelk.mockbukkit.inventory.SimpleInventoryViewMock;
-import com.google.common.base.Charsets;
-import com.google.common.base.Function;
+import static org.junit.Assert.assertEquals;
+
+import java.net.InetSocketAddress;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.EnumMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
+
 import org.bukkit.Achievement;
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
@@ -50,17 +55,15 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.util.Vector;
 
-import java.net.InetSocketAddress;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.EnumMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import com.google.common.base.Charsets;
+import com.google.common.base.Function;
 
-import static org.junit.Assert.assertEquals;
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.PlayerInventoryViewMock;
+import be.seeseemelk.mockbukkit.inventory.SimpleInventoryViewMock;
 
 public class PlayerMock extends EntityMock implements Player
 {
@@ -74,15 +77,15 @@ public class PlayerMock extends EntityMock implements Player
 	private boolean whitelisted = true;
 	private InventoryView inventoryView;
 	
-	public PlayerMock(String name)
+	public PlayerMock(ServerMock server, String name)
 	{
-		this(name, UUID.nameUUIDFromBytes(("OfflinePlayer:" + name).getBytes(Charsets.UTF_8)));
+		this(server, name, UUID.nameUUIDFromBytes(("OfflinePlayer:" + name).getBytes(Charsets.UTF_8)));
 		this.online = false;
 	}
 	
-	public PlayerMock(String name, UUID uuid)
+	public PlayerMock(ServerMock server, String name, UUID uuid)
 	{
-		super(uuid);
+		super(server, uuid);
 		setName(name);
 		setDisplayName(name);
 		this.online = true;
@@ -355,12 +358,6 @@ public class PlayerMock extends EntityMock implements Player
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-	}
-	
-	@Override
-	public ItemStack getItemInHand()
-	{
-		return getInventory().getItemInHand();
 	}
 	
 	@Override
@@ -901,13 +898,6 @@ public class PlayerMock extends EntityMock implements Player
 	
 	@Override
 	public boolean sendChunkChange(Location loc, int sx, int sy, int sz, byte[] data)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-	
-	@Override
-	public void sendBlockChange(Location loc, int material, byte data)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1535,6 +1525,20 @@ public class PlayerMock extends EntityMock implements Player
 		this.maxHealth = health;
 		if (getHealth() > maxHealth)
 			setHealth(maxHealth);
+	}
+
+	@Override
+	public ItemStack getItemInHand()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void sendBlockChange(Location loc, int material, byte data)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 	
 }

@@ -36,7 +36,7 @@ public class ScheduledTask implements BukkitTask
 	 * Sets the tick at which the task is scheduled to run at.
 	 * @param scheduledTick The tick at which the task is scheduled to run at.
 	 */
-	protected void setScheduledtick(long scheduledTick)
+	protected void setScheduledTick(long scheduledTick)
 	{
 		this.scheduledTick = scheduledTick;
 	}

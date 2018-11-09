@@ -15,10 +15,10 @@ public class RepeatingTaskTest
 	}
 	
 	@Test
-	public void getScheduledTick_Run_Changed()
+	public void getScheduledTick_AfterUpdateScheduledTick_Changed()
 	{
 		RepeatingTask task = new RepeatingTask(0, null, true, 10, 20, () -> {});
-		task.run();
+		task.updateScheduledTick();
 		assertEquals(30, task.getScheduledTick());
 	}
 	

@@ -5,20 +5,22 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import org.bukkit.enchantments.Enchantment;
 
 public class ItemMetaMockTest
 {
 	private ItemMetaMock meta;
-
+	
 	@Before
 	public void setUp() {
 		meta = new ItemMetaMock();
 	}
-
+	
 	@Test
 	public void new_CopyConstructor_Copied()
 	{
@@ -172,6 +174,67 @@ public class ItemMetaMockTest
 	}
 	
 	@Test
+	public void hasEnchants()
+	{
+		assertFalse(meta.hasEnchants());
+		meta.addEnchant(Enchantment.DURABILITY, 1, true);
+		assertTrue(meta.hasEnchants());
+	}
+	
+	@Test
+	public void hasEnchant()
+	{
+		assertFalse(meta.hasEnchant(Enchantment.LUCK));
+		meta.addEnchant(Enchantment.LUCK, 1, true);
+		assertTrue(meta.hasEnchant(Enchantment.LUCK));
+	}
+	
+	@Test
+	public void getEnchantLevel()
+	{
+		assertEquals(0, meta.getEnchantLevel(Enchantment.DURABILITY));
+		meta.addEnchant(Enchantment.DURABILITY, 50, true);
+		assertEquals(50, meta.getEnchantLevel(Enchantment.DURABILITY));
+	}
+	
+	@Test
+	public void getEnchants()
+	{
+		meta.addEnchant(Enchantment.DURABILITY, 3, true);
+		
+		Map<Enchantment, Integer> actual = meta.getEnchants();
+		assertEquals(1, actual.size());
+		assertTrue(3 == actual.get(Enchantment.DURABILITY));
+	}
+	
+	@Test
+	public void removeEnchant_NotExisting()
+	{
+		assertFalse(meta.removeEnchant(Enchantment.DAMAGE_ALL));
+	}
+	
+	@Test
+	public void removeEnchant()
+	{
+		meta.addEnchant(Enchantment.DAMAGE_ALL, 5, true);
+		assertTrue(meta.removeEnchant(Enchantment.DAMAGE_ALL));
+	}
+	
+	@Test
+	public void addEnchant_IgnoreLevel()
+	{
+		assertTrue(meta.addEnchant(Enchantment.DURABILITY, 100, true));
+		assertTrue(meta.hasEnchant(Enchantment.DURABILITY));
+	}
+	
+	@Test
+	public void addEnchant_AlreadyExist()
+	{
+		meta.addEnchant(Enchantment.DURABILITY, 100, true);
+		assertFalse(meta.addEnchant(Enchantment.DURABILITY, 100, true));
+	}
+	
+	@Test
 	public void assertHasNoLore_HasNoLore_Returns()
 	{
 		meta.assertHasNoLore();
@@ -198,29 +261,3 @@ public class ItemMetaMockTest
 		meta.assertLore("Something", "else");
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

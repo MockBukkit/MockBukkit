@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicReference;
 
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -60,7 +61,7 @@ public class ServerMockTest
 	@Test
 	public void addPlayer_TwoPlayers_SizeIsTwo()
 	{
-		PlayerMockFactory factory = new PlayerMockFactory();
+		PlayerMockFactory factory = new PlayerMockFactory(server);
 		PlayerMock player1 = factory.createRandomPlayer();
 		PlayerMock player2 = factory.createRandomPlayer();
 		
@@ -361,8 +362,8 @@ public class ServerMockTest
 	@Test
 	public void getEntities_TwoEntitiesRegistered_SetContainsEntities()
 	{
-		EntityMock entity1 = new SimpleEntityMock();
-		EntityMock entity2 = new SimpleEntityMock();
+		EntityMock entity1 = new SimpleEntityMock(server);
+		EntityMock entity2 = new SimpleEntityMock(server);
 		server.registerEntity(entity1);
 		server.registerEntity(entity2);
 		Set<EntityMock> entities = server.getEntities();
@@ -373,7 +374,7 @@ public class ServerMockTest
 	@Test
 	public void getPlayer_NameAndPlayerExists_PlayerFound()
 	{
-		PlayerMock player = new PlayerMock("player");
+		PlayerMock player = new PlayerMock(server, "player");
 		server.addPlayer(player);
 		assertSame(player, server.getPlayer("player"));
 	}
@@ -381,7 +382,7 @@ public class ServerMockTest
 	@Test
 	public void getPlayer_NameAndPlayerExistsButCasingWrong_PlayerNotFound()
 	{
-		PlayerMock player = new PlayerMock("player");
+		PlayerMock player = new PlayerMock(server, "player");
 		server.addPlayer(player);
 		assertSame(player, server.getPlayer("PLAYER"));
 	}
@@ -389,7 +390,7 @@ public class ServerMockTest
 	@Test
 	public void getPlayer_UUIDAndPlayerExists_PlayerFound()
 	{
-		PlayerMock player = new PlayerMock("player");
+		PlayerMock player = new PlayerMock(server, "player");
 		server.addPlayer(player);
 		assertSame(player, server.getPlayer(player.getUniqueId()));
 	}
@@ -397,7 +398,7 @@ public class ServerMockTest
 	@Test
 	public void getPlayer_PlayerNamePartiallyCorrect_PlayerFound()
 	{
-		PlayerMock player = new PlayerMock("player_other");
+		PlayerMock player = new PlayerMock(server, "player_other");
 		server.addPlayer(player);
 		assertSame(player, server.getPlayer("player"));
 	}
@@ -405,7 +406,7 @@ public class ServerMockTest
 	@Test
 	public void getPlayer_PlayerNameIncorrect_PlayerNotFound()
 	{
-		PlayerMock player = new PlayerMock("player_other");
+		PlayerMock player = new PlayerMock(server, "player_other");
 		server.addPlayer(player);
 		assertNull(server.getPlayer("other_player"));
 	}
@@ -413,7 +414,7 @@ public class ServerMockTest
 	@Test
 	public void getPlayer_PlayerNameCasingIncorrect_PlayerFound()
 	{
-		PlayerMock player = new PlayerMock("player");
+		PlayerMock player = new PlayerMock(server, "player");
 		server.addPlayer(player);
 		assertSame(player, server.getPlayer("PLAYER"));
 	}
@@ -421,7 +422,7 @@ public class ServerMockTest
 	@Test
 	public void getPlayerExact_CasingMatches_PlayerFound()
 	{
-		PlayerMock player = new PlayerMock("player");
+		PlayerMock player = new PlayerMock(server, "player");
 		server.addPlayer(player);
 		assertSame(player, server.getPlayerExact("player"));
 	}
@@ -429,7 +430,7 @@ public class ServerMockTest
 	@Test
 	public void getPlayerExact_CasingDoesNotMatch_PlayerNotFoundFound()
 	{
-		PlayerMock player = new PlayerMock("player");
+		PlayerMock player = new PlayerMock(server, "player");
 		server.addPlayer(player);
 		assertNull(server.getPlayerExact("PLAYER"));
 	}
@@ -437,7 +438,7 @@ public class ServerMockTest
 	@Test
 	public void getPlayerExact_PlayerNameIncorrect_PlayerNotFound()
 	{
-		PlayerMock player = new PlayerMock("player_other");
+		PlayerMock player = new PlayerMock(server, "player_other");
 		server.addPlayer(player);
 		assertNull(server.getPlayerExact("player"));
 	}
@@ -447,6 +448,34 @@ public class ServerMockTest
 	{
 		ScoreboardManager manager = server.getScoreboardManager();
 		assertNotNull(manager);
+	}
+	
+	@Test
+	public void assertMainThread_MainThread_Succeeds()
+	{
+		server.assertMainThread();
+	}
+	
+	@Test(expected = ThreadAccessException.class)
+	public void assertMainThread_NotMainThread_ThrowsException() throws Exception
+	{
+		AtomicReference<Exception> exceptionThrown = new AtomicReference<>();
+		
+		server.getScheduler().runTaskAsynchronously(null, () -> {
+			try
+			{
+				server.assertMainThread();
+			}
+			catch (ThreadAccessException e)
+			{
+				exceptionThrown.set(e);
+			}
+		});
+		
+		server.getScheduler().waitAsyncTasksFinished();
+		
+		if (exceptionThrown.get() != null)
+			throw exceptionThrown.get();
 	}
 }
 

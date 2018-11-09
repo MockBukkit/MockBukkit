@@ -161,5 +161,4 @@ public class ScoreboardMock implements Scoreboard
 		if (objectiveMock.getDisplaySlot() != null)
 			objectivesByDisplaySlot.remove(objectiveMock.getDisplaySlot());
 	}
-	
 }

@@ -35,7 +35,7 @@ public class EntityMockTest
 	{
 		server = MockBukkit.mock();
 		world = server.addSimpleWorld("world");
-		entity = new SimpleEntityMock();
+		entity = new SimpleEntityMock(server);
 	}
 	
 	@After
@@ -120,7 +120,7 @@ public class EntityMockTest
 	@Test
 	public void teleport_Entity_LocationSetToEntity()
 	{
-		SimpleEntityMock entity2 = new SimpleEntityMock();
+		SimpleEntityMock entity2 = new SimpleEntityMock(server);
 		Location location = entity2.getLocation();
 		location.add(0, 5, 0);
 		entity2.teleport(location);
@@ -160,7 +160,7 @@ public class EntityMockTest
 	public void getUniqueId_UUIDPassedOn_GetsSameUuid()
 	{
 		UUID uuid = UUID.randomUUID();
-		entity = new SimpleEntityMock(uuid);
+		entity = new SimpleEntityMock(server, uuid);
 		assertEquals(uuid, entity.getUniqueId());
 	}
 	
@@ -177,14 +177,14 @@ public class EntityMockTest
 	@Test
 	public void equals_SameUUID_Equal()
 	{
-		EntityMock entity2 = new SimpleEntityMock(entity.getUniqueId());
+		EntityMock entity2 = new SimpleEntityMock(server, entity.getUniqueId());
 		assertTrue("Two equal entities are not equal", entity.equals(entity2));
 	}
 	
 	@Test
 	public void equals_DifferentUUID_Different()
 	{
-		EntityMock entity2 = new SimpleEntityMock();
+		EntityMock entity2 = new SimpleEntityMock(server);
 		assertFalse("Two different entities detected as equal", entity.equals(entity2));
 	}
 	

@@ -15,7 +15,6 @@ import java.util.concurrent.LinkedTransferQueue;
 import org.bukkit.Bukkit;
 import org.bukkit.EntityEffect;
 import org.bukkit.Location;
-import org.bukkit.Server;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -28,12 +27,14 @@ import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 
+import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.command.MessageTarget;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
 
 public abstract class EntityMock implements Entity, MessageTarget
 {
+	private final ServerMock server;
 	private final UUID uuid;
 	private Location location;
 	private boolean teleported;
@@ -44,8 +45,9 @@ public abstract class EntityMock implements Entity, MessageTarget
 	private final Queue<String> messages = new LinkedTransferQueue<>();
 	private final Set<PermissionAttachment> permissionAttachments = new HashSet<>();
 	
-	public EntityMock(UUID uuid)
+	public EntityMock(ServerMock server, UUID uuid)
 	{
+		this.server = server;
 		this.uuid = uuid;
 		
 		if (Bukkit.getWorlds().size() > 0)
@@ -446,10 +448,9 @@ public abstract class EntityMock implements Entity, MessageTarget
 	}
 	
 	@Override
-	public Server getServer()
+	public ServerMock getServer()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return server;
 	}
 	
 	@Override

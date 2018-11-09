@@ -1,17 +1,18 @@
 package be.seeseemelk.mockbukkit.inventory;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.inventory.meta.BookMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.SkullMetaMock;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFactory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.inventory.meta.BookMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.SkullMetaMock;
 
 public class ItemFactoryMock implements ItemFactory
 {
@@ -19,11 +20,6 @@ public class ItemFactoryMock implements ItemFactory
 	{
 		switch (material)
 		{
-			case BANNER:
-			case STANDING_BANNER:
-			case WALL_BANNER:
-				// TODO Auto-generated method stub
-				throw new UnimplementedOperationException();
 			case BOOK:
 				return BookMetaMock.class;
 			case ENCHANTED_BOOK:
@@ -50,10 +46,6 @@ public class ItemFactoryMock implements ItemFactory
 				return SkullMetaMock.class;
 			case EGG:
 			case DRAGON_EGG:
-			case MONSTER_EGG:
-			case MONSTER_EGGS:
-				// TODO Auto-generated method stub
-				throw new UnimplementedOperationException();
 			default:
 				return ItemMetaMock.class;
 		}
@@ -138,5 +130,4 @@ public class ItemFactoryMock implements ItemFactory
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
 }

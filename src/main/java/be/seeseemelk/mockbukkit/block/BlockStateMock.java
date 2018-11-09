@@ -76,14 +76,6 @@ public class BlockStateMock implements BlockState
 	}
 
 	@Override
-	@Deprecated
-	public int getTypeId()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public byte getLightLevel()
 	{
 		// TODO Auto-generated method stub
@@ -153,14 +145,6 @@ public class BlockStateMock implements BlockState
 	}
 
 	@Override
-	@Deprecated
-	public boolean setTypeId(int type)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public boolean update()
 	{
 		// TODO Auto-generated method stub
@@ -199,6 +183,20 @@ public class BlockStateMock implements BlockState
 
 	@Override
 	public boolean isPlaced()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getTypeId()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean setTypeId(int type)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

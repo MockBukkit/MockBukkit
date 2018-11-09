@@ -1,10 +1,6 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import com.google.common.collect.ImmutableMap;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.inventory.ItemFlag;
-import org.bukkit.inventory.meta.ItemMeta;
+import static java.util.Objects.nonNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,13 +11,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
+import org.bukkit.inventory.meta.ItemMeta;
+
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+
 public class ItemMetaMock implements ItemMeta
 {
 	private String displayName = null;
 	private List<String> lore = null;
-	private Map<Enchantment, Integer> enchantments = null;
+	private Map<Enchantment, Integer> enchantments = new HashMap<>();
 	private EnumSet<ItemFlag> flags = EnumSet.noneOf(ItemFlag.class);
-	
 	public ItemMetaMock()
 	{
 		
@@ -38,7 +40,7 @@ public class ItemMetaMock implements ItemMeta
 	@Override
 	public boolean hasDisplayName()
 	{
-		return displayName != null;
+		return nonNull(displayName);
 	}
 	
 	@Override
@@ -82,10 +84,17 @@ public class ItemMetaMock implements ItemMeta
 	/**
 	 * Checks if the display name of this item meta is equal to the display name of
 	 * another one.
+<<<<<<< HEAD
 	 * 
 	 * @param meta The other item meta to check against.
 	 * @return {@code true} if both display names are equal, {@code false} if
 	 *         they're not.
+=======
+	 *
+	 * @param meta The other item meta to check against.
+	 * @return {@code true} if both display names are equal, {@code false} if
+	 * they're not.
+>>>>>>> v1.13
 	 */
 	private boolean isDisplayNameEqual(ItemMeta meta)
 	{
@@ -166,7 +175,11 @@ public class ItemMetaMock implements ItemMeta
 	
 	/**
 	 * Asserts if the lore contains the given lines in order.
+<<<<<<< HEAD
 	 * 
+=======
+	 *
+>>>>>>> v1.13
 	 * @param lines The lines the lore should contain
 	 */
 	public void assertLore(List<String> lines)
@@ -193,108 +206,6 @@ public class ItemMetaMock implements ItemMeta
 		}
 	}
 	
-	@Override
-	public Map<String, Object> serialize()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-	
-	static boolean checkConflictingEnchants(Map<Enchantment, Integer> enchantments, Enchantment enchantment)
-	{
-		if (enchantments != null && !enchantments.isEmpty())
-		{
-			for (Enchantment otherEnchantment : enchantments.keySet())
-			{
-				if (otherEnchantment.conflictsWith(enchantment))
-					return true;
-			}
-		}
-		return false;
-	}
-	
-	@Override
-	public boolean hasEnchants()
-	{
-		return enchantments != null && !enchantments.isEmpty();
-	}
-	
-	@Override
-	public boolean hasEnchant(Enchantment ench)
-	{
-		// TODO Auto-generated method stub
-		if (!hasEnchants())
-			return false;
-		return enchantments.containsKey(ench);
-	}
-	
-	@Override
-	public int getEnchantLevel(Enchantment ench)
-	{
-		if (!hasEnchants())
-			return -1;
-		return enchantments.getOrDefault(ench, -1);
-	}
-	
-	@Override
-	public Map<Enchantment, Integer> getEnchants()
-	{
-		return hasEnchants() ? ImmutableMap.copyOf(enchantments) : ImmutableMap.of();
-	}
-	
-	@Override
-	public boolean addEnchant(Enchantment ench, int level, boolean ignoreRestrictions)
-	{
-		// Copied from CraftItemMeta
-		if (enchantments == null)
-			enchantments = new HashMap<>(4);
-		if (!ignoreRestrictions && (level < ench.getStartLevel() || level > ench.getMaxLevel()))
-		{
-			return false;
-		}
-		else
-		{
-			Integer old = enchantments.put(ench, level);
-			return old == null || old != level;
-		}
-	}
-	
-	@Override
-	public boolean removeEnchant(Enchantment ench)
-	{
-		boolean b = hasEnchants() && enchantments.remove(ench) != null;
-		if (enchantments != null && enchantments.isEmpty())
-		{
-			enchantments = null;
-		}
-		
-		return b;
-	}
-	
-	@Override
-	public void addItemFlags(ItemFlag... hideFlags)
-	{
-		for (ItemFlag flag : hideFlags)
-			flags.add(flag);
-		
-	}
-	
-	public void removeItemFlags(ItemFlag... hideFlags)
-	{	
-		for (ItemFlag flag : hideFlags)
-			flags.remove(flag);
-	}
-	
-	public Set<ItemFlag> getItemFlags()
-	{
-		return Collections.unmodifiableSet(flags);
-	}
-	
-	public boolean hasItemFlag(ItemFlag flag)
-	{
-		return flags.contains(flag);
-	}
-	
 	/**
 	 * Asserts if the lore contains the given lines in order.
 	 *
@@ -318,10 +229,119 @@ public class ItemMetaMock implements ItemMeta
 		}
 	}
 	
+	/**
+	 * Used internally for the ItemFactoryMock. This code is based on
+	 * `CraftMetaItem#updateMaterial`
+	 *
+	 * @param material
+	 * @return
+	 */
+	public Material updateMaterial(Material material)
+	{
+		return material;
+	}
+	
+	@Override
+	public Map<String, Object> serialize()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+	
+	static boolean checkConflictingEnchants(Map<Enchantment, Integer> enchantments, Enchantment enchantment)
+	{
+		if (enchantments != null && !enchantments.isEmpty())
+		{
+			for (Enchantment otherEnchantment : enchantments.keySet())
+			{
+				if (otherEnchantment.conflictsWith(enchantment))
+					return true;
+			}
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean hasEnchants()
+	{
+		return !enchantments.keySet().isEmpty();
+	}
+	
+	@Override
+	public boolean hasEnchant(Enchantment ench)
+	{
+		return enchantments.containsKey(ench);
+	}
+	
+	@Override
+	public int getEnchantLevel(Enchantment ench)
+	{
+		return hasEnchant(ench) ? enchantments.get(ench) : 0;
+	}
+	
+	@Override
+	public Map<Enchantment, Integer> getEnchants()
+	{
+		return Collections.unmodifiableMap(enchantments);
+	}
+	
+	@Override
+	public boolean addEnchant(Enchantment ench, int level, boolean ignoreRestrictions)
+	{
+		Integer existingLevel = enchantments.get(ench);
+		if (nonNull(existingLevel) && existingLevel.equals(level))
+		{
+			return false; // Already exists with the same level
+		}
+		
+		if (ignoreRestrictions)
+		{
+			enchantments.put(ench, level);
+			return true;
+		}
+		else
+		{
+			// TODO Auto-generated method stub
+			throw new UnimplementedOperationException();
+		}
+	}
+	
+	@Override
+	public boolean removeEnchant(Enchantment ench)
+	{
+		return nonNull(enchantments.remove(ench));
+	}
+	
 	@Override
 	public boolean hasConflictingEnchant(Enchantment ench)
 	{
-		return checkConflictingEnchants(this.enchantments, ench);
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+	
+	@Override
+	public void addItemFlags(ItemFlag... hideFlags)
+	{
+		for (ItemFlag flag : hideFlags)
+			flags.add(flag);
+		
+	}
+	
+	public void removeItemFlags(ItemFlag... hideFlags)
+	{	
+		for (ItemFlag flag : hideFlags)
+			flags.remove(flag);
+	}
+	
+	public Set<ItemFlag> getItemFlags()
+	{
+		return Collections.unmodifiableSet(flags);
+	}
+	
+	@Override
+	public boolean hasItemFlag(ItemFlag flag)
+	{
+		return flags.contains(flag);
 	}
 	
 }

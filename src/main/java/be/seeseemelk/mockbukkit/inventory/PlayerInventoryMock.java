@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.inventory;
 
 import java.util.Arrays;
+import java.util.HashMap;
 
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryType;
@@ -125,12 +126,39 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 			throw new ArrayIndexOutOfBoundsException("Slot should be within [0-8] (was: " + slot + ")");
 		handSlot = slot;
 	}
-	
+
+	@Override
+	public boolean contains(int materialId, int amount)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public HashMap<Integer, ? extends ItemStack> all(int materialId)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int first(int materialId)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void remove(int materialId)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 	@Override
 	public int clear(int id, int data)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
 }
