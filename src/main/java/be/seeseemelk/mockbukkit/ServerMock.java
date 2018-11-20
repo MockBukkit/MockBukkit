@@ -188,6 +188,19 @@ public class ServerMock implements Server
 	}
 	
 	/**
+	 * Creates a player with a given name and adds it.
+	 * @param name The name to give to the player.
+	 * @return The added player.
+	 */
+	public PlayerMock addPlayer(String name)
+	{
+		assertMainThread();
+		PlayerMock player = new PlayerMock(this, name);
+		addPlayer(player);
+		return player;
+	}
+	
+	/**
 	 * Set the numbers of mock players that are on this server. Note that it will
 	 * remove all players that are already on this server.
 	 * 
@@ -419,7 +432,9 @@ public class ServerMock implements Server
 	public List<Player> matchPlayer(String name)
 	{
 		assertMainThread();
-		return players.stream().filter(player -> player.getName().toLowerCase(Locale.ENGLISH).startsWith(name))
+		return players.stream().filter(player -> {
+			return player.getName().toLowerCase(Locale.ENGLISH).startsWith(name.toLowerCase());
+		})
 				.collect(Collectors.toList());
 	}
 	

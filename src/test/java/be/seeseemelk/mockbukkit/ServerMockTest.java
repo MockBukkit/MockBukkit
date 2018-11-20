@@ -1,5 +1,7 @@
 package be.seeseemelk.mockbukkit;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
@@ -476,6 +478,24 @@ public class ServerMockTest
 		
 		if (exceptionThrown.get() != null)
 			throw exceptionThrown.get();
+	}
+	
+	@Test
+	public void matchPlayer_NoMatchingPlayers_EmptyList()
+	{
+		server.addPlayer("Player");
+		List<Player> players = server.matchPlayer("Others");
+		assertEquals("Player list was not empty", 0, players.size());
+	}
+	
+	@Test
+	public void matchPlayer_SomeMatchingPlayers_ListHasPlayer()
+	{
+		PlayerMock playerA = server.addPlayer("PlayerA");
+		PlayerMock playerAB = server.addPlayer("PlayerAB");
+		server.addPlayer("PlayerB");
+		List<Player> players = server.matchPlayer("PlayerA");
+		assertThat(players, containsInAnyOrder(playerA, playerAB));
 	}
 }
 
