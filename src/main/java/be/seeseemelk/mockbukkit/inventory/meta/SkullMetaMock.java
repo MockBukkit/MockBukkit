@@ -1,6 +1,10 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
 import com.google.common.base.Strings;
+
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+
+import org.bukkit.OfflinePlayer;
 import org.bukkit.inventory.meta.SkullMeta;
 
 /**
@@ -28,9 +32,23 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta {
     }
 
     @Override
-    public SkullMeta clone() {
-        SkullMetaMock mock = new SkullMetaMock();
+    public SkullMetaMock clone() {
+        SkullMetaMock mock = (SkullMetaMock) super.clone();
         mock.setOwner(owner);
         return mock;
     }
+
+	@Override
+	public OfflinePlayer getOwningPlayer()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean setOwningPlayer(OfflinePlayer owner)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
 }
