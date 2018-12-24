@@ -115,15 +115,13 @@ public class ObjectiveMock implements Objective
 	@Override
 	public void setRenderType(RenderType renderType) throws IllegalStateException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.renderType =  renderType;
 	}
 
 	@Override
 	public RenderType getRenderType() throws IllegalStateException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return renderType;
 	}
 
 }
