@@ -379,4 +379,5 @@ public class BlockMock implements org.bukkit.block.Block
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
+	
 }
