@@ -17,6 +17,7 @@ import static org.junit.Assert.*;
 /**
  * Created for the AddstarMC Project. Created by Narimm on 24/12/2018.
  */
+@SuppressWarnings("deprecation")
 public class TeamMockTest {
     private ServerMock server;
     private Team team;

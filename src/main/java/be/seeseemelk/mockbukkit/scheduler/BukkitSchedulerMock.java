@@ -8,6 +8,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Consumer;
 import java.util.logging.Logger;
 
 import org.bukkit.plugin.Plugin;
@@ -370,6 +371,51 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			asyncTasksRunning.decrementAndGet();
 		}
 		
+	}
+
+	@Override
+	public void runTask(Plugin plugin, Consumer<BukkitTask> task) throws IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void runTaskAsynchronously(Plugin plugin, Consumer<BukkitTask> task) throws IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void runTaskLater(Plugin plugin, Consumer<BukkitTask> task, long delay) throws IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void runTaskLaterAsynchronously(Plugin plugin, Consumer<BukkitTask> task, long delay)
+			throws IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void runTaskTimer(Plugin plugin, Consumer<BukkitTask> task, long delay, long period)
+			throws IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void runTaskTimerAsynchronously(Plugin plugin, Consumer<BukkitTask> task, long delay, long period)
+			throws IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 }
 

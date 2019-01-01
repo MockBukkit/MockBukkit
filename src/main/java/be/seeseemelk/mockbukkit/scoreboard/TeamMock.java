@@ -5,15 +5,17 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Level;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.scoreboard.NameTagVisibility;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
+
+import be.seeseemelk.mockbukkit.MockBukkit;
 /**
  * Created for the AddstarMC Project. Created by Narimm on 24/12/2018.
  */
+@SuppressWarnings("deprecation")
 public class TeamMock implements Team {
     
     private final String name;
