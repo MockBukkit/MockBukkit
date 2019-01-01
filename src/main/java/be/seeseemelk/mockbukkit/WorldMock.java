@@ -1269,5 +1269,26 @@ public class WorldMock implements World
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
+
+	@Override
+	public boolean isChunkForceLoaded(int x, int z)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setChunkForceLoaded(int x, int z, boolean forced)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public Collection<Chunk> getForceLoadedChunks()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
 	
 }

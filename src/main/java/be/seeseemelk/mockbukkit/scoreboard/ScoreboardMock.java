@@ -1,11 +1,6 @@
 package be.seeseemelk.mockbukkit.scoreboard;
 
-import java.util.Collections;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import org.bukkit.OfflinePlayer;
@@ -23,6 +18,7 @@ public class ScoreboardMock implements Scoreboard
 {
 	private Map<String, ObjectiveMock> objectives = new HashMap<>();
 	private Map<DisplaySlot, ObjectiveMock> objectivesByDisplaySlot = new EnumMap<>(DisplaySlot.class);
+	private Map<String,Team> teams = new HashMap<>();
 
 	@Override
 	public ObjectiveMock registerNewObjective(String name, String criteria) throws IllegalArgumentException
@@ -61,85 +57,101 @@ public class ScoreboardMock implements Scoreboard
 	@Override
 	public Set<Score> getScores(OfflinePlayer player) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getScores(player.getName());
 	}
 
 	@Override
 	public Set<Score> getScores(String entry) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Set<Score> scores = new HashSet<>();
+		for(Objective o: objectives.values()){
+			Score score = o.getScore(entry);
+			if(score != null){
+				scores.add(score);
+			}
+		}
+		return scores;
 	}
 
 	@Override
 	public void resetScores(OfflinePlayer player) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		resetScores(player.getName());
 	}
 
 	@Override
 	public void resetScores(String entry) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		for(Objective o: objectives.values()){
+			Score score = o.getScore(entry);
+			if(score != null){
+				score.setScore(0);
+			}
+		}
 	}
 
 	@Override
 	public Team getPlayerTeam(OfflinePlayer player) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getEntryTeam(player.getName());
 	}
 
 	@Override
 	public Team getEntryTeam(String entry) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		for(Team t:teams.values()){
+			if(t.hasEntry(entry))return t;
+		}
+		return null;
 	}
 
 	@Override
 	public Team getTeam(String teamName) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return teams.get(teamName);
 	}
 
 	@Override
 	public Set<Team> getTeams()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		HashSet<Team> v = new HashSet<>(teams.values());
+		return v;
 	}
 
 	@Override
 	public Team registerNewTeam(String name) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Team team = new TeamMock(name,this);
+		teams.put(name,team);
+		return team;
 	}
 
 	@Override
 	public Set<OfflinePlayer> getPlayers()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Set<OfflinePlayer> players = new HashSet<>();
+		for(Team t:teams.values()){
+			players.addAll(t.getPlayers());
+		}
+		return players;
 	}
 
 	@Override
 	public Set<String> getEntries()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Set<String> entries = new HashSet<>();
+		for(Team t:teams.values()){
+			entries.addAll(t.getEntries());
+		}
+		return entries;
 	}
 
 	@Override
 	public void clearSlot(DisplaySlot slot) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Objective o = objectivesByDisplaySlot.remove(slot);
+		if(o != null)objectives.remove(o.getName());
+		
 	}
 	
 	/**

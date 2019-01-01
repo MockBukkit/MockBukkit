@@ -19,6 +19,7 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.util.BoundingBox;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 
@@ -393,6 +394,13 @@ public class BlockMock implements org.bukkit.block.Block
 	@Override
 	public RayTraceResult rayTrace(Location start, Vector direction, double maxDistance,
 			FluidCollisionMode fluidCollisionMode)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public BoundingBox getBoundingBox()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

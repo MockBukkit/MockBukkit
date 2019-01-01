@@ -21,6 +21,7 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.tags.CustomItemTagContainer;
 
 import com.google.common.collect.Multimap;
 
@@ -423,62 +424,69 @@ public class ItemMetaMock implements ItemMeta, Damageable
 	public boolean hasAttributeModifiers()
 	{
 		// TODO Auto-generated method stub
-		return false;
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public Multimap<Attribute, AttributeModifier> getAttributeModifiers()
 	{
 		// TODO Auto-generated method stub
-		return null;
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot)
 	{
 		// TODO Auto-generated method stub
-		return null;
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public Collection<AttributeModifier> getAttributeModifiers(Attribute attribute)
 	{
 		// TODO Auto-generated method stub
-		return null;
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public boolean addAttributeModifier(Attribute attribute, AttributeModifier modifier)
 	{
 		// TODO Auto-generated method stub
-		return false;
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public void setAttributeModifiers(Multimap<Attribute, AttributeModifier> attributeModifiers)
 	{
 		// TODO Auto-generated method stub
-		
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public boolean removeAttributeModifier(Attribute attribute)
 	{
 		// TODO Auto-generated method stub
-		return false;
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public boolean removeAttributeModifier(EquipmentSlot slot)
 	{
 		// TODO Auto-generated method stub
-		return false;
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public boolean removeAttributeModifier(Attribute attribute, AttributeModifier modifier)
 	{
 		// TODO Auto-generated method stub
-		return false;
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public CustomItemTagContainer getCustomTagContainer()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 }
