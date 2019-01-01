@@ -969,15 +969,13 @@ public class ServerMock implements Server
 	@Override
 	public OfflinePlayer getOfflinePlayer(String name)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getPlayer(name);
 	}
 	
 	@Override
 	public OfflinePlayer getOfflinePlayer(UUID id)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getPlayer(id);
 	}
 	
 	@Override
