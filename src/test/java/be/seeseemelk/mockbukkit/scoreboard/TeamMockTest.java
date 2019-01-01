@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 @SuppressWarnings("deprecation")
 public class TeamMockTest {
     private ServerMock server;
-    private Team team;
+    private TeamMock team;
     private Scoreboard board;
     private PlayerMock playerA;
     
@@ -43,6 +43,7 @@ public class TeamMockTest {
     {
         MockBukkit.unload();
     }
+    
     @Test
     public void getName() {
         assertEquals("Test",team.getName());
@@ -129,10 +130,6 @@ public class TeamMockTest {
     }
     
     @Test
-    public void unregister() {
-    }
-    
-    @Test
     public void hasPlayer() {
         assertFalse(team.hasPlayer(playerB));
         team.addEntry(playerB.getName());
@@ -155,9 +152,29 @@ public class TeamMockTest {
         assertEquals(Team.OptionStatus.ALWAYS,status);
     }
     
+    public void unregister_FirstUnregister_Works()
+    {
+    	team.unregister();
+    }
+    
     @Test(expected = IllegalStateException.class)
-    public void unRegister() {
+    public void unregister_UnregisteredTwice_ThrowsException()
+    {
         team.unregister();
-        
+        team.unregister();
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
