@@ -62,20 +62,20 @@ public class ItemFactoryMock implements ItemFactory
 	}
 
 	@Override
-	public boolean isApplicable(ItemMeta meta, ItemStack stack) throws IllegalArgumentException
+	public boolean isApplicable(ItemMeta meta, ItemStack stack)
 	{
 		return isApplicable(meta, stack.getType());
 	}
 
 	@Override
-	public boolean isApplicable(ItemMeta meta, Material material) throws IllegalArgumentException
+	public boolean isApplicable(ItemMeta meta, Material material)
 	{
 		Class<? extends ItemMeta> target = getItemMetaClass(material);
 		return target.isInstance(meta);
 	}
 
 	@Override
-	public boolean equals(ItemMeta meta1, ItemMeta meta2) throws IllegalArgumentException
+	public boolean equals(ItemMeta meta1, ItemMeta meta2)
 	{
 		if (meta1 != null && meta2 != null)
 		{
@@ -88,13 +88,13 @@ public class ItemFactoryMock implements ItemFactory
 	}
 
 	@Override
-	public ItemMeta asMetaFor(ItemMeta meta, ItemStack stack) throws IllegalArgumentException
+	public ItemMeta asMetaFor(ItemMeta meta, ItemStack stack)
 	{
 		return asMetaFor(meta, stack.getType());
 	}
 
 	@Override
-	public ItemMeta asMetaFor(ItemMeta meta, Material material) throws IllegalArgumentException
+	public ItemMeta asMetaFor(ItemMeta meta, Material material)
 	{
 		Class<? extends ItemMeta> target = getItemMetaClass(material);
 		try
@@ -104,7 +104,7 @@ public class ItemFactoryMock implements ItemFactory
 		}
 		catch (SecurityException | InstantiationException | IllegalAccessException | InvocationTargetException e)
 		{
-			throw new Error(e);
+			throw new RuntimeException(e);
 		}
 		catch (NoSuchMethodException e)
 		{
@@ -115,7 +115,7 @@ public class ItemFactoryMock implements ItemFactory
 			}
 			catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | InvocationTargetException e1)
 			{
-				throw new Error(e);
+				throw new RuntimeException(e);
 			}
 		}
 	}
@@ -128,9 +128,9 @@ public class ItemFactoryMock implements ItemFactory
 	}
 
 	@Override
-	public Material updateMaterial(ItemMeta meta, Material material) throws IllegalArgumentException
+	public Material updateMaterial(ItemMeta meta, Material material)
 	{
-		return ((ItemMetaMock) meta).updateMaterial(material);
+		return material;
 	}
 
 }

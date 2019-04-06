@@ -64,7 +64,7 @@ public class AttributeInstanceMock implements AttributeInstance
 	@Override
 	public double getValue()
 	{
-		return value;
+		return getBaseValue();
 	}
 
 	@Override

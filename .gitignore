@@ -14,3 +14,7 @@
 # Ignore wiki if placed in the root directory
 /wiki
 /MockBukkit.wiki
+
+#IDE Specific
+/out
+*.iml

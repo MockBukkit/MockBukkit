@@ -11,7 +11,7 @@ public class AttributeInstanceMockTest
 	private AttributeInstanceMock attribute;
 
 	@Before
-	public void setUp() throws Exception
+	public void setUp()
 	{
 		attribute = new AttributeInstanceMock(Attribute.GENERIC_FLYING_SPEED, 5.0);
 	}

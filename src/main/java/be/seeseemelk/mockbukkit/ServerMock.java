@@ -1,61 +1,5 @@
 package be.seeseemelk.mockbukkit;
 
-import be.seeseemelk.mockbukkit.command.CommandResult;
-import be.seeseemelk.mockbukkit.command.ConsoleCommandSenderMock;
-import be.seeseemelk.mockbukkit.command.MessageTarget;
-import be.seeseemelk.mockbukkit.entity.EntityMock;
-import be.seeseemelk.mockbukkit.entity.PlayerMock;
-import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
-import be.seeseemelk.mockbukkit.inventory.ChestInventoryMock;
-import be.seeseemelk.mockbukkit.inventory.InventoryMock;
-import be.seeseemelk.mockbukkit.inventory.ItemFactoryMock;
-import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
-import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
-import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
-import be.seeseemelk.mockbukkit.scoreboard.ScoreboardManagerMock;
-import org.bukkit.BanEntry;
-import org.bukkit.BanList;
-import org.bukkit.BanList.Type;
-import org.bukkit.GameMode;
-import org.bukkit.Keyed;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.Server;
-import org.bukkit.Tag;
-import org.bukkit.UnsafeValues;
-import org.bukkit.Warning.WarningState;
-import org.bukkit.World;
-import org.bukkit.WorldCreator;
-import org.bukkit.advancement.Advancement;
-import org.bukkit.block.data.BlockData;
-import org.bukkit.boss.BarColor;
-import org.bukkit.boss.BarFlag;
-import org.bukkit.boss.BarStyle;
-import org.bukkit.boss.BossBar;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandException;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
-import org.bukkit.command.PluginCommand;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.HumanEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.generator.ChunkGenerator.ChunkData;
-import org.bukkit.help.HelpMap;
-import org.bukkit.inventory.InventoryHolder;
-import org.bukkit.inventory.ItemFactory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.Merchant;
-import org.bukkit.inventory.Recipe;
-import org.bukkit.loot.LootTable;
-import org.bukkit.map.MapView;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.ServicesManager;
-import org.bukkit.plugin.messaging.Messenger;
-import org.bukkit.util.CachedServerIcon;
-
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -77,6 +21,65 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+
+import org.bukkit.BanEntry;
+import org.bukkit.BanList;
+import org.bukkit.BanList.Type;
+import org.bukkit.GameMode;
+import org.bukkit.Keyed;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.Server;
+import org.bukkit.StructureType;
+import org.bukkit.Tag;
+import org.bukkit.UnsafeValues;
+import org.bukkit.Warning.WarningState;
+import org.bukkit.World;
+import org.bukkit.WorldCreator;
+import org.bukkit.advancement.Advancement;
+import org.bukkit.block.data.BlockData;
+import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarFlag;
+import org.bukkit.boss.BarStyle;
+import org.bukkit.boss.BossBar;
+import org.bukkit.boss.KeyedBossBar;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.command.PluginCommand;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.HumanEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.generator.ChunkGenerator.ChunkData;
+import org.bukkit.help.HelpMap;
+import org.bukkit.inventory.InventoryHolder;
+import org.bukkit.inventory.ItemFactory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.Merchant;
+import org.bukkit.inventory.Recipe;
+import org.bukkit.loot.LootTable;
+import org.bukkit.map.MapView;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.ServicesManager;
+import org.bukkit.plugin.messaging.Messenger;
+import org.bukkit.util.CachedServerIcon;
+
+import be.seeseemelk.mockbukkit.command.CommandResult;
+import be.seeseemelk.mockbukkit.command.ConsoleCommandSenderMock;
+import be.seeseemelk.mockbukkit.command.MessageTarget;
+import be.seeseemelk.mockbukkit.entity.EntityMock;
+import be.seeseemelk.mockbukkit.entity.PlayerMock;
+import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
+import be.seeseemelk.mockbukkit.inventory.ChestInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.InventoryMock;
+import be.seeseemelk.mockbukkit.inventory.ItemFactoryMock;
+import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
+import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
+import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
+import be.seeseemelk.mockbukkit.scoreboard.ScoreboardManagerMock;
 
 @SuppressWarnings("deprecation")
 public class ServerMock implements Server
@@ -131,7 +134,7 @@ public class ServerMock implements Server
 	 * Checks if we are running a method on the main thread. If not, a
 	 * `ThreadAccessException` is thrown.
 	 */
-	public void assertMainThread() throws ThreadAccessException
+	public void assertMainThread()
 	{
 		if (!isOnMainThread())
 			throw new ThreadAccessException("The Bukkit API was accessed from asynchronous code.");
@@ -174,6 +177,7 @@ public class ServerMock implements Server
 	
 	/**
 	 * Creates a random player and adds it.
+	 * @return The player that was added.
 	 */
 	public PlayerMock addPlayer()
 	{
@@ -207,9 +211,7 @@ public class ServerMock implements Server
 		assertMainThread();
 		players.clear();
 		for (int i = 0; i < num; i++)
-		{
 			addPlayer();
-		}
 	}
 	
 	/**
@@ -304,14 +306,10 @@ public class ServerMock implements Server
 	public CommandResult executePlayer(Command command, String... args)
 	{
 		assertMainThread();
-		if (players.size() > 0)
-		{
+		if (!players.isEmpty())
 			return execute(command, players.get(0), args);
-		}
 		else
-		{
 			throw new IllegalStateException("Need at least one player to run the command");
-		}
 	}
 	
 	/**
@@ -339,13 +337,10 @@ public class ServerMock implements Server
 	{
 		assertMainThread();
 		if (!(sender instanceof MessageTarget))
-		{
 			throw new IllegalArgumentException("Only a MessageTarget can be the sender of the command");
-		}
 		
 		boolean status = command.execute(sender, command.getName(), args);
-		CommandResult result = new CommandResult(status, (MessageTarget) sender);
-		return result;
+		return new CommandResult(status, (MessageTarget) sender);
 	}
 	
 	/**
@@ -428,9 +423,8 @@ public class ServerMock implements Server
 	public List<Player> matchPlayer(String name)
 	{
 		assertMainThread();
-		return players.stream().filter(player -> {
-			return player.getName().toLowerCase(Locale.ENGLISH).startsWith(name.toLowerCase());
-		})
+		return players.stream()
+				.filter(player -> player.getName().toLowerCase(Locale.ENGLISH).startsWith(name.toLowerCase()))
 				.collect(Collectors.toList());
 	}
 	
@@ -540,13 +534,13 @@ public class ServerMock implements Server
 	}
 	
 	@Override
-	public InventoryMock createInventory(InventoryHolder owner, int size) throws IllegalArgumentException
+	public InventoryMock createInventory(InventoryHolder owner, int size)
 	{
 		return createInventory(owner, size, "Inventory");
 	}
 	
 	@Override
-	public InventoryMock createInventory(InventoryHolder owner, int size, String title) throws IllegalArgumentException
+	public InventoryMock createInventory(InventoryHolder owner, int size, String title)
 	{
 		return createInventory(owner, InventoryType.CHEST, title, size);
 	}
@@ -625,10 +619,10 @@ public class ServerMock implements Server
 	public Set<OfflinePlayer> getOperators()
 	{
 		assertMainThread();
-		final Set<OfflinePlayer> players = new HashSet<>();
-		players.addAll(this.offlinePlayers);
-		players.addAll(this.players);
-		return players.stream().filter(OfflinePlayer::isOp).collect(Collectors.toSet());
+		final Set<OfflinePlayer> allPlayers = new HashSet<>();
+		allPlayers.addAll(offlinePlayers);
+		allPlayers.addAll(players);
+		return allPlayers.stream().filter(OfflinePlayer::isOp).collect(Collectors.toSet());
 	}
 	
 	@Override
@@ -683,7 +677,7 @@ public class ServerMock implements Server
 	}
 	
 	@Override
-	public boolean dispatchCommand(CommandSender sender, String commandLine) throws CommandException
+	public boolean dispatchCommand(CommandSender sender, String commandLine)
 	{
 		assertMainThread();
 		String[] commands = commandLine.split(" ");
@@ -859,13 +853,6 @@ public class ServerMock implements Server
 	
 	@Override
 	public boolean unloadWorld(World world, boolean save)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-	
-	@Override
-	public MapView getMap(short id)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1162,14 +1149,14 @@ public class ServerMock implements Server
 	}
 	
 	@Override
-	public BlockData createBlockData(String data) throws IllegalArgumentException
+	public BlockData createBlockData(String data)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 	
 	@Override
-	public BlockData createBlockData(Material material, String data) throws IllegalArgumentException
+	public BlockData createBlockData(Material material, String data)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1184,6 +1171,70 @@ public class ServerMock implements Server
 	
 	@Override
 	public LootTable getLootTable(NamespacedKey key)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public ItemStack createExplorerMap(World world, Location location, StructureType structureType)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public ItemStack createExplorerMap(World world, Location location, StructureType structureType, int radius,
+			boolean findUnexplored)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public KeyedBossBar createBossBar(NamespacedKey key, String title, BarColor color, BarStyle style, BarFlag... flags)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public Iterator<KeyedBossBar> getBossBars()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public KeyedBossBar getBossBar(NamespacedKey key)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean removeBossBar(NamespacedKey key)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public List<Entity> selectEntities(CommandSender sender, String selector)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public MapView getMap(int id)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public <T extends Keyed> Iterable<Tag<T>> getTags(String registry, Class<T> clazz)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

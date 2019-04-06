@@ -4,19 +4,20 @@ MockBukkit is a framework that makes the unit testing of Bukkit plugins a whole 
 It aims to be a complete mock implementation.
 
 ## Usage
-MockBukkit can easily be included in gradle using jitpack.io
+MockBukkit can easily be included in gradle using mavenCentral.
 ```gradle
 repositories {
-    maven { url 'https://jitpack.io' }
+	mavenCentral()
 }
 dependencies {
     testCompile 'junit:junit:4.12'
-    testCompile 'com.github.seeseemelk:MockBukkit:master-SNAPSHOT'
+    testCompile 'com.github.seeseemelk:MockBukkit-v1.13-spigot:0.1.0-SNAPSHOT'
 }
 ```
 
 Note: use v1.8.8-SNAPSHOT to test a Bukkit 1.8.8 plugin or any other version if the branch exists.
-These branches are considered supported and will get updates backported to them.
+These branches will not be receiving patches actively, but any issues will be resolved and any pull requests on them will be accepted.
+This is because backporting every single patch on every branch is incredibely time consuming and slows down the development of Mockbukkit.
 
 In order to use MockBukkit the plugin to be tested needs an extra constructor and it has to be initialised before each test.
 The plugin will need both a default constructor and an extra one that will call a super constructor.

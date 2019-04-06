@@ -6,6 +6,7 @@ import java.util.Map;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.RenderType;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
@@ -17,6 +18,7 @@ public class ObjectiveMock implements Objective
 	private final Map<String, ScoreMock> scores = new HashMap<>();
 	private String displayName;
 	private DisplaySlot displaySlot;
+	private RenderType renderType;
 
 	public ObjectiveMock(ScoreboardMock scoreboard, String name, String criteria)
 	{
@@ -108,6 +110,18 @@ public class ObjectiveMock implements Objective
 			scores.put(entry, score);
 			return score;
 		}
+	}
+
+	@Override
+	public void setRenderType(RenderType renderType) throws IllegalStateException
+	{
+		this.renderType =  renderType;
+	}
+
+	@Override
+	public RenderType getRenderType() throws IllegalStateException
+	{
+		return renderType;
 	}
 
 }

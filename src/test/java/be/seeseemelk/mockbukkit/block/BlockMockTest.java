@@ -16,7 +16,7 @@ public class BlockMockTest
 	private BlockMock block;
 
 	@Before
-	public void setUp() throws Exception
+	public void setUp()
 	{
 		block = new BlockMock();
 	}

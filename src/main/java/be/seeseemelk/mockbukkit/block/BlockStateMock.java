@@ -18,12 +18,14 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 @SuppressWarnings("deprecation")
 public class BlockStateMock implements BlockState
 {
+	@Deprecated
 	private MaterialData data;
 	
 	public BlockStateMock()
 	{
 	}
 	
+	@Deprecated
 	public BlockStateMock(MaterialData data)
 	{
 		this.data = data;
@@ -65,6 +67,7 @@ public class BlockStateMock implements BlockState
 	}
 
 	@Override
+	@Deprecated
 	public MaterialData getData()
 	{
 		return data;
@@ -134,6 +137,7 @@ public class BlockStateMock implements BlockState
 	}
 
 	@Override
+	@Deprecated
 	public void setData(MaterialData data)
 	{
 		this.data = data;
