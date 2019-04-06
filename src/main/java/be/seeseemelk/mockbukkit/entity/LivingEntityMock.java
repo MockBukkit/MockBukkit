@@ -119,13 +119,6 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
-	public Spigot spigot()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public <T extends Projectile> T launchProjectile(Class<? extends T> projectile)
 	{
 		// TODO Auto-generated method stub
