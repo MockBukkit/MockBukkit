@@ -11,7 +11,7 @@ repositories {
 }
 dependencies {
     testCompile 'junit:junit:4.12'
-    testCompile 'com.github.seeseemelk:MockBukkit-v1.13-spigot:0.1.0-SNAPSHOT'
+    testCompile 'com.github.seeseemelk:MockBukkit-v1.13-spigot:0.1.1-SNAPSHOT'
 }
 ```
 
