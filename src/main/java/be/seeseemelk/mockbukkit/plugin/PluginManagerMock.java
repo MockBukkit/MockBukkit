@@ -119,6 +119,7 @@ public class PluginManagerMock implements PluginManager
 	
 	/**
 	 * Asserts that there is at least one event of a certain class for which the predicate is true.
+	 * @param <T> The type of event that is expected.
 	 * @param message The message to display if no event is found.
 	 * @param eventClass The class type that the event should be an instance of.
 	 * @param predicate The predicate to test the event against.
@@ -136,6 +137,7 @@ public class PluginManagerMock implements PluginManager
 	
 	/**
 	 * Asserts that there is at least one event of a certain class for which the predicate is true.
+	 * @param <T> The type of event that is expected.
 	 * @param eventClass The class type that the event should be an instance of.
 	 * @param predicate The predicate to test the event against.
 	 */

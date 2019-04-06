@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.enchantments.Enchantment;
@@ -221,22 +220,10 @@ public class ItemMetaMock implements ItemMeta, Damageable
 	 */
 	public void assertHasNoLore() throws AssertionError
 	{
-		if (lore != null && lore.size() != 0)
+		if (lore != null && !lore.isEmpty())
 		{
 			throw new AssertionError("Lore was set but shouldn't have been set");
 		}
-	}
-	
-	/**
-	 * Used internally for the ItemFactoryMock. This code is based on
-	 * `CraftMetaItem#updateMaterial`
-	 *
-	 * @param material
-	 * @return
-	 */
-	public Material updateMaterial(Material material)
-	{
-		return material;
 	}
 	
 	@Override
@@ -248,28 +235,21 @@ public class ItemMetaMock implements ItemMeta, Damageable
 	
 	static boolean checkConflictingEnchants(Map<Enchantment, Integer> enchantments, Enchantment ench)
 	{
-		if (enchantments != null && !enchantments.isEmpty())
-		{
-			Iterator<Enchantment> var2 = enchantments.keySet().iterator();
-			
-			Enchantment enchant;
-			do
-			{
-				if (!var2.hasNext())
-				{
-					return false;
-				}
-				
-				enchant = (Enchantment) var2.next();
-			}
-			while (!enchant.conflictsWith(ench));
-			
-			return true;
-		}
-		else
-		{
+		if (enchantments == null || enchantments.isEmpty())
 			return false;
+		
+		Iterator<Enchantment> var2 = enchantments.keySet().iterator();
+		
+		Enchantment enchant;
+		do
+		{
+			if (!var2.hasNext())
+				return false;
+			enchant = var2.next();
 		}
+		while (!enchant.conflictsWith(ench));
+		
+		return true;
 	}
 	
 	@Override

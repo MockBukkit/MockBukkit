@@ -51,7 +51,7 @@ public abstract class EntityMock implements Entity, MessageTarget
 		this.server = server;
 		this.uuid = uuid;
 		
-		if (Bukkit.getWorlds().size() > 0)
+		if (!Bukkit.getWorlds().isEmpty())
 			location = Bukkit.getWorlds().get(0).getSpawnLocation();
 		else
 			location = new Location(null, 0, 0, 0);
@@ -292,7 +292,7 @@ public abstract class EntityMock implements Entity, MessageTarget
 		for (PermissionAttachment attachment : permissionAttachments)
 		{
 			Map<String, Boolean> permissions = attachment.getPermissions();
-			if (permissions.containsKey(name) && permissions.get(name) == true)
+			if (permissions.containsKey(name) && permissions.get(name))
 				return true;
 		}
 		return false;
@@ -713,6 +713,13 @@ public abstract class EntityMock implements Entity, MessageTarget
 	public PistonMoveReaction getPistonMoveReaction()
 	{
 		// TODO Auto-generated constructor stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setRotation(float yaw, float pitch)
+	{
+		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 	

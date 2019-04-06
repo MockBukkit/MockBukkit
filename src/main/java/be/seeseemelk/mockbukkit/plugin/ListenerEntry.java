@@ -55,9 +55,9 @@ public class ListenerEntry
 	 * 
 	 * @param event
 	 *            The event to pass on to the method.
-	 * @throws IllegalAccessException
-	 * @throws IllegalArgumentException
-	 * @throws InvocationTargetException
+	 * @throws IllegalAccessException Can be thrown by the event handler. 
+	 * @throws IllegalArgumentException Can be thrown by the event handler.
+	 * @throws InvocationTargetException Can be thrown by the event handler.
 	 */
 	public void invoke(Event event) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException
 	{

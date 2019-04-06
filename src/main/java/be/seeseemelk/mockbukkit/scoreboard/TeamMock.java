@@ -12,6 +12,7 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
+
 /**
  * Created for the AddstarMC Project. Created by Narimm on 24/12/2018.
  */
@@ -27,7 +28,7 @@ public class TeamMock implements Team {
     private final HashSet<String> entries;
     private boolean canSeeFriendly = true;
     private EnumMap<Option,OptionStatus> options = new EnumMap<>(Option.class);
-    public boolean registered;
+    private boolean registered;
     private Scoreboard board;
     
     public TeamMock(String name, Scoreboard board) {
@@ -53,7 +54,7 @@ public class TeamMock implements Team {
     }
     
     @Override
-    public void setDisplayName(String s) throws IllegalStateException, IllegalArgumentException {
+    public void setDisplayName(String s) {
         if(!registered)throw new IllegalStateException("Team not registered");
     
         this.displayName = s;
@@ -67,7 +68,7 @@ public class TeamMock implements Team {
     }
     
     @Override
-    public void setPrefix(String s) throws IllegalStateException, IllegalArgumentException {
+    public void setPrefix(String s) {
         if(!registered)throw new IllegalStateException("Team not registered");
     
         this.prefix = s;
@@ -81,7 +82,7 @@ public class TeamMock implements Team {
     }
     
     @Override
-    public void setSuffix(String s) throws IllegalStateException, IllegalArgumentException {
+    public void setSuffix(String s) {
         if(!registered)throw new IllegalStateException("Team not registered");
     
         this.suffic = s;
@@ -131,7 +132,8 @@ public class TeamMock implements Team {
     
     /** @deprecated  */
     @Override
-    public NameTagVisibility getNameTagVisibility() throws IllegalArgumentException {
+    @Deprecated
+    public NameTagVisibility getNameTagVisibility() {
         if(!registered)throw new IllegalStateException("Team not registered");
     
         OptionStatus s = options.get(Option.NAME_TAG_VISIBILITY);
@@ -150,12 +152,13 @@ public class TeamMock implements Team {
     }
     
     /**
-     * @param nameTagVisibility
-     *
+     * Sets the visibility of a name tag.
+     * @param nameTagVisibility The visibility of the name tag of players in this team.
      * @deprecated
      */
     @Override
-    public void setNameTagVisibility(NameTagVisibility nameTagVisibility) throws IllegalArgumentException {
+    @Deprecated
+    public void setNameTagVisibility(NameTagVisibility nameTagVisibility) {
         MockBukkit.getMock().getLogger().log(Level.WARNING,"Consider USE setOption() DEPRECATED");
         if(!registered)throw new IllegalStateException("Team not registered");
     
@@ -179,6 +182,7 @@ public class TeamMock implements Team {
     
     /** @deprecated  */
     @Override
+    @Deprecated
     public Set<OfflinePlayer> getPlayers() throws IllegalStateException {
         
         if(!registered)throw new IllegalStateException("Team not registered");
@@ -209,37 +213,32 @@ public class TeamMock implements Team {
     }
     
     /**
-     * @param offlinePlayer
-     *
      * @deprecated
      */
     @Override
-    public void addPlayer(OfflinePlayer offlinePlayer) throws IllegalStateException, IllegalArgumentException {
+    public void addPlayer(OfflinePlayer offlinePlayer) {
         if(!registered)throw new IllegalStateException("Team not registered");
     
         entries.add(offlinePlayer.getName());
     }
     
     @Override
-    public void addEntry(String s) throws IllegalStateException, IllegalArgumentException {
+    public void addEntry(String s) {
         if(!registered)throw new IllegalStateException("Team not registered");
         entries.add(s);
     }
     
-    /**
-     * @param offlinePlayer
-     *
-     * @deprecated
-     */
+    /** @deprecated */
     @Override
-    public boolean removePlayer(OfflinePlayer offlinePlayer) throws IllegalStateException, IllegalArgumentException {
+    @Deprecated
+    public boolean removePlayer(OfflinePlayer offlinePlayer) {
         if(!registered)throw new IllegalStateException("Team not registered");
     
         return entries.remove(offlinePlayer.getName());
     }
     
     @Override
-    public boolean removeEntry(String s) throws IllegalStateException, IllegalArgumentException {
+    public boolean removeEntry(String s) {
         if(!registered)throw new IllegalStateException("Team not registered");
         return entries.remove(s);
     
@@ -254,19 +253,16 @@ public class TeamMock implements Team {
         registered = false;
     }
     
-    /**
-     * @param offlinePlayer
-     *
-     * @deprecated
-     */
+    /** @deprecated */
     @Override
-    public boolean hasPlayer(OfflinePlayer offlinePlayer) throws IllegalArgumentException, IllegalStateException {
+    @Deprecated
+    public boolean hasPlayer(OfflinePlayer offlinePlayer) {
         if(!registered)throw new IllegalStateException("Team not registered");
         return entries.contains(offlinePlayer.getName());
     }
     
     @Override
-    public boolean hasEntry(String s) throws IllegalArgumentException, IllegalStateException {
+    public boolean hasEntry(String s) {
         if(!registered)throw new IllegalStateException("Team not registered");
         return entries.contains(s);
     }

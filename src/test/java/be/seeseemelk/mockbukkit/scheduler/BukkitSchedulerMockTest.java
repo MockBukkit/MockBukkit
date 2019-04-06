@@ -22,7 +22,7 @@ public class BukkitSchedulerMockTest
 	private BukkitSchedulerMock scheduler; 
 
 	@Before
-	public void setUp() throws Exception
+	public void setUp()
 	{
 		scheduler = new BukkitSchedulerMock();
 	}
@@ -41,9 +41,7 @@ public class BukkitSchedulerMockTest
 	public void runTask()
 	{
 		AtomicBoolean executed = new AtomicBoolean(false);
-		Runnable task = () -> {
-			executed.set(true);
-		};
+		Runnable task = () -> executed.set(true);
 		scheduler.runTask(null, task);
 		assertFalse(executed.get());
 		scheduler.performOneTick();
@@ -54,9 +52,7 @@ public class BukkitSchedulerMockTest
 	public void runTaskLater()
 	{
 		AtomicBoolean executed = new AtomicBoolean(false);
-		Runnable callback = () -> {
-			executed.set(true);
-		};
+		Runnable callback = () -> executed.set(true);
 		BukkitTask task = scheduler.runTaskLater(null, callback, 20L);
 		assertNotNull(task);
 		assertFalse(executed.get());
@@ -70,9 +66,7 @@ public class BukkitSchedulerMockTest
 	public void runTaskTimer()
 	{
 		AtomicInteger count = new AtomicInteger(0);
-		Runnable callback = () -> {
-			count.incrementAndGet();
-		};
+		Runnable callback = () -> count.incrementAndGet();
 		BukkitTask task = scheduler.runTaskTimer(null, callback, 10L, 2L);
 		assertNotNull(task);
 		scheduler.performTicks(9L);

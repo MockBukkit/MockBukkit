@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.inventory.meta;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.commons.lang.Validate;
 import org.bukkit.inventory.meta.BookMeta;
@@ -23,6 +24,29 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta {
     private String author;
 
     @Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(author, pages, spigot, title);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (!(obj instanceof BookMetaMock))
+			return false;
+		BookMetaMock other = (BookMetaMock) obj;
+		return Objects.equals(author, other.author) && Objects.equals(pages, other.pages)
+				&& Objects.equals(spigot, other.spigot) && Objects.equals(title, other.title);
+	}
+
+	@Override
     public boolean hasTitle() {
         return !Strings.isNullOrEmpty(this.title);
     }
@@ -80,14 +104,18 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta {
         if (!this.isValidPage(page)) {
             throw new IllegalArgumentException("Invalid page number " + page + "/" + this.pages.size());
         } else {
-            String newText = text == null ? "" : (text.length() > 32767 ? text.substring(0, 32767) : text);
+        	String newText;
+        	if (text != null)
+        		newText = text.length() > 32767 ? text.substring(0, 32767) : text;
+        	else
+        		newText = "";
             this.pages.set(page - 1, newText);
         }
     }
 
     @Override
     public List<String> getPages() {
-        return null;
+        return pages;
     }
 
     @Override
@@ -102,7 +130,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta {
         Iterator<String> var2 = pages.iterator();
 
         while (var2.hasNext()) {
-            String page = (String) var2.next();
+            String page = var2.next();
             this.addPage(page);
         }
 
@@ -131,7 +159,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta {
 
     @Override
     public BookMetaMock clone() {
-        BookMetaMock mock = new BookMetaMock();
+        BookMetaMock mock = (BookMetaMock) super.clone();
         mock.pages = new ArrayList<>(pages);
         return mock;
     }
