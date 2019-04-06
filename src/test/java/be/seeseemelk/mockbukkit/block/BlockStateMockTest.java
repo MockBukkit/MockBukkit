@@ -6,6 +6,7 @@ import org.junit.Test;
 
 public class BlockStateMockTest
 {
+	@SuppressWarnings("deprecation")
 	@Test
 	public void getData_Default_Null()
 	{

@@ -67,6 +67,10 @@ public class WorldMock implements World
 	private String name = "World";
 	private UUID uuid = UUID.randomUUID();
 	private Location spawnLocation;
+	private int weatherDuration = 0;
+	private int thunderDuration = 0;
+	private boolean storming = false;
+	private Map<GameRule<?>, Object> gameRules = new HashMap<>();
 	
 	/**
 	 * Creates a new mock world.
@@ -82,6 +86,31 @@ public class WorldMock implements World
 		this.defaultBlock = defaultBlock;
 		this.height = height;
 		this.grassHeight = grassHeight;
+		
+		// Set the default gamerule values.
+		gameRules.put(GameRule.ANNOUNCE_ADVANCEMENTS, true);
+		gameRules.put(GameRule.COMMAND_BLOCK_OUTPUT, true);
+		gameRules.put(GameRule.DISABLE_ELYTRA_MOVEMENT_CHECK, false);
+		gameRules.put(GameRule.DO_DAYLIGHT_CYCLE, true);
+		gameRules.put(GameRule.DO_ENTITY_DROPS, true);
+		gameRules.put(GameRule.DO_FIRE_TICK, true);
+		gameRules.put(GameRule.DO_LIMITED_CRAFTING, false);
+		gameRules.put(GameRule.DO_MOB_LOOT, true);
+		gameRules.put(GameRule.DO_MOB_SPAWNING, true);
+		gameRules.put(GameRule.DO_TILE_DROPS, true);
+		gameRules.put(GameRule.DO_WEATHER_CYCLE, true);
+		gameRules.put(GameRule.KEEP_INVENTORY, false);
+		gameRules.put(GameRule.LOG_ADMIN_COMMANDS, true);
+		gameRules.put(GameRule.MAX_COMMAND_CHAIN_LENGTH, 65536);
+		gameRules.put(GameRule.MAX_ENTITY_CRAMMING, 24);
+		gameRules.put(GameRule.MOB_GRIEFING, true);
+		gameRules.put(GameRule.NATURAL_REGENERATION, true);
+		gameRules.put(GameRule.RANDOM_TICK_SPEED, 3);
+		gameRules.put(GameRule.REDUCED_DEBUG_INFO, false);
+		gameRules.put(GameRule.SEND_COMMAND_FEEDBACK, true);
+		gameRules.put(GameRule.SHOW_DEATH_MESSAGES, true);
+		gameRules.put(GameRule.SPAWN_RADIUS, 10);
+		gameRules.put(GameRule.SPECTATORS_GENERATE_CHUNKS, true);
 	}
 	
 	/**
@@ -555,57 +584,49 @@ public class WorldMock implements World
 	@Override
 	public boolean hasStorm()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return storming;
 	}
 	
 	@Override
 	public void setStorm(boolean hasStorm)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		storming = hasStorm;
 	}
 	
 	@Override
 	public int getWeatherDuration()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return weatherDuration;
 	}
 	
 	@Override
 	public void setWeatherDuration(int duration)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		weatherDuration = duration;
 	}
 	
 	@Override
 	public boolean isThundering()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return thunderDuration > 0;
 	}
 	
 	@Override
 	public void setThundering(boolean thundering)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		thunderDuration = thundering ? 600 : 0;
 	}
 	
 	@Override
 	public int getThunderDuration()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return thunderDuration;
 	}
 	
 	@Override
 	public void setThunderDuration(int duration)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		thunderDuration = duration;
 	}
 	
 	@Override
@@ -999,29 +1020,54 @@ public class WorldMock implements World
 	@Override
 	public String[] getGameRules()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return gameRules.values().stream()
+				.map(Object::toString)
+				.collect(Collectors.toList())
+				.toArray(new String[0]);
 	}
 	
 	@Override
 	public String getGameRuleValue(String rule)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (rule == null)
+			return null;
+		GameRule<?> gameRule = GameRule.getByName(rule);
+		if (gameRule == null)
+			return null;
+		return getGameRuleValue(gameRule).toString();
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean setGameRuleValue(String rule, String value)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (rule == null)
+			return false;
+		GameRule<?> gameRule = GameRule.getByName(rule);
+		if (gameRule == null)
+			return false;
+		if (gameRule.getType().equals(Boolean.TYPE) && (value.equalsIgnoreCase("true") || value.equalsIgnoreCase("false")))
+			return setGameRule((GameRule<Boolean>) gameRule, value.equalsIgnoreCase("true"));
+		else if (gameRule.getType().equals(Integer.TYPE))
+		{
+			try
+			{
+				int intValue = Integer.parseInt(value);
+				return setGameRule((GameRule<Integer>) gameRule, intValue);
+			}
+			catch (NumberFormatException e)
+			{
+				return false;
+			}
+		}
+		else
+			return false;
 	}
 	
 	@Override
 	public boolean isGameRule(String rule)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return rule != null && GameRule.getByName(rule) != null; 
 	}
 
     @Override
@@ -1130,11 +1176,11 @@ public class WorldMock implements World
 		throw new UnimplementedOperationException();
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T getGameRuleValue(GameRule<T> rule)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return (T) gameRules.get(rule);
 	}
 	
 	@Override
@@ -1147,8 +1193,8 @@ public class WorldMock implements World
 	@Override
 	public <T> boolean setGameRule(GameRule<T> rule, T newValue)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		gameRules.put(rule, newValue);
+		return true;
 	}
 
 	@Override
