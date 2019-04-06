@@ -1,12 +1,16 @@
 package be.seeseemelk.mockbukkit;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assume.assumeFalse;
 
 import java.util.List;
 
+import org.bukkit.GameRule;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -150,6 +154,75 @@ public class WorldMockTest
 		WorldMock world = new WorldMock();
 		world.setName("world name");
 		assertEquals("world name", world.getName());
+	}
+	
+	@Test
+	public void setGameRule_CorrectValue_GameRuleSet()
+	{
+		WorldMock world = new WorldMock();
+		assertTrue(world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, true));
+		assertTrue(world.getGameRuleValue(GameRule.DO_DAYLIGHT_CYCLE));
+		assertTrue(world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false));
+		assertFalse(world.getGameRuleValue(GameRule.DO_DAYLIGHT_CYCLE));
+	}
+	
+	@Test
+	public void onCreated_WeatherDurationSetToZero()
+	{
+		WorldMock world = new WorldMock();
+		assertEquals("Weather duration should be zero", 0, world.getWeatherDuration());
+	}
+	
+	@Test
+	public void setWeatherDuration_AnyPositiveValue_WeatherDurationSet()
+	{
+		WorldMock world = new WorldMock();
+		int duration = 5;
+		world.setWeatherDuration(duration);
+		assertEquals("Weather duration should be set", duration, world.getWeatherDuration());
+	}
+	
+	@Test
+	public void onCreated_NotStorming()
+	{
+		WorldMock world = new WorldMock();
+		assertFalse("The world should not be storming", world.hasStorm());
+	}
+	
+	@Test
+	public void setStorm_True_Storming()
+	{
+		WorldMock world = new WorldMock();
+		assumeFalse(world.hasStorm());
+		world.setStorm(true);
+		assertTrue("The world should be storming", world.hasStorm());
+	}
+	
+	@Test
+	public void onCreated_ThunderDurationSetToZero()
+	{
+		WorldMock world = new WorldMock();
+		assertEquals("Weather duration should be zero", 0, world.getThunderDuration());
+		assertFalse(world.isThundering());
+	}
+	
+	@Test
+	public void setThunderDuration_AnyPositiveValue_ShouldBeThundering()
+	{
+		WorldMock world = new WorldMock();
+		int duration = 20;
+		world.setThunderDuration(duration);
+		assertEquals("Weather duration should be more than zero", duration, world.getThunderDuration());
+		assertTrue(world.isThundering());
+	}
+
+	@Test
+	public void setThundering_True_ThunderDurationShouldBePositive()
+	{
+		WorldMock world = new WorldMock();
+		world.setThundering(true);
+		assertTrue("Weather duration should be more than zero", world.getThunderDuration() > 0);
+		assertTrue(world.isThundering());
 	}
 	
 }
