@@ -85,6 +85,31 @@ public class WorldMock implements World
 		this.defaultBlock = defaultBlock;
 		this.height = height;
 		this.grassHeight = grassHeight;
+		
+		// Set the default gamerule values.
+		gameRules.put(GameRule.ANNOUNCE_ADVANCEMENTS, true);
+		gameRules.put(GameRule.COMMAND_BLOCK_OUTPUT, true);
+		gameRules.put(GameRule.DISABLE_ELYTRA_MOVEMENT_CHECK, false);
+		gameRules.put(GameRule.DO_DAYLIGHT_CYCLE, true);
+		gameRules.put(GameRule.DO_ENTITY_DROPS, true);
+		gameRules.put(GameRule.DO_FIRE_TICK, true);
+		gameRules.put(GameRule.DO_LIMITED_CRAFTING, false);
+		gameRules.put(GameRule.DO_MOB_LOOT, true);
+		gameRules.put(GameRule.DO_MOB_SPAWNING, true);
+		gameRules.put(GameRule.DO_TILE_DROPS, true);
+		gameRules.put(GameRule.DO_WEATHER_CYCLE, true);
+		gameRules.put(GameRule.KEEP_INVENTORY, false);
+		gameRules.put(GameRule.LOG_ADMIN_COMMANDS, true);
+		gameRules.put(GameRule.MAX_COMMAND_CHAIN_LENGTH, 65536);
+		gameRules.put(GameRule.MAX_ENTITY_CRAMMING, 24);
+		gameRules.put(GameRule.MOB_GRIEFING, true);
+		gameRules.put(GameRule.NATURAL_REGENERATION, true);
+		gameRules.put(GameRule.RANDOM_TICK_SPEED, 3);
+		gameRules.put(GameRule.REDUCED_DEBUG_INFO, false);
+		gameRules.put(GameRule.SEND_COMMAND_FEEDBACK, true);
+		gameRules.put(GameRule.SHOW_DEATH_MESSAGES, true);
+		gameRules.put(GameRule.SPAWN_RADIUS, 10);
+		gameRules.put(GameRule.SPECTATORS_GENERATE_CHUNKS, true);
 	}
 	
 	/**
