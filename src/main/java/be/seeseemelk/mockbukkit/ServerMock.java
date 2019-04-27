@@ -271,6 +271,17 @@ public class ServerMock implements Server
 	}
 	
 	/**
+	 * Adds the given mocked world to this server.
+	 *
+	 * @param world The world to add.
+	 */
+	public void addWorld(WorldMock world)
+	{
+		assertMainThread();
+		worlds.add(world);
+	}
+	
+	/**
 	 * Executes a command as the console.
 	 * 
 	 * @param command The command to execute.
