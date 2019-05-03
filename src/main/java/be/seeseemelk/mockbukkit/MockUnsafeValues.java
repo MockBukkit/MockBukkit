@@ -51,7 +51,7 @@ public class MockUnsafeValues implements UnsafeValues
 	public int getDataVersion()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return 1;
 	}
 	
 	@Override
