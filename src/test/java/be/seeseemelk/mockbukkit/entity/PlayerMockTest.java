@@ -27,8 +27,6 @@ import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.event.player.PlayerExpChangeEvent;
-import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.inventory.InventoryView;
 import org.junit.After;
 import org.junit.Before;
@@ -45,8 +43,6 @@ import be.seeseemelk.mockbukkit.inventory.SimpleInventoryViewMock;
 
 public class PlayerMockTest
 {
-	// Taken from https://minecraft.gamepedia.com/Experience#Leveling_up
-	private static int[] expRequired = new int[]{7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 42, 47, 52, 57, 62, 67, 72, 77, 82, 87, 92, 97, 102, 107, 112, 121, 130, 139, 148, 157, 166, 175, 184, 193};
 	private ServerMock server;
 	private UUID uuid;
 	private PlayerMock player;
@@ -264,7 +260,7 @@ public class PlayerMockTest
 		server.getPluginManager().assertEventFired(BlockBreakEvent.class);
 		block.assertType(Material.AIR);
 	}
-
+	
 	@Test
 	public void simulateBlockBreak_Creative_BlockBroken()
 	{
@@ -276,7 +272,7 @@ public class PlayerMockTest
 		server.getPluginManager().assertEventFired(BlockBreakEvent.class);
 		block.assertType(Material.AIR);
 	}
-
+	
 	@Test
 	public void simulateBlockBreak_Spectator_BlockNotBroken()
 	{
@@ -287,7 +283,7 @@ public class PlayerMockTest
 		assertFalse(player.simulateBlockBreak(block));
 		block.assertType(Material.STONE);
 	}
-
+	
 	@Test
 	public void simulateBlockBreak_Adventure_BlockNotBroken()
 	{
@@ -316,7 +312,7 @@ public class PlayerMockTest
 		assertFalse(player.simulateBlockBreak(block));
 		block.assertType(Material.STONE);
 	}
-
+	
 	@Test
 	public void simulateBlockBreak_SurvivalAndDamageCancelled_BlockNotBroken()
 	{
@@ -334,7 +330,7 @@ public class PlayerMockTest
 		assertFalse(player.simulateBlockBreak(block));
 		block.assertType(Material.STONE);
 	}
-
+	
 	@Test
 	public void simulateBlockBreak_CreativeAndBreakCancelled_BlockNotBroken()
 	{
@@ -353,7 +349,7 @@ public class PlayerMockTest
 		assertFalse(player.simulateBlockBreak(block));
 		block.assertType(Material.STONE);
 	}
-
+	
 	@Test
 	public void simulateBlockBreak_CreativeAndDamageCancelled_BlockBroken()
 	{
@@ -372,7 +368,7 @@ public class PlayerMockTest
 		assertTrue(player.simulateBlockBreak(block));
 		block.assertType(Material.AIR);
 	}
-
+	
 	@Test
 	public void simulateBlockDamage_Survival_BlockDamaged()
 	{
@@ -380,7 +376,7 @@ public class PlayerMockTest
 		BlockMock block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
 		assertTrue(player.simulateBlockDamage(block));
 	}
-
+	
 	@Test
 	public void simulateBlockDamage_NotSurvival_BlockNotDamaged()
 	{
@@ -391,7 +387,7 @@ public class PlayerMockTest
 			assertFalse("Block was damaged while in gamemode " + gm.name(), player.simulateBlockDamage(block));
 		}
 	}
-
+	
 	@Test
 	public void simulateBlockDamage_NotInstaBreak_NotBroken()
 	{
@@ -405,21 +401,21 @@ public class PlayerMockTest
 			{
 				event.setInstaBreak(false);
 			}
-
+			
 			@EventHandler
 			public void onBlockBreak(BlockBreakEvent event)
 			{
 				wasBroken.set(true);
 			}
 		}, plugin);
-
+		
 		BlockMock block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
 		block.setType(Material.STONE);
 		assumeTrue(player.simulateBlockDamage(block));
 		assertFalse("BlockBreakEvent was fired", wasBroken.get());
 		block.assertType(Material.STONE);
 	}
-
+	
 	@Test
 	public void simulateBlockDamage_InstaBreak_Broken()
 	{
@@ -433,21 +429,21 @@ public class PlayerMockTest
 			{
 				event.setInstaBreak(true);
 			}
-
+			
 			@EventHandler
 			public void onBlockBreak(BlockBreakEvent event)
 			{
 				brokenCount.incrementAndGet();
 			}
 		}, plugin);
-
+		
 		BlockMock block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
 		block.setType(Material.STONE);
 		assumeTrue(player.simulateBlockDamage(block));
 		assertEquals("BlockBreakEvent was not fired only once", 1, brokenCount.get());
 		block.assertType(Material.AIR);
 	}
-
+	
 	@Test
 	public void simulateBlockBreak_InstaBreak_BreakEventOnlyFiredOnce()
 	{
@@ -461,34 +457,34 @@ public class PlayerMockTest
 			{
 				event.setInstaBreak(true);
 			}
-
+			
 			@EventHandler
 			public void onBlockBreak(BlockBreakEvent event)
 			{
 				brokenCount.incrementAndGet();
 			}
 		}, plugin);
-
+		
 		BlockMock block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
 		block.setType(Material.STONE);
 		assumeTrue(player.simulateBlockBreak(block));
 		assertEquals("BlockBreakEvent was not fired only once", 1, brokenCount.get());
 		block.assertType(Material.AIR);
 	}
-
+	
 	@Test
 	public void getDisplayName_Default_SameAsPlayerUsername()
 	{
 		assertEquals(player.getName(), player.getDisplayName());
 	}
-
+	
 	@Test
 	public void getDisplayName_NameSet_NameSet()
 	{
 		player.setDisplayName("Some Display Name");
 		assertEquals("Some Display Name", player.getDisplayName());
 	}
-
+	
 	@Test
 	public void chat_AnyMessage_AsyncEventFired()
 	{
@@ -508,162 +504,20 @@ public class PlayerMockTest
 		assertTrue(plugin.asyncEventExecuted);
 	}
 
-	@Test
-	public void getLevel_Default_EqualsZero()
-	{
-		assertEquals(0, player.getLevel());
-	}
-
-	@Test
-	public void getExp_Default_EqualsZero()
-	{
-		assertEquals(0, player.getExp(), 0);
-	}
-
-	@Test
-	public void getTotalExperience_Default_EqualsZero()
-	{
-		assertEquals(0, player.getTotalExperience());
-	}
-
-	@Test
-	public void setLevel_SomeValue_LevelSetExactly()
-	{
-		player.setLevel(15);
-		assertEquals(15, player.getLevel());
-	}
-
-	@Test
-	public void setExp_SomeValue_LevelSetExactly()
-	{
-		player.setExp(0.5F);
-		assertEquals(0.5, player.getExp(), 0.5);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void setExp_GreaterThanOne_ExceptionThrown()
-	{
-		player.setExp(1.1F);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void setExp_LessThanZero_ExceptionThrown()
-	{
-		player.setExp(-1.0F);
-	}
-
-	@Test
-	public void setTotalExperience_SomeValue_TotalExpSetExactly()
-	{
-		player.setTotalExperience(100);
-		assertEquals(100, player.getTotalExperience());
-	}
-
-	@Test
-	public void setTotalExperience_NegativeValue_ClampedAtZero()
-	{
-		player.setTotalExperience(-200);
-		assertEquals(0, player.getTotalExperience(), 0);
-	}
-
-	@Test
-	public void getExpToLevel_CorrectExp()
-	{
-		for (int i = 0; i < expRequired.length; i++)
-		{
-			player.setLevel(i);
-			assertEquals(expRequired[i], player.getExpToLevel());
-		}
-	}
-
-	@Test
-	public void giveExpLevel_Negative_ClampedAtZero()
-	{
-		player.setExp(0.5F);
-		player.setLevel(1);
-		player.giveExpLevels(-100);
-		assertEquals(0, player.getExp(), 0);
-		assertEquals(0, player.getLevel());
-	}
-
-	@Test
-	public void giveExp_SomeExp_IncreaseLevel()
-	{
-		for (int i = 0; i < expRequired.length; i++)
-		{
-			assertEquals(0, player.getExp(), 0);
-			player.giveExp(expRequired[i]);
-			assertEquals(i+1, player.getLevel());
-		}
-	}
-
-	@Test
-	public void giveExp_SomeExp_IncreaseMultipleLevels()
-	{
-		player.giveExp(expRequired[0] + expRequired[1] + expRequired[2]);
-		assertEquals(3, player.getLevel());
-		assertEquals(expRequired[0] + expRequired[1] + expRequired[2], player.getTotalExperience(), 0);
-	}
-
-	@Test
-	public void giveExp_SomeExp_DecreaseLevel()
-	{
-		player.giveExp(expRequired[0] + expRequired[1]);
-		player.giveExp(-expRequired[1]);
-		assertEquals(1, player.getLevel());
-		assertEquals(expRequired[0], player.getTotalExperience(), 0);
-	}
-
-	@Test
-	public void giveExp_SomeExp_DecreaseMultipleLevels()
-	{
-		player.giveExp(expRequired[0] + expRequired[1]);
-		player.giveExp(-(expRequired[0] + expRequired[1]));
-		assertEquals(0, player.getLevel());
-		assertEquals(0.0, player.getTotalExperience(), 0);
-	}
-
-	@Test
-	public void giveExp_SomeLevelChange_LevelEventFired()
-	{
-		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
-		AtomicInteger levelCount = new AtomicInteger();
-		Bukkit.getPluginManager().registerEvents(new Listener()
-		{
-			@EventHandler
-			public void onLevelChangeEvent(PlayerLevelChangeEvent event)
-			{
-				levelCount.incrementAndGet();
-			}
-
-			@EventHandler
-			public void onExpChangeEvent(PlayerExpChangeEvent event)
-			{
-				fail("PlayerExpChangeEvent should not be called");
-			}
-		}, plugin);
-		player.giveExp(expRequired[0]);
-		assertEquals(1, levelCount.get());
-	}
-
-	@Test
-	public void giveExp_NoExpChange_NoEventFired()
-	{
-		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
-		Bukkit.getPluginManager().registerEvents(new Listener()
-		{
-			@EventHandler
-			public void onLevelChangeEvent(PlayerLevelChangeEvent event)
-			{
-				fail("PlayerLevelChangeEvent should not be called");
-			}
-
-			@EventHandler
-			public void onExpChangeEvent(PlayerExpChangeEvent event)
-			{
-				fail("PlayerExpChangeEvent should not be called");
-			}
-		}, plugin);
-		player.giveExp(0);
-	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

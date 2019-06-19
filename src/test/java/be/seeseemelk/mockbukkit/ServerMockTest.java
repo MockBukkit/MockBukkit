@@ -1,23 +1,11 @@
 package be.seeseemelk.mockbukkit;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assume.assumeTrue;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.atomic.AtomicReference;
-
+import be.seeseemelk.mockbukkit.command.CommandResult;
+import be.seeseemelk.mockbukkit.entity.EntityMock;
+import be.seeseemelk.mockbukkit.entity.PlayerMock;
+import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
+import be.seeseemelk.mockbukkit.entity.SimpleEntityMock;
+import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
@@ -31,12 +19,16 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import be.seeseemelk.mockbukkit.command.CommandResult;
-import be.seeseemelk.mockbukkit.entity.EntityMock;
-import be.seeseemelk.mockbukkit.entity.PlayerMock;
-import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
-import be.seeseemelk.mockbukkit.entity.SimpleEntityMock;
-import be.seeseemelk.mockbukkit.inventory.InventoryMock;
+import java.io.File;
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.atomic.AtomicReference;
+
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.junit.Assert.*;
+import static org.junit.Assume.assumeTrue;
 
 public class ServerMockTest
 {
