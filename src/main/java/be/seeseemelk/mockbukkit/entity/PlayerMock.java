@@ -54,7 +54,6 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerChatEvent;
-import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
@@ -92,37 +91,34 @@ public class PlayerMock extends EntityMock implements Player
 	private double maxHealth = MAX_HEALTH;
 	private String displayName = null;
 	private double health = 20.0;
-	private int expTotal = 0;
-	private float exp = 0;
-	private int expLevel = 0;
 	private boolean whitelisted = true;
 	private Map<Attribute, AttributeInstanceMock> attributes;
 	private InventoryView inventoryView;
-
+	
 	public PlayerMock(ServerMock server, String name)
 	{
 		this(server, name, UUID.nameUUIDFromBytes(("OfflinePlayer:" + name).getBytes(StandardCharsets.UTF_8)));
 		this.online = false;
 	}
-
+	
 	public PlayerMock(ServerMock server, String name, UUID uuid)
 	{
 		super(server, uuid);
 		setName(name);
 		setDisplayName(name);
 		this.online = true;
-
+		
 		attributes = new EnumMap<>(Attribute.class);
 		attributes.put(Attribute.GENERIC_MAX_HEALTH,
 				new AttributeInstanceMock(Attribute.GENERIC_MAX_HEALTH, MAX_HEALTH));
-
+		
 		if (Bukkit.getWorlds().isEmpty())
 			MockBukkit.getMock().addSimpleWorld("world");
-
+		
 		setLocation(Bukkit.getWorlds().get(0).getSpawnLocation().clone());
 		closeInventory();
 	}
-
+	
 	/**
 	 * Assert that the player is in a specific gamemode.
 	 *
@@ -132,13 +128,13 @@ public class PlayerMock extends EntityMock implements Player
 	{
 		assertEquals(expectedGamemode, gamemode);
 	}
-
+	
 	@Override
 	public int hashCode()
 	{
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + Objects.hash(attributes, exp, expLevel, expTotal, displayName, gamemode, health, inventory, inventoryView,
+		result = prime * result + Objects.hash(attributes, displayName, gamemode, health, inventory, inventoryView,
 				maxHealth, online, whitelisted);
 		return result;
 	}
@@ -176,7 +172,7 @@ public class PlayerMock extends EntityMock implements Player
 		Bukkit.getPluginManager().callEvent(event);
 		return event;
 	}
-
+	
 	/**
 	 * Simulates the player damaging a block. Note that this method does not
 	 * anything unless the player is in survival mode. If {@code InstaBreak} is set
@@ -200,7 +196,7 @@ public class PlayerMock extends EntityMock implements Player
 				if (!breakEvent.isCancelled())
 					block.setType(Material.AIR);
 			}
-
+			
 			return !event.isCancelled();
 		}
 		else
@@ -208,7 +204,7 @@ public class PlayerMock extends EntityMock implements Player
 			return false;
 		}
 	}
-
+	
 	/**
 	 * Simulates the player breaking a block. This method will not break the block
 	 * if the player is in adventure or spectator mode. If the player is in survival
@@ -223,14 +219,14 @@ public class PlayerMock extends EntityMock implements Player
 		if ((gamemode == GameMode.SPECTATOR || gamemode == GameMode.ADVENTURE)
 				|| (gamemode == GameMode.SURVIVAL && simulateBlockDamagePure(block).isCancelled()))
 			return false;
-
+		
 		BlockBreakEvent event = new BlockBreakEvent(block, this);
 		Bukkit.getPluginManager().callEvent(event);
 		if (!event.isCancelled())
 			block.setType(Material.AIR);
 		return !event.isCancelled();
 	}
-
+	
 	@Override
 	public PlayerInventory getInventory()
 	{
@@ -240,25 +236,25 @@ public class PlayerMock extends EntityMock implements Player
 		}
 		return inventory;
 	}
-
+	
 	@Override
 	public GameMode getGameMode()
 	{
 		return gamemode;
 	}
-
+	
 	@Override
 	public void setGameMode(GameMode mode)
 	{
 		gamemode = mode;
 	}
-
+	
 	@Override
 	public double getHealth()
 	{
 		return health;
 	}
-
+	
 	@Override
 	public void setHealth(double health)
 	{
@@ -277,13 +273,13 @@ public class PlayerMock extends EntityMock implements Player
 			this.health = health;
 		}
 	}
-
+	
 	@Override
 	public double getMaxHealth()
 	{
 		return getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
 	}
-
+	
 	@Override
 	public void setMaxHealth(double health)
 	{
@@ -293,13 +289,13 @@ public class PlayerMock extends EntityMock implements Player
 			this.health = health;
 		}
 	}
-
+	
 	@Override
 	public void resetMaxHealth()
 	{
 		setMaxHealth(MAX_HEALTH);
 	}
-
+	
 	@Override
 	public void damage(double amount)
 	{
@@ -307,7 +303,7 @@ public class PlayerMock extends EntityMock implements Player
 		modifiers.put(DamageModifier.BASE, 1.0);
 		Map<DamageModifier, Function<Double, Double>> modifierFunctions = new EnumMap<>(DamageModifier.class);
 		modifierFunctions.put(DamageModifier.BASE, damage -> damage);
-
+		
 		EntityDamageEvent event = new EntityDamageEvent(this, DamageCause.CUSTOM, modifiers, modifierFunctions);
 		event.setDamage(amount);
 		Bukkit.getPluginManager().callEvent(event);
@@ -316,7 +312,7 @@ public class PlayerMock extends EntityMock implements Player
 			setHealth(health - amount);
 		}
 	}
-
+	
 	@Override
 	public void damage(double amount, Entity source)
 	{
@@ -324,7 +320,7 @@ public class PlayerMock extends EntityMock implements Player
 		modifiers.put(DamageModifier.BASE, 1.0);
 		Map<DamageModifier, Function<Double, Double>> modifierFunctions = new EnumMap<>(DamageModifier.class);
 		modifierFunctions.put(DamageModifier.BASE, damage -> damage);
-
+		
 		EntityDamageByEntityEvent event = new EntityDamageByEntityEvent(source, this, DamageCause.ENTITY_ATTACK,
 				modifiers, modifierFunctions);
 		event.setDamage(amount);
@@ -334,19 +330,19 @@ public class PlayerMock extends EntityMock implements Player
 			setHealth(health - amount);
 		}
 	}
-
+	
 	@Override
 	public boolean isWhitelisted()
 	{
 		return this.whitelisted;
 	}
-
+	
 	@Override
 	public void setWhitelisted(boolean value)
 	{
 		this.whitelisted = value;
 	}
-
+	
 	@Override
 	public Player getPlayer()
 	{
@@ -356,19 +352,19 @@ public class PlayerMock extends EntityMock implements Player
 		}
 		return null;
 	}
-
+	
 	@Override
 	public boolean isOnline()
 	{
 		return this.online;
 	}
-
+	
 	@Override
 	public boolean isBanned()
 	{
 		return MockBukkit.getMock().getBanList(BanList.Type.NAME).isBanned(getName());
 	}
-
+	
 	@Override
 	public AttributeInstance getAttribute(Attribute attribute)
 	{
@@ -377,626 +373,622 @@ public class PlayerMock extends EntityMock implements Player
 		else
 			throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public InventoryView getOpenInventory()
 	{
 		return inventoryView;
 	}
-
+	
 	@Override
 	public void openInventory(InventoryView inventory)
 	{
 		inventoryView = inventory;
 	}
-
+	
 	@Override
 	public InventoryView openInventory(Inventory inventory)
 	{
 		inventoryView = new PlayerInventoryViewMock(this, inventory);
 		return inventoryView;
 	}
-
+	
 	@Override
 	public void closeInventory()
 	{
 		inventoryView = new SimpleInventoryViewMock(this, null, inventory, InventoryType.CRAFTING);
 	}
-
+	
 	@Override
 	public boolean performCommand(String command)
 	{
 		return Bukkit.dispatchCommand(this, command);
 	}
-
+	
 	@Override
 	public Inventory getEnderChest()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public MainHand getMainHand()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean setWindowProperty(Property prop, int value)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public InventoryView openWorkbench(Location location, boolean force)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public InventoryView openEnchanting(Location location, boolean force)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public InventoryView openMerchant(Villager trader, boolean force)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public InventoryView openMerchant(Merchant merchant, boolean force)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public ItemStack getItemInHand()
 	{
 		return getInventory().getItemInMainHand();
 	}
-
+	
 	@Override
 	public void setItemInHand(ItemStack item)
 	{
 		getInventory().setItemInMainHand(item);
 	}
-
+	
 	@Override
 	public ItemStack getItemOnCursor()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setItemOnCursor(ItemStack item)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean hasCooldown(Material material)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public int getCooldown(Material material)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setCooldown(Material material, int ticks)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean isSleeping()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public int getSleepTicks()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean isBlocking()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean isHandRaised()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public int getExpToLevel()
 	{
-		// Formula from https://minecraft.gamepedia.com/Experience#Leveling_up
-		if (this.expLevel >= 31)
-			return (9 * this.expLevel) - 158;
-		if (this.expLevel >= 16)
-			return (5 * this.expLevel) - 38;
-		return (2 * this.expLevel) + 7;
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public Entity getShoulderEntityLeft()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setShoulderEntityLeft(Entity entity)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public Entity getShoulderEntityRight()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setShoulderEntityRight(Entity entity)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public double getEyeHeight()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public double getEyeHeight(boolean ignorePose)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public Location getEyeLocation()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public List<Block> getLineOfSight(Set<Material> transparent, int maxDistance)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public Block getTargetBlock(Set<Material> transparent, int maxDistance)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public List<Block> getLastTwoTargetBlocks(Set<Material> transparent, int maxDistance)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public int getRemainingAir()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setRemainingAir(int ticks)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public int getMaximumAir()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setMaximumAir(int ticks)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public int getMaximumNoDamageTicks()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setMaximumNoDamageTicks(int ticks)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public double getLastDamage()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setLastDamage(double damage)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public int getNoDamageTicks()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setNoDamageTicks(int ticks)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public Player getKiller()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean addPotionEffect(PotionEffect effect)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean addPotionEffect(PotionEffect effect, boolean force)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean addPotionEffects(Collection<PotionEffect> effects)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean hasPotionEffect(PotionEffectType type)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public PotionEffect getPotionEffect(PotionEffectType type)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void removePotionEffect(PotionEffectType type)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public Collection<PotionEffect> getActivePotionEffects()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean hasLineOfSight(Entity other)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean getRemoveWhenFarAway()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setRemoveWhenFarAway(boolean remove)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public EntityEquipment getEquipment()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setCanPickupItems(boolean pickup)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean getCanPickupItems()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean isLeashed()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public Entity getLeashHolder()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean setLeashHolder(Entity holder)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean isGliding()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setGliding(boolean gliding)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setAI(boolean ai)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean hasAI()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setCollidable(boolean collidable)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean isCollidable()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public <T extends Projectile> T launchProjectile(Class<? extends T> projectile)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public <T extends Projectile> T launchProjectile(Class<? extends T> projectile, Vector velocity)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean isConversing()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void acceptConversationInput(String input)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean beginConversation(Conversation conversation)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void abandonConversation(Conversation conversation)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void abandonConversation(Conversation conversation, ConversationAbandonedEvent details)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public long getFirstPlayed()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public long getLastPlayed()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean hasPlayedBefore()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public Map<String, Object> serialize()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void sendPluginMessage(Plugin source, String channel, byte[] message)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public Set<String> getListeningPluginChannels()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public String getDisplayName()
 	{
 		return displayName;
 	}
-
+	
 	@Override
 	public void setDisplayName(String name)
 	{
 		this.displayName = name;
 	}
-
+	
 	@Override
 	public String getPlayerListName()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setPlayerListName(String name)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setCompassTarget(Location loc)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public Location getCompassTarget()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public InetSocketAddress getAddress()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void sendRawMessage(String message)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void kickPlayer(String message)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void chat(String msg)
 	{
@@ -1007,182 +999,182 @@ public class PlayerMock extends EntityMock implements Player
 				() -> Bukkit.getPluginManager().callEvent(eventAsync));
 		Bukkit.getPluginManager().callEvent(eventSync);
 	}
-
+	
 	@Override
 	public boolean isSneaking()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setSneaking(boolean sneak)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean isSprinting()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setSprinting(boolean sprinting)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void saveData()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void loadData()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setSleepingIgnored(boolean isSleeping)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean isSleepingIgnored()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void playNote(Location loc, byte instrument, byte note)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void playNote(Location loc, Instrument instrument, Note note)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void playSound(Location location, Sound sound, float volume, float pitch)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void playSound(Location location, String sound, float volume, float pitch)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void playSound(Location location, Sound sound, SoundCategory category, float volume, float pitch)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void playSound(Location location, String sound, SoundCategory category, float volume, float pitch)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void stopSound(Sound sound)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void stopSound(String sound)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void stopSound(Sound sound, SoundCategory category)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void stopSound(String sound, SoundCategory category)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void playEffect(Location loc, Effect effect, int data)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public <T> void playEffect(Location loc, Effect effect, T data)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void sendBlockChange(Location loc, Material material, byte data)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean sendChunkChange(Location loc, int sx, int sy, int sz, byte[] data)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void sendSignChange(Location loc, String[] lines)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void sendMap(MapView map)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void updateInventory()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	@Deprecated
 	public void awardAchievement(Achievement achievement)
@@ -1190,7 +1182,7 @@ public class PlayerMock extends EntityMock implements Player
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	@Deprecated
 	public void removeAchievement(Achievement achievement)
@@ -1198,7 +1190,7 @@ public class PlayerMock extends EntityMock implements Player
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	@Deprecated
 	public boolean hasAchievement(Achievement achievement)
@@ -1206,518 +1198,497 @@ public class PlayerMock extends EntityMock implements Player
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void incrementStatistic(Statistic statistic)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void decrementStatistic(Statistic statistic)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void incrementStatistic(Statistic statistic, int amount)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void decrementStatistic(Statistic statistic, int amount)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setStatistic(Statistic statistic, int newValue)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public int getStatistic(Statistic statistic)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void incrementStatistic(Statistic statistic, Material material)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void decrementStatistic(Statistic statistic, Material material)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public int getStatistic(Statistic statistic, Material material)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void incrementStatistic(Statistic statistic, Material material, int amount)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void decrementStatistic(Statistic statistic, Material material, int amount)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setStatistic(Statistic statistic, Material material, int newValue)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void incrementStatistic(Statistic statistic, EntityType entityType)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void decrementStatistic(Statistic statistic, EntityType entityType)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public int getStatistic(Statistic statistic, EntityType entityType)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void incrementStatistic(Statistic statistic, EntityType entityType, int amount)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void decrementStatistic(Statistic statistic, EntityType entityType, int amount)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setStatistic(Statistic statistic, EntityType entityType, int newValue)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setPlayerTime(long time, boolean relative)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public long getPlayerTime()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public long getPlayerTimeOffset()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean isPlayerTimeRelative()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void resetPlayerTime()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setPlayerWeather(WeatherType type)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public WeatherType getPlayerWeather()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void resetPlayerWeather()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void giveExp(int amount)
 	{
-		this.exp += (float) amount / (float) this.getExpToLevel();
-		setTotalExperience(this.expTotal + amount);
-		while (this.exp < 0.0F)
-		{
-			float total = this.exp * this.getExpToLevel();
-
-			boolean shouldContinue = this.expLevel > 0;
-			this.giveExpLevels(-1);
-			if (shouldContinue)
-				this.exp = 1.0F + (total / this.getExpToLevel());
-		}
-
-		while (this.exp >= 1.0F)
-		{
-			this.exp = (this.exp - 1.0F) * this.getExpToLevel();
-			this.giveExpLevels(1);
-			this.exp /= this.getExpToLevel();
-		}
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void giveExpLevels(int amount)
 	{
-		int oldLevel = this.expLevel;
-		this.expLevel += amount;
-		if (this.expLevel < 0)
-		{
-			this.expLevel = 0;
-			this.exp = 0.0F;
-		}
-		if (oldLevel != this.expLevel)
-		{
-			PlayerLevelChangeEvent event = new PlayerLevelChangeEvent(this, oldLevel, this.expLevel);
-			Bukkit.getPluginManager().callEvent(event);
-		}
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public float getExp()
 	{
-		return exp;
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setExp(float exp)
 	{
-		if (exp < 0.0 || exp > 1.0) throw new IllegalArgumentException("Experience progress must be between 0.0 and 1.0");
-		this.exp = exp;
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public int getLevel()
 	{
-		return expLevel;
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setLevel(int level)
 	{
-		this.expLevel = level;
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public int getTotalExperience()
 	{
-		return expTotal;
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setTotalExperience(int exp)
 	{
-		this.expTotal = Math.max(0, exp);
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public float getExhaustion()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setExhaustion(float value)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public float getSaturation()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setSaturation(float value)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public int getFoodLevel()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setFoodLevel(int value)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public Location getBedSpawnLocation()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setBedSpawnLocation(Location location)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setBedSpawnLocation(Location location, boolean force)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean getAllowFlight()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setAllowFlight(boolean flight)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void hidePlayer(Player player)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void hidePlayer(Plugin plugin, Player player)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void showPlayer(Player player)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void showPlayer(Plugin plugin, Player player)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean canSee(Player player)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean isFlying()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setFlying(boolean value)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setFlySpeed(float value)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setWalkSpeed(float value)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public float getFlySpeed()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public float getWalkSpeed()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setTexturePack(String url)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setResourcePack(String url)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setResourcePack(String url, byte[] hash)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public Scoreboard getScoreboard()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setScoreboard(Scoreboard scoreboard)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean isHealthScaled()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setHealthScaled(boolean scale)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setHealthScale(double scale)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public double getHealthScale()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public Entity getSpectatorTarget()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setSpectatorTarget(Entity entity)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void sendTitle(String title, String subtitle)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void sendTitle(String title, String subtitle, int fadeIn, int stay, int fadeOut)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void resetTitle()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void spawnParticle(Particle particle, Location location, int count)
 	{
@@ -1725,27 +1696,34 @@ public class PlayerMock extends EntityMock implements Player
 		throw new UnimplementedOperationException();
 	}
 
+    @Override
+    public Player.Spigot spigot()
+    {
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+    }
+	
 	@Override
 	public void spawnParticle(Particle particle, double x, double y, double z, int count)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public <T> void spawnParticle(Particle particle, Location location, int count, T data)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public <T> void spawnParticle(Particle particle, double x, double y, double z, int count, T data)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void spawnParticle(Particle particle, Location location, int count, double offsetX, double offsetY,
 			double offsetZ)
@@ -1753,7 +1731,7 @@ public class PlayerMock extends EntityMock implements Player
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void spawnParticle(Particle particle, double x, double y, double z, int count, double offsetX,
 			double offsetY, double offsetZ)
@@ -1761,7 +1739,7 @@ public class PlayerMock extends EntityMock implements Player
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public <T> void spawnParticle(Particle particle, Location location, int count, double offsetX, double offsetY,
 			double offsetZ, T data)
@@ -1769,7 +1747,7 @@ public class PlayerMock extends EntityMock implements Player
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public <T> void spawnParticle(Particle particle, double x, double y, double z, int count, double offsetX,
 			double offsetY, double offsetZ, T data)
@@ -1777,7 +1755,7 @@ public class PlayerMock extends EntityMock implements Player
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void spawnParticle(Particle particle, Location location, int count, double offsetX, double offsetY,
 			double offsetZ, double extra)
@@ -1785,7 +1763,7 @@ public class PlayerMock extends EntityMock implements Player
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void spawnParticle(Particle particle, double x, double y, double z, int count, double offsetX,
 			double offsetY, double offsetZ, double extra)
@@ -1793,7 +1771,7 @@ public class PlayerMock extends EntityMock implements Player
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public <T> void spawnParticle(Particle particle, Location location, int count, double offsetX, double offsetY,
 			double offsetZ, double extra, T data)
@@ -1801,7 +1779,7 @@ public class PlayerMock extends EntityMock implements Player
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public <T> void spawnParticle(Particle particle, double x, double y, double z, int count, double offsetX,
 			double offsetY, double offsetZ, double extra, T data)
@@ -1809,98 +1787,98 @@ public class PlayerMock extends EntityMock implements Player
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public AdvancementProgress getAdvancementProgress(Advancement advancement)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public String getLocale()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean isSwimming()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setSwimming(boolean swimming)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean isRiptiding()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public boolean isPersistent()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setPersistent(boolean persistent)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public String getPlayerListHeader()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public String getPlayerListFooter()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setPlayerListHeader(String header)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setPlayerListFooter(String footer)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void setPlayerListHeaderFooter(String header, String footer)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void sendBlockChange(Location loc, BlockData block)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
 	@Override
 	public void updateCommands()
 	{

@@ -151,7 +151,11 @@ public class TeamMock implements Team {
         }
     }
     
-    /** @deprecated */
+    /**
+     * Sets the visibility of a name tag.
+     * @param nameTagVisibility The visibility of the name tag of players in this team.
+     * @deprecated
+     */
     @Override
     @Deprecated
     public void setNameTagVisibility(NameTagVisibility nameTagVisibility) {
@@ -208,7 +212,9 @@ public class TeamMock implements Team {
         return board;
     }
     
-    /** @deprecated */
+    /**
+     * @deprecated
+     */
     @Override
     public void addPlayer(OfflinePlayer offlinePlayer) {
         if(!registered)throw new IllegalStateException("Team not registered");

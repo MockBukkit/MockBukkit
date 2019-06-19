@@ -172,6 +172,8 @@ public class ItemMetaMock implements ItemMeta, Damageable
 		this.lore = new ArrayList<>(lore);
 	}
 
+	private Spigot spigot;
+
 	/**
 	 * Asserts if the lore contains the given lines in order.
 	 * 
@@ -389,7 +391,15 @@ public class ItemMetaMock implements ItemMeta, Damageable
 	{
 		this.damage = damage;
 	}
-	
+
+	@Override
+	public Spigot spigot() {
+		if (spigot == null)
+			spigot = new Spigot();
+
+		return spigot;
+	}
+
 	@Override
 	public boolean hasAttributeModifiers()
 	{

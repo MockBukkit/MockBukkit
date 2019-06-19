@@ -18,6 +18,7 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
  * @author SimplyBallistic
  **/
 public class BookMetaMock extends ItemMetaMock implements BookMeta {
+	private BookMeta.Spigot spigot;
     private String title;
     private List<String> pages = new ArrayList<>();
     private String author;
@@ -27,7 +28,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta {
 	{
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + Objects.hash(author, pages, title);
+		result = prime * result + Objects.hash(author, pages, spigot, title);
 		return result;
 	}
 
@@ -42,7 +43,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta {
 			return false;
 		BookMetaMock other = (BookMetaMock) obj;
 		return Objects.equals(author, other.author) && Objects.equals(pages, other.pages)
-				&& Objects.equals(title, other.title);
+				&& Objects.equals(spigot, other.spigot) && Objects.equals(title, other.title);
 	}
 
 	@Override
@@ -182,5 +183,14 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta {
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+	
+
+	@Override
+	public BookMeta.Spigot spigot() {
+		if (spigot == null)
+			spigot = new BookMeta.Spigot();
+
+		return spigot;
 	}
 }

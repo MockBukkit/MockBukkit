@@ -51,6 +51,11 @@ public class SimpleEntityMock extends EntityMock
 	}
 
 	@Override
+	public Spigot spigot() {
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public BoundingBox getBoundingBox()
 	{
 		// TODO Auto-generated method stub
