@@ -1,0 +1,20 @@
+# Ignore hidden files.
+.*
+**/.*
+!.gitignore
+
+# Ignore compiled files
+/bin/
+/build/
+/*.jar
+
+# Ignore server folder
+/server
+
+# Ignore wiki if placed in the root directory
+/wiki
+/MockBukkit.wiki
+
+#IDE Specific
+/out
+*.iml
