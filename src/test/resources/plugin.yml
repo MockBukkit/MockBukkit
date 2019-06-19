@@ -1,0 +1,9 @@
+name: MockBukkitTestPlugin
+main: be.seeseemelk.mockbukkit.TestPlugin
+version: 0.1.0
+commands:
+  mockcommand:
+    aliases: [stringalias, 1337]
+  testcommand:
+    aliases: "tc"
+  othercommand:

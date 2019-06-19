@@ -1,0 +1,3 @@
+name: SecondTestPlugin
+main: be.seeseemelk.mockbukkit.SecondTestPlugin
+version: 0.1.0
