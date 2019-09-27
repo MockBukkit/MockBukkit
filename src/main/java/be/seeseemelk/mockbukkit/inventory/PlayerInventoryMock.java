@@ -18,9 +18,9 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	protected static final int OFF_HAND = 40;
 	private int mainHandSlot = 0;
 	
-	public PlayerInventoryMock(HumanEntity holder, String name)
+	public PlayerInventoryMock(HumanEntity holder)
 	{
-		super(holder, name, 41, InventoryType.PLAYER);
+		super(holder, 41, InventoryType.PLAYER);
 	}
 	
 	@Override

@@ -21,6 +21,7 @@ import org.bukkit.GameRule;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
+import org.bukkit.Raid;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.StructureType;
@@ -31,6 +32,7 @@ import org.bukkit.WorldType;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
+import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -409,22 +411,7 @@ public class WorldMock implements World
 	}
 	
 	@Override
-	@Deprecated
-	public boolean unloadChunk(int x, int z, boolean save, boolean safe)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-	
-	@Override
 	public boolean unloadChunkRequest(int x, int z)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-	
-	@Override
-	public boolean unloadChunkRequest(int x, int z, boolean safe)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -461,14 +448,6 @@ public class WorldMock implements World
 	
 	@Override
 	public Arrow spawnArrow(Location location, Vector direction, float speed, float spread)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-	
-	@Override
-	public <T extends Arrow> T spawnArrow(Location location, Vector direction, float speed, float spread,
-			Class<T> clazz)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1328,6 +1307,63 @@ public class WorldMock implements World
 
 	@Override
 	public Collection<Chunk> getForceLoadedChunks()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean addPluginChunkTicket(int x, int z, Plugin plugin)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean removePluginChunkTicket(int x, int z, Plugin plugin)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void removePluginChunkTickets(Plugin plugin)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public Collection<Plugin> getPluginChunkTickets(int x, int z)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public Map<Plugin, Collection<Chunk>> getPluginChunkTickets()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public <T extends AbstractArrow> T spawnArrow(Location location, Vector direction, float speed, float spread,
+			Class<T> clazz)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public Raid locateNearestRaid(Location location, int radius)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public List<Raid> getRaids()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

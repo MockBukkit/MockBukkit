@@ -17,6 +17,7 @@ import java.util.UUID;
 import org.bukkit.Achievement;
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
+import org.bukkit.DyeColor;
 import org.bukkit.Effect;
 import org.bukkit.FluidCollisionMode;
 import org.bukkit.GameMode;
@@ -42,8 +43,10 @@ import org.bukkit.conversations.ConversationAbandonedEvent;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Pose;
 import org.bukkit.entity.Projectile;
 import org.bukkit.entity.Villager;
+import org.bukkit.entity.memory.MemoryKey;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -64,6 +67,7 @@ import org.bukkit.inventory.MainHand;
 import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.map.MapView;
+import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -2001,6 +2005,62 @@ public class PlayerMock extends EntityMock implements Player
 
 	@Override
 	public Location getBedLocation()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public <T> T getMemory(MemoryKey<T> memoryKey)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public <T> void setMemory(MemoryKey<T> memoryKey, T memoryValue)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public double getAbsorptionAmount()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setAbsorptionAmount(double amount)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public Pose getPose()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public PersistentDataContainer getPersistentDataContainer()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void sendSignChange(Location loc, String[] lines, DyeColor dyeColor) throws IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void openBook(ItemStack book)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

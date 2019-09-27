@@ -522,10 +522,10 @@ public class ServerMock implements Server
 		switch (type)
 		{
 			case PLAYER:
-				inventory = new PlayerInventoryMock((HumanEntity) owner, title);
+				inventory = new PlayerInventoryMock((HumanEntity) owner);
 				return inventory;
 			case CHEST:
-				inventory = new ChestInventoryMock(owner, title, size > 0 ? size : 9 * 3);
+				inventory = new ChestInventoryMock(owner, size > 0 ? size : 9 * 3);
 				return inventory;
 			default:
 				throw new UnimplementedOperationException("Inventory type not yet supported");
@@ -731,20 +731,6 @@ public class ServerMock implements Server
 	
 	@Override
 	public String getIp()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-	
-	@Override
-	public String getServerName()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-	
-	@Override
-	public String getServerId()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

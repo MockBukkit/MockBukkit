@@ -88,5 +88,12 @@ public class MockUnsafeValues implements UnsafeValues
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
+
+	@Override
+	public Material getMaterial(String material, int version)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
 	
 }

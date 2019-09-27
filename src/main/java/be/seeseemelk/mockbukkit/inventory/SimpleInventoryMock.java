@@ -6,9 +6,9 @@ import org.bukkit.inventory.InventoryHolder;
 public class SimpleInventoryMock extends InventoryMock
 {
 
-	public SimpleInventoryMock(InventoryHolder holder, String name, int size, InventoryType type)
+	public SimpleInventoryMock(InventoryHolder holder, int size, InventoryType type)
 	{
-		super(holder, name, size, type);
+		super(holder, size, type);
 	}
 
 	/**
@@ -18,7 +18,7 @@ public class SimpleInventoryMock extends InventoryMock
 	 */
 	public SimpleInventoryMock()
 	{
-		super(null, "Inventory", 9, InventoryType.CHEST);
+		super(null, 9, InventoryType.CHEST);
 	}
 
 }

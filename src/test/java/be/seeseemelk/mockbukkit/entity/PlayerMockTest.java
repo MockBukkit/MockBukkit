@@ -225,7 +225,7 @@ public class PlayerMockTest
 	@Test
 	public void openInventory_NothingSet_InventoryViewSet()
 	{
-		InventoryMock inventory = new ChestInventoryMock(null, "Inventory", 9);
+		InventoryMock inventory = new ChestInventoryMock(null, 9);
 		InventoryView view = player.openInventory(inventory);
 		assertNotNull(view);
 		assertSame(player.getInventory(), view.getBottomInventory());

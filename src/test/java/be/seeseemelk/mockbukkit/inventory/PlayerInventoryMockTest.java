@@ -22,7 +22,7 @@ public class PlayerInventoryMockTest
 	public void setUp() throws Exception
 	{
 		server = MockBukkit.mock();
-		inventory = new PlayerInventoryMock(null, "Inventory");
+		inventory = new PlayerInventoryMock(null);
 	}
 
 	@After
@@ -41,7 +41,7 @@ public class PlayerInventoryMockTest
 	public void getHolder_HolderSet_GetsHolder()
 	{
 		PlayerMock player = server.addPlayer();
-		PlayerInventoryMock inventory = new PlayerInventoryMock(player, "");
+		PlayerInventoryMock inventory = new PlayerInventoryMock(player);
 		assertSame(player, inventory.getHolder());
 	}
 	

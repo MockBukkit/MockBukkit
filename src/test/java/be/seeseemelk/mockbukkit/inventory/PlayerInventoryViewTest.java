@@ -32,7 +32,7 @@ public class PlayerInventoryViewTest
 	public void constructor_SetsProperties()
 	{
 		Player player = server.addPlayer();
-		Inventory inventory = new SimpleInventoryMock(null, null, 9, InventoryType.CHEST);
+		Inventory inventory = new SimpleInventoryMock(null, 9, InventoryType.CHEST);
 		
 		PlayerInventoryViewMock view = new PlayerInventoryViewMock(player, inventory);
 		assertSame(player, view.getPlayer());

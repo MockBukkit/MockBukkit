@@ -331,7 +331,6 @@ public class ServerMockTest
 	{
 		PlayerMock player = server.addPlayer();
 		InventoryMock inventory = server.createInventory(player, 9, "title");
-		assertEquals("title", inventory.getTitle());
 		assertEquals(9, inventory.getSize());
 		assertSame(player, inventory.getHolder());
 	}

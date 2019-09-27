@@ -11,11 +11,13 @@ public abstract class InventoryViewMock extends InventoryView
 	private Inventory bottomInventory;
 	private HumanEntity player;
 	private InventoryType type;
+	private String name;
 
-	public InventoryViewMock(HumanEntity player, Inventory top, Inventory bottom, InventoryType type)
+	public InventoryViewMock(HumanEntity player, String name, Inventory top, Inventory bottom, InventoryType type)
 	{
 		this.player = player;
 		this.type = type;
+		this.name = name;
 		topInventory = top;
 		bottomInventory = bottom;
 	}
@@ -78,6 +80,12 @@ public abstract class InventoryViewMock extends InventoryView
 	public InventoryType getType()
 	{
 		return type;
+	}
+	
+	@Override
+	public String getTitle()
+	{
+		return name;
 	}
 
 }

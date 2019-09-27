@@ -9,7 +9,7 @@ public class SimpleInventoryViewMock extends InventoryViewMock
 
 	public SimpleInventoryViewMock(HumanEntity player, Inventory top, Inventory bottom, InventoryType type)
 	{
-		super(player, top, bottom, type);
+		super(player, "Inventory", top, bottom, type);
 	}
 
 	/**

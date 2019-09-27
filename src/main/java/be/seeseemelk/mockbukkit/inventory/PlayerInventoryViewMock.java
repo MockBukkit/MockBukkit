@@ -8,7 +8,7 @@ public class PlayerInventoryViewMock extends InventoryViewMock
 	
 	public PlayerInventoryViewMock(HumanEntity player, Inventory top)
 	{
-		super(player, top, player.getInventory(), top.getType());
+		super(player, "Inventory", top, player.getInventory(), top.getType());
 	}
 	
 }

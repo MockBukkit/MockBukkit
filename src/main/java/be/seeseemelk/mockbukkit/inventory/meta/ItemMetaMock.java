@@ -21,11 +21,13 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.tags.CustomItemTagContainer;
+import org.bukkit.persistence.PersistentDataContainer;
 
 import com.google.common.collect.Multimap;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
+@SuppressWarnings("deprecation")
 public class ItemMetaMock implements ItemMeta, Damageable
 {
 	private String displayName = null;
@@ -455,6 +457,41 @@ public class ItemMetaMock implements ItemMeta, Damageable
 
 	@Override
 	public CustomItemTagContainer getCustomTagContainer()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public PersistentDataContainer getPersistentDataContainer()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean hasCustomModelData()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getCustomModelData()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setCustomModelData(Integer data)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setVersion(int version)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

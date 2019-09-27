@@ -3,6 +3,8 @@ package be.seeseemelk.mockbukkit.entity;
 import java.util.UUID;
 
 import org.bukkit.block.BlockFace;
+import org.bukkit.entity.Pose;
+import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.util.BoundingBox;
 
 import be.seeseemelk.mockbukkit.ServerMock;
@@ -59,6 +61,20 @@ public class SimpleEntityMock extends EntityMock
 
 	@Override
 	public BlockFace getFacing()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public Pose getPose()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public PersistentDataContainer getPersistentDataContainer()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

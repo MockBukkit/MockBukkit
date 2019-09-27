@@ -15,4 +15,4 @@ include 'api'
 include 'services:webservice'
 */
 
-rootProject.name = 'MockBukkit-v1.13'
+rootProject.name = 'MockBukkit-v1.14'

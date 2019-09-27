@@ -22,14 +22,12 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 public abstract class InventoryMock implements org.bukkit.inventory.Inventory
 {
 	private final ItemStack[] items;
-	private final String name;
 	private final InventoryHolder holder;
 	private final InventoryType type;
 
-	public InventoryMock(InventoryHolder holder, String name, int size, InventoryType type)
+	public InventoryMock(InventoryHolder holder, int size, InventoryType type)
 	{
 		this.holder = holder;
-		this.name = name;
 		this.type = type;
 		
 		items = new ItemStack[size];
@@ -127,18 +125,6 @@ public abstract class InventoryMock implements org.bukkit.inventory.Inventory
 	public int getSize()
 	{
 		return items.length;
-	}
-	
-	@Override
-	public String getName()
-	{
-		return name;
-	}
-	
-	@Override
-	public String getTitle()
-	{
-		return name;
 	}
 
 	@Override

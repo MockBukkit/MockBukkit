@@ -27,7 +27,7 @@ public class InventoryMockTest
 	public void setUp() throws Exception
 	{
 		MockBukkit.mock();
-		inventory = new SimpleInventoryMock(null, "Inventory", 9, InventoryType.CHEST);
+		inventory = new SimpleInventoryMock(null, 9, InventoryType.CHEST);
 	}
 
 	@After
@@ -39,21 +39,15 @@ public class InventoryMockTest
 	@Test
 	public void constructor_SetsSize()
 	{
-		assertEquals(9, new SimpleInventoryMock(null, "", 9, InventoryType.CHEST).getSize());
-		assertEquals(18, new SimpleInventoryMock(null, "", 18, InventoryType.CHEST).getSize());
+		assertEquals(9, new SimpleInventoryMock(null, 9, InventoryType.CHEST).getSize());
+		assertEquals(18, new SimpleInventoryMock(null, 18, InventoryType.CHEST).getSize());
 	}
 	
 	@Test
 	public void constructor_SetsType()
 	{
-		assertEquals(InventoryType.CHEST, new SimpleInventoryMock(null, "", 9, InventoryType.CHEST).getType());
-		assertEquals(InventoryType.DROPPER, new SimpleInventoryMock(null, "", 9, InventoryType.DROPPER).getType());
-	}
-
-	@Test
-	public void getName_Default_CorrectName()
-	{
-		assertEquals("Inventory", inventory.getName());
+		assertEquals(InventoryType.CHEST, new SimpleInventoryMock(null,  9, InventoryType.CHEST).getType());
+		assertEquals(InventoryType.DROPPER, new SimpleInventoryMock(null, 9, InventoryType.DROPPER).getType());
 	}
 
 	@Test

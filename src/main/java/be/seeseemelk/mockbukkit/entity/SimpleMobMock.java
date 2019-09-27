@@ -6,7 +6,6 @@ import be.seeseemelk.mockbukkit.ServerMock;
 
 public class SimpleMobMock extends MobMock
 {
-
 	public SimpleMobMock(ServerMock server, UUID uuid)
 	{
 		super(server, uuid);
@@ -16,5 +15,5 @@ public class SimpleMobMock extends MobMock
 	{
 		this(server, UUID.randomUUID());
 	}
-
 }
+

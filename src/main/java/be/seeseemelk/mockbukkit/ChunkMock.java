@@ -1,11 +1,15 @@
 package be.seeseemelk.mockbukkit;
 
+import java.util.Collection;
+
 import org.bukkit.Chunk;
 import org.bukkit.ChunkSnapshot;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Entity;
+import org.bukkit.plugin.Plugin;
 
 public class ChunkMock implements Chunk
 {
@@ -94,12 +98,6 @@ public class ChunkMock implements Chunk
 	}
 
 	@Override
-	public boolean unload(boolean save, boolean safe)
-	{
-		return unload();
-	}
-
-	@Override
 	public boolean unload(boolean save)
 	{
 		return unload();
@@ -148,6 +146,48 @@ public class ChunkMock implements Chunk
 
 	@Override
 	public void setForceLoaded(boolean forced)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean addPluginChunkTicket(Plugin plugin)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean removePluginChunkTicket(Plugin plugin)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public Collection<Plugin> getPluginChunkTickets()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public long getInhabitedTime()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setInhabitedTime(long ticks)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean contains(BlockData block)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
