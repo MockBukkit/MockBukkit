@@ -35,6 +35,7 @@ public class ItemMetaMock implements ItemMeta, Damageable
 	private int damage = 0;
 	private Map<Enchantment, Integer> enchants = new HashMap<>();
 	private Set<ItemFlag> hideFlags = EnumSet.noneOf(ItemFlag.class);
+	private boolean unbreakable = false;
 	
 	public ItemMetaMock()
 	{
@@ -363,15 +364,13 @@ public class ItemMetaMock implements ItemMeta, Damageable
 	@Override
 	public boolean isUnbreakable()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return unbreakable;
 	}
 	
 	@Override
 	public void setUnbreakable(boolean unbreakable)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.unbreakable = unbreakable;
 	}
 	
 	@Override

@@ -26,6 +26,7 @@ public class ItemMetaMockTest
 	{
 		meta.setDisplayName("Some name");
 		meta.setLore(Arrays.asList("lore"));
+		meta.setUnbreakable(true);
 		ItemMetaMock meta2 = new ItemMetaMock(meta);
 		meta2.setLore(Arrays.asList("lore"));
 		assertTrue(meta2.equals(meta));
@@ -125,6 +126,28 @@ public class ItemMetaMockTest
 	public void equals_Null_False()
 	{
 		assertFalse(meta.equals(null));
+	}
+	
+	@Test
+	public void equals_SameUnbreakableProperty_True()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.setUnbreakable(false);
+		meta2.setUnbreakable(false);
+		assertTrue(meta.equals(meta2));
+		meta.setUnbreakable(true);
+		meta2.setUnbreakable(true);
+		assertTrue(meta.equals(meta2));
+	}
+	
+	@Test
+	public void equals_DifferentUnbreakableProperty_False()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.setUnbreakable(true);
+		meta2.setUnbreakable(false);
+		assertTrue(meta.equals(meta2));
+		assertTrue(meta2.equals(meta));
 	}
 	
 	@Test
@@ -232,6 +255,20 @@ public class ItemMetaMockTest
 	{
 		meta.addEnchant(Enchantment.DURABILITY, 100, true);
 		assertFalse(meta.addEnchant(Enchantment.DURABILITY, 100, true));
+	}
+	
+	@Test
+	public void setUnbreakable_True_ItemIsUnbreakable()
+	{
+		meta.setUnbreakable(true);
+		assertTrue(meta.isUnbreakable());
+	}
+	
+	@Test
+	public void setUnbreakable_False_ItemIsBreakable()
+	{
+		meta.setUnbreakable(false);
+		assertFalse(meta.isUnbreakable());
 	}
 	
 	@Test
