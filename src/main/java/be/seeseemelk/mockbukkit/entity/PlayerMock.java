@@ -317,6 +317,7 @@ public class PlayerMock extends EntityMock implements Player
 		Bukkit.getPluginManager().callEvent(event);
 		if (!event.isCancelled())
 		{
+			amount = event.getDamage();
 			setHealth(health - amount);
 		}
 	}
@@ -335,6 +336,7 @@ public class PlayerMock extends EntityMock implements Player
 		Bukkit.getPluginManager().callEvent(event);
 		if (!event.isCancelled())
 		{
+			amount = event.getDamage();
 			setHealth(health - amount);
 		}
 	}
