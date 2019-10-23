@@ -1,10 +1,10 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
+import be.seeseemelk.mockbukkit.attribute.AttributeInstanceMock;
+import com.google.common.base.Function;
+import org.bukkit.Bukkit;
 import org.bukkit.FluidCollisionMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -16,6 +16,11 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
+import org.bukkit.event.Event;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -28,66 +33,118 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
 public abstract class LivingEntityMock extends EntityMock implements LivingEntity
 {
+	private static final double MAX_HEALTH = 20.0;
+	private double health;
+	private double maxHealth = MAX_HEALTH;
+	protected Map<Attribute, AttributeInstanceMock> attributes;
 
 	public LivingEntityMock(ServerMock server, UUID uuid)
 	{
 		super(server, uuid);
-	}
 
-	@Override
-	public AttributeInstance getAttribute(Attribute attribute)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void damage(double amount)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void damage(double amount, Entity source)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		attributes = new EnumMap<>(Attribute.class);
+		attributes.put(Attribute.GENERIC_MAX_HEALTH,
+				new AttributeInstanceMock(Attribute.GENERIC_MAX_HEALTH, 20));
+		this.setMaxHealth(MAX_HEALTH);
+		this.setHealth(MAX_HEALTH);
 	}
 
 	@Override
 	public double getHealth()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return health;
 	}
 
 	@Override
 	public void setHealth(double health)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (health <= 0)
+		{
+			this.health = 0;
+			Event event;
+			if(this instanceof PlayerMock){
+				event = new PlayerDeathEvent((Player) this, new ArrayList<>(), 0, getName() + " got killed");
+			} else {
+				event = new EntityDeathEvent(this, new ArrayList<>(), 0);
+			}
+			Bukkit.getPluginManager().callEvent(event);
+		}
+		else if (health > getMaxHealth())
+		{
+			this.health = getMaxHealth();
+		}
+		else
+		{
+			this.health = health;
+		}
 	}
 
 	@Override
 	public double getMaxHealth()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
 	}
 
 	@Override
 	public void setMaxHealth(double health)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(health);
+		if (this.health > health)
+		{
+			this.health = health;
+		}
 	}
 
 	@Override
 	public void resetMaxHealth()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		setMaxHealth(maxHealth);
+	}
+
+	@Override
+	public void damage(double amount)
+	{
+		Map<EntityDamageEvent.DamageModifier, Double> modifiers = new EnumMap<>(EntityDamageEvent.DamageModifier.class);
+		modifiers.put(EntityDamageEvent.DamageModifier.BASE, 1.0);
+		Map<EntityDamageEvent.DamageModifier, Function<Double, Double>> modifierFunctions = new EnumMap<>(EntityDamageEvent.DamageModifier.class);
+		modifierFunctions.put(EntityDamageEvent.DamageModifier.BASE, damage -> damage);
+
+		EntityDamageEvent event = new EntityDamageEvent(this, EntityDamageEvent.DamageCause.CUSTOM, modifiers, modifierFunctions);
+		event.setDamage(amount);
+		Bukkit.getPluginManager().callEvent(event);
+		if (!event.isCancelled())
+		{
+			amount = event.getDamage();
+			setHealth(health - amount);
+		}
+	}
+
+	@Override
+	public void damage(double amount, Entity source)
+	{
+		Map<EntityDamageEvent.DamageModifier, Double> modifiers = new EnumMap<>(EntityDamageEvent.DamageModifier.class);
+		modifiers.put(EntityDamageEvent.DamageModifier.BASE, 1.0);
+		Map<EntityDamageEvent.DamageModifier, Function<Double, Double>> modifierFunctions = new EnumMap<>(EntityDamageEvent.DamageModifier.class);
+		modifierFunctions.put(EntityDamageEvent.DamageModifier.BASE, damage -> damage);
+
+		EntityDamageByEntityEvent event = new EntityDamageByEntityEvent(source, this, EntityDamageEvent.DamageCause.ENTITY_ATTACK,
+				modifiers, modifierFunctions);
+		event.setDamage(amount);
+		Bukkit.getPluginManager().callEvent(event);
+		if (!event.isCancelled())
+		{
+			amount = event.getDamage();
+			setHealth(health - amount);
+		}
+	}
+
+	@Override
+	public AttributeInstance getAttribute(Attribute attribute)
+	{
+		if (attributes.containsKey(attribute))
+			return attributes.get(attribute);
+		else
+			throw new UnimplementedOperationException();
 	}
 
 	@Override

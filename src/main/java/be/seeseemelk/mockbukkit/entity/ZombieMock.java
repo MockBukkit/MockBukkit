@@ -16,6 +16,8 @@ public class ZombieMock extends MonsterMock implements Zombie {
 
     public ZombieMock(ServerMock server, UUID uuid) {
         super(server, uuid);
+        setMaxHealth(20);
+        this.setHealth(20);
     }
 
     @Override

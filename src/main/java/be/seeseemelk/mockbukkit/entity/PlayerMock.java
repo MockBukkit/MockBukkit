@@ -1,71 +1,31 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import static org.junit.Assert.assertEquals;
-
-import java.net.InetSocketAddress;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.EnumMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
-
-import org.bukkit.Achievement;
-import org.bukkit.BanList;
-import org.bukkit.Bukkit;
-import org.bukkit.DyeColor;
-import org.bukkit.Effect;
-import org.bukkit.FluidCollisionMode;
-import org.bukkit.GameMode;
-import org.bukkit.Instrument;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
-import org.bukkit.Note;
-import org.bukkit.Particle;
-import org.bukkit.Sound;
-import org.bukkit.SoundCategory;
-import org.bukkit.Statistic;
-import org.bukkit.WeatherType;
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.attribute.AttributeInstanceMock;
+import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.PlayerInventoryViewMock;
+import be.seeseemelk.mockbukkit.inventory.SimpleInventoryViewMock;
+import org.bukkit.*;
 import org.bukkit.advancement.Advancement;
 import org.bukkit.advancement.AdvancementProgress;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationAbandonedEvent;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Pose;
-import org.bukkit.entity.Projectile;
-import org.bukkit.entity.Villager;
+import org.bukkit.entity.*;
 import org.bukkit.entity.memory.MemoryKey;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
-import org.bukkit.event.entity.EntityDamageEvent.DamageModifier;
-import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
-import org.bukkit.inventory.EntityEquipment;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryView;
+import org.bukkit.inventory.*;
 import org.bukkit.inventory.InventoryView.Property;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.MainHand;
-import org.bukkit.inventory.Merchant;
-import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.map.MapView;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.plugin.Plugin;
@@ -76,31 +36,23 @@ import org.bukkit.util.BoundingBox;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 
-import com.google.common.base.Function;
+import java.net.InetSocketAddress;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.attribute.AttributeInstanceMock;
-import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
-import be.seeseemelk.mockbukkit.inventory.PlayerInventoryViewMock;
-import be.seeseemelk.mockbukkit.inventory.SimpleInventoryViewMock;
+import static org.junit.Assert.assertEquals;
 
 @SuppressWarnings("deprecation")
-public class PlayerMock extends EntityMock implements Player
+public class PlayerMock extends LivingEntityMock implements Player
 {
-	private static final double MAX_HEALTH = 20.0;
 	private boolean online;
 	private PlayerInventoryMock inventory = null;
 	private GameMode gamemode = GameMode.SURVIVAL;
-	private double maxHealth = MAX_HEALTH;
 	private String displayName = null;
-	private double health = 20.0;
 	private int expTotal = 0;
 	private float exp = 0;
 	private int expLevel = 0;
 	private boolean whitelisted = true;
-	private Map<Attribute, AttributeInstanceMock> attributes;
 	private InventoryView inventoryView;
 
 	public PlayerMock(ServerMock server, String name)
@@ -115,10 +67,6 @@ public class PlayerMock extends EntityMock implements Player
 		setName(name);
 		setDisplayName(name);
 		this.online = true;
-
-		attributes = new EnumMap<>(Attribute.class);
-		attributes.put(Attribute.GENERIC_MAX_HEALTH,
-				new AttributeInstanceMock(Attribute.GENERIC_MAX_HEALTH, MAX_HEALTH));
 
 		if (Bukkit.getWorlds().isEmpty())
 			MockBukkit.getMock().addSimpleWorld("world");
@@ -142,8 +90,8 @@ public class PlayerMock extends EntityMock implements Player
 	{
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + Objects.hash(attributes, exp, expLevel, expTotal, displayName, gamemode, health, inventory, inventoryView,
-				maxHealth, online, whitelisted);
+		result = prime * result + Objects.hash(attributes, exp, expLevel, expTotal, displayName, gamemode, getHealth(), inventory, inventoryView,
+				getMaxHealth(), online, whitelisted);
 		return result;
 	}
 
@@ -159,9 +107,9 @@ public class PlayerMock extends EntityMock implements Player
 		PlayerMock other = (PlayerMock) obj;
 		return Objects.equals(attributes, other.attributes) && Objects.equals(displayName, other.displayName)
 				&& gamemode == other.gamemode
-				&& Double.doubleToLongBits(health) == Double.doubleToLongBits(other.health)
+				&& Double.doubleToLongBits(getHealth()) == Double.doubleToLongBits(other.getHealth())
 				&& Objects.equals(inventory, other.inventory) && Objects.equals(inventoryView, other.inventoryView)
-				&& Double.doubleToLongBits(maxHealth) == Double.doubleToLongBits(other.maxHealth)
+				&& Double.doubleToLongBits(getMaxHealth()) == Double.doubleToLongBits(other.getMaxHealth())
 				&& online == other.online && whitelisted == other.whitelisted;
 	}
 
@@ -257,89 +205,6 @@ public class PlayerMock extends EntityMock implements Player
 		gamemode = mode;
 	}
 
-	@Override
-	public double getHealth()
-	{
-		return health;
-	}
-
-	@Override
-	public void setHealth(double health)
-	{
-		if (health <= 0)
-		{
-			this.health = 0;
-			PlayerDeathEvent event = new PlayerDeathEvent(this, new ArrayList<>(), 0, getName() + " got killed");
-			Bukkit.getPluginManager().callEvent(event);
-		}
-		else if (health > maxHealth)
-		{
-			this.health = maxHealth;
-		}
-		else
-		{
-			this.health = health;
-		}
-	}
-
-	@Override
-	public double getMaxHealth()
-	{
-		return getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
-	}
-
-	@Override
-	public void setMaxHealth(double health)
-	{
-		getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(health);
-		if (this.health > health)
-		{
-			this.health = health;
-		}
-	}
-
-	@Override
-	public void resetMaxHealth()
-	{
-		setMaxHealth(MAX_HEALTH);
-	}
-
-	@Override
-	public void damage(double amount)
-	{
-		Map<DamageModifier, Double> modifiers = new EnumMap<>(DamageModifier.class);
-		modifiers.put(DamageModifier.BASE, 1.0);
-		Map<DamageModifier, Function<Double, Double>> modifierFunctions = new EnumMap<>(DamageModifier.class);
-		modifierFunctions.put(DamageModifier.BASE, damage -> damage);
-
-		EntityDamageEvent event = new EntityDamageEvent(this, DamageCause.CUSTOM, modifiers, modifierFunctions);
-		event.setDamage(amount);
-		Bukkit.getPluginManager().callEvent(event);
-		if (!event.isCancelled())
-		{
-			amount = event.getDamage();
-			setHealth(health - amount);
-		}
-	}
-
-	@Override
-	public void damage(double amount, Entity source)
-	{
-		Map<DamageModifier, Double> modifiers = new EnumMap<>(DamageModifier.class);
-		modifiers.put(DamageModifier.BASE, 1.0);
-		Map<DamageModifier, Function<Double, Double>> modifierFunctions = new EnumMap<>(DamageModifier.class);
-		modifierFunctions.put(DamageModifier.BASE, damage -> damage);
-
-		EntityDamageByEntityEvent event = new EntityDamageByEntityEvent(source, this, DamageCause.ENTITY_ATTACK,
-				modifiers, modifierFunctions);
-		event.setDamage(amount);
-		Bukkit.getPluginManager().callEvent(event);
-		if (!event.isCancelled())
-		{
-			amount = event.getDamage();
-			setHealth(health - amount);
-		}
-	}
 
 	@Override
 	public boolean isWhitelisted()
@@ -373,15 +238,6 @@ public class PlayerMock extends EntityMock implements Player
 	public boolean isBanned()
 	{
 		return MockBukkit.getMock().getBanList(BanList.Type.NAME).isBanned(getName());
-	}
-
-	@Override
-	public AttributeInstance getAttribute(Attribute attribute)
-	{
-		if (attributes.containsKey(attribute))
-			return attributes.get(attribute);
-		else
-			throw new UnimplementedOperationException();
 	}
 
 	@Override
