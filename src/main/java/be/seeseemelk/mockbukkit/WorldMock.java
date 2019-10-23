@@ -231,7 +231,7 @@ public class WorldMock implements World
 		// MockBukkit.assertMocking();
 		List<Entity> entities = new ArrayList<>();
 		
-		Collection<? extends PlayerMock> serverEntities = MockBukkit.getMock().getOnlinePlayers();
+		Collection<? extends EntityMock> serverEntities = MockBukkit.getMock().getEntities();
 		serverEntities.stream().filter(entity -> entity.getWorld() == this).collect(Collectors.toCollection(() -> entities));
 		return entities;
 	}
@@ -565,7 +565,7 @@ public class WorldMock implements World
 			case SNOWBALL:
 				break;
 			default:
-				throw new IllegalStateException("Unexpected value: " + type);
+				throw new UnimplementedOperationException();
 		}
 		if(entity!=null) {
 			entity.setLocation(loc);
