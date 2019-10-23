@@ -63,10 +63,10 @@ uploadArchives {
 				MavenDeployment deployment -> signing.signPom(deployment)
 			}
 			repository(url: 'https://oss.sonatype.org/service/local/staging/deploy/maven2/') {
-				authentication(userName: ossrhUsername, password: ossrhPassword)
+				authentication(userName: findProperty('ossrhUsername'), password: findProperty('ossrhPassword'))
 			}
 			snapshotRepository(url: 'https://oss.sonatype.org/content/repositories/snapshots/') {
-				authentication(userName: ossrhUsername, password: ossrhPassword)
+				authentication(userName: findProperty('ossrhUsername'), password: findProperty('ossrhPassword'))
 			}
 			pom.project {
 				name 'MockBukkit-v1.14'
