@@ -31,6 +31,7 @@ import org.bukkit.event.player.PlayerExpChangeEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.inventory.InventoryView;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -665,5 +666,29 @@ public class PlayerMockTest
 			}
 		}, plugin);
 		player.giveExp(0);
+	}
+
+	@Test
+	public void getFood_LevelDefault20(){
+		int foodLevel = player.getFoodLevel();
+		Assert.assertEquals(foodLevel, 20);
+	}
+
+	@Test
+	public void getFood_LevelChange(){
+		player.setFoodLevel(10);
+		Assert.assertEquals(player.getFoodLevel(), 10);
+	}
+
+	@Test
+	public void getPlayer_SneakingDefault(){
+		boolean sneaking = player.isSneaking();
+		assertFalse(sneaking);
+	}
+
+	@Test
+	public void getPlayer_SneakingChange(){
+		player.setSneaking(true);
+		assertTrue(player.isSneaking());
 	}
 }

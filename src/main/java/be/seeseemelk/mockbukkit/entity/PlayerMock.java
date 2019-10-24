@@ -51,7 +51,9 @@ public class PlayerMock extends LivingEntityMock implements Player
 	private String displayName = null;
 	private int expTotal = 0;
 	private float exp = 0;
+	private int foodLevel = 20;
 	private int expLevel = 0;
+	private boolean sneaking = false;
 	private boolean whitelisted = true;
 	private InventoryView inventoryView;
 
@@ -874,14 +876,14 @@ public class PlayerMock extends LivingEntityMock implements Player
 	public boolean isSneaking()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return sneaking;
 	}
 
 	@Override
-	public void setSneaking(boolean sneak)
+	public void setSneaking(boolean sneaking)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.sneaking = sneaking;
 	}
 
 	@Override
@@ -1360,14 +1362,14 @@ public class PlayerMock extends LivingEntityMock implements Player
 	public int getFoodLevel()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return foodLevel;
 	}
 
 	@Override
-	public void setFoodLevel(int value)
+	public void setFoodLevel(int foodLevel)
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.foodLevel = foodLevel;
 	}
 
 	@Override
