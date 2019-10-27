@@ -10,12 +10,20 @@ import static org.junit.Assert.assertTrue;
 import java.util.UUID;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.World;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionDefault;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -281,6 +289,27 @@ public class EntityMockTest
 		PermissionAttachment attachment = entity.addAttachment(plugin);
 		attachment.setPermission(permission.getName(), true);
 		assertTrue(entity.hasPermission("mockbukkit.perm"));
+	}
+
+	@Test
+	public void entityDamage_By_Player(){
+
+		World world = new WorldMock(Material.GRASS_BLOCK, 10);
+		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world,10,10,10), EntityType.ZOMBIE);
+		PlayerMock player1 = server.addPlayer();
+		double initialHealth = zombie.getHealth();
+		zombie.damage(4, player1);
+		double finalHealth = zombie.getHealth();
+		Assert.assertEquals(4, initialHealth-finalHealth, 0.1);
+	}
+
+	@Test
+	public void entityDamage_Event_Triggered(){
+		World world = new WorldMock(Material.GRASS_BLOCK, 10);
+		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world,10,10,10), EntityType.ZOMBIE);
+		PlayerMock player1 = server.addPlayer();
+		zombie.damage(4, player1);
+		server.getPluginManager().assertEventFired(EntityDamageByEntityEvent.class);
 	}
 	
 }

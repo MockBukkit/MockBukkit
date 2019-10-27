@@ -10,11 +10,13 @@ import static org.junit.Assume.assumeFalse;
 
 import java.util.List;
 
+import be.seeseemelk.mockbukkit.entity.EntityMock;
 import org.bukkit.GameRule;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.junit.After;
 import org.junit.Before;
@@ -224,7 +226,22 @@ public class WorldMockTest
 		assertTrue("Weather duration should be more than zero", world.getThunderDuration() > 0);
 		assertTrue(world.isThundering());
 	}
-	
+	@Test
+	public void spawnEntityTest(){
+
+	}
+
+	@Test
+	public void spawnZombieTest(){
+		WorldMock world = new WorldMock();
+		Location location = new Location(world, 100, 20, 50);
+		Entity zombie = world.spawnEntity(location, EntityType.ZOMBIE);
+		assertEquals(zombie.getLocation().getBlockX(), 100);
+		assertEquals(zombie.getLocation().getBlockY(), 20);
+		assertEquals(zombie.getLocation().getBlockZ(), 50);
+		assertTrue(world.getEntities().size()>0);
+
+	}
 }
 
 

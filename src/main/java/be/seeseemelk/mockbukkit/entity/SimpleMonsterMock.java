@@ -6,7 +6,7 @@ import org.bukkit.entity.Monster;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 
-public class SimpleMonsterMock extends MobMock implements Monster
+public class SimpleMonsterMock extends MonsterMock implements Monster
 {
 
 	public SimpleMonsterMock(ServerMock server, UUID uuid)

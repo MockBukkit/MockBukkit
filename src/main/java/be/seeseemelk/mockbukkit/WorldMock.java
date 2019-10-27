@@ -11,24 +11,10 @@ import java.util.UUID;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import org.bukkit.BlockChangeDelegate;
-import org.bukkit.Chunk;
-import org.bukkit.ChunkSnapshot;
-import org.bukkit.Difficulty;
-import org.bukkit.Effect;
-import org.bukkit.FluidCollisionMode;
-import org.bukkit.GameRule;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Particle;
-import org.bukkit.Raid;
-import org.bukkit.Sound;
-import org.bukkit.SoundCategory;
-import org.bukkit.StructureType;
-import org.bukkit.TreeType;
-import org.bukkit.World;
-import org.bukkit.WorldBorder;
-import org.bukkit.WorldType;
+import be.seeseemelk.mockbukkit.entity.EntityMock;
+import be.seeseemelk.mockbukkit.entity.SimpleEntityMock;
+import be.seeseemelk.mockbukkit.entity.ZombieMock;
+import org.bukkit.*;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
@@ -63,6 +49,7 @@ import be.seeseemelk.mockbukkit.entity.PlayerMock;
 public class WorldMock implements World
 {
 	private Map<Coordinate, BlockMock> blocks = new HashMap<>();
+	private ServerMock server;
 	private Material defaultBlock;
 	private int height;
 	private int grassHeight;
@@ -88,6 +75,7 @@ public class WorldMock implements World
 		this.defaultBlock = defaultBlock;
 		this.height = height;
 		this.grassHeight = grassHeight;
+		this.server = MockBukkit.getMock();
 		
 		// Set the default gamerule values.
 		gameRules.put(GameRule.ANNOUNCE_ADVANCEMENTS, true);
@@ -243,9 +231,8 @@ public class WorldMock implements World
 		// MockBukkit.assertMocking();
 		List<Entity> entities = new ArrayList<>();
 		
-		Collection<? extends PlayerMock> players = MockBukkit.getMock().getOnlinePlayers();
-		players.stream().filter(player -> player.getWorld() == this).collect(Collectors.toCollection(() -> entities));
-		
+		Collection<? extends EntityMock> serverEntities = MockBukkit.getMock().getEntities();
+		serverEntities.stream().filter(entity -> entity.getWorld() == this).collect(Collectors.toCollection(() -> entities));
 		return entities;
 	}
 	
@@ -470,8 +457,121 @@ public class WorldMock implements World
 	@Override
 	public Entity spawnEntity(Location loc, EntityType type)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		EntityMock entity = null;
+		switch(type){
+			case DROPPED_ITEM:
+			case ARROW:
+			case PAINTING:
+			case LEASH_HITCH:
+			case EGG:
+			case STRAY:
+			case WITHER_SKELETON:
+			case ELDER_GUARDIAN:
+			case AREA_EFFECT_CLOUD:
+			case EXPERIENCE_ORB:
+			case UNKNOWN:
+			case PLAYER:
+			case LIGHTNING:
+			case FISHING_HOOK:
+			case FOX:
+			case WANDERING_TRADER:
+			case TRADER_LLAMA:
+			case RAVAGER:
+			case PILLAGER:
+			case PANDA:
+			case CAT:
+			case DOLPHIN:
+			case DROWNED:
+			case TROPICAL_FISH:
+			case PUFFERFISH:
+			case SALMON:
+			case COD:
+			case TRIDENT:
+			case PHANTOM:
+			case TURTLE:
+			case ENDER_CRYSTAL:
+			case VILLAGER:
+			case PARROT:
+			case LLAMA_SPIT:
+			case LLAMA:
+			case POLAR_BEAR:
+			case RABBIT:
+			case HORSE:
+			case IRON_GOLEM:
+			case OCELOT:
+			case SNOWMAN:
+			case MUSHROOM_COW:
+			case WOLF:
+			case SQUID:
+			case CHICKEN:
+			case COW:
+			case SHEEP:
+			case PIG:
+			case SHULKER:
+			case GUARDIAN:
+			case ENDERMITE:
+			case WITCH:
+			case BAT:
+			case WITHER:
+			case ENDER_DRAGON:
+			case MAGMA_CUBE:
+			case BLAZE:
+			case SILVERFISH:
+			case CAVE_SPIDER:
+			case ENDERMAN:
+			case PIG_ZOMBIE:
+			case GHAST:
+			case SLIME:
+			case ZOMBIE:
+				entity = new ZombieMock(server, UUID.randomUUID());
+			case GIANT:
+			case SPIDER:
+			case SKELETON:
+			case CREEPER:
+			case MINECART_MOB_SPAWNER:
+			case MINECART_HOPPER:
+			case MINECART_TNT:
+			case MINECART_FURNACE:
+			case MINECART_CHEST:
+			case MINECART:
+			case BOAT:
+			case MINECART_COMMAND:
+			case ILLUSIONER:
+			case VINDICATOR:
+			case VEX:
+			case EVOKER:
+			case EVOKER_FANGS:
+			case MULE:
+			case DONKEY:
+			case ARMOR_STAND:
+			case ZOMBIE_HORSE:
+			case SKELETON_HORSE:
+			case ZOMBIE_VILLAGER:
+			case DRAGON_FIREBALL:
+			case SHULKER_BULLET:
+			case SPECTRAL_ARROW:
+			case HUSK:
+			case FIREWORK:
+			case FALLING_BLOCK:
+			case PRIMED_TNT:
+			case WITHER_SKULL:
+			case ITEM_FRAME:
+			case THROWN_EXP_BOTTLE:
+			case SPLASH_POTION:
+			case ENDER_SIGNAL:
+			case ENDER_PEARL:
+			case SMALL_FIREBALL:
+			case FIREBALL:
+			case SNOWBALL:
+				break;
+			default:
+				throw new UnimplementedOperationException();
+		}
+		if(entity!=null) {
+			entity.setLocation(loc);
+			server.registerEntity(entity);
+		}
+		return entity;
 	}
 	
 	@Override
@@ -1369,7 +1469,6 @@ public class WorldMock implements World
 		throw new UnimplementedOperationException();
 	}
 
-	@Override
 	public boolean createExplosion(double x, double y, double z, float power, boolean setFire, boolean breakBlocks,
 			Entity source)
 	{
@@ -1377,14 +1476,12 @@ public class WorldMock implements World
 		throw new UnimplementedOperationException();
 	}
 
-	@Override
 	public boolean createExplosion(Location loc, float power, boolean setFire, boolean breakBlocks)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
-	@Override
 	public boolean createExplosion(Location loc, float power, boolean setFire, boolean breakBlocks, Entity source)
 	{
 		// TODO Auto-generated method stub
