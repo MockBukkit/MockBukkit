@@ -126,7 +126,6 @@ public class ScoreboardMock implements Scoreboard
 		return team;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public Set<OfflinePlayer> getPlayers()
 	{

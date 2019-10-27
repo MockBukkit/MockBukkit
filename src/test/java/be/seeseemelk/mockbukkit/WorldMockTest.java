@@ -10,7 +10,6 @@ import static org.junit.Assume.assumeFalse;
 
 import java.util.List;
 
-import be.seeseemelk.mockbukkit.entity.EntityMock;
 import org.bukkit.GameRule;
 import org.bukkit.Location;
 import org.bukkit.Material;
