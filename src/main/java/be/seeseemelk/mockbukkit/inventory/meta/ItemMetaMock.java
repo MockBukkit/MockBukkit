@@ -18,6 +18,7 @@ import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.tags.CustomItemTagContainer;
@@ -39,7 +40,6 @@ public class ItemMetaMock implements ItemMeta, Damageable
 	
 	public ItemMetaMock()
 	{
-		
 	}
 	
 	public ItemMetaMock(ItemMeta meta)
@@ -48,6 +48,9 @@ public class ItemMetaMock implements ItemMeta, Damageable
 			displayName = meta.getDisplayName();
 		if (meta.hasLore())
 			lore = meta.getLore();
+		if(meta instanceof Damageable){
+			this.damage = ((Damageable) meta).getDamage();
+		}
 	}
 	
 	@Override
