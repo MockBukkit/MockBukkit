@@ -15,6 +15,7 @@ import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -28,6 +29,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerExpChangeEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.inventory.InventoryView;
 import org.junit.After;
@@ -691,4 +693,12 @@ public class PlayerMockTest
 		player.setSneaking(true);
 		assertTrue(player.isSneaking());
 	}
+
+	@Test
+	public void dispatchPlayer_PlayerJoinEventFired() {
+		PlayerMock player = server.addPlayer();
+		PluginManagerMock pluginManager = server.getPluginManager();
+		pluginManager.assertEventFired(event -> event instanceof PlayerJoinEvent);
+	}
+
 }
