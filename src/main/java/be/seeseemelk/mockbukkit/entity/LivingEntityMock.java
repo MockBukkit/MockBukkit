@@ -101,6 +101,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		setMaxHealth(maxHealth);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void damage(double amount)
 	{
@@ -119,6 +120,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void damage(double amount, Entity source)
 	{
