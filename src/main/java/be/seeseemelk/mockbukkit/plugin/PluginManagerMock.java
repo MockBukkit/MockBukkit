@@ -493,6 +493,7 @@ public class PluginManagerMock implements PluginManager
 					addSection(command, section.getKey(), section.getValue());
 				}
 				this.commands.add(command);
+				this.server.getCommandMap().register(plugin.getName(), command);
 			}
 		}
 	}
