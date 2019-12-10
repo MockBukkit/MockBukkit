@@ -22,6 +22,7 @@ import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -69,8 +70,10 @@ public class ServerMockTest
 		
 		server.addPlayer(player1);
 		assertEquals(1, server.getOnlinePlayers().size());
+		server.getPluginManager().assertEventFired(PlayerJoinEvent.class, event -> event.getPlayer().equals(player1));
 		server.addPlayer(player2);
 		assertEquals(2, server.getOnlinePlayers().size());
+		server.getPluginManager().assertEventFired(PlayerJoinEvent.class, event -> event.getPlayer().equals(player2));
 		
 		assertEquals(player1, server.getPlayer(0));
 		assertEquals(player2, server.getPlayer(1));
@@ -84,7 +87,9 @@ public class ServerMockTest
 	public void addPlayers_None_TwoUniquePlayers()
 	{
 		PlayerMock playerA = server.addPlayer();
+		server.getPluginManager().assertEventFired(PlayerJoinEvent.class, event -> event.getPlayer().equals(playerA));
 		PlayerMock playerB = server.addPlayer();
+		server.getPluginManager().assertEventFired(PlayerJoinEvent.class, event -> event.getPlayer().equals(playerB));
 		PlayerMock player1 = server.getPlayer(0);
 		PlayerMock player2 = server.getPlayer(1);
 		assertNotNull(player1);
