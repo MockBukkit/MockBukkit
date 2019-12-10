@@ -8,17 +8,30 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.ServerMock;
+import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Item;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ItemMetaMockTest
-{
+public class ItemMetaMockTest {
 	private ItemMetaMock meta;
 	
 	@Before
 	public void setUp() {
+		ServerMock mock = MockBukkit.mock();
 		meta = new ItemMetaMock();
+	}
+	@After
+	public void tearDown(){
+		MockBukkit.unload();
 	}
 	
 	@Test
@@ -296,5 +309,17 @@ public class ItemMetaMockTest
 	{
 		meta.setLore(Arrays.asList("Hello", "world"));
 		meta.assertLore("Something", "else");
+	}
+
+	@Test
+	public void assertDamageCorrectlySet(){
+		int value = 500;
+		meta.setDamage(value);
+		ItemStack item = new ItemStack(Material.DIAMOND_SWORD);
+		item.setItemMeta(meta);
+		if(meta != null) {
+			int damage = ((Damageable)item.getItemMeta()).getDamage();
+			Assert.assertEquals(value, damage);
+		}
 	}
 }
