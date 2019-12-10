@@ -101,6 +101,17 @@ public class BukkitSchedulerMockTest
 	}
 	
 	@Test
+	public void runTaskTimer_ZeroDelay_DoesntExecuteTask()
+	{
+		AtomicInteger count = new AtomicInteger(0);
+		Runnable callback = () -> count.incrementAndGet();
+		scheduler.runTaskTimer(null, callback, 0, 2L);
+		assertEquals(0, count.get());
+		scheduler.performTicks(1L);
+		assertEquals(1, count.get());
+	}
+	
+	@Test
 	public void runTaskAsynchronously_TaskExecutedOnSeperateThread() throws InterruptedException, BrokenBarrierException, TimeoutException
 	{
 		final Thread mainThread = Thread.currentThread();
