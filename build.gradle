@@ -53,6 +53,14 @@ signing {
     sign configurations.archives
 }
 
+
+
+jacocoTestReport {
+	reports {
+		xml.enabled true
+	}
+}
+
 group = 'com.github.seeseemelk'
 version = '0.2.2-SNAPSHOT'
 
