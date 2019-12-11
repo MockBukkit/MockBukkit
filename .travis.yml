@@ -1,6 +1,9 @@
 language: java
 jdk: openjdk8
 install: ./gradlew eclipse
+env:
+  global:
+    CC_TEST_REPORTER_ID=777b516861c088512f43a433d2058efdd600446fac3f39bc863d87177324585c
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
