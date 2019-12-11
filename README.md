@@ -1,4 +1,6 @@
+[![Build Status](https://travis-ci.org/seeseemelk/MockBukkit.svg?branch=v1.14)](https://travis-ci.org/seeseemelk/MockBukkit)
 [![Maintainability](https://api.codeclimate.com/v1/badges/403a4bb837ca47333d33/maintainability)](https://codeclimate.com/github/seeseemelk/MockBukkit/maintainability)
+
 # MockBukkit
 MockBukkit is a framework that makes the unit testing of Bukkit plugins a whole lot easier.
 It aims to be a complete mock implementation.
