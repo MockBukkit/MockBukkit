@@ -163,9 +163,29 @@ public class ServerMock implements Server
 		assertMainThread();
 		players.add(player);
 		offlinePlayers.add(player);
+		registerEntity(player);
+	}
+	
+	/**
+	 * Adds a player and fires a join event.
+	 * @param player The player to add.
+	 */
+	public void joinPlayer(PlayerMock player)
+	{
+		addPlayer(player);
 		PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(player, String.format(JOIN_MESSAGE, player.getDisplayName()));
 		Bukkit.getPluginManager().callEvent(playerJoinEvent);
-		registerEntity(player);
+	}
+	
+	/**
+	 * Adds a random player and fires a join event.
+	 * @param player The player to add.
+	 */
+	public PlayerMock joinPlayer()
+	{
+		PlayerMock player = playerFactory.createRandomPlayer();
+		joinPlayer(player);
+		return player;
 	}
 
 	/**

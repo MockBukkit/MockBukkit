@@ -70,10 +70,8 @@ public class ServerMockTest
 		
 		server.addPlayer(player1);
 		assertEquals(1, server.getOnlinePlayers().size());
-		server.getPluginManager().assertEventFired(PlayerJoinEvent.class, event -> event.getPlayer().equals(player1));
 		server.addPlayer(player2);
 		assertEquals(2, server.getOnlinePlayers().size());
-		server.getPluginManager().assertEventFired(PlayerJoinEvent.class, event -> event.getPlayer().equals(player2));
 		
 		assertEquals(player1, server.getPlayer(0));
 		assertEquals(player2, server.getPlayer(1));
@@ -87,9 +85,7 @@ public class ServerMockTest
 	public void addPlayers_None_TwoUniquePlayers()
 	{
 		PlayerMock playerA = server.addPlayer();
-		server.getPluginManager().assertEventFired(PlayerJoinEvent.class, event -> event.getPlayer().equals(playerA));
 		PlayerMock playerB = server.addPlayer();
-		server.getPluginManager().assertEventFired(PlayerJoinEvent.class, event -> event.getPlayer().equals(playerB));
 		PlayerMock player1 = server.getPlayer(0);
 		PlayerMock player2 = server.getPlayer(1);
 		assertNotNull(player1);
@@ -97,6 +93,27 @@ public class ServerMockTest
 		assertEquals(playerA, player1);
 		assertEquals(playerB, player2);
 		assertNotEquals(player1, player2);
+	}
+	
+	@Test
+	public void joinPlayer_APlayer_PlayerAddedAndEventFired()
+	{
+		PlayerMockFactory factory = new PlayerMockFactory(server);
+		PlayerMock player = factory.createRandomPlayer();
+		
+		server.joinPlayer(player);
+		server.getPluginManager().assertEventFired(PlayerJoinEvent.class, event -> event.getPlayer().equals(player)); 
+		assertTrue("Player was not registered", server.getEntities().contains(player));
+	}
+	
+	@Test
+	public void joinPlayers_None_TwoUniquePlayers()
+	{
+		PlayerMock player = server.joinPlayer();
+		server.getPluginManager().assertEventFired(PlayerJoinEvent.class, event -> event.getPlayer().equals(player));
+		PlayerMock addedPlayer = server.getPlayer(0);
+		assertNotNull(player);
+		assertEquals(player, addedPlayer);
 	}
 	
 	@Test

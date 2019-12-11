@@ -694,11 +694,4 @@ public class PlayerMockTest
 		assertTrue(player.isSneaking());
 	}
 
-	@Test
-	public void dispatchPlayer_PlayerJoinEventFired() {
-		PlayerMock player = server.addPlayer();
-		PluginManagerMock pluginManager = server.getPluginManager();
-		pluginManager.assertEventFired(event -> event instanceof PlayerJoinEvent);
-	}
-
 }
