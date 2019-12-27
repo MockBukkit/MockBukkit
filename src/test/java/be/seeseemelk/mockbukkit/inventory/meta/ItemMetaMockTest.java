@@ -23,7 +23,7 @@ import org.junit.Test;
 
 public class ItemMetaMockTest {
 	private ItemMetaMock meta;
-	
+
 	@Before
 	public void setUp() {
 		ServerMock mock = MockBukkit.mock();
@@ -33,7 +33,7 @@ public class ItemMetaMockTest {
 	public void tearDown(){
 		MockBukkit.unload();
 	}
-	
+
 	@Test
 	public void new_CopyConstructor_Copied()
 	{
@@ -46,13 +46,13 @@ public class ItemMetaMockTest {
 		assertTrue(meta.equals(meta2));
 		assertEquals(meta.hashCode(), meta2.hashCode());
 	}
-	
+
 	@Test
 	public void hasDisplayName_Default_False()
 	{
 		assertFalse(meta.hasDisplayName());
 	}
-	
+
 	@Test
 	public void setDisplayName_NewName_NameSetExactly()
 	{
@@ -60,7 +60,7 @@ public class ItemMetaMockTest {
 		assertTrue(meta.hasDisplayName());
 		assertEquals("Some name", meta.getDisplayName());
 	}
-	
+
 	@Test
 	public void setDisplayName_Null_NameRemoves()
 	{
@@ -68,7 +68,7 @@ public class ItemMetaMockTest {
 		meta.setDisplayName(null);
 		assertFalse(meta.hasDisplayName());
 	}
-	
+
 	@Test
 	public void equals_SameWithoutDisplayName_True()
 	{
@@ -76,7 +76,7 @@ public class ItemMetaMockTest {
 		assertTrue(meta.equals(meta2));
 		assertEquals(meta.hashCode(), meta2.hashCode());
 	}
-	
+
 	@Test
 	public void equals_SameWithDisplayName_True()
 	{
@@ -86,7 +86,7 @@ public class ItemMetaMockTest {
 		assertTrue(meta.equals(meta2));
 		assertEquals(meta.hashCode(), meta2.hashCode());
 	}
-	
+
 	@Test
 	public void equals_SameLore_True()
 	{
@@ -97,7 +97,7 @@ public class ItemMetaMockTest {
 		assertTrue(meta2.equals(meta));
 		assertEquals(meta.hashCode(), meta2.hashCode());
 	}
-	
+
 	@Test
 	public void equals_DifferentDisplayName_False()
 	{
@@ -106,7 +106,7 @@ public class ItemMetaMockTest {
 		meta2.setDisplayName("Different name");
 		assertFalse(meta.equals(meta2));
 	}
-	
+
 	@Test
 	public void equals_OneWithDisplayNameOneWithout_False()
 	{
@@ -115,7 +115,7 @@ public class ItemMetaMockTest {
 		assertFalse(meta.equals(meta2));
 		assertFalse(meta2.equals(meta));
 	}
-	
+
 	@Test
 	public void equals_OneWithLoreOneWithout_False()
 	{
@@ -124,7 +124,7 @@ public class ItemMetaMockTest {
 		assertFalse(meta.equals(meta2));
 		assertFalse(meta2.equals(meta));
 	}
-	
+
 	@Test
 	public void equals_DifferentSizedLore_False()
 	{
@@ -134,13 +134,13 @@ public class ItemMetaMockTest {
 		assertFalse(meta.equals(meta2));
 		assertFalse(meta2.equals(meta));
 	}
-	
+
 	@Test
 	public void equals_Null_False()
 	{
 		assertFalse(meta.equals(null));
 	}
-	
+
 	@Test
 	public void equals_SameUnbreakableProperty_True()
 	{
@@ -152,7 +152,7 @@ public class ItemMetaMockTest {
 		meta2.setUnbreakable(true);
 		assertTrue(meta.equals(meta2));
 	}
-	
+
 	@Test
 	public void equals_DifferentUnbreakableProperty_False()
 	{
@@ -162,7 +162,7 @@ public class ItemMetaMockTest {
 		assertTrue(meta.equals(meta2));
 		assertTrue(meta2.equals(meta));
 	}
-	
+
 	@Test
 	public void clone_WithDisplayName_ClonedExactly()
 	{
@@ -171,20 +171,20 @@ public class ItemMetaMockTest {
 		assertEquals(meta, cloned);
 		assertEquals(meta.hashCode(), cloned.hashCode());
 	}
-	
+
 	@Test
 	public void hasLore_NoLore_False()
 	{
 		assertFalse(meta.hasLore());
 	}
-	
+
 	@Test
 	public void hasLore_HasLore_True()
 	{
 		meta.setLore(Arrays.asList("Hello", "world"));
 		assertTrue(meta.hasLore());
 	}
-	
+
 	@Test
 	public void getLore_LoreSet_ExactLines()
 	{
@@ -194,7 +194,7 @@ public class ItemMetaMockTest {
 		assertEquals("Hello", lore.get(0));
 		assertEquals("world", lore.get(1));
 	}
-	
+
 	@Test
 	public void getLore_LoreChangedAfterSet_LoreNotChanged()
 	{
@@ -208,7 +208,7 @@ public class ItemMetaMockTest {
 		assertEquals("Hello", lore.get(0));
 		assertEquals("world", lore.get(1));
 	}
-	
+
 	@Test
 	public void hasEnchants()
 	{
@@ -216,7 +216,7 @@ public class ItemMetaMockTest {
 		meta.addEnchant(Enchantment.DURABILITY, 1, true);
 		assertTrue(meta.hasEnchants());
 	}
-	
+
 	@Test
 	public void hasEnchant()
 	{
@@ -224,7 +224,7 @@ public class ItemMetaMockTest {
 		meta.addEnchant(Enchantment.MENDING, 1, true);
 		assertTrue(meta.hasEnchant(Enchantment.MENDING));
 	}
-	
+
 	@Test
 	public void getEnchantLevel()
 	{
@@ -232,78 +232,78 @@ public class ItemMetaMockTest {
 		meta.addEnchant(Enchantment.DURABILITY, 50, true);
 		assertEquals(50, meta.getEnchantLevel(Enchantment.DURABILITY));
 	}
-	
+
 	@Test
 	public void getEnchants()
 	{
 		meta.addEnchant(Enchantment.DURABILITY, 3, true);
-		
+
 		Map<Enchantment, Integer> actual = meta.getEnchants();
 		assertEquals(1, actual.size());
 		assertTrue(3 == actual.get(Enchantment.DURABILITY));
 	}
-	
+
 	@Test
 	public void removeEnchant_NotExisting()
 	{
 		assertFalse(meta.removeEnchant(Enchantment.DAMAGE_ALL));
 	}
-	
+
 	@Test
 	public void removeEnchant()
 	{
 		meta.addEnchant(Enchantment.DAMAGE_ALL, 5, true);
 		assertTrue(meta.removeEnchant(Enchantment.DAMAGE_ALL));
 	}
-	
+
 	@Test
 	public void addEnchant_IgnoreLevel()
 	{
 		assertTrue(meta.addEnchant(Enchantment.DURABILITY, 100, true));
 		assertTrue(meta.hasEnchant(Enchantment.DURABILITY));
 	}
-	
+
 	@Test
 	public void addEnchant_AlreadyExist()
 	{
 		meta.addEnchant(Enchantment.DURABILITY, 100, true);
 		assertFalse(meta.addEnchant(Enchantment.DURABILITY, 100, true));
 	}
-	
+
 	@Test
 	public void setUnbreakable_True_ItemIsUnbreakable()
 	{
 		meta.setUnbreakable(true);
 		assertTrue(meta.isUnbreakable());
 	}
-	
+
 	@Test
 	public void setUnbreakable_False_ItemIsBreakable()
 	{
 		meta.setUnbreakable(false);
 		assertFalse(meta.isUnbreakable());
 	}
-	
+
 	@Test
 	public void assertHasNoLore_HasNoLore_Returns()
 	{
 		meta.assertHasNoLore();
 	}
-	
+
 	@Test(expected = AssertionError.class)
 	public void assertHasNoLore_HasNoLore_Asserts()
 	{
 		meta.setLore(Arrays.asList("Hello", "world"));
 		meta.assertHasNoLore();
 	}
-	
+
 	@Test
 	public void assertLore_CorrectLore_Returns()
 	{
 		meta.setLore(Arrays.asList("Hello", "world"));
 		meta.assertLore("Hello", "world");
 	}
-	
+
 	@Test(expected = AssertionError.class)
 	public void assertLore_InorrectLore_Asserts()
 	{
@@ -321,5 +321,12 @@ public class ItemMetaMockTest {
 			int damage = ((Damageable)item.getItemMeta()).getDamage();
 			Assert.assertEquals(value, damage);
 		}
+	}
+
+	@Test
+	public void setCustomModelData_NewCustomModeData_CustomModelDataSetExactly() {
+		meta.setCustomModelData(100);
+		assertTrue(meta.hasCustomModelData());
+		assertEquals(100, meta.getCustomModelData());
 	}
 }
