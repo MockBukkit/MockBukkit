@@ -428,7 +428,7 @@ public class ServerMock implements Server
 	{
 		assertMainThread();
 		return players.stream()
-				.filter(player -> player.getName().toLowerCase(Locale.ENGLISH).startsWith(name.toLowerCase()))
+				.filter(player -> player.getName().toLowerCase(Locale.ENGLISH).startsWith(name.toLowerCase(Locale.ENGLISH)))
 				.collect(Collectors.toList());
 	}
 
