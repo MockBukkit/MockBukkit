@@ -427,13 +427,13 @@ public class ServerMockTest
 		server.addPlayer(player);
 		assertSame(player, server.getPlayerExact("player"));
 	}
-	
+
 	@Test
-	public void getPlayerExact_CasingDoesNotMatch_PlayerNotFoundFound()
+	public void getPlayerExact_CasingDoesNotMatch_PlayerFound()
 	{
 		PlayerMock player = new PlayerMock(server, "player");
 		server.addPlayer(player);
-		assertNull(server.getPlayerExact("PLAYER"));
+		assertNotNull(server.getPlayerExact("PLAYER"));
 	}
 	
 	@Test
