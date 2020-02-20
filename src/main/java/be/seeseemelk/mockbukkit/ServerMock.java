@@ -420,7 +420,7 @@ public class ServerMock implements Server
 	public Player getPlayerExact(String name)
 	{
 		assertMainThread();
-		return this.players.stream().filter(playerMock -> playerMock.getName().equals(name)).findFirst().orElse(null);
+		return this.players.stream().filter(playerMock -> playerMock.getName().toLowerCase(Locale.ENGLISH).equals(name.toLowerCase(Locale.ENGLISH))).findFirst().orElse(null);
 	}
 
 	@Override
@@ -428,7 +428,7 @@ public class ServerMock implements Server
 	{
 		assertMainThread();
 		return players.stream()
-				.filter(player -> player.getName().toLowerCase(Locale.ENGLISH).startsWith(name.toLowerCase()))
+				.filter(player -> player.getName().toLowerCase(Locale.ENGLISH).startsWith(name.toLowerCase(Locale.ENGLISH)))
 				.collect(Collectors.toList());
 	}
 
