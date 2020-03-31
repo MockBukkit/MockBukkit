@@ -11,16 +11,28 @@ MockBukkit can easily be included in gradle using mavenCentral.
 ```gradle
 repositories {
 	mavenCentral()
+	maven { url 'https://hub.spigotmc.org/nexus/content/repositories/public/' }
 }
+
 dependencies {
-    testCompile 'junit:junit:4.12'
-    testCompile 'com.github.seeseemelk:MockBukkit-v1.13:0.1.1-SNAPSHOT'
+	testImplementation 'com.github.seeseemelk:MockBukkit-v1.14:0.2.1-SNAPSHOT'
 }
 ```
 
-Note: use v1.8.8-SNAPSHOT to test a Bukkit 1.8.8 plugin or any other version if the branch exists.
+Note: use v1.13-SNAPSHOT to test a Bukkit 1.13 plugin or any other version if the branch exists.
 These branches will not be receiving patches actively, but any issues will be resolved and any pull requests on them will be accepted.
 This is because backporting every single patch on every branch is incredibely time consuming and slows down the development of Mockbukkit.
+
+If you prefer to always have the latest Git version or need a specific commit/branch, you can always use JitPack as your maven repository:
+```gradle
+repositories {
+	maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+	implementation 'com.github.seeseemelk:MockBukkit:v1.14-SNAPSHOT'
+}
+```
 
 In order to use MockBukkit the plugin to be tested needs an extra constructor and it has to be initialised before each test.
 The plugin will need both a default constructor and an extra one that will call a super constructor.
@@ -109,3 +121,8 @@ These exception extends `AssumationException` and will cause the test to be skip
 
 These exceptions should just be ignored, though pull requests that add functionality to MockBukkit are always welcome!
 If you don't want to add the required methods yourself you can also request the method on the issues page.
+
+## Releases
+Releases are not done often.
+If you need a feature or bugfix that is already available on Github but not yet on maven central, feel free to open an issue requesting a release.
+I will happily oblige.
