@@ -437,22 +437,14 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public double getEyeHeight()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getEyeHeight(false);
 	}
 
 	@Override
 	public double getEyeHeight(boolean ignorePose)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public Location getEyeLocation()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (isSneaking() && !ignorePose) return 1.54D;
+		return 1.62D;
 	}
 
 	@Override

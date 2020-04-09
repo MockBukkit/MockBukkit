@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.entity;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
@@ -692,6 +693,17 @@ public class PlayerMockTest
 	public void getPlayer_SneakingChange(){
 		player.setSneaking(true);
 		assertTrue(player.isSneaking());
+	}
+	
+	@Test
+	public void getPlayer_SneakingEyeHeight() {
+		player.setSneaking(true);
+		assertNotEquals(player.getEyeHeight(), player.getEyeHeight(true));
+	}
+	
+	@Test
+	public void getPlayer_EyeLocationDiffers(){
+		assertNotEquals(player.getEyeLocation(), player.getLocation());
 	}
 
 	@Test

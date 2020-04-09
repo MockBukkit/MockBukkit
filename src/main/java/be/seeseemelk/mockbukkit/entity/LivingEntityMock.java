@@ -208,8 +208,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public Location getEyeLocation()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getLocation().add(0, getEyeHeight(), 0);
 	}
 
 	@Override
