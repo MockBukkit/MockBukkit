@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - Add CHANGELOG.md
+- Implement `Player#getEyeLocation`, `Player#getEyeHeight()`, and `Player#getEyeHeight(boolean)`
 
 ### Fixed
 - Out-of-date maven dependency information in README
