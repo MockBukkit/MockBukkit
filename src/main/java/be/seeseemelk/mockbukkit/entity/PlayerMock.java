@@ -448,12 +448,6 @@ public class PlayerMock extends LivingEntityMock implements Player
 	}
 
 	@Override
-	public Location getEyeLocation()
-	{
-		return getLocation().add(0, getEyeHeight(), 0);
-	}
-
-	@Override
 	public List<Block> getLineOfSight(Set<Material> transparent, int maxDistance)
 	{
 		// TODO Auto-generated method stub
