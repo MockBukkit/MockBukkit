@@ -693,6 +693,17 @@ public class PlayerMockTest
 		player.setSneaking(true);
 		assertTrue(player.isSneaking());
 	}
+	
+	@Test
+	public void getPlayer_SneakingEyeHeight() {
+		player.setSneaking(true);
+		assertNotEquals(player.getEyeHeight(), player.getEyeHeight(true));
+	}
+	
+	@Test
+	public void getPlayer_EyeLocationDiffers(){
+		assertNotEquals(player.getEyeLocation(), player.getLocation());
+	}
 
 	@Test
 	public void dispatchPlayer_PlayerJoinEventFired() {
