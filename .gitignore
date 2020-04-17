@@ -19,4 +19,4 @@
 *.iml
 
 # Read the Docs
-!.gitignore
+!.readthedocs.yml
