@@ -68,7 +68,7 @@ public void setUp()
 @After
 public void tearDown()
 {
-    MockBukkit.unload();
+    MockBukkit.unmock();
 }
 ```
 

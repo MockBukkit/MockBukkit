@@ -231,9 +231,19 @@ public class MockBukkit
 	}
 	
 	/**
+	 * Renamed to `unmock()` for symmetry with `mock()`.
+	 * @see MockBukkit#unmock()  
+	 */
+	@Deprecated
+	public static void unload()
+	{
+		unmock();
+	}
+	
+	/**
 	 * Unload all loaded plugins.
 	 */
-	public static void unload()
+	public static void unmock()
 	{
 		try
 		{
