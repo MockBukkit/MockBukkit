@@ -16,6 +16,7 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.block.data.BlockData;
+import org.bukkit.entity.Entity;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
@@ -401,6 +402,13 @@ public class BlockMock implements org.bukkit.block.Block
 
 	@Override
 	public BoundingBox getBoundingBox()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public Collection<ItemStack> getDrops(ItemStack tool, Entity entity)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

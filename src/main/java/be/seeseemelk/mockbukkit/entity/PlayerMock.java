@@ -33,7 +33,6 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
-
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
@@ -1038,30 +1037,6 @@ public class PlayerMock extends LivingEntityMock implements Player
 	}
 
 	@Override
-	@Deprecated
-	public void awardAchievement(Achievement achievement)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	@Deprecated
-	public void removeAchievement(Achievement achievement)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	@Deprecated
-	public boolean hasAchievement(Achievement achievement)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public void incrementStatistic(Statistic statistic)
 	{
 		// TODO Auto-generated method stub
@@ -1911,6 +1886,41 @@ public class PlayerMock extends LivingEntityMock implements Player
 
 	@Override
 	public void openBook(ItemStack book)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void attack(Entity target)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void swingMainHand()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void swingOffHand()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void sendExperienceChange(float progress)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void sendExperienceChange(float progress, int level)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

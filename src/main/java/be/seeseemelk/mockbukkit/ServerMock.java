@@ -1233,4 +1233,25 @@ public class ServerMock implements Server
 	public MockCommandMap getCommandMap() {
 		return commandMap;
 	}
+
+	@Override
+	public int getTicksPerWaterSpawns()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getTicksPerAmbientSpawns()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean removeRecipe(NamespacedKey key)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
 }
