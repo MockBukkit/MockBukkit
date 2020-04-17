@@ -1,7 +1,6 @@
 # Ignore hidden files.
 .*
-**/.*
-!.gitignore
+!.git*
 
 # Ignore compiled files
 /bin/
