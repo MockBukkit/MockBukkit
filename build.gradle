@@ -62,7 +62,7 @@ jacocoTestReport {
 }
 
 group = 'com.github.seeseemelk'
-version = '0.2.2'
+version = '0.2.3-SNAPSHOT'
 
 uploadArchives {
     repositories {
