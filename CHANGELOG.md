@@ -6,15 +6,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
+### Fixed
+### Changed
+### Removed
+
+## [0.2.2] - 2020-04-17
+### Added
 - Add CHANGELOG.md
-- Implement `Player#getEyeLocation`, `Player#getEyeHeight()`, and `Player#getEyeHeight(boolean)`
+- v1.14: Implement `Player#getEyeLocation`, `Player#getEyeHeight()`, and `Player#getEyeHeight(boolean)`
 
 ### Fixed
 - Out-of-date maven dependency information in README
 
-### Changed
-
-### Removed
-
 [Unreleased]: https://github.com/seeseemelk/MockBukkit
+[0.2.2]: https://search.maven.org/artifact/com.github.seeseemelk/MockBukkit-v1.14/0.2.2/jar
 [0.2.1]: https://search.maven.org/artifact/com.github.seeseemelk/MockBukkit-v1.14/0.2.1/jar
