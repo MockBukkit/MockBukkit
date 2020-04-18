@@ -9,8 +9,11 @@ import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.InvalidDescriptionException;
+import org.bukkit.plugin.InvalidPluginException;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.plugin.java.JavaPluginLoader;
 
 public class MockBukkit
 {
@@ -79,6 +82,39 @@ public class MockBukkit
 	}
 	
 	/**
+	 * Loads a plugin from a jar.
+	 * @param path Path to the jar.
+	 */
+	public static void loadJar(String path)
+	{
+		try
+		{
+			loadJar(new File(path));
+		}
+		catch (InvalidPluginException e)
+		{
+			// We *really* don't want to bother users with this error.
+			// It's only supposed to be used during unit tests, so if
+			// it fails it'll fail your test anyway.
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * Loads a plugin from a jar.
+	 * @param path Path to the jar.
+	 * @throws InvalidPluginException
+	 */
+	@SuppressWarnings({ "deprecation" })
+	public static void loadJar(File jarFile) throws InvalidPluginException
+	{
+		JavaPluginLoader loader = new JavaPluginLoader(mock);
+		Plugin plugin = loader.loadPlugin(jarFile);
+		mock.getPluginManager().registerLoadedPlugin(plugin);
+		mock.getPluginManager().enablePlugin(plugin);
+	}
+	
+	/**
 	 * Loads and enables a plugin for mocking.
 	 * 
 	 * @param <T>
@@ -132,26 +168,41 @@ public class MockBukkit
 	 * @return An instance of the plugin's main class.
 	 */
 	@SuppressWarnings("unchecked")
+	public static <T extends JavaPlugin> T loadWith(Class<T> plugin, PluginDescriptionFile descriptionFile, Object... parameters)
+	{
+		if (mock != null)
+		{
+			JavaPlugin instance = mock.getPluginManager().loadPlugin(plugin, descriptionFile, parameters);
+			mock.getPluginManager().enablePlugin(instance);
+			return (T) instance;
+		}
+		else
+		{
+			throw new IllegalStateException("Not mocking");
+		}
+	}
+	
+	/**
+	 * Loads and enables a plugin for mocking. It receives the {@code plugin.yml} to
+	 * use as an extra {@link File} argument.
+	 * 
+	 * @param <T>
+	 *            The plugin's main class to load.
+	 * @param plugin
+	 *            The plugin to load for mocking.
+	 * @param descriptionFile The file to use instead of {@code plugin.yml}.
+	 * @param parameters
+	 *            Extra parameters to pass on to the plugin constructor.
+	 * @return An instance of the plugin's main class.
+	 */
 	public static <T extends JavaPlugin> T loadWith(Class<T> plugin, InputStream descriptionInput, Object... parameters)
 	{
 		try
 		{
-			if (mock != null)
-			{
-				PluginDescriptionFile descriptionFile = new PluginDescriptionFile(descriptionInput);
-				JavaPlugin instance = mock.getPluginManager().loadPlugin(plugin, descriptionFile, parameters);
-				mock.getPluginManager().enablePlugin(instance);
-				return (T) instance;
-			}
-			else
-			{
-				throw new IllegalStateException("Not mocking");
-			}
+			return loadWith(plugin, new PluginDescriptionFile(descriptionInput), parameters);
 		}
 		catch (InvalidDescriptionException e)
 		{
-			// We don't want to have to add exception handling in a test to be able to run
-			// it.
 			throw new RuntimeException(e);
 		}
 	}

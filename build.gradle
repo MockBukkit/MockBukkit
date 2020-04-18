@@ -1,4 +1,4 @@
-apply plugin: 'java'
+apply plugin: 'java-library'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'jacoco'
@@ -21,11 +21,12 @@ repositories {
 }
 
 dependencies {
-    compile 'org.bukkit:bukkit:1.15.2-R0.1-SNAPSHOT'
-    compile 'junit:junit:4.12'
-    compile 'org.hamcrest:hamcrest-library:1.3'
-    compile 'org.apache.commons:commons-io:1.3.2'
-    compile 'org.jetbrains:annotations:19.0.0'
+    api 'org.bukkit:bukkit:1.15.2-R0.1-SNAPSHOT'
+    implementation 'junit:junit:4.12'
+    implementation 'org.hamcrest:hamcrest-library:1.3'
+    implementation 'org.apache.commons:commons-io:1.3.2'
+    implementation 'org.jetbrains:annotations:19.0.0'
+    testImplementation files('extra/TestPlugin/TestPlugin.jar')
 }
 
 task javadocJar(type: Jar) {
@@ -45,8 +46,6 @@ artifacts {
 signing {
     sign configurations.archives
 }
-
-
 
 jacocoTestReport {
 	reports {

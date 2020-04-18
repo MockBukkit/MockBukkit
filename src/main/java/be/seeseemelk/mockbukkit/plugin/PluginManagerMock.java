@@ -276,6 +276,18 @@ public class PluginManagerMock implements PluginManager
 	}
 	
 	/**
+	 * Registers a plugin that has already been loaded.
+	 * This is necessary to register plugins loaded from external jars.
+	 * @param plugin The plugin that has been loaded.
+	 */
+	public void registerLoadedPlugin(Plugin plugin)
+	{
+		addCommandsFrom(plugin);
+		plugins.add(plugin);
+		plugin.onLoad();
+	}
+	
+	/**
 	 * Load a plugin from a class. It will use the system resource
 	 * {@code plugin.yml} as the resource file.
 	 * 
@@ -312,9 +324,7 @@ public class PluginManagerMock implements PluginManager
 			System.arraycopy(parameters, 0, arguments, 4, parameters.length);
 			
 			JavaPlugin plugin = constructor.newInstance(arguments);
-			addCommandsFrom(plugin);
-			plugins.add(plugin);
-			plugin.onLoad();
+			registerLoadedPlugin(plugin);
 			return plugin;
 		}
 		catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
@@ -480,7 +490,7 @@ public class PluginManagerMock implements PluginManager
 	 * @param plugin
 	 *            The plugin from which to read commands.
 	 */
-	protected void addCommandsFrom(JavaPlugin plugin)
+	protected void addCommandsFrom(Plugin plugin)
 	{
 		Map<String, Map<String, Object>> commands = plugin.getDescription().getCommands();
 		if (commands != null)
