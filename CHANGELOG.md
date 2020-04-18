@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
+ - Add `MockBukkit.loadJar(string)` which allows loading other plugins from jar files.
+
 ### Fixed
 
 ### Changed
