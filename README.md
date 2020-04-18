@@ -4,7 +4,7 @@
 
 # ![MockBukkit](logo.png)
 MockBukkit is a framework that makes the unit testing of Bukkit plugins a whole lot easier.
-It aims to be a complete mock implementation.
+It aims to be provide complete mock implementation of CraftBukkit that can be completely controlled from a unit test.
 
 ## Usage
 MockBukkit can easily be included in gradle using mavenCentral.
