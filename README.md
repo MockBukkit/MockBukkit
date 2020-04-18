@@ -2,7 +2,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/403a4bb837ca47333d33/maintainability)](https://codeclimate.com/github/seeseemelk/MockBukkit/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/403a4bb837ca47333d33/test_coverage)](https://codeclimate.com/github/seeseemelk/MockBukkit/test_coverage)
 
-# MockBukkit
+# ![MockBukkit](logo.png)
 MockBukkit is a framework that makes the unit testing of Bukkit plugins a whole lot easier.
 It aims to be a complete mock implementation.
 
