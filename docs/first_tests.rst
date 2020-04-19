@@ -17,9 +17,8 @@ This is because the ``JavaPlugin`` class expects that the plugin was loaded by a
 special class loader.
 However, it is not possible to use this class loader during the unit test phase.
 
-The workaround is easy though, a constructor with a visibility of ``protected``.
+The workaround is easy though, a constructor with a visibility of ``protected``. ::
 
-::
     public class MyPlugin extends JavaPlugin {
         public MyPlugin() {
             super();
@@ -42,8 +41,8 @@ The workaround is easy though, a constructor with a visibility of ``protected``.
 
 Creating the Test Class
 ^^^^^^^^^^^^^^^^^^^^^^^
-Once your directories are set up, you can create unit tests like this:
-::
+Once your directories are set up, you can create unit tests like this::
+
     public class MyPluginTests {
         private ServerMock server;
         private MyPlugin plugin;

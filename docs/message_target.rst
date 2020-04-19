@@ -5,14 +5,14 @@ Two examples of message targets are ```ConsoleCommandSenderMock``` and ```Entity
 
 Using MessageTarget
 -------------------
-Any message that was sent to the target can be read using
-::
+Any message that was sent to the target can be read using::
+
     SimpleEntityMock entity = new SimpleEntityMock();
     entity.sendMessage("Hello world!");
     String message = entity.nextMessage();
 
-It also contains two assert methods to check if a message was or wasn't received.
-::
+It also contains two assert methods to check if a message was or wasn't received. ::
+
     entity.sendMessage("Hello world!");
     entity.assertSaid("Hello world!");
     entity.assertNoMoreSaid();
