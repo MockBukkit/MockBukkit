@@ -21,8 +21,7 @@ Dependencies
 ^^^^^^^^^^^^
 To enable unit testing, all you need to do is add the JUnit dependency and the
 correct MockBukkit dependency.
-Here is an example which adds support for JUnit 4.12 and MockBukkit-v1.15:
-::
+Here is an example which adds support for JUnit 4.12 and MockBukkit-v1.15::
 
     repositories {
         mavenCentral()
@@ -36,19 +35,20 @@ Here is an example which adds support for JUnit 4.12 and MockBukkit-v1.15:
 Running
 ^^^^^^^
 When this has been added, you can run your tests using the `test` task.
-For Windows, running the following command will execute the tests:
-::
+For Windows, running the following command will execute the tests::
+
     gradlew.bat test
-On Linux and macOS, use the following command:
-::
+
+On Linux and macOS, use the following command::
+
     ./gradlew test
 
 Maven
 -----
 For people that use Maven instead of Gradle can also use MockBukkit by adding it
 to their `pom.xml`.
-To do so, both JUnit and MockBukkit habe to be added to your dependencies:
-::
+To do so, both JUnit and MockBukkit habe to be added to your dependencies::
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -77,6 +77,7 @@ To do so, both JUnit and MockBukkit habe to be added to your dependencies:
 
 Running
 ^^^^^^^
-After having modified your `pom.xml`, you can run the unit tests as follows:
-::
+After having modified your `pom.xml`, you can run the unit tests as follows::
+
     mvn test
+
