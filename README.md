@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/seeseemelk/MockBukkit.svg?branch=v1.14)](https://travis-ci.org/seeseemelk/MockBukkit)
+[![Documentation Status](https://readthedocs.org/projects/mockbukkit/badge/?version=latest)](https://mockbukkit.readthedocs.io/en/latest/?badge=latest)
 [![Maintainability](https://api.codeclimate.com/v1/badges/403a4bb837ca47333d33/maintainability)](https://codeclimate.com/github/seeseemelk/MockBukkit/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/403a4bb837ca47333d33/test_coverage)](https://codeclimate.com/github/seeseemelk/MockBukkit/test_coverage)
 
