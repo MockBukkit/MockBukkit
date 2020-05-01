@@ -17,3 +17,11 @@ testing of plugins that use timers or delays.
    :caption: Contents
    
    getting_started.rst
+   first_tests.rst
+   player_mock.rst
+   world_mock.rst
+   scheduler_mock.rst
+   entity_mock.rst
+   message_target.rst
+   dependencies.rst
+
