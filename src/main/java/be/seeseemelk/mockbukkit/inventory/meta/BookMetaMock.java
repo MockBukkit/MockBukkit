@@ -31,7 +31,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta {
         
         this.title = meta.getTitle();
         this.author = meta.getAuthor();
-        this.pages = meta.getPages();
+        this.pages = new ArrayList<>(meta.getPages());
     }
 
     @Override
