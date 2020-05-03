@@ -1925,4 +1925,11 @@ public class PlayerMock extends LivingEntityMock implements Player
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
+
+	@Override
+	public float getAttackCooldown()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
 }
