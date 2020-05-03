@@ -7,6 +7,7 @@ import org.bukkit.advancement.Advancement;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
+import org.bukkit.plugin.InvalidPluginException;
 import org.bukkit.plugin.PluginDescriptionFile;
 
 @SuppressWarnings("deprecation")
@@ -55,15 +56,17 @@ public class MockUnsafeValues implements UnsafeValues {
     }
 
     @Override
-    public void checkSupported(PluginDescriptionFile pdf) {
-        // TODO Auto-generated method stub
-        throw new UnimplementedOperationException();
+    public void checkSupported(PluginDescriptionFile pdf) throws InvalidPluginException {
+    	if (pdf.getAPIVersion() == null)
+    		throw new InvalidPluginException("Plugin does not specify 'api-version' in plugin.yml");
+    		
+        if (!pdf.getAPIVersion().equals("1.15"))
+        	throw new InvalidPluginException("This version of MockBukkit required API 1.15");
     }
 
     @Override
     public byte[] processClass(PluginDescriptionFile pdf, String path, byte[] clazz) {
-        // TODO Auto-generated method stub
-        throw new UnimplementedOperationException();
+        return clazz;
     }
 
     @Override
