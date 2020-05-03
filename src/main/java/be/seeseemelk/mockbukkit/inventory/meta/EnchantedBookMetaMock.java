@@ -20,6 +20,16 @@ public class EnchantedBookMetaMock extends ItemMetaMock implements EnchantmentSt
 
     private Map<Enchantment, Integer> storedEnchantments = new HashMap<>();
     
+    public EnchantedBookMetaMock() {
+        super();
+    }
+    
+    public EnchantedBookMetaMock(EnchantmentStorageMeta meta) {
+        super(meta);
+        
+        this.storedEnchantments = new HashMap<>(meta.getStoredEnchants());
+    }
+    
     @Override
     public int hashCode() {
         final int prime = 31;

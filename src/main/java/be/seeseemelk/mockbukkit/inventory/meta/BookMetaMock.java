@@ -21,6 +21,18 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta {
     private String title;
     private List<String> pages = new ArrayList<>();
     private String author;
+    
+    public BookMetaMock() {
+        super();
+    }
+    
+    public BookMetaMock(BookMeta meta) {
+        super(meta);
+        
+        this.title = meta.getTitle();
+        this.author = meta.getAuthor();
+        this.pages = new ArrayList<>(meta.getPages());
+    }
 
     @Override
 	public int hashCode()
