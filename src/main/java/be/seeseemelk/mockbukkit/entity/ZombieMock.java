@@ -2,6 +2,8 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.Zombie;
 
@@ -18,6 +20,11 @@ public class ZombieMock extends MonsterMock implements Zombie {
         super(server, uuid);
         setMaxHealth(20);
         this.setHealth(20);
+    }
+    
+    @Override
+    public EntityType getType() {
+        return EntityType.ZOMBIE;
     }
 
     @Override
