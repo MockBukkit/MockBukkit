@@ -4,7 +4,10 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.inventory.meta.BookMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.EnchantedBookMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.KnowledgeBookMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.SkullMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.SuspiciousStewMetaMock;
+
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFactory;
@@ -20,13 +23,15 @@ public class ItemFactoryMock implements ItemFactory
 	{
 		switch (material)
 		{
+            case ARMOR_STAND:
+                // TODO Auto-generated method stub
+                throw new UnimplementedOperationException();
 			case BOOK:
 				return BookMetaMock.class;
 			case ENCHANTED_BOOK:
 				return EnchantedBookMetaMock.class;
 			case KNOWLEDGE_BOOK:
-				// TODO Auto-generated method stub
-				throw new UnimplementedOperationException();
+				return KnowledgeBookMetaMock.class;
 			case LEATHER_BOOTS:
 			case LEATHER_CHESTPLATE:
 			case LEATHER_HELMET:
@@ -36,11 +41,19 @@ public class ItemFactoryMock implements ItemFactory
 			case MAP:
 				// TODO Auto-generated method stub
 				throw new UnimplementedOperationException();
+			case FIREWORK_STAR:
+            case FIREWORK_ROCKET:
+                // TODO Auto-generated method stub
+                throw new UnimplementedOperationException();
 			case POTION:
 			case LINGERING_POTION:
 			case SPLASH_POTION:
-				// TODO Auto-generated method stub
 				return SkullMetaMock.class;
+			case SUSPICIOUS_STEW:
+			    return SuspiciousStewMetaMock.class;
+            case TROPICAL_FISH_BUCKET:
+                // TODO Auto-generated method stub
+                throw new UnimplementedOperationException();
 			case EGG:
 			case DRAGON_EGG:
 			default:
