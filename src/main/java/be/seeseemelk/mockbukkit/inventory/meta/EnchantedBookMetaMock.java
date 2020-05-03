@@ -27,7 +27,7 @@ public class EnchantedBookMetaMock extends ItemMetaMock implements EnchantmentSt
     public EnchantedBookMetaMock(EnchantmentStorageMeta meta) {
         super(meta);
         
-        this.storedEnchantments = meta.getStoredEnchants();
+        this.storedEnchantments = new HashMap<>(meta.getStoredEnchants());
     }
     
     @Override
