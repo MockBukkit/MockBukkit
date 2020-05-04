@@ -68,6 +68,7 @@ import org.bukkit.util.Vector;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryViewMock;
 import be.seeseemelk.mockbukkit.inventory.SimpleInventoryViewMock;
@@ -77,6 +78,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 {
 	private boolean online;
 	private PlayerInventoryMock inventory = null;
+	private EnderChestInventoryMock enderChest = null;
 	private GameMode gamemode = GameMode.SURVIVAL;
 	private String displayName = null;
 	private int expTotal = 0;
@@ -306,8 +308,11 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public Inventory getEnderChest()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (enderChest == null) {
+		    enderChest = new EnderChestInventoryMock(this);
+		}
+		
+		return enderChest;
 	}
 
 	@Override
