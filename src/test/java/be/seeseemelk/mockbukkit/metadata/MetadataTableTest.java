@@ -19,21 +19,21 @@ import be.seeseemelk.mockbukkit.TestPlugin;
 
 public class MetadataTableTest
 {
-	@SuppressWarnings("unused")
+    
 	private ServerMock server;
 	private MetadataTable mt;
 
 	@Before
-	public void setUp() throws Exception
+	public void setUp()
 	{
 		server = MockBukkit.mock();
 		mt = new MetadataTable();
 	}
 
 	@After
-	public void tearDown() throws Exception
+	public void tearDown()
 	{
-		MockBukkit.unload();
+		MockBukkit.unmock();
 	}
 
 	@Test

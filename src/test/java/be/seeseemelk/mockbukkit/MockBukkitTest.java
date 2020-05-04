@@ -27,7 +27,7 @@ public class MockBukkitTest
 	{
 		if (MockBukkit.isMocked())
 		{
-			MockBukkit.unload();
+			MockBukkit.unmock();
 		}
 	}
 	
@@ -66,7 +66,7 @@ public class MockBukkitTest
 	public void isMocked_ServerUnloaded_False()
 	{
 		MockBukkit.mock();
-		MockBukkit.unload();
+		MockBukkit.unmock();
 		assertFalse(MockBukkit.isMocked());
 	}
 	
@@ -128,7 +128,7 @@ public class MockBukkitTest
 		MockBukkit.mock();
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
 		assumeFalse(plugin.onDisableExecuted);
-		MockBukkit.unload();
+		MockBukkit.unmock();
 		assertFalse(plugin.isEnabled());
 		assertTrue(plugin.onDisableExecuted);
 	}

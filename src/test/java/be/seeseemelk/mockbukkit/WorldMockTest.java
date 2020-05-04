@@ -36,7 +36,7 @@ public class WorldMockTest
 	@After
 	public void tearDown()
 	{
-		MockBukkit.unload();
+		MockBukkit.unmock();
 	}
 	
 	@Test

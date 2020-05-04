@@ -51,7 +51,7 @@ public class ServerMockTest
 	@After
 	public void tearDown()
 	{
-		MockBukkit.unload();
+		MockBukkit.unmock();
 	}
 	
 	@Test
@@ -321,7 +321,7 @@ public class ServerMockTest
 		assertFalse(file.exists());
 		file.createNewFile();
 		assertTrue(file.exists());
-		MockBukkit.unload();
+		MockBukkit.unmock();;
 		MockBukkit.mock();
 		assertFalse(file.exists());
 	}

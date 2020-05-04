@@ -17,7 +17,7 @@ public class PlayerMockFactoryTest
 	private PlayerMockFactory factory;
 
  	@Before
-	public void setUp() throws Exception
+	public void setUp()
 	{
  		server = MockBukkit.mock();
  		factory = new PlayerMockFactory(server);
@@ -26,7 +26,7 @@ public class PlayerMockFactoryTest
  	@After
  	public void tearDown()
  	{
- 		MockBukkit.unload();
+ 		MockBukkit.unmock();
  	}
 
 	@Test

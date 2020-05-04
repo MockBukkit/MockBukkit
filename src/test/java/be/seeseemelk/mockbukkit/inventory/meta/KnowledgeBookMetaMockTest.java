@@ -16,7 +16,7 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 
 public class KnowledgeBookMetaMockTest {
-    
+
     private final int MAX_RECIPES = 32767;
 
     @Before
@@ -30,13 +30,13 @@ public class KnowledgeBookMetaMockTest {
     }
 
     @Test
-    public void hasRecipesDefaultFalse() {
+    public void testRecipesDefaultFalse() {
         KnowledgeBookMetaMock meta = new KnowledgeBookMetaMock();
         assertFalse(meta.hasRecipes());
     }
 
     @Test
-    public void addRecipe() {
+    public void testAddRecipe() {
         KnowledgeBookMetaMock meta = new KnowledgeBookMetaMock();
         NamespacedKey key = NamespacedKey.randomKey();
 
@@ -46,7 +46,7 @@ public class KnowledgeBookMetaMockTest {
     }
 
     @Test
-    public void addNullRecipeAndFail() {
+    public void testAddNullRecipeAndFail() {
         KnowledgeBookMetaMock meta = new KnowledgeBookMetaMock();
         List<NamespacedKey> recipes = Arrays.asList(null, null, null);
 
@@ -56,7 +56,7 @@ public class KnowledgeBookMetaMockTest {
     }
 
     @Test
-    public void setRecipes() {
+    public void testSetRecipes() {
         KnowledgeBookMetaMock meta = new KnowledgeBookMetaMock();
         List<NamespacedKey> recipes = Arrays.asList(NamespacedKey.randomKey(), NamespacedKey.randomKey());
 
@@ -66,7 +66,7 @@ public class KnowledgeBookMetaMockTest {
     }
 
     @Test
-    public void getRecipes() {
+    public void testGetRecipes() {
         KnowledgeBookMetaMock meta = new KnowledgeBookMetaMock();
         List<NamespacedKey> recipes = Arrays.asList(NamespacedKey.randomKey(), NamespacedKey.randomKey());
         meta.setRecipes(recipes);
@@ -75,25 +75,25 @@ public class KnowledgeBookMetaMockTest {
     }
 
     @Test
-    public void addTooManyRecipes() {
+    public void testTooManyRecipes() {
         KnowledgeBookMetaMock meta = new KnowledgeBookMetaMock();
-        
+
         for (int i = 0; i < MAX_RECIPES + 50; i++) {
             meta.addRecipe(NamespacedKey.randomKey());
         }
-        
+
         assertEquals(MAX_RECIPES, meta.getRecipes().size());
     }
 
     @Test
-    public void equalsEnchantmentMeta() {
+    public void testEquals() {
         KnowledgeBookMetaMock meta = new KnowledgeBookMetaMock();
         assertEquals(meta, meta);
         assertFalse(meta.equals(new ItemMetaMock()));
 
         KnowledgeBookMetaMock meta2 = new KnowledgeBookMetaMock();
         assertEquals(meta, meta2);
-        
+
         NamespacedKey recipe = NamespacedKey.randomKey();
 
         meta.addRecipe(recipe);

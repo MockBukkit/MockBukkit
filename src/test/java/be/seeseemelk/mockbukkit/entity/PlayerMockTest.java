@@ -56,7 +56,7 @@ public class PlayerMockTest
 	private PlayerMock player;
 
 	@Before
-	public void setUp() throws Exception
+	public void setUp()
 	{
 		server = MockBukkit.mock();
 		uuid = UUID.randomUUID();
@@ -64,9 +64,9 @@ public class PlayerMockTest
 	}
 
 	@After
-	public void tearDown() throws Exception
+	public void tearDown()
 	{
-		MockBukkit.unload();
+		MockBukkit.unmock();
 	}
 
 	@Test

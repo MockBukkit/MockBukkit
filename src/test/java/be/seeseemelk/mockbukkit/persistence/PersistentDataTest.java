@@ -16,33 +16,33 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 
 public class PersistentDataTest {
-    
+
     @Before
     public void setUp() {
         ServerMock mock = MockBukkit.mock();
     }
-    
+
     @After
-    public void tearDown(){
+    public void tearDown() {
         MockBukkit.unmock();
     }
-    
+
     @Test
     public void testDefaultMethods() {
         PersistentDataContainer container = new PersistentDataContainerMock();
         assertTrue(container.isEmpty());
         assertTrue(container.getAdapterContext() instanceof PersistentDataAdapterContextMock);
     }
-    
+
     @Test
-    public void addInteger() {
+    public void testAddInteger() {
         PersistentDataContainer container = new PersistentDataContainerMock();
         NamespacedKey key = NamespacedKey.randomKey();
-        
+
         assertTrue(container.isEmpty());
         assertFalse(container.has(key, PersistentDataType.INTEGER));
         assertNull(container.get(key, PersistentDataType.INTEGER));
-        
+
         container.set(key, PersistentDataType.INTEGER, 42);
         assertFalse(container.isEmpty());
         assertNull(container.get(key, PersistentDataType.STRING));
@@ -51,31 +51,42 @@ public class PersistentDataTest {
         assertTrue(container.has(key, PersistentDataType.INTEGER));
         assertEquals(42, container.get(key, PersistentDataType.INTEGER).intValue());
     }
-    
+
     @Test
-    public void removeInteger() {
+    public void testAddString() {
         PersistentDataContainer container = new PersistentDataContainerMock();
         NamespacedKey key = NamespacedKey.randomKey();
-        
+
+        container.set(key, PersistentDataType.STRING, "Hello world");
+        assertFalse(container.isEmpty());
+        assertTrue(container.has(key, PersistentDataType.STRING));
+        assertEquals("Hello world", container.get(key, PersistentDataType.STRING));
+    }
+
+    @Test
+    public void testRemoveInteger() {
+        PersistentDataContainer container = new PersistentDataContainerMock();
+        NamespacedKey key = NamespacedKey.randomKey();
+
         container.set(key, PersistentDataType.INTEGER, 42);
         assertEquals(42, container.get(key, PersistentDataType.INTEGER).intValue());
-        
+
         container.remove(key);
         assertFalse(container.has(key, PersistentDataType.INTEGER));
         assertTrue(container.isEmpty());
     }
-    
+
     @Test
     public void testGetOrDefault() {
         PersistentDataContainer container = new PersistentDataContainerMock();
         NamespacedKey key = NamespacedKey.randomKey();
-        
+
         assertEquals(10, container.getOrDefault(key, PersistentDataType.INTEGER, 10).intValue());
-        
+
         container.set(key, PersistentDataType.INTEGER, 42);
         assertEquals(42, container.getOrDefault(key, PersistentDataType.INTEGER, 10).intValue());
     }
-    
+
     @Test
     public void testEquals() {
         PersistentDataContainer container = new PersistentDataContainerMock();
@@ -85,19 +96,19 @@ public class PersistentDataTest {
 
         NamespacedKey key = NamespacedKey.randomKey();
         container.set(key, PersistentDataType.INTEGER, 42);
-        
+
         assertFalse(container.equals(container2));
 
         container2.set(key, PersistentDataType.INTEGER, 42);
         assertTrue(container.equals(container2));
     }
-    
+
     @Test
-    public void testCloning() {
+    public void testConstructor() {
         PersistentDataContainerMock container = new PersistentDataContainerMock();
         NamespacedKey key = NamespacedKey.randomKey();
         container.set(key, PersistentDataType.INTEGER, 42);
-        
+
         assertEquals(container, new PersistentDataContainerMock(container));
     }
 

@@ -37,7 +37,7 @@ public class EntityMockTest
 	private EntityMock entity;
 
 	@Before
-	public void setUp() throws Exception
+	public void setUp()
 	{
 		server = MockBukkit.mock();
 		world = server.addSimpleWorld("world");
@@ -45,9 +45,9 @@ public class EntityMockTest
 	}
 	
 	@After
-	public void tearDown() throws Exception
+	public void tearDown()
 	{
-		MockBukkit.unload();
+		MockBukkit.unmock();
 	}
 	
 	@Test
