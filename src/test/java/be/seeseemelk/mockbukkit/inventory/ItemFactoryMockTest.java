@@ -27,7 +27,7 @@ public class ItemFactoryMockTest
 	@After
 	public void tearDown()
 	{
-		MockBukkit.unload();
+		MockBukkit.unmock();
 	}
 	
 	/*

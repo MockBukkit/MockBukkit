@@ -31,7 +31,7 @@ public class ItemMetaMockTest {
 	}
 	@After
 	public void tearDown(){
-		MockBukkit.unload();
+		MockBukkit.unmock();
 	}
 
 	@Test
@@ -312,19 +312,35 @@ public class ItemMetaMockTest {
 	}
 
 	@Test
-	public void assertDamageCorrectlySet(){
+	public void assertDamageCorrectlySet() {
 		int value = 500;
 		meta.setDamage(value);
 		ItemStack item = new ItemStack(Material.DIAMOND_SWORD);
 		item.setItemMeta(meta);
-		if(meta != null) {
-			int damage = ((Damageable)item.getItemMeta()).getDamage();
-			Assert.assertEquals(value, damage);
-		}
+
+		Damageable itemMeta = (Damageable) item.getItemMeta();
+        int damage = itemMeta.getDamage();
+        assertEquals(value, damage);
+        assertTrue(itemMeta.hasDamage());
 	}
 
+    @Test
+    public void assertNoDamage() {
+        meta.setDamage(0);
+        ItemStack item = new ItemStack(Material.DIAMOND_SWORD);
+        item.setItemMeta(meta);
+
+        Damageable itemMeta = (Damageable) item.getItemMeta();
+        int damage = itemMeta.getDamage();
+        assertEquals(0, damage);
+        assertFalse(itemMeta.hasDamage());
+    }
+
 	@Test
-	public void setCustomModelData_NewCustomModeData_CustomModelDataSetExactly() {
+	public void assertCustomModelData() {
+        meta.setCustomModelData(null);
+        assertFalse(meta.hasCustomModelData());
+        
 		meta.setCustomModelData(100);
 		assertTrue(meta.hasCustomModelData());
 		assertEquals(100, meta.getCustomModelData());

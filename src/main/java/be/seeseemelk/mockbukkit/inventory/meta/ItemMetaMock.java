@@ -252,12 +252,12 @@ public class ItemMetaMock implements ItemMeta, Damageable {
             return false; // Already exists with the same level
         }
 
-        if (ignoreLevelRestriction) {
+        if (ignoreLevelRestriction || (level >= ench.getStartLevel() && level <= ench.getMaxLevel())) {
             this.enchants.put(ench, level);
             return true;
-        } else {
-            // TODO Auto-generated method stub
-            throw new UnimplementedOperationException();
+        }
+        else {
+            return false;
         }
     }
 
