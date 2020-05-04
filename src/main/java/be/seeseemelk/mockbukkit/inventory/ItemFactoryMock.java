@@ -46,6 +46,9 @@ public class ItemFactoryMock implements ItemFactory
 			case POTION:
 			case LINGERING_POTION:
 			case SPLASH_POTION:
+                // TODO Auto-generated method stub
+                throw new UnimplementedOperationException();
+			case PLAYER_HEAD:
 				return SkullMetaMock.class;
 			case SUSPICIOUS_STEW:
 			    return SuspiciousStewMetaMock.class;
