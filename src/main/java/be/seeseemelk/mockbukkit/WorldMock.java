@@ -458,6 +458,9 @@ public class WorldMock implements World
 	{
 		EntityMock entity = null;
 		switch(type){
+            case ZOMBIE:
+                entity = new ZombieMock(server, UUID.randomUUID());
+                break;
 			case DROPPED_ITEM:
 			case ARROW:
 			case PAINTING:
@@ -521,8 +524,6 @@ public class WorldMock implements World
 			case PIG_ZOMBIE:
 			case GHAST:
 			case SLIME:
-			case ZOMBIE:
-				entity = new ZombieMock(server, UUID.randomUUID());
 			case GIANT:
 			case SPIDER:
 			case SKELETON:
