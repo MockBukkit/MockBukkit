@@ -14,12 +14,13 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
-public abstract class InventoryMock implements org.bukkit.inventory.Inventory
+public abstract class InventoryMock implements Inventory
 {
 	private final ItemStack[] items;
 	private final InventoryHolder holder;

@@ -25,13 +25,16 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
+import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.NotNull;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.command.MessageTarget;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
+import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
 
 public abstract class EntityMock implements Entity, MessageTarget
 {
@@ -41,6 +44,7 @@ public abstract class EntityMock implements Entity, MessageTarget
 	private boolean teleported;
 	private TeleportCause teleportCause;
 	private MetadataTable metadataTable = new MetadataTable();
+	private PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
 	private boolean operator = false;
 	private String name = "entity";
 	private final Queue<String> messages = new LinkedTransferQueue<>();
@@ -195,6 +199,12 @@ public abstract class EntityMock implements Entity, MessageTarget
 	public void removeMetadata(String metadataKey, Plugin owningPlugin)
 	{
 		metadataTable.removeMetadata(metadataKey, owningPlugin);
+	}
+	
+	@Override
+	public @NotNull PersistentDataContainer getPersistentDataContainer() 
+	{
+	    return persistentDataContainer;
 	}
 
 	@Override

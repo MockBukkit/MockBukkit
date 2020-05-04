@@ -7,7 +7,6 @@ import org.bukkit.entity.Mob;
 import org.bukkit.entity.Pose;
 import org.bukkit.entity.memory.MemoryKey;
 import org.bukkit.loot.LootTable;
-import org.bukkit.persistence.PersistentDataContainer;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
@@ -99,13 +98,6 @@ public abstract class MobMock extends LivingEntityMock implements Mob
 
 	@Override
 	public Pose getPose()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public PersistentDataContainer getPersistentDataContainer()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

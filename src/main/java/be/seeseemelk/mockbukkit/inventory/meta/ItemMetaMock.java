@@ -1,6 +1,8 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
+
 import com.google.common.collect.Multimap;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
@@ -18,11 +20,13 @@ import static java.util.Objects.nonNull;
 
 @SuppressWarnings("deprecation")
 public class ItemMetaMock implements ItemMeta, Damageable {
+    
     private String displayName = null;
     private List<String> lore = null;
     private int damage = 0;
     private Map<Enchantment, Integer> enchants = new HashMap<>();
     private Set<ItemFlag> hideFlags = EnumSet.noneOf(ItemFlag.class);
+    private PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
     private boolean unbreakable = false;
     private Integer customModelData = null;
 
@@ -31,10 +35,12 @@ public class ItemMetaMock implements ItemMeta, Damageable {
     }
 
     public ItemMetaMock(ItemMeta meta) {
-        if (meta.hasDisplayName())
+        if (meta.hasDisplayName()) {
             displayName = meta.getDisplayName();
-        if (meta.hasLore())
+        }
+        if (meta.hasLore()) {
             lore = meta.getLore();
+        }
         if (meta instanceof Damageable) {
             this.damage = ((Damageable) meta).getDamage();
         }
@@ -383,8 +389,7 @@ public class ItemMetaMock implements ItemMeta, Damageable {
 
     @Override
     public PersistentDataContainer getPersistentDataContainer() {
-        // TODO Auto-generated method stub
-        throw new UnimplementedOperationException();
+        return this.persistentDataContainer;
     }
 
     @Override
