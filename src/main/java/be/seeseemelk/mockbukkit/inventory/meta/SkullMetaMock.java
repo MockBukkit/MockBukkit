@@ -14,6 +14,16 @@ import org.bukkit.inventory.meta.SkullMeta;
  **/
 public class SkullMetaMock extends ItemMetaMock implements SkullMeta {
     private String owner;
+    
+    public SkullMetaMock() {
+        super();
+    }
+    
+    public SkullMetaMock(SkullMeta meta) {
+        super(meta);
+        
+        this.owner = meta.getOwningPlayer().getName();
+    }
 
     @Override
     public String getOwner() {

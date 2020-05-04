@@ -1,0 +1,41 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	jcenter()
+	
+	maven { url 'https://hub.spigotmc.org/nexus/content/repositories/public/' }
+}
+
+configurations.all {
+	resolutionStrategy.cacheChangingModulesFor 120, 'seconds'
+}
+
+dependencies {
+	implementation 'org.spigotmc:spigot-api:1.15.2-R0.1-SNAPSHOT'
+
+	testImplementation 'junit:junit:4.12'
+}
+
+jar.doLast() {
+	project.copy {
+		from 'build/libs/TestPlugin.jar'
+		into './'
+	}
+}
+
+task deploy(dependsOn: 'jar') {
+	doLast {
+		project.copy() {
+			from 'build/libs/TestPlugin.jar'
+			into new File(gradle.deployDir, 'plugins/')
+		}
+	}
+}
+
+eclipse.classpath.downloadJavadoc = true
+eclipse.classpath.downloadSources = true

@@ -1,0 +1,4 @@
+name: TestPlugin
+main: be.seeseemelk.testplugin.TestPlugin
+version: 0.1.0
+api-version: 1.15
