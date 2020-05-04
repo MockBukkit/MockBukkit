@@ -1,5 +1,14 @@
 package be.seeseemelk.mockbukkit.inventory;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
+import org.bukkit.Color;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemFactory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.inventory.meta.BookMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.EnchantedBookMetaMock;
@@ -8,25 +17,14 @@ import be.seeseemelk.mockbukkit.inventory.meta.KnowledgeBookMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.SkullMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.SuspiciousStewMetaMock;
 
-import org.bukkit.Color;
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemFactory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-
 public class ItemFactoryMock implements ItemFactory
 {
 	private Class<? extends ItemMeta> getItemMetaClass(Material material)
 	{
 		switch (material)
 		{
-            case ARMOR_STAND:
-                // TODO Auto-generated method stub
-                throw new UnimplementedOperationException();
-			case BOOK:
+			case WRITABLE_BOOK:
+			case WRITTEN_BOOK:
 				return BookMetaMock.class;
 			case ENCHANTED_BOOK:
 				return EnchantedBookMetaMock.class;
@@ -54,8 +52,6 @@ public class ItemFactoryMock implements ItemFactory
             case TROPICAL_FISH_BUCKET:
                 // TODO Auto-generated method stub
                 throw new UnimplementedOperationException();
-			case EGG:
-			case DRAGON_EGG:
 			default:
 				return ItemMetaMock.class;
 		}
@@ -112,24 +108,18 @@ public class ItemFactoryMock implements ItemFactory
 		Class<? extends ItemMeta> target = getItemMetaClass(material);
 		try
 		{
-			Constructor<? extends ItemMeta> constructor = target.getDeclaredConstructor(meta.getClass());
-			return constructor.newInstance(meta);
+			for (Constructor<?> constructor : target.getDeclaredConstructors()) {
+			    // This will make sure we find the most suitable constructor for this
+			    if (constructor.getParameterCount() == 1 && constructor.getParameterTypes()[0].isAssignableFrom(meta.getClass())) {
+			        return (ItemMeta) constructor.newInstance(meta);
+			    }
+			}
+			
+			throw new NoSuchMethodException("Cannot find an ItemMeta constructor for the class \"" + meta.getClass().getName() + "\"");
 		}
-		catch (SecurityException | InstantiationException | IllegalAccessException | InvocationTargetException e)
+		catch (SecurityException | InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e)
 		{
 			throw new RuntimeException(e);
-		}
-		catch (NoSuchMethodException e)
-		{
-			try
-			{
-				Constructor<? extends ItemMeta> constructor = target.getDeclaredConstructor(ItemMeta.class);
-				return constructor.newInstance(meta);
-			}
-			catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | InvocationTargetException e1)
-			{
-				throw new RuntimeException(e);
-			}
 		}
 	}
 

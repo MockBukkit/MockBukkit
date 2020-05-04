@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
  * @author TheBusyBiscuit
  *
  */
-public class EnchantmentMock extends Enchantment {
+class EnchantmentMock extends Enchantment {
 
     private final String name;
 

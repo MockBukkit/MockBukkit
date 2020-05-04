@@ -87,7 +87,7 @@ public abstract class InventoryMock implements org.bukkit.inventory.Inventory
 	 */
 	public void assertContainsAny(ItemStack item)
 	{
-		assertTrueForSome(itemstack -> item.isSimilar(itemstack));
+		assertTrueForSome(item::isSimilar);
 	}
 	
 	/**
@@ -181,7 +181,7 @@ public abstract class InventoryMock implements org.bukkit.inventory.Inventory
 	@Override
 	public HashMap<Integer, ItemStack> addItem(ItemStack... items) throws IllegalArgumentException
 	{
-		HashMap<Integer, ItemStack> notSaved = new HashMap<Integer, ItemStack>();
+		HashMap<Integer, ItemStack> notSaved = new HashMap<>();
 		for (int i = 0; i < items.length; i++)
 		{
 			ItemStack item = items[i];
