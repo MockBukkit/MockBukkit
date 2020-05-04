@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.bukkit.NamespacedKey;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.junit.After;
@@ -14,17 +15,36 @@ import org.junit.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.entity.PlayerMock;
+import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
 
 public class PersistentDataTest {
 
+    private ServerMock mock;
+
     @Before
     public void setUp() {
-        ServerMock mock = MockBukkit.mock();
+        mock = MockBukkit.mock();
     }
 
     @After
     public void tearDown() {
         MockBukkit.unmock();
+    }
+
+    @Test
+    public void testAdapterContext() {
+        PersistentDataAdapterContextMock context = new PersistentDataAdapterContextMock();
+        assertTrue(context.newPersistentDataContainer() instanceof PersistentDataContainerMock);
+    }
+
+    @Test
+    public void testImplementationMocks() {
+        ItemMeta meta = new ItemMetaMock();
+        assertTrue(meta.getPersistentDataContainer() instanceof PersistentDataContainerMock);
+
+        PlayerMock player = mock.addPlayer();
+        assertTrue(player.getPersistentDataContainer() instanceof PersistentDataContainerMock);
     }
 
     @Test
