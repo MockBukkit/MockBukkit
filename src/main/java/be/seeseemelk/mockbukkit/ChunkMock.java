@@ -194,21 +194,3 @@ public class ChunkMock implements Chunk
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

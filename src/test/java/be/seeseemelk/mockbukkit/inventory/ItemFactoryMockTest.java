@@ -11,7 +11,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.inventory.meta.BookMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.EnchantedBookMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.KnowledgeBookMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.SkullMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.SuspiciousStewMetaMock;
 
 public class ItemFactoryMockTest
 {
@@ -27,18 +32,25 @@ public class ItemFactoryMockTest
 	@After
 	public void tearDown()
 	{
-		MockBukkit.unload();
+		MockBukkit.unmock();
 	}
 	
 	/*
-	 * These tests are still very incomplete as the ItemFactoryMock for now only
-	 * supports the creation of ItemMetaMock objects.
+	 * These tests are still very incomplete.
 	 */
 	
 	@Test
 	public void getItemMeta_Stick_StandardItemMeta()
 	{
 		assertTrue(factory.getItemMeta(Material.DIRT) instanceof ItemMetaMock);
+        assertTrue(factory.getItemMeta(Material.PLAYER_HEAD) instanceof SkullMetaMock);
+		
+        assertTrue(factory.getItemMeta(Material.WRITABLE_BOOK) instanceof BookMetaMock);
+        assertTrue(factory.getItemMeta(Material.WRITTEN_BOOK) instanceof BookMetaMock);
+        assertTrue(factory.getItemMeta(Material.ENCHANTED_BOOK) instanceof EnchantedBookMetaMock);
+        assertTrue(factory.getItemMeta(Material.KNOWLEDGE_BOOK) instanceof KnowledgeBookMetaMock);
+
+        assertTrue(factory.getItemMeta(Material.SUSPICIOUS_STEW) instanceof SuspiciousStewMetaMock);
 	}
 	
 	@Test
@@ -105,30 +117,3 @@ public class ItemFactoryMockTest
 		assertTrue(meta.equals(newMeta));
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

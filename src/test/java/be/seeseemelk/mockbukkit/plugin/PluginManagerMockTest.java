@@ -32,7 +32,7 @@ public class PluginManagerMockTest
 	private TestPlugin plugin;
 
 	@Before
-	public void setUp() throws Exception
+	public void setUp()
 	{
 		server = MockBukkit.mock();
 		pluginManager = server.getPluginManager();
@@ -40,9 +40,9 @@ public class PluginManagerMockTest
 	}
 
 	@After
-	public void tearDown() throws Exception
+	public void tearDown()
 	{
-		MockBukkit.unload();
+		MockBukkit.unmock();
 	}
 	
 	@Test

@@ -62,6 +62,7 @@ import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
 import be.seeseemelk.mockbukkit.inventory.ChestInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import be.seeseemelk.mockbukkit.inventory.ItemFactoryMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
@@ -520,6 +521,9 @@ public class ServerMock implements Server
 			case CHEST:
 				inventory = new ChestInventoryMock(owner, size > 0 ? size : 9 * 3);
 				return inventory;
+			case ENDER_CHEST:
+			    inventory = new EnderChestInventoryMock(owner);
+			    return inventory;
 			default:
 				throw new UnimplementedOperationException("Inventory type not yet supported");
 		}
