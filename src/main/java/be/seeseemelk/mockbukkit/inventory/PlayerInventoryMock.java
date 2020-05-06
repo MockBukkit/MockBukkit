@@ -2,10 +2,14 @@ package be.seeseemelk.mockbukkit.inventory;
 
 import java.util.Arrays;
 
+import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class PlayerInventoryMock extends InventoryMock implements PlayerInventory
 {
@@ -152,6 +156,54 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	{
 		setItemInMainHand(stack);
 		
+	}
+	
+	@Override
+	public @NotNull ItemStack getItem(@NotNull EquipmentSlot slot) 
+	{
+	    switch (slot) {
+        case CHEST:
+            return getChestplate();
+        case FEET:
+            return getBoots();
+        case HAND:
+            return getItemInMainHand();
+        case HEAD:
+            return getHelmet();
+        case LEGS:
+            return getLeggings();
+        case OFF_HAND:
+            return getItemInOffHand();
+        default:
+            return new ItemStack(Material.AIR);
+	    }
+	}
+	
+	@Override
+	public void setItem(@NotNull EquipmentSlot slot, @Nullable ItemStack item) 
+	{
+	    switch (slot) {
+        case CHEST:
+            setChestplate(item);
+            break;
+        case FEET:
+            setBoots(item);
+            break;
+        case HAND:
+            setItemInMainHand(item);
+            break;
+        case HEAD:
+            setHelmet(item);
+            break;
+        case LEGS:
+            setLeggings(item);
+            break;
+        case OFF_HAND:
+            setItemInOffHand(item);
+            break;
+        default:
+            break;
+	    }
 	}
 	
 	@Override
