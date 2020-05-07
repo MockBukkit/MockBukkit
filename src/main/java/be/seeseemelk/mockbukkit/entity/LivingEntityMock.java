@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.EnumMap;
 import java.util.List;
@@ -26,6 +27,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.EntityEquipment;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.BoundingBox;
@@ -75,11 +77,12 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		if (health <= 0)
 		{
 			this.health = 0;
-			EntityDeathEvent event;
 
 			if (this instanceof Player) {
 			    Player player = (Player) this;
-				event = new PlayerDeathEvent(player, new ArrayList<>(), 0, getName() + " got killed");
+			    List<ItemStack> drops = Arrays.asList(player.getInventory().getContents());
+				PlayerDeathEvent event = new PlayerDeathEvent(player, drops, 0, getName() + " got killed");
+				Bukkit.getPluginManager().callEvent(event);
 
 				// Clear the Inventory if keep-inventory is not enabled
 				if (!getWorld().getGameRuleValue(GameRule.KEEP_INVENTORY).booleanValue()) {
@@ -87,10 +90,11 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 				    // Should someone try to provoke a RespawnEvent, they will now find the Inventory to be empty
 				}
 			} else {
-				event = new EntityDeathEvent(this, new ArrayList<>(), 0);
+			    EntityDeathEvent event = new EntityDeathEvent(this, new ArrayList<>(), 0);
+				Bukkit.getPluginManager().callEvent(event);
 			}
 			
-			Bukkit.getPluginManager().callEvent(event);
+			
 			alive = false;
 		}
 		else
