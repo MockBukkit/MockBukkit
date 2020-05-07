@@ -61,6 +61,47 @@ public class InventoryMockTest
 		}
 	}
 
+    @Test
+    public void testClearInventory()
+    {
+        for (int i = 0; i < inventory.getSize(); i++)
+        {
+            inventory.addItem(new ItemStack(Material.DIRT, 64));
+        }
+        
+        inventory.clear();
+        
+        for (int i = 0; i < inventory.getSize(); i++)
+        {
+            ItemStack item = inventory.getItem(i);
+            assertNotNull(item);
+            assertEquals(Material.AIR, item.getType());
+        }
+    }
+
+    @Test
+    public void testClearSlot()
+    {
+        inventory.setItem(0, new ItemStack(Material.DIAMOND));
+        assertEquals(Material.DIAMOND, inventory.getItem(0).getType());
+
+        inventory.clear(0);
+        assertEquals(Material.AIR, inventory.getItem(0).getType());
+    }
+
+    @Test
+    public void testFirstEmpty()
+    {
+        for (int i = 0; i < inventory.getSize(); i++)
+        {
+            inventory.addItem(new ItemStack(Material.DIRT, 64));
+        }
+        
+        assertEquals(-1, inventory.firstEmpty());
+        inventory.clear();
+        assertEquals(0, inventory.firstEmpty());
+    }
+
 	@Test
 	public void addItem_EmptyInventoryAddsOneStack_OneStackUsed()
 	{

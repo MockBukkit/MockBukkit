@@ -468,8 +468,7 @@ public abstract class EntityMock implements Entity, MessageTarget
 	@Override
 	public boolean isValid()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return !isDead();
 	}
 	
 	@Override
