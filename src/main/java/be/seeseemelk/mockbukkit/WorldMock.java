@@ -1255,11 +1255,10 @@ public class WorldMock implements World
 		throw new UnimplementedOperationException();
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T getGameRuleValue(GameRule<T> rule)
 	{
-		return (T) gameRules.get(rule);
+		return rule.getType().cast(gameRules.get(rule));
 	}
 	
 	@Override

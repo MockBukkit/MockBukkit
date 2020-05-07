@@ -64,6 +64,8 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
@@ -89,6 +91,9 @@ public class PlayerMock extends LivingEntityMock implements Player
 	private boolean whitelisted = true;
 	private InventoryView inventoryView;
 
+	private Location compassTarget;
+    private Location bedSpawnLocation;
+
 	public PlayerMock(ServerMock server, String name)
 	{
 		this(server, name, UUID.nameUUIDFromBytes(("OfflinePlayer:" + name).getBytes(StandardCharsets.UTF_8)));
@@ -106,6 +111,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 			MockBukkit.getMock().addSimpleWorld("world");
 
 		setLocation(Bukkit.getWorlds().get(0).getSpawnLocation().clone());
+		setCompassTarget(getLocation());
 		closeInventory();
 	}
 
@@ -144,7 +150,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 				&& Double.doubleToLongBits(getHealth()) == Double.doubleToLongBits(other.getHealth())
 				&& Objects.equals(inventory, other.inventory) && Objects.equals(inventoryView, other.inventoryView)
 				&& Double.doubleToLongBits(getMaxHealth()) == Double.doubleToLongBits(other.getMaxHealth())
-				&& online == other.online && whitelisted == other.whitelisted;
+				&& online == other.online && whitelisted == other.whitelisted && isDead() == other.isDead();
 	}
 
 	/**
@@ -854,17 +860,16 @@ public class PlayerMock extends LivingEntityMock implements Player
 	}
 
 	@Override
-	public void setCompassTarget(Location loc)
+	public void setCompassTarget(@NotNull Location loc)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+        this.compassTarget = loc;
 	}
 
+	@NotNull
 	@Override
 	public Location getCompassTarget()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.compassTarget;
 	}
 
 	@Override
@@ -1364,36 +1369,34 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public int getFoodLevel()
 	{
-		// TODO Auto-generated method stub
 		return foodLevel;
 	}
 
 	@Override
 	public void setFoodLevel(int foodLevel)
 	{
-		// TODO Auto-generated method stub
 		this.foodLevel = foodLevel;
 	}
 
+	@Nullable
 	@Override
 	public Location getBedSpawnLocation()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return bedSpawnLocation;
 	}
 
 	@Override
-	public void setBedSpawnLocation(Location location)
+	public void setBedSpawnLocation(@Nullable Location loc)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+        setBedSpawnLocation(loc, false);
 	}
 
 	@Override
-	public void setBedSpawnLocation(Location location, boolean force)
+	public void setBedSpawnLocation(@Nullable Location loc, boolean force)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (force || loc == null || loc.getBlock().getType().name().endsWith("_BED")) {
+		    this.bedSpawnLocation = loc;
+		}
 	}
 
 	@Override
