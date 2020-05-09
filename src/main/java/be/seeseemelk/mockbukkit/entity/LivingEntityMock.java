@@ -1,11 +1,17 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 
-import be.seeseemelk.mockbukkit.attribute.AttributeInstanceMock;
-import com.google.common.base.Function;
 import org.bukkit.Bukkit;
 import org.bukkit.FluidCollisionMode;
+import org.bukkit.GameRule;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
@@ -16,26 +22,30 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
-import org.bukkit.event.Event;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.EntityEquipment;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 
+import com.google.common.base.Function;
+
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.attribute.AttributeInstanceMock;
 
 public abstract class LivingEntityMock extends EntityMock implements LivingEntity
 {
 	private static final double MAX_HEALTH = 20.0;
 	private double health;
 	private double maxHealth = MAX_HEALTH;
+	private boolean alive = true;
 	protected Map<Attribute, AttributeInstanceMock> attributes;
 
 	public LivingEntityMock(ServerMock server, UUID uuid)
@@ -54,6 +64,12 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	{
 		return health;
 	}
+	
+	@Override
+	public boolean isDead() 
+	{
+	    return !alive;
+	}
 
 	@Override
 	public void setHealth(double health)
@@ -61,21 +77,29 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		if (health <= 0)
 		{
 			this.health = 0;
-			Event event;
-			if(this instanceof PlayerMock){
-				event = new PlayerDeathEvent((Player) this, new ArrayList<>(), 0, getName() + " got killed");
+
+			if (this instanceof Player) {
+			    Player player = (Player) this;
+			    List<ItemStack> drops = Arrays.asList(player.getInventory().getContents());
+				PlayerDeathEvent event = new PlayerDeathEvent(player, drops, 0, getName() + " got killed");
+				Bukkit.getPluginManager().callEvent(event);
+
+				// Clear the Inventory if keep-inventory is not enabled
+				if (!getWorld().getGameRuleValue(GameRule.KEEP_INVENTORY).booleanValue()) {
+				    player.getInventory().clear();
+				    // Should someone try to provoke a RespawnEvent, they will now find the Inventory to be empty
+				}
 			} else {
-				event = new EntityDeathEvent(this, new ArrayList<>(), 0);
+			    EntityDeathEvent event = new EntityDeathEvent(this, new ArrayList<>(), 0);
+				Bukkit.getPluginManager().callEvent(event);
 			}
-			Bukkit.getPluginManager().callEvent(event);
-		}
-		else if (health > getMaxHealth())
-		{
-			this.health = getMaxHealth();
+			
+			
+			alive = false;
 		}
 		else
 		{
-			this.health = health;
+			this.health = Math.min(health, getMaxHealth());
 		}
 	}
 

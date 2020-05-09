@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -18,7 +19,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.GameRule;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
@@ -32,6 +36,7 @@ import org.bukkit.event.player.PlayerExpChangeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.inventory.InventoryView;
+import org.bukkit.inventory.ItemStack;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -198,6 +203,7 @@ public class PlayerMockTest
 	{
 		player.damage(50.0, player);
 		assertEquals(0, player.getHealth(), 0);
+        assertTrue(player.isDead());
 		server.getPluginManager().assertEventFired(EntityDamageEvent.class);
 		server.getPluginManager().assertEventFired(PlayerDeathEvent.class);
 	}
@@ -207,6 +213,7 @@ public class PlayerMockTest
 	{
 		player.damage(player.getHealth());
 		assertEquals(0, player.getHealth(), 0);
+        assertTrue(player.isDead());
 		server.getPluginManager().assertEventFired(EntityDamageEvent.class);
 		server.getPluginManager().assertEventFired(PlayerDeathEvent.class);
 	}
@@ -719,5 +726,74 @@ public class PlayerMockTest
 		PluginManagerMock pluginManager = server.getPluginManager();
 		pluginManager.assertEventFired(event -> event instanceof PlayerJoinEvent);
 	}
+	
+	@Test
+	public void testCompassDefaultTargetSpawnLocation() {
+	    assertEquals(player.getCompassTarget(), player.getLocation());
+	}
+    
+    @Test
+    public void testSetCompassTarget() {
+        Location loc = new Location(player.getWorld(), 12345678, 100, 12345678);
+
+        player.setCompassTarget(loc);
+        assertEquals(loc, player.getCompassTarget());
+        
+        player.setCompassTarget(loc);
+        assertNotNull(player.getCompassTarget());
+    }
+    
+    @Test
+    public void testBedSpawnLocation() {
+        Location loc = new Location(player.getWorld(), 400, 80, 400);
+        loc.getBlock().setType(Material.LIGHT_BLUE_BED);
+
+        assertNull(player.getBedSpawnLocation());
+
+        player.setBedSpawnLocation(loc);
+        assertEquals(loc, player.getBedSpawnLocation());
+
+        player.setBedSpawnLocation(null);
+        assertNull(player.getBedSpawnLocation());
+    }
+    
+    @Test
+    public void testBedSpawnLocationForce() {
+        Location loc = new Location(player.getWorld(), 400, 80, 400);
+
+        // Location is not actually a Bed and it should fail
+        player.setBedSpawnLocation(loc);
+        assertNull(player.getBedSpawnLocation());
+
+        // Force the Bed Spawn Location
+        player.setBedSpawnLocation(loc, true);
+        assertEquals(loc, player.getBedSpawnLocation());
+    }
+	
+	@Test
+	public void testKeepInventoryFalse() {
+	    World world = player.getWorld();
+	    world.setGameRule(GameRule.KEEP_INVENTORY, false);
+	    
+	    player.getInventory().setItem(0, new ItemStack(Material.DIAMOND));
+	    player.setHealth(0.0);
+	    
+	    // The Player should have lost their inventory
+	    assertTrue(player.isDead());
+	    assertEquals(Material.AIR, player.getInventory().getItem(0).getType());
+	}
+    
+    @Test
+    public void testKeepInventoryTrue() {
+        World world = player.getWorld();
+        world.setGameRule(GameRule.KEEP_INVENTORY, true);
+        
+        player.getInventory().setItem(0, new ItemStack(Material.DIAMOND));
+        player.setHealth(0.0);
+        
+        // The Player should have kept their inventory
+        assertTrue(player.isDead());
+        assertEquals(Material.DIAMOND, player.getInventory().getItem(0).getType());
+    }
 
 }

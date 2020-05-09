@@ -337,8 +337,13 @@ public abstract class InventoryMock implements Inventory
 	@Override
 	public int firstEmpty()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		for (int i = 0; i < getSize(); i++) {
+		    if (items[i] == null || items[i].getType() == Material.AIR) {
+		        return i;
+		    }
+		}
+
+		return -1;
 	}
 	
 	@Override
@@ -358,15 +363,13 @@ public abstract class InventoryMock implements Inventory
 	@Override
 	public void clear(int index)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		items[index] = null;
 	}
 	
 	@Override
 	public void clear()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Arrays.fill(items, null);
 	}
 	
 	@Override

@@ -35,6 +35,10 @@ public class ItemMetaMock implements ItemMeta, Damageable {
     }
 
     public ItemMetaMock(ItemMeta meta) {
+        unbreakable = meta.isUnbreakable();
+        enchants = new HashMap<>(meta.getEnchants());
+        customModelData = meta.hasCustomModelData() ? meta.getCustomModelData() : null;
+        
         if (meta.hasDisplayName()) {
             displayName = meta.getDisplayName();
         }
@@ -43,6 +47,9 @@ public class ItemMetaMock implements ItemMeta, Damageable {
         }
         if (meta instanceof Damageable) {
             this.damage = ((Damageable) meta).getDamage();
+        }
+        if (meta instanceof ItemMetaMock) {
+            this.persistentDataContainer = ((ItemMetaMock) meta).persistentDataContainer;
         }
     }
 
@@ -126,6 +133,10 @@ public class ItemMetaMock implements ItemMeta, Damageable {
         int result = 1;
         result = prime * result + ((displayName == null) ? 0 : displayName.hashCode());
         result = prime * result + ((lore == null) ? 0 : lore.hashCode());
+        result = prime * result + Boolean.hashCode(unbreakable);
+        result = prime * result + enchants.hashCode();
+        result = prime * result + persistentDataContainer.hashCode();
+        result = prime * result + ((customModelData == null) ? 0 : customModelData.hashCode());
         return result;
     }
 
@@ -145,6 +156,10 @@ public class ItemMetaMock implements ItemMeta, Damageable {
             ItemMetaMock meta = (ItemMetaMock) super.clone();
             meta.displayName = displayName;
             meta.lore = lore;
+            meta.unbreakable = unbreakable;
+            meta.customModelData = customModelData;
+            meta.enchants = new HashMap<>(enchants);
+            meta.persistentDataContainer = new PersistentDataContainerMock((PersistentDataContainerMock) persistentDataContainer);
             return meta;
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException(e);
