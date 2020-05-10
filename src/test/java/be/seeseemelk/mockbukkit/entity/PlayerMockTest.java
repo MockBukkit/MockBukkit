@@ -56,7 +56,9 @@ import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 public class PlayerMockTest
 {
 	// Taken from https://minecraft.gamepedia.com/Experience#Leveling_up
-	private static int[] expRequired = new int[]{7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 42, 47, 52, 57, 62, 67, 72, 77, 82, 87, 92, 97, 102, 107, 112, 121, 130, 139, 148, 157, 166, 175, 184, 193};
+	private static int[] expRequired =
+	{ 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 42, 47, 52, 57, 62, 67, 72, 77, 82, 87, 92, 97, 102,
+			107, 112, 121, 130, 139, 148, 157, 166, 175, 184, 193 };
 	private ServerMock server;
 	private UUID uuid;
 	private PlayerMock player;
@@ -81,11 +83,11 @@ public class PlayerMockTest
 		assertNotNull(player.getInventory());
 	}
 
-    @Test
-    public void testEnderChest()
-    {
-        assertTrue(player.getEnderChest() instanceof EnderChestInventoryMock);
-    }
+	@Test
+	public void testEnderChest()
+	{
+		assertTrue(player.getEnderChest() instanceof EnderChestInventoryMock);
+	}
 
 	@Test
 	public void getInventory_Twice_SameInventory()
@@ -203,7 +205,7 @@ public class PlayerMockTest
 	{
 		player.damage(50.0, player);
 		assertEquals(0, player.getHealth(), 0);
-        assertTrue(player.isDead());
+		assertTrue(player.isDead());
 		server.getPluginManager().assertEventFired(EntityDamageEvent.class);
 		server.getPluginManager().assertEventFired(PlayerDeathEvent.class);
 	}
@@ -213,7 +215,7 @@ public class PlayerMockTest
 	{
 		player.damage(player.getHealth());
 		assertEquals(0, player.getHealth(), 0);
-        assertTrue(player.isDead());
+		assertTrue(player.isDead());
 		server.getPluginManager().assertEventFired(EntityDamageEvent.class);
 		server.getPluginManager().assertEventFired(PlayerDeathEvent.class);
 	}
@@ -402,7 +404,8 @@ public class PlayerMockTest
 	@Test
 	public void simulateBlockDamage_NotSurvival_BlockNotDamaged()
 	{
-		for (GameMode gm : new GameMode[]{GameMode.CREATIVE, GameMode.ADVENTURE, GameMode.SPECTATOR})
+		for (GameMode gm : new GameMode[]
+		{ GameMode.CREATIVE, GameMode.ADVENTURE, GameMode.SPECTATOR })
 		{
 			player.setGameMode(gm);
 			Block block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
@@ -516,10 +519,9 @@ public class PlayerMockTest
 		try
 		{
 			plugin.barrier.await(3, TimeUnit.SECONDS);
-		}
-		catch (InterruptedException | BrokenBarrierException e)
-		{}
-		catch (TimeoutException e)
+		} catch (InterruptedException | BrokenBarrierException e)
+		{
+		} catch (TimeoutException e)
 		{
 			fail("Async event was not fired");
 		}
@@ -611,7 +613,7 @@ public class PlayerMockTest
 		{
 			assertEquals(0, player.getExp(), 0);
 			player.giveExp(expRequired[i]);
-			assertEquals(i+1, player.getLevel());
+			assertEquals(i + 1, player.getLevel());
 		}
 	}
 
@@ -686,114 +688,127 @@ public class PlayerMockTest
 	}
 
 	@Test
-	public void getFood_LevelDefault20(){
+	public void getFood_LevelDefault20()
+	{
 		int foodLevel = player.getFoodLevel();
 		Assert.assertEquals(foodLevel, 20);
 	}
 
 	@Test
-	public void getFood_LevelChange(){
+	public void getFood_LevelChange()
+	{
 		player.setFoodLevel(10);
 		Assert.assertEquals(player.getFoodLevel(), 10);
 	}
 
 	@Test
-	public void getPlayer_SneakingDefault(){
+	public void getPlayer_SneakingDefault()
+	{
 		boolean sneaking = player.isSneaking();
 		assertFalse(sneaking);
 	}
 
 	@Test
-	public void getPlayer_SneakingChange(){
+	public void getPlayer_SneakingChange()
+	{
 		player.setSneaking(true);
 		assertTrue(player.isSneaking());
 	}
-	
+
 	@Test
-	public void getPlayer_SneakingEyeHeight() {
+	public void getPlayer_SneakingEyeHeight()
+	{
 		player.setSneaking(true);
 		assertNotEquals(player.getEyeHeight(), player.getEyeHeight(true));
 	}
-	
+
 	@Test
-	public void getPlayer_EyeLocationDiffers(){
+	public void getPlayer_EyeLocationDiffers()
+	{
 		assertNotEquals(player.getEyeLocation(), player.getLocation());
 	}
 
 	@Test
-	public void dispatchPlayer_PlayerJoinEventFired() {
-		PlayerMock player = server.addPlayer();
+	public void dispatchPlayer_PlayerJoinEventFired()
+	{
+		server.addPlayer();
 		PluginManagerMock pluginManager = server.getPluginManager();
 		pluginManager.assertEventFired(event -> event instanceof PlayerJoinEvent);
 	}
-	
+
 	@Test
-	public void testCompassDefaultTargetSpawnLocation() {
-	    assertEquals(player.getCompassTarget(), player.getLocation());
+	public void testCompassDefaultTargetSpawnLocation()
+	{
+		assertEquals(player.getCompassTarget(), player.getLocation());
 	}
-    
-    @Test
-    public void testSetCompassTarget() {
-        Location loc = new Location(player.getWorld(), 12345678, 100, 12345678);
 
-        player.setCompassTarget(loc);
-        assertEquals(loc, player.getCompassTarget());
-        
-        player.setCompassTarget(loc);
-        assertNotNull(player.getCompassTarget());
-    }
-    
-    @Test
-    public void testBedSpawnLocation() {
-        Location loc = new Location(player.getWorld(), 400, 80, 400);
-        loc.getBlock().setType(Material.LIGHT_BLUE_BED);
-
-        assertNull(player.getBedSpawnLocation());
-
-        player.setBedSpawnLocation(loc);
-        assertEquals(loc, player.getBedSpawnLocation());
-
-        player.setBedSpawnLocation(null);
-        assertNull(player.getBedSpawnLocation());
-    }
-    
-    @Test
-    public void testBedSpawnLocationForce() {
-        Location loc = new Location(player.getWorld(), 400, 80, 400);
-
-        // Location is not actually a Bed and it should fail
-        player.setBedSpawnLocation(loc);
-        assertNull(player.getBedSpawnLocation());
-
-        // Force the Bed Spawn Location
-        player.setBedSpawnLocation(loc, true);
-        assertEquals(loc, player.getBedSpawnLocation());
-    }
-	
 	@Test
-	public void testKeepInventoryFalse() {
-	    World world = player.getWorld();
-	    world.setGameRule(GameRule.KEEP_INVENTORY, false);
-	    
-	    player.getInventory().setItem(0, new ItemStack(Material.DIAMOND));
-	    player.setHealth(0.0);
-	    
-	    // The Player should have lost their inventory
-	    assertTrue(player.isDead());
-	    assertEquals(Material.AIR, player.getInventory().getItem(0).getType());
+	public void testSetCompassTarget()
+	{
+		Location loc = new Location(player.getWorld(), 12345678, 100, 12345678);
+
+		player.setCompassTarget(loc);
+		assertEquals(loc, player.getCompassTarget());
+
+		player.setCompassTarget(loc);
+		assertNotNull(player.getCompassTarget());
 	}
-    
-    @Test
-    public void testKeepInventoryTrue() {
-        World world = player.getWorld();
-        world.setGameRule(GameRule.KEEP_INVENTORY, true);
-        
-        player.getInventory().setItem(0, new ItemStack(Material.DIAMOND));
-        player.setHealth(0.0);
-        
-        // The Player should have kept their inventory
-        assertTrue(player.isDead());
-        assertEquals(Material.DIAMOND, player.getInventory().getItem(0).getType());
-    }
+
+	@Test
+	public void testBedSpawnLocation()
+	{
+		Location loc = new Location(player.getWorld(), 400, 80, 400);
+		loc.getBlock().setType(Material.LIGHT_BLUE_BED);
+
+		assertNull(player.getBedSpawnLocation());
+
+		player.setBedSpawnLocation(loc);
+		assertEquals(loc, player.getBedSpawnLocation());
+
+		player.setBedSpawnLocation(null);
+		assertNull(player.getBedSpawnLocation());
+	}
+
+	@Test
+	public void testBedSpawnLocationForce()
+	{
+		Location loc = new Location(player.getWorld(), 400, 80, 400);
+
+		// Location is not actually a Bed and it should fail
+		player.setBedSpawnLocation(loc);
+		assertNull(player.getBedSpawnLocation());
+
+		// Force the Bed Spawn Location
+		player.setBedSpawnLocation(loc, true);
+		assertEquals(loc, player.getBedSpawnLocation());
+	}
+
+	@Test
+	public void testKeepInventoryFalse()
+	{
+		World world = player.getWorld();
+		world.setGameRule(GameRule.KEEP_INVENTORY, false);
+
+		player.getInventory().setItem(0, new ItemStack(Material.DIAMOND));
+		player.setHealth(0.0);
+
+		// The Player should have lost their inventory
+		assertTrue(player.isDead());
+		assertEquals(Material.AIR, player.getInventory().getItem(0).getType());
+	}
+
+	@Test
+	public void testKeepInventoryTrue()
+	{
+		World world = player.getWorld();
+		world.setGameRule(GameRule.KEEP_INVENTORY, true);
+
+		player.getInventory().setItem(0, new ItemStack(Material.DIAMOND));
+		player.setHealth(0.0);
+
+		// The Player should have kept their inventory
+		assertTrue(player.isDead());
+		assertEquals(Material.DIAMOND, player.getInventory().getItem(0).getType());
+	}
 
 }

@@ -8,29 +8,30 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.ServerMock;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ItemMetaMockTest {
+import be.seeseemelk.mockbukkit.MockBukkit;
+
+public class ItemMetaMockTest
+{
 	private ItemMetaMock meta;
 
 	@Before
-	public void setUp() {
-		ServerMock mock = MockBukkit.mock();
+	public void setUp()
+	{
+		MockBukkit.mock();
 		meta = new ItemMetaMock();
 	}
+
 	@After
-	public void tearDown(){
+	public void tearDown()
+	{
 		MockBukkit.unmock();
 	}
 
@@ -312,35 +313,38 @@ public class ItemMetaMockTest {
 	}
 
 	@Test
-	public void assertDamageCorrectlySet() {
+	public void assertDamageCorrectlySet()
+	{
 		int value = 500;
 		meta.setDamage(value);
 		ItemStack item = new ItemStack(Material.DIAMOND_SWORD);
 		item.setItemMeta(meta);
 
 		Damageable itemMeta = (Damageable) item.getItemMeta();
-        int damage = itemMeta.getDamage();
-        assertEquals(value, damage);
-        assertTrue(itemMeta.hasDamage());
+		int damage = itemMeta.getDamage();
+		assertEquals(value, damage);
+		assertTrue(itemMeta.hasDamage());
 	}
 
-    @Test
-    public void assertNoDamage() {
-        meta.setDamage(0);
-        ItemStack item = new ItemStack(Material.DIAMOND_SWORD);
-        item.setItemMeta(meta);
+	@Test
+	public void assertNoDamage()
+	{
+		meta.setDamage(0);
+		ItemStack item = new ItemStack(Material.DIAMOND_SWORD);
+		item.setItemMeta(meta);
 
-        Damageable itemMeta = (Damageable) item.getItemMeta();
-        int damage = itemMeta.getDamage();
-        assertEquals(0, damage);
-        assertFalse(itemMeta.hasDamage());
-    }
+		Damageable itemMeta = (Damageable) item.getItemMeta();
+		int damage = itemMeta.getDamage();
+		assertEquals(0, damage);
+		assertFalse(itemMeta.hasDamage());
+	}
 
 	@Test
-	public void assertCustomModelData() {
-        meta.setCustomModelData(null);
-        assertFalse(meta.hasCustomModelData());
-        
+	public void assertCustomModelData()
+	{
+		meta.setCustomModelData(null);
+		assertFalse(meta.hasCustomModelData());
+
 		meta.setCustomModelData(100);
 		assertTrue(meta.hasCustomModelData());
 		assertEquals(100, meta.getCustomModelData());

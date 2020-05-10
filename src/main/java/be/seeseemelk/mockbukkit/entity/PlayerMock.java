@@ -93,6 +93,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 
 	private Location compassTarget;
     private Location bedSpawnLocation;
+    private ItemStack cursor = null;
 
 	public PlayerMock(ServerMock server, String name)
 	{
@@ -107,8 +108,9 @@ public class PlayerMock extends LivingEntityMock implements Player
 		setDisplayName(name);
 		this.online = true;
 
-		if (Bukkit.getWorlds().isEmpty())
+		if (Bukkit.getWorlds().isEmpty()) {
 			MockBukkit.getMock().addSimpleWorld("world");
+		}
 
 		setLocation(Bukkit.getWorlds().get(0).getSpawnLocation().clone());
 		setCompassTarget(getLocation());
@@ -130,8 +132,8 @@ public class PlayerMock extends LivingEntityMock implements Player
 	{
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + Objects.hash(attributes, exp, expLevel, expTotal, displayName, gamemode, getHealth(), inventory, inventoryView,
-				getMaxHealth(), online, whitelisted);
+		result = prime * result + Objects.hash(attributes, exp, expLevel, expTotal, displayName, gamemode, getHealth(), inventory, enderChest, inventoryView,
+				getMaxHealth(), online, whitelisted, compassTarget, bedSpawnLocation, cursor);
 		return result;
 	}
 
@@ -144,11 +146,13 @@ public class PlayerMock extends LivingEntityMock implements Player
 			return false;
 		if (!(obj instanceof PlayerMock))
 			return false;
+
 		PlayerMock other = (PlayerMock) obj;
 		return Objects.equals(attributes, other.attributes) && Objects.equals(displayName, other.displayName)
 				&& gamemode == other.gamemode
 				&& Double.doubleToLongBits(getHealth()) == Double.doubleToLongBits(other.getHealth())
 				&& Objects.equals(inventory, other.inventory) && Objects.equals(inventoryView, other.inventoryView)
+				&& Objects.equals(cursor, other.cursor)
 				&& Double.doubleToLongBits(getMaxHealth()) == Double.doubleToLongBits(other.getMaxHealth())
 				&& online == other.online && whitelisted == other.whitelisted && isDead() == other.isDead();
 	}
@@ -265,6 +269,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 		{
 			return this;
 		}
+
 		return null;
 	}
 
@@ -378,15 +383,13 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public ItemStack getItemOnCursor()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return cursor;
 	}
 
 	@Override
 	public void setItemOnCursor(ItemStack item)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.cursor = item;
 	}
 
 	@Override

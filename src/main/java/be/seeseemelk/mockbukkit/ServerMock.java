@@ -22,9 +22,23 @@ import java.util.logging.LogManager;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-import org.bukkit.*;
+import org.bukkit.BanEntry;
+import org.bukkit.BanList;
 import org.bukkit.BanList.Type;
+import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
+import org.bukkit.Keyed;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.Server;
+import org.bukkit.StructureType;
+import org.bukkit.Tag;
+import org.bukkit.UnsafeValues;
 import org.bukkit.Warning.WarningState;
+import org.bukkit.World;
+import org.bukkit.WorldCreator;
 import org.bukkit.advancement.Advancement;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.boss.BarColor;
@@ -73,23 +87,25 @@ import be.seeseemelk.mockbukkit.scoreboard.ScoreboardManagerMock;
 @SuppressWarnings("deprecation")
 public class ServerMock implements Server
 {
+	private static final String BUKKIT_VERSION = "1.15.2";
+	private static final String JOIN_MESSAGE = "%s has joined the server.";
+
 	private final Logger logger;
 	private final Thread mainThread;
 	private final MockUnsafeValues unsafe = new MockUnsafeValues();
-	private static final String JOIN_MESSAGE = "%s has joined the server.";
 
 	private final List<PlayerMock> players = new ArrayList<>();
 	private final List<PlayerMock> offlinePlayers = new ArrayList<>();
 	private final Set<EntityMock> entities = new HashSet<>();
 	private final List<World> worlds = new ArrayList<>();
-	private List<Recipe> recipes = new LinkedList<>();
+	private final List<Recipe> recipes = new LinkedList<>();
 	private final ItemFactory factory = new ItemFactoryMock();
 	private final PlayerMockFactory playerFactory = new PlayerMockFactory(this);
 	private final PluginManagerMock pluginManager = new PluginManagerMock(this);
 	private final ScoreboardManagerMock scoreboardManager = new ScoreboardManagerMock();
+	private final BukkitSchedulerMock scheduler = new BukkitSchedulerMock();
+	private final PlayerList playerList = new PlayerList();
 	private ConsoleCommandSender consoleSender;
-	private BukkitSchedulerMock scheduler = new BukkitSchedulerMock();
-	private PlayerList playerList = new PlayerList();
 	private GameMode defaultGameMode = GameMode.SURVIVAL;
 	private MockCommandMap commandMap;
 
@@ -98,12 +114,12 @@ public class ServerMock implements Server
 		mainThread = Thread.currentThread();
 		logger = Logger.getLogger("ServerMock");
 		commandMap = new MockCommandMap(this);
+
 		try
 		{
 			InputStream stream = ClassLoader.getSystemResourceAsStream("logger.properties");
 			LogManager.getLogManager().readConfiguration(stream);
-		}
-		catch (IOException e)
+		} catch (IOException e)
 		{
 			logger.warning("Could not load file logger.properties");
 		}
@@ -111,11 +127,9 @@ public class ServerMock implements Server
 	}
 
 	/**
-	 * Checks if we are on the main thread. The main thread is the thread used to
-	 * create this instance of the mock server.
+	 * Checks if we are on the main thread. The main thread is the thread used to create this instance of the mock server.
 	 *
-	 * @return {@code true} if we are on the main thread, {@code false} if we are
-	 *         running on a different thread.
+	 * @return {@code true} if we are on the main thread, {@code false} if we are running on a different thread.
 	 */
 	public boolean isOnMainThread()
 	{
@@ -123,18 +137,18 @@ public class ServerMock implements Server
 	}
 
 	/**
-	 * Checks if we are running a method on the main thread. If not, a
-	 * `ThreadAccessException` is thrown.
+	 * Checks if we are running a method on the main thread. If not, a `ThreadAccessException` is thrown.
 	 */
 	public void assertMainThread()
 	{
 		if (!isOnMainThread())
+		{
 			throw new ThreadAccessException("The Bukkit API was accessed from asynchronous code.");
+		}
 	}
 
 	/**
-	 * Registers an entity so that the server can track it more easily. Should only
-	 * be used internally.
+	 * Registers an entity so that the server can track it more easily. Should only be used internally.
 	 *
 	 * @param entity The entity to register
 	 */
@@ -164,13 +178,15 @@ public class ServerMock implements Server
 		assertMainThread();
 		players.add(player);
 		offlinePlayers.add(player);
-		PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(player, String.format(JOIN_MESSAGE, player.getDisplayName()));
+		PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(player,
+				String.format(JOIN_MESSAGE, player.getDisplayName()));
 		Bukkit.getPluginManager().callEvent(playerJoinEvent);
 		registerEntity(player);
 	}
 
 	/**
 	 * Creates a random player and adds it.
+	 * 
 	 * @return The player that was added.
 	 */
 	public PlayerMock addPlayer()
@@ -183,6 +199,7 @@ public class ServerMock implements Server
 
 	/**
 	 * Creates a player with a given name and adds it.
+	 * 
 	 * @param name The name to give to the player.
 	 * @return The added player.
 	 */
@@ -195,8 +212,8 @@ public class ServerMock implements Server
 	}
 
 	/**
-	 * Set the numbers of mock players that are on this server. Note that it will
-	 * remove all players that are already on this server.
+	 * Set the numbers of mock players that are on this server. Note that it will remove all players that are already on
+	 * this server.
 	 *
 	 * @param num The number of players that are on this server.
 	 */
@@ -204,14 +221,14 @@ public class ServerMock implements Server
 	{
 		assertMainThread();
 		players.clear();
+
 		for (int i = 0; i < num; i++)
 			addPlayer();
 	}
 
 	/**
-	 * Set the numbers of mock offline players that are on this server. Note that
-	 * even players that are online are also considered offline player because an
-	 * {@link OfflinePlayer} really just refers to anyone that has at some point in
+	 * Set the numbers of mock offline players that are on this server. Note that even players that are online are also
+	 * considered offline player because an {@link OfflinePlayer} really just refers to anyone that has at some point in
 	 * time played on the server.
 	 *
 	 * @param num The number of players that are on this server.
@@ -231,8 +248,7 @@ public class ServerMock implements Server
 	}
 
 	/**
-	 * Get a specific mock player. A player's number will never change between
-	 * invocations of {@link #setPlayers(int)}.
+	 * Get a specific mock player. A player's number will never change between invocations of {@link #setPlayers(int)}.
 	 *
 	 * @param num The number of the player to retrieve.
 	 * @return The chosen player.
@@ -242,8 +258,7 @@ public class ServerMock implements Server
 		if (num < 0 || num >= players.size())
 		{
 			throw new ArrayIndexOutOfBoundsException();
-		}
-		else
+		} else
 		{
 			return players.get(num);
 		}
@@ -279,7 +294,7 @@ public class ServerMock implements Server
 	 * Executes a command as the console.
 	 *
 	 * @param command The command to execute.
-	 * @param args The arguments to pass to the commands.
+	 * @param args    The arguments to pass to the commands.
 	 * @return The value returned by {@link Command#execute}.
 	 */
 	public CommandResult executeConsole(Command command, String... args)
@@ -292,7 +307,7 @@ public class ServerMock implements Server
 	 * Executes a command as the console.
 	 *
 	 * @param command The command to execute.
-	 * @param args The arguments to pass to the commands.
+	 * @param args    The arguments to pass to the commands.
 	 * @return The value returned by {@link Command#execute}.
 	 */
 	public CommandResult executeConsole(String command, String... args)
@@ -305,12 +320,13 @@ public class ServerMock implements Server
 	 * Executes a command as a player.
 	 *
 	 * @param command The command to execute.
-	 * @param args The arguments to pass to the commands.
+	 * @param args    The arguments to pass to the commands.
 	 * @return The value returned by {@link Command#execute}.
 	 */
 	public CommandResult executePlayer(Command command, String... args)
 	{
 		assertMainThread();
+
 		if (!players.isEmpty())
 			return execute(command, players.get(0), args);
 		else
@@ -321,7 +337,7 @@ public class ServerMock implements Server
 	 * Executes a command as a player.
 	 *
 	 * @param command The command to execute.
-	 * @param args The arguments to pass to the commands.
+	 * @param args    The arguments to pass to the commands.
 	 * @return The value returned by {@link Command#execute}.
 	 */
 	public CommandResult executePlayer(String command, String... args)
@@ -334,15 +350,16 @@ public class ServerMock implements Server
 	 * Executes a command.
 	 *
 	 * @param command The command to execute.
-	 * @param sender The person that executed the command.
-	 * @param args The arguments to pass to the commands.
+	 * @param sender  The person that executed the command.
+	 * @param args    The arguments to pass to the commands.
 	 * @return The value returned by {@link Command#execute}.
 	 */
 	public CommandResult execute(Command command, CommandSender sender, String... args)
 	{
 		assertMainThread();
 		if (!(sender instanceof MessageTarget))
-			throw new IllegalArgumentException("Only a MessageTarget can be the sender of the command");
+			throw new IllegalArgumentException(
+					"Only a MessageTarget can be the sender of the command");
 
 		boolean status = command.execute(sender, command.getName(), args);
 		return new CommandResult(status, (MessageTarget) sender);
@@ -352,8 +369,8 @@ public class ServerMock implements Server
 	 * Executes a command.
 	 *
 	 * @param command The command to execute.
-	 * @param sender The person that executed the command.
-	 * @param args The arguments to pass to the commands.
+	 * @param sender  The person that executed the command.
+	 * @param args    The arguments to pass to the commands.
 	 * @return The value returned by {@link Command#execute}.
 	 */
 	public CommandResult execute(String command, CommandSender sender, String... args)
@@ -377,7 +394,7 @@ public class ServerMock implements Server
 	@Override
 	public String getBukkitVersion()
 	{
-		return "1.12.1";
+		return BUKKIT_VERSION;
 	}
 
 	@Override
@@ -421,16 +438,17 @@ public class ServerMock implements Server
 	public Player getPlayerExact(String name)
 	{
 		assertMainThread();
-		return this.players.stream().filter(playerMock -> playerMock.getName().toLowerCase(Locale.ENGLISH).equals(name.toLowerCase(Locale.ENGLISH))).findFirst().orElse(null);
+		return this.players.stream().filter(playerMock -> playerMock.getName()
+				.toLowerCase(Locale.ENGLISH).equals(name.toLowerCase(Locale.ENGLISH))).findFirst()
+				.orElse(null);
 	}
 
 	@Override
 	public List<Player> matchPlayer(String name)
 	{
 		assertMainThread();
-		return players.stream()
-				.filter(player -> player.getName().toLowerCase(Locale.ENGLISH).startsWith(name.toLowerCase(Locale.ENGLISH)))
-				.collect(Collectors.toList());
+		return players.stream().filter(player -> player.getName().toLowerCase(Locale.ENGLISH)
+				.startsWith(name.toLowerCase(Locale.ENGLISH))).collect(Collectors.toList());
 	}
 
 	@Override
@@ -457,10 +475,8 @@ public class ServerMock implements Server
 	 * Checks if the label given is a possible label of the command.
 	 *
 	 * @param command The command to check against.
-	 * @param label The label that should be checked if it's a label for the
-	 *            command.
-	 * @return {@code true} if the label is a label of the command, {@code false} if
-	 *         it's not.
+	 * @param label   The label that should be checked if it's a label for the command.
+	 * @return {@code true} if the label is a label of the command, {@code false} if it's not.
 	 */
 	private boolean isLabelOfCommand(PluginCommand command, String label)
 	{
@@ -509,23 +525,24 @@ public class ServerMock implements Server
 		return consoleSender;
 	}
 
-	public InventoryMock createInventory(InventoryHolder owner, InventoryType type, String title, int size)
+	public InventoryMock createInventory(InventoryHolder owner, InventoryType type, String title,
+			int size)
 	{
 		assertMainThread();
 		InventoryMock inventory;
 		switch (type)
 		{
-			case PLAYER:
-				inventory = new PlayerInventoryMock((HumanEntity) owner);
-				return inventory;
-			case CHEST:
-				inventory = new ChestInventoryMock(owner, size > 0 ? size : 9 * 3);
-				return inventory;
-			case ENDER_CHEST:
-			    inventory = new EnderChestInventoryMock(owner);
-			    return inventory;
-			default:
-				throw new UnimplementedOperationException("Inventory type not yet supported");
+		case PLAYER:
+			inventory = new PlayerInventoryMock((HumanEntity) owner);
+			return inventory;
+		case CHEST:
+			inventory = new ChestInventoryMock(owner, size > 0 ? size : 9 * 3);
+			return inventory;
+		case ENDER_CHEST:
+			inventory = new EnderChestInventoryMock(owner);
+			return inventory;
+		default:
+			throw new UnimplementedOperationException("Inventory type not yet supported");
 		}
 	}
 
@@ -615,11 +632,11 @@ public class ServerMock implements Server
 	{
 		switch (type)
 		{
-			case IP:
-				return playerList.getIPBans();
-			case NAME:
-			default:
-				return playerList.getProfileBans();
+		case IP:
+			return playerList.getIPBans();
+		case NAME:
+		default:
+			return playerList.getProfileBans();
 		}
 	}
 
@@ -667,7 +684,8 @@ public class ServerMock implements Server
 	public List<Recipe> getRecipesFor(ItemStack result)
 	{
 		assertMainThread();
-		return recipes.stream().filter(recipe -> recipe.getResult().equals(result)).collect(Collectors.toList());
+		return recipes.stream().filter(recipe -> recipe.getResult().equals(result))
+				.collect(Collectors.toList());
 	}
 
 	@Override
@@ -1178,15 +1196,16 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public ItemStack createExplorerMap(World world, Location location, StructureType structureType, int radius,
-									   boolean findUnexplored)
+	public ItemStack createExplorerMap(World world, Location location, StructureType structureType,
+			int radius, boolean findUnexplored)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public KeyedBossBar createBossBar(NamespacedKey key, String title, BarColor color, BarStyle style, BarFlag... flags)
+	public KeyedBossBar createBossBar(NamespacedKey key, String title, BarColor color,
+			BarStyle style, BarFlag... flags)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1234,7 +1253,8 @@ public class ServerMock implements Server
 		throw new UnimplementedOperationException();
 	}
 
-	public MockCommandMap getCommandMap() {
+	public MockCommandMap getCommandMap()
+	{
 		return commandMap;
 	}
 
@@ -1255,7 +1275,22 @@ public class ServerMock implements Server
 	@Override
 	public boolean removeRecipe(NamespacedKey key)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		assertMainThread();
+
+		Iterator<Recipe> iterator = recipeIterator();
+
+		while (iterator.hasNext())
+		{
+			Recipe recipe = iterator.next();
+
+			// Seriously why can't the Recipe interface itself just extend Keyed...
+			if (recipe instanceof Keyed && ((Keyed) recipe).getKey().equals(key))
+			{
+				iterator.remove();
+				return true;
+			}
+		}
+
+		return false;
 	}
 }
