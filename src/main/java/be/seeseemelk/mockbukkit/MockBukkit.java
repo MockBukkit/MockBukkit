@@ -56,7 +56,6 @@ public class MockBukkit
 	 * @param serverMockImplementation your custom {@link ServerMock} implementation.
 	 * @return The provided {@link ServerMock}.
 	 */
-	@SuppressWarnings("unchecked")
 	public static <TServerMock extends ServerMock> TServerMock mock(TServerMock serverMockImplementation)
 	{
 		if (mock != null)
@@ -71,7 +70,7 @@ public class MockBukkit
 		Bukkit.setServer(mock);
 		mock.getLogger().setLevel(defaultLevel);
 
-		return (TServerMock) mock;
+		return serverMockImplementation;
 	}
 	
 	/**
