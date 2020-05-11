@@ -44,7 +44,7 @@ public class ZombieMock extends MonsterMock implements Zombie {
 
     /**
      * This are unimplemented because they Bukkit specifies they should always fail? (@Contract Tag)
-     * @param villager
+     * @param villager The villager to set?
      */
     @Override
     public void setVillager(boolean villager){
@@ -54,7 +54,7 @@ public class ZombieMock extends MonsterMock implements Zombie {
 
     /**
      * This are unimplemented because they Bukkit specifies they should always fail? (@Contract Tag)
-     * @param profession
+     * @param profession The profession to set?
      */
     @Override
     public void setVillagerProfession(Villager.Profession profession) {
