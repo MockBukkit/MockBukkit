@@ -53,6 +53,7 @@ public class MockBukkit
 	 * You can pass your own implementation of the {@link ServerMock} instance.
 	 * The instance you passed is returned.
 	 *
+	 * @param <TServerMock> The mock implementation to use.
 	 * @param serverMockImplementation your custom {@link ServerMock} implementation.
 	 * @return The provided {@link ServerMock}.
 	 */
@@ -115,8 +116,8 @@ public class MockBukkit
 
 	/**
 	 * Loads a plugin from a jar.
-	 * @param path Path to the jar.
-	 * @throws InvalidPluginException
+	 * @param jarFile Path to the jar.
+	 * @throws InvalidPluginException If an exception occured while loading a plugin.
 	 */
 	@SuppressWarnings({ "deprecation" })
 	public static void loadJar(File jarFile) throws InvalidPluginException
@@ -171,11 +172,9 @@ public class MockBukkit
 	 * Loads and enables a plugin for mocking. It receives the {@code plugin.yml} to
 	 * use as an extra {@link InputStream} argument.
 	 * 
-	 * @param <T>
-	 *            The plugin's main class to load.
-	 * @param plugin
-	 *            The plugin to load for mocking.
-	 * @param descriptionInput The input stream to use instead of {@code plugin.yml}
+	 * @param <T> The plugin's main class to load.
+	 * @param plugin The plugin to load for mocking.
+	 * @param descriptionFile The plugin description file to use instead of {@code plugin.yml}.
 	 * @param parameters
 	 *            Extra parameters to pass on to the plugin constructor.
 	 * @return An instance of the plugin's main class.
@@ -203,7 +202,7 @@ public class MockBukkit
 	 *            The plugin's main class to load.
 	 * @param plugin
 	 *            The plugin to load for mocking.
-	 * @param descriptionFile The file to use instead of {@code plugin.yml}.
+	 * @param descriptionInput The input stream to use instead of {@code plugin.yml}.
 	 * @param parameters
 	 *            Extra parameters to pass on to the plugin constructor.
 	 * @return An instance of the plugin's main class.
