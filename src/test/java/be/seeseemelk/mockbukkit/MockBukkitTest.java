@@ -51,6 +51,15 @@ public class MockBukkitTest
 		assertEquals(server, MockBukkit.getMock());
 		assertEquals(server, Bukkit.getServer());
 	}
+
+	@Test
+	public void mock_CustomServerMocked()
+	{
+		CustomServerMock server = MockBukkit.mock(new CustomServerMock());
+		assertNotNull(server);
+		assertEquals(server, MockBukkit.getMock());
+		assertEquals(server, Bukkit.getServer());
+	}
 	
 	@Test
 	public void isMocked_ServerNotMocked_False()
@@ -145,5 +154,8 @@ public class MockBukkitTest
 		assertThat(plugins.length, equalTo(1));
 		assertThat(plugins[0].getName(), equalTo("TestPlugin"));
 	}
-	
+
+	public static class CustomServerMock extends ServerMock
+	{
+	}
 }
