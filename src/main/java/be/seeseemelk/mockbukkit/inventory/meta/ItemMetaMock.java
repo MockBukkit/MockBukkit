@@ -4,6 +4,7 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
 
 import com.google.common.collect.Multimap;
+import com.google.common.collect.MultimapBuilder;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.enchantments.Enchantment;
@@ -222,10 +223,28 @@ public class ItemMetaMock implements ItemMeta, Damageable {
         }
     }
 
-    @Override
+	/**
+	 * Serializes the properties of an ItemMetaMock to a HashMap.
+	 * Unimplemented methods have values of null.
+	 * @return A HashMap of String, Object pairs representing the ItemMetaMock.
+	 */
+	@Override
     public Map<String, Object> serialize() {
-        // TODO Auto-generated method stub
-        throw new UnimplementedOperationException();
+		// Make new map and add relevant properties to it.
+	    HashMap<String, Object> map = new HashMap<String, Object>();
+	    map.put("displayName", this.displayName);
+	    map.put("lore", this.lore);
+	    map.put("localizedName", null); // Not implemented.
+	    map.put("enchants", this.enchants);
+	    map.put("itemFlags", this.hideFlags);
+	    map.put("unbreakable", this.unbreakable);
+	    map.put("attributeModifiers", null); // Not implemented.
+	    map.put("customTagContainer", null); // Not implemented.
+	    map.put("customModelData", this.customModelData);
+	    map.put("persistentDataContainer", this.persistentDataContainer);
+	    map.put("damage", this.damage);
+	    // Return map
+	    return map;
     }
 
     @Override
