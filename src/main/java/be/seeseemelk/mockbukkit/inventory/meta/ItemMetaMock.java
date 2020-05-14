@@ -21,7 +21,7 @@ import java.util.*;
 import static java.util.Objects.nonNull;
 
 @SuppressWarnings("deprecation")
-public class ItemMetaMock implements ItemMeta, Damageable {
+public class ItemMetaMock implements ItemMeta, Damageable, ConfigurationSerializable {
     
     private String displayName = null;
     private List<String> lore = null;
