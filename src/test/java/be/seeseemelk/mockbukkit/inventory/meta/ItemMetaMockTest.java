@@ -349,14 +349,14 @@ public class ItemMetaMockTest {
 
 		// Tests for displayName, Lore, enchants, unbreakable status, and damage
 		meta.setDisplayName("Test name");
-		meta.setLore(new ArrayList<String>() {{ add("Test lore"); }});
+		meta.setLore(Arrays.asList("Test lore"));
 		meta.setUnbreakable(true);
 		meta.setDamage(5);
 
 		HashMap<String, Object> expected = new HashMap<String, Object>() {
 			{
 				put("displayName","Test name");
-				put("lore", new ArrayList<String>() {{ add("Test lore"); }});
+				put("lore", Arrays.asList("Test lore"));
 				put("unbreakable", true);
 				put("damage", 5);
 			}
