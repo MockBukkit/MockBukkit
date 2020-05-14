@@ -35,6 +35,7 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerExpChangeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.junit.After;
@@ -784,6 +785,21 @@ public class PlayerMockTest
 	}
 
 	@Test
+	public void testBedSpawnLocationRespawn()
+	{
+		Location loc = new Location(player.getWorld(), 1230, 100, -421310);
+		assertNotEquals(loc, player.getLocation());
+
+		// Force the Bed Spawn Location
+		player.setBedSpawnLocation(loc, true);
+
+		player.setHealth(0);
+		player.respawn();
+
+		assertEquals(loc, player.getLocation());
+	}
+
+	@Test
 	public void testKeepInventoryFalse()
 	{
 		World world = player.getWorld();
@@ -809,6 +825,20 @@ public class PlayerMockTest
 		// The Player should have kept their inventory
 		assertTrue(player.isDead());
 		assertEquals(Material.DIAMOND, player.getInventory().getItem(0).getType());
+	}
+
+	@Test
+	public void testRespawnEventFired()
+	{
+		player.setHealth(0);
+		assertTrue(player.isDead());
+
+		player.respawn();
+
+		PluginManagerMock pluginManager = server.getPluginManager();
+		pluginManager.assertEventFired(event -> event instanceof PlayerRespawnEvent);
+
+		assertFalse(player.isDead());
 	}
 
 }
