@@ -4,9 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
@@ -344,5 +342,41 @@ public class ItemMetaMockTest {
 		meta.setCustomModelData(100);
 		assertTrue(meta.hasCustomModelData());
 		assertEquals(100, meta.getCustomModelData());
+	}
+
+	@Test
+	public void assertSerialize() {
+
+		// Tests for displayName, Lore, enchants, unbreakable status, and damage
+		meta.setDisplayName("Test name");
+		meta.setLore(Arrays.asList("Test lore"));
+		meta.setUnbreakable(true);
+		meta.setDamage(5);
+
+		HashMap<String, Object> expected = new HashMap<String, Object>() {
+			{
+				put("displayName","Test name");
+				put("lore", Arrays.asList("Test lore"));
+				put("unbreakable", true);
+				put("damage", 5);
+			}
+		};
+		Map<String, Object> actual = meta.serialize();
+
+			// Perform tests
+			assertEquals(expected.get("displayName"), actual.get("displayName"));
+			assertEquals(expected.get("lore"), actual.get("lore"));
+			assertEquals(expected.get("unbreakable"), actual.get("unbreakable"));
+			assertEquals(expected.get("damage"), actual.get("damage"));
+
+	}
+
+	@Test
+	public void assertDeserialize() {
+
+		Map<String, Object> actual = meta.serialize();
+
+		assertEquals(meta, ItemMetaMock.deserialize(actual));
+
 	}
 }
