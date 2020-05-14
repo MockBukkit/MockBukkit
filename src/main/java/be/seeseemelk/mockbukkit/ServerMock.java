@@ -22,6 +22,7 @@ import java.util.logging.LogManager;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
 import org.bukkit.*;
 import org.bukkit.BanList.Type;
 import org.bukkit.Warning.WarningState;
@@ -36,6 +37,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.command.PluginCommand;
+import org.bukkit.configuration.serialization.ConfigurationSerializable;
+import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
@@ -98,6 +101,7 @@ public class ServerMock implements Server
 		mainThread = Thread.currentThread();
 		logger = Logger.getLogger("ServerMock");
 		commandMap = new MockCommandMap(this);
+		ServerMock.registerSerializables();
 		try
 		{
 			InputStream stream = ClassLoader.getSystemResourceAsStream("logger.properties");
@@ -653,6 +657,14 @@ public class ServerMock implements Server
 		for (Player player : players)
 			player.sendMessage(message);
 		return players.size();
+	}
+
+	/**
+	 * Registers any classes that are serializable with the ConfigurationSerializable system of Bukkit.
+	 */
+	public static void registerSerializables()
+	{
+		ConfigurationSerialization.registerClass(ItemMetaMock.class);
 	}
 
 	@Override

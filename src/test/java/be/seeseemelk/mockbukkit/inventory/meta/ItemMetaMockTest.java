@@ -363,10 +363,20 @@ public class ItemMetaMockTest {
 		};
 		Map<String, Object> actual = meta.serialize();
 
-		// Perform tests
-		assertEquals(expected.get("displayName"), actual.get("displayName"));
-		assertEquals(expected.get("lore"), actual.get("lore"));
-		assertEquals(expected.get("unbreakable"), actual.get("unbreakable"));
-		assertEquals(expected.get("damage"), actual.get("damage"));
+			// Perform tests
+			assertEquals(expected.get("displayName"), actual.get("displayName"));
+			assertEquals(expected.get("lore"), actual.get("lore"));
+			assertEquals(expected.get("unbreakable"), actual.get("unbreakable"));
+			assertEquals(expected.get("damage"), actual.get("damage"));
+
+	}
+
+	@Test
+	public void assertDeserialize() {
+
+		Map<String, Object> actual = meta.serialize();
+
+		assertEquals(meta, ItemMetaMock.deserialize(actual));
+
 	}
 }

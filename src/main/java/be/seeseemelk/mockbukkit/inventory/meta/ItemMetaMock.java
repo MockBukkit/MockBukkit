@@ -7,6 +7,7 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.MultimapBuilder;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
+import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
@@ -30,7 +31,6 @@ public class ItemMetaMock implements ItemMeta, Damageable {
     private PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
     private boolean unbreakable = false;
     private Integer customModelData = null;
-
 
     public ItemMetaMock() {
     }
@@ -245,6 +245,28 @@ public class ItemMetaMock implements ItemMeta, Damageable {
 	    map.put("damage", this.damage);
 	    // Return map
 	    return map;
+    }
+
+	/**
+	 * Required method for Bukkit deserialization.
+	 * @param args A serialized ItemMetaMock object in a Map<String, Object> format.
+	 * @return A new instance of the ItemMetaMock class.
+	 */
+	public static ItemMetaMock deserialize(Map<String, Object> args) {
+		ItemMetaMock serialMock = new ItemMetaMock();
+
+		serialMock.displayName = (String) args.get("displayName");
+		serialMock.lore = (List<String>) args.get("lore");
+		// serialMock.setLocalizedName(); // localizedName is unimplemented in mock
+		serialMock.enchants = (Map<Enchantment, Integer>) args.get("enchants");
+		serialMock.hideFlags = (Set<ItemFlag>) args.get("itemFlags");
+		serialMock.unbreakable = (boolean) args.get("unbreakable");
+		// serialMock.setAttributeModifiers(); // AttributeModifiers are unimplemented in mock
+	    // customTagContainer is also unimplemented in mock.
+	    serialMock.customModelData = (Integer) args.get("customModelData");
+	    serialMock.persistentDataContainer = (PersistentDataContainer) args.get("persistentDataContainer");
+	    serialMock.damage = (Integer) args.get("damage");
+	    return serialMock;
     }
 
     @Override
