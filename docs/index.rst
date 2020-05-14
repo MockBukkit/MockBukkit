@@ -24,4 +24,5 @@ testing of plugins that use timers or delays.
    entity_mock.rst
    message_target.rst
    dependencies.rst
+   custom_server_mock.rst
 

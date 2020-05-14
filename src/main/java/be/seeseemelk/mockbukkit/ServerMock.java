@@ -50,6 +50,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.command.PluginCommand;
+import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
@@ -80,6 +81,7 @@ import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import be.seeseemelk.mockbukkit.inventory.ItemFactoryMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
 import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
 import be.seeseemelk.mockbukkit.scoreboard.ScoreboardManagerMock;
@@ -114,7 +116,8 @@ public class ServerMock implements Server
 		mainThread = Thread.currentThread();
 		logger = Logger.getLogger("ServerMock");
 		commandMap = new MockCommandMap(this);
-
+		ServerMock.registerSerializables();
+		
 		try
 		{
 			InputStream stream = ClassLoader.getSystemResourceAsStream("logger.properties");
@@ -670,6 +673,14 @@ public class ServerMock implements Server
 		for (Player player : players)
 			player.sendMessage(message);
 		return players.size();
+	}
+
+	/**
+	 * Registers any classes that are serializable with the ConfigurationSerializable system of Bukkit.
+	 */
+	public static void registerSerializables()
+	{
+		ConfigurationSerialization.registerClass(ItemMetaMock.class);
 	}
 
 	@Override
