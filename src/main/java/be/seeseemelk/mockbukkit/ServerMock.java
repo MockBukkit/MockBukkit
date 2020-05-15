@@ -1215,8 +1215,7 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public KeyedBossBar createBossBar(NamespacedKey key, String title, BarColor color,
-			BarStyle style, BarFlag... flags)
+	public KeyedBossBar createBossBar(NamespacedKey key, String title, BarColor color, BarStyle style, BarFlag... flags)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
