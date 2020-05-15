@@ -202,7 +202,8 @@ public class PlayerMock extends LivingEntityMock implements Player
 			}
 
 			return !event.isCancelled();
-		} else
+		}
+		else
 		{
 			return false;
 		}
@@ -228,24 +229,27 @@ public class PlayerMock extends LivingEntityMock implements Player
 			block.setType(Material.AIR);
 		return !event.isCancelled();
 	}
-	
+
 	/**
-	 * This method simulates the {@link Player} respawning and also calls a {@link PlayerRespawnEvent}.
-	 * Should the {@link Player} not be dead (when {@link #isDead()} returns false) then this will throw an {@link UnsupportedOperationException}.
-	 * Otherwise, the {@link Location} will be set to {@link Player#getBedSpawnLocation()} or {@link World#getSpawnLocation()}.
-	 * Lastly the health of this {@link Player} will be restored and set to the max health.
+	 * This method simulates the {@link Player} respawning and also calls a {@link PlayerRespawnEvent}. Should the
+	 * {@link Player} not be dead (when {@link #isDead()} returns false) then this will throw an
+	 * {@link UnsupportedOperationException}. Otherwise, the {@link Location} will be set to
+	 * {@link Player#getBedSpawnLocation()} or {@link World#getSpawnLocation()}. Lastly the health of this
+	 * {@link Player} will be restored and set to the max health.
 	 */
-	public void respawn() {
+	public void respawn()
+	{
 		Location respawnLocation = getBedSpawnLocation();
 		boolean isBedSpawn = respawnLocation != null;
-		
-		if (!isBedSpawn) {
+
+		if (!isBedSpawn)
+		{
 			respawnLocation = getLocation().getWorld().getSpawnLocation();
 		}
-		
+
 		PlayerRespawnEvent event = new PlayerRespawnEvent(this, respawnLocation, isBedSpawn);
 		Bukkit.getPluginManager().callEvent(event);
-		
+
 		// Reset location and health
 		setHealth(getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
 		setLocation(event.getRespawnLocation().clone());

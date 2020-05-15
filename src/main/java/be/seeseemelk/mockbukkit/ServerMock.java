@@ -74,6 +74,7 @@ import be.seeseemelk.mockbukkit.command.CommandResult;
 import be.seeseemelk.mockbukkit.command.ConsoleCommandSenderMock;
 import be.seeseemelk.mockbukkit.command.MessageTarget;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
+import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
 import be.seeseemelk.mockbukkit.inventory.ChestInventoryMock;
@@ -97,7 +98,7 @@ public class ServerMock implements Server
 	private final MockUnsafeValues unsafe = new MockUnsafeValues();
 
 	private final List<PlayerMock> players = new ArrayList<>();
-	private final List<PlayerMock> offlinePlayers = new ArrayList<>();
+	private final Set<OfflinePlayer> offlinePlayers = new HashSet<>();
 	private final Set<EntityMock> entities = new HashSet<>();
 	private final List<World> worlds = new ArrayList<>();
 	private final List<Recipe> recipes = new LinkedList<>();
@@ -117,12 +118,13 @@ public class ServerMock implements Server
 		logger = Logger.getLogger("ServerMock");
 		commandMap = new MockCommandMap(this);
 		ServerMock.registerSerializables();
-		
+
 		try
 		{
 			InputStream stream = ClassLoader.getSystemResourceAsStream("logger.properties");
 			LogManager.getLogManager().readConfiguration(stream);
-		} catch (IOException e)
+		}
+		catch (IOException e)
 		{
 			logger.warning("Could not load file logger.properties");
 		}
@@ -130,7 +132,8 @@ public class ServerMock implements Server
 	}
 
 	/**
-	 * Checks if we are on the main thread. The main thread is the thread used to create this instance of the mock server.
+	 * Checks if we are on the main thread. The main thread is the thread used to create this instance of the mock
+	 * server.
 	 *
 	 * @return {@code true} if we are on the main thread, {@code false} if we are running on a different thread.
 	 */
@@ -244,9 +247,8 @@ public class ServerMock implements Server
 
 		for (int i = 0; i < num; i++)
 		{
-			PlayerMock player = playerFactory.createRandomOfflinePlayer();
+			OfflinePlayer player = playerFactory.createRandomOfflinePlayer();
 			offlinePlayers.add(player);
-			registerEntity(player);
 		}
 	}
 
@@ -261,7 +263,8 @@ public class ServerMock implements Server
 		if (num < 0 || num >= players.size())
 		{
 			throw new ArrayIndexOutOfBoundsException();
-		} else
+		}
+		else
 		{
 			return players.get(num);
 		}
@@ -361,8 +364,7 @@ public class ServerMock implements Server
 	{
 		assertMainThread();
 		if (!(sender instanceof MessageTarget))
-			throw new IllegalArgumentException(
-					"Only a MessageTarget can be the sender of the command");
+			throw new IllegalArgumentException("Only a MessageTarget can be the sender of the command");
 
 		boolean status = command.execute(sender, command.getName(), args);
 		return new CommandResult(status, (MessageTarget) sender);
@@ -441,17 +443,18 @@ public class ServerMock implements Server
 	public Player getPlayerExact(String name)
 	{
 		assertMainThread();
-		return this.players.stream().filter(playerMock -> playerMock.getName()
-				.toLowerCase(Locale.ENGLISH).equals(name.toLowerCase(Locale.ENGLISH))).findFirst()
-				.orElse(null);
+		return this.players.stream().filter(
+				playerMock -> playerMock.getName().toLowerCase(Locale.ENGLISH).equals(name.toLowerCase(Locale.ENGLISH)))
+				.findFirst().orElse(null);
 	}
 
 	@Override
 	public List<Player> matchPlayer(String name)
 	{
 		assertMainThread();
-		return players.stream().filter(player -> player.getName().toLowerCase(Locale.ENGLISH)
-				.startsWith(name.toLowerCase(Locale.ENGLISH))).collect(Collectors.toList());
+		return players.stream().filter(
+				player -> player.getName().toLowerCase(Locale.ENGLISH).startsWith(name.toLowerCase(Locale.ENGLISH)))
+				.collect(Collectors.toList());
 	}
 
 	@Override
@@ -528,8 +531,7 @@ public class ServerMock implements Server
 		return consoleSender;
 	}
 
-	public InventoryMock createInventory(InventoryHolder owner, InventoryType type, String title,
-			int size)
+	public InventoryMock createInventory(InventoryHolder owner, InventoryType type, String title, int size)
 	{
 		assertMainThread();
 		InventoryMock inventory;
@@ -695,8 +697,7 @@ public class ServerMock implements Server
 	public List<Recipe> getRecipesFor(ItemStack result)
 	{
 		assertMainThread();
-		return recipes.stream().filter(recipe -> recipe.getResult().equals(result))
-				.collect(Collectors.toList());
+		return recipes.stream().filter(recipe -> recipe.getResult().equals(result)).collect(Collectors.toList());
 	}
 
 	@Override
@@ -975,13 +976,43 @@ public class ServerMock implements Server
 	@Override
 	public OfflinePlayer getOfflinePlayer(String name)
 	{
-		return getPlayer(name);
+		Player player = getPlayer(name);
+
+		if (player != null)
+		{
+			return player;
+		}
+
+		for (OfflinePlayer offlinePlayer : offlinePlayers)
+		{
+			if (offlinePlayer.getName().equals(name))
+			{
+				return offlinePlayer;
+			}
+		}
+
+		return new OfflinePlayerMock(name);
 	}
 
 	@Override
 	public OfflinePlayer getOfflinePlayer(UUID id)
 	{
-		return getPlayer(id);
+		Player player = getPlayer(id);
+
+		if (player != null)
+		{
+			return player;
+		}
+
+		for (OfflinePlayer offlinePlayer : offlinePlayers)
+		{
+			if (offlinePlayer.getUniqueId().equals(id))
+			{
+				return offlinePlayer;
+			}
+		}
+
+		return playerFactory.createRandomOfflinePlayer();
 	}
 
 	@Override
@@ -1207,8 +1238,8 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public ItemStack createExplorerMap(World world, Location location, StructureType structureType,
-			int radius, boolean findUnexplored)
+	public ItemStack createExplorerMap(World world, Location location, StructureType structureType, int radius,
+			boolean findUnexplored)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

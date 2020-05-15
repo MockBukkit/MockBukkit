@@ -9,20 +9,21 @@ import be.seeseemelk.mockbukkit.ServerMock;
 
 public final class PlayerMockFactory
 {
-	private static final String[] FIRST_NAMES = {"James", "Mary", "John", "Particia", "Robert", "Jennifer", "Michael", "Elizabeth", "William", "Linda"};
-	private static final String[] LAST_NAMES = {"Smith", "Johnson", "Jones", "Brown", "Davis", "Miller", "Wilson", "Moore", "Taylor", "Anderson"};
+	private static final String[] FIRST_NAMES = { "James", "Mary", "John", "Particia", "Robert", "Jennifer", "Michael", "Elizabeth", "William", "Linda" };
+	private static final String[] LAST_NAMES = { "Smith", "Johnson", "Jones", "Brown", "Davis", "Miller", "Wilson", "Moore", "Taylor", "Anderson" };
 
 	private final ServerMock server;
 	private Random random = new Random();
 	private Set<String> usedNames = new HashSet<>();
-	
+
 	public PlayerMockFactory(ServerMock server)
 	{
 		this.server = server;
 	}
-	
+
 	/**
 	 * Generates a random name.
+	 * 
 	 * @return A randomly generated name.
 	 */
 	private String getRandomName()
@@ -31,11 +32,11 @@ public final class PlayerMockFactory
 		String lastName = LAST_NAMES[random.nextInt(LAST_NAMES.length)];
 		return firstName + " " + lastName;
 	}
-	
+
 	/**
-	 * Gets a unique random name.
-	 * Any name that is generated will never be generated again.
-	 * @return A unique random name. 
+	 * Gets a unique random name. Any name that is generated will never be generated again.
+	 * 
+	 * @return A unique random name.
 	 */
 	private String getUniqueRandomName()
 	{
@@ -43,7 +44,7 @@ public final class PlayerMockFactory
 		{
 			throw new RuntimeException("Out of names");
 		}
-		
+
 		while (true)
 		{
 			String name = getRandomName();
@@ -57,6 +58,7 @@ public final class PlayerMockFactory
 
 	/**
 	 * Create a random player mock object with a unique name.
+	 * 
 	 * @return A newly created player mock object.
 	 */
 	public PlayerMock createRandomPlayer()
@@ -67,39 +69,12 @@ public final class PlayerMockFactory
 	}
 
 	/**
-	 * Create a random player mock object with a unique name.
-	 * It will not however contain a UUID. 
+	 * Create a random {@link OfflinePlayerMock} object with a unique name. It will not however contain a UUID.
+	 * 
 	 * @return A newly created player mock object.
 	 */
-	public PlayerMock createRandomOfflinePlayer()
+	public OfflinePlayerMock createRandomOfflinePlayer()
 	{
-		PlayerMock player = new PlayerMock(server, getUniqueRandomName());
-		return player;
+		return new OfflinePlayerMock(getUniqueRandomName());
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
