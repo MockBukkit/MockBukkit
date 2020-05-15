@@ -155,7 +155,8 @@ public abstract class InventoryMock implements Inventory
 				items[i] = item.clone();
 				items[i].setAmount(toAdd);
 				item.setAmount(item.getAmount() - toAdd);
-			} else if (item.isSimilar(oItem) && oItem.getAmount() < oItem.getMaxStackSize())
+			}
+			else if (item.isSimilar(oItem) && oItem.getAmount() < oItem.getMaxStackSize())
 			{
 				int toAdd = Math.min(item.getAmount(), item.getMaxStackSize() - oItem.getAmount());
 				oItem.setAmount(oItem.getAmount() + toAdd);
@@ -201,7 +202,8 @@ public abstract class InventoryMock implements Inventory
 			if (i < items.length && items[i] != null)
 			{
 				this.items[i] = items[i].clone();
-			} else
+			}
+			else
 			{
 				this.items[i] = null;
 			}

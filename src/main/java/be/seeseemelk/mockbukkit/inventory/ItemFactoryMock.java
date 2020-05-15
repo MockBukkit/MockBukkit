@@ -68,7 +68,8 @@ public class ItemFactoryMock implements ItemFactory
 		try
 		{
 			return getItemMetaClass(material).newInstance();
-		} catch (InstantiationException | IllegalAccessException e)
+		}
+		catch (InstantiationException | IllegalAccessException e)
 		{
 			throw new UnsupportedOperationException("Can't instantiate class");
 		}
@@ -93,7 +94,8 @@ public class ItemFactoryMock implements ItemFactory
 		if (meta1 != null && meta2 != null)
 		{
 			return meta1.equals(meta2);
-		} else
+		}
+		else
 		{
 			return false;
 		}
@@ -123,7 +125,8 @@ public class ItemFactoryMock implements ItemFactory
 
 			throw new NoSuchMethodException(
 					"Cannot find an ItemMeta constructor for the class \"" + meta.getClass().getName() + "\"");
-		} catch (SecurityException | InstantiationException | IllegalAccessException | InvocationTargetException
+		}
+		catch (SecurityException | InstantiationException | IllegalAccessException | InvocationTargetException
 				| NoSuchMethodException e)
 		{
 			throw new RuntimeException(e);
