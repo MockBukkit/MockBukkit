@@ -14,12 +14,16 @@ import be.seeseemelk.mockbukkit.inventory.meta.BookMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.EnchantedBookMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.KnowledgeBookMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.LeatherArmorMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.PotionMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.SkullMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.SuspiciousStewMetaMock;
 
 public class ItemFactoryMock implements ItemFactory
 {
+
+	private final Color defaultLeatherColor = Color.fromRGB(10511680);
+
 	private Class<? extends ItemMeta> getItemMetaClass(Material material)
 	{
 		switch (material)
@@ -35,8 +39,7 @@ public class ItemFactoryMock implements ItemFactory
 		case LEATHER_CHESTPLATE:
 		case LEATHER_HELMET:
 		case LEATHER_LEGGINGS:
-			// TODO Auto-generated method stub
-			throw new UnimplementedOperationException();
+			return LeatherArmorMetaMock.class;
 		case MAP:
 			// TODO Auto-generated method stub
 			throw new UnimplementedOperationException();
@@ -136,8 +139,7 @@ public class ItemFactoryMock implements ItemFactory
 	@Override
 	public Color getDefaultLeatherColor()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return defaultLeatherColor;
 	}
 
 	@Override
