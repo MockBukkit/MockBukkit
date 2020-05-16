@@ -164,9 +164,9 @@ public class PlayerMock extends LivingEntityMock implements Player
 	}
 
 	/**
-	 * Simulates the player damaging a block just like {@link simulateBlockDamage}. However, if {@code InstaBreak} is
-	 * enabled, it will not automatically fire a {@link BlockBreakEvent}. It will also still fire a
-	 * {@link BlockDamageEvent} even if the player is not in survival mode.
+	 * Simulates the player damaging a block just like {@link #simulateBlockDamage(Block)}. However, if
+	 * {@code InstaBreak} is enabled, it will not automatically fire a {@link BlockBreakEvent}. It will also still fire
+	 * a {@link BlockDamageEvent} even if the player is not in survival mode.
 	 *
 	 * @param block The block to damage.
 	 * @return The event that has been fired.
