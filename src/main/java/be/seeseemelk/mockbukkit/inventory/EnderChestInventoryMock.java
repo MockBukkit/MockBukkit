@@ -15,7 +15,6 @@ import be.seeseemelk.mockbukkit.entity.PlayerMock;
  */
 public class EnderChestInventoryMock extends InventoryMock
 {
-
 	public EnderChestInventoryMock(InventoryHolder holder)
 	{
 		super(holder, 27, InventoryType.ENDER_CHEST);
