@@ -29,29 +29,30 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	private AtomicInteger asyncTasksRunning = new AtomicInteger();
 	private AtomicReference<Exception> asyncException = new AtomicReference<>();
 	private int asyncTasksQueued = 0;
-	
+
 	/**
-	 * Shuts the scheduler down.
-	 * Note that this function will throw exception that where thrown by old asynchronous tasks.
+	 * Shuts the scheduler down. Note that this function will throw exception that where thrown by old asynchronous
+	 * tasks.
 	 */
 	public void shutdown()
 	{
 		waitAsyncTasksFinished();
 		pool.shutdown();
-		
+
 		if (asyncException.get() != null)
 			throw new AsyncTaskException(asyncException.get());
 	}
-	
+
 	/**
 	 * Get the current tick of the server.
+	 * 
 	 * @return The current tick of the server.
 	 */
 	public long getCurrentTick()
 	{
 		return currentTick;
 	}
-	
+
 	/**
 	 * Perform one tick on the server.
 	 */
@@ -60,7 +61,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		currentTick++;
 		List<ScheduledTask> oldTasks = tasks;
 		tasks = new LinkedList<>();
-		
+
 		for (ScheduledTask task : oldTasks)
 		{
 			if (task.getScheduledTick() == currentTick && !task.isCancelled())
@@ -75,7 +76,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 					pool.execute(task.getRunnable());
 					asyncTasksQueued--;
 				}
-				
+
 				if (task instanceof RepeatingTask && !task.isCancelled())
 				{
 					((RepeatingTask) task).updateScheduledTick();
@@ -88,9 +89,10 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			}
 		}
 	}
-	
+
 	/**
 	 * Perform a number of ticks on the server.
+	 * 
 	 * @param ticks The number of ticks to executed.
 	 */
 	public void performTicks(long ticks)
@@ -100,18 +102,17 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			performOneTick();
 		}
 	}
-	
+
 	/**
-	 * Waits until all asynchronous tasks have finished executing.
-	 * If you have an asynchronous task that runs indefinitely,
-	 * this function will never return.
+	 * Waits until all asynchronous tasks have finished executing. If you have an asynchronous task that runs
+	 * indefinitely, this function will never return.
 	 */
 	public void waitAsyncTasksFinished()
 	{
 		// Make sure all tasks get to execute. (except for repeating asynchronous tasks, they only will fire once)
 		while (asyncTasksQueued > 0)
 			performOneTick();
-		
+
 		// Wait for all tasks to finish executing.
 		while (asyncTasksRunning.get() > 0)
 		{
@@ -146,7 +147,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		tasks.add(scheduledTask);
 		return scheduledTask;
 	}
-	
+
 	@Override
 	public BukkitTask runTaskTimer(Plugin plugin, Runnable task, long delay, long period)
 	{
@@ -206,21 +207,24 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public int scheduleAsyncDelayedTask(Plugin plugin, Runnable task, long delay)
 	{
-		Logger.getLogger(LOGGER_NAME).warning("Consider using runTaskLaterAsynchronously instead of scheduleAsyncDelayedTask");
+		Logger.getLogger(LOGGER_NAME)
+				.warning("Consider using runTaskLaterAsynchronously instead of scheduleAsyncDelayedTask");
 		return runTaskLaterAsynchronously(plugin, task, delay).getTaskId();
 	}
 
 	@Override
 	public int scheduleAsyncDelayedTask(Plugin plugin, Runnable task)
 	{
-		Logger.getLogger(LOGGER_NAME).warning("Consider using runTaskAsynchronously instead of scheduleAsyncDelayedTask");
+		Logger.getLogger(LOGGER_NAME)
+				.warning("Consider using runTaskAsynchronously instead of scheduleAsyncDelayedTask");
 		return runTaskAsynchronously(plugin, task).getTaskId();
 	}
 
 	@Override
 	public int scheduleAsyncRepeatingTask(Plugin plugin, Runnable task, long delay, long period)
 	{
-		Logger.getLogger(LOGGER_NAME).warning("Consider using runTaskTimerAsynchronously instead of scheduleAsyncRepeatingTask");
+		Logger.getLogger(LOGGER_NAME)
+				.warning("Consider using runTaskTimerAsynchronously instead of scheduleAsyncRepeatingTask");
 		return runTaskTimerAsynchronously(plugin, task, delay, period).getTaskId();
 	}
 
@@ -291,8 +295,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public BukkitTask runTaskAsynchronously(Plugin plugin, Runnable task)
 	{
-		ScheduledTask scheduledTask = new ScheduledTask(id++, plugin, false,
-				currentTick, new AsyncRunnable(task));
+		ScheduledTask scheduledTask = new ScheduledTask(id++, plugin, false, currentTick, new AsyncRunnable(task));
 		asyncTasksRunning.incrementAndGet();
 		pool.execute(scheduledTask.getRunnable());
 		return scheduledTask;
@@ -313,8 +316,8 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public BukkitTask runTaskLaterAsynchronously(Plugin plugin, Runnable task, long delay)
 	{
-		ScheduledTask scheduledTask = new ScheduledTask(id++, plugin, false,
-				currentTick + delay, new AsyncRunnable(task));
+		ScheduledTask scheduledTask = new ScheduledTask(id++, plugin, false, currentTick + delay,
+				new AsyncRunnable(task));
 		tasks.add(scheduledTask);
 		asyncTasksQueued++;
 		return scheduledTask;
@@ -329,8 +332,8 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public BukkitTask runTaskTimerAsynchronously(Plugin plugin, Runnable task, long delay, long period)
 	{
-		RepeatingTask scheduledTask = new RepeatingTask(id++, plugin, false,
-				currentTick + delay, period, new AsyncRunnable(task));
+		RepeatingTask scheduledTask = new RepeatingTask(id++, plugin, false, currentTick + delay, period,
+				new AsyncRunnable(task));
 		tasks.add(scheduledTask);
 		return scheduledTask;
 	}
@@ -344,7 +347,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	class AsyncRunnable implements Runnable
 	{
 		private final Runnable task;
-		
+
 		private AsyncRunnable(Runnable runnable)
 		{
 			task = runnable;
@@ -363,7 +366,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			}
 			asyncTasksRunning.decrementAndGet();
 		}
-		
+
 	}
 
 	@Override
@@ -408,33 +411,3 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		throw new UnimplementedOperationException();
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

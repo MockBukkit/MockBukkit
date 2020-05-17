@@ -1013,15 +1013,23 @@ public class PlayerMock extends LivingEntityMock implements Player
 	}
 
 	@Override
-	public void playSound(Location location, Sound sound, float volume, float pitch)
+	public void playSound(Location location, String sound, float volume, float pitch)
 	{
+		// The string sound is equivalent to the internal sound name, not Sound.valueOf()
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void playSound(Location location, String sound, float volume, float pitch)
+	public void playSound(Location location, Sound sound, float volume, float pitch)
 	{
+		playSound(location, sound, SoundCategory.MASTER, volume, pitch);
+	}
+
+	@Override
+	public void playSound(Location location, String sound, SoundCategory category, float volume, float pitch)
+	{
+		// The string sound is equivalent to the internal sound name, not Sound.valueOf()
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
@@ -1029,15 +1037,9 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public void playSound(Location location, Sound sound, SoundCategory category, float volume, float pitch)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void playSound(Location location, String sound, SoundCategory category, float volume, float pitch)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// We could send a packet here in case some wants to test that?
+		// But really I don't think this method should do much at all.
+		// Perhaps we could add an assertSound(...) method in the future?
 	}
 
 	@Override
