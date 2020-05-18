@@ -21,36 +21,40 @@ public abstract class InventoryViewMock extends InventoryView
 		topInventory = top;
 		bottomInventory = bottom;
 	}
-	
+
 	/**
 	 * Sets the top inventory.
+	 * 
 	 * @param inventory The top inventory.
 	 */
 	public void setTopInventory(Inventory inventory)
 	{
 		topInventory = inventory;
 	}
-	
+
 	/**
 	 * Sets the bottom inventory.
+	 * 
 	 * @param inventory The bottom inventory.
 	 */
 	public void setBottomInventory(Inventory inventory)
 	{
 		bottomInventory = inventory;
 	}
-	
+
 	/**
 	 * Sets the player viewing.
+	 * 
 	 * @param player The player viewing.
 	 */
 	public void setPlayer(HumanEntity player)
 	{
 		this.player = player;
 	}
-	
+
 	/**
 	 * Sets the type of inventory view.
+	 * 
 	 * @param type The new type of inventory view.
 	 */
 	public void setType(InventoryType type)
@@ -81,7 +85,7 @@ public abstract class InventoryViewMock extends InventoryView
 	{
 		return type;
 	}
-	
+
 	@Override
 	public String getTitle()
 	{

@@ -4,31 +4,35 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.ServerMock;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ItemMetaMockTest {
+import be.seeseemelk.mockbukkit.MockBukkit;
+
+public class ItemMetaMockTest
+{
 	private ItemMetaMock meta;
 
 	@Before
-	public void setUp() {
-		ServerMock mock = MockBukkit.mock();
+	public void setUp()
+	{
+		MockBukkit.mock();
 		meta = new ItemMetaMock();
 	}
+
 	@After
-	public void tearDown(){
+	public void tearDown()
+	{
 		MockBukkit.unmock();
 	}
 
@@ -310,42 +314,46 @@ public class ItemMetaMockTest {
 	}
 
 	@Test
-	public void assertDamageCorrectlySet() {
+	public void assertDamageCorrectlySet()
+	{
 		int value = 500;
 		meta.setDamage(value);
 		ItemStack item = new ItemStack(Material.DIAMOND_SWORD);
 		item.setItemMeta(meta);
 
 		Damageable itemMeta = (Damageable) item.getItemMeta();
-        int damage = itemMeta.getDamage();
-        assertEquals(value, damage);
-        assertTrue(itemMeta.hasDamage());
+		int damage = itemMeta.getDamage();
+		assertEquals(value, damage);
+		assertTrue(itemMeta.hasDamage());
 	}
 
-    @Test
-    public void assertNoDamage() {
-        meta.setDamage(0);
-        ItemStack item = new ItemStack(Material.DIAMOND_SWORD);
-        item.setItemMeta(meta);
+	@Test
+	public void assertNoDamage()
+	{
+		meta.setDamage(0);
+		ItemStack item = new ItemStack(Material.DIAMOND_SWORD);
+		item.setItemMeta(meta);
 
-        Damageable itemMeta = (Damageable) item.getItemMeta();
-        int damage = itemMeta.getDamage();
-        assertEquals(0, damage);
-        assertFalse(itemMeta.hasDamage());
-    }
+		Damageable itemMeta = (Damageable) item.getItemMeta();
+		int damage = itemMeta.getDamage();
+		assertEquals(0, damage);
+		assertFalse(itemMeta.hasDamage());
+	}
 
 	@Test
-	public void assertCustomModelData() {
-        meta.setCustomModelData(null);
-        assertFalse(meta.hasCustomModelData());
-        
+	public void assertCustomModelData()
+	{
+		meta.setCustomModelData(null);
+		assertFalse(meta.hasCustomModelData());
+
 		meta.setCustomModelData(100);
 		assertTrue(meta.hasCustomModelData());
 		assertEquals(100, meta.getCustomModelData());
 	}
 
 	@Test
-	public void assertSerialize() {
+	public void assertSerialize()
+	{
 
 		// Tests for displayName, Lore, enchants, unbreakable status, and damage
 		meta.setDisplayName("Test name");
@@ -353,26 +361,25 @@ public class ItemMetaMockTest {
 		meta.setUnbreakable(true);
 		meta.setDamage(5);
 
-		HashMap<String, Object> expected = new HashMap<String, Object>() {
-			{
-				put("displayName","Test name");
-				put("lore", Arrays.asList("Test lore"));
-				put("unbreakable", true);
-				put("damage", 5);
-			}
-		};
+		Map<String, Object> expected = new HashMap<>();
+		expected.put("displayName", "Test name");
+		expected.put("lore", Arrays.asList("Test lore"));
+		expected.put("unbreakable", true);
+		expected.put("damage", 5);
+
 		Map<String, Object> actual = meta.serialize();
 
-			// Perform tests
-			assertEquals(expected.get("displayName"), actual.get("displayName"));
-			assertEquals(expected.get("lore"), actual.get("lore"));
-			assertEquals(expected.get("unbreakable"), actual.get("unbreakable"));
-			assertEquals(expected.get("damage"), actual.get("damage"));
+		// Perform tests
+		assertEquals(expected.get("displayName"), actual.get("displayName"));
+		assertEquals(expected.get("lore"), actual.get("lore"));
+		assertEquals(expected.get("unbreakable"), actual.get("unbreakable"));
+		assertEquals(expected.get("damage"), actual.get("damage"));
 
 	}
 
 	@Test
-	public void assertDeserialize() {
+	public void assertDeserialize()
+	{
 
 		Map<String, Object> actual = meta.serialize();
 

@@ -45,7 +45,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	private static final double MAX_HEALTH = 20.0;
 	private double health;
 	private double maxHealth = MAX_HEALTH;
-	private boolean alive = true;
+	protected boolean alive = true;
 	protected Map<Attribute, AttributeInstanceMock> attributes;
 
 	public LivingEntityMock(ServerMock server, UUID uuid)
@@ -83,12 +83,19 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 			    List<ItemStack> drops = Arrays.asList(player.getInventory().getContents());
 				PlayerDeathEvent event = new PlayerDeathEvent(player, drops, 0, getName() + " got killed");
 				Bukkit.getPluginManager().callEvent(event);
+				
+				// Terminate any InventoryView and the cursor item
+				player.closeInventory();
 
 				// Clear the Inventory if keep-inventory is not enabled
 				if (!getWorld().getGameRuleValue(GameRule.KEEP_INVENTORY).booleanValue()) {
 				    player.getInventory().clear();
 				    // Should someone try to provoke a RespawnEvent, they will now find the Inventory to be empty
 				}
+				
+				player.setLevel(0);
+				player.setExp(0);
+				player.setFoodLevel(0);
 			} else {
 			    EntityDeathEvent event = new EntityDeathEvent(this, new ArrayList<>(), 0);
 				Bukkit.getPluginManager().callEvent(event);

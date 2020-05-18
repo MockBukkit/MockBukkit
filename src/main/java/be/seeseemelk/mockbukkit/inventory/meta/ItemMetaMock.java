@@ -1,13 +1,20 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
+import static java.util.Objects.nonNull;
 
-import com.google.common.collect.Multimap;
-import com.google.common.collect.MultimapBuilder;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
-import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
@@ -16,9 +23,10 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.tags.CustomItemTagContainer;
 import org.bukkit.persistence.PersistentDataContainer;
 
-import java.util.*;
+import com.google.common.collect.Multimap;
 
-import static java.util.Objects.nonNull;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
 
 @SuppressWarnings("deprecation")
 public class ItemMetaMock implements ItemMeta, Damageable {
@@ -231,7 +239,7 @@ public class ItemMetaMock implements ItemMeta, Damageable {
 	@Override
     public Map<String, Object> serialize() {
 		// Make new map and add relevant properties to it.
-	    HashMap<String, Object> map = new HashMap<String, Object>();
+	    Map<String, Object> map = new HashMap<>();
 	    map.put("displayName", this.displayName);
 	    map.put("lore", this.lore);
 	    map.put("localizedName", null); // Not implemented.
@@ -252,6 +260,7 @@ public class ItemMetaMock implements ItemMeta, Damageable {
 	 * @param args A serialized ItemMetaMock object in a Map<String, Object> format.
 	 * @return A new instance of the ItemMetaMock class.
 	 */
+	@SuppressWarnings("unchecked")
 	public static ItemMetaMock deserialize(Map<String, Object> args) {
 		ItemMetaMock serialMock = new ItemMetaMock();
 

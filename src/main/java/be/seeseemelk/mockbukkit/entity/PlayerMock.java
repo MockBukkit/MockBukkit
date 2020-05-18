@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -28,8 +29,10 @@ import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.Statistic;
 import org.bukkit.WeatherType;
+import org.bukkit.World;
 import org.bukkit.advancement.Advancement;
 import org.bukkit.advancement.AdvancementProgress;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.BlockData;
@@ -48,6 +51,7 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
@@ -92,7 +96,8 @@ public class PlayerMock extends LivingEntityMock implements Player
 	private InventoryView inventoryView;
 
 	private Location compassTarget;
-    private Location bedSpawnLocation;
+	private Location bedSpawnLocation;
+	private ItemStack cursor = null;
 
 	public PlayerMock(ServerMock server, String name)
 	{
@@ -108,7 +113,9 @@ public class PlayerMock extends LivingEntityMock implements Player
 		this.online = true;
 
 		if (Bukkit.getWorlds().isEmpty())
+		{
 			MockBukkit.getMock().addSimpleWorld("world");
+		}
 
 		setLocation(Bukkit.getWorlds().get(0).getSpawnLocation().clone());
 		setCompassTarget(getLocation());
@@ -130,8 +137,9 @@ public class PlayerMock extends LivingEntityMock implements Player
 	{
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + Objects.hash(attributes, exp, expLevel, expTotal, displayName, gamemode, getHealth(), inventory, inventoryView,
-				getMaxHealth(), online, whitelisted);
+		result = prime * result + Objects.hash(attributes, exp, expLevel, expTotal, displayName, gamemode, getHealth(),
+				inventory, enderChest, inventoryView, getMaxHealth(), online, whitelisted, compassTarget,
+				bedSpawnLocation, cursor);
 		return result;
 	}
 
@@ -144,20 +152,21 @@ public class PlayerMock extends LivingEntityMock implements Player
 			return false;
 		if (!(obj instanceof PlayerMock))
 			return false;
+
 		PlayerMock other = (PlayerMock) obj;
 		return Objects.equals(attributes, other.attributes) && Objects.equals(displayName, other.displayName)
 				&& gamemode == other.gamemode
 				&& Double.doubleToLongBits(getHealth()) == Double.doubleToLongBits(other.getHealth())
 				&& Objects.equals(inventory, other.inventory) && Objects.equals(inventoryView, other.inventoryView)
+				&& Objects.equals(cursor, other.cursor)
 				&& Double.doubleToLongBits(getMaxHealth()) == Double.doubleToLongBits(other.getMaxHealth())
 				&& online == other.online && whitelisted == other.whitelisted && isDead() == other.isDead();
 	}
 
 	/**
-	 * Simulates the player damaging a block just like {@link simulateBlockDamage}.
-	 * However, if {@code InstaBreak} is enabled, it will not automatically fire a
-	 * {@link BlockBreakEvent}. It will also still fire a {@link BlockDamageEvent}
-	 * even if the player is not in survival mode.
+	 * Simulates the player damaging a block just like {@link #simulateBlockDamage(Block)}. However, if
+	 * {@code InstaBreak} is enabled, it will not automatically fire a {@link BlockBreakEvent}. It will also still fire
+	 * a {@link BlockDamageEvent} even if the player is not in survival mode.
 	 *
 	 * @param block The block to damage.
 	 * @return The event that has been fired.
@@ -170,15 +179,14 @@ public class PlayerMock extends LivingEntityMock implements Player
 	}
 
 	/**
-	 * Simulates the player damaging a block. Note that this method does not
-	 * anything unless the player is in survival mode. If {@code InstaBreak} is set
-	 * to true by an event handler, a {@link BlockBreakEvent} is immediately fired.
-	 * The result will then still be whether or not the {@link BlockDamageEvent} was
-	 * cancelled or not, not the later {@link BlockBreakEvent}.
+	 * Simulates the player damaging a block. Note that this method does not anything unless the player is in survival
+	 * mode. If {@code InstaBreak} is set to true by an event handler, a {@link BlockBreakEvent} is immediately fired.
+	 * The result will then still be whether or not the {@link BlockDamageEvent} was cancelled or not, not the later
+	 * {@link BlockBreakEvent}.
 	 *
 	 * @param block The block to damage.
-	 * @return {@code true} if the block was damaged, {@code false} if the event was
-	 *         cancelled or the player was not in survival gamemode.
+	 * @return {@code true} if the block was damaged, {@code false} if the event was cancelled or the player was not in
+	 *         survival gamemode.
 	 */
 	public boolean simulateBlockDamage(Block block)
 	{
@@ -202,13 +210,12 @@ public class PlayerMock extends LivingEntityMock implements Player
 	}
 
 	/**
-	 * Simulates the player breaking a block. This method will not break the block
-	 * if the player is in adventure or spectator mode. If the player is in survival
-	 * mode, the player will first damage the block.
+	 * Simulates the player breaking a block. This method will not break the block if the player is in adventure or
+	 * spectator mode. If the player is in survival mode, the player will first damage the block.
 	 *
 	 * @param block The block to break.
-	 * @return {@code true} if the block was broken, {@code false} if it wasn't or
-	 *         if the player was in adventure mode or in spectator mode.
+	 * @return {@code true} if the block was broken, {@code false} if it wasn't or if the player was in adventure mode
+	 *         or in spectator mode.
 	 */
 	public boolean simulateBlockBreak(Block block)
 	{
@@ -221,6 +228,32 @@ public class PlayerMock extends LivingEntityMock implements Player
 		if (!event.isCancelled())
 			block.setType(Material.AIR);
 		return !event.isCancelled();
+	}
+
+	/**
+	 * This method simulates the {@link Player} respawning and also calls a {@link PlayerRespawnEvent}. Should the
+	 * {@link Player} not be dead (when {@link #isDead()} returns false) then this will throw an
+	 * {@link UnsupportedOperationException}. Otherwise, the {@link Location} will be set to
+	 * {@link Player#getBedSpawnLocation()} or {@link World#getSpawnLocation()}. Lastly the health of this
+	 * {@link Player} will be restored and set to the max health.
+	 */
+	public void respawn()
+	{
+		Location respawnLocation = getBedSpawnLocation();
+		boolean isBedSpawn = respawnLocation != null;
+
+		if (!isBedSpawn)
+		{
+			respawnLocation = getLocation().getWorld().getSpawnLocation();
+		}
+
+		PlayerRespawnEvent event = new PlayerRespawnEvent(this, respawnLocation, isBedSpawn);
+		Bukkit.getPluginManager().callEvent(event);
+
+		// Reset location and health
+		setHealth(getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+		setLocation(event.getRespawnLocation().clone());
+		alive = true;
 	}
 
 	@Override
@@ -245,7 +278,6 @@ public class PlayerMock extends LivingEntityMock implements Player
 		gamemode = mode;
 	}
 
-
 	@Override
 	public boolean isWhitelisted()
 	{
@@ -265,6 +297,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 		{
 			return this;
 		}
+
 		return null;
 	}
 
@@ -289,12 +322,16 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public void openInventory(InventoryView inventory)
 	{
+		// reset the cursor as it is a new InventoryView
+		cursor = null;
 		inventoryView = inventory;
 	}
 
 	@Override
 	public InventoryView openInventory(Inventory inventory)
 	{
+		// reset the cursor as it is a new InventoryView
+		cursor = null;
 		inventoryView = new PlayerInventoryViewMock(this, inventory);
 		return inventoryView;
 	}
@@ -302,6 +339,8 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public void closeInventory()
 	{
+		// reset the cursor as it is a new InventoryView
+		cursor = null;
 		inventoryView = new SimpleInventoryViewMock(this, null, inventory, InventoryType.CRAFTING);
 	}
 
@@ -314,10 +353,11 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public Inventory getEnderChest()
 	{
-		if (enderChest == null) {
-		    enderChest = new EnderChestInventoryMock(this);
+		if (enderChest == null)
+		{
+			enderChest = new EnderChestInventoryMock(this);
 		}
-		
+
 		return enderChest;
 	}
 
@@ -352,8 +392,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public InventoryView openMerchant(Villager trader, boolean force)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return openMerchant((Merchant) trader, force);
 	}
 
 	@Override
@@ -378,15 +417,13 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public ItemStack getItemOnCursor()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return cursor == null ? null : cursor.clone();
 	}
 
 	@Override
 	public void setItemOnCursor(ItemStack item)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.cursor = item == null ? null : item.clone();
 	}
 
 	@Override
@@ -486,7 +523,8 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public double getEyeHeight(boolean ignorePose)
 	{
-		if (isSneaking() && !ignorePose) return 1.54D;
+		if (isSneaking() && !ignorePose)
+			return 1.54D;
 		return 1.62D;
 	}
 
@@ -862,7 +900,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public void setCompassTarget(@NotNull Location loc)
 	{
-        this.compassTarget = loc;
+		this.compassTarget = loc;
 	}
 
 	@NotNull
@@ -975,15 +1013,23 @@ public class PlayerMock extends LivingEntityMock implements Player
 	}
 
 	@Override
-	public void playSound(Location location, Sound sound, float volume, float pitch)
+	public void playSound(Location location, String sound, float volume, float pitch)
 	{
+		// The string sound is equivalent to the internal sound name, not Sound.valueOf()
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void playSound(Location location, String sound, float volume, float pitch)
+	public void playSound(Location location, Sound sound, float volume, float pitch)
 	{
+		playSound(location, sound, SoundCategory.MASTER, volume, pitch);
+	}
+
+	@Override
+	public void playSound(Location location, String sound, SoundCategory category, float volume, float pitch)
+	{
+		// The string sound is equivalent to the internal sound name, not Sound.valueOf()
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
@@ -991,15 +1037,9 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public void playSound(Location location, Sound sound, SoundCategory category, float volume, float pitch)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void playSound(Location location, String sound, SoundCategory category, float volume, float pitch)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// We could send a packet here in case some wants to test that?
+		// But really I don't think this method should do much at all.
+		// Perhaps we could add an assertSound(...) method in the future?
 	}
 
 	@Override
@@ -1310,7 +1350,8 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public void setExp(float exp)
 	{
-		if (exp < 0.0 || exp > 1.0) throw new IllegalArgumentException("Experience progress must be between 0.0 and 1.0");
+		if (exp < 0.0 || exp > 1.0)
+			throw new IllegalArgumentException("Experience progress must be between 0.0 and 1.0");
 		this.exp = exp;
 	}
 
@@ -1388,14 +1429,15 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public void setBedSpawnLocation(@Nullable Location loc)
 	{
-        setBedSpawnLocation(loc, false);
+		setBedSpawnLocation(loc, false);
 	}
 
 	@Override
 	public void setBedSpawnLocation(@Nullable Location loc, boolean force)
 	{
-		if (force || loc == null || loc.getBlock().getType().name().endsWith("_BED")) {
-		    this.bedSpawnLocation = loc;
+		if (force || loc == null || loc.getBlock().getType().name().endsWith("_BED"))
+		{
+			this.bedSpawnLocation = loc;
 		}
 	}
 
@@ -1781,8 +1823,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public boolean discoverRecipe(NamespacedKey recipe)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return discoverRecipes(Arrays.asList(recipe)) != 0;
 	}
 
 	@Override
@@ -1795,8 +1836,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public boolean undiscoverRecipe(NamespacedKey recipe)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return undiscoverRecipes(Arrays.asList(recipe)) != 0;
 	}
 
 	@Override
