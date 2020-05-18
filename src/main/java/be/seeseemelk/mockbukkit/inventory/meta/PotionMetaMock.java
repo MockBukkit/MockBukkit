@@ -83,7 +83,7 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	{
 		PotionMetaMock mock = (PotionMetaMock) super.clone();
 		mock.effects = new ArrayList<>(effects);
-		mock.color = Color.fromRGB(color.asRGB());
+		mock.color = color == null ? null : Color.fromRGB(color.asRGB());
 		return mock;
 	}
 
