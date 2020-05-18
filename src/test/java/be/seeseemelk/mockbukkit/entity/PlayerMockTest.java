@@ -22,6 +22,8 @@ import org.bukkit.GameMode;
 import org.bukkit.GameRule;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
 import org.bukkit.World;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
@@ -520,9 +522,11 @@ public class PlayerMockTest
 		try
 		{
 			plugin.barrier.await(3, TimeUnit.SECONDS);
-		} catch (InterruptedException | BrokenBarrierException e)
+		}
+		catch (InterruptedException | BrokenBarrierException e)
 		{
-		} catch (TimeoutException e)
+		}
+		catch (TimeoutException e)
 		{
 			fail("Async event was not fired");
 		}
@@ -839,6 +843,17 @@ public class PlayerMockTest
 		pluginManager.assertEventFired(event -> event instanceof PlayerRespawnEvent);
 
 		assertFalse(player.isDead());
+	}
+
+	@Test
+	public void testPlaySound()
+	{
+		player.playSound(player.getLocation(), Sound.ENTITY_SLIME_SQUISH, SoundCategory.AMBIENT, 1, 1);
+
+		player.assertSoundHeard(Sound.ENTITY_SLIME_SQUISH, audio -> {
+			return player.getLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.AMBIENT
+					&& audio.getVolume() == 1 && audio.getPitch() == 1;
+		});
 	}
 
 }
