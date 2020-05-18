@@ -53,8 +53,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		super(server, uuid);
 
 		attributes = new EnumMap<>(Attribute.class);
-		attributes.put(Attribute.GENERIC_MAX_HEALTH,
-				new AttributeInstanceMock(Attribute.GENERIC_MAX_HEALTH, 20));
+		attributes.put(Attribute.GENERIC_MAX_HEALTH, new AttributeInstanceMock(Attribute.GENERIC_MAX_HEALTH, 20));
 		this.setMaxHealth(MAX_HEALTH);
 		this.setHealth(MAX_HEALTH);
 	}
@@ -64,11 +63,11 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	{
 		return health;
 	}
-	
+
 	@Override
-	public boolean isDead() 
+	public boolean isDead()
 	{
-	    return !alive;
+		return !alive;
 	}
 
 	@Override
@@ -78,30 +77,34 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		{
 			this.health = 0;
 
-			if (this instanceof Player) {
-			    Player player = (Player) this;
-			    List<ItemStack> drops = Arrays.asList(player.getInventory().getContents());
+			if (this instanceof Player)
+			{
+				Player player = (Player) this;
+				List<ItemStack> drops = new ArrayList<>();
+				drops.addAll(Arrays.asList(player.getInventory().getContents()));
 				PlayerDeathEvent event = new PlayerDeathEvent(player, drops, 0, getName() + " got killed");
 				Bukkit.getPluginManager().callEvent(event);
-				
+
 				// Terminate any InventoryView and the cursor item
 				player.closeInventory();
 
 				// Clear the Inventory if keep-inventory is not enabled
-				if (!getWorld().getGameRuleValue(GameRule.KEEP_INVENTORY).booleanValue()) {
-				    player.getInventory().clear();
-				    // Should someone try to provoke a RespawnEvent, they will now find the Inventory to be empty
+				if (!getWorld().getGameRuleValue(GameRule.KEEP_INVENTORY).booleanValue())
+				{
+					player.getInventory().clear();
+					// Should someone try to provoke a RespawnEvent, they will now find the Inventory to be empty
 				}
-				
+
 				player.setLevel(0);
 				player.setExp(0);
 				player.setFoodLevel(0);
-			} else {
-			    EntityDeathEvent event = new EntityDeathEvent(this, new ArrayList<>(), 0);
+			}
+			else
+			{
+				EntityDeathEvent event = new EntityDeathEvent(this, new ArrayList<>(), 0);
 				Bukkit.getPluginManager().callEvent(event);
 			}
-			
-			
+
 			alive = false;
 		}
 		else
@@ -138,10 +141,12 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	{
 		Map<EntityDamageEvent.DamageModifier, Double> modifiers = new EnumMap<>(EntityDamageEvent.DamageModifier.class);
 		modifiers.put(EntityDamageEvent.DamageModifier.BASE, 1.0);
-		Map<EntityDamageEvent.DamageModifier, Function<Double, Double>> modifierFunctions = new EnumMap<>(EntityDamageEvent.DamageModifier.class);
+		Map<EntityDamageEvent.DamageModifier, Function<Double, Double>> modifierFunctions = new EnumMap<>(
+				EntityDamageEvent.DamageModifier.class);
 		modifierFunctions.put(EntityDamageEvent.DamageModifier.BASE, damage -> damage);
 
-		EntityDamageEvent event = new EntityDamageEvent(this, EntityDamageEvent.DamageCause.CUSTOM, modifiers, modifierFunctions);
+		EntityDamageEvent event = new EntityDamageEvent(this, EntityDamageEvent.DamageCause.CUSTOM, modifiers,
+				modifierFunctions);
 		event.setDamage(amount);
 		Bukkit.getPluginManager().callEvent(event);
 		if (!event.isCancelled())
@@ -157,11 +162,12 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	{
 		Map<EntityDamageEvent.DamageModifier, Double> modifiers = new EnumMap<>(EntityDamageEvent.DamageModifier.class);
 		modifiers.put(EntityDamageEvent.DamageModifier.BASE, 1.0);
-		Map<EntityDamageEvent.DamageModifier, Function<Double, Double>> modifierFunctions = new EnumMap<>(EntityDamageEvent.DamageModifier.class);
+		Map<EntityDamageEvent.DamageModifier, Function<Double, Double>> modifierFunctions = new EnumMap<>(
+				EntityDamageEvent.DamageModifier.class);
 		modifierFunctions.put(EntityDamageEvent.DamageModifier.BASE, damage -> damage);
 
-		EntityDamageByEntityEvent event = new EntityDamageByEntityEvent(source, this, EntityDamageEvent.DamageCause.ENTITY_ATTACK,
-				modifiers, modifierFunctions);
+		EntityDamageByEntityEvent event = new EntityDamageByEntityEvent(source, this,
+				EntityDamageEvent.DamageCause.ENTITY_ATTACK, modifiers, modifierFunctions);
 		event.setDamage(amount);
 		Bukkit.getPluginManager().callEvent(event);
 		if (!event.isCancelled())
