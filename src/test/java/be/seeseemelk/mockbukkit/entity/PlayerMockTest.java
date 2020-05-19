@@ -33,11 +33,13 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerExpChangeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.junit.After;
@@ -854,6 +856,18 @@ public class PlayerMockTest
 			return player.getLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.AMBIENT
 					&& audio.getVolume() == 1 && audio.getPitch() == 1;
 		});
+	}
+
+	@Test
+	public void testCloseInventoryEvenFired()
+	{
+		Inventory inv = server.createInventory(null, 36);
+		player.openInventory(inv);
+		player.setItemOnCursor(new ItemStack(Material.PUMPKIN));
+		player.closeInventory();
+		server.getPluginManager().assertEventFired(InventoryCloseEvent.class,
+				e -> e.getPlayer() == player && e.getInventory() == inv);
+		assertNull(player.getItemOnCursor());
 	}
 
 }

@@ -50,6 +50,7 @@ import org.bukkit.entity.Villager;
 import org.bukkit.entity.memory.MemoryKey;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerChatEvent;
@@ -327,16 +328,14 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public void openInventory(InventoryView inventory)
 	{
-		// reset the cursor as it is a new InventoryView
-		cursor = null;
+		closeInventory();
 		inventoryView = inventory;
 	}
 
 	@Override
 	public InventoryView openInventory(Inventory inventory)
 	{
-		// reset the cursor as it is a new InventoryView
-		cursor = null;
+		closeInventory();
 		inventoryView = new PlayerInventoryViewMock(this, inventory);
 		return inventoryView;
 	}
@@ -344,6 +343,12 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public void closeInventory()
 	{
+		if (inventoryView instanceof PlayerInventoryViewMock)
+		{
+			InventoryCloseEvent event = new InventoryCloseEvent(inventoryView);
+			Bukkit.getPluginManager().callEvent(event);
+		}
+
 		// reset the cursor as it is a new InventoryView
 		cursor = null;
 		inventoryView = new SimpleInventoryViewMock(this, null, inventory, InventoryType.CRAFTING);
