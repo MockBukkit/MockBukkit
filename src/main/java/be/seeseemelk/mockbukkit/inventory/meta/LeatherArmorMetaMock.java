@@ -1,5 +1,7 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
+import java.util.Objects;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
@@ -61,7 +63,7 @@ public class LeatherArmorMetaMock extends ItemMetaMock implements LeatherArmorMe
 		}
 
 		LeatherArmorMeta other = (LeatherArmorMeta) obj;
-		return color.equals(other.getColor());
+		return Objects.equals(color, other.getColor());
 	}
 
 	@Override

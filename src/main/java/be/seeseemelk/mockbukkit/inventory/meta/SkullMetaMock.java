@@ -1,5 +1,7 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
+import java.util.Objects;
+
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.SkullMeta;
@@ -65,7 +67,7 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 		}
 
 		SkullMeta other = (SkullMeta) obj;
-		return owner.equals(other.getOwningPlayer().getName());
+		return Objects.equals(owner, other.getOwningPlayer().getName());
 	}
 
 	@Override
