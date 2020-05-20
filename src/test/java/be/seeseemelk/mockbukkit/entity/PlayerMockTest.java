@@ -22,6 +22,8 @@ import org.bukkit.GameMode;
 import org.bukkit.GameRule;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
 import org.bukkit.World;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
@@ -31,11 +33,13 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerExpChangeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.junit.After;
@@ -520,9 +524,11 @@ public class PlayerMockTest
 		try
 		{
 			plugin.barrier.await(3, TimeUnit.SECONDS);
-		} catch (InterruptedException | BrokenBarrierException e)
+		}
+		catch (InterruptedException | BrokenBarrierException e)
 		{
-		} catch (TimeoutException e)
+		}
+		catch (TimeoutException e)
 		{
 			fail("Async event was not fired");
 		}
@@ -839,6 +845,29 @@ public class PlayerMockTest
 		pluginManager.assertEventFired(event -> event instanceof PlayerRespawnEvent);
 
 		assertFalse(player.isDead());
+	}
+
+	@Test
+	public void testPlaySound()
+	{
+		player.playSound(player.getLocation(), Sound.ENTITY_SLIME_SQUISH, SoundCategory.AMBIENT, 1, 1);
+
+		player.assertSoundHeard(Sound.ENTITY_SLIME_SQUISH, audio -> {
+			return player.getLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.AMBIENT
+					&& audio.getVolume() == 1 && audio.getPitch() == 1;
+		});
+	}
+
+	@Test
+	public void testCloseInventoryEvenFired()
+	{
+		Inventory inv = server.createInventory(null, 36);
+		player.openInventory(inv);
+		player.setItemOnCursor(new ItemStack(Material.PUMPKIN));
+		player.closeInventory();
+		server.getPluginManager().assertEventFired(InventoryCloseEvent.class,
+				e -> e.getPlayer() == player && e.getInventory() == inv);
+		assertNull(player.getItemOnCursor());
 	}
 
 }

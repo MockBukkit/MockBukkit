@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.entity;
 
+import static org.junit.Assert.fail;
 import static org.junit.Assert.assertEquals;
 
 import java.net.InetSocketAddress;
@@ -7,11 +8,13 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
+import java.util.function.Predicate;
 
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
@@ -47,6 +50,7 @@ import org.bukkit.entity.Villager;
 import org.bukkit.entity.memory.MemoryKey;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerChatEvent;
@@ -98,6 +102,8 @@ public class PlayerMock extends LivingEntityMock implements Player
 	private Location compassTarget;
 	private Location bedSpawnLocation;
 	private ItemStack cursor = null;
+
+	private final List<AudioExperience> heardSounds = new LinkedList<>();
 
 	public PlayerMock(ServerMock server, String name)
 	{
@@ -322,16 +328,14 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public void openInventory(InventoryView inventory)
 	{
-		// reset the cursor as it is a new InventoryView
-		cursor = null;
+		closeInventory();
 		inventoryView = inventory;
 	}
 
 	@Override
 	public InventoryView openInventory(Inventory inventory)
 	{
-		// reset the cursor as it is a new InventoryView
-		cursor = null;
+		closeInventory();
 		inventoryView = new PlayerInventoryViewMock(this, inventory);
 		return inventoryView;
 	}
@@ -339,6 +343,12 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public void closeInventory()
 	{
+		if (inventoryView instanceof PlayerInventoryViewMock)
+		{
+			InventoryCloseEvent event = new InventoryCloseEvent(inventoryView);
+			Bukkit.getPluginManager().callEvent(event);
+		}
+
 		// reset the cursor as it is a new InventoryView
 		cursor = null;
 		inventoryView = new SimpleInventoryViewMock(this, null, inventory, InventoryType.CRAFTING);
@@ -1037,16 +1047,41 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public void playSound(Location location, Sound sound, SoundCategory category, float volume, float pitch)
 	{
-		// We could send a packet here in case some wants to test that?
-		// But really I don't think this method should do much at all.
-		// Perhaps we could add an assertSound(...) method in the future?
+		heardSounds.add(new AudioExperience(sound, category, location, volume, pitch));
+	}
+
+	public void assertSoundHeard(String message, Sound sound)
+	{
+		assertSoundHeard(message, sound, e -> true);
+	}
+
+	public void assertSoundHeard(String message, Sound sound, Predicate<AudioExperience> predicate)
+	{
+		for (AudioExperience audio : heardSounds)
+		{
+			if (audio.getSound() == sound && predicate.test(audio))
+			{
+				return;
+			}
+		}
+
+		fail(message);
+	}
+
+	public void assertSoundHeard(Sound sound)
+	{
+		assertSoundHeard("Sound Heard Assertion failed", sound);
+	}
+
+	public void assertSoundHeard(Sound sound, Predicate<AudioExperience> predicate)
+	{
+		assertSoundHeard("Sound Heard Assertion failed", sound, predicate);
 	}
 
 	@Override
 	public void stopSound(Sound sound)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		stopSound(sound, SoundCategory.MASTER);
 	}
 
 	@Override
@@ -1059,8 +1094,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public void stopSound(Sound sound, SoundCategory category)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// We just pretend the Sound has stopped.
 	}
 
 	@Override
