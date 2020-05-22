@@ -1226,13 +1226,16 @@ public class ServerMock implements Server
 	 * 
 	 * @param key       The {@link NamespacedKey} for this {@link Tag}
 	 * @param materials {@link Material Materials} which should be covered by this {@link Tag}
+	 * 
+	 * @return The newly created {@link Tag}
 	 */
-	public void createMaterialTag(NamespacedKey key, Material... materials)
+	public Tag<Material> createMaterialTag(NamespacedKey key, Material... materials)
 	{
 		Validate.notNull(key, "A NamespacedKey must never be null");
 
 		MockMaterialTag tag = new MockMaterialTag(key, materials);
 		materialTags.put(key, tag);
+		return tag;
 	}
 
 	@SuppressWarnings("unchecked")
