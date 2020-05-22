@@ -120,4 +120,12 @@ public class SuspiciousStewMetaMockTest
 		meta2.addCustomEffect(effect, true);
 		assertEquals(meta, meta2);
 	}
+
+	@Test
+	public void testClone()
+	{
+		SuspiciousStewMetaMock meta = new SuspiciousStewMetaMock();
+		SuspiciousStewMetaMock clone = meta.clone();
+		assertEquals(meta, clone);
+	}
 }

@@ -14,79 +14,95 @@ import org.jetbrains.annotations.NotNull;
  * @author TheBusyBiscuit
  *
  */
-public class KnowledgeBookMetaMock extends ItemMetaMock implements KnowledgeBookMeta {
+public class KnowledgeBookMetaMock extends ItemMetaMock implements KnowledgeBookMeta
+{
 
-    private static final int MAX_RECIPES = 32767;
-    
-    private List<NamespacedKey> recipes = new ArrayList<>();
+	private static final int MAX_RECIPES = 32767;
 
-    public KnowledgeBookMetaMock() {
-        super();
-    }
+	private final List<NamespacedKey> recipes = new ArrayList<>();
 
-    public KnowledgeBookMetaMock(KnowledgeBookMeta meta) {
-        super(meta);
+	public KnowledgeBookMetaMock()
+	{
+		super();
+	}
 
-        this.recipes = meta.getRecipes();
-    }
+	public KnowledgeBookMetaMock(KnowledgeBookMeta meta)
+	{
+		super(meta);
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = super.hashCode();
-        return prime * result + recipes.hashCode();
-    }
+		recipes.addAll(meta.getRecipes());
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (!super.equals(obj)) {
-            return false;
-        }
-        if (!(obj instanceof KnowledgeBookMetaMock)) {
-            return false;
-        }
+	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = super.hashCode();
+		return prime * result + recipes.hashCode();
+	}
 
-        KnowledgeBookMetaMock other = (KnowledgeBookMetaMock) obj;
-        return recipes.equals(other.recipes);
-    }
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+		{
+			return true;
+		}
+		if (!super.equals(obj))
+		{
+			return false;
+		}
+		if (!(obj instanceof KnowledgeBookMetaMock))
+		{
+			return false;
+		}
 
-    @Override
-    public KnowledgeBookMetaMock clone() {
-        KnowledgeBookMetaMock mock = (KnowledgeBookMetaMock) super.clone();
-        mock.recipes = new ArrayList<>(recipes);
-        return mock;
-    }
+		KnowledgeBookMetaMock other = (KnowledgeBookMetaMock) obj;
+		return recipes.equals(other.recipes);
+	}
 
-    @Override
-    public void addRecipe(@NotNull NamespacedKey... recipes) {
-        for (NamespacedKey recipe : recipes) {
-            if (this.recipes.size() >= MAX_RECIPES) {
-                return;
-            }
-            
-            if (recipe != null) {
-                this.recipes.add(recipe);
-            }
-        }
-    }
+	@Override
+	public KnowledgeBookMetaMock clone()
+	{
+		KnowledgeBookMetaMock mock = (KnowledgeBookMetaMock) super.clone();
+		mock.recipes.addAll(recipes);
+		return mock;
+	}
 
-    @Override
-    public @NotNull List<NamespacedKey> getRecipes() {
-        return Collections.unmodifiableList(recipes);
-    }
+	@Override
+	public void addRecipe(@NotNull NamespacedKey... recipes)
+	{
+		for (NamespacedKey recipe : recipes)
+		{
+			if (this.recipes.size() >= MAX_RECIPES)
+			{
+				return;
+			}
 
-    @Override
-    public boolean hasRecipes() {
-        return !recipes.isEmpty();
-    }
+			if (recipe != null)
+			{
+				this.recipes.add(recipe);
+			}
+		}
+	}
 
-    @Override
-    public void setRecipes(@NotNull List<NamespacedKey> recipes) {
-        this.recipes.clear();
-        this.addRecipe(recipes.toArray(new NamespacedKey[0]));
-    }
+	@Override
+	public @NotNull List<NamespacedKey> getRecipes()
+	{
+		return Collections.unmodifiableList(recipes);
+	}
+
+	@Override
+	public boolean hasRecipes()
+	{
+		return !recipes.isEmpty();
+	}
+
+	@Override
+	public void setRecipes(@NotNull List<NamespacedKey> recipes)
+	{
+		this.recipes.clear();
+		this.addRecipe(recipes.toArray(new NamespacedKey[0]));
+	}
 
 }

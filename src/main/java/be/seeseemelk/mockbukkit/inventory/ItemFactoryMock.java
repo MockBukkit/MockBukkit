@@ -12,6 +12,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.inventory.meta.BookMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.EnchantedBookMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.FireworkEffectMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.FireworkMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.KnowledgeBookMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.LeatherArmorMetaMock;
@@ -44,11 +46,9 @@ public class ItemFactoryMock implements ItemFactory
 			// TODO Auto-generated method stub
 			throw new UnimplementedOperationException();
 		case FIREWORK_STAR:
-			// TODO Auto-generated method stub
-			throw new UnimplementedOperationException();
+			return FireworkEffectMetaMock.class;
 		case FIREWORK_ROCKET:
-			// TODO Auto-generated method stub
-			throw new UnimplementedOperationException();
+			return FireworkMetaMock.class;
 		case POTION:
 		case LINGERING_POTION:
 		case SPLASH_POTION:

@@ -155,4 +155,12 @@ public class PotionMetaMockTest
 		meta.setBasePotionData(data);
 		assertEquals(data, meta.getBasePotionData());
 	}
+
+	@Test
+	public void testClone()
+	{
+		PotionMeta meta = new PotionMetaMock();
+		PotionMeta clone = meta.clone();
+		assertEquals(meta, clone);
+	}
 }
