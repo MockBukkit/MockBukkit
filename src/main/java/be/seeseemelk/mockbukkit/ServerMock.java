@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -22,6 +23,7 @@ import java.util.logging.LogManager;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang.Validate;
 import org.bukkit.BanEntry;
 import org.bukkit.BanList;
 import org.bukkit.BanList.Type;
@@ -96,6 +98,7 @@ public class ServerMock implements Server
 	private final Logger logger;
 	private final Thread mainThread;
 	private final MockUnsafeValues unsafe = new MockUnsafeValues();
+	private final Map<NamespacedKey, Tag<Material>> materialTags = new HashMap<>();
 
 	private final List<PlayerMock> players = new ArrayList<>();
 	private final Set<OfflinePlayer> offlinePlayers = new HashSet<>();
@@ -1216,11 +1219,38 @@ public class ServerMock implements Server
 		throw new UnimplementedOperationException();
 	}
 
-	@Override
-	public <T extends Keyed> Tag<T> getTag(String registry, NamespacedKey tag, Class<T> clazz)
+	/**
+	 * This creates a new Mock {@link Tag} for the {@link Material} class.<br>
+	 * Call this in advance before you are gonna access {@link #getTag(String, NamespacedKey, Class)} or any of the
+	 * constants defined in {@link Tag}.
+	 * 
+	 * @param key       The {@link NamespacedKey} for this {@link Tag}
+	 * @param materials {@link Material Materials} which should be covered by this {@link Tag}
+	 */
+	public void createMaterialTag(NamespacedKey key, Material... materials)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Validate.notNull(key, "A NamespacedKey must never be null");
+
+		MockMaterialTag tag = new MockMaterialTag(key, materials);
+		materialTags.put(key, tag);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T extends Keyed> Tag<T> getTag(String registry, NamespacedKey key, Class<T> clazz)
+	{
+		if (clazz == Material.class)
+		{
+			Tag<Material> tag = materialTags.get(key);
+
+			if (tag != null)
+			{
+				return (Tag<T>) tag;
+			}
+		}
+
+		// Per definition this method should return null if the given tag does not exist.
+		return null;
 	}
 
 	@Override
