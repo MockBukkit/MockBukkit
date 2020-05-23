@@ -19,6 +19,8 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.Tag;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
@@ -504,18 +506,38 @@ public class ServerMockTest
 	{
 		OfflinePlayerMock offlinePlayer = new OfflinePlayerMock("IAmOffline");
 		assertFalse(server.getOfflinePlayer(offlinePlayer.getUniqueId()) instanceof PlayerMock);
-		
+
 		PlayerMock onlinePlayer = offlinePlayer.join(server);
-		
+
 		assertFalse(offlinePlayer.isOnline());
 		assertTrue(onlinePlayer.isOnline());
 
 		// Assert that this is still the same Player (as far as name and uuid are concerned)
 		assertEquals(offlinePlayer.getName(), onlinePlayer.getName());
 		assertEquals(offlinePlayer.getUniqueId(), onlinePlayer.getUniqueId());
-		
+
 		// Assert that the PlayerMock takes priority over the OfflinePlayerMock
 		assertTrue(server.getOfflinePlayer(offlinePlayer.getUniqueId()) instanceof PlayerMock);
+	}
+
+	@Test
+	public void testCreateTag()
+	{
+		Tag<Material> tag = server.createMaterialTag(NamespacedKey.minecraft("diamonds"), Material.DIAMOND);
+		assertEquals(tag, server.getTag("items", tag.getKey(), Material.class));
+	}
+
+	@Test
+	public void testDefaultTags()
+	{
+		// This should correctly initialize the Tag constant
+		Tag<Material> tag = server.createMaterialTag(NamespacedKey.minecraft("beehives"), Material.BEEHIVE);
+		assertEquals(tag, Tag.BEEHIVES);
+
+		// These should just be null and NOT throw an exception
+		assertNull(Tag.BUTTONS);
+		assertNull(Tag.BEDS);
+		assertNull(Tag.BANNERS);
 	}
 }
 
