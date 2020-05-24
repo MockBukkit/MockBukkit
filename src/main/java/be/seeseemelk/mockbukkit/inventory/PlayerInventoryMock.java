@@ -11,6 +11,8 @@ import org.bukkit.inventory.PlayerInventory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+
 public class PlayerInventoryMock extends InventoryMock implements PlayerInventory
 {
 	protected static final int HOTBAR = 0;
@@ -31,6 +33,19 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	public HumanEntity getHolder()
 	{
 		return (HumanEntity) super.getHolder();
+	}
+
+	@Override
+	public ItemStack[] getStorageContents()
+	{
+		return Arrays.copyOfRange(getContents(), 0, 36);
+	}
+
+	@Override
+	public void setStorageContents(ItemStack[] items) throws IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException("setStorageContests has not been implemented for Player Inventories");
 	}
 
 	@Override

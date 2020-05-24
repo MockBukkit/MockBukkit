@@ -253,15 +253,13 @@ public abstract class InventoryMock implements Inventory
 	@Override
 	public ItemStack[] getStorageContents()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getContents();
 	}
 
 	@Override
 	public void setStorageContents(ItemStack[] items) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		setContents(items);
 	}
 
 	@Override
