@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertArrayEquals;
 
 import java.util.HashMap;
 import java.util.ListIterator;
@@ -42,11 +43,11 @@ public class InventoryMockTest
 		assertEquals(9, new SimpleInventoryMock(null, 9, InventoryType.CHEST).getSize());
 		assertEquals(18, new SimpleInventoryMock(null, 18, InventoryType.CHEST).getSize());
 	}
-	
+
 	@Test
 	public void constructor_SetsType()
 	{
-		assertEquals(InventoryType.CHEST, new SimpleInventoryMock(null,  9, InventoryType.CHEST).getType());
+		assertEquals(InventoryType.CHEST, new SimpleInventoryMock(null, 9, InventoryType.CHEST).getType());
 		assertEquals(InventoryType.DROPPER, new SimpleInventoryMock(null, 9, InventoryType.DROPPER).getType());
 	}
 
@@ -61,46 +62,46 @@ public class InventoryMockTest
 		}
 	}
 
-    @Test
-    public void testClearInventory()
-    {
-        for (int i = 0; i < inventory.getSize(); i++)
-        {
-            inventory.addItem(new ItemStack(Material.DIRT, 64));
-        }
-        
-        inventory.clear();
-        
-        for (int i = 0; i < inventory.getSize(); i++)
-        {
-            ItemStack item = inventory.getItem(i);
-            assertNotNull(item);
-            assertEquals(Material.AIR, item.getType());
-        }
-    }
+	@Test
+	public void testClearInventory()
+	{
+		for (int i = 0; i < inventory.getSize(); i++)
+		{
+			inventory.addItem(new ItemStack(Material.DIRT, 64));
+		}
 
-    @Test
-    public void testClearSlot()
-    {
-        inventory.setItem(0, new ItemStack(Material.DIAMOND));
-        assertEquals(Material.DIAMOND, inventory.getItem(0).getType());
+		inventory.clear();
 
-        inventory.clear(0);
-        assertEquals(Material.AIR, inventory.getItem(0).getType());
-    }
+		for (int i = 0; i < inventory.getSize(); i++)
+		{
+			ItemStack item = inventory.getItem(i);
+			assertNotNull(item);
+			assertEquals(Material.AIR, item.getType());
+		}
+	}
 
-    @Test
-    public void testFirstEmpty()
-    {
-        for (int i = 0; i < inventory.getSize(); i++)
-        {
-            inventory.addItem(new ItemStack(Material.DIRT, 64));
-        }
-        
-        assertEquals(-1, inventory.firstEmpty());
-        inventory.clear();
-        assertEquals(0, inventory.firstEmpty());
-    }
+	@Test
+	public void testClearSlot()
+	{
+		inventory.setItem(0, new ItemStack(Material.DIAMOND));
+		assertEquals(Material.DIAMOND, inventory.getItem(0).getType());
+
+		inventory.clear(0);
+		assertEquals(Material.AIR, inventory.getItem(0).getType());
+	}
+
+	@Test
+	public void testFirstEmpty()
+	{
+		for (int i = 0; i < inventory.getSize(); i++)
+		{
+			inventory.addItem(new ItemStack(Material.DIRT, 64));
+		}
+
+		assertEquals(-1, inventory.firstEmpty());
+		inventory.clear();
+		assertEquals(0, inventory.firstEmpty());
+	}
 
 	@Test
 	public void addItem_EmptyInventoryAddsOneStack_OneStackUsed()
@@ -186,7 +187,8 @@ public class InventoryMockTest
 
 		ItemStack item = new ItemStack(Material.DIRT, 32);
 
-		inventory.setContents(new ItemStack[] { item });
+		inventory.setContents(new ItemStack[]
+		{ item });
 
 		assertTrue(item.isSimilar(inventory.getItem(0)));
 		for (int i = 1; i < inventory.getSize(); i++)
@@ -200,7 +202,8 @@ public class InventoryMockTest
 	@Test
 	public void setContents_ArrayWithNulls_NullsIgnores()
 	{
-		inventory.setContents(new ItemStack[] { null });
+		inventory.setContents(new ItemStack[]
+		{ null });
 	}
 
 	@Test
@@ -234,8 +237,7 @@ public class InventoryMockTest
 	{
 		inventory.addItem(new ItemStack(Material.DIRT, 1));
 		AtomicInteger calls = new AtomicInteger(0);
-		inventory.assertTrueForNonNulls(itemstack ->
-		{
+		inventory.assertTrueForNonNulls(itemstack -> {
 			calls.incrementAndGet();
 			return true;
 		});
@@ -289,5 +291,11 @@ public class InventoryMockTest
 	{
 		inventory.addItem(new ItemStack(Material.GRASS, 3));
 		inventory.assertContainsAtLeast(new ItemStack(Material.DIRT), 4);
+	}
+
+	@Test
+	public void testContentsAndStorageContentsEqual()
+	{
+		assertArrayEquals(inventory.getContents(), inventory.getStorageContents());
 	}
 }
