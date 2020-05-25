@@ -354,6 +354,61 @@ public class PlayerMock extends LivingEntityMock implements Player
 		inventoryView = new SimpleInventoryViewMock(this, null, inventory, InventoryType.CRAFTING);
 	}
 
+	/**
+	 * This method is an assertion for the currently open {@link InventoryView} for this {@link Player}. The
+	 * {@link Predicate} refers to the top inventory, not the {@link PlayerInventory}. It uses the method
+	 * {@link InventoryView#getTopInventory()}.
+	 * 
+	 * @param message   The message to display upon failure
+	 * @param type      The {@link InventoryType} you are expecting
+	 * @param predicate A custom {@link Predicate} to check the opened {@link Inventory}.
+	 */
+	public void assertInventoryView(String message, InventoryType type, Predicate<Inventory> predicate)
+	{
+		InventoryView view = getOpenInventory();
+
+		if (view.getType() == type && predicate.test(view.getTopInventory()))
+		{
+			return;
+		}
+
+		fail(message);
+	}
+
+	/**
+	 * This method is an assertion for the currently open {@link InventoryView} for this {@link Player}. The
+	 * {@link Predicate} refers to the top inventory, not the {@link PlayerInventory}. It uses the method
+	 * {@link InventoryView#getTopInventory()}.
+	 * 
+	 * @param type      The {@link InventoryType} you are expecting
+	 * @param predicate A custom {@link Predicate} to check the opened {@link Inventory}.
+	 */
+	public void assertInventoryView(InventoryType type, Predicate<Inventory> predicate)
+	{
+		assertInventoryView("The InventoryView Assertion has failed", type, predicate);
+	}
+
+	/**
+	 * This method is an assertion for the currently open {@link InventoryView} for this {@link Player}.
+	 * 
+	 * @param type The {@link InventoryType} you are expecting
+	 */
+	public void assertInventoryView(InventoryType type)
+	{
+		assertInventoryView("The InventoryView Assertion has failed", type, inv -> true);
+	}
+
+	/**
+	 * This method is an assertion for the currently open {@link InventoryView} for this {@link Player}.
+	 * 
+	 * @param message The message to display upon failure
+	 * @param type    The {@link InventoryType} you are expecting
+	 */
+	public void assertInventoryView(String message, InventoryType type)
+	{
+		assertInventoryView(message, type, inv -> true);
+	}
+
 	@Override
 	public boolean performCommand(String command)
 	{
@@ -1094,7 +1149,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public void stopSound(Sound sound, SoundCategory category)
 	{
-		// We just pretend the Sound has stopped.
+		// We will just pretend the Sound has stopped.
 	}
 
 	@Override
