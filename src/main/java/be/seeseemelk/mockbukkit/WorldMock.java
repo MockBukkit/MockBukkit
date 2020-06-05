@@ -27,6 +27,7 @@ import org.bukkit.entity.Item;
 import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.world.TimeSkipEvent;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.inventory.ItemStack;
@@ -54,10 +55,12 @@ public class WorldMock implements World
 	private String name = "World";
 	private UUID uuid = UUID.randomUUID();
 	private Location spawnLocation;
+	private long fullTime = 0;
 	private int weatherDuration = 0;
 	private int thunderDuration = 0;
 	private boolean storming = false;
 	private Map<GameRule<?>, Object> gameRules = new HashMap<>();
+	private Environment environment = Environment.NORMAL;
 
 	/**
 	 * Creates a new mock world.
@@ -632,29 +635,31 @@ public class WorldMock implements World
 	@Override
 	public long getTime()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getFullTime() % 24000L;
 	}
 
 	@Override
 	public void setTime(long time)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		long base = this.getFullTime() - this.getFullTime() % 24000L;
+		this.setFullTime(base + time % 24000L);
 	}
 
 	@Override
 	public long getFullTime()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.fullTime;
 	}
 
 	@Override
 	public void setFullTime(long time)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		TimeSkipEvent event = new TimeSkipEvent(this, TimeSkipEvent.SkipReason.CUSTOM, time - this.getFullTime());
+		this.server.getPluginManager().callEvent(event);
+		if (!event.isCancelled())
+		{
+			this.fullTime += event.getSkipAmount();
+		}
 	}
 
 	@Override
@@ -743,8 +748,17 @@ public class WorldMock implements World
 	@Override
 	public Environment getEnvironment()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.environment;
+	}
+
+	/**
+	 * Set a new environment type for this world.
+	 *
+	 * @param environment The world environnement type.
+	 */
+	public void setEnvironment(Environment environment)
+	{
+		this.environment = environment;
 	}
 
 	@Override
