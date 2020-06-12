@@ -391,6 +391,8 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	{
 		if (effect != null)
 		{
+			// Bukkit now allows multiple effects of the same type,
+			// the force/success attributes are now obsolete
 			activeEffects.add(new ActivePotionEffect(effect));
 			return true;
 		}

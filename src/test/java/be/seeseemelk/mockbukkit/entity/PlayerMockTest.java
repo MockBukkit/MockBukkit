@@ -10,6 +10,8 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.junit.Assume.assumeTrue;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.UUID;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.TimeUnit;
@@ -42,6 +44,8 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -886,4 +890,42 @@ public class PlayerMockTest
 		assertEquals(20.0F, player.getSaturation(), 0.1F);
 	}
 
+	@Test
+	public void testPotionEffects()
+	{
+		PotionEffect effect = new PotionEffect(PotionEffectType.CONFUSION, 3, 1);
+		assertTrue(player.addPotionEffect(effect));
+
+		assertTrue(player.hasPotionEffect(effect.getType()));
+		assertTrue(player.getActivePotionEffects().contains(effect));
+
+		assertEquals(effect, player.getPotionEffect(effect.getType()));
+
+		player.removePotionEffect(effect.getType());
+		assertFalse(player.hasPotionEffect(effect.getType()));
+		assertFalse(player.getActivePotionEffects().contains(effect));
+
+	}
+
+	@Test
+	public void testInstantEffect()
+	{
+		PotionEffect instant = new PotionEffect(PotionEffectType.HEAL, 0, 1);
+		assertTrue(player.addPotionEffect(instant));
+		assertFalse(player.hasPotionEffect(instant.getType()));
+	}
+
+	@Test
+	public void testMultiplePotionEffects()
+	{
+		Collection<PotionEffect> effects = Arrays.asList(new PotionEffect(PotionEffectType.BAD_OMEN, 3, 1),
+				new PotionEffect(PotionEffectType.LUCK, 5, 2));
+
+		assertTrue(player.addPotionEffects(effects));
+
+		for (PotionEffect effect : effects)
+		{
+			assertTrue(player.hasPotionEffect(effect.getType()));
+		}
+	}
 }

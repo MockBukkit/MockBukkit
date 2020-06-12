@@ -23,7 +23,8 @@ class ActivePotionEffect
 	 */
 	public boolean hasExpired()
 	{
-		return timestamp + TimeUnit.SECONDS.toMillis(effect.getDuration() * 20) < System.currentTimeMillis();
+		int ticks = effect.getDuration() * 20;
+		return ticks < 1 || timestamp + TimeUnit.SECONDS.toMillis(ticks) < System.currentTimeMillis();
 	}
 
 	/**
