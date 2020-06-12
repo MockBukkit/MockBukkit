@@ -94,6 +94,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 	private int expTotal = 0;
 	private float exp = 0;
 	private int foodLevel = 20;
+	private float saturation = 5.0F;
 	private int expLevel = 0;
 	private boolean sneaking = false;
 	private boolean whitelisted = true;
@@ -144,8 +145,8 @@ public class PlayerMock extends LivingEntityMock implements Player
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + Objects.hash(attributes, exp, expLevel, expTotal, displayName, gamemode, getHealth(),
-				inventory, enderChest, inventoryView, getMaxHealth(), online, whitelisted, compassTarget,
-				bedSpawnLocation, cursor);
+				foodLevel, saturation, inventory, enderChest, inventoryView, getMaxHealth(), online, whitelisted,
+				compassTarget, bedSpawnLocation, cursor);
 		return result;
 	}
 
@@ -1430,15 +1431,14 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public float getSaturation()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return saturation;
 	}
 
 	@Override
 	public void setSaturation(float value)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// Saturation is constrained by the current food level
+		this.saturation = Math.min(getFoodLevel(), value);
 	}
 
 	@Override

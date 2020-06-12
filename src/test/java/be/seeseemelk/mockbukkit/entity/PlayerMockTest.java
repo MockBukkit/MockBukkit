@@ -870,4 +870,20 @@ public class PlayerMockTest
 		assertNull(player.getItemOnCursor());
 	}
 
+	@Test
+	public void testSaturation()
+	{
+		// Default level
+		assertEquals(5.0F, player.getSaturation(), 0.1F);
+
+		player.setFoodLevel(20);
+		player.setSaturation(8);
+		assertEquals(8.0F, player.getSaturation(), 0.1F);
+
+		// Testing the constraint
+		player.setFoodLevel(20);
+		player.setSaturation(10000);
+		assertEquals(20.0F, player.getSaturation(), 0.1F);
+	}
+
 }
