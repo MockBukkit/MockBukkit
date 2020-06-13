@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.EnumMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -42,11 +44,14 @@ import be.seeseemelk.mockbukkit.attribute.AttributeInstanceMock;
 
 public abstract class LivingEntityMock extends EntityMock implements LivingEntity
 {
+
 	private static final double MAX_HEALTH = 20.0;
 	private double health;
 	private double maxHealth = MAX_HEALTH;
 	protected boolean alive = true;
 	protected Map<Attribute, AttributeInstanceMock> attributes;
+
+	private final Set<ActivePotionEffect> activeEffects = new HashSet<>();
 
 	public LivingEntityMock(ServerMock server, UUID uuid)
 	{
@@ -377,50 +382,107 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public boolean addPotionEffect(PotionEffect effect)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return addPotionEffect(effect, false);
 	}
 
 	@Override
+	@Deprecated
 	public boolean addPotionEffect(PotionEffect effect, boolean force)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (effect != null)
+		{
+			// Bukkit now allows multiple effects of the same type,
+			// the force/success attributes are now obsolete
+			activeEffects.add(new ActivePotionEffect(effect));
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	@Override
 	public boolean addPotionEffects(Collection<PotionEffect> effects)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		boolean successful = true;
+
+		for (PotionEffect effect : effects)
+		{
+			if (!addPotionEffect(effect))
+			{
+				successful = false;
+			}
+		}
+
+		return successful;
 	}
 
 	@Override
 	public boolean hasPotionEffect(PotionEffectType type)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		for (PotionEffect effect : getActivePotionEffects())
+		{
+			if (effect.getType().equals(type))
+			{
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	@Override
 	public PotionEffect getPotionEffect(PotionEffectType type)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		for (PotionEffect effect : getActivePotionEffects())
+		{
+			if (effect.getType().equals(type))
+			{
+				return effect;
+			}
+		}
+
+		return null;
 	}
 
 	@Override
 	public void removePotionEffect(PotionEffectType type)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Iterator<ActivePotionEffect> iterator = activeEffects.iterator();
+
+		while (iterator.hasNext())
+		{
+			ActivePotionEffect effect = iterator.next();
+
+			if (effect.hasExpired() || effect.getPotionEffect().getType().equals(type))
+			{
+				iterator.remove();
+			}
+		}
 	}
 
 	@Override
 	public Collection<PotionEffect> getActivePotionEffects()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Set<PotionEffect> effects = new HashSet<>();
+		Iterator<ActivePotionEffect> iterator = activeEffects.iterator();
+
+		while (iterator.hasNext())
+		{
+			ActivePotionEffect effect = iterator.next();
+
+			if (effect.hasExpired())
+			{
+				iterator.remove();
+			}
+			else
+			{
+				effects.add(effect.getPotionEffect());
+			}
+		}
+
+		return effects;
 	}
 
 	@Override

@@ -1,7 +1,7 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import static org.junit.Assert.fail;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
@@ -66,8 +66,6 @@ import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.RayTraceResult;
@@ -94,6 +92,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 	private int expTotal = 0;
 	private float exp = 0;
 	private int foodLevel = 20;
+	private float saturation = 5.0F;
 	private int expLevel = 0;
 	private boolean sneaking = false;
 	private boolean whitelisted = true;
@@ -144,8 +143,8 @@ public class PlayerMock extends LivingEntityMock implements Player
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + Objects.hash(attributes, exp, expLevel, expTotal, displayName, gamemode, getHealth(),
-				inventory, enderChest, inventoryView, getMaxHealth(), online, whitelisted, compassTarget,
-				bedSpawnLocation, cursor);
+				foodLevel, saturation, inventory, enderChest, inventoryView, getMaxHealth(), online, whitelisted,
+				compassTarget, bedSpawnLocation, cursor);
 		return result;
 	}
 
@@ -631,55 +630,6 @@ public class PlayerMock extends LivingEntityMock implements Player
 
 	@Override
 	public Player getKiller()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean addPotionEffect(PotionEffect effect)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean addPotionEffect(PotionEffect effect, boolean force)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean addPotionEffects(Collection<PotionEffect> effects)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean hasPotionEffect(PotionEffectType type)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public PotionEffect getPotionEffect(PotionEffectType type)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void removePotionEffect(PotionEffectType type)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public Collection<PotionEffect> getActivePotionEffects()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1430,15 +1380,14 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public float getSaturation()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return saturation;
 	}
 
 	@Override
 	public void setSaturation(float value)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// Saturation is constrained by the current food level
+		this.saturation = Math.min(getFoodLevel(), value);
 	}
 
 	@Override
