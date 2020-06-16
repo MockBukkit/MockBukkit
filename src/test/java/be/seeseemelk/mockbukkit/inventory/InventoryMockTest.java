@@ -9,12 +9,14 @@ import static org.junit.Assert.assertArrayEquals;
 
 import java.util.HashMap;
 import java.util.ListIterator;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.bukkit.Material;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -52,13 +54,12 @@ public class InventoryMockTest
 	}
 
 	@Test
-	public void getItem_Default_AllAir()
+	public void getItem_Default_AllNull()
 	{
 		for (int i = 0; i < inventory.getSize(); i++)
 		{
 			ItemStack item = inventory.getItem(i);
-			assertNotNull(item);
-			assertEquals(Material.AIR, item.getType());
+			assertNull(item);
 		}
 	}
 
@@ -75,8 +76,7 @@ public class InventoryMockTest
 		for (int i = 0; i < inventory.getSize(); i++)
 		{
 			ItemStack item = inventory.getItem(i);
-			assertNotNull(item);
-			assertEquals(Material.AIR, item.getType());
+			assertNull(item);
 		}
 	}
 
@@ -87,7 +87,7 @@ public class InventoryMockTest
 		assertEquals(Material.DIAMOND, inventory.getItem(0).getType());
 
 		inventory.clear(0);
-		assertEquals(Material.AIR, inventory.getItem(0).getType());
+		assertNull(inventory.getItem(0));
 	}
 
 	@Test
@@ -112,8 +112,7 @@ public class InventoryMockTest
 		ItemStack stored = inventory.getItem(0);
 		assertEquals(stored.getAmount(), 64);
 		ItemStack next = inventory.getItem(1);
-		assertNotNull(next);
-		assertEquals(Material.AIR, next.getType());
+		assertNull(next);
 	}
 
 	@Test
@@ -187,23 +186,20 @@ public class InventoryMockTest
 
 		ItemStack item = new ItemStack(Material.DIRT, 32);
 
-		inventory.setContents(new ItemStack[]
-		{ item });
+		inventory.setContents(new ItemStack[] { item });
 
 		assertTrue(item.isSimilar(inventory.getItem(0)));
 		for (int i = 1; i < inventory.getSize(); i++)
 		{
 			ItemStack emptyItem = inventory.getItem(i);
-			assertNotNull(emptyItem);
-			assertEquals(Material.AIR, emptyItem.getType());
+			assertNull(emptyItem);
 		}
 	}
 
 	@Test
 	public void setContents_ArrayWithNulls_NullsIgnores()
 	{
-		inventory.setContents(new ItemStack[]
-		{ null });
+		inventory.setContents(new ItemStack[] { null });
 	}
 
 	@Test
@@ -222,14 +218,14 @@ public class InventoryMockTest
 	@Test
 	public void assertTrueForAll_ChecksIfNullOnEmptyInventory_DoesNotAssert()
 	{
-		inventory.assertTrueForAll(itemstack -> itemstack == null);
+		inventory.assertTrueForAll(Objects::isNull);
 	}
 
 	@Test(expected = AssertionError.class)
 	public void assertTrueForAll_ChecksIfNullOnNonEmptyInventory_Asserts()
 	{
 		inventory.addItem(new ItemStack(Material.DIRT, 1));
-		inventory.assertTrueForAll(itemstack -> itemstack == null);
+		inventory.assertTrueForAll(Objects::isNull);
 	}
 
 	@Test
