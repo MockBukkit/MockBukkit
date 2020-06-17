@@ -6,6 +6,7 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.Zombie;
+import org.jetbrains.annotations.Contract;
 
 import java.util.UUID;
 
@@ -52,7 +53,7 @@ public class ZombieMock extends MonsterMock implements Zombie
 	/**
 	 * This are unimplemented because they Bukkit specifies they should always fail? (@Contract Tag)
 	 * 
-	 * @param villager
+	 * @param villager If the zombie is a village
 	 */
 	@Override
 	public void setVillager(boolean villager)
@@ -64,12 +65,11 @@ public class ZombieMock extends MonsterMock implements Zombie
 	/**
 	 * This are unimplemented because they Bukkit specifies they should always fail? (@Contract Tag)
 	 * 
-	 * @param profession
+	 * @param profession Villager profession to use
 	 */
 	@Override
 	public void setVillagerProfession(Villager.Profession profession)
 	{
-		this.profession = profession;
 		throw new UnimplementedOperationException();
 	}
 

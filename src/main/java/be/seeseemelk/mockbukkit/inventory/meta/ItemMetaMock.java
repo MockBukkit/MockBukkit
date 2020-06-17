@@ -257,7 +257,7 @@ public class ItemMetaMock implements ItemMeta, Damageable {
 
 	/**
 	 * Required method for Bukkit deserialization.
-	 * @param args A serialized ItemMetaMock object in a Map<String, Object> format.
+	 * @param args A serialized ItemMetaMock object in a Map&lt;String, Object&gt; format.
 	 * @return A new instance of the ItemMetaMock class.
 	 */
 	@SuppressWarnings("unchecked")

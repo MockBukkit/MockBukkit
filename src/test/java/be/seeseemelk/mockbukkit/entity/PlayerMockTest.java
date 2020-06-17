@@ -820,7 +820,7 @@ public class PlayerMockTest
 
 		// The Player should have lost their inventory
 		assertTrue(player.isDead());
-		assertEquals(Material.AIR, player.getInventory().getItem(0).getType());
+		assertNull(player.getInventory().getItem(0));
 	}
 
 	@Test

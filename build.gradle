@@ -2,7 +2,7 @@ apply plugin: 'java-library'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'jacoco'
-apply plugin: 'maven'
+apply plugin: 'maven-publish'
 apply plugin: 'signing'
 
 sourceCompatibility = 1.8
@@ -16,7 +16,7 @@ repositories {
     }
 
     maven {
-        url 'http://repo.md-5.net/content/groups/public/'
+        url 'https://repo.md-5.net/content/groups/public/'
     }
 }
 
@@ -43,52 +43,65 @@ artifacts {
 }
 
 signing {
-    sign configurations.archives
+    sign publishing.publications
 }
 
 jacocoTestReport {
-	reports {
-		xml.enabled true
-	}
+    reports {
+        xml.enabled true
+    }
 }
 
 group = 'com.github.seeseemelk'
 version = '0.3.1-SNAPSHOT'
 
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            beforeDeployment {
-                MavenDeployment deployment -> signing.signPom(deployment)
-            }
-            repository(url: 'https://oss.sonatype.org/service/local/staging/deploy/maven2/') {
-                authentication(userName: findProperty('ossrhUsername'), password: findProperty('ossrhPassword'))
-            }
-            snapshotRepository(url: 'https://oss.sonatype.org/content/repositories/snapshots/') {
-                authentication(userName: findProperty('ossrhUsername'), password: findProperty('ossrhPassword'))
-            }
-            pom.project {
-                name 'MockBukkit-v1.15'
-                packaging 'jar'
-                description 'MockBukkit is a mocking framework for bukkit to allow the easy unit testing of Bukkit plugins.'
-                url 'https://github.com/seeseemelk/MockBukkit'
-                scm {
-                    connection 'scm:git:git://github.com/seeseemelk/MockBukkit.git'
-                    developerConnection 'scm:git:ssh://github.com:seeseemelk/MockBukkit.git'
-                    url 'https://github.com/seeseemelk/MockBukkit/tree/v1.15-spigot'
-                }
-                licenses {
-                    license {
-                        name 'MIT License'
-                        url 'https://github.com/seeseemelk/MockBukkit/blob/v1.15/LICENSE'
+configurations {
+    publishing {
+        publications {
+            mockBukkit(MavenPublication) {
+                from components.java
+                pom {
+                    name = 'MockBukkit-v1.15'
+                    packaging = 'jar'
+                    description = 'MockBukkit is a mocking framework for bukkit to allow the easy unit testing of Bukkit plugins.'
+                    url = 'https://github.com/seeseemelk/MockBukkit'
+                    scm {
+                        connection = 'scm:git:git://github.com/seeseemelk/MockBukkit.git'
+                        developerConnection = 'scm:git:ssh://github.com:seeseemelk/MockBukkit.git'
+                        url = 'https://github.com/seeseemelk/MockBukkit/tree/v1.15-spigot'
+                    }
+                    licenses {
+                        license {
+                            name = 'MIT License'
+                            url = 'https://github.com/seeseemelk/MockBukkit/blob/v1.15/LICENSE'
+                        }
+                    }
+                    developers {
+                        developer {
+                            id = 'seeseemelk'
+                            name = 'Sebastiaan de Schaetzen'
+                            email = 'sebastiaan.de.schaetzen@gmail.com'
+                        }
                     }
                 }
-                developers {
-                    developer {
-                        id 'seeseemelk'
-                        name 'Sebastiaan de Schaetzen'
-                        email 'sebastiaan.de.schaetzen@gmail.com'
-                    }
+            }
+        }
+
+        repositories {
+            maven {
+                name = 'repository'
+                url = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+                credentials {
+                    username = findProperty('ossrhUsername')
+                    password = findProperty('ossrhPassword')
+                }
+            }
+            maven {
+                name = 'snapshotRepository'
+                url = 'https://oss.sonatype.org/content/repositories/snapshots/'
+                credentials {
+                    username = findProperty('ossrhUsername')
+                    password = findProperty('ossrhPassword')
                 }
             }
         }
