@@ -45,8 +45,8 @@ public class BlockDataMock implements BlockData
     @Override
     public boolean matches(@Nullable BlockData data)
     {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException();
+        if (data == null) return false;
+        return data.getMaterial() == type;
     }
 
     @Override

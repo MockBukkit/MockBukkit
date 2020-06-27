@@ -225,6 +225,7 @@ public class BlockMock implements org.bukkit.block.Block
 	public void setType(Material type)
 	{
 		material = type;
+		blockData = new BlockDataMock(type);
 	}
 
 	@Override

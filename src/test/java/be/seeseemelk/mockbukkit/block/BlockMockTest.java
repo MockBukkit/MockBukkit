@@ -9,10 +9,12 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import be.seeseemelk.mockbukkit.WorldMock;
+import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 
 public class BlockMockTest
 {
@@ -119,4 +121,20 @@ public class BlockMockTest
 		assertEquals(block.getZ(), relative.getZ());
 	}
 
+	@Test
+	public void testGetBlockData()
+	{
+		Assert.assertEquals(block.getType(), block.getBlockData().getMaterial());
+	}
+
+	@Test
+	public void testSetBlockData()
+	{
+		BlockDataMock blockData = new BlockDataMock(Material.DIRT);
+		Material oldType = block.getType();
+
+		block.setBlockData(blockData);
+		Assert.assertEquals(blockData, block.getBlockData());
+		block.setType(oldType);
+	}
 }
