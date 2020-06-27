@@ -2,9 +2,10 @@ package be.seeseemelk.mockbukkit.block.data;
 
 import org.bukkit.Material;
 import org.bukkit.block.data.BlockData;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
 public class BlockDataMock implements BlockData
 {
@@ -25,21 +26,21 @@ public class BlockDataMock implements BlockData
     public @NotNull String getAsString()
     {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException();
+        throw new UnimplementedOperationException();
     }
 
     @Override
     public @NotNull String getAsString(boolean hideUnspecified)
     {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException();
+        throw new UnimplementedOperationException();
     }
 
     @Override
     public @NotNull BlockData merge(@NotNull BlockData data)
     {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException();
+        throw new UnimplementedOperationException();
     }
 
     @Override
