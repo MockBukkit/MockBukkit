@@ -50,7 +50,7 @@ public abstract class EntityMock implements Entity, MessageTarget
 	private String name = "entity";
 	private final Queue<String> messages = new LinkedTransferQueue<>();
 	private final Set<PermissionAttachment> permissionAttachments = new HashSet<>();
-	private Vector velocity;
+	private Vector velocity = new Vector(0, 0, 0);
 
 	public EntityMock(ServerMock server, UUID uuid)
 	{

@@ -29,6 +29,7 @@ import org.bukkit.util.Vector;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import junit.framework.AssertionFailedError;
+import org.jetbrains.annotations.NotNull;
 import org.junit.Assert;
 
 public class BlockMock implements org.bukkit.block.Block
@@ -374,9 +375,8 @@ public class BlockMock implements org.bukkit.block.Block
 	}
 
 	@Override
-	public void setBlockData(BlockData data)
+	public void setBlockData(@NotNull BlockData data)
 	{
-		Assert.assertNotNull(data);
 		this.blockData = data;
 	}
 
