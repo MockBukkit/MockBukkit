@@ -59,6 +59,7 @@ configurations {
     publishing {
         publications {
             mockBukkit(MavenPublication) {
+                artifactId = 'MockBukkit'
                 from components.java
                 pom {
                     name = 'MockBukkit-v1.15'
