@@ -20,6 +20,7 @@ import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionDefault;
+import org.bukkit.util.Vector;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -290,8 +291,8 @@ public class EntityMockTest
 	}
 
 	@Test
-	public void entityDamage_By_Player(){
-
+	public void entityDamage_By_Player()
+	{
 		World world = new WorldMock(Material.GRASS_BLOCK, 10);
 		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world,10,10,10), EntityType.ZOMBIE);
 		PlayerMock player1 = server.addPlayer();
@@ -302,14 +303,24 @@ public class EntityMockTest
 	}
 
 	@Test
-	public void entityDamage_Event_Triggered(){
+	public void entityDamage_Event_Triggered()
+	{
 		World world = new WorldMock(Material.GRASS_BLOCK, 10);
 		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world,10,10,10), EntityType.ZOMBIE);
 		PlayerMock player1 = server.addPlayer();
 		zombie.damage(4, player1);
 		server.getPluginManager().assertEventFired(EntityDamageByEntityEvent.class);
 	}
-	
+
+	@Test
+	public void setVelocity()
+	{
+		PlayerMock player1 = server.addPlayer();
+		Vector velocity = player1.getVelocity();
+		velocity.setY(velocity.getY() + 2);
+		player1.setVelocity(velocity);
+		assertEquals(player1.getVelocity(), velocity);
+	}
 }
 
 

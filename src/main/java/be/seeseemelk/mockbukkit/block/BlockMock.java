@@ -5,6 +5,9 @@ import static org.junit.Assert.fail;
 import java.util.Collection;
 import java.util.List;
 
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
+import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.FluidCollisionMode;
 import org.bukkit.Location;
@@ -26,6 +29,8 @@ import org.bukkit.util.Vector;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import junit.framework.AssertionFailedError;
+import org.jetbrains.annotations.NotNull;
+import org.junit.Assert;
 
 public class BlockMock implements org.bukkit.block.Block
 {
@@ -33,6 +38,7 @@ public class BlockMock implements org.bukkit.block.Block
 	private BlockState state;
 	private Material material;
 	private byte data;
+	private BlockData blockData;
 
 	/**
 	 * Creates a basic block made of air.
@@ -73,6 +79,7 @@ public class BlockMock implements org.bukkit.block.Block
 		this.material = material;
 		this.location = location;
 		state = new BlockStateMock();
+		this.blockData = new BlockDataMock(material);
 	}
 
 	@Override
@@ -219,6 +226,7 @@ public class BlockMock implements org.bukkit.block.Block
 	public void setType(Material type)
 	{
 		material = type;
+		blockData = new BlockDataMock(type);
 	}
 
 	@Override
@@ -363,15 +371,13 @@ public class BlockMock implements org.bukkit.block.Block
 	@Override
 	public BlockData getBlockData()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return blockData;
 	}
 
 	@Override
-	public void setBlockData(BlockData data)
+	public void setBlockData(@NotNull BlockData data)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.blockData = data;
 	}
 
 	@Override
