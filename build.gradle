@@ -55,55 +55,53 @@ jacocoTestReport {
 group = 'com.github.seeseemelk'
 version = '0.3.1-SNAPSHOT'
 
-configurations {
-    publishing {
-        publications {
-            mockBukkit(MavenPublication) {
-                artifactId = 'MockBukkit'
-                from components.java
-                pom {
-                    name = 'MockBukkit-v1.15'
-                    packaging = 'jar'
-                    description = 'MockBukkit is a mocking framework for bukkit to allow the easy unit testing of Bukkit plugins.'
-                    url = 'https://github.com/seeseemelk/MockBukkit'
-                    scm {
-                        connection = 'scm:git:git://github.com/seeseemelk/MockBukkit.git'
-                        developerConnection = 'scm:git:ssh://github.com:seeseemelk/MockBukkit.git'
-                        url = 'https://github.com/seeseemelk/MockBukkit/tree/v1.15-spigot'
+publishing {
+    publications {
+        mockBukkit(MavenPublication) {
+            artifactId = 'MockBukkit'
+            from components.java
+            pom {
+                name = 'MockBukkit-v1.15'
+                packaging = 'jar'
+                description = 'MockBukkit is a mocking framework for bukkit to allow the easy unit testing of Bukkit plugins.'
+                url = 'https://github.com/seeseemelk/MockBukkit'
+                scm {
+                    connection = 'scm:git:git://github.com/seeseemelk/MockBukkit.git'
+                    developerConnection = 'scm:git:ssh://github.com:seeseemelk/MockBukkit.git'
+                    url = 'https://github.com/seeseemelk/MockBukkit/tree/v1.15-spigot'
+                }
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'https://github.com/seeseemelk/MockBukkit/blob/v1.15/LICENSE'
                     }
-                    licenses {
-                        license {
-                            name = 'MIT License'
-                            url = 'https://github.com/seeseemelk/MockBukkit/blob/v1.15/LICENSE'
-                        }
-                    }
-                    developers {
-                        developer {
-                            id = 'seeseemelk'
-                            name = 'Sebastiaan de Schaetzen'
-                            email = 'sebastiaan.de.schaetzen@gmail.com'
-                        }
+                }
+                developers {
+                    developer {
+                        id = 'seeseemelk'
+                        name = 'Sebastiaan de Schaetzen'
+                        email = 'sebastiaan.de.schaetzen@gmail.com'
                     }
                 }
             }
         }
+    }
 
-        repositories {
-            maven {
-                name = 'repository'
-                url = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
-                credentials {
-                    username = findProperty('ossrhUsername')
-                    password = findProperty('ossrhPassword')
-                }
+    repositories {
+        maven {
+            name = 'repository'
+            url = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+            credentials {
+                username = findProperty('ossrhUsername')
+                password = findProperty('ossrhPassword')
             }
-            maven {
-                name = 'snapshotRepository'
-                url = 'https://oss.sonatype.org/content/repositories/snapshots/'
-                credentials {
-                    username = findProperty('ossrhUsername')
-                    password = findProperty('ossrhPassword')
-                }
+        }
+        maven {
+            name = 'snapshotRepository'
+            url = 'https://oss.sonatype.org/content/repositories/snapshots/'
+            credentials {
+                username = findProperty('ossrhUsername')
+                password = findProperty('ossrhPassword')
             }
         }
     }
