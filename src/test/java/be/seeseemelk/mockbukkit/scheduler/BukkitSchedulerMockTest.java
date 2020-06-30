@@ -101,7 +101,7 @@ public class BukkitSchedulerMockTest
 	}
 	
 	@Test
-	public void runTaskTimer_ZeroDelay_DoesntExecuteTask()
+	public void runTaskTimer_ZeroDelay_DoesntExecuteTaskImmediately()
 	{
 		AtomicInteger count = new AtomicInteger(0);
 		Runnable callback = () -> count.incrementAndGet();
