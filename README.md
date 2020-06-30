@@ -1,24 +1,73 @@
+[![Build Status](https://travis-ci.org/seeseemelk/MockBukkit.svg?branch=v1.14)](https://travis-ci.org/seeseemelk/MockBukkit)
+[![Documentation Status](https://readthedocs.org/projects/mockbukkit/badge/?version=latest)](https://mockbukkit.readthedocs.io/en/latest/?badge=latest)
 [![Maintainability](https://api.codeclimate.com/v1/badges/403a4bb837ca47333d33/maintainability)](https://codeclimate.com/github/seeseemelk/MockBukkit/maintainability)
-# MockBukkit
+[![Test Coverage](https://api.codeclimate.com/v1/badges/403a4bb837ca47333d33/test_coverage)](https://codeclimate.com/github/seeseemelk/MockBukkit/test_coverage)
+
+# ![MockBukkit](logo.png)
 MockBukkit is a framework that makes the unit testing of Bukkit plugins a whole lot easier.
-It aims to be a complete mock implementation.
+It aims to be provide complete mock implementation of CraftBukkit that can be completely controlled from a unit test.
 
 ## Usage
+MockBukkit can easily be included in your project using either Maven or gradle.
+
+### Adding MockBukkit via gradle
 MockBukkit can easily be included in gradle using mavenCentral.
+
 ```gradle
 repositories {
 	mavenCentral()
+	maven { url 'https://hub.spigotmc.org/nexus/content/repositories/public/' }
 }
+
 dependencies {
-    testCompile 'junit:junit:4.12'
-    testCompile 'com.github.seeseemelk:MockBukkit-v1.13:0.1.1-SNAPSHOT'
+	testImplementation 'com.github.seeseemelk:MockBukkit-v1.15:0.3.0-SNAPSHOT'
 }
 ```
 
-Note: use v1.8.8-SNAPSHOT to test a Bukkit 1.8.8 plugin or any other version if the branch exists.
+Note: use v1.13-SNAPSHOT to test a Bukkit 1.13 plugin or any other version if the branch exists.
 These branches will not be receiving patches actively, but any issues will be resolved and any pull requests on them will be accepted.
 This is because backporting every single patch on every branch is incredibely time consuming and slows down the development of Mockbukkit.
 
+If you prefer to always have the latest Git version or need a specific commit/branch, you can always use JitPack as your maven repository:
+
+```gradle
+repositories {
+	maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+	implementation 'com.github.seeseemelk:MockBukkit:v1.15-SNAPSHOT'
+}
+```
+
+### Adding MockBukkit via Maven
+MockBukkit can be included by using the [https://jitpack.io/](jitpack.io) repository and adding the dependency to your `pom.xml`.
+
+```xml
+<repositories>
+  <repository>
+    <id>jitpack.io</id>
+    <url>https://jitpack.io</url>
+  </repository>
+</repositories>
+
+<dependencies>
+  <dependency>
+    <groupId>com.github.seeseemelk</groupId>
+    <artifactId>MockBukkit</artifactId>
+    <version>v1.15-SNAPSHOT</version>
+    <scope>test</scope>
+  </dependency>
+</dependencies>
+```
+
+Note: use v1.13-SNAPSHOT to test a Bukkit 1.13 plugin or any other version if the branch exists.
+These branches will not be receiving patches actively, but any issues will be resolved and any pull requests on them will be accepted.
+This is because backporting every single patch on every branch is incredibely time consuming and slows down the development of Mockbukkit.
+
+The `scope` test is important here since you are likely to only be using MockBukkit during the `test` stage of your Maven lifecycle and not in your final product.
+
+### Using MockBukkit
 In order to use MockBukkit the plugin to be tested needs an extra constructor and it has to be initialised before each test.
 The plugin will need both a default constructor and an extra one that will call a super constructor.
 Your plugins constructor will look like this if your plugin was called ```MyPlugin```
@@ -53,7 +102,7 @@ public void setUp()
 @After
 public void tearDown()
 {
-    MockBukkit.unload();
+    MockBukkit.unmock();
 }
 ```
 
@@ -106,3 +155,8 @@ These exception extends `AssumationException` and will cause the test to be skip
 
 These exceptions should just be ignored, though pull requests that add functionality to MockBukkit are always welcome!
 If you don't want to add the required methods yourself you can also request the method on the issues page.
+
+## Releases
+Releases are not done often.
+If you need a feature or bugfix that is already available on Github but not yet on maven central, feel free to open an issue requesting a release.
+I will happily oblige.

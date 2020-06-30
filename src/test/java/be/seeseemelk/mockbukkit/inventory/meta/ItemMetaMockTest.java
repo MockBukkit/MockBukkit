@@ -5,35 +5,37 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.ServerMock;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ItemMetaMockTest {
+import be.seeseemelk.mockbukkit.MockBukkit;
+
+public class ItemMetaMockTest
+{
 	private ItemMetaMock meta;
-	
+
 	@Before
-	public void setUp() {
-		ServerMock mock = MockBukkit.mock();
+	public void setUp()
+	{
+		MockBukkit.mock();
 		meta = new ItemMetaMock();
 	}
+
 	@After
-	public void tearDown(){
-		MockBukkit.unload();
+	public void tearDown()
+	{
+		MockBukkit.unmock();
 	}
-	
+
 	@Test
 	public void new_CopyConstructor_Copied()
 	{
@@ -46,13 +48,13 @@ public class ItemMetaMockTest {
 		assertTrue(meta.equals(meta2));
 		assertEquals(meta.hashCode(), meta2.hashCode());
 	}
-	
+
 	@Test
 	public void hasDisplayName_Default_False()
 	{
 		assertFalse(meta.hasDisplayName());
 	}
-	
+
 	@Test
 	public void setDisplayName_NewName_NameSetExactly()
 	{
@@ -60,7 +62,7 @@ public class ItemMetaMockTest {
 		assertTrue(meta.hasDisplayName());
 		assertEquals("Some name", meta.getDisplayName());
 	}
-	
+
 	@Test
 	public void setDisplayName_Null_NameRemoves()
 	{
@@ -68,7 +70,7 @@ public class ItemMetaMockTest {
 		meta.setDisplayName(null);
 		assertFalse(meta.hasDisplayName());
 	}
-	
+
 	@Test
 	public void equals_SameWithoutDisplayName_True()
 	{
@@ -76,7 +78,7 @@ public class ItemMetaMockTest {
 		assertTrue(meta.equals(meta2));
 		assertEquals(meta.hashCode(), meta2.hashCode());
 	}
-	
+
 	@Test
 	public void equals_SameWithDisplayName_True()
 	{
@@ -86,7 +88,7 @@ public class ItemMetaMockTest {
 		assertTrue(meta.equals(meta2));
 		assertEquals(meta.hashCode(), meta2.hashCode());
 	}
-	
+
 	@Test
 	public void equals_SameLore_True()
 	{
@@ -97,7 +99,7 @@ public class ItemMetaMockTest {
 		assertTrue(meta2.equals(meta));
 		assertEquals(meta.hashCode(), meta2.hashCode());
 	}
-	
+
 	@Test
 	public void equals_DifferentDisplayName_False()
 	{
@@ -106,7 +108,7 @@ public class ItemMetaMockTest {
 		meta2.setDisplayName("Different name");
 		assertFalse(meta.equals(meta2));
 	}
-	
+
 	@Test
 	public void equals_OneWithDisplayNameOneWithout_False()
 	{
@@ -115,7 +117,7 @@ public class ItemMetaMockTest {
 		assertFalse(meta.equals(meta2));
 		assertFalse(meta2.equals(meta));
 	}
-	
+
 	@Test
 	public void equals_OneWithLoreOneWithout_False()
 	{
@@ -124,7 +126,7 @@ public class ItemMetaMockTest {
 		assertFalse(meta.equals(meta2));
 		assertFalse(meta2.equals(meta));
 	}
-	
+
 	@Test
 	public void equals_DifferentSizedLore_False()
 	{
@@ -134,13 +136,13 @@ public class ItemMetaMockTest {
 		assertFalse(meta.equals(meta2));
 		assertFalse(meta2.equals(meta));
 	}
-	
+
 	@Test
 	public void equals_Null_False()
 	{
 		assertFalse(meta.equals(null));
 	}
-	
+
 	@Test
 	public void equals_SameUnbreakableProperty_True()
 	{
@@ -152,7 +154,7 @@ public class ItemMetaMockTest {
 		meta2.setUnbreakable(true);
 		assertTrue(meta.equals(meta2));
 	}
-	
+
 	@Test
 	public void equals_DifferentUnbreakableProperty_False()
 	{
@@ -162,7 +164,7 @@ public class ItemMetaMockTest {
 		assertTrue(meta.equals(meta2));
 		assertTrue(meta2.equals(meta));
 	}
-	
+
 	@Test
 	public void clone_WithDisplayName_ClonedExactly()
 	{
@@ -171,20 +173,20 @@ public class ItemMetaMockTest {
 		assertEquals(meta, cloned);
 		assertEquals(meta.hashCode(), cloned.hashCode());
 	}
-	
+
 	@Test
 	public void hasLore_NoLore_False()
 	{
 		assertFalse(meta.hasLore());
 	}
-	
+
 	@Test
 	public void hasLore_HasLore_True()
 	{
 		meta.setLore(Arrays.asList("Hello", "world"));
 		assertTrue(meta.hasLore());
 	}
-	
+
 	@Test
 	public void getLore_LoreSet_ExactLines()
 	{
@@ -194,7 +196,7 @@ public class ItemMetaMockTest {
 		assertEquals("Hello", lore.get(0));
 		assertEquals("world", lore.get(1));
 	}
-	
+
 	@Test
 	public void getLore_LoreChangedAfterSet_LoreNotChanged()
 	{
@@ -208,7 +210,7 @@ public class ItemMetaMockTest {
 		assertEquals("Hello", lore.get(0));
 		assertEquals("world", lore.get(1));
 	}
-	
+
 	@Test
 	public void hasEnchants()
 	{
@@ -216,7 +218,7 @@ public class ItemMetaMockTest {
 		meta.addEnchant(Enchantment.DURABILITY, 1, true);
 		assertTrue(meta.hasEnchants());
 	}
-	
+
 	@Test
 	public void hasEnchant()
 	{
@@ -224,7 +226,7 @@ public class ItemMetaMockTest {
 		meta.addEnchant(Enchantment.MENDING, 1, true);
 		assertTrue(meta.hasEnchant(Enchantment.MENDING));
 	}
-	
+
 	@Test
 	public void getEnchantLevel()
 	{
@@ -232,78 +234,78 @@ public class ItemMetaMockTest {
 		meta.addEnchant(Enchantment.DURABILITY, 50, true);
 		assertEquals(50, meta.getEnchantLevel(Enchantment.DURABILITY));
 	}
-	
+
 	@Test
 	public void getEnchants()
 	{
 		meta.addEnchant(Enchantment.DURABILITY, 3, true);
-		
+
 		Map<Enchantment, Integer> actual = meta.getEnchants();
 		assertEquals(1, actual.size());
 		assertTrue(3 == actual.get(Enchantment.DURABILITY));
 	}
-	
+
 	@Test
 	public void removeEnchant_NotExisting()
 	{
 		assertFalse(meta.removeEnchant(Enchantment.DAMAGE_ALL));
 	}
-	
+
 	@Test
 	public void removeEnchant()
 	{
 		meta.addEnchant(Enchantment.DAMAGE_ALL, 5, true);
 		assertTrue(meta.removeEnchant(Enchantment.DAMAGE_ALL));
 	}
-	
+
 	@Test
 	public void addEnchant_IgnoreLevel()
 	{
 		assertTrue(meta.addEnchant(Enchantment.DURABILITY, 100, true));
 		assertTrue(meta.hasEnchant(Enchantment.DURABILITY));
 	}
-	
+
 	@Test
 	public void addEnchant_AlreadyExist()
 	{
 		meta.addEnchant(Enchantment.DURABILITY, 100, true);
 		assertFalse(meta.addEnchant(Enchantment.DURABILITY, 100, true));
 	}
-	
+
 	@Test
 	public void setUnbreakable_True_ItemIsUnbreakable()
 	{
 		meta.setUnbreakable(true);
 		assertTrue(meta.isUnbreakable());
 	}
-	
+
 	@Test
 	public void setUnbreakable_False_ItemIsBreakable()
 	{
 		meta.setUnbreakable(false);
 		assertFalse(meta.isUnbreakable());
 	}
-	
+
 	@Test
 	public void assertHasNoLore_HasNoLore_Returns()
 	{
 		meta.assertHasNoLore();
 	}
-	
+
 	@Test(expected = AssertionError.class)
 	public void assertHasNoLore_HasNoLore_Asserts()
 	{
 		meta.setLore(Arrays.asList("Hello", "world"));
 		meta.assertHasNoLore();
 	}
-	
+
 	@Test
 	public void assertLore_CorrectLore_Returns()
 	{
 		meta.setLore(Arrays.asList("Hello", "world"));
 		meta.assertLore("Hello", "world");
 	}
-	
+
 	@Test(expected = AssertionError.class)
 	public void assertLore_InorrectLore_Asserts()
 	{
@@ -312,14 +314,76 @@ public class ItemMetaMockTest {
 	}
 
 	@Test
-	public void assertDamageCorrectlySet(){
+	public void assertDamageCorrectlySet()
+	{
 		int value = 500;
 		meta.setDamage(value);
 		ItemStack item = new ItemStack(Material.DIAMOND_SWORD);
 		item.setItemMeta(meta);
-		if(meta != null) {
-			int damage = ((Damageable)item.getItemMeta()).getDamage();
-			Assert.assertEquals(value, damage);
-		}
+
+		Damageable itemMeta = (Damageable) item.getItemMeta();
+		int damage = itemMeta.getDamage();
+		assertEquals(value, damage);
+		assertTrue(itemMeta.hasDamage());
+	}
+
+	@Test
+	public void assertNoDamage()
+	{
+		meta.setDamage(0);
+		ItemStack item = new ItemStack(Material.DIAMOND_SWORD);
+		item.setItemMeta(meta);
+
+		Damageable itemMeta = (Damageable) item.getItemMeta();
+		int damage = itemMeta.getDamage();
+		assertEquals(0, damage);
+		assertFalse(itemMeta.hasDamage());
+	}
+
+	@Test
+	public void assertCustomModelData()
+	{
+		meta.setCustomModelData(null);
+		assertFalse(meta.hasCustomModelData());
+
+		meta.setCustomModelData(100);
+		assertTrue(meta.hasCustomModelData());
+		assertEquals(100, meta.getCustomModelData());
+	}
+
+	@Test
+	public void assertSerialize()
+	{
+
+		// Tests for displayName, Lore, enchants, unbreakable status, and damage
+		meta.setDisplayName("Test name");
+		meta.setLore(Arrays.asList("Test lore"));
+		meta.setUnbreakable(true);
+		meta.setDamage(5);
+
+		Map<String, Object> expected = new HashMap<>();
+		expected.put("displayName", "Test name");
+		expected.put("lore", Arrays.asList("Test lore"));
+		expected.put("unbreakable", true);
+		expected.put("damage", 5);
+
+		Map<String, Object> actual = meta.serialize();
+
+		// Perform tests
+		assertEquals(expected.get("displayName"), actual.get("displayName"));
+		assertEquals(expected.get("lore"), actual.get("lore"));
+		assertEquals(expected.get("unbreakable"), actual.get("unbreakable"));
+		assertEquals(expected.get("damage"), actual.get("damage"));
+
+	}
+
+	@Test
+	public void assertDeserialize()
+	{
+
+		Map<String, Object> actual = meta.serialize();
+
+		assertEquals(meta, ItemMetaMock.deserialize(actual));
+
 	}
 }

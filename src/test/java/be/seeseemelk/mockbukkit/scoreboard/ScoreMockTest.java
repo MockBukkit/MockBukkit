@@ -21,7 +21,7 @@ public class ScoreMockTest
 	private ScoreMock score;
 	
 	@Before
-	public void setUp() throws Exception
+	public void setUp()
 	{
 		server = MockBukkit.mock();
 		scoreboard = server.getScoreboardManager().getNewScoreboard();
@@ -30,9 +30,9 @@ public class ScoreMockTest
 	}
 	
 	@After
-	public void tearDown() throws Exception
+	public void tearDown()
 	{
-		MockBukkit.unload();
+		MockBukkit.unmock();
 	}
 	
 	@Test

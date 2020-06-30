@@ -2,76 +2,98 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.Zombie;
+import org.jetbrains.annotations.Contract;
 
 import java.util.UUID;
 
-public class ZombieMock extends MonsterMock implements Zombie {
-    private boolean baby;
-    private boolean villager;
-    private Villager.Profession profession;
-    private boolean converting;
-    private int conversionTime;
+public class ZombieMock extends MonsterMock implements Zombie
+{
 
-    public ZombieMock(ServerMock server, UUID uuid) {
-        super(server, uuid);
-        setMaxHealth(20);
-        this.setHealth(20);
-    }
+	private boolean baby;
+	private boolean villager;
+	private Villager.Profession profession;
+	private boolean converting;
+	private int conversionTime;
 
-    @Override
-    public boolean isBaby() {
-        return baby;
-    }
+	public ZombieMock(ServerMock server, UUID uuid)
+	{
+		super(server, uuid);
+		setMaxHealth(20);
+		setHealth(20);
+	}
 
-    @Override
-    public void setBaby(boolean baby) {
-        this.baby = baby;
-    }
+	@Override
+	public EntityType getType()
+	{
+		return EntityType.ZOMBIE;
+	}
 
-    @Override
-    public boolean isVillager() {
-        return villager;
-    }
+	@Override
+	public boolean isBaby()
+	{
+		return baby;
+	}
 
-    /**
-     * This are unimplemented because they Bukkit specifies they should always fail? (@Contract Tag)
-     * @param villager
-     */
-    @Override
-    public void setVillager(boolean villager){
-        this.villager = villager;
-        throw new UnimplementedOperationException();
-    }
+	@Override
+	public void setBaby(boolean baby)
+	{
+		this.baby = baby;
+	}
 
-    /**
-     * This are unimplemented because they Bukkit specifies they should always fail? (@Contract Tag)
-     * @param profession
-     */
-    @Override
-    public void setVillagerProfession(Villager.Profession profession) {
-        this.profession = profession;
-        throw new UnimplementedOperationException();
-    }
+	@Override
+	public boolean isVillager()
+	{
+		return villager;
+	}
 
-    @Override
-    public Villager.Profession getVillagerProfession() {
-        return profession;
-    }
+	/**
+	 * This are unimplemented because they Bukkit specifies they should always fail? (@Contract Tag)
+	 * 
+	 * @param villager If the zombie is a village
+	 */
+	@Override
+	public void setVillager(boolean villager)
+	{
+		this.villager = villager;
+		throw new UnimplementedOperationException();
+	}
 
-    @Override
-    public boolean isConverting() {
-        return converting;
-    }
+	/**
+	 * This are unimplemented because they Bukkit specifies they should always fail? (@Contract Tag)
+	 * 
+	 * @param profession Villager profession to use
+	 */
+	@Override
+	public void setVillagerProfession(Villager.Profession profession)
+	{
+		throw new UnimplementedOperationException();
+	}
 
-    @Override
-    public int getConversionTime() {
-        return conversionTime;
-    }
+	@Override
+	public Villager.Profession getVillagerProfession()
+	{
+		return profession;
+	}
 
-    @Override
-    public void setConversionTime(int conversionTime) {
-        this.conversionTime = conversionTime;
-    }
+	@Override
+	public boolean isConverting()
+	{
+		return converting;
+	}
+
+	@Override
+	public int getConversionTime()
+	{
+		return conversionTime;
+	}
+
+	@Override
+	public void setConversionTime(int conversionTime)
+	{
+		this.conversionTime = conversionTime;
+	}
 }

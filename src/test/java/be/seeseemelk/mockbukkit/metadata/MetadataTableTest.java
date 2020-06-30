@@ -14,26 +14,24 @@ import org.junit.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.MockPlugin;
-import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.TestPlugin;
 
 public class MetadataTableTest
 {
-	@SuppressWarnings("unused")
-	private ServerMock server;
+
 	private MetadataTable mt;
 
 	@Before
-	public void setUp() throws Exception
+	public void setUp()
 	{
-		server = MockBukkit.mock();
+		MockBukkit.mock();
 		mt = new MetadataTable();
 	}
 
 	@After
-	public void tearDown() throws Exception
+	public void tearDown()
 	{
-		MockBukkit.unload();
+		MockBukkit.unmock();
 	}
 
 	@Test
@@ -44,7 +42,7 @@ public class MetadataTableTest
 		mt.setMetadata("MyMetadata", new FixedMetadataValue(plugin, "wee"));
 		assertTrue(mt.hasMetadata("MyMetadata"));
 	}
-	
+
 	@Test
 	public void getMetadata_MultipleMetaDataSetByMultiplePlugins_TwoMetadataValuesFound()
 	{
@@ -69,7 +67,7 @@ public class MetadataTableTest
 		assertEquals("also wee", value2.asString());
 		assertEquals(plugin2, value2.getOwningPlugin());
 	}
-	
+
 	@Test
 	public void removeMetadata_MultipleSet_OneRemoved()
 	{
@@ -84,7 +82,7 @@ public class MetadataTableTest
 		MetadataValue value = metadata.get(0);
 		assertEquals(plugin2, value.getOwningPlugin());
 	}
-	
+
 	@Test
 	public void removeMetadata_NoneSet_NothingHappens()
 	{
@@ -93,26 +91,3 @@ public class MetadataTableTest
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

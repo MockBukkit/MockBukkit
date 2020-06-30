@@ -5,6 +5,9 @@ import static org.junit.Assert.fail;
 import java.util.Collection;
 import java.util.List;
 
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
+import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.FluidCollisionMode;
 import org.bukkit.Location;
@@ -16,6 +19,7 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.block.data.BlockData;
+import org.bukkit.entity.Entity;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
@@ -25,6 +29,8 @@ import org.bukkit.util.Vector;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import junit.framework.AssertionFailedError;
+import org.jetbrains.annotations.NotNull;
+import org.junit.Assert;
 
 public class BlockMock implements org.bukkit.block.Block
 {
@@ -32,7 +38,8 @@ public class BlockMock implements org.bukkit.block.Block
 	private BlockState state;
 	private Material material;
 	private byte data;
-	
+	private BlockData blockData;
+
 	/**
 	 * Creates a basic block made of air.
 	 */
@@ -40,29 +47,30 @@ public class BlockMock implements org.bukkit.block.Block
 	{
 		this(Material.AIR);
 	}
-	
+
 	/**
 	 * Creates a basic block made of air at a certain location.
+	 * 
 	 * @param location The location of the block.
 	 */
 	public BlockMock(Location location)
 	{
 		this(Material.AIR, location);
 	}
-	
+
 	/**
 	 * Creates a basic block with a given material.
 	 * 
-	 * @param material
-	 *            The material to give the block.
+	 * @param material The material to give the block.
 	 */
 	public BlockMock(Material material)
 	{
 		this(material, null);
 	}
-	
+
 	/**
 	 * Creates a basic block with a given material that is also linked to a specific location.
+	 * 
 	 * @param material The material of the block.
 	 * @param location The location of the block. Can be {@code null} if not needed.
 	 */
@@ -71,291 +79,288 @@ public class BlockMock implements org.bukkit.block.Block
 		this.material = material;
 		this.location = location;
 		state = new BlockStateMock();
+		this.blockData = new BlockDataMock(material);
 	}
-	
+
 	@Override
 	public void setMetadata(String metadataKey, MetadataValue newMetadataValue)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 	@Override
 	public List<MetadataValue> getMetadata(String metadataKey)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 	@Override
 	public boolean hasMetadata(String metadataKey)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 	@Override
 	public void removeMetadata(String metadataKey, Plugin owningPlugin)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 	@Override
 	@Deprecated
 	public byte getData()
 	{
 		return data;
 	}
-	
+
 	@Override
 	public Block getRelative(int modX, int modY, int modZ)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		int x = location.getBlockX() + modX;
+		int y = location.getBlockY() + modY;
+		int z = location.getBlockZ() + modZ;
+		return location.getWorld().getBlockAt(x, y, z);
 	}
-	
+
 	@Override
 	public Block getRelative(BlockFace face)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getRelative(face, 1);
 	}
-	
+
 	@Override
 	public Block getRelative(BlockFace face, int distance)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getRelative(face.getModX() * distance, face.getModY() * distance, face.getModZ() * distance);
 	}
-	
+
 	/**
 	 * Assets that the material type of the block is equal to a given type.
 	 * 
-	 * @param material
-	 *            The material type that the block should have.
-	 * @throws AssertionFailedError
-	 *             Thrown if the material type of the block does not equal the given
-	 *             material type.
+	 * @param material The material type that the block should have.
+	 * @throws AssertionFailedError Thrown if the material type of the block does not equal the given material type.
 	 */
 	public void assertType(Material material) throws AssertionFailedError
 	{
 		if (this.material != material)
 		{
-			fail(String.format("Block material type is <%s>, but <%s> was expected.",
-					this.material, material));
+			fail(String.format("Block material type is <%s>, but <%s> was expected.", this.material, material));
 		}
 	}
-	
+
 	@Override
 	public Material getType()
 	{
 		return material;
 	}
-	
+
 	@Override
 	public byte getLightLevel()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 	@Override
 	public byte getLightFromSky()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 	@Override
 	public byte getLightFromBlocks()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 	@Override
 	public World getWorld()
 	{
 		return location.getWorld();
 	}
-	
+
 	@Override
 	public int getX()
 	{
 		return location.getBlockX();
 	}
-	
+
 	@Override
 	public int getY()
 	{
 		return location.getBlockY();
 	}
-	
+
 	@Override
 	public int getZ()
 	{
 		return location.getBlockZ();
 	}
-	
+
 	@Override
 	public Location getLocation()
 	{
 		return location;
 	}
-	
+
 	@Override
 	public Location getLocation(Location loc)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 	@Override
 	public Chunk getChunk()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return location.getWorld().getChunkAt(this);
 	}
-	
+
 	@Override
 	public void setType(Material type)
 	{
 		material = type;
+		blockData = new BlockDataMock(type);
 	}
-	
+
 	@Override
 	public void setType(Material type, boolean applyPhysics)
 	{
 		setType(material);
 	}
-	
+
 	@Override
 	public BlockFace getFace(Block block)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 	@Override
 	public BlockState getState()
 	{
 		return state;
 	}
-	
+
 	@Override
 	public Biome getBiome()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 	@Override
 	public void setBiome(Biome bio)
 	{
-		
+
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 	@Override
 	public boolean isBlockPowered()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 	@Override
 	public boolean isBlockIndirectlyPowered()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 	@Override
 	public boolean isBlockFacePowered(BlockFace face)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 	@Override
 	public boolean isBlockFaceIndirectlyPowered(BlockFace face)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 	@Override
 	public int getBlockPower(BlockFace face)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 	@Override
 	public int getBlockPower()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 	@Override
 	public boolean isEmpty()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 	@Override
 	public boolean isLiquid()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 	@Override
 	public double getTemperature()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 	@Override
 	public double getHumidity()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 	@Override
 	public PistonMoveReaction getPistonMoveReaction()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 	@Override
 	public boolean breakNaturally()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 	@Override
 	public boolean breakNaturally(ItemStack tool)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 	@Override
 	public Collection<ItemStack> getDrops()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 	@Override
 	public Collection<ItemStack> getDrops(ItemStack tool)
 	{
@@ -366,15 +371,13 @@ public class BlockMock implements org.bukkit.block.Block
 	@Override
 	public BlockData getBlockData()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return blockData;
 	}
 
 	@Override
-	public void setBlockData(BlockData data)
+	public void setBlockData(@NotNull BlockData data)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.blockData = data;
 	}
 
 	@Override
@@ -392,8 +395,7 @@ public class BlockMock implements org.bukkit.block.Block
 	}
 
 	@Override
-	public RayTraceResult rayTrace(Location start, Vector direction, double maxDistance,
-			FluidCollisionMode fluidCollisionMode)
+	public RayTraceResult rayTrace(Location start, Vector direction, double maxDistance, FluidCollisionMode fluidCollisionMode)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -401,6 +403,13 @@ public class BlockMock implements org.bukkit.block.Block
 
 	@Override
 	public BoundingBox getBoundingBox()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public Collection<ItemStack> getDrops(ItemStack tool, Entity entity)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

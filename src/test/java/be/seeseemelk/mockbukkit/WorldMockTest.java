@@ -17,6 +17,7 @@ import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.event.world.TimeSkipEvent;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,7 +37,7 @@ public class WorldMockTest
 	@After
 	public void tearDown()
 	{
-		MockBukkit.unload();
+		MockBukkit.unmock();
 	}
 	
 	@Test
@@ -240,6 +241,60 @@ public class WorldMockTest
 		assertEquals(zombie.getLocation().getBlockZ(), 50);
 		assertTrue(world.getEntities().size()>0);
 
+	}
+
+	@Test
+	public void onCreated_TimeSetToBeZero()
+	{
+		WorldMock world = new WorldMock();
+		assertEquals("World time should be zero", 0L, world.getFullTime());
+		assertEquals("Day time should be zero", 0L, world.getTime());
+	}
+
+	@Test
+	public void setTime_DayTimeValue()
+	{
+		WorldMock world = new WorldMock();
+		world.setTime(20L);
+		assertEquals(20L, world.getTime());
+		assertEquals(20L, world.getFullTime());
+	}
+
+	@Test
+	public void setTime_FullTimeValue()
+	{
+		WorldMock world = new WorldMock();
+		world.setFullTime(3L * 24000L + 20L);
+		assertEquals(20L, world.getTime());
+		assertEquals(3L * 24000L + 20L, world.getFullTime());
+	}
+
+	@Test
+	public void setTime_FullTimeShouldBeAdjustedWithDayTime()
+	{
+		WorldMock world = new WorldMock();
+		world.setFullTime(3L * 24000L + 20L);
+		world.setTime(12000L);
+		assertEquals(12000L, world.getTime());
+		assertEquals(3L * 24000L + 12000L, world.getFullTime());
+	}
+
+	@Test
+	public void setTime_Event_Triggered()
+	{
+		WorldMock world = new WorldMock();
+		world.setTime(6000L);
+		world.setTime(10000L);
+		server.getPluginManager().assertEventFired(TimeSkipEvent.class, event ->
+				event.getSkipAmount() == 4000L && event.getSkipReason().equals(TimeSkipEvent.SkipReason.CUSTOM)
+		);
+	}
+
+	@Test
+	public void onCreated_EnvironmentSetToBeNormal()
+	{
+		WorldMock world = new WorldMock();
+		assertEquals("World environment type should be normal", World.Environment.NORMAL, world.getEnvironment());
 	}
 }
 

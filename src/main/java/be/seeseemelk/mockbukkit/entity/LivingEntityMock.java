@@ -1,11 +1,19 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.EnumMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 
-import be.seeseemelk.mockbukkit.attribute.AttributeInstanceMock;
-import com.google.common.base.Function;
 import org.bukkit.Bukkit;
 import org.bukkit.FluidCollisionMode;
+import org.bukkit.GameRule;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
@@ -16,35 +24,41 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
-import org.bukkit.event.Event;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.EntityEquipment;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 
+import com.google.common.base.Function;
+
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.attribute.AttributeInstanceMock;
 
 public abstract class LivingEntityMock extends EntityMock implements LivingEntity
 {
+
 	private static final double MAX_HEALTH = 20.0;
 	private double health;
 	private double maxHealth = MAX_HEALTH;
+	protected boolean alive = true;
 	protected Map<Attribute, AttributeInstanceMock> attributes;
+
+	private final Set<ActivePotionEffect> activeEffects = new HashSet<>();
 
 	public LivingEntityMock(ServerMock server, UUID uuid)
 	{
 		super(server, uuid);
 
 		attributes = new EnumMap<>(Attribute.class);
-		attributes.put(Attribute.GENERIC_MAX_HEALTH,
-				new AttributeInstanceMock(Attribute.GENERIC_MAX_HEALTH, 20));
+		attributes.put(Attribute.GENERIC_MAX_HEALTH, new AttributeInstanceMock(Attribute.GENERIC_MAX_HEALTH, 20));
 		this.setMaxHealth(MAX_HEALTH);
 		this.setHealth(MAX_HEALTH);
 	}
@@ -56,26 +70,51 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
+	public boolean isDead()
+	{
+		return !alive;
+	}
+
+	@Override
 	public void setHealth(double health)
 	{
 		if (health <= 0)
 		{
 			this.health = 0;
-			Event event;
-			if(this instanceof PlayerMock){
-				event = new PlayerDeathEvent((Player) this, new ArrayList<>(), 0, getName() + " got killed");
-			} else {
-				event = new EntityDeathEvent(this, new ArrayList<>(), 0);
+
+			if (this instanceof Player)
+			{
+				Player player = (Player) this;
+				List<ItemStack> drops = new ArrayList<>();
+				drops.addAll(Arrays.asList(player.getInventory().getContents()));
+				PlayerDeathEvent event = new PlayerDeathEvent(player, drops, 0, getName() + " got killed");
+				Bukkit.getPluginManager().callEvent(event);
+
+				// Terminate any InventoryView and the cursor item
+				player.closeInventory();
+
+				// Clear the Inventory if keep-inventory is not enabled
+				if (!getWorld().getGameRuleValue(GameRule.KEEP_INVENTORY).booleanValue())
+				{
+					player.getInventory().clear();
+					// Should someone try to provoke a RespawnEvent, they will now find the Inventory to be empty
+				}
+
+				player.setLevel(0);
+				player.setExp(0);
+				player.setFoodLevel(0);
 			}
-			Bukkit.getPluginManager().callEvent(event);
-		}
-		else if (health > getMaxHealth())
-		{
-			this.health = getMaxHealth();
+			else
+			{
+				EntityDeathEvent event = new EntityDeathEvent(this, new ArrayList<>(), 0);
+				Bukkit.getPluginManager().callEvent(event);
+			}
+
+			alive = false;
 		}
 		else
 		{
-			this.health = health;
+			this.health = Math.min(health, getMaxHealth());
 		}
 	}
 
@@ -107,10 +146,12 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	{
 		Map<EntityDamageEvent.DamageModifier, Double> modifiers = new EnumMap<>(EntityDamageEvent.DamageModifier.class);
 		modifiers.put(EntityDamageEvent.DamageModifier.BASE, 1.0);
-		Map<EntityDamageEvent.DamageModifier, Function<Double, Double>> modifierFunctions = new EnumMap<>(EntityDamageEvent.DamageModifier.class);
+		Map<EntityDamageEvent.DamageModifier, Function<Double, Double>> modifierFunctions = new EnumMap<>(
+				EntityDamageEvent.DamageModifier.class);
 		modifierFunctions.put(EntityDamageEvent.DamageModifier.BASE, damage -> damage);
 
-		EntityDamageEvent event = new EntityDamageEvent(this, EntityDamageEvent.DamageCause.CUSTOM, modifiers, modifierFunctions);
+		EntityDamageEvent event = new EntityDamageEvent(this, EntityDamageEvent.DamageCause.CUSTOM, modifiers,
+				modifierFunctions);
 		event.setDamage(amount);
 		Bukkit.getPluginManager().callEvent(event);
 		if (!event.isCancelled())
@@ -126,11 +167,12 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	{
 		Map<EntityDamageEvent.DamageModifier, Double> modifiers = new EnumMap<>(EntityDamageEvent.DamageModifier.class);
 		modifiers.put(EntityDamageEvent.DamageModifier.BASE, 1.0);
-		Map<EntityDamageEvent.DamageModifier, Function<Double, Double>> modifierFunctions = new EnumMap<>(EntityDamageEvent.DamageModifier.class);
+		Map<EntityDamageEvent.DamageModifier, Function<Double, Double>> modifierFunctions = new EnumMap<>(
+				EntityDamageEvent.DamageModifier.class);
 		modifierFunctions.put(EntityDamageEvent.DamageModifier.BASE, damage -> damage);
 
-		EntityDamageByEntityEvent event = new EntityDamageByEntityEvent(source, this, EntityDamageEvent.DamageCause.ENTITY_ATTACK,
-				modifiers, modifierFunctions);
+		EntityDamageByEntityEvent event = new EntityDamageByEntityEvent(source, this,
+				EntityDamageEvent.DamageCause.ENTITY_ATTACK, modifiers, modifierFunctions);
 		event.setDamage(amount);
 		Bukkit.getPluginManager().callEvent(event);
 		if (!event.isCancelled())
@@ -208,8 +250,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public Location getEyeLocation()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getLocation().add(0, getEyeHeight(), 0);
 	}
 
 	@Override
@@ -341,50 +382,107 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public boolean addPotionEffect(PotionEffect effect)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return addPotionEffect(effect, false);
 	}
 
 	@Override
+	@Deprecated
 	public boolean addPotionEffect(PotionEffect effect, boolean force)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (effect != null)
+		{
+			// Bukkit now allows multiple effects of the same type,
+			// the force/success attributes are now obsolete
+			activeEffects.add(new ActivePotionEffect(effect));
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	@Override
 	public boolean addPotionEffects(Collection<PotionEffect> effects)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		boolean successful = true;
+
+		for (PotionEffect effect : effects)
+		{
+			if (!addPotionEffect(effect))
+			{
+				successful = false;
+			}
+		}
+
+		return successful;
 	}
 
 	@Override
 	public boolean hasPotionEffect(PotionEffectType type)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		for (PotionEffect effect : getActivePotionEffects())
+		{
+			if (effect.getType().equals(type))
+			{
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	@Override
 	public PotionEffect getPotionEffect(PotionEffectType type)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		for (PotionEffect effect : getActivePotionEffects())
+		{
+			if (effect.getType().equals(type))
+			{
+				return effect;
+			}
+		}
+
+		return null;
 	}
 
 	@Override
 	public void removePotionEffect(PotionEffectType type)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Iterator<ActivePotionEffect> iterator = activeEffects.iterator();
+
+		while (iterator.hasNext())
+		{
+			ActivePotionEffect effect = iterator.next();
+
+			if (effect.hasExpired() || effect.getPotionEffect().getType().equals(type))
+			{
+				iterator.remove();
+			}
+		}
 	}
 
 	@Override
 	public Collection<PotionEffect> getActivePotionEffects()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Set<PotionEffect> effects = new HashSet<>();
+		Iterator<ActivePotionEffect> iterator = activeEffects.iterator();
+
+		while (iterator.hasNext())
+		{
+			ActivePotionEffect effect = iterator.next();
+
+			if (effect.hasExpired())
+			{
+				iterator.remove();
+			}
+			else
+			{
+				effects.add(effect.getPotionEffect());
+			}
+		}
+
+		return effects;
 	}
 
 	@Override

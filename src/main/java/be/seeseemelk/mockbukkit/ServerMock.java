@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -22,9 +23,24 @@ import java.util.logging.LogManager;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-import org.bukkit.*;
+import org.apache.commons.lang.Validate;
+import org.bukkit.BanEntry;
+import org.bukkit.BanList;
 import org.bukkit.BanList.Type;
+import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
+import org.bukkit.Keyed;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.Server;
+import org.bukkit.StructureType;
+import org.bukkit.Tag;
+import org.bukkit.UnsafeValues;
 import org.bukkit.Warning.WarningState;
+import org.bukkit.World;
+import org.bukkit.WorldCreator;
 import org.bukkit.advancement.Advancement;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.boss.BarColor;
@@ -36,6 +52,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.command.PluginCommand;
+import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
@@ -59,12 +76,15 @@ import be.seeseemelk.mockbukkit.command.CommandResult;
 import be.seeseemelk.mockbukkit.command.ConsoleCommandSenderMock;
 import be.seeseemelk.mockbukkit.command.MessageTarget;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
+import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
 import be.seeseemelk.mockbukkit.inventory.ChestInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import be.seeseemelk.mockbukkit.inventory.ItemFactoryMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
 import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
 import be.seeseemelk.mockbukkit.scoreboard.ScoreboardManagerMock;
@@ -72,23 +92,26 @@ import be.seeseemelk.mockbukkit.scoreboard.ScoreboardManagerMock;
 @SuppressWarnings("deprecation")
 public class ServerMock implements Server
 {
+	private static final String BUKKIT_VERSION = "1.15.2";
+	private static final String JOIN_MESSAGE = "%s has joined the server.";
+
 	private final Logger logger;
 	private final Thread mainThread;
 	private final MockUnsafeValues unsafe = new MockUnsafeValues();
-	private static final String JOIN_MESSAGE = "%s has joined the server.";
+	private final Map<NamespacedKey, Tag<Material>> materialTags = new HashMap<>();
 
 	private final List<PlayerMock> players = new ArrayList<>();
-	private final List<PlayerMock> offlinePlayers = new ArrayList<>();
+	private final Set<OfflinePlayer> offlinePlayers = new HashSet<>();
 	private final Set<EntityMock> entities = new HashSet<>();
 	private final List<World> worlds = new ArrayList<>();
-	private List<Recipe> recipes = new LinkedList<>();
+	private final List<Recipe> recipes = new LinkedList<>();
 	private final ItemFactory factory = new ItemFactoryMock();
 	private final PlayerMockFactory playerFactory = new PlayerMockFactory(this);
 	private final PluginManagerMock pluginManager = new PluginManagerMock(this);
 	private final ScoreboardManagerMock scoreboardManager = new ScoreboardManagerMock();
+	private final BukkitSchedulerMock scheduler = new BukkitSchedulerMock();
+	private final PlayerList playerList = new PlayerList();
 	private ConsoleCommandSender consoleSender;
-	private BukkitSchedulerMock scheduler = new BukkitSchedulerMock();
-	private PlayerList playerList = new PlayerList();
 	private GameMode defaultGameMode = GameMode.SURVIVAL;
 	private MockCommandMap commandMap;
 
@@ -97,6 +120,8 @@ public class ServerMock implements Server
 		mainThread = Thread.currentThread();
 		logger = Logger.getLogger("ServerMock");
 		commandMap = new MockCommandMap(this);
+		ServerMock.registerSerializables();
+
 		try
 		{
 			InputStream stream = ClassLoader.getSystemResourceAsStream("logger.properties");
@@ -110,11 +135,10 @@ public class ServerMock implements Server
 	}
 
 	/**
-	 * Checks if we are on the main thread. The main thread is the thread used to
-	 * create this instance of the mock server.
+	 * Checks if we are on the main thread. The main thread is the thread used to create this instance of the mock
+	 * server.
 	 *
-	 * @return {@code true} if we are on the main thread, {@code false} if we are
-	 *         running on a different thread.
+	 * @return {@code true} if we are on the main thread, {@code false} if we are running on a different thread.
 	 */
 	public boolean isOnMainThread()
 	{
@@ -122,18 +146,18 @@ public class ServerMock implements Server
 	}
 
 	/**
-	 * Checks if we are running a method on the main thread. If not, a
-	 * `ThreadAccessException` is thrown.
+	 * Checks if we are running a method on the main thread. If not, a `ThreadAccessException` is thrown.
 	 */
 	public void assertMainThread()
 	{
 		if (!isOnMainThread())
+		{
 			throw new ThreadAccessException("The Bukkit API was accessed from asynchronous code.");
+		}
 	}
 
 	/**
-	 * Registers an entity so that the server can track it more easily. Should only
-	 * be used internally.
+	 * Registers an entity so that the server can track it more easily. Should only be used internally.
 	 *
 	 * @param entity The entity to register
 	 */
@@ -163,13 +187,15 @@ public class ServerMock implements Server
 		assertMainThread();
 		players.add(player);
 		offlinePlayers.add(player);
-		PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(player, String.format(JOIN_MESSAGE, player.getDisplayName()));
+		PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(player,
+				String.format(JOIN_MESSAGE, player.getDisplayName()));
 		Bukkit.getPluginManager().callEvent(playerJoinEvent);
 		registerEntity(player);
 	}
 
 	/**
 	 * Creates a random player and adds it.
+	 * 
 	 * @return The player that was added.
 	 */
 	public PlayerMock addPlayer()
@@ -182,6 +208,7 @@ public class ServerMock implements Server
 
 	/**
 	 * Creates a player with a given name and adds it.
+	 * 
 	 * @param name The name to give to the player.
 	 * @return The added player.
 	 */
@@ -194,8 +221,8 @@ public class ServerMock implements Server
 	}
 
 	/**
-	 * Set the numbers of mock players that are on this server. Note that it will
-	 * remove all players that are already on this server.
+	 * Set the numbers of mock players that are on this server. Note that it will remove all players that are already on
+	 * this server.
 	 *
 	 * @param num The number of players that are on this server.
 	 */
@@ -203,14 +230,14 @@ public class ServerMock implements Server
 	{
 		assertMainThread();
 		players.clear();
+
 		for (int i = 0; i < num; i++)
 			addPlayer();
 	}
 
 	/**
-	 * Set the numbers of mock offline players that are on this server. Note that
-	 * even players that are online are also considered offline player because an
-	 * {@link OfflinePlayer} really just refers to anyone that has at some point in
+	 * Set the numbers of mock offline players that are on this server. Note that even players that are online are also
+	 * considered offline player because an {@link OfflinePlayer} really just refers to anyone that has at some point in
 	 * time played on the server.
 	 *
 	 * @param num The number of players that are on this server.
@@ -223,15 +250,13 @@ public class ServerMock implements Server
 
 		for (int i = 0; i < num; i++)
 		{
-			PlayerMock player = playerFactory.createRandomOfflinePlayer();
+			OfflinePlayer player = playerFactory.createRandomOfflinePlayer();
 			offlinePlayers.add(player);
-			registerEntity(player);
 		}
 	}
 
 	/**
-	 * Get a specific mock player. A player's number will never change between
-	 * invocations of {@link #setPlayers(int)}.
+	 * Get a specific mock player. A player's number will never change between invocations of {@link #setPlayers(int)}.
 	 *
 	 * @param num The number of the player to retrieve.
 	 * @return The chosen player.
@@ -278,7 +303,7 @@ public class ServerMock implements Server
 	 * Executes a command as the console.
 	 *
 	 * @param command The command to execute.
-	 * @param args The arguments to pass to the commands.
+	 * @param args    The arguments to pass to the commands.
 	 * @return The value returned by {@link Command#execute}.
 	 */
 	public CommandResult executeConsole(Command command, String... args)
@@ -291,7 +316,7 @@ public class ServerMock implements Server
 	 * Executes a command as the console.
 	 *
 	 * @param command The command to execute.
-	 * @param args The arguments to pass to the commands.
+	 * @param args    The arguments to pass to the commands.
 	 * @return The value returned by {@link Command#execute}.
 	 */
 	public CommandResult executeConsole(String command, String... args)
@@ -304,12 +329,13 @@ public class ServerMock implements Server
 	 * Executes a command as a player.
 	 *
 	 * @param command The command to execute.
-	 * @param args The arguments to pass to the commands.
+	 * @param args    The arguments to pass to the commands.
 	 * @return The value returned by {@link Command#execute}.
 	 */
 	public CommandResult executePlayer(Command command, String... args)
 	{
 		assertMainThread();
+
 		if (!players.isEmpty())
 			return execute(command, players.get(0), args);
 		else
@@ -320,7 +346,7 @@ public class ServerMock implements Server
 	 * Executes a command as a player.
 	 *
 	 * @param command The command to execute.
-	 * @param args The arguments to pass to the commands.
+	 * @param args    The arguments to pass to the commands.
 	 * @return The value returned by {@link Command#execute}.
 	 */
 	public CommandResult executePlayer(String command, String... args)
@@ -333,8 +359,8 @@ public class ServerMock implements Server
 	 * Executes a command.
 	 *
 	 * @param command The command to execute.
-	 * @param sender The person that executed the command.
-	 * @param args The arguments to pass to the commands.
+	 * @param sender  The person that executed the command.
+	 * @param args    The arguments to pass to the commands.
 	 * @return The value returned by {@link Command#execute}.
 	 */
 	public CommandResult execute(Command command, CommandSender sender, String... args)
@@ -351,8 +377,8 @@ public class ServerMock implements Server
 	 * Executes a command.
 	 *
 	 * @param command The command to execute.
-	 * @param sender The person that executed the command.
-	 * @param args The arguments to pass to the commands.
+	 * @param sender  The person that executed the command.
+	 * @param args    The arguments to pass to the commands.
 	 * @return The value returned by {@link Command#execute}.
 	 */
 	public CommandResult execute(String command, CommandSender sender, String... args)
@@ -376,7 +402,7 @@ public class ServerMock implements Server
 	@Override
 	public String getBukkitVersion()
 	{
-		return "1.12.1";
+		return BUKKIT_VERSION;
 	}
 
 	@Override
@@ -420,15 +446,17 @@ public class ServerMock implements Server
 	public Player getPlayerExact(String name)
 	{
 		assertMainThread();
-		return this.players.stream().filter(playerMock -> playerMock.getName().equals(name)).findFirst().orElse(null);
+		return this.players.stream().filter(
+				playerMock -> playerMock.getName().toLowerCase(Locale.ENGLISH).equals(name.toLowerCase(Locale.ENGLISH)))
+				.findFirst().orElse(null);
 	}
 
 	@Override
 	public List<Player> matchPlayer(String name)
 	{
 		assertMainThread();
-		return players.stream()
-				.filter(player -> player.getName().toLowerCase(Locale.ENGLISH).startsWith(name.toLowerCase()))
+		return players.stream().filter(
+				player -> player.getName().toLowerCase(Locale.ENGLISH).startsWith(name.toLowerCase(Locale.ENGLISH)))
 				.collect(Collectors.toList());
 	}
 
@@ -456,10 +484,8 @@ public class ServerMock implements Server
 	 * Checks if the label given is a possible label of the command.
 	 *
 	 * @param command The command to check against.
-	 * @param label The label that should be checked if it's a label for the
-	 *            command.
-	 * @return {@code true} if the label is a label of the command, {@code false} if
-	 *         it's not.
+	 * @param label   The label that should be checked if it's a label for the command.
+	 * @return {@code true} if the label is a label of the command, {@code false} if it's not.
 	 */
 	private boolean isLabelOfCommand(PluginCommand command, String label)
 	{
@@ -514,14 +540,17 @@ public class ServerMock implements Server
 		InventoryMock inventory;
 		switch (type)
 		{
-			case PLAYER:
-				inventory = new PlayerInventoryMock((HumanEntity) owner);
-				return inventory;
-			case CHEST:
-				inventory = new ChestInventoryMock(owner, size > 0 ? size : 9 * 3);
-				return inventory;
-			default:
-				throw new UnimplementedOperationException("Inventory type not yet supported");
+		case PLAYER:
+			inventory = new PlayerInventoryMock((HumanEntity) owner);
+			return inventory;
+		case CHEST:
+			inventory = new ChestInventoryMock(owner, size > 0 ? size : 9 * 3);
+			return inventory;
+		case ENDER_CHEST:
+			inventory = new EnderChestInventoryMock(owner);
+			return inventory;
+		default:
+			throw new UnimplementedOperationException("Inventory type not yet supported");
 		}
 	}
 
@@ -611,11 +640,11 @@ public class ServerMock implements Server
 	{
 		switch (type)
 		{
-			case IP:
-				return playerList.getIPBans();
-			case NAME:
-			default:
-				return playerList.getProfileBans();
+		case IP:
+			return playerList.getIPBans();
+		case NAME:
+		default:
+			return playerList.getProfileBans();
 		}
 	}
 
@@ -649,6 +678,14 @@ public class ServerMock implements Server
 		for (Player player : players)
 			player.sendMessage(message);
 		return players.size();
+	}
+
+	/**
+	 * Registers any classes that are serializable with the ConfigurationSerializable system of Bukkit.
+	 */
+	public static void registerSerializables()
+	{
+		ConfigurationSerialization.registerClass(ItemMetaMock.class);
 	}
 
 	@Override
@@ -942,13 +979,43 @@ public class ServerMock implements Server
 	@Override
 	public OfflinePlayer getOfflinePlayer(String name)
 	{
-		return getPlayer(name);
+		Player player = getPlayer(name);
+
+		if (player != null)
+		{
+			return player;
+		}
+
+		for (OfflinePlayer offlinePlayer : offlinePlayers)
+		{
+			if (offlinePlayer.getName().equals(name))
+			{
+				return offlinePlayer;
+			}
+		}
+
+		return new OfflinePlayerMock(name);
 	}
 
 	@Override
 	public OfflinePlayer getOfflinePlayer(UUID id)
 	{
-		return getPlayer(id);
+		Player player = getPlayer(id);
+
+		if (player != null)
+		{
+			return player;
+		}
+
+		for (OfflinePlayer offlinePlayer : offlinePlayers)
+		{
+			if (offlinePlayer.getUniqueId().equals(id))
+			{
+				return offlinePlayer;
+			}
+		}
+
+		return playerFactory.createRandomOfflinePlayer();
 	}
 
 	@Override
@@ -1017,8 +1084,7 @@ public class ServerMock implements Server
 	@Override
 	public boolean isPrimaryThread()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.isOnMainThread();
 	}
 
 	@Override
@@ -1152,11 +1218,41 @@ public class ServerMock implements Server
 		throw new UnimplementedOperationException();
 	}
 
-	@Override
-	public <T extends Keyed> Tag<T> getTag(String registry, NamespacedKey tag, Class<T> clazz)
+	/**
+	 * This creates a new Mock {@link Tag} for the {@link Material} class.<br>
+	 * Call this in advance before you are gonna access {@link #getTag(String, NamespacedKey, Class)} or any of the
+	 * constants defined in {@link Tag}.
+	 * 
+	 * @param key       The {@link NamespacedKey} for this {@link Tag}
+	 * @param materials {@link Material Materials} which should be covered by this {@link Tag}
+	 * 
+	 * @return The newly created {@link Tag}
+	 */
+	public Tag<Material> createMaterialTag(NamespacedKey key, Material... materials)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Validate.notNull(key, "A NamespacedKey must never be null");
+
+		MockMaterialTag tag = new MockMaterialTag(key, materials);
+		materialTags.put(key, tag);
+		return tag;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T extends Keyed> Tag<T> getTag(String registry, NamespacedKey key, Class<T> clazz)
+	{
+		if (clazz == Material.class)
+		{
+			Tag<Material> tag = materialTags.get(key);
+
+			if (tag != null)
+			{
+				return (Tag<T>) tag;
+			}
+		}
+
+		// Per definition this method should return null if the given tag does not exist.
+		return null;
 	}
 
 	@Override
@@ -1175,7 +1271,7 @@ public class ServerMock implements Server
 
 	@Override
 	public ItemStack createExplorerMap(World world, Location location, StructureType structureType, int radius,
-									   boolean findUnexplored)
+			boolean findUnexplored)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1230,7 +1326,44 @@ public class ServerMock implements Server
 		throw new UnimplementedOperationException();
 	}
 
-	public MockCommandMap getCommandMap() {
+	public MockCommandMap getCommandMap()
+	{
 		return commandMap;
+	}
+
+	@Override
+	public int getTicksPerWaterSpawns()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getTicksPerAmbientSpawns()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean removeRecipe(NamespacedKey key)
+	{
+		assertMainThread();
+
+		Iterator<Recipe> iterator = recipeIterator();
+
+		while (iterator.hasNext())
+		{
+			Recipe recipe = iterator.next();
+
+			// Seriously why can't the Recipe interface itself just extend Keyed...
+			if (recipe instanceof Keyed && ((Keyed) recipe).getKey().equals(key))
+			{
+				iterator.remove();
+				return true;
+			}
+		}
+
+		return false;
 	}
 }

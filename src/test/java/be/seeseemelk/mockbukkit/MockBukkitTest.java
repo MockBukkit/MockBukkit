@@ -1,15 +1,18 @@
 package be.seeseemelk.mockbukkit;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assume.assumeFalse;
 import static org.junit.Assume.assumeNotNull;
 
 import org.bukkit.Bukkit;
 import org.bukkit.event.server.PluginEnableEvent;
+import org.bukkit.plugin.Plugin;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,7 +30,7 @@ public class MockBukkitTest
 	{
 		if (MockBukkit.isMocked())
 		{
-			MockBukkit.unload();
+			MockBukkit.unmock();
 		}
 	}
 	
@@ -44,6 +47,15 @@ public class MockBukkitTest
 	public void mock_ServerMocked()
 	{
 		ServerMock server = MockBukkit.mock();
+		assertNotNull(server);
+		assertEquals(server, MockBukkit.getMock());
+		assertEquals(server, Bukkit.getServer());
+	}
+
+	@Test
+	public void mock_CustomServerMocked()
+	{
+		CustomServerMock server = MockBukkit.mock(new CustomServerMock());
 		assertNotNull(server);
 		assertEquals(server, MockBukkit.getMock());
 		assertEquals(server, Bukkit.getServer());
@@ -66,7 +78,7 @@ public class MockBukkitTest
 	public void isMocked_ServerUnloaded_False()
 	{
 		MockBukkit.mock();
-		MockBukkit.unload();
+		MockBukkit.unmock();
 		assertFalse(MockBukkit.isMocked());
 	}
 	
@@ -84,8 +96,8 @@ public class MockBukkitTest
 	public void load_TestPluginWithExtraParameter_ExtraParameterPassedOn()
 	{
 		MockBukkit.mock();
-		TestPlugin plugin = MockBukkit.load(TestPlugin.class, new Integer(5));
-		assertEquals(new Integer(5), plugin.extra);
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class, Integer.valueOf(5));
+		assertThat(plugin.extra, equalTo(5));
 	}
 	
 	@Test(expected = RuntimeException.class)
@@ -128,9 +140,22 @@ public class MockBukkitTest
 		MockBukkit.mock();
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
 		assumeFalse(plugin.onDisableExecuted);
-		MockBukkit.unload();
+		MockBukkit.unmock();
 		assertFalse(plugin.isEnabled());
 		assertTrue(plugin.onDisableExecuted);
 	}
 	
+	@Test
+	public void load_CanLoadPluginFromExternalSource_PluginLoaded()
+	{
+		MockBukkit.mock();
+		MockBukkit.loadJar("extra/TestPlugin/TestPlugin.jar");
+		Plugin[] plugins = MockBukkit.getMock().getPluginManager().getPlugins();
+		assertThat(plugins.length, equalTo(1));
+		assertThat(plugins[0].getName(), equalTo("TestPlugin"));
+	}
+
+	public static class CustomServerMock extends ServerMock
+	{
+	}
 }

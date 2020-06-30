@@ -7,81 +7,86 @@ import org.bukkit.advancement.Advancement;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
+import org.bukkit.plugin.InvalidPluginException;
 import org.bukkit.plugin.PluginDescriptionFile;
 
 @SuppressWarnings("deprecation")
 public class MockUnsafeValues implements UnsafeValues
 {
-	
 	@Override
 	public Material toLegacy(Material material)
 	{
-		// TODO Auto-generated method stub
+		if (material.isLegacy())
+		{
+			return material;
+		}
 		throw new UnimplementedOperationException();
 	}
-	
+
 	@Override
 	public Material fromLegacy(Material material)
 	{
 		return material;
 	}
-	
+
 	@Override
 	public Material fromLegacy(MaterialData material)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 	@Override
 	public Material fromLegacy(MaterialData material, boolean itemPriority)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 	@Override
 	public BlockData fromLegacy(Material material, byte data)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 	@Override
 	public int getDataVersion()
 	{
 		// TODO Auto-generated method stub
 		return 1;
 	}
-	
+
 	@Override
 	public ItemStack modifyItemStack(ItemStack stack, String arguments)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 	@Override
-	public void checkSupported(PluginDescriptionFile pdf)
+	public void checkSupported(PluginDescriptionFile pdf) throws InvalidPluginException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (pdf.getAPIVersion() == null)
+			throw new InvalidPluginException("Plugin does not specify 'api-version' in plugin.yml");
+
+		if (!pdf.getAPIVersion().equals("1.15"))
+			throw new InvalidPluginException("This version of MockBukkit required API 1.15");
 	}
-	
+
 	@Override
 	public byte[] processClass(PluginDescriptionFile pdf, String path, byte[] clazz)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return clazz;
 	}
-	
+
 	@Override
 	public Advancement loadAdvancement(NamespacedKey key, String advancement)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 	@Override
 	public boolean removeAdvancement(NamespacedKey key)
 	{
@@ -95,5 +100,5 @@ public class MockUnsafeValues implements UnsafeValues
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 }

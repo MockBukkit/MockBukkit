@@ -13,7 +13,7 @@ public class SimpleMonsterMock extends MonsterMock implements Monster
 	{
 		super(server, uuid);
 	}
-	
+
 	public SimpleMonsterMock(ServerMock server)
 	{
 		this(server, UUID.randomUUID());

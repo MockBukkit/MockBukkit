@@ -25,7 +25,7 @@ public class PlayerInventoryViewTest
 	@After
 	public void tearDown() throws Exception
 	{
-		MockBukkit.unload();
+		MockBukkit.unmock();
 	}
 	
 	@Test

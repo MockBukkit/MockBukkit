@@ -11,17 +11,12 @@ import org.bukkit.plugin.Plugin;
 
 public class MetadataTable implements Metadatable
 {
-	private Map<String, Map<Plugin, MetadataValue>> metadata = new HashMap<>();
+	private final Map<String, Map<Plugin, MetadataValue>> metadata = new HashMap<>();
 
 	@Override
 	public void setMetadata(String metadataKey, MetadataValue newMetadataValue)
 	{
-		Map<Plugin, MetadataValue> values = metadata.get(metadataKey);
-		if (values == null)
-		{
-			values = new HashMap<>();
-			metadata.put(metadataKey, values);
-		}
+		Map<Plugin, MetadataValue> values = metadata.computeIfAbsent(metadataKey, key -> new HashMap<>());
 		values.put(newMetadataValue.getOwningPlugin(), newMetadataValue);
 	}
 

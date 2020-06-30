@@ -1,7 +1,7 @@
 # Ignore hidden files.
 .*
-**/.*
-!.gitignore
+!.git*
+!.travis/
 
 # Ignore compiled files
 /bin/
@@ -15,6 +15,9 @@
 /wiki
 /MockBukkit.wiki
 
-#IDE Specific
+# IDE Specific
 /out
 *.iml
+
+# Read the Docs
+!.readthedocs.yml

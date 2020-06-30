@@ -12,16 +12,16 @@ public class ChunkTest
 	private WorldMock world;
 
 	@Before
-	public void setUp() throws Exception
+	public void setUp()
 	{
 		server = MockBukkit.mock();
 		world = server.addSimpleWorld("world");
 	}
 
 	@After
-	public void tearDown() throws Exception
+	public void tearDown()
 	{
-		MockBukkit.unload();
+		MockBukkit.unmock();
 	}
 
 	@Test
@@ -29,25 +29,25 @@ public class ChunkTest
 	{
 		assertEquals(10, world.getChunkAt(10, 20).getX());
 	}
-	
+
 	@Test
 	public void getZ_AnyValue_Exact_Value()
 	{
 		assertEquals(20, world.getChunkAt(10, 20).getZ());
 	}
-	
+
 	@Test
 	public void getWorld_AnyChunkFromWorld_ExactWorldReference()
 	{
 		assertSame(world, world.getChunkAt(0, 0).getWorld());
 	}
-	
+
 	@Test
 	public void isLoaded_JustCreated_True()
 	{
 		assertTrue(world.getChunkAt(0, 0).isLoaded());
 	}
-	
+
 	@Test
 	public void isLoaded_AfterUnload_False()
 	{
@@ -55,7 +55,7 @@ public class ChunkTest
 		assertTrue(chunk.unload());
 		assertFalse(chunk.isLoaded());
 	}
-	
+
 	@Test
 	public void isLoaded_AfterLoad_True()
 	{
@@ -64,7 +64,7 @@ public class ChunkTest
 		assertTrue(chunk.load());
 		assertTrue(chunk.isLoaded());
 	}
-	
+
 	@Test
 	public void equals_DifferentChunk_False()
 	{
@@ -72,7 +72,7 @@ public class ChunkTest
 		ChunkMock chunk2 = world.getChunkAt(0, 1);
 		assertFalse(chunk1.equals(chunk2));
 	}
-	
+
 	@Test
 	public void equals_SameChunk_True()
 	{
@@ -81,14 +81,14 @@ public class ChunkTest
 		assertTrue(chunk1.equals(chunk2));
 		assertEquals(chunk1.hashCode(), chunk2.hashCode());
 	}
-	
+
 	@Test
 	public void equals_Null_False()
 	{
 		ChunkMock chunk = world.getChunkAt(0, 0);
 		assertFalse(chunk.equals(null));
 	}
-	
+
 	@Test
 	public void equals_DifferentClass_False()
 	{
@@ -96,6 +96,5 @@ public class ChunkTest
 		Object obj = Runtime.getRuntime();
 		assertFalse(chunk.equals(obj));
 	}
-	
 
 }

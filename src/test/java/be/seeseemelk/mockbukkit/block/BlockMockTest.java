@@ -6,10 +6,15 @@ import static org.junit.Assert.assertNull;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import be.seeseemelk.mockbukkit.WorldMock;
+import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 
 public class BlockMockTest
 {
@@ -18,7 +23,8 @@ public class BlockMockTest
 	@Before
 	public void setUp()
 	{
-		block = new BlockMock();
+		World world = new WorldMock();
+		block = new BlockMock(new Location(world, 120, 60, 120));
 	}
 
 	@Test
@@ -26,24 +32,24 @@ public class BlockMockTest
 	{
 		assertEquals(Material.AIR, block.getType());
 	}
-	
+
 	@Test
 	public void setType_Stone_Set()
 	{
 		block.setType(Material.STONE);
 		assertEquals(Material.STONE, block.getType());
 	}
-	
+
 	@Test
 	public void getState_Default_NotNull()
 	{
 		assertNotNull(block.getState());
 	}
-	
+
 	@Test
 	public void getLocation_Default_Null()
 	{
-		assertNull(block.getLocation());
+		assertNull(new BlockMock().getLocation());
 	}
 
 	@Test
@@ -71,7 +77,7 @@ public class BlockMockTest
 		assertEquals(2, block.getY());
 		assertEquals(3, block.getZ());
 	}
-	
+
 	@Test
 	public void assertType_CorrectType_DoesNotFail()
 	{
@@ -80,7 +86,7 @@ public class BlockMockTest
 		block.setType(Material.DIRT);
 		block.assertType(Material.DIRT);
 	}
-	
+
 	@Test(expected = AssertionError.class)
 	public void assertType_IncorrectType_Fails()
 	{
@@ -88,4 +94,47 @@ public class BlockMockTest
 		block.assertType(Material.DIRT);
 	}
 
+	@Test
+	public void testGetRelativeBlockFace()
+	{
+		Block relative = block.getRelative(BlockFace.UP);
+		assertEquals(block.getX(), relative.getX());
+		assertEquals(block.getY() + 1, relative.getY());
+		assertEquals(block.getZ(), relative.getZ());
+	}
+
+	@Test
+	public void testGetRelativeBlockFaceAndDistance()
+	{
+		Block relative = block.getRelative(BlockFace.UP, 4);
+		assertEquals(block.getX(), relative.getX());
+		assertEquals(block.getY() + 4, relative.getY());
+		assertEquals(block.getZ(), relative.getZ());
+	}
+
+	@Test
+	public void testGetRelativeCordinates()
+	{
+		Block relative = block.getRelative(2, 6, 0);
+		assertEquals(block.getX() + 2, relative.getX());
+		assertEquals(block.getY() + 6, relative.getY());
+		assertEquals(block.getZ(), relative.getZ());
+	}
+
+	@Test
+	public void testGetBlockData()
+	{
+		Assert.assertEquals(block.getType(), block.getBlockData().getMaterial());
+	}
+
+	@Test
+	public void testSetBlockData()
+	{
+		BlockDataMock blockData = new BlockDataMock(Material.DIRT);
+		Material oldType = block.getType();
+
+		block.setBlockData(blockData);
+		Assert.assertEquals(blockData, block.getBlockData());
+		block.setType(oldType);
+	}
 }
