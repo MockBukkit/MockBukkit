@@ -1,6 +1,7 @@
 # Ignore hidden files.
 .*
 !.git*
+!.travis/
 
 # Ignore compiled files
 /bin/
