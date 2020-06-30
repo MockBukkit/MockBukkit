@@ -9,11 +9,13 @@ before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
+  - sudo apt-get -y install python-sphinx
 script:
   - ./gradlew check
   - ./gradlew jacocoTestReport
   - ./gradlew jar
   - ./gradlew javadoc
+  - cd docs && make SPHINXOPTS=-W html linkcheck
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
@@ -30,5 +32,5 @@ deploy:
   provider: script
   script: gpg --batch --passphrase $KEY_PASSPHRASE -d -o .travis/private.gpg .travis/secring.gpg && ./gradlew publishMockBukkitPublicationToSnapshotRepositoryRepository -PossrhUsername=$OSSRH_USERNAME -PossrhPassword=$OSSRH_PASSWORD -Psigning.secretKeyRingFile=$PWD/.travis/private.gpg -Psigning.keyId=$KEY_ID -Psigning.password=$KEY_PASSPHRASE
   on:
-    branch: ci-test
+    branch: v1.15
 
