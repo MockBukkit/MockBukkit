@@ -24,3 +24,8 @@ cache:
 after_script:
   - ./cc-test-reporter format-coverage -t jacoco build/reports/jacoco/test/jacocoTestReport.xml
   - ./cc-test-reporter upload-coverage
+deploy:
+  provider: script
+  script: bash ./gradlew publishMockBukkitPublicationToSnapshotRepositoryRepository -PossrhUsername=$OSSRH_USERNAME -PossrgPassword=$OSSRH_PASSWORD
+  on:
+    branch: ci-test
