@@ -22,10 +22,13 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
 after_script:
+  - rm -f .travis/private.gpg
   - ./cc-test-reporter format-coverage -t jacoco build/reports/jacoco/test/jacocoTestReport.xml
   - ./cc-test-reporter upload-coverage
 deploy:
   provider: script
-  script: bash ./gradlew publishMockBukkitPublicationToSnapshotRepositoryRepository -PossrhUsername=$OSSRH_USERNAME -PossrgPassword=$OSSRH_PASSWORD
+  script:
+    - gpg --bash --passphase $KEY_PASSPHRASE -d -o .travis/private.gpg .travis/secring.gpg
+    - bash ./gradlew publishMockBukkitPublicationToSnapshotRepositoryRepository -PossrhUsername=$OSSRH_USERNAME -PossrgPassword=$OSSRH_PASSWORD -Psigning.secretKeyRingFile=$PWD/.travis/private.gpg -Psigning.keyId=$KEY_ID -Psigning.password=$KEY_PASSPHRASE
   on:
     branch: ci-test
