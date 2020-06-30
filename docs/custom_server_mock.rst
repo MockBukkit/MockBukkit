@@ -1,5 +1,5 @@
 Using a custom ServerMock implementation
-=====================
+========================================
 Sometimes it may be needed to use a custom implementation of the `ServerMock` class.
 This could be if you want to implement some of the unimplemented methods or simply provide your own mocks for certain methods.
 
