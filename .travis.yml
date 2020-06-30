@@ -28,6 +28,6 @@ after_script:
   - rm cc-test-reporter
 deploy:
   provider: script
-  script: gpg --batch --passphase $KEY_PASSPHRASE -d -o .travis/private.gpg .travis/secring.gpg && ./gradlew publishMockBukkitPublicationToSnapshotRepositoryRepository -PossrhUsername=$OSSRH_USERNAME -PossrgPassword="$OSSRH_PASSWORD" -Psigning.secretKeyRingFile=$PWD/.travis/private.gpg -Psigning.keyId=$KEY_ID -Psigning.password=$KEY_PASSPHRASE
+  script: gpg --batch --passphrase $KEY_PASSPHRASE -d -o .travis/private.gpg .travis/secring.gpg && ./gradlew publishMockBukkitPublicationToSnapshotRepositoryRepository -PossrhUsername=$OSSRH_USERNAME -PossrgPassword="$OSSRH_PASSWORD" -Psigning.secretKeyRingFile=$PWD/.travis/private.gpg -Psigning.keyId=$KEY_ID -Psigning.password=$KEY_PASSPHRASE
   on:
     branch: ci-test
