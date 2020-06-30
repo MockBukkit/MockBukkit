@@ -25,6 +25,7 @@ after_script:
   - rm -f .travis/private.gpg
   - ./cc-test-reporter format-coverage -t jacoco build/reports/jacoco/test/jacocoTestReport.xml
   - ./cc-test-reporter upload-coverage
+  - rm cc-test-reporter
 deploy:
   provider: script
   script:
