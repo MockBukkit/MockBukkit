@@ -308,15 +308,13 @@ public class BlockMock implements org.bukkit.block.Block
 	@Override
 	public boolean isEmpty()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getType().equals(Material.AIR);
 	}
 
 	@Override
 	public boolean isLiquid()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getType().equals(Material.LAVA) || this.getType().equals(Material.WATER);
 	}
 
 	@Override
