@@ -1,8 +1,10 @@
 package be.seeseemelk.mockbukkit.block;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -136,5 +138,47 @@ public class BlockMockTest
 		block.setBlockData(blockData);
 		Assert.assertEquals(blockData, block.getBlockData());
 		block.setType(oldType);
+	}
+	
+	@Test
+	public void testWaterIsLiquid()
+	{
+		block.setType(Material.WATER);
+		assertTrue(block.isLiquid());
+	}
+	
+	@Test
+	public void testLavaIsLiquid()
+	{
+		block.setType(Material.LAVA);
+		assertTrue(block.isLiquid());
+	}
+	
+	@Test
+	public void testBubbleColumnIsLiquid()
+	{
+		block.setType(Material.BUBBLE_COLUMN);
+		assertTrue(block.isLiquid());
+	}
+	
+	@Test
+	public void testAirIsLiquid()
+	{
+		block.setType(Material.AIR);
+		assertTrue(block.isEmpty());
+	}
+	
+	@Test
+	public void testStoneIsNotLiquid()
+	{
+		block.setType(Material.STONE);
+		assertFalse(block.isLiquid());
+	}
+	
+	@Test
+	public void testStoneIsNotEmpty()
+	{
+		block.setType(Material.STONE);
+		assertFalse(block.isEmpty());
 	}
 }

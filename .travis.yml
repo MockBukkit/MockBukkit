@@ -29,6 +29,7 @@ after_script:
   - ./cc-test-reporter upload-coverage
   - rm cc-test-reporter
 deploy:
+  skip_cleanup: true
   provider: script
   script: gpg --batch --passphrase $KEY_PASSPHRASE -d -o .travis/private.gpg .travis/secring.gpg && ./gradlew publishMockBukkitPublicationToSnapshotRepositoryRepository -PossrhUsername=$OSSRH_USERNAME -PossrhPassword=$OSSRH_PASSWORD -Psigning.secretKeyRingFile=$PWD/.travis/private.gpg -Psigning.keyId=$KEY_ID -Psigning.password=$KEY_PASSPHRASE
   on:
