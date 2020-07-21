@@ -308,13 +308,15 @@ public class BlockMock implements org.bukkit.block.Block
 	@Override
 	public boolean isEmpty()
 	{
-		return this.getType().equals(Material.AIR);
+		return material == Material.AIR;
 	}
 
 	@Override
 	public boolean isLiquid()
 	{
-		return this.getType().equals(Material.LAVA) || this.getType().equals(Material.WATER);
+		return material == Material.LAVA
+		    || material == Material.WATER
+		    || material == Material.BUBBLE_COLUMN;
 	}
 
 	@Override
