@@ -123,6 +123,9 @@ public class ServerMock implements Server
 		logger = Logger.getLogger("ServerMock");
 		commandMap = new MockCommandMap(this);
 		ServerMock.registerSerializables();
+		
+		// Register default Minecraft Potion Effect Types
+		createPotionEffectTypes();
 
 		try
 		{
@@ -1258,12 +1261,20 @@ public class ServerMock implements Server
 	}
 
 	/**
-	 * This registers Minecrafts default {@link PotionEffectType PotionEffectTypes}. If you somehow need to add your
-	 * own, override this method but make sure to run your code before calling this, as it prevents any new effects to
-	 * be created afterwards.
+	 * This registers Minecrafts default {@link PotionEffectType PotionEffectTypes}. 
+	 * It also prevents any new effects to be created afterwards.
 	 */
-	public void createPotionEffectTypes()
+	private void createPotionEffectTypes()
 	{
+		for (PotionEffectType type : PotionEffectType.values()) {
+			// We probably already registered all Potion Effects
+			// otherwise this would be null
+			if (type != null) {
+				// This is not perfect, but it works.
+				return;
+			}
+		}
+		
 		registerPotionEffectType(1, "SPEED", false, 8171462);
 		registerPotionEffectType(2, "SLOWNESS", false, 5926017);
 		registerPotionEffectType(3, "HASTE", false, 14270531);

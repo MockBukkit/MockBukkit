@@ -28,6 +28,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.Recipe;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.junit.After;
 import org.junit.Before;
@@ -538,6 +539,16 @@ public class ServerMockTest
 		assertNull(Tag.BUTTONS);
 		assertNull(Tag.BEDS);
 		assertNull(Tag.BANNERS);
+	}
+	
+	@Test
+	public void testDefaultPotionEffects()
+	{
+		assertEquals(32, PotionEffectType.values().length);
+		
+		for (PotionEffectType type : PotionEffectType.values()) {
+			assertNotNull(type);
+		}
 	}
 }
 
