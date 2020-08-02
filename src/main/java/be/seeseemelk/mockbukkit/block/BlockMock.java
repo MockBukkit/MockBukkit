@@ -5,9 +5,6 @@ import static org.junit.Assert.fail;
 import java.util.Collection;
 import java.util.List;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
-import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.FluidCollisionMode;
 import org.bukkit.Location;
@@ -26,11 +23,11 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.NotNull;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import junit.framework.AssertionFailedError;
-import org.jetbrains.annotations.NotNull;
-import org.junit.Assert;
 
 public class BlockMock implements org.bukkit.block.Block
 {
