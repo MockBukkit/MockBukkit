@@ -4,8 +4,8 @@ import org.bukkit.Color;
 import org.bukkit.potion.PotionEffectType;
 
 /**
- * This {@link MockPotionEffectType} mocks an actual {@link PotionEffectType} by taking an id,
- * a name, whether it is instant and a RGB {@link Color} variable.
+ * This {@link MockPotionEffectType} mocks an actual {@link PotionEffectType} by taking an id, a name, whether it is
+ * instant and a RGB {@link Color} variable.
  * 
  * @author TheBusyBiscuit
  *
@@ -17,13 +17,13 @@ public class MockPotionEffectType extends PotionEffectType
 	private final boolean instant;
 	private final Color color;
 
-	public MockPotionEffectType(int id, String name, boolean instant, int rgb)
+	public MockPotionEffectType(int id, String name, boolean instant, Color color)
 	{
 		super(id);
 
 		this.name = name;
 		this.instant = instant;
-		this.color = Color.fromRGB(rgb);
+		this.color = color;
 	}
 
 	@Deprecated
@@ -50,6 +50,23 @@ public class MockPotionEffectType extends PotionEffectType
 	public Color getColor()
 	{
 		return color;
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (obj instanceof PotionEffectType)
+		{
+			return getId() == ((PotionEffectType) obj).getId();
+		}
+
+		return false;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return getId();
 	}
 
 }

@@ -28,6 +28,7 @@ import org.bukkit.BanEntry;
 import org.bukkit.BanList;
 import org.bukkit.BanList.Type;
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
 import org.bukkit.GameMode;
 import org.bukkit.Keyed;
 import org.bukkit.Location;
@@ -1312,7 +1313,8 @@ public class ServerMock implements Server
 
 	private void registerPotionEffectType(int id, String name, boolean instant, int rgb)
 	{
-		PotionEffectType.registerPotionEffectType(new MockPotionEffectType(id, name, instant, rgb));
+		PotionEffectType type = new MockPotionEffectType(id, name, instant, Color.fromRGB(rgb));
+		PotionEffectType.registerPotionEffectType(type);
 	}
 
 	@Override
