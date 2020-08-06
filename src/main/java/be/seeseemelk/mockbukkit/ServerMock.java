@@ -28,6 +28,7 @@ import org.bukkit.BanEntry;
 import org.bukkit.BanList;
 import org.bukkit.BanList.Type;
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
 import org.bukkit.GameMode;
 import org.bukkit.Keyed;
 import org.bukkit.Location;
@@ -70,6 +71,7 @@ import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.ServicesManager;
 import org.bukkit.plugin.messaging.Messenger;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.CachedServerIcon;
 
 import be.seeseemelk.mockbukkit.command.CommandResult;
@@ -86,6 +88,7 @@ import be.seeseemelk.mockbukkit.inventory.ItemFactoryMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
 import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
+import be.seeseemelk.mockbukkit.potion.MockPotionEffectType;
 import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
 import be.seeseemelk.mockbukkit.scoreboard.ScoreboardManagerMock;
 
@@ -121,6 +124,9 @@ public class ServerMock implements Server
 		logger = Logger.getLogger("ServerMock");
 		commandMap = new MockCommandMap(this);
 		ServerMock.registerSerializables();
+		
+		// Register default Minecraft Potion Effect Types
+		createPotionEffectTypes();
 
 		try
 		{
@@ -1253,6 +1259,62 @@ public class ServerMock implements Server
 
 		// Per definition this method should return null if the given tag does not exist.
 		return null;
+	}
+
+	/**
+	 * This registers Minecrafts default {@link PotionEffectType PotionEffectTypes}. 
+	 * It also prevents any new effects to be created afterwards.
+	 */
+	private void createPotionEffectTypes()
+	{
+		for (PotionEffectType type : PotionEffectType.values()) {
+			// We probably already registered all Potion Effects
+			// otherwise this would be null
+			if (type != null) {
+				// This is not perfect, but it works.
+				return;
+			}
+		}
+		
+		registerPotionEffectType(1, "SPEED", false, 8171462);
+		registerPotionEffectType(2, "SLOWNESS", false, 5926017);
+		registerPotionEffectType(3, "HASTE", false, 14270531);
+		registerPotionEffectType(4, "MINING_FATIGUE", false, 4866583);
+		registerPotionEffectType(5, "STRENGTH", false, 9643043);
+		registerPotionEffectType(6, "INSTANT_HEALTH", true, 16262179);
+		registerPotionEffectType(7, "INSTANT_DAMAGE", true, 4393481);
+		registerPotionEffectType(8, "JUMP_BOOST", false, 2293580);
+		registerPotionEffectType(9, "NAUSEA", false, 5578058);
+		registerPotionEffectType(10, "REGENERATION", false, 13458603);
+		registerPotionEffectType(11, "RESISTANCE", false, 10044730);
+		registerPotionEffectType(12, "FIRE_RESISTANCE", false, 14981690);
+		registerPotionEffectType(13, "WATER_BREATHING", false, 3035801);
+		registerPotionEffectType(14, "INVISIBILITY", false, 8356754);
+		registerPotionEffectType(15, "BLINDNESS", false, 2039587);
+		registerPotionEffectType(16, "NIGHT_VISION", false, 2039713);
+		registerPotionEffectType(17, "HUNGER", false, 5797459);
+		registerPotionEffectType(18, "WEAKNESS", false, 4738376);
+		registerPotionEffectType(19, "POISON", false, 5149489);
+		registerPotionEffectType(20, "WITHER", false, 3484199);
+		registerPotionEffectType(21, "HEALTH_BOOST", false, 16284963);
+		registerPotionEffectType(22, "ABSORPTION", false, 2445989);
+		registerPotionEffectType(23, "SATURATION", true, 16262179);
+		registerPotionEffectType(24, "GLOWING", false, 9740385);
+		registerPotionEffectType(25, "LEVITATION", false, 13565951);
+		registerPotionEffectType(26, "LUCK", false, 3381504);
+		registerPotionEffectType(27, "UNLUCK", false, 12624973);
+		registerPotionEffectType(28, "SLOW_FALLING", false, 16773073);
+		registerPotionEffectType(29, "CONDUIT_POWER", false, 1950417);
+		registerPotionEffectType(30, "DOLPHINS_GRACE", false, 8954814);
+		registerPotionEffectType(31, "BAD_OMEN", false, 745784);
+		registerPotionEffectType(32, "HERO_OF_THE_VILLAGE", false, 45217);
+		PotionEffectType.stopAcceptingRegistrations();
+	}
+
+	private void registerPotionEffectType(int id, String name, boolean instant, int rgb)
+	{
+		PotionEffectType type = new MockPotionEffectType(id, name, instant, Color.fromRGB(rgb));
+		PotionEffectType.registerPotionEffectType(type);
 	}
 
 	@Override
