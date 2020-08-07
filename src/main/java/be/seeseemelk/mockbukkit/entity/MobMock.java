@@ -4,7 +4,6 @@ import java.util.UUID;
 
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Mob;
-import org.bukkit.entity.Pose;
 import org.bukkit.entity.memory.MemoryKey;
 import org.bukkit.loot.LootTable;
 
@@ -91,13 +90,6 @@ public abstract class MobMock extends LivingEntityMock implements Mob
 
 	@Override
 	public void setAbsorptionAmount(double amount)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public Pose getPose()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
