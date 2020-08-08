@@ -101,6 +101,8 @@ public class PlayerMock extends LivingEntityMock implements Player
 	private Location compassTarget;
 	private Location bedSpawnLocation;
 	private ItemStack cursor = null;
+	private long firstPlayed = 0;
+	private long lastPlayed = 0;
 
 	private final List<AudioExperience> heardSounds = new LinkedList<>();
 
@@ -144,7 +146,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 		int result = super.hashCode();
 		result = prime * result + Objects.hash(attributes, exp, expLevel, expTotal, displayName, gamemode, getHealth(),
 				foodLevel, saturation, inventory, enderChest, inventoryView, getMaxHealth(), online, whitelisted,
-				compassTarget, bedSpawnLocation, cursor);
+				compassTarget, bedSpawnLocation, cursor, firstPlayed, lastPlayed);
 		return result;
 	}
 
@@ -792,22 +794,33 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public long getFirstPlayed()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return firstPlayed;
 	}
 
 	@Override
 	public long getLastPlayed()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return lastPlayed;
 	}
 
 	@Override
 	public boolean hasPlayedBefore()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return firstPlayed > 0;
+	}
+
+	public void setLastPlayed(long time)
+	{
+		if (time > 0)
+		{
+			lastPlayed = time;
+
+			// Set firstPlayed if this is the first time
+			if (firstPlayed == 0)
+			{
+				firstPlayed = time;
+			}
+		}
 	}
 
 	@Override

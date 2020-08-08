@@ -197,6 +197,8 @@ public class ServerMock implements Server
 				String.format(JOIN_MESSAGE, player.getDisplayName()));
 		Bukkit.getPluginManager().callEvent(playerJoinEvent);
 		registerEntity(player);
+		
+		player.setLastPlayed(System.currentTimeMillis());
 	}
 
 	/**
