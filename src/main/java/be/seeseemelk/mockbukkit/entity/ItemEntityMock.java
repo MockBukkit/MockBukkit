@@ -31,6 +31,8 @@ public class ItemEntityMock extends EntityMock implements Item
 	@Override
 	public void setItemStack(ItemStack stack)
 	{
+		// "stack" is actually nullable here, but it seems like Spigot also throws an Exception
+		// in that case anyway. Besides a "null" Item does not really make sense anyway.
 		this.item = stack.clone();
 	}
 
