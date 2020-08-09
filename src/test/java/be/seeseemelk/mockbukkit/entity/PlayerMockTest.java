@@ -75,7 +75,22 @@ public class PlayerMockTest
 	@Before
 	public void setUp()
 	{
-		server = MockBukkit.mock();
+		server = MockBukkit.mock(new ServerMock()
+		{
+
+			private long ticks = 0;
+
+			@Override
+			protected long getCurrentServerTime()
+			{
+				// This will force the current server time to always be different to
+				// any prior invocations, this is much more elegant than simply doing
+				// Thread.sleep!
+				ticks++;
+				return super.getCurrentServerTime() + ticks;
+			}
+		});
+
 		uuid = UUID.randomUUID();
 		player = new PlayerMock(server, "player", uuid);
 	}
@@ -937,20 +952,17 @@ public class PlayerMockTest
 		assertFalse(player.hasPlayedBefore());
 		assertEquals(0, player.getFirstPlayed());
 		assertEquals(0, player.getLastPlayed());
-		
+
 		server.addPlayer(player);
 		long firstPlayed = player.getFirstPlayed();
-		
+
 		assertTrue(player.hasPlayedBefore());
 		assertTrue(firstPlayed > 0);
 		assertEquals(player.getFirstPlayed(), player.getLastPlayed());
-		
-		// This forces the time to be different by at least 1ms
-		Thread.sleep(1);
-		
+
 		// Player reconnects
 		server.addPlayer(player);
-		
+
 		assertEquals(firstPlayed, player.getFirstPlayed());
 		assertNotEquals(player.getFirstPlayed(), player.getLastPlayed());
 	}
