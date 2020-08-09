@@ -159,7 +159,6 @@ public class PlayerMock extends LivingEntityMock implements Player
 			return false;
 		if (!(obj instanceof PlayerMock))
 			return false;
-
 		PlayerMock other = (PlayerMock) obj;
 		return Objects.equals(attributes, other.attributes) && Objects.equals(displayName, other.displayName)
 				&& gamemode == other.gamemode
@@ -167,7 +166,8 @@ public class PlayerMock extends LivingEntityMock implements Player
 				&& Objects.equals(inventory, other.inventory) && Objects.equals(inventoryView, other.inventoryView)
 				&& Objects.equals(cursor, other.cursor)
 				&& Double.doubleToLongBits(getMaxHealth()) == Double.doubleToLongBits(other.getMaxHealth())
-				&& online == other.online && whitelisted == other.whitelisted && isDead() == other.isDead();
+				&& online == other.online && whitelisted == other.whitelisted && isDead() == other.isDead()
+				&& firstPlayed == other.firstPlayed && lastPlayed == other.lastPlayed;
 	}
 
 	/**
