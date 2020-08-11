@@ -124,7 +124,7 @@ public class ServerMock implements Server
 		logger = Logger.getLogger("ServerMock");
 		commandMap = new MockCommandMap(this);
 		ServerMock.registerSerializables();
-		
+
 		// Register default Minecraft Potion Effect Types
 		createPotionEffectTypes();
 
@@ -196,6 +196,8 @@ public class ServerMock implements Server
 		PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(player,
 				String.format(JOIN_MESSAGE, player.getDisplayName()));
 		Bukkit.getPluginManager().callEvent(playerJoinEvent);
+
+		player.setLastPlayed(getCurrentServerTime());
 		registerEntity(player);
 	}
 
@@ -1262,20 +1264,22 @@ public class ServerMock implements Server
 	}
 
 	/**
-	 * This registers Minecrafts default {@link PotionEffectType PotionEffectTypes}. 
-	 * It also prevents any new effects to be created afterwards.
+	 * This registers Minecrafts default {@link PotionEffectType PotionEffectTypes}. It also prevents any new effects to
+	 * be created afterwards.
 	 */
 	private void createPotionEffectTypes()
 	{
-		for (PotionEffectType type : PotionEffectType.values()) {
+		for (PotionEffectType type : PotionEffectType.values())
+		{
 			// We probably already registered all Potion Effects
 			// otherwise this would be null
-			if (type != null) {
+			if (type != null)
+			{
 				// This is not perfect, but it works.
 				return;
 			}
 		}
-		
+
 		registerPotionEffectType(1, "SPEED", false, 8171462);
 		registerPotionEffectType(2, "SLOWNESS", false, 5926017);
 		registerPotionEffectType(3, "HASTE", false, 14270531);
@@ -1427,5 +1431,15 @@ public class ServerMock implements Server
 		}
 
 		return false;
+	}
+
+	/**
+	 * This returns the current time of the {@link Server} in milliseconds
+	 * 
+	 * @return The current {@link Server} time
+	 */
+	protected long getCurrentServerTime()
+	{
+		return System.currentTimeMillis();
 	}
 }

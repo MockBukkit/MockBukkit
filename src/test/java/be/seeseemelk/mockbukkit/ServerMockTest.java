@@ -540,13 +540,14 @@ public class ServerMockTest
 		assertNull(Tag.BEDS);
 		assertNull(Tag.BANNERS);
 	}
-	
+
 	@Test
 	public void testDefaultPotionEffects()
 	{
 		assertEquals(32, PotionEffectType.values().length);
-		
-		for (PotionEffectType type : PotionEffectType.values()) {
+
+		for (PotionEffectType type : PotionEffectType.values())
+		{
 			assertNotNull(type);
 		}
 	}
