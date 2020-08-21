@@ -8,6 +8,12 @@ import org.jetbrains.annotations.NotNull;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 
+/**
+ * This is a mock of a dropped {@link Item} entity. It can hold an {@link ItemStack}, that pretty much covers it all.
+ * 
+ * @author TheBusyBiscuit
+ *
+ */
 public class ItemEntityMock extends EntityMock implements Item
 {
 
