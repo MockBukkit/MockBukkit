@@ -6,14 +6,32 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import be.seeseemelk.mockbukkit.entity.EntityMock;
-import be.seeseemelk.mockbukkit.entity.ZombieMock;
-import org.bukkit.*;
+import org.bukkit.BlockChangeDelegate;
+import org.bukkit.Chunk;
+import org.bukkit.ChunkSnapshot;
+import org.bukkit.Difficulty;
+import org.bukkit.Effect;
+import org.bukkit.FluidCollisionMode;
+import org.bukkit.GameRule;
+import org.bukkit.HeightMap;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.Particle;
+import org.bukkit.Raid;
+import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
+import org.bukkit.StructureType;
+import org.bukkit.TreeType;
+import org.bukkit.World;
+import org.bukkit.WorldBorder;
+import org.bukkit.WorldType;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
@@ -38,8 +56,13 @@ import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Consumer;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.NotNull;
 
 import be.seeseemelk.mockbukkit.block.BlockMock;
+import be.seeseemelk.mockbukkit.entity.EntityMock;
+import be.seeseemelk.mockbukkit.entity.FireworkMock;
+import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
+import be.seeseemelk.mockbukkit.entity.ZombieMock;
 
 /**
  * A mock world object. Note that it is made to be as simple as possible. It is by no means an efficient implementation.
@@ -417,17 +440,34 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public Item dropItem(Location location, ItemStack item)
+	public Item dropItem(@NotNull Location loc, ItemStack item)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (item == null || item.getType() == Material.AIR)
+		{
+			throw new IllegalArgumentException("Cannot drop null or air");
+		}
+
+		ItemEntityMock entity = new ItemEntityMock(server, UUID.randomUUID(), item);
+		entity.setLocation(loc);
+		server.registerEntity(entity);
+		return entity;
 	}
 
 	@Override
-	public Item dropItemNaturally(Location location, ItemStack item)
+	public Item dropItemNaturally(@NotNull Location location, ItemStack item)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Random random = ThreadLocalRandom.current();
+
+		double xs = random.nextFloat() * 0.5F + 0.25;
+		double ys = random.nextFloat() * 0.5F + 0.25;
+		double zs = random.nextFloat() * 0.5F + 0.25;
+
+		Location loc = location.clone();
+		loc.setX(loc.getX() + xs);
+		loc.setY(loc.getY() + ys);
+		loc.setZ(loc.getZ() + zs);
+
+		return dropItem(loc, item);
 	}
 
 	@Override
@@ -461,6 +501,7 @@ public class WorldMock implements World
 			entity = new ZombieMock(server, UUID.randomUUID());
 			break;
 		case DROPPED_ITEM:
+			throw new IllegalArgumentException("Items must be spawned using World#dropItem(...)");
 		case ARROW:
 		case PAINTING:
 		case LEASH_HITCH:
@@ -472,6 +513,7 @@ public class WorldMock implements World
 		case EXPERIENCE_ORB:
 		case UNKNOWN:
 		case PLAYER:
+			throw new IllegalArgumentException("Player Entities cannot be spawned, use ServerMock#addPlayer(...)");
 		case LIGHTNING:
 		case FISHING_HOOK:
 		case FOX:
@@ -551,6 +593,8 @@ public class WorldMock implements World
 		case SPECTRAL_ARROW:
 		case HUSK:
 		case FIREWORK:
+			entity = new FireworkMock(server, UUID.randomUUID());
+			break;
 		case FALLING_BLOCK:
 		case PRIMED_TNT:
 		case WITHER_SKULL:
