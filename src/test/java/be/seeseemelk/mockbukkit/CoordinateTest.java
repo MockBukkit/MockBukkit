@@ -65,7 +65,7 @@ public class CoordinateTest
 	@Test
 	public void equals_Same_True()
 	{
-		assertNotEquals(coordinate, coordinate);
+		assertEquals(coordinate, coordinate);
 	}
 
 	@Test
@@ -73,7 +73,7 @@ public class CoordinateTest
 	{
 		Coordinate c1 = new Coordinate(1, 2, 3);
 		Coordinate c2 = new Coordinate(1, 2, 3);
-		assertNotEquals(c1, c2);
+		assertEquals(c1, c2);
 	}
 
 	@Test

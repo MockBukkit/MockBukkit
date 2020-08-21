@@ -195,7 +195,7 @@ public class EntityMockTest
 	public void equals_SameUUID_Equal()
 	{
 		EntityMock entity2 = new SimpleEntityMock(server, entity.getUniqueId());
-		assertNotEquals("Two equal entities are not equal", entity, entity2);
+		assertEquals("Two equal entities are not equal", entity, entity2);
 	}
 
 	@Test

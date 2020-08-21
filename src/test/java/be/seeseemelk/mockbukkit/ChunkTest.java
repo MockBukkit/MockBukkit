@@ -78,7 +78,7 @@ public class ChunkTest
 	{
 		ChunkMock chunk1 = world.getChunkAt(0, 0);
 		ChunkMock chunk2 = world.getChunkAt(0, 0);
-		assertNotEquals(chunk1, chunk2);
+		assertEquals(chunk1, chunk2);
 		assertEquals(chunk1.hashCode(), chunk2.hashCode());
 	}
 
