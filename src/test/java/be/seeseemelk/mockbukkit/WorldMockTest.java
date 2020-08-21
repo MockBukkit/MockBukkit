@@ -79,8 +79,7 @@ public class WorldMockTest
 		Location spawn = world.getSpawnLocation();
 		assertNotNull(spawn);
 		assertEquals(Material.AIR, world.getBlockAt(spawn.getBlockX(), spawn.getBlockY(), spawn.getBlockZ()).getType());
-		assertEquals(Material.GRASS,
-				world.getBlockAt(spawn.getBlockX(), spawn.getBlockY() - 1, spawn.getBlockZ()).getType());
+		assertEquals(Material.GRASS, world.getBlockAt(spawn.getBlockX(), spawn.getBlockY() - 1, spawn.getBlockZ()).getType());
 	}
 
 	@Test
