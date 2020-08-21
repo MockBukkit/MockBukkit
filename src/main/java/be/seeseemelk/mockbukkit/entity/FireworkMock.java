@@ -34,7 +34,7 @@ public class FireworkMock extends EntityMock implements Firework
 	{
 		super(server, uuid);
 
-		this.meta = meta;
+		this.meta = meta.clone();
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class FireworkMock extends EntityMock implements Firework
 	public void setFireworkMeta(@NotNull FireworkMeta meta)
 	{
 		Validate.notNull(meta, "FireworkMeta cannot be null!");
-		this.meta = meta;
+		this.meta = meta.clone();
 	}
 
 	@Override
