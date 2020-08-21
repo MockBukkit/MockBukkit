@@ -185,8 +185,7 @@ public class EntityMockTest
 	public void sendMessage_Default_nextMessageReturnsMessages()
 	{
 		entity.sendMessage("hello");
-		entity.sendMessage(new String[]
-		{ "my", "world" });
+		entity.sendMessage(new String[] { "my", "world" });
 		assertEquals("hello", entity.nextMessage());
 		assertEquals("my", entity.nextMessage());
 		assertEquals("world", entity.nextMessage());
@@ -196,26 +195,26 @@ public class EntityMockTest
 	public void equals_SameUUID_Equal()
 	{
 		EntityMock entity2 = new SimpleEntityMock(server, entity.getUniqueId());
-		assertTrue("Two equal entities are not equal", entity.equals(entity2));
+		assertNotEquals("Two equal entities are not equal", entity, entity2);
 	}
 
 	@Test
 	public void equals_DifferentUUID_Different()
 	{
 		EntityMock entity2 = new SimpleEntityMock(server);
-		assertFalse("Two different entities detected as equal", entity.equals(entity2));
+		assertNotEquals("Two different entities detected as equal", entity, entity2);
 	}
 
 	@Test
 	public void equals_DifferentObject_Different()
 	{
-		assertFalse(entity.equals(new Object()));
+		assertNotEquals(entity, new Object());
 	}
 
 	@Test
 	public void equals_Null_Different()
 	{
-		assertFalse(entity.equals(null));
+		assertNotEquals(entity, null);
 	}
 
 	@Test
