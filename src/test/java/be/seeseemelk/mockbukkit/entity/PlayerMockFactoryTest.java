@@ -1,6 +1,6 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 
 import org.bukkit.entity.Player;
@@ -16,18 +16,18 @@ public class PlayerMockFactoryTest
 	private ServerMock server;
 	private PlayerMockFactory factory;
 
- 	@Before
+	@Before
 	public void setUp()
 	{
- 		server = MockBukkit.mock();
- 		factory = new PlayerMockFactory(server);
+		server = MockBukkit.mock();
+		factory = new PlayerMockFactory(server);
 	}
- 	
- 	@After
- 	public void tearDown()
- 	{
- 		MockBukkit.unmock();
- 	}
+
+	@After
+	public void tearDown()
+	{
+		MockBukkit.unmock();
+	}
 
 	@Test
 	public void createRandomPlayer_createsRandomPlayer()
@@ -36,13 +36,13 @@ public class PlayerMockFactoryTest
 		assertNotNull(player.getName());
 		assertNotNull(player.getUniqueId());
 	}
-	
+
 	@Test
 	public void createRandomPlayer_TwoInvocations_DifferentPlayers()
 	{
 		Player player1 = factory.createRandomPlayer();
 		Player player2 = factory.createRandomPlayer();
-		assertFalse("Two random players are the same", player1.equals(player2));
+		assertNotEquals("Two random players are the same", player1, player2);
 	}
 
 }

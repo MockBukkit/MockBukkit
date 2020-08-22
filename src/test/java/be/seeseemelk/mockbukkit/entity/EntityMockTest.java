@@ -44,13 +44,13 @@ public class EntityMockTest
 		world = server.addSimpleWorld("world");
 		entity = new SimpleEntityMock(server);
 	}
-	
+
 	@After
 	public void tearDown()
 	{
 		MockBukkit.unmock();
 	}
-	
+
 	@Test
 	public void getLocation_TwoInvocations_TwoClones()
 	{
@@ -59,7 +59,7 @@ public class EntityMockTest
 		assertEquals(location1, location2);
 		assertNotSame(location1, location2);
 	}
-	
+
 	@Test
 	public void getLocation_IntoLocation_LocationCopied()
 	{
@@ -69,7 +69,7 @@ public class EntityMockTest
 		assertEquals(location1, entity.getLocation(location));
 		assertEquals(location1, location);
 	}
-	
+
 	@Test
 	public void assertLocation_CorrectLocation_DoesNotAssert()
 	{
@@ -78,7 +78,7 @@ public class EntityMockTest
 		entity.teleport(location);
 		entity.assertLocation(location, 5.0);
 	}
-	
+
 	@Test(expected = AssertionError.class)
 	public void assertLocation_WrongLocation_Asserts()
 	{
@@ -86,7 +86,7 @@ public class EntityMockTest
 		location.add(0, 10.0, 0);
 		entity.assertLocation(location, 5.0);
 	}
-	
+
 	@Test
 	public void assertTeleported_Teleported_DoesNotAssert()
 	{
@@ -95,27 +95,27 @@ public class EntityMockTest
 		entity.assertTeleported(location, 5.0);
 		assertEquals(TeleportCause.PLUGIN, entity.getTeleportCause());
 	}
-	
+
 	@Test(expected = AssertionError.class)
 	public void assertTeleported_NotTeleported_Asserts()
 	{
 		Location location = entity.getLocation();
 		entity.assertTeleported(location, 5.0);
 	}
-	
+
 	@Test
 	public void assertNotTeleported_NotTeleported_DoesNotAssert()
 	{
 		entity.assertNotTeleported();
 	}
-	
+
 	@Test(expected = AssertionError.class)
 	public void assertNotTeleported_Teleported_Asserts()
 	{
 		entity.teleport(entity.getLocation());
 		entity.assertNotTeleported();
 	}
-	
+
 	@Test
 	public void assertNotTeleported_AfterAssertTeleported_DoesNotAssert()
 	{
@@ -123,7 +123,7 @@ public class EntityMockTest
 		entity.assertTeleported(entity.getLocation(), 0);
 		entity.assertNotTeleported();
 	}
-	
+
 	@Test
 	public void teleport_LocationAndCause_LocationSet()
 	{
@@ -133,7 +133,7 @@ public class EntityMockTest
 		entity.assertTeleported(location, 0);
 		assertEquals(TeleportCause.CHORUS_FRUIT, entity.getTeleportCause());
 	}
-	
+
 	@Test
 	public void teleport_Entity_LocationSetToEntity()
 	{
@@ -144,7 +144,7 @@ public class EntityMockTest
 		entity.teleport(entity2);
 		entity.assertTeleported(location, 0);
 	}
-	
+
 	@Test
 	public void hasTeleport_Teleportation_CorrectStatus()
 	{
@@ -152,7 +152,7 @@ public class EntityMockTest
 		entity.teleport(entity.getLocation());
 		assertTrue(entity.hasTeleported());
 	}
-	
+
 	@Test
 	public void clearTeleport_AfterTeleportation_TeleportStatusReset()
 	{
@@ -160,19 +160,19 @@ public class EntityMockTest
 		entity.clearTeleported();
 		assertFalse(entity.hasTeleported());
 	}
-	
+
 	@Test
 	public void getName_Default_CorrectName()
 	{
 		assertEquals("entity", entity.getName());
 	}
-	
+
 	@Test
 	public void getUniqueId_Default_RandomUuid()
 	{
 		assertNotNull(entity.getUniqueId());
 	}
-	
+
 	@Test
 	public void getUniqueId_UUIDPassedOn_GetsSameUuid()
 	{
@@ -180,43 +180,43 @@ public class EntityMockTest
 		entity = new SimpleEntityMock(server, uuid);
 		assertEquals(uuid, entity.getUniqueId());
 	}
-	
+
 	@Test
 	public void sendMessage_Default_nextMessageReturnsMessages()
 	{
 		entity.sendMessage("hello");
-		entity.sendMessage(new String[]{"my", "world"});
+		entity.sendMessage(new String[] { "my", "world" });
 		assertEquals("hello", entity.nextMessage());
 		assertEquals("my", entity.nextMessage());
 		assertEquals("world", entity.nextMessage());
 	}
-	
+
 	@Test
 	public void equals_SameUUID_Equal()
 	{
 		EntityMock entity2 = new SimpleEntityMock(server, entity.getUniqueId());
-		assertTrue("Two equal entities are not equal", entity.equals(entity2));
+		assertEquals("Two equal entities are not equal", entity, entity2);
 	}
-	
+
 	@Test
 	public void equals_DifferentUUID_Different()
 	{
 		EntityMock entity2 = new SimpleEntityMock(server);
-		assertFalse("Two different entities detected as equal", entity.equals(entity2));
+		assertNotEquals("Two different entities detected as equal", entity, entity2);
 	}
-	
+
 	@Test
 	public void equals_DifferentObject_Different()
 	{
-		assertFalse(entity.equals(new Object()));
+		assertNotEquals(entity, new Object());
 	}
-	
+
 	@Test
 	public void equals_Null_Different()
 	{
-		assertFalse(entity.equals(null));
+		assertNotEquals(entity, null);
 	}
-	
+
 	@Test
 	public void getWorld_LocationSet_GetsWorldSameAsInLocation()
 	{
@@ -227,7 +227,7 @@ public class EntityMockTest
 		entity.teleport(otherWorld.getSpawnLocation());
 		assertEquals(otherWorld, entity.getWorld());
 	}
-	
+
 	@Test
 	public void metadataTest()
 	{
@@ -238,7 +238,7 @@ public class EntityMockTest
 		assertEquals(1, entity.getMetadata("metadata").size());
 		entity.removeMetadata("metadata", plugin);
 	}
-	
+
 	@Test
 	public void hasPermission_NotAddedNotDefault_DoesNotHavePermission()
 	{
@@ -246,7 +246,7 @@ public class EntityMockTest
 		server.getPluginManager().addPermission(permission);
 		assertFalse(entity.hasPermission("mockbukkit.perm"));
 	}
-	
+
 	@Test
 	public void hasPermission_NotAddedButDefault_DoesPermission()
 	{
@@ -256,7 +256,7 @@ public class EntityMockTest
 		entity.addAttachment(plugin, "mockbukkit.perm", true);
 		assertTrue(entity.hasPermission("mockbukkit.perm"));
 	}
-	
+
 	@Test
 	public void addAttachment_PermissionObject_PermissionAdded()
 	{
@@ -267,7 +267,7 @@ public class EntityMockTest
 		attachment.setPermission(permission, true);
 		assertTrue(entity.hasPermission("mockbukkit.perm"));
 	}
-	
+
 	@Test
 	public void addAttachment_PermissionName_PermissionAdded()
 	{
@@ -278,7 +278,7 @@ public class EntityMockTest
 		attachment.setPermission(permission.getName(), true);
 		assertTrue(entity.hasPermission("mockbukkit.perm"));
 	}
-	
+
 	@Test
 	public void addPermission_String_PermissionAdded()
 	{
@@ -294,19 +294,19 @@ public class EntityMockTest
 	public void entityDamage_By_Player()
 	{
 		World world = new WorldMock(Material.GRASS_BLOCK, 10);
-		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world,10,10,10), EntityType.ZOMBIE);
+		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
 		PlayerMock player1 = server.addPlayer();
 		double initialHealth = zombie.getHealth();
 		zombie.damage(4, player1);
 		double finalHealth = zombie.getHealth();
-		Assert.assertEquals(4, initialHealth-finalHealth, 0.1);
+		Assert.assertEquals(4, initialHealth - finalHealth, 0.1);
 	}
 
 	@Test
 	public void entityDamage_Event_Triggered()
 	{
 		World world = new WorldMock(Material.GRASS_BLOCK, 10);
-		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world,10,10,10), EntityType.ZOMBIE);
+		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
 		PlayerMock player1 = server.addPlayer();
 		zombie.damage(4, player1);
 		server.getPluginManager().assertEventFired(EntityDamageByEntityEvent.class);
@@ -322,41 +322,3 @@ public class EntityMockTest
 		assertEquals(player1.getVelocity(), velocity);
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

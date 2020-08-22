@@ -70,7 +70,7 @@ public class ChunkTest
 	{
 		ChunkMock chunk1 = world.getChunkAt(0, 0);
 		ChunkMock chunk2 = world.getChunkAt(0, 1);
-		assertFalse(chunk1.equals(chunk2));
+		assertNotEquals(chunk1, chunk2);
 	}
 
 	@Test
@@ -78,7 +78,7 @@ public class ChunkTest
 	{
 		ChunkMock chunk1 = world.getChunkAt(0, 0);
 		ChunkMock chunk2 = world.getChunkAt(0, 0);
-		assertTrue(chunk1.equals(chunk2));
+		assertEquals(chunk1, chunk2);
 		assertEquals(chunk1.hashCode(), chunk2.hashCode());
 	}
 
@@ -86,15 +86,15 @@ public class ChunkTest
 	public void equals_Null_False()
 	{
 		ChunkMock chunk = world.getChunkAt(0, 0);
-		assertFalse(chunk.equals(null));
+		assertNotEquals(chunk, null);
 	}
 
 	@Test
 	public void equals_DifferentClass_False()
 	{
 		ChunkMock chunk = world.getChunkAt(0, 0);
-		Object obj = Runtime.getRuntime();
-		assertFalse(chunk.equals(obj));
+		Object obj = new Object();
+		assertNotEquals(chunk, obj);
 	}
 
 }

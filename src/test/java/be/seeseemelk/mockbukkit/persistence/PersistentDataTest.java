@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.persistence;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
@@ -123,15 +124,15 @@ public class PersistentDataTest
 		PersistentDataContainer container = new PersistentDataContainerMock();
 		PersistentDataContainer container2 = new PersistentDataContainerMock();
 
-		assertTrue(container.equals(container2));
+		assertEquals(container, container2);
 
 		NamespacedKey key = NamespacedKey.randomKey();
 		container.set(key, PersistentDataType.INTEGER, 42);
 
-		assertFalse(container.equals(container2));
+		assertNotEquals(container, container2);
 
 		container2.set(key, PersistentDataType.INTEGER, 42);
-		assertTrue(container.equals(container2));
+		assertEquals(container, container2);
 	}
 
 	@Test

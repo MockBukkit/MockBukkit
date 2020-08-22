@@ -29,6 +29,7 @@ import org.bukkit.SoundCategory;
 import org.bukkit.World;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
+import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -47,13 +48,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.TestPlugin;
+import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.inventory.ChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
@@ -696,6 +697,7 @@ public class PlayerMockTest
 	public void giveExp_NoExpChange_NoEventFired()
 	{
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+
 		Bukkit.getPluginManager().registerEvents(new Listener()
 		{
 			@EventHandler
@@ -710,6 +712,7 @@ public class PlayerMockTest
 				fail("PlayerExpChangeEvent should not be called");
 			}
 		}, plugin);
+
 		player.giveExp(0);
 	}
 
@@ -717,14 +720,14 @@ public class PlayerMockTest
 	public void getFood_LevelDefault20()
 	{
 		int foodLevel = player.getFoodLevel();
-		Assert.assertEquals(foodLevel, 20);
+		assertEquals(20, foodLevel);
 	}
 
 	@Test
 	public void getFood_LevelChange()
 	{
 		player.setFoodLevel(10);
-		Assert.assertEquals(player.getFoodLevel(), 10);
+		assertEquals(10, player.getFoodLevel());
 	}
 
 	@Test
@@ -965,5 +968,13 @@ public class PlayerMockTest
 
 		assertEquals(firstPlayed, player.getFirstPlayed());
 		assertNotEquals(player.getFirstPlayed(), player.getLastPlayed());
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testIllegalArgumentForSpawning()
+	{
+		World world = new WorldMock();
+		Location location = new Location(world, 300, 100, 300);
+		world.spawnEntity(location, EntityType.PLAYER);
 	}
 }

@@ -27,19 +27,19 @@ import be.seeseemelk.mockbukkit.block.BlockMock;
 public class WorldMockTest
 {
 	private ServerMock server;
-	
+
 	@Before
 	public void setUp()
 	{
 		server = MockBukkit.mock();
 	}
-	
+
 	@After
 	public void tearDown()
 	{
 		MockBukkit.unmock();
 	}
-	
+
 	@Test
 	public void getBlockAt_StandardWorld_DefaultBlocks()
 	{
@@ -50,7 +50,7 @@ public class WorldMockTest
 		assertEquals(Material.DIRT, world.getBlockAt(0, 3, 0).getType());
 		assertEquals(Material.AIR, world.getBlockAt(0, 4, 0).getType());
 	}
-	
+
 	@Test
 	public void getBlockAt_BlockChanged_BlockChanged()
 	{
@@ -59,7 +59,7 @@ public class WorldMockTest
 		world.getBlockAt(0, 10, 0).setType(Material.BIRCH_WOOD);
 		assertEquals(Material.BIRCH_WOOD, world.getBlockAt(0, 10, 0).getType());
 	}
-	
+
 	@Test
 	public void getBlockAt_AnyBlock_LocationSet()
 	{
@@ -71,7 +71,7 @@ public class WorldMockTest
 		assertEquals(3, location.getBlockZ());
 		assertEquals(world, block.getWorld());
 	}
-	
+
 	@Test
 	public void getSpawnLocation_Default_JustAboveDirt()
 	{
@@ -79,9 +79,9 @@ public class WorldMockTest
 		Location spawn = world.getSpawnLocation();
 		assertNotNull(spawn);
 		assertEquals(Material.AIR, world.getBlockAt(spawn.getBlockX(), spawn.getBlockY(), spawn.getBlockZ()).getType());
-		assertEquals(Material.GRASS, world.getBlockAt(spawn.getBlockX(), spawn.getBlockY()-1, spawn.getBlockZ()).getType());
+		assertEquals(Material.GRASS, world.getBlockAt(spawn.getBlockX(), spawn.getBlockY() - 1, spawn.getBlockZ()).getType());
 	}
-	
+
 	@Test
 	public void setSpawnLocation_SomeNewLocation_LocationChanged()
 	{
@@ -91,13 +91,13 @@ public class WorldMockTest
 		assertEquals(spawn.getBlockX() + 10, world.getSpawnLocation().getBlockX());
 		assertEquals(spawn.getBlockY() + 10, world.getSpawnLocation().getBlockY());
 		assertEquals(spawn.getBlockZ() + 10, world.getSpawnLocation().getBlockZ());
-		
+
 		world.setSpawnLocation(spawn);
 		assertEquals(spawn.getBlockX(), world.getSpawnLocation().getBlockX());
 		assertEquals(spawn.getBlockY(), world.getSpawnLocation().getBlockY());
 		assertEquals(spawn.getBlockZ(), world.getSpawnLocation().getBlockZ());
 	}
-	
+
 	@Test
 	public void getEntities_NoEntities_EmptyList()
 	{
@@ -106,7 +106,7 @@ public class WorldMockTest
 		assertNotNull(entities);
 		assertEquals(0, entities.size());
 	}
-	
+
 	@Test
 	public void getEntities_OnePlayerInWorld_ListContainsOnlyPlayer()
 	{
@@ -119,7 +119,7 @@ public class WorldMockTest
 		assertEquals(1, entities.size());
 		assertSame(player, entities.get(0));
 	}
-	
+
 	@Test
 	public void getEntities_OnePlayerInDifferentWorld_EmptyList()
 	{
@@ -131,7 +131,7 @@ public class WorldMockTest
 		assertNotNull(entities);
 		assertEquals(0, entities.size());
 	}
-	
+
 	@Test
 	public void getChunkAt_DifferentLocations_DifferentChunks()
 	{
@@ -140,7 +140,7 @@ public class WorldMockTest
 		ChunkMock chunk2 = world.getChunkAt(1, 0);
 		assertNotEquals(chunk1, chunk2);
 	}
-	
+
 	@Test
 	public void getChunkAt_SameLocations_EqualsChunks()
 	{
@@ -149,7 +149,7 @@ public class WorldMockTest
 		ChunkMock chunk2 = world.getChunkAt(0, 0);
 		assertEquals(chunk1, chunk2);
 	}
-	
+
 	@Test
 	public void getName_NameSet_NameExactly()
 	{
@@ -157,7 +157,7 @@ public class WorldMockTest
 		world.setName("world name");
 		assertEquals("world name", world.getName());
 	}
-	
+
 	@Test
 	public void setGameRule_CorrectValue_GameRuleSet()
 	{
@@ -167,14 +167,14 @@ public class WorldMockTest
 		assertTrue(world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false));
 		assertFalse(world.getGameRuleValue(GameRule.DO_DAYLIGHT_CYCLE));
 	}
-	
+
 	@Test
 	public void onCreated_WeatherDurationSetToZero()
 	{
 		WorldMock world = new WorldMock();
 		assertEquals("Weather duration should be zero", 0, world.getWeatherDuration());
 	}
-	
+
 	@Test
 	public void setWeatherDuration_AnyPositiveValue_WeatherDurationSet()
 	{
@@ -183,14 +183,14 @@ public class WorldMockTest
 		world.setWeatherDuration(duration);
 		assertEquals("Weather duration should be set", duration, world.getWeatherDuration());
 	}
-	
+
 	@Test
 	public void onCreated_NotStorming()
 	{
 		WorldMock world = new WorldMock();
 		assertFalse("The world should not be storming", world.hasStorm());
 	}
-	
+
 	@Test
 	public void setStorm_True_Storming()
 	{
@@ -199,7 +199,7 @@ public class WorldMockTest
 		world.setStorm(true);
 		assertTrue("The world should be storming", world.hasStorm());
 	}
-	
+
 	@Test
 	public void onCreated_ThunderDurationSetToZero()
 	{
@@ -207,7 +207,7 @@ public class WorldMockTest
 		assertEquals("Weather duration should be zero", 0, world.getThunderDuration());
 		assertFalse(world.isThundering());
 	}
-	
+
 	@Test
 	public void setThunderDuration_AnyPositiveValue_ShouldBeThundering()
 	{
@@ -226,21 +226,17 @@ public class WorldMockTest
 		assertTrue("Weather duration should be more than zero", world.getThunderDuration() > 0);
 		assertTrue(world.isThundering());
 	}
-	@Test
-	public void spawnEntityTest(){
-
-	}
 
 	@Test
-	public void spawnZombieTest(){
+	public void spawnZombieTest()
+	{
 		WorldMock world = new WorldMock();
 		Location location = new Location(world, 100, 20, 50);
 		Entity zombie = world.spawnEntity(location, EntityType.ZOMBIE);
-		assertEquals(zombie.getLocation().getBlockX(), 100);
-		assertEquals(zombie.getLocation().getBlockY(), 20);
-		assertEquals(zombie.getLocation().getBlockZ(), 50);
-		assertTrue(world.getEntities().size()>0);
-
+		assertEquals(100, zombie.getLocation().getBlockX());
+		assertEquals(20, zombie.getLocation().getBlockY());
+		assertEquals(50, zombie.getLocation().getBlockZ());
+		assertTrue(world.getEntities().size() > 0);
 	}
 
 	@Test
@@ -285,9 +281,8 @@ public class WorldMockTest
 		WorldMock world = new WorldMock();
 		world.setTime(6000L);
 		world.setTime(10000L);
-		server.getPluginManager().assertEventFired(TimeSkipEvent.class, event ->
-				event.getSkipAmount() == 4000L && event.getSkipReason().equals(TimeSkipEvent.SkipReason.CUSTOM)
-		);
+		server.getPluginManager().assertEventFired(TimeSkipEvent.class, event -> 
+			event.getSkipAmount() == 4000L && event.getSkipReason().equals(TimeSkipEvent.SkipReason.CUSTOM));
 	}
 
 	@Test
@@ -297,15 +292,3 @@ public class WorldMockTest
 		assertEquals("World environment type should be normal", World.Environment.NORMAL, world.getEnvironment());
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
