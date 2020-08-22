@@ -61,6 +61,13 @@ public class FireworkMockTest
 	}
 
 	@Test
+	public void testEntityType()
+	{
+		Firework firework = new FireworkMock(server, UUID.randomUUID());
+		assertEquals(EntityType.FIREWORK, firework.getType());
+	}
+
+	@Test
 	public void testSecondConstructor()
 	{
 		FireworkMeta meta = new FireworkMetaMock();

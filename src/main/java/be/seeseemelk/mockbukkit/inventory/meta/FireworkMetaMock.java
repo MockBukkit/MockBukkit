@@ -60,7 +60,10 @@ public class FireworkMetaMock extends ItemMetaMock implements FireworkMeta
 	public FireworkMetaMock clone()
 	{
 		FireworkMetaMock mock = (FireworkMetaMock) super.clone();
+
+		mock.effects.clear();
 		mock.effects.addAll(this.effects);
+
 		return mock;
 	}
 

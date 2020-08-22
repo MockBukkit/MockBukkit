@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.UUID;
+
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -15,17 +17,19 @@ import org.junit.Before;
 import org.junit.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.WorldMock;
 
 public class ItemEntityMockTest
 {
 
+	private ServerMock server;
 	private World world;
 
 	@Before
 	public void setUp()
 	{
-		MockBukkit.mock();
+		server = MockBukkit.mock();
 		world = new WorldMock();
 	}
 
@@ -76,6 +80,13 @@ public class ItemEntityMockTest
 	{
 		Location location = new Location(world, 300, 100, 300);
 		world.spawnEntity(location, EntityType.DROPPED_ITEM);
+	}
+
+	@Test
+	public void testEntityType()
+	{
+		Item item = new ItemEntityMock(server, UUID.randomUUID(), new ItemStack(Material.STONE));
+		assertEquals(EntityType.DROPPED_ITEM, item.getType());
 	}
 
 	@Test
