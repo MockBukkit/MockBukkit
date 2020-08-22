@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import org.apache.commons.lang.Validate;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.jetbrains.annotations.NotNull;
@@ -35,6 +36,12 @@ public class FireworkMock extends EntityMock implements Firework
 		super(server, uuid);
 
 		this.meta = meta.clone();
+	}
+
+	@Override
+	public EntityType getType()
+	{
+		return EntityType.FIREWORK;
 	}
 
 	@Override
