@@ -495,11 +495,17 @@ public class WorldMock implements World
 	public Entity spawnEntity(Location loc, EntityType type)
 	{
 		EntityMock entity = null;
+
 		switch (type)
 		{
 		case ZOMBIE:
 			entity = new ZombieMock(server, UUID.randomUUID());
 			break;
+		case FIREWORK:
+			entity = new FireworkMock(server, UUID.randomUUID());
+			break;
+		case PLAYER:
+			throw new IllegalArgumentException("Player Entities cannot be spawned, use ServerMock#addPlayer(...)");
 		case DROPPED_ITEM:
 			throw new IllegalArgumentException("Items must be spawned using World#dropItem(...)");
 		case ARROW:
@@ -512,8 +518,6 @@ public class WorldMock implements World
 		case AREA_EFFECT_CLOUD:
 		case EXPERIENCE_ORB:
 		case UNKNOWN:
-		case PLAYER:
-			throw new IllegalArgumentException("Player Entities cannot be spawned, use ServerMock#addPlayer(...)");
 		case LIGHTNING:
 		case FISHING_HOOK:
 		case FOX:
@@ -592,9 +596,6 @@ public class WorldMock implements World
 		case SHULKER_BULLET:
 		case SPECTRAL_ARROW:
 		case HUSK:
-		case FIREWORK:
-			entity = new FireworkMock(server, UUID.randomUUID());
-			break;
 		case FALLING_BLOCK:
 		case PRIMED_TNT:
 		case WITHER_SKULL:
@@ -610,11 +611,13 @@ public class WorldMock implements World
 		default:
 			throw new UnimplementedOperationException();
 		}
+
 		if (entity != null)
 		{
 			entity.setLocation(loc);
 			server.registerEntity(entity);
 		}
+
 		return entity;
 	}
 
