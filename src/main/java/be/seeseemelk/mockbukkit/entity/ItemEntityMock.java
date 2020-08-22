@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.entity;
 
 import java.util.UUID;
 
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -26,6 +27,12 @@ public class ItemEntityMock extends EntityMock implements Item
 	{
 		super(server, uuid);
 		this.item = item.clone();
+	}
+
+	@Override
+	public EntityType getType()
+	{
+		return EntityType.DROPPED_ITEM;
 	}
 
 	@Override
