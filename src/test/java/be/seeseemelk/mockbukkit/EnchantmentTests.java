@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.bukkit.enchantments.Enchantment;
@@ -34,6 +35,9 @@ public class EnchantmentTests
 	public void testEnchantmentsRegisterTwiceDoesNotThrow()
 	{
 		EnchantmentsMock.registerDefaultEnchantments();
+		int originalLength = Enchantment.values().length;
 		EnchantmentsMock.registerDefaultEnchantments();
+		int newLength = Enchantment.values().length;
+		assertEquals(originalLength, newLength);
 	}
 }
