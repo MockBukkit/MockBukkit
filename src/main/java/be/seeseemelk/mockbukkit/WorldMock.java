@@ -60,6 +60,7 @@ import org.jetbrains.annotations.NotNull;
 
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
+import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
 import be.seeseemelk.mockbukkit.entity.FireworkMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
 import be.seeseemelk.mockbukkit.entity.ZombieMock;
@@ -494,131 +495,32 @@ public class WorldMock implements World
 	@Override
 	public Entity spawnEntity(Location loc, EntityType type)
 	{
-		EntityMock entity = null;
+		EntityMock entity = mockEntity(type);
+		entity.setLocation(loc);
+		server.registerEntity(entity);
 
+		return entity;
+	}
+
+	private EntityMock mockEntity(@NotNull EntityType type)
+	{
 		switch (type)
 		{
 		case ZOMBIE:
-			entity = new ZombieMock(server, UUID.randomUUID());
-			break;
+			return new ZombieMock(server, UUID.randomUUID());
 		case FIREWORK:
-			entity = new FireworkMock(server, UUID.randomUUID());
-			break;
+			return new FireworkMock(server, UUID.randomUUID());
+		case EXPERIENCE_ORB:
+			return new ExperienceOrbMock(server, UUID.randomUUID());
 		case PLAYER:
 			throw new IllegalArgumentException("Player Entities cannot be spawned, use ServerMock#addPlayer(...)");
 		case DROPPED_ITEM:
 			throw new IllegalArgumentException("Items must be spawned using World#dropItem(...)");
-		case ARROW:
-		case PAINTING:
-		case LEASH_HITCH:
-		case EGG:
-		case STRAY:
-		case WITHER_SKELETON:
-		case ELDER_GUARDIAN:
-		case AREA_EFFECT_CLOUD:
-		case EXPERIENCE_ORB:
-		case UNKNOWN:
-		case LIGHTNING:
-		case FISHING_HOOK:
-		case FOX:
-		case WANDERING_TRADER:
-		case TRADER_LLAMA:
-		case RAVAGER:
-		case PILLAGER:
-		case PANDA:
-		case CAT:
-		case DOLPHIN:
-		case DROWNED:
-		case TROPICAL_FISH:
-		case PUFFERFISH:
-		case SALMON:
-		case COD:
-		case TRIDENT:
-		case PHANTOM:
-		case TURTLE:
-		case ENDER_CRYSTAL:
-		case VILLAGER:
-		case PARROT:
-		case LLAMA_SPIT:
-		case LLAMA:
-		case POLAR_BEAR:
-		case RABBIT:
-		case HORSE:
-		case IRON_GOLEM:
-		case OCELOT:
-		case SNOWMAN:
-		case MUSHROOM_COW:
-		case WOLF:
-		case SQUID:
-		case CHICKEN:
-		case COW:
-		case SHEEP:
-		case PIG:
-		case SHULKER:
-		case GUARDIAN:
-		case ENDERMITE:
-		case WITCH:
-		case BAT:
-		case WITHER:
-		case ENDER_DRAGON:
-		case MAGMA_CUBE:
-		case BLAZE:
-		case SILVERFISH:
-		case CAVE_SPIDER:
-		case ENDERMAN:
-		case PIG_ZOMBIE:
-		case GHAST:
-		case SLIME:
-		case GIANT:
-		case SPIDER:
-		case SKELETON:
-		case CREEPER:
-		case MINECART_MOB_SPAWNER:
-		case MINECART_HOPPER:
-		case MINECART_TNT:
-		case MINECART_FURNACE:
-		case MINECART_CHEST:
-		case MINECART:
-		case BOAT:
-		case MINECART_COMMAND:
-		case ILLUSIONER:
-		case VINDICATOR:
-		case VEX:
-		case EVOKER:
-		case EVOKER_FANGS:
-		case MULE:
-		case DONKEY:
-		case ARMOR_STAND:
-		case ZOMBIE_HORSE:
-		case SKELETON_HORSE:
-		case ZOMBIE_VILLAGER:
-		case DRAGON_FIREBALL:
-		case SHULKER_BULLET:
-		case SPECTRAL_ARROW:
-		case HUSK:
-		case FALLING_BLOCK:
-		case PRIMED_TNT:
-		case WITHER_SKULL:
-		case ITEM_FRAME:
-		case THROWN_EXP_BOTTLE:
-		case SPLASH_POTION:
-		case ENDER_SIGNAL:
-		case ENDER_PEARL:
-		case SMALL_FIREBALL:
-		case FIREBALL:
-		case SNOWBALL:
-			break;
 		default:
+			// If that specific Mob Type has not been implemented yet, it may be better
+			// to throw an UnimplementedOperationException for consistency
 			throw new UnimplementedOperationException();
 		}
-
-		if (entity != null)
-		{
-			entity.setLocation(loc);
-			server.registerEntity(entity);
-		}
-
-		return entity;
 	}
 
 	@Override
