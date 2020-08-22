@@ -13,7 +13,7 @@ import com.google.common.collect.ImmutableList;
 public class FireworkMetaMock extends ItemMetaMock implements FireworkMeta
 {
 
-	private final List<FireworkEffect> effects = new ArrayList<>();
+	private List<FireworkEffect> effects = new ArrayList<>();
 	private int power = 0;
 
 	public FireworkMetaMock()
@@ -60,10 +60,7 @@ public class FireworkMetaMock extends ItemMetaMock implements FireworkMeta
 	public FireworkMetaMock clone()
 	{
 		FireworkMetaMock mock = (FireworkMetaMock) super.clone();
-
-		mock.effects.clear();
-		mock.effects.addAll(this.effects);
-
+		mock.effects = new ArrayList<>(this.effects);
 		return mock;
 	}
 

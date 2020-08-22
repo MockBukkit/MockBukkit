@@ -129,6 +129,12 @@ public class PlayerMock extends LivingEntityMock implements Player
 		closeInventory();
 	}
 
+	@Override
+	public EntityType getType()
+	{
+		return EntityType.PLAYER;
+	}
+
 	/**
 	 * Assert that the player is in a specific gamemode.
 	 *

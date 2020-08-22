@@ -20,7 +20,6 @@ import org.bukkit.World;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Pose;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
@@ -589,13 +588,6 @@ public abstract class EntityMock implements Entity, MessageTarget
 		// TODO Auto-generated constructor stub
 		throw new UnimplementedOperationException();
 
-	}
-
-	@Override
-	public EntityType getType()
-	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override

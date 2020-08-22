@@ -14,6 +14,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.bukkit.BlockChangeDelegate;
+import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.ChunkSnapshot;
 import org.bukkit.Difficulty;
@@ -64,6 +65,7 @@ import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
 import be.seeseemelk.mockbukkit.entity.FireworkMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
 import be.seeseemelk.mockbukkit.entity.ZombieMock;
+import be.seeseemelk.mockbukkit.metadata.MetadataTable;
 
 /**
  * A mock world object. Note that it is made to be as simple as possible. It is by no means an efficient implementation.
@@ -71,7 +73,11 @@ import be.seeseemelk.mockbukkit.entity.ZombieMock;
 @SuppressWarnings("deprecation")
 public class WorldMock implements World
 {
-	private Map<Coordinate, BlockMock> blocks = new HashMap<>();
+	private final Map<Coordinate, BlockMock> blocks = new HashMap<>();
+	private final Map<GameRule<?>, Object> gameRules = new HashMap<>();
+	private final MetadataTable metadataTable = new MetadataTable();
+	
+	private Environment environment = Environment.NORMAL;
 	private ServerMock server;
 	private Material defaultBlock;
 	private int height;
@@ -83,8 +89,6 @@ public class WorldMock implements World
 	private int weatherDuration = 0;
 	private int thunderDuration = 0;
 	private boolean storming = false;
-	private Map<GameRule<?>, Object> gameRules = new HashMap<>();
-	private Environment environment = Environment.NORMAL;
 
 	/**
 	 * Creates a new mock world.
@@ -281,29 +285,25 @@ public class WorldMock implements World
 	@Override
 	public void setMetadata(String metadataKey, MetadataValue newMetadataValue)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		metadataTable.setMetadata(metadataKey, newMetadataValue);
 	}
 
 	@Override
 	public List<MetadataValue> getMetadata(String metadataKey)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return metadataTable.getMetadata(metadataKey);
 	}
 
 	@Override
 	public boolean hasMetadata(String metadataKey)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return metadataTable.hasMetadata(metadataKey);
 	}
 
 	@Override
 	public void removeMetadata(String metadataKey, Plugin owningPlugin)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		metadataTable.removeMetadata(metadataKey, owningPlugin);
 	}
 
 	@Override
@@ -570,8 +570,7 @@ public class WorldMock implements World
 	@Override
 	public List<Player> getPlayers()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return Bukkit.getOnlinePlayers().stream().filter(p -> p.getWorld() == this).collect(Collectors.toList());
 	}
 
 	@Override
