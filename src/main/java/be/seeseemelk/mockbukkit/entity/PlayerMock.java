@@ -653,15 +653,14 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public boolean getRemoveWhenFarAway()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// Players are never despawned until they log off
+		return false;
 	}
 
 	@Override
 	public void setRemoveWhenFarAway(boolean remove)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// Don't do anything
 	}
 
 	@Override
@@ -688,22 +687,21 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public boolean isLeashed()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// Players can not be leashed
+		return false;
 	}
 
 	@Override
 	public Entity getLeashHolder()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw new IllegalStateException("Players cannot be leashed");
 	}
 
 	@Override
 	public boolean setLeashHolder(Entity holder)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// Players can not be leashed
+		return false;
 	}
 
 	@Override
@@ -723,15 +721,14 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public void setAI(boolean ai)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// I am sorry Dave, I'm afraid I can't do that
 	}
 
 	@Override
 	public boolean hasAI()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// The Player's intelligence is (probably) not artificial
+		return false;
 	}
 
 	@Override
@@ -924,14 +921,12 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public boolean isSneaking()
 	{
-		// TODO Auto-generated method stub
 		return sneaking;
 	}
 
 	@Override
 	public void setSneaking(boolean sneaking)
 	{
-		// TODO Auto-generated method stub
 		this.sneaking = sneaking;
 	}
 
