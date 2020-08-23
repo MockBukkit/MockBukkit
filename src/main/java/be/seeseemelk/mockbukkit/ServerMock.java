@@ -96,7 +96,7 @@ import be.seeseemelk.mockbukkit.scoreboard.ScoreboardManagerMock;
 @SuppressWarnings("deprecation")
 public class ServerMock implements Server
 {
-	private static final String BUKKIT_VERSION = "1.15.2";
+	private static final String BUKKIT_VERSION = "1.16.2";
 	private static final String JOIN_MESSAGE = "%s has joined the server.";
 
 	private final Logger logger;
