@@ -973,6 +973,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 	}
 
 	@Override
+    @Deprecated
 	public void playNote(Location loc, byte instrument, byte note)
 	{
 		// TODO Auto-generated method stub
@@ -1453,6 +1454,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 	}
 
 	@Override
+	@Deprecated
 	public void hidePlayer(Player player)
 	{
 		// TODO Auto-generated method stub
@@ -1467,6 +1469,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 	}
 
 	@Override
+	@Deprecated
 	public void showPlayer(Player player)
 	{
 		// TODO Auto-generated method stub
@@ -1530,6 +1533,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 	}
 
 	@Override
+	@Deprecated
 	public void setTexturePack(String url)
 	{
 		// TODO Auto-generated method stub
