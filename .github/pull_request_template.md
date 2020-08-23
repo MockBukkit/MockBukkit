@@ -2,6 +2,12 @@
 State the changes of the pull request here.
 
 # Checklist
+The following items should be checked before the pull request can be merged.
+- [ ] Version number updated in `settings.gradle`.
+- [ ] Unit tests added.
+- [ ] Code follows existing code format.
+
+# Info on creating a pull request
 Before the pull request can be accepted, the version number stored in settings.gradle should be updated.
 MockBukkit uses semantic-versioning (https://semver.org/)
 
