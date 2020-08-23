@@ -20,7 +20,7 @@ repositories {
 }
 
 dependencies {
-	testImplementation 'com.github.seeseemelk:MockBukkit-v1.16:0.4.0-SNAPSHOT'
+	testImplementation 'com.github.seeseemelk:MockBukkit-v1.16:0.4.0'
 }
 ```
 
