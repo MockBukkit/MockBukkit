@@ -41,21 +41,15 @@ dependencies {
 ```
 
 ### Adding MockBukkit via Maven
-MockBukkit can be included by using the [https://jitpack.io/](jitpack.io) repository and adding the dependency to your `pom.xml`.
+MockBukkit can be included by adding the dependency to your `pom.xml`.<br>
+You won't need to add any additional repositories since MockBukkit is served via maven-central. Make sure to update the version as necessary.
 
 ```xml
-<repositories>
-  <repository>
-    <id>jitpack.io</id>
-    <url>https://jitpack.io</url>
-  </repository>
-</repositories>
-
 <dependencies>
   <dependency>
     <groupId>com.github.seeseemelk</groupId>
-    <artifactId>MockBukkit</artifactId>
-    <version>v1.15-SNAPSHOT</version>
+    <artifactId>MockBukkit-v1.16</artifactId>
+    <version>0.4.0</version>
     <scope>test</scope>
   </dependency>
 </dependencies>
