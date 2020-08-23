@@ -77,6 +77,7 @@ import org.bukkit.util.CachedServerIcon;
 import be.seeseemelk.mockbukkit.command.CommandResult;
 import be.seeseemelk.mockbukkit.command.ConsoleCommandSenderMock;
 import be.seeseemelk.mockbukkit.command.MessageTarget;
+import be.seeseemelk.mockbukkit.enchantments.EnchantmentsMock;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
@@ -127,6 +128,7 @@ public class ServerMock implements Server
 
 		// Register default Minecraft Potion Effect Types
 		createPotionEffectTypes();
+		EnchantmentsMock.registerDefaultEnchantments();
 
 		try
 		{
