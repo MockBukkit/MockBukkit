@@ -21,7 +21,7 @@ repositories {
 }
 
 dependencies {
-    api 'org.bukkit:bukkit:1.15.2-R0.1-SNAPSHOT'
+    api "org.spigotmc:spigot-api:${gradle.ext.apiVersionFull}"
     implementation 'junit:junit:4.12'
     implementation 'org.hamcrest:hamcrest-library:1.3'
     implementation 'org.apache.commons:commons-io:1.3.2'
@@ -53,27 +53,30 @@ jacocoTestReport {
 }
 
 group = 'com.github.seeseemelk'
-version = '0.3.1-SNAPSHOT'
+version = gradle.ext.version
 
 publishing {
     publications {
         mockBukkit(MavenPublication) {
-            artifactId = 'MockBukkit-v1.15'
+            artifactId = "MockBukkit-v${gradle.ext.apiVersion}"
             from components.java
+            
+            artifact sourcesJar
+            artifact javadocJar
             pom {
-                name = 'MockBukkit-v1.15'
+                name = "MockBukkit-v${gradle.ext.apiVersion}"
                 packaging = 'jar'
                 description = 'MockBukkit is a mocking framework for bukkit to allow the easy unit testing of Bukkit plugins.'
                 url = 'https://github.com/seeseemelk/MockBukkit'
                 scm {
                     connection = 'scm:git:git://github.com/seeseemelk/MockBukkit.git'
                     developerConnection = 'scm:git:ssh://github.com:seeseemelk/MockBukkit.git'
-                    url = 'https://github.com/seeseemelk/MockBukkit/tree/v1.15-spigot'
+                    url = "https://github.com/seeseemelk/MockBukkit/tree/v${gradle.ext.apiVersion}"
                 }
                 licenses {
                     license {
                         name = 'MIT License'
-                        url = 'https://github.com/seeseemelk/MockBukkit/blob/v1.15/LICENSE'
+                        url = "https://github.com/seeseemelk/MockBukkit/blob/v${gradle.ext.apiVersion}/LICENSE"
                     }
                 }
                 developers {

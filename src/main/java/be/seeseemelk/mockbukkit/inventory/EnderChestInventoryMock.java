@@ -19,5 +19,4 @@ public class EnderChestInventoryMock extends InventoryMock
 	{
 		super(holder, 27, InventoryType.ENDER_CHEST);
 	}
-
 }

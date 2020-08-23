@@ -1,7 +1,9 @@
 package be.seeseemelk.mockbukkit.persistence;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import org.bukkit.NamespacedKey;
 import org.bukkit.persistence.PersistentDataAdapterContext;
@@ -102,6 +104,12 @@ public class PersistentDataContainerMock implements PersistentDataContainer
 	public void remove(@NotNull NamespacedKey key)
 	{
 		map.remove(key);
+	}
+
+	@Override
+	public Set<NamespacedKey> getKeys()
+	{
+		return Collections.unmodifiableSet(map.keySet());
 	}
 
 }

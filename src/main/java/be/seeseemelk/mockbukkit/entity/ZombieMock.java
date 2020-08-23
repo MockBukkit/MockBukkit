@@ -11,7 +11,6 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
 public class ZombieMock extends MonsterMock implements Zombie
 {
-
 	private boolean baby;
 	private boolean villager;
 	private Villager.Profession profession;
@@ -94,5 +93,68 @@ public class ZombieMock extends MonsterMock implements Zombie
 	public void setConversionTime(int conversionTime)
 	{
 		this.conversionTime = conversionTime;
+	}
+
+	@Override
+	public int getAge()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setAge(int age)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setAgeLock(boolean lock)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean getAgeLock()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setBaby()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setAdult()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isAdult()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean canBreed()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setBreed(boolean breed)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 }
