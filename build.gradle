@@ -60,6 +60,9 @@ publishing {
         mockBukkit(MavenPublication) {
             artifactId = "MockBukkit-v${gradle.ext.apiVersion}"
             from components.java
+            
+            artifact sourcesJar
+            artifact javadocJar
             pom {
                 name = "MockBukkit-v${gradle.ext.apiVersion}"
                 packaging = 'jar'
