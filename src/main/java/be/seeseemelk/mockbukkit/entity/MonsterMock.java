@@ -6,6 +6,7 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Monster;
 
+import java.util.Set;
 import java.util.UUID;
 
 public class MonsterMock extends CreatureMock implements Monster {
@@ -43,6 +44,20 @@ public class MonsterMock extends CreatureMock implements Monster {
 
 	@Override
 	public void swingOffHand()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public Set<UUID> getCollidableExemptions()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public Spigot spigot()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

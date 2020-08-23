@@ -8,11 +8,4 @@
  * in the user guide at https://docs.gradle.org/4.3.1/userguide/multi_project_builds.html
  */
 
-/*
-// To declare projects as part of a multi-project build use the 'include' method
-include 'shared'
-include 'api'
-include 'services:webservice'
-*/
-
-rootProject.name = 'MockBukkit-v1.15'
+rootProject.name = 'MockBukkit-v1.16'

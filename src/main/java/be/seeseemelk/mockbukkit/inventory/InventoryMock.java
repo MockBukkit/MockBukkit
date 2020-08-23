@@ -384,4 +384,11 @@ public abstract class InventoryMock implements Inventory
 		throw new UnimplementedOperationException();
 	}
 
+	@Override
+	public boolean isEmpty()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 }

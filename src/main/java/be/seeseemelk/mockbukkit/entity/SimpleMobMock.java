@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.entity;
 
+import java.util.Set;
 import java.util.UUID;
 
 import org.bukkit.entity.Entity;
@@ -50,6 +51,20 @@ public class SimpleMobMock extends MobMock
 
 	@Override
 	public void swingOffHand()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public Set<UUID> getCollidableExemptions()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public Spigot spigot()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

@@ -8,6 +8,7 @@ import org.bukkit.entity.ExperienceOrb;
 import org.jetbrains.annotations.NotNull;
 
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
 /**
  * This is a simple mock of the {@link ExperienceOrb} {@link Entity}.
@@ -48,6 +49,13 @@ public class ExperienceOrbMock extends EntityMock implements ExperienceOrb
 	public void setExperience(int value)
 	{
 		this.experience = value;
+	}
+
+	@Override
+	public Spigot spigot()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 }
