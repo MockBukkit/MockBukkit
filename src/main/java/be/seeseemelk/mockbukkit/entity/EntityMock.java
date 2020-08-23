@@ -736,8 +736,6 @@ public abstract class EntityMock implements Entity, MessageTarget
 		throw new UnimplementedOperationException();
 	}
 
-
-
 	@Override
 	public BoundingBox getBoundingBox()
 	{

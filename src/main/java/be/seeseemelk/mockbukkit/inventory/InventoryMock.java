@@ -387,8 +387,15 @@ public abstract class InventoryMock implements Inventory
 	@Override
 	public boolean isEmpty()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		for (int i = 0; i < getSize(); i++)
+		{
+			if (items[i] != null && items[i].getType() != Material.AIR)
+			{
+				return false;
+			}
+		}
+		
+		return true;
 	}
 
 }

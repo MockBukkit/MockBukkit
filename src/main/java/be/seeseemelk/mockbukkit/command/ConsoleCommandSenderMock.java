@@ -16,7 +16,7 @@ import java.util.Set;
 
 public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTarget
 {
-	public Queue<String> messages = new LinkedList<>();
+	private final Queue<String> messages = new LinkedList<>();
 	
 	@Override
 	public void sendMessage(String message)
