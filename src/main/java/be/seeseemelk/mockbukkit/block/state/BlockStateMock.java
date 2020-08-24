@@ -1,4 +1,4 @@
-package be.seeseemelk.mockbukkit.block;
+package be.seeseemelk.mockbukkit.block.state;
 
 import java.util.List;
 
@@ -12,142 +12,138 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.material.MaterialData;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.NotNull;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.metadata.MetadataTable;
 
 @SuppressWarnings("deprecation")
-public class BlockStateMock implements BlockState
+public class BlockStateMock implements BlockState, Cloneable
 {
-	@Deprecated
-	private MaterialData data;
-	
+
+	private final MetadataTable metadataTable = new MetadataTable();
+	private Block block;
+	private Material material;
+
 	public BlockStateMock()
 	{
 	}
-	
-	@Deprecated
-	public BlockStateMock(MaterialData data)
+
+	public BlockStateMock(@NotNull Block block)
 	{
-		this.data = data;
+		this.block = block;
+		this.material = block.getType();
 	}
 
 	@Override
 	public void setMetadata(String metadataKey, MetadataValue newMetadataValue)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		metadataTable.setMetadata(metadataKey, newMetadataValue);
 	}
 
 	@Override
 	public List<MetadataValue> getMetadata(String metadataKey)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return metadataTable.getMetadata(metadataKey);
 	}
 
 	@Override
 	public boolean hasMetadata(String metadataKey)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return metadataTable.hasMetadata(metadataKey);
 	}
 
 	@Override
 	public void removeMetadata(String metadataKey, Plugin owningPlugin)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		metadataTable.removeMetadata(metadataKey, owningPlugin);
 	}
 
 	@Override
 	public Block getBlock()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (block == null)
+		{
+			throw new IllegalStateException("This BlockState has not been placed!");
+		}
+		else
+		{
+			return block;
+		}
 	}
 
 	@Override
 	@Deprecated
 	public MaterialData getData()
 	{
-		return data;
+		return new MaterialData(material);
 	}
 
 	@Override
 	public Material getType()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return material;
 	}
 
 	@Override
 	public byte getLightLevel()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getBlock().getLightLevel();
 	}
 
 	@Override
 	public World getWorld()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getBlock().getWorld();
 	}
 
 	@Override
 	public int getX()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getBlock().getX();
 	}
 
 	@Override
 	public int getY()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getBlock().getY();
 	}
 
 	@Override
 	public int getZ()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getBlock().getZ();
 	}
 
 	@Override
 	public Location getLocation()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getBlock().getLocation();
 	}
 
 	@Override
 	public Location getLocation(Location loc)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getBlock().getLocation(loc);
 	}
 
 	@Override
 	public Chunk getChunk()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getBlock().getChunk();
 	}
 
 	@Override
 	@Deprecated
-	public void setData(MaterialData data)
+	public void setData(@NotNull MaterialData data)
 	{
-		this.data = data;
+		this.material = data.getItemType();
 	}
 
 	@Override
 	public void setType(Material type)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.material = type;
 	}
 
 	@Override
@@ -190,8 +186,7 @@ public class BlockStateMock implements BlockState
 	@Override
 	public boolean isPlaced()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return block != null;
 	}
 
 	@Override
@@ -204,6 +199,11 @@ public class BlockStateMock implements BlockState
 	@Override
 	public void setBlockData(BlockData data)
 	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+	
+	public BlockState getSnapshot() {
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}

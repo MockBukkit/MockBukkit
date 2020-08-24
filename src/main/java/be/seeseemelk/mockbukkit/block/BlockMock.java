@@ -27,12 +27,16 @@ import org.jetbrains.annotations.NotNull;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
+import be.seeseemelk.mockbukkit.block.state.BlockStateMock;
+import be.seeseemelk.mockbukkit.metadata.MetadataTable;
 import junit.framework.AssertionFailedError;
 
 public class BlockMock implements org.bukkit.block.Block
 {
+	private final MetadataTable metadataTable = new MetadataTable();
+	
 	private final Location location;
-	private BlockState state;
+	private BlockStateMock state;
 	private Material material;
 	private byte data;
 	private BlockData blockData;
@@ -75,36 +79,32 @@ public class BlockMock implements org.bukkit.block.Block
 	{
 		this.material = material;
 		this.location = location;
-		state = new BlockStateMock();
+		this.state = new BlockStateMock(this);
 		this.blockData = new BlockDataMock(material);
 	}
 
 	@Override
 	public void setMetadata(String metadataKey, MetadataValue newMetadataValue)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		metadataTable.setMetadata(metadataKey, newMetadataValue);
 	}
 
 	@Override
 	public List<MetadataValue> getMetadata(String metadataKey)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return metadataTable.getMetadata(metadataKey);
 	}
 
 	@Override
 	public boolean hasMetadata(String metadataKey)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return metadataTable.hasMetadata(metadataKey);
 	}
 
 	@Override
 	public void removeMetadata(String metadataKey, Plugin owningPlugin)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		metadataTable.removeMetadata(metadataKey, owningPlugin);
 	}
 
 	@Override
@@ -242,7 +242,9 @@ public class BlockMock implements org.bukkit.block.Block
 	@Override
 	public BlockState getState()
 	{
-		return state;
+		// This will always return a snapshot of the BlockState, not the actual state.
+		// This is optional with Paper but for Spigot it simply works like that.
+		return state.getSnapshot();
 	}
 
 	@Override
