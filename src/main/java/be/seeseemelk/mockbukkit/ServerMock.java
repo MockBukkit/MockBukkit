@@ -1453,10 +1453,24 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public Recipe getRecipe(NamespacedKey recipeKey)
+	public Recipe getRecipe(NamespacedKey key)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		assertMainThread();
+
+		Iterator<Recipe> iterator = recipeIterator();
+
+		while (iterator.hasNext())
+		{
+			Recipe recipe = iterator.next();
+
+			// Seriously why can't the Recipe interface itself just extend Keyed...
+			if (recipe instanceof Keyed && ((Keyed) recipe).getKey().equals(key))
+			{
+				return recipe;
+			}
+		}
+
+		return null;
 	}
 
 	@Override
