@@ -15,6 +15,7 @@ import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
 
 @SuppressWarnings("deprecation")
@@ -25,14 +26,21 @@ public class BlockStateMock implements BlockState, Cloneable
 	private Block block;
 	private Material material;
 
-	public BlockStateMock()
+	public BlockStateMock(@NotNull Material material)
 	{
+		this.material = material;
 	}
 
 	public BlockStateMock(@NotNull Block block)
 	{
 		this.block = block;
 		this.material = block.getType();
+	}
+
+	private BlockStateMock(@NotNull BlockStateMock state)
+	{
+		this.material = state.getType();
+		this.block = state.isPlaced() ? state.getBlock() : null;
 	}
 
 	@Override
@@ -149,22 +157,29 @@ public class BlockStateMock implements BlockState, Cloneable
 	@Override
 	public boolean update()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return update(false);
 	}
 
 	@Override
 	public boolean update(boolean force)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return update(force, true);
 	}
 
 	@Override
 	public boolean update(boolean force, boolean applyPhysics)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Block block = getBlock();
+
+		if (block instanceof BlockMock && (force || block.getType() == material))
+		{
+			((BlockMock) block).setState(this);
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	@Override
@@ -202,9 +217,15 @@ public class BlockStateMock implements BlockState, Cloneable
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
-	public BlockState getSnapshot() {
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+
+	/**
+	 * This returns a copy of this {@link BlockStateMock}.
+	 * Inheritents of this class should override this method!
+	 * 
+	 * @return A snapshot of this {@link BlockStateMock}.
+	 */
+	public BlockState getSnapshot()
+	{
+		return new BlockStateMock(this);
 	}
 }

@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import org.bukkit.Material;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.metadata.Metadatable;
@@ -46,7 +47,7 @@ public class MetadataTest<T extends Metadatable>
 		return Arrays.asList(new Object[][] {
 			{new MetadataTable()},
 			{new BlockMock()},
-			{new BlockStateMock()},
+			{new BlockStateMock(Material.DIAMOND_BLOCK)},
 			{new WorldMock()}
 		});
 	}

@@ -5,6 +5,7 @@ import static org.junit.Assert.fail;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.commons.lang.Validate;
 import org.bukkit.Chunk;
 import org.bukkit.FluidCollisionMode;
 import org.bukkit.Location;
@@ -31,7 +32,7 @@ import be.seeseemelk.mockbukkit.block.state.BlockStateMock;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
 import junit.framework.AssertionFailedError;
 
-public class BlockMock implements org.bukkit.block.Block
+public class BlockMock implements Block
 {
 	private final MetadataTable metadataTable = new MetadataTable();
 	
@@ -412,5 +413,17 @@ public class BlockMock implements org.bukkit.block.Block
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	/**
+	 * This method sets the current {@link BlockState} to the provided {@link BlockStateMock}.
+	 * <strong>Do not call this method directly, use {@link BlockState#update()} instead.</strong>
+	 * 
+	 * @param state The {@link BlockState} that should be set.
+	 */
+	public void setState(@NotNull BlockStateMock state)
+	{
+		Validate.notNull(state, "The BlockState cannot be null");
+		this.state = state;
 	}
 }
