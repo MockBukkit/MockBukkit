@@ -53,6 +53,7 @@ public abstract class EntityMock implements Entity, MessageTarget
 	private final Queue<String> messages = new LinkedTransferQueue<>();
 	private final Set<PermissionAttachment> permissionAttachments = new HashSet<>();
 	private Vector velocity = new Vector(0, 0, 0);
+	private float fallDistance;
 
 	public EntityMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -540,15 +541,13 @@ public abstract class EntityMock implements Entity, MessageTarget
 	@Override
 	public float getFallDistance()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return fallDistance;
 	}
 
 	@Override
 	public void setFallDistance(float distance)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		this.fallDistance = distance;
 
 	}
 
