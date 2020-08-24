@@ -45,7 +45,6 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Pose;
-import org.bukkit.entity.Projectile;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.memory.MemoryKey;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -69,7 +68,6 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.RayTraceResult;
-import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -795,20 +793,6 @@ public class PlayerMock extends LivingEntityMock implements Player
 
 	@Override
 	public boolean isCollidable()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public <T extends Projectile> T launchProjectile(Class<? extends T> projectile)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public <T extends Projectile> T launchProjectile(Class<? extends T> projectile, Vector velocity)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

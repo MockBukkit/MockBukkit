@@ -199,8 +199,9 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public <T extends Projectile> T launchProjectile(Class<? extends T> projectile, Vector velocity)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		T entity = launchProjectile(projectile);
+		entity.setVelocity(velocity);
+		return entity;
 	}
 
 	@Override
