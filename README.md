@@ -149,8 +149,3 @@ These exception extends `AssumationException` and will cause the test to be skip
 
 These exceptions should just be ignored, though pull requests that add functionality to MockBukkit are always welcome!
 If you don't want to add the required methods yourself you can also request the method on the issues page.
-
-## Releases
-Releases are not done often.
-If you need a feature or bugfix that is already available on Github but not yet on maven central, feel free to open an issue requesting a release.
-I will happily oblige.
