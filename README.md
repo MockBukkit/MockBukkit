@@ -20,7 +20,7 @@ repositories {
 }
 
 dependencies {
-	testImplementation 'com.github.seeseemelk:MockBukkit-v1.16:0.4.0'
+	testImplementation 'com.github.seeseemelk:MockBukkit-v1.16:0.5.0'
 }
 ```
 
@@ -41,21 +41,15 @@ dependencies {
 ```
 
 ### Adding MockBukkit via Maven
-MockBukkit can be included by using the [https://jitpack.io/](jitpack.io) repository and adding the dependency to your `pom.xml`.
+MockBukkit can be included by adding the dependency to your `pom.xml`.<br>
+You won't need to add any additional repositories since MockBukkit is served via maven-central. Make sure to update the version as necessary.
 
 ```xml
-<repositories>
-  <repository>
-    <id>jitpack.io</id>
-    <url>https://jitpack.io</url>
-  </repository>
-</repositories>
-
 <dependencies>
   <dependency>
     <groupId>com.github.seeseemelk</groupId>
-    <artifactId>MockBukkit</artifactId>
-    <version>v1.15-SNAPSHOT</version>
+    <artifactId>MockBukkit-v1.16</artifactId>
+    <version>0.5.0</version>
     <scope>test</scope>
   </dependency>
 </dependencies>
@@ -155,8 +149,3 @@ These exception extends `AssumationException` and will cause the test to be skip
 
 These exceptions should just be ignored, though pull requests that add functionality to MockBukkit are always welcome!
 If you don't want to add the required methods yourself you can also request the method on the issues page.
-
-## Releases
-Releases are not done often.
-If you need a feature or bugfix that is already available on Github but not yet on maven central, feel free to open an issue requesting a release.
-I will happily oblige.

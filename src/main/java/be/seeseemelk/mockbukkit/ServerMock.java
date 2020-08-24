@@ -96,7 +96,7 @@ import be.seeseemelk.mockbukkit.scoreboard.ScoreboardManagerMock;
 @SuppressWarnings("deprecation")
 public class ServerMock implements Server
 {
-	private static final String BUKKIT_VERSION = "1.15.2";
+	private static final String BUKKIT_VERSION = "1.16.2";
 	private static final String JOIN_MESSAGE = "%s has joined the server.";
 
 	private final Logger logger;
@@ -1453,10 +1453,20 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public Recipe getRecipe(NamespacedKey recipeKey)
+	public Recipe getRecipe(NamespacedKey key)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		assertMainThread();
+
+		for (Recipe recipe : recipes)
+		{
+			// Seriously why can't the Recipe interface itself just extend Keyed...
+			if (recipe instanceof Keyed && ((Keyed) recipe).getKey().equals(key))
+			{
+				return recipe;
+			}
+		}
+
+		return null;
 	}
 
 	@Override

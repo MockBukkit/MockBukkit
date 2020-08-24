@@ -4,6 +4,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
 
 import be.seeseemelk.mockbukkit.ServerMock;
@@ -15,10 +16,17 @@ public class SimpleMobMock extends MobMock
 	{
 		super(server, uuid);
 	}
-	
+
 	public SimpleMobMock(ServerMock server)
 	{
 		this(server, UUID.randomUUID());
+	}
+
+	@Override
+	public EntityType getType()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -70,4 +78,3 @@ public class SimpleMobMock extends MobMock
 		throw new UnimplementedOperationException();
 	}
 }
-

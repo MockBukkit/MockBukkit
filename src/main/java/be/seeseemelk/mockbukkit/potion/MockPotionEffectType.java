@@ -13,6 +13,7 @@ import org.bukkit.potion.PotionEffectType;
 public class MockPotionEffectType extends PotionEffectType
 {
 
+	private final int id;
 	private final String name;
 	private final boolean instant;
 	private final Color color;
@@ -21,6 +22,7 @@ public class MockPotionEffectType extends PotionEffectType
 	{
 		super(id);
 
+		this.id = id;
 		this.name = name;
 		this.instant = instant;
 		this.color = color;
@@ -52,12 +54,13 @@ public class MockPotionEffectType extends PotionEffectType
 		return color;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean equals(Object obj)
 	{
 		if (obj instanceof PotionEffectType)
 		{
-			return getId() == ((PotionEffectType) obj).getId();
+			return id == ((PotionEffectType) obj).getId();
 		}
 
 		return false;
@@ -66,7 +69,7 @@ public class MockPotionEffectType extends PotionEffectType
 	@Override
 	public int hashCode()
 	{
-		return getId();
+		return id;
 	}
 
 }

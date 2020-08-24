@@ -9,6 +9,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -22,6 +23,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -157,7 +159,7 @@ public class PluginManagerMock implements PluginManager
 	 */
 	public void assertEventFired(Class<? extends Event> eventClass)
 	{
-		assertEventFired("No event of that type has been fired", event -> eventClass.isInstance(event));
+		assertEventFired("No event of that type has been fired", eventClass::isInstance);
 	}
 
 	@Override
@@ -258,12 +260,8 @@ public class PluginManagerMock implements PluginManager
 	 */
 	private File createTemporaryDirectory(String name) throws IOException
 	{
-		Random random = new Random();
-		File directory = File.createTempFile(name + "-" + random.nextInt(), ".d");
-		if (!directory.delete())
-			throw new IOException("Could not create temporary directory: file could not be removed");
-		if (!directory.mkdir())
-			throw new IOException("Could not create temporary directory: directory could not be created");
+		Random random = ThreadLocalRandom.current();
+		File directory = Files.createTempDirectory(name + "-" + random.nextInt()).toFile();
 		temporaryFiles.add(directory);
 		return directory;
 	}
@@ -444,7 +442,7 @@ public class PluginManagerMock implements PluginManager
 			List<String> aliases = new ArrayList<>();
 			if (value instanceof List<?>)
 				command.setAliases(
-						((List<?>) aliases).stream().map(object -> object.toString()).collect(Collectors.toList()));
+						((List<?>) aliases).stream().map(Object::toString).collect(Collectors.toList()));
 			else
 				command.setAliases(Arrays.asList(value.toString()));
 			break;
@@ -715,8 +713,7 @@ public class PluginManagerMock implements PluginManager
 	@Override
 	public Set<Permission> getPermissions()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return Collections.unmodifiableSet(new HashSet<>(permissions));
 	}
 
 	@Override

@@ -20,7 +20,6 @@ import org.bukkit.World;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Pose;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
@@ -54,6 +53,7 @@ public abstract class EntityMock implements Entity, MessageTarget
 	private final Queue<String> messages = new LinkedTransferQueue<>();
 	private final Set<PermissionAttachment> permissionAttachments = new HashSet<>();
 	private Vector velocity = new Vector(0, 0, 0);
+	private float fallDistance;
 
 	public EntityMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -541,15 +541,13 @@ public abstract class EntityMock implements Entity, MessageTarget
 	@Override
 	public float getFallDistance()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return fallDistance;
 	}
 
 	@Override
 	public void setFallDistance(float distance)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		this.fallDistance = distance;
 
 	}
 
@@ -589,13 +587,6 @@ public abstract class EntityMock implements Entity, MessageTarget
 		// TODO Auto-generated constructor stub
 		throw new UnimplementedOperationException();
 
-	}
-
-	@Override
-	public EntityType getType()
-	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -743,8 +734,6 @@ public abstract class EntityMock implements Entity, MessageTarget
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
-
 
 	@Override
 	public BoundingBox getBoundingBox()

@@ -3,8 +3,10 @@ package be.seeseemelk.mockbukkit.enchantments;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 
-public class EnchantmentsMock
+public final class EnchantmentsMock
 {
+	private EnchantmentsMock() {}
+	
 	public static void registerDefaultEnchantments()
 	{
 		register("protection");

@@ -2,7 +2,6 @@ package be.seeseemelk.mockbukkit.block;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
@@ -40,12 +39,6 @@ public class BlockMockTest
 	{
 		block.setType(Material.STONE);
 		assertEquals(Material.STONE, block.getType());
-	}
-
-	@Test
-	public void getState_Default_NotNull()
-	{
-		assertNotNull(block.getState());
 	}
 
 	@Test

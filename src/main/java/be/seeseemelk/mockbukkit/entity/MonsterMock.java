@@ -9,10 +9,12 @@ import org.bukkit.entity.Monster;
 import java.util.Set;
 import java.util.UUID;
 
-public class MonsterMock extends CreatureMock implements Monster {
-    public MonsterMock(ServerMock server, UUID uuid) {
-        super(server, uuid);
-    }
+public abstract class MonsterMock extends CreatureMock implements Monster
+{
+	public MonsterMock(ServerMock server, UUID uuid)
+	{
+		super(server, uuid);
+	}
 
 	@Override
 	public void setAware(boolean aware)

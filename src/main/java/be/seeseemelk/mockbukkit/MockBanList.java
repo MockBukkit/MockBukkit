@@ -8,7 +8,7 @@ import java.util.*;
 public class MockBanList implements BanList
 {
 	
-	private Map<String, BanEntry> bans = new HashMap<>();
+	private final Map<String, BanEntry> bans = new HashMap<>();
 	
 	@Override
 	public BanEntry getBanEntry(String target)
@@ -133,7 +133,7 @@ public class MockBanList implements BanList
         	{
         		return true;
         	}
-        	else if (obj != null && obj instanceof BanEntry)
+        	else if (obj instanceof BanEntry)
         	{
         		BanEntry banEntry = (BanEntry) obj;
         		return target.equals(banEntry.getTarget()) && expires.equals(banEntry.getExpiration()) && reason.equals(banEntry.getReason())

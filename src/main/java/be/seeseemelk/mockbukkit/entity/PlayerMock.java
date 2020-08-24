@@ -45,7 +45,6 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Pose;
-import org.bukkit.entity.Projectile;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.memory.MemoryKey;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -69,7 +68,6 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.RayTraceResult;
-import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -127,6 +125,12 @@ public class PlayerMock extends LivingEntityMock implements Player
 		setLocation(Bukkit.getWorlds().get(0).getSpawnLocation().clone());
 		setCompassTarget(getLocation());
 		closeInventory();
+	}
+
+	@Override
+	public EntityType getType()
+	{
+		return EntityType.PLAYER;
 	}
 
 	/**
@@ -353,6 +357,61 @@ public class PlayerMock extends LivingEntityMock implements Player
 		// reset the cursor as it is a new InventoryView
 		cursor = null;
 		inventoryView = new SimpleInventoryViewMock(this, null, inventory, InventoryType.CRAFTING);
+	}
+
+	/**
+	 * This method is an assertion for the currently open {@link InventoryView} for this {@link Player}. The
+	 * {@link Predicate} refers to the top inventory, not the {@link PlayerInventory}. It uses the method
+	 * {@link InventoryView#getTopInventory()}.
+	 * 
+	 * @param message   The message to display upon failure
+	 * @param type      The {@link InventoryType} you are expecting
+	 * @param predicate A custom {@link Predicate} to check the opened {@link Inventory}.
+	 */
+	public void assertInventoryView(String message, InventoryType type, Predicate<Inventory> predicate)
+	{
+		InventoryView view = getOpenInventory();
+
+		if (view.getType() == type && predicate.test(view.getTopInventory()))
+		{
+			return;
+		}
+
+		fail(message);
+	}
+
+	/**
+	 * This method is an assertion for the currently open {@link InventoryView} for this {@link Player}. The
+	 * {@link Predicate} refers to the top inventory, not the {@link PlayerInventory}. It uses the method
+	 * {@link InventoryView#getTopInventory()}.
+	 * 
+	 * @param type      The {@link InventoryType} you are expecting
+	 * @param predicate A custom {@link Predicate} to check the opened {@link Inventory}.
+	 */
+	public void assertInventoryView(InventoryType type, Predicate<Inventory> predicate)
+	{
+		assertInventoryView("The InventoryView Assertion has failed", type, predicate);
+	}
+
+	/**
+	 * This method is an assertion for the currently open {@link InventoryView} for this {@link Player}.
+	 * 
+	 * @param type The {@link InventoryType} you are expecting
+	 */
+	public void assertInventoryView(InventoryType type)
+	{
+		assertInventoryView("The InventoryView Assertion has failed", type, inv -> true);
+	}
+
+	/**
+	 * This method is an assertion for the currently open {@link InventoryView} for this {@link Player}.
+	 * 
+	 * @param message The message to display upon failure
+	 * @param type    The {@link InventoryType} you are expecting
+	 */
+	public void assertInventoryView(String message, InventoryType type)
+	{
+		assertInventoryView(message, type, inv -> true);
 	}
 
 	@Override
@@ -647,15 +706,14 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public boolean getRemoveWhenFarAway()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// Players are never despawned until they log off
+		return false;
 	}
 
 	@Override
 	public void setRemoveWhenFarAway(boolean remove)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// Don't do anything
 	}
 
 	@Override
@@ -682,22 +740,21 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public boolean isLeashed()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// Players can not be leashed
+		return false;
 	}
 
 	@Override
 	public Entity getLeashHolder()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw new IllegalStateException("Players cannot be leashed");
 	}
 
 	@Override
 	public boolean setLeashHolder(Entity holder)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// Players can not be leashed
+		return false;
 	}
 
 	@Override
@@ -717,15 +774,14 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public void setAI(boolean ai)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// I am sorry Dave, I'm afraid I can't do that
 	}
 
 	@Override
 	public boolean hasAI()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// The Player's intelligence is (probably) not artificial
+		return false;
 	}
 
 	@Override
@@ -737,20 +793,6 @@ public class PlayerMock extends LivingEntityMock implements Player
 
 	@Override
 	public boolean isCollidable()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public <T extends Projectile> T launchProjectile(Class<? extends T> projectile)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public <T extends Projectile> T launchProjectile(Class<? extends T> projectile, Vector velocity)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -918,14 +960,12 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public boolean isSneaking()
 	{
-		// TODO Auto-generated method stub
 		return sneaking;
 	}
 
 	@Override
 	public void setSneaking(boolean sneaking)
 	{
-		// TODO Auto-generated method stub
 		this.sneaking = sneaking;
 	}
 
@@ -972,6 +1012,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 	}
 
 	@Override
+    @Deprecated
 	public void playNote(Location loc, byte instrument, byte note)
 	{
 		// TODO Auto-generated method stub
@@ -1057,7 +1098,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public void stopSound(Sound sound, SoundCategory category)
 	{
-		// We just pretend the Sound has stopped.
+		// We will just pretend the Sound has stopped.
 	}
 
 	@Override
@@ -1452,6 +1493,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 	}
 
 	@Override
+	@Deprecated
 	public void hidePlayer(Player player)
 	{
 		// TODO Auto-generated method stub
@@ -1466,6 +1508,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 	}
 
 	@Override
+	@Deprecated
 	public void showPlayer(Player player)
 	{
 		// TODO Auto-generated method stub
@@ -1529,6 +1572,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 	}
 
 	@Override
+	@Deprecated
 	public void setTexturePack(String url)
 	{
 		// TODO Auto-generated method stub

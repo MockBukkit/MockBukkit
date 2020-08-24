@@ -145,4 +145,20 @@ public class PersistentDataTest
 		assertEquals(container, new PersistentDataContainerMock(container));
 	}
 
+	@Test
+	public void testGetkeys()
+	{
+		PersistentDataContainer container = new PersistentDataContainerMock();
+		NamespacedKey key = NamespacedKey.randomKey();
+		NamespacedKey key2 = NamespacedKey.randomKey();
+
+		assertEquals(0, container.getKeys().size());
+		container.set(key, PersistentDataType.STRING, "Hello world");
+		container.set(key2, PersistentDataType.STRING, "MockBukkit");
+
+		assertEquals(2, container.getKeys().size());
+		assertTrue(container.getKeys().contains(key));
+		assertTrue(container.getKeys().contains(key2));
+	}
+
 }
