@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit;
 
 import java.util.Collection;
 
+import org.apache.commons.lang.Validate;
 import org.bukkit.Chunk;
 import org.bukkit.ChunkSnapshot;
 import org.bukkit.World;
@@ -46,8 +47,10 @@ public class ChunkMock implements Chunk
 	@Override
 	public Block getBlock(int x, int y, int z)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Validate.isTrue(x >= 0 && x <= 15, "x is out of range (expected 0-15)");
+		Validate.isTrue(x >= 0 && x <= 255, "y is out of range (expected 0-255)");
+		Validate.isTrue(z >= 0 && z <= 15, "z is out of range (expected 0-15)");
+		return world.getBlockAt(x << 4, y, z << 4);
 	}
 
 	@Override
