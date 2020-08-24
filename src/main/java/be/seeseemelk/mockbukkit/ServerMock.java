@@ -1457,12 +1457,8 @@ public class ServerMock implements Server
 	{
 		assertMainThread();
 
-		Iterator<Recipe> iterator = recipeIterator();
-
-		while (iterator.hasNext())
+		for (Recipe recipe : recipes)
 		{
-			Recipe recipe = iterator.next();
-
 			// Seriously why can't the Recipe interface itself just extend Keyed...
 			if (recipe instanceof Keyed && ((Keyed) recipe).getKey().equals(key))
 			{
