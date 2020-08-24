@@ -80,7 +80,7 @@ public class BlockMock implements Block
 	{
 		this.material = material;
 		this.location = location;
-		this.state = new BlockStateMock(this);
+		this.state = BlockStateMock.mockState(this);
 		this.blockData = new BlockDataMock(material);
 	}
 
@@ -224,6 +224,7 @@ public class BlockMock implements Block
 	public void setType(Material type)
 	{
 		material = type;
+		state = BlockStateMock.mockState(this);
 		blockData = new BlockDataMock(type);
 	}
 

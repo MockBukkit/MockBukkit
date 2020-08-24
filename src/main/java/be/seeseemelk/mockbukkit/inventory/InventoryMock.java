@@ -17,10 +17,11 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
-public abstract class InventoryMock implements Inventory
+public class InventoryMock implements Inventory
 {
 	private final ItemStack[] items;
 	private final InventoryHolder holder;
@@ -394,8 +395,16 @@ public abstract class InventoryMock implements Inventory
 				return false;
 			}
 		}
-		
+
 		return true;
+	}
+
+	@NotNull
+	public Inventory getSnapshot()
+	{
+		Inventory inventory = new InventoryMock(holder, getSize(), type);
+		inventory.setContents(getContents());
+		return inventory;
 	}
 
 }

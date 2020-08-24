@@ -31,13 +31,13 @@ public class BlockStateMock implements BlockState, Cloneable
 		this.material = material;
 	}
 
-	public BlockStateMock(@NotNull Block block)
+	protected BlockStateMock(@NotNull Block block)
 	{
 		this.block = block;
 		this.material = block.getType();
 	}
 
-	private BlockStateMock(@NotNull BlockStateMock state)
+	protected BlockStateMock(@NotNull BlockStateMock state)
 	{
 		this.material = state.getType();
 		this.block = state.isPlaced() ? state.getBlock() : null;
@@ -169,11 +169,16 @@ public class BlockStateMock implements BlockState, Cloneable
 	@Override
 	public boolean update(boolean force, boolean applyPhysics)
 	{
-		Block block = getBlock();
-
-		if (block instanceof BlockMock && (force || block.getType() == material))
+		if (!isPlaced())
 		{
-			((BlockMock) block).setState(this);
+			return true;
+		}
+
+		Block b = getBlock();
+
+		if (b instanceof BlockMock && (force || b.getType() == material))
+		{
+			((BlockMock) b).setState(this);
 			return true;
 		}
 		else
@@ -219,13 +224,30 @@ public class BlockStateMock implements BlockState, Cloneable
 	}
 
 	/**
-	 * This returns a copy of this {@link BlockStateMock}.
-	 * Inheritents of this class should override this method!
+	 * This returns a copy of this {@link BlockStateMock}. Inheritents of this class should override this method!
 	 * 
 	 * @return A snapshot of this {@link BlockStateMock}.
 	 */
+	@NotNull
 	public BlockState getSnapshot()
 	{
 		return new BlockStateMock(this);
+	}
+
+	@NotNull
+	public static BlockStateMock mockState(@NotNull Block block)
+	{
+		switch (block.getType())
+		{
+		case BARREL:
+			return new BarrelMock(block);
+		case CHEST:
+		case TRAPPED_CHEST:
+			return new ChestMock(block);
+		case ENDER_CHEST:
+			return new EnderChestMock(block);
+		default:
+			return new BlockStateMock(block);
+		}
 	}
 }
