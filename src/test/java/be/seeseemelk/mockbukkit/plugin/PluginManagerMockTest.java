@@ -44,7 +44,7 @@ public class PluginManagerMockTest
 	{
 		MockBukkit.unmock();
 	}
-	
+
 	@Test
 	public void callEvent_UnregisteredPlayerInteractEvent_NoneCalled()
 	{
@@ -65,7 +65,7 @@ public class PluginManagerMockTest
 		assertFalse(plugin.annotatedBlockBreakEventExecuted);
 		assertTrue(plugin.annotatedPlayerInteractEventExecuted);
 	}
-	
+
 	@Test
 	public void getPlugin_PluginName_Plugin()
 	{
@@ -80,7 +80,7 @@ public class PluginManagerMockTest
 		Plugin plugin = pluginManager.getPlugin("NoPlugin");
 		assertNull(plugin);
 	}
-	
+
 	@Test
 	public void getCommands_Default_PluginCommand()
 	{
@@ -92,18 +92,18 @@ public class PluginManagerMockTest
 		assertEquals("othercommand", iterator.next().getName());
 		assertFalse(iterator.hasNext());
 	}
-	
+
 	@Test
 	public void assertEventFired_PredicateTrue_DoesNotAssert()
 	{
 		Player player = server.addPlayer();
 		BlockBreakEvent eventToFire = new BlockBreakEvent(null, player);
 		pluginManager.callEvent(eventToFire);
-		pluginManager.assertEventFired(event -> {
-			return event instanceof BlockBreakEvent && ((BlockBreakEvent) event).getPlayer().equals(player);
-		});
+		pluginManager.assertEventFired(event ->
+			event instanceof BlockBreakEvent && ((BlockBreakEvent) event).getPlayer().equals(player)
+		);
 	}
-	
+
 	@Test(expected = AssertionError.class)
 	public void assertEventFired_PredicateFalse_Asserts()
 	{
@@ -114,7 +114,7 @@ public class PluginManagerMockTest
 			return false;
 		});
 	}
-	
+
 	@Test
 	public void assertEventFired_EventWasFired_DoesNotAssert()
 	{
@@ -122,13 +122,13 @@ public class PluginManagerMockTest
 		pluginManager.callEvent(event);
 		pluginManager.assertEventFired(BlockBreakEvent.class);
 	}
-	
+
 	@Test(expected = AssertionError.class)
 	public void assertEventFired_EventWasNotFired_Asserts()
 	{
 		pluginManager.assertEventFired(BlockBreakEvent.class);
 	}
-	
+
 	@Test
 	public void getPermission_NoPermission_Null()
 	{
@@ -142,7 +142,7 @@ public class PluginManagerMockTest
 		pluginManager.addPermission(permission);
 		assertNotNull(pluginManager.getPermission(permission.getName()));
 	}
-	
+
 	@Test
 	public void getDefaultPermission_OpPermissionAddedAndAsked_ContainsPermission()
 	{
@@ -150,7 +150,7 @@ public class PluginManagerMockTest
 		pluginManager.addPermission(permission);
 		assertTrue(pluginManager.getDefaultPermissions(true).contains(permission));
 	}
-	
+
 	@Test
 	public void getDefaultPermission_OpPermissionAskedButNotAdded_DoesNotContainPermission()
 	{
@@ -158,7 +158,7 @@ public class PluginManagerMockTest
 		pluginManager.addPermission(permission);
 		assertFalse(pluginManager.getDefaultPermissions(true).contains(permission));
 	}
-	
+
 	@Test
 	public void disablePlugin_LoadedPlugin_PluginDisabled()
 	{
@@ -169,7 +169,7 @@ public class PluginManagerMockTest
 		assertFalse("Plugin was not disabled", plugin.isEnabled());
 		assertTrue(plugin.onDisableExecuted);
 	}
-	
+
 	@Test
 	public void disablePlugins_LoadedPlugins_AllDisabled()
 	{
@@ -179,7 +179,7 @@ public class PluginManagerMockTest
 		assertFalse("Plugin was not disabled", plugin.isEnabled());
 		assertTrue(plugin.onDisableExecuted);
 	}
-	
+
 	@Test
 	public void clearPlugins_LoadedPlugins_AllPluginsRemove()
 	{
@@ -190,29 +190,5 @@ public class PluginManagerMockTest
 		Plugin[] plugins = pluginManager.getPlugins();
 		assertEquals(0, plugins.length);
 	}
-	
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
