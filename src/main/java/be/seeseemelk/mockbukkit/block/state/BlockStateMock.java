@@ -241,6 +241,10 @@ public class BlockStateMock implements BlockState, Cloneable
 		{
 		case BARREL:
 			return new BarrelMock(block);
+		case DISPENSER:
+			return new DispenserMock(block);
+		case DROPPER:
+			return new DropperMock(block);
 		case CHEST:
 		case TRAPPED_CHEST:
 			return new ChestMock(block);
