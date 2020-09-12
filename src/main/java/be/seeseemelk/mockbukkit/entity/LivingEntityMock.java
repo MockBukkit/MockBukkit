@@ -20,6 +20,7 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityCategory;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
@@ -581,5 +582,39 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
+	
+	@Override
+	public EntityCategory getCategory()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+	
+	@Override
+	public void setArrowsInBody(int count)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+	
+	@Override
+	public int getArrowsInBody()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+	
+	@Override
+	public void setArrowCooldown(int ticks)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+	
+	@Override
+	public int getArrowCooldown()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
 }
