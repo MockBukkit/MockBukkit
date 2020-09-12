@@ -73,6 +73,7 @@ import org.bukkit.plugin.ServicesManager;
 import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.CachedServerIcon;
+import org.jetbrains.annotations.NotNull;
 
 import be.seeseemelk.mockbukkit.command.CommandResult;
 import be.seeseemelk.mockbukkit.command.ConsoleCommandSenderMock;
@@ -707,10 +708,54 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public List<Recipe> getRecipesFor(ItemStack result)
+	public List<Recipe> getRecipesFor(@NotNull ItemStack item)
 	{
 		assertMainThread();
-		return recipes.stream().filter(recipe -> recipe.getResult().equals(result)).collect(Collectors.toList());
+
+		return recipes.stream().filter(recipe -> {
+			ItemStack result = recipe.getResult();
+			// Amount is explicitly ignored here
+			return result.getType() == item.getType() && result.getItemMeta().equals(item.getItemMeta());
+		}).collect(Collectors.toList());
+	}
+
+	@Override
+	public Recipe getRecipe(NamespacedKey key)
+	{
+		assertMainThread();
+
+		for (Recipe recipe : recipes)
+		{
+			// Seriously why can't the Recipe interface itself just extend Keyed...
+			if (recipe instanceof Keyed && ((Keyed) recipe).getKey().equals(key))
+			{
+				return recipe;
+			}
+		}
+
+		return null;
+	}
+
+	@Override
+	public boolean removeRecipe(NamespacedKey key)
+	{
+		assertMainThread();
+
+		Iterator<Recipe> iterator = recipeIterator();
+
+		while (iterator.hasNext())
+		{
+			Recipe recipe = iterator.next();
+
+			// Seriously why can't the Recipe interface itself just extend Keyed...
+			if (recipe instanceof Keyed && ((Keyed) recipe).getKey().equals(key))
+			{
+				iterator.remove();
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	@Override
@@ -1413,28 +1458,6 @@ public class ServerMock implements Server
 		throw new UnimplementedOperationException();
 	}
 
-	@Override
-	public boolean removeRecipe(NamespacedKey key)
-	{
-		assertMainThread();
-
-		Iterator<Recipe> iterator = recipeIterator();
-
-		while (iterator.hasNext())
-		{
-			Recipe recipe = iterator.next();
-
-			// Seriously why can't the Recipe interface itself just extend Keyed...
-			if (recipe instanceof Keyed && ((Keyed) recipe).getKey().equals(key))
-			{
-				iterator.remove();
-				return true;
-			}
-		}
-
-		return false;
-	}
-
 	/**
 	 * This returns the current time of the {@link Server} in milliseconds
 	 * 
@@ -1450,23 +1473,6 @@ public class ServerMock implements Server
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public Recipe getRecipe(NamespacedKey key)
-	{
-		assertMainThread();
-
-		for (Recipe recipe : recipes)
-		{
-			// Seriously why can't the Recipe interface itself just extend Keyed...
-			if (recipe instanceof Keyed && ((Keyed) recipe).getKey().equals(key))
-			{
-				return recipe;
-			}
-		}
-
-		return null;
 	}
 
 	@Override
