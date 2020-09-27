@@ -18,11 +18,19 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 
+import com.google.common.collect.Iterators;
+
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Tag;
+import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarFlag;
+import org.bukkit.boss.BarStyle;
+import org.bukkit.boss.BossBar;
+import org.bukkit.boss.KeyedBossBar;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Horse.Style;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -561,6 +569,37 @@ public class ServerMockTest
 		{
 			assertNotNull(type);
 		}
+	}
+
+	@Test
+	public void testCreateBossBar() {
+		BossBar bar = server.createBossBar("Test bossbar", BarColor.BLUE, BarStyle.SOLID, BarFlag.PLAY_BOSS_MUSIC, BarFlag.CREATE_FOG);
+		assertNotNull(bar);
+
+		assertEquals("Test bossbar", bar.getTitle());
+		assertEquals(BarColor.BLUE, bar.getColor());
+		assertEquals(BarStyle.SOLID, bar.getStyle());
+
+		assertTrue(bar.hasFlag(BarFlag.PLAY_BOSS_MUSIC));
+		assertTrue(bar.hasFlag(BarFlag.CREATE_FOG));
+		assertFalse(bar.hasFlag(BarFlag.DARKEN_SKY));
+
+	}
+
+	@Test
+	@SuppressWarnings("deprecation")
+	public void testKeyedBossBar() {
+		KeyedBossBar bar = server.createBossBar(new NamespacedKey("mockbukkittest", "bossbar1"), "Boss bar 1", BarColor.WHITE, BarStyle.SEGMENTED_10);
+		assertNotNull(bar);
+		
+		assertEquals(1, Iterators.size(server.getBossBars()));
+
+		assertEquals(bar, server.getBossBar(new NamespacedKey("mockbukkittest", "bossbar1")));
+
+		assertTrue(server.removeBossBar(new NamespacedKey("mockbukkittest", "bossbar1")));
+		assertEquals(0, Iterators.size(server.getBossBars()));
+
+		assertFalse(server.removeBossBar(new NamespacedKey("mockbukkittest", "nonexistantbossbar")));
 	}
 }
 
