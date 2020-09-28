@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.boss;
 
 import org.junit.Test;
+import org.junit.After;
 import org.junit.Before;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
@@ -23,6 +24,11 @@ public class KeyedBossBarMockTest {
     @Before
     public void setUp() {
         server = MockBukkit.mock();
+    }
+
+    @After
+    public void tearDown() {
+        MockBukkit.unmock();
     }
 
     @Test
