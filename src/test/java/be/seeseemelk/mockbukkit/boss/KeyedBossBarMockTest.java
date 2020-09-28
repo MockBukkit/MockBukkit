@@ -32,9 +32,15 @@ public class KeyedBossBarMockTest {
                 BarColor.WHITE, BarStyle.SEGMENTED_10);
         assertNotNull(bar);
 
+        assertEquals("Boss bar 1", bar.getTitle());
+        assertEquals(BarColor.WHITE, bar.getColor());
+        assertEquals(BarStyle.SEGMENTED_10, bar.getStyle());
+        assertEquals(1.0, bar.getProgress(), 0);
+
         assertEquals(1, Iterators.size(server.getBossBars()));
 
         assertEquals(bar, server.getBossBar(new NamespacedKey("mockbukkittest", "bossbar1")));
+        assertEquals(bar, server.getBossBars().next());
 
         assertTrue(server.removeBossBar(new NamespacedKey("mockbukkittest", "bossbar1")));
         assertEquals(0, Iterators.size(server.getBossBars()));
