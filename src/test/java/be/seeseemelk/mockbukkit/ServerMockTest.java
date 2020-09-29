@@ -315,6 +315,17 @@ public class ServerMockTest
 	}
 
 	@Test
+	public void getRecipesFor_IgnoresAmount()
+	{
+		TestRecipe recipe = new TestRecipe(new ItemStack(Material.IRON_NUGGET));
+		server.addRecipe(recipe);
+
+		List<Recipe> recipes = server.getRecipesFor(new ItemStack(Material.IRON_NUGGET, 1));
+		List<Recipe> recipes2 = server.getRecipesFor(new ItemStack(Material.IRON_NUGGET, 10));
+		assertEquals(recipes, recipes2);
+	}
+
+	@Test
 	public void getDataFolder_CleanEnvironment_CreatesTemporaryDataDirectory() throws IOException
 	{
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);

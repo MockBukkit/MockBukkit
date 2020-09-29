@@ -427,4 +427,11 @@ public class BlockMock implements Block
 		Validate.notNull(state, "The BlockState cannot be null");
 		this.state = state;
 	}
+	
+	@Override
+	public boolean applyBoneMeal(BlockFace face)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
 }
