@@ -82,7 +82,7 @@ public class BarrelMock extends ContainerMock implements Barrel
 	@Override
 	protected InventoryMock createInventory()
 	{
-		return new BarrelInventoryMock(this, 27);
+		return new BarrelInventoryMock(this);
 	}
 
 	@Override

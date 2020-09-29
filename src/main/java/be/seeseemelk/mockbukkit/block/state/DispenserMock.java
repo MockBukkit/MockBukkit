@@ -79,8 +79,14 @@ public class DispenserMock extends ContainerMock implements Dispenser
 	@Override
 	public BlockProjectileSource getBlockProjectileSource()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (isPlaced())
+		{
+			return new DispenserProjectileSourceMock(this);
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	@Override
