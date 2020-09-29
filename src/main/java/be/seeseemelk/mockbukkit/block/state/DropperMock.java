@@ -8,7 +8,7 @@ import org.bukkit.loot.LootTable;
 import org.jetbrains.annotations.NotNull;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.inventory.DispenserInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.DropperInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 
 /**
@@ -66,7 +66,7 @@ public class DropperMock extends ContainerMock implements Dropper
 	@Override
 	protected InventoryMock createInventory()
 	{
-		return new DispenserInventoryMock(this);
+		return new DropperInventoryMock(this);
 	}
 
 	@Override
@@ -79,7 +79,7 @@ public class DropperMock extends ContainerMock implements Dropper
 	public void drop()
 	{
 		// TODO Auto-generated method stub
-
+		throw new UnimplementedOperationException();
 	}
 
 }
