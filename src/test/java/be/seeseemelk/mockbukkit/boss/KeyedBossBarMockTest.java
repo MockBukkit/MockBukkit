@@ -38,6 +38,7 @@ public class KeyedBossBarMockTest {
                 BarColor.WHITE, BarStyle.SEGMENTED_10);
         assertNotNull(bar);
 
+        // Make sure it initalized correctly
         assertEquals("Boss bar 1", bar.getTitle());
         assertEquals(BarColor.WHITE, bar.getColor());
         assertEquals(BarStyle.SEGMENTED_10, bar.getStyle());
@@ -52,5 +53,10 @@ public class KeyedBossBarMockTest {
         assertEquals(0, Iterators.size(server.getBossBars()));
 
         assertFalse(server.removeBossBar(new NamespacedKey("mockbukkittest", "nonexistantbossbar")));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testNullKey() {
+        server.createBossBar(null, "Boss bar 1", BarColor.WHITE, BarStyle.SEGMENTED_10);
     }
 }
