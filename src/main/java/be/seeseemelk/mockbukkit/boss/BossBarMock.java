@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+import org.apache.commons.lang.Validate;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarFlag;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class BossBarMock implements BossBar {
 
@@ -101,14 +103,16 @@ public class BossBarMock implements BossBar {
     }
 
     @Override
-    public void addPlayer(Player player)
+    public void addPlayer(@NotNull Player player)
     {
+        Validate.notNull(player, "Player cannot be null!");
         this.players.add(player);
     }
 
     @Override
-    public void removePlayer(Player player)
+    public void removePlayer(@NotNull Player player)
     {
+        Validate.notNull(player, "Player cannot be null!");
         this.players.remove(player);
     }
 

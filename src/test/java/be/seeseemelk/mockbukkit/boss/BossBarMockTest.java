@@ -115,4 +115,16 @@ public class BossBarMockTest {
 
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddingPlayerNull()
+    {
+        bar.addPlayer(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testRemovingNullPlayer()
+    {
+        bar.removePlayer(null);
+    }
+
 }
