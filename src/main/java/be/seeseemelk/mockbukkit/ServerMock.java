@@ -1405,7 +1405,7 @@ public class ServerMock implements Server
 	@Override
 	public Iterator<KeyedBossBar> getBossBars()
 	{
-		return ((List) new ArrayList<KeyedBossBarMock>(bossBars.values())).iterator();
+		return bossBars.values().stream().map(bossbar -> (KeyedBossBar) bossbar).iterator();
 	}
 
 	@Override
