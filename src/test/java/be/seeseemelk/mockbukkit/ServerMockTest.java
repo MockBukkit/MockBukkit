@@ -23,7 +23,6 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.Tag;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Horse.Style;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
