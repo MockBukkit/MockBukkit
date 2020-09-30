@@ -33,7 +33,8 @@ public class KeyedBossBarMockTest {
 
     @Test
     @SuppressWarnings("deprecation")
-    public void testKeyedBossBar() {
+    public void testKeyedBossBar() 
+    {
         KeyedBossBar bar = server.createBossBar(new NamespacedKey("mockbukkittest", "bossbar1"), "Boss bar 1",
                 BarColor.WHITE, BarStyle.SEGMENTED_10);
         assertNotNull(bar);
@@ -56,7 +57,8 @@ public class KeyedBossBarMockTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testNullKey() {
+    public void testNullKey() 
+    {
         server.createBossBar(null, "Boss bar 1", BarColor.WHITE, BarStyle.SEGMENTED_10);
     }
 }

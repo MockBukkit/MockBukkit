@@ -23,25 +23,29 @@ public class BossBarMockTest {
     private BossBar bar;
 
     @Before
-    public void setUp() {
+    public void setUp() 
+    {
         server = MockBukkit.mock();
         bar = server.createBossBar("Test bossbar", BarColor.BLUE, BarStyle.SOLID, BarFlag.PLAY_BOSS_MUSIC,
         BarFlag.CREATE_FOG);
     }
 
     @After
-    public void tearDown() {
+    public void tearDown() 
+    {
         MockBukkit.unmock();
     }
 
     @Test
-    public void testBossBarNotNull() {
+    public void testBossBarNotNull() 
+    {
         assertNotNull(bar);
     }
 
 
     @Test
-    public void testFlags() {
+    public void testFlags() 
+    {
         assertTrue(bar.hasFlag(BarFlag.PLAY_BOSS_MUSIC));
         assertTrue(bar.hasFlag(BarFlag.CREATE_FOG));
         assertFalse(bar.hasFlag(BarFlag.DARKEN_SKY));
@@ -52,13 +56,15 @@ public class BossBarMockTest {
     }
 
     @Test
-    public void testSetProgress() {
+    public void testSetProgress()
+    {
         bar.setProgress(0.5);
         assertEquals(0.5, bar.getProgress(), 0);
     }
 
     @Test
-    public void testSetName() {
+    public void testSetName()
+    {
         assertEquals("Test bossbar", bar.getTitle());
 
         bar.setTitle("Hello world");
@@ -66,7 +72,8 @@ public class BossBarMockTest {
     }
 
     @Test
-    public void testSetColor() {
+    public void testSetColor()
+    {
         assertEquals(BarColor.BLUE, bar.getColor());
 
         bar.setColor(BarColor.PURPLE);
@@ -83,7 +90,8 @@ public class BossBarMockTest {
 
 
     @Test
-    public void testBarPlayers() {
+    public void testBarPlayers()
+    {
         assertEquals(0, bar.getPlayers().size());
 
         Player player1 = new PlayerMock(server, "TestPlayer");

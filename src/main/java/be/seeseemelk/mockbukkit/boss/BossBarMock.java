@@ -20,7 +20,8 @@ public class BossBarMock implements BossBar {
     private boolean visible = true;
     private double progress = 1.0;
 
-    public BossBarMock(String title, BarColor color, BarStyle style, BarFlag... flags) {
+    public BossBarMock(String title, BarColor color, BarStyle style, BarFlag... flags)
+    {
         this.title = title;
         this.color = color;
         this.style = style;
@@ -31,52 +32,62 @@ public class BossBarMock implements BossBar {
     
 
     @Override
-    public String getTitle() {
+    public String getTitle()
+    {
         return title;
     }
 
     @Override
-    public void setTitle(String title) {
+    public void setTitle(String title)
+    {
         this.title = title;
     }
 
     @Override
-    public BarColor getColor() {
+    public BarColor getColor()
+    {
         return color;
     }
 
     @Override
-    public void setColor(BarColor color) {
+    public void setColor(BarColor color)
+    {
         this.color = color;
     }
 
     @Override
-    public BarStyle getStyle() {
+    public BarStyle getStyle()
+    {
         return style;
     }
 
     @Override
-    public void setStyle(BarStyle style) {
+    public void setStyle(BarStyle style)
+    {
         this.style = style;
     }
 
     @Override
-    public void removeFlag(BarFlag flag) {
+    public void removeFlag(BarFlag flag)
+    {
         barFlags.remove(flag);
     }
 
     @Override
-    public void addFlag(BarFlag flag) {
+    public void addFlag(BarFlag flag)
+    {
         barFlags.add(flag);
     }
 
     @Override
-    public boolean hasFlag(BarFlag flag) {
+    public boolean hasFlag(BarFlag flag)
+    {
         return barFlags.contains(flag);
     }
 
     @Override
-    public void setProgress(double progress) {
+    public void setProgress(double progress)
+    {
         if (progress > 1.0 || progress < 0) {
             throw new IllegalArgumentException("Progress must be between 0.0 and 1.0");
         }
@@ -84,49 +95,58 @@ public class BossBarMock implements BossBar {
     }
 
     @Override
-    public double getProgress() {
+    public double getProgress()
+    {
         return progress;
     }
 
     @Override
-    public void addPlayer(Player player) {
+    public void addPlayer(Player player)
+    {
         this.players.add(player);
     }
 
     @Override
-    public void removePlayer(Player player) {
+    public void removePlayer(Player player)
+    {
         this.players.remove(player);
     }
 
     @Override
-    public void removeAll() {
+    public void removeAll()
+    {
         this.players.clear();
     }
 
     @Override
-    public List<Player> getPlayers() {
+    public List<Player> getPlayers()
+    {
         return new ArrayList<Player>(players);
     }
 
     @Override
-    public void setVisible(boolean visible) {
+    public void setVisible(boolean visible)
+    {
         this.visible = visible;
     }
 
     @Override
-    public boolean isVisible() {
+    public boolean isVisible()
+    {
         return visible;
     }
 
     @Deprecated
     @Override
-    public void show() {
+    public void show()
+    {
         setVisible(true);
     }
 
     @Deprecated
     @Override
-    public void hide() {
+    public void hide()
+    {
         setVisible(false);
     }
     
