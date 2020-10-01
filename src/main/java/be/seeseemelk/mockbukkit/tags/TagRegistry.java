@@ -24,11 +24,6 @@ public enum TagRegistry
 	BLOCKS,
 
 	/**
-	 * The fluids registry
-	 */
-	FLUIDS,
-
-	/**
 	 * The items registry
 	 */
 	ITEMS;

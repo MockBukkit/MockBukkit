@@ -1,18 +1,23 @@
 package be.seeseemelk.mockbukkit.tags;
 
 import java.io.IOException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
+import org.bukkit.NamespacedKey;
+import org.bukkit.Server;
+import org.bukkit.Tag;
 import org.jetbrains.annotations.NotNull;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.ServerMock;
 
 public final class TagsMock
 {
@@ -21,52 +26,61 @@ public final class TagsMock
 	{
 	}
 
-	public static void loadDefaultTags(@NotNull Logger logger)
+	/**
+	 * This loads all default {@link Tag Tags} into the given {@link Server}.
+	 * 
+	 * @param server The {@link ServerMock} instance
+	 */
+	public static void loadDefaultTags(@NotNull ServerMock server)
 	{
 		try
 		{
 			loadRegistry(TagRegistry.BLOCKS);
+			server.addTagRegistry(TagRegistry.BLOCKS);
 		}
 		catch (URISyntaxException | IOException e)
 		{
-			logger.log(Level.SEVERE, "Failed to load Tag Registry \"blocks\"", e);
+			server.getLogger().log(Level.SEVERE, "Failed to load Tag Registry \"blocks\"", e);
 		}
-		try
-		{
-			loadRegistry(TagRegistry.FLUIDS);
-		}
-		catch (URISyntaxException | IOException e)
-		{
-			logger.log(Level.SEVERE, "Failed to load Tag Registry \"fluids\"", e);
-		}
+
 		try
 		{
 			loadRegistry(TagRegistry.ITEMS);
+			server.addTagRegistry(TagRegistry.BLOCKS);
 		}
 		catch (URISyntaxException | IOException e)
 		{
-			logger.log(Level.SEVERE, "Failed to load Tag Registry \"items\"", e);
+			server.getLogger().log(Level.SEVERE, "Failed to load Tag Registry \"items\"", e);
 		}
 	}
 
+	/**
+	 * This will load all {@link Tag Tags} for the given {@link TagRegistry}.
+	 * 
+	 * @param registry Our {@link TagRegistry}
+	 * 
+	 * @throws URISyntaxException When a {@link URI} is malformed
+	 * @throws IOException        When there was an issue with I/O
+	 */
 	private static void loadRegistry(@NotNull TagRegistry registry) throws URISyntaxException, IOException
 	{
+		Pattern filePattern = Pattern.compile("\\.");
 		URL resource = MockBukkit.class.getClassLoader().getResource("tags/" + registry.getRegistry());
 		Path directory = Paths.get(resource.toURI());
 
+		// Iterate through all paths in that directory
 		try (Stream<Path> stream = Files.walk(directory, 1))
 		{
 			// We wanna skip the root node as we are only interested in the actual
 			// .json files for the tags
 			stream.skip(1).forEach(path -> {
-				String file = path.getFileName().toString();
+				// Splitting will strip away the .json
+				String name = filePattern.split(path.getFileName().toString())[0];
+				NamespacedKey key = NamespacedKey.minecraft(name);
+				TagWrapperMock tag = new TagWrapperMock(registry, key);
+				registry.getTags().put(key, tag);
 			});
 		}
-	}
-
-	public static void main(String[] args)
-	{
-		loadDefaultTags(Logger.getLogger("hi"));
 	}
 
 }

@@ -132,7 +132,7 @@ public class ServerMock implements Server
 
 		// Register default Minecraft Potion Effect Types
 		createPotionEffectTypes();
-		TagsMock.loadDefaultTags(logger);
+		TagsMock.loadDefaultTags(this);
 		EnchantmentsMock.registerDefaultEnchantments();
 
 		try
@@ -1295,6 +1295,11 @@ public class ServerMock implements Server
 		TagWrapperMock tag = new TagWrapperMock(registry, key);
 		registry.getTags().put(key, tag);
 		return tag;
+	}
+
+	public void addTagRegistry(@NotNull TagRegistry registry)
+	{
+		materialTags.put(registry.getRegistry(), registry);
 	}
 
 	@SuppressWarnings("unchecked")
