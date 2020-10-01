@@ -96,16 +96,6 @@ public final class TagsMock
 				server.getLogger().log(Level.SEVERE, e, () -> "Failed to load Tag - " + tag.getKey());
 			}
 		}
-
-		for (TagWrapperMock tag : registry.getTags().values())
-		{
-			System.out.println(tag.getKey() + ": " + tag.getValues());
-		}
-	}
-
-	public static void main(String[] args)
-	{
-		loadDefaultTags(new ServerMock());
 	}
 
 }
