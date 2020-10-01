@@ -620,34 +620,6 @@ public class PlayerMock extends LivingEntityMock implements Player
 	}
 
 	@Override
-	public int getRemainingAir()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setRemainingAir(int ticks)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public int getMaximumAir()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setMaximumAir(int ticks)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public int getMaximumNoDamageTicks()
 	{
 		// TODO Auto-generated method stub
