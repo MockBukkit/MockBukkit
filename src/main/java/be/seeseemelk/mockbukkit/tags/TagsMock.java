@@ -35,8 +35,7 @@ public final class TagsMock
 	{
 		try
 		{
-			loadRegistry(TagRegistry.BLOCKS);
-			server.addTagRegistry(TagRegistry.BLOCKS);
+			loadRegistry(server, TagRegistry.BLOCKS);
 		}
 		catch (URISyntaxException | IOException e)
 		{
@@ -45,8 +44,7 @@ public final class TagsMock
 
 		try
 		{
-			loadRegistry(TagRegistry.ITEMS);
-			server.addTagRegistry(TagRegistry.BLOCKS);
+			loadRegistry(server, TagRegistry.ITEMS);
 		}
 		catch (URISyntaxException | IOException e)
 		{
@@ -57,12 +55,15 @@ public final class TagsMock
 	/**
 	 * This will load all {@link Tag Tags} for the given {@link TagRegistry}.
 	 * 
+	 * @param server
+	 * 
 	 * @param registry Our {@link TagRegistry}
 	 * 
 	 * @throws URISyntaxException When a {@link URI} is malformed
 	 * @throws IOException        When there was an issue with I/O
 	 */
-	private static void loadRegistry(@NotNull TagRegistry registry) throws URISyntaxException, IOException
+	private static void loadRegistry(@NotNull ServerMock server, @NotNull TagRegistry registry)
+			throws URISyntaxException, IOException
 	{
 		Pattern filePattern = Pattern.compile("\\.");
 		URL resource = MockBukkit.class.getClassLoader().getResource("tags/" + registry.getRegistry());
@@ -81,6 +82,30 @@ public final class TagsMock
 				registry.getTags().put(key, tag);
 			});
 		}
+
+		server.addTagRegistry(registry);
+
+		for (TagWrapperMock tag : registry.getTags().values())
+		{
+			try
+			{
+				tag.reload();
+			}
+			catch (TagMisconfigurationException e)
+			{
+				server.getLogger().log(Level.SEVERE, e, () -> "Failed to load Tag - " + tag.getKey());
+			}
+		}
+
+		for (TagWrapperMock tag : registry.getTags().values())
+		{
+			System.out.println(tag.getKey() + ": " + tag.getValues());
+		}
+	}
+
+	public static void main(String[] args)
+	{
+		loadDefaultTags(new ServerMock());
 	}
 
 }

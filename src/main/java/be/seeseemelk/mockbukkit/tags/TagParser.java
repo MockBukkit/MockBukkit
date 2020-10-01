@@ -36,7 +36,7 @@ public class TagParser implements Keyed
 {
 
 	private static final Pattern COLON = Pattern.compile(":");
-	private static final Pattern MINECRAFT_MATERIAL = Pattern.compile("minecraft:[a-z_]+");
+	private static final Pattern MINECRAFT_MATERIAL = Pattern.compile("minecraft:[a-z0-9_]+");
 	private static final Pattern MINECRAFT_TAG = Pattern.compile("#minecraft:[a-z_]+");
 
 	private final TagRegistry registry;
