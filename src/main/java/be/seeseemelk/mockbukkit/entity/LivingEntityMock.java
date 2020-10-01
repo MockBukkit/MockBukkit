@@ -582,37 +582,51 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 	@Override
 	public EntityCategory getCategory()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 	@Override
 	public void setArrowsInBody(int count)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 	@Override
 	public int getArrowsInBody()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 	@Override
 	public void setArrowCooldown(int ticks)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 	@Override
 	public int getArrowCooldown()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setInvisible(boolean invisible)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isInvisible()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
