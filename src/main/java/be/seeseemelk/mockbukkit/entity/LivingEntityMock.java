@@ -47,6 +47,8 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	private static final double MAX_HEALTH = 20.0;
 	private double health;
 	private double maxHealth = MAX_HEALTH;
+	private int maxAirTicks = 300;
+	private int remainingAirTicks = 300;
 	protected boolean alive = true;
 	protected Map<Attribute, AttributeInstanceMock> attributes;
 
@@ -277,29 +279,25 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public int getRemainingAir()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return remainingAirTicks;
 	}
 
 	@Override
 	public void setRemainingAir(int ticks)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.remainingAirTicks = ticks;
 	}
 
 	@Override
 	public int getMaximumAir()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return maxAirTicks;
 	}
 
 	@Override
 	public void setMaximumAir(int ticks)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.maxAirTicks = ticks;
 	}
 
 	@Override
