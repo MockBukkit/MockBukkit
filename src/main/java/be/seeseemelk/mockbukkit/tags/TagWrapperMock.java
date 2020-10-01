@@ -99,4 +99,10 @@ public class TagWrapperMock implements Tag<Material>
 		}
 	}
 
+	@NotNull
+	public Set<TagWrapperMock> getSubTags()
+	{
+		return Collections.unmodifiableSet(additionalTags);
+	}
+
 }

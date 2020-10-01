@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class TestTagParser
+public class TagParserTest
 {
 
 	@Test

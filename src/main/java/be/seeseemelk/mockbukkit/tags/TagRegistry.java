@@ -42,4 +42,9 @@ public enum TagRegistry
 		return tags;
 	}
 
+	public boolean isEmpty()
+	{
+		return tags.isEmpty();
+	}
+
 }
