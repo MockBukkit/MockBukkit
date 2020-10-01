@@ -93,6 +93,9 @@ import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 import be.seeseemelk.mockbukkit.potion.MockPotionEffectType;
 import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
 import be.seeseemelk.mockbukkit.scoreboard.ScoreboardManagerMock;
+import be.seeseemelk.mockbukkit.tags.TagRegistry;
+import be.seeseemelk.mockbukkit.tags.TagWrapperMock;
+import be.seeseemelk.mockbukkit.tags.TagsMock;
 
 @SuppressWarnings("deprecation")
 public class ServerMock implements Server
@@ -103,7 +106,7 @@ public class ServerMock implements Server
 	private final Logger logger;
 	private final Thread mainThread;
 	private final MockUnsafeValues unsafe = new MockUnsafeValues();
-	private final Map<NamespacedKey, Tag<Material>> materialTags = new HashMap<>();
+	private final Map<String, TagRegistry> materialTags = new HashMap<>();
 
 	private final List<PlayerMock> players = new ArrayList<>();
 	private final Set<OfflinePlayer> offlinePlayers = new HashSet<>();
@@ -129,6 +132,7 @@ public class ServerMock implements Server
 
 		// Register default Minecraft Potion Effect Types
 		createPotionEffectTypes();
+		TagsMock.loadDefaultTags(logger);
 		EnchantmentsMock.registerDefaultEnchantments();
 
 		try
@@ -1283,26 +1287,32 @@ public class ServerMock implements Server
 	 * 
 	 * @return The newly created {@link Tag}
 	 */
-	public Tag<Material> createMaterialTag(NamespacedKey key, Material... materials)
+	public Tag<Material> createMaterialTag(NamespacedKey key, String registryKey, Material... materials)
 	{
 		Validate.notNull(key, "A NamespacedKey must never be null");
 
-		MockMaterialTag tag = new MockMaterialTag(key, materials);
-		materialTags.put(key, tag);
+		TagRegistry registry = materialTags.get(registryKey);
+		TagWrapperMock tag = new TagWrapperMock(registry, key);
+		registry.getTags().put(key, tag);
 		return tag;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T extends Keyed> Tag<T> getTag(String registry, NamespacedKey key, Class<T> clazz)
+	public <T extends Keyed> Tag<T> getTag(String registryKey, NamespacedKey key, Class<T> clazz)
 	{
 		if (clazz == Material.class)
 		{
-			Tag<Material> tag = materialTags.get(key);
+			TagRegistry registry = materialTags.get(registryKey);
 
-			if (tag != null)
+			if (registry != null)
 			{
-				return (Tag<T>) tag;
+				Tag<Material> tag = registry.getTags().get(key);
+
+				if (tag != null)
+				{
+					return (Tag<T>) tag;
+				}
 			}
 		}
 
