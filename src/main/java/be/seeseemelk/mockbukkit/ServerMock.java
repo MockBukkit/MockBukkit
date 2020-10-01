@@ -132,7 +132,7 @@ public class ServerMock implements Server
 
 		// Register default Minecraft Potion Effect Types
 		createPotionEffectTypes();
-		TagsMock.loadDefaultTags(this);
+		TagsMock.loadDefaultTags(this, true);
 		EnchantmentsMock.registerDefaultEnchantments();
 
 		try

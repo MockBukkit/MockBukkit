@@ -29,13 +29,14 @@ public final class TagsMock
 	/**
 	 * This loads all default {@link Tag Tags} into the given {@link Server}.
 	 * 
-	 * @param server The {@link ServerMock} instance
+	 * @param server       The {@link ServerMock} instance
+	 * @param skipIfExists Whether to skip an already loaded {@link TagRegistry}
 	 */
-	public static void loadDefaultTags(@NotNull ServerMock server)
+	public static void loadDefaultTags(@NotNull ServerMock server, boolean skipIfExists)
 	{
 		try
 		{
-			loadRegistry(server, TagRegistry.BLOCKS);
+			loadRegistry(server, TagRegistry.BLOCKS, skipIfExists);
 		}
 		catch (URISyntaxException | IOException e)
 		{
@@ -44,7 +45,7 @@ public final class TagsMock
 
 		try
 		{
-			loadRegistry(server, TagRegistry.ITEMS);
+			loadRegistry(server, TagRegistry.ITEMS, skipIfExists);
 		}
 		catch (URISyntaxException | IOException e)
 		{
@@ -56,15 +57,21 @@ public final class TagsMock
 	 * This will load all {@link Tag Tags} for the given {@link TagRegistry}.
 	 * 
 	 * @param server
-	 * 
-	 * @param registry Our {@link TagRegistry}
+	 * @param registry     Our {@link TagRegistry}
+	 * @param skipIfExists Whether to skip an already loaded {@link TagRegistry}
 	 * 
 	 * @throws URISyntaxException When a {@link URI} is malformed
 	 * @throws IOException        When there was an issue with I/O
 	 */
-	private static void loadRegistry(@NotNull ServerMock server, @NotNull TagRegistry registry)
+	private static void loadRegistry(@NotNull ServerMock server, @NotNull TagRegistry registry, boolean skipIfExists)
 			throws URISyntaxException, IOException
 	{
+		if (skipIfExists && !registry.isEmpty())
+		{
+			// Skip
+			return;
+		}
+
 		Pattern filePattern = Pattern.compile("\\.");
 		URL resource = MockBukkit.class.getClassLoader().getResource("tags/" + registry.getRegistry());
 		Path directory = Paths.get(resource.toURI());

@@ -57,6 +57,11 @@ public class RegistryTest
 	public void testNotEmpty()
 	{
 		assertFalse(registry.isEmpty());
+
+		for (TagWrapperMock tag : registry.getTags().values())
+		{
+			assertFalse(tag.getValues().isEmpty());
+		}
 	}
 
 	@Test
@@ -79,7 +84,6 @@ public class RegistryTest
 		for (TagWrapperMock tag : registry.getTags().values())
 		{
 			Set<Material> values = tag.getValues();
-
 			assertFalse(values.isEmpty());
 
 			for (Material value : tag.getValues())
