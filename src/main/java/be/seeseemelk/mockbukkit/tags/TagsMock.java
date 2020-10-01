@@ -68,7 +68,8 @@ public final class TagsMock
 	{
 		if (skipIfExists && !registry.isEmpty())
 		{
-			// Skip
+			// Skip but still add it to the Server instance
+			server.addTagRegistry(registry);
 			return;
 		}
 

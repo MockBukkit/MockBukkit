@@ -11,8 +11,7 @@ import org.junit.Test;
 import be.seeseemelk.mockbukkit.MockBukkit;
 
 /**
- * These are just some example tests for common tags to ensure 
- * their normal functionality has not been disturbed.
+ * These are just some example tests for common tags to ensure their normal functionality has not been disturbed.
  * 
  * @author TheBusyBiscuit
  *
