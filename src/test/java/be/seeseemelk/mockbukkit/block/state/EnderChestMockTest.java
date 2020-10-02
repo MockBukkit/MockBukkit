@@ -28,10 +28,16 @@ public class EnderChestMockTest
 	}
 
 	@Test
-	public void testMaterialChestBlockState()
+	public void testMaterialEnderChestBlockState()
 	{
 		Block block = new BlockMock(Material.ENDER_CHEST);
 		assertTrue(block.getState() instanceof EnderChest);
+	}
+
+	@Test
+	public void testMaterialEnderChestMockConstructor()
+	{
+		assertTrue(new EnderChestMock(Material.ENDER_CHEST) instanceof EnderChest);
 	}
 
 }

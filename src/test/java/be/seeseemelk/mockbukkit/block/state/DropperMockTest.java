@@ -7,8 +7,8 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.bukkit.Material;
-import org.bukkit.block.Barrel;
 import org.bukkit.block.Block;
+import org.bukkit.block.Dropper;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.junit.After;
@@ -18,16 +18,16 @@ import org.junit.Test;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 
-public class BarrelMockTest
+public class DropperMockTest
 {
 
-	private Barrel barrel;
+	private Dropper dropper;
 
 	@Before
 	public void setUp() throws Exception
 	{
 		MockBukkit.mock();
-		barrel = new BarrelMock(Material.BARREL);
+		dropper = new DropperMock(Material.DROPPER);
 	}
 
 	@After
@@ -37,20 +37,20 @@ public class BarrelMockTest
 	}
 
 	@Test
-	public void testMaterialBarrelBlockState()
+	public void testMaterialDropperBlockState()
 	{
-		Block block = new BlockMock(Material.BARREL);
-		assertTrue(block.getState() instanceof Barrel);
+		Block block = new BlockMock(Material.DROPPER);
+		assertTrue(block.getState() instanceof Dropper);
 	}
 
 	@Test
 	public void testHasInventory()
 	{
-		Inventory inventory = barrel.getInventory();
+		Inventory inventory = dropper.getInventory();
 		assertNotNull(inventory);
 
-		assertEquals(barrel, inventory.getHolder());
-		assertEquals(InventoryType.BARREL, inventory.getType());
+		assertEquals(dropper, inventory.getHolder());
+		assertEquals(InventoryType.DROPPER, inventory.getType());
 	}
 
 	@Test
@@ -58,30 +58,30 @@ public class BarrelMockTest
 	{
 		String key = "key";
 
-		assertFalse(barrel.isLocked());
-		assertEquals("", barrel.getLock());
+		assertFalse(dropper.isLocked());
+		assertEquals("", dropper.getLock());
 
-		barrel.setLock("key");
-		assertTrue(barrel.isLocked());
-		assertEquals(key, barrel.getLock());
+		dropper.setLock("key");
+		assertTrue(dropper.isLocked());
+		assertEquals(key, dropper.getLock());
 	}
 
 	@Test
 	public void testNullLocking()
 	{
-		barrel.setLock(null);
-		assertFalse(barrel.isLocked());
-		assertEquals("", barrel.getLock());
+		dropper.setLock(null);
+		assertFalse(dropper.isLocked());
+		assertEquals("", dropper.getLock());
 	}
 
 	@Test
 	public void testNaming()
 	{
-		String name = "Cool Chest";
+		String name = "Cool Dropper";
 
-		assertNull(barrel.getCustomName());
+		assertNull(dropper.getCustomName());
 
-		barrel.setCustomName(name);
-		assertEquals(name, barrel.getCustomName());
+		dropper.setCustomName(name);
+		assertEquals(name, dropper.getCustomName());
 	}
 }
