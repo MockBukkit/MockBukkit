@@ -75,6 +75,8 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.CachedServerIcon;
 import org.jetbrains.annotations.NotNull;
 
+import be.seeseemelk.mockbukkit.boss.BossBarMock;
+import be.seeseemelk.mockbukkit.boss.KeyedBossBarMock;
 import be.seeseemelk.mockbukkit.command.CommandResult;
 import be.seeseemelk.mockbukkit.command.ConsoleCommandSenderMock;
 import be.seeseemelk.mockbukkit.command.MessageTarget;
@@ -113,6 +115,7 @@ public class ServerMock implements Server
 	private final Set<EntityMock> entities = new HashSet<>();
 	private final List<World> worlds = new ArrayList<>();
 	private final List<Recipe> recipes = new LinkedList<>();
+	private final Map<NamespacedKey, KeyedBossBarMock> bossBars = new HashMap<>();
 	private final ItemFactory factory = new ItemFactoryMock();
 	private final PlayerMockFactory playerFactory = new PlayerMockFactory(this);
 	private final PluginManagerMock pluginManager = new PluginManagerMock(this);
@@ -1218,8 +1221,8 @@ public class ServerMock implements Server
 	@Override
 	public BossBar createBossBar(String title, BarColor color, BarStyle style, BarFlag... flags)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		BossBar bar = new BossBarMock(title, color, style, flags);
+		return bar;
 	}
 
 	@Override
@@ -1408,29 +1411,30 @@ public class ServerMock implements Server
 	@Override
 	public KeyedBossBar createBossBar(NamespacedKey key, String title, BarColor color, BarStyle style, BarFlag... flags)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Validate.notNull(key, "A NamespacedKey must never be null");
+		KeyedBossBarMock bar = new KeyedBossBarMock(key, title, color, style, flags);
+		bossBars.put(key, bar);
+		return bar;
 	}
 
 	@Override
 	public Iterator<KeyedBossBar> getBossBars()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return bossBars.values().stream().map(bossbar -> (KeyedBossBar) bossbar).iterator();
 	}
 
 	@Override
 	public KeyedBossBar getBossBar(NamespacedKey key)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Validate.notNull(key, "A NamespacedKey must never be null");
+		return bossBars.get(key);
 	}
 
 	@Override
 	public boolean removeBossBar(NamespacedKey key)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Validate.notNull(key, "A NamespacedKey must never be null");
+		return bossBars.remove(key, bossBars.get(key));
 	}
 
 	@Override
