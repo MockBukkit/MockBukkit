@@ -241,11 +241,50 @@ public class BlockStateMock implements BlockState, Cloneable
 		{
 		case BARREL:
 			return new BarrelMock(block);
+		case DISPENSER:
+			return new DispenserMock(block);
+		case DROPPER:
+			return new DropperMock(block);
 		case CHEST:
 		case TRAPPED_CHEST:
 			return new ChestMock(block);
 		case ENDER_CHEST:
 			return new EnderChestMock(block);
+		case ACACIA_SIGN:
+		case ACACIA_WALL_SIGN:
+		case BIRCH_SIGN:
+		case BIRCH_WALL_SIGN:
+		case CRIMSON_SIGN:
+		case CRIMSON_WALL_SIGN:
+		case DARK_OAK_SIGN:
+		case DARK_OAK_WALL_SIGN:
+		case JUNGLE_SIGN:
+		case JUNGLE_WALL_SIGN:
+		case OAK_SIGN:
+		case OAK_WALL_SIGN:
+		case SPRUCE_SIGN:
+		case SPRUCE_WALL_SIGN:
+		case WARPED_SIGN:
+		case WARPED_WALL_SIGN:
+			return new SignMock(block);
+		case SHULKER_BOX:
+		case WHITE_SHULKER_BOX:
+		case ORANGE_SHULKER_BOX:
+		case MAGENTA_SHULKER_BOX:
+		case LIGHT_BLUE_SHULKER_BOX:
+		case YELLOW_SHULKER_BOX:
+		case LIME_SHULKER_BOX:
+		case PINK_SHULKER_BOX:
+		case GRAY_SHULKER_BOX:
+		case LIGHT_GRAY_SHULKER_BOX:
+		case CYAN_SHULKER_BOX:
+		case PURPLE_SHULKER_BOX:
+		case BLUE_SHULKER_BOX:
+		case BROWN_SHULKER_BOX:
+		case GREEN_SHULKER_BOX:
+		case RED_SHULKER_BOX:
+		case BLACK_SHULKER_BOX:
+			return new ShulkerBoxMock(block);
 		default:
 			return new BlockStateMock(block);
 		}

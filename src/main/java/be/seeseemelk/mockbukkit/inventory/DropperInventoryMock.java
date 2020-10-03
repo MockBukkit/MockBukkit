@@ -5,19 +5,19 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.jetbrains.annotations.NotNull;
 
-public class BarrelInventoryMock extends InventoryMock
+public class DropperInventoryMock extends InventoryMock
 {
 
-	public BarrelInventoryMock(InventoryHolder holder)
+	public DropperInventoryMock(InventoryHolder holder)
 	{
-		super(holder, 27, InventoryType.BARREL);
+		super(holder, 9, InventoryType.DROPPER);
 	}
 
 	@Override
 	@NotNull
 	public Inventory getSnapshot()
 	{
-		Inventory inventory = new BarrelInventoryMock(getHolder());
+		Inventory inventory = new DropperInventoryMock(getHolder());
 		inventory.setContents(getContents());
 		return inventory;
 	}
