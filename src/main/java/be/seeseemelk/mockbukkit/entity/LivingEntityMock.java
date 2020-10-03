@@ -629,5 +629,6 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	public boolean isInvisible()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException()
+		throw new UnimplementedOperationException();
+        }
 }
