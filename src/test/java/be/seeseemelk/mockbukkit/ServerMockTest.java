@@ -562,6 +562,8 @@ public class ServerMockTest
 			assertNotNull(type);
 		}
 	}
+
+	
 }
 
 class TestRecipe implements Recipe
