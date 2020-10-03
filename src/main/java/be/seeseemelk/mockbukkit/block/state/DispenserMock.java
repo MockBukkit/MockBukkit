@@ -1,38 +1,37 @@
 package be.seeseemelk.mockbukkit.block.state;
 
 import org.bukkit.Material;
-import org.bukkit.block.Barrel;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
+import org.bukkit.block.Dispenser;
 import org.bukkit.loot.LootTable;
+import org.bukkit.projectiles.BlockProjectileSource;
 import org.jetbrains.annotations.NotNull;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.inventory.BarrelInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.DispenserInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 
 /**
- * This {@link ContainerMock} represents a {@link Barrel}
+ * This {@link ContainerMock} represents a {@link Dispenser}.
  * 
  * @author TheBusyBiscuit
- * 
- * @see ChestMock
  *
  */
-public class BarrelMock extends ContainerMock implements Barrel
+public class DispenserMock extends ContainerMock implements Dispenser
 {
 
-	public BarrelMock(@NotNull Material material)
+	public DispenserMock(@NotNull Material material)
 	{
 		super(material);
 	}
 
-	protected BarrelMock(@NotNull Block block)
+	protected DispenserMock(@NotNull Block block)
 	{
 		super(block);
 	}
 
-	protected BarrelMock(@NotNull BarrelMock state)
+	protected DispenserMock(@NotNull DispenserMock state)
 	{
 		super(state);
 	}
@@ -66,29 +65,35 @@ public class BarrelMock extends ContainerMock implements Barrel
 	}
 
 	@Override
-	public void open()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void close()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	protected InventoryMock createInventory()
 	{
-		return new BarrelInventoryMock(this);
+		return new DispenserInventoryMock(this);
 	}
 
 	@Override
 	public BlockState getSnapshot()
 	{
-		return new BarrelMock(this);
+		return new DispenserMock(this);
+	}
+
+	@Override
+	public BlockProjectileSource getBlockProjectileSource()
+	{
+		if (isPlaced())
+		{
+			return new DispenserProjectileSourceMock(this);
+		}
+		else
+		{
+			return null;
+		}
+	}
+
+	@Override
+	public boolean dispense()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 }
