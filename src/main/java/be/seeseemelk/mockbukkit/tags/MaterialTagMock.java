@@ -1,4 +1,4 @@
-package be.seeseemelk.mockbukkit;
+package be.seeseemelk.mockbukkit.tags;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -12,18 +12,18 @@ import org.jetbrains.annotations.NotNull;
 import com.google.common.collect.ImmutableSet;
 
 /**
- * A rather simple mock implementation for Material {@link Tag Tags}.
+ * A rather simple mock implementation for {@link Material} {@link Tag Tags}.
  * 
  * @author TheBusyBiscuit
  *
  */
-class MockMaterialTag implements Tag<Material>
+public class MaterialTagMock implements Tag<Material>
 {
 
 	private final NamespacedKey key;
 	private final Set<Material> items;
 
-	MockMaterialTag(NamespacedKey key, Material... items)
+	public MaterialTagMock(NamespacedKey key, Material... items)
 	{
 		this.key = key;
 		this.items = new HashSet<>(Arrays.asList(items));
