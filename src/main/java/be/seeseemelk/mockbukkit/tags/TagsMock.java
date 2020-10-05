@@ -5,11 +5,13 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.FileSystem;
+import java.nio.file.FileSystemAlreadyExistsException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
@@ -116,9 +118,11 @@ public final class TagsMock
 	{
 		try
 		{
-			return FileSystems.newFileSystem(uri, Collections.emptyMap());
+			Map<String, String> env = new HashMap<>();
+			env.put("create", "true");
+			return FileSystems.newFileSystem(uri, env);
 		}
-		catch (IllegalArgumentException e)
+		catch (IllegalArgumentException | FileSystemAlreadyExistsException e)
 		{
 			return FileSystems.getDefault();
 		}
