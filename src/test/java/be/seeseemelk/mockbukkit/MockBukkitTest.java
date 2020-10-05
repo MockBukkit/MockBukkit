@@ -53,6 +53,14 @@ public class MockBukkitTest
 	}
 
 	@Test
+	public void mock_ServerSafeMocked() {
+		ServerMock server = MockBukkit.getOrCreateMock();
+		assertNotNull(server);
+		assertEquals(server, MockBukkit.getMock());
+		assertEquals(server, MockBukkit.getOrCreateMock());
+	}
+
+	@Test
 	public void mock_CustomServerMocked()
 	{
 		CustomServerMock server = MockBukkit.mock(new CustomServerMock());

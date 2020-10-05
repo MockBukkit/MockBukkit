@@ -80,6 +80,20 @@ public class MockBukkit
 
 	/**
 	 * Get the mock server instance.
+	 * If no instance exists one will be created. Otherwise existing one is returned
+	 *
+	 * @return The {@link ServerMock} instance.
+	 */
+	public static ServerMock getOrCreateMock() {
+		if(!isMocked()) {
+			mock();
+		}
+
+		return mock;
+	}
+
+	/**
+	 * Get the mock server instance.
 	 * 
 	 * @return The {@link ServerMock} instance or {@code null} if none is set up yet.
 	 */
