@@ -999,7 +999,7 @@ public class PlayerMockTest
 		player.setMaximumAir(10);
 		assertEquals(10, player.getMaximumAir());
 
-		// This can be negative to
+		// This can be negative too
 		player.setMaximumAir(-10);
 		assertEquals(-10, player.getMaximumAir());
 	}
