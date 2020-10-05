@@ -4,9 +4,12 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.logging.Level;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
@@ -75,6 +78,8 @@ public final class TagsMock
 
 		Pattern filePattern = Pattern.compile("\\.");
 		URL resource = MockBukkit.class.getClassLoader().getResource("tags/" + registry.getRegistry());
+
+		loadFileSystem(resource.toURI());
 		Path directory = Paths.get(resource.toURI());
 
 		// Iterate through all paths in that directory
@@ -103,6 +108,19 @@ public final class TagsMock
 			{
 				server.getLogger().log(Level.SEVERE, e, () -> "Failed to load Tag - " + tag.getKey());
 			}
+		}
+	}
+
+	@NotNull
+	private static FileSystem loadFileSystem(@NotNull URI uri) throws IOException
+	{
+		try
+		{
+			return FileSystems.newFileSystem(uri, Collections.emptyMap());
+		}
+		catch (IllegalArgumentException e)
+		{
+			return FileSystems.getDefault();
 		}
 	}
 
