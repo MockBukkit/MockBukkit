@@ -308,15 +308,22 @@ public class MockBukkit
 	 */
 	public static void unmock()
 	{
+		if (mock == null) 
+		{
+			// We aren't mocking anyway
+			return;
+		}
+		
 		try
 		{
 			mock.getScheduler().shutdown();
 		} finally
 		{
-			if (mock != null && mock.getPluginManager() != null)
+			if (mock.getPluginManager() != null)
 			{
 				mock.getPluginManager().disablePlugins();
 			}
+
 			mock.getPluginManager().unload();
 			setServerInstanceToNull();
 		}
