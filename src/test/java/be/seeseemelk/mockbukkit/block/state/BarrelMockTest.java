@@ -37,7 +37,7 @@ public class BarrelMockTest
 	}
 
 	@Test
-	public void testMaterialChestBlockState()
+	public void testMaterialBarrelBlockState()
 	{
 		Block block = new BlockMock(Material.BARREL);
 		assertTrue(block.getState() instanceof Barrel);

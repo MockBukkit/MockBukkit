@@ -75,6 +75,8 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.CachedServerIcon;
 import org.jetbrains.annotations.NotNull;
 
+import be.seeseemelk.mockbukkit.boss.BossBarMock;
+import be.seeseemelk.mockbukkit.boss.KeyedBossBarMock;
 import be.seeseemelk.mockbukkit.command.CommandResult;
 import be.seeseemelk.mockbukkit.command.ConsoleCommandSenderMock;
 import be.seeseemelk.mockbukkit.command.MessageTarget;
@@ -93,6 +95,9 @@ import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 import be.seeseemelk.mockbukkit.potion.MockPotionEffectType;
 import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
 import be.seeseemelk.mockbukkit.scoreboard.ScoreboardManagerMock;
+import be.seeseemelk.mockbukkit.tags.TagRegistry;
+import be.seeseemelk.mockbukkit.tags.TagWrapperMock;
+import be.seeseemelk.mockbukkit.tags.TagsMock;
 
 @SuppressWarnings("deprecation")
 public class ServerMock implements Server
@@ -103,13 +108,14 @@ public class ServerMock implements Server
 	private final Logger logger;
 	private final Thread mainThread;
 	private final MockUnsafeValues unsafe = new MockUnsafeValues();
-	private final Map<NamespacedKey, Tag<Material>> materialTags = new HashMap<>();
+	private final Map<String, TagRegistry> materialTags = new HashMap<>();
 
 	private final List<PlayerMock> players = new ArrayList<>();
 	private final Set<OfflinePlayer> offlinePlayers = new HashSet<>();
 	private final Set<EntityMock> entities = new HashSet<>();
 	private final List<World> worlds = new ArrayList<>();
 	private final List<Recipe> recipes = new LinkedList<>();
+	private final Map<NamespacedKey, KeyedBossBarMock> bossBars = new HashMap<>();
 	private final ItemFactory factory = new ItemFactoryMock();
 	private final PlayerMockFactory playerFactory = new PlayerMockFactory(this);
 	private final PluginManagerMock pluginManager = new PluginManagerMock(this);
@@ -129,6 +135,7 @@ public class ServerMock implements Server
 
 		// Register default Minecraft Potion Effect Types
 		createPotionEffectTypes();
+		TagsMock.loadDefaultTags(this, true);
 		EnchantmentsMock.registerDefaultEnchantments();
 
 		try
@@ -1214,8 +1221,8 @@ public class ServerMock implements Server
 	@Override
 	public BossBar createBossBar(String title, BarColor color, BarStyle style, BarFlag... flags)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		BossBar bar = new BossBarMock(title, color, style, flags);
+		return bar;
 	}
 
 	@Override
@@ -1283,26 +1290,37 @@ public class ServerMock implements Server
 	 * 
 	 * @return The newly created {@link Tag}
 	 */
-	public Tag<Material> createMaterialTag(NamespacedKey key, Material... materials)
+	public Tag<Material> createMaterialTag(NamespacedKey key, String registryKey, Material... materials)
 	{
 		Validate.notNull(key, "A NamespacedKey must never be null");
 
-		MockMaterialTag tag = new MockMaterialTag(key, materials);
-		materialTags.put(key, tag);
+		TagRegistry registry = materialTags.get(registryKey);
+		TagWrapperMock tag = new TagWrapperMock(registry, key);
+		registry.getTags().put(key, tag);
 		return tag;
+	}
+
+	public void addTagRegistry(@NotNull TagRegistry registry)
+	{
+		materialTags.put(registry.getRegistry(), registry);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T extends Keyed> Tag<T> getTag(String registry, NamespacedKey key, Class<T> clazz)
+	public <T extends Keyed> Tag<T> getTag(String registryKey, NamespacedKey key, Class<T> clazz)
 	{
 		if (clazz == Material.class)
 		{
-			Tag<Material> tag = materialTags.get(key);
+			TagRegistry registry = materialTags.get(registryKey);
 
-			if (tag != null)
+			if (registry != null)
 			{
-				return (Tag<T>) tag;
+				Tag<Material> tag = registry.getTags().get(key);
+
+				if (tag != null)
+				{
+					return (Tag<T>) tag;
+				}
 			}
 		}
 
@@ -1393,29 +1411,30 @@ public class ServerMock implements Server
 	@Override
 	public KeyedBossBar createBossBar(NamespacedKey key, String title, BarColor color, BarStyle style, BarFlag... flags)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Validate.notNull(key, "A NamespacedKey must never be null");
+		KeyedBossBarMock bar = new KeyedBossBarMock(key, title, color, style, flags);
+		bossBars.put(key, bar);
+		return bar;
 	}
 
 	@Override
 	public Iterator<KeyedBossBar> getBossBars()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return bossBars.values().stream().map(bossbar -> (KeyedBossBar) bossbar).iterator();
 	}
 
 	@Override
 	public KeyedBossBar getBossBar(NamespacedKey key)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Validate.notNull(key, "A NamespacedKey must never be null");
+		return bossBars.get(key);
 	}
 
 	@Override
 	public boolean removeBossBar(NamespacedKey key)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Validate.notNull(key, "A NamespacedKey must never be null");
+		return bossBars.remove(key, bossBars.get(key));
 	}
 
 	@Override

@@ -8,16 +8,16 @@ import org.jetbrains.annotations.NotNull;
 public class BarrelInventoryMock extends InventoryMock
 {
 
-	public BarrelInventoryMock(InventoryHolder holder, int size)
+	public BarrelInventoryMock(InventoryHolder holder)
 	{
-		super(holder, size, InventoryType.BARREL);
+		super(holder, 27, InventoryType.BARREL);
 	}
 
 	@Override
 	@NotNull
 	public Inventory getSnapshot()
 	{
-		Inventory inventory = new BarrelInventoryMock(getHolder(), getSize());
+		Inventory inventory = new BarrelInventoryMock(getHolder());
 		inventory.setContents(getContents());
 		return inventory;
 	}

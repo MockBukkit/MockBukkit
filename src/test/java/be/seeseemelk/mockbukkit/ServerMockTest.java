@@ -19,8 +19,6 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
-import org.bukkit.Tag;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
@@ -533,26 +531,6 @@ public class ServerMockTest
 	}
 
 	@Test
-	public void testCreateTag()
-	{
-		Tag<Material> tag = server.createMaterialTag(NamespacedKey.minecraft("diamonds"), Material.DIAMOND);
-		assertEquals(tag, server.getTag("items", tag.getKey(), Material.class));
-	}
-
-	@Test
-	public void testDefaultTags()
-	{
-		// This should correctly initialize the Tag constant
-		Tag<Material> tag = server.createMaterialTag(NamespacedKey.minecraft("beehives"), Material.BEEHIVE);
-		assertEquals(tag, Tag.BEEHIVES);
-
-		// These should just be null and NOT throw an exception
-		assertNull(Tag.BUTTONS);
-		assertNull(Tag.BEDS);
-		assertNull(Tag.BANNERS);
-	}
-
-	@Test
 	public void testDefaultPotionEffects()
 	{
 		assertEquals(32, PotionEffectType.values().length);
@@ -562,6 +540,8 @@ public class ServerMockTest
 			assertNotNull(type);
 		}
 	}
+
+	
 }
 
 class TestRecipe implements Recipe
