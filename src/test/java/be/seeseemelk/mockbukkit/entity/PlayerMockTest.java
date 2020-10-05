@@ -977,4 +977,30 @@ public class PlayerMockTest
 		Location location = new Location(world, 300, 100, 300);
 		world.spawnEntity(location, EntityType.PLAYER);
 	}
+
+	@Test
+	public void testSetRemainingAir()
+	{
+		player.setRemainingAir(10);
+		assertEquals(10, player.getRemainingAir());
+
+		// Just a note: you can set the remaining air above the maximum air
+		player.setRemainingAir(10000);
+		assertEquals(10000, player.getRemainingAir());
+
+		// And negative
+		player.setRemainingAir(-1);
+		assertEquals(-1, player.getRemainingAir());
+	}
+
+	@Test
+	public void testSetMaximumAir()
+	{
+		player.setMaximumAir(10);
+		assertEquals(10, player.getMaximumAir());
+
+		// This can be negative too
+		player.setMaximumAir(-10);
+		assertEquals(-10, player.getMaximumAir());
+	}
 }
