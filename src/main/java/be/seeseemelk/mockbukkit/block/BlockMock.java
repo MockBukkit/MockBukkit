@@ -344,15 +344,18 @@ public class BlockMock implements Block
 	@Override
 	public boolean breakNaturally()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (this.isEmpty())
+		{
+			return false;
+		}
+		this.setType(Material.AIR);
+		return true;
 	}
 
 	@Override
 	public boolean breakNaturally(ItemStack tool)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.breakNaturally();
 	}
 
 	@Override
