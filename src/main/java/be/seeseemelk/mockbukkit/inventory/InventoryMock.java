@@ -29,10 +29,19 @@ public class InventoryMock implements Inventory
 
 	public InventoryMock(InventoryHolder holder, int size, InventoryType type)
 	{
+		assertTrue(
+				"Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got " + size + ")",
+				9 <= size && size <= 54 && size % 9 == 0);
+
 		this.holder = holder;
 		this.type = type;
 
 		items = new ItemStack[size];
+	}
+
+	public InventoryMock(InventoryHolder holder, InventoryType type)
+	{
+		this(holder, type.getDefaultSize(), type);
 	}
 
 	/**

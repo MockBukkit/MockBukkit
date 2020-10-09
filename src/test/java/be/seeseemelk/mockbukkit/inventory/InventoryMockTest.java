@@ -46,6 +46,32 @@ public class InventoryMockTest
 	}
 
 	@Test
+	public void constructor_SetsSizeInvalid()
+	{
+		int errorCount = 0;
+
+		try {
+			new SimpleInventoryMock(null, -1, InventoryType.CHEST);
+		} catch(AssertionError e) {
+			errorCount++;
+		}
+
+		try {
+			new SimpleInventoryMock(null, 10, InventoryType.CHEST);
+		} catch(AssertionError e) {
+			errorCount++;
+		}
+
+		try {
+			new SimpleInventoryMock(null, 63, InventoryType.CHEST);
+		} catch(AssertionError e) {
+			errorCount++;
+		}
+
+		assertEquals(3, errorCount);
+	}
+
+	@Test
 	public void constructor_SetsType()
 	{
 		assertEquals(InventoryType.CHEST, new SimpleInventoryMock(null, 9, InventoryType.CHEST).getType());
