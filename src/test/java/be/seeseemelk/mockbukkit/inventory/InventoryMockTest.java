@@ -50,25 +50,34 @@ public class InventoryMockTest
 	{
 		int errorCount = 0;
 
-		try {
+		try
+		{
 			new SimpleInventoryMock(null, -1, InventoryType.CHEST);
 		} catch(AssertionError e) {
 			errorCount++;
 		}
 
-		try {
+		try
+		{
 			new SimpleInventoryMock(null, 10, InventoryType.CHEST);
 		} catch(AssertionError e) {
 			errorCount++;
 		}
 
-		try {
+		try
+		{
 			new SimpleInventoryMock(null, 63, InventoryType.CHEST);
 		} catch(AssertionError e) {
 			errorCount++;
 		}
 
 		assertEquals(3, errorCount);
+	}
+
+	@Test
+	public void constructor_SetsSizeTwoParamConstructor()
+	{
+		assertEquals(10, new SimpleInventoryMock(null, InventoryType.WORKBENCH).getSize());
 	}
 
 	@Test

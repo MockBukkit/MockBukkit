@@ -41,7 +41,10 @@ public class InventoryMock implements Inventory
 
 	public InventoryMock(InventoryHolder holder, InventoryType type)
 	{
-		this(holder, type.getDefaultSize(), type);
+		this.holder = holder;
+		this.type = type;
+
+		items = new ItemStack[type.getDefaultSize()];
 	}
 
 	/**
