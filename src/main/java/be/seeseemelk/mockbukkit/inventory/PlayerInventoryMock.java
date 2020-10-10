@@ -26,7 +26,7 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 
 	public PlayerInventoryMock(HumanEntity holder)
 	{
-		super(holder, 41, InventoryType.PLAYER);
+		super(holder, InventoryType.PLAYER);
 	}
 
 	@Override
