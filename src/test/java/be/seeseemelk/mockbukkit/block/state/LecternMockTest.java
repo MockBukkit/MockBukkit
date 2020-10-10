@@ -1,7 +1,10 @@
 package be.seeseemelk.mockbukkit.block.state;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.block.BlockMock;
 import org.bukkit.Material;
+import org.bukkit.block.Barrel;
+import org.bukkit.block.Block;
 import org.bukkit.block.Lectern;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
@@ -82,5 +85,12 @@ public class LecternMockTest {
 
         assertEquals(lectern, inventory.getHolder());
         assertEquals(InventoryType.LECTERN, inventory.getType());
+    }
+
+    @Test
+    public void testMaterialBarrelBlockState()
+    {
+        Block block = new BlockMock(Material.LECTERN);
+        assertTrue(block.getState() instanceof Lectern);
     }
 }

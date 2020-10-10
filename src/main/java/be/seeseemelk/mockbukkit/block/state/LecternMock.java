@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.block.state;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import be.seeseemelk.mockbukkit.inventory.LecternInventoryMock;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Lectern;
 import org.bukkit.inventory.ItemStack;
@@ -15,6 +16,11 @@ public class LecternMock extends ContainerMock implements Lectern {
 
     public LecternMock(@NotNull Material material) {
         super(material);
+    }
+
+    protected LecternMock(@NotNull Block block)
+    {
+        super(block);
     }
 
     protected LecternMock(@NotNull LecternMock state)

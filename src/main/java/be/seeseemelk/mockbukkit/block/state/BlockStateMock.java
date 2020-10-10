@@ -239,6 +239,8 @@ public class BlockStateMock implements BlockState, Cloneable
 	{
 		switch (block.getType())
 		{
+		case LECTERN:
+			return new LecternMock(block);
 		case BARREL:
 			return new BarrelMock(block);
 		case DISPENSER:
