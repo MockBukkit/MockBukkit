@@ -16,23 +16,27 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class LecternMockTest {
+public class LecternMockTest
+{
 
     private Lectern lectern;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() throws Exception
+    {
         MockBukkit.mock();
         lectern = new LecternMock(Material.LECTERN);
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() throws Exception
+    {
         MockBukkit.unmock();
     }
 
     @Test
-    public void testSetPageValid() {
+    public void testSetPageValid()
+    {
         //Given
         ItemStack book = new ItemStack(Material.WRITABLE_BOOK);
         BookMeta bookMeta = (BookMeta) book.getItemMeta();
@@ -51,7 +55,8 @@ public class LecternMockTest {
     }
 
     @Test
-    public void testSetPageInvalid() {
+    public void testSetPageInvalid()
+    {
         //Given
         ItemStack book = new ItemStack(Material.WRITABLE_BOOK);
         BookMeta bookMeta = (BookMeta) book.getItemMeta();
