@@ -21,4 +21,11 @@ public class SimpleInventoryMock extends InventoryMock
 		super(null, 9, InventoryType.CHEST);
 	}
 
+	/**
+	 * Creates a new inventory with size inherited from {@linkplain InventoryType#getDefaultSize()}.
+	 */
+	public SimpleInventoryMock(InventoryHolder holder, InventoryType type)
+	{
+		super(holder, type);
+	}
 }

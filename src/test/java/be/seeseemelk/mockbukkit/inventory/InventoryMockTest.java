@@ -45,6 +45,30 @@ public class InventoryMockTest
 		assertEquals(18, new SimpleInventoryMock(null, 18, InventoryType.CHEST).getSize());
 	}
 
+	@Test(expected = IllegalArgumentException.class)
+	public void constructor_SetsSizeTooSmall()
+	{
+		new SimpleInventoryMock(null, -1, InventoryType.CHEST);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void constructor_SetsSizeTooBig()
+	{
+		new SimpleInventoryMock(null, 63, InventoryType.CHEST);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void constructor_SetsSizeTooNotDivisibleByNine()
+	{
+		new SimpleInventoryMock(null, 10, InventoryType.CHEST);
+	}
+
+	@Test
+	public void constructor_SetsSizeTwoParamConstructor()
+	{
+		assertEquals(10, new SimpleInventoryMock(null, InventoryType.WORKBENCH).getSize());
+	}
+
 	@Test
 	public void constructor_SetsType()
 	{

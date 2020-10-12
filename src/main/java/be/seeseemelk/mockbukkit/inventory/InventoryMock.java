@@ -10,6 +10,7 @@ import java.util.ListIterator;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang.Validate;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
@@ -29,10 +30,21 @@ public class InventoryMock implements Inventory
 
 	public InventoryMock(InventoryHolder holder, int size, InventoryType type)
 	{
+		Validate.isTrue(9 <= size && size <= 54 && size % 9 == 0,
+				"Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got " + size + ")");
+
 		this.holder = holder;
 		this.type = type;
 
 		items = new ItemStack[size];
+	}
+
+	public InventoryMock(InventoryHolder holder, InventoryType type)
+	{
+		this.holder = holder;
+		this.type = type;
+
+		items = new ItemStack[type.getDefaultSize()];
 	}
 
 	/**
