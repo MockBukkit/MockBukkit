@@ -22,9 +22,7 @@ import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.ScoreboardManager;
@@ -236,13 +234,6 @@ public class ServerMockTest
 	public void getConsoleSender_NotNull()
 	{
 		assertNotNull(server.getConsoleSender());
-	}
-
-	@Test
-	public void createInventory_PlayerTypeNoHolder_PlayerInventory()
-	{
-		Inventory inventory = server.createInventory(null, InventoryType.PLAYER);
-		assertTrue(inventory instanceof PlayerInventory);
 	}
 
 	@Test
