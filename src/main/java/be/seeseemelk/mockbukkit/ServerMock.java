@@ -562,7 +562,7 @@ public class ServerMock implements Server
 	{
 		assertMainThread();
 
-		if (type.isCreatable())
+		if (!type.isCreatable())
 		{
 			throw new IllegalArgumentException("Inventory Type is not creatable!");
 		}
