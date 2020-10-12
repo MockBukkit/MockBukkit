@@ -85,11 +85,17 @@ import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
+import be.seeseemelk.mockbukkit.inventory.BarrelInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.ChestInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.DispenserInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.DropperInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.HopperInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import be.seeseemelk.mockbukkit.inventory.ItemFactoryMock;
+import be.seeseemelk.mockbukkit.inventory.LecternInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.ShulkerBoxInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
 import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 import be.seeseemelk.mockbukkit.potion.MockPotionEffectType;
@@ -555,18 +561,67 @@ public class ServerMock implements Server
 	public InventoryMock createInventory(InventoryHolder owner, InventoryType type, String title, int size)
 	{
 		assertMainThread();
-		InventoryMock inventory;
+
+		if (type.isCreatable())
+		{
+			throw new IllegalArgumentException("Inventory Type is not creatable!");
+		}
+
 		switch (type)
 		{
-		case PLAYER:
-			inventory = new PlayerInventoryMock((HumanEntity) owner);
-			return inventory;
 		case CHEST:
-			inventory = new ChestInventoryMock(owner, size > 0 ? size : 9 * 3);
-			return inventory;
+			return new ChestInventoryMock(owner, size > 0 ? size : 9 * 3);
+		case DISPENSER:
+			return new DispenserInventoryMock(owner);
+		case DROPPER:
+			return new DropperInventoryMock(owner);
+		case PLAYER:
+			if (owner instanceof HumanEntity)
+			{
+				return new PlayerInventoryMock((HumanEntity) owner);
+			}
+			else
+			{
+				throw new IllegalArgumentException(
+						"Cannot create a Player Inventory for: " + owner.getClass().getSimpleName());
+			}
 		case ENDER_CHEST:
-			inventory = new EnderChestInventoryMock(owner);
-			return inventory;
+			return new EnderChestInventoryMock(owner);
+		case HOPPER:
+			return new HopperInventoryMock(owner);
+		case SHULKER_BOX:
+			return new ShulkerBoxInventoryMock(owner);
+		case BARREL:
+			return new BarrelInventoryMock(owner);
+		case LECTERN:
+			return new LecternInventoryMock(owner);
+		case GRINDSTONE:
+			// TODO: This Inventory Type needs to be implemented
+		case STONECUTTER:
+			// TODO: This Inventory Type needs to be implemented
+		case CARTOGRAPHY:
+			// TODO: This Inventory Type needs to be implemented
+		case SMOKER:
+			// TODO: This Inventory Type needs to be implemented
+		case LOOM:
+			// TODO: This Inventory Type needs to be implemented
+		case BLAST_FURNACE:
+			// TODO: This Inventory Type needs to be implemented
+		case ANVIL:
+			// TODO: This Inventory Type needs to be implemented
+		case SMITHING:
+			// TODO: This Inventory Type needs to be implemented
+		case BEACON:
+			// TODO: This Inventory Type needs to be implemented
+		case FURNACE:
+			// TODO: This Inventory Type needs to be implemented
+		case WORKBENCH:
+			// TODO: This Inventory Type needs to be implemented
+		case ENCHANTING:
+			// TODO: This Inventory Type needs to be implemented
+		case BREWING:
+			// TODO: This Inventory Type needs to be implemented
+			throw new UnimplementedOperationException("Inventory type not yet supported");
 		default:
 			throw new UnimplementedOperationException("Inventory type not yet supported");
 		}

@@ -241,6 +241,8 @@ public class BlockStateMock implements BlockState, Cloneable
 		{
 		case LECTERN:
 			return new LecternMock(block);
+		case HOPPER:
+			return new HopperMock(block);
 		case BARREL:
 			return new BarrelMock(block);
 		case DISPENSER:
