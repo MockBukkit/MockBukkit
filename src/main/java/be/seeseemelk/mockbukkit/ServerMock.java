@@ -582,8 +582,7 @@ public class ServerMock implements Server
 			}
 			else
 			{
-				throw new IllegalArgumentException(
-						"Cannot create a Player Inventory for: " + owner);
+				throw new IllegalArgumentException("Cannot create a Player Inventory for: " + owner);
 			}
 		case ENDER_CHEST:
 			return new EnderChestInventoryMock(owner);
@@ -621,7 +620,6 @@ public class ServerMock implements Server
 			// TODO: This Inventory Type needs to be implemented
 		case BREWING:
 			// TODO: This Inventory Type needs to be implemented
-			throw new UnimplementedOperationException("Inventory type not yet supported");
 		default:
 			throw new UnimplementedOperationException("Inventory type not yet supported");
 		}
