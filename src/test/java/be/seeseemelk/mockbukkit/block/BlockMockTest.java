@@ -174,4 +174,12 @@ public class BlockMockTest
 		block.setType(Material.STONE);
 		assertFalse(block.isEmpty());
 	}
+
+	@Test
+	public void testBreakNaturally()
+	{
+		block.setType(Material.STONE);
+		block.breakNaturally();
+		assertTrue(block.isEmpty());
+	}
 }
