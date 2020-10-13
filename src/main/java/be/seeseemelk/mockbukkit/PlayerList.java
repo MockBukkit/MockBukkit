@@ -8,27 +8,27 @@ import org.bukkit.BanList;
 public class PlayerList
 {
 
-	private int maxPlayers = Integer.MAX_VALUE;
-	private BanList ipBans = new MockBanList();
-	private BanList profileBans = new MockBanList();
+    private int maxPlayers = Integer.MAX_VALUE;
+    private BanList ipBans = new MockBanList();
+    private BanList profileBans = new MockBanList();
 
-	public void setMaxPlayers(int maxPlayers)
-	{
-		this.maxPlayers = maxPlayers;
-	}
+    public void setMaxPlayers(int maxPlayers)
+    {
+        this.maxPlayers = maxPlayers;
+    }
 
-	public int getMaxPlayers()
-	{
-		return this.maxPlayers;
-	}
+    public int getMaxPlayers()
+    {
+        return this.maxPlayers;
+    }
 
-	public BanList getIPBans()
-	{
-		return this.ipBans;
-	}
+    public BanList getIPBans()
+    {
+        return this.ipBans;
+    }
 
-	public BanList getProfileBans()
-	{
-		return this.profileBans;
-	}
+    public BanList getProfileBans()
+    {
+        return this.profileBans;
+    }
 }

@@ -7,8 +7,8 @@ import java.util.UUID;
 
 public abstract class CreatureMock extends MobMock implements Creature
 {
-	public CreatureMock(ServerMock server, UUID uuid)
-	{
-		super(server, uuid);
-	}
+    public CreatureMock(ServerMock server, UUID uuid)
+    {
+        super(server, uuid);
+    }
 }

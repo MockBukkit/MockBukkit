@@ -15,12 +15,12 @@ public class LecternInventoryMock extends InventoryMock
         super(holder, InventoryType.LECTERN);
     }
 
-	@Override
-	@NotNull
-	public Inventory getSnapshot()
-	{
-		Inventory inventory = new LecternInventoryMock(getHolder());
-		inventory.setContents(getContents());
-		return inventory;
-	}
+    @Override
+    @NotNull
+    public Inventory getSnapshot()
+    {
+        Inventory inventory = new LecternInventoryMock(getHolder());
+        inventory.setContents(getContents());
+        return inventory;
+    }
 }

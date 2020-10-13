@@ -1,9 +1,5 @@
 package be.seeseemelk.mockbukkit.boss;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-
 import org.apache.commons.lang.Validate;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarFlag;
@@ -12,7 +8,12 @@ import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class BossBarMock implements BossBar {
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+
+public class BossBarMock implements BossBar
+{
 
     private String title = null;
     private BarColor color = null;
@@ -27,11 +28,12 @@ public class BossBarMock implements BossBar {
         this.title = title;
         this.color = color;
         this.style = style;
-        for (BarFlag flag : flags) {
+        for (BarFlag flag : flags)
+        {
             addFlag(flag);
         }
     }
-    
+
 
     @Override
     public String getTitle()
@@ -90,7 +92,8 @@ public class BossBarMock implements BossBar {
     @Override
     public void setProgress(double progress)
     {
-        if (progress > 1.0 || progress < 0) {
+        if (progress > 1.0 || progress < 0)
+        {
             throw new IllegalArgumentException("Progress must be between 0.0 and 1.0");
         }
         this.progress = progress;
@@ -153,5 +156,5 @@ public class BossBarMock implements BossBar {
     {
         setVisible(false);
     }
-    
+
 }

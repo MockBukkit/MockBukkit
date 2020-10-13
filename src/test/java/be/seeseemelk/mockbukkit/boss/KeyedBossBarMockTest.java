@@ -1,42 +1,40 @@
 package be.seeseemelk.mockbukkit.boss;
 
-import org.junit.Test;
-import org.junit.After;
-import org.junit.Before;
-
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
-
+import com.google.common.collect.Iterators;
 import org.bukkit.NamespacedKey;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.KeyedBossBar;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
-import com.google.common.collect.Iterators;
+import static org.junit.Assert.*;
 
-public class KeyedBossBarMockTest {
+public class KeyedBossBarMockTest
+{
     private ServerMock server;
 
     @Before
-    public void setUp() {
+    public void setUp()
+    {
         server = MockBukkit.mock();
     }
 
     @After
-    public void tearDown() {
+    public void tearDown()
+    {
         MockBukkit.unmock();
     }
 
     @Test
     @SuppressWarnings("deprecation")
-    public void testKeyedBossBar() 
+    public void testKeyedBossBar()
     {
         KeyedBossBar bar = server.createBossBar(new NamespacedKey("mockbukkittest", "bossbar1"), "Boss bar 1",
-                BarColor.WHITE, BarStyle.SEGMENTED_10);
+                                                BarColor.WHITE, BarStyle.SEGMENTED_10);
         assertNotNull(bar);
 
         // Make sure it initalized correctly
@@ -57,7 +55,7 @@ public class KeyedBossBarMockTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testNullKey() 
+    public void testNullKey()
     {
         server.createBossBar(null, "Boss bar 1", BarColor.WHITE, BarStyle.SEGMENTED_10);
     }

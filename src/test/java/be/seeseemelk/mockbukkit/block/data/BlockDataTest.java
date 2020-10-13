@@ -4,7 +4,8 @@ import org.bukkit.Material;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class BlockDataTest {
+public class BlockDataTest
+{
 
     @Test
     public void testMatches()

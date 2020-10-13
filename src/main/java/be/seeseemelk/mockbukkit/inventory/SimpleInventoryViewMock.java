@@ -7,18 +7,18 @@ import org.bukkit.inventory.Inventory;
 public class SimpleInventoryViewMock extends InventoryViewMock
 {
 
-	public SimpleInventoryViewMock(HumanEntity player, Inventory top, Inventory bottom, InventoryType type)
-	{
-		super(player, "Inventory", top, bottom, type);
-	}
+    public SimpleInventoryViewMock(HumanEntity player, Inventory top, Inventory bottom, InventoryType type)
+    {
+        super(player, "Inventory", top, bottom, type);
+    }
 
-	/**
-	 * Creates a very simple mock {@code IntventoryView} with as player, top,
-	 * and bottom {@code null}, and as type {@code InventoryType.CHEST}.
-	 */
-	public SimpleInventoryViewMock()
-	{
-		this(null, null, null, InventoryType.CHEST);
-	}
+    /**
+     * Creates a very simple mock {@code IntventoryView} with as player, top,
+     * and bottom {@code null}, and as type {@code InventoryType.CHEST}.
+     */
+    public SimpleInventoryViewMock()
+    {
+        this(null, null, null, InventoryType.CHEST);
+    }
 
 }

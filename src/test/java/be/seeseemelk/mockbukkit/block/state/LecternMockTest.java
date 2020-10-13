@@ -1,9 +1,7 @@
 package be.seeseemelk.mockbukkit.block.state;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.block.BlockMock;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Lectern;
@@ -15,89 +13,88 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.block.BlockMock;
+import static org.junit.Assert.*;
 
 public class LecternMockTest
 {
 
-	private Lectern lectern;
+    private Lectern lectern;
 
-	@Before
-	public void setUp() throws Exception
-	{
-		MockBukkit.mock();
-		lectern = new LecternMock(Material.LECTERN);
-	}
+    @Before
+    public void setUp() throws Exception
+    {
+        MockBukkit.mock();
+        lectern = new LecternMock(Material.LECTERN);
+    }
 
-	@After
-	public void tearDown() throws Exception
-	{
-		MockBukkit.unmock();
-	}
+    @After
+    public void tearDown() throws Exception
+    {
+        MockBukkit.unmock();
+    }
 
-	@Test
-	public void testSetPageValid()
-	{
-		// Given
-		ItemStack book = new ItemStack(Material.WRITABLE_BOOK);
-		BookMeta bookMeta = (BookMeta) book.getItemMeta();
+    @Test
+    public void testSetPageValid()
+    {
+        // Given
+        ItemStack book = new ItemStack(Material.WRITABLE_BOOK);
+        BookMeta bookMeta = (BookMeta) book.getItemMeta();
 
-		bookMeta.addPage("ABC", "DEF", "GHI", "JKL");
+        bookMeta.addPage("ABC", "DEF", "GHI", "JKL");
 
-		book.setItemMeta(bookMeta);
+        book.setItemMeta(bookMeta);
 
-		lectern.getInventory().addItem(book);
+        lectern.getInventory().addItem(book);
 
-		// When
-		lectern.setPage(2);
+        // When
+        lectern.setPage(2);
 
-		// Then
-		assertEquals(2, lectern.getPage());
-	}
+        // Then
+        assertEquals(2, lectern.getPage());
+    }
 
-	@Test
-	public void testSetPageInvalid()
-	{
-		// Given
-		ItemStack book = new ItemStack(Material.WRITABLE_BOOK);
-		BookMeta bookMeta = (BookMeta) book.getItemMeta();
+    @Test
+    public void testSetPageInvalid()
+    {
+        // Given
+        ItemStack book = new ItemStack(Material.WRITABLE_BOOK);
+        BookMeta bookMeta = (BookMeta) book.getItemMeta();
 
-		bookMeta.addPage("ABC", "DEF", "GHI", "JKL");
+        bookMeta.addPage("ABC", "DEF", "GHI", "JKL");
 
-		book.setItemMeta(bookMeta);
+        book.setItemMeta(bookMeta);
 
-		lectern.getInventory().addItem(book);
+        lectern.getInventory().addItem(book);
 
-		// When
-		lectern.setPage(-1);
-		int negativePage = lectern.getPage();
+        // When
+        lectern.setPage(-1);
+        int negativePage = lectern.getPage();
 
-		lectern.setPage(5);
-		int maxPage = lectern.getPage();
+        lectern.setPage(5);
+        int maxPage = lectern.getPage();
 
-		// Then
-		assertEquals(0, negativePage);
-		assertEquals(3, maxPage);
-	}
+        // Then
+        assertEquals(0, negativePage);
+        assertEquals(3, maxPage);
+    }
 
-	@Test
-	public void testHasInventory()
-	{
-		// When
-		Inventory inventory = lectern.getInventory();
+    @Test
+    public void testHasInventory()
+    {
+        // When
+        Inventory inventory = lectern.getInventory();
 
-		// Then
-		assertNotNull(inventory);
+        // Then
+        assertNotNull(inventory);
 
-		assertEquals(lectern, inventory.getHolder());
-		assertEquals(InventoryType.LECTERN, inventory.getType());
-	}
+        assertEquals(lectern, inventory.getHolder());
+        assertEquals(InventoryType.LECTERN, inventory.getType());
+    }
 
-	@Test
-	public void testMaterialBarrelBlockState()
-	{
-		Block block = new BlockMock(Material.LECTERN);
-		assertTrue(block.getState() instanceof Lectern);
-	}
+    @Test
+    public void testMaterialBarrelBlockState()
+    {
+        Block block = new BlockMock(Material.LECTERN);
+        assertTrue(block.getState() instanceof Lectern);
+    }
 }

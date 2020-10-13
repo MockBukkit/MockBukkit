@@ -1,94 +1,97 @@
 package be.seeseemelk.mockbukkit.scheduler;
 
-import java.util.concurrent.CancellationException;
-
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
 
+import java.util.concurrent.CancellationException;
+
 public class ScheduledTask implements BukkitTask
 {
-	private int id;
-	private Plugin plugin;
-	private boolean isSync;
-	private boolean isCancelled = false;
-	private long scheduledTick;
-	private Runnable runnable;
+    private int id;
+    private Plugin plugin;
+    private boolean isSync;
+    private boolean isCancelled = false;
+    private long scheduledTick;
+    private Runnable runnable;
 
-	public ScheduledTask(int id, Plugin plugin, boolean isSync, long scheduledTick, Runnable runnable)
-	{
-		this.id = id;
-		this.plugin = plugin;
-		this.isSync = isSync;
-		this.scheduledTick = scheduledTick;
-		this.runnable = runnable;
-	}
-	
-	/**
-	 * Get the tick at which the task is scheduled to run at.
-	 * @return The tick the task is scheduled to run at.
-	 */
-	public long getScheduledTick()
-	{
-		return scheduledTick;
-	}
-	
-	/**
-	 * Sets the tick at which the task is scheduled to run at.
-	 * @param scheduledTick The tick at which the task is scheduled to run at.
-	 */
-	protected void setScheduledTick(long scheduledTick)
-	{
-		this.scheduledTick = scheduledTick;
-	}
+    public ScheduledTask(int id, Plugin plugin, boolean isSync, long scheduledTick, Runnable runnable)
+    {
+        this.id = id;
+        this.plugin = plugin;
+        this.isSync = isSync;
+        this.scheduledTick = scheduledTick;
+        this.runnable = runnable;
+    }
 
-	/**
-	 * Get the task itself that will be ran.
-	 * @return The task that will be ran.
-	 */
-	public Runnable getRunnable()
-	{
-		return runnable;
-	}
-	
-	/**
-	 * Runs the task if it has not been cancelled.
-	 */
-	public void run()
-	{
-		if (!isCancelled())
-			runnable.run();
-		else
-			throw new CancellationException("Task is cancelled");
-	}
+    /**
+     * Get the tick at which the task is scheduled to run at.
+     *
+     * @return The tick the task is scheduled to run at.
+     */
+    public long getScheduledTick()
+    {
+        return scheduledTick;
+    }
 
-	@Override
-	public int getTaskId()
-	{
-		return id;
-	}
+    /**
+     * Sets the tick at which the task is scheduled to run at.
+     *
+     * @param scheduledTick The tick at which the task is scheduled to run at.
+     */
+    protected void setScheduledTick(long scheduledTick)
+    {
+        this.scheduledTick = scheduledTick;
+    }
 
-	@Override
-	public Plugin getOwner()
-	{
-		return plugin;
-	}
+    /**
+     * Get the task itself that will be ran.
+     *
+     * @return The task that will be ran.
+     */
+    public Runnable getRunnable()
+    {
+        return runnable;
+    }
 
-	@Override
-	public boolean isSync()
-	{
-		return isSync;
-	}
+    /**
+     * Runs the task if it has not been cancelled.
+     */
+    public void run()
+    {
+        if (!isCancelled())
+            runnable.run();
+        else
+            throw new CancellationException("Task is cancelled");
+    }
 
-	@Override
-	public boolean isCancelled()
-	{
-		return isCancelled;
-	}
+    @Override
+    public int getTaskId()
+    {
+        return id;
+    }
 
-	@Override
-	public void cancel()
-	{
-		isCancelled = true;
-	}
+    @Override
+    public Plugin getOwner()
+    {
+        return plugin;
+    }
+
+    @Override
+    public boolean isSync()
+    {
+        return isSync;
+    }
+
+    @Override
+    public boolean isCancelled()
+    {
+        return isCancelled;
+    }
+
+    @Override
+    public void cancel()
+    {
+        isCancelled = true;
+    }
 
 }

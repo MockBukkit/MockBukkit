@@ -1,50 +1,47 @@
 package be.seeseemelk.mockbukkit.boss;
 
-import org.bukkit.boss.BossBar;
-import org.bukkit.entity.Player;
-import org.junit.Before;
-import org.junit.After;
-import org.junit.Test;
-
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
-
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarFlag;
 import org.bukkit.boss.BarStyle;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import org.bukkit.boss.BossBar;
+import org.bukkit.entity.Player;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
-public class BossBarMockTest {
+import static org.junit.Assert.*;
+
+public class BossBarMockTest
+{
     private ServerMock server;
     private BossBar bar;
 
     @Before
-    public void setUp() 
+    public void setUp()
     {
         server = MockBukkit.mock();
         bar = server.createBossBar("Test bossbar", BarColor.BLUE, BarStyle.SOLID, BarFlag.PLAY_BOSS_MUSIC,
-        BarFlag.CREATE_FOG);
+                                   BarFlag.CREATE_FOG);
     }
 
     @After
-    public void tearDown() 
+    public void tearDown()
     {
         MockBukkit.unmock();
     }
 
     @Test
-    public void testBossBarNotNull() 
+    public void testBossBarNotNull()
     {
         assertNotNull(bar);
     }
 
 
     @Test
-    public void testFlags() 
+    public void testFlags()
     {
         assertTrue(bar.hasFlag(BarFlag.PLAY_BOSS_MUSIC));
         assertTrue(bar.hasFlag(BarFlag.CREATE_FOG));
@@ -81,7 +78,8 @@ public class BossBarMockTest {
     }
 
     @Test
-    public void testBarStyle() {
+    public void testBarStyle()
+    {
         assertEquals(BarStyle.SOLID, bar.getStyle());
 
         bar.setStyle(BarStyle.SEGMENTED_10);

@@ -8,93 +8,93 @@ import org.jetbrains.annotations.NotNull;
 
 public class EnchantmentMock extends Enchantment
 {
-	private String name;
-	private int maxLevel;
-	private int startLevel;
-	private EnchantmentTarget itemTarget;
-	private boolean isTreasure;
-	private boolean isCursed;
+    private String name;
+    private int maxLevel;
+    private int startLevel;
+    private EnchantmentTarget itemTarget;
+    private boolean isTreasure;
+    private boolean isCursed;
 
-	public EnchantmentMock(
-			@NotNull NamespacedKey key,
-			String name
-	)
-	{
-		super(key);
-		this.name = name;
-	}
+    public EnchantmentMock(
+            @NotNull NamespacedKey key,
+            String name
+    )
+    {
+        super(key);
+        this.name = name;
+    }
 
-	@Override
-	public @NotNull String getName()
-	{
-		return name;
-	}
+    @Override
+    public @NotNull String getName()
+    {
+        return name;
+    }
 
-	@Override
-	public int getMaxLevel()
-	{
-		return maxLevel;
-	}
-	
-	public void setMaxLevel(int maxLevel)
-	{
-		this.maxLevel = maxLevel;
-	}
+    @Override
+    public int getMaxLevel()
+    {
+        return maxLevel;
+    }
 
-	@Override
-	public int getStartLevel()
-	{
-		return startLevel;
-	}
-	
-	public void setStartLevel(int startLevel)
-	{
-		this.startLevel = startLevel;
-	}
+    public void setMaxLevel(int maxLevel)
+    {
+        this.maxLevel = maxLevel;
+    }
 
-	@Override
-	public @NotNull EnchantmentTarget getItemTarget()
-	{
-		return itemTarget;
-	}
-	
-	public void setItemTarget(EnchantmentTarget itemTarget)
-	{
-		this.itemTarget = itemTarget;
-	}
+    @Override
+    public int getStartLevel()
+    {
+        return startLevel;
+    }
 
-	@Override
-	public boolean isTreasure()
-	{
-		return isTreasure;
-	}
-	
-	public void setTreasure(boolean isTreasure)
-	{
-		this.isTreasure = isTreasure;
-	}
+    public void setStartLevel(int startLevel)
+    {
+        this.startLevel = startLevel;
+    }
 
-	@Override
-	public boolean isCursed()
-	{
-		return isCursed;
-	}
-	
-	public void setCursed(boolean isCursed)
-	{
-		this.isCursed = isCursed;
-	}
+    @Override
+    public @NotNull EnchantmentTarget getItemTarget()
+    {
+        return itemTarget;
+    }
 
-	@Override
-	public boolean conflictsWith(@NotNull Enchantment other)
-	{
-		return false;
-	}
+    public void setItemTarget(EnchantmentTarget itemTarget)
+    {
+        this.itemTarget = itemTarget;
+    }
 
-	@Override
-	public boolean canEnchantItem(@NotNull ItemStack item)
-	{
-		return false;
-	}
+    @Override
+    public boolean isTreasure()
+    {
+        return isTreasure;
+    }
+
+    public void setTreasure(boolean isTreasure)
+    {
+        this.isTreasure = isTreasure;
+    }
+
+    @Override
+    public boolean isCursed()
+    {
+        return isCursed;
+    }
+
+    public void setCursed(boolean isCursed)
+    {
+        this.isCursed = isCursed;
+    }
+
+    @Override
+    public boolean conflictsWith(@NotNull Enchantment other)
+    {
+        return false;
+    }
+
+    @Override
+    public boolean canEnchantItem(@NotNull ItemStack item)
+    {
+        return false;
+    }
 
 }

@@ -8,18 +8,18 @@ import org.jetbrains.annotations.NotNull;
 public class DispenserInventoryMock extends InventoryMock
 {
 
-	public DispenserInventoryMock(InventoryHolder holder)
-	{
-		super(holder, 9, InventoryType.DISPENSER);
-	}
+    public DispenserInventoryMock(InventoryHolder holder)
+    {
+        super(holder, 9, InventoryType.DISPENSER);
+    }
 
-	@Override
-	@NotNull
-	public Inventory getSnapshot()
-	{
-		Inventory inventory = new DispenserInventoryMock(getHolder());
-		inventory.setContents(getContents());
-		return inventory;
-	}
+    @Override
+    @NotNull
+    public Inventory getSnapshot()
+    {
+        Inventory inventory = new DispenserInventoryMock(getHolder());
+        inventory.setContents(getContents());
+        return inventory;
+    }
 
 }
