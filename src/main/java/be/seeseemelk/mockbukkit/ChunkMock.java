@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit;
 
 import java.util.Collection;
 
+import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Chunk;
 import org.bukkit.ChunkSnapshot;
@@ -10,6 +11,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Entity;
+import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.plugin.Plugin;
 
 public class ChunkMock implements Chunk
@@ -18,6 +20,7 @@ public class ChunkMock implements Chunk
 	private final int x;
 	private final int z;
 	private boolean loaded = true;
+	private final PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
 
 	protected ChunkMock(final World world, final int x, final int z)
 	{
@@ -48,7 +51,7 @@ public class ChunkMock implements Chunk
 	public Block getBlock(int x, int y, int z)
 	{
 		Validate.isTrue(x >= 0 && x <= 15, "x is out of range (expected 0-15)");
-		Validate.isTrue(x >= 0 && x <= 255, "y is out of range (expected 0-255)");
+		Validate.isTrue(y >= 0 && y <= 255, "y is out of range (expected 0-255)");
 		Validate.isTrue(z >= 0 && z <= 15, "z is out of range (expected 0-15)");
 		return world.getBlockAt(x << 4, y, z << 4);
 	}
@@ -196,4 +199,9 @@ public class ChunkMock implements Chunk
 		throw new UnimplementedOperationException();
 	}
 
+	@Override
+	public PersistentDataContainer getPersistentDataContainer()
+	{
+		return persistentDataContainer;
+	}
 }

@@ -905,7 +905,14 @@ public class PlayerMock extends LivingEntityMock implements Player
 	}
 
 	@Override
-	public void sendRawMessage(String message)
+	public void sendRawMessage(@Nullable String message)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void sendRawMessage(@Nullable UUID sender, @NotNull String message)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

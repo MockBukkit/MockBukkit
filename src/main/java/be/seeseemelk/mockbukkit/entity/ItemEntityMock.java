@@ -5,6 +5,7 @@ import java.util.UUID;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
 
 import be.seeseemelk.mockbukkit.ServerMock;
@@ -60,6 +61,34 @@ public class ItemEntityMock extends EntityMock implements Item
 	public void setPickupDelay(int delay)
 	{
 		this.delay = Math.min(delay, 32767);
+	}
+
+	@Override
+	public void setOwner(@Nullable UUID owner)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable UUID getOwner()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setThrower(@Nullable UUID thrower)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable UUID getThrower()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
