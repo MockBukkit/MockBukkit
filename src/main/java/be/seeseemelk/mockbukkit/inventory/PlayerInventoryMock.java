@@ -134,9 +134,9 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	}
 
 	@Override
-	public ItemStack getItemInMainHand()
+	public @NotNull ItemStack getItemInMainHand()
 	{
-		return getItem(SLOT_BAR + mainHandSlot);
+		return notNull(getItem(SLOT_BAR + mainHandSlot));
 	}
 
 	@Override
@@ -146,9 +146,9 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	}
 
 	@Override
-	public ItemStack getItemInOffHand()
+	public @NotNull ItemStack getItemInOffHand()
 	{
-		return getItem(OFF_HAND);
+		return notNull(getItem(OFF_HAND));
 	}
 
 	@Override
@@ -160,7 +160,7 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 
 	@Deprecated
 	@Override
-	public ItemStack getItemInHand()
+	public @NotNull ItemStack getItemInHand()
 	{
 		return getItemInMainHand();
 	}
@@ -173,8 +173,18 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 
 	}
 
+	/**
+	 * Gets the {@link ItemStack} at the given equipment slot in the inventory.
+	 *
+	 * <p>Implementation note: only the contents of the main hand
+	 * and the off hand are guaranteed not to be {@code null},
+	 * despite the annotation present in the Bukkit api.</p>
+	 *
+	 * @param slot the slot to get the {@link ItemStack}
+	 * @return the {@link ItemStack} in the given slot
+	 */
 	@Override
-	public @NotNull ItemStack getItem(@NotNull EquipmentSlot slot)
+	public @Nullable ItemStack getItem(@NotNull EquipmentSlot slot)
 	{
 		switch (slot)
 		{
@@ -235,5 +245,10 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 		if (slot < 0 || slot > 8)
 			throw new ArrayIndexOutOfBoundsException("Slot should be within [0-8] (was: " + slot + ")");
 		mainHandSlot = slot;
+	}
+
+	private @NotNull ItemStack notNull(@Nullable ItemStack itemStack)
+	{
+		return itemStack == null ? new ItemStack(Material.AIR) : itemStack;
 	}
 }

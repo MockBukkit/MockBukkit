@@ -13,6 +13,7 @@ import org.bukkit.plugin.Plugin;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Set;
+import java.util.UUID;
 
 public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTarget
 {
@@ -21,11 +22,23 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	@Override
 	public void sendMessage(String message)
 	{
-		messages.add(message);
+		sendMessage(null, message);
 	}
-	
+
 	@Override
 	public void sendMessage(String[] messages)
+	{
+		sendMessage(null, messages);
+	}
+
+	@Override
+	public void sendMessage(UUID sender, String message)
+	{
+		messages.add(message);
+	}
+
+	@Override
+	public void sendMessage(UUID sender, String[] messages)
 	{
 		for (String message : messages)
 		{
@@ -181,6 +194,12 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	
 	@Override
 	public void sendRawMessage(String message)
+	{
+		sendRawMessage(null, message);
+	}
+
+	@Override
+	public void sendRawMessage(UUID sender, String message)
 	{
 		messages.add(message);
 	}

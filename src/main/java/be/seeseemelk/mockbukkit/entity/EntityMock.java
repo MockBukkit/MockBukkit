@@ -272,11 +272,23 @@ public abstract class EntityMock implements Entity, MessageTarget
 	@Override
 	public void sendMessage(String message)
 	{
-		messages.add(message);
+		sendMessage(null, message);
 	}
 
 	@Override
 	public void sendMessage(String[] messages)
+	{
+		sendMessage(null, messages);
+	}
+
+	@Override
+	public void sendMessage(UUID sender, String message)
+	{
+		messages.add(message);
+	}
+
+	@Override
+	public void sendMessage(UUID sender, String[] messages)
 	{
 		for (String message : messages)
 		{

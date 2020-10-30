@@ -1,9 +1,12 @@
 package be.seeseemelk.mockbukkit.inventory;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 
 import org.bukkit.Material;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.junit.After;
 import org.junit.Before;
@@ -256,6 +259,19 @@ public class PlayerInventoryMockTest
 		inventory.setExtraContents(new ItemStack[2]);
 	}
 
+	@Test
+	public void getItem_Nullability()
+	{
+		inventory.setItemInMainHand(null);
+		inventory.setItemInOffHand(null);
+		inventory.setChestplate(null);
+		assertNotNull(inventory.getItem(EquipmentSlot.HAND));
+		assertNotNull(inventory.getItemInMainHand());
+		assertNotNull(inventory.getItem(EquipmentSlot.OFF_HAND));
+		assertNotNull(inventory.getItemInOffHand());
+		assertNull(inventory.getItem(EquipmentSlot.CHEST));
+		assertNull(inventory.getChestplate());
+	}
 }
 
 
