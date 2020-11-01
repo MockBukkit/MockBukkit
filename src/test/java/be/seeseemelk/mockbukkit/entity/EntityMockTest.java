@@ -323,7 +323,8 @@ public class EntityMockTest
 	}
 
 	@Test
-	public void setFireTicks() {
+	public void setFireTicks()
+	{
 		entity.setFireTicks(10);
 		assertEquals(10, entity.getFireTicks());
 	}
