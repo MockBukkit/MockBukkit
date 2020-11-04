@@ -327,20 +327,12 @@ public class InventoryMock implements Inventory
 	@Override
 	public boolean contains(ItemStack item, int amount)
 	{
-		if (amount < 0)
-		{
-			throw new IllegalArgumentException("Amount cannot be less than 0.");
-		}
 		return getNumberOfItems(item) == amount;
 	}
 
 	@Override
 	public boolean containsAtLeast(ItemStack item, int amount)
 	{
-		if (amount < 0)
-		{
-			throw new IllegalArgumentException("Amount cannot be less than 0.");
-		}
 		return getNumberOfItems(item) >= amount;
 	}
 
