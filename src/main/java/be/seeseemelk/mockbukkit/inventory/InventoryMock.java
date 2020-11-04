@@ -327,35 +327,21 @@ public class InventoryMock implements Inventory
 	@Override
 	public boolean contains(ItemStack item, int amount)
 	{
-		if (amount > 64 || amount < 1)
+		if (amount < 0)
 		{
-			throw new IllegalArgumentException("Amount cannot be more than 64 or less than 1.");
+			throw new IllegalArgumentException("Amount cannot be less than 0.");
 		}
-		for (ItemStack itemStack : this.getContents())
-		{
-			if (itemStack == item && itemStack.getAmount() == amount)
-			{
-				return true;
-			}
-		}
-		return false;
+		return getNumberOfItems(item) == amount;
 	}
 
 	@Override
 	public boolean containsAtLeast(ItemStack item, int amount)
 	{
-		if (amount > 64 || amount < 1)
+		if (amount < 0)
 		{
-			throw new IllegalArgumentException("Amount cannot be more than 64 or less than 1.");
+			throw new IllegalArgumentException("Amount cannot be less than 0.");
 		}
-		for (ItemStack itemStack : this.getContents())
-		{
-			if (itemStack == item && itemStack.getAmount() >= amount)
-			{
-				return true;
-			}
-		}
-		return false;
+		return getNumberOfItems(item) >= amount;
 	}
 
 	@Override
