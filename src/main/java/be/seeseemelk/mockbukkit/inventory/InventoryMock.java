@@ -3,10 +3,7 @@ package be.seeseemelk.mockbukkit.inventory;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -282,7 +279,7 @@ public class InventoryMock implements Inventory
 		}
 		for (ItemStack itemStack : this.getContents())
 		{
-			if (itemStack.getType() == material)
+			if (itemStack != null && itemStack.getType() == material)
 			{
 				return true;
 			}
@@ -293,14 +290,7 @@ public class InventoryMock implements Inventory
 	@Override
 	public boolean contains(ItemStack item)
 	{
-		for (ItemStack itemStack : this.getContents())
-		{
-			if (itemStack == item)
-			{
-				return true;
-			}
-		}
-		return false;
+		return contains(Objects.requireNonNull(item).getType());
 	}
 
 	@Override
