@@ -20,6 +20,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
+import org.junit.experimental.theories.suppliers.TestedOn;
 
 public class InventoryMockTest
 {
@@ -316,5 +317,68 @@ public class InventoryMockTest
 	public void testContentsAndStorageContentsEqual()
 	{
 		assertArrayEquals(inventory.getContents(), inventory.getStorageContents());
+	}
+
+	@Test
+	public void testContainsItemStack()
+	{
+		inventory.addItem(new ItemStack(Material.STONE));
+		assertTrue(inventory.contains(new ItemStack(Material.STONE)));
+	}
+
+	@Test
+	public void testContainsItemStackAmount()
+	{
+		inventory.addItem(new ItemStack(Material.STONE, 2));
+		assertTrue(inventory.contains(new ItemStack(Material.STONE), 2));
+	}
+
+	@Test
+	public void testContainsItemStackFalse()
+	{
+		inventory.addItem(new ItemStack(Material.GRASS));
+		assertFalse(inventory.contains(new ItemStack(Material.STONE)));
+	}
+
+	@Test
+	public void testContainsMaterial()
+	{
+		inventory.addItem(new ItemStack(Material.STONE));
+		assertTrue(inventory.contains(Material.STONE));
+	}
+
+	@Test
+	public void testContainsMaterialAmount()
+	{
+		inventory.addItem(new ItemStack(Material.STONE, 2));
+		assertTrue(inventory.contains(Material.STONE, 2));
+	}
+
+	@Test
+	public void testContainsMaterialFalse()
+	{
+		inventory.addItem(new ItemStack(Material.GRASS));
+		assertFalse(inventory.contains(Material.STONE));
+	}
+
+	@Test
+	public void testContainsAtLeast()
+	{
+		inventory.addItem(new ItemStack(Material.STONE, 3));
+		assertTrue(inventory.containsAtLeast(new ItemStack(Material.STONE), 3));
+	}
+
+	@Test
+	public void testContainsAtLeastExtra()
+	{
+		inventory.addItem(new ItemStack(Material.STONE, 6));
+		assertTrue(inventory.containsAtLeast(new ItemStack(Material.STONE), 3));
+	}
+
+	@Test
+	public void testContainsAtLeastFalse()
+	{
+		inventory.addItem(new ItemStack(Material.STONE));
+		assertFalse(inventory.containsAtLeast(new ItemStack(Material.STONE), 3));
 	}
 }
