@@ -276,36 +276,86 @@ public class InventoryMock implements Inventory
 	@Override
 	public boolean contains(Material material) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (material == null)
+		{
+			throw new IllegalArgumentException("Material cannot be null.");
+		}
+		for (ItemStack itemStack : this.getContents())
+		{
+			if (itemStack.getType() == material)
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override
 	public boolean contains(ItemStack item)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		for (ItemStack itemStack : this.getContents())
+		{
+			if (itemStack == item)
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override
 	public boolean contains(Material material, int amount) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (material == null)
+		{
+			throw new IllegalArgumentException("Material cannot be null.");
+		}
+		if (amount > 64 || amount < 1)
+		{
+			throw new IllegalArgumentException("Amount cannot be more than 64 or less than 1.");
+		}
+		for (ItemStack itemStack : this.getContents())
+		{
+			if (itemStack.getType() == material && itemStack.getAmount() == amount)
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override
 	public boolean contains(ItemStack item, int amount)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (amount > 64 || amount < 1)
+		{
+			throw new IllegalArgumentException("Amount cannot be more than 64 or less than 1.");
+		}
+		for (ItemStack itemStack : this.getContents())
+		{
+			if (itemStack == item && itemStack.getAmount() == amount)
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override
 	public boolean containsAtLeast(ItemStack item, int amount)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (amount > 64 || amount < 1)
+		{
+			throw new IllegalArgumentException("Amount cannot be more than 64 or less than 1.");
+		}
+		for (ItemStack itemStack : this.getContents())
+		{
+			if (itemStack == item && itemStack.getAmount() >= amount)
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override
