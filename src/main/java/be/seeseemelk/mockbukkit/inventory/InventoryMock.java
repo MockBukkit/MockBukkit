@@ -310,18 +310,7 @@ public class InventoryMock implements Inventory
 		{
 			throw new IllegalArgumentException("Material cannot be null.");
 		}
-		if (amount > 64 || amount < 1)
-		{
-			throw new IllegalArgumentException("Amount cannot be more than 64 or less than 1.");
-		}
-		for (ItemStack itemStack : this.getContents())
-		{
-			if (itemStack.getType() == material && itemStack.getAmount() == amount)
-			{
-				return true;
-			}
-		}
-		return false;
+		return amount < 1 || getNumberOfItems(new ItemStack(material)) == amount;
 	}
 
 	@Override
