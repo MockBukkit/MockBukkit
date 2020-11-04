@@ -3,10 +3,7 @@ package be.seeseemelk.mockbukkit.inventory;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -276,36 +273,46 @@ public class InventoryMock implements Inventory
 	@Override
 	public boolean contains(Material material) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (material == null)
+		{
+			throw new IllegalArgumentException("Material cannot be null.");
+		}
+		for (ItemStack itemStack : this.getContents())
+		{
+			if (itemStack != null && itemStack.getType() == material)
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override
 	public boolean contains(ItemStack item)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return contains(Objects.requireNonNull(item).getType());
 	}
 
 	@Override
 	public boolean contains(Material material, int amount) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (material == null)
+		{
+			throw new IllegalArgumentException("Material cannot be null.");
+		}
+		return amount < 1 || getNumberOfItems(new ItemStack(material)) == amount;
 	}
 
 	@Override
 	public boolean contains(ItemStack item, int amount)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getNumberOfItems(item) == amount;
 	}
 
 	@Override
 	public boolean containsAtLeast(ItemStack item, int amount)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getNumberOfItems(item) >= amount;
 	}
 
 	@Override
