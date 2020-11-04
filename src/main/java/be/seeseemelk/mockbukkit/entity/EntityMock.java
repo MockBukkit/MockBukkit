@@ -54,6 +54,8 @@ public abstract class EntityMock implements Entity, MessageTarget
 	private final Set<PermissionAttachment> permissionAttachments = new HashSet<>();
 	private Vector velocity = new Vector(0, 0, 0);
 	private float fallDistance;
+	private int fireTicks = -20;
+	private int maxFireTicks = 20;
 
 	public EntityMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -456,22 +458,19 @@ public abstract class EntityMock implements Entity, MessageTarget
 	@Override
 	public int getFireTicks()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return fireTicks;
 	}
 
 	@Override
 	public int getMaxFireTicks()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return maxFireTicks;
 	}
 
 	@Override
 	public void setFireTicks(int ticks)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		this.fireTicks = ticks;
 	}
 
 	@Override

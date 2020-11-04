@@ -321,4 +321,11 @@ public class EntityMockTest
 		player1.setVelocity(velocity);
 		assertEquals(player1.getVelocity(), velocity);
 	}
+
+	@Test
+	public void setFireTicks()
+	{
+		entity.setFireTicks(10);
+		assertEquals(10, entity.getFireTicks());
+	}
 }
