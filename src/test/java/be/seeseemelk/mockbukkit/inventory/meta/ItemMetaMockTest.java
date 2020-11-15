@@ -11,6 +11,7 @@ import java.util.Map;
 
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.junit.After;
@@ -42,11 +43,13 @@ public class ItemMetaMockTest
 		meta.setDisplayName("Some name");
 		meta.setLore(Arrays.asList("lore"));
 		meta.setUnbreakable(true);
+		meta.addItemFlags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES);
 		ItemMetaMock meta2 = new ItemMetaMock(meta);
 		meta2.setLore(Arrays.asList("lore"));
 		assertTrue(meta2.equals(meta));
 		assertTrue(meta.equals(meta2));
 		assertEquals(meta.hashCode(), meta2.hashCode());
+		assertEquals(meta.getItemFlags(), meta2.getItemFlags());
 	}
 
 	@Test

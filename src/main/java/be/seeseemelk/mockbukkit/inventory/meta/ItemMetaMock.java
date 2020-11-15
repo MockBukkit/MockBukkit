@@ -47,7 +47,8 @@ public class ItemMetaMock implements ItemMeta, Damageable {
         unbreakable = meta.isUnbreakable();
         enchants = new HashMap<>(meta.getEnchants());
         customModelData = meta.hasCustomModelData() ? meta.getCustomModelData() : null;
-        
+        hideFlags.addAll(meta.getItemFlags());
+
         if (meta.hasDisplayName()) {
             displayName = meta.getDisplayName();
         }
