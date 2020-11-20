@@ -386,23 +386,27 @@ public class PluginManagerMock implements PluginManager
 		events.add(event);
 		HandlerList handlers = event.getHandlers();
 		RegisteredListener[] listeners = handlers.getRegisteredListeners();
-		for(RegisteredListener l : listeners) {
+		for(RegisteredListener l : listeners)
+		{
 			callRegisteredListener(l,event);
 		}
 	}
 
 	private void callRegisteredListener(RegisteredListener registration, Event event){
-		if (!registration.getPlugin().isEnabled()) {
+		if (!registration.getPlugin().isEnabled())
+		{
 			return;
 		}
-		try {
+		try
+		{
 			registration.callEvent(event);
-		} catch (AuthorNagException ex) {
+		}
+		catch (AuthorNagException ex)
+		{
 			Plugin plugin = registration.getPlugin();
-
-			if (plugin.isNaggable()) {
+			if (plugin.isNaggable())
+			{
 				plugin.setNaggable(false);
-
 				server.getLogger().log(Level.SEVERE, String.format(
 						"Nag author(s): '%s' of '%s' about the following: %s",
 						plugin.getDescription().getAuthors(),
@@ -410,7 +414,9 @@ public class PluginManagerMock implements PluginManager
 						ex.getMessage()
 				));
 			}
-		} catch (Throwable ex) {
+		}
+		catch (Throwable ex)
+		{
 			String msg = "Could not pass event " + event.getEventName() + " to " + registration.getPlugin().getDescription().getFullName();
 			server.getLogger().log(Level.SEVERE, msg, ex);
 		}
@@ -576,7 +582,8 @@ public class PluginManagerMock implements PluginManager
 	@Override
 	public void registerEvents(Listener listener, Plugin plugin)
 	{
-		if (!plugin.isEnabled()) {
+		if (!plugin.isEnabled())
+		{
 			throw new IllegalPluginAccessException("Plugin attempted to register " + listener + " while not enabled");
 		}
 
@@ -600,32 +607,42 @@ public class PluginManagerMock implements PluginManager
 		Validate.notNull(priority, "Priority cannot be null");
 		Validate.notNull(executor, "Executor cannot be null");
 		Validate.notNull(plugin, "Plugin cannot be null");
-		if (!plugin.isEnabled()) {
+		if (!plugin.isEnabled())
+		{
 			throw new IllegalPluginAccessException("Plugin attempted to register " + event + " while not enabled");
 		}
 		getEventListeners(event).register(new RegisteredListener(listener, executor, priority, plugin, ignoreCancelled));
 	}
 
 	private HandlerList getEventListeners(Class<? extends Event> type) {
-		try {
+		try
+		{
 			Method method = getRegistrationClass(type).getDeclaredMethod("getHandlerList");
 			method.setAccessible(true);
 			return (HandlerList) method.invoke(null);
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			throw new IllegalPluginAccessException(e.toString());
 		}
 	}
 
 	private Class<? extends Event> getRegistrationClass(Class<? extends Event> clazz) {
-		try {
+		try
+		{
 			clazz.getDeclaredMethod("getHandlerList");
 			return clazz;
-		} catch (NoSuchMethodException e) {
+		}
+		catch (NoSuchMethodException e)
+		{
 			if (clazz.getSuperclass() != null
 					&& !clazz.getSuperclass().equals(Event.class)
-					&& Event.class.isAssignableFrom(clazz.getSuperclass())) {
+					&& Event.class.isAssignableFrom(clazz.getSuperclass()))
+			{
 				return getRegistrationClass(clazz.getSuperclass().asSubclass(Event.class));
-			} else {
+			}
+			else
+			{
 				throw new IllegalPluginAccessException("Unable to find handler list for event " + clazz.getName() + ". Static getHandlerList method required!");
 			}
 		}
