@@ -24,7 +24,6 @@ import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.function.BiConsumer;
 import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
@@ -35,7 +34,6 @@ import org.bukkit.command.PluginCommand;
 import org.bukkit.command.PluginCommandUtils;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.Event;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
@@ -773,6 +771,10 @@ public class PluginManagerMock implements PluginManager
 		return Collections.unmodifiableSet(new HashSet<>(permissions));
 	}
 
+	/**
+	 * Timings are used for event timings on a live server - they serve no purpose during a artificial test environ.
+	 * @return boolean.false
+	 */
 	@Override
 	public boolean useTimings()
 	{
