@@ -110,10 +110,20 @@ public class PluginManagerMockTest
 		Player player = server.addPlayer();
 		BlockBreakEvent eventToFire = new BlockBreakEvent(null, player);
 		pluginManager.callEvent(eventToFire);
-		pluginManager.assertEventFired(event -> {
-			return false;
-		});
+		pluginManager.assertEventFired(event -> false);
 	}
+
+	@Test
+	public void assertListenerRan_With_Order(){
+		server.getPluginManager().registerEvents(plugin,plugin);
+		Player p = server.addPlayer();
+		BlockBreakEvent event = new BlockBreakEvent(null, p);
+		assertTrue(plugin.ignoredCancelledEvent);
+		pluginManager.callEvent(event);
+		assertTrue(event.isCancelled());
+		assertTrue(plugin.ignoredCancelledEvent);
+	}
+
 
 	@Test
 	public void assertEventFired_EventWasFired_DoesNotAssert()
