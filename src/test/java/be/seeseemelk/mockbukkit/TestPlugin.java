@@ -7,6 +7,7 @@ import java.util.concurrent.CyclicBarrier;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
@@ -27,6 +28,7 @@ public class TestPlugin extends JavaPlugin implements Listener
 	public boolean unannotatedPlayerInteractEventExecuted = false;
 	public boolean annotatedPlayerInteractEventExecuted = false;
 	public boolean annotatedBlockBreakEventExecuted = false;
+	public boolean ignoredCancelledEvent = true;
 	public boolean asyncEventExecuted = false;
 	public CyclicBarrier barrier = new CyclicBarrier(2);
 	public final Object extra;
@@ -81,13 +83,25 @@ public class TestPlugin extends JavaPlugin implements Listener
 	{
 		annotatedPlayerInteractEventExecuted = true;
 	}
-	
-	@EventHandler
+
+	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onBlockBreak(BlockBreakEvent event)
 	{
 		annotatedBlockBreakEventExecuted = true;
 	}
-	
+
+	@EventHandler(priority = EventPriority.HIGHEST)
+	public void onBlockBreakHighest(BlockBreakEvent event)
+	{
+		event.setCancelled(true);
+	}
+
+	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+	public void onBlockBreakMonitor(BlockBreakEvent event)
+	{
+		ignoredCancelledEvent = false;
+	}
+
 	@EventHandler
 	public void onAsyncChat(AsyncPlayerChatEvent event)
 	{
