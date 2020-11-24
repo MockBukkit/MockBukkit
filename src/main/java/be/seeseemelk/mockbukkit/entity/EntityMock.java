@@ -390,8 +390,13 @@ public abstract class EntityMock implements Entity, MessageTarget
 	@Override
 	public Set<PermissionAttachmentInfo> getEffectivePermissions()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		HashSet<PermissionAttachmentInfo> permissionAttachmentInfos = new HashSet<>();
+		for (PermissionAttachment permissionAttachment : permissionAttachments) {
+			for (Map.Entry<String, Boolean> entry : permissionAttachment.getPermissions().entrySet()) {
+				permissionAttachmentInfos.add(new PermissionAttachmentInfo(this, entry.getKey(), permissionAttachment, entry.getValue()));
+			}
+		}
+		return permissionAttachmentInfos;
 	}
 
 	@Override
