@@ -7,7 +7,10 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -19,6 +22,7 @@ import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
+import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.util.Vector;
 import org.junit.After;
@@ -288,6 +292,27 @@ public class EntityMockTest
 		PermissionAttachment attachment = entity.addAttachment(plugin);
 		attachment.setPermission(permission.getName(), true);
 		assertTrue(entity.hasPermission("mockbukkit.perm"));
+	}
+
+	@Test
+	public void getEffectivePermissions_GetPermissionsList()
+	{
+		MockPlugin plugin = MockBukkit.createMockPlugin();
+		entity.addAttachment(plugin, "mockbukkit.perm", true);
+		entity.addAttachment(plugin, "mockbukkit.perm2", true);
+		entity.addAttachment(plugin, "mockbukkit.perm3", false);
+
+		Set<PermissionAttachmentInfo> effectivePermissions = entity.getEffectivePermissions();
+		assertEquals(effectivePermissions.size(), 3);
+
+		Set<String> permissions = effectivePermissions.stream().map(PermissionAttachmentInfo::getPermission).collect(Collectors.toSet());
+		assertTrue(permissions.contains("mockbukkit.perm"));
+		assertTrue(permissions.contains("mockbukkit.perm2"));
+		assertTrue(permissions.contains("mockbukkit.perm3"));
+
+		Optional<PermissionAttachmentInfo> first = effectivePermissions.stream().filter(permissionAttachmentInfo -> permissionAttachmentInfo.getPermission().equals("mockbukkit.perm3")).findFirst();
+		assertTrue(first.isPresent());
+		assertFalse(first.get().getValue());
 	}
 
 	@Test
