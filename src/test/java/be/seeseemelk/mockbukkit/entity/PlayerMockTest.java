@@ -48,6 +48,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -1002,5 +1003,27 @@ public class PlayerMockTest
 		// This can be negative too
 		player.setMaximumAir(-10);
 		assertEquals(-10, player.getMaximumAir());
+	}
+
+	@Test
+	public void testSimulateBlockPlaceValid()
+	{
+		Location location = new Location(player.getWorld(), 0, 100, 0);
+		GameMode originalGM = player.getGameMode();
+		player.setGameMode(GameMode.SURVIVAL);
+		boolean worked = player.simulateBlockPlace(Material.STONE, location);
+		player.setGameMode(originalGM);
+		assertTrue(worked);
+	}
+
+	@Test
+	public void testSimulateBlockPlaceInvalid()
+	{
+		Location location = new Location(player.getWorld(), 0, 100, 0);
+		GameMode originalGM = player.getGameMode();
+		player.setGameMode(GameMode.ADVENTURE);
+		boolean worked = player.simulateBlockPlace(Material.STONE, location);
+		player.setGameMode(originalGM);
+		assertFalse(worked);
 	}
 }

@@ -211,16 +211,18 @@ public class PlayerMock extends LivingEntityMock implements Player
 	 * Simulates the player placing a block. This method will not place the block if the player is in adventure or
 	 * spectator mode.
 	 *
-	 * @param block The block to set to
+	 * @param material The material of the location to set to
+	 * @param location The location of the material to set to
 	 */
-	public boolean simulateBlockPlace(Block block)
+	public boolean simulateBlockPlace(Material material, Location location)
 	{
-		if ((gamemode != GameMode.ADVENTURE && gamemode != GameMode.SPECTATOR))
+		if ((gamemode == GameMode.ADVENTURE || gamemode == GameMode.SPECTATOR))
 			return false;
+		Block block = location.getBlock();
 		BlockPlaceEvent event = new BlockPlaceEvent(block, null, null, null, this, true, null);
 		Bukkit.getPluginManager().callEvent(event);
 		if (!event.isCancelled())
-			block.setType(block.getType());
+			block.setType(material);
 		return !event.isCancelled();
 	}
 
