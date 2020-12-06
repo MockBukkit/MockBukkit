@@ -23,6 +23,7 @@ import java.util.logging.LogManager;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import be.seeseemelk.mockbukkit.help.HelpMapMock;
 import org.apache.commons.lang.Validate;
 import org.bukkit.BanEntry;
 import org.bukkit.BanList;
@@ -131,12 +132,15 @@ public class ServerMock implements Server
 	private ConsoleCommandSender consoleSender;
 	private GameMode defaultGameMode = GameMode.SURVIVAL;
 	private MockCommandMap commandMap;
+	private HelpMap helpMap;
 
 	public ServerMock()
 	{
 		mainThread = Thread.currentThread();
 		logger = Logger.getLogger("ServerMock");
 		commandMap = new MockCommandMap(this);
+		helpMap = new HelpMapMock();
+
 		ServerMock.registerSerializables();
 
 		// Register default Minecraft Potion Effect Types
@@ -1157,8 +1161,7 @@ public class ServerMock implements Server
 	@Override
 	public HelpMap getHelpMap()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return helpMap;
 	}
 
 	@Override
