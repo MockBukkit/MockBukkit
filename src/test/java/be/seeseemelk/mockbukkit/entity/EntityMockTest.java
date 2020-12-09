@@ -316,6 +316,20 @@ public class EntityMockTest
 	}
 
 	@Test
+	public void removeAttachment_RemovesPermission()
+	{
+		MockPlugin plugin = MockBukkit.createMockPlugin();
+		Permission permission = new Permission("mockbukkit.perm");
+		server.getPluginManager().addPermission(permission);
+		PermissionAttachment attachment = entity.addAttachment(plugin);
+		attachment.setPermission(permission.getName(), true);
+		assertTrue(entity.hasPermission("mockbukkit.perm"));
+
+		entity.removeAttachment(attachment);
+		assertFalse(entity.hasPermission("mockbukkit.perm"));
+	}
+
+	@Test
 	public void entityDamage_By_Player()
 	{
 		World world = new WorldMock(Material.GRASS_BLOCK, 10);

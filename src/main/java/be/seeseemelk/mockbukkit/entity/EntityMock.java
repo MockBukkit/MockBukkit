@@ -27,6 +27,7 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
+import org.bukkit.permissions.PermissionRemovedExecutor;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.BoundingBox;
@@ -376,9 +377,22 @@ public abstract class EntityMock implements Entity, MessageTarget
 	@Override
 	public void removeAttachment(PermissionAttachment attachment)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		if (attachment == null) {
+			throw new IllegalArgumentException("Attachment cannot be null");
+		}
 
+		if (permissionAttachments.contains(attachment)) {
+			permissionAttachments.remove(attachment);
+			PermissionRemovedExecutor ex = attachment.getRemovalCallback();
+
+			if (ex != null) {
+				ex.attachmentRemoved(attachment);
+			}
+
+			recalculatePermissions();
+		} else {
+			throw new IllegalArgumentException("Given attachment is not part of Permissible object " + this);
+		}
 	}
 
 	@Override
