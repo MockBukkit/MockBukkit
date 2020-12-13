@@ -377,20 +377,25 @@ public abstract class EntityMock implements Entity, MessageTarget
 	@Override
 	public void removeAttachment(PermissionAttachment attachment)
 	{
-		if (attachment == null) {
+		if (attachment == null)
+		{
 			throw new IllegalArgumentException("Attachment cannot be null");
 		}
 
-		if (permissionAttachments.contains(attachment)) {
+		if (permissionAttachments.contains(attachment))
+		{
 			permissionAttachments.remove(attachment);
 			PermissionRemovedExecutor ex = attachment.getRemovalCallback();
 
-			if (ex != null) {
+			if (ex != null)
+			{
 				ex.attachmentRemoved(attachment);
 			}
 
 			recalculatePermissions();
-		} else {
+		}
+		else
+		{
 			throw new IllegalArgumentException("Given attachment is not part of Permissible object " + this);
 		}
 	}
@@ -405,11 +410,15 @@ public abstract class EntityMock implements Entity, MessageTarget
 	public Set<PermissionAttachmentInfo> getEffectivePermissions()
 	{
 		HashSet<PermissionAttachmentInfo> permissionAttachmentInfos = new HashSet<>();
-		for (PermissionAttachment permissionAttachment : permissionAttachments) {
-			for (Map.Entry<String, Boolean> entry : permissionAttachment.getPermissions().entrySet()) {
+
+		for (PermissionAttachment permissionAttachment : permissionAttachments)
+		{
+			for (Map.Entry<String, Boolean> entry : permissionAttachment.getPermissions().entrySet())
+			{
 				permissionAttachmentInfos.add(new PermissionAttachmentInfo(this, entry.getKey(), permissionAttachment, entry.getValue()));
 			}
 		}
+
 		return permissionAttachmentInfos;
 	}
 
