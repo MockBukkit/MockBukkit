@@ -842,7 +842,7 @@ public class ServerMock implements Server
 		String[] commands = commandLine.split(" ");
 		String commandLabel = commands[0];
 		String[] args = Arrays.copyOfRange(commands, 1, commands.length);
-		Command command = getPluginCommand(commandLabel);
+		Command command = getCommandMap().getCommand(commandLabel);
 		if (command != null)
 			return command.execute(sender, commandLabel, args);
 		else
