@@ -1003,4 +1003,26 @@ public class PlayerMockTest
 		player.setMaximumAir(-10);
 		assertEquals(-10, player.getMaximumAir());
 	}
+
+	@Test
+	public void testSimulateBlockPlaceValid()
+	{
+		Location location = new Location(player.getWorld(), 0, 100, 0);
+		GameMode originalGM = player.getGameMode();
+		player.setGameMode(GameMode.SURVIVAL);
+		boolean worked = player.simulateBlockPlace(Material.STONE, location);
+		player.setGameMode(originalGM);
+		assertTrue(worked);
+	}
+
+	@Test
+	public void testSimulateBlockPlaceInvalid()
+	{
+		Location location = new Location(player.getWorld(), 0, 100, 0);
+		GameMode originalGM = player.getGameMode();
+		player.setGameMode(GameMode.ADVENTURE);
+		boolean worked = player.simulateBlockPlace(Material.STONE, location);
+		player.setGameMode(originalGM);
+		assertFalse(worked);
+	}
 }
