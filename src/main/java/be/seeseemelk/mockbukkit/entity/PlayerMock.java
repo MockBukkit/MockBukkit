@@ -7,6 +7,8 @@ import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryViewMock;
 import be.seeseemelk.mockbukkit.inventory.SimpleInventoryViewMock;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.*;
 import org.bukkit.advancement.Advancement;
 import org.bukkit.advancement.AdvancementProgress;
@@ -70,6 +72,8 @@ public class PlayerMock extends LivingEntityMock implements Player
 
 	private final List<AudioExperience> heardSounds = new LinkedList<>();
 
+	private PlayerSpigotMock playerSpigotMock;
+
 	public PlayerMock(ServerMock server, String name)
 	{
 		this(server, name, UUID.nameUUIDFromBytes(("OfflinePlayer:" + name).getBytes(StandardCharsets.UTF_8)));
@@ -91,6 +95,8 @@ public class PlayerMock extends LivingEntityMock implements Player
 		setLocation(Bukkit.getWorlds().get(0).getSpawnLocation().clone());
 		setCompassTarget(getLocation());
 		closeInventory();
+
+		playerSpigotMock = new PlayerSpigotMock();
 	}
 
 	@Override
@@ -2044,7 +2050,33 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public org.bukkit.entity.Player.Spigot spigot()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return playerSpigotMock;
+	}
+
+	public class PlayerSpigotMock extends Player.Spigot {
+
+		@Override
+		public void sendMessage(@NotNull BaseComponent... components) {
+			for (BaseComponent component : components) {
+				sendMessage(component);
+			}
+		}
+
+		@Override
+		public void sendMessage(@NotNull ChatMessageType position, @NotNull BaseComponent... components) {
+			for (BaseComponent component : components) {
+				sendMessage(position, component);
+			}
+		}
+
+		@Override
+		public void sendMessage(@NotNull BaseComponent component) {
+			sendMessage(ChatMessageType.CHAT, component);
+		}
+
+		@Override
+		public void sendMessage(@NotNull ChatMessageType position, @NotNull BaseComponent component) {
+			PlayerMock.this.sendMessage(component.toPlainText());
+		}
 	}
 }
