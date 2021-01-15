@@ -42,7 +42,10 @@ artifacts {
     archives javadocJar, sourcesJar
 }
 
+def isFork = isFork()
+
 signing {
+    required { !isFork }
     sign publishing.publications
 }
 
@@ -112,3 +115,16 @@ publishing {
 
 eclipse.classpath.downloadJavadoc = true
 eclipse.classpath.downloadSources = true
+
+def isFork() {
+    try {
+        def workingDir = new File("${project.projectDir}")
+        def result = 'git config --get remote.origin.url'.execute(null, workingDir)
+        result.waitFor()
+        if (result.exitValue() == 0) {
+            return !result.text.contains("seeseemelk")
+        }
+    } catch (e) {
+    }
+    return true
+}
