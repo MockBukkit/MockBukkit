@@ -94,4 +94,16 @@ public class BlockStateMockTest
 		assertTrue(chest.update(true));
 		assertTrue(block.getState() instanceof Chest);
 	}
+
+	@Test
+	public void testEquals() {
+		Block block = new BlockMock(Material.STONE, new Location(null, 0, 64, 0));
+
+		assertEquals(block.getState(), block.getState());
+	}
+
+	@Test
+	public void testEqualsUnplaced() {
+		assertEquals(new BlockStateMock(Material.STONE), new BlockStateMock(Material.STONE));
+	}
 }
