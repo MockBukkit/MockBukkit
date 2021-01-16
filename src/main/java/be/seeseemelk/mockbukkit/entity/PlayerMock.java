@@ -118,12 +118,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public int hashCode()
 	{
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + Objects.hash(attributes, exp, expLevel, expTotal, displayName, gamemode, getHealth(),
-				foodLevel, saturation, inventory, enderChest, inventoryView, getMaxHealth(), online, whitelisted,
-				compassTarget, bedSpawnLocation, cursor, firstPlayed, lastPlayed);
-		return result;
+		return Objects.hash(getUniqueId());
 	}
 
 	@Override
