@@ -1,10 +1,5 @@
 package be.seeseemelk.mockbukkit.block.state;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -17,6 +12,8 @@ import org.junit.Test;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.BlockMock;
+
+import static org.junit.Assert.*;
 
 public class BlockStateMockTest
 {
@@ -103,7 +100,22 @@ public class BlockStateMockTest
 	}
 
 	@Test
+	public void testNotEquals() {
+		Block blockA = new BlockMock(Material.STONE, new Location(null, 0, 64, 0));
+		Block blockB = new BlockMock(Material.AIR, new Location(null, 0, 65, 0));
+		Block blockC = new BlockMock(Material.STONE, new Location(null, 0, 65, 0));
+
+		assertNotEquals(blockA.getState(), blockB.getState());
+		assertNotEquals(blockB.getState(), blockC.getState());
+	}
+
+	@Test
 	public void testEqualsUnplaced() {
 		assertEquals(new BlockStateMock(Material.STONE), new BlockStateMock(Material.STONE));
+	}
+
+	@Test
+	public void testNotEqualsUnplaced() {
+		assertNotEquals(new BlockStateMock(Material.STONE), new BlockStateMock(Material.AIR));
 	}
 }
