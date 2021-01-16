@@ -293,4 +293,17 @@ public class BlockStateMock implements BlockState, Cloneable
 			return new BlockStateMock(block);
 		}
 	}
+
+	@Override
+	public boolean equals(Object other) {
+		if(other == null) {return false;}
+		if(!(other instanceof BlockState)) {return false;}
+
+		BlockState otherState = (BlockState) other;
+		if(!(otherState.getType() == getType())) {return false;}
+		if(otherState.isPlaced() != isPlaced()) {return false;}
+		if(!isPlaced()) {return true;}
+
+		return otherState.getBlock().getLocation().equals(getBlock().getLocation());
+	}
 }
