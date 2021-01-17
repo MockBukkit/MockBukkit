@@ -92,6 +92,7 @@ public class BlockStateMockTest
 		assertTrue(block.getState() instanceof Chest);
 	}
 
+	// Tests that different instances of the placed block state of a block, both with the same material, are equal
 	@Test
 	public void testEquals() {
 		Block block = new BlockMock(Material.STONE, new Location(null, 0, 64, 0));
@@ -99,6 +100,8 @@ public class BlockStateMockTest
 		assertEquals(block.getState(), block.getState());
 	}
 
+	// Tests that different instances of the placed block state of a block, with different materials, are unequal
+	// Also tests that block states with the same material, but with different parent blocks are unequal
 	@Test
 	public void testNotEquals() {
 		Block blockA = new BlockMock(Material.STONE, new Location(null, 0, 64, 0));
@@ -109,11 +112,13 @@ public class BlockStateMockTest
 		assertNotEquals(blockB.getState(), blockC.getState());
 	}
 
+	// Tests that unplaced block states are equal if they have the same material
 	@Test
 	public void testEqualsUnplaced() {
 		assertEquals(new BlockStateMock(Material.STONE), new BlockStateMock(Material.STONE));
 	}
 
+	// Tests that unplaced block states are unequal if they have the same material
 	@Test
 	public void testNotEqualsUnplaced() {
 		assertNotEquals(new BlockStateMock(Material.STONE), new BlockStateMock(Material.AIR));
