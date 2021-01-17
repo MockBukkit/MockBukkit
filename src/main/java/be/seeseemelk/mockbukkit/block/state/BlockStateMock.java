@@ -300,7 +300,7 @@ public class BlockStateMock implements BlockState, Cloneable
 		if(!(other instanceof BlockState)) {return false;}
 
 		BlockState otherState = (BlockState) other;
-		if(!(otherState.getType() == getType())) {return false;}
+		if(otherState.getType() != getType()) {return false;}
 		if(otherState.isPlaced() != isPlaced()) {return false;}
 		if(!isPlaced()) {return true;}
 
