@@ -1,5 +1,7 @@
 package be.seeseemelk.mockbukkit;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 
 import org.bukkit.Material;
@@ -66,7 +68,7 @@ public class MockUnsafeValues implements UnsafeValues
 		throw new UnimplementedOperationException();
 	}
 
-	private static final Set<String> COMPATIBLE_API_VERSIONS = Set.of("1.13", "1.14", "1.15", "1.16");
+	private static final Set<String> COMPATIBLE_API_VERSIONS = new HashSet<>(Arrays.asList("1.13", "1.14", "1.15", "1.16"));
 
 	@Override
 	public void checkSupported(PluginDescriptionFile pdf) throws InvalidPluginException
