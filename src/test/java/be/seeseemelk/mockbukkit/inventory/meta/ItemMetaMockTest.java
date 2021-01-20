@@ -14,6 +14,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
+import org.bukkit.inventory.meta.Repairable;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -344,6 +345,33 @@ public class ItemMetaMockTest
 	}
 
 	@Test
+	public void assertRepairCostCorrectlySet()
+	{
+		int value = 10;
+		meta.setRepairCost(value);
+		ItemStack item = new ItemStack(Material.DIAMOND_SWORD);
+		item.setItemMeta(meta);
+
+		Repairable itemMeta = (Repairable) item.getItemMeta();
+		int repairCost = itemMeta.getRepairCost();
+		assertEquals(value, repairCost);
+		assertTrue(itemMeta.hasRepairCost());
+	}
+
+	@Test
+	public void assertNoRepairCost()
+	{
+		meta.setRepairCost(0);
+		ItemStack item = new ItemStack(Material.DIAMOND_SWORD);
+		item.setItemMeta(meta);
+
+		Repairable itemMeta = (Repairable) item.getItemMeta();
+		int repairCost = itemMeta.getRepairCost();
+		assertEquals(0, repairCost);
+		assertFalse(itemMeta.hasRepairCost());
+	}
+
+	@Test
 	public void assertCustomModelData()
 	{
 		meta.setCustomModelData(null);
@@ -363,12 +391,14 @@ public class ItemMetaMockTest
 		meta.setLore(Arrays.asList("Test lore"));
 		meta.setUnbreakable(true);
 		meta.setDamage(5);
+		meta.setRepairCost(3);
 
 		Map<String, Object> expected = new HashMap<>();
 		expected.put("displayName", "Test name");
 		expected.put("lore", Arrays.asList("Test lore"));
 		expected.put("unbreakable", true);
 		expected.put("damage", 5);
+		expected.put("repairCost", 3);
 
 		Map<String, Object> actual = meta.serialize();
 
@@ -377,6 +407,7 @@ public class ItemMetaMockTest
 		assertEquals(expected.get("lore"), actual.get("lore"));
 		assertEquals(expected.get("unbreakable"), actual.get("unbreakable"));
 		assertEquals(expected.get("damage"), actual.get("damage"));
+		assertEquals(expected.get("repairCost"), actual.get("repairCost"));
 
 	}
 
