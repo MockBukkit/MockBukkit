@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.block.state;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -305,5 +306,10 @@ public class BlockStateMock implements BlockState, Cloneable
 		if(!isPlaced()) {return true;}
 
 		return otherState.getBlock().getLocation().equals(getBlock().getLocation());
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(material, block == null ? null : block.getLocation());
 	}
 }
