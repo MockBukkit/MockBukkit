@@ -17,6 +17,9 @@ import org.bukkit.plugin.PluginDescriptionFile;
 @SuppressWarnings("deprecation")
 public class MockUnsafeValues implements UnsafeValues
 {
+
+	private final Set<String> compatibleApiVersions = new HashSet<>(Arrays.asList("1.13", "1.14", "1.15", "1.16"));
+
 	@Override
 	public Material toLegacy(Material material)
 	{
@@ -68,15 +71,13 @@ public class MockUnsafeValues implements UnsafeValues
 		throw new UnimplementedOperationException();
 	}
 
-	private static final Set<String> COMPATIBLE_API_VERSIONS = new HashSet<>(Arrays.asList("1.13", "1.14", "1.15", "1.16"));
-
 	@Override
 	public void checkSupported(PluginDescriptionFile pdf) throws InvalidPluginException
 	{
 		if (pdf.getAPIVersion() == null)
 			throw new InvalidPluginException("Plugin does not specify 'api-version' in plugin.yml");
 
-		if (!COMPATIBLE_API_VERSIONS.contains(pdf.getAPIVersion()))
+		if (!compatibleApiVersions.contains(pdf.getAPIVersion()))
 			throw new InvalidPluginException(String.format("Plugin api version %s is incompatible with the current MockBukkit version", pdf.getAPIVersion()));
 	}
 
