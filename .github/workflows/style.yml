@@ -23,5 +23,5 @@ jobs:
       run: astyle --options=.astylerc '*.java'
     - uses: stefanzweifel/git-auto-commit-action@v4
       with:
-        commit_message: 'Updated code formatting'
+        commit_message: 'Auto-update code formatting'
         file_pattern: '*.java'
