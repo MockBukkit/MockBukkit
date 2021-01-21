@@ -108,7 +108,7 @@ public class BlockStateMockTest
 		Block blockB = new BlockMock(Material.AIR, new Location(null, 0, 65, 0));
 		Block blockC = new BlockMock(Material.STONE, new Location(null, 0, 65, 0));
 
-		assertNotEquals(blockA.getState(), blockB.getState());
+		assertNotEquals(blockA.getState(), blockC.getState());
 		assertNotEquals(blockB.getState(), blockC.getState());
 	}
 
