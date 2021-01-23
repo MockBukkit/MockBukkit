@@ -20,6 +20,7 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.Repairable;
 import org.bukkit.inventory.meta.tags.CustomItemTagContainer;
 import org.bukkit.persistence.PersistentDataContainer;
 
@@ -29,11 +30,12 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
 
 @SuppressWarnings("deprecation")
-public class ItemMetaMock implements ItemMeta, Damageable {
+public class ItemMetaMock implements ItemMeta, Damageable, Repairable {
     
     private String displayName = null;
     private List<String> lore = null;
     private int damage = 0;
+    private int repairCost = 0;
     private Map<Enchantment, Integer> enchants = new HashMap<>();
     private Set<ItemFlag> hideFlags = EnumSet.noneOf(ItemFlag.class);
     private PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
@@ -57,6 +59,9 @@ public class ItemMetaMock implements ItemMeta, Damageable {
         }
         if (meta instanceof Damageable) {
             this.damage = ((Damageable) meta).getDamage();
+        }
+        if (meta instanceof Repairable) {
+            this.repairCost = ((Repairable) meta).getRepairCost();
         }
         if (meta instanceof ItemMetaMock) {
             this.persistentDataContainer = ((ItemMetaMock) meta).persistentDataContainer;
@@ -147,6 +152,7 @@ public class ItemMetaMock implements ItemMeta, Damageable {
         result = prime * result + enchants.hashCode();
         result = prime * result + persistentDataContainer.hashCode();
         result = prime * result + ((customModelData == null) ? 0 : customModelData.hashCode());
+        result = prime * result + repairCost;
         return result;
     }
 
@@ -170,6 +176,7 @@ public class ItemMetaMock implements ItemMeta, Damageable {
             meta.customModelData = customModelData;
             meta.enchants = new HashMap<>(enchants);
             meta.persistentDataContainer = new PersistentDataContainerMock((PersistentDataContainerMock) persistentDataContainer);
+            meta.repairCost = repairCost;
             return meta;
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException(e);
@@ -252,6 +259,7 @@ public class ItemMetaMock implements ItemMeta, Damageable {
 	    map.put("customModelData", this.customModelData);
 	    map.put("persistentDataContainer", this.persistentDataContainer);
 	    map.put("damage", this.damage);
+        map.put("repairCost", this.repairCost);
 	    // Return map
 	    return map;
     }
@@ -276,6 +284,7 @@ public class ItemMetaMock implements ItemMeta, Damageable {
 	    serialMock.customModelData = (Integer) args.get("customModelData");
 	    serialMock.persistentDataContainer = (PersistentDataContainer) args.get("persistentDataContainer");
 	    serialMock.damage = (Integer) args.get("damage");
+        serialMock.repairCost = (Integer) args.get("repairCost");
 	    return serialMock;
     }
 
@@ -391,6 +400,21 @@ public class ItemMetaMock implements ItemMeta, Damageable {
     @Override
     public void setDamage(int damage) {
         this.damage = damage;
+    }
+
+    @Override
+    public boolean hasRepairCost() {
+        return repairCost > 0;
+    }
+
+    @Override
+    public int getRepairCost() {
+        return repairCost;
+    }
+
+    @Override
+    public void setRepairCost(int cost) {
+        this.repairCost = cost;
     }
 
     @Override
