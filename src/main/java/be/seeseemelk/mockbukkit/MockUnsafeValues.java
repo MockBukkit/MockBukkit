@@ -1,5 +1,9 @@
 package be.seeseemelk.mockbukkit;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.UnsafeValues;
@@ -13,6 +17,9 @@ import org.bukkit.plugin.PluginDescriptionFile;
 @SuppressWarnings("deprecation")
 public class MockUnsafeValues implements UnsafeValues
 {
+
+	private final Set<String> compatibleApiVersions = new HashSet<>(Arrays.asList("1.13", "1.14", "1.15", "1.16"));
+
 	@Override
 	public Material toLegacy(Material material)
 	{
@@ -70,8 +77,8 @@ public class MockUnsafeValues implements UnsafeValues
 		if (pdf.getAPIVersion() == null)
 			throw new InvalidPluginException("Plugin does not specify 'api-version' in plugin.yml");
 
-		if (!pdf.getAPIVersion().equals("1.15"))
-			throw new InvalidPluginException("This version of MockBukkit required API 1.15");
+		if (!compatibleApiVersions.contains(pdf.getAPIVersion()))
+			throw new InvalidPluginException(String.format("Plugin api version %s is incompatible with the current MockBukkit version", pdf.getAPIVersion()));
 	}
 
 	@Override
