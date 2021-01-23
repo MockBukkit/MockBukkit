@@ -13,7 +13,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -23,7 +22,6 @@ import java.util.logging.LogManager;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-import be.seeseemelk.mockbukkit.help.HelpMapMock;
 import org.apache.commons.lang.Validate;
 import org.bukkit.BanEntry;
 import org.bukkit.BanList;
@@ -83,9 +81,9 @@ import be.seeseemelk.mockbukkit.command.ConsoleCommandSenderMock;
 import be.seeseemelk.mockbukkit.command.MessageTarget;
 import be.seeseemelk.mockbukkit.enchantments.EnchantmentsMock;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
-import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
+import be.seeseemelk.mockbukkit.help.HelpMapMock;
 import be.seeseemelk.mockbukkit.inventory.BarrelInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.ChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.DispenserInventoryMock;
@@ -109,8 +107,9 @@ import be.seeseemelk.mockbukkit.tags.TagsMock;
 @SuppressWarnings("deprecation")
 public class ServerMock implements Server
 {
-	private static final String BUKKIT_VERSION = "1.16.2";
+	private static final String BUKKIT_VERSION = "1.16.3";
 	private static final String JOIN_MESSAGE = "%s has joined the server.";
+	private static final String MOTD = "A Minecraft Server";
 
 	private final Logger logger;
 	private final Thread mainThread;
@@ -154,6 +153,7 @@ public class ServerMock implements Server
 		{
 			logger.warning("Could not load file logger.properties");
 		}
+
 		logger.setLevel(Level.ALL);
 	}
 
@@ -184,7 +184,7 @@ public class ServerMock implements Server
 	 *
 	 * @param entity The entity to register
 	 */
-	public void registerEntity(EntityMock entity)
+	public void registerEntity(@NotNull EntityMock entity)
 	{
 		assertMainThread();
 		entities.add(entity);
@@ -195,6 +195,7 @@ public class ServerMock implements Server
 	 *
 	 * @return A set of entities that exist on this server instance.
 	 */
+	@NotNull
 	public Set<EntityMock> getEntities()
 	{
 		return Collections.unmodifiableSet(entities);
@@ -387,8 +388,11 @@ public class ServerMock implements Server
 	public CommandResult execute(Command command, CommandSender sender, String... args)
 	{
 		assertMainThread();
+
 		if (!(sender instanceof MessageTarget))
+		{
 			throw new IllegalArgumentException("Only a MessageTarget can be the sender of the command");
+		}
 
 		boolean status = command.execute(sender, command.getName(), args);
 		return new CommandResult(status, (MessageTarget) sender);
@@ -441,25 +445,7 @@ public class ServerMock implements Server
 	@Override
 	public Player getPlayer(String name)
 	{
-		Player player = getPlayerExact(name);
-		if (player != null)
-			return player;
-
-		final String lowercase = name.toLowerCase(Locale.ENGLISH);
-		int delta = Integer.MAX_VALUE;
-		for (Player namedPlayer : getOnlinePlayers())
-		{
-			if (namedPlayer.getName().toLowerCase(Locale.ENGLISH).startsWith(lowercase))
-			{
-				int currentDelta = Math.abs(namedPlayer.getName().length() - lowercase.length());
-				if (currentDelta < delta)
-				{
-					delta = currentDelta;
-					player = namedPlayer;
-				}
-			}
-		}
-		return player;
+		return playerList.getPlayer(name);
 	}
 
 	@Override
@@ -477,14 +463,7 @@ public class ServerMock implements Server
 	@Override
 	public Player getPlayer(UUID id)
 	{
-		for (Player player : getOnlinePlayers())
-		{
-			if (id.equals(player.getUniqueId()))
-			{
-				return player;
-			}
-		}
-		return null;
+		return playerList.getPlayer(id);
 	}
 
 	@Override
@@ -829,10 +808,21 @@ public class ServerMock implements Server
 		String commandLabel = commands[0];
 		String[] args = Arrays.copyOfRange(commands, 1, commands.length);
 		Command command = getCommandMap().getCommand(commandLabel);
+
 		if (command != null)
+		{
 			return command.execute(sender, commandLabel, args);
+		}
 		else
+		{
 			return false;
+		}
+	}
+
+	@Override
+	public HelpMap getHelpMap()
+	{
+		return helpMap;
 	}
 
 	@Override
@@ -1083,43 +1073,22 @@ public class ServerMock implements Server
 	@Override
 	public OfflinePlayer getOfflinePlayer(String name)
 	{
-		Player player = getPlayer(name);
-
-		if (player != null)
-		{
-			return player;
-		}
-
-		for (OfflinePlayer offlinePlayer : getOfflinePlayers())
-		{
-			if (offlinePlayer.getName().equals(name))
-			{
-				return offlinePlayer;
-			}
-		}
-
-		return new OfflinePlayerMock(name);
+		return playerList.getOfflinePlayer(name);
 	}
 
 	@Override
 	public OfflinePlayer getOfflinePlayer(UUID id)
 	{
-		Player player = getPlayer(id);
+		OfflinePlayer player = playerList.getOfflinePlayer(id);
 
 		if (player != null)
 		{
 			return player;
 		}
-
-		for (OfflinePlayer offlinePlayer : getOfflinePlayers())
+		else
 		{
-			if (offlinePlayer.getUniqueId().equals(id))
-			{
-				return offlinePlayer;
-			}
+			return playerFactory.createRandomOfflinePlayer();
 		}
-
-		return playerFactory.createRandomOfflinePlayer();
 	}
 
 	@Override
@@ -1141,12 +1110,6 @@ public class ServerMock implements Server
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public HelpMap getHelpMap()
-	{
-		return helpMap;
 	}
 
 	@Override
@@ -1193,8 +1156,7 @@ public class ServerMock implements Server
 	@Override
 	public String getMotd()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return MOTD;
 	}
 
 	@Override
