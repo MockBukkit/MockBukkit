@@ -117,8 +117,6 @@ public class ServerMock implements Server
 	private final MockUnsafeValues unsafe = new MockUnsafeValues();
 	private final Map<String, TagRegistry> materialTags = new HashMap<>();
 
-	private final List<PlayerMock> players = new ArrayList<>();
-	private final Set<OfflinePlayer> offlinePlayers = new HashSet<>();
 	private final Set<EntityMock> entities = new HashSet<>();
 	private final List<World> worlds = new ArrayList<>();
 	private final List<Recipe> recipes = new LinkedList<>();
@@ -210,8 +208,7 @@ public class ServerMock implements Server
 	public void addPlayer(PlayerMock player)
 	{
 		assertMainThread();
-		players.add(player);
-		offlinePlayers.add(player);
+		playerList.addPlayer(player);
 		PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(player,
 				String.format(JOIN_MESSAGE, player.getDisplayName()));
 		Bukkit.getPluginManager().callEvent(playerJoinEvent);
@@ -256,7 +253,7 @@ public class ServerMock implements Server
 	public void setPlayers(int num)
 	{
 		assertMainThread();
-		players.clear();
+		playerList.clearOnlinePlayers();
 
 		for (int i = 0; i < num; i++)
 			addPlayer();
@@ -272,13 +269,17 @@ public class ServerMock implements Server
 	public void setOfflinePlayers(int num)
 	{
 		assertMainThread();
-		offlinePlayers.clear();
-		offlinePlayers.addAll(players);
+		playerList.clearOfflinePlayers();
+
+		for (PlayerMock player : getOnlinePlayers())
+		{
+			playerList.addPlayer(player);
+		}
 
 		for (int i = 0; i < num; i++)
 		{
 			OfflinePlayer player = playerFactory.createRandomOfflinePlayer();
-			offlinePlayers.add(player);
+			playerList.addOfflinePlayer(player);
 		}
 	}
 
@@ -290,14 +291,7 @@ public class ServerMock implements Server
 	 */
 	public PlayerMock getPlayer(int num)
 	{
-		if (num < 0 || num >= players.size())
-		{
-			throw new ArrayIndexOutOfBoundsException();
-		}
-		else
-		{
-			return players.get(num);
-		}
+		return playerList.getPlayer(num);
 	}
 
 	/**
@@ -363,8 +357,8 @@ public class ServerMock implements Server
 	{
 		assertMainThread();
 
-		if (!players.isEmpty())
-			return execute(command, players.get(0), args);
+		if (playerList.isSomeoneOnline())
+			return execute(command, getPlayer(0), args);
 		else
 			throw new IllegalStateException("Need at least one player to run the command");
 	}
@@ -435,14 +429,13 @@ public class ServerMock implements Server
 	@Override
 	public Collection<? extends PlayerMock> getOnlinePlayers()
 	{
-		assertMainThread();
-		return players;
+		return playerList.getOnlinePlayers();
 	}
 
 	@Override
 	public OfflinePlayer[] getOfflinePlayers()
 	{
-		return offlinePlayers.toArray(new OfflinePlayer[0]);
+		return playerList.getOfflinePlayers();
 	}
 
 	@Override
@@ -454,7 +447,7 @@ public class ServerMock implements Server
 
 		final String lowercase = name.toLowerCase(Locale.ENGLISH);
 		int delta = Integer.MAX_VALUE;
-		for (Player namedPlayer : players)
+		for (Player namedPlayer : getOnlinePlayers())
 		{
 			if (namedPlayer.getName().toLowerCase(Locale.ENGLISH).startsWith(lowercase))
 			{
@@ -472,25 +465,18 @@ public class ServerMock implements Server
 	@Override
 	public Player getPlayerExact(String name)
 	{
-		assertMainThread();
-		return this.players.stream().filter(
-				playerMock -> playerMock.getName().toLowerCase(Locale.ENGLISH).equals(name.toLowerCase(Locale.ENGLISH)))
-				.findFirst().orElse(null);
+		return playerList.getPlayerExact(name);
 	}
 
 	@Override
 	public List<Player> matchPlayer(String name)
 	{
-		assertMainThread();
-		return players.stream().filter(
-				player -> player.getName().toLowerCase(Locale.ENGLISH).startsWith(name.toLowerCase(Locale.ENGLISH)))
-				.collect(Collectors.toList());
+		return playerList.matchPlayer(name);
 	}
 
 	@Override
 	public Player getPlayer(UUID id)
 	{
-		assertMainThread();
 		for (Player player : getOnlinePlayers())
 		{
 			if (id.equals(player.getUniqueId()))
@@ -725,11 +711,7 @@ public class ServerMock implements Server
 	@Override
 	public Set<OfflinePlayer> getOperators()
 	{
-		assertMainThread();
-		final Set<OfflinePlayer> allPlayers = new HashSet<>();
-		allPlayers.addAll(offlinePlayers);
-		allPlayers.addAll(players);
-		return allPlayers.stream().filter(OfflinePlayer::isOp).collect(Collectors.toSet());
+		return playerList.getOperators();
 	}
 
 	@Override
@@ -748,9 +730,13 @@ public class ServerMock implements Server
 	@Override
 	public int broadcastMessage(String message)
 	{
-		assertMainThread();
+		Collection<? extends PlayerMock> players = getOnlinePlayers();
+
 		for (Player player : players)
+		{
 			player.sendMessage(message);
+		}
+
 		return players.size();
 	}
 
@@ -1104,7 +1090,7 @@ public class ServerMock implements Server
 			return player;
 		}
 
-		for (OfflinePlayer offlinePlayer : offlinePlayers)
+		for (OfflinePlayer offlinePlayer : getOfflinePlayers())
 		{
 			if (offlinePlayer.getName().equals(name))
 			{
@@ -1125,7 +1111,7 @@ public class ServerMock implements Server
 			return player;
 		}
 
-		for (OfflinePlayer offlinePlayer : offlinePlayers)
+		for (OfflinePlayer offlinePlayer : getOfflinePlayers())
 		{
 			if (offlinePlayer.getUniqueId().equals(id))
 			{
