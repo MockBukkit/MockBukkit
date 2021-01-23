@@ -60,6 +60,7 @@ import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
 import be.seeseemelk.mockbukkit.block.BlockMock;
+import be.seeseemelk.mockbukkit.entity.ArmorStandMock;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
 import be.seeseemelk.mockbukkit.entity.FireworkMock;
@@ -506,6 +507,8 @@ public class WorldMock implements World
 	{
 		switch (type)
 		{
+		case ARMOR_STAND:
+			return new ArmorStandMock(server, UUID.randomUUID());
 		case ZOMBIE:
 			return new ZombieMock(server, UUID.randomUUID());
 		case FIREWORK:
