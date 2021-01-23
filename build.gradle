@@ -45,7 +45,7 @@ artifacts {
 def isFork = isFork()
 
 signing {
-    required { !isFork }
+    required { !isFork && System.getenv('JITPACK') == null }
     sign publishing.publications
 }
 
