@@ -12,8 +12,8 @@ import org.bukkit.plugin.InvalidDescriptionException;
 import org.bukkit.plugin.InvalidPluginException;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
+import org.bukkit.plugin.UnknownDependencyException;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.plugin.java.JavaPluginLoader;
 
 public class MockBukkit
 {
@@ -138,14 +138,16 @@ public class MockBukkit
 	 * @param jarFile Path to the jar.
 	 * @throws InvalidPluginException If an exception occured while loading a plugin.
 	 */
-	@SuppressWarnings(
-	{ "deprecation" })
 	public static void loadJar(File jarFile) throws InvalidPluginException
 	{
-		JavaPluginLoader loader = new JavaPluginLoader(mock);
-		Plugin plugin = loader.loadPlugin(jarFile);
-		mock.getPluginManager().registerLoadedPlugin(plugin);
-		mock.getPluginManager().enablePlugin(plugin);
+		try 
+		{
+			Plugin plugin = mock.getPluginManager().loadPlugin(jarFile);
+			mock.getPluginManager().enablePlugin(plugin);
+		} catch (UnknownDependencyException | InvalidDescriptionException e) 
+		{
+			throw new InvalidPluginException(e);
+		}
 	}
 
 	/**

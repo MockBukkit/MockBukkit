@@ -10,6 +10,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -544,13 +546,40 @@ public class PluginManagerMock implements PluginManager
 	public Plugin loadPlugin(File file)
 			throws InvalidPluginException, InvalidDescriptionException, UnknownDependencyException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (!file.getName().endsWith(".jar")) 
+		{
+			throw new InvalidPluginException("Plugin must be a .jar file");
+		}
+
+		try 
+		{
+			File tempDir = createTemporaryDirectory("MockBukkit-plugin-" + file.getName().split(".")[0]);
+			Path targetPath = Files.copy(file.toPath(), tempDir.toPath(), StandardCopyOption.REPLACE_EXISTING);
+			Plugin plugin = loader.loadPlugin(targetPath.toFile());
+
+			if (plugin == null) 
+			{
+				throw new InvalidPluginException("Plugin " + file.getName() + "couldn't be loaded.");
+			}
+
+			registerLoadedPlugin(plugin);
+			return plugin;
+		} 
+		catch (IOException ex) 
+		{
+			throw new RuntimeException("Unable to instantiate plugin: ", ex);
+		}
 	}
 
 	@Override
 	public Plugin[] loadPlugins(File directory)
 	{
+		//copy to temp folder
+		//check description validity
+		//check if already registered
+		//gather softDependencies, dependencies, and loadBefore
+		//load in order gathered before
+
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
