@@ -709,7 +709,8 @@ public class PluginManagerMock implements PluginManager
 	@Override
 	public void recalculatePermissionDefaults(Permission perm)
 	{
-
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	/**
