@@ -2,19 +2,24 @@ package be.seeseemelk.mockbukkit.inventory.meta;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
+import be.seeseemelk.mockbukkit.MockPlugin;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.Repairable;
+import org.bukkit.persistence.PersistentDataType;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -79,7 +84,7 @@ public class ItemMetaMockTest
 	public void equals_SameWithoutDisplayName_True()
 	{
 		ItemMetaMock meta2 = new ItemMetaMock();
-		assertTrue(meta.equals(meta2));
+		assertEquals(meta, meta2);
 		assertEquals(meta.hashCode(), meta2.hashCode());
 	}
 
@@ -89,7 +94,7 @@ public class ItemMetaMockTest
 		ItemMetaMock meta2 = new ItemMetaMock();
 		meta.setDisplayName("Some name");
 		meta2.setDisplayName("Some name");
-		assertTrue(meta.equals(meta2));
+		assertEquals(meta, meta2);
 		assertEquals(meta.hashCode(), meta2.hashCode());
 	}
 
@@ -97,10 +102,10 @@ public class ItemMetaMockTest
 	public void equals_SameLore_True()
 	{
 		ItemMetaMock meta2 = new ItemMetaMock();
-		meta.setLore(Arrays.asList("lore"));
-		meta2.setLore(Arrays.asList("lore"));
-		assertTrue(meta.equals(meta2));
-		assertTrue(meta2.equals(meta));
+		meta.setLore(Collections.singletonList("lore"));
+		meta2.setLore(Collections.singletonList("lore"));
+		assertEquals(meta, meta2);
+		assertEquals(meta2, meta);
 		assertEquals(meta.hashCode(), meta2.hashCode());
 	}
 
@@ -110,7 +115,8 @@ public class ItemMetaMockTest
 		ItemMetaMock meta2 = new ItemMetaMock();
 		meta.setDisplayName("Some name");
 		meta2.setDisplayName("Different name");
-		assertFalse(meta.equals(meta2));
+		assertNotEquals(meta, meta2);
+		assertNotEquals(meta2, meta);
 	}
 
 	@Test
@@ -118,55 +124,220 @@ public class ItemMetaMockTest
 	{
 		ItemMetaMock meta2 = new ItemMetaMock();
 		meta.setDisplayName("Some name");
-		assertFalse(meta.equals(meta2));
-		assertFalse(meta2.equals(meta));
+		assertNotEquals(meta, meta2);
+		assertNotEquals(meta2, meta);
 	}
 
 	@Test
 	public void equals_OneWithLoreOneWithout_False()
 	{
 		ItemMetaMock meta2 = new ItemMetaMock();
-		meta.setLore(Arrays.asList("lore"));
-		assertFalse(meta.equals(meta2));
-		assertFalse(meta2.equals(meta));
+		meta.setLore(Collections.singletonList("lore"));
+		assertNotEquals(meta, meta2);
+		assertNotEquals(meta2, meta);
 	}
 
 	@Test
 	public void equals_DifferentSizedLore_False()
 	{
 		ItemMetaMock meta2 = new ItemMetaMock();
-		meta.setLore(Arrays.asList("lore"));
+		meta.setLore(Collections.singletonList("lore"));
 		meta2.setLore(Arrays.asList("lore", "more lore"));
-		assertFalse(meta.equals(meta2));
-		assertFalse(meta2.equals(meta));
+		assertNotEquals(meta, meta2);
+		assertNotEquals(meta2, meta);
 	}
 
 	@Test
 	public void equals_Null_False()
 	{
-		assertFalse(meta.equals(null));
+		assertNotEquals(meta, null);
+		assertNotEquals(null, meta);
 	}
 
 	@Test
-	public void equals_SameUnbreakableProperty_True()
+	public void equals_DamageSame_True()
 	{
 		ItemMetaMock meta2 = new ItemMetaMock();
-		meta.setUnbreakable(false);
-		meta2.setUnbreakable(false);
-		assertTrue(meta.equals(meta2));
+		meta.setDamage(10);
+		meta2.setDamage(10);
+		assertEquals(meta, meta2);
+		assertEquals(meta2, meta);
+	}
+
+	@Test
+	public void equals_DamageDifferent_False()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.setDamage(10);
+		meta2.setDamage(20);
+		assertNotEquals(meta, meta2);
+		assertNotEquals(meta2, meta);
+	}
+
+	@Test
+	public void equals_DamageOneWithout_False()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.setDamage(10);
+		assertNotEquals(meta, meta2);
+		assertNotEquals(meta2, meta);
+	}
+
+	@Test
+	public void equals_EnchantsSame_True()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.addEnchant(Enchantment.DURABILITY, 5, true);
+		meta2.addEnchant(Enchantment.DURABILITY, 5, true);
+		assertEquals(meta, meta2);
+		assertEquals(meta2, meta);
+	}
+
+	@Test
+	public void equals_EnchantsDifferent_False()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.addEnchant(Enchantment.DURABILITY, 5, true);
+		meta2.addEnchant(Enchantment.DURABILITY, 5, true);
+		meta2.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
+		assertNotEquals(meta, meta2);
+		assertNotEquals(meta2, meta);
+	}
+
+	@Test
+	public void equals_EnchantsDifferentLevel_False()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.addEnchant(Enchantment.DURABILITY, 5, true);
+		meta2.addEnchant(Enchantment.DURABILITY, 10, true);
+		assertNotEquals(meta, meta2);
+		assertNotEquals(meta2, meta);
+	}
+
+	@Test
+	public void equals_EnchantsOneEmpty_False()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.addEnchant(Enchantment.DURABILITY, 5, true);
+		assertNotEquals(meta, meta2);
+		assertNotEquals(meta2, meta);
+	}
+
+	@Test
+	public void equals_HideFlagsSame_True()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_DYE);
+		meta2.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_DYE);
+		assertEquals(meta, meta2);
+		assertEquals(meta2, meta);
+	}
+
+	@Test
+	public void equals_HideFlagsDifferent_False()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_DYE);
+		meta2.addItemFlags(ItemFlag.HIDE_DESTROYS);
+		assertNotEquals(meta, meta2);
+		assertNotEquals(meta2, meta);
+	}
+
+	@Test
+	public void equals_HideFlagsOneEmpty_False()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+		assertNotEquals(meta, meta2);
+		assertNotEquals(meta2, meta);
+	}
+
+	@Test
+	public void equals_PersistentDataSame_True()
+	{
+		MockPlugin plugin = MockBukkit.createMockPlugin();
+		ItemMetaMock meta2 = new ItemMetaMock();
+		NamespacedKey key = new NamespacedKey(plugin, "key");
+		meta.getPersistentDataContainer().set(key, PersistentDataType.LONG, 0L);
+		meta2.getPersistentDataContainer().set(key, PersistentDataType.LONG, 0L);
+		assertEquals(meta, meta2);
+		assertEquals(meta2, meta);
+	}
+
+	@Test
+	public void equals_PersistentDataDifferent_False()
+	{
+		MockPlugin plugin = MockBukkit.createMockPlugin();
+		ItemMetaMock meta2 = new ItemMetaMock();
+		NamespacedKey key = new NamespacedKey(plugin, "key");
+		meta.getPersistentDataContainer().set(key, PersistentDataType.LONG, 0L);
+		meta2.getPersistentDataContainer().set(key, PersistentDataType.LONG, 10L);
+		assertNotEquals(meta, meta2);
+		assertNotEquals(meta2, meta);
+	}
+
+	@Test
+	public void equals_PersistentDataOneEmpty_False()
+	{
+		MockPlugin plugin = MockBukkit.createMockPlugin();
+		ItemMetaMock meta2 = new ItemMetaMock();
+		NamespacedKey key = new NamespacedKey(plugin, "key");
+		meta.getPersistentDataContainer().set(key, PersistentDataType.LONG, 0L);
+		assertNotEquals(meta, meta2);
+		assertNotEquals(meta2, meta);
+	}
+
+	@Test
+	public void equals_UnbreakableSame_True()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
 		meta.setUnbreakable(true);
 		meta2.setUnbreakable(true);
-		assertTrue(meta.equals(meta2));
+		assertEquals(meta, meta2);
+		assertEquals(meta2, meta);
+		meta.setUnbreakable(false);
+		meta2.setUnbreakable(false);
+		assertEquals(meta, meta2);
+		assertEquals(meta2, meta);
 	}
 
 	@Test
-	public void equals_DifferentUnbreakableProperty_False()
+	public void equals_UnbreakableDifferent_False()
 	{
 		ItemMetaMock meta2 = new ItemMetaMock();
 		meta.setUnbreakable(true);
 		meta2.setUnbreakable(false);
-		assertTrue(meta.equals(meta2));
-		assertTrue(meta2.equals(meta));
+		assertNotEquals(meta, meta2);
+		assertNotEquals(meta2, meta);
+	}
+
+	@Test
+	public void equals_CustomModelDataSame_True()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.setCustomModelData(10);
+		meta2.setCustomModelData(10);
+		assertEquals(meta, meta2);
+		assertEquals(meta2, meta);
+	}
+
+	@Test
+	public void equals_CustomModelDataDifferent_False()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.setCustomModelData(10);
+		meta2.setCustomModelData(20);
+		assertNotEquals(meta, meta2);
+		assertNotEquals(meta2, meta);
+	}
+
+	@Test
+	public void equals_CustomModelDataOneWithout_False()
+	{
+		ItemMetaMock meta2 = new ItemMetaMock();
+		meta.setCustomModelData(10);
+		assertNotEquals(meta, meta2);
+		assertNotEquals(meta2, meta);
 	}
 
 	@Test
