@@ -11,7 +11,7 @@ public class Coordinate
 
 	/**
 	 * Creates a new coordinate object with a specified (x, y, z).
-	 * 
+	 *
 	 * @param x The x coordinate to set.
 	 * @param y The y coordinate to set.
 	 * @param z The z coordinate to set.

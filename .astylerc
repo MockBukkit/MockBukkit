@@ -1,0 +1,7 @@
+--style=allman
+--mode=java
+--indent=tab
+--pad-header
+--pad-oper
+--suffix=none
+--recursive

@@ -6,7 +6,7 @@ import org.bukkit.enchantments.Enchantment;
 public final class EnchantmentsMock
 {
 	private EnchantmentsMock() {}
-	
+
 	public static void registerDefaultEnchantments()
 	{
 		register("protection");
@@ -47,7 +47,7 @@ public final class EnchantmentsMock
 		register("mending");
 		register("vanishing_curse");
 	}
-	
+
 	private static void register(String name)
 	{
 		NamespacedKey key = NamespacedKey.minecraft(name);

@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * This {@link ItemMetaMock} mocks the implementation of {@link KnowledgeBookMeta}.
- * 
+ *
  * @author TheBusyBiscuit
  *
  */

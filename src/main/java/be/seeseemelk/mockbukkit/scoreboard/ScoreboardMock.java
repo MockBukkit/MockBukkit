@@ -18,7 +18,7 @@ public class ScoreboardMock implements Scoreboard
 {
 	private Map<String, ObjectiveMock> objectives = new HashMap<>();
 	private Map<DisplaySlot, ObjectiveMock> objectivesByDisplaySlot = new EnumMap<>(DisplaySlot.class);
-	private Map<String,Team> teams = new HashMap<>();
+	private Map<String, Team> teams = new HashMap<>();
 
 	@Override
 	public ObjectiveMock registerNewObjective(String name, String criteria) throws IllegalArgumentException
@@ -38,8 +38,8 @@ public class ScoreboardMock implements Scoreboard
 	public Set<Objective> getObjectivesByCriteria(String criteria) throws IllegalArgumentException
 	{
 		return objectives.values().stream()
-				.filter(objective -> objective.getCriteria().equals(criteria))
-				.collect(Collectors.toSet());
+		       .filter(objective -> objective.getCriteria().equals(criteria))
+		       .collect(Collectors.toSet());
 	}
 
 	@Override
@@ -64,9 +64,11 @@ public class ScoreboardMock implements Scoreboard
 	public Set<Score> getScores(String entry) throws IllegalArgumentException
 	{
 		Set<Score> scores = new HashSet<>();
-		for(Objective o: objectives.values()){
+		for (Objective o : objectives.values())
+		{
 			Score score = o.getScore(entry);
-			if(score != null){
+			if (score != null)
+			{
 				scores.add(score);
 			}
 		}
@@ -82,9 +84,11 @@ public class ScoreboardMock implements Scoreboard
 	@Override
 	public void resetScores(String entry) throws IllegalArgumentException
 	{
-		for(Objective o: objectives.values()){
+		for (Objective o : objectives.values())
+		{
 			Score score = o.getScore(entry);
-			if(score != null){
+			if (score != null)
+			{
 				score.setScore(0);
 			}
 		}
@@ -99,8 +103,9 @@ public class ScoreboardMock implements Scoreboard
 	@Override
 	public Team getEntryTeam(String entry) throws IllegalArgumentException
 	{
-		for(Team t:teams.values()){
-			if(t.hasEntry(entry))return t;
+		for (Team t : teams.values())
+		{
+			if (t.hasEntry(entry))return t;
 		}
 		return null;
 	}
@@ -121,8 +126,8 @@ public class ScoreboardMock implements Scoreboard
 	@Override
 	public Team registerNewTeam(String name) throws IllegalArgumentException
 	{
-		Team team = new TeamMock(name,this);
-		teams.put(name,team);
+		Team team = new TeamMock(name, this);
+		teams.put(name, team);
 		return team;
 	}
 
@@ -130,7 +135,8 @@ public class ScoreboardMock implements Scoreboard
 	public Set<OfflinePlayer> getPlayers()
 	{
 		Set<OfflinePlayer> players = new HashSet<>();
-		for(Team t:teams.values()){
+		for (Team t : teams.values())
+		{
 			players.addAll(t.getPlayers());
 		}
 		return players;
@@ -140,7 +146,8 @@ public class ScoreboardMock implements Scoreboard
 	public Set<String> getEntries()
 	{
 		Set<String> entries = new HashSet<>();
-		for(Team t:teams.values()){
+		for (Team t : teams.values())
+		{
 			entries.addAll(t.getEntries());
 		}
 		return entries;
@@ -150,10 +157,10 @@ public class ScoreboardMock implements Scoreboard
 	public void clearSlot(DisplaySlot slot) throws IllegalArgumentException
 	{
 		Objective o = objectivesByDisplaySlot.remove(slot);
-		if(o != null)objectives.remove(o.getName());
-		
+		if (o != null)objectives.remove(o.getName());
+
 	}
-	
+
 	/**
 	 * Sets the objective to a specific slot.
 	 * @param objective The objective to set to the slot.
@@ -177,7 +184,7 @@ public class ScoreboardMock implements Scoreboard
 
 	@Override
 	public Objective registerNewObjective(String name, String criteria, String displayName)
-			throws IllegalArgumentException
+	throws IllegalArgumentException
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -185,7 +192,7 @@ public class ScoreboardMock implements Scoreboard
 
 	@Override
 	public Objective registerNewObjective(String name, String criteria, String displayName, RenderType renderType)
-			throws IllegalArgumentException
+	throws IllegalArgumentException
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
