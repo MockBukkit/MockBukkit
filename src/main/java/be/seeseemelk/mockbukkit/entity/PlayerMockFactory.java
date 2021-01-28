@@ -23,7 +23,7 @@ public final class PlayerMockFactory
 
 	/**
 	 * Generates a random name.
-	 * 
+	 *
 	 * @return A randomly generated name.
 	 */
 	private String getRandomName()
@@ -35,7 +35,7 @@ public final class PlayerMockFactory
 
 	/**
 	 * Gets a unique random name. Any name that is generated will never be generated again.
-	 * 
+	 *
 	 * @return A unique random name.
 	 */
 	private String getUniqueRandomName()
@@ -58,7 +58,7 @@ public final class PlayerMockFactory
 
 	/**
 	 * Create a random player mock object with a unique name.
-	 * 
+	 *
 	 * @return A newly created player mock object.
 	 */
 	public PlayerMock createRandomPlayer()
@@ -70,7 +70,7 @@ public final class PlayerMockFactory
 
 	/**
 	 * Create a random {@link OfflinePlayerMock} object with a unique name. It will not however contain a UUID.
-	 * 
+	 *
 	 * @return A newly created player mock object.
 	 */
 	public OfflinePlayerMock createRandomOfflinePlayer()

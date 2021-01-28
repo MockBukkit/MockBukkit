@@ -10,25 +10,25 @@ import org.bukkit.plugin.java.JavaPluginLoader;
 public class TestPlugin extends JavaPlugin
 {
 	private static TestPlugin plugin;
-	
+
 	public TestPlugin()
 	{
 		super();
 	}
-	
+
 	@Override
 	public void onEnable()
 	{
 		plugin = this;
 		getLogger().info("Test plugin enabled");
 	}
-	
+
 	@Override
 	public void onDisable()
 	{
 		getLogger().info("Test plugin disabled");
 	}
-	
+
 	/**
 	 * Kills all players on the server.
 	 */
@@ -36,7 +36,7 @@ public class TestPlugin extends JavaPlugin
 	{
 		Bukkit.getOnlinePlayers().forEach(p -> p.damage(99999999));
 	}
-	
+
 	/**
 	 * Gets the global test plugin.
 	 * @return The global test plugin

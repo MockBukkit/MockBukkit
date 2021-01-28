@@ -13,7 +13,7 @@ import com.google.common.collect.ImmutableSet;
 
 /**
  * A rather simple mock implementation for {@link Material} {@link Tag Tags}.
- * 
+ *
  * @author TheBusyBiscuit
  *
  */

@@ -12,7 +12,7 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
 /**
  * This {@link ContainerMock} represents a {@link Sign}.
- * 
+ *
  * @author TheBusyBiscuit
  *
  */

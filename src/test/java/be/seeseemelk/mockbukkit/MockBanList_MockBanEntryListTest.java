@@ -11,14 +11,14 @@ public class MockBanList_MockBanEntryListTest
 {
 	private Date date;
 	private MockBanList.MockBanEntry entry;
-	
+
 	@Before
 	public void setUp()
 	{
 		date = new Date();
 		entry = new MockBanList.MockBanEntry("target", date, "reason", "source");
 	}
-	
+
 	@Test
 	public void constructor()
 	{
@@ -27,7 +27,7 @@ public class MockBanList_MockBanEntryListTest
 		assertEquals("reason", entry.getReason());
 		assertEquals("source", entry.getSource());
 	}
-	
+
 	@Test
 	public void setCreationDate_OtherDate_DateSetExactly()
 	{
@@ -36,7 +36,7 @@ public class MockBanList_MockBanEntryListTest
 		entry.setCreated(created);
 		assertEquals(created, entry.getCreated());
 	}
-	
+
 	@Test
 	public void setExpirationDate_OtherDate_DateSetExactly()
 	{
@@ -45,14 +45,14 @@ public class MockBanList_MockBanEntryListTest
 		entry.setExpiration(expiration);
 		assertEquals(expiration, entry.getExpiration());
 	}
-	
+
 	@Test
 	public void setSource_OtherSource_SourceSetExactly()
 	{
 		entry.setSource("other source");
 		assertEquals("other source", entry.getSource());
 	}
-	
+
 	@Test
 	public void setReason_LaterDate_DateSetExactly()
 	{

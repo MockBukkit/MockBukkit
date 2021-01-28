@@ -467,7 +467,8 @@ public class ServerMockTest
 	{
 		AtomicReference<Exception> exceptionThrown = new AtomicReference<>();
 
-		server.getScheduler().runTaskAsynchronously(null, () -> {
+		server.getScheduler().runTaskAsynchronously(null, () ->
+		{
 			try
 			{
 				server.assertMainThread();
@@ -532,7 +533,7 @@ public class ServerMockTest
 		}
 	}
 
-	
+
 }
 
 class TestRecipe implements Recipe

@@ -8,7 +8,7 @@ public class ThreadAccessException extends RuntimeException
 	{
 		super();
 	}
-	
+
 	public ThreadAccessException(String message)
 	{
 		super(message);

@@ -16,8 +16,8 @@ public class EnchantmentMock extends Enchantment
 	private boolean isCursed;
 
 	public EnchantmentMock(
-			@NotNull NamespacedKey key,
-			String name
+	    @NotNull NamespacedKey key,
+	    String name
 	)
 	{
 		super(key);
@@ -35,7 +35,7 @@ public class EnchantmentMock extends Enchantment
 	{
 		return maxLevel;
 	}
-	
+
 	public void setMaxLevel(int maxLevel)
 	{
 		this.maxLevel = maxLevel;
@@ -46,7 +46,7 @@ public class EnchantmentMock extends Enchantment
 	{
 		return startLevel;
 	}
-	
+
 	public void setStartLevel(int startLevel)
 	{
 		this.startLevel = startLevel;
@@ -57,7 +57,7 @@ public class EnchantmentMock extends Enchantment
 	{
 		return itemTarget;
 	}
-	
+
 	public void setItemTarget(EnchantmentTarget itemTarget)
 	{
 		this.itemTarget = itemTarget;
@@ -68,7 +68,7 @@ public class EnchantmentMock extends Enchantment
 	{
 		return isTreasure;
 	}
-	
+
 	public void setTreasure(boolean isTreasure)
 	{
 		this.isTreasure = isTreasure;
@@ -79,7 +79,7 @@ public class EnchantmentMock extends Enchantment
 	{
 		return isCursed;
 	}
-	
+
 	public void setCursed(boolean isCursed)
 	{
 		this.isCursed = isCursed;

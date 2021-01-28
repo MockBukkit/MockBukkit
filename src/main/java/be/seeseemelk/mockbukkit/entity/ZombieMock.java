@@ -50,7 +50,7 @@ public class ZombieMock extends MonsterMock implements Zombie
 
 	/**
 	 * This are unimplemented because they Bukkit specifies they should always fail? (@Contract Tag)
-	 * 
+	 *
 	 * @param villager If the zombie is a village
 	 */
 	@Override
@@ -62,7 +62,7 @@ public class ZombieMock extends MonsterMock implements Zombie
 
 	/**
 	 * This are unimplemented because they Bukkit specifies they should always fail? (@Contract Tag)
-	 * 
+	 *
 	 * @param profession Villager profession to use
 	 */
 	@Override

@@ -281,8 +281,8 @@ public class WorldMockTest
 		WorldMock world = new WorldMock();
 		world.setTime(6000L);
 		world.setTime(10000L);
-		server.getPluginManager().assertEventFired(TimeSkipEvent.class, event -> 
-			event.getSkipAmount() == 4000L && event.getSkipReason().equals(TimeSkipEvent.SkipReason.CUSTOM));
+		server.getPluginManager().assertEventFired(TimeSkipEvent.class, event ->
+		        event.getSkipAmount() == 4000L && event.getSkipReason().equals(TimeSkipEvent.SkipReason.CUSTOM));
 	}
 
 	@Test
