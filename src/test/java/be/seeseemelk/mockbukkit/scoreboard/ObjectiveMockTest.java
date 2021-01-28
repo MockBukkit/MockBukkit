@@ -28,7 +28,7 @@ public class ObjectiveMockTest
 		scoreboard = new ScoreboardMock();
 		objective = scoreboard.registerNewObjective("Objective", "dummy");
 	}
-	
+
 	@After
 	public void tearDown() throws Exception
 	{
@@ -44,7 +44,7 @@ public class ObjectiveMockTest
 		assertEquals("dummy", objective.getCriteria());
 		assertNull(objective.getDisplaySlot());
 	}
-	
+
 	@Test
 	public void setDisplayName_AnyString_DisplayNameSet()
 	{
@@ -52,7 +52,7 @@ public class ObjectiveMockTest
 		assertEquals("Display name not changed", "New name", objective.getDisplayName());
 		assertEquals("Internal name was changed", "Objective", objective.getName());
 	}
-	
+
 	@Test
 	public void unregister_ObjectiveWasRegistered_ObjectiveIsRemoved()
 	{
@@ -60,14 +60,14 @@ public class ObjectiveMockTest
 		objective.unregister();
 		assertNull("Objective was not registered", scoreboard.getObjective(objective.getName()));
 	}
-	
+
 	@Test
 	public void getScore_Player_ReturnsNotNull()
 	{
 		PlayerMock player = server.addPlayer();
 		assertNotNull(objective.getScore(player));
 	}
-	
+
 	@Test
 	public void getScore_SamePlayer_ReturnsSame()
 	{
@@ -77,14 +77,14 @@ public class ObjectiveMockTest
 		assumeNotNull(score1);
 		assertSame(score1, score2);
 	}
-	
+
 	@Test
 	public void getScore_String_ReturnsNotNull()
 	{
 		Score score = objective.getScore("The score");
 		assertNotNull(score);
 	}
-	
+
 	@Test
 	public void getScore_SameString_ReturnsSame()
 	{

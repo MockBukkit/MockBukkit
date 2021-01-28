@@ -11,7 +11,7 @@ public interface MessageTarget
 	 * @return The next message sent to the target.
 	 */
 	String nextMessage();
-	
+
 	/**
 	 * Asserts that a specific message was not received next by the message target.
 	 * @param expected The message that should have been received by the target.
@@ -28,7 +28,7 @@ public interface MessageTarget
 			assertEquals(expected, message);
 		}
 	}
-	
+
 	/**
 	 * Asserts that more messages were received by the message target.
 	 */

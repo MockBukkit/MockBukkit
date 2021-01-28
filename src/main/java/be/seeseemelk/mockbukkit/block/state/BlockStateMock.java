@@ -225,7 +225,7 @@ public class BlockStateMock implements BlockState, Cloneable
 
 	/**
 	 * This returns a copy of this {@link BlockStateMock}. Inheritents of this class should override this method!
-	 * 
+	 *
 	 * @return A snapshot of this {@link BlockStateMock}.
 	 */
 	@NotNull

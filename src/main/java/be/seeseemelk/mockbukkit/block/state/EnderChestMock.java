@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * A simple mock of the {@link EnderChest} {@link BlockState}, it is a pretty generic implementation of
  * {@link TileStateMock}.
- * 
+ *
  * @author TheBusyBiscuit
  *
  */

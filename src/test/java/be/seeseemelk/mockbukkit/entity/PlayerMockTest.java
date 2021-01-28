@@ -67,8 +67,10 @@ public class PlayerMockTest
 {
 	// Taken from https://minecraft.gamepedia.com/Experience#Leveling_up
 	private static int[] expRequired =
-	{ 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 42, 47, 52, 57, 62, 67, 72, 77, 82, 87, 92, 97, 102,
-			107, 112, 121, 130, 139, 148, 157, 166, 175, 184, 193 };
+	{
+		7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 42, 47, 52, 57, 62, 67, 72, 77, 82, 87, 92, 97, 102,
+		107, 112, 121, 130, 139, 148, 157, 166, 175, 184, 193
+	};
 	private ServerMock server;
 	private UUID uuid;
 	private PlayerMock player;
@@ -430,7 +432,7 @@ public class PlayerMockTest
 	public void simulateBlockDamage_NotSurvival_BlockNotDamaged()
 	{
 		for (GameMode gm : new GameMode[]
-		{ GameMode.CREATIVE, GameMode.ADVENTURE, GameMode.SPECTATOR })
+		        { GameMode.CREATIVE, GameMode.ADVENTURE, GameMode.SPECTATOR })
 		{
 			player.setGameMode(gm);
 			Block block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
@@ -874,9 +876,10 @@ public class PlayerMockTest
 	{
 		player.playSound(player.getLocation(), Sound.ENTITY_SLIME_SQUISH, SoundCategory.AMBIENT, 1, 1);
 
-		player.assertSoundHeard(Sound.ENTITY_SLIME_SQUISH, audio -> {
+		player.assertSoundHeard(Sound.ENTITY_SLIME_SQUISH, audio ->
+		{
 			return player.getLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.AMBIENT
-					&& audio.getVolume() == 1 && audio.getPitch() == 1;
+			&& audio.getVolume() == 1 && audio.getPitch() == 1;
 		});
 	}
 
@@ -888,7 +891,7 @@ public class PlayerMockTest
 		player.setItemOnCursor(new ItemStack(Material.PUMPKIN));
 		player.closeInventory();
 		server.getPluginManager().assertEventFired(InventoryCloseEvent.class,
-				e -> e.getPlayer() == player && e.getInventory() == inv);
+		        e -> e.getPlayer() == player && e.getInventory() == inv);
 		assertNull(player.getItemOnCursor());
 	}
 
@@ -937,7 +940,7 @@ public class PlayerMockTest
 	public void testMultiplePotionEffects()
 	{
 		Collection<PotionEffect> effects = Arrays.asList(new PotionEffect(PotionEffectType.BAD_OMEN, 3, 1),
-				new PotionEffect(PotionEffectType.LUCK, 5, 2));
+		                                   new PotionEffect(PotionEffectType.LUCK, 5, 2));
 
 		assertTrue(player.addPotionEffects(effects));
 

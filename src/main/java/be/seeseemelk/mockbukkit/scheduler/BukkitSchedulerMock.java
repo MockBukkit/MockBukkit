@@ -45,7 +45,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 
 	/**
 	 * Get the current tick of the server.
-	 * 
+	 *
 	 * @return The current tick of the server.
 	 */
 	public long getCurrentTick()
@@ -92,7 +92,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 
 	/**
 	 * Perform a number of ticks on the server.
-	 * 
+	 *
 	 * @param ticks The number of ticks to executed.
 	 */
 	public void performTicks(long ticks)
@@ -210,7 +210,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public int scheduleAsyncDelayedTask(Plugin plugin, Runnable task, long delay)
 	{
 		Logger.getLogger(LOGGER_NAME)
-				.warning("Consider using runTaskLaterAsynchronously instead of scheduleAsyncDelayedTask");
+		.warning("Consider using runTaskLaterAsynchronously instead of scheduleAsyncDelayedTask");
 		return runTaskLaterAsynchronously(plugin, task, delay).getTaskId();
 	}
 
@@ -218,7 +218,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public int scheduleAsyncDelayedTask(Plugin plugin, Runnable task)
 	{
 		Logger.getLogger(LOGGER_NAME)
-				.warning("Consider using runTaskAsynchronously instead of scheduleAsyncDelayedTask");
+		.warning("Consider using runTaskAsynchronously instead of scheduleAsyncDelayedTask");
 		return runTaskAsynchronously(plugin, task).getTaskId();
 	}
 
@@ -226,7 +226,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public int scheduleAsyncRepeatingTask(Plugin plugin, Runnable task, long delay, long period)
 	{
 		Logger.getLogger(LOGGER_NAME)
-				.warning("Consider using runTaskTimerAsynchronously instead of scheduleAsyncRepeatingTask");
+		.warning("Consider using runTaskTimerAsynchronously instead of scheduleAsyncRepeatingTask");
 		return runTaskTimerAsynchronously(plugin, task, delay, period).getTaskId();
 	}
 
@@ -319,7 +319,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public BukkitTask runTaskLaterAsynchronously(Plugin plugin, Runnable task, long delay)
 	{
 		ScheduledTask scheduledTask = new ScheduledTask(id++, plugin, false, currentTick + delay,
-				new AsyncRunnable(task));
+		        new AsyncRunnable(task));
 		tasks.add(scheduledTask);
 		asyncTasksQueued++;
 		return scheduledTask;
@@ -335,7 +335,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public BukkitTask runTaskTimerAsynchronously(Plugin plugin, Runnable task, long delay, long period)
 	{
 		RepeatingTask scheduledTask = new RepeatingTask(id++, plugin, false, currentTick + delay, period,
-				new AsyncRunnable(task));
+		        new AsyncRunnable(task));
 		tasks.add(scheduledTask);
 		return scheduledTask;
 	}

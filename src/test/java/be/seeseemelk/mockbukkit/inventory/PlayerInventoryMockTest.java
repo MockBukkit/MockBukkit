@@ -39,7 +39,7 @@ public class PlayerInventoryMockTest
 	{
 		assertEquals(41, inventory.getSize());
 	}
-	
+
 	@Test
 	public void getHolder_HolderSet_GetsHolder()
 	{
@@ -47,7 +47,7 @@ public class PlayerInventoryMockTest
 		PlayerInventoryMock inventory = new PlayerInventoryMock(player);
 		assertSame(player, inventory.getHolder());
 	}
-	
+
 	@SuppressWarnings("deprecation")
 	@Test
 	public void setItemInMainHand_SomeItem_ItemSet()
@@ -59,7 +59,7 @@ public class PlayerInventoryMockTest
 		assertEquals(item, inventory.getItemInHand());
 		assertEquals(item, inventory.getContents()[PlayerInventoryMock.SLOT_BAR]);
 	}
-	
+
 	@SuppressWarnings("deprecation")
 	@Test
 	public void setItemInHand_SomeItem_ItemSet()
@@ -70,7 +70,7 @@ public class PlayerInventoryMockTest
 		assertEquals(item, inventory.getItemInMainHand());
 		assertEquals(item, inventory.getItemInHand());
 	}
-	
+
 	@Test
 	public void setHeldItemSlot_SecondSlot_ChangesSlot()
 	{
@@ -82,7 +82,7 @@ public class PlayerInventoryMockTest
 		assertEquals(item, inventory.getItemInMainHand());
 		assertEquals(item, inventory.getItem(PlayerInventoryMock.SLOT_BAR + 1));
 	}
-	
+
 	@Test
 	public void setHeldItemSlot_WithinRange_Works()
 	{
@@ -92,31 +92,31 @@ public class PlayerInventoryMockTest
 			assertEquals(i, inventory.getHeldItemSlot());
 		}
 	}
-	
+
 	@Test(expected = ArrayIndexOutOfBoundsException.class)
 	public void setHeldItemSlot_TooLow_Exception()
 	{
 		inventory.setHeldItemSlot(-1);
 	}
-	
+
 	@Test(expected = ArrayIndexOutOfBoundsException.class)
 	public void setHeldItemSlot_TooHigh_Exception()
 	{
 		inventory.setHeldItemSlot(9);
 	}
-	
+
 	@Test
 	public void getArmorContents_Default_Length4()
 	{
 		assertEquals(4, inventory.getArmorContents().length);
 	}
-	
+
 	@Test
 	public void getExtraContents_Default_Length1()
 	{
 		assertEquals(1, inventory.getExtraContents().length);
 	}
-	
+
 	@Test
 	public void setItem_InInventory_ItemInContents()
 	{
@@ -124,7 +124,7 @@ public class PlayerInventoryMockTest
 		inventory.setItem(0, item);
 		assertEquals(item, inventory.getContents()[0]);
 	}
-	
+
 	@Test
 	public void setItem_InArmorInventory_ItemInArmorContents()
 	{
@@ -132,7 +132,7 @@ public class PlayerInventoryMockTest
 		inventory.setItem(36, item);
 		assertEquals(item, inventory.getArmorContents()[0]);
 	}
-	
+
 	@Test
 	public void setItem_InExtraInventory_ItemInExtraContents()
 	{
@@ -140,7 +140,7 @@ public class PlayerInventoryMockTest
 		inventory.setItem(40, item);
 		assertEquals(item, inventory.getExtraContents()[0]);
 	}
-	
+
 	@Test
 	public void getArmorContents_ContentsChanged_ItemsChanged()
 	{
@@ -162,7 +162,7 @@ public class PlayerInventoryMockTest
 		assertEquals(chestplate, inventory.getChestplate());
 		assertEquals(helmet, inventory.getHelmet());
 	}
-	
+
 	@Test
 	public void setBoots_ArmorItem_ArmorItemSet()
 	{
@@ -170,7 +170,7 @@ public class PlayerInventoryMockTest
 		inventory.setBoots(boots);
 		assertEquals(boots, inventory.getBoots());
 	}
-	
+
 	@Test
 	public void setLeggings_ArmorItem_ArmorItemSet()
 	{
@@ -178,7 +178,7 @@ public class PlayerInventoryMockTest
 		inventory.setLeggings(leggings);
 		assertEquals(leggings, inventory.getLeggings());
 	}
-	
+
 	@Test
 	public void setChestplate_ArmorItem_ArmorItemSet()
 	{
@@ -186,7 +186,7 @@ public class PlayerInventoryMockTest
 		inventory.setChestplate(chestplate);
 		assertEquals(chestplate, inventory.getChestplate());
 	}
-	
+
 	@Test
 	public void setHelmet_ArmorItem_ArmorItemSet()
 	{
@@ -194,13 +194,13 @@ public class PlayerInventoryMockTest
 		inventory.setHelmet(helmet);
 		assertEquals(helmet, inventory.getHelmet());
 	}
-	
+
 	@Test
 	public void setContent_ResultFromGetContent_Works()
 	{
 		inventory.setContents(inventory.getContents());
 	}
-	
+
 	@Test
 	public void setArmorContents_NewArray_ArmorSet()
 	{
@@ -215,7 +215,7 @@ public class PlayerInventoryMockTest
 		assertEquals(chestplate, inventory.getChestplate());
 		assertEquals(helmet, inventory.getHelmet());
 	}
-	
+
 	@Test
 	public void setItemInOffHand_NewItem_ItemSet()
 	{
@@ -224,35 +224,35 @@ public class PlayerInventoryMockTest
 		assertEquals(item, inventory.getItemInOffHand());
 		assertEquals(item, inventory.getItem(PlayerInventoryMock.OFF_HAND));
 	}
-	
+
 	@Test
 	public void setExtraContents_NewItem_OffHandSet()
 	{
 		ItemStack item = new ItemStack(Material.STONE);
-		inventory.setExtraContents(new ItemStack[]{item});
+		inventory.setExtraContents(new ItemStack[] {item});
 		ItemStack[] contents = inventory.getExtraContents();
 		assertEquals(item, contents[0]);
 		assertEquals(item, inventory.getItemInOffHand());
 	}
-	
+
 	@Test(expected = NullPointerException.class)
 	public void setArmorContents_Null_Exception()
 	{
 		inventory.setArmorContents(null);
 	}
-	
+
 	@Test(expected = NullPointerException.class)
 	public void setExtraContents_Null_Exception()
 	{
 		inventory.setExtraContents(null);
 	}
-	
+
 	@Test(expected = IllegalArgumentException.class)
 	public void setArmorContents_TooLarge_Exception()
 	{
 		inventory.setArmorContents(new ItemStack[5]);
 	}
-	
+
 	@Test(expected = IllegalArgumentException.class)
 	public void setExtraContents_TooLarge_Exception()
 	{

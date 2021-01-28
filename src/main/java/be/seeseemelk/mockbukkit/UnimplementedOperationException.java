@@ -10,7 +10,7 @@ public class UnimplementedOperationException extends AssumptionViolatedException
 	{
 		super("Not implemented");
 	}
-	
+
 	public UnimplementedOperationException(String message)
 	{
 		super(message);
