@@ -21,7 +21,7 @@ public class AttributeInstanceMockTest
 	{
 		assertEquals(Attribute.GENERIC_FLYING_SPEED, attribute.getAttribute());
 	}
-	
+
 	@Test
 	public void getValues_Constructor_ExactValue()
 	{
@@ -29,7 +29,7 @@ public class AttributeInstanceMockTest
 		assertEquals(5.0, attribute.getValue(), 0);
 		assertEquals(5.0, attribute.getDefaultValue(), 0);
 	}
-	
+
 	@Test
 	public void setValue_Constructor_ValueSetExactly()
 	{

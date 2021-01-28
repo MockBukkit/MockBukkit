@@ -44,25 +44,25 @@ public class TestPlugin extends JavaPlugin implements Listener
 		super(loader, description, dataFolder, file);
 		extra = null;
 	}
-	
+
 	protected TestPlugin(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file, Number extra)
 	{
 		super(loader, description, dataFolder, file);
 		this.extra = extra;
 	}
-	
+
 	@Override
 	public void onEnable()
 	{
 		onEnableExecuted = true;
 	}
-	
+
 	@Override
 	public void onDisable()
 	{
 		onDisableExecuted = true;
 	}
-	
+
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
 	{
@@ -72,12 +72,12 @@ public class TestPlugin extends JavaPlugin implements Listener
 		this.commandArguments = args;
 		return commandReturns;
 	}
-	
+
 	public void unannotatedEventHandler(PlayerInteractEvent event)
 	{
 		unannotatedPlayerInteractEventExecuted = true;
 	}
-	
+
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent event)
 	{

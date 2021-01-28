@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 
 /**
  * This class represents a {@link Sound} that was heard by a {@link Player}.
- * 
+ *
  * @author TheBusyBiscuit
  *
  */
@@ -30,7 +30,7 @@ public final class AudioExperience
 
 	/**
 	 * This returns the {@link Sound} that was played.
-	 * 
+	 *
 	 * @return The {@link Sound}
 	 */
 	public Sound getSound()
@@ -40,7 +40,7 @@ public final class AudioExperience
 
 	/**
 	 * This method returns the {@link SoundCategory} with which the {@link Sound} was played.
-	 * 
+	 *
 	 * @return The {@link SoundCategory}
 	 */
 	public SoundCategory getCategory()
@@ -50,7 +50,7 @@ public final class AudioExperience
 
 	/**
 	 * This returns the {@link Location} at which this {@link Sound} was played.
-	 * 
+	 *
 	 * @return The {@link Location}
 	 */
 	public Location getLocation()
@@ -60,7 +60,7 @@ public final class AudioExperience
 
 	/**
 	 * The volume of this {@link Sound}
-	 * 
+	 *
 	 * @return The volume
 	 */
 	public float getVolume()
@@ -70,7 +70,7 @@ public final class AudioExperience
 
 	/**
 	 * The pitch of this {@link Sound}
-	 * 
+	 *
 	 * @return The pitch
 	 */
 	public float getPitch()

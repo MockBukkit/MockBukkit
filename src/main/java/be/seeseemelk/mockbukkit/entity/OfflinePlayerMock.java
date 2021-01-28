@@ -18,10 +18,10 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
 /**
  * A Mock specifically for {@link OfflinePlayer}. Not interchangeable with {@link PlayerMock}.
- * 
- * 
+ *
+ *
  * @author TheBusyBiscuit
- * 
+ *
  * @see PlayerMock
  *
  */

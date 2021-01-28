@@ -1,0 +1,27 @@
+# This workflow will build a Java project with Gradle
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
+
+name: Code style
+
+on:
+  push:
+    branches: [ v1.16 ]
+  pull_request:
+    branches: [ v1.16 ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install astyle
+      run: sudo apt-get install -y astyle
+      
+    - name: Check formatting
+      run: astyle --options=.astylerc '*.java'
+    - uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: 'Auto-update code formatting'
+        file_pattern: '*.java'

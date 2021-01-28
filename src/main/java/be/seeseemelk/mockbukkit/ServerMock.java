@@ -211,7 +211,7 @@ public class ServerMock implements Server
 		assertMainThread();
 		playerList.addPlayer(player);
 		PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(player,
-				String.format(JOIN_MESSAGE, player.getDisplayName()));
+		        String.format(JOIN_MESSAGE, player.getDisplayName()));
 		Bukkit.getPluginManager().callEvent(playerJoinEvent);
 
 		player.setLastPlayed(getCurrentServerTime());
@@ -220,7 +220,7 @@ public class ServerMock implements Server
 
 	/**
 	 * Creates a random player and adds it.
-	 * 
+	 *
 	 * @return The player that was added.
 	 */
 	public PlayerMock addPlayer()
@@ -233,7 +233,7 @@ public class ServerMock implements Server
 
 	/**
 	 * Creates a player with a given name and adds it.
-	 * 
+	 *
 	 * @param name The name to give to the player.
 	 * @return The added player.
 	 */
@@ -563,31 +563,31 @@ public class ServerMock implements Server
 		case LECTERN:
 			return new LecternInventoryMock(owner);
 		case GRINDSTONE:
-			// TODO: This Inventory Type needs to be implemented
+		// TODO: This Inventory Type needs to be implemented
 		case STONECUTTER:
-			// TODO: This Inventory Type needs to be implemented
+		// TODO: This Inventory Type needs to be implemented
 		case CARTOGRAPHY:
-			// TODO: This Inventory Type needs to be implemented
+		// TODO: This Inventory Type needs to be implemented
 		case SMOKER:
-			// TODO: This Inventory Type needs to be implemented
+		// TODO: This Inventory Type needs to be implemented
 		case LOOM:
-			// TODO: This Inventory Type needs to be implemented
+		// TODO: This Inventory Type needs to be implemented
 		case BLAST_FURNACE:
-			// TODO: This Inventory Type needs to be implemented
+		// TODO: This Inventory Type needs to be implemented
 		case ANVIL:
-			// TODO: This Inventory Type needs to be implemented
+		// TODO: This Inventory Type needs to be implemented
 		case SMITHING:
-			// TODO: This Inventory Type needs to be implemented
+		// TODO: This Inventory Type needs to be implemented
 		case BEACON:
-			// TODO: This Inventory Type needs to be implemented
+		// TODO: This Inventory Type needs to be implemented
 		case FURNACE:
-			// TODO: This Inventory Type needs to be implemented
+		// TODO: This Inventory Type needs to be implemented
 		case WORKBENCH:
-			// TODO: This Inventory Type needs to be implemented
+		// TODO: This Inventory Type needs to be implemented
 		case ENCHANTING:
-			// TODO: This Inventory Type needs to be implemented
+		// TODO: This Inventory Type needs to be implemented
 		case BREWING:
-			// TODO: This Inventory Type needs to be implemented
+		// TODO: This Inventory Type needs to be implemented
 		default:
 			throw new UnimplementedOperationException("Inventory type not yet supported");
 		}
@@ -657,7 +657,7 @@ public class ServerMock implements Server
 	public Set<String> getIPBans()
 	{
 		return this.playerList.getIPBans().getBanEntries().stream().map(BanEntry::getTarget)
-				.collect(Collectors.toSet());
+		       .collect(Collectors.toSet());
 	}
 
 	@Override
@@ -740,7 +740,8 @@ public class ServerMock implements Server
 	{
 		assertMainThread();
 
-		return recipes.stream().filter(recipe -> {
+		return recipes.stream().filter(recipe ->
+		{
 			ItemStack result = recipe.getResult();
 			// Amount is explicitly ignored here
 			return result.getType() == item.getType() && result.getItemMeta().equals(item.getItemMeta());
@@ -1287,10 +1288,10 @@ public class ServerMock implements Server
 	 * This creates a new Mock {@link Tag} for the {@link Material} class.<br>
 	 * Call this in advance before you are gonna access {@link #getTag(String, NamespacedKey, Class)} or any of the
 	 * constants defined in {@link Tag}.
-	 * 
+	 *
 	 * @param key       The {@link NamespacedKey} for this {@link Tag}
 	 * @param materials {@link Material Materials} which should be covered by this {@link Tag}
-	 * 
+	 *
 	 * @return The newly created {@link Tag}
 	 */
 	public Tag<Material> createMaterialTag(NamespacedKey key, String registryKey, Material... materials)
@@ -1405,7 +1406,7 @@ public class ServerMock implements Server
 
 	@Override
 	public ItemStack createExplorerMap(World world, Location location, StructureType structureType, int radius,
-			boolean findUnexplored)
+	                                   boolean findUnexplored)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1482,7 +1483,7 @@ public class ServerMock implements Server
 
 	/**
 	 * This returns the current time of the {@link Server} in milliseconds
-	 * 
+	 *
 	 * @return The current {@link Server} time
 	 */
 	protected long getCurrentServerTime()

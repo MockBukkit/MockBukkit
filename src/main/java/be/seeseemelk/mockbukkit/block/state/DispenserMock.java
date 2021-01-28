@@ -14,7 +14,7 @@ import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 
 /**
  * This {@link ContainerMock} represents a {@link Dispenser}.
- * 
+ *
  * @author TheBusyBiscuit
  *
  */

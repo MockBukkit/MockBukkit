@@ -9,7 +9,7 @@ import org.bukkit.plugin.java.JavaPluginLoader;
 
 public class SecondTestPlugin extends JavaPlugin implements Listener
 {
-	
+
 	public SecondTestPlugin()
 	{
 		super();
@@ -19,5 +19,5 @@ public class SecondTestPlugin extends JavaPlugin implements Listener
 	{
 		super(loader, description, dataFolder, file);
 	}
-	
+
 }

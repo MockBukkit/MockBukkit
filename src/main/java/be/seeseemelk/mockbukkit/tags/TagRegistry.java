@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * An enum for all the different {@link Material} {@link Tag} registries.
- * 
+ *
  * @author TheBusyBiscuit
  *
  */

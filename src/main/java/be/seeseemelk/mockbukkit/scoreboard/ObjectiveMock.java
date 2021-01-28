@@ -70,7 +70,7 @@ public class ObjectiveMock implements Objective
 	{
 		scoreboard.unregister(this);
 	}
-	
+
 	/**
 	 * Checks if the objective is still registered.
 	 * @return {@code true} if the objective is still registered, {@code false} if it has been unregistered.
@@ -96,7 +96,7 @@ public class ObjectiveMock implements Objective
 	@Override
 	public ScoreMock getScore(OfflinePlayer player) throws IllegalArgumentException, IllegalStateException
 	{
-		return getScore(player.getName());	
+		return getScore(player.getName());
 	}
 
 	@Override

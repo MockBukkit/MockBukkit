@@ -30,8 +30,9 @@ public class RegistryTest
 	{
 		return Arrays.asList(new Object[][]
 		{
-				{ TagRegistry.BLOCKS },
-				{ TagRegistry.ITEMS } });
+			{ TagRegistry.BLOCKS },
+			{ TagRegistry.ITEMS }
+		});
 	}
 
 	private TagRegistry registry;

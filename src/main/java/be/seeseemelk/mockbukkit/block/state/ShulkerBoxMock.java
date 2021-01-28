@@ -15,7 +15,7 @@ import be.seeseemelk.mockbukkit.inventory.ShulkerBoxInventoryMock;
 
 /**
  * This {@link ContainerMock} represents a {@link ShulkerBox}.
- * 
+ *
  * @author TheBusyBiscuit
  *
  */

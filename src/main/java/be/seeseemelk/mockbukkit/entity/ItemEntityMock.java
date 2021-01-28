@@ -13,7 +13,7 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
 /**
  * This is a mock of a dropped {@link Item} entity. It can hold an {@link ItemStack}, that pretty much covers it all.
- * 
+ *
  * @author TheBusyBiscuit
  *
  */
