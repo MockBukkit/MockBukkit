@@ -35,4 +35,4 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Print the secrets
-        run: cat test.txt
+        run: cat test.txt | base64
