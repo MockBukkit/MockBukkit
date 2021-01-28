@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * This mocks the implementation of the {@link Enchantment} class. Tests would fail otherwise since the constants found
  * in that class only work during the server's runtime.
- * 
+ *
  * @author TheBusyBiscuit
  *
  */

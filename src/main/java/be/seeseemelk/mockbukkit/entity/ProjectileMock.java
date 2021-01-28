@@ -11,7 +11,7 @@ import be.seeseemelk.mockbukkit.ServerMock;
 
 /**
  * The {@link ProjectileMock} is an {@link EntityMock} representing a generic {@link Projectile}.
- * 
+ *
  * @author TheBusyBiscuit
  *
  */

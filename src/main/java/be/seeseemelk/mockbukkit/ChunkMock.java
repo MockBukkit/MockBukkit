@@ -122,13 +122,13 @@ public class ChunkMock implements Chunk
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 	@Override
 	public int hashCode()
 	{
 		return world.hashCode() + x + z;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj)
 	{

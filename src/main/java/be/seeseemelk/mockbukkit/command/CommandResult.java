@@ -15,7 +15,7 @@ public class CommandResult
 		this.success = success;
 		this.sender = sender;
 	}
-	
+
 	/**
 	 * Check if the command executed successfully.
 	 * @return {@code true} if the command executed successfully, {@code false} if a problem occured.
@@ -32,7 +32,7 @@ public class CommandResult
 	{
 		assertTrue(success);
 	}
-	
+
 	/**
 	 * Asserts if the returned code of the executed command is not {@code false}.
 	 */
@@ -40,7 +40,7 @@ public class CommandResult
 	{
 		assertFalse(success);
 	}
-	
+
 	/**
 	 * Assets if the given message was not the next message send to the command sender.
 	 * @param message The message to check for.
@@ -57,7 +57,7 @@ public class CommandResult
 			fail("No more messages");
 		}
 	}
-	
+
 	/**
 	 * Asserts if a given formatted message was not the next message sent to the command sender.
 	 * @param format The formatted message to check for.
@@ -67,9 +67,9 @@ public class CommandResult
 	{
 		assertResponse(String.format(format, objects));
 	}
-	
+
 	/**
-	 * Asserts if more messages have been sent to the command sender. 
+	 * Asserts if more messages have been sent to the command sender.
 	 */
 	public void assertNoResponse()
 	{

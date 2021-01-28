@@ -18,7 +18,7 @@ class ActivePotionEffect
 
 	/**
 	 * This returns whether this {@link PotionEffect} has expired.
-	 * 
+	 *
 	 * @return Whether the effect wore off.
 	 */
 	public boolean hasExpired()
@@ -29,7 +29,7 @@ class ActivePotionEffect
 
 	/**
 	 * This method returns the underlying {@link PotionEffect}
-	 * 
+	 *
 	 * @return The actual {@link PotionEffect}.
 	 */
 	public PotionEffect getPotionEffect()

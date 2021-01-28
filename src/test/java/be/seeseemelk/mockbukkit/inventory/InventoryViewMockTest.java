@@ -31,7 +31,7 @@ public class InventoryViewMockTest
 	{
 		MockBukkit.unmock();
 	}
-	
+
 	@Test
 	public void constructorEmpty_AllNull()
 	{
@@ -39,7 +39,7 @@ public class InventoryViewMockTest
 		assertNull(view.getBottomInventory());
 		assertNull(view.getPlayer());
 	}
-	
+
 	@Test
 	public void constructorParameterised_ValuesSet()
 	{
@@ -52,13 +52,13 @@ public class InventoryViewMockTest
 		assertSame(bottom, view.getBottomInventory());
 		assertSame(InventoryType.DROPPER, view.getType());
 	}
-	
+
 	@Test
 	public void getType_NoneSet_Chest()
 	{
 		assertEquals(InventoryType.CHEST, view.getType());
 	}
-	
+
 	@Test
 	public void getTopInventory_TopInventorySet_SameReturned()
 	{
@@ -66,7 +66,7 @@ public class InventoryViewMockTest
 		view.setTopInventory(inventory);
 		assertSame(inventory, view.getTopInventory());
 	}
-	
+
 	@Test
 	public void getBottomInventory_BottomInventorySet_SameReturned()
 	{
@@ -74,7 +74,7 @@ public class InventoryViewMockTest
 		view.setBottomInventory(inventory);
 		assertSame(inventory, view.getBottomInventory());
 	}
-	
+
 	@Test
 	public void getPlayer_PlayerSet_SameReturned()
 	{
@@ -82,7 +82,7 @@ public class InventoryViewMockTest
 		view.setPlayer(player);
 		assertSame(player, view.getPlayer());
 	}
-	
+
 	@Test
 	public void getType_TypeSet_SameReturned()
 	{

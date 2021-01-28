@@ -16,7 +16,7 @@ import be.seeseemelk.mockbukkit.inventory.meta.FireworkMetaMock;
 /**
  * This is a simple mock of the {@link Firework} {@link Entity}. It takes a {@link FireworkMeta} to carry all
  * properties.
- * 
+ *
  * @author TheBusyBiscuit
  *
  */

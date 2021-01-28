@@ -24,7 +24,7 @@ public abstract class InventoryViewMock extends InventoryView
 
 	/**
 	 * Sets the top inventory.
-	 * 
+	 *
 	 * @param inventory The top inventory.
 	 */
 	public void setTopInventory(Inventory inventory)
@@ -34,7 +34,7 @@ public abstract class InventoryViewMock extends InventoryView
 
 	/**
 	 * Sets the bottom inventory.
-	 * 
+	 *
 	 * @param inventory The bottom inventory.
 	 */
 	public void setBottomInventory(Inventory inventory)
@@ -44,7 +44,7 @@ public abstract class InventoryViewMock extends InventoryView
 
 	/**
 	 * Sets the player viewing.
-	 * 
+	 *
 	 * @param player The player viewing.
 	 */
 	public void setPlayer(HumanEntity player)
@@ -54,7 +54,7 @@ public abstract class InventoryViewMock extends InventoryView
 
 	/**
 	 * Sets the type of inventory view.
-	 * 
+	 *
 	 * @param type The new type of inventory view.
 	 */
 	public void setType(InventoryType type)

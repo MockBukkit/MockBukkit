@@ -132,42 +132,42 @@ public class BlockMockTest
 		Assert.assertEquals(blockData, block.getBlockData());
 		block.setType(oldType);
 	}
-	
+
 	@Test
 	public void testWaterIsLiquid()
 	{
 		block.setType(Material.WATER);
 		assertTrue(block.isLiquid());
 	}
-	
+
 	@Test
 	public void testLavaIsLiquid()
 	{
 		block.setType(Material.LAVA);
 		assertTrue(block.isLiquid());
 	}
-	
+
 	@Test
 	public void testBubbleColumnIsLiquid()
 	{
 		block.setType(Material.BUBBLE_COLUMN);
 		assertTrue(block.isLiquid());
 	}
-	
+
 	@Test
 	public void testAirIsLiquid()
 	{
 		block.setType(Material.AIR);
 		assertTrue(block.isEmpty());
 	}
-	
+
 	@Test
 	public void testStoneIsNotLiquid()
 	{
 		block.setType(Material.STONE);
 		assertFalse(block.isLiquid());
 	}
-	
+
 	@Test
 	public void testStoneIsNotEmpty()
 	{

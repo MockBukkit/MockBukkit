@@ -85,7 +85,7 @@ public abstract class EntityMock implements Entity, MessageTarget
 
 	/**
 	 * Assert that the actual location of the player is within a certain distance to a given location.
-	 * 
+	 *
 	 * @param expectedLocation The location the player should be at.
 	 * @param maximumDistance  The distance the player may maximumly be separated from the expected location.
 	 */
@@ -94,13 +94,13 @@ public abstract class EntityMock implements Entity, MessageTarget
 		double distance = location.distance(expectedLocation);
 		assertEquals(expectedLocation.getWorld(), location.getWorld());
 		assertTrue(String.format("Distance was <%.3f> but should be less than or equal to <%.3f>", distance,
-				maximumDistance), distance <= maximumDistance);
+		                         maximumDistance), distance <= maximumDistance);
 	}
 
 	/**
 	 * Assert that the player teleported to a certain location within a certain distance to a given location. Also
 	 * clears the teleported flag.
-	 * 
+	 *
 	 * @param expectedLocation The location the player should be at.
 	 * @param maximumDistance  The distance the player may maximumly be separated from the expected location.
 	 */
@@ -122,7 +122,7 @@ public abstract class EntityMock implements Entity, MessageTarget
 
 	/**
 	 * Checks if the player has been teleported since the last assert or {@link #clearTeleported}.
-	 * 
+	 *
 	 * @return {@code true} if the player has been teleported, {@code false} if he hasn't been teleported.
 	 */
 	public boolean hasTeleported()
@@ -140,7 +140,7 @@ public abstract class EntityMock implements Entity, MessageTarget
 
 	/**
 	 * Get the cause of the last teleport.
-	 * 
+	 *
 	 * @return The cause of the last teleport.
 	 */
 	public TeleportCause getTeleportCause()
@@ -173,7 +173,7 @@ public abstract class EntityMock implements Entity, MessageTarget
 
 	/**
 	 * Sets the location of the entity. Note that this will not fire a teleport event.
-	 * 
+	 *
 	 * @param location The new location of the entity.
 	 */
 	public void setLocation(Location location)
@@ -264,7 +264,7 @@ public abstract class EntityMock implements Entity, MessageTarget
 
 	/**
 	 * Sets the name of this entity.
-	 * 
+	 *
 	 * @param name The new name of the entity.
 	 */
 	public void setName(String name)

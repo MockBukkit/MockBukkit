@@ -100,8 +100,8 @@ public class PluginManagerMockTest
 		BlockBreakEvent eventToFire = new BlockBreakEvent(null, player);
 		pluginManager.callEvent(eventToFire);
 		pluginManager.assertEventFired(event ->
-			event instanceof BlockBreakEvent && ((BlockBreakEvent) event).getPlayer().equals(player)
-		);
+		                               event instanceof BlockBreakEvent && ((BlockBreakEvent) event).getPlayer().equals(player)
+		                              );
 	}
 
 	@Test(expected = AssertionError.class)
@@ -114,8 +114,9 @@ public class PluginManagerMockTest
 	}
 
 	@Test
-	public void assertListenerRan_With_Order(){
-		server.getPluginManager().registerEvents(plugin,plugin);
+	public void assertListenerRan_With_Order()
+	{
+		server.getPluginManager().registerEvents(plugin, plugin);
 		Player p = server.addPlayer();
 		BlockBreakEvent event = new BlockBreakEvent(null, p);
 		assertTrue(plugin.ignoredCancelledEvent);

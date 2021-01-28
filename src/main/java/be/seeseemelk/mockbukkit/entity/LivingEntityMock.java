@@ -148,11 +148,11 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		Map<EntityDamageEvent.DamageModifier, Double> modifiers = new EnumMap<>(EntityDamageEvent.DamageModifier.class);
 		modifiers.put(EntityDamageEvent.DamageModifier.BASE, 1.0);
 		Map<EntityDamageEvent.DamageModifier, Function<Double, Double>> modifierFunctions = new EnumMap<>(
-				EntityDamageEvent.DamageModifier.class);
+		    EntityDamageEvent.DamageModifier.class);
 		modifierFunctions.put(EntityDamageEvent.DamageModifier.BASE, damage -> damage);
 
 		EntityDamageEvent event = new EntityDamageEvent(this, EntityDamageEvent.DamageCause.CUSTOM, modifiers,
-				modifierFunctions);
+		        modifierFunctions);
 		event.setDamage(amount);
 		Bukkit.getPluginManager().callEvent(event);
 		if (!event.isCancelled())
@@ -169,11 +169,11 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		Map<EntityDamageEvent.DamageModifier, Double> modifiers = new EnumMap<>(EntityDamageEvent.DamageModifier.class);
 		modifiers.put(EntityDamageEvent.DamageModifier.BASE, 1.0);
 		Map<EntityDamageEvent.DamageModifier, Function<Double, Double>> modifierFunctions = new EnumMap<>(
-				EntityDamageEvent.DamageModifier.class);
+		    EntityDamageEvent.DamageModifier.class);
 		modifierFunctions.put(EntityDamageEvent.DamageModifier.BASE, damage -> damage);
 
 		EntityDamageByEntityEvent event = new EntityDamageByEntityEvent(source, this,
-				EntityDamageEvent.DamageCause.ENTITY_ATTACK, modifiers, modifierFunctions);
+		        EntityDamageEvent.DamageCause.ENTITY_ATTACK, modifiers, modifierFunctions);
 		event.setDamage(amount);
 		Bukkit.getPluginManager().callEvent(event);
 		if (!event.isCancelled())
