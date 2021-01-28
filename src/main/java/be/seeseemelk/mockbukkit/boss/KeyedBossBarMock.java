@@ -6,18 +6,21 @@ import org.bukkit.boss.BarFlag;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.KeyedBossBar;
 
-public class KeyedBossBarMock extends BossBarMock implements KeyedBossBar {
-    private final NamespacedKey key;
+public class KeyedBossBarMock extends BossBarMock implements KeyedBossBar
+{
+	private final NamespacedKey key;
 
-    public KeyedBossBarMock(NamespacedKey key, String title, BarColor color, BarStyle style, BarFlag... flags) {
-        super(title, color, style, flags);
-        this.key = key;
-    }
+	public KeyedBossBarMock(NamespacedKey key, String title, BarColor color, BarStyle style, BarFlag... flags)
+	{
+		super(title, color, style, flags);
+		this.key = key;
+	}
 
-    @Override
-    public NamespacedKey getKey() {
-        return key;
-    }
+	@Override
+	public NamespacedKey getKey()
+	{
+		return key;
+	}
 
 
 }

@@ -12,26 +12,26 @@ import org.junit.Test;
 public class MockBanListTest
 {
 	private MockBanList banList;
-	
+
 	@Before
 	public void setUp() throws Exception
 	{
 		banList = new MockBanList();
 	}
-	
+
 	@Test
 	public void isBanned_NotBanned_False()
 	{
 		assertFalse(banList.isBanned("target"));
 	}
-	
+
 	@Test
 	public void isBanned_Banned_True()
 	{
 		banList.addBan("target", "reason", new Date(), "source");
 		assertTrue(banList.isBanned("target"));
 	}
-	
+
 	@Test
 	public void isBanned_PardonedPerson_False()
 	{
@@ -39,7 +39,7 @@ public class MockBanListTest
 		banList.pardon("target");
 		assertFalse(banList.isBanned("target"));
 	}
-	
+
 	@Test
 	public void getBanEntries_OnePersonBanned_SetOfOnePerson()
 	{
@@ -48,13 +48,13 @@ public class MockBanListTest
 		assertEquals(1, entries.size());
 		assertEquals("target", entries.iterator().next().getTarget());
 	}
-	
+
 	@Test
 	public void getBanEntry_NotBannedPerson_Null()
 	{
 		assertNull(banList.getBanEntry("target"));
 	}
-	
+
 	@Test
 	public void getBanEntry_BannedPerson_AllValuesCorrect()
 	{
@@ -69,7 +69,7 @@ public class MockBanListTest
 		assertEquals(date, banList.getBanEntry(target).getExpiration());
 		assertEquals(source, banList.getBanEntry(target).getSource());
 	}
-	
+
 }
 
 

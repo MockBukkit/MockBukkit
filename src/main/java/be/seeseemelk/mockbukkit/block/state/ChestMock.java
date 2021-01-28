@@ -14,7 +14,7 @@ import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 
 /**
  * This {@link ContainerMock} represents a {@link Chest} or Trapped {@link Chest}.
- * 
+ *
  * @author TheBusyBiscuit
  *
  */

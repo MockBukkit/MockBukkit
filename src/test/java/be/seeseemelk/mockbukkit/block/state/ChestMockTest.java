@@ -49,7 +49,7 @@ public class ChestMockTest
 		Inventory inventory = chest.getInventory();
 		assertNotNull(inventory);
 		assertEquals(inventory, chest.getBlockInventory());
-		
+
 		assertEquals(chest, inventory.getHolder());
 		assertEquals(InventoryType.CHEST, inventory.getType());
 	}

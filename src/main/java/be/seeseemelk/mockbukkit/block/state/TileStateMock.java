@@ -12,7 +12,7 @@ import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
 /**
  * This {@link BlockStateMock} represents a {@link TileState} which is capable of storing persistent data using a
  * {@link PersistentDataContainerMock}.
- * 
+ *
  * @author TheBusyBiscuit
  *
  */

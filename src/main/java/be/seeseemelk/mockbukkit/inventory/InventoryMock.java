@@ -28,7 +28,7 @@ public class InventoryMock implements Inventory
 	public InventoryMock(InventoryHolder holder, int size, InventoryType type)
 	{
 		Validate.isTrue(9 <= size && size <= 54 && size % 9 == 0,
-				"Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got " + size + ")");
+		                "Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got " + size + ")");
 
 		this.holder = holder;
 		this.type = type;
@@ -46,7 +46,7 @@ public class InventoryMock implements Inventory
 
 	/**
 	 * Asserts that a certain condition is true for all items, even {@code nulls}, in this inventory.
-	 * 
+	 *
 	 * @param condition The condition to check for.
 	 */
 	public void assertTrueForAll(Predicate<ItemStack> condition)
@@ -59,7 +59,7 @@ public class InventoryMock implements Inventory
 
 	/**
 	 * Assets that a certain condition is true for all items in this inventory that aren't null.
-	 * 
+	 *
 	 * @param condition The condition to check for.
 	 */
 	public void assertTrueForNonNulls(Predicate<ItemStack> condition)
@@ -69,7 +69,7 @@ public class InventoryMock implements Inventory
 
 	/**
 	 * Asserts that a certain condition is true for at least one item in this inventory. It will skip any null items.
-	 * 
+	 *
 	 * @param condition The condition to check for.
 	 */
 	public void assertTrueForSome(Predicate<ItemStack> condition)
@@ -86,7 +86,7 @@ public class InventoryMock implements Inventory
 
 	/**
 	 * Asserts that the inventory contains at least one itemstack that is compatible with the given itemstack.
-	 * 
+	 *
 	 * @param item The itemstack to compare everything to.
 	 */
 	public void assertContainsAny(ItemStack item)
@@ -97,7 +97,7 @@ public class InventoryMock implements Inventory
 	/**
 	 * Asserts that the inventory contains at least a specific amount of items that are compatible with the given
 	 * itemstack.
-	 * 
+	 *
 	 * @param item   The itemstack to search for.
 	 * @param amount The minimum amount of items that one should have.
 	 */
@@ -110,7 +110,7 @@ public class InventoryMock implements Inventory
 
 	/**
 	 * Get the number of times a certain item is in the inventory.
-	 * 
+	 *
 	 * @param item The item to check for.
 	 * @return The number of times the item is present in this inventory.
 	 */
@@ -147,7 +147,7 @@ public class InventoryMock implements Inventory
 
 	/**
 	 * Adds a single item to the inventory. Returns whatever item it couldn't add.
-	 * 
+	 *
 	 * @param item The item to add.
 	 * @return The remaining stack that couldn't be added. If it's empty it just returns {@code null}.
 	 */

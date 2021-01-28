@@ -33,7 +33,7 @@ public final class TagsMock
 
 	/**
 	 * This loads all default {@link Tag Tags} into the given {@link Server}.
-	 * 
+	 *
 	 * @param server       The {@link ServerMock} instance
 	 * @param skipIfExists Whether to skip an already loaded {@link TagRegistry}
 	 */
@@ -60,16 +60,16 @@ public final class TagsMock
 
 	/**
 	 * This will load all {@link Tag Tags} for the given {@link TagRegistry}.
-	 * 
+	 *
 	 * @param server
 	 * @param registry     Our {@link TagRegistry}
 	 * @param skipIfExists Whether to skip an already loaded {@link TagRegistry}
-	 * 
+	 *
 	 * @throws URISyntaxException When a {@link URI} is malformed
 	 * @throws IOException        When there was an issue with I/O
 	 */
 	private static void loadRegistry(@NotNull ServerMock server, @NotNull TagRegistry registry, boolean skipIfExists)
-			throws URISyntaxException, IOException
+	throws URISyntaxException, IOException
 	{
 		if (skipIfExists && !registry.isEmpty())
 		{
@@ -89,7 +89,8 @@ public final class TagsMock
 		{
 			// We wanna skip the root node as we are only interested in the actual
 			// .json files for the tags
-			stream.skip(1).forEach(path -> {
+			stream.skip(1).forEach(path ->
+			{
 				// Splitting will strip away the .json
 				String name = filePattern.split(path.getFileName().toString())[0];
 				NamespacedKey key = NamespacedKey.minecraft(name);
