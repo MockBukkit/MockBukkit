@@ -10,18 +10,24 @@ on:
     branches: [ v1.16 ]
 
 jobs:
-  build:
+  formatter:
 
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      with:
+        ref: ${{ github.head_ref }}
+
     - name: Install astyle
       run: sudo apt-get install -y astyle
       
     - name: Check formatting
       run: astyle --options=.astylerc '*.java'
-    - uses: stefanzweifel/git-auto-commit-action@v4
+
+    - name: Commit changes
+      uses: stefanzweifel/git-auto-commit-action@v4
       with:
         commit_message: 'Auto-update code formatting'
         file_pattern: '*.java'
