@@ -30,7 +30,7 @@ jobs:
         uses: DamianReeves/write-file-action@v1.0
         with:
           path: test.txt
-          contents: ${{ secrets.TEST}
+          contents: ${{ secrets.TEST }}
           write-mode: overwrite
 
       # Runs a set of commands using the runners shell
