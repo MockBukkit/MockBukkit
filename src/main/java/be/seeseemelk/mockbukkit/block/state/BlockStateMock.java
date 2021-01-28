@@ -296,20 +296,37 @@ public class BlockStateMock implements BlockState, Cloneable
 	}
 
 	@Override
-	public boolean equals(Object other) {
-		if(other == null) {return false;}
-		if(!(other instanceof BlockState)) {return false;}
+	public boolean equals(Object other)
+	{
+		if (other == null)
+		{
+			return false;
+		}
+		if (!(other instanceof BlockState))
+		{
+			return false;
+		}
 
 		BlockState otherState = (BlockState) other;
-		if(otherState.getType() != getType()) {return false;}
-		if(otherState.isPlaced() != isPlaced()) {return false;}
-		if(!isPlaced()) {return true;}
+		if (otherState.getType() != getType())
+		{
+			return false;
+		}
+		if (otherState.isPlaced() != isPlaced())
+		{
+			return false;
+		}
+		if (!isPlaced())
+		{
+			return true;
+		}
 
 		return otherState.getBlock().getLocation().equals(getBlock().getLocation());
 	}
 
 	@Override
-	public int hashCode() {
+	public int hashCode()
+	{
 		return Objects.hash(material, block == null ? null : block.getLocation());
 	}
 }
