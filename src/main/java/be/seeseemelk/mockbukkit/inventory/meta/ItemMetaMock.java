@@ -164,7 +164,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 
 	@Override
 	public int hashCode()
-    {
+	{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((displayName == null) ? 0 : displayName.hashCode());
@@ -197,20 +197,20 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		try
 		{
 			ItemMetaMock meta = (ItemMetaMock) super.clone();
-            meta.displayName = displayName;
-            if (lore != null)
-            {
-                meta.lore = new ArrayList<>(lore);
-            }
+			meta.displayName = displayName;
+			if (lore != null)
+			{
+				meta.lore = new ArrayList<>(lore);
+			}
 
-            meta.unbreakable = unbreakable;
-            meta.customModelData = customModelData;
-            meta.enchants = new HashMap<>(enchants);
-            meta.persistentDataContainer = new PersistentDataContainerMock((PersistentDataContainerMock) persistentDataContainer);
-            meta.damage = damage;
-            meta.repairCost = repairCost;
-            meta.hideFlags = EnumSet.copyOf(hideFlags);
-            return meta;
+			meta.unbreakable = unbreakable;
+			meta.customModelData = customModelData;
+			meta.enchants = new HashMap<>(enchants);
+			meta.persistentDataContainer = new PersistentDataContainerMock((PersistentDataContainerMock) persistentDataContainer);
+			meta.damage = damage;
+			meta.repairCost = repairCost;
+			meta.hideFlags = EnumSet.copyOf(hideFlags);
+			return meta;
 		}
 		catch (CloneNotSupportedException e)
 		{
