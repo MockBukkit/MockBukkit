@@ -21,7 +21,7 @@
 MockBukkit is a framework that makes the unit testing of Bukkit plugins a whole lot easier.
 It aims to be provide complete mock implementation of CraftBukkit that can be completely controlled from a unit test.
 
-## Table of contents
+## :page_facing_up: Table of contents
 1. [Usage](#todo)
     - [Adding MockBukkit via gradle](#todo)
     - [Adding MockBukkit via Maven](#todo)
@@ -32,7 +32,7 @@ It aims to be provide complete mock implementation of CraftBukkit that can be co
     - [Mock Worlds](#todo)
 3. [Troubleshooting (My tests are being skipped)](#todo)
 
-## Usage
+## :mag: Usage
 MockBukkit can easily be included in your project using either Maven or gradle.
 
 ### Adding MockBukkit via gradle
@@ -125,7 +125,7 @@ public void tearDown()
 }
 ```
 
-## Features
+## :sparkles: Features
 ### Mock Plugins
 MockBukkit contains several functions that make the unit testing of Bukkit plugins a lot easier.
 
@@ -166,7 +166,7 @@ and everything else will be Material.AIR.
 Each block is created the moment it is first accessed, so if only one block is only ever touched only one
 block will ever be created in-memory.
 
-## My tests are being skipped!? (UnimplementedOperationException)
+## :question: My tests are being skipped!? (UnimplementedOperationException)
 Sometimes your code may use a method that is not yet implemented in MockBukkit.
 When this happens MockBukkit will, instead of returning placeholder values, throw
 an `UnimplementedOperationException`.
