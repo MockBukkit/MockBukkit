@@ -1,9 +1,23 @@
-[![Build Status](https://travis-ci.org/seeseemelk/MockBukkit.svg?branch=v1.14)](https://travis-ci.org/seeseemelk/MockBukkit)
-[![Documentation Status](https://readthedocs.org/projects/mockbukkit/badge/?version=latest)](https://mockbukkit.readthedocs.io/en/latest/?badge=latest)
-[![Maintainability](https://api.codeclimate.com/v1/badges/403a4bb837ca47333d33/maintainability)](https://codeclimate.com/github/seeseemelk/MockBukkit/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/403a4bb837ca47333d33/test_coverage)](https://codeclimate.com/github/seeseemelk/MockBukkit/test_coverage)
+<p align="center">
+    <!-- Badges -->
+    <a href="https://travis-ci.org/seeseemelk/MockBukkit">
+        <img alt="Build Status" src="https://github.com/seeseemelk/MockBukkit/workflows/Build/badge.svg?event=push" />
+    </a>
+    <a href="https://mockbukkit.readthedocs.io/en/latest/?badge=latest">
+        <img alt="Documentation Status" src="https://readthedocs.org/projects/mockbukkit/badge/?version=latest" />
+    </a>
+    <a href="https://codeclimate.com/github/seeseemelk/MockBukkit/maintainability">
+        <img alt="Maintainability" src="https://api.codeclimate.com/v1/badges/403a4bb837ca47333d33/maintainability" />
+    </a>
+    <a href="https://codeclimate.com/github/seeseemelk/MockBukkit/test_coverage">
+        <img alt="Test Coverage" src="https://api.codeclimate.com/v1/badges/403a4bb837ca47333d33/test_coverage" />
+    </a>
+    <!-- Logo -->
+    <hr />
+        <img alt="MockBukkit logo" src="logo.png"/>
+    <hr />
+</p>
 
-# ![MockBukkit](logo.png)
 MockBukkit is a framework that makes the unit testing of Bukkit plugins a whole lot easier.
 It aims to be provide complete mock implementation of CraftBukkit that can be completely controlled from a unit test.
 
@@ -20,7 +34,7 @@ repositories {
 }
 
 dependencies {
-	testImplementation 'com.github.seeseemelk:MockBukkit-v1.16:0.5.0'
+	testImplementation 'com.github.seeseemelk:MockBukkit-v1.16:0.22.1'
 }
 ```
 
@@ -49,7 +63,7 @@ You won't need to add any additional repositories since MockBukkit is served via
   <dependency>
     <groupId>com.github.seeseemelk</groupId>
     <artifactId>MockBukkit-v1.16</artifactId>
-    <version>0.5.0</version>
+    <version>0.22.1</version>
     <scope>test</scope>
   </dependency>
 </dependencies>
@@ -64,7 +78,7 @@ The `scope` test is important here since you are likely to only be using MockBuk
 ### Using MockBukkit
 In order to use MockBukkit the plugin to be tested needs an extra constructor and it has to be initialised before each test.
 The plugin will need both a default constructor and an extra one that will call a super constructor.
-Your plugins constructor will look like this if your plugin was called ```MyPlugin```
+Your plugins constructor will look like this if your plugin was called ```MyPlugin```.
 ```java
 public class MyPlugin extends JavaPlugin
 {
