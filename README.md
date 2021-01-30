@@ -22,15 +22,15 @@ MockBukkit is a framework that makes the unit testing of Bukkit plugins a whole 
 It aims to be provide complete mock implementation of CraftBukkit that can be completely controlled from a unit test.
 
 ## :page_facing_up: Table of contents
-1. [Usage](#todo)
-    - [Adding MockBukkit via gradle](#todo)
-    - [Adding MockBukkit via Maven](#todo)
-    - [Using MockBukkit](#todo)
-2. [Features](#todo)
-    - [Mock Plugins](#todo)
-    - [Mock Players](#todo)
-    - [Mock Worlds](#todo)
-3. [Troubleshooting (My tests are being skipped)](#todo)
+1. [Usage](#mag-usage)
+    - [Adding MockBukkit via gradle](#adding-mockbukkit-via-gradle)
+    - [Adding MockBukkit via Maven](#adding-mockbukkit-via-maven)
+    - [Using MockBukkit](#using-mockbukkit)
+2. [Features](#sparkles-features)
+    - [Mock Plugins](#mock-plugins)
+    - [Mock Players](#mock-players)
+    - [Mock Worlds](#mock-worlds)
+3. [Troubleshooting (My tests are being skipped)](#question-my-tests-are-being-skipped-unimplementedoperationexception)
 
 ## :mag: Usage
 MockBukkit can easily be included in your project using either Maven or gradle.
