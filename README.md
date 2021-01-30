@@ -6,7 +6,7 @@
     <a href="https://mockbukkit.readthedocs.io/en/latest/?badge=latest">
         <img alt="Documentation Status" src="https://readthedocs.org/projects/mockbukkit/badge/?version=latest" />
     </a>
-    <img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.github.seeseemelk/MockBukkit-v1.16?color=34edaf&logo=apache-maven" />
+    <img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.github.seeseemelk/MockBukkit-v1.16?color=1bcc94&logo=apache-maven" />
     <a href="https://codeclimate.com/github/seeseemelk/MockBukkit/maintainability">
         <img alt="Maintainability" src="https://api.codeclimate.com/v1/badges/403a4bb837ca47333d33/maintainability" />
     </a>
