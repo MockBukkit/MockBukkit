@@ -62,8 +62,7 @@ import org.bukkit.plugin.java.JavaPluginUtils;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
-public class PluginManagerMock implements PluginManager
-{
+public class PluginManagerMock implements PluginManager {
 	private final ServerMock server;
 	private final List<Plugin> plugins = new ArrayList<>();
 	private final JavaPluginLoader loader;
@@ -76,8 +75,7 @@ public class PluginManagerMock implements PluginManager
 	private final Map<Permissible, Set<String>> permissionSubscriptions = new HashMap<>();
 
 	@SuppressWarnings("deprecation")
-	public PluginManagerMock(ServerMock server)
-	{
+	public PluginManagerMock(ServerMock server) {
 		this.server = server;
 		loader = new JavaPluginLoader(this.server);
 	}
@@ -85,8 +83,7 @@ public class PluginManagerMock implements PluginManager
 	/**
 	 * Should be called when the plugin manager is not used anymore.
 	 */
-	public void unload()
-	{
+	public void unload() {
 		for (File file : temporaryFiles)
 		{
 			try
@@ -553,8 +550,8 @@ public class PluginManagerMock implements PluginManager
 
 		try 
 		{
-			File tempDir = createTemporaryDirectory("MockBukkit-plugin-" + file.getName().split(".")[0]);
-			Path targetPath = Files.copy(file.toPath(), tempDir.toPath(), StandardCopyOption.REPLACE_EXISTING);
+			File tempDir = createTemporaryDirectory("MockBukkit-plugin-" + file.getName().replace(".", "-"));
+			Path targetPath = Files.copy(file.toPath(), tempDir.toPath().resolve(file.getName()), StandardCopyOption.REPLACE_EXISTING);
 			Plugin plugin = loader.loadPlugin(targetPath.toFile());
 
 			if (plugin == null) 
