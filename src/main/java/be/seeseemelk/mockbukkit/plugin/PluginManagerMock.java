@@ -74,6 +74,7 @@ public class PluginManagerMock implements PluginManager
 			PluginDescriptionFile.class, File.class, File.class);
 	private final List<Permission> permissions = new ArrayList<>();
 	private final Map<Permissible, Set<String>> permissionSubscriptions = new HashMap<>();
+	private final Set<String> restrictedPluginNames = new HashSet<>(Arrays.asList("bukkit", "minecraft", "mojang"));
 
 	@SuppressWarnings("deprecation")
 	public PluginManagerMock(ServerMock server)
@@ -574,14 +575,130 @@ public class PluginManagerMock implements PluginManager
 	@Override
 	public Plugin[] loadPlugins(File directory)
 	{
-		//copy to temp folder
-		//check description validity
-		//check if already registered
-		//gather softDependencies, dependencies, and loadBefore
-		//load in order gathered before
+		try 
+		{
+			//copy to temp folder
+			File tempDir = createTemporaryDirectory("MockBukkit-plugins");
+			Path targetPath = Files.copy(directory.toPath(), tempDir.toPath(), StandardCopyOption.REPLACE_EXISTING);
 
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+			Map<String, File> pluginsToLoad = new HashMap<>();
+			Map<String, Set<String>> softDependencies = new HashMap<>();
+			Map<String, Set<String>> dependencies = new HashMap<>();
+
+			for(File file : targetPath.toFile().listFiles())
+			{
+				try 
+				{
+					//check description validity
+					PluginDescriptionFile pdf = loader.getPluginDescription(file);
+
+					//acknowledge plugin name restrictions
+					String pluginName = pdf.getName();
+					checkPluginNameValidity(file, pluginName);
+
+					//check if already registered
+					File previousRegisteredPlugin = pluginsToLoad.put(pluginName, file);
+					if (previousRegisteredPlugin != null) 
+					{
+						throw new InvalidDescriptionException(String.format("Plugin %s wasn't loaded: Duplicate plugin name %s!", file.getName(), pluginName));
+					}
+
+					//gather softDependencies, dependencies, and loadBefore
+					Set<String> pluginSoftDependencies = softDependencies.getOrDefault(pluginName, new HashSet<>());
+					pluginSoftDependencies.addAll(pdf.getSoftDepend());
+					softDependencies.put(pluginName, pluginSoftDependencies);
+
+					Set<String> pluginDependencies = dependencies.getOrDefault(pluginName, new HashSet<>());
+					pluginDependencies.addAll(pdf.getDepend());
+					dependencies.put(pluginName, pluginDependencies);
+
+					for (String loadBefore : pdf.getLoadBefore())
+					{
+						Set<String> softDepends = softDependencies.getOrDefault(loadBefore, new HashSet<>());
+						softDepends.add(pluginName);
+						softDependencies.put(loadBefore, softDepends);
+					}
+				}
+				catch(InvalidDescriptionException e)
+				{
+					e.printStackTrace();
+				}
+			}
+
+			Set<Plugin> loadedPlugins = new HashSet<>();
+
+			//load in order gathered before
+			while(!pluginsToLoad.isEmpty())
+			{
+				String pluginToLoad = pluginsToLoad.keySet().iterator().next();
+				loadedPlugins.addAll(loadPluginWithDependencies(pluginToLoad, pluginsToLoad, dependencies, softDependencies, 10));
+			}
+			return loadedPlugins.toArray(Plugin[]::new);
+		} 
+		catch (IOException | InvalidPluginException e)
+		{
+			e.printStackTrace();
+		}
+		return new Plugin[0];
+	}
+
+	private void checkPluginNameValidity(File originFile, String pluginName) throws InvalidDescriptionException 
+	{
+		for (String restrictedName : restrictedPluginNames) 
+		{
+			if (pluginName.equalsIgnoreCase(restrictedName)) 
+			{
+				throw new InvalidDescriptionException(String.format("Plugin %s wasn't loaded: The plugin name %s is forbidden!", originFile.getName(), pluginName));
+			}
+		}
+	
+		if (pluginName.contains(" "))
+		{
+			throw new InvalidDescriptionException(String.format("Plugin %s wasn't loaded: The plugin name isn't allowed to have spaces!", originFile.getName()));
+		}
+	}
+
+	private Set<Plugin> loadPluginWithDependencies(String pluginToLoad, Map<String, File> pluginsToLoad, Map<String, Set<String>> dependencies, Map<String, Set<String>> softDependencies, int recursiveDepthLeft) throws InvalidPluginException
+	{
+		Set<Plugin> result = new HashSet<>();
+		result.addAll(loadDependencies(pluginToLoad, pluginsToLoad, dependencies, dependencies, softDependencies, recursiveDepthLeft));
+		try{
+			result.addAll(loadDependencies(pluginToLoad, pluginsToLoad, softDependencies, dependencies, softDependencies, recursiveDepthLeft));
+		}
+		catch (InvalidPluginException ignored)
+		{
+			//errors in softDepend can be ignored
+		}
+
+		try 
+		{
+			result.add(loadPlugin(pluginsToLoad.get(pluginToLoad)));
+		} 
+		catch (UnknownDependencyException | InvalidPluginException | InvalidDescriptionException e) 
+		{
+			throw new InvalidPluginException(String.format("Error loading plugin %s: ", pluginToLoad), e);
+		}
+		finally {
+			pluginsToLoad.remove(pluginToLoad);
+		}
+		return result;
+	}
+
+	private Set<Plugin> loadDependencies(String key, Map<String, File> pluginsToLoad, Map<String, Set<String>> dependencies, Map<String, Set<String>> globalDependencies, Map<String, Set<String>> globalSoftDependencies, int recursiveDepthLeft)
+			throws InvalidPluginException
+	{
+		Set<Plugin> result = new HashSet<>();
+		try
+		{
+			for (String dependency : dependencies.get(key))
+			{
+				result.addAll(loadPluginWithDependencies(dependency, pluginsToLoad, globalDependencies, globalSoftDependencies, recursiveDepthLeft - 1));
+			}
+		}
+		catch (InvalidPluginException e) {
+			throw new InvalidPluginException(String.format("Error loading dependencies for plugin %s:", key), e);
+		}
+		return result;
 	}
 
 	@Override
