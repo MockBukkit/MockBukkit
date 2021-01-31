@@ -423,7 +423,7 @@ public class ServerMock implements Server
 	@Override
 	public String getVersion()
 	{
-		return "0.1.0";
+		return getBukkitVersion() + "-MockBukkit";
 	}
 
 	@Override
