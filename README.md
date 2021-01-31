@@ -6,7 +6,9 @@
     <a href="https://mockbukkit.readthedocs.io/en/latest/?badge=latest">
         <img alt="Documentation Status" src="https://readthedocs.org/projects/mockbukkit/badge/?version=latest" />
     </a>
-    <img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.github.seeseemelk/MockBukkit-v1.16?color=1bcc94&logo=apache-maven" />
+    <a href="https://search.maven.org/search?q=MockBukkit">
+        <img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.github.seeseemelk/MockBukkit-v1.16?color=1bcc94&logo=apache-maven" />
+    </a>
     <a href="https://codeclimate.com/github/seeseemelk/MockBukkit/maintainability">
         <img alt="Maintainability" src="https://api.codeclimate.com/v1/badges/403a4bb837ca47333d33/maintainability" />
     </a>
@@ -32,6 +34,7 @@ It aims to be provide complete mock implementation of CraftBukkit that can be co
     - [Mock Players](#mock-players)
     - [Mock Worlds](#mock-worlds)
 3. [Troubleshooting (My tests are being skipped)](#question-my-tests-are-being-skipped-unimplementedoperationexception)
+4. [Examples (See MockBukkit in action)](#tada-examples-see-mockbukkit-in-action)
 
 ## :mag: Usage
 MockBukkit can easily be included in your project using either Maven or gradle.
@@ -175,3 +178,9 @@ These exception extends `AssumationException` and will cause the test to be skip
 
 These exceptions should just be ignored, though pull requests that add functionality to MockBukkit are always welcome!
 If you don't want to add the required methods yourself you can also request the method on the issues page.
+
+## :tada: Examples (See MockBukkit in action)
+Several projects have utilized MockBukkit for their needs already.
+If you want to see some projects that are using MockBukkit right now, feel free to take a peak:
+- [Slimefun/Slimefun4](https://github.com/Slimefun/Slimefun4/tree/master/src/test/java/io/github/thebusybiscuit/slimefun4/testing/tests) (~400+ Unit Tests)
+- and more! (I will try to see if I can find people who want to be listed here too)
