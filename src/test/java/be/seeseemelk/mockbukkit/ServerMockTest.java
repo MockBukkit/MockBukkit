@@ -450,6 +450,17 @@ public class ServerMockTest
 	}
 
 	@Test
+	public void getOperators_OneOperator()
+	{
+		PlayerMock player = new PlayerMock(server, "operator");
+		server.addPlayer(player);
+		player.setOp(true);
+		
+		assertTrue(server.getOperators().contains(player));
+		assertEquals(1, server.getOperators().size());
+	}
+
+	@Test
 	public void getScoreboardManager_NotNull()
 	{
 		ScoreboardManager manager = server.getScoreboardManager();

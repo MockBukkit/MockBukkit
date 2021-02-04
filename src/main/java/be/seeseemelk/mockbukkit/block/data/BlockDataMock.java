@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.block.data;
 
 import org.bukkit.Material;
+import org.bukkit.SoundGroup;
 import org.bukkit.block.data.BlockData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -44,10 +45,23 @@ public class BlockDataMock implements BlockData
 	}
 
 	@Override
+	public SoundGroup getSoundGroup()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public boolean matches(@Nullable BlockData data)
 	{
-		if (data == null) return false;
-		return data.getMaterial() == type;
+		if (data == null)
+		{
+			return false;
+		}
+		else
+		{
+			return data.getMaterial() == type;
+		}
 	}
 
 	@Override

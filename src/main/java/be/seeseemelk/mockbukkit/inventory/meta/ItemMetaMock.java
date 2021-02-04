@@ -198,12 +198,18 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		{
 			ItemMetaMock meta = (ItemMetaMock) super.clone();
 			meta.displayName = displayName;
-			meta.lore = lore;
+			if (lore != null)
+			{
+				meta.lore = new ArrayList<>(lore);
+			}
+
 			meta.unbreakable = unbreakable;
 			meta.customModelData = customModelData;
 			meta.enchants = new HashMap<>(enchants);
 			meta.persistentDataContainer = new PersistentDataContainerMock((PersistentDataContainerMock) persistentDataContainer);
+			meta.damage = damage;
 			meta.repairCost = repairCost;
+			meta.hideFlags = EnumSet.copyOf(hideFlags);
 			return meta;
 		}
 		catch (CloneNotSupportedException e)

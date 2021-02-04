@@ -14,12 +14,18 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.List;
 
+/**
+ * The {@link HelpMapMock} is our mock of Bukkit's {@link HelpMap}.
+ * 
+ * @author NeumimTo
+ *
+ */
 public class HelpMapMock implements HelpMap
 {
 
 	private HelpTopic defaultTopic;
 	private final Map<String, HelpTopic> topics = new TreeMap<>(HelpTopicComparator.topicNameComparatorInstance());
-	private final Map<Class, HelpTopicFactory<Command>> factories = new HashMap<>();
+	private final Map<Class<?>, HelpTopicFactory<?>> factories = new HashMap<>();
 
 	@Override
 	public HelpTopic getHelpTopic(final String topicName)
@@ -28,6 +34,7 @@ public class HelpMapMock implements HelpMap
 		{
 			return this.defaultTopic;
 		}
+
 		return topics.get(topicName);
 	}
 
@@ -63,14 +70,14 @@ public class HelpMapMock implements HelpMap
 	}
 
 	@Override
-	public void registerHelpTopicFactory(Class commandClass, HelpTopicFactory factory)
+	public void registerHelpTopicFactory(Class<?> commandClass, HelpTopicFactory<?> factory)
 	{
 		if (!Command.class.isAssignableFrom(commandClass) && !CommandExecutor.class.isAssignableFrom(commandClass))
 		{
 			throw new IllegalArgumentException("CommandClass must inherit from types Command or CommandExecutor");
 		}
+
 		factories.put(commandClass, factory);
 	}
 
 }
-
