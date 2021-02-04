@@ -808,4 +808,11 @@ public abstract class EntityMock implements Entity, MessageTarget
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
+
+	@Override
+	public boolean isInWater()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
 }
