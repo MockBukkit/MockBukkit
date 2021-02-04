@@ -107,7 +107,7 @@ import be.seeseemelk.mockbukkit.tags.TagsMock;
 @SuppressWarnings("deprecation")
 public class ServerMock implements Server
 {
-	private static final String BUKKIT_VERSION = "1.16.3";
+	private static final String BUKKIT_VERSION = "1.16.5";
 	private static final String JOIN_MESSAGE = "%s has joined the server.";
 	private static final String MOTD = "A Minecraft Server";
 
@@ -1507,6 +1507,13 @@ public class ServerMock implements Server
 
 	@Override
 	public Spigot spigot()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getMaxWorldSize()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
