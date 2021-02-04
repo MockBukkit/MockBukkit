@@ -164,9 +164,9 @@ One can make a superflat world using one simple command:
 ```java
 World world = new WorldMock(Material material, int heightUntilAir)
 ```
-Using Material.DIRT and 3 as heightUntilAir will create a superflat world with a height of a 128.
-At y=0 everything will be Material.BEDROCK, and from 1 until 3 (inclusive) will be Material.DIRT
-and everything else will be Material.AIR.
+Using `Material.DIRT` and 3 as heightUntilAir will create a superflat world with a height of a 128.
+At y=0 everything will be `Material.BEDROCK`, and from 1 until 3 (inclusive) will be `Material.DIRT`
+and everything else will be `Material.AIR`.
 Each block is created the moment it is first accessed, so if only one block is only ever touched only one
 block will ever be created in-memory.
 
@@ -184,3 +184,6 @@ Several projects have utilized MockBukkit for their needs already.
 If you want to see some projects that are using MockBukkit right now, feel free to take a peak:
 - [Slimefun/Slimefun4](https://github.com/Slimefun/Slimefun4/tree/master/src/test/java/io/github/thebusybiscuit/slimefun4/testing/tests) (~400+ Unit Tests)
 - and more! (I will try to see if I can find people who want to be listed here too)
+
+You can also have a look at our documentation where we outline various examples and tricks on how to use MockBukkit already:
+https://mockbukkit.readthedocs.io/en/latest/index.html
