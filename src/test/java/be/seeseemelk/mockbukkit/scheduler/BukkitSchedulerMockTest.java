@@ -13,6 +13,10 @@ import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.MockPlugin;
+import be.seeseemelk.mockbukkit.TestPlugin;
+import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
 import org.junit.Before;
 import org.junit.Test;
@@ -113,6 +117,48 @@ public class BukkitSchedulerMockTest
 	}
 
 	@Test
+	public void runScheduledTask_WhileScheduler_ShutDown(){
+		AtomicInteger count = new AtomicInteger(0);
+		Runnable callback = () -> count.incrementAndGet();
+		scheduler.shutdown();
+		scheduler.runTaskTimer(null, callback, 0, 2L);
+		scheduler.performTicks(1L);
+		assertEquals(0,count.get());
+	}
+
+	@Test
+	public void runTaskLaterAsynchronously_TaskExecutedOnSeperateThread() throws InterruptedException, BrokenBarrierException, TimeoutException
+	{
+		final Thread mainThread = Thread.currentThread();
+		AtomicInteger count = new AtomicInteger();
+		CyclicBarrier barrier = new CyclicBarrier(2);
+
+		testTask = scheduler.runTaskLaterAsynchronously(null,()-> {
+
+					assertNotEquals(mainThread, Thread.currentThread());
+					count.incrementAndGet();
+			try
+			{
+				barrier.await(3L, TimeUnit.SECONDS);
+			} catch (InterruptedException | BrokenBarrierException | TimeoutException e)
+			{
+				throw new RuntimeException(e);
+			}
+
+		},2);
+		assertTrue(scheduler.isQueued(testTask.getTaskId()));
+		assertEquals(0,count.get());
+		scheduler.performTicks(1L);
+		assertTrue(scheduler.isQueued(testTask.getTaskId()));
+		assertEquals(0,count.get());
+		scheduler.performTicks(3);
+		barrier.await(3L, TimeUnit.SECONDS);
+		assertFalse(scheduler.isQueued(testTask.getTaskId()));
+		assertEquals(1,count.get());
+
+	}
+
+	@Test
 	public void runTaskAsynchronously_TaskExecutedOnSeperateThread() throws InterruptedException, BrokenBarrierException, TimeoutException
 	{
 		final Thread mainThread = Thread.currentThread();
@@ -177,6 +223,30 @@ public class BukkitSchedulerMockTest
 		scheduler.performTicks(1L);
 		assertFalse(scheduler.isQueued(testTask.getTaskId()));
 		assertEquals(2, count.get());
+	}
+
+	@Test
+	public void testPluginCancel(){
+		MockBukkit.mock();
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		BukkitScheduler s = MockBukkit.getMock().getScheduler();
+		BukkitTask task = s.runTaskLaterAsynchronously(plugin,()->{},10);
+		BukkitTask task2 = s.runTaskLaterAsynchronously(plugin,()->{},10);
+		BukkitTask task3 = s.runTaskLaterAsynchronously(null,()->{},10);
+
+		assertTrue(s.isQueued(task.getTaskId()));
+		assertTrue(s.isQueued(task2.getTaskId()));
+		assertTrue(s.isQueued(task3.getTaskId()));
+
+		s.cancelTasks(plugin);
+		assertTrue(task.isCancelled());
+		assertTrue(task2.isCancelled());
+		assertTrue(s.isQueued(task3.getTaskId()));
+		s.cancelTask(task3.getTaskId());
+		assertFalse(s.isQueued(task3.getTaskId()));
+		assertTrue(task3.isCancelled());
+		MockBukkit.unmock();
+
 	}
 }
 
