@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.inventory.EntityEquipment;
 import org.jetbrains.annotations.NotNull;
 
 import be.seeseemelk.mockbukkit.ServerMock;
@@ -24,6 +25,13 @@ public class SimpleMobMock extends MobMock
 
 	@Override
 	public EntityType getType()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public EntityEquipment getEquipment()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

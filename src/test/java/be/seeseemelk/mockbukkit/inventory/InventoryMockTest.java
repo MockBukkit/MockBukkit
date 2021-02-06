@@ -20,7 +20,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
-import org.junit.experimental.theories.suppliers.TestedOn;
 
 public class InventoryMockTest
 {

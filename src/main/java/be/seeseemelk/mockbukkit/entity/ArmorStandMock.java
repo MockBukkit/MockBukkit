@@ -7,6 +7,7 @@ import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.memory.MemoryKey;
+import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.EulerAngle;
@@ -14,20 +15,22 @@ import org.bukkit.util.EulerAngle;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
+/**
+ * This is the mock of an {@link ArmorStand}.
+ * 
+ * @author TheBusyBiscuit
+ *
+ */
 public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 {
+
+	private final EntityEquipment equipment = new EntityEquipmentMock(this);
 
 	private boolean hasArms = false;
 	private boolean isSmall = false;
 	private boolean isMarker = false;
 	private boolean hasBasePlate = true;
 	private boolean isVisible = true;
-
-	private ItemStack itemInHand;
-	private ItemStack helmet;
-	private ItemStack chestPlate;
-	private ItemStack leggings;
-	private ItemStack boots;
 
 	public ArmorStandMock(ServerMock server, UUID uuid)
 	{
@@ -41,63 +44,79 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	}
 
 	@Override
-	public ItemStack getItemInHand()
+	public EntityEquipment getEquipment()
 	{
-		return itemInHand;
+		return equipment;
 	}
 
 	@Override
-	public void setItemInHand(ItemStack item)
-	{
-		this.itemInHand = item;
-	}
-
-	@Override
+	@Deprecated
 	public ItemStack getBoots()
 	{
-		return boots;
+		return getEquipment().getBoots();
 	}
 
 	@Override
+	@Deprecated
 	public void setBoots(ItemStack item)
 	{
-		this.boots = item;
+		getEquipment().setBoots(item);
 	}
 
 	@Override
+	@Deprecated
 	public ItemStack getLeggings()
 	{
-		return leggings;
+		return getEquipment().getLeggings();
 	}
 
 	@Override
+	@Deprecated
 	public void setLeggings(ItemStack item)
 	{
-		this.leggings = item;
+		getEquipment().setLeggings(item);
 	}
 
 	@Override
+	@Deprecated
 	public ItemStack getChestplate()
 	{
-		return chestPlate;
+		return getEquipment().getChestplate();
 	}
 
 	@Override
+	@Deprecated
 	public void setChestplate(ItemStack item)
 	{
-		this.chestPlate = item;
+		getEquipment().setChestplate(item);
 	}
 
 	@Override
+	@Deprecated
 	public ItemStack getHelmet()
 	{
-		return helmet;
+		return getEquipment().getHelmet();
 	}
 
 	@Override
+	@Deprecated
 	public void setHelmet(ItemStack item)
 	{
-		this.helmet = item;
+		getEquipment().setHelmet(item);
+	}
+
+	@Override
+	@Deprecated
+	public ItemStack getItemInHand()
+	{
+		return getEquipment().getItemInMainHand();
+	}
+
+	@Override
+	@Deprecated
+	public void setItemInHand(ItemStack item)
+	{
+		getEquipment().setItemInMainHand(item);
 	}
 
 	@Override
