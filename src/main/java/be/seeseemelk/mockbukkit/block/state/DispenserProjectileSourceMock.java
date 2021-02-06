@@ -10,7 +10,7 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
 /**
  * This is a {@link BlockProjectileSource} mock specifically for the {@link DispenserMock}.
- * 
+ *
  * @author TheBusyBiscuit
  *
  */

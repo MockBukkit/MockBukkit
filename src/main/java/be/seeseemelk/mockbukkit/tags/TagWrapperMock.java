@@ -11,9 +11,9 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * This is a mock of the {@link Material} {@link Tag} wrapper in Bukkit. This will
- * 
+ *
  * @author TheBusyBiscuit
- * 
+ *
  * @see TagParser
  *
  */
@@ -49,7 +49,8 @@ public class TagWrapperMock implements Tag<Material>
 		this.materials.clear();
 		this.additionalTags.clear();
 
-		new TagParser(this).parse((mats, tags) -> {
+		new TagParser(this).parse((mats, tags) ->
+		{
 			this.materials.addAll(mats);
 			this.additionalTags.addAll(tags);
 		});

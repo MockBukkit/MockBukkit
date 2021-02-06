@@ -22,7 +22,7 @@ public class ScheduledTask implements BukkitTask
 		this.scheduledTick = scheduledTick;
 		this.runnable = runnable;
 	}
-	
+
 	/**
 	 * Get the tick at which the task is scheduled to run at.
 	 * @return The tick the task is scheduled to run at.
@@ -31,7 +31,7 @@ public class ScheduledTask implements BukkitTask
 	{
 		return scheduledTick;
 	}
-	
+
 	/**
 	 * Sets the tick at which the task is scheduled to run at.
 	 * @param scheduledTick The tick at which the task is scheduled to run at.
@@ -49,7 +49,7 @@ public class ScheduledTask implements BukkitTask
 	{
 		return runnable;
 	}
-	
+
 	/**
 	 * Runs the task if it has not been cancelled.
 	 */

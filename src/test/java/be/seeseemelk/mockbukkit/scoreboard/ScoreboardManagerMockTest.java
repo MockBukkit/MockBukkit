@@ -24,7 +24,7 @@ public class ScoreboardManagerMockTest
 	{
 		assertNotNull(manager.getMainScoreboard());
 	}
-	
+
 	@Test
 	public void getMainScoreboard_MultipleCalls_ReturnsSame()
 	{
@@ -32,13 +32,13 @@ public class ScoreboardManagerMockTest
 		Scoreboard scoreboardB = manager.getMainScoreboard();
 		assertSame(scoreboardA, scoreboardB);
 	}
-	
+
 	@Test
 	public void getNewScoreboard_NotNull()
 	{
 		assertNotNull(manager.getNewScoreboard());
 	}
-	
+
 	@Test
 	public void getNewScoreboard_MultipleCalls_ReturnsDifferentInstances()
 	{

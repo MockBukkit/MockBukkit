@@ -11,33 +11,33 @@ import org.junit.Test;
 public class PlayerMessagingTest
 {
 
-    private ServerMock server;
-    private PlayerMock sender;
+	private ServerMock server;
+	private PlayerMock sender;
 
-    @Before
-    public void setUp()
-    {
-        server = MockBukkit.mock();
-        sender = server.addPlayer();
-    }
+	@Before
+	public void setUp()
+	{
+		server = MockBukkit.mock();
+		sender = server.addPlayer();
+	}
 
-    @After
-    public void tearDown()
-    {
-        MockBukkit.unmock();
-    }
+	@After
+	public void tearDown()
+	{
+		MockBukkit.unmock();
+	}
 
-    @Test
-    public void assertSaid_CorrectMessage_spigot_api_DoesNotAssert()
-    {
-        sender.spigot().sendMessage(TextComponent.fromLegacyText("Spigot message"));
-        sender.assertSaid("Spigot message");
-    }
+	@Test
+	public void assertSaid_CorrectMessage_spigot_api_DoesNotAssert()
+	{
+		sender.spigot().sendMessage(TextComponent.fromLegacyText("Spigot message"));
+		sender.assertSaid("Spigot message");
+	}
 
-    @Test(expected = AssertionError.class)
-    public void assertSaid_WrongMessage_spigot_api_Asserts()
-    {
-        sender.sendMessage("Spigot message");
-        sender.assertSaid("Some other message");
-    }
+	@Test(expected = AssertionError.class)
+	public void assertSaid_WrongMessage_spigot_api_Asserts()
+	{
+		sender.sendMessage("Spigot message");
+		sender.assertSaid("Some other message");
+	}
 }

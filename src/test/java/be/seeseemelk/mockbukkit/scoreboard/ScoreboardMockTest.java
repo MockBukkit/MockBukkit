@@ -30,31 +30,31 @@ public class ScoreboardMockTest
 		assertNotNull(objective);
 		assertSame(objective, scoreboard.getObjective("My objective"));
 	}
-	
+
 	@Test
 	public void getObjectivesByCriteria_TwoDifferentObjectives_ReturnsOne()
 	{
 		Objective objective = scoreboard.registerNewObjective("Correct", "dummy");
 		scoreboard.registerNewObjective("Incorrect", "player_kills");
-		
+
 		Set<Objective> objectives = scoreboard.getObjectivesByCriteria("dummy");
 		assertEquals(1, objectives.size());
 		assertSame(objective, objectives.iterator().next());
 	}
-	
+
 	@Test
 	public void getObjectives_TwoObjectives_ReturnsTwo()
 	{
 		Objective objective1 = scoreboard.registerNewObjective("One", "dummy");
 		Objective objective2 = scoreboard.registerNewObjective("Two", "dummy");
-		
+
 		Set<Objective> objectives = scoreboard.getObjectives();
-		
+
 		assertEquals("getObjectives() did not return 2 objectives", 2, objectives.size());
 		assertTrue(objectives.contains(objective1));
 		assertTrue(objectives.contains(objective2));
 	}
-	
+
 	@Test
 	public void getObjective_EmptyDisplaySlot_ReturnsNull()
 	{
@@ -63,7 +63,7 @@ public class ScoreboardMockTest
 		assertNull(scoreboard.getObjective(DisplaySlot.PLAYER_LIST));
 		assertNull(scoreboard.getObjective(DisplaySlot.SIDEBAR));
 	}
-	
+
 	@Test
 	public void getObjective_ObjectiveInDisplaySlot_ReturnsObjective()
 	{

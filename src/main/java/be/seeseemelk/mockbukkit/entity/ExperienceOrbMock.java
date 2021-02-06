@@ -12,7 +12,7 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
 /**
  * This is a simple mock of the {@link ExperienceOrb} {@link Entity}.
- * 
+ *
  * @author TheBusyBiscuit
  *
  */

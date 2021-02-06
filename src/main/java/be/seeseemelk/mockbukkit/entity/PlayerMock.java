@@ -172,7 +172,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 	public boolean simulateBlockBreak(Block block)
 	{
 		if ((gamemode == GameMode.SPECTATOR || gamemode == GameMode.ADVENTURE)
-				|| (gamemode == GameMode.SURVIVAL && simulateBlockDamagePure(block).isCancelled()))
+		        || (gamemode == GameMode.SURVIVAL && simulateBlockDamagePure(block).isCancelled()))
 			return false;
 
 		BlockBreakEvent event = new BlockBreakEvent(block, this);
@@ -325,7 +325,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 	 * This method is an assertion for the currently open {@link InventoryView} for this {@link Player}. The
 	 * {@link Predicate} refers to the top inventory, not the {@link PlayerInventory}. It uses the method
 	 * {@link InventoryView#getTopInventory()}.
-	 * 
+	 *
 	 * @param message   The message to display upon failure
 	 * @param type      The {@link InventoryType} you are expecting
 	 * @param predicate A custom {@link Predicate} to check the opened {@link Inventory}.
@@ -346,7 +346,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 	 * This method is an assertion for the currently open {@link InventoryView} for this {@link Player}. The
 	 * {@link Predicate} refers to the top inventory, not the {@link PlayerInventory}. It uses the method
 	 * {@link InventoryView#getTopInventory()}.
-	 * 
+	 *
 	 * @param type      The {@link InventoryType} you are expecting
 	 * @param predicate A custom {@link Predicate} to check the opened {@link Inventory}.
 	 */
@@ -357,7 +357,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 
 	/**
 	 * This method is an assertion for the currently open {@link InventoryView} for this {@link Player}.
-	 * 
+	 *
 	 * @param type The {@link InventoryType} you are expecting
 	 */
 	public void assertInventoryView(InventoryType type)
@@ -367,7 +367,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 
 	/**
 	 * This method is an assertion for the currently open {@link InventoryView} for this {@link Player}.
-	 * 
+	 *
 	 * @param message The message to display upon failure
 	 * @param type    The {@link InventoryType} you are expecting
 	 */
@@ -891,10 +891,10 @@ public class PlayerMock extends LivingEntityMock implements Player
 	public void chat(String msg)
 	{
 		AsyncPlayerChatEvent eventAsync = new AsyncPlayerChatEvent(false, this, msg,
-				new HashSet<>(Bukkit.getOnlinePlayers()));
+		        new HashSet<>(Bukkit.getOnlinePlayers()));
 		PlayerChatEvent eventSync = new PlayerChatEvent(this, msg);
 		MockBukkit.getMock().getScheduler().runTaskAsynchronously(null,
-				() -> Bukkit.getPluginManager().callEvent(eventAsync));
+		        () -> Bukkit.getPluginManager().callEvent(eventAsync));
 		Bukkit.getPluginManager().callEvent(eventSync);
 	}
 
@@ -953,7 +953,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 	}
 
 	@Override
-    @Deprecated
+	@Deprecated
 	public void playNote(Location loc, byte instrument, byte note)
 	{
 		// TODO Auto-generated method stub
@@ -1641,7 +1641,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 
 	@Override
 	public void spawnParticle(Particle particle, Location location, int count, double offsetX, double offsetY,
-			double offsetZ)
+	                          double offsetZ)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1649,7 +1649,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 
 	@Override
 	public void spawnParticle(Particle particle, double x, double y, double z, int count, double offsetX,
-			double offsetY, double offsetZ)
+	                          double offsetY, double offsetZ)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1657,7 +1657,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 
 	@Override
 	public <T> void spawnParticle(Particle particle, Location location, int count, double offsetX, double offsetY,
-			double offsetZ, T data)
+	                              double offsetZ, T data)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1665,7 +1665,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 
 	@Override
 	public <T> void spawnParticle(Particle particle, double x, double y, double z, int count, double offsetX,
-			double offsetY, double offsetZ, T data)
+	                              double offsetY, double offsetZ, T data)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1673,7 +1673,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 
 	@Override
 	public void spawnParticle(Particle particle, Location location, int count, double offsetX, double offsetY,
-			double offsetZ, double extra)
+	                          double offsetZ, double extra)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1681,7 +1681,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 
 	@Override
 	public void spawnParticle(Particle particle, double x, double y, double z, int count, double offsetX,
-			double offsetY, double offsetZ, double extra)
+	                          double offsetY, double offsetZ, double extra)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1689,7 +1689,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 
 	@Override
 	public <T> void spawnParticle(Particle particle, Location location, int count, double offsetX, double offsetY,
-			double offsetZ, double extra, T data)
+	                              double offsetZ, double extra, T data)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1697,7 +1697,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 
 	@Override
 	public <T> void spawnParticle(Particle particle, double x, double y, double z, int count, double offsetX,
-			double offsetY, double offsetZ, double extra, T data)
+	                              double offsetY, double offsetZ, double extra, T data)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -2022,29 +2022,36 @@ public class PlayerMock extends LivingEntityMock implements Player
 		return playerSpigotMock;
 	}
 
-	public class PlayerSpigotMock extends Player.Spigot {
+	public class PlayerSpigotMock extends Player.Spigot
+	{
 
 		@Override
-		public void sendMessage(@NotNull BaseComponent... components) {
-			for (BaseComponent component : components) {
+		public void sendMessage(@NotNull BaseComponent... components)
+		{
+			for (BaseComponent component : components)
+			{
 				sendMessage(component);
 			}
 		}
 
 		@Override
-		public void sendMessage(@NotNull ChatMessageType position, @NotNull BaseComponent... components) {
-			for (BaseComponent component : components) {
+		public void sendMessage(@NotNull ChatMessageType position, @NotNull BaseComponent... components)
+		{
+			for (BaseComponent component : components)
+			{
 				sendMessage(position, component);
 			}
 		}
 
 		@Override
-		public void sendMessage(@NotNull BaseComponent component) {
+		public void sendMessage(@NotNull BaseComponent component)
+		{
 			sendMessage(ChatMessageType.CHAT, component);
 		}
 
 		@Override
-		public void sendMessage(@NotNull ChatMessageType position, @NotNull BaseComponent component) {
+		public void sendMessage(@NotNull ChatMessageType position, @NotNull BaseComponent component)
+		{
 			PlayerMock.this.sendMessage(component.toPlainText());
 		}
 	}

@@ -12,7 +12,7 @@ import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 
 /**
  * The {@link ContainerMock} is an extension of a {@link TileStateMock} which can also hold an {@link Inventory}.
- * 
+ *
  * @author TheBusyBiscuit
  *
  */
@@ -40,7 +40,7 @@ public abstract class ContainerMock extends TileStateMock implements Container
 		super(state);
 		this.inventory = state.getInventory();
 	}
-	
+
 	protected abstract InventoryMock createInventory();
 
 	@Override

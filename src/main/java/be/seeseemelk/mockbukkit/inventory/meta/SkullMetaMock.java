@@ -12,7 +12,7 @@ import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
 
 /**
  * An {@link ItemMetaMock} for the {@link SkullMeta} interface. The owning {@link Player} is stored via his name.
- * 
+ *
  * Created by SimplyBallistic on 27/10/2018
  *
  * @author SimplyBallistic

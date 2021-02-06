@@ -18,7 +18,7 @@ public class SimpleEntityMock extends EntityMock
 {
 	/**
 	 * Creates a {@code SimpleEntityMock} with a specified UUID.
-	 * 
+	 *
 	 * @param server The server this entity lives on.
 	 * @param uuid   The UUID that the entity should have.
 	 */
@@ -36,7 +36,7 @@ public class SimpleEntityMock extends EntityMock
 
 	/**
 	 * Creates a {@code SimpleEntityMock} with a random UUID.
-	 * 
+	 *
 	 * @param server The server this entity lives on.
 	 */
 	public SimpleEntityMock(ServerMock server)

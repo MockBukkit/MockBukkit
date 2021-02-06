@@ -13,7 +13,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -23,7 +22,6 @@ import java.util.logging.LogManager;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-import be.seeseemelk.mockbukkit.help.HelpMapMock;
 import org.apache.commons.lang.Validate;
 import org.bukkit.BanEntry;
 import org.bukkit.BanList;
@@ -83,9 +81,9 @@ import be.seeseemelk.mockbukkit.command.ConsoleCommandSenderMock;
 import be.seeseemelk.mockbukkit.command.MessageTarget;
 import be.seeseemelk.mockbukkit.enchantments.EnchantmentsMock;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
-import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
+import be.seeseemelk.mockbukkit.help.HelpMapMock;
 import be.seeseemelk.mockbukkit.inventory.BarrelInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.ChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.DispenserInventoryMock;
@@ -109,16 +107,15 @@ import be.seeseemelk.mockbukkit.tags.TagsMock;
 @SuppressWarnings("deprecation")
 public class ServerMock implements Server
 {
-	private static final String BUKKIT_VERSION = "1.16.2";
+	private static final String BUKKIT_VERSION = "1.16.5";
 	private static final String JOIN_MESSAGE = "%s has joined the server.";
+	private static final String MOTD = "A Minecraft Server";
 
 	private final Logger logger;
 	private final Thread mainThread;
 	private final MockUnsafeValues unsafe = new MockUnsafeValues();
 	private final Map<String, TagRegistry> materialTags = new HashMap<>();
 
-	private final List<PlayerMock> players = new ArrayList<>();
-	private final Set<OfflinePlayer> offlinePlayers = new HashSet<>();
 	private final Set<EntityMock> entities = new HashSet<>();
 	private final List<World> worlds = new ArrayList<>();
 	private final List<Recipe> recipes = new LinkedList<>();
@@ -156,6 +153,7 @@ public class ServerMock implements Server
 		{
 			logger.warning("Could not load file logger.properties");
 		}
+
 		logger.setLevel(Level.ALL);
 	}
 
@@ -186,7 +184,7 @@ public class ServerMock implements Server
 	 *
 	 * @param entity The entity to register
 	 */
-	public void registerEntity(EntityMock entity)
+	public void registerEntity(@NotNull EntityMock entity)
 	{
 		assertMainThread();
 		entities.add(entity);
@@ -197,6 +195,7 @@ public class ServerMock implements Server
 	 *
 	 * @return A set of entities that exist on this server instance.
 	 */
+	@NotNull
 	public Set<EntityMock> getEntities()
 	{
 		return Collections.unmodifiableSet(entities);
@@ -210,10 +209,9 @@ public class ServerMock implements Server
 	public void addPlayer(PlayerMock player)
 	{
 		assertMainThread();
-		players.add(player);
-		offlinePlayers.add(player);
+		playerList.addPlayer(player);
 		PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(player,
-				String.format(JOIN_MESSAGE, player.getDisplayName()));
+		        String.format(JOIN_MESSAGE, player.getDisplayName()));
 		Bukkit.getPluginManager().callEvent(playerJoinEvent);
 
 		player.setLastPlayed(getCurrentServerTime());
@@ -222,7 +220,7 @@ public class ServerMock implements Server
 
 	/**
 	 * Creates a random player and adds it.
-	 * 
+	 *
 	 * @return The player that was added.
 	 */
 	public PlayerMock addPlayer()
@@ -235,7 +233,7 @@ public class ServerMock implements Server
 
 	/**
 	 * Creates a player with a given name and adds it.
-	 * 
+	 *
 	 * @param name The name to give to the player.
 	 * @return The added player.
 	 */
@@ -256,7 +254,7 @@ public class ServerMock implements Server
 	public void setPlayers(int num)
 	{
 		assertMainThread();
-		players.clear();
+		playerList.clearOnlinePlayers();
 
 		for (int i = 0; i < num; i++)
 			addPlayer();
@@ -272,13 +270,17 @@ public class ServerMock implements Server
 	public void setOfflinePlayers(int num)
 	{
 		assertMainThread();
-		offlinePlayers.clear();
-		offlinePlayers.addAll(players);
+		playerList.clearOfflinePlayers();
+
+		for (PlayerMock player : getOnlinePlayers())
+		{
+			playerList.addPlayer(player);
+		}
 
 		for (int i = 0; i < num; i++)
 		{
 			OfflinePlayer player = playerFactory.createRandomOfflinePlayer();
-			offlinePlayers.add(player);
+			playerList.addOfflinePlayer(player);
 		}
 	}
 
@@ -290,14 +292,7 @@ public class ServerMock implements Server
 	 */
 	public PlayerMock getPlayer(int num)
 	{
-		if (num < 0 || num >= players.size())
-		{
-			throw new ArrayIndexOutOfBoundsException();
-		}
-		else
-		{
-			return players.get(num);
-		}
+		return playerList.getPlayer(num);
 	}
 
 	/**
@@ -363,8 +358,8 @@ public class ServerMock implements Server
 	{
 		assertMainThread();
 
-		if (!players.isEmpty())
-			return execute(command, players.get(0), args);
+		if (playerList.isSomeoneOnline())
+			return execute(command, getPlayer(0), args);
 		else
 			throw new IllegalStateException("Need at least one player to run the command");
 	}
@@ -393,8 +388,11 @@ public class ServerMock implements Server
 	public CommandResult execute(Command command, CommandSender sender, String... args)
 	{
 		assertMainThread();
+
 		if (!(sender instanceof MessageTarget))
+		{
 			throw new IllegalArgumentException("Only a MessageTarget can be the sender of the command");
+		}
 
 		boolean status = command.execute(sender, command.getName(), args);
 		return new CommandResult(status, (MessageTarget) sender);
@@ -435,70 +433,37 @@ public class ServerMock implements Server
 	@Override
 	public Collection<? extends PlayerMock> getOnlinePlayers()
 	{
-		assertMainThread();
-		return players;
+		return playerList.getOnlinePlayers();
 	}
 
 	@Override
 	public OfflinePlayer[] getOfflinePlayers()
 	{
-		return offlinePlayers.toArray(new OfflinePlayer[0]);
+		return playerList.getOfflinePlayers();
 	}
 
 	@Override
 	public Player getPlayer(String name)
 	{
-		Player player = getPlayerExact(name);
-		if (player != null)
-			return player;
-
-		final String lowercase = name.toLowerCase(Locale.ENGLISH);
-		int delta = Integer.MAX_VALUE;
-		for (Player namedPlayer : players)
-		{
-			if (namedPlayer.getName().toLowerCase(Locale.ENGLISH).startsWith(lowercase))
-			{
-				int currentDelta = Math.abs(namedPlayer.getName().length() - lowercase.length());
-				if (currentDelta < delta)
-				{
-					delta = currentDelta;
-					player = namedPlayer;
-				}
-			}
-		}
-		return player;
+		return playerList.getPlayer(name);
 	}
 
 	@Override
 	public Player getPlayerExact(String name)
 	{
-		assertMainThread();
-		return this.players.stream().filter(
-				playerMock -> playerMock.getName().toLowerCase(Locale.ENGLISH).equals(name.toLowerCase(Locale.ENGLISH)))
-				.findFirst().orElse(null);
+		return playerList.getPlayerExact(name);
 	}
 
 	@Override
 	public List<Player> matchPlayer(String name)
 	{
-		assertMainThread();
-		return players.stream().filter(
-				player -> player.getName().toLowerCase(Locale.ENGLISH).startsWith(name.toLowerCase(Locale.ENGLISH)))
-				.collect(Collectors.toList());
+		return playerList.matchPlayer(name);
 	}
 
 	@Override
 	public Player getPlayer(UUID id)
 	{
-		assertMainThread();
-		for (Player player : getOnlinePlayers())
-		{
-			if (id.equals(player.getUniqueId()))
-			{
-				return player;
-			}
-		}
-		return null;
+		return playerList.getPlayer(id);
 	}
 
 	@Override
@@ -598,31 +563,31 @@ public class ServerMock implements Server
 		case LECTERN:
 			return new LecternInventoryMock(owner);
 		case GRINDSTONE:
-			// TODO: This Inventory Type needs to be implemented
+		// TODO: This Inventory Type needs to be implemented
 		case STONECUTTER:
-			// TODO: This Inventory Type needs to be implemented
+		// TODO: This Inventory Type needs to be implemented
 		case CARTOGRAPHY:
-			// TODO: This Inventory Type needs to be implemented
+		// TODO: This Inventory Type needs to be implemented
 		case SMOKER:
-			// TODO: This Inventory Type needs to be implemented
+		// TODO: This Inventory Type needs to be implemented
 		case LOOM:
-			// TODO: This Inventory Type needs to be implemented
+		// TODO: This Inventory Type needs to be implemented
 		case BLAST_FURNACE:
-			// TODO: This Inventory Type needs to be implemented
+		// TODO: This Inventory Type needs to be implemented
 		case ANVIL:
-			// TODO: This Inventory Type needs to be implemented
+		// TODO: This Inventory Type needs to be implemented
 		case SMITHING:
-			// TODO: This Inventory Type needs to be implemented
+		// TODO: This Inventory Type needs to be implemented
 		case BEACON:
-			// TODO: This Inventory Type needs to be implemented
+		// TODO: This Inventory Type needs to be implemented
 		case FURNACE:
-			// TODO: This Inventory Type needs to be implemented
+		// TODO: This Inventory Type needs to be implemented
 		case WORKBENCH:
-			// TODO: This Inventory Type needs to be implemented
+		// TODO: This Inventory Type needs to be implemented
 		case ENCHANTING:
-			// TODO: This Inventory Type needs to be implemented
+		// TODO: This Inventory Type needs to be implemented
 		case BREWING:
-			// TODO: This Inventory Type needs to be implemented
+		// TODO: This Inventory Type needs to be implemented
 		default:
 			throw new UnimplementedOperationException("Inventory type not yet supported");
 		}
@@ -692,7 +657,7 @@ public class ServerMock implements Server
 	public Set<String> getIPBans()
 	{
 		return this.playerList.getIPBans().getBanEntries().stream().map(BanEntry::getTarget)
-				.collect(Collectors.toSet());
+		       .collect(Collectors.toSet());
 	}
 
 	@Override
@@ -725,11 +690,7 @@ public class ServerMock implements Server
 	@Override
 	public Set<OfflinePlayer> getOperators()
 	{
-		assertMainThread();
-		final Set<OfflinePlayer> allPlayers = new HashSet<>();
-		allPlayers.addAll(offlinePlayers);
-		allPlayers.addAll(players);
-		return allPlayers.stream().filter(OfflinePlayer::isOp).collect(Collectors.toSet());
+		return playerList.getOperators();
 	}
 
 	@Override
@@ -748,9 +709,13 @@ public class ServerMock implements Server
 	@Override
 	public int broadcastMessage(String message)
 	{
-		assertMainThread();
+		Collection<? extends PlayerMock> players = getOnlinePlayers();
+
 		for (Player player : players)
+		{
 			player.sendMessage(message);
+		}
+
 		return players.size();
 	}
 
@@ -775,7 +740,8 @@ public class ServerMock implements Server
 	{
 		assertMainThread();
 
-		return recipes.stream().filter(recipe -> {
+		return recipes.stream().filter(recipe ->
+		{
 			ItemStack result = recipe.getResult();
 			// Amount is explicitly ignored here
 			return result.getType() == item.getType() && result.getItemMeta().equals(item.getItemMeta());
@@ -843,10 +809,21 @@ public class ServerMock implements Server
 		String commandLabel = commands[0];
 		String[] args = Arrays.copyOfRange(commands, 1, commands.length);
 		Command command = getCommandMap().getCommand(commandLabel);
+
 		if (command != null)
+		{
 			return command.execute(sender, commandLabel, args);
+		}
 		else
+		{
 			return false;
+		}
+	}
+
+	@Override
+	public HelpMap getHelpMap()
+	{
+		return helpMap;
 	}
 
 	@Override
@@ -1097,43 +1074,22 @@ public class ServerMock implements Server
 	@Override
 	public OfflinePlayer getOfflinePlayer(String name)
 	{
-		Player player = getPlayer(name);
-
-		if (player != null)
-		{
-			return player;
-		}
-
-		for (OfflinePlayer offlinePlayer : offlinePlayers)
-		{
-			if (offlinePlayer.getName().equals(name))
-			{
-				return offlinePlayer;
-			}
-		}
-
-		return new OfflinePlayerMock(name);
+		return playerList.getOfflinePlayer(name);
 	}
 
 	@Override
 	public OfflinePlayer getOfflinePlayer(UUID id)
 	{
-		Player player = getPlayer(id);
+		OfflinePlayer player = playerList.getOfflinePlayer(id);
 
 		if (player != null)
 		{
 			return player;
 		}
-
-		for (OfflinePlayer offlinePlayer : offlinePlayers)
+		else
 		{
-			if (offlinePlayer.getUniqueId().equals(id))
-			{
-				return offlinePlayer;
-			}
+			return playerFactory.createRandomOfflinePlayer();
 		}
-
-		return playerFactory.createRandomOfflinePlayer();
 	}
 
 	@Override
@@ -1155,12 +1111,6 @@ public class ServerMock implements Server
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public HelpMap getHelpMap()
-	{
-		return helpMap;
 	}
 
 	@Override
@@ -1207,8 +1157,7 @@ public class ServerMock implements Server
 	@Override
 	public String getMotd()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return MOTD;
 	}
 
 	@Override
@@ -1339,10 +1288,10 @@ public class ServerMock implements Server
 	 * This creates a new Mock {@link Tag} for the {@link Material} class.<br>
 	 * Call this in advance before you are gonna access {@link #getTag(String, NamespacedKey, Class)} or any of the
 	 * constants defined in {@link Tag}.
-	 * 
+	 *
 	 * @param key       The {@link NamespacedKey} for this {@link Tag}
 	 * @param materials {@link Material Materials} which should be covered by this {@link Tag}
-	 * 
+	 *
 	 * @return The newly created {@link Tag}
 	 */
 	public Tag<Material> createMaterialTag(NamespacedKey key, String registryKey, Material... materials)
@@ -1457,7 +1406,7 @@ public class ServerMock implements Server
 
 	@Override
 	public ItemStack createExplorerMap(World world, Location location, StructureType structureType, int radius,
-			boolean findUnexplored)
+	                                   boolean findUnexplored)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1534,7 +1483,7 @@ public class ServerMock implements Server
 
 	/**
 	 * This returns the current time of the {@link Server} in milliseconds
-	 * 
+	 *
 	 * @return The current {@link Server} time
 	 */
 	protected long getCurrentServerTime()
@@ -1558,6 +1507,13 @@ public class ServerMock implements Server
 
 	@Override
 	public Spigot spigot()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getMaxWorldSize()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

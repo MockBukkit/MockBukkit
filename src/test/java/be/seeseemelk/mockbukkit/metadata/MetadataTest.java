@@ -29,7 +29,7 @@ import be.seeseemelk.mockbukkit.block.state.BlockStateMock;
 @RunWith(Parameterized.class)
 public class MetadataTest<T extends Metadatable>
 {
-	
+
 	@Before
 	public void setUp()
 	{
@@ -41,20 +41,23 @@ public class MetadataTest<T extends Metadatable>
 	{
 		MockBukkit.unmock();
 	}
-	
+
 	@Parameters
-	public static Collection<Object[]> data() {
-		return Arrays.asList(new Object[][] {
+	public static Collection<Object[]> data()
+	{
+		return Arrays.asList(new Object[][]
+		{
 			{new MetadataTable()},
 			{new BlockMock()},
 			{new BlockStateMock(Material.DIAMOND_BLOCK)},
 			{new WorldMock()}
 		});
 	}
-	
+
 	private final T testSubject;
-	
-	public MetadataTest(T subject) {
+
+	public MetadataTest(T subject)
+	{
 		this.testSubject = subject;
 	}
 
@@ -63,15 +66,15 @@ public class MetadataTest<T extends Metadatable>
 	{
 		MockPlugin plugin1 = MockBukkit.createMockPlugin();
 		TestPlugin plugin2 = MockBukkit.load(TestPlugin.class);
-		
+
 		testSubject.setMetadata("MyMetadata", new FixedMetadataValue(plugin1, "wee"));
 		testSubject.setMetadata("MyMetadata", new FixedMetadataValue(plugin2, "woo"));
 		testSubject.removeMetadata("MyMetadata", plugin1);
-		
+
 		assertTrue(testSubject.hasMetadata("MyMetadata"));
 		List<MetadataValue> metadata = testSubject.getMetadata("MyMetadata");
 		assertEquals(1, metadata.size());
-		
+
 		MetadataValue value = metadata.get(0);
 		assertEquals(plugin2, value.getOwningPlugin());
 	}
