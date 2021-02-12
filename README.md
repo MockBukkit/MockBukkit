@@ -193,7 +193,7 @@ If you need any help with MockBukkit or have a question regarding this project, 
 Several projects have utilized MockBukkit for their needs already.
 If you want to see some projects that are using MockBukkit right now, feel free to take a peak:
 - [Slimefun/Slimefun4](https://github.com/Slimefun/Slimefun4/tree/master/src/test/java/io/github/thebusybiscuit/slimefun4/testing/tests) (~400+ Unit Tests)
-- *and more! (You're welcome to plug your project on discord if you want to be listed here too)*
+- *and more! (If you want to see your plugin here, open up an issue and we'll consider adding it)*
 
 You can also have a look at our documentation where we outline various examples and tricks on how to use MockBukkit already:
 https://mockbukkit.readthedocs.io/en/latest/index.html
