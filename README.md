@@ -34,7 +34,7 @@ It aims to be provide complete mock implementation of CraftBukkit that can be co
     - [Mock Players](#mock-players)
     - [Mock Worlds](#mock-worlds)
 3. [Troubleshooting (My tests are being skipped)](#question-my-tests-are-being-skipped-unimplementedoperationexception)
-4. [Discord server]()
+4. [Discord server](#headphones-discord-server)
 5. [Examples (See MockBukkit in action)](#tada-examples-see-mockbukkit-in-action)
 
 ## :mag: Usage
