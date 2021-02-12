@@ -34,7 +34,8 @@ It aims to be provide complete mock implementation of CraftBukkit that can be co
     - [Mock Players](#mock-players)
     - [Mock Worlds](#mock-worlds)
 3. [Troubleshooting (My tests are being skipped)](#question-my-tests-are-being-skipped-unimplementedoperationexception)
-4. [Examples (See MockBukkit in action)](#tada-examples-see-mockbukkit-in-action)
+4. [Discord server]()
+5. [Examples (See MockBukkit in action)](#tada-examples-see-mockbukkit-in-action)
 
 ## :mag: Usage
 MockBukkit can easily be included in your project using either Maven or gradle.
@@ -179,11 +180,20 @@ These exception extends `AssumationException` and will cause the test to be skip
 These exceptions should just be ignored, though pull requests that add functionality to MockBukkit are always welcome!
 If you don't want to add the required methods yourself you can also request the method on the issues page.
 
+## :headphones: Discord server
+You can also find us on discord by the way!
+If you need any help with MockBukkit or have a question regarding this project, feel free to join and connect with other members of the community.
+<p align="center">
+  <a href="https://discord.gg/s4cWYgsFaV">
+    <img src="https://discordapp.com/api/guilds/792754410576019477/widget.png?style=banner3" alt="Discord Invite"/>
+  </a>
+</p>
+
 ## :tada: Examples (See MockBukkit in action)
 Several projects have utilized MockBukkit for their needs already.
 If you want to see some projects that are using MockBukkit right now, feel free to take a peak:
 - [Slimefun/Slimefun4](https://github.com/Slimefun/Slimefun4/tree/master/src/test/java/io/github/thebusybiscuit/slimefun4/testing/tests) (~400+ Unit Tests)
-- and more! (I will try to see if I can find people who want to be listed here too)
+- *and more! (You're welcome to plug your project on discord if you want to be listed here too)*
 
 You can also have a look at our documentation where we outline various examples and tricks on how to use MockBukkit already:
 https://mockbukkit.readthedocs.io/en/latest/index.html
