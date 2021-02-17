@@ -180,7 +180,7 @@ These exception extends `AssumationException` and will cause the test to be skip
 These exceptions should just be ignored, though pull requests that add functionality to MockBukkit are always welcome!
 If you don't want to add the required methods yourself you can also request the method on the issues page.
 
-## :headphones: Discord server
+## :headphones: Discord Server
 You can also find us on discord by the way!
 If you need any help with MockBukkit or have a question regarding this project, feel free to join and connect with other members of the community.
 <p align="center">
