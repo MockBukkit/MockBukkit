@@ -19,14 +19,14 @@ import org.junit.Test;
 
 public class BukkitSchedulerMockTest
 {
-	private BukkitSchedulerMock scheduler; 
+	private BukkitSchedulerMock scheduler;
 
 	@Before
 	public void setUp()
 	{
 		scheduler = new BukkitSchedulerMock();
 	}
-	
+
 	@Test
 	public void getCurrentTick()
 	{
@@ -47,7 +47,7 @@ public class BukkitSchedulerMockTest
 		scheduler.performOneTick();
 		assertTrue(executed.get());
 	}
-	
+
 	@Test
 	public void runTaskLater()
 	{
@@ -61,7 +61,7 @@ public class BukkitSchedulerMockTest
 		scheduler.performTicks(20L);
 		assertTrue(executed.get());
 	}
-	
+
 	@Test
 	public void runTaskTimer()
 	{
@@ -81,13 +81,14 @@ public class BukkitSchedulerMockTest
 		scheduler.performOneTick();
 		assertEquals(2, count.get());
 	}
-	
+
 	private BukkitTask testTask; /* This is needed because a lambda can't reach writable closures */
 	@Test
 	public void runTaskTimer_SelfCancelling()
 	{
 		AtomicInteger count = new AtomicInteger(0);
-		testTask = scheduler.runTaskTimer(null, () -> {
+		testTask = scheduler.runTaskTimer(null, () ->
+		{
 			if (count.incrementAndGet() == 2)
 				testTask.cancel();
 		}, 1, 1);
@@ -99,7 +100,7 @@ public class BukkitSchedulerMockTest
 		scheduler.performOneTick();
 		assertEquals(2, count.get());
 	}
-	
+
 	@Test
 	public void runTaskTimer_ZeroDelay_DoesntExecuteTaskImmediately()
 	{
@@ -110,14 +111,15 @@ public class BukkitSchedulerMockTest
 		scheduler.performTicks(1L);
 		assertEquals(1, count.get());
 	}
-	
+
 	@Test
 	public void runTaskAsynchronously_TaskExecutedOnSeperateThread() throws InterruptedException, BrokenBarrierException, TimeoutException
 	{
 		final Thread mainThread = Thread.currentThread();
-		
+
 		CyclicBarrier barrier = new CyclicBarrier(2);
-		scheduler.runTaskAsynchronously(null, () -> {
+		scheduler.runTaskAsynchronously(null, () ->
+		{
 			assertNotEquals(mainThread, Thread.currentThread());
 			try
 			{
@@ -130,16 +132,17 @@ public class BukkitSchedulerMockTest
 		});
 		barrier.await(3L, TimeUnit.SECONDS);
 	}
-	
+
 	@Test
 	public void runTaskTimerAsynchronously_TaskExecutedOnSeperateThread() throws InterruptedException, BrokenBarrierException, TimeoutException
 	{
 		final Thread mainThread = Thread.currentThread();
-		
+
 		CyclicBarrier barrier = new CyclicBarrier(2);
 		AtomicInteger count = new AtomicInteger();
-		
-		testTask = scheduler.runTaskTimerAsynchronously(null, () -> {
+
+		testTask = scheduler.runTaskTimerAsynchronously(null, () ->
+		{
 			assertNotEquals(mainThread, Thread.currentThread());
 			try
 			{
@@ -153,14 +156,14 @@ public class BukkitSchedulerMockTest
 				throw new RuntimeException(e);
 			}
 		}, 2L, 1L);
-		
+
 		assertEquals(0, count.get());
 		assertTrue(scheduler.isQueued(testTask.getTaskId()));
-		
+
 		scheduler.performTicks(1L);
 		assertTrue(scheduler.isQueued(testTask.getTaskId()));
 		assertEquals(0, count.get());
-		
+
 		scheduler.performTicks(1L);
 		barrier.await(3L, TimeUnit.SECONDS);
 		assertTrue(scheduler.isQueued(testTask.getTaskId()));
@@ -170,7 +173,7 @@ public class BukkitSchedulerMockTest
 		barrier.await(3L, TimeUnit.SECONDS);
 		assertFalse(scheduler.isQueued(testTask.getTaskId()));
 		assertEquals(2, count.get());
-		
+
 		scheduler.performTicks(1L);
 		assertFalse(scheduler.isQueued(testTask.getTaskId()));
 		assertEquals(2, count.get());

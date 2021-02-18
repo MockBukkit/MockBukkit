@@ -17,7 +17,7 @@ public class ScoreMock implements Score
 		this.objective = objective;
 		this.entry = entry;
 	}
-	
+
 	/**
 	 * Sets the player that this score is tracking.
 	 * @param player The player to track.

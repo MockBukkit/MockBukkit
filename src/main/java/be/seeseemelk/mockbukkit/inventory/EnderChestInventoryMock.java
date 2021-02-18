@@ -9,7 +9,7 @@ import be.seeseemelk.mockbukkit.entity.PlayerMock;
 /**
  * This {@link InventoryMock} mocks an {@link EnderChest} but pretty much behaves like any small chest. A
  * {@link PlayerMock} carries an instance of an {@link EnderChestInventoryMock}.
- * 
+ *
  * @author TheBusyBiscuit
  *
  */

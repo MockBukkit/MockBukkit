@@ -35,7 +35,7 @@ import junit.framework.AssertionFailedError;
 public class BlockMock implements Block
 {
 	private final MetadataTable metadataTable = new MetadataTable();
-	
+
 	private final Location location;
 	private BlockStateMock state;
 	private Material material;
@@ -52,7 +52,7 @@ public class BlockMock implements Block
 
 	/**
 	 * Creates a basic block made of air at a certain location.
-	 * 
+	 *
 	 * @param location The location of the block.
 	 */
 	public BlockMock(Location location)
@@ -62,7 +62,7 @@ public class BlockMock implements Block
 
 	/**
 	 * Creates a basic block with a given material.
-	 * 
+	 *
 	 * @param material The material to give the block.
 	 */
 	public BlockMock(Material material)
@@ -72,7 +72,7 @@ public class BlockMock implements Block
 
 	/**
 	 * Creates a basic block with a given material that is also linked to a specific location.
-	 * 
+	 *
 	 * @param material The material of the block.
 	 * @param location The location of the block. Can be {@code null} if not needed.
 	 */
@@ -138,7 +138,7 @@ public class BlockMock implements Block
 
 	/**
 	 * Assets that the material type of the block is equal to a given type.
-	 * 
+	 *
 	 * @param material The material type that the block should have.
 	 * @throws AssertionFailedError Thrown if the material type of the block does not equal the given material type.
 	 */
@@ -316,8 +316,8 @@ public class BlockMock implements Block
 	public boolean isLiquid()
 	{
 		return material == Material.LAVA
-		    || material == Material.WATER
-		    || material == Material.BUBBLE_COLUMN;
+		       || material == Material.WATER
+		       || material == Material.BUBBLE_COLUMN;
 	}
 
 	@Override
@@ -422,7 +422,7 @@ public class BlockMock implements Block
 	/**
 	 * This method sets the current {@link BlockState} to the provided {@link BlockStateMock}.
 	 * <strong>Do not call this method directly, use {@link BlockState#update()} instead.</strong>
-	 * 
+	 *
 	 * @param state The {@link BlockState} that should be set.
 	 */
 	public void setState(@NotNull BlockStateMock state)
@@ -430,7 +430,7 @@ public class BlockMock implements Block
 		Validate.notNull(state, "The BlockState cannot be null");
 		this.state = state;
 	}
-	
+
 	@Override
 	public boolean applyBoneMeal(BlockFace face)
 	{

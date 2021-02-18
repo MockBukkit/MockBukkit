@@ -450,6 +450,17 @@ public class ServerMockTest
 	}
 
 	@Test
+	public void getOperators_OneOperator()
+	{
+		PlayerMock player = new PlayerMock(server, "operator");
+		server.addPlayer(player);
+		player.setOp(true);
+		
+		assertTrue(server.getOperators().contains(player));
+		assertEquals(1, server.getOperators().size());
+	}
+
+	@Test
 	public void getScoreboardManager_NotNull()
 	{
 		ScoreboardManager manager = server.getScoreboardManager();
@@ -467,7 +478,8 @@ public class ServerMockTest
 	{
 		AtomicReference<Exception> exceptionThrown = new AtomicReference<>();
 
-		server.getScheduler().runTaskAsynchronously(null, () -> {
+		server.getScheduler().runTaskAsynchronously(null, () ->
+		{
 			try
 			{
 				server.assertMainThread();
@@ -532,7 +544,7 @@ public class ServerMockTest
 		}
 	}
 
-	
+
 }
 
 class TestRecipe implements Recipe

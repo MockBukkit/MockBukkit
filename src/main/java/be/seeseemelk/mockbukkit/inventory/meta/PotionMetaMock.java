@@ -21,7 +21,7 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
 /**
  * This {@link ItemMetaMock} mocks the implementation of {@link SuspiciousStewMeta}.
- * 
+ *
  * @author TheBusyBiscuit
  *
  */
@@ -75,7 +75,7 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 
 		PotionMetaMock other = (PotionMetaMock) obj;
 		return effects.equals(other.effects) && Objects.equals(color, other.color)
-				&& basePotionData.equals(other.basePotionData);
+		       && basePotionData.equals(other.basePotionData);
 	}
 
 	@Override

@@ -257,7 +257,8 @@ public class InventoryMockTest
 	{
 		inventory.addItem(new ItemStack(Material.DIRT, 1));
 		AtomicInteger calls = new AtomicInteger(0);
-		inventory.assertTrueForNonNulls(itemstack -> {
+		inventory.assertTrueForNonNulls(itemstack ->
+		{
 			calls.incrementAndGet();
 			return true;
 		});

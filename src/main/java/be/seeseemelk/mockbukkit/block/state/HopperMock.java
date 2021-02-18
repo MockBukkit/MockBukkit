@@ -13,7 +13,7 @@ import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 
 /**
  * This {@link ContainerMock} represents a {@link Hopper}.
- * 
+ *
  * @author TheBusyBiscuit
  *
  */
