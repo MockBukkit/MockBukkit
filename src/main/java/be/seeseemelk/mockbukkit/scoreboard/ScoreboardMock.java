@@ -1,6 +1,11 @@
 package be.seeseemelk.mockbukkit.scoreboard;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.bukkit.OfflinePlayer;
@@ -10,8 +15,7 @@ import org.bukkit.scoreboard.RenderType;
 import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
-
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("deprecation")
 public class ScoreboardMock implements Scoreboard
@@ -23,7 +27,21 @@ public class ScoreboardMock implements Scoreboard
 	@Override
 	public ObjectiveMock registerNewObjective(String name, String criteria) throws IllegalArgumentException
 	{
-		ObjectiveMock objective = new ObjectiveMock(this, name, criteria);
+		return registerNewObjective(name, criteria, name, RenderType.INTEGER);
+	}
+
+	@Override
+	public ObjectiveMock registerNewObjective(String name, String criteria, String displayName)
+			throws IllegalArgumentException
+	{
+		return registerNewObjective(name, criteria, displayName, RenderType.INTEGER);
+	}
+
+	@Override
+	public ObjectiveMock registerNewObjective(String name, String criteria, String displayName, RenderType renderType)
+			throws IllegalArgumentException
+	{
+		ObjectiveMock objective = new ObjectiveMock(this, name, displayName, criteria, renderType);
 		objectives.put(name, objective);
 		return objective;
 	}
@@ -37,9 +55,8 @@ public class ScoreboardMock implements Scoreboard
 	@Override
 	public Set<Objective> getObjectivesByCriteria(String criteria) throws IllegalArgumentException
 	{
-		return objectives.values().stream()
-		       .filter(objective -> objective.getCriteria().equals(criteria))
-		       .collect(Collectors.toSet());
+		return objectives.values().stream().filter(objective -> objective.getCriteria().equals(criteria))
+				.collect(Collectors.toSet());
 	}
 
 	@Override
@@ -64,14 +81,12 @@ public class ScoreboardMock implements Scoreboard
 	public Set<Score> getScores(String entry) throws IllegalArgumentException
 	{
 		Set<Score> scores = new HashSet<>();
+
 		for (Objective o : objectives.values())
 		{
-			Score score = o.getScore(entry);
-			if (score != null)
-			{
-				scores.add(score);
-			}
+			scores.add(o.getScore(entry));
 		}
+
 		return scores;
 	}
 
@@ -86,11 +101,8 @@ public class ScoreboardMock implements Scoreboard
 	{
 		for (Objective o : objectives.values())
 		{
-			Score score = o.getScore(entry);
-			if (score != null)
-			{
-				score.setScore(0);
-			}
+			// Since Scores are always non-null, we don't need a null-check here.
+			o.getScore(entry).setScore(0);
 		}
 	}
 
@@ -105,8 +117,12 @@ public class ScoreboardMock implements Scoreboard
 	{
 		for (Team t : teams.values())
 		{
-			if (t.hasEntry(entry))return t;
+			if (t.hasEntry(entry))
+			{
+				return t;
+			}
 		}
+
 		return null;
 	}
 
@@ -119,8 +135,7 @@ public class ScoreboardMock implements Scoreboard
 	@Override
 	public Set<Team> getTeams()
 	{
-		HashSet<Team> v = new HashSet<>(teams.values());
-		return v;
+		return Collections.unmodifiableSet(new HashSet<>(teams.values()));
 	}
 
 	@Override
@@ -135,10 +150,12 @@ public class ScoreboardMock implements Scoreboard
 	public Set<OfflinePlayer> getPlayers()
 	{
 		Set<OfflinePlayer> players = new HashSet<>();
+
 		for (Team t : teams.values())
 		{
 			players.addAll(t.getPlayers());
 		}
+
 		return players;
 	}
 
@@ -146,10 +163,12 @@ public class ScoreboardMock implements Scoreboard
 	public Set<String> getEntries()
 	{
 		Set<String> entries = new HashSet<>();
+
 		for (Team t : teams.values())
 		{
 			entries.addAll(t.getEntries());
 		}
+
 		return entries;
 	}
 
@@ -157,45 +176,38 @@ public class ScoreboardMock implements Scoreboard
 	public void clearSlot(DisplaySlot slot) throws IllegalArgumentException
 	{
 		Objective o = objectivesByDisplaySlot.remove(slot);
-		if (o != null)objectives.remove(o.getName());
+
+		if (o != null)
+		{
+			objectives.remove(o.getName());
+		}
 
 	}
 
 	/**
 	 * Sets the objective to a specific slot.
+	 * 
 	 * @param objective The objective to set to the slot.
-	 * @param slot The slot to set the objective to.
+	 * @param slot      The slot to set the objective to.
 	 */
-	protected void setDisplaySlot(ObjectiveMock objective, DisplaySlot slot)
+	protected void setDisplaySlot(@NotNull ObjectiveMock objective, DisplaySlot slot)
 	{
 		objectivesByDisplaySlot.put(slot, objective);
 	}
 
 	/**
 	 * Removes an objective off this scoreboard.
+	 * 
 	 * @param objectiveMock The objective to remove.
 	 */
-	protected void unregister(ObjectiveMock objectiveMock)
+	protected void unregister(@NotNull ObjectiveMock objectiveMock)
 	{
-		objectives.remove(objectiveMock.getName());
 		if (objectiveMock.getDisplaySlot() != null)
+		{
 			objectivesByDisplaySlot.remove(objectiveMock.getDisplaySlot());
-	}
+		}
 
-	@Override
-	public Objective registerNewObjective(String name, String criteria, String displayName)
-	throws IllegalArgumentException
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public Objective registerNewObjective(String name, String criteria, String displayName, RenderType renderType)
-	throws IllegalArgumentException
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		objectives.remove(objectiveMock.getName());
 	}
 
 }
