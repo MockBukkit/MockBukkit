@@ -2048,6 +2048,13 @@ public class PlayerMock extends LivingEntityMock implements Player
 	}
 
 	@Override
+	public void sendBlockDamage(Location loc, float progress)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public org.bukkit.entity.Player.Spigot spigot()
 	{
 		return playerSpigotMock;
