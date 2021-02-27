@@ -1,9 +1,9 @@
 package be.seeseemelk.mockbukkit.help;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.WorldMock;
-import org.bukkit.World;
+import static org.junit.Assert.assertSame;
+
+import java.util.Collections;
+
 import org.bukkit.command.defaults.VersionCommand;
 import org.bukkit.help.HelpMap;
 import org.bukkit.help.HelpTopic;
@@ -12,22 +12,19 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Collections;
-
-import static org.junit.Assert.assertSame;
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.ServerMock;
 
 public class HelpMapMockTest
 {
 
 	private ServerMock server;
-	private World world;
 	private HelpMap helpMap;
 
 	@Before
 	public void setUp()
 	{
 		server = MockBukkit.mock();
-		world = new WorldMock();
 		helpMap = server.getHelpMap();
 	}
 

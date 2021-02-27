@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Monster;
+import org.bukkit.inventory.EntityEquipment;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
@@ -23,6 +24,13 @@ public class SimpleMonsterMock extends MonsterMock implements Monster
 
 	@Override
 	public EntityType getType()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public EntityEquipment getEquipment()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

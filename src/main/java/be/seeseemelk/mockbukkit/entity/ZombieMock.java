@@ -5,12 +5,15 @@ import java.util.UUID;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.Zombie;
+import org.bukkit.inventory.EntityEquipment;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
 public class ZombieMock extends MonsterMock implements Zombie
 {
+	private final EntityEquipment equipment = new EntityEquipmentMock(this);
+
 	private boolean baby;
 	private boolean villager;
 	private Villager.Profession profession;
@@ -31,15 +34,9 @@ public class ZombieMock extends MonsterMock implements Zombie
 	}
 
 	@Override
-	public boolean isBaby()
+	public EntityEquipment getEquipment()
 	{
-		return baby;
-	}
-
-	@Override
-	public void setBaby(boolean baby)
-	{
-		this.baby = baby;
+		return equipment;
 	}
 
 	@Override
@@ -124,24 +121,35 @@ public class ZombieMock extends MonsterMock implements Zombie
 	}
 
 	@Override
+	@Deprecated
+	public boolean isBaby()
+	{
+		return baby;
+	}
+
+	@Override
+	@Deprecated
+	public void setBaby(boolean baby)
+	{
+		this.baby = baby;
+	}
+
+	@Override
 	public void setBaby()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		setBaby(true);
 	}
 
 	@Override
 	public void setAdult()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		setBaby(false);
 	}
 
 	@Override
 	public boolean isAdult()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return !isBaby();
 	}
 
 	@Override

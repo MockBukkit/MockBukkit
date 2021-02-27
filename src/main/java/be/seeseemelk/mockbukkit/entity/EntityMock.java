@@ -70,16 +70,18 @@ public abstract class EntityMock implements Entity, MessageTarget
 	}
 
 	@Override
-	public int hashCode()
+	public final int hashCode()
 	{
 		return uuid.hashCode();
 	}
 
 	@Override
-	public boolean equals(Object obj)
+	public final boolean equals(Object obj)
 	{
-		if (obj instanceof EntityMock)
+		if (obj instanceof EntityMock) 
+		{
 			return uuid.equals(((EntityMock) obj).getUniqueId());
+		}
 		return false;
 	}
 
