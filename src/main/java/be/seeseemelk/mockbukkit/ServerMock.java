@@ -68,7 +68,7 @@ import org.bukkit.inventory.Recipe;
 import org.bukkit.loot.LootTable;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.ServicesManager;
+import org.bukkit.plugin.SimpleServicesManager;
 import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.CachedServerIcon;
@@ -125,6 +125,8 @@ public class ServerMock implements Server
 	private final PluginManagerMock pluginManager = new PluginManagerMock(this);
 	private final ScoreboardManagerMock scoreboardManager = new ScoreboardManagerMock();
 	private final BukkitSchedulerMock scheduler = new BukkitSchedulerMock();
+	// We can use the default Service Manager from Bukkit
+	private final SimpleServicesManager servicesManager = new SimpleServicesManager();
 	private final PlayerList playerList = new PlayerList();
 	private ConsoleCommandSender consoleSender;
 	private GameMode defaultGameMode = GameMode.SURVIVAL;
@@ -953,10 +955,9 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public ServicesManager getServicesManager()
+	public SimpleServicesManager getServicesManager()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return servicesManager;
 	}
 
 	@Override
