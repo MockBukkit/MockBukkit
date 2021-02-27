@@ -56,9 +56,10 @@ public class ObjectiveMockTest
 	@Test
 	public void unregister_ObjectiveWasRegistered_ObjectiveIsRemoved()
 	{
-		assumeNotNull("Objective was not registered", scoreboard.getObjective(objective.getName()));
+		String name = objective.getName();
+		assumeNotNull("Objective was not registered", scoreboard.getObjective(name));
 		objective.unregister();
-		assertNull("Objective was not registered", scoreboard.getObjective(objective.getName()));
+		assertNull("Objective was not registered", scoreboard.getObjective(name));
 	}
 
 	@Test
@@ -94,18 +95,3 @@ public class ObjectiveMockTest
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
