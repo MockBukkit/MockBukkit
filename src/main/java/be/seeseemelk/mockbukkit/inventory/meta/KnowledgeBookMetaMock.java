@@ -81,8 +81,8 @@ public class KnowledgeBookMetaMock extends ItemMetaMock implements KnowledgeBook
 			{
 				return;
 			}
-
-			this.recipes.add(recipe);
+			if (recipe != null)
+				this.recipes.add(recipe);
 		}
 	}
 
@@ -101,6 +101,7 @@ public class KnowledgeBookMetaMock extends ItemMetaMock implements KnowledgeBook
 	@Override
 	public void setRecipes(@NotNull List<NamespacedKey> recipes)
 	{
+		Validate.notNull(recipes);
 		this.recipes.clear();
 		this.addRecipe(recipes.toArray(new NamespacedKey[0]));
 	}

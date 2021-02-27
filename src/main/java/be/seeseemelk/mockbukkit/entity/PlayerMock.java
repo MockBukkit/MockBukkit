@@ -449,7 +449,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public @NotNull ItemStack getItemOnCursor()
 	{
-		return cursor == null ? new ItemStack(Material.AIR) : cursor.clone();
+		return cursor == null ? null : cursor.clone();
 	}
 
 	@Override
