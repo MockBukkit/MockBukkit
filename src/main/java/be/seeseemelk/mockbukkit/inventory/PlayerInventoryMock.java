@@ -186,6 +186,7 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	@Override
 	public @NotNull ItemStack getItem(@NotNull EquipmentSlot slot)
 	{
+		// Don't ask me why this method has a @NotNull annotation but not getChestplate(), getBoots(), ...
 		switch (slot)
 		{
 		case CHEST:

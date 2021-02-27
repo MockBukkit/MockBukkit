@@ -269,7 +269,9 @@ public class PlayerInventoryMockTest
 		assertNotNull(inventory.getItemInMainHand());
 		assertNotNull(inventory.getItem(EquipmentSlot.OFF_HAND));
 		assertNotNull(inventory.getItemInOffHand());
-		assertNull(inventory.getItem(EquipmentSlot.CHEST));
+		// NotNull annotation
+		assertNotNull(inventory.getItem(EquipmentSlot.CHEST));
+		assertEquals(Material.AIR, inventory.getItem(EquipmentSlot.CHEST).getType());
 		assertNull(inventory.getChestplate());
 	}
 }
