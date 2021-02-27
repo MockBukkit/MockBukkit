@@ -10,6 +10,8 @@ import org.bukkit.inventory.EntityEquipment;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
+import org.jetbrains.annotations.NotNull;
+
 public class ZombieMock extends MonsterMock implements Zombie
 {
 	private final EntityEquipment equipment = new EntityEquipmentMock(this);
@@ -28,7 +30,7 @@ public class ZombieMock extends MonsterMock implements Zombie
 	}
 
 	@Override
-	public EntityType getType()
+	public @NotNull EntityType getType()
 	{
 		return EntityType.ZOMBIE;
 	}

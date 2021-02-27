@@ -40,7 +40,7 @@ public class ObjectiveMock implements Objective
 	/**
 	 * This method checks if this {@link ObjectiveMock} is still valid. If it has been unregistered, the method will
 	 * throw an {@link IllegalStateException}.
-	 * 
+	 *
 	 * @throws IllegalStateException if this objective has been unregistered.
 	 */
 	private void validate() throws IllegalStateException
@@ -52,21 +52,21 @@ public class ObjectiveMock implements Objective
 	}
 
 	@Override
-	public String getName() throws IllegalStateException
+	public @NotNull String getName() throws IllegalStateException
 	{
 		validate();
 		return name;
 	}
 
 	@Override
-	public String getDisplayName() throws IllegalStateException
+	public @NotNull String getDisplayName() throws IllegalStateException
 	{
 		validate();
 		return displayName;
 	}
 
 	@Override
-	public void setDisplayName(String displayName) throws IllegalStateException, IllegalArgumentException
+	public void setDisplayName(@NotNull String displayName) throws IllegalStateException, IllegalArgumentException
 	{
 		Validate.notNull(displayName, "The display name cannot be null");
 		Validate.isTrue(displayName.length() <= 128, "The display name cannot be longer than 128 characters");
@@ -76,7 +76,7 @@ public class ObjectiveMock implements Objective
 	}
 
 	@Override
-	public String getCriteria() throws IllegalStateException
+	public @NotNull String getCriteria() throws IllegalStateException
 	{
 		validate();
 		return criteria;
@@ -100,7 +100,7 @@ public class ObjectiveMock implements Objective
 
 	/**
 	 * Checks if the objective is still registered.
-	 * 
+	 *
 	 * @return {@code true} if the objective is still registered, {@code false} if it has been unregistered.
 	 */
 	public boolean isRegistered()
@@ -131,7 +131,7 @@ public class ObjectiveMock implements Objective
 	}
 
 	@Override
-	public RenderType getRenderType() throws IllegalStateException
+	public @NotNull RenderType getRenderType() throws IllegalStateException
 	{
 		validate();
 		return renderType;
@@ -139,7 +139,7 @@ public class ObjectiveMock implements Objective
 
 	@Override
 	@Deprecated
-	public ScoreMock getScore(@NotNull OfflinePlayer player) throws IllegalArgumentException, IllegalStateException
+	public @NotNull ScoreMock getScore(@NotNull OfflinePlayer player) throws IllegalArgumentException, IllegalStateException
 	{
 		Validate.notNull(player, "The player cannot be null");
 		validate();
@@ -148,7 +148,7 @@ public class ObjectiveMock implements Objective
 	}
 
 	@Override
-	public ScoreMock getScore(@NotNull String entry) throws IllegalArgumentException, IllegalStateException
+	public @NotNull ScoreMock getScore(@NotNull String entry) throws IllegalArgumentException, IllegalStateException
 	{
 		Validate.notNull(entry, "The entry cannot be null");
 		Validate.isTrue(entry.length() <= 40, "Objective entries cannot be longer than 40 characters");

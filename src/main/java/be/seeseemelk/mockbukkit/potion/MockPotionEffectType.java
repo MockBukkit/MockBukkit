@@ -3,6 +3,8 @@ package be.seeseemelk.mockbukkit.potion;
 import org.bukkit.Color;
 import org.bukkit.potion.PotionEffectType;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * This {@link MockPotionEffectType} mocks an actual {@link PotionEffectType} by taking an id, a name, whether it is
  * instant and a RGB {@link Color} variable.
@@ -18,7 +20,7 @@ public class MockPotionEffectType extends PotionEffectType
 	private final boolean instant;
 	private final Color color;
 
-	public MockPotionEffectType(int id, String name, boolean instant, Color color)
+	public MockPotionEffectType(int id, @NotNull String name, boolean instant, Color color)
 	{
 		super(id);
 
@@ -37,7 +39,7 @@ public class MockPotionEffectType extends PotionEffectType
 	}
 
 	@Override
-	public String getName()
+	public @NotNull String getName()
 	{
 		return name;
 	}
@@ -49,7 +51,7 @@ public class MockPotionEffectType extends PotionEffectType
 	}
 
 	@Override
-	public Color getColor()
+	public @NotNull Color getColor()
 	{
 		return color;
 	}

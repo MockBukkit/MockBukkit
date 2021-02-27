@@ -151,13 +151,13 @@ public abstract class EntityMock implements Entity, MessageTarget
 	}
 
 	@Override
-	public UUID getUniqueId()
+	public @NotNull UUID getUniqueId()
 	{
 		return uuid;
 	}
 
 	@Override
-	public Location getLocation()
+	public @NotNull Location getLocation()
 	{
 		return location.clone();
 	}
@@ -184,31 +184,31 @@ public abstract class EntityMock implements Entity, MessageTarget
 	}
 
 	@Override
-	public World getWorld()
+	public @NotNull World getWorld()
 	{
 		return location.getWorld();
 	}
 
 	@Override
-	public void setMetadata(String metadataKey, MetadataValue newMetadataValue)
+	public void setMetadata(@NotNull String metadataKey, @NotNull MetadataValue newMetadataValue)
 	{
 		metadataTable.setMetadata(metadataKey, newMetadataValue);
 	}
 
 	@Override
-	public List<MetadataValue> getMetadata(String metadataKey)
+	public @NotNull List<MetadataValue> getMetadata(@NotNull String metadataKey)
 	{
 		return metadataTable.getMetadata(metadataKey);
 	}
 
 	@Override
-	public boolean hasMetadata(String metadataKey)
+	public boolean hasMetadata(@NotNull String metadataKey)
 	{
 		return metadataTable.hasMetadata(metadataKey);
 	}
 
 	@Override
-	public void removeMetadata(String metadataKey, Plugin owningPlugin)
+	public void removeMetadata(@NotNull String metadataKey, @NotNull Plugin owningPlugin)
 	{
 		metadataTable.removeMetadata(metadataKey, owningPlugin);
 	}
@@ -220,13 +220,13 @@ public abstract class EntityMock implements Entity, MessageTarget
 	}
 
 	@Override
-	public boolean teleport(Location location)
+	public boolean teleport(@NotNull Location location)
 	{
 		return teleport(location, TeleportCause.PLUGIN);
 	}
 
 	@Override
-	public boolean teleport(Location location, TeleportCause cause)
+	public boolean teleport(@NotNull Location location, @NotNull TeleportCause cause)
 	{
 		this.location = location;
 		teleported = true;
@@ -235,13 +235,13 @@ public abstract class EntityMock implements Entity, MessageTarget
 	}
 
 	@Override
-	public boolean teleport(Entity destination)
+	public boolean teleport(@NotNull Entity destination)
 	{
 		return teleport(destination, TeleportCause.PLUGIN);
 	}
 
 	@Override
-	public boolean teleport(Entity destination, TeleportCause cause)
+	public boolean teleport(Entity destination, @NotNull TeleportCause cause)
 	{
 		return teleport(destination.getLocation(), cause);
 	}
@@ -259,7 +259,7 @@ public abstract class EntityMock implements Entity, MessageTarget
 	}
 
 	@Override
-	public String getName()
+	public @NotNull String getName()
 	{
 		return name;
 	}
@@ -275,7 +275,7 @@ public abstract class EntityMock implements Entity, MessageTarget
 	}
 
 	@Override
-	public void sendMessage(String message)
+	public void sendMessage(@NotNull String message)
 	{
 		sendMessage(null, message);
 	}
@@ -287,7 +287,7 @@ public abstract class EntityMock implements Entity, MessageTarget
 	}
 
 	@Override
-	public void sendMessage(UUID sender, String message)
+	public void sendMessage(UUID sender, @NotNull String message)
 	{
 		messages.add(message);
 	}
@@ -308,7 +308,7 @@ public abstract class EntityMock implements Entity, MessageTarget
 	}
 
 	@Override
-	public boolean isPermissionSet(String name)
+	public boolean isPermissionSet(@NotNull String name)
 	{
 		for (PermissionAttachment attachment : permissionAttachments)
 		{
@@ -329,7 +329,7 @@ public abstract class EntityMock implements Entity, MessageTarget
 	}
 
 	@Override
-	public boolean hasPermission(String name)
+	public boolean hasPermission(@NotNull String name)
 	{
 		if (isPermissionSet(name))
 		{
@@ -341,13 +341,13 @@ public abstract class EntityMock implements Entity, MessageTarget
 	}
 
 	@Override
-	public boolean hasPermission(Permission perm)
+	public boolean hasPermission(@NotNull Permission perm)
 	{
 		return isPermissionSet(perm) || perm.getDefault().getValue(isOp());
 	}
 
 	@Override
-	public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value)
+	public @NotNull PermissionAttachment addAttachment(@NotNull Plugin plugin, @NotNull String name, boolean value)
 	{
 		PermissionAttachment attachment = addAttachment(plugin);
 		attachment.setPermission(name, value);
@@ -355,7 +355,7 @@ public abstract class EntityMock implements Entity, MessageTarget
 	}
 
 	@Override
-	public PermissionAttachment addAttachment(Plugin plugin)
+	public @NotNull PermissionAttachment addAttachment(@NotNull Plugin plugin)
 	{
 		PermissionAttachment attachment = new PermissionAttachment(plugin, this);
 		permissionAttachments.add(attachment);
@@ -363,21 +363,21 @@ public abstract class EntityMock implements Entity, MessageTarget
 	}
 
 	@Override
-	public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value, int ticks)
+	public PermissionAttachment addAttachment(@NotNull Plugin plugin, @NotNull String name, boolean value, int ticks)
 	{
 		// TODO Auto-generated constructor stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public PermissionAttachment addAttachment(Plugin plugin, int ticks)
+	public PermissionAttachment addAttachment(@NotNull Plugin plugin, int ticks)
 	{
 		// TODO Auto-generated constructor stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void removeAttachment(PermissionAttachment attachment)
+	public void removeAttachment(@NotNull PermissionAttachment attachment)
 	{
 		if (attachment == null)
 		{
@@ -409,7 +409,7 @@ public abstract class EntityMock implements Entity, MessageTarget
 	}
 
 	@Override
-	public Set<PermissionAttachmentInfo> getEffectivePermissions()
+	public @NotNull Set<PermissionAttachmentInfo> getEffectivePermissions()
 	{
 		HashSet<PermissionAttachmentInfo> permissionAttachmentInfos = new HashSet<>();
 
@@ -445,7 +445,7 @@ public abstract class EntityMock implements Entity, MessageTarget
 	}
 
 	@Override
-	public Vector getVelocity()
+	public @NotNull Vector getVelocity()
 	{
 		return velocity;
 	}
@@ -472,7 +472,7 @@ public abstract class EntityMock implements Entity, MessageTarget
 	}
 
 	@Override
-	public List<Entity> getNearbyEntities(double x, double y, double z)
+	public @NotNull List<Entity> getNearbyEntities(double x, double y, double z)
 	{
 		// TODO Auto-generated constructor stub
 		throw new UnimplementedOperationException();
@@ -525,7 +525,7 @@ public abstract class EntityMock implements Entity, MessageTarget
 	}
 
 	@Override
-	public ServerMock getServer()
+	public @NotNull ServerMock getServer()
 	{
 		return server;
 	}
@@ -538,28 +538,28 @@ public abstract class EntityMock implements Entity, MessageTarget
 	}
 
 	@Override
-	public boolean setPassenger(Entity passenger)
+	public boolean setPassenger(@NotNull Entity passenger)
 	{
 		// TODO Auto-generated constructor stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public List<Entity> getPassengers()
+	public @NotNull List<Entity> getPassengers()
 	{
 		// TODO Auto-generated constructor stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean addPassenger(Entity passenger)
+	public boolean addPassenger(@NotNull Entity passenger)
 	{
 		// TODO Auto-generated constructor stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean removePassenger(Entity passenger)
+	public boolean removePassenger(@NotNull Entity passenger)
 	{
 		// TODO Auto-generated constructor stub
 		throw new UnimplementedOperationException();
@@ -623,7 +623,7 @@ public abstract class EntityMock implements Entity, MessageTarget
 	}
 
 	@Override
-	public void playEffect(EntityEffect type)
+	public void playEffect(@NotNull EntityEffect type)
 	{
 		// TODO Auto-generated constructor stub
 		throw new UnimplementedOperationException();
@@ -742,28 +742,28 @@ public abstract class EntityMock implements Entity, MessageTarget
 	}
 
 	@Override
-	public Set<String> getScoreboardTags()
+	public @NotNull Set<String> getScoreboardTags()
 	{
 		// TODO Auto-generated constructor stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean addScoreboardTag(String tag)
+	public boolean addScoreboardTag(@NotNull String tag)
 	{
 		// TODO Auto-generated constructor stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean removeScoreboardTag(String tag)
+	public boolean removeScoreboardTag(@NotNull String tag)
 	{
 		// TODO Auto-generated constructor stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public PistonMoveReaction getPistonMoveReaction()
+	public @NotNull PistonMoveReaction getPistonMoveReaction()
 	{
 		// TODO Auto-generated constructor stub
 		throw new UnimplementedOperationException();
@@ -777,7 +777,7 @@ public abstract class EntityMock implements Entity, MessageTarget
 	}
 
 	@Override
-	public BoundingBox getBoundingBox()
+	public @NotNull BoundingBox getBoundingBox()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -798,14 +798,14 @@ public abstract class EntityMock implements Entity, MessageTarget
 	}
 
 	@Override
-	public BlockFace getFacing()
+	public @NotNull BlockFace getFacing()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Pose getPose()
+	public @NotNull Pose getPose()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

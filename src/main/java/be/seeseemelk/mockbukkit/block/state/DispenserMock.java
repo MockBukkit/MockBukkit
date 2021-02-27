@@ -71,7 +71,7 @@ public class DispenserMock extends ContainerMock implements Dispenser
 	}
 
 	@Override
-	public BlockState getSnapshot()
+	public @NotNull BlockState getSnapshot()
 	{
 		return new DispenserMock(this);
 	}

@@ -4,6 +4,8 @@ import java.util.Collection;
 
 import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
 import org.apache.commons.lang.Validate;
+import org.jetbrains.annotations.NotNull;
+
 import org.bukkit.Chunk;
 import org.bukkit.ChunkSnapshot;
 import org.bukkit.World;
@@ -22,7 +24,7 @@ public class ChunkMock implements Chunk
 	private boolean loaded = true;
 	private final PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
 
-	protected ChunkMock(final World world, final int x, final int z)
+	protected ChunkMock(@NotNull final World world, final int x, final int z)
 	{
 		this.world = world;
 		this.x = x;
@@ -42,13 +44,13 @@ public class ChunkMock implements Chunk
 	}
 
 	@Override
-	public World getWorld()
+	public @NotNull World getWorld()
 	{
 		return world;
 	}
 
 	@Override
-	public Block getBlock(int x, int y, int z)
+	public @NotNull Block getBlock(int x, int y, int z)
 	{
 		Validate.isTrue(x >= 0 && x <= 15, "x is out of range (expected 0-15)");
 		Validate.isTrue(y >= 0 && y <= 255, "y is out of range (expected 0-255)");
@@ -57,14 +59,14 @@ public class ChunkMock implements Chunk
 	}
 
 	@Override
-	public ChunkSnapshot getChunkSnapshot()
+	public @NotNull ChunkSnapshot getChunkSnapshot()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public ChunkSnapshot getChunkSnapshot(boolean includeMaxblocky, boolean includeBiome, boolean includeBiomeTempRain)
+	public @NotNull ChunkSnapshot getChunkSnapshot(boolean includeMaxblocky, boolean includeBiome, boolean includeBiomeTempRain)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -158,21 +160,21 @@ public class ChunkMock implements Chunk
 	}
 
 	@Override
-	public boolean addPluginChunkTicket(Plugin plugin)
+	public boolean addPluginChunkTicket(@NotNull Plugin plugin)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean removePluginChunkTicket(Plugin plugin)
+	public boolean removePluginChunkTicket(@NotNull Plugin plugin)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Collection<Plugin> getPluginChunkTickets()
+	public @NotNull Collection<Plugin> getPluginChunkTickets()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -193,14 +195,14 @@ public class ChunkMock implements Chunk
 	}
 
 	@Override
-	public boolean contains(BlockData block)
+	public boolean contains(@NotNull BlockData block)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public PersistentDataContainer getPersistentDataContainer()
+	public @NotNull PersistentDataContainer getPersistentDataContainer()
 	{
 		return persistentDataContainer;
 	}

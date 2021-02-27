@@ -184,22 +184,22 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	 * @return the {@link ItemStack} in the given slot
 	 */
 	@Override
-	public @Nullable ItemStack getItem(@NotNull EquipmentSlot slot)
+	public @NotNull ItemStack getItem(@NotNull EquipmentSlot slot)
 	{
 		switch (slot)
 		{
 		case CHEST:
-			return getChestplate();
+			return notNull(getChestplate());
 		case FEET:
-			return getBoots();
+			return notNull(getBoots());
 		case HAND:
-			return getItemInMainHand();
+			return notNull(getItemInMainHand());
 		case HEAD:
-			return getHelmet();
+			return notNull(getHelmet());
 		case LEGS:
-			return getLeggings();
+			return notNull(getLeggings());
 		case OFF_HAND:
-			return getItemInOffHand();
+			return notNull(getItemInOffHand());
 		default:
 			return new ItemStack(Material.AIR);
 		}

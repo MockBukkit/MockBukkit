@@ -35,6 +35,7 @@ import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 
 import com.google.common.base.Function;
+import org.jetbrains.annotations.NotNull;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
@@ -183,7 +184,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
-	public AttributeInstance getAttribute(Attribute attribute)
+	public AttributeInstance getAttribute(@NotNull Attribute attribute)
 	{
 		if (attributes.containsKey(attribute))
 			return attributes.get(attribute);
@@ -192,14 +193,14 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
-	public <T extends Projectile> T launchProjectile(Class<? extends T> projectile)
+	public <T extends Projectile> @NotNull T launchProjectile(@NotNull Class<? extends T> projectile)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public <T extends Projectile> T launchProjectile(Class<? extends T> projectile, Vector velocity)
+	public <T extends Projectile> @NotNull T launchProjectile(@NotNull Class<? extends T> projectile, Vector velocity)
 	{
 		T entity = launchProjectile(projectile);
 		entity.setVelocity(velocity);
@@ -221,27 +222,27 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
-	public Location getEyeLocation()
+	public @NotNull Location getEyeLocation()
 	{
 		return getLocation().add(0, getEyeHeight(), 0);
 	}
 
 	@Override
-	public List<Block> getLineOfSight(Set<Material> transparent, int maxDistance)
+	public @NotNull List<Block> getLineOfSight(Set<Material> transparent, int maxDistance)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Block getTargetBlock(Set<Material> transparent, int maxDistance)
+	public @NotNull Block getTargetBlock(Set<Material> transparent, int maxDistance)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public List<Block> getLastTwoTargetBlocks(Set<Material> transparent, int maxDistance)
+	public @NotNull List<Block> getLastTwoTargetBlocks(Set<Material> transparent, int maxDistance)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -255,7 +256,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
-	public Block getTargetBlockExact(int maxDistance, FluidCollisionMode fluidCollisionMode)
+	public Block getTargetBlockExact(int maxDistance, @NotNull FluidCollisionMode fluidCollisionMode)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -269,7 +270,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
-	public RayTraceResult rayTraceBlocks(double maxDistance, FluidCollisionMode fluidCollisionMode)
+	public RayTraceResult rayTraceBlocks(double maxDistance, @NotNull FluidCollisionMode fluidCollisionMode)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -349,14 +350,14 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
-	public boolean addPotionEffect(PotionEffect effect)
+	public boolean addPotionEffect(@NotNull PotionEffect effect)
 	{
 		return addPotionEffect(effect, false);
 	}
 
 	@Override
 	@Deprecated
-	public boolean addPotionEffect(PotionEffect effect, boolean force)
+	public boolean addPotionEffect(@NotNull PotionEffect effect, boolean force)
 	{
 		if (effect != null)
 		{
@@ -388,7 +389,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
-	public boolean hasPotionEffect(PotionEffectType type)
+	public boolean hasPotionEffect(@NotNull PotionEffectType type)
 	{
 		for (PotionEffect effect : getActivePotionEffects())
 		{
@@ -402,7 +403,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
-	public PotionEffect getPotionEffect(PotionEffectType type)
+	public PotionEffect getPotionEffect(@NotNull PotionEffectType type)
 	{
 		for (PotionEffect effect : getActivePotionEffects())
 		{
@@ -416,7 +417,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
-	public void removePotionEffect(PotionEffectType type)
+	public void removePotionEffect(@NotNull PotionEffectType type)
 	{
 		Iterator<ActivePotionEffect> iterator = activeEffects.iterator();
 
@@ -432,7 +433,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
-	public Collection<PotionEffect> getActivePotionEffects()
+	public @NotNull Collection<PotionEffect> getActivePotionEffects()
 	{
 		Set<PotionEffect> effects = new HashSet<>();
 		Iterator<ActivePotionEffect> iterator = activeEffects.iterator();
@@ -455,7 +456,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
-	public boolean hasLineOfSight(Entity other)
+	public boolean hasLineOfSight(@NotNull Entity other)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -497,7 +498,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
-	public Entity getLeashHolder() throws IllegalStateException
+	public @NotNull Entity getLeashHolder() throws IllegalStateException
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -574,7 +575,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
-	public EntityCategory getCategory()
+	public @NotNull EntityCategory getCategory()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

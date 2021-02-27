@@ -1,12 +1,17 @@
 package be.seeseemelk.mockbukkit.attribute;
 
 import java.util.Collection;
+import java.util.Objects;
+
+import org.junit.Assert;
 
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.attribute.AttributeModifier;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+
+import org.jetbrains.annotations.NotNull;
 
 public class AttributeInstanceMock implements AttributeInstance
 {
@@ -22,7 +27,7 @@ public class AttributeInstanceMock implements AttributeInstance
 	}
 
 	@Override
-	public Attribute getAttribute()
+	public @NotNull Attribute getAttribute()
 	{
 		return attribute;
 	}
@@ -40,22 +45,21 @@ public class AttributeInstanceMock implements AttributeInstance
 	}
 
 	@Override
-	public Collection<AttributeModifier> getModifiers()
+	public @NotNull Collection<AttributeModifier> getModifiers()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void addModifier(AttributeModifier modifier)
+	public void addModifier(@NotNull AttributeModifier modifier)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-
 	}
 
 	@Override
-	public void removeModifier(AttributeModifier modifier)
+	public void removeModifier(@NotNull AttributeModifier modifier)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

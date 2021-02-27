@@ -70,7 +70,7 @@ public class DropperMock extends ContainerMock implements Dropper
 	}
 
 	@Override
-	public BlockState getSnapshot()
+	public @NotNull BlockState getSnapshot()
 	{
 		return new DropperMock(this);
 	}

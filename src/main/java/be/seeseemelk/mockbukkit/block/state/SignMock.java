@@ -56,7 +56,7 @@ public class SignMock extends TileStateMock implements Sign
 	}
 
 	@Override
-	public String getLine(int index) throws IndexOutOfBoundsException
+	public @NotNull String getLine(int index) throws IndexOutOfBoundsException
 	{
 		return lines[index];
 	}
@@ -97,7 +97,7 @@ public class SignMock extends TileStateMock implements Sign
 	}
 
 	@Override
-	public BlockState getSnapshot()
+	public @NotNull BlockState getSnapshot()
 	{
 		return new SignMock(this);
 	}

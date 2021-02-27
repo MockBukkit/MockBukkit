@@ -68,6 +68,7 @@ import org.bukkit.inventory.Recipe;
 import org.bukkit.loot.LootTable;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.ServicesManager;
 import org.bukkit.plugin.SimpleServicesManager;
 import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.potion.PotionEffectType;
@@ -415,25 +416,25 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public String getName()
+	public @NotNull String getName()
 	{
 		return "ServerMock";
 	}
 
 	@Override
-	public String getVersion()
+	public @NotNull String getVersion()
 	{
 		return "0.1.0";
 	}
 
 	@Override
-	public String getBukkitVersion()
+	public @NotNull String getBukkitVersion()
 	{
 		return BUKKIT_VERSION;
 	}
 
 	@Override
-	public Collection<? extends PlayerMock> getOnlinePlayers()
+	public @NotNull Collection<? extends PlayerMock> getOnlinePlayers()
 	{
 		return playerList.getOnlinePlayers();
 	}
@@ -445,31 +446,31 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public Player getPlayer(String name)
+	public Player getPlayer(@NotNull String name)
 	{
 		return playerList.getPlayer(name);
 	}
 
 	@Override
-	public Player getPlayerExact(String name)
+	public Player getPlayerExact(@NotNull String name)
 	{
 		return playerList.getPlayerExact(name);
 	}
 
 	@Override
-	public List<Player> matchPlayer(String name)
+	public @NotNull List<Player> matchPlayer(@NotNull String name)
 	{
 		return playerList.matchPlayer(name);
 	}
 
 	@Override
-	public Player getPlayer(UUID id)
+	public Player getPlayer(@NotNull UUID id)
 	{
 		return playerList.getPlayer(id);
 	}
 
 	@Override
-	public PluginManagerMock getPluginManager()
+	public @NotNull PluginManagerMock getPluginManager()
 	{
 		return pluginManager;
 	}
@@ -499,7 +500,7 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public PluginCommand getPluginCommand(String name)
+	public PluginCommand getPluginCommand(@NotNull String name)
 	{
 		assertMainThread();
 		for (PluginCommand command : getPluginManager().getCommands())
@@ -513,13 +514,13 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public Logger getLogger()
+	public @NotNull Logger getLogger()
 	{
 		return logger;
 	}
 
 	@Override
-	public ConsoleCommandSender getConsoleSender()
+	public @NotNull ConsoleCommandSender getConsoleSender()
 	{
 		if (consoleSender == null)
 		{
@@ -596,55 +597,55 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public InventoryMock createInventory(InventoryHolder owner, InventoryType type)
+	public @NotNull InventoryMock createInventory(InventoryHolder owner, @NotNull InventoryType type)
 	{
 		return createInventory(owner, type, "Inventory");
 	}
 
 	@Override
-	public InventoryMock createInventory(InventoryHolder owner, InventoryType type, String title)
+	public @NotNull InventoryMock createInventory(InventoryHolder owner, @NotNull InventoryType type, @NotNull String title)
 	{
 		return createInventory(owner, type, title, -1);
 	}
 
 	@Override
-	public InventoryMock createInventory(InventoryHolder owner, int size)
+	public @NotNull InventoryMock createInventory(InventoryHolder owner, int size)
 	{
 		return createInventory(owner, size, "Inventory");
 	}
 
 	@Override
-	public InventoryMock createInventory(InventoryHolder owner, int size, String title)
+	public @NotNull InventoryMock createInventory(InventoryHolder owner, int size, @NotNull String title)
 	{
 		return createInventory(owner, InventoryType.CHEST, title, size);
 	}
 
 	@Override
-	public ItemFactory getItemFactory()
+	public @NotNull ItemFactory getItemFactory()
 	{
 		return factory;
 	}
 
 	@Override
-	public List<World> getWorlds()
+	public @NotNull List<World> getWorlds()
 	{
 		return new ArrayList<>(worlds);
 	}
 
 	@Override
-	public World getWorld(String name)
+	public World getWorld(@NotNull String name)
 	{
 		return worlds.stream().filter(world -> world.getName().equals(name)).findAny().orElse(null);
 	}
 
 	@Override
-	public World getWorld(UUID uid)
+	public World getWorld(@NotNull UUID uid)
 	{
 		return worlds.stream().filter(world -> world.getUID().equals(uid)).findAny().orElse(null);
 	}
 
 	@Override
-	public BukkitSchedulerMock getScheduler()
+	public @NotNull BukkitSchedulerMock getScheduler()
 	{
 		return scheduler;
 	}
@@ -656,28 +657,28 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public Set<String> getIPBans()
+	public @NotNull Set<String> getIPBans()
 	{
 		return this.playerList.getIPBans().getBanEntries().stream().map(BanEntry::getTarget)
 		       .collect(Collectors.toSet());
 	}
 
 	@Override
-	public void banIP(String address)
+	public void banIP(@NotNull String address)
 	{
 		assertMainThread();
 		this.playerList.getIPBans().addBan(address, null, null, null);
 	}
 
 	@Override
-	public void unbanIP(String address)
+	public void unbanIP(@NotNull String address)
 	{
 		assertMainThread();
 		this.playerList.getIPBans().pardon(address);
 	}
 
 	@Override
-	public BanList getBanList(Type type)
+	public @NotNull BanList getBanList(Type type)
 	{
 		switch (type)
 		{
@@ -690,26 +691,26 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public Set<OfflinePlayer> getOperators()
+	public @NotNull Set<OfflinePlayer> getOperators()
 	{
 		return playerList.getOperators();
 	}
 
 	@Override
-	public GameMode getDefaultGameMode()
+	public @NotNull GameMode getDefaultGameMode()
 	{
 		return this.defaultGameMode;
 	}
 
 	@Override
-	public void setDefaultGameMode(GameMode mode)
+	public void setDefaultGameMode(@NotNull GameMode mode)
 	{
 		assertMainThread();
 		this.defaultGameMode = mode;
 	}
 
 	@Override
-	public int broadcastMessage(String message)
+	public int broadcastMessage(@NotNull String message)
 	{
 		Collection<? extends PlayerMock> players = getOnlinePlayers();
 
@@ -738,7 +739,7 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public List<Recipe> getRecipesFor(@NotNull ItemStack item)
+	public @NotNull List<Recipe> getRecipesFor(@NotNull ItemStack item)
 	{
 		assertMainThread();
 
@@ -751,7 +752,7 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public Recipe getRecipe(NamespacedKey key)
+	public Recipe getRecipe(@NotNull NamespacedKey key)
 	{
 		assertMainThread();
 
@@ -768,7 +769,7 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public boolean removeRecipe(NamespacedKey key)
+	public boolean removeRecipe(@NotNull NamespacedKey key)
 	{
 		assertMainThread();
 
@@ -790,7 +791,7 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public Iterator<Recipe> recipeIterator()
+	public @NotNull Iterator<Recipe> recipeIterator()
 	{
 		assertMainThread();
 		return recipes.iterator();
@@ -804,7 +805,7 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public boolean dispatchCommand(CommandSender sender, String commandLine)
+	public boolean dispatchCommand(@NotNull CommandSender sender, String commandLine)
 	{
 		assertMainThread();
 		String[] commands = commandLine.split(" ");
@@ -823,20 +824,20 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public HelpMap getHelpMap()
+	public @NotNull HelpMap getHelpMap()
 	{
 		return helpMap;
 	}
 
 	@Override
-	public void sendPluginMessage(Plugin source, String channel, byte[] message)
+	public void sendPluginMessage(@NotNull Plugin source, @NotNull String channel, byte[] message)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Set<String> getListeningPluginChannels()
+	public @NotNull Set<String> getListeningPluginChannels()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -857,14 +858,14 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public String getIp()
+	public @NotNull String getIp()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public String getWorldType()
+	public @NotNull String getWorldType()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -906,7 +907,7 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public Set<OfflinePlayer> getWhitelistedPlayers()
+	public @NotNull Set<OfflinePlayer> getWhitelistedPlayers()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -920,14 +921,14 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public String getUpdateFolder()
+	public @NotNull String getUpdateFolder()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public File getUpdateFolderFile()
+	public @NotNull File getUpdateFolderFile()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -955,34 +956,34 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public SimpleServicesManager getServicesManager()
+	public @NotNull SimpleServicesManager getServicesManager()
 	{
 		return servicesManager;
 	}
 
 	@Override
-	public World createWorld(WorldCreator creator)
+	public World createWorld(@NotNull WorldCreator creator)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean unloadWorld(String name, boolean save)
+	public boolean unloadWorld(@NotNull String name, boolean save)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean unloadWorld(World world, boolean save)
+	public boolean unloadWorld(@NotNull World world, boolean save)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public MapView createMap(World world)
+	public @NotNull MapView createMap(@NotNull World world)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1017,7 +1018,7 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public Map<String, String[]> getCommandAliases()
+	public @NotNull Map<String, String[]> getCommandAliases()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1066,20 +1067,20 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public int broadcast(String message, String permission)
+	public int broadcast(@NotNull String message, @NotNull String permission)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public OfflinePlayer getOfflinePlayer(String name)
+	public @NotNull OfflinePlayer getOfflinePlayer(@NotNull String name)
 	{
 		return playerList.getOfflinePlayer(name);
 	}
 
 	@Override
-	public OfflinePlayer getOfflinePlayer(UUID id)
+	public @NotNull OfflinePlayer getOfflinePlayer(@NotNull UUID id)
 	{
 		OfflinePlayer player = playerList.getOfflinePlayer(id);
 
@@ -1094,28 +1095,28 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public Set<OfflinePlayer> getBannedPlayers()
+	public @NotNull Set<OfflinePlayer> getBannedPlayers()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public File getWorldContainer()
+	public @NotNull File getWorldContainer()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Messenger getMessenger()
+	public @NotNull Messenger getMessenger()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Merchant createMerchant(String title)
+	public @NotNull Merchant createMerchant(String title)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1156,7 +1157,7 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public String getMotd()
+	public @NotNull String getMotd()
 	{
 		return MOTD;
 	}
@@ -1169,7 +1170,7 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public WarningState getWarningState()
+	public @NotNull WarningState getWarningState()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1189,14 +1190,14 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public CachedServerIcon loadServerIcon(File file)
+	public @NotNull CachedServerIcon loadServerIcon(@NotNull File file)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public CachedServerIcon loadServerIcon(BufferedImage image)
+	public @NotNull CachedServerIcon loadServerIcon(@NotNull BufferedImage image)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1217,69 +1218,69 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public ChunkData createChunkData(World world)
+	public @NotNull ChunkData createChunkData(@NotNull World world)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public BossBar createBossBar(String title, BarColor color, BarStyle style, BarFlag... flags)
+	public @NotNull BossBar createBossBar(String title, @NotNull BarColor color, @NotNull BarStyle style, BarFlag... flags)
 	{
 		BossBar bar = new BossBarMock(title, color, style, flags);
 		return bar;
 	}
 
 	@Override
-	public Entity getEntity(UUID uuid)
+	public Entity getEntity(@NotNull UUID uuid)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Advancement getAdvancement(NamespacedKey key)
+	public Advancement getAdvancement(@NotNull NamespacedKey key)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Iterator<Advancement> advancementIterator()
+	public @NotNull Iterator<Advancement> advancementIterator()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public UnsafeValues getUnsafe()
+	public @NotNull UnsafeValues getUnsafe()
 	{
 		return unsafe;
 	}
 
 	@Override
-	public BlockData createBlockData(Material material)
+	public @NotNull BlockData createBlockData(@NotNull Material material)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public BlockData createBlockData(Material material, Consumer<BlockData> consumer)
+	public @NotNull BlockData createBlockData(@NotNull Material material, Consumer<BlockData> consumer)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public BlockData createBlockData(String data)
+	public @NotNull BlockData createBlockData(@NotNull String data)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public BlockData createBlockData(Material material, String data)
+	public @NotNull BlockData createBlockData(Material material, String data)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1312,7 +1313,7 @@ public class ServerMock implements Server
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T extends Keyed> Tag<T> getTag(String registryKey, NamespacedKey key, Class<T> clazz)
+	public <T extends Keyed> Tag<T> getTag(@NotNull String registryKey, @NotNull NamespacedKey key, @NotNull Class<T> clazz)
 	{
 		if (clazz == Material.class)
 		{
@@ -1392,29 +1393,29 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public LootTable getLootTable(NamespacedKey key)
+	public LootTable getLootTable(@NotNull NamespacedKey key)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public ItemStack createExplorerMap(World world, Location location, StructureType structureType)
+	public @NotNull ItemStack createExplorerMap(@NotNull World world, @NotNull Location location, @NotNull StructureType structureType)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public ItemStack createExplorerMap(World world, Location location, StructureType structureType, int radius,
-	                                   boolean findUnexplored)
+	public @NotNull ItemStack createExplorerMap(@NotNull World world, @NotNull Location location, @NotNull StructureType structureType, int radius,
+												boolean findUnexplored)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public KeyedBossBar createBossBar(NamespacedKey key, String title, BarColor color, BarStyle style, BarFlag... flags)
+	public @NotNull KeyedBossBar createBossBar(@NotNull NamespacedKey key, String title, @NotNull BarColor color, @NotNull BarStyle style, BarFlag... flags)
 	{
 		Validate.notNull(key, "A NamespacedKey must never be null");
 		KeyedBossBarMock bar = new KeyedBossBarMock(key, title, color, style, flags);
@@ -1423,27 +1424,27 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public Iterator<KeyedBossBar> getBossBars()
+	public @NotNull Iterator<KeyedBossBar> getBossBars()
 	{
 		return bossBars.values().stream().map(bossbar -> (KeyedBossBar) bossbar).iterator();
 	}
 
 	@Override
-	public KeyedBossBar getBossBar(NamespacedKey key)
+	public KeyedBossBar getBossBar(@NotNull NamespacedKey key)
 	{
 		Validate.notNull(key, "A NamespacedKey must never be null");
 		return bossBars.get(key);
 	}
 
 	@Override
-	public boolean removeBossBar(NamespacedKey key)
+	public boolean removeBossBar(@NotNull NamespacedKey key)
 	{
 		Validate.notNull(key, "A NamespacedKey must never be null");
 		return bossBars.remove(key, bossBars.get(key));
 	}
 
 	@Override
-	public List<Entity> selectEntities(CommandSender sender, String selector)
+	public @NotNull List<Entity> selectEntities(@NotNull CommandSender sender, @NotNull String selector)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1457,7 +1458,7 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public <T extends Keyed> Iterable<Tag<T>> getTags(String registry, Class<T> clazz)
+	public <T extends Keyed> @NotNull Iterable<Tag<T>> getTags(@NotNull String registry, @NotNull Class<T> clazz)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1507,7 +1508,7 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public Spigot spigot()
+	public @NotNull Spigot spigot()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

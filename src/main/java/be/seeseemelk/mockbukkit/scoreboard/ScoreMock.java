@@ -4,6 +4,8 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 
+import org.jetbrains.annotations.NotNull;
+
 public class ScoreMock implements Score
 {
 	private final ObjectiveMock objective;
@@ -28,19 +30,19 @@ public class ScoreMock implements Score
 	}
 
 	@Override
-	public OfflinePlayer getPlayer()
+	public @NotNull OfflinePlayer getPlayer()
 	{
 		return player;
 	}
 
 	@Override
-	public String getEntry()
+	public @NotNull String getEntry()
 	{
 		return entry;
 	}
 
 	@Override
-	public ObjectiveMock getObjective()
+	public @NotNull ObjectiveMock getObjective()
 	{
 		return objective;
 	}

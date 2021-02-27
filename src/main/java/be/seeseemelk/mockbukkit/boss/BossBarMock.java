@@ -36,7 +36,7 @@ public class BossBarMock implements BossBar
 
 
 	@Override
-	public String getTitle()
+	public @NotNull String getTitle()
 	{
 		return title;
 	}
@@ -48,43 +48,43 @@ public class BossBarMock implements BossBar
 	}
 
 	@Override
-	public BarColor getColor()
+	public @NotNull BarColor getColor()
 	{
 		return color;
 	}
 
 	@Override
-	public void setColor(BarColor color)
+	public void setColor(@NotNull BarColor color)
 	{
 		this.color = color;
 	}
 
 	@Override
-	public BarStyle getStyle()
+	public @NotNull BarStyle getStyle()
 	{
 		return style;
 	}
 
 	@Override
-	public void setStyle(BarStyle style)
+	public void setStyle(@NotNull BarStyle style)
 	{
 		this.style = style;
 	}
 
 	@Override
-	public void removeFlag(BarFlag flag)
+	public void removeFlag(@NotNull BarFlag flag)
 	{
 		barFlags.remove(flag);
 	}
 
 	@Override
-	public void addFlag(BarFlag flag)
+	public void addFlag(@NotNull BarFlag flag)
 	{
 		barFlags.add(flag);
 	}
 
 	@Override
-	public boolean hasFlag(BarFlag flag)
+	public boolean hasFlag(@NotNull BarFlag flag)
 	{
 		return barFlags.contains(flag);
 	}
@@ -126,7 +126,7 @@ public class BossBarMock implements BossBar
 	}
 
 	@Override
-	public List<Player> getPlayers()
+	public @NotNull List<Player> getPlayers()
 	{
 		return new ArrayList<Player>(players);
 	}

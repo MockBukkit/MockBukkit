@@ -40,12 +40,12 @@ public abstract class TileStateMock extends BlockStateMock implements TileState
 	}
 
 	@Override
-	public PersistentDataContainer getPersistentDataContainer()
+	public @NotNull PersistentDataContainer getPersistentDataContainer()
 	{
 		return container;
 	}
 
 	@Override
-	public abstract BlockState getSnapshot();
+	public abstract @NotNull BlockState getSnapshot();
 
 }

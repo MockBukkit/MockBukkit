@@ -44,31 +44,31 @@ public class BlockStateMock implements BlockState, Cloneable
 	}
 
 	@Override
-	public void setMetadata(String metadataKey, MetadataValue newMetadataValue)
+	public void setMetadata(@NotNull String metadataKey, @NotNull MetadataValue newMetadataValue)
 	{
 		metadataTable.setMetadata(metadataKey, newMetadataValue);
 	}
 
 	@Override
-	public List<MetadataValue> getMetadata(String metadataKey)
+	public @NotNull List<MetadataValue> getMetadata(@NotNull String metadataKey)
 	{
 		return metadataTable.getMetadata(metadataKey);
 	}
 
 	@Override
-	public boolean hasMetadata(String metadataKey)
+	public boolean hasMetadata(@NotNull String metadataKey)
 	{
 		return metadataTable.hasMetadata(metadataKey);
 	}
 
 	@Override
-	public void removeMetadata(String metadataKey, Plugin owningPlugin)
+	public void removeMetadata(@NotNull String metadataKey, @NotNull Plugin owningPlugin)
 	{
 		metadataTable.removeMetadata(metadataKey, owningPlugin);
 	}
 
 	@Override
-	public Block getBlock()
+	public @NotNull Block getBlock()
 	{
 		if (block == null)
 		{
@@ -82,13 +82,13 @@ public class BlockStateMock implements BlockState, Cloneable
 
 	@Override
 	@Deprecated
-	public MaterialData getData()
+	public @NotNull MaterialData getData()
 	{
 		return new MaterialData(material);
 	}
 
 	@Override
-	public Material getType()
+	public @NotNull Material getType()
 	{
 		return material;
 	}
@@ -100,7 +100,7 @@ public class BlockStateMock implements BlockState, Cloneable
 	}
 
 	@Override
-	public World getWorld()
+	public @NotNull World getWorld()
 	{
 		return getBlock().getWorld();
 	}
@@ -124,7 +124,7 @@ public class BlockStateMock implements BlockState, Cloneable
 	}
 
 	@Override
-	public Location getLocation()
+	public @NotNull Location getLocation()
 	{
 		return getBlock().getLocation();
 	}
@@ -136,7 +136,7 @@ public class BlockStateMock implements BlockState, Cloneable
 	}
 
 	@Override
-	public Chunk getChunk()
+	public @NotNull Chunk getChunk()
 	{
 		return getBlock().getChunk();
 	}
@@ -149,7 +149,7 @@ public class BlockStateMock implements BlockState, Cloneable
 	}
 
 	@Override
-	public void setType(Material type)
+	public void setType(@NotNull Material type)
 	{
 		this.material = type;
 	}
@@ -210,14 +210,14 @@ public class BlockStateMock implements BlockState, Cloneable
 	}
 
 	@Override
-	public BlockData getBlockData()
+	public @NotNull BlockData getBlockData()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void setBlockData(BlockData data)
+	public void setBlockData(@NotNull BlockData data)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

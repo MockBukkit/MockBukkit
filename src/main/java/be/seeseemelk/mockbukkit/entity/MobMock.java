@@ -10,6 +10,8 @@ import org.bukkit.loot.LootTable;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
+import org.jetbrains.annotations.NotNull;
+
 public abstract class MobMock extends LivingEntityMock implements Mob
 {
 	public MobMock(ServerMock server, UUID uuid)
@@ -68,14 +70,14 @@ public abstract class MobMock extends LivingEntityMock implements Mob
 	}
 
 	@Override
-	public <T> T getMemory(MemoryKey<T> memoryKey)
+	public <T> T getMemory(@NotNull MemoryKey<T> memoryKey)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public <T> void setMemory(MemoryKey<T> memoryKey, T memoryValue)
+	public <T> void setMemory(@NotNull MemoryKey<T> memoryKey, T memoryValue)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

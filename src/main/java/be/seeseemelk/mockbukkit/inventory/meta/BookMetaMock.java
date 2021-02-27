@@ -9,6 +9,7 @@ import org.apache.commons.lang.Validate;
 import org.bukkit.inventory.meta.BookMeta;
 
 import com.google.common.base.Strings;
+import org.jetbrains.annotations.NotNull;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
@@ -116,7 +117,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	}
 
 	@Override
-	public String getPage(int page)
+	public @NotNull String getPage(int page)
 	{
 		Validate.isTrue(this.isValidPage(page), "Invalid page number");
 		return this.pages.get(page - 1);
@@ -128,7 +129,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	}
 
 	@Override
-	public void setPage(int page, String text)
+	public void setPage(int page, @NotNull String text)
 	{
 		if (!this.isValidPage(page))
 		{
@@ -146,7 +147,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	}
 
 	@Override
-	public List<String> getPages()
+	public @NotNull List<String> getPages()
 	{
 		return pages;
 	}
@@ -200,7 +201,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	}
 
 	@Override
-	public BookMetaMock clone()
+	public @NotNull BookMetaMock clone()
 	{
 		BookMetaMock mock = (BookMetaMock) super.clone();
 		mock.pages = new ArrayList<>(pages);
@@ -229,7 +230,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	}
 
 	@Override
-	public Spigot spigot()
+	public @NotNull Spigot spigot()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

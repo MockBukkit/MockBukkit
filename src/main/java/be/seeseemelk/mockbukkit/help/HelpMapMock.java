@@ -14,9 +14,11 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.List;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * The {@link HelpMapMock} is our mock of Bukkit's {@link HelpMap}.
- * 
+ *
  * @author NeumimTo
  *
  */
@@ -28,7 +30,7 @@ public class HelpMapMock implements HelpMap
 	private final Map<Class<?>, HelpTopicFactory<?>> factories = new HashMap<>();
 
 	@Override
-	public HelpTopic getHelpTopic(final String topicName)
+	public HelpTopic getHelpTopic(final @NotNull String topicName)
 	{
 		if ("".equals(topicName))
 		{
@@ -39,7 +41,7 @@ public class HelpMapMock implements HelpMap
 	}
 
 	@Override
-	public Collection<HelpTopic> getHelpTopics()
+	public @NotNull Collection<HelpTopic> getHelpTopics()
 	{
 		return topics.values();
 	}
@@ -64,13 +66,13 @@ public class HelpMapMock implements HelpMap
 	}
 
 	@Override
-	public List<String> getIgnoredPlugins()
+	public @NotNull List<String> getIgnoredPlugins()
 	{
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void registerHelpTopicFactory(Class<?> commandClass, HelpTopicFactory<?> factory)
+	public void registerHelpTopicFactory(@NotNull Class<?> commandClass, @NotNull HelpTopicFactory<?> factory)
 	{
 		if (!Command.class.isAssignableFrom(commandClass) && !CommandExecutor.class.isAssignableFrom(commandClass))
 		{

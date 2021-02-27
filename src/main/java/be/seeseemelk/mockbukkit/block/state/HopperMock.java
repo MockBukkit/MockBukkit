@@ -70,7 +70,7 @@ public class HopperMock extends ContainerMock implements Hopper
 	}
 
 	@Override
-	public BlockState getSnapshot()
+	public @NotNull BlockState getSnapshot()
 	{
 		return new HopperMock(this);
 	}

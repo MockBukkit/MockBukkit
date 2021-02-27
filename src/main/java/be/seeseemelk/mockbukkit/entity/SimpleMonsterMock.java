@@ -9,6 +9,8 @@ import org.bukkit.inventory.EntityEquipment;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
+import org.jetbrains.annotations.NotNull;
+
 public class SimpleMonsterMock extends MonsterMock implements Monster
 {
 
@@ -23,7 +25,7 @@ public class SimpleMonsterMock extends MonsterMock implements Monster
 	}
 
 	@Override
-	public EntityType getType()
+	public @NotNull EntityType getType()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

@@ -6,6 +6,8 @@ import org.bukkit.boss.BarFlag;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.KeyedBossBar;
 
+import org.jetbrains.annotations.NotNull;
+
 public class KeyedBossBarMock extends BossBarMock implements KeyedBossBar
 {
 	private final NamespacedKey key;
@@ -17,7 +19,7 @@ public class KeyedBossBarMock extends BossBarMock implements KeyedBossBar
 	}
 
 	@Override
-	public NamespacedKey getKey()
+	public @NotNull NamespacedKey getKey()
 	{
 		return key;
 	}

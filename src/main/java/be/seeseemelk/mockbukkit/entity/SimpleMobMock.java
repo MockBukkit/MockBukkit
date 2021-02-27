@@ -24,7 +24,7 @@ public class SimpleMobMock extends MobMock
 	}
 
 	@Override
-	public EntityType getType()
+	public @NotNull EntityType getType()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -73,14 +73,14 @@ public class SimpleMobMock extends MobMock
 	}
 
 	@Override
-	public Set<UUID> getCollidableExemptions()
+	public @NotNull Set<UUID> getCollidableExemptions()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Spigot spigot()
+	public @NotNull Spigot spigot()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

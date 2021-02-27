@@ -5,19 +5,21 @@ import org.bukkit.BanList;
 
 import java.util.*;
 
+import org.jetbrains.annotations.NotNull;
+
 public class MockBanList implements BanList
 {
 
 	private final Map<String, BanEntry> bans = new HashMap<>();
 
 	@Override
-	public BanEntry getBanEntry(String target)
+	public BanEntry getBanEntry(@NotNull String target)
 	{
 		return bans.getOrDefault(target, null);
 	}
 
 	@Override
-	public BanEntry addBan(String target, String reason, Date expires, String source)
+	public BanEntry addBan(@NotNull String target, String reason, Date expires, String source)
 	{
 		final BanEntry entry = new MockBanEntry(target, expires, reason, source);
 		this.bans.put(target, entry);
@@ -25,19 +27,19 @@ public class MockBanList implements BanList
 	}
 
 	@Override
-	public Set<BanEntry> getBanEntries()
+	public @NotNull Set<BanEntry> getBanEntries()
 	{
 		return new HashSet<>(this.bans.values());
 	}
 
 	@Override
-	public boolean isBanned(String target)
+	public boolean isBanned(@NotNull String target)
 	{
 		return this.bans.containsKey(target);
 	}
 
 	@Override
-	public void pardon(String target)
+	public void pardon(@NotNull String target)
 	{
 		this.bans.remove(target);
 	}
@@ -61,31 +63,31 @@ public class MockBanList implements BanList
 		}
 
 		@Override
-		public String getTarget()
+		public @NotNull String getTarget()
 		{
 			return this.target;
 		}
 
 		@Override
-		public Date getCreated()
+		public @NotNull Date getCreated()
 		{
 			return this.created;
 		}
 
 		@Override
-		public void setCreated(Date created)
+		public void setCreated(@NotNull Date created)
 		{
 			this.created = created;
 		}
 
 		@Override
-		public String getSource()
+		public @NotNull String getSource()
 		{
 			return this.source;
 		}
 
 		@Override
-		public void setSource(String source)
+		public void setSource(@NotNull String source)
 		{
 			this.source = source;
 		}

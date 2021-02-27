@@ -25,21 +25,21 @@ class DispenserProjectileSourceMock implements BlockProjectileSource
 	}
 
 	@Override
-	public <T extends Projectile> T launchProjectile(Class<? extends T> projectile)
+	public <T extends Projectile> @NotNull T launchProjectile(@NotNull Class<? extends T> projectile)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public <T extends Projectile> T launchProjectile(Class<? extends T> projectile, Vector velocity)
+	public <T extends Projectile> @NotNull T launchProjectile(@NotNull Class<? extends T> projectile, Vector velocity)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Block getBlock()
+	public @NotNull Block getBlock()
 	{
 		return dispenser.getBlock();
 	}

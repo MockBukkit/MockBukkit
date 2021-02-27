@@ -44,7 +44,7 @@ public abstract class ContainerMock extends TileStateMock implements Container
 	protected abstract InventoryMock createInventory();
 
 	@Override
-	public abstract BlockState getSnapshot();
+	public abstract @NotNull BlockState getSnapshot();
 
 	@Override
 	public boolean isLocked()
@@ -86,13 +86,13 @@ public abstract class ContainerMock extends TileStateMock implements Container
 	}
 
 	@Override
-	public Inventory getInventory()
+	public @NotNull Inventory getInventory()
 	{
 		return inventory;
 	}
 
 	@Override
-	public Inventory getSnapshotInventory()
+	public @NotNull Inventory getSnapshotInventory()
 	{
 		return ((InventoryMock) inventory).getSnapshot();
 	}

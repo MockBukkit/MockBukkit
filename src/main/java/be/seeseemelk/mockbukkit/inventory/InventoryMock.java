@@ -181,7 +181,7 @@ public class InventoryMock implements Inventory
 	}
 
 	@Override
-	public HashMap<Integer, ItemStack> addItem(ItemStack... items) throws IllegalArgumentException
+	public @NotNull HashMap<Integer, ItemStack> addItem(ItemStack... items) throws IllegalArgumentException
 	{
 		HashMap<Integer, ItemStack> notSaved = new HashMap<>();
 		for (int i = 0; i < items.length; i++)
@@ -225,14 +225,14 @@ public class InventoryMock implements Inventory
 	}
 
 	@Override
-	public ListIterator<ItemStack> iterator()
+	public @NotNull ListIterator<ItemStack> iterator()
 	{
 		List<ItemStack> list = Arrays.asList(items).stream().filter(item -> item != null).collect(Collectors.toList());
 		return list.listIterator();
 	}
 
 	@Override
-	public InventoryType getType()
+	public @NotNull InventoryType getType()
 	{
 		return type;
 	}
@@ -252,7 +252,7 @@ public class InventoryMock implements Inventory
 	}
 
 	@Override
-	public HashMap<Integer, ItemStack> removeItem(ItemStack... items) throws IllegalArgumentException
+	public @NotNull HashMap<Integer, ItemStack> removeItem(ItemStack... items) throws IllegalArgumentException
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -271,7 +271,7 @@ public class InventoryMock implements Inventory
 	}
 
 	@Override
-	public boolean contains(Material material) throws IllegalArgumentException
+	public boolean contains(@NotNull Material material) throws IllegalArgumentException
 	{
 		if (material == null)
 		{
@@ -294,7 +294,7 @@ public class InventoryMock implements Inventory
 	}
 
 	@Override
-	public boolean contains(Material material, int amount) throws IllegalArgumentException
+	public boolean contains(@NotNull Material material, int amount) throws IllegalArgumentException
 	{
 		if (material == null)
 		{
@@ -316,28 +316,28 @@ public class InventoryMock implements Inventory
 	}
 
 	@Override
-	public HashMap<Integer, ? extends ItemStack> all(Material material) throws IllegalArgumentException
+	public @NotNull HashMap<Integer, ? extends ItemStack> all(@NotNull Material material) throws IllegalArgumentException
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public HashMap<Integer, ? extends ItemStack> all(ItemStack item)
+	public @NotNull HashMap<Integer, ? extends ItemStack> all(ItemStack item)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public int first(Material material) throws IllegalArgumentException
+	public int first(@NotNull Material material) throws IllegalArgumentException
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public int first(ItemStack item)
+	public int first(@NotNull ItemStack item)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -358,14 +358,14 @@ public class InventoryMock implements Inventory
 	}
 
 	@Override
-	public void remove(Material material) throws IllegalArgumentException
+	public void remove(@NotNull Material material) throws IllegalArgumentException
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void remove(ItemStack item)
+	public void remove(@NotNull ItemStack item)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -384,14 +384,14 @@ public class InventoryMock implements Inventory
 	}
 
 	@Override
-	public List<HumanEntity> getViewers()
+	public @NotNull List<HumanEntity> getViewers()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public ListIterator<ItemStack> iterator(int index)
+	public @NotNull ListIterator<ItemStack> iterator(int index)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

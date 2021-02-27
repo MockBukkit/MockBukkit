@@ -13,6 +13,8 @@ import org.bukkit.scoreboard.Team;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * Created for the AddstarMC Project. Created by Narimm on 24/12/2018.
  */
@@ -42,7 +44,7 @@ public class TeamMock implements Team
 	}
 
 	@Override
-	public String getName() throws IllegalStateException
+	public @NotNull String getName() throws IllegalStateException
 	{
 		if (!registered)throw new IllegalStateException("Team not registered");
 
@@ -50,7 +52,7 @@ public class TeamMock implements Team
 	}
 
 	@Override
-	public String getDisplayName() throws IllegalStateException
+	public @NotNull String getDisplayName() throws IllegalStateException
 	{
 		if (!registered)throw new IllegalStateException("Team not registered");
 
@@ -58,7 +60,7 @@ public class TeamMock implements Team
 	}
 
 	@Override
-	public void setDisplayName(String s)
+	public void setDisplayName(@NotNull String s)
 	{
 		if (!registered)throw new IllegalStateException("Team not registered");
 
@@ -66,7 +68,7 @@ public class TeamMock implements Team
 	}
 
 	@Override
-	public String getPrefix() throws IllegalStateException
+	public @NotNull String getPrefix() throws IllegalStateException
 	{
 		if (!registered)throw new IllegalStateException("Team not registered");
 
@@ -74,7 +76,7 @@ public class TeamMock implements Team
 	}
 
 	@Override
-	public void setPrefix(String s)
+	public void setPrefix(@NotNull String s)
 	{
 		if (!registered)throw new IllegalStateException("Team not registered");
 
@@ -82,7 +84,7 @@ public class TeamMock implements Team
 	}
 
 	@Override
-	public String getSuffix() throws IllegalStateException
+	public @NotNull String getSuffix() throws IllegalStateException
 	{
 		if (!registered)throw new IllegalStateException("Team not registered");
 
@@ -90,7 +92,7 @@ public class TeamMock implements Team
 	}
 
 	@Override
-	public void setSuffix(String s)
+	public void setSuffix(@NotNull String s)
 	{
 		if (!registered)throw new IllegalStateException("Team not registered");
 
@@ -98,7 +100,7 @@ public class TeamMock implements Team
 	}
 
 	@Override
-	public ChatColor getColor() throws IllegalStateException
+	public @NotNull ChatColor getColor() throws IllegalStateException
 	{
 		if (!registered)throw new IllegalStateException("Team not registered");
 
@@ -106,7 +108,7 @@ public class TeamMock implements Team
 	}
 
 	@Override
-	public void setColor(ChatColor chatColor)
+	public void setColor(@NotNull ChatColor chatColor)
 	{
 		if (!registered)throw new IllegalStateException("Team not registered");
 
@@ -148,7 +150,7 @@ public class TeamMock implements Team
 	/** @deprecated  */
 	@Override
 	@Deprecated
-	public NameTagVisibility getNameTagVisibility()
+	public @NotNull NameTagVisibility getNameTagVisibility()
 	{
 		if (!registered)throw new IllegalStateException("Team not registered");
 
@@ -171,7 +173,7 @@ public class TeamMock implements Team
 	/** @deprecated */
 	@Override
 	@Deprecated
-	public void setNameTagVisibility(NameTagVisibility nameTagVisibility)
+	public void setNameTagVisibility(@NotNull NameTagVisibility nameTagVisibility)
 	{
 		MockBukkit.getMock().getLogger().log(Level.WARNING, "Consider USE setOption() DEPRECATED");
 		if (!registered)throw new IllegalStateException("Team not registered");
@@ -198,7 +200,7 @@ public class TeamMock implements Team
 	/** @deprecated  */
 	@Override
 	@Deprecated
-	public Set<OfflinePlayer> getPlayers() throws IllegalStateException
+	public @NotNull Set<OfflinePlayer> getPlayers() throws IllegalStateException
 	{
 
 		if (!registered)throw new IllegalStateException("Team not registered");
@@ -215,7 +217,7 @@ public class TeamMock implements Team
 	}
 
 	@Override
-	public Set<String> getEntries() throws IllegalStateException
+	public @NotNull Set<String> getEntries() throws IllegalStateException
 	{
 		return entries;
 	}
@@ -235,7 +237,7 @@ public class TeamMock implements Team
 
 	/** @deprecated */
 	@Override
-	public void addPlayer(OfflinePlayer offlinePlayer)
+	public void addPlayer(@NotNull OfflinePlayer offlinePlayer)
 	{
 		if (!registered)throw new IllegalStateException("Team not registered");
 
@@ -243,7 +245,7 @@ public class TeamMock implements Team
 	}
 
 	@Override
-	public void addEntry(String s)
+	public void addEntry(@NotNull String s)
 	{
 		if (!registered)throw new IllegalStateException("Team not registered");
 		entries.add(s);
@@ -252,7 +254,7 @@ public class TeamMock implements Team
 	/** @deprecated */
 	@Override
 	@Deprecated
-	public boolean removePlayer(OfflinePlayer offlinePlayer)
+	public boolean removePlayer(@NotNull OfflinePlayer offlinePlayer)
 	{
 		if (!registered)throw new IllegalStateException("Team not registered");
 
@@ -260,7 +262,7 @@ public class TeamMock implements Team
 	}
 
 	@Override
-	public boolean removeEntry(String s)
+	public boolean removeEntry(@NotNull String s)
 	{
 		if (!registered)throw new IllegalStateException("Team not registered");
 		return entries.remove(s);
@@ -279,28 +281,28 @@ public class TeamMock implements Team
 	/** @deprecated */
 	@Override
 	@Deprecated
-	public boolean hasPlayer(OfflinePlayer offlinePlayer)
+	public boolean hasPlayer(@NotNull OfflinePlayer offlinePlayer)
 	{
 		if (!registered)throw new IllegalStateException("Team not registered");
 		return entries.contains(offlinePlayer.getName());
 	}
 
 	@Override
-	public boolean hasEntry(String s)
+	public boolean hasEntry(@NotNull String s)
 	{
 		if (!registered)throw new IllegalStateException("Team not registered");
 		return entries.contains(s);
 	}
 
 	@Override
-	public OptionStatus getOption(Option option) throws IllegalStateException
+	public @NotNull OptionStatus getOption(@NotNull Option option) throws IllegalStateException
 	{
 		if (!registered)throw new IllegalStateException("Team not registered");
 		return options.get(option);
 	}
 
 	@Override
-	public void setOption(Option option, OptionStatus optionStatus) throws IllegalStateException
+	public void setOption(@NotNull Option option, @NotNull OptionStatus optionStatus) throws IllegalStateException
 	{
 		if (!registered)throw new IllegalStateException("Team not registered");
 

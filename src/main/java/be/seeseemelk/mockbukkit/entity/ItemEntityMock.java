@@ -32,13 +32,13 @@ public class ItemEntityMock extends EntityMock implements Item
 	}
 
 	@Override
-	public EntityType getType()
+	public @NotNull EntityType getType()
 	{
 		return EntityType.DROPPED_ITEM;
 	}
 
 	@Override
-	public ItemStack getItemStack()
+	public @NotNull ItemStack getItemStack()
 	{
 		return item;
 	}
@@ -92,7 +92,7 @@ public class ItemEntityMock extends EntityMock implements Item
 	}
 
 	@Override
-	public Spigot spigot()
+	public @NotNull Spigot spigot()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

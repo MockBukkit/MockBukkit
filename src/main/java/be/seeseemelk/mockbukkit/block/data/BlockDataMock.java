@@ -1,5 +1,7 @@
 package be.seeseemelk.mockbukkit.block.data;
 
+import java.util.Objects;
+
 import org.bukkit.Material;
 import org.bukkit.SoundGroup;
 import org.bukkit.block.data.BlockData;
@@ -45,7 +47,7 @@ public class BlockDataMock implements BlockData
 	}
 
 	@Override
-	public SoundGroup getSoundGroup()
+	public @NotNull SoundGroup getSoundGroup()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

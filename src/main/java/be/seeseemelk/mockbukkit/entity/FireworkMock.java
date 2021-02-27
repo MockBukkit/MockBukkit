@@ -39,7 +39,7 @@ public class FireworkMock extends ProjectileMock implements Firework
 	}
 
 	@Override
-	public EntityType getType()
+	public @NotNull EntityType getType()
 	{
 		return EntityType.FIREWORK;
 	}
@@ -77,7 +77,7 @@ public class FireworkMock extends ProjectileMock implements Firework
 	}
 
 	@Override
-	public Spigot spigot()
+	public @NotNull Spigot spigot()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

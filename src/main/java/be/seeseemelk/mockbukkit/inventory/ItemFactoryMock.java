@@ -21,6 +21,8 @@ import be.seeseemelk.mockbukkit.inventory.meta.PotionMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.SkullMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.SuspiciousStewMetaMock;
 
+import org.jetbrains.annotations.NotNull;
+
 public class ItemFactoryMock implements ItemFactory
 {
 
@@ -66,7 +68,7 @@ public class ItemFactoryMock implements ItemFactory
 	}
 
 	@Override
-	public ItemMeta getItemMeta(Material material)
+	public ItemMeta getItemMeta(@NotNull Material material)
 	{
 		try
 		{
@@ -105,13 +107,13 @@ public class ItemFactoryMock implements ItemFactory
 	}
 
 	@Override
-	public ItemMeta asMetaFor(ItemMeta meta, ItemStack stack)
+	public ItemMeta asMetaFor(@NotNull ItemMeta meta, ItemStack stack)
 	{
 		return asMetaFor(meta, stack.getType());
 	}
 
 	@Override
-	public ItemMeta asMetaFor(ItemMeta meta, Material material)
+	public ItemMeta asMetaFor(@NotNull ItemMeta meta, @NotNull Material material)
 	{
 		Class<? extends ItemMeta> target = getItemMetaClass(material);
 		try
@@ -137,13 +139,13 @@ public class ItemFactoryMock implements ItemFactory
 	}
 
 	@Override
-	public Color getDefaultLeatherColor()
+	public @NotNull Color getDefaultLeatherColor()
 	{
 		return defaultLeatherColor;
 	}
 
 	@Override
-	public Material updateMaterial(ItemMeta meta, Material material)
+	public @NotNull Material updateMaterial(@NotNull ItemMeta meta, @NotNull Material material)
 	{
 		return material;
 	}

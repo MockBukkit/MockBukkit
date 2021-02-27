@@ -32,7 +32,7 @@ public class EnderChestMock extends TileStateMock implements EnderChest
 	}
 
 	@Override
-	public BlockState getSnapshot()
+	public @NotNull BlockState getSnapshot()
 	{
 		return new EnderChestMock(this);
 	}

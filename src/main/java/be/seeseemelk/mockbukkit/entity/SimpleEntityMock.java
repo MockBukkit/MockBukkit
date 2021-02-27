@@ -10,6 +10,8 @@ import org.bukkit.util.BoundingBox;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * A very simple class that allows one to create an instance of an entity when a specific type of entity is not
  * required. This should only be used for testing code that doesn't care what type of entity it is.
@@ -28,7 +30,7 @@ public class SimpleEntityMock extends EntityMock
 	}
 
 	@Override
-	public EntityType getType()
+	public @NotNull EntityType getType()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -59,28 +61,28 @@ public class SimpleEntityMock extends EntityMock
 	}
 
 	@Override
-	public BoundingBox getBoundingBox()
+	public @NotNull BoundingBox getBoundingBox()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public BlockFace getFacing()
+	public @NotNull BlockFace getFacing()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Pose getPose()
+	public @NotNull Pose getPose()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Spigot spigot()
+	public @NotNull Spigot spigot()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

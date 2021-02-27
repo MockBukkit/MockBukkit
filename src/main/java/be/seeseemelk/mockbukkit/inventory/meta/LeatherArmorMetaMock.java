@@ -31,7 +31,7 @@ public class LeatherArmorMetaMock extends ItemMetaMock implements LeatherArmorMe
 	}
 
 	@Override
-	public LeatherArmorMetaMock clone()
+	public @NotNull LeatherArmorMetaMock clone()
 	{
 		LeatherArmorMetaMock mock = (LeatherArmorMetaMock) super.clone();
 		mock.setColor(color);

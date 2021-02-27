@@ -79,7 +79,7 @@ public class ChestMock extends ContainerMock implements Chest
 	}
 
 	@Override
-	public Inventory getBlockInventory()
+	public @NotNull Inventory getBlockInventory()
 	{
 		return getInventory();
 	}
@@ -91,7 +91,7 @@ public class ChestMock extends ContainerMock implements Chest
 	}
 
 	@Override
-	public BlockState getSnapshot()
+	public @NotNull BlockState getSnapshot()
 	{
 		return new ChestMock(this);
 	}

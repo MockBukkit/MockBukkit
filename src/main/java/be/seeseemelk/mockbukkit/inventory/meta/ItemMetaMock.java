@@ -25,6 +25,7 @@ import org.bukkit.inventory.meta.tags.CustomItemTagContainer;
 import org.bukkit.persistence.PersistentDataContainer;
 
 import com.google.common.collect.Multimap;
+import org.jetbrains.annotations.NotNull;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
@@ -102,7 +103,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
-	public String getDisplayName()
+	public @NotNull String getDisplayName()
 	{
 		return displayName;
 	}
@@ -192,7 +193,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
-	public ItemMetaMock clone()
+	public @NotNull ItemMetaMock clone()
 	{
 		try
 		{
@@ -294,7 +295,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	 * @return A HashMap of String, Object pairs representing the ItemMetaMock.
 	 */
 	@Override
-	public Map<String, Object> serialize()
+	public @NotNull Map<String, Object> serialize()
 	{
 		// Make new map and add relevant properties to it.
 		Map<String, Object> map = new HashMap<>();
@@ -347,7 +348,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
-	public String getLocalizedName()
+	public @NotNull String getLocalizedName()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -367,25 +368,25 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
-	public boolean hasEnchant(Enchantment ench)
+	public boolean hasEnchant(@NotNull Enchantment ench)
 	{
 		return enchants.containsKey(ench);
 	}
 
 	@Override
-	public int getEnchantLevel(Enchantment ench)
+	public int getEnchantLevel(@NotNull Enchantment ench)
 	{
 		return hasEnchant(ench) ? enchants.get(ench) : 0;
 	}
 
 	@Override
-	public Map<Enchantment, Integer> getEnchants()
+	public @NotNull Map<Enchantment, Integer> getEnchants()
 	{
 		return Collections.unmodifiableMap(enchants);
 	}
 
 	@Override
-	public boolean addEnchant(Enchantment ench, int level, boolean ignoreLevelRestriction)
+	public boolean addEnchant(@NotNull Enchantment ench, int level, boolean ignoreLevelRestriction)
 	{
 		Integer existingLevel = this.enchants.get(ench);
 		if (nonNull(existingLevel) && existingLevel.equals(level))
@@ -405,13 +406,13 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
-	public boolean removeEnchant(Enchantment ench)
+	public boolean removeEnchant(@NotNull Enchantment ench)
 	{
 		return nonNull(this.enchants.remove(ench));
 	}
 
 	@Override
-	public boolean hasConflictingEnchant(Enchantment ench)
+	public boolean hasConflictingEnchant(@NotNull Enchantment ench)
 	{
 		boolean b = this.hasEnchants() && enchants.remove(ench) != null;
 		if (enchants != null && enchants.isEmpty())
@@ -435,13 +436,13 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
-	public Set<ItemFlag> getItemFlags()
+	public @NotNull Set<ItemFlag> getItemFlags()
 	{
 		return Collections.unmodifiableSet(hideFlags);
 	}
 
 	@Override
-	public boolean hasItemFlag(ItemFlag flag)
+	public boolean hasItemFlag(@NotNull ItemFlag flag)
 	{
 		return hideFlags.contains(flag);
 	}
@@ -516,56 +517,56 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
-	public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot)
+	public @NotNull Multimap<Attribute, AttributeModifier> getAttributeModifiers(@NotNull EquipmentSlot slot)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Collection<AttributeModifier> getAttributeModifiers(Attribute attribute)
+	public Collection<AttributeModifier> getAttributeModifiers(@NotNull Attribute attribute)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean addAttributeModifier(Attribute attribute, AttributeModifier modifier)
+	public boolean addAttributeModifier(@NotNull Attribute attribute, @NotNull AttributeModifier modifier)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean removeAttributeModifier(Attribute attribute)
+	public boolean removeAttributeModifier(@NotNull Attribute attribute)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean removeAttributeModifier(EquipmentSlot slot)
+	public boolean removeAttributeModifier(@NotNull EquipmentSlot slot)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean removeAttributeModifier(Attribute attribute, AttributeModifier modifier)
+	public boolean removeAttributeModifier(@NotNull Attribute attribute, @NotNull AttributeModifier modifier)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public CustomItemTagContainer getCustomTagContainer()
+	public @NotNull CustomItemTagContainer getCustomTagContainer()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public PersistentDataContainer getPersistentDataContainer()
+	public @NotNull PersistentDataContainer getPersistentDataContainer()
 	{
 		return this.persistentDataContainer;
 	}

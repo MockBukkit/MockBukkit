@@ -5,6 +5,8 @@ import java.util.concurrent.CancellationException;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
 
+import org.jetbrains.annotations.NotNull;
+
 public class ScheduledTask implements BukkitTask
 {
 	private int id;
@@ -14,7 +16,7 @@ public class ScheduledTask implements BukkitTask
 	private long scheduledTick;
 	private Runnable runnable;
 
-	public ScheduledTask(int id, Plugin plugin, boolean isSync, long scheduledTick, Runnable runnable)
+	public ScheduledTask(int id, @NotNull Plugin plugin, boolean isSync, long scheduledTick, Runnable runnable)
 	{
 		this.id = id;
 		this.plugin = plugin;
@@ -68,7 +70,7 @@ public class ScheduledTask implements BukkitTask
 	}
 
 	@Override
-	public Plugin getOwner()
+	public @NotNull Plugin getOwner()
 	{
 		return plugin;
 	}

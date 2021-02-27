@@ -9,6 +9,8 @@ import org.bukkit.entity.Monster;
 import java.util.Set;
 import java.util.UUID;
 
+import org.jetbrains.annotations.NotNull;
+
 public abstract class MonsterMock extends CreatureMock implements Monster
 {
 	public MonsterMock(ServerMock server, UUID uuid)
@@ -31,7 +33,7 @@ public abstract class MonsterMock extends CreatureMock implements Monster
 	}
 
 	@Override
-	public void attack(Entity target)
+	public void attack(@NotNull Entity target)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -52,14 +54,14 @@ public abstract class MonsterMock extends CreatureMock implements Monster
 	}
 
 	@Override
-	public Set<UUID> getCollidableExemptions()
+	public @NotNull Set<UUID> getCollidableExemptions()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Spigot spigot()
+	public @NotNull Spigot spigot()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
