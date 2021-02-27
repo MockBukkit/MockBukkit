@@ -49,7 +49,7 @@ public class ExperienceOrbMockTest
 		Location location = new Location(world, 100, 100, 100);
 		ExperienceOrb orb = (ExperienceOrb) world.spawnEntity(location, EntityType.EXPERIENCE_ORB);
 
-		// Does our Firework exist in the correct World?
+		// Does our orb exist in the correct World?
 		assertTrue(world.getEntities().contains(orb));
 
 		// 0 experience by default?

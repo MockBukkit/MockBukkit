@@ -115,37 +115,6 @@ public class PlayerMock extends LivingEntityMock implements Player
 		assertEquals(expectedGamemode, gamemode);
 	}
 
-	@Override
-	public int hashCode()
-	{
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + Objects.hash(attributes, exp, expLevel, expTotal, displayName, gamemode, getHealth(),
-		                                       foodLevel, saturation, inventory, enderChest, inventoryView, getMaxHealth(), online, whitelisted,
-		                                       compassTarget, bedSpawnLocation, cursor, firstPlayed, lastPlayed);
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj)
-	{
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (!(obj instanceof PlayerMock))
-			return false;
-		PlayerMock other = (PlayerMock) obj;
-		return Objects.equals(attributes, other.attributes) && Objects.equals(displayName, other.displayName)
-		       && gamemode == other.gamemode
-		       && Double.doubleToLongBits(getHealth()) == Double.doubleToLongBits(other.getHealth())
-		       && Objects.equals(inventory, other.inventory) && Objects.equals(inventoryView, other.inventoryView)
-		       && Objects.equals(cursor, other.cursor)
-		       && Double.doubleToLongBits(getMaxHealth()) == Double.doubleToLongBits(other.getMaxHealth())
-		       && online == other.online && whitelisted == other.whitelisted && isDead() == other.isDead()
-		       && firstPlayed == other.firstPlayed && lastPlayed == other.lastPlayed;
-	}
-
 	/**
 	 * Simulates the player damaging a block just like {@link #simulateBlockDamage(Block)}. However, if
 	 * {@code InstaBreak} is enabled, it will not automatically fire a {@link BlockBreakEvent}. It will also still fire
