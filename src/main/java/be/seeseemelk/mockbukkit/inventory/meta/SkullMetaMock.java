@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import com.google.common.base.Strings;
+import org.jetbrains.annotations.NotNull;
 
 import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
 
@@ -35,7 +36,7 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	}
 
 	@Override
-	public SkullMetaMock clone()
+	public @NotNull SkullMetaMock clone()
 	{
 		SkullMetaMock mock = (SkullMetaMock) super.clone();
 		mock.setOwner(owner);
@@ -67,6 +68,8 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 		}
 
 		SkullMeta other = (SkullMeta) obj;
+		if (owner == null && !other.hasOwner())
+			return true;
 		return Objects.equals(owner, other.getOwningPlayer().getName());
 	}
 
@@ -103,7 +106,7 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	@Override
 	public boolean setOwningPlayer(OfflinePlayer owner)
 	{
-		this.owner = owner.getName();
+		this.owner = owner == null ? null : owner.getName();
 
 		// CraftBukkits implementation also always returns true too, so there we go
 		return true;

@@ -23,6 +23,4 @@ public class KeyedBossBarMock extends BossBarMock implements KeyedBossBar
 	{
 		return key;
 	}
-
-
 }

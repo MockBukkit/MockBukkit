@@ -8,17 +8,14 @@ import org.jetbrains.annotations.NotNull;
 
 public class EnchantmentMock extends Enchantment
 {
-	private String name;
+	private final String name;
 	private int maxLevel;
 	private int startLevel;
 	private EnchantmentTarget itemTarget;
 	private boolean isTreasure;
 	private boolean isCursed;
 
-	public EnchantmentMock(
-	    @NotNull NamespacedKey key,
-	    String name
-	)
+	public EnchantmentMock(@NotNull NamespacedKey key, String name)
 	{
 		super(key);
 		this.name = name;

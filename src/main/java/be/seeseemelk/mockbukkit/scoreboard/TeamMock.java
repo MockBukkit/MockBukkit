@@ -18,21 +18,20 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created for the AddstarMC Project. Created by Narimm on 24/12/2018.
  */
-@SuppressWarnings("deprecation")
 public class TeamMock implements Team
 {
 
 	private final String name;
 	private String displayName;
 	private String prefix;
-	private String suffic;
+	private String suffix;
 	private ChatColor color;
 	private boolean allowFriendlyFire = false;
 	private final HashSet<String> entries;
 	private boolean canSeeFriendly = true;
-	private EnumMap<Option, OptionStatus> options = new EnumMap<>(Option.class);
+	private final EnumMap<Option, OptionStatus> options = new EnumMap<>(Option.class);
 	private boolean registered;
-	private Scoreboard board;
+	private final Scoreboard board;
 
 	public TeamMock(String name, Scoreboard board)
 	{
@@ -88,7 +87,7 @@ public class TeamMock implements Team
 	{
 		if (!registered)throw new IllegalStateException("Team not registered");
 
-		return suffic;
+		return suffix;
 	}
 
 	@Override
@@ -96,7 +95,7 @@ public class TeamMock implements Team
 	{
 		if (!registered)throw new IllegalStateException("Team not registered");
 
-		this.suffic = s;
+		this.suffix = s;
 	}
 
 	@Override
@@ -210,7 +209,7 @@ public class TeamMock implements Team
 			if (s != null)
 			{
 				OfflinePlayer player = MockBukkit.getMock().getOfflinePlayer(s);
-				if (player != null) players.add(player);
+				players.add(player);
 			}
 		}
 		return players;

@@ -68,7 +68,6 @@ import org.bukkit.inventory.Recipe;
 import org.bukkit.loot.LootTable;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.ServicesManager;
 import org.bukkit.plugin.SimpleServicesManager;
 import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.potion.PotionEffectType;
@@ -131,15 +130,14 @@ public class ServerMock implements Server
 	private final PlayerList playerList = new PlayerList();
 	private ConsoleCommandSender consoleSender;
 	private GameMode defaultGameMode = GameMode.SURVIVAL;
-	private MockCommandMap commandMap;
-	private HelpMapMock helpMap;
+	private final MockCommandMap commandMap;
+	private final HelpMapMock helpMap = new HelpMapMock();
 
 	public ServerMock()
 	{
 		mainThread = Thread.currentThread();
 		logger = Logger.getLogger("ServerMock");
 		commandMap = new MockCommandMap(this);
-		helpMap = new HelpMapMock();
 		ServerMock.registerSerializables();
 
 		// Register default Minecraft Potion Effect Types
@@ -747,6 +745,8 @@ public class ServerMock implements Server
 		{
 			ItemStack result = recipe.getResult();
 			// Amount is explicitly ignored here
+			if ((result.hasItemMeta() && !item.hasItemMeta()) || (!result.hasItemMeta() && item.hasItemMeta()))
+				return false;
 			return result.getType() == item.getType() && result.getItemMeta().equals(item.getItemMeta());
 		}).collect(Collectors.toList());
 	}
@@ -1227,8 +1227,7 @@ public class ServerMock implements Server
 	@Override
 	public @NotNull BossBar createBossBar(String title, @NotNull BarColor color, @NotNull BarStyle style, BarFlag... flags)
 	{
-		BossBar bar = new BossBarMock(title, color, style, flags);
-		return bar;
+		return new BossBarMock(title, color, style, flags);
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.boss;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang.Validate;
 import org.bukkit.boss.BarColor;
@@ -18,8 +19,8 @@ public class BossBarMock implements BossBar
 	private String title = null;
 	private BarColor color = null;
 	private BarStyle style = null;
-	private HashSet<Player> players = new HashSet<>();
-	private HashSet<BarFlag> barFlags = new HashSet<>();
+	private final Set<Player> players = new HashSet<>();
+	private final Set<BarFlag> barFlags = new HashSet<>();
 	private boolean visible = true;
 	private double progress = 1.0;
 
@@ -33,7 +34,6 @@ public class BossBarMock implements BossBar
 			addFlag(flag);
 		}
 	}
-
 
 	@Override
 	public @NotNull String getTitle()
@@ -128,7 +128,7 @@ public class BossBarMock implements BossBar
 	@Override
 	public @NotNull List<Player> getPlayers()
 	{
-		return new ArrayList<Player>(players);
+		return new ArrayList<>(players);
 	}
 
 	@Override

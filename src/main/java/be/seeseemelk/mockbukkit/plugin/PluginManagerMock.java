@@ -463,9 +463,9 @@ public class PluginManagerMock implements PluginManager
 			List<String> aliases = new ArrayList<>();
 			if (value instanceof List<?>)
 				command.setAliases(
-				    ((List<?>) aliases).stream().map(Object::toString).collect(Collectors.toList()));
+				    ((List<?>) value).stream().map(Object::toString).collect(Collectors.toList()));
 			else
-				command.setAliases(Arrays.asList(value.toString()));
+				command.setAliases(Collections.singletonList(value.toString()));
 			break;
 		case "permission":
 			command.setPermission((String) value);
@@ -489,18 +489,15 @@ public class PluginManagerMock implements PluginManager
 	protected void addCommandsFrom(Plugin plugin)
 	{
 		Map<String, Map<String, Object>> commands = plugin.getDescription().getCommands();
-		if (commands != null)
+		for (Entry<String, Map<String, Object>> entry : commands.entrySet())
 		{
-			for (Entry<String, Map<String, Object>> entry : commands.entrySet())
+			PluginCommand command = PluginCommandUtils.createPluginCommand(entry.getKey(), plugin);
+			for (Entry<String, Object> section : entry.getValue().entrySet())
 			{
-				PluginCommand command = PluginCommandUtils.createPluginCommand(entry.getKey(), plugin);
-				for (Entry<String, Object> section : entry.getValue().entrySet())
-				{
-					addSection(command, section.getKey(), section.getValue());
-				}
-				this.commands.add(command);
-				this.server.getCommandMap().register(plugin.getName(), command);
+				addSection(command, section.getKey(), section.getValue());
 			}
+			this.commands.add(command);
+			this.server.getCommandMap().register(plugin.getName(), command);
 		}
 	}
 

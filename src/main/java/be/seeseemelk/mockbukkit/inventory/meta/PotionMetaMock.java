@@ -79,7 +79,7 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	}
 
 	@Override
-	public PotionMetaMock clone()
+	public @NotNull PotionMetaMock clone()
 	{
 		PotionMetaMock mock = (PotionMetaMock) super.clone();
 		mock.effects = new ArrayList<>(effects);

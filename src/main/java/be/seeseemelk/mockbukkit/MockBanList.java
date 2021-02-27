@@ -47,7 +47,7 @@ public class MockBanList implements BanList
 	public static final class MockBanEntry implements BanEntry
 	{
 
-		private String target;
+		private final String target;
 		private String source;
 		private String reason;
 		private Date created;

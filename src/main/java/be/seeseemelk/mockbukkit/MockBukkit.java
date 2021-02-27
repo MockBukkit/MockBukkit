@@ -322,11 +322,7 @@ public class MockBukkit
 		}
 		finally
 		{
-			if (mock.getPluginManager() != null)
-			{
-				mock.getPluginManager().disablePlugins();
-			}
-
+			mock.getPluginManager().disablePlugins();
 			mock.getPluginManager().unload();
 			setServerInstanceToNull();
 		}

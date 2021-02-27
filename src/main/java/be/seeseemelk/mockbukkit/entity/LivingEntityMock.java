@@ -11,11 +11,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
-import org.bukkit.Bukkit;
-import org.bukkit.FluidCollisionMode;
-import org.bukkit.GameRule;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.block.Block;
@@ -35,6 +31,7 @@ import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 
 import com.google.common.base.Function;
+import org.apache.commons.lang.Validate;
 import org.jetbrains.annotations.NotNull;
 
 import be.seeseemelk.mockbukkit.ServerMock;
@@ -46,7 +43,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 
 	private static final double MAX_HEALTH = 20.0;
 	private double health;
-	private double maxHealth = MAX_HEALTH;
+	private final double maxHealth = MAX_HEALTH;
 	private int maxAirTicks = 300;
 	private int remainingAirTicks = 300;
 	protected boolean alive = true;
@@ -86,8 +83,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 			if (this instanceof Player)
 			{
 				Player player = (Player) this;
-				List<ItemStack> drops = new ArrayList<>();
-				drops.addAll(Arrays.asList(player.getInventory().getContents()));
+				List<ItemStack> drops = new ArrayList<>(Arrays.asList(player.getInventory().getContents()));
 				PlayerDeathEvent event = new PlayerDeathEvent(player, drops, 0, getName() + " got killed");
 				Bukkit.getPluginManager().callEvent(event);
 
@@ -95,7 +91,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 				player.closeInventory();
 
 				// Clear the Inventory if keep-inventory is not enabled
-				if (!getWorld().getGameRuleValue(GameRule.KEEP_INVENTORY).booleanValue())
+				if (!getWorld().getGameRuleValue(GameRule.KEEP_INVENTORY))
 				{
 					player.getInventory().clear();
 					// Should someone try to provoke a RespawnEvent, they will now find the Inventory to be empty
@@ -122,13 +118,17 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public double getMaxHealth()
 	{
-		return getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
+		AttributeInstance maxHealth = getAttribute(Attribute.GENERIC_MAX_HEALTH);
+		return maxHealth == null ? 0 : maxHealth.getValue();
 	}
 
 	@Override
 	public void setMaxHealth(double health)
 	{
-		getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(health);
+		AttributeInstance maxHealth = getAttribute(Attribute.GENERIC_MAX_HEALTH);
+		if (maxHealth != null) {
+			maxHealth.setBaseValue(health);
+		}
 		if (this.health > health)
 		{
 			this.health = health;
@@ -186,10 +186,8 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public AttributeInstance getAttribute(@NotNull Attribute attribute)
 	{
-		if (attributes.containsKey(attribute))
-			return attributes.get(attribute);
-		else
-			throw new UnimplementedOperationException();
+		// Return null if attribute is not applicable for this entity.
+		return attributes.get(attribute);
 	}
 
 	@Override
@@ -359,17 +357,11 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Deprecated
 	public boolean addPotionEffect(@NotNull PotionEffect effect, boolean force)
 	{
-		if (effect != null)
-		{
-			// Bukkit now allows multiple effects of the same type,
-			// the force/success attributes are now obsolete
-			activeEffects.add(new ActivePotionEffect(effect));
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		Validate.notNull(effect);
+		// Bukkit now allows multiple effects of the same type,
+		// the force/success attributes are now obsolete
+		activeEffects.add(new ActivePotionEffect(effect));
+		return true;
 	}
 
 	@Override
@@ -419,17 +411,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public void removePotionEffect(@NotNull PotionEffectType type)
 	{
-		Iterator<ActivePotionEffect> iterator = activeEffects.iterator();
-
-		while (iterator.hasNext())
-		{
-			ActivePotionEffect effect = iterator.next();
-
-			if (effect.hasExpired() || effect.getPotionEffect().getType().equals(type))
-			{
-				iterator.remove();
-			}
-		}
+		activeEffects.removeIf(effect -> effect.hasExpired() || effect.getPotionEffect().getType().equals(type));
 	}
 
 	@Override

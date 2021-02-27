@@ -107,7 +107,7 @@ public class PersistentDataContainerMock implements PersistentDataContainer
 	}
 
 	@Override
-	public Set<NamespacedKey> getKeys()
+	public @NotNull Set<NamespacedKey> getKeys()
 	{
 		return Collections.unmodifiableSet(map.keySet());
 	}

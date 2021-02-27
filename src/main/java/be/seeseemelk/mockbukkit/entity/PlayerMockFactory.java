@@ -13,8 +13,8 @@ public final class PlayerMockFactory
 	private static final String[] LAST_NAMES = { "Smith", "Johnson", "Jones", "Brown", "Davis", "Miller", "Wilson", "Moore", "Taylor", "Anderson" };
 
 	private final ServerMock server;
-	private Random random = new Random();
-	private Set<String> usedNames = new HashSet<>();
+	private final Random random = new Random();
+	private final Set<String> usedNames = new HashSet<>();
 
 	public PlayerMockFactory(ServerMock server)
 	{

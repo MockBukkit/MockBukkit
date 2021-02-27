@@ -4,6 +4,8 @@ import java.util.Objects;
 
 import org.bukkit.FireworkEffect;
 import org.bukkit.inventory.meta.FireworkEffectMeta;
+
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class FireworkEffectMetaMock extends ItemMetaMock implements FireworkEffectMeta
@@ -52,7 +54,7 @@ public class FireworkEffectMetaMock extends ItemMetaMock implements FireworkEffe
 	}
 
 	@Override
-	public FireworkEffectMetaMock clone()
+	public @NotNull FireworkEffectMetaMock clone()
 	{
 		FireworkEffectMetaMock mock = (FireworkEffectMetaMock) super.clone();
 		mock.effect = this.effect;

@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
+
+import org.apache.commons.lang.Validate;
 import org.jetbrains.annotations.NotNull;
 
 import com.google.common.collect.ImmutableMap;
@@ -61,7 +63,7 @@ public class EnchantedBookMetaMock extends ItemMetaMock implements EnchantmentSt
 	}
 
 	@Override
-	public EnchantedBookMetaMock clone()
+	public @NotNull EnchantedBookMetaMock clone()
 	{
 		EnchantedBookMetaMock mock = (EnchantedBookMetaMock) super.clone();
 		mock.storedEnchantments = new HashMap<>(storedEnchantments);
@@ -71,6 +73,7 @@ public class EnchantedBookMetaMock extends ItemMetaMock implements EnchantmentSt
 	@Override
 	public boolean addStoredEnchant(@NotNull Enchantment ench, int level, boolean ignoreLevelRestriction)
 	{
+		Validate.notNull(ench);
 		if (!ignoreLevelRestriction && level < ench.getStartLevel())
 		{
 			return false;
@@ -82,7 +85,13 @@ public class EnchantedBookMetaMock extends ItemMetaMock implements EnchantmentSt
 		}
 
 		Integer prev = storedEnchantments.put(ench, level);
-		return prev == null || prev.intValue() != level;
+		return prev == null || prev != level;
+	}
+	@Override
+	public boolean removeStoredEnchant(@NotNull Enchantment ench) throws IllegalArgumentException
+	{
+		Validate.notNull(ench);
+		return storedEnchantments.remove(ench) != null;
 	}
 
 	@Override
@@ -124,11 +133,4 @@ public class EnchantedBookMetaMock extends ItemMetaMock implements EnchantmentSt
 	{
 		return !storedEnchantments.isEmpty();
 	}
-
-	@Override
-	public boolean removeStoredEnchant(@NotNull Enchantment ench) throws IllegalArgumentException
-	{
-		return storedEnchantments.remove(ench) != null;
-	}
-
 }

@@ -32,6 +32,8 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Vector;
+
+import org.apache.commons.lang.Validate;
 import org.jetbrains.annotations.NotNull;
 
 import be.seeseemelk.mockbukkit.ServerMock;
@@ -47,16 +49,16 @@ public abstract class EntityMock implements Entity, MessageTarget
 	private Location location;
 	private boolean teleported;
 	private TeleportCause teleportCause;
-	private MetadataTable metadataTable = new MetadataTable();
-	private PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
+	private final MetadataTable metadataTable = new MetadataTable();
+	private final PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
 	private boolean operator = false;
 	private String name = "entity";
 	private final Queue<String> messages = new LinkedTransferQueue<>();
 	private final Set<PermissionAttachment> permissionAttachments = new HashSet<>();
-	private Vector velocity = new Vector(0, 0, 0);
+	private final Vector velocity = new Vector(0, 0, 0);
 	private float fallDistance;
 	private int fireTicks = -20;
-	private int maxFireTicks = 20;
+	private final int maxFireTicks = 20;
 
 	public EntityMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -78,7 +80,7 @@ public abstract class EntityMock implements Entity, MessageTarget
 	@Override
 	public final boolean equals(Object obj)
 	{
-		if (obj instanceof EntityMock) 
+		if (obj instanceof EntityMock)
 		{
 			return uuid.equals(((EntityMock) obj).getUniqueId());
 		}
@@ -119,7 +121,6 @@ public abstract class EntityMock implements Entity, MessageTarget
 	public void assertNotTeleported()
 	{
 		assertFalse("Player was teleported", teleported);
-		teleported = false;
 	}
 
 	/**
@@ -165,6 +166,9 @@ public abstract class EntityMock implements Entity, MessageTarget
 	@Override
 	public Location getLocation(Location loc)
 	{
+		// See doc. If given location is null, do nothing and returns null
+		if (loc == null)
+			return null;
 		loc.setWorld(location.getWorld());
 		loc.setDirection(location.getDirection());
 		loc.setX(location.getX());
@@ -314,7 +318,7 @@ public abstract class EntityMock implements Entity, MessageTarget
 		{
 			Map<String, Boolean> permissions = attachment.getPermissions();
 
-			if (permissions.containsKey(name) && permissions.get(name).booleanValue())
+			if (permissions.containsKey(name) && permissions.get(name))
 			{
 				return true;
 			}
@@ -379,10 +383,7 @@ public abstract class EntityMock implements Entity, MessageTarget
 	@Override
 	public void removeAttachment(@NotNull PermissionAttachment attachment)
 	{
-		if (attachment == null)
-		{
-			throw new IllegalArgumentException("Attachment cannot be null");
-		}
+		Validate.notNull(attachment);
 
 		if (permissionAttachments.contains(attachment))
 		{
@@ -441,7 +442,10 @@ public abstract class EntityMock implements Entity, MessageTarget
 	@Override
 	public void setVelocity(@NotNull Vector velocity)
 	{
-		this.velocity = velocity;
+		// Avoid changing the velocity
+		this.velocity.setX(velocity.getX());
+		this.velocity.setY(velocity.getY());
+		this.velocity.setZ(velocity.getZ());
 	}
 
 	@Override

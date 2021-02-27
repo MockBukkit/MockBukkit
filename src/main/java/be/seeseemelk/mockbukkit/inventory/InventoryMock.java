@@ -227,7 +227,7 @@ public class InventoryMock implements Inventory
 	@Override
 	public @NotNull ListIterator<ItemStack> iterator()
 	{
-		List<ItemStack> list = Arrays.asList(items).stream().filter(item -> item != null).collect(Collectors.toList());
+		List<ItemStack> list = Arrays.stream(items).filter(Objects::nonNull).collect(Collectors.toList());
 		return list.listIterator();
 	}
 
@@ -273,10 +273,7 @@ public class InventoryMock implements Inventory
 	@Override
 	public boolean contains(@NotNull Material material) throws IllegalArgumentException
 	{
-		if (material == null)
-		{
-			throw new IllegalArgumentException("Material cannot be null.");
-		}
+		Validate.notNull(material);
 		for (ItemStack itemStack : this.getContents())
 		{
 			if (itemStack != null && itemStack.getType() == material)
@@ -296,10 +293,7 @@ public class InventoryMock implements Inventory
 	@Override
 	public boolean contains(@NotNull Material material, int amount) throws IllegalArgumentException
 	{
-		if (material == null)
-		{
-			throw new IllegalArgumentException("Material cannot be null.");
-		}
+		Validate.notNull(material);
 		return amount < 1 || getNumberOfItems(new ItemStack(material)) == amount;
 	}
 

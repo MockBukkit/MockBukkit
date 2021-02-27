@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.tags;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -61,7 +62,7 @@ public final class TagsMock
 	/**
 	 * This will load all {@link Tag Tags} for the given {@link TagRegistry}.
 	 *
-	 * @param server
+	 * @param server	   The Server
 	 * @param registry     Our {@link TagRegistry}
 	 * @param skipIfExists Whether to skip an already loaded {@link TagRegistry}
 	 *
@@ -79,7 +80,10 @@ public final class TagsMock
 		}
 
 		Pattern filePattern = Pattern.compile("\\.");
-		URL resource = MockBukkit.class.getClassLoader().getResource("tags/" + registry.getRegistry());
+		String resourcePath = "tags/" + registry.getRegistry();
+		URL resource = MockBukkit.class.getClassLoader().getResource(resourcePath);
+		if (resource == null)
+			throw new FileNotFoundException(resourcePath);
 
 		loadFileSystem(resource.toURI());
 		Path directory = Paths.get(resource.toURI());

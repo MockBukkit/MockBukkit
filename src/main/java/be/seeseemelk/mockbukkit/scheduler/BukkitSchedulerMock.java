@@ -27,9 +27,9 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	private long currentTick = 0;
 	private int id = 0;
 	private List<ScheduledTask> tasks = new LinkedList<>();
-	private ExecutorService pool = Executors.newCachedThreadPool();
-	private AtomicInteger asyncTasksRunning = new AtomicInteger();
-	private AtomicReference<Exception> asyncException = new AtomicReference<>();
+	private final ExecutorService pool = Executors.newCachedThreadPool();
+	private final AtomicInteger asyncTasksRunning = new AtomicInteger();
+	private final AtomicReference<Exception> asyncException = new AtomicReference<>();
 	private int asyncTasksQueued = 0;
 
 	/**

@@ -22,10 +22,10 @@ import be.seeseemelk.mockbukkit.entity.PlayerMock;
 
 /**
  * Replica of the Bukkit internal PlayerList and CraftPlayerList implementation
- * 
+ *
  * @author seeseemelk
  * @author TheBusyBiscuit
- * 
+ *
  */
 public class PlayerList
 {
@@ -34,8 +34,8 @@ public class PlayerList
 	private final List<PlayerMock> onlinePlayers = new CopyOnWriteArrayList<>();
 	private final Set<OfflinePlayer> offlinePlayers = Collections.synchronizedSet(new HashSet<>());
 
-	private BanList ipBans = new MockBanList();
-	private BanList profileBans = new MockBanList();
+	private final BanList ipBans = new MockBanList();
+	private final BanList profileBans = new MockBanList();
 
 	public void setMaxPlayers(int maxPlayers)
 	{
@@ -180,7 +180,7 @@ public class PlayerList
 
 		for (OfflinePlayer offlinePlayer : offlinePlayers)
 		{
-			if (offlinePlayer.getName().equals(name))
+			if (name.equals(offlinePlayer.getName()))
 			{
 				return offlinePlayer;
 			}

@@ -20,9 +20,9 @@ import org.jetbrains.annotations.NotNull;
 @SuppressWarnings("deprecation")
 public class ScoreboardMock implements Scoreboard
 {
-	private Map<String, ObjectiveMock> objectives = new HashMap<>();
-	private Map<DisplaySlot, ObjectiveMock> objectivesByDisplaySlot = new EnumMap<>(DisplaySlot.class);
-	private Map<String, Team> teams = new HashMap<>();
+	private final Map<String, ObjectiveMock> objectives = new HashMap<>();
+	private final Map<DisplaySlot, ObjectiveMock> objectivesByDisplaySlot = new EnumMap<>(DisplaySlot.class);
+	private final Map<String, Team> teams = new HashMap<>();
 
 	@Override
 	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull String criteria) throws IllegalArgumentException

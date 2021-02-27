@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.entity;
 
+import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.EntityEquipment;
@@ -13,7 +14,7 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 /**
  * This mocks the {@link EntityEquipment} of a {@link LivingEntityMock}. Note that not every {@link LivingEntity} has
  * {@link EntityEquipment}, so only implement this where necessary.
- * 
+ *
  * @author TheBusyBiscuit
  *
  */
@@ -71,30 +72,38 @@ public class EntityEquipmentMock implements EntityEquipment
 	}
 
 	@Override
-	public ItemStack getItem(@NotNull EquipmentSlot slot)
+	public @NotNull ItemStack getItem(@NotNull EquipmentSlot slot)
 	{
+		ItemStack itemStack;
 		switch (slot)
 		{
 		case CHEST:
-			return getChestplate();
+			itemStack = getChestplate();
+			break;
 		case FEET:
-			return getBoots();
+			itemStack = getBoots();
+			break;
 		case HAND:
-			return getItemInMainHand();
+			itemStack = getItemInMainHand();
+			break;
 		case HEAD:
-			return getHelmet();
+			itemStack = getHelmet();
+			break;
 		case LEGS:
-			return getLeggings();
+			itemStack = getLeggings();
+			break;
 		case OFF_HAND:
-			return getItemInOffHand();
+			itemStack = getItemInOffHand();
+			break;
 		default:
 			// This should never be reached unless Mojang adds new slots
 			throw new UnimplementedOperationException("EquipmentSlot '" + slot + "' has no implementation!");
 		}
+		return itemStack == null ? new ItemStack(Material.AIR) : itemStack;
 	}
 
 	@Override
-	public ItemStack getItemInMainHand()
+	public @NotNull ItemStack getItemInMainHand()
 	{
 		return itemInMainHand;
 	}
@@ -113,7 +122,7 @@ public class EntityEquipmentMock implements EntityEquipment
 	}
 
 	@Override
-	public ItemStack getItemInOffHand()
+	public @NotNull ItemStack getItemInOffHand()
 	{
 		return itemInOffHand;
 	}
@@ -133,7 +142,7 @@ public class EntityEquipmentMock implements EntityEquipment
 
 	@Override
 	@Deprecated
-	public ItemStack getItemInHand()
+	public @NotNull ItemStack getItemInHand()
 	{
 		return getItemInMainHand();
 	}
@@ -231,8 +240,12 @@ public class EntityEquipmentMock implements EntityEquipment
 	@Override
 	public void setArmorContents(ItemStack[] items)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (items.length == 4) {
+			setHelmet(items[0]);
+			setChestplate(items[1]);
+			setLeggings(items[2]);
+			setBoots(items[3]);
+		}
 	}
 
 	@Override

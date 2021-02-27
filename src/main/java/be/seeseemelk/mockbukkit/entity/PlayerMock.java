@@ -12,9 +12,9 @@ import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.*;
 import org.bukkit.advancement.Advancement;
 import org.bukkit.advancement.AdvancementProgress;
-import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.block.BlockState;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationAbandonedEvent;
@@ -71,8 +71,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 	private long lastPlayed = 0;
 
 	private final List<AudioExperience> heardSounds = new LinkedList<>();
-
-	private PlayerSpigotMock playerSpigotMock;
+	private final PlayerSpigotMock playerSpigotMock;
 
 	public PlayerMock(ServerMock server, String name)
 	{
@@ -196,7 +195,8 @@ public class PlayerMock extends LivingEntityMock implements Player
 		if (gamemode == GameMode.ADVENTURE || gamemode == GameMode.SPECTATOR)
 			return false;
 		Block block = location.getBlock();
-		BlockPlaceEvent event = new BlockPlaceEvent(block, null, null, null, this, true, null);
+		BlockState oldState = block.getState();
+		BlockPlaceEvent event = new BlockPlaceEvent(block, oldState, null, null, this, true);
 		Bukkit.getPluginManager().callEvent(event);
 		if (!event.isCancelled())
 			block.setType(material);
@@ -224,7 +224,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 		Bukkit.getPluginManager().callEvent(event);
 
 		// Reset location and health
-		setHealth(getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+		setHealth(getMaxHealth());
 		setLocation(event.getRespawnLocation().clone());
 		alive = true;
 	}
@@ -266,7 +266,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public Player getPlayer()
 	{
-		if (online)
+		if (isOnline())
 		{
 			return this;
 		}
@@ -449,7 +449,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public @NotNull ItemStack getItemOnCursor()
 	{
-		return cursor == null ? null : cursor.clone();
+		return cursor == null ? new ItemStack(Material.AIR) : cursor.clone();
 	}
 
 	@Override
@@ -1804,7 +1804,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public boolean discoverRecipe(@NotNull NamespacedKey recipe)
 	{
-		return discoverRecipes(Arrays.asList(recipe)) != 0;
+		return discoverRecipes(Collections.singletonList(recipe)) != 0;
 	}
 
 	@Override
@@ -1817,7 +1817,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public boolean undiscoverRecipe(@NotNull NamespacedKey recipe)
 	{
-		return undiscoverRecipes(Arrays.asList(recipe)) != 0;
+		return undiscoverRecipes(Collections.singletonList(recipe)) != 0;
 	}
 
 	@Override

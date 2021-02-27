@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.meta.KnowledgeBookMeta;
+
+import org.apache.commons.lang.Validate;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -62,7 +64,7 @@ public class KnowledgeBookMetaMock extends ItemMetaMock implements KnowledgeBook
 	}
 
 	@Override
-	public KnowledgeBookMetaMock clone()
+	public @NotNull KnowledgeBookMetaMock clone()
 	{
 		KnowledgeBookMetaMock mock = (KnowledgeBookMetaMock) super.clone();
 		mock.recipes.addAll(recipes);
@@ -72,6 +74,7 @@ public class KnowledgeBookMetaMock extends ItemMetaMock implements KnowledgeBook
 	@Override
 	public void addRecipe(@NotNull NamespacedKey... recipes)
 	{
+		Validate.notNull(recipes);
 		for (NamespacedKey recipe : recipes)
 		{
 			if (this.recipes.size() >= MAX_RECIPES)
@@ -79,10 +82,7 @@ public class KnowledgeBookMetaMock extends ItemMetaMock implements KnowledgeBook
 				return;
 			}
 
-			if (recipe != null)
-			{
-				this.recipes.add(recipe);
-			}
+			this.recipes.add(recipe);
 		}
 	}
 

@@ -72,9 +72,9 @@ public class ItemFactoryMock implements ItemFactory
 	{
 		try
 		{
-			return getItemMetaClass(material).newInstance();
+			return getItemMetaClass(material).getDeclaredConstructor().newInstance();
 		}
-		catch (InstantiationException | IllegalAccessException e)
+		catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e)
 		{
 			throw new UnsupportedOperationException("Can't instantiate class");
 		}
@@ -83,6 +83,8 @@ public class ItemFactoryMock implements ItemFactory
 	@Override
 	public boolean isApplicable(ItemMeta meta, ItemStack stack)
 	{
+		if (meta == null || stack == null)
+			return false;
 		return isApplicable(meta, stack.getType());
 	}
 

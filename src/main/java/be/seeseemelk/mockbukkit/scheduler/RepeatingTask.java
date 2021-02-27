@@ -4,7 +4,7 @@ import org.bukkit.plugin.Plugin;
 
 public class RepeatingTask extends ScheduledTask
 {
-	private long period;
+	private final long period;
 
 	public RepeatingTask(int id, Plugin plugin, boolean isSync, long scheduledTick, long period, Runnable runnable)
 	{

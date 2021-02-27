@@ -124,7 +124,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	{
 		if (lore == null)
 			return !meta.hasLore();
-		else if (!meta.hasLore())
+		if (!meta.hasLore())
 			return false;
 
 		List<String> otherLore = meta.getLore();

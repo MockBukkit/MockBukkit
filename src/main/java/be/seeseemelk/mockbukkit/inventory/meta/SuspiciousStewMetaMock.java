@@ -63,7 +63,7 @@ public class SuspiciousStewMetaMock extends ItemMetaMock implements SuspiciousSt
 	}
 
 	@Override
-	public SuspiciousStewMetaMock clone()
+	public @NotNull SuspiciousStewMetaMock clone()
 	{
 		SuspiciousStewMetaMock mock = (SuspiciousStewMetaMock) super.clone();
 		mock.effects = new ArrayList<>(effects);

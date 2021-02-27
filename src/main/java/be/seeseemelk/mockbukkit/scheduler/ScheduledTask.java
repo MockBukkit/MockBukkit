@@ -9,12 +9,12 @@ import org.jetbrains.annotations.NotNull;
 
 public class ScheduledTask implements BukkitTask
 {
-	private int id;
-	private Plugin plugin;
-	private boolean isSync;
+	private final int id;
+	private final Plugin plugin;
+	private final boolean isSync;
 	private boolean isCancelled = false;
 	private long scheduledTick;
-	private Runnable runnable;
+	private final Runnable runnable;
 
 	public ScheduledTask(int id, @NotNull Plugin plugin, boolean isSync, long scheduledTick, Runnable runnable)
 	{

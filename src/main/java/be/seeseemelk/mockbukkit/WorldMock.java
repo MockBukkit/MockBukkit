@@ -57,6 +57,8 @@ import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Consumer;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
+
+import org.apache.commons.lang.Validate;
 import org.jetbrains.annotations.NotNull;
 
 import be.seeseemelk.mockbukkit.block.BlockMock;
@@ -79,12 +81,12 @@ public class WorldMock implements World
 	private final MetadataTable metadataTable = new MetadataTable();
 
 	private Environment environment = Environment.NORMAL;
-	private ServerMock server;
-	private Material defaultBlock;
-	private int height;
-	private int grassHeight;
+	private final ServerMock server;
+	private final Material defaultBlock;
+	private final int height;
+	private final int grassHeight;
 	private String name = "World";
-	private UUID uuid = UUID.randomUUID();
+	private final UUID uuid = UUID.randomUUID();
 	private Location spawnLocation;
 	private long fullTime = 0;
 	private int weatherDuration = 0;
@@ -265,8 +267,7 @@ public class WorldMock implements World
 	@Override
 	public @NotNull ChunkMock getChunkAt(int x, int z)
 	{
-		ChunkMock chunk = new ChunkMock(this, x, z);
-		return chunk;
+		return new ChunkMock(this, x, z);
 	}
 
 	@Override
@@ -444,7 +445,9 @@ public class WorldMock implements World
 	@Override
 	public @NotNull Item dropItem(@NotNull Location loc, @NotNull ItemStack item)
 	{
-		if (item == null || item.getType() == Material.AIR)
+		Validate.notNull(loc);
+		Validate.notNull(item);
+		if (item.getType() == Material.AIR)
 		{
 			throw new IllegalArgumentException("Cannot drop null or air");
 		}
@@ -1061,7 +1064,7 @@ public class WorldMock implements World
 	@Override
 	public String[] getGameRules()
 	{
-		return gameRules.values().stream().map(Object::toString).collect(Collectors.toList()).toArray(new String[0]);
+		return gameRules.values().stream().map(Object::toString).toArray(String[]::new);
 	}
 
 	@Override
@@ -1072,15 +1075,16 @@ public class WorldMock implements World
 		GameRule<?> gameRule = GameRule.getByName(rule);
 		if (gameRule == null)
 			return null;
-		return getGameRuleValue(gameRule).toString();
+		Object result = getGameRuleValue(gameRule);
+		return result == null ? null : result.toString();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean setGameRuleValue(@NotNull String rule, @NotNull String value)
 	{
-		if (rule == null)
-			return false;
+		Validate.notNull(rule);
+		Validate.notNull(value);
 		GameRule<?> gameRule = GameRule.getByName(rule);
 		if (gameRule == null)
 			return false;
@@ -1106,7 +1110,8 @@ public class WorldMock implements World
 	@Override
 	public boolean isGameRule(@NotNull String rule)
 	{
-		return rule != null && GameRule.getByName(rule) != null;
+		Validate.notNull(rule);
+		return GameRule.getByName(rule) != null;
 	}
 
 	@Override

@@ -15,9 +15,11 @@ import org.bukkit.util.EulerAngle;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * This is the mock of an {@link ArmorStand}.
- * 
+ *
  * @author TheBusyBiscuit
  *
  */
@@ -38,12 +40,13 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	}
 
 	@Override
-	public EntityType getType()
+	public @NotNull EntityType getType()
 	{
 		return EntityType.ARMOR_STAND;
 	}
 
 	@Override
+	@NotNull
 	public EntityEquipment getEquipment()
 	{
 		return equipment;
@@ -51,9 +54,9 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 
 	@Override
 	@Deprecated
-	public ItemStack getBoots()
+	public @NotNull ItemStack getBoots()
 	{
-		return getEquipment().getBoots();
+		return getEquipment().getItem(EquipmentSlot.FEET);
 	}
 
 	@Override
@@ -65,9 +68,9 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 
 	@Override
 	@Deprecated
-	public ItemStack getLeggings()
+	public @NotNull ItemStack getLeggings()
 	{
-		return getEquipment().getLeggings();
+		return getEquipment().getItem(EquipmentSlot.LEGS);
 	}
 
 	@Override
@@ -79,9 +82,9 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 
 	@Override
 	@Deprecated
-	public ItemStack getChestplate()
+	public @NotNull ItemStack getChestplate()
 	{
-		return getEquipment().getChestplate();
+		return getEquipment().getItem(EquipmentSlot.CHEST);
 	}
 
 	@Override
@@ -93,9 +96,9 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 
 	@Override
 	@Deprecated
-	public ItemStack getHelmet()
+	public @NotNull ItemStack getHelmet()
 	{
-		return getEquipment().getHelmet();
+		return getEquipment().getItem(EquipmentSlot.HEAD);
 	}
 
 	@Override
@@ -107,7 +110,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 
 	@Override
 	@Deprecated
-	public ItemStack getItemInHand()
+	public @NotNull ItemStack getItemInHand()
 	{
 		return getEquipment().getItemInMainHand();
 	}
@@ -120,84 +123,84 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	}
 
 	@Override
-	public EulerAngle getBodyPose()
+	public @NotNull EulerAngle getBodyPose()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void setBodyPose(EulerAngle pose)
+	public void setBodyPose(@NotNull EulerAngle pose)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public EulerAngle getLeftArmPose()
+	public @NotNull EulerAngle getLeftArmPose()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void setLeftArmPose(EulerAngle pose)
+	public void setLeftArmPose(@NotNull EulerAngle pose)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public EulerAngle getRightArmPose()
+	public @NotNull EulerAngle getRightArmPose()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void setRightArmPose(EulerAngle pose)
+	public void setRightArmPose(@NotNull EulerAngle pose)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public EulerAngle getLeftLegPose()
+	public @NotNull EulerAngle getLeftLegPose()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void setLeftLegPose(EulerAngle pose)
+	public void setLeftLegPose(@NotNull EulerAngle pose)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public EulerAngle getRightLegPose()
+	public @NotNull EulerAngle getRightLegPose()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void setRightLegPose(EulerAngle pose)
+	public void setRightLegPose(@NotNull EulerAngle pose)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public EulerAngle getHeadPose()
+	public @NotNull EulerAngle getHeadPose()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void setHeadPose(EulerAngle pose)
+	public void setHeadPose(@NotNull EulerAngle pose)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -264,21 +267,21 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	}
 
 	@Override
-	public void addEquipmentLock(EquipmentSlot slot, LockType lockType)
+	public void addEquipmentLock(@NotNull EquipmentSlot slot, @NotNull LockType lockType)
 	{
 		// TODO Equipment Locks use byte operations internally, they might be hard to implement
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void removeEquipmentLock(EquipmentSlot slot, LockType lockType)
+	public void removeEquipmentLock(@NotNull EquipmentSlot slot, @NotNull LockType lockType)
 	{
 		// TODO Equipment Locks use byte operations internally, they might be hard to implement
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean hasEquipmentLock(EquipmentSlot slot, LockType lockType)
+	public boolean hasEquipmentLock(@NotNull EquipmentSlot slot, @NotNull LockType lockType)
 	{
 		// TODO Equipment Locks use byte operations internally, they might be hard to implement
 		throw new UnimplementedOperationException();
@@ -292,7 +295,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	}
 
 	@Override
-	public void attack(Entity target)
+	public void attack(@NotNull Entity target)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -313,21 +316,21 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	}
 
 	@Override
-	public Set<UUID> getCollidableExemptions()
+	public @NotNull Set<UUID> getCollidableExemptions()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public <T> T getMemory(MemoryKey<T> memoryKey)
+	public <T> T getMemory(@NotNull MemoryKey<T> memoryKey)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public <T> void setMemory(MemoryKey<T> memoryKey, T memoryValue)
+	public <T> void setMemory(@NotNull MemoryKey<T> memoryKey, T memoryValue)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -348,7 +351,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	}
 
 	@Override
-	public Spigot spigot()
+	public @NotNull Spigot spigot()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

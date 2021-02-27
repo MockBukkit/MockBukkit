@@ -131,17 +131,14 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	@Override
 	public void setPage(int page, @NotNull String text)
 	{
+		Validate.notNull(text);
 		if (!this.isValidPage(page))
 		{
 			throw new IllegalArgumentException("Invalid page number " + page + "/" + this.pages.size());
 		}
 		else
 		{
-			String newText;
-			if (text != null)
-				newText = text.length() > 32767 ? text.substring(0, 32767) : text;
-			else
-				newText = "";
+			String newText = text.length() > 32767 ? text.substring(0, 32767) : text;
 			this.pages.set(page - 1, newText);
 		}
 	}
@@ -163,14 +160,10 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	public void setPages(List<String> pages)
 	{
 		this.pages.clear();
-		Iterator<String> var2 = pages.iterator();
 
-		while (var2.hasNext())
-		{
-			String page = var2.next();
+		for (String page : pages) {
 			this.addPage(page);
 		}
-
 	}
 
 	@Override
