@@ -39,6 +39,16 @@ public class ConsoleCommandSenderMockTest
 	}
 
 	@Test
+	public void getName_IsConsole() {
+		assertEquals("CONSOLE", sender.getName());
+	}
+
+	@Test
+	public void assertIsOp() {
+		assertTrue(sender.isOp());
+	}
+
+	@Test
 	public void assertSaid_CorrectMessage_DoesNotAssert()
 	{
 		sender.sendMessage("A hello world");
