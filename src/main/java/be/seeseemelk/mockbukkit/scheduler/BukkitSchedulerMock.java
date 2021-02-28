@@ -260,11 +260,13 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		}
 	}
 
-	private void cancelTask(@NotNull ScheduledTask task){
+	private void cancelTask(@NotNull ScheduledTask task)
+	{
 
-		if(!task.isCancelled()) {
+		if (!task.isCancelled())
+		{
 			task.cancel();
-			if(asyncTasksQueued>0)
+			if (asyncTasksQueued > 0)
 			{
 				asyncTasksQueued--;
 			}
@@ -365,19 +367,22 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		return scheduledTask;
 	}
 
-	private void checkForShutDown(ScheduledTask task){
-		if(shuttingDown) {
+	private void checkForShutDown(ScheduledTask task)
+	{
+		if (shuttingDown)
+		{
 			String name;
-			if(task.getOwner() != null)
+			if (task.getOwner() != null)
 			{
 				name = task.getOwner().getName();
-			} else
+			}
+			else
 			{
 				name = "";
 			}
 			Logger.getLogger(LOGGER_NAME).warning(
-					name + "(" + task.getRunnable().getClass().getSimpleName()
-					+  "): Scheduler is shutting down - why are you scheduling tasks - CANCELLED");
+			    name + "(" + task.getRunnable().getClass().getSimpleName()
+			    +  "): Scheduler is shutting down - why are you scheduling tasks - CANCELLED");
 			task.cancel();
 		}
 	}

@@ -13,7 +13,7 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 /**
  * This mocks the {@link EntityEquipment} of a {@link LivingEntityMock}. Note that not every {@link LivingEntity} has
  * {@link EntityEquipment}, so only implement this where necessary.
- * 
+ *
  * @author TheBusyBiscuit
  *
  */
@@ -225,7 +225,7 @@ public class EntityEquipmentMock implements EntityEquipment
 	public ItemStack[] getArmorContents()
 	{
 		return new ItemStack[]
-		{ getHelmet(), getChestplate(), getLeggings(), getBoots() };
+		       { getHelmet(), getChestplate(), getLeggings(), getBoots() };
 	}
 
 	@Override

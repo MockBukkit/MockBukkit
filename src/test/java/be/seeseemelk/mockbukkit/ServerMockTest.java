@@ -455,7 +455,7 @@ public class ServerMockTest
 		PlayerMock player = new PlayerMock(server, "operator");
 		server.addPlayer(player);
 		player.setOp(true);
-		
+
 		assertTrue(server.getOperators().contains(player));
 		assertEquals(1, server.getOperators().size());
 	}

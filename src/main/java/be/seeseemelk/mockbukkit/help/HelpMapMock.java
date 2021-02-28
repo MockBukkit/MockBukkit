@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  * The {@link HelpMapMock} is our mock of Bukkit's {@link HelpMap}.
- * 
+ *
  * @author NeumimTo
  *
  */

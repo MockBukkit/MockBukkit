@@ -117,13 +117,14 @@ public class BukkitSchedulerMockTest
 	}
 
 	@Test
-	public void runScheduledTask_WhileScheduler_ShutDown(){
+	public void runScheduledTask_WhileScheduler_ShutDown()
+	{
 		AtomicInteger count = new AtomicInteger(0);
 		Runnable callback = () -> count.incrementAndGet();
 		scheduler.shutdown();
 		scheduler.runTaskTimer(null, callback, 0, 2L);
 		scheduler.performTicks(1L);
-		assertEquals(0,count.get());
+		assertEquals(0, count.get());
 	}
 
 	@Test
@@ -133,28 +134,30 @@ public class BukkitSchedulerMockTest
 		AtomicInteger count = new AtomicInteger();
 		CyclicBarrier barrier = new CyclicBarrier(2);
 
-		testTask = scheduler.runTaskLaterAsynchronously(null,()-> {
+		testTask = scheduler.runTaskLaterAsynchronously(null, ()->
+		{
 
-					assertNotEquals(mainThread, Thread.currentThread());
-					count.incrementAndGet();
+			assertNotEquals(mainThread, Thread.currentThread());
+			count.incrementAndGet();
 			try
 			{
 				barrier.await(3L, TimeUnit.SECONDS);
-			} catch (InterruptedException | BrokenBarrierException | TimeoutException e)
+			}
+			catch (InterruptedException | BrokenBarrierException | TimeoutException e)
 			{
 				throw new RuntimeException(e);
 			}
 
-		},2);
+		}, 2);
 		assertTrue(scheduler.isQueued(testTask.getTaskId()));
-		assertEquals(0,count.get());
+		assertEquals(0, count.get());
 		scheduler.performTicks(1L);
 		assertTrue(scheduler.isQueued(testTask.getTaskId()));
-		assertEquals(0,count.get());
+		assertEquals(0, count.get());
 		scheduler.performTicks(3);
 		barrier.await(3L, TimeUnit.SECONDS);
 		assertFalse(scheduler.isQueued(testTask.getTaskId()));
-		assertEquals(1,count.get());
+		assertEquals(1, count.get());
 
 	}
 
@@ -226,13 +229,14 @@ public class BukkitSchedulerMockTest
 	}
 
 	@Test
-	public void testPluginCancel(){
+	public void testPluginCancel()
+	{
 		MockBukkit.mock();
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
 		BukkitScheduler s = MockBukkit.getMock().getScheduler();
-		BukkitTask task = s.runTaskLaterAsynchronously(plugin,()->{},10);
-		BukkitTask task2 = s.runTaskLaterAsynchronously(plugin,()->{},10);
-		BukkitTask task3 = s.runTaskLaterAsynchronously(null,()->{},10);
+		BukkitTask task = s.runTaskLaterAsynchronously(plugin, ()-> {}, 10);
+		BukkitTask task2 = s.runTaskLaterAsynchronously(plugin, ()-> {}, 10);
+		BukkitTask task3 = s.runTaskLaterAsynchronously(null, ()-> {}, 10);
 
 		assertTrue(s.isQueued(task.getTaskId()));
 		assertTrue(s.isQueued(task2.getTaskId()));

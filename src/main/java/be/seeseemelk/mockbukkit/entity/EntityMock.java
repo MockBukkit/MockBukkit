@@ -78,7 +78,7 @@ public abstract class EntityMock implements Entity, MessageTarget
 	@Override
 	public final boolean equals(Object obj)
 	{
-		if (obj instanceof EntityMock) 
+		if (obj instanceof EntityMock)
 		{
 			return uuid.equals(((EntityMock) obj).getUniqueId());
 		}

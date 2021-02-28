@@ -17,7 +17,7 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
 /**
  * This is the mock of an {@link ArmorStand}.
- * 
+ *
  * @author TheBusyBiscuit
  *
  */
