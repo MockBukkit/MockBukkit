@@ -132,15 +132,13 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	@Override
 	public boolean isOp()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return true;
 	}
 
 	@Override
 	public void setOp(boolean value)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw new UnsupportedOperationException("Console is op and its status cannot be changed");
 	}
 
 	@Override
@@ -153,8 +151,7 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	@Override
 	public String getName()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return "CONSOLE";
 	}
 
 	@Override
