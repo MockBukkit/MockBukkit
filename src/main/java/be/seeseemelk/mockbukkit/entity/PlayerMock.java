@@ -23,6 +23,7 @@ import org.bukkit.entity.memory.MemoryKey;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
@@ -625,10 +626,34 @@ public class PlayerMock extends LivingEntityMock implements Player
 	}
 
 	@Override
-	public Player getKiller()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+	public void kill() {
+		this.health = 0;
+
+		if (!this.alive) return;
+
+		List<ItemStack> drops = Arrays.asList(this.getInventory().getContents());
+		PlayerDeathEvent event = new PlayerDeathEvent(this, drops, 0, getName() + " got killed");
+		Boolean keepInventory = getWorld().getGameRuleValue(GameRule.KEEP_INVENTORY);
+		event.setKeepInventory(keepInventory != null && keepInventory);
+		event.setKeepLevel(keepInventory != null && keepInventory);
+		Bukkit.getPluginManager().callEvent(event);
+
+		// Terminate any InventoryView and the cursor item
+		this.closeInventory();
+
+		// Clear the Inventory if keep-inventory is not enabled
+		if (!event.getKeepInventory()) {
+			this.getInventory().clear();
+			// Should someone try to provoke a RespawnEvent, they will now find the Inventory to be empty
+		}
+
+		if (!event.getKeepLevel()) {
+			this.setLevel(0);
+			this.setExp(0);
+		}
+
+		this.setFoodLevel(0);
+		this.alive = false;
 	}
 
 	@Override

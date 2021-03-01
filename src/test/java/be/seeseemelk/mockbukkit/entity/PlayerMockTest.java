@@ -18,6 +18,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -216,6 +217,42 @@ public class PlayerMockTest
 		player.resetMaxHealth();
 		assertEquals(20.0, player.getMaxHealth(), 0);
 		assertEquals(20.0, player.getHealth(), 0);
+	}
+
+	@Test
+	public void kill_PLayerDeathEventDispatched() {
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		AtomicBoolean eventDispatched = new AtomicBoolean();
+		server.getPluginManager().registerEvents(new Listener() {
+			@EventHandler
+			public void onDeath(PlayerDeathEvent event) {
+				eventDispatched.set(true);
+			}
+		}, plugin);
+
+		player.kill();
+		assertTrue(eventDispatched.get());
+	}
+
+	@Test
+	public void kill_NoKeepInventory_PlayerReset() {
+		player.getWorld().setGameRule(GameRule.KEEP_INVENTORY, false);
+		player.kill();
+
+		assertEquals(0, player.getLevel());
+		assertEquals(0, player.getExp(), 0);
+		assertEquals(0, player.getFoodLevel());
+		assertTrue(player.getInventory().isEmpty());
+		assertTrue(player.getOpenInventory() instanceof SimpleInventoryViewMock);
+	}
+
+	@Test
+	public void kill_KeepInventory_inventoryKept() {
+		player.getWorld().setGameRule(GameRule.KEEP_INVENTORY, true);
+		player.getInventory().addItem(new ItemStack(Material.DIRT));
+		player.kill();
+
+		assertFalse(player.getInventory().isEmpty());
 	}
 
 	@Test
