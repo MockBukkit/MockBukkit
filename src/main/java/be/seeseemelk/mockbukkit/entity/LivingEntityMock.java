@@ -50,6 +50,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	private int remainingAirTicks = 300;
 	protected boolean alive = true;
 	protected Map<Attribute, AttributeInstanceMock> attributes;
+	protected Player killer;
 
 	private final Set<ActivePotionEffect> activeEffects = new HashSet<>();
 
@@ -341,11 +342,14 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		throw new UnimplementedOperationException();
 	}
 
+	public void setKiller(Player killer) {
+		this.killer = killer;
+	}
+
 	@Override
 	public Player getKiller()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.killer;
 	}
 
 	@Override
