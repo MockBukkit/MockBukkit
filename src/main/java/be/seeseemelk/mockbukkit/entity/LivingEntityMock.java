@@ -39,6 +39,7 @@ import com.google.common.base.Function;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.attribute.AttributeInstanceMock;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class LivingEntityMock extends EntityMock implements LivingEntity
 {
@@ -83,7 +84,21 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		else this.health = Math.min(health, getMaxHealth());
 	}
 
-	public void kill() {
+	/**
+	 * Simulates a kill by setting the killer of this entity and propagating the necessary event
+	 * @param player the player who killed this entity
+	 */
+	public void simulateKilledBy(@Nullable Player player)
+	{
+		this.setKiller(player);
+		this.kill();
+	}
+
+	/*
+	 * Kills this entity and propagates the necessary event
+	 */
+	public void kill()
+	{
 		this.health = 0;
 		if (!this.alive) return;
 		EntityDeathEvent event = new EntityDeathEvent(this, new ArrayList<>(), 0);
