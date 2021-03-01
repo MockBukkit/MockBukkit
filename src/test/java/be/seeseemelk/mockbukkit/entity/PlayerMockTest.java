@@ -219,6 +219,18 @@ public class PlayerMockTest
 	}
 
 	@Test
+	public void getKiller_Default_null() {
+		assertNull(player.getKiller());
+	}
+
+	@Test
+	public void getKiller_SomeValue_SetExactly() {
+		PlayerMock killer = server.addPlayer();
+		player.setKiller(killer);
+		assertEquals(killer, player.getKiller());
+	}
+
+	@Test
 	public void damage_LessThanHealth_DamageTaken()
 	{
 		double health = player.getHealth();
