@@ -196,10 +196,21 @@ public class PlayerMock extends LivingEntityMock implements Player
 		if (gamemode == GameMode.ADVENTURE || gamemode == GameMode.SPECTATOR)
 			return false;
 		Block block = location.getBlock();
-		BlockPlaceEvent event = new BlockPlaceEvent(block, null, null, null, this, true, null);
+		Material previousMaterial = block.getType();
+
+		block.setType(material); // swap material so event has the correct block information
+
+		BlockPlaceEvent event = new BlockPlaceEvent(block, null, null, getItemInHand(), this, true, null) {
+			@NotNull
+			@Override
+			public EquipmentSlot getHand() {
+				throw new UnimplementedOperationException();
+			}
+		};
+
 		Bukkit.getPluginManager().callEvent(event);
-		if (!event.isCancelled())
-			block.setType(material);
+		if (event.isCancelled())
+			block.setType(previousMaterial);
 		return !event.isCancelled();
 	}
 

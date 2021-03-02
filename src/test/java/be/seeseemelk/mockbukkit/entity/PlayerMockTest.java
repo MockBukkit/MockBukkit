@@ -34,6 +34,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
@@ -1005,6 +1006,27 @@ public class PlayerMockTest
 		// This can be negative too
 		player.setMaximumAir(-10);
 		assertEquals(-10, player.getMaximumAir());
+	}
+
+	@Test
+	public void simulateBlockPlace_ValidBlock_EventShouldBeCalledWithCorrectType() {
+		Material newMaterial = Material.BEDROCK;
+		AtomicBoolean eventDispatched = new AtomicBoolean();
+		AtomicBoolean isTypeCorrect = new AtomicBoolean();
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+
+		server.getPluginManager().registerEvents(new Listener() {
+			@EventHandler
+			public void onPlace(BlockPlaceEvent event) {
+				eventDispatched.set(true);
+				isTypeCorrect.set(event.getBlock().getType() == newMaterial);
+			}
+		}, plugin);
+
+		player.simulateBlockPlace(newMaterial, server.addSimpleWorld("world").getSpawnLocation());
+
+		assertTrue(eventDispatched.get());
+		assertTrue(isTypeCorrect.get());
 	}
 
 	@Test
