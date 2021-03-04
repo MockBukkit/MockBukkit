@@ -178,6 +178,16 @@ public class BukkitSchedulerMockTest
 		assertFalse(scheduler.isQueued(testTask.getTaskId()));
 		assertEquals(2, count.get());
 	}
+
+	@Test
+	public void cancellingAsyncTaskDecreasesNumberOfQueuedAsyncTasks()
+	{
+		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
+		BukkitTask task = scheduler.runTaskLaterAsynchronously(null, () -> {}, 1);
+		assertEquals(1, scheduler.getNumberOfQueuedAsyncTasks());
+		task.cancel();
+		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
+	}
 }
 
 

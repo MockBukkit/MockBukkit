@@ -104,6 +104,16 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	}
 
 	/**
+	 * Gets the number of async tasks which are awaiting execution.
+	 *
+	 * @return The number of async tasks which are pending execution.
+	 */
+	public int getNumberOfQueuedAsyncTasks()
+	{
+		return asyncTasksQueued;
+	}
+
+	/**
 	 * Waits until all asynchronous tasks have finished executing. If you have an asynchronous task that runs
 	 * indefinitely, this function will never return.
 	 */
@@ -319,7 +329,8 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public BukkitTask runTaskLaterAsynchronously(Plugin plugin, Runnable task, long delay)
 	{
 		ScheduledTask scheduledTask = new ScheduledTask(id++, plugin, false, currentTick + delay,
-		        new AsyncRunnable(task));
+				new AsyncRunnable(task));
+		scheduledTask.addOnCancelled(() -> asyncTasksQueued--);
 		tasks.add(scheduledTask);
 		asyncTasksQueued++;
 		return scheduledTask;
