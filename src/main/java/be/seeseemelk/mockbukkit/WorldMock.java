@@ -338,15 +338,13 @@ public class WorldMock implements World
 	@Override
 	public Chunk getChunkAt(Location location)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getChunkAt(location.getBlockX() >> 4, location.getBlockZ() >> 4);
 	}
 
 	@Override
 	public Chunk getChunkAt(Block block)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getChunkAt(block.getLocation());
 	}
 
 	@Override
