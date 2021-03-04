@@ -381,6 +381,7 @@ public class BlockMock implements Block
 	@Override
 	public void setBlockData(@NotNull BlockData data)
 	{
+		this.material = data.getMaterial();
 		this.blockData = data;
 	}
 

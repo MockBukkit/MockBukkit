@@ -143,6 +143,7 @@ public class BlockMockTest
 
 		block.setBlockData(blockData);
 		Assert.assertEquals(blockData, block.getBlockData());
+		Assert.assertEquals(blockData.getMaterial(), block.getType());
 		block.setType(oldType);
 	}
 
