@@ -715,7 +715,7 @@ public class ServerMock implements Server
 
 		for (Player player : players)
 		{
-			if (player.hasPermission(permission)) 
+			if (player.hasPermission(permission))
 			{
 				player.sendMessage(message);
 				count++;
@@ -1516,34 +1516,34 @@ public class ServerMock implements Server
 	{
 		@NotNull
 		@Override
-        public YamlConfiguration getConfig()
+		public YamlConfiguration getConfig()
 		{
 			// TODO Auto-generated method stub
 			throw new UnimplementedOperationException();
-        }
+		}
 
-        @Override
-        public void broadcast(@NotNull BaseComponent component)
-        {
-    		for (Player player : getOnlinePlayers())
-    		{
-    			player.spigot().sendMessage(component);
-    		}
-        }
+		@Override
+		public void broadcast(@NotNull BaseComponent component)
+		{
+			for (Player player : getOnlinePlayers())
+			{
+				player.spigot().sendMessage(component);
+			}
+		}
 
-        @Override
-        public void broadcast(@NotNull BaseComponent... components)
-        {
-    		for (Player player : getOnlinePlayers())
-    		{
-    			player.spigot().sendMessage(components);
-    		}
-        }
+		@Override
+		public void broadcast(@NotNull BaseComponent... components)
+		{
+			for (Player player : getOnlinePlayers())
+			{
+				player.spigot().sendMessage(components);
+			}
+		}
 
-        @Override
-        public void restart()
-        {
-        	throw new UnsupportedOperationException("Not supported.");
-        }
+		@Override
+		public void restart()
+		{
+			throw new UnsupportedOperationException("Not supported.");
+		}
 	}
 }
