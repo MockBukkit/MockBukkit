@@ -70,9 +70,8 @@ public class PlayerMock extends LivingEntityMock implements Player
 	private long firstPlayed = 0;
 	private long lastPlayed = 0;
 
+	private final PlayerSpigotMock playerSpigotMock = new PlayerSpigotMock();
 	private final List<AudioExperience> heardSounds = new LinkedList<>();
-
-	private PlayerSpigotMock playerSpigotMock;
 
 	public PlayerMock(ServerMock server, String name)
 	{
@@ -95,8 +94,6 @@ public class PlayerMock extends LivingEntityMock implements Player
 		setLocation(Bukkit.getWorlds().get(0).getSpawnLocation().clone());
 		setCompassTarget(getLocation());
 		closeInventory();
-
-		playerSpigotMock = new PlayerSpigotMock();
 	}
 
 	@Override
