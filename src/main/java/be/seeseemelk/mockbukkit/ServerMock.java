@@ -79,6 +79,7 @@ import be.seeseemelk.mockbukkit.boss.KeyedBossBarMock;
 import be.seeseemelk.mockbukkit.command.CommandResult;
 import be.seeseemelk.mockbukkit.command.ConsoleCommandSenderMock;
 import be.seeseemelk.mockbukkit.command.MessageTarget;
+import be.seeseemelk.mockbukkit.command.MockCommandMap;
 import be.seeseemelk.mockbukkit.enchantments.EnchantmentsMock;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
