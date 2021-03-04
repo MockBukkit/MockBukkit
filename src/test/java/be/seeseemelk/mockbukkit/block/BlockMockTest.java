@@ -58,7 +58,7 @@ public class BlockMockTest
 	}
 
 	@Test
-	public void getChunk_Matches() {
+	public void getChunk_LocalBlock_Matches() {
 		WorldMock world = new WorldMock();
 		Location location = new Location(world, -10, 5, 30);
 		Block worldBlock = world.getBlockAt(location);
