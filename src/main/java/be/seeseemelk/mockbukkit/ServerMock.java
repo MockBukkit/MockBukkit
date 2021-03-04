@@ -475,30 +475,6 @@ public class ServerMock implements Server
 		return pluginManager;
 	}
 
-	/**
-	 * Checks if the label given is a possible label of the command.
-	 *
-	 * @param command The command to check against.
-	 * @param label   The label that should be checked if it's a label for the command.
-	 * @return {@code true} if the label is a label of the command, {@code false} if it's not.
-	 */
-	private boolean isLabelOfCommand(PluginCommand command, String label)
-	{
-		assertMainThread();
-		if (label.equals(command.getName()))
-		{
-			return true;
-		}
-		for (String alias : command.getAliases())
-		{
-			if (label.equals(alias))
-			{
-				return true;
-			}
-		}
-		return false;
-	}
-
 	@Override
 	public PluginCommand getPluginCommand(String name)
 	{
