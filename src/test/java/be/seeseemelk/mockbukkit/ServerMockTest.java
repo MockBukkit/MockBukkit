@@ -317,7 +317,6 @@ class ServerMockTest
 		file.createNewFile();
 		assertTrue(file.exists());
 		MockBukkit.unmock();
-		;
 		MockBukkit.mock();
 		assertFalse(file.exists());
 	}

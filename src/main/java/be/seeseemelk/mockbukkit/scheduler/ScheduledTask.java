@@ -1,5 +1,7 @@
 package be.seeseemelk.mockbukkit.scheduler;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.CancellationException;
 
 import org.bukkit.plugin.Plugin;
@@ -12,7 +14,9 @@ public class ScheduledTask implements BukkitTask
 	private boolean isSync;
 	private boolean isCancelled = false;
 	private long scheduledTick;
+	private boolean running;
 	private Runnable runnable;
+	private List<Runnable> cancelListeners = new LinkedList<>();
 
 	public ScheduledTask(int id, Plugin plugin, boolean isSync, long scheduledTick, Runnable runnable)
 	{
@@ -21,7 +25,20 @@ public class ScheduledTask implements BukkitTask
 		this.isSync = isSync;
 		this.scheduledTick = scheduledTick;
 		this.runnable = runnable;
+		this.running = false;
 	}
+
+
+	public boolean isRunning()
+	{
+		return running;
+	}
+
+	public void setRunning(boolean running)
+	{
+		this.running = running;
+	}
+
 
 	/**
 	 * Get the tick at which the task is scheduled to run at.
@@ -89,6 +106,17 @@ public class ScheduledTask implements BukkitTask
 	public void cancel()
 	{
 		isCancelled = true;
+		cancelListeners.forEach(Runnable::run);
+	}
+
+	/**
+	 * Adds a callback which is executed when the task is cancelled.
+	 *
+	 * @param callback The callback which gets executed when the task is cancelled.
+	 */
+	public void addOnCancelled(Runnable callback)
+	{
+		cancelListeners.add(callback);
 	}
 
 }

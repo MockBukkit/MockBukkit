@@ -108,7 +108,6 @@ import be.seeseemelk.mockbukkit.tags.TagsMock;
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.jetbrains.annotations.Nullable;
 
-@SuppressWarnings("deprecation")
 public class ServerMock extends Server.Spigot implements Server
 {
 	private static final String BUKKIT_VERSION = "1.17.1";

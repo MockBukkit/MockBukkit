@@ -522,9 +522,7 @@ public class WorldMock implements World
 	@Override
 	public ItemEntityMock dropItemNaturally(@NotNull Location loc, @NotNull ItemStack item)
 	{
-		return dropItemNaturally(loc, item, e ->
-		{
-		});
+		return dropItemNaturally(loc, item, e -> {});
 	}
 
 	@Override
