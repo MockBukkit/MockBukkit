@@ -70,9 +70,8 @@ public class PlayerMock extends LivingEntityMock implements Player
 	private long firstPlayed = 0;
 	private long lastPlayed = 0;
 
+	private final PlayerSpigotMock playerSpigotMock = new PlayerSpigotMock();
 	private final List<AudioExperience> heardSounds = new LinkedList<>();
-
-	private PlayerSpigotMock playerSpigotMock;
 
 	public PlayerMock(ServerMock server, String name)
 	{
@@ -95,8 +94,6 @@ public class PlayerMock extends LivingEntityMock implements Player
 		setLocation(Bukkit.getWorlds().get(0).getSpawnLocation().clone());
 		setCompassTarget(getLocation());
 		closeInventory();
-
-		playerSpigotMock = new PlayerSpigotMock();
 	}
 
 	@Override
@@ -2024,7 +2021,49 @@ public class PlayerMock extends LivingEntityMock implements Player
 	}
 
 	@Override
-	public org.bukkit.entity.Player.Spigot spigot()
+	public int getSaturatedRegenRate()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setSaturatedRegenRate(int ticks)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getUnsaturatedRegenRate()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setUnsaturatedRegenRate(int ticks)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getStarvationRate()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setStarvationRate(int ticks)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public PlayerSpigotMock spigot()
 	{
 		return playerSpigotMock;
 	}

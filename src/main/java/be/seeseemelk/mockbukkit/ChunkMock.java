@@ -53,7 +53,7 @@ public class ChunkMock implements Chunk
 		Validate.isTrue(x >= 0 && x <= 15, "x is out of range (expected 0-15)");
 		Validate.isTrue(y >= 0 && y <= 255, "y is out of range (expected 0-255)");
 		Validate.isTrue(z >= 0 && z <= 15, "z is out of range (expected 0-15)");
-		return world.getBlockAt(x << 4, y, z << 4);
+		return world.getBlockAt((this.x << 4) + x, y, (this.z << 4) + z);
 	}
 
 	@Override
