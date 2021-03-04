@@ -346,7 +346,7 @@ public class ServerMock implements Server
 	public CommandResult executeConsole(String command, String... args)
 	{
 		assertMainThread();
-		return executeConsole(getPluginCommand(command), args);
+		return executeConsole(getCommandMap().getCommand(command), args);
 	}
 
 	/**
@@ -376,7 +376,7 @@ public class ServerMock implements Server
 	public CommandResult executePlayer(String command, String... args)
 	{
 		assertMainThread();
-		return executePlayer(getPluginCommand(command), args);
+		return executePlayer(getCommandMap().getCommand(command), args);
 	}
 
 	/**
@@ -411,7 +411,7 @@ public class ServerMock implements Server
 	public CommandResult execute(String command, CommandSender sender, String... args)
 	{
 		assertMainThread();
-		return execute(getPluginCommand(command), sender, args);
+		return execute(getCommandMap().getCommand(command), sender, args);
 	}
 
 	@Override
@@ -502,14 +502,8 @@ public class ServerMock implements Server
 	public PluginCommand getPluginCommand(String name)
 	{
 		assertMainThread();
-		for (PluginCommand command : getPluginManager().getCommands())
-		{
-			if (isLabelOfCommand(command, name))
-			{
-				return command;
-			}
-		}
-		return null;
+		Command command = getCommandMap().getCommand(name);
+		return command instanceof PluginCommand ? (PluginCommand) command : null;
 	}
 
 	@Override
