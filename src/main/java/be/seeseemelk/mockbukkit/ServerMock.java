@@ -52,6 +52,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.command.PluginCommand;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.HumanEntity;
@@ -68,7 +69,6 @@ import org.bukkit.inventory.Recipe;
 import org.bukkit.loot.LootTable;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.SimpleServicesManager;
 import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.CachedServerIcon;
@@ -79,6 +79,7 @@ import be.seeseemelk.mockbukkit.boss.KeyedBossBarMock;
 import be.seeseemelk.mockbukkit.command.CommandResult;
 import be.seeseemelk.mockbukkit.command.ConsoleCommandSenderMock;
 import be.seeseemelk.mockbukkit.command.MessageTarget;
+import be.seeseemelk.mockbukkit.command.MockCommandMap;
 import be.seeseemelk.mockbukkit.enchantments.EnchantmentsMock;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
@@ -100,9 +101,11 @@ import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 import be.seeseemelk.mockbukkit.potion.MockPotionEffectType;
 import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
 import be.seeseemelk.mockbukkit.scoreboard.ScoreboardManagerMock;
+import be.seeseemelk.mockbukkit.services.ServicesManagerMock;
 import be.seeseemelk.mockbukkit.tags.TagRegistry;
 import be.seeseemelk.mockbukkit.tags.TagWrapperMock;
 import be.seeseemelk.mockbukkit.tags.TagsMock;
+import net.md_5.bungee.api.chat.BaseComponent;
 
 @SuppressWarnings("deprecation")
 public class ServerMock implements Server
@@ -116,6 +119,7 @@ public class ServerMock implements Server
 	private final MockUnsafeValues unsafe = new MockUnsafeValues();
 	private final Map<String, TagRegistry> materialTags = new HashMap<>();
 
+	private final ServerSpigotMock serverSpigotMock = new ServerSpigotMock();
 	private final Set<EntityMock> entities = new HashSet<>();
 	private final List<World> worlds = new ArrayList<>();
 	private final List<Recipe> recipes = new LinkedList<>();
@@ -125,8 +129,7 @@ public class ServerMock implements Server
 	private final PluginManagerMock pluginManager = new PluginManagerMock(this);
 	private final ScoreboardManagerMock scoreboardManager = new ScoreboardManagerMock();
 	private final BukkitSchedulerMock scheduler = new BukkitSchedulerMock();
-	// We can use the default Service Manager from Bukkit
-	private final SimpleServicesManager servicesManager = new SimpleServicesManager();
+	private final ServicesManagerMock servicesManager = new ServicesManagerMock();
 	private final PlayerList playerList = new PlayerList();
 	private ConsoleCommandSender consoleSender;
 	private GameMode defaultGameMode = GameMode.SURVIVAL;
@@ -346,7 +349,7 @@ public class ServerMock implements Server
 	public CommandResult executeConsole(String command, String... args)
 	{
 		assertMainThread();
-		return executeConsole(getPluginCommand(command), args);
+		return executeConsole(getCommandMap().getCommand(command), args);
 	}
 
 	/**
@@ -376,7 +379,7 @@ public class ServerMock implements Server
 	public CommandResult executePlayer(String command, String... args)
 	{
 		assertMainThread();
-		return executePlayer(getPluginCommand(command), args);
+		return executePlayer(getCommandMap().getCommand(command), args);
 	}
 
 	/**
@@ -411,7 +414,7 @@ public class ServerMock implements Server
 	public CommandResult execute(String command, CommandSender sender, String... args)
 	{
 		assertMainThread();
-		return execute(getPluginCommand(command), sender, args);
+		return execute(getCommandMap().getCommand(command), sender, args);
 	}
 
 	@Override
@@ -474,42 +477,18 @@ public class ServerMock implements Server
 		return pluginManager;
 	}
 
-	/**
-	 * Checks if the label given is a possible label of the command.
-	 *
-	 * @param command The command to check against.
-	 * @param label   The label that should be checked if it's a label for the command.
-	 * @return {@code true} if the label is a label of the command, {@code false} if it's not.
-	 */
-	private boolean isLabelOfCommand(PluginCommand command, String label)
+	@NotNull
+	public MockCommandMap getCommandMap()
 	{
-		assertMainThread();
-		if (label.equals(command.getName()))
-		{
-			return true;
-		}
-		for (String alias : command.getAliases())
-		{
-			if (label.equals(alias))
-			{
-				return true;
-			}
-		}
-		return false;
+		return commandMap;
 	}
 
 	@Override
 	public PluginCommand getPluginCommand(String name)
 	{
 		assertMainThread();
-		for (PluginCommand command : getPluginManager().getCommands())
-		{
-			if (isLabelOfCommand(command, name))
-			{
-				return command;
-			}
-		}
-		return null;
+		Command command = getCommandMap().getCommand(name);
+		return command instanceof PluginCommand ? (PluginCommand) command : null;
 	}
 
 	@Override
@@ -528,6 +507,7 @@ public class ServerMock implements Server
 		return consoleSender;
 	}
 
+	@NotNull
 	public InventoryMock createInventory(InventoryHolder owner, InventoryType type, String title, int size)
 	{
 		assertMainThread();
@@ -589,6 +569,12 @@ public class ServerMock implements Server
 		case ENCHANTING:
 		// TODO: This Inventory Type needs to be implemented
 		case BREWING:
+		// TODO: This Inventory Type needs to be implemented
+		case CRAFTING:
+		// TODO: This Inventory Type needs to be implemented
+		case CREATIVE:
+		// TODO: This Inventory Type needs to be implemented
+		case MERCHANT:
 		// TODO: This Inventory Type needs to be implemented
 		default:
 			throw new UnimplementedOperationException("Inventory type not yet supported");
@@ -719,6 +705,24 @@ public class ServerMock implements Server
 		}
 
 		return players.size();
+	}
+
+	@Override
+	public int broadcast(String message, String permission)
+	{
+		Collection<? extends PlayerMock> players = getOnlinePlayers();
+		int count = 0;
+
+		for (Player player : players)
+		{
+			if (player.hasPermission(permission)) 
+			{
+				player.sendMessage(message);
+				count++;
+			}
+		}
+
+		return count;
 	}
 
 	/**
@@ -955,7 +959,7 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public SimpleServicesManager getServicesManager()
+	public ServicesManagerMock getServicesManager()
 	{
 		return servicesManager;
 	}
@@ -1060,13 +1064,6 @@ public class ServerMock implements Server
 
 	@Override
 	public void shutdown()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public int broadcast(String message, String permission)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1226,8 +1223,7 @@ public class ServerMock implements Server
 	@Override
 	public BossBar createBossBar(String title, BarColor color, BarStyle style, BarFlag... flags)
 	{
-		BossBar bar = new BossBarMock(title, color, style, flags);
-		return bar;
+		return new BossBarMock(title, color, style, flags);
 	}
 
 	@Override
@@ -1252,6 +1248,7 @@ public class ServerMock implements Server
 	}
 
 	@Override
+	@Deprecated
 	public UnsafeValues getUnsafe()
 	{
 		return unsafe;
@@ -1295,7 +1292,8 @@ public class ServerMock implements Server
 	 *
 	 * @return The newly created {@link Tag}
 	 */
-	public Tag<Material> createMaterialTag(NamespacedKey key, String registryKey, Material... materials)
+	@NotNull
+	public Tag<Material> createMaterialTag(@NotNull NamespacedKey key, @NotNull String registryKey, @NotNull Material... materials)
 	{
 		Validate.notNull(key, "A NamespacedKey must never be null");
 
@@ -1385,7 +1383,7 @@ public class ServerMock implements Server
 		PotionEffectType.stopAcceptingRegistrations();
 	}
 
-	private void registerPotionEffectType(int id, String name, boolean instant, int rgb)
+	private void registerPotionEffectType(int id, @NotNull String name, boolean instant, int rgb)
 	{
 		PotionEffectType type = new MockPotionEffectType(id, name, instant, Color.fromRGB(rgb));
 		PotionEffectType.registerPotionEffectType(type);
@@ -1463,11 +1461,6 @@ public class ServerMock implements Server
 		throw new UnimplementedOperationException();
 	}
 
-	public MockCommandMap getCommandMap()
-	{
-		return commandMap;
-	}
-
 	@Override
 	public int getTicksPerWaterSpawns()
 	{
@@ -1507,16 +1500,50 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public Spigot spigot()
+	public int getMaxWorldSize()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public int getMaxWorldSize()
+	public ServerSpigotMock spigot()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return serverSpigotMock;
+	}
+
+	public class ServerSpigotMock extends Server.Spigot
+	{
+		@NotNull
+		@Override
+        public YamlConfiguration getConfig()
+		{
+			// TODO Auto-generated method stub
+			throw new UnimplementedOperationException();
+        }
+
+        @Override
+        public void broadcast(@NotNull BaseComponent component)
+        {
+    		for (Player player : getOnlinePlayers())
+    		{
+    			player.spigot().sendMessage(component);
+    		}
+        }
+
+        @Override
+        public void broadcast(@NotNull BaseComponent... components)
+        {
+    		for (Player player : getOnlinePlayers())
+    		{
+    			player.spigot().sendMessage(components);
+    		}
+        }
+
+        @Override
+        public void restart()
+        {
+        	throw new UnsupportedOperationException("Not supported.");
+        }
 	}
 }
