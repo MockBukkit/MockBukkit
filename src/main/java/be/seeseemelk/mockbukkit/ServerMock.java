@@ -1511,7 +1511,7 @@ public class ServerMock implements Server
 	{
 		return serverSpigotMock;
 	}
-	
+
 	public class ServerSpigotMock extends Server.Spigot
 	{
 		@NotNull
