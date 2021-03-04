@@ -587,6 +587,19 @@ public class PlayerMockTest
 	}
 
 	@Test
+	public void getPlayerListName_Default_SameAsPlayerUsername()
+	{
+		assertEquals(player.getName(), player.getPlayerListName());
+	}
+
+	@Test
+	public void getPlayerListName_NameSet_NameSet()
+	{
+		player.setPlayerListName("Some Name");
+		assertEquals("Some Name", player.getPlayerListName());
+	}
+
+	@Test
 	public void chat_AnyMessage_AsyncEventFired()
 	{
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);

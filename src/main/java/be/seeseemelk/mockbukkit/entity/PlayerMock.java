@@ -56,6 +56,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 	private EnderChestInventoryMock enderChest = null;
 	private GameMode gamemode = GameMode.SURVIVAL;
 	private String displayName = null;
+	private String playerListName = null;
 	private int expTotal = 0;
 	private float exp = 0;
 	private int foodLevel = 20;
@@ -857,15 +858,13 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public String getPlayerListName()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.playerListName == null ? getName() : this.playerListName;
 	}
 
 	@Override
 	public void setPlayerListName(String name)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.playerListName = name;
 	}
 
 	@Override
