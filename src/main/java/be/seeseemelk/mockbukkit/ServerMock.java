@@ -1515,7 +1515,7 @@ public class ServerMock implements Server
 	public class ServerSpigotMock extends Server.Spigot
 	{
 		@NotNull
-        @Override
+		@Override
         public YamlConfiguration getConfig()
 		{
 			// TODO Auto-generated method stub
