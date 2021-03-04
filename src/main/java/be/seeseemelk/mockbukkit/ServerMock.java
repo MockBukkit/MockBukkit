@@ -707,6 +707,24 @@ public class ServerMock implements Server
 		return players.size();
 	}
 
+	@Override
+	public int broadcast(String message, String permission)
+	{
+		Collection<? extends PlayerMock> players = getOnlinePlayers();
+		int count = 0;
+
+		for (Player player : players)
+		{
+			if (player.hasPermission(permission)) 
+			{
+				player.sendMessage(message);
+				count++;
+			}
+		}
+
+		return count;
+	}
+
 	/**
 	 * Registers any classes that are serializable with the ConfigurationSerializable system of Bukkit.
 	 */
@@ -1052,13 +1070,6 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public int broadcast(String message, String permission)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public OfflinePlayer getOfflinePlayer(String name)
 	{
 		return playerList.getOfflinePlayer(name);
@@ -1212,8 +1223,7 @@ public class ServerMock implements Server
 	@Override
 	public BossBar createBossBar(String title, BarColor color, BarStyle style, BarFlag... flags)
 	{
-		BossBar bar = new BossBarMock(title, color, style, flags);
-		return bar;
+		return new BossBarMock(title, color, style, flags);
 	}
 
 	@Override
@@ -1238,6 +1248,7 @@ public class ServerMock implements Server
 	}
 
 	@Override
+	@Deprecated
 	public UnsafeValues getUnsafe()
 	{
 		return unsafe;
@@ -1281,7 +1292,8 @@ public class ServerMock implements Server
 	 *
 	 * @return The newly created {@link Tag}
 	 */
-	public Tag<Material> createMaterialTag(NamespacedKey key, String registryKey, Material... materials)
+	@NotNull
+	public Tag<Material> createMaterialTag(@NotNull NamespacedKey key, @NotNull String registryKey, @NotNull Material... materials)
 	{
 		Validate.notNull(key, "A NamespacedKey must never be null");
 
@@ -1371,7 +1383,7 @@ public class ServerMock implements Server
 		PotionEffectType.stopAcceptingRegistrations();
 	}
 
-	private void registerPotionEffectType(int id, String name, boolean instant, int rgb)
+	private void registerPotionEffectType(int id, @NotNull String name, boolean instant, int rgb)
 	{
 		PotionEffectType type = new MockPotionEffectType(id, name, instant, Color.fromRGB(rgb));
 		PotionEffectType.registerPotionEffectType(type);
