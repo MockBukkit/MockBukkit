@@ -2024,7 +2024,49 @@ public class PlayerMock extends LivingEntityMock implements Player
 	}
 
 	@Override
-	public org.bukkit.entity.Player.Spigot spigot()
+	public int getSaturatedRegenRate()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setSaturatedRegenRate(int ticks)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getUnsaturatedRegenRate()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setUnsaturatedRegenRate(int ticks)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getStarvationRate()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setStarvationRate(int ticks)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public PlayerSpigotMock spigot()
 	{
 		return playerSpigotMock;
 	}
