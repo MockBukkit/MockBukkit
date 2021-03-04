@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -54,6 +55,18 @@ public class BlockMockTest
 		Location location = new Location(world, 5, 2, 1);
 		block = new BlockMock(Material.AIR, location);
 		assertEquals(location, block.getLocation());
+	}
+
+	@Test
+	public void getChunk_LocalBlock_Matches() {
+		WorldMock world = new WorldMock();
+		Location location = new Location(world, -10, 5, 30);
+		Block worldBlock = world.getBlockAt(location);
+		Chunk chunk = worldBlock.getChunk();
+		int localX = location.getBlockX() - (chunk.getX() << 4);
+		int localZ = location.getBlockZ() - (chunk.getZ() << 4);
+		Block chunkBlock = chunk.getBlock(localX, location.getBlockY(), localZ);
+		assertEquals(worldBlock, chunkBlock);
 	}
 
 	@Test

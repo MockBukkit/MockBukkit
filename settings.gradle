@@ -1,5 +1,5 @@
 gradle.ext.apiVersion = '1.16'
 gradle.ext.apiVersionFull = '1.16.5-R0.1-SNAPSHOT'
-gradle.ext.version = '0.28.2'
+gradle.ext.version = '0.30.1'
 
 rootProject.name = 'MockBukkit-' + gradle.ext.apiVersion
