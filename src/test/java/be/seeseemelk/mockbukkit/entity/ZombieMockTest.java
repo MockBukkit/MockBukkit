@@ -15,7 +15,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import static org.junit.Assert.*;
 
-public class ZombieMockTest {
+public class ZombieMockTest
+{
 	private ServerMock server;
 	private ZombieMock zombie;
 
@@ -41,7 +42,8 @@ public class ZombieMockTest {
 
 		server.getPluginManager().registerEvents(new Listener() {
 			@EventHandler
-			public void onDeath(EntityDeathEvent event) {
+			public void onDeath(EntityDeathEvent event)
+			{
 				eventDispatched.set(true);
 			}
 		}, plugin);

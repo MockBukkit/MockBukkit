@@ -639,12 +639,14 @@ public class PlayerMock extends LivingEntityMock implements Player
 		this.closeInventory();
 
 		// Clear the Inventory if keep-inventory is not enabled
-		if (!event.getKeepInventory()) {
+		if (!event.getKeepInventory())
+		{
 			this.getInventory().clear();
 			// Should someone try to provoke a RespawnEvent, they will now find the Inventory to be empty
 		}
 
-		if (!event.getKeepLevel()) {
+		if (!event.getKeepLevel())
+		{
 			this.setLevel(0);
 			this.setExp(0);
 		}

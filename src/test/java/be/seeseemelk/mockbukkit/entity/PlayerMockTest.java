@@ -220,12 +220,14 @@ public class PlayerMockTest
 	}
 
 	@Test
-	public void kill_PLayerDeathEventDispatched() {
+	public void kill_PLayerDeathEventDispatched()
+	{
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
 		AtomicBoolean eventDispatched = new AtomicBoolean();
 		server.getPluginManager().registerEvents(new Listener() {
 			@EventHandler
-			public void onDeath(PlayerDeathEvent event) {
+			public void onDeath(PlayerDeathEvent event)
+			{
 				eventDispatched.set(true);
 			}
 		}, plugin);
@@ -235,7 +237,8 @@ public class PlayerMockTest
 	}
 
 	@Test
-	public void kill_NoKeepInventory_PlayerReset() {
+	public void kill_NoKeepInventory_PlayerReset()
+	{
 		player.getWorld().setGameRule(GameRule.KEEP_INVENTORY, false);
 		player.kill();
 
@@ -247,7 +250,8 @@ public class PlayerMockTest
 	}
 
 	@Test
-	public void kill_KeepInventory_inventoryKept() {
+	public void kill_KeepInventory_inventoryKept()
+	{
 		player.getWorld().setGameRule(GameRule.KEEP_INVENTORY, true);
 		player.getInventory().addItem(new ItemStack(Material.DIRT));
 		player.kill();
@@ -256,12 +260,14 @@ public class PlayerMockTest
 	}
 
 	@Test
-	public void getKiller_Default_null() {
+	public void getKiller_Default_null()
+	{
 		assertNull(player.getKiller());
 	}
 
 	@Test
-	public void getKiller_SomeValue_SetExactly() {
+	public void getKiller_SomeValue_SetExactly()
+	{
 		PlayerMock killer = server.addPlayer();
 		player.setKiller(killer);
 		assertEquals(killer, player.getKiller());

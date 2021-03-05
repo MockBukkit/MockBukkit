@@ -116,7 +116,8 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	public void setMaxHealth(double health)
 	{
 		getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(health);
-		if (this.health > health) {
+		if (this.health > health)
+		{
 			this.health = health;
 		}
 	}
@@ -328,7 +329,8 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		throw new UnimplementedOperationException();
 	}
 
-	public void setKiller(Player killer) {
+	public void setKiller(Player killer)
+	{
 		this.killer = killer;
 	}
 
