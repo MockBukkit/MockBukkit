@@ -27,7 +27,7 @@ import be.seeseemelk.mockbukkit.entity.PlayerMock;
  * @author TheBusyBiscuit
  * 
  */
-public class PlayerList
+public class MockPlayerList
 {
 	private int maxPlayers = Integer.MAX_VALUE;
 

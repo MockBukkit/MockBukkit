@@ -50,7 +50,6 @@ import org.bukkit.event.world.TimeSkipEvent;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.material.MaterialData;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.BoundingBox;
@@ -71,7 +70,6 @@ import be.seeseemelk.mockbukkit.metadata.MetadataTable;
 /**
  * A mock world object. Note that it is made to be as simple as possible. It is by no means an efficient implementation.
  */
-@SuppressWarnings("deprecation")
 public class WorldMock implements World
 {
 	private final Map<Coordinate, BlockMock> blocks = new HashMap<>();
@@ -767,8 +765,9 @@ public class WorldMock implements World
 		throw new UnimplementedOperationException();
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
-	public FallingBlock spawnFallingBlock(Location location, MaterialData data) throws IllegalArgumentException
+	public FallingBlock spawnFallingBlock(Location location, org.bukkit.material.MaterialData data) throws IllegalArgumentException
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
