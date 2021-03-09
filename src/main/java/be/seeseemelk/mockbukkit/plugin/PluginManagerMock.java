@@ -385,8 +385,13 @@ public class PluginManagerMock implements PluginManager
 	}
 
 	@Override
-	public void callEvent(Event event) throws IllegalStateException
+	public void callEvent(@NotNull Event event)
 	{
+		if (event.isAsynchronous() && server.isOnMainThread())
+		{
+			throw new IllegalStateException("Asynchronous Events cannot be called on the main Thread.");
+		}
+		
 		events.add(event);
 		HandlerList handlers = event.getHandlers();
 		RegisteredListener[] listeners = handlers.getRegisteredListeners();
@@ -394,6 +399,16 @@ public class PluginManagerMock implements PluginManager
 		{
 			callRegisteredListener(l, event);
 		}
+	}
+	
+	public void callEventAsynchronously(@NotNull Event event)
+	{
+		if (!event.isAsynchronous())
+		{
+			throw new IllegalStateException("Synchronous Events cannot be called asynchronously.");
+		}
+
+		server.getScheduler().runTaskAsynchronously(null, () -> callEvent(event));
 	}
 
 	private void callRegisteredListener(@NotNull RegisteredListener registration, @NotNull Event event)
