@@ -39,9 +39,9 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	private final AtomicReference<Exception> asyncException = new AtomicReference<>();
 	private long currentTick = 0;
 	private int id = 0;
-	private long holdExecutor = 60000;
+	private long executorTimeout = 60000;
 
-	private static Runnable runTask(ScheduledTask task) {
+	private static Runnable wrapTask(ScheduledTask task) {
 		return () -> {
 			task.setRunning(true);
 			task.run();
@@ -50,7 +50,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	}
 
 
-	public void setHoldExecutor(long holdExecutor) {
+	public void setShutdownTimeout(long timeout) {
 		this.holdExecutor = holdExecutor;
 	}
 
@@ -458,7 +458,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 
 		private TaskList()
 		{
-			tasks = new HashMap<>();
+			tasks = new ConcurrentHashMap<>();
 			taskLock = new ReentrantReadWriteLock();
 		}
 
@@ -473,9 +473,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			if (task == null) {
 				return false;
 			}
-			taskLock.writeLock().lock();
 			tasks.put(task.getTaskId(), task);
-			taskLock.writeLock().unlock();
 			return true;
 		}
 
@@ -517,12 +515,9 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			if (tasks.size() == 0) {
 				return out;
 			}
-			taskLock.readLock().lock();
 			if (out.addAll(tasks.values())) {
-				taskLock.readLock().unlock();
 				return out;
 			} else {
-				taskLock.readLock().unlock();
 				throw new RuntimeException("Could not get current task list.");
 			}
 
