@@ -13,6 +13,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang.Validate;
 import org.bukkit.BlockChangeDelegate;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
@@ -438,22 +439,33 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public Item dropItem(@NotNull Location loc, ItemStack item)
+	public ItemEntityMock dropItem(@NotNull Location loc, @NotNull ItemStack item, @NotNull Consumer<Item> function)
 	{
-		if (item == null || item.getType() == Material.AIR)
-		{
-			throw new IllegalArgumentException("Cannot drop null or air");
-		}
+		Validate.notNull(loc, "The provided location must not be null.");
+		Validate.notNull(function, "The provided function must not be null.");
+		Validate.notNull(item, "Cannot drop items that are null.");
+		Validate.isTrue(!item.getType().isAir(), "Cannot drop air.");
 
 		ItemEntityMock entity = new ItemEntityMock(server, UUID.randomUUID(), item);
 		entity.setLocation(loc);
+
+		function.accept(entity);
 		server.registerEntity(entity);
+
 		return entity;
 	}
 
 	@Override
-	public Item dropItemNaturally(@NotNull Location location, ItemStack item)
+	public ItemEntityMock dropItem(@NotNull Location loc, @NotNull ItemStack item)
 	{
+		return dropItem(loc, item, e -> {});
+	}
+	
+	@Override
+	public ItemEntityMock dropItemNaturally(@NotNull Location location, @NotNull ItemStack item, @NotNull Consumer<Item> function)
+	{
+		Validate.notNull(location, "The provided location must not be null.");
+
 		Random random = ThreadLocalRandom.current();
 
 		double xs = random.nextFloat() * 0.5F + 0.25;
@@ -465,7 +477,13 @@ public class WorldMock implements World
 		loc.setY(loc.getY() + ys);
 		loc.setZ(loc.getZ() + zs);
 
-		return dropItem(loc, item);
+		return dropItem(loc, item, function);
+	}
+
+	@Override
+	public ItemEntityMock dropItemNaturally(@NotNull Location loc, @NotNull ItemStack item)
+	{
+		return dropItemNaturally(loc, item, e -> {});
 	}
 
 	@Override
