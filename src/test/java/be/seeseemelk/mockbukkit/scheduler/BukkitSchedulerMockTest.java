@@ -241,7 +241,7 @@ public class BukkitSchedulerMockTest
 		assertEquals(2, scheduler.getActiveRunningCount());
 		scheduler.performOneTick();
 		assertEquals(2, scheduler.getActiveRunningCount());
-		scheduler.setHoldExecutor(300);
+		scheduler.setShutdownTimeout(300);
 		scheduler.shutdown();
 	}
 
@@ -263,7 +263,7 @@ public class BukkitSchedulerMockTest
 			}
 		});
 		assertEquals(1, scheduler.getActiveRunningCount());
-		scheduler.setHoldExecutor(10);
+		scheduler.setShutdownTimeout(10);
 		scheduler.shutdown();
 	}
 
