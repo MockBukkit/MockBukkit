@@ -78,10 +78,12 @@ import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryViewMock;
 import be.seeseemelk.mockbukkit.inventory.SimpleInventoryViewMock;
+import be.seeseemelk.mockbukkit.sound.AudioExperience;
+import be.seeseemelk.mockbukkit.sound.SoundReceiver;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.BaseComponent;
 
-public class PlayerMock extends LivingEntityMock implements Player
+public class PlayerMock extends LivingEntityMock implements Player, SoundReceiver
 {
 	private boolean online;
 	private PlayerInventoryMock inventory = null;
@@ -1024,53 +1026,11 @@ public class PlayerMock extends LivingEntityMock implements Player
 	{
 		heardSounds.add(new AudioExperience(sound, category, location, volume, pitch));
 	}
-
-	public void assertSoundHeard(@NotNull String message, @NotNull Sound sound)
+	
+	@Override
+	public @NotNull List<AudioExperience> getHeardSounds()
 	{
-		assertSoundHeard(message, sound, e -> true);
-	}
-
-	public void assertSoundHeard(@NotNull String message, @NotNull String sound)
-	{
-		assertSoundHeard(message, sound, e -> true);
-	}
-
-	public void assertSoundHeard(@NotNull String message, @NotNull Sound sound, @NotNull Predicate<AudioExperience> predicate)
-	{
-		assertSoundHeard(message, sound.getKey().getKey(), predicate);
-	}
-
-	public void assertSoundHeard(@NotNull String message, @NotNull String sound, @NotNull Predicate<AudioExperience> predicate)
-	{
-		for (AudioExperience audio : heardSounds)
-		{
-			if (audio.getSound().equals(sound) && predicate.test(audio))
-			{
-				return;
-			}
-		}
-
-		fail(message);
-	}
-
-	public void assertSoundHeard(@NotNull Sound sound)
-	{
-		assertSoundHeard("Sound Heard Assertion failed", sound);
-	}
-
-	public void assertSoundHeard(@NotNull String sound)
-	{
-		assertSoundHeard("Sound Heard Assertion failed", sound);
-	}
-
-	public void assertSoundHeard(@NotNull Sound sound, @NotNull Predicate<AudioExperience> predicate)
-	{
-		assertSoundHeard("Sound Heard Assertion failed", sound, predicate);
-	}
-
-	public void assertSoundHeard(@NotNull String sound, @NotNull Predicate<AudioExperience> predicate)
-	{
-		assertSoundHeard("Sound Heard Assertion failed", sound, predicate);
+		return heardSounds;
 	}
 
 	@Override
@@ -1082,8 +1042,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public void stopSound(String sound)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		stopSound(sound, SoundCategory.MASTER);
 	}
 
 	@Override
@@ -1095,8 +1054,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public void stopSound(String sound, SoundCategory category)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// We will just pretend the Sound has stopped.
 	}
 
 	@Override

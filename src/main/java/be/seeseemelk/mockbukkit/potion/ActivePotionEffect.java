@@ -1,10 +1,12 @@
-package be.seeseemelk.mockbukkit.entity;
+package be.seeseemelk.mockbukkit.potion;
 
 import java.util.concurrent.TimeUnit;
 
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffect;
 import org.jetbrains.annotations.NotNull;
+
+import be.seeseemelk.mockbukkit.entity.LivingEntityMock;
 
 /**
  * This class represents an active {@link PotionEffect} which was applied to a {@link LivingEntity}.
@@ -13,13 +15,13 @@ import org.jetbrains.annotations.NotNull;
  *
  * @see LivingEntityMock#addPotionEffect(PotionEffect)
  */
-final class ActivePotionEffect
+public final class ActivePotionEffect
 {
 
 	private final PotionEffect effect;
 	private final long timestamp;
 
-	ActivePotionEffect(@NotNull PotionEffect effect)
+	public ActivePotionEffect(@NotNull PotionEffect effect)
 	{
 		this.effect = effect;
 		this.timestamp = System.currentTimeMillis();

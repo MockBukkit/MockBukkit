@@ -1,4 +1,4 @@
-package be.seeseemelk.mockbukkit.entity;
+package be.seeseemelk.mockbukkit.sound;
 
 import org.apache.commons.lang.Validate;
 import org.bukkit.Location;
@@ -21,7 +21,7 @@ public final class AudioExperience
 	private final float volume;
 	private final float pitch;
 
-	AudioExperience(@NotNull String sound, @NotNull SoundCategory category, @NotNull Location loc, float volume,
+	public AudioExperience(@NotNull String sound, @NotNull SoundCategory category, @NotNull Location loc, float volume,
 			float pitch)
 	{
 		Validate.notNull(sound, "The played sound cannot be null!");
@@ -35,7 +35,7 @@ public final class AudioExperience
 		this.pitch = pitch;
 	}
 
-	AudioExperience(@NotNull Sound sound, @NotNull SoundCategory category, @NotNull Location loc, float volume,
+	public AudioExperience(@NotNull Sound sound, @NotNull SoundCategory category, @NotNull Location loc, float volume,
 			float pitch)
 	{
 		this(sound.getKey().getKey(), category, loc, volume, pitch);
