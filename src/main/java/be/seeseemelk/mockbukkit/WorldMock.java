@@ -67,6 +67,7 @@ import be.seeseemelk.mockbukkit.entity.FireworkMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
 import be.seeseemelk.mockbukkit.entity.ZombieMock;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * A mock world object. Note that it is made to be as simple as possible. It is by no means an efficient implementation.
@@ -453,6 +454,15 @@ public class WorldMock implements World
 		return entity;
 	}
 
+	@NotNull
+	@Override
+	public Item dropItem(@NotNull Location location, @NotNull ItemStack item, @Nullable Consumer<Item> function)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+
+	}
+
 	@Override
 	public Item dropItemNaturally(@NotNull Location location, ItemStack item)
 	{
@@ -468,6 +478,14 @@ public class WorldMock implements World
 		loc.setZ(loc.getZ() + zs);
 
 		return dropItem(loc, item);
+	}
+
+	@NotNull
+	@Override
+	public Item dropItemNaturally(@NotNull Location location, @NotNull ItemStack item, @Nullable Consumer<Item> function) {
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+
 	}
 
 	@Override

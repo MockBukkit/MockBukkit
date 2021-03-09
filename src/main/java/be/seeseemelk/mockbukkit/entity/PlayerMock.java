@@ -890,8 +890,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 		AsyncPlayerChatEvent eventAsync = new AsyncPlayerChatEvent(false, this, msg,
 		        new HashSet<>(Bukkit.getOnlinePlayers()));
 		PlayerChatEvent eventSync = new PlayerChatEvent(this, msg);
-		MockBukkit.getMock().getScheduler().runTaskAsynchronously(null,
-		        () -> Bukkit.getPluginManager().callEvent(eventAsync));
+		MockBukkit.getMock().getScheduler().executeAsyncChatEvent(eventAsync);
 		Bukkit.getPluginManager().callEvent(eventSync);
 	}
 

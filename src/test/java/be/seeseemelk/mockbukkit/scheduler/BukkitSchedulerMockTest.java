@@ -13,6 +13,10 @@ import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.TestPlugin;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
 import org.junit.Before;
 import org.junit.Test;
@@ -188,6 +192,82 @@ public class BukkitSchedulerMockTest
 		task.cancel();
 		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
 	}
+
+	@Test
+	public void cancellingAllTaskbyPlugin()
+	{
+		MockBukkit.mock();
+		MockBukkit.load(TestPlugin.class);
+		Plugin plugin = MockBukkit.getMock().getPluginManager().getPlugin("MockBukkitTestPlugin");
+		BukkitSchedulerMock scheduler1 = MockBukkit.getMock().getScheduler();
+		assertEquals(0, scheduler1.getNumberOfQueuedAsyncTasks());
+		scheduler1.runTaskLaterAsynchronously(plugin, () -> {}, 5);
+		scheduler1.runTaskLaterAsynchronously(plugin, () -> {}, 10);
+		BukkitTask task = scheduler1.runTaskLaterAsynchronously(null, () -> {}, 5);
+		assertEquals(3, scheduler1.getNumberOfQueuedAsyncTasks());
+		scheduler1.cancelTasks(plugin);
+		assertEquals(1, scheduler1.getNumberOfQueuedAsyncTasks());
+		scheduler1.cancelTask(task.getTaskId());
+		assertEquals(0, scheduler1.getNumberOfQueuedAsyncTasks());
+		MockBukkit.unmock();
+	}
+
+
+	@Test(expected = RuntimeException.class)
+	public void longScheduledRunningTask_Throws_RunTimeException(){
+		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
+		scheduler.runTaskAsynchronously(null, () -> {
+			while(true){
+				try {
+					Thread.sleep(10L);
+				} catch (InterruptedException e) {
+					throw new RuntimeException(e);
+				}
+			}
+		});
+		scheduler.runTaskLaterAsynchronously(null, () -> {
+			while(true){
+				try {
+					Thread.sleep(10L);
+				} catch (InterruptedException e) {
+					throw new RuntimeException(e);
+				}
+			}
+		},2);
+		assertEquals(1, scheduler.getActiveRunningCount());
+		scheduler.performOneTick();
+		assertEquals(1, scheduler.getActiveRunningCount());
+		scheduler.performOneTick();
+		assertEquals(2, scheduler.getActiveRunningCount());
+		scheduler.performOneTick();
+		assertEquals(2, scheduler.getActiveRunningCount());
+		scheduler.setHoldExecutor(300);
+		scheduler.shutdown();
+	}
+
+	@Test(expected = RuntimeException.class,timeout = 1000L)
+	public void longRunningTask_Throws_RunTimeException(){
+		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
+		testTask = scheduler.runTaskAsynchronously(null, () -> {
+			boolean alive = true;
+			while (alive)
+			{
+				if(testTask.isCancelled()){
+					alive = false;
+				}
+				try {
+					Thread.sleep(10L);
+				} catch (InterruptedException e) {
+					throw new RuntimeException(e);
+				}
+			}
+		});
+		assertEquals(1, scheduler.getActiveRunningCount());
+		scheduler.setHoldExecutor(10);
+		scheduler.shutdown();
+	}
+
+
 }
 
 

@@ -14,6 +14,7 @@ public class ScheduledTask implements BukkitTask
 	private boolean isSync;
 	private boolean isCancelled = false;
 	private long scheduledTick;
+	private boolean running;
 	private Runnable runnable;
 	private List<Runnable> cancelListeners = new LinkedList<>();
 
@@ -24,7 +25,18 @@ public class ScheduledTask implements BukkitTask
 		this.isSync = isSync;
 		this.scheduledTick = scheduledTick;
 		this.runnable = runnable;
+		this.running = false;
 	}
+
+
+	public boolean isRunning() {
+		return running;
+	}
+
+	public void setRunning(boolean running) {
+		this.running = running;
+	}
+
 
 	/**
 	 * Get the tick at which the task is scheduled to run at.
