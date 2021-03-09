@@ -452,12 +452,10 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	private static class TaskList {
 
 		private final Map<Integer, ScheduledTask> tasks;
-		private final ReadWriteLock taskLock;
 
 		private TaskList()
 		{
 			tasks = new ConcurrentHashMap<>();
-			taskLock = new ReentrantReadWriteLock();
 		}
 
 		/**
