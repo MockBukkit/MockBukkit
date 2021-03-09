@@ -94,9 +94,9 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		for (ScheduledTask task : oldTasks) {
 			if (task.getScheduledTick() == currentTick && !task.isCancelled()) {
 				if (task.isSync()) {
-					runTask(task).run();
+					wrapTask(task).run();
 				} else {
-					pool.submit(runTask(task));
+					pool.submit(wrapTask(task));
 				}
 
 				if (task instanceof RepeatingTask && !task.isCancelled())
@@ -340,7 +340,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public @NotNull BukkitTask runTaskAsynchronously(@NotNull Plugin plugin, @NotNull Runnable task)
 	{
 		ScheduledTask scheduledTask = new ScheduledTask(id++, plugin, false, currentTick, new AsyncRunnable(task));
-		pool.execute(runTask(scheduledTask));
+		pool.execute(wrapTask(scheduledTask));
 		return scheduledTask;
 	}
 
