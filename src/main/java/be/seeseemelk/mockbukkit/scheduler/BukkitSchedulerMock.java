@@ -49,7 +49,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 
 
 	public void setShutdownTimeout(long timeout) {
-		this.holdExecutor = holdExecutor;
+		this.executorTimeout = timeout;
 	}
 
 
@@ -158,7 +158,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 				Thread.currentThread().interrupt();
 				return;
 			}
-			if (System.currentTimeMillis() > (systemTime + holdExecutor)) {
+			if (System.currentTimeMillis() > (systemTime + executorTimeout)) {
 				// If a plugin has left a a runnable going and not cancelled it we could call this bad practice.
 				// we should now force interrupt all these runnables forcing them to throw Interrupted Exceptions.
 				// if they handle that
