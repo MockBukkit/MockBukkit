@@ -58,6 +58,7 @@ import org.bukkit.util.Consumer;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.entity.ArmorStandMock;
@@ -439,19 +440,21 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public ItemEntityMock dropItem(@NotNull Location loc, @NotNull ItemStack item, @NotNull Consumer<Item> function)
+	public ItemEntityMock dropItem(@NotNull Location loc, @NotNull ItemStack item, @Nullable Consumer<Item> function)
 	{
 		Validate.notNull(loc, "The provided location must not be null.");
-		Validate.notNull(function, "The provided function must not be null.");
 		Validate.notNull(item, "Cannot drop items that are null.");
 		Validate.isTrue(!item.getType().isAir(), "Cannot drop air.");
 
 		ItemEntityMock entity = new ItemEntityMock(server, UUID.randomUUID(), item);
 		entity.setLocation(loc);
 
-		function.accept(entity);
-		server.registerEntity(entity);
+		if (function != null)
+		{
+			function.accept(entity);
+		}
 
+		server.registerEntity(entity);
 		return entity;
 	}
 
@@ -462,7 +465,7 @@ public class WorldMock implements World
 	}
 	
 	@Override
-	public ItemEntityMock dropItemNaturally(@NotNull Location location, @NotNull ItemStack item, @NotNull Consumer<Item> function)
+	public ItemEntityMock dropItemNaturally(@NotNull Location location, @NotNull ItemStack item, @Nullable Consumer<Item> function)
 	{
 		Validate.notNull(location, "The provided location must not be null.");
 
