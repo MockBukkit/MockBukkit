@@ -1288,6 +1288,7 @@ public class ServerMock implements Server
 	 * constants defined in {@link Tag}.
 	 *
 	 * @param key       The {@link NamespacedKey} for this {@link Tag}
+	 * @param registryKey The name of the {@link TagRegistry}.
 	 * @param materials {@link Material Materials} which should be covered by this {@link Tag}
 	 *
 	 * @return The newly created {@link Tag}
