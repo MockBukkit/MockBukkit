@@ -1,9 +1,11 @@
 package be.seeseemelk.mockbukkit.entity;
 
+import org.apache.commons.lang.Validate;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * This class represents a {@link Sound} that was heard by a {@link Player}.
@@ -13,27 +15,40 @@ import org.bukkit.entity.Player;
  */
 public final class AudioExperience
 {
-	private final Sound sound;
+	private final String sound;
 	private final SoundCategory category;
 	private final Location location;
 	private final float volume;
 	private final float pitch;
 
-	AudioExperience(Sound sound, SoundCategory category, Location l, float volume, float pitch)
+	AudioExperience(@NotNull String sound, @NotNull SoundCategory category, @NotNull Location loc, float volume,
+			float pitch)
 	{
+		Validate.notNull(sound, "The played sound cannot be null!");
+		Validate.notNull(category, "The category must not be null!");
+		Validate.notNull(loc, "The location cannot be null!");
+
 		this.sound = sound;
 		this.category = category;
-		this.location = l;
+		this.location = loc;
 		this.volume = volume;
 		this.pitch = pitch;
 	}
 
+	AudioExperience(@NotNull Sound sound, @NotNull SoundCategory category, @NotNull Location loc, float volume,
+			float pitch)
+	{
+		this(sound.getKey().getKey(), category, loc, volume, pitch);
+	}
+
 	/**
-	 * This returns the {@link Sound} that was played.
+	 * This returns the {@link Sound} that was played. We return the {@link String} representation of the actual sound,
+	 * not the sound itself.
 	 *
-	 * @return The {@link Sound}
+	 * @return The {@link String} of the heard {@link Sound}.
 	 */
-	public Sound getSound()
+	@NotNull
+	public String getSound()
 	{
 		return sound;
 	}
@@ -43,6 +58,7 @@ public final class AudioExperience
 	 *
 	 * @return The {@link SoundCategory}
 	 */
+	@NotNull
 	public SoundCategory getCategory()
 	{
 		return category;
@@ -53,6 +69,7 @@ public final class AudioExperience
 	 *
 	 * @return The {@link Location}
 	 */
+	@NotNull
 	public Location getLocation()
 	{
 		return location;

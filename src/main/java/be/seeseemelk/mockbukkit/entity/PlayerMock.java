@@ -1004,9 +1004,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public void playSound(Location location, String sound, float volume, float pitch)
 	{
-		// The string sound is equivalent to the internal sound name, not Sound.valueOf()
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		heardSounds.add(new AudioExperience(sound, SoundCategory.MASTER, location, volume, pitch));
 	}
 
 	@Override
@@ -1018,9 +1016,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public void playSound(Location location, String sound, SoundCategory category, float volume, float pitch)
 	{
-		// The string sound is equivalent to the internal sound name, not Sound.valueOf()
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		heardSounds.add(new AudioExperience(sound, category, location, volume, pitch));
 	}
 
 	@Override
@@ -1029,16 +1025,26 @@ public class PlayerMock extends LivingEntityMock implements Player
 		heardSounds.add(new AudioExperience(sound, category, location, volume, pitch));
 	}
 
-	public void assertSoundHeard(String message, Sound sound)
+	public void assertSoundHeard(@NotNull String message, @NotNull Sound sound)
 	{
 		assertSoundHeard(message, sound, e -> true);
 	}
 
-	public void assertSoundHeard(String message, Sound sound, Predicate<AudioExperience> predicate)
+	public void assertSoundHeard(@NotNull String message, @NotNull String sound)
+	{
+		assertSoundHeard(message, sound, e -> true);
+	}
+
+	public void assertSoundHeard(@NotNull String message, @NotNull Sound sound, @NotNull Predicate<AudioExperience> predicate)
+	{
+		assertSoundHeard(message, sound.getKey().getKey(), predicate);
+	}
+
+	public void assertSoundHeard(@NotNull String message, @NotNull String sound, @NotNull Predicate<AudioExperience> predicate)
 	{
 		for (AudioExperience audio : heardSounds)
 		{
-			if (audio.getSound() == sound && predicate.test(audio))
+			if (audio.getSound().equals(sound) && predicate.test(audio))
 			{
 				return;
 			}
@@ -1047,12 +1053,22 @@ public class PlayerMock extends LivingEntityMock implements Player
 		fail(message);
 	}
 
-	public void assertSoundHeard(Sound sound)
+	public void assertSoundHeard(@NotNull Sound sound)
 	{
 		assertSoundHeard("Sound Heard Assertion failed", sound);
 	}
 
-	public void assertSoundHeard(Sound sound, Predicate<AudioExperience> predicate)
+	public void assertSoundHeard(@NotNull String sound)
+	{
+		assertSoundHeard("Sound Heard Assertion failed", sound);
+	}
+
+	public void assertSoundHeard(@NotNull Sound sound, @NotNull Predicate<AudioExperience> predicate)
+	{
+		assertSoundHeard("Sound Heard Assertion failed", sound, predicate);
+	}
+
+	public void assertSoundHeard(@NotNull String sound, @NotNull Predicate<AudioExperience> predicate)
 	{
 		assertSoundHeard("Sound Heard Assertion failed", sound, predicate);
 	}
