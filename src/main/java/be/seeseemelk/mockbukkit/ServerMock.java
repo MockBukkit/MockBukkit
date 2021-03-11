@@ -130,7 +130,7 @@ public class ServerMock implements Server
 	private final ScoreboardManagerMock scoreboardManager = new ScoreboardManagerMock();
 	private final BukkitSchedulerMock scheduler = new BukkitSchedulerMock();
 	private final ServicesManagerMock servicesManager = new ServicesManagerMock();
-	private final PlayerList playerList = new PlayerList();
+	private final MockPlayerList playerList = new MockPlayerList();
 	private ConsoleCommandSender consoleSender;
 	private GameMode defaultGameMode = GameMode.SURVIVAL;
 	private MockCommandMap commandMap;
