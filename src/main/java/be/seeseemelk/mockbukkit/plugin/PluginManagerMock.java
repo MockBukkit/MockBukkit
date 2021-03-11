@@ -56,7 +56,6 @@ import org.bukkit.plugin.UnknownDependencyException;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;
 import org.bukkit.plugin.java.JavaPluginUtils;
-import org.jetbrains.annotations.NotNull;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
@@ -64,19 +63,18 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 public class PluginManagerMock implements PluginManager
 {
 	private final ServerMock server;
-	private final JavaPluginLoader loader;
 	private final List<Plugin> plugins = new ArrayList<>();
+	private final JavaPluginLoader loader;
 	private final List<PluginCommand> commands = new ArrayList<>();
 	private final List<Event> events = new ArrayList<>();
 	private final List<File> temporaryFiles = new LinkedList<>();
+	private final List<Class<?>> pluginConstructorTypes = Arrays.asList(JavaPluginLoader.class,
+	        PluginDescriptionFile.class, File.class, File.class);
 	private final List<Permission> permissions = new ArrayList<>();
 	private final Map<Permissible, Set<String>> permissionSubscriptions = new HashMap<>();
 
-	private final List<Class<?>> pluginConstructorTypes = Arrays.asList(JavaPluginLoader.class,
-	        PluginDescriptionFile.class, File.class, File.class);
-
 	@SuppressWarnings("deprecation")
-	public PluginManagerMock(@NotNull ServerMock server)
+	public PluginManagerMock(ServerMock server)
 	{
 		this.server = server;
 		loader = new JavaPluginLoader(this.server);
@@ -107,7 +105,7 @@ public class PluginManagerMock implements PluginManager
 	 * @param message   The message to display when no event conforms.
 	 * @param predicate The predicate to test against.
 	 */
-	public void assertEventFired(@NotNull String message, @NotNull Predicate<Event> predicate)
+	public void assertEventFired(String message, Predicate<Event> predicate)
 	{
 		for (Event event : events)
 		{
@@ -122,7 +120,7 @@ public class PluginManagerMock implements PluginManager
 	 *
 	 * @param predicate The predicate to test against.
 	 */
-	public void assertEventFired(@NotNull Predicate<Event> predicate)
+	public void assertEventFired(Predicate<Event> predicate)
 	{
 		assertEventFired("Event assert failed", predicate);
 	}
@@ -163,7 +161,7 @@ public class PluginManagerMock implements PluginManager
 	 *
 	 * @param eventClass The class of the event to check for.
 	 */
-	public void assertEventFired(@NotNull Class<? extends Event> eventClass)
+	public void assertEventFired(Class<? extends Event> eventClass)
 	{
 		assertEventFired("No event of that type has been fired", eventClass::isInstance);
 	}
@@ -192,7 +190,6 @@ public class PluginManagerMock implements PluginManager
 	 *
 	 * @return A collection of all available commands.
 	 */
-	@NotNull
 	public Collection<PluginCommand> getCommands()
 	{
 		return Collections.unmodifiableList(commands);
@@ -206,7 +203,7 @@ public class PluginManagerMock implements PluginManager
 	 *                    should be an exact match while the rest don't have to be.
 	 * @return {@code true} if the constructor is compatible, {@code false} if it isn't.
 	 */
-	private boolean isConstructorCompatible(@NotNull Constructor<?> constructor, @NotNull Class<?>[] types)
+	private boolean isConstructorCompatible(Constructor<?> constructor, Class<?>[] types)
 	{
 		Class<?>[] parameters = constructor.getParameterTypes();
 		for (int i = 0; i < types.length; i++)
@@ -265,8 +262,7 @@ public class PluginManagerMock implements PluginManager
 	 * @return The created temporary directory.
 	 * @throws IOException when the directory could not be created.
 	 */
-	@NotNull
-	private File createTemporaryDirectory(@NotNull String name) throws IOException
+	private File createTemporaryDirectory(String name) throws IOException
 	{
 		Random random = ThreadLocalRandom.current();
 		File directory = Files.createTempDirectory(name + "-" + random.nextInt()).toFile();
@@ -279,7 +275,7 @@ public class PluginManagerMock implements PluginManager
 	 *
 	 * @param plugin The plugin that has been loaded.
 	 */
-	public void registerLoadedPlugin(@NotNull Plugin plugin)
+	public void registerLoadedPlugin(Plugin plugin)
 	{
 		addCommandsFrom(plugin);
 		plugins.add(plugin);
@@ -385,13 +381,8 @@ public class PluginManagerMock implements PluginManager
 	}
 
 	@Override
-	public void callEvent(@NotNull Event event)
+	public void callEvent(Event event) throws IllegalStateException
 	{
-		if (event.isAsynchronous() && server.isOnMainThread())
-		{
-			throw new IllegalStateException("Asynchronous Events cannot be called on the main Thread.");
-		}
-		
 		events.add(event);
 		HandlerList handlers = event.getHandlers();
 		RegisteredListener[] listeners = handlers.getRegisteredListeners();
@@ -400,18 +391,8 @@ public class PluginManagerMock implements PluginManager
 			callRegisteredListener(l, event);
 		}
 	}
-	
-	public void callEventAsynchronously(@NotNull Event event)
-	{
-		if (!event.isAsynchronous())
-		{
-			throw new IllegalStateException("Synchronous Events cannot be called asynchronously.");
-		}
 
-		server.getScheduler().runTaskAsynchronously(null, () -> callEvent(event));
-	}
-
-	private void callRegisteredListener(@NotNull RegisteredListener registration, @NotNull Event event)
+	private void callRegisteredListener(RegisteredListener registration, Event event)
 	{
 		if (!registration.getPlugin().isEnabled())
 		{
@@ -703,7 +684,8 @@ public class PluginManagerMock implements PluginManager
 	@Override
 	public void removePermission(Permission perm)
 	{
-		permissions.remove(perm);
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
