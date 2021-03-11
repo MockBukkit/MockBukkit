@@ -416,7 +416,7 @@ public class PluginManagerMock implements PluginManager
 		}
 
 		// Our Scheduler will call the Event on a dedicated Event Thread Executor
-		server.getScheduler().scheduleEventCall(() -> callEvent(event));
+		server.getScheduler().scheduleAsyncEventCall(() -> callEvent(event));
 	}
 
 	private void callRegisteredListener(@NotNull RegisteredListener registration, @NotNull Event event)
