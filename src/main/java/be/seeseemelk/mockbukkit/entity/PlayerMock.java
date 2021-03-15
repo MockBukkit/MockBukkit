@@ -628,8 +628,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 
 		if (!this.alive) return;
 
-		List<ItemStack> drops = Arrays.asList(this.getInventory().getContents());
-		PlayerDeathEvent event = new PlayerDeathEvent(this, drops, 0, getName() + " got killed");
+		PlayerDeathEvent event = new PlayerDeathEvent(this, getDrops(), getDroppedExp(), getName() + " got killed");
 		Boolean keepInventory = getWorld().getGameRuleValue(GameRule.KEEP_INVENTORY);
 		event.setKeepInventory(keepInventory != null && keepInventory);
 		event.setKeepLevel(keepInventory != null && keepInventory);
@@ -653,6 +652,11 @@ public class PlayerMock extends LivingEntityMock implements Player
 
 		this.setFoodLevel(0);
 		this.alive = false;
+	}
+
+	@Override
+	public List<ItemStack> getDrops() {
+		return Arrays.asList(this.getInventory().getContents());
 	}
 
 	@Override

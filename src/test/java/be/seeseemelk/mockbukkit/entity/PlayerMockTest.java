@@ -223,17 +223,8 @@ public class PlayerMockTest
 	public void kill_PLayerDeathEventDispatched()
 	{
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
-		AtomicBoolean eventDispatched = new AtomicBoolean();
-		server.getPluginManager().registerEvents(new Listener() {
-			@EventHandler
-			public void onDeath(PlayerDeathEvent event)
-			{
-				eventDispatched.set(true);
-			}
-		}, plugin);
-
 		player.kill();
-		assertTrue(eventDispatched.get());
+		server.getPluginManager().assertEventFired(PlayerDeathEvent.class);
 	}
 
 	@Test

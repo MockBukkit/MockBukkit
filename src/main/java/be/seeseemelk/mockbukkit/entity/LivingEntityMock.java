@@ -101,9 +101,17 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	{
 		this.health = 0;
 		if (!this.alive) return;
-		EntityDeathEvent event = new EntityDeathEvent(this, new ArrayList<>(), 0);
+		EntityDeathEvent event = new EntityDeathEvent(this, getDrops(), getDroppedExp());
 		Bukkit.getPluginManager().callEvent(event);
 		alive = false;
+	}
+
+	public List<ItemStack> getDrops() {
+		return new ArrayList<>();
+	}
+
+	public int getDroppedExp() {
+		return 0;
 	}
 
 	@Override
@@ -329,7 +337,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		throw new UnimplementedOperationException();
 	}
 
-	public void setKiller(Player killer)
+	public void setKiller(@Nullable Player killer)
 	{
 		this.killer = killer;
 	}
