@@ -426,7 +426,7 @@ public class ServerMock implements Server
 	@Override
 	public String getVersion()
 	{
-		return BUKKIT_VERSION;
+		return String.format("MockBukkit (MC: %s)", BUKKIT_VERSION);
 	}
 
 	@Override
