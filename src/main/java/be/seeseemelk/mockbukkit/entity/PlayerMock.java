@@ -623,7 +623,8 @@ public class PlayerMock extends LivingEntityMock implements Player
 	}
 
 	@Override
-	public void kill() {
+	public void kill()
+	{
 		this.health = 0;
 
 		if (!this.alive) return;
