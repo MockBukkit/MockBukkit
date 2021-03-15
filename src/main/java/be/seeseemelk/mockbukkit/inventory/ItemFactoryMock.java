@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.inventory;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
+import be.seeseemelk.mockbukkit.inventory.meta.BannerMetaMock;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFactory;
@@ -44,13 +45,15 @@ public class ItemFactoryMock implements ItemFactory
 			case SKULL_ITEM:
 				// TODO Auto-generated method stub
 				return SkullMetaMock.class;
+			case BANNER:
+				return BannerMetaMock.class;
 			case EGG:
 			case DRAGON_EGG:
 			default:
 				return ItemMetaMock.class;
 		}
 	}
-	
+
 	@Override
 	public ItemMeta getItemMeta(Material material)
 	{
@@ -63,20 +66,20 @@ public class ItemFactoryMock implements ItemFactory
 			throw new UnsupportedOperationException("Can't instantiate class");
 		}
 	}
-	
+
 	@Override
 	public boolean isApplicable(ItemMeta meta, ItemStack stack) throws IllegalArgumentException
 	{
 		return isApplicable(meta, stack.getType());
 	}
-	
+
 	@Override
 	public boolean isApplicable(ItemMeta meta, Material material) throws IllegalArgumentException
 	{
 		Class<? extends ItemMeta> target = getItemMetaClass(material);
 		return target.isInstance(meta);
 	}
-	
+
 	@Override
 	public boolean equals(ItemMeta meta1, ItemMeta meta2) throws IllegalArgumentException
 	{
@@ -89,13 +92,13 @@ public class ItemFactoryMock implements ItemFactory
 			return false;
 		}
 	}
-	
+
 	@Override
 	public ItemMeta asMetaFor(ItemMeta meta, ItemStack stack) throws IllegalArgumentException
 	{
 		return asMetaFor(meta, stack.getType());
 	}
-	
+
 	@Override
 	public ItemMeta asMetaFor(ItemMeta meta, Material material) throws IllegalArgumentException
 	{
@@ -123,7 +126,7 @@ public class ItemFactoryMock implements ItemFactory
 			}
 		}
 	}
-	
+
 	@Override
 	public Color getDefaultLeatherColor()
 	{
