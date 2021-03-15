@@ -66,6 +66,7 @@ public class BannerMetaMockTest
     public void getPattern_SetExactly()
     {
         Pattern pattern = new Pattern(DyeColor.MAGENTA, PatternType.DIAGONAL_LEFT_MIRROR);
+        meta.setPatterns(Collections.singletonList(null)); // so there is at least one pattern
         meta.setPattern(0, pattern);
         assertEquals(pattern, meta.getPattern(0));
     }
