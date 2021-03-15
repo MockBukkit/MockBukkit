@@ -1,8 +1,5 @@
 package be.seeseemelk.mockbukkit.inventory;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import be.seeseemelk.mockbukkit.inventory.meta.BannerMetaMock;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -14,6 +11,8 @@ import org.junit.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
+
+import static org.junit.Assert.*;
 
 public class ItemFactoryMockTest
 {
@@ -111,6 +110,24 @@ public class ItemFactoryMockTest
 
 		ItemMeta newMeta = factory.asMetaFor(meta, stack);
 		assertTrue(meta.equals(newMeta));
+	}
+
+	@Test
+	public void asMetaFor_BannerMeta_ReturnNewClone()
+	{
+		ItemStack stack = new ItemStack(Material.BANNER);
+		ItemMeta meta = stack.getItemMeta();
+
+		assertTrue(meta instanceof BannerMetaMock); // so we don't fail later
+
+		BannerMeta bannerMeta = (BannerMeta) meta;
+
+		bannerMeta.setDisplayName("My super banner");
+		stack.setItemMeta(bannerMeta);
+
+		ItemMeta newMeta = factory.asMetaFor(bannerMeta, stack);
+		assertTrue(newMeta instanceof BannerMetaMock);
+		assertEquals(meta, newMeta);
 	}
 }
 

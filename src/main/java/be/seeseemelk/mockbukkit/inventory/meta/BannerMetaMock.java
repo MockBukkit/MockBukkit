@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.inventory.meta;
 import org.bukkit.DyeColor;
 import org.bukkit.block.banner.Pattern;
 import org.bukkit.inventory.meta.BannerMeta;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,23 @@ public class BannerMetaMock extends ItemMetaMock implements BannerMeta
 {
     private DyeColor baseColor; // defaults to null
     private List<Pattern> patterns = new ArrayList<>();
+
+    public BannerMetaMock()
+    {
+        super();
+    }
+
+    public BannerMetaMock(ItemMeta meta)
+    {
+        super(meta);
+
+        if (meta instanceof BannerMeta) {
+            BannerMeta bannerMeta = (BannerMeta) meta;
+            this.setBaseColor(((BannerMeta) meta).getBaseColor());
+            this.setPatterns(((BannerMeta) meta).getPatterns());
+        }
+
+    }
 
     @Override
     public DyeColor getBaseColor()
