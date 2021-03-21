@@ -13,12 +13,12 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
 public class SimpleMobMock extends MobMock
 {
-	public SimpleMobMock(ServerMock server, UUID uuid)
+	public SimpleMobMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 	}
 
-	public SimpleMobMock(ServerMock server)
+	public SimpleMobMock(@NotNull ServerMock server)
 	{
 		this(server, UUID.randomUUID());
 	}
@@ -74,13 +74,6 @@ public class SimpleMobMock extends MobMock
 
 	@Override
 	public Set<UUID> getCollidableExemptions()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public Spigot spigot()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

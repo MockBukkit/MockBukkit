@@ -40,7 +40,7 @@ import be.seeseemelk.mockbukkit.command.MessageTarget;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
 import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
 
-public abstract class EntityMock implements Entity, MessageTarget
+public abstract class EntityMock extends Entity.Spigot implements Entity, MessageTarget
 {
 	private final ServerMock server;
 	private final UUID uuid;
@@ -816,5 +816,11 @@ public abstract class EntityMock implements Entity, MessageTarget
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+	
+	@Override
+	public Entity.Spigot spigot()
+	{
+		return this;
 	}
 }
