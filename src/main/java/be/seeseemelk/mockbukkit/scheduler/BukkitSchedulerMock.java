@@ -59,8 +59,12 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public void performOneTick()
 	{
 		currentTick++;
-		List<ScheduledTask> oldTasks = tasks;
-		tasks = new LinkedList<>();
+		List<ScheduledTask> oldTasks;
+		synchronized (tasks)
+		{
+			oldTasks = tasks;
+			tasks = new LinkedList<>();
+		}
 
 		for (ScheduledTask task : oldTasks)
 		{
@@ -79,13 +83,19 @@ public class BukkitSchedulerMock implements BukkitScheduler
 
 				if (task instanceof RepeatingTask && !task.isCancelled())
 				{
-					((RepeatingTask) task).updateScheduledTick();
-					tasks.add(task);
+					synchronized (tasks)
+					{
+						((RepeatingTask) task).updateScheduledTick();
+						tasks.add(task);
+					}
 				}
 			}
 			else if (!task.isCancelled())
 			{
-				tasks.add(task);
+				synchronized (tasks)
+				{
+					tasks.add(task);
+				}
 			}
 		}
 	}
@@ -155,7 +165,10 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	{
 		delay = Math.max(delay, 1);
 		ScheduledTask scheduledTask = new ScheduledTask(id++, plugin, true, currentTick + delay, task);
-		tasks.add(scheduledTask);
+		synchronized (tasks)
+		{
+			tasks.add(scheduledTask);
+		}
 		return scheduledTask;
 	}
 
@@ -164,7 +177,10 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	{
 		delay = Math.max(delay, 1);
 		RepeatingTask repeatingTask = new RepeatingTask(id++, plugin, true, currentTick + delay, period, task);
-		tasks.add(repeatingTask);
+		synchronized (tasks)
+		{
+			tasks.add(repeatingTask);
+		}
 		return repeatingTask;
 	}
 
@@ -250,12 +266,15 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public void cancelTask(int taskId)
 	{
-		for (ScheduledTask task : tasks)
+		synchronized (tasks)
 		{
-			if (task.getTaskId() == taskId)
+			for (ScheduledTask task : tasks)
 			{
-				task.cancel();
-				return;
+				if (task.getTaskId() == taskId)
+				{
+					task.cancel();
+					return;
+				}
 			}
 		}
 	}
@@ -263,11 +282,14 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public void cancelTasks(Plugin plugin)
 	{
-		for (ScheduledTask task : tasks)
+		synchronized (tasks)
 		{
-			if (task.getOwner().equals(plugin))
+			for (ScheduledTask task : tasks)
 			{
-				task.cancel();
+				if (task.getOwner().equals(plugin))
+				{
+					task.cancel();
+				}
 			}
 		}
 	}
@@ -282,12 +304,15 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public boolean isQueued(int taskId)
 	{
-		for (ScheduledTask task : tasks)
+		synchronized (tasks)
 		{
-			if (task.getTaskId() == taskId)
-				return !task.isCancelled();
+			for (ScheduledTask task : tasks)
+			{
+				if (task.getTaskId() == taskId)
+					return !task.isCancelled();
+			}
+			return false;
 		}
-		return false;
 	}
 
 	@Override
@@ -331,8 +356,11 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		ScheduledTask scheduledTask = new ScheduledTask(id++, plugin, false, currentTick + delay,
 				new AsyncRunnable(task));
 		scheduledTask.addOnCancelled(() -> asyncTasksQueued.decrementAndGet());
-		tasks.add(scheduledTask);
-		asyncTasksQueued.incrementAndGet();
+		synchronized (tasks)
+		{
+			tasks.add(scheduledTask);
+			asyncTasksQueued.incrementAndGet();
+		}
 		return scheduledTask;
 	}
 
@@ -347,7 +375,10 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	{
 		RepeatingTask scheduledTask = new RepeatingTask(id++, plugin, false, currentTick + delay, period,
 		        new AsyncRunnable(task));
-		tasks.add(scheduledTask);
+		synchronized (tasks)
+		{
+			tasks.add(scheduledTask);
+		}
 		return scheduledTask;
 	}
 
