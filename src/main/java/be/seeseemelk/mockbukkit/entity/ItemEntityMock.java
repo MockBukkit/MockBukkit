@@ -91,11 +91,4 @@ public class ItemEntityMock extends EntityMock implements Item
 		throw new UnimplementedOperationException();
 	}
 
-	@Override
-	public Spigot spigot()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
 }

@@ -78,11 +78,4 @@ public class SimpleEntityMock extends EntityMock
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
-	@Override
-	public Spigot spigot()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
 }

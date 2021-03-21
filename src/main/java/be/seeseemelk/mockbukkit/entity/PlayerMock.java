@@ -1,15 +1,37 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
-import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
-import be.seeseemelk.mockbukkit.inventory.PlayerInventoryViewMock;
-import be.seeseemelk.mockbukkit.inventory.SimpleInventoryViewMock;
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.BaseComponent;
-import org.bukkit.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
+import java.net.InetSocketAddress;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
+import java.util.function.Predicate;
+
+import org.bukkit.BanList;
+import org.bukkit.Bukkit;
+import org.bukkit.DyeColor;
+import org.bukkit.Effect;
+import org.bukkit.FluidCollisionMode;
+import org.bukkit.GameMode;
+import org.bukkit.Instrument;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.Note;
+import org.bukkit.Particle;
+import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
+import org.bukkit.Statistic;
+import org.bukkit.WeatherType;
+import org.bukkit.World;
 import org.bukkit.advancement.Advancement;
 import org.bukkit.advancement.AdvancementProgress;
 import org.bukkit.attribute.Attribute;
@@ -18,8 +40,13 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationAbandonedEvent;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Pose;
+import org.bukkit.entity.Villager;
 import org.bukkit.entity.memory.MemoryKey;
+import org.bukkit.event.Event;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
@@ -29,8 +56,14 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
-import org.bukkit.inventory.*;
+import org.bukkit.inventory.EntityEquipment;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.InventoryView.Property;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.MainHand;
+import org.bukkit.inventory.Merchant;
+import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scoreboard.Scoreboard;
@@ -39,22 +72,26 @@ import org.bukkit.util.RayTraceResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.net.InetSocketAddress;
-import java.nio.charset.StandardCharsets;
-import java.util.*;
-import java.util.function.Predicate;
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.PlayerInventoryViewMock;
+import be.seeseemelk.mockbukkit.inventory.SimpleInventoryViewMock;
+import be.seeseemelk.mockbukkit.sound.AudioExperience;
+import be.seeseemelk.mockbukkit.sound.SoundReceiver;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.BaseComponent;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-
-@SuppressWarnings("deprecation")
-public class PlayerMock extends LivingEntityMock implements Player
+public class PlayerMock extends LivingEntityMock implements Player, SoundReceiver
 {
 	private boolean online;
 	private PlayerInventoryMock inventory = null;
 	private EnderChestInventoryMock enderChest = null;
 	private GameMode gamemode = GameMode.SURVIVAL;
 	private String displayName = null;
+	private String playerListName = null;
 	private int expTotal = 0;
 	private float exp = 0;
 	private int foodLevel = 20;
@@ -211,13 +248,16 @@ public class PlayerMock extends LivingEntityMock implements Player
 	{
 		Location respawnLocation = getBedSpawnLocation();
 		boolean isBedSpawn = respawnLocation != null;
+		
+		// TODO: Respawn Anchors are not yet supported.
+		boolean isAnchorSpawn = false;
 
 		if (!isBedSpawn)
 		{
 			respawnLocation = getLocation().getWorld().getSpawnLocation();
 		}
 
-		PlayerRespawnEvent event = new PlayerRespawnEvent(this, respawnLocation, isBedSpawn);
+		PlayerRespawnEvent event = new PlayerRespawnEvent(this, respawnLocation, isBedSpawn, isAnchorSpawn);
 		Bukkit.getPluginManager().callEvent(event);
 
 		// Reset location and health
@@ -832,15 +872,13 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public String getPlayerListName()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.playerListName == null ? getName() : this.playerListName;
 	}
 
 	@Override
 	public void setPlayerListName(String name)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.playerListName = name;
 	}
 
 	@Override
@@ -967,9 +1005,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public void playSound(Location location, String sound, float volume, float pitch)
 	{
-		// The string sound is equivalent to the internal sound name, not Sound.valueOf()
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		heardSounds.add(new AudioExperience(sound, SoundCategory.MASTER, location, volume, pitch));
 	}
 
 	@Override
@@ -981,9 +1017,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public void playSound(Location location, String sound, SoundCategory category, float volume, float pitch)
 	{
-		// The string sound is equivalent to the internal sound name, not Sound.valueOf()
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		heardSounds.add(new AudioExperience(sound, category, location, volume, pitch));
 	}
 
 	@Override
@@ -991,33 +1025,11 @@ public class PlayerMock extends LivingEntityMock implements Player
 	{
 		heardSounds.add(new AudioExperience(sound, category, location, volume, pitch));
 	}
-
-	public void assertSoundHeard(String message, Sound sound)
+	
+	@Override
+	public @NotNull List<AudioExperience> getHeardSounds()
 	{
-		assertSoundHeard(message, sound, e -> true);
-	}
-
-	public void assertSoundHeard(String message, Sound sound, Predicate<AudioExperience> predicate)
-	{
-		for (AudioExperience audio : heardSounds)
-		{
-			if (audio.getSound() == sound && predicate.test(audio))
-			{
-				return;
-			}
-		}
-
-		fail(message);
-	}
-
-	public void assertSoundHeard(Sound sound)
-	{
-		assertSoundHeard("Sound Heard Assertion failed", sound);
-	}
-
-	public void assertSoundHeard(Sound sound, Predicate<AudioExperience> predicate)
-	{
-		assertSoundHeard("Sound Heard Assertion failed", sound, predicate);
+		return heardSounds;
 	}
 
 	@Override
@@ -1029,8 +1041,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public void stopSound(String sound)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		stopSound(sound, SoundCategory.MASTER);
 	}
 
 	@Override
@@ -1042,8 +1053,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public void stopSound(String sound, SoundCategory category)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// We will just pretend the Sound has stopped.
 	}
 
 	@Override

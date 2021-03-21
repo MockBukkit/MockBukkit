@@ -76,11 +76,4 @@ public class FireworkMock extends ProjectileMock implements Firework
 		this.shotAtAngle = shotAtAngle;
 	}
 
-	@Override
-	public Spigot spigot()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
 }
