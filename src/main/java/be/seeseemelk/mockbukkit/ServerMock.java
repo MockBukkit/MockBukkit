@@ -421,7 +421,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public String getVersion()
 	{
-		return "0.1.0";
+		return String.format("MockBukkit (MC: %s)", BUKKIT_VERSION);
 	}
 
 	@Override
@@ -710,7 +710,7 @@ public class ServerMock extends Server.Spigot implements Server
 
 		for (Player player : players)
 		{
-			if (player.hasPermission(permission)) 
+			if (player.hasPermission(permission))
 			{
 				player.sendMessage(message);
 				count++;
