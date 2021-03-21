@@ -78,10 +78,12 @@ import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryViewMock;
 import be.seeseemelk.mockbukkit.inventory.SimpleInventoryViewMock;
+import be.seeseemelk.mockbukkit.sound.AudioExperience;
+import be.seeseemelk.mockbukkit.sound.SoundReceiver;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.BaseComponent;
 
-public class PlayerMock extends LivingEntityMock implements Player
+public class PlayerMock extends LivingEntityMock implements Player, SoundReceiver
 {
 	private boolean online;
 	private PlayerInventoryMock inventory = null;
@@ -245,13 +247,16 @@ public class PlayerMock extends LivingEntityMock implements Player
 	{
 		Location respawnLocation = getBedSpawnLocation();
 		boolean isBedSpawn = respawnLocation != null;
+		
+		// TODO: Respawn Anchors are not yet supported.
+		boolean isAnchorSpawn = false;
 
 		if (!isBedSpawn)
 		{
 			respawnLocation = getLocation().getWorld().getSpawnLocation();
 		}
 
-		PlayerRespawnEvent event = new PlayerRespawnEvent(this, respawnLocation, isBedSpawn,false);
+		PlayerRespawnEvent event = new PlayerRespawnEvent(this, respawnLocation, isBedSpawn, isAnchorSpawn);
 		Bukkit.getPluginManager().callEvent(event);
 
 		// Reset location and health
@@ -1004,9 +1009,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public void playSound(@NotNull Location location, @NotNull String sound, float volume, float pitch)
 	{
-		// The string sound is equivalent to the internal sound name, not Sound.valueOf()
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		heardSounds.add(new AudioExperience(sound, SoundCategory.MASTER, location, volume, pitch));
 	}
 
 	@Override
@@ -1018,9 +1021,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public void playSound(@NotNull Location location, @NotNull String sound, @NotNull SoundCategory category, float volume, float pitch)
 	{
-		// The string sound is equivalent to the internal sound name, not Sound.valueOf()
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		heardSounds.add(new AudioExperience(sound, category, location, volume, pitch));
 	}
 
 	@Override
@@ -1029,33 +1030,10 @@ public class PlayerMock extends LivingEntityMock implements Player
 		heardSounds.add(new AudioExperience(sound, category, location, volume, pitch));
 	}
 
-	public void assertSoundHeard(String message, Sound sound)
+	@Override
+	public @NotNull List<AudioExperience> getHeardSounds()
 	{
-		assertSoundHeard(message, sound, e -> true);
-	}
-
-	public void assertSoundHeard(String message, Sound sound, Predicate<AudioExperience> predicate)
-	{
-		for (AudioExperience audio : heardSounds)
-		{
-			if (audio.getSound() == sound && predicate.test(audio))
-			{
-				return;
-			}
-		}
-
-		fail(message);
-	}
-
-	@SuppressWarnings("unused")
-	public void assertSoundHeard(Sound sound)
-	{
-		assertSoundHeard("Sound Heard Assertion failed", sound);
-	}
-
-	public void assertSoundHeard(Sound sound, Predicate<AudioExperience> predicate)
-	{
-		assertSoundHeard("Sound Heard Assertion failed", sound, predicate);
+		return heardSounds;
 	}
 
 	@Override
@@ -1067,8 +1045,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public void stopSound(@NotNull String sound)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		stopSound(sound, SoundCategory.MASTER);
 	}
 
 	@Override
@@ -1080,8 +1057,7 @@ public class PlayerMock extends LivingEntityMock implements Player
 	@Override
 	public void stopSound(@NotNull String sound, SoundCategory category)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// We will just pretend the Sound has stopped.
 	}
 
 	@Override

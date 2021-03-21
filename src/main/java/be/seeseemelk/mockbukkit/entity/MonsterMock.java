@@ -57,11 +57,4 @@ public abstract class MonsterMock extends CreatureMock implements Monster
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
-	@Override
-	public Spigot spigot()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
 }

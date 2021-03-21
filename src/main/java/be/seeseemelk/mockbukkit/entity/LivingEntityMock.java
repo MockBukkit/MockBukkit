@@ -39,6 +39,7 @@ import com.google.common.base.Function;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.attribute.AttributeInstanceMock;
+import be.seeseemelk.mockbukkit.potion.ActivePotionEffect;
 
 public abstract class LivingEntityMock extends EntityMock implements LivingEntity
 {
