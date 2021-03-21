@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.entity;
 
+import org.apache.commons.lang.Validate;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.EntityEquipment;
@@ -225,14 +226,18 @@ public class EntityEquipmentMock implements EntityEquipment
 	public ItemStack[] getArmorContents()
 	{
 		return new ItemStack[]
-		{ getHelmet(), getChestplate(), getLeggings(), getBoots() };
+		{ getBoots(), getLeggings(), getChestplate(), getHelmet() };
 	}
 
 	@Override
-	public void setArmorContents(ItemStack[] items)
+	public void setArmorContents(@NotNull ItemStack[] items)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Validate.notNull(items, "The provided items must not be null.");
+
+		setBoots((items.length >= 1) ? items[0] : null);
+	    setLeggings((items.length >= 2) ? items[1] : null);
+	    setChestplate((items.length >= 3) ? items[2] : null);
+	    setHelmet((items.length >= 4) ? items[3] : null);
 	}
 
 	@Override

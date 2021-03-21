@@ -347,11 +347,4 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 		throw new UnimplementedOperationException();
 	}
 
-	@Override
-	public Spigot spigot()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
 }

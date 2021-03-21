@@ -39,7 +39,10 @@ import com.google.common.base.Function;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.attribute.AttributeInstanceMock;
+import be.seeseemelk.mockbukkit.potion.ActivePotionEffect;
+
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class LivingEntityMock extends EntityMock implements LivingEntity
 {
@@ -55,7 +58,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 
 	private final Set<ActivePotionEffect> activeEffects = new HashSet<>();
 
-	public LivingEntityMock(ServerMock server, UUID uuid)
+	public LivingEntityMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 

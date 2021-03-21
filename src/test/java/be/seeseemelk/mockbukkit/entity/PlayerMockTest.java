@@ -933,12 +933,30 @@ public class PlayerMockTest
 	@Test
 	public void testPlaySound()
 	{
-		player.playSound(player.getLocation(), Sound.ENTITY_SLIME_SQUISH, SoundCategory.AMBIENT, 1, 1);
+		Sound sound = Sound.ENTITY_SLIME_SQUISH;
+		float volume = 1;
+		float pitch = 1;
+		player.playSound(player.getLocation(), sound, SoundCategory.AMBIENT, volume, pitch);
 
-		player.assertSoundHeard(Sound.ENTITY_SLIME_SQUISH, audio ->
+		player.assertSoundHeard(sound, audio ->
 		{
 			return player.getLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.AMBIENT
-			&& audio.getVolume() == 1 && audio.getPitch() == 1;
+			&& audio.getVolume() == volume && audio.getPitch() == pitch;
+		});
+	}
+
+	@Test
+	public void testPlaySoundString()
+	{
+		String sound = "epic.mockbukkit.theme.song";
+		float volume = 0.25F;
+		float pitch = 0.75F;
+		player.playSound(player.getEyeLocation(), sound, SoundCategory.RECORDS, volume, pitch);
+
+		player.assertSoundHeard(sound, audio ->
+		{
+			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
+			&& audio.getVolume() == volume && audio.getPitch() == pitch;
 		});
 	}
 
