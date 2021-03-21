@@ -9,7 +9,6 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.data.BlockData;
-import org.bukkit.material.MaterialData;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
@@ -18,7 +17,6 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
 
-@SuppressWarnings("deprecation")
 public class BlockStateMock implements BlockState, Cloneable
 {
 
@@ -82,9 +80,9 @@ public class BlockStateMock implements BlockState, Cloneable
 
 	@Override
 	@Deprecated
-	public MaterialData getData()
+	public org.bukkit.material.MaterialData getData()
 	{
-		return new MaterialData(material);
+		return new org.bukkit.material.MaterialData(material);
 	}
 
 	@Override
@@ -143,7 +141,7 @@ public class BlockStateMock implements BlockState, Cloneable
 
 	@Override
 	@Deprecated
-	public void setData(@NotNull MaterialData data)
+	public void setData(@NotNull org.bukkit.material.MaterialData data)
 	{
 		this.material = data.getItemType();
 	}
