@@ -21,15 +21,15 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.Repairable;
-import org.bukkit.inventory.meta.tags.CustomItemTagContainer;
 import org.bukkit.persistence.PersistentDataContainer;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import com.google.common.collect.Multimap;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
 
-@SuppressWarnings("deprecation")
 public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 {
 
@@ -51,7 +51,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	{
 	}
 
-	public ItemMetaMock(ItemMeta meta)
+	public ItemMetaMock(@NotNull ItemMeta meta)
 	{
 		unbreakable = meta.isUnbreakable();
 		enchants = new HashMap<>(meta.getEnchants());
@@ -608,9 +608,10 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
-	public CustomItemTagContainer getCustomTagContainer()
+	@SuppressWarnings("deprecation")
+	public org.bukkit.inventory.meta.tags.CustomItemTagContainer getCustomTagContainer()
 	{
-		// TODO Auto-generated method stub
+		// This was replaced by PersistentDataContainer!
 		throw new UnimplementedOperationException();
 	}
 
@@ -633,7 +634,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
-	public void setCustomModelData(Integer data)
+	public void setCustomModelData(@Nullable Integer data)
 	{
 		this.customModelData = data;
 	}
