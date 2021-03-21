@@ -16,6 +16,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
@@ -25,10 +26,11 @@ public class InventoryMock implements Inventory
 	private final InventoryHolder holder;
 	private final InventoryType type;
 
-	public InventoryMock(InventoryHolder holder, int size, InventoryType type)
+	public InventoryMock(@Nullable InventoryHolder holder, int size, @NotNull InventoryType type)
 	{
 		Validate.isTrue(9 <= size && size <= 54 && size % 9 == 0,
 		                "Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got " + size + ")");
+		Validate.notNull(type, "The InventoryType must not be null!");
 
 		this.holder = holder;
 		this.type = type;
@@ -36,8 +38,10 @@ public class InventoryMock implements Inventory
 		items = new ItemStack[size];
 	}
 
-	public InventoryMock(InventoryHolder holder, InventoryType type)
+	public InventoryMock(@Nullable InventoryHolder holder, @NotNull InventoryType type)
 	{
+		Validate.notNull(type, "The InventoryType must not be null!");
+
 		this.holder = holder;
 		this.type = type;
 
@@ -49,7 +53,7 @@ public class InventoryMock implements Inventory
 	 *
 	 * @param condition The condition to check for.
 	 */
-	public void assertTrueForAll(Predicate<ItemStack> condition)
+	public void assertTrueForAll(@NotNull Predicate<ItemStack> condition)
 	{
 		for (ItemStack item : items)
 		{
@@ -62,7 +66,7 @@ public class InventoryMock implements Inventory
 	 *
 	 * @param condition The condition to check for.
 	 */
-	public void assertTrueForNonNulls(Predicate<ItemStack> condition)
+	public void assertTrueForNonNulls(@NotNull Predicate<ItemStack> condition)
 	{
 		assertTrueForAll(itemstack -> itemstack == null || condition.test(itemstack));
 	}
@@ -72,7 +76,7 @@ public class InventoryMock implements Inventory
 	 *
 	 * @param condition The condition to check for.
 	 */
-	public void assertTrueForSome(Predicate<ItemStack> condition)
+	public void assertTrueForSome(@NotNull Predicate<ItemStack> condition)
 	{
 		for (ItemStack item : items)
 		{
@@ -89,7 +93,7 @@ public class InventoryMock implements Inventory
 	 *
 	 * @param item The itemstack to compare everything to.
 	 */
-	public void assertContainsAny(ItemStack item)
+	public void assertContainsAny(@NotNull ItemStack item)
 	{
 		assertTrueForSome(item::isSimilar);
 	}
@@ -101,7 +105,7 @@ public class InventoryMock implements Inventory
 	 * @param item   The itemstack to search for.
 	 * @param amount The minimum amount of items that one should have.
 	 */
-	public void assertContainsAtLeast(ItemStack item, int amount)
+	public void assertContainsAtLeast(@NotNull ItemStack item, int amount)
 	{
 		int n = getNumberOfItems(item);
 		String message = String.format("Inventory contains only <%d> but expected at least <%d>", n, amount);
@@ -114,7 +118,7 @@ public class InventoryMock implements Inventory
 	 * @param item The item to check for.
 	 * @return The number of times the item is present in this inventory.
 	 */
-	public int getNumberOfItems(ItemStack item)
+	public int getNumberOfItems(@NotNull ItemStack item)
 	{
 		int amount = 0;
 		for (ItemStack itemstack : items)
@@ -151,7 +155,8 @@ public class InventoryMock implements Inventory
 	 * @param item The item to add.
 	 * @return The remaining stack that couldn't be added. If it's empty it just returns {@code null}.
 	 */
-	public ItemStack addItem(ItemStack item)
+	@Nullable
+	public ItemStack addItem(@NotNull ItemStack item)
 	{
 		item = item.clone();
 		for (int i = 0; i < items.length; i++)
