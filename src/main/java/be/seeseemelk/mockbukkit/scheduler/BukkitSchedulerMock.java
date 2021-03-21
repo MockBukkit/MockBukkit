@@ -28,7 +28,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	private ExecutorService pool = Executors.newCachedThreadPool();
 	private AtomicInteger asyncTasksRunning = new AtomicInteger();
 	private AtomicReference<Exception> asyncException = new AtomicReference<>();
-	private int asyncTasksQueued = 0;
+	private AtomicInteger asyncTasksQueued = new AtomicInteger();
 
 	/**
 	 * Shuts the scheduler down. Note that this function will throw exception that where thrown by old asynchronous
@@ -74,7 +74,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 				{
 					asyncTasksRunning.incrementAndGet();
 					pool.execute(task.getRunnable());
-					asyncTasksQueued--;
+					asyncTasksQueued.decrementAndGet();
 				}
 
 				if (task instanceof RepeatingTask && !task.isCancelled())
@@ -110,7 +110,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	 */
 	public int getNumberOfQueuedAsyncTasks()
 	{
-		return asyncTasksQueued;
+		return asyncTasksQueued.get();
 	}
 
 	/**
@@ -120,7 +120,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public void waitAsyncTasksFinished()
 	{
 		// Make sure all tasks get to execute. (except for repeating asynchronous tasks, they only will fire once)
-		while (asyncTasksQueued > 0)
+		while (asyncTasksQueued.get() > 0)
 			performOneTick();
 
 		// Wait for all tasks to finish executing.
@@ -330,9 +330,9 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	{
 		ScheduledTask scheduledTask = new ScheduledTask(id++, plugin, false, currentTick + delay,
 				new AsyncRunnable(task));
-		scheduledTask.addOnCancelled(() -> asyncTasksQueued--);
+		scheduledTask.addOnCancelled(() -> asyncTasksQueued.decrementAndGet());
 		tasks.add(scheduledTask);
-		asyncTasksQueued++;
+		asyncTasksQueued.incrementAndGet();
 		return scheduledTask;
 	}
 
