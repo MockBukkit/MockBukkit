@@ -1066,7 +1066,7 @@ public class PlayerMockTest
 		World world = server.addSimpleWorld("world");
 		Location moveLocation = new Location(world, 10.0,-20.0,30.0);
 		player.setLocation(new Location(world, 0, 0, 0));
-		player.moveInstantly(moveLocation);
+		player.fakeMove(moveLocation);
 		server.getPluginManager().assertEventFired(PlayerMoveEvent.class);
 
 		assertTrue(player.getLocation().getX() == 10.0);
@@ -1088,7 +1088,7 @@ public class PlayerMockTest
 		World world = server.addSimpleWorld("world");
 		Location moveLocation = new Location(world, 10,-20,30, 10, 20);
 		player.setLocation(new Location(world, 0, 0, 0));
-		player.moveInstantly(moveLocation);
+		player.fakeMove(moveLocation);
 		server.getPluginManager().assertEventFired(PlayerMoveEvent.class);
 
 		assertTrue(player.getLocation().getX() == 0.0);
