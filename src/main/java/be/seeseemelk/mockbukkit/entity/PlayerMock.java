@@ -54,6 +54,7 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerChatEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.EntityEquipment;
@@ -264,6 +265,13 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		setHealth(getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
 		setLocation(event.getRespawnLocation().clone());
 		alive = true;
+	}
+
+	public void moveInstantly(Location moveLocation) {
+		PlayerMoveEvent event = new PlayerMoveEvent(this, this.getLocation(), moveLocation);
+		Bukkit.getPluginManager().callEvent(event);
+		if(event.isCancelled() == false)
+			this.setLocation(moveLocation.clone());
 	}
 
 	@Override
