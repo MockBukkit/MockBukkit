@@ -12,14 +12,15 @@ import java.util.function.Consumer;
 import java.util.logging.Logger;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+
+import org.apache.commons.lang.Validate;
 import org.bukkit.event.Event;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.scheduler.BukkitWorker;
-
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.jetbrains.annotations.NotNull;
 
 public class BukkitSchedulerMock implements BukkitScheduler
@@ -122,7 +123,9 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	{
 		// Make sure all tasks get to execute. (except for repeating asynchronous tasks, they only will fire once)
 		while (asyncTasksQueued > 0)
+		{
 			performOneTick();
+		}
 
 		// Wait for all tasks to finish executing.
 		while (asyncTasksRunning.get() > 0)
