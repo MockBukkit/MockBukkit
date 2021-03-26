@@ -1060,6 +1060,7 @@ public class PlayerMockTest
 		player.setGameMode(originalGM);
 		assertFalse(worked);
 	}
+
 	@Test
 	public void testPlayerMoveInstantly(){
 		World world = server.addSimpleWorld("world");
