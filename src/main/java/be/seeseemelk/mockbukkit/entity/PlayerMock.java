@@ -267,7 +267,8 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		alive = true;
 	}
 
-	public void moveInstantly(Location moveLocation) {
+	public void simulatePlayerMove(@NotNull Location moveLocation)
+	{
 		PlayerMoveEvent event = new PlayerMoveEvent(this, this.getLocation(), moveLocation);
 		Bukkit.getPluginManager().callEvent(event);
 		if(event.isCancelled() == false)
