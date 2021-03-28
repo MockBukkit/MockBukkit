@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -8,7 +9,6 @@ import java.util.UUID;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
@@ -24,7 +24,7 @@ public class ItemEntityMockTest
 {
 
 	private ServerMock server;
-	private World world;
+	private WorldMock world;
 
 	@Before
 	public void setUp()
@@ -73,6 +73,21 @@ public class ItemEntityMockTest
 
 		// Has the Location been slightly nudged?
 		assertNotEquals(location, entity.getLocation());
+	}
+
+	@Test
+	public void testDropItemConsumer()
+	{
+		ItemStack item = new ItemStack(Material.BEACON);
+		Location location = new Location(world, 200, 50, 500);
+
+		Item entity = world.dropItem(location, item, n -> {
+			// This consumer should be invoked BEFORE the actually spawned.
+			assertFalse(world.getEntities().contains(n));
+		});
+
+		assertEquals(item, entity.getItemStack());
+		assertTrue(world.getEntities().contains(entity));
 	}
 
 	@Test(expected = IllegalArgumentException.class)

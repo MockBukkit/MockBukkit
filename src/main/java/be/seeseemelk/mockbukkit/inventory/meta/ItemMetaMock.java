@@ -21,18 +21,22 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.Repairable;
-import org.bukkit.inventory.meta.tags.CustomItemTagContainer;
 import org.bukkit.persistence.PersistentDataContainer;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import com.google.common.collect.Multimap;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
 
-@SuppressWarnings("deprecation")
 public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 {
 
+	/*
+	 * If you add a new field, you need to add it to #hashCode, #equals, #serialize, and #deserialize.
+	 * If it's a mutable object, it also needs to be handled in #clone.
+	 */
 	private String displayName = null;
 	private List<String> lore = null;
 	private int damage = 0;
@@ -47,7 +51,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	{
 	}
 
-	public ItemMetaMock(ItemMeta meta)
+	public ItemMetaMock(@NotNull ItemMeta meta)
 	{
 		unbreakable = meta.isUnbreakable();
 		enchants = new HashMap<>(meta.getEnchants());
@@ -169,26 +173,72 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		int result = 1;
 		result = prime * result + ((displayName == null) ? 0 : displayName.hashCode());
 		result = prime * result + ((lore == null) ? 0 : lore.hashCode());
-		result = prime * result + Boolean.hashCode(unbreakable);
-		result = prime * result + enchants.hashCode();
-		result = prime * result + persistentDataContainer.hashCode();
 		result = prime * result + ((customModelData == null) ? 0 : customModelData.hashCode());
-		result = prime * result + repairCost;
+		result = prime * result + (enchants.isEmpty() ? 0 : enchants.hashCode());
+		result = prime * result + (hasRepairCost() ? this.repairCost : 0);
+		result = prime * result + (!persistentDataContainer.isEmpty() ? persistentDataContainer.hashCode() : 0);
+		result = prime * result + (hideFlags.isEmpty() ? 0 : hideFlags.hashCode());
+		result = prime * result + Boolean.hashCode(unbreakable);
+		result = prime * result + (hasDamage() ? this.damage : 0);
 		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj)
 	{
-		if (obj instanceof ItemMeta)
-		{
-			ItemMeta meta = (ItemMeta) obj;
-			return isLoreEquals(meta) && isDisplayNameEqual(meta);
-		}
-		else
+		if (!(obj instanceof ItemMeta))
 		{
 			return false;
 		}
+
+		ItemMeta meta = (ItemMeta) obj;
+
+		if (!isDisplayNameEqual(meta))
+		{
+			return false;
+		}
+		if (!isLoreEquals(meta))
+		{
+			return false;
+		}
+		if (obj instanceof Damageable)
+		{
+			Damageable damageable = (Damageable) obj;
+			if (hasDamage() != damageable.hasDamage() || hasDamage() && getDamage() != damageable.getDamage())
+			{
+				return false;
+			}
+		}
+		else if (hasDamage())
+		{
+			return false;
+		}
+		// Comparing using equals is fine - AbstractMap#equals only cares about content, not Map implementation.
+		if (!enchants.equals(meta.getEnchants()))
+		{
+			return false;
+		}
+		// Same as above - AbstractSet#equals only compares content.
+		if (!hideFlags.equals(meta.getItemFlags()))
+		{
+			return false;
+		}
+		// MockPDC does care about PDC impl, but this is in line with CB's equality comparison.
+		if (!persistentDataContainer.equals(meta.getPersistentDataContainer()))
+		{
+			return false;
+		}
+		if (unbreakable != meta.isUnbreakable())
+		{
+			return false;
+		}
+		if (hasCustomModelData() != meta.hasCustomModelData()
+				|| hasCustomModelData() && getCustomModelData() != meta.getCustomModelData())
+		{
+			return false;
+		}
+
+		return true;
 	}
 
 	@Override
@@ -558,9 +608,10 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
-	public CustomItemTagContainer getCustomTagContainer()
+	@SuppressWarnings("deprecation")
+	public org.bukkit.inventory.meta.tags.CustomItemTagContainer getCustomTagContainer()
 	{
-		// TODO Auto-generated method stub
+		// This was replaced by PersistentDataContainer!
 		throw new UnimplementedOperationException();
 	}
 
@@ -583,7 +634,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
-	public void setCustomModelData(Integer data)
+	public void setCustomModelData(@Nullable Integer data)
 	{
 		this.customModelData = data;
 	}
