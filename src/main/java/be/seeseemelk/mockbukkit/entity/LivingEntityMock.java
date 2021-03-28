@@ -109,7 +109,8 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		alive = false;
 	}
 
-	public List<ItemStack> getDrops() {
+	public List<ItemStack> getDrops()
+	{
 		return new ArrayList<>();
 	}
 
