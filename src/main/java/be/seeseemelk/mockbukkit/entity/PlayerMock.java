@@ -695,7 +695,8 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public List<ItemStack> getDrops() {
+	public List<ItemStack> getDrops()
+	{
 		return Arrays.asList(this.getInventory().getContents());
 	}
 
