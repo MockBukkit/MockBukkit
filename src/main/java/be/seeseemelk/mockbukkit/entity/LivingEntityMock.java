@@ -114,7 +114,8 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		return new ArrayList<>();
 	}
 
-	public int getDroppedExp() {
+	public int getDroppedExp()
+	{
 		return 0;
 	}
 
