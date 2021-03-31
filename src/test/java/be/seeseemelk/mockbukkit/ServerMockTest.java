@@ -19,6 +19,7 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.bukkit.Material;
+import org.bukkit.Warning;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
@@ -455,7 +456,7 @@ public class ServerMockTest
 		PlayerMock player = new PlayerMock(server, "operator");
 		server.addPlayer(player);
 		player.setOp(true);
-		
+
 		assertTrue(server.getOperators().contains(player));
 		assertEquals(1, server.getOperators().size());
 	}
@@ -544,6 +545,14 @@ public class ServerMockTest
 		}
 	}
 
+	@Test
+	public void testWarningStateAndShutdownMessage(){
+		final String SHUTDOWN_MESSAGE = "Shutting down server...";
+		Warning.WarningState defaultWarningState = Warning.WarningState.DEFAULT;
+
+		assertEquals(defaultWarningState, server.getWarningState());
+		assertEquals(SHUTDOWN_MESSAGE, server.getShutdownMessage());
+	}
 
 }
 
