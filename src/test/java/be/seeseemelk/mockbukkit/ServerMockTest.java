@@ -545,13 +545,53 @@ public class ServerMockTest
 		}
 	}
 
+	//this feature may be configurable in the future
+	//need to adapt later on.
 	@Test
-	public void testWarningStateAndShutdownMessage(){
-		final String SHUTDOWN_MESSAGE = "Shutting down server...";
-		Warning.WarningState defaultWarningState = Warning.WarningState.DEFAULT;
+	public void testConfigFile(){
+		//warningState included
+		Warning.WarningState warningState = Warning.WarningState.DEFAULT;
+		assertEquals(warningState, server.getWarningState());
 
-		assertEquals(defaultWarningState, server.getWarningState());
-		assertEquals(SHUTDOWN_MESSAGE, server.getShutdownMessage());
+		//default values from https://bukkit.fandom.com/wiki/Bukkit.yml
+		//settings
+		boolean allowEnd = true;
+		String updateFolder = "update";
+		assertEquals(allowEnd, server.getAllowEnd());
+		assertEquals(updateFolder, server.getUpdateFolder());
+
+		//default worldContainer is current working directory (according to the wiki)
+		File worldContainer = new File("");
+		long connectionThrottle = 4000;
+		String shutdownMessage = "Server closed";
+		assertEquals(worldContainer, server.getWorldContainer());
+		assertEquals(connectionThrottle, server.getConnectionThrottle());
+		assertEquals(shutdownMessage, server.getShutdownMessage());
+
+		//spawn-limits
+		int monsterSpawnLimit = 70;
+		int animalSpawnLimit = 10;
+		int waterAnimalSpawnLimit = 15;
+		int waterAmbientSpawnLimit = 20;
+		int ambientSpawnLimit = 15	;
+		assertEquals(monsterSpawnLimit, server.getMonsterSpawnLimit());
+		assertEquals(animalSpawnLimit, server.getAnimalSpawnLimit());
+		assertEquals(waterAnimalSpawnLimit, server.getWaterAnimalSpawnLimit());
+		assertEquals(waterAmbientSpawnLimit, server.getWaterAmbientSpawnLimit());
+		assertEquals(ambientSpawnLimit, server.getAmbientSpawnLimit());
+
+		//ticks-per
+		int ticksPerAnimalSpawns = 400;
+		int ticksPerMonsterSpawns = 1;
+		int ticksPerWaterSpawns = 1;
+		int ticksPerWaterAmbientSpawns = 1;
+		int ticksPerAmbientSpawns = 1;
+		assertEquals(ticksPerAnimalSpawns, server.getTicksPerAnimalSpawns());
+		assertEquals(ticksPerMonsterSpawns, server.getTicksPerMonsterSpawns());
+		assertEquals(ticksPerWaterSpawns, server.getTicksPerWaterSpawns());
+		assertEquals(ticksPerWaterAmbientSpawns, server.getTicksPerWaterAmbientSpawns());
+		assertEquals(ticksPerAmbientSpawns, server.getTicksPerAmbientSpawns());
+
 	}
 
 }

@@ -113,7 +113,6 @@ public class ServerMock extends Server.Spigot implements Server
 	private static final String BUKKIT_VERSION = "1.16.5";
 	private static final String JOIN_MESSAGE = "%s has joined the server.";
 	private static final String MOTD = "A Minecraft Server";
-	private static final String SHUTDOWN_MESSAGE = "Shutting down server...";
 
 	private final Logger logger = Logger.getLogger("ServerMock");
 	private final Thread mainThread = Thread.currentThread();
@@ -136,6 +135,34 @@ public class ServerMock extends Server.Spigot implements Server
 	private WarningState warningState = WarningState.DEFAULT;
 	private GameMode defaultGameMode = GameMode.SURVIVAL;
 	private ConsoleCommandSender consoleSender;
+
+	//===BEGIN bukkit.yml fields getters support
+	//maybe configurable in the future.
+	//todo: make this section configurable
+	//default values from https://bukkit.fandom.com/wiki/Bukkit.yml
+
+	//settings
+	private boolean allowEnd = true;
+	private String updateFolder = "update";
+	//default worldContainer is current working directory (according to the wiki)
+	private File worldContainer = new File("");
+	private long connectionThrottle = 4000;
+	private String shutdownMessage = "Server closed";
+
+	//spawn-limits
+	private int monsterSpawnLimit = 70;
+	private int animalSpawnLimit = 10;
+	private int waterAnimalSpawnLimit = 15;
+	private int waterAmbientSpawnLimit = 20;
+	private int ambientSpawnLimit = 15	;
+
+	//ticks-per
+	private int ticksPerAnimalSpawns = 400;
+	private int ticksPerMonsterSpawns = 1;
+	private int ticksPerWaterSpawns = 1;
+	private int ticksPerWaterAmbientSpawns = 1;
+	private int ticksPerAmbientSpawns = 1;
+	//===END bukkit.yml fields getters support
 
 	public ServerMock()
 	{
@@ -881,8 +908,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public boolean getAllowEnd()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return allowEnd;
 	}
 
 	@Override
@@ -923,36 +949,31 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public String getUpdateFolder()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return updateFolder;
 	}
 
 	@Override
 	public File getUpdateFolderFile()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return new File(getUpdateFolder());
 	}
 
 	@Override
 	public long getConnectionThrottle()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return connectionThrottle;
 	}
 
 	@Override
 	public int getTicksPerAnimalSpawns()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return ticksPerAnimalSpawns;
 	}
 
 	@Override
 	public int getTicksPerMonsterSpawns()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return ticksPerMonsterSpawns;
 	}
 
 	@Override
@@ -1097,8 +1118,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public File getWorldContainer()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return worldContainer;
 	}
 
 	@Override
@@ -1118,29 +1138,25 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public int getMonsterSpawnLimit()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return monsterSpawnLimit;
 	}
 
 	@Override
 	public int getAnimalSpawnLimit()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return animalSpawnLimit;
 	}
 
 	@Override
 	public int getWaterAnimalSpawnLimit()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return waterAnimalSpawnLimit;
 	}
 
 	@Override
 	public int getAmbientSpawnLimit()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return ambientSpawnLimit;
 	}
 
 	@Override
@@ -1158,7 +1174,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public String getShutdownMessage()
 	{
-		return SHUTDOWN_MESSAGE;
+		return shutdownMessage;
 	}
 
 	@Override
@@ -1460,15 +1476,13 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public int getTicksPerWaterSpawns()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return ticksPerWaterSpawns;
 	}
 
 	@Override
 	public int getTicksPerAmbientSpawns()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return ticksPerAmbientSpawns;
 	}
 
 	/**
@@ -1484,15 +1498,13 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public int getTicksPerWaterAmbientSpawns()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return ticksPerWaterAmbientSpawns;
 	}
 
 	@Override
 	public int getWaterAmbientSpawnLimit()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return waterAmbientSpawnLimit;
 	}
 
 	@Override
