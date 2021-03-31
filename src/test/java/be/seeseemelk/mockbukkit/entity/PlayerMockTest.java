@@ -915,7 +915,7 @@ public class PlayerMockTest
 	}
 
 	@Test
-	public void testCloseInventoryEvenFired()
+	public void testCloseInventoryEventFired()
 	{
 		Inventory inv = server.createInventory(null, 36);
 		player.openInventory(inv);
@@ -923,7 +923,7 @@ public class PlayerMockTest
 		player.closeInventory();
 		server.getPluginManager().assertEventFired(InventoryCloseEvent.class,
 		        e -> e.getPlayer() == player && e.getInventory() == inv);
-		assertNull(player.getItemOnCursor());
+		assertTrue(player.getItemOnCursor().getType().isAir());
 	}
 
 	@Test

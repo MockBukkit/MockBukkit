@@ -488,7 +488,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public @NotNull ItemStack getItemOnCursor()
 	{
-		return cursor == null ? new ItemStack(Material.AIR,0) : cursor.clone();
+		return cursor == null ? new ItemStack(Material.AIR, 0) : cursor.clone();
 	}
 
 	@Override
