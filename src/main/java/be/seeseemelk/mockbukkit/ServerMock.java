@@ -136,33 +136,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private GameMode defaultGameMode = GameMode.SURVIVAL;
 	private ConsoleCommandSender consoleSender;
 
-	//===BEGIN bukkit.yml fields getters support
-	//maybe configurable in the future.
-	//todo: make this section configurable
-	//default values from https://bukkit.fandom.com/wiki/Bukkit.yml
-
-	//settings
-	private boolean allowEnd = true;
-	private String updateFolder = "update";
-	//default worldContainer is current working directory (according to the wiki)
-	private File worldContainer = new File("");
-	private long connectionThrottle = 4000;
-	private String shutdownMessage = "Server closed";
-
-	//spawn-limits
-	private int monsterSpawnLimit = 70;
-	private int animalSpawnLimit = 10;
-	private int waterAnimalSpawnLimit = 15;
-	private int waterAmbientSpawnLimit = 20;
-	private int ambientSpawnLimit = 15	;
-
-	//ticks-per
-	private int ticksPerAnimalSpawns = 400;
-	private int ticksPerMonsterSpawns = 1;
-	private int ticksPerWaterSpawns = 1;
-	private int ticksPerWaterAmbientSpawns = 1;
-	private int ticksPerAmbientSpawns = 1;
-	//===END bukkit.yml fields getters support
+	private ServerSettingsMock serverSettings;
 
 	public ServerMock()
 	{
@@ -184,6 +158,14 @@ public class ServerMock extends Server.Spigot implements Server
 		}
 
 		logger.setLevel(Level.ALL);
+	}
+
+	public ServerSettingsMock getServerSettings(){
+		if (serverSettings == null)
+		{
+			serverSettings = new ServerSettingsMock();
+		}
+		return serverSettings;
 	}
 
 	/**
@@ -908,7 +890,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public boolean getAllowEnd()
 	{
-		return allowEnd;
+		return getServerSettings().isAllowEnd();
 	}
 
 	@Override
@@ -949,7 +931,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public String getUpdateFolder()
 	{
-		return updateFolder;
+		return getServerSettings().getUpdateFolder();
 	}
 
 	@Override
@@ -961,19 +943,19 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public long getConnectionThrottle()
 	{
-		return connectionThrottle;
+		return getServerSettings().getConnectionThrottle();
 	}
 
 	@Override
 	public int getTicksPerAnimalSpawns()
 	{
-		return ticksPerAnimalSpawns;
+		return getServerSettings().getTicksPerAnimalSpawns();
 	}
 
 	@Override
 	public int getTicksPerMonsterSpawns()
 	{
-		return ticksPerMonsterSpawns;
+		return getServerSettings().getTicksPerMonsterSpawns();
 	}
 
 	@Override
@@ -1118,7 +1100,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public File getWorldContainer()
 	{
-		return worldContainer;
+		return getServerSettings().getWorldContainer();
 	}
 
 	@Override
@@ -1138,25 +1120,25 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public int getMonsterSpawnLimit()
 	{
-		return monsterSpawnLimit;
+		return getServerSettings().getMonsterSpawnLimit();
 	}
 
 	@Override
 	public int getAnimalSpawnLimit()
 	{
-		return animalSpawnLimit;
+		return getServerSettings().getAnimalSpawnLimit();
 	}
 
 	@Override
 	public int getWaterAnimalSpawnLimit()
 	{
-		return waterAnimalSpawnLimit;
+		return getServerSettings().getWaterAnimalSpawnLimit();
 	}
 
 	@Override
 	public int getAmbientSpawnLimit()
 	{
-		return ambientSpawnLimit;
+		return getServerSettings().getAmbientSpawnLimit();
 	}
 
 	@Override
@@ -1174,7 +1156,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public String getShutdownMessage()
 	{
-		return shutdownMessage;
+		return getServerSettings().getShutdownMessage();
 	}
 
 	@Override
@@ -1476,13 +1458,13 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public int getTicksPerWaterSpawns()
 	{
-		return ticksPerWaterSpawns;
+		return getServerSettings().getTicksPerWaterSpawns();
 	}
 
 	@Override
 	public int getTicksPerAmbientSpawns()
 	{
-		return ticksPerAmbientSpawns;
+		return getServerSettings().getTicksPerAmbientSpawns();
 	}
 
 	/**
@@ -1498,13 +1480,13 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public int getTicksPerWaterAmbientSpawns()
 	{
-		return ticksPerWaterAmbientSpawns;
+		return getServerSettings().getTicksPerWaterAmbientSpawns();
 	}
 
 	@Override
 	public int getWaterAmbientSpawnLimit()
 	{
-		return waterAmbientSpawnLimit;
+		return getServerSettings().getWaterAmbientSpawnLimit();
 	}
 
 	@Override
