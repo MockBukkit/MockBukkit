@@ -17,7 +17,6 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 import org.jetbrains.annotations.NotNull;
 
-@SuppressWarnings("deprecation")
 public class ScoreboardMock implements Scoreboard
 {
 	private Map<String, ObjectiveMock> objectives = new HashMap<>();
@@ -146,6 +145,7 @@ public class ScoreboardMock implements Scoreboard
 		return team;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public Set<OfflinePlayer> getPlayers()
 	{

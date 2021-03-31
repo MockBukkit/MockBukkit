@@ -13,6 +13,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang.Validate;
 import org.bukkit.BlockChangeDelegate;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
@@ -50,7 +51,6 @@ import org.bukkit.event.world.TimeSkipEvent;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.material.MaterialData;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.BoundingBox;
@@ -58,6 +58,7 @@ import org.bukkit.util.Consumer;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.entity.ArmorStandMock;
@@ -72,9 +73,11 @@ import org.jetbrains.annotations.Nullable;
 /**
  * A mock world object. Note that it is made to be as simple as possible. It is by no means an efficient implementation.
  */
-@SuppressWarnings("deprecation")
 public class WorldMock implements World
 {
+	private static final int MIN_WORLD_HEIGHT = 0;
+	private static final int MAX_WORLD_HEIGHT = 256;
+	
 	private final Map<Coordinate, BlockMock> blocks = new HashMap<>();
 	private final Map<GameRule<?>, Object> gameRules = new HashMap<>();
 	private final MetadataTable metadataTable = new MetadataTable();
@@ -441,15 +444,20 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public Item dropItem(@NotNull Location loc, ItemStack item)
+	public ItemEntityMock dropItem(@NotNull Location loc, @NotNull ItemStack item, @Nullable Consumer<Item> function)
 	{
-		if (item == null || item.getType() == Material.AIR)
-		{
-			throw new IllegalArgumentException("Cannot drop null or air");
-		}
+		Validate.notNull(loc, "The provided location must not be null.");
+		Validate.notNull(item, "Cannot drop items that are null.");
+		Validate.isTrue(!item.getType().isAir(), "Cannot drop air.");
 
 		ItemEntityMock entity = new ItemEntityMock(server, UUID.randomUUID(), item);
 		entity.setLocation(loc);
+
+		if (function != null)
+		{
+			function.accept(entity);
+		}
+
 		server.registerEntity(entity);
 		return entity;
 	}
@@ -464,8 +472,16 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public Item dropItemNaturally(@NotNull Location location, ItemStack item)
+	public ItemEntityMock dropItem(@NotNull Location loc, @NotNull ItemStack item)
 	{
+		return dropItem(loc, item, e -> {});
+	}
+	
+	@Override
+	public ItemEntityMock dropItemNaturally(@NotNull Location location, @NotNull ItemStack item, @Nullable Consumer<Item> function)
+	{
+		Validate.notNull(location, "The provided location must not be null.");
+
 		Random random = ThreadLocalRandom.current();
 
 		double xs = random.nextFloat() * 0.5F + 0.25;
@@ -477,7 +493,13 @@ public class WorldMock implements World
 		loc.setY(loc.getY() + ys);
 		loc.setZ(loc.getZ() + zs);
 
-		return dropItem(loc, item);
+		return dropItem(loc, item, function);
+	}
+
+	@Override
+	public ItemEntityMock dropItemNaturally(@NotNull Location loc, @NotNull ItemStack item)
+	{
+		return dropItemNaturally(loc, item, e -> {});
 	}
 
 	@NotNull
@@ -785,8 +807,9 @@ public class WorldMock implements World
 		throw new UnimplementedOperationException();
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
-	public FallingBlock spawnFallingBlock(Location location, MaterialData data) throws IllegalArgumentException
+	public FallingBlock spawnFallingBlock(Location location, org.bukkit.material.MaterialData data) throws IllegalArgumentException
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -886,10 +909,15 @@ public class WorldMock implements World
 	}
 
 	@Override
+	public int getMinHeight()
+	{
+		return MIN_WORLD_HEIGHT;
+	}
+
+	@Override
 	public int getMaxHeight()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return MAX_WORLD_HEIGHT;
 	}
 
 	@Override

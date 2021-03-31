@@ -108,18 +108,16 @@ import be.seeseemelk.mockbukkit.tags.TagsMock;
 import net.md_5.bungee.api.chat.BaseComponent;
 
 @SuppressWarnings("deprecation")
-public class ServerMock implements Server
+public class ServerMock extends Server.Spigot implements Server
 {
 	private static final String BUKKIT_VERSION = "1.16.5";
 	private static final String JOIN_MESSAGE = "%s has joined the server.";
 	private static final String MOTD = "A Minecraft Server";
 
-	private final Logger logger;
-	private final Thread mainThread;
+	private final Logger logger = Logger.getLogger("ServerMock");
+	private final Thread mainThread = Thread.currentThread();
 	private final MockUnsafeValues unsafe = new MockUnsafeValues();
 	private final Map<String, TagRegistry> materialTags = new HashMap<>();
-
-	private final ServerSpigotMock serverSpigotMock = new ServerSpigotMock();
 	private final Set<EntityMock> entities = new HashSet<>();
 	private final List<World> worlds = new ArrayList<>();
 	private final List<Recipe> recipes = new LinkedList<>();
@@ -131,17 +129,14 @@ public class ServerMock implements Server
 	private final BukkitSchedulerMock scheduler = new BukkitSchedulerMock();
 	private final ServicesManagerMock servicesManager = new ServicesManagerMock();
 	private final PlayerList playerList = new PlayerList();
-	private ConsoleCommandSender consoleSender;
+	private final MockCommandMap commandMap = new MockCommandMap(this);
+	private final HelpMapMock helpMap = new HelpMapMock();
+
 	private GameMode defaultGameMode = GameMode.SURVIVAL;
-	private MockCommandMap commandMap;
-	private HelpMapMock helpMap;
+	private ConsoleCommandSender consoleSender;
 
 	public ServerMock()
 	{
-		mainThread = Thread.currentThread();
-		logger = Logger.getLogger("ServerMock");
-		commandMap = new MockCommandMap(this);
-		helpMap = new HelpMapMock();
 		ServerMock.registerSerializables();
 
 		// Register default Minecraft Potion Effect Types
@@ -426,7 +421,7 @@ public class ServerMock implements Server
 	@Override
 	public String getVersion()
 	{
-		return "0.1.0";
+		return String.format("MockBukkit (MC: %s)", BUKKIT_VERSION);
 	}
 
 	@Override
@@ -715,7 +710,7 @@ public class ServerMock implements Server
 
 		for (Player player : players)
 		{
-			if (player.hasPermission(permission)) 
+			if (player.hasPermission(permission))
 			{
 				player.sendMessage(message);
 				count++;
@@ -1288,6 +1283,7 @@ public class ServerMock implements Server
 	 * constants defined in {@link Tag}.
 	 *
 	 * @param key       The {@link NamespacedKey} for this {@link Tag}
+	 * @param registryKey The name of the {@link TagRegistry}.
 	 * @param materials {@link Material Materials} which should be covered by this {@link Tag}
 	 *
 	 * @return The newly created {@link Tag}
@@ -1507,43 +1503,42 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public ServerSpigotMock spigot()
+	public Server.Spigot spigot()
 	{
-		return serverSpigotMock;
+		return this;
 	}
+	
+	// Methods from Server.Spigot:
 
-	public class ServerSpigotMock extends Server.Spigot
+	@NotNull
+	@Override
+    public YamlConfiguration getConfig()
 	{
-		@NotNull
-		@Override
-        public YamlConfiguration getConfig()
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+    }
+
+    @Override
+    public void broadcast(@NotNull BaseComponent component)
+    {
+		for (Player player : getOnlinePlayers())
 		{
-			// TODO Auto-generated method stub
-			throw new UnimplementedOperationException();
-        }
+			player.spigot().sendMessage(component);
+		}
+    }
 
-        @Override
-        public void broadcast(@NotNull BaseComponent component)
-        {
-    		for (Player player : getOnlinePlayers())
-    		{
-    			player.spigot().sendMessage(component);
-    		}
-        }
+    @Override
+    public void broadcast(@NotNull BaseComponent... components)
+    {
+		for (Player player : getOnlinePlayers())
+		{
+			player.spigot().sendMessage(components);
+		}
+    }
 
-        @Override
-        public void broadcast(@NotNull BaseComponent... components)
-        {
-    		for (Player player : getOnlinePlayers())
-    		{
-    			player.spigot().sendMessage(components);
-    		}
-        }
-
-        @Override
-        public void restart()
-        {
-        	throw new UnsupportedOperationException("Not supported.");
-        }
-	}
+    @Override
+    public void restart()
+    {
+    	throw new UnsupportedOperationException("Not supported.");
+    }
 }
