@@ -113,6 +113,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private static final String BUKKIT_VERSION = "1.16.5";
 	private static final String JOIN_MESSAGE = "%s has joined the server.";
 	private static final String MOTD = "A Minecraft Server";
+	private static final String SHUTDOWN_MESSAGE = "Shutting down server...";
 
 	private final Logger logger = Logger.getLogger("ServerMock");
 	private final Thread mainThread = Thread.currentThread();
@@ -132,6 +133,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private final MockCommandMap commandMap = new MockCommandMap(this);
 	private final HelpMapMock helpMap = new HelpMapMock();
 
+	private WarningState warningState = WarningState.DEFAULT;
 	private GameMode defaultGameMode = GameMode.SURVIVAL;
 	private ConsoleCommandSender consoleSender;
 
@@ -1156,15 +1158,13 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public String getShutdownMessage()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return SHUTDOWN_MESSAGE;
 	}
 
 	@Override
 	public WarningState getWarningState()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return warningState;
 	}
 
 	@Override
@@ -1507,7 +1507,7 @@ public class ServerMock extends Server.Spigot implements Server
 	{
 		return this;
 	}
-	
+
 	// Methods from Server.Spigot:
 
 	@NotNull
