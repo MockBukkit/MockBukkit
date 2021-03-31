@@ -74,6 +74,9 @@ import be.seeseemelk.mockbukkit.metadata.MetadataTable;
  */
 public class WorldMock implements World
 {
+	private static final int MIN_WORLD_HEIGHT = 0;
+	private static final int MAX_WORLD_HEIGHT = 256;
+	
 	private final Map<Coordinate, BlockMock> blocks = new HashMap<>();
 	private final Map<GameRule<?>, Object> gameRules = new HashMap<>();
 	private final MetadataTable metadataTable = new MetadataTable();
@@ -888,10 +891,15 @@ public class WorldMock implements World
 	}
 
 	@Override
+	public int getMinHeight()
+	{
+		return MIN_WORLD_HEIGHT;
+	}
+
+	@Override
 	public int getMaxHeight()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return MAX_WORLD_HEIGHT;
 	}
 
 	@Override
