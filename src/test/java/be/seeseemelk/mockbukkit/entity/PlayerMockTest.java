@@ -42,6 +42,9 @@ import org.bukkit.event.player.PlayerExpChangeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.event.player.PlayerToggleFlightEvent;
+import org.bukkit.event.player.PlayerToggleSneakEvent;
+import org.bukkit.event.player.PlayerToggleSprintEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
@@ -1058,5 +1061,28 @@ public class PlayerMockTest
 		boolean worked = player.simulateBlockPlace(Material.STONE, location);
 		player.setGameMode(originalGM);
 		assertFalse(worked);
+	}
+
+	@Test
+	public void testSprint()
+	{
+		player.setSprinting(true);
+		assertTrue(player.isSprinting());
+		server.getPluginManager().assertEventFired(PlayerToggleSprintEvent.class);
+	}
+
+	@Test
+	public void testFly()
+	{
+		player.setFlying(true);
+		assertTrue(player.isFlying());
+		server.getPluginManager().assertEventFired(PlayerToggleFlightEvent.class);
+	}
+
+	@Test
+	public void testSneakEventFired()
+	{
+		player.setSneaking(true);
+		server.getPluginManager().assertEventFired(PlayerToggleSneakEvent.class);
 	}
 }
