@@ -39,6 +39,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerExpChangeEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
@@ -1061,6 +1062,33 @@ public class PlayerMockTest
 		boolean worked = player.simulateBlockPlace(Material.STONE, location);
 		player.setGameMode(originalGM);
 		assertFalse(worked);
+	}
+
+	@Test
+	public void testSimulatePlayerMove(){
+		World world = server.addSimpleWorld("world");
+		player.setLocation(new Location(world, 0, 0, 0));
+		player.simulatePlayerMove(new Location(world, 10,0,0));
+		server.getPluginManager().assertEventFired(PlayerMoveEvent.class);
+		assertTrue(player.getLocation().getX() == 10.0);
+	}
+
+	@Test
+	public void testSimulatePlayerMove_EventCancelled(){
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		Bukkit.getPluginManager().registerEvents(new Listener()
+		{
+			@EventHandler
+			public void onPlayerMove(PlayerMoveEvent event)
+			{
+				event.setCancelled(true);
+			}
+		}, plugin);
+		World world = server.addSimpleWorld("world");
+		player.setLocation(new Location(world, 0, 0, 0));
+		player.simulatePlayerMove(new Location(world, 10,0,0));
+		server.getPluginManager().assertEventFired(PlayerMoveEvent.class);
+		assertTrue(player.getLocation().getX() == 0.0);
 	}
 
 	@Test
