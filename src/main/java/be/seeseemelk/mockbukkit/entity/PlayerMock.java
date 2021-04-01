@@ -961,12 +961,13 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public void setSneaking(boolean sneaking)
 	{
-		PlayerToggleSneakEvent event = new PlayerToggleSneakEvent(this, sneaking);
+		this.sneaking = sneaking;
+	}
+
+	public void simulateSneak(boolean sneak)
+	{
+		PlayerToggleSneakEvent event = new PlayerToggleSneakEvent(this, sneak);
 		Bukkit.getPluginManager().callEvent(event);
-		if (!event.isCancelled())
-		{
-			this.sneaking = event.isSneaking();
-		}
 	}
 
 	@Override
@@ -978,12 +979,13 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public void setSprinting(boolean sprinting)
 	{
-		PlayerToggleSprintEvent event = new PlayerToggleSprintEvent(this, sprinting);
+		this.sprinting = sprinting;
+	}
+
+	public void simulateSprint(boolean sprint)
+	{
+		PlayerToggleSprintEvent event = new PlayerToggleSprintEvent(this, sprint);
 		Bukkit.getPluginManager().callEvent(event);
-		if (!event.isCancelled())
-		{
-			this.sprinting = event.isSprinting();
-		}
 	}
 
 	@Override
@@ -1513,12 +1515,13 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public void setFlying(boolean value)
 	{
-		PlayerToggleFlightEvent event = new PlayerToggleFlightEvent(this, value);
+		this.flying = value;
+	}
+
+	public void simulateToggleFlight(boolean fly)
+	{
+		PlayerToggleFlightEvent event = new PlayerToggleFlightEvent(this, fly);
 		Bukkit.getPluginManager().callEvent(event);
-		if (!event.isCancelled())
-		{
-			this.flying = event.isFlying();
-		}
 	}
 
 	@Override

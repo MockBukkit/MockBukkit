@@ -1096,7 +1096,6 @@ public class PlayerMockTest
 	{
 		player.setSprinting(true);
 		assertTrue(player.isSprinting());
-		server.getPluginManager().assertEventFired(PlayerToggleSprintEvent.class);
 	}
 
 	@Test
@@ -1104,13 +1103,26 @@ public class PlayerMockTest
 	{
 		player.setFlying(true);
 		assertTrue(player.isFlying());
-		server.getPluginManager().assertEventFired(PlayerToggleFlightEvent.class);
 	}
 
 	@Test
 	public void testSneakEventFired()
 	{
-		player.setSneaking(true);
+		player.simulateSneak(true);
 		server.getPluginManager().assertEventFired(PlayerToggleSneakEvent.class);
+	}
+
+	@Test
+	public void testSprintEventFired()
+	{
+		player.simulateSprint(true);
+		server.getPluginManager().assertEventFired(PlayerToggleSprintEvent.class);
+	}
+
+	@Test
+	public void testFlightEventFired()
+	{
+		player.simulateToggleFlight(true);
+		server.getPluginManager().assertEventFired(PlayerToggleFlightEvent.class);
 	}
 }
