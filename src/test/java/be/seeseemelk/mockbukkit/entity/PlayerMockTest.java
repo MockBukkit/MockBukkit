@@ -1062,7 +1062,7 @@ public class PlayerMockTest
 	}
 
 	@Test
-	public void testPlayerMoveInstantly(){
+	public void testSimulatePlayerMove(){
 		World world = server.addSimpleWorld("world");
 		player.setLocation(new Location(world, 0, 0, 0));
 		player.simulatePlayerMove(new Location(world, 10,0,0));
@@ -1071,7 +1071,7 @@ public class PlayerMockTest
 	}
 
 	@Test
-	public void testPlayerMoveInstantly_EventCancelled(){
+	public void testSimulatePlayerMove_EventCancelled(){
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
 		Bukkit.getPluginManager().registerEvents(new Listener()
 		{
