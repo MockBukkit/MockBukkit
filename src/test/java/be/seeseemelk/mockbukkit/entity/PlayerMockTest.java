@@ -1064,14 +1064,10 @@ public class PlayerMockTest
 	@Test
 	public void testPlayerMoveInstantly(){
 		World world = server.addSimpleWorld("world");
-		Location moveLocation = new Location(world, 10.0,-20.0,30.0);
 		player.setLocation(new Location(world, 0, 0, 0));
-		player.simulatePlayerMove(moveLocation);
+		player.simulatePlayerMove(new Location(world, 10,0,0));
 		server.getPluginManager().assertEventFired(PlayerMoveEvent.class);
-
 		assertTrue(player.getLocation().getX() == 10.0);
-		assertTrue(player.getLocation().getY() == -20.0);
-		assertTrue(player.getLocation().getZ() == 30.0);
 	}
 
 	@Test
@@ -1086,13 +1082,9 @@ public class PlayerMockTest
 			}
 		}, plugin);
 		World world = server.addSimpleWorld("world");
-		Location moveLocation = new Location(world, 10,-20,30, 10, 20);
 		player.setLocation(new Location(world, 0, 0, 0));
-		player.simulatePlayerMove(moveLocation);
+		player.simulatePlayerMove(new Location(world, 10,0,0));
 		server.getPluginManager().assertEventFired(PlayerMoveEvent.class);
-
 		assertTrue(player.getLocation().getX() == 0.0);
-		assertTrue(player.getLocation().getY() == 0.0);
-		assertTrue(player.getLocation().getZ() == 0.0);
 	}
 }
