@@ -53,6 +53,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.EntityEquipment;
@@ -263,6 +264,19 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		setHealth(getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
 		setLocation(event.getRespawnLocation().clone());
 		alive = true;
+	}
+
+	/**
+	 * This method moves player instantly with respect to PlayerMoveEvent
+	 *
+	 * @param moveLocation Location to move player to
+	 */
+	public void simulatePlayerMove(@NotNull Location moveLocation)
+	{
+		PlayerMoveEvent event = new PlayerMoveEvent(this, this.getLocation(), moveLocation);
+		Bukkit.getPluginManager().callEvent(event);
+		if (!event.isCancelled())
+			this.setLocation(event.getTo());
 	}
 
 	@Override
