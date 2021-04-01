@@ -949,7 +949,8 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	{
 		PlayerToggleSneakEvent event = new PlayerToggleSneakEvent(this, sneaking);
 		Bukkit.getPluginManager().callEvent(event);
-		if (!event.isCancelled()) {
+		if (!event.isCancelled())
+		{
 			this.sneaking = event.isSneaking();
 		}
 	}
@@ -965,7 +966,8 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	{
 		PlayerToggleSprintEvent event = new PlayerToggleSprintEvent(this, sprinting);
 		Bukkit.getPluginManager().callEvent(event);
-		if (!event.isCancelled()) {
+		if (!event.isCancelled())
+		{
 			this.sprinting = event.isSprinting();
 		}
 	}
@@ -1499,7 +1501,8 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	{
 		PlayerToggleFlightEvent event = new PlayerToggleFlightEvent(this, value);
 		Bukkit.getPluginManager().callEvent(event);
-		if (!event.isCancelled()) {
+		if (!event.isCancelled())
+		{
 			this.flying = event.isFlying();
 		}
 	}
