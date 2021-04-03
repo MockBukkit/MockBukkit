@@ -43,6 +43,9 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.event.player.PlayerToggleFlightEvent;
+import org.bukkit.event.player.PlayerToggleSneakEvent;
+import org.bukkit.event.player.PlayerToggleSprintEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
@@ -1086,5 +1089,43 @@ public class PlayerMockTest
 		player.simulatePlayerMove(new Location(world, 10,0,0));
 		server.getPluginManager().assertEventFired(PlayerMoveEvent.class);
 		assertTrue(player.getLocation().getX() == 0.0);
+	}
+
+	@Test
+	public void testSprint()
+	{
+		player.setSprinting(true);
+		assertTrue(player.isSprinting());
+	}
+
+	@Test
+	public void testFly()
+	{
+		player.setFlying(true);
+		assertTrue(player.isFlying());
+	}
+
+	@Test
+	public void testSneakEventFired()
+	{
+		player.simulateSneak(true);
+		assertTrue(player.isSneaking());
+		server.getPluginManager().assertEventFired(PlayerToggleSneakEvent.class);
+	}
+
+	@Test
+	public void testSprintEventFired()
+	{
+		player.simulateSprint(true);
+		assertTrue(player.isSprinting());
+		server.getPluginManager().assertEventFired(PlayerToggleSprintEvent.class);
+	}
+
+	@Test
+	public void testFlightEventFired()
+	{
+		player.simulateToggleFlight(true);
+		assertTrue(player.isFlying());
+		server.getPluginManager().assertEventFired(PlayerToggleFlightEvent.class);
 	}
 }
