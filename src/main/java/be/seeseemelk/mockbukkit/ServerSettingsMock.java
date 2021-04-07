@@ -1,5 +1,8 @@
 package be.seeseemelk.mockbukkit;
 
+import org.apache.commons.lang.Validate;
+import org.jetbrains.annotations.NotNull;
+
 import java.io.File;
 
 /**
@@ -35,123 +38,159 @@ public class ServerSettingsMock {
 	private int ticksPerWaterAmbientSpawns = 1;
 	private int ticksPerAmbientSpawns = 1;
 
-	public boolean isAllowEnd() {
+	public boolean isAllowEnd()
+    {
 		return allowEnd;
 	}
 
-	public void setAllowEnd(boolean allowEnd) {
+	public void setAllowEnd(boolean allowEnd)
+    {
 		this.allowEnd = allowEnd;
 	}
 
-	public String getUpdateFolder() {
-		return updateFolder;
+	@NotNull
+	public String getUpdateFolder()
+    {
+		Validate.notNull(updateFolder, "'updateFolder' must not be null");
+    	return updateFolder;
 	}
 
-	public void setUpdateFolder(String updateFolder) {
+	public void setUpdateFolder(String updateFolder)
+    {
 		this.updateFolder = updateFolder;
 	}
 
-	public File getWorldContainer() {
+	@NotNull
+	public File getWorldContainer()
+    {
+		Validate.notNull(worldContainer, "'worldContainer' must not be null");
 		return worldContainer;
 	}
 
-	public void setWorldContainer(File worldContainer) {
+	public void setWorldContainer(File worldContainer)
+    {
 		this.worldContainer = worldContainer;
 	}
 
-	public long getConnectionThrottle() {
+	public long getConnectionThrottle()
+    {
 		return connectionThrottle;
 	}
 
-	public void setConnectionThrottle(long connectionThrottle) {
+	public void setConnectionThrottle(long connectionThrottle)
+    {
 		this.connectionThrottle = connectionThrottle;
 	}
 
-	public String getShutdownMessage() {
+	@NotNull
+	public String getShutdownMessage()
+    {
+		Validate.notNull(shutdownMessage, "'shutdownMessage' must not be null");
 		return shutdownMessage;
 	}
 
-	public void setShutdownMessage(String shutdownMessage) {
+	public void setShutdownMessage(String shutdownMessage)
+    {
 		this.shutdownMessage = shutdownMessage;
 	}
 
-	public int getMonsterSpawnLimit() {
+	public int getMonsterSpawnLimit()
+    {
 		return monsterSpawnLimit;
 	}
 
-	public void setMonsterSpawnLimit(int monsterSpawnLimit) {
+	public void setMonsterSpawnLimit(int monsterSpawnLimit)
+    {
 		this.monsterSpawnLimit = monsterSpawnLimit;
 	}
 
-	public int getAnimalSpawnLimit() {
+	public int getAnimalSpawnLimit()
+    {
 		return animalSpawnLimit;
 	}
 
-	public void setAnimalSpawnLimit(int animalSpawnLimit) {
+	public void setAnimalSpawnLimit(int animalSpawnLimit)
+    {
 		this.animalSpawnLimit = animalSpawnLimit;
 	}
 
-	public int getWaterAnimalSpawnLimit() {
+	public int getWaterAnimalSpawnLimit()
+    {
 		return waterAnimalSpawnLimit;
 	}
 
-	public void setWaterAnimalSpawnLimit(int waterAnimalSpawnLimit) {
+	public void setWaterAnimalSpawnLimit(int waterAnimalSpawnLimit)
+    {
 		this.waterAnimalSpawnLimit = waterAnimalSpawnLimit;
 	}
 
-	public int getWaterAmbientSpawnLimit() {
+	public int getWaterAmbientSpawnLimit()
+    {
 		return waterAmbientSpawnLimit;
 	}
 
-	public void setWaterAmbientSpawnLimit(int waterAmbientSpawnLimit) {
+	public void setWaterAmbientSpawnLimit(int waterAmbientSpawnLimit)
+    {
 		this.waterAmbientSpawnLimit = waterAmbientSpawnLimit;
 	}
 
-	public int getAmbientSpawnLimit() {
+	public int getAmbientSpawnLimit()
+	{
 		return ambientSpawnLimit;
 	}
 
-	public void setAmbientSpawnLimit(int ambientSpawnLimit) {
+	public void setAmbientSpawnLimit(int ambientSpawnLimit)
+	{
 		this.ambientSpawnLimit = ambientSpawnLimit;
 	}
 
-	public int getTicksPerAnimalSpawns() {
+	public int getTicksPerAnimalSpawns()
+	{
 		return ticksPerAnimalSpawns;
 	}
 
-	public void setTicksPerAnimalSpawns(int ticksPerAnimalSpawns) {
+	public void setTicksPerAnimalSpawns(int ticksPerAnimalSpawns)
+	{
 		this.ticksPerAnimalSpawns = ticksPerAnimalSpawns;
 	}
 
-	public int getTicksPerMonsterSpawns() {
+	public int getTicksPerMonsterSpawns()
+	{
 		return ticksPerMonsterSpawns;
 	}
 
-	public void setTicksPerMonsterSpawns(int ticksPerMonsterSpawns) {
+	public void setTicksPerMonsterSpawns(int ticksPerMonsterSpawns)
+	{
 		this.ticksPerMonsterSpawns = ticksPerMonsterSpawns;
 	}
 
-	public int getTicksPerWaterSpawns() {
+	public int getTicksPerWaterSpawns()
+	{
 		return ticksPerWaterSpawns;
 	}
 
-	public void setTicksPerWaterSpawns(int ticksPerWaterSpawns) {
+	public void setTicksPerWaterSpawns(int ticksPerWaterSpawns)
+	{
 		this.ticksPerWaterSpawns = ticksPerWaterSpawns;
 	}
 
-	public int getTicksPerWaterAmbientSpawns() {
+	public int getTicksPerWaterAmbientSpawns()
+	{
 		return ticksPerWaterAmbientSpawns;
 	}
 
-	public void setTicksPerWaterAmbientSpawns(int ticksPerWaterAmbientSpawns) {
+	public void setTicksPerWaterAmbientSpawns(int ticksPerWaterAmbientSpawns)
+	{
 		this.ticksPerWaterAmbientSpawns = ticksPerWaterAmbientSpawns;
 	}
 
-	public int getTicksPerAmbientSpawns() {
+	public int getTicksPerAmbientSpawns()
+	{
 		return ticksPerAmbientSpawns;
 	}
 
-	public void setTicksPerAmbientSpawns(int ticksPerAmbientSpawns) {
+	public void setTicksPerAmbientSpawns(int ticksPerAmbientSpawns)
+	{
 		this.ticksPerAmbientSpawns = ticksPerAmbientSpawns;
 	}
 }
