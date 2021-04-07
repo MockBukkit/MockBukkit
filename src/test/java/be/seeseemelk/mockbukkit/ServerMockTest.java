@@ -2,25 +2,23 @@ package be.seeseemelk.mockbukkit;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.junit.Assume.assumeTrue;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.bukkit.Material;
-import org.bukkit.Warning;
 import org.bukkit.command.Command;
+import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
@@ -543,6 +541,73 @@ public class ServerMockTest
 		{
 			assertNotNull(type);
 		}
+	}
+
+	@Test
+	public void testYamlSerialization()
+	{
+		final String SERVER_SETTING_FILE = "bukkit.yml";
+		File file = null;
+		try {
+			Path tempFile = Files.createTempFile(SERVER_SETTING_FILE, String.valueOf(Math.random()));
+			file = new File(tempFile.toUri());
+			file.deleteOnExit();
+		}
+		catch (Exception e)
+		{
+			fail(e.getMessage());
+		}
+
+		ServerSettingsMock serverSettings = null;
+		ServerSettingsMock dummy = new ServerSettingsMock();
+
+		//test on clean start
+		try
+		{
+			serverSettings = server.getServerSettings();
+		}
+		catch (Exception e)
+		{
+			fail(e.getMessage());
+		}
+		assert serverSettings != null;
+		assertEquals(serverSettings, dummy);
+
+		//test on changing props
+		ServerSettingsMock dummy2 = new ServerSettingsMock();
+		fillServerSettings(dummy2);
+		fillServerSettings(serverSettings);
+		try
+		{
+			serverSettings.save(file);
+			serverSettings.load(file);
+			assertEquals(serverSettings, dummy2);
+		}
+		catch (IOException | InvalidConfigurationException e)
+		{
+			fail(e.getMessage());
+		}
+	}
+
+	//fill another value for server setting for serialization test
+	private void fillServerSettings(ServerSettingsMock serverSettings)
+	{
+		serverSettings.setConnectionThrottle(serverSettings.getConnectionThrottle() + 1);
+		serverSettings.setMonsterSpawnLimit(serverSettings.getMonsterSpawnLimit() + 1);
+		serverSettings.setAnimalSpawnLimit(serverSettings.getAnimalSpawnLimit() + 1);
+		serverSettings.setWaterAnimalSpawnLimit(serverSettings.getWaterAnimalSpawnLimit() + 1);
+		serverSettings.setWaterAmbientSpawnLimit(serverSettings.getWaterAmbientSpawnLimit() + 1);
+		serverSettings.setAmbientSpawnLimit(serverSettings.getAmbientSpawnLimit() + 1);
+		serverSettings.setTicksPerAnimalSpawns(serverSettings.getTicksPerAnimalSpawns() + 1);
+		serverSettings.setTicksPerMonsterSpawns(serverSettings.getTicksPerMonsterSpawns() + 1);
+		serverSettings.setTicksPerWaterSpawns(serverSettings.getTicksPerWaterSpawns() + 1);
+		serverSettings.setTicksPerWaterAmbientSpawns(serverSettings.getTicksPerWaterAmbientSpawns() + 1);
+		serverSettings.setTicksPerAmbientSpawns(serverSettings.getTicksPerAmbientSpawns() + 1);
+
+		serverSettings.setAllowEnd(false);
+		serverSettings.setUpdateFolder("update1");
+		serverSettings.setWorldContainer("container");
+		serverSettings.setShutdownMessage("Server closed...");
 	}
 
 }

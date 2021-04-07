@@ -4,6 +4,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -52,6 +56,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.command.PluginCommand;
+import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.entity.Entity;
@@ -137,6 +142,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private ConsoleCommandSender consoleSender;
 
 	private ServerSettingsMock serverSettings;
+	private static final String BUKKIT_SETTING_FILE = "bukkit.yml";
 
 	public ServerMock()
 	{
@@ -160,10 +166,38 @@ public class ServerMock extends Server.Spigot implements Server
 		logger.setLevel(Level.ALL);
 	}
 
+	@NotNull
 	public ServerSettingsMock getServerSettings(){
 		if (serverSettings == null)
 		{
 			serverSettings = new ServerSettingsMock();
+			try
+			{
+				File file;
+				URL systemResource = ClassLoader.getSystemResource(BUKKIT_SETTING_FILE);
+				if (systemResource != null)
+				{
+					file = new File(systemResource.toURI());
+				}
+				else
+				{
+					file = new File(BUKKIT_SETTING_FILE);
+				}
+
+				if (!file.exists())
+				{
+					Path tempFile = Files.createTempFile(file.getName(), String.valueOf(Math.random()));
+					file = new File(tempFile.toUri());
+					file.deleteOnExit();
+				}
+
+				serverSettings.load(file);
+			}
+			catch (IOException | InvalidConfigurationException | URISyntaxException e)
+			{
+				logger.log(Level.SEVERE, "error loading " + BUKKIT_SETTING_FILE + ":", e);
+				throw new RuntimeException(e);
+			}
 		}
 		return serverSettings;
 	}
