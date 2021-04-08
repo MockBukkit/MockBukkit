@@ -54,8 +54,12 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerChatEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.event.player.PlayerToggleFlightEvent;
+import org.bukkit.event.player.PlayerToggleSneakEvent;
+import org.bukkit.event.player.PlayerToggleSprintEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
@@ -98,6 +102,8 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	private float saturation = 5.0F;
 	private int expLevel = 0;
 	private boolean sneaking = false;
+	private boolean sprinting = false;
+	private boolean flying = false;
 	private boolean whitelisted = true;
 	private InventoryView inventoryView;
 
@@ -248,7 +254,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	{
 		Location respawnLocation = getBedSpawnLocation();
 		boolean isBedSpawn = respawnLocation != null;
-		
+
 		// TODO: Respawn Anchors are not yet supported.
 		boolean isAnchorSpawn = false;
 
@@ -264,6 +270,19 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		setHealth(getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
 		setLocation(event.getRespawnLocation().clone());
 		alive = true;
+	}
+
+	/**
+	 * This method moves player instantly with respect to PlayerMoveEvent
+	 *
+	 * @param moveLocation Location to move player to
+	 */
+	public void simulatePlayerMove(@NotNull Location moveLocation)
+	{
+		PlayerMoveEvent event = new PlayerMoveEvent(this, this.getLocation(), moveLocation);
+		Bukkit.getPluginManager().callEvent(event);
+		if (!event.isCancelled())
+			this.setLocation(event.getTo());
 	}
 
 	@Override
@@ -945,18 +964,36 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		this.sneaking = sneaking;
 	}
 
+	public void simulateSneak(boolean sneak)
+	{
+		PlayerToggleSneakEvent event = new PlayerToggleSneakEvent(this, sneak);
+		Bukkit.getPluginManager().callEvent(event);
+		if (!event.isCancelled())
+		{
+			this.sneaking = event.isSneaking();
+		}
+	}
+
 	@Override
 	public boolean isSprinting()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return sprinting;
 	}
 
 	@Override
 	public void setSprinting(boolean sprinting)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.sprinting = sprinting;
+	}
+
+	public void simulateSprint(boolean sprint)
+	{
+		PlayerToggleSprintEvent event = new PlayerToggleSprintEvent(this, sprint);
+		Bukkit.getPluginManager().callEvent(event);
+		if (!event.isCancelled())
+		{
+			this.sprinting = event.isSprinting();
+		}
 	}
 
 	@Override
@@ -1025,7 +1062,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	{
 		heardSounds.add(new AudioExperience(sound, category, location, volume, pitch));
 	}
-	
+
 	@Override
 	public @NotNull List<AudioExperience> getHeardSounds()
 	{
@@ -1480,15 +1517,23 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public boolean isFlying()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return flying;
 	}
 
 	@Override
 	public void setFlying(boolean value)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.flying = value;
+	}
+
+	public void simulateToggleFlight(boolean fly)
+	{
+		PlayerToggleFlightEvent event = new PlayerToggleFlightEvent(this, fly);
+		Bukkit.getPluginManager().callEvent(event);
+		if (!event.isCancelled())
+		{
+			this.flying = event.isFlying();
+		}
 	}
 
 	@Override
