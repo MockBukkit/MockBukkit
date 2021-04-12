@@ -108,7 +108,7 @@ public class PluginManagerMock implements PluginManager
 	 * @param message   The message to display when no event conforms.
 	 * @param predicate The predicate to test against.
 	 */
-	public void assertEventFired(@NotNull String message, @NotNull Predicate<Event> predicate)
+	public void assertEventFired(String message, Predicate<Event> predicate)
 	{
 		for (Event event : events)
 		{
@@ -123,7 +123,7 @@ public class PluginManagerMock implements PluginManager
 	 *
 	 * @param predicate The predicate to test against.
 	 */
-	public void assertEventFired(@NotNull Predicate<Event> predicate)
+	public void assertEventFired(Predicate<Event> predicate)
 	{
 		assertEventFired("Event assert failed", predicate);
 	}
@@ -164,13 +164,13 @@ public class PluginManagerMock implements PluginManager
 	 *
 	 * @param eventClass The class of the event to check for.
 	 */
-	public void assertEventFired(@NotNull Class<? extends Event> eventClass)
+	public void assertEventFired(Class<? extends Event> eventClass)
 	{
 		assertEventFired("No event of that type has been fired", eventClass::isInstance);
 	}
 
 	@Override
-	public Plugin getPlugin(@NotNull String name)
+	public Plugin getPlugin(String name)
 	{
 		for (Plugin plugin : plugins)
 		{
@@ -193,7 +193,6 @@ public class PluginManagerMock implements PluginManager
 	 *
 	 * @return A collection of all available commands.
 	 */
-	@NotNull
 	public Collection<PluginCommand> getCommands()
 	{
 		return Collections.unmodifiableList(commands);
@@ -207,7 +206,7 @@ public class PluginManagerMock implements PluginManager
 	 *                    should be an exact match while the rest don't have to be.
 	 * @return {@code true} if the constructor is compatible, {@code false} if it isn't.
 	 */
-	private boolean isConstructorCompatible(@NotNull Constructor<?> constructor, @NotNull Class<?>[] types)
+	private boolean isConstructorCompatible(Constructor<?> constructor, Class<?>[] types)
 	{
 		Class<?>[] parameters = constructor.getParameterTypes();
 		for (int i = 0; i < types.length; i++)
@@ -266,8 +265,7 @@ public class PluginManagerMock implements PluginManager
 	 * @return The created temporary directory.
 	 * @throws IOException when the directory could not be created.
 	 */
-	@NotNull
-	private File createTemporaryDirectory(@NotNull String name) throws IOException
+	private File createTemporaryDirectory(String name) throws IOException
 	{
 		Random random = ThreadLocalRandom.current();
 		File directory = Files.createTempDirectory(name + "-" + random.nextInt()).toFile();
@@ -280,7 +278,7 @@ public class PluginManagerMock implements PluginManager
 	 *
 	 * @param plugin The plugin that has been loaded.
 	 */
-	public void registerLoadedPlugin(@NotNull Plugin plugin)
+	public void registerLoadedPlugin(Plugin plugin)
 	{
 		addCommandsFrom(plugin);
 		plugins.add(plugin);
@@ -419,7 +417,7 @@ public class PluginManagerMock implements PluginManager
 		server.getScheduler().scheduleAsyncEventCall(event);
 	}
 
-	private void callRegisteredListener(@NotNull RegisteredListener registration, @NotNull Event event)
+	private void callRegisteredListener(RegisteredListener registration, Event event)
 	{
 		if (!registration.getPlugin().isEnabled())
 		{
@@ -454,7 +452,7 @@ public class PluginManagerMock implements PluginManager
 
 
 	@Override
-	public void enablePlugin(@NotNull Plugin plugin)
+	public void enablePlugin(Plugin plugin)
 	{
 		if (plugin instanceof JavaPlugin)
 		{
@@ -531,14 +529,14 @@ public class PluginManagerMock implements PluginManager
 	}
 
 	@Override
-	public void registerInterface(@NotNull Class<? extends PluginLoader> loader) throws IllegalArgumentException
+	public void registerInterface(Class<? extends PluginLoader> loader) throws IllegalArgumentException
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean isPluginEnabled(@NotNull String name)
+	public boolean isPluginEnabled(String name)
 	{
 		boolean result = false;
 
@@ -570,7 +568,7 @@ public class PluginManagerMock implements PluginManager
 	}
 
 	@Override
-	public Plugin loadPlugin(@NotNull File file)
+	public Plugin loadPlugin(File file)
 	throws InvalidPluginException, InvalidDescriptionException, UnknownDependencyException
 	{
 		// TODO Auto-generated method stub
@@ -578,7 +576,7 @@ public class PluginManagerMock implements PluginManager
 	}
 
 	@Override
-	public Plugin[] loadPlugins(@NotNull File directory)
+	public Plugin[] loadPlugins(File directory)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -609,7 +607,7 @@ public class PluginManagerMock implements PluginManager
 	}
 
 	@Override
-	public void registerEvents(@NotNull Listener listener, Plugin plugin)
+	public void registerEvents(Listener listener, Plugin plugin)
 	{
 		if (!plugin.isEnabled())
 		{
@@ -623,15 +621,15 @@ public class PluginManagerMock implements PluginManager
 	}
 
 	@Override
-	public void registerEvent(@NotNull Class<? extends Event> event, @NotNull Listener listener, @NotNull EventPriority priority,
-							  @NotNull EventExecutor executor, @NotNull Plugin plugin)
+	public void registerEvent(Class<? extends Event> event, Listener listener, EventPriority priority,
+							  EventExecutor executor, Plugin plugin)
 	{
 		registerEvent(event, listener, priority, executor, plugin, false);
 	}
 
 	@Override
-	public void registerEvent(@NotNull Class<? extends Event> event, @NotNull Listener listener, @NotNull EventPriority priority,
-							  @NotNull EventExecutor executor, @NotNull Plugin plugin, boolean ignoreCancelled)
+	public void registerEvent(Class<? extends Event> event, Listener listener, EventPriority priority,
+							  EventExecutor executor, Plugin plugin, boolean ignoreCancelled)
 	{
 		Validate.notNull(listener, "Listener cannot be null");
 		Validate.notNull(priority, "Priority cannot be null");
@@ -681,7 +679,7 @@ public class PluginManagerMock implements PluginManager
 	}
 
 	@Override
-	public void disablePlugin(@NotNull Plugin plugin)
+	public void disablePlugin(Plugin plugin)
 	{
 		if (plugin instanceof JavaPlugin)
 		{
@@ -698,32 +696,32 @@ public class PluginManagerMock implements PluginManager
 	}
 
 	@Override
-	public Permission getPermission(@NotNull String name)
+	public Permission getPermission(String name)
 	{
 		return permissions.stream().filter(permission -> permission.getName().equals(name)).findFirst().orElse(null);
 	}
 
 	@Override
-	public void addPermission(@NotNull Permission perm)
+	public void addPermission(Permission perm)
 	{
 		permissions.add(perm);
 	}
 
 	@Override
-	public void removePermission(@NotNull Permission perm)
+	public void removePermission(Permission perm)
 	{
 		permissions.remove(perm);
 	}
 
 	@Override
-	public void removePermission(@NotNull String name)
+	public void removePermission(String name)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public @NotNull Set<Permission> getDefaultPermissions(boolean op)
+	public Set<Permission> getDefaultPermissions(boolean op)
 	{
 		Set<Permission> permissions = new HashSet<>();
 		for (Permission permission : this.permissions)
@@ -738,7 +736,7 @@ public class PluginManagerMock implements PluginManager
 	}
 
 	@Override
-	public void recalculatePermissionDefaults(@NotNull Permission perm)
+	public void recalculatePermissionDefaults(Permission perm)
 	{
 
 	}
@@ -765,19 +763,19 @@ public class PluginManagerMock implements PluginManager
 	}
 
 	@Override
-	public void subscribeToPermission(@NotNull String permission, @NotNull Permissible permissible)
+	public void subscribeToPermission(String permission, Permissible permissible)
 	{
 		getPermissionSubscriptions(permissible).add(permission);
 	}
 
 	@Override
-	public void unsubscribeFromPermission(@NotNull String permission, @NotNull Permissible permissible)
+	public void unsubscribeFromPermission(String permission, Permissible permissible)
 	{
 		getPermissionSubscriptions(permissible).remove(permission);
 	}
 
 	@Override
-	public @NotNull Set<Permissible> getPermissionSubscriptions(@NotNull String permission)
+	public Set<Permissible> getPermissionSubscriptions(String permission)
 	{
 		Set<Permissible> subscriptions = new HashSet<>();
 		for (Entry<Permissible, Set<String>> entry : permissionSubscriptions.entrySet())
@@ -793,28 +791,28 @@ public class PluginManagerMock implements PluginManager
 	}
 
 	@Override
-	public void subscribeToDefaultPerms(boolean op, @NotNull Permissible permissible)
+	public void subscribeToDefaultPerms(boolean op, Permissible permissible)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void unsubscribeFromDefaultPerms(boolean op, @NotNull Permissible permissible)
+	public void unsubscribeFromDefaultPerms(boolean op, Permissible permissible)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public @NotNull Set<Permissible> getDefaultPermSubscriptions(boolean op)
+	public Set<Permissible> getDefaultPermSubscriptions(boolean op)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public @NotNull Set<Permission> getPermissions()
+	public Set<Permission> getPermissions()
 	{
 		return Collections.unmodifiableSet(new HashSet<>(permissions));
 	}
