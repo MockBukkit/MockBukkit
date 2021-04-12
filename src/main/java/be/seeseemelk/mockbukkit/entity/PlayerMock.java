@@ -139,7 +139,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	public EntityType getType()
 	{
 		return EntityType.PLAYER;
 	}
@@ -285,7 +285,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public @NotNull PlayerInventory getInventory()
+	public PlayerInventory getInventory()
 	{
 		if (inventory == null)
 		{
@@ -295,13 +295,13 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public @NotNull GameMode getGameMode()
+	public GameMode getGameMode()
 	{
 		return gamemode;
 	}
 
 	@Override
-	public void setGameMode(@NotNull GameMode mode)
+	public void setGameMode(GameMode mode)
 	{
 		gamemode = mode;
 	}
@@ -342,13 +342,13 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public @NotNull InventoryView getOpenInventory()
+	public InventoryView getOpenInventory()
 	{
 		return inventoryView;
 	}
 
 	@Override
-	public void openInventory(@NotNull InventoryView inventory)
+	public void openInventory(InventoryView inventory)
 	{
 		closeInventory();
 		inventoryView = inventory;
@@ -405,7 +405,6 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	 * @param type      The {@link InventoryType} you are expecting
 	 * @param predicate A custom {@link Predicate} to check the opened {@link Inventory}.
 	 */
-	@SuppressWarnings("unused")
 	public void assertInventoryView(InventoryType type, Predicate<Inventory> predicate)
 	{
 		assertInventoryView("The InventoryView Assertion has failed", type, predicate);
@@ -416,7 +415,6 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	 *
 	 * @param type The {@link InventoryType} you are expecting
 	 */
-	@SuppressWarnings("unused")
 	public void assertInventoryView(InventoryType type)
 	{
 		assertInventoryView("The InventoryView Assertion has failed", type, inv -> true);
@@ -428,20 +426,19 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	 * @param message The message to display upon failure
 	 * @param type    The {@link InventoryType} you are expecting
 	 */
-	@SuppressWarnings("unused")
 	public void assertInventoryView(String message, InventoryType type)
 	{
 		assertInventoryView(message, type, inv -> true);
 	}
 
 	@Override
-	public boolean performCommand(@NotNull String command)
+	public boolean performCommand(String command)
 	{
 		return Bukkit.dispatchCommand(this, command);
 	}
 
 	@Override
-	public @NotNull Inventory getEnderChest()
+	public Inventory getEnderChest()
 	{
 		if (enderChest == null)
 		{
@@ -452,14 +449,14 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public @NotNull MainHand getMainHand()
+	public MainHand getMainHand()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean setWindowProperty(@NotNull Property prop, int value)
+	public boolean setWindowProperty(Property prop, int value)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -480,20 +477,20 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public InventoryView openMerchant(@NotNull Villager trader, boolean force)
+	public InventoryView openMerchant(Villager trader, boolean force)
 	{
 		return openMerchant((Merchant) trader, force);
 	}
 
 	@Override
-	public InventoryView openMerchant(@NotNull Merchant merchant, boolean force)
+	public InventoryView openMerchant(Merchant merchant, boolean force)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public @NotNull ItemStack getItemInHand()
+	public ItemStack getItemInHand()
 	{
 		return getInventory().getItemInMainHand();
 	}
@@ -517,21 +514,21 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public boolean hasCooldown(@NotNull Material material)
+	public boolean hasCooldown(Material material)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public int getCooldown(@NotNull Material material)
+	public int getCooldown(Material material)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void setCooldown(@NotNull Material material, int ticks)
+	public void setCooldown(Material material, int ticks)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -619,21 +616,21 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public @NotNull List<Block> getLineOfSight(Set<Material> transparent, int maxDistance)
+	public List<Block> getLineOfSight(Set<Material> transparent, int maxDistance)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public @NotNull Block getTargetBlock(Set<Material> transparent, int maxDistance)
+	public Block getTargetBlock(Set<Material> transparent, int maxDistance)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public @NotNull List<Block> getLastTwoTargetBlocks(Set<Material> transparent, int maxDistance)
+	public List<Block> getLastTwoTargetBlocks(Set<Material> transparent, int maxDistance)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -689,7 +686,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public boolean hasLineOfSight(@NotNull Entity other)
+	public boolean hasLineOfSight(Entity other)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -737,7 +734,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public @NotNull Entity getLeashHolder()
+	public Entity getLeashHolder()
 	{
 		throw new IllegalStateException("Players cannot be leashed");
 	}
@@ -798,28 +795,28 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public void acceptConversationInput(@NotNull String input)
+	public void acceptConversationInput(String input)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean beginConversation(@NotNull Conversation conversation)
+	public boolean beginConversation(Conversation conversation)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void abandonConversation(@NotNull Conversation conversation)
+	public void abandonConversation(Conversation conversation)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void abandonConversation(@NotNull Conversation conversation, @NotNull ConversationAbandonedEvent details)
+	public void abandonConversation(Conversation conversation, ConversationAbandonedEvent details)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -858,28 +855,28 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public @NotNull Map<String, Object> serialize()
+	public Map<String, Object> serialize()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void sendPluginMessage(@NotNull Plugin source, @NotNull String channel, byte[] message)
+	public void sendPluginMessage(Plugin source, String channel, byte[] message)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public @NotNull Set<String> getListeningPluginChannels()
+	public Set<String> getListeningPluginChannels()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public @NotNull String getDisplayName()
+	public String getDisplayName()
 	{
 		return displayName;
 	}
@@ -891,7 +888,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public @NotNull String getPlayerListName()
+	public String getPlayerListName()
 	{
 		return this.playerListName == null ? getName() : this.playerListName;
 	}
@@ -1030,39 +1027,39 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 
 	@Override
 	@Deprecated
-	public void playNote(@NotNull Location loc, byte instrument, byte note)
+	public void playNote(Location loc, byte instrument, byte note)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void playNote(@NotNull Location loc, @NotNull Instrument instrument, @NotNull Note note)
+	public void playNote(Location loc, Instrument instrument, Note note)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void playSound(@NotNull Location location, @NotNull String sound, float volume, float pitch)
+	public void playSound(Location location, String sound, float volume, float pitch)
 	{
 		heardSounds.add(new AudioExperience(sound, SoundCategory.MASTER, location, volume, pitch));
 	}
 
 	@Override
-	public void playSound(@NotNull Location location, @NotNull Sound sound, float volume, float pitch)
+	public void playSound(Location location, Sound sound, float volume, float pitch)
 	{
 		playSound(location, sound, SoundCategory.MASTER, volume, pitch);
 	}
 
 	@Override
-	public void playSound(@NotNull Location location, @NotNull String sound, @NotNull SoundCategory category, float volume, float pitch)
+	public void playSound(Location location, String sound, SoundCategory category, float volume, float pitch)
 	{
 		heardSounds.add(new AudioExperience(sound, category, location, volume, pitch));
 	}
 
 	@Override
-	public void playSound(@NotNull Location location, @NotNull Sound sound, @NotNull SoundCategory category, float volume, float pitch)
+	public void playSound(Location location, Sound sound, SoundCategory category, float volume, float pitch)
 	{
 		heardSounds.add(new AudioExperience(sound, category, location, volume, pitch));
 	}
@@ -1074,66 +1071,66 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public void stopSound(@NotNull Sound sound)
+	public void stopSound(Sound sound)
 	{
 		stopSound(sound, SoundCategory.MASTER);
 	}
 
 	@Override
-	public void stopSound(@NotNull String sound)
+	public void stopSound(String sound)
 	{
 		stopSound(sound, SoundCategory.MASTER);
 	}
 
 	@Override
-	public void stopSound(@NotNull Sound sound, SoundCategory category)
+	public void stopSound(Sound sound, SoundCategory category)
 	{
 		// We will just pretend the Sound has stopped.
 	}
 
 	@Override
-	public void stopSound(@NotNull String sound, SoundCategory category)
+	public void stopSound(String sound, SoundCategory category)
 	{
 		// We will just pretend the Sound has stopped.
 	}
 
 	@Override
-	public void playEffect(@NotNull Location loc, @NotNull Effect effect, int data)
+	public void playEffect(Location loc, Effect effect, int data)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public <T> void playEffect(@NotNull Location loc, @NotNull Effect effect, T data)
+	public <T> void playEffect(Location loc, Effect effect, T data)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void sendBlockChange(@NotNull Location loc, @NotNull Material material, byte data)
+	public void sendBlockChange(Location loc, Material material, byte data)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean sendChunkChange(@NotNull Location loc, int sx, int sy, int sz, byte[] data)
+	public boolean sendChunkChange(Location loc, int sx, int sy, int sz, byte[] data)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void sendSignChange(@NotNull Location loc, String[] lines)
+	public void sendSignChange(Location loc, String[] lines)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void sendMap(@NotNull MapView map)
+	public void sendMap(MapView map)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1147,126 +1144,126 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public void incrementStatistic(@NotNull Statistic statistic)
+	public void incrementStatistic(Statistic statistic)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void decrementStatistic(@NotNull Statistic statistic)
+	public void decrementStatistic(Statistic statistic)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void incrementStatistic(@NotNull Statistic statistic, int amount)
+	public void incrementStatistic(Statistic statistic, int amount)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void decrementStatistic(@NotNull Statistic statistic, int amount)
+	public void decrementStatistic(Statistic statistic, int amount)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void setStatistic(@NotNull Statistic statistic, int newValue)
+	public void setStatistic(Statistic statistic, int newValue)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public int getStatistic(@NotNull Statistic statistic)
+	public int getStatistic(Statistic statistic)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void incrementStatistic(@NotNull Statistic statistic, @NotNull Material material)
+	public void incrementStatistic(Statistic statistic, Material material)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void decrementStatistic(@NotNull Statistic statistic, @NotNull Material material)
+	public void decrementStatistic(Statistic statistic, Material material)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public int getStatistic(@NotNull Statistic statistic, @NotNull Material material)
+	public int getStatistic(Statistic statistic, Material material)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void incrementStatistic(@NotNull Statistic statistic, @NotNull Material material, int amount)
+	public void incrementStatistic(Statistic statistic, Material material, int amount)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void decrementStatistic(@NotNull Statistic statistic, @NotNull Material material, int amount)
+	public void decrementStatistic(Statistic statistic, Material material, int amount)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void setStatistic(@NotNull Statistic statistic, @NotNull Material material, int newValue)
+	public void setStatistic(Statistic statistic, Material material, int newValue)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void incrementStatistic(@NotNull Statistic statistic, @NotNull EntityType entityType)
+	public void incrementStatistic(Statistic statistic, EntityType entityType)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void decrementStatistic(@NotNull Statistic statistic, @NotNull EntityType entityType)
+	public void decrementStatistic(Statistic statistic, EntityType entityType)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public int getStatistic(@NotNull Statistic statistic, @NotNull EntityType entityType)
+	public int getStatistic(Statistic statistic, EntityType entityType)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void incrementStatistic(@NotNull Statistic statistic, @NotNull EntityType entityType, int amount)
+	public void incrementStatistic(Statistic statistic, EntityType entityType, int amount)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void decrementStatistic(@NotNull Statistic statistic, @NotNull EntityType entityType, int amount)
+	public void decrementStatistic(Statistic statistic, EntityType entityType, int amount)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void setStatistic(@NotNull Statistic statistic, @NotNull EntityType entityType, int newValue)
+	public void setStatistic(Statistic statistic, EntityType entityType, int newValue)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1308,7 +1305,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public void setPlayerWeather(@NotNull WeatherType type)
+	public void setPlayerWeather(WeatherType type)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1483,14 +1480,14 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 
 	@Override
 	@Deprecated
-	public void hidePlayer(@NotNull Player player)
+	public void hidePlayer(Player player)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void hidePlayer(@NotNull Plugin plugin, @NotNull Player player)
+	public void hidePlayer(Plugin plugin, Player player)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1498,21 +1495,21 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 
 	@Override
 	@Deprecated
-	public void showPlayer(@NotNull Player player)
+	public void showPlayer(Player player)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void showPlayer(@NotNull Plugin plugin, @NotNull Player player)
+	public void showPlayer(Plugin plugin, Player player)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean canSee(@NotNull Player player)
+	public boolean canSee(Player player)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1570,35 +1567,35 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 
 	@Override
 	@Deprecated
-	public void setTexturePack(@NotNull String url)
+	public void setTexturePack(String url)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void setResourcePack(@NotNull String url)
+	public void setResourcePack(String url)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void setResourcePack(@NotNull String url, byte[] hash)
+	public void setResourcePack(String url, byte[] hash)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public @NotNull Scoreboard getScoreboard()
+	public Scoreboard getScoreboard()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void setScoreboard(@NotNull Scoreboard scoreboard)
+	public void setScoreboard(Scoreboard scoreboard)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1668,106 +1665,98 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public void spawnParticle(@NotNull Particle particle, @NotNull Location location, int count)
+	public void spawnParticle(Particle particle, Location location, int count)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void spawnParticle(@NotNull Particle particle, double x, double y, double z, int count)
+	public void spawnParticle(Particle particle, double x, double y, double z, int count)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public <T> void spawnParticle(@NotNull Particle particle, @NotNull Location location, int count, T data)
+	public <T> void spawnParticle(Particle particle, Location location, int count, T data)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public <T> void spawnParticle(@NotNull Particle particle, double x, double y, double z, int count, T data)
+	public <T> void spawnParticle(Particle particle, double x, double y, double z, int count, T data)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void spawnParticle(@NotNull Particle particle, @NotNull Location location, int count, double offsetX, double offsetY,
-							  double offsetZ)
+	public void spawnParticle(Particle particle, Location location, int count, double offsetX, double offsetY, double offsetZ)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void spawnParticle(@NotNull Particle particle, double x, double y, double z, int count, double offsetX,
-							  double offsetY, double offsetZ)
+	public void spawnParticle(Particle particle, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public <T> void spawnParticle(@NotNull Particle particle, @NotNull Location location, int count, double offsetX, double offsetY,
-								  double offsetZ, T data)
+	public <T> void spawnParticle(Particle particle, Location location, int count, double offsetX, double offsetY, double offsetZ, T data)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public <T> void spawnParticle(@NotNull Particle particle, double x, double y, double z, int count, double offsetX,
-								  double offsetY, double offsetZ, T data)
+	public <T> void spawnParticle(Particle particle, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, T data)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void spawnParticle(@NotNull Particle particle, @NotNull Location location, int count, double offsetX, double offsetY,
-							  double offsetZ, double extra)
+	public void spawnParticle(Particle particle, Location location, int count, double offsetX, double offsetY, double offsetZ, double extra)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void spawnParticle(@NotNull Particle particle, double x, double y, double z, int count, double offsetX,
-							  double offsetY, double offsetZ, double extra)
+	public void spawnParticle(Particle particle, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double extra)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public <T> void spawnParticle(@NotNull Particle particle, @NotNull Location location, int count, double offsetX, double offsetY,
-								  double offsetZ, double extra, T data)
+	public <T> void spawnParticle(Particle particle, Location location, int count, double offsetX, double offsetY, double offsetZ, double extra, T data)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public <T> void spawnParticle(@NotNull Particle particle, double x, double y, double z, int count, double offsetX,
-								  double offsetY, double offsetZ, double extra, T data)
+	public <T> void spawnParticle(Particle particle, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double extra, T data)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public @NotNull AdvancementProgress getAdvancementProgress(@NotNull Advancement advancement)
+	public AdvancementProgress getAdvancementProgress(Advancement advancement)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public @NotNull String getLocale()
+	public String getLocale()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1844,7 +1833,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public void sendBlockChange(@NotNull Location loc, @NotNull BlockData block)
+	public void sendBlockChange(Location loc, BlockData block)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1858,26 +1847,26 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public boolean discoverRecipe(@NotNull NamespacedKey recipe)
+	public boolean discoverRecipe(NamespacedKey recipe)
 	{
 		return discoverRecipes(Collections.singletonList(recipe)) != 0;
 	}
 
 	@Override
-	public int discoverRecipes(@NotNull Collection<NamespacedKey> recipes)
+	public int discoverRecipes(Collection<NamespacedKey> recipes)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean undiscoverRecipe(@NotNull NamespacedKey recipe)
+	public boolean undiscoverRecipe(NamespacedKey recipe)
 	{
 		return undiscoverRecipes(Collections.singletonList(recipe)) != 0;
 	}
 
 	@Override
-	public int undiscoverRecipes(@NotNull Collection<NamespacedKey> recipes)
+	public int undiscoverRecipes(Collection<NamespacedKey> recipes)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1891,7 +1880,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public Block getTargetBlockExact(int maxDistance, @NotNull FluidCollisionMode fluidCollisionMode)
+	public Block getTargetBlockExact(int maxDistance, FluidCollisionMode fluidCollisionMode)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1905,21 +1894,21 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public RayTraceResult rayTraceBlocks(double maxDistance, @NotNull FluidCollisionMode fluidCollisionMode)
+	public RayTraceResult rayTraceBlocks(double maxDistance, FluidCollisionMode fluidCollisionMode)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public @NotNull BoundingBox getBoundingBox()
+	public BoundingBox getBoundingBox()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public @NotNull BlockFace getFacing()
+	public BlockFace getFacing()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1933,7 +1922,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public boolean sleep(@NotNull Location location, boolean force)
+	public boolean sleep(Location location, boolean force)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1947,21 +1936,21 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public @NotNull Location getBedLocation()
+	public Location getBedLocation()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public <T> T getMemory(@NotNull MemoryKey<T> memoryKey)
+	public <T> T getMemory(MemoryKey<T> memoryKey)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public <T> void setMemory(@NotNull MemoryKey<T> memoryKey, T memoryValue)
+	public <T> void setMemory(MemoryKey<T> memoryKey, T memoryValue)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1982,28 +1971,28 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public @NotNull Pose getPose()
+	public Pose getPose()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void sendSignChange(@NotNull Location loc, String[] lines, @NotNull DyeColor dyeColor) throws IllegalArgumentException
+	public void sendSignChange(Location loc, String[] lines, DyeColor dyeColor) throws IllegalArgumentException
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void openBook(@NotNull ItemStack book)
+	public void openBook(ItemStack book)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void attack(@NotNull Entity target)
+	public void attack(Entity target)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -2045,14 +2034,14 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public boolean hasDiscoveredRecipe(@NotNull NamespacedKey recipe)
+	public boolean hasDiscoveredRecipe(NamespacedKey recipe)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public @NotNull Set<NamespacedKey> getDiscoveredRecipes()
+	public Set<NamespacedKey> getDiscoveredRecipes()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -2066,14 +2055,14 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public @NotNull Set<UUID> getCollidableExemptions()
+	public Set<UUID> getCollidableExemptions()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void sendBlockDamage(@NotNull Location loc, float progress)
+	public void sendBlockDamage(Location loc, float progress)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
