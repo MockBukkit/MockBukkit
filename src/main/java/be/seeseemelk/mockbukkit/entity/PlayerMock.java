@@ -1603,7 +1603,8 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public void setHealth(double health) {
+	public void setHealth(double health)
+	{
 		if (health > 0)
 		{
 			this.health = Math.min(health, getMaxHealth());
