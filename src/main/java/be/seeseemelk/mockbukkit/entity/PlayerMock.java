@@ -5,6 +5,7 @@ import static org.junit.Assert.fail;
 
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
@@ -21,6 +22,7 @@ import org.bukkit.DyeColor;
 import org.bukkit.Effect;
 import org.bukkit.FluidCollisionMode;
 import org.bukkit.GameMode;
+import org.bukkit.GameRule;
 import org.bukkit.Instrument;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -46,10 +48,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Pose;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.memory.MemoryKey;
-import org.bukkit.event.Event;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
@@ -1598,6 +1600,39 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setHealth(double health)
+	{
+		if (health > 0)
+		{
+			this.health = Math.min(health, getMaxHealth());
+			return;
+		}
+
+		this.health = 0;
+
+		List<ItemStack> drops = new ArrayList<>();
+		drops.addAll(Arrays.asList(getInventory().getContents()));
+		PlayerDeathEvent event = new PlayerDeathEvent(this, drops, 0, getName() + " got killed");
+		Bukkit.getPluginManager().callEvent(event);
+
+		// Terminate any InventoryView and the cursor item
+		closeInventory();
+
+		// Clear the Inventory if keep-inventory is not enabled
+		if (!getWorld().getGameRuleValue(GameRule.KEEP_INVENTORY).booleanValue())
+		{
+			getInventory().clear();
+			// Should someone try to provoke a RespawnEvent, they will now find the Inventory to be empty
+		}
+
+		setLevel(0);
+		setExp(0);
+		setFoodLevel(0);
+
+		alive = false;
 	}
 
 	@Override
