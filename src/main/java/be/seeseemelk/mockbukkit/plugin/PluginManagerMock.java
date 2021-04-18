@@ -191,8 +191,7 @@ public class PluginManagerMock implements PluginManager
 	 *
 	 * @return A collection of all available commands.
 	 */
-	@NotNull
-	public Collection<PluginCommand> getCommands()
+	public @NotNull Collection<PluginCommand> getCommands()
 	{
 		return Collections.unmodifiableList(commands);
 	}
@@ -264,8 +263,7 @@ public class PluginManagerMock implements PluginManager
 	 * @return The created temporary directory.
 	 * @throws IOException when the directory could not be created.
 	 */
-	@NotNull
-	private File createTemporaryDirectory(@NotNull String name) throws IOException
+	private @NotNull File createTemporaryDirectory(@NotNull String name) throws IOException
 	{
 		Random random = ThreadLocalRandom.current();
 		File directory = Files.createTempDirectory(name + "-" + random.nextInt()).toFile();
@@ -584,7 +582,7 @@ public class PluginManagerMock implements PluginManager
 	}
 
 	@Override
-	public void registerEvents(@NotNull Listener listener, Plugin plugin)
+	public void registerEvents(@NotNull Listener listener, @NotNull Plugin plugin)
 	{
 		if (!plugin.isEnabled())
 		{
