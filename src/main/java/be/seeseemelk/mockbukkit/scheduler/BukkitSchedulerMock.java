@@ -143,19 +143,19 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	}
 
 	@Override
-	public BukkitTask runTask(Plugin plugin, Runnable task)
+	public @NotNull BukkitTask runTask(@NotNull Plugin plugin, @NotNull Runnable task)
 	{
 		return runTaskLater(plugin, task, 1L);
 	}
 
 	@Override
-	public BukkitTask runTask(Plugin plugin, BukkitRunnable task)
+	public @NotNull BukkitTask runTask(@NotNull Plugin plugin, @NotNull BukkitRunnable task)
 	{
 		return runTask(plugin, (Runnable) task);
 	}
 
 	@Override
-	public BukkitTask runTaskLater(Plugin plugin, Runnable task, long delay)
+	public @NotNull BukkitTask runTaskLater(@NotNull Plugin plugin, @NotNull Runnable task, long delay)
 	{
 		delay = Math.max(delay, 1);
 		ScheduledTask scheduledTask = new ScheduledTask(id++, plugin, true, currentTick + delay, task);
@@ -164,7 +164,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	}
 
 	@Override
-	public BukkitTask runTaskTimer(Plugin plugin, Runnable task, long delay, long period)
+	public @NotNull BukkitTask runTaskTimer(@NotNull Plugin plugin, @NotNull Runnable task, long delay, long period)
 	{
 		delay = Math.max(delay, 1);
 		RepeatingTask repeatingTask = new RepeatingTask(id++, plugin, true, currentTick + delay, period, task);
@@ -173,55 +173,55 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	}
 
 	@Override
-	public BukkitTask runTaskTimer(Plugin plugin, BukkitRunnable task, long delay, long period)
+	public @NotNull BukkitTask runTaskTimer(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay, long period)
 	{
 		return runTaskTimer(plugin, (Runnable) task, delay, period);
 	}
 
 	@Override
-	public int scheduleSyncDelayedTask(Plugin plugin, Runnable task, long delay)
+	public int scheduleSyncDelayedTask(@NotNull Plugin plugin, @NotNull Runnable task, long delay)
 	{
 		Logger.getLogger(LOGGER_NAME).warning("Consider using runTaskLater instead of scheduleSyncDelayTask");
 		return runTaskLater(plugin, task, delay).getTaskId();
 	}
 
 	@Override
-	public int scheduleSyncDelayedTask(Plugin plugin, BukkitRunnable task, long delay)
+	public int scheduleSyncDelayedTask(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay)
 	{
 		Logger.getLogger(LOGGER_NAME).warning("Consider using runTaskLater instead of scheduleSyncDelayTask");
 		return runTaskLater(plugin, (Runnable) task, delay).getTaskId();
 	}
 
 	@Override
-	public int scheduleSyncDelayedTask(Plugin plugin, Runnable task)
+	public int scheduleSyncDelayedTask(@NotNull Plugin plugin, @NotNull Runnable task)
 	{
 		Logger.getLogger(LOGGER_NAME).warning("Consider using runTask instead of scheduleSyncDelayTask");
 		return runTask(plugin, task).getTaskId();
 	}
 
 	@Override
-	public int scheduleSyncDelayedTask(Plugin plugin, BukkitRunnable task)
+	public int scheduleSyncDelayedTask(@NotNull Plugin plugin, @NotNull BukkitRunnable task)
 	{
 		Logger.getLogger(LOGGER_NAME).warning("Consider using runTask instead of scheduleSyncDelayTask");
 		return runTask(plugin, (Runnable) task).getTaskId();
 	}
 
 	@Override
-	public int scheduleSyncRepeatingTask(Plugin plugin, Runnable task, long delay, long period)
+	public int scheduleSyncRepeatingTask(@NotNull Plugin plugin, @NotNull Runnable task, long delay, long period)
 	{
 		Logger.getLogger(LOGGER_NAME).warning("Consider using runTaskTimer instead of scheduleSyncRepeatingTask");
 		return runTaskTimer(plugin, task, delay, period).getTaskId();
 	}
 
 	@Override
-	public int scheduleSyncRepeatingTask(Plugin plugin, BukkitRunnable task, long delay, long period)
+	public int scheduleSyncRepeatingTask(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay, long period)
 	{
 		Logger.getLogger(LOGGER_NAME).warning("Consider using runTaskTimer instead of scheduleSyncRepeatingTask");
 		return runTaskTimer(plugin, (Runnable) task, delay, period).getTaskId();
 	}
 
 	@Override
-	public int scheduleAsyncDelayedTask(Plugin plugin, Runnable task, long delay)
+	public int scheduleAsyncDelayedTask(@NotNull Plugin plugin, @NotNull Runnable task, long delay)
 	{
 		Logger.getLogger(LOGGER_NAME)
 		.warning("Consider using runTaskLaterAsynchronously instead of scheduleAsyncDelayedTask");
@@ -229,7 +229,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	}
 
 	@Override
-	public int scheduleAsyncDelayedTask(Plugin plugin, Runnable task)
+	public int scheduleAsyncDelayedTask(@NotNull Plugin plugin, @NotNull Runnable task)
 	{
 		Logger.getLogger(LOGGER_NAME)
 		.warning("Consider using runTaskAsynchronously instead of scheduleAsyncDelayedTask");
@@ -237,7 +237,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	}
 
 	@Override
-	public int scheduleAsyncRepeatingTask(Plugin plugin, Runnable task, long delay, long period)
+	public int scheduleAsyncRepeatingTask(@NotNull Plugin plugin, @NotNull Runnable task, long delay, long period)
 	{
 		Logger.getLogger(LOGGER_NAME)
 		.warning("Consider using runTaskTimerAsynchronously instead of scheduleAsyncRepeatingTask");
@@ -245,7 +245,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	}
 
 	@Override
-	public <T> Future<T> callSyncMethod(Plugin plugin, Callable<T> task)
+	public <T> @NotNull Future<T> callSyncMethod(@NotNull Plugin plugin, @NotNull Callable<T> task)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -265,7 +265,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	}
 
 	@Override
-	public void cancelTasks(Plugin plugin)
+	public void cancelTasks(@NotNull Plugin plugin)
 	{
 		for (ScheduledTask task : tasks)
 		{
@@ -295,21 +295,21 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	}
 
 	@Override
-	public List<BukkitWorker> getActiveWorkers()
+	public @NotNull List<BukkitWorker> getActiveWorkers()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public List<BukkitTask> getPendingTasks()
+	public @NotNull List<BukkitTask> getPendingTasks()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public BukkitTask runTaskAsynchronously(Plugin plugin, Runnable task)
+	public @NotNull BukkitTask runTaskAsynchronously(@NotNull Plugin plugin, @NotNull Runnable task)
 	{
 		ScheduledTask scheduledTask = new ScheduledTask(id++, plugin, false, currentTick, new AsyncRunnable(task));
 		asyncTasksRunning.incrementAndGet();
@@ -318,19 +318,19 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	}
 
 	@Override
-	public BukkitTask runTaskAsynchronously(Plugin plugin, BukkitRunnable task)
+	public @NotNull BukkitTask runTaskAsynchronously(@NotNull Plugin plugin, @NotNull BukkitRunnable task)
 	{
 		return runTaskAsynchronously(plugin, (Runnable) task);
 	}
 
 	@Override
-	public BukkitTask runTaskLater(Plugin plugin, BukkitRunnable task, long delay)
+	public @NotNull BukkitTask runTaskLater(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay)
 	{
 		return runTaskLater(plugin, (Runnable) task, delay);
 	}
 
 	@Override
-	public BukkitTask runTaskLaterAsynchronously(Plugin plugin, Runnable task, long delay)
+	public @NotNull BukkitTask runTaskLaterAsynchronously(@NotNull Plugin plugin, @NotNull Runnable task, long delay)
 	{
 		ScheduledTask scheduledTask = new ScheduledTask(id++, plugin, false, currentTick + delay,
 		        new AsyncRunnable(task));
@@ -340,13 +340,13 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	}
 
 	@Override
-	public BukkitTask runTaskLaterAsynchronously(Plugin plugin, BukkitRunnable task, long delay)
+	public @NotNull BukkitTask runTaskLaterAsynchronously(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay)
 	{
 		return runTaskLaterAsynchronously(plugin, (Runnable) task, delay);
 	}
 
 	@Override
-	public BukkitTask runTaskTimerAsynchronously(Plugin plugin, Runnable task, long delay, long period)
+	public @NotNull BukkitTask runTaskTimerAsynchronously(@NotNull Plugin plugin, @NotNull Runnable task, long delay, long period)
 	{
 		RepeatingTask scheduledTask = new RepeatingTask(id++, plugin, false, currentTick + delay, period,
 		        new AsyncRunnable(task));
@@ -355,7 +355,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	}
 
 	@Override
-	public BukkitTask runTaskTimerAsynchronously(Plugin plugin, BukkitRunnable task, long delay, long period)
+	public @NotNull BukkitTask runTaskTimerAsynchronously(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay, long period)
 	{
 		return runTaskTimerAsynchronously(plugin, (Runnable) task, delay, period);
 	}
@@ -386,42 +386,42 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	}
 
 	@Override
-	public void runTask(Plugin plugin, Consumer<BukkitTask> task)
+	public void runTask(@NotNull Plugin plugin, @NotNull Consumer<BukkitTask> task)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void runTaskAsynchronously(Plugin plugin, Consumer<BukkitTask> task)
+	public void runTaskAsynchronously(@NotNull Plugin plugin, @NotNull Consumer<BukkitTask> task)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void runTaskLater(Plugin plugin, Consumer<BukkitTask> task, long delay)
+	public void runTaskLater(@NotNull Plugin plugin, @NotNull Consumer<BukkitTask> task, long delay)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void runTaskLaterAsynchronously(Plugin plugin, Consumer<BukkitTask> task, long delay)
+	public void runTaskLaterAsynchronously(@NotNull Plugin plugin, @NotNull Consumer<BukkitTask> task, long delay)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void runTaskTimer(Plugin plugin, Consumer<BukkitTask> task, long delay, long period)
+	public void runTaskTimer(@NotNull Plugin plugin, @NotNull Consumer<BukkitTask> task, long delay, long period)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void runTaskTimerAsynchronously(Plugin plugin, Consumer<BukkitTask> task, long delay, long period)
+	public void runTaskTimerAsynchronously(@NotNull Plugin plugin, @NotNull Consumer<BukkitTask> task, long delay, long period)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
