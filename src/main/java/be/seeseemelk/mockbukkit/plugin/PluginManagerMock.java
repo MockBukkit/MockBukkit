@@ -484,15 +484,17 @@ public class PluginManagerMock implements PluginManager
 			break;
 		case "aliases":
 			if (value instanceof List<?>)
+			{
 				command.setAliases(
-						((List<?>)value).stream().map(Object::toString).collect(Collectors.toList()));
-			else
-				if(value != null)
-				{
-					command.setAliases(Collections.singletonList(value.toString()));
-				} else {
-					command.setAliases(Collections.emptyList());
-				}
+						((List<?>) value).stream().map(Object::toString).collect(Collectors.toList()));
+			}
+			else if (value != null)
+			{
+				command.setAliases(Collections.singletonList(value.toString()));
+			}
+			else {
+				command.setAliases(Collections.emptyList());
+			}
 			break;
 		case "permission":
 			command.setPermission((String) value);
