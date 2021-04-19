@@ -117,6 +117,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 
 	private final PlayerSpigotMock playerSpigotMock = new PlayerSpigotMock();
 	private final List<AudioExperience> heardSounds = new LinkedList<>();
+	private final List<String> hiddenPlayerNicks = new ArrayList<String>();
 
 	public PlayerMock(ServerMock server, String name)
 	{
@@ -1479,41 +1480,37 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		throw new UnimplementedOperationException();
 	}
 
+
 	@Override
 	@Deprecated
 	public void hidePlayer(@NotNull Player player)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		hiddenPlayerNicks.add(player.getName());
 	}
 
 	@Override
 	public void hidePlayer(@NotNull Plugin plugin, @NotNull Player player)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		hidePlayer(player);
 	}
 
 	@Override
 	@Deprecated
 	public void showPlayer(@NotNull Player player)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		hiddenPlayerNicks.remove(player.getName());
 	}
 
 	@Override
 	public void showPlayer(@NotNull Plugin plugin, @NotNull Player player)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		showPlayer(player);
 	}
 
 	@Override
 	public boolean canSee(@NotNull Player player)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return !hiddenPlayerNicks.contains(player.getName());
 	}
 
 	@Override

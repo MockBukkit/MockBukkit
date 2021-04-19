@@ -1128,4 +1128,14 @@ public class PlayerMockTest
 		assertTrue(player.isFlying());
 		server.getPluginManager().assertEventFired(PlayerToggleFlightEvent.class);
 	}
+
+	@Test
+	public void testPlayerHide(){
+		PlayerMock player2 = server.addPlayer();
+		player.hidePlayer(null, player2);
+		assertFalse(player.canSee(player2));
+		player.showPlayer(null, player2);
+		assertTrue(player.canSee(player2));
+	}
+
 }
