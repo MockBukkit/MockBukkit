@@ -1130,7 +1130,7 @@ public class PlayerMockTest
 	}
 
 	@Test
-	public void testPlayerHide(){
+	public void testPlayerHide() {
 		PlayerMock player2 = server.addPlayer();
 		player.hidePlayer(null, player2);
 		assertFalse(player.canSee(player2));
