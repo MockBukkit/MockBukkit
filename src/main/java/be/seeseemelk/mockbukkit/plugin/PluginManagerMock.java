@@ -492,7 +492,8 @@ public class PluginManagerMock implements PluginManager
 			{
 				command.setAliases(Collections.singletonList(value.toString()));
 			}
-			else {
+			else
+			{
 				command.setAliases(Collections.emptyList());
 			}
 			break;
