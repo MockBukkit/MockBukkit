@@ -117,7 +117,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 
 	private final PlayerSpigotMock playerSpigotMock = new PlayerSpigotMock();
 	private final List<AudioExperience> heardSounds = new LinkedList<>();
-	private final List<String> hiddenPlayerNicks = new ArrayList<>();
+	private final HashMap<UUID,List<String>> hiddenPlayerNicks = new HashMap<>();
 
 	public PlayerMock(ServerMock server, String name)
 	{
@@ -1480,37 +1480,49 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		throw new UnimplementedOperationException();
 	}
 
-
 	@Override
 	@Deprecated
 	public void hidePlayer(@NotNull Player player)
 	{
-		hiddenPlayerNicks.add(player.getName());
+		createRecordOfHiddenPlayerIfNotExists(player);
 	}
 
 	@Override
 	public void hidePlayer(@NotNull Plugin plugin, @NotNull Player player)
 	{
-		hidePlayer(player);
+		createRecordOfHiddenPlayerIfNotExists(player);
+		hiddenPlayerNicks.get(player.getUniqueId()).add(plugin.getName());
 	}
 
 	@Override
 	@Deprecated
 	public void showPlayer(@NotNull Player player)
 	{
-		hiddenPlayerNicks.remove(player.getName());
+		hiddenPlayerNicks.remove(player.getUniqueId());
 	}
 
 	@Override
 	public void showPlayer(@NotNull Plugin plugin, @NotNull Player player)
 	{
-		showPlayer(player);
+		if(hiddenPlayerNicks.containsKey(player.getUniqueId()))
+		{
+			List<String> blockingPlugins = hiddenPlayerNicks.get(player.getUniqueId());
+			blockingPlugins.remove(plugin.getName());
+			if(blockingPlugins.size() == 0)
+				showPlayer(player);
+		}
 	}
 
 	@Override
 	public boolean canSee(@NotNull Player player)
 	{
-		return !hiddenPlayerNicks.contains(player.getName());
+		return !hiddenPlayerNicks.containsKey(player.getUniqueId());
+	}
+
+	private void createRecordOfHiddenPlayerIfNotExists(Player playerToHide)
+	{
+		if(!hiddenPlayerNicks.containsKey(playerToHide.getUniqueId()))
+			hiddenPlayerNicks.put(playerToHide.getUniqueId(), new ArrayList<>());
 	}
 
 	@Override
