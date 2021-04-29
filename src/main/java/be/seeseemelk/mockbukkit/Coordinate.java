@@ -31,6 +31,16 @@ public class Coordinate
 		this(0, 0, 0);
 	}
 
+	/**
+	 * Gets the chunk coordinate this coordinate is in.
+	 *
+	 * @return The chunk coordinate of this coordinate.
+	 */
+	public ChunkCoordinate toChunkCoordinate()
+	{
+		return new ChunkCoordinate(x / 16, z / 16);
+	}
+
 	@Override
 	public int hashCode()
 	{

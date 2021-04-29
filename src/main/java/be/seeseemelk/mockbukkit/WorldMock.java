@@ -76,10 +76,11 @@ public class WorldMock implements World
 {
 	private static final int MIN_WORLD_HEIGHT = 0;
 	private static final int MAX_WORLD_HEIGHT = 256;
-	
+
 	private final Map<Coordinate, BlockMock> blocks = new HashMap<>();
 	private final Map<GameRule<?>, Object> gameRules = new HashMap<>();
 	private final MetadataTable metadataTable = new MetadataTable();
+	private final Map<ChunkCoordinate, ChunkMock> loadedChunks = new HashMap<>();
 
 	private Environment environment = Environment.NORMAL;
 	private ServerMock server;
@@ -268,8 +269,17 @@ public class WorldMock implements World
 	@Override
 	public ChunkMock getChunkAt(int x, int z)
 	{
-		ChunkMock chunk = new ChunkMock(this, x, z);
-		return chunk;
+		return getChunkAt(new ChunkCoordinate(x, z));
+	}
+
+	public ChunkMock getChunkAt(ChunkCoordinate coordinate)
+	{
+		if (!loadedChunks.containsKey(coordinate))
+		{
+			ChunkMock chunk = new ChunkMock(this, coordinate.getX(), coordinate.getZ());
+			loadedChunks.put(coordinate, chunk);
+		}
+		return loadedChunks.get(coordinate);
 	}
 
 	@Override
@@ -360,8 +370,7 @@ public class WorldMock implements World
 	@Override
 	public Chunk[] getLoadedChunks()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return loadedChunks.values().toArray(new Chunk[0]);
 	}
 
 	@Override
@@ -374,8 +383,8 @@ public class WorldMock implements World
 	@Override
 	public boolean isChunkLoaded(int x, int z)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		ChunkCoordinate coordinate = new ChunkCoordinate(x, z);
+		return loadedChunks.containsKey(coordinate);
 	}
 
 	@Override
