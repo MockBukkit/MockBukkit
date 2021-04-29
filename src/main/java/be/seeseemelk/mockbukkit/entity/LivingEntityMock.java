@@ -1,7 +1,6 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.EnumMap;
 import java.util.HashSet;
@@ -13,7 +12,6 @@ import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.FluidCollisionMode;
-import org.bukkit.GameRule;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
@@ -27,8 +25,6 @@ import org.bukkit.entity.Projectile;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
-import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.RayTraceResult;
@@ -145,21 +141,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public void damage(double amount)
 	{
-		Map<EntityDamageEvent.DamageModifier, Double> modifiers = new EnumMap<>(EntityDamageEvent.DamageModifier.class);
-		modifiers.put(EntityDamageEvent.DamageModifier.BASE, 1.0);
-		Map<EntityDamageEvent.DamageModifier, Function<Double, Double>> modifierFunctions = new EnumMap<>(
-		    EntityDamageEvent.DamageModifier.class);
-		modifierFunctions.put(EntityDamageEvent.DamageModifier.BASE, damage -> damage);
-
-		EntityDamageEvent event = new EntityDamageEvent(this, EntityDamageEvent.DamageCause.CUSTOM, modifiers,
-		        modifierFunctions);
-		event.setDamage(amount);
-		Bukkit.getPluginManager().callEvent(event);
-		if (!event.isCancelled())
-		{
-			amount = event.getDamage();
-			setHealth(health - amount);
-		}
+		damage(amount, null);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -172,8 +154,13 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		    EntityDamageEvent.DamageModifier.class);
 		modifierFunctions.put(EntityDamageEvent.DamageModifier.BASE, damage -> damage);
 
-		EntityDamageByEntityEvent event = new EntityDamageByEntityEvent(source, this,
-		        EntityDamageEvent.DamageCause.ENTITY_ATTACK, modifiers, modifierFunctions);
+		EntityDamageEvent event = source != null ?
+				new EntityDamageByEntityEvent(source, this,
+						EntityDamageEvent.DamageCause.ENTITY_ATTACK, modifiers, modifierFunctions)
+				:
+				new EntityDamageEvent(this, EntityDamageEvent.DamageCause.CUSTOM, modifiers,
+						modifierFunctions)
+				;
 		event.setDamage(amount);
 		Bukkit.getPluginManager().callEvent(event);
 		if (!event.isCancelled())
@@ -395,15 +382,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public boolean hasPotionEffect(PotionEffectType type)
 	{
-		for (PotionEffect effect : getActivePotionEffects())
-		{
-			if (effect.getType().equals(type))
-			{
-				return true;
-			}
-		}
-
-		return false;
+		return getPotionEffect(type) != null;
 	}
 
 	@Override
@@ -423,17 +402,8 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public void removePotionEffect(PotionEffectType type)
 	{
-		Iterator<ActivePotionEffect> iterator = activeEffects.iterator();
 
-		while (iterator.hasNext())
-		{
-			ActivePotionEffect effect = iterator.next();
-
-			if (effect.hasExpired() || effect.getPotionEffect().getType().equals(type))
-			{
-				iterator.remove();
-			}
-		}
+		activeEffects.removeIf(effect -> effect.hasExpired() || effect.getPotionEffect().getType().equals(type));
 	}
 
 	@Override
