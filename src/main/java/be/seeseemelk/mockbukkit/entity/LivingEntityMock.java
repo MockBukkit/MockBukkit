@@ -79,8 +79,10 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public void setHealth(double health)
 	{
-		if (health <= 0) this.kill();
-		else this.health = Math.min(health, getMaxHealth());
+		if (health <= 0)
+			this.kill();
+		else
+			this.health = Math.min(health, getMaxHealth());
 	}
 
 	/**
@@ -93,8 +95,8 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		this.kill();
 	}
 
-	/*
-	 * Kills this entity and propagates the necessary event
+	/**
+	 * Kills this entity and propagates the necessary event.
 	 */
 	public void kill()
 	{
