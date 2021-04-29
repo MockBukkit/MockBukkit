@@ -5,9 +5,9 @@ package be.seeseemelk.mockbukkit;
  */
 public class Coordinate
 {
-	public int x;
-	public int y;
-	public int z;
+	public final int x;
+	public final int y;
+	public final int z;
 
 	/**
 	 * Creates a new coordinate object with a specified (x, y, z).
