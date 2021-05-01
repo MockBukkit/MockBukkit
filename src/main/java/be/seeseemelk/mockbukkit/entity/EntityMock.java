@@ -78,7 +78,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public final boolean equals(Object obj)
 	{
-		if (obj instanceof EntityMock) 
+		if (obj instanceof EntityMock)
 		{
 			return uuid.equals(((EntityMock) obj).getUniqueId());
 		}
@@ -817,7 +817,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 	@Override
 	public Entity.Spigot spigot()
 	{

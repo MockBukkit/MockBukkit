@@ -76,7 +76,7 @@ public class WorldMock implements World
 {
 	private static final int MIN_WORLD_HEIGHT = 0;
 	private static final int MAX_WORLD_HEIGHT = 256;
-	
+
 	private final Map<Coordinate, BlockMock> blocks = new HashMap<>();
 	private final Map<GameRule<?>, Object> gameRules = new HashMap<>();
 	private final MetadataTable metadataTable = new MetadataTable();
@@ -466,7 +466,7 @@ public class WorldMock implements World
 	{
 		return dropItem(loc, item, e -> {});
 	}
-	
+
 	@Override
 	public ItemEntityMock dropItemNaturally(@NotNull Location location, @NotNull ItemStack item, @Nullable Consumer<Item> function)
 	{
