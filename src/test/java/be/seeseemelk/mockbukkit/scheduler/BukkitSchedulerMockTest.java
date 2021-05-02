@@ -178,6 +178,25 @@ public class BukkitSchedulerMockTest
 		assertFalse(scheduler.isQueued(testTask.getTaskId()));
 		assertEquals(2, count.get());
 	}
+
+	@Test
+	public void getPendingTasks()
+	{
+		assertEquals(0,scheduler.getPendingTasks().size());
+		int amountTasks = 5;
+		AtomicInteger count = new AtomicInteger(amountTasks);
+		Runnable callback = count::decrementAndGet;
+		for (int i = 0; i < amountTasks; i++)
+		{
+			scheduler.runTaskLater(null, callback, 2L+i);
+		}
+		while (count.get()>0)
+		{
+			assertEquals(count.get(),scheduler.getPendingTasks().size());
+			scheduler.performOneTick();
+		}
+		assertEquals(count.get(),scheduler.getPendingTasks().size());
+	}
 }
 
 
