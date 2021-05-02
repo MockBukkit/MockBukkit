@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.scheduler;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -10,6 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
@@ -304,8 +306,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public @NotNull List<BukkitTask> getPendingTasks()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return tasks.stream().filter(task -> task.getTaskId() != -1).collect(Collectors.toList());
 	}
 
 	@Override
