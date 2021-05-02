@@ -1143,6 +1143,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public void updateInventory()
 	{
+		// Sends the client the current inventory to update it on client side, not needed for only server-mocking
 	}
 
 	@Override
