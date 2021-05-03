@@ -18,7 +18,6 @@ import org.bukkit.scheduler.BukkitTask;
 import org.junit.Before;
 import org.junit.Test;
 
-
 public class BukkitSchedulerMockTest
 {
 	private BukkitSchedulerMock scheduler;
@@ -184,7 +183,7 @@ public class BukkitSchedulerMockTest
 	@Test
 	public void getPendingTasks_Sync()
 	{
-		assertEquals(0,scheduler.getPendingTasks().size());
+		assertEquals(0, scheduler.getPendingTasks().size());
 		int amountTasks = 20;
 		AtomicInteger count = new AtomicInteger(amountTasks);
 		Runnable callback = count::decrementAndGet;
@@ -194,15 +193,15 @@ public class BukkitSchedulerMockTest
 		}
 		while (count.get()>0)
 		{
-			assertEquals(count.get(),scheduler.getPendingTasks().size());
+			assertEquals(count.get(), scheduler.getPendingTasks().size());
 			scheduler.performOneTick();
 		}
-		assertEquals(count.get(),scheduler.getPendingTasks().size());
+		assertEquals(count.get(), scheduler.getPendingTasks().size());
 	}
 
 	@Test
 	public void getPendingTasks_Async() {
-		assertEquals(0,scheduler.getPendingTasks().size());
+		assertEquals(0, scheduler.getPendingTasks().size());
 		int amountTasks = 20;
 		AtomicInteger count = new AtomicInteger(amountTasks);
 		Runnable callback = () ->
@@ -218,7 +217,7 @@ public class BukkitSchedulerMockTest
 		};
 		for (int i = 0; i < amountTasks; i++)
 		{
-			scheduler.runTaskLaterAsynchronously(null, callback, 2L+(i%5));
+			scheduler.runTaskLaterAsynchronously(null, callback, 2L + (i % 5));
 		}
 		int pendingTasks;
 		int oldPendingTasks = amountTasks;
@@ -230,8 +229,39 @@ public class BukkitSchedulerMockTest
 			scheduler.performOneTick();
 			oldPendingTasks = pendingTasks;
 		}
-		assertEquals(0,scheduler.getPendingTasks().size());
-		assertEquals(0,count.get());
+		assertEquals(0, scheduler.getPendingTasks().size());
+		assertEquals(0, count.get());
+	}
+
+	@Test
+	public void getPendingTasks_AsyncCanceledTasks() {
+		assertEquals(0, scheduler.getPendingTasks().size());
+		int amountTasks = 20;
+		Runnable callback = () ->
+		{
+			try
+			{	// simulate some varying work load / execution time
+				Thread.sleep(ThreadLocalRandom.current().nextInt(2, 20));
+			}
+			catch (InterruptedException e){
+				e.printStackTrace();
+			}
+		};
+		for (int i = 0; i < amountTasks; i++)
+		{
+			scheduler.runTaskLaterAsynchronously(null, callback, 1L + (i % 5));
+		}
+		assertEquals(amountTasks, scheduler.getPendingTasks().size());
+		scheduler.performOneTick();
+		assertTrue(amountTasks >= scheduler.getPendingTasks().size());
+		assertNotEquals(0, scheduler.getPendingTasks().size());
+		for (BukkitTask task : scheduler.getPendingTasks())
+		{
+			task.cancel();
+		}
+		assertEquals(0, scheduler.getPendingTasks().size());
+		scheduler.performOneTick();
+		assertEquals(0, scheduler.getPendingTasks().size());
 	}
 }
 
