@@ -1,11 +1,5 @@
 package be.seeseemelk.mockbukkit.scheduler;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.TimeUnit;
@@ -16,6 +10,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.bukkit.scheduler.BukkitTask;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 public class BukkitSchedulerMockTest
 {
@@ -180,7 +176,7 @@ public class BukkitSchedulerMockTest
 	}
 
 	@Test
-	public void getPendingTasks()
+	public void getPendingTasks_Sync()
 	{
 		assertEquals(0,scheduler.getPendingTasks().size());
 		int amountTasks = 5;
@@ -193,6 +189,26 @@ public class BukkitSchedulerMockTest
 		while (count.get()>0)
 		{
 			assertEquals(count.get(),scheduler.getPendingTasks().size());
+			scheduler.performOneTick();
+		}
+		assertEquals(count.get(),scheduler.getPendingTasks().size());
+	}
+
+	@Test
+	public void getPendingTasks_Async() {
+		assertEquals(0,scheduler.getPendingTasks().size());
+		int amountTasks = 5;
+		AtomicInteger count = new AtomicInteger(amountTasks);
+		Runnable callback = count::decrementAndGet;
+		for (int i = 0; i < amountTasks; i++)
+		{
+			scheduler.runTaskLaterAsynchronously(null, callback, 2L+i);
+		}
+		int oldCount;
+		while ((oldCount = count.get())>0)
+		{
+			int pendingTasksSize = scheduler.getPendingTasks().size();
+			assertTrue(count.get()<=pendingTasksSize && pendingTasksSize<=oldCount);
 			scheduler.performOneTick();
 		}
 		assertEquals(count.get(),scheduler.getPendingTasks().size());

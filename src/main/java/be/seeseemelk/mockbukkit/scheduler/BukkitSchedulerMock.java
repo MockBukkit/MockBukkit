@@ -3,10 +3,7 @@ package be.seeseemelk.mockbukkit.scheduler;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
@@ -37,6 +34,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	private final AtomicInteger asyncTasksRunning = new AtomicInteger();
 	private final AtomicReference<Exception> asyncException = new AtomicReference<>();
 	private int asyncTasksQueued = 0;
+	private ConcurrentHashMap<Integer, ScheduledTask> runners = new ConcurrentHashMap<>();
 
 	/**
 	 * Shuts the scheduler down. Note that this function will throw exception that where thrown by old asynchronous
@@ -86,6 +84,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 				}
 				else
 				{
+					runners.put(task.getTaskId(),task);
 					asyncTasksRunning.incrementAndGet();
 					pool.execute(task.getRunnable());
 					asyncTasksQueued--;
@@ -261,6 +260,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			if (task.getTaskId() == taskId)
 			{
 				task.cancel();
+				runners.remove(task.getTaskId());
 				return;
 			}
 		}
@@ -273,6 +273,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		{
 			if (task.getOwner().equals(plugin))
 			{
+				runners.remove(task.getTaskId());
 				task.cancel();
 			}
 		}
@@ -306,13 +307,28 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public @NotNull List<BukkitTask> getPendingTasks()
 	{
-		return tasks.stream().filter(task -> task.getTaskId() != -1).collect(Collectors.toList());
+		List<ScheduledTask> truePending = tasks.stream().filter(task -> task.getTaskId() != -1).collect(Collectors.toList());
+		List<BukkitTask> pending = new ArrayList<BukkitTask>();
+		for (ScheduledTask task : runners.values())
+		{
+			if (!task.isCancelled()) {
+				pending.add(task);
+			}
+		}
+		for (ScheduledTask task : truePending)
+		{
+			if (!task.isCancelled() && !pending.contains(task))
+				pending.add(task);
+		}
+		return pending;
 	}
 
 	@Override
 	public @NotNull BukkitTask runTaskAsynchronously(@NotNull Plugin plugin, @NotNull Runnable task)
 	{
-		ScheduledTask scheduledTask = new ScheduledTask(id++, plugin, false, currentTick, new AsyncRunnable(task));
+		ScheduledTask scheduledTask = new ScheduledTask(id, plugin, false, currentTick, new AsyncRunnable(task, id));
+		runners.put(id,scheduledTask);
+		id++;
 		asyncTasksRunning.incrementAndGet();
 		pool.execute(scheduledTask.getRunnable());
 		return scheduledTask;
@@ -333,8 +349,10 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public @NotNull BukkitTask runTaskLaterAsynchronously(@NotNull Plugin plugin, @NotNull Runnable task, long delay)
 	{
-		ScheduledTask scheduledTask = new ScheduledTask(id++, plugin, false, currentTick + delay,
-		        new AsyncRunnable(task));
+		ScheduledTask scheduledTask = new ScheduledTask(id, plugin, false, currentTick + delay,
+		        new AsyncRunnable(task, id));
+		runners.put(id,scheduledTask);
+		id++;
 		tasks.add(scheduledTask);
 		asyncTasksQueued++;
 		return scheduledTask;
@@ -349,8 +367,10 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public @NotNull BukkitTask runTaskTimerAsynchronously(@NotNull Plugin plugin, @NotNull Runnable task, long delay, long period)
 	{
-		RepeatingTask scheduledTask = new RepeatingTask(id++, plugin, false, currentTick + delay, period,
-		        new AsyncRunnable(task));
+		RepeatingTask scheduledTask = new RepeatingTask(id, plugin, false, currentTick + delay, period,
+		        new AsyncRunnable(task, id));
+		runners.put(id,scheduledTask);
+		id++;
 		tasks.add(scheduledTask);
 		return scheduledTask;
 	}
@@ -364,10 +384,12 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	class AsyncRunnable implements Runnable
 	{
 		private final Runnable task;
+		private final int taskId;
 
-		private AsyncRunnable(Runnable runnable)
+		private AsyncRunnable(Runnable runnable, int taskId)
 		{
 			task = runnable;
+			this.taskId = taskId;
 		}
 
 		@Override
@@ -382,6 +404,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 				asyncException.set(t);
 			}
 			asyncTasksRunning.decrementAndGet();
+			runners.remove(taskId);
 		}
 
 	}
