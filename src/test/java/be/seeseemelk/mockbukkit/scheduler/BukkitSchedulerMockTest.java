@@ -1,9 +1,6 @@
 package be.seeseemelk.mockbukkit.scheduler;
 
-import java.util.concurrent.BrokenBarrierException;
-import java.util.concurrent.CyclicBarrier;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -179,12 +176,12 @@ public class BukkitSchedulerMockTest
 	public void getPendingTasks_Sync()
 	{
 		assertEquals(0,scheduler.getPendingTasks().size());
-		int amountTasks = 5;
+		int amountTasks = 20;
 		AtomicInteger count = new AtomicInteger(amountTasks);
 		Runnable callback = count::decrementAndGet;
 		for (int i = 0; i < amountTasks; i++)
 		{
-			scheduler.runTaskLater(null, callback, 2L+i);
+			scheduler.runTaskLater(null, callback, 2L+(i%5));
 		}
 		while (count.get()>0)
 		{
@@ -197,21 +194,35 @@ public class BukkitSchedulerMockTest
 	@Test
 	public void getPendingTasks_Async() {
 		assertEquals(0,scheduler.getPendingTasks().size());
-		int amountTasks = 5;
+		int amountTasks = 20;
 		AtomicInteger count = new AtomicInteger(amountTasks);
-		Runnable callback = count::decrementAndGet;
+		Runnable callback = () ->
+		{
+			try
+			{	// simulate some varying work load / execution time
+				Thread.sleep(ThreadLocalRandom.current().nextInt(2, 20));
+			}
+			catch (InterruptedException e){
+			e.printStackTrace();
+			}
+			count.decrementAndGet();
+		};
 		for (int i = 0; i < amountTasks; i++)
 		{
-			scheduler.runTaskLaterAsynchronously(null, callback, 2L+i);
+			scheduler.runTaskLaterAsynchronously(null, callback, 2L+(i%5));
 		}
-		int oldCount;
-		while ((oldCount = count.get())>0)
+		int pendingTasks;
+		int oldPendingTasks = amountTasks;
+		while ((pendingTasks = scheduler.getPendingTasks().size()) > 0)
 		{
-			int pendingTasksSize = scheduler.getPendingTasks().size();
-			assertTrue(count.get()<=pendingTasksSize && pendingTasksSize<=oldCount);
+			int currentCount = count.get();
+			assertTrue(currentCount <= pendingTasks);
+			assertTrue(pendingTasks <= oldPendingTasks);
 			scheduler.performOneTick();
+			oldPendingTasks = pendingTasks;
 		}
-		assertEquals(count.get(),scheduler.getPendingTasks().size());
+		assertEquals(0,scheduler.getPendingTasks().size());
+		assertEquals(0,count.get());
 	}
 }
 
