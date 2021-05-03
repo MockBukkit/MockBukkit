@@ -84,7 +84,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 				}
 				else
 				{
-					runners.put(task.getTaskId(),task);
+					runners.put(task.getTaskId(), task);
 					asyncTasksRunning.incrementAndGet();
 					pool.execute(task.getRunnable());
 					asyncTasksQueued--;
