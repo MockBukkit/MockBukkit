@@ -351,7 +351,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	{
 		ScheduledTask scheduledTask = new ScheduledTask(id, plugin, false, currentTick + delay,
 		        new AsyncRunnable(task, id));
-		runners.put(id,scheduledTask);
+		runners.put(id, scheduledTask);
 		id++;
 		tasks.add(scheduledTask);
 		asyncTasksQueued++;
