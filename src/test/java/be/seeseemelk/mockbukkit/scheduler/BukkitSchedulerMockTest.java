@@ -1,6 +1,16 @@
 package be.seeseemelk.mockbukkit.scheduler;
 
-import java.util.concurrent.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -8,7 +18,6 @@ import org.bukkit.scheduler.BukkitTask;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
 
 public class BukkitSchedulerMockTest
 {
