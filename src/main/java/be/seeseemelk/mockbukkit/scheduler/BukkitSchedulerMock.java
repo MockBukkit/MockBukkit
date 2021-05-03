@@ -327,7 +327,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public @NotNull BukkitTask runTaskAsynchronously(@NotNull Plugin plugin, @NotNull Runnable task)
 	{
 		ScheduledTask scheduledTask = new ScheduledTask(id, plugin, false, currentTick, new AsyncRunnable(task, id));
-		runners.put(id,scheduledTask);
+		runners.put(id, scheduledTask);
 		id++;
 		asyncTasksRunning.incrementAndGet();
 		pool.execute(scheduledTask.getRunnable());
