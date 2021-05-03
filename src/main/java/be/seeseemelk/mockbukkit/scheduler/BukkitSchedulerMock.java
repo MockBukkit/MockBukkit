@@ -34,7 +34,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	private final AtomicInteger asyncTasksRunning = new AtomicInteger();
 	private final AtomicReference<Exception> asyncException = new AtomicReference<>();
 	private int asyncTasksQueued = 0;
-	private ConcurrentHashMap<Integer, ScheduledTask> runners = new ConcurrentHashMap<>();
+	private ConcurrentMap<Integer, ScheduledTask> runners = new ConcurrentHashMap<>();
 
 	/**
 	 * Shuts the scheduler down. Note that this function will throw exception that where thrown by old asynchronous
