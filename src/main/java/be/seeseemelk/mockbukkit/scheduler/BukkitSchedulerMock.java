@@ -369,7 +369,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	{
 		RepeatingTask scheduledTask = new RepeatingTask(id, plugin, false, currentTick + delay, period,
 		        new AsyncRunnable(task, id));
-		runners.put(id,scheduledTask);
+		runners.put(id, scheduledTask);
 		id++;
 		tasks.add(scheduledTask);
 		return scheduledTask;
