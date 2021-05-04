@@ -1,6 +1,6 @@
 package be.seeseemelk.mockbukkit.boss;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.After;
 import org.junit.Before;
 
@@ -11,10 +11,10 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.KeyedBossBar;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.google.common.collect.Iterators;
 

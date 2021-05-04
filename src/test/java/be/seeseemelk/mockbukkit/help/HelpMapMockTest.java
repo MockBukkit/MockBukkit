@@ -1,6 +1,6 @@
 package be.seeseemelk.mockbukkit.help;
 
-import static org.junit.Assert.assertSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 import java.util.Collections;
 
@@ -10,7 +10,7 @@ import org.bukkit.help.HelpTopic;
 import org.bukkit.help.IndexHelpTopic;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;

@@ -1,6 +1,6 @@
 package be.seeseemelk.mockbukkit.sound;
 
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -73,13 +73,13 @@ public interface SoundReceiver
 	}
 
 	default void assertSoundHeard(@NotNull String message, @NotNull Sound sound,
-	                              @NotNull Predicate<AudioExperience> predicate)
+			@NotNull Predicate<AudioExperience> predicate)
 	{
 		assertSoundHeard(message, sound.getKey().getKey(), predicate);
 	}
 
 	default void assertSoundHeard(@NotNull String message, @NotNull String sound,
-	                              @NotNull Predicate<AudioExperience> predicate)
+			@NotNull Predicate<AudioExperience> predicate)
 	{
 		for (AudioExperience audio : getHeardSounds())
 		{

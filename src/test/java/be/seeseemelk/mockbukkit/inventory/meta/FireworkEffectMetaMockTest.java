@@ -1,9 +1,9 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
@@ -11,7 +11,7 @@ import org.bukkit.FireworkEffect.Type;
 import org.bukkit.inventory.meta.FireworkEffectMeta;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 

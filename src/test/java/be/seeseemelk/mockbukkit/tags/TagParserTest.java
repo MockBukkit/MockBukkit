@@ -1,11 +1,11 @@
 package be.seeseemelk.mockbukkit.tags;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.bukkit.NamespacedKey;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class TagParserTest
 {

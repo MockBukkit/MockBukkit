@@ -2,14 +2,14 @@ package be.seeseemelk.mockbukkit;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assume.assumeTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,9 +26,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.ScoreboardManager;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import be.seeseemelk.mockbukkit.command.CommandResult;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
@@ -38,17 +38,17 @@ import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
 import be.seeseemelk.mockbukkit.entity.SimpleEntityMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 
-public class ServerMockTest
+class ServerMockTest
 {
 	private ServerMock server;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		server = MockBukkit.mock();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown()
 	{
 		MockBukkit.unmock();

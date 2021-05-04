@@ -1,38 +1,38 @@
 package be.seeseemelk.mockbukkit;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.bukkit.enchantments.Enchantment;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import be.seeseemelk.mockbukkit.enchantments.EnchantmentsMock;
 
-public class EnchantmentTests
+class EnchantmentTests
 {
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		MockBukkit.mock();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown()
 	{
 		MockBukkit.unmock();
 	}
 
 	@Test
-	public void testEnchantmentValuesContainsEnchantment()
+	void testEnchantmentValuesContainsEnchantment()
 	{
 		final Enchantment[] enchantments = Enchantment.values();
 		assertTrue(enchantments.length > 0);
 	}
 
 	@Test
-	public void testEnchantmentsRegisterTwiceDoesNotThrow()
+	void testEnchantmentsRegisterTwiceDoesNotThrow()
 	{
 		EnchantmentsMock.registerDefaultEnchantments();
 		int originalLength = Enchantment.values().length;

@@ -1,9 +1,9 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import be.seeseemelk.mockbukkit.MockPlugin;
 import java.util.Arrays;
@@ -22,7 +22,7 @@ import org.bukkit.inventory.meta.Repairable;
 import org.bukkit.persistence.PersistentDataType;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 

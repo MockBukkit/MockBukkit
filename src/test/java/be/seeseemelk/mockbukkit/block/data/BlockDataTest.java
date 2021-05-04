@@ -2,7 +2,7 @@ package be.seeseemelk.mockbukkit.block.data;
 
 import org.bukkit.Material;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class BlockDataTest
 {
