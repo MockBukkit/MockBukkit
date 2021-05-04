@@ -17,67 +17,69 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 
-public class InventoryMockTest
+class InventoryMockTest
 {
 	private InventoryMock inventory;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		MockBukkit.mock();
 		inventory = new SimpleInventoryMock(null, 9, InventoryType.CHEST);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception
 	{
 		MockBukkit.unmock();
 	}
 
 	@Test
-	public void constructor_SetsSize()
+	void constructor_SetsSize()
 	{
 		assertEquals(9, new SimpleInventoryMock(null, 9, InventoryType.CHEST).getSize());
 		assertEquals(18, new SimpleInventoryMock(null, 18, InventoryType.CHEST).getSize());
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void constructor_SetsSizeTooSmall()
+	void constructor_SetsSizeTooSmall()
 	{
 		new SimpleInventoryMock(null, -1, InventoryType.CHEST);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void constructor_SetsSizeTooBig()
+	void constructor_SetsSizeTooBig()
 	{
 		new SimpleInventoryMock(null, 63, InventoryType.CHEST);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void constructor_SetsSizeTooNotDivisibleByNine()
+	void constructor_SetsSizeTooNotDivisibleByNine()
 	{
 		new SimpleInventoryMock(null, 10, InventoryType.CHEST);
 	}
 
 	@Test
-	public void constructor_SetsSizeTwoParamConstructor()
+	void constructor_SetsSizeTwoParamConstructor()
 	{
 		assertEquals(10, new SimpleInventoryMock(null, InventoryType.WORKBENCH).getSize());
 	}
 
 	@Test
-	public void constructor_SetsType()
+	void constructor_SetsType()
 	{
 		assertEquals(InventoryType.CHEST, new SimpleInventoryMock(null, 9, InventoryType.CHEST).getType());
 		assertEquals(InventoryType.DROPPER, new SimpleInventoryMock(null, 9, InventoryType.DROPPER).getType());
 	}
 
 	@Test
-	public void getItem_Default_AllNull()
+	void getItem_Default_AllNull()
 	{
 		for (int i = 0; i < inventory.getSize(); i++)
 		{
@@ -87,7 +89,7 @@ public class InventoryMockTest
 	}
 
 	@Test
-	public void testClearInventory()
+	void testClearInventory()
 	{
 		for (int i = 0; i < inventory.getSize(); i++)
 		{
@@ -104,7 +106,7 @@ public class InventoryMockTest
 	}
 
 	@Test
-	public void testClearSlot()
+	void testClearSlot()
 	{
 		inventory.setItem(0, new ItemStack(Material.DIAMOND));
 		assertEquals(Material.DIAMOND, inventory.getItem(0).getType());
@@ -114,7 +116,7 @@ public class InventoryMockTest
 	}
 
 	@Test
-	public void testFirstEmpty()
+	void testFirstEmpty()
 	{
 		for (int i = 0; i < inventory.getSize(); i++)
 		{
@@ -127,7 +129,7 @@ public class InventoryMockTest
 	}
 
 	@Test
-	public void addItem_EmptyInventoryAddsOneStack_OneStackUsed()
+	void addItem_EmptyInventoryAddsOneStack_OneStackUsed()
 	{
 		ItemStack stack = new ItemStack(Material.DIRT, 64);
 		ItemStack remaining = inventory.addItem(stack);
@@ -139,7 +141,7 @@ public class InventoryMockTest
 	}
 
 	@Test
-	public void addItem_FullInventoryAddsOneStack_NothingAdded()
+	void addItem_FullInventoryAddsOneStack_NothingAdded()
 	{
 		ItemStack filler = new ItemStack(Material.COBBLESTONE, 1);
 		for (int i = 0; i < inventory.getSize(); i++)
@@ -159,7 +161,7 @@ public class InventoryMockTest
 	}
 
 	@Test
-	public void addItem_PartiallyFilled_AddsOneStack_HalfAdded()
+	void addItem_PartiallyFilled_AddsOneStack_HalfAdded()
 	{
 		ItemStack filler = new ItemStack(Material.COBBLESTONE, 1);
 		for (int i = 2; i < inventory.getSize(); i++)
@@ -179,7 +181,7 @@ public class InventoryMockTest
 	}
 
 	@Test
-	public void addItem_MultipleItems_ItemsAddedCorrectly()
+	void addItem_MultipleItems_ItemsAddedCorrectly()
 	{
 		ItemStack filler = new ItemStack(Material.COBBLESTONE, 1);
 		for (int i = 1; i < inventory.getSize(); i++)
@@ -199,7 +201,7 @@ public class InventoryMockTest
 	}
 
 	@Test
-	public void setContents_OneItemAndOneNull_SetAndRestCleared()
+	void setContents_OneItemAndOneNull_SetAndRestCleared()
 	{
 		ItemStack filler = new ItemStack(Material.COBBLESTONE, 1);
 		for (int i = 1; i < inventory.getSize(); i++)
@@ -220,13 +222,13 @@ public class InventoryMockTest
 	}
 
 	@Test
-	public void setContents_ArrayWithNulls_NullsIgnores()
+	void setContents_ArrayWithNulls_NullsIgnores()
 	{
 		inventory.setContents(new ItemStack[] { null });
 	}
 
 	@Test
-	public void iterator_SeveralItems_IteratorsOverItems()
+	void iterator_SeveralItems_IteratorsOverItems()
 	{
 		ItemStack item1 = new ItemStack(Material.COBBLESTONE, 64);
 		ItemStack item2 = new ItemStack(Material.DIRT, 64);
@@ -239,20 +241,20 @@ public class InventoryMockTest
 	}
 
 	@Test
-	public void assertTrueForAll_ChecksIfNullOnEmptyInventory_DoesNotAssert()
+	void assertTrueForAll_ChecksIfNullOnEmptyInventory_DoesNotAssert()
 	{
 		inventory.assertTrueForAll(Objects::isNull);
 	}
 
 	@Test(expected = AssertionError.class)
-	public void assertTrueForAll_ChecksIfNullOnNonEmptyInventory_Asserts()
+	void assertTrueForAll_ChecksIfNullOnNonEmptyInventory_Asserts()
 	{
 		inventory.addItem(new ItemStack(Material.DIRT, 1));
 		inventory.assertTrueForAll(Objects::isNull);
 	}
 
 	@Test
-	public void assertTrueForNonNulls_NumberOfExecutionsOnInventoryOneItem_EqualToOne()
+	void assertTrueForNonNulls_NumberOfExecutionsOnInventoryOneItem_EqualToOne()
 	{
 		inventory.addItem(new ItemStack(Material.DIRT, 1));
 		AtomicInteger calls = new AtomicInteger(0);
@@ -265,118 +267,118 @@ public class InventoryMockTest
 	}
 
 	@Test
-	public void assertTrueForSome_OneItemMeetsCondition_DoesNotAssert()
+	void assertTrueForSome_OneItemMeetsCondition_DoesNotAssert()
 	{
 		inventory.addItem(new ItemStack(Material.DIRT, 1));
 		inventory.assertTrueForSome(itemstack -> itemstack.getAmount() > 0);
 	}
 
 	@Test(expected = AssertionError.class)
-	public void assertTrueForSome_NoItemsMeetCondition_Asserts()
+	void assertTrueForSome_NoItemsMeetCondition_Asserts()
 	{
 		inventory.addItem(new ItemStack(Material.DIRT, 1));
 		inventory.assertTrueForSome(itemstack -> itemstack.getAmount() > 16);
 	}
 
 	@Test
-	public void assertContainsAny_ContainsThem_DoesNotAssert()
+	void assertContainsAny_ContainsThem_DoesNotAssert()
 	{
 		inventory.addItem(new ItemStack(Material.DIRT, 16));
 		inventory.assertContainsAny(new ItemStack(Material.DIRT));
 	}
 
 	@Test(expected = AssertionError.class)
-	public void assertContainsAny_DoesNotContainThem_Asserts()
+	void assertContainsAny_DoesNotContainThem_Asserts()
 	{
 		inventory.addItem(new ItemStack(Material.GRASS, 16));
 		inventory.assertContainsAny(new ItemStack(Material.DIRT));
 	}
 
 	@Test
-	public void assertContainsAtLeast_ContainsExactly_DoesNotAssert()
+	void assertContainsAtLeast_ContainsExactly_DoesNotAssert()
 	{
 		inventory.addItem(new ItemStack(Material.DIRT, 4));
 		inventory.assertContainsAtLeast(new ItemStack(Material.DIRT), 4);
 	}
 
 	@Test
-	public void assertContainsAtLeast_ContainsMore_DoesNotAssert()
+	void assertContainsAtLeast_ContainsMore_DoesNotAssert()
 	{
 		inventory.addItem(new ItemStack(Material.DIRT, 8));
 		inventory.assertContainsAtLeast(new ItemStack(Material.DIRT), 4);
 	}
 
 	@Test(expected = AssertionError.class)
-	public void assertContainsAtLeast_DoesNotContainEnough_Asserts()
+	void assertContainsAtLeast_DoesNotContainEnough_Asserts()
 	{
 		inventory.addItem(new ItemStack(Material.GRASS, 3));
 		inventory.assertContainsAtLeast(new ItemStack(Material.DIRT), 4);
 	}
 
 	@Test
-	public void testContentsAndStorageContentsEqual()
+	void testContentsAndStorageContentsEqual()
 	{
 		assertArrayEquals(inventory.getContents(), inventory.getStorageContents());
 	}
 
 	@Test
-	public void testContainsItemStack()
+	void testContainsItemStack()
 	{
 		inventory.addItem(new ItemStack(Material.STONE));
 		assertTrue(inventory.contains(new ItemStack(Material.STONE)));
 	}
 
 	@Test
-	public void testContainsItemStackAmount()
+	void testContainsItemStackAmount()
 	{
 		inventory.addItem(new ItemStack(Material.STONE, 2));
 		assertTrue(inventory.contains(new ItemStack(Material.STONE), 2));
 	}
 
 	@Test
-	public void testContainsItemStackFalse()
+	void testContainsItemStackFalse()
 	{
 		inventory.addItem(new ItemStack(Material.GRASS));
 		assertFalse(inventory.contains(new ItemStack(Material.STONE)));
 	}
 
 	@Test
-	public void testContainsMaterial()
+	void testContainsMaterial()
 	{
 		inventory.addItem(new ItemStack(Material.STONE));
 		assertTrue(inventory.contains(Material.STONE));
 	}
 
 	@Test
-	public void testContainsMaterialAmount()
+	void testContainsMaterialAmount()
 	{
 		inventory.addItem(new ItemStack(Material.STONE, 2));
 		assertTrue(inventory.contains(Material.STONE, 2));
 	}
 
 	@Test
-	public void testContainsMaterialFalse()
+	void testContainsMaterialFalse()
 	{
 		inventory.addItem(new ItemStack(Material.GRASS));
 		assertFalse(inventory.contains(Material.STONE));
 	}
 
 	@Test
-	public void testContainsAtLeast()
+	void testContainsAtLeast()
 	{
 		inventory.addItem(new ItemStack(Material.STONE, 3));
 		assertTrue(inventory.containsAtLeast(new ItemStack(Material.STONE), 3));
 	}
 
 	@Test
-	public void testContainsAtLeastExtra()
+	void testContainsAtLeastExtra()
 	{
 		inventory.addItem(new ItemStack(Material.STONE, 6));
 		assertTrue(inventory.containsAtLeast(new ItemStack(Material.STONE), 3));
 	}
 
 	@Test
-	public void testContainsAtLeastFalse()
+	void testContainsAtLeastFalse()
 	{
 		inventory.addItem(new ItemStack(Material.STONE));
 		assertFalse(inventory.containsAtLeast(new ItemStack(Material.STONE), 3));
