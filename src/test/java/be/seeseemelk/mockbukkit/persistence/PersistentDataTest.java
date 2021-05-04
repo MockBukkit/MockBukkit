@@ -10,8 +10,8 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
@@ -19,32 +19,32 @@ import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
 
-public class PersistentDataTest
+class PersistentDataTest
 {
 
 	private ServerMock mock;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		mock = MockBukkit.mock();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown()
 	{
 		MockBukkit.unmock();
 	}
 
 	@Test
-	public void testAdapterContext()
+	void testAdapterContext()
 	{
 		PersistentDataAdapterContextMock context = new PersistentDataAdapterContextMock();
 		assertTrue(context.newPersistentDataContainer() instanceof PersistentDataContainerMock);
 	}
 
 	@Test
-	public void testImplementationMocks()
+	void testImplementationMocks()
 	{
 		ItemMeta meta = new ItemMetaMock();
 		assertTrue(meta.getPersistentDataContainer() instanceof PersistentDataContainerMock);
@@ -54,7 +54,7 @@ public class PersistentDataTest
 	}
 
 	@Test
-	public void testDefaultMethods()
+	void testDefaultMethods()
 	{
 		PersistentDataContainer container = new PersistentDataContainerMock();
 		assertTrue(container.isEmpty());
@@ -62,7 +62,7 @@ public class PersistentDataTest
 	}
 
 	@Test
-	public void testAddInteger()
+	void testAddInteger()
 	{
 		PersistentDataContainer container = new PersistentDataContainerMock();
 		NamespacedKey key = NamespacedKey.randomKey();
@@ -81,7 +81,7 @@ public class PersistentDataTest
 	}
 
 	@Test
-	public void testAddString()
+	void testAddString()
 	{
 		PersistentDataContainer container = new PersistentDataContainerMock();
 		NamespacedKey key = NamespacedKey.randomKey();
@@ -93,7 +93,7 @@ public class PersistentDataTest
 	}
 
 	@Test
-	public void testRemoveInteger()
+	void testRemoveInteger()
 	{
 		PersistentDataContainer container = new PersistentDataContainerMock();
 		NamespacedKey key = NamespacedKey.randomKey();
@@ -107,7 +107,7 @@ public class PersistentDataTest
 	}
 
 	@Test
-	public void testGetOrDefault()
+	void testGetOrDefault()
 	{
 		PersistentDataContainer container = new PersistentDataContainerMock();
 		NamespacedKey key = NamespacedKey.randomKey();
@@ -119,7 +119,7 @@ public class PersistentDataTest
 	}
 
 	@Test
-	public void testEquals()
+	void testEquals()
 	{
 		PersistentDataContainer container = new PersistentDataContainerMock();
 		PersistentDataContainer container2 = new PersistentDataContainerMock();
@@ -136,7 +136,7 @@ public class PersistentDataTest
 	}
 
 	@Test
-	public void testConstructor()
+	void testConstructor()
 	{
 		PersistentDataContainerMock container = new PersistentDataContainerMock();
 		NamespacedKey key = NamespacedKey.randomKey();
@@ -146,7 +146,7 @@ public class PersistentDataTest
 	}
 
 	@Test
-	public void testGetkeys()
+	void testGetkeys()
 	{
 		PersistentDataContainer container = new PersistentDataContainerMock();
 		NamespacedKey key = NamespacedKey.randomKey();

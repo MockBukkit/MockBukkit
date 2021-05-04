@@ -60,7 +60,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.generator.ChunkGenerator.ChunkData;
-import org.bukkit.help.HelpMap;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemFactory;
 import org.bukkit.inventory.ItemStack;
@@ -822,7 +821,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public HelpMap getHelpMap()
+	public HelpMapMock getHelpMap()
 	{
 		return helpMap;
 	}
