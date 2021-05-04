@@ -25,6 +25,7 @@ import org.bukkit.util.BoundingBox;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
@@ -75,7 +76,7 @@ public class BlockMock implements Block
 	 * @param material The material of the block.
 	 * @param location The location of the block. Can be {@code null} if not needed.
 	 */
-	public BlockMock(@NotNull Material material, @NotNull Location location)
+	public BlockMock(@NotNull Material material, @Nullable Location location)
 	{
 		this.material = material;
 		this.location = location;
@@ -139,7 +140,7 @@ public class BlockMock implements Block
 	 * Assets that the material type of the block is equal to a given type.
 	 *
 	 * @param material The material type that the block should have.
-	 * @throws AssertionFailedError Thrown if the material type of the block does not equal the given material type.
+	 * @throws AssertionError Thrown if the material type of the block does not equal the given material type.
 	 */
 	public void assertType(@NotNull Material material)
 	{
