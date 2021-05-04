@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.block;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.bukkit.Chunk;
@@ -95,11 +96,11 @@ class BlockMockTest
 		block.assertType(Material.DIRT);
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test
 	void assertType_IncorrectType_Fails()
 	{
 		block.setType(Material.STONE);
-		block.assertType(Material.DIRT);
+		assertThrows(AssertionError.class, () -> block.assertType(Material.DIRT));
 	}
 
 	@Test
