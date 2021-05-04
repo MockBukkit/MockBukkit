@@ -1,55 +1,56 @@
 package be.seeseemelk.mockbukkit.command;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-public class CommandResultTest
+class CommandResultTest
 {
 	@Test
-	public void hasSucceeded_Succeeded_True()
+	void hasSucceeded_Succeeded_True()
 	{
 		CommandResult result = new CommandResult(true, null);
 		assertTrue(result.hasSucceeded());
 	}
 
 	@Test
-	public void hasSucceeded_Failed_False()
+	 void hasSucceeded_Failed_False()
 	{
 		CommandResult result = new CommandResult(false, null);
 		assertFalse(result.hasSucceeded());
 	}
 
 	@Test
-	public void assertSucceed_Succeeded_DoesNotAssert()
+	void assertSucceed_Succeeded_DoesNotAssert()
 	{
 		CommandResult result = new CommandResult(true, null);;
 		result.assertSucceeded();
 	}
 
 	@Test(expected = AssertionError.class)
-	public void assertSucceed_Failed_Asserts()
+	void assertSucceed_Failed_Asserts()
 	{
 		CommandResult result = new CommandResult(false, null);;
 		result.assertSucceeded();
 	}
 
 	@Test(expected = AssertionError.class)
-	public void assertFailed_Succeeded_Asserts()
+	void assertFailed_Succeeded_Asserts()
 	{
 		CommandResult result = new CommandResult(true, null);;
 		result.assertFailed();
 	}
 
 	@Test
-	public void assertFailed_Failed_DoesNotAssert()
+	void assertFailed_Failed_DoesNotAssert()
 	{
 		CommandResult result = new CommandResult(false, null);;
 		result.assertFailed();
 	}
 
 	@Test
-	public void assertResponse_CorrectResponse_DoesNotAssert()
+	void assertResponse_CorrectResponse_DoesNotAssert()
 	{
 		ConsoleCommandSenderMock sender = new ConsoleCommandSenderMock();
 		sender.sendMessage("Hello world");
@@ -58,7 +59,7 @@ public class CommandResultTest
 	}
 
 	@Test(expected = AssertionError.class)
-	public void assertResponse_WrongResponse_Asserts()
+	void assertResponse_WrongResponse_Asserts()
 	{
 		ConsoleCommandSenderMock sender = new ConsoleCommandSenderMock();
 		sender.sendMessage("Hello world");
@@ -67,7 +68,7 @@ public class CommandResultTest
 	}
 
 	@Test(expected = AssertionError.class)
-	public void assertResponse_WrongFormattedResponse_Asserts()
+	void assertResponse_WrongFormattedResponse_Asserts()
 	{
 		ConsoleCommandSenderMock sender = new ConsoleCommandSenderMock();
 		sender.sendMessage("Hello 5 world");
@@ -76,7 +77,7 @@ public class CommandResultTest
 	}
 
 	@Test(expected = AssertionError.class)
-	public void assertResponse_NoMessages_Asserts()
+	void assertResponse_NoMessages_Asserts()
 	{
 		ConsoleCommandSenderMock sender = new ConsoleCommandSenderMock();
 		CommandResult result = new CommandResult(true, sender);
@@ -84,7 +85,7 @@ public class CommandResultTest
 	}
 
 	@Test
-	public void assertNoResponse_NoMoreMessage_DoesNotAssert()
+	void assertNoResponse_NoMoreMessage_DoesNotAssert()
 	{
 		ConsoleCommandSenderMock sender = new ConsoleCommandSenderMock();
 		CommandResult result = new CommandResult(true, sender);
@@ -92,7 +93,7 @@ public class CommandResultTest
 	}
 
 	@Test(expected = AssertionError.class)
-	public void assertNoResponse_MoreMessage_Asserts()
+	void assertNoResponse_MoreMessage_Asserts()
 	{
 		ConsoleCommandSenderMock sender = new ConsoleCommandSenderMock();
 		sender.sendMessage("More hello world");
@@ -100,30 +101,3 @@ public class CommandResultTest
 		result.assertNoResponse();
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

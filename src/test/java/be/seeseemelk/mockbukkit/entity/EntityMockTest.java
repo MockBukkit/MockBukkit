@@ -25,9 +25,8 @@ import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.util.Vector;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
@@ -35,13 +34,13 @@ import be.seeseemelk.mockbukkit.MockPlugin;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.WorldMock;
 
-public class EntityMockTest
+class EntityMockTest
 {
 	private ServerMock server;
 	private WorldMock world;
 	private EntityMock entity;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		server = MockBukkit.mock();
@@ -49,14 +48,14 @@ public class EntityMockTest
 		entity = new SimpleEntityMock(server);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown()
 	{
 		MockBukkit.unmock();
 	}
 
 	@Test
-	public void getLocation_TwoInvocations_TwoClones()
+	void getLocation_TwoInvocations_TwoClones()
 	{
 		Location location1 = entity.getLocation();
 		Location location2 = entity.getLocation();
@@ -65,7 +64,7 @@ public class EntityMockTest
 	}
 
 	@Test
-	public void getLocation_IntoLocation_LocationCopied()
+	void getLocation_IntoLocation_LocationCopied()
 	{
 		Location location = new Location(world, 0, 0, 0);
 		Location location1 = entity.getLocation();
@@ -75,7 +74,7 @@ public class EntityMockTest
 	}
 
 	@Test
-	public void assertLocation_CorrectLocation_DoesNotAssert()
+	void assertLocation_CorrectLocation_DoesNotAssert()
 	{
 		Location location = entity.getLocation();
 		location.add(0, 10.0, 0);
@@ -84,7 +83,7 @@ public class EntityMockTest
 	}
 
 	@Test(expected = AssertionError.class)
-	public void assertLocation_WrongLocation_Asserts()
+	void assertLocation_WrongLocation_Asserts()
 	{
 		Location location = entity.getLocation();
 		location.add(0, 10.0, 0);
@@ -92,7 +91,7 @@ public class EntityMockTest
 	}
 
 	@Test
-	public void assertTeleported_Teleported_DoesNotAssert()
+	void assertTeleported_Teleported_DoesNotAssert()
 	{
 		Location location = entity.getLocation();
 		entity.teleport(location);
@@ -101,27 +100,27 @@ public class EntityMockTest
 	}
 
 	@Test(expected = AssertionError.class)
-	public void assertTeleported_NotTeleported_Asserts()
+	void assertTeleported_NotTeleported_Asserts()
 	{
 		Location location = entity.getLocation();
 		entity.assertTeleported(location, 5.0);
 	}
 
 	@Test
-	public void assertNotTeleported_NotTeleported_DoesNotAssert()
+	void assertNotTeleported_NotTeleported_DoesNotAssert()
 	{
 		entity.assertNotTeleported();
 	}
 
 	@Test(expected = AssertionError.class)
-	public void assertNotTeleported_Teleported_Asserts()
+	void assertNotTeleported_Teleported_Asserts()
 	{
 		entity.teleport(entity.getLocation());
 		entity.assertNotTeleported();
 	}
 
 	@Test
-	public void assertNotTeleported_AfterAssertTeleported_DoesNotAssert()
+	void assertNotTeleported_AfterAssertTeleported_DoesNotAssert()
 	{
 		entity.teleport(entity.getLocation());
 		entity.assertTeleported(entity.getLocation(), 0);
@@ -129,7 +128,7 @@ public class EntityMockTest
 	}
 
 	@Test
-	public void teleport_LocationAndCause_LocationSet()
+	void teleport_LocationAndCause_LocationSet()
 	{
 		Location location = entity.getLocation();
 		location.add(0, 10.0, 0);
@@ -139,7 +138,7 @@ public class EntityMockTest
 	}
 
 	@Test
-	public void teleport_Entity_LocationSetToEntity()
+	void teleport_Entity_LocationSetToEntity()
 	{
 		SimpleEntityMock entity2 = new SimpleEntityMock(server);
 		Location location = entity2.getLocation();
@@ -150,7 +149,7 @@ public class EntityMockTest
 	}
 
 	@Test
-	public void hasTeleport_Teleportation_CorrectStatus()
+	void hasTeleport_Teleportation_CorrectStatus()
 	{
 		assertFalse(entity.hasTeleported());
 		entity.teleport(entity.getLocation());
@@ -158,7 +157,7 @@ public class EntityMockTest
 	}
 
 	@Test
-	public void clearTeleport_AfterTeleportation_TeleportStatusReset()
+	void clearTeleport_AfterTeleportation_TeleportStatusReset()
 	{
 		entity.teleport(entity.getLocation());
 		entity.clearTeleported();
@@ -166,19 +165,19 @@ public class EntityMockTest
 	}
 
 	@Test
-	public void getName_Default_CorrectName()
+	void getName_Default_CorrectName()
 	{
 		assertEquals("entity", entity.getName());
 	}
 
 	@Test
-	public void getUniqueId_Default_RandomUuid()
+	void getUniqueId_Default_RandomUuid()
 	{
 		assertNotNull(entity.getUniqueId());
 	}
 
 	@Test
-	public void getUniqueId_UUIDPassedOn_GetsSameUuid()
+	void getUniqueId_UUIDPassedOn_GetsSameUuid()
 	{
 		UUID uuid = UUID.randomUUID();
 		entity = new SimpleEntityMock(server, uuid);
@@ -186,7 +185,7 @@ public class EntityMockTest
 	}
 
 	@Test
-	public void sendMessage_Default_nextMessageReturnsMessages()
+	void sendMessage_Default_nextMessageReturnsMessages()
 	{
 		entity.sendMessage("hello");
 		entity.sendMessage(new String[] { "my", "world" });
@@ -196,33 +195,33 @@ public class EntityMockTest
 	}
 
 	@Test
-	public void equals_SameUUID_Equal()
+	void equals_SameUUID_Equal()
 	{
 		EntityMock entity2 = new SimpleEntityMock(server, entity.getUniqueId());
-		assertEquals("Two equal entities are not equal", entity, entity2);
+		assertEquals(entity, entity2, "Two equal entities are not equal");
 	}
 
 	@Test
-	public void equals_DifferentUUID_Different()
+	void equals_DifferentUUID_Different()
 	{
 		EntityMock entity2 = new SimpleEntityMock(server);
-		assertNotEquals("Two different entities detected as equal", entity, entity2);
+		assertNotEquals(entity, entity2, "Two different entities detected as equal");
 	}
 
 	@Test
-	public void equals_DifferentObject_Different()
+	void equals_DifferentObject_Different()
 	{
 		assertNotEquals(entity, new Object());
 	}
 
 	@Test
-	public void equals_Null_Different()
+	void equals_Null_Different()
 	{
 		assertNotEquals(entity, null);
 	}
 
 	@Test
-	public void getWorld_LocationSet_GetsWorldSameAsInLocation()
+	void getWorld_LocationSet_GetsWorldSameAsInLocation()
 	{
 		WorldMock world = server.addSimpleWorld("world");
 		WorldMock otherWorld = server.addSimpleWorld("otherWorld");
@@ -233,7 +232,7 @@ public class EntityMockTest
 	}
 
 	@Test
-	public void metadataTest()
+	void metadataTest()
 	{
 		MockPlugin plugin = MockBukkit.createMockPlugin();
 		assertFalse(entity.hasMetadata("metadata"));
@@ -244,7 +243,7 @@ public class EntityMockTest
 	}
 
 	@Test
-	public void hasPermission_NotAddedNotDefault_DoesNotHavePermission()
+	void hasPermission_NotAddedNotDefault_DoesNotHavePermission()
 	{
 		Permission permission = new Permission("mockbukkit.perm", PermissionDefault.FALSE);
 		server.getPluginManager().addPermission(permission);
@@ -252,7 +251,7 @@ public class EntityMockTest
 	}
 
 	@Test
-	public void hasPermission_NotAddedButDefault_DoesPermission()
+	void hasPermission_NotAddedButDefault_DoesPermission()
 	{
 		MockPlugin plugin = MockBukkit.createMockPlugin();
 		Permission permission = new Permission("mockbukkit.perm", PermissionDefault.TRUE);
@@ -262,7 +261,7 @@ public class EntityMockTest
 	}
 
 	@Test
-	public void addAttachment_PermissionObject_PermissionAdded()
+	void addAttachment_PermissionObject_PermissionAdded()
 	{
 		MockPlugin plugin = MockBukkit.createMockPlugin();
 		Permission permission = new Permission("mockbukkit.perm", PermissionDefault.FALSE);
@@ -273,7 +272,7 @@ public class EntityMockTest
 	}
 
 	@Test
-	public void addAttachment_PermissionName_PermissionAdded()
+	void addAttachment_PermissionName_PermissionAdded()
 	{
 		MockPlugin plugin = MockBukkit.createMockPlugin();
 		Permission permission = new Permission("mockbukkit.perm", PermissionDefault.TRUE);
@@ -284,7 +283,7 @@ public class EntityMockTest
 	}
 
 	@Test
-	public void addPermission_String_PermissionAdded()
+	void addPermission_String_PermissionAdded()
 	{
 		MockPlugin plugin = MockBukkit.createMockPlugin();
 		Permission permission = new Permission("mockbukkit.perm", PermissionDefault.TRUE);
@@ -295,7 +294,7 @@ public class EntityMockTest
 	}
 
 	@Test
-	public void getEffectivePermissions_GetPermissionsList()
+	void getEffectivePermissions_GetPermissionsList()
 	{
 		MockPlugin plugin = MockBukkit.createMockPlugin();
 		entity.addAttachment(plugin, "mockbukkit.perm", true);
@@ -316,7 +315,7 @@ public class EntityMockTest
 	}
 
 	@Test
-	public void removeAttachment_RemovesPermission()
+	void removeAttachment_RemovesPermission()
 	{
 		MockPlugin plugin = MockBukkit.createMockPlugin();
 		Permission permission = new Permission("mockbukkit.perm");
@@ -330,7 +329,7 @@ public class EntityMockTest
 	}
 
 	@Test
-	public void entityDamage_By_Player()
+	void entityDamage_By_Player()
 	{
 		World world = new WorldMock(Material.GRASS_BLOCK, 10);
 		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
@@ -338,11 +337,11 @@ public class EntityMockTest
 		double initialHealth = zombie.getHealth();
 		zombie.damage(4, player1);
 		double finalHealth = zombie.getHealth();
-		Assert.assertEquals(4, initialHealth - finalHealth, 0.1);
+		assertEquals(4, initialHealth - finalHealth, 0.1);
 	}
 
 	@Test
-	public void entityDamage_Event_Triggered()
+	void entityDamage_Event_Triggered()
 	{
 		World world = new WorldMock(Material.GRASS_BLOCK, 10);
 		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
@@ -352,7 +351,7 @@ public class EntityMockTest
 	}
 
 	@Test
-	public void setVelocity()
+	void setVelocity()
 	{
 		PlayerMock player1 = server.addPlayer();
 		Vector velocity = player1.getVelocity();
@@ -362,7 +361,7 @@ public class EntityMockTest
 	}
 
 	@Test
-	public void setFireTicks()
+	void setFireTicks()
 	{
 		entity.setFireTicks(10);
 		assertEquals(10, entity.getFireTicks());
