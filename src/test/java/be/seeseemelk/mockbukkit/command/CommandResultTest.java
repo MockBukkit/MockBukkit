@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.command;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -28,18 +29,18 @@ class CommandResultTest
 		result.assertSucceeded();
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test
 	void assertSucceed_Failed_Asserts()
 	{
 		CommandResult result = new CommandResult(false, null);;
-		result.assertSucceeded();
+		assertThrows(AssertionError.class, () -> result.assertSucceeded());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test
 	void assertFailed_Succeeded_Asserts()
 	{
 		CommandResult result = new CommandResult(true, null);;
-		result.assertFailed();
+		assertThrows(AssertionError.class, () -> result.assertFailed());
 	}
 
 	@Test
@@ -58,30 +59,30 @@ class CommandResultTest
 		result.assertResponse("Hello world");
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test
 	void assertResponse_WrongResponse_Asserts()
 	{
 		ConsoleCommandSenderMock sender = new ConsoleCommandSenderMock();
 		sender.sendMessage("Hello world");
 		CommandResult result = new CommandResult(true, sender);
-		result.assertResponse("world Hello");
+		assertThrows(AssertionError.class, () -> result.assertResponse("world Hello"));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test
 	void assertResponse_WrongFormattedResponse_Asserts()
 	{
 		ConsoleCommandSenderMock sender = new ConsoleCommandSenderMock();
 		sender.sendMessage("Hello 5 world");
 		CommandResult result = new CommandResult(true, sender);
-		result.assertResponse("Hello %d world", 6);
+		assertThrows(AssertionError.class, () -> result.assertResponse("Hello %d world", 6));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test
 	void assertResponse_NoMessages_Asserts()
 	{
 		ConsoleCommandSenderMock sender = new ConsoleCommandSenderMock();
 		CommandResult result = new CommandResult(true, sender);
-		result.assertResponse("Hello world");
+		assertThrows(AssertionError.class, () -> result.assertResponse("Hello world"));
 	}
 
 	@Test
@@ -92,12 +93,12 @@ class CommandResultTest
 		result.assertNoResponse();
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test
 	void assertNoResponse_MoreMessage_Asserts()
 	{
 		ConsoleCommandSenderMock sender = new ConsoleCommandSenderMock();
 		sender.sendMessage("More hello world");
 		CommandResult result = new CommandResult(true, sender);
-		result.assertNoResponse();
+		assertThrows(AssertionError.class, () -> result.assertNoResponse());
 	}
 }

@@ -53,7 +53,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -161,10 +160,10 @@ class PlayerMockTest
 		player.assertGameMode(GameMode.SURVIVAL);
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test
 	void assertGameMode_WrongGameMode_Asserts()
 	{
-		player.assertGameMode(GameMode.CREATIVE);
+		assertThrows(AssertionError.class, () -> player.assertGameMode(GameMode.CREATIVE));
 	}
 
 	@Test

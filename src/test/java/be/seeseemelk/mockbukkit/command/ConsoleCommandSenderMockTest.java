@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.command;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -59,17 +60,17 @@ class ConsoleCommandSenderMockTest
 		sender.assertSaid("A hello world");
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test
 	void assertSaid_WrongMessage_Asserts()
 	{
 		sender.sendMessage("My message");
-		sender.assertSaid("Some other message");
+		assertThrows(AssertionError.class, () -> sender.assertSaid("Some other message"));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test
 	void assertSaid_NoMessages_Asserts()
 	{
-		sender.assertSaid("A message");
+		assertThrows(AssertionError.class, () -> sender.assertSaid("A message"));
 	}
 
 	@Test
@@ -78,10 +79,10 @@ class ConsoleCommandSenderMockTest
 		sender.assertNoMoreSaid();
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test
 	void assertNoMore_MoreMessages_Asserts()
 	{
 		sender.sendMessage("Some message");
-		sender.assertNoMoreSaid();
+		assertThrows(AssertionError.class, () -> sender.assertNoMoreSaid());
 	}
 }

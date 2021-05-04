@@ -41,7 +41,7 @@ class WorldMockTest
 	}
 
 	@Test
-	public void getBlockAt_StandardWorld_DefaultBlocks()
+	void getBlockAt_StandardWorld_DefaultBlocks()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		assertEquals(Material.BEDROCK, world.getBlockAt(0, 0, 0).getType());
@@ -52,7 +52,7 @@ class WorldMockTest
 	}
 
 	@Test
-	public void getBlockAt_BlockChanged_BlockChanged()
+	void getBlockAt_BlockChanged_BlockChanged()
 	{
 		WorldMock world = new WorldMock();
 		assertEquals(Material.AIR, world.getBlockAt(0, 10, 0).getType());
@@ -61,7 +61,7 @@ class WorldMockTest
 	}
 
 	@Test
-	public void getBlockAt_AnyBlock_LocationSet()
+	void getBlockAt_AnyBlock_LocationSet()
 	{
 		WorldMock world = new WorldMock();
 		BlockMock block = world.getBlockAt(1, 2, 3);
@@ -73,7 +73,7 @@ class WorldMockTest
 	}
 
 	@Test
-	public void getSpawnLocation_Default_JustAboveDirt()
+	void getSpawnLocation_Default_JustAboveDirt()
 	{
 		WorldMock world = new WorldMock();
 		Location spawn = world.getSpawnLocation();
@@ -83,7 +83,7 @@ class WorldMockTest
 	}
 
 	@Test
-	public void setSpawnLocation_SomeNewLocation_LocationChanged()
+	void setSpawnLocation_SomeNewLocation_LocationChanged()
 	{
 		WorldMock world = new WorldMock();
 		Location spawn = world.getSpawnLocation().clone();
@@ -99,7 +99,7 @@ class WorldMockTest
 	}
 
 	@Test
-	public void getEntities_NoEntities_EmptyList()
+	void getEntities_NoEntities_EmptyList()
 	{
 		WorldMock world = new WorldMock();
 		List<Entity> entities = world.getEntities();
@@ -108,7 +108,7 @@ class WorldMockTest
 	}
 
 	@Test
-	public void getEntities_OnePlayerInWorld_ListContainsOnlyPlayer()
+	void getEntities_OnePlayerInWorld_ListContainsOnlyPlayer()
 	{
 		World world = server.addSimpleWorld("world");
 		server.addSimpleWorld("otherWorld");

@@ -55,13 +55,13 @@ class ServerMockTest
 	}
 
 	@Test
-	public void class_NumberOfPlayers_Zero()
+	void class_NumberOfPlayers_Zero()
 	{
 		assertEquals(0, server.getOnlinePlayers().size());
 	}
 
 	@Test
-	public void addPlayer_TwoPlayers_SizeIsTwo()
+	void addPlayer_TwoPlayers_SizeIsTwo()
 	{
 		PlayerMockFactory factory = new PlayerMockFactory(server);
 		PlayerMock player1 = factory.createRandomPlayer();
@@ -81,7 +81,7 @@ class ServerMockTest
 	}
 
 	@Test
-	public void addPlayers_None_TwoUniquePlayers()
+	void addPlayers_None_TwoUniquePlayers()
 	{
 		PlayerMock playerA = server.addPlayer();
 		PlayerMock playerB = server.addPlayer();
@@ -95,7 +95,7 @@ class ServerMockTest
 	}
 
 	@Test
-	public void setPlayers_Two_TwoUniquePlayers()
+	void setPlayers_Two_TwoUniquePlayers()
 	{
 		server.setPlayers(2);
 		PlayerMock player1 = server.getPlayer(0);
@@ -106,7 +106,7 @@ class ServerMockTest
 	}
 
 	@Test(expected = ArrayIndexOutOfBoundsException.class)
-	public void getPlayers_Negative_ArrayIndexOutOfBoundsException()
+	void getPlayers_Negative_ArrayIndexOutOfBoundsException()
 	{
 		server.setPlayers(2);
 		server.getPlayer(-1);

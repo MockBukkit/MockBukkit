@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.command;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
@@ -35,10 +36,10 @@ class PlayerMessagingTest
 		sender.assertSaid("Spigot message");
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test
 	void assertSaid_WrongMessage_spigot_api_Asserts()
 	{
 		sender.sendMessage("Spigot message");
-		sender.assertSaid("Some other message");
+		assertThrows(AssertionError.class, () -> sender.assertSaid("Some other message"));
 	}
 }

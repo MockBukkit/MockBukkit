@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -104,13 +105,13 @@ class PluginManagerMockTest
 		                              );
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test
 	void assertEventFired_PredicateFalse_Asserts()
 	{
 		Player player = server.addPlayer();
 		BlockBreakEvent eventToFire = new BlockBreakEvent(null, player);
 		pluginManager.callEvent(eventToFire);
-		pluginManager.assertEventFired(event -> false);
+		assertThrows(AssertionError.class, () -> pluginManager.assertEventFired(event -> false));
 	}
 
 	@Test
@@ -134,10 +135,10 @@ class PluginManagerMockTest
 		pluginManager.assertEventFired(BlockBreakEvent.class);
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test
 	void assertEventFired_EventWasNotFired_Asserts()
 	{
-		pluginManager.assertEventFired(BlockBreakEvent.class);
+		assertThrows(AssertionError.class, () -> pluginManager.assertEventFired(BlockBreakEvent.class));
 	}
 
 	@Test

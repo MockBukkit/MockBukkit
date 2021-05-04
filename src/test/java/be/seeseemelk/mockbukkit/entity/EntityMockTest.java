@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Optional;
 import java.util.Set;
@@ -82,12 +83,12 @@ class EntityMockTest
 		entity.assertLocation(location, 5.0);
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test
 	void assertLocation_WrongLocation_Asserts()
 	{
 		Location location = entity.getLocation();
 		location.add(0, 10.0, 0);
-		entity.assertLocation(location, 5.0);
+		assertThrows(AssertionError.class, () -> entity.assertLocation(location, 5.0));
 	}
 
 	@Test
@@ -99,11 +100,11 @@ class EntityMockTest
 		assertEquals(TeleportCause.PLUGIN, entity.getTeleportCause());
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test
 	void assertTeleported_NotTeleported_Asserts()
 	{
 		Location location = entity.getLocation();
-		entity.assertTeleported(location, 5.0);
+		assertThrows(AssertionError.class, () -> entity.assertTeleported(location, 5.0));
 	}
 
 	@Test
@@ -112,11 +113,11 @@ class EntityMockTest
 		entity.assertNotTeleported();
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test
 	void assertNotTeleported_Teleported_Asserts()
 	{
 		entity.teleport(entity.getLocation());
-		entity.assertNotTeleported();
+		assertThrows(AssertionError.class, () -> entity.assertNotTeleported());
 	}
 
 	@Test
