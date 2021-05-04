@@ -252,7 +252,7 @@ class PlayerInventoryMockTest
 	@Test
 	void setArmorContents_TooLarge_Exception()
 	{
-		assertThrows(NullPointerException.class, () -> inventory.setArmorContents(new ItemStack[5]));
+		assertThrows(IllegalArgumentException.class, () -> inventory.setArmorContents(new ItemStack[5]));
 	}
 
 	@Test
