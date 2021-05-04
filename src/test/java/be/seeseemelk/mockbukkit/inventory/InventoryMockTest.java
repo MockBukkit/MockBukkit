@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.HashMap;
 import java.util.ListIterator;
@@ -15,8 +16,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.bukkit.Material;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -47,22 +46,22 @@ class InventoryMockTest
 		assertEquals(18, new SimpleInventoryMock(null, 18, InventoryType.CHEST).getSize());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	void constructor_SetsSizeTooSmall()
 	{
-		new SimpleInventoryMock(null, -1, InventoryType.CHEST);
+		assertThrows(IllegalArgumentException.class, () -> new SimpleInventoryMock(null, -1, InventoryType.CHEST));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	void constructor_SetsSizeTooBig()
 	{
-		new SimpleInventoryMock(null, 63, InventoryType.CHEST);
+		assertThrows(IllegalArgumentException.class, () -> new SimpleInventoryMock(null, 63, InventoryType.CHEST));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	void constructor_SetsSizeTooNotDivisibleByNine()
 	{
-		new SimpleInventoryMock(null, 10, InventoryType.CHEST);
+		assertThrows(IllegalArgumentException.class, () -> new SimpleInventoryMock(null, 10, InventoryType.CHEST));
 	}
 
 	@Test
@@ -135,7 +134,7 @@ class InventoryMockTest
 		ItemStack remaining = inventory.addItem(stack);
 		assertNull(remaining);
 		ItemStack stored = inventory.getItem(0);
-		assertEquals(stored.getAmount(), 64);
+		assertEquals(64, stored.getAmount());
 		ItemStack next = inventory.getItem(1);
 		assertNull(next);
 	}
@@ -246,11 +245,11 @@ class InventoryMockTest
 		inventory.assertTrueForAll(Objects::isNull);
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test
 	void assertTrueForAll_ChecksIfNullOnNonEmptyInventory_Asserts()
 	{
 		inventory.addItem(new ItemStack(Material.DIRT, 1));
-		inventory.assertTrueForAll(Objects::isNull);
+		assertThrows(AssertionError.class, () -> inventory.assertTrueForAll(Objects::isNull));
 	}
 
 	@Test
@@ -273,11 +272,11 @@ class InventoryMockTest
 		inventory.assertTrueForSome(itemstack -> itemstack.getAmount() > 0);
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test
 	void assertTrueForSome_NoItemsMeetCondition_Asserts()
 	{
 		inventory.addItem(new ItemStack(Material.DIRT, 1));
-		inventory.assertTrueForSome(itemstack -> itemstack.getAmount() > 16);
+		assertThrows(AssertionError.class, () -> inventory.assertTrueForSome(itemstack -> itemstack.getAmount() > 16));
 	}
 
 	@Test
@@ -287,11 +286,11 @@ class InventoryMockTest
 		inventory.assertContainsAny(new ItemStack(Material.DIRT));
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test
 	void assertContainsAny_DoesNotContainThem_Asserts()
 	{
 		inventory.addItem(new ItemStack(Material.GRASS, 16));
-		inventory.assertContainsAny(new ItemStack(Material.DIRT));
+		assertThrows(AssertionError.class, () -> inventory.assertContainsAny(new ItemStack(Material.DIRT)));
 	}
 
 	@Test
@@ -308,11 +307,11 @@ class InventoryMockTest
 		inventory.assertContainsAtLeast(new ItemStack(Material.DIRT), 4);
 	}
 
-	@Test(expected = AssertionError.class)
+	@Test
 	void assertContainsAtLeast_DoesNotContainEnough_Asserts()
 	{
 		inventory.addItem(new ItemStack(Material.GRASS, 3));
-		inventory.assertContainsAtLeast(new ItemStack(Material.DIRT), 4);
+		assertThrows(AssertionError.class, () -> inventory.assertContainsAtLeast(new ItemStack(Material.DIRT), 4));
 	}
 
 	@Test

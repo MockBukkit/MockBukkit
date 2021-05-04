@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -8,38 +9,38 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.bukkit.NamespacedKey;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 
-public class KnowledgeBookMetaMockTest
+class KnowledgeBookMetaMockTest
 {
 
 	private final int MAX_RECIPES = 32767;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		MockBukkit.mock();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown()
 	{
 		MockBukkit.unmock();
 	}
 
 	@Test
-	public void testRecipesDefaultFalse()
+	void testRecipesDefaultFalse()
 	{
 		KnowledgeBookMetaMock meta = new KnowledgeBookMetaMock();
 		assertFalse(meta.hasRecipes());
 	}
 
 	@Test
-	public void testAddRecipe()
+	void testAddRecipe()
 	{
 		KnowledgeBookMetaMock meta = new KnowledgeBookMetaMock();
 		NamespacedKey key = NamespacedKey.randomKey();
@@ -50,7 +51,7 @@ public class KnowledgeBookMetaMockTest
 	}
 
 	@Test
-	public void testAddNullRecipeAndFail()
+	void testAddNullRecipeAndFail()
 	{
 		KnowledgeBookMetaMock meta = new KnowledgeBookMetaMock();
 		List<NamespacedKey> recipes = Arrays.asList(null, null, null);
@@ -61,7 +62,7 @@ public class KnowledgeBookMetaMockTest
 	}
 
 	@Test
-	public void testSetRecipes()
+	void testSetRecipes()
 	{
 		KnowledgeBookMetaMock meta = new KnowledgeBookMetaMock();
 		List<NamespacedKey> recipes = Arrays.asList(NamespacedKey.randomKey(), NamespacedKey.randomKey());
@@ -72,7 +73,7 @@ public class KnowledgeBookMetaMockTest
 	}
 
 	@Test
-	public void testGetRecipes()
+	void testGetRecipes()
 	{
 		KnowledgeBookMetaMock meta = new KnowledgeBookMetaMock();
 		List<NamespacedKey> recipes = Arrays.asList(NamespacedKey.randomKey(), NamespacedKey.randomKey());
@@ -82,7 +83,7 @@ public class KnowledgeBookMetaMockTest
 	}
 
 	@Test
-	public void testTooManyRecipes()
+	void testTooManyRecipes()
 	{
 		KnowledgeBookMetaMock meta = new KnowledgeBookMetaMock();
 
@@ -95,11 +96,11 @@ public class KnowledgeBookMetaMockTest
 	}
 
 	@Test
-	public void testEquals()
+	void testEquals()
 	{
 		KnowledgeBookMetaMock meta = new KnowledgeBookMetaMock();
 		assertEquals(meta, meta);
-		assertFalse(meta.equals(new ItemMetaMock()));
+		assertNotEquals(meta, new ItemMetaMock());
 
 		KnowledgeBookMetaMock meta2 = new KnowledgeBookMetaMock();
 		assertEquals(meta, meta2);
@@ -107,7 +108,7 @@ public class KnowledgeBookMetaMockTest
 		NamespacedKey recipe = NamespacedKey.randomKey();
 
 		meta.addRecipe(recipe);
-		assertFalse(meta.equals(meta2));
+		assertNotEquals(meta, meta2);
 
 		meta2.addRecipe(recipe);
 		assertEquals(meta, meta2);

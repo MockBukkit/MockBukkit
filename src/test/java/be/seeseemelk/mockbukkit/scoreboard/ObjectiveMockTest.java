@@ -49,8 +49,8 @@ class ObjectiveMockTest
 	void setDisplayName_AnyString_DisplayNameSet()
 	{
 		objective.setDisplayName("New name");
-		assertEquals("Display name not changed", "New name", objective.getDisplayName());
-		assertEquals("Internal name was changed", "Objective", objective.getName());
+		assertEquals("New name", objective.getDisplayName(), "Display name not changed");
+		assertEquals("Objective", objective.getName(), "Internal name was changed");
 	}
 
 	@Test

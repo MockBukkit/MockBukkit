@@ -5,30 +5,30 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
 
-public class SkullMetaMockTest
+class SkullMetaMockTest
 {
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		MockBukkit.mock();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown()
 	{
 		MockBukkit.unmock();
 	}
 
 	@Test
-	public void testDefaultNoOwner()
+	void testDefaultNoOwner()
 	{
 		SkullMetaMock meta = new SkullMetaMock();
 
@@ -38,7 +38,7 @@ public class SkullMetaMockTest
 	}
 
 	@Test
-	public void testSetOwner()
+	void testSetOwner()
 	{
 		SkullMetaMock meta = new SkullMetaMock();
 
@@ -49,7 +49,7 @@ public class SkullMetaMockTest
 	}
 
 	@Test
-	public void testSetOwningPlayer()
+	void testSetOwningPlayer()
 	{
 		SkullMetaMock meta = new SkullMetaMock();
 
@@ -60,7 +60,7 @@ public class SkullMetaMockTest
 	}
 
 	@Test
-	public void testClone()
+	void testClone()
 	{
 		SkullMetaMock meta = new SkullMetaMock();
 
