@@ -281,7 +281,8 @@ public class WorldMock implements World
 	 *
 	 * @return The chunk at the location.
 	 */
-	public ChunkMock getChunkAt(ChunkCoordinate coordinate)
+	@NotNull
+	public ChunkMock getChunkAt(@NotNull ChunkCoordinate coordinate)
 	{
 		if (!loadedChunks.containsKey(coordinate))
 		{
