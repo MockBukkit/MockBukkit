@@ -74,16 +74,16 @@ publishing {
                 name = "MockBukkit-v${gradle.ext.apiVersion}"
                 packaging = 'jar'
                 description = 'MockBukkit is a mocking framework for bukkit to allow the easy unit testing of Bukkit plugins.'
-                url = 'https://github.com/seeseemelk/MockBukkit'
+                url = 'https://github.com/MockBukkit/MockBukkit'
                 scm {
-                    connection = 'scm:git:git://github.com/seeseemelk/MockBukkit.git'
-                    developerConnection = 'scm:git:ssh://github.com:seeseemelk/MockBukkit.git'
-                    url = "https://github.com/seeseemelk/MockBukkit/tree/v${gradle.ext.apiVersion}"
+                    connection = 'scm:git:git://github.com/MockBukkit/MockBukkit.git'
+                    developerConnection = 'scm:git:ssh://github.com:MockBukkit/MockBukkit.git'
+                    url = "https://github.com/MockBukkit/MockBukkit/tree/v${gradle.ext.apiVersion}"
                 }
                 licenses {
                     license {
                         name = 'MIT License'
-                        url = "https://github.com/seeseemelk/MockBukkit/blob/v${gradle.ext.apiVersion}/LICENSE"
+                        url = "https://github.com/MockBukkit/MockBukkit/blob/v${gradle.ext.apiVersion}/LICENSE"
                     }
                 }
                 developers {
@@ -126,7 +126,7 @@ def isFork() {
         def result = 'git config --get remote.origin.url'.execute(null, workingDir)
         result.waitFor()
         if (result.exitValue() == 0) {
-            return !result.text.contains("seeseemelk")
+            return !result.text.contains("MockBukkit/MockBukkit")
         }
     } catch (e) {
     }

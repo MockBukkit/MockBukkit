@@ -54,7 +54,8 @@ class ServicesManagerTest
 		server.getServicesManager().register(Object.class, obj3, plugin, ServicePriority.Low);
 		// Should be the first object
 		assertEquals(obj2, server.getServicesManager().load(Object.class));
-		RegisteredServiceProvider<Object> registeredServiceProvider = server.getServicesManager().getRegistration(Object.class);
+		RegisteredServiceProvider<Object> registeredServiceProvider = server.getServicesManager()
+				.getRegistration(Object.class);
 		assertNotNull(registeredServiceProvider);
 		assertEquals(ServicePriority.High, registeredServiceProvider.getPriority());
 		assertEquals(3, server.getServicesManager().getRegistrations(Object.class).size());
@@ -87,7 +88,8 @@ class ServicesManagerTest
 		Object object = new Object();
 		server.getServicesManager().register(Object.class, object, plugin, ServicePriority.Normal);
 
-		RegisteredServiceProvider<Object> registeredServiceProvider = server.getServicesManager().getRegistration(Object.class);
+		RegisteredServiceProvider<Object> registeredServiceProvider = server.getServicesManager()
+				.getRegistration(Object.class);
 		assertNotNull(registeredServiceProvider);
 		assertEquals(object, registeredServiceProvider.getProvider());
 	}

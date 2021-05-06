@@ -932,7 +932,7 @@ class PlayerMockTest
 		player.closeInventory();
 		server.getPluginManager().assertEventFired(InventoryCloseEvent.class,
 		        e -> e.getPlayer() == player && e.getInventory() == inv);
-		assertNull(player.getItemOnCursor());
+		assertTrue(player.getItemOnCursor().getType().isAir());
 	}
 
 	@Test
