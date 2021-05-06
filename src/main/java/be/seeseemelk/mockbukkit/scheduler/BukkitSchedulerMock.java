@@ -51,7 +51,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 
 	public @NotNull Future<?> scheduleAsyncEventCall(@NotNull Event event)
 	{
-	    Validate.notNull(event, "Cannot schedule an Event that is null!");
+		Validate.notNull(event, "Cannot schedule an Event that is null!");
 		return asyncEventExecutor.submit(() -> MockBukkit.getMock().getPluginManager().callEvent(event));
 	}
 
