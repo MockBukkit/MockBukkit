@@ -284,12 +284,13 @@ public class WorldMock implements World
 	@NotNull
 	public ChunkMock getChunkAt(@NotNull ChunkCoordinate coordinate)
 	{
-		if (!loadedChunks.containsKey(coordinate))
+		ChunkMock chunk = loadedChunks.get(coordinate);
+		if (chunk == null)
 		{
-			ChunkMock chunk = new ChunkMock(this, coordinate.getX(), coordinate.getZ());
+			chunk = new ChunkMock(this, coordinate.getX(), coordinate.getZ());
 			loadedChunks.put(coordinate, chunk);
 		}
-		return loadedChunks.get(coordinate);
+		return chunk;
 	}
 
 	@Override
