@@ -81,7 +81,8 @@ public class ItemEntityMockTest
 		ItemStack item = new ItemStack(Material.BEACON);
 		Location location = new Location(world, 200, 50, 500);
 
-		Item entity = world.dropItem(location, item, n -> {
+		Item entity = world.dropItem(location, item, n ->
+		{
 			// This consumer should be invoked BEFORE the actually spawned.
 			assertFalse(world.getEntities().contains(n));
 		});

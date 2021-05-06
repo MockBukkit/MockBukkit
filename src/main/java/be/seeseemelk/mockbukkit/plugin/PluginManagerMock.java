@@ -625,14 +625,14 @@ public class PluginManagerMock implements PluginManager
 
 	@Override
 	public void registerEvent(@NotNull Class<? extends Event> event, @NotNull Listener listener, @NotNull EventPriority priority,
-							  @NotNull EventExecutor executor, @NotNull Plugin plugin)
+	                          @NotNull EventExecutor executor, @NotNull Plugin plugin)
 	{
 		registerEvent(event, listener, priority, executor, plugin, false);
 	}
 
 	@Override
 	public void registerEvent(@NotNull Class<? extends Event> event, @NotNull Listener listener, @NotNull EventPriority priority,
-							  @NotNull EventExecutor executor, @NotNull Plugin plugin, boolean ignoreCancelled)
+	                          @NotNull EventExecutor executor, @NotNull Plugin plugin, boolean ignoreCancelled)
 	{
 		Validate.notNull(listener, "Listener cannot be null");
 		Validate.notNull(priority, "Priority cannot be null");

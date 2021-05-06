@@ -10,6 +10,7 @@ import static org.junit.Assume.assumeFalse;
 
 import java.util.List;
 
+import org.bukkit.Chunk;
 import org.bukkit.GameRule;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -290,5 +291,29 @@ public class WorldMockTest
 	{
 		WorldMock world = new WorldMock();
 		assertEquals("World environment type should be normal", World.Environment.NORMAL, world.getEnvironment());
+	}
+
+	@Test
+	public void getLoadedChunks_EmptyWorldHasNoLoadedChunks()
+	{
+		WorldMock world = new WorldMock();
+		assertEquals(0, world.getLoadedChunks().length);
+	}
+
+	@Test
+	public void isChunkLoaded_IsFalseForUnloadedChunk()
+	{
+		WorldMock world = new WorldMock();
+		assertFalse(world.isChunkLoaded(0, 0));
+	}
+
+	@Test
+	public void isChunkloaded_IsTrueForLoadedChunk()
+	{
+		WorldMock world = new WorldMock();
+		BlockMock block = world.getBlockAt(64, 64, 64);
+		assertNotNull(block.getChunk());
+		Chunk chunk = block.getChunk();
+		assertTrue(world.isChunkLoaded(chunk.getX(), chunk.getZ()));
 	}
 }

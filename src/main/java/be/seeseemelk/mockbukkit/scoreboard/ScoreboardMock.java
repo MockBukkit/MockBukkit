@@ -31,14 +31,14 @@ public class ScoreboardMock implements Scoreboard
 
 	@Override
 	public ObjectiveMock registerNewObjective(String name, String criteria, String displayName)
-			throws IllegalArgumentException
+	throws IllegalArgumentException
 	{
 		return registerNewObjective(name, criteria, displayName, RenderType.INTEGER);
 	}
 
 	@Override
 	public ObjectiveMock registerNewObjective(String name, String criteria, String displayName, RenderType renderType)
-			throws IllegalArgumentException
+	throws IllegalArgumentException
 	{
 		ObjectiveMock objective = new ObjectiveMock(this, name, displayName, criteria, renderType);
 		objectives.put(name, objective);
@@ -55,7 +55,7 @@ public class ScoreboardMock implements Scoreboard
 	public Set<Objective> getObjectivesByCriteria(String criteria) throws IllegalArgumentException
 	{
 		return objectives.values().stream().filter(objective -> objective.getCriteria().equals(criteria))
-				.collect(Collectors.toSet());
+		       .collect(Collectors.toSet());
 	}
 
 	@Override
@@ -186,7 +186,7 @@ public class ScoreboardMock implements Scoreboard
 
 	/**
 	 * Sets the objective to a specific slot.
-	 * 
+	 *
 	 * @param objective The objective to set to the slot.
 	 * @param slot      The slot to set the objective to.
 	 */
@@ -197,7 +197,7 @@ public class ScoreboardMock implements Scoreboard
 
 	/**
 	 * Removes an objective off this scoreboard.
-	 * 
+	 *
 	 * @param objectiveMock The objective to remove.
 	 */
 	protected void unregister(@NotNull ObjectiveMock objectiveMock)
