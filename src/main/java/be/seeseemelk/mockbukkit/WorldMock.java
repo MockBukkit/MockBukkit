@@ -486,7 +486,7 @@ public class WorldMock implements World
 	{
 		return dropItem(loc, item, e -> {});
 	}
-	
+
 	@Override
 	public ItemEntityMock dropItemNaturally(@NotNull Location location, @NotNull ItemStack item, @Nullable Consumer<Item> function)
 	{
