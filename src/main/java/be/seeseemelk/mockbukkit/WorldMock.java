@@ -272,6 +272,15 @@ public class WorldMock implements World
 		return getChunkAt(new ChunkCoordinate(x, z));
 	}
 
+	/**
+	 * Gets the chunk at a specific chunk coordinate.
+	 *
+	 * If there is no chunk recorded at the location, one will be created.
+	 *
+	 * @param coordinate The coordinate at which to get the chunk.
+	 *
+	 * @return The chunk at the location.
+	 */
 	public ChunkMock getChunkAt(ChunkCoordinate coordinate)
 	{
 		if (!loadedChunks.containsKey(coordinate))
