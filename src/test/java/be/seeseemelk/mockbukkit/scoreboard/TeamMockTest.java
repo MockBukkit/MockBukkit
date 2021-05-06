@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.bukkit.ChatColor;
-import org.bukkit.scoreboard.NameTagVisibility;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.scoreboard.Team;
@@ -87,12 +86,14 @@ class TeamMockTest
 		assertFalse(team.canSeeFriendlyInvisibles());
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
 	void getNameTagVisibility()
 	{
-		assertEquals(NameTagVisibility.ALWAYS, team.getNameTagVisibility());
+		assertEquals(org.bukkit.scoreboard.NameTagVisibility.ALWAYS, team.getNameTagVisibility());
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
 	void getPlayers()
 	{
@@ -110,6 +111,7 @@ class TeamMockTest
 		assertEquals(1, team.getEntries().size());
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
 	void getSize()
 	{
@@ -124,6 +126,7 @@ class TeamMockTest
 		assertEquals(board, team.getScoreboard());
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
 	void removePlayer()
 	{
@@ -145,6 +148,7 @@ class TeamMockTest
 		assertEquals(0, team.getSize());
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
 	void hasPlayer()
 	{

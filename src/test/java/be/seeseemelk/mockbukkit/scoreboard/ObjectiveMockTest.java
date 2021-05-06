@@ -62,6 +62,7 @@ class ObjectiveMockTest
 		assertNull(scoreboard.getObjective(name), "Objective was not registered");
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
 	void getScore_Player_ReturnsNotNull()
 	{
@@ -69,6 +70,7 @@ class ObjectiveMockTest
 		assertNotNull(objective.getScore(player));
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
 	void getScore_SamePlayer_ReturnsSame()
 	{

@@ -10,6 +10,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -34,6 +35,13 @@ class PersistentDataTest
 	public void tearDown()
 	{
 		MockBukkit.unmock();
+	}
+
+	@NotNull
+	@SuppressWarnings("deprecation")
+	private NamespacedKey getRandomKey()
+	{
+		return NamespacedKey.randomKey();
 	}
 
 	@Test
@@ -65,7 +73,7 @@ class PersistentDataTest
 	void testAddInteger()
 	{
 		PersistentDataContainer container = new PersistentDataContainerMock();
-		NamespacedKey key = NamespacedKey.randomKey();
+		NamespacedKey key = getRandomKey();
 
 		assertTrue(container.isEmpty());
 		assertFalse(container.has(key, PersistentDataType.INTEGER));
@@ -84,7 +92,7 @@ class PersistentDataTest
 	void testAddString()
 	{
 		PersistentDataContainer container = new PersistentDataContainerMock();
-		NamespacedKey key = NamespacedKey.randomKey();
+		NamespacedKey key = getRandomKey();
 
 		container.set(key, PersistentDataType.STRING, "Hello world");
 		assertFalse(container.isEmpty());
@@ -96,7 +104,7 @@ class PersistentDataTest
 	void testRemoveInteger()
 	{
 		PersistentDataContainer container = new PersistentDataContainerMock();
-		NamespacedKey key = NamespacedKey.randomKey();
+		NamespacedKey key = getRandomKey();
 
 		container.set(key, PersistentDataType.INTEGER, 42);
 		assertEquals(42, container.get(key, PersistentDataType.INTEGER).intValue());
@@ -110,7 +118,7 @@ class PersistentDataTest
 	void testGetOrDefault()
 	{
 		PersistentDataContainer container = new PersistentDataContainerMock();
-		NamespacedKey key = NamespacedKey.randomKey();
+		NamespacedKey key = getRandomKey();
 
 		assertEquals(10, container.getOrDefault(key, PersistentDataType.INTEGER, 10).intValue());
 
@@ -126,7 +134,7 @@ class PersistentDataTest
 
 		assertEquals(container, container2);
 
-		NamespacedKey key = NamespacedKey.randomKey();
+		NamespacedKey key = getRandomKey();
 		container.set(key, PersistentDataType.INTEGER, 42);
 
 		assertNotEquals(container, container2);
@@ -139,7 +147,7 @@ class PersistentDataTest
 	void testConstructor()
 	{
 		PersistentDataContainerMock container = new PersistentDataContainerMock();
-		NamespacedKey key = NamespacedKey.randomKey();
+		NamespacedKey key = getRandomKey();
 		container.set(key, PersistentDataType.INTEGER, 42);
 
 		assertEquals(container, new PersistentDataContainerMock(container));
@@ -149,8 +157,8 @@ class PersistentDataTest
 	void testGetkeys()
 	{
 		PersistentDataContainer container = new PersistentDataContainerMock();
-		NamespacedKey key = NamespacedKey.randomKey();
-		NamespacedKey key2 = NamespacedKey.randomKey();
+		NamespacedKey key = getRandomKey();
+		NamespacedKey key2 = getRandomKey();
 
 		assertEquals(0, container.getKeys().size());
 		container.set(key, PersistentDataType.STRING, "Hello world");

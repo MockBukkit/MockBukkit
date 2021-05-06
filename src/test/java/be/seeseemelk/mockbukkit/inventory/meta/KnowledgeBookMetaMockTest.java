@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.bukkit.NamespacedKey;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,6 +33,13 @@ class KnowledgeBookMetaMockTest
 		MockBukkit.unmock();
 	}
 
+	@NotNull
+	@SuppressWarnings("deprecation")
+	private NamespacedKey getRandomKey()
+	{
+		return NamespacedKey.randomKey();
+	}
+
 	@Test
 	void testRecipesDefaultFalse()
 	{
@@ -43,7 +51,7 @@ class KnowledgeBookMetaMockTest
 	void testAddRecipe()
 	{
 		KnowledgeBookMetaMock meta = new KnowledgeBookMetaMock();
-		NamespacedKey key = NamespacedKey.randomKey();
+		NamespacedKey key = getRandomKey();
 
 		assertFalse(meta.hasRecipes());
 		meta.addRecipe(key);
@@ -65,7 +73,7 @@ class KnowledgeBookMetaMockTest
 	void testSetRecipes()
 	{
 		KnowledgeBookMetaMock meta = new KnowledgeBookMetaMock();
-		List<NamespacedKey> recipes = Arrays.asList(NamespacedKey.randomKey(), NamespacedKey.randomKey());
+		List<NamespacedKey> recipes = Arrays.asList(getRandomKey(), getRandomKey());
 
 		assertFalse(meta.hasRecipes());
 		meta.setRecipes(recipes);
@@ -76,7 +84,7 @@ class KnowledgeBookMetaMockTest
 	void testGetRecipes()
 	{
 		KnowledgeBookMetaMock meta = new KnowledgeBookMetaMock();
-		List<NamespacedKey> recipes = Arrays.asList(NamespacedKey.randomKey(), NamespacedKey.randomKey());
+		List<NamespacedKey> recipes = Arrays.asList(getRandomKey(), getRandomKey());
 		meta.setRecipes(recipes);
 
 		assertEquals(recipes, meta.getRecipes());
@@ -89,7 +97,7 @@ class KnowledgeBookMetaMockTest
 
 		for (int i = 0; i < MAX_RECIPES + 50; i++)
 		{
-			meta.addRecipe(NamespacedKey.randomKey());
+			meta.addRecipe(getRandomKey());
 		}
 
 		assertEquals(MAX_RECIPES, meta.getRecipes().size());
@@ -105,7 +113,7 @@ class KnowledgeBookMetaMockTest
 		KnowledgeBookMetaMock meta2 = new KnowledgeBookMetaMock();
 		assertEquals(meta, meta2);
 
-		NamespacedKey recipe = NamespacedKey.randomKey();
+		NamespacedKey recipe = getRandomKey();
 
 		meta.addRecipe(recipe);
 		assertNotEquals(meta, meta2);
