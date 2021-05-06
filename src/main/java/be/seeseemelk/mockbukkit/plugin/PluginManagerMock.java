@@ -486,7 +486,7 @@ public class PluginManagerMock implements PluginManager
 			if (value instanceof List<?>)
 			{
 				command.setAliases(
-						((List<?>) value).stream().map(Object::toString).collect(Collectors.toList()));
+				    ((List<?>) value).stream().map(Object::toString).collect(Collectors.toList()));
 			}
 			else if (value != null)
 			{
