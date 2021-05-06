@@ -57,7 +57,8 @@ class ScoreMockTest
 	@Test
 	void getScore_ObjectiveUnregistered_ThrowsError()
 	{
-		assertThrows(IllegalStateException.class, () -> {
+		assertThrows(IllegalStateException.class, () ->
+		{
 			objective.unregister();
 			score.getScore();
 		});

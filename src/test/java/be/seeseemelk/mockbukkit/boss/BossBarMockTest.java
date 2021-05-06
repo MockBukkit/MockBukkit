@@ -29,7 +29,7 @@ class BossBarMockTest
 	{
 		server = MockBukkit.mock();
 		bar = server.createBossBar("Test bossbar", BarColor.BLUE, BarStyle.SOLID, BarFlag.PLAY_BOSS_MUSIC,
-				BarFlag.CREATE_FOG);
+		                           BarFlag.CREATE_FOG);
 	}
 
 	@AfterEach

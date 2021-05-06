@@ -71,7 +71,8 @@ class UnsafeValuesTest
 	@Test
 	void checkSupported_noSpecifiedVersion() throws InvalidPluginException
 	{
-		assertThrows(InvalidPluginException.class, () -> {
+		assertThrows(InvalidPluginException.class, () ->
+		{
 			PluginDescriptionFile pluginDescriptionFile = new PluginDescriptionFile("VersionTest", "1.0", "not.exists");
 			mockUnsafeValues.checkSupported(pluginDescriptionFile);
 		});

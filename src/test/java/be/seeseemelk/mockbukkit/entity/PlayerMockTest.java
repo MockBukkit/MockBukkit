@@ -438,8 +438,9 @@ class PlayerMockTest
 	@Test
 	void simulateBlockDamage_NotSurvival_BlockNotDamaged()
 	{
-		GameMode[] nonSurvivalGameModes = { GameMode.CREATIVE, GameMode.ADVENTURE, 
-				GameMode.SPECTATOR };
+		GameMode[] nonSurvivalGameModes = { GameMode.CREATIVE, GameMode.ADVENTURE,
+		                                    GameMode.SPECTATOR
+		                                  };
 
 		for (GameMode gm : nonSurvivalGameModes)
 		{

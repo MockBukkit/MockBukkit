@@ -96,7 +96,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		double distance = location.distance(expectedLocation);
 		assertEquals(expectedLocation.getWorld(), location.getWorld());
 		assertTrue(distance <= maximumDistance, String.format("Distance was <%.3f> but should be less than or equal to <%.3f>", distance,
-		                         maximumDistance));
+		           maximumDistance));
 	}
 
 	/**

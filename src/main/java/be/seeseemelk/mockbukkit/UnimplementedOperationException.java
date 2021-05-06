@@ -8,7 +8,7 @@ import org.opentest4j.TestAbortedException;
  * will, instead of returning placeholder values, throw an {@link UnimplementedOperationException}.
  * <p>
  * This is a {@link TestAbortedException} and causes your Test to be skipped instead of just failing.
- * 
+ *
  * @author seeseemelk
  *
  */

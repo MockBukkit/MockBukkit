@@ -25,7 +25,8 @@ class TagParserTest
 		NamespacedKey key = NamespacedKey.minecraft("i_dont_exist");
 		TagParser parser = new TagParser(TagRegistry.BLOCKS, key);
 
-		assertThrows(IllegalArgumentException.class, () -> parser.parse(null, (a, b) -> {
+		assertThrows(IllegalArgumentException.class, () -> parser.parse(null, (a, b) ->
+		{
 		}));
 	}
 
@@ -81,7 +82,8 @@ class TagParserTest
 
 		try
 		{
-			parser.parse(json, (a, b) -> {
+			parser.parse(json, (a, b) ->
+			{
 			});
 
 			fail("JSON was misconfigured, should have thrown an exception");

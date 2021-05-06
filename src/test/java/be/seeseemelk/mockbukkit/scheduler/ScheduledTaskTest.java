@@ -83,7 +83,7 @@ class ScheduledTaskTest
 			executed.set(true);
 		});
 		task.cancel();
-		
+
 		assertThrows(CancellationException.class, task::run);
 	}
 

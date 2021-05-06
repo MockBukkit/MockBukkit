@@ -16,7 +16,7 @@ class CommandResultTest
 	}
 
 	@Test
-	 void hasSucceeded_Failed_False()
+	void hasSucceeded_Failed_False()
 	{
 		CommandResult result = new CommandResult(false, null);
 		assertFalse(result.hasSucceeded());

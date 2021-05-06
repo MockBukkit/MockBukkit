@@ -50,14 +50,14 @@ class HelpMapMockTest
 	void helpmap_factory_registration()
 	{
 		helpMap.registerHelpTopicFactory(VersionCommand.class,
-				command -> new IndexHelpTopic("", "short text", "perm", Collections.emptyList()));
+		                                 command -> new IndexHelpTopic("", "short text", "perm", Collections.emptyList()));
 	}
 
 	@Test
 	void helpmap_factory_registration_incorrect_type()
 	{
 		assertThrows(IllegalArgumentException.class, () -> helpMap.registerHelpTopicFactory(Object.class,
-				command -> new IndexHelpTopic("", "short text", "perm", Collections.emptyList())));
+		             command -> new IndexHelpTopic("", "short text", "perm", Collections.emptyList())));
 	}
 
 }

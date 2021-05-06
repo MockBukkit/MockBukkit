@@ -96,7 +96,7 @@ class ItemEntityMockTest
 	void testIllegalArgumentForSpawning()
 	{
 		Location location = new Location(world, 300, 100, 300);
-		
+
 		assertThrows(IllegalArgumentException.class, () -> world.spawnEntity(location, EntityType.DROPPED_ITEM));
 	}
 
