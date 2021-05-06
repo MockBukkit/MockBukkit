@@ -126,7 +126,7 @@ def isFork() {
         def result = 'git config --get remote.origin.url'.execute(null, workingDir)
         result.waitFor()
         if (result.exitValue() == 0) {
-            return !result.text.contains("seeseemelk")
+            return !result.text.contains("MockBukkit/MockBukkit")
         }
     } catch (e) {
     }
