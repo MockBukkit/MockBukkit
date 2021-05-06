@@ -38,7 +38,7 @@ public class Coordinate
 	 */
 	public ChunkCoordinate toChunkCoordinate()
 	{
-		return new ChunkCoordinate(x / 16, z / 16);
+		return new ChunkCoordinate(x >> 4, z >> 4);
 	}
 
 	@Override
