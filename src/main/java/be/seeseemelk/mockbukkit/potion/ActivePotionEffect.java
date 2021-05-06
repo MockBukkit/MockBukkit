@@ -10,7 +10,7 @@ import be.seeseemelk.mockbukkit.entity.LivingEntityMock;
 
 /**
  * This class represents an active {@link PotionEffect} which was applied to a {@link LivingEntity}.
- * 
+ *
  * @author TheBusyBiscuit
  *
  * @see LivingEntityMock#addPotionEffect(PotionEffect)

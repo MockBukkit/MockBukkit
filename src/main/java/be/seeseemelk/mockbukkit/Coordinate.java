@@ -1,13 +1,15 @@
 package be.seeseemelk.mockbukkit;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * A simple class that contains an x, y and z coordinate as integers.
  */
 public class Coordinate
 {
-	public int x;
-	public int y;
-	public int z;
+	public final int x;
+	public final int y;
+	public final int z;
 
 	/**
 	 * Creates a new coordinate object with a specified (x, y, z).
@@ -29,6 +31,17 @@ public class Coordinate
 	public Coordinate()
 	{
 		this(0, 0, 0);
+	}
+
+	/**
+	 * Gets the chunk coordinate this coordinate is in.
+	 *
+	 * @return The chunk coordinate of this coordinate.
+	 */
+	@NotNull
+	public ChunkCoordinate toChunkCoordinate()
+	{
+		return new ChunkCoordinate(x >> 4, z >> 4);
 	}
 
 	@Override

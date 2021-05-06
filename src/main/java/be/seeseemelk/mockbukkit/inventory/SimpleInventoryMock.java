@@ -10,7 +10,7 @@ public class SimpleInventoryMock extends InventoryMock
 
 	/**
 	 * Creates a new inventory with size inherited from {@linkplain InventoryType#getDefaultSize()}.
-	 * 
+	 *
 	 * @param holder The {@link InventoryHolder}
 	 * @param size   The size for this {@link InventoryMock}.
 	 * @param type   The {@link InventoryType} for this {@link InventoryMock}
@@ -22,7 +22,7 @@ public class SimpleInventoryMock extends InventoryMock
 
 	/**
 	 * Creates a new inventory with size inherited from {@linkplain InventoryType#getDefaultSize()}.
-	 * 
+	 *
 	 * @param holder The {@link InventoryHolder}
 	 * @param type   The {@link InventoryType} for this {@link InventoryMock}
 	 */
