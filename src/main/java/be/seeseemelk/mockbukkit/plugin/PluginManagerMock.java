@@ -60,19 +60,21 @@ import org.jetbrains.annotations.NotNull;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
 
 public class PluginManagerMock implements PluginManager
 {
 	private final ServerMock server;
-	private final List<Plugin> plugins = new ArrayList<>();
 	private final JavaPluginLoader loader;
+	private final List<Plugin> plugins = new ArrayList<>();
 	private final List<PluginCommand> commands = new ArrayList<>();
 	private final List<Event> events = new ArrayList<>();
 	private final List<File> temporaryFiles = new LinkedList<>();
-	private final List<Class<?>> pluginConstructorTypes = Arrays.asList(JavaPluginLoader.class,
-	        PluginDescriptionFile.class, File.class, File.class);
 	private final List<Permission> permissions = new ArrayList<>();
 	private final Map<Permissible, Set<String>> permissionSubscriptions = new HashMap<>();
+
+	private final List<Class<?>> pluginConstructorTypes = Arrays.asList(JavaPluginLoader.class,
+	        PluginDescriptionFile.class, File.class, File.class);
 
 	@SuppressWarnings("deprecation")
 	public PluginManagerMock(@NotNull ServerMock server)
@@ -384,6 +386,11 @@ public class PluginManagerMock implements PluginManager
 	@Override
 	public void callEvent(@NotNull Event event)
 	{
+		if (event.isAsynchronous() && server.isOnMainThread())
+		{
+			throw new IllegalStateException("Asynchronous Events cannot be called on the main Thread.");
+		}
+
 		events.add(event);
 		HandlerList handlers = event.getHandlers();
 		RegisteredListener[] listeners = handlers.getRegisteredListeners();
@@ -391,6 +398,23 @@ public class PluginManagerMock implements PluginManager
 		{
 			callRegisteredListener(l, event);
 		}
+	}
+
+	/**
+	 * This method invokes {@link #callEvent(Event)} from a different {@link Thread}
+	 * using the {@link BukkitSchedulerMock}.
+	 *
+	 * @param event The asynchronous {@link Event} to call.
+	 */
+	public void callEventAsynchronously(@NotNull Event event)
+	{
+		if (!event.isAsynchronous())
+		{
+			throw new IllegalStateException("Synchronous Events cannot be called asynchronously.");
+		}
+
+		// Our Scheduler will call the Event on a dedicated Event Thread Executor
+		server.getScheduler().scheduleAsyncEventCall(event);
 	}
 
 	private void callRegisteredListener(@NotNull RegisteredListener registration, @NotNull Event event)
@@ -459,12 +483,19 @@ public class PluginManagerMock implements PluginManager
 			command.setDescription((String) value);
 			break;
 		case "aliases":
-			List<String> aliases = new ArrayList<>();
 			if (value instanceof List<?>)
+			{
 				command.setAliases(
-				    ((List<?>) aliases).stream().map(Object::toString).collect(Collectors.toList()));
+				    ((List<?>) value).stream().map(Object::toString).collect(Collectors.toList()));
+			}
+			else if (value != null)
+			{
+				command.setAliases(Collections.singletonList(value.toString()));
+			}
 			else
-				command.setAliases(Arrays.asList(value.toString()));
+			{
+				command.setAliases(Collections.emptyList());
+			}
 			break;
 		case "permission":
 			command.setPermission((String) value);
@@ -488,18 +519,15 @@ public class PluginManagerMock implements PluginManager
 	protected void addCommandsFrom(Plugin plugin)
 	{
 		Map<String, Map<String, Object>> commands = plugin.getDescription().getCommands();
-		if (commands != null)
+		for (Entry<String, Map<String, Object>> entry : commands.entrySet())
 		{
-			for (Entry<String, Map<String, Object>> entry : commands.entrySet())
+			PluginCommand command = PluginCommandUtils.createPluginCommand(entry.getKey(), plugin);
+			for (Entry<String, Object> section : entry.getValue().entrySet())
 			{
-				PluginCommand command = PluginCommandUtils.createPluginCommand(entry.getKey(), plugin);
-				for (Entry<String, Object> section : entry.getValue().entrySet())
-				{
-					addSection(command, section.getKey(), section.getValue());
-				}
-				this.commands.add(command);
-				this.server.getCommandMap().register(plugin.getName(), command);
+				addSection(command, section.getKey(), section.getValue());
 			}
+			this.commands.add(command);
+			this.server.getCommandMap().register(plugin.getName(), command);
 		}
 	}
 
@@ -597,14 +625,14 @@ public class PluginManagerMock implements PluginManager
 
 	@Override
 	public void registerEvent(@NotNull Class<? extends Event> event, @NotNull Listener listener, @NotNull EventPriority priority,
-							  @NotNull EventExecutor executor, @NotNull Plugin plugin)
+	                          @NotNull EventExecutor executor, @NotNull Plugin plugin)
 	{
 		registerEvent(event, listener, priority, executor, plugin, false);
 	}
 
 	@Override
 	public void registerEvent(@NotNull Class<? extends Event> event, @NotNull Listener listener, @NotNull EventPriority priority,
-							  @NotNull EventExecutor executor, @NotNull Plugin plugin, boolean ignoreCancelled)
+	                          @NotNull EventExecutor executor, @NotNull Plugin plugin, boolean ignoreCancelled)
 	{
 		Validate.notNull(listener, "Listener cannot be null");
 		Validate.notNull(priority, "Priority cannot be null");
@@ -685,8 +713,7 @@ public class PluginManagerMock implements PluginManager
 	@Override
 	public void removePermission(@NotNull Permission perm)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		permissions.remove(perm);
 	}
 
 	@Override

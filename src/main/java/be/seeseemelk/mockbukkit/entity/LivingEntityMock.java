@@ -129,12 +129,12 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		modifierFunctions.put(EntityDamageEvent.DamageModifier.BASE, damage -> damage);
 
 		EntityDamageEvent event = source != null ?
-				new EntityDamageByEntityEvent(source, this,
-						EntityDamageEvent.DamageCause.ENTITY_ATTACK, modifiers, modifierFunctions)
-				:
-				new EntityDamageEvent(this, EntityDamageEvent.DamageCause.CUSTOM, modifiers,
-						modifierFunctions)
-				;
+		                          new EntityDamageByEntityEvent(source, this,
+		                                  EntityDamageEvent.DamageCause.ENTITY_ATTACK, modifiers, modifierFunctions)
+		                          :
+		                          new EntityDamageEvent(this, EntityDamageEvent.DamageCause.CUSTOM, modifiers,
+		                                  modifierFunctions)
+		                          ;
 		event.setDamage(amount);
 		Bukkit.getPluginManager().callEvent(event);
 		if (!event.isCancelled())
