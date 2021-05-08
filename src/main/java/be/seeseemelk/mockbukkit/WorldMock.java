@@ -76,11 +76,10 @@ public class WorldMock implements World
 {
 	private static final int MIN_WORLD_HEIGHT = 0;
 	private static final int MAX_WORLD_HEIGHT = 256;
-
+	
 	private final Map<Coordinate, BlockMock> blocks = new HashMap<>();
 	private final Map<GameRule<?>, Object> gameRules = new HashMap<>();
 	private final MetadataTable metadataTable = new MetadataTable();
-	private final Map<ChunkCoordinate, ChunkMock> loadedChunks = new HashMap<>();
 
 	private Environment environment = Environment.NORMAL;
 	private ServerMock server;
@@ -269,27 +268,7 @@ public class WorldMock implements World
 	@Override
 	public ChunkMock getChunkAt(int x, int z)
 	{
-		return getChunkAt(new ChunkCoordinate(x, z));
-	}
-
-	/**
-	 * Gets the chunk at a specific chunk coordinate.
-	 *
-	 * If there is no chunk recorded at the location, one will be created.
-	 *
-	 * @param coordinate The coordinate at which to get the chunk.
-	 *
-	 * @return The chunk at the location.
-	 */
-	@NotNull
-	public ChunkMock getChunkAt(@NotNull ChunkCoordinate coordinate)
-	{
-		ChunkMock chunk = loadedChunks.get(coordinate);
-		if (chunk == null)
-		{
-			chunk = new ChunkMock(this, coordinate.getX(), coordinate.getZ());
-			loadedChunks.put(coordinate, chunk);
-		}
+		ChunkMock chunk = new ChunkMock(this, x, z);
 		return chunk;
 	}
 
@@ -381,7 +360,8 @@ public class WorldMock implements World
 	@Override
 	public Chunk[] getLoadedChunks()
 	{
-		return loadedChunks.values().toArray(new Chunk[0]);
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -394,8 +374,8 @@ public class WorldMock implements World
 	@Override
 	public boolean isChunkLoaded(int x, int z)
 	{
-		ChunkCoordinate coordinate = new ChunkCoordinate(x, z);
-		return loadedChunks.containsKey(coordinate);
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -486,7 +466,7 @@ public class WorldMock implements World
 	{
 		return dropItem(loc, item, e -> {});
 	}
-
+	
 	@Override
 	public ItemEntityMock dropItemNaturally(@NotNull Location location, @NotNull ItemStack item, @Nullable Consumer<Item> function)
 	{

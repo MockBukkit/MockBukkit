@@ -39,14 +39,12 @@ public class ConsoleCommandSenderMockTest
 	}
 
 	@Test
-	public void getName_IsConsole()
-	{
+	public void getName_IsConsole() {
 		assertEquals("CONSOLE", sender.getName());
 	}
 
 	@Test
-	public void assertIsOp()
-	{
+	public void assertIsOp() {
 		assertTrue(sender.isOp());
 	}
 

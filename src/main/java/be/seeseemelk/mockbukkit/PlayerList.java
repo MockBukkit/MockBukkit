@@ -22,12 +22,12 @@ import be.seeseemelk.mockbukkit.entity.PlayerMock;
 
 /**
  * Replica of the Bukkit internal PlayerList and CraftPlayerList implementation
- *
+ * 
  * @author seeseemelk
  * @author TheBusyBiscuit
- *
+ * 
  */
-public class MockPlayerList
+public class PlayerList
 {
 	private int maxPlayers = Integer.MAX_VALUE;
 
@@ -75,7 +75,7 @@ public class MockPlayerList
 	public Set<OfflinePlayer> getOperators()
 	{
 		return Stream.concat(onlinePlayers.stream(), offlinePlayers.stream()).filter(OfflinePlayer::isOp)
-		       .collect(Collectors.toSet());
+				.collect(Collectors.toSet());
 	}
 
 	@NotNull
@@ -99,16 +99,16 @@ public class MockPlayerList
 	public List<Player> matchPlayer(@NotNull String name)
 	{
 		return onlinePlayers.stream().filter(
-		           player -> player.getName().toLowerCase(Locale.ENGLISH).startsWith(name.toLowerCase(Locale.ENGLISH)))
-		       .collect(Collectors.toList());
+				player -> player.getName().toLowerCase(Locale.ENGLISH).startsWith(name.toLowerCase(Locale.ENGLISH)))
+				.collect(Collectors.toList());
 	}
 
 	@Nullable
 	public Player getPlayerExact(@NotNull String name)
 	{
 		return onlinePlayers.stream()
-		       .filter(player -> player.getName().toLowerCase(Locale.ENGLISH).equals(name.toLowerCase(Locale.ENGLISH)))
-		       .findFirst().orElse(null);
+				.filter(player -> player.getName().toLowerCase(Locale.ENGLISH).equals(name.toLowerCase(Locale.ENGLISH)))
+				.findFirst().orElse(null);
 	}
 
 	@Nullable

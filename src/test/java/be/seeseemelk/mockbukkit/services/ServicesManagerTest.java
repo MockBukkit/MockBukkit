@@ -12,35 +12,30 @@ import be.seeseemelk.mockbukkit.EmptyPlugin;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 
-public class ServicesManagerTest
-{
+public class ServicesManagerTest {
 	private ServerMock server;
 	private EmptyPlugin plugin;
 
 	@Before
-	public void setUp()
-	{
+	public void setUp() {
 		server = MockBukkit.mock();
 		plugin = MockBukkit.loadWith(EmptyPlugin.class, "empty_plugin.yml");
 	}
 
 	@After
-	public void tearDown()
-	{
+	public void tearDown() {
 		MockBukkit.unmock();
 	}
 
 	@Test
-	public void test_register_should_register()
-	{
+	public void test_register_should_register() {
 		// We use this class as the service class to avoid creating a useless class
 		server.getServicesManager().register(ServicesManagerTest.class, this, plugin, ServicePriority.Normal);
 		assertEquals(this, server.getServicesManager().load(ServicesManagerTest.class));
 	}
 
 	@Test
-	public void test_register_multiple_service()
-	{
+	public void test_register_multiple_service() {
 		Object obj = new Object();
 		Object obj2 = new Object();
 		Object obj3 = new Object();
@@ -56,14 +51,12 @@ public class ServicesManagerTest
 	}
 
 	@Test
-	public void test_load_not_registered_object()
-	{
+	public void test_load_not_registered_object() {
 		assertNull(server.getServicesManager().load(Object.class));
 	}
 
 	@Test
-	public void test_load_registered_object()
-	{
+	public void test_load_registered_object() {
 		Object object = new Object();
 		server.getServicesManager().register(Object.class, object, plugin, ServicePriority.Normal);
 		assertNotNull(server.getServicesManager().load(Object.class));
@@ -71,14 +64,12 @@ public class ServicesManagerTest
 	}
 
 	@Test
-	public void test_get_registration_not_registered_object()
-	{
+	public void test_get_registration_not_registered_object() {
 		assertNull(server.getServicesManager().getRegistration(Object.class));
 	}
 
 	@Test
-	public void test_get_registration_registered_object()
-	{
+	public void test_get_registration_registered_object() {
 		Object object = new Object();
 		server.getServicesManager().register(Object.class, object, plugin, ServicePriority.Normal);
 
@@ -88,8 +79,7 @@ public class ServicesManagerTest
 	}
 
 	@Test
-	public void test_unregister_service_provider()
-	{
+	public void test_unregister_service_provider() {
 		Object obj = new Object();
 		Object obj2 = new Object();
 		Object obj3 = new Object();
@@ -105,8 +95,7 @@ public class ServicesManagerTest
 	}
 
 	@Test
-	public void test_unregister()
-	{
+	public void test_unregister() {
 		Object obj = new Object();
 		Object obj2 = new Object();
 		Object obj3 = new Object();
@@ -129,8 +118,7 @@ public class ServicesManagerTest
 	}
 
 	@Test
-	public void test_get_registrations()
-	{
+	public void test_get_registrations() {
 		Object obj = new Object();
 		Object obj2 = new Object();
 		server.getServicesManager().register(Object.class, obj, plugin, ServicePriority.Normal);
@@ -142,8 +130,7 @@ public class ServicesManagerTest
 	}
 
 	@Test
-	public void test_get_known_services()
-	{
+	public void test_get_known_services() {
 		Object obj = new Object();
 		Object obj2 = new Object();
 		server.getServicesManager().register(Object.class, obj, plugin, ServicePriority.Normal);
@@ -156,8 +143,7 @@ public class ServicesManagerTest
 	}
 
 	@Test
-	public void test_is_provided_for()
-	{
+	public void test_is_provided_for() {
 		Object obj = new Object();
 		Object obj2 = new Object();
 		server.getServicesManager().register(Object.class, obj, plugin, ServicePriority.Normal);
