@@ -1,10 +1,6 @@
 gradle.ext.apiVersion = '1.16'
 gradle.ext.apiVersionFull = '1.16.5-R0.1-SNAPSHOT'
-<<<<<<< HEAD
-gradle.ext.version = '0.35.1'
-=======
 gradle.ext.version = '0.36.0'
->>>>>>> parent of 87d6aa9 (Revert "temporary version change to solve merge conflict when fetching from upstream MockBukkit/MockBukkit:v1.16")
 
 
 rootProject.name = 'MockBukkit-' + gradle.ext.apiVersion
