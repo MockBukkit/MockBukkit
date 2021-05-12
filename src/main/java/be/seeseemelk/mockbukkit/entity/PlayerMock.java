@@ -1512,7 +1512,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		{
 			List<String> blockingPlugins = hiddenPlayerNicks.get(player.getUniqueId());
 			blockingPlugins.remove(plugin.getName());
-			if(blockingPlugins.size() == 0)
+			if(blockingPlugins.isEmpty())
 				showPlayer(player);
 		}
 	}
