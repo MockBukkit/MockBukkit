@@ -11,13 +11,16 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 import java.util.logging.Logger;
 
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+
+import org.apache.commons.lang.Validate;
+import org.bukkit.event.Event;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.scheduler.BukkitWorker;
-
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.jetbrains.annotations.NotNull;
 
 public class BukkitSchedulerMock implements BukkitScheduler
@@ -26,9 +29,11 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	private long currentTick = 0;
 	private int id = 0;
 	private List<ScheduledTask> tasks = new LinkedList<>();
-	private ExecutorService pool = Executors.newCachedThreadPool();
-	private AtomicInteger asyncTasksRunning = new AtomicInteger();
-	private AtomicReference<Exception> asyncException = new AtomicReference<>();
+	private final ExecutorService pool = Executors.newCachedThreadPool();
+	private final ExecutorService asyncEventExecutor = Executors.newCachedThreadPool();
+
+	private final AtomicInteger asyncTasksRunning = new AtomicInteger();
+	private final AtomicReference<Exception> asyncException = new AtomicReference<>();
 	private int asyncTasksQueued = 0;
 
 	/**
@@ -39,9 +44,15 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	{
 		waitAsyncTasksFinished();
 		pool.shutdown();
-
+		asyncEventExecutor.shutdownNow();
 		if (asyncException.get() != null)
 			throw new AsyncTaskException(asyncException.get());
+	}
+
+	public @NotNull Future<?> scheduleAsyncEventCall(@NotNull Event event)
+	{
+		Validate.notNull(event, "Cannot schedule an Event that is null!");
+		return asyncEventExecutor.submit(() -> MockBukkit.getMock().getPluginManager().callEvent(event));
 	}
 
 	/**
@@ -112,7 +123,9 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	{
 		// Make sure all tasks get to execute. (except for repeating asynchronous tasks, they only will fire once)
 		while (asyncTasksQueued > 0)
+		{
 			performOneTick();
+		}
 
 		// Wait for all tasks to finish executing.
 		while (asyncTasksRunning.get() > 0)
