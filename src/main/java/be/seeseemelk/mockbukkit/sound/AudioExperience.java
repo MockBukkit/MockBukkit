@@ -22,7 +22,7 @@ public final class AudioExperience
 	private final float pitch;
 
 	public AudioExperience(@NotNull String sound, @NotNull SoundCategory category, @NotNull Location loc, float volume,
-			float pitch)
+	                       float pitch)
 	{
 		Validate.notNull(sound, "The played sound cannot be null!");
 		Validate.notNull(category, "The category must not be null!");
@@ -36,7 +36,7 @@ public final class AudioExperience
 	}
 
 	public AudioExperience(@NotNull Sound sound, @NotNull SoundCategory category, @NotNull Location loc, float volume,
-			float pitch)
+	                       float pitch)
 	{
 		this(sound.getKey().getKey(), category, loc, volume, pitch);
 	}

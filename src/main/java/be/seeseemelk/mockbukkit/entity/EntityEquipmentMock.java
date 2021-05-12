@@ -14,7 +14,7 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 /**
  * This mocks the {@link EntityEquipment} of a {@link LivingEntityMock}. Note that not every {@link LivingEntity} has
  * {@link EntityEquipment}, so only implement this where necessary.
- * 
+ *
  * @author TheBusyBiscuit
  *
  */
@@ -226,7 +226,7 @@ public class EntityEquipmentMock implements EntityEquipment
 	public ItemStack[] getArmorContents()
 	{
 		return new ItemStack[]
-		{ getBoots(), getLeggings(), getChestplate(), getHelmet() };
+		       { getBoots(), getLeggings(), getChestplate(), getHelmet() };
 	}
 
 	@Override
@@ -235,9 +235,9 @@ public class EntityEquipmentMock implements EntityEquipment
 		Validate.notNull(items, "The provided items must not be null.");
 
 		setBoots((items.length >= 1) ? items[0] : null);
-	    setLeggings((items.length >= 2) ? items[1] : null);
-	    setChestplate((items.length >= 3) ? items[2] : null);
-	    setHelmet((items.length >= 4) ? items[3] : null);
+		setLeggings((items.length >= 2) ? items[1] : null);
+		setChestplate((items.length >= 3) ? items[2] : null);
+		setHelmet((items.length >= 4) ? items[3] : null);
 	}
 
 	@Override

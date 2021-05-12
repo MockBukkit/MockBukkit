@@ -44,7 +44,7 @@ public class TagParser implements Keyed
 
 	/**
 	 * This constructs a new {@link TagParser}.
-	 * 
+	 *
 	 * @param registry The {@link TagRegistry} for the resulting {@link Tag}
 	 * @param key      The {@link NamespacedKey} of the resulting {@link Tag}
 	 */

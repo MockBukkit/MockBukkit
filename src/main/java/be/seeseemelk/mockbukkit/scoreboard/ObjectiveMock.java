@@ -24,7 +24,7 @@ public class ObjectiveMock implements Objective
 	private RenderType renderType;
 
 	public ObjectiveMock(@NotNull ScoreboardMock scoreboard, @NotNull String name, @NotNull String displayName,
-			@NotNull String criteria, @NotNull RenderType renderType)
+	                     @NotNull String criteria, @NotNull RenderType renderType)
 	{
 		Validate.notNull(scoreboard, "When registering an Objective to the Scoreboard the scoreboard cannot be null.");
 		Validate.notNull(name, "The name cannot be null");
@@ -40,7 +40,7 @@ public class ObjectiveMock implements Objective
 	/**
 	 * This method checks if this {@link ObjectiveMock} is still valid. If it has been unregistered, the method will
 	 * throw an {@link IllegalStateException}.
-	 * 
+	 *
 	 * @throws IllegalStateException if this objective has been unregistered.
 	 */
 	private void validate() throws IllegalStateException
@@ -100,7 +100,7 @@ public class ObjectiveMock implements Objective
 
 	/**
 	 * Checks if the objective is still registered.
-	 * 
+	 *
 	 * @return {@code true} if the objective is still registered, {@code false} if it has been unregistered.
 	 */
 	public boolean isRegistered()
