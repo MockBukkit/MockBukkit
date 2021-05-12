@@ -2156,6 +2156,17 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
+	public int getPing()
+	{
+		/*
+		 * This PlayerMock and the ServerMock exist within
+		 * the same machine, therefore there would most
+		 * likely be a ping of 0ms.
+		 */
+		return 0;
+	}
+
+	@Override
 	public @NotNull PlayerSpigotMock spigot()
 	{
 		return playerSpigotMock;
