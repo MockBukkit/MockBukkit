@@ -1523,7 +1523,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		return !hiddenPlayerNicks.containsKey(player.getUniqueId());
 	}
 
-	private void createRecordOfHiddenPlayerIfNotExists(Player playerToHide)
+	private void createRecordOfHiddenPlayerIfNotExists(@NotNull Player playerToHide)
 	{
 		hiddenPlayerNicks.putIfAbsent(playerToHide.getUniqueId(), new ArrayList<>());
 	}
