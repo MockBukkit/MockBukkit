@@ -119,7 +119,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 
 	private final PlayerSpigotMock playerSpigotMock = new PlayerSpigotMock();
 	private final List<AudioExperience> heardSounds = new LinkedList<>();
-	private final HashMap<UUID,List<String>> hiddenPlayerNicks = new HashMap<>();
+	private final Map<UUID, List<String>> hiddenPlayers = new HashMap<>();
 
 	public PlayerMock(ServerMock server, String name)
 	{
