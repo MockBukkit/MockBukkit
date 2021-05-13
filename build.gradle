@@ -1,15 +1,15 @@
-apply plugin: 'java-library'
-apply plugin: 'eclipse'
-apply plugin: 'idea'
-apply plugin: 'jacoco'
-apply plugin: 'maven-publish'
-apply plugin: 'signing'
+plugins {
+    id 'java-library'
+    id 'eclipse'
+    id 'idea'
+    id 'jacoco'
+    id 'maven-publish'
+    id 'signing'
+}
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
 
 repositories {
-    jcenter()
+    mavenCentral()
 
     maven {
         url 'https://hub.spigotmc.org/nexus/content/repositories/public/'
@@ -29,13 +29,27 @@ dependencies {
 }
 
 task javadocJar(type: Jar) {
-    classifier = 'javadoc'
+    classifier('javadoc')
     from javadoc
 }
 
 task sourcesJar(type: Jar) {
-    classifier = 'sources'
+    classifier('sources')
     from sourceSets.main.allSource
+}
+
+tasks.withType(JavaCompile) {
+    Provider<JavaCompiler> compilerProvider = javaToolchains.compilerFor {
+        JavaLanguageVersion.of(8)
+    }
+    JavaCompiler compiler = compilerProvider.orNull
+
+    if (compiler != null && compiler.metadata.languageVersion.asInt() > 8) {
+        // Mark release as 8 if the compiler is Java 9 or newer
+        options.release.set(8)
+    }
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
 }
 
 artifacts {
@@ -67,7 +81,7 @@ publishing {
         mockBukkit(MavenPublication) {
             artifactId = "MockBukkit-v${gradle.ext.apiVersion}"
             from components.java
-            
+
             artifact sourcesJar
             artifact javadocJar
             pom {
