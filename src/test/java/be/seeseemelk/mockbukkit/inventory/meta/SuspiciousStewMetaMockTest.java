@@ -1,41 +1,42 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 
-public class SuspiciousStewMetaMockTest
+class SuspiciousStewMetaMockTest
 {
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		MockBukkit.mock();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown()
 	{
 		MockBukkit.unmock();
 	}
 
 	@Test
-	public void testEffectsDefaultEmpty()
+	void testEffectsDefaultEmpty()
 	{
 		SuspiciousStewMetaMock meta = new SuspiciousStewMetaMock();
 		assertFalse(meta.hasCustomEffects());
 	}
 
 	@Test
-	public void testAddEffect()
+	void testAddEffect()
 	{
 		SuspiciousStewMetaMock meta = new SuspiciousStewMetaMock();
 		PotionEffect effect = new PotionEffect(PotionEffectType.SPEED, 40, 1);
@@ -49,7 +50,7 @@ public class SuspiciousStewMetaMockTest
 	}
 
 	@Test
-	public void testOverrideEffect()
+	void testOverrideEffect()
 	{
 		SuspiciousStewMetaMock meta = new SuspiciousStewMetaMock();
 		PotionEffect effect = new PotionEffect(PotionEffectType.SPEED, 40, 1);
@@ -57,20 +58,20 @@ public class SuspiciousStewMetaMockTest
 		PotionEffect effect3 = new PotionEffect(PotionEffectType.SPEED, 60, 1);
 
 		meta.addCustomEffect(effect, true);
-		assertTrue(meta.getCustomEffects().get(0) == effect);
+		assertEquals(effect, meta.getCustomEffects().get(0));
 
 		meta.addCustomEffect(effect2, false);
-		assertFalse(meta.getCustomEffects().get(0) == effect2);
+		assertNotEquals(effect2, meta.getCustomEffects().get(0));
 
 		meta.addCustomEffect(effect2, true);
-		assertFalse(meta.getCustomEffects().get(0) == effect);
+		assertNotEquals(effect, meta.getCustomEffects().get(0));
 
 		meta.addCustomEffect(effect3, true);
-		assertFalse(meta.getCustomEffects().get(0) == effect3);
+		assertNotEquals(effect3, meta.getCustomEffects().get(0));
 	}
 
 	@Test
-	public void testClearEffects()
+	void testClearEffects()
 	{
 		SuspiciousStewMetaMock meta = new SuspiciousStewMetaMock();
 		assertFalse(meta.clearCustomEffects());
@@ -85,7 +86,7 @@ public class SuspiciousStewMetaMockTest
 	}
 
 	@Test
-	public void testRemoveEffect()
+	void testRemoveEffect()
 	{
 		SuspiciousStewMetaMock meta = new SuspiciousStewMetaMock();
 		assertFalse(meta.clearCustomEffects());
@@ -103,11 +104,11 @@ public class SuspiciousStewMetaMockTest
 	}
 
 	@Test
-	public void testEquals()
+	void testEquals()
 	{
 		SuspiciousStewMetaMock meta = new SuspiciousStewMetaMock();
 		assertEquals(meta, meta);
-		assertFalse(meta.equals(new ItemMetaMock()));
+		assertNotEquals(meta, new ItemMetaMock());
 
 		SuspiciousStewMetaMock meta2 = new SuspiciousStewMetaMock();
 		assertEquals(meta, meta2);
@@ -115,14 +116,14 @@ public class SuspiciousStewMetaMockTest
 		PotionEffect effect = new PotionEffect(PotionEffectType.SPEED, 40, 1);
 
 		meta.addCustomEffect(effect, true);
-		assertFalse(meta.equals(meta2));
+		assertNotEquals(meta, meta2);
 
 		meta2.addCustomEffect(effect, true);
 		assertEquals(meta, meta2);
 	}
 
 	@Test
-	public void testClone()
+	void testClone()
 	{
 		SuspiciousStewMetaMock meta = new SuspiciousStewMetaMock();
 		SuspiciousStewMetaMock clone = meta.clone();

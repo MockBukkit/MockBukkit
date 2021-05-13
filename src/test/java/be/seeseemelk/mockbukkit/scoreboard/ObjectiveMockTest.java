@@ -1,27 +1,27 @@
 package be.seeseemelk.mockbukkit.scoreboard;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assume.assumeNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assumptions.assumeFalse;
 
 import org.bukkit.scoreboard.Score;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 
-public class ObjectiveMockTest
+class ObjectiveMockTest
 {
 	private ServerMock server;
 	private ScoreboardMock scoreboard;
 	private ObjectiveMock objective;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		server = MockBukkit.mock();
@@ -29,14 +29,14 @@ public class ObjectiveMockTest
 		objective = scoreboard.registerNewObjective("Objective", "dummy");
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception
 	{
 		MockBukkit.unmock();
 	}
 
 	@Test
-	public void constructor_PropertiesSet()
+	void constructor_PropertiesSet()
 	{
 		assertSame(scoreboard, objective.getScoreboard());
 		assertEquals("Objective", objective.getName());
@@ -46,48 +46,50 @@ public class ObjectiveMockTest
 	}
 
 	@Test
-	public void setDisplayName_AnyString_DisplayNameSet()
+	void setDisplayName_AnyString_DisplayNameSet()
 	{
 		objective.setDisplayName("New name");
-		assertEquals("Display name not changed", "New name", objective.getDisplayName());
-		assertEquals("Internal name was changed", "Objective", objective.getName());
+		assertEquals("New name", objective.getDisplayName(), "Display name not changed");
+		assertEquals("Objective", objective.getName(), "Internal name was changed");
 	}
 
 	@Test
-	public void unregister_ObjectiveWasRegistered_ObjectiveIsRemoved()
+	void unregister_ObjectiveWasRegistered_ObjectiveIsRemoved()
 	{
 		String name = objective.getName();
-		assumeNotNull("Objective was not registered", scoreboard.getObjective(name));
+		assumeFalse(scoreboard.getObjective(name) == null, "Objective was not registered");
 		objective.unregister();
-		assertNull("Objective was not registered", scoreboard.getObjective(name));
+		assertNull(scoreboard.getObjective(name), "Objective was not registered");
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
-	public void getScore_Player_ReturnsNotNull()
+	void getScore_Player_ReturnsNotNull()
 	{
 		PlayerMock player = server.addPlayer();
 		assertNotNull(objective.getScore(player));
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
-	public void getScore_SamePlayer_ReturnsSame()
+	void getScore_SamePlayer_ReturnsSame()
 	{
 		PlayerMock player = server.addPlayer();
 		Score score1 = objective.getScore(player);
 		Score score2 = objective.getScore(player);
-		assumeNotNull(score1);
+		assumeFalse(score1 == null);
 		assertSame(score1, score2);
 	}
 
 	@Test
-	public void getScore_String_ReturnsNotNull()
+	void getScore_String_ReturnsNotNull()
 	{
 		Score score = objective.getScore("The score");
 		assertNotNull(score);
 	}
 
 	@Test
-	public void getScore_SameString_ReturnsSame()
+	void getScore_SameString_ReturnsSame()
 	{
 		Score score1 = objective.getScore("The score");
 		Score score2 = objective.getScore("The score");

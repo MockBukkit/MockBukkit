@@ -1,55 +1,59 @@
 package be.seeseemelk.mockbukkit;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class ChunkTest
+class ChunkTest
 {
 	private ServerMock server;
 	private WorldMock world;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		server = MockBukkit.mock();
 		world = server.addSimpleWorld("world");
 	}
 
-	@After
+	@AfterEach
 	public void tearDown()
 	{
 		MockBukkit.unmock();
 	}
 
 	@Test
-	public void getX_AnyValue_ExactValue()
+	void getX_AnyValue_ExactValue()
 	{
 		assertEquals(10, world.getChunkAt(10, 20).getX());
 	}
 
 	@Test
-	public void getZ_AnyValue_Exact_Value()
+	void getZ_AnyValue_Exact_Value()
 	{
 		assertEquals(20, world.getChunkAt(10, 20).getZ());
 	}
 
 	@Test
-	public void getWorld_AnyChunkFromWorld_ExactWorldReference()
+	void getWorld_AnyChunkFromWorld_ExactWorldReference()
 	{
 		assertSame(world, world.getChunkAt(0, 0).getWorld());
 	}
 
 	@Test
-	public void isLoaded_JustCreated_True()
+	void isLoaded_JustCreated_True()
 	{
 		assertTrue(world.getChunkAt(0, 0).isLoaded());
 	}
 
 	@Test
-	public void isLoaded_AfterUnload_False()
+	void isLoaded_AfterUnload_False()
 	{
 		ChunkMock chunk = world.getChunkAt(0, 0);
 		assertTrue(chunk.unload());
@@ -57,7 +61,7 @@ public class ChunkTest
 	}
 
 	@Test
-	public void isLoaded_AfterLoad_True()
+	void isLoaded_AfterLoad_True()
 	{
 		ChunkMock chunk = world.getChunkAt(0, 0);
 		chunk.unload();
@@ -66,7 +70,7 @@ public class ChunkTest
 	}
 
 	@Test
-	public void equals_DifferentChunk_False()
+	void equals_DifferentChunk_False()
 	{
 		ChunkMock chunk1 = world.getChunkAt(0, 0);
 		ChunkMock chunk2 = world.getChunkAt(0, 1);
@@ -74,7 +78,7 @@ public class ChunkTest
 	}
 
 	@Test
-	public void equals_SameChunk_True()
+	void equals_SameChunk_True()
 	{
 		ChunkMock chunk1 = world.getChunkAt(0, 0);
 		ChunkMock chunk2 = world.getChunkAt(0, 0);
@@ -83,14 +87,14 @@ public class ChunkTest
 	}
 
 	@Test
-	public void equals_Null_False()
+	void equals_Null_False()
 	{
 		ChunkMock chunk = world.getChunkAt(0, 0);
 		assertNotEquals(chunk, null);
 	}
 
 	@Test
-	public void equals_DifferentClass_False()
+	void equals_DifferentClass_False()
 	{
 		ChunkMock chunk = world.getChunkAt(0, 0);
 		Object obj = new Object();

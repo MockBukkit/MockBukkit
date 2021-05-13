@@ -1,29 +1,29 @@
 package be.seeseemelk.mockbukkit.attribute;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.bukkit.attribute.Attribute;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class AttributeInstanceMockTest
+class AttributeInstanceMockTest
 {
 	private AttributeInstanceMock attribute;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		attribute = new AttributeInstanceMock(Attribute.GENERIC_FLYING_SPEED, 5.0);
 	}
 
 	@Test
-	public void getAttribute_Constructor_CorrectAttribute()
+	void getAttribute_Constructor_CorrectAttribute()
 	{
 		assertEquals(Attribute.GENERIC_FLYING_SPEED, attribute.getAttribute());
 	}
 
 	@Test
-	public void getValues_Constructor_ExactValue()
+	void getValues_Constructor_ExactValue()
 	{
 		assertEquals(5.0, attribute.getBaseValue(), 0);
 		assertEquals(5.0, attribute.getValue(), 0);
@@ -31,7 +31,7 @@ public class AttributeInstanceMockTest
 	}
 
 	@Test
-	public void setValue_Constructor_ValueSetExactly()
+	void setValue_Constructor_ValueSetExactly()
 	{
 		attribute.setBaseValue(8.0);
 		assertEquals(8.0, attribute.getBaseValue(), 0);

@@ -1,6 +1,6 @@
 package be.seeseemelk.mockbukkit.block;
 
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.Collection;
 import java.util.List;
@@ -25,12 +25,12 @@ import org.bukkit.util.BoundingBox;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import be.seeseemelk.mockbukkit.block.state.BlockStateMock;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
-import junit.framework.AssertionFailedError;
 
 public class BlockMock implements Block
 {
@@ -55,7 +55,7 @@ public class BlockMock implements Block
 	 *
 	 * @param location The location of the block.
 	 */
-	public BlockMock(Location location)
+	public BlockMock(@NotNull Location location)
 	{
 		this(Material.AIR, location);
 	}
@@ -65,7 +65,7 @@ public class BlockMock implements Block
 	 *
 	 * @param material The material to give the block.
 	 */
-	public BlockMock(Material material)
+	public BlockMock(@NotNull Material material)
 	{
 		this(material, null);
 	}
@@ -76,7 +76,7 @@ public class BlockMock implements Block
 	 * @param material The material of the block.
 	 * @param location The location of the block. Can be {@code null} if not needed.
 	 */
-	public BlockMock(Material material, Location location)
+	public BlockMock(@NotNull Material material, @Nullable Location location)
 	{
 		this.material = material;
 		this.location = location;
@@ -140,9 +140,9 @@ public class BlockMock implements Block
 	 * Assets that the material type of the block is equal to a given type.
 	 *
 	 * @param material The material type that the block should have.
-	 * @throws AssertionFailedError Thrown if the material type of the block does not equal the given material type.
+	 * @throws AssertionError Thrown if the material type of the block does not equal the given material type.
 	 */
-	public void assertType(Material material) throws AssertionFailedError
+	public void assertType(@NotNull Material material)
 	{
 		if (this.material != material)
 		{

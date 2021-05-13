@@ -1,35 +1,35 @@
 package be.seeseemelk.mockbukkit.inventory;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 
-public class PlayerInventoryViewTest
+class PlayerInventoryViewTest
 {
 	private ServerMock server;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		server = MockBukkit.mock();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception
 	{
 		MockBukkit.unmock();
 	}
 
 	@Test
-	public void constructor_SetsProperties()
+	void constructor_SetsProperties()
 	{
 		Player player = server.addPlayer();
 		Inventory inventory = new SimpleInventoryMock(null, 9, InventoryType.CHEST);
