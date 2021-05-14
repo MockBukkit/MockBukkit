@@ -211,8 +211,9 @@ public class BukkitSchedulerMockTest
 			{	// simulate some varying work load / execution time
 				Thread.sleep(ThreadLocalRandom.current().nextInt(2, 20));
 			}
-			catch (InterruptedException e){
-			e.printStackTrace();
+			catch (InterruptedException e)
+			{
+				e.printStackTrace();
 			}
 			count.decrementAndGet();
 		};
@@ -265,7 +266,6 @@ public class BukkitSchedulerMockTest
 		assertEquals(0, scheduler.getPendingTasks().size());
 	}
 }
-
 
 
 
