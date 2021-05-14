@@ -1,10 +1,11 @@
 package be.seeseemelk.mockbukkit.block.state;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
@@ -12,46 +13,48 @@ import org.bukkit.block.Block;
 import org.bukkit.block.ShulkerBox;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 
-public class ShulkerBoxMockTest
+class ShulkerBoxMockTest
 {
 
 	private ShulkerBoxMock shulkerBox;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		MockBukkit.mock();
 		shulkerBox = new ShulkerBoxMock(Material.SHULKER_BOX);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception
 	{
 		MockBukkit.unmock();
 	}
 
 	@Test
-	public void testMaterialShulkerBoxBlockState()
+	void testMaterialShulkerBoxBlockState()
 	{
 		Block block = new BlockMock(Material.SHULKER_BOX);
 		assertTrue(block.getState() instanceof ShulkerBox);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void testShulkerBoxStateMaterialValidation()
+	@Test
+	void testShulkerBoxStateMaterialValidation()
 	{
-		new ShulkerBoxMock(Material.BREAD);
+		assertThrows(IllegalArgumentException.class, () -> new ShulkerBoxMock(Material.BREAD));
 	}
 
 	@Test
-	public void testHasInventory()
+	void testHasInventory()
 	{
 		Inventory inventory = shulkerBox.getInventory();
 		assertNotNull(inventory);
@@ -61,7 +64,7 @@ public class ShulkerBoxMockTest
 	}
 
 	@Test
-	public void testLocking()
+	void testLocking()
 	{
 		String key = "key";
 
@@ -74,7 +77,7 @@ public class ShulkerBoxMockTest
 	}
 
 	@Test
-	public void testNullLocking()
+	void testNullLocking()
 	{
 		shulkerBox.setLock(null);
 		assertFalse(shulkerBox.isLocked());
@@ -82,7 +85,7 @@ public class ShulkerBoxMockTest
 	}
 
 	@Test
-	public void testNaming()
+	void testNaming()
 	{
 		String name = "Cool Shulker";
 
@@ -92,19 +95,17 @@ public class ShulkerBoxMockTest
 		assertEquals(name, shulkerBox.getCustomName());
 	}
 
-	@Test(expected = NullPointerException.class)
-	public void testNullPointerUndyed()
+	@Test
+	void testNullPointerUndyed()
 	{
-		shulkerBox.getColor();
+		assertThrows(NullPointerException.class, shulkerBox::getColor);
 	}
 
-	@Test
-	public void testShulkerColors()
+	@ParameterizedTest
+	@EnumSource(DyeColor.class)
+	void testShulkerColors(DyeColor color)
 	{
-		for (DyeColor color : DyeColor.values())
-		{
-			assertDyed(Material.valueOf(color.name() + "_SHULKER_BOX"), color);
-		}
+		assertDyed(Material.valueOf(color.name() + "_SHULKER_BOX"), color);
 	}
 
 	private void assertDyed(Material shulkerBox, DyeColor color)

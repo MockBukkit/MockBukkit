@@ -1,50 +1,50 @@
 package be.seeseemelk.mockbukkit.block.state;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.bukkit.Material;
 import org.bukkit.block.Barrel;
 import org.bukkit.block.Block;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 
-public class BarrelMockTest
+class BarrelMockTest
 {
 
 	private Barrel barrel;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		MockBukkit.mock();
 		barrel = new BarrelMock(Material.BARREL);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception
 	{
 		MockBukkit.unmock();
 	}
 
 	@Test
-	public void testMaterialBarrelBlockState()
+	void testMaterialBarrelBlockState()
 	{
 		Block block = new BlockMock(Material.BARREL);
 		assertTrue(block.getState() instanceof Barrel);
 	}
 
 	@Test
-	public void testHasInventory()
+	void testHasInventory()
 	{
 		Inventory inventory = barrel.getInventory();
 		assertNotNull(inventory);
@@ -54,7 +54,7 @@ public class BarrelMockTest
 	}
 
 	@Test
-	public void testLocking()
+	void testLocking()
 	{
 		String key = "key";
 
@@ -67,7 +67,7 @@ public class BarrelMockTest
 	}
 
 	@Test
-	public void testNullLocking()
+	void testNullLocking()
 	{
 		barrel.setLock(null);
 		assertFalse(barrel.isLocked());
@@ -75,7 +75,7 @@ public class BarrelMockTest
 	}
 
 	@Test
-	public void testNaming()
+	void testNaming()
 	{
 		String name = "Cool Chest";
 

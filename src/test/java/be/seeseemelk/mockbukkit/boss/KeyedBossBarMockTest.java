@@ -1,34 +1,35 @@
 package be.seeseemelk.mockbukkit.boss;
 
-import org.junit.Test;
-import org.junit.After;
-import org.junit.Before;
-
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.ServerMock;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.bukkit.NamespacedKey;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.KeyedBossBar;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.google.common.collect.Iterators;
 
-public class KeyedBossBarMockTest
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.ServerMock;
+
+class KeyedBossBarMockTest
 {
 	private ServerMock server;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		server = MockBukkit.mock();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown()
 	{
 		MockBukkit.unmock();
@@ -36,7 +37,7 @@ public class KeyedBossBarMockTest
 
 	@Test
 	@SuppressWarnings("deprecation")
-	public void testKeyedBossBar()
+	void testKeyedBossBar()
 	{
 		KeyedBossBar bar = server.createBossBar(new NamespacedKey("mockbukkittest", "bossbar1"), "Boss bar 1",
 		                                        BarColor.WHITE, BarStyle.SEGMENTED_10);
@@ -59,9 +60,10 @@ public class KeyedBossBarMockTest
 		assertFalse(server.removeBossBar(new NamespacedKey("mockbukkittest", "nonexistantbossbar")));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void testNullKey()
+	@Test
+	void testNullKey()
 	{
-		server.createBossBar(null, "Boss bar 1", BarColor.WHITE, BarStyle.SEGMENTED_10);
+		assertThrows(IllegalArgumentException.class,
+		             () -> server.createBossBar(null, "Boss bar 1", BarColor.WHITE, BarStyle.SEGMENTED_10));
 	}
 }

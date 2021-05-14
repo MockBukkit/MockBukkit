@@ -1,32 +1,32 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 
-public class LeatherArmorMetaMockTest
+class LeatherArmorMetaMockTest
 {
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		MockBukkit.mock();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown()
 	{
 		MockBukkit.unmock();
 	}
 
 	@Test
-	public void testDefaultLeatherColor()
+	void testDefaultLeatherColor()
 	{
 		LeatherArmorMetaMock meta = new LeatherArmorMetaMock();
 
@@ -34,7 +34,7 @@ public class LeatherArmorMetaMockTest
 	}
 
 	@Test
-	public void testSetColor()
+	void testSetColor()
 	{
 		LeatherArmorMetaMock meta = new LeatherArmorMetaMock();
 		Color color = Color.MAROON;
@@ -44,7 +44,7 @@ public class LeatherArmorMetaMockTest
 	}
 
 	@Test
-	public void testResetColor()
+	void testResetColor()
 	{
 		LeatherArmorMetaMock meta = new LeatherArmorMetaMock();
 		// Changing the color first
@@ -58,7 +58,7 @@ public class LeatherArmorMetaMockTest
 	}
 
 	@Test
-	public void testClone()
+	void testClone()
 	{
 		LeatherArmorMetaMock meta = new LeatherArmorMetaMock();
 		meta.setColor(Color.FUCHSIA);

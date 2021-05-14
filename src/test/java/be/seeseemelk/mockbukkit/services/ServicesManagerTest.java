@@ -1,37 +1,42 @@
 package be.seeseemelk.mockbukkit.services;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Set;
 
-import org.junit.*;
-
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.ServicePriority;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import be.seeseemelk.mockbukkit.EmptyPlugin;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 
-public class ServicesManagerTest
+class ServicesManagerTest
 {
 	private ServerMock server;
 	private EmptyPlugin plugin;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		server = MockBukkit.mock();
 		plugin = MockBukkit.loadWith(EmptyPlugin.class, "empty_plugin.yml");
 	}
 
-	@After
+	@AfterEach
 	public void tearDown()
 	{
 		MockBukkit.unmock();
 	}
 
 	@Test
-	public void test_register_should_register()
+	void test_register_should_register()
 	{
 		// We use this class as the service class to avoid creating a useless class
 		server.getServicesManager().register(ServicesManagerTest.class, this, plugin, ServicePriority.Normal);
@@ -39,7 +44,7 @@ public class ServicesManagerTest
 	}
 
 	@Test
-	public void test_register_multiple_service()
+	void test_register_multiple_service()
 	{
 		Object obj = new Object();
 		Object obj2 = new Object();
@@ -49,20 +54,21 @@ public class ServicesManagerTest
 		server.getServicesManager().register(Object.class, obj3, plugin, ServicePriority.Low);
 		// Should be the first object
 		assertEquals(obj2, server.getServicesManager().load(Object.class));
-		RegisteredServiceProvider<Object> registeredServiceProvider = server.getServicesManager().getRegistration(Object.class);
+		RegisteredServiceProvider<Object> registeredServiceProvider = server.getServicesManager()
+		        .getRegistration(Object.class);
 		assertNotNull(registeredServiceProvider);
 		assertEquals(ServicePriority.High, registeredServiceProvider.getPriority());
 		assertEquals(3, server.getServicesManager().getRegistrations(Object.class).size());
 	}
 
 	@Test
-	public void test_load_not_registered_object()
+	void test_load_not_registered_object()
 	{
 		assertNull(server.getServicesManager().load(Object.class));
 	}
 
 	@Test
-	public void test_load_registered_object()
+	void test_load_registered_object()
 	{
 		Object object = new Object();
 		server.getServicesManager().register(Object.class, object, plugin, ServicePriority.Normal);
@@ -71,24 +77,25 @@ public class ServicesManagerTest
 	}
 
 	@Test
-	public void test_get_registration_not_registered_object()
+	void test_get_registration_not_registered_object()
 	{
 		assertNull(server.getServicesManager().getRegistration(Object.class));
 	}
 
 	@Test
-	public void test_get_registration_registered_object()
+	void test_get_registration_registered_object()
 	{
 		Object object = new Object();
 		server.getServicesManager().register(Object.class, object, plugin, ServicePriority.Normal);
 
-		RegisteredServiceProvider<Object> registeredServiceProvider = server.getServicesManager().getRegistration(Object.class);
+		RegisteredServiceProvider<Object> registeredServiceProvider = server.getServicesManager()
+		        .getRegistration(Object.class);
 		assertNotNull(registeredServiceProvider);
 		assertEquals(object, registeredServiceProvider.getProvider());
 	}
 
 	@Test
-	public void test_unregister_service_provider()
+	void test_unregister_service_provider()
 	{
 		Object obj = new Object();
 		Object obj2 = new Object();
@@ -105,7 +112,7 @@ public class ServicesManagerTest
 	}
 
 	@Test
-	public void test_unregister()
+	void test_unregister()
 	{
 		Object obj = new Object();
 		Object obj2 = new Object();
@@ -129,7 +136,7 @@ public class ServicesManagerTest
 	}
 
 	@Test
-	public void test_get_registrations()
+	void test_get_registrations()
 	{
 		Object obj = new Object();
 		Object obj2 = new Object();
@@ -142,7 +149,7 @@ public class ServicesManagerTest
 	}
 
 	@Test
-	public void test_get_known_services()
+	void test_get_known_services()
 	{
 		Object obj = new Object();
 		Object obj2 = new Object();
@@ -156,7 +163,7 @@ public class ServicesManagerTest
 	}
 
 	@Test
-	public void test_is_provided_for()
+	void test_is_provided_for()
 	{
 		Object obj = new Object();
 		Object obj2 = new Object();

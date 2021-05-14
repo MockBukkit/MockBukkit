@@ -1,7 +1,7 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
@@ -2152,6 +2152,17 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getPing()
+	{
+		/*
+		 * This PlayerMock and the ServerMock exist within
+		 * the same machine, therefore there would most
+		 * likely be a ping of 0ms.
+		 */
+		return 0;
 	}
 
 	@Override

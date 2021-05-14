@@ -18,6 +18,7 @@ class EnchantmentMock extends Enchantment
 
 	private final String name;
 
+	@SuppressWarnings("deprecation")
 	public EnchantmentMock(@NotNull String name)
 	{
 		super(NamespacedKey.randomKey());
@@ -54,6 +55,7 @@ class EnchantmentMock extends Enchantment
 		return 3;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public @NotNull EnchantmentTarget getItemTarget()
 	{

@@ -1,8 +1,8 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashSet;
 import java.util.List;
@@ -95,8 +95,8 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	{
 		double distance = location.distance(expectedLocation);
 		assertEquals(expectedLocation.getWorld(), location.getWorld());
-		assertTrue(String.format("Distance was <%.3f> but should be less than or equal to <%.3f>", distance,
-		                         maximumDistance), distance <= maximumDistance);
+		assertTrue(distance <= maximumDistance, String.format("Distance was <%.3f> but should be less than or equal to <%.3f>", distance,
+		           maximumDistance));
 	}
 
 	/**
@@ -106,9 +106,9 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	 * @param expectedLocation The location the player should be at.
 	 * @param maximumDistance  The distance the player may maximumly be separated from the expected location.
 	 */
-	public void assertTeleported(Location expectedLocation, double maximumDistance)
+	public void assertTeleported(@NotNull Location expectedLocation, double maximumDistance)
 	{
-		assertTrue("Player did not teleport", teleported);
+		assertTrue(teleported, "Player did not teleport");
 		assertLocation(expectedLocation, maximumDistance);
 		teleported = false;
 	}
@@ -118,7 +118,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	 */
 	public void assertNotTeleported()
 	{
-		assertFalse("Player was teleported", teleported);
+		assertFalse(teleported, "Player was teleported");
 		teleported = false;
 	}
 
