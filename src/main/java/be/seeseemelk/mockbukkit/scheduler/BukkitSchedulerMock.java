@@ -316,7 +316,8 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		List<BukkitTask> pending = new ArrayList<BukkitTask>();
 		for (ScheduledTask task : runners.values())
 		{
-			if (!task.isCancelled()) {
+			if (!task.isCancelled())
+			{
 				pending.add(task);
 			}
 		}
