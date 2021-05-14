@@ -200,7 +200,8 @@ public class BukkitSchedulerMockTest
 	}
 
 	@Test
-	public void getPendingTasks_Async() {
+	public void getPendingTasks_Async()
+	{
 		assertEquals(0, scheduler.getPendingTasks().size());
 		int amountTasks = 20;
 		AtomicInteger count = new AtomicInteger(amountTasks);
@@ -264,7 +265,6 @@ public class BukkitSchedulerMockTest
 		assertEquals(0, scheduler.getPendingTasks().size());
 	}
 }
-
 
 
 
