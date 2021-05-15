@@ -1501,8 +1501,8 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	{
 		hiddenPlayers.putIfAbsent(player.getUniqueId(), new ArrayList<>());
 		List<String> blockingPlugins = hiddenPlayers.get(player.getUniqueId());
-		if(!blockingPlugins.contains(pluginName))
-			blockingPlugins.add(pluginName);
+		if(blockingPlugins.contains(pluginName)) return;
+		blockingPlugins.add(pluginName);
 	}
 
 	@Override
@@ -1517,16 +1517,14 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	{
 		showPlayer(plugin.getName(), player);
 	}
-	static int i = 0;
+
 	private void showPlayer(@NotNull String pluginName, @NotNull Player player)
 	{
-		if(hiddenPlayers.containsKey(player.getUniqueId()))
-		{
-			List<String> blockingPlugins = hiddenPlayers.get(player.getUniqueId());
-			blockingPlugins.remove(pluginName);
-			if(blockingPlugins.isEmpty())
-				hiddenPlayers.remove(player.getUniqueId());
-		}
+		if(!hiddenPlayers.containsKey(player.getUniqueId())) return;
+		List<String> blockingPlugins = hiddenPlayers.get(player.getUniqueId());
+		blockingPlugins.remove(pluginName);
+		if(!blockingPlugins.isEmpty()) return;
+		hiddenPlayers.remove(player.getUniqueId());
 	}
 
 	@Override
