@@ -57,6 +57,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.MockPlugin;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.TestPlugin;
 import be.seeseemelk.mockbukkit.WorldMock;
@@ -1138,13 +1139,52 @@ class PlayerMockTest
 	}
 
 	@Test
-	public void testPlayerHide()
-	{
+	public void testPlayerHide(){
+		MockPlugin plugin1 = MockBukkit.createMockPlugin("plugin1");
+		MockPlugin plugin2 = MockBukkit.createMockPlugin("plugin2");
 		PlayerMock player2 = server.addPlayer();
+
+		// Player should see player2 on start
+		assertTrue(player.canSee(player2));
+
+		// 1: Only one plugin hides player, this one uses old implementation of hidePlayer method
 		player.hidePlayer(player2);
 		assertFalse(player.canSee(player2));
 		player.showPlayer(player2);
 		assertTrue(player.canSee(player2));
-	}
 
+		// 2: Plugin uses newer version of player visibility functions
+		player.hidePlayer(plugin1, player2);
+		assertFalse(player.canSee(player2));
+		player.showPlayer(plugin1, player2);
+		assertTrue(player.canSee(player2));
+
+		// 3: Old plugin tries to show player, when newer plugin hided player before old one
+		player.hidePlayer(plugin1, player2);
+		assertFalse(player.canSee(player2));
+		player.showPlayer(player2);
+		assertFalse(player.canSee(player2));
+		player.showPlayer(plugin1, player2);
+		assertTrue(player.canSee(player2));
+
+		// 4: Old plugin hides player, then newer plugin shows him
+		player.hidePlayer(player2);
+		assertFalse(player.canSee(player2));
+		player.showPlayer(plugin1, player2);
+		assertFalse(player.canSee(player2));
+
+		// 5: Two plugins and one old one hides and shows player back and forth
+		player.hidePlayer(plugin1, player2);
+		assertFalse(player.canSee(player2));
+		player.hidePlayer(plugin2, player2);
+		assertFalse(player.canSee(player2));
+		player.hidePlayer(player2);
+		assertFalse(player.canSee(player2));
+		player.showPlayer(player2);
+		assertFalse(player.canSee(player2));
+		player.showPlayer(plugin2, player2);
+		assertFalse(player.canSee(player2));
+		player.showPlayer(plugin1, player2);
+		assertTrue(player.canSee(player2));
+	}
 }
