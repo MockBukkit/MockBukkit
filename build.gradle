@@ -44,12 +44,14 @@ tasks.withType(JavaCompile) {
     }
     JavaCompiler compiler = compilerProvider.orNull
 
-    if (compiler != null && compiler.metadata.languageVersion.asInt() > 8) {
-        // Mark release as 8 if the compiler is Java 9 or newer
+    if (compiler != null && compiler.metadata.languageVersion.asInt() > 9) {
+        // Mark release as 8 if the compiler is Java 10 or newer
         options.release.set(8)
+    } else {
+        // Only use the legacy compiler options otherwise
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
     }
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
 }
 
 artifacts {
