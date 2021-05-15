@@ -13,6 +13,6 @@ public class PluginClassLoaderUtils
 {
 	public static PluginClassLoader createPluginClassLoader(@NotNull final JavaPluginLoader loader, @Nullable final ClassLoader parent, @NotNull final PluginDescriptionFile description, @NotNull final File dataFolder, @NotNull final File file) throws IOException, InvalidPluginException, MalformedURLException
 	{
-		return new PluginClassLoader(loader, parent, description, dataFolder, file);
+		return new PluginClassLoader(loader, parent, description, dataFolder, file, null);
 	}
 }
