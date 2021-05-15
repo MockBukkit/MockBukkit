@@ -22,9 +22,9 @@ public class PluginClassLoaderUtils
 	}
 
 	public static @NotNull PluginClassLoader createPluginClassLoader(@NotNull JavaPluginLoader loader,
-			@Nullable ClassLoader parent, @NotNull PluginDescriptionFile description, @NotNull File dataFolder,
-			@NotNull File file, @NotNull ClassLoader libraryLoader)
-			throws IOException, InvalidPluginException, MalformedURLException
+	        @Nullable ClassLoader parent, @NotNull PluginDescriptionFile description, @NotNull File dataFolder,
+	        @NotNull File file, @NotNull ClassLoader libraryLoader)
+	throws IOException, InvalidPluginException, MalformedURLException
 	{
 		return new PluginClassLoader(loader, parent, description, dataFolder, file, libraryLoader);
 	}

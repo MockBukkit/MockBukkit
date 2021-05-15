@@ -16,7 +16,7 @@ public final class JavaPluginUtils
 
 	/**
 	 * Sets the enabled status of a java plugin.
-	 * 
+	 *
 	 * @param plugin  The plugin of which to set the state.
 	 * @param enabled The state to set it to.
 	 */
