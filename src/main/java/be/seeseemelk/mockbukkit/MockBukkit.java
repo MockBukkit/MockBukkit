@@ -327,11 +327,22 @@ public class MockBukkit
 	 *
 	 * @return An instance of a mock plugin.
 	 */
-	public static MockPlugin createMockPlugin()
+	public static MockPlugin createMockPlugin(){
+		return createMockPlugin("MockPlugin");
+	}
+
+	/**
+	 * Creates a mock instance of a {@link JavaPlugin} implementation and gives you a chance to name the plugin. This plugin offers no functionality, but it does
+	 * allow a plugin that might enable and disable other plugins to be tested.
+	 *
+	 * @param pluginName A name of a new plugin.
+	 * @return An instance of a mock plugin.
+	 */
+	public static MockPlugin createMockPlugin(String pluginName)
 	{
 		if (mock != null)
 		{
-			PluginDescriptionFile description = new PluginDescriptionFile("MockPlugin", "1.0.0",
+			PluginDescriptionFile description = new PluginDescriptionFile(pluginName, "1.0.0",
 			        MockPlugin.class.getName());
 			JavaPlugin instance = mock.getPluginManager().loadPlugin(MockPlugin.class, description);
 			mock.getPluginManager().enablePlugin(instance);
