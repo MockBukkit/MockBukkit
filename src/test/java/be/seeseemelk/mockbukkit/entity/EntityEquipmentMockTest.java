@@ -1,7 +1,7 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.UUID;
 
@@ -10,32 +10,32 @@ import org.bukkit.entity.ArmorStand;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 
-public class EntityEquipmentMockTest
+class EntityEquipmentMockTest
 {
 
 	private ServerMock server;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		server = MockBukkit.mock();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown()
 	{
 		MockBukkit.unmock();
 	}
 
 	@Test
-	public void testMainHand()
+	void testMainHand()
 	{
 		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
 		EntityEquipment equipment = armorStand.getEquipment();
@@ -49,7 +49,7 @@ public class EntityEquipmentMockTest
 	}
 
 	@Test
-	public void testOffHand()
+	void testOffHand()
 	{
 		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
 		EntityEquipment equipment = armorStand.getEquipment();
@@ -63,7 +63,7 @@ public class EntityEquipmentMockTest
 	}
 
 	@Test
-	public void testHelmet()
+	void testHelmet()
 	{
 		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
 		EntityEquipment equipment = armorStand.getEquipment();
@@ -77,7 +77,7 @@ public class EntityEquipmentMockTest
 	}
 
 	@Test
-	public void testChestplate()
+	void testChestplate()
 	{
 		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
 		EntityEquipment equipment = armorStand.getEquipment();
@@ -91,7 +91,7 @@ public class EntityEquipmentMockTest
 	}
 
 	@Test
-	public void testLeggings()
+	void testLeggings()
 	{
 		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
 		EntityEquipment equipment = armorStand.getEquipment();
@@ -105,7 +105,7 @@ public class EntityEquipmentMockTest
 	}
 
 	@Test
-	public void testBoots()
+	void testBoots()
 	{
 		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
 		EntityEquipment equipment = armorStand.getEquipment();

@@ -1,9 +1,9 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.UUID;
 
@@ -11,42 +11,42 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.WorldMock;
 
-public class ArmorStandMockTest
+class ArmorStandMockTest
 {
 
 	private ServerMock server;
 	private World world;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		server = MockBukkit.mock();
 		world = new WorldMock();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown()
 	{
 		MockBukkit.unmock();
 	}
 
 	@Test
-	public void testEntityType()
+	void testEntityType()
 	{
 		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
 		assertEquals(EntityType.ARMOR_STAND, armorStand.getType());
 	}
 
 	@Test
-	public void testEntitySpawning()
+	void testEntitySpawning()
 	{
 		Location location = new Location(world, 100, 100, 100);
 		ArmorStand orb = (ArmorStand) world.spawnEntity(location, EntityType.ARMOR_STAND);
@@ -59,14 +59,14 @@ public class ArmorStandMockTest
 	}
 
 	@Test
-	public void testHasEquipment()
+	void testHasEquipment()
 	{
 		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
 		assertNotNull(armorStand.getEquipment());
 	}
 
 	@Test
-	public void testArms()
+	void testArms()
 	{
 		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
 
@@ -77,7 +77,7 @@ public class ArmorStandMockTest
 	}
 
 	@Test
-	public void testSmall()
+	void testSmall()
 	{
 		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
 
@@ -88,7 +88,7 @@ public class ArmorStandMockTest
 	}
 
 	@Test
-	public void testMarker()
+	void testMarker()
 	{
 		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
 
@@ -99,7 +99,7 @@ public class ArmorStandMockTest
 	}
 
 	@Test
-	public void testBasePlate()
+	void testBasePlate()
 	{
 		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
 
@@ -110,7 +110,7 @@ public class ArmorStandMockTest
 	}
 
 	@Test
-	public void testVisible()
+	void testVisible()
 	{
 		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
 

@@ -1,7 +1,9 @@
 package be.seeseemelk.mockbukkit.command;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import org.jetbrains.annotations.NotNull;
 
 @FunctionalInterface
 public interface MessageTarget
@@ -16,7 +18,7 @@ public interface MessageTarget
 	 * Asserts that a specific message was not received next by the message target.
 	 * @param expected The message that should have been received by the target.
 	 */
-	default void assertSaid(String expected)
+	default void assertSaid(@NotNull String expected)
 	{
 		String message = nextMessage();
 		if (message == null)

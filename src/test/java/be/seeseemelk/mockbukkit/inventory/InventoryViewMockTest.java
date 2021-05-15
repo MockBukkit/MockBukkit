@@ -1,39 +1,39 @@
 package be.seeseemelk.mockbukkit.inventory;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 
-public class InventoryViewMockTest
+class InventoryViewMockTest
 {
 	private ServerMock server;
 	private InventoryViewMock view;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		server = MockBukkit.mock();
 		view = new SimpleInventoryViewMock();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception
 	{
 		MockBukkit.unmock();
 	}
 
 	@Test
-	public void constructorEmpty_AllNull()
+	void constructorEmpty_AllNull()
 	{
 		assertNull(view.getTopInventory());
 		assertNull(view.getBottomInventory());
@@ -41,7 +41,7 @@ public class InventoryViewMockTest
 	}
 
 	@Test
-	public void constructorParameterised_ValuesSet()
+	void constructorParameterised_ValuesSet()
 	{
 		Player player = server.addPlayer();
 		InventoryMock top = new SimpleInventoryMock();
@@ -54,13 +54,13 @@ public class InventoryViewMockTest
 	}
 
 	@Test
-	public void getType_NoneSet_Chest()
+	void getType_NoneSet_Chest()
 	{
 		assertEquals(InventoryType.CHEST, view.getType());
 	}
 
 	@Test
-	public void getTopInventory_TopInventorySet_SameReturned()
+	void getTopInventory_TopInventorySet_SameReturned()
 	{
 		InventoryMock inventory = new SimpleInventoryMock();
 		view.setTopInventory(inventory);
@@ -68,7 +68,7 @@ public class InventoryViewMockTest
 	}
 
 	@Test
-	public void getBottomInventory_BottomInventorySet_SameReturned()
+	void getBottomInventory_BottomInventorySet_SameReturned()
 	{
 		InventoryMock inventory = new SimpleInventoryMock();
 		view.setBottomInventory(inventory);
@@ -76,7 +76,7 @@ public class InventoryViewMockTest
 	}
 
 	@Test
-	public void getPlayer_PlayerSet_SameReturned()
+	void getPlayer_PlayerSet_SameReturned()
 	{
 		PlayerMock player = server.addPlayer();
 		view.setPlayer(player);
@@ -84,38 +84,10 @@ public class InventoryViewMockTest
 	}
 
 	@Test
-	public void getType_TypeSet_SameReturned()
+	void getType_TypeSet_SameReturned()
 	{
 		view.setType(InventoryType.CREATIVE);
 		assertEquals(InventoryType.CREATIVE, view.getType());
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,51 +1,52 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.UUID;
 
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
+import org.bukkit.FireworkEffect.Type;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.FireworkEffect.Type;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
 import org.bukkit.inventory.meta.FireworkMeta;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.inventory.meta.FireworkMetaMock;
 
-public class FireworkMockTest
+class FireworkMockTest
 {
 
 	private ServerMock server;
 	private World world;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		server = MockBukkit.mock();
 		world = new WorldMock();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown()
 	{
 		MockBukkit.unmock();
 	}
 
 	@Test
-	public void testEntitySpawning()
+	void testEntitySpawning()
 	{
 		Location location = new Location(world, 100, 100, 100);
 		Firework firework = (Firework) world.spawnEntity(location, EntityType.FIREWORK);
@@ -61,14 +62,14 @@ public class FireworkMockTest
 	}
 
 	@Test
-	public void testEntityType()
+	void testEntityType()
 	{
 		Firework firework = new FireworkMock(server, UUID.randomUUID());
 		assertEquals(EntityType.FIREWORK, firework.getType());
 	}
 
 	@Test
-	public void testSecondConstructor()
+	void testSecondConstructor()
 	{
 		FireworkMeta meta = new FireworkMetaMock();
 		meta.addEffect(FireworkEffect.builder().flicker(true).with(Type.BALL_LARGE).withColor(Color.BLUE).build());
@@ -78,7 +79,7 @@ public class FireworkMockTest
 	}
 
 	@Test
-	public void testShotAtAngle()
+	void testShotAtAngle()
 	{
 		Firework firework = new FireworkMock(server, UUID.randomUUID());
 
@@ -90,7 +91,7 @@ public class FireworkMockTest
 	}
 
 	@Test
-	public void testSetFireworkMeta()
+	void testSetFireworkMeta()
 	{
 		FireworkMeta meta = new FireworkMetaMock();
 		meta.addEffect(FireworkEffect.builder().flicker(true).with(Type.BALL_LARGE).withColor(Color.BLUE).build());
@@ -103,10 +104,10 @@ public class FireworkMockTest
 		assertEquals(meta, firework.getFireworkMeta());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void testSetFireworkMetaNotNull()
+	@Test
+	void testSetFireworkMetaNotNull()
 	{
 		Firework firework = new FireworkMock(server, UUID.randomUUID());
-		firework.setFireworkMeta(null);
+		assertThrows(IllegalArgumentException.class, () -> firework.setFireworkMeta(null));
 	}
 }

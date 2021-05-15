@@ -1,18 +1,22 @@
 package be.seeseemelk.mockbukkit.help;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.help.HelpMap;
 import org.bukkit.help.HelpTopic;
 import org.bukkit.help.HelpTopicComparator;
 import org.bukkit.help.HelpTopicFactory;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.List;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
 /**
  * The {@link HelpMapMock} is our mock of Bukkit's {@link HelpMap}.
@@ -78,6 +82,11 @@ public class HelpMapMock implements HelpMap
 		}
 
 		factories.put(commandClass, factory);
+	}
+
+	public void assertRegistered(@NotNull HelpTopicFactory<?> factory)
+	{
+		assertTrue(factories.containsValue(factory));
 	}
 
 }

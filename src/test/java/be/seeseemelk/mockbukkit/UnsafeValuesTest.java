@@ -1,21 +1,23 @@
 package be.seeseemelk.mockbukkit;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.io.StringReader;
 import java.util.regex.Pattern;
 
 import org.bukkit.plugin.InvalidDescriptionException;
 import org.bukkit.plugin.InvalidPluginException;
 import org.bukkit.plugin.PluginDescriptionFile;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class UnsafeValuesTest
+class UnsafeValuesTest
 {
 	private static final String PLUGIN_INFO_FORMAT = "name: VersionTest\nversion: 1.0\nmain: not.exists\napi-version: %s";
 
 	private MockUnsafeValues mockUnsafeValues;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		mockUnsafeValues = new MockUnsafeValues();
@@ -31,13 +33,13 @@ public class UnsafeValuesTest
 		}
 		catch (InvalidDescriptionException ex)
 		{
-			//exception shouldn't ever be thrown
+			// exception shouldn't ever be thrown
 			ex.printStackTrace();
 		}
 	}
 
 	@Test
-	public void checkSupported_currentServerVersion() throws InvalidPluginException
+	void checkSupported_currentServerVersion() throws InvalidPluginException
 	{
 		String currentVersion = MockBukkit.getOrCreateMock().getBukkitVersion();
 		// if version is in pattern MAJOR.MINOR.FIX, transform to MAJOR.MINOR
@@ -55,21 +57,24 @@ public class UnsafeValuesTest
 	}
 
 	@Test
-	public void checkSupported_supportedVersion() throws InvalidPluginException
+	void checkSupported_supportedVersion() throws InvalidPluginException
 	{
 		checkVersion("1.13");
 	}
 
-	@Test(expected = InvalidPluginException.class)
-	public void checkSupported_unsupportedVersion() throws InvalidPluginException
+	@Test
+	void checkSupported_unsupportedVersion() throws InvalidPluginException
 	{
-		checkVersion("1.8");
+		assertThrows(InvalidPluginException.class, () -> checkVersion("1.8"));
 	}
 
-	@Test(expected = InvalidPluginException.class)
-	public void checkSupported_noSpecifiedVersion() throws InvalidPluginException
+	@Test
+	void checkSupported_noSpecifiedVersion() throws InvalidPluginException
 	{
-		PluginDescriptionFile pluginDescriptionFile = new PluginDescriptionFile("VersionTest", "1.0", "not.exists");
-		mockUnsafeValues.checkSupported(pluginDescriptionFile);
+		assertThrows(InvalidPluginException.class, () ->
+		{
+			PluginDescriptionFile pluginDescriptionFile = new PluginDescriptionFile("VersionTest", "1.0", "not.exists");
+			mockUnsafeValues.checkSupported(pluginDescriptionFile);
+		});
 	}
 }

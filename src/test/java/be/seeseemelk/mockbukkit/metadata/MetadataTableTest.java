@@ -1,41 +1,41 @@
 package be.seeseemelk.mockbukkit.metadata;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.MockPlugin;
 import be.seeseemelk.mockbukkit.TestPlugin;
 
-public class MetadataTableTest
+class MetadataTableTest
 {
 
 	private MetadataTable mt;
 
-	@Before
-	public void setUp()
+	@BeforeEach
+	void setUp()
 	{
 		MockBukkit.mock();
 		mt = new MetadataTable();
 	}
 
-	@After
-	public void tearDown()
+	@AfterEach
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
 
 	@Test
-	public void setMetadata_MetadataSet()
+	void setMetadata_MetadataSet()
 	{
 		MockPlugin plugin = MockBukkit.createMockPlugin();
 		assertFalse(mt.hasMetadata("MyMetadata"));
@@ -44,7 +44,7 @@ public class MetadataTableTest
 	}
 
 	@Test
-	public void getMetadata_MultipleMetaDataSetByMultiplePlugins_TwoMetadataValuesFound()
+	void getMetadata_MultipleMetaDataSetByMultiplePlugins_TwoMetadataValuesFound()
 	{
 		MockPlugin plugin1 = MockBukkit.createMockPlugin();
 		TestPlugin plugin2 = MockBukkit.load(TestPlugin.class);
@@ -69,7 +69,7 @@ public class MetadataTableTest
 	}
 
 	@Test
-	public void removeMetadata_MultipleSet_OneRemoved()
+	void removeMetadata_MultipleSet_OneRemoved()
 	{
 		MockPlugin plugin1 = MockBukkit.createMockPlugin();
 		TestPlugin plugin2 = MockBukkit.load(TestPlugin.class);
@@ -84,7 +84,7 @@ public class MetadataTableTest
 	}
 
 	@Test
-	public void removeMetadata_NoneSet_NothingHappens()
+	void removeMetadata_NoneSet_NothingHappens()
 	{
 		MockPlugin plugin1 = MockBukkit.createMockPlugin();
 		mt.removeMetadata("MyMetadata", plugin1);
