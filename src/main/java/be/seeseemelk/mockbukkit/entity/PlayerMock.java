@@ -1488,30 +1488,40 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Deprecated
 	public void hidePlayer(@NotNull Player player)
 	{
-		createRecordOfHiddenPlayerIfNotExists(player);
+		hidePlayer("", player);
 	}
 
 	@Override
 	public void hidePlayer(@NotNull Plugin plugin, @NotNull Player player)
 	{
-		createRecordOfHiddenPlayerIfNotExists(player);
-		hiddenPlayerNicks.get(player.getUniqueId()).add(plugin.getName());
+		hidePlayer(plugin.getName(), player);
+	}
+
+	private void hidePlayer(@NotNull String pluginName, @NotNull Player player)
+	{
+		hiddenPlayers.putIfAbsent(player.getUniqueId(), new ArrayList<>());
+		hiddenPlayers.get(player.getUniqueId()).add(pluginName);
 	}
 
 	@Override
 	@Deprecated
 	public void showPlayer(@NotNull Player player)
 	{
-		hiddenPlayerNicks.remove(player.getUniqueId());
+		showPlayer("", player);
 	}
 
 	@Override
 	public void showPlayer(@NotNull Plugin plugin, @NotNull Player player)
 	{
-		if(hiddenPlayerNicks.containsKey(player.getUniqueId()))
+		showPlayer(plugin.getName(), player);
+	}
+
+	private void showPlayer(@NotNull String pluginName, @NotNull Player player)
+	{
+		if(hiddenPlayers.containsKey(player.getUniqueId()))
 		{
-			List<String> blockingPlugins = hiddenPlayerNicks.get(player.getUniqueId());
-			blockingPlugins.remove(plugin.getName());
+			List<String> blockingPlugins = hiddenPlayers.get(player.getUniqueId());
+			blockingPlugins.remove(pluginName);
 			if(blockingPlugins.isEmpty())
 				showPlayer(player);
 		}
@@ -1520,12 +1530,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public boolean canSee(@NotNull Player player)
 	{
-		return !hiddenPlayerNicks.containsKey(player.getUniqueId());
-	}
-
-	private void createRecordOfHiddenPlayerIfNotExists(@NotNull Player playerToHide)
-	{
-		hiddenPlayerNicks.putIfAbsent(playerToHide.getUniqueId(), new ArrayList<>());
+		return !hiddenPlayers.containsKey(player.getUniqueId());
 	}
 
 	@Override
