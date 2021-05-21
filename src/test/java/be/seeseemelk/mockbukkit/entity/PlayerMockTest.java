@@ -1174,7 +1174,7 @@ class PlayerMockTest
 		player.showPlayer(plugin1, player2);
 		assertFalse(player.canSee(player2));
 
-		// 5: Two plugins and one old one hides and shows player back and forth
+		// 5: Three plugins hides and shows player back and forth
 		player.hidePlayer(plugin1, player2);
 		assertFalse(player.canSee(player2));
 		player.hidePlayer(plugin2, player2);
