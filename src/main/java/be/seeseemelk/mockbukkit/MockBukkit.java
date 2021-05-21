@@ -339,7 +339,7 @@ public class MockBukkit
 	 * @param pluginName A name of a new plugin.
 	 * @return An instance of a mock plugin.
 	 */
-	public static MockPlugin createMockPlugin(String pluginName)
+	public static @NotNull MockPlugin createMockPlugin(@NotNull String pluginName)
 	{
 		if (mock != null)
 		{
