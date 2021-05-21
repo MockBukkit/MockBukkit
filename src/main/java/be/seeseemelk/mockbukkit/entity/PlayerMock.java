@@ -119,8 +119,8 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 
 	private final PlayerSpigotMock playerSpigotMock = new PlayerSpigotMock();
 	private final List<AudioExperience> heardSounds = new LinkedList<>();
-	private final Map<UUID, List<Plugin>> hiddenPlayers = new HashMap<>();
-	private final List<UUID> hiddenPlayersDeprecated = new ArrayList<>();
+	private final Map<UUID, Set<Plugin>> hiddenPlayers = new HashMap<>();
+	private final Set<UUID> hiddenPlayersDeprecated = new HashSet<>();
 
 	public PlayerMock(ServerMock server, String name)
 	{
@@ -1495,10 +1495,9 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public void hidePlayer(@NotNull Plugin plugin, @NotNull Player player)
 	{
-		hiddenPlayers.putIfAbsent(player.getUniqueId(), new ArrayList<>());
-		List<Plugin> blockingPlugins = hiddenPlayers.get(player.getUniqueId());
-		if (!blockingPlugins.contains(plugin))
-			blockingPlugins.add(plugin);
+		hiddenPlayers.putIfAbsent(player.getUniqueId(), new HashSet<>());
+		Set<Plugin> blockingPlugins = hiddenPlayers.get(player.getUniqueId());
+		blockingPlugins.add(plugin);
 	}
 
 	@Override
@@ -1513,7 +1512,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	{
 		if (hiddenPlayers.containsKey(player.getUniqueId()))
 		{
-			List<Plugin> blockingPlugins = hiddenPlayers.get(player.getUniqueId());
+			Set<Plugin> blockingPlugins = hiddenPlayers.get(player.getUniqueId());
 			blockingPlugins.remove(plugin);
 			if (blockingPlugins.isEmpty())
 				hiddenPlayers.remove(player.getUniqueId());

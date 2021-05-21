@@ -1138,54 +1138,83 @@ class PlayerMockTest
 		server.getPluginManager().assertEventFired(PlayerToggleFlightEvent.class);
 	}
 
-	@Test
-	public void testPlayerHide()
+	private class PlayerHideTestObjects
 	{
-		MockPlugin plugin1 = MockBukkit.createMockPlugin("plugin1");
-		MockPlugin plugin2 = MockBukkit.createMockPlugin("plugin2");
-		PlayerMock player2 = server.addPlayer();
+		public MockPlugin plugin1 = MockBukkit.createMockPlugin("plugin1");
+		public MockPlugin plugin2 = MockBukkit.createMockPlugin("plugin2");
+		public PlayerMock player2 = server.addPlayer();
+	}
+	@Test
+	public void testPlayerHide_InitialState()
+	{
+		PlayerHideTestObjects objects = new PlayerHideTestObjects();
+		assertTrue(player.canSee(objects.player2));
+	}
 
-		// Player should see player2 on start
-		assertTrue(player.canSee(player2));
+	@Test
+	public void testPlayerHide_OldImplementation()
+	{
+		PlayerHideTestObjects objects = new PlayerHideTestObjects();
+		player.hidePlayer(objects.player2);
+		assertFalse(player.canSee(objects.player2));
+		player.showPlayer(objects.player2);
+		assertTrue(player.canSee(objects.player2));
+	}
 
-		// 1: Only one plugin hides player, this one uses old implementation of hidePlayer method
-		player.hidePlayer(player2);
-		assertFalse(player.canSee(player2));
-		player.showPlayer(player2);
-		assertTrue(player.canSee(player2));
+	@Test
+	public void testPlayerHide_NewImplementation()
+	{
+		PlayerHideTestObjects objects = new PlayerHideTestObjects();
+		player.hidePlayer(objects.plugin1, objects.player2);
+		assertFalse(player.canSee(objects.player2));
+		player.showPlayer(objects.plugin1, objects.player2);
+		assertTrue(player.canSee(objects.player2));
+	}
 
-		// 2: Plugin uses newer version of player visibility functions
-		player.hidePlayer(plugin1, player2);
-		assertFalse(player.canSee(player2));
-		player.showPlayer(plugin1, player2);
-		assertTrue(player.canSee(player2));
+	@Test
+	public void testPlayerHide_OldAndNewPluginWorksSimultanously() {
+		PlayerHideTestObjects objects = new PlayerHideTestObjects();
+		player.hidePlayer(objects.plugin1, objects.player2);
+		assertFalse(player.canSee(objects.player2));
+		player.showPlayer(objects.player2);
+		assertFalse(player.canSee(objects.player2));
+		player.showPlayer(objects.plugin1, objects.player2);
+		assertTrue(player.canSee(objects.player2));
+	}
+	@Test
+	public void testPlayerHide_EachOtherTest(){
+		PlayerHideTestObjects objects = new PlayerHideTestObjects();
+		player.hidePlayer(objects.plugin1, objects.player2);
+		assertFalse(player.canSee(objects.player2));
+		player.hidePlayer(objects.plugin2, objects.player2);
+		assertFalse(player.canSee(objects.player2));
+		player.hidePlayer(objects.player2);
+		assertFalse(player.canSee(objects.player2));
+		player.showPlayer(objects.player2);
+		assertFalse(player.canSee(objects.player2));
+		player.showPlayer(objects.plugin2, objects.player2);
+		assertFalse(player.canSee(objects.player2));
+		player.showPlayer(objects.plugin1, objects.player2);
+		assertTrue(player.canSee(objects.player2));
+	}
 
-		// 3: Old plugin tries to show player, when newer plugin hided player before old one
-		player.hidePlayer(plugin1, player2);
-		assertFalse(player.canSee(player2));
-		player.showPlayer(player2);
-		assertFalse(player.canSee(player2));
-		player.showPlayer(plugin1, player2);
-		assertTrue(player.canSee(player2));
-
-		// 4: Old plugin hides player, then newer plugin shows him
-		player.hidePlayer(player2);
-		assertFalse(player.canSee(player2));
-		player.showPlayer(plugin1, player2);
-		assertFalse(player.canSee(player2));
-
-		// 5: Three plugins hides and shows player back and forth
-		player.hidePlayer(plugin1, player2);
-		assertFalse(player.canSee(player2));
-		player.hidePlayer(plugin2, player2);
-		assertFalse(player.canSee(player2));
-		player.hidePlayer(player2);
-		assertFalse(player.canSee(player2));
-		player.showPlayer(player2);
-		assertFalse(player.canSee(player2));
-		player.showPlayer(plugin2, player2);
-		assertFalse(player.canSee(player2));
-		player.showPlayer(plugin1, player2);
-		assertTrue(player.canSee(player2));
+	@Deprecated
+	@Test
+	public void testPlayerHide_HideCommandIssuedMultipleTimesOld(){
+		PlayerHideTestObjects objects = new PlayerHideTestObjects();
+		player.hidePlayer(objects.player2);
+		player.hidePlayer(objects.player2);
+		assertFalse(player.canSee(objects.player2));
+		player.showPlayer(objects.player2);
+		assertTrue(player.canSee(objects.player2));
+	}
+	@Test
+	public void testPlayerHide_HideCommandIssuedMultipleTimesNew(){
+		PlayerHideTestObjects objects = new PlayerHideTestObjects();
+		player.hidePlayer(objects.plugin1, objects.player2);
+		player.hidePlayer(objects.plugin1, objects.player2);
+		assertFalse(player.canSee(objects.player2));
+		player.showPlayer(objects.plugin1, objects.player2);
+		assertTrue(player.canSee(objects.player2));
 	}
 }
