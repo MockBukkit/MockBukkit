@@ -327,7 +327,7 @@ public class MockBukkit
 	 *
 	 * @return An instance of a mock plugin.
 	 */
-	public static MockPlugin createMockPlugin()
+	public static @NotNull MockPlugin createMockPlugin()
 	{
 		return createMockPlugin("MockPlugin");
 	}
