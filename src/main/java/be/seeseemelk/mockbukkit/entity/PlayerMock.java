@@ -1489,8 +1489,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Deprecated
 	public void hidePlayer(@NotNull Player player)
 	{
-		if(!hiddenPlayersDeprecated.contains(player.getUniqueId()))
-			hiddenPlayersDeprecated.add(player.getUniqueId());
+		hiddenPlayersDeprecated.add(player.getUniqueId());
 	}
 
 	@Override
