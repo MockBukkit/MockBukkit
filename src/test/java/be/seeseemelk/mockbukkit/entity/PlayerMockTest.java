@@ -1139,7 +1139,8 @@ class PlayerMockTest
 	}
 
 	@Test
-	public void testPlayerHide(){
+	public void testPlayerHide()
+	{
 		MockPlugin plugin1 = MockBukkit.createMockPlugin("plugin1");
 		MockPlugin plugin2 = MockBukkit.createMockPlugin("plugin2");
 		PlayerMock player2 = server.addPlayer();

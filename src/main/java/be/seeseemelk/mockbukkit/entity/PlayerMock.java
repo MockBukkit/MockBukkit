@@ -119,7 +119,8 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 
 	private final PlayerSpigotMock playerSpigotMock = new PlayerSpigotMock();
 	private final List<AudioExperience> heardSounds = new LinkedList<>();
-	private final Map<UUID, List<String>> hiddenPlayers = new HashMap<>();
+	private final Map<UUID, List<Plugin>> hiddenPlayers = new HashMap<>();
+	private final List<UUID> hiddenPlayersDeprecated = new ArrayList<>();
 
 	public PlayerMock(ServerMock server, String name)
 	{
@@ -1488,42 +1489,33 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Deprecated
 	public void hidePlayer(@NotNull Player player)
 	{
-		hidePlayer("", player);
+		if(!hiddenPlayersDeprecated.contains(player.getUniqueId()))
+			hiddenPlayersDeprecated.add(player.getUniqueId());
 	}
 
 	@Override
 	public void hidePlayer(@NotNull Plugin plugin, @NotNull Player player)
 	{
-		hidePlayer(plugin.getName(), player);
-	}
-
-	private void hidePlayer(@NotNull String pluginName, @NotNull Player player)
-	{
 		hiddenPlayers.putIfAbsent(player.getUniqueId(), new ArrayList<>());
-		List<String> blockingPlugins = hiddenPlayers.get(player.getUniqueId());
-		if (!blockingPlugins.contains(pluginName))
-			blockingPlugins.add(pluginName);
+		List<Plugin> blockingPlugins = hiddenPlayers.get(player.getUniqueId());
+		if (!blockingPlugins.contains(plugin))
+			blockingPlugins.add(plugin);
 	}
 
 	@Override
 	@Deprecated
 	public void showPlayer(@NotNull Player player)
 	{
-		showPlayer("", player);
+		hiddenPlayersDeprecated.remove(player.getUniqueId());
 	}
 
 	@Override
 	public void showPlayer(@NotNull Plugin plugin, @NotNull Player player)
 	{
-		showPlayer(plugin.getName(), player);
-	}
-
-	private void showPlayer(@NotNull String pluginName, @NotNull Player player)
-	{
 		if (hiddenPlayers.containsKey(player.getUniqueId()))
 		{
-			List<String> blockingPlugins = hiddenPlayers.get(player.getUniqueId());
-			blockingPlugins.remove(pluginName);
+			List<Plugin> blockingPlugins = hiddenPlayers.get(player.getUniqueId());
+			blockingPlugins.remove(plugin);
 			if (blockingPlugins.isEmpty())
 				hiddenPlayers.remove(player.getUniqueId());
 		}
@@ -1532,7 +1524,8 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public boolean canSee(@NotNull Player player)
 	{
-		return !hiddenPlayers.containsKey(player.getUniqueId());
+		return !hiddenPlayers.containsKey(player.getUniqueId()) &&
+				!hiddenPlayersDeprecated.contains(player.getUniqueId());
 	}
 
 	@Override
