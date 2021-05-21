@@ -16,6 +16,7 @@ gradle.ext.apiVersionFull = '1.16.5-R0.1-SNAPSHOT'
 */
 gradle.ext.version = '1.1.0'
 
+
 /*
   This is the name of our MockBukkit artifact, it includes
   the API version of Minecraft we are targeting.
