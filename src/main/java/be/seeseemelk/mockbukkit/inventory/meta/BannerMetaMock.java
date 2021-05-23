@@ -22,7 +22,8 @@ public class BannerMetaMock extends ItemMetaMock implements BannerMeta
     {
         super(meta);
 
-        if (meta instanceof BannerMeta) {
+        if (meta instanceof BannerMeta)
+        {
             BannerMeta bannerMeta = (BannerMeta) meta;
             this.setBaseColor(((BannerMeta) meta).getBaseColor());
             this.setPatterns(((BannerMeta) meta).getPatterns());
@@ -45,7 +46,7 @@ public class BannerMetaMock extends ItemMetaMock implements BannerMeta
     @Override
     public List<Pattern> getPatterns()
     {
-        return new ArrayList<>(patterns);
+        return new ArrayList<>(patterns); // To stay inline with bukkit implementation
     }
 
     @Override
