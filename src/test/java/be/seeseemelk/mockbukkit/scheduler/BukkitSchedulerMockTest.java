@@ -208,14 +208,7 @@ class BukkitSchedulerMockTest
 		AtomicInteger count = new AtomicInteger(amountTasks);
 		Runnable callback = () ->
 		{
-			try
-			{	// simulate some varying work load / execution time
-				Thread.sleep(ThreadLocalRandom.current().nextInt(2, 20));
-			}
-			catch (InterruptedException e)
-			{
-				e.printStackTrace();
-			}
+			simulateWorkload();
 			count.decrementAndGet();
 		};
 		for (int i = 0; i < amountTasks; i++)
@@ -241,16 +234,7 @@ class BukkitSchedulerMockTest
 	{
 		assertTrue(scheduler.getPendingTasks().isEmpty());
 		int amountTasks = 20;
-		Runnable callback = () ->
-		{
-			try
-			{	// simulate some varying work load / execution time
-				Thread.sleep(ThreadLocalRandom.current().nextInt(2, 20));
-			}
-			catch (InterruptedException e){
-				e.printStackTrace();
-			}
-		};
+		Runnable callback = this::simulateWorkload;
 		for (int i = 0; i < amountTasks; i++)
 		{
 			scheduler.runTaskLaterAsynchronously(null, callback, 1L + (i % 5));
@@ -266,5 +250,16 @@ class BukkitSchedulerMockTest
 		assertTrue(scheduler.getPendingTasks().isEmpty());
 		scheduler.performOneTick();
 		assertTrue(scheduler.getPendingTasks().isEmpty());
+	}
+
+	/**
+	 * Simulates varying work load by waiting by a random amount of time (up to 20ms).
+	 */
+	private void simulateWorkload() {
+		try {
+			Thread.sleep(ThreadLocalRandom.current().nextInt(2, 20));
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 }
