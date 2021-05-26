@@ -232,7 +232,7 @@ class BukkitSchedulerMockTest
 			scheduler.performOneTick();
 			oldPendingTasks = pendingTasks;
 		}
-		assertEquals(0, scheduler.getPendingTasks().size());
+		assertTrue(scheduler.getPendingTasks().isEmpty());
 		assertEquals(0, count.get());
 	}
 
