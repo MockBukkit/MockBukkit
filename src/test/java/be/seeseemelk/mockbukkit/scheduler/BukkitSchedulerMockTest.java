@@ -258,7 +258,7 @@ class BukkitSchedulerMockTest
 		assertEquals(amountTasks, scheduler.getPendingTasks().size());
 		scheduler.performOneTick();
 		assertTrue(amountTasks >= scheduler.getPendingTasks().size());
-		assertNotEquals(0, scheduler.getPendingTasks().size());
+		assertFalse(scheduler.getPendingTasks().isEmpty());
 		for (BukkitTask task : scheduler.getPendingTasks())
 		{
 			task.cancel();
