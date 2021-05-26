@@ -239,7 +239,7 @@ class BukkitSchedulerMockTest
 	@Test
 	public void getPendingTasks_AsyncCanceledTasks()
 	{
-		assertEquals(0, scheduler.getPendingTasks().size());
+		assertTrue(scheduler.getPendingTasks().isEmpty());
 		int amountTasks = 20;
 		Runnable callback = () ->
 		{
