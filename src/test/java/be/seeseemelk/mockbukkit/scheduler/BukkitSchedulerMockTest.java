@@ -265,6 +265,6 @@ class BukkitSchedulerMockTest
 		}
 		assertTrue(scheduler.getPendingTasks().isEmpty());
 		scheduler.performOneTick();
-		assertEquals(0, scheduler.getPendingTasks().size());
+		assertTrue(scheduler.getPendingTasks().isEmpty());
 	}
 }
