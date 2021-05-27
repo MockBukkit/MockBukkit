@@ -1,9 +1,13 @@
 package be.seeseemelk.mockbukkit.inventory;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -109,7 +113,7 @@ public class InventoryMock implements Inventory
 	{
 		int n = getNumberOfItems(item);
 		String message = String.format("Inventory contains only <%d> but expected at least <%d>", n, amount);
-		assertTrue(message, n >= amount);
+		assertTrue(n >= amount, message);
 	}
 
 	/**
@@ -232,7 +236,7 @@ public class InventoryMock implements Inventory
 	@Override
 	public ListIterator<ItemStack> iterator()
 	{
-		List<ItemStack> list = Arrays.asList(items).stream().filter(item -> item != null).collect(Collectors.toList());
+		List<ItemStack> list = Arrays.asList(items).stream().filter(Objects::nonNull).collect(Collectors.toList());
 		return list.listIterator();
 	}
 

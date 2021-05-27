@@ -1,23 +1,23 @@
 package be.seeseemelk.mockbukkit;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class CoordinateTest
+class CoordinateTest
 {
 	private Coordinate coordinate;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		coordinate = new Coordinate();
 	}
 
 	@Test
-	public void constructor_NoParameters_AllZeroes()
+	void constructor_NoParameters_AllZeroes()
 	{
 		coordinate = new Coordinate();
 		assertEquals(0, coordinate.x);
@@ -26,7 +26,7 @@ public class CoordinateTest
 	}
 
 	@Test
-	public void construct_Parameters_ValuesSet()
+	void construct_Parameters_ValuesSet()
 	{
 		coordinate = new Coordinate(1, 2, 3);
 		assertEquals(1, coordinate.x);
@@ -35,13 +35,13 @@ public class CoordinateTest
 	}
 
 	@Test
-	public void hashCode_SameObject_SameHash()
+	void hashCode_SameObject_SameHash()
 	{
 		assertEquals(coordinate.hashCode(), coordinate.hashCode());
 	}
 
 	@Test
-	public void hashCode_DifferentObjectWithSameCoordinates_SameHash()
+	void hashCode_DifferentObjectWithSameCoordinates_SameHash()
 	{
 		Coordinate c1 = new Coordinate(1, 2, 3);
 		Coordinate c2 = new Coordinate(1, 2, 3);
@@ -49,7 +49,7 @@ public class CoordinateTest
 	}
 
 	@Test
-	public void hashCode_DifferentObjectWithDifferentCoordinates_DifferentHash()
+	void hashCode_DifferentObjectWithDifferentCoordinates_DifferentHash()
 	{
 		Coordinate c1 = new Coordinate(1, 2, 3);
 		Coordinate c2 = new Coordinate(4, 5, 6);
@@ -57,19 +57,19 @@ public class CoordinateTest
 	}
 
 	@Test
-	public void equals_Null_False()
+	void equals_Null_False()
 	{
 		assertNotEquals(coordinate, null);
 	}
 
 	@Test
-	public void equals_Same_True()
+	void equals_Same_True()
 	{
 		assertEquals(coordinate, coordinate);
 	}
 
 	@Test
-	public void equals_DifferentObjectWithSameCoordinates_True()
+	void equals_DifferentObjectWithSameCoordinates_True()
 	{
 		Coordinate c1 = new Coordinate(1, 2, 3);
 		Coordinate c2 = new Coordinate(1, 2, 3);
@@ -77,7 +77,7 @@ public class CoordinateTest
 	}
 
 	@Test
-	public void equals_DifferentObjectWithDifferentCoordinates_False()
+	void equals_DifferentObjectWithDifferentCoordinates_False()
 	{
 		Coordinate c1 = new Coordinate(1, 2, 3);
 		Coordinate c2 = new Coordinate(4, 5, 6);

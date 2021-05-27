@@ -1,55 +1,57 @@
 package be.seeseemelk.mockbukkit.tags;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.bukkit.NamespacedKey;
 import org.jetbrains.annotations.NotNull;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class TagParserTest
+class TagParserTest
 {
 
 	@Test
-	public void testKeyed()
+	void testKeyed()
 	{
 		NamespacedKey key = NamespacedKey.minecraft("i_dont_exist");
 		TagParser parser = new TagParser(TagRegistry.BLOCKS, key);
 		assertEquals(key, parser.getKey());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void testNullability() throws TagMisconfigurationException
+	@Test
+	void testNullability() throws TagMisconfigurationException
 	{
 		NamespacedKey key = NamespacedKey.minecraft("i_dont_exist");
 		TagParser parser = new TagParser(TagRegistry.BLOCKS, key);
-		parser.parse(null, (a, b) ->
+
+		assertThrows(IllegalArgumentException.class, () -> parser.parse(null, (a, b) ->
 		{
-		});
+		}));
 	}
 
 	@Test
-	public void testInvalidJson()
+	void testInvalidJson()
 	{
 		assertMisconfiguration("");
 		assertMisconfiguration("hello world");
 	}
 
 	@Test
-	public void testMissingArray()
+	void testMissingArray()
 	{
 		assertMisconfiguration("{}");
 		assertMisconfiguration("{\"values\":\"derp\"}");
 	}
 
 	@Test
-	public void testInvalidMaterial()
+	void testInvalidMaterial()
 	{
 		assertMisconfiguration("{\"values\":[123456]}");
 	}
 
 	@Test
-	public void testInvalidMaterials()
+	void testInvalidMaterials()
 	{
 		assertMisconfiguration("{\"values\":[\"NO\"]}");
 		assertMisconfiguration("{\"values\":[\"lol:jk\"]}");
@@ -57,13 +59,13 @@ public class TagParserTest
 	}
 
 	@Test
-	public void testInvalidMinecraftTags()
+	void testInvalidMinecraftTags()
 	{
 		assertMisconfiguration("{\"values\":[\"#minecraft:never_gonna_give_you_up\"]}");
 	}
 
 	@Test
-	public void testInvalidJSONObjects()
+	void testInvalidJSONObjects()
 	{
 		assertMisconfiguration("{\"values\":[{}]}");
 		assertMisconfiguration("{\"values\":[{\"id\":123}]}");
@@ -84,7 +86,7 @@ public class TagParserTest
 			{
 			});
 
-			Assert.fail("JSON was misconfigured, should have thrown an exception");
+			fail("JSON was misconfigured, should have thrown an exception");
 		}
 		catch (TagMisconfigurationException x)
 		{

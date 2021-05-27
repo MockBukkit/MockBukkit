@@ -233,7 +233,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 			return false;
 		}
 		if (hasCustomModelData() != meta.hasCustomModelData()
-				|| hasCustomModelData() && getCustomModelData() != meta.getCustomModelData())
+		        || hasCustomModelData() && getCustomModelData() != meta.getCustomModelData())
 		{
 			return false;
 		}

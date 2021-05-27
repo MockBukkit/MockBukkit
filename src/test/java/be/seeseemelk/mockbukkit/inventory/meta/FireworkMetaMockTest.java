@@ -1,8 +1,9 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 
@@ -10,29 +11,29 @@ import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.FireworkEffect.Type;
 import org.bukkit.inventory.meta.FireworkMeta;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 
-public class FireworkMetaMockTest
+class FireworkMetaMockTest
 {
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		MockBukkit.mock();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown()
 	{
 		MockBukkit.unmock();
 	}
 
 	@Test
-	public void testEffectDefaultNone()
+	void testEffectDefaultNone()
 	{
 		FireworkMeta meta = new FireworkMetaMock();
 		assertTrue(meta.getEffects().isEmpty());
@@ -41,7 +42,7 @@ public class FireworkMetaMockTest
 	}
 
 	@Test
-	public void testAddSingleEffect()
+	void testAddSingleEffect()
 	{
 		FireworkMeta meta = new FireworkMetaMock();
 		FireworkEffect effect = FireworkEffect.builder().withColor(Color.BLUE).with(Type.BALL_LARGE).build();
@@ -56,7 +57,7 @@ public class FireworkMetaMockTest
 	}
 
 	@Test
-	public void testAddEffectsArray()
+	void testAddEffectsArray()
 	{
 		FireworkMeta meta = new FireworkMetaMock();
 		FireworkEffect effect = FireworkEffect.builder().withColor(Color.BLUE).with(Type.BALL_LARGE).build();
@@ -74,7 +75,7 @@ public class FireworkMetaMockTest
 	}
 
 	@Test
-	public void testAddEffectsIterable()
+	void testAddEffectsIterable()
 	{
 		FireworkMeta meta = new FireworkMetaMock();
 		FireworkEffect effect = FireworkEffect.builder().withColor(Color.BLUE).with(Type.BALL_LARGE).build();
@@ -92,7 +93,7 @@ public class FireworkMetaMockTest
 	}
 
 	@Test
-	public void testRemoveEffect()
+	void testRemoveEffect()
 	{
 		FireworkMeta meta = new FireworkMetaMock();
 		FireworkEffect effect = FireworkEffect.builder().withColor(Color.BLUE).with(Type.BALL_LARGE).build();
@@ -106,7 +107,7 @@ public class FireworkMetaMockTest
 	}
 
 	@Test
-	public void testClearEffects()
+	void testClearEffects()
 	{
 		FireworkMeta meta = new FireworkMetaMock();
 		FireworkEffect effect = FireworkEffect.builder().withColor(Color.BLUE).with(Type.BALL_LARGE).build();
@@ -120,7 +121,7 @@ public class FireworkMetaMockTest
 	}
 
 	@Test
-	public void testClone()
+	void testClone()
 	{
 		FireworkMeta meta = new FireworkMetaMock();
 		FireworkMeta clone = meta.clone();
@@ -128,24 +129,24 @@ public class FireworkMetaMockTest
 	}
 
 	@Test
-	public void testPower()
+	void testPower()
 	{
 		FireworkMeta meta = new FireworkMetaMock();
 		meta.setPower(8);
 		assertEquals(8, meta.getPower());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void testPowerTooLow()
+	@Test
+	void testPowerTooLow()
 	{
 		FireworkMeta meta = new FireworkMetaMock();
-		meta.setPower(-200);
+		assertThrows(IllegalArgumentException.class, () -> meta.setPower(-200));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void testPowerTooHigh()
+	@Test
+	void testPowerTooHigh()
 	{
 		FireworkMeta meta = new FireworkMetaMock();
-		meta.setPower(1024);
+		assertThrows(IllegalArgumentException.class, () -> meta.setPower(1024));
 	}
 }

@@ -1,14 +1,15 @@
 package be.seeseemelk.mockbukkit.inventory;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.inventory.meta.BookMetaMock;
@@ -22,18 +23,18 @@ import be.seeseemelk.mockbukkit.inventory.meta.PotionMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.SkullMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.SuspiciousStewMetaMock;
 
-public class ItemFactoryMockTest
+class ItemFactoryMockTest
 {
 	private ItemFactoryMock factory;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		MockBukkit.mock();
 		factory = new ItemFactoryMock();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown()
 	{
 		MockBukkit.unmock();
@@ -44,7 +45,7 @@ public class ItemFactoryMockTest
 	 */
 
 	@Test
-	public void testGetItemMetaCorrectClass()
+	void testGetItemMetaCorrectClass()
 	{
 		assertTrue(factory.getItemMeta(Material.DIRT) instanceof ItemMetaMock);
 		assertTrue(factory.getItemMeta(Material.PLAYER_HEAD) instanceof SkullMetaMock);
@@ -63,14 +64,14 @@ public class ItemFactoryMockTest
 	}
 
 	@Test
-	public void isApplicable_StandardItemMetaOnDirtMaterial_True()
+	void isApplicable_StandardItemMetaOnDirtMaterial_True()
 	{
 		ItemMeta meta = factory.getItemMeta(Material.DIRT);
 		assertTrue(factory.isApplicable(meta, Material.DIRT));
 	}
 
 	@Test
-	public void isApplicable_StandardItemMetaOnDirtItemStack_True()
+	void isApplicable_StandardItemMetaOnDirtItemStack_True()
 	{
 		ItemStack stack = new ItemStack(Material.DIRT);
 		ItemMeta meta = factory.getItemMeta(Material.DIRT);
@@ -78,27 +79,27 @@ public class ItemFactoryMockTest
 	}
 
 	@Test
-	public void equals_NullAndNull_False()
+	void equals_NullAndNull_False()
 	{
 		assertFalse(factory.equals(null, null));
 	}
 
 	@Test
-	public void equals_MetaAndNull_False()
+	void equals_MetaAndNull_False()
 	{
 		ItemMeta meta = factory.getItemMeta(Material.DIRT);
 		assertFalse(factory.equals(meta, null));
 	}
 
 	@Test
-	public void equals_NullAndMeta_False()
+	void equals_NullAndMeta_False()
 	{
 		ItemMeta meta = factory.getItemMeta(Material.DIRT);
 		assertFalse(factory.equals(null, meta));
 	}
 
 	@Test
-	public void equals_CompatibleMetas_True()
+	void equals_CompatibleMetas_True()
 	{
 		ItemMeta a = factory.getItemMeta(Material.DIRT);
 		ItemMeta b = factory.getItemMeta(Material.DIRT);
@@ -106,16 +107,16 @@ public class ItemFactoryMockTest
 	}
 
 	@Test
-	public void asMetaFor_DirtItemMetaOnDirtMaterial_ReturnsCloneOfMeta()
+	void asMetaFor_DirtItemMetaOnDirtMaterial_ReturnsCloneOfMeta()
 	{
 		ItemMeta meta = factory.getItemMeta(Material.DIRT);
 		meta.setDisplayName("My piece of dirt");
 		ItemMeta newMeta = factory.asMetaFor(meta, Material.DIRT);
-		assertTrue(meta.equals(newMeta));
+		assertEquals(meta, newMeta);
 	}
 
 	@Test
-	public void asMetaFor_DirtItemMetaOnDirtItemStack_ReturnsCloneOfMeta()
+	void asMetaFor_DirtItemMetaOnDirtItemStack_ReturnsCloneOfMeta()
 	{
 		ItemStack stack = new ItemStack(Material.DIRT);
 		ItemMeta meta = stack.getItemMeta();
@@ -123,6 +124,6 @@ public class ItemFactoryMockTest
 		stack.setItemMeta(meta);
 
 		ItemMeta newMeta = factory.asMetaFor(meta, stack);
-		assertTrue(meta.equals(newMeta));
+		assertEquals(meta, newMeta);
 	}
 }

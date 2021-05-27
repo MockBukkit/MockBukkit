@@ -50,11 +50,11 @@ repositories {
 }
 
 dependencies {
-	testImplementation 'com.github.seeseemelk:MockBukkit-v1.16:0.25.0'
+	testImplementation 'com.github.seeseemelk:MockBukkit-v1.16:1.0.0'
 }
 ```
 
-Note: use v1.13-SNAPSHOT to test a Bukkit 1.13 plugin or any other version if the branch exists.
+Note: use `v1.13-SNAPSHOT` to test a Bukkit 1.13 plugin or any other version if the [branch](https://github.com/MockBukkit/MockBukkit/branches) exists.
 These branches will not be receiving patches actively, but any issues will be resolved and any pull requests on them will be accepted.
 This is because backporting every single patch on every branch is incredibely time consuming and slows down the development of Mockbukkit.
 
@@ -79,13 +79,13 @@ You won't need to add any additional repositories since MockBukkit is served via
   <dependency>
     <groupId>com.github.seeseemelk</groupId>
     <artifactId>MockBukkit-v1.16</artifactId>
-    <version>0.25.0</version>
+    <version>1.0.0</version>
     <scope>test</scope>
   </dependency>
 </dependencies>
 ```
 
-Note: use v1.13-SNAPSHOT to test a Bukkit 1.13 plugin or any other version if the branch exists.
+Note: use `v1.13-SNAPSHOT` to test a Bukkit 1.13 plugin or any other version if the [branch](https://github.com/MockBukkit/MockBukkit/branches) exists.
 These branches will not be receiving patches actively, but any issues will be resolved and any pull requests on them will be accepted.
 This is because backporting every single patch on every branch is incredibely time consuming and slows down the development of Mockbukkit.
 
@@ -193,7 +193,8 @@ If you need any help with MockBukkit or have a question regarding this project, 
 Several projects have utilized MockBukkit for their needs already.
 If you want to see some projects that are using MockBukkit right now, feel free to take a peak:
 - [Slimefun/Slimefun4](https://github.com/Slimefun/Slimefun4/tree/master/src/test/java/io/github/thebusybiscuit/slimefun4/testing/tests) (400+ Unit Tests)
-- [JacksonChen666/treecapitator](https://github.com/JacksonChen666/treecapitator/tree/master/src/test/java/com/jacksonchen666/treecapitator) (33+ Unit Tests)
+- [lluiscamino/MultiverseHardcore](https://github.com/lluiscamino/MultiverseHardcore/tree/master/src/test/java/me/lluiscamino/multiversehardcore) (75+ Unit Tests)
+- [JacksonChen666/treecapitator](https://github.com/JacksonChen666/treecapitator/tree/master/src/test/java/com/jacksonchen666/treecapitator) (30+ Unit Tests)
 - *and more! (If you want to see your plugin here, open up an issue and we'll consider adding it)*
 
 You can also have a look at our documentation where we outline various examples and tricks on how to use MockBukkit already:

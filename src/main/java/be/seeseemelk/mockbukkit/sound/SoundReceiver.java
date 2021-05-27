@@ -1,6 +1,6 @@
 package be.seeseemelk.mockbukkit.sound;
 
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -14,9 +14,9 @@ import be.seeseemelk.mockbukkit.entity.PlayerMock;
 /**
  * This interface provides methods to assert sounds that were heard. This is implemented by {@link PlayerMock}, however
  * the sheer amount of assertion methods did warrant a seperate a file at some point.
- * 
+ *
  * @author TheBusyBiscuit
- * 
+ *
  * @see PlayerMock
  *
  */
@@ -25,7 +25,7 @@ public interface SoundReceiver
 
 	/**
 	 * This returns a {@link List} of every {@link AudioExperience} this receiver has received.
-	 * 
+	 *
 	 * @return A mutable {@link List} containing every heard sound.
 	 */
 	@NotNull
@@ -73,13 +73,13 @@ public interface SoundReceiver
 	}
 
 	default void assertSoundHeard(@NotNull String message, @NotNull Sound sound,
-			@NotNull Predicate<AudioExperience> predicate)
+	                              @NotNull Predicate<AudioExperience> predicate)
 	{
 		assertSoundHeard(message, sound.getKey().getKey(), predicate);
 	}
 
 	default void assertSoundHeard(@NotNull String message, @NotNull String sound,
-			@NotNull Predicate<AudioExperience> predicate)
+	                              @NotNull Predicate<AudioExperience> predicate)
 	{
 		for (AudioExperience audio : getHeardSounds())
 		{

@@ -1,17 +1,18 @@
 package be.seeseemelk.mockbukkit.block.data;
 
-import org.bukkit.Material;
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class BlockDataTest
+import org.bukkit.Material;
+import org.junit.jupiter.api.Test;
+
+class BlockDataTest
 {
 
 	@Test
-	public void testMatches()
+	void testMatches()
 	{
 		BlockDataMock blockData1 = new BlockDataMock(Material.STONE);
 		BlockDataMock blockData2 = new BlockDataMock(Material.STONE);
-		Assert.assertTrue(blockData1.matches(blockData2));
+		assertTrue(blockData1.matches(blockData2));
 	}
 }
