@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import java.util.HashMap;
 import java.util.function.Predicate;
 
 import org.bukkit.BanList;
@@ -118,6 +119,8 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 
 	private final PlayerSpigotMock playerSpigotMock = new PlayerSpigotMock();
 	private final List<AudioExperience> heardSounds = new LinkedList<>();
+	private final Map<UUID, Set<Plugin>> hiddenPlayers = new HashMap<>();
+	private final Set<UUID> hiddenPlayersDeprecated = new HashSet<>();
 
 	public PlayerMock(ServerMock server, String name)
 	{
@@ -1486,37 +1489,41 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Deprecated
 	public void hidePlayer(@NotNull Player player)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		hiddenPlayersDeprecated.add(player.getUniqueId());
 	}
 
 	@Override
 	public void hidePlayer(@NotNull Plugin plugin, @NotNull Player player)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		hiddenPlayers.putIfAbsent(player.getUniqueId(), new HashSet<>());
+		Set<Plugin> blockingPlugins = hiddenPlayers.get(player.getUniqueId());
+		blockingPlugins.add(plugin);
 	}
 
 	@Override
 	@Deprecated
 	public void showPlayer(@NotNull Player player)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		hiddenPlayersDeprecated.remove(player.getUniqueId());
 	}
 
 	@Override
 	public void showPlayer(@NotNull Plugin plugin, @NotNull Player player)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (hiddenPlayers.containsKey(player.getUniqueId()))
+		{
+			Set<Plugin> blockingPlugins = hiddenPlayers.get(player.getUniqueId());
+			blockingPlugins.remove(plugin);
+			if (blockingPlugins.isEmpty())
+				hiddenPlayers.remove(player.getUniqueId());
+		}
 	}
 
 	@Override
 	public boolean canSee(@NotNull Player player)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return !hiddenPlayers.containsKey(player.getUniqueId()) &&
+				!hiddenPlayersDeprecated.contains(player.getUniqueId());
 	}
 
 	@Override
