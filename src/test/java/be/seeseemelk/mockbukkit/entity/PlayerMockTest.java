@@ -1040,15 +1040,18 @@ public class PlayerMockTest
 	}
 
 	@Test
-	public void simulateBlockPlace_ValidBlock_EventShouldBeCalledWithCorrectType() {
+	public void simulateBlockPlace_ValidBlock_EventShouldBeCalledWithCorrectType()
+	{
 		Material newMaterial = Material.BEDROCK;
 		AtomicBoolean eventDispatched = new AtomicBoolean();
 		AtomicBoolean isTypeCorrect = new AtomicBoolean();
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
 
-		server.getPluginManager().registerEvents(new Listener() {
+		server.getPluginManager().registerEvents(new Listener()
+		{
 			@EventHandler
-			public void onPlace(BlockPlaceEvent event) {
+			public void onPlace(BlockPlaceEvent event)
+			{
 				eventDispatched.set(true);
 				isTypeCorrect.set(event.getBlock().getType() == newMaterial);
 			}

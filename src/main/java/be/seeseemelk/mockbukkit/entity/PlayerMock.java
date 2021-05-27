@@ -234,10 +234,12 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 
 		block.setType(material); // swap material so event has the correct block information
 
-		BlockPlaceEvent event = new BlockPlaceEvent(block, null, null, getItemInHand(), this, true, null) {
+		BlockPlaceEvent event = new BlockPlaceEvent(block, null, null, getItemInHand(), this, true, null)
+		{
 			@NotNull
 			@Override
-			public EquipmentSlot getHand() {
+			public EquipmentSlot getHand()
+			{
 				throw new UnimplementedOperationException();
 			}
 		};
