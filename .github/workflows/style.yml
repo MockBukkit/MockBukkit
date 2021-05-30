@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     
     # Mak this workflow only run on forks.
-    if: github.repository != 'seeseemelk/MockBukkit'
+    if: github.repository != 'MockBukkit/MockBukkit'
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v2.3.4
       with:
         ref: ${{ github.head_ref }}
 
@@ -25,7 +25,7 @@ jobs:
       run: astyle --options=.astylerc '*.java'
 
     - name: Commit changes
-      uses: stefanzweifel/git-auto-commit-action@v4
+      uses: stefanzweifel/git-auto-commit-action@v4.11.0
       with:
         commit_message: 'Auto-update code formatting'
         file_pattern: '*.java'
