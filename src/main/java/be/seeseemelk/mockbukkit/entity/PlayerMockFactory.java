@@ -30,7 +30,7 @@ public final class PlayerMockFactory
 	{
 		String firstName = FIRST_NAMES[random.nextInt(FIRST_NAMES.length)];
 		String lastName = LAST_NAMES[random.nextInt(LAST_NAMES.length)];
-		return firstName + " " + lastName;
+		return firstName + "_" + lastName;
 	}
 
 	/**
