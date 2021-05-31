@@ -37,20 +37,16 @@ public final class PlayerMockFactory
 	 * Gets a unique random name. Any name that is generated will never be generated again.
 	 *
 	 * @return A unique random name.
-	 * @throws RuntimeException if no unique name is found after 10 tries
 	 */
 	private String getUniqueRandomName()
 	{
-		for (int i = 0; i < 10; i++)
+		String name;
+		do
 		{
-			String name = getRandomName();
-			if (!usedNames.contains(name))
-			{
-				usedNames.add(name);
-				return name;
-			}
+			name = getRandomName();
 		}
-		throw new RuntimeException("Failed to find a unique name");
+		while (usedNames.contains(name));
+		return name;
 	}
 
 	/**
