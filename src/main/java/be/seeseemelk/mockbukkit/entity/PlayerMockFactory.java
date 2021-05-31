@@ -30,7 +30,7 @@ public final class PlayerMockFactory
 	{
 		String firstName = FIRST_NAMES[random.nextInt(FIRST_NAMES.length)];
 		String lastName = LAST_NAMES[random.nextInt(LAST_NAMES.length)];
-		return firstName + "_" + lastName;
+		return firstName + "_" + lastName + random.nextInt(9999);
 	}
 
 	/**
@@ -40,12 +40,7 @@ public final class PlayerMockFactory
 	 */
 	private String getUniqueRandomName()
 	{
-		if (usedNames.size() >= 100)
-		{
-			throw new RuntimeException("Out of names");
-		}
-
-		while (true)
+		for (int i = 0; i < 10; i++)
 		{
 			String name = getRandomName();
 			if (!usedNames.contains(name))
@@ -54,6 +49,7 @@ public final class PlayerMockFactory
 				return name;
 			}
 		}
+		throw new RuntimeException("Failed to find a unique name");
 	}
 
 	/**
