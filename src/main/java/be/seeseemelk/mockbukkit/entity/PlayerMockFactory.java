@@ -9,8 +9,8 @@ import be.seeseemelk.mockbukkit.ServerMock;
 
 public final class PlayerMockFactory
 {
-	private static final String[] FIRST_NAMES = { "James", "Mary", "John", "Particia", "Robert", "Jennifer", "Michael", "Elizabeth", "William", "Linda" };
-	private static final String[] LAST_NAMES = { "Smith", "Johnson", "Jones", "Brown", "Davis", "Miller", "Wilson", "Moore", "Taylor", "Anderson" };
+	private static final String[] FIRST_NAMES = { "James", "Mary", "John", "Amy", "Cora", "Edie", "Abe", "Alex", "Steve", "Linda" };
+	private static final String[] LAST_NAMES = { "Smith", "Abby", "Jones", "Brown", "Davis", "Miller", "Wilson", "Moore", "Taylor", "Bean" };
 
 	private final ServerMock server;
 	private Random random = new Random();
