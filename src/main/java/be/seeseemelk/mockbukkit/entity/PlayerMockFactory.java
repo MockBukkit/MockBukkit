@@ -37,6 +37,7 @@ public final class PlayerMockFactory
 	 * Gets a unique random name. Any name that is generated will never be generated again.
 	 *
 	 * @return A unique random name.
+	 * @throws RuntimeException if no unique name is found after 10 tries
 	 */
 	private String getUniqueRandomName()
 	{
