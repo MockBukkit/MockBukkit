@@ -50,7 +50,8 @@ public final class PlayerMockFactory {
 	 *
 	 * @return A newly created player mock object.
 	 */
-	public OfflinePlayerMock createRandomOfflinePlayer() {
+	public @NotNull OfflinePlayerMock createRandomOfflinePlayer()
+	{
 		return new OfflinePlayerMock(getUniqueRandomName());
 	}
 }
