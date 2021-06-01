@@ -46,6 +46,7 @@ public final class PlayerMockFactory
 			name = getRandomName();
 		}
 		while (usedNames.contains(name));
+		usedNames.add(name);
 		return name;
 	}
 
