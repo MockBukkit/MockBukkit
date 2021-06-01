@@ -20,9 +20,15 @@ public final class PlayerMockFactory {
 	 *
 	 * @return A unique random name.
 	 */
-	private String getUniqueRandomName() {
-		String name = "name_" + currentNameIndex++;
-		if (name.length() > 16) throw new RuntimeException("Maximum number of player names reached");
+	private @NotNull String getUniqueRandomName()
+	{
+		String name = "Player" + currentNameIndex++;
+
+		if (name.length() > 16)
+		{
+			throw new IllegalStateException("Maximum number of player names reached");
+		}
+
 		return name;
 	}
 
