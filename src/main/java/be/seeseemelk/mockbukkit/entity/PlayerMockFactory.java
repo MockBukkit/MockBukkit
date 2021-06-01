@@ -1,36 +1,18 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
-import java.util.UUID;
-
 import be.seeseemelk.mockbukkit.ServerMock;
 
-public final class PlayerMockFactory
-{
-	private static final String[] FIRST_NAMES = { "James", "Mary", "John", "Amy", "Cora", "Edie", "Abe", "Alex", "Steve", "Linda" };
-	private static final String[] LAST_NAMES = { "Smith", "Abby", "Jones", "Brown", "Davis", "Miller", "Wilson", "Moore", "Taylor", "Bean" };
+import java.util.Random;
+import java.util.UUID;
 
+public final class PlayerMockFactory {
 	private final ServerMock server;
-	private Random random = new Random();
-	private Set<String> usedNames = new HashSet<>();
+	private int currentNameIndex;
+	private final Random random = new Random();
 
-	public PlayerMockFactory(ServerMock server)
-	{
+	public PlayerMockFactory(ServerMock server) {
+		this.currentNameIndex = 0;
 		this.server = server;
-	}
-
-	/**
-	 * Generates a random name.
-	 *
-	 * @return A randomly generated name.
-	 */
-	private String getRandomName()
-	{
-		String firstName = FIRST_NAMES[random.nextInt(FIRST_NAMES.length)];
-		String lastName = LAST_NAMES[random.nextInt(LAST_NAMES.length)];
-		return firstName + "_" + lastName + random.nextInt(9999);
 	}
 
 	/**
@@ -38,15 +20,9 @@ public final class PlayerMockFactory
 	 *
 	 * @return A unique random name.
 	 */
-	private String getUniqueRandomName()
-	{
-		String name;
-		do
-		{
-			name = getRandomName();
-		}
-		while (usedNames.contains(name));
-		usedNames.add(name);
+	private String getUniqueRandomName() {
+		String name = "name_" + currentNameIndex++;
+		if (name.length() > 16) throw new RuntimeException("Maximum number of player names reached");
 		return name;
 	}
 
@@ -55,8 +31,7 @@ public final class PlayerMockFactory
 	 *
 	 * @return A newly created player mock object.
 	 */
-	public PlayerMock createRandomPlayer()
-	{
+	public PlayerMock createRandomPlayer() {
 		String name = getUniqueRandomName();
 		UUID uuid = new UUID(random.nextLong(), random.nextLong());
 		return new PlayerMock(server, name, uuid);
@@ -67,8 +42,7 @@ public final class PlayerMockFactory
 	 *
 	 * @return A newly created player mock object.
 	 */
-	public OfflinePlayerMock createRandomOfflinePlayer()
-	{
+	public OfflinePlayerMock createRandomOfflinePlayer() {
 		return new OfflinePlayerMock(getUniqueRandomName());
 	}
 }
