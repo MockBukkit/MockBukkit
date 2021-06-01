@@ -186,7 +186,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	 * @return {@code true} if the block was damaged, {@code false} if the event was cancelled or the player was not in
 	 *         survival gamemode.
 	 */
-	public boolean simulateBlockDamage(Block block)
+	public @Nullable BlockDamageEvent simulateBlockDamage(Block block)
 	{
 		if (gamemode == GameMode.SURVIVAL)
 		{
@@ -199,11 +199,11 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 					block.setType(Material.AIR);
 			}
 
-			return !event.isCancelled();
+			return event;
 		}
 		else
 		{
-			return false;
+			return null;
 		}
 	}
 
@@ -215,17 +215,17 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	 * @return {@code true} if the block was broken, {@code false} if it wasn't or if the player was in adventure mode
 	 *         or in spectator mode.
 	 */
-	public boolean simulateBlockBreak(Block block)
+	public @Nullable BlockBreakEvent simulateBlockBreak(Block block)
 	{
 		if ((gamemode == GameMode.SPECTATOR || gamemode == GameMode.ADVENTURE)
 		        || (gamemode == GameMode.SURVIVAL && simulateBlockDamagePure(block).isCancelled()))
-			return false;
+			return null;
 
 		BlockBreakEvent event = new BlockBreakEvent(block, this);
 		Bukkit.getPluginManager().callEvent(event);
 		if (!event.isCancelled())
 			block.setType(Material.AIR);
-		return !event.isCancelled();
+		return event;
 	}
 
 	/**
@@ -283,12 +283,13 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	 *
 	 * @param moveLocation Location to move player to
 	 */
-	public void simulatePlayerMove(@NotNull Location moveLocation)
+	public PlayerMoveEvent simulatePlayerMove(@NotNull Location moveLocation)
 	{
 		PlayerMoveEvent event = new PlayerMoveEvent(this, this.getLocation(), moveLocation);
 		Bukkit.getPluginManager().callEvent(event);
 		if (!event.isCancelled())
 			this.setLocation(event.getTo());
+		return event;
 	}
 
 	@Override
@@ -972,7 +973,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		this.sneaking = sneaking;
 	}
 
-	public void simulateSneak(boolean sneak)
+	public PlayerToggleSneakEvent simulateSneak(boolean sneak)
 	{
 		PlayerToggleSneakEvent event = new PlayerToggleSneakEvent(this, sneak);
 		Bukkit.getPluginManager().callEvent(event);
@@ -980,6 +981,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		{
 			this.sneaking = event.isSneaking();
 		}
+		return event;
 	}
 
 	@Override
@@ -994,7 +996,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		this.sprinting = sprinting;
 	}
 
-	public void simulateSprint(boolean sprint)
+	public PlayerToggleSprintEvent simulateSprint(boolean sprint)
 	{
 		PlayerToggleSprintEvent event = new PlayerToggleSprintEvent(this, sprint);
 		Bukkit.getPluginManager().callEvent(event);
@@ -1002,6 +1004,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		{
 			this.sprinting = event.isSprinting();
 		}
+		return event;
 	}
 
 	@Override
@@ -1538,7 +1541,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		this.flying = value;
 	}
 
-	public void simulateToggleFlight(boolean fly)
+	public PlayerToggleFlightEvent simulateToggleFlight(boolean fly)
 	{
 		PlayerToggleFlightEvent event = new PlayerToggleFlightEvent(this, fly);
 		Bukkit.getPluginManager().callEvent(event);
@@ -1546,6 +1549,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		{
 			this.flying = event.isFlying();
 		}
+		return event;
 	}
 
 	@Override
