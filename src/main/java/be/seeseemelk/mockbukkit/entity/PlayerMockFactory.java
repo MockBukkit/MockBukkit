@@ -10,7 +10,8 @@ public final class PlayerMockFactory {
 	private int currentNameIndex;
 	private final Random random = new Random();
 
-	public PlayerMockFactory(ServerMock server) {
+	public PlayerMockFactory(@NotNull ServerMock server)
+	{
 		this.currentNameIndex = 0;
 		this.server = server;
 	}
