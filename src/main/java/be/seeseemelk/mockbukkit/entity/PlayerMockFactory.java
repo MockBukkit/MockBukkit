@@ -38,7 +38,8 @@ public final class PlayerMockFactory {
 	 *
 	 * @return A newly created player mock object.
 	 */
-	public PlayerMock createRandomPlayer() {
+	public @NotNull PlayerMock createRandomPlayer()
+	{
 		String name = getUniqueRandomName();
 		UUID uuid = new UUID(random.nextLong(), random.nextLong());
 		return new PlayerMock(server, name, uuid);
