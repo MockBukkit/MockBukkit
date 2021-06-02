@@ -35,6 +35,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
@@ -1072,9 +1073,10 @@ class PlayerMockTest
 		Location location = new Location(player.getWorld(), 0, 100, 0);
 		GameMode originalGM = player.getGameMode();
 		player.setGameMode(GameMode.SURVIVAL);
-		boolean worked = player.simulateBlockPlace(Material.STONE, location);
+		BlockPlaceEvent event = player.simulateBlockPlace(Material.STONE, location);
 		player.setGameMode(originalGM);
-		assertTrue(worked);
+		assertNotNull(event);
+		assertFalse(event.isCancelled());
 	}
 
 	@Test
@@ -1083,9 +1085,9 @@ class PlayerMockTest
 		Location location = new Location(player.getWorld(), 0, 100, 0);
 		GameMode originalGM = player.getGameMode();
 		player.setGameMode(GameMode.ADVENTURE);
-		boolean worked = player.simulateBlockPlace(Material.STONE, location);
+		BlockPlaceEvent event = player.simulateBlockPlace(Material.STONE, location);
 		player.setGameMode(originalGM);
-		assertFalse(worked);
+		assertNull(event);
 	}
 
 	@Test
