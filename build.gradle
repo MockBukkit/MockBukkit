@@ -133,6 +133,10 @@ publishing {
     }
 }
 
+test {
+    useJUnitPlatform()
+}
+
 eclipse.classpath.downloadJavadoc = true
 eclipse.classpath.downloadSources = true
 
