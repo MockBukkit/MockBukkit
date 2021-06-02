@@ -28,7 +28,8 @@ class WorldBorderMockTest
 	}
 
 	@Test
-	void reset() {
+	void reset()
+	{
 		worldBorderMock.reset();
 
 		assertEquals(6.0E7, worldBorderMock.getSize());
@@ -40,7 +41,8 @@ class WorldBorderMockTest
 	}
 
 	@Test
-	void setSize() {
+	void setSize()
+	{
 		worldBorderMock.setSize(10);
 
 		assertEquals(10, worldBorderMock.getSize());
@@ -48,70 +50,81 @@ class WorldBorderMockTest
 
 
 	@Test
-	void setCenterLocation() {
+	void setCenterLocation()
+	{
 		worldBorderMock.setCenter(new Location(null, 10, 0, 10));
 
 		assertEquals(new Location(world, 10, 0, 10), worldBorderMock.getCenter());
 	}
 
 	@Test
-	void setCenterXZ() {
+	void setCenterXZ()
+	{
 		worldBorderMock.setCenter(10, 10);
 
 		assertEquals(new Location(world, 10, 0, 10), worldBorderMock.getCenter());
 	}
 
 	@Test
-	void setDamageBuffer() {
+	void setDamageBuffer()
+	{
 		worldBorderMock.setDamageBuffer(10.0);
 
 		assertEquals(10.0, worldBorderMock.getDamageBuffer());
 	}
 
 	@Test
-	void setDamageAmount() {
+	void setDamageAmount()
+	{
 		worldBorderMock.setDamageAmount(1);
 
 		assertEquals(1, worldBorderMock.getDamageAmount());
 	}
 
 	@Test
-	void setWarningTime() {
+	void setWarningTime()
+	{
 		worldBorderMock.setWarningTime(10);
 
 		assertEquals(10, worldBorderMock.getWarningTime());
 	}
 
 	@Test
-	void setWarningDistance() {
+	void setWarningDistance()
+	{
 		worldBorderMock.setWarningDistance(10);
 
 		assertEquals(10, worldBorderMock.getWarningDistance());
 	}
 
 	@Test
-	void isInside_Null_ExceptionThrown() {
-		assertThrows(IllegalArgumentException.class, () -> {
+	void isInside_Null_ExceptionThrown()
+	{
+		assertThrows(IllegalArgumentException.class, () ->
+		{
 			worldBorderMock.isInside(null);
 		});
 	}
 
 	@Test
-	void isInside_InsideLocation_True() {
+	void isInside_InsideLocation_True()
+	{
 		worldBorderMock.setSize(100);
 
 		assertTrue(worldBorderMock.isInside(new Location(world, 0, 0, 0)));
 	}
 
 	@Test
-	void isInside_InsideLocationWrongWorld_False() {
+	void isInside_InsideLocationWrongWorld_False()
+	{
 		worldBorderMock.setSize(100);
 
 		assertFalse(worldBorderMock.isInside(new Location(new WorldMock(), 0, 0, 0)));
 	}
 
 	@Test
-	void isInside_OutsideLocation_False() {
+	void isInside_OutsideLocation_False()
+	{
 		worldBorderMock.setSize(100);
 
 		assertFalse(worldBorderMock.isInside(new Location(world, 101, 0, 101)));
