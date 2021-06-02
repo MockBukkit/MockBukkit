@@ -84,6 +84,7 @@ public class WorldMock implements World
 
 	private Environment environment = Environment.NORMAL;
 	private ServerMock server;
+	private WorldBorder worldBorder;
 	private Material defaultBlock;
 	private int height;
 	private int grassHeight;
@@ -94,6 +95,7 @@ public class WorldMock implements World
 	private int weatherDuration = 0;
 	private int thunderDuration = 0;
 	private boolean storming = false;
+
 
 	/**
 	 * Creates a new mock world.
@@ -108,6 +110,7 @@ public class WorldMock implements World
 		this.height = height;
 		this.grassHeight = grassHeight;
 		this.server = MockBukkit.getMock();
+		this.worldBorder = new WorldBorderMock(this);
 
 		// Set the default gamerule values.
 		gameRules.put(GameRule.ANNOUNCE_ADVANCEMENTS, true);
@@ -1158,8 +1161,7 @@ public class WorldMock implements World
 	@Override
 	public WorldBorder getWorldBorder()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return worldBorder;
 	}
 
 	@Override

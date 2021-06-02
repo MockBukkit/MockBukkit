@@ -316,4 +316,11 @@ class WorldMockTest
 		Chunk chunk = block.getChunk();
 		assertTrue(world.isChunkLoaded(chunk.getX(), chunk.getZ()));
 	}
+
+	@Test
+	void getWorldBorder_NotNull() {
+		WorldMock worldMock = new WorldMock();
+
+		assertNotNull(worldMock.getWorldBorder());
+	}
 }
