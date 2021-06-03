@@ -45,6 +45,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.event.player.PlayerToggleSprintEvent;
@@ -1247,4 +1248,48 @@ class PlayerMockTest
 		player.showPlayer(plugin1, player2);
 		assertTrue(player.canSee(player2));
 	}
+
+	@Test
+	public void testPlayerTeleport_WithCause_EventFired() {
+		player.teleport(player.getLocation().add(10, 10, 10), PlayerTeleportEvent.TeleportCause.CHORUS_FRUIT);
+
+		server.getPluginManager().assertEventFired(PlayerTeleportEvent.class);
+	}
+
+	@Test
+	public void testPlayerTeleport_WithoutCause_EventFired() {
+		player.teleport(player.getLocation().add(10, 10, 10));
+
+		server.getPluginManager().assertEventFired(PlayerTeleportEvent.class);
+	}
+
+	@Test
+	public void testPlayerTeleport_NotCanceled_PlayerTeleported() {
+		Location teleportLocation = player.getLocation().add(10, 10, 10);
+		player.teleport(teleportLocation);
+
+		player.assertTeleported(teleportLocation, 0);
+	}
+
+	@Test
+	public void testPlayerTeleport_Canceled_PlayerNotTeleported() {
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		Bukkit.getPluginManager().registerEvents(new Listener()
+		{
+			@EventHandler
+			public void onPlayerTeleport(PlayerTeleportEvent event)
+			{
+				event.setCancelled(true);
+			}
+		}, plugin);
+
+		Location originalLocation = player.getLocation();
+
+		player.teleport(player.getLocation().add(10, 10, 10));
+
+		player.assertNotTeleported();
+		player.assertLocation(originalLocation, 0);
+
+	}
+
 }
