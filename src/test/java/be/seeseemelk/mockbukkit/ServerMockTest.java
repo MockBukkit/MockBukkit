@@ -86,6 +86,17 @@ class ServerMockTest
 	}
 
 	@Test
+	void addPlayer_PlayersWithTheSameName()
+	{
+		server.addPlayer("Player");
+		assertThrows(IllegalStateException.class, ()->{
+			server.addPlayer("Player");
+		});
+
+		assertEquals(1, server.getOnlinePlayers().size());
+	}
+
+	@Test
 	void addPlayers_None_TwoUniquePlayers()
 	{
 		PlayerMock playerA = server.addPlayer();
@@ -157,9 +168,9 @@ class ServerMockTest
 	@Test
 	void getOfflinePlayers_CorrectArraySize()
 	{
-		server.setPlayers(1);
-		server.setOfflinePlayers(2);
-		assertEquals(3, server.getOfflinePlayers().length);
+		server.setPlayers(20);
+		server.setOfflinePlayers(42);
+		assertEquals(42, server.getOfflinePlayers().length);
 	}
 
 	@ParameterizedTest

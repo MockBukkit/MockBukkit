@@ -62,6 +62,9 @@ public class MockPlayerList
 
 	public void addPlayer(@NotNull PlayerMock player)
 	{
+		if(isPlayerAlreadyOnServer(player))
+			throw new IllegalStateException("Player is already on server!");
+
 		onlinePlayers.add(player);
 		offlinePlayers.add(player);
 	}
@@ -101,6 +104,16 @@ public class MockPlayerList
 	public boolean isSomeoneOnline()
 	{
 		return !onlinePlayers.isEmpty();
+	}
+
+	public boolean isPlayerAlreadyOnServer(@NotNull PlayerMock player)
+	{
+		if(onlinePlayers.contains(player)
+				|| getPlayerExact(player.getName()) != null
+				|| getPlayer(player.getUniqueId()) != null
+		)
+			return true;
+		else return false;
 	}
 
 	@NotNull

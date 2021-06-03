@@ -1009,6 +1009,7 @@ class PlayerMockTest
 		assertEquals(player.getFirstPlayed(), player.getLastPlayed());
 
 		// Player reconnects
+		server.removePlayer(player);
 		server.addPlayer(player);
 
 		assertEquals(firstPlayed, player.getFirstPlayed());

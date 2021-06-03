@@ -298,15 +298,8 @@ public class ServerMock extends Server.Spigot implements Server
 	public void setOfflinePlayers(int num)
 	{
 		assertMainThread();
-		playerList.clearOfflinePlayers();
 
-		for (PlayerMock player : getOnlinePlayers())
-		{
-			playerList.addPlayer(player);
-		}
-
-		for (int i = 0; i < num; i++)
-		{
+		for (int i = playerList.getOfflinePlayers().length; i < num; i++) {
 			OfflinePlayer player = playerFactory.createRandomOfflinePlayer();
 			playerList.addOfflinePlayer(player);
 		}
