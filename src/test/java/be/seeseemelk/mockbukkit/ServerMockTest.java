@@ -574,7 +574,8 @@ class ServerMockTest
 	}
 
 	@Test
-	void removePlayer_reconnectPlayer(){
+	void removePlayer_reconnectPlayer()
+	{
 		PlayerMock player = server.addPlayer();
 		server.removePlayer(player);
 		server.addPlayer(player);

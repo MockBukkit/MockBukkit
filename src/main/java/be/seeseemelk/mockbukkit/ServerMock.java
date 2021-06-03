@@ -299,7 +299,8 @@ public class ServerMock extends Server.Spigot implements Server
 	{
 		assertMainThread();
 
-		for (int i = 0; i < num; i++) {
+		for (int i = 0; i < num; i++)
+		{
 			OfflinePlayer player = playerFactory.createRandomOfflinePlayer();
 			playerList.addOfflinePlayer(player);
 		}
