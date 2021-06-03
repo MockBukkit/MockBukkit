@@ -258,7 +258,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * Removes previously added player, calls PlayerQuitEvent on server
 	 *
 	 * @param player
-	 * @return PlayerQuitEvent, that was called on a server.
+	 * @return PlayerQuitEvent that was called on a server.
 	 */
 	@NotNull
 	public PlayerQuitEvent removePlayer(@NotNull PlayerMock player)
