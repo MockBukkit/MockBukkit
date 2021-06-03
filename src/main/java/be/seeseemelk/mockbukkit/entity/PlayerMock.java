@@ -2181,18 +2181,6 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public boolean teleport(@NotNull Location location)
-	{
-		PlayerTeleportEvent playerTeleportEvent = new PlayerTeleportEvent(this, getLocation(), location);
-		Bukkit.getPluginManager().callEvent(playerTeleportEvent);
-
-		if (playerTeleportEvent.isCancelled()) {
-			return false;
-		}
-		return super.teleport(location);
-	}
-
-	@Override
 	public boolean teleport(@NotNull Location location, PlayerTeleportEvent.@NotNull TeleportCause cause)
 	{
 		Validate.notNull(location, "Location cannot be null");
