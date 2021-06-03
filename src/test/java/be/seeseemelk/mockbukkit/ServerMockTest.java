@@ -170,7 +170,7 @@ class ServerMockTest
 	{
 		server.setPlayers(20);
 		server.setOfflinePlayers(42);
-		assertEquals(42, server.getOfflinePlayers().length);
+		assertEquals(62, server.getOfflinePlayers().length);
 	}
 
 	@ParameterizedTest
@@ -573,6 +573,13 @@ class ServerMockTest
 		});
 	}
 
+	@Test
+	void removePlayer_reconnectPlayer(){
+		PlayerMock player = server.addPlayer();
+		server.removePlayer(player);
+		server.addPlayer(player);
+		assertEquals(1, server.getOfflinePlayers().length);
+	}
 }
 
 class TestRecipe implements Recipe
