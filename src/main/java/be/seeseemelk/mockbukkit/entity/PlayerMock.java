@@ -2181,7 +2181,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public boolean teleport(@NotNull Location location, PlayerTeleportEvent.@NotNull TeleportCause cause)
+	public boolean teleport(@NotNull Location location, @NotNull PlayerTeleportEvent.TeleportCause cause)
 	{
 		Validate.notNull(location, "Location cannot be null");
 		Validate.notNull(cause, "Cause cannot be null");
