@@ -32,7 +32,6 @@ import org.bukkit.SoundCategory;
 import org.bukkit.StructureType;
 import org.bukkit.TreeType;
 import org.bukkit.World;
-import org.bukkit.WorldBorder;
 import org.bukkit.WorldType;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
@@ -84,7 +83,7 @@ public class WorldMock implements World
 
 	private Environment environment = Environment.NORMAL;
 	private ServerMock server;
-	private WorldBorder worldBorder;
+	private WorldBorderMock worldBorder;
 	private Material defaultBlock;
 	private int height;
 	private int grassHeight;
@@ -110,7 +109,7 @@ public class WorldMock implements World
 		this.height = height;
 		this.grassHeight = grassHeight;
 		this.server = MockBukkit.getMock();
-		this.worldBorder = new WorldBorderMock(this);
+		this.worldBorder = new WorldBorderMock(this, server);
 
 		// Set the default gamerule values.
 		gameRules.put(GameRule.ANNOUNCE_ADVANCEMENTS, true);
@@ -1159,7 +1158,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public WorldBorder getWorldBorder()
+	public @NotNull WorldBorderMock getWorldBorder()
 	{
 		return worldBorder;
 	}

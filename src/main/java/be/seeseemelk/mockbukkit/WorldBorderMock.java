@@ -2,27 +2,30 @@ package be.seeseemelk.mockbukkit;
 
 import org.apache.commons.lang.Validate;
 import org.bukkit.Location;
+import org.bukkit.Server;
 import org.bukkit.World;
 import org.bukkit.WorldBorder;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.BoundingBox;
 import org.jetbrains.annotations.NotNull;
 
 public class WorldBorderMock implements WorldBorder
 {
 
-	World world;
-	double size;
-	double damageAmount = 0.2;
-	double damageBuffer = 5.0;
-	int warningDistance = 5;
-	int warningTime = 15;
-	double centerX = 0;
-	double centerZ = 0;
+	private final World world;
+	private final Server server;
+	private double size = 6.0E7;
+	private double damageAmount = 0.2;
+	private double damageBuffer = 5.0;
+	private int warningDistance = 5;
+	private int warningTime = 15;
+	private double centerX = 0;
+	private double centerZ = 0;
 
-	public WorldBorderMock(World world)
+	public WorldBorderMock(World world, Server server)
 	{
 		this.world = world;
-		reset();
+		this.server = server;
 	}
 
 	@Override
@@ -45,14 +48,35 @@ public class WorldBorderMock implements WorldBorder
 	@Override
 	public void setSize(double newSize)
 	{
-		setSize(newSize, 0);
+		this.size = newSize;
 	}
 
 	@Override
 	public void setSize(double newSize, long seconds)
 	{
-		// I dont think that implementing seconds here is very important
-		this.size = newSize;
+		if (seconds > 0) {
+			// Assumes server at perfect 20tps
+			double distance = newSize - size;
+			double ticksToTake = seconds * 20;
+
+			double distancePerTick = distance / ticksToTake;
+
+			server.getScheduler().runTaskTimer(null, new BukkitRunnable()
+			{
+				@Override
+				public void run()
+				{
+					if ((size < newSize && distance > 0) || (size > newSize && distance < 0)) {
+						size += distancePerTick;
+					} else {
+						size = newSize;
+						this.cancel();
+					}
+				}
+			}, 1, 1);
+		} else {
+			setSize(newSize);
+		}
 	}
 
 	@NotNull

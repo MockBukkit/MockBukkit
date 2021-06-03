@@ -7,16 +7,22 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 class WorldBorderMockTest
 {
 	private WorldBorder worldBorderMock;
 	private World world;
+	private ServerMock server;
 
 	@BeforeEach
 	public void setUp()
 	{
+		server = MockBukkit.mock();
 		world = new WorldMock();
 		worldBorderMock = world.getWorldBorder();
 	}
@@ -46,6 +52,39 @@ class WorldBorderMockTest
 		worldBorderMock.setSize(10);
 
 		assertEquals(10, worldBorderMock.getSize());
+	}
+
+	@Test
+	void setSize_OverTimeGoingDown_CompleteAtFullTime()
+	{
+		worldBorderMock.setSize(100);
+		worldBorderMock.setSize(50, 10);
+
+		server.getScheduler().performTicks(10 * 20);
+
+		assertEquals(50, worldBorderMock.getSize());
+	}
+
+	@Test
+	void setSize_OverTimeGoingUp_CompleteAtFullTime()
+	{
+		worldBorderMock.setSize(50);
+		worldBorderMock.setSize(100, 10);
+
+		server.getScheduler().performTicks(10 * 20);
+
+		assertEquals(100, worldBorderMock.getSize());
+	}
+
+	@Test
+	void setSize_OverTime_HalfwayAtHalfTime()
+	{
+		worldBorderMock.setSize(100);
+		worldBorderMock.setSize(50, 10);
+
+		server.getScheduler().performTicks(5 * 20);
+
+		assertEquals(75, worldBorderMock.getSize());
 	}
 
 
@@ -129,5 +168,4 @@ class WorldBorderMockTest
 
 		assertFalse(worldBorderMock.isInside(new Location(world, 101, 0, 101)));
 	}
-
 }
