@@ -153,7 +153,7 @@ public class WorldBorderMock implements WorldBorder
 		Validate.notNull(location, "Location cannot be null");
 
 		BoundingBox worldBorderBoundingBox = new BoundingBox(centerX - size, Double.MAX_VALUE, centerZ - size,
-				centerX + size, Double.MAX_VALUE * -1, centerZ + size);
+		        centerX + size, Double.MAX_VALUE * -1, centerZ + size);
 
 		return worldBorderBoundingBox.contains(location.toVector()) && location.getWorld() == world;
 	}
