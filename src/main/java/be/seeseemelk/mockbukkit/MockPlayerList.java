@@ -66,6 +66,14 @@ public class MockPlayerList
 		offlinePlayers.add(player);
 	}
 
+	public void removePlayer(@NotNull PlayerMock player) throws IllegalStateException
+	{
+		if(onlinePlayers.contains(player))
+			onlinePlayers.remove(player);
+		else
+			throw new IllegalStateException("Player is not connected!");
+	}
+
 	public void addOfflinePlayer(@NotNull OfflinePlayer player)
 	{
 		offlinePlayers.add(player);

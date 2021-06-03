@@ -23,6 +23,7 @@ import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.potion.PotionEffectType;
@@ -534,6 +535,32 @@ class ServerMockTest
 		}
 	}
 
+	@Test
+	void removePlayer_isRemovedFromOnlinePlayers()
+	{
+		PlayerMock player = server.addPlayer();
+		assertFalse(server.getOnlinePlayers().isEmpty());
+		server.removePlayer(player);
+		assertTrue(server.getOnlinePlayers().isEmpty());
+	}
+
+	@Test
+	void removePlayer_isEventCalled()
+	{
+		PlayerMock player = server.addPlayer();
+		server.removePlayer(player);
+		server.getPluginManager().assertEventFired(PlayerQuitEvent.class);
+	}
+
+	@Test
+	void removePlayer_removeRemovedPlayer()
+	{
+		PlayerMock player = server.addPlayer();
+		server.removePlayer(player);
+		assertThrows(IllegalStateException.class, () -> {
+			server.removePlayer(player);
+		});
+	}
 
 }
 

@@ -59,6 +59,7 @@ import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.generator.ChunkGenerator.ChunkData;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemFactory;
@@ -111,6 +112,7 @@ public class ServerMock extends Server.Spigot implements Server
 {
 	private static final String BUKKIT_VERSION = "1.16.5";
 	private static final String JOIN_MESSAGE = "%s has joined the server.";
+	private static final String QUIT_MESSAGE = "%s has exit the server.";
 	private static final String MOTD = "A Minecraft Server";
 
 	private final Logger logger = Logger.getLogger("ServerMock");
@@ -189,6 +191,12 @@ public class ServerMock extends Server.Spigot implements Server
 		entities.add(entity);
 	}
 
+	private void unregisterEntity(@NotNull EntityMock entity)
+	{
+		assertMainThread();
+		entities.remove(entity);
+	}
+
 	/**
 	 * Returns a set of entities that exist on the server instance.
 	 *
@@ -205,7 +213,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 *
 	 * @param player The player to add.
 	 */
-	public void addPlayer(PlayerMock player)
+	public void addPlayer(@NotNull PlayerMock player)
 	{
 		assertMainThread();
 		playerList.addPlayer(player);
@@ -222,6 +230,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 *
 	 * @return The player that was added.
 	 */
+	@NotNull
 	public PlayerMock addPlayer()
 	{
 		assertMainThread();
@@ -236,12 +245,32 @@ public class ServerMock extends Server.Spigot implements Server
 	 * @param name The name to give to the player.
 	 * @return The added player.
 	 */
-	public PlayerMock addPlayer(String name)
+	@NotNull
+	public PlayerMock addPlayer(@NotNull String name)
 	{
 		assertMainThread();
 		PlayerMock player = new PlayerMock(this, name);
 		addPlayer(player);
 		return player;
+	}
+
+	/**
+	 * Removes previously added player, calls PlayerQuitEvent on server
+	 *
+	 * @param player
+	 * @return PlayerQuitEvent, that was called on a server.
+	 */
+	@NotNull
+	public PlayerQuitEvent removePlayer(@NotNull PlayerMock player)
+	{
+		assertMainThread();
+		playerList.removePlayer(player);
+		PlayerQuitEvent event = new PlayerQuitEvent(player,
+				String.format(QUIT_MESSAGE, player.getName()));
+		this.getPluginManager().callEvent(event);
+
+		unregisterEntity(player);
+		return event;
 	}
 
 	/**
