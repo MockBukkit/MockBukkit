@@ -145,6 +145,16 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		closeInventory();
 	}
 
+	/**
+	 * This function sets online state. It should be used only by ServerMock.
+	 *
+	 * @param online Sets online parameter
+	 */
+	public void setOnline(boolean online)
+	{
+		this.online = online;
+	}
+
 	@Override
 	public @NotNull EntityType getType()
 	{
@@ -1013,6 +1023,18 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	/**
+	 * This function simulates data loss from consequences of
+	 * qutting the server by player. It should be used only in ServerMock.
+	 */
+	public void simulateDataLossAfterSave()
+	{
+		hiddenPlayers.clear();
+		hiddenPlayersDeprecated.clear();
+		heardSounds.clear();
+		sneaking = sprinting = false;
 	}
 
 	@Override

@@ -19,7 +19,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
@@ -547,7 +549,7 @@ class ServerMockTest
 	}
 
 	@Test
-	void removePlayer_isRemovedFromOnlinePlayers()
+	void removePlayer_IsRemovedFromOnlinePlayers()
 	{
 		PlayerMock player = server.addPlayer();
 		assertFalse(server.getOnlinePlayers().isEmpty());
@@ -556,7 +558,7 @@ class ServerMockTest
 	}
 
 	@Test
-	void removePlayer_isEventCalled()
+	void removePlayer_IsEventCalled()
 	{
 		PlayerMock player = server.addPlayer();
 		server.removePlayer(player);
@@ -564,7 +566,7 @@ class ServerMockTest
 	}
 
 	@Test
-	void removePlayer_removeRemovedPlayer()
+	void removePlayer_RemoveRemovedPlayer()
 	{
 		PlayerMock player = server.addPlayer();
 		server.removePlayer(player);
@@ -574,12 +576,59 @@ class ServerMockTest
 	}
 
 	@Test
-	void removePlayer_reconnectPlayer()
+	void removePlayer_ReconnectPlayer()
 	{
 		PlayerMock player = server.addPlayer();
 		server.removePlayer(player);
 		server.addPlayer(player);
 		assertEquals(1, server.getOfflinePlayers().length);
+	}
+
+	@Deprecated
+	@Test
+	void removePlayer_PlayerDataLoss_HiddenPlayers()
+	{
+		PlayerMock player1 = server.addPlayer();
+		PlayerMock player2 = server.addPlayer();
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		player1.hidePlayer(player2);
+		player1.hidePlayer(plugin, player2);
+		server.removePlayer(player1);
+		server.addPlayer(player1);
+		assertTrue(player1.canSee(player2));
+	}
+
+	@Test
+	void removePlayer_PlayerDataLoss_HeardSounds()
+	{
+		PlayerMock player = server.addPlayer();
+		player.playSound(new Location(null, 0, 0, 0),
+				Sound.AMBIENT_BASALT_DELTAS_ADDITIONS,1f,1f);
+		server.removePlayer(player);
+		server.addPlayer(player);
+		assertTrue(player.getHeardSounds().isEmpty());
+	}
+
+	@Test
+	void removePlayer_PlayerDataLoss_SneakingAndSprinting()
+	{
+		PlayerMock player = server.addPlayer();
+		player.setSneaking(true);
+		player.setSprinting(true);
+		server.removePlayer(player);
+		server.addPlayer(player);
+		assertFalse(player.isSprinting());
+		assertFalse(player.isSneaking());
+	}
+
+	@Test
+	void removePlayer_IsPlayerOnline()
+	{
+		PlayerMock player = server.addPlayer();
+		server.removePlayer(player);
+		assertFalse(player.isOnline());
+		server.addPlayer(player);
+		assertTrue(player.isOnline());
 	}
 }
 

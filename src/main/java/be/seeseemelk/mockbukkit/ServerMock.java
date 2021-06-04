@@ -222,6 +222,7 @@ public class ServerMock extends Server.Spigot implements Server
 		Bukkit.getPluginManager().callEvent(playerJoinEvent);
 
 		player.setLastPlayed(getCurrentServerTime());
+		player.setOnline(true);
 		registerEntity(player);
 	}
 
@@ -270,6 +271,8 @@ public class ServerMock extends Server.Spigot implements Server
 		this.getPluginManager().callEvent(event);
 
 		unregisterEntity(player);
+		player.simulateDataLossAfterSave();
+		player.setOnline(false);
 		return event;
 	}
 
