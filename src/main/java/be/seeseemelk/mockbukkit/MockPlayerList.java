@@ -108,12 +108,9 @@ public class MockPlayerList
 
 	public boolean isPlayerAlreadyOnServer(@NotNull PlayerMock player)
 	{
-		if(onlinePlayers.contains(player)
+		return 	onlinePlayers.contains(player)
 				|| getPlayerExact(player.getName()) != null
-				|| getPlayer(player.getUniqueId()) != null
-		)
-			return true;
-		else return false;
+				|| getPlayer(player.getUniqueId()) != null;
 	}
 
 	@NotNull
