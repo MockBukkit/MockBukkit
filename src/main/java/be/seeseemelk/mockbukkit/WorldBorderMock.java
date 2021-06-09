@@ -9,34 +9,54 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.BoundingBox;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * A mock world border object.
+ */
 public class WorldBorderMock implements WorldBorder
 {
 
+	private static final double DEFAULT_BORDER_SIZE = 6.0E7;
+	private static final double DEFAULT_DAMAGE_AMOUNT = 0.2;
+	private static final double DEFAULT_DAMAGE_BUFFER = 5.0;
+	private static final int DEFAULT_WARNING_DISTANCE = 5;
+	private static final int DEFAULT_WARNING_TIME = 15;
+	private static final double DEFAULT_CENTER_X = 0;
+	private static final double DEFAULT_CENTER_Z = 0;
+	private static final double MAX_CENTER_VALUE = 3.0E7D;
+
 	private final World world;
 	private final Server server;
-	private double size = 6.0E7;
-	private double damageAmount = 0.2;
-	private double damageBuffer = 5.0;
-	private int warningDistance = 5;
-	private int warningTime = 15;
-	private double centerX = 0;
-	private double centerZ = 0;
+	private double size;
+	private double damageAmount;
+	private double damageBuffer;
+	private int warningDistance;
+	private int warningTime;
+	private double centerX;
+	private double centerZ;
 
+	/**
+	 * Creates a new world border mock
+	 *
+	 * @param world The world it is the border of
+	 * @param server The server it is in
+	 */
 	public WorldBorderMock(World world, Server server)
 	{
 		this.world = world;
 		this.server = server;
+
+		reset();
 	}
 
 	@Override
 	public void reset()
 	{
-		setSize(6.0E7);
-		setDamageAmount(0.2);
-		setDamageBuffer(5.0);
-		setWarningDistance(5);
-		setWarningTime(15);
-		setCenter(0, 0);
+		setSize(DEFAULT_BORDER_SIZE);
+		setDamageAmount(DEFAULT_DAMAGE_AMOUNT);
+		setDamageBuffer(DEFAULT_DAMAGE_BUFFER);
+		setWarningDistance(DEFAULT_WARNING_DISTANCE);
+		setWarningTime(DEFAULT_WARNING_TIME);
+		setCenter(DEFAULT_CENTER_X, DEFAULT_CENTER_Z);
 	}
 
 	@Override
@@ -101,6 +121,8 @@ public class WorldBorderMock implements WorldBorder
 	@Override
 	public void setCenter(double x, double z)
 	{
+		x = Math.min(MAX_CENTER_VALUE, Math.max(-MAX_CENTER_VALUE, x));
+		z = Math.min(MAX_CENTER_VALUE, Math.max(-MAX_CENTER_VALUE, z));
 		this.centerX = x;
 		this.centerZ = z;
 	}
