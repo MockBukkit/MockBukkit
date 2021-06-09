@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
-import static org.junit.jupiter.api.Assumptions.assumeTrue;
+import static org.junit.jupiter.api.Assumptions.assumeFalse;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -35,6 +35,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
@@ -68,6 +69,8 @@ import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryViewMock;
 import be.seeseemelk.mockbukkit.inventory.SimpleInventoryViewMock;
 import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 
 class PlayerMockTest
 {
@@ -314,7 +317,9 @@ class PlayerMockTest
 		player.setGameMode(GameMode.SURVIVAL);
 		BlockMock block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
 		block.setType(Material.STONE);
-		assertTrue(player.simulateBlockBreak(block));
+		BlockBreakEvent event = player.simulateBlockBreak(block);
+		assertNotNull(event);
+		assertFalse(event.isCancelled());
 		server.getPluginManager().assertEventFired(BlockDamageEvent.class);
 		server.getPluginManager().assertEventFired(BlockBreakEvent.class);
 		block.assertType(Material.AIR);
@@ -327,7 +332,9 @@ class PlayerMockTest
 		player.setGameMode(GameMode.CREATIVE);
 		BlockMock block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
 		block.setType(Material.STONE);
-		assertTrue(player.simulateBlockBreak(block));
+		BlockBreakEvent event = player.simulateBlockBreak(block);
+		assertNotNull(event);
+		assertFalse(event.isCancelled());
 		server.getPluginManager().assertEventFired(BlockBreakEvent.class);
 		block.assertType(Material.AIR);
 	}
@@ -339,7 +346,7 @@ class PlayerMockTest
 		player.setGameMode(GameMode.SPECTATOR);
 		BlockMock block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
 		block.setType(Material.STONE);
-		assertFalse(player.simulateBlockBreak(block));
+		assertNull(player.simulateBlockBreak(block));
 		block.assertType(Material.STONE);
 	}
 
@@ -350,7 +357,7 @@ class PlayerMockTest
 		player.setGameMode(GameMode.ADVENTURE);
 		BlockMock block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
 		block.setType(Material.STONE);
-		assertFalse(player.simulateBlockBreak(block));
+		assertNull(player.simulateBlockBreak(block));
 		block.assertType(Material.STONE);
 	}
 
@@ -368,7 +375,9 @@ class PlayerMockTest
 		}, plugin);
 		BlockMock block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
 		block.setType(Material.STONE);
-		assertFalse(player.simulateBlockBreak(block));
+		BlockBreakEvent event = player.simulateBlockBreak(block);
+		assertNotNull(event);
+		assertTrue(event.isCancelled());
 		block.assertType(Material.STONE);
 	}
 
@@ -386,7 +395,7 @@ class PlayerMockTest
 		}, plugin);
 		BlockMock block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
 		block.setType(Material.STONE);
-		assertFalse(player.simulateBlockBreak(block));
+		assertNull(player.simulateBlockBreak(block));
 		block.assertType(Material.STONE);
 	}
 
@@ -405,7 +414,9 @@ class PlayerMockTest
 		}, plugin);
 		BlockMock block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
 		block.setType(Material.STONE);
-		assertFalse(player.simulateBlockBreak(block));
+		BlockBreakEvent event = player.simulateBlockBreak(block);
+		assertNotNull(event);
+		assertTrue(event.isCancelled());
 		block.assertType(Material.STONE);
 	}
 
@@ -424,7 +435,9 @@ class PlayerMockTest
 		}, plugin);
 		BlockMock block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
 		block.setType(Material.STONE);
-		assertTrue(player.simulateBlockBreak(block));
+		BlockBreakEvent event = player.simulateBlockBreak(block);
+		assertNotNull(event);
+		assertFalse(event.isCancelled());
 		block.assertType(Material.AIR);
 	}
 
@@ -433,22 +446,18 @@ class PlayerMockTest
 	{
 		player.setGameMode(GameMode.SURVIVAL);
 		BlockMock block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
-		assertTrue(player.simulateBlockDamage(block));
+		BlockDamageEvent event = player.simulateBlockDamage(block);
+		assertNotNull(event);
+		assertFalse(event.isCancelled());
 	}
 
-	@Test
-	void simulateBlockDamage_NotSurvival_BlockNotDamaged()
+	@ParameterizedTest
+	@EnumSource(value = GameMode.class, mode = EnumSource.Mode.EXCLUDE, names = {"SURVIVAL"})
+	void simulateBlockDamage_NotSurvival_BlockNotDamaged(GameMode nonSurvivalGameMode)
 	{
-		GameMode[] nonSurvivalGameModes = { GameMode.CREATIVE, GameMode.ADVENTURE,
-		                                    GameMode.SPECTATOR
-		                                  };
-
-		for (GameMode gm : nonSurvivalGameModes)
-		{
-			player.setGameMode(gm);
-			Block block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
-			assertFalse(player.simulateBlockDamage(block), "Block was damaged while in gamemode " + gm.name());
-		}
+		player.setGameMode(nonSurvivalGameMode);
+		Block block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
+		assertNull(player.simulateBlockDamage(block), "Block was damaged while in gamemode " + nonSurvivalGameMode.name());
 	}
 
 	@Test
@@ -474,7 +483,11 @@ class PlayerMockTest
 
 		BlockMock block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
 		block.setType(Material.STONE);
-		assumeTrue(player.simulateBlockDamage(block));
+
+		BlockDamageEvent event = player.simulateBlockDamage(block);
+		assertNotNull(event);
+		assumeFalse(event.isCancelled());
+
 		assertFalse(wasBroken.get(), "BlockBreakEvent was fired");
 		block.assertType(Material.STONE);
 	}
@@ -502,7 +515,10 @@ class PlayerMockTest
 
 		BlockMock block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
 		block.setType(Material.STONE);
-		assumeTrue(player.simulateBlockDamage(block));
+		BlockDamageEvent event = player.simulateBlockDamage(block);
+		assertNotNull(event);
+		assumeFalse(event.isCancelled());
+
 		assertEquals(1, brokenCount.get(), "BlockBreakEvent was not fired only once");
 		block.assertType(Material.AIR);
 	}
@@ -530,7 +546,9 @@ class PlayerMockTest
 
 		BlockMock block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
 		block.setType(Material.STONE);
-		assumeTrue(player.simulateBlockBreak(block));
+		BlockBreakEvent event = player.simulateBlockBreak(block);
+		assertNotNull(event);
+		assumeFalse(event.isCancelled());
 		assertEquals(1, brokenCount.get(), "BlockBreakEvent was not fired only once");
 		block.assertType(Material.AIR);
 	}
@@ -1055,9 +1073,10 @@ class PlayerMockTest
 		Location location = new Location(player.getWorld(), 0, 100, 0);
 		GameMode originalGM = player.getGameMode();
 		player.setGameMode(GameMode.SURVIVAL);
-		boolean worked = player.simulateBlockPlace(Material.STONE, location);
+		BlockPlaceEvent event = player.simulateBlockPlace(Material.STONE, location);
 		player.setGameMode(originalGM);
-		assertTrue(worked);
+		assertNotNull(event);
+		assertFalse(event.isCancelled());
 	}
 
 	@Test
@@ -1066,9 +1085,9 @@ class PlayerMockTest
 		Location location = new Location(player.getWorld(), 0, 100, 0);
 		GameMode originalGM = player.getGameMode();
 		player.setGameMode(GameMode.ADVENTURE);
-		boolean worked = player.simulateBlockPlace(Material.STONE, location);
+		BlockPlaceEvent event = player.simulateBlockPlace(Material.STONE, location);
 		player.setGameMode(originalGM);
-		assertFalse(worked);
+		assertNull(event);
 	}
 
 	@Test
@@ -1076,7 +1095,8 @@ class PlayerMockTest
 	{
 		World world = server.addSimpleWorld("world");
 		player.setLocation(new Location(world, 0, 0, 0));
-		player.simulatePlayerMove(new Location(world, 10, 0, 0));
+		PlayerMoveEvent event = player.simulatePlayerMove(new Location(world, 10, 0, 0));
+		assertFalse(event.isCancelled());
 		server.getPluginManager().assertEventFired(PlayerMoveEvent.class);
 		assertEquals(10.0, player.getLocation().getX());
 	}
@@ -1095,7 +1115,8 @@ class PlayerMockTest
 		}, plugin);
 		World world = server.addSimpleWorld("world");
 		player.setLocation(new Location(world, 0, 0, 0));
-		player.simulatePlayerMove(new Location(world, 10, 0, 0));
+		PlayerMoveEvent event = player.simulatePlayerMove(new Location(world, 10, 0, 0));
+		assertTrue(event.isCancelled());
 		server.getPluginManager().assertEventFired(PlayerMoveEvent.class);
 		assertEquals(0.0, player.getLocation().getX());
 	}
@@ -1117,7 +1138,8 @@ class PlayerMockTest
 	@Test
 	void testSneakEventFired()
 	{
-		player.simulateSneak(true);
+		PlayerToggleSneakEvent event = player.simulateSneak(true);
+		assertNotNull(event);
 		assertTrue(player.isSneaking());
 		server.getPluginManager().assertEventFired(PlayerToggleSneakEvent.class);
 	}
@@ -1125,7 +1147,8 @@ class PlayerMockTest
 	@Test
 	void testSprintEventFired()
 	{
-		player.simulateSprint(true);
+		PlayerToggleSprintEvent event = player.simulateSprint(true);
+		assertNotNull(event);
 		assertTrue(player.isSprinting());
 		server.getPluginManager().assertEventFired(PlayerToggleSprintEvent.class);
 	}
@@ -1133,7 +1156,8 @@ class PlayerMockTest
 	@Test
 	void testFlightEventFired()
 	{
-		player.simulateToggleFlight(true);
+		PlayerToggleFlightEvent event = player.simulateToggleFlight(true);
+		assertNotNull(event);
 		assertTrue(player.isFlying());
 		server.getPluginManager().assertEventFired(PlayerToggleFlightEvent.class);
 	}
@@ -1167,7 +1191,7 @@ class PlayerMockTest
 	}
 
 	@Test
-	public void testPlayerHide_OldAndNewPluginWorksSimultanously()
+	public void testPlayerHide_OldAndNewPluginWorksSimultaneously()
 	{
 		MockPlugin plugin1 = MockBukkit.createMockPlugin("plugin1");
 		PlayerMock player2 = server.addPlayer();
