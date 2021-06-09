@@ -194,6 +194,7 @@ Several projects have utilized MockBukkit for their needs already.
 If you want to see some projects that are using MockBukkit right now, feel free to take a peak:
 - [Slimefun/Slimefun4](https://github.com/Slimefun/Slimefun4/tree/master/src/test/java/io/github/thebusybiscuit/slimefun4/testing/tests) (400+ Unit Tests)
 - [lluiscamino/MultiverseHardcore](https://github.com/lluiscamino/MultiverseHardcore/tree/master/src/test/java/me/lluiscamino/multiversehardcore) (75+ Unit Tests)
+- [carelesshippo/SpectatorModeRewrite](https://github.com/carelesshippo/SpectatorModeRewrite/tree/dev/src/test/java/me/ohowe12/spectatormode) (50+ Unit Tests)
 - [JacksonChen666/treecapitator](https://github.com/JacksonChen666/treecapitator/tree/master/src/test/java/com/jacksonchen666/treecapitator) (30+ Unit Tests)
 - [axelrindle/PocketKnife](https://github.com/axelrindle/PocketKnife/tree/main/api/src/test/kotlin) (30+ Unit Tests)
 - *and more! (If you want to see your plugin here, open up an issue and we'll consider adding it)*
