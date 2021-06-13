@@ -94,13 +94,13 @@ public class ItemFactoryMock implements ItemFactory
 	@Override
 	public boolean equals(ItemMeta meta1, ItemMeta meta2)
 	{
-		if (meta1 != null && meta2 != null)
+		if (meta1 == null)
 		{
-			return meta1.equals(meta2);
+			return meta2 == null;
 		}
 		else
 		{
-			return false;
+			return meta1.equals(meta2);
 		}
 	}
 
