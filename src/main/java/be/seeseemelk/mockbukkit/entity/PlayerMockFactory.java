@@ -8,8 +8,8 @@ import java.util.UUID;
 
 public final class PlayerMockFactory {
 	private final ServerMock server;
-	private int currentNameIndex;
 	private final Random random = new Random();
+	private int currentNameIndex;
 
 	public PlayerMockFactory(@NotNull ServerMock server)
 	{
