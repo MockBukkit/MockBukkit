@@ -34,7 +34,7 @@ public class Coordinate
 	@Override
 	public int hashCode()
 	{
-		return (x << 0) + (y << 8) + (z << 16);
+		return (x) + (y << 8) + (z << 16);
 	}
 
 	@Override
