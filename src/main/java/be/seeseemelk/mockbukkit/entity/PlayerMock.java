@@ -234,6 +234,8 @@ public class PlayerMock extends EntityMock implements Player
 		EntityDamageEvent event = new EntityDamageEvent(this, DamageCause.CUSTOM, modifiers, modifierFunctions);
 		event.setDamage(amount);
 		Bukkit.getPluginManager().callEvent(event);
+		e = event;
+
 		if (!event.isCancelled())
 		{
 			setHealth(health - amount);
@@ -251,6 +253,7 @@ public class PlayerMock extends EntityMock implements Player
 				modifiers, modifierFunctions);
 		event.setDamage(amount);
 		Bukkit.getPluginManager().callEvent(event);
+		e = event;
 		if (!event.isCancelled())
 		{
 			setHealth(health - amount);
