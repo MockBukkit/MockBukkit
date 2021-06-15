@@ -18,3 +18,4 @@
 #IDE Specific
 /out
 *.iml
+repositoryPassword.txt
