@@ -133,7 +133,7 @@ public class MockBanList implements BanList
         	{
         		return true;
         	}
-        	else if (obj != null && obj instanceof BanEntry)
+        	else if (obj instanceof BanEntry)
         	{
         		BanEntry banEntry = (BanEntry) obj;
         		return target.equals(banEntry.getTarget()) && expires.equals(banEntry.getExpiration()) && reason.equals(banEntry.getReason())
