@@ -251,145 +251,190 @@ public abstract class InventoryMock implements org.bukkit.inventory.Inventory
 	@Override
 	public int getMaxStackSize()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return 64;
 	}
 	
 	@Override
-	public void setMaxStackSize(int size)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-		
-	}
+	public void setMaxStackSize(int size) {}
 	
 	@Override
 	public HashMap<Integer, ItemStack> removeItem(ItemStack... items) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		for (int i = 0; i < this.items.length; i++) {
+			if(items[i].equals( this.items[i] )){
+				items[i] = null;
+			}
+		}
+		return new HashMap<>();
+
 	}
 	
 	@Override
 	public boolean contains(int materialId)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		for (ItemStack stack : this.items) {
+			if(stack.getType().getId() == materialId){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	@Override
 	public boolean contains(Material material) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+
+		for (ItemStack stack : this.items) {
+			if(stack.getType() == material){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	@Override
 	public boolean contains(ItemStack item)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return Arrays.asList(items).contains(item);
 	}
 	
 	@Override
 	public boolean contains(int materialId, int amount)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+
+		for (ItemStack stack : this.items) {
+			if(stack.getType().getId() == materialId && stack.getAmount() == amount){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	@Override
 	public boolean contains(Material material, int amount) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+
+		for (ItemStack stack : this.items) {
+			if(stack.getType() == material && stack.getAmount() == amount){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	@Override
 	public boolean contains(ItemStack item, int amount)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		for (ItemStack stack : this.items) {
+			if(stack.equals(item) && stack.getAmount() == amount){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	@Override
 	public boolean containsAtLeast(ItemStack item, int amount)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		int amountOnInv = 0;
+		for (ItemStack stack : this.items) {
+			if(stack.equals(item)){
+				amountOnInv+= stack.getAmount();
+			}
+		}
+		return amountOnInv>amount;
 	}
 	
 	@Override
 	public HashMap<Integer, ? extends ItemStack> all(int materialId)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		HashMap<Integer, ItemStack> items = new HashMap<>();
+		for (int i = 0; i < this.items.length; i++) {
+			if(this.items[i].getTypeId() == materialId){
+				items.put(i, this.items[i]);
+			}
+		}
+		return items;
 	}
 	
 	@Override
 	public HashMap<Integer, ? extends ItemStack> all(Material material) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+
+		HashMap<Integer, ItemStack> items = new HashMap<>();
+		for (int i = 0; i < this.items.length; i++) {
+			if(this.items[i].getType() == material){
+				items.put(i, this.items[i]);
+			}
+		}
+		return items;
 	}
 	
 	@Override
 	public HashMap<Integer, ? extends ItemStack> all(ItemStack item)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+
+		HashMap<Integer, ItemStack> items = new HashMap<>();
+		for (int i = 0; i < this.items.length; i++) {
+			if(this.items[i].equals(item)){
+				items.put(i, this.items[i]);
+			}
+		}
+		return items;
 	}
 	
 	@Override
 	public int first(int materialId)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		int i = 0;
+		for (ItemStack stack : this.items) {
+			if(stack == null) stack = new ItemStack(Material.AIR);
+			if(stack.getType().getId() == materialId){
+				return i;
+			}
+			i++;
+		}
+		return -1;
 	}
 	
 	@Override
 	public int first(Material material) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return first(material.getId());
 	}
 	
 	@Override
 	public int first(ItemStack item)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return first(item.getType());
 	}
 	
 	@Override
 	public int firstEmpty()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return first(Material.AIR);
 	}
 	
 	@Override
 	public void remove(int materialId)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-		
+		for (int i = 0; i < items.length; i++) {
+			if(items[i].getTypeId() == materialId){
+				items[i] = null;
+			}
+		}
 	}
 	
 	@Override
 	public void remove(Material material) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-		
+		remove(material.getId());
 	}
 	
 	@Override
 	public void remove(ItemStack item)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-		
+		remove(item.getType());
 	}
 	
 	@Override
@@ -403,9 +448,7 @@ public abstract class InventoryMock implements org.bukkit.inventory.Inventory
 	@Override
 	public void clear()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-		
+		Arrays.fill(items, null);
 	}
 	
 	@Override
@@ -418,8 +461,7 @@ public abstract class InventoryMock implements org.bukkit.inventory.Inventory
 	@Override
 	public ListIterator<ItemStack> iterator(int index)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return Arrays.asList(items).listIterator(index);
 	}
 
 }
