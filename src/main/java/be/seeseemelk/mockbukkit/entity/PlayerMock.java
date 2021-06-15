@@ -51,14 +51,8 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.util.Vector;
 
 import java.net.InetSocketAddress;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.EnumMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
 
@@ -245,7 +239,6 @@ public class PlayerMock extends EntityMock implements Player
 			setHealth(health - amount);
 		}
 	}
-	
 	@Override
 	public void damage(double amount, Entity source)
 	{
@@ -368,26 +361,23 @@ public class PlayerMock extends EntityMock implements Player
 	{
 		getInventory().setItemInHand(item);
 	}
-	
+	ItemStack itemOnCursor;
 	@Override
 	public ItemStack getItemOnCursor()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return itemOnCursor;
 	}
 	
 	@Override
 	public void setItemOnCursor(ItemStack item)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		itemOnCursor = item;
 	}
-	
+	boolean isSleeping;
 	@Override
 	public boolean isSleeping()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return isSleeping;
 	}
 	
 	@Override
@@ -414,22 +404,19 @@ public class PlayerMock extends EntityMock implements Player
 	@Override
 	public double getEyeHeight()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return 1.6;
 	}
 	
 	@Override
 	public double getEyeHeight(boolean ignorePose)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getEyeHeight();
 	}
 	
 	@Override
 	public Location getEyeLocation()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getLocation().clone().add(0,getEyeHeight(),0);
 	}
 	
 	@Override
@@ -498,78 +485,86 @@ public class PlayerMock extends EntityMock implements Player
 	@Override
 	public double getLastDamage()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if(e != null){
+			return e.getDamage();
+		}
+		return 0.0;
 	}
 	
 	@Override
 	public void setLastDamage(double damage)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		e.setDamage(damage);
 	}
-	
+	long lastTimeDamage;
 	@Override
 	public int getNoDamageTicks()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return (int) ((System.currentTimeMillis()-lastTimeDamage)/1000)/20;
 	}
 	
 	@Override
 	public void setNoDamageTicks(int ticks)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		lastTimeDamage = System.currentTimeMillis()-ticks;
 	}
 	
 	@Override
 	public Player getKiller()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if(e instanceof EntityDamageByEntityEvent){
+			EntityDamageByEntityEvent ev = ((EntityDamageByEntityEvent) e);
+
+			if(ev.getDamager() instanceof Player){
+				return ((Player) ev.getDamager());
+			}
+		}
+		return null;
 	}
-	
+	Set<PotionEffect> potionEffects = new HashSet<>();
 	@Override
 	public boolean addPotionEffect(PotionEffect effect)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		boolean existed = hasPotionEffect(effect.getType());
+		potionEffects.add(effect);
+		return !existed;
 	}
 	
 	@Override
 	public boolean addPotionEffect(PotionEffect effect, boolean force)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		boolean existed = potionEffects.stream().anyMatch(p->effect.getType() == p.getType());
+
+		if(force)
+			potionEffects.removeIf(p-> p.getType() == effect.getType());
+		potionEffects.add(effect);
+		return force || !existed;
 	}
 	
 	@Override
 	public boolean addPotionEffects(Collection<PotionEffect> effects)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		boolean existed = potionEffects.stream().map(PotionEffect::getType).collect(Collectors.toList()).containsAll(effects.stream().map(PotionEffect::getType).collect(Collectors.toList()));
+		this.potionEffects.addAll(effects);
+		return !existed;
 	}
 	
 	@Override
 	public boolean hasPotionEffect(PotionEffectType type)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return potionEffects.stream().anyMatch(p -> p.getType() == type);
 	}
 	
 	@Override
 	public void removePotionEffect(PotionEffectType type)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		potionEffects.removeIf(p -> p.getType()== type);
 	}
 	
 	@Override
 	public Collection<PotionEffect> getActivePotionEffects()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return new ArrayList<>(potionEffects);
 	}
 	
 	@Override
@@ -610,15 +605,13 @@ public class PlayerMock extends EntityMock implements Player
 	@Override
 	public boolean getCanPickupItems()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return true;
 	}
 	
 	@Override
 	public boolean isLeashed()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return false;
 	}
 	
 	@Override
@@ -701,8 +694,7 @@ public class PlayerMock extends EntityMock implements Player
 	@Override
 	public boolean hasPlayedBefore()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return false;
 	}
 	
 	@Override
@@ -793,33 +785,29 @@ public class PlayerMock extends EntityMock implements Player
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+	boolean isSneaking;
 	@Override
 	public boolean isSneaking()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return isSneaking;
 	}
 	
 	@Override
 	public void setSneaking(boolean sneak)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		isSneaking = sneak;
 	}
-	
+	boolean isSprinting;
 	@Override
 	public boolean isSprinting()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return isSprinting;
 	}
 	
 	@Override
 	public void setSprinting(boolean sprinting)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		isSprinting = sprinting;
 	}
 	
 	@Override
@@ -1144,40 +1132,39 @@ public class PlayerMock extends EntityMock implements Player
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+	int level;
+	float xp;
 	@Override
 	public void giveExpLevels(int amount)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		level += amount;
 	}
 	
 	@Override
 	public float getExp()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return xp;
 	}
 	
 	@Override
 	public void setExp(float exp)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		xp = exp;
+		if(xp > 1){
+			level++;
+		}
 	}
 	
 	@Override
 	public int getLevel()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return level;
 	}
 	
 	@Override
 	public void setLevel(int level)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.level = level;
 	}
 	
 	@Override
@@ -1260,50 +1247,44 @@ public class PlayerMock extends EntityMock implements Player
 	@Override
 	public boolean getAllowFlight()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return canFly;
 	}
-	
+	boolean canFly;
+	boolean isFlying;
 	@Override
 	public void setAllowFlight(boolean flight)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		canFly = flight;
 	}
 	
 	@Override
 	public void hidePlayer(Player player)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		hiddenPlayers.put(this,player);
 	}
 	
 	@Override
 	public void showPlayer(Player player)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		hiddenPlayers.remove(this,player);
 	}
-	
+	HashMap<Player,Player> hiddenPlayers = new HashMap<>();
 	@Override
 	public boolean canSee(Player player)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return hiddenPlayers.containsKey(this) && hiddenPlayers.containsValue(player);
 	}
 	
 	@Override
 	public boolean isFlying()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.isFlying;
 	}
 	
 	@Override
 	public void setFlying(boolean value)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.isFlying = true;
 	}
 	
 	@Override
@@ -1351,15 +1332,13 @@ public class PlayerMock extends EntityMock implements Player
 	@Override
 	public Scoreboard getScoreboard()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return scoreboard;
 	}
-	
+	Scoreboard scoreboard;
 	@Override
 	public void setScoreboard(Scoreboard scoreboard) throws IllegalArgumentException, IllegalStateException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.scoreboard = scoreboard;
 	}
 	
 	@Override
@@ -1421,7 +1400,7 @@ public class PlayerMock extends EntityMock implements Player
 	@Override
 	public Player.Spigot spigot()
 	{
-		throw new UnimplementedOperationException();
+		return new PlayerSpigot(this);
 	}
 	
 	@Override
