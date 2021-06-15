@@ -58,6 +58,7 @@ import static org.junit.Assert.assertEquals;
 
 public class PlayerMock extends EntityMock implements Player
 {
+	int foodLevel;
 	private static final double MAX_HEALTH = 20.0;
 	private boolean online;
 	private PlayerInventoryMock inventory = null;
@@ -1215,15 +1216,13 @@ public class PlayerMock extends EntityMock implements Player
 	@Override
 	public int getFoodLevel()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return foodLevel;
 	}
 	
 	@Override
 	public void setFoodLevel(int value)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		foodLevel = value;
 	}
 	
 	@Override
