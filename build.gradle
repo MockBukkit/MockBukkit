@@ -8,7 +8,7 @@ targetCompatibility = 1.8
 publishing {
 	publications {
 		maven(MavenPublication) {
-			groupId = "org.patzmc."
+			groupId = "org.patzmc"
 			artifactId = 'MockBukkit'
 			version = '1.0.0'
 
