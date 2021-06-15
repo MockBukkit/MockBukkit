@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit;
 
-import org.junit.AssumptionViolatedException;
+
+import org.junit.internal.AssumptionViolatedException;
 
 public class UnimplementedOperationException extends AssumptionViolatedException
 {
