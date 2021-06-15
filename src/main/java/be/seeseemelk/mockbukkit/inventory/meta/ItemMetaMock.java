@@ -227,7 +227,7 @@ public class ItemMetaMock implements ItemMeta
 		// TODO Auto-generated method stub
 		if (!hasEnchants())
 			return false;
-		return enchantments.containsKey(ench);
+		return enchantments.keySet().stream().anyMatch((ench1)->ench1.equals(ench));
 	}
 	
 	@Override

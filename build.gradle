@@ -1,6 +1,5 @@
 plugins{
 	id "java"
-	id "jacoco"
 	id 'maven-publish'
 }
 sourceCompatibility = 1.8
@@ -46,8 +45,6 @@ dependencies {
 }
 
 test {
-	useJUnitPlatform()
-	testLogging {
-		events "passed", "skipped", "failed"
-	}
+//	useJUnitPlatform()
+
 }

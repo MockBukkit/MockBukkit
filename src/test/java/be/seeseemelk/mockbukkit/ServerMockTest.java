@@ -2,12 +2,12 @@ package be.seeseemelk.mockbukkit;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assume.assumeTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.io.File;
 import java.io.IOException;
@@ -90,7 +90,7 @@ public class ServerMockTest
 		assertEquals(playerB, player2);
 		assertNotEquals(player1, player2);
 	}
-	
+
 	@Test
 	public void setPlayers_Two_TwoUniquePlayers()
 	{

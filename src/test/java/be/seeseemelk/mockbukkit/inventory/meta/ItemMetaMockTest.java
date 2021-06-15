@@ -1,5 +1,9 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
+import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -190,7 +194,12 @@ public class ItemMetaMockTest
 		meta.setLore(Arrays.asList("Hello", "world"));
 		meta.assertLore("Hello", "world");
 	}
-	
+	@Test
+	public void addEnchantment(){
+		meta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
+		assertTrue(meta.hasEnchant(Enchantment.DAMAGE_ALL));
+
+	}
 	@Test(expected = AssertionError.class)
 	public void assertLore_InorrectLore_Asserts()
 	{
