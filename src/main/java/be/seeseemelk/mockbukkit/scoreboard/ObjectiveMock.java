@@ -18,6 +18,10 @@ public class ObjectiveMock implements Objective
 	private String displayName;
 	private DisplaySlot displaySlot;
 
+	public Map<String, ScoreMock> getScores() {
+		return scores;
+	}
+
 	public ObjectiveMock(ScoreboardMock scoreboard, String name, String criteria)
 	{
 		this.scoreboard = scoreboard;

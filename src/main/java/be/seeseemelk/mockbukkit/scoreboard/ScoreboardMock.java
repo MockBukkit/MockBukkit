@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.stream.Collectors;
 
 import org.bukkit.OfflinePlayer;
@@ -58,29 +59,41 @@ public class ScoreboardMock implements Scoreboard
 	@Override
 	public Set<Score> getScores(OfflinePlayer player) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Set<Score> score = new CopyOnWriteArraySet<>();
+		getObjectives().forEach(objective -> {
+			if(objective.getScore(player).isScoreSet()){
+				score.add(objective.getScore(player));
+			}
+		});
+		return score;
 	}
 	
 	@Override
 	public Set<Score> getScores(String entry) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Set<Score> score = new CopyOnWriteArraySet<>();
+		getObjectives().forEach(objective -> {
+			if(objective.getScore(entry).isScoreSet()){
+				score.add(objective.getScore(entry));
+			}
+		});
+		return score;
 	}
 	
 	@Override
 	public void resetScores(OfflinePlayer player) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.objectives.forEach((name, objective) ->{
+			objective.getScores().remove(player.getName());
+		});
 	}
 	
 	@Override
 	public void resetScores(String entry) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.objectives.forEach((name, objective) ->{
+			objective.getScores().remove(entry);
+		});
 	}
 	
 	@Override
@@ -128,15 +141,17 @@ public class ScoreboardMock implements Scoreboard
 	@Override
 	public Set<String> getEntries()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Set<String> entries = new CopyOnWriteArraySet<>();
+		objectives.forEach((unused, objective)->{
+			entries.addAll(objective.getScores().keySet());
+		});
+		return entries;
 	}
 	
 	@Override
 	public void clearSlot(DisplaySlot slot) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.objectives.values().removeIf((objective)-> objective.getDisplaySlot() == slot);
 	}
 	
 	/**

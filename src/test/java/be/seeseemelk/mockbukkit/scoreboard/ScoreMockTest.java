@@ -64,7 +64,6 @@ public class ScoreMockTest
 		score.setScore(5);
 		assertEquals(5, score.getScore());
 	}
-	
 	@Test
 	public void getPlayer_PlayerSet_ReturnsPlayer()
 	{
