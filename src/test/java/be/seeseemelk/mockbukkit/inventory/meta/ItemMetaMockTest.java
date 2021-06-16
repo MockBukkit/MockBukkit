@@ -1,11 +1,14 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
+import be.seeseemelk.mockbukkit.MockBukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 
 import java.util.Arrays;
 import java.util.List;
@@ -100,8 +103,8 @@ public class ItemMetaMockTest
 	{
 		ItemMetaMock meta2 = new ItemMetaMock();
 		meta.setDisplayName("Some name");
-		assertFalse(meta.equals(meta2));
-		assertFalse(meta2.equals(meta));
+		Assertions.assertNotEquals(meta, meta2);
+		Assertions.assertNotEquals(meta2, meta);
 	}
 	
 	@Test
@@ -196,9 +199,13 @@ public class ItemMetaMockTest
 	}
 	@Test
 	public void addEnchantment(){
+		MockBukkit.mock();
+		ItemStack stack = new ItemStack(Material.DIAMOND_SWORD);
+		ItemMeta meta  = stack.getItemMeta();
 		meta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
+		stack.setItemMeta(meta);
 		assertTrue(meta.hasEnchant(Enchantment.DAMAGE_ALL));
-
+		MockBukkit.unload();
 	}
 	@Test(expected = AssertionError.class)
 	public void assertLore_InorrectLore_Asserts()

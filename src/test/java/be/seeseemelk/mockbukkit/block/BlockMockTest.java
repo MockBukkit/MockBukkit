@@ -1,15 +1,13 @@
 package be.seeseemelk.mockbukkit.block;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.junit.Before;
 import org.junit.Test;
 
 import be.seeseemelk.mockbukkit.WorldMock;
+
+import static org.junit.Assert.*;
 
 public class BlockMockTest
 {
@@ -26,7 +24,13 @@ public class BlockMockTest
 	{
 		assertEquals(Material.AIR, block.getType());
 	}
-	
+
+	@Test
+	public void isEmpty()
+	{
+		block.setType(Material.GLASS);
+		assertFalse(block.isEmpty());
+	}
 	@SuppressWarnings("deprecation")
 	@Test
 	public void getTypeId_TypeSet_TypeGotten()

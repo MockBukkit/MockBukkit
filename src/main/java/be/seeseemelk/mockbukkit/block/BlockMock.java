@@ -251,16 +251,16 @@ public class BlockMock implements org.bukkit.block.Block
 	@Deprecated
 	public boolean setTypeId(int type)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Material old = material;
+		this.material = Material.getMaterial(type);
+		return this.material != old;
 	}
 	
 	@Override
 	@Deprecated
 	public boolean setTypeId(int type, boolean applyPhysics)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return setTypeId(type);
 	}
 	
 	@Override
@@ -344,14 +344,12 @@ public class BlockMock implements org.bukkit.block.Block
 	@Override
 	public boolean isEmpty()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getTypeId() == 0;
 	}
 	
 	@Override
 	public boolean isLiquid()
 	{
-		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 	
