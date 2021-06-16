@@ -71,16 +71,14 @@ public class BlockStateMock implements BlockState
 	@Override
 	public Material getType()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return data.getItemType();
 	}
 
 	@Override
 	@Deprecated
 	public int getTypeId()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getType().getId();
 	}
 
 	@Override

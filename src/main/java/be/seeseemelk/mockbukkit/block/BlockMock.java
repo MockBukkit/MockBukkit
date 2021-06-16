@@ -5,6 +5,7 @@ import static org.junit.Assert.fail;
 import java.util.Collection;
 import java.util.List;
 
+import be.seeseemelk.mockbukkit.inventory.ChestStateMock;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -239,6 +240,9 @@ public class BlockMock implements org.bukkit.block.Block
 	public void setType(Material type)
 	{
 		material = type;
+		if(material == Material.CHEST){
+			this.state = new ChestStateMock(this.state.getData());
+		}
 	}
 	
 	@Override
