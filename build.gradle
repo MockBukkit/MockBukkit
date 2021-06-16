@@ -9,7 +9,7 @@ publishing {
 		maven(MavenPublication) {
 			groupId = "org.patzmc"
 			artifactId = 'MockBukkit'
-			version = '1.0.7'
+			version = '1.0.9'
 
 			from components.java
 		}

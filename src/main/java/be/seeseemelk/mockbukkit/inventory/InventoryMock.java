@@ -285,6 +285,7 @@ public abstract class InventoryMock implements org.bukkit.inventory.Inventory
 	{
 
 		for (ItemStack stack : this.items) {
+			if(stack == null) continue;
 			if(stack.getType() == material){
 				return true;
 			}
@@ -297,12 +298,14 @@ public abstract class InventoryMock implements org.bukkit.inventory.Inventory
 	{
 		return Arrays.asList(items).contains(item);
 	}
-	
+
 	@Override
 	public boolean contains(int materialId, int amount)
 	{
 
 		for (ItemStack stack : this.items) {
+			if(stack == null) continue;
+
 			if(stack.getType().getId() == materialId && stack.getAmount() == amount){
 				return true;
 			}
@@ -315,6 +318,8 @@ public abstract class InventoryMock implements org.bukkit.inventory.Inventory
 	{
 
 		for (ItemStack stack : this.items) {
+			if(stack == null) continue;
+
 			if(stack.getType() == material && stack.getAmount() == amount){
 				return true;
 			}
@@ -326,6 +331,8 @@ public abstract class InventoryMock implements org.bukkit.inventory.Inventory
 	public boolean contains(ItemStack item, int amount)
 	{
 		for (ItemStack stack : this.items) {
+			if(stack == null) continue;
+
 			if(stack.equals(item) && stack.getAmount() == amount){
 				return true;
 			}
@@ -338,6 +345,8 @@ public abstract class InventoryMock implements org.bukkit.inventory.Inventory
 	{
 		int amountOnInv = 0;
 		for (ItemStack stack : this.items) {
+			if(stack == null) continue;
+
 			if(stack.equals(item)){
 				amountOnInv+= stack.getAmount();
 			}
@@ -350,6 +359,7 @@ public abstract class InventoryMock implements org.bukkit.inventory.Inventory
 	{
 		HashMap<Integer, ItemStack> items = new HashMap<>();
 		for (int i = 0; i < this.items.length; i++) {
+
 			if(this.items[i].getTypeId() == materialId){
 				items.put(i, this.items[i]);
 			}
@@ -442,7 +452,7 @@ public abstract class InventoryMock implements org.bukkit.inventory.Inventory
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-		
+
 	}
 	
 	@Override
