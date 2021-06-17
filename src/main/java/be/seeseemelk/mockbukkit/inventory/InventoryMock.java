@@ -121,7 +121,9 @@ public abstract class InventoryMock implements org.bukkit.inventory.Inventory
 		}
 		return amount;
 	}
-	
+	public boolean isEmpty(){
+		return Arrays.stream(items).noneMatch(item-> item != null && item.getTypeId() != 0);
+	}
 	@Override
 	public int getSize()
 	{
