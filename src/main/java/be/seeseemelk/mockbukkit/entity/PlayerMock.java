@@ -779,8 +779,7 @@ public class PlayerMock extends EntityMock implements Player
 	@Override
 	public void kickPlayer(String message)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		MockBukkit.getMock().removePlayer(message, this);
 	}
 	
 	@Override
