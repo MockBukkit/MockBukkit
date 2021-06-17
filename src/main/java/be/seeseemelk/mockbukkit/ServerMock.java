@@ -129,7 +129,17 @@ public class ServerMock implements Server
 		offlinePlayers.add(player);
 		registerEntity(player);
 	}
+	public void removePlayer(PlayerMock player){
 
+		players.remove(player);
+		offlinePlayers.remove(player);
+		entities.remove(player);
+	}
+	public void removePlayer(String message, PlayerMock player){
+		removePlayer(player);
+
+		System.out.println("[INFO] Player "+player.getName() + " was kicked for " + message);
+	}
 	/**
 	 * Creates a random player and adds it.
 	 */
