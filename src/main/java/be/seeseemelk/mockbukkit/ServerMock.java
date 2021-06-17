@@ -14,16 +14,9 @@ import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
 import be.seeseemelk.mockbukkit.scoreboard.ScoreboardManagerMock;
 import com.avaje.ebean.config.ServerConfig;
-import org.bukkit.BanEntry;
-import org.bukkit.BanList;
+import org.bukkit.*;
 import org.bukkit.BanList.Type;
-import org.bukkit.GameMode;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.Server;
-import org.bukkit.UnsafeValues;
 import org.bukkit.Warning.WarningState;
-import org.bukkit.World;
-import org.bukkit.WorldCreator;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
@@ -32,6 +25,7 @@ import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.generator.ChunkGenerator.ChunkData;
 import org.bukkit.help.HelpMap;
 import org.bukkit.inventory.InventoryHolder;
@@ -130,15 +124,18 @@ public class ServerMock implements Server
 		registerEntity(player);
 	}
 	public void removePlayer(PlayerMock player){
+		removePlayer(null,player);
+	}
+	public void removePlayer(String message, PlayerMock player){
+
 
 		players.remove(player);
 		offlinePlayers.remove(player);
 		entities.remove(player);
-	}
-	public void removePlayer(String message, PlayerMock player){
-		removePlayer(player);
-
-		System.out.println("[INFO] Player "+player.getName() + " was kicked for " + message);
+		PlayerQuitEvent event = new PlayerQuitEvent(player, message);
+		Bukkit.getPluginManager().callEvent(event);
+		if(message != null)
+			System.out.println("[INFO] Player "+player.getName() + " was kicked for " + message);
 	}
 	/**
 	 * Creates a random player and adds it.
