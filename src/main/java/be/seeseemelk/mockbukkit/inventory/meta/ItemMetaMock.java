@@ -155,6 +155,7 @@ public class ItemMetaMock implements ItemMeta
 	@Override
 	public List<String> getLore()
 	{
+		if(lore == null) return null;
 		return new ArrayList<>(lore);
 	}
 	
