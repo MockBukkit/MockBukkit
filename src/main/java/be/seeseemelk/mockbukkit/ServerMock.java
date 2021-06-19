@@ -25,6 +25,7 @@ import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.generator.ChunkGenerator.ChunkData;
 import org.bukkit.help.HelpMap;
@@ -144,6 +145,7 @@ public class ServerMock implements Server
 	{
 		PlayerMock player = playerFactory.createRandomPlayer();
 		addPlayer(player);
+		Bukkit.getPluginManager().callEvent(new PlayerJoinEvent(player, player.getName()+" joined the game"));
 		return player;
 	}
 
