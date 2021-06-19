@@ -192,12 +192,12 @@ class BukkitSchedulerMockTest
 		{
 			scheduler.runTaskLater(null, callback, 2L+(i%5));
 		}
-		while (count.get()>0)
+		while (count.get() > 0)
 		{
 			assertEquals(count.get(), scheduler.getPendingTasks().size());
 			scheduler.performOneTick();
 		}
-		assertEquals(count.get(), scheduler.getPendingTasks().size());
+		assertEquals(0, scheduler.getPendingTasks().size());
 	}
 
 	@Test
@@ -256,9 +256,12 @@ class BukkitSchedulerMockTest
 	 * Simulates varying work load by waiting by a random amount of time (up to 20ms).
 	 */
 	private void simulateWorkload() {
-		try {
+		try
+		{
 			Thread.sleep(ThreadLocalRandom.current().nextInt(2, 20));
-		} catch (InterruptedException e) {
+		}
+		catch (InterruptedException e)
+		{
 			e.printStackTrace();
 		}
 	}
