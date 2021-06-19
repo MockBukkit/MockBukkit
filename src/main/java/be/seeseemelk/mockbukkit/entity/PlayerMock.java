@@ -18,6 +18,7 @@ import java.util.UUID;
 import java.util.HashMap;
 import java.util.function.Predicate;
 
+import org.apache.commons.lang.Validate;
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
@@ -61,6 +62,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.event.player.PlayerToggleSprintEvent;
@@ -2199,6 +2201,24 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		 */
 		return 0;
 	}
+
+	@Override
+	public boolean teleport(@NotNull Location location, @NotNull PlayerTeleportEvent.TeleportCause cause)
+	{
+		Validate.notNull(location, "Location cannot be null");
+		Validate.notNull(cause, "Cause cannot be null");
+
+		PlayerTeleportEvent playerTeleportEvent = new PlayerTeleportEvent(this, getLocation(), location, cause);
+		Bukkit.getPluginManager().callEvent(playerTeleportEvent);
+
+		if (playerTeleportEvent.isCancelled())
+		{
+			return false;
+		}
+
+		return super.teleport(playerTeleportEvent.getTo(), cause);
+	}
+
 
 	@Override
 	public @NotNull PlayerSpigotMock spigot()
