@@ -106,7 +106,7 @@ public class MockPlayerList
 		return !onlinePlayers.isEmpty();
 	}
 
-	public boolean isPlayerAlreadyOnServer(@NotNull PlayerMock player)
+	public boolean isOnline(@NotNull PlayerMock player)
 	{
 		return 	onlinePlayers.contains(player)
 				|| getPlayerExact(player.getName()) != null
