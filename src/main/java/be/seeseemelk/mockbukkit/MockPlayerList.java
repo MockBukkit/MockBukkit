@@ -62,7 +62,7 @@ public class MockPlayerList
 
 	public void addPlayer(@NotNull PlayerMock player)
 	{
-		if(isPlayerAlreadyOnServer(player))
+		if(isOnline(player))
 			throw new IllegalStateException("Player is already on server!");
 
 		onlinePlayers.add(player);
@@ -71,9 +71,8 @@ public class MockPlayerList
 
 	public void removePlayer(@NotNull PlayerMock player) throws IllegalStateException
 	{
-		if (!onlinePlayers.remove(player)) {
+		if (!onlinePlayers.remove(player))
 			throw new IllegalStateException("Player is not connected!");
-		}
 	}
 
 	public void addOfflinePlayer(@NotNull OfflinePlayer player)
