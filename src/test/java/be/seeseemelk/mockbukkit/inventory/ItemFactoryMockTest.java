@@ -79,9 +79,9 @@ class ItemFactoryMockTest
 	}
 
 	@Test
-	void equals_NullAndNull_False()
+	void equals_NullAndNull_True()
 	{
-		assertFalse(factory.equals(null, null));
+		assertTrue(factory.equals(null, null));
 	}
 
 	@Test
