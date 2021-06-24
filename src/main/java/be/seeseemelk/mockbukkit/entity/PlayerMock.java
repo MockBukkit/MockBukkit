@@ -3,7 +3,7 @@ package be.seeseemelk.mockbukkit.entity;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import be.seeseemelk.mockbukkit.statistic.StatisticMock;
+import be.seeseemelk.mockbukkit.statistic.StatisticsMock;
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -125,7 +125,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	private final Map<UUID, Set<Plugin>> hiddenPlayers = new HashMap<>();
 	private final Set<UUID> hiddenPlayersDeprecated = new HashSet<>();
 
-	private final StatisticMock statistics = new StatisticMock();
+	private final StatisticsMock statistics = new StatisticsMock();
 
 	public PlayerMock(ServerMock server, String name)
 	{
@@ -1162,25 +1162,25 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public void incrementStatistic(@NotNull Statistic statistic)
 	{
-		incrementStatistic(statistic, 1);
+		statistics.incrementStatistic(statistic, 1);
 	}
 
 	@Override
 	public void decrementStatistic(@NotNull Statistic statistic)
 	{
-		decrementStatistic(statistic, 1);
+		statistics.decrementStatistic(statistic, 1);
 	}
 
 	@Override
 	public void incrementStatistic(@NotNull Statistic statistic, int amount)
 	{
-		statistics.setStatistic(statistic, statistics.getStatistic(statistic) + amount);
+		statistics.incrementStatistic(statistic, amount);
 	}
 
 	@Override
 	public void decrementStatistic(@NotNull Statistic statistic, int amount)
 	{
-		statistics.setStatistic(statistic, statistics.getStatistic(statistic) - amount);
+		statistics.decrementStatistic(statistic, amount);
 	}
 
 	@Override
@@ -1198,13 +1198,13 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public void incrementStatistic(@NotNull Statistic statistic, @NotNull Material material)
 	{
-		incrementStatistic(statistic, material, 1);
+		statistics.incrementStatistic(statistic, material, 1);
 	}
 
 	@Override
 	public void decrementStatistic(@NotNull Statistic statistic, @NotNull Material material)
 	{
-		decrementStatistic(statistic, material, 1);
+		statistics.decrementStatistic(statistic, material, 1);
 	}
 
 	@Override
@@ -1216,13 +1216,13 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public void incrementStatistic(@NotNull Statistic statistic, @NotNull Material material, int amount)
 	{
-		statistics.setStatistic(statistic, material, statistics.getStatistic(statistic, material) + amount);
+		statistics.incrementStatistic(statistic, material, amount);
 	}
 
 	@Override
 	public void decrementStatistic(@NotNull Statistic statistic, @NotNull Material material, int amount)
 	{
-		statistics.setStatistic(statistic, material, statistics.getStatistic(statistic, material) - amount);
+		statistics.decrementStatistic(statistic, material, amount);
 	}
 
 	@Override
@@ -1234,13 +1234,13 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public void incrementStatistic(@NotNull Statistic statistic, @NotNull EntityType entityType)
 	{
-		incrementStatistic(statistic, entityType, 1);
+		statistics.incrementStatistic(statistic, entityType, 1);
 	}
 
 	@Override
 	public void decrementStatistic(@NotNull Statistic statistic, @NotNull EntityType entityType)
 	{
-		decrementStatistic(statistic, entityType, 1);
+		statistics.decrementStatistic(statistic, entityType, 1);
 	}
 
 	@Override
@@ -1252,13 +1252,13 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public void incrementStatistic(@NotNull Statistic statistic, @NotNull EntityType entityType, int amount)
 	{
-		statistics.setStatistic(statistic, entityType, statistics.getStatistic(statistic, entityType) + amount);
+		statistics.incrementStatistic(statistic, entityType, amount);
 	}
 
 	@Override
 	public void decrementStatistic(@NotNull Statistic statistic, @NotNull EntityType entityType, int amount)
 	{
-		statistics.setStatistic(statistic, entityType, statistics.getStatistic(statistic, entityType) - amount);
+		statistics.decrementStatistic(statistic, entityType, amount);
 	}
 
 	@Override

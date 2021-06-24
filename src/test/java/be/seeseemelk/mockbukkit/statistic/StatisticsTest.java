@@ -1,5 +1,7 @@
 package be.seeseemelk.mockbukkit.statistic;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
@@ -10,9 +12,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-public class StatisticTest
+public class StatisticsTest
 {
 
 	private ServerMock mock;
@@ -112,5 +112,52 @@ public class StatisticTest
 
 		assertEquals(3, player.getStatistic(Statistic.MINE_BLOCK, Material.STONE));
 		assertEquals(8, player.getStatistic(Statistic.KILL_ENTITY, EntityType.SQUID));
+	}
+
+	@Test
+	public void testNegativeIncrement() {
+		player.setStatistic(Statistic.DEATHS, 7);
+
+		assertThrows(IllegalArgumentException.class, () ->
+			player.incrementStatistic(Statistic.DEATHS, -1));
+
+		assertThrows(IllegalArgumentException.class, () ->
+			player.incrementStatistic(Statistic.DEATHS, 0));
+	}
+
+	@Test
+	public void testNegativeDecrement() {
+		player.setStatistic(Statistic.DEATHS, 7);
+
+		assertThrows(IllegalArgumentException.class, () ->
+			player.decrementStatistic(Statistic.DEATHS, -1));
+
+		assertThrows(IllegalArgumentException.class, () ->
+			player.decrementStatistic(Statistic.DEATHS, 0));
+	}
+
+	@Test
+	public void testNegativeSet() {
+		player.setStatistic(Statistic.DEATHS, 5);
+
+		assertThrows(IllegalArgumentException.class, () ->
+			player.setStatistic(Statistic.DEATHS, -1));
+
+		player.setStatistic(Statistic.DEATHS, 0);
+	}
+
+	@Test
+	public void testType() {
+		assertThrows(IllegalArgumentException.class, () ->
+			player.setStatistic(Statistic.DEATHS, Material.ACACIA_LOG, 5));
+
+		assertThrows(IllegalArgumentException.class, () ->
+			player.setStatistic(Statistic.DEATHS, EntityType.SQUID, 4));
+
+		assertThrows(IllegalArgumentException.class, () ->
+			player.setStatistic(Statistic.MINE_BLOCK, 10));
+
+		assertThrows(IllegalArgumentException.class, () ->
+			player.setStatistic(Statistic.MINE_BLOCK, EntityType.BAT, 10));
 	}
 }
