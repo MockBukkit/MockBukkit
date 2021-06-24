@@ -14,7 +14,7 @@ gradle.ext.apiVersionFull = '1.16.5-R0.1-SNAPSHOT'
   Every new update should bump the version below according to
   the conventions.
 */
-gradle.ext.version = '1.3.1'
+gradle.ext.version = '1.4.0'
 
 /*
   This is the name of our MockBukkit artifact, it includes
