@@ -6,7 +6,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Random;
 import java.util.UUID;
 
-public final class PlayerMockFactory {
+public final class PlayerMockFactory
+{
 	private final ServerMock server;
 	private final Random random = new Random();
 	private int currentNameIndex;
