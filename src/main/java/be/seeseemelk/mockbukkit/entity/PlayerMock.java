@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.entity;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import be.seeseemelk.mockbukkit.statistic.StatisticMock;
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -123,6 +124,8 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	private final List<AudioExperience> heardSounds = new LinkedList<>();
 	private final Map<UUID, Set<Plugin>> hiddenPlayers = new HashMap<>();
 	private final Set<UUID> hiddenPlayersDeprecated = new HashSet<>();
+
+	private final StatisticMock statistics = new StatisticMock();
 
 	public PlayerMock(ServerMock server, String name)
 	{
@@ -1159,127 +1162,109 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public void incrementStatistic(@NotNull Statistic statistic)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		incrementStatistic(statistic, 1);
 	}
 
 	@Override
 	public void decrementStatistic(@NotNull Statistic statistic)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		decrementStatistic(statistic, 1);
 	}
 
 	@Override
 	public void incrementStatistic(@NotNull Statistic statistic, int amount)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		statistics.setStatistic(statistic, statistics.getStatistic(statistic) + amount);
 	}
 
 	@Override
 	public void decrementStatistic(@NotNull Statistic statistic, int amount)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		statistics.setStatistic(statistic, statistics.getStatistic(statistic) - amount);
 	}
 
 	@Override
 	public void setStatistic(@NotNull Statistic statistic, int newValue)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		statistics.setStatistic(statistic, newValue);
 	}
 
 	@Override
 	public int getStatistic(@NotNull Statistic statistic)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return statistics.getStatistic(statistic);
 	}
 
 	@Override
 	public void incrementStatistic(@NotNull Statistic statistic, @NotNull Material material)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		incrementStatistic(statistic, material, 1);
 	}
 
 	@Override
 	public void decrementStatistic(@NotNull Statistic statistic, @NotNull Material material)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		decrementStatistic(statistic, material, 1);
 	}
 
 	@Override
 	public int getStatistic(@NotNull Statistic statistic, @NotNull Material material)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return statistics.getStatistic(statistic, material);
 	}
 
 	@Override
 	public void incrementStatistic(@NotNull Statistic statistic, @NotNull Material material, int amount)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		statistics.setStatistic(statistic, material, statistics.getStatistic(statistic, material) + amount);
 	}
 
 	@Override
 	public void decrementStatistic(@NotNull Statistic statistic, @NotNull Material material, int amount)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		statistics.setStatistic(statistic, material, statistics.getStatistic(statistic, material) - amount);
 	}
 
 	@Override
 	public void setStatistic(@NotNull Statistic statistic, @NotNull Material material, int newValue)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		statistics.setStatistic(statistic, material, newValue);
 	}
 
 	@Override
 	public void incrementStatistic(@NotNull Statistic statistic, @NotNull EntityType entityType)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		incrementStatistic(statistic, entityType, 1);
 	}
 
 	@Override
 	public void decrementStatistic(@NotNull Statistic statistic, @NotNull EntityType entityType)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		decrementStatistic(statistic, entityType, 1);
 	}
 
 	@Override
 	public int getStatistic(@NotNull Statistic statistic, @NotNull EntityType entityType)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return statistics.getStatistic(statistic, entityType);
 	}
 
 	@Override
 	public void incrementStatistic(@NotNull Statistic statistic, @NotNull EntityType entityType, int amount)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		statistics.setStatistic(statistic, entityType, statistics.getStatistic(statistic, entityType) + amount);
 	}
 
 	@Override
 	public void decrementStatistic(@NotNull Statistic statistic, @NotNull EntityType entityType, int amount)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		statistics.setStatistic(statistic, entityType, statistics.getStatistic(statistic, entityType) - amount);
 	}
 
 	@Override
 	public void setStatistic(@NotNull Statistic statistic, @NotNull EntityType entityType, int newValue)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		statistics.setStatistic(statistic, entityType, newValue);
 	}
 
 	@Override
