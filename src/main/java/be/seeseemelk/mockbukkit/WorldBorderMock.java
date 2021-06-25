@@ -40,7 +40,7 @@ public class WorldBorderMock implements WorldBorder
 	 * @param world The world it is the border of
 	 * @param server The server it is in
 	 */
-	public WorldBorderMock(World world, Server server)
+	public WorldBorderMock(@NotNull World world,@NotNull Server server)
 	{
 		this.world = world;
 		this.server = server;
