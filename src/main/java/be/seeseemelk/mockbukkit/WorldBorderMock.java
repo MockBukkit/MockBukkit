@@ -101,9 +101,8 @@ public class WorldBorderMock implements WorldBorder
 		}
 	}
 
-	@NotNull
 	@Override
-	public Location getCenter()
+	public @NotNull Location getCenter()
 	{
 		return new Location(this.world, centerX, 0, centerZ);
 	}
