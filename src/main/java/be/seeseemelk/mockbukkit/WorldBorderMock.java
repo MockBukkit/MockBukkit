@@ -82,20 +82,16 @@ public class WorldBorderMock implements WorldBorder
 
 			double distancePerTick = distance / ticksToTake;
 
-			server.getScheduler().runTaskTimer(null, new BukkitRunnable()
+			server.getScheduler().runTaskTimer(null, () ->
 			{
-				@Override
-				public void run()
+				if ((size < newSize && distance > 0) || (size > newSize && distance < 0))
 				{
-					if ((size < newSize && distance > 0) || (size > newSize && distance < 0))
-					{
-						size += distancePerTick;
-					}
-					else
-					{
-						size = newSize;
-						this.cancel();
-					}
+					size += distancePerTick;
+				}
+				else
+				{
+					size = newSize;
+					this.cancel();
 				}
 			}, 1, 1);
 		}
