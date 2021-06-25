@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.entity;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import be.seeseemelk.mockbukkit.statistic.StatisticsMock;
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import java.util.UUID;
 import java.util.HashMap;
 import java.util.function.Predicate;
 
+import org.apache.commons.lang.Validate;
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
@@ -61,6 +63,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.event.player.PlayerToggleSprintEvent;
@@ -121,6 +124,8 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	private final List<AudioExperience> heardSounds = new LinkedList<>();
 	private final Map<UUID, Set<Plugin>> hiddenPlayers = new HashMap<>();
 	private final Set<UUID> hiddenPlayersDeprecated = new HashSet<>();
+
+	private final StatisticsMock statistics = new StatisticsMock();
 
 	public PlayerMock(ServerMock server, String name)
 	{
@@ -1157,127 +1162,109 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public void incrementStatistic(@NotNull Statistic statistic)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		statistics.incrementStatistic(statistic, 1);
 	}
 
 	@Override
 	public void decrementStatistic(@NotNull Statistic statistic)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		statistics.decrementStatistic(statistic, 1);
 	}
 
 	@Override
 	public void incrementStatistic(@NotNull Statistic statistic, int amount)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		statistics.incrementStatistic(statistic, amount);
 	}
 
 	@Override
 	public void decrementStatistic(@NotNull Statistic statistic, int amount)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		statistics.decrementStatistic(statistic, amount);
 	}
 
 	@Override
 	public void setStatistic(@NotNull Statistic statistic, int newValue)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		statistics.setStatistic(statistic, newValue);
 	}
 
 	@Override
 	public int getStatistic(@NotNull Statistic statistic)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return statistics.getStatistic(statistic);
 	}
 
 	@Override
 	public void incrementStatistic(@NotNull Statistic statistic, @NotNull Material material)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		statistics.incrementStatistic(statistic, material, 1);
 	}
 
 	@Override
 	public void decrementStatistic(@NotNull Statistic statistic, @NotNull Material material)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		statistics.decrementStatistic(statistic, material, 1);
 	}
 
 	@Override
 	public int getStatistic(@NotNull Statistic statistic, @NotNull Material material)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return statistics.getStatistic(statistic, material);
 	}
 
 	@Override
 	public void incrementStatistic(@NotNull Statistic statistic, @NotNull Material material, int amount)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		statistics.incrementStatistic(statistic, material, amount);
 	}
 
 	@Override
 	public void decrementStatistic(@NotNull Statistic statistic, @NotNull Material material, int amount)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		statistics.decrementStatistic(statistic, material, amount);
 	}
 
 	@Override
 	public void setStatistic(@NotNull Statistic statistic, @NotNull Material material, int newValue)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		statistics.setStatistic(statistic, material, newValue);
 	}
 
 	@Override
 	public void incrementStatistic(@NotNull Statistic statistic, @NotNull EntityType entityType)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		statistics.incrementStatistic(statistic, entityType, 1);
 	}
 
 	@Override
 	public void decrementStatistic(@NotNull Statistic statistic, @NotNull EntityType entityType)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		statistics.decrementStatistic(statistic, entityType, 1);
 	}
 
 	@Override
 	public int getStatistic(@NotNull Statistic statistic, @NotNull EntityType entityType)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return statistics.getStatistic(statistic, entityType);
 	}
 
 	@Override
 	public void incrementStatistic(@NotNull Statistic statistic, @NotNull EntityType entityType, int amount)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		statistics.incrementStatistic(statistic, entityType, amount);
 	}
 
 	@Override
 	public void decrementStatistic(@NotNull Statistic statistic, @NotNull EntityType entityType, int amount)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		statistics.decrementStatistic(statistic, entityType, amount);
 	}
 
 	@Override
 	public void setStatistic(@NotNull Statistic statistic, @NotNull EntityType entityType, int newValue)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		statistics.setStatistic(statistic, entityType, newValue);
 	}
 
 	@Override
@@ -2177,6 +2164,24 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		 */
 		return 0;
 	}
+
+	@Override
+	public boolean teleport(@NotNull Location location, @NotNull PlayerTeleportEvent.TeleportCause cause)
+	{
+		Validate.notNull(location, "Location cannot be null");
+		Validate.notNull(cause, "Cause cannot be null");
+
+		PlayerTeleportEvent playerTeleportEvent = new PlayerTeleportEvent(this, getLocation(), location, cause);
+		Bukkit.getPluginManager().callEvent(playerTeleportEvent);
+
+		if (playerTeleportEvent.isCancelled())
+		{
+			return false;
+		}
+
+		return super.teleport(playerTeleportEvent.getTo(), cause);
+	}
+
 
 	@Override
 	public @NotNull PlayerSpigotMock spigot()
