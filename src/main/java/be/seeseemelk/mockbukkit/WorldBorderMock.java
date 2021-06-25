@@ -81,7 +81,7 @@ public class WorldBorderMock implements WorldBorder
 			double ticksToTake = seconds * 20;
 
 			double distancePerTick = distance / ticksToTake;
-			
+
 			server.getScheduler().runTaskTimer(null, new BukkitRunnable()
 			{
 				@Override
