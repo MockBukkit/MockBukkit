@@ -15,9 +15,9 @@ import org.jetbrains.annotations.NotNull;
 public class WorldBorderMock implements WorldBorder
 {
 
-	private static final double DEFAULT_BORDER_SIZE = 6.0E7;
-	private static final double DEFAULT_DAMAGE_AMOUNT = 0.2;
-	private static final double DEFAULT_DAMAGE_BUFFER = 5.0;
+	private static final double DEFAULT_BORDER_SIZE = 6.0E7D;
+	private static final double DEFAULT_DAMAGE_AMOUNT = 0.2D;
+	private static final double DEFAULT_DAMAGE_BUFFER = 5.0D;
 	private static final int DEFAULT_WARNING_DISTANCE = 5;
 	private static final int DEFAULT_WARNING_TIME = 15;
 	private static final double DEFAULT_CENTER_X = 0;
@@ -81,17 +81,21 @@ public class WorldBorderMock implements WorldBorder
 			double ticksToTake = seconds * 20;
 
 			double distancePerTick = distance / ticksToTake;
-
-			server.getScheduler().runTaskTimer(null, () ->
+			
+			server.getScheduler().runTaskTimer(null, new BukkitRunnable()
 			{
-				if ((size < newSize && distance > 0) || (size > newSize && distance < 0))
+				@Override
+				public void run()
 				{
-					size += distancePerTick;
-				}
-				else
-				{
-					size = newSize;
-					this.cancel();
+					if ((size < newSize && distance > 0) || (size > newSize && distance < 0))
+					{
+						size += distancePerTick;
+					}
+					else
+					{
+						size = newSize;
+						this.cancel();
+					}
 				}
 			}, 1, 1);
 		}
