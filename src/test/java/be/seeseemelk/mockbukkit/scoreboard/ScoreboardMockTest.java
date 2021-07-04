@@ -74,4 +74,13 @@ class ScoreboardMockTest
 		assertSame(objective, scoreboard.getObjective(DisplaySlot.SIDEBAR));
 	}
 
+	@Test
+	void clearSlot_NotUnregisterObjectives()
+	{
+		ObjectiveMock objective = scoreboard.registerNewObjective("Objective", "dummy");
+		assertTrue(objective.isRegistered());
+		objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+		scoreboard.clearSlot(DisplaySlot.SIDEBAR);
+		assertTrue(objective.isRegistered());
+	}
 }
