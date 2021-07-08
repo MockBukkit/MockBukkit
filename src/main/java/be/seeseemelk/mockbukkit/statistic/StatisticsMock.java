@@ -119,7 +119,8 @@ public class StatisticsMock
 	{
 		Validate.isTrue(statistic.getType() == Type.ITEM || statistic.getType() == Type.BLOCK, "statistic must take a material parameter");
 		Map<Material, Integer> map = materialStatistics.get(statistic);
-		if (map == null) {
+		if (map == null)
+		{
 			return 0;
 		}
 		return map.getOrDefault(material, 0);
@@ -132,7 +133,8 @@ public class StatisticsMock
 	{
 		Validate.isTrue(statistic.getType() == Type.ENTITY, "statistic must take an entity parameter");
 		Map<EntityType, Integer> map = entityStatistics.get(statistic);
-		if (map == null) {
+		if (map == null)
+		{
 			return 0;
 		}
 		return map.getOrDefault(entity, 0);

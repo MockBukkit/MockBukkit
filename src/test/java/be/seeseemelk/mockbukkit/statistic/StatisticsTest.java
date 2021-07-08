@@ -115,49 +115,53 @@ public class StatisticsTest
 	}
 
 	@Test
-	public void testNegativeIncrement() {
+	public void testNegativeIncrement()
+	{
 		player.setStatistic(Statistic.DEATHS, 7);
 
 		assertThrows(IllegalArgumentException.class, () ->
-			player.incrementStatistic(Statistic.DEATHS, -1));
+		             player.incrementStatistic(Statistic.DEATHS, -1));
 
 		assertThrows(IllegalArgumentException.class, () ->
-			player.incrementStatistic(Statistic.DEATHS, 0));
+		             player.incrementStatistic(Statistic.DEATHS, 0));
 	}
 
 	@Test
-	public void testNegativeDecrement() {
+	public void testNegativeDecrement()
+	{
 		player.setStatistic(Statistic.DEATHS, 7);
 
 		assertThrows(IllegalArgumentException.class, () ->
-			player.decrementStatistic(Statistic.DEATHS, -1));
+		             player.decrementStatistic(Statistic.DEATHS, -1));
 
 		assertThrows(IllegalArgumentException.class, () ->
-			player.decrementStatistic(Statistic.DEATHS, 0));
+		             player.decrementStatistic(Statistic.DEATHS, 0));
 	}
 
 	@Test
-	public void testNegativeSet() {
+	public void testNegativeSet()
+	{
 		player.setStatistic(Statistic.DEATHS, 5);
 
 		assertThrows(IllegalArgumentException.class, () ->
-			player.setStatistic(Statistic.DEATHS, -1));
+		             player.setStatistic(Statistic.DEATHS, -1));
 
 		player.setStatistic(Statistic.DEATHS, 0);
 	}
 
 	@Test
-	public void testType() {
+	public void testType()
+	{
 		assertThrows(IllegalArgumentException.class, () ->
-			player.setStatistic(Statistic.DEATHS, Material.ACACIA_LOG, 5));
+		             player.setStatistic(Statistic.DEATHS, Material.ACACIA_LOG, 5));
 
 		assertThrows(IllegalArgumentException.class, () ->
-			player.setStatistic(Statistic.DEATHS, EntityType.SQUID, 4));
+		             player.setStatistic(Statistic.DEATHS, EntityType.SQUID, 4));
 
 		assertThrows(IllegalArgumentException.class, () ->
-			player.setStatistic(Statistic.MINE_BLOCK, 10));
+		             player.setStatistic(Statistic.MINE_BLOCK, 10));
 
 		assertThrows(IllegalArgumentException.class, () ->
-			player.setStatistic(Statistic.MINE_BLOCK, EntityType.BAT, 10));
+		             player.setStatistic(Statistic.MINE_BLOCK, EntityType.BAT, 10));
 	}
 }

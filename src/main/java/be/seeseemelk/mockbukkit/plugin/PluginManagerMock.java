@@ -330,7 +330,7 @@ public class PluginManagerMock implements PluginManager
 			arguments[2] = createTemporaryDirectory(
 			                   "MockBukkit-" + description.getName() + "-" + description.getVersion());
 			arguments[3] = createTemporaryPluginFile(
-					           "MockBukkit-" + description.getName() + "-" + description.getVersion());
+			                   "MockBukkit-" + description.getName() + "-" + description.getVersion());
 			System.arraycopy(parameters, 0, arguments, 4, parameters.length);
 
 			JavaPlugin plugin = constructor.newInstance(arguments);
