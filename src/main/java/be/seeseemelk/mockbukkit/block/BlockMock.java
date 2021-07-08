@@ -106,22 +106,22 @@ public class BlockMock implements org.bukkit.block.Block
 	@Override
 	public Block getRelative(int modX, int modY, int modZ)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getBlockPlus(modX,modY,modZ);
 	}
-	
-	@Override
-	public Block getRelative(BlockFace face)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
+	private Block getBlockPlus(int x, int y, int z){
+        	return this.getWorld().getBlockAt(this.getLocation().clone().add(x,y,z));
+    	}
+    	@Override
+    	public Block getRelative(BlockFace face) {
+        	Block relative = getBlockPlus(face.getModX(), face.getModY(), face.getModZ());
+        	return relative;
+    	}
 	
 	@Override
 	public Block getRelative(BlockFace face, int distance)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+        	Block relative = getBlockPlus(face.getModX()*distance, face.getModY()*distance, face.getModZ()*distance);
+        	return relative;
 	}
 	
 	/**
