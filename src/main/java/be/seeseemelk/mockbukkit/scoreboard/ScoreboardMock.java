@@ -175,13 +175,7 @@ public class ScoreboardMock implements Scoreboard
 	@Override
 	public void clearSlot(DisplaySlot slot) throws IllegalArgumentException
 	{
-		Objective o = objectivesByDisplaySlot.remove(slot);
-
-		if (o != null)
-		{
-			objectives.remove(o.getName());
-		}
-
+		objectivesByDisplaySlot.remove(slot);
 	}
 
 	/**
