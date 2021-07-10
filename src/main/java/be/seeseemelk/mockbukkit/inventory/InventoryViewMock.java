@@ -5,16 +5,14 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 
-public abstract class InventoryViewMock extends InventoryView
-{
+public abstract class InventoryViewMock extends InventoryView {
 	private Inventory topInventory;
 	private Inventory bottomInventory;
 	private HumanEntity player;
 	private InventoryType type;
 	private String name;
 
-	public InventoryViewMock(HumanEntity player, String name, Inventory top, Inventory bottom, InventoryType type)
-	{
+	public InventoryViewMock(HumanEntity player, String name, Inventory top, Inventory bottom, InventoryType type) {
 		this.player = player;
 		this.type = type;
 		this.name = name;
@@ -27,8 +25,7 @@ public abstract class InventoryViewMock extends InventoryView
 	 *
 	 * @param inventory The top inventory.
 	 */
-	public void setTopInventory(Inventory inventory)
-	{
+	public void setTopInventory(Inventory inventory) {
 		topInventory = inventory;
 	}
 
@@ -37,8 +34,7 @@ public abstract class InventoryViewMock extends InventoryView
 	 *
 	 * @param inventory The bottom inventory.
 	 */
-	public void setBottomInventory(Inventory inventory)
-	{
+	public void setBottomInventory(Inventory inventory) {
 		bottomInventory = inventory;
 	}
 
@@ -47,8 +43,7 @@ public abstract class InventoryViewMock extends InventoryView
 	 *
 	 * @param player The player viewing.
 	 */
-	public void setPlayer(HumanEntity player)
-	{
+	public void setPlayer(HumanEntity player) {
 		this.player = player;
 	}
 
@@ -57,38 +52,32 @@ public abstract class InventoryViewMock extends InventoryView
 	 *
 	 * @param type The new type of inventory view.
 	 */
-	public void setType(InventoryType type)
-	{
+	public void setType(InventoryType type) {
 		this.type = type;
 	}
 
 	@Override
-	public Inventory getTopInventory()
-	{
+	public Inventory getTopInventory() {
 		return topInventory;
 	}
 
 	@Override
-	public Inventory getBottomInventory()
-	{
+	public Inventory getBottomInventory() {
 		return bottomInventory;
 	}
 
 	@Override
-	public HumanEntity getPlayer()
-	{
+	public HumanEntity getPlayer() {
 		return player;
 	}
 
 	@Override
-	public InventoryType getType()
-	{
+	public InventoryType getType() {
 		return type;
 	}
 
 	@Override
-	public String getTitle()
-	{
+	public String getTitle() {
 		return name;
 	}
 
