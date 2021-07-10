@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
+import com.google.common.collect.Lists;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -152,7 +153,7 @@ public class InventoryMock implements Inventory {
 	 * @return The remaining stack that couldn't be added. If it's empty it just returns {@code null}.
 	 */
 	@Nullable
-	public ItemStack addItem(@NotNull ItemStack item) {
+	public ItemStack addItem(@NotNull ItemStack item){
 		item = item.clone();
 		for (int i = 0; i < items.length; i++) {
 			ItemStack oItem = items[i];
@@ -353,22 +354,11 @@ public class InventoryMock implements Inventory {
 
 	@Override
 	public List<HumanEntity> getViewers() {
-		List<HumanEntity> viewers = new ArrayList<>();
-
-		if (Bukkit.getOnlinePlayers().size() == 0) {
-			return viewers;
-		}
-
-		for(Player p : Bukkit.getOnlinePlayers()) {
-			InventoryView openInventory = p.getOpenInventory();
-
-			Inventory topLevel = openInventory.getTopInventory();
-			if (topLevel != null && topLevel.equals(this)) {
-				viewers.add(p);
-			}
-		}
-
-		return viewers;
+		Inventory thisInv = this;
+		return Bukkit.getOnlinePlayers().stream().filter(p -> {
+			InventoryView openInv = p.getOpenInventory();
+			return openInv.getTopInventory() != null && openInv.getTopInventory().equals(thisInv);
+		}).map(p -> (HumanEntity) p).collect(Collectors.toList());
 	}
 
 	@Override
