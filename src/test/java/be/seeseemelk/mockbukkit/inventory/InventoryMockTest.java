@@ -353,5 +353,6 @@ class InventoryMockTest {
 		assertEquals(0, inventory.getViewers().size());
 		player.openInventory(inventory);
 		assertEquals(1, inventory.getViewers().size());
+		assertEquals(((Player)inventory.getViewers().get(0)),player);
 	}
 }
