@@ -136,6 +136,8 @@ public class ServerMock extends Server.Spigot implements Server
 	private GameMode defaultGameMode = GameMode.SURVIVAL;
 	private ConsoleCommandSender consoleSender;
 
+	private PlayerQuitEvent lastPlayerQuitEvent = null;
+
 	public ServerMock()
 	{
 		ServerMock.registerSerializables();
@@ -259,10 +261,9 @@ public class ServerMock extends Server.Spigot implements Server
 	 * Removes previously added player, calls PlayerQuitEvent on server
 	 *
 	 * @param player player to remove.
-	 * @return PlayerQuitEvent that was called on a server.
 	 */
 	@NotNull
-	public PlayerQuitEvent removePlayer(@NotNull PlayerMock player)
+	public void removePlayer(@NotNull PlayerMock player)
 	{
 		assertMainThread();
 		playerList.removePlayer(player);
@@ -273,7 +274,17 @@ public class ServerMock extends Server.Spigot implements Server
 		unregisterEntity(player);
 		player.simulateDataLossAfterSave();
 		player.setOnline(false);
-		return event;
+		lastPlayerQuitEvent = event;
+	}
+
+	/**
+	 * Returns last instance of an PlayerQuitEvent object used while removing player from server
+	 *
+	 * @return PlayerQuitEvent that was last called on a server by removePlayer method
+	 */
+	public PlayerQuitEvent getLastPlayerQuitEvent()
+	{
+		return lastPlayerQuitEvent;
 	}
 
 	/**

@@ -24,6 +24,8 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
@@ -629,6 +631,22 @@ class ServerMockTest
 		assertFalse(player.isOnline());
 		server.addPlayer(player);
 		assertTrue(player.isOnline());
+	}
+
+	@Test
+	void removePlayer_GetLastPlayerQuitEvent()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		server.getPluginManager().registerEvents(new Listener(){
+			@EventHandler
+			public void onPlayerQuit(PlayerQuitEvent event){
+				event.setQuitMessage("He left!");
+			}
+		}, plugin);
+
+		PlayerMock player = server.addPlayer("Tester");
+		server.removePlayer(player);
+		assertEquals("He left!", server.getLastPlayerQuitEvent().getQuitMessage());
 	}
 }
 
