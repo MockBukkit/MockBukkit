@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.inventory;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Objects;
 
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -94,14 +95,8 @@ public class ItemFactoryMock implements ItemFactory
 	@Override
 	public boolean equals(ItemMeta meta1, ItemMeta meta2)
 	{
-		if (meta1 != null && meta2 != null)
-		{
-			return meta1.equals(meta2);
-		}
-		else
-		{
-			return false;
-		}
+		// Returns true if both metas are null or equal.
+		return Objects.equals(meta1, meta2);
 	}
 
 	@Override
