@@ -67,7 +67,7 @@ To do so, both JUnit and MockBukkit habe to be added to your dependencies::
 
     <build>
         <pluginManagement>
-            <plugin>
+            <plugins>
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
                 </plugin>
