@@ -793,7 +793,7 @@ public class PlayerMock extends EntityMock implements Player
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	boolean isSneaking;
+	private boolean isSneaking;
 	@Override
 	public boolean isSneaking()
 	{
@@ -805,7 +805,7 @@ public class PlayerMock extends EntityMock implements Player
 	{
 		isSneaking = sneak;
 	}
-	boolean isSprinting;
+	private boolean isSprinting;
 	@Override
 	public boolean isSprinting()
 	{
