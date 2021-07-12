@@ -260,15 +260,20 @@ public abstract class InventoryMock implements org.bukkit.inventory.Inventory
 	public void setMaxStackSize(int size) {}
 	
 	@Override
-	public HashMap<Integer, ItemStack> removeItem(ItemStack... items) throws IllegalArgumentException
+	public HashMap<Integer, ItemStack> removeItem(ItemStack... itemsIn) throws IllegalArgumentException
 	{
 		HashMap<Integer, ItemStack> result = new HashMap<Integer, ItemStack>();
 		
-		for (int i = 0; i < this.items.length; i++) {
-			result.put(Integer.valueOf(i), items[i]);
-			if(items[i].equals( this.items[i] )){
-				items[i] = null;
-				result.remove(Integer.valueOf(i));
+		for (int i = 0; i < itemsIn.length; i++) {
+			
+			for(int j = 0; j < items.length; j++){
+				if(items[j].getType() == Material.AIR) continue;
+				result.put(Integer.valueOf(j), itemsIn[i]);
+				if(itemsIn[i].equals( items[j] )){
+					items[j] = null;
+					result.remove(Integer.valueOf(j));
+				}
+				
 			}
 		}
 		return result;
