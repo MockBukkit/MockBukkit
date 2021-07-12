@@ -89,6 +89,7 @@ public class PlayerMock extends EntityMock implements Player
 		
 		setLocation(Bukkit.getWorlds().get(0).getSpawnLocation().clone());
 		closeInventory();
+		PlayerMock.playersThatPlayerBefore.add(this);
 	}
 	
 	/**
@@ -697,10 +698,12 @@ public class PlayerMock extends EntityMock implements Player
 		throw new UnimplementedOperationException();
 	}
 	
+	private static Set<String> playersThatPlayedBefore = new HashSet<>();
+	
 	@Override
 	public boolean hasPlayedBefore()
 	{
-		return false;
+		return playersThatPlayedBefore.contains(this.name);
 	}
 	
 	@Override
