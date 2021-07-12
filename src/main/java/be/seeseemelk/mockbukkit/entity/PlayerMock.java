@@ -235,10 +235,11 @@ public class PlayerMock extends EntityMock implements Player
 		EntityDamageEvent event = new EntityDamageEvent(this, DamageCause.CUSTOM, modifiers, modifierFunctions);
 		event.setDamage(amount);
 		Bukkit.getPluginManager().callEvent(event);
-		e = event;
 
 		if (!event.isCancelled())
 		{
+			
+			lastEntityDamageEvent = event;
 			setHealth(health - amount);
 		}
 	}
@@ -254,9 +255,9 @@ public class PlayerMock extends EntityMock implements Player
 				modifiers, modifierFunctions);
 		event.setDamage(amount);
 		Bukkit.getPluginManager().callEvent(event);
-		e = event;
 		if (!event.isCancelled())
 		{
+			lastEntityDamageEvent = event;
 			setHealth(health - amount);
 		}
 	}
@@ -490,7 +491,7 @@ public class PlayerMock extends EntityMock implements Player
 	public double getLastDamage()
 	{
 		if(e != null){
-			return e.getDamage();
+			return lastEntityDamageEvent.getDamage();
 		}
 		return 0.0;
 	}
@@ -498,7 +499,7 @@ public class PlayerMock extends EntityMock implements Player
 	@Override
 	public void setLastDamage(double damage)
 	{
-		e.setDamage(damage);
+		lastEntityDamageEvent.setDamage(damage);
 	}
 	long lastTimeDamage;
 	@Override
@@ -517,7 +518,7 @@ public class PlayerMock extends EntityMock implements Player
 	public Player getKiller()
 	{
 		if(e instanceof EntityDamageByEntityEvent){
-			EntityDamageByEntityEvent ev = ((EntityDamageByEntityEvent) e);
+			EntityDamageByEntityEvent ev = ((EntityDamageByEntityEvent) lastEntityDamageEvent);
 
 			if(ev.getDamager() instanceof Player){
 				return ((Player) ev.getDamager());
