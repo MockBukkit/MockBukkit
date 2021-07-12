@@ -220,7 +220,6 @@ public abstract class EntityMock implements Entity, MessageTarget {
     @Override
     public void sendMessage(String message) {
         messages.add(message);
-        System.out.println(this.name + ": " + message);
     }
 
     @Override
