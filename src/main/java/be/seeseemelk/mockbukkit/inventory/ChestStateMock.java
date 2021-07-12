@@ -6,7 +6,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.material.MaterialData;
 
 public class ChestStateMock extends BlockStateMock implements Chest {
-    ChestInventoryMock inventory = new ChestInventoryMock(this, "Baú", 9*3);
+    ChestInventoryMock inventory = new ChestInventoryMock(this, "Chest", 9*3);
     @Override
     public Inventory getBlockInventory() {
         return inventory;
