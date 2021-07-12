@@ -25,8 +25,8 @@ public abstract class EntityMock implements Entity, MessageTarget {
     private final UUID uuid;
     private final Queue<String> messages = new LinkedTransferQueue<>();
     private final Set<PermissionAttachment> permissionAttachments = new HashSet<>();
-    String customName = null;
-    EntityDamageEvent e = null;
+    private String customName = null;
+    private EntityDamageEvent e = null;
     private Location location;
     private boolean teleported;
     private TeleportCause teleportCause;
