@@ -262,12 +262,16 @@ public abstract class InventoryMock implements org.bukkit.inventory.Inventory
 	@Override
 	public HashMap<Integer, ItemStack> removeItem(ItemStack... items) throws IllegalArgumentException
 	{
+		HashMap<Integer, ItemStack> result = new HashMap<Integer, ItemStack>();
+		
 		for (int i = 0; i < this.items.length; i++) {
+			result.put(Integer.valueOf(i), items[i]);
 			if(items[i].equals( this.items[i] )){
 				items[i] = null;
+				result.remove(Integer.valueOf(i));
 			}
 		}
-		return new HashMap<>();
+		return result;
 
 	}
 	
