@@ -616,6 +616,7 @@ public class PlayerMock extends EntityMock implements Player
 	@Override
 	public boolean isLeashed()
 	{
+		// Players can not be leashed
 		return false;
 	}
 	
