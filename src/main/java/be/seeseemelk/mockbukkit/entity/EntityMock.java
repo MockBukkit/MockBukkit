@@ -247,13 +247,7 @@ public abstract class EntityMock implements Entity, MessageTarget {
 
     @Override
     public boolean isPermissionSet(Permission perm) {
-
-        for (PermissionAttachment attachment : permissionAttachments) {
-            Map<String, Boolean> permissions = attachment.getPermissions();
-            if (permissions.containsKey(perm.getName()))
-                return true;
-        }
-        return false;
+        return isPermissionSet(perm.getName().toLowerCase(Locale.ENGLISH));
     }
 
     @Override
