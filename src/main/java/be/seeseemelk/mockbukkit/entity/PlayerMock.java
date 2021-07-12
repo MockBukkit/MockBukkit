@@ -58,7 +58,7 @@ import static org.junit.Assert.assertEquals;
 
 public class PlayerMock extends EntityMock implements Player
 {
-	int foodLevel;
+	private int foodLevel;
 	private static final double MAX_HEALTH = 20.0;
 	private boolean online;
 	private PlayerInventoryMock inventory = null;
@@ -366,7 +366,7 @@ public class PlayerMock extends EntityMock implements Player
 	{
 		getInventory().setItemInHand(item);
 	}
-	ItemStack itemOnCursor;
+	private ItemStack itemOnCursor;
 	@Override
 	public ItemStack getItemOnCursor()
 	{
