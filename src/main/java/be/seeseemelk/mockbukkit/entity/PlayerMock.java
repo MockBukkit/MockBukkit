@@ -526,7 +526,7 @@ public class PlayerMock extends EntityMock implements Player
 		}
 		return null;
 	}
-	Set<PotionEffect> potionEffects = new HashSet<>();
+	private Set<PotionEffect> potionEffects = new HashSet<>();
 	@Override
 	public boolean addPotionEffect(PotionEffect effect)
 	{
