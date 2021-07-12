@@ -26,7 +26,7 @@ public abstract class EntityMock implements Entity, MessageTarget {
     private final Queue<String> messages = new LinkedTransferQueue<>();
     private final Set<PermissionAttachment> permissionAttachments = new HashSet<>();
     private String customName = null;
-    private EntityDamageEvent e = null;
+    private EntityDamageEvent lastEntityDamageEvent = null;
     private Location location;
     private boolean teleported;
     private TeleportCause teleportCause;
@@ -432,7 +432,7 @@ public abstract class EntityMock implements Entity, MessageTarget {
 
     @Override
     public EntityDamageEvent getLastDamageCause() {
-        return e;
+        return lastEntityDamageEvent;
     }
 
     @Override
