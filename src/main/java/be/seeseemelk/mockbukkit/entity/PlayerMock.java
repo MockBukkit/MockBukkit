@@ -40,10 +40,10 @@ public class PlayerMock extends EntityMock implements Player {
     private static final double MAX_HEALTH = 20.0;
     private static final Set<String> playersThatPlayedBefore = new HashSet<>();
     private final Set<PotionEffect> potionEffects = new HashSet<>();
-    boolean canFly;
-    boolean isFlying;
-    HashMap<Player, Player> hiddenPlayers = new HashMap<>();
-    Scoreboard scoreboard;
+    private boolean canFly;
+    private boolean isFlying;
+    private HashMap<Player, Player> hiddenPlayers = new HashMap<>();
+    private Scoreboard scoreboard;
     private int foodLevel;
     private boolean online;
     private PlayerInventoryMock inventory = null;
