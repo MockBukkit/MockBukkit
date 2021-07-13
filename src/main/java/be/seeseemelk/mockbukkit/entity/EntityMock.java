@@ -32,7 +32,7 @@ public abstract class EntityMock implements Entity, MessageTarget {
     private TeleportCause teleportCause;
     private final MetadataTable metadataTable = new MetadataTable();
     private boolean operator = false;
-    private String name = "entity";
+    protected String name = "entity";
     private int id;
     private static int nextID;
     public EntityMock(UUID uuid) {
