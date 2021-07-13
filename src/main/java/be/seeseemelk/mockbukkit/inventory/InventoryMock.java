@@ -257,7 +257,9 @@ public abstract class InventoryMock implements org.bukkit.inventory.Inventory
 	}
 	
 	@Override
-	public void setMaxStackSize(int size) {}
+	public void setMaxStackSize(int size) {
+	    throw new UnimplementedOperationException();
+	}
 	
 	@Override
 	public HashMap<Integer, ItemStack> removeItem(ItemStack... itemsIn) throws IllegalArgumentException
