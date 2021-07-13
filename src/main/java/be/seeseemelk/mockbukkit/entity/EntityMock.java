@@ -34,6 +34,7 @@ public abstract class EntityMock implements Entity, MessageTarget {
     private boolean operator = false;
     private String name = "entity";
     private int id;
+    private static int nextID;
     public EntityMock(UUID uuid) {
         this.uuid = uuid;
 
@@ -41,7 +42,8 @@ public abstract class EntityMock implements Entity, MessageTarget {
             location = Bukkit.getWorlds().get(0).getSpawnLocation();
         else
             location = new Location(null, 0, 0, 0);
-        this.id = new ArrayList<>(MockBukkit.getMock().getEntities()).indexOf(this);
+        nextID++;
+        this.id = nextID;
     }
 
     @Override
