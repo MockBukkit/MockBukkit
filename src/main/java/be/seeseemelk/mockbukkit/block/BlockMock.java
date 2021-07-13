@@ -348,7 +348,7 @@ public class BlockMock implements org.bukkit.block.Block
 	@Override
 	public boolean isEmpty()
 	{
-		return this.getTypeId() == 0;
+		return this.getType().equals(Material.AIR);
 	}
 	
 	@Override
