@@ -444,7 +444,7 @@ public class PlayerMock extends EntityMock implements Player {
 
     @Override
     public void setNoDamageTicks(int ticks) {
-        lastTimeDamage = System.currentTimeMillis() - ticks;
+        lastTimeDamage = (long) (System.currentTimeMillis() - (ticks/0.05));
     }
 
     @Override
