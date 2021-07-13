@@ -38,6 +38,7 @@ import static org.junit.Assert.assertEquals;
 public class PlayerMock extends EntityMock implements Player {
     private static final double MAX_HEALTH = 20.0;
     private static final Set<String> playersThatPlayedBefore = new HashSet<>();
+    private final Set<PotionEffect> potionEffects = new HashSet<>();
     boolean canFly;
     boolean isFlying;
     HashMap<Player, Player> hiddenPlayers = new HashMap<>();
@@ -58,7 +59,7 @@ public class PlayerMock extends EntityMock implements Player {
     private float xp;
     private ItemStack itemOnCursor;
     private long lastTimeDamage;
-    private final Set<PotionEffect> potionEffects = new HashSet<>();
+    private EntityDamageByEntityEvent killEvent;
 
     public PlayerMock(String name) {
         this(name, UUID.nameUUIDFromBytes(("OfflinePlayer:" + name).getBytes(Charsets.UTF_8)));
@@ -209,6 +210,10 @@ public class PlayerMock extends EntityMock implements Player {
             lastEntityDamageEvent = event;
             setHealth(health - amount);
         }
+
+        if(health <= 0){
+            this.killEvent = null;
+        }
     }
 
     @Override
@@ -221,10 +226,14 @@ public class PlayerMock extends EntityMock implements Player {
         EntityDamageByEntityEvent event = new EntityDamageByEntityEvent(source, this, DamageCause.ENTITY_ATTACK,
                 modifiers, modifierFunctions);
         event.setDamage(amount);
+
         Bukkit.getPluginManager().callEvent(event);
         if (!event.isCancelled()) {
             lastEntityDamageEvent = event;
             setHealth(health - amount);
+        }
+        if(health <= 0){
+            this.killEvent = event;
         }
     }
 
@@ -444,18 +453,16 @@ public class PlayerMock extends EntityMock implements Player {
 
     @Override
     public void setNoDamageTicks(int ticks) {
-        lastTimeDamage = (long) (System.currentTimeMillis() - (ticks/0.05));
+        lastTimeDamage = (long) (System.currentTimeMillis() - (ticks / 0.05));
     }
 
     @Override
     public Player getKiller() {
-        if (lastEntityDamageEvent instanceof EntityDamageByEntityEvent) {
-            EntityDamageByEntityEvent ev = ((EntityDamageByEntityEvent) lastEntityDamageEvent);
-
-            if (ev.getDamager() instanceof Player) {
-                return ((Player) ev.getDamager());
-            }
+        if(killEvent == null) return null;
+        if (killEvent.getDamager() instanceof Player) {
+            return ((Player) killEvent.getDamager());
         }
+
         return null;
     }
 
