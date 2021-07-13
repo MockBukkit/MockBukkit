@@ -3,7 +3,11 @@ package be.seeseemelk.mockbukkit;
 import org.bukkit.BanEntry;
 import org.bukkit.BanList;
 
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class MockBanList implements BanList
 {
