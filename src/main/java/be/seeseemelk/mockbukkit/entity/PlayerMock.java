@@ -68,7 +68,11 @@ public class PlayerMock extends EntityMock implements Player
 	private double health = 20.0;
 	private boolean whitelisted = true;
 	private InventoryView inventoryView;
-	
+	private boolean isSleeping;
+	private boolean isSprinting;
+	private boolean isSneaking;
+	private int level;
+	private float xp;
 	public PlayerMock(String name)
 	{
 		this(name, UUID.nameUUIDFromBytes(("OfflinePlayer:" + name).getBytes(Charsets.UTF_8)));
@@ -379,7 +383,6 @@ public class PlayerMock extends EntityMock implements Player
 	{
 		itemOnCursor = item;
 	}
-	boolean isSleeping;
 	@Override
 	public boolean isSleeping()
 	{
@@ -502,7 +505,7 @@ public class PlayerMock extends EntityMock implements Player
 	{
 		lastEntityDamageEvent.setDamage(damage);
 	}
-	long lastTimeDamage;
+	private long lastTimeDamage;
 	@Override
 	public int getNoDamageTicks()
 	{
@@ -793,7 +796,6 @@ public class PlayerMock extends EntityMock implements Player
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	private boolean isSneaking;
 	@Override
 	public boolean isSneaking()
 	{
@@ -805,7 +807,6 @@ public class PlayerMock extends EntityMock implements Player
 	{
 		isSneaking = sneak;
 	}
-	private boolean isSprinting;
 	@Override
 	public boolean isSprinting()
 	{
@@ -1140,8 +1141,6 @@ public class PlayerMock extends EntityMock implements Player
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	int level;
-	float xp;
 	@Override
 	public void giveExpLevels(int amount)
 	{
