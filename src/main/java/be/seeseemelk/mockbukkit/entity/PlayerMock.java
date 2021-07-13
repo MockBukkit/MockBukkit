@@ -20,6 +20,7 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityDamageEvent.DamageModifier;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.InventoryView.Property;
 import org.bukkit.map.MapView;
@@ -1003,7 +1004,7 @@ public class PlayerMock extends EntityMock implements Player {
     public void setExp(float exp) {
         xp = exp;
         if (xp > 1) {
-            level++;
+            incLevel();
         }
     }
 
@@ -1011,10 +1012,15 @@ public class PlayerMock extends EntityMock implements Player {
     public int getLevel() {
         return level;
     }
-
+    public void incLevel(){
+        setLevel(getLevel()+1);
+    }
     @Override
     public void setLevel(int level) {
+        int oldLevel = this.level;
         this.level = level;
+        PlayerLevelChangeEvent e = new PlayerLevelChangeEvent(this, oldLevel,level);
+        Bukkit.getPluginManager().callEvent(e);
     }
 
     @Override
