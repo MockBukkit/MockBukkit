@@ -42,7 +42,7 @@ public class PlayerMock extends EntityMock implements Player {
     private final Set<PotionEffect> potionEffects = new HashSet<>();
     private boolean canFly;
     private boolean isFlying;
-    private HashMap<Player, Player> hiddenPlayers = new HashMap<>();
+    private final Set<Player> hiddenPlayers = new HashSet<>();
     private Scoreboard scoreboard;
     private int foodLevel;
     private boolean online;
@@ -1099,17 +1099,31 @@ public class PlayerMock extends EntityMock implements Player {
 
     @Override
     public void hidePlayer(Player player) {
-        hiddenPlayers.put(this, player);
+        hiddenPlayers.add(player);
     }
 
     @Override
     public void showPlayer(Player player) {
-        hiddenPlayers.remove(this, player);
+        hiddenPlayers.remove(player);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof PlayerMock)) return false;
+        if (!super.equals(o)) return false;
+        PlayerMock that = (PlayerMock) o;
+        return canFly == that.canFly && isFlying() == that.isFlying() && getFoodLevel() == that.getFoodLevel() && isOnline() == that.isOnline() && Double.compare(that.getMaxHealth(), getMaxHealth()) == 0 && Double.compare(that.getHealth(), getHealth()) == 0 && isWhitelisted() == that.isWhitelisted() && isSleeping() == that.isSleeping() && isSprinting() == that.isSprinting() && isSneaking() == that.isSneaking() && getLevel() == that.getLevel() && Float.compare(that.xp, xp) == 0 && lastTimeDamage == that.lastTimeDamage && potionEffects.equals(that.potionEffects) && hiddenPlayers.equals(that.hiddenPlayers) && getScoreboard().equals(that.getScoreboard()) && getInventory().equals(that.getInventory()) && gamemode == that.gamemode && getDisplayName().equals(that.getDisplayName()) && inventoryView.equals(that.inventoryView) && getItemOnCursor().equals(that.getItemOnCursor()) && killEvent.equals(that.killEvent);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), potionEffects, canFly, isFlying(), hiddenPlayers, getScoreboard(), getFoodLevel(), isOnline(), getInventory(), gamemode, getMaxHealth(), getDisplayName(), getHealth(), isWhitelisted(), inventoryView, isSleeping(), isSprinting(), isSneaking(), getLevel(), xp, getItemOnCursor(), lastTimeDamage, killEvent);
     }
 
     @Override
     public boolean canSee(Player player) {
-        return hiddenPlayers.containsKey(this) && hiddenPlayers.containsValue(player);
+        return !hiddenPlayers.contains(player);
     }
 
     @Override
