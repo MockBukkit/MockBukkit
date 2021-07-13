@@ -256,7 +256,7 @@ public class BlockMock implements org.bukkit.block.Block
 	public boolean setTypeId(int type)
 	{
 		Material old = material;
-		this.material = Material.getMaterial(type);
+		setType(material);
 		return this.material != old;
 	}
 	
