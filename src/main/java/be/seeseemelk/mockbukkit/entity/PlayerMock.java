@@ -1119,7 +1119,7 @@ public class PlayerMock extends EntityMock implements Player {
 
     @Override
     public void setFlying(boolean value) {
-        this.isFlying = true;
+        this.isFlying = value;
     }
 
     @Override
