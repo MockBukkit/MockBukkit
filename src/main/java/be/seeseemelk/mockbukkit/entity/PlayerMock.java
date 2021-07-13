@@ -93,7 +93,7 @@ public class PlayerMock extends EntityMock implements Player
 		
 		setLocation(Bukkit.getWorlds().get(0).getSpawnLocation().clone());
 		closeInventory();
-		PlayerMock.playersThatPlayerBefore.add(this);
+		playersThatPlayedBefore.add(this.name);
 	}
 	
 	/**
@@ -494,7 +494,7 @@ public class PlayerMock extends EntityMock implements Player
 	@Override
 	public double getLastDamage()
 	{
-		if(e != null){
+		if(lastEntityDamageEvent != null){
 			return lastEntityDamageEvent.getDamage();
 		}
 		return 0.0;
@@ -521,7 +521,7 @@ public class PlayerMock extends EntityMock implements Player
 	@Override
 	public Player getKiller()
 	{
-		if(e instanceof EntityDamageByEntityEvent){
+		if(lastEntityDamageEvent instanceof EntityDamageByEntityEvent){
 			EntityDamageByEntityEvent ev = ((EntityDamageByEntityEvent) lastEntityDamageEvent);
 
 			if(ev.getDamager() instanceof Player){
