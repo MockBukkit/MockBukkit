@@ -14,92 +14,91 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
  * This {@link ContainerMock} represents a {@link Sign}.
  *
  * @author TheBusyBiscuit
- *
  */
 public class SignMock extends TileStateMock implements Sign
 {
 
-	private final String[] lines = { "", "", "", "" };
+    private final String[] lines = {"", "", "", ""};
 
-	public SignMock(@NotNull Material material)
-	{
-		super(material);
-	}
+    public SignMock(@NotNull Material material)
+    {
+        super(material);
+    }
 
-	protected SignMock(@NotNull Block block)
-	{
-		super(block);
-	}
+    protected SignMock(@NotNull Block block)
+    {
+        super(block);
+    }
 
-	protected SignMock(@NotNull SignMock state)
-	{
-		super(state);
+    protected SignMock(@NotNull SignMock state)
+    {
+        super(state);
 
-		for (int i = 0; i < 4; i++)
-		{
-			lines[i] = state.getLine(i);
-		}
-	}
+        for (int i = 0; i < 4; i++)
+        {
+            lines[i] = state.getLine(i);
+        }
+    }
 
-	@Override
-	@NotNull
-	public String[] getLines()
-	{
-		String[] text = new String[4];
+    @Override
+    @NotNull
+    public String[] getLines()
+    {
+        String[] text = new String[4];
 
-		for (int i = 0; i < 4; i++)
-		{
-			text[i] = getLine(i);
-		}
+        for (int i = 0; i < 4; i++)
+        {
+            text[i] = getLine(i);
+        }
 
-		return text;
-	}
+        return text;
+    }
 
-	@Override
-	public String getLine(int index) throws IndexOutOfBoundsException
-	{
-		return lines[index];
-	}
+    @Override
+    public String getLine(int index) throws IndexOutOfBoundsException
+    {
+        return lines[index];
+    }
 
-	@Override
-	public void setLine(int index, @NotNull String line) throws IndexOutOfBoundsException
-	{
-		Validate.notNull(line, "Line cannot be null!");
-		lines[index] = line;
-	}
+    @Override
+    public void setLine(int index, @NotNull String line) throws IndexOutOfBoundsException
+    {
+        Validate.notNull(line, "Line cannot be null!");
+        lines[index] = line;
+    }
 
-	@Override
-	public boolean isEditable()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
+    @Override
+    public boolean isEditable()
+    {
+        // TODO Auto-generated method stub
+        throw new UnimplementedOperationException();
+    }
 
-	@Override
-	public void setEditable(boolean editable)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
+    @Override
+    public void setEditable(boolean editable)
+    {
+        // TODO Auto-generated method stub
+        throw new UnimplementedOperationException();
+    }
 
-	@Override
-	public DyeColor getColor()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
+    @Override
+    public DyeColor getColor()
+    {
+        // TODO Auto-generated method stub
+        throw new UnimplementedOperationException();
+    }
 
-	@Override
-	public void setColor(DyeColor color)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
+    @Override
+    public void setColor(DyeColor color)
+    {
+        // TODO Auto-generated method stub
+        throw new UnimplementedOperationException();
+    }
 
-	@Override
-	public BlockState getSnapshot()
-	{
-		return new SignMock(this);
-	}
+    @Override
+    public BlockState getSnapshot()
+    {
+        return new SignMock(this);
+    }
 
 }

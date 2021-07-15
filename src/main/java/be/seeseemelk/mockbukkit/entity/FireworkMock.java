@@ -18,62 +18,61 @@ import be.seeseemelk.mockbukkit.inventory.meta.FireworkMetaMock;
  * properties.
  *
  * @author TheBusyBiscuit
- *
  */
 public class FireworkMock extends ProjectileMock implements Firework
 {
 
-	private FireworkMeta meta;
-	private boolean shotAtAngle = false;
+    private FireworkMeta meta;
+    private boolean shotAtAngle = false;
 
-	public FireworkMock(@NotNull ServerMock server, @NotNull UUID uuid)
-	{
-		this(server, uuid, new FireworkMetaMock());
-	}
+    public FireworkMock(@NotNull ServerMock server, @NotNull UUID uuid)
+    {
+        this(server, uuid, new FireworkMetaMock());
+    }
 
-	public FireworkMock(@NotNull ServerMock server, @NotNull UUID uuid, @NotNull FireworkMeta meta)
-	{
-		super(server, uuid);
+    public FireworkMock(@NotNull ServerMock server, @NotNull UUID uuid, @NotNull FireworkMeta meta)
+    {
+        super(server, uuid);
 
-		this.meta = meta.clone();
-	}
+        this.meta = meta.clone();
+    }
 
-	@Override
-	public EntityType getType()
-	{
-		return EntityType.FIREWORK;
-	}
+    @Override
+    public EntityType getType()
+    {
+        return EntityType.FIREWORK;
+    }
 
-	@Override
-	public @NotNull FireworkMeta getFireworkMeta()
-	{
-		return meta;
-	}
+    @Override
+    public @NotNull FireworkMeta getFireworkMeta()
+    {
+        return meta;
+    }
 
-	@Override
-	public void setFireworkMeta(@NotNull FireworkMeta meta)
-	{
-		Validate.notNull(meta, "FireworkMeta cannot be null!");
-		this.meta = meta.clone();
-	}
+    @Override
+    public void setFireworkMeta(@NotNull FireworkMeta meta)
+    {
+        Validate.notNull(meta, "FireworkMeta cannot be null!");
+        this.meta = meta.clone();
+    }
 
-	@Override
-	public void detonate()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
+    @Override
+    public void detonate()
+    {
+        // TODO Auto-generated method stub
+        throw new UnimplementedOperationException();
+    }
 
-	@Override
-	public boolean isShotAtAngle()
-	{
-		return shotAtAngle;
-	}
+    @Override
+    public boolean isShotAtAngle()
+    {
+        return shotAtAngle;
+    }
 
-	@Override
-	public void setShotAtAngle(boolean shotAtAngle)
-	{
-		this.shotAtAngle = shotAtAngle;
-	}
+    @Override
+    public void setShotAtAngle(boolean shotAtAngle)
+    {
+        this.shotAtAngle = shotAtAngle;
+    }
 
 }

@@ -8,18 +8,18 @@ import org.jetbrains.annotations.NotNull;
 public class ShulkerBoxInventoryMock extends InventoryMock
 {
 
-	public ShulkerBoxInventoryMock(InventoryHolder holder)
-	{
-		super(holder, 27, InventoryType.SHULKER_BOX);
-	}
+    public ShulkerBoxInventoryMock(InventoryHolder holder)
+    {
+        super(holder, 27, InventoryType.SHULKER_BOX);
+    }
 
-	@Override
-	@NotNull
-	public Inventory getSnapshot()
-	{
-		Inventory inventory = new ShulkerBoxInventoryMock(getHolder());
-		inventory.setContents(getContents());
-		return inventory;
-	}
+    @Override
+    @NotNull
+    public Inventory getSnapshot()
+    {
+        Inventory inventory = new ShulkerBoxInventoryMock(getHolder());
+        inventory.setContents(getContents());
+        return inventory;
+    }
 
 }

@@ -21,49 +21,49 @@ import be.seeseemelk.mockbukkit.ServerMock;
 
 class KeyedBossBarMockTest
 {
-	private ServerMock server;
+    private ServerMock server;
 
-	@BeforeEach
-	public void setUp()
-	{
-		server = MockBukkit.mock();
-	}
+    @BeforeEach
+    public void setUp()
+    {
+        server = MockBukkit.mock();
+    }
 
-	@AfterEach
-	public void tearDown()
-	{
-		MockBukkit.unmock();
-	}
+    @AfterEach
+    public void tearDown()
+    {
+        MockBukkit.unmock();
+    }
 
-	@Test
-	@SuppressWarnings("deprecation")
-	void testKeyedBossBar()
-	{
-		KeyedBossBar bar = server.createBossBar(new NamespacedKey("mockbukkittest", "bossbar1"), "Boss bar 1",
-		                                        BarColor.WHITE, BarStyle.SEGMENTED_10);
-		assertNotNull(bar);
+    @Test
+    @SuppressWarnings("deprecation")
+    void testKeyedBossBar()
+    {
+        KeyedBossBar bar = server.createBossBar(new NamespacedKey("mockbukkittest", "bossbar1"), "Boss bar 1",
+                BarColor.WHITE, BarStyle.SEGMENTED_10);
+        assertNotNull(bar);
 
-		// Make sure it initalized correctly
-		assertEquals("Boss bar 1", bar.getTitle());
-		assertEquals(BarColor.WHITE, bar.getColor());
-		assertEquals(BarStyle.SEGMENTED_10, bar.getStyle());
-		assertEquals(1.0, bar.getProgress(), 0);
+        // Make sure it initalized correctly
+        assertEquals("Boss bar 1", bar.getTitle());
+        assertEquals(BarColor.WHITE, bar.getColor());
+        assertEquals(BarStyle.SEGMENTED_10, bar.getStyle());
+        assertEquals(1.0, bar.getProgress(), 0);
 
-		assertEquals(1, Iterators.size(server.getBossBars()));
+        assertEquals(1, Iterators.size(server.getBossBars()));
 
-		assertEquals(bar, server.getBossBar(new NamespacedKey("mockbukkittest", "bossbar1")));
-		assertEquals(bar, server.getBossBars().next());
+        assertEquals(bar, server.getBossBar(new NamespacedKey("mockbukkittest", "bossbar1")));
+        assertEquals(bar, server.getBossBars().next());
 
-		assertTrue(server.removeBossBar(new NamespacedKey("mockbukkittest", "bossbar1")));
-		assertEquals(0, Iterators.size(server.getBossBars()));
+        assertTrue(server.removeBossBar(new NamespacedKey("mockbukkittest", "bossbar1")));
+        assertEquals(0, Iterators.size(server.getBossBars()));
 
-		assertFalse(server.removeBossBar(new NamespacedKey("mockbukkittest", "nonexistantbossbar")));
-	}
+        assertFalse(server.removeBossBar(new NamespacedKey("mockbukkittest", "nonexistantbossbar")));
+    }
 
-	@Test
-	void testNullKey()
-	{
-		assertThrows(IllegalArgumentException.class,
-		             () -> server.createBossBar(null, "Boss bar 1", BarColor.WHITE, BarStyle.SEGMENTED_10));
-	}
+    @Test
+    void testNullKey()
+    {
+        assertThrows(IllegalArgumentException.class,
+                () -> server.createBossBar(null, "Boss bar 1", BarColor.WHITE, BarStyle.SEGMENTED_10));
+    }
 }

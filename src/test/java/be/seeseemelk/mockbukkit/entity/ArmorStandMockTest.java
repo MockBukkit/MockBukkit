@@ -22,101 +22,101 @@ import be.seeseemelk.mockbukkit.WorldMock;
 class ArmorStandMockTest
 {
 
-	private ServerMock server;
-	private World world;
+    private ServerMock server;
+    private World world;
 
-	@BeforeEach
-	public void setUp()
-	{
-		server = MockBukkit.mock();
-		world = new WorldMock();
-	}
+    @BeforeEach
+    public void setUp()
+    {
+        server = MockBukkit.mock();
+        world = new WorldMock();
+    }
 
-	@AfterEach
-	public void tearDown()
-	{
-		MockBukkit.unmock();
-	}
+    @AfterEach
+    public void tearDown()
+    {
+        MockBukkit.unmock();
+    }
 
-	@Test
-	void testEntityType()
-	{
-		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
-		assertEquals(EntityType.ARMOR_STAND, armorStand.getType());
-	}
+    @Test
+    void testEntityType()
+    {
+        ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
+        assertEquals(EntityType.ARMOR_STAND, armorStand.getType());
+    }
 
-	@Test
-	void testEntitySpawning()
-	{
-		Location location = new Location(world, 100, 100, 100);
-		ArmorStand orb = (ArmorStand) world.spawnEntity(location, EntityType.ARMOR_STAND);
+    @Test
+    void testEntitySpawning()
+    {
+        Location location = new Location(world, 100, 100, 100);
+        ArmorStand orb = (ArmorStand) world.spawnEntity(location, EntityType.ARMOR_STAND);
 
-		// Does our entity exist in the correct World?
-		assertTrue(world.getEntities().contains(orb));
+        // Does our entity exist in the correct World?
+        assertTrue(world.getEntities().contains(orb));
 
-		// Is it at the right location?
-		assertEquals(location, orb.getLocation());
-	}
+        // Is it at the right location?
+        assertEquals(location, orb.getLocation());
+    }
 
-	@Test
-	void testHasEquipment()
-	{
-		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
-		assertNotNull(armorStand.getEquipment());
-	}
+    @Test
+    void testHasEquipment()
+    {
+        ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
+        assertNotNull(armorStand.getEquipment());
+    }
 
-	@Test
-	void testArms()
-	{
-		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
+    @Test
+    void testArms()
+    {
+        ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
 
-		armorStand.setArms(true);
-		assertTrue(armorStand.hasArms());
-		armorStand.setArms(false);
-		assertFalse(armorStand.hasArms());
-	}
+        armorStand.setArms(true);
+        assertTrue(armorStand.hasArms());
+        armorStand.setArms(false);
+        assertFalse(armorStand.hasArms());
+    }
 
-	@Test
-	void testSmall()
-	{
-		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
+    @Test
+    void testSmall()
+    {
+        ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
 
-		armorStand.setSmall(true);
-		assertTrue(armorStand.isSmall());
-		armorStand.setSmall(false);
-		assertFalse(armorStand.isSmall());
-	}
+        armorStand.setSmall(true);
+        assertTrue(armorStand.isSmall());
+        armorStand.setSmall(false);
+        assertFalse(armorStand.isSmall());
+    }
 
-	@Test
-	void testMarker()
-	{
-		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
+    @Test
+    void testMarker()
+    {
+        ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
 
-		armorStand.setMarker(true);
-		assertTrue(armorStand.isMarker());
-		armorStand.setMarker(false);
-		assertFalse(armorStand.isMarker());
-	}
+        armorStand.setMarker(true);
+        assertTrue(armorStand.isMarker());
+        armorStand.setMarker(false);
+        assertFalse(armorStand.isMarker());
+    }
 
-	@Test
-	void testBasePlate()
-	{
-		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
+    @Test
+    void testBasePlate()
+    {
+        ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
 
-		armorStand.setBasePlate(true);
-		assertTrue(armorStand.hasBasePlate());
-		armorStand.setBasePlate(false);
-		assertFalse(armorStand.hasBasePlate());
-	}
+        armorStand.setBasePlate(true);
+        assertTrue(armorStand.hasBasePlate());
+        armorStand.setBasePlate(false);
+        assertFalse(armorStand.hasBasePlate());
+    }
 
-	@Test
-	void testVisible()
-	{
-		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
+    @Test
+    void testVisible()
+    {
+        ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
 
-		armorStand.setVisible(true);
-		assertTrue(armorStand.isVisible());
-		armorStand.setVisible(false);
-		assertFalse(armorStand.isVisible());
-	}
+        armorStand.setVisible(true);
+        assertTrue(armorStand.isVisible());
+        armorStand.setVisible(false);
+        assertFalse(armorStand.isVisible());
+    }
 }

@@ -15,60 +15,60 @@ import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
 class SkullMetaMockTest
 {
 
-	@BeforeEach
-	public void setUp()
-	{
-		MockBukkit.mock();
-	}
+    @BeforeEach
+    public void setUp()
+    {
+        MockBukkit.mock();
+    }
 
-	@AfterEach
-	public void tearDown()
-	{
-		MockBukkit.unmock();
-	}
+    @AfterEach
+    public void tearDown()
+    {
+        MockBukkit.unmock();
+    }
 
-	@Test
-	void testDefaultNoOwner()
-	{
-		SkullMetaMock meta = new SkullMetaMock();
+    @Test
+    void testDefaultNoOwner()
+    {
+        SkullMetaMock meta = new SkullMetaMock();
 
-		assertFalse(meta.hasOwner());
-		assertNull(meta.getOwner());
-		assertNull(meta.getOwningPlayer());
-	}
+        assertFalse(meta.hasOwner());
+        assertNull(meta.getOwner());
+        assertNull(meta.getOwningPlayer());
+    }
 
-	@Test
-	void testSetOwner()
-	{
-		SkullMetaMock meta = new SkullMetaMock();
+    @Test
+    void testSetOwner()
+    {
+        SkullMetaMock meta = new SkullMetaMock();
 
-		assertTrue(meta.setOwner("TheBusyBiscuit"));
-		assertTrue(meta.hasOwner());
-		assertEquals("TheBusyBiscuit", meta.getOwner());
-		assertEquals("TheBusyBiscuit", meta.getOwningPlayer().getName());
-	}
+        assertTrue(meta.setOwner("TheBusyBiscuit"));
+        assertTrue(meta.hasOwner());
+        assertEquals("TheBusyBiscuit", meta.getOwner());
+        assertEquals("TheBusyBiscuit", meta.getOwningPlayer().getName());
+    }
 
-	@Test
-	void testSetOwningPlayer()
-	{
-		SkullMetaMock meta = new SkullMetaMock();
+    @Test
+    void testSetOwningPlayer()
+    {
+        SkullMetaMock meta = new SkullMetaMock();
 
-		assertTrue(meta.setOwningPlayer(new OfflinePlayerMock("TheBusyBiscuit")));
-		assertTrue(meta.hasOwner());
-		assertEquals("TheBusyBiscuit", meta.getOwner());
-		assertEquals("TheBusyBiscuit", meta.getOwningPlayer().getName());
-	}
+        assertTrue(meta.setOwningPlayer(new OfflinePlayerMock("TheBusyBiscuit")));
+        assertTrue(meta.hasOwner());
+        assertEquals("TheBusyBiscuit", meta.getOwner());
+        assertEquals("TheBusyBiscuit", meta.getOwningPlayer().getName());
+    }
 
-	@Test
-	void testClone()
-	{
-		SkullMetaMock meta = new SkullMetaMock();
+    @Test
+    void testClone()
+    {
+        SkullMetaMock meta = new SkullMetaMock();
 
-		assertTrue(meta.setOwner("TheBusyBiscuit"));
+        assertTrue(meta.setOwner("TheBusyBiscuit"));
 
-		SkullMetaMock clone = meta.clone();
-		assertEquals(meta, clone);
-		assertEquals("TheBusyBiscuit", clone.getOwner());
-	}
+        SkullMetaMock clone = meta.clone();
+        assertEquals(meta, clone);
+        assertEquals("TheBusyBiscuit", clone.getOwner());
+    }
 
 }

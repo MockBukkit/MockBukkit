@@ -21,67 +21,67 @@ import be.seeseemelk.mockbukkit.block.BlockMock;
 class BarrelMockTest
 {
 
-	private Barrel barrel;
+    private Barrel barrel;
 
-	@BeforeEach
-	public void setUp() throws Exception
-	{
-		MockBukkit.mock();
-		barrel = new BarrelMock(Material.BARREL);
-	}
+    @BeforeEach
+    public void setUp() throws Exception
+    {
+        MockBukkit.mock();
+        barrel = new BarrelMock(Material.BARREL);
+    }
 
-	@AfterEach
-	public void tearDown() throws Exception
-	{
-		MockBukkit.unmock();
-	}
+    @AfterEach
+    public void tearDown() throws Exception
+    {
+        MockBukkit.unmock();
+    }
 
-	@Test
-	void testMaterialBarrelBlockState()
-	{
-		Block block = new BlockMock(Material.BARREL);
-		assertTrue(block.getState() instanceof Barrel);
-	}
+    @Test
+    void testMaterialBarrelBlockState()
+    {
+        Block block = new BlockMock(Material.BARREL);
+        assertTrue(block.getState() instanceof Barrel);
+    }
 
-	@Test
-	void testHasInventory()
-	{
-		Inventory inventory = barrel.getInventory();
-		assertNotNull(inventory);
+    @Test
+    void testHasInventory()
+    {
+        Inventory inventory = barrel.getInventory();
+        assertNotNull(inventory);
 
-		assertEquals(barrel, inventory.getHolder());
-		assertEquals(InventoryType.BARREL, inventory.getType());
-	}
+        assertEquals(barrel, inventory.getHolder());
+        assertEquals(InventoryType.BARREL, inventory.getType());
+    }
 
-	@Test
-	void testLocking()
-	{
-		String key = "key";
+    @Test
+    void testLocking()
+    {
+        String key = "key";
 
-		assertFalse(barrel.isLocked());
-		assertEquals("", barrel.getLock());
+        assertFalse(barrel.isLocked());
+        assertEquals("", barrel.getLock());
 
-		barrel.setLock("key");
-		assertTrue(barrel.isLocked());
-		assertEquals(key, barrel.getLock());
-	}
+        barrel.setLock("key");
+        assertTrue(barrel.isLocked());
+        assertEquals(key, barrel.getLock());
+    }
 
-	@Test
-	void testNullLocking()
-	{
-		barrel.setLock(null);
-		assertFalse(barrel.isLocked());
-		assertEquals("", barrel.getLock());
-	}
+    @Test
+    void testNullLocking()
+    {
+        barrel.setLock(null);
+        assertFalse(barrel.isLocked());
+        assertEquals("", barrel.getLock());
+    }
 
-	@Test
-	void testNaming()
-	{
-		String name = "Cool Chest";
+    @Test
+    void testNaming()
+    {
+        String name = "Cool Chest";
 
-		assertNull(barrel.getCustomName());
+        assertNull(barrel.getCustomName());
 
-		barrel.setCustomName(name);
-		assertEquals(name, barrel.getCustomName());
-	}
+        barrel.setCustomName(name);
+        assertEquals(name, barrel.getCustomName());
+    }
 }

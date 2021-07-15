@@ -10,21 +10,21 @@ import org.jetbrains.annotations.NotNull;
 public final class PluginCommandUtils
 {
 
-	private PluginCommandUtils()
-	{
-		// Do not instantiate this.
-	}
+    private PluginCommandUtils()
+    {
+        // Do not instantiate this.
+    }
 
-	/**
-	 * Creates a plugin command.
-	 *
-	 * @param name  The name of the command to instantiate.
-	 * @param owner The plugin that owns this command.
-	 * @return The new command.
-	 */
-	public static @NotNull PluginCommand createPluginCommand(@NotNull String name, @NotNull Plugin owner)
-	{
-		return new PluginCommand(name, owner);
-	}
+    /**
+     * Creates a plugin command.
+     *
+     * @param name  The name of the command to instantiate.
+     * @param owner The plugin that owns this command.
+     * @return The new command.
+     */
+    public static @NotNull PluginCommand createPluginCommand(@NotNull String name, @NotNull Plugin owner)
+    {
+        return new PluginCommand(name, owner);
+    }
 
 }

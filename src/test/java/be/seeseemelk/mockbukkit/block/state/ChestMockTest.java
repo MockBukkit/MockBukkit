@@ -21,68 +21,68 @@ import be.seeseemelk.mockbukkit.block.BlockMock;
 class ChestMockTest
 {
 
-	private Chest chest;
+    private Chest chest;
 
-	@BeforeEach
-	public void setUp() throws Exception
-	{
-		MockBukkit.mock();
-		chest = new ChestMock(Material.CHEST);
-	}
+    @BeforeEach
+    public void setUp() throws Exception
+    {
+        MockBukkit.mock();
+        chest = new ChestMock(Material.CHEST);
+    }
 
-	@AfterEach
-	public void tearDown() throws Exception
-	{
-		MockBukkit.unmock();
-	}
+    @AfterEach
+    public void tearDown() throws Exception
+    {
+        MockBukkit.unmock();
+    }
 
-	@Test
-	void testMaterialChestBlockState()
-	{
-		Block block = new BlockMock(Material.CHEST);
-		assertTrue(block.getState() instanceof Chest);
-	}
+    @Test
+    void testMaterialChestBlockState()
+    {
+        Block block = new BlockMock(Material.CHEST);
+        assertTrue(block.getState() instanceof Chest);
+    }
 
-	@Test
-	void testHasInventory()
-	{
-		Inventory inventory = chest.getInventory();
-		assertNotNull(inventory);
-		assertEquals(inventory, chest.getBlockInventory());
+    @Test
+    void testHasInventory()
+    {
+        Inventory inventory = chest.getInventory();
+        assertNotNull(inventory);
+        assertEquals(inventory, chest.getBlockInventory());
 
-		assertEquals(chest, inventory.getHolder());
-		assertEquals(InventoryType.CHEST, inventory.getType());
-	}
+        assertEquals(chest, inventory.getHolder());
+        assertEquals(InventoryType.CHEST, inventory.getType());
+    }
 
-	@Test
-	void testLocking()
-	{
-		String key = "key";
+    @Test
+    void testLocking()
+    {
+        String key = "key";
 
-		assertFalse(chest.isLocked());
-		assertEquals("", chest.getLock());
+        assertFalse(chest.isLocked());
+        assertEquals("", chest.getLock());
 
-		chest.setLock("key");
-		assertTrue(chest.isLocked());
-		assertEquals(key, chest.getLock());
-	}
+        chest.setLock("key");
+        assertTrue(chest.isLocked());
+        assertEquals(key, chest.getLock());
+    }
 
-	@Test
-	void testNullLocking()
-	{
-		chest.setLock(null);
-		assertFalse(chest.isLocked());
-		assertEquals("", chest.getLock());
-	}
+    @Test
+    void testNullLocking()
+    {
+        chest.setLock(null);
+        assertFalse(chest.isLocked());
+        assertEquals("", chest.getLock());
+    }
 
-	@Test
-	void testNaming()
-	{
-		String name = "Cool Chest";
+    @Test
+    void testNaming()
+    {
+        String name = "Cool Chest";
 
-		assertNull(chest.getCustomName());
+        assertNull(chest.getCustomName());
 
-		chest.setCustomName(name);
-		assertEquals(name, chest.getCustomName());
-	}
+        chest.setCustomName(name);
+        assertEquals(name, chest.getCustomName());
+    }
 }

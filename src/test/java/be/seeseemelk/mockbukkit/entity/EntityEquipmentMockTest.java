@@ -20,102 +20,102 @@ import be.seeseemelk.mockbukkit.ServerMock;
 class EntityEquipmentMockTest
 {
 
-	private ServerMock server;
+    private ServerMock server;
 
-	@BeforeEach
-	public void setUp()
-	{
-		server = MockBukkit.mock();
-	}
+    @BeforeEach
+    public void setUp()
+    {
+        server = MockBukkit.mock();
+    }
 
-	@AfterEach
-	public void tearDown()
-	{
-		MockBukkit.unmock();
-	}
+    @AfterEach
+    public void tearDown()
+    {
+        MockBukkit.unmock();
+    }
 
-	@Test
-	void testMainHand()
-	{
-		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
-		EntityEquipment equipment = armorStand.getEquipment();
-		ItemStack item = new ItemStack(Material.DIAMOND);
+    @Test
+    void testMainHand()
+    {
+        ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
+        EntityEquipment equipment = armorStand.getEquipment();
+        ItemStack item = new ItemStack(Material.DIAMOND);
 
-		assertNull(equipment.getItemInMainHand());
-		equipment.setItemInMainHand(item);
+        assertNull(equipment.getItemInMainHand());
+        equipment.setItemInMainHand(item);
 
-		assertEquals(item, equipment.getItemInMainHand());
-		assertEquals(item, equipment.getItem(EquipmentSlot.HAND));
-	}
+        assertEquals(item, equipment.getItemInMainHand());
+        assertEquals(item, equipment.getItem(EquipmentSlot.HAND));
+    }
 
-	@Test
-	void testOffHand()
-	{
-		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
-		EntityEquipment equipment = armorStand.getEquipment();
-		ItemStack item = new ItemStack(Material.DIAMOND);
+    @Test
+    void testOffHand()
+    {
+        ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
+        EntityEquipment equipment = armorStand.getEquipment();
+        ItemStack item = new ItemStack(Material.DIAMOND);
 
-		assertNull(equipment.getItemInOffHand());
-		equipment.setItemInOffHand(item);
+        assertNull(equipment.getItemInOffHand());
+        equipment.setItemInOffHand(item);
 
-		assertEquals(item, equipment.getItemInOffHand());
-		assertEquals(item, equipment.getItem(EquipmentSlot.OFF_HAND));
-	}
+        assertEquals(item, equipment.getItemInOffHand());
+        assertEquals(item, equipment.getItem(EquipmentSlot.OFF_HAND));
+    }
 
-	@Test
-	void testHelmet()
-	{
-		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
-		EntityEquipment equipment = armorStand.getEquipment();
-		ItemStack item = new ItemStack(Material.DIAMOND);
+    @Test
+    void testHelmet()
+    {
+        ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
+        EntityEquipment equipment = armorStand.getEquipment();
+        ItemStack item = new ItemStack(Material.DIAMOND);
 
-		assertNull(equipment.getHelmet());
-		equipment.setHelmet(item);
+        assertNull(equipment.getHelmet());
+        equipment.setHelmet(item);
 
-		assertEquals(item, equipment.getHelmet());
-		assertEquals(item, equipment.getItem(EquipmentSlot.HEAD));
-	}
+        assertEquals(item, equipment.getHelmet());
+        assertEquals(item, equipment.getItem(EquipmentSlot.HEAD));
+    }
 
-	@Test
-	void testChestplate()
-	{
-		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
-		EntityEquipment equipment = armorStand.getEquipment();
-		ItemStack item = new ItemStack(Material.DIAMOND);
+    @Test
+    void testChestplate()
+    {
+        ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
+        EntityEquipment equipment = armorStand.getEquipment();
+        ItemStack item = new ItemStack(Material.DIAMOND);
 
-		assertNull(equipment.getChestplate());
-		equipment.setChestplate(item);
+        assertNull(equipment.getChestplate());
+        equipment.setChestplate(item);
 
-		assertEquals(item, equipment.getChestplate());
-		assertEquals(item, equipment.getItem(EquipmentSlot.CHEST));
-	}
+        assertEquals(item, equipment.getChestplate());
+        assertEquals(item, equipment.getItem(EquipmentSlot.CHEST));
+    }
 
-	@Test
-	void testLeggings()
-	{
-		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
-		EntityEquipment equipment = armorStand.getEquipment();
-		ItemStack item = new ItemStack(Material.DIAMOND);
+    @Test
+    void testLeggings()
+    {
+        ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
+        EntityEquipment equipment = armorStand.getEquipment();
+        ItemStack item = new ItemStack(Material.DIAMOND);
 
-		assertNull(equipment.getLeggings());
-		equipment.setLeggings(item);
+        assertNull(equipment.getLeggings());
+        equipment.setLeggings(item);
 
-		assertEquals(item, equipment.getLeggings());
-		assertEquals(item, equipment.getItem(EquipmentSlot.LEGS));
-	}
+        assertEquals(item, equipment.getLeggings());
+        assertEquals(item, equipment.getItem(EquipmentSlot.LEGS));
+    }
 
-	@Test
-	void testBoots()
-	{
-		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
-		EntityEquipment equipment = armorStand.getEquipment();
-		ItemStack item = new ItemStack(Material.DIAMOND);
+    @Test
+    void testBoots()
+    {
+        ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
+        EntityEquipment equipment = armorStand.getEquipment();
+        ItemStack item = new ItemStack(Material.DIAMOND);
 
-		assertNull(equipment.getBoots());
-		equipment.setBoots(item);
+        assertNull(equipment.getBoots());
+        equipment.setBoots(item);
 
-		assertEquals(item, equipment.getBoots());
-		assertEquals(item, equipment.getItem(EquipmentSlot.FEET));
-	}
+        assertEquals(item, equipment.getBoots());
+        assertEquals(item, equipment.getItem(EquipmentSlot.FEET));
+    }
 
 }

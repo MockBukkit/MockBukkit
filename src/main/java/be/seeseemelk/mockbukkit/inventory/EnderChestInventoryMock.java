@@ -11,12 +11,11 @@ import be.seeseemelk.mockbukkit.entity.PlayerMock;
  * {@link PlayerMock} carries an instance of an {@link EnderChestInventoryMock}.
  *
  * @author TheBusyBiscuit
- *
  */
 public class EnderChestInventoryMock extends InventoryMock
 {
-	public EnderChestInventoryMock(InventoryHolder holder)
-	{
-		super(holder, 27, InventoryType.ENDER_CHEST);
-	}
+    public EnderChestInventoryMock(InventoryHolder holder)
+    {
+        super(holder, 27, InventoryType.ENDER_CHEST);
+    }
 }

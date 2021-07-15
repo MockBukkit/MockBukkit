@@ -9,15 +9,14 @@ import org.jetbrains.annotations.NotNull;
  * identical with the default CraftBukkit implementation too. So mock successful I would say.
  *
  * @author TheBusyBiscuit
- *
  */
 public class PersistentDataAdapterContextMock implements PersistentDataAdapterContext
 {
 
-	@Override
-	public @NotNull PersistentDataContainer newPersistentDataContainer()
-	{
-		return new PersistentDataContainerMock();
-	}
+    @Override
+    public @NotNull PersistentDataContainer newPersistentDataContainer()
+    {
+        return new PersistentDataContainerMock();
+    }
 
 }

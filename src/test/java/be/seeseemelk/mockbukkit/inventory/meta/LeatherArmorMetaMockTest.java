@@ -13,60 +13,60 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 class LeatherArmorMetaMockTest
 {
 
-	@BeforeEach
-	public void setUp()
-	{
-		MockBukkit.mock();
-	}
+    @BeforeEach
+    public void setUp()
+    {
+        MockBukkit.mock();
+    }
 
-	@AfterEach
-	public void tearDown()
-	{
-		MockBukkit.unmock();
-	}
+    @AfterEach
+    public void tearDown()
+    {
+        MockBukkit.unmock();
+    }
 
-	@Test
-	void testDefaultLeatherColor()
-	{
-		LeatherArmorMetaMock meta = new LeatherArmorMetaMock();
+    @Test
+    void testDefaultLeatherColor()
+    {
+        LeatherArmorMetaMock meta = new LeatherArmorMetaMock();
 
-		assertEquals(Bukkit.getItemFactory().getDefaultLeatherColor(), meta.getColor());
-	}
+        assertEquals(Bukkit.getItemFactory().getDefaultLeatherColor(), meta.getColor());
+    }
 
-	@Test
-	void testSetColor()
-	{
-		LeatherArmorMetaMock meta = new LeatherArmorMetaMock();
-		Color color = Color.MAROON;
-		meta.setColor(color);
+    @Test
+    void testSetColor()
+    {
+        LeatherArmorMetaMock meta = new LeatherArmorMetaMock();
+        Color color = Color.MAROON;
+        meta.setColor(color);
 
-		assertEquals(color, meta.getColor());
-	}
+        assertEquals(color, meta.getColor());
+    }
 
-	@Test
-	void testResetColor()
-	{
-		LeatherArmorMetaMock meta = new LeatherArmorMetaMock();
-		// Changing the color first
-		Color color = Color.MAROON;
-		meta.setColor(color);
-		assertEquals(color, meta.getColor());
+    @Test
+    void testResetColor()
+    {
+        LeatherArmorMetaMock meta = new LeatherArmorMetaMock();
+        // Changing the color first
+        Color color = Color.MAROON;
+        meta.setColor(color);
+        assertEquals(color, meta.getColor());
 
-		// Now clearing the color
-		meta.setColor(null);
-		assertEquals(Bukkit.getItemFactory().getDefaultLeatherColor(), meta.getColor());
-	}
+        // Now clearing the color
+        meta.setColor(null);
+        assertEquals(Bukkit.getItemFactory().getDefaultLeatherColor(), meta.getColor());
+    }
 
-	@Test
-	void testClone()
-	{
-		LeatherArmorMetaMock meta = new LeatherArmorMetaMock();
-		meta.setColor(Color.FUCHSIA);
+    @Test
+    void testClone()
+    {
+        LeatherArmorMetaMock meta = new LeatherArmorMetaMock();
+        meta.setColor(Color.FUCHSIA);
 
-		LeatherArmorMetaMock clone = meta.clone();
+        LeatherArmorMetaMock clone = meta.clone();
 
-		assertEquals(meta, clone);
-		assertEquals(meta.getColor(), clone.getColor());
-	}
+        assertEquals(meta, clone);
+        assertEquals(meta.getColor(), clone.getColor());
+    }
 
 }

@@ -17,99 +17,98 @@ import org.jetbrains.annotations.Nullable;
  * it isn't persistent of course since it only ever exists in a test environment.
  *
  * @author TheBusyBiscuit
- *
  */
 public class PersistentDataContainerMock implements PersistentDataContainer
 {
 
-	private final PersistentDataAdapterContext context = new PersistentDataAdapterContextMock();
-	private final Map<NamespacedKey, Object> map;
+    private final PersistentDataAdapterContext context = new PersistentDataAdapterContextMock();
+    private final Map<NamespacedKey, Object> map;
 
-	public PersistentDataContainerMock()
-	{
-		this.map = new HashMap<>();
-	}
+    public PersistentDataContainerMock()
+    {
+        this.map = new HashMap<>();
+    }
 
-	public PersistentDataContainerMock(PersistentDataContainerMock mock)
-	{
-		this.map = new HashMap<>(mock.map);
-	}
+    public PersistentDataContainerMock(PersistentDataContainerMock mock)
+    {
+        this.map = new HashMap<>(mock.map);
+    }
 
-	@Override
-	public int hashCode()
-	{
-		int hashCode = 3;
-		hashCode += map.hashCode();
-		return hashCode;
-	}
+    @Override
+    public int hashCode()
+    {
+        int hashCode = 3;
+        hashCode += map.hashCode();
+        return hashCode;
+    }
 
-	@Override
-	public boolean equals(Object obj)
-	{
-		if (!(obj instanceof PersistentDataContainerMock))
-		{
-			return false;
-		}
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (!(obj instanceof PersistentDataContainerMock))
+        {
+            return false;
+        }
 
-		return map.equals(((PersistentDataContainerMock) obj).map);
-	}
+        return map.equals(((PersistentDataContainerMock) obj).map);
+    }
 
-	@Override
-	public <T, Z> @Nullable Z get(@NotNull NamespacedKey key, @NotNull PersistentDataType<T, Z> type)
-	{
-		Object value = map.get(key);
+    @Override
+    public <T, Z> @Nullable Z get(@NotNull NamespacedKey key, @NotNull PersistentDataType<T, Z> type)
+    {
+        Object value = map.get(key);
 
-		if (value == null || !type.getPrimitiveType().isInstance(value))
-		{
-			return null;
-		}
+        if (value == null || !type.getPrimitiveType().isInstance(value))
+        {
+            return null;
+        }
 
-		return type.fromPrimitive(type.getPrimitiveType().cast(value), context);
-	}
+        return type.fromPrimitive(type.getPrimitiveType().cast(value), context);
+    }
 
-	@Override
-	public <T, Z> void set(@NotNull NamespacedKey key, @NotNull PersistentDataType<T, Z> type, @NotNull Z value)
-	{
-		map.put(key, type.toPrimitive(value, context));
-	}
+    @Override
+    public <T, Z> void set(@NotNull NamespacedKey key, @NotNull PersistentDataType<T, Z> type, @NotNull Z value)
+    {
+        map.put(key, type.toPrimitive(value, context));
+    }
 
-	@Override
-	public <T, Z> boolean has(@NotNull NamespacedKey key, @NotNull PersistentDataType<T, Z> type)
-	{
-		Object value = map.get(key);
-		return value != null && type.getPrimitiveType().isInstance(value);
-	}
+    @Override
+    public <T, Z> boolean has(@NotNull NamespacedKey key, @NotNull PersistentDataType<T, Z> type)
+    {
+        Object value = map.get(key);
+        return value != null && type.getPrimitiveType().isInstance(value);
+    }
 
-	@Override
-	public @NotNull PersistentDataAdapterContext getAdapterContext()
-	{
-		return context;
-	}
+    @Override
+    public @NotNull PersistentDataAdapterContext getAdapterContext()
+    {
+        return context;
+    }
 
-	@Override
-	public <T, Z> @NotNull Z getOrDefault(@NotNull NamespacedKey key, @NotNull PersistentDataType<T, Z> type,
-	                                      @NotNull Z defaultValue)
-	{
-		Z value = get(key, type);
-		return value != null ? value : defaultValue;
-	}
+    @Override
+    public <T, Z> @NotNull Z getOrDefault(@NotNull NamespacedKey key, @NotNull PersistentDataType<T, Z> type,
+                                          @NotNull Z defaultValue)
+    {
+        Z value = get(key, type);
+        return value != null ? value : defaultValue;
+    }
 
-	@Override
-	public boolean isEmpty()
-	{
-		return map.isEmpty();
-	}
+    @Override
+    public boolean isEmpty()
+    {
+        return map.isEmpty();
+    }
 
-	@Override
-	public void remove(@NotNull NamespacedKey key)
-	{
-		map.remove(key);
-	}
+    @Override
+    public void remove(@NotNull NamespacedKey key)
+    {
+        map.remove(key);
+    }
 
-	@Override
-	public Set<NamespacedKey> getKeys()
-	{
-		return Collections.unmodifiableSet(map.keySet());
-	}
+    @Override
+    public Set<NamespacedKey> getKeys()
+    {
+        return Collections.unmodifiableSet(map.keySet());
+    }
 
 }

@@ -21,67 +21,67 @@ import be.seeseemelk.mockbukkit.block.BlockMock;
 class HopperMockTest
 {
 
-	private Hopper hopper;
+    private Hopper hopper;
 
-	@BeforeEach
-	public void setUp() throws Exception
-	{
-		MockBukkit.mock();
-		hopper = new HopperMock(Material.HOPPER);
-	}
+    @BeforeEach
+    public void setUp() throws Exception
+    {
+        MockBukkit.mock();
+        hopper = new HopperMock(Material.HOPPER);
+    }
 
-	@AfterEach
-	public void tearDown() throws Exception
-	{
-		MockBukkit.unmock();
-	}
+    @AfterEach
+    public void tearDown() throws Exception
+    {
+        MockBukkit.unmock();
+    }
 
-	@Test
-	void testMaterialHopperBlockState()
-	{
-		Block block = new BlockMock(Material.HOPPER);
-		assertTrue(block.getState() instanceof Hopper);
-	}
+    @Test
+    void testMaterialHopperBlockState()
+    {
+        Block block = new BlockMock(Material.HOPPER);
+        assertTrue(block.getState() instanceof Hopper);
+    }
 
-	@Test
-	void testHasInventory()
-	{
-		Inventory inventory = hopper.getInventory();
-		assertNotNull(inventory);
+    @Test
+    void testHasInventory()
+    {
+        Inventory inventory = hopper.getInventory();
+        assertNotNull(inventory);
 
-		assertEquals(hopper, inventory.getHolder());
-		assertEquals(InventoryType.HOPPER, inventory.getType());
-	}
+        assertEquals(hopper, inventory.getHolder());
+        assertEquals(InventoryType.HOPPER, inventory.getType());
+    }
 
-	@Test
-	void testLocking()
-	{
-		String key = "key";
+    @Test
+    void testLocking()
+    {
+        String key = "key";
 
-		assertFalse(hopper.isLocked());
-		assertEquals("", hopper.getLock());
+        assertFalse(hopper.isLocked());
+        assertEquals("", hopper.getLock());
 
-		hopper.setLock("key");
-		assertTrue(hopper.isLocked());
-		assertEquals(key, hopper.getLock());
-	}
+        hopper.setLock("key");
+        assertTrue(hopper.isLocked());
+        assertEquals(key, hopper.getLock());
+    }
 
-	@Test
-	void testNullLocking()
-	{
-		hopper.setLock(null);
-		assertFalse(hopper.isLocked());
-		assertEquals("", hopper.getLock());
-	}
+    @Test
+    void testNullLocking()
+    {
+        hopper.setLock(null);
+        assertFalse(hopper.isLocked());
+        assertEquals("", hopper.getLock());
+    }
 
-	@Test
-	void testNaming()
-	{
-		String name = "Cool Hopper";
+    @Test
+    void testNaming()
+    {
+        String name = "Cool Hopper";
 
-		assertNull(hopper.getCustomName());
+        assertNull(hopper.getCustomName());
 
-		hopper.setCustomName(name);
-		assertEquals(name, hopper.getCustomName());
-	}
+        hopper.setCustomName(name);
+        assertEquals(name, hopper.getCustomName());
+    }
 }

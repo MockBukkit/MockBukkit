@@ -8,8 +8,8 @@ import be.seeseemelk.mockbukkit.ServerMock;
 
 public class MockCommandMap extends SimpleCommandMap implements CommandMap
 {
-	public MockCommandMap(@NotNull ServerMock serverMock)
-	{
-		super(serverMock);
-	}
+    public MockCommandMap(@NotNull ServerMock serverMock)
+    {
+        super(serverMock);
+    }
 }

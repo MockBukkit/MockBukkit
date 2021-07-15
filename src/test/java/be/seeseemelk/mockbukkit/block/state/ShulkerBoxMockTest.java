@@ -25,93 +25,93 @@ import be.seeseemelk.mockbukkit.block.BlockMock;
 class ShulkerBoxMockTest
 {
 
-	private ShulkerBoxMock shulkerBox;
+    private ShulkerBoxMock shulkerBox;
 
-	@BeforeEach
-	public void setUp() throws Exception
-	{
-		MockBukkit.mock();
-		shulkerBox = new ShulkerBoxMock(Material.SHULKER_BOX);
-	}
+    @BeforeEach
+    public void setUp() throws Exception
+    {
+        MockBukkit.mock();
+        shulkerBox = new ShulkerBoxMock(Material.SHULKER_BOX);
+    }
 
-	@AfterEach
-	public void tearDown() throws Exception
-	{
-		MockBukkit.unmock();
-	}
+    @AfterEach
+    public void tearDown() throws Exception
+    {
+        MockBukkit.unmock();
+    }
 
-	@Test
-	void testMaterialShulkerBoxBlockState()
-	{
-		Block block = new BlockMock(Material.SHULKER_BOX);
-		assertTrue(block.getState() instanceof ShulkerBox);
-	}
+    @Test
+    void testMaterialShulkerBoxBlockState()
+    {
+        Block block = new BlockMock(Material.SHULKER_BOX);
+        assertTrue(block.getState() instanceof ShulkerBox);
+    }
 
-	@Test
-	void testShulkerBoxStateMaterialValidation()
-	{
-		assertThrows(IllegalArgumentException.class, () -> new ShulkerBoxMock(Material.BREAD));
-	}
+    @Test
+    void testShulkerBoxStateMaterialValidation()
+    {
+        assertThrows(IllegalArgumentException.class, () -> new ShulkerBoxMock(Material.BREAD));
+    }
 
-	@Test
-	void testHasInventory()
-	{
-		Inventory inventory = shulkerBox.getInventory();
-		assertNotNull(inventory);
+    @Test
+    void testHasInventory()
+    {
+        Inventory inventory = shulkerBox.getInventory();
+        assertNotNull(inventory);
 
-		assertEquals(shulkerBox, inventory.getHolder());
-		assertEquals(InventoryType.SHULKER_BOX, inventory.getType());
-	}
+        assertEquals(shulkerBox, inventory.getHolder());
+        assertEquals(InventoryType.SHULKER_BOX, inventory.getType());
+    }
 
-	@Test
-	void testLocking()
-	{
-		String key = "key";
+    @Test
+    void testLocking()
+    {
+        String key = "key";
 
-		assertFalse(shulkerBox.isLocked());
-		assertEquals("", shulkerBox.getLock());
+        assertFalse(shulkerBox.isLocked());
+        assertEquals("", shulkerBox.getLock());
 
-		shulkerBox.setLock("key");
-		assertTrue(shulkerBox.isLocked());
-		assertEquals(key, shulkerBox.getLock());
-	}
+        shulkerBox.setLock("key");
+        assertTrue(shulkerBox.isLocked());
+        assertEquals(key, shulkerBox.getLock());
+    }
 
-	@Test
-	void testNullLocking()
-	{
-		shulkerBox.setLock(null);
-		assertFalse(shulkerBox.isLocked());
-		assertEquals("", shulkerBox.getLock());
-	}
+    @Test
+    void testNullLocking()
+    {
+        shulkerBox.setLock(null);
+        assertFalse(shulkerBox.isLocked());
+        assertEquals("", shulkerBox.getLock());
+    }
 
-	@Test
-	void testNaming()
-	{
-		String name = "Cool Shulker";
+    @Test
+    void testNaming()
+    {
+        String name = "Cool Shulker";
 
-		assertNull(shulkerBox.getCustomName());
+        assertNull(shulkerBox.getCustomName());
 
-		shulkerBox.setCustomName(name);
-		assertEquals(name, shulkerBox.getCustomName());
-	}
+        shulkerBox.setCustomName(name);
+        assertEquals(name, shulkerBox.getCustomName());
+    }
 
-	@Test
-	void testNullPointerUndyed()
-	{
-		assertThrows(NullPointerException.class, shulkerBox::getColor);
-	}
+    @Test
+    void testNullPointerUndyed()
+    {
+        assertThrows(NullPointerException.class, shulkerBox::getColor);
+    }
 
-	@ParameterizedTest
-	@EnumSource(DyeColor.class)
-	void testShulkerColors(DyeColor color)
-	{
-		assertDyed(Material.valueOf(color.name() + "_SHULKER_BOX"), color);
-	}
+    @ParameterizedTest
+    @EnumSource(DyeColor.class)
+    void testShulkerColors(DyeColor color)
+    {
+        assertDyed(Material.valueOf(color.name() + "_SHULKER_BOX"), color);
+    }
 
-	private void assertDyed(Material shulkerBox, DyeColor color)
-	{
-		Block block = new BlockMock(shulkerBox);
-		assertTrue(block.getState() instanceof ShulkerBox);
-		assertEquals(color, ((ShulkerBox) block.getState()).getColor());
-	}
+    private void assertDyed(Material shulkerBox, DyeColor color)
+    {
+        Block block = new BlockMock(shulkerBox);
+        assertTrue(block.getState() instanceof ShulkerBox);
+        assertEquals(color, ((ShulkerBox) block.getState()).getColor());
+    }
 }

@@ -15,80 +15,78 @@ import be.seeseemelk.mockbukkit.inventory.InventoryMock;
  * This {@link ContainerMock} represents a {@link Barrel}
  *
  * @author TheBusyBiscuit
- *
  * @see ChestMock
- *
  */
 public class BarrelMock extends ContainerMock implements Barrel
 {
 
-	public BarrelMock(@NotNull Material material)
-	{
-		super(material);
-	}
+    public BarrelMock(@NotNull Material material)
+    {
+        super(material);
+    }
 
-	protected BarrelMock(@NotNull Block block)
-	{
-		super(block);
-	}
+    protected BarrelMock(@NotNull Block block)
+    {
+        super(block);
+    }
 
-	protected BarrelMock(@NotNull BarrelMock state)
-	{
-		super(state);
-	}
+    protected BarrelMock(@NotNull BarrelMock state)
+    {
+        super(state);
+    }
 
-	@Override
-	public void setLootTable(LootTable table)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
+    @Override
+    public void setLootTable(LootTable table)
+    {
+        // TODO Auto-generated method stub
+        throw new UnimplementedOperationException();
+    }
 
-	@Override
-	public LootTable getLootTable()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
+    @Override
+    public LootTable getLootTable()
+    {
+        // TODO Auto-generated method stub
+        throw new UnimplementedOperationException();
+    }
 
-	@Override
-	public void setSeed(long seed)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
+    @Override
+    public void setSeed(long seed)
+    {
+        // TODO Auto-generated method stub
+        throw new UnimplementedOperationException();
+    }
 
-	@Override
-	public long getSeed()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
+    @Override
+    public long getSeed()
+    {
+        // TODO Auto-generated method stub
+        throw new UnimplementedOperationException();
+    }
 
-	@Override
-	public void open()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
+    @Override
+    public void open()
+    {
+        // TODO Auto-generated method stub
+        throw new UnimplementedOperationException();
+    }
 
-	@Override
-	public void close()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
+    @Override
+    public void close()
+    {
+        // TODO Auto-generated method stub
+        throw new UnimplementedOperationException();
+    }
 
-	@Override
-	protected InventoryMock createInventory()
-	{
-		return new BarrelInventoryMock(this);
-	}
+    @Override
+    protected InventoryMock createInventory()
+    {
+        return new BarrelInventoryMock(this);
+    }
 
-	@Override
-	public BlockState getSnapshot()
-	{
-		return new BarrelMock(this);
-	}
+    @Override
+    public BlockState getSnapshot()
+    {
+        return new BarrelMock(this);
+    }
 
 }

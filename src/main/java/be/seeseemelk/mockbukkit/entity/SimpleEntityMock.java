@@ -16,66 +16,66 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
  */
 public class SimpleEntityMock extends EntityMock
 {
-	/**
-	 * Creates a {@code SimpleEntityMock} with a specified UUID.
-	 *
-	 * @param server The server this entity lives on.
-	 * @param uuid   The UUID that the entity should have.
-	 */
-	public SimpleEntityMock(ServerMock server, UUID uuid)
-	{
-		super(server, uuid);
-	}
+    /**
+     * Creates a {@code SimpleEntityMock} with a specified UUID.
+     *
+     * @param server The server this entity lives on.
+     * @param uuid   The UUID that the entity should have.
+     */
+    public SimpleEntityMock(ServerMock server, UUID uuid)
+    {
+        super(server, uuid);
+    }
 
-	@Override
-	public EntityType getType()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
+    @Override
+    public EntityType getType()
+    {
+        // TODO Auto-generated method stub
+        throw new UnimplementedOperationException();
+    }
 
-	/**
-	 * Creates a {@code SimpleEntityMock} with a random UUID.
-	 *
-	 * @param server The server this entity lives on.
-	 */
-	public SimpleEntityMock(ServerMock server)
-	{
-		this(server, UUID.randomUUID());
-	}
+    /**
+     * Creates a {@code SimpleEntityMock} with a random UUID.
+     *
+     * @param server The server this entity lives on.
+     */
+    public SimpleEntityMock(ServerMock server)
+    {
+        this(server, UUID.randomUUID());
+    }
 
-	@Override
-	public boolean isPersistent()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
+    @Override
+    public boolean isPersistent()
+    {
+        // TODO Auto-generated method stub
+        throw new UnimplementedOperationException();
+    }
 
-	@Override
-	public void setPersistent(boolean persistent)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
+    @Override
+    public void setPersistent(boolean persistent)
+    {
+        // TODO Auto-generated method stub
+        throw new UnimplementedOperationException();
+    }
 
-	@Override
-	public BoundingBox getBoundingBox()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
+    @Override
+    public BoundingBox getBoundingBox()
+    {
+        // TODO Auto-generated method stub
+        throw new UnimplementedOperationException();
+    }
 
-	@Override
-	public BlockFace getFacing()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
+    @Override
+    public BlockFace getFacing()
+    {
+        // TODO Auto-generated method stub
+        throw new UnimplementedOperationException();
+    }
 
-	@Override
-	public Pose getPose()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
+    @Override
+    public Pose getPose()
+    {
+        // TODO Auto-generated method stub
+        throw new UnimplementedOperationException();
+    }
 }

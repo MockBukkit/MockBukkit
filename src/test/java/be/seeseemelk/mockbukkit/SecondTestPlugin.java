@@ -10,14 +10,14 @@ import org.bukkit.plugin.java.JavaPluginLoader;
 public class SecondTestPlugin extends JavaPlugin implements Listener
 {
 
-	public SecondTestPlugin()
-	{
-		super();
-	}
+    public SecondTestPlugin()
+    {
+        super();
+    }
 
-	protected SecondTestPlugin(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file)
-	{
-		super(loader, description, dataFolder, file);
-	}
+    protected SecondTestPlugin(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file)
+    {
+        super(loader, description, dataFolder, file);
+    }
 
 }

@@ -14,38 +14,37 @@ import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
  * {@link PersistentDataContainerMock}.
  *
  * @author TheBusyBiscuit
- *
  */
 public abstract class TileStateMock extends BlockStateMock implements TileState
 {
 
-	private final PersistentDataContainerMock container;
+    private final PersistentDataContainerMock container;
 
-	public TileStateMock(@NotNull Material material)
-	{
-		super(material);
-		this.container = new PersistentDataContainerMock();
-	}
+    public TileStateMock(@NotNull Material material)
+    {
+        super(material);
+        this.container = new PersistentDataContainerMock();
+    }
 
-	protected TileStateMock(@NotNull Block block)
-	{
-		super(block);
-		this.container = new PersistentDataContainerMock();
-	}
+    protected TileStateMock(@NotNull Block block)
+    {
+        super(block);
+        this.container = new PersistentDataContainerMock();
+    }
 
-	protected TileStateMock(@NotNull TileStateMock state)
-	{
-		super(state);
-		this.container = new PersistentDataContainerMock(state.container);
-	}
+    protected TileStateMock(@NotNull TileStateMock state)
+    {
+        super(state);
+        this.container = new PersistentDataContainerMock(state.container);
+    }
 
-	@Override
-	public PersistentDataContainer getPersistentDataContainer()
-	{
-		return container;
-	}
+    @Override
+    public PersistentDataContainer getPersistentDataContainer()
+    {
+        return container;
+    }
 
-	@Override
-	public abstract BlockState getSnapshot();
+    @Override
+    public abstract BlockState getSnapshot();
 
 }

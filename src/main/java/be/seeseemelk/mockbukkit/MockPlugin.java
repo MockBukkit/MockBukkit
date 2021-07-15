@@ -9,13 +9,13 @@ import org.bukkit.plugin.java.JavaPluginLoader;
 public class MockPlugin extends JavaPlugin
 {
 
-	public MockPlugin()
-	{
-	}
+    public MockPlugin()
+    {
+    }
 
-	protected MockPlugin(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file)
-	{
-		super(loader, description, dataFolder, file);
-	}
+    protected MockPlugin(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file)
+    {
+        super(loader, description, dataFolder, file);
+    }
 
 }

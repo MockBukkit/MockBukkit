@@ -16,84 +16,83 @@ import be.seeseemelk.mockbukkit.inventory.InventoryMock;
  * This {@link ContainerMock} represents a {@link Chest} or Trapped {@link Chest}.
  *
  * @author TheBusyBiscuit
- *
  */
 public class ChestMock extends ContainerMock implements Chest
 {
 
-	public ChestMock(@NotNull Material material)
-	{
-		super(material);
-	}
+    public ChestMock(@NotNull Material material)
+    {
+        super(material);
+    }
 
-	protected ChestMock(@NotNull Block block)
-	{
-		super(block);
-	}
+    protected ChestMock(@NotNull Block block)
+    {
+        super(block);
+    }
 
-	protected ChestMock(@NotNull ChestMock state)
-	{
-		super(state);
-	}
+    protected ChestMock(@NotNull ChestMock state)
+    {
+        super(state);
+    }
 
-	@Override
-	public void setLootTable(LootTable table)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
+    @Override
+    public void setLootTable(LootTable table)
+    {
+        // TODO Auto-generated method stub
+        throw new UnimplementedOperationException();
+    }
 
-	@Override
-	public LootTable getLootTable()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
+    @Override
+    public LootTable getLootTable()
+    {
+        // TODO Auto-generated method stub
+        throw new UnimplementedOperationException();
+    }
 
-	@Override
-	public void setSeed(long seed)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
+    @Override
+    public void setSeed(long seed)
+    {
+        // TODO Auto-generated method stub
+        throw new UnimplementedOperationException();
+    }
 
-	@Override
-	public long getSeed()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
+    @Override
+    public long getSeed()
+    {
+        // TODO Auto-generated method stub
+        throw new UnimplementedOperationException();
+    }
 
-	@Override
-	public void open()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
+    @Override
+    public void open()
+    {
+        // TODO Auto-generated method stub
+        throw new UnimplementedOperationException();
+    }
 
-	@Override
-	public void close()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
+    @Override
+    public void close()
+    {
+        // TODO Auto-generated method stub
+        throw new UnimplementedOperationException();
+    }
 
-	@Override
-	public Inventory getBlockInventory()
-	{
-		return getInventory();
-	}
+    @Override
+    public Inventory getBlockInventory()
+    {
+        return getInventory();
+    }
 
-	@Override
-	protected InventoryMock createInventory()
-	{
-		return new ChestInventoryMock(this, 27);
-	}
+    @Override
+    protected InventoryMock createInventory()
+    {
+        return new ChestInventoryMock(this, 27);
+    }
 
-	@Override
-	public BlockState getSnapshot()
-	{
-		return new ChestMock(this);
-	}
+    @Override
+    public BlockState getSnapshot()
+    {
+        return new ChestMock(this);
+    }
 
 }

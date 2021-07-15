@@ -9,20 +9,20 @@ import org.jetbrains.annotations.NotNull;
 public final class JavaPluginUtils
 {
 
-	private JavaPluginUtils()
-	{
-		// Do not instantiate this.
-	}
+    private JavaPluginUtils()
+    {
+        // Do not instantiate this.
+    }
 
-	/**
-	 * Sets the enabled status of a java plugin.
-	 *
-	 * @param plugin  The plugin of which to set the state.
-	 * @param enabled The state to set it to.
-	 */
-	public static void setEnabled(@NotNull JavaPlugin plugin, boolean enabled)
-	{
-		plugin.setEnabled(enabled);
-	}
+    /**
+     * Sets the enabled status of a java plugin.
+     *
+     * @param plugin  The plugin of which to set the state.
+     * @param enabled The state to set it to.
+     */
+    public static void setEnabled(@NotNull JavaPlugin plugin, boolean enabled)
+    {
+        plugin.setEnabled(enabled);
+    }
 
 }

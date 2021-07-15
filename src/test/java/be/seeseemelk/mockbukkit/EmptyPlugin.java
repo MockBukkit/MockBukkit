@@ -14,13 +14,13 @@ import org.jetbrains.annotations.NotNull;
 public class EmptyPlugin extends JavaPlugin
 {
 
-	public EmptyPlugin()
-	{
-		super();
-	}
+    public EmptyPlugin()
+    {
+        super();
+    }
 
-	public EmptyPlugin(@NotNull JavaPluginLoader loader, @NotNull PluginDescriptionFile description, @NotNull File dataFolder, @NotNull File file)
-	{
-		super(loader, description, dataFolder, file);
-	}
+    public EmptyPlugin(@NotNull JavaPluginLoader loader, @NotNull PluginDescriptionFile description, @NotNull File dataFolder, @NotNull File file)
+    {
+        super(loader, description, dataFolder, file);
+    }
 }

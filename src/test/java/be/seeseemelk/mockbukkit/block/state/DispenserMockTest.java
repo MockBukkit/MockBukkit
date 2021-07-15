@@ -22,85 +22,85 @@ import be.seeseemelk.mockbukkit.block.BlockMock;
 class DispenserMockTest
 {
 
-	private Dispenser dispenser;
+    private Dispenser dispenser;
 
-	@BeforeEach
-	public void setUp() throws Exception
-	{
-		MockBukkit.mock();
-		dispenser = new DispenserMock(Material.DISPENSER);
-	}
+    @BeforeEach
+    public void setUp() throws Exception
+    {
+        MockBukkit.mock();
+        dispenser = new DispenserMock(Material.DISPENSER);
+    }
 
-	@AfterEach
-	public void tearDown() throws Exception
-	{
-		MockBukkit.unmock();
-	}
+    @AfterEach
+    public void tearDown() throws Exception
+    {
+        MockBukkit.unmock();
+    }
 
-	@Test
-	void testMaterialDispenserBlockState()
-	{
-		Block block = new BlockMock(Material.DISPENSER);
-		assertTrue(block.getState() instanceof Dispenser);
-	}
+    @Test
+    void testMaterialDispenserBlockState()
+    {
+        Block block = new BlockMock(Material.DISPENSER);
+        assertTrue(block.getState() instanceof Dispenser);
+    }
 
-	@Test
-	void testHasInventory()
-	{
-		Inventory inventory = dispenser.getInventory();
-		assertNotNull(inventory);
+    @Test
+    void testHasInventory()
+    {
+        Inventory inventory = dispenser.getInventory();
+        assertNotNull(inventory);
 
-		assertEquals(dispenser, inventory.getHolder());
-		assertEquals(InventoryType.DISPENSER, inventory.getType());
-	}
+        assertEquals(dispenser, inventory.getHolder());
+        assertEquals(InventoryType.DISPENSER, inventory.getType());
+    }
 
-	@Test
-	void testLocking()
-	{
-		String key = "key";
+    @Test
+    void testLocking()
+    {
+        String key = "key";
 
-		assertFalse(dispenser.isLocked());
-		assertEquals("", dispenser.getLock());
+        assertFalse(dispenser.isLocked());
+        assertEquals("", dispenser.getLock());
 
-		dispenser.setLock("key");
-		assertTrue(dispenser.isLocked());
-		assertEquals(key, dispenser.getLock());
-	}
+        dispenser.setLock("key");
+        assertTrue(dispenser.isLocked());
+        assertEquals(key, dispenser.getLock());
+    }
 
-	@Test
-	void testNullLocking()
-	{
-		dispenser.setLock(null);
-		assertFalse(dispenser.isLocked());
-		assertEquals("", dispenser.getLock());
-	}
+    @Test
+    void testNullLocking()
+    {
+        dispenser.setLock(null);
+        assertFalse(dispenser.isLocked());
+        assertEquals("", dispenser.getLock());
+    }
 
-	@Test
-	void testNaming()
-	{
-		String name = "Cool Dispenser";
+    @Test
+    void testNaming()
+    {
+        String name = "Cool Dispenser";
 
-		assertNull(dispenser.getCustomName());
+        assertNull(dispenser.getCustomName());
 
-		dispenser.setCustomName(name);
-		assertEquals(name, dispenser.getCustomName());
-	}
+        dispenser.setCustomName(name);
+        assertEquals(name, dispenser.getCustomName());
+    }
 
-	@Test
-	void testUnplacedProjectileSource()
-	{
-		Dispenser dispenser = new DispenserMock(Material.DISPENSER);
-		assertNull(dispenser.getBlockProjectileSource());
-	}
+    @Test
+    void testUnplacedProjectileSource()
+    {
+        Dispenser dispenser = new DispenserMock(Material.DISPENSER);
+        assertNull(dispenser.getBlockProjectileSource());
+    }
 
-	@Test
-	void testPlacedProjectileSource()
-	{
-		Block block = new BlockMock(Material.DISPENSER);
-		Dispenser dispenser = (Dispenser) block.getState();
-		BlockProjectileSource source = dispenser.getBlockProjectileSource();
+    @Test
+    void testPlacedProjectileSource()
+    {
+        Block block = new BlockMock(Material.DISPENSER);
+        Dispenser dispenser = (Dispenser) block.getState();
+        BlockProjectileSource source = dispenser.getBlockProjectileSource();
 
-		assertNotNull(source);
-		assertEquals(block, source.getBlock());
-	}
+        assertNotNull(source);
+        assertEquals(block, source.getBlock());
+    }
 }

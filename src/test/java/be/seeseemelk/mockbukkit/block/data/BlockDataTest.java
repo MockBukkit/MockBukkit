@@ -8,11 +8,11 @@ import org.junit.jupiter.api.Test;
 class BlockDataTest
 {
 
-	@Test
-	void testMatches()
-	{
-		BlockDataMock blockData1 = new BlockDataMock(Material.STONE);
-		BlockDataMock blockData2 = new BlockDataMock(Material.STONE);
-		assertTrue(blockData1.matches(blockData2));
-	}
+    @Test
+    void testMatches()
+    {
+        BlockDataMock blockData1 = new BlockDataMock(Material.STONE);
+        BlockDataMock blockData2 = new BlockDataMock(Material.STONE);
+        assertTrue(blockData1.matches(blockData2));
+    }
 }

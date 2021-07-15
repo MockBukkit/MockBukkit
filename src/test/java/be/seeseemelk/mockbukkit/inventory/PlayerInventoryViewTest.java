@@ -14,30 +14,30 @@ import be.seeseemelk.mockbukkit.ServerMock;
 
 class PlayerInventoryViewTest
 {
-	private ServerMock server;
+    private ServerMock server;
 
-	@BeforeEach
-	public void setUp() throws Exception
-	{
-		server = MockBukkit.mock();
-	}
+    @BeforeEach
+    public void setUp() throws Exception
+    {
+        server = MockBukkit.mock();
+    }
 
-	@AfterEach
-	public void tearDown() throws Exception
-	{
-		MockBukkit.unmock();
-	}
+    @AfterEach
+    public void tearDown() throws Exception
+    {
+        MockBukkit.unmock();
+    }
 
-	@Test
-	void constructor_SetsProperties()
-	{
-		Player player = server.addPlayer();
-		Inventory inventory = new SimpleInventoryMock(null, 9, InventoryType.CHEST);
+    @Test
+    void constructor_SetsProperties()
+    {
+        Player player = server.addPlayer();
+        Inventory inventory = new SimpleInventoryMock(null, 9, InventoryType.CHEST);
 
-		PlayerInventoryViewMock view = new PlayerInventoryViewMock(player, inventory);
-		assertSame(player, view.getPlayer());
-		assertSame(player.getInventory(), view.getBottomInventory());
-		assertSame(inventory, view.getTopInventory());
-	}
+        PlayerInventoryViewMock view = new PlayerInventoryViewMock(player, inventory);
+        assertSame(player, view.getPlayer());
+        assertSame(player.getInventory(), view.getBottomInventory());
+        assertSame(inventory, view.getTopInventory());
+    }
 
 }

@@ -18,46 +18,46 @@ import be.seeseemelk.mockbukkit.ServerMock;
 class HelpMapMockTest
 {
 
-	private ServerMock server;
-	private HelpMapMock helpMap;
+    private ServerMock server;
+    private HelpMapMock helpMap;
 
-	@BeforeEach
-	public void setUp()
-	{
-		server = MockBukkit.mock();
-		helpMap = server.getHelpMap();
-	}
+    @BeforeEach
+    public void setUp()
+    {
+        server = MockBukkit.mock();
+        helpMap = server.getHelpMap();
+    }
 
-	@AfterEach
-	public void tearDown()
-	{
-		MockBukkit.unmock();
-	}
+    @AfterEach
+    public void tearDown()
+    {
+        MockBukkit.unmock();
+    }
 
-	@Test
-	void helpmap_lookup()
-	{
-		IndexHelpTopic indexHelpTopic = new IndexHelpTopic("test", "short text", "perm", Collections.emptyList());
-		helpMap.addTopic(indexHelpTopic);
+    @Test
+    void helpmap_lookup()
+    {
+        IndexHelpTopic indexHelpTopic = new IndexHelpTopic("test", "short text", "perm", Collections.emptyList());
+        helpMap.addTopic(indexHelpTopic);
 
-		// test lookup by help topic name
-		HelpTopic test = helpMap.getHelpTopic("test");
-		assertSame(indexHelpTopic, test);
+        // test lookup by help topic name
+        HelpTopic test = helpMap.getHelpTopic("test");
+        assertSame(indexHelpTopic, test);
 
-	}
+    }
 
-	@Test
-	void helpmap_factory_registration()
-	{
-		helpMap.registerHelpTopicFactory(VersionCommand.class,
-		                                 command -> new IndexHelpTopic("", "short text", "perm", Collections.emptyList()));
-	}
+    @Test
+    void helpmap_factory_registration()
+    {
+        helpMap.registerHelpTopicFactory(VersionCommand.class,
+                command -> new IndexHelpTopic("", "short text", "perm", Collections.emptyList()));
+    }
 
-	@Test
-	void helpmap_factory_registration_incorrect_type()
-	{
-		assertThrows(IllegalArgumentException.class, () -> helpMap.registerHelpTopicFactory(Object.class,
-		             command -> new IndexHelpTopic("", "short text", "perm", Collections.emptyList())));
-	}
+    @Test
+    void helpmap_factory_registration_incorrect_type()
+    {
+        assertThrows(IllegalArgumentException.class, () -> helpMap.registerHelpTopicFactory(Object.class,
+                command -> new IndexHelpTopic("", "short text", "perm", Collections.emptyList())));
+    }
 
 }

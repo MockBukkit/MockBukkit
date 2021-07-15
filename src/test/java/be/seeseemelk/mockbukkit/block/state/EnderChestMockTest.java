@@ -15,29 +15,29 @@ import be.seeseemelk.mockbukkit.block.BlockMock;
 class EnderChestMockTest
 {
 
-	@BeforeEach
-	public void setUp() throws Exception
-	{
-		MockBukkit.mock();
-	}
+    @BeforeEach
+    public void setUp() throws Exception
+    {
+        MockBukkit.mock();
+    }
 
-	@AfterEach
-	public void tearDown() throws Exception
-	{
-		MockBukkit.unmock();
-	}
+    @AfterEach
+    public void tearDown() throws Exception
+    {
+        MockBukkit.unmock();
+    }
 
-	@Test
-	void testMaterialEnderChestBlockState()
-	{
-		Block block = new BlockMock(Material.ENDER_CHEST);
-		assertTrue(block.getState() instanceof EnderChest);
-	}
+    @Test
+    void testMaterialEnderChestBlockState()
+    {
+        Block block = new BlockMock(Material.ENDER_CHEST);
+        assertTrue(block.getState() instanceof EnderChest);
+    }
 
-	@Test
-	void testMaterialEnderChestMockConstructor()
-	{
-		assertTrue(new EnderChestMock(Material.ENDER_CHEST) instanceof EnderChest);
-	}
+    @Test
+    void testMaterialEnderChestMockConstructor()
+    {
+        assertTrue(new EnderChestMock(Material.ENDER_CHEST) instanceof EnderChest);
+    }
 
 }

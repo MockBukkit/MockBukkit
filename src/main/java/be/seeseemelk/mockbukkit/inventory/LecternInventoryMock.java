@@ -10,17 +10,17 @@ import org.jetbrains.annotations.NotNull;
  */
 public class LecternInventoryMock extends InventoryMock
 {
-	public LecternInventoryMock(InventoryHolder holder)
-	{
-		super(holder, InventoryType.LECTERN);
-	}
+    public LecternInventoryMock(InventoryHolder holder)
+    {
+        super(holder, InventoryType.LECTERN);
+    }
 
-	@Override
-	@NotNull
-	public Inventory getSnapshot()
-	{
-		Inventory inventory = new LecternInventoryMock(getHolder());
-		inventory.setContents(getContents());
-		return inventory;
-	}
+    @Override
+    @NotNull
+    public Inventory getSnapshot()
+    {
+        Inventory inventory = new LecternInventoryMock(getHolder());
+        inventory.setContents(getContents());
+        return inventory;
+    }
 }

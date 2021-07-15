@@ -11,29 +11,28 @@ import org.jetbrains.annotations.NotNull;
  * {@link TileStateMock}.
  *
  * @author TheBusyBiscuit
- *
  */
 public class EnderChestMock extends TileStateMock implements EnderChest
 {
 
-	public EnderChestMock(@NotNull Material material)
-	{
-		super(material);
-	}
+    public EnderChestMock(@NotNull Material material)
+    {
+        super(material);
+    }
 
-	protected EnderChestMock(@NotNull Block block)
-	{
-		super(block);
-	}
+    protected EnderChestMock(@NotNull Block block)
+    {
+        super(block);
+    }
 
-	protected EnderChestMock(@NotNull EnderChestMock state)
-	{
-		super(state);
-	}
+    protected EnderChestMock(@NotNull EnderChestMock state)
+    {
+        super(state);
+    }
 
-	@Override
-	public BlockState getSnapshot()
-	{
-		return new EnderChestMock(this);
-	}
+    @Override
+    public BlockState getSnapshot()
+    {
+        return new EnderChestMock(this);
+    }
 }

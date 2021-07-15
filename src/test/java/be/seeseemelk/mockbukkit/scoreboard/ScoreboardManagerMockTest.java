@@ -11,40 +11,40 @@ import org.junit.jupiter.api.Test;
 
 class ScoreboardManagerMockTest
 {
-	private ScoreboardManager manager;
+    private ScoreboardManager manager;
 
-	@BeforeEach
-	public void setUp() throws Exception
-	{
-		manager = new ScoreboardManagerMock();
-	}
+    @BeforeEach
+    public void setUp() throws Exception
+    {
+        manager = new ScoreboardManagerMock();
+    }
 
-	@Test
-	void getMainScoreboard_NotNull()
-	{
-		assertNotNull(manager.getMainScoreboard());
-	}
+    @Test
+    void getMainScoreboard_NotNull()
+    {
+        assertNotNull(manager.getMainScoreboard());
+    }
 
-	@Test
-	void getMainScoreboard_MultipleCalls_ReturnsSame()
-	{
-		Scoreboard scoreboardA = manager.getMainScoreboard();
-		Scoreboard scoreboardB = manager.getMainScoreboard();
-		assertSame(scoreboardA, scoreboardB);
-	}
+    @Test
+    void getMainScoreboard_MultipleCalls_ReturnsSame()
+    {
+        Scoreboard scoreboardA = manager.getMainScoreboard();
+        Scoreboard scoreboardB = manager.getMainScoreboard();
+        assertSame(scoreboardA, scoreboardB);
+    }
 
-	@Test
-	void getNewScoreboard_NotNull()
-	{
-		assertNotNull(manager.getNewScoreboard());
-	}
+    @Test
+    void getNewScoreboard_NotNull()
+    {
+        assertNotNull(manager.getNewScoreboard());
+    }
 
-	@Test
-	void getNewScoreboard_MultipleCalls_ReturnsDifferentInstances()
-	{
-		Scoreboard scoreboardA = manager.getNewScoreboard();
-		Scoreboard scoreboardB = manager.getNewScoreboard();
-		assertNotSame(scoreboardA, scoreboardB);
-	}
+    @Test
+    void getNewScoreboard_MultipleCalls_ReturnsDifferentInstances()
+    {
+        Scoreboard scoreboardA = manager.getNewScoreboard();
+        Scoreboard scoreboardB = manager.getNewScoreboard();
+        assertNotSame(scoreboardA, scoreboardB);
+    }
 
 }

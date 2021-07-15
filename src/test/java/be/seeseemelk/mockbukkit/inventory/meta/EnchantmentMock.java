@@ -11,68 +11,67 @@ import org.jetbrains.annotations.NotNull;
  * in that class only work during the server's runtime.
  *
  * @author TheBusyBiscuit
- *
  */
 class EnchantmentMock extends Enchantment
 {
 
-	private final String name;
+    private final String name;
 
-	@SuppressWarnings("deprecation")
-	public EnchantmentMock(@NotNull String name)
-	{
-		super(NamespacedKey.randomKey());
-		this.name = name;
-	}
+    @SuppressWarnings("deprecation")
+    public EnchantmentMock(@NotNull String name)
+    {
+        super(NamespacedKey.randomKey());
+        this.name = name;
+    }
 
-	@Override
-	public @NotNull String getName()
-	{
-		return name;
-	}
+    @Override
+    public @NotNull String getName()
+    {
+        return name;
+    }
 
-	@Override
-	public boolean isTreasure()
-	{
-		return false;
-	}
+    @Override
+    public boolean isTreasure()
+    {
+        return false;
+    }
 
-	@Override
-	public boolean isCursed()
-	{
-		return false;
-	}
+    @Override
+    public boolean isCursed()
+    {
+        return false;
+    }
 
-	@Override
-	public int getStartLevel()
-	{
-		return 1;
-	}
+    @Override
+    public int getStartLevel()
+    {
+        return 1;
+    }
 
-	@Override
-	public int getMaxLevel()
-	{
-		return 3;
-	}
+    @Override
+    public int getMaxLevel()
+    {
+        return 3;
+    }
 
-	@SuppressWarnings("deprecation")
-	@Override
-	public @NotNull EnchantmentTarget getItemTarget()
-	{
-		return EnchantmentTarget.ALL;
-	}
+    @SuppressWarnings("deprecation")
+    @Override
+    public @NotNull EnchantmentTarget getItemTarget()
+    {
+        return EnchantmentTarget.ALL;
+    }
 
-	@Override
-	public boolean canEnchantItem(@NotNull ItemStack item)
-	{
-		return true;
-	}
+    @Override
+    public boolean canEnchantItem(@NotNull ItemStack item)
+    {
+        return true;
+    }
 
-	@Override
-	public boolean conflictsWith(@NotNull Enchantment other)
-	{
-		// We just let it only conflict with itself, it's enough for our tests
-		return other == this;
-	}
+    @Override
+    public boolean conflictsWith(@NotNull Enchantment other)
+    {
+        // We just let it only conflict with itself, it's enough for our tests
+        return other == this;
+    }
 
 }

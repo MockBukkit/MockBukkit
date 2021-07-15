@@ -21,67 +21,67 @@ import be.seeseemelk.mockbukkit.block.BlockMock;
 class DropperMockTest
 {
 
-	private Dropper dropper;
+    private Dropper dropper;
 
-	@BeforeEach
-	public void setUp() throws Exception
-	{
-		MockBukkit.mock();
-		dropper = new DropperMock(Material.DROPPER);
-	}
+    @BeforeEach
+    public void setUp() throws Exception
+    {
+        MockBukkit.mock();
+        dropper = new DropperMock(Material.DROPPER);
+    }
 
-	@AfterEach
-	public void tearDown() throws Exception
-	{
-		MockBukkit.unmock();
-	}
+    @AfterEach
+    public void tearDown() throws Exception
+    {
+        MockBukkit.unmock();
+    }
 
-	@Test
-	void testMaterialDropperBlockState()
-	{
-		Block block = new BlockMock(Material.DROPPER);
-		assertTrue(block.getState() instanceof Dropper);
-	}
+    @Test
+    void testMaterialDropperBlockState()
+    {
+        Block block = new BlockMock(Material.DROPPER);
+        assertTrue(block.getState() instanceof Dropper);
+    }
 
-	@Test
-	void testHasInventory()
-	{
-		Inventory inventory = dropper.getInventory();
-		assertNotNull(inventory);
+    @Test
+    void testHasInventory()
+    {
+        Inventory inventory = dropper.getInventory();
+        assertNotNull(inventory);
 
-		assertEquals(dropper, inventory.getHolder());
-		assertEquals(InventoryType.DROPPER, inventory.getType());
-	}
+        assertEquals(dropper, inventory.getHolder());
+        assertEquals(InventoryType.DROPPER, inventory.getType());
+    }
 
-	@Test
-	void testLocking()
-	{
-		String key = "key";
+    @Test
+    void testLocking()
+    {
+        String key = "key";
 
-		assertFalse(dropper.isLocked());
-		assertEquals("", dropper.getLock());
+        assertFalse(dropper.isLocked());
+        assertEquals("", dropper.getLock());
 
-		dropper.setLock("key");
-		assertTrue(dropper.isLocked());
-		assertEquals(key, dropper.getLock());
-	}
+        dropper.setLock("key");
+        assertTrue(dropper.isLocked());
+        assertEquals(key, dropper.getLock());
+    }
 
-	@Test
-	void testNullLocking()
-	{
-		dropper.setLock(null);
-		assertFalse(dropper.isLocked());
-		assertEquals("", dropper.getLock());
-	}
+    @Test
+    void testNullLocking()
+    {
+        dropper.setLock(null);
+        assertFalse(dropper.isLocked());
+        assertEquals("", dropper.getLock());
+    }
 
-	@Test
-	void testNaming()
-	{
-		String name = "Cool Dropper";
+    @Test
+    void testNaming()
+    {
+        String name = "Cool Dropper";
 
-		assertNull(dropper.getCustomName());
+        assertNull(dropper.getCustomName());
 
-		dropper.setCustomName(name);
-		assertEquals(name, dropper.getCustomName());
-	}
+        dropper.setCustomName(name);
+        assertEquals(name, dropper.getCustomName());
+    }
 }
