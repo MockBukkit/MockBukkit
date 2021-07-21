@@ -13,13 +13,14 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 
 	private final BlockData[][][] blocks;
 
+	// unused but will be useful in 1.17/1.18
+	private final int minHeight;
 	private final int maxHeight;
-	private final int minHeight; // unused but will be useful in 1.17/1.18
 
-	public MockChunkData(World world)
+	public MockChunkData(@NotNull World world)
 	{
-		this.maxHeight = world.getMaxHeight();
 		this.minHeight = world.getMinHeight();
+		this.maxHeight = world.getMaxHeight();
 		blocks = new BlockData[16][this.maxHeight][16];
 	}
 
@@ -44,12 +45,12 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 	@Override
 	public void setBlock(int x, int y, int z, @NotNull BlockData blockData)
 	{
-		try
+		if (x >= 0 && x < 16 &&
+			y >= 0 && y < this.maxHeight &&
+			z >= 0 && z < 16
+		)
 		{
 			blocks[x][y][z] = blockData;
-		}
-		catch (ArrayIndexOutOfBoundsException ignored)
-		{
 		}
 	}
 
@@ -84,16 +85,17 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 	@Override
 	public Material getType(int x, int y, int z)
 	{
-		try
+		if (x >= 0 && x < 16 &&
+			y >= 0 && y < this.maxHeight &&
+			z >= 0 && z < 16
+		)
 		{
 			BlockData data = blocks[x][y][z];
 			// shortcut to return air directly instead of creating air block data then unpacking material
 			return data == null ? Material.AIR : data.getMaterial();
 		}
-		catch (ArrayIndexOutOfBoundsException e)
-		{
-			return Material.AIR;
-		}
+
+		return Material.AIR;
 	}
 
 	@NotNull
@@ -107,15 +109,16 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 	@Override
 	public BlockData getBlockData(int x, int y, int z)
 	{
-		try
+		if (x >= 0 && x < 16 &&
+			y >= 0 && y < this.maxHeight &&
+			z >= 0 && z < 16
+		)
 		{
 			BlockData data = blocks[x][y][z];
 			return data == null ? new BlockDataMock(Material.AIR) : data;
 		}
-		catch (ArrayIndexOutOfBoundsException e)
-		{
-			return new BlockDataMock(Material.AIR);
-		}
+
+		return new BlockDataMock(Material.AIR);
 	}
 
 	@Override
