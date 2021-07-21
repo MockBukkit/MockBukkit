@@ -46,9 +46,9 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 	public void setBlock(int x, int y, int z, @NotNull BlockData blockData)
 	{
 		if (x >= 0 && x < 16 &&
-			y >= 0 && y < this.maxHeight &&
-			z >= 0 && z < 16
-		)
+		        y >= 0 && y < this.maxHeight &&
+		        z >= 0 && z < 16
+		   )
 		{
 			blocks[x][y][z] = blockData;
 		}
@@ -86,9 +86,9 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 	public Material getType(int x, int y, int z)
 	{
 		if (x >= 0 && x < 16 &&
-			y >= 0 && y < this.maxHeight &&
-			z >= 0 && z < 16
-		)
+		        y >= 0 && y < this.maxHeight &&
+		        z >= 0 && z < 16
+		   )
 		{
 			BlockData data = blocks[x][y][z];
 			// shortcut to return air directly instead of creating air block data then unpacking material
@@ -110,9 +110,9 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 	public BlockData getBlockData(int x, int y, int z)
 	{
 		if (x >= 0 && x < 16 &&
-			y >= 0 && y < this.maxHeight &&
-			z >= 0 && z < 16
-		)
+		        y >= 0 && y < this.maxHeight &&
+		        z >= 0 && z < 16
+		   )
 		{
 			BlockData data = blocks[x][y][z];
 			return data == null ? new BlockDataMock(Material.AIR) : data;
