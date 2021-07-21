@@ -46,12 +46,12 @@ public class MockChunkData implements ChunkGenerator.ChunkData {
 
 	@Override
 	public void setRegion(int xMin, int yMin, int zMin, int xMax, int yMax, int zMax, @NotNull Material material) {
-
+		this.setRegion(xMin, yMin, zMin, xMax, yMax, zMax, new BlockDataMock(material));
 	}
 
 	@Override
 	public void setRegion(int xMin, int yMin, int zMin, int xMax, int yMax, int zMax, @NotNull MaterialData material) {
-
+		this.setRegion(xMin, yMin, zMin, xMax, yMax, zMax, new BlockDataMock(material.getItemType()));
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class MockChunkData implements ChunkGenerator.ChunkData {
 		for (int x = xMin; x < xMax; x++) {
 			for (int y = yMin; y < yMax; y++) {
 				for (int z = zMin; z < zMax; z++) {
-
+					this.setBlock(x, y, z, blockData);
 				}
 			}
 		}
