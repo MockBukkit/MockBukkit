@@ -1,4 +1,5 @@
 package be.seeseemelk.mockbukkit;
 
-public class MockChunkDataTest {
+public class MockChunkDataTest
+{
 }
