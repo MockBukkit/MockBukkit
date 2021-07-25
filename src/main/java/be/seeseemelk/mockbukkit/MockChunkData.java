@@ -11,9 +11,10 @@ import org.jetbrains.annotations.NotNull;
 public class MockChunkData implements ChunkGenerator.ChunkData
 {
 
+	private static final int CHUNK_SIZE = 16;
+
 	private final BlockData[][][] blocks;
 
-	// unused but will be useful in 1.17/1.18
 	private final int minHeight;
 	private final int maxHeight;
 
@@ -21,7 +22,7 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 	{
 		this.minHeight = world.getMinHeight();
 		this.maxHeight = world.getMaxHeight();
-		blocks = new BlockData[16][this.maxHeight][16];
+		blocks = new BlockData[CHUNK_SIZE][this.maxHeight][CHUNK_SIZE];
 	}
 
 	@Override
@@ -45,9 +46,9 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 	@Override
 	public void setBlock(int x, int y, int z, @NotNull BlockData blockData)
 	{
-		if (x >= 0 && x < 16 &&
-		        y >= 0 && y < this.maxHeight &&
-		        z >= 0 && z < 16
+		if (x >= 0 && x < CHUNK_SIZE &&
+		        y >= this.minHeight && y < this.maxHeight &&
+		        z >= 0 && z < CHUNK_SIZE
 		   )
 		{
 			blocks[x][y][z] = blockData;
@@ -85,9 +86,9 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 	@Override
 	public Material getType(int x, int y, int z)
 	{
-		if (x >= 0 && x < 16 &&
-		        y >= 0 && y < this.maxHeight &&
-		        z >= 0 && z < 16
+		if (x >= 0 && x < CHUNK_SIZE &&
+		        y >= this.minHeight && y < this.maxHeight &&
+		        z >= 0 && z < CHUNK_SIZE
 		   )
 		{
 			BlockData data = blocks[x][y][z];
@@ -109,9 +110,9 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 	@Override
 	public BlockData getBlockData(int x, int y, int z)
 	{
-		if (x >= 0 && x < 16 &&
-		        y >= 0 && y < this.maxHeight &&
-		        z >= 0 && z < 16
+		if (x >= 0 && x < CHUNK_SIZE &&
+		        y >= this.minHeight && y < this.maxHeight &&
+		        z >= 0 && z < CHUNK_SIZE
 		   )
 		{
 			BlockData data = blocks[x][y][z];
