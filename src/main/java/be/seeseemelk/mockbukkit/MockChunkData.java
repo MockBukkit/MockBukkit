@@ -22,7 +22,7 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 	{
 		this.minHeight = world.getMinHeight();
 		this.maxHeight = world.getMaxHeight();
-		blocks = new BlockData[CHUNK_SIZE][this.maxHeight][CHUNK_SIZE];
+		blocks = new BlockData[CHUNK_SIZE][this.maxHeight - this.minHeight][CHUNK_SIZE];
 	}
 
 	@Override
