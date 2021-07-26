@@ -39,7 +39,7 @@ public class MockChunkDataTest
 		WorldMock dummy = server.addSimpleWorld("dummy");
 		ChunkGenerator.ChunkData data = server.createChunkData(dummy);
 
-		data.setBlock(33, 1000, 33, Material.STONE);
+		Assertions.assertDoesNotThrow(() -> data.setBlock(33, 1000, 33, Material.STONE));
 	}
 
 	@Test
