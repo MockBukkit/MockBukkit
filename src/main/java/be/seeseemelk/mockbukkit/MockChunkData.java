@@ -91,7 +91,7 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 		        z >= 0 && z < CHUNK_SIZE
 		   )
 		{
-			BlockData data = blocks[x][y][z];
+			BlockData data = blocks[x][y - this.minHeight][z];
 			// shortcut to return air directly instead of creating air block data then unpacking material
 			return data == null ? Material.AIR : data.getMaterial();
 		}
@@ -115,7 +115,7 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 		        z >= 0 && z < CHUNK_SIZE
 		   )
 		{
-			BlockData data = blocks[x][y][z];
+			BlockData data = blocks[x][y - this.minHeight][z];
 			return data == null ? new BlockDataMock(Material.AIR) : data;
 		}
 
