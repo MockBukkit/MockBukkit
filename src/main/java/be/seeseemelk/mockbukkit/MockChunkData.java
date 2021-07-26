@@ -51,7 +51,7 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 		        z >= 0 && z < CHUNK_SIZE
 		   )
 		{
-			blocks[x][y][z] = blockData;
+			blocks[x][y - this.minHeight][z] = blockData;
 		}
 	}
 
