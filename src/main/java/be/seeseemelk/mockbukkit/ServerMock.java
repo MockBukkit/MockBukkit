@@ -105,6 +105,7 @@ import be.seeseemelk.mockbukkit.tags.TagRegistry;
 import be.seeseemelk.mockbukkit.tags.TagWrapperMock;
 import be.seeseemelk.mockbukkit.tags.TagsMock;
 import net.md_5.bungee.api.chat.BaseComponent;
+import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("deprecation")
 public class ServerMock extends Server.Spigot implements Server
@@ -765,6 +766,22 @@ public class ServerMock extends Server.Spigot implements Server
 		return null;
 	}
 
+	@Nullable
+	@Override
+	public Recipe getCraftingRecipe(@NotNull ItemStack[] craftingMatrix, @NotNull World world)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@NotNull
+	@Override
+	public ItemStack craftItem(@NotNull ItemStack[] craftingMatrix, @NotNull World world, @NotNull Player player)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 	@Override
 	public boolean removeRecipe(NamespacedKey key)
 	{
@@ -898,6 +915,20 @@ public class ServerMock extends Server.Spigot implements Server
 
 	@Override
 	public void setWhitelist(boolean value)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isWhitelistEnforced()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setWhitelistEnforced(boolean value)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

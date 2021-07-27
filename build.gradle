@@ -22,10 +22,11 @@ repositories {
 
 dependencies {
     api "org.spigotmc:spigot-api:${gradle.ext.apiVersionFull}"
-    implementation 'org.junit.jupiter:junit-jupiter:5.7.1'
-    implementation 'org.hamcrest:hamcrest-library:1.3'
-    implementation 'org.apache.commons:commons-io:1.3.2'
-    implementation 'org.jetbrains:annotations:19.0.0'
+    implementation 'org.junit.jupiter:junit-jupiter:5.7.2'
+    implementation 'org.hamcrest:hamcrest-library:2.2'
+    //noinspection GradlePackageUpdate
+    implementation 'commons-io:commons-io:2.11.0'
+    implementation 'org.jetbrains:annotations:21.0.1'
 }
 
 task javadocJar(type: Jar) {
@@ -40,17 +41,17 @@ task sourcesJar(type: Jar) {
 
 tasks.withType(JavaCompile) {
     Provider<JavaCompiler> compilerProvider = javaToolchains.compilerFor {
-        JavaLanguageVersion.of(8)
+        JavaLanguageVersion.of(16)
     }
     JavaCompiler compiler = compilerProvider.orNull
 
-    if (compiler != null && compiler.metadata.languageVersion.asInt() > 9) {
+    if (compiler != null && compiler.metadata.languageVersion.asInt() > 16) {
         // Mark release as 8 if the compiler is Java 10 or newer
-        options.release.set(8)
+        options.release.set(16)
     } else {
         // Only use the legacy compiler options otherwise
-        sourceCompatibility = 1.8
-        targetCompatibility = 1.8
+        sourceCompatibility = 16
+        targetCompatibility = 16
     }
 }
 

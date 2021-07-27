@@ -18,12 +18,14 @@ import org.bukkit.block.BlockState;
 import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
+import org.bukkit.util.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -413,6 +415,14 @@ public class BlockMock implements Block
 		throw new UnimplementedOperationException();
 	}
 
+	@NotNull
+	@Override
+	public VoxelShape getCollisionShape()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 	@Override
 	public Collection<ItemStack> getDrops(ItemStack tool, Entity entity)
 	{
@@ -441,6 +451,13 @@ public class BlockMock implements Block
 
 	@Override
 	public boolean isPreferredTool(ItemStack tool)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public float getBreakSpeed(@NotNull Player player)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
