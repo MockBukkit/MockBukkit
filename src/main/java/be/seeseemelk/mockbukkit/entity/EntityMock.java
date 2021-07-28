@@ -504,6 +504,48 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
+	public void setVisualFire(boolean fire)
+	{
+		// TODO Auto-generated constructor stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isVisualFire()
+	{
+		// TODO Auto-generated constructor stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setFreezeTicks(int ticks)
+	{
+		// TODO Auto-generated constructor stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isFrozen()
+	{
+		// TODO Auto-generated constructor stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getFreezeTicks()
+	{
+		// TODO Auto-generated constructor stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getMaxFreezeTicks()
+	{
+		// TODO Auto-generated constructor stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public void remove()
 	{
 		// TODO Auto-generated constructor stub

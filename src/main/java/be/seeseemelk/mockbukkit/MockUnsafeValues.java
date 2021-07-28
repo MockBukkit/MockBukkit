@@ -18,7 +18,7 @@ import org.bukkit.plugin.PluginDescriptionFile;
 public class MockUnsafeValues implements UnsafeValues
 {
 
-	private final Set<String> compatibleApiVersions = new HashSet<>(Arrays.asList("1.13", "1.14", "1.15", "1.16"));
+	private final Set<String> compatibleApiVersions = new HashSet<>(Arrays.asList("1.13", "1.14", "1.15", "1.16", "1.17"));
 
 	@Override
 	public Material toLegacy(Material material)
