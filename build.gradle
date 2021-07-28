@@ -39,20 +39,7 @@ task sourcesJar(type: Jar) {
 }
 
 tasks.withType(JavaCompile) {
-    Provider<JavaCompiler> compilerProvider = javaToolchains.compilerFor {
-        JavaLanguageVersion.of(16)
-    }
-    JavaCompiler compiler = compilerProvider.orNull
-
-    // TODO maybe adjust this comments and logic
-    if (compiler != null && compiler.metadata.languageVersion.asInt() > 16) {
-        // Mark release as 8 if the compiler is Java 10 or newer
-        options.release.set(16)
-    } else {
-        // Only use the legacy compiler options otherwise
-        sourceCompatibility = 16
-        targetCompatibility = 16
-    }
+    options.release.set(16)
 }
 
 artifacts {
