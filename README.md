@@ -192,7 +192,7 @@ If you need any help with MockBukkit or have a question regarding this project, 
 ## :tada: Examples (See MockBukkit in action)
 Several projects have utilized MockBukkit for their needs already.
 If you want to see some projects that are using MockBukkit right now, feel free to take a peak:
-- [Slimefun/Slimefun4](https://github.com/Slimefun/Slimefun4/tree/master/src/test/java/io/github/thebusybiscuit/slimefun4/testing/tests) (400+ Unit Tests)
+- [Slimefun/Slimefun4](https://github.com/Slimefun/Slimefun4/tree/master/src/test/java/io/github/thebusybiscuit/slimefun4) (400+ Unit Tests)
 - [lluiscamino/MultiverseHardcore](https://github.com/lluiscamino/MultiverseHardcore/tree/master/src/test/java/me/lluiscamino/multiversehardcore) (75+ Unit Tests)
 - [carelesshippo/SpectatorModeRewrite](https://github.com/carelesshippo/SpectatorModeRewrite/tree/dev/src/test/java/me/ohowe12/spectatormode) (50+ Unit Tests)
 - [JacksonChen666/treecapitator](https://github.com/JacksonChen666/treecapitator/tree/master/src/test/java/com/jacksonchen666/treecapitator) (30+ Unit Tests)
