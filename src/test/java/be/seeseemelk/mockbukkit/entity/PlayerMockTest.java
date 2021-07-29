@@ -32,15 +32,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.event.player.PlayerExpChangeEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerLevelChangeEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.event.player.PlayerRespawnEvent;
-import org.bukkit.event.player.PlayerTeleportEvent;
-import org.bukkit.event.player.PlayerToggleFlightEvent;
-import org.bukkit.event.player.PlayerToggleSneakEvent;
-import org.bukkit.event.player.PlayerToggleSprintEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
@@ -156,6 +148,35 @@ class PlayerMockTest
 	{
 		player.setGameMode(GameMode.CREATIVE);
 		assertEquals(GameMode.CREATIVE, player.getGameMode());
+		server.getPluginManager().assertEventFired(PlayerGameModeChangeEvent.class);
+	}
+	@Test
+	void simulateChangeGameMode_NotChanged_DefaultGameMode()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		Bukkit.getPluginManager().registerEvents(new Listener()
+		{
+			@EventHandler
+			public void onGameModeChange(PlayerGameModeChangeEvent event)
+			{
+				event.setCancelled(true);
+			}
+		}, plugin);
+
+		PlayerGameModeChangeEvent event = player.simulateChangeGameMode(GameMode.CREATIVE);
+
+		assertEquals(GameMode.SURVIVAL, player.getGameMode());
+		server.getPluginManager().assertEventFired(PlayerGameModeChangeEvent.class);
+		assertNotNull(event);
+		assertTrue(event.isCancelled());
+	}
+
+	@Test
+	void setGameMode_GameModeNotChanged_GameModeSet()
+	{
+		player.setGameMode(GameMode.CREATIVE);
+		assertEquals(GameMode.CREATIVE, player.getGameMode());
+		server.getPluginManager().assertEventFired(PlayerGameModeChangeEvent.class);
 	}
 
 	@Test
@@ -1310,7 +1331,19 @@ class PlayerMockTest
 
 		player.assertNotTeleported();
 		player.assertLocation(originalLocation, 0);
-
 	}
 
+	@Test
+	void isCollidable_Default()
+	{
+		boolean collidable = player.isCollidable();
+		assertTrue(collidable);
+	}
+
+	@Test
+	void isCollidable_CollidableChange()
+	{
+		player.setCollidable(false);
+		assertFalse(player.isCollidable());
+	}
 }

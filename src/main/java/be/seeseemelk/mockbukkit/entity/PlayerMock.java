@@ -52,14 +52,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.event.player.PlayerLevelChangeEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.event.player.PlayerRespawnEvent;
-import org.bukkit.event.player.PlayerTeleportEvent;
-import org.bukkit.event.player.PlayerToggleFlightEvent;
-import org.bukkit.event.player.PlayerToggleSneakEvent;
-import org.bukkit.event.player.PlayerToggleSprintEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
@@ -111,6 +104,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	private boolean sprinting = false;
 	private boolean flying = false;
 	private boolean whitelisted = true;
+	private boolean collides = true;
 	private InventoryView inventoryView;
 
 	private Location compassTarget;
@@ -317,7 +311,28 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public void setGameMode(@NotNull GameMode mode)
 	{
-		gamemode = mode;
+		PlayerGameModeChangeEvent gameModeChangeEvent = new PlayerGameModeChangeEvent(this, mode);
+
+		ServerMock server = MockBukkit.getMock();
+		server.getPluginManager().callEvent(gameModeChangeEvent);
+
+		if (!gameModeChangeEvent.isCancelled())
+		{
+			gamemode = mode;
+		}
+	}
+	public @NotNull PlayerGameModeChangeEvent simulateChangeGameMode(@NotNull GameMode mode)
+	{
+		PlayerGameModeChangeEvent gameModeChangeEvent = new PlayerGameModeChangeEvent(this, mode);
+
+		ServerMock server = MockBukkit.getMock();
+		server.getPluginManager().callEvent(gameModeChangeEvent);
+
+		if (!gameModeChangeEvent.isCancelled())
+		{
+			gamemode = mode;
+		}
+		return gameModeChangeEvent;
 	}
 
 	@Override
@@ -798,15 +813,13 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public void setCollidable(boolean collidable)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.collides = collidable;
 	}
 
 	@Override
 	public boolean isCollidable()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return collides;
 	}
 
 	@Override
