@@ -40,6 +40,7 @@ public class MockChunkDataTest
 		ChunkGenerator.ChunkData data = server.createChunkData(dummy);
 
 		Assertions.assertDoesNotThrow(() -> data.setBlock(33, 1000, 33, Material.STONE));
+		Assertions.assertEquals(Material.AIR, data.getType(33, 1000, 33));
 	}
 
 	@Test
