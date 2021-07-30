@@ -490,6 +490,13 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
+	public boolean isClimbing()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public void setAI(boolean ai)
 	{
 		// TODO Auto-generated method stub

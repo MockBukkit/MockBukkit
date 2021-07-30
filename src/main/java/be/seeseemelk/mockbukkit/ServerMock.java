@@ -106,11 +106,12 @@ import be.seeseemelk.mockbukkit.tags.TagRegistry;
 import be.seeseemelk.mockbukkit.tags.TagWrapperMock;
 import be.seeseemelk.mockbukkit.tags.TagsMock;
 import net.md_5.bungee.api.chat.BaseComponent;
+import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("deprecation")
 public class ServerMock extends Server.Spigot implements Server
 {
-	private static final String BUKKIT_VERSION = "1.16.5";
+	private static final String BUKKIT_VERSION = "1.17.1";
 	private static final String JOIN_MESSAGE = "%s has joined the server.";
 	private static final String MOTD = "A Minecraft Server";
 
@@ -766,6 +767,22 @@ public class ServerMock extends Server.Spigot implements Server
 		return null;
 	}
 
+	@Nullable
+	@Override
+	public Recipe getCraftingRecipe(@NotNull ItemStack[] craftingMatrix, @NotNull World world)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@NotNull
+	@Override
+	public ItemStack craftItem(@NotNull ItemStack[] craftingMatrix, @NotNull World world, @NotNull Player player)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 	@Override
 	public boolean removeRecipe(NamespacedKey key)
 	{
@@ -899,6 +916,20 @@ public class ServerMock extends Server.Spigot implements Server
 
 	@Override
 	public void setWhitelist(boolean value)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isWhitelistEnforced()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setWhitelistEnforced(boolean value)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
