@@ -26,6 +26,12 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 	}
 
 	@Override
+	public int getMinHeight()
+	{
+		return this.minHeight;
+	}
+
+	@Override
 	public int getMaxHeight()
 	{
 		return this.maxHeight;
