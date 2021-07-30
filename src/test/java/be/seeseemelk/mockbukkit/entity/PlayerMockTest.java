@@ -32,7 +32,16 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.event.player.*;
+import org.bukkit.event.player.PlayerExpChangeEvent;
+import org.bukkit.event.player.PlayerGameModeChangeEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerLevelChangeEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.event.player.PlayerToggleFlightEvent;
+import org.bukkit.event.player.PlayerToggleSneakEvent;
+import org.bukkit.event.player.PlayerToggleSprintEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
@@ -169,14 +178,6 @@ class PlayerMockTest
 		server.getPluginManager().assertEventFired(PlayerGameModeChangeEvent.class);
 		assertNotNull(event);
 		assertTrue(event.isCancelled());
-	}
-
-	@Test
-	void setGameMode_GameModeNotChanged_GameModeSet()
-	{
-		player.setGameMode(GameMode.CREATIVE);
-		assertEquals(GameMode.CREATIVE, player.getGameMode());
-		server.getPluginManager().assertEventFired(PlayerGameModeChangeEvent.class);
 	}
 
 	@Test
