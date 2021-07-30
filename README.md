@@ -7,7 +7,7 @@
         <img alt="Documentation Status" src="https://readthedocs.org/projects/mockbukkit/badge/?version=latest" />
     </a>
     <a href="https://search.maven.org/search?q=MockBukkit">
-        <img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.github.seeseemelk/MockBukkit-v1.16?color=1bcc94&logo=apache-maven" />
+        <img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.github.seeseemelk/MockBukkit-v1.17?color=1bcc94&logo=apache-maven" />
     </a>
     <a href="https://codeclimate.com/github/seeseemelk/MockBukkit/maintainability">
         <img alt="Maintainability" src="https://api.codeclimate.com/v1/badges/403a4bb837ca47333d33/maintainability" />
@@ -50,7 +50,7 @@ repositories {
 }
 
 dependencies {
-	testImplementation 'com.github.seeseemelk:MockBukkit-v1.16:1.0.0'
+	testImplementation 'com.github.seeseemelk:MockBukkit-v1.17:1.6.0'
 }
 ```
 
@@ -66,7 +66,7 @@ repositories {
 }
 
 dependencies {
-	implementation 'com.github.seeseemelk:MockBukkit:v1.16-SNAPSHOT'
+	implementation 'com.github.seeseemelk:MockBukkit:v1.17-SNAPSHOT'
 }
 ```
 
@@ -78,8 +78,8 @@ You won't need to add any additional repositories since MockBukkit is served via
 <dependencies>
   <dependency>
     <groupId>com.github.seeseemelk</groupId>
-    <artifactId>MockBukkit-v1.16</artifactId>
-    <version>1.0.0</version>
+    <artifactId>MockBukkit-v1.17</artifactId>
+    <version>1.6.0</version>
     <scope>test</scope>
   </dependency>
 </dependencies>
