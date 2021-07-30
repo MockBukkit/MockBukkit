@@ -321,8 +321,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	{
 		PlayerGameModeChangeEvent gameModeChangeEvent = new PlayerGameModeChangeEvent(this, mode);
 
-		ServerMock server = MockBukkit.getMock();
-		server.getPluginManager().callEvent(gameModeChangeEvent);
+		getServer().getPluginManager().callEvent(gameModeChangeEvent);
 
 		if (!gameModeChangeEvent.isCancelled())
 		{
@@ -333,8 +332,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	{
 		PlayerGameModeChangeEvent gameModeChangeEvent = new PlayerGameModeChangeEvent(this, mode);
 
-		ServerMock server = MockBukkit.getMock();
-		server.getPluginManager().callEvent(gameModeChangeEvent);
+		getServer().getPluginManager().callEvent(gameModeChangeEvent);
 
 		if (!gameModeChangeEvent.isCancelled())
 		{
