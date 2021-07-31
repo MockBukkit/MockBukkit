@@ -157,7 +157,7 @@ class PlayerMockTest
 	{
 		player.setGameMode(GameMode.CREATIVE);
 		assertEquals(GameMode.CREATIVE, player.getGameMode());
-		server.getPluginManager().assertEventFired(PlayerGameModeChangeEvent.class, gameModeChangeEvent -> gameModeChangeEvent.getNewGameMode() == GameMode.CREATIVE);
+		server.getPluginManager().assertEventFired(PlayerGameModeChangeEvent.class, event -> event.getNewGameMode() == GameMode.CREATIVE);
 	}
 	@Test
 	void simulateChangeGameMode_NotChanged_DefaultGameMode()
