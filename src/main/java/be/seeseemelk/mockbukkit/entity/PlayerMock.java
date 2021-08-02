@@ -112,7 +112,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	private boolean sprinting = false;
 	private boolean flying = false;
 	private boolean whitelisted = true;
-	private boolean collides = true;
+	private boolean collidable = true;
 	private InventoryView inventoryView;
 
 	private Location compassTarget;
@@ -319,14 +319,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public void setGameMode(@NotNull GameMode mode)
 	{
-		PlayerGameModeChangeEvent gameModeChangeEvent = new PlayerGameModeChangeEvent(this, mode);
-
-		getServer().getPluginManager().callEvent(gameModeChangeEvent);
-
-		if (!gameModeChangeEvent.isCancelled())
-		{
-			gamemode = mode;
-		}
+		simulateChangeGameMode(mode);
 	}
 	public @NotNull PlayerGameModeChangeEvent simulateChangeGameMode(@NotNull GameMode mode)
 	{
@@ -819,13 +812,13 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public void setCollidable(boolean collidable)
 	{
-		this.collides = collidable;
+		this.collidable = collidable;
 	}
 
 	@Override
 	public boolean isCollidable()
 	{
-		return collides;
+		return collidable;
 	}
 
 	@Override
