@@ -321,6 +321,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	{
 		simulateChangeGameMode(mode);
 	}
+
 	public @NotNull PlayerGameModeChangeEvent simulateChangeGameMode(@NotNull GameMode mode)
 	{
 		PlayerGameModeChangeEvent gameModeChangeEvent = new PlayerGameModeChangeEvent(this, mode);
