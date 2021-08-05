@@ -618,6 +618,9 @@ class ItemMetaMockTest
 
 		assertEquals(empty, bukkitInput.readObject());
 		assertEquals(modified, bukkitInput.readObject());
+
+		bukkitOutput.close();
+		bukkitInput.close();
 	}
 
 }
