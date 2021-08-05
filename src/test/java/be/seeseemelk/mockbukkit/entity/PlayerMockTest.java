@@ -1126,15 +1126,17 @@ class PlayerMockTest
 	{
 		final Location teleportLocation = player.getLocation().add(10, 10, 10);
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
-		Bukkit.getPluginManager().registerEvents(new Listener(){
+		Bukkit.getPluginManager().registerEvents(new Listener()
+		{
 			@EventHandler
-			public void onPlayerMove(PlayerMoveEvent event){
+			public void onPlayerMove(PlayerMoveEvent event)
+			{
 				event.getPlayer().teleport(teleportLocation);
 			}
-		},plugin);
+		}, plugin);
 
 		player.simulatePlayerMove(player.getLocation().add(-10, -10, -10));
-		player.assertTeleported(teleportLocation,0);
+		player.assertTeleported(teleportLocation, 0);
 	}
 
 	@Test
