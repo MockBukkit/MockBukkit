@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.bukkit.NamespacedKey;
 import org.bukkit.persistence.PersistentDataAdapterContext;
@@ -110,6 +111,21 @@ public class PersistentDataContainerMock implements PersistentDataContainer
 	public Set<NamespacedKey> getKeys()
 	{
 		return Collections.unmodifiableSet(map.keySet());
+	}
+
+	public Map<String, Object> serialize()
+	{
+		return map.entrySet().stream().collect(Collectors.toMap(e -> e.getKey().toString(), Map.Entry::getValue));
+	}
+
+	public static PersistentDataContainerMock deserialize(Map<String, Object> args)
+	{
+		PersistentDataContainerMock mock = new PersistentDataContainerMock();
+		for (Map.Entry<String, Object> entry : args.entrySet())
+		{
+			mock.map.put(NamespacedKey.fromString(entry.getKey()), entry.getValue());
+		}
+		return mock;
 	}
 
 }
