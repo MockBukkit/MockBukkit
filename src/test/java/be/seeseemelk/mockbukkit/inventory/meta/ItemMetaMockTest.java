@@ -6,6 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -20,6 +23,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.Repairable;
 import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.util.io.BukkitObjectInputStream;
+import org.bukkit.util.io.BukkitObjectOutputStream;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -588,4 +593,31 @@ class ItemMetaMockTest
 		Map<String, Object> actual = meta.serialize();
 		assertEquals(meta, ItemMetaMock.deserialize(actual));
 	}
+
+	@Test
+	void testBukkitSerialization() throws IOException, ClassNotFoundException
+	{
+		ItemMetaMock empty = new ItemMetaMock();
+		ItemMetaMock modified = new ItemMetaMock();
+
+		modified.setDisplayName("Test name");
+		modified.setLore(Arrays.asList("Test lore"));
+		modified.setUnbreakable(true);
+		modified.setDamage(5);
+		modified.setRepairCost(3);
+		modified.setCustomModelData(2);
+
+		ByteArrayOutputStream byteOutput = new ByteArrayOutputStream();
+		BukkitObjectOutputStream bukkitOutput = new BukkitObjectOutputStream(byteOutput);
+
+		bukkitOutput.writeObject(empty);
+		bukkitOutput.writeObject(modified);
+
+		ByteArrayInputStream byteInput = new ByteArrayInputStream(byteOutput.toByteArray());
+		BukkitObjectInputStream bukkitInput = new BukkitObjectInputStream(byteInput);
+
+		assertEquals(empty, bukkitInput.readObject());
+		assertEquals(modified, bukkitInput.readObject());
+	}
+
 }
