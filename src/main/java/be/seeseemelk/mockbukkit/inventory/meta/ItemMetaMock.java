@@ -360,7 +360,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		{
 			map.put("localizedName", this.localizedName);
 		}
-	 	*/
+		*/
 
 		if (this.lore != null)
 		{
@@ -379,7 +379,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		{
 			map.put("attributeModifiers", this.attributeModifiers);
 		}
-	 	*/
+		*/
 
 		map.put("repairCost", this.repairCost);
 		map.put("itemFlags", this.hideFlags);
@@ -391,7 +391,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		{
 			map.put("customTagContainer", this.customTagContainer);
 		}
-	 	*/
+		*/
 
 		map.put("persistentDataContainer", this.persistentDataContainer.serialize());
 
