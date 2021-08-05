@@ -2044,6 +2044,13 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
+	public void sendSignChange(@NotNull Location loc, @Nullable String[] lines, @NotNull DyeColor dyeColor, boolean hasGlowingText) throws IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public void openBook(@NotNull ItemStack book)
 	{
 		// TODO Auto-generated method stub
