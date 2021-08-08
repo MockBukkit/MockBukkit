@@ -10,16 +10,19 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author md5sha256
  */
-public class PersistentDataHolderMock implements PersistentDataHolder {
+public class PersistentDataHolderMock implements PersistentDataHolder
+{
 
 	private final PersistentDataContainer container;
 
-	public PersistentDataHolderMock() {
+	public PersistentDataHolderMock()
+	{
 		this.container = new PersistentDataContainerMock();
 	}
 
 	@Override
-	public @NotNull PersistentDataContainer getPersistentDataContainer() {
+	public @NotNull PersistentDataContainer getPersistentDataContainer()
+	{
 		return container;
 	}
 }
