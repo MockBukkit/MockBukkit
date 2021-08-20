@@ -21,3 +21,5 @@ jobs:
         env:
           USERNAME: ${{ secrets.MAVEN_USERNAME }}
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PATZ_USERNAME: ${{ secrets.PATZ_USERNAME }}
+          PATZ_PASSWORD: ${{ secrets.PATZ_PASSWORD }}
