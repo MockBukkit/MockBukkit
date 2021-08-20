@@ -16,3 +16,4 @@ include 'services:webservice'
 */
 
 rootProject.name = 'MockBukkit'
+rootProject.version = '1.1.4'
