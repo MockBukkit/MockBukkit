@@ -1,4 +1,6 @@
 on: 
+  workflow_dispatch:
+  
   release:
     types: [created]
 name: Publish to github packages
