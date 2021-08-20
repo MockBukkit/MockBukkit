@@ -1,8 +1,29 @@
 plugins{
 	id "java"
+	id "maven-publish"
 }
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+
+    
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/PaTzMC/MockedBukkit")
+            credentials {
+                username = System.getenv("USERNAME")
+                password = System.getenv("TOKEN")
+            }
+    }
+
+    publications {
+        gpr(MavenPublication) {
+            from(components.java)
+        }
+    }
+}    
+
 repositories {
 	mavenCentral()
 	maven {
