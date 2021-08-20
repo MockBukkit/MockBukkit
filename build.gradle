@@ -5,8 +5,7 @@ plugins{
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 version = "v2.0"
-groupId = "com.patzmc"
-artifactId = MockBukkit;
+group = "com.patzmc"
 
 publishing {
     repositories {
