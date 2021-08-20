@@ -15,6 +15,7 @@ publishing {
                 username = System.getenv("USERNAME")
                 password = System.getenv("TOKEN")
             }
+	}
     }
 
     publications {
