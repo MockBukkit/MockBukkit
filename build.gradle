@@ -11,12 +11,20 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/PaTzMC/MockedBukkit")
+            url = uri("https://maven.pkg.github.com/PaTzMC/MockBukkit")
             credentials {
             	username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
             	password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
             }
-	}
+		}
+		maven{
+			name = "PaTzMC"
+			url = "https://repo.patzmc.tk/repository/patz-repo"
+			credentials{
+				username = System.getenv("PATZ_USERNAME")
+				password = System.getenv("PATZ_PASSWORD")
+			}
+		}
     }
 
     publications {

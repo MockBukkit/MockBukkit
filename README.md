@@ -1,24 +1,24 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/403a4bb837ca47333d33/maintainability)](https://codeclimate.com/github/seeseemelk/MockBukkit/maintainability)
-# MockBukkit
-MockBukkit is a framework that makes the unit testing of Bukkit plugins a whole lot easier.
+# Jukkit
+Jukkit is a framework that makes the unit testing of Bukkit plugins a whole lot easier.
 It aims to be a complete mock implementation.
 
 ## Usage
-MockBukkit can easily be included in gradle using jitpack.io
+Jukkit can easily be included in gradle using jitpack.io
 ```gradle
 repositories {
     maven { url 'https://jitpack.io' }
 }
 dependencies {
     testCompile 'junit:junit:4.12'
-    testCompile 'com.github.seeseemelk:MockBukkit:master-SNAPSHOT'
+    testCompile 'com.patzmc:MockBukkit:v2.0'
 }
 ```
 
 Note: use v1.8.8-SNAPSHOT to test a Bukkit 1.8.8 plugin or any other version if the branch exists.
 These branches are considered supported and will get updates backported to them.
 
-In order to use MockBukkit the plugin to be tested needs an extra constructor and it has to be initialised before each test.
+In order to use Jukkit the plugin to be tested needs an extra constructor and it has to be initialised before each test.
 The plugin will need both a default constructor and an extra one that will call a super constructor.
 Your plugins constructor will look like this if your plugin was called ```MyPlugin```
 ```java
@@ -35,7 +35,7 @@ public class MyPlugin extends JavaPlugin
     }
 }
 ```
-The plugin is now ready to be tested by MockBukkit.
+The plugin is now ready to be tested by Jukkit.
 A plugin can be loaded in this initialiser block.
 
 ```java
