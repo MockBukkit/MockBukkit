@@ -92,7 +92,7 @@ public class PluginManagerMock implements PluginManager
 		{
 			try
 			{
-				FileUtils.deleteDirectory(file);
+				FileUtils.forceDelete(file);
 			}
 			catch (IOException e)
 			{
@@ -274,6 +274,22 @@ public class PluginManagerMock implements PluginManager
 	}
 
 	/**
+	 * Tries to create a temporary plugin file.
+	 *
+	 * @param name The name of the plugin.
+	 * @return The created temporary file.
+	 * @throws IOException when the file could not be created.
+	 */
+	private @NotNull File createTemporaryPluginFile(@NotNull String name) throws IOException
+	{
+		Random random = ThreadLocalRandom.current();
+		File pluginFile = Files.createTempFile(name + "-" + random.nextInt(), ".jar").toFile();
+		pluginFile.createNewFile();
+		temporaryFiles.add(pluginFile);
+		return pluginFile;
+	}
+
+	/**
 	 * Registers a plugin that has already been loaded. This is necessary to register plugins loaded from external jars.
 	 *
 	 * @param plugin The plugin that has been loaded.
@@ -312,6 +328,8 @@ public class PluginManagerMock implements PluginManager
 			arguments[0] = loader;
 			arguments[1] = description;
 			arguments[2] = createTemporaryDirectory(
+			                   "MockBukkit-" + description.getName() + "-" + description.getVersion());
+			arguments[3] = createTemporaryPluginFile(
 			                   "MockBukkit-" + description.getName() + "-" + description.getVersion());
 			System.arraycopy(parameters, 0, arguments, 4, parameters.length);
 
