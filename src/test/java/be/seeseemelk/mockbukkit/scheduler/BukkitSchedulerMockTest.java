@@ -1,5 +1,12 @@
 package be.seeseemelk.mockbukkit.scheduler;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.TimeUnit;
@@ -13,8 +20,6 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class BukkitSchedulerMockTest
 {
@@ -210,26 +215,37 @@ class BukkitSchedulerMockTest
 
 
 	@Test
-	public void longScheduledRunningTask_Throws_RunTimeException(){
+	public void longScheduledRunningTask_Throws_RunTimeException()
+	{
 		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
-		scheduler.runTaskAsynchronously(null, () -> {
-			while(true){
-				try {
+		scheduler.runTaskAsynchronously(null, () ->
+		{
+			while (true)
+			{
+				try
+				{
 					Thread.sleep(10L);
-				} catch (InterruptedException e) {
+				}
+				catch (InterruptedException e)
+				{
 					throw new RuntimeException(e);
 				}
 			}
 		});
-		scheduler.runTaskLaterAsynchronously(null, () -> {
-			while(true){
-				try {
+		scheduler.runTaskLaterAsynchronously(null, () ->
+		{
+			while (true)
+			{
+				try
+				{
 					Thread.sleep(10L);
-				} catch (InterruptedException e) {
+				}
+				catch (InterruptedException e)
+				{
 					throw new RuntimeException(e);
 				}
 			}
-		},2);
+		}, 2);
 		assertEquals(1, scheduler.getActiveRunningCount());
 		scheduler.performOneTick();
 		assertEquals(1, scheduler.getActiveRunningCount());
@@ -253,9 +269,11 @@ class BukkitSchedulerMockTest
 				if(testTask.isCancelled()){
 					alive.set(false);
 				}
-				try {
+				try
+				{
 					Thread.sleep(10L);
-				} catch (InterruptedException e) {
+				} catch (InterruptedException e)
+				{
 					alive.set(false);
 					String message = "Interrupted";
 					throw new RuntimeException(message,e);
@@ -266,8 +284,10 @@ class BukkitSchedulerMockTest
 		assertEquals(1, scheduler.getActiveRunningCount());
 		scheduler.performTicks(10);
 		scheduler.setShutdownTimeout(10);
-		assertThrows(RuntimeException.class,() -> {
-			scheduler.shutdown();
-		});
+		assertThrows(RuntimeException.class,
+				() ->
+				{
+					scheduler.shutdown();
+				});
 	}
 }

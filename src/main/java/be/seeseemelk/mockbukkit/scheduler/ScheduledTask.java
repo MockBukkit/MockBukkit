@@ -29,11 +29,13 @@ public class ScheduledTask implements BukkitTask
 	}
 
 
-	public boolean isRunning() {
+	public boolean isRunning()
+	{
 		return running;
 	}
 
-	public void setRunning(boolean running) {
+	public void setRunning(boolean running)
+	{
 		this.running = running;
 	}
 
