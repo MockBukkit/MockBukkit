@@ -524,7 +524,8 @@ public class WorldMock implements World
 
 	@NotNull
 	@Override
-	public Item dropItemNaturally(@NotNull Location location, @NotNull ItemStack item, @Nullable Consumer<Item> function) {
+	public Item dropItemNaturally(@NotNull Location location, @NotNull ItemStack item, @Nullable Consumer<Item> function)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 

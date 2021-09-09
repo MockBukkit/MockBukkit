@@ -215,26 +215,37 @@ class BukkitSchedulerMockTest
 
 
 	@Test(expected = RuntimeException.class)
-	public void longScheduledRunningTask_Throws_RunTimeException(){
+	public void longScheduledRunningTask_Throws_RunTimeException()
+	{
 		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
-		scheduler.runTaskAsynchronously(null, () -> {
-			while(true){
-				try {
+		scheduler.runTaskAsynchronously(null, () ->
+		{
+			while (true)
+			{
+				try
+				{
 					Thread.sleep(10L);
-				} catch (InterruptedException e) {
+				}
+				catch (InterruptedException e)
+				{
 					throw new RuntimeException(e);
 				}
 			}
 		});
-		scheduler.runTaskLaterAsynchronously(null, () -> {
-			while(true){
-				try {
+		scheduler.runTaskLaterAsynchronously(null, () ->
+		{
+			while (true)
+			{
+				try
+				{
 					Thread.sleep(10L);
-				} catch (InterruptedException e) {
+				}
+				catch (InterruptedException e)
+				{
 					throw new RuntimeException(e);
 				}
 			}
-		},2);
+		}, 2);
 		assertEquals(1, scheduler.getActiveRunningCount());
 		scheduler.performOneTick();
 		assertEquals(1, scheduler.getActiveRunningCount());
@@ -246,19 +257,25 @@ class BukkitSchedulerMockTest
 		scheduler.shutdown();
 	}
 
-	@Test(expected = RuntimeException.class,timeout = 1000L)
-	public void longRunningTask_Throws_RunTimeException(){
+	@Test(expected = RuntimeException.class, timeout = 1000L)
+	public void longRunningTask_Throws_RunTimeException()
+	{
 		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
-		testTask = scheduler.runTaskAsynchronously(null, () -> {
+		testTask = scheduler.runTaskAsynchronously(null, () ->
+		{
 			boolean alive = true;
 			while (alive)
 			{
-				if(testTask.isCancelled()){
+				if (testTask.isCancelled())
+				{
 					alive = false;
 				}
-				try {
+				try
+				{
 					Thread.sleep(10L);
-				} catch (InterruptedException e) {
+				}
+				catch (InterruptedException e)
+				{
 					throw new RuntimeException(e);
 				}
 			}
