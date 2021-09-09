@@ -254,29 +254,34 @@ class BukkitSchedulerMockTest
 		scheduler.performOneTick();
 		assertEquals(2, scheduler.getActiveRunningCount());
 		scheduler.setShutdownTimeout(300);
-		assertThrows(RuntimeException.class,()->{
+		assertThrows(RuntimeException.class, ()->
+		{
 			scheduler.shutdown();
 		});
 	}
 
 	@Test
-	public void longRunningTask_Throws_RunTimeException(){
+	public void longRunningTask_Throws_RunTimeException()
+	{
 		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
 		final AtomicBoolean alive = new AtomicBoolean(true);
-		testTask = scheduler.runTaskAsynchronously(null, () -> {
+		testTask = scheduler.runTaskAsynchronously(null, () ->
+		{
 			while (alive.get())
 			{
-				if(testTask.isCancelled()){
+				if (testTask.isCancelled())
+				{
 					alive.set(false);
 				}
 				try
 				{
 					Thread.sleep(10L);
-				} catch (InterruptedException e)
+				}
+				catch (InterruptedException e)
 				{
 					alive.set(false);
 					String message = "Interrupted";
-					throw new RuntimeException(message,e);
+					throw new RuntimeException(message, e);
 				}
 			}
 		});
@@ -285,9 +290,9 @@ class BukkitSchedulerMockTest
 		scheduler.performTicks(10);
 		scheduler.setShutdownTimeout(10);
 		assertThrows(RuntimeException.class,
-				() ->
-				{
-					scheduler.shutdown();
-				});
+		             () ->
+		{
+			scheduler.shutdown();
+		});
 	}
 }
