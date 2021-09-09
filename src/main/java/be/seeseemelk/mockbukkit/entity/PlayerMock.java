@@ -960,7 +960,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		org.bukkit.event.player.PlayerChatEvent syncEvent = new org.bukkit.event.player.PlayerChatEvent(this, msg);
 
 		ServerMock server = MockBukkit.getMock();
-		server.getScheduler().executeAsyncChatEvent(asyncEvent);
+		server.getScheduler().executeAsyncEvent(asyncEvent);
 		server.getPluginManager().callEvent(syncEvent);
 	}
 

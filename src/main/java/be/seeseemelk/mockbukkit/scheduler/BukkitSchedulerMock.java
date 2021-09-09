@@ -18,7 +18,6 @@ import java.util.logging.Logger;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
-import org.apache.commons.lang.Validate;
 import org.bukkit.event.Event;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.plugin.Plugin;
@@ -34,7 +33,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	private final ThreadPoolExecutor pool = new ThreadPoolExecutor(0, Integer.MAX_VALUE,
 			60L, TimeUnit.SECONDS,
 			new SynchronousQueue<>());
-	private final ExecutorService chatExecutor = Executors.newCachedThreadPool();
+	private final ExecutorService asyncEventExecutor = Executors.newCachedThreadPool();
 	private final TaskList scheduledTasks = new TaskList();
 	private final AtomicReference<Exception> asyncException = new AtomicReference<>();
 	private long currentTick = 0;
@@ -65,18 +64,12 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		pool.shutdown();
 		if (asyncException.get() != null)
 			throw new AsyncTaskException(asyncException.get());
-		chatExecutor.shutdownNow();
+		asyncEventExecutor.shutdownNow();
 	}
 
-	public void executeAsyncChatEvent(AsyncPlayerChatEvent event)
-	{
-		chatExecutor.submit(() -> MockBukkit.getMock().getPluginManager().callEvent(event));
-	}
+	public void executeAsyncEvent(Event event){
+		asyncEventExecutor.submit(() -> MockBukkit.getMock().getPluginManager().callEvent(event));
 
-	public @NotNull Future<?> scheduleAsyncEventCall(@NotNull Event event)
-	{
-		Validate.notNull(event, "Cannot schedule an Event that is null!");
-		return asyncEventExecutor.submit(() -> MockBukkit.getMock().getPluginManager().callEvent(event));
 	}
 
 	/**

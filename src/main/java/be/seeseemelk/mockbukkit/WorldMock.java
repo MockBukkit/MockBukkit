@@ -482,15 +482,6 @@ public class WorldMock implements World
 		return entity;
 	}
 
-	@NotNull
-	@Override
-	public Item dropItem(@NotNull Location location, @NotNull ItemStack item, @Nullable Consumer<Item> function)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
-	}
-
 	@Override
 	public ItemEntityMock dropItem(@NotNull Location loc, @NotNull ItemStack item)
 	{
@@ -520,14 +511,6 @@ public class WorldMock implements World
 	public ItemEntityMock dropItemNaturally(@NotNull Location loc, @NotNull ItemStack item)
 	{
 		return dropItemNaturally(loc, item, e -> {});
-	}
-
-	@NotNull
-	@Override
-	public Item dropItemNaturally(@NotNull Location location, @NotNull ItemStack item, @Nullable Consumer<Item> function) {
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
 	}
 
 	@Override

@@ -1,11 +1,5 @@
 package be.seeseemelk.mockbukkit.scheduler;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.TimeUnit;
@@ -16,10 +10,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.TestPlugin;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class BukkitSchedulerMockTest
 {
@@ -195,7 +190,7 @@ class BukkitSchedulerMockTest
 	}
 
 	@Test
-	public void cancellingAllTaskbyPlugin()
+	public void cancellingAllTaskByPlugin()
 	{
 		MockBukkit.mock();
 		MockBukkit.load(TestPlugin.class);
@@ -214,7 +209,7 @@ class BukkitSchedulerMockTest
 	}
 
 
-	@Test(expected = RuntimeException.class)
+	@Test
 	public void longScheduledRunningTask_Throws_RunTimeException(){
 		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
 		scheduler.runTaskAsynchronously(null, () -> {
@@ -243,30 +238,36 @@ class BukkitSchedulerMockTest
 		scheduler.performOneTick();
 		assertEquals(2, scheduler.getActiveRunningCount());
 		scheduler.setShutdownTimeout(300);
-		scheduler.shutdown();
+		assertThrows(RuntimeException.class,()->{
+			scheduler.shutdown();
+		});
 	}
 
-	@Test(expected = RuntimeException.class,timeout = 1000L)
+	@Test
 	public void longRunningTask_Throws_RunTimeException(){
 		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
+		final AtomicBoolean alive = new AtomicBoolean(true);
 		testTask = scheduler.runTaskAsynchronously(null, () -> {
-			boolean alive = true;
-			while (alive)
+			while (alive.get())
 			{
 				if(testTask.isCancelled()){
-					alive = false;
+					alive.set(false);
 				}
 				try {
 					Thread.sleep(10L);
 				} catch (InterruptedException e) {
-					throw new RuntimeException(e);
+					alive.set(false);
+					String message = "Interrupted";
+					throw new RuntimeException(message,e);
 				}
 			}
 		});
+		assertTrue(alive.get());
 		assertEquals(1, scheduler.getActiveRunningCount());
+		scheduler.performTicks(10);
 		scheduler.setShutdownTimeout(10);
-		scheduler.shutdown();
+		assertThrows(RuntimeException.class,() -> {
+			scheduler.shutdown();
+		});
 	}
-
-
 }
