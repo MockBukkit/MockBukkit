@@ -1,8 +1,8 @@
 package be.seeseemelk.mockbukkit.block.state;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -11,33 +11,33 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 
-public class LecternMockTest
+class LecternMockTest
 {
 
 	private Lectern lectern;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		MockBukkit.mock();
 		lectern = new LecternMock(Material.LECTERN);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception
 	{
 		MockBukkit.unmock();
 	}
 
 	@Test
-	public void testSetPageValid()
+	void testSetPageValid()
 	{
 		// Given
 		ItemStack book = new ItemStack(Material.WRITABLE_BOOK);
@@ -57,7 +57,7 @@ public class LecternMockTest
 	}
 
 	@Test
-	public void testSetPageInvalid()
+	void testSetPageInvalid()
 	{
 		// Given
 		ItemStack book = new ItemStack(Material.WRITABLE_BOOK);
@@ -82,7 +82,7 @@ public class LecternMockTest
 	}
 
 	@Test
-	public void testHasInventory()
+	void testHasInventory()
 	{
 		// When
 		Inventory inventory = lectern.getInventory();
@@ -95,7 +95,7 @@ public class LecternMockTest
 	}
 
 	@Test
-	public void testMaterialBarrelBlockState()
+	void testMaterialBarrelBlockState()
 	{
 		Block block = new BlockMock(Material.LECTERN);
 		assertTrue(block.getState() instanceof Lectern);

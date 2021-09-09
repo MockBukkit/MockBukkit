@@ -1,15 +1,15 @@
-apply plugin: 'java-library'
-apply plugin: 'eclipse'
-apply plugin: 'idea'
-apply plugin: 'jacoco'
-apply plugin: 'maven-publish'
-apply plugin: 'signing'
+plugins {
+    id 'java-library'
+    id 'eclipse'
+    id 'idea'
+    id 'jacoco'
+    id 'maven-publish'
+    id 'signing'
+}
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
 
 repositories {
-    jcenter()
+    mavenCentral()
 
     maven {
         url 'https://hub.spigotmc.org/nexus/content/repositories/public/'
@@ -22,20 +22,36 @@ repositories {
 
 dependencies {
     api "org.spigotmc:spigot-api:${gradle.ext.apiVersionFull}"
-    implementation 'junit:junit:4.12'
+    implementation 'org.junit.jupiter:junit-jupiter:5.7.1'
     implementation 'org.hamcrest:hamcrest-library:1.3'
     implementation 'org.apache.commons:commons-io:1.3.2'
     implementation 'org.jetbrains:annotations:19.0.0'
 }
 
 task javadocJar(type: Jar) {
-    classifier = 'javadoc'
+    classifier('javadoc')
     from javadoc
 }
 
 task sourcesJar(type: Jar) {
-    classifier = 'sources'
+    classifier('sources')
     from sourceSets.main.allSource
+}
+
+tasks.withType(JavaCompile) {
+    Provider<JavaCompiler> compilerProvider = javaToolchains.compilerFor {
+        JavaLanguageVersion.of(8)
+    }
+    JavaCompiler compiler = compilerProvider.orNull
+
+    if (compiler != null && compiler.metadata.languageVersion.asInt() > 9) {
+        // Mark release as 8 if the compiler is Java 10 or newer
+        options.release.set(8)
+    } else {
+        // Only use the legacy compiler options otherwise
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
 }
 
 artifacts {
@@ -55,6 +71,10 @@ jacocoTestReport {
     }
 }
 
+jacoco {
+	toolVersion = "0.8.6"
+}
+
 group = 'com.github.seeseemelk'
 version = gradle.ext.version
 
@@ -63,23 +83,23 @@ publishing {
         mockBukkit(MavenPublication) {
             artifactId = "MockBukkit-v${gradle.ext.apiVersion}"
             from components.java
-            
+
             artifact sourcesJar
             artifact javadocJar
             pom {
                 name = "MockBukkit-v${gradle.ext.apiVersion}"
                 packaging = 'jar'
                 description = 'MockBukkit is a mocking framework for bukkit to allow the easy unit testing of Bukkit plugins.'
-                url = 'https://github.com/seeseemelk/MockBukkit'
+                url = 'https://github.com/MockBukkit/MockBukkit'
                 scm {
-                    connection = 'scm:git:git://github.com/seeseemelk/MockBukkit.git'
-                    developerConnection = 'scm:git:ssh://github.com:seeseemelk/MockBukkit.git'
-                    url = "https://github.com/seeseemelk/MockBukkit/tree/v${gradle.ext.apiVersion}"
+                    connection = 'scm:git:git://github.com/MockBukkit/MockBukkit.git'
+                    developerConnection = 'scm:git:ssh://github.com:MockBukkit/MockBukkit.git'
+                    url = "https://github.com/MockBukkit/MockBukkit/tree/v${gradle.ext.apiVersion}"
                 }
                 licenses {
                     license {
                         name = 'MIT License'
-                        url = "https://github.com/seeseemelk/MockBukkit/blob/v${gradle.ext.apiVersion}/LICENSE"
+                        url = "https://github.com/MockBukkit/MockBukkit/blob/v${gradle.ext.apiVersion}/LICENSE"
                     }
                 }
                 developers {
@@ -113,6 +133,10 @@ publishing {
     }
 }
 
+test {
+    useJUnitPlatform()
+}
+
 eclipse.classpath.downloadJavadoc = true
 eclipse.classpath.downloadSources = true
 
@@ -122,7 +146,7 @@ def isFork() {
         def result = 'git config --get remote.origin.url'.execute(null, workingDir)
         result.waitFor()
         if (result.exitValue() == 0) {
-            return !result.text.contains("seeseemelk")
+            return !result.text.contains("MockBukkit/MockBukkit")
         }
     } catch (e) {
     }

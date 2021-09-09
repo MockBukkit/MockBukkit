@@ -14,6 +14,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;
+import org.jetbrains.annotations.NotNull;
 
 public class MockBukkit
 {
@@ -295,17 +296,6 @@ public class MockBukkit
 	}
 
 	/**
-	 * Renamed to `unmock()` for symmetry with `mock()`.
-	 *
-	 * @see MockBukkit#unmock()
-	 */
-	@Deprecated
-	public static void unload()
-	{
-		unmock();
-	}
-
-	/**
 	 * Unload all loaded plugins.
 	 */
 	public static void unmock()
@@ -338,11 +328,23 @@ public class MockBukkit
 	 *
 	 * @return An instance of a mock plugin.
 	 */
-	public static MockPlugin createMockPlugin()
+	public static @NotNull MockPlugin createMockPlugin()
+	{
+		return createMockPlugin("MockPlugin");
+	}
+
+	/**
+	 * Creates a mock instance of a {@link JavaPlugin} implementation and gives you a chance to name the plugin. This plugin offers no functionality, but it does
+	 * allow a plugin that might enable and disable other plugins to be tested.
+	 *
+	 * @param pluginName A name of a new plugin.
+	 * @return An instance of a mock plugin.
+	 */
+	public static @NotNull MockPlugin createMockPlugin(@NotNull String pluginName)
 	{
 		if (mock != null)
 		{
-			PluginDescriptionFile description = new PluginDescriptionFile("MockPlugin", "1.0.0",
+			PluginDescriptionFile description = new PluginDescriptionFile(pluginName, "1.0.0",
 			        MockPlugin.class.getName());
 			JavaPlugin instance = mock.getPluginManager().loadPlugin(MockPlugin.class, description);
 			mock.getPluginManager().enablePlugin(instance);

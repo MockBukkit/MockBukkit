@@ -16,14 +16,16 @@ import java.util.function.Consumer;
 import java.util.logging.Logger;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+
+import org.apache.commons.lang.Validate;
+import org.bukkit.event.Event;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.scheduler.BukkitWorker;
-
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.jetbrains.annotations.NotNull;
 
 public class BukkitSchedulerMock implements BukkitScheduler
@@ -69,6 +71,12 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public void executeAsyncChatEvent(AsyncPlayerChatEvent event)
 	{
 		chatExecutor.submit(() -> MockBukkit.getMock().getPluginManager().callEvent(event));
+	}
+
+	public @NotNull Future<?> scheduleAsyncEventCall(@NotNull Event event)
+	{
+		Validate.notNull(event, "Cannot schedule an Event that is null!");
+		return asyncEventExecutor.submit(() -> MockBukkit.getMock().getPluginManager().callEvent(event));
 	}
 
 	/**
@@ -144,8 +152,9 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public void waitAsyncTasksFinished()
 	{
 		// Make sure all tasks get to execute. (except for repeating asynchronous tasks, they only will fire once)
-		while (scheduledTasks.getScheduledTaskCount() > 0)
+		while (scheduledTasks.getScheduledTaskCount() > 0) {
 			performOneTick();
+		}
 
 		// Wait for all tasks to finish executing.
 		long systemTime = System.currentTimeMillis();
@@ -349,12 +358,14 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	}
 
 	@Override
-	public @NotNull BukkitTask runTaskLater(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay) {
+	public @NotNull BukkitTask runTaskLater(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay)
+	{
 		return runTaskLater(plugin, (Runnable) task, delay);
 	}
 
 	@Override
-	public @NotNull BukkitTask runTaskLaterAsynchronously(@NotNull Plugin plugin, @NotNull Runnable task, long delay) {
+	public @NotNull BukkitTask runTaskLaterAsynchronously(@NotNull Plugin plugin, @NotNull Runnable task, long delay)
+	{
 		ScheduledTask scheduledTask = new ScheduledTask(id++, plugin, false, currentTick + delay,
 				new AsyncRunnable(task));
 		scheduledTasks.addTask(scheduledTask);
@@ -362,12 +373,14 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	}
 
 	@Override
-	public @NotNull BukkitTask runTaskLaterAsynchronously(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay) {
+	public @NotNull BukkitTask runTaskLaterAsynchronously(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay)
+	{
 		return runTaskLaterAsynchronously(plugin, (Runnable) task, delay);
 	}
 
 	@Override
-	public @NotNull BukkitTask runTaskTimerAsynchronously(@NotNull Plugin plugin, @NotNull Runnable task, long delay, long period) {
+	public @NotNull BukkitTask runTaskTimerAsynchronously(@NotNull Plugin plugin, @NotNull Runnable task, long delay, long period)
+	{
 		RepeatingTask scheduledTask = new RepeatingTask(id++, plugin, false, currentTick + delay, period,
 				new AsyncRunnable(task));
 		scheduledTasks.addTask(scheduledTask);
@@ -375,7 +388,8 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	}
 
 	@Override
-	public @NotNull BukkitTask runTaskTimerAsynchronously(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay, long period) {
+	public @NotNull BukkitTask runTaskTimerAsynchronously(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay, long period)
+	{
 		return runTaskTimerAsynchronously(plugin, (Runnable) task, delay, period);
 	}
 
@@ -404,7 +418,8 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	}
 
 	@Override
-	public void runTask(@NotNull Plugin plugin, @NotNull Consumer<BukkitTask> task) {
+	public void runTask(@NotNull Plugin plugin, @NotNull Consumer<BukkitTask> task)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}

@@ -1,61 +1,40 @@
 package be.seeseemelk.mockbukkit.tags;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.jetbrains.annotations.NotNull;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 
-@RunWith(Parameterized.class)
-public class RegistryTest
+class RegistryTest
 {
 
-	@Parameters
-	public static Collection<Object[]> data()
-	{
-		return Arrays.asList(new Object[][]
-		{
-			{ TagRegistry.BLOCKS },
-			{ TagRegistry.ITEMS }
-		});
-	}
-
-	private TagRegistry registry;
-
-	public RegistryTest(TagRegistry registry)
-	{
-		this.registry = registry;
-	}
-
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		MockBukkit.mock();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown()
 	{
 		MockBukkit.unmock();
 	}
 
-	@Test
-	public void testNotEmpty()
+	@ParameterizedTest
+	@EnumSource(TagRegistry.class)
+	void testNotEmpty(@NotNull TagRegistry registry)
 	{
 		assertFalse(registry.isEmpty());
 
@@ -65,8 +44,9 @@ public class RegistryTest
 		}
 	}
 
-	@Test
-	public void testForInfiniteLoops() throws TagMisconfigurationException
+	@ParameterizedTest
+	@EnumSource(TagRegistry.class)
+	void testForInfiniteLoops(@NotNull TagRegistry registry) throws TagMisconfigurationException
 	{
 		for (TagWrapperMock tag : registry.getTags().values())
 		{
@@ -74,8 +54,9 @@ public class RegistryTest
 		}
 	}
 
-	@Test
-	public void testGetValues() throws TagMisconfigurationException
+	@ParameterizedTest
+	@EnumSource(TagRegistry.class)
+	void testGetValues(@NotNull TagRegistry registry) throws TagMisconfigurationException
 	{
 		for (TagWrapperMock tag : registry.getTags().values())
 		{
@@ -113,7 +94,7 @@ public class RegistryTest
 		{
 			System.out.println("Currently visiting: " + visiting);
 			System.out.println("Previously visited" + visiting);
-			Assert.fail("Tag '" + tag.getKey() + "' is cyclic!");
+			fail("Tag '" + tag.getKey() + "' is cyclic!");
 		}
 	}
 

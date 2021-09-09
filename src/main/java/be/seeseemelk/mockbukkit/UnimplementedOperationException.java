@@ -1,17 +1,27 @@
 package be.seeseemelk.mockbukkit;
 
-import org.junit.AssumptionViolatedException;
+import org.jetbrains.annotations.NotNull;
+import org.opentest4j.TestAbortedException;
 
-public class UnimplementedOperationException extends AssumptionViolatedException
+/**
+ * Sometimes your code may use a method that is not yet implemented in MockBukkit. When this happens {@link MockBukkit}
+ * will, instead of returning placeholder values, throw an {@link UnimplementedOperationException}.
+ * <p>
+ * This is a {@link TestAbortedException} and causes your Test to be skipped instead of just failing.
+ *
+ * @author seeseemelk
+ *
+ */
+public class UnimplementedOperationException extends TestAbortedException
 {
 	private static final long serialVersionUID = 1L;
 
 	public UnimplementedOperationException()
 	{
-		super("Not implemented");
+		this("Not implemented");
 	}
 
-	public UnimplementedOperationException(String message)
+	public UnimplementedOperationException(@NotNull String message)
 	{
 		super(message);
 	}

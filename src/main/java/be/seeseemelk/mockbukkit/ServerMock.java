@@ -60,7 +60,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.generator.ChunkGenerator.ChunkData;
-import org.bukkit.help.HelpMap;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemFactory;
 import org.bukkit.inventory.ItemStack;
@@ -128,7 +127,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private final ScoreboardManagerMock scoreboardManager = new ScoreboardManagerMock();
 	private final BukkitSchedulerMock scheduler = new BukkitSchedulerMock();
 	private final ServicesManagerMock servicesManager = new ServicesManagerMock();
-	private final PlayerList playerList = new PlayerList();
+	private final MockPlayerList playerList = new MockPlayerList();
 	private final MockCommandMap commandMap = new MockCommandMap(this);
 	private final HelpMapMock helpMap = new HelpMapMock();
 
@@ -822,7 +821,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public HelpMap getHelpMap()
+	public HelpMapMock getHelpMap()
 	{
 		return helpMap;
 	}
@@ -1507,38 +1506,38 @@ public class ServerMock extends Server.Spigot implements Server
 	{
 		return this;
 	}
-	
+
 	// Methods from Server.Spigot:
 
 	@NotNull
 	@Override
-    public YamlConfiguration getConfig()
+	public YamlConfiguration getConfig()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-    }
+	}
 
-    @Override
-    public void broadcast(@NotNull BaseComponent component)
-    {
+	@Override
+	public void broadcast(@NotNull BaseComponent component)
+	{
 		for (Player player : getOnlinePlayers())
 		{
 			player.spigot().sendMessage(component);
 		}
-    }
+	}
 
-    @Override
-    public void broadcast(@NotNull BaseComponent... components)
-    {
+	@Override
+	public void broadcast(@NotNull BaseComponent... components)
+	{
 		for (Player player : getOnlinePlayers())
 		{
 			player.spigot().sendMessage(components);
 		}
-    }
+	}
 
-    @Override
-    public void restart()
-    {
-    	throw new UnsupportedOperationException("Not supported.");
-    }
+	@Override
+	public void restart()
+	{
+		throw new UnsupportedOperationException("Not supported.");
+	}
 }

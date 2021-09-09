@@ -1,40 +1,41 @@
 package be.seeseemelk.mockbukkit.block.state;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Chest;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 
-public class BlockStateMockTest
+class BlockStateMockTest
 {
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		MockBukkit.mock();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception
 	{
 		MockBukkit.unmock();
 	}
 
 	@Test
-	public void testPlaced()
+	void testPlaced()
 	{
 		Location location = new Location(new WorldMock(), 400, 100, 1200);
 		Block block = new BlockMock(Material.DIRT, location);
@@ -53,21 +54,21 @@ public class BlockStateMockTest
 	}
 
 	@Test
-	public void getBlockNotPlaced()
+	void getBlockNotPlaced()
 	{
 		BlockState state = new BlockStateMock(Material.SAND);
 		assertFalse(state.isPlaced());
 	}
 
-	@Test(expected = IllegalStateException.class)
-	public void getBlockNotPlacedException()
+	@Test
+	void getBlockNotPlacedException()
 	{
 		BlockState state = new BlockStateMock(Material.SAND);
-		state.getBlock();
+		assertThrows(IllegalStateException.class, state::getBlock);
 	}
 
 	@Test
-	public void testUpdateWrongType()
+	void testUpdateWrongType()
 	{
 		Block block = new BlockMock(Material.CHEST);
 		BlockState chest = new ChestMock(block);
@@ -76,7 +77,7 @@ public class BlockStateMockTest
 	}
 
 	@Test
-	public void testUpdateNotPlacedReturnsTrue()
+	void testUpdateNotPlacedReturnsTrue()
 	{
 		BlockState state = new BlockStateMock(Material.IRON_BLOCK);
 		assertFalse(state.isPlaced());
@@ -84,7 +85,7 @@ public class BlockStateMockTest
 	}
 
 	@Test
-	public void testUpdateForce()
+	void testUpdateForce()
 	{
 		Block block = new BlockMock(Material.CHEST);
 		BlockState chest = new ChestMock(block);

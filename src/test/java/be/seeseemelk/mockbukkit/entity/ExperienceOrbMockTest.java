@@ -1,7 +1,7 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.UUID;
 
@@ -9,42 +9,42 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ExperienceOrb;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.WorldMock;
 
-public class ExperienceOrbMockTest
+class ExperienceOrbMockTest
 {
 
 	private ServerMock server;
 	private World world;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		server = MockBukkit.mock();
 		world = new WorldMock();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown()
 	{
 		MockBukkit.unmock();
 	}
 
 	@Test
-	public void testEntityType()
+	void testEntityType()
 	{
 		ExperienceOrb orb = new ExperienceOrbMock(server, UUID.randomUUID());
 		assertEquals(EntityType.EXPERIENCE_ORB, orb.getType());
 	}
 
 	@Test
-	public void testEntitySpawning()
+	void testEntitySpawning()
 	{
 		Location location = new Location(world, 100, 100, 100);
 		ExperienceOrb orb = (ExperienceOrb) world.spawnEntity(location, EntityType.EXPERIENCE_ORB);
@@ -60,14 +60,14 @@ public class ExperienceOrbMockTest
 	}
 
 	@Test
-	public void testSecondConstructor()
+	void testSecondConstructor()
 	{
 		ExperienceOrb orb = new ExperienceOrbMock(server, UUID.randomUUID(), 10);
 		assertEquals(10, orb.getExperience());
 	}
 
 	@Test
-	public void testSetExperience()
+	void testSetExperience()
 	{
 		ExperienceOrb orb = new ExperienceOrbMock(server, UUID.randomUUID(), 0);
 

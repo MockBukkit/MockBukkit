@@ -1,26 +1,27 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.bukkit.enchantments.Enchantment;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 
-public class EnchantedBookMetaMockTest
+class EnchantedBookMetaMockTest
 {
 
 	private Enchantment testEnchantment;
 	private Enchantment testEnchantment2;
 
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 		MockBukkit.mock();
@@ -28,14 +29,14 @@ public class EnchantedBookMetaMockTest
 		testEnchantment2 = new EnchantmentMock("Second Test Enchantment");
 	}
 
-	@After
+	@AfterEach
 	public void tearDown()
 	{
 		MockBukkit.unmock();
 	}
 
 	@Test
-	public void testStoredEnchantsDefaultFalse()
+	void testStoredEnchantsDefaultFalse()
 	{
 		EnchantedBookMetaMock meta = new EnchantedBookMetaMock();
 		assertFalse(meta.hasStoredEnchants());
@@ -43,7 +44,7 @@ public class EnchantedBookMetaMockTest
 	}
 
 	@Test
-	public void testStoredEnchantsWithEnchantment()
+	void testStoredEnchantsWithEnchantment()
 	{
 		EnchantedBookMetaMock meta = new EnchantedBookMetaMock();
 		assertTrue(meta.addStoredEnchant(testEnchantment, 1, false));
@@ -52,7 +53,7 @@ public class EnchantedBookMetaMockTest
 	}
 
 	@Test
-	public void testEnchantmentLevelWithEnchantment()
+	void testEnchantmentLevelWithEnchantment()
 	{
 		EnchantedBookMetaMock meta = new EnchantedBookMetaMock();
 		assertTrue(meta.addStoredEnchant(testEnchantment, 3, false));
@@ -60,7 +61,7 @@ public class EnchantedBookMetaMockTest
 	}
 
 	@Test
-	public void testAddEnchantmentUnsafely()
+	void testAddEnchantmentUnsafely()
 	{
 		EnchantedBookMetaMock meta = new EnchantedBookMetaMock();
 
@@ -72,7 +73,7 @@ public class EnchantedBookMetaMockTest
 	}
 
 	@Test
-	public void testAlreadyExistingEnchantment()
+	void testAlreadyExistingEnchantment()
 	{
 		EnchantedBookMetaMock meta = new EnchantedBookMetaMock();
 
@@ -86,7 +87,7 @@ public class EnchantedBookMetaMockTest
 	}
 
 	@Test
-	public void testAddEnchantmentButFail()
+	void testAddEnchantmentButFail()
 	{
 		EnchantedBookMetaMock meta = new EnchantedBookMetaMock();
 
@@ -98,7 +99,7 @@ public class EnchantedBookMetaMockTest
 	}
 
 	@Test
-	public void testAddConflictingEnchantments()
+	void testAddConflictingEnchantments()
 	{
 		EnchantedBookMetaMock meta = new EnchantedBookMetaMock();
 
@@ -108,7 +109,7 @@ public class EnchantedBookMetaMockTest
 	}
 
 	@Test
-	public void testRemoveStoredEnchantment()
+	void testRemoveStoredEnchantment()
 	{
 		EnchantedBookMetaMock meta = new EnchantedBookMetaMock();
 
@@ -123,7 +124,7 @@ public class EnchantedBookMetaMockTest
 	}
 
 	@Test
-	public void testGetStoredEnchantments()
+	void testGetStoredEnchantments()
 	{
 		EnchantedBookMetaMock meta = new EnchantedBookMetaMock();
 		Map<Enchantment, Integer> enchantments = new HashMap<>();
@@ -136,17 +137,17 @@ public class EnchantedBookMetaMockTest
 	}
 
 	@Test
-	public void testEquals()
+	void testEquals()
 	{
 		EnchantedBookMetaMock meta = new EnchantedBookMetaMock();
 		assertEquals(meta, meta);
-		assertFalse(meta.equals(new ItemMetaMock()));
+		assertNotEquals(meta, new ItemMetaMock());
 
 		EnchantedBookMetaMock meta2 = new EnchantedBookMetaMock();
 		assertEquals(meta, meta2);
 
 		meta.addStoredEnchant(testEnchantment, 1, false);
-		assertFalse(meta.equals(meta2));
+		assertNotEquals(meta, meta2);
 
 		meta2.addStoredEnchant(testEnchantment, 1, false);
 		assertEquals(meta, meta2);

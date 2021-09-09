@@ -1,30 +1,30 @@
 package be.seeseemelk.mockbukkit.scoreboard;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Set;
 
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class ScoreboardMockTest
+class ScoreboardMockTest
 {
 	private ScoreboardMock scoreboard;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception
 	{
 		scoreboard = new ScoreboardMock();
 	}
 
 	@Test
-	public void registerObjective_DummyObjective_ObjectiveRegistered()
+	void registerObjective_DummyObjective_ObjectiveRegistered()
 	{
 		Objective objective = scoreboard.registerNewObjective("My objective", "dummy");
 		assertNotNull(objective);
@@ -32,7 +32,7 @@ public class ScoreboardMockTest
 	}
 
 	@Test
-	public void getObjectivesByCriteria_TwoDifferentObjectives_ReturnsOne()
+	void getObjectivesByCriteria_TwoDifferentObjectives_ReturnsOne()
 	{
 		Objective objective = scoreboard.registerNewObjective("Correct", "dummy");
 		scoreboard.registerNewObjective("Incorrect", "player_kills");
@@ -43,20 +43,20 @@ public class ScoreboardMockTest
 	}
 
 	@Test
-	public void getObjectives_TwoObjectives_ReturnsTwo()
+	void getObjectives_TwoObjectives_ReturnsTwo()
 	{
 		Objective objective1 = scoreboard.registerNewObjective("One", "dummy");
 		Objective objective2 = scoreboard.registerNewObjective("Two", "dummy");
 
 		Set<Objective> objectives = scoreboard.getObjectives();
 
-		assertEquals("getObjectives() did not return 2 objectives", 2, objectives.size());
+		assertEquals(2, objectives.size(), "getObjectives() did not return 2 objectives");
 		assertTrue(objectives.contains(objective1));
 		assertTrue(objectives.contains(objective2));
 	}
 
 	@Test
-	public void getObjective_EmptyDisplaySlot_ReturnsNull()
+	void getObjective_EmptyDisplaySlot_ReturnsNull()
 	{
 		scoreboard.registerNewObjective("Objective", "dummy");
 		assertNull(scoreboard.getObjective(DisplaySlot.BELOW_NAME));
@@ -65,7 +65,7 @@ public class ScoreboardMockTest
 	}
 
 	@Test
-	public void getObjective_ObjectiveInDisplaySlot_ReturnsObjective()
+	void getObjective_ObjectiveInDisplaySlot_ReturnsObjective()
 	{
 		ObjectiveMock objective = scoreboard.registerNewObjective("Objective", "dummy");
 		objective.setDisplaySlot(DisplaySlot.SIDEBAR);
@@ -75,24 +75,3 @@ public class ScoreboardMockTest
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
