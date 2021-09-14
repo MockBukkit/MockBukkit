@@ -235,6 +235,7 @@ public class TeamMock implements Team
 
 	/** @deprecated */
 	@Override
+	@Deprecated
 	public void addPlayer(OfflinePlayer offlinePlayer)
 	{
 		if (!registered)throw new IllegalStateException("Team not registered");

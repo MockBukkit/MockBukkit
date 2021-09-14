@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.Biome;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.material.MaterialData;
@@ -35,6 +36,14 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 	public int getMaxHeight()
 	{
 		return this.maxHeight;
+	}
+
+	@NotNull
+	@Override
+	public Biome getBiome(int x, int y, int z) {
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+
 	}
 
 	@Override
