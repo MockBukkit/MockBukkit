@@ -193,7 +193,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public BlockMock getBlockAt(int x, int y, int z)
+	public @NotNull BlockMock getBlockAt(int x, int y, int z)
 	{
 		Coordinate coordinate = new Coordinate(x, y, z);
 		if (blocks.containsKey(coordinate))
@@ -207,13 +207,13 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public BlockMock getBlockAt(Location location)
+	public @NotNull BlockMock getBlockAt(Location location)
 	{
 		return getBlockAt(location.getBlockX(), location.getBlockY(), location.getBlockZ());
 	}
 
 	@Override
-	public String getName()
+	public @NotNull String getName()
 	{
 		return name;
 	}
@@ -229,13 +229,13 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public UUID getUID()
+	public @NotNull UUID getUID()
 	{
 		return uuid;
 	}
 
 	@Override
-	public Location getSpawnLocation()
+	public @NotNull Location getSpawnLocation()
 	{
 		if (spawnLocation == null)
 		{
@@ -267,7 +267,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public List<Entity> getEntities()
+	public @NotNull List<Entity> getEntities()
 	{
 		// MockBukkit.assertMocking();
 		List<Entity> entities = new ArrayList<>();
@@ -279,7 +279,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public ChunkMock getChunkAt(int x, int z)
+	public @NotNull ChunkMock getChunkAt(int x, int z)
 	{
 		return getChunkAt(new ChunkCoordinate(x, z));
 	}
@@ -305,39 +305,39 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public void sendPluginMessage(Plugin source, String channel, byte[] message)
+	public void sendPluginMessage(@NotNull Plugin source, @NotNull String channel, byte[] message)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Set<String> getListeningPluginChannels()
+	public @NotNull Set<String> getListeningPluginChannels()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void setMetadata(String metadataKey, MetadataValue newMetadataValue)
+	public void setMetadata(@NotNull String metadataKey, @NotNull MetadataValue newMetadataValue)
 	{
 		metadataTable.setMetadata(metadataKey, newMetadataValue);
 	}
 
 	@Override
-	public List<MetadataValue> getMetadata(String metadataKey)
+	public @NotNull List<MetadataValue> getMetadata(@NotNull String metadataKey)
 	{
 		return metadataTable.getMetadata(metadataKey);
 	}
 
 	@Override
-	public boolean hasMetadata(String metadataKey)
+	public boolean hasMetadata(@NotNull String metadataKey)
 	{
 		return metadataTable.hasMetadata(metadataKey);
 	}
 
 	@Override
-	public void removeMetadata(String metadataKey, Plugin owningPlugin)
+	public void removeMetadata(@NotNull String metadataKey, @NotNull Plugin owningPlugin)
 	{
 		metadataTable.removeMetadata(metadataKey, owningPlugin);
 	}
@@ -350,21 +350,21 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public int getHighestBlockYAt(Location location)
+	public int getHighestBlockYAt(@NotNull Location location)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Block getHighestBlockAt(int x, int z)
+	public @NotNull Block getHighestBlockAt(int x, int z)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Block getHighestBlockAt(Location location)
+	public @NotNull Block getHighestBlockAt(Location location)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1610,86 +1610,76 @@ public class WorldMock implements World
 	@Override
 	public BlockState getBlockState(@NotNull Location location)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		Block block = this.getBlockAt(location);
+		return block.getState();
 	}
 
 	@NotNull
 	@Override
 	public BlockState getBlockState(int x, int y, int z)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		Block block = this.getBlockAt(x, y, z);
+		return block.getState();
 	}
 
 	@NotNull
 	@Override
 	public BlockData getBlockData(@NotNull Location location)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		Block block = this.getBlockAt(location);
+		return block.getBlockData();
 	}
 
 	@NotNull
 	@Override
 	public BlockData getBlockData(int x, int y, int z)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		Block block = this.getBlockAt(x, y, z);
+		return block.getBlockData();
 	}
 
 	@NotNull
 	@Override
 	public Material getType(@NotNull Location location)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		Block block = this.getBlockAt(location);
+		return block.getType();
 	}
 
 	@NotNull
 	@Override
 	public Material getType(int x, int y, int z)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		Block block = this.getBlockAt(x, y, z);
+		return block.getType();
 	}
 
 	@Override
 	public void setBlockData(@NotNull Location location, @NotNull BlockData blockData)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		Block block = this.getBlockAt(location);
+		block.setBlockData(blockData);
 	}
 
 	@Override
 	public void setBlockData(int x, int y, int z, @NotNull BlockData blockData)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		Block block = this.getBlockAt(x, y, z);
+		block.setBlockData(blockData);
 	}
 
 	@Override
 	public void setType(@NotNull Location location, @NotNull Material material)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		Block block = this.getBlockAt(location);
+		block.setType(material);
 	}
 
 	@Override
 	public void setType(int x, int y, int z, @NotNull Material material)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		Block block = this.getBlockAt(x, y, z);
+		block.setType(material);
 	}
 
 	@Override
@@ -1697,7 +1687,6 @@ public class WorldMock implements World
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-
 	}
 
 	@Override
@@ -1705,7 +1694,6 @@ public class WorldMock implements World
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-
 	}
 
 	@Override
@@ -1727,7 +1715,6 @@ public class WorldMock implements World
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-
 	}
 
 	@Override
@@ -1735,7 +1722,6 @@ public class WorldMock implements World
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-
 	}
 
 	@Override
@@ -1743,7 +1729,6 @@ public class WorldMock implements World
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-
 	}
 
 	@Override
@@ -1751,7 +1736,6 @@ public class WorldMock implements World
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-
 	}
 
 	@Override
@@ -1759,7 +1743,6 @@ public class WorldMock implements World
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-
 	}
 
 	@Override
@@ -1767,7 +1750,6 @@ public class WorldMock implements World
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-
 	}
 
 	@Override
@@ -1775,7 +1757,6 @@ public class WorldMock implements World
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-
 	}
 
 	@Override
@@ -1783,7 +1764,6 @@ public class WorldMock implements World
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-
 	}
 
 	@Override
@@ -1791,7 +1771,6 @@ public class WorldMock implements World
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-
 	}
 
 	@Override
