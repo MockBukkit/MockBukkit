@@ -1535,7 +1535,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	public boolean canSee(@NotNull Player player)
 	{
 		return !hiddenPlayers.containsKey(player.getUniqueId()) &&
-				!hiddenPlayersDeprecated.contains(player.getUniqueId());
+		       !hiddenPlayersDeprecated.contains(player.getUniqueId());
 	}
 
 	@Override

@@ -40,7 +40,8 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 
 	@NotNull
 	@Override
-	public Biome getBiome(int x, int y, int z) {
+	public Biome getBiome(int x, int y, int z)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 
