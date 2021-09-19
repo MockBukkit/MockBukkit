@@ -71,6 +71,14 @@ public class ChunkMock implements Chunk
 	}
 
 	@Override
+	public boolean isEntitiesLoaded()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+
+	}
+
+	@Override
 	public Entity[] getEntities()
 	{
 		// TODO Auto-generated method stub
