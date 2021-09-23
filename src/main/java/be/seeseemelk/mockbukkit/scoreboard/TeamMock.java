@@ -233,8 +233,8 @@ public class TeamMock implements Team
 		return board;
 	}
 
-	/** @deprecated */
 	@Override
+	@Deprecated
 	public void addPlayer(OfflinePlayer offlinePlayer)
 	{
 		if (!registered)throw new IllegalStateException("Team not registered");
