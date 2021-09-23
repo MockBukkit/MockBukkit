@@ -68,7 +68,6 @@ import be.seeseemelk.mockbukkit.entity.FireworkMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
 import be.seeseemelk.mockbukkit.entity.ZombieMock;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * A mock world object. Note that it is made to be as simple as possible. It is by no means an efficient implementation.

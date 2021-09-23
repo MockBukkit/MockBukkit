@@ -504,53 +504,15 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			return true;
 		}
 
-		/**
-		 * Remove a task by id but locks the Task list to other writes while removing it.
-		 *
-		 */
-		/*@Deprecated
-		protected ScheduledTask removeTask(ScheduledTask task)
-		{
-			if (!tasks.containsKey(task.getTaskId())) {
-				return null;
-			}
-			taskLock.writeLock().lock();
-			ScheduledTask removed = tasks.remove(task.getTaskId());
-			taskLock.writeLock().unlock();
-			return removed;
-
-		}*/
-
-		/**
-		 * Remove a task by id but locks the Task list to other writes while removing it.
-		 * Not generally there is no reason to remove tasks just cancel them.
-		 *
-		 */
-		/*@Deprecated
-		protected ScheduledTask removeTask(int taskID)
-		{
-			taskLock.writeLock().lock();
-			ScheduledTask removed = tasks.remove(taskID);
-			taskLock.writeLock().unlock();
-			return removed;
-
-		}*/
 
 		protected final List<ScheduledTask> getCurrentTaskList()
 		{
 			List<ScheduledTask> out = new ArrayList<>();
-			if (tasks.size() == 0)
+			if (tasks.size() != 0)
 			{
-				return out;
+				out.addAll(tasks.values());
 			}
-			if (out.addAll(tasks.values()))
-			{
-				return out;
-			}
-			else
-			{
-				throw new RuntimeException("Could not get current task list.");
-			}
+			return out;
 
 		}
 
