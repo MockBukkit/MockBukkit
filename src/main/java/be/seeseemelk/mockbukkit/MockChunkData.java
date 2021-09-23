@@ -44,7 +44,6 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-
 	}
 
 	@Override
