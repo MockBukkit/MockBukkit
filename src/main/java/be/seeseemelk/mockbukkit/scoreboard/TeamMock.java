@@ -233,7 +233,6 @@ public class TeamMock implements Team
 		return board;
 	}
 
-	/** @deprecated */
 	@Override
 	@Deprecated
 	public void addPlayer(OfflinePlayer offlinePlayer)

@@ -43,7 +43,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	private int repairCost = 0;
 	private Map<Enchantment, Integer> enchants = new HashMap<>();
 	private Set<ItemFlag> hideFlags = EnumSet.noneOf(ItemFlag.class);
-	private PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
+	private PersistentDataContainerMock persistentDataContainer = new PersistentDataContainerMock();
 	private boolean unbreakable = false;
 	private Integer customModelData = null;
 
@@ -340,7 +340,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 
 	/**
 	 * Serializes the properties of an ItemMetaMock to a HashMap.
-	 * Unimplemented methods have values of null.
+	 * Unimplemented properties are not present in the map.
 	 * @return A HashMap of String, Object pairs representing the ItemMetaMock.
 	 */
 	@Override
@@ -348,18 +348,52 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	{
 		// Make new map and add relevant properties to it.
 		Map<String, Object> map = new HashMap<>();
-		map.put("displayName", this.displayName);
-		map.put("lore", this.lore);
-		map.put("localizedName", null); // Not implemented.
+
+		if (this.displayName != null)
+		{
+			map.put("displayName", this.displayName);
+		}
+
+		/* Not implemented.
+		if (this.localizedName != null)
+		{
+			map.put("localizedName", this.localizedName);
+		}
+		*/
+
+		if (this.lore != null)
+		{
+			map.put("lore", this.lore);
+		}
+
+		if (this.customModelData != null)
+		{
+			map.put("customModelData", this.customModelData);
+		}
+
 		map.put("enchants", this.enchants);
+
+		/* Not implemented.
+		if (hasAttributeModifiers())
+		{
+			map.put("attributeModifiers", this.attributeModifiers);
+		}
+		*/
+
+		map.put("repairCost", this.repairCost);
 		map.put("itemFlags", this.hideFlags);
 		map.put("unbreakable", this.unbreakable);
-		map.put("attributeModifiers", null); // Not implemented.
-		map.put("customTagContainer", null); // Not implemented.
-		map.put("customModelData", this.customModelData);
-		map.put("persistentDataContainer", this.persistentDataContainer);
 		map.put("damage", this.damage);
-		map.put("repairCost", this.repairCost);
+
+		/* Not implemented.
+		if (!this.customTagContainer.isEmpty())
+		{
+			map.put("customTagContainer", this.customTagContainer);
+		}
+		*/
+
+		map.put("persistentDataContainer", this.persistentDataContainer.serialize());
+
 		// Return map
 		return map;
 	}
@@ -383,7 +417,8 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		// serialMock.setAttributeModifiers(); // AttributeModifiers are unimplemented in mock
 		// customTagContainer is also unimplemented in mock.
 		serialMock.customModelData = (Integer) args.get("customModelData");
-		serialMock.persistentDataContainer = (PersistentDataContainer) args.get("persistentDataContainer");
+		Map<String, Object> map = (Map<String, Object>) args.get("persistentDataContainer");
+		serialMock.persistentDataContainer = PersistentDataContainerMock.deserialize(map);
 		serialMock.damage = (Integer) args.get("damage");
 		serialMock.repairCost = (Integer) args.get("repairCost");
 		return serialMock;
