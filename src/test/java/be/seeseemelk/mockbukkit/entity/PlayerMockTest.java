@@ -1187,6 +1187,7 @@ class PlayerMockTest
 		assertTrue(player.canSee(player2));
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testPlayerHide_OldImplementation()
 	{

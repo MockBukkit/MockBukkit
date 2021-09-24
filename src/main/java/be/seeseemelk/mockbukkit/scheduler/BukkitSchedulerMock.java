@@ -1,12 +1,16 @@
 package be.seeseemelk.mockbukkit.scheduler;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.SynchronousQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 import java.util.logging.Logger;
@@ -21,20 +25,38 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.scheduler.BukkitWorker;
+
 import org.jetbrains.annotations.NotNull;
 
 public class BukkitSchedulerMock implements BukkitScheduler
 {
 	private static final String LOGGER_NAME = "BukkitSchedulerMock";
+	private final ThreadPoolExecutor pool = new ThreadPoolExecutor(0, Integer.MAX_VALUE,
+	        60L, TimeUnit.SECONDS,
+	        new SynchronousQueue<>());
+	private final ExecutorService asyncEventExecutor = Executors.newCachedThreadPool();
+	private final TaskList scheduledTasks = new TaskList();
+	private final AtomicReference<Exception> asyncException = new AtomicReference<>();
 	private long currentTick = 0;
 	private int id = 0;
-	private List<ScheduledTask> tasks = new LinkedList<>();
-	private final ExecutorService pool = Executors.newCachedThreadPool();
-	private final ExecutorService asyncEventExecutor = Executors.newCachedThreadPool();
+	private long executorTimeout = 60000;
 
-	private final AtomicInteger asyncTasksRunning = new AtomicInteger();
-	private final AtomicReference<Exception> asyncException = new AtomicReference<>();
-	private int asyncTasksQueued = 0;
+	private static Runnable wrapTask(ScheduledTask task)
+	{
+		return () ->
+		{
+			task.setRunning(true);
+			task.run();
+			task.setRunning(false);
+		};
+	}
+
+
+	public void setShutdownTimeout(long timeout)
+	{
+		this.executorTimeout = timeout;
+	}
+
 
 	/**
 	 * Shuts the scheduler down. Note that this function will throw exception that where thrown by old asynchronous
@@ -44,12 +66,12 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	{
 		waitAsyncTasksFinished();
 		pool.shutdown();
-		asyncEventExecutor.shutdownNow();
 		if (asyncException.get() != null)
 			throw new AsyncTaskException(asyncException.get());
+		asyncEventExecutor.shutdownNow();
 	}
 
-	public @NotNull Future<?> scheduleAsyncEventCall(@NotNull Event event)
+	public @NotNull Future<?> executeAsyncEvent(Event event)
 	{
 		Validate.notNull(event, "Cannot schedule an Event that is null!");
 		return asyncEventExecutor.submit(() -> MockBukkit.getMock().getPluginManager().callEvent(event));
@@ -71,8 +93,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public void performOneTick()
 	{
 		currentTick++;
-		List<ScheduledTask> oldTasks = tasks;
-		tasks = new LinkedList<>();
+		List<ScheduledTask> oldTasks = scheduledTasks.getCurrentTaskList();
 
 		for (ScheduledTask task : oldTasks)
 		{
@@ -80,24 +101,18 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			{
 				if (task.isSync())
 				{
-					task.run();
+					wrapTask(task).run();
 				}
 				else
 				{
-					asyncTasksRunning.incrementAndGet();
-					pool.execute(task.getRunnable());
-					asyncTasksQueued--;
+					pool.submit(wrapTask(task));
 				}
 
 				if (task instanceof RepeatingTask && !task.isCancelled())
 				{
 					((RepeatingTask) task).updateScheduledTick();
-					tasks.add(task);
+					scheduledTasks.addTask(task);
 				}
-			}
-			else if (!task.isCancelled())
-			{
-				tasks.add(task);
 			}
 		}
 	}
@@ -116,19 +131,39 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	}
 
 	/**
+	 * Gets the number of async tasks which are awaiting execution.
+	 *
+	 * @return The number of async tasks which are pending execution.
+	 */
+	public int getNumberOfQueuedAsyncTasks()
+	{
+		int queuedAsync = 0;
+		for (ScheduledTask task : scheduledTasks.getCurrentTaskList())
+		{
+			if (task.isSync() || task.isCancelled() || task.isRunning())
+			{
+				continue;
+			}
+			queuedAsync++;
+		}
+		return queuedAsync;
+	}
+
+	/**
 	 * Waits until all asynchronous tasks have finished executing. If you have an asynchronous task that runs
 	 * indefinitely, this function will never return.
 	 */
 	public void waitAsyncTasksFinished()
 	{
 		// Make sure all tasks get to execute. (except for repeating asynchronous tasks, they only will fire once)
-		while (asyncTasksQueued > 0)
+		while (scheduledTasks.getScheduledTaskCount() > 0)
 		{
 			performOneTick();
 		}
 
 		// Wait for all tasks to finish executing.
-		while (asyncTasksRunning.get() > 0)
+		long systemTime = System.currentTimeMillis();
+		while (pool.getActiveCount() > 0)
 		{
 			try
 			{
@@ -138,6 +173,23 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			{
 				Thread.currentThread().interrupt();
 				return;
+			}
+			if (System.currentTimeMillis() > (systemTime + executorTimeout))
+			{
+				// If a plugin has left a a runnable going and not cancelled it we could call this bad practice.
+				// we should now force interrupt all these runnables forcing them to throw Interrupted Exceptions.
+				// if they handle that
+				for (ScheduledTask task : scheduledTasks.getCurrentTaskList())
+				{
+					if (task.isRunning())
+					{
+						task.cancel();
+						cancelTask(task.getTaskId());
+						throw new RuntimeException("Forced Cancellation of task owned by "
+						                           + task.getOwner().getName());
+					}
+				}
+				pool.shutdownNow();
 			}
 		}
 	}
@@ -159,7 +211,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	{
 		delay = Math.max(delay, 1);
 		ScheduledTask scheduledTask = new ScheduledTask(id++, plugin, true, currentTick + delay, task);
-		tasks.add(scheduledTask);
+		scheduledTasks.addTask(scheduledTask);
 		return scheduledTask;
 	}
 
@@ -168,7 +220,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	{
 		delay = Math.max(delay, 1);
 		RepeatingTask repeatingTask = new RepeatingTask(id++, plugin, true, currentTick + delay, period, task);
-		tasks.add(repeatingTask);
+		scheduledTasks.addTask(repeatingTask);
 		return repeatingTask;
 	}
 
@@ -254,24 +306,20 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public void cancelTask(int taskId)
 	{
-		for (ScheduledTask task : tasks)
-		{
-			if (task.getTaskId() == taskId)
-			{
-				task.cancel();
-				return;
-			}
-		}
+		scheduledTasks.cancelTask(taskId);
 	}
 
 	@Override
 	public void cancelTasks(@NotNull Plugin plugin)
 	{
-		for (ScheduledTask task : tasks)
+		for (ScheduledTask task : scheduledTasks.getCurrentTaskList())
 		{
-			if (task.getOwner().equals(plugin))
+			if (task.getOwner() != null)
 			{
-				task.cancel();
+				if (task.getOwner().equals(plugin))
+				{
+					task.cancel();
+				}
 			}
 		}
 	}
@@ -286,7 +334,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public boolean isQueued(int taskId)
 	{
-		for (ScheduledTask task : tasks)
+		for (ScheduledTask task : scheduledTasks.getCurrentTaskList())
 		{
 			if (task.getTaskId() == taskId)
 				return !task.isCancelled();
@@ -312,8 +360,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public @NotNull BukkitTask runTaskAsynchronously(@NotNull Plugin plugin, @NotNull Runnable task)
 	{
 		ScheduledTask scheduledTask = new ScheduledTask(id++, plugin, false, currentTick, new AsyncRunnable(task));
-		asyncTasksRunning.incrementAndGet();
-		pool.execute(scheduledTask.getRunnable());
+		pool.execute(wrapTask(scheduledTask));
 		return scheduledTask;
 	}
 
@@ -334,8 +381,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	{
 		ScheduledTask scheduledTask = new ScheduledTask(id++, plugin, false, currentTick + delay,
 		        new AsyncRunnable(task));
-		tasks.add(scheduledTask);
-		asyncTasksQueued++;
+		scheduledTasks.addTask(scheduledTask);
 		return scheduledTask;
 	}
 
@@ -350,7 +396,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	{
 		RepeatingTask scheduledTask = new RepeatingTask(id++, plugin, false, currentTick + delay, period,
 		        new AsyncRunnable(task));
-		tasks.add(scheduledTask);
+		scheduledTasks.addTask(scheduledTask);
 		return scheduledTask;
 	}
 
@@ -380,7 +426,6 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			{
 				asyncException.set(t);
 			}
-			asyncTasksRunning.decrementAndGet();
 		}
 
 	}
@@ -425,5 +470,78 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	protected int getActiveRunningCount()
+	{
+		return pool.getActiveCount();
+	}
+
+	private static class TaskList
+	{
+
+		private final Map<Integer, ScheduledTask> tasks;
+
+		private TaskList()
+		{
+			tasks = new ConcurrentHashMap<>();
+		}
+
+		/**
+		 * Add a task but locks the Task list to other writes while adding it.
+		 *
+		 * @param task the task to remove.
+		 * @return true on success.
+		 */
+		private boolean addTask(ScheduledTask task)
+		{
+			if (task == null)
+			{
+				return false;
+			}
+			tasks.put(task.getTaskId(), task);
+			return true;
+		}
+
+
+		protected final List<ScheduledTask> getCurrentTaskList()
+		{
+			List<ScheduledTask> out = new ArrayList<>();
+			if (tasks.size() != 0)
+			{
+				out.addAll(tasks.values());
+			}
+			return out;
+
+		}
+
+		protected int getScheduledTaskCount()
+		{
+			int scheduled = 0;
+			if (tasks.size() == 0)
+			{
+				return 0;
+			}
+
+			for (ScheduledTask task : tasks.values())
+			{
+				if (task.isCancelled() || task.isRunning())
+					continue;
+				scheduled++;
+			}
+			return scheduled;
+		}
+
+		protected boolean cancelTask(int taskID)
+		{
+			if (tasks.containsKey(taskID))
+			{
+				ScheduledTask task = tasks.get(taskID);
+				task.cancel();
+				tasks.put(taskID, task);
+				return true;
+			}
+			return false;
+		}
 	}
 }

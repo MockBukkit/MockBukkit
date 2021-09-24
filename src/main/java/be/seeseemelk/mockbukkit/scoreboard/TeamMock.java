@@ -13,10 +13,7 @@ import org.bukkit.scoreboard.Team;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 
-/**
- * Created for the AddstarMC Project. Created by Narimm on 24/12/2018.
- */
-@SuppressWarnings("deprecation")
+
 public class TeamMock implements Team
 {
 

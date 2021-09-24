@@ -53,8 +53,8 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
@@ -969,11 +969,11 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	public void chat(@NotNull String msg)
 	{
 		Set<Player> players = new HashSet<>(Bukkit.getOnlinePlayers());
-		Event asyncEvent = new AsyncPlayerChatEvent(true, this, msg, players);
-		Event syncEvent = new org.bukkit.event.player.PlayerChatEvent(this, msg);
+		AsyncPlayerChatEvent asyncEvent = new AsyncPlayerChatEvent(true, this, msg, players);
+		org.bukkit.event.player.PlayerChatEvent syncEvent = new org.bukkit.event.player.PlayerChatEvent(this, msg);
 
 		ServerMock server = MockBukkit.getMock();
-		server.getPluginManager().callEventAsynchronously(asyncEvent);
+		server.getScheduler().executeAsyncEvent(asyncEvent);
 		server.getPluginManager().callEvent(syncEvent);
 	}
 
