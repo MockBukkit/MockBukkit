@@ -351,14 +351,16 @@ class EntityMockTest
 	}
 
 	@Test
-	void setInvulnerable(){
+	void setInvulnerable()
+	{
 		assertFalse(entity.isInvulnerable());
 		entity.setInvulnerable(true);
 		assertTrue(entity.isInvulnerable());
 	}
 
 	@Test
-	void entityDamage_preventedByInvulnerable(){
+	void entityDamage_preventedByInvulnerable()
+	{
 		World world = new WorldMock(Material.GRASS_BLOCK, 10);
 		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
 		PlayerMock player1 = server.addPlayer();
@@ -370,7 +372,8 @@ class EntityMockTest
 	}
 
 	@Test
-	void entityDamage_creativeDamagesInvulnerable() {
+	void entityDamage_creativeDamagesInvulnerable()
+	{
 		World world = new WorldMock(Material.GRASS_BLOCK, 10);
 		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
 		PlayerMock player1 = server.addPlayer();

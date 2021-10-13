@@ -114,12 +114,17 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public void damage(double amount, Entity source)
 	{
-		if(isInvulnerable()){
-			if(source instanceof HumanEntity) {
-				if (((Player) source).getGameMode() != GameMode.CREATIVE) {
+		if (isInvulnerable())
+		{
+			if (source instanceof HumanEntity)
+			{
+				if (((Player) source).getGameMode() != GameMode.CREATIVE)
+				{
 					return;
 				}
- 			} else {
+			}
+			else
+			{
 				return;
 			}
 		}

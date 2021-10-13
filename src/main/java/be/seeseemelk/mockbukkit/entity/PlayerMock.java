@@ -1292,7 +1292,8 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public String getCustomName() {
+	public String getCustomName()
+	{
 		return displayName;
 	}
 

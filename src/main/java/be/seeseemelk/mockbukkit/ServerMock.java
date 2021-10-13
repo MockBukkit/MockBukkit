@@ -1475,7 +1475,8 @@ public class ServerMock extends Server.Spigot implements Server
 
 	@NotNull
 	@Override
-	public StructureManager getStructureManager() {
+	public StructureManager getStructureManager()
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 
@@ -1527,7 +1528,8 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public int getTicksPerWaterUndergroundCreatureSpawns() {
+	public int getTicksPerWaterUndergroundCreatureSpawns()
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 
@@ -1541,7 +1543,8 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public int getWaterUndergroundCreatureSpawnLimit() {
+	public int getWaterUndergroundCreatureSpawnLimit()
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 
