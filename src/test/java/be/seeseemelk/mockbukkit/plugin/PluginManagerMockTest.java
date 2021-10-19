@@ -71,24 +71,24 @@ class PluginManagerMockTest
 	@Test
 	void test_ManualListener_Registration()
 	{
-		MockBukkit.getMock().getPluginManager().registerEvents(plugin,plugin);
-		Assertions.assertEquals(3,BlockBreakEvent.getHandlerList().getRegisteredListeners().length);
+		MockBukkit.getMock().getPluginManager().registerEvents(plugin, plugin);
+		Assertions.assertEquals(3, BlockBreakEvent.getHandlerList().getRegisteredListeners().length);
 		pluginManager.unregisterPluginEvents(plugin);
-		Assertions.assertEquals(0,BlockBreakEvent.getHandlerList().getRegisteredListeners().length);
-		MockBukkit.getMock().getPluginManager().registerEvents(plugin,plugin);
-		MockBukkit.getMock().getPluginManager().registerEvents(plugin,plugin);
-		Assertions.assertEquals(6,BlockBreakEvent.getHandlerList().getRegisteredListeners().length);
+		Assertions.assertEquals(0, BlockBreakEvent.getHandlerList().getRegisteredListeners().length);
+		MockBukkit.getMock().getPluginManager().registerEvents(plugin, plugin);
+		MockBukkit.getMock().getPluginManager().registerEvents(plugin, plugin);
+		Assertions.assertEquals(6, BlockBreakEvent.getHandlerList().getRegisteredListeners().length);
 		pluginManager.unregisterPluginEvents(plugin);
-		Assertions.assertEquals(0,BlockBreakEvent.getHandlerList().getRegisteredListeners().length);
+		Assertions.assertEquals(0, BlockBreakEvent.getHandlerList().getRegisteredListeners().length);
 	}
 
 	@Test
 	void test_AutomaticListener_DeRegistration()
 	{
-		MockBukkit.getMock().getPluginManager().registerEvents(plugin,plugin);
-		Assertions.assertEquals(3,BlockBreakEvent.getHandlerList().getRegisteredListeners().length);
+		MockBukkit.getMock().getPluginManager().registerEvents(plugin, plugin);
+		Assertions.assertEquals(3, BlockBreakEvent.getHandlerList().getRegisteredListeners().length);
 		MockBukkit.unmock();
-		Assertions.assertEquals(0,BlockBreakEvent.getHandlerList().getRegisteredListeners().length);
+		Assertions.assertEquals(0, BlockBreakEvent.getHandlerList().getRegisteredListeners().length);
 
 	}
 

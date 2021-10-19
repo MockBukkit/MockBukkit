@@ -635,7 +635,7 @@ public class PluginManagerMock implements PluginManager
 		{
 			throw new IllegalPluginAccessException("Plugin attempted to register " + listener + " while not enabled");
 		}
-		addListener(listener,plugin);
+		addListener(listener, plugin);
 		for (Map.Entry<Class<? extends Event>, Set<RegisteredListener>> entry : plugin.getPluginLoader().createRegisteredListeners(listener, plugin).entrySet())
 		{
 			getEventListeners(getRegistrationClass(entry.getKey())).registerAll(entry.getValue());
@@ -643,15 +643,15 @@ public class PluginManagerMock implements PluginManager
 
 	}
 
-	private void addListener(Listener listener,Plugin plugin)
+	private void addListener(Listener listener, Plugin plugin)
 	{
-		List<Listener> l  = listeners.getOrDefault(plugin.getName(),new ArrayList<>());
+		List<Listener> l  = listeners.getOrDefault(plugin.getName(), new ArrayList<>());
 		if (l.contains(listener))
 		{
 			return;
 		}
 		l.add(listener);
-		listeners.put(plugin.getName(),l);
+		listeners.put(plugin.getName(), l);
 	}
 
 	public void unregisterPluginEvents(Plugin plugin)
@@ -689,7 +689,7 @@ public class PluginManagerMock implements PluginManager
 		{
 			throw new IllegalPluginAccessException("Plugin attempted to register " + event + " while not enabled");
 		}
-		addListener(listener,plugin);
+		addListener(listener, plugin);
 		getEventListeners(event).register(new RegisteredListener(listener, executor, priority, plugin, ignoreCancelled));
 	}
 
