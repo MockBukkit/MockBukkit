@@ -1292,6 +1292,12 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
+	public String getCustomName()
+	{
+		return displayName;
+	}
+
+	@Override
 	public long getPlayerTime()
 	{
 		// TODO Auto-generated method stub
