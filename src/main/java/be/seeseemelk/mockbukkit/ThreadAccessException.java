@@ -13,4 +13,9 @@ public class ThreadAccessException extends RuntimeException
 	{
 		super(message);
 	}
+
+	public ThreadAccessException(String message, Exception exception)
+	{
+		super(message, exception);
+	}
 }

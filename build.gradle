@@ -22,10 +22,12 @@ repositories {
 
 dependencies {
     api "org.spigotmc:spigot-api:${gradle.ext.apiVersionFull}"
-    implementation 'org.junit.jupiter:junit-jupiter:5.7.2'
+    implementation 'org.junit.jupiter:junit-jupiter:5.8.1'
     implementation 'org.hamcrest:hamcrest-library:2.2'
     implementation 'commons-io:commons-io:2.11.0'
-    implementation 'org.jetbrains:annotations:21.0.1'
+    implementation 'org.jetbrains:annotations:22.0.0'
+
+    testImplementation 'org.mockito:mockito-core:4.0.0'
 }
 
 task javadocJar(type: Jar) {

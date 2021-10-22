@@ -50,7 +50,7 @@ repositories {
 }
 
 dependencies {
-	testImplementation 'com.github.seeseemelk:MockBukkit-v1.17:1.7.0'
+	testImplementation 'com.github.seeseemelk:MockBukkit-v1.17:1.11.0'
 }
 ```
 
@@ -79,7 +79,7 @@ You won't need to add any additional repositories since MockBukkit is served via
   <dependency>
     <groupId>com.github.seeseemelk</groupId>
     <artifactId>MockBukkit-v1.17</artifactId>
-    <version>1.7.0</version>
+    <version>1.11.0</version>
     <scope>test</scope>
   </dependency>
 </dependencies>
