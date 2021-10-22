@@ -646,12 +646,11 @@ public class PluginManagerMock implements PluginManager
 	private void addListener(Listener listener, Plugin plugin)
 	{
 		List<Listener> l  = listeners.getOrDefault(plugin.getName(), new ArrayList<>());
-		if (l.contains(listener))
+		if (!l.contains(listener))
 		{
-			return;
+			l.add(listener);
+			listeners.put(plugin.getName(), l);
 		}
-		l.add(listener);
-		listeners.put(plugin.getName(), l);
 	}
 
 	public void unregisterPluginEvents(Plugin plugin)
