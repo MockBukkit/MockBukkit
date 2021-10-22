@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
@@ -13,6 +14,10 @@ import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.TestPlugin;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -178,5 +183,117 @@ class BukkitSchedulerMockTest
 		scheduler.performTicks(1L);
 		assertFalse(scheduler.isQueued(testTask.getTaskId()));
 		assertEquals(2, count.get());
+	}
+
+	@Test
+	public void cancellingAsyncTaskDecreasesNumberOfQueuedAsyncTasks()
+	{
+		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
+		BukkitTask task = scheduler.runTaskLaterAsynchronously(null, () -> {}, 1);
+		assertEquals(1, scheduler.getNumberOfQueuedAsyncTasks());
+		task.cancel();
+		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
+	}
+
+	@Test
+	public void cancellingAllTaskByPlugin()
+	{
+		MockBukkit.mock();
+		MockBukkit.load(TestPlugin.class);
+		Plugin plugin = MockBukkit.getMock().getPluginManager().getPlugin("MockBukkitTestPlugin");
+		BukkitSchedulerMock scheduler1 = MockBukkit.getMock().getScheduler();
+		assertEquals(0, scheduler1.getNumberOfQueuedAsyncTasks());
+		scheduler1.runTaskLaterAsynchronously(plugin, () -> {}, 5);
+		scheduler1.runTaskLaterAsynchronously(plugin, () -> {}, 10);
+		BukkitTask task = scheduler1.runTaskLaterAsynchronously(null, () -> {}, 5);
+		assertEquals(3, scheduler1.getNumberOfQueuedAsyncTasks());
+		scheduler1.cancelTasks(plugin);
+		assertEquals(1, scheduler1.getNumberOfQueuedAsyncTasks());
+		scheduler1.cancelTask(task.getTaskId());
+		assertEquals(0, scheduler1.getNumberOfQueuedAsyncTasks());
+		MockBukkit.unmock();
+	}
+
+
+	@Test
+	public void longScheduledRunningTask_Throws_RunTimeException()
+	{
+		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
+		scheduler.runTaskAsynchronously(null, () ->
+		{
+			while (true)
+			{
+				try
+				{
+					Thread.sleep(10L);
+				}
+				catch (InterruptedException e)
+				{
+					throw new RuntimeException(e);
+				}
+			}
+		});
+		scheduler.runTaskLaterAsynchronously(null, () ->
+		{
+			while (true)
+			{
+				try
+				{
+					Thread.sleep(10L);
+				}
+				catch (InterruptedException e)
+				{
+					throw new RuntimeException(e);
+				}
+			}
+		}, 2);
+		assertEquals(1, scheduler.getActiveRunningCount());
+		scheduler.performOneTick();
+		assertEquals(1, scheduler.getActiveRunningCount());
+		scheduler.performOneTick();
+		assertEquals(2, scheduler.getActiveRunningCount());
+		scheduler.performOneTick();
+		assertEquals(2, scheduler.getActiveRunningCount());
+		scheduler.setShutdownTimeout(300);
+		assertThrows(RuntimeException.class, ()->
+		{
+			scheduler.shutdown();
+		});
+	}
+
+	@Test
+	public void longRunningTask_Throws_RunTimeException()
+	{
+		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
+		final AtomicBoolean alive = new AtomicBoolean(true);
+		testTask = scheduler.runTaskAsynchronously(null, () ->
+		{
+			while (alive.get())
+			{
+				if (testTask.isCancelled())
+				{
+					alive.set(false);
+				}
+				try
+				{
+					Thread.sleep(10L);
+				}
+				catch (InterruptedException e)
+				{
+					alive.set(false);
+					String message = "Interrupted";
+					throw new RuntimeException(message, e);
+				}
+			}
+		});
+		assertTrue(alive.get());
+		assertEquals(1, scheduler.getActiveRunningCount());
+		scheduler.performTicks(10);
+		scheduler.setShutdownTimeout(10);
+		assertThrows(RuntimeException.class,
+		             () ->
+		{
+			scheduler.shutdown();
+		});
 	}
 }

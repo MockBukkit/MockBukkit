@@ -579,13 +579,17 @@ class PlayerMockTest
 	void getDisplayName_Default_SameAsPlayerUsername()
 	{
 		assertEquals(player.getName(), player.getDisplayName());
+		assertEquals(player.getDisplayName(), player.getCustomName());
 	}
 
 	@Test
 	void getDisplayName_NameSet_NameSet()
 	{
 		player.setDisplayName("Some Display Name");
+		player.setCustomName("Some Custom Name");
 		assertEquals("Some Display Name", player.getDisplayName());
+		assertEquals("Some Display Name", player.getCustomName());
+
 	}
 
 	@Test
@@ -1209,6 +1213,7 @@ class PlayerMockTest
 		assertTrue(player.canSee(player2));
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testPlayerHide_OldImplementation()
 	{

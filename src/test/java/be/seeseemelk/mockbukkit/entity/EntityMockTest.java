@@ -1,18 +1,11 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNotSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -34,6 +27,8 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.MockPlugin;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.WorldMock;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class EntityMockTest
 {
@@ -169,6 +164,20 @@ class EntityMockTest
 	void getName_Default_CorrectName()
 	{
 		assertEquals("entity", entity.getName());
+	}
+
+	@Test
+	void getCustomName_Default_CorrectName()
+	{
+		assertNull(entity.getCustomName());
+	}
+
+	@Test
+	void getCustomName_setCustomName()
+	{
+		entity.setCustomName("Some Custom Name");
+		assertEquals("entity", entity.getName());
+		assertEquals("Some Custom Name", entity.getCustomName());
 	}
 
 	@Test
@@ -335,6 +344,41 @@ class EntityMockTest
 		World world = new WorldMock(Material.GRASS_BLOCK, 10);
 		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
 		PlayerMock player1 = server.addPlayer();
+		double initialHealth = zombie.getHealth();
+		zombie.damage(4, player1);
+		double finalHealth = zombie.getHealth();
+		assertEquals(4, initialHealth - finalHealth, 0.1);
+	}
+
+	@Test
+	void setInvulnerable()
+	{
+		assertFalse(entity.isInvulnerable());
+		entity.setInvulnerable(true);
+		assertTrue(entity.isInvulnerable());
+	}
+
+	@Test
+	void entityDamage_preventedByInvulnerable()
+	{
+		World world = new WorldMock(Material.GRASS_BLOCK, 10);
+		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+		PlayerMock player1 = server.addPlayer();
+		double initialHealth = zombie.getHealth();
+		zombie.setInvulnerable(true);
+		zombie.damage(4, player1);
+		double finalHealth = zombie.getHealth();
+		assertEquals(initialHealth, finalHealth, 0.1);
+	}
+
+	@Test
+	void entityDamage_creativeDamagesInvulnerable()
+	{
+		World world = new WorldMock(Material.GRASS_BLOCK, 10);
+		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+		PlayerMock player1 = server.addPlayer();
+		player1.setGameMode(GameMode.CREATIVE);
+		zombie.setInvulnerable(true);
 		double initialHealth = zombie.getHealth();
 		zombie.damage(4, player1);
 		double finalHealth = zombie.getHealth();

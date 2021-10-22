@@ -71,6 +71,7 @@ import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.structure.StructureManager;
 import org.bukkit.util.CachedServerIcon;
 import org.jetbrains.annotations.NotNull;
 
@@ -108,7 +109,6 @@ import be.seeseemelk.mockbukkit.tags.TagsMock;
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.jetbrains.annotations.Nullable;
 
-@SuppressWarnings("deprecation")
 public class ServerMock extends Server.Spigot implements Server
 {
 	private static final String BUKKIT_VERSION = "1.17.1";
@@ -1473,6 +1473,15 @@ public class ServerMock extends Server.Spigot implements Server
 		throw new UnimplementedOperationException();
 	}
 
+	@NotNull
+	@Override
+	public StructureManager getStructureManager()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+
+	}
+
 	@Override
 	public MapView getMap(int id)
 	{
@@ -1519,10 +1528,26 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	public int getTicksPerWaterUndergroundCreatureSpawns()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+
+	}
+
+	@Override
 	public int getWaterAmbientSpawnLimit()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getWaterUndergroundCreatureSpawnLimit()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+
 	}
 
 	@Override

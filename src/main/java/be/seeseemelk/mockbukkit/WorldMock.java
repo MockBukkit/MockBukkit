@@ -36,6 +36,7 @@ import org.bukkit.WorldBorder;
 import org.bukkit.WorldType;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.boss.DragonBattle;
 import org.bukkit.entity.AbstractArrow;
@@ -48,6 +49,7 @@ import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.world.TimeSkipEvent;
+import org.bukkit.generator.BiomeProvider;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.inventory.ItemStack;
@@ -163,25 +165,35 @@ public class WorldMock implements World
 	public BlockMock createBlock(Coordinate c)
 	{
 		if (c.y >= height)
+		{
 			throw new ArrayIndexOutOfBoundsException("Y larger than height");
+		}
 		else if (c.y < 0)
+		{
 			throw new ArrayIndexOutOfBoundsException("Y smaller than 0");
+		}
 
 		Location location = new Location(this, c.x, c.y, c.z);
 		BlockMock block;
 		if (c.y == 0)
+		{
 			block = new BlockMock(Material.BEDROCK, location);
+		}
 		else if (c.y <= grassHeight)
+		{
 			block = new BlockMock(defaultBlock, location);
+		}
 		else
+		{
 			block = new BlockMock(location);
+		}
 
 		blocks.put(c, block);
 		return block;
 	}
 
 	@Override
-	public BlockMock getBlockAt(int x, int y, int z)
+	public @NotNull BlockMock getBlockAt(int x, int y, int z)
 	{
 		Coordinate coordinate = new Coordinate(x, y, z);
 		if (blocks.containsKey(coordinate))
@@ -195,13 +207,13 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public BlockMock getBlockAt(Location location)
+	public @NotNull BlockMock getBlockAt(Location location)
 	{
 		return getBlockAt(location.getBlockX(), location.getBlockY(), location.getBlockZ());
 	}
 
 	@Override
-	public String getName()
+	public @NotNull String getName()
 	{
 		return name;
 	}
@@ -217,13 +229,13 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public UUID getUID()
+	public @NotNull UUID getUID()
 	{
 		return uuid;
 	}
 
 	@Override
-	public Location getSpawnLocation()
+	public @NotNull Location getSpawnLocation()
 	{
 		if (spawnLocation == null)
 		{
@@ -255,7 +267,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public List<Entity> getEntities()
+	public @NotNull List<Entity> getEntities()
 	{
 		// MockBukkit.assertMocking();
 		List<Entity> entities = new ArrayList<>();
@@ -267,18 +279,17 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public ChunkMock getChunkAt(int x, int z)
+	public @NotNull ChunkMock getChunkAt(int x, int z)
 	{
 		return getChunkAt(new ChunkCoordinate(x, z));
 	}
 
 	/**
 	 * Gets the chunk at a specific chunk coordinate.
-	 *
+	 * <p>
 	 * If there is no chunk recorded at the location, one will be created.
 	 *
 	 * @param coordinate The coordinate at which to get the chunk.
-	 *
 	 * @return The chunk at the location.
 	 */
 	@NotNull
@@ -294,39 +305,39 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public void sendPluginMessage(Plugin source, String channel, byte[] message)
+	public void sendPluginMessage(@NotNull Plugin source, @NotNull String channel, byte[] message)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Set<String> getListeningPluginChannels()
+	public @NotNull Set<String> getListeningPluginChannels()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void setMetadata(String metadataKey, MetadataValue newMetadataValue)
+	public void setMetadata(@NotNull String metadataKey, @NotNull MetadataValue newMetadataValue)
 	{
 		metadataTable.setMetadata(metadataKey, newMetadataValue);
 	}
 
 	@Override
-	public List<MetadataValue> getMetadata(String metadataKey)
+	public @NotNull List<MetadataValue> getMetadata(@NotNull String metadataKey)
 	{
 		return metadataTable.getMetadata(metadataKey);
 	}
 
 	@Override
-	public boolean hasMetadata(String metadataKey)
+	public boolean hasMetadata(@NotNull String metadataKey)
 	{
 		return metadataTable.hasMetadata(metadataKey);
 	}
 
 	@Override
-	public void removeMetadata(String metadataKey, Plugin owningPlugin)
+	public void removeMetadata(@NotNull String metadataKey, @NotNull Plugin owningPlugin)
 	{
 		metadataTable.removeMetadata(metadataKey, owningPlugin);
 	}
@@ -339,21 +350,21 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public int getHighestBlockYAt(Location location)
+	public int getHighestBlockYAt(@NotNull Location location)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Block getHighestBlockAt(int x, int z)
+	public @NotNull Block getHighestBlockAt(int x, int z)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Block getHighestBlockAt(Location location)
+	public @NotNull Block getHighestBlockAt(Location location)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -484,7 +495,9 @@ public class WorldMock implements World
 	@Override
 	public ItemEntityMock dropItem(@NotNull Location loc, @NotNull ItemStack item)
 	{
-		return dropItem(loc, item, e -> {});
+		return dropItem(loc, item, e ->
+		{
+		});
 	}
 
 	@Override
@@ -541,6 +554,15 @@ public class WorldMock implements World
 		server.registerEntity(entity);
 
 		return entity;
+	}
+
+	@NotNull
+	@Override
+	public Entity spawnEntity(@NotNull Location loc, @NotNull EntityType type, boolean randomizeData)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+
 	}
 
 	private EntityMock mockEntity(@NotNull EntityType type)
@@ -780,6 +802,15 @@ public class WorldMock implements World
 		throw new UnimplementedOperationException();
 	}
 
+	@Nullable
+	@Override
+	public BiomeProvider getBiomeProvider()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+
+	}
+
 	@Override
 	public void save()
 	{
@@ -807,6 +838,15 @@ public class WorldMock implements World
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	@NotNull
+	@Override
+	public <T extends Entity> T spawn(@NotNull Location location, @NotNull Class<T> clazz, boolean randomizeData, @Nullable Consumer<T> function) throws IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+
 	}
 
 	@SuppressWarnings("deprecation")
@@ -958,14 +998,14 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public void setDifficulty(Difficulty difficulty)
+	public Difficulty getDifficulty()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Difficulty getDifficulty()
+	public void setDifficulty(Difficulty difficulty)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1063,6 +1103,22 @@ public class WorldMock implements World
 	}
 
 	@Override
+	public int getWaterUndergroundCreatureSpawnLimit()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+
+	}
+
+	@Override
+	public void setWaterUndergroundCreatureSpawnLimit(int limit)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+
+	}
+
+	@Override
 	public int getAmbientSpawnLimit()
 	{
 		// TODO Auto-generated method stub
@@ -1114,10 +1170,14 @@ public class WorldMock implements World
 	public String getGameRuleValue(String rule)
 	{
 		if (rule == null)
+		{
 			return null;
+		}
 		GameRule<?> gameRule = GameRule.getByName(rule);
 		if (gameRule == null)
+		{
 			return null;
+		}
 		return getGameRuleValue(gameRule).toString();
 	}
 
@@ -1126,13 +1186,19 @@ public class WorldMock implements World
 	public boolean setGameRuleValue(String rule, String value)
 	{
 		if (rule == null)
+		{
 			return false;
+		}
 		GameRule<?> gameRule = GameRule.getByName(rule);
 		if (gameRule == null)
+		{
 			return false;
+		}
 		if (gameRule.getType().equals(Boolean.TYPE)
 		        && (value.equalsIgnoreCase("true") || value.equalsIgnoreCase("false")))
+		{
 			return setGameRule((GameRule<Boolean>) gameRule, value.equalsIgnoreCase("true"));
+		}
 		else if (gameRule.getType().equals(Integer.TYPE))
 		{
 			try
@@ -1146,7 +1212,9 @@ public class WorldMock implements World
 			}
 		}
 		else
+		{
 			return false;
+		}
 	}
 
 	@Override
@@ -1521,6 +1589,15 @@ public class WorldMock implements World
 		throw new UnimplementedOperationException();
 	}
 
+	@NotNull
+	@Override
+	public Biome getBiome(@NotNull Location location)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+
+	}
+
 	@Override
 	public Biome getBiome(int x, int y, int z)
 	{
@@ -1529,7 +1606,105 @@ public class WorldMock implements World
 	}
 
 	@Override
+	public void setBiome(@NotNull Location location, @NotNull Biome biome)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+
+	}
+
+	@Override
 	public void setBiome(int x, int y, int z, Biome bio)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@NotNull
+	@Override
+	public BlockState getBlockState(@NotNull Location location)
+	{
+		Block block = this.getBlockAt(location);
+		return block.getState();
+	}
+
+	@NotNull
+	@Override
+	public BlockState getBlockState(int x, int y, int z)
+	{
+		Block block = this.getBlockAt(x, y, z);
+		return block.getState();
+	}
+
+	@NotNull
+	@Override
+	public BlockData getBlockData(@NotNull Location location)
+	{
+		Block block = this.getBlockAt(location);
+		return block.getBlockData();
+	}
+
+	@NotNull
+	@Override
+	public BlockData getBlockData(int x, int y, int z)
+	{
+		Block block = this.getBlockAt(x, y, z);
+		return block.getBlockData();
+	}
+
+	@NotNull
+	@Override
+	public Material getType(@NotNull Location location)
+	{
+		Block block = this.getBlockAt(location);
+		return block.getType();
+	}
+
+	@NotNull
+	@Override
+	public Material getType(int x, int y, int z)
+	{
+		Block block = this.getBlockAt(x, y, z);
+		return block.getType();
+	}
+
+	@Override
+	public void setBlockData(@NotNull Location location, @NotNull BlockData blockData)
+	{
+		Block block = this.getBlockAt(location);
+		block.setBlockData(blockData);
+	}
+
+	@Override
+	public void setBlockData(int x, int y, int z, @NotNull BlockData blockData)
+	{
+		Block block = this.getBlockAt(x, y, z);
+		block.setBlockData(blockData);
+	}
+
+	@Override
+	public void setType(@NotNull Location location, @NotNull Material material)
+	{
+		Block block = this.getBlockAt(location);
+		block.setType(material);
+	}
+
+	@Override
+	public void setType(int x, int y, int z, @NotNull Material material)
+	{
+		Block block = this.getBlockAt(x, y, z);
+		block.setType(material);
+	}
+
+	@Override
+	public boolean generateTree(@NotNull Location location, @NotNull Random random, @NotNull TreeType type)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean generateTree(@NotNull Location location, @NotNull Random random, @NotNull TreeType type, @Nullable Consumer<BlockState> stateConsumer)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1544,6 +1719,69 @@ public class WorldMock implements World
 
 	@Override
 	public double getHumidity(int x, int y, int z)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getLogicalHeight()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isNatural()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isBedWorks()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean hasSkyLight()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean hasCeiling()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isPiglinSafe()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isRespawnAnchorWorks()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean hasRaids()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isUltraWarm()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1620,6 +1858,22 @@ public class WorldMock implements World
 	}
 
 	@Override
+	public long getTicksPerWaterUndergroundCreatureSpawns()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+
+	}
+
+	@Override
+	public void setTicksPerWaterUndergroundCreatureSpawns(int ticksPerWaterUndergroundCreatureSpawns)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+
+	}
+
+	@Override
 	public int getWaterAmbientSpawnLimit()
 	{
 		// TODO Auto-generated method stub
@@ -1655,14 +1909,14 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public void setClearWeatherDuration(int duration)
+	public int getClearWeatherDuration()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public int getClearWeatherDuration()
+	public void setClearWeatherDuration(int duration)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
