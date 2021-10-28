@@ -234,34 +234,4 @@ class PluginManagerMockTest
 		Plugin[] plugins = pluginManager.getPlugins();
 		assertEquals(0, plugins.length);
 	}
-
-	@Nested
-	class AsyncEvents
-	{
-
-		private ChatListener listener;
-
-		@BeforeEach
-		void setUp()
-		{
-			listener = spy(new ChatListener());
-			pluginManager.registerEvents(listener, plugin);
-		}
-
-		@Test
-		void chat_callsAsyncChatEvent_afterWaitingForTask()
-		{
-			server.addPlayer().chat("test");
-			verify(listener, never()).onAsyncChat(any());
-
-			pluginManager.waitAsyncEventsFinished();
-			verify(listener).onAsyncChat(any());
-		}
-
-		public static class ChatListener implements Listener
-		{
-			@EventHandler
-			public void onAsyncChat(AsyncPlayerChatEvent event) {}
-		}
-	}
 }
