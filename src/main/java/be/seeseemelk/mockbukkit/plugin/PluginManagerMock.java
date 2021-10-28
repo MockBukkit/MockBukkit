@@ -74,6 +74,7 @@ public class PluginManagerMock implements PluginManager
 	private final List<File> temporaryFiles = new LinkedList<>();
 	private final List<Permission> permissions = new ArrayList<>();
 	private final Map<Permissible, Set<String>> permissionSubscriptions = new HashMap<>();
+	private final List<Future<?>> queuedAsyncEvents = new ArrayList<>();
 	private Map<String, List<Listener>> listeners = new HashMap<>();
 
 	private final List<Class<?>> pluginConstructorTypes = Arrays.asList(JavaPluginLoader.class,
@@ -435,7 +436,30 @@ public class PluginManagerMock implements PluginManager
 		}
 
 		// Our Scheduler will call the Event on a dedicated Event Thread Executor
-		server.getScheduler().executeAsyncEvent(event);
+		queuedAsyncEvents.add(server.getScheduler().executeAsyncEvent(event));
+	}
+
+	public void waitAsyncEventsFinished()
+	{
+		for (Future<?> futureEvent : List.copyOf(queuedAsyncEvents))
+		{
+			if (futureEvent.isDone())
+			{
+				queuedAsyncEvents.remove(futureEvent);
+			}
+			else
+			{
+				try
+				{
+					queuedAsyncEvents.remove(futureEvent);
+					futureEvent.get();
+				}
+				catch (InterruptedException | ExecutionException e)
+				{
+					throw new ThreadAccessException("Failed to wait for async events: " + e.getMessage(), e);
+				}
+			}
+		}
 	}
 
 	private void callRegisteredListener(@NotNull RegisteredListener registration, @NotNull Event event)
