@@ -1,7 +1,6 @@
 package be.seeseemelk.mockbukkit.inventory;
 
-import java.util.Arrays;
-
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryType;
@@ -11,7 +10,7 @@ import org.bukkit.inventory.PlayerInventory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import java.util.Arrays;
 
 public class PlayerInventoryMock extends InventoryMock implements PlayerInventory
 {
@@ -188,20 +187,20 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	{
 		switch (slot)
 		{
-		case CHEST:
-			return getChestplate();
-		case FEET:
-			return getBoots();
-		case HAND:
-			return getItemInMainHand();
-		case HEAD:
-			return getHelmet();
-		case LEGS:
-			return getLeggings();
-		case OFF_HAND:
-			return getItemInOffHand();
-		default:
-			return new ItemStack(Material.AIR);
+			case CHEST:
+				return getChestplate();
+			case FEET:
+				return getBoots();
+			case HAND:
+				return getItemInMainHand();
+			case HEAD:
+				return getHelmet();
+			case LEGS:
+				return getLeggings();
+			case OFF_HAND:
+				return getItemInOffHand();
+			default:
+				return new ItemStack(Material.AIR);
 		}
 	}
 
@@ -210,26 +209,26 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	{
 		switch (slot)
 		{
-		case CHEST:
-			setChestplate(item);
-			break;
-		case FEET:
-			setBoots(item);
-			break;
-		case HAND:
-			setItemInMainHand(item);
-			break;
-		case HEAD:
-			setHelmet(item);
-			break;
-		case LEGS:
-			setLeggings(item);
-			break;
-		case OFF_HAND:
-			setItemInOffHand(item);
-			break;
-		default:
-			break;
+			case CHEST:
+				setChestplate(item);
+				break;
+			case FEET:
+				setBoots(item);
+				break;
+			case HAND:
+				setItemInMainHand(item);
+				break;
+			case HEAD:
+				setHelmet(item);
+				break;
+			case LEGS:
+				setLeggings(item);
+				break;
+			case OFF_HAND:
+				setItemInOffHand(item);
+				break;
+			default:
+				break;
 		}
 	}
 

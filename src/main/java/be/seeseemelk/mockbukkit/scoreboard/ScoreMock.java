@@ -20,6 +20,7 @@ public class ScoreMock implements Score
 
 	/**
 	 * Sets the player that this score is tracking.
+	 *
 	 * @param player The player to track.
 	 */
 	public void setPlayer(OfflinePlayer player)

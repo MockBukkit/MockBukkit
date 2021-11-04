@@ -1,21 +1,19 @@
 package be.seeseemelk.mockbukkit.tags;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Tag;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * This is a mock of the {@link Material} {@link Tag} wrapper in Bukkit. This will
  *
  * @author TheBusyBiscuit
- *
  * @see TagParser
- *
  */
 public class TagWrapperMock implements Tag<Material>
 {
@@ -62,8 +60,7 @@ public class TagWrapperMock implements Tag<Material>
 		if (materials.contains(item))
 		{
 			return true;
-		}
-		else
+		} else
 		{
 			// Check if any of our additional Tags contain this Materials
 			for (Tag<Material> tag : additionalTags)
@@ -86,8 +83,7 @@ public class TagWrapperMock implements Tag<Material>
 		if (additionalTags.isEmpty())
 		{
 			return Collections.unmodifiableSet(materials);
-		}
-		else
+		} else
 		{
 			Set<Material> mats = new HashSet<>(materials);
 

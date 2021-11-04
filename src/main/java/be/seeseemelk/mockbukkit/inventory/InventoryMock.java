@@ -1,16 +1,6 @@
 package be.seeseemelk.mockbukkit.inventory;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
-
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Objects;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -22,7 +12,12 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class InventoryMock implements Inventory
 {
@@ -33,7 +28,7 @@ public class InventoryMock implements Inventory
 	public InventoryMock(@Nullable InventoryHolder holder, int size, @NotNull InventoryType type)
 	{
 		Validate.isTrue(9 <= size && size <= 54 && size % 9 == 0,
-		                "Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got " + size + ")");
+				"Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got " + size + ")");
 		Validate.notNull(type, "The InventoryType must not be null!");
 
 		this.holder = holder;
@@ -172,8 +167,7 @@ public class InventoryMock implements Inventory
 				items[i] = item.clone();
 				items[i].setAmount(toAdd);
 				item.setAmount(item.getAmount() - toAdd);
-			}
-			else if (item.isSimilar(oItem) && oItem.getAmount() < oItem.getMaxStackSize())
+			} else if (item.isSimilar(oItem) && oItem.getAmount() < oItem.getMaxStackSize())
 			{
 				int toAdd = Math.min(item.getAmount(), item.getMaxStackSize() - oItem.getAmount());
 				oItem.setAmount(oItem.getAmount() + toAdd);
@@ -219,8 +213,7 @@ public class InventoryMock implements Inventory
 			if (i < items.length && items[i] != null)
 			{
 				this.items[i] = items[i].clone();
-			}
-			else
+			} else
 			{
 				this.items[i] = null;
 			}
@@ -231,6 +224,13 @@ public class InventoryMock implements Inventory
 	public InventoryHolder getHolder()
 	{
 		return holder;
+	}
+
+	@Override
+	public @Nullable InventoryHolder getHolder(boolean useSnapshot)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -262,6 +262,13 @@ public class InventoryMock implements Inventory
 
 	@Override
 	public HashMap<Integer, ItemStack> removeItem(ItemStack... items) throws IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull HashMap<Integer, ItemStack> removeItemAnySlot(@NotNull ItemStack... items) throws IllegalArgumentException
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -390,6 +397,13 @@ public class InventoryMock implements Inventory
 	public void clear()
 	{
 		Arrays.fill(items, null);
+	}
+
+	@Override
+	public int close()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

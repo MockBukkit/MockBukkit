@@ -1,9 +1,7 @@
 package be.seeseemelk.mockbukkit.inventory;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.inventory.meta.*;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -11,17 +9,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.inventory.meta.BookMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.EnchantedBookMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.FireworkEffectMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.FireworkMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.KnowledgeBookMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.LeatherArmorMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.PotionMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.SkullMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.SuspiciousStewMetaMock;
+import static org.junit.jupiter.api.Assertions.*;
 
 class ItemFactoryMockTest
 {

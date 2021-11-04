@@ -1,8 +1,7 @@
 package be.seeseemelk.mockbukkit.scoreboard;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import net.kyori.adventure.text.Component;
 import org.apache.commons.lang.Validate;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.scoreboard.DisplaySlot;
@@ -11,7 +10,8 @@ import org.bukkit.scoreboard.RenderType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ObjectiveMock implements Objective
 {
@@ -24,7 +24,7 @@ public class ObjectiveMock implements Objective
 	private RenderType renderType;
 
 	public ObjectiveMock(@NotNull ScoreboardMock scoreboard, @NotNull String name, @NotNull String displayName,
-	                     @NotNull String criteria, @NotNull RenderType renderType)
+						 @NotNull String criteria, @NotNull RenderType renderType)
 	{
 		Validate.notNull(scoreboard, "When registering an Objective to the Scoreboard the scoreboard cannot be null.");
 		Validate.notNull(name, "The name cannot be null");
@@ -56,6 +56,20 @@ public class ObjectiveMock implements Objective
 	{
 		validate();
 		return name;
+	}
+
+	@Override
+	public @NotNull Component displayName() throws IllegalStateException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void displayName(@Nullable Component displayName) throws IllegalStateException, IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -159,8 +173,7 @@ public class ObjectiveMock implements Objective
 		if (score != null)
 		{
 			return score;
-		}
-		else
+		} else
 		{
 			score = new ScoreMock(this, entry);
 			scores.put(entry, score);

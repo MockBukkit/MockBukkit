@@ -1,25 +1,10 @@
 package be.seeseemelk.mockbukkit;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assumptions.assumeFalse;
-
-import java.util.List;
-import java.util.concurrent.BlockingQueue;
-
+import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import be.seeseemelk.mockbukkit.block.state.BlockStateMock;
-import org.bukkit.Chunk;
-import org.bukkit.GameRule;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -29,7 +14,10 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import be.seeseemelk.mockbukkit.block.BlockMock;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.assumeFalse;
 
 class WorldMockTest
 {
@@ -289,7 +277,7 @@ class WorldMockTest
 		world.setTime(6000L);
 		world.setTime(10000L);
 		server.getPluginManager().assertEventFired(TimeSkipEvent.class, event ->
-		        event.getSkipAmount() == 4000L && event.getSkipReason().equals(TimeSkipEvent.SkipReason.CUSTOM));
+				event.getSkipAmount() == 4000L && event.getSkipReason().equals(TimeSkipEvent.SkipReason.CUSTOM));
 	}
 
 	@Test
@@ -353,7 +341,7 @@ class WorldMockTest
 		assertEquals(Material.GRASS, world.getBlockData(location).getMaterial());
 		assertEquals(Material.GRASS, world.getBlockData(0, 1, 0).getMaterial());
 		assertEquals(Material.GRASS, world.getType(0, 1, 0));
-		world.setBlockData(0, 1, 0, mock2) ;
+		world.setBlockData(0, 1, 0, mock2);
 		assertEquals(Material.GRASS_BLOCK, world.getBlockData(location).getMaterial());
 		assertEquals(Material.GRASS_BLOCK, world.getType(location));
 		world.setType(location, Material.BEDROCK);

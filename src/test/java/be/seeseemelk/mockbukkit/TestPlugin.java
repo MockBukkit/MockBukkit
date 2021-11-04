@@ -1,9 +1,5 @@
 package be.seeseemelk.mockbukkit;
 
-import java.io.File;
-import java.util.concurrent.BrokenBarrierException;
-import java.util.concurrent.CyclicBarrier;
-
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.EventHandler;
@@ -15,6 +11,10 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;
+
+import java.io.File;
+import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CyclicBarrier;
 
 public class TestPlugin extends JavaPlugin implements Listener
 {
@@ -111,9 +111,9 @@ public class TestPlugin extends JavaPlugin implements Listener
 			try
 			{
 				barrier.await();
+			} catch (InterruptedException | BrokenBarrierException e)
+			{
 			}
-			catch (InterruptedException | BrokenBarrierException e)
-			{}
 		}
 	}
 }

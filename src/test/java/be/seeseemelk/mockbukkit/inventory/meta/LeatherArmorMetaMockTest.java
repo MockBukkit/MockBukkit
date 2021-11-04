@@ -1,14 +1,13 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import be.seeseemelk.mockbukkit.MockBukkit;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LeatherArmorMetaMockTest
 {

@@ -1,21 +1,19 @@
 package be.seeseemelk.mockbukkit.tags;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
+import com.google.common.collect.ImmutableSet;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Tag;
 import org.jetbrains.annotations.NotNull;
 
-import com.google.common.collect.ImmutableSet;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A rather simple mock implementation for {@link Material} {@link Tag Tags}.
  *
  * @author TheBusyBiscuit
- *
  */
 public class MaterialTagMock implements Tag<Material>
 {

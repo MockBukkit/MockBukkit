@@ -1,5 +1,9 @@
 package be.seeseemelk.mockbukkit.block.state;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.inventory.InventoryMock;
+import be.seeseemelk.mockbukkit.inventory.ShulkerBoxInventoryMock;
+import net.kyori.adventure.text.Component;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -9,15 +13,12 @@ import org.bukkit.loot.LootTable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.inventory.InventoryMock;
-import be.seeseemelk.mockbukkit.inventory.ShulkerBoxInventoryMock;
+import java.util.UUID;
 
 /**
  * This {@link ContainerMock} represents a {@link ShulkerBox}.
  *
  * @author TheBusyBiscuit
- *
  */
 public class ShulkerBoxMock extends ContainerMock implements ShulkerBox
 {
@@ -47,42 +48,42 @@ public class ShulkerBoxMock extends ContainerMock implements ShulkerBox
 	{
 		switch (type)
 		{
-		case SHULKER_BOX:
-			return null;
-		case WHITE_SHULKER_BOX:
-			return DyeColor.WHITE;
-		case ORANGE_SHULKER_BOX:
-			return DyeColor.ORANGE;
-		case MAGENTA_SHULKER_BOX:
-			return DyeColor.MAGENTA;
-		case LIGHT_BLUE_SHULKER_BOX:
-			return DyeColor.LIGHT_BLUE;
-		case YELLOW_SHULKER_BOX:
-			return DyeColor.YELLOW;
-		case LIME_SHULKER_BOX:
-			return DyeColor.LIME;
-		case PINK_SHULKER_BOX:
-			return DyeColor.PINK;
-		case GRAY_SHULKER_BOX:
-			return DyeColor.GRAY;
-		case LIGHT_GRAY_SHULKER_BOX:
-			return DyeColor.LIGHT_GRAY;
-		case CYAN_SHULKER_BOX:
-			return DyeColor.CYAN;
-		case PURPLE_SHULKER_BOX:
-			return DyeColor.PURPLE;
-		case BLUE_SHULKER_BOX:
-			return DyeColor.BLUE;
-		case BROWN_SHULKER_BOX:
-			return DyeColor.BROWN;
-		case GREEN_SHULKER_BOX:
-			return DyeColor.GREEN;
-		case RED_SHULKER_BOX:
-			return DyeColor.RED;
-		case BLACK_SHULKER_BOX:
-			return DyeColor.BLACK;
-		default:
-			throw new IllegalArgumentException(type.name() + " is not a Shulker Box!");
+			case SHULKER_BOX:
+				return null;
+			case WHITE_SHULKER_BOX:
+				return DyeColor.WHITE;
+			case ORANGE_SHULKER_BOX:
+				return DyeColor.ORANGE;
+			case MAGENTA_SHULKER_BOX:
+				return DyeColor.MAGENTA;
+			case LIGHT_BLUE_SHULKER_BOX:
+				return DyeColor.LIGHT_BLUE;
+			case YELLOW_SHULKER_BOX:
+				return DyeColor.YELLOW;
+			case LIME_SHULKER_BOX:
+				return DyeColor.LIME;
+			case PINK_SHULKER_BOX:
+				return DyeColor.PINK;
+			case GRAY_SHULKER_BOX:
+				return DyeColor.GRAY;
+			case LIGHT_GRAY_SHULKER_BOX:
+				return DyeColor.LIGHT_GRAY;
+			case CYAN_SHULKER_BOX:
+				return DyeColor.CYAN;
+			case PURPLE_SHULKER_BOX:
+				return DyeColor.PURPLE;
+			case BLUE_SHULKER_BOX:
+				return DyeColor.BLUE;
+			case BROWN_SHULKER_BOX:
+				return DyeColor.BROWN;
+			case GREEN_SHULKER_BOX:
+				return DyeColor.GREEN;
+			case RED_SHULKER_BOX:
+				return DyeColor.RED;
+			case BLACK_SHULKER_BOX:
+				return DyeColor.BLACK;
+			default:
+				throw new IllegalArgumentException(type.name() + " is not a Shulker Box!");
 		}
 	}
 
@@ -129,6 +130,13 @@ public class ShulkerBoxMock extends ContainerMock implements ShulkerBox
 	}
 
 	@Override
+	public boolean isOpen()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	protected InventoryMock createInventory()
 	{
 		return new ShulkerBoxInventoryMock(this);
@@ -154,4 +162,80 @@ public class ShulkerBoxMock extends ContainerMock implements ShulkerBox
 		return color;
 	}
 
+	@Override
+	public boolean isRefillEnabled()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean hasBeenFilled()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean hasPlayerLooted(@NotNull UUID player)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Long getLastLooted(@NotNull UUID player)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean setHasPlayerLooted(@NotNull UUID player, boolean looted)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean hasPendingRefill()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public long getLastFilled()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public long getNextRefill()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public long setNextRefill(long refillAt)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Component customName()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void customName(@Nullable Component customName)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
 }

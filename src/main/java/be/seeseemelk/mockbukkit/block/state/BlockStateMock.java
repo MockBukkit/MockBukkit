@@ -1,7 +1,8 @@
 package be.seeseemelk.mockbukkit.block.state;
 
-import java.util.List;
-
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.block.BlockMock;
+import be.seeseemelk.mockbukkit.metadata.MetadataTable;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -13,9 +14,7 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.block.BlockMock;
-import be.seeseemelk.mockbukkit.metadata.MetadataTable;
+import java.util.List;
 
 public class BlockStateMock implements BlockState, Cloneable
 {
@@ -71,8 +70,7 @@ public class BlockStateMock implements BlockState, Cloneable
 		if (block == null)
 		{
 			throw new IllegalStateException("This BlockState has not been placed!");
-		}
-		else
+		} else
 		{
 			return block;
 		}
@@ -178,8 +176,7 @@ public class BlockStateMock implements BlockState, Cloneable
 		{
 			((BlockMock) b).setState(this);
 			return true;
-		}
-		else
+		} else
 		{
 			return false;
 		}
@@ -237,58 +234,58 @@ public class BlockStateMock implements BlockState, Cloneable
 	{
 		switch (block.getType())
 		{
-		case LECTERN:
-			return new LecternMock(block);
-		case HOPPER:
-			return new HopperMock(block);
-		case BARREL:
-			return new BarrelMock(block);
-		case DISPENSER:
-			return new DispenserMock(block);
-		case DROPPER:
-			return new DropperMock(block);
-		case CHEST:
-		case TRAPPED_CHEST:
-			return new ChestMock(block);
-		case ENDER_CHEST:
-			return new EnderChestMock(block);
-		case ACACIA_SIGN:
-		case ACACIA_WALL_SIGN:
-		case BIRCH_SIGN:
-		case BIRCH_WALL_SIGN:
-		case CRIMSON_SIGN:
-		case CRIMSON_WALL_SIGN:
-		case DARK_OAK_SIGN:
-		case DARK_OAK_WALL_SIGN:
-		case JUNGLE_SIGN:
-		case JUNGLE_WALL_SIGN:
-		case OAK_SIGN:
-		case OAK_WALL_SIGN:
-		case SPRUCE_SIGN:
-		case SPRUCE_WALL_SIGN:
-		case WARPED_SIGN:
-		case WARPED_WALL_SIGN:
-			return new SignMock(block);
-		case SHULKER_BOX:
-		case WHITE_SHULKER_BOX:
-		case ORANGE_SHULKER_BOX:
-		case MAGENTA_SHULKER_BOX:
-		case LIGHT_BLUE_SHULKER_BOX:
-		case YELLOW_SHULKER_BOX:
-		case LIME_SHULKER_BOX:
-		case PINK_SHULKER_BOX:
-		case GRAY_SHULKER_BOX:
-		case LIGHT_GRAY_SHULKER_BOX:
-		case CYAN_SHULKER_BOX:
-		case PURPLE_SHULKER_BOX:
-		case BLUE_SHULKER_BOX:
-		case BROWN_SHULKER_BOX:
-		case GREEN_SHULKER_BOX:
-		case RED_SHULKER_BOX:
-		case BLACK_SHULKER_BOX:
-			return new ShulkerBoxMock(block);
-		default:
-			return new BlockStateMock(block);
+			case LECTERN:
+				return new LecternMock(block);
+			case HOPPER:
+				return new HopperMock(block);
+			case BARREL:
+				return new BarrelMock(block);
+			case DISPENSER:
+				return new DispenserMock(block);
+			case DROPPER:
+				return new DropperMock(block);
+			case CHEST:
+			case TRAPPED_CHEST:
+				return new ChestMock(block);
+			case ENDER_CHEST:
+				return new EnderChestMock(block);
+			case ACACIA_SIGN:
+			case ACACIA_WALL_SIGN:
+			case BIRCH_SIGN:
+			case BIRCH_WALL_SIGN:
+			case CRIMSON_SIGN:
+			case CRIMSON_WALL_SIGN:
+			case DARK_OAK_SIGN:
+			case DARK_OAK_WALL_SIGN:
+			case JUNGLE_SIGN:
+			case JUNGLE_WALL_SIGN:
+			case OAK_SIGN:
+			case OAK_WALL_SIGN:
+			case SPRUCE_SIGN:
+			case SPRUCE_WALL_SIGN:
+			case WARPED_SIGN:
+			case WARPED_WALL_SIGN:
+				return new SignMock(block);
+			case SHULKER_BOX:
+			case WHITE_SHULKER_BOX:
+			case ORANGE_SHULKER_BOX:
+			case MAGENTA_SHULKER_BOX:
+			case LIGHT_BLUE_SHULKER_BOX:
+			case YELLOW_SHULKER_BOX:
+			case LIME_SHULKER_BOX:
+			case PINK_SHULKER_BOX:
+			case GRAY_SHULKER_BOX:
+			case LIGHT_GRAY_SHULKER_BOX:
+			case CYAN_SHULKER_BOX:
+			case PURPLE_SHULKER_BOX:
+			case BLUE_SHULKER_BOX:
+			case BROWN_SHULKER_BOX:
+			case GREEN_SHULKER_BOX:
+			case RED_SHULKER_BOX:
+			case BLACK_SHULKER_BOX:
+				return new ShulkerBoxMock(block);
+			default:
+				return new BlockStateMock(block);
 		}
 	}
 }

@@ -1,12 +1,11 @@
 package be.seeseemelk.mockbukkit.block.data;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.Material;
 import org.bukkit.SoundGroup;
 import org.bukkit.block.data.BlockData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
 public class BlockDataMock implements BlockData
 {
@@ -57,8 +56,7 @@ public class BlockDataMock implements BlockData
 		if (data == null)
 		{
 			return false;
-		}
-		else
+		} else
 		{
 			return data.getMaterial() == type;
 		}
@@ -70,8 +68,7 @@ public class BlockDataMock implements BlockData
 		try
 		{
 			return (BlockData) super.clone();
-		}
-		catch (CloneNotSupportedException e)
+		} catch (CloneNotSupportedException e)
 		{
 			return new BlockDataMock(type);
 		}

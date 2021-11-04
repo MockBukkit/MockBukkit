@@ -1,31 +1,23 @@
 package be.seeseemelk.mockbukkit;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
+import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
+import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import org.bukkit.BanList;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
-import be.seeseemelk.mockbukkit.entity.PlayerMock;
+import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Replica of the Bukkit internal PlayerList and CraftPlayerList implementation
  *
  * @author seeseemelk
  * @author TheBusyBiscuit
- *
  */
 public class MockPlayerList
 {
@@ -34,8 +26,8 @@ public class MockPlayerList
 	private final List<PlayerMock> onlinePlayers = new CopyOnWriteArrayList<>();
 	private final Set<OfflinePlayer> offlinePlayers = Collections.synchronizedSet(new HashSet<>());
 
-	private BanList ipBans = new MockBanList();
-	private BanList profileBans = new MockBanList();
+	private final BanList ipBans = new MockBanList();
+	private final BanList profileBans = new MockBanList();
 
 	public void setMaxPlayers(int maxPlayers)
 	{
@@ -75,7 +67,7 @@ public class MockPlayerList
 	public Set<OfflinePlayer> getOperators()
 	{
 		return Stream.concat(onlinePlayers.stream(), offlinePlayers.stream()).filter(OfflinePlayer::isOp)
-		       .collect(Collectors.toSet());
+				.collect(Collectors.toSet());
 	}
 
 	@NotNull
@@ -99,16 +91,16 @@ public class MockPlayerList
 	public List<Player> matchPlayer(@NotNull String name)
 	{
 		return onlinePlayers.stream().filter(
-		           player -> player.getName().toLowerCase(Locale.ENGLISH).startsWith(name.toLowerCase(Locale.ENGLISH)))
-		       .collect(Collectors.toList());
+						player -> player.getName().toLowerCase(Locale.ENGLISH).startsWith(name.toLowerCase(Locale.ENGLISH)))
+				.collect(Collectors.toList());
 	}
 
 	@Nullable
 	public Player getPlayerExact(@NotNull String name)
 	{
 		return onlinePlayers.stream()
-		       .filter(player -> player.getName().toLowerCase(Locale.ENGLISH).equals(name.toLowerCase(Locale.ENGLISH)))
-		       .findFirst().orElse(null);
+				.filter(player -> player.getName().toLowerCase(Locale.ENGLISH).equals(name.toLowerCase(Locale.ENGLISH)))
+				.findFirst().orElse(null);
 	}
 
 	@Nullable
@@ -161,8 +153,7 @@ public class MockPlayerList
 		if (num < 0 || num >= onlinePlayers.size())
 		{
 			throw new ArrayIndexOutOfBoundsException();
-		}
-		else
+		} else
 		{
 			return onlinePlayers.get(num);
 		}

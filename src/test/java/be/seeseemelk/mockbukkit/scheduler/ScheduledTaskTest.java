@@ -1,15 +1,11 @@
 package be.seeseemelk.mockbukkit.scheduler;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 class ScheduledTaskTest
 {
@@ -23,7 +19,9 @@ class ScheduledTaskTest
 	@Test
 	void getRunnable_GetsRunnable()
 	{
-		Runnable runnable = () -> {};
+		Runnable runnable = () ->
+		{
+		};
 		ScheduledTask task = new ScheduledTask(0, null, true, 0, runnable);
 		assertSame(runnable, task.getRunnable());
 	}

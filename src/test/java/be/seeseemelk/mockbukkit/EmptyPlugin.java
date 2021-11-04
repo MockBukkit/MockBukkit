@@ -1,12 +1,11 @@
 package be.seeseemelk.mockbukkit;
 
-import java.io.File;
-
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;
-
 import org.jetbrains.annotations.NotNull;
+
+import java.io.File;
 
 /**
  * Empty JavaPlugin used for testing only

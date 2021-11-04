@@ -1,13 +1,14 @@
 package be.seeseemelk.mockbukkit.statistic;
 
-import java.util.EnumMap;
-import java.util.Map;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Material;
 import org.bukkit.Statistic;
 import org.bukkit.Statistic.Type;
 import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.EnumMap;
+import java.util.Map;
 
 /**
  * An implementation of player statistics, similar to CraftStatistic

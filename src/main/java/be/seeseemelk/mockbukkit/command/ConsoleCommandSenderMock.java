@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.command;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Server;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.conversations.Conversation;
@@ -9,6 +10,7 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -203,6 +205,13 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 
 	@Override
 	public Spigot spigot()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Component name()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

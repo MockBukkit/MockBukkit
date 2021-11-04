@@ -1,10 +1,10 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
-import java.util.Objects;
-
 import org.bukkit.FireworkEffect;
 import org.bukkit.inventory.meta.FireworkEffectMeta;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Objects;
 
 public class FireworkEffectMetaMock extends ItemMetaMock implements FireworkEffectMeta
 {

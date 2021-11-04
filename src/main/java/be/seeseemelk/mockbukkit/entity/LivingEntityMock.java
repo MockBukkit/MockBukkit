@@ -1,15 +1,10 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.EnumMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-
+import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.attribute.AttributeInstanceMock;
+import be.seeseemelk.mockbukkit.potion.ActivePotionEffect;
+import com.google.common.base.Function;
 import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
@@ -23,19 +18,14 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 
-import com.google.common.base.Function;
-
-import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.attribute.AttributeInstanceMock;
-import be.seeseemelk.mockbukkit.potion.ActivePotionEffect;
+import java.util.*;
 
 public abstract class LivingEntityMock extends EntityMock implements LivingEntity
 {
 
 	private static final double MAX_HEALTH = 20.0;
 	protected double health;
-	private double maxHealth = MAX_HEALTH;
+	private final double maxHealth = MAX_HEALTH;
 	private int maxAirTicks = 300;
 	private int remainingAirTicks = 300;
 	protected boolean alive = true;
@@ -122,8 +112,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 				{
 					return;
 				}
-			}
-			else
+			} else
 			{
 				return;
 			}
@@ -131,16 +120,15 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		Map<EntityDamageEvent.DamageModifier, Double> modifiers = new EnumMap<>(EntityDamageEvent.DamageModifier.class);
 		modifiers.put(EntityDamageEvent.DamageModifier.BASE, 1.0);
 		Map<EntityDamageEvent.DamageModifier, Function<Double, Double>> modifierFunctions = new EnumMap<>(
-		    EntityDamageEvent.DamageModifier.class);
+				EntityDamageEvent.DamageModifier.class);
 		modifierFunctions.put(EntityDamageEvent.DamageModifier.BASE, damage -> damage);
 
 		EntityDamageEvent event = source != null ?
-		                          new EntityDamageByEntityEvent(source, this,
-		                                  EntityDamageEvent.DamageCause.ENTITY_ATTACK, modifiers, modifierFunctions)
-		                          :
-		                          new EntityDamageEvent(this, EntityDamageEvent.DamageCause.CUSTOM, modifiers,
-		                                  modifierFunctions)
-		                          ;
+				new EntityDamageByEntityEvent(source, this,
+						EntityDamageEvent.DamageCause.ENTITY_ATTACK, modifiers, modifierFunctions)
+				:
+				new EntityDamageEvent(this, EntityDamageEvent.DamageCause.CUSTOM, modifiers,
+						modifierFunctions);
 		event.setDamage(amount);
 		Bukkit.getPluginManager().callEvent(event);
 		if (!event.isCancelled())
@@ -332,8 +320,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 			// the force/success attributes are now obsolete
 			activeEffects.add(new ActivePotionEffect(effect));
 			return true;
-		}
-		else
+		} else
 		{
 			return false;
 		}
@@ -395,8 +382,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 			if (effect.hasExpired())
 			{
 				iterator.remove();
-			}
-			else
+			} else
 			{
 				effects.add(effect.getPotionEffect());
 			}

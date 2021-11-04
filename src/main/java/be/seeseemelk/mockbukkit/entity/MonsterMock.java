@@ -2,7 +2,6 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Monster;
 

@@ -1,28 +1,22 @@
 package be.seeseemelk.mockbukkit.tags;
 
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.FileSystem;
-import java.nio.file.FileSystemAlreadyExistsException;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.regex.Pattern;
-import java.util.stream.Stream;
-
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.ServerMock;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Server;
 import org.bukkit.Tag;
 import org.jetbrains.annotations.NotNull;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.ServerMock;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 public final class TagsMock
 {
@@ -42,8 +36,7 @@ public final class TagsMock
 		try
 		{
 			loadRegistry(server, TagRegistry.BLOCKS, skipIfExists);
-		}
-		catch (URISyntaxException | IOException e)
+		} catch (URISyntaxException | IOException e)
 		{
 			server.getLogger().log(Level.SEVERE, "Failed to load Tag Registry \"blocks\"", e);
 		}
@@ -51,8 +44,7 @@ public final class TagsMock
 		try
 		{
 			loadRegistry(server, TagRegistry.ITEMS, skipIfExists);
-		}
-		catch (URISyntaxException | IOException e)
+		} catch (URISyntaxException | IOException e)
 		{
 			server.getLogger().log(Level.SEVERE, "Failed to load Tag Registry \"items\"", e);
 		}
@@ -64,12 +56,11 @@ public final class TagsMock
 	 * @param server
 	 * @param registry     Our {@link TagRegistry}
 	 * @param skipIfExists Whether to skip an already loaded {@link TagRegistry}
-	 *
 	 * @throws URISyntaxException When a {@link URI} is malformed
 	 * @throws IOException        When there was an issue with I/O
 	 */
 	private static void loadRegistry(@NotNull ServerMock server, @NotNull TagRegistry registry, boolean skipIfExists)
-	throws URISyntaxException, IOException
+			throws URISyntaxException, IOException
 	{
 		if (skipIfExists && !registry.isEmpty())
 		{
@@ -106,8 +97,7 @@ public final class TagsMock
 			try
 			{
 				tag.reload();
-			}
-			catch (TagMisconfigurationException e)
+			} catch (TagMisconfigurationException e)
 			{
 				server.getLogger().log(Level.SEVERE, e, () -> "Failed to load Tag - " + tag.getKey());
 			}
@@ -122,8 +112,7 @@ public final class TagsMock
 			Map<String, String> env = new HashMap<>();
 			env.put("create", "true");
 			return FileSystems.newFileSystem(uri, env);
-		}
-		catch (IllegalArgumentException | FileSystemAlreadyExistsException e)
+		} catch (IllegalArgumentException | FileSystemAlreadyExistsException e)
 		{
 			return FileSystems.getDefault();
 		}

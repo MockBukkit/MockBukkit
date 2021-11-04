@@ -18,10 +18,14 @@ repositories {
     maven {
         url 'https://repo.md-5.net/content/groups/public/'
     }
+
+    maven {
+        url 'https://papermc.io/repo/repository/maven-public/'
+    }
 }
 
 dependencies {
-    api "org.spigotmc:spigot-api:${gradle.ext.apiVersionFull}"
+    api "io.papermc.paper:paper-api:${gradle.ext.apiVersionFull}"
     implementation 'org.junit.jupiter:junit-jupiter:5.8.1'
     implementation 'org.hamcrest:hamcrest-library:2.2'
     implementation 'commons-io:commons-io:2.11.0'

@@ -57,8 +57,7 @@ public class Coordinate
 		{
 			Coordinate c = (Coordinate) obj;
 			return x == c.x && y == c.y && z == c.z;
-		}
-		else
+		} else
 		{
 			return false;
 		}

@@ -8,7 +8,6 @@ import org.bukkit.potion.PotionEffectType;
  * instant and a RGB {@link Color} variable.
  *
  * @author TheBusyBiscuit
- *
  */
 public class MockPotionEffectType extends PotionEffectType
 {

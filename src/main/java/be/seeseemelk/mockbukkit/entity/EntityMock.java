@@ -1,18 +1,10 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Queue;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.LinkedTransferQueue;
-
+import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.command.MessageTarget;
+import be.seeseemelk.mockbukkit.metadata.MetadataTable;
+import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
 import org.bukkit.Bukkit;
 import org.bukkit.EntityEffect;
 import org.bukkit.Location;
@@ -34,11 +26,10 @@ import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
-import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.command.MessageTarget;
-import be.seeseemelk.mockbukkit.metadata.MetadataTable;
-import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
+import java.util.*;
+import java.util.concurrent.LinkedTransferQueue;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public abstract class EntityMock extends Entity.Spigot implements Entity, MessageTarget
 {
@@ -47,8 +38,8 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private Location location;
 	private boolean teleported;
 	private TeleportCause teleportCause;
-	private MetadataTable metadataTable = new MetadataTable();
-	private PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
+	private final MetadataTable metadataTable = new MetadataTable();
+	private final PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
 	private boolean operator = false;
 	private String name = "entity";
 	private String customName = null;
@@ -60,7 +51,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private Vector velocity = new Vector(0, 0, 0);
 	private float fallDistance;
 	private int fireTicks = -20;
-	private int maxFireTicks = 20;
+	private final int maxFireTicks = 20;
 
 	public EntityMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -100,7 +91,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		double distance = location.distance(expectedLocation);
 		assertEquals(expectedLocation.getWorld(), location.getWorld());
 		assertTrue(distance <= maximumDistance, String.format("Distance was <%.3f> but should be less than or equal to <%.3f>", distance,
-		           maximumDistance));
+				maximumDistance));
 	}
 
 	/**
@@ -399,8 +390,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 			}
 
 			recalculatePermissions();
-		}
-		else
+		} else
 		{
 			throw new IllegalArgumentException("Given attachment is not part of Permissible object " + this);
 		}

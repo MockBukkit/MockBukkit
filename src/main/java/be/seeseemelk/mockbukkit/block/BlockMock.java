@@ -1,21 +1,13 @@
 package be.seeseemelk.mockbukkit.block;
 
-import static org.junit.jupiter.api.Assertions.fail;
-
-import java.util.Collection;
-import java.util.List;
-
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
+import be.seeseemelk.mockbukkit.block.state.BlockStateMock;
+import be.seeseemelk.mockbukkit.metadata.MetadataTable;
+import com.destroystokyo.paper.block.BlockSoundGroup;
 import org.apache.commons.lang.Validate;
-import org.bukkit.Chunk;
-import org.bukkit.FluidCollisionMode;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
-import org.bukkit.block.Biome;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
-import org.bukkit.block.BlockState;
-import org.bukkit.block.PistonMoveReaction;
+import org.bukkit.*;
+import org.bukkit.block.*;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -29,10 +21,10 @@ import org.bukkit.util.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
-import be.seeseemelk.mockbukkit.block.state.BlockStateMock;
-import be.seeseemelk.mockbukkit.metadata.MetadataTable;
+import java.util.Collection;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class BlockMock implements Block
 {
@@ -204,6 +196,13 @@ public class BlockMock implements Block
 	}
 
 	@Override
+	public boolean isValidTool(@NotNull ItemStack itemStack)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public Location getLocation()
 	{
 		return location;
@@ -249,6 +248,13 @@ public class BlockMock implements Block
 		// This will always return a snapshot of the BlockState, not the actual state.
 		// This is optional with Paper but for Spigot it simply works like that.
 		return state.getSnapshot();
+	}
+
+	@Override
+	public @NotNull BlockState getState(boolean useSnapshot)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -318,8 +324,36 @@ public class BlockMock implements Block
 	public boolean isLiquid()
 	{
 		return material == Material.LAVA
-		       || material == Material.WATER
-		       || material == Material.BUBBLE_COLUMN;
+				|| material == Material.WATER
+				|| material == Material.BUBBLE_COLUMN;
+	}
+
+	@Override
+	public boolean isBuildable()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isBurnable()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isReplaceable()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isSolid()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -358,6 +392,20 @@ public class BlockMock implements Block
 	public boolean breakNaturally(ItemStack tool)
 	{
 		return this.breakNaturally();
+	}
+
+	@Override
+	public boolean breakNaturally(boolean triggerEffect)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean breakNaturally(@NotNull ItemStack tool, boolean triggerEffect)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -424,6 +472,27 @@ public class BlockMock implements Block
 	}
 
 	@Override
+	public @NotNull BlockSoundGroup getSoundGroup()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull String getTranslationKey()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull float getDestroySpeed(@NotNull ItemStack itemStack, boolean considerEnchants)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public Collection<ItemStack> getDrops(ItemStack tool, Entity entity)
 	{
 		// TODO Auto-generated method stub
@@ -458,6 +527,13 @@ public class BlockMock implements Block
 
 	@Override
 	public float getBreakSpeed(@NotNull Player player)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull String translationKey()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

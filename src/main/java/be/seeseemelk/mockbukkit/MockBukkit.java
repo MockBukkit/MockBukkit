@@ -1,12 +1,5 @@
 package be.seeseemelk.mockbukkit;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Field;
-import java.util.logging.Level;
-
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.InvalidDescriptionException;
 import org.bukkit.plugin.InvalidPluginException;
@@ -15,6 +8,13 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;
 import org.jetbrains.annotations.NotNull;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.Field;
+import java.util.logging.Level;
 
 public class MockBukkit
 {
@@ -36,8 +36,7 @@ public class MockBukkit
 			server.setAccessible(true);
 			server.set(null, null);
 			mock = null;
-		}
-		catch (NoSuchFieldException | IllegalArgumentException | IllegalAccessException e)
+		} catch (NoSuchFieldException | IllegalArgumentException | IllegalAccessException e)
 		{
 			throw new RuntimeException(e);
 		}
@@ -125,8 +124,7 @@ public class MockBukkit
 		try
 		{
 			loadJar(new File(path));
-		}
-		catch (InvalidPluginException e)
+		} catch (InvalidPluginException e)
 		{
 			// We *really* don't want to bother users with this error.
 			// It's only supposed to be used during unit tests, so if
@@ -142,7 +140,7 @@ public class MockBukkit
 	 * @throws InvalidPluginException If an exception occured while loading a plugin.
 	 */
 	@SuppressWarnings(
-	{ "deprecation" })
+			{"deprecation"})
 	public static void loadJar(File jarFile) throws InvalidPluginException
 	{
 		JavaPluginLoader loader = new JavaPluginLoader(mock);
@@ -178,8 +176,7 @@ public class MockBukkit
 			JavaPlugin instance = mock.getPluginManager().loadPlugin(plugin, parameters);
 			mock.getPluginManager().enablePlugin(instance);
 			return plugin.cast(instance);
-		}
-		else
+		} else
 		{
 			throw new IllegalStateException("Not mocking");
 		}
@@ -196,15 +193,14 @@ public class MockBukkit
 	 * @return An instance of the plugin's main class.
 	 */
 	public static <T extends JavaPlugin> T loadWith(Class<T> plugin, PluginDescriptionFile descriptionFile,
-	        Object... parameters)
+													Object... parameters)
 	{
 		if (mock != null)
 		{
 			JavaPlugin instance = mock.getPluginManager().loadPlugin(plugin, descriptionFile, parameters);
 			mock.getPluginManager().enablePlugin(instance);
 			return plugin.cast(instance);
-		}
-		else
+		} else
 		{
 			throw new IllegalStateException("Not mocking");
 		}
@@ -225,8 +221,7 @@ public class MockBukkit
 		try
 		{
 			return loadWith(plugin, new PluginDescriptionFile(descriptionInput), parameters);
-		}
-		catch (InvalidDescriptionException e)
+		} catch (InvalidDescriptionException e)
 		{
 			throw new RuntimeException(e);
 		}
@@ -247,8 +242,7 @@ public class MockBukkit
 		try
 		{
 			return loadWith(plugin, new FileInputStream(descriptionFile), parameters);
-		}
-		catch (IOException e)
+		} catch (IOException e)
 		{
 			throw new RuntimeException(e);
 		}
@@ -282,14 +276,13 @@ public class MockBukkit
 	public static <T extends JavaPlugin> T loadSimple(Class<T> plugin, Object... parameters)
 	{
 		PluginDescriptionFile description = new PluginDescriptionFile(plugin.getSimpleName(), "1.0.0",
-		        plugin.getCanonicalName());
+				plugin.getCanonicalName());
 		if (mock != null)
 		{
 			JavaPlugin instance = mock.getPluginManager().loadPlugin(plugin, description, parameters);
 			mock.getPluginManager().enablePlugin(instance);
 			return plugin.cast(instance);
-		}
-		else
+		} else
 		{
 			throw new IllegalStateException("Not mocking");
 		}
@@ -309,8 +302,7 @@ public class MockBukkit
 		try
 		{
 			mock.getScheduler().shutdown();
-		}
-		finally
+		} finally
 		{
 			if (mock.getPluginManager() != null)
 			{
@@ -345,12 +337,11 @@ public class MockBukkit
 		if (mock != null)
 		{
 			PluginDescriptionFile description = new PluginDescriptionFile(pluginName, "1.0.0",
-			        MockPlugin.class.getName());
+					MockPlugin.class.getName());
 			JavaPlugin instance = mock.getPluginManager().loadPlugin(MockPlugin.class, description);
 			mock.getPluginManager().enablePlugin(instance);
 			return (MockPlugin) instance;
-		}
-		else
+		} else
 		{
 			throw new IllegalStateException("Not mocking");
 		}

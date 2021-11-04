@@ -1,12 +1,10 @@
 package be.seeseemelk.mockbukkit.tags;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.fail;
-
 import org.bukkit.NamespacedKey;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class TagParserTest
 {
@@ -87,8 +85,7 @@ class TagParserTest
 			});
 
 			fail("JSON was misconfigured, should have thrown an exception");
-		}
-		catch (TagMisconfigurationException x)
+		} catch (TagMisconfigurationException x)
 		{
 			// This was to be expected
 		}

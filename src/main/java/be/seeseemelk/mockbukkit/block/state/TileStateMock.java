@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.block.state;
 
+import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
@@ -7,14 +8,11 @@ import org.bukkit.block.TileState;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.jetbrains.annotations.NotNull;
 
-import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
-
 /**
  * This {@link BlockStateMock} represents a {@link TileState} which is capable of storing persistent data using a
  * {@link PersistentDataContainerMock}.
  *
  * @author TheBusyBiscuit
- *
  */
 public abstract class TileStateMock extends BlockStateMock implements TileState
 {

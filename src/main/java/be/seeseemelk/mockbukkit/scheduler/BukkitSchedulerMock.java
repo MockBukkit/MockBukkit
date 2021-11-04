@@ -1,17 +1,8 @@
 package be.seeseemelk.mockbukkit.scheduler;
 
-import java.util.ArrayList;
-import java.util.concurrent.*;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicReference;
-import java.util.function.Consumer;
-import java.util.logging.Logger;
-
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ThreadAccessException;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-
 import org.apache.commons.lang.Validate;
 import org.bukkit.event.Event;
 import org.bukkit.plugin.Plugin;
@@ -19,15 +10,22 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.scheduler.BukkitWorker;
-
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Consumer;
+import java.util.logging.Logger;
 
 public class BukkitSchedulerMock implements BukkitScheduler
 {
 	private static final String LOGGER_NAME = "BukkitSchedulerMock";
 	private final ThreadPoolExecutor pool = new ThreadPoolExecutor(0, Integer.MAX_VALUE,
-	        60L, TimeUnit.SECONDS,
-	        new SynchronousQueue<>());
+			60L, TimeUnit.SECONDS,
+			new SynchronousQueue<>());
 	private final ExecutorService asyncEventExecutor = Executors.newCachedThreadPool();
 	private final List<Future<?>> queuedAsyncEvents = new ArrayList<>();
 	private final TaskList scheduledTasks = new TaskList();
@@ -99,8 +97,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 				if (task.isSync())
 				{
 					wrapTask(task).run();
-				}
-				else
+				} else
 				{
 					pool.submit(wrapTask(task));
 				}
@@ -165,8 +162,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			try
 			{
 				Thread.sleep(10L);
-			}
-			catch (InterruptedException e)
+			} catch (InterruptedException e)
 			{
 				Thread.currentThread().interrupt();
 				return;
@@ -183,7 +179,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 						task.cancel();
 						cancelTask(task.getTaskId());
 						throw new RuntimeException("Forced Cancellation of task owned by "
-						                           + task.getOwner().getName());
+								+ task.getOwner().getName());
 					}
 				}
 				pool.shutdownNow();
@@ -198,15 +194,13 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			if (futureEvent.isDone())
 			{
 				queuedAsyncEvents.remove(futureEvent);
-			}
-			else
+			} else
 			{
 				try
 				{
 					queuedAsyncEvents.remove(futureEvent);
 					futureEvent.get();
-				}
-				catch (InterruptedException | ExecutionException e)
+				} catch (InterruptedException | ExecutionException e)
 				{
 					throw new ThreadAccessException("Failed to wait for async events: " + e.getMessage(), e);
 				}
@@ -296,7 +290,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public int scheduleAsyncDelayedTask(@NotNull Plugin plugin, @NotNull Runnable task, long delay)
 	{
 		Logger.getLogger(LOGGER_NAME)
-		.warning("Consider using runTaskLaterAsynchronously instead of scheduleAsyncDelayedTask");
+				.warning("Consider using runTaskLaterAsynchronously instead of scheduleAsyncDelayedTask");
 		return runTaskLaterAsynchronously(plugin, task, delay).getTaskId();
 	}
 
@@ -304,7 +298,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public int scheduleAsyncDelayedTask(@NotNull Plugin plugin, @NotNull Runnable task)
 	{
 		Logger.getLogger(LOGGER_NAME)
-		.warning("Consider using runTaskAsynchronously instead of scheduleAsyncDelayedTask");
+				.warning("Consider using runTaskAsynchronously instead of scheduleAsyncDelayedTask");
 		return runTaskAsynchronously(plugin, task).getTaskId();
 	}
 
@@ -312,7 +306,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public int scheduleAsyncRepeatingTask(@NotNull Plugin plugin, @NotNull Runnable task, long delay, long period)
 	{
 		Logger.getLogger(LOGGER_NAME)
-		.warning("Consider using runTaskTimerAsynchronously instead of scheduleAsyncRepeatingTask");
+				.warning("Consider using runTaskTimerAsynchronously instead of scheduleAsyncRepeatingTask");
 		return runTaskTimerAsynchronously(plugin, task, delay, period).getTaskId();
 	}
 
@@ -400,7 +394,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public @NotNull BukkitTask runTaskLaterAsynchronously(@NotNull Plugin plugin, @NotNull Runnable task, long delay)
 	{
 		ScheduledTask scheduledTask = new ScheduledTask(id++, plugin, false, currentTick + delay,
-		        new AsyncRunnable(task));
+				new AsyncRunnable(task));
 		scheduledTasks.addTask(scheduledTask);
 		return scheduledTask;
 	}
@@ -415,7 +409,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public @NotNull BukkitTask runTaskTimerAsynchronously(@NotNull Plugin plugin, @NotNull Runnable task, long delay, long period)
 	{
 		RepeatingTask scheduledTask = new RepeatingTask(id++, plugin, false, currentTick + delay, period,
-		        new AsyncRunnable(task));
+				new AsyncRunnable(task));
 		scheduledTasks.addTask(scheduledTask);
 		return scheduledTask;
 	}
@@ -424,6 +418,13 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public @NotNull BukkitTask runTaskTimerAsynchronously(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay, long period)
 	{
 		return runTaskTimerAsynchronously(plugin, (Runnable) task, delay, period);
+	}
+
+	@Override
+	public @NotNull Executor getMainThreadExecutor(@NotNull Plugin plugin)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	class AsyncRunnable implements Runnable
@@ -441,8 +442,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			try
 			{
 				task.run();
-			}
-			catch (Exception t)
+			} catch (Exception t)
 			{
 				asyncException.set(t);
 			}

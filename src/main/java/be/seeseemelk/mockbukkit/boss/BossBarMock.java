@@ -1,9 +1,5 @@
 package be.seeseemelk.mockbukkit.boss;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-
 import org.apache.commons.lang.Validate;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarFlag;
@@ -12,14 +8,18 @@ import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+
 public class BossBarMock implements BossBar
 {
 
 	private String title = null;
 	private BarColor color = null;
 	private BarStyle style = null;
-	private HashSet<Player> players = new HashSet<>();
-	private HashSet<BarFlag> barFlags = new HashSet<>();
+	private final HashSet<Player> players = new HashSet<>();
+	private final HashSet<BarFlag> barFlags = new HashSet<>();
 	private boolean visible = true;
 	private double progress = 1.0;
 

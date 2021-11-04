@@ -1,27 +1,20 @@
 package be.seeseemelk.mockbukkit.scoreboard;
 
-import java.util.Collections;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
-
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import net.kyori.adventure.text.Component;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.scoreboard.DisplaySlot;
-import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.RenderType;
-import org.bukkit.scoreboard.Score;
-import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.Team;
+import org.bukkit.scoreboard.*;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class ScoreboardMock implements Scoreboard
 {
-	private Map<String, ObjectiveMock> objectives = new HashMap<>();
-	private Map<DisplaySlot, ObjectiveMock> objectivesByDisplaySlot = new EnumMap<>(DisplaySlot.class);
-	private Map<String, Team> teams = new HashMap<>();
+	private final Map<String, ObjectiveMock> objectives = new HashMap<>();
+	private final Map<DisplaySlot, ObjectiveMock> objectivesByDisplaySlot = new EnumMap<>(DisplaySlot.class);
+	private final Map<String, Team> teams = new HashMap<>();
 
 	@Override
 	public ObjectiveMock registerNewObjective(String name, String criteria) throws IllegalArgumentException
@@ -30,15 +23,29 @@ public class ScoreboardMock implements Scoreboard
 	}
 
 	@Override
+	public @NotNull Objective registerNewObjective(@NotNull String name, @NotNull String criteria, @Nullable Component displayName) throws IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Objective registerNewObjective(@NotNull String name, @NotNull String criteria, @Nullable Component displayName, @NotNull RenderType renderType) throws IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public ObjectiveMock registerNewObjective(String name, String criteria, String displayName)
-	throws IllegalArgumentException
+			throws IllegalArgumentException
 	{
 		return registerNewObjective(name, criteria, displayName, RenderType.INTEGER);
 	}
 
 	@Override
 	public ObjectiveMock registerNewObjective(String name, String criteria, String displayName, RenderType renderType)
-	throws IllegalArgumentException
+			throws IllegalArgumentException
 	{
 		ObjectiveMock objective = new ObjectiveMock(this, name, displayName, criteria, renderType);
 		objectives.put(name, objective);
@@ -55,7 +62,7 @@ public class ScoreboardMock implements Scoreboard
 	public Set<Objective> getObjectivesByCriteria(String criteria) throws IllegalArgumentException
 	{
 		return objectives.values().stream().filter(objective -> objective.getCriteria().equals(criteria))
-		       .collect(Collectors.toSet());
+				.collect(Collectors.toSet());
 	}
 
 	@Override

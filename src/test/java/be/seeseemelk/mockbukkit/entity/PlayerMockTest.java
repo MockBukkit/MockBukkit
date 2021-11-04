@@ -1,25 +1,10 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.MockPlugin;
-import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.TestPlugin;
-import be.seeseemelk.mockbukkit.WorldMock;
+import be.seeseemelk.mockbukkit.*;
 import be.seeseemelk.mockbukkit.block.BlockMock;
-import be.seeseemelk.mockbukkit.inventory.ChestInventoryMock;
-import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
-import be.seeseemelk.mockbukkit.inventory.InventoryMock;
-import be.seeseemelk.mockbukkit.inventory.InventoryViewMock;
-import be.seeseemelk.mockbukkit.inventory.SimpleInventoryViewMock;
+import be.seeseemelk.mockbukkit.inventory.*;
 import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
-import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
-import org.bukkit.GameRule;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Sound;
-import org.bukkit.SoundCategory;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
@@ -32,15 +17,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.event.player.PlayerExpChangeEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerLevelChangeEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.event.player.PlayerRespawnEvent;
-import org.bukkit.event.player.PlayerTeleportEvent;
-import org.bukkit.event.player.PlayerToggleFlightEvent;
-import org.bukkit.event.player.PlayerToggleSneakEvent;
-import org.bukkit.event.player.PlayerToggleSprintEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
@@ -61,25 +38,17 @@ import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assumptions.assumeFalse;
 
 class PlayerMockTest
 {
 	// Taken from https://minecraft.gamepedia.com/Experience#Leveling_up
-	private static int[] expRequired =
-	{
-		7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 42, 47, 52, 57, 62, 67, 72, 77, 82, 87, 92, 97, 102,
-		107, 112, 121, 130, 139, 148, 157, 166, 175, 184, 193
-	};
+	private static final int[] expRequired =
+			{
+					7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 42, 47, 52, 57, 62, 67, 72, 77, 82, 87, 92, 97, 102,
+					107, 112, 121, 130, 139, 148, 157, 166, 175, 184, 193
+			};
 	private ServerMock server;
 	private UUID uuid;
 	private PlayerMock player;
@@ -586,21 +555,25 @@ class PlayerMockTest
 	@Test
 	void chat_AnyMessage_AsyncEventFired()
 	{
-		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
-		Bukkit.getPluginManager().registerEvents(plugin, plugin);
-		player.chat("A message");
 		try
 		{
-			plugin.barrier.await(3, TimeUnit.SECONDS);
-		}
-		catch (InterruptedException | BrokenBarrierException e)
+			TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+			Bukkit.getPluginManager().registerEvents(plugin, plugin);
+			player.chat("A message");
+			try
+			{
+				plugin.barrier.await(3, TimeUnit.SECONDS);
+			} catch (InterruptedException | BrokenBarrierException e)
+			{
+			} catch (TimeoutException e)
+			{
+				fail("Async event was not fired");
+			}
+			assertTrue(plugin.asyncEventExecuted);
+		} catch (Exception e)
 		{
+			e.printStackTrace();
 		}
-		catch (TimeoutException e)
-		{
-			fail("Async event was not fired");
-		}
-		assertTrue(plugin.asyncEventExecuted);
 	}
 
 	@Test
@@ -928,7 +901,7 @@ class PlayerMockTest
 		player.assertSoundHeard(sound, audio ->
 		{
 			return player.getLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.AMBIENT
-			&& audio.getVolume() == volume && audio.getPitch() == pitch;
+					&& audio.getVolume() == volume && audio.getPitch() == pitch;
 		});
 	}
 
@@ -943,7 +916,7 @@ class PlayerMockTest
 		player.assertSoundHeard(sound, audio ->
 		{
 			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
-			&& audio.getVolume() == volume && audio.getPitch() == pitch;
+					&& audio.getVolume() == volume && audio.getPitch() == pitch;
 		});
 	}
 
@@ -955,7 +928,7 @@ class PlayerMockTest
 		player.setItemOnCursor(new ItemStack(Material.PUMPKIN));
 		player.closeInventory();
 		server.getPluginManager().assertEventFired(InventoryCloseEvent.class,
-		        e -> e.getPlayer() == player && e.getInventory() == inv);
+				e -> e.getPlayer() == player && e.getInventory() == inv);
 		assertTrue(player.getItemOnCursor().getType().isAir());
 	}
 
@@ -1004,7 +977,7 @@ class PlayerMockTest
 	void testMultiplePotionEffects()
 	{
 		Collection<PotionEffect> effects = Arrays.asList(new PotionEffect(PotionEffectType.BAD_OMEN, 3, 1),
-		                                   new PotionEffect(PotionEffectType.LUCK, 5, 2));
+				new PotionEffect(PotionEffectType.LUCK, 5, 2));
 
 		assertTrue(player.addPotionEffects(effects));
 

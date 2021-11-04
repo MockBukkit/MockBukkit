@@ -1,24 +1,8 @@
 package be.seeseemelk.mockbukkit;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assumptions.assumeTrue;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.atomic.AtomicReference;
-
+import be.seeseemelk.mockbukkit.command.CommandResult;
+import be.seeseemelk.mockbukkit.entity.*;
+import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
@@ -34,13 +18,17 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import be.seeseemelk.mockbukkit.command.CommandResult;
-import be.seeseemelk.mockbukkit.entity.EntityMock;
-import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
-import be.seeseemelk.mockbukkit.entity.PlayerMock;
-import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
-import be.seeseemelk.mockbukkit.entity.SimpleEntityMock;
-import be.seeseemelk.mockbukkit.inventory.InventoryMock;
+import java.io.File;
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.atomic.AtomicReference;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 class ServerMockTest
 {
@@ -67,21 +55,27 @@ class ServerMockTest
 	@Test
 	void addPlayer_TwoPlayers_SizeIsTwo()
 	{
-		PlayerMockFactory factory = new PlayerMockFactory(server);
-		PlayerMock player1 = factory.createRandomPlayer();
-		PlayerMock player2 = factory.createRandomPlayer();
+		try
+		{
+			PlayerMockFactory factory = new PlayerMockFactory(server);
+			PlayerMock player1 = factory.createRandomPlayer();
+			PlayerMock player2 = factory.createRandomPlayer();
 
-		server.addPlayer(player1);
-		assertEquals(1, server.getOnlinePlayers().size());
-		server.addPlayer(player2);
-		assertEquals(2, server.getOnlinePlayers().size());
+			server.addPlayer(player1);
+			assertEquals(1, server.getOnlinePlayers().size());
+			server.addPlayer(player2);
+			assertEquals(2, server.getOnlinePlayers().size());
 
-		assertEquals(player1, server.getPlayer(0));
-		assertEquals(player2, server.getPlayer(1));
+			assertEquals(player1, server.getPlayer(0));
+			assertEquals(player2, server.getPlayer(1));
 
-		Set<EntityMock> entities = server.getEntities();
-		assertTrue(entities.contains(player1), "Player 1 was not registered");
-		assertTrue(entities.contains(player2), "Player 2 was not registered");
+			Set<EntityMock> entities = server.getEntities();
+			assertTrue(entities.contains(player1), "Player 1 was not registered");
+			assertTrue(entities.contains(player2), "Player 2 was not registered");
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	@Test
@@ -180,7 +174,7 @@ class ServerMockTest
 	void executeCommand_PlayerAndTrueReturnValue_Succeeds()
 	{
 		server.setPlayers(1);
-		TestPlugin plugin = (TestPlugin) MockBukkit.load(TestPlugin.class);
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
 		plugin.commandReturns = true;
 
 		Command command = server.getPluginCommand("testcommand");
@@ -197,7 +191,7 @@ class ServerMockTest
 	@Test
 	void executeCommand_ConsoleAndFalseReturnValue_Fails()
 	{
-		TestPlugin plugin = (TestPlugin) MockBukkit.load(TestPlugin.class);
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
 		plugin.commandReturns = false;
 
 		Command command = server.getPluginCommand("testcommand");
@@ -214,7 +208,7 @@ class ServerMockTest
 	@Test
 	void executeCommand_CommandAsStringAndTrueReturnValue_Succeeds()
 	{
-		TestPlugin plugin = (TestPlugin) MockBukkit.load(TestPlugin.class);
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
 		plugin.commandReturns = true;
 
 		CommandResult result = server.executeConsole("testcommand");
@@ -473,8 +467,7 @@ class ServerMockTest
 			try
 			{
 				server.assertMainThread();
-			}
-			catch (ThreadAccessException e)
+			} catch (ThreadAccessException e)
 			{
 				exceptionThrown.set(e);
 			}

@@ -1,20 +1,18 @@
 package be.seeseemelk.mockbukkit.tags;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import be.seeseemelk.mockbukkit.MockBukkit;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * These are just some example tests for common tags to ensure their normal functionality has not been disturbed.
  *
  * @author TheBusyBiscuit
- *
  */
 class DefaultTagsTest
 {

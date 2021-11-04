@@ -1,11 +1,8 @@
 package be.seeseemelk.mockbukkit.command;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
-
 import org.jetbrains.annotations.NotNull;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class CommandResult
@@ -21,6 +18,7 @@ public class CommandResult
 
 	/**
 	 * Check if the command executed successfully.
+	 *
 	 * @return {@code true} if the command executed successfully, {@code false} if a problem occured.
 	 */
 	public boolean hasSucceeded()
@@ -46,6 +44,7 @@ public class CommandResult
 
 	/**
 	 * Assets if the given message was not the next message send to the command sender.
+	 *
 	 * @param message The message to check for.
 	 */
 	public void assertResponse(String message)
@@ -54,8 +53,7 @@ public class CommandResult
 		if (received != null)
 		{
 			assertEquals(message, received);
-		}
-		else
+		} else
 		{
 			fail("No more messages");
 		}
@@ -63,7 +61,8 @@ public class CommandResult
 
 	/**
 	 * Asserts if a given formatted message was not the next message sent to the command sender.
-	 * @param format The formatted message to check for.
+	 *
+	 * @param format  The formatted message to check for.
 	 * @param objects The objects to place into the formatted message.
 	 */
 	public void assertResponse(String format, Object... objects)

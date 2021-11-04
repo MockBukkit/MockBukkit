@@ -1,18 +1,6 @@
 package be.seeseemelk.mockbukkit.inventory;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import java.util.HashMap;
-import java.util.ListIterator;
-import java.util.Objects;
-import java.util.concurrent.atomic.AtomicInteger;
-
+import be.seeseemelk.mockbukkit.MockBukkit;
 import org.bukkit.Material;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
@@ -20,7 +8,12 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
+import java.util.HashMap;
+import java.util.ListIterator;
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class InventoryMockTest
 {
@@ -210,7 +203,7 @@ class InventoryMockTest
 
 		ItemStack item = new ItemStack(Material.DIRT, 32);
 
-		inventory.setContents(new ItemStack[] { item });
+		inventory.setContents(new ItemStack[]{item});
 
 		assertTrue(item.isSimilar(inventory.getItem(0)));
 		for (int i = 1; i < inventory.getSize(); i++)
@@ -223,7 +216,7 @@ class InventoryMockTest
 	@Test
 	void setContents_ArrayWithNulls_NullsIgnores()
 	{
-		inventory.setContents(new ItemStack[] { null });
+		inventory.setContents(new ItemStack[]{null});
 	}
 
 	@Test

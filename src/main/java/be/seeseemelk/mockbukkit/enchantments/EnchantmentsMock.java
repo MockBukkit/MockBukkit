@@ -5,7 +5,9 @@ import org.bukkit.enchantments.Enchantment;
 
 public final class EnchantmentsMock
 {
-	private EnchantmentsMock() {}
+	private EnchantmentsMock()
+	{
+	}
 
 	public static void registerDefaultEnchantments()
 	{

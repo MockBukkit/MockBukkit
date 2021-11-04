@@ -1,21 +1,19 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
+import com.google.common.collect.ImmutableList;
 import org.bukkit.inventory.meta.SuspiciousStewMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 
-import com.google.common.collect.ImmutableList;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * This {@link ItemMetaMock} mocks the implementation of {@link SuspiciousStewMeta}.
  *
  * @author TheBusyBiscuit
- *
  */
 public class SuspiciousStewMetaMock extends ItemMetaMock implements SuspiciousStewMeta
 {

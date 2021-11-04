@@ -1,13 +1,6 @@
 package be.seeseemelk.mockbukkit.help;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.help.HelpMap;
@@ -16,13 +9,14 @@ import org.bukkit.help.HelpTopicComparator;
 import org.bukkit.help.HelpTopicFactory;
 import org.jetbrains.annotations.NotNull;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import java.util.*;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * The {@link HelpMapMock} is our mock of Bukkit's {@link HelpMap}.
  *
  * @author NeumimTo
- *
  */
 public class HelpMapMock implements HelpMap
 {
@@ -54,8 +48,7 @@ public class HelpMapMock implements HelpMap
 		if ("".equals(topic.getName()))
 		{
 			defaultTopic = topic;
-		}
-		else
+		} else
 		{
 			topics.put(topic.getName(), topic);
 		}

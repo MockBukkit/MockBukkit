@@ -1,18 +1,19 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
-import java.util.Objects;
-
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
+import com.destroystokyo.paper.profile.PlayerProfile;
+import com.google.common.base.Strings;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.jetbrains.annotations.Nullable;
 
-import com.google.common.base.Strings;
-
-import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
+import java.util.Objects;
 
 /**
  * An {@link ItemMetaMock} for the {@link SkullMeta} interface. The owning {@link Player} is stored via his name.
- *
+ * <p>
  * Created by SimplyBallistic on 27/10/2018
  *
  * @author SimplyBallistic
@@ -87,6 +88,20 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	{
 		this.owner = owner;
 		return true;
+	}
+
+	@Override
+	public void setPlayerProfile(@Nullable PlayerProfile profile)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable PlayerProfile getPlayerProfile()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

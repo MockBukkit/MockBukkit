@@ -1,15 +1,15 @@
 package be.seeseemelk.mockbukkit;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import java.io.StringReader;
-import java.util.regex.Pattern;
-
 import org.bukkit.plugin.InvalidDescriptionException;
 import org.bukkit.plugin.InvalidPluginException;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.io.StringReader;
+import java.util.regex.Pattern;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class UnsafeValuesTest
 {
@@ -30,8 +30,7 @@ class UnsafeValuesTest
 		{
 			PluginDescriptionFile pluginDescriptionFile = new PluginDescriptionFile(stringReader);
 			mockUnsafeValues.checkSupported(pluginDescriptionFile);
-		}
-		catch (InvalidDescriptionException ex)
+		} catch (InvalidDescriptionException ex)
 		{
 			// exception shouldn't ever be thrown
 			ex.printStackTrace();

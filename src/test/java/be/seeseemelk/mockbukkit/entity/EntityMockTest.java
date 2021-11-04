@@ -1,10 +1,9 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import java.util.Optional;
-import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
-
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.MockPlugin;
+import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.WorldMock;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -23,10 +22,10 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.MockPlugin;
-import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.WorldMock;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -198,7 +197,7 @@ class EntityMockTest
 	void sendMessage_Default_nextMessageReturnsMessages()
 	{
 		entity.sendMessage("hello");
-		entity.sendMessage(new String[] { "my", "world" });
+		entity.sendMessage(new String[]{"my", "world"});
 		assertEquals("hello", entity.nextMessage());
 		assertEquals("my", entity.nextMessage());
 		assertEquals("world", entity.nextMessage());

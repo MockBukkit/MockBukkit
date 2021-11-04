@@ -1,12 +1,11 @@
 package be.seeseemelk.mockbukkit.attribute;
 
-import java.util.Collection;
-
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.attribute.AttributeModifier;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import java.util.Collection;
 
 public class AttributeInstanceMock implements AttributeInstance
 {
