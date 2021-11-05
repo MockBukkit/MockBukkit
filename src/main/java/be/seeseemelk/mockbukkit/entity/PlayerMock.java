@@ -16,6 +16,7 @@ import com.destroystokyo.paper.block.TargetBlockInfo;
 import com.destroystokyo.paper.entity.TargetEntityInfo;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.apache.commons.lang.Validate;
@@ -63,7 +64,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	private PlayerInventoryMock inventory = null;
 	private EnderChestInventoryMock enderChest = null;
 	private GameMode gamemode = GameMode.SURVIVAL;
-	private String displayName = null;
+	private Component displayName = null;
 	private String playerListName = null;
 	private int expTotal = 0;
 	private float exp = 0;
@@ -1039,27 +1040,25 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public @NotNull Component displayName()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return displayName;
 	}
 
 	@Override
 	public void displayName(@Nullable Component displayName)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.displayName = displayName;
 	}
 
 	@Override
 	public @NotNull String getDisplayName()
 	{
-		return displayName;
+		return LegacyComponentSerializer.legacySection().serialize(displayName);
 	}
 
 	@Override
 	public void setDisplayName(String name)
 	{
-		this.displayName = name;
+		this.displayName = Component.text(name);
 	}
 
 	@Override
@@ -1627,7 +1626,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public String getCustomName()
 	{
-		return displayName;
+		return getDisplayName();
 	}
 
 	@Override
