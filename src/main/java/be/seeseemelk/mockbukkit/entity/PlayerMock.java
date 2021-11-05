@@ -15,6 +15,9 @@ import com.destroystokyo.paper.Title;
 import com.destroystokyo.paper.block.TargetBlockInfo;
 import com.destroystokyo.paper.entity.TargetEntityInfo;
 import com.destroystokyo.paper.profile.PlayerProfile;
+import io.papermc.paper.chat.ChatRenderer;
+import io.papermc.paper.event.player.AsyncChatEvent;
+import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.md_5.bungee.api.ChatMessageType;
@@ -54,6 +57,7 @@ import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -1176,9 +1180,18 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	{
 		Set<Player> players = new HashSet<>(Bukkit.getOnlinePlayers());
 		AsyncPlayerChatEvent asyncEvent = new AsyncPlayerChatEvent(true, this, msg, players);
+		AsyncChatEvent asyncChatEvent = new AsyncChatEvent(
+				true,
+				this,
+				Bukkit.getOnlinePlayers().stream().map(p -> (Audience) p).collect(Collectors.toSet()),
+				ChatRenderer.defaultRenderer(),
+				Component.text(msg),
+				Component.text(msg)
+		);
 		org.bukkit.event.player.PlayerChatEvent syncEvent = new org.bukkit.event.player.PlayerChatEvent(this, msg);
 
 		ServerMock server = MockBukkit.getMock();
+		server.getScheduler().executeAsyncEvent(asyncChatEvent);
 		server.getScheduler().executeAsyncEvent(asyncEvent);
 		server.getPluginManager().callEvent(syncEvent);
 	}
