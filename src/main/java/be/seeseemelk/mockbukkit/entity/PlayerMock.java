@@ -1121,7 +1121,8 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public void stopAllSounds() {
+	public void stopAllSounds()
+	{
 		// We will just pretend the Sounds have stopped.
 	}
 
