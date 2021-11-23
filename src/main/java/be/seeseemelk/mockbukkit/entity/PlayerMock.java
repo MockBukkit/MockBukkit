@@ -1713,11 +1713,13 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		sendTitle(title, subtitle);
 	}
 
-	public String nextTitle(){
+	public String nextTitle()
+	{
 		return title.poll();
 	}
 
-	public String nextSubTitle(){
+	public String nextSubTitle()
+	{
 		return title.poll();
 	}
 
