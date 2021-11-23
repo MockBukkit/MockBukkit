@@ -1720,7 +1720,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 
 	public String nextSubTitle()
 	{
-		return title.poll();
+		return subitles.poll();
 	}
 
 	@Override
