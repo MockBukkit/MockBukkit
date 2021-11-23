@@ -72,29 +72,25 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assumptions.assumeFalse;
 
-class PlayerMockTest
-{
+class PlayerMockTest {
 	// Taken from https://minecraft.gamepedia.com/Experience#Leveling_up
 	private static int[] expRequired =
-	{
-		7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 42, 47, 52, 57, 62, 67, 72, 77, 82, 87, 92, 97, 102,
-		107, 112, 121, 130, 139, 148, 157, 166, 175, 184, 193
-	};
+			{
+					7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 42, 47, 52, 57, 62, 67, 72, 77, 82, 87, 92, 97, 102,
+					107, 112, 121, 130, 139, 148, 157, 166, 175, 184, 193
+			};
 	private ServerMock server;
 	private UUID uuid;
 	private PlayerMock player;
 
 	@BeforeEach
-	public void setUp()
-	{
-		server = MockBukkit.mock(new ServerMock()
-		{
+	public void setUp() {
+		server = MockBukkit.mock(new ServerMock() {
 
 			private long ticks = 0;
 
 			@Override
-			protected long getCurrentServerTime()
-			{
+			protected long getCurrentServerTime() {
 				/*
 				 *  This will force the current server time to always be different to
 				 *  any prior invocations, this is much more elegant than simply doing
@@ -110,118 +106,100 @@ class PlayerMockTest
 	}
 
 	@AfterEach
-	public void tearDown()
-	{
+	public void tearDown() {
 		MockBukkit.unmock();
 	}
 
 	@Test
-	void getInventory_Default_NotNull()
-	{
+	void getInventory_Default_NotNull() {
 		assertNotNull(player.getInventory());
 	}
 
 	@Test
-	void testEnderChest()
-	{
+	void testEnderChest() {
 		assertTrue(player.getEnderChest() instanceof EnderChestInventoryMock);
 	}
 
 	@Test
-	void getInventory_Twice_SameInventory()
-	{
+	void getInventory_Twice_SameInventory() {
 		assertSame(player.getInventory(), player.getInventory());
 	}
 
 	@Test
-	void getName_Default_CorrectName()
-	{
+	void getName_Default_CorrectName() {
 		assertEquals("player", player.getName());
 	}
 
 	@Test
-	void getUniqueId_Default_CorrectUuid()
-	{
+	void getUniqueId_Default_CorrectUuid() {
 		assertEquals(uuid, player.getUniqueId());
 	}
 
 	@Test
-	void getGameMode_Default_Survival()
-	{
+	void getGameMode_Default_Survival() {
 		assertEquals(GameMode.SURVIVAL, player.getGameMode());
 	}
 
 	@Test
-	void setGameMode_GameModeChanged_GameModeSet()
-	{
+	void setGameMode_GameModeChanged_GameModeSet() {
 		player.setGameMode(GameMode.CREATIVE);
 		assertEquals(GameMode.CREATIVE, player.getGameMode());
 	}
 
 	@Test
-	void assertGameMode_CorrectGameMode_DoesNotAssert()
-	{
+	void assertGameMode_CorrectGameMode_DoesNotAssert() {
 		player.assertGameMode(GameMode.SURVIVAL);
 	}
 
 	@Test
-	void assertGameMode_WrongGameMode_Asserts()
-	{
+	void assertGameMode_WrongGameMode_Asserts() {
 		assertThrows(AssertionError.class, () -> player.assertGameMode(GameMode.CREATIVE));
 	}
 
 	@Test
-	void getHealth_Default_EqualsToGetMaxHealth()
-	{
+	void getHealth_Default_EqualsToGetMaxHealth() {
 		assertEquals(player.getMaxHealth(), player.getHealth(), 0);
 	}
 
 	@Test
-	void setHealth_SomeValue_HealthSetExactly()
-	{
+	void setHealth_SomeValue_HealthSetExactly() {
 		player.setHealth(15.5);
 		assertEquals(15.5, player.getHealth(), 0);
 	}
 
 	@Test
-	void setHealth_NegativeValue_ClampedAtZero()
-	{
+	void setHealth_NegativeValue_ClampedAtZero() {
 		player.setHealth(-10.0);
 		assertEquals(0, player.getHealth(), 0);
 	}
 
 	@Test
-	void setHealh_TooHighValue_ClampedAtMaxHealth()
-	{
+	void setHealh_TooHighValue_ClampedAtMaxHealth() {
 		player.setHealth(player.getMaxHealth() + 10.0);
 		assertEquals(player.getMaxHealth(), player.getHealth(), 0);
 	}
 
 	@Test
-	void getMaxHealth_Default_20()
-	{
+	void getMaxHealth_Default_20() {
 		assertEquals(20.0, player.getMaxHealth(), 0);
 	}
 
 	@Test
-	void setMaxHealth_Decreased_HealthAndMaxHealthSet()
-	{
+	void setMaxHealth_Decreased_HealthAndMaxHealthSet() {
 		player.setMaxHealth(10.0);
 		assertEquals(10.0, player.getMaxHealth(), 0);
 		assertEquals(10.0, player.getHealth(), 0);
 	}
 
 	@Test
-	void setMaxHealth_Increased_MaxHealthSet()
-	{
+	void setMaxHealth_Increased_MaxHealthSet() {
 		player.setMaxHealth(30.0);
 		assertEquals(30.0, player.getMaxHealth(), 0);
 		assertEquals(20.0, player.getHealth(), 0);
 	}
 
 	@Test
-	void resetMaxHealth_MaxHealthChanged_ResetsBackTo20()
-	{
+	void resetMaxHealth_MaxHealthChanged_ResetsBackTo20() {
 		player.setMaxHealth(30.0);
 		player.setHealth(30.0);
 		player.resetMaxHealth();
@@ -230,8 +208,7 @@ class PlayerMockTest
 	}
 
 	@Test
-	void damage_LessThanHealth_DamageTaken()
-	{
+	void damage_LessThanHealth_DamageTaken() {
 		double health = player.getHealth();
 		player.damage(5.0);
 		assertEquals(health - 5.0, player.getHealth(), 0);
@@ -239,8 +216,7 @@ class PlayerMockTest
 	}
 
 	@Test
-	void damage_MoreThanHealth_ClampedAtZeroAndDeathEvent()
-	{
+	void damage_MoreThanHealth_ClampedAtZeroAndDeathEvent() {
 		player.damage(50.0, player);
 		assertEquals(0, player.getHealth(), 0);
 		assertTrue(player.isDead());
@@ -249,8 +225,7 @@ class PlayerMockTest
 	}
 
 	@Test
-	void damage_ExactlyHealth_ZeroAndDeathEvent()
-	{
+	void damage_ExactlyHealth_ZeroAndDeathEvent() {
 		player.damage(player.getHealth());
 		assertEquals(0, player.getHealth(), 0);
 		assertTrue(player.isDead());
@@ -259,30 +234,26 @@ class PlayerMockTest
 	}
 
 	@Test
-	void getAttribute_HealthAttribute_IsMaximumHealth()
-	{
+	void getAttribute_HealthAttribute_IsMaximumHealth() {
 		assertEquals(20.0, player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getDefaultValue(), 0);
 	}
 
 	@Test
-	void getOpenInventory_NoneOpened_Null()
-	{
+	void getOpenInventory_NoneOpened_Null() {
 		InventoryView view = player.getOpenInventory();
 		assertNotNull(player.getOpenInventory());
 		assertEquals(InventoryType.CRAFTING, view.getType());
 	}
 
 	@Test
-	void getOpenInventory_InventorySet_InventorySet()
-	{
+	void getOpenInventory_InventorySet_InventorySet() {
 		InventoryViewMock inventory = new SimpleInventoryViewMock();
 		player.openInventory(inventory);
 		assertSame(inventory, player.getOpenInventory());
 	}
 
 	@Test
-	void openInventory_NothingSet_InventoryViewSet()
-	{
+	void openInventory_NothingSet_InventoryViewSet() {
 		InventoryMock inventory = new ChestInventoryMock(null, 9);
 		InventoryView view = player.openInventory(inventory);
 		assertNotNull(view);
@@ -292,16 +263,14 @@ class PlayerMockTest
 	}
 
 	@Test
-	void closeInventory_NoneInventory_CraftingView()
-	{
+	void closeInventory_NoneInventory_CraftingView() {
 		InventoryView view = player.getOpenInventory();
 		assertNotNull(view);
 		assertEquals(InventoryType.CRAFTING, view.getType());
 	}
 
 	@Test
-	void performCommand_PerformsCommand()
-	{
+	void performCommand_PerformsCommand() {
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
 		plugin.commandReturns = true;
 		assertTrue(player.performCommand("mockcommand argA argB"));
@@ -311,8 +280,7 @@ class PlayerMockTest
 	}
 
 	@Test
-	void simulateBlockBreak_Survival_BlockBroken()
-	{
+	void simulateBlockBreak_Survival_BlockBroken() {
 		MockBukkit.load(TestPlugin.class);
 		player.setGameMode(GameMode.SURVIVAL);
 		BlockMock block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
@@ -326,8 +294,7 @@ class PlayerMockTest
 	}
 
 	@Test
-	void simulateBlockBreak_Creative_BlockBroken()
-	{
+	void simulateBlockBreak_Creative_BlockBroken() {
 		MockBukkit.load(TestPlugin.class);
 		player.setGameMode(GameMode.CREATIVE);
 		BlockMock block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
@@ -340,8 +307,7 @@ class PlayerMockTest
 	}
 
 	@Test
-	void simulateBlockBreak_Spectator_BlockNotBroken()
-	{
+	void simulateBlockBreak_Spectator_BlockNotBroken() {
 		MockBukkit.load(TestPlugin.class);
 		player.setGameMode(GameMode.SPECTATOR);
 		BlockMock block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
@@ -351,8 +317,7 @@ class PlayerMockTest
 	}
 
 	@Test
-	void simulateBlockBreak_Adventure_BlockNotBroken()
-	{
+	void simulateBlockBreak_Adventure_BlockNotBroken() {
 		MockBukkit.load(TestPlugin.class);
 		player.setGameMode(GameMode.ADVENTURE);
 		BlockMock block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
@@ -362,14 +327,11 @@ class PlayerMockTest
 	}
 
 	@Test
-	void simulateBlockBreak_BreakCancelled_BlockNotBroken()
-	{
+	void simulateBlockBreak_BreakCancelled_BlockNotBroken() {
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
-		Bukkit.getPluginManager().registerEvents(new Listener()
-		{
+		Bukkit.getPluginManager().registerEvents(new Listener() {
 			@EventHandler
-			public void onBlockBreak(BlockBreakEvent event)
-			{
+			public void onBlockBreak(BlockBreakEvent event) {
 				event.setCancelled(true);
 			}
 		}, plugin);
@@ -382,14 +344,11 @@ class PlayerMockTest
 	}
 
 	@Test
-	void simulateBlockBreak_SurvivalAndDamageCancelled_BlockNotBroken()
-	{
+	void simulateBlockBreak_SurvivalAndDamageCancelled_BlockNotBroken() {
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
-		Bukkit.getPluginManager().registerEvents(new Listener()
-		{
+		Bukkit.getPluginManager().registerEvents(new Listener() {
 			@EventHandler
-			public void onBlockDamage(BlockDamageEvent event)
-			{
+			public void onBlockDamage(BlockDamageEvent event) {
 				event.setCancelled(true);
 			}
 		}, plugin);
@@ -400,15 +359,12 @@ class PlayerMockTest
 	}
 
 	@Test
-	void simulateBlockBreak_CreativeAndBreakCancelled_BlockNotBroken()
-	{
+	void simulateBlockBreak_CreativeAndBreakCancelled_BlockNotBroken() {
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
 		player.setGameMode(GameMode.CREATIVE);
-		Bukkit.getPluginManager().registerEvents(new Listener()
-		{
+		Bukkit.getPluginManager().registerEvents(new Listener() {
 			@EventHandler
-			public void onBlockBreak(BlockBreakEvent event)
-			{
+			public void onBlockBreak(BlockBreakEvent event) {
 				event.setCancelled(true);
 			}
 		}, plugin);
@@ -421,15 +377,12 @@ class PlayerMockTest
 	}
 
 	@Test
-	void simulateBlockBreak_CreativeAndDamageCancelled_BlockBroken()
-	{
+	void simulateBlockBreak_CreativeAndDamageCancelled_BlockBroken() {
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
 		player.setGameMode(GameMode.CREATIVE);
-		Bukkit.getPluginManager().registerEvents(new Listener()
-		{
+		Bukkit.getPluginManager().registerEvents(new Listener() {
 			@EventHandler
-			public void onBlockDamage(BlockDamageEvent event)
-			{
+			public void onBlockDamage(BlockDamageEvent event) {
 				event.setCancelled(true);
 			}
 		}, plugin);
@@ -442,8 +395,7 @@ class PlayerMockTest
 	}
 
 	@Test
-	void simulateBlockDamage_Survival_BlockDamaged()
-	{
+	void simulateBlockDamage_Survival_BlockDamaged() {
 		player.setGameMode(GameMode.SURVIVAL);
 		BlockMock block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
 		BlockDamageEvent event = player.simulateBlockDamage(block);
@@ -453,30 +405,25 @@ class PlayerMockTest
 
 	@ParameterizedTest
 	@EnumSource(value = GameMode.class, mode = EnumSource.Mode.EXCLUDE, names = {"SURVIVAL"})
-	void simulateBlockDamage_NotSurvival_BlockNotDamaged(GameMode nonSurvivalGameMode)
-	{
+	void simulateBlockDamage_NotSurvival_BlockNotDamaged(GameMode nonSurvivalGameMode) {
 		player.setGameMode(nonSurvivalGameMode);
 		Block block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
 		assertNull(player.simulateBlockDamage(block), "Block was damaged while in gamemode " + nonSurvivalGameMode.name());
 	}
 
 	@Test
-	void simulateBlockDamage_NotInstaBreak_NotBroken()
-	{
+	void simulateBlockDamage_NotInstaBreak_NotBroken() {
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
 		player.setGameMode(GameMode.SURVIVAL);
 		AtomicBoolean wasBroken = new AtomicBoolean();
-		Bukkit.getPluginManager().registerEvents(new Listener()
-		{
+		Bukkit.getPluginManager().registerEvents(new Listener() {
 			@EventHandler
-			public void onBlockDamage(BlockDamageEvent event)
-			{
+			public void onBlockDamage(BlockDamageEvent event) {
 				event.setInstaBreak(false);
 			}
 
 			@EventHandler
-			public void onBlockBreak(BlockBreakEvent event)
-			{
+			public void onBlockBreak(BlockBreakEvent event) {
 				wasBroken.set(true);
 			}
 		}, plugin);
@@ -493,22 +440,18 @@ class PlayerMockTest
 	}
 
 	@Test
-	void simulateBlockDamage_InstaBreak_Broken()
-	{
+	void simulateBlockDamage_InstaBreak_Broken() {
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
 		player.setGameMode(GameMode.SURVIVAL);
 		AtomicInteger brokenCount = new AtomicInteger();
-		Bukkit.getPluginManager().registerEvents(new Listener()
-		{
+		Bukkit.getPluginManager().registerEvents(new Listener() {
 			@EventHandler
-			public void onBlockDamage(BlockDamageEvent event)
-			{
+			public void onBlockDamage(BlockDamageEvent event) {
 				event.setInstaBreak(true);
 			}
 
 			@EventHandler
-			public void onBlockBreak(BlockBreakEvent event)
-			{
+			public void onBlockBreak(BlockBreakEvent event) {
 				brokenCount.incrementAndGet();
 			}
 		}, plugin);
@@ -524,22 +467,18 @@ class PlayerMockTest
 	}
 
 	@Test
-	void simulateBlockBreak_InstaBreak_BreakEventOnlyFiredOnce()
-	{
+	void simulateBlockBreak_InstaBreak_BreakEventOnlyFiredOnce() {
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
 		player.setGameMode(GameMode.SURVIVAL);
 		AtomicInteger brokenCount = new AtomicInteger();
-		Bukkit.getPluginManager().registerEvents(new Listener()
-		{
+		Bukkit.getPluginManager().registerEvents(new Listener() {
 			@EventHandler
-			public void onBlockDamage(BlockDamageEvent event)
-			{
+			public void onBlockDamage(BlockDamageEvent event) {
 				event.setInstaBreak(true);
 			}
 
 			@EventHandler
-			public void onBlockBreak(BlockBreakEvent event)
-			{
+			public void onBlockBreak(BlockBreakEvent event) {
 				brokenCount.incrementAndGet();
 			}
 		}, plugin);
@@ -554,15 +493,13 @@ class PlayerMockTest
 	}
 
 	@Test
-	void getDisplayName_Default_SameAsPlayerUsername()
-	{
+	void getDisplayName_Default_SameAsPlayerUsername() {
 		assertEquals(player.getName(), player.getDisplayName());
 		assertEquals(player.getDisplayName(), player.getCustomName());
 	}
 
 	@Test
-	void getDisplayName_NameSet_NameSet()
-	{
+	void getDisplayName_NameSet_NameSet() {
 		player.setDisplayName("Some Display Name");
 		player.setCustomName("Some Custom Name");
 		assertEquals("Some Display Name", player.getDisplayName());
@@ -571,109 +508,96 @@ class PlayerMockTest
 	}
 
 	@Test
-	void getPlayerListName_Default_SameAsPlayerUsername()
-	{
+	void getPlayerListName_Default_SameAsPlayerUsername() {
 		assertEquals(player.getName(), player.getPlayerListName());
 	}
 
 	@Test
-	void getPlayerListName_NameSet_NameSet()
-	{
+	void getPlayerListName_NameSet_NameSet() {
 		player.setPlayerListName("Some Name");
 		assertEquals("Some Name", player.getPlayerListName());
 	}
 
 	@Test
-	void chat_AnyMessage_AsyncEventFired()
-	{
+	void chat_AnyMessage_AsyncEventFired() {
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
 		Bukkit.getPluginManager().registerEvents(plugin, plugin);
 		player.chat("A message");
-		try
-		{
+		try {
 			plugin.barrier.await(3, TimeUnit.SECONDS);
-		}
-		catch (InterruptedException | BrokenBarrierException e)
-		{
-		}
-		catch (TimeoutException e)
-		{
+		} catch (InterruptedException | BrokenBarrierException e) {
+		} catch (TimeoutException e) {
 			fail("Async event was not fired");
 		}
 		assertTrue(plugin.asyncEventExecuted);
 	}
 
 	@Test
-	void getLevel_Default_EqualsZero()
-	{
+	void testSendTitle() {
+		player.sendTitle("test1", "test2");
+		assertEquals("test1", player.nextTitle());
+		assertEquals("test2", player.nextSubTitle());
+	}
+
+	@Test
+	void getLevel_Default_EqualsZero() {
 		assertEquals(0, player.getLevel());
 	}
 
 	@Test
-	void getExp_Default_EqualsZero()
-	{
+	void getExp_Default_EqualsZero() {
 		assertEquals(0, player.getExp(), 0);
 	}
 
 	@Test
-	void getTotalExperience_Default_EqualsZero()
-	{
+	void getTotalExperience_Default_EqualsZero() {
 		assertEquals(0, player.getTotalExperience());
 	}
 
 	@Test
-	void setLevel_SomeValue_LevelSetExactly()
-	{
+	void setLevel_SomeValue_LevelSetExactly() {
 		player.setLevel(15);
 		assertEquals(15, player.getLevel());
 	}
 
 	@Test
-	void setExp_SomeValue_LevelSetExactly()
-	{
+	void setExp_SomeValue_LevelSetExactly() {
 		player.setExp(0.5F);
 		assertEquals(0.5, player.getExp(), 0.5);
 	}
 
 	@Test
-	void setExp_GreaterThanOne_ExceptionThrown()
-	{
+	void setExp_GreaterThanOne_ExceptionThrown() {
 		assertThrows(IllegalArgumentException.class, () -> player.setExp(1.1F));
 	}
 
 	@Test
-	void setExp_LessThanZero_ExceptionThrown()
-	{
+	void setExp_LessThanZero_ExceptionThrown() {
 		assertThrows(IllegalArgumentException.class, () -> player.setExp(-1.0F));
 	}
 
 	@Test
-	void setTotalExperience_SomeValue_TotalExpSetExactly()
-	{
+	void setTotalExperience_SomeValue_TotalExpSetExactly() {
 		player.setTotalExperience(100);
 		assertEquals(100, player.getTotalExperience());
 	}
 
 	@Test
-	void setTotalExperience_NegativeValue_ClampedAtZero()
-	{
+	void setTotalExperience_NegativeValue_ClampedAtZero() {
 		player.setTotalExperience(-200);
 		assertEquals(0, player.getTotalExperience(), 0);
 	}
 
 	@Test
-	void getExpToLevel_CorrectExp()
-	{
-		for (int i = 0; i < expRequired.length; i++)
-		{
+	void getExpToLevel_CorrectExp() {
+		for (int i = 0; i < expRequired.length; i++) {
 			player.setLevel(i);
 			assertEquals(expRequired[i], player.getExpToLevel());
 		}
 	}
 
 	@Test
-	void giveExpLevel_Negative_ClampedAtZero()
-	{
+	void giveExpLevel_Negative_ClampedAtZero() {
 		player.setExp(0.5F);
 		player.setLevel(1);
 		player.giveExpLevels(-100);
@@ -682,10 +606,8 @@ class PlayerMockTest
 	}
 
 	@Test
-	void giveExp_SomeExp_IncreaseLevel()
-	{
-		for (int i = 0; i < expRequired.length; i++)
-		{
+	void giveExp_SomeExp_IncreaseLevel() {
+		for (int i = 0; i < expRequired.length; i++) {
 			assertEquals(0, player.getExp(), 0);
 			player.giveExp(expRequired[i]);
 			assertEquals(i + 1, player.getLevel());
@@ -693,16 +615,14 @@ class PlayerMockTest
 	}
 
 	@Test
-	void giveExp_SomeExp_IncreaseMultipleLevels()
-	{
+	void giveExp_SomeExp_IncreaseMultipleLevels() {
 		player.giveExp(expRequired[0] + expRequired[1] + expRequired[2]);
 		assertEquals(3, player.getLevel());
 		assertEquals(expRequired[0] + expRequired[1] + expRequired[2], player.getTotalExperience(), 0);
 	}
 
 	@Test
-	void giveExp_SomeExp_DecreaseLevel()
-	{
+	void giveExp_SomeExp_DecreaseLevel() {
 		player.giveExp(expRequired[0] + expRequired[1]);
 		player.giveExp(-expRequired[1]);
 		assertEquals(1, player.getLevel());
@@ -710,8 +630,7 @@ class PlayerMockTest
 	}
 
 	@Test
-	void giveExp_SomeExp_DecreaseMultipleLevels()
-	{
+	void giveExp_SomeExp_DecreaseMultipleLevels() {
 		player.giveExp(expRequired[0] + expRequired[1]);
 		player.giveExp(-(expRequired[0] + expRequired[1]));
 		assertEquals(0, player.getLevel());
@@ -719,21 +638,17 @@ class PlayerMockTest
 	}
 
 	@Test
-	void giveExp_SomeLevelChange_LevelEventFired()
-	{
+	void giveExp_SomeLevelChange_LevelEventFired() {
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
 		AtomicInteger levelCount = new AtomicInteger();
-		Bukkit.getPluginManager().registerEvents(new Listener()
-		{
+		Bukkit.getPluginManager().registerEvents(new Listener() {
 			@EventHandler
-			public void onLevelChangeEvent(PlayerLevelChangeEvent event)
-			{
+			public void onLevelChangeEvent(PlayerLevelChangeEvent event) {
 				levelCount.incrementAndGet();
 			}
 
 			@EventHandler
-			public void onExpChangeEvent(PlayerExpChangeEvent event)
-			{
+			public void onExpChangeEvent(PlayerExpChangeEvent event) {
 				fail("PlayerExpChangeEvent should not be called");
 			}
 		}, plugin);
@@ -742,21 +657,17 @@ class PlayerMockTest
 	}
 
 	@Test
-	void giveExp_NoExpChange_NoEventFired()
-	{
+	void giveExp_NoExpChange_NoEventFired() {
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
 
-		Bukkit.getPluginManager().registerEvents(new Listener()
-		{
+		Bukkit.getPluginManager().registerEvents(new Listener() {
 			@EventHandler
-			public void onLevelChangeEvent(PlayerLevelChangeEvent event)
-			{
+			public void onLevelChangeEvent(PlayerLevelChangeEvent event) {
 				fail("PlayerLevelChangeEvent should not be called");
 			}
 
 			@EventHandler
-			public void onExpChangeEvent(PlayerExpChangeEvent event)
-			{
+			public void onExpChangeEvent(PlayerExpChangeEvent event) {
 				fail("PlayerExpChangeEvent should not be called");
 			}
 		}, plugin);
@@ -765,63 +676,54 @@ class PlayerMockTest
 	}
 
 	@Test
-	void getFood_LevelDefault20()
-	{
+	void getFood_LevelDefault20() {
 		int foodLevel = player.getFoodLevel();
 		assertEquals(20, foodLevel);
 	}
 
 	@Test
-	void getFood_LevelChange()
-	{
+	void getFood_LevelChange() {
 		player.setFoodLevel(10);
 		assertEquals(10, player.getFoodLevel());
 	}
 
 	@Test
-	void getPlayer_SneakingDefault()
-	{
+	void getPlayer_SneakingDefault() {
 		boolean sneaking = player.isSneaking();
 		assertFalse(sneaking);
 	}
 
 	@Test
-	void getPlayer_SneakingChange()
-	{
+	void getPlayer_SneakingChange() {
 		player.setSneaking(true);
 		assertTrue(player.isSneaking());
 	}
 
 	@Test
-	void getPlayer_SneakingEyeHeight()
-	{
+	void getPlayer_SneakingEyeHeight() {
 		player.setSneaking(true);
 		assertNotEquals(player.getEyeHeight(), player.getEyeHeight(true));
 	}
 
 	@Test
-	void getPlayer_EyeLocationDiffers()
-	{
+	void getPlayer_EyeLocationDiffers() {
 		assertNotEquals(player.getEyeLocation(), player.getLocation());
 	}
 
 	@Test
-	void dispatchPlayer_PlayerJoinEventFired()
-	{
+	void dispatchPlayer_PlayerJoinEventFired() {
 		server.addPlayer();
 		PluginManagerMock pluginManager = server.getPluginManager();
 		pluginManager.assertEventFired(event -> event instanceof PlayerJoinEvent);
 	}
 
 	@Test
-	void testCompassDefaultTargetSpawnLocation()
-	{
+	void testCompassDefaultTargetSpawnLocation() {
 		assertEquals(player.getCompassTarget(), player.getLocation());
 	}
 
 	@Test
-	void testSetCompassTarget()
-	{
+	void testSetCompassTarget() {
 		Location loc = new Location(player.getWorld(), 12345678, 100, 12345678);
 
 		player.setCompassTarget(loc);
@@ -832,8 +734,7 @@ class PlayerMockTest
 	}
 
 	@Test
-	void testBedSpawnLocation()
-	{
+	void testBedSpawnLocation() {
 		Location loc = new Location(player.getWorld(), 400, 80, 400);
 		loc.getBlock().setType(Material.LIGHT_BLUE_BED);
 
@@ -847,8 +748,7 @@ class PlayerMockTest
 	}
 
 	@Test
-	void testBedSpawnLocationForce()
-	{
+	void testBedSpawnLocationForce() {
 		Location loc = new Location(player.getWorld(), 400, 80, 400);
 
 		// Location is not actually a Bed and it should fail
@@ -861,8 +761,7 @@ class PlayerMockTest
 	}
 
 	@Test
-	void testBedSpawnLocationRespawn()
-	{
+	void testBedSpawnLocationRespawn() {
 		Location loc = new Location(player.getWorld(), 1230, 100, -421310);
 		assertNotEquals(loc, player.getLocation());
 
@@ -876,8 +775,7 @@ class PlayerMockTest
 	}
 
 	@Test
-	void testKeepInventoryFalse()
-	{
+	void testKeepInventoryFalse() {
 		World world = player.getWorld();
 		world.setGameRule(GameRule.KEEP_INVENTORY, false);
 
@@ -890,8 +788,7 @@ class PlayerMockTest
 	}
 
 	@Test
-	void testKeepInventoryTrue()
-	{
+	void testKeepInventoryTrue() {
 		World world = player.getWorld();
 		world.setGameRule(GameRule.KEEP_INVENTORY, true);
 
@@ -904,8 +801,7 @@ class PlayerMockTest
 	}
 
 	@Test
-	void testRespawnEventFired()
-	{
+	void testRespawnEventFired() {
 		player.setHealth(0);
 		assertTrue(player.isDead());
 
@@ -918,8 +814,7 @@ class PlayerMockTest
 	}
 
 	@Test
-	void testPlaySound()
-	{
+	void testPlaySound() {
 		Sound sound = Sound.ENTITY_SLIME_SQUISH;
 		float volume = 1;
 		float pitch = 1;
@@ -928,13 +823,12 @@ class PlayerMockTest
 		player.assertSoundHeard(sound, audio ->
 		{
 			return player.getLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.AMBIENT
-			&& audio.getVolume() == volume && audio.getPitch() == pitch;
+					&& audio.getVolume() == volume && audio.getPitch() == pitch;
 		});
 	}
 
 	@Test
-	void testPlaySoundString()
-	{
+	void testPlaySoundString() {
 		String sound = "epic.mockbukkit.theme.song";
 		float volume = 0.25F;
 		float pitch = 0.75F;
@@ -943,25 +837,23 @@ class PlayerMockTest
 		player.assertSoundHeard(sound, audio ->
 		{
 			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
-			&& audio.getVolume() == volume && audio.getPitch() == pitch;
+					&& audio.getVolume() == volume && audio.getPitch() == pitch;
 		});
 	}
 
 	@Test
-	void testCloseInventoryEvenFired()
-	{
+	void testCloseInventoryEvenFired() {
 		Inventory inv = server.createInventory(null, 36);
 		player.openInventory(inv);
 		player.setItemOnCursor(new ItemStack(Material.PUMPKIN));
 		player.closeInventory();
 		server.getPluginManager().assertEventFired(InventoryCloseEvent.class,
-		        e -> e.getPlayer() == player && e.getInventory() == inv);
+				e -> e.getPlayer() == player && e.getInventory() == inv);
 		assertTrue(player.getItemOnCursor().getType().isAir());
 	}
 
 	@Test
-	void testSaturation()
-	{
+	void testSaturation() {
 		// Default level
 		assertEquals(5.0F, player.getSaturation(), 0.1F);
 
@@ -976,8 +868,7 @@ class PlayerMockTest
 	}
 
 	@Test
-	void testPotionEffects()
-	{
+	void testPotionEffects() {
 		PotionEffect effect = new PotionEffect(PotionEffectType.CONFUSION, 3, 1);
 		assertTrue(player.addPotionEffect(effect));
 
@@ -993,30 +884,26 @@ class PlayerMockTest
 	}
 
 	@Test
-	void testInstantEffect()
-	{
+	void testInstantEffect() {
 		PotionEffect instant = new PotionEffect(PotionEffectType.HEAL, 0, 1);
 		assertTrue(player.addPotionEffect(instant));
 		assertFalse(player.hasPotionEffect(instant.getType()));
 	}
 
 	@Test
-	void testMultiplePotionEffects()
-	{
+	void testMultiplePotionEffects() {
 		Collection<PotionEffect> effects = Arrays.asList(new PotionEffect(PotionEffectType.BAD_OMEN, 3, 1),
-		                                   new PotionEffect(PotionEffectType.LUCK, 5, 2));
+				new PotionEffect(PotionEffectType.LUCK, 5, 2));
 
 		assertTrue(player.addPotionEffects(effects));
 
-		for (PotionEffect effect : effects)
-		{
+		for (PotionEffect effect : effects) {
 			assertTrue(player.hasPotionEffect(effect.getType()));
 		}
 	}
 
 	@Test
-	void testFirstPlayed() throws InterruptedException
-	{
+	void testFirstPlayed() throws InterruptedException {
 		PlayerMock player = new PlayerMock(server, "FirstPlayed123");
 
 		assertFalse(player.hasPlayedBefore());
@@ -1038,16 +925,14 @@ class PlayerMockTest
 	}
 
 	@Test
-	void testIllegalArgumentForSpawning()
-	{
+	void testIllegalArgumentForSpawning() {
 		World world = new WorldMock();
 		Location location = new Location(world, 300, 100, 300);
 		assertThrows(IllegalArgumentException.class, () -> world.spawnEntity(location, EntityType.PLAYER));
 	}
 
 	@Test
-	void testSetRemainingAir()
-	{
+	void testSetRemainingAir() {
 		player.setRemainingAir(10);
 		assertEquals(10, player.getRemainingAir());
 
@@ -1061,8 +946,7 @@ class PlayerMockTest
 	}
 
 	@Test
-	void testSetMaximumAir()
-	{
+	void testSetMaximumAir() {
 		player.setMaximumAir(10);
 		assertEquals(10, player.getMaximumAir());
 
@@ -1072,8 +956,7 @@ class PlayerMockTest
 	}
 
 	@Test
-	void testSimulateBlockPlaceValid()
-	{
+	void testSimulateBlockPlaceValid() {
 		Location location = new Location(player.getWorld(), 0, 100, 0);
 		GameMode originalGM = player.getGameMode();
 		player.setGameMode(GameMode.SURVIVAL);
@@ -1084,8 +967,7 @@ class PlayerMockTest
 	}
 
 	@Test
-	void testSimulateBlockPlaceInvalid()
-	{
+	void testSimulateBlockPlaceInvalid() {
 		Location location = new Location(player.getWorld(), 0, 100, 0);
 		GameMode originalGM = player.getGameMode();
 		player.setGameMode(GameMode.ADVENTURE);
@@ -1095,8 +977,7 @@ class PlayerMockTest
 	}
 
 	@Test
-	void testSimulatePlayerMove()
-	{
+	void testSimulatePlayerMove() {
 		World world = server.addSimpleWorld("world");
 		player.setLocation(new Location(world, 0, 0, 0));
 		PlayerMoveEvent event = player.simulatePlayerMove(new Location(world, 10, 0, 0));
@@ -1106,14 +987,11 @@ class PlayerMockTest
 	}
 
 	@Test
-	void testSimulatePlayerMove_EventCancelled()
-	{
+	void testSimulatePlayerMove_EventCancelled() {
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
-		Bukkit.getPluginManager().registerEvents(new Listener()
-		{
+		Bukkit.getPluginManager().registerEvents(new Listener() {
 			@EventHandler
-			public void onPlayerMove(PlayerMoveEvent event)
-			{
+			public void onPlayerMove(PlayerMoveEvent event) {
 				event.setCancelled(true);
 			}
 		}, plugin);
@@ -1126,15 +1004,12 @@ class PlayerMockTest
 	}
 
 	@Test
-	void testSimulatePlayerMove_WithTeleportation()
-	{
+	void testSimulatePlayerMove_WithTeleportation() {
 		final Location teleportLocation = player.getLocation().add(10, 10, 10);
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
-		Bukkit.getPluginManager().registerEvents(new Listener()
-		{
+		Bukkit.getPluginManager().registerEvents(new Listener() {
 			@EventHandler
-			public void onPlayerMove(PlayerMoveEvent event)
-			{
+			public void onPlayerMove(PlayerMoveEvent event) {
 				event.getPlayer().teleport(teleportLocation);
 			}
 		}, plugin);
@@ -1144,22 +1019,19 @@ class PlayerMockTest
 	}
 
 	@Test
-	void testSprint()
-	{
+	void testSprint() {
 		player.setSprinting(true);
 		assertTrue(player.isSprinting());
 	}
 
 	@Test
-	void testFly()
-	{
+	void testFly() {
 		player.setFlying(true);
 		assertTrue(player.isFlying());
 	}
 
 	@Test
-	void testSneakEventFired()
-	{
+	void testSneakEventFired() {
 		PlayerToggleSneakEvent event = player.simulateSneak(true);
 		assertNotNull(event);
 		assertTrue(player.isSneaking());
@@ -1167,8 +1039,7 @@ class PlayerMockTest
 	}
 
 	@Test
-	void testSprintEventFired()
-	{
+	void testSprintEventFired() {
 		PlayerToggleSprintEvent event = player.simulateSprint(true);
 		assertNotNull(event);
 		assertTrue(player.isSprinting());
@@ -1176,8 +1047,7 @@ class PlayerMockTest
 	}
 
 	@Test
-	void testFlightEventFired()
-	{
+	void testFlightEventFired() {
 		PlayerToggleFlightEvent event = player.simulateToggleFlight(true);
 		assertNotNull(event);
 		assertTrue(player.isFlying());
@@ -1185,16 +1055,14 @@ class PlayerMockTest
 	}
 
 	@Test
-	public void testPlayerHide_InitialState()
-	{
+	public void testPlayerHide_InitialState() {
 		PlayerMock player2 = server.addPlayer();
 		assertTrue(player.canSee(player2));
 	}
 
 	@SuppressWarnings("deprecation")
 	@Test
-	public void testPlayerHide_OldImplementation()
-	{
+	public void testPlayerHide_OldImplementation() {
 		PlayerMock player2 = server.addPlayer();
 		player.hidePlayer(player2);
 		assertFalse(player.canSee(player2));
@@ -1203,8 +1071,7 @@ class PlayerMockTest
 	}
 
 	@Test
-	public void testPlayerHide_NewImplementation()
-	{
+	public void testPlayerHide_NewImplementation() {
 		MockPlugin plugin1 = MockBukkit.createMockPlugin("plugin1");
 		PlayerMock player2 = server.addPlayer();
 		player.hidePlayer(plugin1, player2);
@@ -1214,8 +1081,7 @@ class PlayerMockTest
 	}
 
 	@Test
-	public void testPlayerHide_OldAndNewPluginWorksSimultaneously()
-	{
+	public void testPlayerHide_OldAndNewPluginWorksSimultaneously() {
 		MockPlugin plugin1 = MockBukkit.createMockPlugin("plugin1");
 		PlayerMock player2 = server.addPlayer();
 		player.hidePlayer(plugin1, player2);
@@ -1228,8 +1094,7 @@ class PlayerMockTest
 
 	@Deprecated
 	@Test
-	public void testPlayerHide_EachOtherTest()
-	{
+	public void testPlayerHide_EachOtherTest() {
 		MockPlugin plugin1 = MockBukkit.createMockPlugin("plugin1");
 		MockPlugin plugin2 = MockBukkit.createMockPlugin("plugin2");
 		PlayerMock player2 = server.addPlayer();
@@ -1249,8 +1114,7 @@ class PlayerMockTest
 
 	@Deprecated
 	@Test
-	public void testPlayerHide_HideCommandIssuedMultipleTimesOld()
-	{
+	public void testPlayerHide_HideCommandIssuedMultipleTimesOld() {
 		PlayerMock player2 = server.addPlayer();
 		player.hidePlayer(player2);
 		player.hidePlayer(player2);
@@ -1260,8 +1124,7 @@ class PlayerMockTest
 	}
 
 	@Test
-	public void testPlayerHide_HideCommandIssuedMultipleTimesNew()
-	{
+	public void testPlayerHide_HideCommandIssuedMultipleTimesNew() {
 		MockPlugin plugin1 = MockBukkit.createMockPlugin("plugin1");
 		PlayerMock player2 = server.addPlayer();
 		player.hidePlayer(plugin1, player2);
@@ -1272,24 +1135,21 @@ class PlayerMockTest
 	}
 
 	@Test
-	public void testPlayerTeleport_WithCause_EventFired()
-	{
+	public void testPlayerTeleport_WithCause_EventFired() {
 		player.teleport(player.getLocation().add(10, 10, 10), PlayerTeleportEvent.TeleportCause.CHORUS_FRUIT);
 
 		server.getPluginManager().assertEventFired(PlayerTeleportEvent.class);
 	}
 
 	@Test
-	public void testPlayerTeleport_WithoutCause_EventFired()
-	{
+	public void testPlayerTeleport_WithoutCause_EventFired() {
 		player.teleport(player.getLocation().add(10, 10, 10));
 
 		server.getPluginManager().assertEventFired(PlayerTeleportEvent.class);
 	}
 
 	@Test
-	public void testPlayerTeleport_NotCanceled_PlayerTeleported()
-	{
+	public void testPlayerTeleport_NotCanceled_PlayerTeleported() {
 		Location teleportLocation = player.getLocation().add(10, 10, 10);
 		player.teleport(teleportLocation);
 
@@ -1297,14 +1157,11 @@ class PlayerMockTest
 	}
 
 	@Test
-	public void testPlayerTeleport_Canceled_PlayerNotTeleported()
-	{
+	public void testPlayerTeleport_Canceled_PlayerNotTeleported() {
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
-		Bukkit.getPluginManager().registerEvents(new Listener()
-		{
+		Bukkit.getPluginManager().registerEvents(new Listener() {
 			@EventHandler
-			public void onPlayerTeleport(PlayerTeleportEvent event)
-			{
+			public void onPlayerTeleport(PlayerTeleportEvent event) {
 				event.setCancelled(true);
 			}
 		}, plugin);
