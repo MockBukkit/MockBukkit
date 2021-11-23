@@ -1703,8 +1703,8 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public void sendTitle(String title, String subtitle)
 	{
-		title.add(title);
-		subtitle.add(subtitle);
+		this.title.add(title);
+		this.subitles.add(subtitle);
 	}
 
 	@Override
