@@ -135,6 +135,7 @@ public class ServerMock extends Server.Spigot implements Server
 
 	private GameMode defaultGameMode = GameMode.SURVIVAL;
 	private ConsoleCommandSender consoleSender;
+	private int spawnRadius = 16;
 
 	public ServerMock()
 	{
@@ -1056,15 +1057,13 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public int getSpawnRadius()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return spawnRadius;
 	}
 
 	@Override
-	public void setSpawnRadius(int value)
+	public void setSpawnRadius(int spawnRadius)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.spawnRadius = spawnRadius;
 	}
 
 	@Override
