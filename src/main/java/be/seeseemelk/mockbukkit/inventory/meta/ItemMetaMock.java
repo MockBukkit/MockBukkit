@@ -426,8 +426,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public boolean hasLocalizedName()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return localizedName != null;
 	}
 
 	@Override
