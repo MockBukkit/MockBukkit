@@ -284,7 +284,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	public void setLore(@Nullable List<String> lore)
 	{
 		if (lore != null && !lore.isEmpty()) {
-			this.lore = lore;
+			this.lore = new ArrayList<>(lore);
 		} else {
 			this.lore = null;
 		}
