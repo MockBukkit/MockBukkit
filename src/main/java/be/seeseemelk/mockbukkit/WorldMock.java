@@ -837,7 +837,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public <T extends Entity> T spawn(@NotNull Location location, @NotNull Class<T> clazz, Consumer<T> function)
+	public <T extends Entity> T spawn(@NotNull Location location, @NotNull Class<T> clazz, @Nullable Consumer<T> function)
 	throws IllegalArgumentException
 	{
 		T entity = spawn(location, clazz);
