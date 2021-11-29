@@ -533,7 +533,12 @@ class ServerMockTest
 		}
 	}
 
-
+	@Test
+	void testSetSpawnRadius()
+	{
+		server.setSpawnRadius(51);
+		assertEquals(51, server.getSpawnRadius());
+	}
 }
 
 class TestRecipe implements Recipe
