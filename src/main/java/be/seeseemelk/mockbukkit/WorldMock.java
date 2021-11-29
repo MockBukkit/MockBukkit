@@ -827,7 +827,7 @@ public class WorldMock implements World
 	public <T extends Entity> T spawn(@NotNull Location location, @NotNull Class<T> clazz) throws IllegalArgumentException
 	{
 		Validate.notNull(location, "The provided location must not be null.");
-		Validate.notNull(location, "The provided clazz must not be null.");
+		Validate.notNull(clazz, "The provided clazz must not be null.");
 
 		EntityMock entity = mockEntity(clazz);
 		entity.setLocation(location);
