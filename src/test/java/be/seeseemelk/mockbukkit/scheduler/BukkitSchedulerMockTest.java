@@ -6,6 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
@@ -15,11 +18,16 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.TestPlugin;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 class BukkitSchedulerMockTest
@@ -295,5 +303,41 @@ class BukkitSchedulerMockTest
 		{
 			scheduler.shutdown();
 		});
+	}
+
+	@Nested
+	class AsyncEvents
+	{
+		private ServerMock server;
+		private ChatListener listener;
+
+		@BeforeEach
+		public void setUp()
+		{
+			server = MockBukkit.mock();
+			TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+			listener = spy(new ChatListener());
+			server.getPluginManager().registerEvents(listener, plugin);
+		}
+
+		@AfterEach
+		public void tearDown()
+		{
+			MockBukkit.unmock();
+		}
+
+		@Test
+		void chat_callsAsyncChatEvent_afterWaitingForTask()
+		{
+			server.addPlayer().chat("test");
+			server.getScheduler().waitAsyncEventsFinished();
+			verify(listener).onAsyncChat(any());
+		}
+
+		public static class ChatListener implements Listener
+		{
+			@EventHandler
+			public void onAsyncChat(AsyncPlayerChatEvent event) {}
+		}
 	}
 }
