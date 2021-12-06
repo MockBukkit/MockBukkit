@@ -62,7 +62,7 @@ public final class PlayerMockFactory
 	 * @param uuid the id of the offline player
 	 * @return A newly created offline player mock object.
 	 */
-	public @NotNull OfflinePlayerMock createOfflinePlayer(UUID uuid)
+	public @NotNull OfflinePlayerMock createOfflinePlayer(@NotNull UUID uuid)
 	{
 		return new OfflinePlayerMock(uuid, getUniqueRandomName());
 	}
