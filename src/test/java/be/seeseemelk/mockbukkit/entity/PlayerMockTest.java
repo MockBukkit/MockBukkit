@@ -604,6 +604,14 @@ class PlayerMockTest
 	}
 
 	@Test
+	void testSendTitle()
+	{
+		player.sendTitle("test1", "test2");
+		assertEquals("test1", player.nextTitle());
+		assertEquals("test2", player.nextSubTitle());
+	}
+
+	@Test
 	void getLevel_Default_EqualsZero()
 	{
 		assertEquals(0, player.getLevel());
