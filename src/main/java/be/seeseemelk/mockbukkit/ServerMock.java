@@ -1111,7 +1111,7 @@ public class ServerMock extends Server.Spigot implements Server
 		}
 		else
 		{
-			return playerFactory.createRandomOfflinePlayer();
+			return playerFactory.createOfflinePlayer(id);
 		}
 	}
 
