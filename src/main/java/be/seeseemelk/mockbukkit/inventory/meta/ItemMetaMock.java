@@ -436,7 +436,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
-	public void setLocalizedName(String name)
+	public void setLocalizedName(@Nullable String name)
 	{
 		localizedName = name;
 	}
