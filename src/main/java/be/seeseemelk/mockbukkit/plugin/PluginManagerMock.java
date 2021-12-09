@@ -72,6 +72,7 @@ public class PluginManagerMock implements PluginManager
 	private final List<File> temporaryFiles = new LinkedList<>();
 	private final List<Permission> permissions = new ArrayList<>();
 	private final Map<Permissible, Set<String>> permissionSubscriptions = new HashMap<>();
+	private Map<String, List<Listener>> listeners = new HashMap<>();
 
 	private final List<Class<?>> pluginConstructorTypes = Arrays.asList(JavaPluginLoader.class,
 	        PluginDescriptionFile.class, File.class, File.class);
@@ -432,7 +433,7 @@ public class PluginManagerMock implements PluginManager
 		}
 
 		// Our Scheduler will call the Event on a dedicated Event Thread Executor
-		server.getScheduler().scheduleAsyncEventCall(event);
+		server.getScheduler().executeAsyncEvent(event);
 	}
 
 	private void callRegisteredListener(@NotNull RegisteredListener registration, @NotNull Event event)
@@ -634,11 +635,38 @@ public class PluginManagerMock implements PluginManager
 		{
 			throw new IllegalPluginAccessException("Plugin attempted to register " + listener + " while not enabled");
 		}
-
+		addListener(listener, plugin);
 		for (Map.Entry<Class<? extends Event>, Set<RegisteredListener>> entry : plugin.getPluginLoader().createRegisteredListeners(listener, plugin).entrySet())
 		{
 			getEventListeners(getRegistrationClass(entry.getKey())).registerAll(entry.getValue());
 		}
+
+	}
+
+	private void addListener(Listener listener, Plugin plugin)
+	{
+		List<Listener> l  = listeners.getOrDefault(plugin.getName(), new ArrayList<>());
+		if (!l.contains(listener))
+		{
+			l.add(listener);
+			listeners.put(plugin.getName(), l);
+		}
+	}
+
+	public void unregisterPluginEvents(Plugin plugin)
+	{
+		List<Listener> listListener  = listeners.get(plugin.getName());
+		if (listListener != null)
+		{
+			for (Listener l : listListener)
+			{
+				for (Map.Entry<Class<? extends Event>, Set<RegisteredListener>> entry : plugin.getPluginLoader().createRegisteredListeners(l, plugin).entrySet())
+				{
+					getEventListeners(getRegistrationClass(entry.getKey())).unregister(plugin);
+				}
+			}
+		}
+
 	}
 
 	@Override
@@ -660,6 +688,7 @@ public class PluginManagerMock implements PluginManager
 		{
 			throw new IllegalPluginAccessException("Plugin attempted to register " + event + " while not enabled");
 		}
+		addListener(listener, plugin);
 		getEventListeners(event).register(new RegisteredListener(listener, executor, priority, plugin, ignoreCancelled));
 	}
 
@@ -706,6 +735,7 @@ public class PluginManagerMock implements PluginManager
 		{
 			if (plugin.isEnabled())
 			{
+				unregisterPluginEvents(plugin);
 				JavaPluginUtils.setEnabled((JavaPlugin) plugin, false);
 				callEvent(new PluginDisableEvent(plugin));
 			}

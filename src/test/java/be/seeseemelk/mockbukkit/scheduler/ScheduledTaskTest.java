@@ -57,9 +57,9 @@ class ScheduledTaskTest
 	void cancel()
 	{
 		ScheduledTask task = new ScheduledTask(0, null, true, 0, null);
-		assertEquals(false, task.isCancelled());
+		assertFalse(task.isCancelled());
 		task.cancel();
-		assertEquals(true, task.isCancelled());
+		assertTrue(task.isCancelled());
 	}
 
 	@Test

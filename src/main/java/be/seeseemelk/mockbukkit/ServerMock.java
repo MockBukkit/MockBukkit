@@ -22,6 +22,7 @@ import java.util.logging.LogManager;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import org.apache.commons.lang.Validate;
 import org.bukkit.BanEntry;
 import org.bukkit.BanList;
@@ -70,6 +71,7 @@ import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.structure.StructureManager;
 import org.bukkit.util.CachedServerIcon;
 import org.jetbrains.annotations.NotNull;
 
@@ -105,11 +107,11 @@ import be.seeseemelk.mockbukkit.tags.TagRegistry;
 import be.seeseemelk.mockbukkit.tags.TagWrapperMock;
 import be.seeseemelk.mockbukkit.tags.TagsMock;
 import net.md_5.bungee.api.chat.BaseComponent;
+import org.jetbrains.annotations.Nullable;
 
-@SuppressWarnings("deprecation")
 public class ServerMock extends Server.Spigot implements Server
 {
-	private static final String BUKKIT_VERSION = "1.16.5";
+	private static final String BUKKIT_VERSION = "1.17.1";
 	private static final String JOIN_MESSAGE = "%s has joined the server.";
 	private static final String MOTD = "A Minecraft Server";
 
@@ -133,6 +135,7 @@ public class ServerMock extends Server.Spigot implements Server
 
 	private GameMode defaultGameMode = GameMode.SURVIVAL;
 	private ConsoleCommandSender consoleSender;
+	private int spawnRadius = 16;
 
 	public ServerMock()
 	{
@@ -765,6 +768,22 @@ public class ServerMock extends Server.Spigot implements Server
 		return null;
 	}
 
+	@Nullable
+	@Override
+	public Recipe getCraftingRecipe(@NotNull ItemStack[] craftingMatrix, @NotNull World world)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@NotNull
+	@Override
+	public ItemStack craftItem(@NotNull ItemStack[] craftingMatrix, @NotNull World world, @NotNull Player player)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 	@Override
 	public boolean removeRecipe(NamespacedKey key)
 	{
@@ -904,6 +923,20 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	public boolean isWhitelistEnforced()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setWhitelistEnforced(boolean value)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public Set<OfflinePlayer> getWhitelistedPlayers()
 	{
 		// TODO Auto-generated method stub
@@ -1024,15 +1057,13 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public int getSpawnRadius()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return spawnRadius;
 	}
 
 	@Override
-	public void setSpawnRadius(int value)
+	public void setSpawnRadius(int spawnRadius)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.spawnRadius = spawnRadius;
 	}
 
 	@Override
@@ -1080,7 +1111,7 @@ public class ServerMock extends Server.Spigot implements Server
 		}
 		else
 		{
-			return playerFactory.createRandomOfflinePlayer();
+			return playerFactory.createOfflinePlayer(id);
 		}
 	}
 
@@ -1210,8 +1241,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public ChunkData createChunkData(World world)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return new MockChunkData(world);
 	}
 
 	@Override
@@ -1442,6 +1472,15 @@ public class ServerMock extends Server.Spigot implements Server
 		throw new UnimplementedOperationException();
 	}
 
+	@NotNull
+	@Override
+	public StructureManager getStructureManager()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+
+	}
+
 	@Override
 	public MapView getMap(int id)
 	{
@@ -1488,10 +1527,26 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	public int getTicksPerWaterUndergroundCreatureSpawns()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+
+	}
+
+	@Override
 	public int getWaterAmbientSpawnLimit()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getWaterUndergroundCreatureSpawnLimit()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+
 	}
 
 	@Override

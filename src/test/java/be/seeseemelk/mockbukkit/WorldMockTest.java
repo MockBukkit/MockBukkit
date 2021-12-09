@@ -1,11 +1,20 @@
 package be.seeseemelk.mockbukkit;
 
+import java.util.List;
+import java.util.concurrent.BlockingQueue;
+
+import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
+import be.seeseemelk.mockbukkit.block.state.BlockStateMock;
 import be.seeseemelk.mockbukkit.block.BlockMock;
+
 import org.bukkit.Chunk;
 import org.bukkit.GameRule;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -293,21 +302,21 @@ class WorldMockTest
 	}
 
 	@Test
-	public void getLoadedChunks_EmptyWorldHasNoLoadedChunks()
+	void getLoadedChunks_EmptyWorldHasNoLoadedChunks()
 	{
 		WorldMock world = new WorldMock();
 		assertEquals(0, world.getLoadedChunks().length);
 	}
 
 	@Test
-	public void isChunkLoaded_IsFalseForUnloadedChunk()
+	void isChunkLoaded_IsFalseForUnloadedChunk()
 	{
 		WorldMock world = new WorldMock();
 		assertFalse(world.isChunkLoaded(0, 0));
 	}
 
 	@Test
-	public void isChunkloaded_IsTrueForLoadedChunk()
+	void isChunkloaded_IsTrueForLoadedChunk()
 	{
 		WorldMock world = new WorldMock();
 		BlockMock block = world.getBlockAt(64, 64, 64);
@@ -322,5 +331,45 @@ class WorldMockTest
 		WorldMock worldMock = new WorldMock();
 
 		assertNotNull(worldMock.getWorldBorder());
+	}
+  
+  @Test
+	void getBlockState_ChangeBlock()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertEquals(Material.DIRT, world.getType(0, 1, 0));
+		Location location = new Location(world, 0, 1, 0);
+		Block block = world.getBlockAt(0, 1, 0);
+		BlockMock block2 = new BlockMock();
+		block2.setBlockData(block.getBlockData());
+		BlockStateMock state = BlockStateMock.mockState(block);
+		block2.setState(state);
+		assertEquals(block2.getState().getType(), world.getBlockState(0, 1, 0).getType());
+		assertEquals(block2.getState().getType(), world.getBlockState(location).getType());
+
+	}
+
+	@Test
+	void setBlock_ChangeBlock()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Location location = new Location(world, 0, 1, 0);
+		Block block = world.getBlockAt(0, 1, 0);
+		BlockData data = block.getBlockData();
+		assertEquals(data.getMaterial(), world.getBlockData(location).getMaterial());
+		BlockDataMock mock = new BlockDataMock(Material.GRASS);
+		BlockDataMock mock2 = new BlockDataMock(Material.GRASS_BLOCK);
+		world.setBlockData(location, mock);
+		assertEquals(Material.GRASS, world.getBlockData(location).getMaterial());
+		assertEquals(Material.GRASS, world.getBlockData(0, 1, 0).getMaterial());
+		assertEquals(Material.GRASS, world.getType(0, 1, 0));
+		world.setBlockData(0, 1, 0, mock2) ;
+		assertEquals(Material.GRASS_BLOCK, world.getBlockData(location).getMaterial());
+		assertEquals(Material.GRASS_BLOCK, world.getType(location));
+		world.setType(location, Material.BEDROCK);
+		assertEquals(Material.BEDROCK, world.getType(location));
+		world.setType(0, 1, 0, Material.DIRT);
+		assertEquals(Material.DIRT, world.getType(location));
+
 	}
 }

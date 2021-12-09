@@ -83,6 +83,20 @@ public class SignMock extends TileStateMock implements Sign
 	}
 
 	@Override
+	public boolean isGlowingText()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setGlowingText(boolean glowing)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public DyeColor getColor()
 	{
 		// TODO Auto-generated method stub

@@ -51,6 +51,10 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
 	private boolean operator = false;
 	private String name = "entity";
+	private String customName = null;
+	private boolean customNameVisible = false;
+	private boolean invulnerable;
+	private boolean glowingFlag = false;
 	private final Queue<String> messages = new LinkedTransferQueue<>();
 	private final Set<PermissionAttachment> permissionAttachments = new HashSet<>();
 	private Vector velocity = new Vector(0, 0, 0);
@@ -427,15 +431,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public String getCustomName()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return customName;
 	}
 
 	@Override
 	public void setCustomName(String name)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		customName = name;
 	}
 
 	@Override
@@ -501,6 +503,48 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	public void setFireTicks(int ticks)
 	{
 		this.fireTicks = ticks;
+	}
+
+	@Override
+	public void setVisualFire(boolean fire)
+	{
+		// TODO Auto-generated constructor stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isVisualFire()
+	{
+		// TODO Auto-generated constructor stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setFreezeTicks(int ticks)
+	{
+		// TODO Auto-generated constructor stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isFrozen()
+	{
+		// TODO Auto-generated constructor stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getFreezeTicks()
+	{
+		// TODO Auto-generated constructor stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getMaxFreezeTicks()
+	{
+		// TODO Auto-generated constructor stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -654,46 +698,39 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public void setCustomNameVisible(boolean flag)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		customNameVisible = flag;
 
 	}
 
 	@Override
 	public boolean isCustomNameVisible()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return customNameVisible;
 	}
 
 	@Override
 	public void setGlowing(boolean flag)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		glowingFlag = flag;
 
 	}
 
 	@Override
 	public boolean isGlowing()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return glowingFlag;
 	}
 
 	@Override
 	public void setInvulnerable(boolean flag)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
-
+		invulnerable = flag;
 	}
 
 	@Override
 	public boolean isInvulnerable()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return invulnerable;
 	}
 
 	@Override

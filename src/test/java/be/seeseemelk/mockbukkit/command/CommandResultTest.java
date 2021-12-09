@@ -25,28 +25,28 @@ class CommandResultTest
 	@Test
 	void assertSucceed_Succeeded_DoesNotAssert()
 	{
-		CommandResult result = new CommandResult(true, null);;
+		CommandResult result = new CommandResult(true, null);
 		result.assertSucceeded();
 	}
 
 	@Test
 	void assertSucceed_Failed_Asserts()
 	{
-		CommandResult result = new CommandResult(false, null);;
+		CommandResult result = new CommandResult(false, null);
 		assertThrows(AssertionError.class, () -> result.assertSucceeded());
 	}
 
 	@Test
 	void assertFailed_Succeeded_Asserts()
 	{
-		CommandResult result = new CommandResult(true, null);;
+		CommandResult result = new CommandResult(true, null);
 		assertThrows(AssertionError.class, () -> result.assertFailed());
 	}
 
 	@Test
 	void assertFailed_Failed_DoesNotAssert()
 	{
-		CommandResult result = new CommandResult(false, null);;
+		CommandResult result = new CommandResult(false, null);
 		result.assertFailed();
 	}
 
