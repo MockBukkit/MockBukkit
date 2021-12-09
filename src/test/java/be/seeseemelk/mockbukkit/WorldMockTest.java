@@ -332,8 +332,8 @@ class WorldMockTest
 
 		assertNotNull(worldMock.getWorldBorder());
 	}
-  
-  @Test
+
+	@Test
 	void getBlockState_ChangeBlock()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
