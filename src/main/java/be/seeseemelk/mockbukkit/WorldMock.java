@@ -833,7 +833,7 @@ public class WorldMock implements World
 		entity.setLocation(location);
 		server.registerEntity(entity);
 
-		return (T) entity;
+		return clazz.cast(entity);
 	}
 
 	@Override
@@ -1935,4 +1935,10 @@ public class WorldMock implements World
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
+
+    @Override
+    public int getSimulationDistance() {
+        // TODO Auto-generated method stub
+        throw new UnimplementedOperationException();
+    }
 }

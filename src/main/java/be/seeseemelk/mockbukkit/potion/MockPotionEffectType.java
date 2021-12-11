@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.potion;
 
 import org.bukkit.Color;
+import org.bukkit.NamespacedKey;
 import org.bukkit.potion.PotionEffectType;
 
 /**
@@ -18,9 +19,9 @@ public class MockPotionEffectType extends PotionEffectType
 	private final boolean instant;
 	private final Color color;
 
-	public MockPotionEffectType(int id, String name, boolean instant, Color color)
+	public MockPotionEffectType(NamespacedKey key, int id, String name, boolean instant, Color color)
 	{
-		super(id);
+		super(id, key);
 
 		this.id = id;
 		this.name = name;
@@ -60,6 +61,7 @@ public class MockPotionEffectType extends PotionEffectType
 	{
 		if (obj instanceof PotionEffectType)
 		{
+		    // It would make sense to compare the NamespacedKey here but Spigot stil compares ids
 			return id == ((PotionEffectType) obj).getId();
 		}
 
