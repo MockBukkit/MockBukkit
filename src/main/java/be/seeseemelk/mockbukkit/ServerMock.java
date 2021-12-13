@@ -994,8 +994,9 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public World createWorld(WorldCreator creator)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		WorldMock world = new WorldMock(creator);
+		addWorld(world);
+		return world;
 	}
 
 	@Override
