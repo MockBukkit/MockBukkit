@@ -45,7 +45,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Pose;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.memory.MemoryKey;
-import org.bukkit.event.Event;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
@@ -76,19 +75,11 @@ import org.bukkit.util.RayTraceResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Queue;
+import java.util.concurrent.LinkedTransferQueue;
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.function.Predicate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -123,6 +114,9 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	private final List<AudioExperience> heardSounds = new LinkedList<>();
 	private final Map<UUID, Set<Plugin>> hiddenPlayers = new HashMap<>();
 	private final Set<UUID> hiddenPlayersDeprecated = new HashSet<>();
+
+	private final Queue<String> title = new LinkedTransferQueue<>();
+	private final Queue<String> subitles = new LinkedTransferQueue<>();
 
 	private final StatisticsMock statistics = new StatisticsMock();
 
@@ -1715,15 +1709,24 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public void sendTitle(String title, String subtitle)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.title.add(title);
+		this.subitles.add(subtitle);
 	}
 
 	@Override
 	public void sendTitle(String title, String subtitle, int fadeIn, int stay, int fadeOut)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		sendTitle(title, subtitle);
+	}
+
+	public String nextTitle()
+	{
+		return title.poll();
+	}
+
+	public String nextSubTitle()
+	{
+		return subitles.poll();
 	}
 
 	@Override

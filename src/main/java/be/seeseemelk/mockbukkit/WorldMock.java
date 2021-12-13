@@ -40,14 +40,18 @@ import org.bukkit.block.BlockState;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.boss.DragonBattle;
 import org.bukkit.entity.AbstractArrow;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.FallingBlock;
+import org.bukkit.entity.Firework;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Zombie;
 import org.bukkit.event.world.TimeSkipEvent;
 import org.bukkit.generator.BiomeProvider;
 import org.bukkit.generator.BlockPopulator;
@@ -549,11 +553,7 @@ public class WorldMock implements World
 	@Override
 	public Entity spawnEntity(Location loc, EntityType type)
 	{
-		EntityMock entity = mockEntity(type);
-		entity.setLocation(loc);
-		server.registerEntity(entity);
-
-		return entity;
+		return spawn(loc, type.getEntityClass());
 	}
 
 	@NotNull
@@ -565,24 +565,22 @@ public class WorldMock implements World
 
 	}
 
-	private EntityMock mockEntity(@NotNull EntityType type)
+	private <T extends Entity> EntityMock mockEntity(@NotNull Class<T> clazz)
 	{
-		switch (type)
-		{
-		case ARMOR_STAND:
+		if (clazz == ArmorStand.class) {
 			return new ArmorStandMock(server, UUID.randomUUID());
-		case ZOMBIE:
+		} else if (clazz == Zombie.class) {
 			return new ZombieMock(server, UUID.randomUUID());
-		case FIREWORK:
+		} else if (clazz == Firework.class) {
 			return new FireworkMock(server, UUID.randomUUID());
-		case EXPERIENCE_ORB:
+		} else if (clazz == ExperienceOrb.class) {
 			return new ExperienceOrbMock(server, UUID.randomUUID());
-		case PLAYER:
+		} else if (clazz == Player.class) {
 			throw new IllegalArgumentException("Player Entities cannot be spawned, use ServerMock#addPlayer(...)");
-		case DROPPED_ITEM:
+		} else if (clazz == Item.class) {
 			throw new IllegalArgumentException("Items must be spawned using World#dropItem(...)");
-		default:
-			// If that specific Mob Type has not been implemented yet, it may be better
+		} else {
+			// If that specific Mob Class has not been implemented yet, it may be better
 			// to throw an UnimplementedOperationException for consistency
 			throw new UnimplementedOperationException();
 		}
@@ -826,18 +824,27 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public <T extends Entity> T spawn(Location location, Class<T> clazz) throws IllegalArgumentException
+	public <T extends Entity> T spawn(@NotNull Location location, @NotNull Class<T> clazz) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Validate.notNull(location, "The provided location must not be null.");
+		Validate.notNull(clazz, "The provided class must not be null.");
+
+		EntityMock entity = mockEntity(clazz);
+		entity.setLocation(location);
+		server.registerEntity(entity);
+
+		return (T) entity;
 	}
 
 	@Override
-	public <T extends Entity> T spawn(Location location, Class<T> clazz, Consumer<T> function)
+	public <T extends Entity> T spawn(@NotNull Location location, @NotNull Class<T> clazz, @Nullable Consumer<T> function)
 	throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		T entity = spawn(location, clazz);
+		if (function != null) {
+			function.accept(entity);
+		}
+		return entity;
 	}
 
 	@NotNull
