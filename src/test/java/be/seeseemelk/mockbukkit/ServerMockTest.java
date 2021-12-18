@@ -21,8 +21,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
 
-import org.bukkit.Material;
-import org.bukkit.OfflinePlayer;
+import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
@@ -45,31 +44,41 @@ import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
 import be.seeseemelk.mockbukkit.entity.SimpleEntityMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 
-class ServerMockTest
-{
+class ServerMockTest {
 	private ServerMock server;
 
 	@BeforeEach
-	public void setUp()
-	{
+	public void setUp() {
 		server = MockBukkit.mock();
 	}
 
 	@AfterEach
-	public void tearDown()
-	{
+	public void tearDown() {
 		MockBukkit.unmock();
 	}
 
 	@Test
-	void class_NumberOfPlayers_Zero()
-	{
+	void class_NumberOfPlayers_Zero() {
 		assertEquals(0, server.getOnlinePlayers().size());
 	}
 
 	@Test
-	void addPlayer_TwoPlayers_SizeIsTwo()
-	{
+	void createWorld_WorldCreator() {
+		WorldCreator worldCreator = new WorldCreator("test")
+				.seed(12345)
+				.type(WorldType.FLAT)
+				.environment(World.Environment.NORMAL);
+		server.createWorld(worldCreator);
+
+		assertEquals(1, server.getWorlds().size());
+		assertEquals("test", server.getWorlds().get(0).getName());
+		assertEquals(12345, server.getWorlds().get(0).getSeed());
+		assertEquals(WorldType.FLAT, server.getWorlds().get(0).getWorldType());
+		assertEquals(World.Environment.NORMAL, server.getWorlds().get(0).getEnvironment());
+	}
+
+	@Test
+	void addPlayer_TwoPlayers_SizeIsTwo() {
 		PlayerMockFactory factory = new PlayerMockFactory(server);
 		PlayerMock player1 = factory.createRandomPlayer();
 		PlayerMock player2 = factory.createRandomPlayer();
@@ -88,8 +97,7 @@ class ServerMockTest
 	}
 
 	@Test
-	void addPlayers_None_TwoUniquePlayers()
-	{
+	void addPlayers_None_TwoUniquePlayers() {
 		PlayerMock playerA = server.addPlayer();
 		PlayerMock playerB = server.addPlayer();
 		PlayerMock player1 = server.getPlayer(0);
@@ -102,8 +110,7 @@ class ServerMockTest
 	}
 
 	@Test
-	void setPlayers_Two_TwoUniquePlayers()
-	{
+	void setPlayers_Two_TwoUniquePlayers() {
 		server.setPlayers(2);
 		PlayerMock player1 = server.getPlayer(0);
 		PlayerMock player2 = server.getPlayer(1);
@@ -113,40 +120,34 @@ class ServerMockTest
 	}
 
 	@Test
-	void getPlayers_Negative_ArrayIndexOutOfBoundsException()
-	{
+	void getPlayers_Negative_ArrayIndexOutOfBoundsException() {
 		server.setPlayers(2);
 		assertThrows(ArrayIndexOutOfBoundsException.class, () -> server.getPlayer(-1));
 	}
 
 	@Test
-	void getPlayers_LargerThanNumberOfPlayers_ArrayIndexOutOfBoundsException()
-	{
+	void getPlayers_LargerThanNumberOfPlayers_ArrayIndexOutOfBoundsException() {
 		server.setPlayers(2);
 		assertThrows(ArrayIndexOutOfBoundsException.class, () -> server.getPlayer(2));
 	}
 
 	@Test
-	void getVersion_NotNull()
-	{
+	void getVersion_NotNull() {
 		assertNotNull(server.getVersion());
 	}
 
 	@Test
-	void getBukkitVersion_NotNull()
-	{
+	void getBukkitVersion_NotNull() {
 		assertNotNull(server.getBukkitVersion());
 	}
 
 	@Test
-	void getName_NotNull()
-	{
+	void getName_NotNull() {
 		assertNotNull(server.getName());
 	}
 
 	@Test
-	void getPlayers_AllSame()
-	{
+	void getPlayers_AllSame() {
 		server.setPlayers(2);
 		PlayerMock player1 = server.getPlayer(0);
 		PlayerMock player2 = server.getPlayer(1);
@@ -157,16 +158,14 @@ class ServerMockTest
 	}
 
 	@Test
-	void getOfflinePlayers_CorrectArraySize()
-	{
+	void getOfflinePlayers_CorrectArraySize() {
 		server.setPlayers(1);
 		server.setOfflinePlayers(2);
 		assertEquals(3, server.getOfflinePlayers().length);
 	}
 
 	@Test
-	void getOfflinePlayerByUnknownId_returnsOfflinePlayerWithGivenId()
-	{
+	void getOfflinePlayerByUnknownId_returnsOfflinePlayerWithGivenId() {
 		UUID id = UUID.randomUUID();
 		OfflinePlayer offlinePlayer = server.getOfflinePlayer(id);
 		assertThat(offlinePlayer.getUniqueId(), equalTo(id));
@@ -174,22 +173,19 @@ class ServerMockTest
 
 	@ParameterizedTest
 	@ValueSource(strings = {"testcommand", "tc", "othercommand"})
-	void testPluginCommand(String cmd)
-	{
+	void testPluginCommand(String cmd) {
 		MockBukkit.load(TestPlugin.class);
 		assertNotNull(server.getPluginCommand(cmd));
 	}
 
 	@Test
-	void getPluginCommand_Unknown_Null()
-	{
+	void getPluginCommand_Unknown_Null() {
 		MockBukkit.load(TestPlugin.class);
 		assertNull(server.getPluginCommand("notknown"));
 	}
 
 	@Test
-	void executeCommand_PlayerAndTrueReturnValue_Succeeds()
-	{
+	void executeCommand_PlayerAndTrueReturnValue_Succeeds() {
 		server.setPlayers(1);
 		TestPlugin plugin = (TestPlugin) MockBukkit.load(TestPlugin.class);
 		plugin.commandReturns = true;
@@ -206,8 +202,7 @@ class ServerMockTest
 	}
 
 	@Test
-	void executeCommand_ConsoleAndFalseReturnValue_Fails()
-	{
+	void executeCommand_ConsoleAndFalseReturnValue_Fails() {
 		TestPlugin plugin = (TestPlugin) MockBukkit.load(TestPlugin.class);
 		plugin.commandReturns = false;
 
@@ -223,8 +218,7 @@ class ServerMockTest
 	}
 
 	@Test
-	void executeCommand_CommandAsStringAndTrueReturnValue_Succeeds()
-	{
+	void executeCommand_CommandAsStringAndTrueReturnValue_Succeeds() {
 		TestPlugin plugin = (TestPlugin) MockBukkit.load(TestPlugin.class);
 		plugin.commandReturns = true;
 
@@ -233,20 +227,17 @@ class ServerMockTest
 	}
 
 	@Test
-	void getConsoleSender_NotNull()
-	{
+	void getConsoleSender_NotNull() {
 		assertNotNull(server.getConsoleSender());
 	}
 
 	@Test
-	void getItemFactory_NotNull()
-	{
+	void getItemFactory_NotNull() {
 		assertNotNull(server.getItemFactory());
 	}
 
 	@Test
-	void addSimpleWorld_Name_WorldWithNameAdded()
-	{
+	void addSimpleWorld_Name_WorldWithNameAdded() {
 		WorldMock world = server.addSimpleWorld("MyWorld");
 		assertEquals(1, server.getWorlds().size());
 		assertSame(world, server.getWorlds().get(0));
@@ -255,14 +246,12 @@ class ServerMockTest
 	}
 
 	@Test
-	void getScheduler_Default_NotNull()
-	{
+	void getScheduler_Default_NotNull() {
 		assertNotNull(server.getScheduler());
 	}
 
 	@Test
-	void broadcastMessage_TwoPlayers_BothReceivedMessage()
-	{
+	void broadcastMessage_TwoPlayers_BothReceivedMessage() {
 		PlayerMock playerA = server.addPlayer();
 		PlayerMock playerB = server.addPlayer();
 		server.broadcastMessage("Hello world");
@@ -271,8 +260,7 @@ class ServerMockTest
 	}
 
 	@Test
-	void addRecipe_AddsRecipe_ReturnsTrue()
-	{
+	void addRecipe_AddsRecipe_ReturnsTrue() {
 		TestRecipe recipe1 = new TestRecipe();
 		TestRecipe recipe2 = new TestRecipe();
 		server.addRecipe(recipe1);
@@ -284,8 +272,7 @@ class ServerMockTest
 	}
 
 	@Test
-	void clearRecipes_SomeRecipes_AllRecipesRemoved()
-	{
+	void clearRecipes_SomeRecipes_AllRecipesRemoved() {
 		TestRecipe recipe = new TestRecipe();
 		server.addRecipe(recipe);
 		assumeTrue(server.recipeIterator().hasNext());
@@ -294,8 +281,7 @@ class ServerMockTest
 	}
 
 	@Test
-	void getRecipesFor_ManyRecipes_OnlyCorrectRecipes()
-	{
+	void getRecipesFor_ManyRecipes_OnlyCorrectRecipes() {
 		TestRecipe recipe1 = new TestRecipe(new ItemStack(Material.STONE));
 		TestRecipe recipe2 = new TestRecipe(new ItemStack(Material.APPLE));
 		server.addRecipe(recipe1);
@@ -306,8 +292,7 @@ class ServerMockTest
 	}
 
 	@Test
-	void getRecipesFor_IgnoresAmount()
-	{
+	void getRecipesFor_IgnoresAmount() {
 		TestRecipe recipe = new TestRecipe(new ItemStack(Material.IRON_NUGGET));
 		server.addRecipe(recipe);
 
@@ -317,8 +302,7 @@ class ServerMockTest
 	}
 
 	@Test
-	void getDataFolder_CleanEnvironment_CreatesTemporaryDataDirectory() throws IOException
-	{
+	void getDataFolder_CleanEnvironment_CreatesTemporaryDataDirectory() throws IOException {
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
 		File folder = plugin.getDataFolder();
 		assertNotNull(folder);
@@ -333,8 +317,7 @@ class ServerMockTest
 	}
 
 	@Test
-	void createInventory_WithSize_CreatesInventory()
-	{
+	void createInventory_WithSize_CreatesInventory() {
 		PlayerMock player = server.addPlayer();
 		InventoryMock inventory = server.createInventory(player, 9, "title");
 		assertEquals(9, inventory.getSize());
@@ -342,15 +325,13 @@ class ServerMockTest
 	}
 
 	@Test
-	void createInventory_ChestInventoryWithoutSize_CreatesInventoryWithThreeLines()
-	{
+	void createInventory_ChestInventoryWithoutSize_CreatesInventoryWithThreeLines() {
 		InventoryMock inventory = server.createInventory(null, InventoryType.CHEST);
 		assertEquals(9 * 3, inventory.getSize());
 	}
 
 	@Test
-	void performCommand_PerformsCommand()
-	{
+	void performCommand_PerformsCommand() {
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
 		plugin.commandReturns = true;
 		Player player = server.addPlayer();
@@ -361,14 +342,12 @@ class ServerMockTest
 	}
 
 	@Test
-	void getEntities_NoEntities_EmptySet()
-	{
+	void getEntities_NoEntities_EmptySet() {
 		assertTrue(server.getEntities().isEmpty(), "Entities set was not empty");
 	}
 
 	@Test
-	void getEntities_TwoEntitiesRegistered_SetContainsEntities()
-	{
+	void getEntities_TwoEntitiesRegistered_SetContainsEntities() {
 		EntityMock entity1 = new SimpleEntityMock(server);
 		EntityMock entity2 = new SimpleEntityMock(server);
 		server.registerEntity(entity1);
@@ -379,80 +358,70 @@ class ServerMockTest
 	}
 
 	@Test
-	void getPlayer_NameAndPlayerExists_PlayerFound()
-	{
+	void getPlayer_NameAndPlayerExists_PlayerFound() {
 		PlayerMock player = new PlayerMock(server, "player");
 		server.addPlayer(player);
 		assertSame(player, server.getPlayer("player"));
 	}
 
 	@Test
-	void getPlayer_NameAndPlayerExistsButCasingWrong_PlayerNotFound()
-	{
+	void getPlayer_NameAndPlayerExistsButCasingWrong_PlayerNotFound() {
 		PlayerMock player = new PlayerMock(server, "player");
 		server.addPlayer(player);
 		assertSame(player, server.getPlayer("PLAYER"));
 	}
 
 	@Test
-	void getPlayer_UUIDAndPlayerExists_PlayerFound()
-	{
+	void getPlayer_UUIDAndPlayerExists_PlayerFound() {
 		PlayerMock player = new PlayerMock(server, "player");
 		server.addPlayer(player);
 		assertSame(player, server.getPlayer(player.getUniqueId()));
 	}
 
 	@Test
-	void getPlayer_PlayerNamePartiallyCorrect_PlayerFound()
-	{
+	void getPlayer_PlayerNamePartiallyCorrect_PlayerFound() {
 		PlayerMock player = new PlayerMock(server, "player_other");
 		server.addPlayer(player);
 		assertSame(player, server.getPlayer("player"));
 	}
 
 	@Test
-	void getPlayer_PlayerNameIncorrect_PlayerNotFound()
-	{
+	void getPlayer_PlayerNameIncorrect_PlayerNotFound() {
 		PlayerMock player = new PlayerMock(server, "player_other");
 		server.addPlayer(player);
 		assertNull(server.getPlayer("other_player"));
 	}
 
 	@Test
-	void getPlayer_PlayerNameCasingIncorrect_PlayerFound()
-	{
+	void getPlayer_PlayerNameCasingIncorrect_PlayerFound() {
 		PlayerMock player = new PlayerMock(server, "player");
 		server.addPlayer(player);
 		assertSame(player, server.getPlayer("PLAYER"));
 	}
 
 	@Test
-	void getPlayerExact_CasingMatches_PlayerFound()
-	{
+	void getPlayerExact_CasingMatches_PlayerFound() {
 		PlayerMock player = new PlayerMock(server, "player");
 		server.addPlayer(player);
 		assertSame(player, server.getPlayerExact("player"));
 	}
 
 	@Test
-	void getPlayerExact_CasingDoesNotMatch_PlayerFound()
-	{
+	void getPlayerExact_CasingDoesNotMatch_PlayerFound() {
 		PlayerMock player = new PlayerMock(server, "player");
 		server.addPlayer(player);
 		assertNotNull(server.getPlayerExact("PLAYER"));
 	}
 
 	@Test
-	void getPlayerExact_PlayerNameIncorrect_PlayerNotFound()
-	{
+	void getPlayerExact_PlayerNameIncorrect_PlayerNotFound() {
 		PlayerMock player = new PlayerMock(server, "player_other");
 		server.addPlayer(player);
 		assertNull(server.getPlayerExact("player"));
 	}
 
 	@Test
-	void getOperators_OneOperator()
-	{
+	void getOperators_OneOperator() {
 		PlayerMock player = new PlayerMock(server, "operator");
 		server.addPlayer(player);
 		player.setOp(true);
@@ -462,31 +431,25 @@ class ServerMockTest
 	}
 
 	@Test
-	void getScoreboardManager_NotNull()
-	{
+	void getScoreboardManager_NotNull() {
 		ScoreboardManager manager = server.getScoreboardManager();
 		assertNotNull(manager);
 	}
 
 	@Test
-	void assertMainThread_MainThread_Succeeds()
-	{
+	void assertMainThread_MainThread_Succeeds() {
 		server.assertMainThread();
 	}
 
 	@Test
-	void assertMainThread_NotMainThread_ThrowsException() throws Exception
-	{
+	void assertMainThread_NotMainThread_ThrowsException() throws Exception {
 		AtomicReference<Exception> exceptionThrown = new AtomicReference<>();
 
 		server.getScheduler().runTaskAsynchronously(null, () ->
 		{
-			try
-			{
+			try {
 				server.assertMainThread();
-			}
-			catch (ThreadAccessException e)
-			{
+			} catch (ThreadAccessException e) {
 				exceptionThrown.set(e);
 			}
 		});
@@ -497,16 +460,14 @@ class ServerMockTest
 	}
 
 	@Test
-	void matchPlayer_NoMatchingPlayers_EmptyList()
-	{
+	void matchPlayer_NoMatchingPlayers_EmptyList() {
 		server.addPlayer("Player");
 		List<Player> players = server.matchPlayer("Others");
 		assertEquals(0, players.size(), "Player list was not empty");
 	}
 
 	@Test
-	void matchPlayer_SomeMatchingPlayers_ListHasPlayer()
-	{
+	void matchPlayer_SomeMatchingPlayers_ListHasPlayer() {
 		PlayerMock playerA = server.addPlayer("PlayerA");
 		PlayerMock playerAB = server.addPlayer("PlayerAB");
 		server.addPlayer("PlayerB");
@@ -515,8 +476,7 @@ class ServerMockTest
 	}
 
 	@Test
-	void testOfflinePlayerJoin()
-	{
+	void testOfflinePlayerJoin() {
 		OfflinePlayerMock offlinePlayer = new OfflinePlayerMock("IAmOffline");
 		assertFalse(server.getOfflinePlayer(offlinePlayer.getUniqueId()) instanceof PlayerMock);
 
@@ -534,41 +494,34 @@ class ServerMockTest
 	}
 
 	@Test
-	void testDefaultPotionEffects()
-	{
+	void testDefaultPotionEffects() {
 		assertEquals(32, PotionEffectType.values().length);
 
-		for (PotionEffectType type : PotionEffectType.values())
-		{
+		for (PotionEffectType type : PotionEffectType.values()) {
 			assertNotNull(type);
 		}
 	}
 
 	@Test
-	void testSetSpawnRadius()
-	{
+	void testSetSpawnRadius() {
 		server.setSpawnRadius(51);
 		assertEquals(51, server.getSpawnRadius());
 	}
 }
 
-class TestRecipe implements Recipe
-{
+class TestRecipe implements Recipe {
 	private final ItemStack result;
 
-	public TestRecipe(@NotNull ItemStack result)
-	{
+	public TestRecipe(@NotNull ItemStack result) {
 		this.result = result;
 	}
 
-	public TestRecipe()
-	{
+	public TestRecipe() {
 		this(null);
 	}
 
 	@Override
-	public ItemStack getResult()
-	{
+	public ItemStack getResult() {
 		return result;
 	}
 }
