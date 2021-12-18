@@ -14,26 +14,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang.Validate;
-import org.bukkit.BlockChangeDelegate;
-import org.bukkit.Bukkit;
-import org.bukkit.Chunk;
-import org.bukkit.ChunkSnapshot;
-import org.bukkit.Difficulty;
-import org.bukkit.Effect;
-import org.bukkit.FluidCollisionMode;
-import org.bukkit.GameRule;
-import org.bukkit.HeightMap;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Particle;
-import org.bukkit.Raid;
-import org.bukkit.Sound;
-import org.bukkit.SoundCategory;
-import org.bukkit.StructureType;
-import org.bukkit.TreeType;
-import org.bukkit.World;
-import org.bukkit.WorldBorder;
-import org.bukkit.WorldType;
+import org.bukkit.*;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
@@ -100,6 +81,8 @@ public class WorldMock implements World
 	private int weatherDuration = 0;
 	private int thunderDuration = 0;
 	private boolean storming = false;
+	private long seed = 0;
+	private WorldType worldType = WorldType.NORMAL;
 
 	/**
 	 * Creates a new mock world.
@@ -139,6 +122,14 @@ public class WorldMock implements World
 		gameRules.put(GameRule.SHOW_DEATH_MESSAGES, true);
 		gameRules.put(GameRule.SPAWN_RADIUS, 10);
 		gameRules.put(GameRule.SPECTATORS_GENERATE_CHUNKS, true);
+	}
+
+	public WorldMock(WorldCreator creator){
+		this();
+		this.name = creator.name();
+		this.worldType = creator.type();
+		this.seed = creator.seed();
+		this.environment = creator.environment();
 	}
 
 	/**

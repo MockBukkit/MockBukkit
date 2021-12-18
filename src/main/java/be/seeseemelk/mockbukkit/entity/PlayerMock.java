@@ -1614,6 +1614,21 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
+	public void setResourcePack(@NotNull String url, @Nullable byte[] hash, @Nullable String prompt) {
+
+	}
+
+	@Override
+	public void setResourcePack(@NotNull String url, @Nullable byte[] hash, boolean force) {
+
+	}
+
+	@Override
+	public void setResourcePack(@NotNull String url, @Nullable byte[] hash, @Nullable String prompt, boolean force) {
+
+	}
+
+	@Override
 	public @NotNull Scoreboard getScoreboard()
 	{
 		// TODO Auto-generated method stub
