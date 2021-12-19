@@ -2239,47 +2239,54 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		return super.teleport(playerTeleportEvent.getTo(), cause);
 	}
 
-    @Override
-    public void sendEquipmentChange(LivingEntity entity, EquipmentSlot slot, ItemStack item) {
-        // TODO Auto-generated method stub
-        throw new UnimplementedOperationException();
-    }
+	@Override
+	public void sendEquipmentChange(LivingEntity entity, EquipmentSlot slot, ItemStack item)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
 
-    @Override
-    public void hideEntity(Plugin plugin, Entity entity) {
-        // TODO Auto-generated method stub
-        throw new UnimplementedOperationException();
-    }
+	@Override
+	public void hideEntity(Plugin plugin, Entity entity)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
 
-    @Override
-    public void showEntity(Plugin plugin, Entity entity) {
-        // TODO Auto-generated method stub
-        throw new UnimplementedOperationException();
-    }
+	@Override
+	public void showEntity(Plugin plugin, Entity entity)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
 
-    @Override
-    public boolean canSee(Entity entity) {
-        // TODO Auto-generated method stub
-        throw new UnimplementedOperationException();
-    }
+	@Override
+	public boolean canSee(Entity entity)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
 
-    @Override
-    public void openSign(Sign sign) {
-        // TODO Auto-generated method stub
-        throw new UnimplementedOperationException();
-    }
+	@Override
+	public void openSign(Sign sign)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
 
-    @Override
-    public void showDemoScreen() {
-        // TODO Auto-generated method stub
-        throw new UnimplementedOperationException();
-    }
+	@Override
+	public void showDemoScreen()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
 
-    @Override
-    public boolean isAllowingServerListings() {
-        // TODO Auto-generated method stub
-        throw new UnimplementedOperationException();
-    }
+	@Override
+	public boolean isAllowingServerListings()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
 
 
 	@Override
