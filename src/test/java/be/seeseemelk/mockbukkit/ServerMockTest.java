@@ -72,13 +72,13 @@ class ServerMockTest
 				.seed(12345)
 				.type(WorldType.FLAT)
 				.environment(World.Environment.NORMAL);
-		server.createWorld(worldCreator);
+		World world = server.createWorld(worldCreator);
 
 		assertEquals(1, server.getWorlds().size());
-		assertEquals("test", server.getWorlds().get(0).getName());
-		assertEquals(12345, server.getWorlds().get(0).getSeed());
-		assertEquals(WorldType.FLAT, server.getWorlds().get(0).getWorldType());
-		assertEquals(World.Environment.NORMAL, server.getWorlds().get(0).getEnvironment());
+		assertEquals("test", world.getName());
+		assertEquals(12345, world.getSeed());
+		assertEquals(WorldType.FLAT, world.getWorldType());
+		assertEquals(World.Environment.NORMAL, world.getEnvironment());
 	}
 
 	@Test

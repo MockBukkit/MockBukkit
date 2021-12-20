@@ -910,24 +910,28 @@ public class ServerMock extends Server.Spigot implements Server
 	@NotNull
 	@Override
 	public String getResourcePack() {
-		return null;
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@NotNull
 	@Override
 	public String getResourcePackHash() {
-		return null;
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@NotNull
 	@Override
 	public String getResourcePackPrompt() {
-		return null;
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public boolean isResourcePackRequired() {
-		return false;
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
