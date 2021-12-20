@@ -144,7 +144,8 @@ public class WorldMock implements World
 		gameRules.put(GameRule.SPECTATORS_GENERATE_CHUNKS, true);
 	}
 
-	public WorldMock(WorldCreator creator){
+	public WorldMock(@NotNull WorldCreator creator)
+	{
 		this();
 		this.name = creator.name();
 		this.worldType = creator.type();
