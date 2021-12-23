@@ -1614,19 +1614,22 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public void setResourcePack(@NotNull String url, @Nullable byte[] hash, @Nullable String prompt) {
+	public void setResourcePack(@NotNull String url, @Nullable byte[] hash, @Nullable String prompt)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void setResourcePack(@NotNull String url, @Nullable byte[] hash, boolean force) {
+	public void setResourcePack(@NotNull String url, @Nullable byte[] hash, boolean force)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void setResourcePack(@NotNull String url, @Nullable byte[] hash, @Nullable String prompt, boolean force) {
+	public void setResourcePack(@NotNull String url, @Nullable byte[] hash, @Nullable String prompt, boolean force)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
