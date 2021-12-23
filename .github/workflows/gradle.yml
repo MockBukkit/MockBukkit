@@ -107,7 +107,7 @@ jobs:
           gpg --batch --import private.key
           gpg --batch --export-secret-keys --passphrase $SIGN_KEY "Sebastiaan de Schaetzen <sebastiaan.de.schaetzen@gmail.com>" > private.gpg
           
-          NEW_VERSION=$(echo ${GITHUB_REF#refs/heads/})-$(echo ${{ steps.bump-semver.outputs.new_version }} | sed -e 's/^v//')
+          NEW_VERSION=$(echo ${{ steps.bump-semver.outputs.new_version }} | sed -e 's/^v//')
           
           ./gradlew publishMockBukkitPublicationToRepositoryRepository \
             -Pmockbukkit.version=$NEW_VERSION \
