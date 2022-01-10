@@ -2328,7 +2328,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		@Override
 		public void sendMessage(@NotNull ChatMessageType position, @NotNull BaseComponent component)
 		{
-			PlayerMock.this.sendMessage(component.toPlainText());
+			PlayerMock.this.sendMessage(component.toLegacyText());
 		}
 	}
 }
