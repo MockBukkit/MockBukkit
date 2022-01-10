@@ -13,6 +13,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -22,7 +23,6 @@ import java.util.logging.LogManager;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import org.apache.commons.lang.Validate;
 import org.bukkit.BanEntry;
 import org.bukkit.BanList;
@@ -38,7 +38,6 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.Server;
 import org.bukkit.StructureType;
 import org.bukkit.Tag;
-import org.bukkit.UnsafeValues;
 import org.bukkit.Warning.WarningState;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
@@ -908,6 +907,37 @@ public class ServerMock extends Server.Spigot implements Server
 		throw new UnimplementedOperationException();
 	}
 
+	@NotNull
+	@Override
+	public String getResourcePack()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@NotNull
+	@Override
+	public String getResourcePackHash()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@NotNull
+	@Override
+	public String getResourcePackPrompt()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isResourcePackRequired()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 	@Override
 	public boolean hasWhitelist()
 	{
@@ -994,8 +1024,9 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public World createWorld(WorldCreator creator)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		WorldMock world = new WorldMock(creator);
+		addWorld(world);
+		return world;
 	}
 
 	@Override
@@ -1273,7 +1304,7 @@ public class ServerMock extends Server.Spigot implements Server
 
 	@Override
 	@Deprecated
-	public UnsafeValues getUnsafe()
+	public MockUnsafeValues getUnsafe()
 	{
 		return unsafe;
 	}
@@ -1410,7 +1441,8 @@ public class ServerMock extends Server.Spigot implements Server
 
 	private void registerPotionEffectType(int id, @NotNull String name, boolean instant, int rgb)
 	{
-		PotionEffectType type = new MockPotionEffectType(id, name, instant, Color.fromRGB(rgb));
+		NamespacedKey key = NamespacedKey.minecraft(name.toLowerCase(Locale.ROOT));
+		PotionEffectType type = new MockPotionEffectType(key, id, name, instant, Color.fromRGB(rgb));
 		PotionEffectType.registerPotionEffectType(type);
 	}
 
@@ -1551,6 +1583,20 @@ public class ServerMock extends Server.Spigot implements Server
 
 	@Override
 	public int getMaxWorldSize()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getSimulationDistance()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean getHideOnlinePlayers()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
