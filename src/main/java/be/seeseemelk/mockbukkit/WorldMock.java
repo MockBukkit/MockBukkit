@@ -579,19 +579,32 @@ public class WorldMock implements World
 
 	private <T extends Entity> EntityMock mockEntity(@NotNull Class<T> clazz)
 	{
-		if (clazz == ArmorStand.class) {
+		if (clazz == ArmorStand.class)
+		{
 			return new ArmorStandMock(server, UUID.randomUUID());
-		} else if (clazz == Zombie.class) {
+		}
+		else if (clazz == Zombie.class)
+		{
 			return new ZombieMock(server, UUID.randomUUID());
-		} else if (clazz == Firework.class) {
+		}
+		else if (clazz == Firework.class)
+		{
 			return new FireworkMock(server, UUID.randomUUID());
-		} else if (clazz == ExperienceOrb.class) {
+		}
+		else if (clazz == ExperienceOrb.class)
+		{
 			return new ExperienceOrbMock(server, UUID.randomUUID());
-		} else if (clazz == Player.class) {
+		}
+		else if (clazz == Player.class)
+		{
 			throw new IllegalArgumentException("Player Entities cannot be spawned, use ServerMock#addPlayer(...)");
-		} else if (clazz == Item.class) {
+		}
+		else if (clazz == Item.class)
+		{
 			throw new IllegalArgumentException("Items must be spawned using World#dropItem(...)");
-		} else {
+		}
+		else
+		{
 			// If that specific Mob Class has not been implemented yet, it may be better
 			// to throw an UnimplementedOperationException for consistency
 			throw new UnimplementedOperationException();
@@ -853,7 +866,8 @@ public class WorldMock implements World
 	throws IllegalArgumentException
 	{
 		T entity = spawn(location, clazz);
-		if (function != null) {
+		if (function != null)
+		{
 			function.accept(entity);
 		}
 		return entity;
@@ -1948,9 +1962,10 @@ public class WorldMock implements World
 		throw new UnimplementedOperationException();
 	}
 
-    @Override
-    public int getSimulationDistance() {
-        // TODO Auto-generated method stub
-        throw new UnimplementedOperationException();
-    }
+	@Override
+	public int getSimulationDistance()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
 }

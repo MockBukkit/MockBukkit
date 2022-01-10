@@ -69,9 +69,10 @@ public class TagParser implements Keyed
 	void parse(@NotNull BiConsumer<Set<Material>, Set<TagWrapperMock>> callback) throws TagMisconfigurationException, FileNotFoundException
 	{
 		String path = "/tags/" + registry.getRegistry() + '/' + getKey().getKey() + ".json";
-		
-		if (MockBukkit.class.getResource(path) == null) {
-		    throw new FileNotFoundException(path);
+
+		if (MockBukkit.class.getResource(path) == null)
+		{
+			throw new FileNotFoundException(path);
 		}
 
 		try (BufferedReader reader = new BufferedReader(
