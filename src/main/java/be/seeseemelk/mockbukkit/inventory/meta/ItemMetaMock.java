@@ -272,19 +272,23 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public boolean hasLore()
 	{
-		return lore != null;
+		return lore != null && !lore.isEmpty();
 	}
 
 	@Override
-	public List<String> getLore()
+	public @Nullable List<String> getLore()
 	{
-		return new ArrayList<>(lore);
+		return lore == null ? null : new ArrayList<>(lore);
 	}
 
 	@Override
-	public void setLore(List<String> lore)
+	public void setLore(@Nullable List<String> lore)
 	{
-		this.lore = new ArrayList<>(lore);
+		if (lore != null && !lore.isEmpty()) {
+			this.lore = new ArrayList<>(lore);
+		} else {
+			this.lore = null;
+		}
 	}
 
 	/**
@@ -333,7 +337,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	 */
 	public void assertHasNoLore() throws AssertionError
 	{
-		if (lore != null && !lore.isEmpty())
+		if (hasLore())
 		{
 			throw new AssertionError("Lore was set but shouldn't have been set");
 		}
