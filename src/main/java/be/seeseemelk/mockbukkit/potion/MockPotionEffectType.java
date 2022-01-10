@@ -61,7 +61,7 @@ public class MockPotionEffectType extends PotionEffectType
 	{
 		if (obj instanceof PotionEffectType)
 		{
-		    // It would make sense to compare the NamespacedKey here but Spigot stil compares ids
+			// It would make sense to compare the NamespacedKey here but Spigot stil compares ids
 			return id == ((PotionEffectType) obj).getId();
 		}
 

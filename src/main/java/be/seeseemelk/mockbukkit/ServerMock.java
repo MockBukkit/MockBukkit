@@ -909,27 +909,31 @@ public class ServerMock extends Server.Spigot implements Server
 
 	@NotNull
 	@Override
-	public String getResourcePack() {
+	public String getResourcePack()
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@NotNull
 	@Override
-	public String getResourcePackHash() {
+	public String getResourcePackHash()
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@NotNull
 	@Override
-	public String getResourcePackPrompt() {
+	public String getResourcePackPrompt()
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean isResourcePackRequired() {
+	public boolean isResourcePackRequired()
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
@@ -1437,7 +1441,7 @@ public class ServerMock extends Server.Spigot implements Server
 
 	private void registerPotionEffectType(int id, @NotNull String name, boolean instant, int rgb)
 	{
-	    NamespacedKey key = NamespacedKey.minecraft(name.toLowerCase(Locale.ROOT));
+		NamespacedKey key = NamespacedKey.minecraft(name.toLowerCase(Locale.ROOT));
 		PotionEffectType type = new MockPotionEffectType(key, id, name, instant, Color.fromRGB(rgb));
 		PotionEffectType.registerPotionEffectType(type);
 	}
@@ -1584,17 +1588,19 @@ public class ServerMock extends Server.Spigot implements Server
 		throw new UnimplementedOperationException();
 	}
 
-    @Override
-    public int getSimulationDistance() {
-        // TODO Auto-generated method stub
-        throw new UnimplementedOperationException();
-    }
+	@Override
+	public int getSimulationDistance()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
 
-    @Override
-    public boolean getHideOnlinePlayers() {
-        // TODO Auto-generated method stub
-        throw new UnimplementedOperationException();
-    }
+	@Override
+	public boolean getHideOnlinePlayers()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
 
 	@Override
 	public Server.Spigot spigot()
