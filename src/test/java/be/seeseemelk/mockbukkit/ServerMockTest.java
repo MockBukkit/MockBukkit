@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -17,9 +18,14 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.WorldCreator;
+import org.bukkit.WorldType;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
@@ -62,6 +68,22 @@ class ServerMockTest
 	void class_NumberOfPlayers_Zero()
 	{
 		assertEquals(0, server.getOnlinePlayers().size());
+	}
+
+	@Test
+	void createWorld_WorldCreator()
+	{
+		WorldCreator worldCreator = new WorldCreator("test")
+		.seed(12345)
+		.type(WorldType.FLAT)
+		.environment(World.Environment.NORMAL);
+		World world = server.createWorld(worldCreator);
+
+		assertEquals(1, server.getWorlds().size());
+		assertEquals("test", world.getName());
+		assertEquals(12345, world.getSeed());
+		assertEquals(WorldType.FLAT, world.getWorldType());
+		assertEquals(World.Environment.NORMAL, world.getEnvironment());
 	}
 
 	@Test
@@ -159,6 +181,14 @@ class ServerMockTest
 		server.setPlayers(1);
 		server.setOfflinePlayers(2);
 		assertEquals(3, server.getOfflinePlayers().length);
+	}
+
+	@Test
+	void getOfflinePlayerByUnknownId_returnsOfflinePlayerWithGivenId()
+	{
+		UUID id = UUID.randomUUID();
+		OfflinePlayer offlinePlayer = server.getOfflinePlayer(id);
+		assertThat(offlinePlayer.getUniqueId(), equalTo(id));
 	}
 
 	@ParameterizedTest
@@ -533,7 +563,12 @@ class ServerMockTest
 		}
 	}
 
-
+	@Test
+	void testSetSpawnRadius()
+	{
+		server.setSpawnRadius(51);
+		assertEquals(51, server.getSpawnRadius());
+	}
 }
 
 class TestRecipe implements Recipe

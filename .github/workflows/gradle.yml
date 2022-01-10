@@ -2,9 +2,9 @@ name: Build
 
 on:
   push:
-    branches: [ v1.17 ]
+    branches: [ v1.* ]
   pull_request:
-    branches: [ v1.17 ]
+    branches: [ v1.* ]
 
 jobs:
   build:
@@ -12,10 +12,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Set up JDK 16
+    - name: Validate gradle wrapper
+      uses: gradle/wrapper-validation-action@v1
+    - name: Set up JDK 17
       uses: actions/setup-java@v1
       with:
-        java-version: 16
+        java-version: 17
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
@@ -25,14 +27,14 @@ jobs:
       run: ./gradlew test
 
     - name: Store Private key
-      if: github.ref == 'refs/heads/v1.17' && github.repository == 'MockBukkit/MockBukkit'
+      if: startsWith(github.ref, 'refs/heads/v1.') && github.repository == 'MockBukkit/MockBukkit'
       uses: DamianReeves/write-file-action@v1.0
       with:
         path: private.key
         contents: ${{ secrets.PRIV_KEY }}
         write-mode: overwrite
     - name: Publish
-      if: github.ref == 'refs/heads/v1.17' && github.repository == 'MockBukkit/MockBukkit'
+      if: startsWith(github.ref, 'refs/heads/v1.') && github.repository == 'MockBukkit/MockBukkit'
       env:
         OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
         SIGN_KEY: ${{ secrets.PRIV_KEY_PASS }}
