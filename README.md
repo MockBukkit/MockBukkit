@@ -50,7 +50,7 @@ repositories {
 }
 
 dependencies {
-	testImplementation 'com.github.seeseemelk:MockBukkit-v1.17:1.7.0'
+	testImplementation 'com.github.seeseemelk:MockBukkit-v1.18:1.15.1'
 }
 ```
 
