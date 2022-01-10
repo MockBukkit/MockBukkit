@@ -65,7 +65,7 @@ public class MockChunkDataTest
 	@Test
 	void test_pos_min_height()
 	{
-		WorldMock dummy = new WorldMock(Material.GRASS,60, 256, 70);
+		WorldMock dummy = new WorldMock(Material.GRASS, 60, 256, 70);
 		ChunkGenerator.ChunkData data = server.createChunkData(dummy);
 
 		data.setBlock(0, 80, 0, Material.OBSIDIAN);
