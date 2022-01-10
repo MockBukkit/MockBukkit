@@ -36,16 +36,17 @@ import org.bukkit.advancement.AdvancementProgress;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.block.Sign;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationAbandonedEvent;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Pose;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.memory.MemoryKey;
-import org.bukkit.event.Event;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
@@ -61,6 +62,7 @@ import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.event.player.PlayerToggleSprintEvent;
 import org.bukkit.inventory.EntityEquipment;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.InventoryView.Property;
@@ -76,19 +78,11 @@ import org.bukkit.util.RayTraceResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Queue;
+import java.util.concurrent.LinkedTransferQueue;
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.function.Predicate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -123,6 +117,9 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	private final List<AudioExperience> heardSounds = new LinkedList<>();
 	private final Map<UUID, Set<Plugin>> hiddenPlayers = new HashMap<>();
 	private final Set<UUID> hiddenPlayersDeprecated = new HashSet<>();
+
+	private final Queue<String> title = new LinkedTransferQueue<>();
+	private final Queue<String> subitles = new LinkedTransferQueue<>();
 
 	private final StatisticsMock statistics = new StatisticsMock();
 
@@ -1121,6 +1118,12 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
+	public void stopAllSounds()
+	{
+		// We will just pretend the Sounds have stopped.
+	}
+
+	@Override
 	public void playEffect(@NotNull Location loc, @NotNull Effect effect, int data)
 	{
 		// TODO Auto-generated method stub
@@ -1143,13 +1146,6 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 
 	@Override
 	public void sendBlockChange(@NotNull Location loc, @NotNull Material material, byte data)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean sendChunkChange(@NotNull Location loc, int sx, int sy, int sz, byte[] data)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1618,6 +1614,27 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
+	public void setResourcePack(@NotNull String url, @Nullable byte[] hash, @Nullable String prompt)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setResourcePack(@NotNull String url, @Nullable byte[] hash, boolean force)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setResourcePack(@NotNull String url, @Nullable byte[] hash, @Nullable String prompt, boolean force)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull Scoreboard getScoreboard()
 	{
 		// TODO Auto-generated method stub
@@ -1709,15 +1726,24 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public void sendTitle(String title, String subtitle)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.title.add(title);
+		this.subitles.add(subtitle);
 	}
 
 	@Override
 	public void sendTitle(String title, String subtitle, int fadeIn, int stay, int fadeOut)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		sendTitle(title, subtitle);
+	}
+
+	public String nextTitle()
+	{
+		return title.poll();
+	}
+
+	public String nextSubTitle()
+	{
+		return subitles.poll();
 	}
 
 	@Override
@@ -2214,6 +2240,55 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		}
 
 		return super.teleport(playerTeleportEvent.getTo(), cause);
+	}
+
+	@Override
+	public void sendEquipmentChange(LivingEntity entity, EquipmentSlot slot, ItemStack item)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void hideEntity(Plugin plugin, Entity entity)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void showEntity(Plugin plugin, Entity entity)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean canSee(Entity entity)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void openSign(Sign sign)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void showDemoScreen()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isAllowingServerListings()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 

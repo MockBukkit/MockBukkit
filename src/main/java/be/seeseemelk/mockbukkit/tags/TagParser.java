@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.tags;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
@@ -65,9 +66,14 @@ public class TagParser implements Keyed
 		this.key = tag.getKey();
 	}
 
-	void parse(@NotNull BiConsumer<Set<Material>, Set<TagWrapperMock>> callback) throws TagMisconfigurationException
+	void parse(@NotNull BiConsumer<Set<Material>, Set<TagWrapperMock>> callback) throws TagMisconfigurationException, FileNotFoundException
 	{
 		String path = "/tags/" + registry.getRegistry() + '/' + getKey().getKey() + ".json";
+
+		if (MockBukkit.class.getResource(path) == null)
+		{
+			throw new FileNotFoundException(path);
+		}
 
 		try (BufferedReader reader = new BufferedReader(
 			    new InputStreamReader(MockBukkit.class.getResourceAsStream(path), StandardCharsets.UTF_8)))
