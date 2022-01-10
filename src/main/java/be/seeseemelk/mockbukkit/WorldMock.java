@@ -81,21 +81,21 @@ import be.seeseemelk.mockbukkit.metadata.MetadataTable;
  */
 public class WorldMock implements World
 {
-	private static final int MIN_WORLD_HEIGHT = 0;
-	private static final int MAX_WORLD_HEIGHT = 256;
+	private static final int SEA_LEVEL = 63;
 
 	private final Map<Coordinate, BlockMock> blocks = new HashMap<>();
 	private final Map<GameRule<?>, Object> gameRules = new HashMap<>();
 	private final MetadataTable metadataTable = new MetadataTable();
 	private final Map<ChunkCoordinate, ChunkMock> loadedChunks = new HashMap<>();
+	private final ServerMock server;
+	private final Material defaultBlock;
+	private final int grassHeight;
+	private final int minHeight;
+	private final int maxHeight;
+	private final UUID uuid = UUID.randomUUID();
 
 	private Environment environment = Environment.NORMAL;
-	private ServerMock server;
-	private Material defaultBlock;
-	private int height;
-	private int grassHeight;
 	private String name = "World";
-	private UUID uuid = UUID.randomUUID();
 	private Location spawnLocation;
 	private long fullTime = 0;
 	private int weatherDuration = 0;
@@ -108,13 +108,15 @@ public class WorldMock implements World
 	 * Creates a new mock world.
 	 *
 	 * @param defaultBlock The block that is spawned at locations 1 to {@code grassHeight}
-	 * @param height       The height of the world.
+	 * @param minHeight    The minimum height of the world.
+	 * @param maxHeight    The maximum height of the world.
 	 * @param grassHeight  The last {@code y} at which {@code defaultBlock} will spawn.
 	 */
-	public WorldMock(Material defaultBlock, int height, int grassHeight)
+	public WorldMock(Material defaultBlock, int minHeight, int maxHeight, int grassHeight)
 	{
 		this.defaultBlock = defaultBlock;
-		this.height = height;
+		this.minHeight = minHeight;
+		this.maxHeight = maxHeight;
 		this.grassHeight = grassHeight;
 		this.server = MockBukkit.getMock();
 
@@ -154,6 +156,18 @@ public class WorldMock implements World
 	}
 
 	/**
+	 * Creates a new mock world with a specific height from 0.
+	 *
+	 * @param defaultBlock The block that is spawned at locations 1 to {@code grassHeight}
+	 * @param maxHeight    The maximum height of the world.
+	 * @param grassHeight  The last {@code y} at which {@code defaultBlock} will spawn.
+	 */
+	public WorldMock(Material defaultBlock, int maxHeight, int grassHeight)
+	{
+		this(defaultBlock, 0, maxHeight, grassHeight);
+	}
+
+	/**
 	 * Creates a new mock world with a height of 128.
 	 *
 	 * @param defaultBlock The block that is spawned at locations 1 to {@code grassHeight}
@@ -180,13 +194,13 @@ public class WorldMock implements World
 	 */
 	public BlockMock createBlock(Coordinate c)
 	{
-		if (c.y >= height)
+		if (c.y >= maxHeight)
 		{
-			throw new ArrayIndexOutOfBoundsException("Y larger than height");
+			throw new ArrayIndexOutOfBoundsException("Y larger than max height");
 		}
-		else if (c.y < 0)
+		else if (c.y < minHeight)
 		{
-			throw new ArrayIndexOutOfBoundsException("Y smaller than 0");
+			throw new ArrayIndexOutOfBoundsException("Y smaller than min height");
 		}
 
 		Location location = new Location(this, c.x, c.y, c.z);
@@ -211,7 +225,11 @@ public class WorldMock implements World
 	@Override
 	public @NotNull BlockMock getBlockAt(int x, int y, int z)
 	{
-		Coordinate coordinate = new Coordinate(x, y, z);
+		return getBlockAt(new Coordinate(x, y, z));
+	}
+
+	public @NotNull BlockMock getBlockAt(@NotNull Coordinate coordinate)
+	{
 		if (blocks.containsKey(coordinate))
 		{
 			return blocks.get(coordinate);
@@ -986,20 +1004,19 @@ public class WorldMock implements World
 	@Override
 	public int getMinHeight()
 	{
-		return MIN_WORLD_HEIGHT;
+		return minHeight;
 	}
 
 	@Override
 	public int getMaxHeight()
 	{
-		return MAX_WORLD_HEIGHT;
+		return maxHeight;
 	}
 
 	@Override
 	public int getSeaLevel()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return SEA_LEVEL;
 	}
 
 	@Override
@@ -1168,29 +1185,37 @@ public class WorldMock implements World
 	@Override
 	public void playSound(Location location, Sound sound, float volume, float pitch)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		for (Player player : getPlayers())
+		{
+			player.playSound(location, sound, volume, pitch);
+		}
 	}
 
 	@Override
 	public void playSound(Location location, String sound, float volume, float pitch)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		for (Player player : getPlayers())
+		{
+			player.playSound(location, sound, volume, pitch);
+		}
 	}
 
 	@Override
 	public void playSound(Location location, Sound sound, SoundCategory category, float volume, float pitch)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		for (Player player : getPlayers())
+		{
+			player.playSound(location, sound, category, volume, pitch);
+		}
 	}
 
 	@Override
 	public void playSound(Location location, String sound, SoundCategory category, float volume, float pitch)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		for (Player player : getPlayers())
+		{
+			player.playSound(location, sound, category, volume, pitch);
+		}
 	}
 
 	@Override

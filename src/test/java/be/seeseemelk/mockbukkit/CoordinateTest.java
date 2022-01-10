@@ -83,4 +83,21 @@ class CoordinateTest
 		Coordinate c2 = new Coordinate(4, 5, 6);
 		assertNotEquals(c1, c2);
 	}
+
+	@Test
+	void toChunkCoordinate()
+	{
+		Coordinate coordinate = new Coordinate(83, -15, -150);
+		ChunkCoordinate chunk = coordinate.toChunkCoordinate();
+		assertEquals(5, chunk.x);
+		assertEquals(-10, chunk.z);
+	}
+
+	@Test
+	void toLocalCoordinate()
+	{
+		Coordinate coordinate = new Coordinate(83, -15, -150);
+		Coordinate local = coordinate.toLocalCoordinate();
+		assertEquals(new Coordinate(3, -15, 10), local);
+	}
 }

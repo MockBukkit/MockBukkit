@@ -3,7 +3,7 @@ package be.seeseemelk.mockbukkit;
 import java.util.Collection;
 
 import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
-import org.apache.commons.lang.Validate;
+import com.google.common.base.Preconditions;
 import org.bukkit.Chunk;
 import org.bukkit.ChunkSnapshot;
 import org.bukkit.World;
@@ -51,10 +51,15 @@ public class ChunkMock implements Chunk
 	@Override
 	public @NotNull Block getBlock(int x, int y, int z)
 	{
-		Validate.isTrue(x >= 0 && x <= 15, "x is out of range (expected 0-15)");
-		Validate.isTrue(y >= 0 && y <= 255, "y is out of range (expected 0-255)");
-		Validate.isTrue(z >= 0 && z <= 15, "z is out of range (expected 0-15)");
+		Preconditions.checkArgument(0 <= x && x <= 15, "x out of range (expected 0-15, got %s)", x);
+		Preconditions.checkArgument(world.getMinHeight() <= y && y <= world.getMaxHeight(), "y out of range (expected %s-%s, got %s)", world.getMinHeight(), world.getMaxHeight(), y);
+		Preconditions.checkArgument(0 <= z && z <= 15, "z out of range (expected 0-15, got %s)", z);
 		return world.getBlockAt((this.x << 4) + x, y, (this.z << 4) + z);
+	}
+
+	public @NotNull Block getBlock(@NotNull Coordinate coordinate)
+	{
+		return getBlock(coordinate.x, coordinate.y, coordinate.z);
 	}
 
 	@Override
