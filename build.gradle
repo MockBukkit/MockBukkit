@@ -39,7 +39,7 @@ task sourcesJar(type: Jar) {
 }
 
 tasks.withType(JavaCompile) {
-    options.release.set(16)
+    options.release.set(17)
 }
 
 artifacts {

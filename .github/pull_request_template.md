@@ -3,7 +3,7 @@ State the changes of the pull request here.
 
 # Checklist
 The following items should be checked before the pull request can be merged.
-- [ ] Version number updated in `settings.gradle`.
+- [ ] Version number updated in `settings.gradle` and `Readme.md`.
 - [ ] Unit tests added.
 - [ ] Code follows existing code format.
 

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.io.FileNotFoundException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -40,7 +41,7 @@ class RegistryTest
 
 		for (TagWrapperMock tag : registry.getTags().values())
 		{
-			assertFalse(tag.getValues().isEmpty());
+			assertFalse(tag.getValues().isEmpty(), "Expected Tag \"" + tag + "\" not to be empty");
 		}
 	}
 
@@ -56,7 +57,7 @@ class RegistryTest
 
 	@ParameterizedTest
 	@EnumSource(TagRegistry.class)
-	void testGetValues(@NotNull TagRegistry registry) throws TagMisconfigurationException
+	void testGetValues(@NotNull TagRegistry registry) throws TagMisconfigurationException, FileNotFoundException
 	{
 		for (TagWrapperMock tag : registry.getTags().values())
 		{
