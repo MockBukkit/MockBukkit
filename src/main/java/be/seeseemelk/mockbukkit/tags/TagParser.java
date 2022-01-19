@@ -106,8 +106,7 @@ public class TagParser implements Keyed
 			Set<Material> materials = new HashSet<>();
 			Set<TagWrapperMock> tags = new HashSet<>();
 
-			JsonParser parser = new JsonParser();
-			JsonObject root = parser.parse(json).getAsJsonObject();
+			JsonObject root = JsonParser.parseString(json).getAsJsonObject();
 			JsonElement child = root.get("values");
 
 			if (child instanceof JsonArray)
