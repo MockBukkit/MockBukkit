@@ -26,6 +26,8 @@ dependencies {
     implementation 'org.hamcrest:hamcrest-library:2.2'
     implementation 'commons-io:commons-io:2.11.0'
     implementation 'org.jetbrains:annotations:21.0.1'
+
+    testImplementation 'org.mockito:mockito-core:4.0.0'
 }
 
 task javadocJar(type: Jar) {

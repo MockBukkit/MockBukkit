@@ -1,10 +1,13 @@
 package be.seeseemelk.mockbukkit.scheduler;
 
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import java.util.ArrayList;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -14,10 +17,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 import java.util.logging.Logger;
-
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-
 import org.apache.commons.lang.Validate;
 import org.bukkit.event.Event;
 import org.bukkit.plugin.Plugin;
@@ -25,7 +24,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.scheduler.BukkitWorker;
-
 import org.jetbrains.annotations.NotNull;
 
 public class BukkitSchedulerMock implements BukkitScheduler
@@ -35,6 +33,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	        60L, TimeUnit.SECONDS,
 	        new SynchronousQueue<>());
 	private final ExecutorService asyncEventExecutor = Executors.newCachedThreadPool();
+	private final List<Future<?>> queuedAsyncEvents = new ArrayList<>();
 	private final TaskList scheduledTasks = new TaskList();
 	private final AtomicReference<Exception> asyncException = new AtomicReference<>();
 	private long currentTick = 0;
@@ -74,7 +73,9 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public @NotNull Future<?> executeAsyncEvent(Event event)
 	{
 		Validate.notNull(event, "Cannot schedule an Event that is null!");
-		return asyncEventExecutor.submit(() -> MockBukkit.getMock().getPluginManager().callEvent(event));
+		Future<?> future = asyncEventExecutor.submit(() -> MockBukkit.getMock().getPluginManager().callEvent(event));
+		queuedAsyncEvents.add(future);
+		return future;
 	}
 
 	/**
@@ -190,6 +191,29 @@ public class BukkitSchedulerMock implements BukkitScheduler
 					}
 				}
 				pool.shutdownNow();
+			}
+		}
+	}
+
+	public void waitAsyncEventsFinished()
+	{
+		for (Future<?> futureEvent : List.copyOf(queuedAsyncEvents))
+		{
+			if (futureEvent.isDone())
+			{
+				queuedAsyncEvents.remove(futureEvent);
+			}
+			else
+			{
+				try
+				{
+					queuedAsyncEvents.remove(futureEvent);
+					futureEvent.get();
+				}
+				catch (InterruptedException | ExecutionException e)
+				{
+					throw new RuntimeException("Failed to wait for async event execution: " + e.getMessage(), e);
+				}
 			}
 		}
 	}
