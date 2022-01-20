@@ -33,7 +33,7 @@ class PlayerMessagingTest
 	void assertSaid_CorrectMessage_spigot_api_DoesNotAssert()
 	{
 		sender.spigot().sendMessage(TextComponent.fromLegacyText("Spigot message"));
-		sender.assertSaid("Spigot message");
+		sender.assertSaid("§fSpigot message");
 	}
 
 	@Test

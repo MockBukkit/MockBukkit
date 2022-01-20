@@ -44,10 +44,21 @@ public class Coordinate
 		return new ChunkCoordinate(x >> 4, z >> 4);
 	}
 
+	/**
+	 * Gets the coordinate relative to the chunk.
+	 *
+	 * @return The local coordinate.
+	 */
+	@NotNull
+	public Coordinate toLocalCoordinate()
+	{
+		return new Coordinate(x & 0xf, y, z & 0xf);
+	}
+
 	@Override
 	public int hashCode()
 	{
-		return (x << 0) + (y << 8) + (z << 16);
+		return x + (y << 8) + (z << 16);
 	}
 
 	@Override

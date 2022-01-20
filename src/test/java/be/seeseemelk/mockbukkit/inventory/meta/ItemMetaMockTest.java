@@ -393,6 +393,20 @@ class ItemMetaMockTest
 	}
 
 	@Test
+	void hasLocalizedName_NoLocalizedName_False()
+	{
+		assertFalse(meta.hasLocalizedName());
+	}
+
+	@Test
+	void setLocalizedName_NewName_NameSetExactly()
+	{
+		meta.setLocalizedName("Some name");
+		assertTrue(meta.hasLocalizedName());
+		assertEquals("Some name", meta.getLocalizedName());
+	}
+
+	@Test
 	void hasEnchants()
 	{
 		assertFalse(meta.hasEnchants());
