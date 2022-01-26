@@ -580,6 +580,13 @@ public class WorldMock implements World
 		throw new UnimplementedOperationException();
 	}
 
+    @Override
+    public boolean generateTree(Location location, Random random, TreeType type, Predicate<BlockState> statePredicate)
+    {
+        // TODO Auto-generated method stub
+        throw new UnimplementedOperationException();
+    }
+
 	@Override
 	public Entity spawnEntity(Location loc, EntityType type)
 	{
@@ -818,8 +825,7 @@ public class WorldMock implements World
 	@Override
 	public long getSeed()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.seed;
 	}
 
 	@Override
@@ -1069,10 +1075,10 @@ public class WorldMock implements World
 	}
 
 	@Override
+	@Deprecated
 	public WorldType getWorldType()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.worldType;
 	}
 
 	@Override
@@ -1185,19 +1191,13 @@ public class WorldMock implements World
 	@Override
 	public void playSound(Location location, Sound sound, float volume, float pitch)
 	{
-		for (Player player : getPlayers())
-		{
-			player.playSound(location, sound, volume, pitch);
-		}
+        this.playSound(location, sound, SoundCategory.MASTER, volume, pitch);
 	}
 
 	@Override
 	public void playSound(Location location, String sound, float volume, float pitch)
 	{
-		for (Player player : getPlayers())
-		{
-			player.playSound(location, sound, volume, pitch);
-		}
+		this.playSound(location, sound, SoundCategory.MASTER, volume, pitch);
 	}
 
 	@Override
@@ -1217,6 +1217,27 @@ public class WorldMock implements World
 			player.playSound(location, sound, category, volume, pitch);
 		}
 	}
+
+    @Override
+    public void playSound(Entity entity, Sound sound, float volume, float pitch)
+    {
+        this.playSound(entity, sound, SoundCategory.MASTER, volume, pitch);
+    }
+
+    @Override
+    public void playSound(Entity entity, Sound sound, SoundCategory category, float volume, float pitch)
+    {
+        if (entity == null || entity.getWorld() != this || sound == null || category == null)
+        {
+            // Null values are simply ignored - This is inline with CB behaviour
+            return;
+        }
+
+        for (Player player : getPlayers())
+        {
+            player.playSound(entity, sound, category, volume, pitch);
+        }
+    }
 
 	@Override
 	public String[] getGameRules()

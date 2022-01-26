@@ -69,13 +69,16 @@ public class ItemFactoryMock implements ItemFactory
 	@Override
 	public ItemMeta getItemMeta(Material material)
 	{
+	    Class<? extends ItemMeta> clazz = null;
+
 		try
 		{
-			return getItemMetaClass(material).newInstance();
+		    clazz = getItemMetaClass(material);
+			return clazz.getDeclaredConstructor().newInstance();
 		}
-		catch (InstantiationException | IllegalAccessException e)
+		catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e)
 		{
-			throw new UnsupportedOperationException("Can't instantiate class");
+			throw new UnsupportedOperationException("Can't instantiate class '" + clazz + "'");
 		}
 	}
 

@@ -26,7 +26,7 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	}
 
 	@Override
-	public void sendMessage(String[] messages)
+	public void sendMessage(String... messages)
 	{
 		sendMessage(null, messages);
 	}
@@ -38,7 +38,7 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	}
 
 	@Override
-	public void sendMessage(UUID sender, String[] messages)
+	public void sendMessage(UUID sender, String... messages)
 	{
 		for (String message : messages)
 		{
