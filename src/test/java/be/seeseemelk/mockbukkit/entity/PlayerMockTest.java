@@ -13,6 +13,7 @@ import be.seeseemelk.mockbukkit.inventory.InventoryViewMock;
 import be.seeseemelk.mockbukkit.inventory.SimpleInventoryViewMock;
 import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 import org.bukkit.Bukkit;
+import org.bukkit.DyeColor;
 import org.bukkit.GameMode;
 import org.bukkit.GameRule;
 import org.bukkit.Location;
@@ -41,6 +42,7 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.event.player.PlayerToggleSprintEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
@@ -52,9 +54,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -1324,6 +1324,39 @@ class PlayerMockTest
 		player.assertNotTeleported();
 		player.assertLocation(originalLocation, 0);
 
+	}
+
+	@Test
+	public void testPlayerSendSignChange_Valid()
+	{
+		player.sendSignChange(player.getLocation(), new String[4], DyeColor.CYAN, true);
+	}
+
+	@Test
+	public void testPlayerSendSignChange_Invalid()
+	{
+		assertThrows(IllegalArgumentException.class, () ->
+		{
+			player.sendSignChange(player.getLocation(), new String[2]);
+		});
+	}
+
+	@Test
+	public void testPlayerSendExperienceChange()
+	{
+		player.sendExperienceChange(0.5f);
+	}
+
+	@Test
+	public void testPlayerSendBlockDamage()
+	{
+		player.sendBlockDamage(player.getLocation(), 0.5f);
+	}
+
+	@Test
+	public void testPlayerSendEquipmentChange()
+	{
+		player.sendEquipmentChange(player, EquipmentSlot.CHEST, new ItemStack(Material.DIAMOND_CHESTPLATE));
 	}
 
 }

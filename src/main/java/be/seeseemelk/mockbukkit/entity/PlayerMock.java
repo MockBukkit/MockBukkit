@@ -10,6 +10,7 @@ import be.seeseemelk.mockbukkit.inventory.SimpleInventoryViewMock;
 import be.seeseemelk.mockbukkit.sound.AudioExperience;
 import be.seeseemelk.mockbukkit.sound.SoundReceiver;
 import be.seeseemelk.mockbukkit.statistic.StatisticsMock;
+import com.google.common.base.Preconditions;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.apache.commons.lang.Validate;
@@ -1166,22 +1167,47 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public void sendBlockChange(@NotNull Location loc, @NotNull Material material, byte data)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// Pretend we sent the block change.
+	}
+
+	@Override
+	public void sendBlockChange(@NotNull Location loc, @NotNull BlockData block)
+	{
+		// Pretend we sent the block change.
 	}
 
 	@Override
 	public void sendSignChange(@NotNull Location loc, String[] lines)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.sendSignChange(loc, lines, DyeColor.BLACK);
+	}
+
+	@Override
+	public void sendSignChange(@NotNull Location loc, String[] lines, @NotNull DyeColor dyeColor) throws IllegalArgumentException
+	{
+		this.sendSignChange(loc, lines, dyeColor, false);
+	}
+
+	@Override
+	public void sendSignChange(@NotNull Location loc, @Nullable String[] lines, @NotNull DyeColor dyeColor, boolean hasGlowingText) throws IllegalArgumentException
+	{
+		if (lines == null)
+		{
+			lines = new String[4];
+		}
+
+		Validate.notNull(loc, "Location can not be null");
+		Validate.notNull(dyeColor, "DyeColor can not be null");
+		if (lines.length < 4)
+		{
+			throw new IllegalArgumentException("Must have at least 4 lines");
+		}
 	}
 
 	@Override
 	public void sendMap(@NotNull MapView map)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// Pretend we sent the map change.
 	}
 
 	@Override
@@ -1949,13 +1975,6 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public void sendBlockChange(@NotNull Location loc, @NotNull BlockData block)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public void updateCommands()
 	{
 		// TODO Auto-generated method stub
@@ -2094,20 +2113,6 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public void sendSignChange(@NotNull Location loc, String[] lines, @NotNull DyeColor dyeColor) throws IllegalArgumentException
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void sendSignChange(@NotNull Location loc, @Nullable String[] lines, @NotNull DyeColor dyeColor, boolean hasGlowingText) throws IllegalArgumentException
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public void openBook(@NotNull ItemStack book)
 	{
 		// TODO Auto-generated method stub
@@ -2138,15 +2143,14 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public void sendExperienceChange(float progress)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.sendExperienceChange(progress, this.getLevel());
 	}
 
 	@Override
 	public void sendExperienceChange(float progress, int level)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(progress >= 0.0 && progress <= 1.0, "Experience progress must be between 0.0 and 1.0 (%s)", progress);
+		Preconditions.checkArgument(level >= 0, "Experience level must not be negative (%s)", level);
 	}
 
 	@Override
@@ -2187,8 +2191,8 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public void sendBlockDamage(@NotNull Location loc, float progress)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(loc != null, "loc must not be null");
+		Preconditions.checkArgument(progress >= 0.0 && progress <= 1.0, "progress must be between 0.0 and 1.0 (inclusive)");
 	}
 
 	@Override
@@ -2262,10 +2266,11 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public void sendEquipmentChange(LivingEntity entity, EquipmentSlot slot, ItemStack item)
+	public void sendEquipmentChange(@NotNull LivingEntity entity, @NotNull EquipmentSlot slot, @NotNull ItemStack item)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(entity != null, "entity must not be null");
+		Preconditions.checkArgument(slot != null, "slot must not be null");
+		Preconditions.checkArgument(item != null, "item must not be null");
 	}
 
 	@Override
