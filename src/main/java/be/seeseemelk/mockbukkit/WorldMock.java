@@ -52,6 +52,7 @@ import org.bukkit.entity.Item;
 import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.SpawnCategory;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.world.TimeSkipEvent;
 import org.bukkit.generator.BiomeProvider;
@@ -59,6 +60,7 @@ import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
+import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Consumer;
@@ -75,6 +77,7 @@ import be.seeseemelk.mockbukkit.entity.FireworkMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
 import be.seeseemelk.mockbukkit.entity.ZombieMock;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
+import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
 
 /**
  * A mock world object. Note that it is made to be as simple as possible. It is by no means an efficient implementation.
@@ -87,6 +90,7 @@ public class WorldMock implements World
 	private final Map<GameRule<?>, Object> gameRules = new HashMap<>();
 	private final MetadataTable metadataTable = new MetadataTable();
 	private final Map<ChunkCoordinate, ChunkMock> loadedChunks = new HashMap<>();
+    private PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
 	private final ServerMock server;
 	private final Material defaultBlock;
 	private final int grassHeight;
@@ -2014,4 +2018,33 @@ public class WorldMock implements World
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
+
+    @Override
+    public @NotNull PersistentDataContainer getPersistentDataContainer() {
+        return this.persistentDataContainer;
+    }
+
+    @Override
+    public long getTicksPerSpawns(@NotNull SpawnCategory spawnCategory) {
+        // TODO Auto-generated method stub
+        throw new UnimplementedOperationException();
+    }
+
+    @Override
+    public void setTicksPerSpawns(@NotNull SpawnCategory spawnCategory, int ticksPerCategorySpawn) {
+        // TODO Auto-generated method stub
+        throw new UnimplementedOperationException();
+    }
+
+    @Override
+    public int getSpawnLimit(@NotNull SpawnCategory spawnCategory) {
+        // TODO Auto-generated method stub
+        throw new UnimplementedOperationException();
+    }
+
+    @Override
+    public void setSpawnLimit(@NotNull SpawnCategory spawnCategory, int limit) {
+        // TODO Auto-generated method stub
+        throw new UnimplementedOperationException();
+    }
 }
