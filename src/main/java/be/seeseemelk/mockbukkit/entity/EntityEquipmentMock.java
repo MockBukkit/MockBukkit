@@ -11,6 +11,8 @@ import org.jetbrains.annotations.Nullable;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
+import java.util.*;
+
 /**
  * This mocks the {@link EntityEquipment} of a {@link LivingEntityMock}. Note that not every {@link LivingEntity} has
  * {@link EntityEquipment}, so only implement this where necessary.
@@ -22,6 +24,8 @@ public class EntityEquipmentMock implements EntityEquipment
 {
 
 	private final LivingEntityMock holder;
+
+	private final Map<EquipmentSlot, Float> dropChances = new EnumMap<>(EquipmentSlot.class);
 
 	private ItemStack itemInMainHand;
 	private ItemStack itemInOffHand;
@@ -253,101 +257,89 @@ public class EntityEquipmentMock implements EntityEquipment
 	}
 
 	@Override
+	@Deprecated
 	public float getItemInHandDropChance()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.dropChances.get(EquipmentSlot.HAND);
 	}
 
 	@Override
+	@Deprecated
 	public void setItemInHandDropChance(float chance)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.dropChances.put(EquipmentSlot.HAND, chance);
 	}
 
 	@Override
 	public float getItemInMainHandDropChance()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.dropChances.get(EquipmentSlot.HAND);
 	}
 
 	@Override
 	public void setItemInMainHandDropChance(float chance)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.dropChances.put(EquipmentSlot.HAND, chance);
 	}
 
 	@Override
 	public float getItemInOffHandDropChance()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.dropChances.get(EquipmentSlot.OFF_HAND);
 	}
 
 	@Override
 	public void setItemInOffHandDropChance(float chance)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.dropChances.put(EquipmentSlot.OFF_HAND, chance);
 	}
 
 	@Override
 	public float getHelmetDropChance()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.dropChances.get(EquipmentSlot.HEAD);
 	}
 
 	@Override
 	public void setHelmetDropChance(float chance)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.dropChances.put(EquipmentSlot.HEAD, chance);
 	}
 
 	@Override
 	public float getChestplateDropChance()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.dropChances.get(EquipmentSlot.CHEST);
 	}
 
 	@Override
 	public void setChestplateDropChance(float chance)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.dropChances.put(EquipmentSlot.CHEST, chance);
 	}
 
 	@Override
 	public float getLeggingsDropChance()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.dropChances.get(EquipmentSlot.LEGS);
 	}
 
 	@Override
 	public void setLeggingsDropChance(float chance)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.dropChances.put(EquipmentSlot.LEGS, chance);
 	}
 
 	@Override
 	public float getBootsDropChance()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.dropChances.get(EquipmentSlot.FEET);
 	}
 
 	@Override
 	public void setBootsDropChance(float chance)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.dropChances.put(EquipmentSlot.FEET, chance);
 	}
 
 	@Override
