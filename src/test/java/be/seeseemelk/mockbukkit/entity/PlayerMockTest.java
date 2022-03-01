@@ -134,6 +134,12 @@ class PlayerMockTest
 	}
 
 	@Test
+	void getInventory_getEquipment_SameInventory()
+	{
+		assertSame(player.getInventory(), player.getEquipment());
+	}
+
+	@Test
 	void getName_Default_CorrectName()
 	{
 		assertEquals("player", player.getName());
@@ -1324,12 +1330,6 @@ class PlayerMockTest
 		player.assertNotTeleported();
 		player.assertLocation(originalLocation, 0);
 
-	}
-
-	@Test
-	public void testPlayerEquipment_SetHelmet()
-	{
-		player.getEquipment().setHelmet(new ItemStack(Material.DIAMOND_HELMET));
 	}
 
 }

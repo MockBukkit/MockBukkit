@@ -92,7 +92,6 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 {
 	private boolean online;
 	private PlayerInventoryMock inventory = null;
-	private EntityEquipment equipment = null;
 	private EnderChestInventoryMock enderChest = null;
 	private GameMode gamemode = GameMode.SURVIVAL;
 	private String displayName = null;
@@ -737,11 +736,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public EntityEquipment getEquipment()
 	{
-		if (equipment == null)
-		{
-			equipment = new EntityEquipmentMock(this);
-		}
-		return equipment;
+		return this.inventory;
 	}
 
 	@Override
