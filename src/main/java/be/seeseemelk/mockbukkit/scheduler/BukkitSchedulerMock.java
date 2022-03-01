@@ -1,9 +1,7 @@
 package be.seeseemelk.mockbukkit.scheduler;
 
-import java.util.ArrayList;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -156,6 +154,15 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	 */
 	public void waitAsyncTasksFinished()
 	{
+		// Cancel repeating tasks so they don't run forever.
+		for (Map.Entry<Integer, ScheduledTask> entry : scheduledTasks.tasks.entrySet())
+		{
+			if (entry.getValue() instanceof RepeatingTask)
+			{
+				scheduledTasks.cancelTask(entry.getKey());
+			}
+		}
+
 		// Make sure all tasks get to execute. (except for repeating asynchronous tasks, they only will fire once)
 		while (scheduledTasks.getScheduledTaskCount() > 0)
 		{
