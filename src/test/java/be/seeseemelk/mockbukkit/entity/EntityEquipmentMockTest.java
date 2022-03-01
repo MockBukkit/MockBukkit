@@ -118,4 +118,70 @@ class EntityEquipmentMockTest
 		assertEquals(item, equipment.getItem(EquipmentSlot.FEET));
 	}
 
+	@Test
+	void testMainHandDropChance()
+	{
+		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
+		EntityEquipment equipment = armorStand.getEquipment();
+
+		equipment.setItemInMainHandDropChance(0.75f);
+
+		assertEquals(0.75f, equipment.getItemInMainHandDropChance());
+	}
+
+	@Test
+	void testOffHandDropChance()
+	{
+		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
+		EntityEquipment equipment = armorStand.getEquipment();
+
+		equipment.setItemInOffHandDropChance(0.75f);
+
+		assertEquals(0.75f, equipment.getItemInOffHandDropChance());
+	}
+
+	@Test
+	void testHelmetDropChance()
+	{
+		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
+		EntityEquipment equipment = armorStand.getEquipment();
+
+		equipment.setHelmetDropChance(0.75f);
+
+		assertEquals(0.75f, equipment.getHelmetDropChance());
+	}
+
+	@Test
+	void testChestplateDropChance()
+	{
+		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
+		EntityEquipment equipment = armorStand.getEquipment();
+
+		equipment.setChestplateDropChance(0.75f);
+
+		assertEquals(0.75f, equipment.getChestplateDropChance());
+	}
+
+	@Test
+	void testLeggingsDropChance()
+	{
+		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
+		EntityEquipment equipment = armorStand.getEquipment();
+
+		equipment.setLeggingsDropChance(0.75f);
+
+		assertEquals(0.75f, equipment.getLeggingsDropChance());
+	}
+
+	@Test
+	void testBootsDropChance()
+	{
+		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
+		EntityEquipment equipment = armorStand.getEquipment();
+
+		equipment.setBootsDropChance(0.75f);
+
+		assertEquals(0.75f, equipment.getBootsDropChance());
+	}
+
 }
