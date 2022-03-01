@@ -1813,7 +1813,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	public <T> void spawnParticle(@NotNull Particle particle, @NotNull Location location, int count, double offsetX, double offsetY,
 	                          double offsetZ, T data)
 	{
-		this.spawnParticle(particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ, extra, data);
+		this.spawnParticle(particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ, data);
 	}
 
 	@Override
