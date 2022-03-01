@@ -1512,6 +1512,10 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public void setAllowFlight(boolean flight)
 	{
+		if (this.isFlying() && !flight)
+		{
+			flying = false;
+		}
 		this.allowFlight = flight;
 	}
 
