@@ -113,13 +113,15 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	}
 
     @Override
-    public PlayerProfile getOwnerProfile() {
+    public PlayerProfile getOwnerProfile()
+    {
         // TODO Auto-generated method stub
         throw new UnimplementedOperationException();
     }
 
     @Override
-    public void setOwnerProfile(@Nullable PlayerProfile profile) {
+    public void setOwnerProfile(@Nullable PlayerProfile profile)
+    {
         // TODO Auto-generated method stub
         throw new UnimplementedOperationException();
     }

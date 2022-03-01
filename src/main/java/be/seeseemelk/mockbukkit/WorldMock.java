@@ -2020,30 +2020,35 @@ public class WorldMock implements World
 	}
 
     @Override
-    public @NotNull PersistentDataContainer getPersistentDataContainer() {
+    public @NotNull PersistentDataContainer getPersistentDataContainer()
+    {
         return this.persistentDataContainer;
     }
 
     @Override
-    public long getTicksPerSpawns(@NotNull SpawnCategory spawnCategory) {
+    public long getTicksPerSpawns(@NotNull SpawnCategory spawnCategory)
+    {
         // TODO Auto-generated method stub
         throw new UnimplementedOperationException();
     }
 
     @Override
-    public void setTicksPerSpawns(@NotNull SpawnCategory spawnCategory, int ticksPerCategorySpawn) {
+    public void setTicksPerSpawns(@NotNull SpawnCategory spawnCategory, int ticksPerCategorySpawn)
+    {
         // TODO Auto-generated method stub
         throw new UnimplementedOperationException();
     }
 
     @Override
-    public int getSpawnLimit(@NotNull SpawnCategory spawnCategory) {
+    public int getSpawnLimit(@NotNull SpawnCategory spawnCategory)
+    {
         // TODO Auto-generated method stub
         throw new UnimplementedOperationException();
     }
 
     @Override
-    public void setSpawnLimit(@NotNull SpawnCategory spawnCategory, int limit) {
+    public void setSpawnLimit(@NotNull SpawnCategory spawnCategory, int limit)
+    {
         // TODO Auto-generated method stub
         throw new UnimplementedOperationException();
     }

@@ -81,7 +81,8 @@ public class SimpleMobMock extends MobMock
 	}
 
     @Override
-    public SpawnCategory getSpawnCategory() {
+    public SpawnCategory getSpawnCategory()
+    {
         // TODO Auto-generated method stub
         throw new UnimplementedOperationException();
     }
