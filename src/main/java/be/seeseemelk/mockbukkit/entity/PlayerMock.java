@@ -94,6 +94,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	private PlayerInventoryMock inventory = null;
 	private EnderChestInventoryMock enderChest = null;
 	private GameMode gamemode = GameMode.SURVIVAL;
+	private GameMode previousGamemode = gamemode;
 	private String displayName = null;
 	private String playerListName = null;
 	private int expTotal = 0;
@@ -316,14 +317,14 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public void setGameMode(@NotNull GameMode mode)
 	{
-		gamemode = mode;
+		this.previousGamemode = gamemode;
+		this.gamemode = mode;
 	}
 
     @Override
     public GameMode getPreviousGameMode()
     {
-        // TODO Auto-generated method stub
-        throw new UnimplementedOperationException();
+        return previousGamemode;
     }
 
 	@Override
