@@ -237,10 +237,17 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public BlockFace getFace(Block block)
+	public BlockFace getFace(@NotNull Block block)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		for (BlockFace face : BlockFace.values())
+		{
+			if ((this.getX() + face.getModX() == block.getX()) && (this.getY() + face.getModY() == block.getY()) && (this.getZ() + face.getModZ() == block.getZ()))
+			{
+				return face;
+			}
+		}
+
+		return null;
 	}
 
 	@Override

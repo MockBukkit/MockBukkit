@@ -207,4 +207,19 @@ class BlockMockTest
 		block.breakNaturally();
 		assertTrue(block.isEmpty());
 	}
+
+	@Test
+	void testGetFace_Valid()
+	{
+		Block b = block.getRelative(BlockFace.NORTH);
+		assertEquals(block.getFace(b), BlockFace.NORTH);
+	}
+
+	@Test
+	void testGetFace_Invalid()
+	{
+		Block b = block.getRelative(BlockFace.NORTH, 2);
+		assertNull(block.getFace(b));
+	}
+
 }
