@@ -5,9 +5,12 @@ import java.util.Objects;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.profile.PlayerProfile;
+import org.jetbrains.annotations.Nullable;
 
 import com.google.common.base.Strings;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
 
 /**
@@ -108,4 +111,16 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 		// CraftBukkits implementation also always returns true too, so there we go
 		return true;
 	}
+
+    @Override
+    public PlayerProfile getOwnerProfile() {
+        // TODO Auto-generated method stub
+        throw new UnimplementedOperationException();
+    }
+
+    @Override
+    public void setOwnerProfile(@Nullable PlayerProfile profile) {
+        // TODO Auto-generated method stub
+        throw new UnimplementedOperationException();
+    }
 }
