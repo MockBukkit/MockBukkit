@@ -1328,13 +1328,18 @@ class PlayerMockTest
 	}
 
 	@Test
-	public void testPlayerSpawnParticle_Correct_DataType() {
+	public void testPlayerSpawnParticle_Correct_DataType()
+	{
 		player.spawnParticle(Particle.ITEM_CRACK, player.getLocation(), 1, new ItemStack(Material.STONE));
 	}
 
 	@Test
-	public void testPlayerSpawnParticle_Incorrect_DataType() {
-		player.spawnParticle(Particle.ITEM_CRACK, player.getLocation(), 1, new Object());
+	public void testPlayerSpawnParticle_Incorrect_DataType()
+	{
+		assertThrows(IllegalArgumentException.class, () ->
+		{
+			player.spawnParticle(Particle.ITEM_CRACK, player.getLocation(), 1, new Object());
+		});
 	}
 
 }
