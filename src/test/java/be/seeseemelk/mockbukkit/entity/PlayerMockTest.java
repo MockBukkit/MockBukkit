@@ -15,8 +15,10 @@ import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.GameRule;
+import org.bukkit.Instrument;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Note;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.World;
@@ -952,6 +954,30 @@ class PlayerMockTest
 		{
 			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
 			&& audio.getVolume() == volume && audio.getPitch() == pitch;
+		});
+	}
+
+	@Test
+	void testPlayNote_NewMethod()
+	{
+		int note = 10;
+		player.playNote(player.getEyeLocation(), Instrument.BANJO, new Note(note));
+		player.assertSoundHeard(Sound.BLOCK_NOTE_BLOCK_BANJO, audio ->
+		{
+			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
+					&& audio.getVolume() == 3.0f && audio.getPitch() == Math.pow(2.0D, (note - 12.0D) / 12.0D);
+		});
+	}
+
+	@Test
+	void testPlayNote_OldMethod()
+	{
+		int note = 10;
+		player.playNote(player.getEyeLocation(), (byte) 0, (byte) note);
+		player.assertSoundHeard(Sound.BLOCK_NOTE_BLOCK_HARP, audio ->
+		{
+			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
+					&& audio.getVolume() == 3.0f && audio.getPitch() == Math.pow(2.0D, (note - 12.0D) / 12.0D);
 		});
 	}
 
