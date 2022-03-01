@@ -102,99 +102,85 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	@Override
 	public float getItemInHandDropChance()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return 1;
 	}
 
 	@Override
 	public void setItemInHandDropChance(float chance)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw new UnsupportedOperationException("Cannot set drop chance for PlayerInventory");
 	}
 
 	@Override
 	public float getItemInMainHandDropChance()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return 1;
 	}
 
 	@Override
 	public void setItemInMainHandDropChance(float chance)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw new UnsupportedOperationException("Cannot set drop chance for PlayerInventory");
 	}
 
 	@Override
 	public float getItemInOffHandDropChance()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return 1;
 	}
 
 	@Override
 	public void setItemInOffHandDropChance(float chance)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw new UnsupportedOperationException("Cannot set drop chance for PlayerInventory");
 	}
 
 	@Override
 	public float getHelmetDropChance()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return 1;
 	}
 
 	@Override
 	public void setHelmetDropChance(float chance)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw new UnsupportedOperationException("Cannot set drop chance for PlayerInventory");
 	}
 
 	@Override
 	public float getChestplateDropChance()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return 1;
 	}
 
 	@Override
 	public void setChestplateDropChance(float chance)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw new UnsupportedOperationException("Cannot set drop chance for PlayerInventory");
 	}
 
 	@Override
 	public float getLeggingsDropChance()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return 1;
 	}
 
 	@Override
 	public void setLeggingsDropChance(float chance)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw new UnsupportedOperationException("Cannot set drop chance for PlayerInventory");
 	}
 
 	@Override
 	public float getBootsDropChance()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return 1;
 	}
 
 	@Override
 	public void setBootsDropChance(float chance)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		throw new UnsupportedOperationException("Cannot set drop chance for PlayerInventory");
 	}
 
 	@Override
