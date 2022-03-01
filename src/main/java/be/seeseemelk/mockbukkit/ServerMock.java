@@ -1284,8 +1284,14 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public Entity getEntity(UUID uuid)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		for (EntityMock entity : entities)
+		{
+			if (entity.getUniqueId().equals(uuid))
+			{
+				return entity;
+			}
+		}
+		return null;
 	}
 
 	@Override
