@@ -26,6 +26,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.WorldCreator;
 import org.bukkit.WorldType;
 import org.bukkit.World;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
@@ -569,6 +570,13 @@ class ServerMockTest
 		server.setSpawnRadius(51);
 		assertEquals(51, server.getSpawnRadius());
 	}
+
+	@Test
+	void testCreateBlockData() {
+		BlockData blockData = server.createBlockData(Material.STONE);
+		assertEquals(Material.STONE, blockData.getMaterial());
+	}
+
 }
 
 class TestRecipe implements Recipe
