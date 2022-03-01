@@ -885,8 +885,9 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public @NotNull Map<String, Object> serialize()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Map<String, Object> result = new LinkedHashMap<>();
+		result.put("name", getName());
+		return result;
 	}
 
 	@Override

@@ -1,0 +1,42 @@
+package be.seeseemelk.mockbukkit.entity;
+
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.ServerMock;
+import org.bukkit.OfflinePlayer;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.util.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+class OfflinePlayerMockTest
+{
+
+	private ServerMock server;
+	private UUID uuid;
+	private OfflinePlayer player;
+
+	@BeforeEach
+	public void setUp()
+	{
+		server = MockBukkit.mock();
+		uuid = UUID.randomUUID();
+		player = new OfflinePlayerMock(uuid, "player");
+	}
+
+	@AfterEach
+	public void tearDown()
+	{
+		MockBukkit.unmock();
+	}
+
+	@Test
+	public void testOfflinePlayerSerialization()
+	{
+		Map<String, Object> serialized = player.serialize();
+		assertEquals(serialized.get("UUID"), uuid);
+	}
+
+}
