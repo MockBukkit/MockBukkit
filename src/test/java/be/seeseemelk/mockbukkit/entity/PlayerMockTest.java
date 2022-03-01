@@ -1327,7 +1327,8 @@ class PlayerMockTest
 	}
 
 	@Test
-	public void testPlayerEquipment_SetHelmet() {
+	public void testPlayerEquipment_SetHelmet()
+	{
 		player.getEquipment().setHelmet(new ItemStack(Material.DIAMOND_HELMET));
 	}
 
