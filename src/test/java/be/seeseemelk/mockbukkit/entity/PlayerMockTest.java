@@ -1161,8 +1161,17 @@ class PlayerMockTest
 	@Test
 	void testFly()
 	{
+		player.setAllowFlight(true);
 		player.setFlying(true);
 		assertTrue(player.isFlying());
+	}
+
+	@Test
+	void testFly_NotAllowed() {
+		assertThrows(IllegalArgumentException.class, () -> {
+			player.setAllowFlight(false);
+			player.setFlying(true);
+		});
 	}
 
 	@Test
