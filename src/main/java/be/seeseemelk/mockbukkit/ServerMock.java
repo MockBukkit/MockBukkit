@@ -1282,7 +1282,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public Entity getEntity(UUID uuid)
+	public @Nullable Entity getEntity(@NotNull UUID uuid)
 	{
 		for (EntityMock entity : entities)
 		{
