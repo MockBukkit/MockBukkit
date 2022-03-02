@@ -13,6 +13,7 @@ import be.seeseemelk.mockbukkit.inventory.InventoryViewMock;
 import be.seeseemelk.mockbukkit.inventory.SimpleInventoryViewMock;
 import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 import org.bukkit.Bukkit;
+import org.bukkit.Effect;
 import org.bukkit.GameMode;
 import org.bukkit.GameRule;
 import org.bukkit.Location;
@@ -1341,6 +1342,12 @@ class PlayerMockTest
 		player.assertNotTeleported();
 		player.assertLocation(originalLocation, 0);
 
+	}
+
+	@Test
+	public void testPlayerPlayEffect()
+	{
+		player.playEffect(player.getLocation(), Effect.STEP_SOUND, Material.STONE);
 	}
 
 }

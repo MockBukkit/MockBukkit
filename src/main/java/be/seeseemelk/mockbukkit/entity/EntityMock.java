@@ -13,6 +13,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.LinkedTransferQueue;
 
+import com.google.common.base.Preconditions;
 import org.bukkit.Bukkit;
 import org.bukkit.EntityEffect;
 import org.bukkit.Location;
@@ -667,11 +668,9 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public void playEffect(EntityEffect type)
+	public void playEffect(@NotNull EntityEffect type)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
-
+		Preconditions.checkArgument(type != null, "type");
 	}
 
 	@Override

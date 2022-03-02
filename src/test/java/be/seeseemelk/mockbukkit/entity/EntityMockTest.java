@@ -5,6 +5,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import org.bukkit.EntityEffect;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -411,4 +412,11 @@ class EntityMockTest
 		entity.setFireTicks(10);
 		assertEquals(10, entity.getFireTicks());
 	}
+
+	@Test
+	void playEffect()
+	{
+		entity.playEffect(EntityEffect.LOVE_HEARTS);
+	}
+
 }
