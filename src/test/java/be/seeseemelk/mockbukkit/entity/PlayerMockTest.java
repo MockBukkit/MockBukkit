@@ -965,7 +965,7 @@ class PlayerMockTest
 		player.assertSoundHeard(Sound.BLOCK_NOTE_BLOCK_BANJO, audio ->
 		{
 			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
-					&& audio.getVolume() == 3.0f && audio.getPitch() == Math.pow(2.0D, (note - 12.0D) / 12.0D);
+					&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
 		});
 	}
 
@@ -977,7 +977,7 @@ class PlayerMockTest
 		player.assertSoundHeard(Sound.BLOCK_NOTE_BLOCK_HARP, audio ->
 		{
 			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
-					&& audio.getVolume() == 3.0f && audio.getPitch() == Math.pow(2.0D, (note - 12.0D) / 12.0D);
+					&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
 		});
 	}
 
