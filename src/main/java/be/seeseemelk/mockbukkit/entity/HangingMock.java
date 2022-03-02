@@ -5,7 +5,6 @@ import org.apache.commons.lang.Validate;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Hanging;
-import org.bukkit.entity.SpawnCategory;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
@@ -15,7 +14,7 @@ public class HangingMock extends EntityMock implements Hanging
 
 	private BlockFace facing;
 
-	protected HangingMock(@NotNull ServerMock server, @NotNull UUID uuid)
+	public HangingMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 	}
