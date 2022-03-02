@@ -1,14 +1,7 @@
 package be.seeseemelk.mockbukkit;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -60,6 +53,7 @@ import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Consumer;
 import org.bukkit.util.RayTraceResult;
@@ -341,15 +335,23 @@ public class WorldMock implements World
 	@Override
 	public void sendPluginMessage(@NotNull Plugin source, @NotNull String channel, byte[] message)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		StandardMessenger.validatePluginMessage(this.server.getMessenger(), source, channel, message);
+
+		for (Player player : this.getPlayers()) {
+			player.sendPluginMessage(source, channel, message);
+		}
 	}
 
 	@Override
 	public @NotNull Set<String> getListeningPluginChannels()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Set<String> result = new HashSet<>();
+
+		for (Player player : this.getPlayers()) {
+			result.addAll(player.getListeningPluginChannels());
+		}
+
+		return result;
 	}
 
 	@Override

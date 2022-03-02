@@ -12,6 +12,8 @@ import java.util.List;
 
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import be.seeseemelk.mockbukkit.block.state.BlockStateMock;
+import com.google.common.io.ByteArrayDataOutput;
+import com.google.common.io.ByteStreams;
 import org.bukkit.Chunk;
 import org.bukkit.GameRule;
 import org.bukkit.Location;
@@ -359,6 +361,20 @@ class WorldMockTest
 		world.setType(0, 1, 0, Material.DIRT);
 		assertEquals(Material.DIRT, world.getType(location));
 
+	}
+
+	@Test
+	@SuppressWarnings("UnstableApiUsage")
+	void testSendPluginMessage()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		MockPlugin plugin = MockBukkit.createMockPlugin();
+		server.getMessenger().registerOutgoingPluginChannel(plugin, "BungeeCord");
+		ByteArrayDataOutput out = ByteStreams.newDataOutput();
+		out.writeUTF("Forward");
+		out.writeUTF("ALL");
+		out.writeUTF("MockBukkit");
+		world.sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
 	}
 
 }

@@ -21,6 +21,8 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
 
+import com.google.common.io.ByteArrayDataOutput;
+import com.google.common.io.ByteStreams;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.WorldCreator;
@@ -569,6 +571,20 @@ class ServerMockTest
 		server.setSpawnRadius(51);
 		assertEquals(51, server.getSpawnRadius());
 	}
+
+	@Test
+	@SuppressWarnings("UnstableApiUsage")
+	void testSendPluginMessage()
+	{
+		MockPlugin plugin = MockBukkit.createMockPlugin();
+		server.getMessenger().registerOutgoingPluginChannel(plugin, "BungeeCord");
+		ByteArrayDataOutput out = ByteStreams.newDataOutput();
+		out.writeUTF("Forward");
+		out.writeUTF("ALL");
+		out.writeUTF("MockBukkit");
+		server.sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
+	}
+
 }
 
 class TestRecipe implements Recipe

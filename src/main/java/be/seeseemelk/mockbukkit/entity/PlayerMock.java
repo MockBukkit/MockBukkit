@@ -10,6 +10,7 @@ import be.seeseemelk.mockbukkit.inventory.SimpleInventoryViewMock;
 import be.seeseemelk.mockbukkit.sound.AudioExperience;
 import be.seeseemelk.mockbukkit.sound.SoundReceiver;
 import be.seeseemelk.mockbukkit.statistic.StatisticsMock;
+import com.google.common.collect.ImmutableSet;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.apache.commons.lang.Validate;
@@ -72,6 +73,7 @@ import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.RayTraceResult;
@@ -122,6 +124,8 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	private final Queue<String> subitles = new LinkedTransferQueue<>();
 
 	private final StatisticsMock statistics = new StatisticsMock();
+
+	private final Set<String> channels = new HashSet<>();
 
 	public PlayerMock(ServerMock server, String name)
 	{
@@ -892,15 +896,13 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public void sendPluginMessage(@NotNull Plugin source, @NotNull String channel, byte[] message)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		StandardMessenger.validatePluginMessage(getServer().getMessenger(), source, channel, message);
 	}
 
 	@Override
 	public @NotNull Set<String> getListeningPluginChannels()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return ImmutableSet.copyOf(channels);
 	}
 
 	@Override

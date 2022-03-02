@@ -69,6 +69,7 @@ import org.bukkit.loot.LootTable;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.messaging.Messenger;
+import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.structure.StructureManager;
 import org.bukkit.util.CachedServerIcon;
@@ -131,6 +132,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private final MockPlayerList playerList = new MockPlayerList();
 	private final MockCommandMap commandMap = new MockCommandMap(this);
 	private final HelpMapMock helpMap = new HelpMapMock();
+	private final StandardMessenger messenger = new StandardMessenger();
 
 	private GameMode defaultGameMode = GameMode.SURVIVAL;
 	private ConsoleCommandSender consoleSender;
@@ -845,17 +847,25 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public void sendPluginMessage(Plugin source, String channel, byte[] message)
+	public void sendPluginMessage(@NotNull Plugin source, @NotNull String channel, byte[] message)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		StandardMessenger.validatePluginMessage(this.getMessenger(), source, channel, message);
+
+		for (Player player : this.getOnlinePlayers()) {
+			player.sendPluginMessage(source, channel, message);
+		}
 	}
 
 	@Override
-	public Set<String> getListeningPluginChannels()
+	public @NotNull Set<String> getListeningPluginChannels()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Set<String> result = new HashSet<>();
+
+		for (Player player : this.getOnlinePlayers()) {
+			result.addAll(player.getListeningPluginChannels());
+		}
+
+		return result;
 	}
 
 	@Override
@@ -1161,10 +1171,9 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public Messenger getMessenger()
+	public @NotNull Messenger getMessenger()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.messenger;
 	}
 
 	@Override

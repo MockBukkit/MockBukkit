@@ -12,6 +12,8 @@ import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryViewMock;
 import be.seeseemelk.mockbukkit.inventory.SimpleInventoryViewMock;
 import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
+import com.google.common.io.ByteArrayDataOutput;
+import com.google.common.io.ByteStreams;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.GameRule;
@@ -1324,6 +1326,19 @@ class PlayerMockTest
 		player.assertNotTeleported();
 		player.assertLocation(originalLocation, 0);
 
+	}
+
+	@Test
+	@SuppressWarnings("UnstableApiUsage")
+	public void testPlayerSendPluginMessage()
+	{
+		MockPlugin plugin = MockBukkit.createMockPlugin();
+		server.getMessenger().registerOutgoingPluginChannel(plugin, "BungeeCord");
+		ByteArrayDataOutput out = ByteStreams.newDataOutput();
+		out.writeUTF("Forward");
+		out.writeUTF("ALL");
+		out.writeUTF("MockBukkit");
+		player.sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
 	}
 
 }
