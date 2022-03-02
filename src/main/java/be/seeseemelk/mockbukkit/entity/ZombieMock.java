@@ -27,7 +27,7 @@ public class ZombieMock extends MonsterMock implements Zombie
 	}
 
 	@Override
-	public EntityType getType()
+	public @NotNull EntityType getType()
 	{
 		return EntityType.ZOMBIE;
 	}
