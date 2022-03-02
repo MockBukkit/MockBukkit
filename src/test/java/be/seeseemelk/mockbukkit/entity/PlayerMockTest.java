@@ -1175,6 +1175,14 @@ class PlayerMockTest
 	}
 
 	@Test
+	void testFly_DisabledWhenNotAllowed() {
+		player.setAllowFlight(true);
+		player.setFlying(true);
+		player.setAllowFlight(false);
+		assertFalse(player.isFlying());
+	}
+
+	@Test
 	void testSneakEventFired()
 	{
 		PlayerToggleSneakEvent event = player.simulateSneak(true);
