@@ -36,7 +36,7 @@ class OfflinePlayerMockTest
 	public void testOfflinePlayerSerialization()
 	{
 		Map<String, Object> serialized = player.serialize();
-		assertEquals(serialized.get("UUID"), uuid);
+		assertEquals(serialized.get("UUID").toString(), uuid.toString());
 	}
 
 }
