@@ -448,7 +448,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public Vector getVelocity()
+	public @NotNull Vector getVelocity()
 	{
 		return velocity;
 	}
