@@ -22,6 +22,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
+import org.bukkit.entity.SpawnCategory;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
@@ -636,6 +637,13 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	@NotNull
+	@Override
+	public SpawnCategory getSpawnCategory()
+	{
+		return SpawnCategory.MISC;
 	}
 
 	@Override
