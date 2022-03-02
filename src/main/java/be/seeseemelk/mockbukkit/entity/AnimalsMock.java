@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.entity.Animals;
@@ -9,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
-public abstract class AnimalsMock extends AgeableMock implements Animals
+public class AnimalsMock extends AgeableMock implements Animals
 {
 
 	private UUID breedCause;
@@ -49,6 +50,13 @@ public abstract class AnimalsMock extends AgeableMock implements Animals
 	public int getLoveModeTicks()
 	{
 		return isInLoveTicks;
+	}
+
+	@Override
+	public boolean isBreedItem(@NotNull ItemStack stack)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

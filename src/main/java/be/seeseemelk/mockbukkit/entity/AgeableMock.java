@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
-public abstract class AgeableMock extends CreatureMock implements Ageable
+public class AgeableMock extends CreatureMock implements Ageable
 {
 
 	private int age;
