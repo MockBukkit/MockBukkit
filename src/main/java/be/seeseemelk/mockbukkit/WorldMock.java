@@ -1,18 +1,15 @@
 package be.seeseemelk.mockbukkit;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.ThreadLocalRandom;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-
+import be.seeseemelk.mockbukkit.block.BlockMock;
+import be.seeseemelk.mockbukkit.entity.ArmorStandMock;
+import be.seeseemelk.mockbukkit.entity.EntityMock;
+import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
+import be.seeseemelk.mockbukkit.entity.FireworkMock;
+import be.seeseemelk.mockbukkit.entity.FishHookMock;
+import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
+import be.seeseemelk.mockbukkit.entity.ZombieMock;
+import be.seeseemelk.mockbukkit.metadata.MetadataTable;
+import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
 import org.apache.commons.lang.Validate;
 import org.bukkit.BlockChangeDelegate;
 import org.bukkit.Bukkit;
@@ -33,8 +30,8 @@ import org.bukkit.StructureType;
 import org.bukkit.TreeType;
 import org.bukkit.World;
 import org.bukkit.WorldBorder;
-import org.bukkit.WorldType;
 import org.bukkit.WorldCreator;
+import org.bukkit.WorldType;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
@@ -48,6 +45,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Firework;
+import org.bukkit.entity.FishHook;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.LivingEntity;
@@ -69,15 +67,18 @@ import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import be.seeseemelk.mockbukkit.block.BlockMock;
-import be.seeseemelk.mockbukkit.entity.ArmorStandMock;
-import be.seeseemelk.mockbukkit.entity.EntityMock;
-import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
-import be.seeseemelk.mockbukkit.entity.FireworkMock;
-import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
-import be.seeseemelk.mockbukkit.entity.ZombieMock;
-import be.seeseemelk.mockbukkit.metadata.MetadataTable;
-import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * A mock world object. Note that it is made to be as simple as possible. It is by no means an efficient implementation.
@@ -623,6 +624,10 @@ public class WorldMock implements World
 		else if (clazz == ExperienceOrb.class)
 		{
 			return new ExperienceOrbMock(server, UUID.randomUUID());
+		}
+		else if (clazz == FishHook.class)
+		{
+			return new FishHookMock(server, UUID.randomUUID());
 		}
 		else if (clazz == Player.class)
 		{
