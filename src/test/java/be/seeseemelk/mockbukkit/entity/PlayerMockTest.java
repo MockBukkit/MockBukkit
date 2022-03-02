@@ -317,8 +317,8 @@ class PlayerMockTest
 		player.setGameMode(GameMode.SURVIVAL);
 		BlockMock block = (BlockMock) player.getWorld().getBlockAt(0, 0, 0);
 		block.setType(Material.STONE);
-		boolean canceled = player.breakBlock(block);
-		assertFalse(canceled);
+		boolean broken = player.breakBlock(block);
+		assertTrue(broken);
 		server.getPluginManager().assertEventFired(BlockBreakEvent.class);
 		block.assertType(Material.AIR);
 	}
@@ -331,8 +331,8 @@ class PlayerMockTest
 		player.setItemInHand(new ItemStack(Material.DIAMOND_SWORD));
 		BlockMock block = (BlockMock) player.getWorld().getBlockAt(0, 0, 0);
 		block.setType(Material.STONE);
-		boolean canceled = player.breakBlock(block);
-		assertTrue(canceled);
+		boolean broken = player.breakBlock(block);
+		assertFalse(broken);
 		server.getPluginManager().assertEventFired(BlockBreakEvent.class);
 		block.assertType(Material.STONE);
 	}
