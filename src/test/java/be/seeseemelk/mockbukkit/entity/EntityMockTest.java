@@ -411,4 +411,15 @@ class EntityMockTest
 		entity.setFireTicks(10);
 		assertEquals(10, entity.getFireTicks());
 	}
+
+	@Test
+	void lastDamageCause()
+	{
+		World world = new WorldMock(Material.GRASS_BLOCK, 10);
+		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+		assertNull(zombie.getLastDamageCause());
+		zombie.damage(1);
+		assertNotNull(zombie.getLastDamageCause());
+	}
+
 }
