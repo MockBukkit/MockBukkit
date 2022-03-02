@@ -12,6 +12,8 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 public class SimpleMonsterMock extends MonsterMock implements Monster
 {
 
+	private final EntityEquipment equipment= new EntityEquipmentMock(this);
+
 	public SimpleMonsterMock(ServerMock server, UUID uuid)
 	{
 		super(server, uuid);
@@ -32,8 +34,7 @@ public class SimpleMonsterMock extends MonsterMock implements Monster
 	@Override
 	public EntityEquipment getEquipment()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.equipment;
 	}
 
 }

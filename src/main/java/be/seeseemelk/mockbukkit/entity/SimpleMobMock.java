@@ -13,6 +13,9 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
 public class SimpleMobMock extends MobMock
 {
+
+	private final EntityEquipment equipment = new EntityEquipmentMock(this);
+
 	public SimpleMobMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
@@ -33,8 +36,7 @@ public class SimpleMobMock extends MobMock
 	@Override
 	public EntityEquipment getEquipment()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.equipment;
 	}
 
 	@Override
