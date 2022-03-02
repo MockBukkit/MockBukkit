@@ -91,11 +91,5 @@ public class ItemEntityMock extends EntityMock implements Item
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-    
-    @Override
-    public @NotNull SpawnCategory getSpawnCategory()
-    {
-        return SpawnCategory.MISC;
-    }
 
 }

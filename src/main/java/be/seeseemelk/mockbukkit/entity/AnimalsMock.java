@@ -5,6 +5,7 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.entity.Animals;
+import org.bukkit.entity.SpawnCategory;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
@@ -63,6 +64,13 @@ public class AnimalsMock extends AgeableMock implements Animals
 	public boolean isBreedItem(@NotNull Material material)
 	{
 		return this.isBreedItem(new ItemStack(material));
+	}
+
+	@NotNull
+	@Override
+	public SpawnCategory getSpawnCategory()
+	{
+		return SpawnCategory.ANIMAL;
 	}
 
 	@Override

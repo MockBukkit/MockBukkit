@@ -50,11 +50,5 @@ public class ExperienceOrbMock extends EntityMock implements ExperienceOrb
 	{
 		this.experience = value;
 	}
-    
-    @Override
-    public @NotNull SpawnCategory getSpawnCategory()
-    {
-        return SpawnCategory.MISC;
-    }
 
 }

@@ -2299,12 +2299,6 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
     @Override
-    public @NotNull SpawnCategory getSpawnCategory()
-    {
-        return SpawnCategory.MISC;
-    }
-
-    @Override
     public PlayerProfile getPlayerProfile()
     {
         // TODO Auto-generated method stub

@@ -21,6 +21,7 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Pose;
+import org.bukkit.entity.SpawnCategory;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.metadata.MetadataValue;
@@ -853,6 +854,12 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull SpawnCategory getSpawnCategory()
+	{
+		return SpawnCategory.MISC;
 	}
 
 	@Override

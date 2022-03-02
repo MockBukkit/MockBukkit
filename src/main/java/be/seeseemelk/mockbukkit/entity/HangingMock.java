@@ -47,13 +47,6 @@ public class HangingMock extends EntityMock implements Hanging
 		return facing;
 	}
 
-	@NotNull
-	@Override
-	public SpawnCategory getSpawnCategory()
-	{
-		return SpawnCategory.MISC;
-	}
-
 	@Override
 	public @NotNull EntityType getType()
 	{

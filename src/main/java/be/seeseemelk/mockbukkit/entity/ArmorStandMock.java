@@ -308,10 +308,4 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 		throw new UnimplementedOperationException();
 	}
 
-	@Override
-	public @NotNull SpawnCategory getSpawnCategory()
-	{
-		return SpawnCategory.MISC;
-	}
-
 }

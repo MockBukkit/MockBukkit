@@ -32,14 +32,6 @@ public class ZombieMock extends MonsterMock implements Zombie
 		return EntityType.ZOMBIE;
 	}
 
-	@NotNull
-	@Override
-	public SpawnCategory getSpawnCategory()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
 	@Override
 	public boolean isVillager()
 	{
