@@ -1190,8 +1190,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public void updateInventory()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// Pretend packet gets sent.
 	}
 
 	@Override
@@ -2317,7 +2316,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-    
+
     @Override
     public @NotNull SpawnCategory getSpawnCategory()
     {
