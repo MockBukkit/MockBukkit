@@ -311,6 +311,33 @@ class PlayerMockTest
 	}
 
 	@Test
+	void breakBlock_Survival_BlockBroken()
+	{
+		MockBukkit.load(TestPlugin.class);
+		player.setGameMode(GameMode.SURVIVAL);
+		BlockMock block = (BlockMock) player.getWorld().getBlockAt(0, 0, 0);
+		block.setType(Material.STONE);
+		boolean canceled = player.breakBlock(block);
+		assertFalse(canceled);
+		server.getPluginManager().assertEventFired(BlockBreakEvent.class);
+		block.assertType(Material.AIR);
+	}
+
+	@Test
+	void breakBlock_Creative_Sword_BlockNotBroken()
+	{
+		MockBukkit.load(TestPlugin.class);
+		player.setGameMode(GameMode.CREATIVE);
+		player.setItemInHand(new ItemStack(Material.DIAMOND_SWORD));
+		BlockMock block = (BlockMock) player.getWorld().getBlockAt(0, 0, 0);
+		block.setType(Material.STONE);
+		boolean canceled = player.breakBlock(block);
+		assertTrue(canceled);
+		server.getPluginManager().assertEventFired(BlockBreakEvent.class);
+		block.assertType(Material.STONE);
+	}
+
+	@Test
 	void simulateBlockBreak_Survival_BlockBroken()
 	{
 		MockBukkit.load(TestPlugin.class);
