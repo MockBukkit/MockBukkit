@@ -1,15 +1,14 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import java.util.Set;
-import java.util.UUID;
-
+import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.EntityEquipment;
 import org.jetbrains.annotations.NotNull;
 
-import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import java.util.Set;
+import java.util.UUID;
 
 public class SimpleMobMock extends MobMock
 {

@@ -1,7 +1,6 @@
 package be.seeseemelk.mockbukkit.inventory;
 
-import java.util.Arrays;
-
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryType;
@@ -12,7 +11,7 @@ import org.bukkit.inventory.PlayerInventory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import java.util.Arrays;
 
 public class PlayerInventoryMock extends InventoryMock implements PlayerInventory, EntityEquipment
 {

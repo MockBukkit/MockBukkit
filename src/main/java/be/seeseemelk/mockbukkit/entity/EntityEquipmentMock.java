@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.entity;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.apache.commons.lang.Validate;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -9,9 +10,8 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-
-import java.util.*;
+import java.util.EnumMap;
+import java.util.Map;
 
 /**
  * This mocks the {@link EntityEquipment} of a {@link LivingEntityMock}. Note that not every {@link LivingEntity} has

@@ -1,14 +1,13 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import java.util.UUID;
-
+import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.Zombie;
 import org.bukkit.inventory.EntityEquipment;
 
-import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import java.util.UUID;
 
 public class ZombieMock extends MonsterMock implements Zombie
 {

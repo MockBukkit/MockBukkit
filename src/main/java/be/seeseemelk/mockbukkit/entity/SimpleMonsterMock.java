@@ -1,18 +1,17 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import java.util.UUID;
-
+import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Monster;
 import org.bukkit.inventory.EntityEquipment;
 
-import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import java.util.UUID;
 
 public class SimpleMonsterMock extends MonsterMock implements Monster
 {
 
-	private final EntityEquipment equipment= new EntityEquipmentMock(this);
+	private final EntityEquipment equipment = new EntityEquipmentMock(this);
 
 	public SimpleMonsterMock(ServerMock server, UUID uuid)
 	{
