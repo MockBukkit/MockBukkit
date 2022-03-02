@@ -736,7 +736,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public EntityEquipment getEquipment()
 	{
-		return this.inventory;
+		return (EntityEquipment) getInventory();
 	}
 
 	@Override
