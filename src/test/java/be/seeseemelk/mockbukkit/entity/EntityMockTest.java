@@ -11,6 +11,8 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Mob;
+import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.metadata.FixedMetadataValue;
@@ -411,4 +413,52 @@ class EntityMockTest
 		entity.setFireTicks(10);
 		assertEquals(10, entity.getFireTicks());
 	}
+
+	@Test
+	void setAi()
+	{
+		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+		zombie.setAI(false);
+		assertFalse(zombie.hasAI());
+		zombie.setAI(true);
+		assertTrue(zombie.hasAI());
+	}
+
+	@Test
+	void setAi_NonMob()
+	{
+		Player player = server.addPlayer();
+		player.setAI(false);
+		assertFalse(player.hasAI());
+		player.setAI(true);
+		assertFalse(player.hasAI());
+	}
+
+	@Test
+	void setCollidable()
+	{
+		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+		zombie.setCollidable(false);
+		assertFalse(zombie.isCollidable());
+		zombie.setCollidable(true);
+		assertTrue(zombie.isCollidable());
+	}
+
+	@Test
+	void getCollidableExemptions()
+	{
+		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+		assertNotNull(zombie.getCollidableExemptions());
+	}
+
+	@Test
+	void setAware()
+	{
+		Mob zombie = (Mob) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+		zombie.setAware(false);
+		assertFalse(zombie.isAware());
+		zombie.setAware(true);
+		assertTrue(zombie.isAware());
+	}
+
 }
