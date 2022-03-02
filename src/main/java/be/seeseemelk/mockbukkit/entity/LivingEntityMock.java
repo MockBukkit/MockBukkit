@@ -22,6 +22,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.NotNull;
 
 import com.google.common.base.Function;
 
@@ -43,7 +44,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 
 	private final Set<ActivePotionEffect> activeEffects = new HashSet<>();
 
-	public LivingEntityMock(ServerMock server, UUID uuid)
+	protected LivingEntityMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 
