@@ -2,7 +2,6 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.SpawnCategory;
@@ -19,21 +18,7 @@ public abstract class MonsterMock extends CreatureMock implements Monster
 	}
 
 	@Override
-	public void setAware(boolean aware)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean isAware()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void attack(Entity target)
+	public void attack(@NotNull Entity target)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -54,15 +39,9 @@ public abstract class MonsterMock extends CreatureMock implements Monster
 	}
 
 	@Override
-	public Set<UUID> getCollidableExemptions()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-	
-	@Override
 	public @NotNull SpawnCategory getSpawnCategory()
 	{
-	    return SpawnCategory.MONSTER;
+		return SpawnCategory.MONSTER;
 	}
+
 }

@@ -792,19 +792,6 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public void setAI(boolean ai)
-	{
-		// I am sorry Dave, I'm afraid I can't do that
-	}
-
-	@Override
-	public boolean hasAI()
-	{
-		// The Player's intelligence is (probably) not artificial
-		return false;
-	}
-
-	@Override
 	public void setCollidable(boolean collidable)
 	{
 		// TODO Auto-generated method stub
@@ -2186,13 +2173,6 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public @NotNull Set<UUID> getCollidableExemptions()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public void sendBlockDamage(@NotNull Location loc, float progress)
 	{
 		// TODO Auto-generated method stub
@@ -2317,7 +2297,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-    
+
     @Override
     public @NotNull SpawnCategory getSpawnCategory()
     {

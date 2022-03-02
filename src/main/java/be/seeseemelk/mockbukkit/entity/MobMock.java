@@ -1,17 +1,19 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import java.util.UUID;
-
+import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Mob;
 import org.bukkit.entity.memory.MemoryKey;
 import org.bukkit.loot.LootTable;
 
-import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import java.util.UUID;
 
 public abstract class MobMock extends LivingEntityMock implements Mob
 {
+
+	private boolean aware = true;
+
 	public MobMock(ServerMock server, UUID uuid)
 	{
 		super(server, uuid);
@@ -93,6 +95,18 @@ public abstract class MobMock extends LivingEntityMock implements Mob
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setAware(boolean aware)
+	{
+		this.aware = aware;
+	}
+
+	@Override
+	public boolean isAware()
+	{
+		return this.aware;
 	}
 
 }

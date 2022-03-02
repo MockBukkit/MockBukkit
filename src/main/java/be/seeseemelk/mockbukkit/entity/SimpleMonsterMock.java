@@ -1,13 +1,13 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import java.util.UUID;
-
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Monster;
-import org.bukkit.inventory.EntityEquipment;
-
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Monster;
+import org.bukkit.entity.SpawnCategory;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.UUID;
 
 public class SimpleMonsterMock extends MonsterMock implements Monster
 {
@@ -29,8 +29,9 @@ public class SimpleMonsterMock extends MonsterMock implements Monster
 		throw new UnimplementedOperationException();
 	}
 
+	@NotNull
 	@Override
-	public EntityEquipment getEquipment()
+	public SpawnCategory getSpawnCategory()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

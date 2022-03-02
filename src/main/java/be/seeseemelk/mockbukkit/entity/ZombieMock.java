@@ -1,18 +1,17 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import java.util.UUID;
-
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Villager;
-import org.bukkit.entity.Zombie;
-import org.bukkit.inventory.EntityEquipment;
-
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.SpawnCategory;
+import org.bukkit.entity.Villager;
+import org.bukkit.entity.Zombie;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.UUID;
 
 public class ZombieMock extends MonsterMock implements Zombie
 {
-	private final EntityEquipment equipment = new EntityEquipmentMock(this);
 
 	private boolean baby;
 	private boolean villager;
@@ -33,10 +32,12 @@ public class ZombieMock extends MonsterMock implements Zombie
 		return EntityType.ZOMBIE;
 	}
 
+	@NotNull
 	@Override
-	public EntityEquipment getEquipment()
+	public SpawnCategory getSpawnCategory()
 	{
-		return equipment;
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

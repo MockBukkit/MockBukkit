@@ -1,32 +1,25 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import java.util.Set;
-import java.util.UUID;
-
+import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.entity.memory.MemoryKey;
-import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.EulerAngle;
 import org.jetbrains.annotations.NotNull;
 
-import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import java.util.UUID;
 
 /**
  * This is the mock of an {@link ArmorStand}.
  *
  * @author TheBusyBiscuit
- *
  */
 public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 {
-
-	private final EntityEquipment equipment = new EntityEquipmentMock(this);
 
 	private boolean hasArms = false;
 	private boolean isSmall = false;
@@ -43,12 +36,6 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	public EntityType getType()
 	{
 		return EntityType.ARMOR_STAND;
-	}
-
-	@Override
-	public EntityEquipment getEquipment()
-	{
-		return equipment;
 	}
 
 	@Override
@@ -294,34 +281,6 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	}
 
 	@Override
-	public void attack(Entity target)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void swingMainHand()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void swingOffHand()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public Set<UUID> getCollidableExemptions()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public <T> T getMemory(MemoryKey<T> memoryKey)
 	{
 		// TODO Auto-generated method stub
@@ -348,11 +307,11 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-    
-    @Override
-    public @NotNull SpawnCategory getSpawnCategory()
-    {
-        return SpawnCategory.MISC;
-    }
+
+	@Override
+	public @NotNull SpawnCategory getSpawnCategory()
+	{
+		return SpawnCategory.MISC;
+	}
 
 }
