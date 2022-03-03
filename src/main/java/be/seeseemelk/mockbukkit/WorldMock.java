@@ -956,10 +956,9 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public ChunkSnapshot getEmptyChunkSnapshot(int x, int z, boolean includeBiome, boolean includeBiomeTempRain)
+	public @NotNull ChunkSnapshot getEmptyChunkSnapshot(int x, int z, boolean includeBiome, boolean includeBiomeTempRain)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return new ChunkSnapshotMock(x, z, getMinHeight(), getMaxHeight(), getName(), getFullTime(), Map.of());
 	}
 
 	@Override
