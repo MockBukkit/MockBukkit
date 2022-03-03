@@ -1284,10 +1284,18 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public Entity getEntity(UUID uuid)
+	public @Nullable Entity getEntity(@NotNull UUID uuid)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Validate.notNull(uuid, "UUID cannot be null");
+
+		for (EntityMock entity : entities)
+		{
+			if (entity.getUniqueId().equals(uuid))
+			{
+				return entity;
+			}
+		}
+		return null;
 	}
 
 	@Override
