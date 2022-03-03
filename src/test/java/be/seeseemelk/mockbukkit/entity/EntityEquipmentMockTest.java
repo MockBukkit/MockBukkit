@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.UUID;
@@ -39,9 +40,10 @@ class EntityEquipmentMockTest
 	{
 		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
 		EntityEquipment equipment = armorStand.getEquipment();
-		ItemStack item = new ItemStack(Material.DIAMOND);
 
-		assertNull(equipment.getItemInMainHand());
+		assertNotNull(equipment.getItemInMainHand());
+
+		ItemStack item = new ItemStack(Material.DIAMOND);
 		equipment.setItemInMainHand(item);
 
 		assertEquals(item, equipment.getItemInMainHand());
@@ -53,9 +55,10 @@ class EntityEquipmentMockTest
 	{
 		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
 		EntityEquipment equipment = armorStand.getEquipment();
-		ItemStack item = new ItemStack(Material.DIAMOND);
 
-		assertNull(equipment.getItemInOffHand());
+		assertNotNull(equipment.getItemInOffHand());
+
+		ItemStack item = new ItemStack(Material.DIAMOND);
 		equipment.setItemInOffHand(item);
 
 		assertEquals(item, equipment.getItemInOffHand());
@@ -67,9 +70,10 @@ class EntityEquipmentMockTest
 	{
 		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
 		EntityEquipment equipment = armorStand.getEquipment();
-		ItemStack item = new ItemStack(Material.DIAMOND);
 
-		assertNull(equipment.getHelmet());
+		assertNotNull(equipment.getHelmet());
+
+		ItemStack item = new ItemStack(Material.DIAMOND);
 		equipment.setHelmet(item);
 
 		assertEquals(item, equipment.getHelmet());
@@ -81,9 +85,10 @@ class EntityEquipmentMockTest
 	{
 		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
 		EntityEquipment equipment = armorStand.getEquipment();
-		ItemStack item = new ItemStack(Material.DIAMOND);
 
-		assertNull(equipment.getChestplate());
+		assertNotNull(equipment.getChestplate());
+
+		ItemStack item = new ItemStack(Material.DIAMOND);
 		equipment.setChestplate(item);
 
 		assertEquals(item, equipment.getChestplate());
@@ -95,9 +100,10 @@ class EntityEquipmentMockTest
 	{
 		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
 		EntityEquipment equipment = armorStand.getEquipment();
-		ItemStack item = new ItemStack(Material.DIAMOND);
 
-		assertNull(equipment.getLeggings());
+		assertNotNull(equipment.getLeggings());
+
+		ItemStack item = new ItemStack(Material.DIAMOND);
 		equipment.setLeggings(item);
 
 		assertEquals(item, equipment.getLeggings());
@@ -109,9 +115,10 @@ class EntityEquipmentMockTest
 	{
 		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
 		EntityEquipment equipment = armorStand.getEquipment();
-		ItemStack item = new ItemStack(Material.DIAMOND);
 
-		assertNull(equipment.getBoots());
+		assertNotNull(equipment.getBoots());
+
+		ItemStack item = new ItemStack(Material.DIAMOND);
 		equipment.setBoots(item);
 
 		assertEquals(item, equipment.getBoots());

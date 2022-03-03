@@ -6,11 +6,13 @@ import java.util.UUID;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.SpawnCategory;
 import org.bukkit.entity.memory.MemoryKey;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.EulerAngle;
+import org.jetbrains.annotations.NotNull;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
@@ -346,5 +348,11 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
+    
+    @Override
+    public @NotNull SpawnCategory getSpawnCategory()
+    {
+        return SpawnCategory.MISC;
+    }
 
 }
