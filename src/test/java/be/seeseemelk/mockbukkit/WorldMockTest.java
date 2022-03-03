@@ -386,9 +386,9 @@ class WorldMockTest
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		world.setDifficulty(Difficulty.PEACEFUL);
-		Entity zombie = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ARMOR_STAND);
-		assertTrue(zombie.isValid());
-		assertFalse(zombie.isDead());
+		Entity armorStand = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ARMOR_STAND);
+		assertTrue(armorStand.isValid());
+		assertFalse(armorStand.isDead());
 	}
 
 }
