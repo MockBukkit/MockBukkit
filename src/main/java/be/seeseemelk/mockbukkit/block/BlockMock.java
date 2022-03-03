@@ -260,18 +260,15 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public Biome getBiome()
+	public @NotNull Biome getBiome()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getWorld().getBiome(getLocation());
 	}
 
 	@Override
-	public void setBiome(Biome bio)
+	public void setBiome(@NotNull Biome bio)
 	{
-
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		getWorld().setBiome(getLocation(), bio);
 	}
 
 	@Override

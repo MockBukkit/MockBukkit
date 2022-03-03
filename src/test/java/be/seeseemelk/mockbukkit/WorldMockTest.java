@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assumptions.assumeFalse;
 
@@ -17,6 +18,7 @@ import org.bukkit.GameRule;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Entity;
@@ -31,6 +33,7 @@ import be.seeseemelk.mockbukkit.block.BlockMock;
 
 class WorldMockTest
 {
+
 	private ServerMock server;
 
 	@BeforeEach
@@ -287,7 +290,7 @@ class WorldMockTest
 		world.setTime(6000L);
 		world.setTime(10000L);
 		server.getPluginManager().assertEventFired(TimeSkipEvent.class, event ->
-		        event.getSkipAmount() == 4000L && event.getSkipReason().equals(TimeSkipEvent.SkipReason.CUSTOM));
+				event.getSkipAmount() == 4000L && event.getSkipReason().equals(TimeSkipEvent.SkipReason.CUSTOM));
 	}
 
 	@Test
@@ -351,14 +354,52 @@ class WorldMockTest
 		assertEquals(Material.GRASS, world.getBlockData(location).getMaterial());
 		assertEquals(Material.GRASS, world.getBlockData(0, 1, 0).getMaterial());
 		assertEquals(Material.GRASS, world.getType(0, 1, 0));
-		world.setBlockData(0, 1, 0, mock2) ;
+		world.setBlockData(0, 1, 0, mock2);
 		assertEquals(Material.GRASS_BLOCK, world.getBlockData(location).getMaterial());
 		assertEquals(Material.GRASS_BLOCK, world.getType(location));
 		world.setType(location, Material.BEDROCK);
 		assertEquals(Material.BEDROCK, world.getType(location));
 		world.setType(0, 1, 0, Material.DIRT);
 		assertEquals(Material.DIRT, world.getType(location));
+	}
 
+	@Test
+	public void getDefaultBiome()
+	{
+		WorldMock world = new WorldMock(Material.GRASS_BLOCK, Biome.JUNGLE, 0, 256);
+		Biome biome = world.getBiome(0, 0, 0);
+		assertNotNull(biome);
+		assertEquals(Biome.JUNGLE, biome);
+	}
+
+	@Test
+	public void getBiomeLegacy()
+	{
+		WorldMock world = new WorldMock(Material.GRASS_BLOCK, Biome.JUNGLE, 0, 256);
+		Biome biome3d = world.getBiome(0, 0, 0);
+		Biome biome2d = world.getBiome(0, 0);
+		assertNotNull(biome3d);
+		assertNotNull(biome2d);
+		assertEquals(biome3d, biome2d);
+	}
+
+	@Test
+	public void setBiome()
+	{
+		WorldMock world = new WorldMock(Material.GRASS_BLOCK, Biome.JUNGLE, 0, 256);
+		world.setBiome(0, 0, 0, Biome.DESERT);
+		Biome biome = world.getBiome(0, 0, 0);
+		assertEquals(Biome.DESERT, biome);
+	}
+
+	@Test
+	public void setBiome_CustomFails()
+	{
+		WorldMock world = new WorldMock(Material.GRASS_BLOCK, Biome.JUNGLE, 0, 256);
+		assertThrows(IllegalArgumentException.class, () ->
+		{
+			world.setBiome(0, 0, 0, Biome.CUSTOM);
+		});
 	}
 
 }

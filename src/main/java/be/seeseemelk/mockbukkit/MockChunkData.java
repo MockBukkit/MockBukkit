@@ -9,12 +9,16 @@ import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.material.MaterialData;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class MockChunkData implements ChunkGenerator.ChunkData
 {
 
-	private static final int CHUNK_SIZE = 16;
+	private final Map<Coordinate, BlockData> blocks;
+	private final Map<Coordinate, Biome> biomes;
 
-	private final BlockData[][][] blocks;
+	private final Biome defaultBiome;
 
 	private final int minHeight;
 	private final int maxHeight;
@@ -23,7 +27,17 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 	{
 		this.minHeight = world.getMinHeight();
 		this.maxHeight = world.getMaxHeight();
-		blocks = new BlockData[CHUNK_SIZE][this.maxHeight - this.minHeight][CHUNK_SIZE];
+		blocks = new HashMap<>((15 * 15) * Math.abs((world.getMaxHeight() - world.getMinHeight())), 1.0f);
+		if (world instanceof WorldMock mockWorld)
+		{
+			biomes = mockWorld.getBiomeMap();
+			defaultBiome = mockWorld.getDefaultBiome();
+		}
+		else
+		{
+			biomes = new HashMap<>(0);
+			defaultBiome = Biome.PLAINS;
+		}
 	}
 
 	@Override
@@ -42,8 +56,7 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 	@Override
 	public Biome getBiome(int x, int y, int z)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return biomes.getOrDefault(new Coordinate(x, y, z), defaultBiome);
 	}
 
 	@Override
@@ -61,13 +74,11 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 	@Override
 	public void setBlock(int x, int y, int z, @NotNull BlockData blockData)
 	{
-		if (x >= 0 && x < CHUNK_SIZE &&
-		        y >= this.minHeight && y < this.maxHeight &&
-		        z >= 0 && z < CHUNK_SIZE
-		   )
+		if (x != (x & 0xf) || y < this.minHeight || y >= this.maxHeight || z != (z & 0xf))
 		{
-			blocks[x][y - this.minHeight][z] = blockData;
+			return;
 		}
+		blocks.put(new Coordinate(x, y, z), blockData);
 	}
 
 	@Override
@@ -101,17 +112,14 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 	@Override
 	public Material getType(int x, int y, int z)
 	{
-		if (x >= 0 && x < CHUNK_SIZE &&
-		        y >= this.minHeight && y < this.maxHeight &&
-		        z >= 0 && z < CHUNK_SIZE
-		   )
+		if (x != (x & 0xf) || y < this.minHeight || y >= this.maxHeight || z != (z & 0xf))
 		{
-			BlockData data = blocks[x][y - this.minHeight][z];
-			// shortcut to return air directly instead of creating air block data then unpacking material
-			return data == null ? Material.AIR : data.getMaterial();
+			return Material.AIR;
 		}
 
-		return Material.AIR;
+		BlockData data = blocks.get(new Coordinate(x, y, z));
+		// shortcut to return air directly instead of creating air block data then unpacking material
+		return data == null ? Material.AIR : data.getMaterial();
 	}
 
 	@NotNull
@@ -125,16 +133,13 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 	@Override
 	public BlockData getBlockData(int x, int y, int z)
 	{
-		if (x >= 0 && x < CHUNK_SIZE &&
-		        y >= this.minHeight && y < this.maxHeight &&
-		        z >= 0 && z < CHUNK_SIZE
-		   )
+		if (x != (x & 0xf) || y < this.minHeight || y >= this.maxHeight || z != (z & 0xf))
 		{
-			BlockData data = blocks[x][y - this.minHeight][z];
-			return data == null ? new BlockDataMock(Material.AIR) : data;
+			return new BlockDataMock(Material.AIR);
 		}
 
-		return new BlockDataMock(Material.AIR);
+		BlockData data = blocks.get(new Coordinate(x, y, z));
+		return data == null ? new BlockDataMock(Material.AIR) : data;
 	}
 
 	@Override
@@ -142,4 +147,5 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 	{
 		return this.getTypeAndData(x, y, z).getData();
 	}
+
 }
