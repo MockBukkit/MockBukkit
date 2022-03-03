@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit;
 
+import com.google.common.base.Preconditions;
 import org.bukkit.ChunkSnapshot;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
@@ -54,6 +55,8 @@ public class ChunkSnapshotMock implements ChunkSnapshot
 	@Override
 	public Material getBlockType(int x, int y, int z)
 	{
+		validateChunkCoordinates(x, y, z);
+
 		return blockStates.get(new Coordinate(x, y, z)).getType();
 	}
 
@@ -140,6 +143,12 @@ public class ChunkSnapshotMock implements ChunkSnapshot
 
 		for (int y = minY + (sy << 4); y < (minY + (sy << 4)) + 16; y++)
 		{
+			if (y < minY || y >= maxY)
+			{
+				// We round up when checking if section is too big, so if the height
+				// isn't divisible by 16 we could get an error.
+				break;
+			}
 			for (int x = 0; x < 15; x++)
 			{
 				for (int z = 0; z < 15; z++)
@@ -159,6 +168,13 @@ public class ChunkSnapshotMock implements ChunkSnapshot
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	private void validateChunkCoordinates(int x, int y, int z)
+	{
+		Preconditions.checkArgument(0 <= x && x <= 15, "x out of range (expected 0-15, got %s)", x);
+		Preconditions.checkArgument(minY <= y && y <= maxY, "y out of range (expected %s-%s, got %s)", minY, maxY, y);
+		Preconditions.checkArgument(0 <= z && z <= 15, "z out of range (expected 0-15, got %s)", z);
 	}
 
 }
