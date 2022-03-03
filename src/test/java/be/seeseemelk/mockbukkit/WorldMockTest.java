@@ -13,6 +13,7 @@ import java.util.List;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import be.seeseemelk.mockbukkit.block.state.BlockStateMock;
 import org.bukkit.Chunk;
+import org.bukkit.Difficulty;
 import org.bukkit.GameRule;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -359,6 +360,35 @@ class WorldMockTest
 		world.setType(0, 1, 0, Material.DIRT);
 		assertEquals(Material.DIRT, world.getType(location));
 
+	}
+
+	@Test
+	public void setDifficulty()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertNotNull(world.getDifficulty());
+		world.setDifficulty(Difficulty.HARD);
+		assertEquals(Difficulty.HARD, world.getDifficulty());
+	}
+
+	@Test
+	public void spawnMonster_Peaceful()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setDifficulty(Difficulty.PEACEFUL);
+		Entity zombie = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ZOMBIE);
+		assertFalse(zombie.isValid());
+		assertTrue(zombie.isDead());
+	}
+
+	@Test
+	public void spawnFriendly_Peaceful()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setDifficulty(Difficulty.PEACEFUL);
+		Entity zombie = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ARMOR_STAND);
+		assertTrue(zombie.isValid());
+		assertFalse(zombie.isDead());
 	}
 
 }
