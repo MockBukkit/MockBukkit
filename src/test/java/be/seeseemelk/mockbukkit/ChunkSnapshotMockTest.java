@@ -22,7 +22,7 @@ public class ChunkSnapshotMockTest
 	public void setUp()
 	{
 		server = MockBukkit.mock();
-		world = new WorldMock(Material.GRASS, -64, 319, 4);
+		world = new WorldMock(Material.GRASS, 0, 319, 4);
 		chunk = world.getChunkAt(1, 1);
 	}
 

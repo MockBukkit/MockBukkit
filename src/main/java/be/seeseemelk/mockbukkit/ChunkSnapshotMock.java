@@ -7,21 +7,25 @@ import org.bukkit.block.BlockState;
 import org.bukkit.block.data.BlockData;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Map;
+
 public class ChunkSnapshotMock implements ChunkSnapshot
 {
 
 	private final String worldName;
 	private final int x;
-	private final int minY;
 	private final int z;
+	private final int minY;
+	private final int maxY;
 	private final long worldTime;
-	private final BlockState[][][] blockStates;
+	private final Map<Coordinate, BlockState> blockStates;
 
-	ChunkSnapshotMock(int x, int z, int minY, String worldName, long worldTime, BlockState[][][] blockStates)
+	ChunkSnapshotMock(int x, int z, int minY, int maxY, String worldName, long worldTime, Map<Coordinate, BlockState> blockStates)
 	{
 		this.x = x;
 		this.z = z;
 		this.minY = minY;
+		this.maxY = maxY;
 		this.worldName = worldName;
 		this.worldTime = worldTime;
 		this.blockStates = blockStates;
@@ -50,7 +54,7 @@ public class ChunkSnapshotMock implements ChunkSnapshot
 	@Override
 	public Material getBlockType(int x, int y, int z)
 	{
-		return blockStates[x][y][z].getType();
+		return blockStates.get(new Coordinate(x, y, z)).getType();
 	}
 
 	@NotNull
@@ -128,7 +132,13 @@ public class ChunkSnapshotMock implements ChunkSnapshot
 	@Override
 	public boolean isSectionEmpty(int sy)
 	{
-		for (int y = sy << 4; y < (sy << 4) + 16; y++)
+		int totalSections = (int) Math.ceil(Math.abs((minY - maxY)) / 16.0);
+		if (sy < 0 || sy >= totalSections)
+		{   // Bukkit just gets the value from an array, so if it's invalid it'll throw this.
+			throw new ArrayIndexOutOfBoundsException("Index %d out of bounds for length %d".formatted(sy, totalSections));
+		}
+
+		for (int y = minY + (sy << 4); y < (minY + (sy << 4)) + 16; y++)
 		{
 			for (int x = 0; x < 15; x++)
 			{

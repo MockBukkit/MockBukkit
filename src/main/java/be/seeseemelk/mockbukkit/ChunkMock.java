@@ -14,6 +14,8 @@ import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ChunkMock implements Chunk
 {
@@ -72,18 +74,18 @@ public class ChunkMock implements Chunk
 	@Override
 	public @NotNull ChunkSnapshot getChunkSnapshot(boolean includeMaxblocky, boolean includeBiome, boolean includeBiomeTempRain)
 	{
-		BlockState[][][] blockStates = new BlockState[15][world.getMinHeight() + world.getMaxHeight()][15];
+		Map<Coordinate, BlockState> blockStates = new HashMap<>((15 * 15) * Math.abs((world.getMaxHeight() - world.getMinHeight())), 1.0f);
 		for (int x = 0; x < 15; x++)
 		{
 			for (int y = world.getMinHeight(); y < world.getMaxHeight(); y++)
 			{
 				for (int z = 0; z < 15; z++)
 				{
-					blockStates[x][y][z] = getBlock(x, y, z).getState();
+					blockStates.put(new Coordinate(x, y, z), getBlock(x, y, z).getState());
 				}
 			}
 		}
-		return new ChunkSnapshotMock(x, z, world.getMinHeight(), world.getName(), world.getFullTime(), blockStates);
+		return new ChunkSnapshotMock(x, z, world.getMinHeight(), world.getMaxHeight(), world.getName(), world.getFullTime(), blockStates);
 	}
 
 
