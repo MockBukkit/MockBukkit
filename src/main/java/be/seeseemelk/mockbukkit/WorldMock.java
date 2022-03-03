@@ -209,7 +209,7 @@ public class WorldMock implements World
 
 		Location location = new Location(this, c.x, c.y, c.z);
 		BlockMock block;
-		if (c.y == 0)
+		if (c.y == minHeight)
 		{
 			block = new BlockMock(Material.BEDROCK, location);
 		}
