@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.apache.commons.lang.Validate;
+import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.EntityEquipment;
@@ -27,13 +28,13 @@ public class EntityEquipmentMock implements EntityEquipment
 
 	private final Map<EquipmentSlot, Float> dropChances = new EnumMap<>(EquipmentSlot.class);
 
-	private ItemStack itemInMainHand;
-	private ItemStack itemInOffHand;
+	private ItemStack itemInMainHand = new ItemStack(Material.AIR);
+	private ItemStack itemInOffHand = new ItemStack(Material.AIR);
 
-	private ItemStack helmet;
-	private ItemStack chestPlate;
-	private ItemStack leggings;
-	private ItemStack boots;
+	private ItemStack helmet = new ItemStack(Material.AIR);
+	private ItemStack chestPlate = new ItemStack(Material.AIR);
+	private ItemStack leggings = new ItemStack(Material.AIR);
+	private ItemStack boots = new ItemStack(Material.AIR);
 
 	public EntityEquipmentMock(@NotNull LivingEntityMock holder)
 	{
@@ -51,55 +52,37 @@ public class EntityEquipmentMock implements EntityEquipment
 	{
 		switch (slot)
 		{
-		case HEAD:
-			setHelmet(item, silent);
-			break;
-		case CHEST:
-			setChestplate(item, silent);
-			break;
-		case LEGS:
-			setLeggings(item, silent);
-			break;
-		case FEET:
-			setBoots(item, silent);
-			break;
-		case HAND:
-			setItemInMainHand(item, silent);
-			break;
-		case OFF_HAND:
-			setItemInOffHand(item, silent);
-			break;
-		default:
-			// This should never be reached unless Mojang adds new slots
-			throw new UnimplementedOperationException("EquipmentSlot '" + slot + "' has no implementation!");
+			case HEAD -> setHelmet(item, silent);
+			case CHEST -> setChestplate(item, silent);
+			case LEGS -> setLeggings(item, silent);
+			case FEET -> setBoots(item, silent);
+			case HAND -> setItemInMainHand(item, silent);
+			case OFF_HAND -> setItemInOffHand(item, silent);
+			default ->
+					// This should never be reached unless Mojang adds new slots
+					throw new UnimplementedOperationException("EquipmentSlot '" + slot + "' has no implementation!");
 		}
 	}
 
 	@Override
-	public ItemStack getItem(@NotNull EquipmentSlot slot)
+	public @NotNull ItemStack getItem(@NotNull EquipmentSlot slot)
 	{
-		switch (slot)
-		{
-		case CHEST:
-			return getChestplate();
-		case FEET:
-			return getBoots();
-		case HAND:
-			return getItemInMainHand();
-		case HEAD:
-			return getHelmet();
-		case LEGS:
-			return getLeggings();
-		case OFF_HAND:
-			return getItemInOffHand();
-		default:
-			// This should never be reached unless Mojang adds new slots
-			throw new UnimplementedOperationException("EquipmentSlot '" + slot + "' has no implementation!");
-		}
+		return switch (slot)
+				{
+					case CHEST -> getChestplate();
+					case FEET -> getBoots();
+					case HAND -> getItemInMainHand();
+					case HEAD -> getHelmet();
+					case LEGS -> getLeggings();
+					case OFF_HAND -> getItemInOffHand();
+					default ->
+							// This should never be reached unless Mojang adds new slots
+							throw new UnimplementedOperationException("EquipmentSlot '" + slot + "' has no implementation!");
+				};
 	}
 
 	@Override
-	public ItemStack getItemInMainHand()
+	public @NotNull ItemStack getItemInMainHand()
 	{
 		return itemInMainHand;
 	}
@@ -118,7 +101,7 @@ public class EntityEquipmentMock implements EntityEquipment
 	}
 
 	@Override
-	public ItemStack getItemInOffHand()
+	public @NotNull ItemStack getItemInOffHand()
 	{
 		return itemInOffHand;
 	}
@@ -138,7 +121,7 @@ public class EntityEquipmentMock implements EntityEquipment
 
 	@Override
 	@Deprecated
-	public ItemStack getItemInHand()
+	public @NotNull ItemStack getItemInHand()
 	{
 		return getItemInMainHand();
 	}
