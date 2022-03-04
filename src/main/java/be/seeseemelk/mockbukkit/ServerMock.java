@@ -57,6 +57,7 @@ import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.SpawnCategory;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.generator.ChunkGenerator.ChunkData;
@@ -70,6 +71,7 @@ import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.profile.PlayerProfile;
 import org.bukkit.structure.StructureManager;
 import org.bukkit.util.CachedServerIcon;
 import org.jetbrains.annotations.NotNull;
@@ -1282,10 +1284,18 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public Entity getEntity(UUID uuid)
+	public @Nullable Entity getEntity(@NotNull UUID uuid)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Validate.notNull(uuid, "UUID cannot be null");
+
+		for (EntityMock entity : entities)
+		{
+			if (entity.getUniqueId().equals(uuid))
+			{
+				return entity;
+			}
+		}
+		return null;
 	}
 
 	@Override
@@ -1608,8 +1618,6 @@ public class ServerMock extends Server.Spigot implements Server
 		return this;
 	}
 
-	// Methods from Server.Spigot:
-
 	@NotNull
 	@Override
 	public YamlConfiguration getConfig()
@@ -1641,4 +1649,39 @@ public class ServerMock extends Server.Spigot implements Server
 	{
 		throw new UnsupportedOperationException("Not supported.");
 	}
+
+    @Override
+    public int getTicksPerSpawns(@NotNull SpawnCategory spawnCategory)
+    {
+        // TODO Auto-generated method stub
+        throw new UnimplementedOperationException();
+    }
+
+    @Override
+    public PlayerProfile createPlayerProfile(@Nullable UUID uniqueId, @Nullable String name)
+    {
+        // TODO Auto-generated method stub
+        throw new UnimplementedOperationException();
+    }
+
+    @Override
+    public PlayerProfile createPlayerProfile(@NotNull UUID uniqueId)
+    {
+        // TODO Auto-generated method stub
+        throw new UnimplementedOperationException();
+    }
+
+    @Override
+    public PlayerProfile createPlayerProfile(@NotNull String name)
+    {
+        // TODO Auto-generated method stub
+        throw new UnimplementedOperationException();
+    }
+
+    @Override
+    public int getSpawnLimit(@NotNull SpawnCategory spawnCategory)
+    {
+        // TODO Auto-generated method stub
+        throw new UnimplementedOperationException();
+    }
 }

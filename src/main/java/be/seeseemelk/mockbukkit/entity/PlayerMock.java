@@ -45,6 +45,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Pose;
+import org.bukkit.entity.SpawnCategory;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.memory.MemoryKey;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -72,6 +73,7 @@ import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.profile.PlayerProfile;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.RayTraceResult;
@@ -94,6 +96,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	private PlayerInventoryMock inventory = null;
 	private EnderChestInventoryMock enderChest = null;
 	private GameMode gamemode = GameMode.SURVIVAL;
+	private GameMode previousGamemode = gamemode;
 	private String displayName = null;
 	private String playerListName = null;
 	private int expTotal = 0;
@@ -103,6 +106,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	private int expLevel = 0;
 	private boolean sneaking = false;
 	private boolean sprinting = false;
+	private boolean allowFlight = false;
 	private boolean flying = false;
 	private boolean whitelisted = true;
 	private InventoryView inventoryView;
@@ -316,14 +320,14 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public void setGameMode(@NotNull GameMode mode)
 	{
-		gamemode = mode;
+		this.previousGamemode = gamemode;
+		this.gamemode = mode;
 	}
 
     @Override
     public GameMode getPreviousGameMode()
     {
-        // TODO Auto-generated method stub
-        throw new UnimplementedOperationException();
+        return previousGamemode;
     }
 
 	@Override
@@ -1506,15 +1510,17 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public boolean getAllowFlight()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return allowFlight;
 	}
 
 	@Override
 	public void setAllowFlight(boolean flight)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (this.isFlying() && !flight)
+		{
+			flying = false;
+		}
+		this.allowFlight = flight;
 	}
 
 	@Override
@@ -1569,6 +1575,9 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public void setFlying(boolean value)
 	{
+		if (!this.getAllowFlight() && value) {
+			throw new IllegalArgumentException("Cannot make player fly if getAllowFlight() is false");
+		}
 		this.flying = value;
 	}
 
@@ -2310,6 +2319,19 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
+    
+    @Override
+    public @NotNull SpawnCategory getSpawnCategory()
+    {
+        return SpawnCategory.MISC;
+    }
+
+    @Override
+    public PlayerProfile getPlayerProfile()
+    {
+        // TODO Auto-generated method stub
+        throw new UnimplementedOperationException();
+    }
 
 
 	@Override

@@ -10,6 +10,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.Statistic;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.profile.PlayerProfile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -270,5 +271,12 @@ public class OfflinePlayerMock implements OfflinePlayer
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
+
+    @Override
+    public PlayerProfile getPlayerProfile()
+    {
+        // TODO Auto-generated method stub
+        throw new UnimplementedOperationException();
+    }
 
 }
