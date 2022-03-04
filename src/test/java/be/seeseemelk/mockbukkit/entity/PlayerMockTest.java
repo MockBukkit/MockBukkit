@@ -161,6 +161,14 @@ class PlayerMockTest
 	}
 
 	@Test
+	void getPreviousGameMode()
+	{
+		player.setGameMode(GameMode.SURVIVAL);
+		player.setGameMode(GameMode.CREATIVE);
+		assertEquals(GameMode.SURVIVAL, player.getPreviousGameMode());
+	}
+
+	@Test
 	void assertGameMode_CorrectGameMode_DoesNotAssert()
 	{
 		player.assertGameMode(GameMode.SURVIVAL);
@@ -1163,8 +1171,25 @@ class PlayerMockTest
 	@Test
 	void testFly()
 	{
+		player.setAllowFlight(true);
 		player.setFlying(true);
 		assertTrue(player.isFlying());
+	}
+
+	@Test
+	void testFly_NotAllowed() {
+		assertThrows(IllegalArgumentException.class, () -> {
+			player.setAllowFlight(false);
+			player.setFlying(true);
+		});
+	}
+
+	@Test
+	void testFly_DisabledWhenNotAllowed() {
+		player.setAllowFlight(true);
+		player.setFlying(true);
+		player.setAllowFlight(false);
+		assertFalse(player.isFlying());
 	}
 
 	@Test

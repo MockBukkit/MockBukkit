@@ -6,6 +6,7 @@ import org.apache.commons.lang.Validate;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
+import org.bukkit.entity.SpawnCategory;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.jetbrains.annotations.NotNull;
 
@@ -75,5 +76,11 @@ public class FireworkMock extends ProjectileMock implements Firework
 	{
 		this.shotAtAngle = shotAtAngle;
 	}
+    
+    @Override
+    public @NotNull SpawnCategory getSpawnCategory()
+    {
+        return SpawnCategory.MISC;
+    }
 
 }

@@ -573,7 +573,16 @@ class ServerMockTest
 	}
 
 	@Test
-	@SuppressWarnings("UnstableApiUsage")
+	void testGetEntity()
+	{
+		EntityMock entity = new SimpleEntityMock(server);
+		UUID uuid = entity.getUniqueId();
+		server.registerEntity(entity);
+		assertNotNull(server.getEntity(uuid));
+	}
+
+  @Test
+  @SuppressWarnings("UnstableApiUsage")
 	void testSendPluginMessage()
 	{
 		MockPlugin plugin = MockBukkit.createMockPlugin();
@@ -583,8 +592,6 @@ class ServerMockTest
 		out.writeUTF("ALL");
 		out.writeUTF("MockBukkit");
 		server.sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
-	}
-
 }
 
 class TestRecipe implements Recipe
