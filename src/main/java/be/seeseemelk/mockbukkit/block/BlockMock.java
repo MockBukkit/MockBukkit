@@ -212,8 +212,16 @@ public class BlockMock implements Block
 	@Override
 	public Location getLocation(Location loc)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (loc != null) {
+			loc.setWorld(this.getWorld());
+			loc.setX(location.getX());
+			loc.setY(location.getY());
+			loc.setZ(location.getZ());
+			loc.setYaw(0);
+			loc.setPitch(0);
+		}
+
+		return loc;
 	}
 
 	@Override

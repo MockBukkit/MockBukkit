@@ -569,6 +569,16 @@ class ServerMockTest
 		server.setSpawnRadius(51);
 		assertEquals(51, server.getSpawnRadius());
 	}
+
+	@Test
+	void testGetEntity()
+	{
+		EntityMock entity = new SimpleEntityMock(server);
+		UUID uuid = entity.getUniqueId();
+		server.registerEntity(entity);
+		assertNotNull(server.getEntity(uuid));
+	}
+
 }
 
 class TestRecipe implements Recipe
