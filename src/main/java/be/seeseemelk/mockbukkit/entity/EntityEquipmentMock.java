@@ -1,10 +1,12 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import com.google.common.base.Preconditions;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Mob;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
@@ -19,7 +21,6 @@ import java.util.Map;
  * {@link EntityEquipment}, so only implement this where necessary.
  *
  * @author TheBusyBiscuit
- *
  */
 public class EntityEquipmentMock implements EntityEquipment
 {
@@ -213,7 +214,7 @@ public class EntityEquipmentMock implements EntityEquipment
 	public ItemStack[] getArmorContents()
 	{
 		return new ItemStack[]
-		       { getBoots(), getLeggings(), getChestplate(), getHelmet() };
+				{ getBoots(), getLeggings(), getChestplate(), getHelmet() };
 	}
 
 	@Override
@@ -250,7 +251,7 @@ public class EntityEquipmentMock implements EntityEquipment
 	@Deprecated
 	public void setItemInHandDropChance(float chance)
 	{
-		this.dropChances.put(EquipmentSlot.HAND, chance);
+		setDropChance(EquipmentSlot.HAND, chance);
 	}
 
 	@Override
@@ -262,7 +263,7 @@ public class EntityEquipmentMock implements EntityEquipment
 	@Override
 	public void setItemInMainHandDropChance(float chance)
 	{
-		this.dropChances.put(EquipmentSlot.HAND, chance);
+		setDropChance(EquipmentSlot.HAND, chance);
 	}
 
 	@Override
@@ -274,7 +275,7 @@ public class EntityEquipmentMock implements EntityEquipment
 	@Override
 	public void setItemInOffHandDropChance(float chance)
 	{
-		this.dropChances.put(EquipmentSlot.OFF_HAND, chance);
+		setDropChance(EquipmentSlot.OFF_HAND, chance);
 	}
 
 	@Override
@@ -286,7 +287,7 @@ public class EntityEquipmentMock implements EntityEquipment
 	@Override
 	public void setHelmetDropChance(float chance)
 	{
-		this.dropChances.put(EquipmentSlot.HEAD, chance);
+		setDropChance(EquipmentSlot.HEAD, chance);
 	}
 
 	@Override
@@ -298,7 +299,7 @@ public class EntityEquipmentMock implements EntityEquipment
 	@Override
 	public void setChestplateDropChance(float chance)
 	{
-		this.dropChances.put(EquipmentSlot.CHEST, chance);
+		setDropChance(EquipmentSlot.CHEST, chance);
 	}
 
 	@Override
@@ -310,7 +311,7 @@ public class EntityEquipmentMock implements EntityEquipment
 	@Override
 	public void setLeggingsDropChance(float chance)
 	{
-		this.dropChances.put(EquipmentSlot.LEGS, chance);
+		setDropChance(EquipmentSlot.LEGS, chance);
 	}
 
 	@Override
@@ -322,7 +323,14 @@ public class EntityEquipmentMock implements EntityEquipment
 	@Override
 	public void setBootsDropChance(float chance)
 	{
-		this.dropChances.put(EquipmentSlot.FEET, chance);
+		setDropChance(EquipmentSlot.FEET, chance);
+	}
+
+	private void setDropChance(EquipmentSlot slot, float chance)
+	{
+		Preconditions.checkArgument(holder instanceof Mob, "Cannot set drop chance for non-Mob entity");
+
+		this.dropChances.put(slot, chance);
 	}
 
 	@Override
