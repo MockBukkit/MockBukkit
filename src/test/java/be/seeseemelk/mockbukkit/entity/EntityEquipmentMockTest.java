@@ -2,9 +2,8 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
-
 import org.bukkit.Material;
-import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Zombie;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
@@ -16,7 +15,6 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 class EntityEquipmentMockTest
 {
@@ -38,8 +36,8 @@ class EntityEquipmentMockTest
 	@Test
 	void testMainHand()
 	{
-		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
-		EntityEquipment equipment = armorStand.getEquipment();
+		Zombie zombie = new ZombieMock(server, UUID.randomUUID());
+		EntityEquipment equipment = zombie.getEquipment();
 
 		assertNotNull(equipment.getItemInMainHand());
 
@@ -53,8 +51,8 @@ class EntityEquipmentMockTest
 	@Test
 	void testOffHand()
 	{
-		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
-		EntityEquipment equipment = armorStand.getEquipment();
+		Zombie zombie = new ZombieMock(server, UUID.randomUUID());
+		EntityEquipment equipment = zombie.getEquipment();
 
 		assertNotNull(equipment.getItemInOffHand());
 
@@ -68,8 +66,8 @@ class EntityEquipmentMockTest
 	@Test
 	void testHelmet()
 	{
-		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
-		EntityEquipment equipment = armorStand.getEquipment();
+		Zombie zombie = new ZombieMock(server, UUID.randomUUID());
+		EntityEquipment equipment = zombie.getEquipment();
 
 		assertNotNull(equipment.getHelmet());
 
@@ -83,8 +81,8 @@ class EntityEquipmentMockTest
 	@Test
 	void testChestplate()
 	{
-		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
-		EntityEquipment equipment = armorStand.getEquipment();
+		Zombie zombie = new ZombieMock(server, UUID.randomUUID());
+		EntityEquipment equipment = zombie.getEquipment();
 
 		assertNotNull(equipment.getChestplate());
 
@@ -98,8 +96,8 @@ class EntityEquipmentMockTest
 	@Test
 	void testLeggings()
 	{
-		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
-		EntityEquipment equipment = armorStand.getEquipment();
+		Zombie zombie = new ZombieMock(server, UUID.randomUUID());
+		EntityEquipment equipment = zombie.getEquipment();
 
 		assertNotNull(equipment.getLeggings());
 
@@ -113,8 +111,8 @@ class EntityEquipmentMockTest
 	@Test
 	void testBoots()
 	{
-		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
-		EntityEquipment equipment = armorStand.getEquipment();
+		Zombie zombie = new ZombieMock(server, UUID.randomUUID());
+		EntityEquipment equipment = zombie.getEquipment();
 
 		assertNotNull(equipment.getBoots());
 
@@ -128,8 +126,8 @@ class EntityEquipmentMockTest
 	@Test
 	void testMainHandDropChance()
 	{
-		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
-		EntityEquipment equipment = armorStand.getEquipment();
+		Zombie zombie = new ZombieMock(server, UUID.randomUUID());
+		EntityEquipment equipment = zombie.getEquipment();
 
 		equipment.setItemInMainHandDropChance(0.75f);
 
@@ -139,8 +137,8 @@ class EntityEquipmentMockTest
 	@Test
 	void testOffHandDropChance()
 	{
-		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
-		EntityEquipment equipment = armorStand.getEquipment();
+		Zombie zombie = new ZombieMock(server, UUID.randomUUID());
+		EntityEquipment equipment = zombie.getEquipment();
 
 		equipment.setItemInOffHandDropChance(0.75f);
 
@@ -150,8 +148,8 @@ class EntityEquipmentMockTest
 	@Test
 	void testHelmetDropChance()
 	{
-		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
-		EntityEquipment equipment = armorStand.getEquipment();
+		Zombie zombie = new ZombieMock(server, UUID.randomUUID());
+		EntityEquipment equipment = zombie.getEquipment();
 
 		equipment.setHelmetDropChance(0.75f);
 
@@ -161,8 +159,8 @@ class EntityEquipmentMockTest
 	@Test
 	void testChestplateDropChance()
 	{
-		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
-		EntityEquipment equipment = armorStand.getEquipment();
+		Zombie zombie = new ZombieMock(server, UUID.randomUUID());
+		EntityEquipment equipment = zombie.getEquipment();
 
 		equipment.setChestplateDropChance(0.75f);
 
@@ -172,8 +170,8 @@ class EntityEquipmentMockTest
 	@Test
 	void testLeggingsDropChance()
 	{
-		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
-		EntityEquipment equipment = armorStand.getEquipment();
+		Zombie zombie = new ZombieMock(server, UUID.randomUUID());
+		EntityEquipment equipment = zombie.getEquipment();
 
 		equipment.setLeggingsDropChance(0.75f);
 
@@ -183,8 +181,8 @@ class EntityEquipmentMockTest
 	@Test
 	void testBootsDropChance()
 	{
-		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
-		EntityEquipment equipment = armorStand.getEquipment();
+		Zombie zombie = new ZombieMock(server, UUID.randomUUID());
+		EntityEquipment equipment = zombie.getEquipment();
 
 		equipment.setBootsDropChance(0.75f);
 
