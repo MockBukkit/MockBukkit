@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import org.bukkit.Material;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Zombie;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.EquipmentSlot;
@@ -15,6 +16,7 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class EntityEquipmentMockTest
 {
@@ -187,6 +189,16 @@ class EntityEquipmentMockTest
 		equipment.setBootsDropChance(0.75f);
 
 		assertEquals(0.75f, equipment.getBootsDropChance());
+	}
+
+	@Test
+	void setDropChance_NonMob()
+	{
+		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
+		assertThrows(IllegalArgumentException.class, () ->
+		{
+			armorStand.getEquipment().setHelmetDropChance(0.5f);
+		});
 	}
 
 }
