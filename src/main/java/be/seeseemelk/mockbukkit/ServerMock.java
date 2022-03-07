@@ -1324,11 +1324,11 @@ public class ServerMock extends Server.Spigot implements Server
 	public @NotNull BlockData createBlockData(@NotNull Material material)
 	{
 		Validate.notNull(material, "Must provide material");
-		return new BlockDataMock(material);
+		return BlockDataMock.mock(material);
 	}
 
 	@Override
-	public @NotNull BlockData createBlockData(@NotNull Material material, Consumer<BlockData> consumer)
+	public @NotNull BlockData createBlockData(@NotNull Material material, @Nullable Consumer<BlockData> consumer)
 	{
 		BlockData blockData = createBlockData(material);
 
