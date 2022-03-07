@@ -571,6 +571,7 @@ class ServerMockTest
 		assertEquals(51, server.getSpawnRadius());
 	}
 
+	@Test
 	void testGetEntity()
 	{
 		EntityMock entity = new SimpleEntityMock(server);
