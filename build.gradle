@@ -39,11 +39,13 @@ task sourcesJar(type: Jar) {
 }
 
 processResources {
-    new File("$buildDir/resources/main/build.properties").withWriter { w ->
-        Properties p = new Properties()
-        p['version'] = gradle.ext.version
-        p['full-api-version'] = gradle.ext.apiVersionFull
-        p.store w, null
+    doLast {
+        file("${buildDir}/resources/main/build.properties").withWriter { w ->
+            Properties p = new Properties()
+            p['version'] = gradle.ext.version
+            p['full-api-version'] = gradle.ext.apiVersionFull
+            p.store w, null
+        }
     }
 }
 
