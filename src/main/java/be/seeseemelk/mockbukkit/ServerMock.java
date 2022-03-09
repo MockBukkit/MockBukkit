@@ -1224,7 +1224,8 @@ public class ServerMock extends Server.Spigot implements Server
 		throw new UnimplementedOperationException();
 	}
 
-	public void setWarningState(WarningState warningState) {
+	public void setWarningState(@NotNull WarningState warningState)
+	{
 		this.warningState = warningState;
 	}
 
