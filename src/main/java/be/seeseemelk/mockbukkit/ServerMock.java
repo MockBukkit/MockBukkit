@@ -137,6 +137,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private GameMode defaultGameMode = GameMode.SURVIVAL;
 	private ConsoleCommandSender consoleSender;
 	private int spawnRadius = 16;
+	private WarningState warningState = WarningState.DEFAULT;
 
 	public ServerMock()
 	{
@@ -1223,11 +1224,14 @@ public class ServerMock extends Server.Spigot implements Server
 		throw new UnimplementedOperationException();
 	}
 
+	public void setWarningState(WarningState warningState) {
+		this.warningState = warningState;
+	}
+
 	@Override
-	public WarningState getWarningState()
+	public @NotNull WarningState getWarningState()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.warningState;
 	}
 
 	@Override
