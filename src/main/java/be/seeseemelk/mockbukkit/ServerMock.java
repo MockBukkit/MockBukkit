@@ -1224,6 +1224,11 @@ public class ServerMock extends Server.Spigot implements Server
 		throw new UnimplementedOperationException();
 	}
 
+	/**
+	 * Sets the return value of {@link #getWarningState}.
+	 *
+	 * @param warningState The {@link WarningState} to set.
+	 */
 	public void setWarningState(@NotNull WarningState warningState)
 	{
 		this.warningState = warningState;
