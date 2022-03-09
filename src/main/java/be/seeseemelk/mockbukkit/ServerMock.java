@@ -1231,6 +1231,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 */
 	public void setWarningState(@NotNull WarningState warningState)
 	{
+		Validate.notNull(warningState, "Warning state cannot be null");
 		this.warningState = warningState;
 	}
 
