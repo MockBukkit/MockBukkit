@@ -23,6 +23,7 @@ import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.entity.SpawnCategory;
+import org.bukkit.entity.memory.MemoryKey;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
@@ -98,6 +99,20 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		Bukkit.getPluginManager().callEvent(event);
 
 		alive = false;
+	}
+
+	@Override
+	public double getAbsorptionAmount()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setAbsorptionAmount(double amount)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -521,6 +536,13 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
+	public boolean isSleeping()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public boolean isClimbing()
 	{
 		// TODO Auto-generated method stub
@@ -587,6 +609,21 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	public Set<UUID> getCollidableExemptions()
 	{
 		return this.collidableExemptions;
+	}
+
+	@Nullable
+	@Override
+	public <T> T getMemory(@NotNull MemoryKey<T> memoryKey)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public <T> void setMemory(@NotNull MemoryKey<T> memoryKey, @Nullable T memoryValue)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@NotNull

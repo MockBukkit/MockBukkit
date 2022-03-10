@@ -4,8 +4,8 @@ import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Mob;
-import org.bukkit.entity.memory.MemoryKey;
 import org.bukkit.loot.LootTable;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
@@ -20,12 +20,13 @@ public abstract class MobMock extends LivingEntityMock implements Mob
 	}
 
 	@Override
-	public void setTarget(LivingEntity target)
+	public void setTarget(@Nullable LivingEntity target)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
+	@Nullable
 	@Override
 	public LivingEntity getTarget()
 	{
@@ -34,12 +35,25 @@ public abstract class MobMock extends LivingEntityMock implements Mob
 	}
 
 	@Override
-	public void setLootTable(LootTable table)
+	public void setAware(boolean aware)
+	{
+		this.aware = aware;
+	}
+
+	@Override
+	public boolean isAware()
+	{
+		return this.aware;
+	}
+
+	@Override
+	public void setLootTable(@Nullable LootTable table)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
+	@Nullable
 	@Override
 	public LootTable getLootTable()
 	{
@@ -59,54 +73,6 @@ public abstract class MobMock extends LivingEntityMock implements Mob
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-	}
-
-
-	@Override
-	public boolean isSleeping()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public <T> T getMemory(MemoryKey<T> memoryKey)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public <T> void setMemory(MemoryKey<T> memoryKey, T memoryValue)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public double getAbsorptionAmount()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setAbsorptionAmount(double amount)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setAware(boolean aware)
-	{
-		this.aware = aware;
-	}
-
-	@Override
-	public boolean isAware()
-	{
-		return this.aware;
 	}
 
 }

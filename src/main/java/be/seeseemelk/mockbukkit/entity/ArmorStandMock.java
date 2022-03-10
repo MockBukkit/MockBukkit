@@ -273,39 +273,4 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 		throw new UnimplementedOperationException();
 	}
 
-	@Override
-	public boolean isSleeping()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public <T> T getMemory(MemoryKey<T> memoryKey)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public <T> void setMemory(MemoryKey<T> memoryKey, T memoryValue)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public double getAbsorptionAmount()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setAbsorptionAmount(double amount)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
 }
