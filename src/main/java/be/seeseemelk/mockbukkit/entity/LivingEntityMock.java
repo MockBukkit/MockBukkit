@@ -60,6 +60,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	private boolean collidable = true;
 	private boolean ai = true;
 	private double absorptionAmount;
+	private int arrowCooldown;
 
 	private final Set<ActivePotionEffect> activeEffects = new HashSet<>();
 
@@ -649,15 +650,13 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public void setArrowCooldown(int ticks)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.arrowCooldown = ticks;
 	}
 
 	@Override
 	public int getArrowCooldown()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return arrowCooldown;
 	}
 
 	@Override
