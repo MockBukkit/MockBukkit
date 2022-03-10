@@ -27,6 +27,7 @@ import org.bukkit.entity.memory.MemoryKey;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.EntityToggleSwimEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -59,6 +60,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	private final Set<UUID> collidableExemptions = new HashSet<>();
 	private boolean collidable = true;
 	private boolean ai = true;
+	private boolean swimming;
 	private double absorptionAmount;
 	private int arrowCooldown;
 	private int arrowsInBody;
@@ -518,15 +520,22 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public boolean isSwimming()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.swimming;
 	}
 
 	@Override
 	public void setSwimming(boolean swimming)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (/*this.isValid() &&*/ this.isSwimming() != swimming)
+		{
+			EntityToggleSwimEvent event = new EntityToggleSwimEvent(this, swimming);
+			Bukkit.getPluginManager().callEvent(event);
+			if (event.isCancelled())
+			{
+				return;
+			}
+		}
+		this.swimming = swimming;
 	}
 
 	@Override
