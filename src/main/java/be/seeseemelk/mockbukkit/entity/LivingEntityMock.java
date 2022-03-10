@@ -61,6 +61,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	private boolean ai = true;
 	private double absorptionAmount;
 	private int arrowCooldown;
+	private int arrowsInBody;
 
 	private final Set<ActivePotionEffect> activeEffects = new HashSet<>();
 
@@ -112,6 +113,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public void setAbsorptionAmount(double amount)
 	{
+		Preconditions.checkArgument(amount >= 0 && Double.isFinite(amount), "amount < 0 or non-finite");
 		this.absorptionAmount = amount;
 	}
 
@@ -636,15 +638,14 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public void setArrowsInBody(int count)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(count >= 0, "New arrow amount must be >= 0");
+		this.arrowsInBody = count;
 	}
 
 	@Override
 	public int getArrowsInBody()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.arrowsInBody;
 	}
 
 	@Override
