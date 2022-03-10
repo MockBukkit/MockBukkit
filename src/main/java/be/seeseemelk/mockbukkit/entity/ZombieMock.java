@@ -3,7 +3,6 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.SpawnCategory;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.Zombie;
 import org.jetbrains.annotations.NotNull;
@@ -88,40 +87,33 @@ public class ZombieMock extends MonsterMock implements Zombie
 	@Override
 	public int getAge()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.isBaby() ? -1 : 0;
 	}
 
 	@Override
 	public void setAge(int age)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.setBaby(age < 0);
 	}
 
 	@Override
 	public void setAgeLock(boolean lock)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public boolean getAgeLock()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return false;
 	}
 
 	@Override
-	@Deprecated
 	public boolean isBaby()
 	{
 		return baby;
 	}
 
 	@Override
-	@Deprecated
 	public void setBaby(boolean baby)
 	{
 		this.baby = baby;
@@ -148,14 +140,12 @@ public class ZombieMock extends MonsterMock implements Zombie
 	@Override
 	public boolean canBreed()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return false;
 	}
 
 	@Override
 	public void setBreed(boolean breed)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
+
 }
