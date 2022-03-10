@@ -1,10 +1,9 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import java.util.Optional;
-import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
-
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.MockPlugin;
+import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.WorldMock;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -14,6 +13,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityToggleSwimEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.permissions.Permission;
@@ -25,15 +25,23 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.MockPlugin;
-import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.WorldMock;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class EntityMockTest
 {
+
 	private ServerMock server;
 	private WorldMock world;
 	private EntityMock entity;
@@ -200,7 +208,7 @@ class EntityMockTest
 	void sendMessage_Default_nextMessageReturnsMessages()
 	{
 		entity.sendMessage("hello");
-		entity.sendMessage(new String[] { "my", "world" });
+		entity.sendMessage("my", "world");
 		assertEquals("hello", entity.nextMessage());
 		assertEquals("my", entity.nextMessage());
 		assertEquals("world", entity.nextMessage());
@@ -459,6 +467,53 @@ class EntityMockTest
 		assertFalse(zombie.isAware());
 		zombie.setAware(true);
 		assertTrue(zombie.isAware());
+	}
+
+	@Test
+	void absorptionAmount()
+	{
+		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+		assertEquals(0, zombie.getAbsorptionAmount());
+		zombie.setAbsorptionAmount(1.5);
+		assertEquals(1.5, zombie.getAbsorptionAmount());
+	}
+
+	@Test
+	void arrowCooldown()
+	{
+		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+		assertEquals(0, zombie.getArrowCooldown());
+		zombie.setArrowCooldown(10);
+		assertEquals(10, zombie.getArrowCooldown());
+	}
+
+	@Test
+	void arrowsInBody()
+	{
+		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+		assertEquals(0, zombie.getArrowsInBody());
+		zombie.setArrowsInBody(5);
+		assertEquals(5, zombie.getArrowsInBody());
+	}
+
+	@Test
+	void arrowsInBody_NegativeValue_Fails()
+	{
+		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+		assertThrows(IllegalArgumentException.class, () ->
+		{
+			zombie.setArrowsInBody(-1);
+		});
+	}
+
+	@Test
+	void swimming()
+	{
+		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+		assertFalse(zombie.isSwimming());
+		zombie.setSwimming(true);
+		assertTrue(zombie.isSwimming());
+		server.getPluginManager().assertEventFired(event -> event instanceof EntityToggleSwimEvent);
 	}
 
 }
