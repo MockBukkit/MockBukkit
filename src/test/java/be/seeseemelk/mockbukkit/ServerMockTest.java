@@ -25,6 +25,7 @@ import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.Warning;
 import org.bukkit.WorldCreator;
 import org.bukkit.WorldType;
 import org.bukkit.World;
@@ -581,8 +582,16 @@ class ServerMockTest
 		assertNotNull(server.getEntity(uuid));
 	}
 
-        @Test
-        @SuppressWarnings("UnstableApiUsage")
+	@Test
+	void testWarningState()
+	{
+		assertEquals(Warning.WarningState.DEFAULT, server.getWarningState());
+		server.setWarningState(Warning.WarningState.ON);
+		assertEquals(Warning.WarningState.ON, server.getWarningState());
+	}
+
+	@Test
+	@SuppressWarnings("UnstableApiUsage")
 	void testSendPluginMessage()
 	{
 		MockPlugin plugin = MockBukkit.createMockPlugin();
@@ -592,7 +601,7 @@ class ServerMockTest
 		out.writeUTF("ALL");
 		out.writeUTF("MockBukkit");
 		server.sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
-        }
+	}
 
 }
 
