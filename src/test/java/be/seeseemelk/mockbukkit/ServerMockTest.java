@@ -10,6 +10,7 @@ import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
+import org.bukkit.Warning;
 import org.bukkit.WorldCreator;
 import org.bukkit.WorldType;
 import org.bukkit.block.data.BlockData;
@@ -585,6 +586,14 @@ class ServerMockTest
 	{
 		BlockData blockData = server.createBlockData(Material.STONE);
 		assertEquals(Material.STONE, blockData.getMaterial());
+	}
+
+	@Test
+	void testWarningState()
+	{
+		assertEquals(Warning.WarningState.DEFAULT, server.getWarningState());
+		server.setWarningState(Warning.WarningState.ON);
+		assertEquals(Warning.WarningState.ON, server.getWarningState());
 	}
 
 }
