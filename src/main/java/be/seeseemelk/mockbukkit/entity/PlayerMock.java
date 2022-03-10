@@ -1075,7 +1075,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public void playSound(Entity entity, Sound sound, float volume, float pitch)
+	public void playSound(@NotNull Entity entity, @NotNull Sound sound, float volume, float pitch)
 	{
 		playSound(entity, sound, SoundCategory.MASTER, volume, pitch);
 	}
@@ -1093,7 +1093,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public void playSound(Entity entity, Sound sound, SoundCategory category, float volume, float pitch)
+	public void playSound(Entity entity, @NotNull Sound sound, @NotNull SoundCategory category, float volume, float pitch)
 	{
 		playSound(entity.getLocation(), sound, volume, pitch);
 	}
@@ -1631,21 +1631,21 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public void setResourcePack(@NotNull String url, @Nullable byte[] hash, @Nullable String prompt)
+	public void setResourcePack(@NotNull String url, byte[] hash, @Nullable String prompt)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void setResourcePack(@NotNull String url, @Nullable byte[] hash, boolean force)
+	public void setResourcePack(@NotNull String url, byte[] hash, boolean force)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void setResourcePack(@NotNull String url, @Nullable byte[] hash, @Nullable String prompt, boolean force)
+	public void setResourcePack(@NotNull String url, byte[] hash, @Nullable String prompt, boolean force)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1676,8 +1676,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 
 		this.health = 0;
 
-		List<ItemStack> drops = new ArrayList<>();
-		drops.addAll(Arrays.asList(getInventory().getContents()));
+		List<ItemStack> drops = new ArrayList<>(Arrays.asList(getInventory().getContents()));
 		PlayerDeathEvent event = new PlayerDeathEvent(this, drops, 0, getName() + " got killed");
 		Bukkit.getPluginManager().callEvent(event);
 
@@ -1685,7 +1684,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		closeInventory();
 
 		// Clear the Inventory if keep-inventory is not enabled
-		if (!getWorld().getGameRuleValue(GameRule.KEEP_INVENTORY).booleanValue())
+		if (!getWorld().getGameRuleValue(GameRule.KEEP_INVENTORY))
 		{
 			getInventory().clear();
 			// Should someone try to provoke a RespawnEvent, they will now find the Inventory to be empty
@@ -2225,35 +2224,35 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public void sendEquipmentChange(LivingEntity entity, EquipmentSlot slot, ItemStack item)
+	public void sendEquipmentChange(@NotNull LivingEntity entity, @NotNull EquipmentSlot slot, @NotNull ItemStack item)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void hideEntity(Plugin plugin, Entity entity)
+	public void hideEntity(@NotNull Plugin plugin, @NotNull Entity entity)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void showEntity(Plugin plugin, Entity entity)
+	public void showEntity(@NotNull Plugin plugin, @NotNull Entity entity)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean canSee(Entity entity)
+	public boolean canSee(@NotNull Entity entity)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void openSign(Sign sign)
+	public void openSign(@NotNull Sign sign)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -2274,7 +2273,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public PlayerProfile getPlayerProfile()
+	public @NotNull PlayerProfile getPlayerProfile()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

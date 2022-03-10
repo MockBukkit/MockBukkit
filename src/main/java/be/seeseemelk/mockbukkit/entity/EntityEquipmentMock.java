@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.entity;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
@@ -10,14 +11,11 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-
 /**
  * This mocks the {@link EntityEquipment} of a {@link LivingEntityMock}. Note that not every {@link LivingEntity} has
  * {@link EntityEquipment}, so only implement this where necessary.
  *
  * @author TheBusyBiscuit
- *
  */
 public class EntityEquipmentMock implements EntityEquipment
 {
@@ -209,7 +207,7 @@ public class EntityEquipmentMock implements EntityEquipment
 	public ItemStack[] getArmorContents()
 	{
 		return new ItemStack[]
-		       { getBoots(), getLeggings(), getChestplate(), getHelmet() };
+				{ getBoots(), getLeggings(), getChestplate(), getHelmet() };
 	}
 
 	@Override

@@ -34,7 +34,7 @@ public class ExperienceOrbMock extends EntityMock implements ExperienceOrb
 	}
 
 	@Override
-	public EntityType getType()
+	public @NotNull EntityType getType()
 	{
 		return EntityType.EXPERIENCE_ORB;
 	}
