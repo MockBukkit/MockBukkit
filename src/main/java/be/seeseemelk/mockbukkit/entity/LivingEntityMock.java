@@ -59,6 +59,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	private final Set<UUID> collidableExemptions = new HashSet<>();
 	private boolean collidable = true;
 	private boolean ai = true;
+	private double absorptionAmount;
 
 	private final Set<ActivePotionEffect> activeEffects = new HashSet<>();
 
@@ -104,15 +105,13 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public double getAbsorptionAmount()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return absorptionAmount;
 	}
 
 	@Override
 	public void setAbsorptionAmount(double amount)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.absorptionAmount = amount;
 	}
 
 	@Override
