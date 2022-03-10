@@ -159,6 +159,14 @@ class PlayerMockTest
 	}
 
 	@Test
+	void getPreviousGameMode()
+	{
+		player.setGameMode(GameMode.SURVIVAL);
+		player.setGameMode(GameMode.CREATIVE);
+		assertEquals(GameMode.SURVIVAL, player.getPreviousGameMode());
+	}
+
+	@Test
 	void assertGameMode_CorrectGameMode_DoesNotAssert()
 	{
 		player.assertGameMode(GameMode.SURVIVAL);
