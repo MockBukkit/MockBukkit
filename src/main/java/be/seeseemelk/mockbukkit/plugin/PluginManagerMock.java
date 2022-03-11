@@ -114,8 +114,11 @@ public class PluginManagerMock implements PluginManager
 		for (Event event : events)
 		{
 			if (predicate.test(event))
-				return;
+			{
+			    return;
+			}
 		}
+
 		fail(message);
 	}
 
@@ -137,14 +140,16 @@ public class PluginManagerMock implements PluginManager
 	 * @param eventClass The class type that the event should be an instance of.
 	 * @param predicate  The predicate to test the event against.
 	 */
-	@SuppressWarnings("unchecked")
 	public <T extends Event> void assertEventFired(String message, Class<T> eventClass, Predicate<T> predicate)
 	{
 		for (Event event : events)
 		{
-			if (eventClass.isInstance(event) && predicate.test((T) event))
-				return;
+			if (eventClass.isInstance(event) && predicate.test(eventClass.cast(event)))
+			{
+			    return;
+			}
 		}
+
 		fail(message);
 	}
 
