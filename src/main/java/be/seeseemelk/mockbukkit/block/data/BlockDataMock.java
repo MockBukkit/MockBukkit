@@ -77,12 +77,12 @@ public class BlockDataMock implements BlockData
 		}
 	}
 
-	public static BlockDataMock mock(Material material)
+	public static @NotNull BlockDataMock mock(@NotNull Material material)
 	{
 		return switch (material)
-				{
-					default -> new BlockDataMock(material);
-				};
+		{
+			default -> new BlockDataMock(material);
+		};
 	}
 
 }
