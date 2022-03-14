@@ -23,6 +23,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.Warning;
 import org.bukkit.WorldCreator;
 import org.bukkit.WorldType;
 import org.bukkit.World;
@@ -569,6 +570,24 @@ class ServerMockTest
 		server.setSpawnRadius(51);
 		assertEquals(51, server.getSpawnRadius());
 	}
+
+	@Test
+	void testGetEntity()
+	{
+		EntityMock entity = new SimpleEntityMock(server);
+		UUID uuid = entity.getUniqueId();
+		server.registerEntity(entity);
+		assertNotNull(server.getEntity(uuid));
+	}
+
+	@Test
+	void testWarningState()
+	{
+		assertEquals(Warning.WarningState.DEFAULT, server.getWarningState());
+		server.setWarningState(Warning.WarningState.ON);
+		assertEquals(Warning.WarningState.ON, server.getWarningState());
+	}
+
 }
 
 class TestRecipe implements Recipe
