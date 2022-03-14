@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.SpawnCategory;
 import org.bukkit.inventory.EntityEquipment;
 import org.jetbrains.annotations.NotNull;
 
@@ -74,6 +75,13 @@ public class SimpleMobMock extends MobMock
 
 	@Override
 	public Set<UUID> getCollidableExemptions()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public SpawnCategory getSpawnCategory()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
