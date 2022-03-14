@@ -69,11 +69,11 @@ public class ItemFactoryMock implements ItemFactory
 	@Override
 	public ItemMeta getItemMeta(Material material)
 	{
-	    Class<? extends ItemMeta> clazz = null;
+		Class<? extends ItemMeta> clazz = null;
 
 		try
 		{
-		    clazz = getItemMetaClass(material);
+			clazz = getItemMetaClass(material);
 			return clazz.getDeclaredConstructor().newInstance();
 		}
 		catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e)
