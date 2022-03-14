@@ -1178,13 +1178,15 @@ class PlayerMockTest
 	}
 
 	@Test
-	void testFly_NotAllowed() {
-        player.setAllowFlight(false);
+	void testFly_NotAllowed()
+	{
+		player.setAllowFlight(false);
 		assertThrows(IllegalArgumentException.class, () -> player.setFlying(true));
 	}
 
 	@Test
-	void testFly_DisabledWhenNotAllowed() {
+	void testFly_DisabledWhenNotAllowed()
+	{
 		player.setAllowFlight(true);
 		player.setFlying(true);
 		player.setAllowFlight(false);
@@ -1225,7 +1227,7 @@ class PlayerMockTest
 		assertTrue(player.canSee(player2));
 	}
 
-    @Deprecated
+	@Deprecated
 	@Test
 	void testPlayerHide_OldImplementation()
 	{
@@ -1247,7 +1249,7 @@ class PlayerMockTest
 		assertTrue(player.canSee(player2));
 	}
 
-    @Deprecated
+	@Deprecated
 	@Test
 	void testPlayerHide_OldAndNewPluginWorksSimultaneously()
 	{

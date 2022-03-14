@@ -212,7 +212,8 @@ public class BlockMock implements Block
 	@Override
 	public Location getLocation(Location loc)
 	{
-		if (loc != null) {
+		if (loc != null)
+		{
 			loc.setWorld(this.getWorld());
 			loc.setX(location.getX());
 			loc.setY(location.getY());

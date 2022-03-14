@@ -115,7 +115,7 @@ public class PluginManagerMock implements PluginManager
 		{
 			if (predicate.test(event))
 			{
-			    return;
+				return;
 			}
 		}
 
@@ -146,7 +146,7 @@ public class PluginManagerMock implements PluginManager
 		{
 			if (eventClass.isInstance(event) && predicate.test(eventClass.cast(event)))
 			{
-			    return;
+				return;
 			}
 		}
 
