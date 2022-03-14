@@ -17,6 +17,7 @@ import org.bukkit.GameMode;
 import org.bukkit.GameRule;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.World;
@@ -1353,6 +1354,21 @@ class PlayerMockTest
 		player.assertNotTeleported();
 		player.assertLocation(originalLocation, 0);
 
+	}
+
+	@Test
+	public void testPlayerSpawnParticle_Correct_DataType()
+	{
+		player.spawnParticle(Particle.ITEM_CRACK, player.getLocation(), 1, new ItemStack(Material.STONE));
+	}
+
+	@Test
+	public void testPlayerSpawnParticle_Incorrect_DataType()
+	{
+		assertThrows(IllegalArgumentException.class, () ->
+		{
+			player.spawnParticle(Particle.ITEM_CRACK, player.getLocation(), 1, new Object());
+		});
 	}
 
 }
