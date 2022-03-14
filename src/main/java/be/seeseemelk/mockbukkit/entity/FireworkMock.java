@@ -76,11 +76,11 @@ public class FireworkMock extends ProjectileMock implements Firework
 	{
 		this.shotAtAngle = shotAtAngle;
 	}
-    
-    @Override
-    public @NotNull SpawnCategory getSpawnCategory()
-    {
-        return SpawnCategory.MISC;
-    }
+
+	@Override
+	public @NotNull SpawnCategory getSpawnCategory()
+	{
+		return SpawnCategory.MISC;
+	}
 
 }

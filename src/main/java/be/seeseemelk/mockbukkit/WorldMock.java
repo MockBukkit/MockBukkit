@@ -90,7 +90,7 @@ public class WorldMock implements World
 	private final Map<GameRule<?>, Object> gameRules = new HashMap<>();
 	private final MetadataTable metadataTable = new MetadataTable();
 	private final Map<ChunkCoordinate, ChunkMock> loadedChunks = new HashMap<>();
-    private PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
+	private PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
 	private final ServerMock server;
 	private final Material defaultBlock;
 	private final int grassHeight;
@@ -584,12 +584,12 @@ public class WorldMock implements World
 		throw new UnimplementedOperationException();
 	}
 
-    @Override
-    public boolean generateTree(Location location, Random random, TreeType type, Predicate<BlockState> statePredicate)
-    {
-        // TODO Auto-generated method stub
-        throw new UnimplementedOperationException();
-    }
+	@Override
+	public boolean generateTree(Location location, Random random, TreeType type, Predicate<BlockState> statePredicate)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
 
 	@Override
 	public Entity spawnEntity(Location loc, EntityType type)
@@ -1195,7 +1195,7 @@ public class WorldMock implements World
 	@Override
 	public void playSound(Location location, Sound sound, float volume, float pitch)
 	{
-        this.playSound(location, sound, SoundCategory.MASTER, volume, pitch);
+		this.playSound(location, sound, SoundCategory.MASTER, volume, pitch);
 	}
 
 	@Override
@@ -1222,26 +1222,26 @@ public class WorldMock implements World
 		}
 	}
 
-    @Override
-    public void playSound(Entity entity, Sound sound, float volume, float pitch)
-    {
-        this.playSound(entity, sound, SoundCategory.MASTER, volume, pitch);
-    }
+	@Override
+	public void playSound(Entity entity, Sound sound, float volume, float pitch)
+	{
+		this.playSound(entity, sound, SoundCategory.MASTER, volume, pitch);
+	}
 
-    @Override
-    public void playSound(Entity entity, Sound sound, SoundCategory category, float volume, float pitch)
-    {
-        if (entity == null || entity.getWorld() != this || sound == null || category == null)
-        {
-            // Null values are simply ignored - This is inline with CB behaviour
-            return;
-        }
+	@Override
+	public void playSound(Entity entity, Sound sound, SoundCategory category, float volume, float pitch)
+	{
+		if (entity == null || entity.getWorld() != this || sound == null || category == null)
+		{
+			// Null values are simply ignored - This is inline with CB behaviour
+			return;
+		}
 
-        for (Player player : getPlayers())
-        {
-            player.playSound(entity, sound, category, volume, pitch);
-        }
-    }
+		for (Player player : getPlayers())
+		{
+			player.playSound(entity, sound, category, volume, pitch);
+		}
+	}
 
 	@Override
 	public String[] getGameRules()
@@ -2019,37 +2019,37 @@ public class WorldMock implements World
 		throw new UnimplementedOperationException();
 	}
 
-    @Override
-    public @NotNull PersistentDataContainer getPersistentDataContainer()
-    {
-        return this.persistentDataContainer;
-    }
+	@Override
+	public @NotNull PersistentDataContainer getPersistentDataContainer()
+	{
+		return this.persistentDataContainer;
+	}
 
-    @Override
-    public long getTicksPerSpawns(@NotNull SpawnCategory spawnCategory)
-    {
-        // TODO Auto-generated method stub
-        throw new UnimplementedOperationException();
-    }
+	@Override
+	public long getTicksPerSpawns(@NotNull SpawnCategory spawnCategory)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
 
-    @Override
-    public void setTicksPerSpawns(@NotNull SpawnCategory spawnCategory, int ticksPerCategorySpawn)
-    {
-        // TODO Auto-generated method stub
-        throw new UnimplementedOperationException();
-    }
+	@Override
+	public void setTicksPerSpawns(@NotNull SpawnCategory spawnCategory, int ticksPerCategorySpawn)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
 
-    @Override
-    public int getSpawnLimit(@NotNull SpawnCategory spawnCategory)
-    {
-        // TODO Auto-generated method stub
-        throw new UnimplementedOperationException();
-    }
+	@Override
+	public int getSpawnLimit(@NotNull SpawnCategory spawnCategory)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
 
-    @Override
-    public void setSpawnLimit(@NotNull SpawnCategory spawnCategory, int limit)
-    {
-        // TODO Auto-generated method stub
-        throw new UnimplementedOperationException();
-    }
+	@Override
+	public void setSpawnLimit(@NotNull SpawnCategory spawnCategory, int limit)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
 }
