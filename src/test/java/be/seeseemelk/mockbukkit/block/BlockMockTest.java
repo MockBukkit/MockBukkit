@@ -60,7 +60,8 @@ class BlockMockTest
 	}
 
 	@Test
-	void getLocation_CustomLocation_ApplyToProvided() {
+	void getLocation_CustomLocation_ApplyToProvided()
+	{
 		WorldMock world = new WorldMock();
 		Location location = new Location(world, 5, 2, 1);
 		block = new BlockMock(Material.AIR, location);

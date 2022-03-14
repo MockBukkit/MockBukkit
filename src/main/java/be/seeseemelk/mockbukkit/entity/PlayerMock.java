@@ -324,11 +324,11 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		this.gamemode = mode;
 	}
 
-    @Override
-    public GameMode getPreviousGameMode()
-    {
-        return previousGamemode;
-    }
+	@Override
+	public GameMode getPreviousGameMode()
+	{
+		return previousGamemode;
+	}
 
 	@Override
 	public boolean isWhitelisted()
@@ -1077,7 +1077,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public void playSound(@NotNull Location location, @NotNull String sound, float volume, float pitch)
 	{
-	    playSound(location, sound, SoundCategory.MASTER, volume, pitch);
+		playSound(location, sound, SoundCategory.MASTER, volume, pitch);
 	}
 
 	@Override
@@ -1086,11 +1086,11 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		playSound(location, sound, SoundCategory.MASTER, volume, pitch);
 	}
 
-    @Override
-    public void playSound(Entity entity, Sound sound, float volume, float pitch)
-    {
-        playSound(entity, sound, SoundCategory.MASTER, volume, pitch);
-    }
+	@Override
+	public void playSound(Entity entity, Sound sound, float volume, float pitch)
+	{
+		playSound(entity, sound, SoundCategory.MASTER, volume, pitch);
+	}
 
 	@Override
 	public void playSound(@NotNull Location location, @NotNull String sound, @NotNull SoundCategory category, float volume, float pitch)
@@ -1104,11 +1104,11 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		heardSounds.add(new AudioExperience(sound, category, location, volume, pitch));
 	}
 
-    @Override
-    public void playSound(Entity entity, Sound sound, SoundCategory category, float volume, float pitch)
-    {
-        playSound(entity.getLocation(), sound, volume, pitch);
-    }
+	@Override
+	public void playSound(Entity entity, Sound sound, SoundCategory category, float volume, float pitch)
+	{
+		playSound(entity.getLocation(), sound, volume, pitch);
+	}
 
 	@Override
 	public @NotNull List<AudioExperience> getHeardSounds()
@@ -1574,7 +1574,8 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public void setFlying(boolean value)
 	{
-		if (!this.getAllowFlight() && value) {
+		if (!this.getAllowFlight() && value)
+		{
 			throw new IllegalArgumentException("Cannot make player fly if getAllowFlight() is false");
 		}
 		this.flying = value;
@@ -2318,19 +2319,19 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-    
-    @Override
-    public @NotNull SpawnCategory getSpawnCategory()
-    {
-        return SpawnCategory.MISC;
-    }
 
-    @Override
-    public PlayerProfile getPlayerProfile()
-    {
-        // TODO Auto-generated method stub
-        throw new UnimplementedOperationException();
-    }
+	@Override
+	public @NotNull SpawnCategory getSpawnCategory()
+	{
+		return SpawnCategory.MISC;
+	}
+
+	@Override
+	public PlayerProfile getPlayerProfile()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
 
 
 	@Override
