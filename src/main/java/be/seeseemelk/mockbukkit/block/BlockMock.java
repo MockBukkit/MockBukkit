@@ -212,8 +212,17 @@ public class BlockMock implements Block
 	@Override
 	public Location getLocation(Location loc)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (loc != null)
+		{
+			loc.setWorld(this.getWorld());
+			loc.setX(location.getX());
+			loc.setY(location.getY());
+			loc.setZ(location.getZ());
+			loc.setYaw(0);
+			loc.setPitch(0);
+		}
+
+		return loc;
 	}
 
 	@Override
@@ -237,10 +246,17 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public BlockFace getFace(Block block)
+	public BlockFace getFace(@NotNull Block block)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		for (BlockFace face : BlockFace.values())
+		{
+			if ((this.getX() + face.getModX() == block.getX()) && (this.getY() + face.getModY() == block.getY()) && (this.getZ() + face.getModZ() == block.getZ()))
+			{
+				return face;
+			}
+		}
+
+		return null;
 	}
 
 	@Override

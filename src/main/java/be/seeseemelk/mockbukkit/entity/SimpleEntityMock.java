@@ -5,6 +5,7 @@ import java.util.UUID;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Pose;
+import org.bukkit.entity.SpawnCategory;
 import org.bukkit.util.BoundingBox;
 
 import be.seeseemelk.mockbukkit.ServerMock;
@@ -74,6 +75,13 @@ public class SimpleEntityMock extends EntityMock
 
 	@Override
 	public Pose getPose()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public SpawnCategory getSpawnCategory()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
