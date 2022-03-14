@@ -516,4 +516,49 @@ class EntityMockTest
 		server.getPluginManager().assertEventFired(event -> event instanceof EntityToggleSwimEvent);
 	}
 
+	@Test
+	void zombieCanBreed()
+	{
+		ZombieMock zombie = new ZombieMock(server, UUID.randomUUID());
+		assertFalse(zombie.canBreed());
+		zombie.setBreed(true);
+		assertFalse(zombie.canBreed());
+	}
+
+	@Test
+	void zombieAgeLock()
+	{
+		ZombieMock zombie = new ZombieMock(server, UUID.randomUUID());
+		assertFalse(zombie.getAgeLock());
+		zombie.setAgeLock(true);
+		assertFalse(zombie.getAgeLock());
+	}
+
+	@Test
+	void zombieSetAdult()
+	{
+		ZombieMock zombie = new ZombieMock(server, UUID.randomUUID());
+		zombie.setAdult();
+		assertTrue(zombie.isAdult());
+	}
+
+	@Test
+	void zombieSetBaby()
+	{
+		ZombieMock zombie = new ZombieMock(server, UUID.randomUUID());
+		assertTrue(zombie.isAdult());
+		zombie.setBaby();
+		assertTrue(zombie.isBaby());
+	}
+
+	@Test
+	void zombieGetAge()
+	{
+		ZombieMock zombie = new ZombieMock(server, UUID.randomUUID());
+		assertTrue(zombie.isAdult());
+		assertEquals(0, zombie.getAge());
+		zombie.setBaby();
+		assertEquals(-1, zombie.getAge());
+	}
+
 }
