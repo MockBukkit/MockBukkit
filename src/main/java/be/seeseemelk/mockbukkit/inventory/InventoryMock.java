@@ -1,16 +1,6 @@
 package be.seeseemelk.mockbukkit.inventory;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
-
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Objects;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -22,10 +12,20 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Objects;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class InventoryMock implements Inventory
 {
+
 	private final ItemStack[] items;
 	private final InventoryHolder holder;
 	private final InventoryType type;
@@ -33,7 +33,7 @@ public class InventoryMock implements Inventory
 	public InventoryMock(@Nullable InventoryHolder holder, int size, @NotNull InventoryType type)
 	{
 		Validate.isTrue(9 <= size && size <= 54 && size % 9 == 0,
-		                "Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got " + size + ")");
+				"Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got " + size + ")");
 		Validate.notNull(type, "The InventoryType must not be null!");
 
 		this.holder = holder;
@@ -424,8 +424,10 @@ public class InventoryMock implements Inventory
 	public void remove(@NotNull ItemStack item)
 	{
 		ItemStack[] items = this.getStorageContents();
-		for (int i = 0; i < items.length; i++) {
-			if (items[i] != null && items[i].equals(item)) {
+		for (int i = 0; i < items.length; i++)
+		{
+			if (items[i] != null && items[i].equals(item))
+			{
 				this.clear(i);
 			}
 		}
