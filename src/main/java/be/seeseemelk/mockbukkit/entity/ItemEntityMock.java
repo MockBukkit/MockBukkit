@@ -20,7 +20,6 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
  */
 public class ItemEntityMock extends EntityMock implements Item
 {
-
 	private ItemStack item;
 
 	// The default pickup delay
@@ -65,6 +64,20 @@ public class ItemEntityMock extends EntityMock implements Item
 	}
 
 	@Override
+	public void setUnlimitedLifetime(boolean unlimited)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isUnlimitedLifetime()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public void setOwner(@Nullable UUID owner)
 	{
 		// TODO Auto-generated method stub
@@ -91,11 +104,11 @@ public class ItemEntityMock extends EntityMock implements Item
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-    
-    @Override
-    public @NotNull SpawnCategory getSpawnCategory()
-    {
-        return SpawnCategory.MISC;
-    }
+
+	@Override
+	public @NotNull SpawnCategory getSpawnCategory()
+	{
+		return SpawnCategory.MISC;
+	}
 
 }
