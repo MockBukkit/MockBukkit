@@ -59,10 +59,10 @@ public abstract class MonsterMock extends CreatureMock implements Monster
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 	@Override
 	public @NotNull SpawnCategory getSpawnCategory()
 	{
-	    return SpawnCategory.MONSTER;
+		return SpawnCategory.MONSTER;
 	}
 }
