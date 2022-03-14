@@ -17,7 +17,6 @@ import java.util.UUID;
  */
 public class ItemEntityMock extends EntityMock implements Item
 {
-
 	private ItemStack item;
 
 	// The default pickup delay
@@ -59,6 +58,20 @@ public class ItemEntityMock extends EntityMock implements Item
 	public void setPickupDelay(int delay)
 	{
 		this.delay = Math.min(delay, 32767);
+	}
+
+	@Override
+	public void setUnlimitedLifetime(boolean unlimited)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isUnlimitedLifetime()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

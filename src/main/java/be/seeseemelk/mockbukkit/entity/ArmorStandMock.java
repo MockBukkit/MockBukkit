@@ -25,6 +25,13 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	private boolean hasBasePlate = true;
 	private boolean isVisible = true;
 
+	private EulerAngle headPose = EulerAngle.ZERO;
+	private EulerAngle bodyPose = EulerAngle.ZERO;
+	private EulerAngle leftArmPose = new EulerAngle(Math.toRadians(-10.0f), 0.0f, Math.toRadians(-10.0f));
+	private EulerAngle rightArmPose = new EulerAngle(Math.toRadians(-15.0f), 0.0f, Math.toRadians(10.0f));
+	private EulerAngle leftLegPose = new EulerAngle(Math.toRadians(-1.0f), 0.0f, Math.toRadians(-1.0f));
+	private EulerAngle rightLegPose = new EulerAngle(Math.toRadians(1.0f), 0.0f, Math.toRadians(1.0f));
+
 	public ArmorStandMock(ServerMock server, UUID uuid)
 	{
 		super(server, uuid);
@@ -109,85 +116,73 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	@Override
 	public @NotNull EulerAngle getBodyPose()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return bodyPose;
 	}
 
 	@Override
 	public void setBodyPose(@NotNull EulerAngle pose)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.bodyPose = pose;
 	}
 
 	@Override
 	public @NotNull EulerAngle getLeftArmPose()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return leftArmPose;
 	}
 
 	@Override
 	public void setLeftArmPose(@NotNull EulerAngle pose)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.leftArmPose = pose;
 	}
 
 	@Override
 	public @NotNull EulerAngle getRightArmPose()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return rightArmPose;
 	}
 
 	@Override
 	public void setRightArmPose(@NotNull EulerAngle pose)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.rightArmPose = pose;
 	}
 
 	@Override
 	public @NotNull EulerAngle getLeftLegPose()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return leftLegPose;
 	}
 
 	@Override
 	public void setLeftLegPose(@NotNull EulerAngle pose)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.leftLegPose = pose;
 	}
 
 	@Override
 	public @NotNull EulerAngle getRightLegPose()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return rightLegPose;
 	}
 
 	@Override
 	public void setRightLegPose(@NotNull EulerAngle pose)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.rightLegPose = pose;
 	}
 
 	@Override
 	public @NotNull EulerAngle getHeadPose()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return headPose;
 	}
 
 	@Override
 	public void setHeadPose(@NotNull EulerAngle pose)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.headPose = pose;
 	}
 
 	@Override

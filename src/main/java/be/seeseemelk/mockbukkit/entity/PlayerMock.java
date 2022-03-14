@@ -1077,6 +1077,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 
 	@Override
 	public void playSound(@NotNull Entity entity, @NotNull Sound sound, float volume, float pitch)
+
 	{
 		playSound(entity, sound, SoundCategory.MASTER, volume, pitch);
 	}
@@ -1773,93 +1774,84 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public void spawnParticle(@NotNull Particle particle, @NotNull Location location, int count)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.spawnParticle(particle, location.getX(), location.getY(), location.getZ(), count);
 	}
 
 	@Override
 	public void spawnParticle(@NotNull Particle particle, double x, double y, double z, int count)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.spawnParticle(particle, x, y, z, count, null);
 	}
 
 	@Override
 	public <T> void spawnParticle(@NotNull Particle particle, @NotNull Location location, int count, T data)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.spawnParticle(particle, location.getX(), location.getY(), location.getZ(), count, data);
 	}
 
 	@Override
 	public <T> void spawnParticle(@NotNull Particle particle, double x, double y, double z, int count, T data)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.spawnParticle(particle, x, y, z, count, 0, 0, 0, data);
 	}
 
 	@Override
 	public void spawnParticle(@NotNull Particle particle, @NotNull Location location, int count, double offsetX, double offsetY,
 							  double offsetZ)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.spawnParticle(particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ);
 	}
 
 	@Override
 	public void spawnParticle(@NotNull Particle particle, double x, double y, double z, int count, double offsetX,
 							  double offsetY, double offsetZ)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.spawnParticle(particle, x, y, z, count, offsetX, offsetY, offsetZ, null);
 	}
 
 	@Override
 	public <T> void spawnParticle(@NotNull Particle particle, @NotNull Location location, int count, double offsetX, double offsetY,
 								  double offsetZ, T data)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.spawnParticle(particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ, data);
 	}
 
 	@Override
 	public <T> void spawnParticle(@NotNull Particle particle, double x, double y, double z, int count, double offsetX,
 								  double offsetY, double offsetZ, T data)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.spawnParticle(particle, x, y, z, count, offsetX, offsetY, offsetZ, 1, data);
 	}
 
 	@Override
 	public void spawnParticle(@NotNull Particle particle, @NotNull Location location, int count, double offsetX, double offsetY,
 							  double offsetZ, double extra)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.spawnParticle(particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ, extra);
 	}
 
 	@Override
 	public void spawnParticle(@NotNull Particle particle, double x, double y, double z, int count, double offsetX,
 							  double offsetY, double offsetZ, double extra)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.spawnParticle(particle, x, y, z, count, offsetX, offsetY, offsetZ, extra, null);
 	}
 
 	@Override
 	public <T> void spawnParticle(@NotNull Particle particle, @NotNull Location location, int count, double offsetX, double offsetY,
 								  double offsetZ, double extra, T data)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.spawnParticle(particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ, data);
 	}
 
 	@Override
 	public <T> void spawnParticle(@NotNull Particle particle, double x, double y, double z, int count, double offsetX,
 								  double offsetY, double offsetZ, double extra, T data)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (data != null && !particle.getDataType().isInstance(data))
+		{
+			throw new IllegalArgumentException("data should be " + particle.getDataType() + " got " + data.getClass());
+		}
 	}
 
 	@Override
@@ -2253,12 +2245,17 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
+	public @NotNull SpawnCategory getSpawnCategory()
+	{
+		return SpawnCategory.MISC;
+	}
+
+	@Override
 	public @NotNull PlayerProfile getPlayerProfile()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
 
 	@Override
 	public @NotNull PlayerSpigotMock spigot()
