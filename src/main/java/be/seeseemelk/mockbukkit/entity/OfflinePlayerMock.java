@@ -270,11 +270,11 @@ public class OfflinePlayerMock implements OfflinePlayer
 		throw new UnimplementedOperationException();
 	}
 
-    @Override
-    public PlayerProfile getPlayerProfile()
-    {
-        // TODO Auto-generated method stub
-        throw new UnimplementedOperationException();
-    }
+	@Override
+	public PlayerProfile getPlayerProfile()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
 
 }
