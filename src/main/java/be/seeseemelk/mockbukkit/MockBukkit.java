@@ -306,17 +306,17 @@ public class MockBukkit
 			return;
 		}
 
+		if (mock.getPluginManager() != null)
+		{
+			mock.getPluginManager().disablePlugins();
+		}
+
 		try
 		{
 			mock.getScheduler().shutdown();
 		}
 		finally
 		{
-			if (mock.getPluginManager() != null)
-			{
-				mock.getPluginManager().disablePlugins();
-			}
-
 			mock.getPluginManager().unload();
 			setServerInstanceToNull();
 		}
