@@ -138,6 +138,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private GameMode defaultGameMode = GameMode.SURVIVAL;
 	private ConsoleCommandSender consoleSender;
 	private int spawnRadius = 16;
+	private WarningState warningState = WarningState.DEFAULT;
 
 	public ServerMock()
 	{
@@ -1234,11 +1235,21 @@ public class ServerMock extends Server.Spigot implements Server
 		throw new UnimplementedOperationException();
 	}
 
-	@Override
-	public WarningState getWarningState()
+	/**
+	 * Sets the return value of {@link #getWarningState}.
+	 *
+	 * @param warningState The {@link WarningState} to set.
+	 */
+	public void setWarningState(@NotNull WarningState warningState)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Validate.notNull(warningState, "Warning state cannot be null");
+		this.warningState = warningState;
+	}
+
+	@Override
+	public @NotNull WarningState getWarningState()
+	{
+		return this.warningState;
 	}
 
 	@Override
@@ -1661,38 +1672,38 @@ public class ServerMock extends Server.Spigot implements Server
 		throw new UnsupportedOperationException("Not supported.");
 	}
 
-    @Override
-    public int getTicksPerSpawns(@NotNull SpawnCategory spawnCategory)
-    {
-        // TODO Auto-generated method stub
-        throw new UnimplementedOperationException();
-    }
+	@Override
+	public int getTicksPerSpawns(@NotNull SpawnCategory spawnCategory)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
 
-    @Override
-    public PlayerProfile createPlayerProfile(@Nullable UUID uniqueId, @Nullable String name)
-    {
-        // TODO Auto-generated method stub
-        throw new UnimplementedOperationException();
-    }
+	@Override
+	public PlayerProfile createPlayerProfile(@Nullable UUID uniqueId, @Nullable String name)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
 
-    @Override
-    public PlayerProfile createPlayerProfile(@NotNull UUID uniqueId)
-    {
-        // TODO Auto-generated method stub
-        throw new UnimplementedOperationException();
-    }
+	@Override
+	public PlayerProfile createPlayerProfile(@NotNull UUID uniqueId)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
 
-    @Override
-    public PlayerProfile createPlayerProfile(@NotNull String name)
-    {
-        // TODO Auto-generated method stub
-        throw new UnimplementedOperationException();
-    }
+	@Override
+	public PlayerProfile createPlayerProfile(@NotNull String name)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
 
-    @Override
-    public int getSpawnLimit(@NotNull SpawnCategory spawnCategory)
-    {
-        // TODO Auto-generated method stub
-        throw new UnimplementedOperationException();
-    }
+	@Override
+	public int getSpawnLimit(@NotNull SpawnCategory spawnCategory)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
 }
