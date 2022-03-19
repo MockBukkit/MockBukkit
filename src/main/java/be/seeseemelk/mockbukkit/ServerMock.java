@@ -57,6 +57,7 @@ import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.SpawnCategory;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.generator.ChunkGenerator.ChunkData;
@@ -70,6 +71,7 @@ import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.profile.PlayerProfile;
 import org.bukkit.structure.StructureManager;
 import org.bukkit.util.CachedServerIcon;
 import org.jetbrains.annotations.NotNull;
@@ -110,7 +112,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class ServerMock extends Server.Spigot implements Server
 {
-	private static final String BUKKIT_VERSION = "1.17.1";
+	private static final String BUKKIT_VERSION = "1.18.2";
 	private static final String JOIN_MESSAGE = "%s has joined the server.";
 	private static final String MOTD = "A Minecraft Server";
 
@@ -135,6 +137,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private GameMode defaultGameMode = GameMode.SURVIVAL;
 	private ConsoleCommandSender consoleSender;
 	private int spawnRadius = 16;
+	private WarningState warningState = WarningState.DEFAULT;
 
 	public ServerMock()
 	{
@@ -1221,11 +1224,21 @@ public class ServerMock extends Server.Spigot implements Server
 		throw new UnimplementedOperationException();
 	}
 
-	@Override
-	public WarningState getWarningState()
+	/**
+	 * Sets the return value of {@link #getWarningState}.
+	 *
+	 * @param warningState The {@link WarningState} to set.
+	 */
+	public void setWarningState(@NotNull WarningState warningState)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Validate.notNull(warningState, "Warning state cannot be null");
+		this.warningState = warningState;
+	}
+
+	@Override
+	public @NotNull WarningState getWarningState()
+	{
+		return this.warningState;
 	}
 
 	@Override
@@ -1282,10 +1295,18 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public Entity getEntity(UUID uuid)
+	public @Nullable Entity getEntity(@NotNull UUID uuid)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Validate.notNull(uuid, "UUID cannot be null");
+
+		for (EntityMock entity : entities)
+		{
+			if (entity.getUniqueId().equals(uuid))
+			{
+				return entity;
+			}
+		}
+		return null;
 	}
 
 	@Override
@@ -1608,8 +1629,6 @@ public class ServerMock extends Server.Spigot implements Server
 		return this;
 	}
 
-	// Methods from Server.Spigot:
-
 	@NotNull
 	@Override
 	public YamlConfiguration getConfig()
@@ -1640,5 +1659,40 @@ public class ServerMock extends Server.Spigot implements Server
 	public void restart()
 	{
 		throw new UnsupportedOperationException("Not supported.");
+	}
+
+	@Override
+	public int getTicksPerSpawns(@NotNull SpawnCategory spawnCategory)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public PlayerProfile createPlayerProfile(@Nullable UUID uniqueId, @Nullable String name)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public PlayerProfile createPlayerProfile(@NotNull UUID uniqueId)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public PlayerProfile createPlayerProfile(@NotNull String name)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getSpawnLimit(@NotNull SpawnCategory spawnCategory)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 }

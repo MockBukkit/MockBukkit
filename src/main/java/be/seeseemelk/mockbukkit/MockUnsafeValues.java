@@ -12,6 +12,7 @@ import org.bukkit.advancement.Advancement;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.block.data.BlockData;
+import org.bukkit.inventory.CreativeCategory;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
@@ -106,6 +107,13 @@ public class MockUnsafeValues implements UnsafeValues
 
 	@Override
 	public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(Material material, EquipmentSlot slot)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public CreativeCategory getCreativeCategory(Material material)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

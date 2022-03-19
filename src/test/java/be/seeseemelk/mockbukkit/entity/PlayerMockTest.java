@@ -17,6 +17,7 @@ import org.bukkit.GameMode;
 import org.bukkit.GameRule;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.World;
@@ -156,6 +157,14 @@ class PlayerMockTest
 	{
 		player.setGameMode(GameMode.CREATIVE);
 		assertEquals(GameMode.CREATIVE, player.getGameMode());
+	}
+
+	@Test
+	void getPreviousGameMode()
+	{
+		player.setGameMode(GameMode.SURVIVAL);
+		player.setGameMode(GameMode.CREATIVE);
+		assertEquals(GameMode.SURVIVAL, player.getPreviousGameMode());
 	}
 
 	@Test
@@ -1117,6 +1126,7 @@ class PlayerMockTest
 	void testSimulatePlayerMove_EventCancelled()
 	{
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+
 		Bukkit.getPluginManager().registerEvents(new Listener()
 		{
 			@EventHandler
@@ -1125,6 +1135,7 @@ class PlayerMockTest
 				event.setCancelled(true);
 			}
 		}, plugin);
+
 		World world = server.addSimpleWorld("world");
 		player.setLocation(new Location(world, 0, 0, 0));
 		PlayerMoveEvent event = player.simulatePlayerMove(new Location(world, 10, 0, 0));
@@ -1138,6 +1149,7 @@ class PlayerMockTest
 	{
 		final Location teleportLocation = player.getLocation().add(10, 10, 10);
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+
 		Bukkit.getPluginManager().registerEvents(new Listener()
 		{
 			@EventHandler
@@ -1161,8 +1173,25 @@ class PlayerMockTest
 	@Test
 	void testFly()
 	{
+		player.setAllowFlight(true);
 		player.setFlying(true);
 		assertTrue(player.isFlying());
+	}
+
+	@Test
+	void testFly_NotAllowed()
+	{
+		player.setAllowFlight(false);
+		assertThrows(IllegalArgumentException.class, () -> player.setFlying(true));
+	}
+
+	@Test
+	void testFly_DisabledWhenNotAllowed()
+	{
+		player.setAllowFlight(true);
+		player.setFlying(true);
+		player.setAllowFlight(false);
+		assertFalse(player.isFlying());
 	}
 
 	@Test
@@ -1193,15 +1222,15 @@ class PlayerMockTest
 	}
 
 	@Test
-	public void testPlayerHide_InitialState()
+	void testPlayerHide_InitialState()
 	{
 		PlayerMock player2 = server.addPlayer();
 		assertTrue(player.canSee(player2));
 	}
 
-	@SuppressWarnings("deprecation")
+	@Deprecated
 	@Test
-	public void testPlayerHide_OldImplementation()
+	void testPlayerHide_OldImplementation()
 	{
 		PlayerMock player2 = server.addPlayer();
 		player.hidePlayer(player2);
@@ -1211,7 +1240,7 @@ class PlayerMockTest
 	}
 
 	@Test
-	public void testPlayerHide_NewImplementation()
+	void testPlayerHide_NewImplementation()
 	{
 		MockPlugin plugin1 = MockBukkit.createMockPlugin("plugin1");
 		PlayerMock player2 = server.addPlayer();
@@ -1221,8 +1250,9 @@ class PlayerMockTest
 		assertTrue(player.canSee(player2));
 	}
 
+	@Deprecated
 	@Test
-	public void testPlayerHide_OldAndNewPluginWorksSimultaneously()
+	void testPlayerHide_OldAndNewPluginWorksSimultaneously()
 	{
 		MockPlugin plugin1 = MockBukkit.createMockPlugin("plugin1");
 		PlayerMock player2 = server.addPlayer();
@@ -1236,7 +1266,7 @@ class PlayerMockTest
 
 	@Deprecated
 	@Test
-	public void testPlayerHide_EachOtherTest()
+	void testPlayerHide_EachOtherTest()
 	{
 		MockPlugin plugin1 = MockBukkit.createMockPlugin("plugin1");
 		MockPlugin plugin2 = MockBukkit.createMockPlugin("plugin2");
@@ -1257,7 +1287,7 @@ class PlayerMockTest
 
 	@Deprecated
 	@Test
-	public void testPlayerHide_HideCommandIssuedMultipleTimesOld()
+	void testPlayerHide_HideCommandIssuedMultipleTimesOld()
 	{
 		PlayerMock player2 = server.addPlayer();
 		player.hidePlayer(player2);
@@ -1268,7 +1298,7 @@ class PlayerMockTest
 	}
 
 	@Test
-	public void testPlayerHide_HideCommandIssuedMultipleTimesNew()
+	void testPlayerHide_HideCommandIssuedMultipleTimesNew()
 	{
 		MockPlugin plugin1 = MockBukkit.createMockPlugin("plugin1");
 		PlayerMock player2 = server.addPlayer();
@@ -1280,7 +1310,7 @@ class PlayerMockTest
 	}
 
 	@Test
-	public void testPlayerTeleport_WithCause_EventFired()
+	void testPlayerTeleport_WithCause_EventFired()
 	{
 		player.teleport(player.getLocation().add(10, 10, 10), PlayerTeleportEvent.TeleportCause.CHORUS_FRUIT);
 
@@ -1288,7 +1318,7 @@ class PlayerMockTest
 	}
 
 	@Test
-	public void testPlayerTeleport_WithoutCause_EventFired()
+	void testPlayerTeleport_WithoutCause_EventFired()
 	{
 		player.teleport(player.getLocation().add(10, 10, 10));
 
@@ -1296,7 +1326,7 @@ class PlayerMockTest
 	}
 
 	@Test
-	public void testPlayerTeleport_NotCanceled_PlayerTeleported()
+	void testPlayerTeleport_NotCanceled_PlayerTeleported()
 	{
 		Location teleportLocation = player.getLocation().add(10, 10, 10);
 		player.teleport(teleportLocation);
@@ -1305,7 +1335,7 @@ class PlayerMockTest
 	}
 
 	@Test
-	public void testPlayerTeleport_Canceled_PlayerNotTeleported()
+	void testPlayerTeleport_Canceled_PlayerNotTeleported()
 	{
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
 		Bukkit.getPluginManager().registerEvents(new Listener()
@@ -1324,6 +1354,21 @@ class PlayerMockTest
 		player.assertNotTeleported();
 		player.assertLocation(originalLocation, 0);
 
+	}
+
+	@Test
+	public void testPlayerSpawnParticle_Correct_DataType()
+	{
+		player.spawnParticle(Particle.ITEM_CRACK, player.getLocation(), 1, new ItemStack(Material.STONE));
+	}
+
+	@Test
+	public void testPlayerSpawnParticle_Incorrect_DataType()
+	{
+		assertThrows(IllegalArgumentException.class, () ->
+		{
+			player.spawnParticle(Particle.ITEM_CRACK, player.getLocation(), 1, new Object());
+		});
 	}
 
 }
