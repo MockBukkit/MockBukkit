@@ -80,9 +80,6 @@ import org.bukkit.util.RayTraceResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.nio.charset.StandardCharsets;
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -95,9 +92,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
+import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.LinkedTransferQueue;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Predicate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -105,6 +104,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class PlayerMock extends LivingEntityMock implements Player, SoundReceiver
 {
+
 	private boolean online;
 	private PlayerInventoryMock inventory = null;
 	private EnderChestInventoryMock enderChest = null;
@@ -140,6 +140,8 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 
 	private final StatisticsMock statistics = new StatisticsMock();
 
+	private InetSocketAddress address;
+
 	public PlayerMock(ServerMock server, String name)
 	{
 		this(server, name, UUID.nameUUIDFromBytes(("OfflinePlayer:" + name).getBytes(StandardCharsets.UTF_8)));
@@ -161,6 +163,9 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		setLocation(Bukkit.getWorlds().get(0).getSpawnLocation().clone());
 		setCompassTarget(getLocation());
 		closeInventory();
+
+		Random random = ThreadLocalRandom.current();
+		address = new InetSocketAddress("192.0.2." + random.nextInt(255), random.nextInt(32768, 65535));
 	}
 
 	@Override
@@ -957,11 +962,20 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		return this.compassTarget;
 	}
 
+	/**
+	 * Sets the {@link InetSocketAddress} returned by {@link #getAddress}.
+	 *
+	 * @param address The address to set.
+	 */
+	public void setAddress(InetSocketAddress address)
+	{
+		this.address = address;
+	}
+
 	@Override
 	public InetSocketAddress getAddress()
 	{
-		// Assuming the "client" and the "server" are on the same machine.
-		return new InetSocketAddress(InetAddress.getLoopbackAddress(), 25565);
+		return address;
 	}
 
 	@Override
