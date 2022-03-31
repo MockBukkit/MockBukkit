@@ -11,6 +11,7 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.metadata.FixedMetadataValue;
@@ -420,6 +421,17 @@ class EntityMockTest
 		assertNull(zombie.getLastDamageCause());
 		zombie.damage(1);
 		assertNotNull(zombie.getLastDamageCause());
+	}
+
+	@Test
+	void setGliding()
+	{
+		PlayerMock player = server.addPlayer();
+		assertFalse(player.isGliding());
+		player.setGliding(true);
+		assertTrue(player.isGliding());
+		player.setGliding(false);
+		assertFalse(player.isGliding());
 	}
 
 }
