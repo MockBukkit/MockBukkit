@@ -40,6 +40,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	private int maxAirTicks = 300;
 	private int remainingAirTicks = 300;
 	protected boolean alive = true;
+	private boolean gliding = false;
 	protected Map<Attribute, AttributeInstanceMock> attributes;
 
 	private final Set<ActivePotionEffect> activeEffects = new HashSet<>();
@@ -465,15 +466,13 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public boolean isGliding()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.gliding;
 	}
 
 	@Override
 	public void setGliding(boolean gliding)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.gliding = gliding;
 	}
 
 	@Override
