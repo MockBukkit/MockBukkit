@@ -11,6 +11,7 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.metadata.FixedMetadataValue;
@@ -411,4 +412,16 @@ class EntityMockTest
 		entity.setFireTicks(10);
 		assertEquals(10, entity.getFireTicks());
 	}
+
+	@Test
+	void setGliding()
+	{
+		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+		assertFalse(zombie.isGliding());
+		zombie.setGliding(true);
+		assertTrue(zombie.isGliding());
+		zombie.setGliding(false);
+		assertFalse(zombie.isGliding());
+	}
+
 }
