@@ -561,4 +561,15 @@ class EntityMockTest
 		assertEquals(-1, zombie.getAge());
 	}
 
+	@Test
+	void setGliding()
+	{
+		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+		assertFalse(zombie.isGliding());
+		zombie.setGliding(true);
+		assertTrue(zombie.isGliding());
+		zombie.setGliding(false);
+		assertFalse(zombie.isGliding());
+	}
+
 }

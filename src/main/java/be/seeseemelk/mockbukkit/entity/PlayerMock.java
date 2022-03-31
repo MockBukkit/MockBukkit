@@ -782,17 +782,16 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public boolean isGliding()
+	public void setAI(boolean ai)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// I am sorry Dave, I'm afraid I can't do that
 	}
 
 	@Override
-	public void setGliding(boolean gliding)
+	public boolean hasAI()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// The Player's intelligence is (probably) not artificial
+		return false;
 	}
 
 	@Override
