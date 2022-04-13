@@ -40,6 +40,7 @@ import org.bukkit.StructureType;
 import org.bukkit.Tag;
 import org.bukkit.Warning.WarningState;
 import org.bukkit.World;
+import org.bukkit.WorldBorder;
 import org.bukkit.WorldCreator;
 import org.bukkit.advancement.Advancement;
 import org.bukkit.block.data.BlockData;
@@ -626,6 +627,14 @@ public class ServerMock extends Server.Spigot implements Server
 	public World getWorld(UUID uid)
 	{
 		return worlds.stream().filter(world -> world.getUID().equals(uid)).findAny().orElse(null);
+	}
+
+	@NotNull
+	@Override
+	public WorldBorder createWorldBorder()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
