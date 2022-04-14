@@ -106,7 +106,7 @@ public class MockPlayerList
 
 	public boolean isOnline(@NotNull PlayerMock player)
 	{
-		return 	onlinePlayers.contains(player)
+		return onlinePlayers.contains(player)
 				|| getPlayerExact(player.getName()) != null
 				|| getPlayer(player.getUniqueId()) != null;
 	}
