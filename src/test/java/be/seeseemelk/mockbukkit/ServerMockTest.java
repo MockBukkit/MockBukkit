@@ -606,7 +606,7 @@ class ServerMockTest
 	{
 		PlayerMock player = server.addPlayer();
 		player.playSound(new Location(null, 0, 0, 0),
-				Sound.AMBIENT_BASALT_DELTAS_ADDITIONS,1f,1f);
+				Sound.AMBIENT_BASALT_DELTAS_ADDITIONS, 1f, 1f);
 		server.removePlayer(player);
 		server.addPlayer(player);
 		assertTrue(player.getHeardSounds().isEmpty());
