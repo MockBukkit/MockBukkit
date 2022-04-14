@@ -641,7 +641,8 @@ class ServerMockTest
 		server.getPluginManager().registerEvents(new Listener()
 		{
 			@EventHandler
-			public void onPlayerQuit(PlayerQuitEvent event){
+			public void onPlayerQuit(PlayerQuitEvent event)
+			{
 				event.setQuitMessage("He left!");
 			}
 		}, plugin);
