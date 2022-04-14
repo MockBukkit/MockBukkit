@@ -638,7 +638,8 @@ class ServerMockTest
 	void removePlayer_GetLastPlayerQuitEvent()
 	{
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
-		server.getPluginManager().registerEvents(new Listener(){
+		server.getPluginManager().registerEvents(new Listener()
+		{
 			@EventHandler
 			public void onPlayerQuit(PlayerQuitEvent event){
 				event.setQuitMessage("He left!");
