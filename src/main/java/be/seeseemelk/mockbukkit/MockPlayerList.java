@@ -62,7 +62,7 @@ public class MockPlayerList
 
 	public void addPlayer(@NotNull PlayerMock player)
 	{
-		if(isOnline(player))
+		if (isOnline(player))
 			throw new IllegalStateException("Player is already on server!");
 
 		onlinePlayers.add(player);
