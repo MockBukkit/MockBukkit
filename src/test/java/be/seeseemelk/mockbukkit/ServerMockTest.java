@@ -93,7 +93,8 @@ class ServerMockTest
 	void addPlayer_PlayersWithTheSameName()
 	{
 		server.addPlayer("Player");
-		assertThrows(IllegalStateException.class, ()->{
+		assertThrows(IllegalStateException.class, () ->
+		{
 			server.addPlayer("Player");
 		});
 
