@@ -382,4 +382,45 @@ class InventoryMockTest
 		inventory.addItem(new ItemStack(Material.STONE));
 		assertFalse(inventory.containsAtLeast(new ItemStack(Material.STONE), 3));
 	}
+
+	@Test
+	void getMaxStackSize_ReturnsExpected()
+	{
+		assertEquals(64, inventory.getMaxStackSize());
+
+		inventory.setMaxStackSize(15);
+		assertEquals(15, inventory.getMaxStackSize());
+	}
+
+	@Test
+	void addItem_setMaxStackSize_EmptyInventoryAddsOneStack_OneStackUsed()
+	{
+		inventory.setMaxStackSize(30);
+		ItemStack stack = new ItemStack(Material.DIRT, 64);
+		ItemStack remaining = inventory.addItem(stack);
+		assertNull(remaining);
+		assertEquals(30, inventory.getItem(0));
+		assertEquals(30, inventory.getItem(1));
+		assertEquals(4, inventory.getItem(2));
+		assertEquals(null, inventory.getItem(3));
+	}
+
+	@Test
+	void addItem_setMaxStackSize_PartiallyFilled_AddsOneStack_HalfAdded()
+	{
+		ItemStack filler = new ItemStack(Material.COBBLESTONE, 1);
+		for (int i = 3; i < inventory.getSize(); i++)
+		{
+			inventory.setItem(i, filler);
+		}
+		inventory.setMaxStackSize(32);
+		inventory.setItem(0, new ItemStack(Material.DIRT, 20));
+		inventory.setItem(1, new ItemStack(Material.DIRT, 32));
+		inventory.setItem(2, new ItemStack(Material.DIRT, 20));
+
+		ItemStack store = new ItemStack(Material.DIRT, 64);
+		ItemStack remaining = inventory.addItem(store);
+		assertNotNull(remaining);
+		assertEquals(40, remaining.getAmount());
+	}
 }

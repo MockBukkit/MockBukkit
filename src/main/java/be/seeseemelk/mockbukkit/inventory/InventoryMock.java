@@ -263,9 +263,11 @@ public class InventoryMock implements Inventory
 	public void setMaxStackSize(int size)
 	{
 		if (size < 1) {
+			// Unverified if this is the same behavior Bukkit has, but fair sanity check for plugins
 			throw new IllegalArgumentException("Max stack size cannot be lower than 1");
 		}
 		if (size > 127) {
+			// Unverified if this is the same behavior Bukkit has, but fair sanity check for plugins
 			throw new IllegalArgumentException("Stack sizes larger than 127 may get clipped");
 		}
 		maxStackSize = size;
