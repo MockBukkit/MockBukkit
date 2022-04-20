@@ -30,6 +30,8 @@ public class InventoryMock implements Inventory
 	private final InventoryHolder holder;
 	private final InventoryType type;
 
+	private int maxStackSize = 64;
+
 	public InventoryMock(@Nullable InventoryHolder holder, int size, @NotNull InventoryType type)
 	{
 		Validate.isTrue(9 <= size && size <= 54 && size % 9 == 0,
@@ -162,22 +164,27 @@ public class InventoryMock implements Inventory
 	@Nullable
 	public ItemStack addItem(@NotNull ItemStack item)
 	{
+		final int itemMaxStackSize = Math.min(item.getMaxStackSize(), this.maxStackSize);
 		item = item.clone();
 		for (int i = 0; i < items.length; i++)
 		{
 			ItemStack oItem = items[i];
 			if (oItem == null)
 			{
-				int toAdd = Math.min(item.getAmount(), item.getMaxStackSize());
+				int toAdd = Math.min(item.getAmount(), itemMaxStackSize);
 				items[i] = item.clone();
 				items[i].setAmount(toAdd);
 				item.setAmount(item.getAmount() - toAdd);
 			}
-			else if (item.isSimilar(oItem) && oItem.getAmount() < oItem.getMaxStackSize())
+			else 
 			{
-				int toAdd = Math.min(item.getAmount(), item.getMaxStackSize() - oItem.getAmount());
-				oItem.setAmount(oItem.getAmount() + toAdd);
-				item.setAmount(item.getAmount() - toAdd);
+				final int oITemMaxStackSize = Math.min(oItem.getMaxStackSize(), this.maxStackSize);
+				if (item.isSimilar(oItem) && oItem.getAmount() < oITemMaxStackSize)
+				{
+					int toAdd = Math.min(item.getAmount(), oITemMaxStackSize - oItem.getAmount());
+					oItem.setAmount(oItem.getAmount() + toAdd);
+					item.setAmount(item.getAmount() - toAdd);
+				}
 			}
 
 			if (item.getAmount() == 0)
@@ -249,15 +256,19 @@ public class InventoryMock implements Inventory
 	@Override
 	public int getMaxStackSize()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return maxStackSize;
 	}
 
 	@Override
 	public void setMaxStackSize(int size)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (size < 1) {
+			throw new IllegalArgumentException("Max stack size cannot be lower than 1");
+		}
+		if (size > 127) {
+			throw new IllegalArgumentException("Stack sizes larger than 127 may get clipped");
+		}
+		maxStackSize = size;
 	}
 
 	@Override
