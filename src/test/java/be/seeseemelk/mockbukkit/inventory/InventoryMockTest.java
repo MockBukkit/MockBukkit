@@ -399,9 +399,9 @@ class InventoryMockTest
 		ItemStack stack = new ItemStack(Material.DIRT, 64);
 		ItemStack remaining = inventory.addItem(stack);
 		assertNull(remaining);
-		assertEquals(30, inventory.getItem(0));
-		assertEquals(30, inventory.getItem(1));
-		assertEquals(4, inventory.getItem(2));
+		assertEquals(30, inventory.getItem(0).getAmount());
+		assertEquals(30, inventory.getItem(1).getAmount());
+		assertEquals(4, inventory.getItem(2).getAmount());
 		assertEquals(null, inventory.getItem(3));
 	}
 
