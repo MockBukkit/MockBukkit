@@ -645,6 +645,14 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		throw new UnimplementedOperationException();
 	}
 
+	@NotNull
+	@Override
+	public String getAsString()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 	@Override
 	@SuppressWarnings("deprecation")
 	public org.bukkit.inventory.meta.tags.CustomItemTagContainer getCustomTagContainer()

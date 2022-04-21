@@ -21,6 +21,7 @@ import be.seeseemelk.mockbukkit.inventory.meta.LeatherArmorMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.PotionMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.SkullMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.SuspiciousStewMetaMock;
+import org.jetbrains.annotations.NotNull;
 
 public class ItemFactoryMock implements ItemFactory
 {
@@ -138,6 +139,14 @@ public class ItemFactoryMock implements ItemFactory
 	public Color getDefaultLeatherColor()
 	{
 		return defaultLeatherColor;
+	}
+
+	@NotNull
+	@Override
+	public ItemStack createItemStack(@NotNull String input) throws IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
