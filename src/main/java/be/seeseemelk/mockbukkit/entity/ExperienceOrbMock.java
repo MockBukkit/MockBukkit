@@ -5,6 +5,7 @@ import java.util.UUID;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ExperienceOrb;
+import org.bukkit.entity.SpawnCategory;
 import org.jetbrains.annotations.NotNull;
 
 import be.seeseemelk.mockbukkit.ServerMock;
@@ -48,6 +49,12 @@ public class ExperienceOrbMock extends EntityMock implements ExperienceOrb
 	public void setExperience(int value)
 	{
 		this.experience = value;
+	}
+
+	@Override
+	public @NotNull SpawnCategory getSpawnCategory()
+	{
+		return SpawnCategory.MISC;
 	}
 
 }

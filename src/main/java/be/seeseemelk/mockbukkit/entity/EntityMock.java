@@ -62,7 +62,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private int fireTicks = -20;
 	private int maxFireTicks = 20;
 
-	public EntityMock(@NotNull ServerMock server, @NotNull UUID uuid)
+	protected EntityMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		this.server = server;
 		this.uuid = uuid;
@@ -285,7 +285,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public void sendMessage(String[] messages)
+	public void sendMessage(String... messages)
 	{
 		sendMessage(null, messages);
 	}
@@ -297,7 +297,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public void sendMessage(UUID sender, String[] messages)
+	public void sendMessage(UUID sender, String... messages)
 	{
 		for (String message : messages)
 		{

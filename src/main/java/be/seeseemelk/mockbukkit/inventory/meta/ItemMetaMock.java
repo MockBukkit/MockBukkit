@@ -38,6 +38,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	 * If it's a mutable object, it also needs to be handled in #clone.
 	 */
 	private String displayName = null;
+	private String localizedName = null;
 	private List<String> lore = null;
 	private int damage = 0;
 	private int repairCost = 0;
@@ -271,19 +272,26 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public boolean hasLore()
 	{
-		return lore != null;
+		return lore != null && !lore.isEmpty();
 	}
 
 	@Override
-	public List<String> getLore()
+	public @Nullable List<String> getLore()
 	{
-		return new ArrayList<>(lore);
+		return lore == null ? null : new ArrayList<>(lore);
 	}
 
 	@Override
-	public void setLore(List<String> lore)
+	public void setLore(@Nullable List<String> lore)
 	{
-		this.lore = new ArrayList<>(lore);
+		if (lore != null && !lore.isEmpty())
+		{
+			this.lore = new ArrayList<>(lore);
+		}
+		else
+		{
+			this.lore = null;
+		}
 	}
 
 	/**
@@ -332,7 +340,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	 */
 	public void assertHasNoLore() throws AssertionError
 	{
-		if (lore != null && !lore.isEmpty())
+		if (hasLore())
 		{
 			throw new AssertionError("Lore was set but shouldn't have been set");
 		}
@@ -354,12 +362,10 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 			map.put("displayName", this.displayName);
 		}
 
-		/* Not implemented.
 		if (this.localizedName != null)
 		{
 			map.put("localizedName", this.localizedName);
 		}
-		*/
 
 		if (this.lore != null)
 		{
@@ -410,7 +416,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 
 		serialMock.displayName = (String) args.get("displayName");
 		serialMock.lore = (List<String>) args.get("lore");
-		// serialMock.setLocalizedName(); // localizedName is unimplemented in mock
+		serialMock.localizedName = (String) args.get("localizedName");
 		serialMock.enchants = (Map<Enchantment, Integer>) args.get("enchants");
 		serialMock.hideFlags = (Set<ItemFlag>) args.get("itemFlags");
 		serialMock.unbreakable = (boolean) args.get("unbreakable");
@@ -427,22 +433,19 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public boolean hasLocalizedName()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return localizedName != null;
 	}
 
 	@Override
 	public String getLocalizedName()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return localizedName;
 	}
 
 	@Override
-	public void setLocalizedName(String name)
+	public void setLocalizedName(@Nullable String name)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		localizedName = name;
 	}
 
 	@Override
@@ -637,6 +640,14 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 
 	@Override
 	public boolean removeAttributeModifier(Attribute attribute, AttributeModifier modifier)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@NotNull
+	@Override
+	public String getAsString()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

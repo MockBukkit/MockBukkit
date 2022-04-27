@@ -22,6 +22,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.NotNull;
 
 import com.google.common.base.Function;
 
@@ -39,11 +40,12 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	private int maxAirTicks = 300;
 	private int remainingAirTicks = 300;
 	protected boolean alive = true;
+	private boolean gliding = false;
 	protected Map<Attribute, AttributeInstanceMock> attributes;
 
 	private final Set<ActivePotionEffect> activeEffects = new HashSet<>();
 
-	public LivingEntityMock(ServerMock server, UUID uuid)
+	protected LivingEntityMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 
@@ -464,15 +466,13 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public boolean isGliding()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.gliding;
 	}
 
 	@Override
 	public void setGliding(boolean gliding)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.gliding = gliding;
 	}
 
 	@Override

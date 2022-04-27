@@ -21,6 +21,7 @@ import be.seeseemelk.mockbukkit.inventory.meta.LeatherArmorMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.PotionMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.SkullMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.SuspiciousStewMetaMock;
+import org.jetbrains.annotations.NotNull;
 
 public class ItemFactoryMock implements ItemFactory
 {
@@ -69,13 +70,16 @@ public class ItemFactoryMock implements ItemFactory
 	@Override
 	public ItemMeta getItemMeta(Material material)
 	{
+		Class<? extends ItemMeta> clazz = null;
+
 		try
 		{
-			return getItemMetaClass(material).newInstance();
+			clazz = getItemMetaClass(material);
+			return clazz.getDeclaredConstructor().newInstance();
 		}
-		catch (InstantiationException | IllegalAccessException e)
+		catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e)
 		{
-			throw new UnsupportedOperationException("Can't instantiate class");
+			throw new UnsupportedOperationException("Can't instantiate class '" + clazz + "'");
 		}
 	}
 
@@ -135,6 +139,14 @@ public class ItemFactoryMock implements ItemFactory
 	public Color getDefaultLeatherColor()
 	{
 		return defaultLeatherColor;
+	}
+
+	@NotNull
+	@Override
+	public ItemStack createItemStack(@NotNull String input) throws IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

@@ -52,6 +52,7 @@ import org.bukkit.entity.Item;
 import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.SpawnCategory;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.world.TimeSkipEvent;
 import org.bukkit.generator.BiomeProvider;
@@ -59,6 +60,7 @@ import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
+import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Consumer;
@@ -75,27 +77,29 @@ import be.seeseemelk.mockbukkit.entity.FireworkMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
 import be.seeseemelk.mockbukkit.entity.ZombieMock;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
+import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
 
 /**
  * A mock world object. Note that it is made to be as simple as possible. It is by no means an efficient implementation.
  */
 public class WorldMock implements World
 {
-	private static final int MIN_WORLD_HEIGHT = 0;
-	private static final int MAX_WORLD_HEIGHT = 256;
+	private static final int SEA_LEVEL = 63;
 
 	private final Map<Coordinate, BlockMock> blocks = new HashMap<>();
 	private final Map<GameRule<?>, Object> gameRules = new HashMap<>();
 	private final MetadataTable metadataTable = new MetadataTable();
 	private final Map<ChunkCoordinate, ChunkMock> loadedChunks = new HashMap<>();
+	private PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
+	private final ServerMock server;
+	private final Material defaultBlock;
+	private final int grassHeight;
+	private final int minHeight;
+	private final int maxHeight;
+	private final UUID uuid = UUID.randomUUID();
 
 	private Environment environment = Environment.NORMAL;
-	private ServerMock server;
-	private Material defaultBlock;
-	private int height;
-	private int grassHeight;
 	private String name = "World";
-	private UUID uuid = UUID.randomUUID();
 	private Location spawnLocation;
 	private long fullTime = 0;
 	private int weatherDuration = 0;
@@ -108,13 +112,15 @@ public class WorldMock implements World
 	 * Creates a new mock world.
 	 *
 	 * @param defaultBlock The block that is spawned at locations 1 to {@code grassHeight}
-	 * @param height       The height of the world.
+	 * @param minHeight    The minimum height of the world.
+	 * @param maxHeight    The maximum height of the world.
 	 * @param grassHeight  The last {@code y} at which {@code defaultBlock} will spawn.
 	 */
-	public WorldMock(Material defaultBlock, int height, int grassHeight)
+	public WorldMock(Material defaultBlock, int minHeight, int maxHeight, int grassHeight)
 	{
 		this.defaultBlock = defaultBlock;
-		this.height = height;
+		this.minHeight = minHeight;
+		this.maxHeight = maxHeight;
 		this.grassHeight = grassHeight;
 		this.server = MockBukkit.getMock();
 
@@ -154,6 +160,18 @@ public class WorldMock implements World
 	}
 
 	/**
+	 * Creates a new mock world with a specific height from 0.
+	 *
+	 * @param defaultBlock The block that is spawned at locations 1 to {@code grassHeight}
+	 * @param maxHeight    The maximum height of the world.
+	 * @param grassHeight  The last {@code y} at which {@code defaultBlock} will spawn.
+	 */
+	public WorldMock(Material defaultBlock, int maxHeight, int grassHeight)
+	{
+		this(defaultBlock, 0, maxHeight, grassHeight);
+	}
+
+	/**
 	 * Creates a new mock world with a height of 128.
 	 *
 	 * @param defaultBlock The block that is spawned at locations 1 to {@code grassHeight}
@@ -180,13 +198,13 @@ public class WorldMock implements World
 	 */
 	public BlockMock createBlock(Coordinate c)
 	{
-		if (c.y >= height)
+		if (c.y >= maxHeight)
 		{
-			throw new ArrayIndexOutOfBoundsException("Y larger than height");
+			throw new ArrayIndexOutOfBoundsException("Y larger than max height");
 		}
-		else if (c.y < 0)
+		else if (c.y < minHeight)
 		{
-			throw new ArrayIndexOutOfBoundsException("Y smaller than 0");
+			throw new ArrayIndexOutOfBoundsException("Y smaller than min height");
 		}
 
 		Location location = new Location(this, c.x, c.y, c.z);
@@ -211,7 +229,11 @@ public class WorldMock implements World
 	@Override
 	public @NotNull BlockMock getBlockAt(int x, int y, int z)
 	{
-		Coordinate coordinate = new Coordinate(x, y, z);
+		return getBlockAt(new Coordinate(x, y, z));
+	}
+
+	public @NotNull BlockMock getBlockAt(@NotNull Coordinate coordinate)
+	{
 		if (blocks.containsKey(coordinate))
 		{
 			return blocks.get(coordinate);
@@ -563,6 +585,13 @@ public class WorldMock implements World
 	}
 
 	@Override
+	public boolean generateTree(Location location, Random random, TreeType type, Predicate<BlockState> statePredicate)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public Entity spawnEntity(Location loc, EntityType type)
 	{
 		return spawn(loc, type.getEntityClass());
@@ -800,8 +829,7 @@ public class WorldMock implements World
 	@Override
 	public long getSeed()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.seed;
 	}
 
 	@Override
@@ -986,20 +1014,19 @@ public class WorldMock implements World
 	@Override
 	public int getMinHeight()
 	{
-		return MIN_WORLD_HEIGHT;
+		return minHeight;
 	}
 
 	@Override
 	public int getMaxHeight()
 	{
-		return MAX_WORLD_HEIGHT;
+		return maxHeight;
 	}
 
 	@Override
 	public int getSeaLevel()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return SEA_LEVEL;
 	}
 
 	@Override
@@ -1052,10 +1079,10 @@ public class WorldMock implements World
 	}
 
 	@Override
+	@Deprecated
 	public WorldType getWorldType()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.worldType;
 	}
 
 	@Override
@@ -1168,29 +1195,52 @@ public class WorldMock implements World
 	@Override
 	public void playSound(Location location, Sound sound, float volume, float pitch)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.playSound(location, sound, SoundCategory.MASTER, volume, pitch);
 	}
 
 	@Override
 	public void playSound(Location location, String sound, float volume, float pitch)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.playSound(location, sound, SoundCategory.MASTER, volume, pitch);
 	}
 
 	@Override
 	public void playSound(Location location, Sound sound, SoundCategory category, float volume, float pitch)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		for (Player player : getPlayers())
+		{
+			player.playSound(location, sound, category, volume, pitch);
+		}
 	}
 
 	@Override
 	public void playSound(Location location, String sound, SoundCategory category, float volume, float pitch)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		for (Player player : getPlayers())
+		{
+			player.playSound(location, sound, category, volume, pitch);
+		}
+	}
+
+	@Override
+	public void playSound(Entity entity, Sound sound, float volume, float pitch)
+	{
+		this.playSound(entity, sound, SoundCategory.MASTER, volume, pitch);
+	}
+
+	@Override
+	public void playSound(Entity entity, Sound sound, SoundCategory category, float volume, float pitch)
+	{
+		if (entity == null || entity.getWorld() != this || sound == null || category == null)
+		{
+			// Null values are simply ignored - This is inline with CB behaviour
+			return;
+		}
+
+		for (Player player : getPlayers())
+		{
+			player.playSound(entity, sound, category, volume, pitch);
+		}
 	}
 
 	@Override
@@ -1964,6 +2014,40 @@ public class WorldMock implements World
 
 	@Override
 	public int getSimulationDistance()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull PersistentDataContainer getPersistentDataContainer()
+	{
+		return this.persistentDataContainer;
+	}
+
+	@Override
+	public long getTicksPerSpawns(@NotNull SpawnCategory spawnCategory)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setTicksPerSpawns(@NotNull SpawnCategory spawnCategory, int ticksPerCategorySpawn)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getSpawnLimit(@NotNull SpawnCategory spawnCategory)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setSpawnLimit(@NotNull SpawnCategory spawnCategory, int limit)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
