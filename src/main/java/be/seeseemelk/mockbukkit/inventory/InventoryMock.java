@@ -233,6 +233,13 @@ public class InventoryMock implements Inventory
 		return holder;
 	}
 
+	@Override //Paper
+	public @Nullable InventoryHolder getHolder(boolean useSnapshot)
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 	@Override
 	public ListIterator<ItemStack> iterator()
 	{
@@ -264,6 +271,13 @@ public class InventoryMock implements Inventory
 	public HashMap<Integer, ItemStack> removeItem(ItemStack... items) throws IllegalArgumentException
 	{
 		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull HashMap<Integer, ItemStack> removeItemAnySlot(@NotNull ItemStack... items) throws IllegalArgumentException
+	{
+		//TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
@@ -393,6 +407,13 @@ public class InventoryMock implements Inventory
 	}
 
 	@Override
+	public int close()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public List<HumanEntity> getViewers()
 	{
 		// TODO Auto-generated method stub
@@ -416,10 +437,8 @@ public class InventoryMock implements Inventory
 	@Override
 	public boolean isEmpty()
 	{
-		for (int i = 0; i < getSize(); i++)
-		{
-			if (items[i] != null && items[i].getType() != Material.AIR)
-			{
+		for (int i = 0; i < getSize(); i++) {
+			if (items[i] != null && items[i].getType() != Material.AIR) {
 				return false;
 			}
 		}

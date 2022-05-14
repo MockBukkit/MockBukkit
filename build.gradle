@@ -18,24 +18,20 @@ repositories {
     maven {
         url 'https://repo.md-5.net/content/groups/public/'
     }
+
+    maven {
+        url 'https://papermc.io/repo/repository/maven-public/'
+    }
 }
 
 dependencies {
-    // Spigot-API
-    api "org.spigotmc:spigot-api:${gradle.ext.apiVersionFull}"
-
-    // General utilities for the project
-    implementation 'commons-io:commons-io:2.11.0'
-    implementation 'org.jetbrains:annotations:23.0.0'
-
-    // Dependencies for unit testing
-    implementation 'org.junit.jupiter:junit-jupiter:5.8.2'
+    api "io.papermc.paper:paper-api:${gradle.ext.apiVersionFull}"
+    implementation 'org.junit.jupiter:junit-jupiter:5.8.1'
     implementation 'org.hamcrest:hamcrest-library:2.2'
+    implementation 'commons-io:commons-io:2.11.0'
+    implementation 'org.jetbrains:annotations:22.0.0'
 
-    // LibraryLoader dependencies
-    implementation 'org.apache.maven:maven-resolver-provider:3.8.5'
-    implementation 'org.apache.maven.resolver:maven-resolver-connector-basic:1.7.3'
-    implementation 'org.apache.maven.resolver:maven-resolver-transport-http:1.7.3'
+    testImplementation 'org.mockito:mockito-core:4.0.0'
 }
 
 task javadocJar(type: Jar) {
@@ -70,7 +66,7 @@ jacocoTestReport {
 }
 
 jacoco {
-	toolVersion = "0.8.7"
+    toolVersion = "0.8.6"
 }
 
 group = 'com.github.seeseemelk'
