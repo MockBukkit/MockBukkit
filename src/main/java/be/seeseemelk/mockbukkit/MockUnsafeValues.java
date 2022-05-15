@@ -1,9 +1,5 @@
 package be.seeseemelk.mockbukkit;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
 import com.destroystokyo.paper.util.VersionFetcher;
 import com.google.common.collect.Multimap;
 import io.papermc.paper.inventory.ItemRarity;
@@ -28,6 +24,10 @@ import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.InvalidPluginException;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 @SuppressWarnings("deprecation")
 @Deprecated
@@ -93,7 +93,8 @@ public class MockUnsafeValues implements UnsafeValues
 	@Override
 	public Material toLegacy(Material material)
 	{
-		if (material.isLegacy()) {
+		if (material.isLegacy())
+		{
 			return material;
 		}
 		throw new UnimplementedOperationException();

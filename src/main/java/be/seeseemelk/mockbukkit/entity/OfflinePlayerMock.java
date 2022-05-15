@@ -145,6 +145,20 @@ public class OfflinePlayerMock implements OfflinePlayer
 	}
 
 	@Override
+	public long getLastLogin()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public long getLastSeen()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public void incrementStatistic(@NotNull Statistic statistic)
 	{
 		// TODO Auto-generated method stub

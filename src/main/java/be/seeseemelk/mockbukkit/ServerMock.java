@@ -1,58 +1,38 @@
 package be.seeseemelk.mockbukkit;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-import java.util.function.Consumer;
-import java.util.logging.Level;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
-import java.util.stream.Collectors;
-
+import be.seeseemelk.mockbukkit.boss.BossBarMock;
+import be.seeseemelk.mockbukkit.boss.KeyedBossBarMock;
+import be.seeseemelk.mockbukkit.command.CommandResult;
+import be.seeseemelk.mockbukkit.command.ConsoleCommandSenderMock;
+import be.seeseemelk.mockbukkit.command.MessageTarget;
+import be.seeseemelk.mockbukkit.command.MockCommandMap;
+import be.seeseemelk.mockbukkit.enchantments.EnchantmentsMock;
+import be.seeseemelk.mockbukkit.entity.EntityMock;
+import be.seeseemelk.mockbukkit.entity.PlayerMock;
+import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
+import be.seeseemelk.mockbukkit.help.HelpMapMock;
+import be.seeseemelk.mockbukkit.inventory.*;
+import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
+import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
+import be.seeseemelk.mockbukkit.potion.MockPotionEffectType;
+import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
+import be.seeseemelk.mockbukkit.scoreboard.ScoreboardManagerMock;
+import be.seeseemelk.mockbukkit.services.ServicesManagerMock;
+import be.seeseemelk.mockbukkit.tags.TagRegistry;
+import be.seeseemelk.mockbukkit.tags.TagWrapperMock;
+import be.seeseemelk.mockbukkit.tags.TagsMock;
 import com.destroystokyo.paper.entity.ai.MobGoals;
 import io.papermc.paper.datapack.DatapackManager;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
+import net.md_5.bungee.api.chat.BaseComponent;
 import org.apache.commons.lang.Validate;
-import org.bukkit.BanEntry;
-import org.bukkit.BanList;
+import org.bukkit.*;
 import org.bukkit.BanList.Type;
-import org.bukkit.Bukkit;
-import org.bukkit.Color;
-import org.bukkit.GameMode;
-import org.bukkit.Keyed;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.Server;
-import org.bukkit.StructureType;
-import org.bukkit.Tag;
 import org.bukkit.Warning.WarningState;
-import org.bukkit.World;
-import org.bukkit.WorldBorder;
-import org.bukkit.WorldCreator;
 import org.bukkit.advancement.Advancement;
 import org.bukkit.block.data.BlockData;
-import org.bukkit.boss.BarColor;
-import org.bukkit.boss.BarFlag;
-import org.bukkit.boss.BarStyle;
-import org.bukkit.boss.BossBar;
-import org.bukkit.boss.KeyedBossBar;
+import org.bukkit.boss.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
@@ -77,39 +57,6 @@ import org.bukkit.profile.PlayerProfile;
 import org.bukkit.structure.StructureManager;
 import org.bukkit.util.CachedServerIcon;
 import org.jetbrains.annotations.NotNull;
-
-import be.seeseemelk.mockbukkit.boss.BossBarMock;
-import be.seeseemelk.mockbukkit.boss.KeyedBossBarMock;
-import be.seeseemelk.mockbukkit.command.CommandResult;
-import be.seeseemelk.mockbukkit.command.ConsoleCommandSenderMock;
-import be.seeseemelk.mockbukkit.command.MessageTarget;
-import be.seeseemelk.mockbukkit.command.MockCommandMap;
-import be.seeseemelk.mockbukkit.enchantments.EnchantmentsMock;
-import be.seeseemelk.mockbukkit.entity.EntityMock;
-import be.seeseemelk.mockbukkit.entity.PlayerMock;
-import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
-import be.seeseemelk.mockbukkit.help.HelpMapMock;
-import be.seeseemelk.mockbukkit.inventory.BarrelInventoryMock;
-import be.seeseemelk.mockbukkit.inventory.ChestInventoryMock;
-import be.seeseemelk.mockbukkit.inventory.DispenserInventoryMock;
-import be.seeseemelk.mockbukkit.inventory.DropperInventoryMock;
-import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
-import be.seeseemelk.mockbukkit.inventory.HopperInventoryMock;
-import be.seeseemelk.mockbukkit.inventory.InventoryMock;
-import be.seeseemelk.mockbukkit.inventory.ItemFactoryMock;
-import be.seeseemelk.mockbukkit.inventory.LecternInventoryMock;
-import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
-import be.seeseemelk.mockbukkit.inventory.ShulkerBoxInventoryMock;
-import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
-import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
-import be.seeseemelk.mockbukkit.potion.MockPotionEffectType;
-import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
-import be.seeseemelk.mockbukkit.scoreboard.ScoreboardManagerMock;
-import be.seeseemelk.mockbukkit.services.ServicesManagerMock;
-import be.seeseemelk.mockbukkit.tags.TagRegistry;
-import be.seeseemelk.mockbukkit.tags.TagWrapperMock;
-import be.seeseemelk.mockbukkit.tags.TagsMock;
-import net.md_5.bungee.api.chat.BaseComponent;
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.image.BufferedImage;
@@ -165,8 +112,7 @@ public class ServerMock extends Server.Spigot implements Server
 		{
 			InputStream stream = ClassLoader.getSystemResourceAsStream("logger.properties");
 			LogManager.getLogManager().readConfiguration(stream);
-		}
-		catch (IOException e)
+		} catch (IOException e)
 		{
 			logger.warning("Could not load file logger.properties");
 		}
@@ -1531,10 +1477,9 @@ public class ServerMock extends Server.Spigot implements Server
 	 * Call this in advance before you are gonna access {@link #getTag(String, NamespacedKey, Class)} or any of the
 	 * constants defined in {@link Tag}.
 	 *
-	 * @param key       The {@link NamespacedKey} for this {@link Tag}
+	 * @param key         The {@link NamespacedKey} for this {@link Tag}
 	 * @param registryKey The name of the {@link TagRegistry}.
-	 * @param materials {@link Material Materials} which should be covered by this {@link Tag}
-	 *
+	 * @param materials   {@link Material Materials} which should be covered by this {@link Tag}
 	 * @return The newly created {@link Tag}
 	 */
 	@NotNull
@@ -1651,7 +1596,7 @@ public class ServerMock extends Server.Spigot implements Server
 
 	@Override
 	public ItemStack createExplorerMap(World world, Location location, StructureType structureType, int radius,
-	                                   boolean findUnexplored)
+									   boolean findUnexplored)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

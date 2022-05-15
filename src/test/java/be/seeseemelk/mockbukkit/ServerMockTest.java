@@ -1,32 +1,11 @@
 package be.seeseemelk.mockbukkit;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.hamcrest.Matchers.equalTo;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assumptions.assumeTrue;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.atomic.AtomicReference;
-
-import org.bukkit.Material;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.Warning;
-import org.bukkit.WorldCreator;
-import org.bukkit.WorldType;
-import org.bukkit.World;
+import be.seeseemelk.mockbukkit.command.CommandResult;
+import be.seeseemelk.mockbukkit.entity.*;
+import be.seeseemelk.mockbukkit.inventory.InventoryMock;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
+import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
@@ -41,13 +20,19 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import be.seeseemelk.mockbukkit.command.CommandResult;
-import be.seeseemelk.mockbukkit.entity.EntityMock;
-import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
-import be.seeseemelk.mockbukkit.entity.PlayerMock;
-import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
-import be.seeseemelk.mockbukkit.entity.SimpleEntityMock;
-import be.seeseemelk.mockbukkit.inventory.InventoryMock;
+import java.io.File;
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.atomic.AtomicReference;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.equalTo;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 class ServerMockTest
 {
@@ -75,9 +60,9 @@ class ServerMockTest
 	void createWorld_WorldCreator()
 	{
 		WorldCreator worldCreator = new WorldCreator("test")
-		.seed(12345)
-		.type(WorldType.FLAT)
-		.environment(World.Environment.NORMAL);
+				.seed(12345)
+				.type(WorldType.FLAT)
+				.environment(World.Environment.NORMAL);
 		World world = server.createWorld(worldCreator);
 
 		assertEquals(1, server.getWorlds().size());
@@ -504,8 +489,7 @@ class ServerMockTest
 			try
 			{
 				server.assertMainThread();
-			}
-			catch (ThreadAccessException e)
+			} catch (ThreadAccessException e)
 			{
 				exceptionThrown.set(e);
 			}
@@ -586,6 +570,45 @@ class ServerMockTest
 		assertEquals(Warning.WarningState.DEFAULT, server.getWarningState());
 		server.setWarningState(Warning.WarningState.ON);
 		assertEquals(Warning.WarningState.ON, server.getWarningState());
+	}
+
+	@Test
+	void testGetPlayerUniqueID()
+	{
+		PlayerMock player = new PlayerMock(server, "player");
+		UUID uuid = player.getUniqueId();
+		assertEquals(uuid, server.getPlayerUniqueId(player.getName()));
+	}
+
+	@Test
+	void testGetWorldByNamespacedKey()
+	{
+		WorldMock world = new WorldMock();
+		NamespacedKey key = world.getKey();
+		server.addWorld(world);
+
+		assertEquals(world, server.getWorld(key));
+	}
+
+	@Test
+	void testSetMaxPlayers()
+	{
+		server.setMaxPlayers(69420);
+		assertEquals(69420, server.getMaxPlayers());
+	}
+
+	@Test
+	void testBroadCastMessageWithComponent()
+	{
+		PlayerMock playerA = server.addPlayer();
+		PlayerMock playerB = server.addPlayer();
+
+		Component component = Component.text("Hello");
+
+		server.broadcast(component);
+
+		playerA.assertSaid(PlainTextComponentSerializer.plainText().serialize(component));
+		playerB.assertSaid(PlainTextComponentSerializer.plainText().serialize(component));
 	}
 
 }

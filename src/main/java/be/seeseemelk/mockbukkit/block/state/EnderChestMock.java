@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.block.state;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
@@ -11,10 +12,11 @@ import org.jetbrains.annotations.NotNull;
  * {@link TileStateMock}.
  *
  * @author TheBusyBiscuit
- *
  */
 public class EnderChestMock extends TileStateMock implements EnderChest
 {
+
+	private boolean isOpen = false;
 
 	public EnderChestMock(@NotNull Material material)
 	{
@@ -35,5 +37,30 @@ public class EnderChestMock extends TileStateMock implements EnderChest
 	public BlockState getSnapshot()
 	{
 		return new EnderChestMock(this);
+	}
+
+	@Override
+	public void open()
+	{
+		isOpen = true;
+	}
+
+	@Override
+	public void close()
+	{
+		isOpen = false;
+	}
+
+	@Override
+	public boolean isOpen()
+	{
+		return isOpen;
+	}
+
+	@Override
+	public boolean isSnapshot()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 }

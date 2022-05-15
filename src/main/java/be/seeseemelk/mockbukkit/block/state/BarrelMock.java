@@ -1,26 +1,27 @@
 package be.seeseemelk.mockbukkit.block.state;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.inventory.BarrelInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.InventoryMock;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.block.Barrel;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.loot.LootTable;
 import org.jetbrains.annotations.NotNull;
-
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.inventory.BarrelInventoryMock;
-import be.seeseemelk.mockbukkit.inventory.InventoryMock;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * This {@link ContainerMock} represents a {@link Barrel}
  *
  * @author TheBusyBiscuit
- *
  * @see ChestMock
- *
  */
 public class BarrelMock extends ContainerMock implements Barrel
 {
+
+	private boolean isOpen = false;
 
 	public BarrelMock(@NotNull Material material)
 	{
@@ -68,15 +69,19 @@ public class BarrelMock extends ContainerMock implements Barrel
 	@Override
 	public void open()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		isOpen = true;
 	}
 
 	@Override
 	public void close()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		isOpen = false;
+	}
+
+	@Override
+	public boolean isOpen()
+	{
+		return isOpen;
 	}
 
 	@Override
@@ -91,4 +96,24 @@ public class BarrelMock extends ContainerMock implements Barrel
 		return new BarrelMock(this);
 	}
 
+	@Override
+	public @Nullable Component customName()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void customName(@Nullable Component customName)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isSnapshot()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
 }

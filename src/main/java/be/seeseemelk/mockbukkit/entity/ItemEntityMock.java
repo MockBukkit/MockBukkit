@@ -1,9 +1,12 @@
 package be.seeseemelk.mockbukkit.entity;
 
+import java.util.Set;
 import java.util.UUID;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
+import org.bukkit.entity.Player;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
@@ -106,9 +109,92 @@ public class ItemEntityMock extends EntityMock implements Item
 	}
 
 	@Override
+	public boolean canMobPickup()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setCanMobPickup(boolean canMobPickup)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean canPlayerPickup()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setCanPlayerPickup(boolean canPlayerPickup)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean willAge()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setWillAge(boolean willAge)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getHealth()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setHealth(int health)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull SpawnCategory getSpawnCategory()
 	{
 		return SpawnCategory.MISC;
 	}
 
+	@Override
+	public @Nullable Component customName()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void customName(@Nullable Component customName)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Set<Player> getTrackedPlayers()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Component name()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
 }

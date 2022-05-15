@@ -8,7 +8,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import net.kyori.adventure.text.Component;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Entity;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.RenderType;
@@ -16,6 +19,7 @@ import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class ScoreboardMock implements Scoreboard
 {
@@ -27,6 +31,20 @@ public class ScoreboardMock implements Scoreboard
 	public ObjectiveMock registerNewObjective(String name, String criteria) throws IllegalArgumentException
 	{
 		return registerNewObjective(name, criteria, name, RenderType.INTEGER);
+	}
+
+	@Override
+	public @NotNull Objective registerNewObjective(@NotNull String name, @NotNull String criteria, @Nullable Component displayName) throws IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Objective registerNewObjective(@NotNull String name, @NotNull String criteria, @Nullable Component displayName, @NotNull RenderType renderType) throws IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -176,6 +194,27 @@ public class ScoreboardMock implements Scoreboard
 	public void clearSlot(DisplaySlot slot) throws IllegalArgumentException
 	{
 		objectivesByDisplaySlot.remove(slot);
+	}
+
+	@Override
+	public @NotNull Set<Score> getScoresFor(@NotNull Entity entity) throws IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void resetScoresFor(@NotNull Entity entity) throws IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Team getEntityTeam(@NotNull Entity entity) throws IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	/**

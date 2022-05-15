@@ -73,4 +73,11 @@ public class ScoreMock implements Score
 		return objective.getScoreboard();
 	}
 
+	@Override
+	public void resetScore() throws IllegalStateException
+	{
+		score = 0;
+		set = false;
+	}
+
 }
