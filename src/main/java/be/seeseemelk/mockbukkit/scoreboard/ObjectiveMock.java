@@ -74,6 +74,7 @@ public class ObjectiveMock implements Objective
 	}
 
 	@Override
+	@Deprecated //Paper
 	public String getDisplayName() throws IllegalStateException
 	{
 		validate();
@@ -81,6 +82,7 @@ public class ObjectiveMock implements Objective
 	}
 
 	@Override
+	@Deprecated //Paper
 	public void setDisplayName(String displayName) throws IllegalStateException, IllegalArgumentException
 	{
 		Validate.notNull(displayName, "The display name cannot be null");

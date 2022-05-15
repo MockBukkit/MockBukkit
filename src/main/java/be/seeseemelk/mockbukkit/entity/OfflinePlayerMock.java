@@ -124,6 +124,7 @@ public class OfflinePlayerMock implements OfflinePlayer
 	}
 
 	@Override
+	@Deprecated
 	public long getLastPlayed()
 	{
 		// TODO Auto-generated method stub
