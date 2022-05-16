@@ -69,7 +69,7 @@ public class PluginManagerMock implements PluginManager
 	private final List<Plugin> plugins = new ArrayList<>();
 	private final List<PluginCommand> commands = new ArrayList<>();
 	private final List<Event> events = new ArrayList<>();
-	private final List<File> temporaryFiles = new LinkedList<>();
+	private File parentTemporaryDirectory;
 	private final List<Permission> permissions = new ArrayList<>();
 	private final Map<Permissible, Set<String>> permissionSubscriptions = new HashMap<>();
 	private Map<String, List<Listener>> listeners = new HashMap<>();
@@ -89,11 +89,11 @@ public class PluginManagerMock implements PluginManager
 	 */
 	public void unload()
 	{
-		for (File file : temporaryFiles)
+		if (parentTemporaryDirectory != null)
 		{
 			try
 			{
-				FileUtils.forceDelete(file);
+				FileUtils.forceDelete(parentTemporaryDirectory);
 			}
 			catch (IOException e)
 			{
@@ -264,6 +264,16 @@ public class PluginManagerMock implements PluginManager
 		    "No compatible constructor for " + class1.getName() + " with parameters " + str);
 	}
 
+	public @NotNull File getParentTemporaryDirectory() throws IOException
+	{
+		if (parentTemporaryDirectory == null)
+		{
+			Random random = ThreadLocalRandom.current();
+			parentTemporaryDirectory = Files.createTempDirectory("MockBukkit-" + random.nextInt(0, Integer.MAX_VALUE)).toFile();
+		}
+		return parentTemporaryDirectory;
+	}
+
 	/**
 	 * Tries to create a temporary directory.
 	 *
@@ -271,11 +281,11 @@ public class PluginManagerMock implements PluginManager
 	 * @return The created temporary directory.
 	 * @throws IOException when the directory could not be created.
 	 */
-	private @NotNull File createTemporaryDirectory(@NotNull String name) throws IOException
+	public @NotNull File createTemporaryDirectory(@NotNull String name) throws IOException
 	{
 		Random random = ThreadLocalRandom.current();
-		File directory = Files.createTempDirectory(name + "-" + random.nextInt()).toFile();
-		temporaryFiles.add(directory);
+		File directory = new File(getParentTemporaryDirectory(), name);
+		directory.mkdirs();
 		return directory;
 	}
 
@@ -286,12 +296,11 @@ public class PluginManagerMock implements PluginManager
 	 * @return The created temporary file.
 	 * @throws IOException when the file could not be created.
 	 */
-	private @NotNull File createTemporaryPluginFile(@NotNull String name) throws IOException
+	public @NotNull File createTemporaryPluginFile(@NotNull String name) throws IOException
 	{
 		Random random = ThreadLocalRandom.current();
-		File pluginFile = Files.createTempFile(name + "-" + random.nextInt(), ".jar").toFile();
+		File pluginFile = new File(getParentTemporaryDirectory(), name + ".jar");
 		pluginFile.createNewFile();
-		temporaryFiles.add(pluginFile);
 		return pluginFile;
 	}
 
@@ -333,10 +342,8 @@ public class PluginManagerMock implements PluginManager
 			Object[] arguments = new Object[types.size()];
 			arguments[0] = loader;
 			arguments[1] = description;
-			arguments[2] = createTemporaryDirectory(
-			                   "MockBukkit-" + description.getName() + "-" + description.getVersion());
-			arguments[3] = createTemporaryPluginFile(
-			                   "MockBukkit-" + description.getName() + "-" + description.getVersion());
+			arguments[2] = createTemporaryDirectory(description.getName() + "-" + description.getVersion());
+			arguments[3] = createTemporaryPluginFile(description.getName() + "-" + description.getVersion());
 			System.arraycopy(parameters, 0, arguments, 4, parameters.length);
 
 			JavaPlugin plugin = constructor.newInstance(arguments);

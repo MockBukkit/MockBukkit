@@ -1917,8 +1917,14 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull File getPluginsFolder()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		try
+		{
+			return getPluginManager().getParentTemporaryDirectory();
+		}
+		catch (IOException e)
+		{
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Override
