@@ -576,18 +576,9 @@ class ServerMockTest
 	void testGetPlayerUniqueID()
 	{
 		PlayerMock player = new PlayerMock(server, "player");
+		server.addPlayer(player);
 		UUID uuid = player.getUniqueId();
 		assertEquals(uuid, server.getPlayerUniqueId(player.getName()));
-	}
-
-	@Test
-	void testGetWorldByNamespacedKey()
-	{
-		WorldMock world = new WorldMock();
-		NamespacedKey key = world.getKey();
-		server.addWorld(world);
-
-		assertEquals(world, server.getWorld(key));
 	}
 
 	@Test

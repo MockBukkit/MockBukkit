@@ -213,7 +213,6 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	@Override
 	public @NotNull Component name()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return Component.text(getName());
 	}
 }

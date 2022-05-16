@@ -640,7 +640,8 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override //Paper
 	public @Nullable World getWorld(@NotNull NamespacedKey worldKey)
 	{
-		return worlds.stream().filter(world -> world.getKey().equals(worldKey)).findAny().orElse(null);
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@NotNull

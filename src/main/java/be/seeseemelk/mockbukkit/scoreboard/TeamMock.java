@@ -285,8 +285,7 @@ public class TeamMock implements Team
 	@Override
 	public Set<String> getEntries() throws IllegalStateException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return entries;
 	}
 
 	@Override
