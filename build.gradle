@@ -25,13 +25,21 @@ repositories {
 }
 
 dependencies {
+    //Paper API
     api "io.papermc.paper:paper-api:${gradle.ext.apiVersionFull}"
-    implementation 'org.junit.jupiter:junit-jupiter:5.8.1'
-    implementation 'org.hamcrest:hamcrest-library:2.2'
-    implementation 'commons-io:commons-io:2.11.0'
-    implementation 'org.jetbrains:annotations:22.0.0'
 
-    testImplementation 'org.mockito:mockito-core:4.0.0'
+    //Dependencies for Unit Tests
+    implementation 'org.junit.jupiter:junit-jupiter:5.8.2'
+    implementation 'org.hamcrest:hamcrest-library:2.2'
+
+    // General utilities for the project
+    implementation 'commons-io:commons-io:2.11.0'
+    implementation 'org.jetbrains:annotations:23.0.0'
+
+    // LibraryLoader dependencies
+    implementation 'org.apache.maven:maven-resolver-provider:3.8.5'
+    implementation 'org.apache.maven.resolver:maven-resolver-connector-basic:1.8.0'
+    implementation 'org.apache.maven.resolver:maven-resolver-transport-http:1.8.0'
 }
 
 task javadocJar(type: Jar) {
@@ -66,7 +74,7 @@ jacocoTestReport {
 }
 
 jacoco {
-    toolVersion = "0.8.6"
+    toolVersion = "0.8.7"
 }
 
 group = 'com.github.seeseemelk'

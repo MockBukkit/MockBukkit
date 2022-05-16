@@ -2206,17 +2206,24 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Deprecated
 	public void sendTitle(String title, String subtitle)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.title.add(title);
+		this.subitles.add(subtitle);
 	}
 
 	@Override
 	@Deprecated
 	public void sendTitle(String title, String subtitle, int fadeIn, int stay, int fadeOut)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		sendTitle(title, subtitle);
 	}
+
+	public String nextTitle() { return title.poll(); }
+
+	public String nextSubTitle()
+	{
+		return subitles.poll();
+	}
+
 
 	@Override
 	public void resetTitle()
