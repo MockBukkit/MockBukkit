@@ -28,8 +28,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-
-@SuppressWarnings("deprecation")
 @Deprecated
 public class MockUnsafeValues implements UnsafeValues
 {
@@ -37,48 +35,54 @@ public class MockUnsafeValues implements UnsafeValues
 	private final Set<String> compatibleApiVersions = new HashSet<>(Arrays.asList("1.13", "1.14", "1.15", "1.16", "1.17", "1.18"));
 
 	//Paper start
+	public static final ComponentFlattener FLATTENER = ComponentFlattener.basic().toBuilder()
+			.build();
+	public static final LegacyComponentSerializer LEGACY_SECTION_UXRC = LegacyComponentSerializer.builder().flattener(FLATTENER).hexColors().useUnusualXRepeatedCharacterHexFormat().build();
+	public static final PlainComponentSerializer PLAIN = PlainComponentSerializer.builder().flattener(FLATTENER).build();
+	public static final PlainTextComponentSerializer PLAIN_TEXT = PlainTextComponentSerializer.builder().flattener(FLATTENER).build();
+	public static final GsonComponentSerializer GSON = GsonComponentSerializer.builder()
+			/*.legacyHoverEventSerializer(NBTLegacyHoverEventSerializer.INSTANCE)*/
+			.build();
+	public static final GsonComponentSerializer COLOR_DOWNSAMPLING_GSON = GsonComponentSerializer.builder()
+			/*.legacyHoverEventSerializer(NBTLegacyHoverEventSerializer.INSTANCE)*/
+			.downsampleColors()
+			.build();
 
 	@Override
 	public ComponentFlattener componentFlattener()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return FLATTENER;
 	}
 
 	@Override
 	@Deprecated(forRemoval = true)
 	public PlainComponentSerializer plainComponentSerializer()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return PLAIN;
 	}
 
 	@Override
 	public PlainTextComponentSerializer plainTextSerializer()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return PLAIN_TEXT;
 	}
 
 	@Override
 	public GsonComponentSerializer gsonComponentSerializer()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return GSON;
 	}
 
 	@Override
 	public GsonComponentSerializer colorDownsamplingGsonComponentSerializer()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return COLOR_DOWNSAMPLING_GSON;
 	}
 
 	@Override
 	public LegacyComponentSerializer legacyComponentSerializer()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return LEGACY_SECTION_UXRC;
 	}
 
 	@Override
