@@ -47,7 +47,7 @@ Once your directories are set up, you can create unit tests like this::
         private ServerMock server;
         private MyPlugin plugin;
 
-        @Before    
+        @Before
         public void setUp() {
             // Start the mock server
             server = MockBukkit.mock();
@@ -68,16 +68,16 @@ Once your directories are set up, you can create unit tests like this::
     }
 
 UnimplementationOperationException
----------------------------------- 
+----------------------------------
 Sometimes your code may use a method that is not yet implemented in MockBukkit.
 When this happens MockBukkit will, instead of returning placeholder values, throw
 an ``UnimplementedOperationException``.
-These exception extends ``AssumationException`` and will cause the test to be skipped.
+These exception extends ``TestAbortedException`` and will cause the test to be skipped.
 
 These exceptions should just be ignored, though pull requests that add functionality
 to MockBukkit are always welcome!
 
 As an alternative you can always extend `ServerMock` and implement those missing methods.
-Simply pass your custom implementation of ServerMock to the `MockBukkit.mock(...)` method.
+Simply pass your custom implementation of ServerMock to the `MockBukkit.mock(...)` method.::
 
     MyCustomServerMock server = MockBukkit.mock(new MyCustomServerMock());
