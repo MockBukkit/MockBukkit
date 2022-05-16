@@ -25,6 +25,7 @@ Here is an example which adds support for JUnit 5.8.2 and MockBukkit-v1.18:2.0.0
 
 Groovy DSL
 ^^^^^^^^^^
+This is how you add the dependencies in Groovy DSL::
 
     repositories {
         mavenCentral()
@@ -37,6 +38,7 @@ Groovy DSL
 
 Kotlin DSL
 ^^^^^^^^^^
+This is how you add the dependencies in Kotlin DSL::
 
     repositories {
         mavenCentral()
@@ -95,4 +97,3 @@ Running
 After having modified your `pom.xml`, you can run the unit tests as follows::
 
     mvn test
-
