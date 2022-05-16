@@ -46,7 +46,7 @@ This is how you add the dependencies in Kotlin DSL::
 
     dependencies {
         testImplementation('org.junit.jupiter:junit-jupiter:5.8.2')
-        testImplementation ('com.github.seeseemelk:MockBukkit-v1.18:2.0.0')
+        testImplementation('com.github.seeseemelk:MockBukkit-v1.18:2.0.0')
     }
 
 Running
