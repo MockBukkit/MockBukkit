@@ -1981,7 +1981,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 				!hiddenPlayersDeprecated.contains(player.getUniqueId());
 	}
 
-	//Paper start
+
 
 	@Override
 	@ApiStatus.Experimental
@@ -2006,7 +2006,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		throw new UnimplementedOperationException();
 	}
 
-	//Paper end
+
 
 	@Override
 	public boolean isFlying()
@@ -2086,7 +2086,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		throw new UnimplementedOperationException();
 	}
 
-	@Override //Paper
+	@Override
 	@Deprecated
 	public void setResourcePack(@NotNull String url, @Nullable byte[] hash, @Nullable String prompt)
 	{
@@ -2405,7 +2405,8 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public void setSimulationDistance(int simulationDistance)
 	{
-
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

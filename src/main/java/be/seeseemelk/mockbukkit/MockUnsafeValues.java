@@ -34,17 +34,14 @@ public class MockUnsafeValues implements UnsafeValues
 
 	private final Set<String> compatibleApiVersions = new HashSet<>(Arrays.asList("1.13", "1.14", "1.15", "1.16", "1.17", "1.18"));
 
-	//Paper start
 	public static final ComponentFlattener FLATTENER = ComponentFlattener.basic().toBuilder()
 			.build();
 	public static final LegacyComponentSerializer LEGACY_SECTION_UXRC = LegacyComponentSerializer.builder().flattener(FLATTENER).hexColors().useUnusualXRepeatedCharacterHexFormat().build();
 	public static final PlainComponentSerializer PLAIN = PlainComponentSerializer.builder().flattener(FLATTENER).build();
 	public static final PlainTextComponentSerializer PLAIN_TEXT = PlainTextComponentSerializer.builder().flattener(FLATTENER).build();
 	public static final GsonComponentSerializer GSON = GsonComponentSerializer.builder()
-			/*.legacyHoverEventSerializer(NBTLegacyHoverEventSerializer.INSTANCE)*/
 			.build();
 	public static final GsonComponentSerializer COLOR_DOWNSAMPLING_GSON = GsonComponentSerializer.builder()
-			/*.legacyHoverEventSerializer(NBTLegacyHoverEventSerializer.INSTANCE)*/
 			.downsampleColors()
 			.build();
 
@@ -92,7 +89,6 @@ public class MockUnsafeValues implements UnsafeValues
 		throw new UnimplementedOperationException();
 	}
 
-	//Paper end
 
 	@Override
 	public Material toLegacy(Material material)

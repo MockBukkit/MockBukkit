@@ -28,7 +28,7 @@ public class ScoreMock implements Score
 	}
 
 	@Override
-	@Deprecated //Paper
+	@Deprecated
 	public OfflinePlayer getPlayer()
 	{
 		return player;

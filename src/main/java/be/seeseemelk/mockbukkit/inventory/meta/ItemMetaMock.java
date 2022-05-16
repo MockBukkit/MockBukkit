@@ -180,7 +180,8 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 				return displayName.equals(meta.getDisplayName());
 			else
 				return false;
-		} else
+		}
+		else
 		{
 			return !meta.hasDisplayName();
 		}
@@ -228,7 +229,8 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 			{
 				return false;
 			}
-		} else if (hasDamage())
+		}
+		else if (hasDamage())
 		{
 			return false;
 		}
@@ -280,7 +282,8 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 			meta.repairCost = repairCost;
 			meta.hideFlags = EnumSet.copyOf(hideFlags);
 			return meta;
-		} catch (CloneNotSupportedException e)
+		}
+		catch (CloneNotSupportedException e)
 		{
 			throw new RuntimeException(e);
 		}
@@ -396,7 +399,8 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		if (lore != null && !lore.isEmpty())
 		{
 			this.lore = new ArrayList<>(lore);
-		} else
+		}
+		else
 		{
 			this.lore = null;
 		}
@@ -426,11 +430,13 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 							String.format("Line %d should be '%s' but was '%s'", i, lines.get(i), lore.get(i)));
 				}
 			}
-		} else if (lore != null)
+		}
+		else if (lore != null)
 		{
 			throw new AssertionError(
 					String.format("Lore contained %d lines but should contain %d lines", lore.size(), lines.size()));
-		} else
+		}
+		else
 		{
 			throw new AssertionError("No lore was set");
 		}
@@ -600,7 +606,8 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		{
 			this.enchants.put(ench, level);
 			return true;
-		} else
+		}
+		else
 		{
 			return false;
 		}

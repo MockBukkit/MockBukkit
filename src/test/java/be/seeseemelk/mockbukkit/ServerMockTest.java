@@ -489,7 +489,8 @@ class ServerMockTest
 			try
 			{
 				server.assertMainThread();
-			} catch (ThreadAccessException e)
+			}
+			catch (ThreadAccessException e)
 			{
 				exceptionThrown.set(e);
 			}

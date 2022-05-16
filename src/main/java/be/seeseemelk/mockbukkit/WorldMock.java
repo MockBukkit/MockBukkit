@@ -715,13 +715,15 @@ public class WorldMock implements World
 	@Override
 	public @Nullable Location findLightningRod(@NotNull Location location)
 	{
-		return null;
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public @Nullable Location findLightningTarget(@NotNull Location location)
 	{
-		return null;
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -757,7 +759,8 @@ public class WorldMock implements World
 	@Override
 	public @NotNull CompletableFuture<Chunk> getChunkAtAsync(int x, int z, boolean gen, boolean urgent)
 	{
-		return null;
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -776,7 +779,8 @@ public class WorldMock implements World
 	@Override
 	public @Nullable Entity getEntity(@NotNull UUID uuid)
 	{
-		return null;
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -998,7 +1002,8 @@ public class WorldMock implements World
 	@Override
 	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz, @Nullable Consumer<T> function, CreatureSpawnEvent.@NotNull SpawnReason reason) throws IllegalArgumentException
 	{
-		return null;
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@NotNull
@@ -1130,7 +1135,8 @@ public class WorldMock implements World
 	@Override
 	public @NotNull BiomeProvider vanillaBiomeProvider()
 	{
-		return null;
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -1906,7 +1912,8 @@ public class WorldMock implements World
 	@Override
 	public @NotNull Biome getComputedBiome(int x, int y, int z)
 	{
-		return null;
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -2206,7 +2213,7 @@ public class WorldMock implements World
 		throw new UnimplementedOperationException();
 	}
 
-	//Paper start
+
 	@Override
 	public void setViewDistance(int viewDistance)
 	{

@@ -112,7 +112,8 @@ public class ServerMock extends Server.Spigot implements Server
 		{
 			InputStream stream = ClassLoader.getSystemResourceAsStream("logger.properties");
 			LogManager.getLogManager().readConfiguration(stream);
-		} catch (IOException e)
+		}
+		catch (IOException e)
 		{
 			logger.warning("Could not load file logger.properties");
 		}
@@ -258,7 +259,7 @@ public class ServerMock extends Server.Spigot implements Server
 		return playerList.getPlayer(num);
 	}
 
-	@Override //Paper
+	@Override
 	public @Nullable UUID getPlayerUniqueId(@NotNull String playerName)
 	{
 		return playerList.getPlayer(playerName).getUniqueId();
@@ -484,7 +485,7 @@ public class ServerMock extends Server.Spigot implements Server
 		return consoleSender;
 	}
 
-	@Override //Paper
+	@Override
 	public @NotNull CommandSender createCommandSender(@NotNull Consumer<? super Component> feedback)
 	{
 		//TODO Auto-generated method stub
@@ -637,7 +638,7 @@ public class ServerMock extends Server.Spigot implements Server
 		return worlds.stream().filter(world -> world.getUID().equals(uid)).findAny().orElse(null);
 	}
 
-	@Override //Paper
+	@Override
 	public @Nullable World getWorld(@NotNull NamespacedKey worldKey)
 	{
 		// TODO Auto-generated method stub
@@ -664,7 +665,7 @@ public class ServerMock extends Server.Spigot implements Server
 		return playerList.getMaxPlayers();
 	}
 
-	@Override //Paper
+	@Override
 	public void setMaxPlayers(int maxPlayers)
 	{
 		playerList.setMaxPlayers(maxPlayers);
@@ -1749,7 +1750,7 @@ public class ServerMock extends Server.Spigot implements Server
 		return this;
 	}
 
-	//Paper start
+
 	@Override
 	public void reloadPermissions()
 	{

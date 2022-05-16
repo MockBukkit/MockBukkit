@@ -129,7 +129,7 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	}
 
 	@Override
-	@Deprecated //Paper
+	@Deprecated
 	public PlayerProfile getOwnerProfile()
 	{
 		// TODO Auto-generated method stub
@@ -137,7 +137,7 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	}
 
 	@Override
-	@Deprecated //Paper
+	@Deprecated
 	public void setOwnerProfile(@Nullable PlayerProfile profile)
 	{
 		// TODO Auto-generated method stub

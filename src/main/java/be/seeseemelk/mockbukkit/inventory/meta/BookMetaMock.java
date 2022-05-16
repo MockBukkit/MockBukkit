@@ -193,7 +193,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	}
 
 	@Override
-	@Deprecated //Paper
+	@Deprecated
 	public String getPage(int page)
 	{
 		Validate.isTrue(this.isValidPage(page), "Invalid page number");
@@ -206,7 +206,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	}
 
 	@Override
-	@Deprecated //Paper
+	@Deprecated
 	public void setPage(int page, String text)
 	{
 		if (!this.isValidPage(page))
@@ -225,14 +225,14 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	}
 
 	@Override
-	@Deprecated //Paper
+	@Deprecated
 	public List<String> getPages()
 	{
 		return pages;
 	}
 
 	@Override
-	@Deprecated //Paper
+	@Deprecated
 	public void setPages(String... pages)
 	{
 		this.pages.clear();
@@ -240,7 +240,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	}
 
 	@Override
-	@Deprecated //Paper
+	@Deprecated
 	public void setPages(List<String> pages)
 	{
 		this.pages.clear();
@@ -255,7 +255,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	}
 
 	@Override
-	@Deprecated //Paper
+	@Deprecated
 	public void addPage(String... pages)
 	{
 

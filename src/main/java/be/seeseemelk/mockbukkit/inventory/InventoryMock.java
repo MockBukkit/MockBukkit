@@ -228,7 +228,7 @@ public class InventoryMock implements Inventory
 		return holder;
 	}
 
-	@Override //Paper
+	@Override
 	public @Nullable InventoryHolder getHolder(boolean useSnapshot)
 	{
 		//TODO Auto-generated method stub
@@ -432,8 +432,10 @@ public class InventoryMock implements Inventory
 	@Override
 	public boolean isEmpty()
 	{
-		for (int i = 0; i < getSize(); i++) {
-			if (items[i] != null && items[i].getType() != Material.AIR) {
+		for (int i = 0; i < getSize(); i++)
+		{
+			if (items[i] != null && items[i].getType() != Material.AIR)
+			{
 				return false;
 			}
 		}

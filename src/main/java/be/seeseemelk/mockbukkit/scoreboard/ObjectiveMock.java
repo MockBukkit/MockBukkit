@@ -74,7 +74,7 @@ public class ObjectiveMock implements Objective
 	}
 
 	@Override
-	@Deprecated //Paper
+	@Deprecated
 	public String getDisplayName() throws IllegalStateException
 	{
 		validate();
@@ -82,7 +82,7 @@ public class ObjectiveMock implements Objective
 	}
 
 	@Override
-	@Deprecated //Paper
+	@Deprecated
 	public void setDisplayName(String displayName) throws IllegalStateException, IllegalArgumentException
 	{
 		Validate.notNull(displayName, "The display name cannot be null");
@@ -176,7 +176,8 @@ public class ObjectiveMock implements Objective
 		if (score != null)
 		{
 			return score;
-		} else
+		}
+		else
 		{
 			score = new ScoreMock(this, entry);
 			scores.put(entry, score);

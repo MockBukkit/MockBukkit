@@ -49,7 +49,7 @@ public class ScoreboardMock implements Scoreboard
 	}
 
 	@Override
-	@Deprecated //Paper
+	@Deprecated
 	public ObjectiveMock registerNewObjective(String name, String criteria, String displayName)
 	throws IllegalArgumentException
 	{
@@ -57,7 +57,7 @@ public class ScoreboardMock implements Scoreboard
 	}
 
 	@Override
-	@Deprecated //Paper
+	@Deprecated
 	public ObjectiveMock registerNewObjective(String name, String criteria, String displayName, RenderType renderType)
 	throws IllegalArgumentException
 	{
@@ -168,7 +168,7 @@ public class ScoreboardMock implements Scoreboard
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@Deprecated //Paper
+	@Deprecated
 	public Set<OfflinePlayer> getPlayers()
 	{
 		Set<OfflinePlayer> players = new HashSet<>();

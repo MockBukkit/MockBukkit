@@ -38,7 +38,8 @@ public class SignMock extends TileStateMock implements Sign
 	{
 		super(state);
 
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 4; i++)
+		{
 			lines[i] = state.getLine(i);
 		}
 	}
@@ -48,7 +49,8 @@ public class SignMock extends TileStateMock implements Sign
 	{
 		List<Component> components = new ArrayList<>();
 
-		for (String line : lines) {
+		for (String line : lines)
+		{
 			components.add(LegacyComponentSerializer.legacySection().deserialize(line));
 		}
 
@@ -70,12 +72,13 @@ public class SignMock extends TileStateMock implements Sign
 
 	@Override
 	@NotNull
-	@Deprecated //Paper
+	@Deprecated
 	public String[] getLines()
 	{
 		String[] text = new String[4];
 
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 4; i++)
+		{
 			text[i] = getLine(i);
 		}
 
@@ -83,14 +86,14 @@ public class SignMock extends TileStateMock implements Sign
 	}
 
 	@Override
-	@Deprecated //Paper
+	@Deprecated
 	public String getLine(int index) throws IndexOutOfBoundsException
 	{
 		return lines[index];
 	}
 
 	@Override
-	@Deprecated //Paper
+	@Deprecated
 	public void setLine(int index, @NotNull String line) throws IndexOutOfBoundsException
 	{
 		Validate.notNull(line, "Line cannot be null!");

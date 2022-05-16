@@ -93,7 +93,6 @@ class BarrelMockTest
 	@Test
 	void testClose()
 	{
-
 		assertFalse(barrel.isOpen());
 
 		barrel.open();

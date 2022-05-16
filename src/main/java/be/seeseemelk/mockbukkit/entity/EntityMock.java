@@ -526,8 +526,6 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		throw new UnimplementedOperationException();
 	}
 
-	//Paper Start - Freeze Tick Lock API
-
 	@Override
 	public boolean isFreezeTickingLocked()
 	{
@@ -542,7 +540,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		throw new UnimplementedOperationException();
 	}
 
-	//Paper End
+
 
 	@Override
 	public int getFreezeTicks()

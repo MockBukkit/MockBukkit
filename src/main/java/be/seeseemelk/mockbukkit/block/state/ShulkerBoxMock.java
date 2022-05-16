@@ -152,7 +152,8 @@ public class ShulkerBoxMock extends ContainerMock implements ShulkerBox
 	{
 		// Don't ask me why but it seems like calling this on an undyed Shulker box
 		// throws a NullPointerException rather than simply returning null.
-		if (color == null) {
+		if (color == null)
+		{
 			throw new NullPointerException("This Shulker Box has not been dyed");
 		}
 
