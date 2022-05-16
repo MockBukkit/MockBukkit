@@ -8,8 +8,8 @@ The most important thing to remember is that each version of MockBukkit is named
 after the version of Bukkit it implements, followed by the version number of
 MockBukkit itself.
 
-For instance: MockBukkit-v1.15 v0.3.0 is the 0.3.0 release of MockBukkit,
-targetting plugins build for Minecraft 1.15.
+For instance: MockBukkit-v1.18 v2.0.0 is the 2.0.0 release of MockBukkit,
+targeting plugins build for Minecraft 1.18.
 The latest stable version can always be found at https://search.maven.org/search?q=MockBukkit
 
 Gradle
@@ -21,15 +21,30 @@ Dependencies
 ^^^^^^^^^^^^
 To enable unit testing, all you need to do is add the JUnit dependency and the
 correct MockBukkit dependency.
-Here is an example which adds support for JUnit 4.12 and MockBukkit-v1.15::
+Here is an example which adds support for JUnit 5.8.2 and MockBukkit-v1.18:2.0.0
+
+Groovy DSL
+^^^^^^^^^^
 
     repositories {
         mavenCentral()
     }
 
     dependencies {
-        testImplementation 'junit:junit:4.12'
-        testImplementation 'com.github.seeseemelk:MockBukkit-v1.15:0.3.0-SNAPSHOT'
+        testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
+        testImplementation 'com.github.seeseemelk:MockBukkit-v1.18:2.0.0'
+    }
+
+Kotlin DSL
+^^^^^^^^^^
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        testImplementation('org.junit.jupiter:junit-jupiter:5.8.2')
+        testImplementation ('com.github.seeseemelk:MockBukkit-v1.18:2.0.0')
     }
 
 Running
@@ -51,15 +66,15 @@ To do so, both JUnit and MockBukkit habe to be added to your dependencies::
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.8.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.github.seeseemelk</groupId>
-            <artifactId>MockBukkit-v1.15</artifactId>
-            <version>0.3.0-SNAPSHOT</version>
+            <artifactId>MockBukkit-v1.18</artifactId>
+            <version>2.0.0</version>
             <scope>test</scope>
         </dependency>
         <!-- Add your other dependencies here -->
