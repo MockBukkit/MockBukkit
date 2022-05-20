@@ -88,6 +88,12 @@ public class PersistentDataContainerMock implements PersistentDataContainer
 	}
 
 	@Override
+	public boolean has(@NotNull NamespacedKey key)
+	{
+		return map.containsKey(key);
+	}
+
+	@Override
 	public <T, Z> @NotNull Z getOrDefault(@NotNull NamespacedKey key, @NotNull PersistentDataType<T, Z> type,
 	                                      @NotNull Z defaultValue)
 	{
