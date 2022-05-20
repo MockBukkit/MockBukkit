@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import net.kyori.adventure.text.Component;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
@@ -150,6 +151,20 @@ public class FishHookMock extends ProjectileMock implements FishHook
 		return state;
 	}
 
+	@Override
+	public int getWaitTime()
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void setWaitTime(int ticks)
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
 	@NotNull
 	@Override
 	public EntityType getType()
@@ -168,6 +183,27 @@ public class FishHookMock extends ProjectileMock implements FishHook
 	public String toString()
 	{
 		return "FishingHookMock";
+	}
+
+	@Override
+	public @NotNull Component name()
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public @Nullable Component customName()
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void customName(@Nullable Component customName)
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
 	}
 
 }
