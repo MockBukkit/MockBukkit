@@ -155,11 +155,4 @@ public class HopperMock extends ContainerMock implements Hopper
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
-	@Override
-	public boolean isSnapshot()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
 }

@@ -96,10 +96,4 @@ public class LecternMock extends ContainerMock implements Lectern
 		throw new UnimplementedOperationException();
 	}
 
-	@Override
-	public boolean isSnapshot()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
 }

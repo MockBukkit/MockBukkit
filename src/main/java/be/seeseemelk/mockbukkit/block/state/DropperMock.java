@@ -163,10 +163,4 @@ public class DropperMock extends ContainerMock implements Dropper
 		throw new UnimplementedOperationException();
 	}
 
-	@Override
-	public boolean isSnapshot()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
 }

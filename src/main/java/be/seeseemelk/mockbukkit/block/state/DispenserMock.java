@@ -1,5 +1,8 @@
 package be.seeseemelk.mockbukkit.block.state;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.inventory.DispenserInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -8,10 +11,6 @@ import org.bukkit.block.Dispenser;
 import org.bukkit.loot.LootTable;
 import org.bukkit.projectiles.BlockProjectileSource;
 import org.jetbrains.annotations.NotNull;
-
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.inventory.DispenserInventoryMock;
-import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
@@ -20,7 +19,6 @@ import java.util.UUID;
  * This {@link ContainerMock} represents a {@link Dispenser}.
  *
  * @author TheBusyBiscuit
- *
  */
 public class DispenserMock extends ContainerMock implements Dispenser
 {
@@ -86,8 +84,7 @@ public class DispenserMock extends ContainerMock implements Dispenser
 		if (isPlaced())
 		{
 			return new DispenserProjectileSourceMock(this);
-		}
-		else
+		} else
 		{
 			return null;
 		}
@@ -172,13 +169,6 @@ public class DispenserMock extends ContainerMock implements Dispenser
 
 	@Override
 	public void customName(@Nullable Component customName)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean isSnapshot()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

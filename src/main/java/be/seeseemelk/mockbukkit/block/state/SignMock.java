@@ -148,10 +148,4 @@ public class SignMock extends TileStateMock implements Sign
 		return new SignMock(this);
 	}
 
-	@Override
-	public boolean isSnapshot()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
 }

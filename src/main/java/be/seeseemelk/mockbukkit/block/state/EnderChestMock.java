@@ -57,10 +57,4 @@ public class EnderChestMock extends TileStateMock implements EnderChest
 		return isOpen;
 	}
 
-	@Override
-	public boolean isSnapshot()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
 }

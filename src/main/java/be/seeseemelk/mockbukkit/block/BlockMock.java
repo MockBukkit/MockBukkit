@@ -366,13 +366,6 @@ public class BlockMock implements Block
 		throw new UnimplementedOperationException();
 	}
 
-	@Override
-	public boolean isCollidable()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
-	}
 
 	@Override
 	public boolean isSolid()
@@ -380,6 +373,13 @@ public class BlockMock implements Block
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 
+	}
+
+	@Override
+	public boolean isCollidable()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

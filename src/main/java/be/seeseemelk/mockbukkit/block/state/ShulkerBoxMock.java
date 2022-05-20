@@ -237,10 +237,4 @@ public class ShulkerBoxMock extends ContainerMock implements ShulkerBox
 		throw new UnimplementedOperationException();
 	}
 
-	@Override
-	public boolean isSnapshot()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
 }
