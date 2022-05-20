@@ -74,6 +74,7 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	}
 
 	@Override
+	@Deprecated
 	public String getOwner()
 	{
 		return owner;
@@ -86,10 +87,25 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	}
 
 	@Override
+	@Deprecated
 	public boolean setOwner(String owner)
 	{
 		this.owner = owner;
 		return true;
+	}
+
+	@Override
+	public void setPlayerProfile(com.destroystokyo.paper.profile.@Nullable PlayerProfile profile)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public com.destroystokyo.paper.profile.@Nullable PlayerProfile getPlayerProfile()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -113,6 +129,7 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	}
 
 	@Override
+	@Deprecated
 	public PlayerProfile getOwnerProfile()
 	{
 		// TODO Auto-generated method stub
@@ -120,6 +137,7 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	}
 
 	@Override
+	@Deprecated
 	public void setOwnerProfile(@Nullable PlayerProfile profile)
 	{
 		// TODO Auto-generated method stub
