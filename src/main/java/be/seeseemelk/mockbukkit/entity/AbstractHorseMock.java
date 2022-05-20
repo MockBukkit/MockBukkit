@@ -21,6 +21,8 @@ public abstract class AbstractHorseMock extends AnimalsMock implements AbstractH
 	private double jumpStrength;
 	private boolean tamed;
 	private boolean isEating;
+	private boolean isMouthOpen;
+	private boolean rearing;
 
 	public AbstractHorseMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -143,43 +145,37 @@ public abstract class AbstractHorseMock extends AnimalsMock implements AbstractH
 	@Override
 	public boolean isEatingGrass()
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		return isEating;
 	}
 
 	@Override
 	public void setEatingGrass(boolean eating)
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		this.isEating = eating;
 	}
 
 	@Override
 	public boolean isRearing()
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		return rearing;
 	}
 
 	@Override
 	public void setRearing(boolean rearing)
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		this.rearing = rearing;
 	}
 
 	@Override
 	public boolean isEating()
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		return isMouthOpen;
 	}
 
 	@Override
 	public void setEating(boolean eating)
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		this.isMouthOpen = eating;
 	}
 
 }
