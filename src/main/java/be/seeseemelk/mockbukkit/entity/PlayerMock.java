@@ -3021,14 +3021,6 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public void sendEquipmentChange(@NotNull LivingEntity entity, @NotNull EquipmentSlot slot,
-									@NotNull ItemStack item)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public int getSaturatedRegenRate()
 	{
 		// TODO Auto-generated method stub
@@ -3112,7 +3104,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		Preconditions.checkArgument(slot != null, "slot must not be null");
 		Preconditions.checkArgument(item != null, "item must not be null");
 	}
-	
+
 	@Override
 	public @NotNull Component name()
 	{
