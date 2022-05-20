@@ -1,15 +1,20 @@
 package be.seeseemelk.mockbukkit.potion;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.Color;
 import org.bukkit.NamespacedKey;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.potion.PotionEffectType;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Map;
 
 /**
  * This {@link MockPotionEffectType} mocks an actual {@link PotionEffectType} by taking an id, a name, whether it is
  * instant and a RGB {@link Color} variable.
  *
  * @author TheBusyBiscuit
- *
  */
 public class MockPotionEffectType extends PotionEffectType
 {
@@ -74,4 +79,31 @@ public class MockPotionEffectType extends PotionEffectType
 		return id;
 	}
 
+	@Override
+	public @NotNull Map<Attribute, AttributeModifier> getEffectAttributes()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public double getAttributeModifierAmount(@NotNull Attribute attribute, int effectAmplifier)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Category getEffectCategory()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull String translationKey()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
 }
