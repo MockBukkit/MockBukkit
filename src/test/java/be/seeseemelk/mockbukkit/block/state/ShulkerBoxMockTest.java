@@ -114,4 +114,30 @@ class ShulkerBoxMockTest
 		assertTrue(block.getState() instanceof ShulkerBox);
 		assertEquals(color, ((ShulkerBox) block.getState()).getColor());
 	}
+
+	@Test
+	void testOpen()
+	{
+		shulkerBox.open();
+		assertTrue(shulkerBox.isOpen());
+	}
+
+	@Test
+	void testClose()
+	{
+		assertFalse(shulkerBox.isOpen());
+		shulkerBox.open();
+		shulkerBox.close();
+		assertFalse(shulkerBox.isOpen());
+	}
+
+	@Test
+	void testIsOpen()
+	{
+		assertFalse(shulkerBox.isOpen());
+		shulkerBox.open();
+		assertTrue(shulkerBox.isOpen());
+	}
+
+
 }
