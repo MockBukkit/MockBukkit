@@ -14,6 +14,11 @@ import org.bukkit.Warning;
 import org.bukkit.WorldCreator;
 import org.bukkit.WorldType;
 import org.bukkit.block.data.BlockData;
+import be.seeseemelk.mockbukkit.entity.*;
+import be.seeseemelk.mockbukkit.inventory.InventoryMock;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
+import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
@@ -594,6 +599,36 @@ class ServerMockTest
 		assertEquals(Warning.WarningState.DEFAULT, server.getWarningState());
 		server.setWarningState(Warning.WarningState.ON);
 		assertEquals(Warning.WarningState.ON, server.getWarningState());
+	}
+
+	@Test
+	void testGetPlayerUniqueID()
+	{
+		PlayerMock player = new PlayerMock(server, "player");
+		server.addPlayer(player);
+		UUID uuid = player.getUniqueId();
+		assertEquals(uuid, server.getPlayerUniqueId(player.getName()));
+	}
+
+	@Test
+	void testSetMaxPlayers()
+	{
+		server.setMaxPlayers(69420);
+		assertEquals(69420, server.getMaxPlayers());
+	}
+
+	@Test
+	void testBroadCastMessageWithComponent()
+	{
+		PlayerMock playerA = server.addPlayer();
+		PlayerMock playerB = server.addPlayer();
+
+		Component component = Component.text("Hello");
+
+		server.broadcast(component);
+
+		playerA.assertSaid(PlainTextComponentSerializer.plainText().serialize(component));
+		playerB.assertSaid(PlainTextComponentSerializer.plainText().serialize(component));
 	}
 
 }

@@ -21,3 +21,6 @@
 
 # Read the Docs
 !.readthedocs.yml
+
+# Ignore Error Files
+hs_err_*
