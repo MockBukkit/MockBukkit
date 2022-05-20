@@ -10,6 +10,8 @@ import java.util.UUID;
 public abstract class AbstractSkeletonMock extends MonsterMock implements AbstractSkeleton
 {
 
+	private boolean shouldBurnInDay;
+
 	public AbstractSkeletonMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
@@ -19,6 +21,18 @@ public abstract class AbstractSkeletonMock extends MonsterMock implements Abstra
 	public void setSkeletonType(Skeleton.SkeletonType type)
 	{
 		throw new UnsupportedOperationException("Not supported.");
+	}
+
+	@Override
+	public boolean shouldBurnInDay()
+	{
+		return shouldBurnInDay;
+	}
+
+	@Override
+	public void setShouldBurnInDay(boolean shouldBurnInDay)
+	{
+		this.shouldBurnInDay = shouldBurnInDay;
 	}
 
 }
