@@ -1,6 +1,5 @@
 package be.seeseemelk.mockbukkit.block.state;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;

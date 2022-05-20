@@ -15,7 +15,6 @@ import java.util.Map;
  * instant and a RGB {@link Color} variable.
  *
  * @author TheBusyBiscuit
- *
  */
 public class MockPotionEffectType extends PotionEffectType
 {

@@ -1,6 +1,5 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import java.util.Set;
 import java.util.UUID;
 
 import com.destroystokyo.paper.block.TargetBlockInfo;
