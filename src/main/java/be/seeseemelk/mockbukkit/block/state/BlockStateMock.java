@@ -208,6 +208,13 @@ public class BlockStateMock implements BlockState, Cloneable
 	}
 
 	@Override
+	public boolean isCollidable()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public BlockData getBlockData()
 	{
 		// TODO Auto-generated method stub

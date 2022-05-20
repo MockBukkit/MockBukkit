@@ -1,17 +1,25 @@
 package be.seeseemelk.mockbukkit.scoreboard;
 
+import java.util.Collection;
 import java.util.EnumMap;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Level;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Entity;
 import org.bukkit.scoreboard.NameTagVisibility;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 
 public class TeamMock implements Team
@@ -20,7 +28,7 @@ public class TeamMock implements Team
 	private final String name;
 	private String displayName;
 	private String prefix;
-	private String suffic;
+	private String suffix;
 	private ChatColor color;
 	private boolean allowFriendlyFire = false;
 	private final HashSet<String> entries;
@@ -44,6 +52,69 @@ public class TeamMock implements Team
 		if (!registered)throw new IllegalStateException("Team not registered");
 
 		return name;
+	}
+
+	@Override
+	public @NotNull Component displayName() throws IllegalStateException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void displayName(@Nullable Component displayName) throws IllegalStateException, IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Component prefix() throws IllegalStateException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void prefix(@Nullable Component prefix) throws IllegalStateException, IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Component suffix() throws IllegalStateException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void suffix(@Nullable Component suffix) throws IllegalStateException, IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean hasColor()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull TextColor color() throws IllegalStateException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void color(@Nullable NamedTextColor color)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -83,7 +154,7 @@ public class TeamMock implements Team
 	{
 		if (!registered)throw new IllegalStateException("Team not registered");
 
-		return suffic;
+		return suffix;
 	}
 
 	@Override
@@ -91,7 +162,7 @@ public class TeamMock implements Team
 	{
 		if (!registered)throw new IllegalStateException("Team not registered");
 
-		this.suffic = s;
+		this.suffix = s;
 	}
 
 	@Override
@@ -246,6 +317,20 @@ public class TeamMock implements Team
 		entries.add(s);
 	}
 
+	@Override
+	public void addEntities(@NotNull Collection<Entity> entities) throws IllegalStateException, IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void addEntries(@NotNull Collection<String> entries) throws IllegalStateException, IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 	/** @deprecated */
 	@Override
 	@Deprecated
@@ -262,6 +347,20 @@ public class TeamMock implements Team
 		if (!registered)throw new IllegalStateException("Team not registered");
 		return entries.remove(s);
 
+	}
+
+	@Override
+	public boolean removeEntities(@NotNull Collection<Entity> entities) throws IllegalStateException, IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean removeEntries(@NotNull Collection<String> entries) throws IllegalStateException, IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -302,5 +401,26 @@ public class TeamMock implements Team
 		if (!registered)throw new IllegalStateException("Team not registered");
 
 		options.put(option, optionStatus);
+	}
+
+	@Override
+	public void addEntity(@NotNull Entity entity) throws IllegalStateException, IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean removeEntity(@NotNull Entity entity) throws IllegalStateException, IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean hasEntity(@NotNull Entity entity) throws IllegalStateException, IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 }
