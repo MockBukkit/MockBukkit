@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.block.state;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
@@ -43,6 +44,13 @@ public abstract class TileStateMock extends BlockStateMock implements TileState
 	public PersistentDataContainer getPersistentDataContainer()
 	{
 		return container;
+	}
+
+	@Override
+	public boolean isSnapshot()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
