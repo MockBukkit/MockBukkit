@@ -1,81 +1,5 @@
 package be.seeseemelk.mockbukkit;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-import java.util.function.Consumer;
-import java.util.logging.Level;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
-import java.util.stream.Collectors;
-
-import org.apache.commons.lang.Validate;
-import org.bukkit.BanEntry;
-import org.bukkit.BanList;
-import org.bukkit.BanList.Type;
-import org.bukkit.Bukkit;
-import org.bukkit.Color;
-import org.bukkit.GameMode;
-import org.bukkit.Keyed;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.Server;
-import org.bukkit.StructureType;
-import org.bukkit.Tag;
-import org.bukkit.Warning.WarningState;
-import org.bukkit.World;
-import org.bukkit.WorldCreator;
-import org.bukkit.advancement.Advancement;
-import org.bukkit.block.data.BlockData;
-import org.bukkit.boss.BarColor;
-import org.bukkit.boss.BarFlag;
-import org.bukkit.boss.BarStyle;
-import org.bukkit.boss.BossBar;
-import org.bukkit.boss.KeyedBossBar;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
-import org.bukkit.command.PluginCommand;
-import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.configuration.serialization.ConfigurationSerialization;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.HumanEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.SpawnCategory;
-import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.generator.ChunkGenerator.ChunkData;
-import org.bukkit.inventory.InventoryHolder;
-import org.bukkit.inventory.ItemFactory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.Merchant;
-import org.bukkit.inventory.Recipe;
-import org.bukkit.loot.LootTable;
-import org.bukkit.map.MapView;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.messaging.Messenger;
-import org.bukkit.potion.PotionEffectType;
-import org.bukkit.profile.PlayerProfile;
-import org.bukkit.structure.StructureManager;
-import org.bukkit.util.CachedServerIcon;
-import org.jetbrains.annotations.NotNull;
-
 import be.seeseemelk.mockbukkit.boss.BossBarMock;
 import be.seeseemelk.mockbukkit.boss.KeyedBossBarMock;
 import be.seeseemelk.mockbukkit.command.CommandResult;
@@ -107,8 +31,90 @@ import be.seeseemelk.mockbukkit.services.ServicesManagerMock;
 import be.seeseemelk.mockbukkit.tags.TagRegistry;
 import be.seeseemelk.mockbukkit.tags.TagWrapperMock;
 import be.seeseemelk.mockbukkit.tags.TagsMock;
+import com.destroystokyo.paper.entity.ai.MobGoals;
+import io.papermc.paper.datapack.DatapackManager;
+import net.kyori.adventure.audience.Audience;
+import net.kyori.adventure.text.Component;
 import net.md_5.bungee.api.chat.BaseComponent;
+import org.apache.commons.lang.Validate;
+import org.bukkit.BanEntry;
+import org.bukkit.BanList;
+import org.bukkit.BanList.Type;
+import org.bukkit.Bukkit;
+import org.bukkit.Color;
+import org.bukkit.GameMode;
+import org.bukkit.Keyed;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.Server;
+import org.bukkit.StructureType;
+import org.bukkit.Tag;
+import org.bukkit.Warning.WarningState;
+import org.bukkit.World;
+import org.bukkit.WorldBorder;
+import org.bukkit.WorldCreator;
+import org.bukkit.advancement.Advancement;
+import org.bukkit.block.data.BlockData;
+import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarFlag;
+import org.bukkit.boss.BarStyle;
+import org.bukkit.boss.BossBar;
+import org.bukkit.boss.KeyedBossBar;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.command.PluginCommand;
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.configuration.serialization.ConfigurationSerialization;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.HumanEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.SpawnCategory;
+import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.generator.ChunkGenerator.ChunkData;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryHolder;
+import org.bukkit.inventory.ItemFactory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.Merchant;
+import org.bukkit.inventory.Recipe;
+import org.bukkit.loot.LootTable;
+import org.bukkit.map.MapView;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.messaging.Messenger;
+import org.bukkit.potion.PotionBrewer;
+import org.bukkit.potion.PotionEffectType;
+import org.bukkit.profile.PlayerProfile;
+import org.bukkit.structure.StructureManager;
+import org.bukkit.util.CachedServerIcon;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
+import java.util.function.Consumer;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 public class ServerMock extends Server.Spigot implements Server
 {
@@ -215,7 +221,7 @@ public class ServerMock extends Server.Spigot implements Server
 		assertMainThread();
 		playerList.addPlayer(player);
 		PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(player,
-		        String.format(JOIN_MESSAGE, player.getDisplayName()));
+				String.format(JOIN_MESSAGE, player.getDisplayName()));
 		Bukkit.getPluginManager().callEvent(playerJoinEvent);
 
 		player.setLastPlayed(getCurrentServerTime());
@@ -297,6 +303,12 @@ public class ServerMock extends Server.Spigot implements Server
 	public PlayerMock getPlayer(int num)
 	{
 		return playerList.getPlayer(num);
+	}
+
+	@Override
+	public @Nullable UUID getPlayerUniqueId(@NotNull String playerName)
+	{
+		return playerList.getPlayer(playerName).getUniqueId();
 	}
 
 	/**
@@ -435,6 +447,12 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	public @NotNull String getMinecraftVersion()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public Collection<? extends PlayerMock> getOnlinePlayers()
 	{
 		return playerList.getOnlinePlayers();
@@ -444,6 +462,13 @@ public class ServerMock extends Server.Spigot implements Server
 	public OfflinePlayer[] getOfflinePlayers()
 	{
 		return playerList.getOfflinePlayers();
+	}
+
+	@Override
+	public @Nullable OfflinePlayer getOfflinePlayerIfCached(@NotNull String name)
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -506,7 +531,15 @@ public class ServerMock extends Server.Spigot implements Server
 		return consoleSender;
 	}
 
+	@Override
+	public @NotNull CommandSender createCommandSender(@NotNull Consumer<? super Component> feedback)
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 	@NotNull
+	@Deprecated
 	public InventoryMock createInventory(InventoryHolder owner, InventoryType type, String title, int size)
 	{
 		assertMainThread();
@@ -587,6 +620,14 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	public @NotNull Inventory createInventory(@Nullable InventoryHolder owner, @NotNull InventoryType type, @NotNull Component title)
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@Deprecated
 	public InventoryMock createInventory(InventoryHolder owner, InventoryType type, String title)
 	{
 		return createInventory(owner, type, title, -1);
@@ -599,9 +640,24 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	public @NotNull Inventory createInventory(@Nullable InventoryHolder owner, int size, @NotNull Component title) throws IllegalArgumentException
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@Deprecated
 	public InventoryMock createInventory(InventoryHolder owner, int size, String title)
 	{
 		return createInventory(owner, InventoryType.CHEST, title, size);
+	}
+
+	@Override
+	public Merchant createMerchant(@Nullable Component title)
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -629,6 +685,21 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	public @Nullable World getWorld(@NotNull NamespacedKey worldKey)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@NotNull
+	@Override
+	public WorldBorder createWorldBorder()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public BukkitSchedulerMock getScheduler()
 	{
 		return scheduler;
@@ -641,10 +712,16 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	public void setMaxPlayers(int maxPlayers)
+	{
+		playerList.setMaxPlayers(maxPlayers);
+	}
+
+	@Override
 	public Set<String> getIPBans()
 	{
 		return this.playerList.getIPBans().getBanEntries().stream().map(BanEntry::getTarget)
-		       .collect(Collectors.toSet());
+				.collect(Collectors.toSet());
 	}
 
 	@Override
@@ -694,6 +771,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	@Deprecated
 	public int broadcastMessage(String message)
 	{
 		Collection<? extends PlayerMock> players = getOnlinePlayers();
@@ -707,6 +785,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	@Deprecated
 	public int broadcast(String message, String permission)
 	{
 		Collection<? extends PlayerMock> players = getOnlinePlayers();
@@ -720,7 +799,36 @@ public class ServerMock extends Server.Spigot implements Server
 				count++;
 			}
 		}
+		return count;
+	}
 
+	@Override
+	public int broadcast(@NotNull Component message)
+	{
+		Collection<? extends PlayerMock> players = getOnlinePlayers();
+
+		for (Player player : players)
+		{
+			player.sendMessage(message);
+		}
+
+		return players.size();
+	}
+
+	@Override
+	public int broadcast(@NotNull Component message, @NotNull String permission)
+	{
+		Collection<? extends PlayerMock> players = getOnlinePlayers();
+		int count = 0;
+
+		for (Player player : players)
+		{
+			if (player.hasPermission(permission))
+			{
+				player.sendMessage(message);
+				count++;
+			}
+		}
 		return count;
 	}
 
@@ -1005,6 +1113,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	@Deprecated
 	public int getTicksPerAnimalSpawns()
 	{
 		// TODO Auto-generated method stub
@@ -1012,6 +1121,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	@Deprecated
 	public int getTicksPerMonsterSpawns()
 	{
 		// TODO Auto-generated method stub
@@ -1129,6 +1239,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	@Deprecated
 	public OfflinePlayer getOfflinePlayer(String name)
 	{
 		return playerList.getOfflinePlayer(name);
@@ -1171,6 +1282,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	@Deprecated
 	public Merchant createMerchant(String title)
 	{
 		// TODO Auto-generated method stub
@@ -1178,6 +1290,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	@Deprecated
 	public int getMonsterSpawnLimit()
 	{
 		// TODO Auto-generated method stub
@@ -1185,6 +1298,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	@Deprecated
 	public int getAnimalSpawnLimit()
 	{
 		// TODO Auto-generated method stub
@@ -1192,6 +1306,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	@Deprecated
 	public int getWaterAnimalSpawnLimit()
 	{
 		// TODO Auto-generated method stub
@@ -1199,6 +1314,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	@Deprecated
 	public int getAmbientSpawnLimit()
 	{
 		// TODO Auto-generated method stub
@@ -1212,12 +1328,28 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	public @NotNull Component motd()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@Deprecated
 	public String getMotd()
 	{
 		return MOTD;
 	}
 
 	@Override
+	public @Nullable Component shutdownMessage()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@Deprecated
 	public String getShutdownMessage()
 	{
 		// TODO Auto-generated method stub
@@ -1289,6 +1421,15 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+
+	@Deprecated(forRemoval = true)
+	public @NotNull ChunkData createVanillaChunkData(@NotNull World world, int x, int z)
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public BossBar createBossBar(String title, BarColor color, BarStyle style, BarFlag... flags)
 	{
 		return new BossBarMock(title, color, style, flags);
@@ -1307,6 +1448,27 @@ public class ServerMock extends Server.Spigot implements Server
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public @NotNull double[] getTPS()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull long[] getTickTimes()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public double getAverageTickTime()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -1363,10 +1525,9 @@ public class ServerMock extends Server.Spigot implements Server
 	 * Call this in advance before you are gonna access {@link #getTag(String, NamespacedKey, Class)} or any of the
 	 * constants defined in {@link Tag}.
 	 *
-	 * @param key       The {@link NamespacedKey} for this {@link Tag}
+	 * @param key         The {@link NamespacedKey} for this {@link Tag}
 	 * @param registryKey The name of the {@link TagRegistry}.
-	 * @param materials {@link Material Materials} which should be covered by this {@link Tag}
-	 *
+	 * @param materials   {@link Material Materials} which should be covered by this {@link Tag}
 	 * @return The newly created {@link Tag}
 	 */
 	@NotNull
@@ -1483,7 +1644,7 @@ public class ServerMock extends Server.Spigot implements Server
 
 	@Override
 	public ItemStack createExplorerMap(World world, Location location, StructureType structureType, int radius,
-	                                   boolean findUnexplored)
+									   boolean findUnexplored)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1535,6 +1696,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	@Deprecated
 	public MapView getMap(int id)
 	{
 		// TODO Auto-generated method stub
@@ -1549,6 +1711,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	@Deprecated
 	public int getTicksPerWaterSpawns()
 	{
 		// TODO Auto-generated method stub
@@ -1556,6 +1719,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	@Deprecated
 	public int getTicksPerAmbientSpawns()
 	{
 		// TODO Auto-generated method stub
@@ -1580,6 +1744,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	@Deprecated
 	public int getTicksPerWaterUndergroundCreatureSpawns()
 	{
 		// TODO Auto-generated method stub
@@ -1588,6 +1753,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	@Deprecated
 	public int getWaterAmbientSpawnLimit()
 	{
 		// TODO Auto-generated method stub
@@ -1595,6 +1761,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	@Deprecated
 	public int getWaterUndergroundCreatureSpawnLimit()
 	{
 		// TODO Auto-generated method stub
@@ -1629,6 +1796,91 @@ public class ServerMock extends Server.Spigot implements Server
 		return this;
 	}
 
+
+	@Override
+	public void reloadPermissions()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean reloadCommandAliases()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean suggestPlayerNamesWhenNullTabCompletions()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull String getPermissionMessage()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public com.destroystokyo.paper.profile.@NotNull PlayerProfile createProfile(@NotNull UUID uuid)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public com.destroystokyo.paper.profile.@NotNull PlayerProfile createProfile(@NotNull String name)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public com.destroystokyo.paper.profile.@NotNull PlayerProfile createProfile(@Nullable UUID uuid, @Nullable String name)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public com.destroystokyo.paper.profile.@NotNull PlayerProfile createProfileExact(@Nullable UUID uuid, @Nullable String name)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getCurrentTick()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isStopping()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull MobGoals getMobGoals()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull DatapackManager getDatapackManager()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 	@NotNull
 	@Override
 	public YamlConfiguration getConfig()
@@ -1638,6 +1890,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	@Deprecated
 	public void broadcast(@NotNull BaseComponent component)
 	{
 		for (Player player : getOnlinePlayers())
@@ -1647,6 +1900,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	@Deprecated
 	public void broadcast(@NotNull BaseComponent... components)
 	{
 		for (Player player : getOnlinePlayers())
@@ -1669,6 +1923,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	@Deprecated
 	public PlayerProfile createPlayerProfile(@Nullable UUID uniqueId, @Nullable String name)
 	{
 		// TODO Auto-generated method stub
@@ -1676,6 +1931,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	@Deprecated
 	public PlayerProfile createPlayerProfile(@NotNull UUID uniqueId)
 	{
 		// TODO Auto-generated method stub
@@ -1683,6 +1939,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	@Deprecated
 	public PlayerProfile createPlayerProfile(@NotNull String name)
 	{
 		// TODO Auto-generated method stub
@@ -1691,6 +1948,33 @@ public class ServerMock extends Server.Spigot implements Server
 
 	@Override
 	public int getSpawnLimit(@NotNull SpawnCategory spawnCategory)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull PotionBrewer getPotionBrewer()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull File getPluginsFolder()
+	{
+		try
+		{
+			return getPluginManager().getParentTemporaryDirectory();
+		}
+		catch (IOException e)
+		{
+			throw new RuntimeException(e);
+		}
+	}
+
+	@Override
+	public @NotNull Iterable<? extends Audience> audiences()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

@@ -126,6 +126,7 @@ public class OfflinePlayerMock implements OfflinePlayer
 	}
 
 	@Override
+	@Deprecated
 	public long getLastPlayed()
 	{
 		// TODO Auto-generated method stub
@@ -141,6 +142,20 @@ public class OfflinePlayerMock implements OfflinePlayer
 
 	@Override
 	public @Nullable Location getBedSpawnLocation()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public long getLastLogin()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public long getLastSeen()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
