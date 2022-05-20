@@ -8,6 +8,7 @@ import org.bukkit.entity.AnimalTamer;
 import org.bukkit.entity.Horse;
 import org.bukkit.inventory.AbstractHorseInventory;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
@@ -85,13 +86,19 @@ public abstract class AbstractHorseMock extends AnimalsMock implements AbstractH
 	}
 
 	@Override
+	public @Nullable UUID getOwnerUniqueId()
+	{
+		return this.owner;
+	}
+
+	@Override
 	public AnimalTamer getOwner()
 	{
-		if (this.getOwnerUUID() == null)
+		if (this.getOwnerUniqueId() == null)
 		{
 			return null;
 		}
-		return getServer().getOfflinePlayer(this.getOwnerUUID());
+		return getServer().getOfflinePlayer(this.getOwnerUniqueId());
 	}
 
 	@Override
@@ -107,11 +114,6 @@ public abstract class AbstractHorseMock extends AnimalsMock implements AbstractH
 			this.setTamed(false);
 			this.setOwnerUUID(null);
 		}
-	}
-
-	public UUID getOwnerUUID()
-	{
-		return this.owner;
 	}
 
 	public void setOwnerUUID(UUID uuid)
@@ -136,6 +138,48 @@ public abstract class AbstractHorseMock extends AnimalsMock implements AbstractH
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isEatingGrass()
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void setEatingGrass(boolean eating)
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean isRearing()
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void setRearing(boolean rearing)
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean isEating()
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void setEating(boolean eating)
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
 	}
 
 }
