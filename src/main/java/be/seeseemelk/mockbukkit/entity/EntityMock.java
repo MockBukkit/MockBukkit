@@ -295,7 +295,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public void sendMessage(String[] messages)
+	public void sendMessage(String... messages)
 	{
 		sendMessage(null, messages);
 	}
