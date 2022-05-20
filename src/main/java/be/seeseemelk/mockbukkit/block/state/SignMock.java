@@ -1,5 +1,8 @@
 package be.seeseemelk.mockbukkit.block.state;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.apache.commons.lang.Validate;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
@@ -8,18 +11,18 @@ import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
 import org.jetbrains.annotations.NotNull;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This {@link ContainerMock} represents a {@link Sign}.
  *
  * @author TheBusyBiscuit
- *
  */
 public class SignMock extends TileStateMock implements Sign
 {
 
-	private final String[] lines = { "", "", "", "" };
+	private final String[] lines = {"", "", "", ""};
 
 	public SignMock(@NotNull Material material)
 	{
@@ -42,7 +45,34 @@ public class SignMock extends TileStateMock implements Sign
 	}
 
 	@Override
+	public @NotNull List<Component> lines()
+	{
+		List<Component> components = new ArrayList<>();
+
+		for (String line : lines)
+		{
+			components.add(LegacyComponentSerializer.legacySection().deserialize(line));
+		}
+
+		return components;
+	}
+
+	@Override
+	public @NotNull Component line(int index) throws IndexOutOfBoundsException
+	{
+		return LegacyComponentSerializer.legacySection().deserialize(getLine(index));
+	}
+
+	@Override
+	public void line(int index, @NotNull Component line) throws IndexOutOfBoundsException
+	{
+		Validate.notNull(line, "Line cannot be null!");
+		lines[index] = LegacyComponentSerializer.legacySection().serialize(line);
+	}
+
+	@Override
 	@NotNull
+	@Deprecated
 	public String[] getLines()
 	{
 		String[] text = new String[4];
@@ -56,12 +86,14 @@ public class SignMock extends TileStateMock implements Sign
 	}
 
 	@Override
+	@Deprecated
 	public String getLine(int index) throws IndexOutOfBoundsException
 	{
 		return lines[index];
 	}
 
 	@Override
+	@Deprecated
 	public void setLine(int index, @NotNull String line) throws IndexOutOfBoundsException
 	{
 		Validate.notNull(line, "Line cannot be null!");
