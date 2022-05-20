@@ -1,12 +1,10 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import java.util.Set;
 import java.util.UUID;
 
 import net.kyori.adventure.text.Component;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
 import org.bukkit.entity.Pose;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.util.BoundingBox;
@@ -87,13 +85,6 @@ public class SimpleEntityMock extends EntityMock
 
 	@Override
 	public SpawnCategory getSpawnCategory()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull Set<Player> getTrackedPlayers()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

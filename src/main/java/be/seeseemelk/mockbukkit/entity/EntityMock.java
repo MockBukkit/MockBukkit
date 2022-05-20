@@ -11,6 +11,7 @@ import org.bukkit.*;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import org.bukkit.entity.Pose;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.event.entity.CreatureSpawnEvent;
@@ -157,6 +158,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	public Location getLocation()
 	{
 		return location.clone();
+	}
+
+	@Override
+	public @NotNull Set<Player> getTrackedPlayers()
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

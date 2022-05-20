@@ -1,11 +1,13 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import java.util.Set;
 import java.util.UUID;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import net.kyori.adventure.text.Component;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.ExperienceOrb;
+import org.bukkit.entity.SpawnCategory;
 import org.jetbrains.annotations.NotNull;
 
 import be.seeseemelk.mockbukkit.ServerMock;
@@ -79,12 +81,6 @@ public class ExperienceOrbMock extends EntityMock implements ExperienceOrb
 		return SpawnCategory.MISC;
 	}
 
-	@Override
-	public @NotNull Set<Player> getTrackedPlayers()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
 
 	@Override
 	public @NotNull Component name()

@@ -2866,13 +2866,6 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public @NotNull Set<Player> getTrackedPlayers()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public @Nullable String getClientBrandName()
 	{
 		// TODO Auto-generated method stub

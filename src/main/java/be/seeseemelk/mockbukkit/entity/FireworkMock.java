@@ -141,13 +141,6 @@ public class FireworkMock extends ProjectileMock implements Firework
 	}
 
 	@Override
-	public @NotNull Set<Player> getTrackedPlayers()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public @NotNull Component name()
 	{
 		// TODO Auto-generated method stub

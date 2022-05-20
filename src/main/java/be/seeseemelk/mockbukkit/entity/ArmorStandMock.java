@@ -615,12 +615,6 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 		return SpawnCategory.MISC;
 	}
 
-	@Override
-	public @NotNull Set<Player> getTrackedPlayers()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
 
 	@Override
 	public @NotNull Component name()

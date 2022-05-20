@@ -11,7 +11,12 @@ import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Item;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Villager;
+import org.bukkit.entity.Zombie;
 import org.bukkit.inventory.EntityEquipment;
 
 import be.seeseemelk.mockbukkit.ServerMock;
@@ -44,12 +49,6 @@ public class ZombieMock extends MonsterMock implements Zombie
 		return EntityType.ZOMBIE;
 	}
 
-	@Override
-	public @NotNull Set<Player> getTrackedPlayers()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
 
 	@Override
 	public @Nullable Block getTargetBlock(int maxDistance, TargetBlockInfo.@NotNull FluidMode fluidMode)

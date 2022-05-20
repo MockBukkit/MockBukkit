@@ -42,13 +42,6 @@ public class SimpleMonsterMock extends MonsterMock implements Monster
 	}
 
 	@Override
-	public @NotNull Set<Player> getTrackedPlayers()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public @Nullable Block getTargetBlock(int maxDistance, TargetBlockInfo.@NotNull FluidMode fluidMode)
 	{
 		// TODO Auto-generated method stub
