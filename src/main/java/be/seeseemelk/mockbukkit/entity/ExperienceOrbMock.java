@@ -5,10 +5,10 @@ import java.util.UUID;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ExperienceOrb;
-import org.bukkit.entity.SpawnCategory;
 import org.jetbrains.annotations.NotNull;
 
 import be.seeseemelk.mockbukkit.ServerMock;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * This is a simple mock of the {@link ExperienceOrb} {@link Entity}.
@@ -49,6 +49,27 @@ public class ExperienceOrbMock extends EntityMock implements ExperienceOrb
 	public void setExperience(int value)
 	{
 		this.experience = value;
+	}
+
+	@Override
+	public @Nullable UUID getTriggerEntityId()
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public @Nullable UUID getSourceEntityId()
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public @NotNull SpawnReason getSpawnReason()
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
 	}
 
 }

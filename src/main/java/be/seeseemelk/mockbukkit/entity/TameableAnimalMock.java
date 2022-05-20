@@ -5,6 +5,7 @@ import org.bukkit.entity.AnimalTamer;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.Tameable;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
@@ -20,11 +21,6 @@ public class TameableAnimalMock extends AnimalsMock implements Tameable, Creatur
 		super(server, uuid);
 	}
 
-	public UUID getOwnerUUID()
-	{
-		return this.owner;
-	}
-
 	public void setOwnerUUID(UUID uuid)
 	{
 		this.owner = uuid;
@@ -33,15 +29,15 @@ public class TameableAnimalMock extends AnimalsMock implements Tameable, Creatur
 	@Override
 	public AnimalTamer getOwner()
 	{
-		if (this.getOwnerUUID() == null)
+		if (this.getOwnerUniqueId() == null)
 		{
 			return null;
 		}
 
-		AnimalTamer owner = getServer().getPlayer(this.getOwnerUUID());
+		AnimalTamer owner = getServer().getPlayer(this.getOwnerUniqueId());
 		if (owner == null)
 		{
-			owner = getServer().getOfflinePlayer(this.getOwnerUUID());
+			owner = getServer().getOfflinePlayer(this.getOwnerUniqueId());
 		}
 
 		return owner;
@@ -76,6 +72,12 @@ public class TameableAnimalMock extends AnimalsMock implements Tameable, Creatur
 		{
 			this.setOwnerUUID(null);
 		}
+	}
+
+	@Override
+	public @Nullable UUID getOwnerUniqueId()
+	{
+		return this.owner;
 	}
 
 	// Sitting methods implemented here for animals that implement Sittable.

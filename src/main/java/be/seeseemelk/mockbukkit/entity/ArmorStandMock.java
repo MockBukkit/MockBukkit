@@ -8,7 +8,9 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.EulerAngle;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -264,6 +266,83 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	{
 		// TODO Equipment Locks use byte operations internally, they might be hard to implement
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean canMove()
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void setCanMove(boolean move)
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean canTick()
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void setCanTick(boolean tick)
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public @NotNull ItemStack getItem(@NotNull EquipmentSlot slot)
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void setItem(@NotNull EquipmentSlot slot, @Nullable ItemStack item)
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public @NotNull Set<EquipmentSlot> getDisabledSlots()
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void setDisabledSlots(@NotNull EquipmentSlot... slots)
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void addDisabledSlots(@NotNull EquipmentSlot... slots)
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void removeDisabledSlots(@NotNull EquipmentSlot... slots)
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean isSlotDisabled(@NotNull EquipmentSlot slot)
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
 	}
 
 }
