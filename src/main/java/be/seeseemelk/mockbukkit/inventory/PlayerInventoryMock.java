@@ -359,6 +359,18 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 		mainHandSlot = slot;
 	}
 
+	@Override
+	public float getDropChance(@NotNull EquipmentSlot slot)
+	{
+		return 1;
+	}
+
+	@Override
+	public void setDropChance(@NotNull EquipmentSlot slot, float chance)
+	{
+		throw new UnsupportedOperationException("Cannot set drop chance for PlayerInventory");
+	}
+
 	private @NotNull ItemStack notNull(@Nullable ItemStack itemStack)
 	{
 		return itemStack == null ? new ItemStack(Material.AIR) : itemStack;

@@ -326,13 +326,6 @@ public class EntityEquipmentMock implements EntityEquipment
 		setDropChance(EquipmentSlot.FEET, chance);
 	}
 
-	private void setDropChance(EquipmentSlot slot, float chance)
-	{
-		Preconditions.checkArgument(holder instanceof Mob, "Cannot set drop chance for non-Mob entity");
-
-		this.dropChances.put(slot, chance);
-	}
-
 	@Override
 	public Entity getHolder()
 	{
@@ -340,17 +333,17 @@ public class EntityEquipmentMock implements EntityEquipment
 	}
 
 	@Override
-	public float getDropChance(@NotNull EquipmentSlot slot)
+	public void setDropChance(@NotNull EquipmentSlot slot, float chance)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(holder instanceof Mob, "Cannot set drop chance for non-Mob entity");
+
+		this.dropChances.put(slot, chance);
 	}
 
 	@Override
-	public void setDropChance(@NotNull EquipmentSlot slot, float chance)
+	public float getDropChance(@NotNull EquipmentSlot slot)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.dropChances.get(slot);
 	}
 
 }
