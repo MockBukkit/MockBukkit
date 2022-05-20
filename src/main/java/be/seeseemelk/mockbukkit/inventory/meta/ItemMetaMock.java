@@ -1,18 +1,12 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
-import static java.util.Objects.nonNull;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
+import com.destroystokyo.paper.Namespaced;
+import com.google.common.collect.Multimap;
+import net.kyori.adventure.text.Component;
+import net.md_5.bungee.api.chat.BaseComponent;
+import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.enchantments.Enchantment;
@@ -25,10 +19,19 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import com.google.common.collect.Multimap;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import static java.util.Objects.nonNull;
 
 public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 {
@@ -107,15 +110,42 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
+	public @Nullable Component displayName()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void displayName(@Nullable Component displayName)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public String getDisplayName()
 	{
 		return displayName;
 	}
 
 	@Override
+	public @NotNull BaseComponent[] getDisplayNameComponent()
+	{
+		return new BaseComponent[0];
+	}
+
+	@Override
 	public void setDisplayName(String name)
 	{
 		displayName = name;
+	}
+
+	@Override
+	public void setDisplayNameComponent(@Nullable BaseComponent[] component)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	/**
@@ -234,7 +264,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 			return false;
 		}
 		if (hasCustomModelData() != meta.hasCustomModelData()
-		        || hasCustomModelData() && getCustomModelData() != meta.getCustomModelData())
+				|| hasCustomModelData() && getCustomModelData() != meta.getCustomModelData())
 		{
 			return false;
 		}
@@ -270,15 +300,107 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
+	public Set<Material> getCanDestroy()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setCanDestroy(Set<Material> canDestroy)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public Set<Material> getCanPlaceOn()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setCanPlaceOn(Set<Material> canPlaceOn)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Set<Namespaced> getDestroyableKeys()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setDestroyableKeys(@NotNull Collection<Namespaced> canDestroy)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Set<Namespaced> getPlaceableKeys()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@NotNull
+	@Override
+	public void setPlaceableKeys(@NotNull Collection<Namespaced> canPlaceOn)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean hasPlaceableKeys()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean hasDestroyableKeys()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public boolean hasLore()
 	{
 		return lore != null && !lore.isEmpty();
 	}
 
 	@Override
+	public @Nullable List<Component> lore()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void lore(@Nullable List<Component> lore)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @Nullable List<String> getLore()
 	{
 		return lore == null ? null : new ArrayList<>(lore);
+	}
+
+	@Override
+	public @Nullable List<BaseComponent[]> getLoreComponents()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -292,6 +414,13 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		{
 			this.lore = null;
 		}
+	}
+
+	@Override
+	public void setLoreComponents(@Nullable List<BaseComponent[]> lore)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	/**
@@ -308,14 +437,14 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 				if (!lore.get(i).equals(lines.get(i)))
 				{
 					throw new AssertionError(
-					    String.format("Line %d should be '%s' but was '%s'", i, lines.get(i), lore.get(i)));
+							String.format("Line %d should be '%s' but was '%s'", i, lines.get(i), lore.get(i)));
 				}
 			}
 		}
 		else if (lore != null)
 		{
 			throw new AssertionError(
-			    String.format("Lore contained %d lines but should contain %d lines", lore.size(), lines.size()));
+					String.format("Lore contained %d lines but should contain %d lines", lore.size(), lines.size()));
 		}
 		else
 		{
@@ -349,6 +478,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	/**
 	 * Serializes the properties of an ItemMetaMock to a HashMap.
 	 * Unimplemented properties are not present in the map.
+	 *
 	 * @return A HashMap of String, Object pairs representing the ItemMetaMock.
 	 */
 	@Override
@@ -406,6 +536,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 
 	/**
 	 * Required method for Bukkit deserialization.
+	 *
 	 * @param args A serialized ItemMetaMock object in a Map&lt;String, Object&gt; format.
 	 * @return A new instance of the ItemMetaMock class.
 	 */

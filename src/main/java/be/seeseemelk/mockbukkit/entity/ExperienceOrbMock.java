@@ -2,6 +2,8 @@ package be.seeseemelk.mockbukkit.entity;
 
 import java.util.UUID;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ExperienceOrb;
@@ -9,6 +11,7 @@ import org.bukkit.entity.SpawnCategory;
 import org.jetbrains.annotations.NotNull;
 
 import be.seeseemelk.mockbukkit.ServerMock;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * This is a simple mock of the {@link ExperienceOrb} {@link Entity}.
@@ -52,9 +55,51 @@ public class ExperienceOrbMock extends EntityMock implements ExperienceOrb
 	}
 
 	@Override
+	public @Nullable UUID getTriggerEntityId()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable UUID getSourceEntityId()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull SpawnReason getSpawnReason()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull SpawnCategory getSpawnCategory()
 	{
 		return SpawnCategory.MISC;
 	}
 
+
+	@Override
+	public @NotNull Component name()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Component customName()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void customName(@Nullable Component customName)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
 }
