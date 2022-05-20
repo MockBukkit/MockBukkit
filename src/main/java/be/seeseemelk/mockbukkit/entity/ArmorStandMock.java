@@ -10,6 +10,9 @@ import org.bukkit.util.EulerAngle;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collections;
+import java.util.EnumSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -33,6 +36,8 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	private EulerAngle rightArmPose = new EulerAngle(Math.toRadians(-15.0f), 0.0f, Math.toRadians(10.0f));
 	private EulerAngle leftLegPose = new EulerAngle(Math.toRadians(-1.0f), 0.0f, Math.toRadians(-1.0f));
 	private EulerAngle rightLegPose = new EulerAngle(Math.toRadians(1.0f), 0.0f, Math.toRadians(1.0f));
+
+	private final Set<EquipmentSlot> disabledSlots = EnumSet.noneOf(EquipmentSlot.class);
 
 	public ArmorStandMock(ServerMock server, UUID uuid)
 	{
@@ -313,36 +318,32 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	@Override
 	public @NotNull Set<EquipmentSlot> getDisabledSlots()
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		return EnumSet.copyOf(this.disabledSlots);
 	}
 
 	@Override
 	public void setDisabledSlots(@NotNull EquipmentSlot... slots)
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		this.disabledSlots.clear();
+		Collections.addAll(this.disabledSlots, slots);
 	}
 
 	@Override
 	public void addDisabledSlots(@NotNull EquipmentSlot... slots)
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		Collections.addAll(this.disabledSlots, slots);
 	}
 
 	@Override
 	public void removeDisabledSlots(@NotNull EquipmentSlot... slots)
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		this.disabledSlots.removeAll(List.of(slots));
 	}
 
 	@Override
 	public boolean isSlotDisabled(@NotNull EquipmentSlot slot)
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		return this.disabledSlots.contains(slot);
 	}
 
 }
