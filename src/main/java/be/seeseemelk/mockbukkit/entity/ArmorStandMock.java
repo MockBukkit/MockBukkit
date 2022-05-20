@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import com.google.common.base.Preconditions;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.EquipmentSlot;
@@ -304,15 +305,32 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	@Override
 	public @NotNull ItemStack getItem(@NotNull EquipmentSlot slot)
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		Preconditions.checkNotNull(slot, "slot");
+		return switch (slot)
+		{
+			case HAND -> getEquipment().getItemInMainHand();
+			case OFF_HAND -> getEquipment().getItemInOffHand();
+			case FEET -> getBoots();
+			case LEGS -> getLeggings();
+			case CHEST -> getChestplate();
+			case HEAD -> getHelmet();
+		};
 	}
 
 	@Override
 	public void setItem(@NotNull EquipmentSlot slot, @Nullable ItemStack item)
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		Preconditions.checkNotNull(slot, "slot");
+		switch (slot)
+		{
+			case HAND -> getEquipment().setItemInMainHand(item);
+			case OFF_HAND -> getEquipment().setItemInOffHand(item);
+			case FEET -> setBoots(item);
+			case LEGS -> setLeggings(item);
+			case CHEST -> setChestplate(item);
+			case HEAD -> setHelmet(item);
+			default -> throw new UnsupportedOperationException(slot.name());
+		}
 	}
 
 	@Override
