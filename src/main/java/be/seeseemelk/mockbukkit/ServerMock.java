@@ -455,7 +455,12 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull String getBukkitVersion()
 	{
-		return buildProperties.getProperty("full-api-version").split("-")[0];
+		String apiVersion;
+		if (buildProperties == null || (apiVersion = buildProperties.getProperty("full-api-version")) == null)
+		{
+			throw new IllegalStateException("Bukkit version could not be determined");
+		}
+		return apiVersion.split("-")[0];
 	}
 
 	@Override
