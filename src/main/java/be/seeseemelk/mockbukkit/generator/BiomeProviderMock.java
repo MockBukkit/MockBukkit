@@ -1,8 +1,6 @@
 package be.seeseemelk.mockbukkit.generator;
 
-import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.WorldMock;
-import org.bukkit.Bukkit;
 import org.bukkit.block.Biome;
 import org.bukkit.generator.BiomeProvider;
 import org.bukkit.generator.WorldInfo;
@@ -16,15 +14,17 @@ public class BiomeProviderMock extends BiomeProvider
 	@Override
 	public @NotNull Biome getBiome(@NotNull WorldInfo worldInfo, int x, int y, int z)
 	{
-		ServerMock server = (ServerMock) Bukkit.getServer();
-		return server.getWorld(worldInfo.getUID()).getBiome(x, y, z);
+		if (!(worldInfo instanceof WorldMock world))
+			throw new UnsupportedOperationException("Can only get biome from WorldMock");
+		return world.getBiome(x, y, z);
 	}
 
 	@Override
 	public @NotNull List<Biome> getBiomes(@NotNull WorldInfo worldInfo)
 	{
-		ServerMock server = (ServerMock) Bukkit.getServer();
-		return List.of(((WorldMock) server.getWorld(worldInfo.getUID())).getDefaultBiome());
+		if (!(worldInfo instanceof WorldMock world))
+			throw new UnsupportedOperationException("Can only get biomes from WorldMock");
+		return List.of(world.getDefaultBiome());
 	}
 
 }
