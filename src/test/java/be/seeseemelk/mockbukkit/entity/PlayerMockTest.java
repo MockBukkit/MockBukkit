@@ -1364,6 +1364,24 @@ class PlayerMockTest
 	}
 
 	@Test
+	public void testPlayerPlayEffect_NullData()
+	{
+		assertThrows(IllegalArgumentException.class, () ->
+		{
+			player.playEffect(player.getLocation(), Effect.STEP_SOUND, null);
+		});
+	}
+
+	@Test
+	public void testPlayerPlayEffect_IncorrectData()
+	{
+		assertThrows(IllegalArgumentException.class, () ->
+		{
+			player.playEffect(player.getLocation(), Effect.STEP_SOUND, 1.0f);
+		});
+	}
+
+	@Test
 	public void testPlayerSpawnParticle_Correct_DataType()
 	{
 		player.spawnParticle(Particle.ITEM_CRACK, player.getLocation(), 1, new ItemStack(Material.STONE));

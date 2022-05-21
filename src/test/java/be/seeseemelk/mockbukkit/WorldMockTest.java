@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assumptions.assumeFalse;
 
@@ -362,10 +363,30 @@ class WorldMockTest
 	}
 
 	@Test
-	public void testPlayerPlayEffect()
+	public void worldPlayEffect()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		world.playEffect(new Location(world, 0, 0, 0), Effect.STEP_SOUND, Material.STONE);
+	}
+
+	@Test
+	public void worldPlayEffect_NullData()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertThrows(IllegalArgumentException.class, () ->
+		{
+			world.playEffect(new Location(world, 0, 0, 0), Effect.STEP_SOUND, null);
+		});
+	}
+
+	@Test
+	public void worldPlayEffect_IncorrectData()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertThrows(IllegalArgumentException.class, () ->
+		{
+			world.playEffect(new Location(world, 0, 0, 0), Effect.STEP_SOUND, 1.0f);
+		});
 	}
 
 }
