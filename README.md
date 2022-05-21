@@ -1,19 +1,13 @@
 <p align="center">
     <!-- Badges -->
-    <a href="https://travis-ci.org/seeseemelk/MockBukkit">
-        <img alt="Build Status" src="https://github.com/seeseemelk/MockBukkit/workflows/Build/badge.svg?event=push" />
+    <a href="https://github.com/MockBukkit/MockBukkit/actions/">
+        <img alt="Build Status" src="https://github.com/MockBukkit/MockBukkit/workflows/Build/badge.svg?event=push" />
     </a>
     <a href="https://mockbukkit.readthedocs.io/en/latest/?badge=latest">
         <img alt="Documentation Status" src="https://readthedocs.org/projects/mockbukkit/badge/?version=latest" />
     </a>
     <a href="https://search.maven.org/search?q=MockBukkit">
-        <img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.github.seeseemelk/MockBukkit-v1.17?color=1bcc94&logo=apache-maven" />
-    </a>
-    <a href="https://codeclimate.com/github/seeseemelk/MockBukkit/maintainability">
-        <img alt="Maintainability" src="https://api.codeclimate.com/v1/badges/403a4bb837ca47333d33/maintainability" />
-    </a>
-    <a href="https://codeclimate.com/github/seeseemelk/MockBukkit/test_coverage">
-        <img alt="Test Coverage" src="https://api.codeclimate.com/v1/badges/403a4bb837ca47333d33/test_coverage" />
+        <img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.github.seeseemelk/MockBukkit-v1.18?color=1bcc94&logo=apache-maven" />
     </a>
     <!-- Logo -->
     <hr />
