@@ -30,5 +30,15 @@ If the player is not in that gamemode, an AssertionException is thrown. ::
 
     player.assertGameMode(GameMode.SURVIVAL);
 
+To simulate a Player disconnecting, use the ``disconnect()`` method.
+This will set the Player as offline but keeps him as an OfflinePlayer. ::
+
+        player.disconnect();
+
+After a Player has been disconnected, it's possible to simulate a reconnection.
+This will set the Player as online and restore it's full Functionality. ::
+
+        player.connect();
+
 PlayerMock extends [EntityMock](EntityMock.md) since it's possible to use those added methods too.
 
