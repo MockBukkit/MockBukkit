@@ -77,7 +77,7 @@ These exception extends ``TestAbortedException`` and will cause the test to be s
 These exceptions should just be ignored, though pull requests that add functionality
 to MockBukkit are always welcome!
 
-As an alternative you can always extend `ServerMock` and implement those missing methods.
+As an alternative you can always extend ``ServerMock`` and implement those missing methods.
 Simply pass your custom implementation of ServerMock to the `MockBukkit.mock(...)` method.::
 
     MyCustomServerMock server = MockBukkit.mock(new MyCustomServerMock());

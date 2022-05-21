@@ -14,7 +14,7 @@ The latest stable version can always be found at https://search.maven.org/search
 
 Gradle
 ------
-If you are using Gradle, you will need to setup your `build.gradle` file to enable
+If you are using Gradle, you will need to setup your ``build.gradle`` file to enable
 unit testing.
 
 Dependencies
@@ -63,8 +63,8 @@ On Linux and macOS, use the following command::
 Maven
 -----
 For people that use Maven instead of Gradle can also use MockBukkit by adding it
-to their `pom.xml`.
-To do so, both JUnit and MockBukkit habe to be added to your dependencies::
+to their ``pom.xml``.
+To do so, both JUnit and MockBukkit have to be added to your dependencies::
 
     <dependencies>
         <dependency>
@@ -94,6 +94,6 @@ To do so, both JUnit and MockBukkit habe to be added to your dependencies::
 
 Running
 ^^^^^^^
-After having modified your `pom.xml`, you can run the unit tests as follows::
+After having modified your ``pom.xml``, you can run the unit tests as follows::
 
     mvn test
