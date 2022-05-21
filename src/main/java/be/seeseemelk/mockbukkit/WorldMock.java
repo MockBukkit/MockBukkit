@@ -1971,7 +1971,10 @@ public class WorldMock implements World
 		return new HashMap<>(biomes);
 	}
 
-	protected Biome getDefaultBiome()
+	/**
+	 * @return The default biome of this world.
+	 */
+	public Biome getDefaultBiome()
 	{
 		return defaultBiome;
 	}
