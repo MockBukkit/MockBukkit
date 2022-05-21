@@ -30,5 +30,5 @@ If the player is not in that Gamemode, an ```AssertionException``` is thrown. ::
 
     player.assertGameMode(GameMode.SURVIVAL);
 
-PlayerMock extends `EntityMock`, therefore it's possible to use those added methods too.
+PlayerMock extends ``EntityMock``, therefore it's possible to use those added methods too.
 
