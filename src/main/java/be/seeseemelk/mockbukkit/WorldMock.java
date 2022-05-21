@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit;
 
+import be.seeseemelk.mockbukkit.generator.BiomeProviderMock;
 import com.google.common.base.Preconditions;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.entity.ArmorStandMock;
@@ -114,6 +115,7 @@ public class WorldMock implements World
 	private boolean storming = false;
 	private long seed = 0;
 	private WorldType worldType = WorldType.NORMAL;
+	private final BiomeProviderMock biomeProviderMock = new BiomeProviderMock();
 	private Map<Coordinate, Biome> biomes = new HashMap<>();
 
 	/**
@@ -998,9 +1000,7 @@ public class WorldMock implements World
 	@Override
 	public BiomeProvider getBiomeProvider()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		return biomeProviderMock;
 	}
 
 	@Override

@@ -1,0 +1,28 @@
+package be.seeseemelk.mockbukkit.generator;
+
+import be.seeseemelk.mockbukkit.ServerMock;
+import org.bukkit.Bukkit;
+import org.bukkit.block.Biome;
+import org.bukkit.generator.BiomeProvider;
+import org.bukkit.generator.WorldInfo;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
+
+public class BiomeProviderMock extends BiomeProvider
+{
+
+	@Override
+	public @NotNull Biome getBiome(@NotNull WorldInfo worldInfo, int x, int y, int z)
+	{
+		ServerMock server = (ServerMock) Bukkit.getServer();
+		return server.getWorld(worldInfo.getUID()).getBiome(x, y, z);
+	}
+
+	@Override
+	public @NotNull List<Biome> getBiomes(@NotNull WorldInfo worldInfo)
+	{
+		return List.of(Biome.values());
+	}
+
+}
