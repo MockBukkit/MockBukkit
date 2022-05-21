@@ -1390,6 +1390,30 @@ class PlayerMockTest
 	}
 
 	@Test
+	public void testPlayerSendActionBar()
+	{
+		player.sendActionBar("Action!");
+	}
+
+	@Test
+	public void testPlayerSendHealthUpdate()
+	{
+		player.sendHealthUpdate();
+	}
+
+	@Test
+	public void testPlayerSendHealthUpdate_Params()
+	{
+		player.sendHealthUpdate(20, 10, 0.0f);
+	}
+
+	@Test
+	public void testPlayerSendMultiBlockChange()
+	{
+		player.sendMultiBlockChange(new HashMap<>(0));
+	}
+
+	@Test
 	public void testPlayerSpawnParticle_Correct_DataType()
 	{
 		player.spawnParticle(Particle.ITEM_CRACK, player.getLocation(), 1, new ItemStack(Material.STONE));
