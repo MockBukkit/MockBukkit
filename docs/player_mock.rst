@@ -25,8 +25,8 @@ In all examples we will assume that your unit test starts with::
 
     PlayerMock player = server.addPlayer();
 
-It's possible to assert that a player is in a specific gamemode.
-If the player is not in that gamemode, an AssertionException is thrown. ::
+fIIt's possible to assert that a player is in a specific Gamemode.
+If the player is not in that Gamemode, an ```AssertionException``` is thrown. ::
 
     player.assertGameMode(GameMode.SURVIVAL);
 
