@@ -71,6 +71,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerResourcePackStatusEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
@@ -119,9 +120,13 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class PlayerMock extends LivingEntityMock implements Player, SoundReceiver
 {
+
+	private static final String QUIT_MESSAGE = "%s has left the server.";
+
 	private boolean online;
 	private PlayerInventoryMock inventory = null;
 	private EnderChestInventoryMock enderChest = null;
+	private ServerMock server = null;
 	private GameMode gamemode = GameMode.SURVIVAL;
 	private GameMode previousGamemode = gamemode;
 	private Component displayName = null;
@@ -158,6 +163,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	{
 		this(server, name, UUID.nameUUIDFromBytes(("OfflinePlayer:" + name).getBytes(StandardCharsets.UTF_8)));
 		this.online = false;
+		this.firstPlayed = 0;
 	}
 
 	public PlayerMock(ServerMock server, String name, UUID uuid)
@@ -166,6 +172,8 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		setName(name);
 		setDisplayName(name);
 		this.online = true;
+		this.server = server;
+		this.firstPlayed = System.currentTimeMillis();
 
 		if (Bukkit.getWorlds().isEmpty())
 		{
@@ -175,6 +183,52 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		setLocation(Bukkit.getWorlds().get(0).getSpawnLocation().clone());
 		setCompassTarget(getLocation());
 		closeInventory();
+	}
+
+	/**
+	 * Simulates a disconnection from the server.
+	 *
+	 * @return True if the player was disconnected, false if they were already offline.
+	 */
+	public boolean disconnect()
+	{
+		if (!online)
+		{
+			return false;
+		}
+		this.online = false;
+		this.lastPlayed = System.currentTimeMillis();
+
+		PlayerQuitEvent playerQuitEvent = new PlayerQuitEvent(this, String.format(QUIT_MESSAGE, this.getDisplayName()));
+		Bukkit.getPluginManager().callEvent(playerQuitEvent);
+
+		this.server.getPlayerList().disconnectPlayer(this);
+
+		return true;
+	}
+
+	/**
+	 * Simulates a connection to the server.
+	 *
+	 * @return True if the player was connected, false if they were already online.
+	 */
+	public boolean connect()
+	{
+		if (firstPlayed == 0)
+		{
+			throw new IllegalStateException("Player wasn't online before");
+		}
+		if (online)
+		{
+			return false;
+		}
+
+		this.online = true;
+		this.lastPlayed = System.currentTimeMillis();
+
+		server.addPlayer(this);
+
+		return true;
 	}
 
 	@Override
@@ -2035,7 +2089,6 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 
-
 	@Override
 	@ApiStatus.Experimental
 	public void hideEntity(@NotNull Plugin plugin, @NotNull Entity entity)
@@ -2058,7 +2111,6 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
 
 
 	@Override

@@ -305,6 +305,15 @@ public class ServerMock extends Server.Spigot implements Server
 		return playerList.getPlayer(num);
 	}
 
+	/**
+	 * Returns the {@link MockPlayerList} instance that is used by this server.
+	 * @return The {@link MockPlayerList} instance.
+	 */
+	public MockPlayerList getPlayerList()
+	{
+		return playerList;
+	}
+
 	@Override
 	public @Nullable UUID getPlayerUniqueId(@NotNull String playerName)
 	{

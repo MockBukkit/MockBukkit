@@ -1,11 +1,20 @@
 package be.seeseemelk.mockbukkit;
 
 import be.seeseemelk.mockbukkit.command.CommandResult;
-import be.seeseemelk.mockbukkit.entity.*;
+import be.seeseemelk.mockbukkit.entity.EntityMock;
+import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
+import be.seeseemelk.mockbukkit.entity.PlayerMock;
+import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
+import be.seeseemelk.mockbukkit.entity.SimpleEntityMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
-import org.bukkit.*;
+import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.Warning;
+import org.bukkit.World;
+import org.bukkit.WorldCreator;
+import org.bukkit.WorldType;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
@@ -29,10 +38,12 @@ import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -496,8 +507,7 @@ class ServerMockTest
 			try
 			{
 				server.assertMainThread();
-			}
-			catch (ThreadAccessException e)
+			} catch (ThreadAccessException e)
 			{
 				exceptionThrown.set(e);
 			}
@@ -608,6 +618,26 @@ class ServerMockTest
 
 		playerA.assertSaid(PlainTextComponentSerializer.plainText().serialize(component));
 		playerB.assertSaid(PlainTextComponentSerializer.plainText().serialize(component));
+	}
+
+	@Test
+	void testGetPlayerList()
+	{
+		PlayerMock playerA = server.addPlayer();
+		PlayerMock playerB = server.addPlayer();
+
+		assertThat(server.getPlayerList().getOnlinePlayers(), containsInAnyOrder(playerA, playerB));
+		assertInstanceOf(MockPlayerList.class, server.getPlayerList());
+	}
+
+	@Test
+	void testPlayerListDisconnectPlayer()
+	{
+		MockPlayerList playerList = server.getPlayerList();
+		PlayerMock playerA = server.addPlayer();
+		playerList.disconnectPlayer(playerA);
+
+		assertFalse(playerList.getOnlinePlayers().contains(playerA));
 	}
 
 }

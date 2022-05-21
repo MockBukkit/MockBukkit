@@ -77,10 +77,10 @@ class PlayerMockTest
 {
 	// Taken from https://minecraft.gamepedia.com/Experience#Leveling_up
 	private static int[] expRequired =
-	{
-		7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 42, 47, 52, 57, 62, 67, 72, 77, 82, 87, 92, 97, 102,
-		107, 112, 121, 130, 139, 148, 157, 166, 175, 184, 193
-	};
+			{
+					7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 42, 47, 52, 57, 62, 67, 72, 77, 82, 87, 92, 97, 102,
+					107, 112, 121, 130, 139, 148, 157, 166, 175, 184, 193
+			};
 	private ServerMock server;
 	private UUID uuid;
 	private PlayerMock player;
@@ -601,11 +601,9 @@ class PlayerMockTest
 		try
 		{
 			plugin.barrier.await(3, TimeUnit.SECONDS);
-		}
-		catch (InterruptedException | BrokenBarrierException e)
+		} catch (InterruptedException | BrokenBarrierException e)
 		{
-		}
-		catch (TimeoutException e)
+		} catch (TimeoutException e)
 		{
 			fail("Async event was not fired");
 		}
@@ -945,7 +943,7 @@ class PlayerMockTest
 		player.assertSoundHeard(sound, audio ->
 		{
 			return player.getLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.AMBIENT
-			&& audio.getVolume() == volume && audio.getPitch() == pitch;
+					&& audio.getVolume() == volume && audio.getPitch() == pitch;
 		});
 	}
 
@@ -960,7 +958,7 @@ class PlayerMockTest
 		player.assertSoundHeard(sound, audio ->
 		{
 			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
-			&& audio.getVolume() == volume && audio.getPitch() == pitch;
+					&& audio.getVolume() == volume && audio.getPitch() == pitch;
 		});
 	}
 
@@ -972,7 +970,7 @@ class PlayerMockTest
 		player.setItemOnCursor(new ItemStack(Material.PUMPKIN));
 		player.closeInventory();
 		server.getPluginManager().assertEventFired(InventoryCloseEvent.class,
-		        e -> e.getPlayer() == player && e.getInventory() == inv);
+				e -> e.getPlayer() == player && e.getInventory() == inv);
 		assertTrue(player.getItemOnCursor().getType().isAir());
 	}
 
@@ -1021,7 +1019,7 @@ class PlayerMockTest
 	void testMultiplePotionEffects()
 	{
 		Collection<PotionEffect> effects = Arrays.asList(new PotionEffect(PotionEffectType.BAD_OMEN, 3, 1),
-		                                   new PotionEffect(PotionEffectType.LUCK, 5, 2));
+				new PotionEffect(PotionEffectType.LUCK, 5, 2));
 
 		assertTrue(player.addPotionEffects(effects));
 
@@ -1369,6 +1367,38 @@ class PlayerMockTest
 		{
 			player.spawnParticle(Particle.ITEM_CRACK, player.getLocation(), 1, new Object());
 		});
+	}
+
+	@Test
+	public void testDisconnect()
+	{
+		assertTrue(player.isOnline());
+		assertTrue(player.disconnect());
+		assertFalse(player.isOnline());
+		assertFalse(server.getOnlinePlayers().contains(player));
+	}
+
+	@Test
+	public void testConnect()
+	{
+		if (player.isOnline())
+		{
+			player.disconnect();
+		}
+
+		assertFalse(player.isOnline());
+		assertTrue(player.connect());
+		assertTrue(player.isOnline());
+		assertTrue(server.getOnlinePlayers().contains(player));
+		assertTrue(player.hasPlayedBefore());
+	}
+
+	@Test
+	public void testConnectWithoutJoiningBefore()
+	{
+		player = new PlayerMock(server, "testPlayer");
+
+		assertThrows(IllegalStateException.class, () -> player.connect());
 	}
 
 }
