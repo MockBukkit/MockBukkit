@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.entity;
 
 import java.util.UUID;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Pose;
@@ -10,6 +11,8 @@ import org.bukkit.util.BoundingBox;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * A very simple class that allows one to create an instance of an entity when a specific type of entity is not
@@ -82,6 +85,27 @@ public class SimpleEntityMock extends EntityMock
 
 	@Override
 	public SpawnCategory getSpawnCategory()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Component name()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Component customName()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void customName(@Nullable Component customName)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
