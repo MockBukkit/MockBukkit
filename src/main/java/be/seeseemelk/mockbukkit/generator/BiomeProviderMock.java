@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.generator;
 
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.WorldMock;
 import org.bukkit.Bukkit;
 import org.bukkit.block.Biome;
 import org.bukkit.generator.BiomeProvider;
@@ -22,7 +23,8 @@ public class BiomeProviderMock extends BiomeProvider
 	@Override
 	public @NotNull List<Biome> getBiomes(@NotNull WorldInfo worldInfo)
 	{
-		return List.of(Biome.values());
+		ServerMock server = (ServerMock) Bukkit.getServer();
+		return List.of(((WorldMock) server.getWorld(worldInfo.getUID())).getDefaultBiome());
 	}
 
 }
