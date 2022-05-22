@@ -163,4 +163,11 @@ public abstract class MobMock extends LivingEntityMock implements Mob
 		throw new UnimplementedOperationException();
 	}
 
+	/**
+	 * Called immediately after the entity is spawned.
+	 */
+	public void finalizeSpawn()
+	{
+	}
+
 }
