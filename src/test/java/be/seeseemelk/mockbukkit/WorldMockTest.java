@@ -1,15 +1,6 @@
 package be.seeseemelk.mockbukkit;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assumptions.assumeFalse;
-
-import java.util.List;
-
+import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import be.seeseemelk.mockbukkit.block.state.BlockStateMock;
 import org.bukkit.Chunk;
@@ -21,16 +12,27 @@ import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.world.TimeSkipEvent;
+import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import be.seeseemelk.mockbukkit.block.BlockMock;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assumptions.assumeFalse;
 
 class WorldMockTest
 {
+
 	private ServerMock server;
 
 	@BeforeEach
@@ -287,7 +289,7 @@ class WorldMockTest
 		world.setTime(6000L);
 		world.setTime(10000L);
 		server.getPluginManager().assertEventFired(TimeSkipEvent.class, event ->
-		        event.getSkipAmount() == 4000L && event.getSkipReason().equals(TimeSkipEvent.SkipReason.CUSTOM));
+				event.getSkipAmount() == 4000L && event.getSkipReason().equals(TimeSkipEvent.SkipReason.CUSTOM));
 	}
 
 	@Test
@@ -351,14 +353,68 @@ class WorldMockTest
 		assertEquals(Material.GRASS, world.getBlockData(location).getMaterial());
 		assertEquals(Material.GRASS, world.getBlockData(0, 1, 0).getMaterial());
 		assertEquals(Material.GRASS, world.getType(0, 1, 0));
-		world.setBlockData(0, 1, 0, mock2) ;
+		world.setBlockData(0, 1, 0, mock2);
 		assertEquals(Material.GRASS_BLOCK, world.getBlockData(location).getMaterial());
 		assertEquals(Material.GRASS_BLOCK, world.getType(location));
 		world.setType(location, Material.BEDROCK);
 		assertEquals(Material.BEDROCK, world.getType(location));
 		world.setType(0, 1, 0, Material.DIRT);
 		assertEquals(Material.DIRT, world.getType(location));
+	}
 
+	@Test
+	void testDropItem()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		ItemStack item = new ItemStack(Material.DIAMOND);
+		Location location = new Location(world, 100, 100, 100);
+
+		Item entity = world.dropItem(location, item);
+
+		// Is this the same Item we wanted to drop?
+		assertEquals(item, entity.getItemStack());
+
+		// Does our Item exist in the correct World?
+		assertTrue(world.getEntities().contains(entity));
+
+		// Is it at the right location?
+		assertEquals(location, entity.getLocation());
+	}
+
+	@Test
+	void testDropItemNaturally()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		ItemStack item = new ItemStack(Material.EMERALD);
+		Location location = new Location(world, 200, 100, 200);
+
+		Item entity = world.dropItemNaturally(location, item);
+
+		// Is this the same Item we wanted to drop?
+		assertEquals(item, entity.getItemStack());
+
+		// Does our Item exist in the correct World?
+		assertTrue(world.getEntities().contains(entity));
+
+		// Has the Location been slightly nudged?
+		assertNotEquals(location, entity.getLocation());
+	}
+
+	@Test
+	void testDropItemConsumer()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		ItemStack item = new ItemStack(Material.BEACON);
+		Location location = new Location(world, 200, 50, 500);
+
+		Item entity = world.dropItem(location, item, n ->
+		{
+			// This consumer should be invoked BEFORE the actually spawned.
+			assertFalse(world.getEntities().contains(n));
+		});
+
+		assertEquals(item, entity.getItemStack());
+		assertTrue(world.getEntities().contains(entity));
 	}
 
 }
