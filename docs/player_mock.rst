@@ -38,7 +38,7 @@ This will set the Player as offline but keeps him as an OfflinePlayer. ::
 After a Player has been disconnected, it's possible to simulate a reconnection.
 This will set the Player as online and restore it's full Functionality. ::
 
-        player.connect();
+        player.reconnect();
 
 PlayerMock extends [EntityMock](EntityMock.md) since it's possible to use those added methods too.
 

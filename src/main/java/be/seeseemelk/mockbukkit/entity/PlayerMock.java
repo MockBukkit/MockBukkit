@@ -212,7 +212,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	 *
 	 * @return True if the player was connected, false if they were already online.
 	 */
-	public boolean connect()
+	public boolean reconnect()
 	{
 		if (firstPlayed == 0)
 		{

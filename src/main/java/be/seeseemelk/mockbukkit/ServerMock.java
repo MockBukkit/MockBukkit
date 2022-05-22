@@ -309,7 +309,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * Returns the {@link MockPlayerList} instance that is used by this server.
 	 * @return The {@link MockPlayerList} instance.
 	 */
-	public MockPlayerList getPlayerList()
+	public @NotNull MockPlayerList getPlayerList()
 	{
 		return playerList;
 	}

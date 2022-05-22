@@ -1379,7 +1379,7 @@ class PlayerMockTest
 	}
 
 	@Test
-	public void testConnect()
+	public void testReconnect()
 	{
 		if (player.isOnline())
 		{
@@ -1387,18 +1387,18 @@ class PlayerMockTest
 		}
 
 		assertFalse(player.isOnline());
-		assertTrue(player.connect());
+		assertTrue(player.reconnect());
 		assertTrue(player.isOnline());
 		assertTrue(server.getOnlinePlayers().contains(player));
 		assertTrue(player.hasPlayedBefore());
 	}
 
 	@Test
-	public void testConnectWithoutJoiningBefore()
+	public void testReconnectWithoutJoiningBefore()
 	{
 		player = new PlayerMock(server, "testPlayer");
 
-		assertThrows(IllegalStateException.class, () -> player.connect());
+		assertThrows(IllegalStateException.class, () -> player.reconnect());
 	}
 
 }
