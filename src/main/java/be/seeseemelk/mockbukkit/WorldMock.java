@@ -667,8 +667,44 @@ public class WorldMock implements World
 		throw new UnimplementedOperationException();
 	}
 
+	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz) throws IllegalArgumentException {
+		return this.spawn(location, clazz, null, CreatureSpawnEvent.SpawnReason.CUSTOM);
+	}
+
 	@Override
-	public Entity spawnEntity(Location loc, EntityType type)
+	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz, Consumer<T> function) throws IllegalArgumentException {
+		return this.spawn(location, clazz, function, CreatureSpawnEvent.SpawnReason.CUSTOM);
+	}
+
+	@Override
+	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz, boolean randomizeData, Consumer<T> function) throws IllegalArgumentException {
+		return this.spawn(location, clazz, function, CreatureSpawnEvent.SpawnReason.CUSTOM, randomizeData);
+	}
+
+	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz, Consumer<T> function, CreatureSpawnEvent.@NotNull SpawnReason reason) throws IllegalArgumentException {
+		return this.spawn(location, clazz, function, reason, true);
+	}
+
+	@SuppressWarnings("unchecked")
+	public <T extends Entity> T spawn(Location location, Class<T> clazz, Consumer<T> function, CreatureSpawnEvent.SpawnReason reason, boolean randomizeData) throws IllegalArgumentException {
+		if (location == null || clazz == null) {
+			throw new IllegalArgumentException("Location or entity class cannot be null");
+		}
+
+		EntityMock entity = this.mockEntity(clazz, randomizeData);
+
+		entity.setLocation(location);
+		server.registerEntity(entity);
+
+		if (function != null) {
+			function.accept((T) entity);
+		}
+
+		return (T) entity;
+	}
+
+	@Override
+	public @NotNull Entity spawnEntity(@NotNull Location loc, EntityType type)
 	{
 		return spawn(loc, type.getEntityClass());
 	}
@@ -677,12 +713,10 @@ public class WorldMock implements World
 	@Override
 	public Entity spawnEntity(@NotNull Location loc, @NotNull EntityType type, boolean randomizeData)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		return this.spawn(loc, type.getEntityClass(), randomizeData, null);
 	}
 
-	private <T extends Entity> EntityMock mockEntity(@NotNull Class<T> clazz)
+	private <T extends Entity> EntityMock mockEntity(@NotNull Class<T> clazz, boolean randomizeData)
 	{
 		if (clazz == ArmorStand.class)
 		{
@@ -984,47 +1018,6 @@ public class WorldMock implements World
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public <T extends Entity> T spawn(@NotNull Location location, @NotNull Class<T> clazz) throws IllegalArgumentException
-	{
-		Validate.notNull(location, "The provided location must not be null.");
-		Validate.notNull(clazz, "The provided class must not be null.");
-
-		EntityMock entity = mockEntity(clazz);
-		entity.setLocation(location);
-		server.registerEntity(entity);
-
-		return clazz.cast(entity);
-	}
-
-	@Override
-	public <T extends Entity> T spawn(@NotNull Location location, @NotNull Class<T> clazz, @Nullable Consumer<T> function)
-			throws IllegalArgumentException
-	{
-		T entity = spawn(location, clazz);
-		if (function != null)
-		{
-			function.accept(entity);
-		}
-		return entity;
-	}
-
-	@Override
-	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz, @Nullable Consumer<T> function, CreatureSpawnEvent.@NotNull SpawnReason reason) throws IllegalArgumentException
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@NotNull
-	@Override
-	public <T extends Entity> T spawn(@NotNull Location location, @NotNull Class<T> clazz, boolean randomizeData, @Nullable Consumer<T> function) throws IllegalArgumentException
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
 	}
 
 	@SuppressWarnings("deprecation")
