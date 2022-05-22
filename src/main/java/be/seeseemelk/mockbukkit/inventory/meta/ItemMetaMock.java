@@ -801,6 +801,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	public boolean removeAttributeModifier(@NotNull EquipmentSlot slot)
 	{
 		this.checkAttributeMap();
+		// Match against null because as of 1.13, AttributeModifiers without a set slot are active in any slot.
 		return this.attributeModifiers.entries().removeIf(entry -> entry.getValue().getSlot() == null || entry.getValue().getSlot() == slot);
 	}
 
