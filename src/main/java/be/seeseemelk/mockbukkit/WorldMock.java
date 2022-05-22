@@ -38,6 +38,7 @@ import org.bukkit.WorldCreator;
 import org.bukkit.WorldType;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.boss.DragonBattle;
@@ -49,7 +50,10 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Firework;
+import org.bukkit.entity.Hanging;
 import org.bukkit.entity.Item;
+import org.bukkit.entity.ItemFrame;
+import org.bukkit.entity.LeashHitch;
 import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -706,7 +710,7 @@ public class WorldMock implements World
 			throw new IllegalArgumentException("Location or entity class cannot be null");
 		}
 
-		EntityMock entity = this.mockEntity(clazz, randomizeData);
+		EntityMock entity = this.mockEntity(location, clazz, randomizeData);
 
 		entity.setLocation(location);
 
@@ -739,13 +743,52 @@ public class WorldMock implements World
 		return this.spawn(loc, type.getEntityClass(), randomizeData, null);
 	}
 
-	private <T extends Entity> EntityMock mockEntity(@NotNull Class<T> clazz, boolean randomizeData)
+	private <T extends Entity> EntityMock mockEntity(@NotNull Location location, @NotNull Class<T> clazz, boolean randomizeData)
 	{
 		return switch (clazz)
 				{
 					case Class<T> c && c == ArmorStand.class -> new ArmorStandMock(server, UUID.randomUUID());
 					case Class<T> c && c == ExperienceOrb.class -> new ExperienceOrbMock(server, UUID.randomUUID());
 					case Class<T> c && c == Firework.class -> new FireworkMock(server, UUID.randomUUID());
+					case Class<T> c && c == Hanging.class ->
+					{
+						// LeashHitch has no direction and is always centered
+						if (LeashHitch.class.isAssignableFrom(clazz))
+						{
+							throw new UnimplementedOperationException();
+						}
+
+						BlockFace spawnFace = BlockFace.SELF;
+						BlockFace[] faces = (ItemFrame.class.isAssignableFrom(clazz))
+								? new BlockFace[]{ BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST, BlockFace.UP, BlockFace.DOWN }
+								: new BlockFace[]{ BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST };
+
+						for (BlockFace face : faces)
+						{
+							Block block = this.getBlockAt(location.add(face.getModX(), face.getModY(), face.getModZ()));
+							if (!block.getType().isSolid() && (block.getType() != Material.REPEATER && block.getType() != Material.COMPARATOR))
+								continue;
+
+							boolean taken = false;
+
+							// TODO: Check if the entity's bounding box collides with any other hanging entities.
+
+							if (taken)
+								continue;
+
+							spawnFace = face;
+							break;
+						}
+
+						if (spawnFace == BlockFace.SELF)
+						{
+							spawnFace = BlockFace.SOUTH;
+						}
+
+						spawnFace = spawnFace.getOppositeFace();
+						// TODO: Spawn entities here.
+						throw new UnimplementedOperationException();
+					}
 					case Class<T> c && c == Item.class ->
 							throw new IllegalArgumentException("Items must be spawned using World#dropItem(...)");
 					case Class<T> c && c == Player.class ->
