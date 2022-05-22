@@ -742,13 +742,13 @@ public class WorldMock implements World
 		return switch (clazz)
 				{
 					case Class<T> c && c == ArmorStand.class -> new ArmorStandMock(server, UUID.randomUUID());
-					case Class<T> c && c == Zombie.class -> new ZombieMock(server, UUID.randomUUID());
-					case Class<T> c && c == Firework.class -> new FireworkMock(server, UUID.randomUUID());
 					case Class<T> c && c == ExperienceOrb.class -> new ExperienceOrbMock(server, UUID.randomUUID());
-					case Class<T> c && c == Player.class ->
-							throw new IllegalArgumentException("Player Entities cannot be spawned, use ServerMock#addPlayer(...)");
+					case Class<T> c && c == Firework.class -> new FireworkMock(server, UUID.randomUUID());
 					case Class<T> c && c == Item.class ->
 							throw new IllegalArgumentException("Items must be spawned using World#dropItem(...)");
+					case Class<T> c && c == Player.class ->
+							throw new IllegalArgumentException("Player Entities cannot be spawned, use ServerMock#addPlayer(...)");
+					case Class<T> c && c == Zombie.class -> new ZombieMock(server, UUID.randomUUID());
 					case default -> throw new UnimplementedOperationException();
 				};
 	}
