@@ -63,6 +63,11 @@ tasks.withType(Test) {
     jvmArgs += "--enable-preview"
 }
 
+javadoc.options {
+    addBooleanOption('-enable-preview', true)
+    addStringOption('-release', "${gradle.ext.javaVersion}")
+}
+
 artifacts {
     archives javadocJar, sourcesJar
 }
