@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.attribute.AttributeInstanceMock;
+import be.seeseemelk.mockbukkit.attribute.Attributes;
 import be.seeseemelk.mockbukkit.potion.ActivePotionEffect;
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
@@ -58,7 +59,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		super(server, uuid);
 
 		attributes = new EnumMap<>(Attribute.class);
-		attributes.put(Attribute.GENERIC_MAX_HEALTH, new AttributeInstanceMock(Attribute.GENERIC_MAX_HEALTH, 20));
+		attributes.put(Attribute.GENERIC_MAX_HEALTH, new AttributeInstanceMock(Attribute.GENERIC_MAX_HEALTH, Attributes.getDefaultValue(Attribute.GENERIC_MAX_HEALTH)));
 		this.setMaxHealth(MAX_HEALTH);
 		this.setHealth(MAX_HEALTH);
 	}
@@ -173,9 +174,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	public void registerAttribute(@NotNull Attribute attribute)
 	{
 		Preconditions.checkArgument(attribute != null, "attribute");
-//		this.attributes.put(attribute, new AttributeInstanceMock(attribute, 0));
-		// TODO
-		throw new UnimplementedOperationException();
+		this.attributes.put(attribute, new AttributeInstanceMock(attribute, Attributes.getDefaultValue(attribute)));
 	}
 
 	@Override
