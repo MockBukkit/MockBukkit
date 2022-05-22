@@ -5,10 +5,12 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import be.seeseemelk.mockbukkit.attribute.Attributes;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -422,6 +424,14 @@ class EntityMockTest
 		assertTrue(zombie.isGliding());
 		zombie.setGliding(false);
 		assertFalse(zombie.isGliding());
+	}
+
+	@Test
+	void registerAttribute()
+	{
+		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+		zombie.registerAttribute(Attribute.HORSE_JUMP_STRENGTH);
+		assertEquals(0.7, zombie.getAttribute(Attribute.HORSE_JUMP_STRENGTH).getValue());
 	}
 
 }
