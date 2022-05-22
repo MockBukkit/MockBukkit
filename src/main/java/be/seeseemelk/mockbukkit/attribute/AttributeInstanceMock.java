@@ -1,28 +1,33 @@
 package be.seeseemelk.mockbukkit.attribute;
 
-import java.util.Collection;
-
+import com.google.common.base.Preconditions;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.attribute.AttributeModifier;
+import org.jetbrains.annotations.NotNull;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class AttributeInstanceMock implements AttributeInstance
 {
+
 	private final Attribute attribute;
 	private final double defaultValue;
 	private double value;
+	private final List<AttributeModifier> modifiers;
 
 	public AttributeInstanceMock(Attribute attribute, double value)
 	{
 		this.attribute = attribute;
 		this.defaultValue = value;
 		this.value = value;
+		modifiers = new ArrayList<>();
 	}
 
 	@Override
-	public Attribute getAttribute()
+	public @NotNull Attribute getAttribute()
 	{
 		return attribute;
 	}
@@ -40,25 +45,23 @@ public class AttributeInstanceMock implements AttributeInstance
 	}
 
 	@Override
-	public Collection<AttributeModifier> getModifiers()
+	public @NotNull Collection<AttributeModifier> getModifiers()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return modifiers;
 	}
 
 	@Override
-	public void addModifier(AttributeModifier modifier)
+	public void addModifier(@NotNull AttributeModifier modifier)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		Preconditions.checkArgument(modifier != null, "modifier");
+		modifiers.add(modifier);
 	}
 
 	@Override
-	public void removeModifier(AttributeModifier modifier)
+	public void removeModifier(@NotNull AttributeModifier modifier)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(modifier != null, "modifier");
+		modifiers.remove(modifier);
 	}
 
 	@Override
