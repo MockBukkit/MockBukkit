@@ -718,30 +718,16 @@ public class WorldMock implements World
 
 	private <T extends Entity> EntityMock mockEntity(@NotNull Class<T> clazz, boolean randomizeData)
 	{
-		if (clazz == ArmorStand.class)
-		{
-			return new ArmorStandMock(server, UUID.randomUUID());
-		} else if (clazz == Zombie.class)
-		{
-			return new ZombieMock(server, UUID.randomUUID());
-		} else if (clazz == Firework.class)
-		{
-			return new FireworkMock(server, UUID.randomUUID());
-		} else if (clazz == ExperienceOrb.class)
-		{
-			return new ExperienceOrbMock(server, UUID.randomUUID());
-		} else if (clazz == Player.class)
-		{
-			throw new IllegalArgumentException("Player Entities cannot be spawned, use ServerMock#addPlayer(...)");
-		} else if (clazz == Item.class)
-		{
-			throw new IllegalArgumentException("Items must be spawned using World#dropItem(...)");
-		} else
-		{
-			// If that specific Mob Class has not been implemented yet, it may be better
-			// to throw an UnimplementedOperationException for consistency
-			throw new UnimplementedOperationException();
-		}
+		return switch (clazz)
+				{
+					case Class<T> c && c == ArmorStand.class -> new ArmorStandMock(server, UUID.randomUUID());
+					case Class<T> c && c == Zombie.class -> new ZombieMock(server, UUID.randomUUID());
+					case Class<T> c && c == Firework.class -> new FireworkMock(server, UUID.randomUUID());
+					case Class<T> c && c == ExperienceOrb.class -> new ExperienceOrbMock(server, UUID.randomUUID());
+					case Class<T> c && c == Player.class -> throw new IllegalArgumentException("Player Entities cannot be spawned, use ServerMock#addPlayer(...)");
+					case Class<T> c && c == Item.class -> throw new IllegalArgumentException("Items must be spawned using World#dropItem(...)");
+					case default -> throw new UnimplementedOperationException();
+				};
 	}
 
 	@Override

@@ -54,6 +54,11 @@ task sourcesJar(type: Jar) {
 
 tasks.withType(JavaCompile) {
     options.release.set(17)
+    options.compilerArgs += "--enable-preview"
+}
+
+tasks.withType(Test) {
+    jvmArgs += "--enable-preview"
 }
 
 artifacts {
