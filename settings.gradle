@@ -21,3 +21,8 @@ gradle.ext.version = '2.0.1'
   the API version of Minecraft we are targeting.
 */
 rootProject.name = 'MockBukkit-' + gradle.ext.apiVersion
+
+/*
+  The Java version we are building against.
+*/
+gradle.ext.javaVersion = 17
