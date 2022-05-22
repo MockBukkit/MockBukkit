@@ -1,15 +1,11 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.EnumMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-
+import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.attribute.AttributeInstanceMock;
+import be.seeseemelk.mockbukkit.potion.ActivePotionEffect;
+import com.google.common.base.Function;
+import com.google.common.base.Preconditions;
 import org.bukkit.Bukkit;
 import org.bukkit.FluidCollisionMode;
 import org.bukkit.GameMode;
@@ -33,12 +29,15 @@ import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
-import com.google.common.base.Function;
-
-import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.attribute.AttributeInstanceMock;
-import be.seeseemelk.mockbukkit.potion.ActivePotionEffect;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.EnumMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 
 public abstract class LivingEntityMock extends EntityMock implements LivingEntity
 {
@@ -162,12 +161,21 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
-	public AttributeInstance getAttribute(Attribute attribute)
+	public AttributeInstance getAttribute(@NotNull Attribute attribute)
 	{
 		if (attributes.containsKey(attribute))
 			return attributes.get(attribute);
 		else
 			throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void registerAttribute(@NotNull Attribute attribute)
+	{
+		Preconditions.checkArgument(attribute != null, "attribute");
+//		this.attributes.put(attribute, new AttributeInstanceMock(attribute, 0));
+		// TODO
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -588,4 +596,5 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
+
 }

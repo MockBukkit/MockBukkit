@@ -1,13 +1,12 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import java.util.UUID;
-
+import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.destroystokyo.paper.block.TargetBlockInfo;
 import com.destroystokyo.paper.entity.Pathfinder;
 import com.destroystokyo.paper.entity.TargetEntityInfo;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Location;
-import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Entity;
@@ -17,16 +16,16 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.Zombie;
 import org.bukkit.inventory.EntityEquipment;
-
-import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.UUID;
+
 public class ZombieMock extends MonsterMock implements Zombie
 {
+
 	private final EntityEquipment equipment = new EntityEquipmentMock(this);
 
 	private boolean baby;
@@ -539,10 +538,4 @@ public class ZombieMock extends MonsterMock implements Zombie
 		throw new UnimplementedOperationException();
 	}
 
-	@Override
-	public void registerAttribute(@NotNull Attribute attribute)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
 }

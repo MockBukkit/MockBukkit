@@ -1,13 +1,11 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import java.util.Set;
-import java.util.UUID;
-
+import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.destroystokyo.paper.block.TargetBlockInfo;
 import com.destroystokyo.paper.entity.TargetEntityInfo;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Location;
-import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.ArmorStand;
@@ -22,17 +20,15 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.EulerAngle;
 import org.jetbrains.annotations.NotNull;
-
-import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * This is the mock of an {@link ArmorStand}.
  *
  * @author TheBusyBiscuit
- *
  */
 public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 {
@@ -642,10 +638,4 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 		throw new UnimplementedOperationException();
 	}
 
-	@Override
-	public void registerAttribute(@NotNull Attribute attribute)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
 }
