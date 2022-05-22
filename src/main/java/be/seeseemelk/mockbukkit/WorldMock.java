@@ -53,11 +53,13 @@ import org.bukkit.entity.Item;
 import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.entity.ItemSpawnEvent;
+import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.world.TimeSkipEvent;
 import org.bukkit.generator.BiomeProvider;
 import org.bukkit.generator.BlockPopulator;
@@ -777,6 +779,7 @@ public class WorldMock implements World
 					}
 					case Item item -> new ItemSpawnEvent(item).callEvent();
 					case Player p -> true; // Shouldn't get here but just for parody.
+					case Projectile p -> new ProjectileLaunchEvent(entity).callEvent();
 					case null, default -> new EntitySpawnEvent(entity).callEvent();
 				};
 
