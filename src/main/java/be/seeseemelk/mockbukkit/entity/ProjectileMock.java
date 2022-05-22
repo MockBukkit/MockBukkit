@@ -10,8 +10,6 @@ import java.util.UUID;
 
 /**
  * The {@link ProjectileMock} is an {@link EntityMock} representing a generic {@link Projectile}.
- *
- * @author TheBusyBiscuit
  */
 public abstract class ProjectileMock extends AbstractProjectileMock implements Projectile
 {

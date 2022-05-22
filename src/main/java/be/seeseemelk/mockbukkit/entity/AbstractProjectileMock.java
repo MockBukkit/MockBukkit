@@ -6,6 +6,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
+/**
+ * The {@link AbstractProjectileMock} is an {@link EntityMock} representing a generic {@link Projectile}.
+ * Not everything that extends {@link AbstractProjectileMock} extends {@link ProjectileMock}.
+ */
 public abstract class AbstractProjectileMock extends EntityMock implements Projectile
 {
 
