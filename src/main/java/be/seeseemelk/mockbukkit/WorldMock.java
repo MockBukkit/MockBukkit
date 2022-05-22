@@ -755,43 +755,44 @@ public class WorldMock implements World
 
 	private void callSpawnEvent(EntityMock entity, CreatureSpawnEvent.SpawnReason reason)
 	{
-		boolean canceled = false;
+		boolean canceled = switch (entity)
+				{
+					case LivingEntity living && !(entity instanceof Player) ->
+					{
 
-		if (entity instanceof LivingEntity living && !(entity instanceof Player))
-		{
+						/* Not implemented
+						boolean isAnimal = entity instanceof Animals || entity instanceof WaterMob || entity instanceof Golem;
+						boolean isMonster = entity instanceof Monster || entity instanceof Ghast || entity instanceof Slime;
+						if (reason != CreatureSpawnEvent.SpawnReason.CUSTOM)
+						{
+							if (isAnimal && !getAllowAnimals() || isMonster && !getAllowMonsters())
+							{
+								entity.remove();
+								yield false;
+							}
+						}
+						*/
 
-			/* not implemented
-			boolean isAnimal = entity instanceof Animals || entity instanceof WaterMob || entity instanceof Golem;
-			boolean isMonster = entity instanceof Monster || entity instanceof Ghast || entity instanceof Slime;
-			if (reason != CreatureSpawnEvent.SpawnReason.CUSTOM) {
-				if (isAnimal && !getAllowAnimals() || isMonster && !getAllowMonsters()) {
-					entity.remove();
-					return;
-				}
-			}
-			*/
-
-			canceled = new CreatureSpawnEvent(living, reason).callEvent();
-		}
-		else if (entity instanceof Item item)
-		{
-			canceled = new ItemSpawnEvent(item).callEvent();
-		}
-		else
-		{
-			canceled = new EntitySpawnEvent(entity).callEvent();
-		}
+						yield new CreatureSpawnEvent(living, reason).callEvent();
+					}
+					case Item item -> new ItemSpawnEvent(item).callEvent();
+					case Player p -> true; // Shouldn't get here but just for parody.
+					case null, default -> new EntitySpawnEvent(entity).callEvent();
+				};
 
 		/* Not implemented
-		if (canceled || entity.isValid()) {
+		if (canceled || entity.isValid())
+		{
 			Entity vehicle = entity.getVehicle();
-			if (vehicle != null) {
-				vehicle.discard();
+			if (vehicle != null)
+			{
+				vehicle.remove();
 			}
-			for (Entity passenger : entity.getPassengers()) {
+			for (Entity passenger : entity.getPassengers())
+			{
 				passenger.remove();
 			}
-			entity.discard();
+			entity.remove();
 		}
 		*/
 	}
