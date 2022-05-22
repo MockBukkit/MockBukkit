@@ -38,7 +38,6 @@ import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -638,6 +637,8 @@ class ServerMockTest
 		playerList.disconnectPlayer(playerA);
 
 		assertFalse(playerList.getOnlinePlayers().contains(playerA));
+
+
 	}
 
 }

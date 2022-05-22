@@ -37,6 +37,7 @@ import org.bukkit.event.player.PlayerExpChangeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
@@ -1376,6 +1377,7 @@ class PlayerMockTest
 		assertTrue(player.disconnect());
 		assertFalse(player.isOnline());
 		assertFalse(server.getOnlinePlayers().contains(player));
+		server.getPluginManager().assertEventFired(PlayerQuitEvent.class);
 	}
 
 	@Test
@@ -1391,6 +1393,7 @@ class PlayerMockTest
 		assertTrue(player.isOnline());
 		assertTrue(server.getOnlinePlayers().contains(player));
 		assertTrue(player.hasPlayedBefore());
+		server.getPluginManager().assertEventFired(PlayerJoinEvent.class);
 	}
 
 	@Test
