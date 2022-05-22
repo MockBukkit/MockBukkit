@@ -128,6 +128,11 @@ public class FishHookMock extends ProjectileMock implements FishHook
 		return true;
 	}
 
+	/**
+	 * Updates the {@link HookState} of the hook.
+	 * Normally the server does this every tick.
+	 * @see #getState()
+	 */
 	public void updateState()
 	{
 		if (hookedEntity != null)
