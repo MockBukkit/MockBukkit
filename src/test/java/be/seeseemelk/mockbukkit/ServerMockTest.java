@@ -1,11 +1,21 @@
 package be.seeseemelk.mockbukkit;
 
 import be.seeseemelk.mockbukkit.command.CommandResult;
-import be.seeseemelk.mockbukkit.entity.*;
+import be.seeseemelk.mockbukkit.entity.EntityMock;
+import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
+import be.seeseemelk.mockbukkit.entity.PlayerMock;
+import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
+import be.seeseemelk.mockbukkit.entity.SimpleEntityMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
+import be.seeseemelk.mockbukkit.profile.PlayerProfileMock;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
-import org.bukkit.*;
+import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.Warning;
+import org.bukkit.World;
+import org.bukkit.WorldCreator;
+import org.bukkit.WorldType;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
@@ -43,6 +53,7 @@ import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 class ServerMockTest
 {
+
 	private ServerMock server;
 
 	@BeforeEach
@@ -185,7 +196,7 @@ class ServerMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = {"testcommand", "tc", "othercommand"})
+	@ValueSource(strings = { "testcommand", "tc", "othercommand" })
 	void testPluginCommand(String cmd)
 	{
 		MockBukkit.load(TestPlugin.class);
@@ -203,7 +214,7 @@ class ServerMockTest
 	void executeCommand_PlayerAndTrueReturnValue_Succeeds()
 	{
 		server.setPlayers(1);
-		TestPlugin plugin = (TestPlugin) MockBukkit.load(TestPlugin.class);
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
 		plugin.commandReturns = true;
 
 		Command command = server.getPluginCommand("testcommand");
@@ -220,7 +231,7 @@ class ServerMockTest
 	@Test
 	void executeCommand_ConsoleAndFalseReturnValue_Fails()
 	{
-		TestPlugin plugin = (TestPlugin) MockBukkit.load(TestPlugin.class);
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
 		plugin.commandReturns = false;
 
 		Command command = server.getPluginCommand("testcommand");
@@ -237,7 +248,7 @@ class ServerMockTest
 	@Test
 	void executeCommand_CommandAsStringAndTrueReturnValue_Succeeds()
 	{
-		TestPlugin plugin = (TestPlugin) MockBukkit.load(TestPlugin.class);
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
 		plugin.commandReturns = true;
 
 		CommandResult result = server.executeConsole("testcommand");
@@ -610,10 +621,38 @@ class ServerMockTest
 		playerB.assertSaid(PlainTextComponentSerializer.plainText().serialize(component));
 	}
 
+	@Test
+	void createProfile_NameOnly()
+	{
+		PlayerProfileMock profile = server.createProfile("Test");
+
+		assertEquals("Test", profile.getName());
+	}
+
+	@Test
+	void createProfile_UuidOnly()
+	{
+		UUID uuid = UUID.fromString("b9d9f8f9-f8d9-4f9d-9f8f-9f8f8f8f8f8");
+		PlayerProfileMock profile = server.createProfile(uuid);
+
+		assertEquals(uuid, profile.getUniqueId());
+	}
+
+	@Test
+	void createProfile_NameUuid()
+	{
+		UUID uuid = UUID.fromString("b9d9f8f9-f8d9-4f9d-9f8f-9f8f8f8f8f8");
+		PlayerProfileMock profile = server.createProfile(uuid, "Test");
+
+		assertEquals("Test", profile.getName());
+		assertEquals(uuid, profile.getUniqueId());
+	}
+
 }
 
 class TestRecipe implements Recipe
 {
+
 	private final ItemStack result;
 
 	public TestRecipe(@NotNull ItemStack result)
@@ -627,8 +666,9 @@ class TestRecipe implements Recipe
 	}
 
 	@Override
-	public ItemStack getResult()
+	public @NotNull ItemStack getResult()
 	{
 		return result;
 	}
+
 }

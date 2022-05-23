@@ -25,6 +25,7 @@ import be.seeseemelk.mockbukkit.inventory.ShulkerBoxInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
 import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 import be.seeseemelk.mockbukkit.potion.MockPotionEffectType;
+import be.seeseemelk.mockbukkit.profile.PlayerProfileMock;
 import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
 import be.seeseemelk.mockbukkit.scoreboard.ScoreboardManagerMock;
 import be.seeseemelk.mockbukkit.services.ServicesManagerMock;
@@ -87,7 +88,6 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.potion.PotionBrewer;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.profile.PlayerProfile;
 import org.bukkit.structure.StructureManager;
 import org.bukkit.util.CachedServerIcon;
 import org.jetbrains.annotations.NotNull;
@@ -1826,31 +1826,27 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public com.destroystokyo.paper.profile.@NotNull PlayerProfile createProfile(@NotNull UUID uuid)
+	public @NotNull PlayerProfileMock createProfile(@NotNull UUID uuid)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return createProfile(uuid, null);
 	}
 
 	@Override
-	public com.destroystokyo.paper.profile.@NotNull PlayerProfile createProfile(@NotNull String name)
+	public @NotNull PlayerProfileMock createProfile(@NotNull String name)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return createProfile(null, name);
 	}
 
 	@Override
-	public com.destroystokyo.paper.profile.@NotNull PlayerProfile createProfile(@Nullable UUID uuid, @Nullable String name)
+	public @NotNull PlayerProfileMock createProfile(@Nullable UUID uuid, @Nullable String name)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return new PlayerProfileMock(name, uuid);
 	}
 
 	@Override
-	public com.destroystokyo.paper.profile.@NotNull PlayerProfile createProfileExact(@Nullable UUID uuid, @Nullable String name)
+	public @NotNull PlayerProfileMock createProfileExact(@Nullable UUID uuid, @Nullable String name)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return new PlayerProfileMock(name, uuid);
 	}
 
 	@Override
@@ -1924,26 +1920,23 @@ public class ServerMock extends Server.Spigot implements Server
 
 	@Override
 	@Deprecated
-	public PlayerProfile createPlayerProfile(@Nullable UUID uniqueId, @Nullable String name)
+	public @NotNull PlayerProfileMock createPlayerProfile(@Nullable UUID uniqueId, @Nullable String name)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return new PlayerProfileMock(name, uniqueId);
 	}
 
 	@Override
 	@Deprecated
-	public PlayerProfile createPlayerProfile(@NotNull UUID uniqueId)
+	public @NotNull PlayerProfileMock createPlayerProfile(@NotNull UUID uniqueId)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return createPlayerProfile(uniqueId, null);
 	}
 
 	@Override
 	@Deprecated
-	public PlayerProfile createPlayerProfile(@NotNull String name)
+	public @NotNull PlayerProfileMock createPlayerProfile(@NotNull String name)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return createPlayerProfile(null, name);
 	}
 
 	@Override
