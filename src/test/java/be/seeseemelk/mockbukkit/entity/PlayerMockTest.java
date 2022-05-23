@@ -53,6 +53,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
+import java.net.InetSocketAddress;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.UUID;
@@ -1369,6 +1370,20 @@ class PlayerMockTest
 		{
 			player.spawnParticle(Particle.ITEM_CRACK, player.getLocation(), 1, new Object());
 		});
+	}
+
+	@Test
+	public void getAddress_Constructor()
+	{
+		assertNotNull(player.getAddress());
+	}
+
+	@Test
+	public void setAddress()
+	{
+		InetSocketAddress address = new InetSocketAddress("192.0.2.78", 25565);
+		player.setAddress(address);
+		assertEquals(address, player.getAddress());
 	}
 
 }
