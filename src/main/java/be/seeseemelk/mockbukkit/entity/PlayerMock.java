@@ -112,6 +112,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.LinkedTransferQueue;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -178,7 +179,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		setCompassTarget(getLocation());
 		closeInventory();
 
-		Random random = new Random();
+		Random random = ThreadLocalRandom.current();
 		address = new InetSocketAddress("192.0.2." + random.nextInt(255), random.nextInt(32768, 65535));
 	}
 
