@@ -26,7 +26,6 @@ import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
 import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 import be.seeseemelk.mockbukkit.potion.MockPotionEffectType;
 import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
-import be.seeseemelk.mockbukkit.scheduler.ScheduledTask;
 import be.seeseemelk.mockbukkit.scoreboard.ScoreboardManagerMock;
 import be.seeseemelk.mockbukkit.services.ServicesManagerMock;
 import be.seeseemelk.mockbukkit.tags.TagRegistry;
@@ -113,8 +112,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
@@ -228,13 +225,9 @@ public class ServerMock extends Server.Spigot implements Server
 		playerList.addPlayer(player);
 
 		CountDownLatch conditionLatch = new CountDownLatch(1);
-		getScheduler().runTaskAsynchronously(null, () ->
-		{
-			AsyncPlayerPreLoginEvent preLoginEvent = new AsyncPlayerPreLoginEvent(player.getName(), player.getAddress().getAddress(), player.getUniqueId());
-			getPluginManager().callEventAsynchronously(preLoginEvent);
-			conditionLatch.countDown();
-		});
-		getScheduler().performOneTick();
+
+		AsyncPlayerPreLoginEvent preLoginEvent = new AsyncPlayerPreLoginEvent(player.getName(), player.getAddress().getAddress(), player.getUniqueId());
+		getPluginManager().callEventAsynchronously(preLoginEvent, (e) -> conditionLatch.countDown());
 
 		try
 		{
