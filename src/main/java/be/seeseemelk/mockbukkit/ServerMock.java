@@ -228,11 +228,10 @@ public class ServerMock extends Server.Spigot implements Server
 		playerList.addPlayer(player);
 
 		CountDownLatch conditionLatch = new CountDownLatch(1);
-		AtomicReference<Future<?>> future = new AtomicReference<>();
-		ScheduledTask task = (ScheduledTask) getScheduler().runTaskAsynchronously(null, () ->
+		getScheduler().runTaskAsynchronously(null, () ->
 		{
 			AsyncPlayerPreLoginEvent preLoginEvent = new AsyncPlayerPreLoginEvent(player.getName(), player.getAddress().getAddress(), player.getUniqueId());
-			future.set(getPluginManager().callEventAsynchronously(preLoginEvent));
+			getPluginManager().callEventAsynchronously(preLoginEvent);
 			conditionLatch.countDown();
 		});
 		getScheduler().performOneTick();
@@ -240,9 +239,8 @@ public class ServerMock extends Server.Spigot implements Server
 		try
 		{
 			conditionLatch.await();
-			future.get().get();
 		}
-		catch (Exception e)
+		catch (InterruptedException e)
 		{
 			throw new RuntimeException("Exception occurred while waiting for AsyncPlayerPreLoginEvent to complete", e);
 		}

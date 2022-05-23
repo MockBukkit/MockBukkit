@@ -436,9 +436,8 @@ public class PluginManagerMock implements PluginManager
 	 * using the {@link BukkitSchedulerMock}.
 	 *
 	 * @param event The asynchronous {@link Event} to call.
-	 * @return A {@link Future} that will complete once the event has run.
 	 */
-	public Future<?> callEventAsynchronously(@NotNull Event event)
+	public void callEventAsynchronously(@NotNull Event event)
 	{
 		if (!event.isAsynchronous())
 		{
@@ -446,7 +445,7 @@ public class PluginManagerMock implements PluginManager
 		}
 
 		// Our Scheduler will call the Event on a dedicated Event Thread Executor
-		return server.getScheduler().executeAsyncEvent(event);
+		server.getScheduler().executeAsyncEvent(event);
 	}
 
 	private void callRegisteredListener(@NotNull RegisteredListener registration, @NotNull Event event)
