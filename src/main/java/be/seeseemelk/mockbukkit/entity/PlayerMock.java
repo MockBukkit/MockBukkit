@@ -108,11 +108,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Queue;
-import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.LinkedTransferQueue;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -157,8 +155,6 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 
 	private final StatisticsMock statistics = new StatisticsMock();
 
-	private InetSocketAddress address;
-
 	public PlayerMock(ServerMock server, String name)
 	{
 		this(server, name, UUID.nameUUIDFromBytes(("OfflinePlayer:" + name).getBytes(StandardCharsets.UTF_8)));
@@ -180,9 +176,6 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		setLocation(Bukkit.getWorlds().get(0).getSpawnLocation().clone());
 		setCompassTarget(getLocation());
 		closeInventory();
-
-		Random random = ThreadLocalRandom.current();
-		address = new InetSocketAddress("192.0.2." + random.nextInt(255), random.nextInt(32768, 65535));
 	}
 
 	@Override
@@ -1190,20 +1183,11 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		return this.compassTarget;
 	}
 
-	/**
-	 * Sets the {@link InetSocketAddress} returned by {@link #getAddress}.
-	 *
-	 * @param address The address to set.
-	 */
-	public void setAddress(InetSocketAddress address)
-	{
-		this.address = address;
-	}
-
 	@Override
 	public InetSocketAddress getAddress()
 	{
-		return address;
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
