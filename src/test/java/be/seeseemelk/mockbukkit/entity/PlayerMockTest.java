@@ -1375,15 +1375,26 @@ class PlayerMockTest
 	@Test
 	public void getAddress_Constructor()
 	{
+		PlayerMock player = server.addPlayer();
 		assertNotNull(player.getAddress());
 	}
 
 	@Test
 	public void setAddress()
 	{
+		PlayerMock player = server.addPlayer();
 		InetSocketAddress address = new InetSocketAddress("192.0.2.78", 25565);
 		player.setAddress(address);
 		assertEquals(address, player.getAddress());
+	}
+
+	@Test
+	public void getAddress_NullWhenNotOnline()
+	{
+		PlayerMock player = new PlayerMock(server, "testPlayer");
+		assertNull(player.getAddress());
+		server.addPlayer(player);
+		assertNotNull(player.getAddress());
 	}
 
 }

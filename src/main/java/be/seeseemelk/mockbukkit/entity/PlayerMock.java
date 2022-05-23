@@ -1201,7 +1201,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public @Nullable InetSocketAddress getAddress()
 	{
-		return address;
+		return (getServer().getPlayer(getUniqueId()) == null) ? null : address;
 	}
 
 	@Override
