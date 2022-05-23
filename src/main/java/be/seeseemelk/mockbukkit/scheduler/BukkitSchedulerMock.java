@@ -182,9 +182,9 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			}
 			if (System.currentTimeMillis() > (systemTime + executorTimeout))
 			{
-				// If a plugin has left a a runnable going and not cancelled it we could call this bad practice.
-				// we should now force interrupt all these runnables forcing them to throw Interrupted Exceptions.
-				// if they handle that
+				// If a plugin has left a runnable going and not cancelled it we could call this bad practice.
+				// We should force interrupt all these runnables, forcing them to throw Interrupted Exceptions
+				// if they handle that.
 				for (ScheduledTask task : scheduledTasks.getCurrentTaskList())
 				{
 					if (task.isRunning())

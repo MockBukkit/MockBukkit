@@ -26,6 +26,7 @@ import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
 import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 import be.seeseemelk.mockbukkit.potion.MockPotionEffectType;
 import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
+import be.seeseemelk.mockbukkit.scheduler.ScheduledTask;
 import be.seeseemelk.mockbukkit.scoreboard.ScoreboardManagerMock;
 import be.seeseemelk.mockbukkit.services.ServicesManagerMock;
 import be.seeseemelk.mockbukkit.tags.TagRegistry;
@@ -73,6 +74,7 @@ import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.generator.ChunkGenerator.ChunkData;
 import org.bukkit.inventory.Inventory;
@@ -110,6 +112,9 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
@@ -118,6 +123,7 @@ import java.util.stream.Collectors;
 
 public class ServerMock extends Server.Spigot implements Server
 {
+
 	private static final String BUKKIT_VERSION = "1.18.2";
 	private static final String JOIN_MESSAGE = "%s has joined the server.";
 	private static final String MOTD = "A Minecraft Server";
@@ -220,8 +226,28 @@ public class ServerMock extends Server.Spigot implements Server
 	{
 		assertMainThread();
 		playerList.addPlayer(player);
-		PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(player,
-				String.format(JOIN_MESSAGE, player.getDisplayName()));
+
+		CountDownLatch conditionLatch = new CountDownLatch(1);
+		AtomicReference<Future<?>> future = new AtomicReference<>();
+		ScheduledTask task = (ScheduledTask) getScheduler().runTaskAsynchronously(null, () ->
+		{
+			AsyncPlayerPreLoginEvent preLoginEvent = new AsyncPlayerPreLoginEvent(player.getName(), player.getAddress().getAddress(), player.getUniqueId());
+			future.set(getPluginManager().callEventAsynchronously(preLoginEvent));
+			conditionLatch.countDown();
+		});
+		getScheduler().performOneTick();
+
+		try
+		{
+			conditionLatch.await();
+			future.get().get();
+		}
+		catch (Exception e)
+		{
+			throw new RuntimeException("Exception occurred while waiting for AsyncPlayerPreLoginEvent to complete", e);
+		}
+
+		PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(player, String.format(JOIN_MESSAGE, player.getDisplayName()));
 		Bukkit.getPluginManager().callEvent(playerJoinEvent);
 
 		player.setLastPlayed(getCurrentServerTime());
@@ -1979,4 +2005,5 @@ public class ServerMock extends Server.Spigot implements Server
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
+
 }
