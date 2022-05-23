@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class ScoreboardManagerMock implements ScoreboardManager
 {
+
 	private final ScoreboardMock mainScoreboard = new ScoreboardMock();
 
 	@Override
