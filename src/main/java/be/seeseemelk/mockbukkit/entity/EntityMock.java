@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.entity;
 
+import be.seeseemelk.mockbukkit.AsyncCatcher;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.command.MessageTarget;
@@ -486,6 +487,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public List<Entity> getNearbyEntities(double x, double y, double z)
 	{
+		AsyncCatcher.catchOp("getNearbyEntities");
 		// TODO Auto-generated constructor stub
 		throw new UnimplementedOperationException();
 	}

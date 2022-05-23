@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
+import be.seeseemelk.mockbukkit.AsyncCatcher;
 import org.bukkit.Bukkit;
 import org.bukkit.FluidCollisionMode;
 import org.bukkit.GameMode;
@@ -328,15 +329,16 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
-	public boolean addPotionEffect(PotionEffect effect)
+	public boolean addPotionEffect(@NotNull PotionEffect effect)
 	{
 		return addPotionEffect(effect, false);
 	}
 
 	@Override
 	@Deprecated
-	public boolean addPotionEffect(PotionEffect effect, boolean force)
+	public boolean addPotionEffect(@NotNull PotionEffect effect, boolean force)
 	{
+		AsyncCatcher.catchOp("effect add");
 		if (effect != null)
 		{
 			// Bukkit now allows multiple effects of the same type,
