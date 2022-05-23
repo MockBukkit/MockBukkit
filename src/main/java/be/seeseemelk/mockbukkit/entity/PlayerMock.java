@@ -1192,13 +1192,13 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	 *
 	 * @param address The address to set.
 	 */
-	public void setAddress(InetSocketAddress address)
+	public void setAddress(@Nullable InetSocketAddress address)
 	{
 		this.address = address;
 	}
 
 	@Override
-	public InetSocketAddress getAddress()
+	public @Nullable InetSocketAddress getAddress()
 	{
 		return address;
 	}
