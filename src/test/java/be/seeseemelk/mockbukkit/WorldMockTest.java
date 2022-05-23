@@ -1,15 +1,6 @@
 package be.seeseemelk.mockbukkit;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assumptions.assumeFalse;
-
-import java.util.List;
-
+import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import be.seeseemelk.mockbukkit.block.state.BlockStateMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
@@ -31,7 +22,15 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import be.seeseemelk.mockbukkit.block.BlockMock;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assumptions.assumeFalse;
 
 class WorldMockTest
 {
@@ -189,9 +188,9 @@ class WorldMockTest
 		WorldMock world = new WorldMock();
 		world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ZOMBIE);
 		world.dropItem(new Location(world, 0, 0, 0), new ItemStack(Material.STONE));
-		assertEquals(1, world.getEntitiesByClass(new Class[]{ZombieMock.class}).size());
-		assertEquals(1, world.getEntitiesByClass(new Class[]{ItemEntityMock.class}).size());
-		assertEquals(2, world.getEntitiesByClass(new Class[]{ZombieMock.class, ItemEntityMock.class}).size());
+		assertEquals(1, world.getEntitiesByClass(new Class[]{ ZombieMock.class }).size());
+		assertEquals(1, world.getEntitiesByClass(new Class[]{ ItemEntityMock.class }).size());
+		assertEquals(2, world.getEntitiesByClass(new Class[]{ ZombieMock.class, ItemEntityMock.class }).size());
 	}
 
 	@Test
