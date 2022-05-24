@@ -65,8 +65,8 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	{
 		waitAsyncTasksFinished();
 
-		shutdownPool(pool, 2000);
-		shutdownPool(asyncEventExecutor, 2000);
+		shutdownPool(pool, executorTimeout);
+		shutdownPool(asyncEventExecutor, executorTimeout);
 
 		if (asyncException.get() != null)
 			throw new AsyncTaskException(asyncException.get());
