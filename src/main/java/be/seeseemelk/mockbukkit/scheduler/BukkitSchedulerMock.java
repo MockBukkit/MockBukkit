@@ -167,7 +167,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 
 	/**
 	 * Waits until all asynchronous tasks have finished executing. If you have an asynchronous task that runs
-	 * indefinitely, this function will never return.
+	 * indefinitely, this function will never return. Will not wait for async events.
 	 */
 	public void waitAsyncTasksFinished()
 	{
