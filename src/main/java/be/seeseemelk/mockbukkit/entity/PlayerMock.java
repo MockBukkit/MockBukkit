@@ -482,6 +482,13 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
+	public void updateInventory()
+	{
+		// Normally a packet would be sent here to update the player's inventory.
+		// We just pretend that this happened!
+	}
+
+	@Override
 	public boolean performCommand(@NotNull String command)
 	{
 		return Bukkit.dispatchCommand(this, command);
@@ -1598,13 +1605,6 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	@Deprecated
 	public void hideTitle()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void updateInventory()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
