@@ -95,7 +95,7 @@ public class WorldMock implements World
 	private final Map<GameRule<?>, Object> gameRules = new HashMap<>();
 	private final MetadataTable metadataTable = new MetadataTable();
 	private final Map<ChunkCoordinate, ChunkMock> loadedChunks = new HashMap<>();
-	private PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
+	private final PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
 	private final ServerMock server;
 	private final Material defaultBlock;
 	private final int grassHeight;
@@ -441,6 +441,11 @@ public class WorldMock implements World
 	public void removeMetadata(@NotNull String metadataKey, @NotNull Plugin owningPlugin)
 	{
 		metadataTable.removeMetadata(metadataKey, owningPlugin);
+	}
+
+	public void clearMetadata(Plugin plugin)
+	{
+		metadataTable.clearMetadata(plugin);
 	}
 
 	@Override

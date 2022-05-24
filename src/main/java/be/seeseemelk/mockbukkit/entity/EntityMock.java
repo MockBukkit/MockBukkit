@@ -227,6 +227,10 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		metadataTable.removeMetadata(metadataKey, owningPlugin);
 	}
 
+	public void clearMetadata(Plugin plugin)
+	{
+		metadataTable.clearMetadata(plugin);
+	}
 	@Override
 	public @NotNull PersistentDataContainer getPersistentDataContainer()
 	{
