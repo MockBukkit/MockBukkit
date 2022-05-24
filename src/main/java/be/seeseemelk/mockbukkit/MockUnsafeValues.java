@@ -31,13 +31,13 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 @Deprecated
 public class MockUnsafeValues implements UnsafeValues
 {
 
-	private final Set<String> compatibleApiVersions = new HashSet<>(Arrays.asList("1.13", "1.14", "1.15", "1.16", "1.17", "1.18"));
+	private static final List<String> COMPATIBLE_API_VERSIONS = Arrays.asList("1.13", "1.14", "1.15", "1.16", "1.17", "1.18");
+	private static final String MINIMUM_API_VERSION = "none";
 
 	public static final ComponentFlattener FLATTENER = ComponentFlattener.basic().toBuilder()
 			.build();
@@ -149,10 +149,26 @@ public class MockUnsafeValues implements UnsafeValues
 	public void checkSupported(PluginDescriptionFile pdf) throws InvalidPluginException
 	{
 		if (pdf.getAPIVersion() == null)
-			throw new InvalidPluginException("Plugin does not specify 'api-version' in plugin.yml");
+		{
+			if (COMPATIBLE_API_VERSIONS.contains(MINIMUM_API_VERSION))
+			{
+				throw new InvalidPluginException("Plugin does not specify an 'api-version' in its plugin.yml.");
+			}
+		}
+		else
+		{
+			int pluginIndex = COMPATIBLE_API_VERSIONS.indexOf(pdf.getAPIVersion());
 
-		if (!compatibleApiVersions.contains(pdf.getAPIVersion()))
-			throw new InvalidPluginException(String.format("Plugin api version %s is incompatible with the current MockBukkit version", pdf.getAPIVersion()));
+			if (pluginIndex == -1)
+			{
+				throw new InvalidPluginException("Unsupported API version " + pdf.getAPIVersion());
+			}
+
+			if (pluginIndex < COMPATIBLE_API_VERSIONS.indexOf(MINIMUM_API_VERSION))
+			{
+				throw new InvalidPluginException("Plugin API version " + pdf.getAPIVersion() + " is lower than the minimum allowed version.");
+			}
+		}
 	}
 
 	@Override
@@ -206,8 +222,7 @@ public class MockUnsafeValues implements UnsafeValues
 	@Override
 	public boolean isSupportedApiVersion(String apiVersion)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return COMPATIBLE_API_VERSIONS.contains(apiVersion);
 	}
 
 	@Override
