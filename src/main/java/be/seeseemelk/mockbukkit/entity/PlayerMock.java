@@ -374,16 +374,6 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		return (online) ? this : null;
 	}
 
-	/**
-	 * Sets the return value of {@link #isOnline}.
-	 *
-	 * @param online Whether the player is online.
-	 */
-	public void setOnline(boolean online)
-	{
-		this.online = online;
-	}
-
 	@Override
 	public boolean isOnline()
 	{
