@@ -1358,13 +1358,13 @@ class PlayerMockTest
 	}
 
 	@Test
-	public void testPlayerSpawnParticle_Correct_DataType()
+	void testPlayerSpawnParticle_Correct_DataType()
 	{
 		player.spawnParticle(Particle.ITEM_CRACK, player.getLocation(), 1, new ItemStack(Material.STONE));
 	}
 
 	@Test
-	public void testPlayerSpawnParticle_Incorrect_DataType()
+	void testPlayerSpawnParticle_Incorrect_DataType()
 	{
 		assertThrows(IllegalArgumentException.class, () ->
 		{
@@ -1373,14 +1373,14 @@ class PlayerMockTest
 	}
 
 	@Test
-	public void getAddress_Constructor()
+	void getAddress_Constructor()
 	{
 		PlayerMock player = server.addPlayer();
 		assertNotNull(player.getAddress());
 	}
 
 	@Test
-	public void setAddress()
+	void setAddress()
 	{
 		PlayerMock player = server.addPlayer();
 		InetSocketAddress address = new InetSocketAddress("192.0.2.78", 25565);
@@ -1389,7 +1389,7 @@ class PlayerMockTest
 	}
 
 	@Test
-	public void getAddress_NullWhenNotOnline()
+	void getAddress_NullWhenNotOnline()
 	{
 		PlayerMock player = new PlayerMock(server, "testPlayer");
 		assertNull(player.getAddress());
