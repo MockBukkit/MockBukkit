@@ -103,6 +103,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -1179,6 +1180,8 @@ public class ServerMock extends Server.Spigot implements Server
 			getOnlinePlayers().forEach(p -> p.clearMetadata(plugin));
 		}
 
+//		reloadData(); Not implemented.
+
 		// Wait up to 2.5 seconds for plugins to finish async tasks.
 		int pollCount = 0;
 		while (pollCount < 50 && getScheduler().getPendingTasks().size() > 0)   // TODO: Not implemented
@@ -1193,13 +1196,18 @@ public class ServerMock extends Server.Spigot implements Server
 
 		getScheduler().saveOverdueTasks();
 
+		List<Plugin> newPlugins = new ArrayList<>(pluginsClone.length);
 		for (Plugin oldPlugin : pluginsClone)
 		{
 			if (!(oldPlugin instanceof JavaPlugin oldJavaPlugin))
 				continue;
 			JavaPlugin plugin = getPluginManager().loadPlugin(oldJavaPlugin.getClass(), oldJavaPlugin.getDescription());
-			getPluginManager().enablePlugin(plugin);
+			newPlugins.add(plugin);
 		}
+
+		newPlugins.stream()
+				.sorted(Comparator.comparing(p -> p.getDescription().getLoad()))
+				.forEach(plugin -> getPluginManager().enablePlugin(plugin));
 
 		new ServerLoadEvent(ServerLoadEvent.LoadType.RELOAD).callEvent();
 	}
