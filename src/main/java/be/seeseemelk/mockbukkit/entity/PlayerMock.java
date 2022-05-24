@@ -375,7 +375,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public boolean isOnline()
 	{
-		return getServer().getPlayer(getUniqueId()) == null;
+		return getServer().getPlayer(getUniqueId()) != null;
 	}
 
 	@Override
