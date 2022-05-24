@@ -1206,8 +1206,8 @@ public class ServerMock extends Server.Spigot implements Server
 		}
 
 		newPlugins.stream()
-				.sorted(Comparator.comparing(p -> p.getDescription().getLoad()))
-				.forEach(plugin -> getPluginManager().enablePlugin(plugin));
+		.sorted(Comparator.comparing(p -> p.getDescription().getLoad()))
+		.forEach(plugin -> getPluginManager().enablePlugin(plugin));
 
 		new ServerLoadEvent(ServerLoadEvent.LoadType.RELOAD).callEvent();
 	}
