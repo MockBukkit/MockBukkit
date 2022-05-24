@@ -72,7 +72,8 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			throw new AsyncTaskException(asyncException.get());
 	}
 
-	private void shutdownPool(ExecutorService pool, long timeout) {
+	private void shutdownPool(ExecutorService pool, long timeout)
+	{
 		pool.shutdown();
 		try
 		{
