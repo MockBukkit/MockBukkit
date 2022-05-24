@@ -85,6 +85,7 @@ import org.bukkit.inventory.Recipe;
 import org.bukkit.loot.LootTable;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.potion.PotionBrewer;
 import org.bukkit.potion.PotionEffectType;
@@ -1192,7 +1193,13 @@ public class ServerMock extends Server.Spigot implements Server
 
 		getScheduler().saveOverdueTasks();
 
-		// TODO: Figure out a good way to load plugins again.
+		for (Plugin oldPlugin : pluginsClone)
+		{
+			if (!(oldPlugin instanceof JavaPlugin oldJavaPlugin))
+				continue;
+			JavaPlugin plugin = getPluginManager().loadPlugin(oldJavaPlugin.getClass(), oldJavaPlugin.getDescription());
+			getPluginManager().enablePlugin(plugin);
+		}
 
 		new ServerLoadEvent(ServerLoadEvent.LoadType.RELOAD).callEvent();
 	}
