@@ -37,8 +37,6 @@ public class MockUnsafeValues implements UnsafeValues
 {
 
 	private static final List<String> COMPATIBLE_API_VERSIONS = Arrays.asList("1.13", "1.14", "1.15", "1.16", "1.17", "1.18");
-	private static final String MINIMUM_API_VERSION = "none";
-
 	public static final ComponentFlattener FLATTENER = ComponentFlattener.basic().toBuilder()
 			.build();
 	public static final LegacyComponentSerializer LEGACY_SECTION_UXRC = LegacyComponentSerializer.builder().flattener(FLATTENER).hexColors().useUnusualXRepeatedCharacterHexFormat().build();
@@ -49,6 +47,8 @@ public class MockUnsafeValues implements UnsafeValues
 	public static final GsonComponentSerializer COLOR_DOWNSAMPLING_GSON = GsonComponentSerializer.builder()
 			.downsampleColors()
 			.build();
+
+	private String minimumApiVersion = "none";
 
 	@Override
 	public ComponentFlattener componentFlattener()
@@ -145,12 +145,22 @@ public class MockUnsafeValues implements UnsafeValues
 		throw new UnimplementedOperationException();
 	}
 
+	/**
+	 * Sets the minimum api-version allowed.
+	 *
+	 * @param minimumApiVersion The minimum API version to support.
+	 */
+	public void setMinimumApiVersion(String minimumApiVersion)
+	{
+		this.minimumApiVersion = minimumApiVersion;
+	}
+
 	@Override
 	public void checkSupported(PluginDescriptionFile pdf) throws InvalidPluginException
 	{
 		if (pdf.getAPIVersion() == null)
 		{
-			if (COMPATIBLE_API_VERSIONS.contains(MINIMUM_API_VERSION))
+			if (COMPATIBLE_API_VERSIONS.contains(minimumApiVersion))
 			{
 				throw new InvalidPluginException("Plugin does not specify an 'api-version' in its plugin.yml.");
 			}
@@ -164,7 +174,7 @@ public class MockUnsafeValues implements UnsafeValues
 				throw new InvalidPluginException("Unsupported API version " + pdf.getAPIVersion());
 			}
 
-			if (pluginIndex < COMPATIBLE_API_VERSIONS.indexOf(MINIMUM_API_VERSION))
+			if (pluginIndex < COMPATIBLE_API_VERSIONS.indexOf(minimumApiVersion))
 			{
 				throw new InvalidPluginException("Plugin API version " + pdf.getAPIVersion() + " is lower than the minimum allowed version.");
 			}

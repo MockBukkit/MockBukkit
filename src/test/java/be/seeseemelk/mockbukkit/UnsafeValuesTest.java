@@ -83,4 +83,14 @@ class UnsafeValuesTest
 		});
 	}
 
+	@Test
+	void minimumApiVersion_GreaterThanCurrentVersion()
+	{
+		assertThrows(InvalidPluginException.class, () ->
+		{
+			mockUnsafeValues.setMinimumApiVersion("1.15");
+			checkVersion("1.13");
+		});
+	}
+
 }
