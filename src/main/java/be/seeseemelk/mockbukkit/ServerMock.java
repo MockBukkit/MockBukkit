@@ -222,7 +222,7 @@ public class ServerMock extends Server.Spigot implements Server
 		assertMainThread();
 		playerList.addPlayer(player);
 		PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(player,
-				String.format(JOIN_MESSAGE, player.getDisplayName()));
+		        String.format(JOIN_MESSAGE, player.getDisplayName()));
 		Bukkit.getPluginManager().callEvent(playerJoinEvent);
 
 		player.setLastPlayed(getCurrentServerTime());
@@ -722,7 +722,7 @@ public class ServerMock extends Server.Spigot implements Server
 	public Set<String> getIPBans()
 	{
 		return this.playerList.getIPBans().getBanEntries().stream().map(BanEntry::getTarget)
-				.collect(Collectors.toSet());
+		       .collect(Collectors.toSet());
 	}
 
 	@Override
@@ -1180,10 +1180,13 @@ public class ServerMock extends Server.Spigot implements Server
 
 		// Wait up to 2.5 seconds for plugins to finish async tasks.
 		int pollCount = 0;
-		while (pollCount < 50 && getScheduler().getPendingTasks().size() > 0) { // TODO: Not implemented
-			try {
+		while (pollCount < 50 && getScheduler().getPendingTasks().size() > 0)   // TODO: Not implemented
+		{
+			try
+			{
 				Thread.sleep(50); // TODO: Can we avoid busy waiting?
-			} catch (InterruptedException ignored) {}
+			}
+			catch (InterruptedException ignored) {}
 			pollCount++;
 		}
 
@@ -1668,7 +1671,7 @@ public class ServerMock extends Server.Spigot implements Server
 
 	@Override
 	public ItemStack createExplorerMap(World world, Location location, StructureType structureType, int radius,
-									   boolean findUnexplored)
+	                                   boolean findUnexplored)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
