@@ -220,6 +220,7 @@ public class ServerMock extends Server.Spigot implements Server
 	{
 		assertMainThread();
 		playerList.addPlayer(player);
+		player.setOnline(true);
 		PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(player,
 		        String.format(JOIN_MESSAGE, player.getDisplayName()));
 		Bukkit.getPluginManager().callEvent(playerJoinEvent);
