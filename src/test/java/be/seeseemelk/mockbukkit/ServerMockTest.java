@@ -9,6 +9,7 @@ import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.event.server.ServerLoadEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.potion.PotionEffectType;
@@ -608,6 +609,19 @@ class ServerMockTest
 
 		playerA.assertSaid(PlainTextComponentSerializer.plainText().serialize(component));
 		playerB.assertSaid(PlainTextComponentSerializer.plainText().serialize(component));
+	}
+
+	@Test
+	void reload()
+	{
+		server.reload();
+	}
+
+	@Test
+	void reload_ServerLoadEvent_IsCalled()
+	{
+		server.reload();
+		server.getPluginManager().assertEventFired(ServerLoadEvent.class, (e) -> e.getType() == ServerLoadEvent.LoadType.RELOAD);
 	}
 
 }

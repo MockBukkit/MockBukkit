@@ -74,6 +74,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.server.ServerLoadEvent;
 import org.bukkit.generator.ChunkGenerator.ChunkData;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
@@ -1166,8 +1167,31 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public void reload()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Plugin[] pluginsClone = pluginManager.getPlugins().clone();
+		this.pluginManager.clearPlugins();
+		this.commandMap.clearCommands();
+		for (Plugin plugin : pluginsClone)
+		{
+			getPluginManager().disablePlugin(plugin);
+			getWorlds().stream().map(WorldMock.class::cast).forEach(w -> w.clearMetadata(plugin));
+			getEntities().forEach(e -> e.clearMetadata(plugin));
+			getOnlinePlayers().forEach(p -> p.clearMetadata(plugin));
+		}
+
+		// Wait up to 2.5 seconds for plugins to finish async tasks.
+		int pollCount = 0;
+		while (pollCount < 50 && getScheduler().getPendingTasks().size() > 0) { // TODO: Not implemented
+			try {
+				Thread.sleep(50); // TODO: Can we avoid busy waiting?
+			} catch (InterruptedException ignored) {}
+			pollCount++;
+		}
+
+		getScheduler().saveOverdueTasks();
+
+		// TODO: Figure out a good way to load plugins again.
+
+		new ServerLoadEvent(ServerLoadEvent.LoadType.RELOAD).callEvent();
 	}
 
 	@Override
