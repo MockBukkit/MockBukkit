@@ -371,12 +371,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public Player getPlayer()
 	{
-		if (online)
-		{
-			return this;
-		}
-
-		return null;
+		return (online) ? this : null;
 	}
 
 	/**
@@ -1211,7 +1206,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public @Nullable InetSocketAddress getAddress()
 	{
-		return (getServer().getPlayer(getUniqueId()) == null) ? null : address;
+		return (isOnline()) ? address : null;
 	}
 
 	@Override
