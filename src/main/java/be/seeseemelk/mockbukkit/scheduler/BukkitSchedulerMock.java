@@ -10,6 +10,7 @@ import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.scheduler.BukkitWorker;
 import org.jetbrains.annotations.NotNull;
+import org.opentest4j.AssertionFailedError;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +40,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	private long currentTick = 0;
 	private int id = 0;
 	private long executorTimeout = 60000;
+	private final List<BukkitWorker> overdueTasks = new ArrayList<>();
 
 	private static Runnable wrapTask(ScheduledTask task)
 	{
@@ -495,6 +497,32 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	protected int getActiveRunningCount()
 	{
 		return pool.getActiveCount();
+	}
+
+	/**
+	 * Adds any active workers to the overdue tasks list.
+	 */
+	public void saveOverdueTasks()
+	{
+		this.overdueTasks.clear();
+		this.overdueTasks.addAll(getActiveWorkers());
+	}
+
+	/**
+	 * @return A new {@link List} of all overdue tasks.
+	 */
+	public List<BukkitWorker> getOverdueTasks()
+	{
+		return new ArrayList<>(this.overdueTasks);
+	}
+
+	/**
+	 * Asserts that there are no overdue tasks.
+	 */
+	public void assertNoOverdueTasks()
+	{
+		if (!overdueTasks.isEmpty())
+			throw new AssertionFailedError("There are overdue tasks: " + overdueTasks);
 	}
 
 	private static class TaskList

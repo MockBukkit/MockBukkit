@@ -1,11 +1,12 @@
 package be.seeseemelk.mockbukkit.scheduler;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.TestPlugin;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.scheduler.BukkitTask;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.opentest4j.AssertionFailedError;
 
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
@@ -14,12 +15,13 @@ import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.TestPlugin;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.scheduler.BukkitTask;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BukkitSchedulerMockTest
 {
@@ -295,4 +297,31 @@ class BukkitSchedulerMockTest
 			scheduler.shutdown();
 		});
 	}
+
+	@Test
+	public void saveOverdueTasks()
+	{
+		scheduler.saveOverdueTasks();
+		assertTrue(scheduler.getOverdueTasks().isEmpty());
+		scheduler.runTaskAsynchronously(null, () -> {});
+		scheduler.saveOverdueTasks();
+		assertFalse(scheduler.getOverdueTasks().isEmpty());
+	}
+
+	@Test
+	public void assertNoOverdueTasks()
+	{
+		scheduler.saveOverdueTasks();
+		scheduler.assertNoOverdueTasks();
+	}
+
+	@Test
+	public void assertNoOverdueTasks_FailedWhenOverdue()
+	{
+		scheduler.runTaskTimerAsynchronously(null, () -> {}, 0, 1);
+		scheduler.performOneTick();
+		scheduler.saveOverdueTasks();
+		assertThrowsExactly(AssertionFailedError.class, () -> scheduler.assertNoOverdueTasks());
+	}
+
 }
