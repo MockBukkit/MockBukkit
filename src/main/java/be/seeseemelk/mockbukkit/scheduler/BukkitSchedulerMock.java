@@ -67,7 +67,6 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		pool.shutdown();
 		if (asyncException.get() != null)
 			throw new AsyncTaskException(asyncException.get());
-		asyncEventExecutor.shutdownNow();
 	}
 
 	public @NotNull Future<?> executeAsyncEvent(Event event)
@@ -182,8 +181,8 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			}
 			if (System.currentTimeMillis() > (systemTime + executorTimeout))
 			{
-				// If a plugin has left a a runnable going and not cancelled it we could call this bad practice.
-				// we should now force interrupt all these runnables forcing them to throw Interrupted Exceptions.
+				// If a plugin has left a runnable going and not cancelled it we could call this bad practice.
+				// We should force interrupt all those runnables forcing them to throw Interrupted Exceptions-
 				// if they handle that
 				for (ScheduledTask task : scheduledTasks.getCurrentTaskList())
 				{
@@ -197,6 +196,20 @@ public class BukkitSchedulerMock implements BukkitScheduler
 				}
 				pool.shutdownNow();
 			}
+		}
+
+		// Wait for async events to finish
+		asyncEventExecutor.shutdown();
+		try
+		{
+			if (!asyncEventExecutor.awaitTermination(2, TimeUnit.SECONDS))
+			{
+				asyncEventExecutor.shutdownNow();
+			}
+		}
+		catch (InterruptedException e)
+		{
+			asyncEventExecutor.shutdownNow();
 		}
 	}
 
