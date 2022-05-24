@@ -64,9 +64,27 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public void shutdown()
 	{
 		waitAsyncTasksFinished();
-		pool.shutdown();
+
+		shutdownPool(pool, 2000);
+		shutdownPool(asyncEventExecutor, 2000);
+
 		if (asyncException.get() != null)
 			throw new AsyncTaskException(asyncException.get());
+	}
+
+	private void shutdownPool(ExecutorService pool, long timeout) {
+		pool.shutdown();
+		try
+		{
+			if (!pool.awaitTermination(timeout, TimeUnit.MILLISECONDS))
+			{
+				pool.shutdownNow();
+			}
+		}
+		catch (InterruptedException e)
+		{
+			pool.shutdownNow();
+		}
 	}
 
 	public @NotNull Future<?> executeAsyncEvent(Event event)
@@ -198,20 +216,6 @@ public class BukkitSchedulerMock implements BukkitScheduler
 				}
 				pool.shutdownNow();
 			}
-		}
-
-		// Wait for async events to finish
-		asyncEventExecutor.shutdown();
-		try
-		{
-			if (!asyncEventExecutor.awaitTermination(2, TimeUnit.SECONDS))
-			{
-				asyncEventExecutor.shutdownNow();
-			}
-		}
-		catch (InterruptedException e)
-		{
-			asyncEventExecutor.shutdownNow();
 		}
 	}
 

@@ -15,14 +15,12 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.MockPlugin;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.TestPlugin;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
 import org.junit.jupiter.api.AfterEach;
@@ -214,10 +212,9 @@ class BukkitSchedulerMockTest
 	@Test
 	public void cancellingAllTaskByPlugin()
 	{
-		MockBukkit.mock();
 		MockBukkit.load(TestPlugin.class);
-		Plugin plugin = MockBukkit.getMock().getPluginManager().getPlugin("MockBukkitTestPlugin");
-		BukkitSchedulerMock scheduler1 = MockBukkit.getMock().getScheduler();
+		Plugin plugin = server.getPluginManager().getPlugin("MockBukkitTestPlugin");
+		BukkitSchedulerMock scheduler1 = server.getScheduler();
 		assertEquals(0, scheduler1.getNumberOfQueuedAsyncTasks());
 		scheduler1.runTaskLaterAsynchronously(plugin, () -> {}, 5);
 		scheduler1.runTaskLaterAsynchronously(plugin, () -> {}, 10);
@@ -227,7 +224,6 @@ class BukkitSchedulerMockTest
 		assertEquals(1, scheduler1.getNumberOfQueuedAsyncTasks());
 		scheduler1.cancelTask(task.getTaskId());
 		assertEquals(0, scheduler1.getNumberOfQueuedAsyncTasks());
-		MockBukkit.unmock();
 	}
 
 
