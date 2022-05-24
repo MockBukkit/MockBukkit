@@ -40,15 +40,15 @@ public class MockUnsafeValues implements UnsafeValues
 	private static final String MINIMUM_API_VERSION = "none";
 
 	public static final ComponentFlattener FLATTENER = ComponentFlattener.basic().toBuilder()
-			.build();
+	        .build();
 	public static final LegacyComponentSerializer LEGACY_SECTION_UXRC = LegacyComponentSerializer.builder().flattener(FLATTENER).hexColors().useUnusualXRepeatedCharacterHexFormat().build();
 	public static final PlainComponentSerializer PLAIN = PlainComponentSerializer.builder().flattener(FLATTENER).build();
 	public static final PlainTextComponentSerializer PLAIN_TEXT = PlainTextComponentSerializer.builder().flattener(FLATTENER).build();
 	public static final GsonComponentSerializer GSON = GsonComponentSerializer.builder()
-			.build();
+	        .build();
 	public static final GsonComponentSerializer COLOR_DOWNSAMPLING_GSON = GsonComponentSerializer.builder()
-			.downsampleColors()
-			.build();
+	        .downsampleColors()
+	        .build();
 
 	@Override
 	public ComponentFlattener componentFlattener()

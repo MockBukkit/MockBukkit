@@ -84,7 +84,8 @@ public class DispenserMock extends ContainerMock implements Dispenser
 		if (isPlaced())
 		{
 			return new DispenserProjectileSourceMock(this);
-		} else
+		}
+		else
 		{
 			return null;
 		}
