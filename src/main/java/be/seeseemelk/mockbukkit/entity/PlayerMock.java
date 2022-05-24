@@ -121,7 +121,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class PlayerMock extends LivingEntityMock implements Player, SoundReceiver
 {
-	private boolean online;
+
 	private PlayerInventoryMock inventory = null;
 	private EnderChestInventoryMock enderChest = null;
 	private GameMode gamemode = GameMode.SURVIVAL;
@@ -160,7 +160,6 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	public PlayerMock(ServerMock server, String name)
 	{
 		this(server, name, UUID.nameUUIDFromBytes(("OfflinePlayer:" + name).getBytes(StandardCharsets.UTF_8)));
-		this.online = false;
 	}
 
 	public PlayerMock(ServerMock server, String name, UUID uuid)
@@ -168,7 +167,6 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		super(server, uuid);
 		setName(name);
 		setDisplayName(name);
-		this.online = true;
 
 		if (Bukkit.getWorlds().isEmpty())
 		{
@@ -371,13 +369,13 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public Player getPlayer()
 	{
-		return (online) ? this : null;
+		return (isOnline()) ? this : null;
 	}
 
 	@Override
 	public boolean isOnline()
 	{
-		return this.online;
+		return getServer().getPlayer(getUniqueId()) == null;
 	}
 
 	@Override
