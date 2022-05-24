@@ -746,85 +746,85 @@ public class WorldMock implements World
 	private <T extends Entity> EntityMock mockEntity(@NotNull Location location, @NotNull Class<T> clazz, boolean randomizeData)
 	{
 		return switch (clazz)
-				{
-					case Class<T> c && c == ArmorStand.class -> new ArmorStandMock(server, UUID.randomUUID());
-					case Class<T> c && c == ExperienceOrb.class -> new ExperienceOrbMock(server, UUID.randomUUID());
-					case Class<T> c && c == Firework.class -> new FireworkMock(server, UUID.randomUUID());
-					case Class<T> c && c == Hanging.class ->
-					{
-						// LeashHitch has no direction and is always centered
-						if (LeashHitch.class.isAssignableFrom(clazz))
-						{
-							throw new UnimplementedOperationException();
-						}
+		{
+		case Class<T> c && c == ArmorStand.class -> new ArmorStandMock(server, UUID.randomUUID());
+		case Class<T> c && c == ExperienceOrb.class -> new ExperienceOrbMock(server, UUID.randomUUID());
+		case Class<T> c && c == Firework.class -> new FireworkMock(server, UUID.randomUUID());
+		case Class<T> c && c == Hanging.class ->
+		{
+			// LeashHitch has no direction and is always centered
+			if (LeashHitch.class.isAssignableFrom(clazz))
+			{
+				throw new UnimplementedOperationException();
+			}
 
-						BlockFace spawnFace = BlockFace.SELF;
-						BlockFace[] faces = (ItemFrame.class.isAssignableFrom(clazz))
-								? new BlockFace[]{ BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST, BlockFace.UP, BlockFace.DOWN }
-								: new BlockFace[]{ BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST };
+			BlockFace spawnFace = BlockFace.SELF;
+			BlockFace[] faces = (ItemFrame.class.isAssignableFrom(clazz))
+			? new BlockFace[]{ BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST, BlockFace.UP, BlockFace.DOWN }
+			: new BlockFace[]{ BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST };
 
-						for (BlockFace face : faces)
-						{
-							Block block = this.getBlockAt(location.add(face.getModX(), face.getModY(), face.getModZ()));
-							if (!block.getType().isSolid() && (block.getType() != Material.REPEATER && block.getType() != Material.COMPARATOR))
-								continue;
+			for (BlockFace face : faces)
+			{
+				Block block = this.getBlockAt(location.add(face.getModX(), face.getModY(), face.getModZ()));
+				if (!block.getType().isSolid() && (block.getType() != Material.REPEATER && block.getType() != Material.COMPARATOR))
+					continue;
 
-							boolean taken = false;
+				boolean taken = false;
 
-							// TODO: Check if the entity's bounding box collides with any other hanging entities.
+				// TODO: Check if the entity's bounding box collides with any other hanging entities.
 
-							if (taken)
-								continue;
+				if (taken)
+					continue;
 
-							spawnFace = face;
-							break;
-						}
+				spawnFace = face;
+				break;
+			}
 
-						if (spawnFace == BlockFace.SELF)
-						{
-							spawnFace = BlockFace.SOUTH;
-						}
+			if (spawnFace == BlockFace.SELF)
+			{
+				spawnFace = BlockFace.SOUTH;
+			}
 
-						spawnFace = spawnFace.getOppositeFace();
-						// TODO: Spawn entities here.
-						throw new UnimplementedOperationException();
-					}
-					case Class<T> c && c == Item.class ->
-							throw new IllegalArgumentException("Items must be spawned using World#dropItem(...)");
-					case Class<T> c && c == Player.class ->
-							throw new IllegalArgumentException("Player Entities cannot be spawned, use ServerMock#addPlayer(...)");
-					case Class<T> c && c == Zombie.class -> new ZombieMock(server, UUID.randomUUID());
-					case default -> throw new UnimplementedOperationException();
-				};
+			spawnFace = spawnFace.getOppositeFace();
+			// TODO: Spawn entities here.
+			throw new UnimplementedOperationException();
+		}
+		case Class<T> c && c == Item.class ->
+				throw new IllegalArgumentException("Items must be spawned using World#dropItem(...)");
+		case Class<T> c && c == Player.class ->
+				throw new IllegalArgumentException("Player Entities cannot be spawned, use ServerMock#addPlayer(...)");
+		case Class<T> c && c == Zombie.class -> new ZombieMock(server, UUID.randomUUID());
+		case default -> throw new UnimplementedOperationException();
+		};
 	}
 
 	private void callSpawnEvent(EntityMock entity, CreatureSpawnEvent.SpawnReason reason)
 	{
 		boolean canceled = switch (entity)
+		{
+		case LivingEntity living && !(entity instanceof Player) ->
+		{
+
+			/* Not implemented
+			boolean isAnimal = entity instanceof Animals || entity instanceof WaterMob || entity instanceof Golem;
+			boolean isMonster = entity instanceof Monster || entity instanceof Ghast || entity instanceof Slime;
+			if (reason != CreatureSpawnEvent.SpawnReason.CUSTOM)
+			{
+				if (isAnimal && !getAllowAnimals() || isMonster && !getAllowMonsters())
 				{
-					case LivingEntity living && !(entity instanceof Player) ->
-					{
+					entity.remove();
+					yield false;
+				}
+			}
+			*/
 
-						/* Not implemented
-						boolean isAnimal = entity instanceof Animals || entity instanceof WaterMob || entity instanceof Golem;
-						boolean isMonster = entity instanceof Monster || entity instanceof Ghast || entity instanceof Slime;
-						if (reason != CreatureSpawnEvent.SpawnReason.CUSTOM)
-						{
-							if (isAnimal && !getAllowAnimals() || isMonster && !getAllowMonsters())
-							{
-								entity.remove();
-								yield false;
-							}
-						}
-						*/
-
-						yield new CreatureSpawnEvent(living, reason).callEvent();
-					}
-					case Item item -> new ItemSpawnEvent(item).callEvent();
-					case Player p -> true; // Shouldn't get here but just for parody.
-					case Projectile p -> new ProjectileLaunchEvent(entity).callEvent();
-					case null, default -> new EntitySpawnEvent(entity).callEvent();
-				};
+			yield new CreatureSpawnEvent(living, reason).callEvent();
+		}
+		case Item item -> new ItemSpawnEvent(item).callEvent();
+		case Player p -> true; // Shouldn't get here but just for parody.
+		case Projectile p -> new ProjectileLaunchEvent(entity).callEvent();
+		case null, default -> new EntitySpawnEvent(entity).callEvent();
+		};
 
 		/* Not implemented
 		if (canceled || entity.isValid())

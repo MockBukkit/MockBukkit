@@ -207,7 +207,7 @@ public class EntityEquipmentMock implements EntityEquipment
 	public ItemStack[] getArmorContents()
 	{
 		return new ItemStack[]
-				{ getBoots(), getLeggings(), getChestplate(), getHelmet() };
+		       { getBoots(), getLeggings(), getChestplate(), getHelmet() };
 	}
 
 	@Override

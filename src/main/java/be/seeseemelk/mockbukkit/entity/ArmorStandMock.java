@@ -308,12 +308,12 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 		Preconditions.checkNotNull(slot, "slot");
 		return switch (slot)
 		{
-			case HAND -> getEquipment().getItemInMainHand();
-			case OFF_HAND -> getEquipment().getItemInOffHand();
-			case FEET -> getBoots();
-			case LEGS -> getLeggings();
-			case CHEST -> getChestplate();
-			case HEAD -> getHelmet();
+		case HAND -> getEquipment().getItemInMainHand();
+		case OFF_HAND -> getEquipment().getItemInOffHand();
+		case FEET -> getBoots();
+		case LEGS -> getLeggings();
+		case CHEST -> getChestplate();
+		case HEAD -> getHelmet();
 		};
 	}
 
@@ -323,12 +323,12 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 		Preconditions.checkNotNull(slot, "slot");
 		switch (slot)
 		{
-			case HAND -> getEquipment().setItemInMainHand(item);
-			case OFF_HAND -> getEquipment().setItemInOffHand(item);
-			case FEET -> setBoots(item);
-			case LEGS -> setLeggings(item);
-			case CHEST -> setChestplate(item);
-			case HEAD -> setHelmet(item);
+		case HAND -> getEquipment().setItemInMainHand(item);
+		case OFF_HAND -> getEquipment().setItemInOffHand(item);
+		case FEET -> setBoots(item);
+		case LEGS -> setLeggings(item);
+		case CHEST -> setChestplate(item);
+		case HEAD -> setHelmet(item);
 			default -> throw new UnsupportedOperationException(slot.name());
 		}
 	}
