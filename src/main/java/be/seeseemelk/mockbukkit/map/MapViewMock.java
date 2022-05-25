@@ -6,37 +6,47 @@ import org.bukkit.map.MapView;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MapViewMock implements MapView
 {
 
+	private World world;
+	private final int id;
+	private final List<MapRenderer> renderers = new ArrayList<>();
+	private Scale scale;
+	private boolean locked;
+
+	public MapViewMock(World world)
+	{
+		this.world = world;
+		this.id = nextId++;
+		mapViews.put(this.id, this);
+	}
+
 	@Override
 	public int getId()
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		return this.id;
 	}
 
 	@Override
 	public boolean isVirtual()
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		return this.renderers.size() > 0 && !(this.renderers.get(0) instanceof MapRendererMock);
 	}
 
 	@Override
 	public @NotNull Scale getScale()
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		return scale;
 	}
 
 	@Override
 	public void setScale(@NotNull Scale scale)
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		this.scale = scale;
 	}
 
 	@Override
@@ -70,36 +80,31 @@ public class MapViewMock implements MapView
 	@Override
 	public @Nullable World getWorld()
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		return this.world;
 	}
 
 	@Override
 	public void setWorld(@NotNull World world)
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		this.world = world;
 	}
 
 	@Override
 	public @NotNull List<MapRenderer> getRenderers()
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		return new ArrayList<>(this.renderers);
 	}
 
 	@Override
 	public void addRenderer(@NotNull MapRenderer renderer)
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		this.renderers.add(renderer);
 	}
 
 	@Override
 	public boolean removeRenderer(@Nullable MapRenderer renderer)
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		return this.renderers.remove(renderer);
 	}
 
 	@Override
@@ -133,15 +138,13 @@ public class MapViewMock implements MapView
 	@Override
 	public boolean isLocked()
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		return this.locked;
 	}
 
 	@Override
 	public void setLocked(boolean locked)
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		this.locked = locked;
 	}
 
 }
