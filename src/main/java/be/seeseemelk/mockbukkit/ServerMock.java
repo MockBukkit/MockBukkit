@@ -1160,7 +1160,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public @NotNull MapView createMap(@NotNull World world)
+	public @NotNull MapViewMock createMap(@NotNull World world)
 	{
 		MapViewMock mapView = new MapViewMock(world, nextMapId++);
 		mapViews.put(mapView.getId(), mapView);
@@ -1702,7 +1702,7 @@ public class ServerMock extends Server.Spigot implements Server
 
 	@Override
 	@Deprecated
-	public MapView getMap(int id)
+	public MapViewMock getMap(int id)
 	{
 		return mapViews.get(id);
 	}
