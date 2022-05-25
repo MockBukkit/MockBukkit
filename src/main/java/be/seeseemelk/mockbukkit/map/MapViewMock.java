@@ -7,10 +7,21 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MapViewMock implements MapView
 {
+
+	private static final Map<Integer, MapViewMock> mapViews = new HashMap<>();
+	private static int nextId = 1;
+
+	public static MapViewMock getMapView(int id)
+	{
+		return mapViews.get(id);
+	}
+
 
 	private World world;
 	private final int id;

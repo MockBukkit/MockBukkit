@@ -23,6 +23,7 @@ import be.seeseemelk.mockbukkit.inventory.LecternInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.ShulkerBoxInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
+import be.seeseemelk.mockbukkit.map.MapViewMock;
 import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 import be.seeseemelk.mockbukkit.potion.MockPotionEffectType;
 import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
@@ -1159,8 +1160,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public MapView createMap(World world)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return new MapViewMock(world);
 	}
 
 	@Override
@@ -1699,8 +1699,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Deprecated
 	public MapView getMap(int id)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return MapViewMock.getMapView(id);
 	}
 
 	@Override
