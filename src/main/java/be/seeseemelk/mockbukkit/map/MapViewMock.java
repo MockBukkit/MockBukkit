@@ -14,7 +14,7 @@ public class MapViewMock implements MapView
 
 	private World world;
 	private final int id;
-	private final List<MapRenderer> renderers = new ArrayList<>();
+	private final List<MapRenderer> renderers;
 	private Scale scale;
 	private boolean locked;
 
@@ -22,6 +22,9 @@ public class MapViewMock implements MapView
 	{
 		this.world = world;
 		this.id = id;
+		this.renderers = new ArrayList<>();
+		this.scale = Scale.NORMAL;
+		this.locked = false;
 	}
 
 	@Override
