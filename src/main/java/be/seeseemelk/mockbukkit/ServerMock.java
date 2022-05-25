@@ -131,7 +131,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private final List<World> worlds = new ArrayList<>();
 	private final List<Recipe> recipes = new LinkedList<>();
 	private final Map<NamespacedKey, KeyedBossBarMock> bossBars = new HashMap<>();
-	private final ItemFactory factory = new ItemFactoryMock();
+	private final ItemFactoryMock factory = new ItemFactoryMock();
 	private final PlayerMockFactory playerFactory = new PlayerMockFactory(this);
 	private final PluginManagerMock pluginManager = new PluginManagerMock(this);
 	private final ScoreboardManagerMock scoreboardManager = new ScoreboardManagerMock();
@@ -662,7 +662,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public ItemFactory getItemFactory()
+	public @NotNull ItemFactoryMock getItemFactory()
 	{
 		return factory;
 	}

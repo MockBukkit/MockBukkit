@@ -9,60 +9,71 @@ import org.jetbrains.annotations.Nullable;
 public class MapMetaMock extends ItemMetaMock implements MapMeta
 {
 
+	private static final byte SCALING_EMPTY = (byte) 0;
+	private static final byte SCALING_TRUE = (byte) 1;
+	private static final byte SCALING_FALSE = (byte) 2;
+
+	private Integer mapId;
+	private MapView mapView;
+	private Color color;
+	private byte scaling = SCALING_EMPTY;
+
+	public MapMetaMock()
+	{
+		super();
+	}
+
+	public MapMetaMock(MapMeta meta)
+	{
+		super(meta);
+	}
+
 	@Override
 	public boolean hasMapId()
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		return mapId != null;
 	}
 
 	@Override
 	public int getMapId()
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		return mapId;
 	}
 
 	@Override
 	public void setMapId(int id)
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		this.mapId = id;
 	}
 
 	@Override
 	public boolean hasMapView()
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		return this.mapView != null;
 	}
 
 	@Override
 	public @Nullable MapView getMapView()
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		return mapView;
 	}
 
 	@Override
 	public void setMapView(MapView map)
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		this.mapView = map;
 	}
 
 	@Override
 	public boolean isScaling()
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		return this.scaling == SCALING_TRUE;
 	}
 
 	@Override
-	public void setScaling(boolean value)
+	public void setScaling(boolean scaling)
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		this.scaling = scaling ? SCALING_TRUE : SCALING_FALSE;
 	}
 
 	@Override
@@ -89,22 +100,19 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 	@Override
 	public boolean hasColor()
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		return this.color != null;
 	}
 
 	@Override
 	public @Nullable Color getColor()
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		return this.color;
 	}
 
 	@Override
 	public void setColor(@Nullable Color color)
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		this.color = color;
 	}
 
 	@Override
