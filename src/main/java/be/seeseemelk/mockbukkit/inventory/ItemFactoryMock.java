@@ -48,7 +48,7 @@ public class ItemFactoryMock implements ItemFactory
 					case KNOWLEDGE_BOOK -> KnowledgeBookMetaMock.class;
 					case LEATHER_BOOTS, LEATHER_CHESTPLATE, LEATHER_HELMET, LEATHER_LEGGINGS ->
 							LeatherArmorMetaMock.class;
-					case MAP -> MapMetaMock.class;
+					case FILLED_MAP -> MapMetaMock.class;
 					case FIREWORK_STAR -> FireworkEffectMetaMock.class;
 					case FIREWORK_ROCKET -> FireworkMetaMock.class;
 					case POTION, LINGERING_POTION, SPLASH_POTION -> PotionMetaMock.class;
