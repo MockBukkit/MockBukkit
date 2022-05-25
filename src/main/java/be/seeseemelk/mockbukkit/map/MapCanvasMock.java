@@ -22,7 +22,7 @@ public class MapCanvasMock implements MapCanvas
 	protected MapCanvasMock(MapViewMock mapView)
 	{
 		this.mapView = mapView;
-		Arrays.stream(pixels).forEach(x -> Arrays.fill(x, (byte) -1));
+		Arrays.stream(pixels).forEach(x -> Arrays.fill(x, (byte) - 1));
 	}
 
 	@Override
