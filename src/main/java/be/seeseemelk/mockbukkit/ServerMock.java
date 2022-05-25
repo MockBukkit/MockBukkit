@@ -75,6 +75,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.server.MapInitializeEvent;
 import org.bukkit.generator.ChunkGenerator.ChunkData;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
@@ -1163,6 +1164,7 @@ public class ServerMock extends Server.Spigot implements Server
 	{
 		MapViewMock mapView = new MapViewMock(world, nextMapId++);
 		mapViews.put(mapView.getId(), mapView);
+		new MapInitializeEvent(mapView).callEvent();
 		return mapView;
 	}
 
