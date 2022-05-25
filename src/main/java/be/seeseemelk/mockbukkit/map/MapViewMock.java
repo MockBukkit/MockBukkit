@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.map;
 
+import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import org.bukkit.World;
 import org.bukkit.map.MapRenderer;
 import org.bukkit.map.MapView;
@@ -7,7 +8,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MapViewMock implements MapView
 {
@@ -15,6 +18,7 @@ public class MapViewMock implements MapView
 	private World world;
 	private final int id;
 	private final List<MapRenderer> renderers;
+	private final Map<MapRenderer, Map<PlayerMock, MapCanvasMock>> canvases = new HashMap<>();
 	private Scale scale;
 	private boolean locked;
 
@@ -100,13 +104,62 @@ public class MapViewMock implements MapView
 	@Override
 	public void addRenderer(@NotNull MapRenderer renderer)
 	{
-		this.renderers.add(renderer);
+		if (!this.renderers.contains(renderer))
+		{
+			this.renderers.add(renderer);
+			this.canvases.put(renderer, new HashMap<>());
+			renderer.initialize(this);
+		}
 	}
 
 	@Override
 	public boolean removeRenderer(@Nullable MapRenderer renderer)
 	{
-		return this.renderers.remove(renderer);
+		if (!this.renderers.contains(renderer))
+			return false;
+
+		this.renderers.remove(renderer);
+
+		// canvases should always be in sync with renderers.
+		for (MapCanvasMock canvas : this.canvases.get(renderer).values())
+		{
+			for (int x = 0; x < 128; ++x)
+			{
+				for (int y = 0; y < 128; ++y)
+				{
+					canvas.setPixel(x, y, (byte) -1);
+				}
+			}
+		}
+
+		this.canvases.remove(renderer);
+		return true;
+	}
+
+	/**
+	 * Renders the map for the given player.
+	 *
+	 * @param player Player to render for.
+	 */
+	public void render(PlayerMock player)
+	{
+		for (MapRenderer renderer : this.renderers)
+		{
+			MapCanvasMock canvas = this.canvases.get(renderer).get(renderer.isContextual() ? player : null);
+			if (canvas == null)
+			{
+				canvas = new MapCanvasMock(this);
+				this.canvases.get(renderer).put(renderer.isContextual() ? player : null, canvas);
+			}
+
+			try
+			{
+				renderer.render(this, canvas, player);
+			}
+			catch (Throwable ignored)
+			{
+			}
+		}
 	}
 
 	@Override
