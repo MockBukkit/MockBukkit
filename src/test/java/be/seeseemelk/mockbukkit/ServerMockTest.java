@@ -1,16 +1,27 @@
 package be.seeseemelk.mockbukkit;
 
 import be.seeseemelk.mockbukkit.command.CommandResult;
-import be.seeseemelk.mockbukkit.entity.*;
+import be.seeseemelk.mockbukkit.entity.EntityMock;
+import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
+import be.seeseemelk.mockbukkit.entity.PlayerMock;
+import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
+import be.seeseemelk.mockbukkit.entity.SimpleEntityMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
-import org.bukkit.*;
+import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.Warning;
+import org.bukkit.World;
+import org.bukkit.WorldCreator;
+import org.bukkit.WorldType;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.event.server.MapInitializeEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
+import org.bukkit.map.MapView;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.jetbrains.annotations.NotNull;
@@ -43,6 +54,7 @@ import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 class ServerMockTest
 {
+
 	private ServerMock server;
 
 	@BeforeEach
@@ -67,9 +79,9 @@ class ServerMockTest
 	void createWorld_WorldCreator()
 	{
 		WorldCreator worldCreator = new WorldCreator("test")
-		.seed(12345)
-		.type(WorldType.FLAT)
-		.environment(World.Environment.NORMAL);
+				.seed(12345)
+				.type(WorldType.FLAT)
+				.environment(World.Environment.NORMAL);
 		World world = server.createWorld(worldCreator);
 
 		assertEquals(1, server.getWorlds().size());
@@ -185,7 +197,7 @@ class ServerMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = {"testcommand", "tc", "othercommand"})
+	@ValueSource(strings = { "testcommand", "tc", "othercommand" })
 	void testPluginCommand(String cmd)
 	{
 		MockBukkit.load(TestPlugin.class);
@@ -610,10 +622,38 @@ class ServerMockTest
 		playerB.assertSaid(PlainTextComponentSerializer.plainText().serialize(component));
 	}
 
+	@Test
+	void createMap_IdIncrements()
+	{
+		WorldMock world = new WorldMock();
+		assertEquals(1, server.createMap(world).getId());
+		assertEquals(2, server.createMap(world).getId());
+		assertEquals(3, server.createMap(world).getId());
+	}
+
+	@Test
+	void getMap_ValidId_ReturnsMap()
+	{
+		WorldMock world = new WorldMock();
+		int id = server.createMap(world).getId();
+
+		assertNotNull(server.getMap(id));
+		assertEquals(id, server.getMap(id).getId());
+	}
+
+	@Test
+	void createMap_CallsMapInitEvent()
+	{
+		MapView mapView = server.createMap(new WorldMock());
+
+		server.getPluginManager().assertEventFired(MapInitializeEvent.class, (e) -> e.getMap().equals(mapView));
+	}
+
 }
 
 class TestRecipe implements Recipe
 {
+
 	private final ItemStack result;
 
 	public TestRecipe(@NotNull ItemStack result)
@@ -631,4 +671,5 @@ class TestRecipe implements Recipe
 	{
 		return result;
 	}
+
 }
