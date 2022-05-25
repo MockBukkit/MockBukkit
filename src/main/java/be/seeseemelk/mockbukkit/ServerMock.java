@@ -78,7 +78,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.generator.ChunkGenerator.ChunkData;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
-import org.bukkit.inventory.ItemFactory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.Recipe;
@@ -123,6 +122,8 @@ public class ServerMock extends Server.Spigot implements Server
 	private static final String JOIN_MESSAGE = "%s has joined the server.";
 	private static final String MOTD = "A Minecraft Server";
 
+	private final Map<Integer, MapViewMock> mapViews = new HashMap<>();
+	private int nextMapId = 1;
 	private final Logger logger = Logger.getLogger("ServerMock");
 	private final Thread mainThread = Thread.currentThread();
 	private final MockUnsafeValues unsafe = new MockUnsafeValues();
@@ -1158,9 +1159,11 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public MapView createMap(World world)
+	public @NotNull MapView createMap(@NotNull World world)
 	{
-		return new MapViewMock(world);
+		MapViewMock mapView = new MapViewMock(world, nextMapId++);
+		mapViews.put(mapView.getId(), mapView);
+		return mapView;
 	}
 
 	@Override
@@ -1699,7 +1702,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Deprecated
 	public MapView getMap(int id)
 	{
-		return MapViewMock.getMapView(id);
+		return mapViews.get(id);
 	}
 
 	@Override

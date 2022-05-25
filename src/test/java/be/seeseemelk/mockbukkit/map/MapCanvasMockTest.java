@@ -45,7 +45,7 @@ public class MapCanvasMockTest
 	@Test
 	void getMapView_Constructor_NotNull()
 	{
-		assertNotNull(new MapCanvasMock(new MapViewMock(null)).getMapView());
+		assertNotNull(new MapCanvasMock(new MapViewMock(null, 1)).getMapView());
 	}
 
 	@Test

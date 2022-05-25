@@ -89,7 +89,7 @@ public class MapMetaMockTest
 	void setMapView_Sets()
 	{
 		MapMeta meta = new MapMetaMock();
-		MapViewMock mapView = new MapViewMock(new WorldMock());
+		MapViewMock mapView = new MapViewMock(new WorldMock(), 1);
 
 		meta.setMapView(mapView);
 
