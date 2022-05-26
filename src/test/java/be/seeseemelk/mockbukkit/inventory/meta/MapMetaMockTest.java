@@ -1,11 +1,9 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.map.MapViewMock;
 import org.bukkit.Color;
-import org.bukkit.inventory.meta.MapMeta;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,12 +16,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class MapMetaMockTest
 {
 
-	private ServerMock server;
+	private MapMetaMock meta;
 
 	@BeforeEach
 	void setUp()
 	{
-		server = MockBukkit.mock();
+		MockBukkit.mock();
+		meta = new MapMetaMock();
 	}
 
 	@AfterEach
@@ -33,18 +32,25 @@ public class MapMetaMockTest
 	}
 
 	@Test
+	void cloneConstructor_CopiesValues()
+	{
+		MapViewMock mapView = new MapViewMock(new WorldMock(), 1);
+		meta.setMapView(mapView);
+
+		MapMetaMock otherMeta = new MapMetaMock(meta);
+
+		assertEquals(mapView, otherMeta.getMapView());
+	}
+
+	@Test
 	void getColor_Constructor_IsNull()
 	{
-		MapMeta meta = new MapMetaMock();
-
 		assertNull(meta.getColor());
 	}
 
 	@Test
 	void setColor_Sets()
 	{
-		MapMeta meta = new MapMetaMock();
-
 		meta.setColor(Color.AQUA);
 
 		assertEquals(Color.AQUA, meta.getColor());
@@ -53,16 +59,12 @@ public class MapMetaMockTest
 	@Test
 	void hasId_Constructor_False()
 	{
-		MapMeta meta = new MapMetaMock();
-
 		assertFalse(meta.hasMapId());
 	}
 
 	@Test
 	void hasId_True_HasId()
 	{
-		MapMeta meta = new MapMetaMock();
-
 		meta.setMapId(1);
 
 		assertTrue(meta.hasMapId());
@@ -71,8 +73,6 @@ public class MapMetaMockTest
 	@Test
 	void getId_CorrectValue()
 	{
-		MapMeta meta = new MapMetaMock();
-
 		meta.setMapId(1);
 
 		assertEquals(1, meta.getMapId());
@@ -81,14 +81,12 @@ public class MapMetaMockTest
 	@Test
 	void getMapView_Constructor_IsNull()
 	{
-		MapMeta meta = new MapMetaMock();
 		assertNull(meta.getMapView());
 	}
 
 	@Test
 	void setMapView_Sets()
 	{
-		MapMeta meta = new MapMetaMock();
 		MapViewMock mapView = new MapViewMock(new WorldMock(), 1);
 
 		meta.setMapView(mapView);
@@ -99,19 +97,26 @@ public class MapMetaMockTest
 	@Test
 	void isScaling_Constructor_False()
 	{
-		MapMeta meta = new MapMetaMock();
-
 		assertFalse(meta.isScaling());
 	}
 
 	@Test
 	void setScaling_Sets()
 	{
-		MapMeta meta = new MapMetaMock();
-
 		meta.setScaling(true);
 
 		assertTrue(meta.isScaling());
+	}
+
+	@Test
+	void clone_CopiesValues()
+	{
+		MapViewMock mapView = new MapViewMock(new WorldMock(), 1);
+		meta.setMapView(mapView);
+
+		MapMetaMock otherMeta = meta.clone();
+
+		assertEquals(mapView, otherMeta.getMapView());
 	}
 
 }
