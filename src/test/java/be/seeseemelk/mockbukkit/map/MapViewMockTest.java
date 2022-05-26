@@ -3,6 +3,9 @@ package be.seeseemelk.mockbukkit.map;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.WorldMock;
+import be.seeseemelk.mockbukkit.entity.PlayerMock;
+import com.google.common.collect.Lists;
+import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.entity.Player;
 import org.bukkit.map.MapCanvas;
 import org.bukkit.map.MapRenderer;
@@ -12,8 +15,13 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -138,17 +146,123 @@ public class MapViewMockTest
 	}
 
 	@Test
-	void removeRenderer_RemovesRenderer()
+	void addRenderer_Duplicate_DoesntAdd()
+	{
+		MapRendererMock renderer = new MapRendererMock();
+
+		mapView.addRenderer(renderer);
+		mapView.addRenderer(renderer);
+
+		assertEquals(1, mapView.getRenderers().size());
+		assertEquals(renderer, mapView.getRenderers().get(0));
+	}
+
+	@Test
+	void removeRenderer_Exists_Removes_ReturnsTrue()
 	{
 		MapRendererMock renderer1 = new MapRendererMock();
 		MapRendererMock renderer2 = new MapRendererMock();
 		mapView.addRenderer(renderer1);
 		mapView.addRenderer(renderer2);
 
-		mapView.removeRenderer(renderer1);
+		assertTrue(mapView.removeRenderer(renderer1));
 
 		assertEquals(1, mapView.getRenderers().size());
 		assertEquals(renderer2, mapView.getRenderers().get(0));
+	}
+
+	@Test
+	void removeRenderer_DoesntExist_ReturnsFalse()
+	{
+		MapRendererMock renderer = new MapRendererMock();
+
+		assertFalse(mapView.removeRenderer(renderer));
+	}
+
+	@Test
+	void render_CallsRenderMethod()
+	{
+		AtomicBoolean b = new AtomicBoolean(false);
+		mapView.addRenderer(new MapRenderer()
+		{
+			@Override
+			public void render(@NotNull MapView map, @NotNull MapCanvas canvas, @NotNull Player player)
+			{
+				b.set(true);
+			}
+		});
+
+		mapView.render(null);
+
+		assertTrue(b.get());
+	}
+
+	@Test
+	void render_Contextual_SamePlayer_ReusesCanvas()
+	{
+		List<MapCanvas> canvases = new ArrayList<>();
+		MapRenderer renderer = new MapRenderer(true)
+		{
+			@Override
+			public void render(@NotNull MapView map, @NotNull MapCanvas canvas, @NotNull Player player)
+			{
+				canvases.add(canvas);
+			}
+		};
+		mapView.addRenderer(renderer);
+		PlayerMock player = server.addPlayer();
+
+		mapView.render(player);
+		mapView.render(player);
+
+		assertEquals(2, canvases.size());
+		assertEquals(canvases.get(0), canvases.get(1));
+	}
+
+	@Test
+	void render_Contextual_DifferentPlayer_DoesntReusesCanvas()
+	{
+		List<MapCanvas> canvases = new ArrayList<>();
+		MapRenderer renderer = new MapRenderer(true)
+		{
+			@Override
+			public void render(@NotNull MapView map, @NotNull MapCanvas canvas, @NotNull Player player)
+			{
+				canvases.add(canvas);
+			}
+		};
+		mapView.addRenderer(renderer);
+		PlayerMock player1 = server.addPlayer();
+		PlayerMock player2 = server.addPlayer();
+
+		mapView.render(player1);
+		mapView.render(player2);
+
+		assertEquals(2, canvases.size());
+		assertNotEquals(canvases.get(0), canvases.get(1));
+	}
+
+	@Test
+	void render_NonContextual_DifferentPlayer_ReusesCanvas()
+	{
+		List<MapCanvas> canvases = new ArrayList<>();
+		MapRenderer renderer = new MapRenderer(false)
+		{
+			@Override
+			public void render(@NotNull MapView map, @NotNull MapCanvas canvas, @NotNull Player player)
+			{
+				canvases.add(canvas);
+			}
+		};
+		mapView.addRenderer(renderer);
+		PlayerMock player1 = server.addPlayer();
+		PlayerMock player2 = server.addPlayer();
+
+		mapView.render(player1);
+		mapView.render(player2);
+
+		assertEquals(2, canvases.size());
+		assertEquals(canvases.get(0), canvases.get(1));
 	}
 
 	@Test
