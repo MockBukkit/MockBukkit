@@ -127,7 +127,7 @@ public class MapViewMock implements MapView
 			{
 				for (int y = 0; y < 128; ++y)
 				{
-					canvas.setPixel(x, y, (byte) -1);
+					canvas.setPixel(x, y, (byte) - 1);
 				}
 			}
 		}
