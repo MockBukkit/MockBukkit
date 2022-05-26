@@ -118,7 +118,12 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 	@Override
 	public @NotNull MapMetaMock clone()
 	{
-		return (MapMetaMock) super.clone();
+		MapMetaMock clone = (MapMetaMock) super.clone();
+		clone.color = this.color;
+		clone.mapId = this.mapId;
+		clone.mapView = this.mapView;
+		clone.scaling = this.scaling;
+		return clone;
 	}
 
 }
