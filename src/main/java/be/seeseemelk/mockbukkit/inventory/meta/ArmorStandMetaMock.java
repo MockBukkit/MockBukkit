@@ -19,6 +19,8 @@ public class ArmorStandMetaMock extends ItemMetaMock implements ArmorStandMeta
 
 	public ArmorStandMetaMock(ArmorStandMeta meta)
 	{
+		super(meta);
+
 		this.invisible = meta.isInvisible();
 		this.marker = meta.isMarker();
 		this.noBasePlate = meta.hasNoBasePlate();
