@@ -16,6 +16,8 @@ public class AxolotlBucketMetaMock extends ItemMetaMock implements AxolotlBucket
 
 	public AxolotlBucketMetaMock(AxolotlBucketMeta meta)
 	{
+		super(meta);
+
 		this.variant = meta.getVariant();
 	}
 
