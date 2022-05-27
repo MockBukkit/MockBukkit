@@ -61,6 +61,8 @@ class ItemFactoryMockTest
 		assertTrue(factory.getItemMeta(Material.SUSPICIOUS_STEW) instanceof SuspiciousStewMetaMock);
 		assertTrue(factory.getItemMeta(Material.POTION) instanceof PotionMetaMock);
 		assertTrue(factory.getItemMeta(Material.LEATHER_CHESTPLATE) instanceof LeatherArmorMetaMock);
+
+		assertTrue(factory.getItemMeta(Material.ARMOR_STAND) instanceof LeatherArmorMetaMock);
 	}
 
 	@Test
