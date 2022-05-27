@@ -26,23 +26,24 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class ItemFactoryMockTest
 {
 
-	private static final Material[] BANNERS = {
-			Material.WHITE_BANNER,
-			Material.ORANGE_BANNER,
-			Material.MAGENTA_BANNER,
-			Material.LIGHT_BLUE_BANNER,
-			Material.YELLOW_BANNER,
-			Material.LIME_BANNER,
-			Material.PINK_BANNER,
-			Material.GRAY_BANNER,
-			Material.LIGHT_GRAY_BANNER,
-			Material.CYAN_BANNER,
-			Material.PURPLE_BANNER,
-			Material.BLUE_BANNER,
-			Material.BROWN_BANNER,
-			Material.GREEN_BANNER,
-			Material.RED_BANNER,
-			Material.BLACK_BANNER
+	private static final Material[] BANNERS =
+	{
+		Material.WHITE_BANNER,
+		Material.ORANGE_BANNER,
+		Material.MAGENTA_BANNER,
+		Material.LIGHT_BLUE_BANNER,
+		Material.YELLOW_BANNER,
+		Material.LIME_BANNER,
+		Material.PINK_BANNER,
+		Material.GRAY_BANNER,
+		Material.LIGHT_GRAY_BANNER,
+		Material.CYAN_BANNER,
+		Material.PURPLE_BANNER,
+		Material.BLUE_BANNER,
+		Material.BROWN_BANNER,
+		Material.GREEN_BANNER,
+		Material.RED_BANNER,
+		Material.BLACK_BANNER
 	};
 
 	private ItemFactoryMock factory;

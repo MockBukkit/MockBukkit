@@ -43,27 +43,27 @@ public class ItemFactoryMock implements ItemFactory
 	private Class<? extends ItemMeta> getItemMetaClass(Material material)
 	{
 		return switch (material)
-				{
-					case WRITABLE_BOOK, WRITTEN_BOOK -> BookMetaMock.class;
-					case ENCHANTED_BOOK -> EnchantedBookMetaMock.class;
-					case KNOWLEDGE_BOOK -> KnowledgeBookMetaMock.class;
-					case LEATHER_BOOTS, LEATHER_CHESTPLATE, LEATHER_HELMET, LEATHER_LEGGINGS ->
-							LeatherArmorMetaMock.class;
-					case MAP ->
-						// TODO Auto-generated method stub
-							throw new UnimplementedOperationException();
-					case FIREWORK_STAR -> FireworkEffectMetaMock.class;
-					case FIREWORK_ROCKET -> FireworkMetaMock.class;
-					case POTION, LINGERING_POTION, SPLASH_POTION -> PotionMetaMock.class;
-					case PLAYER_HEAD -> SkullMetaMock.class;
-					case SUSPICIOUS_STEW -> SuspiciousStewMetaMock.class;
-					case TROPICAL_FISH_BUCKET ->
-						// TODO Auto-generated method stub
-							throw new UnimplementedOperationException();
-					case WHITE_BANNER, ORANGE_BANNER, MAGENTA_BANNER, LIGHT_BLUE_BANNER, YELLOW_BANNER, LIME_BANNER, PINK_BANNER, GRAY_BANNER, LIGHT_GRAY_BANNER, CYAN_BANNER, PURPLE_BANNER, BLUE_BANNER, BROWN_BANNER, GREEN_BANNER, RED_BANNER, BLACK_BANNER ->
-							BannerMetaMock.class;
-					default -> ItemMetaMock.class;
-				};
+		{
+		case WRITABLE_BOOK, WRITTEN_BOOK -> BookMetaMock.class;
+		case ENCHANTED_BOOK -> EnchantedBookMetaMock.class;
+		case KNOWLEDGE_BOOK -> KnowledgeBookMetaMock.class;
+		case LEATHER_BOOTS, LEATHER_CHESTPLATE, LEATHER_HELMET, LEATHER_LEGGINGS ->
+				LeatherArmorMetaMock.class;
+		case MAP ->
+				// TODO Auto-generated method stub
+				throw new UnimplementedOperationException();
+		case FIREWORK_STAR -> FireworkEffectMetaMock.class;
+		case FIREWORK_ROCKET -> FireworkMetaMock.class;
+		case POTION, LINGERING_POTION, SPLASH_POTION -> PotionMetaMock.class;
+		case PLAYER_HEAD -> SkullMetaMock.class;
+		case SUSPICIOUS_STEW -> SuspiciousStewMetaMock.class;
+		case TROPICAL_FISH_BUCKET ->
+				// TODO Auto-generated method stub
+				throw new UnimplementedOperationException();
+		case WHITE_BANNER, ORANGE_BANNER, MAGENTA_BANNER, LIGHT_BLUE_BANNER, YELLOW_BANNER, LIME_BANNER, PINK_BANNER, GRAY_BANNER, LIGHT_GRAY_BANNER, CYAN_BANNER, PURPLE_BANNER, BLUE_BANNER, BROWN_BANNER, GREEN_BANNER, RED_BANNER, BLACK_BANNER ->
+				BannerMetaMock.class;
+			default -> ItemMetaMock.class;
+		};
 	}
 
 	@Override
