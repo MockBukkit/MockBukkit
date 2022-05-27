@@ -1,11 +1,17 @@
 package be.seeseemelk.mockbukkit.inventory;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.Objects;
-import java.util.Random;
-import java.util.function.UnaryOperator;
-
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.inventory.meta.BookMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.CompassMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.EnchantedBookMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.FireworkEffectMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.FireworkMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.KnowledgeBookMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.LeatherArmorMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.PotionMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.SkullMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.SuspiciousStewMetaMock;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.md_5.bungee.api.chat.BaseComponent;
@@ -17,21 +23,15 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemFactory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.inventory.meta.BookMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.EnchantedBookMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.FireworkEffectMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.FireworkMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.KnowledgeBookMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.LeatherArmorMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.PotionMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.SkullMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.SuspiciousStewMetaMock;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Objects;
+import java.util.Random;
+import java.util.function.UnaryOperator;
 
 public class ItemFactoryMock implements ItemFactory
 {
@@ -40,41 +40,27 @@ public class ItemFactoryMock implements ItemFactory
 
 	private Class<? extends ItemMeta> getItemMetaClass(Material material)
 	{
-		switch (material)
-		{
-		case WRITABLE_BOOK:
-		case WRITTEN_BOOK:
-			return BookMetaMock.class;
-		case ENCHANTED_BOOK:
-			return EnchantedBookMetaMock.class;
-		case KNOWLEDGE_BOOK:
-			return KnowledgeBookMetaMock.class;
-		case LEATHER_BOOTS:
-		case LEATHER_CHESTPLATE:
-		case LEATHER_HELMET:
-		case LEATHER_LEGGINGS:
-			return LeatherArmorMetaMock.class;
-		case MAP:
-			// TODO Auto-generated method stub
-			throw new UnimplementedOperationException();
-		case FIREWORK_STAR:
-			return FireworkEffectMetaMock.class;
-		case FIREWORK_ROCKET:
-			return FireworkMetaMock.class;
-		case POTION:
-		case LINGERING_POTION:
-		case SPLASH_POTION:
-			return PotionMetaMock.class;
-		case PLAYER_HEAD:
-			return SkullMetaMock.class;
-		case SUSPICIOUS_STEW:
-			return SuspiciousStewMetaMock.class;
-		case TROPICAL_FISH_BUCKET:
-			// TODO Auto-generated method stub
-			throw new UnimplementedOperationException();
-		default:
-			return ItemMetaMock.class;
-		}
+		return switch (material)
+				{
+					case WRITABLE_BOOK, WRITTEN_BOOK -> BookMetaMock.class;
+					case ENCHANTED_BOOK -> EnchantedBookMetaMock.class;
+					case KNOWLEDGE_BOOK -> KnowledgeBookMetaMock.class;
+					case LEATHER_BOOTS, LEATHER_CHESTPLATE, LEATHER_HELMET, LEATHER_LEGGINGS ->
+							LeatherArmorMetaMock.class;
+					case MAP ->
+						// TODO Auto-generated method stub
+							throw new UnimplementedOperationException();
+					case FIREWORK_STAR -> FireworkEffectMetaMock.class;
+					case FIREWORK_ROCKET -> FireworkMetaMock.class;
+					case POTION, LINGERING_POTION, SPLASH_POTION -> PotionMetaMock.class;
+					case PLAYER_HEAD -> SkullMetaMock.class;
+					case SUSPICIOUS_STEW -> SuspiciousStewMetaMock.class;
+					case TROPICAL_FISH_BUCKET ->
+						// TODO Auto-generated method stub
+							throw new UnimplementedOperationException();
+					case COMPASS -> CompassMetaMock.class;
+					default -> ItemMetaMock.class;
+				};
 	}
 
 	@Override

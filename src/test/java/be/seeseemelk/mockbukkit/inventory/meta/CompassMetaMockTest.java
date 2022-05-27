@@ -1,0 +1,102 @@
+package be.seeseemelk.mockbukkit.inventory.meta;
+
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.WorldMock;
+import org.bukkit.Location;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+public class CompassMetaMockTest
+{
+
+	private CompassMetaMock meta;
+
+	@BeforeEach
+	void setUp()
+	{
+		MockBukkit.mock();
+		meta = new CompassMetaMock();
+	}
+
+	@AfterEach
+	void teardown()
+	{
+		MockBukkit.unmock();
+	}
+
+	@Test
+	void constructor_DefaultValues()
+	{
+		assertNull(meta.getLodestone());
+		assertFalse(meta.isLodestoneTracked());
+	}
+
+	@Test
+	void constructor_Clone_CopiesValues()
+	{
+		Location loc = new Location(new WorldMock(), 1, 2, 3);
+		meta.setLodestone(loc);
+		meta.setLodestoneTracked(true);
+
+		CompassMetaMock clone = new CompassMetaMock(meta);
+
+		assertEquals(loc, clone.getLodestone());
+		assertTrue(clone.isLodestoneTracked());
+	}
+
+	@Test
+	void setLodestone()
+	{
+		Location loc = new Location(new WorldMock(), 1, 2, 3);
+		meta.setLodestone(loc);
+		assertEquals(loc, meta.getLodestone());
+	}
+
+	@Test
+	void setLodestone_NullWorld_ThrowsException()
+	{
+		Location loc = new Location(null, 1, 2, 3);
+		assertThrowsExactly(IllegalArgumentException.class, () -> meta.setLodestone(loc));
+	}
+
+	@Test
+	void hasLodestone()
+	{
+		assertFalse(meta.hasLodestone());
+
+		meta.setLodestone(new Location(new WorldMock(), 1, 2, 3));
+
+		assertTrue(meta.hasLodestone());
+	}
+
+	@Test
+	void isLodestoneTracked()
+	{
+		assertFalse(meta.isLodestoneTracked());
+
+		meta.setLodestoneTracked(true);
+
+		assertTrue(meta.isLodestoneTracked());
+	}
+
+	@Test
+	void clone_CopiesValues()
+	{
+		Location loc = new Location(new WorldMock(), 1, 2, 3);
+		meta.setLodestone(loc);
+		meta.setLodestoneTracked(true);
+
+		CompassMetaMock clone = meta.clone();
+
+		assertEquals(loc, clone.getLodestone());
+		assertTrue(clone.isLodestoneTracked());
+	}
+
+}
