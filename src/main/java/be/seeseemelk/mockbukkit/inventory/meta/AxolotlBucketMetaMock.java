@@ -44,6 +44,22 @@ public class AxolotlBucketMetaMock extends ItemMetaMock implements AxolotlBucket
 	}
 
 	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + (this.variant != null ? this.variant.hashCode() : 0);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof AxolotlBucketMeta meta))
+			return false;
+		return super.equals(obj) && this.variant == meta.getVariant();
+	}
+
+	@Override
 	public @NotNull AxolotlBucketMetaMock clone()
 	{
 		AxolotlBucketMetaMock clone = (AxolotlBucketMetaMock) super.clone();

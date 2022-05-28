@@ -8,10 +8,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class AxolotlBucketMetaMockTest
+class AxolotlBucketMetaMockTest
 {
 
 	private AxolotlBucketMetaMock meta;
@@ -67,6 +68,27 @@ public class AxolotlBucketMetaMockTest
 		meta.setVariant(Axolotl.Variant.GOLD);
 
 		assertTrue(meta.hasVariant());
+	}
+
+	@Test
+	void equals_SameInstance_ReturnsTrue()
+	{
+		assertEquals(meta, meta);
+	}
+
+	@Test
+	void equals_DifferentInstance_SameValues_True()
+	{
+		AxolotlBucketMetaMock clone = meta.clone();
+		assertEquals(meta, clone);
+	}
+
+	@Test
+	void equals_DifferentInstance_DifferentValues_False()
+	{
+		AxolotlBucketMetaMock clone = meta.clone();
+		clone.setVariant(Axolotl.Variant.WILD);
+		assertNotEquals(meta, clone);
 	}
 
 	@Test
