@@ -95,6 +95,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		catch (InterruptedException e)
 		{
 			pool.shutdownNow();
+			Thread.currentThread().interrupt();
 		}
 	}
 
