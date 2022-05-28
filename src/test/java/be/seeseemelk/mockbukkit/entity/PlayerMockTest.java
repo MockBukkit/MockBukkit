@@ -136,6 +136,34 @@ class PlayerMockTest
 	}
 
 	@Test
+	void getInventory_getEquipment_SameInventory()
+	{
+		assertSame(player.getInventory(), player.getEquipment());
+	}
+
+	@Test
+	void getEquipment_DropChance()
+	{
+		assertEquals(1, player.getEquipment().getHelmetDropChance());
+		assertEquals(1, player.getEquipment().getChestplateDropChance());
+		assertEquals(1, player.getEquipment().getLeggingsDropChance());
+		assertEquals(1, player.getEquipment().getBootsDropChance());
+		assertEquals(1, player.getEquipment().getItemInMainHandDropChance());
+		assertEquals(1, player.getEquipment().getItemInOffHandDropChance());
+	}
+
+	@Test
+	void getEquipment_SetDropChance()
+	{
+		assertThrows(UnsupportedOperationException.class, () -> player.getEquipment().setHelmetDropChance(0));
+		assertThrows(UnsupportedOperationException.class, () -> player.getEquipment().setChestplateDropChance(0));
+		assertThrows(UnsupportedOperationException.class, () -> player.getEquipment().setLeggingsDropChance(0));
+		assertThrows(UnsupportedOperationException.class, () -> player.getEquipment().setBootsDropChance(0));
+		assertThrows(UnsupportedOperationException.class, () -> player.getEquipment().setItemInMainHandDropChance(0));
+		assertThrows(UnsupportedOperationException.class, () -> player.getEquipment().setItemInOffHandDropChance(0));
+	}
+
+	@Test
 	void getName_Default_CorrectName()
 	{
 		assertEquals("player", player.getName());
