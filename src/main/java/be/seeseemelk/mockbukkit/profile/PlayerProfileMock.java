@@ -42,9 +42,10 @@ public class PlayerProfileMock implements PlayerProfile
 	}
 
 	@Override
+	@Deprecated
 	public @Nullable UUID getUniqueId()
 	{
-		return uuid;
+		return getId();
 	}
 
 	@Override
