@@ -59,11 +59,11 @@ jobs:
           current_version: ${{ steps.get-latest-tag.outputs.tag }}
           level: ${{ steps.release-label.outputs.level }}
 
-      - name: Set up JDK 16
+      - name: Set up JDK 17
         if: ${{ steps.bump-semver.outputs.new_version != null }}
         uses: actions/setup-java@v1
         with:
-          java-version: 16
+          java-version: 17
 
       - name: Restore caches
         if: ${{ steps.bump-semver.outputs.new_version != null }}
