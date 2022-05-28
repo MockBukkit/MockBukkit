@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.StringReader;
 import java.util.regex.Pattern;
@@ -58,7 +59,7 @@ class UnsafeValuesTest
 			currentVersion = currentVersion.substring(0, currentVersion.indexOf(".", currentVersion.indexOf(".") + 1));
 		}
 
-		mockUnsafeValues.isSupportedApiVersion(currentVersion);
+		assertTrue(mockUnsafeValues.isSupportedApiVersion(currentVersion));
 	}
 
 	@Test
