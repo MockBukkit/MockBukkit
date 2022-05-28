@@ -1068,31 +1068,37 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public void playEffect(Location location, Effect effect, int data)
+	public void playEffect(@NotNull Location location, @NotNull Effect effect, int data)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.playEffect(location, effect, data, 64);
 	}
 
 	@Override
-	public void playEffect(Location location, Effect effect, int data, int radius)
+	public void playEffect(@NotNull Location location, @NotNull Effect effect, int data, int radius)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Validate.notNull(location, "Location cannot be null");
+		Validate.notNull(effect, "Effect cannot be null");
+		Validate.notNull(location.getWorld(), "World cannot be null");
 	}
 
 	@Override
-	public <T> void playEffect(Location location, Effect effect, T data)
+	public <T> void playEffect(@NotNull Location location, @NotNull Effect effect, T data)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.playEffect(location, effect, data, 64);
 	}
 
 	@Override
-	public <T> void playEffect(Location location, Effect effect, T data, int radius)
+	public <T> void playEffect(@NotNull Location location, @NotNull Effect effect, T data, int radius)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (data != null)
+		{
+			Validate.isTrue(effect.getData() != null && effect.getData().isAssignableFrom(data.getClass()), "Wrong kind of data for this effect!");
+		}
+		else
+		{
+			// Special case: the axis is optional for ELECTRIC_SPARK
+			Validate.isTrue(effect.getData() == null || effect == Effect.ELECTRIC_SPARK, "Wrong kind of data for this effect!");
+		}
 	}
 
 	@Override
