@@ -27,7 +27,7 @@ public class ObjectiveMock implements Objective
 	private RenderType renderType;
 
 	public ObjectiveMock(@NotNull ScoreboardMock scoreboard, @NotNull String name, @NotNull String displayName,
-						 @NotNull String criteria, @NotNull RenderType renderType)
+	                     @NotNull String criteria, @NotNull RenderType renderType)
 	{
 		Validate.notNull(scoreboard, "When registering an Objective to the Scoreboard the scoreboard cannot be null.");
 		Validate.notNull(name, "The name cannot be null");

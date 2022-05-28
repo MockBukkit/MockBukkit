@@ -75,9 +75,9 @@ class ServerMockTest
 	void createWorld_WorldCreator()
 	{
 		WorldCreator worldCreator = new WorldCreator("test")
-				.seed(12345)
-				.type(WorldType.FLAT)
-				.environment(World.Environment.NORMAL);
+		.seed(12345)
+		.type(WorldType.FLAT)
+		.environment(World.Environment.NORMAL);
 		World world = server.createWorld(worldCreator);
 
 		assertEquals(1, server.getWorlds().size());
