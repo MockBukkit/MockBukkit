@@ -7,6 +7,7 @@ import java.util.Random;
 import java.util.function.UnaryOperator;
 
 import be.seeseemelk.mockbukkit.inventory.meta.ArmorStandMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.TropicalFishBucketMetaMock;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.md_5.bungee.api.chat.BaseComponent;
@@ -57,9 +58,7 @@ public class ItemFactoryMock implements ItemFactory
 		case POTION, LINGERING_POTION, SPLASH_POTION -> PotionMetaMock.class;
 		case PLAYER_HEAD -> SkullMetaMock.class;
 		case SUSPICIOUS_STEW -> SuspiciousStewMetaMock.class;
-		case TROPICAL_FISH_BUCKET ->
-				// TODO Auto-generated method stub
-				throw new UnimplementedOperationException();
+		case TROPICAL_FISH_BUCKET -> TropicalFishBucketMetaMock.class;
 			default -> ItemMetaMock.class;
 		};
 	}
