@@ -9,7 +9,7 @@ import java.util.UUID;
 public abstract class VehicleMock extends EntityMock implements Vehicle
 {
 
-	public VehicleMock(@NotNull ServerMock server, @NotNull UUID uuid)
+	protected VehicleMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 	}

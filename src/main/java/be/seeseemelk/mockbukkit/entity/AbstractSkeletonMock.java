@@ -12,7 +12,7 @@ public abstract class AbstractSkeletonMock extends MonsterMock implements Abstra
 
 	private boolean shouldBurnInDay;
 
-	public AbstractSkeletonMock(@NotNull ServerMock server, @NotNull UUID uuid)
+	protected AbstractSkeletonMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 	}

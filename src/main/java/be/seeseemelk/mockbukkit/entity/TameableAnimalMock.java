@@ -34,13 +34,13 @@ public class TameableAnimalMock extends AnimalsMock implements Tameable, Creatur
 			return null;
 		}
 
-		AnimalTamer owner = getServer().getPlayer(this.getOwnerUniqueId());
-		if (owner == null)
+		AnimalTamer tamer = getServer().getPlayer(this.getOwnerUniqueId());
+		if (tamer == null)
 		{
-			owner = getServer().getOfflinePlayer(this.getOwnerUniqueId());
+			tamer = getServer().getOfflinePlayer(this.getOwnerUniqueId());
 		}
 
-		return owner;
+		return tamer;
 	}
 
 	@Override

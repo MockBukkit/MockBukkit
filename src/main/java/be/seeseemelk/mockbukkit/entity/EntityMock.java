@@ -331,16 +331,9 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public boolean isPermissionSet(@NotNull String name)
 	{
-		for (PermissionAttachment attachment : permissionAttachments)
-		{
-			Map<String, Boolean> permissions = attachment.getPermissions();
-
-			if (permissions.containsKey(name) && permissions.get(name))
-			{
-				return true;
-			}
-		}
-		return false;
+		return permissionAttachments.stream()
+				.map(PermissionAttachment::getPermissions)
+				.anyMatch(permissions -> permissions.containsKey(name) && permissions.get(name));
 	}
 
 	@Override

@@ -24,7 +24,7 @@ public abstract class AbstractHorseMock extends AnimalsMock implements AbstractH
 	private boolean isMouthOpen;
 	private boolean rearing;
 
-	public AbstractHorseMock(@NotNull ServerMock server, @NotNull UUID uuid)
+	protected AbstractHorseMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 	}

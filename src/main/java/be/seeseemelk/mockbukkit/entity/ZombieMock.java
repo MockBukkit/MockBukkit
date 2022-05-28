@@ -169,6 +169,7 @@ public class ZombieMock extends MonsterMock implements Zombie
 	@Override
 	public void setAgeLock(boolean lock)
 	{
+		// Does nothing in CraftBukkit.
 	}
 
 	@Override
@@ -216,6 +217,7 @@ public class ZombieMock extends MonsterMock implements Zombie
 	@Override
 	public void setBreed(boolean breed)
 	{
+		// Does nothing in CraftBukkit.
 	}
 
 }

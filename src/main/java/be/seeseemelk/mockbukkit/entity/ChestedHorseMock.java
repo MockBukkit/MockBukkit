@@ -11,7 +11,7 @@ public abstract class ChestedHorseMock extends AbstractHorseMock implements Ches
 
 	private boolean hasChest;
 
-	public ChestedHorseMock(@NotNull ServerMock server, @NotNull UUID uuid)
+	protected ChestedHorseMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 	}

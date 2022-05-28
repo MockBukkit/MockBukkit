@@ -55,7 +55,6 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 
 	private static final double MAX_HEALTH = 20.0;
 	protected double health;
-	private final double maxHealth = MAX_HEALTH;
 	private int maxAirTicks = 300;
 	private int remainingAirTicks = 300;
 	protected boolean alive = true;
@@ -143,7 +142,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public void resetMaxHealth()
 	{
-		setMaxHealth(maxHealth);
+		setMaxHealth(MAX_HEALTH);
 	}
 
 	@Override
