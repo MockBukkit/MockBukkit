@@ -22,6 +22,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityCategory;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -50,6 +51,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	private int remainingAirTicks = 300;
 	protected boolean alive = true;
 	private boolean gliding = false;
+	private boolean ai = true;
 	protected Map<Attribute, AttributeInstanceMock> attributes;
 
 	private final Set<ActivePotionEffect> activeEffects = new HashSet<>();
@@ -62,6 +64,11 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		attributes.put(Attribute.GENERIC_MAX_HEALTH, new AttributeInstanceMock(Attribute.GENERIC_MAX_HEALTH, 20));
 		this.setMaxHealth(MAX_HEALTH);
 		this.setHealth(MAX_HEALTH);
+
+		if (!(this instanceof Mob))
+		{
+			ai = false;
+		}
 	}
 
 	@Override
@@ -516,15 +523,16 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public void setAI(boolean ai)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (this instanceof Mob)
+		{
+			this.ai = ai;
+		}
 	}
 
 	@Override
 	public boolean hasAI()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this instanceof Mob && this.ai;
 	}
 
 	@Override

@@ -441,4 +441,24 @@ class EntityMockTest
 		assertFalse(player.isGliding());
 	}
 
+	@Test
+	void testHasAI()
+	{
+		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+
+		assertTrue(zombie.hasAI());
+	}
+
+	@Test
+	void testSetAI()
+	{
+		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+
+		zombie.setAI(false);
+		assertFalse(zombie.hasAI());
+
+		zombie.setAI(true);
+		assertTrue(zombie.hasAI());
+	}
+
 }
