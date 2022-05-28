@@ -6,6 +6,8 @@ import org.bukkit.map.MapView;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
+
 public class MapMetaMock extends ItemMetaMock implements MapMeta
 {
 
@@ -124,6 +126,30 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 	public void setColor(@Nullable Color color)
 	{
 		this.color = color;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((color == null) ? 0 : color.hashCode());
+		result = prime * result + ((mapId == null) ? 0 : mapId.hashCode());
+		result = prime * result + ((mapView == null) ? 0 : mapView.hashCode());
+		result = prime * result + (scaling);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (!(obj instanceof MapMeta meta))
+			return false;
+		return super.equals(obj) &&
+				(!this.hasMapId() && !meta.hasMapId() || Objects.equals(this.mapId, meta.getMapId())) &&
+				Objects.equals(this.mapView, meta.getMapView()) &&
+				Objects.equals(this.color, meta.getColor()) &&
+				((meta instanceof MapMetaMock mapMeta) ? this.scaling == mapMeta.scaling : meta.isScaling() ? this.scaling == 1 : this.scaling == 2);
 	}
 
 	@Override

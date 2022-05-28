@@ -10,10 +10,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class MapMetaMockTest
+class MapMetaMockTest
 {
 
 	private MapMetaMock meta;
@@ -106,6 +107,27 @@ public class MapMetaMockTest
 		meta.setScaling(true);
 
 		assertTrue(meta.isScaling());
+	}
+
+	@Test
+	void equals_SameInstance_ReturnsTrue()
+	{
+		assertEquals(meta, meta);
+	}
+
+	@Test
+	void equals_DifferentInstance_SameValues_True()
+	{
+		MapMetaMock clone = meta.clone();
+		assertEquals(meta, clone);
+	}
+
+	@Test
+	void equals_DifferentInstance_DifferentValues_False()
+	{
+		MapMetaMock clone = meta.clone();
+		clone.setMapId(2);
+		assertNotEquals(meta, clone);
 	}
 
 	@Test
