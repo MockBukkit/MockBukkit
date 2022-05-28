@@ -1386,7 +1386,7 @@ class PlayerMockTest
 	}
 
 	@Test
-	public void testPlayerSerialization() 
+	public void testPlayerSerialization()
 	{
 		Map<String, Object> serialized = player.serialize();
 		assertEquals(serialized.get("name"), "player");
