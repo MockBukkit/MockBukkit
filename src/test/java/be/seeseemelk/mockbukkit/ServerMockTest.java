@@ -1,5 +1,13 @@
 package be.seeseemelk.mockbukkit;
 
+import com.google.common.io.ByteArrayDataOutput;
+import com.google.common.io.ByteStreams;
+import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.Warning;
+import org.bukkit.WorldCreator;
+import org.bukkit.WorldType;
+import org.bukkit.World;
 import be.seeseemelk.mockbukkit.command.CommandResult;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
@@ -78,9 +86,9 @@ class ServerMockTest
 	void createWorld_WorldCreator()
 	{
 		WorldCreator worldCreator = new WorldCreator("test")
-				.seed(12345)
-				.type(WorldType.FLAT)
-				.environment(World.Environment.NORMAL);
+		.seed(12345)
+		.type(WorldType.FLAT)
+		.environment(World.Environment.NORMAL);
 		World world = server.createWorld(worldCreator);
 
 		assertEquals(1, server.getWorlds().size());
@@ -584,11 +592,31 @@ class ServerMockTest
 	}
 
 	@Test
+	void testCreateBlockData()
+	{
+		BlockData blockData = server.createBlockData(Material.STONE);
+		assertEquals(Material.STONE, blockData.getMaterial());
+	}
+
+	@Test
 	void testWarningState()
 	{
 		assertEquals(Warning.WarningState.DEFAULT, server.getWarningState());
 		server.setWarningState(Warning.WarningState.ON);
 		assertEquals(Warning.WarningState.ON, server.getWarningState());
+	}
+
+	@Test
+	@SuppressWarnings("UnstableApiUsage")
+	void testSendPluginMessage()
+	{
+		MockPlugin plugin = MockBukkit.createMockPlugin();
+		server.getMessenger().registerOutgoingPluginChannel(plugin, "BungeeCord");
+		ByteArrayDataOutput out = ByteStreams.newDataOutput();
+		out.writeUTF("Forward");
+		out.writeUTF("ALL");
+		out.writeUTF("MockBukkit");
+		server.sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
 	}
 
 	@Test
