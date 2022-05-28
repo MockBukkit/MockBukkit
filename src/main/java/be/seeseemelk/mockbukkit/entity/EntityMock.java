@@ -1,11 +1,20 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.AsyncCatcher;
+import com.google.common.base.Preconditions;
+import org.bukkit.Bukkit;
+import org.bukkit.EntityEffect;
+import org.bukkit.Location;
+import org.bukkit.World;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.command.MessageTarget;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
 import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
+import org.bukkit.Bukkit;
+import org.bukkit.EntityEffect;
+import org.bukkit.Location;
+import org.bukkit.World;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
 import org.bukkit.*;
@@ -43,7 +52,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-
 public abstract class EntityMock extends Entity.Spigot implements Entity, MessageTarget
 {
 	private final ServerMock server;
@@ -65,6 +73,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private float fallDistance;
 	private int fireTicks = -20;
 	private int maxFireTicks = 20;
+	private EntityDamageEvent lastDamageEvent;
 
 	protected EntityMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -669,16 +678,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public void setLastDamageCause(EntityDamageEvent event)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
-
+		this.lastDamageEvent = event;
 	}
 
 	@Override
 	public EntityDamageEvent getLastDamageCause()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return this.lastDamageEvent;
 	}
 
 	@Override
@@ -697,11 +703,9 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public void playEffect(EntityEffect type)
+	public void playEffect(@NotNull EntityEffect type)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
-
+		Preconditions.checkArgument(type != null, "type");
 	}
 
 	@Override

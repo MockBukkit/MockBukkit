@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit;
 
+import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import be.seeseemelk.mockbukkit.boss.BossBarMock;
 import be.seeseemelk.mockbukkit.boss.KeyedBossBarMock;
 import be.seeseemelk.mockbukkit.command.CommandResult;
@@ -85,6 +86,7 @@ import org.bukkit.loot.LootTable;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.messaging.Messenger;
+import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.potion.PotionBrewer;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.profile.PlayerProfile;
@@ -139,6 +141,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private final MockPlayerList playerList = new MockPlayerList();
 	private final MockCommandMap commandMap = new MockCommandMap(this);
 	private final HelpMapMock helpMap = new HelpMapMock();
+	private final StandardMessenger messenger = new StandardMessenger();
 
 	private GameMode defaultGameMode = GameMode.SURVIVAL;
 	private ConsoleCommandSender consoleSender;
@@ -210,7 +213,7 @@ public class ServerMock extends Server.Spigot implements Server
 		AsyncCatcher.catchOp("player add");
 		playerList.addPlayer(player);
 		PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(player,
-				String.format(JOIN_MESSAGE, player.getDisplayName()));
+		        String.format(JOIN_MESSAGE, player.getDisplayName()));
 		Bukkit.getPluginManager().callEvent(playerJoinEvent);
 
 		player.setLastPlayed(getCurrentServerTime());
@@ -704,7 +707,7 @@ public class ServerMock extends Server.Spigot implements Server
 	public Set<String> getIPBans()
 	{
 		return this.playerList.getIPBans().getBanEntries().stream().map(BanEntry::getTarget)
-				.collect(Collectors.toSet());
+		       .collect(Collectors.toSet());
 	}
 
 	@Override
@@ -924,17 +927,27 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public void sendPluginMessage(Plugin source, String channel, byte[] message)
+	public void sendPluginMessage(@NotNull Plugin source, @NotNull String channel, byte[] message)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		StandardMessenger.validatePluginMessage(this.getMessenger(), source, channel, message);
+
+		for (Player player : this.getOnlinePlayers())
+		{
+			player.sendPluginMessage(source, channel, message);
+		}
 	}
 
 	@Override
-	public Set<String> getListeningPluginChannels()
+	public @NotNull Set<String> getListeningPluginChannels()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Set<String> result = new HashSet<>();
+
+		for (Player player : this.getOnlinePlayers())
+		{
+			result.addAll(player.getListeningPluginChannels());
+		}
+
+		return result;
 	}
 
 	@Override
@@ -1243,10 +1256,9 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public Messenger getMessenger()
+	public @NotNull Messenger getMessenger()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.messenger;
 	}
 
 	@Override
@@ -1461,17 +1473,23 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public BlockData createBlockData(Material material)
+	public @NotNull BlockData createBlockData(@NotNull Material material)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Validate.notNull(material, "Must provide material");
+		return BlockDataMock.mock(material);
 	}
 
 	@Override
-	public BlockData createBlockData(Material material, Consumer<BlockData> consumer)
+	public @NotNull BlockData createBlockData(@NotNull Material material, @Nullable Consumer<BlockData> consumer)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		BlockData blockData = createBlockData(material);
+
+		if (consumer != null)
+		{
+			consumer.accept(blockData);
+		}
+
+		return blockData;
 	}
 
 	@Override
@@ -1612,7 +1630,7 @@ public class ServerMock extends Server.Spigot implements Server
 
 	@Override
 	public ItemStack createExplorerMap(World world, Location location, StructureType structureType, int radius,
-									   boolean findUnexplored)
+	                                   boolean findUnexplored)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
