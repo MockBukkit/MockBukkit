@@ -10,6 +10,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class CrossbowMetaMock extends ItemMetaMock implements CrossbowMeta
 {
@@ -70,6 +71,23 @@ public class CrossbowMetaMock extends ItemMetaMock implements CrossbowMeta
 		}
 
 		this.projectiles.add(item);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((projectiles == null) ? 0 : projectiles.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (!(obj instanceof CrossbowMeta meta))
+			return false;
+		return super.equals(obj) && Objects.equals(this.getChargedProjectiles(), meta.getChargedProjectiles());
 	}
 
 	@Override

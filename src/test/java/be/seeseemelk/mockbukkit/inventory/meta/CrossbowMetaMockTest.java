@@ -12,11 +12,12 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class CrossbowMetaMockTest
+class CrossbowMetaMockTest
 {
 
 	private CrossbowMetaMock meta;
@@ -172,6 +173,27 @@ public class CrossbowMetaMockTest
 	void addChargedProjectile_NotArrow_ThrowsException()
 	{
 		assertThrowsExactly(IllegalArgumentException.class, () -> meta.addChargedProjectile(new ItemStack(Material.STONE)));
+	}
+
+	@Test
+	void equals_SameInstance_ReturnsTrue()
+	{
+		assertEquals(meta, meta);
+	}
+
+	@Test
+	void equals_DifferentInstance_SameValues_True()
+	{
+		CrossbowMetaMock clone = meta.clone();
+		assertEquals(meta, clone);
+	}
+
+	@Test
+	void equals_DifferentInstance_DifferentValues_False()
+	{
+		CrossbowMetaMock clone = meta.clone();
+		clone.addChargedProjectile(new ItemStack(Material.FIREWORK_ROCKET));
+		assertNotEquals(meta, clone);
 	}
 
 	@Test
