@@ -10,6 +10,7 @@ import be.seeseemelk.mockbukkit.inventory.SimpleInventoryViewMock;
 import be.seeseemelk.mockbukkit.sound.AudioExperience;
 import be.seeseemelk.mockbukkit.sound.SoundReceiver;
 import be.seeseemelk.mockbukkit.statistic.StatisticsMock;
+import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
 import com.destroystokyo.paper.ClientOption;
 import com.destroystokyo.paper.Title;
@@ -1484,8 +1485,22 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public boolean breakBlock(@NotNull Block block)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(block != null, "Block cannot be null");
+		Preconditions.checkArgument(block.getWorld().equals(getWorld()), "Cannot break blocks across worlds");
+
+		BlockBreakEvent event = new BlockBreakEvent(block, this);
+
+		boolean swordNoBreak = getGameMode() == GameMode.CREATIVE && getEquipment().getItemInMainHand().getType().name().contains("SWORD");
+		event.setCancelled(swordNoBreak);
+
+		Bukkit.getPluginManager().callEvent(event);
+		if (!event.isCancelled())
+		{
+			block.setType(Material.AIR);
+			// todo: BlockDropItemEvent when BlockMock#getDrops is implemented.
+		}
+
+		return !event.isCancelled();
 	}
 
 	@Override
