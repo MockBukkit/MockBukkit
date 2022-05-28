@@ -311,15 +311,15 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	public @NotNull ItemStack getItem(@NotNull EquipmentSlot slot)
 	{
 		return switch (slot)
-				{
-					case CHEST -> getChestplate();
-					case FEET -> getBoots();
-					case HAND -> getItemInMainHand();
-					case HEAD -> getHelmet();
-					case LEGS -> getLeggings();
-					case OFF_HAND -> getItemInOffHand();
-					default -> new ItemStack(Material.AIR);
-				};
+		{
+		case CHEST -> getChestplate();
+		case FEET -> getBoots();
+		case HAND -> getItemInMainHand();
+		case HEAD -> getHelmet();
+		case LEGS -> getLeggings();
+		case OFF_HAND -> getItemInOffHand();
+			default -> new ItemStack(Material.AIR);
+		};
 	}
 
 	@Override
@@ -333,14 +333,15 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	{
 		switch (slot)
 		{
-			case CHEST -> setChestplate(item);
-			case FEET -> setBoots(item);
-			case HAND -> setItemInMainHand(item);
-			case HEAD -> setHelmet(item);
-			case LEGS -> setLeggings(item);
-			case OFF_HAND -> setItemInOffHand(item);
-			default -> {
-			}
+		case CHEST -> setChestplate(item);
+		case FEET -> setBoots(item);
+		case HAND -> setItemInMainHand(item);
+		case HEAD -> setHelmet(item);
+		case LEGS -> setLeggings(item);
+		case OFF_HAND -> setItemInOffHand(item);
+			default ->
+		{
+		}
 		}
 		// Sounds are not implemented here
 	}
