@@ -107,11 +107,11 @@ public class ArmorStandMetaMock extends ItemMetaMock implements ArmorStandMeta
 		if (!(obj instanceof ArmorStandMeta meta))
 			return false;
 		return super.equals(obj) &&
-				this.isInvisible() == meta.isInvisible() &&
-				this.hasNoBasePlate() == meta.hasNoBasePlate() &&
-				this.shouldShowArms() == meta.shouldShowArms() &&
-				this.isSmall() == meta.isSmall() &&
-				this.isMarker() == meta.isMarker();
+		       this.isInvisible() == meta.isInvisible() &&
+		       this.hasNoBasePlate() == meta.hasNoBasePlate() &&
+		       this.shouldShowArms() == meta.shouldShowArms() &&
+		       this.isSmall() == meta.isSmall() &&
+		       this.isMarker() == meta.isMarker();
 	}
 
 	@Override
