@@ -33,5 +33,5 @@ In MockBukkit an entity can also be renamed if needed::
 
     entity.setName("new-name");
 
-An EntityMock also implements the [MessageTarget](MessageTarget.md) interface so one can test received messages.
+An EntityMock also implements the ``MessageTarget`` interface so one can test received messages.
 
