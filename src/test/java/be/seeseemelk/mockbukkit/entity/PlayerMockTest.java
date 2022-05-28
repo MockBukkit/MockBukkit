@@ -56,6 +56,7 @@ import org.junit.jupiter.params.provider.EnumSource;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.TimeUnit;
@@ -133,6 +134,34 @@ class PlayerMockTest
 	void getInventory_Twice_SameInventory()
 	{
 		assertSame(player.getInventory(), player.getInventory());
+	}
+
+	@Test
+	void getInventory_getEquipment_SameInventory()
+	{
+		assertSame(player.getInventory(), player.getEquipment());
+	}
+
+	@Test
+	void getEquipment_DropChance()
+	{
+		assertEquals(1, player.getEquipment().getHelmetDropChance());
+		assertEquals(1, player.getEquipment().getChestplateDropChance());
+		assertEquals(1, player.getEquipment().getLeggingsDropChance());
+		assertEquals(1, player.getEquipment().getBootsDropChance());
+		assertEquals(1, player.getEquipment().getItemInMainHandDropChance());
+		assertEquals(1, player.getEquipment().getItemInOffHandDropChance());
+	}
+
+	@Test
+	void getEquipment_SetDropChance()
+	{
+		assertThrows(UnsupportedOperationException.class, () -> player.getEquipment().setHelmetDropChance(0));
+		assertThrows(UnsupportedOperationException.class, () -> player.getEquipment().setChestplateDropChance(0));
+		assertThrows(UnsupportedOperationException.class, () -> player.getEquipment().setLeggingsDropChance(0));
+		assertThrows(UnsupportedOperationException.class, () -> player.getEquipment().setBootsDropChance(0));
+		assertThrows(UnsupportedOperationException.class, () -> player.getEquipment().setItemInMainHandDropChance(0));
+		assertThrows(UnsupportedOperationException.class, () -> player.getEquipment().setItemInOffHandDropChance(0));
 	}
 
 	@Test
@@ -1353,6 +1382,13 @@ class PlayerMockTest
 		player.assertNotTeleported();
 		player.assertLocation(originalLocation, 0);
 
+	}
+
+	@Test
+	void testPlayerSerialization()
+	{
+		Map<String, Object> serialized = player.serialize();
+		assertEquals("player", serialized.get("name"));
 	}
 
 	@Test
