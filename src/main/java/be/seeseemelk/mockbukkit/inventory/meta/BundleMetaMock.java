@@ -69,6 +69,23 @@ public class BundleMetaMock extends ItemMetaMock implements BundleMeta
 	}
 
 	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((items == null) ? 0 : items.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (!(obj instanceof BundleMeta meta))
+			return false;
+		return super.equals(obj) && this.getItems().equals(meta.getItems());
+	}
+
+	@Override
 	public @NotNull BundleMetaMock clone()
 	{
 		BundleMetaMock clone = (BundleMetaMock) super.clone();

@@ -11,10 +11,11 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class BundleMetaMockTest
+class BundleMetaMockTest
 {
 
 	private BundleMetaMock meta;
@@ -118,6 +119,27 @@ public class BundleMetaMockTest
 	void addItems_AirItem_ThrowsException()
 	{
 		assertThrowsExactly(IllegalArgumentException.class, () -> meta.addItem(new ItemStack(Material.AIR)));
+	}
+
+	@Test
+	void equals_SameInstance_ReturnsTrue()
+	{
+		assertEquals(meta, meta);
+	}
+
+	@Test
+	void equals_DifferentInstance_SameValues_True()
+	{
+		BundleMetaMock clone = meta.clone();
+		assertEquals(meta, clone);
+	}
+
+	@Test
+	void equals_DifferentInstance_DifferentValues_False()
+	{
+		BundleMetaMock clone = meta.clone();
+		clone.addItem(new ItemStack(Material.STONE));
+		assertNotEquals(meta, clone);
 	}
 
 	@Test
