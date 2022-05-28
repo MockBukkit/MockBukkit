@@ -40,15 +40,15 @@ public class MockUnsafeValues implements UnsafeValues
 	private final Set<String> compatibleApiVersions = new HashSet<>(Arrays.asList("1.13", "1.14", "1.15", "1.16", "1.17", "1.18"));
 
 	public static final ComponentFlattener FLATTENER = ComponentFlattener.basic().toBuilder()
-			.build();
+	        .build();
 	public static final LegacyComponentSerializer LEGACY_SECTION_UXRC = LegacyComponentSerializer.builder().flattener(FLATTENER).hexColors().useUnusualXRepeatedCharacterHexFormat().build();
 	public static final PlainComponentSerializer PLAIN = PlainComponentSerializer.builder().flattener(FLATTENER).build();
 	public static final PlainTextComponentSerializer PLAIN_TEXT = PlainTextComponentSerializer.builder().flattener(FLATTENER).build();
 	public static final GsonComponentSerializer GSON = GsonComponentSerializer.builder()
-			.build();
+	        .build();
 	public static final GsonComponentSerializer COLOR_DOWNSAMPLING_GSON = GsonComponentSerializer.builder()
-			.downsampleColors()
-			.build();
+	        .downsampleColors()
+	        .build();
 
 	@Override
 	public ComponentFlattener componentFlattener()
@@ -284,6 +284,12 @@ public class MockUnsafeValues implements UnsafeValues
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull String getMainLevelName()
+	{
+		return "world"; // TODO: Allow this to be changed when server properties are implemented.
 	}
 
 	@Override
