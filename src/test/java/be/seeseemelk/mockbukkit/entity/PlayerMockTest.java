@@ -1425,7 +1425,7 @@ class PlayerMockTest
 		out.writeUTF("MockBukkit");
 		player.sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
 	}
-		
+
 	@Test
 	void testPlayerSerialization()
 	{
