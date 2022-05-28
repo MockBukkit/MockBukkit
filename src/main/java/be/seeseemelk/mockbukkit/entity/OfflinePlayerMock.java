@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.entity;
 
 import java.util.Map;
 import java.util.UUID;
+import java.util.LinkedHashMap;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -85,8 +86,9 @@ public class OfflinePlayerMock implements OfflinePlayer
 	@Override
 	public @NotNull Map<String, Object> serialize()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Map<String, Object> result = new LinkedHashMap<>();
+		result.put("UUID", uuid.toString());
+		return result;
 	}
 
 	@Override
@@ -124,6 +126,7 @@ public class OfflinePlayerMock implements OfflinePlayer
 	}
 
 	@Override
+	@Deprecated
 	public long getLastPlayed()
 	{
 		// TODO Auto-generated method stub
@@ -139,6 +142,20 @@ public class OfflinePlayerMock implements OfflinePlayer
 
 	@Override
 	public @Nullable Location getBedSpawnLocation()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public long getLastLogin()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public long getLastSeen()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

@@ -269,6 +269,31 @@ public class MockBukkit
 		return loadWith(plugin, ClassLoader.getSystemResourceAsStream(descriptionFileName), parameters);
 	}
 
+	/*	public static <T extends JavaPlugin> T loadWith(Class<T> plugin, File configFile, Object... parameters)
+		{
+			if (mock != null)
+			{
+				JavaPlugin instance = mock.getPluginManager().loadPlugin(plugin, parameters);
+				YamlConfiguration yamlConfig = new YamlConfiguration();
+
+				try
+				{
+					yamlConfig.load(configFile);
+				}
+				catch (IOException | InvalidConfigurationException e)
+				{
+					throw new RuntimeException(e);
+				}
+				instance.getConfig().setDefaults(yamlConfig);
+				mock.getPluginManager().enablePlugin(instance);
+				return plugin.cast(instance);
+			}
+			else
+			{
+				throw new IllegalStateException("Not mocking");
+			}
+		}*/
+
 	/**
 	 * Loads and enables a plugin for mocking. It will not load the {@code plugin.yml} file, but rather it will use a
 	 * mock one. This can be useful in certain multi-project plugins where one cannot always access the

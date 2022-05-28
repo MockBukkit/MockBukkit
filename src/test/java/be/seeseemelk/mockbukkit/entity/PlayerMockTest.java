@@ -12,11 +12,16 @@ import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryViewMock;
 import be.seeseemelk.mockbukkit.inventory.SimpleInventoryViewMock;
 import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
+import com.google.common.io.ByteArrayDataOutput;
+import com.google.common.io.ByteStreams;
 import org.bukkit.Bukkit;
+import org.bukkit.Effect;
 import org.bukkit.GameMode;
 import org.bukkit.GameRule;
+import org.bukkit.Instrument;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Note;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
@@ -55,6 +60,7 @@ import org.junit.jupiter.params.provider.EnumSource;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.TimeUnit;
@@ -132,6 +138,34 @@ class PlayerMockTest
 	void getInventory_Twice_SameInventory()
 	{
 		assertSame(player.getInventory(), player.getInventory());
+	}
+
+	@Test
+	void getInventory_getEquipment_SameInventory()
+	{
+		assertSame(player.getInventory(), player.getEquipment());
+	}
+
+	@Test
+	void getEquipment_DropChance()
+	{
+		assertEquals(1, player.getEquipment().getHelmetDropChance());
+		assertEquals(1, player.getEquipment().getChestplateDropChance());
+		assertEquals(1, player.getEquipment().getLeggingsDropChance());
+		assertEquals(1, player.getEquipment().getBootsDropChance());
+		assertEquals(1, player.getEquipment().getItemInMainHandDropChance());
+		assertEquals(1, player.getEquipment().getItemInOffHandDropChance());
+	}
+
+	@Test
+	void getEquipment_SetDropChance()
+	{
+		assertThrows(UnsupportedOperationException.class, () -> player.getEquipment().setHelmetDropChance(0));
+		assertThrows(UnsupportedOperationException.class, () -> player.getEquipment().setChestplateDropChance(0));
+		assertThrows(UnsupportedOperationException.class, () -> player.getEquipment().setLeggingsDropChance(0));
+		assertThrows(UnsupportedOperationException.class, () -> player.getEquipment().setBootsDropChance(0));
+		assertThrows(UnsupportedOperationException.class, () -> player.getEquipment().setItemInMainHandDropChance(0));
+		assertThrows(UnsupportedOperationException.class, () -> player.getEquipment().setItemInOffHandDropChance(0));
 	}
 
 	@Test
@@ -965,6 +999,30 @@ class PlayerMockTest
 	}
 
 	@Test
+	void testPlayNote_NewMethod()
+	{
+		int note = 10;
+		player.playNote(player.getEyeLocation(), Instrument.BANJO, new Note(note));
+		player.assertSoundHeard(Sound.BLOCK_NOTE_BLOCK_BANJO, audio ->
+		{
+			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
+			&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
+		});
+	}
+
+	@Test
+	void testPlayNote_OldMethod()
+	{
+		int note = 10;
+		player.playNote(player.getEyeLocation(), (byte) 0, (byte) note);
+		player.assertSoundHeard(Sound.BLOCK_NOTE_BLOCK_HARP, audio ->
+		{
+			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
+			&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
+		});
+	}
+
+	@Test
 	void testCloseInventoryEvenFired()
 	{
 		Inventory inv = server.createInventory(null, 36);
@@ -1357,13 +1415,56 @@ class PlayerMockTest
 	}
 
 	@Test
-	public void testPlayerSpawnParticle_Correct_DataType()
+	void testPlayerPlayEffect()
+	{
+		player.playEffect(player.getLocation(), Effect.STEP_SOUND, Material.STONE);
+	}
+
+	@Test
+	void testPlayerPlayEffect_NullData()
+	{
+		assertThrows(IllegalArgumentException.class, () ->
+		{
+			player.playEffect(player.getLocation(), Effect.STEP_SOUND, null);
+		});
+	}
+
+	@Test
+	void testPlayerPlayEffect_IncorrectData()
+	{
+		assertThrows(IllegalArgumentException.class, () ->
+		{
+			player.playEffect(player.getLocation(), Effect.STEP_SOUND, 1.0f);
+		});
+	}
+
+	@SuppressWarnings("UnstableApiUsage")
+	void testPlayerSendPluginMessage()
+	{
+		MockPlugin plugin = MockBukkit.createMockPlugin();
+		server.getMessenger().registerOutgoingPluginChannel(plugin, "BungeeCord");
+		ByteArrayDataOutput out = ByteStreams.newDataOutput();
+		out.writeUTF("Forward");
+		out.writeUTF("ALL");
+		out.writeUTF("MockBukkit");
+		player.sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
+	}
+
+	@Test
+	void testPlayerSerialization()
+	{
+		Map<String, Object> serialized = player.serialize();
+		assertEquals("player", serialized.get("name"));
+	}
+
+	@Test
+	void testPlayerSpawnParticle_Correct_DataType()
 	{
 		player.spawnParticle(Particle.ITEM_CRACK, player.getLocation(), 1, new ItemStack(Material.STONE));
 	}
 
 	@Test
-	public void testPlayerSpawnParticle_Incorrect_DataType()
+	void testPlayerSpawnParticle_Incorrect_DataType()
 	{
 		assertThrows(IllegalArgumentException.class, () ->
 		{

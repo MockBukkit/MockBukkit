@@ -1,8 +1,22 @@
 package be.seeseemelk.mockbukkit.scheduler;
 
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import org.apache.commons.lang.Validate;
+import org.bukkit.event.Event;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitScheduler;
+import org.bukkit.scheduler.BukkitTask;
+import org.bukkit.scheduler.BukkitWorker;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -12,19 +26,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 import java.util.logging.Logger;
-
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-
-import org.apache.commons.lang.Validate;
-import org.bukkit.event.Event;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitScheduler;
-import org.bukkit.scheduler.BukkitTask;
-import org.bukkit.scheduler.BukkitWorker;
-
-import org.jetbrains.annotations.NotNull;
 
 public class BukkitSchedulerMock implements BukkitScheduler
 {
@@ -208,6 +209,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	}
 
 	@Override
+	@Deprecated
 	public @NotNull BukkitTask runTask(@NotNull Plugin plugin, @NotNull BukkitRunnable task)
 	{
 		return runTask(plugin, (Runnable) task);
@@ -232,6 +234,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	}
 
 	@Override
+	@Deprecated
 	public @NotNull BukkitTask runTaskTimer(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay, long period)
 	{
 		return runTaskTimer(plugin, (Runnable) task, delay, period);
@@ -245,6 +248,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	}
 
 	@Override
+	@Deprecated
 	public int scheduleSyncDelayedTask(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay)
 	{
 		Logger.getLogger(LOGGER_NAME).warning("Consider using runTaskLater instead of scheduleSyncDelayTask");
@@ -259,6 +263,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	}
 
 	@Override
+	@Deprecated
 	public int scheduleSyncDelayedTask(@NotNull Plugin plugin, @NotNull BukkitRunnable task)
 	{
 		Logger.getLogger(LOGGER_NAME).warning("Consider using runTask instead of scheduleSyncDelayTask");
@@ -273,6 +278,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	}
 
 	@Override
+	@Deprecated
 	public int scheduleSyncRepeatingTask(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay, long period)
 	{
 		Logger.getLogger(LOGGER_NAME).warning("Consider using runTaskTimer instead of scheduleSyncRepeatingTask");
@@ -280,6 +286,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	}
 
 	@Override
+	@Deprecated
 	public int scheduleAsyncDelayedTask(@NotNull Plugin plugin, @NotNull Runnable task, long delay)
 	{
 		Logger.getLogger(LOGGER_NAME)
@@ -288,6 +295,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	}
 
 	@Override
+	@Deprecated
 	public int scheduleAsyncDelayedTask(@NotNull Plugin plugin, @NotNull Runnable task)
 	{
 		Logger.getLogger(LOGGER_NAME)
@@ -296,6 +304,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	}
 
 	@Override
+	@Deprecated
 	public int scheduleAsyncRepeatingTask(@NotNull Plugin plugin, @NotNull Runnable task, long delay, long period)
 	{
 		Logger.getLogger(LOGGER_NAME)
@@ -474,6 +483,13 @@ public class BukkitSchedulerMock implements BukkitScheduler
 
 	@Override
 	public void runTaskTimerAsynchronously(@NotNull Plugin plugin, @NotNull Consumer<BukkitTask> task, long delay, long period)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Executor getMainThreadExecutor(@NotNull Plugin plugin)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
