@@ -1,16 +1,6 @@
 package be.seeseemelk.mockbukkit.inventory;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
-
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Objects;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -22,7 +12,12 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class InventoryMock implements Inventory
 {
@@ -234,6 +229,13 @@ public class InventoryMock implements Inventory
 	}
 
 	@Override
+	public @Nullable InventoryHolder getHolder(boolean useSnapshot)
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public ListIterator<ItemStack> iterator()
 	{
 		List<ItemStack> list = Arrays.asList(items).stream().filter(Objects::nonNull).collect(Collectors.toList());
@@ -264,6 +266,13 @@ public class InventoryMock implements Inventory
 	public HashMap<Integer, ItemStack> removeItem(ItemStack... items) throws IllegalArgumentException
 	{
 		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull HashMap<Integer, ItemStack> removeItemAnySlot(@NotNull ItemStack... items) throws IllegalArgumentException
+	{
+		//TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
@@ -390,6 +399,13 @@ public class InventoryMock implements Inventory
 	public void clear()
 	{
 		Arrays.fill(items, null);
+	}
+
+	@Override
+	public int close()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
