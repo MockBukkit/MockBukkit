@@ -399,8 +399,8 @@ public class BlockMock implements Block
 	public boolean isLiquid()
 	{
 		return material == Material.LAVA
-				|| material == Material.WATER
-				|| material == Material.BUBBLE_COLUMN;
+		       || material == Material.WATER
+		       || material == Material.BUBBLE_COLUMN;
 	}
 
 	@Override
