@@ -12,6 +12,11 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Objects;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -21,6 +26,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class InventoryMock implements Inventory
 {
+
 	private final ItemStack[] items;
 	private final InventoryHolder holder;
 	private final InventoryType type;
@@ -334,31 +340,71 @@ public class InventoryMock implements Inventory
 	}
 
 	@Override
-	public HashMap<Integer, ? extends ItemStack> all(Material material) throws IllegalArgumentException
+	public @NotNull HashMap<Integer, ? extends ItemStack> all(@NotNull Material material) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Validate.notNull(material, "Material cannot be null");
+		HashMap<Integer, ItemStack> slots = new HashMap<>();
+
+		ItemStack[] items = this.getStorageContents();
+		for (int i = 0; i < items.length; i++)
+		{
+			if (items[i] != null && items[i].getType() == material)
+			{
+				slots.put(i, items[i]);
+			}
+		}
+		return slots;
 	}
 
 	@Override
-	public HashMap<Integer, ? extends ItemStack> all(ItemStack item)
+	public @NotNull HashMap<Integer, ? extends ItemStack> all(ItemStack item)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		HashMap<Integer, ItemStack> slots = new HashMap<>();
+		if (item != null)
+		{
+			ItemStack[] items = this.getStorageContents();
+			for (int i = 0; i < items.length; i++)
+			{
+				if (item.equals(items[i]))
+				{
+					slots.put(i, items[i]);
+				}
+			}
+		}
+		return slots;
 	}
 
 	@Override
-	public int first(Material material) throws IllegalArgumentException
+	public int first(@NotNull Material material) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Validate.notNull(material, "Material cannot be null");
+		ItemStack[] items = this.getStorageContents();
+		for (int i = 0; i < items.length; i++)
+		{
+			if (items[i] != null && items[i].getType() == material)
+			{
+				return i;
+			}
+		}
+		return -1;
 	}
 
 	@Override
-	public int first(ItemStack item)
+	public int first(@NotNull ItemStack item)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (item == null)
+		{
+			return -1;
+		}
+		ItemStack[] items = this.getStorageContents();
+		for (int i = 0; i < items.length; i++)
+		{
+			if (items[i] != null && item.equals(items[i]))
+			{
+				return i;
+			}
+		}
+		return -1;
 	}
 
 	@Override
@@ -376,17 +422,30 @@ public class InventoryMock implements Inventory
 	}
 
 	@Override
-	public void remove(Material material) throws IllegalArgumentException
+	public void remove(@NotNull Material material) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Validate.notNull(material, "Material cannot be null");
+		ItemStack[] items = this.getStorageContents();
+		for (int i = 0; i < items.length; i++)
+		{
+			if (items[i] != null && items[i].getType() == material)
+			{
+				this.clear(i);
+			}
+		}
 	}
 
 	@Override
-	public void remove(ItemStack item)
+	public void remove(@NotNull ItemStack item)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		ItemStack[] items = this.getStorageContents();
+		for (int i = 0; i < items.length; i++)
+		{
+			if (items[i] != null && items[i].equals(item))
+			{
+				this.clear(i);
+			}
+		}
 	}
 
 	@Override

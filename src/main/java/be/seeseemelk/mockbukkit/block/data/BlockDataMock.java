@@ -1,15 +1,15 @@
 package be.seeseemelk.mockbukkit.block.data;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.Material;
 import org.bukkit.SoundGroup;
 import org.bukkit.block.data.BlockData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-
 public class BlockDataMock implements BlockData
 {
+
 	private final Material type;
 
 	public BlockDataMock(Material type)
@@ -76,4 +76,13 @@ public class BlockDataMock implements BlockData
 			return new BlockDataMock(type);
 		}
 	}
+
+	public static @NotNull BlockDataMock mock(@NotNull Material material)
+	{
+		return switch (material)
+		{
+			default -> new BlockDataMock(material);
+		};
+	}
+
 }

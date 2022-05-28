@@ -78,7 +78,7 @@ jacoco {
 }
 
 group = 'com.github.seeseemelk'
-version = gradle.ext.version
+version = property('mockbukkit.version')
 
 publishing {
     publications {
@@ -88,6 +88,7 @@ publishing {
 
             artifact sourcesJar
             artifact javadocJar
+            version = property('mockbukkit.version')
             pom {
                 name = "MockBukkit-v${gradle.ext.apiVersion}"
                 packaging = 'jar'
