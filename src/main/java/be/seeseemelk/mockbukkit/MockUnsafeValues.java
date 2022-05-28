@@ -312,6 +312,12 @@ public class MockUnsafeValues implements UnsafeValues
 	}
 
 	@Override
+	public @NotNull String getMainLevelName()
+	{
+		return "world"; // TODO: Allow this to be changed when server properties are implemented.
+	}
+
+	@Override
 	public ItemRarity getItemRarity(Material material)
 	{
 		// TODO Auto-generated method stub
