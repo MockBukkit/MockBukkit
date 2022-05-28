@@ -5,6 +5,10 @@ import org.bukkit.Bukkit;
 public class AsyncCatcher
 {
 
+	private AsyncCatcher()
+	{
+	}
+
 	public static void catchOp(String reason)
 	{
 		if (Bukkit.getServer().isPrimaryThread())

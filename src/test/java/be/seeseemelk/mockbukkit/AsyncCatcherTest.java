@@ -6,9 +6,10 @@ import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.atomic.AtomicReference;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class AsyncCatcherTest
+class AsyncCatcherTest
 {
 
 	private ServerMock server;
@@ -28,7 +29,7 @@ public class AsyncCatcherTest
 	@Test
 	void catchOp_MainThread_Succeeds()
 	{
-		AsyncCatcher.catchOp("test");
+		assertDoesNotThrow(() -> AsyncCatcher.catchOp("test"));
 	}
 
 	@Test

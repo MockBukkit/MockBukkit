@@ -565,7 +565,6 @@ public class WorldMock implements World
 	@Override
 	public boolean unloadChunk(int x, int z)
 	{
-		AsyncCatcher.catchOp("chunk unload");
 		return unloadChunk(x, z, true);
 	}
 
