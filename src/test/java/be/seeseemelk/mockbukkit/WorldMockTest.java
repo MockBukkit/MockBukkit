@@ -1,5 +1,16 @@
 package be.seeseemelk.mockbukkit;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assumptions.assumeFalse;
+
+import java.util.List;
+
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import be.seeseemelk.mockbukkit.block.state.BlockStateMock;
@@ -7,7 +18,10 @@ import be.seeseemelk.mockbukkit.entity.ArmorStandMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
 import be.seeseemelk.mockbukkit.entity.FireworkMock;
 import be.seeseemelk.mockbukkit.entity.ZombieMock;
+import com.google.common.io.ByteArrayDataOutput;
+import com.google.common.io.ByteStreams;
 import org.bukkit.Chunk;
+import org.bukkit.Effect;
 import org.bukkit.GameRule;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -28,17 +42,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assumptions.assumeFalse;
 
 class WorldMockTest
 {
@@ -361,6 +366,13 @@ class WorldMockTest
 	}
 
 	@Test
+	public void worldPlayEffect()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.playEffect(new Location(world, 0, 0, 0), Effect.STEP_SOUND, Material.STONE);
+	}
+
+	@Test
 	void testDropItem()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
@@ -435,6 +447,40 @@ class WorldMockTest
 	{
 		WorldMock world = new WorldMock();
 		assertThrowsExactly(IllegalArgumentException.class, () -> world.spawn(new Location(world, 0, 5, 0), null));
+	}
+
+	@Test
+	public void worldPlayEffect_NullData()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertThrows(IllegalArgumentException.class, () ->
+		{
+			world.playEffect(new Location(world, 0, 0, 0), Effect.STEP_SOUND, null);
+		});
+	}
+
+	@Test
+	public void worldPlayEffect_IncorrectData()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertThrows(IllegalArgumentException.class, () ->
+		{
+			world.playEffect(new Location(world, 0, 0, 0), Effect.STEP_SOUND, 1.0f);
+		});
+	}
+
+	@Test
+	@SuppressWarnings("UnstableApiUsage")
+	void testSendPluginMessage()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		MockPlugin plugin = MockBukkit.createMockPlugin();
+		server.getMessenger().registerOutgoingPluginChannel(plugin, "BungeeCord");
+		ByteArrayDataOutput out = ByteStreams.newDataOutput();
+		out.writeUTF("Forward");
+		out.writeUTF("ALL");
+		out.writeUTF("MockBukkit");
+		world.sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
 	}
 
 	@Test

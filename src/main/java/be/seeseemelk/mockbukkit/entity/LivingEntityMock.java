@@ -186,6 +186,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		Bukkit.getPluginManager().callEvent(event);
 		if (!event.isCancelled())
 		{
+			setLastDamageCause(event);
 			amount = event.getDamage();
 			setHealth(health - amount);
 		}
