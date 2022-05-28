@@ -2309,6 +2309,7 @@ public class WorldMock implements World
 	@Override
 	public boolean isClearWeather()
 	{
+
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
