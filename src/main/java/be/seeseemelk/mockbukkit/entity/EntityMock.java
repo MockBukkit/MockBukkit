@@ -67,6 +67,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private float fallDistance;
 	private int fireTicks = -20;
 	private int maxFireTicks = 20;
+	private EntityDamageEvent lastDamageEvent;
 
 	protected EntityMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -670,16 +671,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public void setLastDamageCause(EntityDamageEvent event)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
-
+		this.lastDamageEvent = event;
 	}
 
 	@Override
 	public EntityDamageEvent getLastDamageCause()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return this.lastDamageEvent;
 	}
 
 	@Override

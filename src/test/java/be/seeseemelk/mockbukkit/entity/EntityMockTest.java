@@ -414,14 +414,24 @@ class EntityMockTest
 	}
 
 	@Test
+	void lastDamageCause()
+	{
+		World world = new WorldMock(Material.GRASS_BLOCK, 10);
+		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+		assertNull(zombie.getLastDamageCause());
+		zombie.damage(1);
+		assertNotNull(zombie.getLastDamageCause());
+	}
+
+	@Test
 	void setGliding()
 	{
-		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
-		assertFalse(zombie.isGliding());
-		zombie.setGliding(true);
-		assertTrue(zombie.isGliding());
-		zombie.setGliding(false);
-		assertFalse(zombie.isGliding());
+		PlayerMock player = server.addPlayer();
+		assertFalse(player.isGliding());
+		player.setGliding(true);
+		assertTrue(player.isGliding());
+		player.setGliding(false);
+		assertFalse(player.isGliding());
 	}
 
 }
