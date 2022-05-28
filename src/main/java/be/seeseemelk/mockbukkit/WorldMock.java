@@ -63,6 +63,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Consumer;
 import org.bukkit.util.RayTraceResult;
@@ -74,6 +75,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -95,7 +97,7 @@ public class WorldMock implements World
 	private final Map<GameRule<?>, Object> gameRules = new HashMap<>();
 	private final MetadataTable metadataTable = new MetadataTable();
 	private final Map<ChunkCoordinate, ChunkMock> loadedChunks = new HashMap<>();
-	private PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
+	private final PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
 	private final ServerMock server;
 	private final Material defaultBlock;
 	private final int grassHeight;
@@ -413,15 +415,25 @@ public class WorldMock implements World
 	@Override
 	public void sendPluginMessage(@NotNull Plugin source, @NotNull String channel, byte[] message)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		StandardMessenger.validatePluginMessage(this.server.getMessenger(), source, channel, message);
+
+		for (Player player : this.getPlayers())
+		{
+			player.sendPluginMessage(source, channel, message);
+		}
 	}
 
 	@Override
 	public @NotNull Set<String> getListeningPluginChannels()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Set<String> result = new HashSet<>();
+
+		for (Player player : this.getPlayers())
+		{
+			result.addAll(player.getListeningPluginChannels());
+		}
+
+		return result;
 	}
 
 	@Override
@@ -1056,31 +1068,37 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public void playEffect(Location location, Effect effect, int data)
+	public void playEffect(@NotNull Location location, @NotNull Effect effect, int data)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.playEffect(location, effect, data, 64);
 	}
 
 	@Override
-	public void playEffect(Location location, Effect effect, int data, int radius)
+	public void playEffect(@NotNull Location location, @NotNull Effect effect, int data, int radius)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Validate.notNull(location, "Location cannot be null");
+		Validate.notNull(effect, "Effect cannot be null");
+		Validate.notNull(location.getWorld(), "World cannot be null");
 	}
 
 	@Override
-	public <T> void playEffect(Location location, Effect effect, T data)
+	public <T> void playEffect(@NotNull Location location, @NotNull Effect effect, T data)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.playEffect(location, effect, data, 64);
 	}
 
 	@Override
-	public <T> void playEffect(Location location, Effect effect, T data, int radius)
+	public <T> void playEffect(@NotNull Location location, @NotNull Effect effect, T data, int radius)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (data != null)
+		{
+			Validate.isTrue(effect.getData() != null && effect.getData().isAssignableFrom(data.getClass()), "Wrong kind of data for this effect!");
+		}
+		else
+		{
+			// Special case: the axis is optional for ELECTRIC_SPARK
+			Validate.isTrue(effect.getData() == null || effect == Effect.ELECTRIC_SPARK, "Wrong kind of data for this effect!");
+		}
 	}
 
 	@Override
