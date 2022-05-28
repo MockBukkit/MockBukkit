@@ -89,6 +89,32 @@ public class ArmorStandMetaMock extends ItemMetaMock implements ArmorStandMeta
 	}
 
 	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + (invisible ? 1 : 0);
+		result = prime * result + (noBasePlate ? 1 : 0);
+		result = prime * result + (showArms ? 1 : 0);
+		result = prime * result + (small ? 1 : 0);
+		result = prime * result + (marker ? 1 : 0);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (!(obj instanceof ArmorStandMeta meta))
+			return false;
+		return super.equals(obj) &&
+				this.isInvisible() == meta.isInvisible() &&
+				this.hasNoBasePlate() == meta.hasNoBasePlate() &&
+				this.shouldShowArms() == meta.shouldShowArms() &&
+				this.isSmall() == meta.isSmall() &&
+				this.isMarker() == meta.isMarker();
+	}
+
+	@Override
 	public @NotNull ArmorStandMetaMock clone()
 	{
 		ArmorStandMetaMock clone = (ArmorStandMetaMock) super.clone();

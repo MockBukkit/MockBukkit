@@ -5,10 +5,12 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ArmorStandMetaMockTest
+class ArmorStandMetaMockTest
 {
 
 	private ArmorStandMetaMock meta;
@@ -87,6 +89,27 @@ public class ArmorStandMetaMockTest
 	{
 		meta.setSmall(true);
 		assertTrue(meta.isSmall());
+	}
+
+	@Test
+	void equals_SameInstance_ReturnsTrue()
+	{
+		assertEquals(meta, meta);
+	}
+
+	@Test
+	void equals_DifferentInstance_SameValues_True()
+	{
+		ArmorStandMetaMock clone = meta.clone();
+		assertEquals(meta, clone);
+	}
+
+	@Test
+	void equals_DifferentInstance_DifferentValues_False()
+	{
+		ArmorStandMetaMock clone = meta.clone();
+		clone.setMarker(true);
+		assertNotEquals(meta, clone);
 	}
 
 	@Test
