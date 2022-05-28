@@ -1,7 +1,5 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import java.util.UUID;
-
 import com.destroystokyo.paper.block.TargetBlockInfo;
 import com.destroystokyo.paper.entity.Pathfinder;
 import com.destroystokyo.paper.entity.TargetEntityInfo;
@@ -18,6 +16,7 @@ import org.bukkit.entity.Villager;
 import org.bukkit.entity.Zombie;
 import org.bukkit.inventory.EntityEquipment;
 
+import java.util.UUID;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.inventory.EquipmentSlot;
