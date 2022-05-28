@@ -1,8 +1,5 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import java.util.Set;
-import java.util.UUID;
-
 import com.destroystokyo.paper.block.TargetBlockInfo;
 import com.destroystokyo.paper.entity.Pathfinder;
 import com.destroystokyo.paper.entity.TargetEntityInfo;
@@ -21,12 +18,17 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Set;
+import java.util.UUID;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.jetbrains.annotations.Nullable;
 
 public class SimpleMobMock extends MobMock
 {
+
+	private final EntityEquipment equipment = new EntityEquipmentMock(this);
+
 	public SimpleMobMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
@@ -124,8 +126,7 @@ public class SimpleMobMock extends MobMock
 	@Override
 	public EntityEquipment getEquipment()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.equipment;
 	}
 
 	@Override
