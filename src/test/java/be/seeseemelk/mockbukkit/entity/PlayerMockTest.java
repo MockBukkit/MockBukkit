@@ -15,6 +15,7 @@ import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import org.bukkit.Bukkit;
+import org.bukkit.Effect;
 import org.bukkit.GameMode;
 import org.bukkit.GameRule;
 import org.bukkit.Instrument;
@@ -1441,8 +1442,31 @@ class PlayerMockTest
 	}
 
 	@Test
+	void testPlayerPlayEffect()
+	{
+		player.playEffect(player.getLocation(), Effect.STEP_SOUND, Material.STONE);
+	}
+
+	@Test
+	void testPlayerPlayEffect_NullData()
+	{
+		assertThrows(IllegalArgumentException.class, () ->
+		{
+			player.playEffect(player.getLocation(), Effect.STEP_SOUND, null);
+		});
+	}
+
+	@Test
+	void testPlayerPlayEffect_IncorrectData()
+	{
+		assertThrows(IllegalArgumentException.class, () ->
+		{
+			player.playEffect(player.getLocation(), Effect.STEP_SOUND, 1.0f);
+		});
+	}
+
 	@SuppressWarnings("UnstableApiUsage")
-	public void testPlayerSendPluginMessage()
+	void testPlayerSendPluginMessage()
 	{
 		MockPlugin plugin = MockBukkit.createMockPlugin();
 		server.getMessenger().registerOutgoingPluginChannel(plugin, "BungeeCord");
@@ -1461,13 +1485,13 @@ class PlayerMockTest
 	}
 
 	@Test
-	public void testPlayerSpawnParticle_Correct_DataType()
+	void testPlayerSpawnParticle_Correct_DataType()
 	{
 		player.spawnParticle(Particle.ITEM_CRACK, player.getLocation(), 1, new ItemStack(Material.STONE));
 	}
 
 	@Test
-	public void testPlayerSpawnParticle_Incorrect_DataType()
+	void testPlayerSpawnParticle_Incorrect_DataType()
 	{
 		assertThrows(IllegalArgumentException.class, () ->
 		{
