@@ -33,13 +33,13 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
-      run: ./gradlew build
+      run: ./gradlew build -x test
     - name: Run unit tests
       run: ./gradlew test
 
   publish:
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/heads/v1.') && github.repository == 'MockBukkit/MockBukkit'
+    if: github.event.pull_request.merged == true && github.repository == 'MockBukkit/MockBukkit'
 
     steps:
       - uses: actions/checkout@v2
@@ -59,11 +59,11 @@ jobs:
           current_version: ${{ steps.get-latest-tag.outputs.tag }}
           level: ${{ steps.release-label.outputs.level }}
 
-      - name: Set up JDK 16
+      - name: Set up JDK 17
         if: ${{ steps.bump-semver.outputs.new_version != null }}
         uses: actions/setup-java@v1
         with:
-          java-version: 16
+          java-version: 17
 
       - name: Restore caches
         if: ${{ steps.bump-semver.outputs.new_version != null }}
