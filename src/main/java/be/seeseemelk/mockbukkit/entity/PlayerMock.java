@@ -1361,27 +1361,27 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	private void playNote(@NotNull Location loc, @NotNull Instrument instrument, byte note)
 	{
 		Sound sound = switch (instrument)
-				{
-					case BANJO -> Sound.BLOCK_NOTE_BLOCK_BANJO;
-					case BASS_DRUM -> Sound.BLOCK_NOTE_BLOCK_BASEDRUM;
-					case BASS_GUITAR -> Sound.BLOCK_NOTE_BLOCK_BASS;
-					case BELL -> Sound.BLOCK_NOTE_BLOCK_BELL;
-					case BIT -> Sound.BLOCK_NOTE_BLOCK_BIT;
-					case CHIME -> Sound.BLOCK_NOTE_BLOCK_CHIME;
-					case COW_BELL -> Sound.BLOCK_NOTE_BLOCK_COW_BELL;
-					case DIDGERIDOO -> Sound.BLOCK_NOTE_BLOCK_DIDGERIDOO;
-					case FLUTE -> Sound.BLOCK_NOTE_BLOCK_FLUTE;
-					case GUITAR -> Sound.BLOCK_NOTE_BLOCK_GUITAR;
-					case IRON_XYLOPHONE -> Sound.BLOCK_NOTE_BLOCK_IRON_XYLOPHONE;
-					case PIANO -> Sound.BLOCK_NOTE_BLOCK_HARP;
-					case PLING -> Sound.BLOCK_NOTE_BLOCK_PLING;
-					case SNARE_DRUM -> Sound.BLOCK_NOTE_BLOCK_SNARE;
-					case STICKS -> Sound.BLOCK_NOTE_BLOCK_HAT;
-					case XYLOPHONE -> Sound.BLOCK_NOTE_BLOCK_XYLOPHONE;
-					default ->
-							// This should never be reached unless Mojang adds new instruments
-							throw new UnimplementedOperationException("Instrument '" + instrument + "' has no implementation!");
-				};
+		{
+		case BANJO -> Sound.BLOCK_NOTE_BLOCK_BANJO;
+		case BASS_DRUM -> Sound.BLOCK_NOTE_BLOCK_BASEDRUM;
+		case BASS_GUITAR -> Sound.BLOCK_NOTE_BLOCK_BASS;
+		case BELL -> Sound.BLOCK_NOTE_BLOCK_BELL;
+		case BIT -> Sound.BLOCK_NOTE_BLOCK_BIT;
+		case CHIME -> Sound.BLOCK_NOTE_BLOCK_CHIME;
+		case COW_BELL -> Sound.BLOCK_NOTE_BLOCK_COW_BELL;
+		case DIDGERIDOO -> Sound.BLOCK_NOTE_BLOCK_DIDGERIDOO;
+		case FLUTE -> Sound.BLOCK_NOTE_BLOCK_FLUTE;
+		case GUITAR -> Sound.BLOCK_NOTE_BLOCK_GUITAR;
+		case IRON_XYLOPHONE -> Sound.BLOCK_NOTE_BLOCK_IRON_XYLOPHONE;
+		case PIANO -> Sound.BLOCK_NOTE_BLOCK_HARP;
+		case PLING -> Sound.BLOCK_NOTE_BLOCK_PLING;
+		case SNARE_DRUM -> Sound.BLOCK_NOTE_BLOCK_SNARE;
+		case STICKS -> Sound.BLOCK_NOTE_BLOCK_HAT;
+		case XYLOPHONE -> Sound.BLOCK_NOTE_BLOCK_XYLOPHONE;
+			default ->
+			// This should never be reached unless Mojang adds new instruments
+			throw new UnimplementedOperationException("Instrument '" + instrument + "' has no implementation!");
+		};
 		float pitch = (float) Math.pow(2.0D, (note - 12.0D) / 12.0D);
 		playSound(loc, sound, SoundCategory.RECORDS, 3, pitch);
 	}
