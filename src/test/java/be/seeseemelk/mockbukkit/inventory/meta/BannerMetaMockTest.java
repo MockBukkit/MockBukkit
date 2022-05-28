@@ -12,10 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class BannerMetaMockTest
+class BannerMetaMockTest
 {
 
 	private BannerMetaMock meta;
@@ -135,6 +136,27 @@ public class BannerMetaMockTest
 		meta.addPattern(new Pattern(DyeColor.CYAN, PatternType.CIRCLE_MIDDLE));
 
 		assertEquals(2, meta.numberOfPatterns());
+	}
+
+	@Test
+	void equals_SameInstance_ReturnsTrue()
+	{
+		assertEquals(meta, meta);
+	}
+
+	@Test
+	void equals_DifferentInstance_SameValues_True()
+	{
+		BannerMetaMock clone = meta.clone();
+		assertEquals(meta, clone);
+	}
+
+	@Test
+	void equals_DifferentInstance_DifferentValues_False()
+	{
+		BannerMetaMock clone = meta.clone();
+		clone.addPattern(new Pattern(DyeColor.BLUE, PatternType.STRIPE_BOTTOM));
+		assertNotEquals(meta, clone);
 	}
 
 	@Test

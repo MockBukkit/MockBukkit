@@ -85,6 +85,23 @@ public class BannerMetaMock extends ItemMetaMock implements BannerMeta
 	}
 
 	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((baseColor == null) ? 0 : baseColor.hashCode());
+		result = prime * result + (this.patterns.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof BannerMeta meta))
+			return false;
+		return super.equals(obj) && this.baseColor == meta.getBaseColor() && this.patterns.equals(meta.getPatterns());
+	}
+
+	@Override
 	public @NotNull BannerMetaMock clone()
 	{
 		BannerMetaMock clone = (BannerMetaMock) super.clone();
