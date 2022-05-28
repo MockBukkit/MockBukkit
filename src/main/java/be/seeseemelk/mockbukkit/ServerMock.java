@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit;
 
+import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import be.seeseemelk.mockbukkit.boss.BossBarMock;
 import be.seeseemelk.mockbukkit.boss.KeyedBossBarMock;
 import be.seeseemelk.mockbukkit.command.CommandResult;
@@ -221,7 +222,7 @@ public class ServerMock extends Server.Spigot implements Server
 		assertMainThread();
 		playerList.addPlayer(player);
 		PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(player,
-				String.format(JOIN_MESSAGE, player.getDisplayName()));
+		        String.format(JOIN_MESSAGE, player.getDisplayName()));
 		Bukkit.getPluginManager().callEvent(playerJoinEvent);
 
 		player.setLastPlayed(getCurrentServerTime());
@@ -721,7 +722,7 @@ public class ServerMock extends Server.Spigot implements Server
 	public Set<String> getIPBans()
 	{
 		return this.playerList.getIPBans().getBanEntries().stream().map(BanEntry::getTarget)
-				.collect(Collectors.toSet());
+		       .collect(Collectors.toSet());
 	}
 
 	@Override
@@ -1493,17 +1494,23 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public BlockData createBlockData(Material material)
+	public @NotNull BlockData createBlockData(@NotNull Material material)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Validate.notNull(material, "Must provide material");
+		return BlockDataMock.mock(material);
 	}
 
 	@Override
-	public BlockData createBlockData(Material material, Consumer<BlockData> consumer)
+	public @NotNull BlockData createBlockData(@NotNull Material material, @Nullable Consumer<BlockData> consumer)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		BlockData blockData = createBlockData(material);
+
+		if (consumer != null)
+		{
+			consumer.accept(blockData);
+		}
+
+		return blockData;
 	}
 
 	@Override
@@ -1644,7 +1651,7 @@ public class ServerMock extends Server.Spigot implements Server
 
 	@Override
 	public ItemStack createExplorerMap(World world, Location location, StructureType structureType, int radius,
-									   boolean findUnexplored)
+	                                   boolean findUnexplored)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
