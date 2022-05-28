@@ -412,7 +412,8 @@ public class WorldMock implements World
 	{
 		StandardMessenger.validatePluginMessage(this.server.getMessenger(), source, channel, message);
 
-		for (Player player : this.getPlayers()) {
+		for (Player player : this.getPlayers())
+		{
 			player.sendPluginMessage(source, channel, message);
 		}
 	}
@@ -422,7 +423,8 @@ public class WorldMock implements World
 	{
 		Set<String> result = new HashSet<>();
 
-		for (Player player : this.getPlayers()) {
+		for (Player player : this.getPlayers())
+		{
 			result.addAll(player.getListeningPluginChannels());
 		}
 

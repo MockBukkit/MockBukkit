@@ -962,7 +962,8 @@ public class ServerMock extends Server.Spigot implements Server
 	{
 		StandardMessenger.validatePluginMessage(this.getMessenger(), source, channel, message);
 
-		for (Player player : this.getOnlinePlayers()) {
+		for (Player player : this.getOnlinePlayers())
+		{
 			player.sendPluginMessage(source, channel, message);
 		}
 	}
@@ -972,7 +973,8 @@ public class ServerMock extends Server.Spigot implements Server
 	{
 		Set<String> result = new HashSet<>();
 
-		for (Player player : this.getOnlinePlayers()) {
+		for (Player player : this.getOnlinePlayers())
+		{
 			result.addAll(player.getListeningPluginChannels());
 		}
 
