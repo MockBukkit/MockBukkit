@@ -1,6 +1,19 @@
 package be.seeseemelk.mockbukkit;
 
 import be.seeseemelk.mockbukkit.command.CommandResult;
+import be.seeseemelk.mockbukkit.entity.EntityMock;
+import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
+import be.seeseemelk.mockbukkit.entity.PlayerMock;
+import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
+import be.seeseemelk.mockbukkit.entity.SimpleEntityMock;
+import be.seeseemelk.mockbukkit.inventory.InventoryMock;
+import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.World;
+import org.bukkit.Warning;
+import org.bukkit.WorldCreator;
+import org.bukkit.WorldType;
+import org.bukkit.block.data.BlockData;
 import be.seeseemelk.mockbukkit.entity.*;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import net.kyori.adventure.text.Component;
@@ -43,6 +56,7 @@ import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 class ServerMockTest
 {
+
 	private ServerMock server;
 
 	@BeforeEach
@@ -67,9 +81,9 @@ class ServerMockTest
 	void createWorld_WorldCreator()
 	{
 		WorldCreator worldCreator = new WorldCreator("test")
-				.seed(12345)
-				.type(WorldType.FLAT)
-				.environment(World.Environment.NORMAL);
+		.seed(12345)
+		.type(WorldType.FLAT)
+		.environment(World.Environment.NORMAL);
 		World world = server.createWorld(worldCreator);
 
 		assertEquals(1, server.getWorlds().size());
@@ -185,7 +199,7 @@ class ServerMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = {"testcommand", "tc", "othercommand"})
+	@ValueSource(strings = { "testcommand", "tc", "othercommand" })
 	void testPluginCommand(String cmd)
 	{
 		MockBukkit.load(TestPlugin.class);
@@ -203,7 +217,7 @@ class ServerMockTest
 	void executeCommand_PlayerAndTrueReturnValue_Succeeds()
 	{
 		server.setPlayers(1);
-		TestPlugin plugin = (TestPlugin) MockBukkit.load(TestPlugin.class);
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
 		plugin.commandReturns = true;
 
 		Command command = server.getPluginCommand("testcommand");
@@ -220,7 +234,7 @@ class ServerMockTest
 	@Test
 	void executeCommand_ConsoleAndFalseReturnValue_Fails()
 	{
-		TestPlugin plugin = (TestPlugin) MockBukkit.load(TestPlugin.class);
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
 		plugin.commandReturns = false;
 
 		Command command = server.getPluginCommand("testcommand");
@@ -237,7 +251,7 @@ class ServerMockTest
 	@Test
 	void executeCommand_CommandAsStringAndTrueReturnValue_Succeeds()
 	{
-		TestPlugin plugin = (TestPlugin) MockBukkit.load(TestPlugin.class);
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
 		plugin.commandReturns = true;
 
 		CommandResult result = server.executeConsole("testcommand");
@@ -573,6 +587,13 @@ class ServerMockTest
 	}
 
 	@Test
+	void testCreateBlockData()
+	{
+		BlockData blockData = server.createBlockData(Material.STONE);
+		assertEquals(Material.STONE, blockData.getMaterial());
+	}
+
+	@Test
 	void testWarningState()
 	{
 		assertEquals(Warning.WarningState.DEFAULT, server.getWarningState());
@@ -614,6 +635,7 @@ class ServerMockTest
 
 class TestRecipe implements Recipe
 {
+
 	private final ItemStack result;
 
 	public TestRecipe(@NotNull ItemStack result)
@@ -631,4 +653,5 @@ class TestRecipe implements Recipe
 	{
 		return result;
 	}
+
 }

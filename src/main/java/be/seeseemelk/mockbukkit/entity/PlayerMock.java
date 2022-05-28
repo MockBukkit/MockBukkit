@@ -103,6 +103,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -232,7 +233,8 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 			}
 
 			return event;
-		} else
+		}
+		else
 		{
 			return null;
 		}
@@ -249,7 +251,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	public @Nullable BlockBreakEvent simulateBlockBreak(Block block)
 	{
 		if ((gamemode == GameMode.SPECTATOR || gamemode == GameMode.ADVENTURE)
-				|| (gamemode == GameMode.SURVIVAL && simulateBlockDamagePure(block).isCancelled()))
+		        || (gamemode == GameMode.SURVIVAL && simulateBlockDamagePure(block).isCancelled()))
 			return null;
 
 		BlockBreakEvent event = new BlockBreakEvent(block, this);
@@ -479,6 +481,13 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	public void assertInventoryView(String message, InventoryType type)
 	{
 		assertInventoryView(message, type, inv -> true);
+	}
+
+	@Override
+	public void updateInventory()
+	{
+		// Normally a packet would be sent here to update the player's inventory.
+		// We just pretend that this happened!
 	}
 
 	@Override
@@ -948,8 +957,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public EntityEquipment getEquipment()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return (EntityEquipment) getInventory();
 	}
 
 	@Override
@@ -984,20 +992,6 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	{
 		// Players can not be leashed
 		return false;
-	}
-
-	@Override
-	public boolean isGliding()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setGliding(boolean gliding)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -1097,8 +1091,9 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public @NotNull Map<String, Object> serialize()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Map<String, Object> result = new LinkedHashMap<>();
+		result.put("name", getName());
+		return result;
 	}
 
 	@Override
@@ -1260,12 +1255,12 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		Set<Player> players = new HashSet<>(Bukkit.getOnlinePlayers());
 		AsyncPlayerChatEvent asyncEvent = new AsyncPlayerChatEvent(true, this, msg, players);
 		AsyncChatEvent asyncChatEvent = new AsyncChatEvent(
-				true,
-				this,
-				Bukkit.getOnlinePlayers().stream().map(p -> (Audience) p).collect(Collectors.toSet()),
-				ChatRenderer.defaultRenderer(),
-				Component.text(msg),
-				Component.text(msg)
+		    true,
+		    this,
+		    Bukkit.getOnlinePlayers().stream().map(p -> (Audience) p).collect(Collectors.toSet()),
+		    ChatRenderer.defaultRenderer(),
+		    Component.text(msg),
+		    Component.text(msg)
 		);
 		org.bukkit.event.player.PlayerChatEvent syncEvent = new org.bukkit.event.player.PlayerChatEvent(this, msg);
 
@@ -1604,13 +1599,6 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	@Deprecated
 	public void hideTitle()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void updateInventory()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -2031,7 +2019,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	public boolean canSee(@NotNull Player player)
 	{
 		return !hiddenPlayers.containsKey(player.getUniqueId()) &&
-				!hiddenPlayersDeprecated.contains(player.getUniqueId());
+		       !hiddenPlayersDeprecated.contains(player.getUniqueId());
 	}
 
 
@@ -2345,14 +2333,14 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 
 	@Override
 	public void spawnParticle(@NotNull Particle particle, @NotNull Location location, int count, double offsetX, double offsetY,
-							  double offsetZ)
+	                          double offsetZ)
 	{
 		this.spawnParticle(particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ);
 	}
 
 	@Override
 	public void spawnParticle(@NotNull Particle particle, double x, double y, double z, int count, double offsetX,
-							  double offsetY, double offsetZ)
+	                          double offsetY, double offsetZ)
 	{
 		this.spawnParticle(particle, x, y, z, count, offsetX, offsetY, offsetZ, null);
 
@@ -2360,14 +2348,14 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 
 	@Override
 	public <T> void spawnParticle(@NotNull Particle particle, @NotNull Location location, int count, double offsetX, double offsetY,
-								  double offsetZ, T data)
+	                              double offsetZ, T data)
 	{
 		this.spawnParticle(particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ, data);
 	}
 
 	@Override
 	public <T> void spawnParticle(@NotNull Particle particle, double x, double y, double z, int count, double offsetX,
-								  double offsetY, double offsetZ, T data)
+	                              double offsetY, double offsetZ, T data)
 	{
 		this.spawnParticle(particle, x, y, z, count, offsetX, offsetY, offsetZ, 1, data);
 
@@ -2375,14 +2363,14 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 
 	@Override
 	public void spawnParticle(@NotNull Particle particle, @NotNull Location location, int count, double offsetX, double offsetY,
-							  double offsetZ, double extra)
+	                          double offsetZ, double extra)
 	{
 		this.spawnParticle(particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ, extra);
 	}
 
 	@Override
 	public void spawnParticle(@NotNull Particle particle, double x, double y, double z, int count, double offsetX,
-							  double offsetY, double offsetZ, double extra)
+	                          double offsetY, double offsetZ, double extra)
 	{
 		this.spawnParticle(particle, x, y, z, count, offsetX, offsetY, offsetZ, extra, null);
 
@@ -2390,7 +2378,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 
 	@Override
 	public <T> void spawnParticle(@NotNull Particle particle, @NotNull Location location, int count, double offsetX, double offsetY,
-								  double offsetZ, double extra, T data)
+	                              double offsetZ, double extra, T data)
 	{
 		this.spawnParticle(particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ, data);
 
@@ -2398,7 +2386,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 
 	@Override
 	public <T> void spawnParticle(@NotNull Particle particle, double x, double y, double z, int count, double offsetX,
-								  double offsetY, double offsetZ, double extra, T data)
+	                              double offsetY, double offsetZ, double extra, T data)
 	{
 		if (data != null && !particle.getDataType().isInstance(data))
 		{
@@ -3018,7 +3006,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 
 	@Override
 	public void sendEquipmentChange(@NotNull LivingEntity entity, @NotNull EquipmentSlot slot,
-									@NotNull ItemStack item)
+	                                @NotNull ItemStack item)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
