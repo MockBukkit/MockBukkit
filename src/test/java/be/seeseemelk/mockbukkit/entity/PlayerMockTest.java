@@ -55,6 +55,7 @@ import org.junit.jupiter.params.provider.EnumSource;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.TimeUnit;
@@ -1382,6 +1383,13 @@ class PlayerMockTest
 		player.assertNotTeleported();
 		player.assertLocation(originalLocation, 0);
 
+	}
+
+	@Test
+	void testPlayerSerialization()
+	{
+		Map<String, Object> serialized = player.serialize();
+		assertEquals("player", serialized.get("name"));
 	}
 
 	@Test
