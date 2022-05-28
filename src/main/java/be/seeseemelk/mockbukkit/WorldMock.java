@@ -1090,9 +1090,12 @@ public class WorldMock implements World
 	@Override
 	public <T> void playEffect(@NotNull Location location, @NotNull Effect effect, T data, int radius)
 	{
-		if (data != null) {
+		if (data != null)
+		{
 			Validate.isTrue(effect.getData() != null && effect.getData().isAssignableFrom(data.getClass()), "Wrong kind of data for this effect!");
-		} else {
+		}
+		else
+		{
 			// Special case: the axis is optional for ELECTRIC_SPARK
 			Validate.isTrue(effect.getData() == null || effect == Effect.ELECTRIC_SPARK, "Wrong kind of data for this effect!");
 		}
