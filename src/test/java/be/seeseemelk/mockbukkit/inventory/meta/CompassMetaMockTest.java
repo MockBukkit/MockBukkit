@@ -9,11 +9,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class CompassMetaMockTest
+class CompassMetaMockTest
 {
 
 	private CompassMetaMock meta;
@@ -84,6 +85,27 @@ public class CompassMetaMockTest
 		meta.setLodestoneTracked(true);
 
 		assertTrue(meta.isLodestoneTracked());
+	}
+
+	@Test
+	void equals_SameInstance_ReturnsTrue()
+	{
+		assertEquals(meta, meta);
+	}
+
+	@Test
+	void equals_DifferentInstance_SameValues_True()
+	{
+		CompassMetaMock clone = meta.clone();
+		assertEquals(meta, clone);
+	}
+
+	@Test
+	void equals_DifferentInstance_DifferentValues_False()
+	{
+		CompassMetaMock clone = meta.clone();
+		clone.setLodestoneTracked(true);
+		assertNotEquals(meta, clone);
 	}
 
 	@Test

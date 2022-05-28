@@ -6,6 +6,8 @@ import org.bukkit.inventory.meta.CompassMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
+
 public class CompassMetaMock extends ItemMetaMock implements CompassMeta
 {
 
@@ -54,6 +56,24 @@ public class CompassMetaMock extends ItemMetaMock implements CompassMeta
 	public void setLodestoneTracked(boolean tracked)
 	{
 		this.tracked = tracked;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int hash = super.hashCode();
+		hash = prime * hash + (this.lodestone != null ? this.lodestone.hashCode() : 0);
+		hash = prime * hash + (this.tracked ? 1 : 0);
+		return hash;
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (!(obj instanceof CompassMeta meta))
+			return false;
+		return super.equals(obj) && Objects.equals(this.lodestone, meta.getLodestone()) && this.tracked == meta.isLodestoneTracked();
 	}
 
 	@Override
