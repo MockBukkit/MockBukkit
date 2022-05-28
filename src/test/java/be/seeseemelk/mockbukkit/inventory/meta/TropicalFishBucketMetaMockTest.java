@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -119,6 +121,28 @@ class TropicalFishBucketMetaMockTest
 		meta.setPattern(TropicalFish.Pattern.BETTY);
 
 		assertEquals(TropicalFish.Pattern.BETTY, meta.getPattern());
+	}
+
+	@Test
+	void equals_SameInstance_True()
+	{
+		meta.checkVars();
+		assertEquals(meta, meta);
+	}
+
+	@Test
+	void equals_DifferentObjects_SameValues_True()
+	{
+		meta.checkVars();
+		assertEquals(meta, meta.clone());
+	}
+
+	@Test
+	void equals_DifferentObjects_DifferentValues_True()
+	{
+		TropicalFishBucketMetaMock clone = meta.clone();
+		clone.setPattern(TropicalFish.Pattern.CLAYFISH);
+		assertNotEquals(meta, clone);
 	}
 
 	@Test

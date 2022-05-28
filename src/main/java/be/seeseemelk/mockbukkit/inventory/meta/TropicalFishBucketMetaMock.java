@@ -95,6 +95,25 @@ public class TropicalFishBucketMetaMock extends ItemMetaMock implements Tropical
 	}
 
 	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((bodyColor == null) ? 0 : bodyColor.hashCode());
+		result = prime * result + ((pattern == null) ? 0 : pattern.hashCode());
+		result = prime * result + ((patternColor == null) ? 0 : patternColor.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (!(obj instanceof TropicalFishBucketMeta meta))
+			return false;
+		return super.equals(obj) && patternColor == meta.getPatternColor() && bodyColor == meta.getBodyColor() && pattern == meta.getPattern();
+	}
+
+	@Override
 	public @NotNull TropicalFishBucketMetaMock clone()
 	{
 		TropicalFishBucketMetaMock clone = (TropicalFishBucketMetaMock) super.clone();
