@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit;
 
+import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import be.seeseemelk.mockbukkit.boss.BossBarMock;
 import be.seeseemelk.mockbukkit.boss.KeyedBossBarMock;
 import be.seeseemelk.mockbukkit.command.CommandResult;
@@ -1504,17 +1505,23 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public BlockData createBlockData(Material material)
+	public @NotNull BlockData createBlockData(@NotNull Material material)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Validate.notNull(material, "Must provide material");
+		return BlockDataMock.mock(material);
 	}
 
 	@Override
-	public BlockData createBlockData(Material material, Consumer<BlockData> consumer)
+	public @NotNull BlockData createBlockData(@NotNull Material material, @Nullable Consumer<BlockData> consumer)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		BlockData blockData = createBlockData(material);
+
+		if (consumer != null)
+		{
+			consumer.accept(blockData);
+		}
+
+		return blockData;
 	}
 
 	@Override
