@@ -103,6 +103,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -956,8 +957,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public EntityEquipment getEquipment()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return (EntityEquipment) getInventory();
 	}
 
 	@Override
@@ -1091,8 +1091,9 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public @NotNull Map<String, Object> serialize()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Map<String, Object> result = new LinkedHashMap<>();
+		result.put("name", getName());
+		return result;
 	}
 
 	@Override
