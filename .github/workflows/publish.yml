@@ -1,4 +1,4 @@
-name: Push Tag
+name: Publish
 
 on:
   pull_request:
@@ -27,12 +27,6 @@ jobs:
         with:
           current_version: ${{ steps.get-latest-tag.outputs.tag }}
           level: ${{ steps.release-label.outputs.level }}
-      - name: Push tag
-        uses: actions-ecosystem/action-push-tag@v1
-        if: ${{ steps.bump-semver.outputs.new_version != null }}
-        with:
-          tag: ${{ steps.bump-semver.outputs.new_version }}
-          message: '${{ steps.bump-semver.outputs.new_version }}: PR #${{ github.event.pull_request.number }} ${{ github.event.pull_request.title }}'
 
 # Same as the build workflow
       - name: Validate gradle wrapper
