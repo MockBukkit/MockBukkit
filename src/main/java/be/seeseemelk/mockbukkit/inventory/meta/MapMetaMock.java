@@ -29,12 +29,9 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 	{
 		super(meta);
 
-		try
+		if (meta.hasMapId())
 		{
 			this.mapId = meta.getMapId();
-		} // If no map ID is set, it will throw a NPE when trying to convert the Integer to an int.
-		catch (NullPointerException ignored)
-		{
 		}
 		this.mapView = meta.getMapView();
 		this.color = meta.getColor();
