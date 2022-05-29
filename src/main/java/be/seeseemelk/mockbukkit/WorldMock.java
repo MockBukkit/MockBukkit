@@ -1135,7 +1135,7 @@ public class WorldMock implements World
 	@Override
 	public @NotNull ChunkSnapshot getEmptyChunkSnapshot(int x, int z, boolean includeBiome, boolean includeBiomeTempRain)
 	{
-		return new ChunkSnapshotMock(x, z, getMinHeight(), getMaxHeight(), getName(), getFullTime(), Map.of());
+		return new ChunkSnapshotMock(x, z, getMinHeight(), getMaxHeight(), getName(), getFullTime(), Map.of(), (includeBiome || includeBiomeTempRain) ? Map.of() : null);
 	}
 
 	@Override

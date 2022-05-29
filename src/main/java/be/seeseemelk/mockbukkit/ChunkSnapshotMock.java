@@ -6,6 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Biome;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.data.BlockData;
+import org.checkerframework.checker.units.qual.C;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
@@ -20,8 +21,9 @@ public class ChunkSnapshotMock implements ChunkSnapshot
 	private final int maxY;
 	private final long worldTime;
 	private final Map<Coordinate, BlockState> blockStates;
+	private final Map<Coordinate, Biome> biomes;
 
-	ChunkSnapshotMock(int x, int z, int minY, int maxY, String worldName, long worldTime, Map<Coordinate, BlockState> blockStates)
+	ChunkSnapshotMock(int x, int z, int minY, int maxY, String worldName, long worldTime, Map<Coordinate, BlockState> blockStates, Map<Coordinate, Biome> biomes)
 	{
 		this.x = x;
 		this.z = z;
@@ -30,6 +32,7 @@ public class ChunkSnapshotMock implements ChunkSnapshot
 		this.worldName = worldName;
 		this.worldTime = worldTime;
 		this.blockStates = blockStates;
+		this.biomes = biomes;
 	}
 
 	@Override
@@ -100,23 +103,22 @@ public class ChunkSnapshotMock implements ChunkSnapshot
 	@Override
 	public Biome getBiome(int x, int z)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getBiome(z, 0, z);
 	}
 
 	@NotNull
 	@Override
 	public Biome getBiome(int x, int y, int z)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkState(this.biomes != null, "ChunkSnapshot created without biome. Please call getSnapshot with includeBiome=true");
+		validateChunkCoordinates(x, y, z);
+		return this.biomes.get(new Coordinate(z, y, z));
 	}
 
 	@Override
 	public double getRawBiomeTemperature(int x, int z)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getRawBiomeTemperature(x, 0, z);
 	}
 
 	@Override

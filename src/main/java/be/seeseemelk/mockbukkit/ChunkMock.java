@@ -5,6 +5,7 @@ import com.google.common.base.Preconditions;
 import org.bukkit.Chunk;
 import org.bukkit.ChunkSnapshot;
 import org.bukkit.World;
+import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.data.BlockData;
@@ -96,18 +97,25 @@ public class ChunkMock implements Chunk
 	@Override
 	public @NotNull ChunkSnapshot getChunkSnapshot(boolean includeMaxblocky, boolean includeBiome, boolean includeBiomeTempRain)
 	{
-		Map<Coordinate, BlockState> blockStates = new HashMap<>((15 * 15) * Math.abs((world.getMaxHeight() - world.getMinHeight())), 1.0f);
+		int size = (16 << 4) * Math.abs((world.getMaxHeight() - world.getMinHeight()));
+		Map<Coordinate, BlockState> blockStates = new HashMap<>(size, 1.0f);
+		Map<Coordinate, Biome> biomes = includeBiome ? new HashMap<>(size, 1.0f) : null;
 		for (int x = 0; x < 15; x++)
 		{
 			for (int y = world.getMinHeight(); y < world.getMaxHeight(); y++)
 			{
 				for (int z = 0; z < 15; z++)
 				{
-					blockStates.put(new Coordinate(x, y, z), getBlock(x, y, z).getState());
+					Coordinate coord = new Coordinate(x, y, z);
+					blockStates.put(coord, getBlock(x, y, z).getState());
+					if (includeBiome)
+					{
+						biomes.put(coord, world.getBiome(x << 4, y, z << 4));
+					}
 				}
 			}
 		}
-		return new ChunkSnapshotMock(x, z, world.getMinHeight(), world.getMaxHeight(), world.getName(), world.getFullTime(), blockStates);
+		return new ChunkSnapshotMock(x, z, world.getMinHeight(), world.getMaxHeight(), world.getName(), world.getFullTime(), blockStates, biomes);
 	}
 
 
@@ -183,9 +191,8 @@ public class ChunkMock implements Chunk
 	{
 		if (obj == null)
 			return false;
-		else if (obj instanceof ChunkMock)
+		else if (obj instanceof ChunkMock chunk)
 		{
-			ChunkMock chunk = (ChunkMock) obj;
 			return x == chunk.x && z == chunk.z && world.equals(chunk.world);
 		}
 		else
