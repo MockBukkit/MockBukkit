@@ -1,0 +1,35 @@
+name: Push Tag
+
+on:
+  pull_request_target:
+    branches: [ v1.* ]
+    types: [closed]
+
+jobs:
+  push_tag:
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/heads/v1.') && github.event.pull_request.merged == true && github.repository == 'MockBukkit/MockBukkit'
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-ecosystem/action-release-label@v1
+        id: release-label
+        with:
+          label_prefix: 'release/'
+      - uses: actions-ecosystem/action-get-latest-tag@v1
+        id: get-latest-tag
+        if: ${{ steps.release-label.outputs.level != null }}
+        with:
+          semver_only: true
+      - uses: actions-ecosystem/action-bump-semver@v1
+        id: bump-semver
+        if: ${{ steps.release-label.outputs.level != null }}
+        with:
+          current_version: ${{ steps.get-latest-tag.outputs.tag }}
+          level: ${{ steps.release-label.outputs.level }}
+      - name: Push tag
+        uses: actions-ecosystem/action-push-tag@v1
+        if: ${{ steps.bump-semver.outputs.new_version != null }}
+        with:
+          tag: ${{ steps.bump-semver.outputs.new_version }}
+          message: '${{ steps.bump-semver.outputs.new_version }}: PR #${{ github.event.pull_request.number }} ${{ github.event.pull_request.title }}'
