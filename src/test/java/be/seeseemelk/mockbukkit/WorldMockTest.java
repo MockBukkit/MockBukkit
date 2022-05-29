@@ -304,21 +304,21 @@ class WorldMockTest
 	}
 
 	@Test
-	public void getLoadedChunks_EmptyWorldHasNoLoadedChunks()
+	void getLoadedChunks_EmptyWorldHasNoLoadedChunks()
 	{
 		WorldMock world = new WorldMock();
 		assertEquals(0, world.getLoadedChunks().length);
 	}
 
 	@Test
-	public void isChunkLoaded_IsFalseForUnloadedChunk()
+	void isChunkLoaded_IsFalseForUnloadedChunk()
 	{
 		WorldMock world = new WorldMock();
 		assertFalse(world.isChunkLoaded(0, 0));
 	}
 
 	@Test
-	public void isChunkloaded_IsTrueForLoadedChunk()
+	void isChunkloaded_IsTrueForLoadedChunk()
 	{
 		WorldMock world = new WorldMock();
 		BlockMock block = world.getBlockAt(64, 64, 64);
@@ -328,7 +328,7 @@ class WorldMockTest
 	}
 
 	@Test
-	public void getBlockState_ChangeBlock()
+	void getBlockState_ChangeBlock()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		assertEquals(Material.DIRT, world.getType(0, 1, 0));
@@ -344,7 +344,7 @@ class WorldMockTest
 	}
 
 	@Test
-	public void setBlock_ChangeBlock()
+	void setBlock_ChangeBlock()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		Location location = new Location(world, 0, 1, 0);
@@ -367,7 +367,7 @@ class WorldMockTest
 	}
 
 	@Test
-	public void getDefaultBiome()
+	void getDefaultBiome()
 	{
 		WorldMock world = new WorldMock(Material.GRASS_BLOCK, Biome.JUNGLE, 0, 256);
 		Biome biome = world.getBiome(0, 0, 0);
@@ -376,7 +376,7 @@ class WorldMockTest
 	}
 
 	@Test
-	public void getBiomeLegacy()
+	void getBiomeLegacy()
 	{
 		WorldMock world = new WorldMock(Material.GRASS_BLOCK, Biome.JUNGLE, 0, 256);
 		Biome biome3d = world.getBiome(0, 0, 0);
@@ -387,7 +387,7 @@ class WorldMockTest
 	}
 
 	@Test
-	public void setBiome()
+	void setBiome()
 	{
 		WorldMock world = new WorldMock(Material.GRASS_BLOCK, Biome.JUNGLE, 0, 256);
 		world.setBiome(0, 0, 0, Biome.DESERT);
@@ -396,7 +396,7 @@ class WorldMockTest
 	}
 
 	@Test
-	public void setBiome_CustomFails()
+	void setBiome_CustomFails()
 	{
 		WorldMock world = new WorldMock(Material.GRASS_BLOCK, Biome.JUNGLE, 0, 256);
 		assertThrows(IllegalArgumentException.class, () ->
@@ -406,14 +406,14 @@ class WorldMockTest
 	}
 
 	@Test
-	public void worldPlayEffect()
+	void worldPlayEffect()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		world.playEffect(new Location(world, 0, 0, 0), Effect.STEP_SOUND, Material.STONE);
 	}
 
 	@Test
-	public void worldPlayEffect_NullData()
+	void worldPlayEffect_NullData()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		assertThrows(IllegalArgumentException.class, () ->
@@ -423,7 +423,7 @@ class WorldMockTest
 	}
 
 	@Test
-	public void worldPlayEffect_IncorrectData()
+	void worldPlayEffect_IncorrectData()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		assertThrows(IllegalArgumentException.class, () ->
