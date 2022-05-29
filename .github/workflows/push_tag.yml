@@ -62,12 +62,14 @@ jobs:
 # End of build workflow
 
       - name: Store Private key
+        if: ${{ steps.bump-semver.outputs.new_version != null }}
         uses: DamianReeves/write-file-action@v1.0
         with:
           path: private.key
           contents: ${{ secrets.PRIV_KEY }}
           write-mode: overwrite
       - name: Publish
+        if: ${{ steps.bump-semver.outputs.new_version != null }}
         env:
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
           SIGN_KEY: ${{ secrets.PRIV_KEY_PASS }}
@@ -79,7 +81,7 @@ jobs:
           gpg --batch --import private.key
           gpg --batch --export-secret-keys --passphrase $SIGN_KEY "Sebastiaan de Schaetzen <sebastiaan.de.schaetzen@gmail.com>" > private.gpg
 
-          NEW_VERSION=$(echo ${{ github.event.push.ref }} | 's:refs/tags/v::')
+          NEW_VERSION=$(echo ${{ github.event.push.ref }} | sed -e 's:refs/tags/v::')
 
           ./gradlew publishMockBukkitPublicationToRepositoryRepository \
             -Pmockbukkit.version=$NEW_VERSION \
