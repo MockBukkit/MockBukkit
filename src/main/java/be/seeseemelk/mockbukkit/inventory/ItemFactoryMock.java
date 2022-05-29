@@ -1,7 +1,18 @@
 package be.seeseemelk.mockbukkit.inventory;
 
-import be.seeseemelk.mockbukkit.inventory.meta.AxolotlBucketMetaMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.inventory.meta.ArmorStandMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.AxolotlBucketMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.BookMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.EnchantedBookMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.FireworkEffectMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.FireworkMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.KnowledgeBookMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.LeatherArmorMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.PotionMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.SkullMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.SuspiciousStewMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.TropicalFishBucketMetaMock;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
@@ -14,21 +25,15 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemFactory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.inventory.meta.BookMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.EnchantedBookMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.FireworkEffectMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.FireworkMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.KnowledgeBookMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.LeatherArmorMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.PotionMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.SkullMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.SuspiciousStewMetaMock;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Objects;
+import java.util.Random;
+import java.util.function.UnaryOperator;
 
 public class ItemFactoryMock implements ItemFactory
 {
@@ -69,7 +74,8 @@ public class ItemFactoryMock implements ItemFactory
 			clazz = getItemMetaClass(material);
 			return clazz.getDeclaredConstructor().newInstance();
 		}
-		catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e)
+		catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException |
+			   NoSuchMethodException | SecurityException e)
 		{
 			throw new UnsupportedOperationException("Can't instantiate class '" + clazz + "'");
 		}
@@ -111,17 +117,17 @@ public class ItemFactoryMock implements ItemFactory
 			{
 				// This will make sure we find the most suitable constructor for this
 				if (constructor.getParameterCount() == 1
-				        && constructor.getParameterTypes()[0].isAssignableFrom(meta.getClass()))
+						&& constructor.getParameterTypes()[0].isAssignableFrom(meta.getClass()))
 				{
 					return (ItemMeta) constructor.newInstance(meta);
 				}
 			}
 
 			throw new NoSuchMethodException(
-			    "Cannot find an ItemMeta constructor for the class \"" + meta.getClass().getName() + "\"");
+					"Cannot find an ItemMeta constructor for the class \"" + meta.getClass().getName() + "\"");
 		}
 		catch (SecurityException | InstantiationException | IllegalAccessException | InvocationTargetException
-			        | NoSuchMethodException e)
+			   | NoSuchMethodException e)
 		{
 			throw new RuntimeException(e);
 		}
