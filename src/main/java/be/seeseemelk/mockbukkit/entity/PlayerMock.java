@@ -1520,12 +1520,14 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public void sendSignChange(@NotNull Location loc, @Nullable List<Component> lines, @NotNull DyeColor dyeColor, boolean hasGlowingText) throws IllegalArgumentException
 	{
-		if (lines == null) {
+		if (lines == null)
+		{
 			lines = new java.util.ArrayList<>(4);
 		}
 		Validate.notNull(loc, "Location cannot be null");
 		Validate.notNull(dyeColor, "DyeColor cannot be null");
-		if (lines.size() < 4) {
+		if (lines.size() < 4)
+		{
 			throw new IllegalArgumentException("Must have at least 4 lines");
 		}
 	}
