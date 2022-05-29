@@ -12,6 +12,7 @@ import be.seeseemelk.mockbukkit.inventory.meta.MapMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.PotionMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.SkullMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.SuspiciousStewMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.ArmorStandMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.TropicalFishBucketMetaMock;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
@@ -44,6 +45,7 @@ public class ItemFactoryMock implements ItemFactory
 	{
 		return switch (material)
 		{
+		case ARMOR_STAND -> ArmorStandMetaMock.class;
 		case WRITABLE_BOOK, WRITTEN_BOOK -> BookMetaMock.class;
 		case ENCHANTED_BOOK -> EnchantedBookMetaMock.class;
 		case KNOWLEDGE_BOOK -> KnowledgeBookMetaMock.class;
