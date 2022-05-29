@@ -24,6 +24,7 @@ import be.seeseemelk.mockbukkit.inventory.meta.SkullMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.SuspiciousStewMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.BundleMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.TropicalFishBucketMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.ArmorStandMetaMock;
 
 class ItemFactoryMockTest
 {
@@ -65,6 +66,7 @@ class ItemFactoryMockTest
 		assertTrue(factory.getItemMeta(Material.LEATHER_CHESTPLATE) instanceof LeatherArmorMetaMock);
 
 		assertTrue(factory.getItemMeta(Material.BUNDLE) instanceof BundleMetaMock);
+		assertTrue(factory.getItemMeta(Material.ARMOR_STAND) instanceof ArmorStandMetaMock);
 		assertTrue(factory.getItemMeta(Material.TROPICAL_FISH_BUCKET) instanceof TropicalFishBucketMetaMock);
 	}
 

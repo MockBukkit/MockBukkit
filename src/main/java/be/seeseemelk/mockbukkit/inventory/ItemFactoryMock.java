@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.function.UnaryOperator;
 
+import be.seeseemelk.mockbukkit.inventory.meta.ArmorStandMetaMock;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.md_5.bungee.api.chat.BaseComponent;
@@ -44,6 +45,7 @@ public class ItemFactoryMock implements ItemFactory
 	{
 		return switch (material)
 		{
+		case ARMOR_STAND -> ArmorStandMetaMock.class;
 		case WRITABLE_BOOK, WRITTEN_BOOK -> BookMetaMock.class;
 		case ENCHANTED_BOOK -> EnchantedBookMetaMock.class;
 		case KNOWLEDGE_BOOK -> KnowledgeBookMetaMock.class;
