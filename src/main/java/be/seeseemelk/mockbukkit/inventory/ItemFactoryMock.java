@@ -1,12 +1,8 @@
 package be.seeseemelk.mockbukkit.inventory;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.Objects;
-import java.util.Random;
-import java.util.function.UnaryOperator;
-
 import be.seeseemelk.mockbukkit.inventory.meta.AxolotlBucketMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.ArmorStandMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.TropicalFishBucketMetaMock;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.md_5.bungee.api.chat.BaseComponent;
@@ -43,6 +39,7 @@ public class ItemFactoryMock implements ItemFactory
 	{
 		return switch (material)
 		{
+		case ARMOR_STAND -> ArmorStandMetaMock.class;
 		case WRITABLE_BOOK, WRITTEN_BOOK -> BookMetaMock.class;
 		case ENCHANTED_BOOK -> EnchantedBookMetaMock.class;
 		case KNOWLEDGE_BOOK -> KnowledgeBookMetaMock.class;
@@ -56,10 +53,8 @@ public class ItemFactoryMock implements ItemFactory
 		case POTION, LINGERING_POTION, SPLASH_POTION -> PotionMetaMock.class;
 		case PLAYER_HEAD -> SkullMetaMock.class;
 		case SUSPICIOUS_STEW -> SuspiciousStewMetaMock.class;
-		case TROPICAL_FISH_BUCKET ->
-				// TODO Auto-generated method stub
-				throw new UnimplementedOperationException();
 		case AXOLOTL_BUCKET -> AxolotlBucketMetaMock.class;
+		case TROPICAL_FISH_BUCKET -> TropicalFishBucketMetaMock.class;
 			default -> ItemMetaMock.class;
 		};
 	}
