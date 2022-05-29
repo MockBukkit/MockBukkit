@@ -273,6 +273,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		{
 			return false;
 		}
+
 		return hasCustomModelData() == meta.hasCustomModelData()
 				&& (!hasCustomModelData() || getCustomModelData() == meta.getCustomModelData());
 	}
@@ -441,14 +442,14 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 				if (!lore.get(i).equals(lines.get(i)))
 				{
 					throw new AssertionError(
-							String.format("Line %d should be '%s' but was '%s'", i, lines.get(i), lore.get(i)));
+					    String.format("Line %d should be '%s' but was '%s'", i, lines.get(i), lore.get(i)));
 				}
 			}
 		}
 		else if (lore != null)
 		{
 			throw new AssertionError(
-					String.format("Lore contained %d lines but should contain %d lines", lore.size(), lines.size()));
+			    String.format("Lore contained %d lines but should contain %d lines", lore.size(), lines.size()));
 		}
 		else
 		{

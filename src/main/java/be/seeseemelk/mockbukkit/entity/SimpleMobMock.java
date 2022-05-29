@@ -18,6 +18,11 @@ import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Set;
+import java.util.UUID;
+import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
@@ -25,6 +30,8 @@ import java.util.UUID;
 
 public class SimpleMobMock extends MobMock
 {
+
+	private final EntityEquipment equipment = new EntityEquipmentMock(this);
 
 	public SimpleMobMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -123,8 +130,7 @@ public class SimpleMobMock extends MobMock
 	@Override
 	public EntityEquipment getEquipment()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.equipment;
 	}
 
 	@Override
