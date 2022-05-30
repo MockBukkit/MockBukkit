@@ -1,16 +1,6 @@
 package be.seeseemelk.mockbukkit;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assumptions.assumeFalse;
-
-import java.util.List;
-
+import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import be.seeseemelk.mockbukkit.block.state.BlockStateMock;
 import com.google.common.io.ByteArrayDataOutput;
@@ -26,12 +16,22 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.event.weather.ThunderChangeEvent;
+import org.bukkit.event.weather.WeatherChangeEvent;
 import org.bukkit.event.world.TimeSkipEvent;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import be.seeseemelk.mockbukkit.block.BlockMock;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class WorldMockTest
 {
@@ -178,65 +178,6 @@ class WorldMockTest
 	}
 
 	@Test
-	void onCreated_WeatherDurationSetToZero()
-	{
-		WorldMock world = new WorldMock();
-		assertEquals(0, world.getWeatherDuration(), "Weather duration should be zero");
-	}
-
-	@Test
-	void setWeatherDuration_AnyPositiveValue_WeatherDurationSet()
-	{
-		WorldMock world = new WorldMock();
-		int duration = 5;
-		world.setWeatherDuration(duration);
-		assertEquals(duration, world.getWeatherDuration(), "Weather duration should be set");
-	}
-
-	@Test
-	void onCreated_NotStorming()
-	{
-		WorldMock world = new WorldMock();
-		assertFalse(world.hasStorm(), "The world should not be storming");
-	}
-
-	@Test
-	void setStorm_True_Storming()
-	{
-		WorldMock world = new WorldMock();
-		assumeFalse(world.hasStorm());
-		world.setStorm(true);
-		assertTrue(world.hasStorm(), "The world should be storming");
-	}
-
-	@Test
-	void onCreated_ThunderDurationSetToZero()
-	{
-		WorldMock world = new WorldMock();
-		assertEquals(0, world.getThunderDuration(), "Weather duration should be zero");
-		assertFalse(world.isThundering());
-	}
-
-	@Test
-	void setThunderDuration_AnyPositiveValue_ShouldBeThundering()
-	{
-		WorldMock world = new WorldMock();
-		int duration = 20;
-		world.setThunderDuration(duration);
-		assertEquals(duration, world.getThunderDuration(), "Weather duration should be more than zero");
-		assertTrue(world.isThundering());
-	}
-
-	@Test
-	void setThundering_True_ThunderDurationShouldBePositive()
-	{
-		WorldMock world = new WorldMock();
-		world.setThundering(true);
-		assertTrue(world.getThunderDuration() > 0, "Weather duration should be more than zero");
-		assertTrue(world.isThundering());
-	}
-
-	@Test
 	void spawnZombieTest()
 	{
 		WorldMock world = new WorldMock();
@@ -302,21 +243,21 @@ class WorldMockTest
 	}
 
 	@Test
-	public void getLoadedChunks_EmptyWorldHasNoLoadedChunks()
+	void getLoadedChunks_EmptyWorldHasNoLoadedChunks()
 	{
 		WorldMock world = new WorldMock();
 		assertEquals(0, world.getLoadedChunks().length);
 	}
 
 	@Test
-	public void isChunkLoaded_IsFalseForUnloadedChunk()
+	void isChunkLoaded_IsFalseForUnloadedChunk()
 	{
 		WorldMock world = new WorldMock();
 		assertFalse(world.isChunkLoaded(0, 0));
 	}
 
 	@Test
-	public void isChunkloaded_IsTrueForLoadedChunk()
+	void isChunkloaded_IsTrueForLoadedChunk()
 	{
 		WorldMock world = new WorldMock();
 		BlockMock block = world.getBlockAt(64, 64, 64);
@@ -326,7 +267,7 @@ class WorldMockTest
 	}
 
 	@Test
-	public void getBlockState_ChangeBlock()
+	void getBlockState_ChangeBlock()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		assertEquals(Material.DIRT, world.getType(0, 1, 0));
@@ -342,7 +283,7 @@ class WorldMockTest
 	}
 
 	@Test
-	public void setBlock_ChangeBlock()
+	void setBlock_ChangeBlock()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		Location location = new Location(world, 0, 1, 0);
@@ -365,14 +306,14 @@ class WorldMockTest
 	}
 
 	@Test
-	public void worldPlayEffect()
+	void worldPlayEffect()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		world.playEffect(new Location(world, 0, 0, 0), Effect.STEP_SOUND, Material.STONE);
 	}
 
 	@Test
-	public void worldPlayEffect_NullData()
+	void worldPlayEffect_NullData()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		assertThrows(IllegalArgumentException.class, () ->
@@ -382,7 +323,7 @@ class WorldMockTest
 	}
 
 	@Test
-	public void worldPlayEffect_IncorrectData()
+	void worldPlayEffect_IncorrectData()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		assertThrows(IllegalArgumentException.class, () ->
@@ -403,6 +344,151 @@ class WorldMockTest
 		out.writeUTF("ALL");
 		out.writeUTF("MockBukkit");
 		world.sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
+	}
+
+	@Test
+	void onCreated_WeatherDurations_Zero()
+	{
+		WorldMock world = new WorldMock();
+		assertEquals(0, world.getWeatherDuration());
+		assertEquals(0, world.getThunderDuration());
+		assertEquals(0, world.getClearWeatherDuration());
+	}
+
+	@Test
+	void onCreated_Weather()
+	{
+		WorldMock world = new WorldMock();
+		assertTrue(world.isClearWeather());
+		assertFalse(world.isThundering());
+		assertFalse(world.hasStorm());
+	}
+
+	@Test
+	void setStorm_ChangeState_CallsEvent()
+	{
+		WorldMock world = new WorldMock();
+		world.setStorm(true);
+		server.getPluginManager().assertEventFired(WeatherChangeEvent.class, event ->
+				event.getWorld().equals(world) && event.toWeatherState());
+		world.setStorm(false);
+		server.getPluginManager().assertEventFired(WeatherChangeEvent.class, event ->
+				event.getWorld().equals(world) && !event.toWeatherState());
+	}
+
+	@Test
+	void setStorm_SameState_DoesntCallEvent()
+	{
+		WorldMock world = new WorldMock();
+		world.setStorm(false);
+		server.getPluginManager().assertEventNotFired(WeatherChangeEvent.class);
+	}
+
+	@Test
+	void setStorm_SetsStorming()
+	{
+		WorldMock world = new WorldMock();
+		world.setStorm(true);
+		assertTrue(world.hasStorm());
+	}
+
+	@Test
+	void setStorm_ResetsWeatherDuration()
+	{
+		WorldMock world = new WorldMock();
+		world.setStorm(true);
+		assertEquals(0, world.getWeatherDuration());
+	}
+
+	@Test
+	void setStorm_ResetsClearWeatherDuration()
+	{
+		WorldMock world = new WorldMock();
+		world.setStorm(true);
+		assertEquals(0, world.getClearWeatherDuration());
+	}
+
+	@Test
+	void setWeatherDuration_SetsDuration()
+	{
+		WorldMock world = new WorldMock();
+		world.setWeatherDuration(10);
+		assertEquals(10, world.getWeatherDuration());
+	}
+
+	@Test
+	void setThundering_ChangeState_CallsEvent()
+	{
+		WorldMock world = new WorldMock();
+		world.setThundering(true);
+		server.getPluginManager().assertEventFired(ThunderChangeEvent.class, event ->
+				event.getWorld().equals(world) && event.toThunderState());
+		world.setThundering(false);
+		server.getPluginManager().assertEventFired(ThunderChangeEvent.class, event ->
+				event.getWorld().equals(world) && !event.toThunderState());
+	}
+
+	@Test
+	void setThundering_SameState_DoesntCallEvent()
+	{
+		WorldMock world = new WorldMock();
+		world.setThundering(false);
+		server.getPluginManager().assertEventNotFired(ThunderChangeEvent.class);
+	}
+
+	@Test
+	void setThundering_SetsThundering()
+	{
+		WorldMock world = new WorldMock();
+		world.setThundering(true);
+		assertTrue(world.isThundering());
+	}
+
+	@Test
+	void setThundering_ResetsThunderingDuration()
+	{
+		WorldMock world = new WorldMock();
+		world.setThundering(true);
+		assertEquals(0, world.getThunderDuration());
+	}
+
+	@Test
+	void setThundering_ResetsClearWeatherDuration()
+	{
+		WorldMock world = new WorldMock();
+		world.setThundering(true);
+		assertEquals(0, world.getClearWeatherDuration());
+	}
+
+	@Test
+	void setThunderDuration_SetsDuration()
+	{
+		WorldMock world = new WorldMock();
+		world.setThunderDuration(10);
+		assertEquals(10, world.getThunderDuration());
+	}
+
+	@Test
+	void isClearWeather_ClearWeather()
+	{
+		WorldMock world = new WorldMock();
+		assertTrue(world.isClearWeather());
+	}
+
+	@Test
+	void isClearWeather_Thundering_False()
+	{
+		WorldMock world = new WorldMock();
+		world.setThundering(true);
+		assertFalse(world.isClearWeather());
+	}
+
+	@Test
+	void isClearWeather_Storming_False()
+	{
+		WorldMock world = new WorldMock();
+		world.setStorm(true);
+		assertFalse(world.isClearWeather());
 	}
 
 }

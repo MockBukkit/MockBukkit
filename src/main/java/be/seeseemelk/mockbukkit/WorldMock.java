@@ -55,6 +55,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.weather.ThunderChangeEvent;
+import org.bukkit.event.weather.WeatherChangeEvent;
 import org.bukkit.event.world.TimeSkipEvent;
 import org.bukkit.generator.BiomeProvider;
 import org.bukkit.generator.BlockPopulator;
@@ -109,9 +111,11 @@ public class WorldMock implements World
 	private String name = "World";
 	private Location spawnLocation;
 	private long fullTime = 0;
-	private int weatherDuration = 0;
-	private int thunderDuration = 0;
-	private boolean storming = false;
+	private int weatherDuration;
+	private boolean thundering;
+	private int thunderDuration;
+	private boolean storming;
+	private int clearWeatherDuration;
 	private long seed = 0;
 	private WorldType worldType = WorldType.NORMAL;
 
@@ -857,49 +861,91 @@ public class WorldMock implements World
 	@Override
 	public boolean hasStorm()
 	{
-		return storming;
+		return this.storming;
 	}
 
 	@Override
 	public void setStorm(boolean hasStorm)
 	{
-		storming = hasStorm;
+		if (this.storming == hasStorm)
+		{
+			return;
+		}
+		WeatherChangeEvent weather = new WeatherChangeEvent(this, hasStorm, WeatherChangeEvent.Cause.PLUGIN);
+		Bukkit.getServer().getPluginManager().callEvent(weather);
+		if (weather.isCancelled())
+		{
+			return;
+		}
+		this.storming = hasStorm;
+		this.setWeatherDuration(0);
+		this.setClearWeatherDuration(0);
 	}
 
 	@Override
 	public int getWeatherDuration()
 	{
-		return weatherDuration;
+		return this.weatherDuration;
 	}
 
 	@Override
 	public void setWeatherDuration(int duration)
 	{
-		weatherDuration = duration;
+		this.weatherDuration = duration;
 	}
 
 	@Override
 	public boolean isThundering()
 	{
-		return thunderDuration > 0;
+		return this.thundering;
 	}
 
 	@Override
 	public void setThundering(boolean thundering)
 	{
-		thunderDuration = thundering ? 600 : 0;
+		if (this.thundering == thundering)
+		{
+			return;
+		}
+		ThunderChangeEvent thunder = new ThunderChangeEvent(this, thundering, ThunderChangeEvent.Cause.PLUGIN); // Paper
+		Bukkit.getServer().getPluginManager().callEvent(thunder);
+		if (thunder.isCancelled()) {
+			return;
+		}
+		this.thundering = thundering;
+		this.setThunderDuration(0);
+		this.setClearWeatherDuration(0);
 	}
 
 	@Override
 	public int getThunderDuration()
 	{
-		return thunderDuration;
+		return this.thunderDuration;
 	}
 
 	@Override
 	public void setThunderDuration(int duration)
 	{
-		thunderDuration = duration;
+		this.thunderDuration = duration;
+	}
+
+	@Override
+	public boolean isClearWeather()
+	{
+
+		return !this.hasStorm() && !this.isThundering();
+	}
+
+	@Override
+	public int getClearWeatherDuration()
+	{
+		return this.clearWeatherDuration;
+	}
+
+	@Override
+	public void setClearWeatherDuration(int duration)
+	{
+		this.clearWeatherDuration = duration;
 	}
 
 	@Override
@@ -2300,28 +2346,6 @@ public class WorldMock implements World
 
 	@Override
 	public Spigot spigot()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean isClearWeather()
-	{
-
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public int getClearWeatherDuration()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setClearWeatherDuration(int duration)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
