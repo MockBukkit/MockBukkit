@@ -56,7 +56,7 @@ repositories {
 }
 
 dependencies {
-	testImplementation 'com.github.seeseemelk:MockBukkit-v1.18:2.1.1'
+	testImplementation 'com.github.seeseemelk:MockBukkit-v1.18:2.3.0'
 }
 ```
 
@@ -67,7 +67,7 @@ will be accepted.
 This is because backporting every single patch on every branch is incredibly time consuming and slows down the
 development of Mockbukkit.
 
-If you prefer to always have the latest Git version or need a specific commit/branch, you can always use JitPack as your
+If you prefer to always have the latest Git version or need a specific commit/branch, you can always use [JitPack](https://jitpack.io/#MockBukkit/MockBukkit) as your
 maven repository:
 
 ```gradle
@@ -76,7 +76,7 @@ repositories {
 }
 
 dependencies {
-	implementation 'com.github.seeseemelk:MockBukkit:v1.17-SNAPSHOT'
+	testImplementation 'com.github.seeseemelk:MockBukkit:v1.18-SNAPSHOT'
 }
 ```
 
@@ -89,12 +89,12 @@ version as necessary.
 ```xml
 
 <dependencies>
-    <dependency>
-        <groupId>com.github.seeseemelk</groupId>
-        <artifactId>MockBukkit-v1.18</artifactId>
-        <version>2.0.0</version>
-        <scope>test</scope>
-    </dependency>
+  <dependency>
+    <groupId>com.github.seeseemelk</groupId>
+    <artifactId>MockBukkit-v1.18</artifactId>
+    <version>2.3.0</version>
+    <scope>test</scope>
+  </dependency>
 </dependencies>
 ```
 
