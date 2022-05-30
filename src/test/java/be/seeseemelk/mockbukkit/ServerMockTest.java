@@ -54,6 +54,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.equalTo;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -657,7 +658,7 @@ class ServerMockTest
 	@Test
 	void reload()
 	{
-		server.reload();
+		assertDoesNotThrow(server::reload);
 	}
 
 	@Test

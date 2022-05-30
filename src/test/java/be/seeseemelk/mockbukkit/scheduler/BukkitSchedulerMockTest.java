@@ -187,7 +187,7 @@ class BukkitSchedulerMockTest
 	}
 
 	@Test
-	public void cancellingAsyncTaskDecreasesNumberOfQueuedAsyncTasks()
+	void cancellingAsyncTaskDecreasesNumberOfQueuedAsyncTasks()
 	{
 		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
 		BukkitTask task = scheduler.runTaskLaterAsynchronously(null, () -> {}, 1);
@@ -197,7 +197,7 @@ class BukkitSchedulerMockTest
 	}
 
 	@Test
-	public void cancellingAllTaskByPlugin()
+	void cancellingAllTaskByPlugin()
 	{
 		MockBukkit.mock();
 		MockBukkit.load(TestPlugin.class);
@@ -217,7 +217,7 @@ class BukkitSchedulerMockTest
 
 
 	@Test
-	public void longScheduledRunningTask_Throws_RunTimeException()
+	void longScheduledRunningTask_Throws_RunTimeException()
 	{
 		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
 		scheduler.runTaskAsynchronously(null, () ->
@@ -263,7 +263,7 @@ class BukkitSchedulerMockTest
 	}
 
 	@Test
-	public void longRunningTask_Throws_RunTimeException()
+	void longRunningTask_Throws_RunTimeException()
 	{
 		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
 		final AtomicBoolean alive = new AtomicBoolean(true);
@@ -299,7 +299,7 @@ class BukkitSchedulerMockTest
 	}
 
 	@Test
-	public void saveOverdueTasks()
+	void saveOverdueTasks()
 	{
 		scheduler.saveOverdueTasks();
 		assertTrue(scheduler.getOverdueTasks().isEmpty());
@@ -309,14 +309,14 @@ class BukkitSchedulerMockTest
 	}
 
 	@Test
-	public void assertNoOverdueTasks()
+	void assertNoOverdueTasks()
 	{
 		scheduler.saveOverdueTasks();
 		scheduler.assertNoOverdueTasks();
 	}
 
 	@Test
-	public void assertNoOverdueTasks_FailedWhenOverdue()
+	void assertNoOverdueTasks_FailedWhenOverdue()
 	{
 		scheduler.runTaskTimerAsynchronously(null, () -> {}, 0, 1);
 		scheduler.performOneTick();
