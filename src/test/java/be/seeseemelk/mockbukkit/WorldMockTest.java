@@ -5,7 +5,10 @@ import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import be.seeseemelk.mockbukkit.block.state.BlockStateMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
 import be.seeseemelk.mockbukkit.entity.ZombieMock;
+import com.google.common.io.ByteArrayDataOutput;
+import com.google.common.io.ByteStreams;
 import org.bukkit.Chunk;
+import org.bukkit.Effect;
 import org.bukkit.GameRule;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -414,7 +417,47 @@ class WorldMockTest
 		assertEquals(Material.BEDROCK, world.getType(location));
 		world.setType(0, 1, 0, Material.DIRT);
 		assertEquals(Material.DIRT, world.getType(location));
+	}
 
+	@Test
+	public void worldPlayEffect()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.playEffect(new Location(world, 0, 0, 0), Effect.STEP_SOUND, Material.STONE);
+	}
+
+	@Test
+	public void worldPlayEffect_NullData()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertThrows(IllegalArgumentException.class, () ->
+		{
+			world.playEffect(new Location(world, 0, 0, 0), Effect.STEP_SOUND, null);
+		});
+	}
+
+	@Test
+	public void worldPlayEffect_IncorrectData()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertThrows(IllegalArgumentException.class, () ->
+		{
+			world.playEffect(new Location(world, 0, 0, 0), Effect.STEP_SOUND, 1.0f);
+		});
+	}
+
+	@Test
+	@SuppressWarnings("UnstableApiUsage")
+	void testSendPluginMessage()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		MockPlugin plugin = MockBukkit.createMockPlugin();
+		server.getMessenger().registerOutgoingPluginChannel(plugin, "BungeeCord");
+		ByteArrayDataOutput out = ByteStreams.newDataOutput();
+		out.writeUTF("Forward");
+		out.writeUTF("ALL");
+		out.writeUTF("MockBukkit");
+		world.sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
 	}
 
 }
