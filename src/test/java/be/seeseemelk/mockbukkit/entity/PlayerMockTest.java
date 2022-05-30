@@ -71,6 +71,7 @@ import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -84,12 +85,13 @@ import static org.junit.jupiter.api.Assumptions.assumeFalse;
 
 class PlayerMockTest
 {
+
 	// Taken from https://minecraft.gamepedia.com/Experience#Leveling_up
 	private static int[] expRequired =
-	{
-		7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 42, 47, 52, 57, 62, 67, 72, 77, 82, 87, 92, 97, 102,
-		107, 112, 121, 130, 139, 148, 157, 166, 175, 184, 193
-	};
+			{
+					7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 42, 47, 52, 57, 62, 67, 72, 77, 82, 87, 92, 97, 102,
+					107, 112, 121, 130, 139, 148, 157, 166, 175, 184, 193
+			};
 	private ServerMock server;
 	private UUID uuid;
 	private PlayerMock player;
@@ -525,7 +527,7 @@ class PlayerMockTest
 	}
 
 	@ParameterizedTest
-	@EnumSource(value = GameMode.class, mode = EnumSource.Mode.EXCLUDE, names = {"SURVIVAL"})
+	@EnumSource(value = GameMode.class, mode = EnumSource.Mode.EXCLUDE, names = { "SURVIVAL" })
 	void simulateBlockDamage_NotSurvival_BlockNotDamaged(GameMode nonSurvivalGameMode)
 	{
 		player.setGameMode(nonSurvivalGameMode);
@@ -1009,7 +1011,7 @@ class PlayerMockTest
 		player.assertSoundHeard(sound, audio ->
 		{
 			return player.getLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.AMBIENT
-			&& audio.getVolume() == volume && audio.getPitch() == pitch;
+					&& audio.getVolume() == volume && audio.getPitch() == pitch;
 		});
 	}
 
@@ -1024,7 +1026,7 @@ class PlayerMockTest
 		player.assertSoundHeard(sound, audio ->
 		{
 			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
-			&& audio.getVolume() == volume && audio.getPitch() == pitch;
+					&& audio.getVolume() == volume && audio.getPitch() == pitch;
 		});
 	}
 
@@ -1036,7 +1038,7 @@ class PlayerMockTest
 		player.assertSoundHeard(Sound.BLOCK_NOTE_BLOCK_BANJO, audio ->
 		{
 			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
-			&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
+					&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
 		});
 	}
 
@@ -1048,7 +1050,7 @@ class PlayerMockTest
 		player.assertSoundHeard(Sound.BLOCK_NOTE_BLOCK_HARP, audio ->
 		{
 			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
-			&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
+					&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
 		});
 	}
 
@@ -1060,7 +1062,7 @@ class PlayerMockTest
 		player.setItemOnCursor(new ItemStack(Material.PUMPKIN));
 		player.closeInventory();
 		server.getPluginManager().assertEventFired(InventoryCloseEvent.class,
-		        e -> e.getPlayer() == player && e.getInventory() == inv);
+				e -> e.getPlayer() == player && e.getInventory() == inv);
 		assertTrue(player.getItemOnCursor().getType().isAir());
 	}
 
@@ -1109,7 +1111,7 @@ class PlayerMockTest
 	void testMultiplePotionEffects()
 	{
 		Collection<PotionEffect> effects = Arrays.asList(new PotionEffect(PotionEffectType.BAD_OMEN, 3, 1),
-		                                   new PotionEffect(PotionEffectType.LUCK, 5, 2));
+				new PotionEffect(PotionEffectType.LUCK, 5, 2));
 
 		assertTrue(player.addPotionEffects(effects));
 
@@ -1447,15 +1449,19 @@ class PlayerMockTest
 	@Test
 	void testPlayerSendSignChange_Valid()
 	{
-		player.sendSignChange(player.getLocation(), new String[4], DyeColor.CYAN, true);
+		assertDoesNotThrow(() ->
+		{
+			player.sendSignChange(player.getLocation(), new String[4], DyeColor.CYAN, true);
+		});
 	}
 
 	@Test
 	void testPlayerSendSignChange_Invalid()
 	{
+		Location loc = player.getLocation();
 		assertThrows(IllegalArgumentException.class, () ->
 		{
-			player.sendSignChange(player.getLocation(), new String[2]);
+			player.sendSignChange(loc, new String[2]);
 		});
 	}
 
@@ -1477,51 +1483,74 @@ class PlayerMockTest
 	@Test
 	void testPlayerSendExperienceChange()
 	{
-		player.sendExperienceChange(0.5f);
+		assertDoesNotThrow(() ->
+		{
+			player.sendExperienceChange(0.5f);
+		});
 	}
 
 	@Test
 	void testPlayerSendBlockDamage()
 	{
-		player.sendBlockDamage(player.getLocation(), 0.5f);
+		Location loc = player.getLocation();
+		assertDoesNotThrow(() ->
+		{
+			player.sendBlockDamage(loc, 0.5f);
+		});
 	}
 
 	@Test
 	void testPlayerSendEquipmentChange()
 	{
-		player.sendEquipmentChange(player, EquipmentSlot.CHEST, new ItemStack(Material.DIAMOND_CHESTPLATE));
+		assertDoesNotThrow(() ->
+		{
+			player.sendEquipmentChange(player, EquipmentSlot.CHEST, new ItemStack(Material.DIAMOND_CHESTPLATE));
+		});
 	}
 
 	@Test
 	void testPlayerSendActionBar()
 	{
-		player.sendActionBar("Action!");
+		assertDoesNotThrow(() ->
+		{
+			player.sendActionBar("Action!");
+		});
 	}
 
 	@Test
 	void testPlayerSendHealthUpdate()
 	{
-		player.sendHealthUpdate();
+		assertDoesNotThrow(() ->
+		{
+			player.sendHealthUpdate();
+		});
 	}
 
 	@Test
 	void testPlayerSendHealthUpdate_Params()
 	{
-		player.sendHealthUpdate(20, 10, 0.0f);
+		assertDoesNotThrow(() ->
+		{
+			player.sendHealthUpdate(20, 10, 0.0f);
+		});
 	}
 
 	@Test
 	void testPlayerSendMultiBlockChange()
 	{
-		player.sendMultiBlockChange(new HashMap<>(0));
+		assertDoesNotThrow(() ->
+		{
+			player.sendMultiBlockChange(new HashMap<>(0));
+		});
 	}
 
 	@Test
 	void testPlayerPlayEffect_IncorrectData()
 	{
+		Location loc = player.getLocation();
 		assertThrows(IllegalArgumentException.class, () ->
 		{
-			player.playEffect(player.getLocation(), Effect.STEP_SOUND, 1.0f);
+			player.playEffect(loc, Effect.STEP_SOUND, 1.0f);
 		});
 	}
 
