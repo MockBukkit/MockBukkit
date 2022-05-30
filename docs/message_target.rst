@@ -1,7 +1,7 @@
 MessageTarget introduction
 ==========================
 The MessageTarget interface is a small interface implemented by methods that can receive messages.
-Two examples of message targets are ```ConsoleCommandSenderMock``` and ```EntityMock```.
+Two examples of message targets are ``ConsoleCommandSenderMock`` and ``EntityMock``.
 
 Using MessageTarget
 -------------------
