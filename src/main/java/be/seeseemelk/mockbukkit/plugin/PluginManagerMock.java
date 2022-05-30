@@ -1,33 +1,8 @@
 package be.seeseemelk.mockbukkit.plugin;
 
-import static org.junit.jupiter.api.Assertions.fail;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.net.URL;
-import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Random;
-import java.util.Set;
-import java.util.concurrent.ThreadLocalRandom;
-import java.util.function.Predicate;
-import java.util.logging.Level;
-import java.util.stream.Collectors;
-
-import org.apache.commons.io.FileUtils;
+import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
 import org.apache.commons.lang.Validate;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.PluginCommandUtils;
@@ -57,9 +32,35 @@ import org.bukkit.plugin.java.JavaPluginLoader;
 import org.bukkit.plugin.java.JavaPluginUtils;
 import org.jetbrains.annotations.NotNull;
 
-import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Random;
+import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.Predicate;
+import java.util.logging.Level;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class PluginManagerMock implements PluginManager
 {
@@ -88,17 +89,19 @@ public class PluginManagerMock implements PluginManager
 	 */
 	public void unload()
 	{
-		if (parentTemporaryDirectory != null)
+		if (parentTemporaryDirectory == null)
+			return;
+
+		try (Stream<Path> walk = Files.walk(parentTemporaryDirectory.toPath()))
 		{
-			try
-			{
-				FileUtils.forceDelete(parentTemporaryDirectory);
-			}
-			catch (IOException e)
-			{
-				System.err.println("Could not remove file");
-				e.printStackTrace();
-			}
+			walk.sorted(Comparator.reverseOrder())
+					.map(Path::toFile)
+					.forEach(File::delete);
+		}
+		catch (IOException e)
+		{
+			System.err.println("Could not remove file");
+			e.printStackTrace();
 		}
 	}
 
