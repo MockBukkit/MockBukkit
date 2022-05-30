@@ -179,10 +179,10 @@ public class InventoryMock implements Inventory
 			}
 			else 
 			{
-				final int oITemMaxStackSize = Math.min(oItem.getMaxStackSize(), this.maxStackSize);
-				if (item.isSimilar(oItem) && oItem.getAmount() < oITemMaxStackSize)
+				final int oItemMaxStackSize = Math.min(oItem.getMaxStackSize(), this.maxStackSize);
+				if (item.isSimilar(oItem) && oItem.getAmount() < oItemMaxStackSize)
 				{
-					int toAdd = Math.min(item.getAmount(), oITemMaxStackSize - oItem.getAmount());
+					int toAdd = Math.min(item.getAmount(), oItemMaxStackSize - oItem.getAmount());
 					oItem.setAmount(oItem.getAmount() + toAdd);
 					item.setAmount(item.getAmount() - toAdd);
 				}
