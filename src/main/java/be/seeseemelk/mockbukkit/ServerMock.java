@@ -1203,7 +1203,9 @@ public class ServerMock extends Server.Spigot implements Server
 			{
 				Thread.sleep(50); // TODO: Can we avoid busy waiting?
 			}
-			catch (InterruptedException ignored) {}
+			catch (InterruptedException ignored) {
+				Thread.currentThread().interrupt();
+			}
 			pollCount++;
 		}
 
