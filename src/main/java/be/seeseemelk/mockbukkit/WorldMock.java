@@ -53,6 +53,7 @@ import org.bukkit.entity.Firework;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.entity.Zombie;
@@ -119,6 +120,7 @@ public class WorldMock implements World
 	private WorldType worldType = WorldType.NORMAL;
 	private final BiomeProviderMock biomeProviderMock = new BiomeProviderMock();
 	private Map<Coordinate, Biome> biomes = new HashMap<>();
+	private Difficulty difficulty = Difficulty.NORMAL;
 
 	/**
 	 * Creates a new mock world.
@@ -557,8 +559,7 @@ public class WorldMock implements World
 	@Override
 	public void loadChunk(Chunk chunk)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		loadChunk(chunk.getX(), chunk.getZ());
 	}
 
 	@Override
@@ -579,13 +580,13 @@ public class WorldMock implements World
 	@Override
 	public void loadChunk(int x, int z)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		loadChunk(x, z, true);
 	}
 
 	@Override
 	public boolean loadChunk(int x, int z, boolean generate)
 	{
+		AsyncCatcher.catchOp("chunk load");
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
@@ -593,20 +594,19 @@ public class WorldMock implements World
 	@Override
 	public boolean unloadChunk(Chunk chunk)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.unloadChunk(chunk.getX(), chunk.getZ());
 	}
 
 	@Override
 	public boolean unloadChunk(int x, int z)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return unloadChunk(x, z, true);
 	}
 
 	@Override
 	public boolean unloadChunk(int x, int z, boolean save)
 	{
+		AsyncCatcher.catchOp("chunk unload");
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
@@ -614,6 +614,7 @@ public class WorldMock implements World
 	@Override
 	public boolean unloadChunkRequest(int x, int z)
 	{
+		AsyncCatcher.catchOp("chunk unload");
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
@@ -622,6 +623,7 @@ public class WorldMock implements World
 	@Deprecated
 	public boolean regenerateChunk(int x, int z)
 	{
+		AsyncCatcher.catchOp("chunk regenerate");
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
@@ -734,6 +736,7 @@ public class WorldMock implements World
 
 	private <T extends Entity> EntityMock mockEntity(@NotNull Class<T> clazz)
 	{
+		AsyncCatcher.catchOp("entity add");
 		if (clazz == ArmorStand.class)
 		{
 			return new ArmorStandMock(server, UUID.randomUUID());
@@ -1029,6 +1032,7 @@ public class WorldMock implements World
 	@Override
 	public void save()
 	{
+		AsyncCatcher.catchOp("world save");
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
@@ -1041,7 +1045,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public <T extends Entity> T spawn(@NotNull Location location, @NotNull Class<T> clazz) throws IllegalArgumentException
+	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz) throws IllegalArgumentException
 	{
 		Validate.notNull(location, "The provided location must not be null.");
 		Validate.notNull(clazz, "The provided class must not be null.");
@@ -1050,11 +1054,16 @@ public class WorldMock implements World
 		entity.setLocation(location);
 		server.registerEntity(entity);
 
+		if (getDifficulty() == Difficulty.PEACEFUL && entity instanceof Monster monster)
+		{
+			monster.remove();
+		}
+
 		return clazz.cast(entity);
 	}
 
 	@Override
-	public <T extends Entity> T spawn(@NotNull Location location, @NotNull Class<T> clazz, @Nullable Consumer<T> function)
+	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz, @Nullable Consumer<T> function)
 	throws IllegalArgumentException
 	{
 		T entity = spawn(location, clazz);
@@ -1245,17 +1254,15 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public Difficulty getDifficulty()
+	public @NotNull Difficulty getDifficulty()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.difficulty;
 	}
 
 	@Override
-	public void setDifficulty(Difficulty difficulty)
+	public void setDifficulty(@NotNull Difficulty difficulty)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.difficulty = difficulty;
 	}
 
 	@Override

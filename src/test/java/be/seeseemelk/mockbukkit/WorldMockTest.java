@@ -16,6 +16,7 @@ import be.seeseemelk.mockbukkit.block.state.BlockStateMock;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import org.bukkit.Chunk;
+import org.bukkit.Difficulty;
 import org.bukkit.Effect;
 import org.bukkit.GameRule;
 import org.bukkit.Location;
@@ -444,6 +445,35 @@ class WorldMockTest
 		out.writeUTF("ALL");
 		out.writeUTF("MockBukkit");
 		world.sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
+	}
+
+	@Test
+	public void setDifficulty()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertNotNull(world.getDifficulty());
+		world.setDifficulty(Difficulty.HARD);
+		assertEquals(Difficulty.HARD, world.getDifficulty());
+	}
+
+	@Test
+	public void spawnMonster_Peaceful()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setDifficulty(Difficulty.PEACEFUL);
+		Entity zombie = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ZOMBIE);
+		assertFalse(zombie.isValid());
+		assertTrue(zombie.isDead());
+	}
+
+	@Test
+	public void spawnFriendly_Peaceful()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setDifficulty(Difficulty.PEACEFUL);
+		Entity armorStand = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ARMOR_STAND);
+		assertTrue(armorStand.isValid());
+		assertFalse(armorStand.isDead());
 	}
 
 }
