@@ -524,8 +524,7 @@ public class WorldMock implements World
 	@Override
 	public void loadChunk(Chunk chunk)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		loadChunk(chunk.getX(), chunk.getZ());
 	}
 
 	@Override
@@ -546,13 +545,13 @@ public class WorldMock implements World
 	@Override
 	public void loadChunk(int x, int z)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		loadChunk(x, z, true);
 	}
 
 	@Override
 	public boolean loadChunk(int x, int z, boolean generate)
 	{
+		AsyncCatcher.catchOp("chunk load");
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
@@ -560,20 +559,19 @@ public class WorldMock implements World
 	@Override
 	public boolean unloadChunk(Chunk chunk)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.unloadChunk(chunk.getX(), chunk.getZ());
 	}
 
 	@Override
 	public boolean unloadChunk(int x, int z)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return unloadChunk(x, z, true);
 	}
 
 	@Override
 	public boolean unloadChunk(int x, int z, boolean save)
 	{
+		AsyncCatcher.catchOp("chunk unload");
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
@@ -581,6 +579,7 @@ public class WorldMock implements World
 	@Override
 	public boolean unloadChunkRequest(int x, int z)
 	{
+		AsyncCatcher.catchOp("chunk unload");
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
@@ -589,6 +588,7 @@ public class WorldMock implements World
 	@Deprecated
 	public boolean regenerateChunk(int x, int z)
 	{
+		AsyncCatcher.catchOp("chunk regenerate");
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
@@ -701,6 +701,7 @@ public class WorldMock implements World
 
 	private <T extends Entity> EntityMock mockEntity(@NotNull Class<T> clazz)
 	{
+		AsyncCatcher.catchOp("entity add");
 		if (clazz == ArmorStand.class)
 		{
 			return new ArmorStandMock(server, UUID.randomUUID());
@@ -998,6 +999,7 @@ public class WorldMock implements World
 	@Override
 	public void save()
 	{
+		AsyncCatcher.catchOp("world save");
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
