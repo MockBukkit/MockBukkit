@@ -1,14 +1,7 @@
 package be.seeseemelk.mockbukkit.inventory;
 
-import be.seeseemelk.mockbukkit.inventory.meta.TropicalFishBucketMetaMock;
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.inventory.meta.BannerMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.BookMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.EnchantedBookMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.FireworkEffectMetaMock;
@@ -20,6 +13,8 @@ import be.seeseemelk.mockbukkit.inventory.meta.PotionMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.SkullMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.SuspiciousStewMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.ArmorStandMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.TropicalFishBucketMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.SpawnEggMetaMock;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -36,6 +31,27 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ItemFactoryMockTest
 {
+
+	private static final Material[] BANNERS =
+	{
+		Material.WHITE_BANNER,
+		Material.ORANGE_BANNER,
+		Material.MAGENTA_BANNER,
+		Material.LIGHT_BLUE_BANNER,
+		Material.YELLOW_BANNER,
+		Material.LIME_BANNER,
+		Material.PINK_BANNER,
+		Material.GRAY_BANNER,
+		Material.LIGHT_GRAY_BANNER,
+		Material.CYAN_BANNER,
+		Material.PURPLE_BANNER,
+		Material.BLUE_BANNER,
+		Material.BROWN_BANNER,
+		Material.GREEN_BANNER,
+		Material.RED_BANNER,
+		Material.BLACK_BANNER
+	};
+
 	private ItemFactoryMock factory;
 
 	@BeforeEach
@@ -75,10 +91,14 @@ class ItemFactoryMockTest
 
 		assertTrue(factory.getItemMeta(Material.ARMOR_STAND) instanceof ArmorStandMetaMock);
 		assertTrue(factory.getItemMeta(Material.TROPICAL_FISH_BUCKET) instanceof TropicalFishBucketMetaMock);
-		
+
 		for (Material egg : Arrays.stream(Material.values()).filter(m -> m.name().endsWith("_SPAWN_EGG")).toList())
 		{
 			assertTrue(factory.getItemMeta(egg) instanceof SpawnEggMeta);
+
+		for (Material m : BANNERS)
+		{
+			assertTrue(factory.getItemMeta(m) instanceof BannerMetaMock);
 		}
 	}
 
