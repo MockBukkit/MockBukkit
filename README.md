@@ -174,7 +174,7 @@ From then on it's possible to get a certain player using ```server.getPlayer(int
 An even easier way to create a player on the fly is by simply using
 
 ```java
-PlayerMock player=server.addPlayer();
+PlayerMock player = server.addPlayer();
 ```
 
 A mock player also supports several simulated actions, such as damaging a block or even
