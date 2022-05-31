@@ -20,7 +20,9 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class FishHookMockTest
@@ -45,26 +47,41 @@ class FishHookMockTest
 	}
 
 	@Test
+	void constructor_DefaultValues()
+	{
+		assertEquals(100, hook.getMinWaitTime());
+		assertEquals(600, hook.getMaxWaitTime());
+		assertTrue(hook.getApplyLure());
+		assertEquals(FishHook.HookState.UNHOOKED, hook.getState());
+		assertNull(hook.getHookedEntity());
+	}
+
+	@Test
 	void setMinWaitTime_Valid()
 	{
-		FishHookMock hook = new FishHookMock(server, UUID.randomUUID());
 		hook.setMinWaitTime(1);
+
 		assertEquals(1, hook.getMinWaitTime());
+	}
+
+	@Test
+	void setMinWaitTime_Invalid()
+	{
+		assertThrowsExactly(IllegalArgumentException.class, () -> hook.setMinWaitTime(700));
 	}
 
 	@Test
 	void setMaxWaitTime_Valid()
 	{
-		FishHookMock hook = new FishHookMock(server, UUID.randomUUID());
 		hook.setMaxWaitTime(1_000);
+
 		assertEquals(1_000, hook.getMaxWaitTime());
 	}
 
 	@Test
-	void setWaitTime_Invalid()
+	void setMaxWaitTime_Invalid()
 	{
-		hook.setMaxWaitTime(5);
-		assertThrows(IllegalArgumentException.class, () -> hook.setMinWaitTime(10));
+		assertThrowsExactly(IllegalArgumentException.class, () -> hook.setMaxWaitTime(50));
 	}
 
 	@Test
@@ -77,23 +94,23 @@ class FishHookMockTest
 	}
 
 	@Test
-	void setBiteChance_Valid()
+	void setBiteChance_SetsChance()
 	{
 		hook.setBiteChance(0.5);
+
 		assertEquals(0.5, hook.getBiteChance());
 	}
 
 	@Test
-	void setBiteChance_Invalid()
+	void setBiteChance_GreaterThanOne_ThrowsException()
 	{
-		assertThrows(IllegalArgumentException.class, () ->
-		{
-			hook.setBiteChance(2);
-		});
-		assertThrows(IllegalArgumentException.class, () ->
-		{
-			hook.setBiteChance(-1);
-		});
+		assertThrows(IllegalArgumentException.class, () -> hook.setBiteChance(2));
+	}
+
+	@Test
+	void setBiteChance_LessThanZero_ThrowsException()
+	{
+		assertThrows(IllegalArgumentException.class, () -> hook.setBiteChance(-1));
 	}
 
 // todo: Uncomment when WorkMock#isClearWeather is implemented.
