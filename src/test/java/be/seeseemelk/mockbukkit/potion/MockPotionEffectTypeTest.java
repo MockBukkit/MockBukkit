@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
-public class MockPotionEffectTypeTest
+class MockPotionEffectTypeTest
 {
 
 	private ServerMock server;

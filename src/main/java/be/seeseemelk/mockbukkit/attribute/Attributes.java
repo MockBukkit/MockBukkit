@@ -8,6 +8,10 @@ import java.util.Map;
 public class Attributes
 {
 
+	private Attributes()
+	{
+	}
+
 	private static final Map<Attribute, Double> DEFAULT_ATTRIBUTE_VALUES = ImmutableMap.ofEntries(
 			Map.entry(Attribute.GENERIC_MAX_HEALTH, 20.0),
 			Map.entry(Attribute.GENERIC_FOLLOW_RANGE, 32.0),
