@@ -80,7 +80,7 @@ public class CompassMetaMock extends ItemMetaMock implements CompassMeta
 	public @NotNull CompassMetaMock clone()
 	{
 		CompassMetaMock clone = (CompassMetaMock) super.clone();
-		clone.lodestone = this.lodestone;
+		clone.lodestone = this.lodestone == null ? null : this.lodestone.clone();
 		clone.tracked = this.tracked;
 		return clone;
 	}
