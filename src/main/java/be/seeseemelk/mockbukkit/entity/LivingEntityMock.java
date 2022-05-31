@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.entity;
 
+import be.seeseemelk.mockbukkit.AsyncCatcher;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.attribute.AttributeInstanceMock;
@@ -71,9 +72,23 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
+	public void remove()
+	{
+		this.health = 0;
+		alive = false;
+		super.remove();
+	}
+
+	@Override
 	public boolean isDead()
 	{
-		return !alive;
+		return !alive || !super.isValid();
+	}
+
+	@Override
+	public boolean isValid()
+	{
+		return !isDead();
 	}
 
 	@Override
@@ -336,15 +351,16 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
-	public boolean addPotionEffect(PotionEffect effect)
+	public boolean addPotionEffect(@NotNull PotionEffect effect)
 	{
 		return addPotionEffect(effect, false);
 	}
 
 	@Override
 	@Deprecated
-	public boolean addPotionEffect(PotionEffect effect, boolean force)
+	public boolean addPotionEffect(@NotNull PotionEffect effect, boolean force)
 	{
+		AsyncCatcher.catchOp("effect add");
 		if (effect != null)
 		{
 			// Bukkit now allows multiple effects of the same type,
