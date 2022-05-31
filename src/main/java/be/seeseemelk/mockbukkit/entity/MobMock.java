@@ -17,6 +17,7 @@ public abstract class MobMock extends LivingEntityMock implements Mob
 {
 
 	private boolean aware = true;
+	private boolean leftHanded;
 
 	public MobMock(ServerMock server, UUID uuid)
 	{
@@ -123,15 +124,13 @@ public abstract class MobMock extends LivingEntityMock implements Mob
 	@Override
 	public boolean isLeftHanded()
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		return this.leftHanded;
 	}
 
 	@Override
 	public void setLeftHanded(boolean leftHanded)
 	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		this.leftHanded = leftHanded;
 	}
 
 	@Override
