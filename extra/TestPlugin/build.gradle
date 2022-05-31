@@ -18,7 +18,7 @@ configurations.all {
 dependencies {
 	implementation 'org.spigotmc:spigot-api:1.15.2-R0.1-SNAPSHOT'
 
-	testImplementation 'junit:junit:4.12'
+	testImplementation 'junit:junit:4.13.2'
 }
 
 jar.doLast() {
