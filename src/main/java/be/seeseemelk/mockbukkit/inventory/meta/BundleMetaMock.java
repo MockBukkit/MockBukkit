@@ -13,36 +13,38 @@ import java.util.List;
 public class BundleMetaMock extends ItemMetaMock implements BundleMeta
 {
 
-	private List<ItemStack> items = null;
+	private List<ItemStack> items;
 
 	public BundleMetaMock()
 	{
 		super();
+
+		this.items = new ArrayList<>();
 	}
 
 	public BundleMetaMock(BundleMeta meta)
 	{
 		super(meta);
 
-		this.items = meta.getItems();
+		this.items = new ArrayList<>(meta.getItems());
 	}
 
 	@Override
 	public boolean hasItems()
 	{
-		return this.items != null && !this.items.isEmpty();
+		return !this.items.isEmpty();
 	}
 
 	@Override
 	public @NotNull List<ItemStack> getItems()
 	{
-		return (this.items == null) ? ImmutableList.of() : ImmutableList.copyOf(items);
+		return ImmutableList.copyOf(items);
 	}
 
 	@Override
 	public void setItems(@Nullable List<ItemStack> items)
 	{
-		this.items = null;
+		this.items.clear();
 
 		if (items == null)
 		{
@@ -60,11 +62,6 @@ public class BundleMetaMock extends ItemMetaMock implements BundleMeta
 	{
 		Preconditions.checkArgument(item != null && !item.getType().isAir(), "item is null or air");
 
-		if (this.items == null)
-		{
-			this.items = new ArrayList<>();
-		}
-
 		this.items.add(item);
 	}
 
@@ -73,7 +70,7 @@ public class BundleMetaMock extends ItemMetaMock implements BundleMeta
 	{
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((items == null) ? 0 : items.hashCode());
+		result = prime * result + (items.hashCode());
 		return result;
 	}
 
@@ -89,7 +86,7 @@ public class BundleMetaMock extends ItemMetaMock implements BundleMeta
 	public @NotNull BundleMetaMock clone()
 	{
 		BundleMetaMock clone = (BundleMetaMock) super.clone();
-		clone.items = this.items;
+		clone.items = new ArrayList<>(this.items);
 		return clone;
 	}
 
