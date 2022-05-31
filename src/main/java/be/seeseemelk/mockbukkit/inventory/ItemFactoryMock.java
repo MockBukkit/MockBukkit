@@ -14,6 +14,7 @@ import be.seeseemelk.mockbukkit.inventory.meta.SkullMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.SuspiciousStewMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.ArmorStandMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.TropicalFishBucketMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.BannerMetaMock;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.md_5.bungee.api.chat.BaseComponent;
@@ -21,6 +22,7 @@ import net.md_5.bungee.api.chat.hover.content.Content;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Color;
 import org.bukkit.Material;
+import org.bukkit.block.data.Rotatable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemFactory;
@@ -45,6 +47,7 @@ public class ItemFactoryMock implements ItemFactory
 	{
 		return switch (material)
 		{
+
 		case ARMOR_STAND -> ArmorStandMetaMock.class;
 		case WRITABLE_BOOK, WRITTEN_BOOK -> BookMetaMock.class;
 		case ENCHANTED_BOOK -> EnchantedBookMetaMock.class;
@@ -57,6 +60,8 @@ public class ItemFactoryMock implements ItemFactory
 		case POTION, LINGERING_POTION, SPLASH_POTION -> PotionMetaMock.class;
 		case PLAYER_HEAD -> SkullMetaMock.class;
 		case SUSPICIOUS_STEW -> SuspiciousStewMetaMock.class;
+		case WHITE_BANNER, ORANGE_BANNER, MAGENTA_BANNER, LIGHT_BLUE_BANNER, YELLOW_BANNER, LIME_BANNER, PINK_BANNER, GRAY_BANNER, LIGHT_GRAY_BANNER, CYAN_BANNER, PURPLE_BANNER, BLUE_BANNER, BROWN_BANNER, GREEN_BANNER, RED_BANNER, BLACK_BANNER ->
+				BannerMetaMock.class;
 		case TROPICAL_FISH_BUCKET -> TropicalFishBucketMetaMock.class;
 			default -> ItemMetaMock.class;
 		};
