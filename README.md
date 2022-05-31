@@ -182,8 +182,8 @@ breaking it. This will fire all the required events and will remove the block if
 events weren't cancelled.
 
 ```java
-Block block=...;
-        player.simulateBlockBreak(block);
+Block block = ...;
+player.simulateBlockBreak(block);
 ```
 
 ### Mock Worlds
