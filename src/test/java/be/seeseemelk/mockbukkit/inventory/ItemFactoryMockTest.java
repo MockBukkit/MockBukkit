@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.inventory;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.inventory.meta.ArmorStandMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.BannerMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.BookMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.EnchantedBookMetaMock;
@@ -11,14 +12,12 @@ import be.seeseemelk.mockbukkit.inventory.meta.KnowledgeBookMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.LeatherArmorMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.PotionMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.SkullMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.SuspiciousStewMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.ArmorStandMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.TropicalFishBucketMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.SpawnEggMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.SuspiciousStewMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.TropicalFishBucketMetaMock;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.SpawnEggMeta;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -94,7 +93,8 @@ class ItemFactoryMockTest
 
 		for (Material egg : Arrays.stream(Material.values()).filter(m -> m.name().endsWith("_SPAWN_EGG")).toList())
 		{
-			assertTrue(factory.getItemMeta(egg) instanceof SpawnEggMeta);
+			assertTrue(factory.getItemMeta(egg) instanceof SpawnEggMetaMock);
+		}
 
 		for (Material m : BANNERS)
 		{
