@@ -733,6 +733,14 @@ public class WorldMock implements World
 			mob.finalizeSpawn();
 		}
 
+		// CraftBukkit doesn't check this when spawning, it's done when the entity is ticking so
+		// it ends up being spawned for one tick before being removed. We don't have a great way
+		// to do that, so we just do it here.
+		if (entity instanceof Monster && this.getDifficulty() == Difficulty.PEACEFUL)
+		{
+			entity.remove();
+		}
+
 		if (function != null)
 		{
 			function.accept((T) entity);
