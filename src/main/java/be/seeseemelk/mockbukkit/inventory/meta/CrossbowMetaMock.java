@@ -95,7 +95,7 @@ public class CrossbowMetaMock extends ItemMetaMock implements CrossbowMeta
 	{
 		CrossbowMetaMock clone = (CrossbowMetaMock) super.clone();
 
-		clone.projectiles = this.projectiles;
+		clone.projectiles = new ArrayList<>(this.projectiles);
 
 		return clone;
 	}
