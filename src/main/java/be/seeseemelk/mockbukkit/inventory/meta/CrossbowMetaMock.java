@@ -20,6 +20,8 @@ public class CrossbowMetaMock extends ItemMetaMock implements CrossbowMeta
 	public CrossbowMetaMock()
 	{
 		super();
+
+		this.projectiles = new ArrayList<>();
 	}
 
 	public CrossbowMetaMock(CrossbowMeta meta)
@@ -35,19 +37,20 @@ public class CrossbowMetaMock extends ItemMetaMock implements CrossbowMeta
 	@Override
 	public boolean hasChargedProjectiles()
 	{
-		return this.projectiles != null;
+		return !this.projectiles.isEmpty();
 	}
 
 	@Override
 	public @NotNull List<ItemStack> getChargedProjectiles()
 	{
-		return (this.projectiles == null) ? ImmutableList.of() : ImmutableList.copyOf(this.projectiles);
+		return ImmutableList.copyOf(this.projectiles);
 	}
 
 	@Override
 	public void setChargedProjectiles(@Nullable List<ItemStack> projectiles)
 	{
-		this.projectiles = null;
+		this.projectiles.clear();
+
 		if (projectiles == null)
 		{
 			return;
@@ -65,11 +68,6 @@ public class CrossbowMetaMock extends ItemMetaMock implements CrossbowMeta
 		Preconditions.checkArgument(item != null, "item");
 		Preconditions.checkArgument(item.getType() == Material.FIREWORK_ROCKET || item.getType().name().contains("ARROW"), "Item %s is not an arrow or firework rocket", item);
 
-		if (this.projectiles == null)
-		{
-			this.projectiles = new ArrayList<>();
-		}
-
 		this.projectiles.add(item);
 	}
 
@@ -78,7 +76,7 @@ public class CrossbowMetaMock extends ItemMetaMock implements CrossbowMeta
 	{
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((projectiles == null) ? 0 : projectiles.hashCode());
+		result = prime * result + (projectiles.hashCode());
 		return result;
 	}
 
