@@ -50,7 +50,7 @@ repositories {
 }
 
 dependencies {
-	testImplementation 'com.github.seeseemelk:MockBukkit-v1.18:2.0.0'
+	testImplementation 'com.github.seeseemelk:MockBukkit-v1.18:2.0.1'
 }
 ```
 
@@ -58,7 +58,7 @@ Note: use `v1.13-SNAPSHOT` to test a Bukkit 1.13 plugin or any other version if 
 These branches will not be receiving patches actively, but any issues will be resolved and any pull requests on them will be accepted.
 This is because backporting every single patch on every branch is incredibly time consuming and slows down the development of Mockbukkit.
 
-If you prefer to always have the latest Git version or need a specific commit/branch, you can always use JitPack as your maven repository:
+If you prefer to always have the latest Git version or need a specific commit/branch, you can always use [JitPack](https://jitpack.io/#MockBukkit/MockBukkit) as your maven repository:
 
 ```gradle
 repositories {
@@ -66,7 +66,7 @@ repositories {
 }
 
 dependencies {
-	implementation 'com.github.seeseemelk:MockBukkit:v1.17-SNAPSHOT'
+	testImplementation 'com.github.seeseemelk:MockBukkit:v1.18-SNAPSHOT'
 }
 ```
 
@@ -79,7 +79,7 @@ You won't need to add any additional repositories since MockBukkit is served via
   <dependency>
     <groupId>com.github.seeseemelk</groupId>
     <artifactId>MockBukkit-v1.18</artifactId>
-    <version>2.0.0</version>
+    <version>2.0.1</version>
     <scope>test</scope>
   </dependency>
 </dependencies>

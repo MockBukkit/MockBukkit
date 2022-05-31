@@ -1,9 +1,9 @@
-name: Build
+name: Gradle
 
 on:
-  push:
-    branches: [ v1.* ]
   pull_request:
+    branches: [ v1.* ]
+  push:
     branches: [ v1.* ]
 
 jobs:
@@ -11,38 +11,95 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Validate gradle wrapper
-      uses: gradle/wrapper-validation-action@v1
-    - name: Set up JDK 17
-      uses: actions/setup-java@v1
-      with:
-        java-version: 17
+      - uses: actions/checkout@v3
+      - name: Validate gradle wrapper
+        uses: gradle/wrapper-validation-action@v1
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: 'temurin'
 
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
-    - name: Build with Gradle
-      run: ./gradlew build
-    - name: Run unit tests
-      run: ./gradlew test
+      - name: Restore caches
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/build.gradle', '**/*.gradle*', 'gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-${{ hashFiles('**/build.gradle', '**/*.gradle*' ,'gradle-wrapper.properties') }}
+            ${{ runner.os }}-gradle-
 
-    - name: Store Private key
-      if: startsWith(github.ref, 'refs/heads/v1.') && github.repository == 'MockBukkit/MockBukkit'
-      uses: DamianReeves/write-file-action@v1.0
-      with:
-        path: private.key
-        contents: ${{ secrets.PRIV_KEY }}
-        write-mode: overwrite
-    - name: Publish
-      if: startsWith(github.ref, 'refs/heads/v1.') && github.repository == 'MockBukkit/MockBukkit'
-      env:
-        OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
-        SIGN_KEY: ${{ secrets.PRIV_KEY_PASS }}
-      run: |
-        mkdir -p $HOME/.gnupg
-        echo use-agent >> $HOME/.gnupg/gpg.conf
-        echo pinentry-mode loopback >> $HOME/.gnupg/gpg.conf
-        echo allow-loopback-pinentry >> $HOME/.gnupg/gpg-agent.conf
-        gpg --batch --import private.key
-        gpg --batch --export-secret-keys --passphrase $SIGN_KEY "Sebastiaan de Schaetzen <sebastiaan.de.schaetzen@gmail.com>" > private.gpg
-        ./gradlew publishMockBukkitPublicationToRepositoryRepository -PossrhUsername=seeseemelk -PossrhPassword=$OSSRH_PASSWORD -Psigning.secretKeyRingFile=private.gpg -Psigning.keyId=${{ secrets.PRIV_KEY_ID }} -Psigning.password=$SIGN_KEY
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+      - name: Build with Gradle
+        run: ./gradlew build -x test
+      - name: Run unit tests
+        run: ./gradlew test
+
+      - name: Get merged pull request
+        uses: actions-ecosystem/action-get-merged-pull-request@v1.0.1
+        if: github.event_name == 'push'
+        id: pr
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get release label
+        uses: actions-ecosystem/action-release-label@v1
+        if: ${{ steps.pr.outputs.labels != null }}
+        id: release-label
+        with:
+          label_prefix: 'release/'
+          labels: ${{ steps.pr.outputs.labels }}
+
+      - name: Get latest tag
+        uses: actions-ecosystem/action-get-latest-tag@v1
+        if: ${{ steps.release-label.outputs.level != null }}
+        id: get-latest-tag
+        with:
+          semver_only: true
+
+      - name: Bump version
+        uses: actions-ecosystem/action-bump-semver@v1
+        if: ${{ steps.release-label.outputs.level != null }}
+        id: bump-semver
+        with:
+          current_version: ${{ steps.get-latest-tag.outputs.tag }}
+          level: ${{ steps.release-label.outputs.level }}
+
+      - name: Push tag
+        uses: actions-ecosystem/action-push-tag@v1
+        if: ${{ steps.bump-semver.outputs.new_version != null }}
+        with:
+          tag: ${{ steps.bump-semver.outputs.new_version }}
+          message: '${{ steps.bump-semver.outputs.new_version }}: PR #${{ github.event.pull_request.number }} ${{ github.event.pull_request.title }}'
+
+      - name: Store Private key
+        uses: DamianReeves/write-file-action@v1.0
+        if: ${{ steps.bump-semver.outputs.new_version != null }}
+        with:
+          path: private.key
+          contents: ${{ secrets.PRIV_KEY }}
+          write-mode: overwrite
+
+      - name: Publish
+        if: ${{ steps.bump-semver.outputs.new_version != null }}
+        env:
+          OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          SIGN_KEY: ${{ secrets.PRIV_KEY_PASS }}
+        run: |
+          mkdir -p $HOME/.gnupg
+          echo use-agent >> $HOME/.gnupg/gpg.conf
+          echo pinentry-mode loopback >> $HOME/.gnupg/gpg.conf
+          echo allow-loopback-pinentry >> $HOME/.gnupg/gpg-agent.conf
+          gpg --batch --import private.key
+          gpg --batch --export-secret-keys --passphrase $SIGN_KEY "Sebastiaan de Schaetzen <sebastiaan.de.schaetzen@gmail.com>" > private.gpg
+
+          ./gradlew publishMockBukkitPublicationToRepositoryRepository \
+            -Pmockbukkit.version=$(echo ${{ steps.bump-semver.outputs.new_version }} | sed -e 's:v::') \
+            -PossrhUsername=seeseemelk \
+            -PossrhPassword=$OSSRH_PASSWORD \
+            -Psigning.secretKeyRingFile=private.gpg \
+            -Psigning.keyId=${{ secrets.PRIV_KEY_ID }} \
+            -Psigning.password=$SIGN_KEY

@@ -33,7 +33,6 @@ dependencies {
     implementation 'org.hamcrest:hamcrest-library:2.2'
 
     // General utilities for the project
-    implementation 'commons-io:commons-io:2.11.0'
     implementation 'org.jetbrains:annotations:23.0.0'
 
     // LibraryLoader dependencies
@@ -89,7 +88,7 @@ jacoco {
 }
 
 group = 'com.github.seeseemelk'
-version = gradle.ext.version
+version = property('mockbukkit.version')
 
 publishing {
     publications {
@@ -99,6 +98,7 @@ publishing {
 
             artifact sourcesJar
             artifact javadocJar
+            version = property('mockbukkit.version')
             pom {
                 name = "MockBukkit-v${gradle.ext.apiVersion}"
                 packaging = 'jar'
