@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class FishHookMockTest
+class FishHookMockTest
 {
 
 	private ServerMock server;
@@ -63,11 +63,8 @@ public class FishHookMockTest
 	@Test
 	void setWaitTime_Invalid()
 	{
-		assertThrows(IllegalArgumentException.class, () ->
-		{
-			hook.setMaxWaitTime(5);
-			hook.setMinWaitTime(10);
-		});
+		hook.setMaxWaitTime(5);
+		assertThrows(IllegalArgumentException.class, () -> hook.setMinWaitTime(10));
 	}
 
 	@Test

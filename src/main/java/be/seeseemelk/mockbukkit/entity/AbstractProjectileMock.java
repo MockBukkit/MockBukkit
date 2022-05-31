@@ -15,7 +15,7 @@ public abstract class AbstractProjectileMock extends EntityMock implements Proje
 
 	private boolean doesBounce;
 
-	public AbstractProjectileMock(@NotNull ServerMock server, @NotNull UUID uuid)
+	protected AbstractProjectileMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 		this.doesBounce = false;
