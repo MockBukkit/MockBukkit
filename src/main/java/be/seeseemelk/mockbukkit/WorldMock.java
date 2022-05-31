@@ -216,7 +216,7 @@ public class WorldMock implements World
 
 		Location location = new Location(this, c.x, c.y, c.z);
 		BlockMock block;
-		if (c.y == 0)
+		if (c.y == minHeight)
 		{
 			block = new BlockMock(Material.BEDROCK, location);
 		}
@@ -1104,10 +1104,9 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public ChunkSnapshot getEmptyChunkSnapshot(int x, int z, boolean includeBiome, boolean includeBiomeTempRain)
+	public @NotNull ChunkSnapshot getEmptyChunkSnapshot(int x, int z, boolean includeBiome, boolean includeBiomeTempRain)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return new ChunkSnapshotMock(x, z, getMinHeight(), getMaxHeight(), getName(), getFullTime(), Map.of());
 	}
 
 	@Override
