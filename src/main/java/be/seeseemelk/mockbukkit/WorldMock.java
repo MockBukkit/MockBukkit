@@ -51,6 +51,7 @@ import org.bukkit.entity.Firework;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.entity.Zombie;
@@ -114,6 +115,7 @@ public class WorldMock implements World
 	private boolean storming = false;
 	private long seed = 0;
 	private WorldType worldType = WorldType.NORMAL;
+	private Difficulty difficulty = Difficulty.NORMAL;
 
 	/**
 	 * Creates a new mock world.
@@ -1012,7 +1014,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public <T extends Entity> T spawn(@NotNull Location location, @NotNull Class<T> clazz) throws IllegalArgumentException
+	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz) throws IllegalArgumentException
 	{
 		Validate.notNull(location, "The provided location must not be null.");
 		Validate.notNull(clazz, "The provided class must not be null.");
@@ -1021,11 +1023,16 @@ public class WorldMock implements World
 		entity.setLocation(location);
 		server.registerEntity(entity);
 
+		if (getDifficulty() == Difficulty.PEACEFUL && entity instanceof Monster monster)
+		{
+			monster.remove();
+		}
+
 		return clazz.cast(entity);
 	}
 
 	@Override
-	public <T extends Entity> T spawn(@NotNull Location location, @NotNull Class<T> clazz, @Nullable Consumer<T> function)
+	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz, @Nullable Consumer<T> function)
 	throws IllegalArgumentException
 	{
 		T entity = spawn(location, clazz);
@@ -1216,17 +1223,15 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public Difficulty getDifficulty()
+	public @NotNull Difficulty getDifficulty()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.difficulty;
 	}
 
 	@Override
-	public void setDifficulty(Difficulty difficulty)
+	public void setDifficulty(@NotNull Difficulty difficulty)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.difficulty = difficulty;
 	}
 
 	@Override

@@ -72,9 +72,23 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
+	public void remove()
+	{
+		this.health = 0;
+		alive = false;
+		super.remove();
+	}
+
+	@Override
 	public boolean isDead()
 	{
-		return !alive;
+		return !alive || !super.isValid();
+	}
+
+	@Override
+	public boolean isValid()
+	{
+		return !isDead();
 	}
 
 	@Override
