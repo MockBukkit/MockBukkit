@@ -4,6 +4,8 @@ import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.destroystokyo.paper.entity.Pathfinder;
 import org.bukkit.Location;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Mob;
@@ -12,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
 
 public abstract class MobMock extends LivingEntityMock implements Mob
 {
@@ -167,6 +170,11 @@ public abstract class MobMock extends LivingEntityMock implements Mob
 	 */
 	public void finalizeSpawn()
 	{
+		/* TODO: Unimplemented (#354)
+		this.registerAttribute(Attribute.GENERIC_FOLLOW_RANGE);
+		this.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).addModifier(new AttributeModifier("Random spawn bonus", ThreadLocalRandom.current().nextGaussian() * 0.05D, AttributeModifier.Operation.MULTIPLY_SCALAR_1));
+		 */
+		this.setLeftHanded(ThreadLocalRandom.current().nextFloat() < 0.05F);
 	}
 
 }
