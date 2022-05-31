@@ -92,6 +92,7 @@ public class PluginManagerMock implements PluginManager
 		if (parentTemporaryDirectory == null)
 			return;
 
+		// Delete the temporary directory, from the deepest file to the root.
 		try (Stream<Path> walk = Files.walk(parentTemporaryDirectory.toPath()))
 		{
 			walk.sorted(Comparator.reverseOrder())
