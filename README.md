@@ -140,8 +140,8 @@ private MyPlugin plugin;
 @Before
 public void setUp()
 {
-    server=MockBukkit.mock();
-    plugin=(MyPlugin)MockBukkit.load(MyPlugin.class);
+    server = MockBukkit.mock();
+    plugin = MockBukkit.load(MyPlugin.class);
 }
 
 @After
