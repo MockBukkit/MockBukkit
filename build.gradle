@@ -33,7 +33,6 @@ dependencies {
     implementation 'org.hamcrest:hamcrest-library:2.2'
 
     // General utilities for the project
-    implementation 'commons-io:commons-io:2.11.0'
     implementation 'org.jetbrains:annotations:23.0.0'
 
     // LibraryLoader dependencies
@@ -62,10 +61,10 @@ artifacts {
 
 def isFork = isFork()
 
-signing {
-    required { !isFork && System.getenv('JITPACK') == null }
-    sign publishing.publications
-}
+//signing {
+//    required { !isFork && System.getenv('JITPACK') == null }
+//    sign publishing.publications
+//}
 
 jacocoTestReport {
     reports {
