@@ -61,10 +61,10 @@ artifacts {
 
 def isFork = isFork()
 
-//signing {
-//    required { !isFork && System.getenv('JITPACK') == null }
-//    sign publishing.publications
-//}
+signing {
+    required { !isFork && System.getenv('JITPACK') == null }
+    sign publishing.publications
+}
 
 jacocoTestReport {
     reports {
