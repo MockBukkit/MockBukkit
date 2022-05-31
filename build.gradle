@@ -33,7 +33,6 @@ dependencies {
     implementation 'org.hamcrest:hamcrest-library:2.2'
 
     // General utilities for the project
-    implementation 'commons-io:commons-io:2.11.0'
     implementation 'org.jetbrains:annotations:23.0.0'
 
     // LibraryLoader dependencies
