@@ -126,7 +126,7 @@ public abstract class AbstractHorseMock extends AnimalsMock implements AbstractH
 	@Override
 	public boolean isEatingHaystack()
 	{
-		return isEating;
+		return this.isEating;
 	}
 
 	@Override
@@ -143,21 +143,23 @@ public abstract class AbstractHorseMock extends AnimalsMock implements AbstractH
 	}
 
 	@Override
+	@Deprecated
 	public boolean isEatingGrass()
 	{
-		return isEating;
+		return this.isEatingHaystack();
 	}
 
 	@Override
+	@Deprecated
 	public void setEatingGrass(boolean eating)
 	{
-		this.isEating = eating;
+		this.setEatingHaystack(eating);
 	}
 
 	@Override
 	public boolean isRearing()
 	{
-		return rearing;
+		return this.rearing;
 	}
 
 	@Override
@@ -169,7 +171,7 @@ public abstract class AbstractHorseMock extends AnimalsMock implements AbstractH
 	@Override
 	public boolean isEating()
 	{
-		return isMouthOpen;
+		return this.isMouthOpen;
 	}
 
 	@Override
