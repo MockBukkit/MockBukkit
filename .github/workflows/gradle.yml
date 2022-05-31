@@ -95,10 +95,8 @@ jobs:
           gpg --batch --import private.key
           gpg --batch --export-secret-keys --passphrase $SIGN_KEY "Sebastiaan de Schaetzen <sebastiaan.de.schaetzen@gmail.com>" > private.gpg
 
-          NEW_VERSION=$(echo ${{ github.event.push.ref }} | sed -e 's:v::')
-
           ./gradlew publishMockBukkitPublicationToRepositoryRepository \
-            -Pmockbukkit.version=$NEW_VERSION \
+            -Pmockbukkit.version=$(echo ${{ github.event.push.ref }} | sed -e 's:v::') \
             -PossrhUsername=seeseemelk \
             -PossrhPassword=$OSSRH_PASSWORD \
             -Psigning.secretKeyRingFile=private.gpg \
