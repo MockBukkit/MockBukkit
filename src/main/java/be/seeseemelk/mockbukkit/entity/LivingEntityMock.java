@@ -88,9 +88,23 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
+	public void remove()
+	{
+		this.health = 0;
+		alive = false;
+		super.remove();
+	}
+
+	@Override
 	public boolean isDead()
 	{
-		return !alive;
+		return !alive || !super.isValid();
+	}
+
+	@Override
+	public boolean isValid()
+	{
+		return !isDead();
 	}
 
 	@Override
@@ -413,8 +427,10 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
+	@Deprecated
 	public boolean addPotionEffect(@NotNull PotionEffect effect, boolean force)
 	{
+		AsyncCatcher.catchOp("effect add");
 		if (effect != null)
 		{
 			// Bukkit now allows multiple effects of the same type,

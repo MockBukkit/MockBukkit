@@ -1,5 +1,11 @@
 package be.seeseemelk.mockbukkit.entity;
 
+import be.seeseemelk.mockbukkit.AsyncCatcher;
+import com.google.common.base.Preconditions;
+import org.bukkit.Bukkit;
+import org.bukkit.EntityEffect;
+import org.bukkit.Location;
+import org.bukkit.World;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.command.MessageTarget;
@@ -70,6 +76,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private float fallDistance;
 	private int fireTicks = -20;
 	private int maxFireTicks = 20;
+	private boolean removed = false;
 	private EntityDamageEvent lastDamageEvent;
 
 	protected EntityMock(@NotNull ServerMock server, @NotNull UUID uuid)
@@ -500,6 +507,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public @NotNull List<Entity> getNearbyEntities(double x, double y, double z)
 	{
+		AsyncCatcher.catchOp("getNearbyEntities");
 		// TODO Auto-generated constructor stub
 		throw new UnimplementedOperationException();
 	}
@@ -590,22 +598,19 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public void remove()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
-
+		this.removed = true;
 	}
 
 	@Override
 	public boolean isDead()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return !removed;
 	}
 
 	@Override
 	public boolean isValid()
 	{
-		return !isDead();
+		return !removed;
 	}
 
 	@Override

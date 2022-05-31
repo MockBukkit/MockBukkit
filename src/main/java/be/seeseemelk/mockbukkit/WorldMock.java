@@ -56,6 +56,7 @@ import org.bukkit.entity.ItemFrame;
 import org.bukkit.entity.LeashHitch;
 import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.entity.SpawnCategory;
@@ -124,6 +125,7 @@ public class WorldMock implements World
 	private boolean storming = false;
 	private long seed = 0;
 	private WorldType worldType = WorldType.NORMAL;
+	private Difficulty difficulty = Difficulty.NORMAL;
 
 	/**
 	 * Creates a new mock world.
@@ -534,8 +536,7 @@ public class WorldMock implements World
 	@Override
 	public void loadChunk(Chunk chunk)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		loadChunk(chunk.getX(), chunk.getZ());
 	}
 
 	@Override
@@ -556,13 +557,13 @@ public class WorldMock implements World
 	@Override
 	public void loadChunk(int x, int z)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		loadChunk(x, z, true);
 	}
 
 	@Override
 	public boolean loadChunk(int x, int z, boolean generate)
 	{
+		AsyncCatcher.catchOp("chunk load");
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
@@ -570,20 +571,19 @@ public class WorldMock implements World
 	@Override
 	public boolean unloadChunk(Chunk chunk)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.unloadChunk(chunk.getX(), chunk.getZ());
 	}
 
 	@Override
 	public boolean unloadChunk(int x, int z)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return unloadChunk(x, z, true);
 	}
 
 	@Override
 	public boolean unloadChunk(int x, int z, boolean save)
 	{
+		AsyncCatcher.catchOp("chunk unload");
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
@@ -591,6 +591,7 @@ public class WorldMock implements World
 	@Override
 	public boolean unloadChunkRequest(int x, int z)
 	{
+		AsyncCatcher.catchOp("chunk unload");
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
@@ -599,6 +600,7 @@ public class WorldMock implements World
 	@Deprecated
 	public boolean regenerateChunk(int x, int z)
 	{
+		AsyncCatcher.catchOp("chunk regenerate");
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
@@ -757,6 +759,7 @@ public class WorldMock implements World
 
 	private <T extends Entity> EntityMock mockEntity(@NotNull Location location, @NotNull Class<T> clazz, boolean randomizeData)
 	{
+		AsyncCatcher.catchOp("entity add");
 		return switch (clazz)
 		{
 		case Class<T> c && c == ArmorStand.class -> new ArmorStandMock(server, UUID.randomUUID());
@@ -1120,6 +1123,7 @@ public class WorldMock implements World
 	@Override
 	public void save()
 	{
+		AsyncCatcher.catchOp("world save");
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
@@ -1295,17 +1299,15 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public Difficulty getDifficulty()
+	public @NotNull Difficulty getDifficulty()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.difficulty;
 	}
 
 	@Override
-	public void setDifficulty(Difficulty difficulty)
+	public void setDifficulty(@NotNull Difficulty difficulty)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.difficulty = difficulty;
 	}
 
 	@Override
