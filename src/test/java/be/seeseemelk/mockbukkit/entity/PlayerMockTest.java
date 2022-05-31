@@ -12,11 +12,16 @@ import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryViewMock;
 import be.seeseemelk.mockbukkit.inventory.SimpleInventoryViewMock;
 import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
+import com.google.common.io.ByteArrayDataOutput;
+import com.google.common.io.ByteStreams;
 import org.bukkit.Bukkit;
+import org.bukkit.Effect;
 import org.bukkit.GameMode;
 import org.bukkit.GameRule;
+import org.bukkit.Instrument;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Note;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
@@ -347,6 +352,33 @@ class PlayerMockTest
 		assertEquals("argA", plugin.commandArguments[0]);
 		assertEquals("argB", plugin.commandArguments[1]);
 		assertSame(player, plugin.commandSender);
+	}
+
+	@Test
+	void breakBlock_Survival_BlockBroken()
+	{
+		MockBukkit.load(TestPlugin.class);
+		player.setGameMode(GameMode.SURVIVAL);
+		BlockMock block = (BlockMock) player.getWorld().getBlockAt(0, 0, 0);
+		block.setType(Material.STONE);
+		boolean broken = player.breakBlock(block);
+		assertTrue(broken);
+		server.getPluginManager().assertEventFired(BlockBreakEvent.class);
+		block.assertType(Material.AIR);
+	}
+
+	@Test
+	void breakBlock_Creative_Sword_BlockNotBroken()
+	{
+		MockBukkit.load(TestPlugin.class);
+		player.setGameMode(GameMode.CREATIVE);
+		player.setItemInHand(new ItemStack(Material.DIAMOND_SWORD));
+		BlockMock block = (BlockMock) player.getWorld().getBlockAt(0, 0, 0);
+		block.setType(Material.STONE);
+		boolean broken = player.breakBlock(block);
+		assertFalse(broken);
+		server.getPluginManager().assertEventFired(BlockBreakEvent.class);
+		block.assertType(Material.STONE);
 	}
 
 	@Test
@@ -993,6 +1025,30 @@ class PlayerMockTest
 	}
 
 	@Test
+	void testPlayNote_NewMethod()
+	{
+		int note = 10;
+		player.playNote(player.getEyeLocation(), Instrument.BANJO, new Note(note));
+		player.assertSoundHeard(Sound.BLOCK_NOTE_BLOCK_BANJO, audio ->
+		{
+			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
+			&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
+		});
+	}
+
+	@Test
+	void testPlayNote_OldMethod()
+	{
+		int note = 10;
+		player.playNote(player.getEyeLocation(), (byte) 0, (byte) note);
+		player.assertSoundHeard(Sound.BLOCK_NOTE_BLOCK_HARP, audio ->
+		{
+			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
+			&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
+		});
+	}
+
+	@Test
 	void testCloseInventoryEvenFired()
 	{
 		Inventory inv = server.createInventory(null, 36);
@@ -1385,6 +1441,42 @@ class PlayerMockTest
 	}
 
 	@Test
+	void testPlayerPlayEffect()
+	{
+		player.playEffect(player.getLocation(), Effect.STEP_SOUND, Material.STONE);
+	}
+
+	@Test
+	void testPlayerPlayEffect_NullData()
+	{
+		assertThrows(IllegalArgumentException.class, () ->
+		{
+			player.playEffect(player.getLocation(), Effect.STEP_SOUND, null);
+		});
+	}
+
+	@Test
+	void testPlayerPlayEffect_IncorrectData()
+	{
+		assertThrows(IllegalArgumentException.class, () ->
+		{
+			player.playEffect(player.getLocation(), Effect.STEP_SOUND, 1.0f);
+		});
+	}
+
+	@SuppressWarnings("UnstableApiUsage")
+	void testPlayerSendPluginMessage()
+	{
+		MockPlugin plugin = MockBukkit.createMockPlugin();
+		server.getMessenger().registerOutgoingPluginChannel(plugin, "BungeeCord");
+		ByteArrayDataOutput out = ByteStreams.newDataOutput();
+		out.writeUTF("Forward");
+		out.writeUTF("ALL");
+		out.writeUTF("MockBukkit");
+		player.sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
+	}
+
+	@Test
 	void testPlayerSerialization()
 	{
 		Map<String, Object> serialized = player.serialize();
@@ -1392,13 +1484,13 @@ class PlayerMockTest
 	}
 
 	@Test
-	public void testPlayerSpawnParticle_Correct_DataType()
+	void testPlayerSpawnParticle_Correct_DataType()
 	{
 		player.spawnParticle(Particle.ITEM_CRACK, player.getLocation(), 1, new ItemStack(Material.STONE));
 	}
 
 	@Test
-	public void testPlayerSpawnParticle_Incorrect_DataType()
+	void testPlayerSpawnParticle_Incorrect_DataType()
 	{
 		assertThrows(IllegalArgumentException.class, () ->
 		{
