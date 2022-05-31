@@ -192,7 +192,7 @@ Another feature is the easy creation of mock worlds.
 One can make a superflat world using one simple command:
 
 ```java
-World world=new WorldMock(Material material,int heightUntilAir)
+World world = new WorldMock(Material material, int heightUntilAir)
 ```
 
 Using `Material.DIRT` and 3 as heightUntilAir will create a superflat world with a height of a 128.
