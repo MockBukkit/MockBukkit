@@ -129,7 +129,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	private GameMode gamemode = GameMode.SURVIVAL;
 	private GameMode previousGamemode = gamemode;
 	private Component displayName = null;
-	private String playerListName = null;
+	private Component playerListName = null;
 	private int expTotal = 0;
 	private float exp = 0;
 	private int foodLevel = 20;
@@ -1172,14 +1172,14 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Deprecated
 	public @NotNull String getPlayerListName()
 	{
-		return this.playerListName == null ? getName() : this.playerListName;
+		return this.playerListName == null ? getName() : LegacyComponentSerializer.legacySection().serialize(this.playerListName);
 	}
 
 	@Override
 	@Deprecated
 	public void setPlayerListName(String name)
 	{
-		this.playerListName = name;
+		this.playerListName = LegacyComponentSerializer.legacySection().deserialize(name);
 	}
 
 	@Override
