@@ -1,20 +1,7 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.MockPlugin;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
@@ -29,8 +16,19 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.MockPlugin;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ItemMetaMockTest
 {
@@ -578,27 +576,19 @@ class ItemMetaMockTest
 	{
 		// Tests for displayName, Lore, enchants, unbreakable status, and damage
 		meta.setDisplayName("Test name");
-		meta.setLore(Arrays.asList("Test lore"));
+		meta.setLore(List.of("Test lore"));
 		meta.setUnbreakable(true);
 		meta.setDamage(5);
 		meta.setRepairCost(3);
 
-		Map<String, Object> expected = new HashMap<>();
-		expected.put("displayName", "Test name");
-		expected.put("lore", Arrays.asList("Test lore"));
-		expected.put("unbreakable", true);
-		expected.put("damage", 5);
-		expected.put("repairCost", 3);
-
 		Map<String, Object> actual = meta.serialize();
 
 		// Perform tests
-		assertEquals(expected.get("displayName"), actual.get("displayName"));
-		assertEquals(expected.get("lore"), actual.get("lore"));
-		assertEquals(expected.get("unbreakable"), actual.get("unbreakable"));
-		assertEquals(expected.get("damage"), actual.get("damage"));
-		assertEquals(expected.get("repairCost"), actual.get("repairCost"));
-
+		assertEquals("{\"text\":\"Test name\"}", actual.get("displayName"));
+		assertEquals(List.of("{\"text\":\"Test lore\"}"), actual.get("lore"));
+		assertEquals(true, actual.get("unbreakable"));
+		assertEquals(5, actual.get("damage"));
+		assertEquals(3, actual.get("repairCost"));
 	}
 
 	@Test
@@ -615,7 +605,7 @@ class ItemMetaMockTest
 		ItemMetaMock modified = new ItemMetaMock();
 
 		modified.setDisplayName("Test name");
-		modified.setLore(Arrays.asList("Test lore"));
+		modified.setLore(List.of("Test lore"));
 		modified.setUnbreakable(true);
 		modified.setDamage(5);
 		modified.setRepairCost(3);

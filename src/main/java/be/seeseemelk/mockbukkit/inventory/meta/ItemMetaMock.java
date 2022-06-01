@@ -6,6 +6,7 @@ import com.destroystokyo.paper.Namespaced;
 import com.google.common.collect.Multimap;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.bungeecord.BungeeComponentSerializer;
+import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.Material;
@@ -32,19 +33,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static java.util.Objects.nonNull;
 
 public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 {
 
-	/*
-	 * If you add a new field, you need to add it to #hashCode, #equals, #serialize, and #deserialize.
-	 * If it's a mutable object, it also needs to be handled in #clone.
-	 */
-	private Component displayName = null;
+	// We store the raw JSON representation of all text data. See SPIGOT-5063, SPIGOT-5656, SPIGOT-5304
+	private String displayName = null;
 	private String localizedName = null;
-	private List<Component> lore = null;
+	private List<String> lore = null;
 	private int damage = 0;
 	private int repairCost = 0;
 	private Map<Enchantment, Integer> enchants = new HashMap<>();
@@ -66,11 +65,11 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 
 		if (meta.hasDisplayName())
 		{
-			displayName = meta.displayName();
+			displayName = GsonComponentSerializer.gson().serialize(meta.displayName());
 		}
 		if (meta.hasLore())
 		{
-			lore = meta.lore();
+			lore = meta.lore().stream().map(c -> GsonComponentSerializer.gson().serialize(c)).collect(Collectors.toList());
 		}
 		if (meta instanceof Damageable)
 		{
@@ -108,43 +107,43 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public boolean hasDisplayName()
 	{
-		return nonNull(displayName);
+		return this.displayName != null;
 	}
 
 	@Override
 	public @Nullable Component displayName()
 	{
-		return this.displayName;
+		return this.displayName == null ? null : GsonComponentSerializer.gson().deserialize(this.displayName);
 	}
 
 	@Override
 	public void displayName(@Nullable Component displayName)
 	{
-		this.displayName = displayName;
+		this.displayName = GsonComponentSerializer.gson().serialize(displayName);
 	}
 
 	@Override
 	public String getDisplayName()
 	{
-		return LegacyComponentSerializer.legacySection().serialize(this.displayName);
+		return this.displayName == null ? null : LegacyComponentSerializer.legacySection().serialize(GsonComponentSerializer.gson().deserialize(this.displayName));
 	}
 
 	@Override
 	public @NotNull BaseComponent[] getDisplayNameComponent()
 	{
-		return BungeeComponentSerializer.get().serialize(this.displayName);
+		return BungeeComponentSerializer.get().serialize(GsonComponentSerializer.gson().deserialize(this.displayName));
 	}
 
 	@Override
 	public void setDisplayName(String name)
 	{
-		this.displayName = LegacyComponentSerializer.legacySection().deserialize(name);
+		this.displayName = name == null ? null : GsonComponentSerializer.gson().serialize(LegacyComponentSerializer.legacySection().deserialize(name));
 	}
 
 	@Override
 	public void setDisplayNameComponent(@Nullable BaseComponent[] components)
 	{
-		this.displayName = BungeeComponentSerializer.get().deserialize(Arrays.stream(components).filter(Objects::nonNull).toArray(BaseComponent[]::new));
+		this.displayName = GsonComponentSerializer.gson().serialize(BungeeComponentSerializer.get().deserialize(Arrays.stream(components).filter(Objects::nonNull).toArray(BaseComponent[]::new)));
 	}
 
 	/**
@@ -165,7 +164,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		{
 			for (int i = 0; i < lore.size(); i++)
 			{
-				if (!lore.get(i).equals(otherLore.get(i)))
+				if (!GsonComponentSerializer.gson().deserialize(lore.get(i)).equals(otherLore.get(i)))
 					return false;
 			}
 			return true;
@@ -186,7 +185,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		if (displayName != null)
 		{
 			if (meta.hasDisplayName())
-				return displayName.equals(meta.displayName());
+				return GsonComponentSerializer.gson().deserialize(displayName).equals(meta.displayName());
 			else
 				return false;
 		}
@@ -378,7 +377,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public @Nullable List<Component> lore()
 	{
-		return this.lore;
+		return this.lore.stream().map(s -> GsonComponentSerializer.gson().deserialize(s)).collect(Collectors.toList());
 	}
 
 	@Override
@@ -386,7 +385,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	{
 		if (lore != null && !lore.isEmpty())
 		{
-			this.lore = new ArrayList<>(lore);
+			this.lore = new ArrayList<>(lore.stream().map(s -> GsonComponentSerializer.gson().serialize(s)).toList());
 		}
 		else
 		{
@@ -397,13 +396,13 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public @Nullable List<String> getLore()
 	{
-		return this.lore == null ? null : this.lore.stream().map(s -> LegacyComponentSerializer.legacySection().serialize(s)).toList();
+		return this.lore == null ? null : this.lore.stream().map(s -> LegacyComponentSerializer.legacySection().serialize(GsonComponentSerializer.gson().deserialize(s))).collect(Collectors.toList());
 	}
 
 	@Override
 	public @Nullable List<BaseComponent[]> getLoreComponents()
 	{
-		return this.lore.stream().map(c -> BungeeComponentSerializer.get().serialize(c)).toList();
+		return this.lore.stream().map(c -> BungeeComponentSerializer.get().serialize(GsonComponentSerializer.gson().deserialize(c))).collect(Collectors.toList());
 	}
 
 	@Override
@@ -411,7 +410,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	{
 		if (lore != null && !lore.isEmpty())
 		{
-			this.lore = lore.stream().map(s -> LegacyComponentSerializer.legacySection().deserialize(s).asComponent()).toList();
+			this.lore = lore.stream().map(s -> GsonComponentSerializer.gson().serialize(LegacyComponentSerializer.legacySection().deserialize(s).asComponent())).collect(Collectors.toList());
 		}
 		else
 		{
@@ -452,7 +451,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		}
 		for (int i = 0; i < this.lore.size(); i++)
 		{
-			if (this.lore.get(i).equals(lines.get(i)))
+			if (GsonComponentSerializer.gson().deserialize(this.lore.get(i)).equals(lines.get(i)))
 				continue;
 			throw new AssertionError(String.format("Line %d should be '%s' but was '%s'", i, lines.get(i), this.lore.get(i)));
 		}
@@ -551,8 +550,8 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	{
 		ItemMetaMock serialMock = new ItemMetaMock();
 
-		serialMock.displayName = (Component) args.get("displayName");
-		serialMock.lore = (List<Component>) args.get("lore");
+		serialMock.displayName = (String) args.get("displayName");
+		serialMock.lore = (List<String>) args.get("lore");
 		serialMock.localizedName = (String) args.get("localizedName");
 		serialMock.enchants = (Map<Enchantment, Integer>) args.get("enchants");
 		serialMock.hideFlags = (Set<ItemFlag>) args.get("itemFlags");
@@ -828,4 +827,5 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
+
 }

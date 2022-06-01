@@ -33,8 +33,10 @@ class PlayerMessagingTest
 	@Test
 	void assertSaid_CorrectMessage_spigot_api_DoesNotAssert()
 	{
+		// With plain Bungee components, this would return '§fSpigot message' but
+		// since the leading colour is white, Adventure strips that away.
 		sender.spigot().sendMessage(TextComponent.fromLegacyText("Spigot message"));
-		sender.assertSaid(ChatColor.COLOR_CHAR + "fSpigot message");
+		sender.assertSaid("Spigot message");
 	}
 
 	@Test
