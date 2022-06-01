@@ -55,16 +55,6 @@ sourceCompatibility = gradle.ext.javaVersion
 targetCompatibility = gradle.ext.javaVersion
 tasks.withType(JavaCompile) {
     options.release.set(gradle.ext.javaVersion)
-    options.compilerArgs += "--enable-preview"
-}
-
-tasks.withType(Test) {
-    jvmArgs += "--enable-preview"
-}
-
-javadoc.options {
-    addBooleanOption('-enable-preview', true)
-    addStringOption('-release', "${gradle.ext.javaVersion}")
 }
 
 artifacts {
