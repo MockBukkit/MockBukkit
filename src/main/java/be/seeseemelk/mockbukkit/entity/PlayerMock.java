@@ -250,7 +250,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		Bukkit.getPluginManager().callEvent(event);
 		if (event.isCancelled())
 		{
-			blockState.update(true);
+			blockState.update(true, false);
 		}
 		return event;
 	}
