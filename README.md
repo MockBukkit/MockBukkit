@@ -3,8 +3,8 @@
     <a href="https://github.com/MockBukkit/MockBukkit/actions/">
         <img alt="Build Status" src="https://github.com/MockBukkit/MockBukkit/workflows/Build/badge.svg?event=push" />
     </a>
-    <a href="https://mockbukkit.readthedocs.io/en/latest/?badge=latest">
-        <img alt="Documentation Status" src="https://readthedocs.org/projects/mockbukkit/badge/?version=latest" />
+    <a href="https://mockbukkit.readthedocs.io/en/v1.18/?badge=v1.18">
+        <img alt="Documentation Status" src="https://readthedocs.org/projects/mockbukkit/badge/?version=v1.18" />
     </a>
     <a href="https://search.maven.org/search?q=MockBukkit">
         <img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.github.seeseemelk/MockBukkit-v1.18?color=1bcc94&logo=apache-maven" />
