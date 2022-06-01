@@ -836,7 +836,7 @@ public class WorldMock implements World
 		boolean canceled; // Here for future implementation (see below)
 
 		if (entity instanceof LivingEntity living && !(entity instanceof Player)) {
-			/* Not implemented
+			/* getAllowAnimals and getAllowMonsters aren't implemented yet
 			boolean isAnimal = entity instanceof Animals || entity instanceof WaterMob || entity instanceof Golem;
 			boolean isMonster = entity instanceof Monster || entity instanceof Ghast || entity instanceof Slime;
 			if (reason != CreatureSpawnEvent.SpawnReason.CUSTOM)
