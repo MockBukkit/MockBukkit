@@ -51,8 +51,10 @@ task sourcesJar(type: Jar) {
     from sourceSets.main.allSource
 }
 
+sourceCompatibility = gradle.ext.javaVersion
+targetCompatibility = gradle.ext.javaVersion
 tasks.withType(JavaCompile) {
-    options.release.set(17)
+    options.release.set(gradle.ext.javaVersion)
 }
 
 artifacts {
