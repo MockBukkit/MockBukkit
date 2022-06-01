@@ -391,7 +391,7 @@ public class WorldMock implements World
 	{
 		return server.getEntities().stream()
 				.filter(entity -> entity.getWorld() == this)
-//				.filter(EntityMock::isValid) Not implemented
+				.filter(EntityMock::isValid)
 				.collect(Collectors.toList());
 	}
 
