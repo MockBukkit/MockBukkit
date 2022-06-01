@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.entity;
 
+import be.seeseemelk.mockbukkit.AsyncCatcher;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
@@ -408,6 +409,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public InventoryView openInventory(@NotNull Inventory inventory)
 	{
+		AsyncCatcher.catchOp("open inventory");
 		closeInventory();
 		inventoryView = new PlayerInventoryViewMock(this, inventory);
 		return inventoryView;
