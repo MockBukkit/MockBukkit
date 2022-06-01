@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.entity;
 
 import java.util.UUID;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ExperienceOrb;
@@ -55,21 +56,21 @@ public class ExperienceOrbMock extends EntityMock implements ExperienceOrb
 	public @Nullable UUID getTriggerEntityId()
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public @Nullable UUID getSourceEntityId()
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public @NotNull SpawnReason getSpawnReason()
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 }

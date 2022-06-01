@@ -449,14 +449,14 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	public @Nullable Component customName()
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public void customName(@Nullable Component customName)
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -919,7 +919,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	public @NotNull Component name()
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	// Paper start
