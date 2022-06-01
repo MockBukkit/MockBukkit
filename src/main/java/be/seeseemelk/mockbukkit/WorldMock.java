@@ -905,8 +905,8 @@ public class WorldMock implements World
 	public List<LivingEntity> getLivingEntities()
 	{
 		return getEntities().stream()
-				.filter(entity -> entity instanceof LivingEntity)
-				.map(entity -> (LivingEntity) entity)
+				.filter(LivingEntity.class::isInstance)
+				.map(LivingEntity.class::cast)
 				.collect(Collectors.toList());
 	}
 
