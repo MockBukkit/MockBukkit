@@ -1,9 +1,8 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import java.util.Map;
-import java.util.UUID;
-import java.util.LinkedHashMap;
-
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
@@ -14,18 +13,15 @@ import org.bukkit.profile.PlayerProfile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * A Mock specifically for {@link OfflinePlayer}. Not interchangeable with {@link PlayerMock}.
  *
- *
  * @author TheBusyBiscuit
- *
  * @see PlayerMock
- *
  */
 public class OfflinePlayerMock implements OfflinePlayer
 {
@@ -288,7 +284,7 @@ public class OfflinePlayerMock implements OfflinePlayer
 	}
 
 	@Override
-	public PlayerProfile getPlayerProfile()
+	public @NotNull PlayerProfile getPlayerProfile()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

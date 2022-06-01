@@ -4,5 +4,6 @@
     ],
     "labels": [
         "release/none"
-    ]
+    ],
+    "dependencyDashboard": false
 }
