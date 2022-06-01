@@ -15,7 +15,6 @@ import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.hover.content.Content;
 import org.bukkit.Color;
 import org.bukkit.Material;
-import org.bukkit.block.data.Rotatable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemFactory;
@@ -174,8 +173,7 @@ public class ItemFactoryMock implements ItemFactory
 	@Override
 	public @NotNull Component displayName(@NotNull ItemStack itemStack)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return itemStack.displayName();
 	}
 
 	@Override
