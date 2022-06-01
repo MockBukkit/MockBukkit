@@ -7,6 +7,8 @@ import be.seeseemelk.mockbukkit.command.MessageTarget;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
 import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
 import com.google.common.base.Preconditions;
+import net.kyori.adventure.audience.MessageType;
+import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
@@ -66,7 +68,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private boolean customNameVisible = false;
 	private boolean invulnerable;
 	private boolean glowingFlag = false;
-	private final Queue<String> messages = new LinkedTransferQueue<>();
+	private final Queue<Component> messages = new LinkedTransferQueue<>();
 	private final Set<PermissionAttachment> permissionAttachments = new HashSet<>();
 	private Vector velocity = new Vector(0, 0, 0);
 	private float fallDistance;
@@ -313,7 +315,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public void sendMessage(UUID sender, @NotNull String message)
 	{
-		messages.add(message);
+		sendMessage(sender == null ? Identity.nil() : Identity.identity(sender), LegacyComponentSerializer.legacySection().deserialize(message), MessageType.SYSTEM);
 	}
 
 	@Override
@@ -325,8 +327,18 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		}
 	}
 
+	public void sendMessage(final @NotNull Identity source, final @NotNull Component message, final @NotNull MessageType type)
+	{
+		this.messages.add(message);
+	}
+
 	@Override
 	public String nextMessage()
+	{
+		return LegacyComponentSerializer.legacySection().serialize(messages.poll());
+	}
+
+	public Component nextComponentMessage()
 	{
 		return messages.poll();
 	}
