@@ -5,5 +5,5 @@
     "labels": [
         "release/none"
     ],
-    "dependencyDashboard": true
+    "dependencyDashboard": false
 }
