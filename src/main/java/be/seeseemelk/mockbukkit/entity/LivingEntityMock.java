@@ -602,7 +602,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public void setSwimming(boolean swimming)
 	{
-		if (/*this.isValid() &&*/ this.isSwimming() != swimming)
+		if (this.isValid() && this.isSwimming() != swimming)
 		{
 			EntityToggleSwimEvent event = new EntityToggleSwimEvent(this, swimming);
 			Bukkit.getPluginManager().callEvent(event);

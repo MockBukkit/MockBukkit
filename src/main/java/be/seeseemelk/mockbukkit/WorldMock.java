@@ -860,7 +860,7 @@ public class WorldMock implements World
 			canceled = new EntitySpawnEvent(entity).callEvent();
 		}
 
-		/* Not implemented
+		/* EntityMock#getPassengers() and #getVehicle() isn't implemented
 		if (canceled || entity.isValid())
 		{
 			Entity vehicle = entity.getVehicle();
