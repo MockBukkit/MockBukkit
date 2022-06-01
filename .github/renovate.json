@@ -1,8 +1,9 @@
 {
     "extends": [
-        "config:base", ":dependencyDashboardApproval"
+        "config:base"
     ],
     "labels": [
         "release/none"
-    ]
+    ],
+    "dependencyDashboard": true
 }
