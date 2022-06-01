@@ -1241,6 +1241,13 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
+	public void kick()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public void kick(@Nullable Component message)
 	{
 		// TODO Auto-generated method stub
