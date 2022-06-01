@@ -627,7 +627,7 @@ class PlayerMockTest
 	void getDisplayName_Default_SameAsPlayerUsername()
 	{
 		assertEquals(player.getName(), player.getDisplayName());
-		assertEquals(player.getDisplayName(), player.getCustomName());
+		assertNotEquals(player.getDisplayName(), player.getCustomName());
 	}
 
 	@Test
@@ -636,8 +636,7 @@ class PlayerMockTest
 		player.setDisplayName("Some Display Name");
 		player.setCustomName("Some Custom Name");
 		assertEquals("Some Display Name", player.getDisplayName());
-		assertEquals("Some Display Name", player.getCustomName());
-
+		assertEquals("Some Custom Name", player.getCustomName());
 	}
 
 	@Test
