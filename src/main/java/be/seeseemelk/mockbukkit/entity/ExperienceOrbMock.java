@@ -3,11 +3,9 @@ package be.seeseemelk.mockbukkit.entity;
 import java.util.UUID;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ExperienceOrb;
-import org.bukkit.entity.SpawnCategory;
 import org.jetbrains.annotations.NotNull;
 
 import be.seeseemelk.mockbukkit.ServerMock;
@@ -37,7 +35,7 @@ public class ExperienceOrbMock extends EntityMock implements ExperienceOrb
 	}
 
 	@Override
-	public EntityType getType()
+	public @NotNull EntityType getType()
 	{
 		return EntityType.EXPERIENCE_ORB;
 	}
@@ -75,31 +73,4 @@ public class ExperienceOrbMock extends EntityMock implements ExperienceOrb
 		throw new UnimplementedOperationException();
 	}
 
-	@Override
-	public @NotNull SpawnCategory getSpawnCategory()
-	{
-		return SpawnCategory.MISC;
-	}
-
-
-	@Override
-	public @NotNull Component name()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable Component customName()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void customName(@Nullable Component customName)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
 }
