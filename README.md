@@ -45,18 +45,33 @@ It aims to be provide complete mock implementation of CraftBukkit that can be co
 
 MockBukkit can easily be included in your project using either Maven or gradle.
 
-### Adding MockBukkit via gradle
+<details>
+<summary><h3>Adding MockBukkit via Gradle</h3></summary>
 
-MockBukkit can easily be included in gradle using mavenCentral.
-
+MockBukkit can easily be included in Gradle using the Maven Central and PaperMC repositories.
+Make sure to update the version as necessary.
 ```gradle
 repositories {
-	mavenCentral()
-	maven { url 'https://hub.spigotmc.org/nexus/content/repositories/public/' }
+    mavenCentral()
+    maven { url 'https://repo.papermc.io/repository/maven-public/' }
 }
 
 dependencies {
-	testImplementation 'com.github.seeseemelk:MockBukkit-v1.18:2.3.0'
+    testImplementation 'com.github.seeseemelk:MockBukkit-v1.18:2.7.0'
+}
+```
+
+If you prefer to always have the latest Git version or need a specific commit/branch, you can always use [JitPack](https://jitpack.io/#MockBukkit/MockBukkit) as your
+maven repository:
+
+```gradle
+repositories {
+    maven { url 'https://jitpack.io' }
+    maven { url 'https://repo.papermc.io/repository/maven-public/' }
+}
+
+dependencies {
+    testImplementation 'com.github.MockBukkit:MockBukkit:v1.18-SNAPSHOT'
 }
 ```
 
@@ -64,35 +79,56 @@ Note: use `v1.13-SNAPSHOT` to test a Bukkit 1.13 plugin or any other version if
 the [branch](https://github.com/MockBukkit/MockBukkit/branches) exists.
 These branches will not be receiving patches actively, but any issues will be resolved and any pull requests on them
 will be accepted.
-This is because backporting every single patch on every branch is incredibly time consuming and slows down the
-development of Mockbukkit.
+This is because back-porting every single patch on every branch is incredibly time-consuming and slows down the
+development of MockBukkit.
 
-If you prefer to always have the latest Git version or need a specific commit/branch, you can always use [JitPack](https://jitpack.io/#MockBukkit/MockBukkit) as your
-maven repository:
+</details>
 
-```gradle
-repositories {
-	maven { url 'https://jitpack.io' }
-}
 
-dependencies {
-	testImplementation 'com.github.seeseemelk:MockBukkit:v1.18-SNAPSHOT'
-}
-```
+<details>
+<summary><h3>Adding MockBukkit via Maven</h3></summary>
 
-### Adding MockBukkit via Maven
-
-MockBukkit can be included by adding the dependency to your `pom.xml`.<br>
-You won't need to add any additional repositories since MockBukkit is served via maven-central. Make sure to update the
-version as necessary.
-
+MockBukkit can easily be included in Maven using the default Maven Central and PaperMC repositories.
+Make sure to update the version as necessary.
 ```xml
+<repositories>
+    <repository>
+        <id>papermc</id>
+        <url>https://repo.papermc.io/repository/maven-public/</url>
+    </repository>
+</repositories>
 
 <dependencies>
   <dependency>
     <groupId>com.github.seeseemelk</groupId>
     <artifactId>MockBukkit-v1.18</artifactId>
-    <version>2.3.0</version>
+    <version>2.7.0</version>
+    <scope>test</scope>
+  </dependency>
+</dependencies>
+```
+The `test` scope is important here since you are likely to only be using MockBukkit during the `test` stage of your
+Maven lifecycle and not in your final product.
+
+If you prefer to always have the latest Git version or need a specific commit/branch, you can always use [JitPack](https://jitpack.io/#MockBukkit/MockBukkit) as your
+maven repository:
+```xml
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+    <repository>
+        <id>papermc</id>
+        <url>https://repo.papermc.io/repository/maven-public/</url>
+    </repository>
+</repositories>
+
+<dependencies>
+  <dependency>
+    <groupId>com.github.MockBukkit</groupId>
+    <artifactId>MockBukkit</artifactId>
+    <version>v1.18-SNAPSHOT</version>
     <scope>test</scope>
   </dependency>
 </dependencies>
@@ -102,11 +138,11 @@ Note: use `v1.13-SNAPSHOT` to test a Bukkit 1.13 plugin or any other version if
 the [branch](https://github.com/MockBukkit/MockBukkit/branches) exists.
 These branches will not be receiving patches actively, but any issues will be resolved and any pull requests on them
 will be accepted.
-This is because backporting every single patch on every branch is incredibly time consuming and slows down the
-development of Mockbukkit.
+This is because back-porting every single patch on every branch is incredibly time-consuming and slows down the
+development of MockBukkit.
 
-The `scope` test is important here since you are likely to only be using MockBukkit during the `test` stage of your
-Maven lifecycle and not in your final product.
+</details>
+
 
 ### Using MockBukkit
 
