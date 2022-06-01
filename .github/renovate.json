@@ -1,0 +1,9 @@
+{
+    "extends": [
+        "config:base"
+    ],
+    "labels": [
+        "release/none"
+    ],
+    "dependencyDashboard": false
+}

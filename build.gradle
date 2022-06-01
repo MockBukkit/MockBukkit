@@ -33,7 +33,6 @@ dependencies {
     implementation 'org.hamcrest:hamcrest-library:2.2'
 
     // General utilities for the project
-    implementation 'commons-io:commons-io:2.11.0'
     implementation 'org.jetbrains:annotations:23.0.0'
 
     // LibraryLoader dependencies
@@ -52,8 +51,10 @@ task sourcesJar(type: Jar) {
     from sourceSets.main.allSource
 }
 
+sourceCompatibility = gradle.ext.javaVersion
+targetCompatibility = gradle.ext.javaVersion
 tasks.withType(JavaCompile) {
-    options.release.set(17)
+    options.release.set(gradle.ext.javaVersion)
 }
 
 artifacts {
