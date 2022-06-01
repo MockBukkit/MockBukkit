@@ -182,6 +182,17 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	/**
+	 * Checks if we are running a method on the main thread. If not, a `ThreadAccessException` is thrown.
+	 */
+	public void assertMainThread()
+	{
+		if (!isOnMainThread())
+		{
+			throw new ThreadAccessException("The Bukkit API was accessed from asynchronous code.");
+		}
+	}
+
+	/**
 	 * Registers an entity so that the server can track it more easily. Should only be used internally.
 	 *
 	 * @param entity The entity to register
