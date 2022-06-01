@@ -5,12 +5,14 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import org.bukkit.EntityEffect;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.metadata.FixedMetadataValue;
@@ -411,4 +413,32 @@ class EntityMockTest
 		entity.setFireTicks(10);
 		assertEquals(10, entity.getFireTicks());
 	}
+
+	@Test
+	void playEffect()
+	{
+		entity.playEffect(EntityEffect.LOVE_HEARTS);
+  	}
+
+	@Test
+	void lastDamageCause()
+	{
+		World world = new WorldMock(Material.GRASS_BLOCK, 10);
+		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+		assertNull(zombie.getLastDamageCause());
+		zombie.damage(1);
+		assertNotNull(zombie.getLastDamageCause());
+	}
+
+	@Test
+	void setGliding()
+	{
+		PlayerMock player = server.addPlayer();
+		assertFalse(player.isGliding());
+		player.setGliding(true);
+		assertTrue(player.isGliding());
+		player.setGliding(false);
+		assertFalse(player.isGliding());
+	}
+
 }

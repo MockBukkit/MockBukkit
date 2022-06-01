@@ -3,17 +3,30 @@ package be.seeseemelk.mockbukkit.entity;
 import java.util.Set;
 import java.util.UUID;
 
+import com.destroystokyo.paper.block.TargetBlockInfo;
+import com.destroystokyo.paper.entity.TargetEntityInfo;
+import net.kyori.adventure.text.Component;
+import org.bukkit.Location;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Item;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.SpawnCategory;
 import org.bukkit.entity.memory.MemoryKey;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.EulerAngle;
+import org.jetbrains.annotations.NotNull;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * This is the mock of an {@link ArmorStand}.
@@ -32,6 +45,13 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	private boolean hasBasePlate = true;
 	private boolean isVisible = true;
 
+	private EulerAngle headPose = EulerAngle.ZERO;
+	private EulerAngle bodyPose = EulerAngle.ZERO;
+	private EulerAngle leftArmPose = new EulerAngle(Math.toRadians(-10.0f), 0.0f, Math.toRadians(-10.0f));
+	private EulerAngle rightArmPose = new EulerAngle(Math.toRadians(-15.0f), 0.0f, Math.toRadians(10.0f));
+	private EulerAngle leftLegPose = new EulerAngle(Math.toRadians(-1.0f), 0.0f, Math.toRadians(-1.0f));
+	private EulerAngle rightLegPose = new EulerAngle(Math.toRadians(1.0f), 0.0f, Math.toRadians(1.0f));
+
 	public ArmorStandMock(ServerMock server, UUID uuid)
 	{
 		super(server, uuid);
@@ -44,9 +64,149 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	}
 
 	@Override
+	public @Nullable Block getTargetBlock(int maxDistance, TargetBlockInfo.@NotNull FluidMode fluidMode)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable BlockFace getTargetBlockFace(int maxDistance, TargetBlockInfo.@NotNull FluidMode fluidMode)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable TargetBlockInfo getTargetBlockInfo(int maxDistance, TargetBlockInfo.@NotNull FluidMode fluidMode)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Entity getTargetEntity(int maxDistance, boolean ignoreBlocks)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable TargetEntityInfo getTargetEntityInfo(int maxDistance, boolean ignoreBlocks)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getBeeStingerCooldown()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setBeeStingerCooldown(int ticks)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getBeeStingersInBody()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setBeeStingersInBody(int count)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setKiller(@Nullable Player killer)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean hasLineOfSight(@NotNull Location location)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public EntityEquipment getEquipment()
 	{
 		return equipment;
+	}
+
+	@Override
+	public boolean canTick()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setCanTick(boolean tick)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull ItemStack getItem(@NotNull EquipmentSlot slot)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setItem(@NotNull EquipmentSlot slot, @Nullable ItemStack item)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Set<EquipmentSlot> getDisabledSlots()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setDisabledSlots(@NotNull EquipmentSlot... slots)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void addDisabledSlots(@NotNull EquipmentSlot... slots)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void removeDisabledSlots(@NotNull EquipmentSlot... slots)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isSlotDisabled(@NotNull EquipmentSlot slot)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -120,87 +280,75 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	}
 
 	@Override
-	public EulerAngle getBodyPose()
+	public @NotNull EulerAngle getBodyPose()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return bodyPose;
 	}
 
 	@Override
-	public void setBodyPose(EulerAngle pose)
+	public void setBodyPose(@NotNull EulerAngle pose)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.bodyPose = pose;
 	}
 
 	@Override
-	public EulerAngle getLeftArmPose()
+	public @NotNull EulerAngle getLeftArmPose()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return leftArmPose;
 	}
 
 	@Override
-	public void setLeftArmPose(EulerAngle pose)
+	public void setLeftArmPose(@NotNull EulerAngle pose)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.leftArmPose = pose;
 	}
 
 	@Override
-	public EulerAngle getRightArmPose()
+	public @NotNull EulerAngle getRightArmPose()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return rightArmPose;
 	}
 
 	@Override
-	public void setRightArmPose(EulerAngle pose)
+	public void setRightArmPose(@NotNull EulerAngle pose)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.rightArmPose = pose;
 	}
 
 	@Override
-	public EulerAngle getLeftLegPose()
+	public @NotNull EulerAngle getLeftLegPose()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return leftLegPose;
 	}
 
 	@Override
-	public void setLeftLegPose(EulerAngle pose)
+	public void setLeftLegPose(@NotNull EulerAngle pose)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.leftLegPose = pose;
 	}
 
 	@Override
-	public EulerAngle getRightLegPose()
+	public @NotNull EulerAngle getRightLegPose()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return rightLegPose;
 	}
 
 	@Override
-	public void setRightLegPose(EulerAngle pose)
+	public void setRightLegPose(@NotNull EulerAngle pose)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.rightLegPose = pose;
 	}
 
 	@Override
-	public EulerAngle getHeadPose()
+	public @NotNull EulerAngle getHeadPose()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return headPose;
 	}
 
 	@Override
-	public void setHeadPose(EulerAngle pose)
+	public void setHeadPose(@NotNull EulerAngle pose)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.headPose = pose;
 	}
 
 	@Override
@@ -285,6 +433,20 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	}
 
 	@Override
+	public boolean canMove()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setCanMove(boolean move)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public boolean isSleeping()
 	{
 		// TODO Auto-generated method stub
@@ -334,6 +496,111 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	}
 
 	@Override
+	public int getArrowsStuck()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setArrowsStuck(int arrows)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getShieldBlockingDelay()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setShieldBlockingDelay(int delay)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable ItemStack getActiveItem()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void clearActiveItem()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getItemUseRemainingTime()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getHandRaisedTime()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isHandRaised()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull EquipmentSlot getHandRaised()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isJumping()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setJumping(boolean jumping)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void playPickupItemAnimation(@NotNull Item item, int quantity)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public float getHurtDirection()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setHurtDirection(float hurtDirection)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public double getAbsorptionAmount()
 	{
 		// TODO Auto-generated method stub
@@ -347,4 +614,38 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 		throw new UnimplementedOperationException();
 	}
 
+	@Override
+	public @NotNull SpawnCategory getSpawnCategory()
+	{
+		return SpawnCategory.MISC;
+	}
+
+
+	@Override
+	public @NotNull Component name()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Component customName()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void customName(@Nullable Component customName)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void registerAttribute(@NotNull Attribute attribute)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
 }

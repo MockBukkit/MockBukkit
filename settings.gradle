@@ -7,14 +7,14 @@ gradle.ext.apiVersion = '1.18'
 /*
   The Spigot version we are building MockBukkit against.
 */
-gradle.ext.apiVersionFull = '1.18.1-R0.1-SNAPSHOT'
+gradle.ext.apiVersionFull = '1.18.2-R0.1-SNAPSHOT'
 
 /*
   MockBukkit uses semantic-versioning (https://semver.org/).
   Every new update should bump the version below according to
   the conventions.
 */
-gradle.ext.version = '1.15.0'
+gradle.ext.version = '2.4.0'
 
 /*
   This is the name of our MockBukkit artifact, it includes
