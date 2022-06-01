@@ -6,6 +6,7 @@ import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
 import be.seeseemelk.mockbukkit.entity.FireworkMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
+import be.seeseemelk.mockbukkit.entity.MobMock;
 import be.seeseemelk.mockbukkit.entity.ZombieMock;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
 import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
@@ -37,6 +38,7 @@ import org.bukkit.WorldCreator;
 import org.bukkit.WorldType;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.boss.DragonBattle;
@@ -48,13 +50,21 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Firework;
+import org.bukkit.entity.Hanging;
 import org.bukkit.entity.Item;
+import org.bukkit.entity.ItemFrame;
+import org.bukkit.entity.LeashHitch;
 import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.entity.EntitySpawnEvent;
+import org.bukkit.event.entity.ItemSpawnEvent;
+import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.world.TimeSkipEvent;
 import org.bukkit.generator.BiomeProvider;
 import org.bukkit.generator.BlockPopulator;
@@ -91,6 +101,7 @@ import java.util.stream.Collectors;
  */
 public class WorldMock implements World
 {
+
 	private static final int SEA_LEVEL = 63;
 
 	private final Map<Coordinate, BlockMock> blocks = new HashMap<>();
@@ -114,6 +125,7 @@ public class WorldMock implements World
 	private boolean storming = false;
 	private long seed = 0;
 	private WorldType worldType = WorldType.NORMAL;
+	private Difficulty difficulty = Difficulty.NORMAL;
 
 	/**
 	 * Creates a new mock world.
@@ -521,8 +533,7 @@ public class WorldMock implements World
 	@Override
 	public void loadChunk(Chunk chunk)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		loadChunk(chunk.getX(), chunk.getZ());
 	}
 
 	@Override
@@ -543,13 +554,13 @@ public class WorldMock implements World
 	@Override
 	public void loadChunk(int x, int z)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		loadChunk(x, z, true);
 	}
 
 	@Override
 	public boolean loadChunk(int x, int z, boolean generate)
 	{
+		AsyncCatcher.catchOp("chunk load");
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
@@ -557,20 +568,19 @@ public class WorldMock implements World
 	@Override
 	public boolean unloadChunk(Chunk chunk)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.unloadChunk(chunk.getX(), chunk.getZ());
 	}
 
 	@Override
 	public boolean unloadChunk(int x, int z)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return unloadChunk(x, z, true);
 	}
 
 	@Override
 	public boolean unloadChunk(int x, int z, boolean save)
 	{
+		AsyncCatcher.catchOp("chunk unload");
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
@@ -578,6 +588,7 @@ public class WorldMock implements World
 	@Override
 	public boolean unloadChunkRequest(int x, int z)
 	{
+		AsyncCatcher.catchOp("chunk unload");
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
@@ -586,6 +597,7 @@ public class WorldMock implements World
 	@Deprecated
 	public boolean regenerateChunk(int x, int z)
 	{
+		AsyncCatcher.catchOp("chunk regenerate");
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
@@ -599,7 +611,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public ItemEntityMock dropItem(@NotNull Location loc, @NotNull ItemStack item, @Nullable Consumer<Item> function)
+	public @NotNull ItemEntityMock dropItem(@NotNull Location loc, @NotNull ItemStack item, @Nullable Consumer<Item> function)
 	{
 		Validate.notNull(loc, "The provided location must not be null.");
 		Validate.notNull(item, "Cannot drop items that are null.");
@@ -614,19 +626,19 @@ public class WorldMock implements World
 		}
 
 		server.registerEntity(entity);
+		callSpawnEvent(entity, null);
+
 		return entity;
 	}
 
 	@Override
-	public ItemEntityMock dropItem(@NotNull Location loc, @NotNull ItemStack item)
+	public @NotNull ItemEntityMock dropItem(@NotNull Location loc, @NotNull ItemStack item)
 	{
-		return dropItem(loc, item, e ->
-		{
-		});
+		return dropItem(loc, item, null);
 	}
 
 	@Override
-	public ItemEntityMock dropItemNaturally(@NotNull Location location, @NotNull ItemStack item, @Nullable Consumer<Item> function)
+	public @NotNull ItemEntityMock dropItemNaturally(@NotNull Location location, @NotNull ItemStack item, @Nullable Consumer<Item> function)
 	{
 		Validate.notNull(location, "The provided location must not be null.");
 
@@ -645,11 +657,9 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public ItemEntityMock dropItemNaturally(@NotNull Location loc, @NotNull ItemStack item)
+	public @NotNull ItemEntityMock dropItemNaturally(@NotNull Location loc, @NotNull ItemStack item)
 	{
-		return dropItemNaturally(loc, item, e ->
-		{
-		});
+		return dropItemNaturally(loc, item, null);
 	}
 
 	@Override
@@ -681,8 +691,66 @@ public class WorldMock implements World
 		throw new UnimplementedOperationException();
 	}
 
+	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz) throws IllegalArgumentException
+	{
+		return this.spawn(location, clazz, null, CreatureSpawnEvent.SpawnReason.CUSTOM);
+	}
+
 	@Override
-	public Entity spawnEntity(Location loc, EntityType type)
+	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz, Consumer<T> function) throws IllegalArgumentException
+	{
+		return this.spawn(location, clazz, function, CreatureSpawnEvent.SpawnReason.CUSTOM);
+	}
+
+	@Override
+	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz, boolean randomizeData, Consumer<T> function) throws IllegalArgumentException
+	{
+		return this.spawn(location, clazz, function, CreatureSpawnEvent.SpawnReason.CUSTOM, randomizeData);
+	}
+
+	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz, Consumer<T> function, CreatureSpawnEvent.@NotNull SpawnReason reason) throws IllegalArgumentException
+	{
+		return this.spawn(location, clazz, function, reason, true);
+	}
+
+	@SuppressWarnings("unchecked")
+	public <T extends Entity> T spawn(Location location, Class<T> clazz, Consumer<T> function, CreatureSpawnEvent.SpawnReason reason, boolean randomizeData) throws IllegalArgumentException
+	{
+		if (location == null || clazz == null)
+		{
+			throw new IllegalArgumentException("Location or entity class cannot be null");
+		}
+
+		EntityMock entity = this.mockEntity(location, clazz, randomizeData);
+
+		entity.setLocation(location);
+
+		if (entity instanceof MobMock mob)
+		{
+			mob.finalizeSpawn();
+		}
+
+		// CraftBukkit doesn't check this when spawning, it's done when the entity is ticking so
+		// it ends up being spawned for one tick before being removed. We don't have a great way
+		// to do that, so we just do it here.
+		if (entity instanceof Monster && this.getDifficulty() == Difficulty.PEACEFUL)
+		{
+			entity.remove();
+		}
+
+		if (function != null)
+		{
+			function.accept((T) entity);
+		}
+
+		server.registerEntity(entity);
+		callSpawnEvent(entity, reason);
+
+		return (T) entity;
+	}
+
+	@Override
+	public @NotNull Entity spawnEntity(@NotNull Location loc, EntityType type)
 	{
 		return spawn(loc, type.getEntityClass());
 	}
@@ -691,43 +759,119 @@ public class WorldMock implements World
 	@Override
 	public Entity spawnEntity(@NotNull Location loc, @NotNull EntityType type, boolean randomizeData)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		return this.spawn(loc, type.getEntityClass(), randomizeData, null);
 	}
 
-	private <T extends Entity> EntityMock mockEntity(@NotNull Class<T> clazz)
+	private <T extends Entity> EntityMock mockEntity(@NotNull Location location, @NotNull Class<T> clazz, boolean randomizeData)
 	{
+		AsyncCatcher.catchOp("entity add");
 		if (clazz == ArmorStand.class)
 		{
 			return new ArmorStandMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Zombie.class)
-		{
-			return new ZombieMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Firework.class)
-		{
-			return new FireworkMock(server, UUID.randomUUID());
 		}
 		else if (clazz == ExperienceOrb.class)
 		{
 			return new ExperienceOrbMock(server, UUID.randomUUID());
 		}
-		else if (clazz == Player.class)
+		else if (clazz == Firework.class)
 		{
-			throw new IllegalArgumentException("Player Entities cannot be spawned, use ServerMock#addPlayer(...)");
+			return new FireworkMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Hanging.class)
+		{
+			// LeashHitch has no direction and is always centered
+			if (LeashHitch.class.isAssignableFrom(clazz))
+			{
+				throw new UnimplementedOperationException();
+			}
+			BlockFace spawnFace = BlockFace.SELF;
+			BlockFace[] faces = (ItemFrame.class.isAssignableFrom(clazz))
+					? new BlockFace[]{ BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST, BlockFace.UP, BlockFace.DOWN }
+					: new BlockFace[]{ BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST };
+			for (BlockFace face : faces)
+			{
+				Block block = this.getBlockAt(location.add(face.getModX(), face.getModY(), face.getModZ()));
+				if (!block.getType().isSolid() && (block.getType() != Material.REPEATER && block.getType() != Material.COMPARATOR))
+					continue;
+
+				boolean taken = false;
+
+				// TODO: Check if the entity's bounding box collides with any other hanging entities.
+
+				if (taken)
+					continue;
+
+				spawnFace = face;
+				break;
+			}
+			if (spawnFace == BlockFace.SELF)
+			{
+				spawnFace = BlockFace.SOUTH;
+			}
+			spawnFace = spawnFace.getOppositeFace();
+			// TODO: Spawn entities here.
+			throw new UnimplementedOperationException();
 		}
 		else if (clazz == Item.class)
 		{
 			throw new IllegalArgumentException("Items must be spawned using World#dropItem(...)");
 		}
-		else
+		else if (clazz == Player.class)
 		{
-			// If that specific Mob Class has not been implemented yet, it may be better
-			// to throw an UnimplementedOperationException for consistency
-			throw new UnimplementedOperationException();
+			throw new IllegalArgumentException("Player Entities cannot be spawned, use ServerMock#addPlayer(...)");
 		}
+		else if (clazz == Zombie.class)
+		{
+			return new ZombieMock(server, UUID.randomUUID());
+		}
+		throw new UnimplementedOperationException();
+	}
+
+	private void callSpawnEvent(EntityMock entity, CreatureSpawnEvent.SpawnReason reason)
+	{
+
+		boolean canceled; // Here for future implementation (see below)
+
+		if (entity instanceof LivingEntity living && !(entity instanceof Player)) {
+			/* getAllowAnimals and getAllowMonsters aren't implemented yet
+			boolean isAnimal = entity instanceof Animals || entity instanceof WaterMob || entity instanceof Golem;
+			boolean isMonster = entity instanceof Monster || entity instanceof Ghast || entity instanceof Slime;
+			if (reason != CreatureSpawnEvent.SpawnReason.CUSTOM)
+			{
+				if (isAnimal && !getAllowAnimals() || isMonster && !getAllowMonsters())
+				{
+					entity.remove();
+					yield false;
+				}
+			}
+			*/
+
+			canceled = new CreatureSpawnEvent(living, reason).callEvent();
+		} else if (entity instanceof Item item) {
+			canceled = new ItemSpawnEvent(item).callEvent();
+		} else if (entity instanceof Player player) {
+			canceled = true; // Shouldn't ever be called here but just for parody.
+		} else if (entity instanceof Projectile projectile) {
+			canceled = new ProjectileLaunchEvent(entity).callEvent();
+		} else {
+			canceled = new EntitySpawnEvent(entity).callEvent();
+		}
+
+		/* EntityMock#getPassengers() and #getVehicle() isn't implemented
+		if (canceled || entity.isValid())
+		{
+			Entity vehicle = entity.getVehicle();
+			if (vehicle != null)
+			{
+				vehicle.remove();
+			}
+			for (Entity passenger : entity.getPassengers())
+			{
+				passenger.remove();
+			}
+			entity.remove();
+		}
+		*/
 	}
 
 	@Override
@@ -1007,6 +1151,7 @@ public class WorldMock implements World
 	@Override
 	public void save()
 	{
+		AsyncCatcher.catchOp("world save");
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
@@ -1016,47 +1161,6 @@ public class WorldMock implements World
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public <T extends Entity> T spawn(@NotNull Location location, @NotNull Class<T> clazz) throws IllegalArgumentException
-	{
-		Validate.notNull(location, "The provided location must not be null.");
-		Validate.notNull(clazz, "The provided class must not be null.");
-
-		EntityMock entity = mockEntity(clazz);
-		entity.setLocation(location);
-		server.registerEntity(entity);
-
-		return clazz.cast(entity);
-	}
-
-	@Override
-	public <T extends Entity> T spawn(@NotNull Location location, @NotNull Class<T> clazz, @Nullable Consumer<T> function)
-	throws IllegalArgumentException
-	{
-		T entity = spawn(location, clazz);
-		if (function != null)
-		{
-			function.accept(entity);
-		}
-		return entity;
-	}
-
-	@Override
-	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz, @Nullable Consumer<T> function, CreatureSpawnEvent.@NotNull SpawnReason reason) throws IllegalArgumentException
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@NotNull
-	@Override
-	public <T extends Entity> T spawn(@NotNull Location location, @NotNull Class<T> clazz, boolean randomizeData, @Nullable Consumer<T> function) throws IllegalArgumentException
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
 	}
 
 	@SuppressWarnings("deprecation")
@@ -1223,17 +1327,15 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public Difficulty getDifficulty()
+	public @NotNull Difficulty getDifficulty()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.difficulty;
 	}
 
 	@Override
-	public void setDifficulty(Difficulty difficulty)
+	public void setDifficulty(@NotNull Difficulty difficulty)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.difficulty = difficulty;
 	}
 
 	@Override
@@ -2389,4 +2491,5 @@ public class WorldMock implements World
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
+
 }
