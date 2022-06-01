@@ -1,11 +1,6 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.AsyncCatcher;
-import com.google.common.base.Preconditions;
-import org.bukkit.Bukkit;
-import org.bukkit.EntityEffect;
-import org.bukkit.Location;
-import org.bukkit.World;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.command.MessageTarget;
@@ -14,6 +9,7 @@ import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
 import com.google.common.base.Preconditions;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.EntityEffect;
@@ -65,8 +61,8 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private final MetadataTable metadataTable = new MetadataTable();
 	private final PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
 	private boolean operator = false;
-	private String name = "entity";
-	private String customName = null;
+	private Component name = Component.text("entity");
+	private Component customName = null;
 	private boolean customNameVisible = false;
 	private boolean invulnerable;
 	private boolean glowingFlag = false;
@@ -289,7 +285,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public @NotNull String getName()
 	{
-		return name;
+		return LegacyComponentSerializer.legacySection().serialize(this.name);
 	}
 
 	/**
@@ -299,7 +295,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	 */
 	public void setName(String name)
 	{
-		this.name = name;
+		this.name = LegacyComponentSerializer.legacySection().deserialize(name);
 	}
 
 	@Override
@@ -448,27 +444,25 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public @Nullable Component customName()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.customName;
 	}
 
 	@Override
 	public void customName(@Nullable Component customName)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.customName = customName;
 	}
 
 	@Override
 	public String getCustomName()
 	{
-		return customName;
+		return LegacyComponentSerializer.legacySection().serialize(this.customName);
 	}
 
 	@Override
 	public void setCustomName(String name)
 	{
-		customName = name;
+		this.customName = LegacyComponentSerializer.legacySection().deserialize(name);
 	}
 
 	@Override
@@ -918,8 +912,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public @NotNull Component name()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.name;
 	}
 
 	// Paper start
