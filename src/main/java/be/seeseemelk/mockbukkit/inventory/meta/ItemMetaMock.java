@@ -5,6 +5,8 @@ import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
 import com.destroystokyo.paper.Namespaced;
 import com.google.common.collect.Multimap;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.bungeecord.BungeeComponentSerializer;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
@@ -19,7 +21,6 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -29,6 +30,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import static java.util.Objects.nonNull;
@@ -40,9 +42,9 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	 * If you add a new field, you need to add it to #hashCode, #equals, #serialize, and #deserialize.
 	 * If it's a mutable object, it also needs to be handled in #clone.
 	 */
-	private String displayName = null;
+	private Component displayName = null;
 	private String localizedName = null;
-	private List<String> lore = null;
+	private List<Component> lore = null;
 	private int damage = 0;
 	private int repairCost = 0;
 	private Map<Enchantment, Integer> enchants = new HashMap<>();
@@ -64,11 +66,11 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 
 		if (meta.hasDisplayName())
 		{
-			displayName = meta.getDisplayName();
+			displayName = meta.displayName();
 		}
 		if (meta.hasLore())
 		{
-			lore = meta.getLore();
+			lore = meta.lore();
 		}
 		if (meta instanceof Damageable)
 		{
@@ -112,40 +114,37 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public @Nullable Component displayName()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.displayName;
 	}
 
 	@Override
 	public void displayName(@Nullable Component displayName)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.displayName = displayName;
 	}
 
 	@Override
 	public String getDisplayName()
 	{
-		return displayName;
+		return LegacyComponentSerializer.legacySection().serialize(this.displayName);
 	}
 
 	@Override
 	public @NotNull BaseComponent[] getDisplayNameComponent()
 	{
-		return new BaseComponent[0];
+		return BungeeComponentSerializer.get().serialize(this.displayName);
 	}
 
 	@Override
 	public void setDisplayName(String name)
 	{
-		displayName = name;
+		this.displayName = LegacyComponentSerializer.legacySection().deserialize(name);
 	}
 
 	@Override
-	public void setDisplayNameComponent(@Nullable BaseComponent[] component)
+	public void setDisplayNameComponent(@Nullable BaseComponent[] components)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.displayName = BungeeComponentSerializer.get().deserialize(Arrays.stream(components).filter(Objects::nonNull).toArray(BaseComponent[]::new));
 	}
 
 	/**
@@ -161,7 +160,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		else if (!meta.hasLore())
 			return false;
 
-		List<String> otherLore = meta.getLore();
+		List<Component> otherLore = meta.lore();
 		if (lore.size() == otherLore.size())
 		{
 			for (int i = 0; i < lore.size(); i++)
@@ -187,7 +186,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		if (displayName != null)
 		{
 			if (meta.hasDisplayName())
-				return displayName.equals(meta.getDisplayName());
+				return displayName.equals(meta.displayName());
 			else
 				return false;
 		}
@@ -373,38 +372,17 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public boolean hasLore()
 	{
-		return lore != null && !lore.isEmpty();
+		return this.lore != null && !lore.isEmpty();
 	}
 
 	@Override
 	public @Nullable List<Component> lore()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.lore;
 	}
 
 	@Override
 	public void lore(@Nullable List<Component> lore)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable List<String> getLore()
-	{
-		return lore == null ? null : new ArrayList<>(lore);
-	}
-
-	@Override
-	public @Nullable List<BaseComponent[]> getLoreComponents()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setLore(@Nullable List<String> lore)
 	{
 		if (lore != null && !lore.isEmpty())
 		{
@@ -417,10 +395,34 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
+	public @Nullable List<String> getLore()
+	{
+		return this.lore == null ? null : this.lore.stream().map(s -> LegacyComponentSerializer.legacySection().serialize(s)).toList();
+	}
+
+	@Override
+	public @Nullable List<BaseComponent[]> getLoreComponents()
+	{
+		return this.lore.stream().map(c -> BungeeComponentSerializer.get().serialize(c)).toList();
+	}
+
+	@Override
+	public void setLore(@Nullable List<String> lore)
+	{
+		if (lore != null && !lore.isEmpty())
+		{
+			this.lore = lore.stream().map(s -> LegacyComponentSerializer.legacySection().deserialize(s).asComponent()).toList();
+		}
+		else
+		{
+			this.lore = null;
+		}
+	}
+
+	@Override
 	public void setLoreComponents(@Nullable List<BaseComponent[]> lore)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		lore(lore.stream().map(c -> BungeeComponentSerializer.get().deserialize(c)).toList());
 	}
 
 	/**
@@ -430,25 +432,29 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	 */
 	public void assertLore(List<String> lines)
 	{
-		if (lore != null && lore.size() == lines.size())
-		{
-			for (int i = 0; i < lore.size(); i++)
-			{
-				if (!lore.get(i).equals(lines.get(i)))
-				{
-					throw new AssertionError(
-					    String.format("Line %d should be '%s' but was '%s'", i, lines.get(i), lore.get(i)));
-				}
-			}
-		}
-		else if (lore != null)
-		{
-			throw new AssertionError(
-			    String.format("Lore contained %d lines but should contain %d lines", lore.size(), lines.size()));
-		}
-		else
+		assertComponentLore(lines.stream().map(s -> LegacyComponentSerializer.legacySection().deserialize(s).asComponent()).toList());
+	}
+
+	/**
+	 * Asserts if the lore contains the given lines in order.
+	 *
+	 * @param lines The lines the lore should contain
+	 */
+	public void assertComponentLore(List<Component> lines)
+	{
+		if (this.lore == null)
 		{
 			throw new AssertionError("No lore was set");
+		}
+		if (this.lore.size() != lines.size())
+		{
+			throw new AssertionError("Lore size mismatch: expected " + lines.size() + " but was " + this.lore.size());
+		}
+		for (int i = 0; i < this.lore.size(); i++)
+		{
+			if (this.lore.get(i).equals(lines.get(i)))
+				continue;
+			throw new AssertionError(String.format("Line %d should be '%s' but was '%s'", i, lines.get(i), this.lore.get(i)));
 		}
 	}
 
@@ -545,8 +551,8 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	{
 		ItemMetaMock serialMock = new ItemMetaMock();
 
-		serialMock.displayName = (String) args.get("displayName");
-		serialMock.lore = (List<String>) args.get("lore");
+		serialMock.displayName = (Component) args.get("displayName");
+		serialMock.lore = (List<Component>) args.get("lore");
 		serialMock.localizedName = (String) args.get("localizedName");
 		serialMock.enchants = (Map<Enchantment, Integer>) args.get("enchants");
 		serialMock.hideFlags = (Set<ItemFlag>) args.get("itemFlags");
