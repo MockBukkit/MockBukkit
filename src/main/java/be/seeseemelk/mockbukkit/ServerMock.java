@@ -17,6 +17,7 @@ import be.seeseemelk.mockbukkit.inventory.ChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.DispenserInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.DropperInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.GrindstoneInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.HopperInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import be.seeseemelk.mockbukkit.inventory.ItemFactoryMock;
@@ -120,6 +121,7 @@ import java.util.stream.Collectors;
 
 public class ServerMock extends Server.Spigot implements Server
 {
+
 	private static final String BUKKIT_VERSION = "1.18.2";
 	private static final String JOIN_MESSAGE = "%s has joined the server.";
 	private static final String MOTD = "A Minecraft Server";
@@ -213,7 +215,7 @@ public class ServerMock extends Server.Spigot implements Server
 		AsyncCatcher.catchOp("player add");
 		playerList.addPlayer(player);
 		PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(player,
-		        String.format(JOIN_MESSAGE, player.getDisplayName()));
+				String.format(JOIN_MESSAGE, player.getDisplayName()));
 		Bukkit.getPluginManager().callEvent(playerJoinEvent);
 
 		player.setLastPlayed(getCurrentServerTime());
@@ -563,7 +565,7 @@ public class ServerMock extends Server.Spigot implements Server
 		case LECTERN:
 			return new LecternInventoryMock(owner);
 		case GRINDSTONE:
-		// TODO: This Inventory Type needs to be implemented
+			return new GrindstoneInventoryMock(owner);
 		case STONECUTTER:
 		// TODO: This Inventory Type needs to be implemented
 		case CARTOGRAPHY:
@@ -707,7 +709,7 @@ public class ServerMock extends Server.Spigot implements Server
 	public Set<String> getIPBans()
 	{
 		return this.playerList.getIPBans().getBanEntries().stream().map(BanEntry::getTarget)
-		       .collect(Collectors.toSet());
+				.collect(Collectors.toSet());
 	}
 
 	@Override
@@ -1630,7 +1632,7 @@ public class ServerMock extends Server.Spigot implements Server
 
 	@Override
 	public ItemStack createExplorerMap(World world, Location location, StructureType structureType, int radius,
-	                                   boolean findUnexplored)
+									   boolean findUnexplored)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
