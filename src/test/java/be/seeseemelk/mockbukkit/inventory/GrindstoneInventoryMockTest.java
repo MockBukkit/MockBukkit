@@ -12,6 +12,7 @@ import static org.hamcrest.Matchers.not;
 
 class GrindstoneInventoryMockTest
 {
+
 	private GrindstoneInventoryMock inventory;
 
 	@BeforeEach
@@ -35,4 +36,5 @@ class GrindstoneInventoryMockTest
 		assertThat(snapshot, instanceOf(GrindstoneInventoryMock.class));
 		assertThat(snapshot, not(equalToObject(inventory)));
 	}
+
 }

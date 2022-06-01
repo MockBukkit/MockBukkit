@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class GrindstoneInventoryMock extends InventoryMock
 {
+
 	public GrindstoneInventoryMock(InventoryHolder holder)
 	{
 		super(holder, InventoryType.GRINDSTONE);
