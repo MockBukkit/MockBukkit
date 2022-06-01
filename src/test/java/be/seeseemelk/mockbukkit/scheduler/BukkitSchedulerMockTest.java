@@ -15,7 +15,12 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.TestPlugin;
+import io.papermc.paper.event.player.AsyncChatEvent;
+import org.bukkit.Bukkit;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
 import org.junit.jupiter.api.BeforeEach;
@@ -197,10 +202,10 @@ class BukkitSchedulerMockTest
 	@Test
 	public void cancellingAllTaskByPlugin()
 	{
-		MockBukkit.mock();
+		ServerMock server = MockBukkit.mock();
 		MockBukkit.load(TestPlugin.class);
-		Plugin plugin = MockBukkit.getMock().getPluginManager().getPlugin("MockBukkitTestPlugin");
-		BukkitSchedulerMock scheduler1 = MockBukkit.getMock().getScheduler();
+		Plugin plugin = server.getPluginManager().getPlugin("MockBukkitTestPlugin");
+		BukkitSchedulerMock scheduler1 = server.getScheduler();
 		assertEquals(0, scheduler1.getNumberOfQueuedAsyncTasks());
 		scheduler1.runTaskLaterAsynchronously(plugin, () -> {}, 5);
 		scheduler1.runTaskLaterAsynchronously(plugin, () -> {}, 10);
@@ -295,4 +300,29 @@ class BukkitSchedulerMockTest
 			scheduler.shutdown();
 		});
 	}
+
+	@Test
+	void shutdown_waitsForAsyncEvents()
+	{
+		MockBukkit.mock();
+		AtomicBoolean done = new AtomicBoolean(false);
+		Bukkit.getPluginManager().registerEvents(new Listener()
+		{
+			@EventHandler
+			public void onChat(AsyncChatEvent event) throws Exception
+			{
+				Thread.sleep(50);
+				done.set(true);
+			}
+		}, MockBukkit.createMockPlugin());
+		AsyncChatEvent event = new AsyncChatEvent(true, null, null, null, null, null);
+		scheduler.executeAsyncEvent(event);
+		assertFalse(done.get());
+
+		scheduler.shutdown();
+
+		assertTrue(done.get());
+		MockBukkit.unmock();
+	}
+
 }
