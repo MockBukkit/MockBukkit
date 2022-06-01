@@ -468,7 +468,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public String getCustomName()
 	{
-		return LegacyComponentSerializer.legacySection().serialize(this.customName);
+		return this.customName == null ? null : LegacyComponentSerializer.legacySection().serialize(this.customName);
 	}
 
 	@Override
