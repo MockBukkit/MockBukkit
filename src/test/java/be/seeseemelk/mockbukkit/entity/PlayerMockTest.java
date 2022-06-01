@@ -1499,7 +1499,7 @@ class PlayerMockTest
 	}
 
 	@Test
-	public void testDisconnect()
+	void testDisconnect()
 	{
 		assertTrue(player.isOnline());
 		assertTrue(player.disconnect());
@@ -1509,7 +1509,7 @@ class PlayerMockTest
 	}
 
 	@Test
-	public void testReconnect()
+	void testReconnect()
 	{
 		if (player.isOnline())
 		{
@@ -1525,7 +1525,7 @@ class PlayerMockTest
 	}
 
 	@Test
-	public void testReconnectWithoutJoiningBefore()
+	void testReconnectWithoutJoiningBefore()
 	{
 		player = new PlayerMock(server, "testPlayer");
 

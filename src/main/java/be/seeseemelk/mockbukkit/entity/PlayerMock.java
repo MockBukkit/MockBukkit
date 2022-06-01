@@ -71,6 +71,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -131,7 +132,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	private boolean online;
 	private PlayerInventoryMock inventory = null;
 	private EnderChestInventoryMock enderChest = null;
-	private ServerMock server = null;
+	private ServerMock server;
 	private GameMode gamemode = GameMode.SURVIVAL;
 	private GameMode previousGamemode = gamemode;
 	private Component displayName = null;
@@ -1321,9 +1322,8 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		    Component.text(msg),
 		    Component.text(msg)
 		);
-		org.bukkit.event.player.PlayerChatEvent syncEvent = new org.bukkit.event.player.PlayerChatEvent(this, msg);
+		PlayerChatEvent syncEvent = new PlayerChatEvent(this, msg);
 
-		ServerMock server = MockBukkit.getMock();
 		server.getScheduler().executeAsyncEvent(asyncChatEvent);
 		server.getScheduler().executeAsyncEvent(asyncEvent);
 		server.getPluginManager().callEvent(syncEvent);
