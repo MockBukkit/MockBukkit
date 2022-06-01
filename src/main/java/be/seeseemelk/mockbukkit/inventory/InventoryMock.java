@@ -26,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class InventoryMock implements Inventory
 {
-	public static final int DefaultMaxStackSize = 64;
+	private static final int MAX_STACK_SIZE = 64;
 
 	private final ItemStack[] items;
 	private final InventoryHolder holder;
