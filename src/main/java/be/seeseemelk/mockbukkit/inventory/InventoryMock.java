@@ -32,7 +32,7 @@ public class InventoryMock implements Inventory
 	private final InventoryHolder holder;
 	private final InventoryType type;
 
-	private int maxStackSize = DefaultMaxStackSize;
+	private int maxStackSize = MAX_STACK_SIZE;
 
 	public InventoryMock(@Nullable InventoryHolder holder, int size, @NotNull InventoryType type)
 	{
