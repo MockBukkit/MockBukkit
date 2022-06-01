@@ -10,7 +10,7 @@ import static org.hamcrest.Matchers.equalToObject;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.not;
 
-public class GrindstoneInventoryMockTest
+class GrindstoneInventoryMockTest
 {
 	private GrindstoneInventoryMock inventory;
 
@@ -28,7 +28,7 @@ public class GrindstoneInventoryMockTest
 	}
 
 	@Test
-	public void testGetSnapshot()
+	void testGetSnapshot()
 	{
 		InventoryMock snapshot = inventory.getSnapshot();
 
