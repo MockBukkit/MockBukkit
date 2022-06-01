@@ -38,6 +38,7 @@ import io.papermc.paper.datapack.DatapackManager;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.apache.commons.lang.Validate;
 import org.bukkit.BanEntry;
@@ -1310,8 +1311,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull Component motd()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return LegacyComponentSerializer.legacySection().deserialize(MOTD);
 	}
 
 	@Override
