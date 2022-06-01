@@ -3,7 +3,7 @@
     <a href="https://github.com/MockBukkit/MockBukkit/actions/">
         <img alt="Build Status" src="https://github.com/MockBukkit/MockBukkit/workflows/Build/badge.svg?event=push" />
     </a>
-    <a href="https://mockbukkit.readthedocs.io/en/latest/?badge=v1.18">
+    <a href="https://mockbukkit.readthedocs.io/en/v1.18/?badge=v1.18">
         <img alt="Documentation Status" src="https://readthedocs.org/projects/mockbukkit/badge/?version=v1.18" />
     </a>
     <a href="https://search.maven.org/search?q=MockBukkit">
