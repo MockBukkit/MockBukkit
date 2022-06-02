@@ -645,7 +645,7 @@ class ServerMockTest
 	}
 
 	@Test
-	void getCommandTabCompleteReturnsExpectedResults()
+	void getCommandTabComplete_ReturnsExpectedResults()
 	{
 		MockBukkit.load(TestPlugin.class);
 		Player player = server.addPlayer();
