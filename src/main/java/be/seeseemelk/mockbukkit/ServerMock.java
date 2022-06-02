@@ -922,12 +922,9 @@ public class ServerMock extends Server.Spigot implements Server
 		}
 	}
 
-	public List<String> getCommandTabComplete(CommandSender sender, String commandLine)
+	public List<String> getCommandTabComplete(CommandSender sender, String commandLabel, String[] args)
 	{
-		AsyncCatcher.catchOp("command dispatch");
-		String[] commands = commandLine.split(" ");
-		String commandLabel = commands[0];
-		String[] args = Arrays.copyOfRange(commands, 1, commands.length);
+		AsyncCatcher.catchOp("command tabcomplete");
 		Command command = getCommandMap().getCommand(commandLabel);
 
 		if (command != null)

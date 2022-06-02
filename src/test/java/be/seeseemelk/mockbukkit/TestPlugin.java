@@ -80,7 +80,10 @@ public class TestPlugin extends JavaPlugin implements Listener
 	@Override
 	public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args)
 	{
-		return Arrays.asList("Tab", "Complete", "Results");
+		if(args.length==1){
+			return Arrays.asList("Tab", "Complete", "Results");
+		}
+		return Arrays.asList("Other", "Results");
 	}
 
 	public void unannotatedEventHandler(PlayerInteractEvent event)
