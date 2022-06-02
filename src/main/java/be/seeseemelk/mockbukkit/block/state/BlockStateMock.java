@@ -257,9 +257,16 @@ public class BlockStateMock implements BlockState, Cloneable
 		{
 			return false;
 		}
-		return Objects.equals(this.getWorld(), other.getWorld())
-				&& Objects.equals(this.getLocation(), other.getLocation())
-				&& Objects.equals(this.getBlockData(), other.getBlockData());
+		if (this.isPlaced() && this.getWorld() != other.getWorld() && (this.getWorld() == null || !this.getWorld().equals(other.getWorld()))) {
+			return false;
+		}
+		if (this.isPlaced() && this.getLocation() != other.getLocation() && (this.getLocation() == null || !this.getLocation().equals(other.getLocation()))) {
+			return false;
+		}
+//		if (this.getBlockData() != other.getBlockData() && (this.getBlockData() == null || !this.getBlockData().equals(other.getBlockData()))) {
+//			return false; Not implemented
+//		}
+		return true;
 	}
 
 	@NotNull
