@@ -649,8 +649,8 @@ class ServerMockTest
 	{
 		MockBukkit.load(TestPlugin.class);
 		Player player = server.addPlayer();
-		assertEquals(Arrays.asList("Tab", "Complete", "Results"), server.getCommandTabComplete(player, "mockcommand", new String[]{ "argA" }));
-		assertEquals(Arrays.asList("Other", "Results"), server.getCommandTabComplete(player, "mockcommand", new String[]{ "argA", "argB" }));
+		assertEquals(Arrays.asList("Other", "Results"), server.getCommandTabComplete(player, "mockcommand argA"));
+		assertEquals(Arrays.asList("Tab", "Complete", "Results"), server.getCommandTabComplete(player, "mockcommand argA argB"));
 	}
 
 }
