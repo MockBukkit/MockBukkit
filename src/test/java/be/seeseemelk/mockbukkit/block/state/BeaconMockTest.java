@@ -13,6 +13,8 @@ import org.bukkit.potion.PotionEffectType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -97,54 +99,21 @@ class BeaconMockTest
 		assertEquals(0, this.beacon.getTier());
 	}
 
-	@Test
-	void updateTier_Tier1()
+	@ParameterizedTest
+	@CsvSource({
+			"1, 1",
+			"2, 2",
+			"3, 3",
+			"4, 4",
+			"5, 4",
+	})
+	void updateTier(int level, int expected)
 	{
-		createBase(1);
+		createBase(level);
 
 		this.beacon.updateTier();
 
-		assertEquals(1, this.beacon.getTier());
-	}
-
-	@Test
-	void updateTier_Tier2()
-	{
-		createBase(2);
-
-		this.beacon.updateTier();
-
-		assertEquals(2, this.beacon.getTier());
-	}
-
-	@Test
-	void updateTier_Tier3()
-	{
-		createBase(3);
-
-		this.beacon.updateTier();
-
-		assertEquals(3, this.beacon.getTier());
-	}
-
-	@Test
-	void updateTier_Tier4()
-	{
-		createBase(4);
-
-		this.beacon.updateTier();
-
-		assertEquals(4, this.beacon.getTier());
-	}
-
-	@Test
-	void updateTier_Tier5_ReturnsTier4()
-	{
-		createBase(5);
-
-		this.beacon.updateTier();
-
-		assertEquals(4, this.beacon.getTier());
+		assertEquals(expected, this.beacon.getTier());
 	}
 
 	@Test
