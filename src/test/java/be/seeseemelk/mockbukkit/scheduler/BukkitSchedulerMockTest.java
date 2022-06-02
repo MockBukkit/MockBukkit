@@ -229,7 +229,7 @@ class BukkitSchedulerMockTest
 			{
 				try
 				{
-					Thread.sleep(10L);
+					Thread.sleep(50L);
 				}
 				catch (InterruptedException e)
 				{
@@ -243,7 +243,7 @@ class BukkitSchedulerMockTest
 			{
 				try
 				{
-					Thread.sleep(10L);
+					Thread.sleep(50L);
 				}
 				catch (InterruptedException e)
 				{
@@ -280,7 +280,7 @@ class BukkitSchedulerMockTest
 				}
 				try
 				{
-					Thread.sleep(10L);
+					Thread.sleep(50L);
 				}
 				catch (InterruptedException e)
 				{
