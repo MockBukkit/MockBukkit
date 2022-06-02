@@ -20,23 +20,26 @@ import be.seeseemelk.mockbukkit.metadata.MetadataTable;
 public class BlockStateMock implements BlockState, Cloneable
 {
 
-	private final MetadataTable metadataTable = new MetadataTable();
+	private final MetadataTable metadataTable;
 	private Block block;
 	private Material material;
 
 	public BlockStateMock(@NotNull Material material)
 	{
+		this.metadataTable = new MetadataTable();
 		this.material = material;
 	}
 
 	protected BlockStateMock(@NotNull Block block)
 	{
+		this.metadataTable = new MetadataTable();
 		this.block = block;
 		this.material = block.getType();
 	}
 
 	protected BlockStateMock(@NotNull BlockStateMock state)
 	{
+		this.metadataTable = new MetadataTable(state.metadataTable);
 		this.material = state.getType();
 		this.block = state.isPlaced() ? state.getBlock() : null;
 	}
