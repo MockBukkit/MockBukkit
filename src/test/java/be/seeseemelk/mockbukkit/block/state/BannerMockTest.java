@@ -160,7 +160,7 @@ class BannerMockTest
 	}
 
 	@Test
-	void blockStateMock_mockState()
+	void blockStateMock_MockState_CorrectType()
 	{
 		for (Material mat : Material.values())
 		{
