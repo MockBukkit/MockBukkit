@@ -1,7 +1,8 @@
 package be.seeseemelk.mockbukkit.block.state;
 
-import java.util.List;
-
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.block.BlockMock;
+import be.seeseemelk.mockbukkit.metadata.MetadataTable;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -13,9 +14,8 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.block.BlockMock;
-import be.seeseemelk.mockbukkit.metadata.MetadataTable;
+import java.util.List;
+import java.util.Objects;
 
 public class BlockStateMock implements BlockState, Cloneable
 {
@@ -239,6 +239,29 @@ public class BlockStateMock implements BlockState, Cloneable
 		return new BlockStateMock(this);
 	}
 
+	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int hash = 1;
+		hash = prime * hash + (this.getWorld() != null ? this.getWorld().hashCode() : 0);
+		hash = prime * hash + (this.getLocation() != null ? this.getLocation().hashCode() : 0);
+		hash = prime * hash + (this.getBlockData() != null ? this.getBlockData().hashCode() : 0);
+		return hash;
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (!(obj instanceof BlockStateMock other))
+		{
+			return false;
+		}
+		return Objects.equals(this.getWorld(), other.getWorld())
+				&& Objects.equals(this.getLocation(), other.getLocation())
+				&& Objects.equals(this.getBlockData(), other.getBlockData());
+	}
+
 	@NotNull
 	public static BlockStateMock mockState(@NotNull Block block)
 	{
@@ -298,4 +321,5 @@ public class BlockStateMock implements BlockState, Cloneable
 			return new BlockStateMock(block);
 		}
 	}
+
 }
