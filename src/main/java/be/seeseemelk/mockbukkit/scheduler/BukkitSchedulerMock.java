@@ -52,12 +52,15 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		};
 	}
 
-
+	/**
+	 * Sets the maximum time to wait for async tasks to finish before terminating them.
+	 *
+	 * @param timeout The timeout in milliseconds.
+	 */
 	public void setShutdownTimeout(long timeout)
 	{
 		this.executorTimeout = timeout;
 	}
-
 
 	/**
 	 * Shuts the scheduler down. Note that this function will throw exception that where thrown by old asynchronous
@@ -66,10 +69,36 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public void shutdown()
 	{
 		waitAsyncTasksFinished();
-		pool.shutdown();
+
+		shutdownPool(pool);
+
 		if (asyncException.get() != null)
 			throw new AsyncTaskException(asyncException.get());
-		asyncEventExecutor.shutdownNow();
+
+		shutdownPool(asyncEventExecutor);
+	}
+
+	/**
+	 * Shuts down the given executor service, waiting up to the shutdown timeout for all tasks to finish.
+	 *
+	 * @param pool The pool to shut down.
+	 * @see #setShutdownTimeout(long)
+	 */
+	private void shutdownPool(ExecutorService pool)
+	{
+		pool.shutdown();
+		try
+		{
+			if (!pool.awaitTermination(this.executorTimeout, TimeUnit.MILLISECONDS))
+			{
+				pool.shutdownNow();
+			}
+		}
+		catch (InterruptedException e)
+		{
+			pool.shutdownNow();
+			Thread.currentThread().interrupt();
+		}
 	}
 
 	public @NotNull Future<?> executeAsyncEvent(Event event)
@@ -152,7 +181,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 
 	/**
 	 * Waits until all asynchronous tasks have finished executing. If you have an asynchronous task that runs
-	 * indefinitely, this function will never return.
+	 * indefinitely, this function will never return. Note that this will not wait for async events to finish.
 	 */
 	public void waitAsyncTasksFinished()
 	{
@@ -186,8 +215,8 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			}
 			if (System.currentTimeMillis() > (systemTime + executorTimeout))
 			{
-				// If a plugin has left a a runnable going and not cancelled it we could call this bad practice.
-				// we should now force interrupt all these runnables forcing them to throw Interrupted Exceptions.
+				// If a plugin has left a runnable going and not cancelled it we could call this bad practice.
+				// We should force interrupt all those runnables forcing them to throw Interrupted Exceptions-
 				// if they handle that
 				for (ScheduledTask task : scheduledTasks.getCurrentTaskList())
 				{
