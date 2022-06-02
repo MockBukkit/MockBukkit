@@ -244,6 +244,23 @@ public class BlockStateMock implements BlockState, Cloneable
 	{
 		switch (block.getType())
 		{
+		case BLACK_BED:
+		case BLUE_BED:
+		case BROWN_BED :
+		case CYAN_BED :
+		case GRAY_BED :
+		case GREEN_BED:
+		case LIGHT_BLUE_BED:
+		case LIGHT_GRAY_BED :
+		case LIME_BED :
+		case MAGENTA_BED :
+		case ORANGE_BED:
+		case PINK_BED :
+		case PURPLE_BED :
+		case RED_BED:
+		case WHITE_BED:
+		case YELLOW_BED:
+			return new BedMock(block);
 		case LECTERN:
 			return new LecternMock(block);
 		case HOPPER:
