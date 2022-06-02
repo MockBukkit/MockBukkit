@@ -19,4 +19,5 @@ public class GrindstoneInventoryMock extends InventoryMock
 		inventory.setContents(getContents());
 		return inventory;
 	}
+
 }
