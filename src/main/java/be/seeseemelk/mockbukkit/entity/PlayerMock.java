@@ -66,6 +66,9 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryAction;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
@@ -256,7 +259,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	public @Nullable BlockBreakEvent simulateBlockBreak(Block block)
 	{
 		if ((gamemode == GameMode.SPECTATOR || gamemode == GameMode.ADVENTURE)
-		        || (gamemode == GameMode.SURVIVAL && simulateBlockDamagePure(block).isCancelled()))
+				|| (gamemode == GameMode.SURVIVAL && simulateBlockDamagePure(block).isCancelled()))
 			return null;
 
 		BlockBreakEvent event = new BlockBreakEvent(block, this);
@@ -287,6 +290,44 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 			block.setType(material);
 		}
 		return event;
+	}
+
+	/**
+	 * Simulates the player clicking an Inventory.
+	 *
+	 * @param slot The slot in the player's open inventory
+	 * @return The event that was fired.
+	 */
+	public InventoryClickEvent simulateInventoryClick(int slot)
+	{
+		return simulateInventoryClick(getOpenInventory(), slot);
+	}
+
+	/**
+	 * Simulates the player clicking an Inventory.
+	 *
+	 * @param inventoryView The inventory view we want to click
+	 * @param slot          The slot in the provided Inventory
+	 * @return The event that was fired.
+	 */
+	public InventoryClickEvent simulateInventoryClick(InventoryView inventoryView, int slot)
+	{
+		return simulateInventoryClick(inventoryView, ClickType.LEFT, slot);
+	}
+
+	/**
+	 * Simulates the player clicking an Inventory.
+	 *
+	 * @param inventoryView The inventory view we want to click
+	 * @param clickType     The click type we want to fire
+	 * @param slot          The slot in the provided Inventory
+	 * @return The event that was fired.
+	 */
+	public InventoryClickEvent simulateInventoryClick(InventoryView inventoryView, ClickType clickType, int slot)
+	{
+		InventoryClickEvent inventoryClickEvent = new InventoryClickEvent(inventoryView, InventoryType.SlotType.CONTAINER, slot, clickType, InventoryAction.UNKNOWN);
+		Bukkit.getPluginManager().callEvent(inventoryClickEvent);
+		return inventoryClickEvent;
 	}
 
 	/**
@@ -1266,12 +1307,12 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		Set<Player> players = new HashSet<>(Bukkit.getOnlinePlayers());
 		AsyncPlayerChatEvent asyncEvent = new AsyncPlayerChatEvent(true, this, msg, players);
 		AsyncChatEvent asyncChatEvent = new AsyncChatEvent(
-		    true,
-		    this,
-		    Bukkit.getOnlinePlayers().stream().map(p -> (Audience) p).collect(Collectors.toSet()),
-		    ChatRenderer.defaultRenderer(),
-		    Component.text(msg),
-		    Component.text(msg)
+				true,
+				this,
+				Bukkit.getOnlinePlayers().stream().map(p -> (Audience) p).collect(Collectors.toSet()),
+				ChatRenderer.defaultRenderer(),
+				Component.text(msg),
+				Component.text(msg)
 		);
 		org.bukkit.event.player.PlayerChatEvent syncEvent = new org.bukkit.event.player.PlayerChatEvent(this, msg);
 
@@ -1371,27 +1412,27 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	private void playNote(@NotNull Location loc, @NotNull Instrument instrument, byte note)
 	{
 		Sound sound = switch (instrument)
-		{
-		case BANJO -> Sound.BLOCK_NOTE_BLOCK_BANJO;
-		case BASS_DRUM -> Sound.BLOCK_NOTE_BLOCK_BASEDRUM;
-		case BASS_GUITAR -> Sound.BLOCK_NOTE_BLOCK_BASS;
-		case BELL -> Sound.BLOCK_NOTE_BLOCK_BELL;
-		case BIT -> Sound.BLOCK_NOTE_BLOCK_BIT;
-		case CHIME -> Sound.BLOCK_NOTE_BLOCK_CHIME;
-		case COW_BELL -> Sound.BLOCK_NOTE_BLOCK_COW_BELL;
-		case DIDGERIDOO -> Sound.BLOCK_NOTE_BLOCK_DIDGERIDOO;
-		case FLUTE -> Sound.BLOCK_NOTE_BLOCK_FLUTE;
-		case GUITAR -> Sound.BLOCK_NOTE_BLOCK_GUITAR;
-		case IRON_XYLOPHONE -> Sound.BLOCK_NOTE_BLOCK_IRON_XYLOPHONE;
-		case PIANO -> Sound.BLOCK_NOTE_BLOCK_HARP;
-		case PLING -> Sound.BLOCK_NOTE_BLOCK_PLING;
-		case SNARE_DRUM -> Sound.BLOCK_NOTE_BLOCK_SNARE;
-		case STICKS -> Sound.BLOCK_NOTE_BLOCK_HAT;
-		case XYLOPHONE -> Sound.BLOCK_NOTE_BLOCK_XYLOPHONE;
-			default ->
-			// This should never be reached unless Mojang adds new instruments
-			throw new UnimplementedOperationException("Instrument '" + instrument + "' has no implementation!");
-		};
+				{
+					case BANJO -> Sound.BLOCK_NOTE_BLOCK_BANJO;
+					case BASS_DRUM -> Sound.BLOCK_NOTE_BLOCK_BASEDRUM;
+					case BASS_GUITAR -> Sound.BLOCK_NOTE_BLOCK_BASS;
+					case BELL -> Sound.BLOCK_NOTE_BLOCK_BELL;
+					case BIT -> Sound.BLOCK_NOTE_BLOCK_BIT;
+					case CHIME -> Sound.BLOCK_NOTE_BLOCK_CHIME;
+					case COW_BELL -> Sound.BLOCK_NOTE_BLOCK_COW_BELL;
+					case DIDGERIDOO -> Sound.BLOCK_NOTE_BLOCK_DIDGERIDOO;
+					case FLUTE -> Sound.BLOCK_NOTE_BLOCK_FLUTE;
+					case GUITAR -> Sound.BLOCK_NOTE_BLOCK_GUITAR;
+					case IRON_XYLOPHONE -> Sound.BLOCK_NOTE_BLOCK_IRON_XYLOPHONE;
+					case PIANO -> Sound.BLOCK_NOTE_BLOCK_HARP;
+					case PLING -> Sound.BLOCK_NOTE_BLOCK_PLING;
+					case SNARE_DRUM -> Sound.BLOCK_NOTE_BLOCK_SNARE;
+					case STICKS -> Sound.BLOCK_NOTE_BLOCK_HAT;
+					case XYLOPHONE -> Sound.BLOCK_NOTE_BLOCK_XYLOPHONE;
+					default ->
+						// This should never be reached unless Mojang adds new instruments
+							throw new UnimplementedOperationException("Instrument '" + instrument + "' has no implementation!");
+				};
 		float pitch = (float) Math.pow(2.0D, (note - 12.0D) / 12.0D);
 		playSound(loc, sound, SoundCategory.RECORDS, 3, pitch);
 	}
@@ -2083,9 +2124,8 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	public boolean canSee(@NotNull Player player)
 	{
 		return !hiddenPlayers.containsKey(player.getUniqueId()) &&
-		       !hiddenPlayersDeprecated.contains(player.getUniqueId());
+				!hiddenPlayersDeprecated.contains(player.getUniqueId());
 	}
-
 
 
 	@Override
@@ -2110,7 +2150,6 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
 
 
 	@Override
@@ -2396,14 +2435,14 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 
 	@Override
 	public void spawnParticle(@NotNull Particle particle, @NotNull Location location, int count, double offsetX, double offsetY,
-	                          double offsetZ)
+							  double offsetZ)
 	{
 		this.spawnParticle(particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ);
 	}
 
 	@Override
 	public void spawnParticle(@NotNull Particle particle, double x, double y, double z, int count, double offsetX,
-	                          double offsetY, double offsetZ)
+							  double offsetY, double offsetZ)
 	{
 		this.spawnParticle(particle, x, y, z, count, offsetX, offsetY, offsetZ, null);
 
@@ -2411,14 +2450,14 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 
 	@Override
 	public <T> void spawnParticle(@NotNull Particle particle, @NotNull Location location, int count, double offsetX, double offsetY,
-	                              double offsetZ, T data)
+								  double offsetZ, T data)
 	{
 		this.spawnParticle(particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ, data);
 	}
 
 	@Override
 	public <T> void spawnParticle(@NotNull Particle particle, double x, double y, double z, int count, double offsetX,
-	                              double offsetY, double offsetZ, T data)
+								  double offsetY, double offsetZ, T data)
 	{
 		this.spawnParticle(particle, x, y, z, count, offsetX, offsetY, offsetZ, 1, data);
 
@@ -2426,14 +2465,14 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 
 	@Override
 	public void spawnParticle(@NotNull Particle particle, @NotNull Location location, int count, double offsetX, double offsetY,
-	                          double offsetZ, double extra)
+							  double offsetZ, double extra)
 	{
 		this.spawnParticle(particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ, extra);
 	}
 
 	@Override
 	public void spawnParticle(@NotNull Particle particle, double x, double y, double z, int count, double offsetX,
-	                          double offsetY, double offsetZ, double extra)
+							  double offsetY, double offsetZ, double extra)
 	{
 		this.spawnParticle(particle, x, y, z, count, offsetX, offsetY, offsetZ, extra, null);
 
@@ -2441,7 +2480,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 
 	@Override
 	public <T> void spawnParticle(@NotNull Particle particle, @NotNull Location location, int count, double offsetX, double offsetY,
-	                              double offsetZ, double extra, T data)
+								  double offsetZ, double extra, T data)
 	{
 		this.spawnParticle(particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ, data);
 
@@ -2449,7 +2488,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 
 	@Override
 	public <T> void spawnParticle(@NotNull Particle particle, double x, double y, double z, int count, double offsetX,
-	                              double offsetY, double offsetZ, double extra, T data)
+								  double offsetY, double offsetZ, double extra, T data)
 	{
 		if (data != null && !particle.getDataType().isInstance(data))
 		{
@@ -2978,7 +3017,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 
 	@Override
 	public void sendEquipmentChange(@NotNull LivingEntity entity, @NotNull EquipmentSlot slot,
-	                                @NotNull ItemStack item)
+									@NotNull ItemStack item)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
