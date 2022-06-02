@@ -567,35 +567,35 @@ public class ServerMock extends Server.Spigot implements Server
 		case GRINDSTONE:
 			return new GrindstoneInventoryMock(owner);
 		case STONECUTTER:
-		// TODO: This Inventory Type needs to be implemented
+			// TODO: This Inventory Type needs to be implemented
 		case CARTOGRAPHY:
-		// TODO: This Inventory Type needs to be implemented
+			// TODO: This Inventory Type needs to be implemented
 		case SMOKER:
-		// TODO: This Inventory Type needs to be implemented
+			// TODO: This Inventory Type needs to be implemented
 		case LOOM:
-		// TODO: This Inventory Type needs to be implemented
+			// TODO: This Inventory Type needs to be implemented
 		case BLAST_FURNACE:
-		// TODO: This Inventory Type needs to be implemented
+			// TODO: This Inventory Type needs to be implemented
 		case ANVIL:
-		// TODO: This Inventory Type needs to be implemented
+			// TODO: This Inventory Type needs to be implemented
 		case SMITHING:
-		// TODO: This Inventory Type needs to be implemented
+			// TODO: This Inventory Type needs to be implemented
 		case BEACON:
-		// TODO: This Inventory Type needs to be implemented
+			// TODO: This Inventory Type needs to be implemented
 		case FURNACE:
-		// TODO: This Inventory Type needs to be implemented
+			// TODO: This Inventory Type needs to be implemented
 		case WORKBENCH:
-		// TODO: This Inventory Type needs to be implemented
+			// TODO: This Inventory Type needs to be implemented
 		case ENCHANTING:
-		// TODO: This Inventory Type needs to be implemented
+			// TODO: This Inventory Type needs to be implemented
 		case BREWING:
-		// TODO: This Inventory Type needs to be implemented
+			// TODO: This Inventory Type needs to be implemented
 		case CRAFTING:
-		// TODO: This Inventory Type needs to be implemented
+			// TODO: This Inventory Type needs to be implemented
 		case CREATIVE:
-		// TODO: This Inventory Type needs to be implemented
+			// TODO: This Inventory Type needs to be implemented
 		case MERCHANT:
-		// TODO: This Inventory Type needs to be implemented
+			// TODO: This Inventory Type needs to be implemented
 		default:
 			throw new UnimplementedOperationException("Inventory type not yet supported");
 		}
@@ -919,6 +919,24 @@ public class ServerMock extends Server.Spigot implements Server
 		else
 		{
 			return false;
+		}
+	}
+
+	public List<String> getCommandTabComplete(CommandSender sender, String commandLine)
+	{
+		AsyncCatcher.catchOp("command dispatch");
+		String[] commands = commandLine.split(" ");
+		String commandLabel = commands[0];
+		String[] args = Arrays.copyOfRange(commands, 1, commands.length);
+		Command command = getCommandMap().getCommand(commandLabel);
+
+		if (command != null)
+		{
+			return command.tabComplete(sender, commandLabel, args);
+		}
+		else
+		{
+			return Collections.emptyList();
 		}
 	}
 
@@ -1960,4 +1978,5 @@ public class ServerMock extends Server.Spigot implements Server
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
+
 }

@@ -5,6 +5,7 @@ plugins {
     id 'jacoco'
     id 'maven-publish'
     id 'signing'
+    id 'io.github.gradle-nexus.publish-plugin' version '1.1.0'
 }
 
 
@@ -81,6 +82,15 @@ jacoco {
 group = 'com.github.seeseemelk'
 version = property('mockbukkit.version')
 
+nexusPublishing {
+    repositories {
+        sonatype {
+            username = findProperty('ossrhUsername')
+            password = findProperty('ossrhPassword')
+        }
+    }
+}
+
 publishing {
     publications {
         mockBukkit(MavenPublication) {
@@ -113,25 +123,6 @@ publishing {
                         email = 'sebastiaan.de.schaetzen@gmail.com'
                     }
                 }
-            }
-        }
-    }
-
-    repositories {
-        maven {
-            name = 'repository'
-            url = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
-            credentials {
-                username = findProperty('ossrhUsername')
-                password = findProperty('ossrhPassword')
-            }
-        }
-        maven {
-            name = 'snapshotRepository'
-            url = 'https://oss.sonatype.org/content/repositories/snapshots/'
-            credentials {
-                username = findProperty('ossrhUsername')
-                password = findProperty('ossrhPassword')
             }
         }
     }
