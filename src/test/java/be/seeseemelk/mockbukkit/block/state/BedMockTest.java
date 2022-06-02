@@ -6,9 +6,9 @@ import org.bukkit.Material;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class BedMockTest
 {
@@ -50,22 +50,15 @@ class BedMockTest
 	@Test
 	void blockStateMock_mockState_CorrectType()
 	{
-		assertInstanceOf(BedMock.class, BlockStateMock.mockState(new BlockMock(Material.BLACK_BED)));
-		assertInstanceOf(BedMock.class, BlockStateMock.mockState(new BlockMock(Material.BLUE_BED)));
-		assertInstanceOf(BedMock.class, BlockStateMock.mockState(new BlockMock(Material.BROWN_BED)));
-		assertInstanceOf(BedMock.class, BlockStateMock.mockState(new BlockMock(Material.CYAN_BED)));
-		assertInstanceOf(BedMock.class, BlockStateMock.mockState(new BlockMock(Material.GRAY_BED)));
-		assertInstanceOf(BedMock.class, BlockStateMock.mockState(new BlockMock(Material.GREEN_BED)));
-		assertInstanceOf(BedMock.class, BlockStateMock.mockState(new BlockMock(Material.LIGHT_BLUE_BED)));
-		assertInstanceOf(BedMock.class, BlockStateMock.mockState(new BlockMock(Material.LIGHT_GRAY_BED)));
-		assertInstanceOf(BedMock.class, BlockStateMock.mockState(new BlockMock(Material.LIME_BED)));
-		assertInstanceOf(BedMock.class, BlockStateMock.mockState(new BlockMock(Material.MAGENTA_BED)));
-		assertInstanceOf(BedMock.class, BlockStateMock.mockState(new BlockMock(Material.ORANGE_BED)));
-		assertInstanceOf(BedMock.class, BlockStateMock.mockState(new BlockMock(Material.PINK_BED)));
-		assertInstanceOf(BedMock.class, BlockStateMock.mockState(new BlockMock(Material.PURPLE_BED)));
-		assertInstanceOf(BedMock.class, BlockStateMock.mockState(new BlockMock(Material.RED_BED)));
-		assertInstanceOf(BedMock.class, BlockStateMock.mockState(new BlockMock(Material.WHITE_BED)));
-		assertInstanceOf(BedMock.class, BlockStateMock.mockState(new BlockMock(Material.YELLOW_BED)));
+
+		for (Material mat : Material.values())
+		{
+			if (!mat.name().endsWith("_BED") || mat.name().contains("LEGACY"))
+				continue;
+			if (BlockStateMock.mockState(new BlockMock(mat)) instanceof BedMock)
+				continue;
+			fail("BlockState for '" + mat + "' is not a " + BedMock.class.getSimpleName());
+		}
 	}
 
 }
