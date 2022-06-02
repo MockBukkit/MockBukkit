@@ -925,6 +925,9 @@ public class ServerMock extends Server.Spigot implements Server
 	public List<String> getCommandTabComplete(CommandSender sender, String commandLine)
 	{
 		AsyncCatcher.catchOp("command tabcomplete");
+		int idx = commandLine.indexOf(' ');
+		String commandLabel = commandLine.substring(0, idx);
+		String[] args = commandLine.substring(idx + 1).split(" ", -1);
 		Command command = getCommandMap().getCommand(commandLabel);
 
 		if (command != null)
