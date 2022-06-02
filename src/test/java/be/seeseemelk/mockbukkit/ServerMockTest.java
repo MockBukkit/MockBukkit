@@ -37,6 +37,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -84,9 +85,9 @@ class ServerMockTest
 	void createWorld_WorldCreator()
 	{
 		WorldCreator worldCreator = new WorldCreator("test")
-		.seed(12345)
-		.type(WorldType.FLAT)
-		.environment(World.Environment.NORMAL);
+				.seed(12345)
+				.type(WorldType.FLAT)
+				.environment(World.Environment.NORMAL);
 		World world = server.createWorld(worldCreator);
 
 		assertEquals(1, server.getWorlds().size());
@@ -673,6 +674,14 @@ class ServerMockTest
 
 		assertEquals("Test", profile.getName());
 		assertEquals(uuid, profile.getUniqueId());
+	}
+
+	@Test
+	void getCommandTabComplete_ReturnsExpectedResults()
+	{
+		MockBukkit.load(TestPlugin.class);
+		Player player = server.addPlayer();
+		assertEquals(Arrays.asList("Tab", "Complete", "Results"), server.getCommandTabComplete(player, "mockcommand argA argB"));
 	}
 
 }
