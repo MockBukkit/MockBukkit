@@ -30,6 +30,7 @@ import java.util.logging.Logger;
 
 public class BukkitSchedulerMock implements BukkitScheduler
 {
+
 	private static final String LOGGER_NAME = "BukkitSchedulerMock";
 	private final ThreadPoolExecutor pool = new ThreadPoolExecutor(0, Integer.MAX_VALUE,
 	        60L, TimeUnit.SECONDS,

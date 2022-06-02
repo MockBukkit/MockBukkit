@@ -1,17 +1,17 @@
 package be.seeseemelk.mockbukkit.scheduler;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.TestPlugin;
+import io.papermc.paper.event.player.AsyncChatEvent;
+import org.bukkit.Bukkit;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.opentest4j.AssertionFailedError;
-import be.seeseemelk.mockbukkit.ServerMock;
-import io.papermc.paper.event.player.AsyncChatEvent;
-import org.bukkit.Bukkit;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
@@ -30,6 +30,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BukkitSchedulerMockTest
 {
+
 	private BukkitSchedulerMock scheduler;
 
 	@BeforeEach
