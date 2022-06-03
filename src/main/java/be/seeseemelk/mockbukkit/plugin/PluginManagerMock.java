@@ -3,7 +3,6 @@ package be.seeseemelk.mockbukkit.plugin;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.Validate;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.PluginCommandUtils;
@@ -41,10 +40,14 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.nio.file.Files;
+
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+
+import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -57,6 +60,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -87,17 +91,20 @@ public class PluginManagerMock implements PluginManager
 	 */
 	public void unload()
 	{
-		if (parentTemporaryDirectory != null)
+		if (parentTemporaryDirectory == null)
+			return;
+
+		// Delete the temporary directory, from the deepest file to the root.
+		try (Stream<Path> walk = Files.walk(parentTemporaryDirectory.toPath()))
 		{
-			try
-			{
-				FileUtils.forceDelete(parentTemporaryDirectory);
-			}
-			catch (IOException e)
-			{
-				System.err.println("Could not remove file");
-				e.printStackTrace();
-			}
+			walk.sorted(Comparator.reverseOrder())
+					.map(Path::toFile)
+					.forEach(File::delete);
+		}
+		catch (IOException e)
+		{
+			System.err.println("Could not remove file");
+			e.printStackTrace();
 		}
 	}
 

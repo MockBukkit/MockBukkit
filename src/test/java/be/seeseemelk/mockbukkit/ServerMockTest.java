@@ -1,13 +1,5 @@
 package be.seeseemelk.mockbukkit;
 
-import com.google.common.io.ByteArrayDataOutput;
-import com.google.common.io.ByteStreams;
-import org.bukkit.Material;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.Warning;
-import org.bukkit.WorldCreator;
-import org.bukkit.WorldType;
-import org.bukkit.World;
 import be.seeseemelk.mockbukkit.command.CommandResult;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
@@ -15,18 +7,18 @@ import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
 import be.seeseemelk.mockbukkit.entity.SimpleEntityMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
+import be.seeseemelk.mockbukkit.profile.PlayerProfileMock;
+import com.google.common.io.ByteArrayDataOutput;
+import com.google.common.io.ByteStreams;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.World;
 import org.bukkit.Warning;
+import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.WorldType;
 import org.bukkit.block.data.BlockData;
-import be.seeseemelk.mockbukkit.entity.*;
-import be.seeseemelk.mockbukkit.inventory.InventoryMock;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
-import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
@@ -43,6 +35,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -89,9 +82,9 @@ class ServerMockTest
 	void createWorld_WorldCreator()
 	{
 		WorldCreator worldCreator = new WorldCreator("test")
-		.seed(12345)
-		.type(WorldType.FLAT)
-		.environment(World.Environment.NORMAL);
+				.seed(12345)
+				.type(WorldType.FLAT)
+				.environment(World.Environment.NORMAL);
 		World world = server.createWorld(worldCreator);
 
 		assertEquals(1, server.getWorlds().size());
@@ -503,34 +496,6 @@ class ServerMockTest
 	}
 
 	@Test
-	void assertMainThread_MainThread_Succeeds()
-	{
-		server.assertMainThread();
-	}
-
-	@Test
-	void assertMainThread_NotMainThread_ThrowsException() throws Exception
-	{
-		AtomicReference<Exception> exceptionThrown = new AtomicReference<>();
-
-		server.getScheduler().runTaskAsynchronously(null, () ->
-		{
-			try
-			{
-				server.assertMainThread();
-			}
-			catch (ThreadAccessException e)
-			{
-				exceptionThrown.set(e);
-			}
-		});
-
-		server.getScheduler().waitAsyncTasksFinished();
-
-		assertNotNull(exceptionThrown.get());
-	}
-
-	@Test
 	void matchPlayer_NoMatchingPlayers_EmptyList()
 	{
 		server.addPlayer("Player");
@@ -652,6 +617,42 @@ class ServerMockTest
 		playerB.assertSaid(PlainTextComponentSerializer.plainText().serialize(component));
 	}
 
+	@Test
+	void createProfile_NameOnly()
+	{
+		PlayerProfileMock profile = server.createProfile("Test");
+
+		assertEquals("Test", profile.getName());
+	}
+
+	@Test
+	void createProfile_UuidOnly()
+	{
+		UUID uuid = UUID.fromString("b9d9f8f9-f8d9-4f9d-9f8f-9f8f8f8f8f8");
+		PlayerProfileMock profile = server.createProfile(uuid);
+
+		assertEquals(uuid, profile.getUniqueId());
+	}
+
+	@Test
+	void createProfile_NameUuid()
+	{
+		UUID uuid = UUID.fromString("b9d9f8f9-f8d9-4f9d-9f8f-9f8f8f8f8f8");
+		PlayerProfileMock profile = server.createProfile(uuid, "Test");
+
+		assertEquals("Test", profile.getName());
+		assertEquals(uuid, profile.getUniqueId());
+	}
+
+	@Test
+	void getCommandTabComplete_ReturnsExpectedResults()
+	{
+		MockBukkit.load(TestPlugin.class);
+		Player player = server.addPlayer();
+		assertEquals(Arrays.asList("Tab", "Complete", "Results"), server.getCommandTabComplete(player, "mockcommand "));
+		assertEquals(Arrays.asList("Other", "Results"), server.getCommandTabComplete(player, "mockcommand argA "));
+	}
+
 }
 
 class TestRecipe implements Recipe
@@ -670,7 +671,7 @@ class TestRecipe implements Recipe
 	}
 
 	@Override
-	public ItemStack getResult()
+	public @NotNull ItemStack getResult()
 	{
 		return result;
 	}
