@@ -1,7 +1,5 @@
 package be.seeseemelk.mockbukkit;
 
-import java.util.Collection;
-
 import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.Chunk;
@@ -15,8 +13,14 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collection;
+import java.util.function.Predicate;
+import java.util.HashMap;
+import java.util.Map;
+
 public class ChunkMock implements Chunk
 {
+
 	private final World world;
 	private final int x;
 	private final int z;
@@ -43,6 +47,27 @@ public class ChunkMock implements Chunk
 	}
 
 	@Override
+	public @NotNull Collection<BlockState> getTileEntities(@NotNull Predicate<Block> blockPredicate, boolean useSnapshot)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull BlockState[] getTileEntities(boolean useSnapshot)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public long getChunkKey()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull World getWorld()
 	{
 		return world;
@@ -65,15 +90,24 @@ public class ChunkMock implements Chunk
 	@Override
 	public @NotNull ChunkSnapshot getChunkSnapshot()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getChunkSnapshot(true, false, false);
 	}
 
 	@Override
 	public @NotNull ChunkSnapshot getChunkSnapshot(boolean includeMaxblocky, boolean includeBiome, boolean includeBiomeTempRain)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Map<Coordinate, BlockState> blockStates = new HashMap<>((15 * 15) * Math.abs((world.getMaxHeight() - world.getMinHeight())), 1.0f);
+		for (int x = 0; x < 15; x++)
+		{
+			for (int y = world.getMinHeight(); y < world.getMaxHeight(); y++)
+			{
+				for (int z = 0; z < 15; z++)
+				{
+					blockStates.put(new Coordinate(x, y, z), getBlock(x, y, z).getState());
+				}
+			}
+		}
+		return new ChunkSnapshotMock(x, z, world.getMinHeight(), world.getMaxHeight(), world.getName(), world.getFullTime(), blockStates);
 	}
 
 
@@ -219,4 +253,5 @@ public class ChunkMock implements Chunk
 	{
 		return persistentDataContainer;
 	}
+
 }

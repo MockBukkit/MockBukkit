@@ -1,7 +1,8 @@
 package be.seeseemelk.mockbukkit.block.state;
 
-import java.util.List;
-
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.block.BlockMock;
+import be.seeseemelk.mockbukkit.metadata.MetadataTable;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -13,9 +14,7 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.block.BlockMock;
-import be.seeseemelk.mockbukkit.metadata.MetadataTable;
+import java.util.List;
 
 public class BlockStateMock implements BlockState, Cloneable
 {
@@ -174,15 +173,19 @@ public class BlockStateMock implements BlockState, Cloneable
 
 		Block b = getBlock();
 
-		if (b instanceof BlockMock && (force || b.getType() == material))
-		{
-			((BlockMock) b).setState(this);
-			return true;
-		}
-		else
+		if (b.getType() != this.getType() && !force)
 		{
 			return false;
 		}
+
+		b.setType(this.getType());
+
+		if (b instanceof BlockMock bm)
+		{
+			bm.setState(this);
+		}
+
+		return true;
 	}
 
 	@Override
@@ -205,6 +208,13 @@ public class BlockStateMock implements BlockState, Cloneable
 	public boolean isPlaced()
 	{
 		return block != null;
+	}
+
+	@Override
+	public boolean isCollidable()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
