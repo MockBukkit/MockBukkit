@@ -64,6 +64,20 @@ class BeehiveMockTest
 	}
 
 	@Test
+	void constructor_Clone_CopiesValues()
+	{
+		beehive.setFlower(new Location(world, 1, 2, 3));
+		beehive.setMaxEntities(5);
+		beehive.setSedated(true);
+
+		BeehiveMock cloned = new BeehiveMock(beehive);
+
+		assertEquals(new Location(world, 1, 2, 3), cloned.getFlower());
+		assertEquals(5, cloned.getMaxEntities());
+		assertTrue(cloned.isSedated());
+	}
+
+	@Test
 	void setFlower()
 	{
 		Location location = new Location(world, 0, 0, 0);
