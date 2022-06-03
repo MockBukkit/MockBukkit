@@ -33,7 +33,7 @@ class FishHookMockTest
 	private FishHookMock hook;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		server = MockBukkit.mock();
 		world = server.addSimpleWorld("world");
@@ -41,7 +41,7 @@ class FishHookMockTest
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
