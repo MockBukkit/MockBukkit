@@ -33,7 +33,7 @@ class BeaconMockTest
 	private BeaconMock beacon;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		this.server = MockBukkit.mock();
 		this.world = new WorldMock();
@@ -43,7 +43,7 @@ class BeaconMockTest
 	}
 
 	@AfterEach
-	public void teardown()
+	void teardown()
 	{
 		MockBukkit.unmock();
 	}
