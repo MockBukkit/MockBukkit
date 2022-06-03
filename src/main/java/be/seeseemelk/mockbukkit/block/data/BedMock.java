@@ -8,14 +8,14 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 
-public class BedDataMock extends BlockDataMock implements Bed
+public class BedMock extends BlockDataMock implements Bed
 {
 
 	private static final String PART = "part";
 	private static final String OCCUPIED = "occupied";
 	private static final String FACING = "facing";
 
-	public BedDataMock(Material type)
+	public BedMock(Material type)
 	{
 		super(type);
 		if (!type.name().endsWith("_BED"))

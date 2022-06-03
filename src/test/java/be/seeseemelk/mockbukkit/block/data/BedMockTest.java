@@ -9,13 +9,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.fail;
 
-class BedDataMockTest
+class BedMockTest
 {
 
 	@Test
 	void constructor_DefaultValues()
 	{
-		BedDataMock bed = new BedDataMock(Material.RED_BED);
+		BedMock bed = new BedMock(Material.RED_BED);
 
 		assertEquals(Bed.Part.FOOT, bed.getPart());
 		assertFalse(bed.isOccupied());
@@ -25,7 +25,7 @@ class BedDataMockTest
 	@Test
 	void getAsString_NoData()
 	{
-		BedDataMock bed = new BedDataMock(Material.RED_BED);
+		BedMock bed = new BedMock(Material.RED_BED);
 
 		assertEquals("minecraft:red_bed[facing=north,occupied=false,part=foot]", bed.getAsString());
 	}
@@ -35,9 +35,9 @@ class BedDataMockTest
 	{
 		for (Material material : Material.values())
 		{
-			if (material.name().endsWith("_BED") && !(BlockDataMock.mock(material) instanceof BedDataMock))
+			if (material.name().endsWith("_BED") && !(BlockDataMock.mock(material) instanceof BedMock))
 			{
-				fail("BlockDataMock for '" + material + "' is not a " + BedDataMock.class.getSimpleName());
+				fail("BlockDataMock for '" + material + "' is not a " + BedMock.class.getSimpleName());
 			}
 		}
 	}
