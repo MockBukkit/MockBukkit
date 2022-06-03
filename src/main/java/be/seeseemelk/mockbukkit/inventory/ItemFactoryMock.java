@@ -1,8 +1,11 @@
 package be.seeseemelk.mockbukkit.inventory;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.inventory.meta.ArmorStandMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.BannerMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.BookMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.CompassMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.CrossbowMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.EnchantedBookMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.FireworkEffectMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.FireworkMetaMock;
@@ -12,15 +15,6 @@ import be.seeseemelk.mockbukkit.inventory.meta.LeatherArmorMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.PotionMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.SkullMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.SuspiciousStewMetaMock;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.Objects;
-import java.util.Random;
-import java.util.function.UnaryOperator;
-
-import be.seeseemelk.mockbukkit.inventory.meta.CrossbowMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.BannerMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.ArmorStandMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.TropicalFishBucketMetaMock;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
@@ -28,7 +22,6 @@ import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.hover.content.Content;
 import org.bukkit.Color;
 import org.bukkit.Material;
-import org.bukkit.block.data.Rotatable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemFactory;
