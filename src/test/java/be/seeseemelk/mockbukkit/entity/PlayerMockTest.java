@@ -60,6 +60,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
+import java.net.InetSocketAddress;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
@@ -1500,6 +1501,31 @@ class PlayerMockTest
 		{
 			player.spawnParticle(Particle.ITEM_CRACK, player.getLocation(), 1, new Object());
 		});
+	}
+
+	@Test
+	void getAddress_Constructor()
+	{
+		PlayerMock player = server.addPlayer();
+		assertNotNull(player.getAddress());
+	}
+
+	@Test
+	void setAddress()
+	{
+		PlayerMock player = server.addPlayer();
+		InetSocketAddress address = new InetSocketAddress("192.0.2.78", 25565);
+		player.setAddress(address);
+		assertEquals(address, player.getAddress());
+	}
+
+	@Test
+	void getAddress_NullWhenNotOnline()
+	{
+		PlayerMock player = new PlayerMock(server, "testPlayer");
+		assertNull(player.getAddress());
+		server.addPlayer(player);
+		assertNotNull(player.getAddress());
 	}
 
 	@Test

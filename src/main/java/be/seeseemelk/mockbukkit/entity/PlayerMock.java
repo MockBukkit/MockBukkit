@@ -114,9 +114,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Queue;
+import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.LinkedTransferQueue;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -126,7 +128,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class PlayerMock extends LivingEntityMock implements Player, SoundReceiver
 {
 
-	private boolean online;
 	private PlayerInventoryMock inventory = null;
 	private EnderChestInventoryMock enderChest = null;
 	private GameMode gamemode = GameMode.SURVIVAL;
@@ -150,6 +151,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	private ItemStack cursor = null;
 	private long firstPlayed = 0;
 	private long lastPlayed = 0;
+	private InetSocketAddress address;
 
 	private final PlayerSpigotMock playerSpigotMock = new PlayerSpigotMock();
 	private final List<AudioExperience> heardSounds = new LinkedList<>();
@@ -166,7 +168,6 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	public PlayerMock(ServerMock server, String name)
 	{
 		this(server, name, UUID.nameUUIDFromBytes(("OfflinePlayer:" + name).getBytes(StandardCharsets.UTF_8)));
-		this.online = false;
 	}
 
 	public PlayerMock(ServerMock server, String name, UUID uuid)
@@ -174,7 +175,6 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		super(server, uuid);
 		setName(name);
 		setDisplayName(name);
-		this.online = true;
 
 		if (Bukkit.getWorlds().isEmpty())
 		{
@@ -184,6 +184,9 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		setLocation(Bukkit.getWorlds().get(0).getSpawnLocation().clone());
 		setCompassTarget(getLocation());
 		closeInventory();
+
+		Random random = ThreadLocalRandom.current();
+		address = new InetSocketAddress("192.0.2." + random.nextInt(255), random.nextInt(32768, 65535));
 	}
 
 	@Override
@@ -412,18 +415,13 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public Player getPlayer()
 	{
-		if (online)
-		{
-			return this;
-		}
-
-		return null;
+		return (isOnline()) ? this : null;
 	}
 
 	@Override
 	public boolean isOnline()
 	{
-		return this.online;
+		return getServer().getPlayer(getUniqueId()) != null;
 	}
 
 	@Override
@@ -1235,12 +1233,20 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	{
 		return this.compassTarget;
 	}
+	/**
+	 * Sets the {@link InetSocketAddress} returned by {@link #getAddress}.
+	 *
+	 * @param address The address to set.
+	 */
+	public void setAddress(@Nullable InetSocketAddress address)
+	{
+		this.address = address;
+	}
 
 	@Override
-	public InetSocketAddress getAddress()
+	public @Nullable InetSocketAddress getAddress()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return (isOnline()) ? address : null;
 	}
 
 	@Override
