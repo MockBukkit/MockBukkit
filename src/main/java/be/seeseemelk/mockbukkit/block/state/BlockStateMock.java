@@ -17,7 +17,7 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
 
-public class BlockStateMock implements BlockState, Cloneable
+public class BlockStateMock implements BlockState
 {
 
 	private final MetadataTable metadataTable = new MetadataTable();
