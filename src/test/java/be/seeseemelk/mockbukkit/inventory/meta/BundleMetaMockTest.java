@@ -21,14 +21,14 @@ class BundleMetaMockTest
 	private BundleMetaMock meta;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		MockBukkit.mock();
 		meta = new BundleMetaMock();
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
