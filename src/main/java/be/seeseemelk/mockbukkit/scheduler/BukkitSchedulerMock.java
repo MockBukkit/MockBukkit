@@ -258,9 +258,13 @@ public class BukkitSchedulerMock implements BukkitScheduler
 					queuedAsyncEvents.remove(futureEvent);
 					futureEvent.get();
 				}
-				catch (InterruptedException | ExecutionException e)
+				catch (InterruptedException e)
 				{
-					throw new RuntimeException("Failed to wait for async event execution: " + e.getMessage(), e);
+					Thread.currentThread().interrupt();
+				}
+				catch (ExecutionException e)
+				{
+					throw new RuntimeException(e);
 				}
 			}
 		}
