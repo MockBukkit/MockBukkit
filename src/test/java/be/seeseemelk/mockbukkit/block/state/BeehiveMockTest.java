@@ -23,7 +23,7 @@ class BeehiveMockTest
 	private BeehiveMock beehive;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		this.world = new WorldMock();
 		this.block = world.getBlockAt(0, 10, 0);
