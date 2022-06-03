@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assumptions.assumeFalse;
 
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.server.PluginEnableEvent;
 import org.bukkit.plugin.Plugin;
 import org.junit.jupiter.api.AfterEach;
@@ -20,13 +21,13 @@ import org.junit.jupiter.api.Test;
 class MockBukkitTest
 {
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		MockBukkit.setServerInstanceToNull();
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		if (MockBukkit.isMocked())
 		{
@@ -162,6 +163,16 @@ class MockBukkitTest
 		Plugin[] plugins = MockBukkit.getMock().getPluginManager().getPlugins();
 		assertThat(plugins.length, equalTo(1));
 		assertThat(plugins[0].getName(), equalTo("TestPlugin"));
+	}
+
+	@Test
+	void load_PluginWithConfigFile_ConfigFileParsed()
+	{
+		MockBukkit.mock();
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		FileConfiguration config = plugin.getConfig();
+		String value = config.getString("foo");
+		assertThat(value, equalTo("bar"));
 	}
 
 	private static class CustomServerMock extends ServerMock

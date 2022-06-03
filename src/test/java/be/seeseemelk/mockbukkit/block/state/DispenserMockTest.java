@@ -25,14 +25,14 @@ class DispenserMockTest
 	private Dispenser dispenser;
 
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		MockBukkit.mock();
 		dispenser = new DispenserMock(Material.DISPENSER);
 	}
 
 	@AfterEach
-	public void tearDown() throws Exception
+	void tearDown() throws Exception
 	{
 		MockBukkit.unmock();
 	}
