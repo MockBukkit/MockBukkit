@@ -1,30 +1,25 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import java.util.Set;
-import java.util.UUID;
-
-import net.kyori.adventure.text.Component;
+import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.inventory.meta.FireworkMetaMock;
 import org.apache.commons.lang.Validate;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.SpawnCategory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.jetbrains.annotations.NotNull;
-
-import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.inventory.meta.FireworkMetaMock;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.UUID;
 
 /**
  * This is a simple mock of the {@link Firework} {@link Entity}. It takes a {@link FireworkMeta} to carry all
  * properties.
  *
  * @author TheBusyBiscuit
- *
  */
 public class FireworkMock extends ProjectileMock implements Firework
 {
@@ -45,7 +40,7 @@ public class FireworkMock extends ProjectileMock implements Firework
 	}
 
 	@Override
-	public EntityType getType()
+	public @NotNull EntityType getType()
 	{
 		return EntityType.FIREWORK;
 	}
@@ -138,30 +133,4 @@ public class FireworkMock extends ProjectileMock implements Firework
 		throw new UnimplementedOperationException();
 	}
 
-	@Override
-	public @NotNull SpawnCategory getSpawnCategory()
-	{
-		return SpawnCategory.MISC;
-	}
-
-	@Override
-	public @NotNull Component name()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable Component customName()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void customName(@Nullable Component customName)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
 }
