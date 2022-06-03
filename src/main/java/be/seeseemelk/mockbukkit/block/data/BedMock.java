@@ -22,39 +22,44 @@ public class BedMock extends BlockDataMock implements Bed
 		{
 			throw new IllegalArgumentException("Cannot create a BedMock from " + type);
 		}
-		setFacing(BlockFace.NORTH);
-		set(OCCUPIED, false);
-		setPart(Part.FOOT);
+		this.setFacing(BlockFace.NORTH);
+		super.set(OCCUPIED, false);
+		this.setPart(Part.FOOT);
 	}
 
 	@Override
 	public @NotNull Part getPart()
 	{
-		return get(PART);
+		return super.get(PART);
 	}
 
 	@Override
 	public void setPart(@NotNull Part part)
 	{
-		set(PART, part);
+		super.set(PART, part);
 	}
 
 	@Override
 	public boolean isOccupied()
 	{
-		return get(OCCUPIED);
+		return super.get(OCCUPIED);
 	}
 
 	@Override
 	public @NotNull BlockFace getFacing()
 	{
-		return get(FACING);
+		return super.get(FACING);
 	}
 
 	@Override
 	public void setFacing(@NotNull BlockFace facing)
 	{
-		set(FACING, facing);
+
+		if (!getFaces().contains(facing))
+		{
+			throw new IllegalArgumentException("Invalid face: " + facing);
+		}
+		super.set(FACING, facing);
 	}
 
 	@Override
