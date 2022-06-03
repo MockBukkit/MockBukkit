@@ -1,13 +1,8 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.UUID;
-
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.WorldMock;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
@@ -17,9 +12,10 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.WorldMock;
+import java.util.UUID;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ItemEntityMockTest
 {
@@ -38,58 +34,6 @@ class ItemEntityMockTest
 	public void tearDown()
 	{
 		MockBukkit.unmock();
-	}
-
-	@Test
-	void testDropItem()
-	{
-		ItemStack item = new ItemStack(Material.DIAMOND);
-		Location location = new Location(world, 100, 100, 100);
-
-		Item entity = world.dropItem(location, item);
-
-		// Is this the same Item we wanted to drop?
-		assertEquals(item, entity.getItemStack());
-
-		// Does our Item exist in the correct World?
-		assertTrue(world.getEntities().contains(entity));
-
-		// Is it at the right location?
-		assertEquals(location, entity.getLocation());
-	}
-
-	@Test
-	void testDropItemNaturally()
-	{
-		ItemStack item = new ItemStack(Material.EMERALD);
-		Location location = new Location(world, 200, 100, 200);
-
-		Item entity = world.dropItemNaturally(location, item);
-
-		// Is this the same Item we wanted to drop?
-		assertEquals(item, entity.getItemStack());
-
-		// Does our Item exist in the correct World?
-		assertTrue(world.getEntities().contains(entity));
-
-		// Has the Location been slightly nudged?
-		assertNotEquals(location, entity.getLocation());
-	}
-
-	@Test
-	void testDropItemConsumer()
-	{
-		ItemStack item = new ItemStack(Material.BEACON);
-		Location location = new Location(world, 200, 50, 500);
-
-		Item entity = world.dropItem(location, item, n ->
-		{
-			// This consumer should be invoked BEFORE the actually spawned.
-			assertFalse(world.getEntities().contains(n));
-		});
-
-		assertEquals(item, entity.getItemStack());
-		assertTrue(world.getEntities().contains(entity));
 	}
 
 	@Test
@@ -159,4 +103,5 @@ class ItemEntityMockTest
 		// Spigot really just throws a NPE here, so this is accurate behaviour
 		assertThrows(NullPointerException.class, () -> entity.setItemStack(null));
 	}
+
 }
