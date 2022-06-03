@@ -403,13 +403,6 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		gamemode = mode;
 	}
 
-    @Override
-    public GameMode getPreviousGameMode()
-    {
-        // TODO Auto-generated method stub
-        throw new UnimplementedOperationException();
-    }
-
 	@Override
 	public boolean isWhitelisted()
 	{
@@ -1472,13 +1465,6 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
     }
 
 	@Override
-	public void playSound(@NotNull Entity entity, @NotNull Sound sound, float volume, float pitch)
-
-	{
-		playSound(entity, sound, SoundCategory.MASTER, volume, pitch);
-	}
-
-	@Override
 	public void playSound(@NotNull Location location, @NotNull String sound, @NotNull SoundCategory category, float volume, float pitch)
 	{
 		heardSounds.add(new AudioExperience(sound, category, location, volume, pitch));
@@ -1489,12 +1475,6 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	{
 		heardSounds.add(new AudioExperience(sound, category, location, volume, pitch));
 	}
-
-    @Override
-    public void playSound(Entity entity, Sound sound, SoundCategory category, float volume, float pitch)
-    {
-        playSound(entity.getLocation(), sound, volume, pitch);
-    }
 
 	@Override
 	public void playSound(@NotNull Entity entity, @NotNull Sound sound, @NotNull SoundCategory category, float volume, float pitch)

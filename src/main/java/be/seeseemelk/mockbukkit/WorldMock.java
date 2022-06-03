@@ -694,13 +694,6 @@ public class WorldMock implements World
         throw new UnimplementedOperationException();
     }
 
-	@Override
-	public boolean generateTree(Location location, Random random, TreeType type, Predicate<BlockState> statePredicate)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
 	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz) throws IllegalArgumentException
 	{
 		return this.spawn(location, clazz, null, CreatureSpawnEvent.SpawnReason.CUSTOM);
@@ -1506,27 +1499,6 @@ public class WorldMock implements World
     {
         this.playSound(entity, sound, SoundCategory.MASTER, volume, pitch);
     }
-
-    @Override
-    public void playSound(Entity entity, Sound sound, SoundCategory category, float volume, float pitch)
-    {
-        if (entity == null || entity.getWorld() != this || sound == null || category == null)
-        {
-            // Null values are simply ignored - This is inline with CB behaviour
-            return;
-        }
-
-        for (Player player : getPlayers())
-        {
-            player.playSound(entity, sound, category, volume, pitch);
-        }
-    }
-
-	@Override
-	public void playSound(Entity entity, Sound sound, float volume, float pitch)
-	{
-		this.playSound(entity, sound, SoundCategory.MASTER, volume, pitch);
-	}
 
 	@Override
 	public void playSound(Entity entity, Sound sound, SoundCategory category, float volume, float pitch)
