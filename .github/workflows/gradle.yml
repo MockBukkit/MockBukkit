@@ -11,16 +11,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Validate gradle wrapper
         uses: gradle/wrapper-validation-action@v1
       - name: Set up JDK 17
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v3
         with:
           java-version: 17
+          distribution: 'temurin'
 
       - name: Restore caches
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ~/.gradle/caches
@@ -95,7 +96,7 @@ jobs:
           gpg --batch --import private.key
           gpg --batch --export-secret-keys --passphrase $SIGN_KEY "Sebastiaan de Schaetzen <sebastiaan.de.schaetzen@gmail.com>" > private.gpg
 
-          ./gradlew publishMockBukkitPublicationToRepositoryRepository \
+          ./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository \
             -Pmockbukkit.version=$(echo ${{ steps.bump-semver.outputs.new_version }} | sed -e 's:v::') \
             -PossrhUsername=seeseemelk \
             -PossrhPassword=$OSSRH_PASSWORD \
