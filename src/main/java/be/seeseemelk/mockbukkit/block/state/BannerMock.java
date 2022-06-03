@@ -19,14 +19,14 @@ public class BannerMock extends TileStateMock implements Banner
 	public BannerMock(@NotNull Material material)
 	{
 		super(material);
-		if (material.name().endsWith("_BANNER") && !material.name().contains("LEGACY"))
+		if (!material.name().endsWith("_BANNER") || material.name().contains("LEGACY"))
 			throw new IllegalArgumentException("Cannot create a Banner state from " + material.name());
 	}
 
 	protected BannerMock(@NotNull Block block)
 	{
 		super(block);
-		if (block.getType().name().endsWith("_BANNER") && !block.getType().name().contains("LEGACY"))
+		if (!block.getType().name().endsWith("_BANNER") || block.getType().name().contains("LEGACY"))
 			throw new IllegalArgumentException("Cannot create a Banner state from " + block.getType().name());
 	}
 
