@@ -14,25 +14,27 @@ public class BannerMock extends TileStateMock implements Banner
 {
 
 	private DyeColor baseColor;
-	private List<Pattern> patterns;
+	private List<Pattern> patterns = new ArrayList<>();
 
 	public BannerMock(@NotNull Material material)
 	{
 		super(material);
-		this.patterns = new ArrayList<>();
+		if (material.name().endsWith("_BANNER") && !material.name().contains("LEGACY"))
+			throw new IllegalArgumentException("Cannot create a Banner state from " + material.name());
 	}
 
 	protected BannerMock(@NotNull Block block)
 	{
 		super(block);
-		this.patterns = new ArrayList<>();
+		if (block.getType().name().endsWith("_BANNER") && !block.getType().name().contains("LEGACY"))
+			throw new IllegalArgumentException("Cannot create a Banner state from " + block.getType().name());
 	}
 
 	protected BannerMock(@NotNull BannerMock state)
 	{
 		super(state);
 		this.baseColor = state.baseColor;
-		this.patterns = new ArrayList<>(state.patterns);
+		this.patterns.addAll(state.patterns);
 	}
 
 	@Override

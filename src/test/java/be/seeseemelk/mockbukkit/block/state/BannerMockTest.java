@@ -13,9 +13,11 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -42,6 +44,31 @@ class BannerMockTest
 	{
 		assertNull(meta.getBaseColor());
 		assertTrue(meta.getPatterns().isEmpty());
+	}
+
+
+	@Test
+	void constructor_Material()
+	{
+		assertDoesNotThrow(() -> new BannerMock(Material.BLACK_BANNER));
+	}
+
+	@Test
+	void constructor_Material_NotBeehive_ThrowsException()
+	{
+		assertThrowsExactly(IllegalArgumentException.class, () -> new BannerMock(Material.BEDROCK));
+	}
+
+	@Test
+	void constructor_Block()
+	{
+		assertDoesNotThrow(() -> new BannerMock(new BlockMock(Material.BLACK_BANNER)));
+	}
+
+	@Test
+	void constructor_Block_NotBeehive_ThrowsException()
+	{
+		assertThrowsExactly(IllegalArgumentException.class, () -> new BannerMock(new BlockMock(Material.BEDROCK)));
 	}
 
 	@Test
