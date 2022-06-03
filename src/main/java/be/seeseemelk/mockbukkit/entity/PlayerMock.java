@@ -50,6 +50,7 @@ import org.bukkit.advancement.AdvancementProgress;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.conversations.Conversation;
@@ -286,11 +287,13 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		if (gamemode == GameMode.ADVENTURE || gamemode == GameMode.SPECTATOR)
 			return null;
 		Block block = location.getBlock();
-		BlockPlaceEvent event = new BlockPlaceEvent(block, null, null, null, this, true, null);
+		BlockState blockState = block.getState();
+		block.setType(material);
+		BlockPlaceEvent event = new BlockPlaceEvent(block, blockState, null, null, this, true, null);
 		Bukkit.getPluginManager().callEvent(event);
-		if (!event.isCancelled())
+		if (event.isCancelled() || !event.canBuild())
 		{
-			block.setType(material);
+			blockState.update(true, false);
 		}
 		return event;
 	}
