@@ -454,9 +454,10 @@ class WorldMockTest
 	void worldPlayEffect_NullData()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Location loc = new Location(world, 0, 0, 0);
 		assertThrows(IllegalArgumentException.class, () ->
 		{
-			world.playEffect(new Location(world, 0, 0, 0), Effect.STEP_SOUND, null);
+			world.playEffect(loc, Effect.STEP_SOUND, null);
 		});
 	}
 
@@ -464,9 +465,10 @@ class WorldMockTest
 	void worldPlayEffect_IncorrectData()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Location loc = new Location(world, 0, 0, 0);
 		assertThrows(IllegalArgumentException.class, () ->
 		{
-			world.playEffect(new Location(world, 0, 0, 0), Effect.STEP_SOUND, 1.0f);
+			world.playEffect(loc, Effect.STEP_SOUND, 1.0f);
 		});
 	}
 
