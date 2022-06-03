@@ -247,6 +247,8 @@ public class BlockStateMock implements BlockState, Cloneable
 	{
 		switch (block.getType())
 		{
+		case BELL:
+			return new BellMock(block);
 		case LECTERN:
 			return new LecternMock(block);
 		case HOPPER:
