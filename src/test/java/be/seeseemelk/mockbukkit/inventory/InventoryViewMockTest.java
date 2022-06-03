@@ -20,14 +20,14 @@ class InventoryViewMockTest
 	private InventoryViewMock view;
 
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		server = MockBukkit.mock();
 		view = new SimpleInventoryViewMock();
 	}
 
 	@AfterEach
-	public void tearDown() throws Exception
+	void tearDown() throws Exception
 	{
 		MockBukkit.unmock();
 	}
