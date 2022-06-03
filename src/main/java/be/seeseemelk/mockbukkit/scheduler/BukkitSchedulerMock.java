@@ -1,10 +1,22 @@
 package be.seeseemelk.mockbukkit.scheduler;
 
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import org.apache.commons.lang.Validate;
+import org.bukkit.event.Event;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitScheduler;
+import org.bukkit.scheduler.BukkitTask;
+import org.bukkit.scheduler.BukkitWorker;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -14,19 +26,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 import java.util.logging.Logger;
-
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-
-import org.apache.commons.lang.Validate;
-import org.bukkit.event.Event;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitScheduler;
-import org.bukkit.scheduler.BukkitTask;
-import org.bukkit.scheduler.BukkitWorker;
-
-import org.jetbrains.annotations.NotNull;
 
 public class BukkitSchedulerMock implements BukkitScheduler
 {
@@ -51,12 +50,15 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		};
 	}
 
-
+	/**
+	 * Sets the maximum time to wait for async tasks to finish before terminating them.
+	 *
+	 * @param timeout The timeout in milliseconds.
+	 */
 	public void setShutdownTimeout(long timeout)
 	{
 		this.executorTimeout = timeout;
 	}
-
 
 	/**
 	 * Shuts the scheduler down. Note that this function will throw exception that where thrown by old asynchronous
@@ -65,10 +67,36 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public void shutdown()
 	{
 		waitAsyncTasksFinished();
-		pool.shutdown();
+
+		shutdownPool(pool);
+
 		if (asyncException.get() != null)
 			throw new AsyncTaskException(asyncException.get());
-		asyncEventExecutor.shutdownNow();
+
+		shutdownPool(asyncEventExecutor);
+	}
+
+	/**
+	 * Shuts down the given executor service, waiting up to the shutdown timeout for all tasks to finish.
+	 *
+	 * @param pool The pool to shut down.
+	 * @see #setShutdownTimeout(long)
+	 */
+	private void shutdownPool(ExecutorService pool)
+	{
+		pool.shutdown();
+		try
+		{
+			if (!pool.awaitTermination(this.executorTimeout, TimeUnit.MILLISECONDS))
+			{
+				pool.shutdownNow();
+			}
+		}
+		catch (InterruptedException e)
+		{
+			pool.shutdownNow();
+			Thread.currentThread().interrupt();
+		}
 	}
 
 	public @NotNull Future<?> executeAsyncEvent(Event event)
@@ -151,10 +179,19 @@ public class BukkitSchedulerMock implements BukkitScheduler
 
 	/**
 	 * Waits until all asynchronous tasks have finished executing. If you have an asynchronous task that runs
-	 * indefinitely, this function will never return.
+	 * indefinitely, this function will never return. Note that this will not wait for async events to finish.
 	 */
 	public void waitAsyncTasksFinished()
 	{
+		// Cancel repeating tasks so they don't run forever.
+		for (Map.Entry<Integer, ScheduledTask> entry : scheduledTasks.tasks.entrySet())
+		{
+			if (entry.getValue() instanceof RepeatingTask)
+			{
+				scheduledTasks.cancelTask(entry.getKey());
+			}
+		}
+
 		// Make sure all tasks get to execute. (except for repeating asynchronous tasks, they only will fire once)
 		while (scheduledTasks.getScheduledTaskCount() > 0)
 		{
@@ -176,8 +213,8 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			}
 			if (System.currentTimeMillis() > (systemTime + executorTimeout))
 			{
-				// If a plugin has left a a runnable going and not cancelled it we could call this bad practice.
-				// we should now force interrupt all these runnables forcing them to throw Interrupted Exceptions.
+				// If a plugin has left a runnable going and not cancelled it we could call this bad practice.
+				// We should force interrupt all those runnables forcing them to throw Interrupted Exceptions-
 				// if they handle that
 				for (ScheduledTask task : scheduledTasks.getCurrentTaskList())
 				{
@@ -201,6 +238,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	}
 
 	@Override
+	@Deprecated
 	public @NotNull BukkitTask runTask(@NotNull Plugin plugin, @NotNull BukkitRunnable task)
 	{
 		return runTask(plugin, (Runnable) task);
@@ -225,6 +263,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	}
 
 	@Override
+	@Deprecated
 	public @NotNull BukkitTask runTaskTimer(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay, long period)
 	{
 		return runTaskTimer(plugin, (Runnable) task, delay, period);
@@ -238,6 +277,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	}
 
 	@Override
+	@Deprecated
 	public int scheduleSyncDelayedTask(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay)
 	{
 		Logger.getLogger(LOGGER_NAME).warning("Consider using runTaskLater instead of scheduleSyncDelayTask");
@@ -252,6 +292,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	}
 
 	@Override
+	@Deprecated
 	public int scheduleSyncDelayedTask(@NotNull Plugin plugin, @NotNull BukkitRunnable task)
 	{
 		Logger.getLogger(LOGGER_NAME).warning("Consider using runTask instead of scheduleSyncDelayTask");
@@ -266,6 +307,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	}
 
 	@Override
+	@Deprecated
 	public int scheduleSyncRepeatingTask(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay, long period)
 	{
 		Logger.getLogger(LOGGER_NAME).warning("Consider using runTaskTimer instead of scheduleSyncRepeatingTask");
@@ -273,6 +315,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	}
 
 	@Override
+	@Deprecated
 	public int scheduleAsyncDelayedTask(@NotNull Plugin plugin, @NotNull Runnable task, long delay)
 	{
 		Logger.getLogger(LOGGER_NAME)
@@ -281,6 +324,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	}
 
 	@Override
+	@Deprecated
 	public int scheduleAsyncDelayedTask(@NotNull Plugin plugin, @NotNull Runnable task)
 	{
 		Logger.getLogger(LOGGER_NAME)
@@ -289,6 +333,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	}
 
 	@Override
+	@Deprecated
 	public int scheduleAsyncRepeatingTask(@NotNull Plugin plugin, @NotNull Runnable task, long delay, long period)
 	{
 		Logger.getLogger(LOGGER_NAME)
@@ -467,6 +512,13 @@ public class BukkitSchedulerMock implements BukkitScheduler
 
 	@Override
 	public void runTaskTimerAsynchronously(@NotNull Plugin plugin, @NotNull Consumer<BukkitTask> task, long delay, long period)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Executor getMainThreadExecutor(@NotNull Plugin plugin)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

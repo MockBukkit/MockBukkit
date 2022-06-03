@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
@@ -79,5 +80,29 @@ class SignMockTest
 	{
 		assertThrows(IndexOutOfBoundsException.class, () -> sign.getLine(100));
 	}
+
+	@Test
+	void testGetLineComponent()
+	{
+		Component component = Component.text("Hello World");
+		sign.line(2, component);
+		assertEquals(component, sign.line(2));
+	}
+
+	@Test
+	void testSetLineComponent()
+	{
+		Component component = Component.text("Hello World");
+		sign.line(2, component);
+		assertEquals(component, sign.line(2));
+	}
+
+	@Test
+	void testGetLineComponentNull()
+	{
+		assertThrows(IllegalArgumentException.class, () -> sign.line(2, null));
+	}
+
+
 
 }

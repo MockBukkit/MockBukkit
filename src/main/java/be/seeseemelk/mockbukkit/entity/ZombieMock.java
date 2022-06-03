@@ -1,18 +1,16 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import java.util.UUID;
-
+import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.Zombie;
-import org.bukkit.inventory.EntityEquipment;
+import org.jetbrains.annotations.NotNull;
 
-import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import java.util.UUID;
 
 public class ZombieMock extends MonsterMock implements Zombie
 {
-	private final EntityEquipment equipment = new EntityEquipmentMock(this);
 
 	private boolean baby;
 	private boolean villager;
@@ -28,15 +26,9 @@ public class ZombieMock extends MonsterMock implements Zombie
 	}
 
 	@Override
-	public EntityType getType()
+	public @NotNull EntityType getType()
 	{
 		return EntityType.ZOMBIE;
-	}
-
-	@Override
-	public EntityEquipment getEquipment()
-	{
-		return equipment;
 	}
 
 	@Override
@@ -93,42 +85,106 @@ public class ZombieMock extends MonsterMock implements Zombie
 	}
 
 	@Override
-	public int getAge()
+	public boolean isDrowning()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void startDrowning(int drownedConversionTime)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void stopDrowning()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setArmsRaised(boolean raised)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isArmsRaised()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean shouldBurnInDay()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setShouldBurnInDay(boolean shouldBurnInDay)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean canBreakDoors()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setCanBreakDoors(boolean canBreakDoors)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean supportsBreakingDoors()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getAge()
+	{
+		return this.isBaby() ? -1 : 0;
 	}
 
 	@Override
 	public void setAge(int age)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.setBaby(age < 0);
 	}
 
 	@Override
 	public void setAgeLock(boolean lock)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// Does nothing in CraftBukkit.
 	}
 
 	@Override
 	public boolean getAgeLock()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return false;
 	}
 
 	@Override
-	@Deprecated
 	public boolean isBaby()
 	{
 		return baby;
 	}
 
 	@Override
-	@Deprecated
 	public void setBaby(boolean baby)
 	{
 		this.baby = baby;
@@ -155,14 +211,13 @@ public class ZombieMock extends MonsterMock implements Zombie
 	@Override
 	public boolean canBreed()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return false;
 	}
 
 	@Override
 	public void setBreed(boolean breed)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// Does nothing in CraftBukkit.
 	}
+
 }

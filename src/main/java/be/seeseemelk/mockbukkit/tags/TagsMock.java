@@ -89,7 +89,14 @@ public final class TagsMock
 		{
 			// We wanna skip the root node as we are only interested in the actual
 			// .json files for the tags
-			stream.skip(1).forEach(path ->
+			// We also want to filter out "_all" files or similar, as those are not
+			// tag files but rather serve different purposes
+			stream.skip(1).filter(path ->
+			{
+				boolean isDirectory = Files.isDirectory(path);
+				boolean isTagFormat = !path.getFileName().toString().startsWith("_");
+				return !isDirectory && isTagFormat;
+			}).forEach(path ->
 			{
 				// Splitting will strip away the .json
 				String name = filePattern.split(path.getFileName().toString())[0];
