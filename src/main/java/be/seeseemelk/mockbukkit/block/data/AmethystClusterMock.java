@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.block.data;
 
+import com.google.common.collect.ImmutableSet;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.Directional;
@@ -45,7 +46,7 @@ public class AmethystClusterMock extends BlockDataMock implements AmethystCluste
 	@Override
 	public @NotNull Set<BlockFace> getFaces()
 	{
-		return Set.of(BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST, BlockFace.UP, BlockFace.DOWN);
+		return ImmutableSet.of(BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST, BlockFace.UP, BlockFace.DOWN);
 	}
 
 	@Override

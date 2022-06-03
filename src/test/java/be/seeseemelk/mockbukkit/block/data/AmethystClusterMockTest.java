@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.block.data;
 
+import com.google.common.collect.ImmutableSet;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
 import org.junit.jupiter.api.BeforeEach;
@@ -58,6 +59,12 @@ class AmethystClusterMockTest
 	{
 		Set<BlockFace> validFaces = Set.of(BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST, BlockFace.UP, BlockFace.DOWN);
 		assertEquals(validFaces, cluster.getFaces());
+	}
+
+	@Test
+	void getFacing_ImmutableSet()
+	{
+		assertInstanceOf(ImmutableSet.class, cluster.getFaces());
 	}
 
 	@Test
