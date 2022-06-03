@@ -11,7 +11,7 @@ class AttributeInstanceMockTest
 	private AttributeInstanceMock attribute;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		attribute = new AttributeInstanceMock(Attribute.GENERIC_FLYING_SPEED, 5.0);
 	}

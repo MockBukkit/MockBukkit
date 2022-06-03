@@ -31,7 +31,7 @@ class BukkitSchedulerMockTest
 	private BukkitSchedulerMock scheduler;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		scheduler = new BukkitSchedulerMock();
 	}
@@ -190,7 +190,7 @@ class BukkitSchedulerMockTest
 	}
 
 	@Test
-	public void cancellingAsyncTaskDecreasesNumberOfQueuedAsyncTasks()
+	void cancellingAsyncTaskDecreasesNumberOfQueuedAsyncTasks()
 	{
 		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
 		BukkitTask task = scheduler.runTaskLaterAsynchronously(null, () -> {}, 1);
@@ -200,7 +200,7 @@ class BukkitSchedulerMockTest
 	}
 
 	@Test
-	public void cancellingAllTaskByPlugin()
+	void cancellingAllTaskByPlugin()
 	{
 		ServerMock server = MockBukkit.mock();
 		MockBukkit.load(TestPlugin.class);
@@ -220,7 +220,7 @@ class BukkitSchedulerMockTest
 
 
 	@Test
-	public void longScheduledRunningTask_Throws_RunTimeException()
+	void longScheduledRunningTask_Throws_RunTimeException()
 	{
 		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
 		scheduler.runTaskAsynchronously(null, () ->
@@ -266,7 +266,7 @@ class BukkitSchedulerMockTest
 	}
 
 	@Test
-	public void longRunningTask_Throws_RunTimeException()
+	void longRunningTask_Throws_RunTimeException()
 	{
 		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
 		final AtomicBoolean alive = new AtomicBoolean(true);

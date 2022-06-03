@@ -95,7 +95,7 @@ class PlayerMockTest
 	private PlayerMock player;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		server = MockBukkit.mock(new ServerMock()
 		{
@@ -120,7 +120,7 @@ class PlayerMockTest
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
