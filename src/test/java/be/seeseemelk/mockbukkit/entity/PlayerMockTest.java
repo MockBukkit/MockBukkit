@@ -37,6 +37,8 @@ import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerExpChangeEvent;
@@ -60,6 +62,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
+import java.net.InetSocketAddress;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -1585,6 +1588,46 @@ class PlayerMockTest
 		assertThrows(IllegalArgumentException.class, () ->
 		{
 			player.spawnParticle(Particle.ITEM_CRACK, player.getLocation(), 1, new Object());
+		});
+	}
+
+	@Test
+	void getAddress_Constructor()
+	{
+		PlayerMock player = server.addPlayer();
+		assertNotNull(player.getAddress());
+	}
+
+	@Test
+	void setAddress()
+	{
+		PlayerMock player = server.addPlayer();
+		InetSocketAddress address = new InetSocketAddress("192.0.2.78", 25565);
+		player.setAddress(address);
+		assertEquals(address, player.getAddress());
+	}
+
+	@Test
+	void getAddress_NullWhenNotOnline()
+	{
+		PlayerMock player = new PlayerMock(server, "testPlayer");
+		assertNull(player.getAddress());
+		server.addPlayer(player);
+		assertNotNull(player.getAddress());
+	}
+
+	@Test
+	void testPlayerInventoryClick_Dispatched()
+	{
+		Inventory inventory = Bukkit.createInventory(null, 9);
+		player.openInventory(inventory);
+		player.simulateInventoryClick(0);
+		server.getPluginManager().assertEventFired(event ->
+		{
+			if (!(event instanceof InventoryClickEvent inventoryClickEvent)) return false;
+			if (inventoryClickEvent.getSlot() != 0) return false;
+			if (inventoryClickEvent.getClickedInventory() != inventory) return false;
+			return inventoryClickEvent.getClick() == ClickType.LEFT;
 		});
 	}
 
