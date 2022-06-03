@@ -230,7 +230,7 @@ class WorldMockTest
 	void setStorm_True_Storming()
 	{
 		WorldMock world = new WorldMock();
-		assumeFalse(world.hasStorm());
+		assertFalse(world.hasStorm());
 		world.setStorm(true);
 		assertTrue(world.hasStorm(), "The world should be storming");
 	}
