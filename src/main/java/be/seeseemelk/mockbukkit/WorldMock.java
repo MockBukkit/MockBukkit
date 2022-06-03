@@ -687,12 +687,12 @@ public class WorldMock implements World
 		throw new UnimplementedOperationException();
 	}
 
-    @Override
-    public boolean generateTree(Location location, Random random, TreeType type, Predicate<BlockState> statePredicate)
-    {
-        // TODO Auto-generated method stub
-        throw new UnimplementedOperationException();
-    }
+	@Override
+	public boolean generateTree(Location location, Random random, TreeType type, Predicate<BlockState> statePredicate)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
 
 	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz) throws IllegalArgumentException
 	{
@@ -1494,11 +1494,11 @@ public class WorldMock implements World
 		}
 	}
 
-    @Override
-    public void playSound(Entity entity, Sound sound, float volume, float pitch)
-    {
-        this.playSound(entity, sound, SoundCategory.MASTER, volume, pitch);
-    }
+	@Override
+	public void playSound(Entity entity, Sound sound, float volume, float pitch)
+	{
+		this.playSound(entity, sound, SoundCategory.MASTER, volume, pitch);
+	}
 
 	@Override
 	public void playSound(Entity entity, Sound sound, SoundCategory category, float volume, float pitch)

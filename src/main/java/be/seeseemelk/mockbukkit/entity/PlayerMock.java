@@ -1449,7 +1449,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public void playSound(@NotNull Location location, @NotNull String sound, float volume, float pitch)
 	{
-	    playSound(location, sound, SoundCategory.MASTER, volume, pitch);
+		heardSounds.add(new AudioExperience(sound, SoundCategory.MASTER, location, volume, pitch));
 	}
 
 	@Override
@@ -1458,11 +1458,12 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		playSound(location, sound, SoundCategory.MASTER, volume, pitch);
 	}
 
-    @Override
-    public void playSound(Entity entity, Sound sound, float volume, float pitch)
-    {
-        playSound(entity, sound, SoundCategory.MASTER, volume, pitch);
-    }
+	@Override
+	public void playSound(@NotNull Entity entity, @NotNull Sound sound, float volume, float pitch)
+
+	{
+		playSound(entity, sound, SoundCategory.MASTER, volume, pitch);
+	}
 
 	@Override
 	public void playSound(@NotNull Location location, @NotNull String sound, @NotNull SoundCategory category, float volume, float pitch)
