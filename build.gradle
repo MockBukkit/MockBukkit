@@ -52,6 +52,16 @@ task sourcesJar(type: Jar) {
     from sourceSets.main.allSource
 }
 
+processResources {
+    doLast {
+        file("${buildDir}/resources/main/build.properties").withWriter { w ->
+            Properties p = new Properties()
+            p['full-api-version'] = gradle.ext.apiVersionFull
+            p.store w, null
+        }
+    }
+}
+
 sourceCompatibility = gradle.ext.javaVersion
 targetCompatibility = gradle.ext.javaVersion
 tasks.withType(JavaCompile) {
