@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
-class BellMockTestTest
+class BlastFurnaceMockTest
 {
 
 	private WorldMock world;
@@ -36,7 +36,7 @@ class BellMockTestTest
 	@Test
 	void constructor_Material_NotBeehive_ThrowsException()
 	{
-		assertThrowsExactly(IllegalArgumentException.class, () -> new BlastFurnaceMock(Material.BEDROCK));
+		assertThrowsExactly(IllegalArgumentException.class, () -> new BlastFurnaceMock(Material.FURNACE));
 	}
 
 	@Test
@@ -48,7 +48,7 @@ class BellMockTestTest
 	@Test
 	void constructor_Block_NotBeehive_ThrowsException()
 	{
-		assertThrowsExactly(IllegalArgumentException.class, () -> new BlastFurnaceMock(new BlockMock(Material.BEDROCK)));
+		assertThrowsExactly(IllegalArgumentException.class, () -> new BlastFurnaceMock(new BlockMock(Material.FURNACE)));
 	}
 
 	@Test
