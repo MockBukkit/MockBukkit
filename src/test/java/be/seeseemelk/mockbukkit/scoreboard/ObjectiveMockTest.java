@@ -22,7 +22,7 @@ class ObjectiveMockTest
 	private ObjectiveMock objective;
 
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		server = MockBukkit.mock();
 		scoreboard = new ScoreboardMock();
@@ -30,7 +30,7 @@ class ObjectiveMockTest
 	}
 
 	@AfterEach
-	public void tearDown() throws Exception
+	void tearDown() throws Exception
 	{
 		MockBukkit.unmock();
 	}

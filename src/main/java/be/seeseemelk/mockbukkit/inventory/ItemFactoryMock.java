@@ -1,13 +1,20 @@
 package be.seeseemelk.mockbukkit.inventory;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.Objects;
-import java.util.Random;
-import java.util.function.UnaryOperator;
-
-import be.seeseemelk.mockbukkit.inventory.meta.BannerMetaMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.inventory.meta.ArmorStandMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.BannerMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.BookMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.CompassMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.CrossbowMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.EnchantedBookMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.FireworkEffectMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.FireworkMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.KnowledgeBookMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.LeatherArmorMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.PotionMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.SkullMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.SuspiciousStewMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.TropicalFishBucketMetaMock;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
@@ -20,21 +27,15 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemFactory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.inventory.meta.BookMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.EnchantedBookMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.FireworkEffectMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.FireworkMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.KnowledgeBookMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.LeatherArmorMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.PotionMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.SkullMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.SuspiciousStewMetaMock;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Objects;
+import java.util.Random;
+import java.util.function.UnaryOperator;
 
 public class ItemFactoryMock implements ItemFactory
 {
@@ -60,6 +61,8 @@ public class ItemFactoryMock implements ItemFactory
 		case POTION, LINGERING_POTION, SPLASH_POTION -> PotionMetaMock.class;
 		case PLAYER_HEAD -> SkullMetaMock.class;
 		case SUSPICIOUS_STEW -> SuspiciousStewMetaMock.class;
+		case COMPASS -> CompassMetaMock.class;
+		case CROSSBOW -> CrossbowMetaMock.class;
 		case WHITE_BANNER, ORANGE_BANNER, MAGENTA_BANNER, LIGHT_BLUE_BANNER, YELLOW_BANNER, LIME_BANNER, PINK_BANNER, GRAY_BANNER, LIGHT_GRAY_BANNER, CYAN_BANNER, PURPLE_BANNER, BLUE_BANNER, BROWN_BANNER, GREEN_BANNER, RED_BANNER, BLACK_BANNER ->
 				BannerMetaMock.class;
 		case TROPICAL_FISH_BUCKET -> TropicalFishBucketMetaMock.class;

@@ -18,14 +18,14 @@ class PlayerMessagingTest
 	private PlayerMock sender;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		server = MockBukkit.mock();
 		sender = server.addPlayer();
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}

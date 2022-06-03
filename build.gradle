@@ -5,6 +5,7 @@ plugins {
     id 'jacoco'
     id 'maven-publish'
     id 'signing'
+    id 'io.github.gradle-nexus.publish-plugin' version '1.1.0'
 }
 
 
@@ -52,6 +53,16 @@ task sourcesJar(type: Jar) {
     from sourceSets.main.allSource
 }
 
+processResources {
+    doLast {
+        file("${buildDir}/resources/main/build.properties").withWriter { w ->
+            Properties p = new Properties()
+            p['full-api-version'] = gradle.ext.apiVersionFull
+            p.store w, null
+        }
+    }
+}
+
 sourceCompatibility = gradle.ext.javaVersion
 targetCompatibility = gradle.ext.javaVersion
 tasks.withType(JavaCompile) {
@@ -81,6 +92,15 @@ jacoco {
 
 group = 'com.github.seeseemelk'
 version = property('mockbukkit.version')
+
+nexusPublishing {
+    repositories {
+        sonatype {
+            username = findProperty('ossrhUsername')
+            password = findProperty('ossrhPassword')
+        }
+    }
+}
 
 publishing {
     publications {
@@ -114,25 +134,6 @@ publishing {
                         email = 'sebastiaan.de.schaetzen@gmail.com'
                     }
                 }
-            }
-        }
-    }
-
-    repositories {
-        maven {
-            name = 'repository'
-            url = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
-            credentials {
-                username = findProperty('ossrhUsername')
-                password = findProperty('ossrhPassword')
-            }
-        }
-        maven {
-            name = 'snapshotRepository'
-            url = 'https://oss.sonatype.org/content/repositories/snapshots/'
-            credentials {
-                username = findProperty('ossrhUsername')
-                password = findProperty('ossrhPassword')
             }
         }
     }

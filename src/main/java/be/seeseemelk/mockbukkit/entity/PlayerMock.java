@@ -50,6 +50,7 @@ import org.bukkit.advancement.AdvancementProgress;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.conversations.Conversation;
@@ -66,6 +67,9 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryAction;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
@@ -112,9 +116,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Queue;
+import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.LinkedTransferQueue;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Predicate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -123,7 +129,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class PlayerMock extends LivingEntityMock implements Player, SoundReceiver
 {
 
-	private boolean online;
 	private PlayerInventoryMock inventory = null;
 	private EnderChestInventoryMock enderChest = null;
 	private GameMode gamemode = GameMode.SURVIVAL;
@@ -147,6 +152,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	private ItemStack cursor = null;
 	private long firstPlayed = 0;
 	private long lastPlayed = 0;
+	private InetSocketAddress address;
 
 	private final PlayerSpigotMock playerSpigotMock = new PlayerSpigotMock();
 	private final List<AudioExperience> heardSounds = new LinkedList<>();
@@ -163,7 +169,6 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	public PlayerMock(ServerMock server, String name)
 	{
 		this(server, name, UUID.nameUUIDFromBytes(("OfflinePlayer:" + name).getBytes(StandardCharsets.UTF_8)));
-		this.online = false;
 	}
 
 	public PlayerMock(ServerMock server, String name, UUID uuid)
@@ -171,7 +176,6 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		super(server, uuid);
 		setName(name);
 		setDisplayName(name);
-		this.online = true;
 
 		if (Bukkit.getWorlds().isEmpty())
 		{
@@ -181,6 +185,9 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		setLocation(Bukkit.getWorlds().get(0).getSpawnLocation().clone());
 		setCompassTarget(getLocation());
 		closeInventory();
+
+		Random random = ThreadLocalRandom.current();
+		address = new InetSocketAddress("192.0.2." + random.nextInt(255), random.nextInt(32768, 65535));
 	}
 
 	@Override
@@ -256,7 +263,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	public @Nullable BlockBreakEvent simulateBlockBreak(Block block)
 	{
 		if ((gamemode == GameMode.SPECTATOR || gamemode == GameMode.ADVENTURE)
-		        || (gamemode == GameMode.SURVIVAL && simulateBlockDamagePure(block).isCancelled()))
+				|| (gamemode == GameMode.SURVIVAL && simulateBlockDamagePure(block).isCancelled()))
 			return null;
 
 		BlockBreakEvent event = new BlockBreakEvent(block, this);
@@ -280,13 +287,53 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		if (gamemode == GameMode.ADVENTURE || gamemode == GameMode.SPECTATOR)
 			return null;
 		Block block = location.getBlock();
-		BlockPlaceEvent event = new BlockPlaceEvent(block, null, null, null, this, true, null);
+		BlockState blockState = block.getState();
+		block.setType(material);
+		BlockPlaceEvent event = new BlockPlaceEvent(block, blockState, null, null, this, true, null);
 		Bukkit.getPluginManager().callEvent(event);
-		if (!event.isCancelled())
+		if (event.isCancelled() || !event.canBuild())
 		{
-			block.setType(material);
+			blockState.update(true, false);
 		}
 		return event;
+	}
+
+	/**
+	 * Simulates the player clicking an Inventory.
+	 *
+	 * @param slot The slot in the player's open inventory
+	 * @return The event that was fired.
+	 */
+	public InventoryClickEvent simulateInventoryClick(int slot)
+	{
+		return simulateInventoryClick(getOpenInventory(), slot);
+	}
+
+	/**
+	 * Simulates the player clicking an Inventory.
+	 *
+	 * @param inventoryView The inventory view we want to click
+	 * @param slot          The slot in the provided Inventory
+	 * @return The event that was fired.
+	 */
+	public InventoryClickEvent simulateInventoryClick(InventoryView inventoryView, int slot)
+	{
+		return simulateInventoryClick(inventoryView, ClickType.LEFT, slot);
+	}
+
+	/**
+	 * Simulates the player clicking an Inventory.
+	 *
+	 * @param inventoryView The inventory view we want to click
+	 * @param clickType     The click type we want to fire
+	 * @param slot          The slot in the provided Inventory
+	 * @return The event that was fired.
+	 */
+	public InventoryClickEvent simulateInventoryClick(InventoryView inventoryView, ClickType clickType, int slot)
+	{
+		InventoryClickEvent inventoryClickEvent = new InventoryClickEvent(inventoryView, InventoryType.SlotType.CONTAINER, slot, clickType, InventoryAction.UNKNOWN);
+		Bukkit.getPluginManager().callEvent(inventoryClickEvent);
+		return inventoryClickEvent;
 	}
 
 	/**
@@ -371,18 +418,13 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public Player getPlayer()
 	{
-		if (online)
-		{
-			return this;
-		}
-
-		return null;
+		return (isOnline()) ? this : null;
 	}
 
 	@Override
 	public boolean isOnline()
 	{
-		return this.online;
+		return getServer().getPlayer(getUniqueId()) != null;
 	}
 
 	@Override
@@ -1194,12 +1236,20 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	{
 		return this.compassTarget;
 	}
+	/**
+	 * Sets the {@link InetSocketAddress} returned by {@link #getAddress}.
+	 *
+	 * @param address The address to set.
+	 */
+	public void setAddress(@Nullable InetSocketAddress address)
+	{
+		this.address = address;
+	}
 
 	@Override
-	public InetSocketAddress getAddress()
+	public @Nullable InetSocketAddress getAddress()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return (isOnline()) ? address : null;
 	}
 
 	@Override
@@ -1371,27 +1421,27 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	private void playNote(@NotNull Location loc, @NotNull Instrument instrument, byte note)
 	{
 		Sound sound = switch (instrument)
-		{
-		case BANJO -> Sound.BLOCK_NOTE_BLOCK_BANJO;
-		case BASS_DRUM -> Sound.BLOCK_NOTE_BLOCK_BASEDRUM;
-		case BASS_GUITAR -> Sound.BLOCK_NOTE_BLOCK_BASS;
-		case BELL -> Sound.BLOCK_NOTE_BLOCK_BELL;
-		case BIT -> Sound.BLOCK_NOTE_BLOCK_BIT;
-		case CHIME -> Sound.BLOCK_NOTE_BLOCK_CHIME;
-		case COW_BELL -> Sound.BLOCK_NOTE_BLOCK_COW_BELL;
-		case DIDGERIDOO -> Sound.BLOCK_NOTE_BLOCK_DIDGERIDOO;
-		case FLUTE -> Sound.BLOCK_NOTE_BLOCK_FLUTE;
-		case GUITAR -> Sound.BLOCK_NOTE_BLOCK_GUITAR;
-		case IRON_XYLOPHONE -> Sound.BLOCK_NOTE_BLOCK_IRON_XYLOPHONE;
-		case PIANO -> Sound.BLOCK_NOTE_BLOCK_HARP;
-		case PLING -> Sound.BLOCK_NOTE_BLOCK_PLING;
-		case SNARE_DRUM -> Sound.BLOCK_NOTE_BLOCK_SNARE;
-		case STICKS -> Sound.BLOCK_NOTE_BLOCK_HAT;
-		case XYLOPHONE -> Sound.BLOCK_NOTE_BLOCK_XYLOPHONE;
-			default ->
-			// This should never be reached unless Mojang adds new instruments
-			throw new UnimplementedOperationException("Instrument '" + instrument + "' has no implementation!");
-		};
+				{
+					case BANJO -> Sound.BLOCK_NOTE_BLOCK_BANJO;
+					case BASS_DRUM -> Sound.BLOCK_NOTE_BLOCK_BASEDRUM;
+					case BASS_GUITAR -> Sound.BLOCK_NOTE_BLOCK_BASS;
+					case BELL -> Sound.BLOCK_NOTE_BLOCK_BELL;
+					case BIT -> Sound.BLOCK_NOTE_BLOCK_BIT;
+					case CHIME -> Sound.BLOCK_NOTE_BLOCK_CHIME;
+					case COW_BELL -> Sound.BLOCK_NOTE_BLOCK_COW_BELL;
+					case DIDGERIDOO -> Sound.BLOCK_NOTE_BLOCK_DIDGERIDOO;
+					case FLUTE -> Sound.BLOCK_NOTE_BLOCK_FLUTE;
+					case GUITAR -> Sound.BLOCK_NOTE_BLOCK_GUITAR;
+					case IRON_XYLOPHONE -> Sound.BLOCK_NOTE_BLOCK_IRON_XYLOPHONE;
+					case PIANO -> Sound.BLOCK_NOTE_BLOCK_HARP;
+					case PLING -> Sound.BLOCK_NOTE_BLOCK_PLING;
+					case SNARE_DRUM -> Sound.BLOCK_NOTE_BLOCK_SNARE;
+					case STICKS -> Sound.BLOCK_NOTE_BLOCK_HAT;
+					case XYLOPHONE -> Sound.BLOCK_NOTE_BLOCK_XYLOPHONE;
+					default ->
+						// This should never be reached unless Mojang adds new instruments
+							throw new UnimplementedOperationException("Instrument '" + instrument + "' has no implementation!");
+				};
 		float pitch = (float) Math.pow(2.0D, (note - 12.0D) / 12.0D);
 		playSound(loc, sound, SoundCategory.RECORDS, 3, pitch);
 	}
@@ -1521,55 +1571,85 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Deprecated
 	public void sendBlockChange(@NotNull Location loc, @NotNull Material material, byte data)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// Pretend we sent the block change.
+	}
+
+	@Override
+	public void sendBlockChange(@NotNull Location loc, @NotNull BlockData block)
+	{
+		// Pretend we sent the block change.
 	}
 
 
 	@Override
 	public void sendSignChange(@NotNull Location loc, @Nullable List<Component> lines, @NotNull DyeColor dyeColor, boolean hasGlowingText) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (lines == null)
+		{
+			lines = new java.util.ArrayList<>(4);
+		}
+		Validate.notNull(loc, "Location cannot be null");
+		Validate.notNull(dyeColor, "DyeColor cannot be null");
+		if (lines.size() < 4)
+		{
+			throw new IllegalArgumentException("Must have at least 4 lines");
+		}
 	}
 
 	@Override
 	@Deprecated
 	public void sendSignChange(@NotNull Location loc, String[] lines)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.sendSignChange(loc, lines, DyeColor.BLACK);
+	}
+
+	@Override
+	public void sendSignChange(@NotNull Location loc, String[] lines, @NotNull DyeColor dyeColor) throws IllegalArgumentException
+	{
+		this.sendSignChange(loc, lines, dyeColor, false);
+	}
+
+	@Override
+	public void sendSignChange(@NotNull Location loc, @Nullable String[] lines, @NotNull DyeColor dyeColor, boolean hasGlowingText) throws IllegalArgumentException
+	{
+		if (lines == null)
+		{
+			lines = new String[4];
+		}
+
+		Validate.notNull(loc, "Location can not be null");
+		Validate.notNull(dyeColor, "DyeColor can not be null");
+		if (lines.length < 4)
+		{
+			throw new IllegalArgumentException("Must have at least 4 lines");
+		}
 	}
 
 	@Override
 	public void sendMap(@NotNull MapView map)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// Pretend we sent the map change.
 	}
 
 	@Override
 	@Deprecated
 	public void sendActionBar(@NotNull String message)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// Pretend we sent the action bar.
 	}
 
 	@Override
 	@Deprecated
 	public void sendActionBar(char alternateChar, @NotNull String message)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// Pretend we sent the action bar.
 	}
 
 	@Override
 	@Deprecated
 	public void sendActionBar(@NotNull BaseComponent... message)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// Pretend we sent the action bar.
 	}
 
 	@Override
@@ -1648,8 +1728,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Deprecated
 	public void sendTitle(@NotNull Title title)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(title, "Title is null");
 	}
 
 	@Override
@@ -2063,9 +2142,8 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	public boolean canSee(@NotNull Player player)
 	{
 		return !hiddenPlayers.containsKey(player.getUniqueId()) &&
-		       !hiddenPlayersDeprecated.contains(player.getUniqueId());
+				!hiddenPlayersDeprecated.contains(player.getUniqueId());
 	}
-
 
 
 	@Override
@@ -2090,7 +2168,6 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
 
 
 	@Override
@@ -2292,15 +2369,13 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public void sendHealthUpdate(double health, int foodLevel, float saturationLevel)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// Pretend we sent the health update.
 	}
 
 	@Override
 	public void sendHealthUpdate()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// Pretend we sent the health update.
 	}
 
 	@Override
@@ -2376,14 +2451,14 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 
 	@Override
 	public void spawnParticle(@NotNull Particle particle, @NotNull Location location, int count, double offsetX, double offsetY,
-	                          double offsetZ)
+							  double offsetZ)
 	{
 		this.spawnParticle(particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ);
 	}
 
 	@Override
 	public void spawnParticle(@NotNull Particle particle, double x, double y, double z, int count, double offsetX,
-	                          double offsetY, double offsetZ)
+							  double offsetY, double offsetZ)
 	{
 		this.spawnParticle(particle, x, y, z, count, offsetX, offsetY, offsetZ, null);
 
@@ -2391,14 +2466,14 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 
 	@Override
 	public <T> void spawnParticle(@NotNull Particle particle, @NotNull Location location, int count, double offsetX, double offsetY,
-	                              double offsetZ, T data)
+								  double offsetZ, T data)
 	{
 		this.spawnParticle(particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ, data);
 	}
 
 	@Override
 	public <T> void spawnParticle(@NotNull Particle particle, double x, double y, double z, int count, double offsetX,
-	                              double offsetY, double offsetZ, T data)
+								  double offsetY, double offsetZ, T data)
 	{
 		this.spawnParticle(particle, x, y, z, count, offsetX, offsetY, offsetZ, 1, data);
 
@@ -2406,14 +2481,14 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 
 	@Override
 	public void spawnParticle(@NotNull Particle particle, @NotNull Location location, int count, double offsetX, double offsetY,
-	                          double offsetZ, double extra)
+							  double offsetZ, double extra)
 	{
 		this.spawnParticle(particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ, extra);
 	}
 
 	@Override
 	public void spawnParticle(@NotNull Particle particle, double x, double y, double z, int count, double offsetX,
-	                          double offsetY, double offsetZ, double extra)
+							  double offsetY, double offsetZ, double extra)
 	{
 		this.spawnParticle(particle, x, y, z, count, offsetX, offsetY, offsetZ, extra, null);
 
@@ -2421,7 +2496,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 
 	@Override
 	public <T> void spawnParticle(@NotNull Particle particle, @NotNull Location location, int count, double offsetX, double offsetY,
-	                              double offsetZ, double extra, T data)
+								  double offsetZ, double extra, T data)
 	{
 		this.spawnParticle(particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ, data);
 
@@ -2429,7 +2504,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 
 	@Override
 	public <T> void spawnParticle(@NotNull Particle particle, double x, double y, double z, int count, double offsetX,
-	                              double offsetY, double offsetZ, double extra, T data)
+								  double offsetY, double offsetZ, double extra, T data)
 	{
 		if (data != null && !particle.getDataType().isInstance(data))
 		{
@@ -2594,13 +2669,6 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public void sendBlockChange(@NotNull Location loc, @NotNull BlockData block)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public void updateCommands()
 	{
 		// TODO Auto-generated method stub
@@ -2746,20 +2814,6 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public void sendSignChange(@NotNull Location loc, String[] lines, @NotNull DyeColor dyeColor) throws IllegalArgumentException
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void sendSignChange(@NotNull Location loc, @Nullable String[] lines, @NotNull DyeColor dyeColor, boolean hasGlowingText) throws IllegalArgumentException
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public void openBook(@NotNull ItemStack book)
 	{
 		// TODO Auto-generated method stub
@@ -2896,15 +2950,14 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public void sendExperienceChange(float progress)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.sendExperienceChange(progress, this.getLevel());
 	}
 
 	@Override
 	public void sendExperienceChange(float progress, int level)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(progress >= 0.0 && progress <= 1.0, "Experience progress must be between 0.0 and 1.0 (%s)", progress);
+		Preconditions.checkArgument(level >= 0, "Experience level must not be negative (%s)", level);
 	}
 
 	@Override
@@ -2938,30 +2991,20 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public void sendBlockDamage(@NotNull Location loc, float progress)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(loc != null, "loc must not be null");
+		Preconditions.checkArgument(progress >= 0.0 && progress <= 1.0, "progress must be between 0.0 and 1.0 (inclusive)");
 	}
 
 	@Override
 	public void sendMultiBlockChange(@NotNull Map<Location, BlockData> blockChanges)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// Pretend we sent the block change.
 	}
 
 	@Override
 	public void sendMultiBlockChange(@NotNull Map<Location, BlockData> blockChanges, boolean suppressLightUpdates)
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void sendEquipmentChange(@NotNull LivingEntity entity, @NotNull EquipmentSlot slot,
-	                                @NotNull ItemStack item)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// Pretend we sent the block change.
 	}
 
 	@Override
@@ -3032,6 +3075,15 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		}
 
 		return super.teleport(playerTeleportEvent.getTo(), cause);
+	}
+
+	@Override
+	public void sendEquipmentChange(@NotNull LivingEntity entity, @NotNull EquipmentSlot slot, @NotNull ItemStack item)
+	{
+		Preconditions.checkArgument(entity != null, "entity must not be null");
+		Preconditions.checkArgument(slot != null, "slot must not be null");
+		Preconditions.checkArgument(item != null, "item must not be null");
+		// Pretend the packet gets sent.
 	}
 
 	@Override

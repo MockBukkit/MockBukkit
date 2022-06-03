@@ -35,14 +35,14 @@ class ItemMetaMockTest
 	private ItemMetaMock meta;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		MockBukkit.mock();
 		meta = new ItemMetaMock();
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
