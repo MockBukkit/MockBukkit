@@ -19,7 +19,6 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.Plugin;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -34,7 +33,7 @@ class PluginManagerMockTest
 	private TestPlugin plugin;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		server = MockBukkit.mock();
 		pluginManager = server.getPluginManager();
@@ -42,7 +41,7 @@ class PluginManagerMockTest
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
@@ -72,23 +71,23 @@ class PluginManagerMockTest
 	void test_ManualListener_Registration()
 	{
 		MockBukkit.getMock().getPluginManager().registerEvents(plugin, plugin);
-		Assertions.assertEquals(3, BlockBreakEvent.getHandlerList().getRegisteredListeners().length);
+		assertEquals(3, BlockBreakEvent.getHandlerList().getRegisteredListeners().length);
 		pluginManager.unregisterPluginEvents(plugin);
-		Assertions.assertEquals(0, BlockBreakEvent.getHandlerList().getRegisteredListeners().length);
+		assertEquals(0, BlockBreakEvent.getHandlerList().getRegisteredListeners().length);
 		MockBukkit.getMock().getPluginManager().registerEvents(plugin, plugin);
 		MockBukkit.getMock().getPluginManager().registerEvents(plugin, plugin);
-		Assertions.assertEquals(6, BlockBreakEvent.getHandlerList().getRegisteredListeners().length);
+		assertEquals(6, BlockBreakEvent.getHandlerList().getRegisteredListeners().length);
 		pluginManager.unregisterPluginEvents(plugin);
-		Assertions.assertEquals(0, BlockBreakEvent.getHandlerList().getRegisteredListeners().length);
+		assertEquals(0, BlockBreakEvent.getHandlerList().getRegisteredListeners().length);
 	}
 
 	@Test
 	void test_AutomaticListener_DeRegistration()
 	{
 		MockBukkit.getMock().getPluginManager().registerEvents(plugin, plugin);
-		Assertions.assertEquals(3, BlockBreakEvent.getHandlerList().getRegisteredListeners().length);
+		assertEquals(3, BlockBreakEvent.getHandlerList().getRegisteredListeners().length);
 		MockBukkit.unmock();
-		Assertions.assertEquals(0, BlockBreakEvent.getHandlerList().getRegisteredListeners().length);
+		assertEquals(0, BlockBreakEvent.getHandlerList().getRegisteredListeners().length);
 
 	}
 

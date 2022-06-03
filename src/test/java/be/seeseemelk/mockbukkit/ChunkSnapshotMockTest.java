@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ChunkSnapshotMockTest
+class ChunkSnapshotMockTest
 {
 
 	private ServerMock server;
@@ -19,7 +19,7 @@ public class ChunkSnapshotMockTest
 	private Chunk chunk;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		server = MockBukkit.mock();
 		world = new WorldMock(Material.GRASS, 0, 319, 4);
@@ -27,7 +27,7 @@ public class ChunkSnapshotMockTest
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}

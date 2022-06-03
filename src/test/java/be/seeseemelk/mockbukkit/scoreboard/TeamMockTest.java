@@ -32,7 +32,7 @@ class TeamMockTest
 	private PlayerMock playerB;
 
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		server = MockBukkit.mock();
 		playerA = server.addPlayer();
@@ -43,7 +43,7 @@ class TeamMockTest
 	}
 
 	@AfterEach
-	public void tearDown() throws Exception
+	void tearDown() throws Exception
 	{
 		MockBukkit.unmock();
 	}
