@@ -1568,55 +1568,85 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Deprecated
 	public void sendBlockChange(@NotNull Location loc, @NotNull Material material, byte data)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// Pretend we sent the block change.
+	}
+
+	@Override
+	public void sendBlockChange(@NotNull Location loc, @NotNull BlockData block)
+	{
+		// Pretend we sent the block change.
 	}
 
 
 	@Override
 	public void sendSignChange(@NotNull Location loc, @Nullable List<Component> lines, @NotNull DyeColor dyeColor, boolean hasGlowingText) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (lines == null)
+		{
+			lines = new java.util.ArrayList<>(4);
+		}
+		Validate.notNull(loc, "Location cannot be null");
+		Validate.notNull(dyeColor, "DyeColor cannot be null");
+		if (lines.size() < 4)
+		{
+			throw new IllegalArgumentException("Must have at least 4 lines");
+		}
 	}
 
 	@Override
 	@Deprecated
 	public void sendSignChange(@NotNull Location loc, String[] lines)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.sendSignChange(loc, lines, DyeColor.BLACK);
+	}
+
+	@Override
+	public void sendSignChange(@NotNull Location loc, String[] lines, @NotNull DyeColor dyeColor) throws IllegalArgumentException
+	{
+		this.sendSignChange(loc, lines, dyeColor, false);
+	}
+
+	@Override
+	public void sendSignChange(@NotNull Location loc, @Nullable String[] lines, @NotNull DyeColor dyeColor, boolean hasGlowingText) throws IllegalArgumentException
+	{
+		if (lines == null)
+		{
+			lines = new String[4];
+		}
+
+		Validate.notNull(loc, "Location can not be null");
+		Validate.notNull(dyeColor, "DyeColor can not be null");
+		if (lines.length < 4)
+		{
+			throw new IllegalArgumentException("Must have at least 4 lines");
+		}
 	}
 
 	@Override
 	public void sendMap(@NotNull MapView map)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// Pretend we sent the map change.
 	}
 
 	@Override
 	@Deprecated
 	public void sendActionBar(@NotNull String message)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// Pretend we sent the action bar.
 	}
 
 	@Override
 	@Deprecated
 	public void sendActionBar(char alternateChar, @NotNull String message)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// Pretend we sent the action bar.
 	}
 
 	@Override
 	@Deprecated
 	public void sendActionBar(@NotNull BaseComponent... message)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// Pretend we sent the action bar.
 	}
 
 	@Override
@@ -1695,8 +1725,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Deprecated
 	public void sendTitle(@NotNull Title title)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(title, "Title is null");
 	}
 
 	@Override
@@ -2357,15 +2386,13 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public void sendHealthUpdate(double health, int foodLevel, float saturationLevel)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// Pretend we sent the health update.
 	}
 
 	@Override
 	public void sendHealthUpdate()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// Pretend we sent the health update.
 	}
 
 	@Override
@@ -2659,13 +2686,6 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public void sendBlockChange(@NotNull Location loc, @NotNull BlockData block)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public void updateCommands()
 	{
 		// TODO Auto-generated method stub
@@ -2811,20 +2831,6 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	}
 
 	@Override
-	public void sendSignChange(@NotNull Location loc, String[] lines, @NotNull DyeColor dyeColor) throws IllegalArgumentException
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void sendSignChange(@NotNull Location loc, @Nullable String[] lines, @NotNull DyeColor dyeColor, boolean hasGlowingText) throws IllegalArgumentException
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public void openBook(@NotNull ItemStack book)
 	{
 		// TODO Auto-generated method stub
@@ -2961,15 +2967,14 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public void sendExperienceChange(float progress)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.sendExperienceChange(progress, this.getLevel());
 	}
 
 	@Override
 	public void sendExperienceChange(float progress, int level)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(progress >= 0.0 && progress <= 1.0, "Experience progress must be between 0.0 and 1.0 (%s)", progress);
+		Preconditions.checkArgument(level >= 0, "Experience level must not be negative (%s)", level);
 	}
 
 	@Override
@@ -3003,30 +3008,20 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public void sendBlockDamage(@NotNull Location loc, float progress)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(loc != null, "loc must not be null");
+		Preconditions.checkArgument(progress >= 0.0 && progress <= 1.0, "progress must be between 0.0 and 1.0 (inclusive)");
 	}
 
 	@Override
 	public void sendMultiBlockChange(@NotNull Map<Location, BlockData> blockChanges)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// Pretend we sent the block change.
 	}
 
 	@Override
 	public void sendMultiBlockChange(@NotNull Map<Location, BlockData> blockChanges, boolean suppressLightUpdates)
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void sendEquipmentChange(@NotNull LivingEntity entity, @NotNull EquipmentSlot slot,
-									@NotNull ItemStack item)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// Pretend we sent the block change.
 	}
 
 	@Override
@@ -3097,6 +3092,15 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		}
 
 		return super.teleport(playerTeleportEvent.getTo(), cause);
+	}
+
+	@Override
+	public void sendEquipmentChange(@NotNull LivingEntity entity, @NotNull EquipmentSlot slot, @NotNull ItemStack item)
+	{
+		Preconditions.checkArgument(entity != null, "entity must not be null");
+		Preconditions.checkArgument(slot != null, "slot must not be null");
+		Preconditions.checkArgument(item != null, "item must not be null");
+		// Pretend the packet gets sent.
 	}
 
 	@Override

@@ -15,6 +15,7 @@ import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import org.bukkit.Bukkit;
+import org.bukkit.DyeColor;
 import org.bukkit.Effect;
 import org.bukkit.GameMode;
 import org.bukkit.GameRule;
@@ -49,6 +50,7 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.event.player.PlayerToggleSprintEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
@@ -63,6 +65,7 @@ import org.junit.jupiter.params.provider.EnumSource;
 import java.net.InetSocketAddress;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.BrokenBarrierException;
@@ -71,6 +74,7 @@ import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -1446,6 +1450,25 @@ class PlayerMockTest
 	}
 
 	@Test
+	void testPlayerSendSignChange_Valid()
+	{
+		assertDoesNotThrow(() ->
+		{
+			player.sendSignChange(player.getLocation(), new String[4], DyeColor.CYAN, true);
+		});
+	}
+
+	@Test
+	void testPlayerSendSignChange_Invalid()
+	{
+		Location loc = player.getLocation();
+		assertThrows(IllegalArgumentException.class, () ->
+		{
+			player.sendSignChange(loc, new String[2]);
+		});
+	}
+
+	@Test
 	void testPlayerPlayEffect()
 	{
 		player.playEffect(player.getLocation(), Effect.STEP_SOUND, Material.STONE);
@@ -1461,11 +1484,76 @@ class PlayerMockTest
 	}
 
 	@Test
+	void testPlayerSendExperienceChange()
+	{
+		assertDoesNotThrow(() ->
+		{
+			player.sendExperienceChange(0.5f);
+		});
+	}
+
+	@Test
+	void testPlayerSendBlockDamage()
+	{
+		Location loc = player.getLocation();
+		assertDoesNotThrow(() ->
+		{
+			player.sendBlockDamage(loc, 0.5f);
+		});
+	}
+
+	@Test
+	void testPlayerSendEquipmentChange()
+	{
+		assertDoesNotThrow(() ->
+		{
+			player.sendEquipmentChange(player, EquipmentSlot.CHEST, new ItemStack(Material.DIAMOND_CHESTPLATE));
+		});
+	}
+
+	@Test
+	void testPlayerSendActionBar()
+	{
+		assertDoesNotThrow(() ->
+		{
+			player.sendActionBar("Action!");
+		});
+	}
+
+	@Test
+	void testPlayerSendHealthUpdate()
+	{
+		assertDoesNotThrow(() ->
+		{
+			player.sendHealthUpdate();
+		});
+	}
+
+	@Test
+	void testPlayerSendHealthUpdate_Params()
+	{
+		assertDoesNotThrow(() ->
+		{
+			player.sendHealthUpdate(20, 10, 0.0f);
+		});
+	}
+
+	@Test
+	void testPlayerSendMultiBlockChange()
+	{
+		assertDoesNotThrow(() ->
+		{
+			player.sendMultiBlockChange(new HashMap<>(0));
+		});
+	}
+
+	@Test
 	void testPlayerPlayEffect_IncorrectData()
 	{
+		Location loc = player.getLocation();
 		assertThrows(IllegalArgumentException.class, () ->
 		{
-			player.playEffect(player.getLocation(), Effect.STEP_SOUND, 1.0f);
+			player.playEffect(loc, Effect.STEP_SOUND, 1.0f);
 		});
 	}
 
