@@ -28,14 +28,14 @@ class ShulkerBoxMockTest
 	private ShulkerBoxMock shulkerBox;
 
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		MockBukkit.mock();
 		shulkerBox = new ShulkerBoxMock(Material.SHULKER_BOX);
 	}
 
 	@AfterEach
-	public void tearDown() throws Exception
+	void tearDown() throws Exception
 	{
 		MockBukkit.unmock();
 	}

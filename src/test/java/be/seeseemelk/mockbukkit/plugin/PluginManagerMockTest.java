@@ -33,7 +33,7 @@ class PluginManagerMockTest
 	private TestPlugin plugin;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		server = MockBukkit.mock();
 		pluginManager = server.getPluginManager();
@@ -41,7 +41,7 @@ class PluginManagerMockTest
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}

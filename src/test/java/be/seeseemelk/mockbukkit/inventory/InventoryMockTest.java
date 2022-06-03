@@ -27,14 +27,14 @@ class InventoryMockTest
 	private InventoryMock inventory;
 
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		MockBukkit.mock();
 		inventory = new SimpleInventoryMock(null, 9, InventoryType.CHEST);
 	}
 
 	@AfterEach
-	public void tearDown() throws Exception
+	void tearDown() throws Exception
 	{
 		MockBukkit.unmock();
 	}
