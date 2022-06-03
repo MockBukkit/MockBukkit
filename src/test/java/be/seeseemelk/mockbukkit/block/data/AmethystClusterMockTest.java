@@ -20,7 +20,7 @@ class AmethystClusterMockTest
 	private AmethystClusterMock cluster;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		this.cluster = new AmethystClusterMock(Material.AMETHYST_CLUSTER);
 	}
