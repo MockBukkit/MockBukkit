@@ -28,6 +28,9 @@ import org.junit.jupiter.api.Test;
 
 class BukkitSchedulerMockTest
 {
+
+	private static final long SLEEP_TIME = 50L;
+
 	private BukkitSchedulerMock scheduler;
 
 	@BeforeEach
@@ -229,7 +232,7 @@ class BukkitSchedulerMockTest
 			{
 				try
 				{
-					Thread.sleep(50L);
+					Thread.sleep(SLEEP_TIME);
 				}
 				catch (InterruptedException e)
 				{
@@ -243,7 +246,7 @@ class BukkitSchedulerMockTest
 			{
 				try
 				{
-					Thread.sleep(50L);
+					Thread.sleep(SLEEP_TIME);
 				}
 				catch (InterruptedException e)
 				{
@@ -280,7 +283,7 @@ class BukkitSchedulerMockTest
 				}
 				try
 				{
-					Thread.sleep(50L);
+					Thread.sleep(SLEEP_TIME);
 				}
 				catch (InterruptedException e)
 				{
@@ -311,7 +314,7 @@ class BukkitSchedulerMockTest
 			@EventHandler
 			public void onChat(AsyncChatEvent event) throws Exception
 			{
-				Thread.sleep(50);
+				Thread.sleep(SLEEP_TIME);
 				done.set(true);
 			}
 		}, MockBukkit.createMockPlugin());
