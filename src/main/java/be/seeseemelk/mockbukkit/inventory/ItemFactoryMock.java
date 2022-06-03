@@ -18,6 +18,7 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.function.UnaryOperator;
 
+import be.seeseemelk.mockbukkit.inventory.meta.CrossbowMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.BannerMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.ArmorStandMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.TropicalFishBucketMetaMock;
@@ -68,6 +69,7 @@ public class ItemFactoryMock implements ItemFactory
 		case PLAYER_HEAD -> SkullMetaMock.class;
 		case SUSPICIOUS_STEW -> SuspiciousStewMetaMock.class;
 		case COMPASS -> CompassMetaMock.class;
+		case CROSSBOW -> CrossbowMetaMock.class;
 		case WHITE_BANNER, ORANGE_BANNER, MAGENTA_BANNER, LIGHT_BLUE_BANNER, YELLOW_BANNER, LIME_BANNER, PINK_BANNER, GRAY_BANNER, LIGHT_GRAY_BANNER, CYAN_BANNER, PURPLE_BANNER, BLUE_BANNER, BROWN_BANNER, GREEN_BANNER, RED_BANNER, BLACK_BANNER ->
 				BannerMetaMock.class;
 		case TROPICAL_FISH_BUCKET -> TropicalFishBucketMetaMock.class;
