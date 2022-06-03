@@ -1,23 +1,19 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import java.util.UUID;
-
-import net.kyori.adventure.text.Component;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Item;
-import org.bukkit.entity.SpawnCategory;
-import org.bukkit.inventory.ItemStack;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.annotations.NotNull;
-
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Item;
+import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.UUID;
 
 /**
  * This is a mock of a dropped {@link Item} entity. It can hold an {@link ItemStack}, that pretty much covers it all.
  *
  * @author TheBusyBiscuit
- *
  */
 public class ItemEntityMock extends EntityMock implements Item
 {
@@ -33,13 +29,13 @@ public class ItemEntityMock extends EntityMock implements Item
 	}
 
 	@Override
-	public EntityType getType()
+	public @NotNull EntityType getType()
 	{
 		return EntityType.DROPPED_ITEM;
 	}
 
 	@Override
-	public ItemStack getItemStack()
+	public @NotNull ItemStack getItemStack()
 	{
 		return item;
 	}
@@ -162,31 +158,4 @@ public class ItemEntityMock extends EntityMock implements Item
 		throw new UnimplementedOperationException();
 	}
 
-	@Override
-	public @NotNull SpawnCategory getSpawnCategory()
-	{
-		return SpawnCategory.MISC;
-	}
-
-	@Override
-	public @Nullable Component customName()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void customName(@Nullable Component customName)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-
-	@Override
-	public @NotNull Component name()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
 }
