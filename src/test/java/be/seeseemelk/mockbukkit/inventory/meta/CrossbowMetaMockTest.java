@@ -23,14 +23,14 @@ class CrossbowMetaMockTest
 	private CrossbowMetaMock meta;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		MockBukkit.mock();
 		meta = new CrossbowMetaMock();
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
