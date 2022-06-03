@@ -22,7 +22,7 @@ class BedMockTest
 	private BedMock bed;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		this.bed = new BedMock(Material.RED_BED);
 	}
