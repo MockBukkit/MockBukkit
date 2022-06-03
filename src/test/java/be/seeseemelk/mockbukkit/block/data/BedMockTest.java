@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.block.data;
 
+import com.google.common.collect.ImmutableSet;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.type.Bed;
@@ -11,6 +12,7 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -60,6 +62,12 @@ class BedMockTest
 	{
 		Set<BlockFace> validFaces = Set.of(BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST);
 		assertEquals(validFaces, bed.getFaces());
+	}
+
+	@Test
+	void getFacing_ImmutableSet()
+	{
+		assertInstanceOf(ImmutableSet.class, bed.getFaces());
 	}
 
 	@Test
