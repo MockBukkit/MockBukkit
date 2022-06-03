@@ -250,7 +250,7 @@ class WorldMockTest
 		int duration = 20;
 		world.setThunderDuration(duration);
 		assertEquals(duration, world.getThunderDuration(), "Weather duration should be more than zero");
-		assertTrue(world.isThundering());
+		assertFalse(world.isThundering());
 	}
 
 	@Test
@@ -258,7 +258,7 @@ class WorldMockTest
 	{
 		WorldMock world = new WorldMock();
 		world.setThundering(true);
-		assertTrue(world.getThunderDuration() > 0, "Weather duration should be more than zero");
+		assertEquals(0, world.getThunderDuration(), "Weather duration should be reset to zero");
 		assertTrue(world.isThundering());
 	}
 
