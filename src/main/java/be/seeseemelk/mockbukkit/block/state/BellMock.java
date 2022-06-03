@@ -23,7 +23,7 @@ public class BellMock extends TileStateMock implements Bell
 			throw new IllegalArgumentException("Cannot create a Bell state from " + block.getType());
 	}
 
-	protected BellMock(@NotNull TileStateMock state)
+	protected BellMock(@NotNull BellMock state)
 	{
 		super(state);
 	}
