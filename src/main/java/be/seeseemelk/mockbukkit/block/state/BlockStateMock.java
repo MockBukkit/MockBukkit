@@ -244,6 +244,8 @@ public class BlockStateMock implements BlockState, Cloneable
 	{
 		switch (block.getType())
 		{
+		case BEEHIVE:
+			return new BeehiveMock(block);
 		case LECTERN:
 			return new LecternMock(block);
 		case HOPPER:
