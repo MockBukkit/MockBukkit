@@ -35,7 +35,6 @@ dependencies {
 
     // General utilities for the project
     implementation 'org.jetbrains:annotations:23.0.0'
-	testImplementation 'org.mockito:mockito-core:4.0.0'
 
     // LibraryLoader dependencies
     implementation 'org.apache.maven:maven-resolver-provider:3.8.5'

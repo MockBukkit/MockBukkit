@@ -3,18 +3,13 @@ package be.seeseemelk.mockbukkit.scheduler;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.TestPlugin;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.BrokenBarrierException;
@@ -30,12 +25,10 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 
 class BukkitSchedulerMockTest
 {
+
 	private BukkitSchedulerMock scheduler;
 
 	@BeforeEach
@@ -309,40 +302,28 @@ class BukkitSchedulerMockTest
 		});
 	}
 
-	@Nested
-	class AsyncEventsTest
+	@Test
+	void waitAsyncEventsFinished()
 	{
-		private ServerMock server;
-		private ChatListener listener;
-
-		@BeforeEach
-		public void setUp()
-		{
-			server = MockBukkit.mock();
-			TestPlugin plugin = MockBukkit.load(TestPlugin.class);
-			listener = spy(new ChatListener());
-			server.getPluginManager().registerEvents(listener, plugin);
-		}
-
-		@AfterEach
-		public void tearDown()
-		{
-			MockBukkit.unmock();
-		}
-
-		@Test
-		void chat_callsAsyncChatEvent_afterWaitingForTask()
-		{
-			server.addPlayer().chat("test");
-			server.getScheduler().waitAsyncEventsFinished();
-			verify(listener).onAsyncChat(any());
-		}
-
-		public static class ChatListener implements Listener
+		MockBukkit.mock();
+		AtomicBoolean done = new AtomicBoolean(false);
+		Bukkit.getPluginManager().registerEvents(new Listener()
 		{
 			@EventHandler
-			public void onAsyncChat(AsyncPlayerChatEvent event) {}
-		}
+			public void onChat(AsyncChatEvent event) throws Exception
+			{
+				Thread.sleep(50);
+				done.set(true);
+			}
+		}, MockBukkit.createMockPlugin());
+		AsyncChatEvent event = new AsyncChatEvent(true, null, null, null, null, null);
+		scheduler.executeAsyncEvent(event);
+		assertFalse(done.get());
+
+		scheduler.waitAsyncEventsFinished();
+
+		assertTrue(done.get());
+		MockBukkit.unmock();
 	}
 
 	@Test
