@@ -29,6 +29,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class BukkitSchedulerMockTest
 {
 
+	/**
+	 * How long, in milliseconds, to sleep when testing async tasks.
+	 */
 	private static final long SLEEP_TIME = 50L;
 
 	private BukkitSchedulerMock scheduler;
