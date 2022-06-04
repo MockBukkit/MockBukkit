@@ -31,6 +31,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.File;
@@ -405,20 +406,17 @@ class ServerMockTest
 		assertTrue(entities.contains(entity2), "Set did not contain second entity");
 	}
 
-	@Test
-	void getPlayer_NameAndPlayerExists_PlayerFound()
+	@ParameterizedTest
+	@CsvSource({
+			"player, player",
+			"player, PLAYER",
+			"player_other, player",
+	})
+	void getPlayer_NameAndPlayerExists_PlayerFound(String actual, String expected)
 	{
-		PlayerMock player = new PlayerMock(server, "player");
+		PlayerMock player = new PlayerMock(server, actual);
 		server.addPlayer(player);
-		assertSame(player, server.getPlayer("player"));
-	}
-
-	@Test
-	void getPlayer_NameAndPlayerExistsButCasingWrong_PlayerNotFound()
-	{
-		PlayerMock player = new PlayerMock(server, "player");
-		server.addPlayer(player);
-		assertSame(player, server.getPlayer("PLAYER"));
+		assertSame(player, server.getPlayer(expected));
 	}
 
 	@Test
@@ -427,14 +425,6 @@ class ServerMockTest
 		PlayerMock player = new PlayerMock(server, "player");
 		server.addPlayer(player);
 		assertSame(player, server.getPlayer(player.getUniqueId()));
-	}
-
-	@Test
-	void getPlayer_PlayerNamePartiallyCorrect_PlayerFound()
-	{
-		PlayerMock player = new PlayerMock(server, "player_other");
-		server.addPlayer(player);
-		assertSame(player, server.getPlayer("player"));
 	}
 
 	@Test
