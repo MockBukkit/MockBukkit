@@ -3,7 +3,6 @@ package be.seeseemelk.mockbukkit.block.state;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.BlockMock;
-import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
@@ -44,6 +43,8 @@ class AbstractFurnaceMockTest
 	void constructor_Material()
 	{
 		assertDoesNotThrow(() -> new TestFurnace(Material.FURNACE));
+		assertDoesNotThrow(() -> new TestFurnace(Material.BLAST_FURNACE));
+		assertDoesNotThrow(() -> new TestFurnace(Material.SMOKER));
 	}
 
 	@Test
@@ -56,6 +57,8 @@ class AbstractFurnaceMockTest
 	void constructor_Block()
 	{
 		assertDoesNotThrow(() -> new TestFurnace(new BlockMock(Material.FURNACE)));
+		assertDoesNotThrow(() -> new TestFurnace(new BlockMock(Material.BLAST_FURNACE)));
+		assertDoesNotThrow(() -> new TestFurnace(new BlockMock(Material.SMOKER)));
 	}
 
 	@Test

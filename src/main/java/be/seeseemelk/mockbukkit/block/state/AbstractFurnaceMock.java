@@ -3,7 +3,6 @@ package be.seeseemelk.mockbukkit.block.state;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import com.google.common.base.Preconditions;
-import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
@@ -26,14 +25,14 @@ public abstract class AbstractFurnaceMock extends ContainerMock implements Furna
 	protected AbstractFurnaceMock(@NotNull Material material)
 	{
 		super(material);
-		if (!material.name().endsWith("FURNACE") || material.name().contains("LEGACY"))
+		if (material != Material.SMOKER && material != Material.FURNACE && material != Material.BLAST_FURNACE)
 			throw new IllegalArgumentException("Cannot create a Furnace state from " + material);
 	}
 
 	protected AbstractFurnaceMock(@NotNull Block block)
 	{
 		super(block);
-		if (!block.getType().name().endsWith("FURNACE") || block.getType().name().contains("LEGACY"))
+		if (block.getType() != Material.SMOKER && block.getType() != Material.FURNACE && block.getType() != Material.BLAST_FURNACE)
 			throw new IllegalArgumentException("Cannot create a Furnace state from " + block.getType().name());
 	}
 
