@@ -15,9 +15,9 @@ public class CampfireMock extends TileStateMock implements Campfire
 	private static final int MAX_SLOTS = 4;
 
 	private ItemStack[] items = new ItemStack[MAX_SLOTS];
-	public int[] cookingProgress = new int[MAX_SLOTS];
-	public int[] cookingTime = new int[MAX_SLOTS];
-	public boolean[] cookingDisabled = new boolean[MAX_SLOTS];
+	private int[] cookingProgress = new int[MAX_SLOTS];
+	private int[] cookingTime = new int[MAX_SLOTS];
+	private boolean[] cookingDisabled = new boolean[MAX_SLOTS];
 
 	public CampfireMock(@NotNull Material material)
 	{
