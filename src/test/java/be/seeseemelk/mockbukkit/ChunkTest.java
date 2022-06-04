@@ -16,14 +16,14 @@ class ChunkTest
 	private WorldMock world;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		server = MockBukkit.mock();
 		world = server.addSimpleWorld("world");
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
