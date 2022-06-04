@@ -22,7 +22,6 @@ public abstract class AbstractFurnaceMock extends ContainerMock implements Furna
 	private short cookTime;
 	private int cookTimeTotal;
 	private double cookSpeedMultiplier = 1.0;
-	private Component customName;
 
 	protected AbstractFurnaceMock(@NotNull Material material)
 	{
