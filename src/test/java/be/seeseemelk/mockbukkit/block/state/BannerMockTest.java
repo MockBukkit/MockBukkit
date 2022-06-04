@@ -54,7 +54,7 @@ class BannerMockTest
 	}
 
 	@Test
-	void constructor_Material_NotBeehive_ThrowsException()
+	void constructor_Material_NotBanner_ThrowsException()
 	{
 		assertThrowsExactly(IllegalArgumentException.class, () -> new BannerMock(Material.BEDROCK));
 	}
@@ -66,7 +66,7 @@ class BannerMockTest
 	}
 
 	@Test
-	void constructor_Block_NotBeehive_ThrowsException()
+	void constructor_Block_NotBanner_ThrowsException()
 	{
 		assertThrowsExactly(IllegalArgumentException.class, () -> new BannerMock(new BlockMock(Material.BEDROCK)));
 	}
