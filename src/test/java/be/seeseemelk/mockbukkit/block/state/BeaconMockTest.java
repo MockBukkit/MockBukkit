@@ -16,12 +16,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BeaconMockTest
@@ -46,6 +48,31 @@ class BeaconMockTest
 	void teardown()
 	{
 		MockBukkit.unmock();
+	}
+
+
+	@Test
+	void constructor_Material()
+	{
+		assertDoesNotThrow(() -> new BeaconMock(Material.BEACON));
+	}
+
+	@Test
+	void constructor_Material_NotBeacon_ThrowsException()
+	{
+		assertThrowsExactly(IllegalArgumentException.class, () -> new BeaconMock(Material.BEDROCK));
+	}
+
+	@Test
+	void constructor_Block()
+	{
+		assertDoesNotThrow(() -> new BeaconMock(new BlockMock(Material.BEACON)));
+	}
+
+	@Test
+	void constructor_Block_NotBeacon_ThrowsException()
+	{
+		assertThrowsExactly(IllegalArgumentException.class, () -> new BeaconMock(new BlockMock(Material.BEDROCK)));
 	}
 
 	@Test
