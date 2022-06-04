@@ -91,7 +91,7 @@ public class BarrelMock extends ContainerMock implements Barrel
 	}
 
 	@Override
-	public BlockState getSnapshot()
+	public @NotNull BlockState getSnapshot()
 	{
 		return new BarrelMock(this);
 	}

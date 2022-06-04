@@ -65,7 +65,7 @@ public class BlockStateMock implements BlockState, Cloneable
 	}
 
 	@Override
-	public Block getBlock()
+	public @NotNull Block getBlock()
 	{
 		if (block == null)
 		{
