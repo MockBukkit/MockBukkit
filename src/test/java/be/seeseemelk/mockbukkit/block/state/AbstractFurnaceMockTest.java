@@ -47,7 +47,7 @@ class AbstractFurnaceMockTest
 	}
 
 	@Test
-	void constructor_Material_NotBeehive_ThrowsException()
+	void constructor_Material_NotFurnace_ThrowsException()
 	{
 		assertThrowsExactly(IllegalArgumentException.class, () -> new TestFurnace(Material.BEDROCK));
 	}
@@ -59,7 +59,7 @@ class AbstractFurnaceMockTest
 	}
 
 	@Test
-	void constructor_Block_NotBeehive_ThrowsException()
+	void constructor_Block_NotFurnace_ThrowsException()
 	{
 		assertThrowsExactly(IllegalArgumentException.class, () -> new TestFurnace(new BlockMock(Material.BEDROCK)));
 	}
