@@ -12,7 +12,6 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.CookingRecipe;
 import org.bukkit.inventory.FurnaceInventory;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
@@ -134,18 +133,6 @@ public abstract class AbstractFurnaceMock extends ContainerMock implements Furna
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable Component customName()
-	{
-		return this.customName;
-	}
-
-	@Override
-	public void customName(@Nullable Component customName)
-	{
-		this.customName = customName;
 	}
 
 	@NotNull

@@ -109,14 +109,6 @@ class AbstractFurnaceMockTest
 		assertThrowsExactly(IllegalArgumentException.class, () -> furnace.setCookSpeedMultiplier((short) 201));
 	}
 
-	@Test
-	void customName()
-	{
-		furnace.customName(Component.text("Test"));
-
-		assertEquals(Component.text("Test"), furnace.customName());
-	}
-
 	private static class TestFurnace extends AbstractFurnaceMock
 	{
 
