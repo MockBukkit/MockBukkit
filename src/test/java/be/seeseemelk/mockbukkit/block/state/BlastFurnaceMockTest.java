@@ -34,7 +34,7 @@ class BlastFurnaceMockTest
 	}
 
 	@Test
-	void constructor_Material_NotBeehive_ThrowsException()
+	void constructor_Material_NotBlastFurnace_ThrowsException()
 	{
 		assertThrowsExactly(IllegalArgumentException.class, () -> new BlastFurnaceMock(Material.FURNACE));
 	}
@@ -46,7 +46,7 @@ class BlastFurnaceMockTest
 	}
 
 	@Test
-	void constructor_Block_NotBeehive_ThrowsException()
+	void constructor_Block_NotBlastFurnace_ThrowsException()
 	{
 		assertThrowsExactly(IllegalArgumentException.class, () -> new BlastFurnaceMock(new BlockMock(Material.FURNACE)));
 	}
