@@ -247,6 +247,9 @@ public class BlockStateMock implements BlockState, Cloneable
 	{
 		switch (block.getType())
 		{
+		case CAMPFIRE:
+		case SOUL_CAMPFIRE:
+			return new CampfireMock(block);
 		case BELL:
 			return new BellMock(block);
 		case LECTERN:
