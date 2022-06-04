@@ -18,7 +18,7 @@ class ScoreboardMockTest
 	private ScoreboardMock scoreboard;
 
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		scoreboard = new ScoreboardMock();
 	}

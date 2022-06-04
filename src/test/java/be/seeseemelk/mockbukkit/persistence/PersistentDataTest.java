@@ -26,13 +26,13 @@ class PersistentDataTest
 	private ServerMock mock;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		mock = MockBukkit.mock();
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}

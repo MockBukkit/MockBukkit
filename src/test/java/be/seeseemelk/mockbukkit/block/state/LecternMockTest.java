@@ -24,14 +24,14 @@ class LecternMockTest
 	private Lectern lectern;
 
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		MockBukkit.mock();
 		lectern = new LecternMock(Material.LECTERN);
 	}
 
 	@AfterEach
-	public void tearDown() throws Exception
+	void tearDown() throws Exception
 	{
 		MockBukkit.unmock();
 	}
