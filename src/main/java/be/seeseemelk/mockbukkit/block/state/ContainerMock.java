@@ -55,8 +55,7 @@ public abstract class ContainerMock extends TileStateMock implements Container
 	}
 
 	@Override
-	@NotNull
-	public String getLock()
+	public @NotNull String getLock()
 	{
 		return this.lock;
 	}
