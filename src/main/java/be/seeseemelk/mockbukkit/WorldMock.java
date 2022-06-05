@@ -113,7 +113,7 @@ public class WorldMock implements World
 	private final int grassHeight;
 	private final int minHeight;
 	private final int maxHeight;
-	private final WorldBorderMock worldBorder;
+	private WorldBorderMock worldBorder;
 	private final UUID uuid = UUID.randomUUID();
 
 	private Environment environment = Environment.NORMAL;
@@ -144,7 +144,6 @@ public class WorldMock implements World
 		this.maxHeight = maxHeight;
 		this.grassHeight = grassHeight;
 		this.server = MockBukkit.getMock();
-		this.worldBorder = new WorldBorderMock(this);
 
 		// Set the default gamerule values.
 		gameRules.put(GameRule.ANNOUNCE_ADVANCEMENTS, true);
@@ -1586,7 +1585,11 @@ public class WorldMock implements World
 	@Override
 	public @NotNull WorldBorderMock getWorldBorder()
 	{
-		return worldBorder;
+		if (this.worldBorder == null)
+		{
+			this.worldBorder = new WorldBorderMock(this);
+		}
+		return this.worldBorder;
 	}
 
 	@Override
