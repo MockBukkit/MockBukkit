@@ -2,7 +2,6 @@ package be.seeseemelk.mockbukkit;
 
 import org.apache.commons.lang.Validate;
 import org.bukkit.Location;
-import org.bukkit.Server;
 import org.bukkit.World;
 import org.bukkit.WorldBorder;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -26,7 +25,6 @@ public class WorldBorderMock implements WorldBorder
 	private static final double MAX_CENTER_VALUE = 3.0E7D;
 
 	private final World world;
-	private final Server server;
 	private double size;
 	private double damageAmount;
 	private double damageBuffer;
@@ -38,13 +36,11 @@ public class WorldBorderMock implements WorldBorder
 	/**
 	 * Creates a new world border mock
 	 *
-	 * @param world  The world it is the border of
-	 * @param server The server it is in
+	 * @param world The world it is the border of
 	 */
-	public WorldBorderMock(@NotNull World world, @NotNull Server server)
+	public WorldBorderMock(@NotNull World world)
 	{
 		this.world = world;
-		this.server = server;
 
 		reset();
 	}

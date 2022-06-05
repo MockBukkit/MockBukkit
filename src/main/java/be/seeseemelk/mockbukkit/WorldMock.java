@@ -145,7 +145,7 @@ public class WorldMock implements World
 		this.maxHeight = maxHeight;
 		this.grassHeight = grassHeight;
 		this.server = MockBukkit.getMock();
-		this.worldBorder = new WorldBorderMock(this, server);
+		this.worldBorder = new WorldBorderMock(this);
 
 		// Set the default gamerule values.
 		gameRules.put(GameRule.ANNOUNCE_ADVANCEMENTS, true);
