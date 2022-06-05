@@ -1,8 +1,12 @@
 package be.seeseemelk.mockbukkit;
 
+import io.papermc.paper.event.world.border.WorldBorderBoundsChangeEvent;
+import io.papermc.paper.event.world.border.WorldBorderCenterChangeEvent;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.WorldBorder;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,15 +16,15 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-
 class WorldBorderMockTest
 {
-	private WorldBorder worldBorderMock;
-	private World world;
+
 	private ServerMock server;
+	private World world;
+	private WorldBorder worldBorderMock;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		server = MockBukkit.mock();
 		world = new WorldMock();
@@ -28,7 +32,7 @@ class WorldBorderMockTest
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
@@ -104,6 +108,75 @@ class WorldBorderMockTest
 	}
 
 	@Test
+	void setSize_Instant_CallsEvent()
+	{
+		worldBorderMock.setSize(100);
+
+		server.getPluginManager().assertEventFired(WorldBorderBoundsChangeEvent.class, (e) -> e.getType() == WorldBorderBoundsChangeEvent.Type.INSTANT_MOVE && e.getNewSize() == 100);
+	}
+
+	@Test
+	void setSize_Duration_CallsEvent()
+	{
+		worldBorderMock.setSize(100, 5);
+
+		server.getPluginManager().assertEventFired(WorldBorderBoundsChangeEvent.class, (e) -> e.getType() == WorldBorderBoundsChangeEvent.Type.STARTED_MOVE && e.getNewSize() == 100 && e.getDuration() == 5000);
+	}
+
+	@Test
+	void setSize_Event_AppliesSize()
+	{
+		worldBorderMock.setSize(100);
+
+		server.getPluginManager().registerEvents(new Listener()
+		{
+			@EventHandler
+			public void onBorderChange(WorldBorderBoundsChangeEvent e)
+			{
+				e.setNewSize(50);
+			}
+		}, MockBukkit.createMockPlugin());
+
+		assertEquals(50, worldBorderMock.getSize());
+	}
+
+	@Test
+	void setSize_Event_AppliesDuration()
+	{
+		worldBorderMock.setSize(100, 10);
+
+		server.getPluginManager().registerEvents(new Listener()
+		{
+			@EventHandler
+			public void onBorderChange(WorldBorderBoundsChangeEvent e)
+			{
+				e.setDuration(5000);
+			}
+		}, MockBukkit.createMockPlugin());
+
+		server.getScheduler().performTicks(5 * 20);
+
+		assertEquals(100, worldBorderMock.getSize());
+	}
+
+	@Test
+	void setSize_CanceledEvent_DoesntApply()
+	{
+		worldBorderMock.setSize(100);
+
+		server.getPluginManager().registerEvents(new Listener()
+		{
+			@EventHandler
+			public void onBorderChange(WorldBorderBoundsChangeEvent e)
+			{
+				e.setCancelled(true);
+			}
+		}, MockBukkit.createMockPlugin());
+
+		assertEquals(6.0E7, worldBorderMock.getSize());
+	}
+
+	@Test
 	void setCenterLocation()
 	{
 		worldBorderMock.setCenter(new Location(null, 10, 0, 10));
@@ -117,6 +190,32 @@ class WorldBorderMockTest
 		worldBorderMock.setCenter(10, 10);
 
 		assertEquals(new Location(world, 10, 0, 10), worldBorderMock.getCenter());
+	}
+
+	@Test
+	void setCenter_CallsEvent()
+	{
+		worldBorderMock.setCenter(10, 12);
+
+		server.getPluginManager().assertEventFired(WorldBorderCenterChangeEvent.class, (e) -> e.getNewCenter().getX() == 10 && e.getNewCenter().getZ() == 12);
+	}
+
+	@Test
+	void setCenter_CanceledEvent_DoesntApply()
+	{
+		worldBorderMock.setCenter(10, 10);
+
+		server.getPluginManager().registerEvents(new Listener()
+		{
+			@EventHandler
+			public void onBorderChange(WorldBorderCenterChangeEvent e)
+			{
+				e.setCancelled(true);
+			}
+		}, MockBukkit.createMockPlugin());
+
+		assertEquals(0, worldBorderMock.getCenter().getBlockX());
+		assertEquals(0, worldBorderMock.getCenter().getBlockZ());
 	}
 
 	@Test
@@ -183,4 +282,5 @@ class WorldBorderMockTest
 
 		assertFalse(worldBorderMock.isInside(new Location(world, 101, 0, 101)));
 	}
+
 }

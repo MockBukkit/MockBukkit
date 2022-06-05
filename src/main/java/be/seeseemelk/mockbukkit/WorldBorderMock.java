@@ -1,5 +1,8 @@
 package be.seeseemelk.mockbukkit;
 
+import io.papermc.paper.event.world.border.WorldBorderBoundsChangeEvent;
+import io.papermc.paper.event.world.border.WorldBorderBoundsChangeFinishEvent;
+import io.papermc.paper.event.world.border.WorldBorderCenterChangeEvent;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -78,35 +81,47 @@ public class WorldBorderMock implements WorldBorder
 	}
 
 	@Override
-	public void setSize(double newSizeRaw, long seconds)
+	public void setSize(double newSize, long seconds)
 	{
-		double newSize = Math.min(MAX_BORDER_SIZE, Math.max(MIN_BORDER_SIZE, newSizeRaw));
+		newSize = Math.min(MAX_BORDER_SIZE, Math.max(MIN_BORDER_SIZE, newSize));
 		seconds = Math.min(MAX_MOVEMENT_TIME, Math.max(0L, seconds));
 
-		if (seconds <= 0)
+		WorldBorderBoundsChangeEvent.Type moveType = seconds <= 0 ? WorldBorderBoundsChangeEvent.Type.INSTANT_MOVE : WorldBorderBoundsChangeEvent.Type.STARTED_MOVE;
+		WorldBorderBoundsChangeEvent event = new WorldBorderBoundsChangeEvent(this.world, this, moveType, this.size, newSize, seconds * 1000L);
+		if (!event.callEvent())
+			return;
+
+		double millis = event.getDuration();
+		newSize = event.getNewSize();
+
+		if (millis <= 0)
 		{
 			this.size = newSize;
 			return;
 		}
 
-		// Assumes server at perfect 20tps
-		double distance = newSize - size;
-		double ticksToTake = seconds * (double) 20;
+		double distance = newSize - this.size;
+		moveBorderOverTime(distance, millis, newSize);
+	}
 
-		double distancePerTick = distance / ticksToTake;
-
+	private void moveBorderOverTime(double distance, double millis, double newSize)
+	{
+		double distancePerTick = distance / ((millis / 1000) * 20);
+		final double oldSize = this.size;
+		WorldBorderMock thisBorder = this; // We can't use 'this' in the anonymous class below, so we need to store it in a variable.
 		new BukkitRunnable()
 		{
 			@Override
 			public void run()
 			{
-				if ((size < newSize && distance > 0) || (size > newSize && distance < 0))
+				if ((size < newSize && distance > 0.001) || (size > newSize && distance < -0.001))
 				{
 					size += distancePerTick;
 				}
 				else
 				{
 					size = newSize;
+					new WorldBorderBoundsChangeFinishEvent(world, thisBorder, oldSize, newSize, millis).callEvent();
 					this.cancel();
 				}
 			}
@@ -130,8 +145,13 @@ public class WorldBorderMock implements WorldBorder
 	{
 		x = Math.min(MAX_CENTER_VALUE, Math.max(-MAX_CENTER_VALUE, x));
 		z = Math.min(MAX_CENTER_VALUE, Math.max(-MAX_CENTER_VALUE, z));
-		this.centerX = x;
-		this.centerZ = z;
+
+		WorldBorderCenterChangeEvent event = new WorldBorderCenterChangeEvent(this.world, this, new Location(this.world, this.centerX, 0, this.centerZ), new Location(this.world, x, 0, z));
+		if (!event.callEvent())
+			return;
+
+		this.centerX = event.getNewCenter().getX();
+		this.centerZ = event.getNewCenter().getZ();
 	}
 
 	@Override
