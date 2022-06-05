@@ -87,6 +87,21 @@ class WorldBorderMockTest
 		assertEquals(75, worldBorderMock.getSize());
 	}
 
+	@Test
+	void setSize_LessThanOne_ClampedAtOne()
+	{
+		worldBorderMock.setSize(0);
+
+		assertEquals(1, worldBorderMock.getSize());
+	}
+
+	@Test
+	void setSize_GreaterThanMax_ClampedAtMax()
+	{
+		worldBorderMock.setSize(6.0000001E7);
+
+		assertEquals(6.0E7, worldBorderMock.getSize());
+	}
 
 	@Test
 	void setCenterLocation()

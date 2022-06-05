@@ -23,6 +23,9 @@ public class WorldBorderMock implements WorldBorder
 	private static final double DEFAULT_CENTER_X = 0;
 	private static final double DEFAULT_CENTER_Z = 0;
 	private static final double MAX_CENTER_VALUE = 3.0E7D;
+	private static final long MAX_MOVEMENT_TIME = 9223372036854775L;
+	private static final double MAX_BORDER_SIZE = 6.0E7D;
+	private static final double MIN_BORDER_SIZE = 1.0D;
 
 	private final World world;
 	private double size;
@@ -65,21 +68,24 @@ public class WorldBorderMock implements WorldBorder
 	@Override
 	public double getSize()
 	{
-		return size;
+		return this.size;
 	}
 
 	@Override
 	public void setSize(double newSize)
 	{
-		this.size = newSize;
+		this.setSize(newSize, 0L);
 	}
 
 	@Override
-	public void setSize(double newSize, long seconds)
+	public void setSize(double newSizeRaw, long seconds)
 	{
+		double newSize = Math.min(MAX_BORDER_SIZE, Math.max(MIN_BORDER_SIZE, newSizeRaw));
+		seconds = Math.min(MAX_MOVEMENT_TIME, Math.max(0L, seconds));
+
 		if (seconds <= 0)
 		{
-			setSize(newSize);
+			this.size = newSize;
 			return;
 		}
 
