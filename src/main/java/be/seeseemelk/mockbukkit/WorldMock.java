@@ -33,7 +33,6 @@ import org.bukkit.SoundCategory;
 import org.bukkit.StructureType;
 import org.bukkit.TreeType;
 import org.bukkit.World;
-import org.bukkit.WorldBorder;
 import org.bukkit.WorldCreator;
 import org.bukkit.WorldType;
 import org.bukkit.block.Biome;
@@ -114,7 +113,7 @@ public class WorldMock implements World
 	private final int grassHeight;
 	private final int minHeight;
 	private final int maxHeight;
-	private WorldBorderMock worldBorder;
+	private final WorldBorderMock worldBorder;
 	private final UUID uuid = UUID.randomUUID();
 
 	private Environment environment = Environment.NORMAL;

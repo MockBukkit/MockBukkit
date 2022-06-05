@@ -77,35 +77,34 @@ public class WorldBorderMock implements WorldBorder
 	@Override
 	public void setSize(double newSize, long seconds)
 	{
-		if (seconds > 0)
-		{
-			// Assumes server at perfect 20tps
-			double distance = newSize - size;
-			double ticksToTake = seconds * 20;
-
-			double distancePerTick = distance / ticksToTake;
-
-			new BukkitRunnable()
-			{
-				@Override
-				public void run()
-				{
-					if ((size < newSize && distance > 0) || (size > newSize && distance < 0))
-					{
-						size += distancePerTick;
-					}
-					else
-					{
-						size = newSize;
-						this.cancel();
-					}
-				}
-			}.runTaskTimer(null, 1, 1);
-		}
-		else
+		if (seconds <= 0)
 		{
 			setSize(newSize);
+			return;
 		}
+
+		// Assumes server at perfect 20tps
+		double distance = newSize - size;
+		double ticksToTake = seconds * (double) 20;
+
+		double distancePerTick = distance / ticksToTake;
+
+		new BukkitRunnable()
+		{
+			@Override
+			public void run()
+			{
+				if ((size < newSize && distance > 0) || (size > newSize && distance < 0))
+				{
+					size += distancePerTick;
+				}
+				else
+				{
+					size = newSize;
+					this.cancel();
+				}
+			}
+		}.runTaskTimer(null, 1, 1);
 	}
 
 	@Override
