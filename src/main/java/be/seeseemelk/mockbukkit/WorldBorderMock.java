@@ -38,7 +38,7 @@ public class WorldBorderMock implements WorldBorder
 	/**
 	 * Creates a new world border mock
 	 *
-	 * @param world The world it is the border of
+	 * @param world  The world it is the border of
 	 * @param server The server it is in
 	 */
 	public WorldBorderMock(@NotNull World world, @NotNull Server server)
@@ -89,7 +89,7 @@ public class WorldBorderMock implements WorldBorder
 
 			double distancePerTick = distance / ticksToTake;
 
-			server.getScheduler().runTaskTimer(null, new BukkitRunnable()
+			new BukkitRunnable()
 			{
 				@Override
 				public void run()
@@ -104,7 +104,7 @@ public class WorldBorderMock implements WorldBorder
 						this.cancel();
 					}
 				}
-			}, 1, 1);
+			}.runTaskTimer(null, 1, 1);
 		}
 		else
 		{
@@ -187,8 +187,9 @@ public class WorldBorderMock implements WorldBorder
 		Validate.notNull(location, "Location cannot be null");
 
 		BoundingBox worldBorderBoundingBox = new BoundingBox(centerX - size, Double.MAX_VALUE, centerZ - size,
-		        centerX + size, Double.MAX_VALUE * -1, centerZ + size);
+				centerX + size, Double.MAX_VALUE * -1, centerZ + size);
 
 		return worldBorderBoundingBox.contains(location.toVector()) && location.getWorld() == world;
 	}
+
 }
