@@ -8,6 +8,7 @@ import org.bukkit.WorldBorder;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.BoundingBox;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * A mock world border object.
@@ -46,6 +47,12 @@ public class WorldBorderMock implements WorldBorder
 		this.server = server;
 
 		reset();
+	}
+
+	@Override
+	public @Nullable World getWorld()
+	{
+		return this.world;
 	}
 
 	@Override
