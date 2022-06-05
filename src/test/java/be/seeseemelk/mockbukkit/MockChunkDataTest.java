@@ -7,18 +7,18 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class MockChunkDataTest
+class MockChunkDataTest
 {
 	private ServerMock server;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		server = MockBukkit.mock();
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
@@ -55,7 +55,7 @@ public class MockChunkDataTest
 	@Test
 	void test_neg_min_height()
 	{
-		MinHeightMock dummy = new MinHeightMock(-60, 256);
+		WorldMock dummy = new WorldMock(Material.GRASS, -60, 256, 70);
 		ChunkGenerator.ChunkData data = server.createChunkData(dummy);
 
 		data.setBlock(0, -40, 0, Material.OBSIDIAN);
@@ -65,35 +65,10 @@ public class MockChunkDataTest
 	@Test
 	void test_pos_min_height()
 	{
-		MinHeightMock dummy = new MinHeightMock(60, 256);
+		WorldMock dummy = new WorldMock(Material.GRASS, 60, 256, 70);
 		ChunkGenerator.ChunkData data = server.createChunkData(dummy);
 
 		data.setBlock(0, 80, 0, Material.OBSIDIAN);
 		Assertions.assertEquals(Material.OBSIDIAN, data.getType(0, 80, 0));
-	}
-
-	private static final class MinHeightMock extends WorldMock
-	{
-		private final int minHeight;
-		private final int maxHeight;
-
-		private MinHeightMock(int minHeight, int maxHeight)
-		{
-			super(Material.GRASS, 2);
-			this.minHeight = minHeight;
-			this.maxHeight = maxHeight;
-		}
-
-		@Override
-		public int getMinHeight()
-		{
-			return minHeight;
-		}
-
-		@Override
-		public int getMaxHeight()
-		{
-			return maxHeight;
-		}
 	}
 }

@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.command;
 
+import org.bukkit.ChatColor;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,14 +18,14 @@ class PlayerMessagingTest
 	private PlayerMock sender;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		server = MockBukkit.mock();
 		sender = server.addPlayer();
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
@@ -33,7 +34,7 @@ class PlayerMessagingTest
 	void assertSaid_CorrectMessage_spigot_api_DoesNotAssert()
 	{
 		sender.spigot().sendMessage(TextComponent.fromLegacyText("Spigot message"));
-		sender.assertSaid("Spigot message");
+		sender.assertSaid(ChatColor.COLOR_CHAR + "fSpigot message");
 	}
 
 	@Test

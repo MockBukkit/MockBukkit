@@ -1,18 +1,17 @@
 package be.seeseemelk.mockbukkit;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.ThreadLocalRandom;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-
+import be.seeseemelk.mockbukkit.block.BlockMock;
+import be.seeseemelk.mockbukkit.entity.ArmorStandMock;
+import be.seeseemelk.mockbukkit.entity.EntityMock;
+import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
+import be.seeseemelk.mockbukkit.entity.FireworkMock;
+import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
+import be.seeseemelk.mockbukkit.entity.MobMock;
+import be.seeseemelk.mockbukkit.entity.ZombieMock;
+import be.seeseemelk.mockbukkit.metadata.MetadataTable;
+import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
+import com.destroystokyo.paper.HeightmapType;
+import io.papermc.paper.world.MoonPhase;
 import org.apache.commons.lang.Validate;
 import org.bukkit.BlockChangeDelegate;
 import org.bukkit.Bukkit;
@@ -21,10 +20,12 @@ import org.bukkit.ChunkSnapshot;
 import org.bukkit.Difficulty;
 import org.bukkit.Effect;
 import org.bukkit.FluidCollisionMode;
+import org.bukkit.GameEvent;
 import org.bukkit.GameRule;
 import org.bukkit.HeightMap;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.Particle;
 import org.bukkit.Raid;
 import org.bukkit.Sound;
@@ -32,9 +33,12 @@ import org.bukkit.SoundCategory;
 import org.bukkit.StructureType;
 import org.bukkit.TreeType;
 import org.bukkit.World;
+import org.bukkit.WorldBorder;
+import org.bukkit.WorldCreator;
 import org.bukkit.WorldType;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.boss.DragonBattle;
@@ -46,18 +50,30 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Firework;
+import org.bukkit.entity.Hanging;
 import org.bukkit.entity.Item;
+import org.bukkit.entity.ItemFrame;
+import org.bukkit.entity.LeashHitch;
 import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
+import org.bukkit.entity.SpawnCategory;
 import org.bukkit.entity.Zombie;
+import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.entity.EntitySpawnEvent;
+import org.bukkit.event.entity.ItemSpawnEvent;
+import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.world.TimeSkipEvent;
 import org.bukkit.generator.BiomeProvider;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
+import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Consumer;
 import org.bukkit.util.RayTraceResult;
@@ -65,54 +81,68 @@ import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import be.seeseemelk.mockbukkit.block.BlockMock;
-import be.seeseemelk.mockbukkit.entity.ArmorStandMock;
-import be.seeseemelk.mockbukkit.entity.EntityMock;
-import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
-import be.seeseemelk.mockbukkit.entity.FireworkMock;
-import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
-import be.seeseemelk.mockbukkit.entity.ZombieMock;
-import be.seeseemelk.mockbukkit.metadata.MetadataTable;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * A mock world object. Note that it is made to be as simple as possible. It is by no means an efficient implementation.
  */
 public class WorldMock implements World
 {
-	private static final int MIN_WORLD_HEIGHT = 0;
-	private static final int MAX_WORLD_HEIGHT = 256;
+
+	private static final int SEA_LEVEL = 63;
 
 	private final Map<Coordinate, BlockMock> blocks = new HashMap<>();
 	private final Map<GameRule<?>, Object> gameRules = new HashMap<>();
 	private final MetadataTable metadataTable = new MetadataTable();
 	private final Map<ChunkCoordinate, ChunkMock> loadedChunks = new HashMap<>();
+	private final PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
+	private final ServerMock server;
+	private final Material defaultBlock;
+	private final int grassHeight;
+	private final int minHeight;
+	private final int maxHeight;
+	private WorldBorderMock worldBorder;
+	private final UUID uuid = UUID.randomUUID();
 
 	private Environment environment = Environment.NORMAL;
-	private ServerMock server;
-	private WorldBorderMock worldBorder;
-	private Material defaultBlock;
-	private int height;
-	private int grassHeight;
+
 	private String name = "World";
-	private UUID uuid = UUID.randomUUID();
 	private Location spawnLocation;
 	private long fullTime = 0;
 	private int weatherDuration = 0;
 	private int thunderDuration = 0;
 	private boolean storming = false;
+	private long seed = 0;
+	private WorldType worldType = WorldType.NORMAL;
+	private Difficulty difficulty = Difficulty.NORMAL;
 
 
 	/**
 	 * Creates a new mock world.
 	 *
 	 * @param defaultBlock The block that is spawned at locations 1 to {@code grassHeight}
-	 * @param height       The height of the world.
+	 * @param minHeight    The minimum height of the world.
+	 * @param maxHeight    The maximum height of the world.
 	 * @param grassHeight  The last {@code y} at which {@code defaultBlock} will spawn.
 	 */
-	public WorldMock(Material defaultBlock, int height, int grassHeight)
+	public WorldMock(Material defaultBlock, int minHeight, int maxHeight, int grassHeight)
 	{
 		this.defaultBlock = defaultBlock;
-		this.height = height;
+		this.minHeight = minHeight;
+		this.maxHeight = maxHeight;
 		this.grassHeight = grassHeight;
 		this.server = MockBukkit.getMock();
 		this.worldBorder = new WorldBorderMock(this, server);
@@ -143,6 +173,27 @@ public class WorldMock implements World
 		gameRules.put(GameRule.SPECTATORS_GENERATE_CHUNKS, true);
 	}
 
+	public WorldMock(@NotNull WorldCreator creator)
+	{
+		this();
+		this.name = creator.name();
+		this.worldType = creator.type();
+		this.seed = creator.seed();
+		this.environment = creator.environment();
+	}
+
+	/**
+	 * Creates a new mock world with a specific height from 0.
+	 *
+	 * @param defaultBlock The block that is spawned at locations 1 to {@code grassHeight}
+	 * @param maxHeight    The maximum height of the world.
+	 * @param grassHeight  The last {@code y} at which {@code defaultBlock} will spawn.
+	 */
+	public WorldMock(Material defaultBlock, int maxHeight, int grassHeight)
+	{
+		this(defaultBlock, 0, maxHeight, grassHeight);
+	}
+
 	/**
 	 * Creates a new mock world with a height of 128.
 	 *
@@ -170,18 +221,18 @@ public class WorldMock implements World
 	 */
 	public BlockMock createBlock(Coordinate c)
 	{
-		if (c.y >= height)
+		if (c.y >= maxHeight)
 		{
-			throw new ArrayIndexOutOfBoundsException("Y larger than height");
+			throw new ArrayIndexOutOfBoundsException("Y larger than max height");
 		}
-		else if (c.y < 0)
+		else if (c.y < minHeight)
 		{
-			throw new ArrayIndexOutOfBoundsException("Y smaller than 0");
+			throw new ArrayIndexOutOfBoundsException("Y smaller than min height");
 		}
 
 		Location location = new Location(this, c.x, c.y, c.z);
 		BlockMock block;
-		if (c.y == 0)
+		if (c.y == minHeight)
 		{
 			block = new BlockMock(Material.BEDROCK, location);
 		}
@@ -199,9 +250,62 @@ public class WorldMock implements World
 	}
 
 	@Override
+	public int getEntityCount()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getTileEntityCount()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getTickableTileEntityCount()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getChunkCount()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getPlayerCount()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull MoonPhase getMoonPhase()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean lineOfSightExists(@NotNull Location from, @NotNull Location to)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull BlockMock getBlockAt(int x, int y, int z)
 	{
-		Coordinate coordinate = new Coordinate(x, y, z);
+		return getBlockAt(new Coordinate(x, y, z));
+	}
+
+	public @NotNull BlockMock getBlockAt(@NotNull Coordinate coordinate)
+	{
 		if (blocks.containsKey(coordinate))
 		{
 			return blocks.get(coordinate);
@@ -216,6 +320,20 @@ public class WorldMock implements World
 	public @NotNull BlockMock getBlockAt(Location location)
 	{
 		return getBlockAt(location.getBlockX(), location.getBlockY(), location.getBlockZ());
+	}
+
+	@Override
+	@Deprecated
+	public @NotNull Block getBlockAtKey(long key)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Location getLocationAtKey(long key)
+	{
+		return World.super.getLocationAtKey(key);
 	}
 
 	@Override
@@ -313,15 +431,25 @@ public class WorldMock implements World
 	@Override
 	public void sendPluginMessage(@NotNull Plugin source, @NotNull String channel, byte[] message)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		StandardMessenger.validatePluginMessage(this.server.getMessenger(), source, channel, message);
+
+		for (Player player : this.getPlayers())
+		{
+			player.sendPluginMessage(source, channel, message);
+		}
 	}
 
 	@Override
 	public @NotNull Set<String> getListeningPluginChannels()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Set<String> result = new HashSet<>();
+
+		for (Player player : this.getPlayers())
+		{
+			result.addAll(player.getListeningPluginChannels());
+		}
+
+		return result;
 	}
 
 	@Override
@@ -377,6 +505,14 @@ public class WorldMock implements World
 	}
 
 	@Override
+	@Deprecated
+	public int getHighestBlockYAt(int x, int z, @NotNull HeightmapType heightmap) throws UnsupportedOperationException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public Chunk getChunkAt(Location location)
 	{
 		return getChunkAt(location.getBlockX() >> 4, location.getBlockZ() >> 4);
@@ -404,8 +540,7 @@ public class WorldMock implements World
 	@Override
 	public void loadChunk(Chunk chunk)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		loadChunk(chunk.getX(), chunk.getZ());
 	}
 
 	@Override
@@ -416,6 +551,7 @@ public class WorldMock implements World
 	}
 
 	@Override
+	@Deprecated
 	public boolean isChunkInUse(int x, int z)
 	{
 		// TODO Auto-generated method stub
@@ -425,13 +561,13 @@ public class WorldMock implements World
 	@Override
 	public void loadChunk(int x, int z)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		loadChunk(x, z, true);
 	}
 
 	@Override
 	public boolean loadChunk(int x, int z, boolean generate)
 	{
+		AsyncCatcher.catchOp("chunk load");
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
@@ -439,20 +575,19 @@ public class WorldMock implements World
 	@Override
 	public boolean unloadChunk(Chunk chunk)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.unloadChunk(chunk.getX(), chunk.getZ());
 	}
 
 	@Override
 	public boolean unloadChunk(int x, int z)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return unloadChunk(x, z, true);
 	}
 
 	@Override
 	public boolean unloadChunk(int x, int z, boolean save)
 	{
+		AsyncCatcher.catchOp("chunk unload");
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
@@ -460,13 +595,16 @@ public class WorldMock implements World
 	@Override
 	public boolean unloadChunkRequest(int x, int z)
 	{
+		AsyncCatcher.catchOp("chunk unload");
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
+	@Deprecated
 	public boolean regenerateChunk(int x, int z)
 	{
+		AsyncCatcher.catchOp("chunk regenerate");
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
@@ -480,7 +618,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public ItemEntityMock dropItem(@NotNull Location loc, @NotNull ItemStack item, @Nullable Consumer<Item> function)
+	public @NotNull ItemEntityMock dropItem(@NotNull Location loc, @NotNull ItemStack item, @Nullable Consumer<Item> function)
 	{
 		Validate.notNull(loc, "The provided location must not be null.");
 		Validate.notNull(item, "Cannot drop items that are null.");
@@ -495,19 +633,19 @@ public class WorldMock implements World
 		}
 
 		server.registerEntity(entity);
+		callSpawnEvent(entity, null);
+
 		return entity;
 	}
 
 	@Override
-	public ItemEntityMock dropItem(@NotNull Location loc, @NotNull ItemStack item)
+	public @NotNull ItemEntityMock dropItem(@NotNull Location loc, @NotNull ItemStack item)
 	{
-		return dropItem(loc, item, e ->
-		{
-		});
+		return dropItem(loc, item, null);
 	}
 
 	@Override
-	public ItemEntityMock dropItemNaturally(@NotNull Location location, @NotNull ItemStack item, @Nullable Consumer<Item> function)
+	public @NotNull ItemEntityMock dropItemNaturally(@NotNull Location location, @NotNull ItemStack item, @Nullable Consumer<Item> function)
 	{
 		Validate.notNull(location, "The provided location must not be null.");
 
@@ -526,9 +664,9 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public ItemEntityMock dropItemNaturally(@NotNull Location loc, @NotNull ItemStack item)
+	public @NotNull ItemEntityMock dropItemNaturally(@NotNull Location loc, @NotNull ItemStack item)
 	{
-		return dropItemNaturally(loc, item, e -> {});
+		return dropItemNaturally(loc, item, null);
 	}
 
 	@Override
@@ -546,6 +684,7 @@ public class WorldMock implements World
 	}
 
 	@Override
+	@Deprecated
 	public boolean generateTree(Location loc, TreeType type, BlockChangeDelegate delegate)
 	{
 		// TODO Auto-generated method stub
@@ -553,7 +692,72 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public Entity spawnEntity(Location loc, EntityType type)
+	public boolean generateTree(Location location, Random random, TreeType type, Predicate<BlockState> statePredicate)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz) throws IllegalArgumentException
+	{
+		return this.spawn(location, clazz, null, CreatureSpawnEvent.SpawnReason.CUSTOM);
+	}
+
+	@Override
+	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz, Consumer<T> function) throws IllegalArgumentException
+	{
+		return this.spawn(location, clazz, function, CreatureSpawnEvent.SpawnReason.CUSTOM);
+	}
+
+	@Override
+	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz, boolean randomizeData, Consumer<T> function) throws IllegalArgumentException
+	{
+		return this.spawn(location, clazz, function, CreatureSpawnEvent.SpawnReason.CUSTOM, randomizeData);
+	}
+
+	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz, Consumer<T> function, CreatureSpawnEvent.@NotNull SpawnReason reason) throws IllegalArgumentException
+	{
+		return this.spawn(location, clazz, function, reason, true);
+	}
+
+	@SuppressWarnings("unchecked")
+	public <T extends Entity> T spawn(Location location, Class<T> clazz, Consumer<T> function, CreatureSpawnEvent.SpawnReason reason, boolean randomizeData) throws IllegalArgumentException
+	{
+		if (location == null || clazz == null)
+		{
+			throw new IllegalArgumentException("Location or entity class cannot be null");
+		}
+
+		EntityMock entity = this.mockEntity(location, clazz, randomizeData);
+
+		entity.setLocation(location);
+
+		if (entity instanceof MobMock mob)
+		{
+			mob.finalizeSpawn();
+		}
+
+		// CraftBukkit doesn't check this when spawning, it's done when the entity is ticking so
+		// it ends up being spawned for one tick before being removed. We don't have a great way
+		// to do that, so we just do it here.
+		if (entity instanceof Monster && this.getDifficulty() == Difficulty.PEACEFUL)
+		{
+			entity.remove();
+		}
+
+		if (function != null)
+		{
+			function.accept((T) entity);
+		}
+
+		server.registerEntity(entity);
+		callSpawnEvent(entity, reason);
+
+		return (T) entity;
+	}
+
+	@Override
+	public @NotNull Entity spawnEntity(@NotNull Location loc, EntityType type)
 	{
 		return spawn(loc, type.getEntityClass());
 	}
@@ -562,43 +766,119 @@ public class WorldMock implements World
 	@Override
 	public Entity spawnEntity(@NotNull Location loc, @NotNull EntityType type, boolean randomizeData)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		return this.spawn(loc, type.getEntityClass(), randomizeData, null);
 	}
 
-	private <T extends Entity> EntityMock mockEntity(@NotNull Class<T> clazz)
+	private <T extends Entity> EntityMock mockEntity(@NotNull Location location, @NotNull Class<T> clazz, boolean randomizeData)
 	{
+		AsyncCatcher.catchOp("entity add");
 		if (clazz == ArmorStand.class)
 		{
 			return new ArmorStandMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Zombie.class)
-		{
-			return new ZombieMock(server, UUID.randomUUID());
-		}
-		else if (clazz == Firework.class)
-		{
-			return new FireworkMock(server, UUID.randomUUID());
 		}
 		else if (clazz == ExperienceOrb.class)
 		{
 			return new ExperienceOrbMock(server, UUID.randomUUID());
 		}
-		else if (clazz == Player.class)
+		else if (clazz == Firework.class)
 		{
-			throw new IllegalArgumentException("Player Entities cannot be spawned, use ServerMock#addPlayer(...)");
+			return new FireworkMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Hanging.class)
+		{
+			// LeashHitch has no direction and is always centered
+			if (LeashHitch.class.isAssignableFrom(clazz))
+			{
+				throw new UnimplementedOperationException();
+			}
+			BlockFace spawnFace = BlockFace.SELF;
+			BlockFace[] faces = (ItemFrame.class.isAssignableFrom(clazz))
+					? new BlockFace[]{ BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST, BlockFace.UP, BlockFace.DOWN }
+					: new BlockFace[]{ BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST };
+			for (BlockFace face : faces)
+			{
+				Block block = this.getBlockAt(location.add(face.getModX(), face.getModY(), face.getModZ()));
+				if (!block.getType().isSolid() && (block.getType() != Material.REPEATER && block.getType() != Material.COMPARATOR))
+					continue;
+
+				boolean taken = false;
+
+				// TODO: Check if the entity's bounding box collides with any other hanging entities.
+
+				if (taken)
+					continue;
+
+				spawnFace = face;
+				break;
+			}
+			if (spawnFace == BlockFace.SELF)
+			{
+				spawnFace = BlockFace.SOUTH;
+			}
+			spawnFace = spawnFace.getOppositeFace();
+			// TODO: Spawn entities here.
+			throw new UnimplementedOperationException();
 		}
 		else if (clazz == Item.class)
 		{
 			throw new IllegalArgumentException("Items must be spawned using World#dropItem(...)");
 		}
-		else
+		else if (clazz == Player.class)
 		{
-			// If that specific Mob Class has not been implemented yet, it may be better
-			// to throw an UnimplementedOperationException for consistency
-			throw new UnimplementedOperationException();
+			throw new IllegalArgumentException("Player Entities cannot be spawned, use ServerMock#addPlayer(...)");
 		}
+		else if (clazz == Zombie.class)
+		{
+			return new ZombieMock(server, UUID.randomUUID());
+		}
+		throw new UnimplementedOperationException();
+	}
+
+	private void callSpawnEvent(EntityMock entity, CreatureSpawnEvent.SpawnReason reason)
+	{
+
+		boolean canceled; // Here for future implementation (see below)
+
+		if (entity instanceof LivingEntity living && !(entity instanceof Player)) {
+			/* getAllowAnimals and getAllowMonsters aren't implemented yet
+			boolean isAnimal = entity instanceof Animals || entity instanceof WaterMob || entity instanceof Golem;
+			boolean isMonster = entity instanceof Monster || entity instanceof Ghast || entity instanceof Slime;
+			if (reason != CreatureSpawnEvent.SpawnReason.CUSTOM)
+			{
+				if (isAnimal && !getAllowAnimals() || isMonster && !getAllowMonsters())
+				{
+					entity.remove();
+					yield false;
+				}
+			}
+			*/
+
+			canceled = new CreatureSpawnEvent(living, reason).callEvent();
+		} else if (entity instanceof Item item) {
+			canceled = new ItemSpawnEvent(item).callEvent();
+		} else if (entity instanceof Player player) {
+			canceled = true; // Shouldn't ever be called here but just for parody.
+		} else if (entity instanceof Projectile projectile) {
+			canceled = new ProjectileLaunchEvent(entity).callEvent();
+		} else {
+			canceled = new EntitySpawnEvent(entity).callEvent();
+		}
+
+		/* EntityMock#getPassengers() and #getVehicle() isn't implemented
+		if (canceled || entity.isValid())
+		{
+			Entity vehicle = entity.getVehicle();
+			if (vehicle != null)
+			{
+				vehicle.remove();
+			}
+			for (Entity passenger : entity.getPassengers())
+			{
+				passenger.remove();
+			}
+			entity.remove();
+		}
+		*/
 	}
 
 	@Override
@@ -610,6 +890,20 @@ public class WorldMock implements World
 
 	@Override
 	public LightningStrike strikeLightningEffect(Location loc)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Location findLightningRod(@NotNull Location location)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Location findLightningTarget(@NotNull Location location)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -646,6 +940,13 @@ public class WorldMock implements World
 	}
 
 	@Override
+	public @NotNull CompletableFuture<Chunk> getChunkAtAsync(int x, int z, boolean gen, boolean urgent)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public List<Player> getPlayers()
 	{
 		return Bukkit.getOnlinePlayers().stream().filter(p -> p.getWorld() == this).collect(Collectors.toList());
@@ -653,6 +954,13 @@ public class WorldMock implements World
 
 	@Override
 	public Collection<Entity> getNearbyEntities(Location location, double x, double y, double z)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Entity getEntity(@NotNull UUID uuid)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -686,6 +994,12 @@ public class WorldMock implements World
 		{
 			this.fullTime += event.getSkipAmount();
 		}
+	}
+
+	@Override
+	public boolean isDayTime()
+	{
+		return false;
 	}
 
 	@Override
@@ -772,6 +1086,12 @@ public class WorldMock implements World
 	}
 
 	@Override
+	public boolean createExplosion(@Nullable Entity source, @NotNull Location loc, float power, boolean setFire, boolean breakBlocks)
+	{
+		return false;
+	}
+
+	@Override
 	public Environment getEnvironment()
 	{
 		return this.environment;
@@ -790,8 +1110,7 @@ public class WorldMock implements World
 	@Override
 	public long getSeed()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.seed;
 	}
 
 	@Override
@@ -827,6 +1146,7 @@ public class WorldMock implements World
 	@Override
 	public void save()
 	{
+		AsyncCatcher.catchOp("world save");
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
@@ -836,40 +1156,6 @@ public class WorldMock implements World
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public <T extends Entity> T spawn(@NotNull Location location, @NotNull Class<T> clazz) throws IllegalArgumentException
-	{
-		Validate.notNull(location, "The provided location must not be null.");
-		Validate.notNull(clazz, "The provided class must not be null.");
-
-		EntityMock entity = mockEntity(clazz);
-		entity.setLocation(location);
-		server.registerEntity(entity);
-
-		return (T) entity;
-	}
-
-	@Override
-	public <T extends Entity> T spawn(@NotNull Location location, @NotNull Class<T> clazz, @Nullable Consumer<T> function)
-	throws IllegalArgumentException
-	{
-		T entity = spawn(location, clazz);
-		if (function != null)
-		{
-			function.accept(entity);
-		}
-		return entity;
-	}
-
-	@NotNull
-	@Override
-	public <T extends Entity> T spawn(@NotNull Location location, @NotNull Class<T> clazz, boolean randomizeData, @Nullable Consumer<T> function) throws IllegalArgumentException
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
 	}
 
 	@SuppressWarnings("deprecation")
@@ -890,38 +1176,43 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public void playEffect(Location location, Effect effect, int data)
+	public void playEffect(@NotNull Location location, @NotNull Effect effect, int data)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.playEffect(location, effect, data, 64);
 	}
 
 	@Override
-	public void playEffect(Location location, Effect effect, int data, int radius)
+	public void playEffect(@NotNull Location location, @NotNull Effect effect, int data, int radius)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Validate.notNull(location, "Location cannot be null");
+		Validate.notNull(effect, "Effect cannot be null");
+		Validate.notNull(location.getWorld(), "World cannot be null");
 	}
 
 	@Override
-	public <T> void playEffect(Location location, Effect effect, T data)
+	public <T> void playEffect(@NotNull Location location, @NotNull Effect effect, T data)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.playEffect(location, effect, data, 64);
 	}
 
 	@Override
-	public <T> void playEffect(Location location, Effect effect, T data, int radius)
+	public <T> void playEffect(@NotNull Location location, @NotNull Effect effect, T data, int radius)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (data != null)
+		{
+			Validate.isTrue(effect.getData() != null && effect.getData().isAssignableFrom(data.getClass()), "Wrong kind of data for this effect!");
+		}
+		else
+		{
+			// Special case: the axis is optional for ELECTRIC_SPARK
+			Validate.isTrue(effect.getData() == null || effect == Effect.ELECTRIC_SPARK, "Wrong kind of data for this effect!");
+		}
 	}
 
 	@Override
-	public ChunkSnapshot getEmptyChunkSnapshot(int x, int z, boolean includeBiome, boolean includeBiomeTempRain)
+	public @NotNull ChunkSnapshot getEmptyChunkSnapshot(int x, int z, boolean includeBiome, boolean includeBiomeTempRain)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return new ChunkSnapshotMock(x, z, getMinHeight(), getMaxHeight(), getName(), getFullTime(), Map.of());
 	}
 
 	@Override
@@ -946,6 +1237,7 @@ public class WorldMock implements World
 	}
 
 	@Override
+	@Deprecated
 	public Biome getBiome(int x, int z)
 	{
 		// TODO Auto-generated method stub
@@ -953,6 +1245,7 @@ public class WorldMock implements World
 	}
 
 	@Override
+	@Deprecated
 	public void setBiome(int x, int z, Biome bio)
 	{
 		// TODO Auto-generated method stub
@@ -960,6 +1253,7 @@ public class WorldMock implements World
 	}
 
 	@Override
+	@Deprecated
 	public double getTemperature(int x, int z)
 	{
 		// TODO Auto-generated method stub
@@ -967,6 +1261,7 @@ public class WorldMock implements World
 	}
 
 	@Override
+	@Deprecated
 	public double getHumidity(int x, int z)
 	{
 		// TODO Auto-generated method stub
@@ -976,20 +1271,26 @@ public class WorldMock implements World
 	@Override
 	public int getMinHeight()
 	{
-		return MIN_WORLD_HEIGHT;
+		return minHeight;
 	}
 
 	@Override
 	public int getMaxHeight()
 	{
-		return MAX_WORLD_HEIGHT;
+		return maxHeight;
+	}
+
+	@Override
+	public @NotNull BiomeProvider vanillaBiomeProvider()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public int getSeaLevel()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return SEA_LEVEL;
 	}
 
 	@Override
@@ -1021,17 +1322,15 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public Difficulty getDifficulty()
+	public @NotNull Difficulty getDifficulty()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.difficulty;
 	}
 
 	@Override
-	public void setDifficulty(Difficulty difficulty)
+	public void setDifficulty(@NotNull Difficulty difficulty)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.difficulty = difficulty;
 	}
 
 	@Override
@@ -1042,10 +1341,10 @@ public class WorldMock implements World
 	}
 
 	@Override
+	@Deprecated
 	public WorldType getWorldType()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.worldType;
 	}
 
 	@Override
@@ -1056,6 +1355,7 @@ public class WorldMock implements World
 	}
 
 	@Override
+	@Deprecated
 	public long getTicksPerAnimalSpawns()
 	{
 		// TODO Auto-generated method stub
@@ -1063,6 +1363,7 @@ public class WorldMock implements World
 	}
 
 	@Override
+	@Deprecated
 	public void setTicksPerAnimalSpawns(int ticksPerAnimalSpawns)
 	{
 		// TODO Auto-generated method stub
@@ -1070,6 +1371,7 @@ public class WorldMock implements World
 	}
 
 	@Override
+	@Deprecated
 	public long getTicksPerMonsterSpawns()
 	{
 		// TODO Auto-generated method stub
@@ -1077,6 +1379,7 @@ public class WorldMock implements World
 	}
 
 	@Override
+	@Deprecated
 	public void setTicksPerMonsterSpawns(int ticksPerMonsterSpawns)
 	{
 		// TODO Auto-generated method stub
@@ -1084,6 +1387,7 @@ public class WorldMock implements World
 	}
 
 	@Override
+	@Deprecated
 	public int getMonsterSpawnLimit()
 	{
 		// TODO Auto-generated method stub
@@ -1091,6 +1395,7 @@ public class WorldMock implements World
 	}
 
 	@Override
+	@Deprecated
 	public void setMonsterSpawnLimit(int limit)
 	{
 		// TODO Auto-generated method stub
@@ -1098,6 +1403,7 @@ public class WorldMock implements World
 	}
 
 	@Override
+	@Deprecated
 	public int getAnimalSpawnLimit()
 	{
 		// TODO Auto-generated method stub
@@ -1105,6 +1411,7 @@ public class WorldMock implements World
 	}
 
 	@Override
+	@Deprecated
 	public void setAnimalSpawnLimit(int limit)
 	{
 		// TODO Auto-generated method stub
@@ -1112,6 +1419,7 @@ public class WorldMock implements World
 	}
 
 	@Override
+	@Deprecated
 	public int getWaterAnimalSpawnLimit()
 	{
 		// TODO Auto-generated method stub
@@ -1119,6 +1427,7 @@ public class WorldMock implements World
 	}
 
 	@Override
+	@Deprecated
 	public void setWaterAnimalSpawnLimit(int limit)
 	{
 		// TODO Auto-generated method stub
@@ -1126,6 +1435,7 @@ public class WorldMock implements World
 	}
 
 	@Override
+	@Deprecated
 	public int getWaterUndergroundCreatureSpawnLimit()
 	{
 		// TODO Auto-generated method stub
@@ -1134,6 +1444,7 @@ public class WorldMock implements World
 	}
 
 	@Override
+	@Deprecated
 	public void setWaterUndergroundCreatureSpawnLimit(int limit)
 	{
 		// TODO Auto-generated method stub
@@ -1142,6 +1453,7 @@ public class WorldMock implements World
 	}
 
 	@Override
+	@Deprecated
 	public int getAmbientSpawnLimit()
 	{
 		// TODO Auto-generated method stub
@@ -1149,6 +1461,7 @@ public class WorldMock implements World
 	}
 
 	@Override
+	@Deprecated
 	public void setAmbientSpawnLimit(int limit)
 	{
 		// TODO Auto-generated method stub
@@ -1158,29 +1471,52 @@ public class WorldMock implements World
 	@Override
 	public void playSound(Location location, Sound sound, float volume, float pitch)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.playSound(location, sound, SoundCategory.MASTER, volume, pitch);
 	}
 
 	@Override
 	public void playSound(Location location, String sound, float volume, float pitch)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.playSound(location, sound, SoundCategory.MASTER, volume, pitch);
 	}
 
 	@Override
 	public void playSound(Location location, Sound sound, SoundCategory category, float volume, float pitch)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		for (Player player : getPlayers())
+		{
+			player.playSound(location, sound, category, volume, pitch);
+		}
 	}
 
 	@Override
 	public void playSound(Location location, String sound, SoundCategory category, float volume, float pitch)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		for (Player player : getPlayers())
+		{
+			player.playSound(location, sound, category, volume, pitch);
+		}
+	}
+
+	@Override
+	public void playSound(Entity entity, Sound sound, float volume, float pitch)
+	{
+		this.playSound(entity, sound, SoundCategory.MASTER, volume, pitch);
+	}
+
+	@Override
+	public void playSound(Entity entity, Sound sound, SoundCategory category, float volume, float pitch)
+	{
+		if (entity == null || entity.getWorld() != this || sound == null || category == null)
+		{
+			// Null values are simply ignored - This is inline with CB behaviour
+			return;
+		}
+
+		for (Player player : getPlayers())
+		{
+			player.playSound(entity, sound, category, volume, pitch);
+		}
 	}
 
 	@Override
@@ -1190,6 +1526,7 @@ public class WorldMock implements World
 	}
 
 	@Override
+	@Deprecated
 	public String getGameRuleValue(String rule)
 	{
 		if (rule == null)
@@ -1206,6 +1543,7 @@ public class WorldMock implements World
 
 	@SuppressWarnings("unchecked")
 	@Override
+	@Deprecated
 	public boolean setGameRuleValue(String rule, String value)
 	{
 		if (rule == null)
@@ -1339,6 +1677,13 @@ public class WorldMock implements World
 	@Override
 	public <T> void spawnParticle(Particle particle, double x, double y, double z, int count, double offsetX,
 	                              double offsetY, double offsetZ, double extra, T data)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public <T> void spawnParticle(@NotNull Particle particle, @Nullable List<Player> receivers, @Nullable Player source, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double extra, @Nullable T data, boolean force)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1487,6 +1832,88 @@ public class WorldMock implements World
 	}
 
 	@Override
+	public @Nullable Location locateNearestBiome(@NotNull Location origin, @NotNull Biome biome, int radius)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Location locateNearestBiome(@NotNull Location origin, @NotNull Biome biome, int radius, int step)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@Deprecated
+	public boolean isUltrawarm()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public double getCoordinateScale()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@Deprecated
+	public boolean hasSkylight()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@Deprecated
+	public boolean hasBedrockCeiling()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@Deprecated
+	public boolean doesBedWork()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@Deprecated
+	public boolean doesRespawnAnchorWork()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isFixedTime()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Collection<Material> getInfiniburn()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void sendGameEvent(@Nullable Entity sourceEntity, @NotNull GameEvent gameEvent, @NotNull Vector position)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public boolean isChunkForceLoaded(int x, int z)
 	{
 		// TODO Auto-generated method stub
@@ -1622,6 +2049,13 @@ public class WorldMock implements World
 
 	@Override
 	public Biome getBiome(int x, int y, int z)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Biome getComputedBiome(int x, int y, int z)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1824,6 +2258,7 @@ public class WorldMock implements World
 	}
 
 	@Override
+	@Deprecated
 	public long getTicksPerWaterSpawns()
 	{
 		// TODO Auto-generated method stub
@@ -1831,6 +2266,7 @@ public class WorldMock implements World
 	}
 
 	@Override
+	@Deprecated
 	public void setTicksPerWaterSpawns(int ticksPerWaterSpawns)
 	{
 		// TODO Auto-generated method stub
@@ -1838,6 +2274,7 @@ public class WorldMock implements World
 	}
 
 	@Override
+	@Deprecated
 	public long getTicksPerAmbientSpawns()
 	{
 		// TODO Auto-generated method stub
@@ -1845,6 +2282,7 @@ public class WorldMock implements World
 	}
 
 	@Override
+	@Deprecated
 	public void setTicksPerAmbientSpawns(int ticksPerAmbientSpawns)
 	{
 		// TODO Auto-generated method stub
@@ -1866,6 +2304,7 @@ public class WorldMock implements World
 	}
 
 	@Override
+	@Deprecated
 	public long getTicksPerWaterAmbientSpawns()
 	{
 		// TODO Auto-generated method stub
@@ -1873,6 +2312,7 @@ public class WorldMock implements World
 	}
 
 	@Override
+	@Deprecated
 	public void setTicksPerWaterAmbientSpawns(int ticksPerAmbientSpawns)
 	{
 		// TODO Auto-generated method stub
@@ -1880,6 +2320,7 @@ public class WorldMock implements World
 	}
 
 	@Override
+	@Deprecated
 	public long getTicksPerWaterUndergroundCreatureSpawns()
 	{
 		// TODO Auto-generated method stub
@@ -1888,6 +2329,7 @@ public class WorldMock implements World
 	}
 
 	@Override
+	@Deprecated
 	public void setTicksPerWaterUndergroundCreatureSpawns(int ticksPerWaterUndergroundCreatureSpawns)
 	{
 		// TODO Auto-generated method stub
@@ -1911,6 +2353,51 @@ public class WorldMock implements World
 
 	@Override
 	public int getViewDistance()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+
+	@Override
+	public void setViewDistance(int viewDistance)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setSimulationDistance(int simulationDistance)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@Deprecated
+	public int getNoTickViewDistance()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@Deprecated
+	public void setNoTickViewDistance(int viewDistance)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getSendViewDistance()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setSendViewDistance(int viewDistance)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1950,4 +2437,53 @@ public class WorldMock implements World
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
+
+	@Override
+	public int getSimulationDistance()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull PersistentDataContainer getPersistentDataContainer()
+	{
+		return this.persistentDataContainer;
+	}
+
+	@Override
+	public long getTicksPerSpawns(@NotNull SpawnCategory spawnCategory)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setTicksPerSpawns(@NotNull SpawnCategory spawnCategory, int ticksPerCategorySpawn)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getSpawnLimit(@NotNull SpawnCategory spawnCategory)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setSpawnLimit(@NotNull SpawnCategory spawnCategory, int limit)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull NamespacedKey getKey()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 }

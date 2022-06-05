@@ -1,18 +1,18 @@
 package be.seeseemelk.mockbukkit.scoreboard;
 
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.entity.PlayerMock;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.entity.PlayerMock;
 
 class ScoreMockTest
 {
@@ -22,7 +22,7 @@ class ScoreMockTest
 	private ScoreMock score;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		server = MockBukkit.mock();
 		scoreboard = server.getScoreboardManager().getNewScoreboard();
@@ -31,7 +31,7 @@ class ScoreMockTest
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
@@ -96,6 +96,15 @@ class ScoreMockTest
 	void getScoreboard_ReturnsScoreboard()
 	{
 		assertSame(scoreboard, score.getScoreboard());
+	}
+
+	@Test
+	void testResetScore()
+	{
+		score.setScore(5);
+		score.resetScore();
+		assertEquals(0, score.getScore());
+		assertFalse(score.isScoreSet());
 	}
 
 }

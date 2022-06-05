@@ -24,14 +24,14 @@ class HopperMockTest
 	private Hopper hopper;
 
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		MockBukkit.mock();
 		hopper = new HopperMock(Material.HOPPER);
 	}
 
 	@AfterEach
-	public void tearDown() throws Exception
+	void tearDown() throws Exception
 	{
 		MockBukkit.unmock();
 	}
