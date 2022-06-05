@@ -614,4 +614,5 @@ class WorldMockTest
 		assertTrue(armorStand.isValid());
 		assertFalse(armorStand.isDead());
 	}
+
 }
