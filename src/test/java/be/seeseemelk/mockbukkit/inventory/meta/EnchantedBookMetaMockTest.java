@@ -22,7 +22,7 @@ class EnchantedBookMetaMockTest
 	private Enchantment testEnchantment2;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		MockBukkit.mock();
 		testEnchantment = new EnchantmentMock("Test Enchantment");
@@ -30,7 +30,7 @@ class EnchantedBookMetaMockTest
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}

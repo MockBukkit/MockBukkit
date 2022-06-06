@@ -36,6 +36,7 @@ public class BarrelMock extends ContainerMock implements Barrel
 	protected BarrelMock(@NotNull BarrelMock state)
 	{
 		super(state);
+		this.isOpen = state.isOpen;
 	}
 
 	@Override
