@@ -6,7 +6,6 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.attribute.AttributeInstanceMock;
 import be.seeseemelk.mockbukkit.attribute.Attributes;
 import be.seeseemelk.mockbukkit.potion.ActivePotionEffect;
-import be.seeseemelk.mockbukkit.potion.ActivePotionEffect;
 import com.destroystokyo.paper.block.TargetBlockInfo;
 import com.destroystokyo.paper.entity.TargetEntityInfo;
 import com.google.common.base.Function;
@@ -222,12 +221,6 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	{
 		Preconditions.checkArgument(attribute != null, "attribute");
 		this.attributes.put(attribute, new AttributeInstanceMock(attribute, Attributes.getDefaultValue(attribute)));
-	}
-
-	@Override
-	public <T extends Projectile> T launchProjectile(Class<? extends T> projectile)
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
