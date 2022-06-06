@@ -22,14 +22,14 @@ class UnsafeValuesTest
 	private MockUnsafeValues mockUnsafeValues;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		server = MockBukkit.mock();
 		mockUnsafeValues = server.getUnsafe();
 	}
 
 	@AfterEach
-	public void teardown()
+	void teardown()
 	{
 		MockBukkit.unmock();
 	}

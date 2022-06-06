@@ -1,6 +1,8 @@
 package be.seeseemelk.mockbukkit;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 
@@ -15,6 +17,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class TestPlugin extends JavaPlugin implements Listener
 {
@@ -73,6 +77,16 @@ public class TestPlugin extends JavaPlugin implements Listener
 		return commandReturns;
 	}
 
+	@Override
+	public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args)
+	{
+		if (args.length == 1)
+		{
+			return Arrays.asList("Tab", "Complete", "Results");
+		}
+		return Arrays.asList("Other", "Results");
+	}
+
 	public void unannotatedEventHandler(PlayerInteractEvent event)
 	{
 		unannotatedPlayerInteractEventExecuted = true;
@@ -113,7 +127,8 @@ public class TestPlugin extends JavaPlugin implements Listener
 				barrier.await();
 			}
 			catch (InterruptedException | BrokenBarrierException e)
-			{}
+			{
+			}
 		}
 	}
 }

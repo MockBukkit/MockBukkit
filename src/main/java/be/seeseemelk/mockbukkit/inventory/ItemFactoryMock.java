@@ -1,18 +1,21 @@
 package be.seeseemelk.mockbukkit.inventory;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.inventory.meta.MapMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.ArmorStandMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.BannerMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.BookMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.CompassMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.CrossbowMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.EnchantedBookMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.FireworkEffectMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.FireworkMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.KnowledgeBookMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.LeatherArmorMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.MapMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.PotionMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.SkullMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.SuspiciousStewMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.ArmorStandMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.TropicalFishBucketMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.BannerMetaMock;
 import net.kyori.adventure.text.Component;
@@ -22,7 +25,6 @@ import net.md_5.bungee.api.chat.hover.content.Content;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Color;
 import org.bukkit.Material;
-import org.bukkit.block.data.Rotatable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemFactory;
@@ -60,6 +62,8 @@ public class ItemFactoryMock implements ItemFactory
 		case POTION, LINGERING_POTION, SPLASH_POTION -> PotionMetaMock.class;
 		case PLAYER_HEAD -> SkullMetaMock.class;
 		case SUSPICIOUS_STEW -> SuspiciousStewMetaMock.class;
+		case COMPASS -> CompassMetaMock.class;
+		case CROSSBOW -> CrossbowMetaMock.class;
 		case WHITE_BANNER, ORANGE_BANNER, MAGENTA_BANNER, LIGHT_BLUE_BANNER, YELLOW_BANNER, LIME_BANNER, PINK_BANNER, GRAY_BANNER, LIGHT_GRAY_BANNER, CYAN_BANNER, PURPLE_BANNER, BLUE_BANNER, BROWN_BANNER, GREEN_BANNER, RED_BANNER, BLACK_BANNER ->
 				BannerMetaMock.class;
 		case TROPICAL_FISH_BUCKET -> TropicalFishBucketMetaMock.class;
