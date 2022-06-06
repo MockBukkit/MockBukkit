@@ -9,6 +9,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class AttributeInstanceMockTest
 {
 
+	private AttributeInstanceMock attribute;
+
+	@BeforeEach
+	void setUp()
+	{
+		attribute = new AttributeInstanceMock(Attribute.GENERIC_FLYING_SPEED, 5.0);
+	}
+
 	@Test
 	void getAttribute_Constructor_CorrectAttribute()
 	{

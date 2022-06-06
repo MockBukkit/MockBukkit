@@ -23,13 +23,13 @@ class BlockStateMockTest
 {
 
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		MockBukkit.mock();
 	}
 
 	@AfterEach
-	public void tearDown() throws Exception
+	void tearDown() throws Exception
 	{
 		MockBukkit.unmock();
 	}
@@ -95,4 +95,16 @@ class BlockStateMockTest
 		assertTrue(chest.update(true));
 		assertTrue(block.getState() instanceof Chest);
 	}
+
+	@Test
+	void testUpdateForceChangesType()
+	{
+		Block block = new BlockMock(Material.CHEST);
+		BlockState chest = new ChestMock(block);
+		chest.setType(Material.IRON_BLOCK);
+
+		assertTrue(chest.update(true));
+		assertEquals(Material.IRON_BLOCK, block.getType());
+	}
+
 }

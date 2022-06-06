@@ -8,20 +8,18 @@ import net.kyori.adventure.text.Component;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import com.google.common.base.Preconditions;
 import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Item;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.SpawnCategory;
-import org.bukkit.entity.memory.MemoryKey;
-import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.EulerAngle;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collections;
+import java.util.EnumSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -32,8 +30,6 @@ import java.util.UUID;
  */
 public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 {
-
-	private final EntityEquipment equipment = new EntityEquipmentMock(this);
 
 	private boolean hasArms = false;
 	private boolean isSmall = false;
@@ -48,166 +44,22 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	private EulerAngle leftLegPose = new EulerAngle(Math.toRadians(-1.0f), 0.0f, Math.toRadians(-1.0f));
 	private EulerAngle rightLegPose = new EulerAngle(Math.toRadians(1.0f), 0.0f, Math.toRadians(1.0f));
 
+	private final Set<EquipmentSlot> disabledSlots = EnumSet.noneOf(EquipmentSlot.class);
+
 	public ArmorStandMock(ServerMock server, UUID uuid)
 	{
 		super(server, uuid);
 	}
 
 	@Override
-	public EntityType getType()
+	public @NotNull EntityType getType()
 	{
 		return EntityType.ARMOR_STAND;
 	}
 
 	@Override
-	public @Nullable Block getTargetBlock(int maxDistance, TargetBlockInfo.@NotNull FluidMode fluidMode)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable BlockFace getTargetBlockFace(int maxDistance, TargetBlockInfo.@NotNull FluidMode fluidMode)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable TargetBlockInfo getTargetBlockInfo(int maxDistance, TargetBlockInfo.@NotNull FluidMode fluidMode)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable Entity getTargetEntity(int maxDistance, boolean ignoreBlocks)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable TargetEntityInfo getTargetEntityInfo(int maxDistance, boolean ignoreBlocks)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public int getBeeStingerCooldown()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setBeeStingerCooldown(int ticks)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public int getBeeStingersInBody()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setBeeStingersInBody(int count)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setKiller(@Nullable Player killer)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean hasLineOfSight(@NotNull Location location)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public EntityEquipment getEquipment()
-	{
-		return equipment;
-	}
-
-	@Override
-	public boolean canTick()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setCanTick(boolean tick)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull ItemStack getItem(@NotNull EquipmentSlot slot)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setItem(@NotNull EquipmentSlot slot, @Nullable ItemStack item)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull Set<EquipmentSlot> getDisabledSlots()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setDisabledSlots(@NotNull EquipmentSlot... slots)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void addDisabledSlots(@NotNull EquipmentSlot... slots)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void removeDisabledSlots(@NotNull EquipmentSlot... slots)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean isSlotDisabled(@NotNull EquipmentSlot slot)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	@Deprecated
-	public ItemStack getBoots()
+	public @NotNull ItemStack getBoots()
 	{
 		return getEquipment().getBoots();
 	}
@@ -221,7 +73,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 
 	@Override
 	@Deprecated
-	public ItemStack getLeggings()
+	public @NotNull ItemStack getLeggings()
 	{
 		return getEquipment().getLeggings();
 	}
@@ -235,7 +87,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 
 	@Override
 	@Deprecated
-	public ItemStack getChestplate()
+	public @NotNull ItemStack getChestplate()
 	{
 		return getEquipment().getChestplate();
 	}
@@ -249,7 +101,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 
 	@Override
 	@Deprecated
-	public ItemStack getHelmet()
+	public @NotNull ItemStack getHelmet()
 	{
 		return getEquipment().getHelmet();
 	}
@@ -263,7 +115,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 
 	@Override
 	@Deprecated
-	public ItemStack getItemInHand()
+	public @NotNull ItemStack getItemInHand()
 	{
 		return getEquipment().getItemInMainHand();
 	}
@@ -408,21 +260,21 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	}
 
 	@Override
-	public void addEquipmentLock(EquipmentSlot slot, LockType lockType)
+	public void addEquipmentLock(@NotNull EquipmentSlot slot, @NotNull LockType lockType)
 	{
 		// TODO Equipment Locks use byte operations internally, they might be hard to implement
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void removeEquipmentLock(EquipmentSlot slot, LockType lockType)
+	public void removeEquipmentLock(@NotNull EquipmentSlot slot, @NotNull LockType lockType)
 	{
 		// TODO Equipment Locks use byte operations internally, they might be hard to implement
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean hasEquipmentLock(EquipmentSlot slot, LockType lockType)
+	public boolean hasEquipmentLock(@NotNull EquipmentSlot slot, @NotNull LockType lockType)
 	{
 		// TODO Equipment Locks use byte operations internally, they might be hard to implement
 		throw new UnimplementedOperationException();
@@ -443,199 +295,79 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	}
 
 	@Override
-	public boolean isSleeping()
+	public boolean canTick()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void attack(Entity target)
+	public void setCanTick(boolean tick)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void swingMainHand()
+	public @NotNull ItemStack getItem(@NotNull EquipmentSlot slot)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(slot, "slot");
+		return switch (slot)
+		{
+		case HAND -> getEquipment().getItemInMainHand();
+		case OFF_HAND -> getEquipment().getItemInOffHand();
+		case FEET -> getBoots();
+		case LEGS -> getLeggings();
+		case CHEST -> getChestplate();
+		case HEAD -> getHelmet();
+		};
 	}
 
 	@Override
-	public void swingOffHand()
+	public void setItem(@NotNull EquipmentSlot slot, @Nullable ItemStack item)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(slot, "slot");
+		switch (slot)
+		{
+		case HAND -> getEquipment().setItemInMainHand(item);
+		case OFF_HAND -> getEquipment().setItemInOffHand(item);
+		case FEET -> setBoots(item);
+		case LEGS -> setLeggings(item);
+		case CHEST -> setChestplate(item);
+		case HEAD -> setHelmet(item);
+			default -> throw new UnsupportedOperationException(slot.name());
+		}
 	}
 
 	@Override
-	public Set<UUID> getCollidableExemptions()
+	public @NotNull Set<EquipmentSlot> getDisabledSlots()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return EnumSet.copyOf(this.disabledSlots);
 	}
 
 	@Override
-	public <T> T getMemory(MemoryKey<T> memoryKey)
+	public void setDisabledSlots(@NotNull EquipmentSlot... slots)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.disabledSlots.clear();
+		Collections.addAll(this.disabledSlots, slots);
 	}
 
 	@Override
-	public <T> void setMemory(MemoryKey<T> memoryKey, T memoryValue)
+	public void addDisabledSlots(@NotNull EquipmentSlot... slots)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Collections.addAll(this.disabledSlots, slots);
 	}
 
 	@Override
-	public int getArrowsStuck()
+	public void removeDisabledSlots(@NotNull EquipmentSlot... slots)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.disabledSlots.removeAll(List.of(slots));
 	}
 
 	@Override
-	public void setArrowsStuck(int arrows)
+	public boolean isSlotDisabled(@NotNull EquipmentSlot slot)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public int getShieldBlockingDelay()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setShieldBlockingDelay(int delay)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable ItemStack getActiveItem()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void clearActiveItem()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public int getItemUseRemainingTime()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public int getHandRaisedTime()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean isHandRaised()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull EquipmentSlot getHandRaised()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean isJumping()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setJumping(boolean jumping)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void playPickupItemAnimation(@NotNull Item item, int quantity)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public float getHurtDirection()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setHurtDirection(float hurtDirection)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public double getAbsorptionAmount()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setAbsorptionAmount(double amount)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull SpawnCategory getSpawnCategory()
-	{
-		return SpawnCategory.MISC;
-	}
-
-
-	@Override
-	public @NotNull Component name()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable Component customName()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void customName(@Nullable Component customName)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.disabledSlots.contains(slot);
 	}
 
 }
