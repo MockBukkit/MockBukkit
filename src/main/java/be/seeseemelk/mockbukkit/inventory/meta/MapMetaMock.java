@@ -41,13 +41,17 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 	@Override
 	public boolean hasMapId()
 	{
-		return mapId != null;
+		return this.mapId != null;
 	}
 
 	@Override
 	public int getMapId()
 	{
-		return mapId;
+		if (this.mapId == null)
+		{
+			throw new IllegalStateException("Map ID is not set. Are you checking #hasMapId() first?");
+		}
+		return this.mapId;
 	}
 
 	@Override
