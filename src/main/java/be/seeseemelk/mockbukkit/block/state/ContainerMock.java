@@ -23,7 +23,7 @@ public abstract class ContainerMock extends TileStateMock implements Container
 	private String customName;
 	private String lock = "";
 
-	public ContainerMock(@NotNull Material material)
+	protected ContainerMock(@NotNull Material material)
 	{
 		super(material);
 		this.inventory = createInventory();
