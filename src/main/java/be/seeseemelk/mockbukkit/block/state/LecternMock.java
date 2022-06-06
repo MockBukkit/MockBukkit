@@ -33,6 +33,7 @@ public class LecternMock extends ContainerMock implements Lectern
 	protected LecternMock(@NotNull LecternMock state)
 	{
 		super(state);
+		this.currentPage = state.currentPage;
 	}
 
 	@Override
