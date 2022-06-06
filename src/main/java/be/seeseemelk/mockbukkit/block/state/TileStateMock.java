@@ -22,7 +22,7 @@ public abstract class TileStateMock extends BlockStateMock implements TileState
 
 	private final PersistentDataContainerMock container;
 
-	public TileStateMock(@NotNull Material material)
+	protected TileStateMock(@NotNull Material material)
 	{
 		super(material);
 		this.container = new PersistentDataContainerMock();

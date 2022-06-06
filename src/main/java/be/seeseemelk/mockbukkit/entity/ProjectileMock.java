@@ -19,7 +19,7 @@ public abstract class ProjectileMock extends EntityMock implements Projectile
 	private ProjectileSource source;
 	private boolean bounce;
 
-	public ProjectileMock(@NotNull ServerMock server, @NotNull UUID uuid)
+	protected ProjectileMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 	}
