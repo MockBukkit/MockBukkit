@@ -131,7 +131,7 @@ public class WorldBorderMock implements WorldBorder
 	@Override
 	public @NotNull Location getCenter()
 	{
-		return new Location(this.world, centerX, 0, centerZ);
+		return new Location(this.world, this.centerX, 0, this.centerZ);
 	}
 
 	@Override
@@ -157,7 +157,7 @@ public class WorldBorderMock implements WorldBorder
 	@Override
 	public double getDamageBuffer()
 	{
-		return damageBuffer;
+		return this.damageBuffer;
 	}
 
 	@Override
@@ -169,7 +169,7 @@ public class WorldBorderMock implements WorldBorder
 	@Override
 	public double getDamageAmount()
 	{
-		return damageAmount;
+		return this.damageAmount;
 	}
 
 	@Override
@@ -181,7 +181,7 @@ public class WorldBorderMock implements WorldBorder
 	@Override
 	public int getWarningTime()
 	{
-		return warningTime;
+		return this.warningTime;
 	}
 
 	@Override
@@ -193,7 +193,7 @@ public class WorldBorderMock implements WorldBorder
 	@Override
 	public int getWarningDistance()
 	{
-		return warningDistance;
+		return this.warningDistance;
 	}
 
 	@Override
@@ -207,10 +207,10 @@ public class WorldBorderMock implements WorldBorder
 	{
 		Validate.notNull(location, "Location cannot be null");
 
-		BoundingBox worldBorderBoundingBox = new BoundingBox(centerX - size, Double.MAX_VALUE, centerZ - size,
-				centerX + size, Double.MAX_VALUE * -1, centerZ + size);
+		BoundingBox worldBorderBoundingBox = new BoundingBox(this.centerX - this.size, Double.MAX_VALUE, this.centerZ - this.size,
+				this.centerX + this.size, Double.MAX_VALUE * -1, this.centerZ + size);
 
-		return worldBorderBoundingBox.contains(location.toVector()) && location.getWorld() == world;
+		return worldBorderBoundingBox.contains(location.toVector()) && location.getWorld() == this.world;
 	}
 
 }
