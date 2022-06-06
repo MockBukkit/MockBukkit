@@ -12,27 +12,27 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class StatisticsTest
+class StatisticsTest
 {
 
 	private ServerMock mock;
 	private PlayerMock player;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		mock = MockBukkit.mock();
 		player = mock.addPlayer();
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
 
 	@Test
-	public void testDefaults()
+	void testDefaults()
 	{
 		assertEquals(0, player.getStatistic(Statistic.DEATHS));
 		assertEquals(0, player.getStatistic(Statistic.MINE_BLOCK, Material.STONE));
@@ -40,7 +40,7 @@ public class StatisticsTest
 	}
 
 	@Test
-	public void testGet()
+	void testGet()
 	{
 		player.setStatistic(Statistic.DEATHS, 9);
 		player.setStatistic(Statistic.MINE_BLOCK, Material.STONE, 2);
@@ -52,7 +52,7 @@ public class StatisticsTest
 	}
 
 	@Test
-	public void testIncrement()
+	void testIncrement()
 	{
 		player.setStatistic(Statistic.DEATHS, 400);
 		player.setStatistic(Statistic.MINE_BLOCK, Material.STONE, 500);
@@ -77,7 +77,7 @@ public class StatisticsTest
 
 
 	@Test
-	public void testDecrement()
+	void testDecrement()
 	{
 		player.setStatistic(Statistic.DEATHS, 411);
 		player.setStatistic(Statistic.MINE_BLOCK, Material.STONE, 521);
@@ -102,7 +102,7 @@ public class StatisticsTest
 
 
 	@Test
-	public void testTyped()
+	void testTyped()
 	{
 		player.setStatistic(Statistic.MINE_BLOCK, Material.STONE, 3);
 		player.setStatistic(Statistic.KILL_ENTITY, EntityType.SQUID, 8);
@@ -115,7 +115,7 @@ public class StatisticsTest
 	}
 
 	@Test
-	public void testNegativeIncrement()
+	void testNegativeIncrement()
 	{
 		player.setStatistic(Statistic.DEATHS, 7);
 
@@ -127,7 +127,7 @@ public class StatisticsTest
 	}
 
 	@Test
-	public void testNegativeDecrement()
+	void testNegativeDecrement()
 	{
 		player.setStatistic(Statistic.DEATHS, 7);
 
@@ -139,7 +139,7 @@ public class StatisticsTest
 	}
 
 	@Test
-	public void testNegativeSet()
+	void testNegativeSet()
 	{
 		player.setStatistic(Statistic.DEATHS, 5);
 
@@ -150,7 +150,7 @@ public class StatisticsTest
 	}
 
 	@Test
-	public void testType()
+	void testType()
 	{
 		assertThrows(IllegalArgumentException.class, () ->
 		             player.setStatistic(Statistic.DEATHS, Material.ACACIA_LOG, 5));
