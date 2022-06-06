@@ -5,8 +5,6 @@ import org.bukkit.entity.Monster;
 
 import java.util.UUID;
 
-import java.util.UUID;
-
 public class SimpleMonsterMock extends MonsterMock implements Monster
 {
 
