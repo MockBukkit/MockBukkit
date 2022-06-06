@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class BlockStateMock implements BlockState, Cloneable
+public class BlockStateMock implements BlockState
 {
 
 	private final MetadataTable metadataTable;
