@@ -126,8 +126,6 @@ class WorldBorderMockTest
 	@Test
 	void setSize_Event_AppliesSize()
 	{
-		worldBorderMock.setSize(100);
-
 		server.getPluginManager().registerEvents(new Listener()
 		{
 			@EventHandler
@@ -137,14 +135,14 @@ class WorldBorderMockTest
 			}
 		}, MockBukkit.createMockPlugin());
 
+		worldBorderMock.setSize(100);
+
 		assertEquals(50, worldBorderMock.getSize());
 	}
 
 	@Test
 	void setSize_Event_AppliesDuration()
 	{
-		worldBorderMock.setSize(100, 10);
-
 		server.getPluginManager().registerEvents(new Listener()
 		{
 			@EventHandler
@@ -154,6 +152,7 @@ class WorldBorderMockTest
 			}
 		}, MockBukkit.createMockPlugin());
 
+		worldBorderMock.setSize(100, 10);
 		server.getScheduler().performTicks(5 * 20);
 
 		assertEquals(100, worldBorderMock.getSize());
@@ -162,8 +161,6 @@ class WorldBorderMockTest
 	@Test
 	void setSize_CanceledEvent_DoesntApply()
 	{
-		worldBorderMock.setSize(100);
-
 		server.getPluginManager().registerEvents(new Listener()
 		{
 			@EventHandler
@@ -172,6 +169,8 @@ class WorldBorderMockTest
 				e.setCancelled(true);
 			}
 		}, MockBukkit.createMockPlugin());
+
+		worldBorderMock.setSize(100);
 
 		assertEquals(6.0E7, worldBorderMock.getSize());
 	}
@@ -203,8 +202,6 @@ class WorldBorderMockTest
 	@Test
 	void setCenter_CanceledEvent_DoesntApply()
 	{
-		worldBorderMock.setCenter(10, 10);
-
 		server.getPluginManager().registerEvents(new Listener()
 		{
 			@EventHandler
@@ -213,6 +210,8 @@ class WorldBorderMockTest
 				e.setCancelled(true);
 			}
 		}, MockBukkit.createMockPlugin());
+
+		worldBorderMock.setCenter(10, 10);
 
 		assertEquals(0, worldBorderMock.getCenter().getBlockX());
 		assertEquals(0, worldBorderMock.getCenter().getBlockZ());
