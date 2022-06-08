@@ -15,7 +15,7 @@ import java.util.Map;
 
 /**
  * This {@link MockPotionEffectType} mocks an actual {@link PotionEffectType} by taking an id, a name, whether it is
- * instant and an RGB {@link Color} variable.
+ * instant and a RGB {@link Color} variable.
  *
  * @author TheBusyBiscuit
  */
