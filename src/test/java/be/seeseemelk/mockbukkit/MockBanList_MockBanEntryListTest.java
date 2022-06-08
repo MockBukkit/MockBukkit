@@ -13,7 +13,7 @@ class MockBanList_MockBanEntryListTest
 	private MockBanList.MockBanEntry entry;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		date = new Date();
 		entry = new MockBanList.MockBanEntry("target", date, "reason", "source");
