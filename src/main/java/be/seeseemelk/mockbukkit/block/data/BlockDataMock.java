@@ -7,7 +7,7 @@ import org.bukkit.block.data.BlockData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -21,7 +21,7 @@ public class BlockDataMock implements BlockData
 	{
 		this.type = type;
 
-		this.data = new HashMap<>();
+		this.data = new LinkedHashMap<>();
 	}
 
 	protected <T> void set(String key, T value)
@@ -131,6 +131,7 @@ public class BlockDataMock implements BlockData
 	{
 		return switch (material)
 				{
+					case AMETHYST_CLUSTER -> new AmethystClusterMock(material);
 					default -> new BlockDataMock(material);
 				};
 	}
