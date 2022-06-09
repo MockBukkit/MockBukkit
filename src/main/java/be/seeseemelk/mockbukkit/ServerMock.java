@@ -125,7 +125,7 @@ public class ServerMock extends Server.Spigot implements Server
 {
 
 	private static final String JOIN_MESSAGE = "%s has joined the server.";
-	private static final String MOTD = "A Minecraft Server";
+	private static final Component MOTD = Component.text("A Minecraft Server");
 
 	private final Properties buildProperties = new Properties();
 	private final Logger logger = Logger.getLogger("ServerMock");
@@ -1348,14 +1348,14 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull Component motd()
 	{
-		return LegacyComponentSerializer.legacySection().deserialize(MOTD);
+		return MOTD;
 	}
 
 	@Override
 	@Deprecated
-	public String getMotd()
+	public @NotNull String getMotd()
 	{
-		return MOTD;
+		return LegacyComponentSerializer.legacySection().serialize(MOTD);
 	}
 
 	@Override
