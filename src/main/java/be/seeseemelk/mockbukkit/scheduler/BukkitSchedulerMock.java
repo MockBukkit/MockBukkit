@@ -2,7 +2,7 @@ package be.seeseemelk.mockbukkit.scheduler;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import org.apache.commons.lang.Validate;
+import com.google.common.base.Preconditions;
 import org.bukkit.event.Event;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -103,7 +103,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 
 	public @NotNull Future<?> executeAsyncEvent(Event event)
 	{
-		Validate.notNull(event, "Cannot schedule an Event that is null!");
+		Preconditions.checkNotNull(event,"Cannot schedule an Event that is null!");
 		Future<?> future = asyncEventExecutor.submit(() -> MockBukkit.getMock().getPluginManager().callEvent(event));
 		queuedAsyncEvents.add(future);
 		return future;
