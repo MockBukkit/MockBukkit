@@ -19,7 +19,7 @@ class OfflinePlayerMockTest
 	private OfflinePlayer player;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		server = MockBukkit.mock();
 		uuid = UUID.randomUUID();
@@ -27,7 +27,7 @@ class OfflinePlayerMockTest
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}

@@ -36,6 +36,7 @@ public class BarrelMock extends ContainerMock implements Barrel
 	protected BarrelMock(@NotNull BarrelMock state)
 	{
 		super(state);
+		this.isOpen = state.isOpen;
 	}
 
 	@Override
@@ -91,7 +92,7 @@ public class BarrelMock extends ContainerMock implements Barrel
 	}
 
 	@Override
-	public BlockState getSnapshot()
+	public @NotNull BlockState getSnapshot()
 	{
 		return new BarrelMock(this);
 	}

@@ -22,13 +22,13 @@ import org.junit.jupiter.api.Test;
 class MockBukkitTest
 {
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		MockBukkit.setServerInstanceToNull();
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		if (MockBukkit.isMocked())
 		{
