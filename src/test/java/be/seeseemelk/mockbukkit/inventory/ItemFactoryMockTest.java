@@ -54,14 +54,14 @@ class ItemFactoryMockTest
 	private ItemFactoryMock factory;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		MockBukkit.mock();
 		factory = new ItemFactoryMock();
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
@@ -92,7 +92,7 @@ class ItemFactoryMockTest
 		assertTrue(factory.getItemMeta(Material.CROSSBOW) instanceof CrossbowMetaMock);
 		assertTrue(factory.getItemMeta(Material.ARMOR_STAND) instanceof ArmorStandMetaMock);
 		assertTrue(factory.getItemMeta(Material.TROPICAL_FISH_BUCKET) instanceof TropicalFishBucketMetaMock);
-		
+
 		for (Material m : BANNERS)
 		{
 			assertTrue(factory.getItemMeta(m) instanceof BannerMetaMock);

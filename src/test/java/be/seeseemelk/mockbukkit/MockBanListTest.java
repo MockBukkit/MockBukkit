@@ -18,7 +18,7 @@ class MockBanListTest
 	private MockBanList banList;
 
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		banList = new MockBanList();
 	}
