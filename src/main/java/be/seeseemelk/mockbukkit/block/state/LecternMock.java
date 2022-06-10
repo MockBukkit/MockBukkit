@@ -43,7 +43,7 @@ public class LecternMock extends ContainerMock implements Lectern
 	}
 
 	@Override
-	public BlockState getSnapshot()
+	public @NotNull BlockState getSnapshot()
 	{
 		return new LecternMock(this);
 	}
