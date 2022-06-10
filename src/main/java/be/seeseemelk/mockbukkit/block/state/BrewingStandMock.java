@@ -1,7 +1,6 @@
 package be.seeseemelk.mockbukkit.block.state;
 
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
-import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
@@ -13,7 +12,6 @@ import org.jetbrains.annotations.NotNull;
 public class BrewingStandMock extends ContainerMock implements BrewingStand
 {
 
-	private Component customName;
 	private int brewingTime;
 	private int fuelLevel;
 
@@ -31,9 +29,11 @@ public class BrewingStandMock extends ContainerMock implements BrewingStand
 			throw new IllegalArgumentException("Cannot create a Brewing Stand state from " + block.getType());
 	}
 
-	protected BrewingStandMock(@NotNull ContainerMock state)
+	protected BrewingStandMock(@NotNull BrewingStandMock state)
 	{
 		super(state);
+		this.brewingTime = state.brewingTime;
+		this.fuelLevel = state.fuelLevel;
 	}
 
 	@Override
