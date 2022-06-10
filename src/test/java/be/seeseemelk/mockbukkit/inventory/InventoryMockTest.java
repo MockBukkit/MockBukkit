@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.inventory;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -27,14 +28,14 @@ class InventoryMockTest
 	private InventoryMock inventory;
 
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		MockBukkit.mock();
 		inventory = new SimpleInventoryMock(null, 9, InventoryType.CHEST);
 	}
 
 	@AfterEach
-	public void tearDown() throws Exception
+	void tearDown() throws Exception
 	{
 		MockBukkit.unmock();
 	}
@@ -223,7 +224,7 @@ class InventoryMockTest
 	@Test
 	void setContents_ArrayWithNulls_NullsIgnores()
 	{
-		inventory.setContents(new ItemStack[] { null });
+		assertDoesNotThrow(() -> inventory.setContents(new ItemStack[] { null }));
 	}
 
 	@Test
@@ -290,7 +291,8 @@ class InventoryMockTest
 	void assertContainsAny_DoesNotContainThem_Asserts()
 	{
 		inventory.addItem(new ItemStack(Material.GRASS, 16));
-		assertThrows(AssertionError.class, () -> inventory.assertContainsAny(new ItemStack(Material.DIRT)));
+		ItemStack item = new ItemStack(Material.DIRT);
+		assertThrows(AssertionError.class, () -> inventory.assertContainsAny(item));
 	}
 
 	@Test
@@ -311,7 +313,8 @@ class InventoryMockTest
 	void assertContainsAtLeast_DoesNotContainEnough_Asserts()
 	{
 		inventory.addItem(new ItemStack(Material.GRASS, 3));
-		assertThrows(AssertionError.class, () -> inventory.assertContainsAtLeast(new ItemStack(Material.DIRT), 4));
+		ItemStack item = new ItemStack(Material.DIRT);
+		assertThrows(AssertionError.class, () -> inventory.assertContainsAtLeast(item, 4));
 	}
 
 	@Test

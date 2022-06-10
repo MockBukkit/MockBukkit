@@ -50,6 +50,7 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.event.player.PlayerToggleSprintEvent;
+import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
@@ -100,7 +101,7 @@ class PlayerMockTest
 	private PlayerMock player;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		server = MockBukkit.mock(new ServerMock()
 		{
@@ -125,7 +126,7 @@ class PlayerMockTest
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
@@ -168,12 +169,13 @@ class PlayerMockTest
 	@Test
 	void getEquipment_SetDropChance()
 	{
-		assertThrows(UnsupportedOperationException.class, () -> player.getEquipment().setHelmetDropChance(0));
-		assertThrows(UnsupportedOperationException.class, () -> player.getEquipment().setChestplateDropChance(0));
-		assertThrows(UnsupportedOperationException.class, () -> player.getEquipment().setLeggingsDropChance(0));
-		assertThrows(UnsupportedOperationException.class, () -> player.getEquipment().setBootsDropChance(0));
-		assertThrows(UnsupportedOperationException.class, () -> player.getEquipment().setItemInMainHandDropChance(0));
-		assertThrows(UnsupportedOperationException.class, () -> player.getEquipment().setItemInOffHandDropChance(0));
+		EntityEquipment equipment = player.getEquipment();
+		assertThrows(UnsupportedOperationException.class, () -> equipment.setHelmetDropChance(0));
+		assertThrows(UnsupportedOperationException.class, () -> equipment.setChestplateDropChance(0));
+		assertThrows(UnsupportedOperationException.class, () -> equipment.setLeggingsDropChance(0));
+		assertThrows(UnsupportedOperationException.class, () -> equipment.setBootsDropChance(0));
+		assertThrows(UnsupportedOperationException.class, () -> equipment.setItemInMainHandDropChance(0));
+		assertThrows(UnsupportedOperationException.class, () -> equipment.setItemInOffHandDropChance(0));
 	}
 
 	@Test
@@ -1471,15 +1473,17 @@ class PlayerMockTest
 	@Test
 	void testPlayerPlayEffect()
 	{
-		player.playEffect(player.getLocation(), Effect.STEP_SOUND, Material.STONE);
+		Location loc = player.getLocation();
+		assertDoesNotThrow(() -> player.playEffect(loc, Effect.STEP_SOUND, Material.STONE));
 	}
 
 	@Test
 	void testPlayerPlayEffect_NullData()
 	{
+		Location loc = player.getLocation();
 		assertThrows(IllegalArgumentException.class, () ->
 		{
-			player.playEffect(player.getLocation(), Effect.STEP_SOUND, null);
+			player.playEffect(loc, Effect.STEP_SOUND, null);
 		});
 	}
 
@@ -1585,9 +1589,11 @@ class PlayerMockTest
 	@Test
 	void testPlayerSpawnParticle_Incorrect_DataType()
 	{
+		Location loc = player.getLocation();
+		Object wrongObj = new Object();
 		assertThrows(IllegalArgumentException.class, () ->
 		{
-			player.spawnParticle(Particle.ITEM_CRACK, player.getLocation(), 1, new Object());
+			player.spawnParticle(Particle.ITEM_CRACK, loc, 1, wrongObj);
 		});
 	}
 

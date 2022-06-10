@@ -14,13 +14,13 @@ class LeatherArmorMetaMockTest
 {
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		MockBukkit.mock();
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
