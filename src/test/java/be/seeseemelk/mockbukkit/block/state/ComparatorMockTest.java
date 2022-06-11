@@ -16,7 +16,7 @@ class ComparatorMockTest
 
 	private WorldMock world;
 	private BlockMock block;
-	private ComparatorMock bell;
+	private ComparatorMock comparator;
 
 	@BeforeEach
 	void setUp()
@@ -24,7 +24,7 @@ class ComparatorMockTest
 		this.world = new WorldMock();
 		this.block = world.getBlockAt(0, 10, 0);
 		this.block.setType(Material.COMPARATOR);
-		this.bell = new ComparatorMock(this.block);
+		this.comparator = new ComparatorMock(this.block);
 	}
 
 	@Test
@@ -54,7 +54,7 @@ class ComparatorMockTest
 	@Test
 	void getSnapshot_DifferentInstance()
 	{
-		assertNotSame(bell, bell.getSnapshot());
+		assertNotSame(comparator, comparator.getSnapshot());
 	}
 
 	@Test
