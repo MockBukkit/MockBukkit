@@ -113,6 +113,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
@@ -125,10 +126,10 @@ import java.util.stream.Collectors;
 public class ServerMock extends Server.Spigot implements Server
 {
 
-	private static final String BUKKIT_VERSION = "1.18.2";
 	private static final String JOIN_MESSAGE = "%s has joined the server.";
 	private static final String MOTD = "A Minecraft Server";
 
+	private final Properties buildProperties = new Properties();
 	private final Logger logger = Logger.getLogger("ServerMock");
 	private final Thread mainThread = Thread.currentThread();
 	private final MockUnsafeValues unsafe = new MockUnsafeValues();
@@ -172,7 +173,17 @@ public class ServerMock extends Server.Spigot implements Server
 			logger.warning("Could not load file logger.properties");
 		}
 
+		try
+		{
+			buildProperties.load(ClassLoader.getSystemResourceAsStream("build.properties"));
+		}
+		catch (IOException | NullPointerException e)
+		{
+			logger.warning("Could not load build properties");
+		}
+
 		logger.setLevel(Level.ALL);
+
 	}
 
 	/**
@@ -444,21 +455,26 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public String getVersion()
+	public @NotNull String getVersion()
 	{
-		return String.format("MockBukkit (MC: %s)", BUKKIT_VERSION);
+		return String.format("MockBukkit (MC: %s)", getBukkitVersion());
 	}
 
 	@Override
-	public String getBukkitVersion()
+	public @NotNull String getBukkitVersion()
 	{
-		return BUKKIT_VERSION;
+		return getMinecraftVersion();
 	}
 
 	@Override
 	public @NotNull String getMinecraftVersion()
 	{
-		throw new UnimplementedOperationException();
+		String apiVersion;
+		if (buildProperties == null || (apiVersion = buildProperties.getProperty("full-api-version")) == null)
+		{
+			throw new IllegalStateException("Minecraft version could not be determined");
+		}
+		return apiVersion.split("-")[0];
 	}
 
 	@Override

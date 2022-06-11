@@ -42,6 +42,12 @@ dependencies {
     implementation 'org.apache.maven.resolver:maven-resolver-transport-http:1.8.0'
 }
 
+jar {
+    manifest {
+        attributes 'Automatic-Module-Name': "be.seeseemelk.mockbukkit"
+    }
+}
+
 task javadocJar(type: Jar) {
     classifier('javadoc')
     from javadoc
@@ -50,6 +56,16 @@ task javadocJar(type: Jar) {
 task sourcesJar(type: Jar) {
     classifier('sources')
     from sourceSets.main.allSource
+}
+
+processResources {
+    doLast {
+        file("${buildDir}/resources/main/build.properties").withWriter { w ->
+            Properties p = new Properties()
+            p['full-api-version'] = gradle.ext.apiVersionFull
+            p.store w, null
+        }
+    }
 }
 
 sourceCompatibility = gradle.ext.javaVersion
