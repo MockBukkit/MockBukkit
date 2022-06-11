@@ -13,14 +13,14 @@ public class ConduitMock extends TileStateMock implements Conduit
 	{
 		super(material);
 		if (material != Material.CONDUIT)
-			throw new IllegalArgumentException("Cannot create a Comparator state from " + material);
+			throw new IllegalArgumentException("Cannot create a Conduit state from " + material);
 	}
 
 	protected ConduitMock(@NotNull Block block)
 	{
 		super(block);
 		if (block.getType() != Material.CONDUIT)
-			throw new IllegalArgumentException("Cannot create a Comparator state from " + block.getType());
+			throw new IllegalArgumentException("Cannot create a Conduit state from " + block.getType());
 	}
 
 	protected ConduitMock(@NotNull ConduitMock state)
