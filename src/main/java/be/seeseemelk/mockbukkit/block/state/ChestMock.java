@@ -38,6 +38,7 @@ public class ChestMock extends ContainerMock implements Chest
 	protected ChestMock(@NotNull ChestMock state)
 	{
 		super(state);
+		this.isOpen = state.isOpen;
 	}
 
 	@Override
@@ -99,7 +100,7 @@ public class ChestMock extends ContainerMock implements Chest
 	}
 
 	@Override
-	public BlockState getSnapshot()
+	public @NotNull BlockState getSnapshot()
 	{
 		return new ChestMock(this);
 	}
