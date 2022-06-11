@@ -9,7 +9,6 @@ import org.jetbrains.annotations.NotNull;
 public class ComparatorMock extends TileStateMock implements Comparator
 {
 
-
 	protected ComparatorMock(@NotNull Material material)
 	{
 		super(material);
