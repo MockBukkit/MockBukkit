@@ -36,9 +36,13 @@ public abstract class AbstractFurnaceMock extends ContainerMock implements Furna
 			throw new IllegalArgumentException("Cannot create a Furnace state from " + block.getType().name());
 	}
 
-	protected AbstractFurnaceMock(@NotNull ContainerMock state)
+	protected AbstractFurnaceMock(@NotNull AbstractFurnaceMock state)
 	{
 		super(state);
+		this.burnTime = state.burnTime;
+		this.cookTime = state.cookTime;
+		this.cookTimeTotal = state.cookTimeTotal;
+		this.cookSpeedMultiplier = state.cookSpeedMultiplier;
 	}
 
 	@Override

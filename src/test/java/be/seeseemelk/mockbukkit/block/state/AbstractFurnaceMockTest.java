@@ -68,6 +68,22 @@ class AbstractFurnaceMockTest
 	}
 
 	@Test
+	void constructor_Copy_CopiesValues()
+	{
+		furnace.setBurnTime((short) 10);
+		furnace.setCookSpeedMultiplier(2.0);
+		furnace.setCookTime((short) 5);
+		furnace.setCookTimeTotal(15);
+
+		TestFurnace copy = new TestFurnace(furnace);
+
+		assertEquals(5, copy.getCookTime());
+		assertEquals(10, copy.getBurnTime());
+		assertEquals(15, copy.getCookTimeTotal());
+		assertEquals(2.0, copy.getCookSpeedMultiplier());
+	}
+
+	@Test
 	void setBurnTime()
 	{
 		furnace.setBurnTime((short) 5);
