@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -34,6 +35,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	        60L, TimeUnit.SECONDS,
 	        new SynchronousQueue<>());
 	private final ExecutorService asyncEventExecutor = Executors.newCachedThreadPool();
+	private final List<Future<?>> queuedAsyncEvents = new ArrayList<>();
 	private final TaskList scheduledTasks = new TaskList();
 	private final AtomicReference<Exception> asyncException = new AtomicReference<>();
 	private long currentTick = 0;
@@ -67,12 +69,12 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public void shutdown()
 	{
 		waitAsyncTasksFinished();
-
 		shutdownPool(pool);
 
 		if (asyncException.get() != null)
 			throw new AsyncTaskException(asyncException.get());
 
+		waitAsyncEventsFinished();
 		shutdownPool(asyncEventExecutor);
 	}
 
@@ -101,8 +103,21 @@ public class BukkitSchedulerMock implements BukkitScheduler
 
 	public @NotNull Future<?> executeAsyncEvent(Event event)
 	{
-		Validate.notNull(event, "Cannot schedule an Event that is null!");
-		return asyncEventExecutor.submit(() -> MockBukkit.getMock().getPluginManager().callEvent(event));
+		return executeAsyncEvent(event, null);
+	}
+
+	public <T extends Event> @NotNull Future<?> executeAsyncEvent(T event, Consumer<T> func)
+	{
+		Validate.notNull(event, "Cannot call a null event!");
+		Future<?> future = asyncEventExecutor.submit(() -> {
+			MockBukkit.getMock().getPluginManager().callEvent(event);
+			if (func != null)
+			{
+				func.accept(event);
+			}
+		});
+		queuedAsyncEvents.add(future);
+		return future;
 	}
 
 	/**
@@ -214,8 +229,8 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			if (System.currentTimeMillis() > (systemTime + executorTimeout))
 			{
 				// If a plugin has left a runnable going and not cancelled it we could call this bad practice.
-				// We should force interrupt all those runnables forcing them to throw Interrupted Exceptions-
-				// if they handle that
+				// We should force interrupt all these runnables, forcing them to throw Interrupted Exceptions
+				// if they handle that.
 				for (ScheduledTask task : scheduledTasks.getCurrentTaskList())
 				{
 					if (task.isRunning())
@@ -227,6 +242,33 @@ public class BukkitSchedulerMock implements BukkitScheduler
 					}
 				}
 				pool.shutdownNow();
+			}
+		}
+	}
+
+	public void waitAsyncEventsFinished()
+	{
+		for (Future<?> futureEvent : List.copyOf(queuedAsyncEvents))
+		{
+			if (futureEvent.isDone())
+			{
+				queuedAsyncEvents.remove(futureEvent);
+			}
+			else
+			{
+				try
+				{
+					queuedAsyncEvents.remove(futureEvent);
+					futureEvent.get();
+				}
+				catch (InterruptedException e)
+				{
+					Thread.currentThread().interrupt();
+				}
+				catch (ExecutionException e)
+				{
+					throw new RuntimeException(e);
+				}
 			}
 		}
 	}
