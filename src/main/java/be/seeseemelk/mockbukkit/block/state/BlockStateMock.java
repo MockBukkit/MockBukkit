@@ -250,6 +250,8 @@ public class BlockStateMock implements BlockState
 	{
 		switch (block.getType())
 		{
+		case CONDUIT:
+			return new ConduitMock(block);
 		case CAMPFIRE:
 		case SOUL_CAMPFIRE:
 			return new CampfireMock(block);
