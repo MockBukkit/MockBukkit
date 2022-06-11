@@ -2,7 +2,6 @@ package be.seeseemelk.mockbukkit.block.state;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.Comparator;
 import org.jetbrains.annotations.NotNull;
 
@@ -29,7 +28,7 @@ public class ComparatorMock extends TileStateMock implements Comparator
 	}
 
 	@Override
-	public @NotNull BlockState getSnapshot()
+	public @NotNull ComparatorMock getSnapshot()
 	{
 		return new ComparatorMock(this);
 	}
