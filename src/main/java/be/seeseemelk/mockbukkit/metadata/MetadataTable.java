@@ -15,7 +15,17 @@ import java.util.Map;
 public class MetadataTable implements Metadatable
 {
 
-	private final Map<String, Map<Plugin, MetadataValue>> metadata = new HashMap<>();
+	private final Map<String, Map<Plugin, MetadataValue>> metadata;
+
+	public MetadataTable()
+	{
+		metadata = new HashMap<>();
+	}
+
+	public MetadataTable(MetadataTable table)
+	{
+		this.metadata = new HashMap<>(table.metadata);
+	}
 
 	@Override
 	public void setMetadata(@NotNull String metadataKey, @NotNull MetadataValue newMetadataValue)

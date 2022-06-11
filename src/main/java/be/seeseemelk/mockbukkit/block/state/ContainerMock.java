@@ -1,5 +1,8 @@
 package be.seeseemelk.mockbukkit.block.state;
 
+import be.seeseemelk.mockbukkit.inventory.InventoryMock;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
@@ -8,19 +11,16 @@ import org.bukkit.inventory.Inventory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import be.seeseemelk.mockbukkit.inventory.InventoryMock;
-
 /**
  * The {@link ContainerMock} is an extension of a {@link TileStateMock} which can also hold an {@link Inventory}.
  *
  * @author TheBusyBiscuit
- *
  */
 public abstract class ContainerMock extends TileStateMock implements Container
 {
 
 	private final Inventory inventory;
-	private String customName;
+	private Component customName;
 	private String lock = "";
 
 	protected ContainerMock(@NotNull Material material)
@@ -39,61 +39,68 @@ public abstract class ContainerMock extends TileStateMock implements Container
 	{
 		super(state);
 		this.inventory = state.getInventory();
+		this.customName = state.customName();
+		this.lock = state.getLock();
 	}
 
 	protected abstract InventoryMock createInventory();
 
 	@Override
-	public abstract BlockState getSnapshot();
+	public abstract @NotNull BlockState getSnapshot();
 
 	@Override
 	public boolean isLocked()
 	{
-		return !lock.isEmpty();
+		return !this.lock.isEmpty();
 	}
 
 	@Override
-	@NotNull
-	public String getLock()
+	public @NotNull String getLock()
 	{
-		return lock;
+		return this.lock;
 	}
 
 	@Override
 	public void setLock(String key)
 	{
-		if (key == null)
-		{
-			lock = "";
-		}
-		else
-		{
-			lock = key;
-		}
+		this.lock = key == null ? "" : key;
+	}
+
+	@Override
+	public @Nullable Component customName()
+	{
+		return this.customName;
+	}
+
+	@Override
+	public void customName(@Nullable Component customName)
+	{
+		this.customName = customName;
 	}
 
 	@Override
 	@Nullable
 	public String getCustomName()
 	{
-		return customName;
+		return this.customName == null ? null : LegacyComponentSerializer.legacySection().serialize(this.customName);
 	}
 
 	@Override
-	public void setCustomName(String name)
+	public void setCustomName(@Nullable String name)
 	{
-		this.customName = name;
+		this.customName = name == null ? null : LegacyComponentSerializer.legacySection().deserialize(name);
 	}
 
 	@Override
-	public Inventory getInventory()
+	public @NotNull Inventory getInventory()
 	{
-		return inventory;
+		return this.inventory;
 	}
 
 	@Override
-	public Inventory getSnapshotInventory()
+	public @NotNull Inventory getSnapshotInventory()
 	{
-		return ((InventoryMock) inventory).getSnapshot();
+		return ((InventoryMock) this.inventory).getSnapshot();
 	}
+
 }
