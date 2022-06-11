@@ -29,7 +29,7 @@ public class ConduitMock extends TileStateMock implements Conduit
 	}
 
 	@Override
-	public @NotNull BlockState getSnapshot()
+	public @NotNull ConduitMock getSnapshot()
 	{
 		return new ConduitMock(this);
 	}
