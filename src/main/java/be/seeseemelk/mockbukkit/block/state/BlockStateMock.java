@@ -68,7 +68,7 @@ public class BlockStateMock implements BlockState
 	}
 
 	@Override
-	public Block getBlock()
+	public @NotNull Block getBlock()
 	{
 		if (block == null)
 		{
