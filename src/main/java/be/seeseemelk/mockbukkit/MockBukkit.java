@@ -1,12 +1,5 @@
 package be.seeseemelk.mockbukkit;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Field;
-import java.util.logging.Level;
-
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.InvalidDescriptionException;
 import org.bukkit.plugin.InvalidPluginException;
@@ -16,8 +9,16 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.Field;
+import java.util.logging.Level;
+
 public class MockBukkit
 {
+
 	private static ServerMock mock = null;
 
 	private MockBukkit()
@@ -139,10 +140,9 @@ public class MockBukkit
 	 * Loads a plugin from a jar.
 	 *
 	 * @param jarFile Path to the jar.
-	 * @throws InvalidPluginException If an exception occured while loading a plugin.
+	 * @throws InvalidPluginException If an exception occurred while loading a plugin.
 	 */
-	@SuppressWarnings(
-	{ "deprecation" })
+	@SuppressWarnings("deprecation")
 	public static void loadJar(File jarFile) throws InvalidPluginException
 	{
 		JavaPluginLoader loader = new JavaPluginLoader(mock);
@@ -173,16 +173,10 @@ public class MockBukkit
 	 */
 	public static <T extends JavaPlugin> T load(Class<T> plugin, Object... parameters)
 	{
-		if (mock != null)
-		{
-			JavaPlugin instance = mock.getPluginManager().loadPlugin(plugin, parameters);
-			mock.getPluginManager().enablePlugin(instance);
-			return plugin.cast(instance);
-		}
-		else
-		{
-			throw new IllegalStateException("Not mocking");
-		}
+		ensureMocking();
+		JavaPlugin instance = mock.getPluginManager().loadPlugin(plugin, parameters);
+		mock.getPluginManager().enablePlugin(instance);
+		return plugin.cast(instance);
 	}
 
 	/**
@@ -195,19 +189,12 @@ public class MockBukkit
 	 * @param parameters      Extra parameters to pass on to the plugin constructor.
 	 * @return An instance of the plugin's main class.
 	 */
-	public static <T extends JavaPlugin> T loadWith(Class<T> plugin, PluginDescriptionFile descriptionFile,
-	        Object... parameters)
+	public static <T extends JavaPlugin> T loadWith(Class<T> plugin, PluginDescriptionFile descriptionFile, Object... parameters)
 	{
-		if (mock != null)
-		{
-			JavaPlugin instance = mock.getPluginManager().loadPlugin(plugin, descriptionFile, parameters);
-			mock.getPluginManager().enablePlugin(instance);
-			return plugin.cast(instance);
-		}
-		else
-		{
-			throw new IllegalStateException("Not mocking");
-		}
+		ensureMocking();
+		JavaPlugin instance = mock.getPluginManager().loadPlugin(plugin, descriptionFile, parameters);
+		mock.getPluginManager().enablePlugin(instance);
+		return plugin.cast(instance);
 	}
 
 	/**
@@ -269,30 +256,24 @@ public class MockBukkit
 		return loadWith(plugin, ClassLoader.getSystemResourceAsStream(descriptionFileName), parameters);
 	}
 
-	/*	public static <T extends JavaPlugin> T loadWith(Class<T> plugin, File configFile, Object... parameters)
-		{
-			if (mock != null)
-			{
-				JavaPlugin instance = mock.getPluginManager().loadPlugin(plugin, parameters);
-				YamlConfiguration yamlConfig = new YamlConfiguration();
+	/*public static <T extends JavaPlugin> T loadWith(Class<T> plugin, File configFile, Object... parameters)
+	{
+		ensureMocking();
+		JavaPlugin instance = mock.getPluginManager().loadPlugin(plugin, parameters);
+		YamlConfiguration yamlConfig = new YamlConfiguration();
 
-				try
-				{
-					yamlConfig.load(configFile);
-				}
-				catch (IOException | InvalidConfigurationException e)
-				{
-					throw new RuntimeException(e);
-				}
-				instance.getConfig().setDefaults(yamlConfig);
-				mock.getPluginManager().enablePlugin(instance);
-				return plugin.cast(instance);
-			}
-			else
-			{
-				throw new IllegalStateException("Not mocking");
-			}
-		}*/
+		try
+		{
+			yamlConfig.load(configFile);
+		}
+		catch (IOException | InvalidConfigurationException e)
+		{
+			throw new RuntimeException(e);
+		}
+		instance.getConfig().setDefaults(yamlConfig);
+		mock.getPluginManager().enablePlugin(instance);
+		return plugin.cast(instance);
+	}*/
 
 	/**
 	 * Loads and enables a plugin for mocking. It will not load the {@code plugin.yml} file, but rather it will use a
@@ -306,18 +287,12 @@ public class MockBukkit
 	 */
 	public static <T extends JavaPlugin> T loadSimple(Class<T> plugin, Object... parameters)
 	{
+		ensureMocking();
 		PluginDescriptionFile description = new PluginDescriptionFile(plugin.getSimpleName(), "1.0.0",
-		        plugin.getCanonicalName());
-		if (mock != null)
-		{
-			JavaPlugin instance = mock.getPluginManager().loadPlugin(plugin, description, parameters);
-			mock.getPluginManager().enablePlugin(instance);
-			return plugin.cast(instance);
-		}
-		else
-		{
-			throw new IllegalStateException("Not mocking");
-		}
+				plugin.getCanonicalName());
+		JavaPlugin instance = mock.getPluginManager().loadPlugin(plugin, description, parameters);
+		mock.getPluginManager().enablePlugin(instance);
+		return plugin.cast(instance);
 	}
 
 	/**
@@ -367,17 +342,22 @@ public class MockBukkit
 	 */
 	public static @NotNull MockPlugin createMockPlugin(@NotNull String pluginName)
 	{
-		if (mock != null)
-		{
-			PluginDescriptionFile description = new PluginDescriptionFile(pluginName, "1.0.0",
-			        MockPlugin.class.getName());
-			JavaPlugin instance = mock.getPluginManager().loadPlugin(MockPlugin.class, description);
-			mock.getPluginManager().enablePlugin(instance);
-			return (MockPlugin) instance;
-		}
-		else
+		ensureMocking();
+		PluginDescriptionFile description = new PluginDescriptionFile(pluginName, "1.0.0", MockPlugin.class.getName());
+		JavaPlugin instance = mock.getPluginManager().loadPlugin(MockPlugin.class, description);
+		mock.getPluginManager().enablePlugin(instance);
+		return (MockPlugin) instance;
+	}
+
+	/**
+	 * Throws an IllegalStateException when not mocked.
+	 */
+	public static void ensureMocking()
+	{
+		if (!isMocked())
 		{
 			throw new IllegalStateException("Not mocking");
 		}
 	}
+
 }

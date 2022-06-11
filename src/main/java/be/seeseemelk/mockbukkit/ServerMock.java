@@ -40,6 +40,7 @@ import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.apache.commons.lang.Validate;
+import org.apache.commons.lang3.StringUtils;
 import org.bukkit.BanEntry;
 import org.bukkit.BanList;
 import org.bukkit.BanList.Type;
@@ -76,6 +77,7 @@ import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.generator.ChunkGenerator.ChunkData;
 import org.bukkit.inventory.Inventory;
@@ -114,6 +116,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.CountDownLatch;
 import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
@@ -225,8 +228,23 @@ public class ServerMock extends Server.Spigot implements Server
 	{
 		AsyncCatcher.catchOp("player add");
 		playerList.addPlayer(player);
-		PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(player,
-				String.format(JOIN_MESSAGE, player.getDisplayName()));
+
+		CountDownLatch conditionLatch = new CountDownLatch(1);
+
+		AsyncPlayerPreLoginEvent preLoginEvent = new AsyncPlayerPreLoginEvent(player.getName(), player.getAddress().getAddress(), player.getUniqueId());
+		getPluginManager().callEventAsynchronously(preLoginEvent, (e) -> conditionLatch.countDown());
+
+		try
+		{
+			conditionLatch.await();
+		}
+		catch (InterruptedException e)
+		{
+			getLogger().severe("Interrupted while waiting for AsyncPlayerPreLoginEvent! " + (StringUtils.isEmpty(e.getMessage()) ? "" : e.getMessage()));
+			Thread.currentThread().interrupt();
+		}
+
+		PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(player, String.format(JOIN_MESSAGE, player.getDisplayName()));
 		Bukkit.getPluginManager().callEvent(playerJoinEvent);
 
 		player.setLastPlayed(getCurrentServerTime());
