@@ -250,6 +250,8 @@ public class BlockStateMock implements BlockState
 	{
 		switch (block.getType())
 		{
+		case DAYLIGHT_DETECTOR:
+			return new DaylightDetectorMock(block);
 		case CAMPFIRE:
 		case SOUL_CAMPFIRE:
 			return new CampfireMock(block);
