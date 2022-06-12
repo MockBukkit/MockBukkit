@@ -142,7 +142,7 @@ public class ShulkerBoxMock extends ContainerMock implements ShulkerBox
 	}
 
 	@Override
-	public BlockState getSnapshot()
+	public @NotNull BlockState getSnapshot()
 	{
 		return new ShulkerBoxMock(this);
 	}
