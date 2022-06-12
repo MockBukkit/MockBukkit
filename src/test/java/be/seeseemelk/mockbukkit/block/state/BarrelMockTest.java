@@ -24,14 +24,14 @@ class BarrelMockTest
 	private Barrel barrel;
 
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		MockBukkit.mock();
 		barrel = new BarrelMock(Material.BARREL);
 	}
 
 	@AfterEach
-	public void tearDown() throws Exception
+	void tearDown() throws Exception
 	{
 		MockBukkit.unmock();
 	}

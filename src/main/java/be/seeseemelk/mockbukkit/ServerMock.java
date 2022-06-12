@@ -17,6 +17,7 @@ import be.seeseemelk.mockbukkit.inventory.ChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.DispenserInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.DropperInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.GrindstoneInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.HopperInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import be.seeseemelk.mockbukkit.inventory.ItemFactoryMock;
@@ -110,6 +111,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 import java.util.UUID;
 import java.util.function.Consumer;
@@ -120,10 +122,11 @@ import java.util.stream.Collectors;
 
 public class ServerMock extends Server.Spigot implements Server
 {
-	private static final String BUKKIT_VERSION = "1.18.2";
+
 	private static final String JOIN_MESSAGE = "%s has joined the server.";
 	private static final String MOTD = "A Minecraft Server";
 
+	private final Properties buildProperties = new Properties();
 	private final Logger logger = Logger.getLogger("ServerMock");
 	private final Thread mainThread = Thread.currentThread();
 	private final MockUnsafeValues unsafe = new MockUnsafeValues();
@@ -167,7 +170,17 @@ public class ServerMock extends Server.Spigot implements Server
 			logger.warning("Could not load file logger.properties");
 		}
 
+		try
+		{
+			buildProperties.load(ClassLoader.getSystemResourceAsStream("build.properties"));
+		}
+		catch (IOException | NullPointerException e)
+		{
+			logger.warning("Could not load build properties");
+		}
+
 		logger.setLevel(Level.ALL);
+
 	}
 
 	/**
@@ -224,7 +237,7 @@ public class ServerMock extends Server.Spigot implements Server
 		AsyncCatcher.catchOp("player add");
 		playerList.addPlayer(player);
 		PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(player,
-		        String.format(JOIN_MESSAGE, player.getDisplayName()));
+				String.format(JOIN_MESSAGE, player.getDisplayName()));
 		Bukkit.getPluginManager().callEvent(playerJoinEvent);
 
 		player.setLastPlayed(getCurrentServerTime());
@@ -444,21 +457,26 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public String getVersion()
+	public @NotNull String getVersion()
 	{
-		return String.format("MockBukkit (MC: %s)", BUKKIT_VERSION);
+		return String.format("MockBukkit (MC: %s)", getBukkitVersion());
 	}
 
 	@Override
-	public String getBukkitVersion()
+	public @NotNull String getBukkitVersion()
 	{
-		return BUKKIT_VERSION;
+		return getMinecraftVersion();
 	}
 
 	@Override
 	public @NotNull String getMinecraftVersion()
 	{
-		throw new UnimplementedOperationException();
+		String apiVersion;
+		if (buildProperties == null || (apiVersion = buildProperties.getProperty("full-api-version")) == null)
+		{
+			throw new IllegalStateException("Minecraft version could not be determined");
+		}
+		return apiVersion.split("-")[0];
 	}
 
 	@Override
@@ -583,37 +601,37 @@ public class ServerMock extends Server.Spigot implements Server
 		case LECTERN:
 			return new LecternInventoryMock(owner);
 		case GRINDSTONE:
-		// TODO: This Inventory Type needs to be implemented
+			return new GrindstoneInventoryMock(owner);
 		case STONECUTTER:
-		// TODO: This Inventory Type needs to be implemented
+			// TODO: This Inventory Type needs to be implemented
 		case CARTOGRAPHY:
-		// TODO: This Inventory Type needs to be implemented
+			// TODO: This Inventory Type needs to be implemented
 		case SMOKER:
-		// TODO: This Inventory Type needs to be implemented
+			// TODO: This Inventory Type needs to be implemented
 		case LOOM:
-		// TODO: This Inventory Type needs to be implemented
+			// TODO: This Inventory Type needs to be implemented
 		case BLAST_FURNACE:
-		// TODO: This Inventory Type needs to be implemented
+			// TODO: This Inventory Type needs to be implemented
 		case ANVIL:
-		// TODO: This Inventory Type needs to be implemented
+			// TODO: This Inventory Type needs to be implemented
 		case SMITHING:
-		// TODO: This Inventory Type needs to be implemented
+			// TODO: This Inventory Type needs to be implemented
 		case BEACON:
-		// TODO: This Inventory Type needs to be implemented
+			// TODO: This Inventory Type needs to be implemented
 		case FURNACE:
-		// TODO: This Inventory Type needs to be implemented
+			// TODO: This Inventory Type needs to be implemented
 		case WORKBENCH:
-		// TODO: This Inventory Type needs to be implemented
+			// TODO: This Inventory Type needs to be implemented
 		case ENCHANTING:
-		// TODO: This Inventory Type needs to be implemented
+			// TODO: This Inventory Type needs to be implemented
 		case BREWING:
-		// TODO: This Inventory Type needs to be implemented
+			// TODO: This Inventory Type needs to be implemented
 		case CRAFTING:
-		// TODO: This Inventory Type needs to be implemented
+			// TODO: This Inventory Type needs to be implemented
 		case CREATIVE:
-		// TODO: This Inventory Type needs to be implemented
+			// TODO: This Inventory Type needs to be implemented
 		case MERCHANT:
-		// TODO: This Inventory Type needs to be implemented
+			// TODO: This Inventory Type needs to be implemented
 		default:
 			throw new UnimplementedOperationException("Inventory type not yet supported");
 		}
@@ -727,7 +745,7 @@ public class ServerMock extends Server.Spigot implements Server
 	public Set<String> getIPBans()
 	{
 		return this.playerList.getIPBans().getBanEntries().stream().map(BanEntry::getTarget)
-		       .collect(Collectors.toSet());
+				.collect(Collectors.toSet());
 	}
 
 	@Override
@@ -937,6 +955,24 @@ public class ServerMock extends Server.Spigot implements Server
 		else
 		{
 			return false;
+		}
+	}
+
+	public List<String> getCommandTabComplete(CommandSender sender, String commandLine)
+	{
+		AsyncCatcher.catchOp("command tabcomplete");
+		int idx = commandLine.indexOf(' ');
+		String commandLabel = commandLine.substring(0, idx);
+		String[] args = commandLine.substring(idx + 1).split(" ", -1);
+		Command command = getCommandMap().getCommand(commandLabel);
+
+		if (command != null)
+		{
+			return command.tabComplete(sender, commandLabel, args);
+		}
+		else
+		{
+			return Collections.emptyList();
 		}
 	}
 
@@ -1650,7 +1686,7 @@ public class ServerMock extends Server.Spigot implements Server
 
 	@Override
 	public ItemStack createExplorerMap(World world, Location location, StructureType structureType, int radius,
-	                                   boolean findUnexplored)
+									   boolean findUnexplored)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1978,4 +2014,5 @@ public class ServerMock extends Server.Spigot implements Server
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
+
 }

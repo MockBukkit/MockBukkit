@@ -11,7 +11,7 @@ class CoordinateTest
 	private Coordinate coordinate;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		coordinate = new Coordinate();
 	}

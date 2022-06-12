@@ -42,6 +42,7 @@ public class ShulkerBoxMock extends ContainerMock implements ShulkerBox
 	{
 		super(state);
 		this.color = state.color;
+		this.isOpen = state.isOpen;
 	}
 
 	@Nullable
