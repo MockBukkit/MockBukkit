@@ -46,6 +46,7 @@ public final class EnchantmentsMock
 		register("piercing");
 		register("mending");
 		register("vanishing_curse");
+		register("swift_sneak");
 	}
 
 	private static void register(String name)
