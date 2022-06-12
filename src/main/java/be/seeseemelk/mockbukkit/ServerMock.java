@@ -1848,6 +1848,13 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	public @NotNull Component permissionMessage()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull PlayerProfileMock createProfile(@NotNull UUID uuid)
 	{
 		return createProfile(uuid, null);
