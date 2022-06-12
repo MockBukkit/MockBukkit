@@ -82,6 +82,7 @@ import static org.junit.jupiter.api.Assumptions.assumeFalse;
 
 class PlayerMockTest
 {
+
 	// Taken from https://minecraft.gamepedia.com/Experience#Leveling_up
 	private static int[] expRequired =
 			{
@@ -523,7 +524,7 @@ class PlayerMockTest
 	}
 
 	@ParameterizedTest
-	@EnumSource(value = GameMode.class, mode = EnumSource.Mode.EXCLUDE, names = {"SURVIVAL"})
+	@EnumSource(value = GameMode.class, mode = EnumSource.Mode.EXCLUDE, names = { "SURVIVAL" })
 	void simulateBlockDamage_NotSurvival_BlockNotDamaged(GameMode nonSurvivalGameMode)
 	{
 		player.setGameMode(nonSurvivalGameMode);
@@ -663,9 +664,11 @@ class PlayerMockTest
 		try
 		{
 			plugin.barrier.await(3, TimeUnit.SECONDS);
-		} catch (InterruptedException | BrokenBarrierException e)
+		}
+		catch (InterruptedException | BrokenBarrierException e)
 		{
-		} catch (TimeoutException e)
+		}
+		catch (TimeoutException e)
 		{
 			fail("Async event was not fired");
 		}
@@ -1032,7 +1035,7 @@ class PlayerMockTest
 		player.assertSoundHeard(Sound.BLOCK_NOTE_BLOCK_BANJO, audio ->
 		{
 			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
-			&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
+					&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
 		});
 	}
 
@@ -1044,7 +1047,7 @@ class PlayerMockTest
 		player.assertSoundHeard(Sound.BLOCK_NOTE_BLOCK_HARP, audio ->
 		{
 			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
-			&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
+					&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
 		});
 	}
 
