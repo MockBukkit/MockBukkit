@@ -125,7 +125,7 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class PlayerMock extends LivingEntityMock implements Player, SoundReceiver
+public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 {
 
 	private PlayerInventoryMock inventory = null;
@@ -3068,6 +3068,8 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		throw new UnimplementedOperationException();
 	}
 
+
+
 	@Override
 	public int getPing()
 	{
@@ -3198,5 +3200,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		}
 
 	}
+
+
 
 }
