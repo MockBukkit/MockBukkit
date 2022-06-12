@@ -4,7 +4,7 @@ import be.seeseemelk.mockbukkit.AsyncCatcher;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.attribute.AttributeInstanceMock;
-import be.seeseemelk.mockbukkit.attribute.Attributes;
+import be.seeseemelk.mockbukkit.attribute.AttributesMock;
 import be.seeseemelk.mockbukkit.potion.ActivePotionEffect;
 import com.destroystokyo.paper.block.TargetBlockInfo;
 import com.destroystokyo.paper.entity.TargetEntityInfo;
@@ -78,7 +78,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		super(server, uuid);
 
 		attributes = new EnumMap<>(Attribute.class);
-		attributes.put(Attribute.GENERIC_MAX_HEALTH, new AttributeInstanceMock(Attribute.GENERIC_MAX_HEALTH, Attributes.getDefaultValue(Attribute.GENERIC_MAX_HEALTH)));
+		attributes.put(Attribute.GENERIC_MAX_HEALTH, new AttributeInstanceMock(Attribute.GENERIC_MAX_HEALTH, AttributesMock.getDefaultValue(Attribute.GENERIC_MAX_HEALTH)));
 		this.setMaxHealth(MAX_HEALTH);
 		this.setHealth(MAX_HEALTH);
 	}
@@ -220,7 +220,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	public void registerAttribute(@NotNull Attribute attribute)
 	{
 		Preconditions.checkArgument(attribute != null, "attribute");
-		this.attributes.put(attribute, new AttributeInstanceMock(attribute, Attributes.getDefaultValue(attribute)));
+		this.attributes.put(attribute, new AttributeInstanceMock(attribute, AttributesMock.getDefaultValue(attribute)));
 	}
 
 	@Override

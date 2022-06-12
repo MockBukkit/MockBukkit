@@ -5,10 +5,13 @@ import org.bukkit.attribute.Attribute;
 
 import java.util.Map;
 
-public class Attributes
+/**
+ * Mocks the {@code net.minecraft.world.entity.ai.attributes.Attributes} class with the default Attribute values.
+ */
+public class AttributesMock
 {
 
-	private Attributes()
+	private AttributesMock()
 	{
 	}
 

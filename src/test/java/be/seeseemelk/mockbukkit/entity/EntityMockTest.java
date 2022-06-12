@@ -1,6 +1,5 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import be.seeseemelk.mockbukkit.attribute.Attributes;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.MockPlugin;
 import be.seeseemelk.mockbukkit.ServerMock;
