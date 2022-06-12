@@ -651,7 +651,6 @@ class ServerMockTest
 		PlayerMock playerB = server.addPlayer();
 
 		assertThat(server.getPlayerList().getOnlinePlayers(), containsInAnyOrder(playerA, playerB));
-		assertInstanceOf(MockPlayerList.class, server.getPlayerList());
 	}
 
 	@Test

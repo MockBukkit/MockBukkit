@@ -222,7 +222,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	{
 		if (firstPlayed == 0)
 		{
-			throw new IllegalStateException("Player wasn't online before");
+			throw new IllegalStateException("Player was never online");
 		}
 		if (online)
 		{
