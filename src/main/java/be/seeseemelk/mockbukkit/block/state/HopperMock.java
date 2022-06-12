@@ -1,6 +1,5 @@
 package be.seeseemelk.mockbukkit.block.state;
 
-import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
@@ -74,7 +73,7 @@ public class HopperMock extends ContainerMock implements Hopper
 	}
 
 	@Override
-	public BlockState getSnapshot()
+	public @NotNull BlockState getSnapshot()
 	{
 		return new HopperMock(this);
 	}
@@ -142,17 +141,4 @@ public class HopperMock extends ContainerMock implements Hopper
 		throw new UnimplementedOperationException();
 	}
 
-	@Override
-	public @Nullable Component customName()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void customName(@Nullable Component customName)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
 }

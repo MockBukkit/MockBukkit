@@ -601,11 +601,11 @@ class ItemMetaMockTest
 		Map<String, Object> actual = meta.serialize();
 
 		// Perform tests
-		assertEquals(expected.get("displayName"), actual.get("displayName"));
+		assertEquals(expected.get("displayName"), actual.get("display-name"));
 		assertEquals(expected.get("lore"), actual.get("lore"));
-		assertEquals(expected.get("unbreakable"), actual.get("unbreakable"));
-		assertEquals(expected.get("damage"), actual.get("damage"));
-		assertEquals(expected.get("repairCost"), actual.get("repairCost"));
+		assertEquals(expected.get("unbreakable"), actual.get("Unbreakable"));
+		assertEquals(expected.get("damage"), actual.get("Damage"));
+		assertEquals(expected.get("repairCost"), actual.get("repair-cost"));
 
 	}
 

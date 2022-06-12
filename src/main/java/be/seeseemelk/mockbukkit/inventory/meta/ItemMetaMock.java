@@ -494,12 +494,12 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 
 		if (this.displayName != null)
 		{
-			map.put("displayName", this.displayName);
+			map.put("display-name", this.displayName);
 		}
 
 		if (this.localizedName != null)
 		{
-			map.put("localizedName", this.localizedName);
+			map.put("loc-name", this.localizedName);
 		}
 
 		if (this.lore != null)
@@ -509,20 +509,20 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 
 		if (this.customModelData != null)
 		{
-			map.put("customModelData", this.customModelData);
+			map.put("custom-model-data", this.customModelData);
 		}
 
 		map.put("enchants", this.enchants);
 
 		if (hasAttributeModifiers())
 		{
-			map.put("attributeModifiers", this.attributeModifiers);
+			map.put("attribute-modifiers", this.attributeModifiers);
 		}
 
-		map.put("repairCost", this.repairCost);
-		map.put("itemFlags", this.hideFlags);
-		map.put("unbreakable", this.unbreakable);
-		map.put("damage", this.damage);
+		map.put("repair-cost", this.repairCost);
+		map.put("ItemFlags", this.hideFlags);
+		map.put("Unbreakable", this.unbreakable);
+		map.put("Damage", this.damage);
 
 		/* Not implemented.
 		if (!this.customTagContainer.isEmpty())
@@ -531,7 +531,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		}
 		*/
 
-		map.put("persistentDataContainer", this.persistentDataContainer.serialize());
+		map.put("PublicBukkitValues", this.persistentDataContainer.serialize());
 
 		// Return map
 		return map;
@@ -548,19 +548,19 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	{
 		ItemMetaMock serialMock = new ItemMetaMock();
 
-		serialMock.displayName = (String) args.get("displayName");
+		serialMock.displayName = (String) args.get("display-name");
 		serialMock.lore = (List<String>) args.get("lore");
-		serialMock.localizedName = (String) args.get("localizedName");
+		serialMock.localizedName = (String) args.get("loc-name");
 		serialMock.enchants = (Map<Enchantment, Integer>) args.get("enchants");
-		serialMock.hideFlags = (Set<ItemFlag>) args.get("itemFlags");
-		serialMock.unbreakable = (boolean) args.get("unbreakable");
-		serialMock.setAttributeModifiers((Multimap<Attribute, AttributeModifier>) args.get("attributeModifiers"));
+		serialMock.hideFlags = (Set<ItemFlag>) args.get("ItemFlags");
+		serialMock.unbreakable = (boolean) args.get("Unbreakable");
+		serialMock.setAttributeModifiers((Multimap<Attribute, AttributeModifier>) args.get("AttributeModifiers"));
 		// customTagContainer is also unimplemented in mock.
-		serialMock.customModelData = (Integer) args.get("customModelData");
-		Map<String, Object> map = (Map<String, Object>) args.get("persistentDataContainer");
+		serialMock.customModelData = (Integer) args.get("custom-model-data");
+		Map<String, Object> map = (Map<String, Object>) args.get("PublicBukkitValues");
 		serialMock.persistentDataContainer = PersistentDataContainerMock.deserialize(map);
-		serialMock.damage = (Integer) args.get("damage");
-		serialMock.repairCost = (Integer) args.get("repairCost");
+		serialMock.damage = (int) args.get("Damage");
+		serialMock.repairCost = (int) args.get("repair-cost");
 		return serialMock;
 	}
 
