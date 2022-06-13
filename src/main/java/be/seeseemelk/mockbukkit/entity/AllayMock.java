@@ -15,13 +15,14 @@ import java.util.UUID;
 
 public class AllayMock extends CreatureMock implements Allay
 {
+
 	private final Inventory inventory;
 	private Material currentItem;
 
 	protected AllayMock(ServerMock server, UUID uuid)
 	{
 		super(server, uuid);
-		inventory = Bukkit.createInventory(null, 9);
+		this.inventory = Bukkit.createInventory(null, 9);
 	}
 
 	/**
@@ -41,14 +42,7 @@ public class AllayMock extends CreatureMock implements Allay
 	{
 		List<ItemStack> items = new ArrayList<>();
 
-		for (ItemStack inventoryItems :
-				inventory.getContents())
-		{
-			if (inventoryItems != null)
-			{
-				items.add(inventoryItems);
-			}
-		}
+Arrays.stream(this.inventory.getContents()).filter(Objects::notNull).forEach(i -> items.add(i));
 
 		return items;
 	}
@@ -62,14 +56,15 @@ public class AllayMock extends CreatureMock implements Allay
 	public void simulateItemPickup(@NotNull ItemStack item)
 	{
 
-		if (item.getType() == currentItem)
+		if (item.getType() == this.currentItem)
 		{
 			inventory.addItem(item);
 			if (Arrays.stream(inventory.getContents()).count() > 1)
 			{
 				throw new IllegalStateException("Allay cannot hold more than 1 ItemStack");
 			}
-		}else
+		}
+		else
 		{
 			throw new IllegalArgumentException("Item is not the same type as the Allay is currently holding");
 		}
@@ -78,7 +73,7 @@ public class AllayMock extends CreatureMock implements Allay
 	@Override
 	public @NotNull Inventory getInventory()
 	{
-		return inventory;
+		return this.inventory;
 	}
 
 }
