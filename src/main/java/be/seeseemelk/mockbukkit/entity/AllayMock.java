@@ -81,5 +81,4 @@ public class AllayMock extends CreatureMock implements Allay
 		return inventory;
 	}
 
-
 }
