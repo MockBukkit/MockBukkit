@@ -11,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 public class AllayMock extends CreatureMock implements Allay
@@ -27,6 +28,7 @@ public class AllayMock extends CreatureMock implements Allay
 
 	/**
 	 * Simulates the Interaction of a Player with the Allay to set it's current item.
+	 *
 	 * @param item The {@link Material} of the Item the Allay should collect
 	 */
 	public void simulatePlayerInteract(@NotNull Material item)
@@ -36,13 +38,14 @@ public class AllayMock extends CreatureMock implements Allay
 
 	/**
 	 * Simulate the retrieval of the Allay's current items.
+	 *
 	 * @return A {@link List} of {@link ItemStack}s that the Allay is holding
 	 */
 	public List<ItemStack> simulateItemRetrieval()
 	{
 		List<ItemStack> items = new ArrayList<>();
 
-Arrays.stream(this.inventory.getContents()).filter(Objects::notNull).forEach(i -> items.add(i));
+		Arrays.stream(this.inventory.getContents()).filter(Objects::nonNull).forEach(i -> items.add(i));
 
 		return items;
 	}
@@ -51,6 +54,7 @@ Arrays.stream(this.inventory.getContents()).filter(Objects::notNull).forEach(i -
 	 * Simulate the Allay picking up an {@link ItemStack} from the ground.
 	 * If the Itemstack is not of the current Type, this will throw a {@link IllegalArgumentException}.
 	 * If the Inventory is full, this will throw a {@link IllegalStateException}.
+	 *
 	 * @param item The {@link ItemStack} to pick up
 	 */
 	public void simulateItemPickup(@NotNull ItemStack item)
