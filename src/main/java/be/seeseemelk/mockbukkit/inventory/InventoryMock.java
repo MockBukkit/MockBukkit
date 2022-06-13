@@ -27,9 +27,13 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class InventoryMock implements Inventory
 {
 
+	private static final int MAX_STACK_SIZE = 64;
+
 	private final ItemStack[] items;
 	private final InventoryHolder holder;
 	private final InventoryType type;
+
+	private int maxStackSize = MAX_STACK_SIZE;
 
 	public InventoryMock(@Nullable InventoryHolder holder, int size, @NotNull InventoryType type)
 	{
@@ -163,22 +167,27 @@ public class InventoryMock implements Inventory
 	@Nullable
 	public ItemStack addItem(@NotNull ItemStack item)
 	{
+		final int itemMaxStackSize = Math.min(item.getMaxStackSize(), this.maxStackSize);
 		item = item.clone();
 		for (int i = 0; i < items.length; i++)
 		{
 			ItemStack oItem = items[i];
 			if (oItem == null)
 			{
-				int toAdd = Math.min(item.getAmount(), item.getMaxStackSize());
+				int toAdd = Math.min(item.getAmount(), itemMaxStackSize);
 				items[i] = item.clone();
 				items[i].setAmount(toAdd);
 				item.setAmount(item.getAmount() - toAdd);
 			}
-			else if (item.isSimilar(oItem) && oItem.getAmount() < oItem.getMaxStackSize())
+			else 
 			{
-				int toAdd = Math.min(item.getAmount(), item.getMaxStackSize() - oItem.getAmount());
-				oItem.setAmount(oItem.getAmount() + toAdd);
-				item.setAmount(item.getAmount() - toAdd);
+				final int oItemMaxStackSize = Math.min(oItem.getMaxStackSize(), this.maxStackSize);
+				if (item.isSimilar(oItem) && oItem.getAmount() < oItemMaxStackSize)
+				{
+					int toAdd = Math.min(item.getAmount(), oItemMaxStackSize - oItem.getAmount());
+					oItem.setAmount(oItem.getAmount() + toAdd);
+					item.setAmount(item.getAmount() - toAdd);
+				}
 			}
 
 			if (item.getAmount() == 0)
@@ -257,15 +266,22 @@ public class InventoryMock implements Inventory
 	@Override
 	public int getMaxStackSize()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return maxStackSize;
 	}
 
 	@Override
 	public void setMaxStackSize(int size)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// The following checks aren't done in CraftBukkit, but are a fair sanity check.
+		if (size < 1)
+		{
+			throw new IllegalArgumentException("Max stack size cannot be lower than 1");
+		}
+		if (size > 127)
+		{
+			throw new IllegalArgumentException("Stack sizes larger than 127 may get clipped");
+		}
+		maxStackSize = size;
 	}
 
 	@Override
