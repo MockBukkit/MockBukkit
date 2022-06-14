@@ -393,13 +393,10 @@ public class WorldMock implements World
 	@Override
 	public @NotNull List<Entity> getEntities()
 	{
-		// MockBukkit.assertMocking();
-		List<Entity> entities = new ArrayList<>();
-
-		Collection<? extends EntityMock> serverEntities = MockBukkit.getMock().getEntities();
-		serverEntities.stream().filter(entity -> entity.getWorld() == this)
-		.collect(Collectors.toCollection(() -> entities));
-		return entities;
+		return server.getEntities().stream()
+				.filter(entity -> entity.getWorld() == this)
+				.filter(EntityMock::isValid)
+				.collect(Collectors.toList());
 	}
 
 	@Override
@@ -895,7 +892,6 @@ public class WorldMock implements World
 		throw new UnimplementedOperationException();
 	}
 
-	@Override
 	public @Nullable Location findLightningRod(@NotNull Location location)
 	{
 		// TODO Auto-generated method stub
@@ -912,31 +908,44 @@ public class WorldMock implements World
 	@Override
 	public List<LivingEntity> getLivingEntities()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	@Deprecated
-	public <T extends Entity> Collection<T> getEntitiesByClass(Class<T>... classes)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getEntities().stream()
+				.filter(LivingEntity.class::isInstance)
+				.map(LivingEntity.class::cast)
+				.collect(Collectors.toList());
 	}
 
 	@Override
-	public <T extends Entity> Collection<T> getEntitiesByClass(Class<T> cls)
+	@SafeVarargs
+	public final <T extends Entity> @NotNull Collection<T> getEntitiesByClass(Class<T>... classes)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		List<T> entities = new ArrayList<>();
+		for (Class<T> clazz : classes)
+		{
+			entities.addAll(getEntitiesByClass(clazz));
+		}
+		return entities;
 	}
 
 	@Override
-	public Collection<Entity> getEntitiesByClasses(Class<?>... classes)
+	public <T extends Entity> @NotNull Collection<T> getEntitiesByClass(@NotNull Class<T> cls)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getEntities().stream()
+				.filter(entity -> cls.isAssignableFrom(entity.getClass()))
+				.map(cls::cast)
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public @NotNull Collection<Entity> getEntitiesByClasses(Class<?>... classes)
+	{
+		List<Entity> entities = new ArrayList<>();
+		for (Class<?> clazz : classes)
+		{
+			entities.addAll(getEntities().stream()
+					.filter(entity -> clazz.isAssignableFrom(entity.getClass()))
+					.toList());
+		}
+		return entities;
 	}
 
 	@Override
