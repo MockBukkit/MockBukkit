@@ -22,6 +22,8 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.potion.PotionEffectType;
@@ -41,7 +43,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
-import java.util.concurrent.atomic.AtomicReference;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
@@ -127,6 +128,20 @@ class ServerMockTest
 		assertEquals(playerA, player1);
 		assertEquals(playerB, player2);
 		assertNotEquals(player1, player2);
+	}
+
+	@Test
+	void addPlayer_Calls_AsyncPreLoginEvent()
+	{
+		PlayerMock player = server.addPlayer();
+		server.getPluginManager().assertEventFired(AsyncPlayerPreLoginEvent.class);
+	}
+
+	@Test
+	void addPlayer_Calls_PlayerJoinEvent()
+	{
+		PlayerMock player = server.addPlayer();
+		server.getPluginManager().assertEventFired(PlayerJoinEvent.class);
 	}
 
 	@Test
@@ -525,7 +540,7 @@ class ServerMockTest
 	@Test
 	void testDefaultPotionEffects()
 	{
-		assertEquals(32, PotionEffectType.values().length);
+		assertEquals(33, PotionEffectType.values().length);
 
 		for (PotionEffectType type : PotionEffectType.values())
 		{
