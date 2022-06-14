@@ -55,6 +55,7 @@ import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
@@ -442,13 +443,25 @@ public class PluginManagerMock implements PluginManager
 	 */
 	public void callEventAsynchronously(@NotNull Event event)
 	{
+		callEventAsynchronously(event, null);
+	}
+
+	/**
+	 * This method invokes {@link #callEvent(Event)} from a different {@link Thread}
+	 * using the {@link BukkitSchedulerMock}.
+	 *
+	 * @param event The asynchronous {@link Event} to call.
+	 * @param func A function to invoke after the event has been called.
+	 */
+	public <T extends Event> void callEventAsynchronously(@NotNull T event, Consumer<T> func)
+	{
 		if (!event.isAsynchronous())
 		{
 			throw new IllegalStateException("Synchronous Events cannot be called asynchronously.");
 		}
 
 		// Our Scheduler will call the Event on a dedicated Event Thread Executor
-		server.getScheduler().executeAsyncEvent(event);
+		server.getScheduler().executeAsyncEvent(event, func);
 	}
 
 	private void callRegisteredListener(@NotNull RegisteredListener registration, @NotNull Event event)

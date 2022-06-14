@@ -42,6 +42,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerExpChangeEvent;
+import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -204,11 +205,38 @@ class PlayerMockTest
 	}
 
 	@Test
+	void setGameMode_GameModeChanged_CallsEvent()
+	{
+		player.setGameMode(GameMode.CREATIVE);
+		server.getPluginManager().assertEventFired(PlayerGameModeChangeEvent.class, (e) -> e.getNewGameMode() == GameMode.CREATIVE);
+	}
+
+	@Test
+	void setGameMode_GameModeNotChanged_DoesntCallsEvent()
+	{
+		//todo: replace with PluginManagerMock#assertEventNotFired once implemented
+		AtomicBoolean bool = new AtomicBoolean(false);
+		server.getPluginManager().registerEvents(new Listener()
+		{
+			@EventHandler
+			public void onPlayerGameModeChange(PlayerGameModeChangeEvent event)
+			{
+				bool.set(true);
+			}
+		}, MockBukkit.createMockPlugin());
+
+		player.setGameMode(GameMode.SURVIVAL);
+
+		assertFalse(bool.get());
+	}
+
+	@Test
 	void getPreviousGameMode()
 	{
 		player.setGameMode(GameMode.SURVIVAL);
 		player.setGameMode(GameMode.CREATIVE);
-		assertEquals(GameMode.SURVIVAL, player.getPreviousGameMode());
+		player.setGameMode(GameMode.SURVIVAL);
+		assertEquals(GameMode.CREATIVE, player.getPreviousGameMode());
 	}
 
 	@Test
