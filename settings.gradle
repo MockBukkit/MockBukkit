@@ -2,19 +2,12 @@
   This is the API (major + minor) version of Minecraft we are
   building against.
 */
-gradle.ext.apiVersion = '1.18'
+gradle.ext.apiVersion = '1.19'
 
 /*
   The Spigot version we are building MockBukkit against.
 */
-gradle.ext.apiVersionFull = '1.18.2-R0.1-SNAPSHOT'
-
-/*
-  MockBukkit uses semantic-versioning (https://semver.org/).
-  Every new update should bump the version below according to
-  the conventions.
-*/
-gradle.ext.version = '2.4.0'
+gradle.ext.apiVersionFull = '1.19-R0.1-SNAPSHOT'
 
 /*
   This is the name of our MockBukkit artifact, it includes
