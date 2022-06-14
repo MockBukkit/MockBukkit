@@ -57,7 +57,7 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'com.github.seeseemelk:MockBukkit-v1.19:2.7.0'
+    testImplementation 'com.github.seeseemelk:MockBukkit-v1.19:2.29.0'
 }
 ```
 
@@ -102,7 +102,7 @@ Make sure to update the version as necessary.
   <dependency>
     <groupId>com.github.seeseemelk</groupId>
     <artifactId>MockBukkit-v1.19</artifactId>
-    <version>2.7.0</version>
+    <version>2.29.0</version>
     <scope>test</scope>
   </dependency>
 </dependencies>
