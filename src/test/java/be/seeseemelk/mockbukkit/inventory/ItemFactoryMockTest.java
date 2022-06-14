@@ -12,8 +12,11 @@ import be.seeseemelk.mockbukkit.inventory.meta.LeatherArmorMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.PotionMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.SkullMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.SuspiciousStewMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.BundleMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.TropicalFishBucketMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.ArmorStandMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.TropicalFishBucketMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.MapMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.CompassMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.CrossbowMetaMock;
 
@@ -88,6 +91,8 @@ class ItemFactoryMockTest
 		assertTrue(factory.getItemMeta(Material.POTION) instanceof PotionMetaMock);
 		assertTrue(factory.getItemMeta(Material.LEATHER_CHESTPLATE) instanceof LeatherArmorMetaMock);
 
+		assertTrue(factory.getItemMeta(Material.BUNDLE) instanceof BundleMetaMock);
+		assertTrue(factory.getItemMeta(Material.FILLED_MAP) instanceof MapMetaMock);
 		assertTrue(factory.getItemMeta(Material.COMPASS) instanceof CompassMetaMock);
 		assertTrue(factory.getItemMeta(Material.CROSSBOW) instanceof CrossbowMetaMock);
 		assertTrue(factory.getItemMeta(Material.ARMOR_STAND) instanceof ArmorStandMetaMock);
