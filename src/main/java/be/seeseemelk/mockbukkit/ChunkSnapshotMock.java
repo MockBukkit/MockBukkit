@@ -109,7 +109,7 @@ public class ChunkSnapshotMock implements ChunkSnapshot
 	@Override
 	public Biome getBiome(int x, int y, int z)
 	{
-		Preconditions.checkState(this.biomes != null, "ChunkSnapshot created without biome. Please call getSnapshot with includeBiome=true");
+		Preconditions.checkState(this.biomes != null && !this.biomes.isEmpty(), "ChunkSnapshot created without biome. Please call getSnapshot with includeBiome=true");
 		validateChunkCoordinates(x, y, z);
 		return this.biomes.get(new Coordinate(z, y, z));
 	}

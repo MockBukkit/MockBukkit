@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit;
 
 import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableMap;
 import org.bukkit.Chunk;
 import org.bukkit.ChunkSnapshot;
 import org.bukkit.World;
@@ -16,8 +17,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.function.Predicate;
-import java.util.HashMap;
-import java.util.Map;
 
 public class ChunkMock implements Chunk
 {
@@ -95,11 +94,13 @@ public class ChunkMock implements Chunk
 	}
 
 	@Override
+	@SuppressWarnings("UnstableApiUsage")
 	public @NotNull ChunkSnapshot getChunkSnapshot(boolean includeMaxblocky, boolean includeBiome, boolean includeBiomeTempRain)
 	{
-		int size = (16 << 4) * Math.abs((world.getMaxHeight() - world.getMinHeight()));
-		Map<Coordinate, BlockState> blockStates = new HashMap<>(size, 1.0f);
-		Map<Coordinate, Biome> biomes = includeBiome ? new HashMap<>(size, 1.0f) : null;
+		// Cubic size of the chunk.
+		int size = (16 << 4) * (16 << 4) * Math.abs((world.getMaxHeight() - world.getMinHeight()));
+		ImmutableMap.Builder<Coordinate, BlockState> blockStates = ImmutableMap.builderWithExpectedSize(size);
+		ImmutableMap.Builder<Coordinate, Biome> biomes = ImmutableMap.builderWithExpectedSize(size);
 		for (int x = 0; x < 15; x++)
 		{
 			for (int y = world.getMinHeight(); y < world.getMaxHeight(); y++)
@@ -115,7 +116,7 @@ public class ChunkMock implements Chunk
 				}
 			}
 		}
-		return new ChunkSnapshotMock(x, z, world.getMinHeight(), world.getMaxHeight(), world.getName(), world.getFullTime(), blockStates, biomes);
+		return new ChunkSnapshotMock(x, z, world.getMinHeight(), world.getMaxHeight(), world.getName(), world.getFullTime(), blockStates.build(), biomes.build());
 	}
 
 
