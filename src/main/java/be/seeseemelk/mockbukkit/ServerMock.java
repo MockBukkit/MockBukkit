@@ -34,6 +34,7 @@ import be.seeseemelk.mockbukkit.tags.TagRegistry;
 import be.seeseemelk.mockbukkit.tags.TagWrapperMock;
 import be.seeseemelk.mockbukkit.tags.TagsMock;
 import com.destroystokyo.paper.entity.ai.MobGoals;
+import com.google.common.base.Preconditions;
 import io.papermc.paper.datapack.DatapackManager;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
@@ -1397,7 +1398,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull ChunkData createChunkData(@NotNull World world)
 	{
-		Validate.notNull(world, "World cannot be null");
+		Preconditions.checkNotNull(world, "World cannot be null");
 		return new MockChunkData(world);
 	}
 
