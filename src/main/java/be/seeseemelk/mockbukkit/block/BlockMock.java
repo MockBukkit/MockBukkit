@@ -5,7 +5,7 @@ import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import be.seeseemelk.mockbukkit.block.state.BlockStateMock;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
 import com.destroystokyo.paper.block.BlockSoundGroup;
-import org.apache.commons.lang.Validate;
+import com.google.common.base.Preconditions;
 import org.bukkit.Chunk;
 import org.bukkit.FluidCollisionMode;
 import org.bukkit.Location;
@@ -573,7 +573,8 @@ public class BlockMock implements Block
 	 */
 	public void setState(@NotNull BlockStateMock state)
 	{
-		Validate.notNull(state, "The BlockState cannot be null");
+		Preconditions.checkNotNull(state, "The BlockState cannot be null");
+
 		this.state = state;
 	}
 

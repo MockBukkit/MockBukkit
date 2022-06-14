@@ -25,6 +25,7 @@ import be.seeseemelk.mockbukkit.inventory.LecternInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.ShulkerBoxInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
+import be.seeseemelk.mockbukkit.map.MapViewMock;
 import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 import be.seeseemelk.mockbukkit.potion.MockPotionEffectType;
 import be.seeseemelk.mockbukkit.profile.PlayerProfileMock;
@@ -40,7 +41,6 @@ import io.papermc.paper.datapack.DatapackManager;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 import net.md_5.bungee.api.chat.BaseComponent;
-import org.apache.commons.lang.Validate;
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.BanEntry;
 import org.bukkit.BanList;
@@ -80,10 +80,10 @@ import org.bukkit.entity.SpawnCategory;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.server.MapInitializeEvent;
 import org.bukkit.generator.ChunkGenerator.ChunkData;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
-import org.bukkit.inventory.ItemFactory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.Recipe;
@@ -139,7 +139,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private final List<World> worlds = new ArrayList<>();
 	private final List<Recipe> recipes = new LinkedList<>();
 	private final Map<NamespacedKey, KeyedBossBarMock> bossBars = new HashMap<>();
-	private final ItemFactory factory = new ItemFactoryMock();
+	private final ItemFactoryMock factory = new ItemFactoryMock();
 	private final PlayerMockFactory playerFactory = new PlayerMockFactory(this);
 	private final PluginManagerMock pluginManager = new PluginManagerMock(this);
 	private final ScoreboardManagerMock scoreboardManager = new ScoreboardManagerMock();
@@ -149,6 +149,8 @@ public class ServerMock extends Server.Spigot implements Server
 	private final MockCommandMap commandMap = new MockCommandMap(this);
 	private final HelpMapMock helpMap = new HelpMapMock();
 	private final StandardMessenger messenger = new StandardMessenger();
+	private final Map<Integer, MapViewMock> mapViews = new HashMap<>();
+	private int nextMapId = 1;
 
 	private GameMode defaultGameMode = GameMode.SURVIVAL;
 	private ConsoleCommandSender consoleSender;
@@ -684,7 +686,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public ItemFactory getItemFactory()
+	public @NotNull ItemFactoryMock getItemFactory()
 	{
 		return factory;
 	}
@@ -1193,10 +1195,12 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public MapView createMap(World world)
+	public @NotNull MapViewMock createMap(@NotNull World world)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		MapViewMock mapView = new MapViewMock(world, nextMapId++);
+		mapViews.put(mapView.getId(), mapView);
+		new MapInitializeEvent(mapView).callEvent();
+		return mapView;
 	}
 
 	@Override
@@ -1398,7 +1402,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 */
 	public void setWarningState(@NotNull WarningState warningState)
 	{
-		Validate.notNull(warningState, "Warning state cannot be null");
+		Preconditions.checkNotNull(warningState, "warningState cannot be null");
 		this.warningState = warningState;
 	}
 
@@ -1474,7 +1478,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @Nullable Entity getEntity(@NotNull UUID uuid)
 	{
-		Validate.notNull(uuid, "UUID cannot be null");
+		Preconditions.checkNotNull(uuid, "uuid cannot be null");
 
 		for (EntityMock entity : entities)
 		{
@@ -1531,7 +1535,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull BlockData createBlockData(@NotNull Material material)
 	{
-		Validate.notNull(material, "Must provide material");
+		Preconditions.checkNotNull(material, "Must provide material");
 		return BlockDataMock.mock(material);
 	}
 
@@ -1575,7 +1579,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@NotNull
 	public Tag<Material> createMaterialTag(@NotNull NamespacedKey key, @NotNull String registryKey, @NotNull Material... materials)
 	{
-		Validate.notNull(key, "A NamespacedKey must never be null");
+		Preconditions.checkNotNull(key, "A NamespacedKey must never be null");
 
 		TagRegistry registry = materialTags.get(registryKey);
 		TagWrapperMock tag = new TagWrapperMock(registry, key);
@@ -1659,7 +1663,8 @@ public class ServerMock extends Server.Spigot implements Server
 		registerPotionEffectType(29, "CONDUIT_POWER", false, 1950417);
 		registerPotionEffectType(30, "DOLPHINS_GRACE", false, 8954814);
 		registerPotionEffectType(31, "BAD_OMEN", false, 745784);
-		registerPotionEffectType(32, "HERO_OF_THE_VILLAGE", false, 45217);
+		registerPotionEffectType(32, "HERO_OF_THE_VILLAGE", false, 4521796);
+		registerPotionEffectType(33, "DARKNESS", false, 2696993);
 		PotionEffectType.stopAcceptingRegistrations();
 	}
 
@@ -1695,7 +1700,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public KeyedBossBar createBossBar(NamespacedKey key, String title, BarColor color, BarStyle style, BarFlag... flags)
 	{
-		Validate.notNull(key, "A NamespacedKey must never be null");
+		Preconditions.checkNotNull(key, "A NamespacedKey must never be null");
 		KeyedBossBarMock bar = new KeyedBossBarMock(key, title, color, style, flags);
 		bossBars.put(key, bar);
 		return bar;
@@ -1710,14 +1715,14 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public KeyedBossBar getBossBar(NamespacedKey key)
 	{
-		Validate.notNull(key, "A NamespacedKey must never be null");
+		Preconditions.checkNotNull(key, "A NamespacedKey must never be null");
 		return bossBars.get(key);
 	}
 
 	@Override
 	public boolean removeBossBar(NamespacedKey key)
 	{
-		Validate.notNull(key, "A NamespacedKey must never be null");
+		Preconditions.checkNotNull(key, "A NamespacedKey must never be null");
 		return bossBars.remove(key, bossBars.get(key));
 	}
 
@@ -1739,10 +1744,9 @@ public class ServerMock extends Server.Spigot implements Server
 
 	@Override
 	@Deprecated
-	public MapView getMap(int id)
+	public MapViewMock getMap(int id)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return mapViews.get(id);
 	}
 
 	@Override
@@ -1862,6 +1866,13 @@ public class ServerMock extends Server.Spigot implements Server
 
 	@Override
 	public @NotNull String getPermissionMessage()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Component permissionMessage()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

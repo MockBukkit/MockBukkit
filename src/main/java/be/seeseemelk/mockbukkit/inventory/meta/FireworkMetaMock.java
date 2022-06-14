@@ -1,14 +1,13 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.lang.Validate;
+import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableList;
 import org.bukkit.FireworkEffect;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.jetbrains.annotations.NotNull;
 
-import com.google.common.collect.ImmutableList;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FireworkMetaMock extends ItemMetaMock implements FireworkMeta
 {
@@ -67,14 +66,14 @@ public class FireworkMetaMock extends ItemMetaMock implements FireworkMeta
 	@Override
 	public void addEffect(@NotNull FireworkEffect effect)
 	{
-		Validate.notNull(effect, "effect must never be null");
+		Preconditions.checkNotNull(effect, "effect must never be null");
 		effects.add(effect);
 	}
 
 	@Override
 	public void addEffects(@NotNull FireworkEffect... effects)
 	{
-		Validate.notNull(effects, "effects must never be null");
+		Preconditions.checkNotNull(effects, "effects must never be null");
 
 		for (FireworkEffect effect : effects)
 		{
@@ -85,7 +84,7 @@ public class FireworkMetaMock extends ItemMetaMock implements FireworkMeta
 	@Override
 	public void addEffects(@NotNull Iterable<FireworkEffect> effects)
 	{
-		Validate.notNull(effects, "effects must never be null");
+		Preconditions.checkNotNull(effects, "effects must never be null");
 
 		for (FireworkEffect effect : effects)
 		{
