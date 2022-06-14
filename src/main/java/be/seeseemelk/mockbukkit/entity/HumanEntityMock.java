@@ -29,10 +29,5 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	{
 		this.lastDeathLocation = location;
 	}
-
-
-
-
-
 }
 
