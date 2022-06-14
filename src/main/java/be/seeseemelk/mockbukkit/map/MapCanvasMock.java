@@ -8,6 +8,7 @@ import org.bukkit.map.MapPalette;
 import org.bukkit.map.MapView;
 import org.jetbrains.annotations.NotNull;
 
+import java.awt.Color;
 import java.awt.Image;
 import java.util.Arrays;
 
@@ -41,6 +42,24 @@ public class MapCanvasMock implements MapCanvas
 	public void setCursors(@NotNull MapCursorCollection cursors)
 	{
 		this.cursors = cursors;
+	}
+
+	@Override
+	public void setPixelColor(int x, int y, @NotNull Color color)
+	{
+		pixels[x][y] = MapPalette.matchColor(color);
+	}
+
+	@Override
+	public @NotNull Color getPixelColor(int x, int y)
+	{
+		return MapPalette.getColor(pixels[x][y]);
+	}
+
+	@Override
+	public @NotNull Color getBasePixelColor(int x, int y)
+	{
+		return MapPalette.getColor(base[x][y]);
 	}
 
 	@Override
