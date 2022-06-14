@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.metadata;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -87,7 +88,7 @@ class MetadataTableTest
 	void removeMetadata_NoneSet_NothingHappens()
 	{
 		MockPlugin plugin1 = MockBukkit.createMockPlugin();
-		mt.removeMetadata("MyMetadata", plugin1);
+		assertDoesNotThrow(() -> mt.removeMetadata("MyMetadata", plugin1));
 	}
 
 }

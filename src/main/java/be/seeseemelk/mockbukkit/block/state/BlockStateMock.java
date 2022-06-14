@@ -17,26 +17,29 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.Objects;
 
-public class BlockStateMock implements BlockState, Cloneable
+public class BlockStateMock implements BlockState
 {
 
-	private final MetadataTable metadataTable = new MetadataTable();
+	private final MetadataTable metadataTable;
 	private Block block;
 	private Material material;
 
 	public BlockStateMock(@NotNull Material material)
 	{
+		this.metadataTable = new MetadataTable();
 		this.material = material;
 	}
 
 	protected BlockStateMock(@NotNull Block block)
 	{
+		this.metadataTable = new MetadataTable();
 		this.block = block;
 		this.material = block.getType();
 	}
 
 	protected BlockStateMock(@NotNull BlockStateMock state)
 	{
+		this.metadataTable = new MetadataTable(state.metadataTable);
 		this.material = state.getType();
 		this.block = state.isPlaced() ? state.getBlock() : null;
 	}
@@ -66,7 +69,7 @@ public class BlockStateMock implements BlockState, Cloneable
 	}
 
 	@Override
-	public Block getBlock()
+	public @NotNull Block getBlock()
 	{
 		if (block == null)
 		{
@@ -174,15 +177,19 @@ public class BlockStateMock implements BlockState, Cloneable
 
 		Block b = getBlock();
 
-		if (b instanceof BlockMock && (force || b.getType() == material))
-		{
-			((BlockMock) b).setState(this);
-			return true;
-		}
-		else
+		if (b.getType() != this.getType() && !force)
 		{
 			return false;
 		}
+
+		b.setType(this.getType());
+
+		if (b instanceof BlockMock bm)
+		{
+			bm.setState(this);
+		}
+
+		return true;
 	}
 
 	@Override
@@ -274,6 +281,15 @@ public class BlockStateMock implements BlockState, Cloneable
 	{
 		switch (block.getType())
 		{
+		case COMMAND_BLOCK:
+		case CHAIN_COMMAND_BLOCK:
+		case REPEATING_COMMAND_BLOCK:
+			return new CommandBlockMock(block);
+		case CAMPFIRE:
+		case SOUL_CAMPFIRE:
+			return new CampfireMock(block);
+		case BELL:
+			return new BellMock(block);
 		case LECTERN:
 			return new LecternMock(block);
 		case HOPPER:
@@ -324,6 +340,39 @@ public class BlockStateMock implements BlockState, Cloneable
 		case RED_SHULKER_BOX:
 		case BLACK_SHULKER_BOX:
 			return new ShulkerBoxMock(block);
+		case WHITE_BANNER:
+		case ORANGE_BANNER:
+		case MAGENTA_BANNER:
+		case LIGHT_BLUE_BANNER:
+		case YELLOW_BANNER:
+		case LIME_BANNER:
+		case PINK_BANNER:
+		case GRAY_BANNER:
+		case LIGHT_GRAY_BANNER:
+		case CYAN_BANNER:
+		case PURPLE_BANNER:
+		case BLUE_BANNER:
+		case BROWN_BANNER:
+		case GREEN_BANNER:
+		case RED_BANNER:
+		case BLACK_BANNER:
+		case WHITE_WALL_BANNER:
+		case ORANGE_WALL_BANNER:
+		case MAGENTA_WALL_BANNER:
+		case LIGHT_BLUE_WALL_BANNER:
+		case YELLOW_WALL_BANNER:
+		case LIME_WALL_BANNER:
+		case PINK_WALL_BANNER:
+		case GRAY_WALL_BANNER:
+		case LIGHT_GRAY_WALL_BANNER:
+		case CYAN_WALL_BANNER:
+		case PURPLE_WALL_BANNER:
+		case BLUE_WALL_BANNER:
+		case BROWN_WALL_BANNER:
+		case GREEN_WALL_BANNER:
+		case RED_WALL_BANNER:
+		case BLACK_WALL_BANNER:
+			return new BannerMock(block);
 		default:
 			return new BlockStateMock(block);
 		}

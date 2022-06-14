@@ -2,7 +2,6 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
-import org.apache.commons.lang.Validate;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -220,7 +219,7 @@ public class EntityEquipmentMock implements EntityEquipment
 	@Override
 	public void setArmorContents(@NotNull ItemStack[] items)
 	{
-		Validate.notNull(items, "The provided items must not be null.");
+		Preconditions.checkNotNull(items, "The provided items must not be null.");
 
 		setBoots((items.length >= 1) ? items[0] : null);
 		setLeggings((items.length >= 2) ? items[1] : null);

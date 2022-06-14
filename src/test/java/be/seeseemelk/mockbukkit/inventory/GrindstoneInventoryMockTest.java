@@ -14,14 +14,14 @@ class GrindstoneInventoryMockTest
 	private GrindstoneInventoryMock inventory;
 
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		MockBukkit.mock();
 		inventory = new GrindstoneInventoryMock(null);
 	}
 
 	@AfterEach
-	public void tearDown() throws Exception
+	void tearDown() throws Exception
 	{
 		MockBukkit.unmock();
 	}
