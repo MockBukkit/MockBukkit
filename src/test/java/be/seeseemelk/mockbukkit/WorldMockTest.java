@@ -53,13 +53,13 @@ class WorldMockTest
 	private ServerMock server;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		server = MockBukkit.mock();
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
@@ -357,21 +357,21 @@ class WorldMockTest
 	}
 
 	@Test
-	public void getLoadedChunks_EmptyWorldHasNoLoadedChunks()
+	void getLoadedChunks_EmptyWorldHasNoLoadedChunks()
 	{
 		WorldMock world = new WorldMock();
 		assertEquals(0, world.getLoadedChunks().length);
 	}
 
 	@Test
-	public void isChunkLoaded_IsFalseForUnloadedChunk()
+	void isChunkLoaded_IsFalseForUnloadedChunk()
 	{
 		WorldMock world = new WorldMock();
 		assertFalse(world.isChunkLoaded(0, 0));
 	}
 
 	@Test
-	public void isChunkloaded_IsTrueForLoadedChunk()
+	void isChunkloaded_IsTrueForLoadedChunk()
 	{
 		WorldMock world = new WorldMock();
 		BlockMock block = world.getBlockAt(64, 64, 64);
@@ -381,7 +381,7 @@ class WorldMockTest
 	}
 
 	@Test
-	public void getBlockState_ChangeBlock()
+	void getBlockState_ChangeBlock()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		assertEquals(Material.DIRT, world.getType(0, 1, 0));
@@ -397,7 +397,7 @@ class WorldMockTest
 	}
 
 	@Test
-	public void setBlock_ChangeBlock()
+	void setBlock_ChangeBlock()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		Location location = new Location(world, 0, 1, 0);
@@ -420,7 +420,7 @@ class WorldMockTest
 	}
 
 	@Test
-	public void worldPlayEffect()
+	void worldPlayEffect()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		world.playEffect(new Location(world, 0, 0, 0), Effect.STEP_SOUND, Material.STONE);
@@ -504,22 +504,24 @@ class WorldMockTest
 	}
 
 	@Test
-	public void worldPlayEffect_NullData()
+	void worldPlayEffect_NullData()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Location loc = new Location(world, 0, 0, 0);
 		assertThrows(IllegalArgumentException.class, () ->
 		{
-			world.playEffect(new Location(world, 0, 0, 0), Effect.STEP_SOUND, null);
+			world.playEffect(loc, Effect.STEP_SOUND, null);
 		});
 	}
 
 	@Test
-	public void worldPlayEffect_IncorrectData()
+	void worldPlayEffect_IncorrectData()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Location loc = new Location(world, 0, 0, 0);
 		assertThrows(IllegalArgumentException.class, () ->
 		{
-			world.playEffect(new Location(world, 0, 0, 0), Effect.STEP_SOUND, 1.0f);
+			world.playEffect(loc, Effect.STEP_SOUND, 1.0f);
 		});
 	}
 
@@ -630,7 +632,7 @@ class WorldMockTest
 	}
 
 	@Test
-	public void setDifficulty()
+	void setDifficulty()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		assertNotNull(world.getDifficulty());
@@ -639,7 +641,7 @@ class WorldMockTest
 	}
 
 	@Test
-	public void spawnMonster_Peaceful()
+	void spawnMonster_Peaceful()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		world.setDifficulty(Difficulty.PEACEFUL);
@@ -649,7 +651,7 @@ class WorldMockTest
 	}
 
 	@Test
-	public void spawnFriendly_Peaceful()
+	void spawnFriendly_Peaceful()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		world.setDifficulty(Difficulty.PEACEFUL);

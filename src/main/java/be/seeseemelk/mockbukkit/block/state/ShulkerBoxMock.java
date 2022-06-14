@@ -3,7 +3,6 @@ package be.seeseemelk.mockbukkit.block.state;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import be.seeseemelk.mockbukkit.inventory.ShulkerBoxInventoryMock;
-import net.kyori.adventure.text.Component;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -42,6 +41,7 @@ public class ShulkerBoxMock extends ContainerMock implements ShulkerBox
 	{
 		super(state);
 		this.color = state.color;
+		this.isOpen = state.isOpen;
 	}
 
 	@Nullable
@@ -141,7 +141,7 @@ public class ShulkerBoxMock extends ContainerMock implements ShulkerBox
 	}
 
 	@Override
-	public BlockState getSnapshot()
+	public @NotNull BlockState getSnapshot()
 	{
 		return new ShulkerBoxMock(this);
 	}
@@ -218,20 +218,6 @@ public class ShulkerBoxMock extends ContainerMock implements ShulkerBox
 
 	@Override
 	public long setNextRefill(long refillAt)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable Component customName()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void customName(@Nullable Component customName)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

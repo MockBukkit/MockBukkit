@@ -22,14 +22,14 @@ class HelpMapMockTest
 	private HelpMapMock helpMap;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		server = MockBukkit.mock();
 		helpMap = server.getHelpMap();
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}

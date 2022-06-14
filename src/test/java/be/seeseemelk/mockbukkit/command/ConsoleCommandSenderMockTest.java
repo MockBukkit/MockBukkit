@@ -13,7 +13,7 @@ class ConsoleCommandSenderMockTest
 	private ConsoleCommandSenderMock sender;
 
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		sender = new ConsoleCommandSenderMock();
 	}
