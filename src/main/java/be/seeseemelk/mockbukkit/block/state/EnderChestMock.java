@@ -30,6 +30,7 @@ public class EnderChestMock extends TileStateMock implements EnderChest
 	protected EnderChestMock(@NotNull EnderChestMock state)
 	{
 		super(state);
+		this.isOpen = state.isOpen;
 	}
 
 	@Override

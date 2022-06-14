@@ -1,11 +1,8 @@
 package be.seeseemelk.mockbukkit.boss;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarFlag;
 import org.bukkit.boss.BarStyle;
@@ -15,9 +12,11 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.entity.PlayerMock;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BossBarMockTest
 {
@@ -25,7 +24,7 @@ class BossBarMockTest
 	private BossBar bar;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		server = MockBukkit.mock();
 		bar = server.createBossBar("Test bossbar", BarColor.BLUE, BarStyle.SOLID, BarFlag.PLAY_BOSS_MUSIC,
@@ -33,7 +32,7 @@ class BossBarMockTest
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
@@ -118,13 +117,13 @@ class BossBarMockTest
 	@Test
 	void testAddingPlayerNull()
 	{
-		assertThrows(IllegalArgumentException.class, () -> bar.addPlayer(null));
+		assertThrows(NullPointerException.class, () -> bar.addPlayer(null));
 	}
 
 	@Test
 	void testRemovingNullPlayer()
 	{
-		assertThrows(IllegalArgumentException.class, () -> bar.removePlayer(null));
+		assertThrows(NullPointerException.class, () -> bar.removePlayer(null));
 	}
 
 }
