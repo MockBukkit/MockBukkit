@@ -1,15 +1,14 @@
 package be.seeseemelk.mockbukkit.sound;
 
-import static org.junit.jupiter.api.Assertions.fail;
+import be.seeseemelk.mockbukkit.entity.PlayerMock;
+import com.google.common.base.Preconditions;
+import org.bukkit.Sound;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.function.Predicate;
 
-import org.apache.commons.lang.Validate;
-import org.bukkit.Sound;
-import org.jetbrains.annotations.NotNull;
-
-import be.seeseemelk.mockbukkit.entity.PlayerMock;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * This interface provides methods to assert sounds that were heard. This is implemented by {@link PlayerMock}, however
@@ -33,7 +32,7 @@ public interface SoundReceiver
 
 	default void addHeardSound(@NotNull AudioExperience audioExperience)
 	{
-		Validate.notNull(audioExperience, "An audio experience must not be null.");
+		Preconditions.checkNotNull(audioExperience, "An audio experience must not be null.");
 		getHeardSounds().add(audioExperience);
 	}
 
