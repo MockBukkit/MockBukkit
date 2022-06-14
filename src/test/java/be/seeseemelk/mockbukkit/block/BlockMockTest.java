@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.block;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -12,6 +13,7 @@ import be.seeseemelk.mockbukkit.Coordinate;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.junit.jupiter.api.BeforeEach;
@@ -217,6 +219,23 @@ class BlockMockTest
 		block.setType(Material.STONE);
 		block.breakNaturally();
 		assertTrue(block.isEmpty());
+	}
+
+	@Test
+	void getBiome()
+	{
+		Biome worldBiome = block.getWorld().getBiome(block.getLocation());
+		assertNotNull(worldBiome);
+		Biome blockBiome = block.getBiome();
+		assertNotNull(blockBiome);
+		assertEquals(worldBiome, blockBiome);
+	}
+
+	@Test
+	void setBiome()
+	{
+		block.setBiome(Biome.DESERT);
+		assertEquals(Biome.DESERT, block.getBiome());
 	}
 
 	@Test
