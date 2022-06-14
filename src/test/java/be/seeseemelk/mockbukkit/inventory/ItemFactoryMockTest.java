@@ -15,6 +15,8 @@ import be.seeseemelk.mockbukkit.inventory.meta.SuspiciousStewMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.ArmorStandMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.TropicalFishBucketMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.AxolotlBucketMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.CompassMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.CrossbowMetaMock;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -53,14 +55,14 @@ class ItemFactoryMockTest
 	private ItemFactoryMock factory;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		MockBukkit.mock();
 		factory = new ItemFactoryMock();
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
@@ -88,9 +90,11 @@ class ItemFactoryMockTest
 		assertTrue(factory.getItemMeta(Material.LEATHER_CHESTPLATE) instanceof LeatherArmorMetaMock);
 
 		assertTrue(factory.getItemMeta(Material.AXOLOTL_BUCKET) instanceof AxolotlBucketMetaMock);
+		assertTrue(factory.getItemMeta(Material.COMPASS) instanceof CompassMetaMock);
+		assertTrue(factory.getItemMeta(Material.CROSSBOW) instanceof CrossbowMetaMock);
 		assertTrue(factory.getItemMeta(Material.ARMOR_STAND) instanceof ArmorStandMetaMock);
 		assertTrue(factory.getItemMeta(Material.TROPICAL_FISH_BUCKET) instanceof TropicalFishBucketMetaMock);
-		
+
 		for (Material m : BANNERS)
 		{
 			assertTrue(factory.getItemMeta(m) instanceof BannerMetaMock);

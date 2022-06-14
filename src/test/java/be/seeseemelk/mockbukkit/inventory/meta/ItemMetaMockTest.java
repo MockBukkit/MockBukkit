@@ -1,23 +1,15 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.MockPlugin;
+import com.google.common.collect.LinkedHashMultimap;
+import com.google.common.collect.Multimap;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
@@ -29,22 +21,38 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.MockPlugin;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ItemMetaMockTest
 {
+
 	private ItemMetaMock meta;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		MockBukkit.mock();
 		meta = new ItemMetaMock();
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
@@ -53,11 +61,11 @@ class ItemMetaMockTest
 	void new_CopyConstructor_Copied()
 	{
 		meta.setDisplayName("Some name");
-		meta.setLore(Arrays.asList("lore"));
+		meta.setLore(List.of("lore"));
 		meta.setUnbreakable(true);
 		meta.addItemFlags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES);
 		ItemMetaMock meta2 = new ItemMetaMock(meta);
-		meta2.setLore(Arrays.asList("lore"));
+		meta2.setLore(List.of("lore"));
 		assertEquals(meta2, meta);
 		assertEquals(meta, meta2);
 		assertEquals(meta.hashCode(), meta2.hashCode());
@@ -350,7 +358,7 @@ class ItemMetaMockTest
 	void clone_WithDisplayName_ClonedExactly()
 	{
 		meta.setDisplayName("Some name");
-		ItemMetaMock cloned = (ItemMetaMock) meta.clone();
+		ItemMetaMock cloned = meta.clone();
 		assertEquals(meta, cloned);
 		assertEquals(meta.hashCode(), cloned.hashCode());
 	}
@@ -578,14 +586,14 @@ class ItemMetaMockTest
 	{
 		// Tests for displayName, Lore, enchants, unbreakable status, and damage
 		meta.setDisplayName("Test name");
-		meta.setLore(Arrays.asList("Test lore"));
+		meta.setLore(List.of("Test lore"));
 		meta.setUnbreakable(true);
 		meta.setDamage(5);
 		meta.setRepairCost(3);
 
 		Map<String, Object> expected = new HashMap<>();
 		expected.put("displayName", "Test name");
-		expected.put("lore", Arrays.asList("Test lore"));
+		expected.put("lore", List.of("Test lore"));
 		expected.put("unbreakable", true);
 		expected.put("damage", 5);
 		expected.put("repairCost", 3);
@@ -593,11 +601,11 @@ class ItemMetaMockTest
 		Map<String, Object> actual = meta.serialize();
 
 		// Perform tests
-		assertEquals(expected.get("displayName"), actual.get("displayName"));
+		assertEquals(expected.get("displayName"), actual.get("display-name"));
 		assertEquals(expected.get("lore"), actual.get("lore"));
-		assertEquals(expected.get("unbreakable"), actual.get("unbreakable"));
-		assertEquals(expected.get("damage"), actual.get("damage"));
-		assertEquals(expected.get("repairCost"), actual.get("repairCost"));
+		assertEquals(expected.get("unbreakable"), actual.get("Unbreakable"));
+		assertEquals(expected.get("damage"), actual.get("Damage"));
+		assertEquals(expected.get("repairCost"), actual.get("repair-cost"));
 
 	}
 
@@ -615,7 +623,7 @@ class ItemMetaMockTest
 		ItemMetaMock modified = new ItemMetaMock();
 
 		modified.setDisplayName("Test name");
-		modified.setLore(Arrays.asList("Test lore"));
+		modified.setLore(List.of("Test lore"));
 		modified.setUnbreakable(true);
 		modified.setDamage(5);
 		modified.setRepairCost(3);
@@ -635,6 +643,220 @@ class ItemMetaMockTest
 
 		bukkitOutput.close();
 		bukkitInput.close();
+	}
+
+	@Test
+	void hasAttributeModifiers_Constructor_Empty()
+	{
+		ItemMetaMock meta = new ItemMetaMock();
+
+		assertFalse(meta.hasAttributeModifiers());
+	}
+
+	@Test
+	void getAttributeModifiers_Constructor_Null()
+	{
+		ItemMetaMock meta = new ItemMetaMock();
+
+		assertNull(meta.getAttributeModifiers());
+	}
+
+	@Test
+	void setAttributeModifiers_NullMap()
+	{
+		ItemMetaMock meta = new ItemMetaMock();
+
+		meta.setAttributeModifiers(null);
+
+		assertFalse(meta.hasAttributeModifiers());
+	}
+
+	@Test
+	void setAttributeModifiers_AddsEntries()
+	{
+		ItemMetaMock meta = new ItemMetaMock();
+
+		Multimap<Attribute, AttributeModifier> modifiers = LinkedHashMultimap.create();
+		AttributeModifier modifier = new AttributeModifier("test", 1, AttributeModifier.Operation.ADD_NUMBER);
+		modifiers.put(Attribute.GENERIC_ARMOR, modifier);
+
+		meta.setAttributeModifiers(modifiers);
+
+		assertEquals(1, meta.getAttributeModifiers().size());
+		assertEquals(1, meta.getAttributeModifiers().get(Attribute.GENERIC_ARMOR).size());
+		assertEquals(modifier, meta.getAttributeModifiers().get(Attribute.GENERIC_ARMOR).stream().findFirst().orElse(null));
+	}
+
+	@Test
+	void setAttributeModifiers_RemovesAndAddsEntries()
+	{
+		ItemMetaMock meta = new ItemMetaMock();
+		Multimap<Attribute, AttributeModifier> oldModifiers = LinkedHashMultimap.create();
+		oldModifiers.put(Attribute.GENERIC_ARMOR, new AttributeModifier("test_1", 1, AttributeModifier.Operation.ADD_NUMBER));
+		meta.setAttributeModifiers(oldModifiers);
+		Multimap<Attribute, AttributeModifier> modifiers = LinkedHashMultimap.create();
+		AttributeModifier modifier = new AttributeModifier("test_2", 1, AttributeModifier.Operation.ADD_NUMBER);
+		modifiers.put(Attribute.GENERIC_ARMOR_TOUGHNESS, modifier);
+
+		meta.setAttributeModifiers(modifiers);
+
+		assertEquals(1, meta.getAttributeModifiers().size());
+		assertEquals(1, meta.getAttributeModifiers().get(Attribute.GENERIC_ARMOR_TOUGHNESS).size());
+		assertEquals(modifier, meta.getAttributeModifiers().get(Attribute.GENERIC_ARMOR_TOUGHNESS).stream().findFirst().orElse(null));
+	}
+
+	@Test
+	void getAttributeModifiers_Slot()
+	{
+		ItemMetaMock meta = new ItemMetaMock();
+		Multimap<Attribute, AttributeModifier> modifiers = LinkedHashMultimap.create();
+		AttributeModifier modifier1 = new AttributeModifier(UUID.randomUUID(), "test_1", 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HEAD);
+		AttributeModifier modifier2 = new AttributeModifier(UUID.randomUUID(), "test_2", 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.CHEST);
+		modifiers.put(Attribute.GENERIC_ARMOR, modifier1);
+		modifiers.put(Attribute.GENERIC_ARMOR, modifier2);
+
+		meta.setAttributeModifiers(modifiers);
+
+		assertEquals(1, meta.getAttributeModifiers(EquipmentSlot.HEAD).size());
+		assertEquals(1, meta.getAttributeModifiers(EquipmentSlot.HEAD).get(Attribute.GENERIC_ARMOR).size());
+		assertEquals(modifier1, meta.getAttributeModifiers(EquipmentSlot.HEAD).get(Attribute.GENERIC_ARMOR).stream().findFirst().orElse(null));
+	}
+
+	@Test
+	void getAttributeModifiers_NullAttribute_ThrowException()
+	{
+		ItemMetaMock meta = new ItemMetaMock();
+
+		assertThrowsExactly(NullPointerException.class, () -> meta.getAttributeModifiers((Attribute) null));
+	}
+
+	@Test
+	void addAttributeModifier_AddsOne()
+	{
+		ItemMetaMock meta = new ItemMetaMock();
+		AttributeModifier modifier = new AttributeModifier("test", 1, AttributeModifier.Operation.ADD_NUMBER);
+
+		meta.addAttributeModifier(Attribute.GENERIC_ARMOR, modifier);
+
+		assertEquals(1, meta.getAttributeModifiers().size());
+		assertEquals(1, meta.getAttributeModifiers().get(Attribute.GENERIC_ARMOR).size());
+		assertEquals(modifier, meta.getAttributeModifiers().get(Attribute.GENERIC_ARMOR).stream().findFirst().orElse(null));
+	}
+
+	@Test
+	void addAttributeModifier_Duplicate_ThrowsException()
+	{
+		ItemMetaMock meta = new ItemMetaMock();
+		AttributeModifier modifier = new AttributeModifier("test", 1, AttributeModifier.Operation.ADD_NUMBER);
+
+		meta.addAttributeModifier(Attribute.GENERIC_ARMOR, modifier);
+
+		assertThrowsExactly(IllegalArgumentException.class, () -> meta.addAttributeModifier(Attribute.GENERIC_ARMOR, modifier));
+	}
+
+	@Test
+	void addAttributeModifier_NullAttribute_ThrowsException()
+	{
+		ItemMetaMock meta = new ItemMetaMock();
+		AttributeModifier modifier = new AttributeModifier("test", 1, AttributeModifier.Operation.ADD_NUMBER);
+
+		assertThrowsExactly(NullPointerException.class, () -> meta.addAttributeModifier(null, modifier));
+	}
+
+	@Test
+	void addAttributeModifier_NullModifier_ThrowsException()
+	{
+		ItemMetaMock meta = new ItemMetaMock();
+
+		assertThrowsExactly(NullPointerException.class, () -> meta.addAttributeModifier(Attribute.GENERIC_ARMOR, null));
+	}
+
+	@Test
+	void removeAttribute_Attribute()
+	{
+		ItemMetaMock meta = new ItemMetaMock();
+		AttributeModifier modifier = new AttributeModifier("test", 1, AttributeModifier.Operation.ADD_NUMBER);
+		meta.addAttributeModifier(Attribute.GENERIC_ARMOR, modifier);
+
+		assertTrue(meta.hasAttributeModifiers());
+
+		meta.removeAttributeModifier(Attribute.GENERIC_ARMOR);
+
+		assertFalse(meta.hasAttributeModifiers());
+	}
+
+	@Test
+	void removeAttribute_Attribute_NullThrowsException()
+	{
+		ItemMetaMock meta = new ItemMetaMock();
+
+		assertThrowsExactly(NullPointerException.class, () -> meta.removeAttributeModifier((Attribute) null));
+	}
+
+	@Test
+	void removeAttribute_Slot_RemovesCorrectSlot()
+	{
+		ItemMetaMock meta = new ItemMetaMock();
+		AttributeModifier modifier1 = new AttributeModifier(UUID.randomUUID(), "test_1", 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HEAD);
+		AttributeModifier modifier2 = new AttributeModifier(UUID.randomUUID(), "test_2", 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.CHEST);
+		meta.addAttributeModifier(Attribute.GENERIC_ARMOR, modifier1);
+		meta.addAttributeModifier(Attribute.GENERIC_ARMOR, modifier2);
+
+		assertEquals(2, meta.getAttributeModifiers().size());
+		meta.removeAttributeModifier(EquipmentSlot.HEAD);
+		assertEquals(1, meta.getAttributeModifiers().size());
+		assertEquals(modifier2, meta.getAttributeModifiers().get(Attribute.GENERIC_ARMOR).stream().findFirst().orElse(null));
+	}
+
+	@Test
+		// May seem a little weird, but this is what Spigot does
+		// (https://hub.spigotmc.org/stash/projects/SPIGOT/repos/craftbukkit/browse/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaItem.java#1019)
+	void removeAttribute_Slot_RemovesAllNoSlots()
+	{
+		ItemMetaMock meta = new ItemMetaMock();
+		Multimap<Attribute, AttributeModifier> modifiers = LinkedHashMultimap.create();
+		AttributeModifier modifier1 = new AttributeModifier("test_1", 1, AttributeModifier.Operation.ADD_NUMBER);
+		AttributeModifier modifier2 = new AttributeModifier("test_2", 1, AttributeModifier.Operation.ADD_NUMBER);
+		meta.addAttributeModifier(Attribute.GENERIC_ARMOR, modifier1);
+		meta.addAttributeModifier(Attribute.GENERIC_ARMOR, modifier2);
+
+		meta.removeAttributeModifier(EquipmentSlot.HEAD);
+
+		assertFalse(meta.hasAttributeModifiers());
+	}
+
+	@Test
+	void removeAttribute_SpecificModifier_Removes()
+	{
+		ItemMetaMock meta = new ItemMetaMock();
+		Multimap<Attribute, AttributeModifier> modifiers = LinkedHashMultimap.create();
+		AttributeModifier modifier1 = new AttributeModifier(UUID.randomUUID(), "test_1", 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HEAD);
+		AttributeModifier modifier2 = new AttributeModifier(UUID.randomUUID(), "test_2", 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.CHEST);
+		meta.addAttributeModifier(Attribute.GENERIC_ARMOR, modifier1);
+		meta.addAttributeModifier(Attribute.GENERIC_ARMOR, modifier2);
+
+		meta.removeAttributeModifier(Attribute.GENERIC_ARMOR, modifier1);
+
+		assertEquals(1, meta.getAttributeModifiers().size());
+		assertEquals(modifier2, meta.getAttributeModifiers().get(Attribute.GENERIC_ARMOR).stream().findFirst().orElse(null));
+	}
+
+	@Test
+	void removeAttribute_SpecificModifier_NullAttribute_ThrowsException()
+	{
+		ItemMetaMock meta = new ItemMetaMock();
+		AttributeModifier modifier = new AttributeModifier("test_1", 1, AttributeModifier.Operation.ADD_NUMBER);
+		meta.addAttributeModifier(Attribute.GENERIC_ARMOR, modifier);
+
+		assertThrowsExactly(NullPointerException.class, () -> meta.removeAttributeModifier(null, modifier));
+	}
+
+	@Test
+	void removeAttribute_SpecificModifier_NullModifier_ThrowsException()
+	{
+		ItemMetaMock meta = new ItemMetaMock();
+
+		assertThrowsExactly(NullPointerException.class, () -> meta.removeAttributeModifier(Attribute.GENERIC_ARMOR, null));
 	}
 
 }

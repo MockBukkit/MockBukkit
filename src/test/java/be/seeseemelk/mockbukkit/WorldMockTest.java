@@ -11,8 +11,13 @@ import static org.junit.jupiter.api.Assumptions.assumeFalse;
 
 import java.util.List;
 
+import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import be.seeseemelk.mockbukkit.block.state.BlockStateMock;
+import be.seeseemelk.mockbukkit.entity.ArmorStandMock;
+import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
+import be.seeseemelk.mockbukkit.entity.FireworkMock;
+import be.seeseemelk.mockbukkit.entity.ZombieMock;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import org.bukkit.Chunk;
@@ -26,26 +31,34 @@ import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Zombie;
+import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.entity.ItemSpawnEvent;
+import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.world.TimeSkipEvent;
+import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import be.seeseemelk.mockbukkit.block.BlockMock;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 class WorldMockTest
 {
+
 	private ServerMock server;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		server = MockBukkit.mock();
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
@@ -238,18 +251,6 @@ class WorldMockTest
 	}
 
 	@Test
-	void spawnZombieTest()
-	{
-		WorldMock world = new WorldMock();
-		Location location = new Location(world, 100, 20, 50);
-		Entity zombie = world.spawnEntity(location, EntityType.ZOMBIE);
-		assertEquals(100, zombie.getLocation().getBlockX());
-		assertEquals(20, zombie.getLocation().getBlockY());
-		assertEquals(50, zombie.getLocation().getBlockZ());
-		assertTrue(world.getEntities().size() > 0);
-	}
-
-	@Test
 	void onCreated_TimeSetToBeZero()
 	{
 		WorldMock world = new WorldMock();
@@ -292,7 +293,7 @@ class WorldMockTest
 		world.setTime(6000L);
 		world.setTime(10000L);
 		server.getPluginManager().assertEventFired(TimeSkipEvent.class, event ->
-		        event.getSkipAmount() == 4000L && event.getSkipReason().equals(TimeSkipEvent.SkipReason.CUSTOM));
+		        event.getSkipAmount() == 4000L && event.getSkipReason() == TimeSkipEvent.SkipReason.CUSTOM);
 	}
 
 	@Test
@@ -303,21 +304,21 @@ class WorldMockTest
 	}
 
 	@Test
-	public void getLoadedChunks_EmptyWorldHasNoLoadedChunks()
+	void getLoadedChunks_EmptyWorldHasNoLoadedChunks()
 	{
 		WorldMock world = new WorldMock();
 		assertEquals(0, world.getLoadedChunks().length);
 	}
 
 	@Test
-	public void isChunkLoaded_IsFalseForUnloadedChunk()
+	void isChunkLoaded_IsFalseForUnloadedChunk()
 	{
 		WorldMock world = new WorldMock();
 		assertFalse(world.isChunkLoaded(0, 0));
 	}
 
 	@Test
-	public void isChunkloaded_IsTrueForLoadedChunk()
+	void isChunkloaded_IsTrueForLoadedChunk()
 	{
 		WorldMock world = new WorldMock();
 		BlockMock block = world.getBlockAt(64, 64, 64);
@@ -327,7 +328,7 @@ class WorldMockTest
 	}
 
 	@Test
-	public void getBlockState_ChangeBlock()
+	void getBlockState_ChangeBlock()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		assertEquals(Material.DIRT, world.getType(0, 1, 0));
@@ -343,7 +344,7 @@ class WorldMockTest
 	}
 
 	@Test
-	public void setBlock_ChangeBlock()
+	void setBlock_ChangeBlock()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		Location location = new Location(world, 0, 1, 0);
@@ -356,7 +357,7 @@ class WorldMockTest
 		assertEquals(Material.GRASS, world.getBlockData(location).getMaterial());
 		assertEquals(Material.GRASS, world.getBlockData(0, 1, 0).getMaterial());
 		assertEquals(Material.GRASS, world.getType(0, 1, 0));
-		world.setBlockData(0, 1, 0, mock2) ;
+		world.setBlockData(0, 1, 0, mock2);
 		assertEquals(Material.GRASS_BLOCK, world.getBlockData(location).getMaterial());
 		assertEquals(Material.GRASS_BLOCK, world.getType(location));
 		world.setType(location, Material.BEDROCK);
@@ -366,29 +367,108 @@ class WorldMockTest
 	}
 
 	@Test
-	public void worldPlayEffect()
+	void worldPlayEffect()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		world.playEffect(new Location(world, 0, 0, 0), Effect.STEP_SOUND, Material.STONE);
 	}
 
 	@Test
-	public void worldPlayEffect_NullData()
+	void testDropItem()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
+		ItemStack item = new ItemStack(Material.DIAMOND);
+		Location location = new Location(world, 100, 100, 100);
+
+		Item entity = world.dropItem(location, item);
+
+		// Is this the same Item we wanted to drop?
+		assertEquals(item, entity.getItemStack());
+
+		// Does our Item exist in the correct World?
+		assertTrue(world.getEntities().contains(entity));
+
+		// Is it at the right location?
+		assertEquals(location, entity.getLocation());
+	}
+
+	@Test
+	void testDropItemNaturally()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		ItemStack item = new ItemStack(Material.EMERALD);
+		Location location = new Location(world, 200, 100, 200);
+
+		Item entity = world.dropItemNaturally(location, item);
+
+		// Is this the same Item we wanted to drop?
+		assertEquals(item, entity.getItemStack());
+
+		// Does our Item exist in the correct World?
+		assertTrue(world.getEntities().contains(entity));
+
+		// Has the Location been slightly nudged?
+		assertNotEquals(location, entity.getLocation());
+	}
+
+	@Test
+	void testDropItemConsumer()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		ItemStack item = new ItemStack(Material.BEACON);
+		Location location = new Location(world, 200, 50, 500);
+
+		Item entity = world.dropItem(location, item, n ->
+		{
+			// This consumer should be invoked BEFORE the actually spawned.
+			assertFalse(world.getEntities().contains(n));
+		});
+
+		assertEquals(item, entity.getItemStack());
+		assertTrue(world.getEntities().contains(entity));
+	}
+
+	@Test
+	void drop_Item_CorrectEvent()
+	{
+		WorldMock world = new WorldMock();
+		Entity entity = world.dropItem(new Location(world, 0, 5, 0), new ItemStack(Material.STONE));
+		server.getPluginManager().assertEventFired(ItemSpawnEvent.class, (e) -> !e.isCancelled());
+	}
+
+	@Test
+	void spawn_NullLocation_ThrowsException()
+	{
+		WorldMock world = new WorldMock();
+		assertThrowsExactly(IllegalArgumentException.class, () -> world.spawn(null, Zombie.class));
+	}
+
+	@Test
+	void spawn_NullClass_ThrowsException()
+	{
+		WorldMock world = new WorldMock();
+		assertThrowsExactly(IllegalArgumentException.class, () -> world.spawn(new Location(world, 0, 5, 0), null));
+	}
+
+	@Test
+	void worldPlayEffect_NullData()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Location loc = new Location(world, 0, 0, 0);
 		assertThrows(IllegalArgumentException.class, () ->
 		{
-			world.playEffect(new Location(world, 0, 0, 0), Effect.STEP_SOUND, null);
+			world.playEffect(loc, Effect.STEP_SOUND, null);
 		});
 	}
 
 	@Test
-	public void worldPlayEffect_IncorrectData()
+	void worldPlayEffect_IncorrectData()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Location loc = new Location(world, 0, 0, 0);
 		assertThrows(IllegalArgumentException.class, () ->
 		{
-			world.playEffect(new Location(world, 0, 0, 0), Effect.STEP_SOUND, 1.0f);
+			world.playEffect(loc, Effect.STEP_SOUND, 1.0f);
 		});
 	}
 
@@ -407,7 +487,99 @@ class WorldMockTest
 	}
 
 	@Test
-	public void setDifficulty()
+	void spawn_AddedToEntities()
+	{
+		WorldMock world = new WorldMock();
+		Entity zombie = world.spawnEntity(new Location(world, 0, 5, 0), EntityType.ZOMBIE);
+		assertEquals(1, world.getEntities().size());
+		assertEquals(zombie, world.getEntities().get(0));
+	}
+
+	@Test
+	void spawn_CorrectLocation()
+	{
+		WorldMock world = new WorldMock();
+		Location location = new Location(world, 100, 20, 50);
+		Entity zombie = world.spawnEntity(location, EntityType.ZOMBIE);
+		assertEquals(100, zombie.getLocation().getBlockX());
+		assertEquals(20, zombie.getLocation().getBlockY());
+		assertEquals(50, zombie.getLocation().getBlockZ());
+	}
+
+	@Test
+	void spawn_ArmorStand_CorrectType()
+	{
+		WorldMock world = new WorldMock();
+		Entity entity = world.spawnEntity(new Location(world, 0, 5, 0), EntityType.ARMOR_STAND);
+		assertInstanceOf(ArmorStandMock.class, entity);
+	}
+
+	@Test
+	void spawn_ArmorStand_CorrectEvent()
+	{
+		WorldMock world = new WorldMock();
+		Entity entity = world.spawnEntity(new Location(world, 0, 5, 0), EntityType.ARMOR_STAND);
+		server.getPluginManager().assertEventFired(CreatureSpawnEvent.class, (e) -> e.getSpawnReason() == CreatureSpawnEvent.SpawnReason.CUSTOM);
+		server.getPluginManager().assertEventFired(CreatureSpawnEvent.class, (e) -> !e.isCancelled());
+	}
+
+	@Test
+	void spawn_ExperienceOrb_CorrectType()
+	{
+		WorldMock world = new WorldMock();
+		Entity entity = world.spawnEntity(new Location(world, 0, 5, 0), EntityType.EXPERIENCE_ORB);
+		assertInstanceOf(ExperienceOrbMock.class, entity);
+	}
+
+	@Test
+	void spawn_Firework_CorrectType()
+	{
+		WorldMock world = new WorldMock();
+		Entity entity = world.spawnEntity(new Location(world, 0, 5, 0), EntityType.FIREWORK);
+		assertInstanceOf(FireworkMock.class, entity);
+	}
+
+	@Test
+	void spawn_Firework_CorrectEvent()
+	{
+		WorldMock world = new WorldMock();
+		Entity entity = world.spawnEntity(new Location(world, 0, 5, 0), EntityType.FIREWORK);
+		server.getPluginManager().assertEventFired(ProjectileLaunchEvent.class, (e) -> !e.isCancelled());
+	}
+
+	@Test
+	void spawn_Item_ThrowsException()
+	{
+		WorldMock world = new WorldMock();
+		assertThrowsExactly(IllegalArgumentException.class, () -> world.spawnEntity(new Location(world, 0, 5, 0), EntityType.DROPPED_ITEM));
+	}
+
+	@Test
+	void spawn_Player_ThrowsException()
+	{
+		WorldMock world = new WorldMock();
+		assertThrowsExactly(IllegalArgumentException.class, () -> world.spawnEntity(new Location(world, 0, 5, 0), EntityType.PLAYER));
+	}
+
+	@Test
+	void spawn_Zombie_CorrectType()
+	{
+		WorldMock world = new WorldMock();
+		Entity entity = world.spawnEntity(new Location(world, 0, 5, 0), EntityType.ZOMBIE);
+		assertInstanceOf(ZombieMock.class, entity);
+	}
+
+	@Test
+	void spawn_Zombie_CorrectEvent()
+	{
+		WorldMock world = new WorldMock();
+		Entity entity = world.spawnEntity(new Location(world, 0, 5, 0), EntityType.ZOMBIE);
+		server.getPluginManager().assertEventFired(CreatureSpawnEvent.class, (e) -> e.getSpawnReason() == CreatureSpawnEvent.SpawnReason.CUSTOM);
+		server.getPluginManager().assertEventFired(CreatureSpawnEvent.class, (e) -> !e.isCancelled());
+	}
+
+	@Test
+	void setDifficulty()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		assertNotNull(world.getDifficulty());
@@ -416,7 +588,7 @@ class WorldMockTest
 	}
 
 	@Test
-	public void spawnMonster_Peaceful()
+	void spawnMonster_Peaceful()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		world.setDifficulty(Difficulty.PEACEFUL);
@@ -426,7 +598,7 @@ class WorldMockTest
 	}
 
 	@Test
-	public void spawnFriendly_Peaceful()
+	void spawnFriendly_Peaceful()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		world.setDifficulty(Difficulty.PEACEFUL);
