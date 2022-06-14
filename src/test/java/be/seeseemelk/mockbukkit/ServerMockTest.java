@@ -58,7 +58,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
-import java.util.concurrent.atomic.AtomicReference;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
@@ -556,7 +555,7 @@ class ServerMockTest
 	@Test
 	void testDefaultPotionEffects()
 	{
-		assertEquals(32, PotionEffectType.values().length);
+		assertEquals(33, PotionEffectType.values().length);
 
 		for (PotionEffectType type : PotionEffectType.values())
 		{
