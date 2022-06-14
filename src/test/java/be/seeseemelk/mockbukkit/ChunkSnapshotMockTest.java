@@ -21,7 +21,7 @@ class ChunkSnapshotMockTest
 	private Chunk chunk;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		server = MockBukkit.mock();
 		world = new WorldMock(Material.GRASS, 0, 319, 4);
@@ -29,7 +29,7 @@ class ChunkSnapshotMockTest
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}

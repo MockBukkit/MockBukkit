@@ -12,18 +12,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class MockChunkDataTest
+class MockChunkDataTest
 {
 
 	private ServerMock server;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		server = MockBukkit.mock();
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}

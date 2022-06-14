@@ -1,19 +1,17 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import java.util.UUID;
-
+import be.seeseemelk.mockbukkit.ServerMock;
 import org.bukkit.entity.Projectile;
 import org.bukkit.projectiles.ProjectileSource;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import be.seeseemelk.mockbukkit.ServerMock;
+import java.util.UUID;
 
 /**
  * The {@link ProjectileMock} is an {@link EntityMock} representing a generic {@link Projectile}.
  *
  * @author TheBusyBiscuit
- *
  */
 public abstract class ProjectileMock extends EntityMock implements Projectile
 {
@@ -21,7 +19,7 @@ public abstract class ProjectileMock extends EntityMock implements Projectile
 	private ProjectileSource source;
 	private boolean bounce;
 
-	public ProjectileMock(@NotNull ServerMock server, @NotNull UUID uuid)
+	protected ProjectileMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 	}
