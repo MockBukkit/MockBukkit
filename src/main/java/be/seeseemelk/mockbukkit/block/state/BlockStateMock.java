@@ -251,9 +251,9 @@ public class BlockStateMock implements BlockState
 	{
 		final int prime = 31;
 		int hash = 1;
-		hash = prime * hash + (this.getWorld() != null ? this.getWorld().hashCode() : 0);
-		hash = prime * hash + (this.getLocation() != null ? this.getLocation().hashCode() : 0);
-		hash = prime * hash + (this.getBlockData() != null ? this.getBlockData().hashCode() : 0);
+		hash = prime * hash + (this.isPlaced() ? this.getWorld().hashCode() : 0);
+		hash = prime * hash + (this.isPlaced() ? this.getLocation().hashCode() : 0);
+//		hash = prime * hash + (this.getBlockData() != null ? this.getBlockData().hashCode() : 0); Not implemented
 		return hash;
 	}
 
