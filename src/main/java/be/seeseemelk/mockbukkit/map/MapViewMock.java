@@ -123,13 +123,7 @@ public class MapViewMock implements MapView
 		// canvases should always be in sync with renderers.
 		for (MapCanvasMock canvas : this.canvases.get(renderer).values())
 		{
-			for (int x = 0; x < 128; ++x)
-			{
-				for (int y = 0; y < 128; ++y)
-				{
-					canvas.setPixel(x, y, (byte) - 1);
-				}
-			}
+			MapCanvasMock.executeForAllPixels((x, y) -> canvas.setPixel(x, y, (byte) -1));
 		}
 
 		this.canvases.remove(renderer);

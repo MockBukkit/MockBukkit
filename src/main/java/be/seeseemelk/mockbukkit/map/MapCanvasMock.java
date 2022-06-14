@@ -11,19 +11,22 @@ import org.jetbrains.annotations.NotNull;
 import java.awt.Color;
 import java.awt.Image;
 import java.util.Arrays;
+import java.util.function.BiConsumer;
 
 public class MapCanvasMock implements MapCanvas
 {
 
+	private static final int MAP_SIZE = 128;
+
 	private final MapViewMock mapView;
-	private final byte[][] pixels = new byte[128][128];
+	private final byte[][] pixels = new byte[MAP_SIZE][MAP_SIZE];
 	private byte[][] base;
 	private MapCursorCollection cursors = new MapCursorCollection();
 
 	protected MapCanvasMock(MapViewMock mapView)
 	{
 		this.mapView = mapView;
-		Arrays.stream(pixels).forEach(x -> Arrays.fill(x, (byte) - 1));
+		Arrays.stream(pixels).forEach(x -> Arrays.fill(x, (byte) -1));
 	}
 
 	@Override
@@ -149,6 +152,22 @@ public class MapCanvasMock implements MapCanvas
 				}
 			}
 			x += sprite.getWidth() + 1;
+		}
+	}
+
+	/**
+	 * Runs a Consumer for each pixel coordinate on a map.
+	 *
+	 * @param consumer The consumer to run. First parameter is the X coordinate, second is the Y coordinate.
+	 */
+	public static void executeForAllPixels(BiConsumer<Integer, Integer> consumer)
+	{
+		for (int x = 0; x < MAP_SIZE; ++x)
+		{
+			for (int y = 0; y < MAP_SIZE; ++y)
+			{
+				consumer.accept(x, y);
+			}
 		}
 	}
 

@@ -51,27 +51,18 @@ class MapCanvasMockTest
 	@Test
 	void getPixel_Constructor_NegativeOne()
 	{
-		for (int x = 0; x < 128; x++)
-		{
-			for (int y = 0; y < 128; y++)
-			{
-				assertEquals(-1, canvas.getPixel(x, y));
-			}
-		}
+		MapCanvasMock.executeForAllPixels((x, y) -> assertEquals(-1, canvas.getPixel(x, y)));
 	}
 
 	@Test
 	void setPixel_SetsPixel()
 	{
-		for (int x = 0; x < 128; x++)
+		MapCanvasMock.executeForAllPixels((x, y) ->
 		{
-			for (int y = 0; y < 128; y++)
-			{
-				byte b = (byte) ThreadLocalRandom.current().nextInt(Byte.MAX_VALUE);
-				canvas.setPixel(x, y, b);
-				assertEquals(b, canvas.getPixel(x, y));
-			}
-		}
+			byte b = (byte) ThreadLocalRandom.current().nextInt(Byte.MAX_VALUE);
+			canvas.setPixel(x, y, b);
+			assertEquals(b, canvas.getPixel(x, y));
+		});
 	}
 
 	@Test
@@ -90,13 +81,7 @@ class MapCanvasMockTest
 
 		canvas.drawImage(0, 0, image);
 
-		for (int x = 0; x < 128; x++)
-		{
-			for (int y = 0; y < 128; y++)
-			{
-				assertEquals(bytes[x][y], canvas.getPixel(x, y));
-			}
-		}
+		MapCanvasMock.executeForAllPixels((x, y) -> assertEquals(bytes[x][y], canvas.getPixel(x, y)));
 	}
 
 	@Test
@@ -110,13 +95,7 @@ class MapCanvasMockTest
 
 		canvas.drawText(0, 0, MinecraftFont.Font, "Hello World!");
 
-		for (int x = 0; x < 128; x++)
-		{
-			for (int y = 0; y < 128; y++)
-			{
-				assertEquals(bytes[x][y], canvas.getPixel(x, y));
-			}
-		}
+		MapCanvasMock.executeForAllPixels((x, y) -> assertEquals(bytes[x][y], canvas.getPixel(x, y)));
 	}
 
 }
