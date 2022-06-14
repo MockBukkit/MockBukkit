@@ -15,7 +15,7 @@
     <a href="https://sonarcloud.io/component_measures?id=MockBukkit_MockBukkit&metric=sqale_rating&view=list">
         <img alt="Maintainability" src="https://sonarcloud.io/api/project_badges/measure?project=MockBukkit_MockBukkit&metric=sqale_rating">
     </a>
-    <a href="https://sonarcloud.io/api/project_badges/measure?project=MockBukkit_MockBukkit&metric=bugs">
+    <a href="https://sonarcloud.io/project/issues?resolved=false&types=BUG&id=MockBukkit_MockBukkit">
         <img alt="Bugs" src="https://sonarcloud.io/api/project_badges/measure?project=MockBukkit_MockBukkit&metric=bugs">
     </a>
     <!-- Logo -->

@@ -22,13 +22,13 @@ class KnowledgeBookMetaMockTest
 	private final int MAX_RECIPES = 32767;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		MockBukkit.mock();
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}

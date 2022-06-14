@@ -1,9 +1,9 @@
 package be.seeseemelk.mockbukkit.block.state;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import com.google.common.base.Preconditions;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
-import org.apache.commons.lang.Validate;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -66,7 +66,8 @@ public class SignMock extends TileStateMock implements Sign
 	@Override
 	public void line(int index, @NotNull Component line) throws IndexOutOfBoundsException
 	{
-		Validate.notNull(line, "Line cannot be null!");
+
+		Preconditions.checkNotNull(line, "Line cannot be null!");
 		lines[index] = LegacyComponentSerializer.legacySection().serialize(line);
 	}
 
@@ -96,7 +97,7 @@ public class SignMock extends TileStateMock implements Sign
 	@Deprecated
 	public void setLine(int index, @NotNull String line) throws IndexOutOfBoundsException
 	{
-		Validate.notNull(line, "Line cannot be null!");
+		Preconditions.checkNotNull(line, "Line cannot be null!");
 		lines[index] = line;
 	}
 
