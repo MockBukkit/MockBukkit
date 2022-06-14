@@ -182,8 +182,7 @@ public class ItemFactoryMock implements ItemFactory
 	@Override
 	public @NotNull Component displayName(@NotNull ItemStack itemStack)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return itemStack.displayName();
 	}
 
 	@Override
