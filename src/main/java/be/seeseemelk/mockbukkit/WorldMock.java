@@ -1062,7 +1062,8 @@ public class WorldMock implements World
 		}
 		ThunderChangeEvent thunder = new ThunderChangeEvent(this, thundering, ThunderChangeEvent.Cause.PLUGIN); // Paper
 		Bukkit.getServer().getPluginManager().callEvent(thunder);
-		if (thunder.isCancelled()) {
+		if (thunder.isCancelled()) 
+		{
 			return;
 		}
 		this.thundering = thundering;
