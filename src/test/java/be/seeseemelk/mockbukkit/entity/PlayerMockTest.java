@@ -1665,4 +1665,18 @@ class PlayerMockTest
 		});
 	}
 
+	@Test
+	void testPlayerLastDeathLocation_Set()
+	{
+		assertTrue(player.getLastDeathLocation().getX() == 0.0
+				&& player.getLastDeathLocation().getY() == 0.0
+				&& player.getLastDeathLocation().getZ() == 0.0);
+
+		Location loc = new Location(new WorldMock(), 69, 69, 69);
+
+		player.setLastDeathLocation(loc);
+
+		assertEquals(loc, player.getLastDeathLocation());
+	}
+
 }

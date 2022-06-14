@@ -3,7 +3,12 @@ package be.seeseemelk.mockbukkit.inventory.meta;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
 import com.destroystokyo.paper.Namespaced;
+import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.SetMultimap;
 import net.kyori.adventure.text.Component;
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.Material;
@@ -15,10 +20,10 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.Repairable;
+import org.bukkit.inventory.meta.tags.CustomItemTagContainer;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,6 +51,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	private int damage = 0;
 	private int repairCost = 0;
 	private Map<Enchantment, Integer> enchants = new HashMap<>();
+	private Multimap<Attribute, AttributeModifier> attributeModifiers;
 	private Set<ItemFlag> hideFlags = EnumSet.noneOf(ItemFlag.class);
 	private PersistentDataContainerMock persistentDataContainer = new PersistentDataContainerMock();
 	private boolean unbreakable = false;
@@ -81,6 +87,10 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		if (meta instanceof ItemMetaMock)
 		{
 			this.persistentDataContainer = ((ItemMetaMock) meta).persistentDataContainer;
+		}
+		if (meta.hasAttributeModifiers())
+		{
+			this.attributeModifiers = LinkedHashMultimap.create(meta.getAttributeModifiers());
 		}
 	}
 
@@ -263,13 +273,9 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		{
 			return false;
 		}
-		if (hasCustomModelData() != meta.hasCustomModelData()
-		        || hasCustomModelData() && getCustomModelData() != meta.getCustomModelData())
-		{
-			return false;
-		}
 
-		return true;
+		return hasCustomModelData() == meta.hasCustomModelData()
+				&& (!hasCustomModelData() || getCustomModelData() == meta.getCustomModelData());
 	}
 
 	@Override
@@ -287,7 +293,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 			meta.unbreakable = unbreakable;
 			meta.customModelData = customModelData;
 			meta.enchants = new HashMap<>(enchants);
-			meta.persistentDataContainer = new PersistentDataContainerMock((PersistentDataContainerMock) persistentDataContainer);
+			meta.persistentDataContainer = new PersistentDataContainerMock(persistentDataContainer);
 			meta.damage = damage;
 			meta.repairCost = repairCost;
 			meta.hideFlags = EnumSet.copyOf(hideFlags);
@@ -348,7 +354,6 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		throw new UnimplementedOperationException();
 	}
 
-	@NotNull
 	@Override
 	public void setPlaceableKeys(@NotNull Collection<Namespaced> canPlaceOn)
 	{
@@ -489,12 +494,12 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 
 		if (this.displayName != null)
 		{
-			map.put("displayName", this.displayName);
+			map.put("display-name", this.displayName);
 		}
 
 		if (this.localizedName != null)
 		{
-			map.put("localizedName", this.localizedName);
+			map.put("loc-name", this.localizedName);
 		}
 
 		if (this.lore != null)
@@ -504,22 +509,20 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 
 		if (this.customModelData != null)
 		{
-			map.put("customModelData", this.customModelData);
+			map.put("custom-model-data", this.customModelData);
 		}
 
 		map.put("enchants", this.enchants);
 
-		/* Not implemented.
 		if (hasAttributeModifiers())
 		{
-			map.put("attributeModifiers", this.attributeModifiers);
+			map.put("attribute-modifiers", this.attributeModifiers);
 		}
-		*/
 
-		map.put("repairCost", this.repairCost);
-		map.put("itemFlags", this.hideFlags);
-		map.put("unbreakable", this.unbreakable);
-		map.put("damage", this.damage);
+		map.put("repair-cost", this.repairCost);
+		map.put("ItemFlags", this.hideFlags);
+		map.put("Unbreakable", this.unbreakable);
+		map.put("Damage", this.damage);
 
 		/* Not implemented.
 		if (!this.customTagContainer.isEmpty())
@@ -528,7 +531,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		}
 		*/
 
-		map.put("persistentDataContainer", this.persistentDataContainer.serialize());
+		map.put("PublicBukkitValues", this.persistentDataContainer.serialize());
 
 		// Return map
 		return map;
@@ -545,19 +548,19 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	{
 		ItemMetaMock serialMock = new ItemMetaMock();
 
-		serialMock.displayName = (String) args.get("displayName");
+		serialMock.displayName = (String) args.get("display-name");
 		serialMock.lore = (List<String>) args.get("lore");
-		serialMock.localizedName = (String) args.get("localizedName");
+		serialMock.localizedName = (String) args.get("loc-name");
 		serialMock.enchants = (Map<Enchantment, Integer>) args.get("enchants");
-		serialMock.hideFlags = (Set<ItemFlag>) args.get("itemFlags");
-		serialMock.unbreakable = (boolean) args.get("unbreakable");
-		// serialMock.setAttributeModifiers(); // AttributeModifiers are unimplemented in mock
+		serialMock.hideFlags = (Set<ItemFlag>) args.get("ItemFlags");
+		serialMock.unbreakable = (boolean) args.get("Unbreakable");
+		serialMock.setAttributeModifiers((Multimap<Attribute, AttributeModifier>) args.get("AttributeModifiers"));
 		// customTagContainer is also unimplemented in mock.
-		serialMock.customModelData = (Integer) args.get("customModelData");
-		Map<String, Object> map = (Map<String, Object>) args.get("persistentDataContainer");
+		serialMock.customModelData = (Integer) args.get("custom-model-data");
+		Map<String, Object> map = (Map<String, Object>) args.get("PublicBukkitValues");
 		serialMock.persistentDataContainer = PersistentDataContainerMock.deserialize(map);
-		serialMock.damage = (Integer) args.get("damage");
-		serialMock.repairCost = (Integer) args.get("repairCost");
+		serialMock.damage = (int) args.get("Damage");
+		serialMock.repairCost = (int) args.get("repair-cost");
 		return serialMock;
 	}
 
@@ -713,67 +716,106 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		this.repairCost = cost;
 	}
 
+	private void checkAttributeMap()
+	{
+		if (this.attributeModifiers == null)
+		{
+			this.attributeModifiers = LinkedHashMultimap.create();
+		}
+	}
+
 	@Override
 	public boolean hasAttributeModifiers()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return attributeModifiers != null && !attributeModifiers.isEmpty();
 	}
 
 	@Override
 	public Multimap<Attribute, AttributeModifier> getAttributeModifiers()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.hasAttributeModifiers()
+				? ImmutableMultimap.copyOf(attributeModifiers)
+				: null;
 	}
 
 	@Override
 	public void setAttributeModifiers(Multimap<Attribute, AttributeModifier> attributeModifiers)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (attributeModifiers == null || attributeModifiers.isEmpty())
+		{
+			this.attributeModifiers = LinkedHashMultimap.create();
+			return;
+		}
+
+		this.checkAttributeMap();
+		this.attributeModifiers.clear();
+
+		attributeModifiers.entries().stream()
+				.filter(entry -> entry.getKey() != null && entry.getValue() != null)
+				.forEach(entry -> this.attributeModifiers.put(entry.getKey(), entry.getValue()));
 	}
 
 	@Override
-	public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot)
+	public @NotNull Multimap<Attribute, AttributeModifier> getAttributeModifiers(@NotNull EquipmentSlot slot)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.checkAttributeMap();
+		SetMultimap<Attribute, AttributeModifier> result = LinkedHashMultimap.create();
+
+		this.attributeModifiers.entries().stream()
+				.filter(entry -> entry.getValue().getSlot() != null && entry.getValue().getSlot() == slot)
+				.forEach(entry -> result.put(entry.getKey(), entry.getValue()));
+
+		return result;
 	}
 
 	@Override
-	public Collection<AttributeModifier> getAttributeModifiers(Attribute attribute)
+	public Collection<AttributeModifier> getAttributeModifiers(@NotNull Attribute attribute)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(attribute, "Attribute cannot be null");
+		return this.attributeModifiers.containsKey(attribute)
+				? ImmutableList.copyOf(this.attributeModifiers.get(attribute))
+				: null;
 	}
 
 	@Override
-	public boolean addAttributeModifier(Attribute attribute, AttributeModifier modifier)
+	public boolean addAttributeModifier(@NotNull Attribute attribute, @NotNull AttributeModifier modifier)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(attribute, "Attribute cannot be null");
+		Preconditions.checkNotNull(modifier, "AttributeModifier cannot be null");
+		this.checkAttributeMap();
+		for (Map.Entry<Attribute, AttributeModifier> entry : this.attributeModifiers.entries())
+		{
+			Preconditions.checkArgument(!entry.getValue().getUniqueId().equals(modifier.getUniqueId()), "Cannot register AttributeModifier. Modifier is already applied! %s", modifier);
+		}
+		return this.attributeModifiers.put(attribute, modifier);
 	}
 
 	@Override
-	public boolean removeAttributeModifier(Attribute attribute)
+	public boolean removeAttributeModifier(@NotNull Attribute attribute)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(attribute, "Attribute cannot be null");
+		this.checkAttributeMap();
+		return !this.attributeModifiers.removeAll(attribute).isEmpty();
 	}
 
 	@Override
-	public boolean removeAttributeModifier(EquipmentSlot slot)
+	public boolean removeAttributeModifier(@NotNull EquipmentSlot slot)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.checkAttributeMap();
+		// Match against null because as of 1.13, AttributeModifiers without a set slot are active in any slot.
+		return this.attributeModifiers.entries().removeIf(entry -> entry.getValue().getSlot() == null || entry.getValue().getSlot() == slot);
 	}
 
 	@Override
-	public boolean removeAttributeModifier(Attribute attribute, AttributeModifier modifier)
+	public boolean removeAttributeModifier(@NotNull Attribute attribute, @NotNull AttributeModifier modifier)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(attribute, "Attribute cannot be null");
+		Preconditions.checkNotNull(modifier, "AttributeModifier cannot be null");
+		this.checkAttributeMap();
+
+		return this.attributeModifiers.entries().removeIf(entry ->
+				(entry.getKey() == null || entry.getValue() == null) || (entry.getKey() == attribute && entry.getValue().getUniqueId().equals(modifier.getUniqueId()))
+		);
 	}
 
 	@NotNull
@@ -786,14 +828,14 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 
 	@Override
 	@SuppressWarnings("deprecation")
-	public org.bukkit.inventory.meta.tags.CustomItemTagContainer getCustomTagContainer()
+	public @NotNull CustomItemTagContainer getCustomTagContainer()
 	{
 		// This was replaced by PersistentDataContainer!
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public PersistentDataContainer getPersistentDataContainer()
+	public @NotNull PersistentDataContainer getPersistentDataContainer()
 	{
 		return this.persistentDataContainer;
 	}
@@ -822,4 +864,5 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
+
 }
