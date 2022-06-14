@@ -1,7 +1,5 @@
 package be.seeseemelk.mockbukkit.block.state;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
@@ -13,7 +11,6 @@ import org.jetbrains.annotations.NotNull;
 
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import be.seeseemelk.mockbukkit.inventory.LecternInventoryMock;
-import org.jetbrains.annotations.Nullable;
 
 public class LecternMock extends ContainerMock implements Lectern
 {
@@ -43,7 +40,7 @@ public class LecternMock extends ContainerMock implements Lectern
 	}
 
 	@Override
-	public BlockState getSnapshot()
+	public @NotNull BlockState getSnapshot()
 	{
 		return new LecternMock(this);
 	}
@@ -81,20 +78,6 @@ public class LecternMock extends ContainerMock implements Lectern
 		{
 			return 1;
 		}
-	}
-
-	@Override
-	public @Nullable Component customName()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void customName(@Nullable Component customName)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 }
