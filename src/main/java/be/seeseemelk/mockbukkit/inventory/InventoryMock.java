@@ -1,7 +1,7 @@
 package be.seeseemelk.mockbukkit.inventory;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import org.apache.commons.lang.Validate;
+import com.google.common.base.Preconditions;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
@@ -17,7 +17,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Objects;
-import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -37,9 +36,9 @@ public class InventoryMock implements Inventory
 
 	public InventoryMock(@Nullable InventoryHolder holder, int size, @NotNull InventoryType type)
 	{
-		Validate.isTrue(9 <= size && size <= 54 && size % 9 == 0,
-		                "Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got " + size + ")");
-		Validate.notNull(type, "The InventoryType must not be null!");
+		Preconditions.checkArgument(9 <= size && size <= 54 && size % 9 == 0,
+				"Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got " + size + ")");
+		Preconditions.checkNotNull(type, "The InventoryType must not be null!");
 
 		this.holder = holder;
 		this.type = type;
@@ -49,7 +48,7 @@ public class InventoryMock implements Inventory
 
 	public InventoryMock(@Nullable InventoryHolder holder, @NotNull InventoryType type)
 	{
-		Validate.notNull(type, "The InventoryType must not be null!");
+		Preconditions.checkNotNull(type, "The InventoryType must not be null!");
 
 		this.holder = holder;
 		this.type = type;
@@ -358,7 +357,7 @@ public class InventoryMock implements Inventory
 	@Override
 	public @NotNull HashMap<Integer, ? extends ItemStack> all(@NotNull Material material) throws IllegalArgumentException
 	{
-		Validate.notNull(material, "Material cannot be null");
+		Preconditions.checkNotNull(material, "Material cannot be null");
 		HashMap<Integer, ItemStack> slots = new HashMap<>();
 
 		ItemStack[] items = this.getStorageContents();
@@ -393,7 +392,7 @@ public class InventoryMock implements Inventory
 	@Override
 	public int first(@NotNull Material material) throws IllegalArgumentException
 	{
-		Validate.notNull(material, "Material cannot be null");
+		Preconditions.checkNotNull(material, "Material cannot be null");
 		ItemStack[] items = this.getStorageContents();
 		for (int i = 0; i < items.length; i++)
 		{
@@ -440,7 +439,7 @@ public class InventoryMock implements Inventory
 	@Override
 	public void remove(@NotNull Material material) throws IllegalArgumentException
 	{
-		Validate.notNull(material, "Material cannot be null");
+		Preconditions.checkNotNull(material, "Material cannot be null");
 		ItemStack[] items = this.getStorageContents();
 		for (int i = 0; i < items.length; i++)
 		{

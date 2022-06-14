@@ -12,10 +12,12 @@ import be.seeseemelk.mockbukkit.inventory.meta.FireworkMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.KnowledgeBookMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.LeatherArmorMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.MapMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.PotionMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.SkullMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.SuspiciousStewMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.TropicalFishBucketMetaMock;
+import com.google.common.base.Preconditions;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.md_5.bungee.api.chat.BaseComponent;
@@ -53,9 +55,7 @@ public class ItemFactoryMock implements ItemFactory
 		case KNOWLEDGE_BOOK -> KnowledgeBookMetaMock.class;
 		case LEATHER_BOOTS, LEATHER_CHESTPLATE, LEATHER_HELMET, LEATHER_LEGGINGS ->
 				LeatherArmorMetaMock.class;
-		case MAP ->
-				// TODO Auto-generated method stub
-				throw new UnimplementedOperationException();
+		case FILLED_MAP -> MapMetaMock.class;
 		case FIREWORK_STAR -> FireworkEffectMetaMock.class;
 		case FIREWORK_ROCKET -> FireworkMetaMock.class;
 		case POTION, LINGERING_POTION, SPLASH_POTION -> PotionMetaMock.class;
@@ -71,8 +71,10 @@ public class ItemFactoryMock implements ItemFactory
 	}
 
 	@Override
-	public ItemMeta getItemMeta(Material material)
+	public ItemMeta getItemMeta(@NotNull Material material)
 	{
+		Preconditions.checkNotNull(material, "Material cannot be null");
+
 		Class<? extends ItemMeta> clazz = null;
 
 		try
@@ -80,7 +82,7 @@ public class ItemFactoryMock implements ItemFactory
 			clazz = getItemMetaClass(material);
 			return clazz.getDeclaredConstructor().newInstance();
 		}
-		catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e)
+		catch (ReflectiveOperationException e)
 		{
 			throw new UnsupportedOperationException("Can't instantiate class '" + clazz + "'");
 		}

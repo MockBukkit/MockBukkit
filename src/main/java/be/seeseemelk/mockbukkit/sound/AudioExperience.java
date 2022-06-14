@@ -1,6 +1,6 @@
 package be.seeseemelk.mockbukkit.sound;
 
-import org.apache.commons.lang.Validate;
+import com.google.common.base.Preconditions;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
@@ -24,9 +24,9 @@ public final class AudioExperience
 	public AudioExperience(@NotNull String sound, @NotNull SoundCategory category, @NotNull Location loc, float volume,
 	                       float pitch)
 	{
-		Validate.notNull(sound, "The played sound cannot be null!");
-		Validate.notNull(category, "The category must not be null!");
-		Validate.notNull(loc, "The location cannot be null!");
+		Preconditions.checkNotNull(sound, "The played sound cannot be null!");
+		Preconditions.checkNotNull(category, "The category cannot be null!");
+		Preconditions.checkNotNull(loc, "The location cannot be null!");
 
 		this.sound = sound;
 		this.category = category;
