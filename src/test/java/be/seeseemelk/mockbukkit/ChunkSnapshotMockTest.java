@@ -76,7 +76,8 @@ class ChunkSnapshotMockTest
 	@Test
 	void getBiome_DoesntInclideBiome_ThrowsException()
 	{
-		assertThrowsExactly(IllegalStateException.class, () -> {
+		assertThrowsExactly(IllegalStateException.class, () ->
+		{
 			chunk.getChunkSnapshot().getBiome(0, 0, 0);
 		});
 	}
