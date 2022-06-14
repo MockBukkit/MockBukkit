@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -11,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assumptions.assumeFalse;
 
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.server.PluginEnableEvent;
 import org.bukkit.plugin.Plugin;
 import org.junit.jupiter.api.AfterEach;
@@ -20,13 +22,13 @@ import org.junit.jupiter.api.Test;
 class MockBukkitTest
 {
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		MockBukkit.setServerInstanceToNull();
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		if (MockBukkit.isMocked())
 		{
@@ -162,6 +164,29 @@ class MockBukkitTest
 		Plugin[] plugins = MockBukkit.getMock().getPluginManager().getPlugins();
 		assertThat(plugins.length, equalTo(1));
 		assertThat(plugins[0].getName(), equalTo("TestPlugin"));
+	}
+
+	@Test
+	void load_PluginWithConfigFile_ConfigFileParsed()
+	{
+		MockBukkit.mock();
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		FileConfiguration config = plugin.getConfig();
+		String value = config.getString("foo");
+		assertThat(value, equalTo("bar"));
+	}
+
+	@Test
+	void ensureMocking_Mocking_DoesNothing()
+	{
+		MockBukkit.mock();
+		assertDoesNotThrow(MockBukkit::ensureMocking);
+	}
+
+	@Test
+	void ensureMocking_NotMocking_ThrowsException()
+	{
+		assertThrows(IllegalStateException.class, MockBukkit::ensureMocking);
 	}
 
 	private static class CustomServerMock extends ServerMock

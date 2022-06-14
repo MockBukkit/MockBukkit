@@ -1,4 +1,4 @@
-name: Gradle
+name: Build
 
 on:
   pull_request:
@@ -18,7 +18,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: 17
-          distribution: 'corretto'
+          distribution: 'temurin'
 
       - name: Restore caches
         uses: actions/cache@v3
@@ -96,7 +96,7 @@ jobs:
           gpg --batch --import private.key
           gpg --batch --export-secret-keys --passphrase $SIGN_KEY "Sebastiaan de Schaetzen <sebastiaan.de.schaetzen@gmail.com>" > private.gpg
 
-          ./gradlew publishMockBukkitPublicationToRepositoryRepository \
+          ./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository \
             -Pmockbukkit.version=$(echo ${{ steps.bump-semver.outputs.new_version }} | sed -e 's:v::') \
             -PossrhUsername=seeseemelk \
             -PossrhPassword=$OSSRH_PASSWORD \

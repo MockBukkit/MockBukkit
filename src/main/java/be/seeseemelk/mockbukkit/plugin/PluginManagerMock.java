@@ -3,7 +3,7 @@ package be.seeseemelk.mockbukkit.plugin;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
-import org.apache.commons.lang.Validate;
+import com.google.common.base.Preconditions;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.PluginCommandUtils;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -40,11 +40,13 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.nio.file.Files;
+
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+
 import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -55,6 +57,7 @@ import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
@@ -169,13 +172,40 @@ public class PluginManagerMock implements PluginManager
 	}
 
 	/**
-	 * Asserts that a specific event or once of it's sub-events has been fired at least once.
+	 * Asserts that a specific event or one of it's sub-events has been fired at least once.
 	 *
 	 * @param eventClass The class of the event to check for.
 	 */
 	public void assertEventFired(@NotNull Class<? extends Event> eventClass)
 	{
 		assertEventFired("No event of that type has been fired", eventClass::isInstance);
+	}
+
+	/**
+	 * Asserts that a specific event or one of it's sub-event has not been fired.
+	 *
+	 * @param eventClass The class of the event to check for.
+	 */
+	public void assertEventNotFired(@NotNull Class<? extends Event> eventClass)
+	{
+		assertEventNotFired(eventClass, "An event of type " + eventClass.getSimpleName() + " has been fired when it shouldn't have been");
+	}
+
+	/**
+	 * Asserts that a specific event or one of it's sub-event has not been fired.
+	 *
+	 * @param eventClass The class of the event to check for.
+	 * @param message    The message to print when failed.
+	 */
+	public void assertEventNotFired(@NotNull Class<? extends Event> eventClass, String message)
+	{
+		for (Event event : this.events)
+		{
+			if (eventClass.isAssignableFrom(event.getClass()))
+			{
+				fail(message);
+			}
+		}
 	}
 
 	@Override
@@ -442,13 +472,25 @@ public class PluginManagerMock implements PluginManager
 	 */
 	public void callEventAsynchronously(@NotNull Event event)
 	{
+		callEventAsynchronously(event, null);
+	}
+
+	/**
+	 * This method invokes {@link #callEvent(Event)} from a different {@link Thread}
+	 * using the {@link BukkitSchedulerMock}.
+	 *
+	 * @param event The asynchronous {@link Event} to call.
+	 * @param func A function to invoke after the event has been called.
+	 */
+	public <T extends Event> void callEventAsynchronously(@NotNull T event, Consumer<T> func)
+	{
 		if (!event.isAsynchronous())
 		{
 			throw new IllegalStateException("Synchronous Events cannot be called asynchronously.");
 		}
 
 		// Our Scheduler will call the Event on a dedicated Event Thread Executor
-		server.getScheduler().executeAsyncEvent(event);
+		server.getScheduler().executeAsyncEvent(event, func);
 	}
 
 	private void callRegisteredListener(@NotNull RegisteredListener registration, @NotNull Event event)
@@ -695,10 +737,11 @@ public class PluginManagerMock implements PluginManager
 	public void registerEvent(@NotNull Class<? extends Event> event, @NotNull Listener listener, @NotNull EventPriority priority,
 	                          @NotNull EventExecutor executor, @NotNull Plugin plugin, boolean ignoreCancelled)
 	{
-		Validate.notNull(listener, "Listener cannot be null");
-		Validate.notNull(priority, "Priority cannot be null");
-		Validate.notNull(executor, "Executor cannot be null");
-		Validate.notNull(plugin, "Plugin cannot be null");
+		Preconditions.checkNotNull(listener, "Listener cannot be null");
+		Preconditions.checkNotNull(listener, "Listener cannot be null");
+		Preconditions.checkNotNull(priority, "Priority cannot be null");
+		Preconditions.checkNotNull(executor, "Executor cannot be null");
+		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
 		if (!plugin.isEnabled())
 		{
 			throw new IllegalPluginAccessException("Plugin attempted to register " + event + " while not enabled");
