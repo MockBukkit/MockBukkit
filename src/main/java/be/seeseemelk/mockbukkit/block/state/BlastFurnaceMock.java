@@ -1,6 +1,5 @@
 package be.seeseemelk.mockbukkit.block.state;
 
-import be.seeseemelk.mockbukkit.block.state.AbstractFurnaceMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import org.bukkit.Material;
 import org.bukkit.block.BlastFurnace;
