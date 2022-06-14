@@ -40,7 +40,7 @@ import io.papermc.paper.datapack.DatapackManager;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 import net.md_5.bungee.api.chat.BaseComponent;
-import org.apache.commons.lang.Validate;
+import org.apache.commons.lang3.StringUtils;
 import org.bukkit.BanEntry;
 import org.bukkit.BanList;
 import org.bukkit.BanList.Type;
@@ -1657,7 +1657,8 @@ public class ServerMock extends Server.Spigot implements Server
 		registerPotionEffectType(29, "CONDUIT_POWER", false, 1950417);
 		registerPotionEffectType(30, "DOLPHINS_GRACE", false, 8954814);
 		registerPotionEffectType(31, "BAD_OMEN", false, 745784);
-		registerPotionEffectType(32, "HERO_OF_THE_VILLAGE", false, 45217);
+		registerPotionEffectType(32, "HERO_OF_THE_VILLAGE", false, 4521796);
+		registerPotionEffectType(33, "DARKNESS", false, 2696993);
 		PotionEffectType.stopAcceptingRegistrations();
 	}
 
