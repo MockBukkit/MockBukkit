@@ -17,6 +17,7 @@ import org.bukkit.GameRule;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Entity;
@@ -417,6 +418,45 @@ class WorldMockTest
 		assertEquals(Material.BEDROCK, world.getType(location));
 		world.setType(0, 1, 0, Material.DIRT);
 		assertEquals(Material.DIRT, world.getType(location));
+	}
+
+	@Test
+	void getDefaultBiome()
+	{
+		WorldMock world = new WorldMock(Material.GRASS_BLOCK, Biome.JUNGLE, 0, 256);
+		Biome biome = world.getBiome(0, 0, 0);
+		assertNotNull(biome);
+		assertEquals(Biome.JUNGLE, biome);
+	}
+
+	@Test
+	void getBiomeLegacy()
+	{
+		WorldMock world = new WorldMock(Material.GRASS_BLOCK, Biome.JUNGLE, 0, 256);
+		Biome biome3d = world.getBiome(0, 0, 0);
+		Biome biome2d = world.getBiome(0, 0);
+		assertNotNull(biome3d);
+		assertNotNull(biome2d);
+		assertEquals(biome3d, biome2d);
+	}
+
+	@Test
+	void setBiome()
+	{
+		WorldMock world = new WorldMock(Material.GRASS_BLOCK, Biome.JUNGLE, 0, 256);
+		world.setBiome(0, 0, 0, Biome.DESERT);
+		Biome biome = world.getBiome(0, 0, 0);
+		assertEquals(Biome.DESERT, biome);
+	}
+
+	@Test
+	void setBiome_CustomFails()
+	{
+		WorldMock world = new WorldMock(Material.GRASS_BLOCK, Biome.JUNGLE, 0, 256);
+		assertThrows(IllegalArgumentException.class, () ->
+		{
+			world.setBiome(0, 0, 0, Biome.CUSTOM);
+		});
 	}
 
 	@Test

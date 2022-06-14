@@ -1,5 +1,7 @@
 package be.seeseemelk.mockbukkit;
 
+import be.seeseemelk.mockbukkit.generator.BiomeProviderMock;
+import com.google.common.base.Preconditions;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.entity.ArmorStandMock;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
@@ -111,6 +113,7 @@ public class WorldMock implements World
 	private final PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
 	private final ServerMock server;
 	private final Material defaultBlock;
+	private final Biome defaultBiome;
 	private final int grassHeight;
 	private final int minHeight;
 	private final int maxHeight;
@@ -125,6 +128,8 @@ public class WorldMock implements World
 	private boolean storming = false;
 	private long seed = 0;
 	private WorldType worldType = WorldType.NORMAL;
+	private final BiomeProviderMock biomeProviderMock = new BiomeProviderMock();
+	private Map<Coordinate, Biome> biomes = new HashMap<>();
 	private Difficulty difficulty = Difficulty.NORMAL;
 
 	/**
@@ -137,7 +142,22 @@ public class WorldMock implements World
 	 */
 	public WorldMock(Material defaultBlock, int minHeight, int maxHeight, int grassHeight)
 	{
+		this(defaultBlock, Biome.PLAINS, minHeight, maxHeight, grassHeight);
+	}
+
+	/**
+	 * Creates a new mock world.
+	 *
+	 * @param defaultBlock The block that is spawned at locations 1 to {@code grassHeight}
+	 * @param defaultBiome The biome that every block will be in by default.
+	 * @param minHeight    The minimum height of the world.
+	 * @param maxHeight    The maximum height of the world.
+	 * @param grassHeight  The last {@code y} at which {@code defaultBlock} will spawn.
+	 */
+	public WorldMock(Material defaultBlock, Biome defaultBiome, int minHeight, int maxHeight, int grassHeight)
+	{
 		this.defaultBlock = defaultBlock;
+		this.defaultBiome = defaultBiome;
 		this.minHeight = minHeight;
 		this.maxHeight = maxHeight;
 		this.grassHeight = grassHeight;
@@ -176,6 +196,19 @@ public class WorldMock implements World
 		this.worldType = creator.type();
 		this.seed = creator.seed();
 		this.environment = creator.environment();
+	}
+
+	/**
+	 * Creates a new mock world with a specific height from 0.
+	 *
+	 * @param defaultBlock The block that is spawned at locations 1 to {@code grassHeight}
+	 * @param defaultBiome The biome that every block will be in by default.
+	 * @param maxHeight    The maximum height of the world.
+	 * @param grassHeight  The last {@code y} at which {@code defaultBlock} will spawn.
+	 */
+	public WorldMock(Material defaultBlock, Biome defaultBiome, int maxHeight, int grassHeight)
+	{
+		this(defaultBlock, defaultBiome,0, maxHeight, grassHeight);
 	}
 
 	/**
@@ -1143,9 +1176,7 @@ public class WorldMock implements World
 	@Override
 	public BiomeProvider getBiomeProvider()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		return biomeProviderMock;
 	}
 
 	@Override
@@ -1218,7 +1249,7 @@ public class WorldMock implements World
 	@Override
 	public @NotNull ChunkSnapshot getEmptyChunkSnapshot(int x, int z, boolean includeBiome, boolean includeBiomeTempRain)
 	{
-		return new ChunkSnapshotMock(x, z, getMinHeight(), getMaxHeight(), getName(), getFullTime(), Map.of());
+		return new ChunkSnapshotMock(x, z, getMinHeight(), getMaxHeight(), getName(), getFullTime(), Map.of(), (includeBiome || includeBiomeTempRain) ? Map.of() : null);
 	}
 
 	@Override
@@ -1246,16 +1277,16 @@ public class WorldMock implements World
 	@Deprecated
 	public Biome getBiome(int x, int z)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getBiome(x, 0, z);
 	}
 
 	@Override
 	@Deprecated
 	public void setBiome(int x, int z, Biome bio)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		for (int y = this.getMinHeight(); y < this.getMaxHeight(); y++) {
+			this.setBiome(x, y, z, bio);
+		}
 	}
 
 	@Override
@@ -2049,16 +2080,13 @@ public class WorldMock implements World
 	@Override
 	public Biome getBiome(@NotNull Location location)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		return this.getBiome(location.getBlockX(), location.getBlockY(), location.getBlockZ());
 	}
 
 	@Override
-	public Biome getBiome(int x, int y, int z)
+	public @NotNull Biome getBiome(int x, int y, int z)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return biomes.getOrDefault(new Coordinate(x, y, z), defaultBiome);
 	}
 
 	@Override
@@ -2071,16 +2099,27 @@ public class WorldMock implements World
 	@Override
 	public void setBiome(@NotNull Location location, @NotNull Biome biome)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		this.setBiome(location.getBlockX(), location.getBlockY(), location.getBlockZ(), biome);
 	}
 
 	@Override
-	public void setBiome(int x, int y, int z, Biome bio)
+	public void setBiome(int x, int y, int z, @NotNull Biome bio)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(bio != Biome.CUSTOM, "Cannot set the biome to %s", bio);
+		biomes.put(new Coordinate(x, y, z), bio);
+	}
+
+	protected Map<Coordinate, Biome> getBiomeMap()
+	{
+		return new HashMap<>(biomes);
+	}
+
+	/**
+	 * @return The default biome of this world.
+	 */
+	public Biome getDefaultBiome()
+	{
+		return defaultBiome;
 	}
 
 	@NotNull
