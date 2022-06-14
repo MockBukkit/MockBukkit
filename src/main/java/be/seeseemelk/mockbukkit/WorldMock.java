@@ -11,8 +11,8 @@ import be.seeseemelk.mockbukkit.entity.ZombieMock;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
 import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
 import com.destroystokyo.paper.HeightmapType;
+import com.google.common.base.Preconditions;
 import io.papermc.paper.world.MoonPhase;
-import org.apache.commons.lang.Validate;
 import org.bukkit.BlockChangeDelegate;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
@@ -621,9 +621,9 @@ public class WorldMock implements World
 	@Override
 	public @NotNull ItemEntityMock dropItem(@NotNull Location loc, @NotNull ItemStack item, @Nullable Consumer<Item> function)
 	{
-		Validate.notNull(loc, "The provided location must not be null.");
-		Validate.notNull(item, "Cannot drop items that are null.");
-		Validate.isTrue(!item.getType().isAir(), "Cannot drop air.");
+		Preconditions.checkNotNull(loc, "The provided location must not be null.");
+		Preconditions.checkNotNull(item, "Cannot drop items that are null.");
+		Preconditions.checkArgument(!item.getType().isAir(), "Cannot drop air.");
 
 		ItemEntityMock entity = new ItemEntityMock(server, UUID.randomUUID(), item);
 		entity.setLocation(loc);
@@ -648,7 +648,7 @@ public class WorldMock implements World
 	@Override
 	public @NotNull ItemEntityMock dropItemNaturally(@NotNull Location location, @NotNull ItemStack item, @Nullable Consumer<Item> function)
 	{
-		Validate.notNull(location, "The provided location must not be null.");
+		Preconditions.checkNotNull(location, "The provided location must not be null.");
 
 		Random random = ThreadLocalRandom.current();
 
@@ -1185,9 +1185,9 @@ public class WorldMock implements World
 	@Override
 	public void playEffect(@NotNull Location location, @NotNull Effect effect, int data, int radius)
 	{
-		Validate.notNull(location, "Location cannot be null");
-		Validate.notNull(effect, "Effect cannot be null");
-		Validate.notNull(location.getWorld(), "World cannot be null");
+		Preconditions.checkNotNull(location, "Location cannot be null");
+		Preconditions.checkNotNull(effect, "Effect cannot be null");
+		Preconditions.checkNotNull(location.getWorld(), "World cannot be null");
 	}
 
 	@Override
@@ -1201,12 +1201,13 @@ public class WorldMock implements World
 	{
 		if (data != null)
 		{
-			Validate.isTrue(effect.getData() != null && effect.getData().isAssignableFrom(data.getClass()), "Wrong kind of data for this effect!");
+			Preconditions.checkArgument(effect.getData() != null && effect.getData().isAssignableFrom(data.getClass()), "Wrong kind of data for this effect!");
 		}
 		else
 		{
 			// Special case: the axis is optional for ELECTRIC_SPARK
-			Validate.isTrue(effect.getData() == null || effect == Effect.ELECTRIC_SPARK, "Wrong kind of data for this effect!");
+			Preconditions.checkArgument(effect.getData() == null || effect == Effect.ELECTRIC_SPARK, "Wrong kind of data for this effect!");
+
 		}
 	}
 

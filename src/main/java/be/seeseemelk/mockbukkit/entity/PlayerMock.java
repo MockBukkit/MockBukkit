@@ -11,21 +11,21 @@ import be.seeseemelk.mockbukkit.inventory.SimpleInventoryViewMock;
 import be.seeseemelk.mockbukkit.sound.AudioExperience;
 import be.seeseemelk.mockbukkit.sound.SoundReceiver;
 import be.seeseemelk.mockbukkit.statistic.StatisticsMock;
-import com.google.common.base.Preconditions;
-import com.google.common.collect.ImmutableSet;
 import com.destroystokyo.paper.ClientOption;
 import com.destroystokyo.paper.Title;
 import com.destroystokyo.paper.block.TargetBlockInfo;
 import com.destroystokyo.paper.entity.TargetEntityInfo;
 import com.destroystokyo.paper.profile.PlayerProfile;
+import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableSet;
 import io.papermc.paper.chat.ChatRenderer;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.bungeecord.BungeeComponentSerializer;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.BaseComponent;
-import org.apache.commons.lang.Validate;
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
@@ -115,6 +115,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Queue;
 import java.util.Random;
 import java.util.Set;
@@ -127,7 +128,7 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class PlayerMock extends LivingEntityMock implements Player, SoundReceiver
+public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 {
 
 	private PlayerInventoryMock inventory = null;
@@ -136,6 +137,8 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	private GameMode previousGamemode = gamemode;
 	private Component displayName = null;
 	private String playerListName = null;
+	private Component playerListHeader = null;
+	private Component playerListFooter = null;
 	private int expTotal = 0;
 	private float exp = 0;
 	private int foodLevel = 20;
@@ -1208,15 +1211,13 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public @Nullable Component playerListHeader()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.playerListHeader;
 	}
 
 	@Override
 	public @Nullable Component playerListFooter()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.playerListFooter;
 	}
 
 	@Override
@@ -1546,12 +1547,12 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	{
 		if (data != null)
 		{
-			Validate.isTrue(effect.getData() != null && effect.getData().isAssignableFrom(data.getClass()), "Wrong kind of data for this effect!");
+			Preconditions.checkArgument(effect.getData() != null && effect.getData().isAssignableFrom(data.getClass()), "Wrong kind of data for this effect!");
 		}
 		else
 		{
 			// The axis is optional for ELECTRIC_SPARK
-			Validate.isTrue(effect.getData() == null || effect == Effect.ELECTRIC_SPARK, "Wrong kind of data for this effect!");
+			Preconditions.checkArgument(effect.getData() == null || effect == Effect.ELECTRIC_SPARK, "Wrong kind of data for this effect!");
 		}
 	}
 
@@ -1597,8 +1598,8 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		{
 			lines = new java.util.ArrayList<>(4);
 		}
-		Validate.notNull(loc, "Location cannot be null");
-		Validate.notNull(dyeColor, "DyeColor cannot be null");
+		Preconditions.checkNotNull(loc, "Location cannot be null");
+		Preconditions.checkNotNull(dyeColor,"DyeColor cannot be null");
 		if (lines.size() < 4)
 		{
 			throw new IllegalArgumentException("Must have at least 4 lines");
@@ -1626,8 +1627,8 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 			lines = new String[4];
 		}
 
-		Validate.notNull(loc, "Location can not be null");
-		Validate.notNull(dyeColor, "DyeColor can not be null");
+		Preconditions.checkNotNull(loc, "Location cannot be null");
+		Preconditions.checkNotNull(dyeColor,"DyeColor cannot be null");
 		if (lines.length < 4)
 		{
 			throw new IllegalArgumentException("Must have at least 4 lines");
@@ -1665,16 +1666,16 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Deprecated
 	public void setPlayerListHeaderFooter(@Nullable BaseComponent[] header, @Nullable BaseComponent[] footer)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.playerListHeader = BungeeComponentSerializer.get().deserialize(Arrays.stream(header).filter(Objects::nonNull).toArray(BaseComponent[]::new));
+		this.playerListFooter = BungeeComponentSerializer.get().deserialize(Arrays.stream(footer).filter(Objects::nonNull).toArray(BaseComponent[]::new));
 	}
 
 	@Override
 	@Deprecated
 	public void setPlayerListHeaderFooter(@Nullable BaseComponent header, @Nullable BaseComponent footer)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.playerListHeader = BungeeComponentSerializer.get().deserialize(new BaseComponent[] { header });
+		this.playerListFooter = BungeeComponentSerializer.get().deserialize(new BaseComponent[] { footer });
 	}
 
 	@Override
@@ -2665,36 +2666,32 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public String getPlayerListHeader()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return LegacyComponentSerializer.legacySection().serialize(this.playerListHeader);
 	}
 
 	@Override
 	public void setPlayerListHeader(String header)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.playerListHeader = LegacyComponentSerializer.legacySection().deserialize(header);
 	}
 
 	@Override
 	public String getPlayerListFooter()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return LegacyComponentSerializer.legacySection().serialize(this.playerListFooter);
 	}
 
 	@Override
 	public void setPlayerListFooter(String footer)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.playerListFooter = LegacyComponentSerializer.legacySection().deserialize(footer);
 	}
 
 	@Override
 	public void setPlayerListHeaderFooter(String header, String footer)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.playerListHeader = LegacyComponentSerializer.legacySection().deserialize(header);
+		this.playerListFooter = LegacyComponentSerializer.legacySection().deserialize(footer);
 	}
 
 	@Override
@@ -3078,6 +3075,8 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		throw new UnimplementedOperationException();
 	}
 
+
+
 	@Override
 	public int getPing()
 	{
@@ -3092,8 +3091,8 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public boolean teleport(@NotNull Location location, @NotNull PlayerTeleportEvent.TeleportCause cause)
 	{
-		Validate.notNull(location, "Location cannot be null");
-		Validate.notNull(cause, "Cause cannot be null");
+		Preconditions.checkNotNull(location, "Location cannot be null");
+		Preconditions.checkNotNull(cause, "Cause cannot be null");
 
 		PlayerTeleportEvent playerTeleportEvent = new PlayerTeleportEvent(this, getLocation(), location, cause);
 		Bukkit.getPluginManager().callEvent(playerTeleportEvent);
@@ -3109,9 +3108,9 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 	@Override
 	public void sendEquipmentChange(@NotNull LivingEntity entity, @NotNull EquipmentSlot slot, @NotNull ItemStack item)
 	{
-		Preconditions.checkArgument(entity != null, "entity must not be null");
-		Preconditions.checkArgument(slot != null, "slot must not be null");
-		Preconditions.checkArgument(item != null, "item must not be null");
+		Preconditions.checkNotNull(entity, "entity must not be null");
+		Preconditions.checkNotNull(slot, "slot must not be null");
+		Preconditions.checkNotNull(item, "item must not be null");
 		// Pretend the packet gets sent.
 	}
 
@@ -3208,5 +3207,7 @@ public class PlayerMock extends LivingEntityMock implements Player, SoundReceive
 		}
 
 	}
+
+
 
 }

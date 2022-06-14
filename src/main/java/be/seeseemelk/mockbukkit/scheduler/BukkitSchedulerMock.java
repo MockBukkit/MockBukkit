@@ -2,7 +2,7 @@ package be.seeseemelk.mockbukkit.scheduler;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import org.apache.commons.lang.Validate;
+import com.google.common.base.Preconditions;
 import org.bukkit.event.Event;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -106,8 +106,19 @@ public class BukkitSchedulerMock implements BukkitScheduler
 
 	public @NotNull Future<?> executeAsyncEvent(Event event)
 	{
-		Validate.notNull(event, "Cannot schedule an Event that is null!");
-		Future<?> future = asyncEventExecutor.submit(() -> MockBukkit.getMock().getPluginManager().callEvent(event));
+		return executeAsyncEvent(event, null);
+	}
+
+	public <T extends Event> @NotNull Future<?> executeAsyncEvent(T event, Consumer<T> func)
+	{
+		Preconditions.checkNotNull(event, "Cannot call a null event!");
+		Future<?> future = asyncEventExecutor.submit(() -> {
+			MockBukkit.getMock().getPluginManager().callEvent(event);
+			if (func != null)
+			{
+				func.accept(event);
+			}
+		});
 		queuedAsyncEvents.add(future);
 		return future;
 	}
@@ -221,8 +232,8 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			if (System.currentTimeMillis() > (systemTime + executorTimeout))
 			{
 				// If a plugin has left a runnable going and not cancelled it we could call this bad practice.
-				// We should force interrupt all those runnables forcing them to throw Interrupted Exceptions-
-				// if they handle that
+				// We should force interrupt all these runnables, forcing them to throw Interrupted Exceptions
+				// if they handle that.
 				for (ScheduledTask task : scheduledTasks.getCurrentTaskList())
 				{
 					if (task.isRunning())
