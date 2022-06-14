@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit;
 
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
+import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
@@ -74,10 +75,7 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 	@Override
 	public void setBlock(int x, int y, int z, @NotNull BlockData blockData)
 	{
-		if (x != (x & 0xf) || y < this.minHeight || y >= this.maxHeight || z != (z & 0xf))
-		{
-			return;
-		}
+		checkCoords(x, y, z);
 		blocks.put(new Coordinate(x, y, z), blockData);
 	}
 
@@ -112,10 +110,7 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 	@Override
 	public Material getType(int x, int y, int z)
 	{
-		if (x != (x & 0xf) || y < this.minHeight || y >= this.maxHeight || z != (z & 0xf))
-		{
-			return Material.AIR;
-		}
+		checkCoords(x, y, z);
 
 		BlockData data = blocks.get(new Coordinate(x, y, z));
 		// shortcut to return air directly instead of creating air block data then unpacking material
@@ -133,10 +128,7 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 	@Override
 	public BlockData getBlockData(int x, int y, int z)
 	{
-		if (x != (x & 0xf) || y < this.minHeight || y >= this.maxHeight || z != (z & 0xf))
-		{
-			return new BlockDataMock(Material.AIR);
-		}
+		checkCoords(x, y, z);
 
 		BlockData data = blocks.get(new Coordinate(x, y, z));
 		return data == null ? new BlockDataMock(Material.AIR) : data;
@@ -146,6 +138,18 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 	public byte getData(int x, int y, int z)
 	{
 		return this.getTypeAndData(x, y, z).getData();
+	}
+
+	/**
+	 * Ensures that the X and Y coordinates are within the chunks 0-15 range, and the height is withing the min and max height.
+	 *
+	 * @param x The X coordinate.
+	 * @param y The Y coordinate.
+	 * @param z The Z coordinate.
+	 */
+	private void checkCoords(int x, int y, int z)
+	{
+		Preconditions.checkArgument(x == (x & 0xf) && y >= this.minHeight && y < this.maxHeight && z == (z & 0xf), "Coordinates are out-of-bounds");
 	}
 
 }
