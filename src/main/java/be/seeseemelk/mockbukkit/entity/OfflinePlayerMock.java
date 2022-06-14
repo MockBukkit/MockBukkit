@@ -284,6 +284,13 @@ public class OfflinePlayerMock implements OfflinePlayer
 	}
 
 	@Override
+	public @Nullable Location getLastDeathLocation()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull PlayerProfile getPlayerProfile()
 	{
 		// TODO Auto-generated method stub
