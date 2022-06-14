@@ -3,7 +3,7 @@ package be.seeseemelk.mockbukkit.plugin;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
-import org.apache.commons.lang.Validate;
+import com.google.common.base.Preconditions;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.PluginCommandUtils;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -708,10 +708,11 @@ public class PluginManagerMock implements PluginManager
 	public void registerEvent(@NotNull Class<? extends Event> event, @NotNull Listener listener, @NotNull EventPriority priority,
 	                          @NotNull EventExecutor executor, @NotNull Plugin plugin, boolean ignoreCancelled)
 	{
-		Validate.notNull(listener, "Listener cannot be null");
-		Validate.notNull(priority, "Priority cannot be null");
-		Validate.notNull(executor, "Executor cannot be null");
-		Validate.notNull(plugin, "Plugin cannot be null");
+		Preconditions.checkNotNull(listener, "Listener cannot be null");
+		Preconditions.checkNotNull(listener, "Listener cannot be null");
+		Preconditions.checkNotNull(priority, "Priority cannot be null");
+		Preconditions.checkNotNull(executor, "Executor cannot be null");
+		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
 		if (!plugin.isEnabled())
 		{
 			throw new IllegalPluginAccessException("Plugin attempted to register " + event + " while not enabled");
