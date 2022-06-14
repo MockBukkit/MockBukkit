@@ -9,6 +9,7 @@ import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Mob;
@@ -31,6 +32,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -48,7 +50,7 @@ class EntityMockTest
 	private EntityMock entity;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		server = MockBukkit.mock();
 		world = server.addSimpleWorld("world");
@@ -56,7 +58,7 @@ class EntityMockTest
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
@@ -323,7 +325,7 @@ class EntityMockTest
 		entity.addAttachment(plugin, "mockbukkit.perm3", false);
 
 		Set<PermissionAttachmentInfo> effectivePermissions = entity.getEffectivePermissions();
-		assertEquals(effectivePermissions.size(), 3);
+		assertEquals(3, effectivePermissions.size());
 
 		Set<String> permissions = effectivePermissions.stream().map(PermissionAttachmentInfo::getPermission).collect(Collectors.toSet());
 		assertTrue(permissions.contains("mockbukkit.perm"));
@@ -565,7 +567,7 @@ class EntityMockTest
 	@Test
 	void playEffect()
 	{
-		entity.playEffect(EntityEffect.LOVE_HEARTS);
+		assertDoesNotThrow(() -> entity.playEffect(EntityEffect.LOVE_HEARTS));
   	}
 
 	@Test
@@ -587,6 +589,14 @@ class EntityMockTest
 		assertTrue(player.isGliding());
 		player.setGliding(false);
 		assertFalse(player.isGliding());
+	}
+
+	@Test
+	void registerAttribute()
+	{
+		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+		zombie.registerAttribute(Attribute.HORSE_JUMP_STRENGTH);
+		assertEquals(0.7, zombie.getAttribute(Attribute.HORSE_JUMP_STRENGTH).getValue());
 	}
 
 }

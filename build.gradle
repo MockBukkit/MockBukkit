@@ -34,12 +34,19 @@ dependencies {
     implementation 'org.hamcrest:hamcrest-library:2.2'
 
     // General utilities for the project
+    implementation 'net.kyori:adventure-platform-bungeecord:4.1.1'
     implementation 'org.jetbrains:annotations:23.0.0'
 
     // LibraryLoader dependencies
-    implementation 'org.apache.maven:maven-resolver-provider:3.8.5'
-    implementation 'org.apache.maven.resolver:maven-resolver-connector-basic:1.8.0'
+    implementation 'org.apache.maven:maven-resolver-provider:3.8.6'
+    implementation 'org.apache.maven.resolver:maven-resolver-connector-basic:1.8.1'
     implementation 'org.apache.maven.resolver:maven-resolver-transport-http:1.8.0'
+}
+
+jar {
+    manifest {
+        attributes 'Automatic-Module-Name': "be.seeseemelk.mockbukkit"
+    }
 }
 
 task javadocJar(type: Jar) {
@@ -50,6 +57,16 @@ task javadocJar(type: Jar) {
 task sourcesJar(type: Jar) {
     classifier('sources')
     from sourceSets.main.allSource
+}
+
+processResources {
+    doLast {
+        file("${buildDir}/resources/main/build.properties").withWriter { w ->
+            Properties p = new Properties()
+            p['full-api-version'] = gradle.ext.apiVersionFull
+            p.store w, null
+        }
+    }
 }
 
 sourceCompatibility = gradle.ext.javaVersion
