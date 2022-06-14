@@ -17,11 +17,11 @@ import be.seeseemelk.mockbukkit.inventory.meta.PotionMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.SkullMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.SuspiciousStewMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.TropicalFishBucketMetaMock;
+import com.google.common.base.Preconditions;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.hover.content.Content;
-import org.apache.commons.lang.Validate;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
@@ -73,7 +73,7 @@ public class ItemFactoryMock implements ItemFactory
 	@Override
 	public ItemMeta getItemMeta(@NotNull Material material)
 	{
-		Validate.notNull(material, "Material cannot be null");
+		Preconditions.checkNotNull(material, "Material cannot be null");
 
 		Class<? extends ItemMeta> clazz = null;
 
