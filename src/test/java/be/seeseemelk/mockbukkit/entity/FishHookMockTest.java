@@ -116,9 +116,9 @@ class FishHookMockTest
 	@Test
 	void setBiteChance_Raining()
 	{
-		assertTrue(hook.getBiteChance() - 0.003 < 0.001, "Expected 0.003, but was "	+ hook.getBiteChance());
-		world.setThundering(true);
 		assertTrue(hook.getBiteChance() - 0.002 < 0.001, "Expected 0.002, but was "	+ hook.getBiteChance());
+		world.setThundering(true);
+		assertTrue(hook.getBiteChance() - 0.003 < 0.001, "Expected 0.003, but was "	+ hook.getBiteChance());
 	}
 
 	@Test
