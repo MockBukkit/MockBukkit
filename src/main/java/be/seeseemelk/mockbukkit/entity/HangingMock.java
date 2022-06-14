@@ -1,7 +1,7 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
-import org.apache.commons.lang.Validate;
+import com.google.common.base.Preconditions;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Hanging;
@@ -34,8 +34,8 @@ public class HangingMock extends EntityMock implements Hanging
 	@Override
 	public boolean setFacingDirection(@NotNull BlockFace face, boolean force)
 	{
-		Validate.notNull(face);
-		Validate.isTrue(face.isCartesian() && face != BlockFace.UP && face != BlockFace.DOWN);
+		Preconditions.checkNotNull(face);
+		Preconditions.checkArgument(face.isCartesian() && face != BlockFace.UP && face != BlockFace.DOWN);
 		facing = face;
 		return true;
 	}

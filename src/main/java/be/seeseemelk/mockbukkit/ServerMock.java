@@ -35,13 +35,14 @@ import be.seeseemelk.mockbukkit.tags.TagRegistry;
 import be.seeseemelk.mockbukkit.tags.TagWrapperMock;
 import be.seeseemelk.mockbukkit.tags.TagsMock;
 import com.destroystokyo.paper.entity.ai.MobGoals;
+import com.google.common.base.Preconditions;
 import io.papermc.paper.datapack.DatapackManager;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.md_5.bungee.api.chat.BaseComponent;
-import org.apache.commons.lang.Validate;
+import org.apache.commons.lang3.StringUtils;
 import org.bukkit.BanEntry;
 import org.bukkit.BanList;
 import org.bukkit.BanList.Type;
@@ -78,6 +79,7 @@ import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.generator.ChunkGenerator.ChunkData;
 import org.bukkit.inventory.InventoryHolder;
@@ -115,6 +117,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.CountDownLatch;
 import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
@@ -226,6 +229,21 @@ public class ServerMock extends Server.Spigot implements Server
 	{
 		AsyncCatcher.catchOp("player add");
 		playerList.addPlayer(player);
+
+		CountDownLatch conditionLatch = new CountDownLatch(1);
+
+		AsyncPlayerPreLoginEvent preLoginEvent = new AsyncPlayerPreLoginEvent(player.getName(), player.getAddress().getAddress(), player.getUniqueId());
+		getPluginManager().callEventAsynchronously(preLoginEvent, (e) -> conditionLatch.countDown());
+
+		try
+		{
+			conditionLatch.await();
+		}
+		catch (InterruptedException e)
+		{
+			getLogger().severe("Interrupted while waiting for AsyncPlayerPreLoginEvent! " + (StringUtils.isEmpty(e.getMessage()) ? "" : e.getMessage()));
+			Thread.currentThread().interrupt();
+		}
 
 		Component joinMessage = player.displayName().append(Component.text(" joined the game")).color(TextColor.color(Color.YELLOW.asRGB()));
 		PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(player, joinMessage);
@@ -1380,7 +1398,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 */
 	public void setWarningState(@NotNull WarningState warningState)
 	{
-		Validate.notNull(warningState, "Warning state cannot be null");
+		Preconditions.checkNotNull(warningState, "warningState cannot be null");
 		this.warningState = warningState;
 	}
 
@@ -1455,7 +1473,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @Nullable Entity getEntity(@NotNull UUID uuid)
 	{
-		Validate.notNull(uuid, "UUID cannot be null");
+		Preconditions.checkNotNull(uuid, "uuid cannot be null");
 
 		for (EntityMock entity : entities)
 		{
@@ -1512,7 +1530,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull BlockData createBlockData(@NotNull Material material)
 	{
-		Validate.notNull(material, "Must provide material");
+		Preconditions.checkNotNull(material, "Must provide material");
 		return BlockDataMock.mock(material);
 	}
 
@@ -1556,7 +1574,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@NotNull
 	public Tag<Material> createMaterialTag(@NotNull NamespacedKey key, @NotNull String registryKey, @NotNull Material... materials)
 	{
-		Validate.notNull(key, "A NamespacedKey must never be null");
+		Preconditions.checkNotNull(key, "A NamespacedKey must never be null");
 
 		TagRegistry registry = materialTags.get(registryKey);
 		TagWrapperMock tag = new TagWrapperMock(registry, key);
@@ -1640,7 +1658,8 @@ public class ServerMock extends Server.Spigot implements Server
 		registerPotionEffectType(29, "CONDUIT_POWER", false, 1950417);
 		registerPotionEffectType(30, "DOLPHINS_GRACE", false, 8954814);
 		registerPotionEffectType(31, "BAD_OMEN", false, 745784);
-		registerPotionEffectType(32, "HERO_OF_THE_VILLAGE", false, 45217);
+		registerPotionEffectType(32, "HERO_OF_THE_VILLAGE", false, 4521796);
+		registerPotionEffectType(33, "DARKNESS", false, 2696993);
 		PotionEffectType.stopAcceptingRegistrations();
 	}
 
@@ -1676,7 +1695,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public KeyedBossBar createBossBar(NamespacedKey key, String title, BarColor color, BarStyle style, BarFlag... flags)
 	{
-		Validate.notNull(key, "A NamespacedKey must never be null");
+		Preconditions.checkNotNull(key, "A NamespacedKey must never be null");
 		KeyedBossBarMock bar = new KeyedBossBarMock(key, title, color, style, flags);
 		bossBars.put(key, bar);
 		return bar;
@@ -1691,14 +1710,14 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public KeyedBossBar getBossBar(NamespacedKey key)
 	{
-		Validate.notNull(key, "A NamespacedKey must never be null");
+		Preconditions.checkNotNull(key, "A NamespacedKey must never be null");
 		return bossBars.get(key);
 	}
 
 	@Override
 	public boolean removeBossBar(NamespacedKey key)
 	{
-		Validate.notNull(key, "A NamespacedKey must never be null");
+		Preconditions.checkNotNull(key, "A NamespacedKey must never be null");
 		return bossBars.remove(key, bossBars.get(key));
 	}
 
@@ -1843,6 +1862,13 @@ public class ServerMock extends Server.Spigot implements Server
 
 	@Override
 	public @NotNull String getPermissionMessage()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Component permissionMessage()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
