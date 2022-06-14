@@ -37,9 +37,15 @@ dependencies {
     implementation 'org.jetbrains:annotations:23.0.0'
 
     // LibraryLoader dependencies
-    implementation 'org.apache.maven:maven-resolver-provider:3.8.5'
+    implementation 'org.apache.maven:maven-resolver-provider:3.8.6'
     implementation 'org.apache.maven.resolver:maven-resolver-connector-basic:1.8.0'
     implementation 'org.apache.maven.resolver:maven-resolver-transport-http:1.8.0'
+}
+
+jar {
+    manifest {
+        attributes 'Automatic-Module-Name': "be.seeseemelk.mockbukkit"
+    }
 }
 
 task javadocJar(type: Jar) {
