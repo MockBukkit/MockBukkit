@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 class MockChunkDataTest
 {
@@ -44,8 +45,7 @@ class MockChunkDataTest
 		WorldMock dummy = server.addSimpleWorld("dummy");
 		ChunkGenerator.ChunkData data = server.createChunkData(dummy);
 
-		Assertions.assertDoesNotThrow(() -> data.setBlock(33, 1000, 33, Material.STONE));
-		Assertions.assertEquals(Material.AIR, data.getType(33, 1000, 33));
+		assertThrowsExactly(IllegalArgumentException.class, () -> data.setBlock(33, 1000, 33, Material.STONE));
 	}
 
 	@Test
@@ -54,7 +54,7 @@ class MockChunkDataTest
 		WorldMock dummy = server.addSimpleWorld("dummy");
 		ChunkGenerator.ChunkData data = server.createChunkData(dummy);
 
-		Assertions.assertEquals(Material.AIR, data.getType(33, 1000, 33));
+		assertThrowsExactly(IllegalArgumentException.class, () -> data.getType(33, 1000, 33));
 	}
 
 	@Test
