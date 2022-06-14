@@ -427,7 +427,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public void setLoreComponents(@Nullable List<BaseComponent[]> lore)
 	{
-		lore(lore.stream().map(c -> BungeeComponentSerializer.get().deserialize(c)).toList());
+		lore(lore == null ? null : lore.stream().map(c -> BungeeComponentSerializer.get().deserialize(c)).toList());
 	}
 
 	/**
