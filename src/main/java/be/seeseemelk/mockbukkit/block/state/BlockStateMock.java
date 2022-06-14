@@ -250,6 +250,8 @@ public class BlockStateMock implements BlockState
 	{
 		switch (block.getType())
 		{
+		case DAYLIGHT_DETECTOR:
+			return new DaylightDetectorMock(block);
 		case COMMAND_BLOCK:
 		case CHAIN_COMMAND_BLOCK:
 		case REPEATING_COMMAND_BLOCK:
