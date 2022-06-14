@@ -602,22 +602,6 @@ class ItemMetaMockTest
 		assertEquals(true, actual.get("unbreakable"));
 		assertEquals(5, actual.get("damage"));
 		assertEquals(3, actual.get("repairCost"));
-
-		Map<String, Object> expected = new HashMap<>();
-		expected.put("displayName", "Test name");
-		expected.put("lore", List.of("Test lore"));
-		expected.put("unbreakable", true);
-		expected.put("damage", 5);
-		expected.put("repairCost", 3);
-
-		Map<String, Object> actual = meta.serialize();
-
-		// Perform tests
-		assertEquals(expected.get("displayName"), actual.get("display-name"));
-		assertEquals(expected.get("lore"), actual.get("lore"));
-		assertEquals(expected.get("unbreakable"), actual.get("Unbreakable"));
-		assertEquals(expected.get("damage"), actual.get("Damage"));
-		assertEquals(expected.get("repairCost"), actual.get("repair-cost"));
 	}
 
 	@Test
