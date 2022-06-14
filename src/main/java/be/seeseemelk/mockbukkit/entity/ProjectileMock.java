@@ -16,7 +16,7 @@ public abstract class ProjectileMock extends AbstractProjectileMock implements P
 
 	private ProjectileSource source;
 
-	public ProjectileMock(@NotNull ServerMock server, @NotNull UUID uuid)
+	protected ProjectileMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 	}

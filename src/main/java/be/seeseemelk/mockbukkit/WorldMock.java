@@ -12,8 +12,8 @@ import be.seeseemelk.mockbukkit.entity.ZombieMock;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
 import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
 import com.destroystokyo.paper.HeightmapType;
+import com.google.common.base.Preconditions;
 import io.papermc.paper.world.MoonPhase;
-import org.apache.commons.lang.Validate;
 import org.bukkit.BlockChangeDelegate;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
@@ -391,13 +391,10 @@ public class WorldMock implements World
 	@Override
 	public @NotNull List<Entity> getEntities()
 	{
-		// MockBukkit.assertMocking();
-		List<Entity> entities = new ArrayList<>();
-
-		Collection<? extends EntityMock> serverEntities = MockBukkit.getMock().getEntities();
-		serverEntities.stream().filter(entity -> entity.getWorld() == this)
-		.collect(Collectors.toCollection(() -> entities));
-		return entities;
+		return server.getEntities().stream()
+				.filter(entity -> entity.getWorld() == this)
+				.filter(EntityMock::isValid)
+				.collect(Collectors.toList());
 	}
 
 	@Override
@@ -618,9 +615,9 @@ public class WorldMock implements World
 	@Override
 	public @NotNull ItemEntityMock dropItem(@NotNull Location loc, @NotNull ItemStack item, @Nullable Consumer<Item> function)
 	{
-		Validate.notNull(loc, "The provided location must not be null.");
-		Validate.notNull(item, "Cannot drop items that are null.");
-		Validate.isTrue(!item.getType().isAir(), "Cannot drop air.");
+		Preconditions.checkNotNull(loc, "The provided location must not be null.");
+		Preconditions.checkNotNull(item, "Cannot drop items that are null.");
+		Preconditions.checkArgument(!item.getType().isAir(), "Cannot drop air.");
 
 		ItemEntityMock entity = new ItemEntityMock(server, UUID.randomUUID(), item);
 		entity.setLocation(loc);
@@ -645,7 +642,7 @@ public class WorldMock implements World
 	@Override
 	public @NotNull ItemEntityMock dropItemNaturally(@NotNull Location location, @NotNull ItemStack item, @Nullable Consumer<Item> function)
 	{
-		Validate.notNull(location, "The provided location must not be null.");
+		Preconditions.checkNotNull(location, "The provided location must not be null.");
 
 		Random random = ThreadLocalRandom.current();
 
@@ -897,7 +894,6 @@ public class WorldMock implements World
 		throw new UnimplementedOperationException();
 	}
 
-	@Override
 	public @Nullable Location findLightningRod(@NotNull Location location)
 	{
 		// TODO Auto-generated method stub
@@ -914,31 +910,44 @@ public class WorldMock implements World
 	@Override
 	public List<LivingEntity> getLivingEntities()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	@Deprecated
-	public <T extends Entity> Collection<T> getEntitiesByClass(Class<T>... classes)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getEntities().stream()
+				.filter(LivingEntity.class::isInstance)
+				.map(LivingEntity.class::cast)
+				.collect(Collectors.toList());
 	}
 
 	@Override
-	public <T extends Entity> Collection<T> getEntitiesByClass(Class<T> cls)
+	@SafeVarargs
+	public final <T extends Entity> @NotNull Collection<T> getEntitiesByClass(Class<T>... classes)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		List<T> entities = new ArrayList<>();
+		for (Class<T> clazz : classes)
+		{
+			entities.addAll(getEntitiesByClass(clazz));
+		}
+		return entities;
 	}
 
 	@Override
-	public Collection<Entity> getEntitiesByClasses(Class<?>... classes)
+	public <T extends Entity> @NotNull Collection<T> getEntitiesByClass(@NotNull Class<T> cls)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getEntities().stream()
+				.filter(entity -> cls.isAssignableFrom(entity.getClass()))
+				.map(cls::cast)
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public @NotNull Collection<Entity> getEntitiesByClasses(Class<?>... classes)
+	{
+		List<Entity> entities = new ArrayList<>();
+		for (Class<?> clazz : classes)
+		{
+			entities.addAll(getEntities().stream()
+					.filter(entity -> clazz.isAssignableFrom(entity.getClass()))
+					.toList());
+		}
+		return entities;
 	}
 
 	@Override
@@ -1186,9 +1195,9 @@ public class WorldMock implements World
 	@Override
 	public void playEffect(@NotNull Location location, @NotNull Effect effect, int data, int radius)
 	{
-		Validate.notNull(location, "Location cannot be null");
-		Validate.notNull(effect, "Effect cannot be null");
-		Validate.notNull(location.getWorld(), "World cannot be null");
+		Preconditions.checkNotNull(location, "Location cannot be null");
+		Preconditions.checkNotNull(effect, "Effect cannot be null");
+		Preconditions.checkNotNull(location.getWorld(), "World cannot be null");
 	}
 
 	@Override
@@ -1202,12 +1211,13 @@ public class WorldMock implements World
 	{
 		if (data != null)
 		{
-			Validate.isTrue(effect.getData() != null && effect.getData().isAssignableFrom(data.getClass()), "Wrong kind of data for this effect!");
+			Preconditions.checkArgument(effect.getData() != null && effect.getData().isAssignableFrom(data.getClass()), "Wrong kind of data for this effect!");
 		}
 		else
 		{
 			// Special case: the axis is optional for ELECTRIC_SPARK
-			Validate.isTrue(effect.getData() == null || effect == Effect.ELECTRIC_SPARK, "Wrong kind of data for this effect!");
+			Preconditions.checkArgument(effect.getData() == null || effect == Effect.ELECTRIC_SPARK, "Wrong kind of data for this effect!");
+
 		}
 	}
 

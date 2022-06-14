@@ -1,22 +1,12 @@
 package be.seeseemelk.mockbukkit;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assumptions.assumeFalse;
-
-import java.util.List;
-
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import be.seeseemelk.mockbukkit.block.state.BlockStateMock;
 import be.seeseemelk.mockbukkit.entity.ArmorStandMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
 import be.seeseemelk.mockbukkit.entity.FireworkMock;
+import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
 import be.seeseemelk.mockbukkit.entity.ZombieMock;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
@@ -32,6 +22,7 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.entity.CreatureSpawnEvent;
@@ -43,8 +34,18 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assumptions.assumeFalse;
 
 class WorldMockTest
 {
@@ -52,13 +53,13 @@ class WorldMockTest
 	private ServerMock server;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		server = MockBukkit.mock();
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
@@ -153,6 +154,58 @@ class WorldMockTest
 		List<Entity> entities = world.getEntities();
 		assertNotNull(entities);
 		assertEquals(0, entities.size());
+	}
+
+	@Test
+	void getLivingEntities()
+	{
+		WorldMock world = new WorldMock();
+		world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ZOMBIE);
+		world.dropItem(new Location(world, 0, 0, 0), new ItemStack(Material.STONE));
+		assertEquals(2, world.getEntities().size());
+		assertEquals(1, world.getLivingEntities().size());
+	}
+
+	@Test
+	void getLivingEntities_EmptyList()
+	{
+		WorldMock world = new WorldMock();
+		List<LivingEntity> entities = world.getLivingEntities();
+		assertNotNull(entities);
+		assertEquals(0, entities.size());
+	}
+
+	@Test
+	void getEntitiesByClass()
+	{
+		WorldMock world = new WorldMock();
+		world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ZOMBIE);
+		world.dropItem(new Location(world, 0, 0, 0), new ItemStack(Material.STONE));
+		assertEquals(1, world.getEntitiesByClass(ZombieMock.class).size());
+		assertEquals(1, world.getEntitiesByClass(ItemEntityMock.class).size());
+	}
+
+	@Test
+	void getEntitiesByClasses()
+	{
+		WorldMock world = new WorldMock();
+		world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ZOMBIE);
+		world.dropItem(new Location(world, 0, 0, 0), new ItemStack(Material.STONE));
+		assertEquals(1, world.getEntitiesByClasses(ZombieMock.class).size());
+		assertEquals(1, world.getEntitiesByClasses(ItemEntityMock.class).size());
+		assertEquals(2, world.getEntitiesByClasses(ZombieMock.class, ItemEntityMock.class).size());
+	}
+
+	@Test
+	@SuppressWarnings("unchecked")
+	void getEntitiesByClasses_Generic()
+	{
+		WorldMock world = new WorldMock();
+		world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ZOMBIE);
+		world.dropItem(new Location(world, 0, 0, 0), new ItemStack(Material.STONE));
+		assertEquals(1, world.getEntitiesByClass(new Class[]{ ZombieMock.class }).size());
+		assertEquals(1, world.getEntitiesByClass(new Class[]{ ItemEntityMock.class }).size());
+		assertEquals(2, world.getEntitiesByClass(new Class[]{ ZombieMock.class, ItemEntityMock.class }).size());
 	}
 
 	@Test
@@ -304,21 +357,21 @@ class WorldMockTest
 	}
 
 	@Test
-	public void getLoadedChunks_EmptyWorldHasNoLoadedChunks()
+	void getLoadedChunks_EmptyWorldHasNoLoadedChunks()
 	{
 		WorldMock world = new WorldMock();
 		assertEquals(0, world.getLoadedChunks().length);
 	}
 
 	@Test
-	public void isChunkLoaded_IsFalseForUnloadedChunk()
+	void isChunkLoaded_IsFalseForUnloadedChunk()
 	{
 		WorldMock world = new WorldMock();
 		assertFalse(world.isChunkLoaded(0, 0));
 	}
 
 	@Test
-	public void isChunkloaded_IsTrueForLoadedChunk()
+	void isChunkloaded_IsTrueForLoadedChunk()
 	{
 		WorldMock world = new WorldMock();
 		BlockMock block = world.getBlockAt(64, 64, 64);
@@ -328,7 +381,7 @@ class WorldMockTest
 	}
 
 	@Test
-	public void getBlockState_ChangeBlock()
+	void getBlockState_ChangeBlock()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		assertEquals(Material.DIRT, world.getType(0, 1, 0));
@@ -344,7 +397,7 @@ class WorldMockTest
 	}
 
 	@Test
-	public void setBlock_ChangeBlock()
+	void setBlock_ChangeBlock()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		Location location = new Location(world, 0, 1, 0);
@@ -367,7 +420,7 @@ class WorldMockTest
 	}
 
 	@Test
-	public void worldPlayEffect()
+	void worldPlayEffect()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		world.playEffect(new Location(world, 0, 0, 0), Effect.STEP_SOUND, Material.STONE);
@@ -451,22 +504,24 @@ class WorldMockTest
 	}
 
 	@Test
-	public void worldPlayEffect_NullData()
+	void worldPlayEffect_NullData()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Location loc = new Location(world, 0, 0, 0);
 		assertThrows(IllegalArgumentException.class, () ->
 		{
-			world.playEffect(new Location(world, 0, 0, 0), Effect.STEP_SOUND, null);
+			world.playEffect(loc, Effect.STEP_SOUND, null);
 		});
 	}
 
 	@Test
-	public void worldPlayEffect_IncorrectData()
+	void worldPlayEffect_IncorrectData()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Location loc = new Location(world, 0, 0, 0);
 		assertThrows(IllegalArgumentException.class, () ->
 		{
-			world.playEffect(new Location(world, 0, 0, 0), Effect.STEP_SOUND, 1.0f);
+			world.playEffect(loc, Effect.STEP_SOUND, 1.0f);
 		});
 	}
 
@@ -577,7 +632,7 @@ class WorldMockTest
 	}
 
 	@Test
-	public void setDifficulty()
+	void setDifficulty()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		assertNotNull(world.getDifficulty());
@@ -586,7 +641,7 @@ class WorldMockTest
 	}
 
 	@Test
-	public void spawnMonster_Peaceful()
+	void spawnMonster_Peaceful()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		world.setDifficulty(Difficulty.PEACEFUL);
@@ -596,7 +651,7 @@ class WorldMockTest
 	}
 
 	@Test
-	public void spawnFriendly_Peaceful()
+	void spawnFriendly_Peaceful()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		world.setDifficulty(Difficulty.PEACEFUL);

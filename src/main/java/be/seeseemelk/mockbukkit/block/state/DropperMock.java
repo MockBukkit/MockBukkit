@@ -1,6 +1,5 @@
 package be.seeseemelk.mockbukkit.block.state;
 
-import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
@@ -74,7 +73,7 @@ public class DropperMock extends ContainerMock implements Dropper
 	}
 
 	@Override
-	public BlockState getSnapshot()
+	public @NotNull BlockState getSnapshot()
 	{
 		return new DropperMock(this);
 	}
@@ -144,20 +143,6 @@ public class DropperMock extends ContainerMock implements Dropper
 
 	@Override
 	public long setNextRefill(long refillAt)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable Component customName()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void customName(@Nullable Component customName)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

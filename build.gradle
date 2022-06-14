@@ -5,6 +5,7 @@ plugins {
     id 'jacoco'
     id 'maven-publish'
     id 'signing'
+    id 'io.github.gradle-nexus.publish-plugin' version '1.1.0'
 }
 
 
@@ -33,12 +34,19 @@ dependencies {
     implementation 'org.hamcrest:hamcrest-library:2.2'
 
     // General utilities for the project
+    implementation 'net.kyori:adventure-platform-bungeecord:4.1.1'
     implementation 'org.jetbrains:annotations:23.0.0'
 
     // LibraryLoader dependencies
-    implementation 'org.apache.maven:maven-resolver-provider:3.8.5'
-    implementation 'org.apache.maven.resolver:maven-resolver-connector-basic:1.8.0'
-    implementation 'org.apache.maven.resolver:maven-resolver-transport-http:1.8.0'
+    implementation 'org.apache.maven:maven-resolver-provider:3.8.6'
+    implementation 'org.apache.maven.resolver:maven-resolver-connector-basic:1.8.1'
+    implementation 'org.apache.maven.resolver:maven-resolver-transport-http:1.8.1'
+}
+
+jar {
+    manifest {
+        attributes 'Automatic-Module-Name': "be.seeseemelk.mockbukkit"
+    }
 }
 
 task javadocJar(type: Jar) {
@@ -49,6 +57,16 @@ task javadocJar(type: Jar) {
 task sourcesJar(type: Jar) {
     classifier('sources')
     from sourceSets.main.allSource
+}
+
+processResources {
+    doLast {
+        file("${buildDir}/resources/main/build.properties").withWriter { w ->
+            Properties p = new Properties()
+            p['full-api-version'] = gradle.ext.apiVersionFull
+            p.store w, null
+        }
+    }
 }
 
 sourceCompatibility = gradle.ext.javaVersion
@@ -80,6 +98,15 @@ jacoco {
 
 group = 'com.github.seeseemelk'
 version = property('mockbukkit.version')
+
+nexusPublishing {
+    repositories {
+        sonatype {
+            username = findProperty('ossrhUsername')
+            password = findProperty('ossrhPassword')
+        }
+    }
+}
 
 publishing {
     publications {
@@ -113,25 +140,6 @@ publishing {
                         email = 'sebastiaan.de.schaetzen@gmail.com'
                     }
                 }
-            }
-        }
-    }
-
-    repositories {
-        maven {
-            name = 'repository'
-            url = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
-            credentials {
-                username = findProperty('ossrhUsername')
-                password = findProperty('ossrhPassword')
-            }
-        }
-        maven {
-            name = 'snapshotRepository'
-            url = 'https://oss.sonatype.org/content/repositories/snapshots/'
-            credentials {
-                username = findProperty('ossrhUsername')
-                password = findProperty('ossrhPassword')
             }
         }
     }
