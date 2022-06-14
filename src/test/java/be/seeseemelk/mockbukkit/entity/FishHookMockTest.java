@@ -113,15 +113,13 @@ class FishHookMockTest
 		assertThrows(IllegalArgumentException.class, () -> hook.setBiteChance(-1));
 	}
 
-// todo: Uncomment when WorkMock#isClearWeather is implemented.
-//	@Test
-//	void setBiteChance_Raining()
-//	{
-//		hook.setBiteChance(-1);
-//		assertEquals(1.0 / 500.0, hook.getBiteChance());
-//		world.setThunderDuration(60);
-//		assertEquals(1.0 / 300.0, hook.getBiteChance());
-//	}
+	@Test
+	void setBiteChance_Raining()
+	{
+		assertTrue(hook.getBiteChance() - 0.003 < 0.001, "Expected 0.003, but was "	+ hook.getBiteChance());
+		world.setThundering(true);
+		assertTrue(hook.getBiteChance() - 0.002 < 0.001, "Expected 0.002, but was "	+ hook.getBiteChance());
+	}
 
 	@Test
 	void setHookedEntity()

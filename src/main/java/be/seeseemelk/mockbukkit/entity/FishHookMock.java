@@ -73,10 +73,9 @@ public class FishHookMock extends ProjectileMock implements FishHook
 	{
 		if (this.biteChance == -1)
 		{
-			// todo: Uncomment when WorkMock#isClearWeather is implemented.
-//			if (!getWorld().isClearWeather()) {
-//				return 1 / 300.0;
-//			}
+			if (!getWorld().isClearWeather()) {
+				return 1 / 300.0;
+			}
 			return 1 / 500.0;
 		}
 		return this.biteChance;
