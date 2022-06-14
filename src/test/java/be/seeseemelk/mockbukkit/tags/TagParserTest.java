@@ -1,12 +1,12 @@
 package be.seeseemelk.mockbukkit.tags;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.fail;
-
 import org.bukkit.NamespacedKey;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class TagParserTest
 {
@@ -25,7 +25,7 @@ class TagParserTest
 		NamespacedKey key = NamespacedKey.minecraft("i_dont_exist");
 		TagParser parser = new TagParser(TagRegistry.BLOCKS, key);
 
-		assertThrows(IllegalArgumentException.class, () -> parser.parse(null, (a, b) ->
+		assertThrows(NullPointerException.class, () -> parser.parse(null, (a, b) ->
 		{
 		}));
 	}

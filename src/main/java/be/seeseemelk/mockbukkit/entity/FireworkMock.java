@@ -3,7 +3,7 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.inventory.meta.FireworkMetaMock;
-import org.apache.commons.lang.Validate;
+import com.google.common.base.Preconditions;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
@@ -54,7 +54,7 @@ public class FireworkMock extends ProjectileMock implements Firework
 	@Override
 	public void setFireworkMeta(@NotNull FireworkMeta meta)
 	{
-		Validate.notNull(meta, "FireworkMeta cannot be null!");
+		Preconditions.checkNotNull(meta, "FireworkMeta cannot be null!");
 		this.meta = meta.clone();
 	}
 
