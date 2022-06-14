@@ -1,5 +1,7 @@
 package be.seeseemelk.mockbukkit;
 
+import be.seeseemelk.mockbukkit.generator.BiomeProviderMock;
+import com.google.common.base.Preconditions;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.entity.ArmorStandMock;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
@@ -62,6 +64,8 @@ import org.bukkit.entity.Projectile;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.weather.ThunderChangeEvent;
+import org.bukkit.event.weather.WeatherChangeEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.entity.ItemSpawnEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
@@ -111,6 +115,7 @@ public class WorldMock implements World
 	private final PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
 	private final ServerMock server;
 	private final Material defaultBlock;
+	private final Biome defaultBiome;
 	private final int grassHeight;
 	private final int minHeight;
 	private final int maxHeight;
@@ -120,11 +125,15 @@ public class WorldMock implements World
 	private String name = "World";
 	private Location spawnLocation;
 	private long fullTime = 0;
-	private int weatherDuration = 0;
-	private int thunderDuration = 0;
-	private boolean storming = false;
+	private int weatherDuration;
+	private boolean thundering;
+	private int thunderDuration;
+	private boolean storming;
+	private int clearWeatherDuration;
 	private long seed = 0;
 	private WorldType worldType = WorldType.NORMAL;
+	private final BiomeProviderMock biomeProviderMock = new BiomeProviderMock();
+	private Map<Coordinate, Biome> biomes = new HashMap<>();
 	private Difficulty difficulty = Difficulty.NORMAL;
 
 	/**
@@ -137,7 +146,22 @@ public class WorldMock implements World
 	 */
 	public WorldMock(Material defaultBlock, int minHeight, int maxHeight, int grassHeight)
 	{
+		this(defaultBlock, Biome.PLAINS, minHeight, maxHeight, grassHeight);
+	}
+
+	/**
+	 * Creates a new mock world.
+	 *
+	 * @param defaultBlock The block that is spawned at locations 1 to {@code grassHeight}
+	 * @param defaultBiome The biome that every block will be in by default.
+	 * @param minHeight    The minimum height of the world.
+	 * @param maxHeight    The maximum height of the world.
+	 * @param grassHeight  The last {@code y} at which {@code defaultBlock} will spawn.
+	 */
+	public WorldMock(Material defaultBlock, Biome defaultBiome, int minHeight, int maxHeight, int grassHeight)
+	{
 		this.defaultBlock = defaultBlock;
+		this.defaultBiome = defaultBiome;
 		this.minHeight = minHeight;
 		this.maxHeight = maxHeight;
 		this.grassHeight = grassHeight;
@@ -176,6 +200,19 @@ public class WorldMock implements World
 		this.worldType = creator.type();
 		this.seed = creator.seed();
 		this.environment = creator.environment();
+	}
+
+	/**
+	 * Creates a new mock world with a specific height from 0.
+	 *
+	 * @param defaultBlock The block that is spawned at locations 1 to {@code grassHeight}
+	 * @param defaultBiome The biome that every block will be in by default.
+	 * @param maxHeight    The maximum height of the world.
+	 * @param grassHeight  The last {@code y} at which {@code defaultBlock} will spawn.
+	 */
+	public WorldMock(Material defaultBlock, Biome defaultBiome, int maxHeight, int grassHeight)
+	{
+		this(defaultBlock, defaultBiome,0, maxHeight, grassHeight);
 	}
 
 	/**
@@ -1010,49 +1047,92 @@ public class WorldMock implements World
 	@Override
 	public boolean hasStorm()
 	{
-		return storming;
+		return this.storming;
 	}
 
 	@Override
 	public void setStorm(boolean hasStorm)
 	{
-		storming = hasStorm;
+		if (this.storming == hasStorm)
+		{
+			return;
+		}
+		WeatherChangeEvent weather = new WeatherChangeEvent(this, hasStorm, WeatherChangeEvent.Cause.PLUGIN);
+		Bukkit.getServer().getPluginManager().callEvent(weather);
+		if (weather.isCancelled())
+		{
+			return;
+		}
+		this.storming = hasStorm;
+		this.setWeatherDuration(0);
+		this.setClearWeatherDuration(0);
 	}
 
 	@Override
 	public int getWeatherDuration()
 	{
-		return weatherDuration;
+		return this.weatherDuration;
 	}
 
 	@Override
 	public void setWeatherDuration(int duration)
 	{
-		weatherDuration = duration;
+		this.weatherDuration = duration;
 	}
 
 	@Override
 	public boolean isThundering()
 	{
-		return thunderDuration > 0;
+		return this.thundering;
 	}
 
 	@Override
 	public void setThundering(boolean thundering)
 	{
-		thunderDuration = thundering ? 600 : 0;
+		if (this.thundering == thundering)
+		{
+			return;
+		}
+		ThunderChangeEvent thunder = new ThunderChangeEvent(this, thundering, ThunderChangeEvent.Cause.PLUGIN); // Paper
+		Bukkit.getServer().getPluginManager().callEvent(thunder);
+		if (thunder.isCancelled()) 
+		{
+			return;
+		}
+		this.thundering = thundering;
+		this.setThunderDuration(0);
+		this.setClearWeatherDuration(0);
 	}
 
 	@Override
 	public int getThunderDuration()
 	{
-		return thunderDuration;
+		return this.thunderDuration;
 	}
 
 	@Override
 	public void setThunderDuration(int duration)
 	{
-		thunderDuration = duration;
+		this.thunderDuration = duration;
+	}
+
+	@Override
+	public boolean isClearWeather()
+	{
+
+		return !this.hasStorm() && !this.isThundering();
+	}
+
+	@Override
+	public int getClearWeatherDuration()
+	{
+		return this.clearWeatherDuration;
+	}
+
+	@Override
+	public void setClearWeatherDuration(int duration)
+	{
+		this.clearWeatherDuration = duration;
 	}
 
 	@Override
@@ -1143,9 +1223,7 @@ public class WorldMock implements World
 	@Override
 	public BiomeProvider getBiomeProvider()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		return biomeProviderMock;
 	}
 
 	@Override
@@ -1218,7 +1296,7 @@ public class WorldMock implements World
 	@Override
 	public @NotNull ChunkSnapshot getEmptyChunkSnapshot(int x, int z, boolean includeBiome, boolean includeBiomeTempRain)
 	{
-		return new ChunkSnapshotMock(x, z, getMinHeight(), getMaxHeight(), getName(), getFullTime(), Map.of());
+		return new ChunkSnapshotMock(x, z, getMinHeight(), getMaxHeight(), getName(), getFullTime(), Map.of(), (includeBiome || includeBiomeTempRain) ? Map.of() : null);
 	}
 
 	@Override
@@ -1246,16 +1324,16 @@ public class WorldMock implements World
 	@Deprecated
 	public Biome getBiome(int x, int z)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getBiome(x, 0, z);
 	}
 
 	@Override
 	@Deprecated
 	public void setBiome(int x, int z, Biome bio)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		for (int y = this.getMinHeight(); y < this.getMaxHeight(); y++) {
+			this.setBiome(x, y, z, bio);
+		}
 	}
 
 	@Override
@@ -2049,16 +2127,13 @@ public class WorldMock implements World
 	@Override
 	public Biome getBiome(@NotNull Location location)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		return this.getBiome(location.getBlockX(), location.getBlockY(), location.getBlockZ());
 	}
 
 	@Override
-	public Biome getBiome(int x, int y, int z)
+	public @NotNull Biome getBiome(int x, int y, int z)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return biomes.getOrDefault(new Coordinate(x, y, z), defaultBiome);
 	}
 
 	@Override
@@ -2071,16 +2146,27 @@ public class WorldMock implements World
 	@Override
 	public void setBiome(@NotNull Location location, @NotNull Biome biome)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		this.setBiome(location.getBlockX(), location.getBlockY(), location.getBlockZ(), biome);
 	}
 
 	@Override
-	public void setBiome(int x, int y, int z, Biome bio)
+	public void setBiome(int x, int y, int z, @NotNull Biome bio)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(bio != Biome.CUSTOM, "Cannot set the biome to %s", bio);
+		biomes.put(new Coordinate(x, y, z), bio);
+	}
+
+	protected Map<Coordinate, Biome> getBiomeMap()
+	{
+		return new HashMap<>(biomes);
+	}
+
+	/**
+	 * @return The default biome of this world.
+	 */
+	public Biome getDefaultBiome()
+	{
+		return defaultBiome;
 	}
 
 	@NotNull
@@ -2412,27 +2498,6 @@ public class WorldMock implements World
 
 	@Override
 	public Spigot spigot()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean isClearWeather()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public int getClearWeatherDuration()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setClearWeatherDuration(int duration)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

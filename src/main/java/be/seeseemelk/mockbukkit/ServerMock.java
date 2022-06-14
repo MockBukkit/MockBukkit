@@ -1455,8 +1455,9 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public ChunkData createChunkData(World world)
+	public @NotNull ChunkData createChunkData(@NotNull World world)
 	{
+		Preconditions.checkNotNull(world, "World cannot be null");
 		return new MockChunkData(world);
 	}
 
