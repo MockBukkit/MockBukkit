@@ -25,6 +25,7 @@ import be.seeseemelk.mockbukkit.inventory.LecternInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.ShulkerBoxInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
+import be.seeseemelk.mockbukkit.map.MapViewMock;
 import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 import be.seeseemelk.mockbukkit.potion.MockPotionEffectType;
 import be.seeseemelk.mockbukkit.profile.PlayerProfileMock;
@@ -81,9 +82,9 @@ import org.bukkit.entity.SpawnCategory;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.server.MapInitializeEvent;
 import org.bukkit.generator.ChunkGenerator.ChunkData;
 import org.bukkit.inventory.InventoryHolder;
-import org.bukkit.inventory.ItemFactory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.Recipe;
@@ -139,7 +140,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private final List<World> worlds = new ArrayList<>();
 	private final List<Recipe> recipes = new LinkedList<>();
 	private final Map<NamespacedKey, KeyedBossBarMock> bossBars = new HashMap<>();
-	private final ItemFactory factory = new ItemFactoryMock();
+	private final ItemFactoryMock factory = new ItemFactoryMock();
 	private final PlayerMockFactory playerFactory = new PlayerMockFactory(this);
 	private final PluginManagerMock pluginManager = new PluginManagerMock(this);
 	private final ScoreboardManagerMock scoreboardManager = new ScoreboardManagerMock();
@@ -149,6 +150,8 @@ public class ServerMock extends Server.Spigot implements Server
 	private final MockCommandMap commandMap = new MockCommandMap(this);
 	private final HelpMapMock helpMap = new HelpMapMock();
 	private final StandardMessenger messenger = new StandardMessenger();
+	private final Map<Integer, MapViewMock> mapViews = new HashMap<>();
+	private int nextMapId = 1;
 
 	private GameMode defaultGameMode = GameMode.SURVIVAL;
 	private ConsoleCommandSender consoleSender;
@@ -685,7 +688,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public ItemFactory getItemFactory()
+	public @NotNull ItemFactoryMock getItemFactory()
 	{
 		return factory;
 	}
@@ -1194,10 +1197,12 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public MapView createMap(World world)
+	public @NotNull MapViewMock createMap(@NotNull World world)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		MapViewMock mapView = new MapViewMock(world, nextMapId++);
+		mapViews.put(mapView.getId(), mapView);
+		new MapInitializeEvent(mapView).callEvent();
+		return mapView;
 	}
 
 	@Override
@@ -1739,10 +1744,9 @@ public class ServerMock extends Server.Spigot implements Server
 
 	@Override
 	@Deprecated
-	public MapView getMap(int id)
+	public MapViewMock getMap(int id)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return mapViews.get(id);
 	}
 
 	@Override
