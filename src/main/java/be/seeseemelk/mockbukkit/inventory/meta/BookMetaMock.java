@@ -1,23 +1,21 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
-
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 import net.kyori.adventure.inventory.Book;
 import net.kyori.adventure.text.Component;
-import org.apache.commons.lang.Validate;
 import org.bukkit.inventory.meta.BookMeta;
-
-import com.google.common.base.Strings;
-
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.common.returnsreceiver.qual.This;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by SimplyBallistic on 26/10/2018
@@ -196,7 +194,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	@Deprecated
 	public String getPage(int page)
 	{
-		Validate.isTrue(this.isValidPage(page), "Invalid page number");
+		Preconditions.checkArgument(this.isValidPage(page), "Invalid page number");
 		return this.pages.get(page - 1);
 	}
 

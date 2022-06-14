@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -21,13 +22,13 @@ import org.junit.jupiter.api.Test;
 class MockBukkitTest
 {
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		MockBukkit.setServerInstanceToNull();
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		if (MockBukkit.isMocked())
 		{
@@ -173,6 +174,19 @@ class MockBukkitTest
 		FileConfiguration config = plugin.getConfig();
 		String value = config.getString("foo");
 		assertThat(value, equalTo("bar"));
+	}
+
+	@Test
+	void ensureMocking_Mocking_DoesNothing()
+	{
+		MockBukkit.mock();
+		assertDoesNotThrow(MockBukkit::ensureMocking);
+	}
+
+	@Test
+	void ensureMocking_NotMocking_ThrowsException()
+	{
+		assertThrows(IllegalStateException.class, MockBukkit::ensureMocking);
 	}
 
 	private static class CustomServerMock extends ServerMock

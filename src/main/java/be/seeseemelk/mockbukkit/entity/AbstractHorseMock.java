@@ -2,7 +2,7 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import org.apache.commons.lang.Validate;
+import com.google.common.base.Preconditions;
 import org.bukkit.entity.AbstractHorse;
 import org.bukkit.entity.AnimalTamer;
 import org.bukkit.entity.Horse;
@@ -44,8 +44,9 @@ public abstract class AbstractHorseMock extends AnimalsMock implements AbstractH
 	@Override
 	public void setDomestication(int value)
 	{
-		Validate.isTrue(value >= 0, "Domestication cannot be less than zero");
-		Validate.isTrue(value <= this.getMaxDomestication(), "Domestication cannot be greater than the max domestication");
+
+		Preconditions.checkArgument(value >= 0, "Domestication cannot be less than zero");
+		Preconditions.checkArgument(value <= this.getMaxDomestication(), "Domestication cannot be greater than the max domestication");
 		this.domestication = value;
 	}
 
@@ -58,7 +59,7 @@ public abstract class AbstractHorseMock extends AnimalsMock implements AbstractH
 	@Override
 	public void setMaxDomestication(int value)
 	{
-		Validate.isTrue(value > 0, "Max domestication cannot be zero or less");
+		Preconditions.checkArgument(value > 0, "Max domestication cannot be zero or less");
 		this.maxDomestication = value;
 	}
 
@@ -71,7 +72,7 @@ public abstract class AbstractHorseMock extends AnimalsMock implements AbstractH
 	@Override
 	public void setJumpStrength(double strength)
 	{
-		Validate.isTrue(strength >= 0, "Jump strength cannot be less than zero");
+		Preconditions.checkArgument(strength >= 0, "Jump strength cannot be less than zero");
 		this.jumpStrength = strength;
 	}
 
