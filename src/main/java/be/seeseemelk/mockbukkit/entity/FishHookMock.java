@@ -2,8 +2,8 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import com.google.common.base.Preconditions;
 import net.kyori.adventure.text.Component;
-import org.apache.commons.lang.Validate;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -39,7 +39,7 @@ public class FishHookMock extends ProjectileMock implements FishHook
 	@Override
 	public void setMinWaitTime(int minWaitTime)
 	{
-		Validate.isTrue(minWaitTime >= 0 && minWaitTime <= this.getMaxWaitTime(), "The minimum wait time should be between 0 and the maximum wait time.");
+		Preconditions.checkArgument(minWaitTime >= 0 && minWaitTime <= this.getMaxWaitTime(), "The minimum wait time should be between 0 and the maximum wait time.");
 		this.minWaitTime = minWaitTime;
 	}
 
@@ -52,7 +52,7 @@ public class FishHookMock extends ProjectileMock implements FishHook
 	@Override
 	public void setMaxWaitTime(int maxWaitTime)
 	{
-		Validate.isTrue(maxWaitTime >= 0 && maxWaitTime >= this.getMinWaitTime(), "The maximum wait time should be higher than or equal to 0 and the minimum wait time.");
+		Preconditions.checkArgument(maxWaitTime >= 0 && maxWaitTime >= this.getMinWaitTime(), "The maximum wait time should be higher than or equal to 0 and the minimum wait time.");
 		this.maxWaitTime = maxWaitTime;
 	}
 
@@ -85,7 +85,7 @@ public class FishHookMock extends ProjectileMock implements FishHook
 	@Override
 	public void setBiteChance(double chance) throws IllegalArgumentException
 	{
-		Validate.isTrue(chance >= 0 && chance <= 1, "The bite chance must be between 0 and 1.");
+		Preconditions.checkArgument(chance >= 0 && chance <= 1, "The bite chance must be between 0 and 1.");
 		this.biteChance = chance;
 	}
 
