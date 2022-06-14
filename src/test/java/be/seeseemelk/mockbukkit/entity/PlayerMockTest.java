@@ -1688,6 +1688,7 @@ class PlayerMockTest
 		mapView.render(player);
 
 		assertTrue(b.get());
+	}
 
 	@Test
 	void testPlayerLastDeathLocation_Set()
