@@ -1,17 +1,7 @@
 package be.seeseemelk.mockbukkit.inventory;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
-
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Objects;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-
-import org.apache.commons.lang.Validate;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import com.google.common.base.Preconditions;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
@@ -22,19 +12,33 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Objects;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class InventoryMock implements Inventory
 {
+
+	private static final int MAX_STACK_SIZE = 64;
+
 	private final ItemStack[] items;
 	private final InventoryHolder holder;
 	private final InventoryType type;
 
+	private int maxStackSize = MAX_STACK_SIZE;
+
 	public InventoryMock(@Nullable InventoryHolder holder, int size, @NotNull InventoryType type)
 	{
-		Validate.isTrue(9 <= size && size <= 54 && size % 9 == 0,
-		                "Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got " + size + ")");
-		Validate.notNull(type, "The InventoryType must not be null!");
+		Preconditions.checkArgument(9 <= size && size <= 54 && size % 9 == 0,
+				"Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got " + size + ")");
+		Preconditions.checkNotNull(type, "The InventoryType must not be null!");
 
 		this.holder = holder;
 		this.type = type;
@@ -44,7 +48,7 @@ public class InventoryMock implements Inventory
 
 	public InventoryMock(@Nullable InventoryHolder holder, @NotNull InventoryType type)
 	{
-		Validate.notNull(type, "The InventoryType must not be null!");
+		Preconditions.checkNotNull(type, "The InventoryType must not be null!");
 
 		this.holder = holder;
 		this.type = type;
@@ -162,22 +166,27 @@ public class InventoryMock implements Inventory
 	@Nullable
 	public ItemStack addItem(@NotNull ItemStack item)
 	{
+		final int itemMaxStackSize = Math.min(item.getMaxStackSize(), this.maxStackSize);
 		item = item.clone();
 		for (int i = 0; i < items.length; i++)
 		{
 			ItemStack oItem = items[i];
 			if (oItem == null)
 			{
-				int toAdd = Math.min(item.getAmount(), item.getMaxStackSize());
+				int toAdd = Math.min(item.getAmount(), itemMaxStackSize);
 				items[i] = item.clone();
 				items[i].setAmount(toAdd);
 				item.setAmount(item.getAmount() - toAdd);
 			}
-			else if (item.isSimilar(oItem) && oItem.getAmount() < oItem.getMaxStackSize())
+			else 
 			{
-				int toAdd = Math.min(item.getAmount(), item.getMaxStackSize() - oItem.getAmount());
-				oItem.setAmount(oItem.getAmount() + toAdd);
-				item.setAmount(item.getAmount() - toAdd);
+				final int oItemMaxStackSize = Math.min(oItem.getMaxStackSize(), this.maxStackSize);
+				if (item.isSimilar(oItem) && oItem.getAmount() < oItemMaxStackSize)
+				{
+					int toAdd = Math.min(item.getAmount(), oItemMaxStackSize - oItem.getAmount());
+					oItem.setAmount(oItem.getAmount() + toAdd);
+					item.setAmount(item.getAmount() - toAdd);
+				}
 			}
 
 			if (item.getAmount() == 0)
@@ -234,6 +243,13 @@ public class InventoryMock implements Inventory
 	}
 
 	@Override
+	public @Nullable InventoryHolder getHolder(boolean useSnapshot)
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public ListIterator<ItemStack> iterator()
 	{
 		List<ItemStack> list = Arrays.asList(items).stream().filter(Objects::nonNull).collect(Collectors.toList());
@@ -249,21 +265,35 @@ public class InventoryMock implements Inventory
 	@Override
 	public int getMaxStackSize()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return maxStackSize;
 	}
 
 	@Override
 	public void setMaxStackSize(int size)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// The following checks aren't done in CraftBukkit, but are a fair sanity check.
+		if (size < 1)
+		{
+			throw new IllegalArgumentException("Max stack size cannot be lower than 1");
+		}
+		if (size > 127)
+		{
+			throw new IllegalArgumentException("Stack sizes larger than 127 may get clipped");
+		}
+		maxStackSize = size;
 	}
 
 	@Override
 	public HashMap<Integer, ItemStack> removeItem(ItemStack... items) throws IllegalArgumentException
 	{
 		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull HashMap<Integer, ItemStack> removeItemAnySlot(@NotNull ItemStack... items) throws IllegalArgumentException
+	{
+		//TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
@@ -325,31 +355,71 @@ public class InventoryMock implements Inventory
 	}
 
 	@Override
-	public HashMap<Integer, ? extends ItemStack> all(Material material) throws IllegalArgumentException
+	public @NotNull HashMap<Integer, ? extends ItemStack> all(@NotNull Material material) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(material, "Material cannot be null");
+		HashMap<Integer, ItemStack> slots = new HashMap<>();
+
+		ItemStack[] items = this.getStorageContents();
+		for (int i = 0; i < items.length; i++)
+		{
+			if (items[i] != null && items[i].getType() == material)
+			{
+				slots.put(i, items[i]);
+			}
+		}
+		return slots;
 	}
 
 	@Override
-	public HashMap<Integer, ? extends ItemStack> all(ItemStack item)
+	public @NotNull HashMap<Integer, ? extends ItemStack> all(ItemStack item)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		HashMap<Integer, ItemStack> slots = new HashMap<>();
+		if (item != null)
+		{
+			ItemStack[] items = this.getStorageContents();
+			for (int i = 0; i < items.length; i++)
+			{
+				if (item.equals(items[i]))
+				{
+					slots.put(i, items[i]);
+				}
+			}
+		}
+		return slots;
 	}
 
 	@Override
-	public int first(Material material) throws IllegalArgumentException
+	public int first(@NotNull Material material) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(material, "Material cannot be null");
+		ItemStack[] items = this.getStorageContents();
+		for (int i = 0; i < items.length; i++)
+		{
+			if (items[i] != null && items[i].getType() == material)
+			{
+				return i;
+			}
+		}
+		return -1;
 	}
 
 	@Override
-	public int first(ItemStack item)
+	public int first(@NotNull ItemStack item)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (item == null)
+		{
+			return -1;
+		}
+		ItemStack[] items = this.getStorageContents();
+		for (int i = 0; i < items.length; i++)
+		{
+			if (items[i] != null && item.equals(items[i]))
+			{
+				return i;
+			}
+		}
+		return -1;
 	}
 
 	@Override
@@ -367,17 +437,30 @@ public class InventoryMock implements Inventory
 	}
 
 	@Override
-	public void remove(Material material) throws IllegalArgumentException
+	public void remove(@NotNull Material material) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(material, "Material cannot be null");
+		ItemStack[] items = this.getStorageContents();
+		for (int i = 0; i < items.length; i++)
+		{
+			if (items[i] != null && items[i].getType() == material)
+			{
+				this.clear(i);
+			}
+		}
 	}
 
 	@Override
-	public void remove(ItemStack item)
+	public void remove(@NotNull ItemStack item)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		ItemStack[] items = this.getStorageContents();
+		for (int i = 0; i < items.length; i++)
+		{
+			if (items[i] != null && items[i].equals(item))
+			{
+				this.clear(i);
+			}
+		}
 	}
 
 	@Override
@@ -390,6 +473,13 @@ public class InventoryMock implements Inventory
 	public void clear()
 	{
 		Arrays.fill(items, null);
+	}
+
+	@Override
+	public int close()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

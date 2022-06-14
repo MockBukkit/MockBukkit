@@ -1,6 +1,21 @@
 package be.seeseemelk.mockbukkit.tags;
 
+import be.seeseemelk.mockbukkit.MockBukkit;
+import com.google.common.base.Preconditions;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonPrimitive;
+import org.bukkit.Keyed;
+import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.Tag;
+import org.jetbrains.annotations.NotNull;
+
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
@@ -9,22 +24,6 @@ import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-
-import org.apache.commons.lang.Validate;
-import org.bukkit.Keyed;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
-import org.bukkit.Tag;
-import org.jetbrains.annotations.NotNull;
-
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.JsonParser;
-import com.google.gson.JsonPrimitive;
-
-import be.seeseemelk.mockbukkit.MockBukkit;
 
 /**
  * The {@link TagParser} is responsible for parsing a JSON input into a {@link TagWrapperMock}.
@@ -65,9 +64,14 @@ public class TagParser implements Keyed
 		this.key = tag.getKey();
 	}
 
-	void parse(@NotNull BiConsumer<Set<Material>, Set<TagWrapperMock>> callback) throws TagMisconfigurationException
+	void parse(@NotNull BiConsumer<Set<Material>, Set<TagWrapperMock>> callback) throws TagMisconfigurationException, FileNotFoundException
 	{
 		String path = "/tags/" + registry.getRegistry() + '/' + getKey().getKey() + ".json";
+
+		if (MockBukkit.class.getResource(path) == null)
+		{
+			throw new FileNotFoundException(path);
+		}
 
 		try (BufferedReader reader = new BufferedReader(
 			    new InputStreamReader(MockBukkit.class.getResourceAsStream(path), StandardCharsets.UTF_8)))
@@ -93,15 +97,14 @@ public class TagParser implements Keyed
 	public void parse(@NotNull String json, @NotNull BiConsumer<Set<Material>, Set<TagWrapperMock>> callback)
 	throws TagMisconfigurationException
 	{
-		Validate.notNull(json, "Cannot parse a null String");
+		Preconditions.checkNotNull(json, "Cannot parse a null String");
 
 		try
 		{
 			Set<Material> materials = new HashSet<>();
 			Set<TagWrapperMock> tags = new HashSet<>();
 
-			JsonParser parser = new JsonParser();
-			JsonObject root = parser.parse(json).getAsJsonObject();
+			JsonObject root = JsonParser.parseString(json).getAsJsonObject();
 			JsonElement child = root.get("values");
 
 			if (child instanceof JsonArray)

@@ -1,16 +1,21 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
+import net.kyori.adventure.inventory.Book;
+import net.kyori.adventure.text.Component;
+import org.bukkit.inventory.meta.BookMeta;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.common.returnsreceiver.qual.This;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.Unmodifiable;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
-
-import org.apache.commons.lang.Validate;
-import org.bukkit.inventory.meta.BookMeta;
-
-import com.google.common.base.Strings;
-
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
 /**
  * Created by SimplyBallistic on 26/10/2018
@@ -73,6 +78,76 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	}
 
 	@Override
+	public @Nullable Component title()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @This @NotNull BookMeta title(@Nullable Component title)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Component author()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @This @NotNull BookMeta author(@Nullable Component author)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Unmodifiable @NotNull List<Component> pages()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Book pages(@NotNull List<Component> pages)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Component page(int page)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void page(int page, @NotNull Component data)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void addPages(@NotNull Component... pages)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NonNull BookMetaBuilder toBuilder()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public String getTitle()
 	{
 		return this.title;
@@ -116,9 +191,10 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	}
 
 	@Override
+	@Deprecated
 	public String getPage(int page)
 	{
-		Validate.isTrue(this.isValidPage(page), "Invalid page number");
+		Preconditions.checkArgument(this.isValidPage(page), "Invalid page number");
 		return this.pages.get(page - 1);
 	}
 
@@ -128,6 +204,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	}
 
 	@Override
+	@Deprecated
 	public void setPage(int page, String text)
 	{
 		if (!this.isValidPage(page))
@@ -146,12 +223,14 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	}
 
 	@Override
+	@Deprecated
 	public List<String> getPages()
 	{
 		return pages;
 	}
 
 	@Override
+	@Deprecated
 	public void setPages(String... pages)
 	{
 		this.pages.clear();
@@ -159,6 +238,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	}
 
 	@Override
+	@Deprecated
 	public void setPages(List<String> pages)
 	{
 		this.pages.clear();
@@ -173,6 +253,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	}
 
 	@Override
+	@Deprecated
 	public void addPage(String... pages)
 	{
 

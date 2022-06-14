@@ -17,6 +17,10 @@
     "minecraft:diorite_wall",
     "minecraft:blackstone_wall",
     "minecraft:polished_blackstone_brick_wall",
-    "minecraft:polished_blackstone_wall"
+    "minecraft:polished_blackstone_wall",
+    "minecraft:cobbled_deepslate_wall",
+    "minecraft:polished_deepslate_wall",
+    "minecraft:deepslate_tile_wall",
+    "minecraft:deepslate_brick_wall"
   ]
 }

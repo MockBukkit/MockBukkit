@@ -33,7 +33,7 @@ class PluginManagerMockTest
 	private TestPlugin plugin;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		server = MockBukkit.mock();
 		pluginManager = server.getPluginManager();
@@ -41,7 +41,7 @@ class PluginManagerMockTest
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
@@ -65,6 +65,30 @@ class PluginManagerMockTest
 		assertFalse(plugin.unannotatedPlayerInteractEventExecuted);
 		assertFalse(plugin.annotatedBlockBreakEventExecuted);
 		assertTrue(plugin.annotatedPlayerInteractEventExecuted);
+	}
+
+	@Test
+	void test_ManualListener_Registration()
+	{
+		MockBukkit.getMock().getPluginManager().registerEvents(plugin, plugin);
+		assertEquals(3, BlockBreakEvent.getHandlerList().getRegisteredListeners().length);
+		pluginManager.unregisterPluginEvents(plugin);
+		assertEquals(0, BlockBreakEvent.getHandlerList().getRegisteredListeners().length);
+		MockBukkit.getMock().getPluginManager().registerEvents(plugin, plugin);
+		MockBukkit.getMock().getPluginManager().registerEvents(plugin, plugin);
+		assertEquals(6, BlockBreakEvent.getHandlerList().getRegisteredListeners().length);
+		pluginManager.unregisterPluginEvents(plugin);
+		assertEquals(0, BlockBreakEvent.getHandlerList().getRegisteredListeners().length);
+	}
+
+	@Test
+	void test_AutomaticListener_DeRegistration()
+	{
+		MockBukkit.getMock().getPluginManager().registerEvents(plugin, plugin);
+		assertEquals(3, BlockBreakEvent.getHandlerList().getRegisteredListeners().length);
+		MockBukkit.unmock();
+		assertEquals(0, BlockBreakEvent.getHandlerList().getRegisteredListeners().length);
+
 	}
 
 	@Test

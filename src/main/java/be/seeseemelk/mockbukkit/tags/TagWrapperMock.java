@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.tags;
 
+import java.io.FileNotFoundException;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -44,7 +45,7 @@ public class TagWrapperMock implements Tag<Material>
 		return registry;
 	}
 
-	public void reload() throws TagMisconfigurationException
+	public void reload() throws TagMisconfigurationException, FileNotFoundException
 	{
 		this.materials.clear();
 		this.additionalTags.clear();
@@ -104,6 +105,15 @@ public class TagWrapperMock implements Tag<Material>
 	public Set<TagWrapperMock> getSubTags()
 	{
 		return Collections.unmodifiableSet(additionalTags);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public @NotNull String toString()
+	{
+		return key.toString();
 	}
 
 }

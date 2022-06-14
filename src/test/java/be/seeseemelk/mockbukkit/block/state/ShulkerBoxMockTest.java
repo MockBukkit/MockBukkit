@@ -28,14 +28,14 @@ class ShulkerBoxMockTest
 	private ShulkerBoxMock shulkerBox;
 
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		MockBukkit.mock();
 		shulkerBox = new ShulkerBoxMock(Material.SHULKER_BOX);
 	}
 
 	@AfterEach
-	public void tearDown() throws Exception
+	void tearDown() throws Exception
 	{
 		MockBukkit.unmock();
 	}
@@ -114,4 +114,30 @@ class ShulkerBoxMockTest
 		assertTrue(block.getState() instanceof ShulkerBox);
 		assertEquals(color, ((ShulkerBox) block.getState()).getColor());
 	}
+
+	@Test
+	void testOpen()
+	{
+		shulkerBox.open();
+		assertTrue(shulkerBox.isOpen());
+	}
+
+	@Test
+	void testClose()
+	{
+		assertFalse(shulkerBox.isOpen());
+		shulkerBox.open();
+		shulkerBox.close();
+		assertFalse(shulkerBox.isOpen());
+	}
+
+	@Test
+	void testIsOpen()
+	{
+		assertFalse(shulkerBox.isOpen());
+		shulkerBox.open();
+		assertTrue(shulkerBox.isOpen());
+	}
+
+
 }

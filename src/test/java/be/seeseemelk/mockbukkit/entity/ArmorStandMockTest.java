@@ -11,6 +11,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
+import org.bukkit.util.EulerAngle;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,14 +27,14 @@ class ArmorStandMockTest
 	private World world;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		server = MockBukkit.mock();
 		world = new WorldMock();
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
@@ -119,4 +120,59 @@ class ArmorStandMockTest
 		armorStand.setVisible(false);
 		assertFalse(armorStand.isVisible());
 	}
+
+	@Test
+	void testHeadPose()
+	{
+		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
+
+		armorStand.setHeadPose(new EulerAngle(5, 5, 5));
+		assertEquals(armorStand.getHeadPose(), new EulerAngle(5, 5, 5));
+	}
+
+	@Test
+	void testBodyPose()
+	{
+		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
+
+		armorStand.setBodyPose(new EulerAngle(5, 5, 5));
+		assertEquals(armorStand.getBodyPose(), new EulerAngle(5, 5, 5));
+	}
+
+	@Test
+	void testLeftArm()
+	{
+		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
+
+		armorStand.setLeftArmPose(new EulerAngle(5, 5, 5));
+		assertEquals(armorStand.getLeftArmPose(), new EulerAngle(5, 5, 5));
+	}
+
+	@Test
+	void testRightArm()
+	{
+		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
+
+		armorStand.setRightArmPose(new EulerAngle(5, 5, 5));
+		assertEquals(armorStand.getRightArmPose(), new EulerAngle(5, 5, 5));
+	}
+
+	@Test
+	void testLeftLeg()
+	{
+		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
+
+		armorStand.setLeftLegPose(new EulerAngle(5, 5, 5));
+		assertEquals(armorStand.getLeftLegPose(), new EulerAngle(5, 5, 5));
+	}
+
+	@Test
+	void testRightLeg()
+	{
+		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
+
+		armorStand.setRightLegPose(new EulerAngle(5, 5, 5));
+		assertEquals(armorStand.getRightLegPose(), new EulerAngle(5, 5, 5));
+	}
+
 }

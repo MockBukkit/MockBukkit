@@ -26,13 +26,13 @@ class PersistentDataTest
 	private ServerMock mock;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		mock = MockBukkit.mock();
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
@@ -167,6 +167,19 @@ class PersistentDataTest
 		assertEquals(2, container.getKeys().size());
 		assertTrue(container.getKeys().contains(key));
 		assertTrue(container.getKeys().contains(key2));
+	}
+
+	@Test
+	void testHasKey()
+	{
+		PersistentDataContainer container = new PersistentDataContainerMock();
+		NamespacedKey key = getRandomKey();
+		NamespacedKey key2 = getRandomKey();
+
+		assertFalse(container.has(key));
+		container.set(key, PersistentDataType.STRING, "Hello world");
+		assertTrue(container.has(key));
+		assertFalse(container.has(key2));
 	}
 
 }

@@ -1,9 +1,7 @@
 package be.seeseemelk.mockbukkit;
 
-import java.util.Collection;
-
 import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
-import org.apache.commons.lang.Validate;
+import com.google.common.base.Preconditions;
 import org.bukkit.Chunk;
 import org.bukkit.ChunkSnapshot;
 import org.bukkit.World;
@@ -13,9 +11,16 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Entity;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Collection;
+import java.util.function.Predicate;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ChunkMock implements Chunk
 {
+
 	private final World world;
 	private final int x;
 	private final int z;
@@ -42,32 +47,76 @@ public class ChunkMock implements Chunk
 	}
 
 	@Override
-	public World getWorld()
+	public @NotNull Collection<BlockState> getTileEntities(@NotNull Predicate<Block> blockPredicate, boolean useSnapshot)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull BlockState[] getTileEntities(boolean useSnapshot)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public long getChunkKey()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull World getWorld()
 	{
 		return world;
 	}
 
 	@Override
-	public Block getBlock(int x, int y, int z)
+	public @NotNull Block getBlock(int x, int y, int z)
 	{
-		Validate.isTrue(x >= 0 && x <= 15, "x is out of range (expected 0-15)");
-		Validate.isTrue(y >= 0 && y <= 255, "y is out of range (expected 0-255)");
-		Validate.isTrue(z >= 0 && z <= 15, "z is out of range (expected 0-15)");
+		Preconditions.checkArgument(0 <= x && x <= 15, "x out of range (expected 0-15, got %s)", x);
+		Preconditions.checkArgument(world.getMinHeight() <= y && y <= world.getMaxHeight(), "y out of range (expected %s-%s, got %s)", world.getMinHeight(), world.getMaxHeight(), y);
+		Preconditions.checkArgument(0 <= z && z <= 15, "z out of range (expected 0-15, got %s)", z);
 		return world.getBlockAt((this.x << 4) + x, y, (this.z << 4) + z);
 	}
 
-	@Override
-	public ChunkSnapshot getChunkSnapshot()
+	public @NotNull Block getBlock(@NotNull Coordinate coordinate)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getBlock(coordinate.x, coordinate.y, coordinate.z);
 	}
 
 	@Override
-	public ChunkSnapshot getChunkSnapshot(boolean includeMaxblocky, boolean includeBiome, boolean includeBiomeTempRain)
+	public @NotNull ChunkSnapshot getChunkSnapshot()
+	{
+		return getChunkSnapshot(true, false, false);
+	}
+
+	@Override
+	public @NotNull ChunkSnapshot getChunkSnapshot(boolean includeMaxblocky, boolean includeBiome, boolean includeBiomeTempRain)
+	{
+		Map<Coordinate, BlockState> blockStates = new HashMap<>((15 * 15) * Math.abs((world.getMaxHeight() - world.getMinHeight())), 1.0f);
+		for (int x = 0; x < 15; x++)
+		{
+			for (int y = world.getMinHeight(); y < world.getMaxHeight(); y++)
+			{
+				for (int z = 0; z < 15; z++)
+				{
+					blockStates.put(new Coordinate(x, y, z), getBlock(x, y, z).getState());
+				}
+			}
+		}
+		return new ChunkSnapshotMock(x, z, world.getMinHeight(), world.getMaxHeight(), world.getName(), world.getFullTime(), blockStates);
+	}
+
+
+	@Override
+	public boolean isEntitiesLoaded()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+
 	}
 
 	@Override
@@ -158,21 +207,21 @@ public class ChunkMock implements Chunk
 	}
 
 	@Override
-	public boolean addPluginChunkTicket(Plugin plugin)
+	public boolean addPluginChunkTicket(@NotNull Plugin plugin)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean removePluginChunkTicket(Plugin plugin)
+	public boolean removePluginChunkTicket(@NotNull Plugin plugin)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Collection<Plugin> getPluginChunkTickets()
+	public @NotNull Collection<Plugin> getPluginChunkTickets()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -193,15 +242,16 @@ public class ChunkMock implements Chunk
 	}
 
 	@Override
-	public boolean contains(BlockData block)
+	public boolean contains(@NotNull BlockData block)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public PersistentDataContainer getPersistentDataContainer()
+	public @NotNull PersistentDataContainer getPersistentDataContainer()
 	{
 		return persistentDataContainer;
 	}
+
 }

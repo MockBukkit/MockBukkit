@@ -1,24 +1,25 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import java.util.UUID;
-
-import org.apache.commons.lang.Validate;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Firework;
-import org.bukkit.inventory.meta.FireworkMeta;
-import org.jetbrains.annotations.NotNull;
-
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.inventory.meta.FireworkMetaMock;
+import com.google.common.base.Preconditions;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Firework;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.FireworkMeta;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.UUID;
 
 /**
  * This is a simple mock of the {@link Firework} {@link Entity}. It takes a {@link FireworkMeta} to carry all
  * properties.
  *
  * @author TheBusyBiscuit
- *
  */
 public class FireworkMock extends ProjectileMock implements Firework
 {
@@ -39,7 +40,7 @@ public class FireworkMock extends ProjectileMock implements Firework
 	}
 
 	@Override
-	public EntityType getType()
+	public @NotNull EntityType getType()
 	{
 		return EntityType.FIREWORK;
 	}
@@ -53,7 +54,7 @@ public class FireworkMock extends ProjectileMock implements Firework
 	@Override
 	public void setFireworkMeta(@NotNull FireworkMeta meta)
 	{
-		Validate.notNull(meta, "FireworkMeta cannot be null!");
+		Preconditions.checkNotNull(meta, "FireworkMeta cannot be null!");
 		this.meta = meta.clone();
 	}
 
@@ -74,6 +75,62 @@ public class FireworkMock extends ProjectileMock implements Firework
 	public void setShotAtAngle(boolean shotAtAngle)
 	{
 		this.shotAtAngle = shotAtAngle;
+	}
+
+	@Override
+	public @Nullable UUID getSpawningEntity()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable LivingEntity getBoostedEntity()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull ItemStack getItem()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setItem(@Nullable ItemStack itemStack)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getTicksFlown()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setTicksFlown(int ticks)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getTicksToDetonate()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setTicksToDetonate(int ticks)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 }

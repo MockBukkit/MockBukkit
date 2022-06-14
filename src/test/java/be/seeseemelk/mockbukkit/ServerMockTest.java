@@ -1,32 +1,33 @@
 package be.seeseemelk.mockbukkit;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assumptions.assumeTrue;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.atomic.AtomicReference;
-
+import be.seeseemelk.mockbukkit.command.CommandResult;
+import be.seeseemelk.mockbukkit.entity.EntityMock;
+import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
+import be.seeseemelk.mockbukkit.entity.PlayerMock;
+import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
+import be.seeseemelk.mockbukkit.entity.SimpleEntityMock;
+import be.seeseemelk.mockbukkit.inventory.InventoryMock;
+import be.seeseemelk.mockbukkit.profile.PlayerProfileMock;
+import com.google.common.io.ByteArrayDataOutput;
+import com.google.common.io.ByteStreams;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.Sound;
+import org.bukkit.Warning;
+import org.bukkit.World;
+import org.bukkit.WorldCreator;
+import org.bukkit.WorldType;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
@@ -37,28 +38,43 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import be.seeseemelk.mockbukkit.command.CommandResult;
-import be.seeseemelk.mockbukkit.entity.EntityMock;
-import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
-import be.seeseemelk.mockbukkit.entity.PlayerMock;
-import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
-import be.seeseemelk.mockbukkit.entity.SimpleEntityMock;
-import be.seeseemelk.mockbukkit.inventory.InventoryMock;
+import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.equalTo;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 class ServerMockTest
 {
+
 	private ServerMock server;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		server = MockBukkit.mock();
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
@@ -67,6 +83,22 @@ class ServerMockTest
 	void class_NumberOfPlayers_Zero()
 	{
 		assertEquals(0, server.getOnlinePlayers().size());
+	}
+
+	@Test
+	void createWorld_WorldCreator()
+	{
+		WorldCreator worldCreator = new WorldCreator("test")
+				.seed(12345)
+				.type(WorldType.FLAT)
+				.environment(World.Environment.NORMAL);
+		World world = server.createWorld(worldCreator);
+
+		assertEquals(1, server.getWorlds().size());
+		assertEquals("test", world.getName());
+		assertEquals(12345, world.getSeed());
+		assertEquals(WorldType.FLAT, world.getWorldType());
+		assertEquals(World.Environment.NORMAL, world.getEnvironment());
 	}
 
 	@Test
@@ -113,6 +145,20 @@ class ServerMockTest
 		assertEquals(playerA, player1);
 		assertEquals(playerB, player2);
 		assertNotEquals(player1, player2);
+	}
+
+	@Test
+	void addPlayer_Calls_AsyncPreLoginEvent()
+	{
+		PlayerMock player = server.addPlayer();
+		server.getPluginManager().assertEventFired(AsyncPlayerPreLoginEvent.class);
+	}
+
+	@Test
+	void addPlayer_Calls_PlayerJoinEvent()
+	{
+		PlayerMock player = server.addPlayer();
+		server.getPluginManager().assertEventFired(PlayerJoinEvent.class);
 	}
 
 	@Test
@@ -178,8 +224,16 @@ class ServerMockTest
 		assertEquals(62, server.getOfflinePlayers().length);
 	}
 
+	@Test
+	void getOfflinePlayerByUnknownId_returnsOfflinePlayerWithGivenId()
+	{
+		UUID id = UUID.randomUUID();
+		OfflinePlayer offlinePlayer = server.getOfflinePlayer(id);
+		assertThat(offlinePlayer.getUniqueId(), equalTo(id));
+	}
+
 	@ParameterizedTest
-	@ValueSource(strings = {"testcommand", "tc", "othercommand"})
+	@ValueSource(strings = { "testcommand", "tc", "othercommand" })
 	void testPluginCommand(String cmd)
 	{
 		MockBukkit.load(TestPlugin.class);
@@ -197,7 +251,7 @@ class ServerMockTest
 	void executeCommand_PlayerAndTrueReturnValue_Succeeds()
 	{
 		server.setPlayers(1);
-		TestPlugin plugin = (TestPlugin) MockBukkit.load(TestPlugin.class);
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
 		plugin.commandReturns = true;
 
 		Command command = server.getPluginCommand("testcommand");
@@ -214,7 +268,7 @@ class ServerMockTest
 	@Test
 	void executeCommand_ConsoleAndFalseReturnValue_Fails()
 	{
-		TestPlugin plugin = (TestPlugin) MockBukkit.load(TestPlugin.class);
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
 		plugin.commandReturns = false;
 
 		Command command = server.getPluginCommand("testcommand");
@@ -231,7 +285,7 @@ class ServerMockTest
 	@Test
 	void executeCommand_CommandAsStringAndTrueReturnValue_Succeeds()
 	{
-		TestPlugin plugin = (TestPlugin) MockBukkit.load(TestPlugin.class);
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
 		plugin.commandReturns = true;
 
 		CommandResult result = server.executeConsole("testcommand");
@@ -334,7 +388,6 @@ class ServerMockTest
 		file.createNewFile();
 		assertTrue(file.exists());
 		MockBukkit.unmock();
-		;
 		MockBukkit.mock();
 		assertFalse(file.exists());
 	}
@@ -385,20 +438,17 @@ class ServerMockTest
 		assertTrue(entities.contains(entity2), "Set did not contain second entity");
 	}
 
-	@Test
-	void getPlayer_NameAndPlayerExists_PlayerFound()
+	@ParameterizedTest
+	@CsvSource({
+			"player, player",
+			"player, PLAYER",
+			"player_other, player",
+	})
+	void getPlayer_NameAndPlayerExists_PlayerFound(String actual, String expected)
 	{
-		PlayerMock player = new PlayerMock(server, "player");
+		PlayerMock player = new PlayerMock(server, actual);
 		server.addPlayer(player);
-		assertSame(player, server.getPlayer("player"));
-	}
-
-	@Test
-	void getPlayer_NameAndPlayerExistsButCasingWrong_PlayerNotFound()
-	{
-		PlayerMock player = new PlayerMock(server, "player");
-		server.addPlayer(player);
-		assertSame(player, server.getPlayer("PLAYER"));
+		assertSame(player, server.getPlayer(expected));
 	}
 
 	@Test
@@ -407,14 +457,6 @@ class ServerMockTest
 		PlayerMock player = new PlayerMock(server, "player");
 		server.addPlayer(player);
 		assertSame(player, server.getPlayer(player.getUniqueId()));
-	}
-
-	@Test
-	void getPlayer_PlayerNamePartiallyCorrect_PlayerFound()
-	{
-		PlayerMock player = new PlayerMock(server, "player_other");
-		server.addPlayer(player);
-		assertSame(player, server.getPlayer("player"));
 	}
 
 	@Test
@@ -476,34 +518,6 @@ class ServerMockTest
 	}
 
 	@Test
-	void assertMainThread_MainThread_Succeeds()
-	{
-		server.assertMainThread();
-	}
-
-	@Test
-	void assertMainThread_NotMainThread_ThrowsException() throws Exception
-	{
-		AtomicReference<Exception> exceptionThrown = new AtomicReference<>();
-
-		server.getScheduler().runTaskAsynchronously(null, () ->
-		{
-			try
-			{
-				server.assertMainThread();
-			}
-			catch (ThreadAccessException e)
-			{
-				exceptionThrown.set(e);
-			}
-		});
-
-		server.getScheduler().waitAsyncTasksFinished();
-
-		assertNotNull(exceptionThrown.get());
-	}
-
-	@Test
 	void matchPlayer_NoMatchingPlayers_EmptyList()
 	{
 		server.addPlayer("Player");
@@ -543,7 +557,7 @@ class ServerMockTest
 	@Test
 	void testDefaultPotionEffects()
 	{
-		assertEquals(32, PotionEffectType.values().length);
+		assertEquals(33, PotionEffectType.values().length);
 
 		for (PotionEffectType type : PotionEffectType.values())
 		{
@@ -558,6 +572,115 @@ class ServerMockTest
 		assertFalse(server.getOnlinePlayers().isEmpty());
 		server.removePlayer(player);
 		assertTrue(server.getOnlinePlayers().isEmpty());
+	}
+
+	void testSetSpawnRadius()
+	{
+		server.setSpawnRadius(51);
+		assertEquals(51, server.getSpawnRadius());
+	}
+
+	@Test
+	void testGetEntity()
+	{
+		EntityMock entity = new SimpleEntityMock(server);
+		UUID uuid = entity.getUniqueId();
+		server.registerEntity(entity);
+		assertNotNull(server.getEntity(uuid));
+	}
+
+	@Test
+	void testCreateBlockData()
+	{
+		BlockData blockData = server.createBlockData(Material.STONE);
+		assertEquals(Material.STONE, blockData.getMaterial());
+	}
+
+	@Test
+	void testWarningState()
+	{
+		assertEquals(Warning.WarningState.DEFAULT, server.getWarningState());
+		server.setWarningState(Warning.WarningState.ON);
+		assertEquals(Warning.WarningState.ON, server.getWarningState());
+	}
+
+	@Test
+	@SuppressWarnings("UnstableApiUsage")
+	void testSendPluginMessage()
+	{
+		MockPlugin plugin = MockBukkit.createMockPlugin();
+		server.getMessenger().registerOutgoingPluginChannel(plugin, "BungeeCord");
+		ByteArrayDataOutput out = ByteStreams.newDataOutput();
+		out.writeUTF("Forward");
+		out.writeUTF("ALL");
+		out.writeUTF("MockBukkit");
+		server.sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
+	}
+
+	@Test
+	void testGetPlayerUniqueID()
+	{
+		PlayerMock player = new PlayerMock(server, "player");
+		server.addPlayer(player);
+		UUID uuid = player.getUniqueId();
+		assertEquals(uuid, server.getPlayerUniqueId(player.getName()));
+	}
+
+	@Test
+	void testSetMaxPlayers()
+	{
+		server.setMaxPlayers(69420);
+		assertEquals(69420, server.getMaxPlayers());
+	}
+
+	@Test
+	void testBroadCastMessageWithComponent()
+	{
+		PlayerMock playerA = server.addPlayer();
+		PlayerMock playerB = server.addPlayer();
+
+		Component component = Component.text("Hello");
+
+		server.broadcast(component);
+
+		playerA.assertSaid(PlainTextComponentSerializer.plainText().serialize(component));
+		playerB.assertSaid(PlainTextComponentSerializer.plainText().serialize(component));
+	}
+
+	@Test
+	void createProfile_NameOnly()
+	{
+		PlayerProfileMock profile = server.createProfile("Test");
+
+		assertEquals("Test", profile.getName());
+	}
+
+	@Test
+	void createProfile_UuidOnly()
+	{
+		UUID uuid = UUID.fromString("b9d9f8f9-f8d9-4f9d-9f8f-9f8f8f8f8f8");
+		PlayerProfileMock profile = server.createProfile(uuid);
+
+		assertEquals(uuid, profile.getUniqueId());
+	}
+
+	@Test
+	void createProfile_NameUuid()
+	{
+		UUID uuid = UUID.fromString("b9d9f8f9-f8d9-4f9d-9f8f-9f8f8f8f8f8");
+		PlayerProfileMock profile = server.createProfile(uuid, "Test");
+
+		assertEquals("Test", profile.getName());
+		assertEquals(uuid, profile.getUniqueId());
+	}
+
+	@Test
+	void getCommandTabComplete_ReturnsExpectedResults()
+	{
+		MockBukkit.load(TestPlugin.class);
+		Player player = server.addPlayer();
+		assertEquals(Arrays.asList("Tab", "Complete", "Results"), server.getCommandTabComplete(player, "mockcommand "));
+		assertEquals(Arrays.asList("Other", "Results"), server.getCommandTabComplete(player, "mockcommand argA "));
 	}
 
 	@Test
@@ -655,6 +778,7 @@ class ServerMockTest
 
 class TestRecipe implements Recipe
 {
+
 	private final ItemStack result;
 
 	public TestRecipe(@NotNull ItemStack result)
@@ -668,8 +792,9 @@ class TestRecipe implements Recipe
 	}
 
 	@Override
-	public ItemStack getResult()
+	public @NotNull ItemStack getResult()
 	{
 		return result;
 	}
+
 }

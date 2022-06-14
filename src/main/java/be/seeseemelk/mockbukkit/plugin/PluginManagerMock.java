@@ -1,35 +1,9 @@
 package be.seeseemelk.mockbukkit.plugin;
 
-import static org.junit.jupiter.api.Assertions.fail;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.net.URL;
-import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Random;
-import java.util.Set;
-import java.util.concurrent.ThreadLocalRandom;
-import java.util.function.Predicate;
-import java.util.logging.Level;
-import java.util.stream.Collectors;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.Validate;
+import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
+import com.google.common.base.Preconditions;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.PluginCommandUtils;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -58,9 +32,36 @@ import org.bukkit.plugin.java.JavaPluginLoader;
 import org.bukkit.plugin.java.JavaPluginUtils;
 import org.jetbrains.annotations.NotNull;
 
-import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Random;
+import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+import java.util.logging.Level;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class PluginManagerMock implements PluginManager
 {
@@ -69,9 +70,10 @@ public class PluginManagerMock implements PluginManager
 	private final List<Plugin> plugins = new ArrayList<>();
 	private final List<PluginCommand> commands = new ArrayList<>();
 	private final List<Event> events = new ArrayList<>();
-	private final List<File> temporaryFiles = new LinkedList<>();
+	private File parentTemporaryDirectory;
 	private final List<Permission> permissions = new ArrayList<>();
 	private final Map<Permissible, Set<String>> permissionSubscriptions = new HashMap<>();
+	private Map<String, List<Listener>> listeners = new HashMap<>();
 
 	private final List<Class<?>> pluginConstructorTypes = Arrays.asList(JavaPluginLoader.class,
 	        PluginDescriptionFile.class, File.class, File.class);
@@ -88,17 +90,20 @@ public class PluginManagerMock implements PluginManager
 	 */
 	public void unload()
 	{
-		for (File file : temporaryFiles)
+		if (parentTemporaryDirectory == null)
+			return;
+
+		// Delete the temporary directory, from the deepest file to the root.
+		try (Stream<Path> walk = Files.walk(parentTemporaryDirectory.toPath()))
 		{
-			try
-			{
-				FileUtils.forceDelete(file);
-			}
-			catch (IOException e)
-			{
-				System.err.println("Could not remove file");
-				e.printStackTrace();
-			}
+			walk.sorted(Comparator.reverseOrder())
+					.map(Path::toFile)
+					.forEach(File::delete);
+		}
+		catch (IOException e)
+		{
+			System.err.println("Could not remove file");
+			e.printStackTrace();
 		}
 	}
 
@@ -113,8 +118,11 @@ public class PluginManagerMock implements PluginManager
 		for (Event event : events)
 		{
 			if (predicate.test(event))
+			{
 				return;
+			}
 		}
+
 		fail(message);
 	}
 
@@ -136,14 +144,16 @@ public class PluginManagerMock implements PluginManager
 	 * @param eventClass The class type that the event should be an instance of.
 	 * @param predicate  The predicate to test the event against.
 	 */
-	@SuppressWarnings("unchecked")
 	public <T extends Event> void assertEventFired(String message, Class<T> eventClass, Predicate<T> predicate)
 	{
 		for (Event event : events)
 		{
-			if (eventClass.isInstance(event) && predicate.test((T) event))
+			if (eventClass.isInstance(event) && predicate.test(eventClass.cast(event)))
+			{
 				return;
+			}
 		}
+
 		fail(message);
 	}
 
@@ -258,6 +268,16 @@ public class PluginManagerMock implements PluginManager
 		    "No compatible constructor for " + class1.getName() + " with parameters " + str);
 	}
 
+	public @NotNull File getParentTemporaryDirectory() throws IOException
+	{
+		if (parentTemporaryDirectory == null)
+		{
+			Random random = ThreadLocalRandom.current();
+			parentTemporaryDirectory = Files.createTempDirectory("MockBukkit-" + random.nextInt(0, Integer.MAX_VALUE)).toFile();
+		}
+		return parentTemporaryDirectory;
+	}
+
 	/**
 	 * Tries to create a temporary directory.
 	 *
@@ -265,11 +285,11 @@ public class PluginManagerMock implements PluginManager
 	 * @return The created temporary directory.
 	 * @throws IOException when the directory could not be created.
 	 */
-	private @NotNull File createTemporaryDirectory(@NotNull String name) throws IOException
+	public @NotNull File createTemporaryDirectory(@NotNull String name) throws IOException
 	{
 		Random random = ThreadLocalRandom.current();
-		File directory = Files.createTempDirectory(name + "-" + random.nextInt()).toFile();
-		temporaryFiles.add(directory);
+		File directory = new File(getParentTemporaryDirectory(), name);
+		directory.mkdirs();
 		return directory;
 	}
 
@@ -280,12 +300,11 @@ public class PluginManagerMock implements PluginManager
 	 * @return The created temporary file.
 	 * @throws IOException when the file could not be created.
 	 */
-	private @NotNull File createTemporaryPluginFile(@NotNull String name) throws IOException
+	public @NotNull File createTemporaryPluginFile(@NotNull String name) throws IOException
 	{
 		Random random = ThreadLocalRandom.current();
-		File pluginFile = Files.createTempFile(name + "-" + random.nextInt(), ".jar").toFile();
+		File pluginFile = new File(getParentTemporaryDirectory(), name + ".jar");
 		pluginFile.createNewFile();
-		temporaryFiles.add(pluginFile);
 		return pluginFile;
 	}
 
@@ -327,10 +346,8 @@ public class PluginManagerMock implements PluginManager
 			Object[] arguments = new Object[types.size()];
 			arguments[0] = loader;
 			arguments[1] = description;
-			arguments[2] = createTemporaryDirectory(
-			                   "MockBukkit-" + description.getName() + "-" + description.getVersion());
-			arguments[3] = createTemporaryPluginFile(
-			                   "MockBukkit-" + description.getName() + "-" + description.getVersion());
+			arguments[2] = createTemporaryDirectory(description.getName() + "-" + description.getVersion());
+			arguments[3] = createTemporaryPluginFile(description.getName() + "-" + description.getVersion());
 			System.arraycopy(parameters, 0, arguments, 4, parameters.length);
 
 			JavaPlugin plugin = constructor.newInstance(arguments);
@@ -426,13 +443,25 @@ public class PluginManagerMock implements PluginManager
 	 */
 	public void callEventAsynchronously(@NotNull Event event)
 	{
+		callEventAsynchronously(event, null);
+	}
+
+	/**
+	 * This method invokes {@link #callEvent(Event)} from a different {@link Thread}
+	 * using the {@link BukkitSchedulerMock}.
+	 *
+	 * @param event The asynchronous {@link Event} to call.
+	 * @param func A function to invoke after the event has been called.
+	 */
+	public <T extends Event> void callEventAsynchronously(@NotNull T event, Consumer<T> func)
+	{
 		if (!event.isAsynchronous())
 		{
 			throw new IllegalStateException("Synchronous Events cannot be called asynchronously.");
 		}
 
 		// Our Scheduler will call the Event on a dedicated Event Thread Executor
-		server.getScheduler().executeAsyncEvent(event);
+		server.getScheduler().executeAsyncEvent(event, func);
 	}
 
 	private void callRegisteredListener(@NotNull RegisteredListener registration, @NotNull Event event)
@@ -634,11 +663,38 @@ public class PluginManagerMock implements PluginManager
 		{
 			throw new IllegalPluginAccessException("Plugin attempted to register " + listener + " while not enabled");
 		}
-
+		addListener(listener, plugin);
 		for (Map.Entry<Class<? extends Event>, Set<RegisteredListener>> entry : plugin.getPluginLoader().createRegisteredListeners(listener, plugin).entrySet())
 		{
 			getEventListeners(getRegistrationClass(entry.getKey())).registerAll(entry.getValue());
 		}
+
+	}
+
+	private void addListener(Listener listener, Plugin plugin)
+	{
+		List<Listener> l  = listeners.getOrDefault(plugin.getName(), new ArrayList<>());
+		if (!l.contains(listener))
+		{
+			l.add(listener);
+			listeners.put(plugin.getName(), l);
+		}
+	}
+
+	public void unregisterPluginEvents(Plugin plugin)
+	{
+		List<Listener> listListener  = listeners.get(plugin.getName());
+		if (listListener != null)
+		{
+			for (Listener l : listListener)
+			{
+				for (Map.Entry<Class<? extends Event>, Set<RegisteredListener>> entry : plugin.getPluginLoader().createRegisteredListeners(l, plugin).entrySet())
+				{
+					getEventListeners(getRegistrationClass(entry.getKey())).unregister(plugin);
+				}
+			}
+		}
+
 	}
 
 	@Override
@@ -652,14 +708,16 @@ public class PluginManagerMock implements PluginManager
 	public void registerEvent(@NotNull Class<? extends Event> event, @NotNull Listener listener, @NotNull EventPriority priority,
 	                          @NotNull EventExecutor executor, @NotNull Plugin plugin, boolean ignoreCancelled)
 	{
-		Validate.notNull(listener, "Listener cannot be null");
-		Validate.notNull(priority, "Priority cannot be null");
-		Validate.notNull(executor, "Executor cannot be null");
-		Validate.notNull(plugin, "Plugin cannot be null");
+		Preconditions.checkNotNull(listener, "Listener cannot be null");
+		Preconditions.checkNotNull(listener, "Listener cannot be null");
+		Preconditions.checkNotNull(priority, "Priority cannot be null");
+		Preconditions.checkNotNull(executor, "Executor cannot be null");
+		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
 		if (!plugin.isEnabled())
 		{
 			throw new IllegalPluginAccessException("Plugin attempted to register " + event + " while not enabled");
 		}
+		addListener(listener, plugin);
 		getEventListeners(event).register(new RegisteredListener(listener, executor, priority, plugin, ignoreCancelled));
 	}
 
@@ -706,6 +764,7 @@ public class PluginManagerMock implements PluginManager
 		{
 			if (plugin.isEnabled())
 			{
+				unregisterPluginEvents(plugin);
 				JavaPluginUtils.setEnabled((JavaPlugin) plugin, false);
 				callEvent(new PluginDisableEvent(plugin));
 			}

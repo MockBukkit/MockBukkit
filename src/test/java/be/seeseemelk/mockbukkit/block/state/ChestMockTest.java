@@ -1,11 +1,7 @@
 package be.seeseemelk.mockbukkit.block.state;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.block.BlockMock;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
@@ -15,8 +11,12 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.block.BlockMock;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 class ChestMockTest
 {
@@ -24,14 +24,14 @@ class ChestMockTest
 	private Chest chest;
 
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		MockBukkit.mock();
 		chest = new ChestMock(Material.CHEST);
 	}
 
 	@AfterEach
-	public void tearDown() throws Exception
+	void tearDown() throws Exception
 	{
 		MockBukkit.unmock();
 	}
@@ -84,5 +84,29 @@ class ChestMockTest
 
 		chest.setCustomName(name);
 		assertEquals(name, chest.getCustomName());
+	}
+
+	@Test
+	void testOpen()
+	{
+		chest.open();
+		assertTrue(chest.isOpen());
+	}
+
+	@Test
+	void testClose()
+	{
+		assertFalse(chest.isOpen());
+		chest.open();
+		chest.close();
+		assertFalse(chest.isOpen());
+	}
+
+	@Test
+	void testIsOpen()
+	{
+		assertFalse(chest.isOpen());
+		chest.open();
+		assertTrue(chest.isOpen());
 	}
 }
