@@ -39,8 +39,8 @@ dependencies {
 
     // LibraryLoader dependencies
     implementation 'org.apache.maven:maven-resolver-provider:3.8.6'
-    implementation 'org.apache.maven.resolver:maven-resolver-connector-basic:1.8.0'
-    implementation 'org.apache.maven.resolver:maven-resolver-transport-http:1.8.0'
+    implementation 'org.apache.maven.resolver:maven-resolver-connector-basic:1.8.1'
+    implementation 'org.apache.maven.resolver:maven-resolver-transport-http:1.8.1'
 }
 
 jar {
