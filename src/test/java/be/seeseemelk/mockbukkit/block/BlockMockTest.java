@@ -25,7 +25,7 @@ class BlockMockTest
 	private BlockMock block;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		World world = new WorldMock();
 		block = new BlockMock(new Location(world, 120, 60, 120));

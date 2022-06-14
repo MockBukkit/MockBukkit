@@ -20,14 +20,14 @@ class TropicalFishBucketMetaMockTest
 	private TropicalFishBucketMetaMock meta;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		MockBukkit.mock();
 		meta = new TropicalFishBucketMetaMock();
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}

@@ -15,6 +15,7 @@ import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import org.bukkit.Bukkit;
+import org.bukkit.DyeColor;
 import org.bukkit.Effect;
 import org.bukkit.GameMode;
 import org.bukkit.GameRule;
@@ -41,6 +42,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerExpChangeEvent;
+import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -49,6 +51,8 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.event.player.PlayerToggleSprintEvent;
+import org.bukkit.inventory.EntityEquipment;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
@@ -63,6 +67,7 @@ import org.junit.jupiter.params.provider.EnumSource;
 import java.net.InetSocketAddress;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.BrokenBarrierException;
@@ -71,6 +76,7 @@ import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -96,7 +102,7 @@ class PlayerMockTest
 	private PlayerMock player;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		server = MockBukkit.mock(new ServerMock()
 		{
@@ -121,7 +127,7 @@ class PlayerMockTest
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
@@ -164,12 +170,13 @@ class PlayerMockTest
 	@Test
 	void getEquipment_SetDropChance()
 	{
-		assertThrows(UnsupportedOperationException.class, () -> player.getEquipment().setHelmetDropChance(0));
-		assertThrows(UnsupportedOperationException.class, () -> player.getEquipment().setChestplateDropChance(0));
-		assertThrows(UnsupportedOperationException.class, () -> player.getEquipment().setLeggingsDropChance(0));
-		assertThrows(UnsupportedOperationException.class, () -> player.getEquipment().setBootsDropChance(0));
-		assertThrows(UnsupportedOperationException.class, () -> player.getEquipment().setItemInMainHandDropChance(0));
-		assertThrows(UnsupportedOperationException.class, () -> player.getEquipment().setItemInOffHandDropChance(0));
+		EntityEquipment equipment = player.getEquipment();
+		assertThrows(UnsupportedOperationException.class, () -> equipment.setHelmetDropChance(0));
+		assertThrows(UnsupportedOperationException.class, () -> equipment.setChestplateDropChance(0));
+		assertThrows(UnsupportedOperationException.class, () -> equipment.setLeggingsDropChance(0));
+		assertThrows(UnsupportedOperationException.class, () -> equipment.setBootsDropChance(0));
+		assertThrows(UnsupportedOperationException.class, () -> equipment.setItemInMainHandDropChance(0));
+		assertThrows(UnsupportedOperationException.class, () -> equipment.setItemInOffHandDropChance(0));
 	}
 
 	@Test
@@ -198,11 +205,38 @@ class PlayerMockTest
 	}
 
 	@Test
+	void setGameMode_GameModeChanged_CallsEvent()
+	{
+		player.setGameMode(GameMode.CREATIVE);
+		server.getPluginManager().assertEventFired(PlayerGameModeChangeEvent.class, (e) -> e.getNewGameMode() == GameMode.CREATIVE);
+	}
+
+	@Test
+	void setGameMode_GameModeNotChanged_DoesntCallsEvent()
+	{
+		//todo: replace with PluginManagerMock#assertEventNotFired once implemented
+		AtomicBoolean bool = new AtomicBoolean(false);
+		server.getPluginManager().registerEvents(new Listener()
+		{
+			@EventHandler
+			public void onPlayerGameModeChange(PlayerGameModeChangeEvent event)
+			{
+				bool.set(true);
+			}
+		}, MockBukkit.createMockPlugin());
+
+		player.setGameMode(GameMode.SURVIVAL);
+
+		assertFalse(bool.get());
+	}
+
+	@Test
 	void getPreviousGameMode()
 	{
 		player.setGameMode(GameMode.SURVIVAL);
 		player.setGameMode(GameMode.CREATIVE);
-		assertEquals(GameMode.SURVIVAL, player.getPreviousGameMode());
+		player.setGameMode(GameMode.SURVIVAL);
+		assertEquals(GameMode.CREATIVE, player.getPreviousGameMode());
 	}
 
 	@Test
@@ -1446,26 +1480,112 @@ class PlayerMockTest
 	}
 
 	@Test
+	void testPlayerSendSignChange_Valid()
+	{
+		assertDoesNotThrow(() ->
+		{
+			player.sendSignChange(player.getLocation(), new String[4], DyeColor.CYAN, true);
+		});
+	}
+
+	@Test
+	void testPlayerSendSignChange_Invalid()
+	{
+		Location loc = player.getLocation();
+		assertThrows(IllegalArgumentException.class, () ->
+		{
+			player.sendSignChange(loc, new String[2]);
+		});
+	}
+
+	@Test
 	void testPlayerPlayEffect()
 	{
-		player.playEffect(player.getLocation(), Effect.STEP_SOUND, Material.STONE);
+		Location loc = player.getLocation();
+		assertDoesNotThrow(() -> player.playEffect(loc, Effect.STEP_SOUND, Material.STONE));
 	}
 
 	@Test
 	void testPlayerPlayEffect_NullData()
 	{
+		Location loc = player.getLocation();
 		assertThrows(IllegalArgumentException.class, () ->
 		{
-			player.playEffect(player.getLocation(), Effect.STEP_SOUND, null);
+			player.playEffect(loc, Effect.STEP_SOUND, null);
+		});
+	}
+
+	@Test
+	void testPlayerSendExperienceChange()
+	{
+		assertDoesNotThrow(() ->
+		{
+			player.sendExperienceChange(0.5f);
+		});
+	}
+
+	@Test
+	void testPlayerSendBlockDamage()
+	{
+		Location loc = player.getLocation();
+		assertDoesNotThrow(() ->
+		{
+			player.sendBlockDamage(loc, 0.5f);
+		});
+	}
+
+	@Test
+	void testPlayerSendEquipmentChange()
+	{
+		assertDoesNotThrow(() ->
+		{
+			player.sendEquipmentChange(player, EquipmentSlot.CHEST, new ItemStack(Material.DIAMOND_CHESTPLATE));
+		});
+	}
+
+	@Test
+	void testPlayerSendActionBar()
+	{
+		assertDoesNotThrow(() ->
+		{
+			player.sendActionBar("Action!");
+		});
+	}
+
+	@Test
+	void testPlayerSendHealthUpdate()
+	{
+		assertDoesNotThrow(() ->
+		{
+			player.sendHealthUpdate();
+		});
+	}
+
+	@Test
+	void testPlayerSendHealthUpdate_Params()
+	{
+		assertDoesNotThrow(() ->
+		{
+			player.sendHealthUpdate(20, 10, 0.0f);
+		});
+	}
+
+	@Test
+	void testPlayerSendMultiBlockChange()
+	{
+		assertDoesNotThrow(() ->
+		{
+			player.sendMultiBlockChange(new HashMap<>(0));
 		});
 	}
 
 	@Test
 	void testPlayerPlayEffect_IncorrectData()
 	{
+		Location loc = player.getLocation();
 		assertThrows(IllegalArgumentException.class, () ->
 		{
-			player.playEffect(player.getLocation(), Effect.STEP_SOUND, 1.0f);
+			player.playEffect(loc, Effect.STEP_SOUND, 1.0f);
 		});
 	}
 
@@ -1497,9 +1617,11 @@ class PlayerMockTest
 	@Test
 	void testPlayerSpawnParticle_Incorrect_DataType()
 	{
+		Location loc = player.getLocation();
+		Object wrongObj = new Object();
 		assertThrows(IllegalArgumentException.class, () ->
 		{
-			player.spawnParticle(Particle.ITEM_CRACK, player.getLocation(), 1, new Object());
+			player.spawnParticle(Particle.ITEM_CRACK, loc, 1, wrongObj);
 		});
 	}
 
