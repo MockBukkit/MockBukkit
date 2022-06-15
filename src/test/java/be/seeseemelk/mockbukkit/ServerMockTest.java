@@ -1,11 +1,14 @@
 package be.seeseemelk.mockbukkit;
 
+import com.google.common.io.ByteArrayDataOutput;
+import com.google.common.io.ByteStreams;
 import be.seeseemelk.mockbukkit.command.CommandResult;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
 import be.seeseemelk.mockbukkit.entity.SimpleEntityMock;
+
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import be.seeseemelk.mockbukkit.profile.PlayerProfileMock;
 import com.google.common.io.ByteArrayDataOutput;
@@ -19,13 +22,25 @@ import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.WorldType;
 import org.bukkit.block.data.BlockData;
+import be.seeseemelk.mockbukkit.entity.*;
+import be.seeseemelk.mockbukkit.inventory.InventoryMock;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
+import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.Warning;
+import org.bukkit.World;
+import org.bukkit.WorldCreator;
+import org.bukkit.WorldType;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.event.server.MapInitializeEvent;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
+import org.bukkit.map.MapView;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.jetbrains.annotations.NotNull;
@@ -49,6 +64,7 @@ import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -623,6 +639,25 @@ class ServerMockTest
 	}
 
 	@Test
+	void testGetPlayerList()
+	{
+		PlayerMock playerA = server.addPlayer();
+		PlayerMock playerB = server.addPlayer();
+
+		assertThat(server.getPlayerList().getOnlinePlayers(), containsInAnyOrder(playerA, playerB));
+	}
+
+	@Test
+	void testPlayerListDisconnectPlayer()
+	{
+		MockPlayerList playerList = server.getPlayerList();
+		PlayerMock playerA = server.addPlayer();
+		playerList.disconnectPlayer(playerA);
+
+		assertFalse(playerList.getOnlinePlayers().contains(playerA));
+	}
+
+	@Test
 	void createProfile_NameOnly()
 	{
 		PlayerProfileMock profile = server.createProfile("Test");
@@ -647,6 +682,33 @@ class ServerMockTest
 
 		assertEquals("Test", profile.getName());
 		assertEquals(uuid, profile.getUniqueId());
+	}
+
+	@Test
+	void createMap_IdIncrements()
+	{
+		WorldMock world = new WorldMock();
+		assertEquals(1, server.createMap(world).getId());
+		assertEquals(2, server.createMap(world).getId());
+		assertEquals(3, server.createMap(world).getId());
+	}
+
+	@Test
+	void getMap_ValidId_ReturnsMap()
+	{
+		WorldMock world = new WorldMock();
+		int id = server.createMap(world).getId();
+
+		assertNotNull(server.getMap(id));
+		assertEquals(id, server.getMap(id).getId());
+	}
+
+	@Test
+	void createMap_CallsMapInitEvent()
+	{
+		MapView mapView = server.createMap(new WorldMock());
+
+		server.getPluginManager().assertEventFired(MapInitializeEvent.class, (e) -> e.getMap().equals(mapView));
 	}
 
 	@Test

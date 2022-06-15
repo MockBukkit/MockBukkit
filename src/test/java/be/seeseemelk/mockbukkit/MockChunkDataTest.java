@@ -1,14 +1,20 @@
 package be.seeseemelk.mockbukkit;
 
 import org.bukkit.Material;
+import org.bukkit.block.Biome;
 import org.bukkit.generator.ChunkGenerator;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
+
 class MockChunkDataTest
 {
+
 	private ServerMock server;
 
 	@BeforeEach
@@ -39,8 +45,7 @@ class MockChunkDataTest
 		WorldMock dummy = server.addSimpleWorld("dummy");
 		ChunkGenerator.ChunkData data = server.createChunkData(dummy);
 
-		Assertions.assertDoesNotThrow(() -> data.setBlock(33, 1000, 33, Material.STONE));
-		Assertions.assertEquals(Material.AIR, data.getType(33, 1000, 33));
+		assertThrowsExactly(IllegalArgumentException.class, () -> data.setBlock(33, 1000, 33, Material.STONE));
 	}
 
 	@Test
@@ -49,7 +54,7 @@ class MockChunkDataTest
 		WorldMock dummy = server.addSimpleWorld("dummy");
 		ChunkGenerator.ChunkData data = server.createChunkData(dummy);
 
-		Assertions.assertEquals(Material.AIR, data.getType(33, 1000, 33));
+		assertThrowsExactly(IllegalArgumentException.class, () -> data.getType(33, 1000, 33));
 	}
 
 	@Test
@@ -71,4 +76,20 @@ class MockChunkDataTest
 		data.setBlock(0, 80, 0, Material.OBSIDIAN);
 		Assertions.assertEquals(Material.OBSIDIAN, data.getType(0, 80, 0));
 	}
+
+	@Test
+	void getBiome()
+	{
+		WorldMock dummy = new WorldMock(Material.GRASS, 60, 256, 70);
+		ChunkGenerator.ChunkData data = server.createChunkData(dummy);
+
+		Biome worldBiome = dummy.getBiome(0, 0, 0);
+		assertNotNull(worldBiome);
+
+		Biome chunkBiome = data.getBiome(0, 0, 0);
+		assertNotNull(chunkBiome);
+
+		assertEquals(worldBiome, chunkBiome);
+	}
+
 }
