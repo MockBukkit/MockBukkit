@@ -894,9 +894,9 @@ public class WorldMock implements World
 			canceled = new CreatureSpawnEvent(living, reason).callEvent();
 		} else if (entity instanceof Item item) {
 			canceled = new ItemSpawnEvent(item).callEvent();
-		} else if (entity instanceof Player player) {
+		} else if (entity instanceof Player) {
 			canceled = true; // Shouldn't ever be called here but just for parody.
-		} else if (entity instanceof Projectile projectile) {
+		} else if (entity instanceof Projectile) {
 			canceled = new ProjectileLaunchEvent(entity).callEvent();
 		} else {
 			canceled = new EntitySpawnEvent(entity).callEvent();
@@ -1103,7 +1103,7 @@ public class WorldMock implements World
 		}
 		ThunderChangeEvent thunder = new ThunderChangeEvent(this, thundering, ThunderChangeEvent.Cause.PLUGIN); // Paper
 		Bukkit.getServer().getPluginManager().callEvent(thunder);
-		if (thunder.isCancelled()) 
+		if (thunder.isCancelled())
 		{
 			return;
 		}

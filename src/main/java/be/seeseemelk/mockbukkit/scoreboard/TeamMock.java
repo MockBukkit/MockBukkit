@@ -1,11 +1,6 @@
 package be.seeseemelk.mockbukkit.scoreboard;
 
-import java.util.Collection;
-import java.util.EnumMap;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.logging.Level;
-
+import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -16,10 +11,14 @@ import org.bukkit.entity.Entity;
 import org.bukkit.scoreboard.NameTagVisibility;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
-
-import be.seeseemelk.mockbukkit.MockBukkit;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Collection;
+import java.util.EnumMap;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.logging.Level;
 
 
 public class TeamMock implements Team
@@ -33,9 +32,9 @@ public class TeamMock implements Team
 	private boolean allowFriendlyFire = false;
 	private final HashSet<String> entries;
 	private boolean canSeeFriendly = true;
-	private EnumMap<Option, OptionStatus> options = new EnumMap<>(Option.class);
+	private final EnumMap<Option, OptionStatus> options = new EnumMap<>(Option.class);
 	private boolean registered;
-	private Scoreboard board;
+	private final Scoreboard board;
 
 	public TeamMock(String name, Scoreboard board)
 	{
@@ -49,8 +48,7 @@ public class TeamMock implements Team
 	@Override
 	public String getName() throws IllegalStateException
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
-
+		checkRegistered();
 		return name;
 	}
 
@@ -120,105 +118,95 @@ public class TeamMock implements Team
 	@Override
 	public String getDisplayName() throws IllegalStateException
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
-
+		checkRegistered();
 		return displayName;
 	}
 
 	@Override
 	public void setDisplayName(String s)
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
-
+		checkRegistered();
 		this.displayName = s;
 	}
 
 	@Override
 	public String getPrefix() throws IllegalStateException
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
-
+		checkRegistered();
 		return prefix;
 	}
 
 	@Override
 	public void setPrefix(String s)
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
-
+		checkRegistered();
 		this.prefix = s;
 	}
 
 	@Override
 	public String getSuffix() throws IllegalStateException
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
-
+		checkRegistered();
 		return suffix;
 	}
 
 	@Override
 	public void setSuffix(String s)
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
-
+		checkRegistered();
 		this.suffix = s;
 	}
 
 	@Override
 	public ChatColor getColor() throws IllegalStateException
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
-
+		checkRegistered();
 		return color;
 	}
 
 	@Override
 	public void setColor(ChatColor chatColor)
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
-
+		checkRegistered();
 		this.color = chatColor;
 	}
 
 	@Override
 	public boolean allowFriendlyFire() throws IllegalStateException
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
-
+		checkRegistered();
 		return allowFriendlyFire;
 	}
 
 	@Override
 	public void setAllowFriendlyFire(boolean b) throws IllegalStateException
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
-
+		checkRegistered();
 		this.allowFriendlyFire = b;
 	}
 
 	@Override
 	public boolean canSeeFriendlyInvisibles() throws IllegalStateException
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
-
+		checkRegistered();
 		return canSeeFriendly;
 	}
 
 	@Override
 	public void setCanSeeFriendlyInvisibles(boolean b) throws IllegalStateException
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
-
+		checkRegistered();
 		this.canSeeFriendly = b;
 	}
 
-	/** @deprecated  */
+	/**
+	 * @deprecated
+	 */
 	@Override
 	@Deprecated
 	public NameTagVisibility getNameTagVisibility()
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
+		checkRegistered();
 
 		OptionStatus s = options.get(Option.NAME_TAG_VISIBILITY);
 		switch (s)
@@ -236,13 +224,15 @@ public class TeamMock implements Team
 		}
 	}
 
-	/** @deprecated */
+	/**
+	 * @deprecated
+	 */
 	@Override
 	@Deprecated
 	public void setNameTagVisibility(NameTagVisibility nameTagVisibility)
 	{
 		MockBukkit.getMock().getLogger().log(Level.WARNING, "Consider USE setOption() DEPRECATED");
-		if (!registered)throw new IllegalStateException("Team not registered");
+		checkRegistered();
 
 		switch (nameTagVisibility)
 		{
@@ -263,13 +253,14 @@ public class TeamMock implements Team
 		}
 	}
 
-	/** @deprecated  */
+	/**
+	 * @deprecated
+	 */
 	@Override
 	@Deprecated
 	public Set<OfflinePlayer> getPlayers() throws IllegalStateException
 	{
-
-		if (!registered)throw new IllegalStateException("Team not registered");
+		checkRegistered();
 		Set<OfflinePlayer> players = new HashSet<>();
 		for (String s : entries)
 		{
@@ -291,7 +282,7 @@ public class TeamMock implements Team
 	@Override
 	public int getSize() throws IllegalStateException
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
+		checkRegistered();
 		return entries.size();
 	}
 
@@ -305,15 +296,14 @@ public class TeamMock implements Team
 	@Deprecated
 	public void addPlayer(OfflinePlayer offlinePlayer)
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
-
+		checkRegistered();
 		entries.add(offlinePlayer.getName());
 	}
 
 	@Override
 	public void addEntry(String s)
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
+		checkRegistered();
 		entries.add(s);
 	}
 
@@ -331,20 +321,21 @@ public class TeamMock implements Team
 		throw new UnimplementedOperationException();
 	}
 
-	/** @deprecated */
+	/**
+	 * @deprecated
+	 */
 	@Override
 	@Deprecated
 	public boolean removePlayer(OfflinePlayer offlinePlayer)
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
-
+		checkRegistered();
 		return entries.remove(offlinePlayer.getName());
 	}
 
 	@Override
 	public boolean removeEntry(String s)
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
+		checkRegistered();
 		return entries.remove(s);
 
 	}
@@ -366,40 +357,39 @@ public class TeamMock implements Team
 	@Override
 	public void unregister() throws IllegalStateException
 	{
-		if (!registered)
-			throw new IllegalStateException("Team not registered");
-
+		checkRegistered();
 		registered = false;
 	}
 
-	/** @deprecated */
+	/**
+	 * @deprecated
+	 */
 	@Override
 	@Deprecated
 	public boolean hasPlayer(OfflinePlayer offlinePlayer)
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
+		checkRegistered();
 		return entries.contains(offlinePlayer.getName());
 	}
 
 	@Override
 	public boolean hasEntry(String s)
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
+		checkRegistered();
 		return entries.contains(s);
 	}
 
 	@Override
 	public OptionStatus getOption(Option option) throws IllegalStateException
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
+		checkRegistered();
 		return options.get(option);
 	}
 
 	@Override
 	public void setOption(Option option, OptionStatus optionStatus) throws IllegalStateException
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
-
+		checkRegistered();
 		options.put(option, optionStatus);
 	}
 
@@ -423,4 +413,16 @@ public class TeamMock implements Team
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
+
+	/**
+	 * Ensures that the team is registered, throwing an IllegalStateException if it is not.
+	 */
+	private void checkRegistered()
+	{
+		if (!registered)
+		{
+			throw new IllegalStateException("Team not registered");
+		}
+	}
+
 }
