@@ -250,6 +250,10 @@ public class BlockStateMock implements BlockState
 	{
 		switch (block.getType())
 		{
+		case COMMAND_BLOCK:
+		case CHAIN_COMMAND_BLOCK:
+		case REPEATING_COMMAND_BLOCK:
+			return new CommandBlockMock(block);
 		case CAMPFIRE:
 		case SOUL_CAMPFIRE:
 			return new CampfireMock(block);
