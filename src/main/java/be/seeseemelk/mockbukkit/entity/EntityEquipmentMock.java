@@ -1,35 +1,40 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import org.apache.commons.lang.Validate;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import com.google.common.base.Preconditions;
+import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Mob;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import java.util.EnumMap;
+import java.util.Map;
 
 /**
  * This mocks the {@link EntityEquipment} of a {@link LivingEntityMock}. Note that not every {@link LivingEntity} has
  * {@link EntityEquipment}, so only implement this where necessary.
  *
  * @author TheBusyBiscuit
- *
  */
 public class EntityEquipmentMock implements EntityEquipment
 {
 
 	private final LivingEntityMock holder;
 
-	private ItemStack itemInMainHand;
-	private ItemStack itemInOffHand;
+	private final Map<EquipmentSlot, Float> dropChances = new EnumMap<>(EquipmentSlot.class);
 
-	private ItemStack helmet;
-	private ItemStack chestPlate;
-	private ItemStack leggings;
-	private ItemStack boots;
+	private ItemStack itemInMainHand = new ItemStack(Material.AIR);
+	private ItemStack itemInOffHand = new ItemStack(Material.AIR);
+
+	private ItemStack helmet = new ItemStack(Material.AIR);
+	private ItemStack chestPlate = new ItemStack(Material.AIR);
+	private ItemStack leggings = new ItemStack(Material.AIR);
+	private ItemStack boots = new ItemStack(Material.AIR);
 
 	public EntityEquipmentMock(@NotNull LivingEntityMock holder)
 	{
@@ -47,55 +52,37 @@ public class EntityEquipmentMock implements EntityEquipment
 	{
 		switch (slot)
 		{
-		case HEAD:
-			setHelmet(item, silent);
-			break;
-		case CHEST:
-			setChestplate(item, silent);
-			break;
-		case LEGS:
-			setLeggings(item, silent);
-			break;
-		case FEET:
-			setBoots(item, silent);
-			break;
-		case HAND:
-			setItemInMainHand(item, silent);
-			break;
-		case OFF_HAND:
-			setItemInOffHand(item, silent);
-			break;
-		default:
+		case HEAD -> setHelmet(item, silent);
+		case CHEST -> setChestplate(item, silent);
+		case LEGS -> setLeggings(item, silent);
+		case FEET -> setBoots(item, silent);
+		case HAND -> setItemInMainHand(item, silent);
+		case OFF_HAND -> setItemInOffHand(item, silent);
+			default ->
 			// This should never be reached unless Mojang adds new slots
 			throw new UnimplementedOperationException("EquipmentSlot '" + slot + "' has no implementation!");
 		}
 	}
 
 	@Override
-	public ItemStack getItem(@NotNull EquipmentSlot slot)
+	public @NotNull ItemStack getItem(@NotNull EquipmentSlot slot)
 	{
-		switch (slot)
+		return switch (slot)
 		{
-		case CHEST:
-			return getChestplate();
-		case FEET:
-			return getBoots();
-		case HAND:
-			return getItemInMainHand();
-		case HEAD:
-			return getHelmet();
-		case LEGS:
-			return getLeggings();
-		case OFF_HAND:
-			return getItemInOffHand();
-		default:
+		case CHEST -> getChestplate();
+		case FEET -> getBoots();
+		case HAND -> getItemInMainHand();
+		case HEAD -> getHelmet();
+		case LEGS -> getLeggings();
+		case OFF_HAND -> getItemInOffHand();
+			default ->
 			// This should never be reached unless Mojang adds new slots
 			throw new UnimplementedOperationException("EquipmentSlot '" + slot + "' has no implementation!");
-		}
+		};
 	}
 
 	@Override
-	public ItemStack getItemInMainHand()
+	public @NotNull ItemStack getItemInMainHand()
 	{
 		return itemInMainHand;
 	}
@@ -114,7 +101,7 @@ public class EntityEquipmentMock implements EntityEquipment
 	}
 
 	@Override
-	public ItemStack getItemInOffHand()
+	public @NotNull ItemStack getItemInOffHand()
 	{
 		return itemInOffHand;
 	}
@@ -134,7 +121,7 @@ public class EntityEquipmentMock implements EntityEquipment
 
 	@Override
 	@Deprecated
-	public ItemStack getItemInHand()
+	public @NotNull ItemStack getItemInHand()
 	{
 		return getItemInMainHand();
 	}
@@ -232,7 +219,7 @@ public class EntityEquipmentMock implements EntityEquipment
 	@Override
 	public void setArmorContents(@NotNull ItemStack[] items)
 	{
-		Validate.notNull(items, "The provided items must not be null.");
+		Preconditions.checkNotNull(items, "The provided items must not be null.");
 
 		setBoots((items.length >= 1) ? items[0] : null);
 		setLeggings((items.length >= 2) ? items[1] : null);
@@ -253,107 +240,109 @@ public class EntityEquipmentMock implements EntityEquipment
 	}
 
 	@Override
+	@Deprecated
 	public float getItemInHandDropChance()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.dropChances.get(EquipmentSlot.HAND);
 	}
 
 	@Override
+	@Deprecated
 	public void setItemInHandDropChance(float chance)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		setDropChance(EquipmentSlot.HAND, chance);
 	}
 
 	@Override
 	public float getItemInMainHandDropChance()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.dropChances.get(EquipmentSlot.HAND);
 	}
 
 	@Override
 	public void setItemInMainHandDropChance(float chance)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		setDropChance(EquipmentSlot.HAND, chance);
 	}
 
 	@Override
 	public float getItemInOffHandDropChance()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.dropChances.get(EquipmentSlot.OFF_HAND);
 	}
 
 	@Override
 	public void setItemInOffHandDropChance(float chance)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		setDropChance(EquipmentSlot.OFF_HAND, chance);
 	}
 
 	@Override
 	public float getHelmetDropChance()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.dropChances.get(EquipmentSlot.HEAD);
 	}
 
 	@Override
 	public void setHelmetDropChance(float chance)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		setDropChance(EquipmentSlot.HEAD, chance);
 	}
 
 	@Override
 	public float getChestplateDropChance()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.dropChances.get(EquipmentSlot.CHEST);
 	}
 
 	@Override
 	public void setChestplateDropChance(float chance)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		setDropChance(EquipmentSlot.CHEST, chance);
 	}
 
 	@Override
 	public float getLeggingsDropChance()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.dropChances.get(EquipmentSlot.LEGS);
 	}
 
 	@Override
 	public void setLeggingsDropChance(float chance)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		setDropChance(EquipmentSlot.LEGS, chance);
 	}
 
 	@Override
 	public float getBootsDropChance()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.dropChances.get(EquipmentSlot.FEET);
 	}
 
 	@Override
 	public void setBootsDropChance(float chance)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		setDropChance(EquipmentSlot.FEET, chance);
 	}
 
 	@Override
 	public Entity getHolder()
 	{
 		return holder;
+	}
+
+	@Override
+	public void setDropChance(@NotNull EquipmentSlot slot, float chance)
+	{
+		Preconditions.checkArgument(holder instanceof Mob, "Cannot set drop chance for non-Mob entity");
+
+		this.dropChances.put(slot, chance);
+	}
+
+	@Override
+	public float getDropChance(@NotNull EquipmentSlot slot)
+	{
+		return this.dropChances.get(slot);
 	}
 
 }

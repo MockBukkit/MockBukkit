@@ -1,29 +1,27 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import java.util.Map;
-import java.util.UUID;
-
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Statistic;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.profile.PlayerProfile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * A Mock specifically for {@link OfflinePlayer}. Not interchangeable with {@link PlayerMock}.
  *
- *
  * @author TheBusyBiscuit
- *
  * @see PlayerMock
- *
  */
 public class OfflinePlayerMock implements OfflinePlayer
 {
@@ -84,8 +82,9 @@ public class OfflinePlayerMock implements OfflinePlayer
 	@Override
 	public @NotNull Map<String, Object> serialize()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Map<String, Object> result = new LinkedHashMap<>();
+		result.put("UUID", uuid.toString());
+		return result;
 	}
 
 	@Override
@@ -123,6 +122,7 @@ public class OfflinePlayerMock implements OfflinePlayer
 	}
 
 	@Override
+	@Deprecated
 	public long getLastPlayed()
 	{
 		// TODO Auto-generated method stub
@@ -138,6 +138,20 @@ public class OfflinePlayerMock implements OfflinePlayer
 
 	@Override
 	public @Nullable Location getBedSpawnLocation()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public long getLastLogin()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public long getLastSeen()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -264,6 +278,20 @@ public class OfflinePlayerMock implements OfflinePlayer
 
 	@Override
 	public void setStatistic(@NotNull Statistic statistic, @NotNull EntityType entityType, int newValue)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Location getLastDeathLocation()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull PlayerProfile getPlayerProfile()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

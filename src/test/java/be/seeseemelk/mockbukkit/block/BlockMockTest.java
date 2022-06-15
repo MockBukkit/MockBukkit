@@ -2,14 +2,18 @@ package be.seeseemelk.mockbukkit.block;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.bukkit.Chunk;
+import be.seeseemelk.mockbukkit.ChunkCoordinate;
+import be.seeseemelk.mockbukkit.ChunkMock;
+import be.seeseemelk.mockbukkit.Coordinate;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,7 +27,7 @@ class BlockMockTest
 	private BlockMock block;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		World world = new WorldMock();
 		block = new BlockMock(new Location(world, 120, 60, 120));
@@ -58,15 +62,34 @@ class BlockMockTest
 	}
 
 	@Test
+	void getLocation_CustomLocation_ApplyToProvided()
+	{
+		WorldMock world = new WorldMock();
+		Location location = new Location(world, 5, 2, 1);
+		block = new BlockMock(Material.AIR, location);
+		Location location2 = new Location(null, 0, 0, 0);
+		block.getLocation(location2);
+		assertEquals(block.getLocation(), location2);
+	}
+
+	@Test
 	void getChunk_LocalBlock_Matches()
 	{
 		WorldMock world = new WorldMock();
-		Location location = new Location(world, -10, 5, 30);
-		Block worldBlock = world.getBlockAt(location);
-		Chunk chunk = worldBlock.getChunk();
-		int localX = location.getBlockX() - (chunk.getX() << 4);
-		int localZ = location.getBlockZ() - (chunk.getZ() << 4);
-		Block chunkBlock = chunk.getBlock(localX, location.getBlockY(), localZ);
+		Coordinate coordinate = new Coordinate(-10, 5, 30);
+		Block worldBlock = world.getBlockAt(coordinate);
+		Block chunkBlock = ((ChunkMock) worldBlock.getChunk()).getBlock(coordinate.toLocalCoordinate());
+		assertEquals(worldBlock, chunkBlock);
+	}
+
+	@Test
+	void getChunk_LocalBlock_NegativeY()
+	{
+		WorldMock world = new WorldMock(Material.STONE, -64, 320, 70);
+		Coordinate coordinate = new Coordinate(55, -40, 100);
+		Block worldBlock = world.getBlockAt(coordinate);
+		ChunkCoordinate chunkCoordinate = coordinate.toChunkCoordinate();
+		Block chunkBlock = world.getChunkAt(chunkCoordinate).getBlock(coordinate.toLocalCoordinate());
 		assertEquals(worldBlock, chunkBlock);
 	}
 
@@ -197,4 +220,36 @@ class BlockMockTest
 		block.breakNaturally();
 		assertTrue(block.isEmpty());
 	}
+
+	@Test
+	void getBiome()
+	{
+		Biome worldBiome = block.getWorld().getBiome(block.getLocation());
+		assertNotNull(worldBiome);
+		Biome blockBiome = block.getBiome();
+		assertNotNull(blockBiome);
+		assertEquals(worldBiome, blockBiome);
+	}
+
+	@Test
+	void setBiome()
+	{
+		block.setBiome(Biome.DESERT);
+		assertEquals(Biome.DESERT, block.getBiome());
+	}
+
+	@Test
+	void testGetFace_Valid()
+	{
+		Block b = block.getRelative(BlockFace.NORTH);
+		assertEquals(block.getFace(b), BlockFace.NORTH);
+	}
+
+	@Test
+	void testGetFace_Invalid()
+	{
+		Block b = block.getRelative(BlockFace.NORTH, 2);
+		assertNull(block.getFace(b));
+	}
+
 }

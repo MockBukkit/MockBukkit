@@ -1,17 +1,20 @@
 package be.seeseemelk.mockbukkit.scoreboard;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.apache.commons.lang.Validate;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import com.google.common.base.Preconditions;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Entity;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.RenderType;
+import org.bukkit.scoreboard.Score;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ObjectiveMock implements Objective
 {
@@ -19,20 +22,20 @@ public class ObjectiveMock implements Objective
 	private final String name;
 	private final String criteria;
 	private final Map<String, ScoreMock> scores = new HashMap<>();
-	private String displayName;
+	private Component displayName;
 	private DisplaySlot displaySlot;
 	private RenderType renderType;
 
 	public ObjectiveMock(@NotNull ScoreboardMock scoreboard, @NotNull String name, @NotNull String displayName,
 	                     @NotNull String criteria, @NotNull RenderType renderType)
 	{
-		Validate.notNull(scoreboard, "When registering an Objective to the Scoreboard the scoreboard cannot be null.");
-		Validate.notNull(name, "The name cannot be null");
-		Validate.notNull(criteria, "The criteria cannot be null");
+		Preconditions.checkNotNull(scoreboard, "When registering an Objective to the Scoreboard the scoreboard cannot be null.");
+		Preconditions.checkNotNull(name, "The name cannot be null");
+		Preconditions.checkNotNull(criteria, "The criteria cannot be null");
 
 		this.scoreboard = scoreboard;
 		this.name = name;
-		this.displayName = displayName;
+		this.displayName = Component.text(displayName);
 		this.criteria = criteria;
 		this.renderType = renderType;
 	}
@@ -59,20 +62,34 @@ public class ObjectiveMock implements Objective
 	}
 
 	@Override
-	public String getDisplayName() throws IllegalStateException
+	public @NotNull Component displayName() throws IllegalStateException
 	{
-		validate();
 		return displayName;
 	}
 
 	@Override
+	public void displayName(@Nullable Component displayName) throws IllegalStateException, IllegalArgumentException
+	{
+		this.displayName = displayName;
+	}
+
+	@Override
+	@Deprecated
+	public String getDisplayName() throws IllegalStateException
+	{
+		validate();
+		return LegacyComponentSerializer.legacySection().serialize(displayName);
+	}
+
+	@Override
+	@Deprecated
 	public void setDisplayName(String displayName) throws IllegalStateException, IllegalArgumentException
 	{
-		Validate.notNull(displayName, "The display name cannot be null");
-		Validate.isTrue(displayName.length() <= 128, "The display name cannot be longer than 128 characters");
+		Preconditions.checkNotNull(displayName, "The display name cannot be null");
+		Preconditions.checkArgument(displayName.length() <= 128, "The display name cannot be longer than 128 characters");
 
 		validate();
-		this.displayName = displayName;
+		this.displayName = LegacyComponentSerializer.legacySection().deserialize(displayName);
 	}
 
 	@Override
@@ -141,7 +158,7 @@ public class ObjectiveMock implements Objective
 	@Deprecated
 	public ScoreMock getScore(@NotNull OfflinePlayer player) throws IllegalArgumentException, IllegalStateException
 	{
-		Validate.notNull(player, "The player cannot be null");
+		Preconditions.checkNotNull(player, "The player cannot be null");
 		validate();
 
 		return getScore(player.getName());
@@ -150,8 +167,8 @@ public class ObjectiveMock implements Objective
 	@Override
 	public ScoreMock getScore(@NotNull String entry) throws IllegalArgumentException, IllegalStateException
 	{
-		Validate.notNull(entry, "The entry cannot be null");
-		Validate.isTrue(entry.length() <= 40, "Objective entries cannot be longer than 40 characters");
+		Preconditions.checkNotNull(entry, "The entry cannot be null");
+		Preconditions.checkArgument(entry.length() <= 40, "Objective entries cannot be longer than 40 characters");
 		validate();
 
 		ScoreMock score = scores.get(entry);
@@ -166,6 +183,13 @@ public class ObjectiveMock implements Objective
 			scores.put(entry, score);
 			return score;
 		}
+	}
+
+	@Override
+	public @NotNull Score getScoreFor(@NotNull Entity entity) throws IllegalArgumentException, IllegalStateException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

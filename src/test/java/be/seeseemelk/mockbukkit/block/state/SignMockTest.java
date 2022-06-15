@@ -1,11 +1,8 @@
 package be.seeseemelk.mockbukkit.block.state;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.block.BlockMock;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
@@ -13,8 +10,11 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.block.BlockMock;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class SignMockTest
 {
@@ -22,14 +22,14 @@ class SignMockTest
 	private Sign sign;
 
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		MockBukkit.mock();
 		sign = new SignMock(Material.OAK_SIGN);
 	}
 
 	@AfterEach
-	public void tearDown() throws Exception
+	void tearDown() throws Exception
 	{
 		MockBukkit.unmock();
 	}
@@ -65,7 +65,7 @@ class SignMockTest
 	@Test
 	void testLineNotNull()
 	{
-		assertThrows(IllegalArgumentException.class, () -> sign.setLine(0, null));
+		assertThrows(NullPointerException.class, () -> sign.setLine(0, null));
 	}
 
 	@Test
@@ -79,5 +79,29 @@ class SignMockTest
 	{
 		assertThrows(IndexOutOfBoundsException.class, () -> sign.getLine(100));
 	}
+
+	@Test
+	void testGetLineComponent()
+	{
+		Component component = Component.text("Hello World");
+		sign.line(2, component);
+		assertEquals(component, sign.line(2));
+	}
+
+	@Test
+	void testSetLineComponent()
+	{
+		Component component = Component.text("Hello World");
+		sign.line(2, component);
+		assertEquals(component, sign.line(2));
+	}
+
+	@Test
+	void testGetLineComponentNull()
+	{
+		assertThrows(NullPointerException.class, () -> sign.line(2, null));
+	}
+
+
 
 }

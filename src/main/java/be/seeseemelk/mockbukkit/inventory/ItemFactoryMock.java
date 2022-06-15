@@ -1,26 +1,46 @@
 package be.seeseemelk.mockbukkit.inventory;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.Objects;
-
-import org.bukkit.Color;
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemFactory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.inventory.meta.ArmorStandMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.BannerMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.BookMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.CompassMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.CrossbowMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.EnchantedBookMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.FireworkEffectMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.FireworkMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.KnowledgeBookMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.LeatherArmorMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.MapMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.PotionMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.SkullMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.SuspiciousStewMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.TropicalFishBucketMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.BundleMetaMock;
+import com.google.common.base.Preconditions;
+
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.event.HoverEvent;
+import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.hover.content.Content;
+import org.bukkit.Color;
+import org.bukkit.Material;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.inventory.ItemFactory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.Range;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Objects;
+import java.util.Random;
+import java.util.function.UnaryOperator;
 
 public class ItemFactoryMock implements ItemFactory
 {
@@ -29,53 +49,46 @@ public class ItemFactoryMock implements ItemFactory
 
 	private Class<? extends ItemMeta> getItemMetaClass(Material material)
 	{
-		switch (material)
+		return switch (material)
 		{
-		case WRITABLE_BOOK:
-		case WRITTEN_BOOK:
-			return BookMetaMock.class;
-		case ENCHANTED_BOOK:
-			return EnchantedBookMetaMock.class;
-		case KNOWLEDGE_BOOK:
-			return KnowledgeBookMetaMock.class;
-		case LEATHER_BOOTS:
-		case LEATHER_CHESTPLATE:
-		case LEATHER_HELMET:
-		case LEATHER_LEGGINGS:
-			return LeatherArmorMetaMock.class;
-		case MAP:
-			// TODO Auto-generated method stub
-			throw new UnimplementedOperationException();
-		case FIREWORK_STAR:
-			return FireworkEffectMetaMock.class;
-		case FIREWORK_ROCKET:
-			return FireworkMetaMock.class;
-		case POTION:
-		case LINGERING_POTION:
-		case SPLASH_POTION:
-			return PotionMetaMock.class;
-		case PLAYER_HEAD:
-			return SkullMetaMock.class;
-		case SUSPICIOUS_STEW:
-			return SuspiciousStewMetaMock.class;
-		case TROPICAL_FISH_BUCKET:
-			// TODO Auto-generated method stub
-			throw new UnimplementedOperationException();
-		default:
-			return ItemMetaMock.class;
-		}
+
+		case ARMOR_STAND -> ArmorStandMetaMock.class;
+		case WRITABLE_BOOK, WRITTEN_BOOK -> BookMetaMock.class;
+		case ENCHANTED_BOOK -> EnchantedBookMetaMock.class;
+		case KNOWLEDGE_BOOK -> KnowledgeBookMetaMock.class;
+		case LEATHER_BOOTS, LEATHER_CHESTPLATE, LEATHER_HELMET, LEATHER_LEGGINGS ->
+				LeatherArmorMetaMock.class;
+		case FILLED_MAP -> MapMetaMock.class;
+		case FIREWORK_STAR -> FireworkEffectMetaMock.class;
+		case FIREWORK_ROCKET -> FireworkMetaMock.class;
+		case POTION, LINGERING_POTION, SPLASH_POTION -> PotionMetaMock.class;
+		case PLAYER_HEAD -> SkullMetaMock.class;
+		case SUSPICIOUS_STEW -> SuspiciousStewMetaMock.class;
+		case BUNDLE -> BundleMetaMock.class;
+		case COMPASS -> CompassMetaMock.class;
+		case CROSSBOW -> CrossbowMetaMock.class;
+		case WHITE_BANNER, ORANGE_BANNER, MAGENTA_BANNER, LIGHT_BLUE_BANNER, YELLOW_BANNER, LIME_BANNER, PINK_BANNER, GRAY_BANNER, LIGHT_GRAY_BANNER, CYAN_BANNER, PURPLE_BANNER, BLUE_BANNER, BROWN_BANNER, GREEN_BANNER, RED_BANNER, BLACK_BANNER ->
+				BannerMetaMock.class;
+		case TROPICAL_FISH_BUCKET -> TropicalFishBucketMetaMock.class;
+		default -> ItemMetaMock.class;
+		};
 	}
 
 	@Override
-	public ItemMeta getItemMeta(Material material)
+	public ItemMeta getItemMeta(@NotNull Material material)
 	{
+		Preconditions.checkNotNull(material, "Material cannot be null");
+
+		Class<? extends ItemMeta> clazz = null;
+
 		try
 		{
-			return getItemMetaClass(material).newInstance();
+			clazz = getItemMetaClass(material);
+			return clazz.getDeclaredConstructor().newInstance();
 		}
-		catch (InstantiationException | IllegalAccessException e)
+		catch (ReflectiveOperationException e)
 		{
-			throw new UnsupportedOperationException("Can't instantiate class");
+			throw new UnsupportedOperationException("Can't instantiate class '" + clazz + "'");
 		}
 	}
 
@@ -137,10 +150,101 @@ public class ItemFactoryMock implements ItemFactory
 		return defaultLeatherColor;
 	}
 
+	@NotNull
 	@Override
+	public ItemStack createItemStack(@NotNull String input) throws IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@Deprecated
 	public Material updateMaterial(ItemMeta meta, Material material)
 	{
 		return material;
+	}
+
+	@Override
+	public @NotNull ItemStack enchantWithLevels(@NotNull ItemStack itemStack, @Range(from = 1L, to = 30L) int levels, boolean allowTreasure, @NotNull Random random)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull HoverEvent<HoverEvent.ShowItem> asHoverEvent(@NotNull ItemStack item, @NotNull UnaryOperator<HoverEvent.ShowItem> op)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Component displayName(@NotNull ItemStack itemStack)
+	{
+		return itemStack.displayName();
+	}
+
+	@Override
+	@Deprecated
+	public @Nullable String getI18NDisplayName(@Nullable ItemStack item)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull ItemStack ensureServerConversions(@NotNull ItemStack item)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@Deprecated
+	public @NotNull Content hoverContentOf(@NotNull ItemStack itemStack)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@Deprecated
+	public @NotNull Content hoverContentOf(@NotNull Entity entity)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@Deprecated
+	public @NotNull Content hoverContentOf(@NotNull Entity entity, @Nullable String customName)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@Deprecated
+	public @NotNull Content hoverContentOf(@NotNull Entity entity, @Nullable BaseComponent customName)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@Deprecated
+	public @NotNull Content hoverContentOf(@NotNull Entity entity, @NotNull BaseComponent[] customName)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable ItemStack getSpawnEgg(@Nullable EntityType type)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 }

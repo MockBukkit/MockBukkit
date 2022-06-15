@@ -28,6 +28,7 @@ public class ScoreMock implements Score
 	}
 
 	@Override
+	@Deprecated
 	public OfflinePlayer getPlayer()
 	{
 		return player;
@@ -71,6 +72,13 @@ public class ScoreMock implements Score
 	public Scoreboard getScoreboard()
 	{
 		return objective.getScoreboard();
+	}
+
+	@Override
+	public void resetScore() throws IllegalStateException
+	{
+		score = 0;
+		set = false;
 	}
 
 }

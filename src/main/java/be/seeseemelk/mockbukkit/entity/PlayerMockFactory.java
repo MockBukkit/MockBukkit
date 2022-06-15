@@ -8,6 +8,7 @@ import java.util.UUID;
 
 public final class PlayerMockFactory
 {
+
 	private final ServerMock server;
 	private final Random random = new Random();
 	private int currentNameIndex;
@@ -56,4 +57,16 @@ public final class PlayerMockFactory
 	{
 		return new OfflinePlayerMock(getUniqueRandomName());
 	}
+
+	/**
+	 * Create a random {@link OfflinePlayerMock} object with a unique name and the given id.
+	 *
+	 * @param uuid the id of the offline player
+	 * @return A newly created offline player mock object.
+	 */
+	public @NotNull OfflinePlayerMock createOfflinePlayer(@NotNull UUID uuid)
+	{
+		return new OfflinePlayerMock(uuid, getUniqueRandomName());
+	}
+
 }
