@@ -87,7 +87,7 @@ public class AllayMock extends CreatureMock implements Allay
 	 */
 	public void assertCurrentItem(@NotNull Material item)
 	{
-		assertCurrentItem(item, "");
+		assertCurrentItem(item, "Allay is not holding the correct item");
 	}
 
 	/**
@@ -112,7 +112,7 @@ public class AllayMock extends CreatureMock implements Allay
 
 	public void assertInventoryContains(ItemStack item)
 	{
-		assertInventoryContains(item, "");
+		assertInventoryContains(item, "Inventory does not contain the given ItemStack");
 	}
 
 	private void assertInventoryContains(ItemStack item, String s)
