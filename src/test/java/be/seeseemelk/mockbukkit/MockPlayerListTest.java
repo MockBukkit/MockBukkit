@@ -32,8 +32,6 @@ public class MockPlayerListTest
 		playerList.disconnectPlayer(playerA);
 
 		assertFalse(playerList.getOnlinePlayers().contains(playerA));
-
-
 	}
 
 }
