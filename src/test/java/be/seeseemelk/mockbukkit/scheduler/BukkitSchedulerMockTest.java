@@ -320,28 +320,14 @@ class BukkitSchedulerMockTest
 		{
 			while (true)
 			{
-				try
-				{
-					Thread.sleep(SLEEP_TIME);
-				}
-				catch (InterruptedException e)
-				{
-					throw new RuntimeException(e);
-				}
+				simulateWorkload();
 			}
 		});
 		scheduler.runTaskLaterAsynchronously(null, () ->
 		{
 			while (true)
 			{
-				try
-				{
-					Thread.sleep(SLEEP_TIME);
-				}
-				catch (InterruptedException e)
-				{
-					throw new RuntimeException(e);
-				}
+				simulateWorkload();
 			}
 		}, 2);
 		assertEquals(1, scheduler.getActiveRunningCount());
@@ -402,9 +388,9 @@ class BukkitSchedulerMockTest
 		Bukkit.getPluginManager().registerEvents(new Listener()
 		{
 			@EventHandler
-			public void onChat(AsyncChatEvent event) throws Exception
+			public void onChat(AsyncChatEvent event)
 			{
-				Thread.sleep(50);
+				simulateWorkload();
 				done.set(true);
 			}
 		}, MockBukkit.createMockPlugin());
@@ -428,7 +414,7 @@ class BukkitSchedulerMockTest
 			@EventHandler
 			public void onChat(AsyncChatEvent event) throws Exception
 			{
-				Thread.sleep(SLEEP_TIME);
+				simulateWorkload();
 				done.set(true);
 			}
 		}, MockBukkit.createMockPlugin());
