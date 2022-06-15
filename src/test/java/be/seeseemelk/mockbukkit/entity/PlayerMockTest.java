@@ -1672,7 +1672,6 @@ class PlayerMockTest
 	}
 
 	@Test
-
 	void testDisconnect()
 	{
 		assertTrue(player.isOnline());
@@ -1705,6 +1704,9 @@ class PlayerMockTest
 
 		assertThrows(IllegalStateException.class, () -> player.reconnect());
 
+	}
+
+	@Test
 	void sendMap_RendersMap()
 	{
 		MapViewMock mapView = new MapViewMock(new WorldMock(), 1);
