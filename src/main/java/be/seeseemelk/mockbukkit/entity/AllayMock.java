@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
+import com.google.common.base.Preconditions;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Allay;
@@ -8,7 +9,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -31,11 +31,12 @@ public class AllayMock extends CreatureMock implements Allay
 	/**
 	 * Simulates the Interaction of a Player with the Allay to set it's current item.
 	 *
-	 * @param item The {@link Material} of the Item the Allay should collect
+	 * @param material The {@link Material} of the Item the Allay should collect
 	 */
-	public void simulatePlayerInteract(@NotNull Material item)
+	public void simulatePlayerInteract(@NotNull Material material)
 	{
-		this.currentItem = item;
+		Preconditions.checkNotNull(material, "Material cannot be null");
+		this.currentItem = material;
 	}
 
 	/**
@@ -43,15 +44,12 @@ public class AllayMock extends CreatureMock implements Allay
 	 *
 	 * @return A {@link List} of {@link ItemStack}s that the Allay is holding
 	 */
-	public List<ItemStack> simulateItemRetrieval()
+	public ItemStack simulateItemRetrieval()
 	{
-		List<ItemStack> items = new ArrayList<>();
-
-		Arrays.stream(this.inventory.getContents()).filter(Objects::nonNull).forEach(items::add);
-
+		ItemStack item = this.inventory.getContents()[0];
 		this.inventory.clear();
 
-		return items;
+		return item;
 	}
 
 	/**
