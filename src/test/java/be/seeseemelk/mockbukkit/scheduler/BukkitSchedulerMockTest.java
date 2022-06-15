@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -230,6 +229,7 @@ class BukkitSchedulerMockTest
 		{
 			scheduler.runTaskLaterAsynchronously(null, callback, 2L + (i % 5));
 		}
+
 		int pendingTasks;
 		int oldPendingTasks = amountTasks;
 		while ((pendingTasks = scheduler.getPendingTasks().size()) > 0)
@@ -268,16 +268,17 @@ class BukkitSchedulerMockTest
 	}
 
 	/**
-	 * Simulates varying work load by waiting by a random amount of time (up to 20ms).
+	 * Simulates work load by waiting SLEEP_TIME milliseconds.
 	 */
 	private void simulateWorkload() {
 		try
 		{
-			Thread.sleep(ThreadLocalRandom.current().nextInt(2, 20));
+			Thread.sleep(SLEEP_TIME);
 		}
 		catch (InterruptedException e)
 		{
 			e.printStackTrace();
+			Thread.currentThread().interrupt();
 		}
 	}
 
