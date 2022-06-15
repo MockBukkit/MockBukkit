@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.scheduler;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableList;
 import org.bukkit.event.Event;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -458,7 +459,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public @NotNull List<BukkitTask> getPendingTasks()
 	{
 		List<ScheduledTask> truePending = scheduledTasks.getCurrentTaskList().stream().filter(task -> task.getTaskId() != -1).toList();
-		List<BukkitTask> pending = new ArrayList<BukkitTask>();
+		List<BukkitTask> pending = new ArrayList<>();
 		for (ScheduledTask task : runners.values())
 		{
 			if (!task.isCancelled())
@@ -471,7 +472,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			if (!task.isCancelled() && !pending.contains(task))
 				pending.add(task);
 		}
-		return pending;
+		return ImmutableList.copyOf(pending);
 	}
 
 	@Override
