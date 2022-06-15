@@ -53,13 +53,13 @@ class BlastFurnaceMockTest
 	}
 
 	@Test
+	@Disabled("FurnaceInventoryMock isn't implemented yet")
 	void getSnapshot_DifferentInstance()
 	{
 		assertNotSame(furnace, furnace.getSnapshot());
 	}
 
 	@Test
-	@Disabled("FurnaceInventoryMock isn't implemented yet")
 	void blockStateMock_Mock_CorrectType()
 	{
 		assertInstanceOf(BlastFurnaceMock.class, BlockStateMock.mockState(block));
