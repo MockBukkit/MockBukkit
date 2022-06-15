@@ -502,33 +502,6 @@ class ServerMockTest
 	}
 
 	@Test
-	void assertMainThread_MainThread_Succeeds()
-	{
-		server.assertMainThread();
-	}
-
-	@Test
-	void assertMainThread_NotMainThread_ThrowsException() throws Exception
-	{
-		AtomicReference<Exception> exceptionThrown = new AtomicReference<>();
-
-		server.getScheduler().runTaskAsynchronously(null, () ->
-		{
-			try
-			{
-				server.assertMainThread();
-			} catch (ThreadAccessException e)
-			{
-				exceptionThrown.set(e);
-			}
-		});
-
-		server.getScheduler().waitAsyncTasksFinished();
-
-		assertNotNull(exceptionThrown.get());
-	}
-
-	@Test
 	void matchPlayer_NoMatchingPlayers_EmptyList()
 	{
 		server.addPlayer("Player");
