@@ -35,11 +35,11 @@ import be.seeseemelk.mockbukkit.tags.TagRegistry;
 import be.seeseemelk.mockbukkit.tags.TagWrapperMock;
 import be.seeseemelk.mockbukkit.tags.TagsMock;
 import com.destroystokyo.paper.entity.ai.MobGoals;
+import com.google.common.base.Preconditions;
 import io.papermc.paper.datapack.DatapackManager;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 import net.md_5.bungee.api.chat.BaseComponent;
-import org.apache.commons.lang.Validate;
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.BanEntry;
 import org.bukkit.BanList;
@@ -1417,7 +1417,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 */
 	public void setWarningState(@NotNull WarningState warningState)
 	{
-		Validate.notNull(warningState, "Warning state cannot be null");
+		Preconditions.checkNotNull(warningState, "warningState cannot be null");
 		this.warningState = warningState;
 	}
 
@@ -1492,7 +1492,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @Nullable Entity getEntity(@NotNull UUID uuid)
 	{
-		Validate.notNull(uuid, "UUID cannot be null");
+		Preconditions.checkNotNull(uuid, "uuid cannot be null");
 
 		for (EntityMock entity : entities)
 		{
@@ -1549,7 +1549,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull BlockData createBlockData(@NotNull Material material)
 	{
-		Validate.notNull(material, "Must provide material");
+		Preconditions.checkNotNull(material, "Must provide material");
 		return BlockDataMock.mock(material);
 	}
 
@@ -1593,7 +1593,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@NotNull
 	public Tag<Material> createMaterialTag(@NotNull NamespacedKey key, @NotNull String registryKey, @NotNull Material... materials)
 	{
-		Validate.notNull(key, "A NamespacedKey must never be null");
+		Preconditions.checkNotNull(key, "A NamespacedKey must never be null");
 
 		TagRegistry registry = materialTags.get(registryKey);
 		TagWrapperMock tag = new TagWrapperMock(registry, key);
@@ -1677,7 +1677,8 @@ public class ServerMock extends Server.Spigot implements Server
 		registerPotionEffectType(29, "CONDUIT_POWER", false, 1950417);
 		registerPotionEffectType(30, "DOLPHINS_GRACE", false, 8954814);
 		registerPotionEffectType(31, "BAD_OMEN", false, 745784);
-		registerPotionEffectType(32, "HERO_OF_THE_VILLAGE", false, 45217);
+		registerPotionEffectType(32, "HERO_OF_THE_VILLAGE", false, 4521796);
+		registerPotionEffectType(33, "DARKNESS", false, 2696993);
 		PotionEffectType.stopAcceptingRegistrations();
 	}
 
@@ -1713,7 +1714,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public KeyedBossBar createBossBar(NamespacedKey key, String title, BarColor color, BarStyle style, BarFlag... flags)
 	{
-		Validate.notNull(key, "A NamespacedKey must never be null");
+		Preconditions.checkNotNull(key, "A NamespacedKey must never be null");
 		KeyedBossBarMock bar = new KeyedBossBarMock(key, title, color, style, flags);
 		bossBars.put(key, bar);
 		return bar;
@@ -1728,14 +1729,14 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public KeyedBossBar getBossBar(NamespacedKey key)
 	{
-		Validate.notNull(key, "A NamespacedKey must never be null");
+		Preconditions.checkNotNull(key, "A NamespacedKey must never be null");
 		return bossBars.get(key);
 	}
 
 	@Override
 	public boolean removeBossBar(NamespacedKey key)
 	{
-		Validate.notNull(key, "A NamespacedKey must never be null");
+		Preconditions.checkNotNull(key, "A NamespacedKey must never be null");
 		return bossBars.remove(key, bossBars.get(key));
 	}
 
@@ -1880,6 +1881,13 @@ public class ServerMock extends Server.Spigot implements Server
 
 	@Override
 	public @NotNull String getPermissionMessage()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Component permissionMessage()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
