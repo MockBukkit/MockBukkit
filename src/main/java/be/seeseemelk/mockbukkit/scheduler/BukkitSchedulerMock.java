@@ -31,6 +31,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 public class BukkitSchedulerMock implements BukkitScheduler
 {
@@ -404,7 +405,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public void cancelTask(int taskId)
 	{
-		for (ScheduledTask task : tasks)
+		for (ScheduledTask task : scheduledTasks.getCurrentTaskList())
 		{
 			if (task.getTaskId() == taskId)
 			{
@@ -456,7 +457,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public @NotNull List<BukkitTask> getPendingTasks()
 	{
-		List<ScheduledTask> truePending = tasks.stream().filter(task -> task.getTaskId() != -1).collect(Collectors.toList());
+		List<ScheduledTask> truePending = scheduledTasks.getCurrentTaskList().stream().filter(task -> task.getTaskId() != -1).toList();
 		List<BukkitTask> pending = new ArrayList<BukkitTask>();
 		for (ScheduledTask task : runners.values())
 		{
@@ -503,7 +504,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		        new AsyncRunnable(task, id));
 		runners.put(id, scheduledTask);
 		id++;
-		tasks.add(scheduledTask);
+		scheduledTasks.addTask(scheduledTask);
 		asyncTasksQueued++;
 		return scheduledTask;
 	}
@@ -521,7 +522,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		        new AsyncRunnable(task, id));
 		runners.put(id, scheduledTask);
 		id++;
-		tasks.add(scheduledTask);
+		scheduledTasks.addTask(scheduledTask);
 		return scheduledTask;
 	}
 
