@@ -131,6 +131,7 @@ class PlayerMockTest
 
 		uuid = UUID.randomUUID();
 		player = new PlayerMock(server, "player", uuid);
+		server.addPlayer(player);
 	}
 
 	@AfterEach
