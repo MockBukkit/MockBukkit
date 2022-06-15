@@ -15,6 +15,7 @@ import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Objects;
 
 public class BlockStateMock implements BlockState
 {
@@ -245,11 +246,43 @@ public class BlockStateMock implements BlockState
 		return new BlockStateMock(this);
 	}
 
+	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int hash = 1;
+		hash = prime * hash + (this.isPlaced() ? this.getWorld().hashCode() : 0);
+		hash = prime * hash + (this.isPlaced() ? this.getLocation().hashCode() : 0);
+//		hash = prime * hash + (this.getBlockData() != null ? this.getBlockData().hashCode() : 0); Not implemented
+		return hash;
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (!(obj instanceof BlockStateMock other))
+		{
+			return false;
+		}
+		if (this.isPlaced() && this.getWorld() != other.getWorld() && (this.getWorld() == null || !this.getWorld().equals(other.getWorld()))) {
+			return false;
+		}
+		if (this.isPlaced() && this.getLocation() != other.getLocation() && (this.getLocation() == null || !this.getLocation().equals(other.getLocation()))) {
+			return false;
+		}
+//		if (this.getBlockData() != other.getBlockData() && (this.getBlockData() == null || !this.getBlockData().equals(other.getBlockData()))) {
+//			return false; Not implemented
+//		}
+		return true;
+	}
+
 	@NotNull
 	public static BlockStateMock mockState(@NotNull Block block)
 	{
 		switch (block.getType())
 		{
+		case DAYLIGHT_DETECTOR:
+			return new DaylightDetectorMock(block);
 		case COMMAND_BLOCK:
 		case CHAIN_COMMAND_BLOCK:
 		case REPEATING_COMMAND_BLOCK:
@@ -346,4 +379,5 @@ public class BlockStateMock implements BlockState
 			return new BlockStateMock(block);
 		}
 	}
+
 }

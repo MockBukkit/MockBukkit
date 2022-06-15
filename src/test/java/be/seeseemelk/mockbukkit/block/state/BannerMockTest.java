@@ -15,7 +15,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -89,7 +89,7 @@ class BannerMockTest
 	void getSnapshot_DifferentInstance()
 	{
 		BannerMock state = meta.getSnapshot();
-		assertNotEquals(meta, state);
+		assertNotSame(meta, state);
 	}
 
 	@Test
