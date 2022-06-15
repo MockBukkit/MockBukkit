@@ -22,6 +22,8 @@ import com.google.common.collect.ImmutableSet;
 import io.papermc.paper.chat.ChatRenderer;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.serializer.bungeecord.BungeeComponentSerializer;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.md_5.bungee.api.ChatMessageType;
@@ -78,6 +80,7 @@ import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerResourcePackStatusEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
@@ -131,8 +134,10 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 {
 
+	private boolean online;
 	private PlayerInventoryMock inventory = null;
 	private EnderChestInventoryMock enderChest = null;
+	private ServerMock server;
 	private GameMode gamemode = GameMode.SURVIVAL;
 	private GameMode previousGamemode = gamemode;
 	private Component displayName = null;
@@ -173,6 +178,8 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public PlayerMock(ServerMock server, String name)
 	{
 		this(server, name, UUID.nameUUIDFromBytes(("OfflinePlayer:" + name).getBytes(StandardCharsets.UTF_8)));
+		this.online = false;
+		this.firstPlayed = 0;
 	}
 
 	public PlayerMock(ServerMock server, String name, UUID uuid)
@@ -180,6 +187,9 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		super(server, uuid);
 		setName(name);
 		setDisplayName(name);
+		this.online = true;
+		this.server = server;
+		this.firstPlayed = System.currentTimeMillis();
 
 		if (Bukkit.getWorlds().isEmpty())
 		{
@@ -192,6 +202,55 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 		Random random = ThreadLocalRandom.current();
 		address = new InetSocketAddress("192.0.2." + random.nextInt(255), random.nextInt(32768, 65535));
+	}
+
+	/**
+	 * Simulates a disconnection from the server.
+	 *
+	 * @return True if the player was disconnected, false if they were already offline.
+	 */
+	public boolean disconnect()
+	{
+		if (!online)
+		{
+			return false;
+		}
+		this.online = false;
+		this.lastPlayed = System.currentTimeMillis();
+
+		Component message = MiniMessage.miniMessage()
+				.deserialize("<name> has left the Server!", Placeholder.component("name", this.displayName()));
+
+		PlayerQuitEvent playerQuitEvent = new PlayerQuitEvent(this, message, PlayerQuitEvent.QuitReason.DISCONNECTED);
+		Bukkit.getPluginManager().callEvent(playerQuitEvent);
+
+		this.server.getPlayerList().disconnectPlayer(this);
+
+		return true;
+	}
+
+	/**
+	 * Simulates a connection to the server.
+	 *
+	 * @return True if the player was connected, false if they were already online.
+	 */
+	public boolean reconnect()
+	{
+		if (firstPlayed == 0)
+		{
+			throw new IllegalStateException("Player was never online");
+		}
+		if (online)
+		{
+			return false;
+		}
+
+		this.online = true;
+		this.lastPlayed = System.currentTimeMillis();
+
+		server.addPlayer(this);
+
+		return true;
 	}
 
 	@Override
@@ -1246,6 +1305,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	{
 		return this.compassTarget;
 	}
+
 	/**
 	 * Sets the {@link InetSocketAddress} returned by {@link #getAddress}.
 	 *
@@ -1335,7 +1395,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		);
 		PlayerChatEvent syncEvent = new PlayerChatEvent(this, msg);
 
-		ServerMock server = MockBukkit.getMock();
 		server.getScheduler().executeAsyncEvent(asyncChatEvent);
 		server.getScheduler().executeAsyncEvent(asyncEvent);
 		server.getPluginManager().callEvent(syncEvent);
@@ -1599,7 +1658,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 			lines = new java.util.ArrayList<>(4);
 		}
 		Preconditions.checkNotNull(loc, "Location cannot be null");
-		Preconditions.checkNotNull(dyeColor,"DyeColor cannot be null");
+		Preconditions.checkNotNull(dyeColor, "DyeColor cannot be null");
 		if (lines.size() < 4)
 		{
 			throw new IllegalArgumentException("Must have at least 4 lines");
@@ -1628,7 +1687,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		}
 
 		Preconditions.checkNotNull(loc, "Location cannot be null");
-		Preconditions.checkNotNull(dyeColor,"DyeColor cannot be null");
+		Preconditions.checkNotNull(dyeColor, "DyeColor cannot be null");
 		if (lines.length < 4)
 		{
 			throw new IllegalArgumentException("Must have at least 4 lines");
@@ -3061,7 +3120,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 
-
 	@Override
 	public int getPing()
 	{
@@ -3193,7 +3251,5 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		}
 
 	}
-
-
 
 }
