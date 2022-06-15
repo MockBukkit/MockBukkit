@@ -1,9 +1,9 @@
 package be.seeseemelk.mockbukkit;
 
+import com.google.common.base.Preconditions;
 import io.papermc.paper.event.world.border.WorldBorderBoundsChangeEvent;
 import io.papermc.paper.event.world.border.WorldBorderBoundsChangeFinishEvent;
 import io.papermc.paper.event.world.border.WorldBorderCenterChangeEvent;
-import org.apache.commons.lang.Validate;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.WorldBorder;
@@ -205,7 +205,7 @@ public class WorldBorderMock implements WorldBorder
 	@Override
 	public boolean isInside(@NotNull Location location)
 	{
-		Validate.notNull(location, "Location cannot be null");
+		Preconditions.checkNotNull(location, "Location cannot be null");
 
 		BoundingBox worldBorderBoundingBox = new BoundingBox(this.centerX - this.size, Double.MAX_VALUE, this.centerZ - this.size,
 				this.centerX + this.size, Double.MAX_VALUE * -1, this.centerZ + size);

@@ -252,7 +252,7 @@ class WorldBorderMockTest
 	@Test
 	void isInside_Null_ExceptionThrown()
 	{
-		assertThrows(IllegalArgumentException.class, () ->
+		assertThrows(NullPointerException.class, () ->
 		{
 			worldBorderMock.isInside(null);
 		});
