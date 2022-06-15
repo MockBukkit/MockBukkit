@@ -36,7 +36,6 @@ import org.bukkit.SoundCategory;
 import org.bukkit.StructureType;
 import org.bukkit.TreeType;
 import org.bukkit.World;
-import org.bukkit.WorldBorder;
 import org.bukkit.WorldCreator;
 import org.bukkit.WorldType;
 import org.bukkit.block.Biome;
@@ -121,9 +120,11 @@ public class WorldMock implements World
 	private final int grassHeight;
 	private final int minHeight;
 	private final int maxHeight;
+	private WorldBorderMock worldBorder;
 	private final UUID uuid = UUID.randomUUID();
 
 	private Environment environment = Environment.NORMAL;
+
 	private String name = "World";
 	private Location spawnLocation;
 	private long fullTime = 0;
@@ -137,6 +138,7 @@ public class WorldMock implements World
 	private final BiomeProviderMock biomeProviderMock = new BiomeProviderMock();
 	private Map<Coordinate, Biome> biomes = new HashMap<>();
 	private Difficulty difficulty = Difficulty.NORMAL;
+
 
 	/**
 	 * Creates a new mock world.
@@ -1675,10 +1677,13 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public WorldBorder getWorldBorder()
+	public @NotNull WorldBorderMock getWorldBorder()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (this.worldBorder == null)
+		{
+			this.worldBorder = new WorldBorderMock(this);
+		}
+		return this.worldBorder;
 	}
 
 	@Override
