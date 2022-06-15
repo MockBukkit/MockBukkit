@@ -66,6 +66,11 @@ public class MockPlayerList
 		offlinePlayers.add(player);
 	}
 
+	public void disconnectPlayer(@NotNull PlayerMock player)
+	{
+		onlinePlayers.remove(player);
+	}
+
 	public void addOfflinePlayer(@NotNull OfflinePlayer player)
 	{
 		offlinePlayers.add(player);
