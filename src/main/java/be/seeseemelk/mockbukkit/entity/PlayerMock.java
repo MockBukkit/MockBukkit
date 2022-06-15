@@ -22,28 +22,12 @@ import io.papermc.paper.chat.ChatRenderer;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.BaseComponent;
-import org.bukkit.BanList;
-import org.bukkit.Bukkit;
-import org.bukkit.DyeColor;
-import org.bukkit.Effect;
-import org.bukkit.FluidCollisionMode;
-import org.bukkit.GameMode;
-import org.bukkit.GameRule;
-import org.bukkit.Instrument;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
-import org.bukkit.Note;
-import org.bukkit.Particle;
-import org.bukkit.Sound;
-import org.bukkit.SoundCategory;
-import org.bukkit.Statistic;
-import org.bukkit.WeatherType;
-import org.bukkit.World;
-import org.bukkit.WorldBorder;
+import org.bukkit.*;
 import org.bukkit.advancement.Advancement;
 import org.bukkit.advancement.AdvancementProgress;
 import org.bukkit.attribute.Attribute;
@@ -54,45 +38,15 @@ import org.bukkit.block.Sign;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationAbandonedEvent;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Firework;
-import org.bukkit.entity.Item;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Pose;
-import org.bukkit.entity.Villager;
+import org.bukkit.entity.*;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.inventory.ClickType;
-import org.bukkit.event.inventory.InventoryAction;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryCloseEvent;
-import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.event.player.PlayerChatEvent;
-import org.bukkit.event.player.PlayerGameModeChangeEvent;
-import org.bukkit.event.player.PlayerKickEvent;
-import org.bukkit.event.player.PlayerLevelChangeEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.event.player.PlayerResourcePackStatusEvent;
-import org.bukkit.event.player.PlayerRespawnEvent;
-import org.bukkit.event.player.PlayerTeleportEvent;
-import org.bukkit.event.player.PlayerToggleFlightEvent;
-import org.bukkit.event.player.PlayerToggleSneakEvent;
-import org.bukkit.event.player.PlayerToggleSprintEvent;
-import org.bukkit.inventory.EntityEquipment;
-import org.bukkit.inventory.EquipmentSlot;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryView;
+import org.bukkit.event.inventory.*;
+import org.bukkit.event.player.*;
+import org.bukkit.inventory.*;
 import org.bukkit.inventory.InventoryView.Property;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.MainHand;
-import org.bukkit.inventory.Merchant;
-import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.messaging.StandardMessenger;
@@ -105,21 +59,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Queue;
-import java.util.Random;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.LinkedTransferQueue;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Predicate;
@@ -131,7 +71,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 {
 
-	private static final String QUIT_MESSAGE = "%s has left the server.";
 
 	private boolean online;
 	private PlayerInventoryMock inventory = null;
@@ -215,7 +154,10 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		this.online = false;
 		this.lastPlayed = System.currentTimeMillis();
 
-		PlayerQuitEvent playerQuitEvent = new PlayerQuitEvent(this, String.format(QUIT_MESSAGE, this.getDisplayName()));
+		Component message = MiniMessage.miniMessage()
+				.deserialize("<name> has left the Server!", Placeholder.component("name", this.displayName()));
+
+		PlayerQuitEvent playerQuitEvent = new PlayerQuitEvent(this, message, PlayerQuitEvent.QuitReason.DISCONNECTED);
 		Bukkit.getPluginManager().callEvent(playerQuitEvent);
 
 		this.server.getPlayerList().disconnectPlayer(this);
@@ -1301,6 +1243,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	{
 		return this.compassTarget;
 	}
+
 	/**
 	 * Sets the {@link InetSocketAddress} returned by {@link #getAddress}.
 	 *
@@ -1653,7 +1596,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 			lines = new java.util.ArrayList<>(4);
 		}
 		Preconditions.checkNotNull(loc, "Location cannot be null");
-		Preconditions.checkNotNull(dyeColor,"DyeColor cannot be null");
+		Preconditions.checkNotNull(dyeColor, "DyeColor cannot be null");
 		if (lines.size() < 4)
 		{
 			throw new IllegalArgumentException("Must have at least 4 lines");
@@ -1682,7 +1625,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		}
 
 		Preconditions.checkNotNull(loc, "Location cannot be null");
-		Preconditions.checkNotNull(dyeColor,"DyeColor cannot be null");
+		Preconditions.checkNotNull(dyeColor, "DyeColor cannot be null");
 		if (lines.length < 4)
 		{
 			throw new IllegalArgumentException("Must have at least 4 lines");
@@ -2535,7 +2478,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 	@Override
 	public void spawnParticle(@NotNull Particle particle, @NotNull Location location, int count, double offsetX, double offsetY,
-	                          double offsetZ)
+							  double offsetZ)
 	{
 		this.spawnParticle(particle, location.getX(), location.getY(), location.getZ(), count, offsetX, offsetY, offsetZ);
 	}
@@ -3134,7 +3077,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 
-
 	@Override
 	public int getPing()
 	{
@@ -3265,7 +3207,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		}
 
 	}
-
 
 
 }

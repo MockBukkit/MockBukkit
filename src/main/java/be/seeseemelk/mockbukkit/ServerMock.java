@@ -39,6 +39,8 @@ import com.google.common.base.Preconditions;
 import io.papermc.paper.datapack.DatapackManager;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.BanEntry;
@@ -231,7 +233,8 @@ public class ServerMock extends Server.Spigot implements Server
 
 		CountDownLatch conditionLatch = new CountDownLatch(1);
 
-		AsyncPlayerPreLoginEvent preLoginEvent = new AsyncPlayerPreLoginEvent(player.getName(), player.getAddress().getAddress(), player.getUniqueId());
+		AsyncPlayerPreLoginEvent preLoginEvent = new AsyncPlayerPreLoginEvent(player.getName(),
+				player.getAddress().getAddress(), player.getUniqueId());
 		getPluginManager().callEventAsynchronously(preLoginEvent, (e) -> conditionLatch.countDown());
 
 		try
@@ -240,11 +243,16 @@ public class ServerMock extends Server.Spigot implements Server
 		}
 		catch (InterruptedException e)
 		{
-			getLogger().severe("Interrupted while waiting for AsyncPlayerPreLoginEvent! " + (StringUtils.isEmpty(e.getMessage()) ? "" : e.getMessage()));
+			getLogger().severe("Interrupted while waiting for AsyncPlayerPreLoginEvent! " +
+					(StringUtils.isEmpty(e.getMessage()) ? "" : e.getMessage()));
 			Thread.currentThread().interrupt();
 		}
 
-		PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(player, String.format(JOIN_MESSAGE, player.getDisplayName()));
+		Component joinMessage = MiniMessage.miniMessage()
+				.deserialize("<name> has joined the Server!", Placeholder.component("name", player.displayName()));
+
+
+		PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(player, joinMessage);
 		Bukkit.getPluginManager().callEvent(playerJoinEvent);
 
 		player.setLastPlayed(getCurrentServerTime());
