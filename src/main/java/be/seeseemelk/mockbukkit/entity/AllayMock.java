@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+import static org.junit.jupiter.api.Assertions.fail;
+
 public class AllayMock extends CreatureMock implements Allay
 {
 
@@ -45,7 +47,9 @@ public class AllayMock extends CreatureMock implements Allay
 	{
 		List<ItemStack> items = new ArrayList<>();
 
-		Arrays.stream(this.inventory.getContents()).filter(Objects::nonNull).forEach(i -> items.add(i));
+		Arrays.stream(this.inventory.getContents()).filter(Objects::nonNull).forEach(items::add);
+
+		this.inventory.clear();
 
 		return items;
 	}
@@ -63,7 +67,9 @@ public class AllayMock extends CreatureMock implements Allay
 		if (item.getType() == this.currentItem)
 		{
 			inventory.addItem(item);
-			if (Arrays.stream(inventory.getContents()).count() > 1)
+			if (Arrays.stream(inventory.getContents())
+					.filter(Objects::nonNull)
+					.count() > 1)
 			{
 				throw new IllegalStateException("Allay cannot hold more than 1 ItemStack");
 			}
@@ -74,10 +80,47 @@ public class AllayMock extends CreatureMock implements Allay
 		}
 	}
 
+	/**
+	 * Asserts that the Allay uses the given {@link Material} to pick up an {@link ItemStack} from the ground.
+	 *
+	 * @param item The {@link Material} to pick up
+	 */
+	public void assertCurrentItem(@NotNull Material item)
+	{
+		assertCurrentItem(item, "");
+	}
+
+	/**
+	 * Asserts that the Allay uses the given {@link Material} to pick up an {@link ItemStack} from the ground.
+	 *
+	 * @param item    The {@link Material} to pick up
+	 * @param message The message to display if the assertion fails
+	 */
+	public void assertCurrentItem(@NotNull Material item, String message)
+	{
+		if (item != this.currentItem)
+		{
+			fail(message);
+		}
+	}
+
 	@Override
 	public @NotNull Inventory getInventory()
 	{
 		return this.inventory;
+	}
+
+	public void assertInventoryContains(ItemStack item)
+	{
+		assertInventoryContains(item, "");
+	}
+
+	private void assertInventoryContains(ItemStack item, String s)
+	{
+		if (!inventory.contains(item))
+		{
+			fail(s);
+		}
 	}
 
 }
