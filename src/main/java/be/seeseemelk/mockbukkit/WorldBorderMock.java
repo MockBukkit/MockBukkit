@@ -46,6 +46,8 @@ public class WorldBorderMock implements WorldBorder
 	 */
 	public WorldBorderMock(@NotNull World world)
 	{
+		Preconditions.checkNotNull(world, "World cannot be null");
+
 		this.world = world;
 
 		reset();
@@ -137,6 +139,8 @@ public class WorldBorderMock implements WorldBorder
 	@Override
 	public void setCenter(@NotNull Location location)
 	{
+		Preconditions.checkNotNull(location, "Location cannot be null");
+
 		setCenter(location.getX(), location.getZ());
 	}
 

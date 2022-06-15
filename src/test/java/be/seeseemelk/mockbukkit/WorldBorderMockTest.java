@@ -38,6 +38,12 @@ class WorldBorderMockTest
 	}
 
 	@Test
+	void constructor_NullWorld_ThrowsException()
+	{
+		assertThrows(NullPointerException.class, () -> new WorldBorderMock(null));
+	}
+
+	@Test
 	void reset()
 	{
 		worldBorderMock.reset();
