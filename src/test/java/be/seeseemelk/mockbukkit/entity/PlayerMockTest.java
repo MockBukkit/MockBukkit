@@ -11,6 +11,7 @@ import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryViewMock;
 import be.seeseemelk.mockbukkit.inventory.SimpleInventoryViewMock;
+import be.seeseemelk.mockbukkit.map.MapViewMock;
 import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
@@ -30,6 +31,7 @@ import org.bukkit.World;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -57,8 +59,12 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.map.MapCanvas;
+import org.bukkit.map.MapRenderer;
+import org.bukkit.map.MapView;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -666,7 +672,7 @@ class PlayerMockTest
 	void getDisplayName_Default_SameAsPlayerUsername()
 	{
 		assertEquals(player.getName(), player.getDisplayName());
-		assertEquals(player.getDisplayName(), player.getCustomName());
+		assertNotEquals(player.getDisplayName(), player.getCustomName());
 	}
 
 	@Test
@@ -675,8 +681,7 @@ class PlayerMockTest
 		player.setDisplayName("Some Display Name");
 		player.setCustomName("Some Custom Name");
 		assertEquals("Some Display Name", player.getDisplayName());
-		assertEquals("Some Display Name", player.getCustomName());
-
+		assertEquals("Some Custom Name", player.getCustomName());
 	}
 
 	@Test
@@ -1667,6 +1672,7 @@ class PlayerMockTest
 	}
 
 	@Test
+
 	void testDisconnect()
 	{
 		assertTrue(player.isOnline());
@@ -1698,6 +1704,23 @@ class PlayerMockTest
 		player = new PlayerMock(server, "testPlayer");
 
 		assertThrows(IllegalStateException.class, () -> player.reconnect());
+
+	void sendMap_RendersMap()
+	{
+		MapViewMock mapView = new MapViewMock(new WorldMock(), 1);
+		AtomicBoolean b = new AtomicBoolean(false);
+		mapView.addRenderer(new MapRenderer()
+		{
+			@Override
+			public void render(@NotNull MapView map, @NotNull MapCanvas canvas, @NotNull Player player)
+			{
+				b.set(true);
+			}
+		});
+
+		mapView.render(player);
+
+		assertTrue(b.get());
 	}
 
 	@Test
@@ -1712,6 +1735,7 @@ class PlayerMockTest
 		player.setLastDeathLocation(loc);
 
 		assertEquals(loc, player.getLastDeathLocation());
+
 	}
 
 }
