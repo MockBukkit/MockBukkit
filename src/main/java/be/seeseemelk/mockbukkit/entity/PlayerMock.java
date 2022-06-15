@@ -134,7 +134,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 {
 
-
 	private boolean online;
 	private PlayerInventoryMock inventory = null;
 	private EnderChestInventoryMock enderChest = null;
