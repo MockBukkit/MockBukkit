@@ -61,7 +61,7 @@ public class AllayMock extends CreatureMock implements Allay
 	 */
 	public void simulateItemPickup(@NotNull ItemStack item)
 	{
-
+		Preconditions.checkNotNull(item, "ItemStack cannot be null");
 		if (item.getType() == this.currentItem)
 		{
 			inventory.addItem(item);

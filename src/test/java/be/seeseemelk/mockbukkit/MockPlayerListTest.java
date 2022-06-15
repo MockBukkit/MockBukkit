@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-public class MockPlayerListTest
+class MockPlayerListTest
 {
 
 	private ServerMock server;
