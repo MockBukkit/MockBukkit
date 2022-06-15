@@ -8,6 +8,7 @@ import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryViewMock;
 import be.seeseemelk.mockbukkit.inventory.SimpleInventoryViewMock;
+import be.seeseemelk.mockbukkit.map.MapViewMock;
 import be.seeseemelk.mockbukkit.sound.AudioExperience;
 import be.seeseemelk.mockbukkit.sound.SoundReceiver;
 import be.seeseemelk.mockbukkit.statistic.StatisticsMock;
@@ -20,8 +21,8 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
 import io.papermc.paper.chat.ChatRenderer;
 import io.papermc.paper.event.player.AsyncChatEvent;
-import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.bungeecord.BungeeComponentSerializer;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.BaseComponent;
@@ -72,6 +73,8 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerChatEvent;
+import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -113,6 +116,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Queue;
 import java.util.Random;
 import java.util.Set;
@@ -120,7 +124,6 @@ import java.util.UUID;
 import java.util.concurrent.LinkedTransferQueue;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -133,7 +136,9 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private GameMode gamemode = GameMode.SURVIVAL;
 	private GameMode previousGamemode = gamemode;
 	private Component displayName = null;
-	private String playerListName = null;
+	private Component playerListName = null;
+	private Component playerListHeader = null;
+	private Component playerListFooter = null;
 	private int expTotal = 0;
 	private float exp = 0;
 	private int foodLevel = 20;
@@ -393,13 +398,21 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public @NotNull GameMode getGameMode()
 	{
-		return gamemode;
+		return this.gamemode;
 	}
 
 	@Override
 	public void setGameMode(@NotNull GameMode mode)
 	{
-		gamemode = mode;
+		if (this.gamemode == mode)
+			return;
+
+		PlayerGameModeChangeEvent event = new PlayerGameModeChangeEvent(this, mode, PlayerGameModeChangeEvent.Cause.UNKNOWN, null);
+		if (!event.callEvent())
+			return;
+
+		this.previousGamemode = this.gamemode;
+		this.gamemode = mode;
 	}
 
 	@Override
@@ -1158,7 +1171,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public @NotNull Component displayName()
 	{
-		return displayName;
+		return this.displayName;
 	}
 
 	@Override
@@ -1171,14 +1184,14 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Deprecated
 	public @NotNull String getDisplayName()
 	{
-		return LegacyComponentSerializer.legacySection().serialize(displayName);
+		return LegacyComponentSerializer.legacySection().serialize(this.displayName);
 	}
 
 	@Override
 	@Deprecated
 	public void setDisplayName(String name)
 	{
-		this.displayName = Component.text(name);
+		this.displayName = LegacyComponentSerializer.legacySection().deserialize(name);
 	}
 
 	@Override
@@ -1198,29 +1211,27 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public @Nullable Component playerListHeader()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.playerListHeader;
 	}
 
 	@Override
 	public @Nullable Component playerListFooter()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.playerListFooter;
 	}
 
 	@Override
 	@Deprecated
 	public @NotNull String getPlayerListName()
 	{
-		return this.playerListName == null ? getName() : this.playerListName;
+		return this.playerListName == null ? getName() : LegacyComponentSerializer.legacySection().serialize(this.playerListName);
 	}
 
 	@Override
 	@Deprecated
 	public void setPlayerListName(String name)
 	{
-		this.playerListName = name;
+		this.playerListName = LegacyComponentSerializer.legacySection().deserialize(name);
 	}
 
 	@Override
@@ -1317,12 +1328,12 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		AsyncChatEvent asyncChatEvent = new AsyncChatEvent(
 				true,
 				this,
-				Bukkit.getOnlinePlayers().stream().map(p -> (Audience) p).collect(Collectors.toSet()),
+				new HashSet<>(Bukkit.getOnlinePlayers()),
 				ChatRenderer.defaultRenderer(),
 				Component.text(msg),
 				Component.text(msg)
 		);
-		org.bukkit.event.player.PlayerChatEvent syncEvent = new org.bukkit.event.player.PlayerChatEvent(this, msg);
+		PlayerChatEvent syncEvent = new PlayerChatEvent(this, msg);
 
 		ServerMock server = MockBukkit.getMock();
 		server.getScheduler().executeAsyncEvent(asyncChatEvent);
@@ -1627,7 +1638,12 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void sendMap(@NotNull MapView map)
 	{
-		// Pretend we sent the map change.
+		if (!(map instanceof MapViewMock mapView))
+			return;
+
+		mapView.render(this);
+
+		// Pretend the map packet gets sent.
 	}
 
 	@Override
@@ -1655,16 +1671,16 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Deprecated
 	public void setPlayerListHeaderFooter(@Nullable BaseComponent[] header, @Nullable BaseComponent[] footer)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.playerListHeader = BungeeComponentSerializer.get().deserialize(Arrays.stream(header).filter(Objects::nonNull).toArray(BaseComponent[]::new));
+		this.playerListFooter = BungeeComponentSerializer.get().deserialize(Arrays.stream(footer).filter(Objects::nonNull).toArray(BaseComponent[]::new));
 	}
 
 	@Override
 	@Deprecated
 	public void setPlayerListHeaderFooter(@Nullable BaseComponent header, @Nullable BaseComponent footer)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.playerListHeader = BungeeComponentSerializer.get().deserialize(new BaseComponent[] { header });
+		this.playerListFooter = BungeeComponentSerializer.get().deserialize(new BaseComponent[] { footer });
 	}
 
 	@Override
@@ -1865,26 +1881,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable Component customName()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void customName(@Nullable Component customName)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public String getCustomName()
-	{
-		return getDisplayName();
 	}
 
 	@Override
@@ -2655,36 +2651,32 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public String getPlayerListHeader()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return LegacyComponentSerializer.legacySection().serialize(this.playerListHeader);
 	}
 
 	@Override
 	public void setPlayerListHeader(String header)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.playerListHeader = LegacyComponentSerializer.legacySection().deserialize(header);
 	}
 
 	@Override
 	public String getPlayerListFooter()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return LegacyComponentSerializer.legacySection().serialize(this.playerListFooter);
 	}
 
 	@Override
 	public void setPlayerListFooter(String footer)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.playerListFooter = LegacyComponentSerializer.legacySection().deserialize(footer);
 	}
 
 	@Override
 	public void setPlayerListHeaderFooter(String header, String footer)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.playerListHeader = LegacyComponentSerializer.legacySection().deserialize(header);
+		this.playerListFooter = LegacyComponentSerializer.legacySection().deserialize(footer);
 	}
 
 	@Override
@@ -3196,7 +3188,8 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		@Deprecated
 		public void sendMessage(@NotNull ChatMessageType position, @NotNull BaseComponent component)
 		{
-			PlayerMock.this.sendMessage(component.toLegacyText());
+			Component comp = BungeeComponentSerializer.get().deserialize(new BaseComponent[]{ component });
+			PlayerMock.this.sendMessage(comp);
 		}
 
 	}
