@@ -15,14 +15,14 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class AllayMockTest
+class AllayMockTest
 {
 
-	ServerMock serverMock;
-	AllayMock allayMock;
+	private ServerMock serverMock;
+	private AllayMock allayMock;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		serverMock = MockBukkit.mock();
 		allayMock = new AllayMock(serverMock, UUID.randomUUID());
@@ -86,6 +86,5 @@ public class AllayMockTest
 		assertEquals(0, Arrays.stream(allayMock.getInventory().getContents()).filter(Objects::nonNull).count());
 		assertEquals(content, addedItem);
 	}
-
 
 }
