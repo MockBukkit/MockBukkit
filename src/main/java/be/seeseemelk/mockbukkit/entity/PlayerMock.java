@@ -3252,5 +3252,4 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 	}
 
-
 }
