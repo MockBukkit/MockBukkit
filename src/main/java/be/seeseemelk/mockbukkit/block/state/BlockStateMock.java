@@ -325,6 +325,8 @@ public class BlockStateMock implements BlockState
 		case SPRUCE_WALL_SIGN:
 		case WARPED_SIGN:
 		case WARPED_WALL_SIGN:
+		case MANGROVE_SIGN:
+		case MANGROVE_WALL_SIGN:
 			return new SignMock(block);
 		case SHULKER_BOX:
 		case WHITE_SHULKER_BOX:

@@ -27,11 +27,15 @@ public class SignMock extends TileStateMock implements Sign
 	public SignMock(@NotNull Material material)
 	{
 		super(material);
+		if (!material.name().endsWith("_SIGN"))
+			throw new IllegalArgumentException("Cannot create a Sign state from " + material);
 	}
 
 	protected SignMock(@NotNull Block block)
 	{
 		super(block);
+		if (!block.getType().name().endsWith("_SIGN"))
+			throw new IllegalArgumentException("Cannot create a Sign state from " + block.getType());
 	}
 
 	protected SignMock(@NotNull SignMock state)

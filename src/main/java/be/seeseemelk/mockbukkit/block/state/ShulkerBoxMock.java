@@ -28,12 +28,16 @@ public class ShulkerBoxMock extends ContainerMock implements ShulkerBox
 	public ShulkerBoxMock(@NotNull Material material)
 	{
 		super(material);
+		if (!material.name().endsWith("SHULKER_BOX") || material.name().contains("LEGACY"))
+			throw new IllegalArgumentException("Cannot create a Shulker Box state from " + material);
 		this.color = getFromMaterial(material);
 	}
 
 	protected ShulkerBoxMock(@NotNull Block block)
 	{
 		super(block);
+		if (!block.getType().name().endsWith("SHULKER_BOX") || block.getType().name().contains("LEGACY"))
+			throw new IllegalArgumentException("Cannot create a Shulker Box state from " + block.getType());
 		this.color = getFromMaterial(block.getType());
 	}
 

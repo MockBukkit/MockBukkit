@@ -1,12 +1,8 @@
 package be.seeseemelk.mockbukkit.block.state;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.WorldMock;
+import be.seeseemelk.mockbukkit.block.BlockMock;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -19,19 +15,31 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.block.BlockMock;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ShulkerBoxMockTest
 {
 
+	private WorldMock world;
+	private BlockMock block;
 	private ShulkerBoxMock shulkerBox;
 
 	@BeforeEach
-	void setUp() throws Exception
+	void setUp()
 	{
-		MockBukkit.mock();
-		shulkerBox = new ShulkerBoxMock(Material.SHULKER_BOX);
+		this.world = new WorldMock();
+		this.block = world.getBlockAt(0, 10, 0);
+		this.block.setType(Material.SHULKER_BOX);
+		this.shulkerBox = new ShulkerBoxMock(this.block);
 	}
 
 	@AfterEach
@@ -41,58 +49,37 @@ class ShulkerBoxMockTest
 	}
 
 	@Test
-	void testMaterialShulkerBoxBlockState()
+	void constructor_Material()
 	{
-		Block block = new BlockMock(Material.SHULKER_BOX);
-		assertTrue(block.getState() instanceof ShulkerBox);
+		for (Material material : Material.values())
+		{
+			if (!material.name().endsWith("SHULKER_BOX") || material.name().contains("LEGACY"))
+				continue;
+			assertDoesNotThrow(() -> new ShulkerBoxMock(material));
+		}
 	}
 
 	@Test
-	void testShulkerBoxStateMaterialValidation()
+	void constructor_Material_WrongType_ThrowsException()
 	{
-		assertThrows(IllegalArgumentException.class, () -> new ShulkerBoxMock(Material.BREAD));
+		assertThrowsExactly(IllegalArgumentException.class, () -> new ShulkerBoxMock(Material.BEDROCK));
 	}
 
 	@Test
-	void testHasInventory()
+	void constructor_Block()
 	{
-		Inventory inventory = shulkerBox.getInventory();
-		assertNotNull(inventory);
-
-		assertEquals(shulkerBox, inventory.getHolder());
-		assertEquals(InventoryType.SHULKER_BOX, inventory.getType());
+		for (Material material : Material.values())
+		{
+			if (!material.name().endsWith("SHULKER_BOX") || material.name().contains("LEGACY"))
+				continue;
+			assertDoesNotThrow(() -> new ShulkerBoxMock(new BlockMock(material)));
+		}
 	}
 
 	@Test
-	void testLocking()
+	void constructor_Block_WrongType_ThrowsException()
 	{
-		String key = "key";
-
-		assertFalse(shulkerBox.isLocked());
-		assertEquals("", shulkerBox.getLock());
-
-		shulkerBox.setLock("key");
-		assertTrue(shulkerBox.isLocked());
-		assertEquals(key, shulkerBox.getLock());
-	}
-
-	@Test
-	void testNullLocking()
-	{
-		shulkerBox.setLock(null);
-		assertFalse(shulkerBox.isLocked());
-		assertEquals("", shulkerBox.getLock());
-	}
-
-	@Test
-	void testNaming()
-	{
-		String name = "Cool Shulker";
-
-		assertNull(shulkerBox.getCustomName());
-
-		shulkerBox.setCustomName(name);
-		assertEquals(name, shulkerBox.getCustomName());
+		assertThrowsExactly(IllegalArgumentException.class, () -> new ShulkerBoxMock(new BlockMock(Material.BEDROCK)));
 	}
 
 	@Test
@@ -139,5 +126,16 @@ class ShulkerBoxMockTest
 		assertTrue(shulkerBox.isOpen());
 	}
 
+	@Test
+	void getSnapshot_DifferentInstance()
+	{
+		assertNotSame(shulkerBox, shulkerBox.getSnapshot());
+	}
+
+	@Test
+	void blockStateMock_Mock_CorrectType()
+	{
+		assertInstanceOf(ShulkerBoxMock.class, BlockStateMock.mockState(block));
+	}
 
 }
