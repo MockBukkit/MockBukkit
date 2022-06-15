@@ -10,8 +10,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -83,10 +81,10 @@ public class AllayMockTest
 
 		allayMock.simulateItemPickup(new ItemStack(addedItem));
 
-		List<ItemStack> content = allayMock.simulateItemRetrieval();
+		ItemStack content = allayMock.simulateItemRetrieval();
 
 		assertEquals(0, Arrays.stream(allayMock.getInventory().getContents()).filter(Objects::nonNull).count());
-		assertEquals(content, Collections.singletonList(addedItem));
+		assertEquals(content, addedItem);
 	}
 
 
