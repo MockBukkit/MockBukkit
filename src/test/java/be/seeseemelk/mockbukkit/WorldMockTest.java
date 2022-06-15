@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import be.seeseemelk.mockbukkit.block.state.BlockStateMock;
+import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.entity.ArmorStandMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
 import be.seeseemelk.mockbukkit.entity.FireworkMock;
@@ -392,6 +393,14 @@ class WorldMockTest
 		assertNotNull(block.getChunk());
 		Chunk chunk = block.getChunk();
 		assertTrue(world.isChunkLoaded(chunk.getX(), chunk.getZ()));
+	}
+
+	@Test
+	void getWorldBorder_NotNull()
+	{
+		WorldMock worldMock = new WorldMock();
+
+		assertNotNull(worldMock.getWorldBorder());
 	}
 
 	@Test
