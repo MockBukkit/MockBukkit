@@ -48,6 +48,7 @@ import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
@@ -130,6 +131,7 @@ class PlayerMockTest
 
 		uuid = UUID.randomUUID();
 		player = new PlayerMock(server, "player", uuid);
+		server.addPlayer(player);
 	}
 
 	@AfterEach
@@ -1668,6 +1670,41 @@ class PlayerMockTest
 			if (inventoryClickEvent.getClickedInventory() != inventory) return false;
 			return inventoryClickEvent.getClick() == ClickType.LEFT;
 		});
+	}
+
+	@Test
+	void testDisconnect()
+	{
+		assertTrue(player.isOnline());
+		assertTrue(player.disconnect());
+		assertFalse(player.isOnline());
+		assertFalse(server.getOnlinePlayers().contains(player));
+		server.getPluginManager().assertEventFired(PlayerQuitEvent.class);
+	}
+
+	@Test
+	void testReconnect()
+	{
+		if (player.isOnline())
+		{
+			player.disconnect();
+		}
+
+		assertFalse(player.isOnline());
+		assertTrue(player.reconnect());
+		assertTrue(player.isOnline());
+		assertTrue(server.getOnlinePlayers().contains(player));
+		assertTrue(player.hasPlayedBefore());
+		server.getPluginManager().assertEventFired(PlayerJoinEvent.class);
+	}
+
+	@Test
+	void testReconnectWithoutJoiningBefore()
+	{
+		player = new PlayerMock(server, "testPlayer");
+
+		assertThrows(IllegalStateException.class, () -> player.reconnect());
+
 	}
 
 	@Test
