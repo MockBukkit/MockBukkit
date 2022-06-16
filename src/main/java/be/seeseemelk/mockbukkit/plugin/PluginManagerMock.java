@@ -104,8 +104,7 @@ public class PluginManagerMock implements PluginManager
 		}
 		catch (IOException e)
 		{
-			server.getLogger().severe("Could not remove file: " + e.getMessage());
-			e.printStackTrace();
+			server.getLogger().log(Level.SEVERE, "Could not delete temporary directory", e);
 		}
 	}
 
