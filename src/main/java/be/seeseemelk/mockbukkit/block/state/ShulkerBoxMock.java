@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.block.state;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import be.seeseemelk.mockbukkit.inventory.ShulkerBoxInventoryMock;
+import com.google.common.base.Preconditions;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -21,7 +22,6 @@ import java.util.UUID;
  */
 public class ShulkerBoxMock extends ContainerMock implements ShulkerBox
 {
-
 	private final DyeColor color;
 	private boolean isOpen = false;
 
@@ -47,6 +47,7 @@ public class ShulkerBoxMock extends ContainerMock implements ShulkerBox
 	@Nullable
 	private DyeColor getFromMaterial(@NotNull Material type)
 	{
+		Preconditions.checkNotNull(type, "Type cannot be null");
 		switch (type)
 		{
 		case SHULKER_BOX:

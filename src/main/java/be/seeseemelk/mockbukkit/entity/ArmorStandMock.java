@@ -66,7 +66,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 
 	@Override
 	@Deprecated
-	public void setBoots(ItemStack item)
+	public void setBoots(@Nullable ItemStack item)
 	{
 		getEquipment().setBoots(item);
 	}
@@ -80,7 +80,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 
 	@Override
 	@Deprecated
-	public void setLeggings(ItemStack item)
+	public void setLeggings(@Nullable ItemStack item)
 	{
 		getEquipment().setLeggings(item);
 	}
@@ -94,7 +94,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 
 	@Override
 	@Deprecated
-	public void setChestplate(ItemStack item)
+	public void setChestplate(@Nullable ItemStack item)
 	{
 		getEquipment().setChestplate(item);
 	}
@@ -108,7 +108,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 
 	@Override
 	@Deprecated
-	public void setHelmet(ItemStack item)
+	public void setHelmet(@Nullable ItemStack item)
 	{
 		getEquipment().setHelmet(item);
 	}
@@ -122,7 +122,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 
 	@Override
 	@Deprecated
-	public void setItemInHand(ItemStack item)
+	public void setItemInHand(@Nullable ItemStack item)
 	{
 		getEquipment().setItemInMainHand(item);
 	}
@@ -136,6 +136,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	@Override
 	public void setBodyPose(@NotNull EulerAngle pose)
 	{
+		Preconditions.checkNotNull(pose, "Pose cannot be null");
 		this.bodyPose = pose;
 	}
 
@@ -148,6 +149,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	@Override
 	public void setLeftArmPose(@NotNull EulerAngle pose)
 	{
+		Preconditions.checkNotNull(pose, "Pose cannot be null");
 		this.leftArmPose = pose;
 	}
 
@@ -160,6 +162,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	@Override
 	public void setRightArmPose(@NotNull EulerAngle pose)
 	{
+		Preconditions.checkNotNull(pose, "Pose cannot be null");
 		this.rightArmPose = pose;
 	}
 
@@ -172,6 +175,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	@Override
 	public void setLeftLegPose(@NotNull EulerAngle pose)
 	{
+		Preconditions.checkNotNull(pose, "Pose cannot be null");
 		this.leftLegPose = pose;
 	}
 
@@ -184,6 +188,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	@Override
 	public void setRightLegPose(@NotNull EulerAngle pose)
 	{
+		Preconditions.checkNotNull(pose, "Pose cannot be null");
 		this.rightLegPose = pose;
 	}
 
@@ -196,6 +201,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	@Override
 	public void setHeadPose(@NotNull EulerAngle pose)
 	{
+		Preconditions.checkNotNull(pose, "Pose cannot be null");
 		this.headPose = pose;
 	}
 
@@ -311,7 +317,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	@Override
 	public @NotNull ItemStack getItem(@NotNull EquipmentSlot slot)
 	{
-		Preconditions.checkNotNull(slot, "slot");
+		Preconditions.checkNotNull(slot, "Slot cannot be null");
 		return switch (slot)
 		{
 		case HAND -> getEquipment().getItemInMainHand();
@@ -326,7 +332,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	@Override
 	public void setItem(@NotNull EquipmentSlot slot, @Nullable ItemStack item)
 	{
-		Preconditions.checkNotNull(slot, "slot");
+		Preconditions.checkNotNull(slot, "Slot cannot be null");
 		switch (slot)
 		{
 		case HAND -> getEquipment().setItemInMainHand(item);
@@ -348,6 +354,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	@Override
 	public void setDisabledSlots(@NotNull EquipmentSlot... slots)
 	{
+		Preconditions.checkNotNull(slots, "Slots cannot be null");
 		this.disabledSlots.clear();
 		Collections.addAll(this.disabledSlots, slots);
 	}
@@ -355,18 +362,21 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	@Override
 	public void addDisabledSlots(@NotNull EquipmentSlot... slots)
 	{
+		Preconditions.checkNotNull(slots, "Slots cannot be null");
 		Collections.addAll(this.disabledSlots, slots);
 	}
 
 	@Override
 	public void removeDisabledSlots(@NotNull EquipmentSlot... slots)
 	{
+		Preconditions.checkNotNull(slots, "Slots cannot be null");
 		this.disabledSlots.removeAll(List.of(slots));
 	}
 
 	@Override
 	public boolean isSlotDisabled(@NotNull EquipmentSlot slot)
 	{
+		Preconditions.checkNotNull(slot, "Slot cannot be null");
 		return this.disabledSlots.contains(slot);
 	}
 

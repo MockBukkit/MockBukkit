@@ -22,7 +22,7 @@ public abstract class MobMock extends LivingEntityMock implements Mob
 	private boolean aware = true;
 	private boolean leftHanded;
 
-	protected MobMock(ServerMock server, UUID uuid)
+	protected MobMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 	}

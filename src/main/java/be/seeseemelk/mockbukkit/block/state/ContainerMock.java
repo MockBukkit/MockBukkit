@@ -61,7 +61,7 @@ public abstract class ContainerMock extends TileStateMock implements Container
 	}
 
 	@Override
-	public void setLock(String key)
+	public void setLock(@Nullable String key)
 	{
 		this.lock = key == null ? "" : key;
 	}

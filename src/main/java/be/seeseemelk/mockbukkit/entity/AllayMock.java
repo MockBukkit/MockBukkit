@@ -22,7 +22,7 @@ public class AllayMock extends CreatureMock implements Allay
 	private final Inventory inventory;
 	private Material currentItem;
 
-	protected AllayMock(ServerMock server, UUID uuid)
+	protected AllayMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 		this.inventory = Bukkit.createInventory(null, 9);

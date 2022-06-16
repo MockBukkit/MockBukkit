@@ -1,7 +1,9 @@
 package be.seeseemelk.mockbukkit.attribute;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import org.bukkit.attribute.Attribute;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
@@ -31,8 +33,9 @@ public class AttributesMock
 			Map.entry(Attribute.ZOMBIE_SPAWN_REINFORCEMENTS, 0.0)
 	);
 
-	public static double getDefaultValue(Attribute attribute)
+	public static double getDefaultValue(@NotNull Attribute attribute)
 	{
+		Preconditions.checkNotNull(attribute, "Attribute cannot be null");
 		return DEFAULT_ATTRIBUTE_VALUES.get(attribute);
 	}
 

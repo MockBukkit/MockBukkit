@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.command;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import com.google.common.base.Preconditions;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Server;
 import org.bukkit.command.ConsoleCommandSender;
@@ -11,6 +12,7 @@ import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -22,7 +24,7 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	private final Queue<String> messages = new LinkedList<>();
 
 	@Override
-	public void sendMessage(String message)
+	public void sendMessage(@NotNull String message)
 	{
 		sendMessage(null, message);
 	}
@@ -34,8 +36,9 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	}
 
 	@Override
-	public void sendMessage(UUID sender, String message)
+	public void sendMessage(UUID sender, @NotNull String message)
 	{
+		Preconditions.checkNotNull(message, "Message cannot be null");
 		messages.add(message);
 	}
 
@@ -192,14 +195,15 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	}
 
 	@Override
-	public void sendRawMessage(String message)
+	public void sendRawMessage(@NotNull String message)
 	{
 		sendRawMessage(null, message);
 	}
 
 	@Override
-	public void sendRawMessage(UUID sender, String message)
+	public void sendRawMessage(@Nullable UUID sender, @NotNull String message)
 	{
+		Preconditions.checkNotNull(message, "Message cannot be null");
 		messages.add(message);
 	}
 

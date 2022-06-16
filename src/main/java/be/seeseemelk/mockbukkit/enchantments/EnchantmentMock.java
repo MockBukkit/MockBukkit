@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.enchantments;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import com.google.common.base.Preconditions;
 import io.papermc.paper.enchantments.EnchantmentRarity;
 import net.kyori.adventure.text.Component;
 import org.bukkit.NamespacedKey;
@@ -21,6 +22,12 @@ public class EnchantmentMock extends Enchantment
 	private EnchantmentTarget itemTarget;
 	private boolean isTreasure;
 	private boolean isCursed;
+
+	public EnchantmentMock(@NotNull NamespacedKey key, String name)
+	{
+		super(key);
+		this.name = name;
+	}
 
 	@Override
 	public @NotNull Component displayName(int level)
@@ -71,15 +78,6 @@ public class EnchantmentMock extends Enchantment
 		throw new UnimplementedOperationException();
 	}
 
-	public EnchantmentMock(
-	    @NotNull NamespacedKey key,
-	    String name
-	)
-	{
-		super(key);
-		this.name = name;
-	}
-
 	@Override
 	public @NotNull String getName()
 	{
@@ -114,8 +112,9 @@ public class EnchantmentMock extends Enchantment
 		return itemTarget;
 	}
 
-	public void setItemTarget(EnchantmentTarget itemTarget)
+	public void setItemTarget(@NotNull EnchantmentTarget itemTarget)
 	{
+		Preconditions.checkNotNull(itemTarget, "EnchantmentTarget cannot be null");
 		this.itemTarget = itemTarget;
 	}
 
@@ -144,12 +143,14 @@ public class EnchantmentMock extends Enchantment
 	@Override
 	public boolean conflictsWith(@NotNull Enchantment other)
 	{
+		Preconditions.checkNotNull(other, "Enchantment cannot be null");
 		return false;
 	}
 
 	@Override
 	public boolean canEnchantItem(@NotNull ItemStack item)
 	{
+		Preconditions.checkNotNull(item, "Item cannot be null");
 		return false;
 	}
 

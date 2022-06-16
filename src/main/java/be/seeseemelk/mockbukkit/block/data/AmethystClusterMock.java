@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.block.data;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
@@ -16,13 +17,11 @@ public class AmethystClusterMock extends BlockDataMock implements AmethystCluste
 	private static final String FACING = "facing";
 	private static final String WATERLOGGED = "waterlogged";
 
-	public AmethystClusterMock(Material type)
+	public AmethystClusterMock(@NotNull Material type)
 	{
 		super(type);
 		if (type != Material.AMETHYST_CLUSTER)
-		{
 			throw new IllegalArgumentException("Cannot create an AmethystClusterMock for " + type.name());
-		}
 		setFacing(BlockFace.NORTH);
 		setWaterlogged(false);
 	}
@@ -36,10 +35,8 @@ public class AmethystClusterMock extends BlockDataMock implements AmethystCluste
 	@Override
 	public void setFacing(@NotNull BlockFace facing)
 	{
-		if (!getFaces().contains(facing))
-		{
-			throw new IllegalArgumentException("Invalid face: " + facing);
-		}
+		Preconditions.checkNotNull(facing, "Facing cannot be null");
+		Preconditions.checkArgument(getFaces().contains(facing), "Invalid face. Must be one of " + getFaces());
 		super.set(FACING, facing);
 	}
 

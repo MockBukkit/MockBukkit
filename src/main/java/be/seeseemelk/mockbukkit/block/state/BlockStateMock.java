@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.block.state;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
+import com.google.common.base.Preconditions;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -26,12 +27,14 @@ public class BlockStateMock implements BlockState
 
 	public BlockStateMock(@NotNull Material material)
 	{
+		Preconditions.checkNotNull(material, "Material cannot be null");
 		this.metadataTable = new MetadataTable();
 		this.material = material;
 	}
 
 	protected BlockStateMock(@NotNull Block block)
 	{
+		Preconditions.checkNotNull(block, "Block cannot be null");
 		this.metadataTable = new MetadataTable();
 		this.block = block;
 		this.material = block.getType();
@@ -39,6 +42,7 @@ public class BlockStateMock implements BlockState
 
 	protected BlockStateMock(@NotNull BlockStateMock state)
 	{
+		Preconditions.checkNotNull(state, "BlockStateMock cannot be null");
 		this.metadataTable = new MetadataTable(state.metadataTable);
 		this.material = state.getType();
 		this.block = state.isPlaced() ? state.getBlock() : null;
