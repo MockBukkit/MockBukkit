@@ -97,8 +97,8 @@ public class ChunkMock implements Chunk
 	@SuppressWarnings("UnstableApiUsage")
 	public @NotNull ChunkSnapshot getChunkSnapshot(boolean includeMaxblocky, boolean includeBiome, boolean includeBiomeTempRain)
 	{
-		// Cubic size of the chunk.
-		int size = (16 << 4) * (16 << 4) * Math.abs((world.getMaxHeight() - world.getMinHeight()));
+		// Cubic size of the chunk. (16 * 16 * height, using a bitshift)
+		int size = (16 << 4) * Math.abs((world.getMaxHeight() - world.getMinHeight()));
 		ImmutableMap.Builder<Coordinate, BlockState> blockStates = ImmutableMap.builderWithExpectedSize(size);
 		ImmutableMap.Builder<Coordinate, Biome> biomes = ImmutableMap.builderWithExpectedSize(size);
 		for (int x = 0; x < 15; x++)
