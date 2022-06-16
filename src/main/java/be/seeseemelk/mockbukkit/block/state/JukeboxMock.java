@@ -11,7 +11,7 @@ import org.jetbrains.annotations.Nullable;
 public class JukeboxMock extends TileStateMock implements Jukebox
 {
 
-	private ItemStack record;
+	private ItemStack recordItem;
 	private boolean playing;
 
 	public JukeboxMock(@NotNull Material material)
@@ -33,7 +33,7 @@ public class JukeboxMock extends TileStateMock implements Jukebox
 	public JukeboxMock(@NotNull JukeboxMock state)
 	{
 		super(state);
-		this.record = state.record;
+		this.recordItem = state.recordItem;
 		this.playing = state.playing;
 	}
 
@@ -46,26 +46,26 @@ public class JukeboxMock extends TileStateMock implements Jukebox
 	@Override
 	public @NotNull Material getPlaying()
 	{
-		return this.record.getType();
+		return this.recordItem.getType();
 	}
 
 	@Override
-	public void setPlaying(@Nullable Material record)
+	public void setPlaying(@Nullable Material recordType)
 	{
-		setRecord(new ItemStack(record == null ? Material.AIR : record));
+		setRecord(new ItemStack(recordType == null ? Material.AIR : recordType));
 	}
 
 	@Override
 	public @NotNull ItemStack getRecord()
 	{
-		return this.record;
+		return this.recordItem;
 	}
 
 	@Override
-	public void setRecord(@Nullable ItemStack record)
+	public void setRecord(@Nullable ItemStack recordItem)
 	{
-		this.record = record == null ? new ItemStack(Material.AIR) : record;
-		this.playing = !this.record.getType().isAir();
+		this.recordItem = recordItem == null ? new ItemStack(Material.AIR) : recordItem;
+		this.playing = !this.recordItem.getType().isAir();
 	}
 
 	@Override
