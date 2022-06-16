@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.block.state;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.block.BlockMock;
+import net.kyori.adventure.text.Component;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.block.banner.Pattern;
@@ -46,7 +47,6 @@ class BannerMockTest
 		assertTrue(meta.getPatterns().isEmpty());
 	}
 
-
 	@Test
 	void constructor_Material()
 	{
@@ -76,10 +76,12 @@ class BannerMockTest
 	{
 		meta.setBaseColor(DyeColor.CYAN);
 		meta.setPatterns(List.of(new Pattern(DyeColor.BLUE, PatternType.STRIPE_BOTTOM)));
+		meta.customName(Component.text("Custom Name"));
 
 		BannerMock cloned = new BannerMock(meta);
 
 		assertEquals(DyeColor.CYAN, cloned.getBaseColor());
+		assertEquals(Component.text("Custom Name"), cloned.customName());
 		assertEquals(1, cloned.getPatterns().size());
 		assertEquals(DyeColor.BLUE, cloned.getPatterns().get(0).getColor());
 		assertEquals(PatternType.STRIPE_BOTTOM, cloned.getPatterns().get(0).getPattern());
