@@ -330,7 +330,10 @@ public class PluginManagerMock implements PluginManager
 	public @NotNull File createTemporaryPluginFile(@NotNull String name) throws IOException
 	{
 		File pluginFile = new File(getParentTemporaryDirectory(), name + ".jar");
-		pluginFile.createNewFile();
+		if (!pluginFile.exists() && !pluginFile.createNewFile())
+		{
+			throw new IOException("Could not create file " + pluginFile.getAbsolutePath());
+		}
 		return pluginFile;
 	}
 
