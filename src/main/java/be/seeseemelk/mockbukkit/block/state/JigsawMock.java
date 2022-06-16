@@ -9,21 +9,21 @@ import org.jetbrains.annotations.NotNull;
 public class JigsawMock extends TileStateMock implements Jigsaw
 {
 
-	protected JigsawMock(@NotNull Material material)
+	public JigsawMock(@NotNull Material material)
 	{
 		super(material);
 		if (material != Material.JIGSAW)
 			throw new IllegalArgumentException("Cannot create a Jigsaw state from " + material);
 	}
 
-	protected JigsawMock(@NotNull Block block)
+	public JigsawMock(@NotNull Block block)
 	{
 		super(block);
 		if (block.getType() != Material.JIGSAW)
 			throw new IllegalArgumentException("Cannot create a Jigsaw state from " + block.getType());
 	}
 
-	protected JigsawMock(@NotNull TileStateMock state)
+	public JigsawMock(@NotNull TileStateMock state)
 	{
 		super(state);
 	}
