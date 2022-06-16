@@ -61,6 +61,10 @@ public class ScoreboardMock implements Scoreboard
 	public ObjectiveMock registerNewObjective(String name, String criteria, String displayName, RenderType renderType)
 	throws IllegalArgumentException
 	{
+		if (objectives.containsKey(name))
+		{
+			throw new IllegalArgumentException("An objective of name '" + name + "' already exists");
+		}
 		ObjectiveMock objective = new ObjectiveMock(this, name, displayName, criteria, renderType);
 		objectives.put(name, objective);
 		return objective;
@@ -161,6 +165,10 @@ public class ScoreboardMock implements Scoreboard
 	@Override
 	public Team registerNewTeam(String name) throws IllegalArgumentException
 	{
+		if (teams.containsKey(name))
+		{
+			throw new IllegalArgumentException("Team name '" + name + "' is already in use");
+		}
 		Team team = new TeamMock(name, this);
 		teams.put(name, team);
 		return team;
@@ -245,6 +253,16 @@ public class ScoreboardMock implements Scoreboard
 		}
 
 		objectives.remove(objectiveMock.getName());
+	}
+
+	/**
+	 * Removes a team from this scoreboard.
+	 *
+	 * @param teamMock The team to remove.
+	 */
+	protected void unregister(@NotNull TeamMock teamMock)
+	{
+		teams.remove(teamMock.getName());
 	}
 
 }
