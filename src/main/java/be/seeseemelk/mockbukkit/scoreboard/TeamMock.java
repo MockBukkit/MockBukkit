@@ -1,6 +1,11 @@
 package be.seeseemelk.mockbukkit.scoreboard;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
+import java.util.Collection;
+import java.util.EnumMap;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.logging.Level;
+
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -11,14 +16,10 @@ import org.bukkit.entity.Entity;
 import org.bukkit.scoreboard.NameTagVisibility;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
+
+import be.seeseemelk.mockbukkit.MockBukkit;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Collection;
-import java.util.EnumMap;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.logging.Level;
 
 
 public class TeamMock implements Team
@@ -32,15 +33,13 @@ public class TeamMock implements Team
 	private boolean allowFriendlyFire = false;
 	private final HashSet<String> entries;
 	private boolean canSeeFriendly = true;
-	private final EnumMap<Option, OptionStatus> options = new EnumMap<>(Option.class);
-	private boolean registered;
-	private final Scoreboard board;
+	private EnumMap<Option, OptionStatus> options = new EnumMap<>(Option.class);
+	private ScoreboardMock board;
 
-	public TeamMock(String name, Scoreboard board)
+	public TeamMock(String name, ScoreboardMock board)
 	{
 		this.name = name;
 		this.board = board;
-		registered = true;
 		entries = new HashSet<>();
 		options.put(Option.NAME_TAG_VISIBILITY, OptionStatus.ALWAYS);
 	}
@@ -49,6 +48,7 @@ public class TeamMock implements Team
 	public String getName() throws IllegalStateException
 	{
 		checkRegistered();
+
 		return name;
 	}
 
@@ -119,6 +119,7 @@ public class TeamMock implements Team
 	public String getDisplayName() throws IllegalStateException
 	{
 		checkRegistered();
+
 		return displayName;
 	}
 
@@ -126,6 +127,7 @@ public class TeamMock implements Team
 	public void setDisplayName(String s)
 	{
 		checkRegistered();
+
 		this.displayName = s;
 	}
 
@@ -133,6 +135,7 @@ public class TeamMock implements Team
 	public String getPrefix() throws IllegalStateException
 	{
 		checkRegistered();
+
 		return prefix;
 	}
 
@@ -140,6 +143,7 @@ public class TeamMock implements Team
 	public void setPrefix(String s)
 	{
 		checkRegistered();
+
 		this.prefix = s;
 	}
 
@@ -147,6 +151,7 @@ public class TeamMock implements Team
 	public String getSuffix() throws IllegalStateException
 	{
 		checkRegistered();
+
 		return suffix;
 	}
 
@@ -154,6 +159,7 @@ public class TeamMock implements Team
 	public void setSuffix(String s)
 	{
 		checkRegistered();
+
 		this.suffix = s;
 	}
 
@@ -161,6 +167,7 @@ public class TeamMock implements Team
 	public ChatColor getColor() throws IllegalStateException
 	{
 		checkRegistered();
+
 		return color;
 	}
 
@@ -168,6 +175,7 @@ public class TeamMock implements Team
 	public void setColor(ChatColor chatColor)
 	{
 		checkRegistered();
+
 		this.color = chatColor;
 	}
 
@@ -175,6 +183,7 @@ public class TeamMock implements Team
 	public boolean allowFriendlyFire() throws IllegalStateException
 	{
 		checkRegistered();
+
 		return allowFriendlyFire;
 	}
 
@@ -182,6 +191,7 @@ public class TeamMock implements Team
 	public void setAllowFriendlyFire(boolean b) throws IllegalStateException
 	{
 		checkRegistered();
+
 		this.allowFriendlyFire = b;
 	}
 
@@ -189,6 +199,7 @@ public class TeamMock implements Team
 	public boolean canSeeFriendlyInvisibles() throws IllegalStateException
 	{
 		checkRegistered();
+
 		return canSeeFriendly;
 	}
 
@@ -196,12 +207,11 @@ public class TeamMock implements Team
 	public void setCanSeeFriendlyInvisibles(boolean b) throws IllegalStateException
 	{
 		checkRegistered();
+
 		this.canSeeFriendly = b;
 	}
 
-	/**
-	 * @deprecated
-	 */
+	/** @deprecated  */
 	@Override
 	@Deprecated
 	public NameTagVisibility getNameTagVisibility()
@@ -224,9 +234,7 @@ public class TeamMock implements Team
 		}
 	}
 
-	/**
-	 * @deprecated
-	 */
+	/** @deprecated */
 	@Override
 	@Deprecated
 	public void setNameTagVisibility(NameTagVisibility nameTagVisibility)
@@ -253,13 +261,12 @@ public class TeamMock implements Team
 		}
 	}
 
-	/**
-	 * @deprecated
-	 */
+	/** @deprecated  */
 	@Override
 	@Deprecated
 	public Set<OfflinePlayer> getPlayers() throws IllegalStateException
 	{
+
 		checkRegistered();
 		Set<OfflinePlayer> players = new HashSet<>();
 		for (String s : entries)
@@ -297,6 +304,7 @@ public class TeamMock implements Team
 	public void addPlayer(OfflinePlayer offlinePlayer)
 	{
 		checkRegistered();
+
 		entries.add(offlinePlayer.getName());
 	}
 
@@ -321,14 +329,13 @@ public class TeamMock implements Team
 		throw new UnimplementedOperationException();
 	}
 
-	/**
-	 * @deprecated
-	 */
+	/** @deprecated */
 	@Override
 	@Deprecated
 	public boolean removePlayer(OfflinePlayer offlinePlayer)
 	{
 		checkRegistered();
+
 		return entries.remove(offlinePlayer.getName());
 	}
 
@@ -337,7 +344,6 @@ public class TeamMock implements Team
 	{
 		checkRegistered();
 		return entries.remove(s);
-
 	}
 
 	@Override
@@ -358,12 +364,12 @@ public class TeamMock implements Team
 	public void unregister() throws IllegalStateException
 	{
 		checkRegistered();
-		registered = false;
+
+		board.unregister(this);
+		board = null;
 	}
 
-	/**
-	 * @deprecated
-	 */
+	/** @deprecated */
 	@Override
 	@Deprecated
 	public boolean hasPlayer(OfflinePlayer offlinePlayer)
@@ -390,6 +396,7 @@ public class TeamMock implements Team
 	public void setOption(Option option, OptionStatus optionStatus) throws IllegalStateException
 	{
 		checkRegistered();
+
 		options.put(option, optionStatus);
 	}
 
@@ -415,14 +422,13 @@ public class TeamMock implements Team
 	}
 
 	/**
-	 * Ensures that the team is registered, throwing an IllegalStateException if it is not.
+	 * Throws an exception if the team is not registered.
 	 */
-	private void checkRegistered()
+	public void checkRegistered()
 	{
-		if (!registered)
+		if (board == null)
 		{
 			throw new IllegalStateException("Team not registered");
 		}
 	}
-
 }
