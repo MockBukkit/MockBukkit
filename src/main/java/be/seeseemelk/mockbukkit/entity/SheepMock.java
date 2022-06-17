@@ -10,8 +10,9 @@ import java.util.UUID;
 
 public class SheepMock extends AnimalsMock implements Sheep
 {
-	boolean sheared = false;
-	DyeColor color = DyeColor.WHITE;
+
+	private boolean sheared = false;
+	private DyeColor color = DyeColor.WHITE;
 
 	public SheepMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
