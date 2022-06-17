@@ -10,6 +10,9 @@ import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.SetMultimap;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.bungeecord.BungeeComponentSerializer;
+import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
@@ -34,17 +37,16 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static java.util.Objects.nonNull;
 
 public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 {
 
-	/*
-	 * If you add a new field, you need to add it to #hashCode, #equals, #serialize, and #deserialize.
-	 * If it's a mutable object, it also needs to be handled in #clone.
-	 */
+	// We store the raw JSON representation of all text data. See SPIGOT-5063, SPIGOT-5656, SPIGOT-5304
 	private String displayName = null;
 	private String localizedName = null;
 	private List<String> lore = null;
@@ -70,11 +72,11 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 
 		if (meta.hasDisplayName())
 		{
-			displayName = meta.getDisplayName();
+			displayName = GsonComponentSerializer.gson().serialize(meta.displayName());
 		}
 		if (meta.hasLore())
 		{
-			lore = meta.getLore();
+			lore = meta.lore().stream().map(c -> GsonComponentSerializer.gson().serialize(c)).collect(Collectors.toList());
 		}
 		if (meta instanceof Damageable)
 		{
@@ -116,46 +118,43 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public boolean hasDisplayName()
 	{
-		return nonNull(displayName);
+		return this.displayName != null;
 	}
 
 	@Override
 	public @Nullable Component displayName()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.displayName == null ? null : GsonComponentSerializer.gson().deserialize(this.displayName);
 	}
 
 	@Override
 	public void displayName(@Nullable Component displayName)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.displayName = GsonComponentSerializer.gson().serialize(displayName);
 	}
 
 	@Override
 	public String getDisplayName()
 	{
-		return displayName;
+		return this.displayName == null ? null : LegacyComponentSerializer.legacySection().serialize(GsonComponentSerializer.gson().deserialize(this.displayName));
 	}
 
 	@Override
 	public @NotNull BaseComponent[] getDisplayNameComponent()
 	{
-		return new BaseComponent[0];
+		return BungeeComponentSerializer.get().serialize(GsonComponentSerializer.gson().deserialize(this.displayName));
 	}
 
 	@Override
 	public void setDisplayName(String name)
 	{
-		displayName = name;
+		this.displayName = name == null ? null : GsonComponentSerializer.gson().serialize(LegacyComponentSerializer.legacySection().deserialize(name));
 	}
 
 	@Override
-	public void setDisplayNameComponent(@Nullable BaseComponent[] component)
+	public void setDisplayNameComponent(@Nullable BaseComponent[] components)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.displayName = GsonComponentSerializer.gson().serialize(BungeeComponentSerializer.get().deserialize(Arrays.stream(components).filter(Objects::nonNull).toArray(BaseComponent[]::new)));
 	}
 
 	/**
@@ -171,12 +170,12 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		else if (!meta.hasLore())
 			return false;
 
-		List<String> otherLore = meta.getLore();
+		List<Component> otherLore = meta.lore();
 		if (lore.size() == otherLore.size())
 		{
 			for (int i = 0; i < lore.size(); i++)
 			{
-				if (!lore.get(i).equals(otherLore.get(i)))
+				if (!GsonComponentSerializer.gson().deserialize(lore.get(i)).equals(otherLore.get(i)))
 					return false;
 			}
 			return true;
@@ -197,7 +196,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		if (displayName != null)
 		{
 			if (meta.hasDisplayName())
-				return displayName.equals(meta.getDisplayName());
+				return GsonComponentSerializer.gson().deserialize(displayName).equals(meta.displayName());
 			else
 				return false;
 		}
@@ -378,34 +377,38 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public boolean hasLore()
 	{
-		return lore != null && !lore.isEmpty();
+		return this.lore != null && !lore.isEmpty();
 	}
 
 	@Override
 	public @Nullable List<Component> lore()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.lore.stream().map(s -> GsonComponentSerializer.gson().deserialize(s)).collect(Collectors.toList());
 	}
 
 	@Override
 	public void lore(@Nullable List<Component> lore)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (lore != null && !lore.isEmpty())
+		{
+			this.lore = new ArrayList<>(lore.stream().map(s -> GsonComponentSerializer.gson().serialize(s)).toList());
+		}
+		else
+		{
+			this.lore = null;
+		}
 	}
 
 	@Override
 	public @Nullable List<String> getLore()
 	{
-		return lore == null ? null : new ArrayList<>(lore);
+		return this.lore == null ? null : this.lore.stream().map(s -> LegacyComponentSerializer.legacySection().serialize(GsonComponentSerializer.gson().deserialize(s))).collect(Collectors.toList());
 	}
 
 	@Override
 	public @Nullable List<BaseComponent[]> getLoreComponents()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.lore.stream().map(c -> BungeeComponentSerializer.get().serialize(GsonComponentSerializer.gson().deserialize(c))).collect(Collectors.toList());
 	}
 
 	@Override
@@ -413,7 +416,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	{
 		if (lore != null && !lore.isEmpty())
 		{
-			this.lore = new ArrayList<>(lore);
+			this.lore = lore.stream().map(s -> GsonComponentSerializer.gson().serialize(LegacyComponentSerializer.legacySection().deserialize(s).asComponent())).collect(Collectors.toList());
 		}
 		else
 		{
@@ -424,8 +427,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public void setLoreComponents(@Nullable List<BaseComponent[]> lore)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		lore(lore == null ? null : lore.stream().map(c -> BungeeComponentSerializer.get().deserialize(c)).toList());
 	}
 
 	/**
@@ -435,25 +437,29 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	 */
 	public void assertLore(List<String> lines)
 	{
-		if (lore != null && lore.size() == lines.size())
-		{
-			for (int i = 0; i < lore.size(); i++)
-			{
-				if (!lore.get(i).equals(lines.get(i)))
-				{
-					throw new AssertionError(
-					    String.format("Line %d should be '%s' but was '%s'", i, lines.get(i), lore.get(i)));
-				}
-			}
-		}
-		else if (lore != null)
-		{
-			throw new AssertionError(
-			    String.format("Lore contained %d lines but should contain %d lines", lore.size(), lines.size()));
-		}
-		else
+		assertComponentLore(lines.stream().map(s -> LegacyComponentSerializer.legacySection().deserialize(s).asComponent()).toList());
+	}
+
+	/**
+	 * Asserts if the lore contains the given lines in order.
+	 *
+	 * @param lines The lines the lore should contain
+	 */
+	public void assertComponentLore(List<Component> lines)
+	{
+		if (this.lore == null)
 		{
 			throw new AssertionError("No lore was set");
+		}
+		if (this.lore.size() != lines.size())
+		{
+			throw new AssertionError("Lore size mismatch: expected " + lines.size() + " but was " + this.lore.size());
+		}
+		for (int i = 0; i < this.lore.size(); i++)
+		{
+			if (GsonComponentSerializer.gson().deserialize(this.lore.get(i)).equals(lines.get(i)))
+				continue;
+			throw new AssertionError(String.format("Line %d should be '%s' but was '%s'", i, lines.get(i), this.lore.get(i)));
 		}
 	}
 

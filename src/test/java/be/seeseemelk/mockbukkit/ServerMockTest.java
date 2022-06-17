@@ -64,6 +64,7 @@ import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -617,6 +618,13 @@ class ServerMockTest
 	}
 
 	@Test
+	void testGetPlayerUniqueID_OfflineMode()
+	{
+		OfflinePlayer player = new OfflinePlayerMock("OfflinePlayer");
+		assertEquals(player.getUniqueId(), server.getPlayerUniqueId(player.getName()));
+	}
+
+	@Test
 	void testSetMaxPlayers()
 	{
 		server.setMaxPlayers(69420);
@@ -635,6 +643,25 @@ class ServerMockTest
 
 		playerA.assertSaid(PlainTextComponentSerializer.plainText().serialize(component));
 		playerB.assertSaid(PlainTextComponentSerializer.plainText().serialize(component));
+	}
+
+	@Test
+	void testGetPlayerList()
+	{
+		PlayerMock playerA = server.addPlayer();
+		PlayerMock playerB = server.addPlayer();
+
+		assertThat(server.getPlayerList().getOnlinePlayers(), containsInAnyOrder(playerA, playerB));
+	}
+
+	@Test
+	void testPlayerListDisconnectPlayer()
+	{
+		MockPlayerList playerList = server.getPlayerList();
+		PlayerMock playerA = server.addPlayer();
+		playerList.disconnectPlayer(playerA);
+
+		assertFalse(playerList.getOnlinePlayers().contains(playerA));
 	}
 
 	@Test

@@ -34,14 +34,12 @@ public class TeamMock implements Team
 	private final HashSet<String> entries;
 	private boolean canSeeFriendly = true;
 	private EnumMap<Option, OptionStatus> options = new EnumMap<>(Option.class);
-	private boolean registered;
-	private Scoreboard board;
+	private ScoreboardMock board;
 
-	public TeamMock(String name, Scoreboard board)
+	public TeamMock(String name, ScoreboardMock board)
 	{
 		this.name = name;
 		this.board = board;
-		registered = true;
 		entries = new HashSet<>();
 		options.put(Option.NAME_TAG_VISIBILITY, OptionStatus.ALWAYS);
 	}
@@ -49,7 +47,7 @@ public class TeamMock implements Team
 	@Override
 	public String getName() throws IllegalStateException
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
+		checkRegistered();
 
 		return name;
 	}
@@ -120,7 +118,7 @@ public class TeamMock implements Team
 	@Override
 	public String getDisplayName() throws IllegalStateException
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
+		checkRegistered();
 
 		return displayName;
 	}
@@ -128,7 +126,7 @@ public class TeamMock implements Team
 	@Override
 	public void setDisplayName(String s)
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
+		checkRegistered();
 
 		this.displayName = s;
 	}
@@ -136,7 +134,7 @@ public class TeamMock implements Team
 	@Override
 	public String getPrefix() throws IllegalStateException
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
+		checkRegistered();
 
 		return prefix;
 	}
@@ -144,7 +142,7 @@ public class TeamMock implements Team
 	@Override
 	public void setPrefix(String s)
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
+		checkRegistered();
 
 		this.prefix = s;
 	}
@@ -152,7 +150,7 @@ public class TeamMock implements Team
 	@Override
 	public String getSuffix() throws IllegalStateException
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
+		checkRegistered();
 
 		return suffix;
 	}
@@ -160,7 +158,7 @@ public class TeamMock implements Team
 	@Override
 	public void setSuffix(String s)
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
+		checkRegistered();
 
 		this.suffix = s;
 	}
@@ -168,7 +166,7 @@ public class TeamMock implements Team
 	@Override
 	public ChatColor getColor() throws IllegalStateException
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
+		checkRegistered();
 
 		return color;
 	}
@@ -176,7 +174,7 @@ public class TeamMock implements Team
 	@Override
 	public void setColor(ChatColor chatColor)
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
+		checkRegistered();
 
 		this.color = chatColor;
 	}
@@ -184,7 +182,7 @@ public class TeamMock implements Team
 	@Override
 	public boolean allowFriendlyFire() throws IllegalStateException
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
+		checkRegistered();
 
 		return allowFriendlyFire;
 	}
@@ -192,7 +190,7 @@ public class TeamMock implements Team
 	@Override
 	public void setAllowFriendlyFire(boolean b) throws IllegalStateException
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
+		checkRegistered();
 
 		this.allowFriendlyFire = b;
 	}
@@ -200,7 +198,7 @@ public class TeamMock implements Team
 	@Override
 	public boolean canSeeFriendlyInvisibles() throws IllegalStateException
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
+		checkRegistered();
 
 		return canSeeFriendly;
 	}
@@ -208,7 +206,7 @@ public class TeamMock implements Team
 	@Override
 	public void setCanSeeFriendlyInvisibles(boolean b) throws IllegalStateException
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
+		checkRegistered();
 
 		this.canSeeFriendly = b;
 	}
@@ -218,7 +216,7 @@ public class TeamMock implements Team
 	@Deprecated
 	public NameTagVisibility getNameTagVisibility()
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
+		checkRegistered();
 
 		OptionStatus s = options.get(Option.NAME_TAG_VISIBILITY);
 		switch (s)
@@ -242,7 +240,7 @@ public class TeamMock implements Team
 	public void setNameTagVisibility(NameTagVisibility nameTagVisibility)
 	{
 		MockBukkit.getMock().getLogger().log(Level.WARNING, "Consider USE setOption() DEPRECATED");
-		if (!registered)throw new IllegalStateException("Team not registered");
+		checkRegistered();
 
 		switch (nameTagVisibility)
 		{
@@ -269,7 +267,7 @@ public class TeamMock implements Team
 	public Set<OfflinePlayer> getPlayers() throws IllegalStateException
 	{
 
-		if (!registered)throw new IllegalStateException("Team not registered");
+		checkRegistered();
 		Set<OfflinePlayer> players = new HashSet<>();
 		for (String s : entries)
 		{
@@ -291,7 +289,7 @@ public class TeamMock implements Team
 	@Override
 	public int getSize() throws IllegalStateException
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
+		checkRegistered();
 		return entries.size();
 	}
 
@@ -305,7 +303,7 @@ public class TeamMock implements Team
 	@Deprecated
 	public void addPlayer(OfflinePlayer offlinePlayer)
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
+		checkRegistered();
 
 		entries.add(offlinePlayer.getName());
 	}
@@ -313,7 +311,7 @@ public class TeamMock implements Team
 	@Override
 	public void addEntry(String s)
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
+		checkRegistered();
 		entries.add(s);
 	}
 
@@ -336,7 +334,7 @@ public class TeamMock implements Team
 	@Deprecated
 	public boolean removePlayer(OfflinePlayer offlinePlayer)
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
+		checkRegistered();
 
 		return entries.remove(offlinePlayer.getName());
 	}
@@ -344,9 +342,8 @@ public class TeamMock implements Team
 	@Override
 	public boolean removeEntry(String s)
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
+		checkRegistered();
 		return entries.remove(s);
-
 	}
 
 	@Override
@@ -366,10 +363,10 @@ public class TeamMock implements Team
 	@Override
 	public void unregister() throws IllegalStateException
 	{
-		if (!registered)
-			throw new IllegalStateException("Team not registered");
+		checkRegistered();
 
-		registered = false;
+		board.unregister(this);
+		board = null;
 	}
 
 	/** @deprecated */
@@ -377,28 +374,28 @@ public class TeamMock implements Team
 	@Deprecated
 	public boolean hasPlayer(OfflinePlayer offlinePlayer)
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
+		checkRegistered();
 		return entries.contains(offlinePlayer.getName());
 	}
 
 	@Override
 	public boolean hasEntry(String s)
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
+		checkRegistered();
 		return entries.contains(s);
 	}
 
 	@Override
 	public OptionStatus getOption(Option option) throws IllegalStateException
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
+		checkRegistered();
 		return options.get(option);
 	}
 
 	@Override
 	public void setOption(Option option, OptionStatus optionStatus) throws IllegalStateException
 	{
-		if (!registered)throw new IllegalStateException("Team not registered");
+		checkRegistered();
 
 		options.put(option, optionStatus);
 	}
@@ -422,5 +419,16 @@ public class TeamMock implements Team
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	/**
+	 * Throws an exception if the team is not registered.
+	 */
+	public void checkRegistered()
+	{
+		if (board == null)
+		{
+			throw new IllegalStateException("Team not registered");
+		}
 	}
 }

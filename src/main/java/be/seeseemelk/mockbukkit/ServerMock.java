@@ -40,6 +40,10 @@ import com.google.common.base.Preconditions;
 import io.papermc.paper.datapack.DatapackManager;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
+import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.BanEntry;
@@ -82,7 +86,6 @@ import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.server.MapInitializeEvent;
 import org.bukkit.generator.ChunkGenerator.ChunkData;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Merchant;
@@ -128,7 +131,7 @@ public class ServerMock extends Server.Spigot implements Server
 {
 
 	private static final String JOIN_MESSAGE = "%s has joined the server.";
-	private static final String MOTD = "A Minecraft Server";
+	private static final Component MOTD = Component.text("A Minecraft Server");
 
 	private final Properties buildProperties = new Properties();
 	private final Logger logger = Logger.getLogger("ServerMock");
@@ -234,7 +237,8 @@ public class ServerMock extends Server.Spigot implements Server
 
 		CountDownLatch conditionLatch = new CountDownLatch(1);
 
-		AsyncPlayerPreLoginEvent preLoginEvent = new AsyncPlayerPreLoginEvent(player.getName(), player.getAddress().getAddress(), player.getUniqueId());
+		AsyncPlayerPreLoginEvent preLoginEvent = new AsyncPlayerPreLoginEvent(player.getName(),
+				player.getAddress().getAddress(), player.getUniqueId());
 		getPluginManager().callEventAsynchronously(preLoginEvent, (e) -> conditionLatch.countDown());
 
 		try
@@ -243,11 +247,15 @@ public class ServerMock extends Server.Spigot implements Server
 		}
 		catch (InterruptedException e)
 		{
-			getLogger().severe("Interrupted while waiting for AsyncPlayerPreLoginEvent! " + (StringUtils.isEmpty(e.getMessage()) ? "" : e.getMessage()));
+			getLogger().severe("Interrupted while waiting for AsyncPlayerPreLoginEvent! " +
+					(StringUtils.isEmpty(e.getMessage()) ? "" : e.getMessage()));
 			Thread.currentThread().interrupt();
 		}
 
-		PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(player, String.format(JOIN_MESSAGE, player.getDisplayName()));
+		Component joinMessage = MiniMessage.miniMessage()
+				.deserialize("<name> has joined the Server!", Placeholder.component("name", player.displayName()));
+        
+		PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(player, joinMessage);
 		Bukkit.getPluginManager().callEvent(playerJoinEvent);
 
 		player.setLastPlayed(getCurrentServerTime());
@@ -331,10 +339,19 @@ public class ServerMock extends Server.Spigot implements Server
 		return playerList.getPlayer(num);
 	}
 
+	/**
+	 * Returns the {@link MockPlayerList} instance that is used by this server.
+	 * @return The {@link MockPlayerList} instance.
+	 */
+	public @NotNull MockPlayerList getPlayerList()
+	{
+		return playerList;
+	}
+
 	@Override
 	public @Nullable UUID getPlayerUniqueId(@NotNull String playerName)
 	{
-		return playerList.getPlayer(playerName).getUniqueId();
+		return playerList.getOfflinePlayer(playerName).getUniqueId();
 	}
 
 	/**
@@ -645,7 +662,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public @NotNull Inventory createInventory(@Nullable InventoryHolder owner, @NotNull InventoryType type, @NotNull Component title)
+	public @NotNull InventoryMock createInventory(@Nullable InventoryHolder owner, @NotNull InventoryType type, @NotNull Component title)
 	{
 		//TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -665,7 +682,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public @NotNull Inventory createInventory(@Nullable InventoryHolder owner, int size, @NotNull Component title) throws IllegalArgumentException
+	public @NotNull InventoryMock createInventory(@Nullable InventoryHolder owner, int size, @NotNull Component title) throws IllegalArgumentException
 	{
 		//TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1369,15 +1386,14 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull Component motd()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return MOTD;
 	}
 
 	@Override
 	@Deprecated
-	public String getMotd()
+	public @NotNull String getMotd()
 	{
-		return MOTD;
+		return LegacyComponentSerializer.legacySection().serialize(MOTD);
 	}
 
 	@Override
