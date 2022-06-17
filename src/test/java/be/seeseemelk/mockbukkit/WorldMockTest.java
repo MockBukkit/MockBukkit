@@ -3,7 +3,6 @@ package be.seeseemelk.mockbukkit;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import be.seeseemelk.mockbukkit.block.state.BlockStateMock;
-import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.entity.ArmorStandMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
 import be.seeseemelk.mockbukkit.entity.FireworkMock;
@@ -865,6 +864,29 @@ class WorldMockTest
 		Entity armorStand = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ARMOR_STAND);
 		assertTrue(armorStand.isValid());
 		assertFalse(armorStand.isDead());
+	}
+
+	@Test
+	void testGetAllowAnimals()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertTrue(world.getAllowAnimals());
+	}
+
+	@Test
+	void testGetAllowMonsters()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertTrue(world.getAllowMonsters());
+	}
+
+	@Test
+	void testSetSpawnFlags()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setSpawnFlags(false, false);
+		assertFalse(world.getAllowAnimals());
+		assertFalse(world.getAllowMonsters());
 	}
 
 }
