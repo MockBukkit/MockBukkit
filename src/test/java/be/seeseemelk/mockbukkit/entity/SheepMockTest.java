@@ -17,7 +17,6 @@ class SheepMockTest
 {
 
 	private ServerMock server;
-
 	private SheepMock sheep;
 
 	@BeforeEach
