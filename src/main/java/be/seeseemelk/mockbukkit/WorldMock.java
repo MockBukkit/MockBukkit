@@ -138,8 +138,8 @@ public class WorldMock implements World
 	private Map<Coordinate, Biome> biomes = new HashMap<>();
 	private Difficulty difficulty = Difficulty.NORMAL;
 
-	private boolean allowAnimals;
-	private boolean allowMonsters;
+	private boolean allowAnimals = false;
+	private boolean allowMonsters = false;
 
 
 	/**
