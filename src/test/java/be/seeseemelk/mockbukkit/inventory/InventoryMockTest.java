@@ -573,5 +573,4 @@ class InventoryMockTest
 		assertThrows(NullPointerException.class, () -> inventory.addViewers(player1, player2, null, player3));
 	}
 
-
 }
