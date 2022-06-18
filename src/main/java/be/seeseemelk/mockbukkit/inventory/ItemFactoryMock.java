@@ -91,8 +91,7 @@ public class ItemFactoryMock implements ItemFactory
 			clazz = getItemMetaClass(material);
 			return clazz.getDeclaredConstructor().newInstance();
 		}
-		catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException |
-			   NoSuchMethodException | SecurityException | ReflectiveOperationException e)
+		catch (ReflectiveOperationException e)
 		{
 			throw new UnsupportedOperationException("Can't instantiate class '" + clazz + "'");
 		}
