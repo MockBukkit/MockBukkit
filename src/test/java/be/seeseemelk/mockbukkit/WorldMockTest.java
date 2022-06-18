@@ -876,8 +876,6 @@ class WorldMockTest
 		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ALLAY);
 		assertInstanceOf(AllayMock.class, entity);
 		assertTrue(entity.isValid());
-		assertFalse(entity.isDead());
-
 	}
 
   @Test
