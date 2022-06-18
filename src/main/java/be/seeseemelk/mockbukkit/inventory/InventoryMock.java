@@ -143,6 +143,7 @@ public class InventoryMock implements Inventory
 
 	/**
 	 * Adds a viewer to this inventory.
+	 *
 	 * @param viewer The viewer to add.
 	 */
 	public void addViewer(@NotNull HumanEntity viewer)
@@ -153,9 +154,20 @@ public class InventoryMock implements Inventory
 
 	/**
 	 * Adds the given viewers to this inventory.
+	 *
 	 * @param viewers The viewers to add.
 	 */
 	public void addViewers(@NotNull HumanEntity... viewers)
+	{
+		addViewers(Arrays.asList(viewers));
+	}
+
+	/**
+	 * Adds the given viewers to this inventory.
+	 *
+	 * @param viewers The {@link List} of viewers to add.
+	 */
+	public void addViewers(@NotNull List<HumanEntity> viewers)
 	{
 		for (HumanEntity viewer : viewers)
 		{
@@ -165,20 +177,8 @@ public class InventoryMock implements Inventory
 	}
 
 	/**
-	 * Adds the given viewers to this inventory.
-	 * @param viewers The {@link List} of viewers to add.
-	 */
-	public void addViewers(@NotNull List<HumanEntity> viewers)
-	{
-		for(HumanEntity viewer : viewers)
-		{
-			Preconditions.checkNotNull(viewer, "The viewer must not be null!");
-			addViewer(viewer);
-		}
-	}
-
-	/**
 	 * Removes a viewer from this inventory.
+	 *
 	 * @param viewer The viewer to remove.
 	 */
 	public void removeViewer(@NotNull HumanEntity viewer)
