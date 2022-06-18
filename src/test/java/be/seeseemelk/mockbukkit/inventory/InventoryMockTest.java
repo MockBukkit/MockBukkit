@@ -1,36 +1,42 @@
 package be.seeseemelk.mockbukkit.inventory;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import java.util.HashMap;
-import java.util.ListIterator;
-import java.util.Objects;
-import java.util.concurrent.atomic.AtomicInteger;
-
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.ServerMock;
 import org.bukkit.Material;
+import org.bukkit.entity.HumanEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class InventoryMockTest
 {
+
+	ServerMock server;
 	private InventoryMock inventory;
 
 	@BeforeEach
 	void setUp() throws Exception
 	{
-		MockBukkit.mock();
+		server = MockBukkit.mock();
 		inventory = new SimpleInventoryMock(null, 9, InventoryType.CHEST);
 	}
 
@@ -211,7 +217,7 @@ class InventoryMockTest
 
 		ItemStack item = new ItemStack(Material.DIRT, 32);
 
-		inventory.setContents(new ItemStack[] { item });
+		inventory.setContents(new ItemStack[]{ item });
 
 		assertTrue(item.isSimilar(inventory.getItem(0)));
 		for (int i = 1; i < inventory.getSize(); i++)
@@ -224,7 +230,7 @@ class InventoryMockTest
 	@Test
 	void setContents_ArrayWithNulls_NullsIgnores()
 	{
-		assertDoesNotThrow(() -> inventory.setContents(new ItemStack[] { null }));
+		assertDoesNotThrow(() -> inventory.setContents(new ItemStack[]{ null }));
 	}
 
 	@Test
@@ -479,5 +485,93 @@ class InventoryMockTest
 		assertEquals(Material.STONE, inventory.getItem(0).getType());
 		assertNull(inventory.getItem(1));
 	}
+
+	@Test
+	void testGetViewersDefault()
+	{
+		assertEquals(0, inventory.getViewers().size());
+	}
+
+	@Test
+	void testAddViewer()
+	{
+		Player player = server.addPlayer();
+		inventory.addViewer(player);
+		assertEquals(1, inventory.getViewers().size());
+		assertTrue(inventory.getViewers().contains(player));
+	}
+
+	@Test
+	void testNullViewerThrowsException()
+	{
+		assertThrows(NullPointerException.class, () -> inventory.addViewer(null));
+	}
+
+	@Test
+	void testRemoveViewer()
+	{
+		Player player = server.addPlayer();
+		inventory.addViewer(player);
+		assertTrue(inventory.getViewers().contains(player));
+		inventory.removeViewer(player);
+		assertEquals(0, inventory.getViewers().size());
+		assertFalse(inventory.getViewers().contains(player));
+	}
+
+	@Test
+	void testAddMultipleViewersList()
+	{
+		List<HumanEntity> players = new ArrayList<>();
+		for (int i = 0; i < 10; i++)
+		{
+			players.add(server.addPlayer());
+		}
+		inventory.addViewers(players);
+
+		assertEquals(10, inventory.getViewers().size());
+		for (HumanEntity player : players)
+		{
+			assertTrue(inventory.getViewers().contains(player));
+		}
+	}
+
+	@Test
+	void testAddMultipleViewersListWithNullEntries()
+	{
+		List<HumanEntity> players = new ArrayList<>();
+		for (int i = 0; i < 10; i++)
+		{
+			players.add(server.addPlayer());
+		}
+		players.add(null);
+
+		assertThrows(NullPointerException.class, () -> inventory.addViewers(players));
+	}
+
+	@Test
+	void testAddMultipleViewersVarargs()
+	{
+		Player player1 = server.addPlayer();
+		Player player2 = server.addPlayer();
+		Player player3 = server.addPlayer();
+
+		inventory.addViewers(player1, player2, player3);
+
+		assertEquals(3, inventory.getViewers().size());
+		assertTrue(inventory.getViewers().contains(player1));
+		assertTrue(inventory.getViewers().contains(player2));
+		assertTrue(inventory.getViewers().contains(player3));
+	}
+
+	@Test
+	void testAddMultipleViewersVarargsWithNullEntries()
+	{
+		Player player1 = server.addPlayer();
+		Player player2 = server.addPlayer();
+		Player player3 = server.addPlayer();
+
+		assertThrows(NullPointerException.class, () -> inventory.addViewers(player1, player2, null, player3));
+	}
+
 
 }
