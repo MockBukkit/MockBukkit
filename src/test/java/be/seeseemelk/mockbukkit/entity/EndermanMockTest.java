@@ -2,13 +2,9 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.data.BlockData;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
 import org.bukkit.material.MaterialData;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,9 +13,7 @@ import org.junit.jupiter.api.Test;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class EndermanMockTest
 {
@@ -94,15 +88,6 @@ public class EndermanMockTest
 	{
 		endermanMock.setHasBeenStaredAt(true);
 		assertEquals(true, endermanMock.hasBeenStaredAt());
-	}
-
-	@Test
-	void testSpawnEnderMan()
-	{
-		WorldMock world = new WorldMock(Material.DIRT, 3);
-		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ENDERMAN);
-		assertInstanceOf(EndermanMock.class, entity);
-		assertTrue(entity.isValid());
 	}
 
 }
