@@ -870,6 +870,17 @@ class WorldMockTest
 	}
 
 	@Test
+	void testSpawnAllay()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ALLAY);
+		assertInstanceOf(AllayMock.class, entity);
+		assertTrue(entity.isValid());
+		assertFalse(entity.isDead());
+
+	}
+
+  @Test
 	void testGetAllowAnimalsDefault()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
@@ -916,16 +927,6 @@ class WorldMockTest
 		Entity pig = world.spawn(new Location(world, 0, 0, 0), Pig.class, CreatureSpawnEvent.SpawnReason.NATURAL);
 		assertFalse(pig.isValid());
 		assertTrue(pig.isDead());
-	}
-
-	@Test
-	void testSpawnAllay()
-	{
-		WorldMock world = new WorldMock(Material.DIRT, 3);
-		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ALLAY);
-		assertInstanceOf(AllayMock.class, entity);
-		assertTrue(entity.isValid());
-		assertFalse(entity.isDead());
 	}
 
 }
