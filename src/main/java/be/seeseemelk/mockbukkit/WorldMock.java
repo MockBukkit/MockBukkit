@@ -885,6 +885,7 @@ public class WorldMock implements World
 		else if (clazz == Enderman.class)
 		{
 			return new EndermanMock(server, UUID.randomUUID());
+		}
 		else if (clazz == Sheep.class)
 		{
 			return new SheepMock(server, UUID.randomUUID());
