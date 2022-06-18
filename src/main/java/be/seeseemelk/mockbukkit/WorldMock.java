@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit;
 
 import be.seeseemelk.mockbukkit.block.BlockMock;
+import be.seeseemelk.mockbukkit.entity.AllayMock;
 import be.seeseemelk.mockbukkit.entity.ArmorStandMock;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
@@ -875,6 +876,10 @@ public class WorldMock implements World
 		else if (clazz == Zombie.class)
 		{
 			return new ZombieMock(server, UUID.randomUUID());
+		}
+		else if (clazz == AllayMock.class)
+		{
+			return new AllayMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}

@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import be.seeseemelk.mockbukkit.block.state.BlockStateMock;
+import be.seeseemelk.mockbukkit.entity.AllayMock;
 import be.seeseemelk.mockbukkit.entity.ArmorStandMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
 import be.seeseemelk.mockbukkit.entity.FireworkMock;
@@ -915,6 +916,16 @@ class WorldMockTest
 		Entity pig = world.spawn(new Location(world, 0, 0, 0), Pig.class, CreatureSpawnEvent.SpawnReason.NATURAL);
 		assertFalse(pig.isValid());
 		assertTrue(pig.isDead());
+	}
+
+	@Test
+	void testSpawnAllay()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ALLAY);
+		assertInstanceOf(AllayMock.class, entity);
+		assertTrue(entity.isValid());
+		assertFalse(entity.isDead());
 	}
 
 }
