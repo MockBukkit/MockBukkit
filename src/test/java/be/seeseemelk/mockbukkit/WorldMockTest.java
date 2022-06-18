@@ -25,6 +25,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Pig;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.entity.CreatureSpawnEvent;
@@ -36,6 +37,7 @@ import org.bukkit.event.world.TimeSkipEvent;
 import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -361,7 +363,7 @@ class WorldMockTest
 		world.setTime(6000L);
 		world.setTime(10000L);
 		server.getPluginManager().assertEventFired(TimeSkipEvent.class, event ->
-		        event.getSkipAmount() == 4000L && event.getSkipReason() == TimeSkipEvent.SkipReason.CUSTOM);
+				event.getSkipAmount() == 4000L && event.getSkipReason() == TimeSkipEvent.SkipReason.CUSTOM);
 	}
 
 	@Test
@@ -875,6 +877,54 @@ class WorldMockTest
 		assertInstanceOf(AllayMock.class, entity);
 		assertTrue(entity.isValid());
 		assertFalse(entity.isDead());
+
+  @Test  
+	void testGetAllowAnimalsDefault()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertTrue(world.getAllowAnimals());
+	}
+
+	@Test
+	void testGetAllowMonstersDefault()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertTrue(world.getAllowMonsters());
+	}
+
+	@Test
+	void testSetSpawnFlags()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+
+		world.setSpawnFlags(false, true);
+		assertFalse(world.getAllowMonsters());
+		assertTrue(world.getAllowAnimals());
+
+		world.setSpawnFlags(true, false);
+		assertTrue(world.getAllowMonsters());
+		assertFalse(world.getAllowAnimals());
+	}
+
+	@Test
+	void testCallSpawnEventOnDisallowedMonster()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setSpawnFlags(false, true);
+		Entity zombie = world.spawn(new Location(world, 0, 0, 0), Zombie.class, CreatureSpawnEvent.SpawnReason.NATURAL);
+		assertFalse(zombie.isValid());
+		assertTrue(zombie.isDead());
+	}
+
+	@Test
+	@Disabled("No Animal Mock merged yet")
+	void testCallSpawnEventOnDisallowedAnimal()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setSpawnFlags(true, false);
+		Entity pig = world.spawn(new Location(world, 0, 0, 0), Pig.class, CreatureSpawnEvent.SpawnReason.NATURAL);
+		assertFalse(pig.isValid());
+		assertTrue(pig.isDead());
 	}
 
 }
