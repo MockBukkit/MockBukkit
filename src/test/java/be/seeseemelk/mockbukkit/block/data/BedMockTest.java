@@ -1,9 +1,12 @@
 package be.seeseemelk.mockbukkit.block.data;
 
+import be.seeseemelk.mockbukkit.MockBukkit;
 import com.google.common.collect.ImmutableSet;
 import org.bukkit.Material;
+import org.bukkit.Tag;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.type.Bed;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +27,14 @@ class BedMockTest
 	@BeforeEach
 	void setUp()
 	{
+		MockBukkit.mock();
 		this.bed = new BedMock(Material.RED_BED);
+	}
+
+	@AfterEach
+	void teardown()
+	{
+		MockBukkit.unmock();
 	}
 
 	@Test
@@ -81,7 +91,7 @@ class BedMockTest
 	{
 		for (Material material : Material.values())
 		{
-			if (material.name().endsWith("_BED") && !(BlockDataMock.mock(material) instanceof BedMock))
+			if (Tag.BEDS.isTagged(material) && !(BlockDataMock.mock(material) instanceof BedMock))
 			{
 				fail("BlockDataMock for '" + material + "' is not a " + BedMock.class.getSimpleName());
 			}

@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.block.data;
 
 import com.google.common.collect.ImmutableSet;
 import org.bukkit.Material;
+import org.bukkit.Tag;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.type.Bed;
 import org.jetbrains.annotations.NotNull;
@@ -18,7 +19,7 @@ public class BedMock extends BlockDataMock implements Bed
 	public BedMock(Material type)
 	{
 		super(type);
-		if (!type.name().endsWith("_BED"))
+		if (!Tag.BEDS.isTagged(type))
 		{
 			throw new IllegalArgumentException("Cannot create a BedMock from " + type);
 		}
