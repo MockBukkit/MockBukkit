@@ -198,6 +198,14 @@ public class PlayerProfileMock implements PlayerProfile
 	}
 
 	@Override
+	public String toString()
+	{
+		return "CraftPlayerProfile [uniqueId=" + getId() +
+				", name=" + getName() +
+				"]";
+	}
+
+	@Override
 	@SuppressWarnings("MethodDoesntCallSuperMethod")
 	public org.bukkit.profile.@NotNull PlayerProfile clone()
 	{
