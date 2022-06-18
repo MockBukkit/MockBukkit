@@ -8,6 +8,7 @@ import be.seeseemelk.mockbukkit.entity.ArmorStandMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
 import be.seeseemelk.mockbukkit.entity.FireworkMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
+import be.seeseemelk.mockbukkit.entity.SheepMock;
 import be.seeseemelk.mockbukkit.entity.ZombieMock;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
@@ -870,6 +871,15 @@ class WorldMockTest
 	}
 
 	@Test
+	void testSpawnSheep()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.SHEEP);
+		assertInstanceOf(SheepMock.class, entity);
+		assertTrue(entity.isValid());
+	}
+
+	@Test
 	void testSpawnAllay()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
@@ -878,7 +888,7 @@ class WorldMockTest
 		assertTrue(entity.isValid());
 	}
 
-  @Test
+	@Test
 	void testGetAllowAnimalsDefault()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
