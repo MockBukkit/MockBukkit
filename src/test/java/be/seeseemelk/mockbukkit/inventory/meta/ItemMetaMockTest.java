@@ -26,6 +26,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +36,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
@@ -591,22 +594,14 @@ class ItemMetaMockTest
 		meta.setDamage(5);
 		meta.setRepairCost(3);
 
-		Map<String, Object> expected = new HashMap<>();
-		expected.put("displayName", "Test name");
-		expected.put("lore", List.of("Test lore"));
-		expected.put("unbreakable", true);
-		expected.put("damage", 5);
-		expected.put("repairCost", 3);
-
 		Map<String, Object> actual = meta.serialize();
 
 		// Perform tests
-		assertEquals(expected.get("displayName"), actual.get("display-name"));
-		assertEquals(expected.get("lore"), actual.get("lore"));
-		assertEquals(expected.get("unbreakable"), actual.get("Unbreakable"));
-		assertEquals(expected.get("damage"), actual.get("Damage"));
-		assertEquals(expected.get("repairCost"), actual.get("repair-cost"));
-
+		assertEquals("{\"text\":\"Test name\"}", actual.get("display-name"));
+		assertEquals(List.of("{\"text\":\"Test lore\"}"), actual.get("lore"));
+		assertEquals(true, actual.get("Unbreakable"));
+		assertEquals(5, actual.get("Damage"));
+		assertEquals(3, actual.get("repair-cost"));
 	}
 
 	@Test
