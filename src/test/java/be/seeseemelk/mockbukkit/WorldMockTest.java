@@ -869,14 +869,14 @@ class WorldMockTest
 	}
 
 	@Test
-	void testGetAllowAnimals()
+	void testGetAllowAnimalsDefault()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		assertTrue(world.getAllowAnimals());
 	}
 
 	@Test
-	void testGetAllowMonsters()
+	void testGetAllowMonstersDefault()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		assertTrue(world.getAllowMonsters());
@@ -886,8 +886,13 @@ class WorldMockTest
 	void testSetSpawnFlags()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
-		world.setSpawnFlags(false, false);
+
+		world.setSpawnFlags(false, true);
 		assertFalse(world.getAllowAnimals());
+		assertTrue(world.getAllowMonsters());
+
+		world.setSpawnFlags(true, false);
+		assertTrue(world.getAllowAnimals());
 		assertFalse(world.getAllowMonsters());
 	}
 
@@ -910,7 +915,6 @@ class WorldMockTest
 		Entity pig = world.spawn(new Location(world, 0, 0, 0), Pig.class, CreatureSpawnEvent.SpawnReason.NATURAL);
 		assertFalse(pig.isValid());
 		assertTrue(pig.isDead());
-
 	}
 
 }
