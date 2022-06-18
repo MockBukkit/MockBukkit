@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit;
 
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.entity.ArmorStandMock;
+import be.seeseemelk.mockbukkit.entity.EndermanMock;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
 import be.seeseemelk.mockbukkit.entity.FireworkMock;
@@ -47,6 +48,7 @@ import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Animals;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Enderman;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ExperienceOrb;
@@ -876,6 +878,10 @@ public class WorldMock implements World
 		{
 			return new ZombieMock(server, UUID.randomUUID());
 		}
+		else if (clazz == Enderman.class)
+		{
+			return new EndermanMock(server, UUID.randomUUID());
+		}
 		throw new UnimplementedOperationException();
 	}
 
@@ -893,7 +899,6 @@ public class WorldMock implements World
 			{
 				if (isAnimal && !getAllowAnimals() || isMonster && !getAllowMonsters())
 				{
-					System.out.println("Canceled spawn of " + entity.getType() + " because it was not allowed");
 					entity.remove();
 					return;
 				}
