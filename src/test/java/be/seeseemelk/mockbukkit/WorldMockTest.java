@@ -888,12 +888,12 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 
 		world.setSpawnFlags(false, true);
-		assertFalse(world.getAllowAnimals());
-		assertTrue(world.getAllowMonsters());
+		assertFalse(world.getAllowMonsters());
+		assertTrue(world.getAllowAnimals());
 
 		world.setSpawnFlags(true, false);
-		assertTrue(world.getAllowAnimals());
-		assertFalse(world.getAllowMonsters());
+		assertTrue(world.getAllowMonsters());
+		assertFalse(world.getAllowAnimals());
 	}
 
 	@Test
