@@ -50,8 +50,9 @@ public class EndermanMock extends MonsterMock implements Enderman
 	@Override
 	public @Nullable BlockData getCarriedBlock()
 	{
-		if (carriedBlock == null){
-			throw  new IllegalStateException("Carried Block must be set before using this method");
+		if (carriedBlock == null)
+		{
+			throw new IllegalStateException("Carried Block must be set before using this method");
 		}
 		return this.carriedBlock;
 	}
