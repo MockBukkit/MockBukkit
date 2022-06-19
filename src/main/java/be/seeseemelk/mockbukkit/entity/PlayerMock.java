@@ -534,10 +534,15 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void closeInventory()
 	{
-		if (inventoryView instanceof PlayerInventoryViewMock)
+		if (inventoryView instanceof PlayerInventoryViewMock )
 		{
 			InventoryCloseEvent event = new InventoryCloseEvent(inventoryView);
 			Bukkit.getPluginManager().callEvent(event);
+
+			if (inventoryView.getTopInventory() instanceof InventoryMock inventoryMock)
+			{
+				inventoryMock.removeViewer(this);
+			}
 		}
 
 		// reset the cursor as it is a new InventoryView
