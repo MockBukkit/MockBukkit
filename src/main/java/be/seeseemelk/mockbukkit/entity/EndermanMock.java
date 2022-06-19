@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Enderman;
@@ -14,7 +15,6 @@ import java.util.UUID;
 public class EndermanMock extends MonsterMock implements Enderman
 {
 
-	private MaterialData carriedMaterial = null;
 	private BlockData carriedBlock = null;
 	private boolean isScreaming = false;
 	private boolean hasBeenStaredAt = false;
@@ -34,18 +34,18 @@ public class EndermanMock extends MonsterMock implements Enderman
 	@Override
 	public @NotNull MaterialData getCarriedMaterial()
 	{
-		if (carriedMaterial == null)
+		if (carriedBlock == null)
 		{
-			throw new IllegalStateException("Carried Material must be set before using this method");
+			throw new IllegalStateException("Carried Block must be set before using this method");
 		}
-		return this.carriedMaterial;
+		return new MaterialData(carriedBlock.getMaterial());
 	}
 
 	@Override
 	public void setCarriedMaterial(@NotNull MaterialData material)
 	{
 		Preconditions.checkNotNull(material, "MaterialData cannot be null");
-		this.carriedMaterial = material;
+		carriedBlock = new BlockDataMock(material.getItemType());
 	}
 
 	@Override
