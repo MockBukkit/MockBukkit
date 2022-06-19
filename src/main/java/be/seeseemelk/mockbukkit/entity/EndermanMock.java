@@ -16,8 +16,8 @@ public class EndermanMock extends MonsterMock implements Enderman
 
 	private MaterialData carriedMaterial = null;
 	private BlockData carriedBlock = null;
-	boolean isScreaming = false;
-	boolean hasBeenStaredAt = false;
+	private boolean isScreaming = false;
+	private boolean hasBeenStaredAt = false;
 
 	public EndermanMock(ServerMock server, UUID uuid)
 	{
