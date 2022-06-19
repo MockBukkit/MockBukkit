@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.UUID;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AllayMockTest
@@ -37,29 +38,30 @@ class AllayMockTest
 	@Test
 	void testCurrentItem()
 	{
-		allayMock.simulatePlayerInteract(Material.DIAMOND);
+		assertDoesNotThrow(() -> allayMock.simulatePlayerInteract(Material.DIAMOND));
 
-		allayMock.assertCurrentItem(Material.DIAMOND);
+		assertDoesNotThrow(() -> allayMock.assertCurrentItem(Material.DIAMOND));
 	}
 
 	@Test
 	void testItemPickUp()
 	{
-		allayMock.simulatePlayerInteract(Material.DIAMOND);
+		assertDoesNotThrow(() -> allayMock.simulatePlayerInteract(Material.DIAMOND));
 
-		allayMock.simulateItemPickup(new ItemStack(Material.DIAMOND, 2));
+		assertDoesNotThrow(() -> allayMock.simulateItemPickup(new ItemStack(Material.DIAMOND, 2)));
 
-		allayMock.assertInventoryContains(new ItemStack(Material.DIAMOND, 2));
+		assertDoesNotThrow(() -> allayMock.assertInventoryContains(new ItemStack(Material.DIAMOND, 2)));
 	}
 
 	@Test
 	void testItemPickUpToMany()
 	{
 		allayMock.simulatePlayerInteract(Material.DIAMOND);
+		ItemStack item = new ItemStack(Material.DIAMOND, 5);
 
 		allayMock.simulateItemPickup(new ItemStack(Material.DIAMOND, 63));
 		Assertions.assertThrows(IllegalStateException.class,
-				() -> allayMock.simulateItemPickup(new ItemStack(Material.DIAMOND, 5)));
+				() -> allayMock.simulateItemPickup(item));
 
 	}
 
@@ -67,9 +69,10 @@ class AllayMockTest
 	void testItemPickUpWrongItem()
 	{
 		allayMock.simulatePlayerInteract(Material.DIAMOND);
+		ItemStack item = new ItemStack(Material.IRON_INGOT, 1);
 
 		Assertions.assertThrows(IllegalArgumentException.class,
-				() -> allayMock.simulateItemPickup(new ItemStack(Material.IRON_INGOT, 1)));
+				() -> allayMock.simulateItemPickup(item));
 	}
 
 	@Test

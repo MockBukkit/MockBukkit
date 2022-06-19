@@ -1,11 +1,6 @@
 package be.seeseemelk.mockbukkit.scoreboard;
 
-import java.util.Collection;
-import java.util.EnumMap;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.logging.Level;
-
+import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -16,11 +11,14 @@ import org.bukkit.entity.Entity;
 import org.bukkit.scoreboard.NameTagVisibility;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
-
-import be.seeseemelk.mockbukkit.MockBukkit;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collection;
+import java.util.EnumMap;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.logging.Level;
 
 public class TeamMock implements Team
 {
@@ -33,23 +31,22 @@ public class TeamMock implements Team
 	private boolean allowFriendlyFire = false;
 	private final HashSet<String> entries;
 	private boolean canSeeFriendly = true;
-	private EnumMap<Option, OptionStatus> options = new EnumMap<>(Option.class);
+	private final EnumMap<Option, OptionStatus> options = new EnumMap<>(Option.class);
 	private ScoreboardMock board;
 
 	public TeamMock(String name, ScoreboardMock board)
 	{
 		this.name = name;
 		this.board = board;
-		entries = new HashSet<>();
-		options.put(Option.NAME_TAG_VISIBILITY, OptionStatus.ALWAYS);
+		this.entries = new HashSet<>();
+		this.options.put(Option.NAME_TAG_VISIBILITY, OptionStatus.ALWAYS);
 	}
 
 	@Override
 	public String getName() throws IllegalStateException
 	{
 		checkRegistered();
-
-		return name;
+		return this.name;
 	}
 
 	@Override
@@ -119,15 +116,13 @@ public class TeamMock implements Team
 	public String getDisplayName() throws IllegalStateException
 	{
 		checkRegistered();
-
-		return displayName;
+		return this.displayName;
 	}
 
 	@Override
 	public void setDisplayName(String s)
 	{
 		checkRegistered();
-
 		this.displayName = s;
 	}
 
@@ -135,8 +130,7 @@ public class TeamMock implements Team
 	public String getPrefix() throws IllegalStateException
 	{
 		checkRegistered();
-
-		return prefix;
+		return this.prefix;
 	}
 
 	@Override
@@ -151,15 +145,13 @@ public class TeamMock implements Team
 	public String getSuffix() throws IllegalStateException
 	{
 		checkRegistered();
-
-		return suffix;
+		return this.suffix;
 	}
 
 	@Override
 	public void setSuffix(String s)
 	{
 		checkRegistered();
-
 		this.suffix = s;
 	}
 
@@ -167,15 +159,13 @@ public class TeamMock implements Team
 	public ChatColor getColor() throws IllegalStateException
 	{
 		checkRegistered();
-
-		return color;
+		return this.color;
 	}
 
 	@Override
 	public void setColor(ChatColor chatColor)
 	{
 		checkRegistered();
-
 		this.color = chatColor;
 	}
 
@@ -183,15 +173,13 @@ public class TeamMock implements Team
 	public boolean allowFriendlyFire() throws IllegalStateException
 	{
 		checkRegistered();
-
-		return allowFriendlyFire;
+		return this.allowFriendlyFire;
 	}
 
 	@Override
 	public void setAllowFriendlyFire(boolean b) throws IllegalStateException
 	{
 		checkRegistered();
-
 		this.allowFriendlyFire = b;
 	}
 
@@ -199,19 +187,19 @@ public class TeamMock implements Team
 	public boolean canSeeFriendlyInvisibles() throws IllegalStateException
 	{
 		checkRegistered();
-
-		return canSeeFriendly;
+		return this.canSeeFriendly;
 	}
 
 	@Override
 	public void setCanSeeFriendlyInvisibles(boolean b) throws IllegalStateException
 	{
 		checkRegistered();
-
 		this.canSeeFriendly = b;
 	}
 
-	/** @deprecated  */
+	/**
+	 * @deprecated
+	 */
 	@Override
 	@Deprecated
 	public NameTagVisibility getNameTagVisibility()
@@ -219,22 +207,19 @@ public class TeamMock implements Team
 		checkRegistered();
 
 		OptionStatus s = options.get(Option.NAME_TAG_VISIBILITY);
-		switch (s)
-		{
-		case NEVER:
-			return NameTagVisibility.NEVER;
-		case ALWAYS:
-			return NameTagVisibility.ALWAYS;
-		case FOR_OTHER_TEAMS:
-			return NameTagVisibility.HIDE_FOR_OTHER_TEAMS;
-		case FOR_OWN_TEAM:
-			return NameTagVisibility.HIDE_FOR_OWN_TEAM;
-		default:
-			throw new IllegalArgumentException("Option not compatible");
-		}
+		return switch (s)
+				{
+					case NEVER -> NameTagVisibility.NEVER;
+					case ALWAYS -> NameTagVisibility.ALWAYS;
+					case FOR_OTHER_TEAMS -> NameTagVisibility.HIDE_FOR_OTHER_TEAMS;
+					case FOR_OWN_TEAM -> NameTagVisibility.HIDE_FOR_OWN_TEAM;
+					default -> throw new IllegalArgumentException("Option not compatible");
+				};
 	}
 
-	/** @deprecated */
+	/**
+	 * @deprecated
+	 */
 	@Override
 	@Deprecated
 	public void setNameTagVisibility(NameTagVisibility nameTagVisibility)
@@ -244,29 +229,21 @@ public class TeamMock implements Team
 
 		switch (nameTagVisibility)
 		{
-		case ALWAYS:
-			setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.ALWAYS);
-			return;
-		case NEVER:
-			setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
-			return;
-		case HIDE_FOR_OTHER_TEAMS:
-			setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.FOR_OTHER_TEAMS);
-			return;
-		case HIDE_FOR_OWN_TEAM:
-			setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.FOR_OWN_TEAM);
-			return;
-		default:
-			throw new IllegalArgumentException("Option not compatible");
+		case ALWAYS -> setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.ALWAYS);
+		case NEVER -> setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
+		case HIDE_FOR_OTHER_TEAMS -> setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.FOR_OTHER_TEAMS);
+		case HIDE_FOR_OWN_TEAM -> setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.FOR_OWN_TEAM);
+		default -> throw new IllegalArgumentException("Option not compatible");
 		}
 	}
 
-	/** @deprecated  */
+	/**
+	 * @deprecated
+	 */
 	@Override
 	@Deprecated
 	public Set<OfflinePlayer> getPlayers() throws IllegalStateException
 	{
-
 		checkRegistered();
 		Set<OfflinePlayer> players = new HashSet<>();
 		for (String s : entries)
@@ -283,20 +260,20 @@ public class TeamMock implements Team
 	@Override
 	public Set<String> getEntries() throws IllegalStateException
 	{
-		return entries;
+		return this.entries;
 	}
 
 	@Override
 	public int getSize() throws IllegalStateException
 	{
 		checkRegistered();
-		return entries.size();
+		return this.entries.size();
 	}
 
 	@Override
 	public Scoreboard getScoreboard()
 	{
-		return board;
+		return this.board;
 	}
 
 	@Override
@@ -304,15 +281,14 @@ public class TeamMock implements Team
 	public void addPlayer(OfflinePlayer offlinePlayer)
 	{
 		checkRegistered();
-
-		entries.add(offlinePlayer.getName());
+		this.entries.add(offlinePlayer.getName());
 	}
 
 	@Override
 	public void addEntry(String s)
 	{
 		checkRegistered();
-		entries.add(s);
+		this.entries.add(s);
 	}
 
 	@Override
@@ -329,21 +305,22 @@ public class TeamMock implements Team
 		throw new UnimplementedOperationException();
 	}
 
-	/** @deprecated */
+	/**
+	 * @deprecated
+	 */
 	@Override
 	@Deprecated
 	public boolean removePlayer(OfflinePlayer offlinePlayer)
 	{
 		checkRegistered();
-
-		return entries.remove(offlinePlayer.getName());
+		return this.entries.remove(offlinePlayer.getName());
 	}
 
 	@Override
 	public boolean removeEntry(String s)
 	{
 		checkRegistered();
-		return entries.remove(s);
+		return this.entries.remove(s);
 	}
 
 	@Override
@@ -364,40 +341,40 @@ public class TeamMock implements Team
 	public void unregister() throws IllegalStateException
 	{
 		checkRegistered();
-
-		board.unregister(this);
-		board = null;
+		this.board.unregister(this);
+		this.board = null;
 	}
 
-	/** @deprecated */
+	/**
+	 * @deprecated
+	 */
 	@Override
 	@Deprecated
 	public boolean hasPlayer(OfflinePlayer offlinePlayer)
 	{
 		checkRegistered();
-		return entries.contains(offlinePlayer.getName());
+		return this.entries.contains(offlinePlayer.getName());
 	}
 
 	@Override
 	public boolean hasEntry(String s)
 	{
 		checkRegistered();
-		return entries.contains(s);
+		return this.entries.contains(s);
 	}
 
 	@Override
 	public OptionStatus getOption(Option option) throws IllegalStateException
 	{
 		checkRegistered();
-		return options.get(option);
+		return this.options.get(option);
 	}
 
 	@Override
 	public void setOption(Option option, OptionStatus optionStatus) throws IllegalStateException
 	{
 		checkRegistered();
-
-		options.put(option, optionStatus);
+		this.options.put(option, optionStatus);
 	}
 
 	@Override
@@ -426,9 +403,10 @@ public class TeamMock implements Team
 	 */
 	public void checkRegistered()
 	{
-		if (board == null)
+		if (this.board == null)
 		{
 			throw new IllegalStateException("Team not registered");
 		}
 	}
+
 }
