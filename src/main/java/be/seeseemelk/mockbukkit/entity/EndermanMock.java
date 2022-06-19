@@ -34,8 +34,9 @@ public class EndermanMock extends MonsterMock implements Enderman
 	@Override
 	public @NotNull MaterialData getCarriedMaterial()
 	{
-		if (carriedMaterial == null){
-			throw  new IllegalStateException("Carried Material must be set before using this method");
+		if (carriedMaterial == null)
+		{
+			throw new IllegalStateException("Carried Material must be set before using this method");
 		}
 		return this.carriedMaterial;
 	}
