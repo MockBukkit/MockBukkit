@@ -45,7 +45,7 @@ public class EndermanMock extends MonsterMock implements Enderman
 	public void setCarriedMaterial(@NotNull MaterialData material)
 	{
 		Preconditions.checkNotNull(material, "MaterialData cannot be null");
-		carriedBlock = new BlockDataMock(material.getItemType());
+		carriedBlock = BlockDataMock.mock(material.getItemType());
 	}
 
 	@Override
