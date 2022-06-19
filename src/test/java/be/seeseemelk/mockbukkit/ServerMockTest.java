@@ -618,6 +618,13 @@ class ServerMockTest
 	}
 
 	@Test
+	void testGetPlayerUniqueID_OfflineMode()
+	{
+		OfflinePlayer player = new OfflinePlayerMock("OfflinePlayer");
+		assertEquals(player.getUniqueId(), server.getPlayerUniqueId(player.getName()));
+	}
+
+	@Test
 	void testSetMaxPlayers()
 	{
 		server.setMaxPlayers(69420);
