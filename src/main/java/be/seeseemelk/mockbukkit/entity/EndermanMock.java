@@ -19,7 +19,7 @@ public class EndermanMock extends MonsterMock implements Enderman
 	private boolean isScreaming = false;
 	private boolean hasBeenStaredAt = false;
 
-	public EndermanMock(ServerMock server, UUID uuid)
+	public EndermanMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 	}
