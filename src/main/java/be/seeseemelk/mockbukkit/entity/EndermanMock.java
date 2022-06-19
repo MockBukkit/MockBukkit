@@ -34,10 +34,7 @@ public class EndermanMock extends MonsterMock implements Enderman
 	@Override
 	public @NotNull MaterialData getCarriedMaterial()
 	{
-		if (carriedBlock == null)
-		{
-			throw new IllegalStateException("Carried Block must be set before using this method");
-		}
+		checkHasBlock();
 		return new MaterialData(carriedBlock.getMaterial());
 	}
 
@@ -51,10 +48,7 @@ public class EndermanMock extends MonsterMock implements Enderman
 	@Override
 	public @Nullable BlockData getCarriedBlock()
 	{
-		if (carriedBlock == null)
-		{
-			throw new IllegalStateException("Carried Block must be set before using this method");
-		}
+		checkHasBlock();
 		return this.carriedBlock;
 	}
 
@@ -87,6 +81,11 @@ public class EndermanMock extends MonsterMock implements Enderman
 	public void setHasBeenStaredAt(boolean hasBeenStaredAt)
 	{
 		this.hasBeenStaredAt = hasBeenStaredAt;
+	}
+
+	private void checkHasBlock()
+	{
+		Preconditions.checkState(this.carriedBlock != null, "Carried Block must be set before using this method");
 	}
 
 }
