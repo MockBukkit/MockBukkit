@@ -573,4 +573,14 @@ class InventoryMockTest
 		assertThrows(NullPointerException.class, () -> inventory.addViewers(player1, player2, null, player3));
 	}
 
+	@Test
+	void testOpenInventoryAddViewers()
+	{
+		Player player = server.addPlayer();
+		player.openInventory(inventory);
+
+		assertEquals(1, inventory.getViewers().size());
+		assertTrue(inventory.getViewers().contains(player));
+	}
+
 }
