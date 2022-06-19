@@ -281,6 +281,11 @@ public class BlockStateMock implements BlockState
 	{
 		switch (block.getType())
 		{
+		case JIGSAW:
+			return new JigsawMock(block);
+
+		case JUKEBOX:
+			return new JukeboxMock(block);
 		case SPAWNER:
 			return new CreatureSpawnerMock(block);
 		case DAYLIGHT_DETECTOR:
