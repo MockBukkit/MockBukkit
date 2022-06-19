@@ -104,8 +104,7 @@ public class PluginManagerMock implements PluginManager
 		}
 		catch (IOException e)
 		{
-			System.err.println("Could not remove file");
-			e.printStackTrace();
+			server.getLogger().log(Level.SEVERE, "Could not delete temporary directory", e);
 		}
 	}
 
@@ -316,7 +315,6 @@ public class PluginManagerMock implements PluginManager
 	 */
 	public @NotNull File createTemporaryDirectory(@NotNull String name) throws IOException
 	{
-		Random random = ThreadLocalRandom.current();
 		File directory = new File(getParentTemporaryDirectory(), name);
 		directory.mkdirs();
 		return directory;
@@ -331,9 +329,11 @@ public class PluginManagerMock implements PluginManager
 	 */
 	public @NotNull File createTemporaryPluginFile(@NotNull String name) throws IOException
 	{
-		Random random = ThreadLocalRandom.current();
 		File pluginFile = new File(getParentTemporaryDirectory(), name + ".jar");
-		pluginFile.createNewFile();
+		if (!pluginFile.exists() && !pluginFile.createNewFile())
+		{
+			throw new IOException("Could not create file " + pluginFile.getAbsolutePath());
+		}
 		return pluginFile;
 	}
 
@@ -368,8 +368,7 @@ public class PluginManagerMock implements PluginManager
 				types.add(parameter.getClass());
 			}
 
-			Constructor<? extends JavaPlugin> constructor = getCompatibleConstructor(class1,
-			        types.toArray(new Class<?>[0]));
+			Constructor<? extends JavaPlugin> constructor = getCompatibleConstructor(class1, types.toArray(new Class<?>[0]));
 			constructor.setAccessible(true);
 
 			Object[] arguments = new Object[types.size()];
@@ -383,8 +382,7 @@ public class PluginManagerMock implements PluginManager
 			registerLoadedPlugin(plugin);
 			return plugin;
 		}
-		catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
-			        | IllegalArgumentException | IOException | InvocationTargetException e)
+		catch (ReflectiveOperationException | IOException e)
 		{
 			throw new RuntimeException("Failed to instantiate plugin", e);
 		}
@@ -457,10 +455,9 @@ public class PluginManagerMock implements PluginManager
 
 		events.add(event);
 		HandlerList handlers = event.getHandlers();
-		RegisteredListener[] listeners = handlers.getRegisteredListeners();
-		for (RegisteredListener l : listeners)
+		for (RegisteredListener listener : handlers.getRegisteredListeners())
 		{
-			callRegisteredListener(l, event);
+			callRegisteredListener(listener, event);
 		}
 	}
 
@@ -594,8 +591,8 @@ public class PluginManagerMock implements PluginManager
 	 */
 	protected void addCommandsFrom(Plugin plugin)
 	{
-		Map<String, Map<String, Object>> commands = plugin.getDescription().getCommands();
-		for (Entry<String, Map<String, Object>> entry : commands.entrySet())
+		Map<String, Map<String, Object>> pluginCommands = plugin.getDescription().getCommands();
+		for (Entry<String, Map<String, Object>> entry : pluginCommands.entrySet())
 		{
 			PluginCommand command = PluginCommandUtils.createPluginCommand(entry.getKey(), plugin);
 			for (Entry<String, Object> section : entry.getValue().entrySet())
@@ -832,16 +829,16 @@ public class PluginManagerMock implements PluginManager
 	@Override
 	public @NotNull Set<Permission> getDefaultPermissions(boolean op)
 	{
-		Set<Permission> permissions = new HashSet<>();
-		for (Permission permission : this.permissions)
+		Set<Permission> perms = new HashSet<>();
+		for (Permission perm : this.permissions)
 		{
-			PermissionDefault permissionDefault = permission.getDefault();
-			if (permissionDefault == PermissionDefault.TRUE)
-				permissions.add(permission);
-			else if (op && permissionDefault == PermissionDefault.OP)
-				permissions.add(permission);
+			PermissionDefault permDefault = perm.getDefault();
+			if (permDefault == PermissionDefault.TRUE || (op && permDefault == PermissionDefault.OP))
+			{
+				perms.add(perm);
+			}
 		}
-		return permissions;
+		return perms;
 	}
 
 	@Override
@@ -889,9 +886,9 @@ public class PluginManagerMock implements PluginManager
 		Set<Permissible> subscriptions = new HashSet<>();
 		for (Entry<Permissible, Set<String>> entry : permissionSubscriptions.entrySet())
 		{
+			Set<String> perms = entry.getValue();
 			Permissible permissible = entry.getKey();
-			Set<String> permissions = entry.getValue();
-			if (permissions.contains(permission))
+			if (perms.contains(permission))
 			{
 				subscriptions.add(permissible);
 			}
