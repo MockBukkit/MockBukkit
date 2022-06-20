@@ -5,6 +5,7 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryViewMock;
 import be.seeseemelk.mockbukkit.inventory.SimpleInventoryViewMock;
@@ -531,6 +532,10 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		AsyncCatcher.catchOp("open inventory");
 		Preconditions.checkNotNull(inventory, "Inventory cannot be null");
 		closeInventory();
+		if (inventory instanceof InventoryMock inventoryMock)
+		{
+			inventoryMock.addViewers(this);
+		}
 		inventoryView = new PlayerInventoryViewMock(this, inventory);
 		return inventoryView;
 	}
@@ -542,6 +547,11 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		{
 			InventoryCloseEvent event = new InventoryCloseEvent(inventoryView);
 			Bukkit.getPluginManager().callEvent(event);
+
+			if (inventoryView.getTopInventory() instanceof InventoryMock inventoryMock)
+			{
+				inventoryMock.removeViewer(this);
+			}
 		}
 
 		// reset the cursor as it is a new InventoryView
@@ -1778,8 +1788,8 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Deprecated
 	public void setPlayerListHeaderFooter(@Nullable BaseComponent header, @Nullable BaseComponent footer)
 	{
-		this.playerListHeader = BungeeComponentSerializer.get().deserialize(new BaseComponent[] { header });
-		this.playerListFooter = BungeeComponentSerializer.get().deserialize(new BaseComponent[] { footer });
+		this.playerListHeader = BungeeComponentSerializer.get().deserialize(new BaseComponent[]{ header });
+		this.playerListFooter = BungeeComponentSerializer.get().deserialize(new BaseComponent[]{ footer });
 	}
 
 	@Override
