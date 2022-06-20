@@ -351,7 +351,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @Nullable UUID getPlayerUniqueId(@NotNull String playerName)
 	{
-		return playerList.getPlayer(playerName).getUniqueId();
+		return playerList.getOfflinePlayer(playerName).getUniqueId();
 	}
 
 	/**

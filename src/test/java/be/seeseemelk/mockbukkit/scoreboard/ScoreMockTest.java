@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ScoreMockTest
 {
+
 	private ServerMock server;
 	private ScoreboardMock scoreboard;
 	private ObjectiveMock objective;
@@ -57,9 +58,9 @@ class ScoreMockTest
 	@Test
 	void getScore_ObjectiveUnregistered_ThrowsError()
 	{
+		objective.unregister();
 		assertThrows(IllegalStateException.class, () ->
 		{
-			objective.unregister();
 			score.getScore();
 		});
 	}

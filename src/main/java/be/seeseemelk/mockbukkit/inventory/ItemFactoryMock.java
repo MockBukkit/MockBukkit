@@ -1,6 +1,10 @@
 package be.seeseemelk.mockbukkit.inventory;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.inventory.meta.BannerMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.ArmorStandMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.AxolotlBucketMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.BookMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.ArmorStandMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.BannerMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.BookMetaMock;
@@ -64,6 +68,7 @@ public class ItemFactoryMock implements ItemFactory
 		case POTION, LINGERING_POTION, SPLASH_POTION -> PotionMetaMock.class;
 		case PLAYER_HEAD -> SkullMetaMock.class;
 		case SUSPICIOUS_STEW -> SuspiciousStewMetaMock.class;
+		case AXOLOTL_BUCKET -> AxolotlBucketMetaMock.class;
 		case BUNDLE -> BundleMetaMock.class;
 		case COMPASS -> CompassMetaMock.class;
 		case CROSSBOW -> CrossbowMetaMock.class;
@@ -128,17 +133,17 @@ public class ItemFactoryMock implements ItemFactory
 			{
 				// This will make sure we find the most suitable constructor for this
 				if (constructor.getParameterCount() == 1
-				        && constructor.getParameterTypes()[0].isAssignableFrom(meta.getClass()))
+						&& constructor.getParameterTypes()[0].isAssignableFrom(meta.getClass()))
 				{
 					return (ItemMeta) constructor.newInstance(meta);
 				}
 			}
 
 			throw new NoSuchMethodException(
-			    "Cannot find an ItemMeta constructor for the class \"" + meta.getClass().getName() + "\"");
+					"Cannot find an ItemMeta constructor for the class \"" + meta.getClass().getName() + "\"");
 		}
 		catch (SecurityException | InstantiationException | IllegalAccessException | InvocationTargetException
-			        | NoSuchMethodException e)
+			   | NoSuchMethodException e)
 		{
 			throw new RuntimeException(e);
 		}
