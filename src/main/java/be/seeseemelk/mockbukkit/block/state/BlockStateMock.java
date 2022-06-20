@@ -283,6 +283,12 @@ public class BlockStateMock implements BlockState
 		{
 		case CONDUIT:
 			return new ConduitMock(block);
+		case ENCHANTING_TABLE:
+			return new EnchantingTableMock(block);
+		case JIGSAW:
+			return new JigsawMock(block);
+		case JUKEBOX:
+			return new JukeboxMock(block);
 		case SPAWNER:
 			return new CreatureSpawnerMock(block);
 		case DAYLIGHT_DETECTOR:

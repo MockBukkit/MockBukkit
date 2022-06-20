@@ -72,6 +72,7 @@ public class MockBukkit
 
 		mock = serverMockImplementation;
 
+		// Hides the startup info message.
 		Level defaultLevel = mock.getLogger().getLevel();
 		mock.getLogger().setLevel(Level.WARNING);
 		Bukkit.setServer(mock);
