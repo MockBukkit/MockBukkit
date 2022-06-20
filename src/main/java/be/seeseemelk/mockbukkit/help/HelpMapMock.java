@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import com.google.common.base.Preconditions;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.help.HelpMap;
@@ -32,32 +33,30 @@ public class HelpMapMock implements HelpMap
 	private final Map<Class<?>, HelpTopicFactory<?>> factories = new HashMap<>();
 
 	@Override
-	public HelpTopic getHelpTopic(final String topicName)
+	public HelpTopic getHelpTopic(final @NotNull String topicName)
 	{
-		if ("".equals(topicName))
-		{
-			return this.defaultTopic;
-		}
-
-		return topics.get(topicName);
+		Preconditions.checkNotNull(topicName, "TopicName cannot be null");
+		return topicName.isEmpty() ? this.defaultTopic : this.topics.get(topicName);
 	}
 
 	@Override
-	public Collection<HelpTopic> getHelpTopics()
+	public @NotNull Collection<HelpTopic> getHelpTopics()
 	{
 		return topics.values();
 	}
 
 	@Override
-	public void addTopic(HelpTopic topic)
+	public void addTopic(@NotNull HelpTopic topic)
 	{
-		if ("".equals(topic.getName()))
+		Preconditions.checkNotNull(topic, "Topic cannot be null");
+		Preconditions.checkNotNull(topic.getName(), "Topic name cannot be null");
+		if (topic.getName().isEmpty())
 		{
-			defaultTopic = topic;
+			this.defaultTopic = topic;
 		}
 		else
 		{
-			topics.put(topic.getName(), topic);
+			this.topics.put(topic.getName(), topic);
 		}
 	}
 
@@ -68,14 +67,16 @@ public class HelpMapMock implements HelpMap
 	}
 
 	@Override
-	public List<String> getIgnoredPlugins()
+	public @NotNull List<String> getIgnoredPlugins()
 	{
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void registerHelpTopicFactory(Class<?> commandClass, HelpTopicFactory<?> factory)
+	public void registerHelpTopicFactory(@NotNull Class<?> commandClass, @NotNull HelpTopicFactory<?> factory)
 	{
+		Preconditions.checkNotNull(commandClass, "CommandClass cannot be null");
+		Preconditions.checkNotNull(factory, "Factory cannot be null");
 		if (!Command.class.isAssignableFrom(commandClass) && !CommandExecutor.class.isAssignableFrom(commandClass))
 		{
 			throw new IllegalArgumentException("CommandClass must inherit from types Command or CommandExecutor");
@@ -86,6 +87,7 @@ public class HelpMapMock implements HelpMap
 
 	public void assertRegistered(@NotNull HelpTopicFactory<?> factory)
 	{
+		Preconditions.checkNotNull(factory, "Factory cannot be null");
 		assertTrue(factories.containsValue(factory));
 	}
 

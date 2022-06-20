@@ -137,7 +137,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private boolean online;
 	private PlayerInventoryMock inventory = null;
 	private EnderChestInventoryMock enderChest = null;
-	private ServerMock server;
+	private final ServerMock server;
 	private GameMode gamemode = GameMode.SURVIVAL;
 	private GameMode previousGamemode = gamemode;
 	private Component displayName = null;
@@ -175,16 +175,17 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 	private final Set<String> channels = new HashSet<>();
 
-	public PlayerMock(ServerMock server, String name)
+	public PlayerMock(@NotNull ServerMock server, @NotNull String name)
 	{
 		this(server, name, UUID.nameUUIDFromBytes(("OfflinePlayer:" + name).getBytes(StandardCharsets.UTF_8)));
 		this.online = false;
 		this.firstPlayed = 0;
 	}
 
-	public PlayerMock(ServerMock server, String name, UUID uuid)
+	public PlayerMock(@NotNull ServerMock server, @NotNull String name, @NotNull UUID uuid)
 	{
 		super(server, uuid);
+		Preconditions.checkNotNull(name, "Name cannot be null");
 		setName(name);
 		setDisplayName(name);
 		this.online = true;
@@ -277,8 +278,9 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @param block The block to damage.
 	 * @return The event that has been fired.
 	 */
-	protected BlockDamageEvent simulateBlockDamagePure(Block block)
+	protected BlockDamageEvent simulateBlockDamagePure(@NotNull Block block)
 	{
+		Preconditions.checkNotNull(block, "Block cannot be null");
 		BlockDamageEvent event = new BlockDamageEvent(this, block, getItemInHand(), false);
 		Bukkit.getPluginManager().callEvent(event);
 		return event;
@@ -294,25 +296,24 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @return the event that was fired, {@code null} if the player was not in
 	 * survival gamemode.
 	 */
-	public @Nullable BlockDamageEvent simulateBlockDamage(Block block)
+	public @Nullable BlockDamageEvent simulateBlockDamage(@NotNull Block block)
 	{
-		if (gamemode == GameMode.SURVIVAL)
-		{
-			BlockDamageEvent event = simulateBlockDamagePure(block);
-			if (event.getInstaBreak())
-			{
-				BlockBreakEvent breakEvent = new BlockBreakEvent(block, this);
-				Bukkit.getPluginManager().callEvent(breakEvent);
-				if (!breakEvent.isCancelled())
-					block.setType(Material.AIR);
-			}
-
-			return event;
-		}
-		else
+		Preconditions.checkNotNull(block, "Block cannot be null");
+		if (gamemode != GameMode.SURVIVAL)
 		{
 			return null;
 		}
+
+		BlockDamageEvent event = simulateBlockDamagePure(block);
+		if (event.getInstaBreak())
+		{
+			BlockBreakEvent breakEvent = new BlockBreakEvent(block, this);
+			Bukkit.getPluginManager().callEvent(breakEvent);
+			if (!breakEvent.isCancelled())
+				block.setType(Material.AIR);
+		}
+
+		return event;
 	}
 
 	/**
@@ -323,8 +324,9 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @return The event that was fired, {@code null} if it wasn't or if the player was in adventure mode
 	 * or in spectator mode.
 	 */
-	public @Nullable BlockBreakEvent simulateBlockBreak(Block block)
+	public @Nullable BlockBreakEvent simulateBlockBreak(@NotNull Block block)
 	{
+		Preconditions.checkNotNull(block, "Block cannot be null");
 		if ((gamemode == GameMode.SPECTATOR || gamemode == GameMode.ADVENTURE)
 				|| (gamemode == GameMode.SURVIVAL && simulateBlockDamagePure(block).isCancelled()))
 			return null;
@@ -345,14 +347,16 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @return The event that was fired. {@code null} if it wasn't or the player was in adventure
 	 * mode.
 	 */
-	public @Nullable BlockPlaceEvent simulateBlockPlace(Material material, Location location)
+	public @Nullable BlockPlaceEvent simulateBlockPlace(@NotNull Material material, @NotNull Location location)
 	{
+		Preconditions.checkNotNull(material, "Material cannot be null");
+		Preconditions.checkNotNull(location, "Location cannot be null");
 		if (gamemode == GameMode.ADVENTURE || gamemode == GameMode.SPECTATOR)
 			return null;
 		Block block = location.getBlock();
 		BlockState blockState = block.getState();
 		block.setType(material);
-		BlockPlaceEvent event = new BlockPlaceEvent(block, blockState, null, null, this, true, null);
+		BlockPlaceEvent event = new BlockPlaceEvent(block, blockState, null, getItemInHand(), this, true, EquipmentSlot.HAND);
 		Bukkit.getPluginManager().callEvent(event);
 		if (event.isCancelled() || !event.canBuild())
 		{
@@ -379,7 +383,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @param slot          The slot in the provided Inventory
 	 * @return The event that was fired.
 	 */
-	public InventoryClickEvent simulateInventoryClick(InventoryView inventoryView, int slot)
+	public InventoryClickEvent simulateInventoryClick(@NotNull InventoryView inventoryView, int slot)
 	{
 		return simulateInventoryClick(inventoryView, ClickType.LEFT, slot);
 	}
@@ -392,8 +396,9 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @param slot          The slot in the provided Inventory
 	 * @return The event that was fired.
 	 */
-	public InventoryClickEvent simulateInventoryClick(InventoryView inventoryView, ClickType clickType, int slot)
+	public InventoryClickEvent simulateInventoryClick(@NotNull InventoryView inventoryView, ClickType clickType, int slot)
 	{
+		Preconditions.checkNotNull(inventoryView, "InventoryView cannot be null");
 		InventoryClickEvent inventoryClickEvent = new InventoryClickEvent(inventoryView, InventoryType.SlotType.CONTAINER, slot, clickType, InventoryAction.UNKNOWN);
 		Bukkit.getPluginManager().callEvent(inventoryClickEvent);
 		return inventoryClickEvent;
@@ -436,6 +441,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 */
 	public @NotNull PlayerMoveEvent simulatePlayerMove(@NotNull Location moveLocation)
 	{
+		Preconditions.checkNotNull(moveLocation, "Location cannot be null");
 		PlayerMoveEvent event = new PlayerMoveEvent(this, this.getLocation(), moveLocation);
 		this.setLocation(event.getTo());
 		Bukkit.getPluginManager().callEvent(event);
@@ -463,6 +469,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void setGameMode(@NotNull GameMode mode)
 	{
+		Preconditions.checkNotNull(mode, "GameMode cannot be null");
 		if (this.gamemode == mode)
 			return;
 
@@ -513,6 +520,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void openInventory(@NotNull InventoryView inventory)
 	{
+		Preconditions.checkNotNull(inventory, "Inventory cannot be null");
 		closeInventory();
 		inventoryView = inventory;
 	}
@@ -521,6 +529,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public InventoryView openInventory(@NotNull Inventory inventory)
 	{
 		AsyncCatcher.catchOp("open inventory");
+		Preconditions.checkNotNull(inventory, "Inventory cannot be null");
 		closeInventory();
 		inventoryView = new PlayerInventoryViewMock(this, inventory);
 		return inventoryView;
@@ -612,6 +621,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public boolean performCommand(@NotNull String command)
 	{
+		Preconditions.checkNotNull(command, "Command cannot be null");
 		return Bukkit.dispatchCommand(this, command);
 	}
 
@@ -657,6 +667,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public InventoryView openMerchant(@NotNull Villager trader, boolean force)
 	{
+		Preconditions.checkNotNull(trader, "Trader cannot be null");
 		return openMerchant((Merchant) trader, force);
 	}
 
@@ -716,7 +727,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public void setItemInHand(ItemStack item)
+	public void setItemInHand(@Nullable ItemStack item)
 	{
 		getInventory().setItemInMainHand(item);
 	}
@@ -728,7 +739,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public void setItemOnCursor(ItemStack item)
+	public void setItemOnCursor(@Nullable ItemStack item)
 	{
 		this.cursor = item == null ? null : item.clone();
 	}
@@ -1107,7 +1118,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public boolean setLeashHolder(Entity holder)
+	public boolean setLeashHolder(@Nullable Entity holder)
 	{
 		// Players can not be leashed
 		return false;
@@ -1218,6 +1229,8 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void sendPluginMessage(@NotNull Plugin source, @NotNull String channel, byte[] message)
 	{
+		Preconditions.checkNotNull(source, "Source cannot be null");
+		Preconditions.checkNotNull(channel, "Channel cannot be null");
 		StandardMessenger.validatePluginMessage(getServer().getMessenger(), source, channel, message);
 	}
 
@@ -1256,15 +1269,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void playerListName(@Nullable Component name)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.playerListName = name;
 	}
 
 	@Override
 	public @NotNull Component playerListName()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.playerListName == null ? name() : this.playerListName;
 	}
 
 	@Override
@@ -1288,14 +1299,15 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 	@Override
 	@Deprecated
-	public void setPlayerListName(String name)
+	public void setPlayerListName(@Nullable String name)
 	{
-		this.playerListName = LegacyComponentSerializer.legacySection().deserialize(name);
+		this.playerListName = name == null ? null : LegacyComponentSerializer.legacySection().deserialize(name);
 	}
 
 	@Override
 	public void setCompassTarget(@NotNull Location loc)
 	{
+		Preconditions.checkNotNull(loc, "Location cannot be null");
 		this.compassTarget = loc;
 	}
 
@@ -1383,6 +1395,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@SuppressWarnings("deprecation")
 	public void chat(@NotNull String msg)
 	{
+		Preconditions.checkNotNull(msg, "Message cannot be null");
 		Set<Player> players = new HashSet<>(Bukkit.getOnlinePlayers());
 		AsyncPlayerChatEvent asyncEvent = new AsyncPlayerChatEvent(true, this, msg, players);
 		AsyncChatEvent asyncChatEvent = new AsyncChatEvent(
@@ -1489,6 +1502,8 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 	private void playNote(@NotNull Location loc, @NotNull Instrument instrument, byte note)
 	{
+		Preconditions.checkNotNull(loc, "Location cannot be null");
+		Preconditions.checkNotNull(instrument, "Instrument cannot be null");
 		Sound sound = switch (instrument)
 				{
 					case BANJO -> Sound.BLOCK_NOTE_BLOCK_BANJO;
@@ -1518,6 +1533,8 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void playSound(@NotNull Location location, @NotNull String sound, float volume, float pitch)
 	{
+		Preconditions.checkNotNull(location, "Location cannot be null");
+		Preconditions.checkNotNull(sound, "Sound cannot be null");
 		heardSounds.add(new AudioExperience(sound, SoundCategory.MASTER, location, volume, pitch));
 	}
 
@@ -1537,18 +1554,27 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void playSound(@NotNull Location location, @NotNull String sound, @NotNull SoundCategory category, float volume, float pitch)
 	{
+		Preconditions.checkNotNull(location, "Location cannot be null");
+		Preconditions.checkNotNull(sound, "Sound cannot be null");
+		Preconditions.checkNotNull(category, "Category cannot be null");
 		heardSounds.add(new AudioExperience(sound, category, location, volume, pitch));
 	}
 
 	@Override
 	public void playSound(@NotNull Location location, @NotNull Sound sound, @NotNull SoundCategory category, float volume, float pitch)
 	{
+		Preconditions.checkNotNull(location, "Location cannot be null");
+		Preconditions.checkNotNull(sound, "Sound cannot be null");
+		Preconditions.checkNotNull(category, "Category cannot be null");
 		heardSounds.add(new AudioExperience(sound, category, location, volume, pitch));
 	}
 
 	@Override
 	public void playSound(@NotNull Entity entity, @NotNull Sound sound, @NotNull SoundCategory category, float volume, float pitch)
 	{
+		Preconditions.checkNotNull(entity, "Entity cannot be null");
+		Preconditions.checkNotNull(sound, "Sound cannot be null");
+		Preconditions.checkNotNull(category, "Category cannot be null");
 		heardSounds.add(new AudioExperience(sound, category, entity.getLocation(), volume, pitch));
 	}
 
@@ -1561,6 +1587,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void addHeardSound(@NotNull AudioExperience audioExperience)
 	{
+		Preconditions.checkNotNull(audioExperience, "AudioExperience cannot be null");
 		SoundReceiver.super.addHeardSound(audioExperience);
 	}
 
@@ -1577,14 +1604,16 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public void stopSound(@NotNull Sound sound, SoundCategory category)
+	public void stopSound(@NotNull Sound sound, @Nullable SoundCategory category)
 	{
+		Preconditions.checkNotNull(sound, "Sound cannot be null");
 		// We will just pretend the Sound has stopped.
 	}
 
 	@Override
-	public void stopSound(@NotNull String sound, SoundCategory category)
+	public void stopSound(@NotNull String sound, @Nullable SoundCategory category)
 	{
+		Preconditions.checkNotNull(sound, "Sound cannot be null");
 		// We will just pretend the Sound has stopped.
 	}
 
@@ -1598,12 +1627,16 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Deprecated
 	public void playEffect(@NotNull Location loc, @NotNull Effect effect, int data)
 	{
+		Preconditions.checkNotNull(loc, "Location cannot be null");
+		Preconditions.checkNotNull(effect, "Effect cannot be null");
 		// Pretend packet gets sent.
 	}
 
 	@Override
 	public <T> void playEffect(@NotNull Location loc, @NotNull Effect effect, T data)
 	{
+		Preconditions.checkNotNull(loc, "Location cannot be null");
+		Preconditions.checkNotNull(effect, "Effect cannot be null");
 		if (data != null)
 		{
 			Preconditions.checkArgument(effect.getData() != null && effect.getData().isAssignableFrom(data.getClass()), "Wrong kind of data for this effect!");
@@ -1618,7 +1651,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public boolean breakBlock(@NotNull Block block)
 	{
-		Preconditions.checkArgument(block != null, "Block cannot be null");
+		Preconditions.checkNotNull(block, "Block cannot be null");
 		Preconditions.checkArgument(block.getWorld().equals(getWorld()), "Cannot break blocks across worlds");
 
 		BlockBreakEvent event = new BlockBreakEvent(block, this);
@@ -1640,12 +1673,16 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Deprecated
 	public void sendBlockChange(@NotNull Location loc, @NotNull Material material, byte data)
 	{
+		Preconditions.checkNotNull(loc, "Location cannot be null");
+		Preconditions.checkNotNull(material, "Material cannot be null");
 		// Pretend we sent the block change.
 	}
 
 	@Override
 	public void sendBlockChange(@NotNull Location loc, @NotNull BlockData block)
 	{
+		Preconditions.checkNotNull(loc, "Location cannot be null");
+		Preconditions.checkNotNull(block, "Block cannot be null");
 		// Pretend we sent the block change.
 	}
 
@@ -1653,12 +1690,12 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void sendSignChange(@NotNull Location loc, @Nullable List<Component> lines, @NotNull DyeColor dyeColor, boolean hasGlowingText) throws IllegalArgumentException
 	{
-		if (lines == null)
-		{
-			lines = new java.util.ArrayList<>(4);
-		}
 		Preconditions.checkNotNull(loc, "Location cannot be null");
 		Preconditions.checkNotNull(dyeColor, "DyeColor cannot be null");
+		if (lines == null)
+		{
+			lines = new ArrayList<>(4);
+		}
 		if (lines.size() < 4)
 		{
 			throw new IllegalArgumentException("Must have at least 4 lines");
@@ -1681,13 +1718,12 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void sendSignChange(@NotNull Location loc, @Nullable String[] lines, @NotNull DyeColor dyeColor, boolean hasGlowingText) throws IllegalArgumentException
 	{
+		Preconditions.checkNotNull(loc, "Location cannot be null");
+		Preconditions.checkNotNull(dyeColor, "DyeColor cannot be null");
 		if (lines == null)
 		{
 			lines = new String[4];
 		}
-
-		Preconditions.checkNotNull(loc, "Location cannot be null");
-		Preconditions.checkNotNull(dyeColor, "DyeColor cannot be null");
 		if (lines.length < 4)
 		{
 			throw new IllegalArgumentException("Must have at least 4 lines");
@@ -1697,6 +1733,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void sendMap(@NotNull MapView map)
 	{
+		Preconditions.checkNotNull(map, "Map cannot be null");
 		if (!(map instanceof MapViewMock mapView))
 			return;
 
@@ -1709,6 +1746,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Deprecated
 	public void sendActionBar(@NotNull String message)
 	{
+		Preconditions.checkNotNull(message, "Message cannot be null");
 		// Pretend we sent the action bar.
 	}
 
@@ -1716,6 +1754,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Deprecated
 	public void sendActionBar(char alternateChar, @NotNull String message)
 	{
+		Preconditions.checkNotNull(message, "Message cannot be null");
 		// Pretend we sent the action bar.
 	}
 
@@ -1723,6 +1762,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Deprecated
 	public void sendActionBar(@NotNull BaseComponent... message)
 	{
+		Preconditions.checkNotNull(message, "Message cannot be null");
 		// Pretend we sent the action bar.
 	}
 
@@ -2180,12 +2220,15 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Deprecated
 	public void hidePlayer(@NotNull Player player)
 	{
+		Preconditions.checkNotNull(player, "Player cannot be null");
 		hiddenPlayersDeprecated.add(player.getUniqueId());
 	}
 
 	@Override
 	public void hidePlayer(@NotNull Plugin plugin, @NotNull Player player)
 	{
+		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
+		Preconditions.checkNotNull(player, "Player cannot be null");
 		hiddenPlayers.putIfAbsent(player.getUniqueId(), new HashSet<>());
 		Set<Plugin> blockingPlugins = hiddenPlayers.get(player.getUniqueId());
 		blockingPlugins.add(plugin);
@@ -2195,12 +2238,15 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Deprecated
 	public void showPlayer(@NotNull Player player)
 	{
+		Preconditions.checkNotNull(player, "Player cannot be null");
 		hiddenPlayersDeprecated.remove(player.getUniqueId());
 	}
 
 	@Override
 	public void showPlayer(@NotNull Plugin plugin, @NotNull Player player)
 	{
+		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
+		Preconditions.checkNotNull(player, "Player cannot be null");
 		if (hiddenPlayers.containsKey(player.getUniqueId()))
 		{
 			Set<Plugin> blockingPlugins = hiddenPlayers.get(player.getUniqueId());
@@ -2215,6 +2261,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public boolean canSee(@NotNull Player player)
 	{
+		Preconditions.checkNotNull(player, "Player cannot be null");
 		return !hiddenPlayers.containsKey(player.getUniqueId()) &&
 				!hiddenPlayersDeprecated.contains(player.getUniqueId());
 	}
@@ -2580,6 +2627,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public <T> void spawnParticle(@NotNull Particle particle, double x, double y, double z, int count, double offsetX,
 								  double offsetY, double offsetZ, double extra, T data)
 	{
+		Preconditions.checkNotNull(particle, "Particle cannot be null");
 		if (data != null && !particle.getDataType().isInstance(data))
 		{
 			throw new IllegalArgumentException("data should be " + particle.getDataType() + " got " + data.getClass());
@@ -2714,9 +2762,9 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public void setPlayerListHeader(String header)
+	public void setPlayerListHeader(@Nullable String header)
 	{
-		this.playerListHeader = LegacyComponentSerializer.legacySection().deserialize(header);
+		this.playerListHeader = header == null ? null : LegacyComponentSerializer.legacySection().deserialize(header);
 	}
 
 	@Override
@@ -2726,16 +2774,16 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public void setPlayerListFooter(String footer)
+	public void setPlayerListFooter(@Nullable String footer)
 	{
-		this.playerListFooter = LegacyComponentSerializer.legacySection().deserialize(footer);
+		this.playerListFooter = footer == null ? null : LegacyComponentSerializer.legacySection().deserialize(footer);
 	}
 
 	@Override
-	public void setPlayerListHeaderFooter(String header, String footer)
+	public void setPlayerListHeaderFooter(@Nullable String header, @Nullable String footer)
 	{
-		this.playerListHeader = LegacyComponentSerializer.legacySection().deserialize(header);
-		this.playerListFooter = LegacyComponentSerializer.legacySection().deserialize(footer);
+		this.playerListHeader = header == null ? null : LegacyComponentSerializer.legacySection().deserialize(header);
+		this.playerListFooter = footer == null ? null : LegacyComponentSerializer.legacySection().deserialize(footer);
 	}
 
 	@Override
@@ -2748,6 +2796,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public boolean discoverRecipe(@NotNull NamespacedKey recipe)
 	{
+		Preconditions.checkNotNull(recipe, "Recipe cannot be null");
 		return discoverRecipes(Collections.singletonList(recipe)) != 0;
 	}
 
@@ -2761,6 +2810,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public boolean undiscoverRecipe(@NotNull NamespacedKey recipe)
 	{
+		Preconditions.checkNotNull(recipe, "Recipe cannot be null");
 		return undiscoverRecipes(Collections.singletonList(recipe)) != 0;
 	}
 
@@ -3061,19 +3111,21 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void sendBlockDamage(@NotNull Location loc, float progress)
 	{
-		Preconditions.checkArgument(loc != null, "loc must not be null");
+		Preconditions.checkNotNull(loc, "Location cannot be null");
 		Preconditions.checkArgument(progress >= 0.0 && progress <= 1.0, "progress must be between 0.0 and 1.0 (inclusive)");
 	}
 
 	@Override
 	public void sendMultiBlockChange(@NotNull Map<Location, BlockData> blockChanges)
 	{
+		Preconditions.checkNotNull(blockChanges, "BlockChanges cannot be null");
 		// Pretend we sent the block change.
 	}
 
 	@Override
 	public void sendMultiBlockChange(@NotNull Map<Location, BlockData> blockChanges, boolean suppressLightUpdates)
 	{
+		Preconditions.checkNotNull(blockChanges, "BlockChanges cannot be null");
 		// Pretend we sent the block change.
 	}
 
@@ -3246,6 +3298,8 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		@Deprecated
 		public void sendMessage(@NotNull ChatMessageType position, @NotNull BaseComponent component)
 		{
+			Preconditions.checkNotNull(position, "Position must not be null");
+			Preconditions.checkNotNull(component, "Component must not be null");
 			Component comp = BungeeComponentSerializer.get().deserialize(new BaseComponent[]{ component });
 			PlayerMock.this.sendMessage(comp);
 		}

@@ -105,6 +105,7 @@ public class FishHookMock extends ProjectileMock implements FishHook
 	@Override
 	public void setHookedEntity(@Nullable Entity entity)
 	{
+		Preconditions.checkNotNull(entity, "The hooked entity cannot be null");
 		this.state = HookState.HOOKED_ENTITY;
 		this.hookedEntity = entity;
 	}
@@ -187,27 +188,6 @@ public class FishHookMock extends ProjectileMock implements FishHook
 	public String toString()
 	{
 		return "FishingHookMock";
-	}
-
-	@Override
-	public @NotNull Component name()
-	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public @Nullable Component customName()
-	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public void customName(@Nullable Component customName)
-	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
 	}
 
 }

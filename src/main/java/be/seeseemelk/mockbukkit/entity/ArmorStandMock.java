@@ -46,7 +46,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 
 	private final Set<EquipmentSlot> disabledSlots = EnumSet.noneOf(EquipmentSlot.class);
 
-	public ArmorStandMock(ServerMock server, UUID uuid)
+	public ArmorStandMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 	}

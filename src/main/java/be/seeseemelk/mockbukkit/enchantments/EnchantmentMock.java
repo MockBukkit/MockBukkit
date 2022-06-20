@@ -16,16 +16,18 @@ import java.util.Set;
 
 public class EnchantmentMock extends Enchantment
 {
-	private String name;
+	private final String name;
 	private int maxLevel;
 	private int startLevel;
 	private EnchantmentTarget itemTarget;
 	private boolean isTreasure;
 	private boolean isCursed;
 
-	public EnchantmentMock(@NotNull NamespacedKey key, String name)
+	public EnchantmentMock(@NotNull NamespacedKey key, @NotNull String name)
 	{
 		super(key);
+		Preconditions.checkNotNull(key, "Key cannot be null");
+		Preconditions.checkNotNull(name, "Name cannot be null");
 		this.name = name;
 	}
 
@@ -87,7 +89,7 @@ public class EnchantmentMock extends Enchantment
 	@Override
 	public int getMaxLevel()
 	{
-		return maxLevel;
+		return this.maxLevel;
 	}
 
 	public void setMaxLevel(int maxLevel)
@@ -98,7 +100,7 @@ public class EnchantmentMock extends Enchantment
 	@Override
 	public int getStartLevel()
 	{
-		return startLevel;
+		return this.startLevel;
 	}
 
 	public void setStartLevel(int startLevel)
@@ -109,7 +111,7 @@ public class EnchantmentMock extends Enchantment
 	@Override
 	public @NotNull EnchantmentTarget getItemTarget()
 	{
-		return itemTarget;
+		return this.itemTarget;
 	}
 
 	public void setItemTarget(@NotNull EnchantmentTarget itemTarget)
@@ -121,7 +123,7 @@ public class EnchantmentMock extends Enchantment
 	@Override
 	public boolean isTreasure()
 	{
-		return isTreasure;
+		return this.isTreasure;
 	}
 
 	public void setTreasure(boolean isTreasure)
@@ -132,7 +134,7 @@ public class EnchantmentMock extends Enchantment
 	@Override
 	public boolean isCursed()
 	{
-		return isCursed;
+		return this.isCursed;
 	}
 
 	public void setCursed(boolean isCursed)

@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import com.google.common.base.Preconditions;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
@@ -29,20 +30,22 @@ public class OfflinePlayerMock implements OfflinePlayer
 	private final UUID uuid;
 	private final String name;
 
-	public OfflinePlayerMock(UUID uuid, String name)
+	public OfflinePlayerMock(@NotNull UUID uuid, @Nullable String name)
 	{
+		Preconditions.checkNotNull(uuid, "UUID cannot be null");
 		this.uuid = uuid;
 		this.name = name;
 	}
 
-	public OfflinePlayerMock(String name)
+	public OfflinePlayerMock(@Nullable String name)
 	{
 		this(UUID.nameUUIDFromBytes(("OfflinePlayer:" + name).getBytes()), name);
 	}
 
-	public PlayerMock join(ServerMock server)
+	public PlayerMock join(@NotNull ServerMock server)
 	{
-		PlayerMock player = new PlayerMock(server, name, uuid);
+		Preconditions.checkNotNull(server, "Server cannot be null");
+		PlayerMock player = new PlayerMock(server, this.name, this.uuid);
 		server.addPlayer(player);
 		return player;
 	}
@@ -56,13 +59,13 @@ public class OfflinePlayerMock implements OfflinePlayer
 	@Override
 	public @Nullable String getName()
 	{
-		return name;
+		return this.name;
 	}
 
 	@Override
 	public @NotNull UUID getUniqueId()
 	{
-		return uuid;
+		return this.uuid;
 	}
 
 	@Override
@@ -83,7 +86,7 @@ public class OfflinePlayerMock implements OfflinePlayer
 	public @NotNull Map<String, Object> serialize()
 	{
 		Map<String, Object> result = new LinkedHashMap<>();
-		result.put("UUID", uuid.toString());
+		result.put("UUID", this.uuid.toString());
 		return result;
 	}
 
@@ -111,7 +114,7 @@ public class OfflinePlayerMock implements OfflinePlayer
 	@Override
 	public @Nullable Player getPlayer()
 	{
-		return MockBukkit.getMock().getPlayerExact(name);
+		return MockBukkit.getMock().getPlayerExact(this.name);
 	}
 
 	@Override

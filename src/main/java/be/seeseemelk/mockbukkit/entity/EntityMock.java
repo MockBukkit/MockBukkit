@@ -210,8 +210,9 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	 *
 	 * @param location The new location of the entity.
 	 */
-	public void setLocation(Location location)
+	public void setLocation(@NotNull Location location)
 	{
+		Preconditions.checkNotNull(location, "Location cannot be null");
 		this.location = location;
 	}
 
@@ -353,12 +354,14 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public String nextMessage()
+	public @Nullable String nextMessage()
 	{
+		if (messages.peek() == null)
+			return null;
 		return LegacyComponentSerializer.legacySection().serialize(messages.poll());
 	}
 
-	public Component nextComponentMessage()
+	public @Nullable Component nextComponentMessage()
 	{
 		return messages.poll();
 	}
@@ -496,14 +499,15 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public void setCustomName(String name)
+	public void setCustomName(@Nullable String name)
 	{
-		this.customName = LegacyComponentSerializer.legacySection().deserialize(name);
+		this.customName = name == null ? null : LegacyComponentSerializer.legacySection().deserialize(name);
 	}
 
 	@Override
 	public void setVelocity(@NotNull Vector velocity)
 	{
+		Preconditions.checkNotNull(velocity, "Velocity cannot be null");
 		this.velocity = velocity;
 	}
 
@@ -634,19 +638,19 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public boolean isDead()
 	{
-		return !removed;
+		return !this.removed;
 	}
 
 	@Override
 	public boolean isValid()
 	{
-		return !removed;
+		return !this.removed;
 	}
 
 	@Override
 	public @NotNull ServerMock getServer()
 	{
-		return server;
+		return this.server;
 	}
 
 	@Override
@@ -714,13 +718,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public void setLastDamageCause(EntityDamageEvent event)
+	public void setLastDamageCause(@Nullable EntityDamageEvent event)
 	{
 		this.lastDamageEvent = event;
 	}
 
 	@Override
-	public EntityDamageEvent getLastDamageCause()
+	public @Nullable EntityDamageEvent getLastDamageCause()
 	{
 		return this.lastDamageEvent;
 	}
@@ -743,7 +747,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public void playEffect(@NotNull EntityEffect type)
 	{
-		Preconditions.checkArgument(type != null, "type");
+		Preconditions.checkNotNull(type, "Type cannot be null");
 	}
 
 	@Override

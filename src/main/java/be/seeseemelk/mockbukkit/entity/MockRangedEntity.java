@@ -9,8 +9,6 @@ import org.jetbrains.annotations.NotNull;
 public interface MockRangedEntity<T extends Mob> extends RangedEntity
 {
 
-	T getHandle();
-
 	@Override
 	default void rangedAttack(@NotNull LivingEntity target, float charge)
 	{
