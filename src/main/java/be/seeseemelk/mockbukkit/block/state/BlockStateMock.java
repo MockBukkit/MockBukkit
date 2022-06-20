@@ -281,9 +281,10 @@ public class BlockStateMock implements BlockState
 	{
 		switch (block.getType())
 		{
+		case ENCHANTING_TABLE:
+			return new EnchantingTableMock(block);
 		case JIGSAW:
 			return new JigsawMock(block);
-
 		case JUKEBOX:
 			return new JukeboxMock(block);
 		case SPAWNER:
