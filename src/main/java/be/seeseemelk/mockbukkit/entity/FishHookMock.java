@@ -105,7 +105,6 @@ public class FishHookMock extends ProjectileMock implements FishHook
 	@Override
 	public void setHookedEntity(@Nullable Entity entity)
 	{
-		Preconditions.checkNotNull(entity, "The hooked entity cannot be null");
 		this.state = HookState.HOOKED_ENTITY;
 		this.hookedEntity = entity;
 	}
