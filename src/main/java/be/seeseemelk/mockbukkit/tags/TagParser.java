@@ -1,6 +1,21 @@
 package be.seeseemelk.mockbukkit.tags;
 
+import be.seeseemelk.mockbukkit.MockBukkit;
+import com.google.common.base.Preconditions;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonPrimitive;
+import org.bukkit.Keyed;
+import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.Tag;
+import org.jetbrains.annotations.NotNull;
+
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
@@ -10,25 +25,9 @@ import java.util.function.BiConsumer;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import org.apache.commons.lang.Validate;
-import org.bukkit.Keyed;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
-import org.bukkit.Tag;
-import org.jetbrains.annotations.NotNull;
-
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.JsonParser;
-import com.google.gson.JsonPrimitive;
-
-import be.seeseemelk.mockbukkit.MockBukkit;
-
 /**
  * The {@link TagParser} is responsible for parsing a JSON input into a {@link TagWrapperMock}.
- * 
+ *
  * @author TheBusyBiscuit
  *
  */
@@ -44,9 +43,9 @@ public class TagParser implements Keyed
 
 	/**
 	 * This constructs a new {@link TagParser}.
-	 * 
-	 * @param key The {@link TagRegistry} for the resulting {@link Tag}
-	 * @param key The {@link NamespacedKey} of the resulting {@link Tag}
+	 *
+	 * @param registry The {@link TagRegistry} for the resulting {@link Tag}
+	 * @param key      The {@link NamespacedKey} of the resulting {@link Tag}
 	 */
 	public TagParser(@NotNull TagRegistry registry, @NotNull NamespacedKey key)
 	{
@@ -56,7 +55,7 @@ public class TagParser implements Keyed
 
 	/**
 	 * This constructs a new {@link TagParser}.
-	 * 
+	 *
 	 * @param tag The {@link TagWrapperMock}
 	 */
 	TagParser(@NotNull TagWrapperMock tag)
@@ -65,12 +64,17 @@ public class TagParser implements Keyed
 		this.key = tag.getKey();
 	}
 
-	void parse(@NotNull BiConsumer<Set<Material>, Set<TagWrapperMock>> callback) throws TagMisconfigurationException
+	void parse(@NotNull BiConsumer<Set<Material>, Set<TagWrapperMock>> callback) throws TagMisconfigurationException, FileNotFoundException
 	{
 		String path = "/tags/" + registry.getRegistry() + '/' + getKey().getKey() + ".json";
 
+		if (MockBukkit.class.getResource(path) == null)
+		{
+			throw new FileNotFoundException(path);
+		}
+
 		try (BufferedReader reader = new BufferedReader(
-				new InputStreamReader(MockBukkit.class.getResourceAsStream(path), StandardCharsets.UTF_8)))
+			    new InputStreamReader(MockBukkit.class.getResourceAsStream(path), StandardCharsets.UTF_8)))
 		{
 			parse(reader.lines().collect(Collectors.joining("")), callback);
 		}
@@ -83,25 +87,24 @@ public class TagParser implements Keyed
 	/**
 	 * This will parse the given JSON {@link String} and run the provided callback with {@link Set Sets} of matched
 	 * {@link Material Materials} and {@link Tag Tags}.
-	 * 
+	 *
 	 * @param json     The JSON {@link String} to parse
 	 * @param callback A callback to run after successfully parsing the input
-	 * 
+	 *
 	 * @throws TagMisconfigurationException This is thrown whenever the given input is malformed or no adequate
 	 *                                      {@link Material} or {@link Tag} could be found
 	 */
 	public void parse(@NotNull String json, @NotNull BiConsumer<Set<Material>, Set<TagWrapperMock>> callback)
-			throws TagMisconfigurationException
+	throws TagMisconfigurationException
 	{
-		Validate.notNull(json, "Cannot parse a null String");
+		Preconditions.checkNotNull(json, "Cannot parse a null String");
 
 		try
 		{
 			Set<Material> materials = new HashSet<>();
 			Set<TagWrapperMock> tags = new HashSet<>();
 
-			JsonParser parser = new JsonParser();
-			JsonObject root = parser.parse(json).getAsJsonObject();
+			JsonObject root = JsonParser.parseString(json).getAsJsonObject();
 			JsonElement child = root.get("values");
 
 			if (child instanceof JsonArray)
@@ -124,7 +127,7 @@ public class TagParser implements Keyed
 					else
 					{
 						throw new TagMisconfigurationException(key, "Unexpected value format: "
-								+ element.getClass().getSimpleName() + " - " + element.toString());
+						                                       + element.getClass().getSimpleName() + " - " + element.toString());
 					}
 				}
 
@@ -144,7 +147,7 @@ public class TagParser implements Keyed
 	}
 
 	private void parsePrimitiveValue(@NotNull String value, @NotNull Set<Material> materials,
-			@NotNull Set<TagWrapperMock> tags) throws TagMisconfigurationException
+	                                 @NotNull Set<TagWrapperMock> tags) throws TagMisconfigurationException
 	{
 		if (MINECRAFT_MATERIAL.matcher(value).matches())
 		{
@@ -173,7 +176,7 @@ public class TagParser implements Keyed
 			else
 			{
 				throw new TagMisconfigurationException(key,
-						"There is no '" + value + "' tag in Minecraft:" + registry.getRegistry());
+				                                       "There is no '" + value + "' tag in Minecraft:" + registry.getRegistry());
 			}
 		}
 		else
@@ -184,14 +187,14 @@ public class TagParser implements Keyed
 	}
 
 	private void parseComplexValue(@NotNull JsonObject entry, @NotNull Set<Material> materials,
-			@NotNull Set<TagWrapperMock> tags) throws TagMisconfigurationException
+	                               @NotNull Set<TagWrapperMock> tags) throws TagMisconfigurationException
 	{
 		JsonElement id = entry.get("id");
 		JsonElement required = entry.get("required");
 
 		// Check if the entry contains elements of the correct type
 		if (id instanceof JsonPrimitive && ((JsonPrimitive) id).isString() && required instanceof JsonPrimitive
-				&& ((JsonPrimitive) required).isBoolean())
+		        && ((JsonPrimitive) required).isBoolean())
 		{
 			if (required.getAsBoolean())
 			{

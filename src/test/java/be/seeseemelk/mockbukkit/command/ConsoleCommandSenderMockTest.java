@@ -1,91 +1,88 @@
 package be.seeseemelk.mockbukkit.command;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class ConsoleCommandSenderMockTest
+class ConsoleCommandSenderMockTest
 {
 	private ConsoleCommandSenderMock sender;
 
-	@Before
-	public void setUp() throws Exception
+	@BeforeEach
+	void setUp() throws Exception
 	{
 		sender = new ConsoleCommandSenderMock();
 	}
 
 	@Test
-	public void getMessage_SomeString_SameString()
+	void getMessage_SomeString_SameString()
 	{
 		sender.sendMessage("Hello");
 		sender.sendMessage("Other");
 		assertEquals("Hello", sender.nextMessage());
 		assertEquals("Other", sender.nextMessage());
 	}
-	
+
 	@Test
-	public void getMessage_NoMessages_Null()
+	void getMessage_NoMessages_Null()
 	{
 		assertNull(sender.nextMessage());
 	}
-	
+
 	@Test
-	public void sendMessageVararg_SomeStrings_StringsInRightOrder()
+	void sendMessageVararg_SomeStrings_StringsInRightOrder()
 	{
-		sender.sendMessage(new String[]{"Hello", "world"});
+		sender.sendMessage(new String[] {"Hello", "world"});
 		sender.assertSaid("Hello");
 		sender.assertSaid("world");
 	}
 
 	@Test
-	public void assertSaid_CorrectMessage_DoesNotAssert()
+	void getName_IsConsole()
+	{
+		assertEquals("CONSOLE", sender.getName());
+	}
+
+	@Test
+	void assertIsOp()
+	{
+		assertTrue(sender.isOp());
+	}
+
+	@Test
+	void assertSaid_CorrectMessage_DoesNotAssert()
 	{
 		sender.sendMessage("A hello world");
 		sender.assertSaid("A hello world");
 	}
-	
-	@Test(expected = AssertionError.class)
-	public void assertSaid_WrongMessage_Asserts()
+
+	@Test
+	void assertSaid_WrongMessage_Asserts()
 	{
 		sender.sendMessage("My message");
-		sender.assertSaid("Some other message");
+		assertThrows(AssertionError.class, () -> sender.assertSaid("Some other message"));
 	}
-	
-	@Test(expected = AssertionError.class)
-	public void assertSaid_NoMessages_Asserts()
-	{
-		sender.assertSaid("A message");
-	}
-	
+
 	@Test
-	public void assertNoMore_NoMessages_DoesNotAssert()
+	void assertSaid_NoMessages_Asserts()
+	{
+		assertThrows(AssertionError.class, () -> sender.assertSaid("A message"));
+	}
+
+	@Test
+	void assertNoMore_NoMessages_DoesNotAssert()
 	{
 		sender.assertNoMoreSaid();
 	}
-	
-	@Test(expected = AssertionError.class)
-	public void assertNoMore_MoreMessages_Asserts()
+
+	@Test
+	void assertNoMore_MoreMessages_Asserts()
 	{
 		sender.sendMessage("Some message");
-		sender.assertNoMoreSaid();
+		assertThrows(AssertionError.class, () -> sender.assertNoMoreSaid());
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

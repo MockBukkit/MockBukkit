@@ -1,29 +1,71 @@
 package be.seeseemelk.mockbukkit.scoreboard;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import net.kyori.adventure.text.Component;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Entity;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.RenderType;
 import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-
-@SuppressWarnings("deprecation")
 public class ScoreboardMock implements Scoreboard
 {
 	private Map<String, ObjectiveMock> objectives = new HashMap<>();
 	private Map<DisplaySlot, ObjectiveMock> objectivesByDisplaySlot = new EnumMap<>(DisplaySlot.class);
-	private Map<String,Team> teams = new HashMap<>();
+	private Map<String, Team> teams = new HashMap<>();
 
 	@Override
+	@Deprecated
 	public ObjectiveMock registerNewObjective(String name, String criteria) throws IllegalArgumentException
 	{
-		ObjectiveMock objective = new ObjectiveMock(this, name, criteria);
+		return registerNewObjective(name, criteria, name, RenderType.INTEGER);
+	}
+
+	@Override
+	public @NotNull Objective registerNewObjective(@NotNull String name, @NotNull String criteria, @Nullable Component displayName) throws IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Objective registerNewObjective(@NotNull String name, @NotNull String criteria, @Nullable Component displayName, @NotNull RenderType renderType) throws IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@Deprecated
+	public ObjectiveMock registerNewObjective(String name, String criteria, String displayName)
+	throws IllegalArgumentException
+	{
+		return registerNewObjective(name, criteria, displayName, RenderType.INTEGER);
+	}
+
+	@Override
+	@Deprecated
+	public ObjectiveMock registerNewObjective(String name, String criteria, String displayName, RenderType renderType)
+	throws IllegalArgumentException
+	{
+		if (objectives.containsKey(name))
+		{
+			throw new IllegalArgumentException("An objective of name '" + name + "' already exists");
+		}
+		ObjectiveMock objective = new ObjectiveMock(this, name, displayName, criteria, renderType);
 		objectives.put(name, objective);
 		return objective;
 	}
@@ -37,9 +79,8 @@ public class ScoreboardMock implements Scoreboard
 	@Override
 	public Set<Objective> getObjectivesByCriteria(String criteria) throws IllegalArgumentException
 	{
-		return objectives.values().stream()
-				.filter(objective -> objective.getCriteria().equals(criteria))
-				.collect(Collectors.toSet());
+		return objectives.values().stream().filter(objective -> objective.getCriteria().equals(criteria))
+		       .collect(Collectors.toSet());
 	}
 
 	@Override
@@ -64,12 +105,12 @@ public class ScoreboardMock implements Scoreboard
 	public Set<Score> getScores(String entry) throws IllegalArgumentException
 	{
 		Set<Score> scores = new HashSet<>();
-		for(Objective o: objectives.values()){
-			Score score = o.getScore(entry);
-			if(score != null){
-				scores.add(score);
-			}
+
+		for (Objective o : objectives.values())
+		{
+			scores.add(o.getScore(entry));
 		}
+
 		return scores;
 	}
 
@@ -82,11 +123,10 @@ public class ScoreboardMock implements Scoreboard
 	@Override
 	public void resetScores(String entry) throws IllegalArgumentException
 	{
-		for(Objective o: objectives.values()){
-			Score score = o.getScore(entry);
-			if(score != null){
-				score.setScore(0);
-			}
+		for (Objective o : objectives.values())
+		{
+			// Since Scores are always non-null, we don't need a null-check here.
+			o.getScore(entry).setScore(0);
 		}
 	}
 
@@ -99,9 +139,14 @@ public class ScoreboardMock implements Scoreboard
 	@Override
 	public Team getEntryTeam(String entry) throws IllegalArgumentException
 	{
-		for(Team t:teams.values()){
-			if(t.hasEntry(entry))return t;
+		for (Team t : teams.values())
+		{
+			if (t.hasEntry(entry))
+			{
+				return t;
+			}
 		}
+
 		return null;
 	}
 
@@ -114,25 +159,33 @@ public class ScoreboardMock implements Scoreboard
 	@Override
 	public Set<Team> getTeams()
 	{
-		HashSet<Team> v = new HashSet<>(teams.values());
-		return v;
+		return Collections.unmodifiableSet(new HashSet<>(teams.values()));
 	}
 
 	@Override
 	public Team registerNewTeam(String name) throws IllegalArgumentException
 	{
-		Team team = new TeamMock(name,this);
-		teams.put(name,team);
+		if (teams.containsKey(name))
+		{
+			throw new IllegalArgumentException("Team name '" + name + "' is already in use");
+		}
+		Team team = new TeamMock(name, this);
+		teams.put(name, team);
 		return team;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
+	@Deprecated
 	public Set<OfflinePlayer> getPlayers()
 	{
 		Set<OfflinePlayer> players = new HashSet<>();
-		for(Team t:teams.values()){
+
+		for (Team t : teams.values())
+		{
 			players.addAll(t.getPlayers());
 		}
+
 		return players;
 	}
 
@@ -140,55 +193,76 @@ public class ScoreboardMock implements Scoreboard
 	public Set<String> getEntries()
 	{
 		Set<String> entries = new HashSet<>();
-		for(Team t:teams.values()){
+
+		for (Team t : teams.values())
+		{
 			entries.addAll(t.getEntries());
 		}
+
 		return entries;
 	}
 
 	@Override
 	public void clearSlot(DisplaySlot slot) throws IllegalArgumentException
 	{
-		Objective o = objectivesByDisplaySlot.remove(slot);
-		if(o != null)objectives.remove(o.getName());
-		
+		objectivesByDisplaySlot.remove(slot);
 	}
-	
+
+	@Override
+	public @NotNull Set<Score> getScoresFor(@NotNull Entity entity) throws IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void resetScoresFor(@NotNull Entity entity) throws IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Team getEntityTeam(@NotNull Entity entity) throws IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 	/**
 	 * Sets the objective to a specific slot.
+	 *
 	 * @param objective The objective to set to the slot.
-	 * @param slot The slot to set the objective to.
+	 * @param slot      The slot to set the objective to.
 	 */
-	protected void setDisplaySlot(ObjectiveMock objective, DisplaySlot slot)
+	protected void setDisplaySlot(@NotNull ObjectiveMock objective, DisplaySlot slot)
 	{
 		objectivesByDisplaySlot.put(slot, objective);
 	}
 
 	/**
 	 * Removes an objective off this scoreboard.
+	 *
 	 * @param objectiveMock The objective to remove.
 	 */
-	protected void unregister(ObjectiveMock objectiveMock)
+	protected void unregister(@NotNull ObjectiveMock objectiveMock)
 	{
-		objectives.remove(objectiveMock.getName());
 		if (objectiveMock.getDisplaySlot() != null)
+		{
 			objectivesByDisplaySlot.remove(objectiveMock.getDisplaySlot());
+		}
+
+		objectives.remove(objectiveMock.getName());
 	}
 
-	@Override
-	public Objective registerNewObjective(String name, String criteria, String displayName)
-			throws IllegalArgumentException
+	/**
+	 * Removes a team from this scoreboard.
+	 *
+	 * @param teamMock The team to remove.
+	 */
+	protected void unregister(@NotNull TeamMock teamMock)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public Objective registerNewObjective(String name, String criteria, String displayName, RenderType renderType)
-			throws IllegalArgumentException
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		teams.remove(teamMock.getName());
 	}
 
 }

@@ -1,12 +1,9 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import java.util.UUID;
-
-import org.bukkit.entity.EntityType;
+import be.seeseemelk.mockbukkit.ServerMock;
 import org.bukkit.entity.Monster;
 
-import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import java.util.UUID;
 
 public class SimpleMonsterMock extends MonsterMock implements Monster
 {
@@ -19,13 +16,6 @@ public class SimpleMonsterMock extends MonsterMock implements Monster
 	public SimpleMonsterMock(ServerMock server)
 	{
 		this(server, UUID.randomUUID());
-	}
-
-	@Override
-	public EntityType getType()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 }

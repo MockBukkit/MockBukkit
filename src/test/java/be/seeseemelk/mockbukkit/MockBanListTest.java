@@ -1,62 +1,66 @@
 package be.seeseemelk.mockbukkit;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Date;
 import java.util.Set;
 
 import org.bukkit.BanEntry;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class MockBanListTest
+class MockBanListTest
 {
 	private MockBanList banList;
-	
-	@Before
-	public void setUp() throws Exception
+
+	@BeforeEach
+	void setUp() throws Exception
 	{
 		banList = new MockBanList();
 	}
-	
+
 	@Test
-	public void isBanned_NotBanned_False()
+	void isBanned_NotBanned_False()
 	{
 		assertFalse(banList.isBanned("target"));
 	}
-	
+
 	@Test
-	public void isBanned_Banned_True()
+	void isBanned_Banned_True()
 	{
 		banList.addBan("target", "reason", new Date(), "source");
 		assertTrue(banList.isBanned("target"));
 	}
-	
+
 	@Test
-	public void isBanned_PardonedPerson_False()
+	void isBanned_PardonedPerson_False()
 	{
 		banList.addBan("target", "reason", new Date(), "source");
 		banList.pardon("target");
 		assertFalse(banList.isBanned("target"));
 	}
-	
+
 	@Test
-	public void getBanEntries_OnePersonBanned_SetOfOnePerson()
+	void getBanEntries_OnePersonBanned_SetOfOnePerson()
 	{
 		banList.addBan("target", "reason", new Date(), "source");
 		Set<BanEntry> entries = banList.getBanEntries();
 		assertEquals(1, entries.size());
 		assertEquals("target", entries.iterator().next().getTarget());
 	}
-	
+
 	@Test
-	public void getBanEntry_NotBannedPerson_Null()
+	void getBanEntry_NotBannedPerson_Null()
 	{
 		assertNull(banList.getBanEntry("target"));
 	}
-	
+
 	@Test
-	public void getBanEntry_BannedPerson_AllValuesCorrect()
+	void getBanEntry_BannedPerson_AllValuesCorrect()
 	{
 		String target = "target";
 		String reason = "reason";
@@ -69,14 +73,5 @@ public class MockBanListTest
 		assertEquals(date, banList.getBanEntry(target).getExpiration());
 		assertEquals(source, banList.getBanEntry(target).getSource());
 	}
-	
+
 }
-
-
-
-
-
-
-
-
-

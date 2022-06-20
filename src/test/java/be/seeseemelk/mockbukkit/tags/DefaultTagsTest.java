@@ -1,38 +1,38 @@
 package be.seeseemelk.mockbukkit.tags;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.bukkit.Material;
 import org.bukkit.Tag;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 
 /**
  * These are just some example tests for common tags to ensure their normal functionality has not been disturbed.
- * 
+ *
  * @author TheBusyBiscuit
  *
  */
-public class DefaultTagsTest
+class DefaultTagsTest
 {
 
-	@Before
-	public void setUp()
+	@BeforeEach
+	void setUp()
 	{
 		MockBukkit.mock();
 	}
 
-	@After
-	public void tearDown()
+	@AfterEach
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
 
 	@Test
-	public void testSaplings()
+	void testSaplings()
 	{
 		assertTrue(Tag.SAPLINGS.isTagged(Material.OAK_SAPLING));
 		assertTrue(Tag.SAPLINGS.isTagged(Material.DARK_OAK_SAPLING));
@@ -40,7 +40,7 @@ public class DefaultTagsTest
 	}
 
 	@Test
-	public void testLogs()
+	void testLogs()
 	{
 		assertTrue(Tag.LOGS.isTagged(Material.ACACIA_LOG));
 		assertTrue(Tag.LOGS.isTagged(Material.BIRCH_LOG));
@@ -49,14 +49,14 @@ public class DefaultTagsTest
 	}
 
 	@Test
-	public void testIce()
+	void testIce()
 	{
 		assertTrue(Tag.ICE.isTagged(Material.ICE));
 		assertTrue(Tag.ICE.isTagged(Material.BLUE_ICE));
 	}
 
 	@Test
-	public void testBoats()
+	void testBoats()
 	{
 		assertTrue(Tag.ITEMS_BOATS.isTagged(Material.OAK_BOAT));
 		assertTrue(Tag.ITEMS_BOATS.isTagged(Material.BIRCH_BOAT));

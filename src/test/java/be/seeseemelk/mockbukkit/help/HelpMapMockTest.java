@@ -1,66 +1,63 @@
 package be.seeseemelk.mockbukkit.help;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.WorldMock;
-import org.bukkit.World;
-import org.bukkit.command.defaults.VersionCommand;
-import org.bukkit.help.HelpMap;
-import org.bukkit.help.HelpTopic;
-import org.bukkit.help.IndexHelpTopic;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Collections;
 
-import static org.junit.Assert.assertSame;
+import org.bukkit.command.defaults.VersionCommand;
+import org.bukkit.help.HelpTopic;
+import org.bukkit.help.IndexHelpTopic;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class HelpMapMockTest
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.ServerMock;
+
+class HelpMapMockTest
 {
 
-    private ServerMock server;
-    private World world;
-    private HelpMap helpMap;
+	private ServerMock server;
+	private HelpMapMock helpMap;
 
-    @Before
-    public void setUp()
-    {
-        server = MockBukkit.mock();
-        world = new WorldMock();
-        helpMap = server.getHelpMap();
-    }
+	@BeforeEach
+	void setUp()
+	{
+		server = MockBukkit.mock();
+		helpMap = server.getHelpMap();
+	}
 
-    @After
-    public void tearDown()
-    {
-        MockBukkit.unmock();
-    }
+	@AfterEach
+	void tearDown()
+	{
+		MockBukkit.unmock();
+	}
 
-    @Test
-    public void helpmap_lookup()
-    {
-        IndexHelpTopic indexHelpTopic = new IndexHelpTopic("test", "short text", "perm", Collections.emptyList());
-        helpMap.addTopic(indexHelpTopic);
+	@Test
+	void helpmap_lookup()
+	{
+		IndexHelpTopic indexHelpTopic = new IndexHelpTopic("test", "short text", "perm", Collections.emptyList());
+		helpMap.addTopic(indexHelpTopic);
 
-        //test lookup by help topic name
-        HelpTopic test = helpMap.getHelpTopic("test");
-        assertSame(indexHelpTopic, test);
+		// test lookup by help topic name
+		HelpTopic test = helpMap.getHelpTopic("test");
+		assertSame(indexHelpTopic, test);
 
-    }
+	}
 
-    @Test
-    public void helpmap_factory_registration()
-    {
-        helpMap.registerHelpTopicFactory(VersionCommand.class,
-                command -> new IndexHelpTopic("","short text", "perm", Collections.emptyList()));
-    }
+	@Test
+	void helpmap_factory_registration()
+	{
+		helpMap.registerHelpTopicFactory(VersionCommand.class,
+		                                 command -> new IndexHelpTopic("", "short text", "perm", Collections.emptyList()));
+	}
 
-    @Test(expected = IllegalArgumentException.class)
-    public void helpmap_factory_registration_incorrect_type()
-    {
-        helpMap.registerHelpTopicFactory(Object.class,
-                command -> new IndexHelpTopic("","short text", "perm", Collections.emptyList()));
-    }
+	@Test
+	void helpmap_factory_registration_incorrect_type()
+	{
+		assertThrows(IllegalArgumentException.class, () -> helpMap.registerHelpTopicFactory(Object.class,
+		             command -> new IndexHelpTopic("", "short text", "perm", Collections.emptyList())));
+	}
 
 }

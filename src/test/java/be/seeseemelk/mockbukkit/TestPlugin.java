@@ -1,6 +1,8 @@
 package be.seeseemelk.mockbukkit;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 
@@ -15,6 +17,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class TestPlugin extends JavaPlugin implements Listener
 {
@@ -44,25 +48,25 @@ public class TestPlugin extends JavaPlugin implements Listener
 		super(loader, description, dataFolder, file);
 		extra = null;
 	}
-	
+
 	protected TestPlugin(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file, Number extra)
 	{
 		super(loader, description, dataFolder, file);
 		this.extra = extra;
 	}
-	
+
 	@Override
 	public void onEnable()
 	{
 		onEnableExecuted = true;
 	}
-	
+
 	@Override
 	public void onDisable()
 	{
 		onDisableExecuted = true;
 	}
-	
+
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
 	{
@@ -72,12 +76,22 @@ public class TestPlugin extends JavaPlugin implements Listener
 		this.commandArguments = args;
 		return commandReturns;
 	}
-	
+
+	@Override
+	public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args)
+	{
+		if (args.length == 1)
+		{
+			return Arrays.asList("Tab", "Complete", "Results");
+		}
+		return Arrays.asList("Other", "Results");
+	}
+
 	public void unannotatedEventHandler(PlayerInteractEvent event)
 	{
 		unannotatedPlayerInteractEventExecuted = true;
 	}
-	
+
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent event)
 	{
@@ -113,7 +127,8 @@ public class TestPlugin extends JavaPlugin implements Listener
 				barrier.await();
 			}
 			catch (InterruptedException | BrokenBarrierException e)
-			{}
+			{
+			}
 		}
 	}
 }

@@ -1,5 +1,107 @@
 package be.seeseemelk.mockbukkit;
 
+import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
+import be.seeseemelk.mockbukkit.boss.BossBarMock;
+import be.seeseemelk.mockbukkit.boss.KeyedBossBarMock;
+import be.seeseemelk.mockbukkit.command.CommandResult;
+import be.seeseemelk.mockbukkit.command.ConsoleCommandSenderMock;
+import be.seeseemelk.mockbukkit.command.MessageTarget;
+import be.seeseemelk.mockbukkit.command.MockCommandMap;
+import be.seeseemelk.mockbukkit.enchantments.EnchantmentsMock;
+import be.seeseemelk.mockbukkit.entity.EntityMock;
+import be.seeseemelk.mockbukkit.entity.PlayerMock;
+import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
+import be.seeseemelk.mockbukkit.help.HelpMapMock;
+import be.seeseemelk.mockbukkit.inventory.BarrelInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.ChestInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.DispenserInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.DropperInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.GrindstoneInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.HopperInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.InventoryMock;
+import be.seeseemelk.mockbukkit.inventory.ItemFactoryMock;
+import be.seeseemelk.mockbukkit.inventory.LecternInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.ShulkerBoxInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
+import be.seeseemelk.mockbukkit.map.MapViewMock;
+import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
+import be.seeseemelk.mockbukkit.potion.MockPotionEffectType;
+import be.seeseemelk.mockbukkit.profile.PlayerProfileMock;
+import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
+import be.seeseemelk.mockbukkit.scoreboard.ScoreboardManagerMock;
+import be.seeseemelk.mockbukkit.services.ServicesManagerMock;
+import be.seeseemelk.mockbukkit.tags.TagRegistry;
+import be.seeseemelk.mockbukkit.tags.TagWrapperMock;
+import be.seeseemelk.mockbukkit.tags.TagsMock;
+import com.destroystokyo.paper.entity.ai.MobGoals;
+import com.google.common.base.Preconditions;
+import io.papermc.paper.datapack.DatapackManager;
+import net.kyori.adventure.audience.Audience;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
+import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import net.md_5.bungee.api.chat.BaseComponent;
+import org.apache.commons.lang3.StringUtils;
+import org.bukkit.BanEntry;
+import org.bukkit.BanList;
+import org.bukkit.BanList.Type;
+import org.bukkit.Bukkit;
+import org.bukkit.Color;
+import org.bukkit.GameMode;
+import org.bukkit.Keyed;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.Server;
+import org.bukkit.StructureType;
+import org.bukkit.Tag;
+import org.bukkit.Warning.WarningState;
+import org.bukkit.World;
+import org.bukkit.WorldBorder;
+import org.bukkit.WorldCreator;
+import org.bukkit.advancement.Advancement;
+import org.bukkit.block.data.BlockData;
+import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarFlag;
+import org.bukkit.boss.BarStyle;
+import org.bukkit.boss.BossBar;
+import org.bukkit.boss.KeyedBossBar;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.command.PluginCommand;
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.configuration.serialization.ConfigurationSerialization;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.HumanEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.SpawnCategory;
+import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.server.MapInitializeEvent;
+import org.bukkit.generator.ChunkGenerator.ChunkData;
+import org.bukkit.inventory.InventoryHolder;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.Merchant;
+import org.bukkit.inventory.Recipe;
+import org.bukkit.loot.LootTable;
+import org.bukkit.map.MapView;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.messaging.Messenger;
+import org.bukkit.plugin.messaging.StandardMessenger;
+import org.bukkit.potion.PotionBrewer;
+import org.bukkit.potion.PotionEffectType;
+import org.bukkit.structure.StructureManager;
+import org.bukkit.util.CachedServerIcon;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -15,131 +117,51 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.CountDownLatch;
 import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-import be.seeseemelk.mockbukkit.help.HelpMapMock;
-import org.apache.commons.lang.Validate;
-import org.bukkit.BanEntry;
-import org.bukkit.BanList;
-import org.bukkit.BanList.Type;
-import org.bukkit.Bukkit;
-import org.bukkit.Color;
-import org.bukkit.GameMode;
-import org.bukkit.Keyed;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.Server;
-import org.bukkit.StructureType;
-import org.bukkit.Tag;
-import org.bukkit.UnsafeValues;
-import org.bukkit.Warning.WarningState;
-import org.bukkit.World;
-import org.bukkit.WorldCreator;
-import org.bukkit.advancement.Advancement;
-import org.bukkit.block.data.BlockData;
-import org.bukkit.boss.BarColor;
-import org.bukkit.boss.BarFlag;
-import org.bukkit.boss.BarStyle;
-import org.bukkit.boss.BossBar;
-import org.bukkit.boss.KeyedBossBar;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
-import org.bukkit.command.PluginCommand;
-import org.bukkit.configuration.serialization.ConfigurationSerialization;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.HumanEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.generator.ChunkGenerator.ChunkData;
-import org.bukkit.help.HelpMap;
-import org.bukkit.inventory.InventoryHolder;
-import org.bukkit.inventory.ItemFactory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.Merchant;
-import org.bukkit.inventory.Recipe;
-import org.bukkit.loot.LootTable;
-import org.bukkit.map.MapView;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.ServicesManager;
-import org.bukkit.plugin.messaging.Messenger;
-import org.bukkit.potion.PotionEffectType;
-import org.bukkit.util.CachedServerIcon;
-import org.jetbrains.annotations.NotNull;
-
-import be.seeseemelk.mockbukkit.boss.BossBarMock;
-import be.seeseemelk.mockbukkit.boss.KeyedBossBarMock;
-import be.seeseemelk.mockbukkit.command.CommandResult;
-import be.seeseemelk.mockbukkit.command.ConsoleCommandSenderMock;
-import be.seeseemelk.mockbukkit.command.MessageTarget;
-import be.seeseemelk.mockbukkit.enchantments.EnchantmentsMock;
-import be.seeseemelk.mockbukkit.entity.EntityMock;
-import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
-import be.seeseemelk.mockbukkit.entity.PlayerMock;
-import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
-import be.seeseemelk.mockbukkit.inventory.BarrelInventoryMock;
-import be.seeseemelk.mockbukkit.inventory.ChestInventoryMock;
-import be.seeseemelk.mockbukkit.inventory.DispenserInventoryMock;
-import be.seeseemelk.mockbukkit.inventory.DropperInventoryMock;
-import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
-import be.seeseemelk.mockbukkit.inventory.HopperInventoryMock;
-import be.seeseemelk.mockbukkit.inventory.InventoryMock;
-import be.seeseemelk.mockbukkit.inventory.ItemFactoryMock;
-import be.seeseemelk.mockbukkit.inventory.LecternInventoryMock;
-import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
-import be.seeseemelk.mockbukkit.inventory.ShulkerBoxInventoryMock;
-import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
-import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
-import be.seeseemelk.mockbukkit.potion.MockPotionEffectType;
-import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
-import be.seeseemelk.mockbukkit.scoreboard.ScoreboardManagerMock;
-import be.seeseemelk.mockbukkit.tags.TagRegistry;
-import be.seeseemelk.mockbukkit.tags.TagWrapperMock;
-import be.seeseemelk.mockbukkit.tags.TagsMock;
-
-@SuppressWarnings("deprecation")
-public class ServerMock implements Server
+public class ServerMock extends Server.Spigot implements Server
 {
-	private static final String BUKKIT_VERSION = "1.16.2";
-	private static final String JOIN_MESSAGE = "%s has joined the server.";
 
-	private final Logger logger;
-	private final Thread mainThread;
+	private static final String JOIN_MESSAGE = "%s has joined the server.";
+	private static final Component MOTD = Component.text("A Minecraft Server");
+
+	private final Properties buildProperties = new Properties();
+	private final Logger logger = Logger.getLogger("ServerMock");
+	private final Thread mainThread = Thread.currentThread();
 	private final MockUnsafeValues unsafe = new MockUnsafeValues();
 	private final Map<String, TagRegistry> materialTags = new HashMap<>();
-
-	private final List<PlayerMock> players = new ArrayList<>();
-	private final Set<OfflinePlayer> offlinePlayers = new HashSet<>();
 	private final Set<EntityMock> entities = new HashSet<>();
 	private final List<World> worlds = new ArrayList<>();
 	private final List<Recipe> recipes = new LinkedList<>();
 	private final Map<NamespacedKey, KeyedBossBarMock> bossBars = new HashMap<>();
-	private final ItemFactory factory = new ItemFactoryMock();
+	private final ItemFactoryMock factory = new ItemFactoryMock();
 	private final PlayerMockFactory playerFactory = new PlayerMockFactory(this);
 	private final PluginManagerMock pluginManager = new PluginManagerMock(this);
 	private final ScoreboardManagerMock scoreboardManager = new ScoreboardManagerMock();
 	private final BukkitSchedulerMock scheduler = new BukkitSchedulerMock();
-	private final PlayerList playerList = new PlayerList();
-	private ConsoleCommandSender consoleSender;
+	private final ServicesManagerMock servicesManager = new ServicesManagerMock();
+	private final MockPlayerList playerList = new MockPlayerList();
+	private final MockCommandMap commandMap = new MockCommandMap(this);
+	private final HelpMapMock helpMap = new HelpMapMock();
+	private final StandardMessenger messenger = new StandardMessenger();
+	private final Map<Integer, MapViewMock> mapViews = new HashMap<>();
+	private int nextMapId = 1;
+
 	private GameMode defaultGameMode = GameMode.SURVIVAL;
-	private MockCommandMap commandMap;
-	private HelpMapMock helpMap;
+	private ConsoleCommandSender consoleSender;
+	private int spawnRadius = 16;
+	private WarningState warningState = WarningState.DEFAULT;
 
 	public ServerMock()
 	{
-		mainThread = Thread.currentThread();
-		logger = Logger.getLogger("ServerMock");
-		commandMap = new MockCommandMap(this);
-		helpMap = new HelpMapMock();
 		ServerMock.registerSerializables();
 
 		// Register default Minecraft Potion Effect Types
@@ -156,7 +178,18 @@ public class ServerMock implements Server
 		{
 			logger.warning("Could not load file logger.properties");
 		}
+
+		try
+		{
+			buildProperties.load(ClassLoader.getSystemResourceAsStream("build.properties"));
+		}
+		catch (IOException | NullPointerException e)
+		{
+			logger.warning("Could not load build properties");
+		}
+
 		logger.setLevel(Level.ALL);
+
 	}
 
 	/**
@@ -171,24 +204,13 @@ public class ServerMock implements Server
 	}
 
 	/**
-	 * Checks if we are running a method on the main thread. If not, a `ThreadAccessException` is thrown.
-	 */
-	public void assertMainThread()
-	{
-		if (!isOnMainThread())
-		{
-			throw new ThreadAccessException("The Bukkit API was accessed from asynchronous code.");
-		}
-	}
-
-	/**
 	 * Registers an entity so that the server can track it more easily. Should only be used internally.
 	 *
 	 * @param entity The entity to register
 	 */
-	public void registerEntity(EntityMock entity)
+	public void registerEntity(@NotNull EntityMock entity)
 	{
-		assertMainThread();
+		AsyncCatcher.catchOp("entity add");
 		entities.add(entity);
 	}
 
@@ -197,6 +219,7 @@ public class ServerMock implements Server
 	 *
 	 * @return A set of entities that exist on this server instance.
 	 */
+	@NotNull
 	public Set<EntityMock> getEntities()
 	{
 		return Collections.unmodifiableSet(entities);
@@ -209,11 +232,30 @@ public class ServerMock implements Server
 	 */
 	public void addPlayer(PlayerMock player)
 	{
-		assertMainThread();
-		players.add(player);
-		offlinePlayers.add(player);
-		PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(player,
-				String.format(JOIN_MESSAGE, player.getDisplayName()));
+		AsyncCatcher.catchOp("player add");
+		playerList.addPlayer(player);
+
+		CountDownLatch conditionLatch = new CountDownLatch(1);
+
+		AsyncPlayerPreLoginEvent preLoginEvent = new AsyncPlayerPreLoginEvent(player.getName(),
+				player.getAddress().getAddress(), player.getUniqueId());
+		getPluginManager().callEventAsynchronously(preLoginEvent, (e) -> conditionLatch.countDown());
+
+		try
+		{
+			conditionLatch.await();
+		}
+		catch (InterruptedException e)
+		{
+			getLogger().severe("Interrupted while waiting for AsyncPlayerPreLoginEvent! " +
+					(StringUtils.isEmpty(e.getMessage()) ? "" : e.getMessage()));
+			Thread.currentThread().interrupt();
+		}
+
+		Component joinMessage = MiniMessage.miniMessage()
+				.deserialize("<name> has joined the Server!", Placeholder.component("name", player.displayName()));
+        
+		PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(player, joinMessage);
 		Bukkit.getPluginManager().callEvent(playerJoinEvent);
 
 		player.setLastPlayed(getCurrentServerTime());
@@ -222,12 +264,12 @@ public class ServerMock implements Server
 
 	/**
 	 * Creates a random player and adds it.
-	 * 
+	 *
 	 * @return The player that was added.
 	 */
 	public PlayerMock addPlayer()
 	{
-		assertMainThread();
+		AsyncCatcher.catchOp("player add");
 		PlayerMock player = playerFactory.createRandomPlayer();
 		addPlayer(player);
 		return player;
@@ -235,13 +277,13 @@ public class ServerMock implements Server
 
 	/**
 	 * Creates a player with a given name and adds it.
-	 * 
+	 *
 	 * @param name The name to give to the player.
 	 * @return The added player.
 	 */
 	public PlayerMock addPlayer(String name)
 	{
-		assertMainThread();
+		AsyncCatcher.catchOp("player add");
 		PlayerMock player = new PlayerMock(this, name);
 		addPlayer(player);
 		return player;
@@ -255,8 +297,8 @@ public class ServerMock implements Server
 	 */
 	public void setPlayers(int num)
 	{
-		assertMainThread();
-		players.clear();
+		AsyncCatcher.catchOp("set players");
+		playerList.clearOnlinePlayers();
 
 		for (int i = 0; i < num; i++)
 			addPlayer();
@@ -271,14 +313,18 @@ public class ServerMock implements Server
 	 */
 	public void setOfflinePlayers(int num)
 	{
-		assertMainThread();
-		offlinePlayers.clear();
-		offlinePlayers.addAll(players);
+		AsyncCatcher.catchOp("set offline players");
+		playerList.clearOfflinePlayers();
+
+		for (PlayerMock player : getOnlinePlayers())
+		{
+			playerList.addPlayer(player);
+		}
 
 		for (int i = 0; i < num; i++)
 		{
 			OfflinePlayer player = playerFactory.createRandomOfflinePlayer();
-			offlinePlayers.add(player);
+			playerList.addOfflinePlayer(player);
 		}
 	}
 
@@ -290,14 +336,22 @@ public class ServerMock implements Server
 	 */
 	public PlayerMock getPlayer(int num)
 	{
-		if (num < 0 || num >= players.size())
-		{
-			throw new ArrayIndexOutOfBoundsException();
-		}
-		else
-		{
-			return players.get(num);
-		}
+		return playerList.getPlayer(num);
+	}
+
+	/**
+	 * Returns the {@link MockPlayerList} instance that is used by this server.
+	 * @return The {@link MockPlayerList} instance.
+	 */
+	public @NotNull MockPlayerList getPlayerList()
+	{
+		return playerList;
+	}
+
+	@Override
+	public @Nullable UUID getPlayerUniqueId(@NotNull String playerName)
+	{
+		return playerList.getOfflinePlayer(playerName).getUniqueId();
 	}
 
 	/**
@@ -308,7 +362,7 @@ public class ServerMock implements Server
 	 */
 	public WorldMock addSimpleWorld(String name)
 	{
-		assertMainThread();
+		AsyncCatcher.catchOp("world creation");
 		WorldMock world = new WorldMock();
 		world.setName(name);
 		worlds.add(world);
@@ -322,7 +376,7 @@ public class ServerMock implements Server
 	 */
 	public void addWorld(WorldMock world)
 	{
-		assertMainThread();
+		AsyncCatcher.catchOp("world add");
 		worlds.add(world);
 	}
 
@@ -335,7 +389,6 @@ public class ServerMock implements Server
 	 */
 	public CommandResult executeConsole(Command command, String... args)
 	{
-		assertMainThread();
 		return execute(command, getConsoleSender(), args);
 	}
 
@@ -348,8 +401,7 @@ public class ServerMock implements Server
 	 */
 	public CommandResult executeConsole(String command, String... args)
 	{
-		assertMainThread();
-		return executeConsole(getPluginCommand(command), args);
+		return executeConsole(getCommandMap().getCommand(command), args);
 	}
 
 	/**
@@ -361,10 +413,10 @@ public class ServerMock implements Server
 	 */
 	public CommandResult executePlayer(Command command, String... args)
 	{
-		assertMainThread();
+		AsyncCatcher.catchOp("command dispatch");
 
-		if (!players.isEmpty())
-			return execute(command, players.get(0), args);
+		if (playerList.isSomeoneOnline())
+			return execute(command, getPlayer(0), args);
 		else
 			throw new IllegalStateException("Need at least one player to run the command");
 	}
@@ -378,8 +430,7 @@ public class ServerMock implements Server
 	 */
 	public CommandResult executePlayer(String command, String... args)
 	{
-		assertMainThread();
-		return executePlayer(getPluginCommand(command), args);
+		return executePlayer(getCommandMap().getCommand(command), args);
 	}
 
 	/**
@@ -392,9 +443,12 @@ public class ServerMock implements Server
 	 */
 	public CommandResult execute(Command command, CommandSender sender, String... args)
 	{
-		assertMainThread();
+		AsyncCatcher.catchOp("command dispatch");
+
 		if (!(sender instanceof MessageTarget))
+		{
 			throw new IllegalArgumentException("Only a MessageTarget can be the sender of the command");
+		}
 
 		boolean status = command.execute(sender, command.getName(), args);
 		return new CommandResult(status, (MessageTarget) sender);
@@ -410,8 +464,8 @@ public class ServerMock implements Server
 	 */
 	public CommandResult execute(String command, CommandSender sender, String... args)
 	{
-		assertMainThread();
-		return execute(getPluginCommand(command), sender, args);
+		AsyncCatcher.catchOp("command dispatch");
+		return execute(getCommandMap().getCommand(command), sender, args);
 	}
 
 	@Override
@@ -421,84 +475,69 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public String getVersion()
+	public @NotNull String getVersion()
 	{
-		return getBukkitVersion() + "-MockBukkit";
+		return String.format("MockBukkit (MC: %s)", getBukkitVersion());
 	}
 
 	@Override
-	public String getBukkitVersion()
+	public @NotNull String getBukkitVersion()
 	{
-		return BUKKIT_VERSION;
+		return getMinecraftVersion();
+	}
+
+	@Override
+	public @NotNull String getMinecraftVersion()
+	{
+		String apiVersion;
+		if (buildProperties == null || (apiVersion = buildProperties.getProperty("full-api-version")) == null)
+		{
+			throw new IllegalStateException("Minecraft version could not be determined");
+		}
+		return apiVersion.split("-")[0];
 	}
 
 	@Override
 	public Collection<? extends PlayerMock> getOnlinePlayers()
 	{
-		assertMainThread();
-		return players;
+		return playerList.getOnlinePlayers();
 	}
 
 	@Override
 	public OfflinePlayer[] getOfflinePlayers()
 	{
-		return offlinePlayers.toArray(new OfflinePlayer[0]);
+		return playerList.getOfflinePlayers();
+	}
+
+	@Override
+	public @Nullable OfflinePlayer getOfflinePlayerIfCached(@NotNull String name)
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public Player getPlayer(String name)
 	{
-		Player player = getPlayerExact(name);
-		if (player != null)
-			return player;
-
-		final String lowercase = name.toLowerCase(Locale.ENGLISH);
-		int delta = Integer.MAX_VALUE;
-		for (Player namedPlayer : players)
-		{
-			if (namedPlayer.getName().toLowerCase(Locale.ENGLISH).startsWith(lowercase))
-			{
-				int currentDelta = Math.abs(namedPlayer.getName().length() - lowercase.length());
-				if (currentDelta < delta)
-				{
-					delta = currentDelta;
-					player = namedPlayer;
-				}
-			}
-		}
-		return player;
+		return playerList.getPlayer(name);
 	}
 
 	@Override
 	public Player getPlayerExact(String name)
 	{
-		assertMainThread();
-		return this.players.stream().filter(
-				playerMock -> playerMock.getName().toLowerCase(Locale.ENGLISH).equals(name.toLowerCase(Locale.ENGLISH)))
-				.findFirst().orElse(null);
+		return playerList.getPlayerExact(name);
 	}
 
 	@Override
 	public List<Player> matchPlayer(String name)
 	{
-		assertMainThread();
-		return players.stream().filter(
-				player -> player.getName().toLowerCase(Locale.ENGLISH).startsWith(name.toLowerCase(Locale.ENGLISH)))
-				.collect(Collectors.toList());
+		return playerList.matchPlayer(name);
 	}
 
 	@Override
 	public Player getPlayer(UUID id)
 	{
-		assertMainThread();
-		for (Player player : getOnlinePlayers())
-		{
-			if (id.equals(player.getUniqueId()))
-			{
-				return player;
-			}
-		}
-		return null;
+		return playerList.getPlayer(id);
 	}
 
 	@Override
@@ -507,42 +546,17 @@ public class ServerMock implements Server
 		return pluginManager;
 	}
 
-	/**
-	 * Checks if the label given is a possible label of the command.
-	 *
-	 * @param command The command to check against.
-	 * @param label   The label that should be checked if it's a label for the command.
-	 * @return {@code true} if the label is a label of the command, {@code false} if it's not.
-	 */
-	private boolean isLabelOfCommand(PluginCommand command, String label)
+	@NotNull
+	public MockCommandMap getCommandMap()
 	{
-		assertMainThread();
-		if (label.equals(command.getName()))
-		{
-			return true;
-		}
-		for (String alias : command.getAliases())
-		{
-			if (label.equals(alias))
-			{
-				return true;
-			}
-		}
-		return false;
+		return commandMap;
 	}
 
 	@Override
 	public PluginCommand getPluginCommand(String name)
 	{
-		assertMainThread();
-		for (PluginCommand command : getPluginManager().getCommands())
-		{
-			if (isLabelOfCommand(command, name))
-			{
-				return command;
-			}
-		}
-		return null;
+		Command command = getCommandMap().getCommand(name);
+		return command instanceof PluginCommand ? (PluginCommand) command : null;
 	}
 
 	@Override
@@ -561,10 +575,17 @@ public class ServerMock implements Server
 		return consoleSender;
 	}
 
+	@Override
+	public @NotNull CommandSender createCommandSender(@NotNull Consumer<? super Component> feedback)
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@NotNull
+	@Deprecated
 	public InventoryMock createInventory(InventoryHolder owner, InventoryType type, String title, int size)
 	{
-		assertMainThread();
-
 		if (!type.isCreatable())
 		{
 			throw new IllegalArgumentException("Inventory Type is not creatable!");
@@ -598,7 +619,7 @@ public class ServerMock implements Server
 		case LECTERN:
 			return new LecternInventoryMock(owner);
 		case GRINDSTONE:
-			// TODO: This Inventory Type needs to be implemented
+			return new GrindstoneInventoryMock(owner);
 		case STONECUTTER:
 			// TODO: This Inventory Type needs to be implemented
 		case CARTOGRAPHY:
@@ -623,6 +644,12 @@ public class ServerMock implements Server
 			// TODO: This Inventory Type needs to be implemented
 		case BREWING:
 			// TODO: This Inventory Type needs to be implemented
+		case CRAFTING:
+			// TODO: This Inventory Type needs to be implemented
+		case CREATIVE:
+			// TODO: This Inventory Type needs to be implemented
+		case MERCHANT:
+			// TODO: This Inventory Type needs to be implemented
 		default:
 			throw new UnimplementedOperationException("Inventory type not yet supported");
 		}
@@ -635,6 +662,14 @@ public class ServerMock implements Server
 	}
 
 	@Override
+	public @NotNull InventoryMock createInventory(@Nullable InventoryHolder owner, @NotNull InventoryType type, @NotNull Component title)
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@Deprecated
 	public InventoryMock createInventory(InventoryHolder owner, InventoryType type, String title)
 	{
 		return createInventory(owner, type, title, -1);
@@ -647,13 +682,28 @@ public class ServerMock implements Server
 	}
 
 	@Override
+	public @NotNull InventoryMock createInventory(@Nullable InventoryHolder owner, int size, @NotNull Component title) throws IllegalArgumentException
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@Deprecated
 	public InventoryMock createInventory(InventoryHolder owner, int size, String title)
 	{
 		return createInventory(owner, InventoryType.CHEST, title, size);
 	}
 
 	@Override
-	public ItemFactory getItemFactory()
+	public Merchant createMerchant(@Nullable Component title)
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull ItemFactoryMock getItemFactory()
 	{
 		return factory;
 	}
@@ -677,6 +727,21 @@ public class ServerMock implements Server
 	}
 
 	@Override
+	public @Nullable World getWorld(@NotNull NamespacedKey worldKey)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@NotNull
+	@Override
+	public WorldBorder createWorldBorder()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public BukkitSchedulerMock getScheduler()
 	{
 		return scheduler;
@@ -689,6 +754,12 @@ public class ServerMock implements Server
 	}
 
 	@Override
+	public void setMaxPlayers(int maxPlayers)
+	{
+		playerList.setMaxPlayers(maxPlayers);
+	}
+
+	@Override
 	public Set<String> getIPBans()
 	{
 		return this.playerList.getIPBans().getBanEntries().stream().map(BanEntry::getTarget)
@@ -698,38 +769,29 @@ public class ServerMock implements Server
 	@Override
 	public void banIP(String address)
 	{
-		assertMainThread();
 		this.playerList.getIPBans().addBan(address, null, null, null);
 	}
 
 	@Override
 	public void unbanIP(String address)
 	{
-		assertMainThread();
 		this.playerList.getIPBans().pardon(address);
 	}
 
 	@Override
-	public BanList getBanList(Type type)
+	public @NotNull BanList getBanList(@NotNull Type type)
 	{
-		switch (type)
-		{
-		case IP:
-			return playerList.getIPBans();
-		case NAME:
-		default:
-			return playerList.getProfileBans();
-		}
+		return switch (type)
+				{
+					case IP -> playerList.getIPBans();
+					case NAME -> playerList.getProfileBans();
+				};
 	}
 
 	@Override
 	public Set<OfflinePlayer> getOperators()
 	{
-		assertMainThread();
-		final Set<OfflinePlayer> allPlayers = new HashSet<>();
-		allPlayers.addAll(offlinePlayers);
-		allPlayers.addAll(players);
-		return allPlayers.stream().filter(OfflinePlayer::isOp).collect(Collectors.toSet());
+		return playerList.getOperators();
 	}
 
 	@Override
@@ -741,17 +803,69 @@ public class ServerMock implements Server
 	@Override
 	public void setDefaultGameMode(GameMode mode)
 	{
-		assertMainThread();
 		this.defaultGameMode = mode;
 	}
 
 	@Override
+	@Deprecated
 	public int broadcastMessage(String message)
 	{
-		assertMainThread();
+		Collection<? extends PlayerMock> players = getOnlinePlayers();
+
 		for (Player player : players)
+		{
 			player.sendMessage(message);
+		}
+
 		return players.size();
+	}
+
+	@Override
+	@Deprecated
+	public int broadcast(String message, String permission)
+	{
+		Collection<? extends PlayerMock> players = getOnlinePlayers();
+		int count = 0;
+
+		for (Player player : players)
+		{
+			if (player.hasPermission(permission))
+			{
+				player.sendMessage(message);
+				count++;
+			}
+		}
+		return count;
+	}
+
+	@Override
+	public int broadcast(@NotNull Component message)
+	{
+		Collection<? extends PlayerMock> players = getOnlinePlayers();
+
+		for (Player player : players)
+		{
+			player.sendMessage(message);
+		}
+
+		return players.size();
+	}
+
+	@Override
+	public int broadcast(@NotNull Component message, @NotNull String permission)
+	{
+		Collection<? extends PlayerMock> players = getOnlinePlayers();
+		int count = 0;
+
+		for (Player player : players)
+		{
+			if (player.hasPermission(permission))
+			{
+				player.sendMessage(message);
+				count++;
+			}
+		}
+		return count;
 	}
 
 	/**
@@ -765,7 +879,6 @@ public class ServerMock implements Server
 	@Override
 	public boolean addRecipe(Recipe recipe)
 	{
-		assertMainThread();
 		recipes.add(recipe);
 		return true;
 	}
@@ -773,9 +886,8 @@ public class ServerMock implements Server
 	@Override
 	public List<Recipe> getRecipesFor(@NotNull ItemStack item)
 	{
-		assertMainThread();
-
-		return recipes.stream().filter(recipe -> {
+		return recipes.stream().filter(recipe ->
+		{
 			ItemStack result = recipe.getResult();
 			// Amount is explicitly ignored here
 			return result.getType() == item.getType() && result.getItemMeta().equals(item.getItemMeta());
@@ -785,8 +897,6 @@ public class ServerMock implements Server
 	@Override
 	public Recipe getRecipe(NamespacedKey key)
 	{
-		assertMainThread();
-
 		for (Recipe recipe : recipes)
 		{
 			// Seriously why can't the Recipe interface itself just extend Keyed...
@@ -799,11 +909,25 @@ public class ServerMock implements Server
 		return null;
 	}
 
+	@Nullable
+	@Override
+	public Recipe getCraftingRecipe(@NotNull ItemStack[] craftingMatrix, @NotNull World world)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@NotNull
+	@Override
+	public ItemStack craftItem(@NotNull ItemStack[] craftingMatrix, @NotNull World world, @NotNull Player player)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 	@Override
 	public boolean removeRecipe(NamespacedKey key)
 	{
-		assertMainThread();
-
 		Iterator<Recipe> iterator = recipeIterator();
 
 		while (iterator.hasNext())
@@ -824,43 +948,80 @@ public class ServerMock implements Server
 	@Override
 	public Iterator<Recipe> recipeIterator()
 	{
-		assertMainThread();
 		return recipes.iterator();
 	}
 
 	@Override
 	public void clearRecipes()
 	{
-		assertMainThread();
 		recipes.clear();
 	}
 
 	@Override
 	public boolean dispatchCommand(CommandSender sender, String commandLine)
 	{
-		assertMainThread();
+		AsyncCatcher.catchOp("command dispatch");
 		String[] commands = commandLine.split(" ");
 		String commandLabel = commands[0];
 		String[] args = Arrays.copyOfRange(commands, 1, commands.length);
 		Command command = getCommandMap().getCommand(commandLabel);
+
 		if (command != null)
+		{
 			return command.execute(sender, commandLabel, args);
+		}
 		else
+		{
 			return false;
+		}
+	}
+
+	public List<String> getCommandTabComplete(CommandSender sender, String commandLine)
+	{
+		AsyncCatcher.catchOp("command tabcomplete");
+		int idx = commandLine.indexOf(' ');
+		String commandLabel = commandLine.substring(0, idx);
+		String[] args = commandLine.substring(idx + 1).split(" ", -1);
+		Command command = getCommandMap().getCommand(commandLabel);
+
+		if (command != null)
+		{
+			return command.tabComplete(sender, commandLabel, args);
+		}
+		else
+		{
+			return Collections.emptyList();
+		}
 	}
 
 	@Override
-	public void sendPluginMessage(Plugin source, String channel, byte[] message)
+	public HelpMapMock getHelpMap()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return helpMap;
 	}
 
 	@Override
-	public Set<String> getListeningPluginChannels()
+	public void sendPluginMessage(@NotNull Plugin source, @NotNull String channel, byte[] message)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		StandardMessenger.validatePluginMessage(this.getMessenger(), source, channel, message);
+
+		for (Player player : this.getOnlinePlayers())
+		{
+			player.sendPluginMessage(source, channel, message);
+		}
+	}
+
+	@Override
+	public @NotNull Set<String> getListeningPluginChannels()
+	{
+		Set<String> result = new HashSet<>();
+
+		for (Player player : this.getOnlinePlayers())
+		{
+			result.addAll(player.getListeningPluginChannels());
+		}
+
+		return result;
 	}
 
 	@Override
@@ -912,6 +1073,37 @@ public class ServerMock implements Server
 		throw new UnimplementedOperationException();
 	}
 
+	@NotNull
+	@Override
+	public String getResourcePack()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@NotNull
+	@Override
+	public String getResourcePackHash()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@NotNull
+	@Override
+	public String getResourcePackPrompt()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isResourcePackRequired()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 	@Override
 	public boolean hasWhitelist()
 	{
@@ -921,6 +1113,20 @@ public class ServerMock implements Server
 
 	@Override
 	public void setWhitelist(boolean value)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isWhitelistEnforced()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setWhitelistEnforced(boolean value)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -962,6 +1168,7 @@ public class ServerMock implements Server
 	}
 
 	@Override
+	@Deprecated
 	public int getTicksPerAnimalSpawns()
 	{
 		// TODO Auto-generated method stub
@@ -969,6 +1176,7 @@ public class ServerMock implements Server
 	}
 
 	@Override
+	@Deprecated
 	public int getTicksPerMonsterSpawns()
 	{
 		// TODO Auto-generated method stub
@@ -976,17 +1184,17 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public ServicesManager getServicesManager()
+	public ServicesManagerMock getServicesManager()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return servicesManager;
 	}
 
 	@Override
 	public World createWorld(WorldCreator creator)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		WorldMock world = new WorldMock(creator);
+		addWorld(world);
+		return world;
 	}
 
 	@Override
@@ -1004,10 +1212,12 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public MapView createMap(World world)
+	public @NotNull MapViewMock createMap(@NotNull World world)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		MapViewMock mapView = new MapViewMock(world, nextMapId++);
+		mapViews.put(mapView.getId(), mapView);
+		new MapInitializeEvent(mapView).callEvent();
+		return mapView;
 	}
 
 	@Override
@@ -1048,15 +1258,13 @@ public class ServerMock implements Server
 	@Override
 	public int getSpawnRadius()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return spawnRadius;
 	}
 
 	@Override
-	public void setSpawnRadius(int value)
+	public void setSpawnRadius(int spawnRadius)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.spawnRadius = spawnRadius;
 	}
 
 	@Override
@@ -1088,52 +1296,25 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public int broadcast(String message, String permission)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
+	@Deprecated
 	public OfflinePlayer getOfflinePlayer(String name)
 	{
-		Player player = getPlayer(name);
-
-		if (player != null)
-		{
-			return player;
-		}
-
-		for (OfflinePlayer offlinePlayer : offlinePlayers)
-		{
-			if (offlinePlayer.getName().equals(name))
-			{
-				return offlinePlayer;
-			}
-		}
-
-		return new OfflinePlayerMock(name);
+		return playerList.getOfflinePlayer(name);
 	}
 
 	@Override
 	public OfflinePlayer getOfflinePlayer(UUID id)
 	{
-		Player player = getPlayer(id);
+		OfflinePlayer player = playerList.getOfflinePlayer(id);
 
 		if (player != null)
 		{
 			return player;
 		}
-
-		for (OfflinePlayer offlinePlayer : offlinePlayers)
+		else
 		{
-			if (offlinePlayer.getUniqueId().equals(id))
-			{
-				return offlinePlayer;
-			}
+			return playerFactory.createOfflinePlayer(id);
 		}
-
-		return playerFactory.createRandomOfflinePlayer();
 	}
 
 	@Override
@@ -1151,19 +1332,13 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public Messenger getMessenger()
+	public @NotNull Messenger getMessenger()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.messenger;
 	}
 
 	@Override
-	public HelpMap getHelpMap()
-	{
-		return helpMap;
-	}
-
-	@Override
+	@Deprecated
 	public Merchant createMerchant(String title)
 	{
 		// TODO Auto-generated method stub
@@ -1171,6 +1346,7 @@ public class ServerMock implements Server
 	}
 
 	@Override
+	@Deprecated
 	public int getMonsterSpawnLimit()
 	{
 		// TODO Auto-generated method stub
@@ -1178,6 +1354,7 @@ public class ServerMock implements Server
 	}
 
 	@Override
+	@Deprecated
 	public int getAnimalSpawnLimit()
 	{
 		// TODO Auto-generated method stub
@@ -1185,6 +1362,7 @@ public class ServerMock implements Server
 	}
 
 	@Override
+	@Deprecated
 	public int getWaterAnimalSpawnLimit()
 	{
 		// TODO Auto-generated method stub
@@ -1192,6 +1370,7 @@ public class ServerMock implements Server
 	}
 
 	@Override
+	@Deprecated
 	public int getAmbientSpawnLimit()
 	{
 		// TODO Auto-generated method stub
@@ -1205,24 +1384,48 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public String getMotd()
+	public @NotNull Component motd()
+	{
+		return MOTD;
+	}
+
+	@Override
+	@Deprecated
+	public @NotNull String getMotd()
+	{
+		return LegacyComponentSerializer.legacySection().serialize(MOTD);
+	}
+
+	@Override
+	public @Nullable Component shutdownMessage()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
+	@Deprecated
 	public String getShutdownMessage()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
-	@Override
-	public WarningState getWarningState()
+	/**
+	 * Sets the return value of {@link #getWarningState}.
+	 *
+	 * @param warningState The {@link WarningState} to set.
+	 */
+	public void setWarningState(@NotNull WarningState warningState)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(warningState, "warningState cannot be null");
+		this.warningState = warningState;
+	}
+
+	@Override
+	public @NotNull WarningState getWarningState()
+	{
+		return this.warningState;
 	}
 
 	@Override
@@ -1267,21 +1470,58 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public ChunkData createChunkData(World world)
+	public @NotNull ChunkData createChunkData(@NotNull World world)
 	{
-		// TODO Auto-generated method stub
+		Preconditions.checkNotNull(world, "World cannot be null");
+		return new MockChunkData(world);
+	}
+
+	@Override
+
+	@Deprecated(forRemoval = true)
+	public @NotNull ChunkData createVanillaChunkData(@NotNull World world, int x, int z)
+	{
+		//TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public BossBar createBossBar(String title, BarColor color, BarStyle style, BarFlag... flags)
 	{
-		BossBar bar = new BossBarMock(title, color, style, flags);
-		return bar;
+		return new BossBarMock(title, color, style, flags);
 	}
 
 	@Override
-	public Entity getEntity(UUID uuid)
+	public @Nullable Entity getEntity(@NotNull UUID uuid)
+	{
+		Preconditions.checkNotNull(uuid, "uuid cannot be null");
+
+		for (EntityMock entity : entities)
+		{
+			if (entity.getUniqueId().equals(uuid))
+			{
+				return entity;
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public @NotNull double[] getTPS()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull long[] getTickTimes()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public double getAverageTickTime()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1302,23 +1542,30 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public UnsafeValues getUnsafe()
+	@Deprecated
+	public MockUnsafeValues getUnsafe()
 	{
 		return unsafe;
 	}
 
 	@Override
-	public BlockData createBlockData(Material material)
+	public @NotNull BlockData createBlockData(@NotNull Material material)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(material, "Must provide material");
+		return BlockDataMock.mock(material);
 	}
 
 	@Override
-	public BlockData createBlockData(Material material, Consumer<BlockData> consumer)
+	public @NotNull BlockData createBlockData(@NotNull Material material, @Nullable Consumer<BlockData> consumer)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		BlockData blockData = createBlockData(material);
+
+		if (consumer != null)
+		{
+			consumer.accept(blockData);
+		}
+
+		return blockData;
 	}
 
 	@Override
@@ -1339,15 +1586,16 @@ public class ServerMock implements Server
 	 * This creates a new Mock {@link Tag} for the {@link Material} class.<br>
 	 * Call this in advance before you are gonna access {@link #getTag(String, NamespacedKey, Class)} or any of the
 	 * constants defined in {@link Tag}.
-	 * 
-	 * @param key       The {@link NamespacedKey} for this {@link Tag}
-	 * @param materials {@link Material Materials} which should be covered by this {@link Tag}
-	 * 
+	 *
+	 * @param key         The {@link NamespacedKey} for this {@link Tag}
+	 * @param registryKey The name of the {@link TagRegistry}.
+	 * @param materials   {@link Material Materials} which should be covered by this {@link Tag}
 	 * @return The newly created {@link Tag}
 	 */
-	public Tag<Material> createMaterialTag(NamespacedKey key, String registryKey, Material... materials)
+	@NotNull
+	public Tag<Material> createMaterialTag(@NotNull NamespacedKey key, @NotNull String registryKey, @NotNull Material... materials)
 	{
-		Validate.notNull(key, "A NamespacedKey must never be null");
+		Preconditions.checkNotNull(key, "A NamespacedKey must never be null");
 
 		TagRegistry registry = materialTags.get(registryKey);
 		TagWrapperMock tag = new TagWrapperMock(registry, key);
@@ -1431,13 +1679,15 @@ public class ServerMock implements Server
 		registerPotionEffectType(29, "CONDUIT_POWER", false, 1950417);
 		registerPotionEffectType(30, "DOLPHINS_GRACE", false, 8954814);
 		registerPotionEffectType(31, "BAD_OMEN", false, 745784);
-		registerPotionEffectType(32, "HERO_OF_THE_VILLAGE", false, 45217);
+		registerPotionEffectType(32, "HERO_OF_THE_VILLAGE", false, 4521796);
+		registerPotionEffectType(33, "DARKNESS", false, 2696993);
 		PotionEffectType.stopAcceptingRegistrations();
 	}
 
-	private void registerPotionEffectType(int id, String name, boolean instant, int rgb)
+	private void registerPotionEffectType(int id, @NotNull String name, boolean instant, int rgb)
 	{
-		PotionEffectType type = new MockPotionEffectType(id, name, instant, Color.fromRGB(rgb));
+		NamespacedKey key = NamespacedKey.minecraft(name.toLowerCase(Locale.ROOT));
+		PotionEffectType type = new MockPotionEffectType(key, id, name, instant, Color.fromRGB(rgb));
 		PotionEffectType.registerPotionEffectType(type);
 	}
 
@@ -1457,7 +1707,7 @@ public class ServerMock implements Server
 
 	@Override
 	public ItemStack createExplorerMap(World world, Location location, StructureType structureType, int radius,
-			boolean findUnexplored)
+									   boolean findUnexplored)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1466,7 +1716,7 @@ public class ServerMock implements Server
 	@Override
 	public KeyedBossBar createBossBar(NamespacedKey key, String title, BarColor color, BarStyle style, BarFlag... flags)
 	{
-		Validate.notNull(key, "A NamespacedKey must never be null");
+		Preconditions.checkNotNull(key, "A NamespacedKey must never be null");
 		KeyedBossBarMock bar = new KeyedBossBarMock(key, title, color, style, flags);
 		bossBars.put(key, bar);
 		return bar;
@@ -1481,14 +1731,14 @@ public class ServerMock implements Server
 	@Override
 	public KeyedBossBar getBossBar(NamespacedKey key)
 	{
-		Validate.notNull(key, "A NamespacedKey must never be null");
+		Preconditions.checkNotNull(key, "A NamespacedKey must never be null");
 		return bossBars.get(key);
 	}
 
 	@Override
 	public boolean removeBossBar(NamespacedKey key)
 	{
-		Validate.notNull(key, "A NamespacedKey must never be null");
+		Preconditions.checkNotNull(key, "A NamespacedKey must never be null");
 		return bossBars.remove(key, bossBars.get(key));
 	}
 
@@ -1499,11 +1749,20 @@ public class ServerMock implements Server
 		throw new UnimplementedOperationException();
 	}
 
+	@NotNull
 	@Override
-	public MapView getMap(int id)
+	public StructureManager getStructureManager()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+
+	}
+
+	@Override
+	@Deprecated
+	public MapViewMock getMap(int id)
+	{
+		return mapViews.get(id);
 	}
 
 	@Override
@@ -1513,12 +1772,8 @@ public class ServerMock implements Server
 		throw new UnimplementedOperationException();
 	}
 
-	public MockCommandMap getCommandMap()
-	{
-		return commandMap;
-	}
-
 	@Override
+	@Deprecated
 	public int getTicksPerWaterSpawns()
 	{
 		// TODO Auto-generated method stub
@@ -1526,6 +1781,7 @@ public class ServerMock implements Server
 	}
 
 	@Override
+	@Deprecated
 	public int getTicksPerAmbientSpawns()
 	{
 		// TODO Auto-generated method stub
@@ -1534,7 +1790,7 @@ public class ServerMock implements Server
 
 	/**
 	 * This returns the current time of the {@link Server} in milliseconds
-	 * 
+	 *
 	 * @return The current {@link Server} time
 	 */
 	protected long getCurrentServerTime()
@@ -1550,6 +1806,16 @@ public class ServerMock implements Server
 	}
 
 	@Override
+	@Deprecated
+	public int getTicksPerWaterUndergroundCreatureSpawns()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+
+	}
+
+	@Override
+	@Deprecated
 	public int getWaterAmbientSpawnLimit()
 	{
 		// TODO Auto-generated method stub
@@ -1557,9 +1823,223 @@ public class ServerMock implements Server
 	}
 
 	@Override
-	public Spigot spigot()
+	@Deprecated
+	public int getWaterUndergroundCreatureSpawnLimit()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+
+	}
+
+	@Override
+	public int getMaxWorldSize()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
+
+	@Override
+	public int getSimulationDistance()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean getHideOnlinePlayers()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public Server.Spigot spigot()
+	{
+		return this;
+	}
+
+
+	@Override
+	public void reloadPermissions()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean reloadCommandAliases()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean suggestPlayerNamesWhenNullTabCompletions()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull String getPermissionMessage()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Component permissionMessage()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull PlayerProfileMock createProfile(@NotNull UUID uuid)
+	{
+		return createProfile(uuid, null);
+	}
+
+	@Override
+	public @NotNull PlayerProfileMock createProfile(@NotNull String name)
+	{
+		return createProfile(null, name);
+	}
+
+	@Override
+	public @NotNull PlayerProfileMock createProfile(@Nullable UUID uuid, @Nullable String name)
+	{
+		return new PlayerProfileMock(name, uuid);
+	}
+
+	@Override
+	public @NotNull PlayerProfileMock createProfileExact(@Nullable UUID uuid, @Nullable String name)
+	{
+		return new PlayerProfileMock(name, uuid);
+	}
+
+	@Override
+	public int getCurrentTick()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isStopping()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull MobGoals getMobGoals()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull DatapackManager getDatapackManager()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@NotNull
+	@Override
+	public YamlConfiguration getConfig()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@Deprecated
+	public void broadcast(@NotNull BaseComponent component)
+	{
+		for (Player player : getOnlinePlayers())
+		{
+			player.spigot().sendMessage(component);
+		}
+	}
+
+	@Override
+	@Deprecated
+	public void broadcast(@NotNull BaseComponent... components)
+	{
+		for (Player player : getOnlinePlayers())
+		{
+			player.spigot().sendMessage(components);
+		}
+	}
+
+	@Override
+	public void restart()
+	{
+		throw new UnsupportedOperationException("Not supported.");
+	}
+
+	@Override
+	public int getTicksPerSpawns(@NotNull SpawnCategory spawnCategory)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@Deprecated
+	public @NotNull PlayerProfileMock createPlayerProfile(@Nullable UUID uniqueId, @Nullable String name)
+	{
+		return new PlayerProfileMock(name, uniqueId);
+	}
+
+	@Override
+	@Deprecated
+	public @NotNull PlayerProfileMock createPlayerProfile(@NotNull UUID uniqueId)
+	{
+		return createPlayerProfile(uniqueId, null);
+	}
+
+	@Override
+	@Deprecated
+	public @NotNull PlayerProfileMock createPlayerProfile(@NotNull String name)
+	{
+		return createPlayerProfile(null, name);
+	}
+
+	@Override
+	public int getSpawnLimit(@NotNull SpawnCategory spawnCategory)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull PotionBrewer getPotionBrewer()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull File getPluginsFolder()
+	{
+		try
+		{
+			return getPluginManager().getParentTemporaryDirectory();
+		}
+		catch (IOException e)
+		{
+			throw new RuntimeException(e);
+		}
+	}
+
+	@Override
+	public @NotNull Iterable<? extends Audience> audiences()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 }

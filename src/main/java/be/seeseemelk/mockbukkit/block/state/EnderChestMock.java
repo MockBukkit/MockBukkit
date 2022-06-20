@@ -9,12 +9,13 @@ import org.jetbrains.annotations.NotNull;
 /**
  * A simple mock of the {@link EnderChest} {@link BlockState}, it is a pretty generic implementation of
  * {@link TileStateMock}.
- * 
- * @author TheBusyBiscuit
  *
+ * @author TheBusyBiscuit
  */
 public class EnderChestMock extends TileStateMock implements EnderChest
 {
+
+	private boolean isOpen = false;
 
 	public EnderChestMock(@NotNull Material material)
 	{
@@ -29,6 +30,7 @@ public class EnderChestMock extends TileStateMock implements EnderChest
 	protected EnderChestMock(@NotNull EnderChestMock state)
 	{
 		super(state);
+		this.isOpen = state.isOpen;
 	}
 
 	@Override
@@ -36,4 +38,23 @@ public class EnderChestMock extends TileStateMock implements EnderChest
 	{
 		return new EnderChestMock(this);
 	}
+
+	@Override
+	public void open()
+	{
+		isOpen = true;
+	}
+
+	@Override
+	public void close()
+	{
+		isOpen = false;
+	}
+
+	@Override
+	public boolean isOpen()
+	{
+		return isOpen;
+	}
+
 }

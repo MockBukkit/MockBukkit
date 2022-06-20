@@ -1,47 +1,48 @@
 package be.seeseemelk.mockbukkit.block.state;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.block.BlockMock;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.block.BlockMock;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class SignMockTest
+class SignMockTest
 {
 
 	private Sign sign;
 
-	@Before
-	public void setUp() throws Exception
+	@BeforeEach
+	void setUp() throws Exception
 	{
 		MockBukkit.mock();
 		sign = new SignMock(Material.OAK_SIGN);
 	}
 
-	@After
-	public void tearDown() throws Exception
+	@AfterEach
+	void tearDown() throws Exception
 	{
 		MockBukkit.unmock();
 	}
 
 	@Test
-	public void testMaterialSignBlockState()
+	void testMaterialSignBlockState()
 	{
 		Block block = new BlockMock(Material.OAK_SIGN);
 		assertTrue(block.getState() instanceof Sign);
 	}
 
 	@Test
-	public void testGetLines()
+	void testGetLines()
 	{
 		String[] lines = sign.getLines();
 		assertNotNull(lines);
@@ -53,7 +54,7 @@ public class SignMockTest
 	}
 
 	@Test
-	public void testSetLine()
+	void testSetLine()
 	{
 		String text = "I am a Sign";
 		sign.setLine(2, text);
@@ -61,22 +62,46 @@ public class SignMockTest
 		assertEquals(text, sign.getLines()[2]);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void testLineNotNull()
+	@Test
+	void testLineNotNull()
 	{
-		sign.setLine(0, null);
+		assertThrows(NullPointerException.class, () -> sign.setLine(0, null));
 	}
 
-	@Test(expected = IndexOutOfBoundsException.class)
-	public void testLineNegative()
+	@Test
+	void testLineNegative()
 	{
-		sign.getLine(-100);
+		assertThrows(IndexOutOfBoundsException.class, () -> sign.getLine(-100));
 	}
 
-	@Test(expected = IndexOutOfBoundsException.class)
-	public void testLineTooHigh()
+	@Test
+	void testLineTooHigh()
 	{
-		sign.getLine(100);
+		assertThrows(IndexOutOfBoundsException.class, () -> sign.getLine(100));
 	}
+
+	@Test
+	void testGetLineComponent()
+	{
+		Component component = Component.text("Hello World");
+		sign.line(2, component);
+		assertEquals(component, sign.line(2));
+	}
+
+	@Test
+	void testSetLineComponent()
+	{
+		Component component = Component.text("Hello World");
+		sign.line(2, component);
+		assertEquals(component, sign.line(2));
+	}
+
+	@Test
+	void testGetLineComponentNull()
+	{
+		assertThrows(NullPointerException.class, () -> sign.line(2, null));
+	}
+
+
 
 }

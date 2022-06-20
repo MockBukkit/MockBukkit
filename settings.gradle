@@ -1,5 +1,21 @@
-gradle.ext.apiVersion = '1.16'
-gradle.ext.apiVersionFull = '1.16.3-R0.1-SNAPSHOT'
-gradle.ext.version = '0.23.0'
+/*
+  This is the API (major + minor) version of Minecraft we are
+  building against.
+*/
+gradle.ext.apiVersion = '1.19'
 
+/*
+  The Spigot version we are building MockBukkit against.
+*/
+gradle.ext.apiVersionFull = '1.19-R0.1-SNAPSHOT'
+
+/*
+  This is the name of our MockBukkit artifact, it includes
+  the API version of Minecraft we are targeting.
+*/
 rootProject.name = 'MockBukkit-' + gradle.ext.apiVersion
+
+/*
+  The Java version we are building against.
+*/
+gradle.ext.javaVersion = 17

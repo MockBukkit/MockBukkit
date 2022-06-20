@@ -1,5 +1,8 @@
 package be.seeseemelk.mockbukkit.block.state;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.inventory.ChestInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
@@ -7,19 +10,19 @@ import org.bukkit.block.Chest;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.loot.LootTable;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.inventory.ChestInventoryMock;
-import be.seeseemelk.mockbukkit.inventory.InventoryMock;
+import java.util.UUID;
 
 /**
  * This {@link ContainerMock} represents a {@link Chest} or Trapped {@link Chest}.
- * 
- * @author TheBusyBiscuit
  *
+ * @author TheBusyBiscuit
  */
 public class ChestMock extends ContainerMock implements Chest
 {
+
+	private boolean isOpen = false;
 
 	public ChestMock(@NotNull Material material)
 	{
@@ -34,6 +37,7 @@ public class ChestMock extends ContainerMock implements Chest
 	protected ChestMock(@NotNull ChestMock state)
 	{
 		super(state);
+		this.isOpen = state.isOpen;
 	}
 
 	@Override
@@ -67,15 +71,19 @@ public class ChestMock extends ContainerMock implements Chest
 	@Override
 	public void open()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		isOpen = true;
 	}
 
 	@Override
 	public void close()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		isOpen = false;
+	}
+
+	@Override
+	public boolean isOpen()
+	{
+		return isOpen;
 	}
 
 	@Override
@@ -91,9 +99,72 @@ public class ChestMock extends ContainerMock implements Chest
 	}
 
 	@Override
-	public BlockState getSnapshot()
+	public @NotNull BlockState getSnapshot()
 	{
 		return new ChestMock(this);
+	}
+
+	@Override
+	public boolean isRefillEnabled()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean hasBeenFilled()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean hasPlayerLooted(@NotNull UUID player)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Long getLastLooted(@NotNull UUID player)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean setHasPlayerLooted(@NotNull UUID player, boolean looted)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean hasPendingRefill()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public long getLastFilled()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public long getNextRefill()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public long setNextRefill(long refillAt)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 }
