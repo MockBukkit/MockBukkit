@@ -4,6 +4,7 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.SoundGroup;
+import org.bukkit.Tag;
 import org.bukkit.block.data.BlockData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -132,6 +133,11 @@ public class BlockDataMock implements BlockData
 	public static @NotNull BlockDataMock mock(@NotNull Material material)
 	{
 		Preconditions.checkNotNull(material, "Material cannot be null");
+		// Special Cases
+		if (Tag.BEDS.isTagged(material))
+		{
+			return new BedMock(material);
+		}
 		return switch (material)
 				{
 					case AMETHYST_CLUSTER -> new AmethystClusterMock(material);

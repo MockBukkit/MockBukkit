@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.entity.AllayMock;
 import be.seeseemelk.mockbukkit.entity.ArmorStandMock;
+import be.seeseemelk.mockbukkit.entity.EndermanMock;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
 import be.seeseemelk.mockbukkit.entity.FireworkMock;
@@ -50,6 +51,7 @@ import org.bukkit.entity.Allay;
 import org.bukkit.entity.Animals;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Enderman;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ExperienceOrb;
@@ -880,6 +882,10 @@ public class WorldMock implements World
 		{
 			return new ZombieMock(server, UUID.randomUUID());
 		}
+		else if (clazz == Enderman.class)
+		{
+			return new EndermanMock(server, UUID.randomUUID());
+		}
 		else if (clazz == Sheep.class)
 		{
 			return new SheepMock(server, UUID.randomUUID());
@@ -905,7 +911,6 @@ public class WorldMock implements World
 			{
 				if (isAnimal && !getAllowAnimals() || isMonster && !getAllowMonsters())
 				{
-					System.out.println("Canceled spawn of " + entity.getType() + " because it was not allowed");
 					entity.remove();
 					return;
 				}
@@ -918,11 +923,11 @@ public class WorldMock implements World
 		{
 			canceled = new ItemSpawnEvent(item).callEvent();
 		}
-		else if (entity instanceof Player player)
+		else if (entity instanceof Player)
 		{
 			canceled = true; // Shouldn't ever be called here but just for parody.
 		}
-		else if (entity instanceof Projectile projectile)
+		else if (entity instanceof Projectile)
 		{
 			canceled = new ProjectileLaunchEvent(entity).callEvent();
 		}
