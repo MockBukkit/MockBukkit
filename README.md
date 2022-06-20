@@ -20,7 +20,7 @@
     </a>
     <!-- Logo -->
     <hr />
-        <img alt="MockBukkit logo" src="logo.png"/>
+        <img alt="MockBukkit logo (design by HuffleAnimations)" title="Design by HuffleAnimations" src="logo.png"/>
     <hr />
 </p>
 
