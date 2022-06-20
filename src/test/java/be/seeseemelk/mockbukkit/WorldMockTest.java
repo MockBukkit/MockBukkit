@@ -27,8 +27,8 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Pig;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Sheep;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.ItemSpawnEvent;
@@ -928,14 +928,12 @@ class WorldMockTest
 	}
 
 	@Test
-	@Disabled("No Animal Mock merged yet")
 	void testCallSpawnEventOnDisallowedAnimal()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		world.setSpawnFlags(true, false);
-		Entity pig = world.spawn(new Location(world, 0, 0, 0), Pig.class, CreatureSpawnEvent.SpawnReason.NATURAL);
-		assertFalse(pig.isValid());
-		assertTrue(pig.isDead());
+		Entity sheep = world.spawn(new Location(world, 0, 0, 0), Sheep.class, CreatureSpawnEvent.SpawnReason.NATURAL);
+		assertFalse(sheep.isValid());
 	}
 
 	@Test
