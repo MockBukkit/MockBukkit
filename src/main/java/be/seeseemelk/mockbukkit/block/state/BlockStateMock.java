@@ -281,6 +281,8 @@ public class BlockStateMock implements BlockState
 	{
 		switch (block.getType())
 		{
+		case CONDUIT:
+			return new ConduitMock(block);
 		case ENCHANTING_TABLE:
 			return new EnchantingTableMock(block);
 		case JIGSAW:
