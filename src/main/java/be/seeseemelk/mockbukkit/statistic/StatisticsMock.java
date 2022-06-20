@@ -25,7 +25,7 @@ public class StatisticsMock
 	 */
 	public void setStatistic(@NotNull Statistic statistic, int amount)
 	{
-		Preconditions.checkArgument(amount >= 0, "amount must be greater than or equal to 0");
+		checkGreaterThanEqualTo0(amount);
 		Preconditions.checkArgument(statistic.getType() == Type.UNTYPED, "statistic must be provided with parameter");
 		untypedStatistics.put(statistic, amount);
 	}
@@ -35,7 +35,7 @@ public class StatisticsMock
 	 */
 	public void setStatistic(@NotNull Statistic statistic, @NotNull Material material, int amount)
 	{
-		Preconditions.checkArgument(amount >= 0, "amount must be greater than or equal to 0");
+		checkGreaterThanEqualTo0(amount);
 		Preconditions.checkArgument(statistic.getType() == Type.ITEM || statistic.getType() == Type.BLOCK, "statistic must take a material parameter");
 		materialStatistics.computeIfAbsent(statistic, k -> new EnumMap<>(Material.class)).put(material, amount);
 	}
@@ -45,7 +45,7 @@ public class StatisticsMock
 	 */
 	public void setStatistic(@NotNull Statistic statistic, @NotNull EntityType entity, int amount)
 	{
-		Preconditions.checkArgument(amount >= 0, "amount must be greater than or equal to 0");
+		checkGreaterThanEqualTo0(amount);
 		Preconditions.checkArgument(statistic.getType() == Type.ENTITY, "statistic must take an entity parameter");
 		entityStatistics.computeIfAbsent(statistic, k -> new EnumMap<>(EntityType.class)).put(entity, amount);
 	}
@@ -55,7 +55,7 @@ public class StatisticsMock
 	 */
 	public void incrementStatistic(@NotNull Statistic statistic, int amount)
 	{
-		Preconditions.checkArgument(amount > 0, "amount must be greater than 0");
+		checkGreaterThan0(amount);
 		setStatistic(statistic, getStatistic(statistic) + amount);
 	}
 
@@ -64,7 +64,7 @@ public class StatisticsMock
 	 */
 	public void incrementStatistic(@NotNull Statistic statistic, @NotNull Material material, int amount)
 	{
-		Preconditions.checkArgument(amount > 0, "amount must be greater than 0");
+		checkGreaterThan0(amount);
 		setStatistic(statistic, material, getStatistic(statistic, material) + amount);
 	}
 
@@ -73,7 +73,7 @@ public class StatisticsMock
 	 */
 	public void incrementStatistic(@NotNull Statistic statistic, @NotNull EntityType entity, int amount)
 	{
-		Preconditions.checkArgument(amount > 0, "amount must be greater than 0");
+		checkGreaterThan0(amount);
 		setStatistic(statistic, entity, getStatistic(statistic, entity) + amount);
 	}
 
@@ -82,7 +82,7 @@ public class StatisticsMock
 	 */
 	public void decrementStatistic(@NotNull Statistic statistic, int amount)
 	{
-		Preconditions.checkArgument(amount > 0, "amount must be greater than 0");
+		checkGreaterThan0(amount);
 		setStatistic(statistic, getStatistic(statistic) - amount);
 	}
 
@@ -91,7 +91,7 @@ public class StatisticsMock
 	 */
 	public void decrementStatistic(@NotNull Statistic statistic, @NotNull Material material, int amount)
 	{
-		Preconditions.checkArgument(amount > 0, "amount must be greater than 0");
+		checkGreaterThan0(amount);
 		setStatistic(statistic, material, getStatistic(statistic, material) - amount);
 	}
 
@@ -100,7 +100,7 @@ public class StatisticsMock
 	 */
 	public void decrementStatistic(@NotNull Statistic statistic, @NotNull EntityType entity, int amount)
 	{
-		Preconditions.checkArgument(amount > 0, "amount must be greater than 0");
+		checkGreaterThan0(amount);
 		setStatistic(statistic, entity, getStatistic(statistic, entity) - amount);
 	}
 
@@ -140,4 +140,25 @@ public class StatisticsMock
 		}
 		return map.getOrDefault(entity, 0);
 	}
+
+	/**
+	 * Ensures that the provided amount is greater than
+	 *
+	 * @param amount the amount to check
+	 */
+	private static void checkGreaterThan0(int amount)
+	{
+		Preconditions.checkArgument(amount > 0, "amount must be greater than 0");
+	}
+
+	/**
+	 * Ensures that the provided amount is greater than or equal to 0
+	 *
+	 * @param amount the amount to check
+	 */
+	private static void checkGreaterThanEqualTo0(int amount)
+	{
+		Preconditions.checkArgument(amount >= 0, "amount must be greater than or equal to 0");
+	}
+
 }
