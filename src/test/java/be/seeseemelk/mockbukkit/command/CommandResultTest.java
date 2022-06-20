@@ -1,52 +1,62 @@
 package be.seeseemelk.mockbukkit.command;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.Test;
-
 class CommandResultTest
 {
+
+	private MessageTarget target;
+
+	@BeforeEach
+	void setUp()
+	{
+		this.target = new ConsoleCommandSenderMock();
+	}
+
 	@Test
 	void hasSucceeded_Succeeded_True()
 	{
-		CommandResult result = new CommandResult(true, null);
+		CommandResult result = new CommandResult(true, target);
 		assertTrue(result.hasSucceeded());
 	}
 
 	@Test
 	void hasSucceeded_Failed_False()
 	{
-		CommandResult result = new CommandResult(false, null);
+		CommandResult result = new CommandResult(false, target);
 		assertFalse(result.hasSucceeded());
 	}
 
 	@Test
 	void assertSucceed_Succeeded_DoesNotAssert()
 	{
-		CommandResult result = new CommandResult(true, null);
+		CommandResult result = new CommandResult(true, target);
 		result.assertSucceeded();
 	}
 
 	@Test
 	void assertSucceed_Failed_Asserts()
 	{
-		CommandResult result = new CommandResult(false, null);
-		assertThrows(AssertionError.class, () -> result.assertSucceeded());
+		CommandResult result = new CommandResult(false, target);
+		assertThrows(AssertionError.class, result::assertSucceeded);
 	}
 
 	@Test
 	void assertFailed_Succeeded_Asserts()
 	{
-		CommandResult result = new CommandResult(true, null);
-		assertThrows(AssertionError.class, () -> result.assertFailed());
+		CommandResult result = new CommandResult(true, target);
+		assertThrows(AssertionError.class, result::assertFailed);
 	}
 
 	@Test
 	void assertFailed_Failed_DoesNotAssert()
 	{
-		CommandResult result = new CommandResult(false, null);
+		CommandResult result = new CommandResult(false, target);
 		result.assertFailed();
 	}
 
@@ -99,6 +109,7 @@ class CommandResultTest
 		ConsoleCommandSenderMock sender = new ConsoleCommandSenderMock();
 		sender.sendMessage("More hello world");
 		CommandResult result = new CommandResult(true, sender);
-		assertThrows(AssertionError.class, () -> result.assertNoResponse());
+		assertThrows(AssertionError.class, result::assertNoResponse);
 	}
+
 }
