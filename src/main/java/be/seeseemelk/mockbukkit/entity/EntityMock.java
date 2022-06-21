@@ -1,19 +1,17 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.AsyncCatcher;
-import com.google.common.base.Preconditions;
-import org.bukkit.Bukkit;
-import org.bukkit.EntityEffect;
-import org.bukkit.Location;
-import org.bukkit.World;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.command.MessageTarget;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
 import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
 import com.google.common.base.Preconditions;
+import net.kyori.adventure.audience.MessageType;
+import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.EntityEffect;
@@ -65,12 +63,12 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private final MetadataTable metadataTable = new MetadataTable();
 	private final PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
 	private boolean operator = false;
-	private String name = "entity";
-	private String customName = null;
+	private Component name = Component.text("entity");
+	private Component customName = null;
 	private boolean customNameVisible = false;
 	private boolean invulnerable;
 	private boolean glowingFlag = false;
-	private final Queue<String> messages = new LinkedTransferQueue<>();
+	private final Queue<Component> messages = new LinkedTransferQueue<>();
 	private final Set<PermissionAttachment> permissionAttachments = new HashSet<>();
 	private Vector velocity = new Vector(0, 0, 0);
 	private float fallDistance;
@@ -81,6 +79,9 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 
 	protected EntityMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
+		Preconditions.checkNotNull(server, "Server cannot be null");
+		Preconditions.checkNotNull(uuid, "UUID cannot be null");
+
 		this.server = server;
 		this.uuid = uuid;
 
@@ -191,8 +192,11 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public Location getLocation(Location loc)
+	public Location getLocation(@Nullable Location loc)
 	{
+		if (loc == null)
+			return null;
+
 		loc.setWorld(location.getWorld());
 		loc.setDirection(location.getDirection());
 		loc.setX(location.getX());
@@ -206,8 +210,9 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	 *
 	 * @param location The new location of the entity.
 	 */
-	public void setLocation(Location location)
+	public void setLocation(@NotNull Location location)
 	{
+		Preconditions.checkNotNull(location, "Location cannot be null");
 		this.location = location;
 	}
 
@@ -220,24 +225,28 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public void setMetadata(@NotNull String metadataKey, @NotNull MetadataValue newMetadataValue)
 	{
+		Preconditions.checkNotNull(metadataKey, "Metadata key cannot be null");
 		metadataTable.setMetadata(metadataKey, newMetadataValue);
 	}
 
 	@Override
 	public @NotNull List<MetadataValue> getMetadata(@NotNull String metadataKey)
 	{
+		Preconditions.checkNotNull(metadataKey, "Metadata key cannot be null");
 		return metadataTable.getMetadata(metadataKey);
 	}
 
 	@Override
 	public boolean hasMetadata(@NotNull String metadataKey)
 	{
+		Preconditions.checkNotNull(metadataKey, "Metadata key cannot be null");
 		return metadataTable.hasMetadata(metadataKey);
 	}
 
 	@Override
 	public void removeMetadata(@NotNull String metadataKey, @NotNull Plugin owningPlugin)
 	{
+		Preconditions.checkNotNull(metadataKey, "Metadata key cannot be null");
 		metadataTable.removeMetadata(metadataKey, owningPlugin);
 	}
 
@@ -250,12 +259,14 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public boolean teleport(@NotNull Location location)
 	{
+		Preconditions.checkNotNull(location, "Location cannot be null");
 		return teleport(location, TeleportCause.PLUGIN);
 	}
 
 	@Override
 	public boolean teleport(@NotNull Location location, @NotNull TeleportCause cause)
 	{
+		Preconditions.checkNotNull(location, "Location cannot be null");
 		this.location = location;
 		teleported = true;
 		teleportCause = cause;
@@ -265,12 +276,15 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public boolean teleport(@NotNull Entity destination)
 	{
+		Preconditions.checkNotNull(destination, "Destination entity cannot be null");
 		return teleport(destination, TeleportCause.PLUGIN);
 	}
 
 	@Override
-	public boolean teleport(Entity destination, @NotNull TeleportCause cause)
+	public boolean teleport(@NotNull Entity destination, @NotNull TeleportCause cause)
 	{
+		Preconditions.checkNotNull(destination, "Destination entity cannot be null");
+		Preconditions.checkNotNull(cause, "TeleportCause cannot be null");
 		return teleport(destination.getLocation(), cause);
 	}
 
@@ -289,7 +303,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public @NotNull String getName()
 	{
-		return name;
+		return LegacyComponentSerializer.legacySection().serialize(this.name);
 	}
 
 	/**
@@ -297,9 +311,10 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	 *
 	 * @param name The new name of the entity.
 	 */
-	public void setName(String name)
+	public void setName(@NotNull String name)
 	{
-		this.name = name;
+		Preconditions.checkNotNull(name, "Name cannot be null");
+		this.name = LegacyComponentSerializer.legacySection().deserialize(name);
 	}
 
 	@Override
@@ -315,9 +330,10 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public void sendMessage(UUID sender, @NotNull String message)
+	public void sendMessage(@Nullable UUID sender, @NotNull String message)
 	{
-		messages.add(message);
+		Preconditions.checkNotNull(message, "Message cannot be null");
+		sendMessage(sender == null ? Identity.nil() : Identity.identity(sender), LegacyComponentSerializer.legacySection().deserialize(message), MessageType.SYSTEM);
 	}
 
 	@Override
@@ -329,8 +345,23 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		}
 	}
 
+	public void sendMessage(final @NotNull Identity source, final @NotNull Component message, final @NotNull MessageType type)
+	{
+		Preconditions.checkNotNull(source, "Source cannot be null");
+		Preconditions.checkNotNull(message, "Message cannot be null");
+		Preconditions.checkNotNull(type, "MessageType cannot be null");
+		this.messages.add(message);
+	}
+
 	@Override
-	public String nextMessage()
+	public @Nullable String nextMessage()
+	{
+		if (messages.peek() == null)
+			return null;
+		return LegacyComponentSerializer.legacySection().serialize(messages.poll());
+	}
+
+	public @Nullable Component nextComponentMessage()
 	{
 		return messages.poll();
 	}
@@ -338,20 +369,23 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public boolean isPermissionSet(@NotNull String name)
 	{
+		Preconditions.checkNotNull(name, "Name cannot be null");
 		return permissionAttachments.stream()
 				.map(PermissionAttachment::getPermissions)
 				.anyMatch(permissions -> permissions.containsKey(name) && permissions.get(name));
 	}
 
 	@Override
-	public boolean isPermissionSet(Permission perm)
+	public boolean isPermissionSet(@NotNull Permission perm)
 	{
+		Preconditions.checkNotNull(perm, "Permission cannot be null");
 		return isPermissionSet(perm.getName().toLowerCase(Locale.ENGLISH));
 	}
 
 	@Override
 	public boolean hasPermission(@NotNull String name)
 	{
+		Preconditions.checkNotNull(name, "Name cannot be null");
 		if (isPermissionSet(name))
 		{
 			return true;
@@ -364,12 +398,15 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public boolean hasPermission(@NotNull Permission perm)
 	{
+		Preconditions.checkNotNull(perm, "Permission cannot be null");
 		return isPermissionSet(perm) || perm.getDefault().getValue(isOp());
 	}
 
 	@Override
 	public @NotNull PermissionAttachment addAttachment(@NotNull Plugin plugin, @NotNull String name, boolean value)
 	{
+		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
+		Preconditions.checkNotNull(name, "Name cannot be null");
 		PermissionAttachment attachment = addAttachment(plugin);
 		attachment.setPermission(name, value);
 		return attachment;
@@ -378,6 +415,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public @NotNull PermissionAttachment addAttachment(@NotNull Plugin plugin)
 	{
+		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
 		PermissionAttachment attachment = new PermissionAttachment(plugin, this);
 		permissionAttachments.add(attachment);
 		return attachment;
@@ -400,10 +438,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public void removeAttachment(@NotNull PermissionAttachment attachment)
 	{
-		if (attachment == null)
-		{
-			throw new IllegalArgumentException("Attachment cannot be null");
-		}
+		Preconditions.checkNotNull(attachment, "Attachment cannot be null");
 
 		if (permissionAttachments.contains(attachment))
 		{
@@ -448,32 +483,31 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public @Nullable Component customName()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.customName;
 	}
 
 	@Override
 	public void customName(@Nullable Component customName)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.customName = customName;
 	}
 
 	@Override
 	public String getCustomName()
 	{
-		return customName;
+		return this.customName == null ? null : LegacyComponentSerializer.legacySection().serialize(this.customName);
 	}
 
 	@Override
-	public void setCustomName(String name)
+	public void setCustomName(@Nullable String name)
 	{
-		customName = name;
+		this.customName = name == null ? null : LegacyComponentSerializer.legacySection().deserialize(name);
 	}
 
 	@Override
 	public void setVelocity(@NotNull Vector velocity)
 	{
+		Preconditions.checkNotNull(velocity, "Velocity cannot be null");
 		this.velocity = velocity;
 	}
 
@@ -604,19 +638,19 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public boolean isDead()
 	{
-		return !removed;
+		return !this.removed;
 	}
 
 	@Override
 	public boolean isValid()
 	{
-		return !removed;
+		return !this.removed;
 	}
 
 	@Override
 	public @NotNull ServerMock getServer()
 	{
-		return server;
+		return this.server;
 	}
 
 	@Override
@@ -684,13 +718,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public void setLastDamageCause(EntityDamageEvent event)
+	public void setLastDamageCause(@Nullable EntityDamageEvent event)
 	{
 		this.lastDamageEvent = event;
 	}
 
 	@Override
-	public EntityDamageEvent getLastDamageCause()
+	public @Nullable EntityDamageEvent getLastDamageCause()
 	{
 		return this.lastDamageEvent;
 	}
@@ -713,7 +747,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public void playEffect(@NotNull EntityEffect type)
 	{
-		Preconditions.checkArgument(type != null, "type");
+		Preconditions.checkNotNull(type, "Type cannot be null");
 	}
 
 	@Override
@@ -918,8 +952,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public @NotNull Component name()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.name;
 	}
 
 	// Paper start

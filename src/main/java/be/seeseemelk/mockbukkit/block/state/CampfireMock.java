@@ -64,35 +64,35 @@ public class CampfireMock extends TileStateMock implements Campfire
 	@Override
 	public void setItem(int index, @Nullable ItemStack item)
 	{
-		checkSlot(index); // Sanity check
+		checkSlot(index);
 		this.items[index] = item;
 	}
 
 	@Override
 	public int getCookTime(int index)
 	{
-		checkSlot(index); // Sanity check
+		checkSlot(index);
 		return this.cookingTime[index];
 	}
 
 	@Override
 	public void setCookTime(int index, int cookTime)
 	{
-		checkSlot(index); // Sanity check
+		checkSlot(index);
 		this.cookingTime[index] = cookTime;
 	}
 
 	@Override
 	public int getCookTimeTotal(int index)
 	{
-		checkSlot(index); // Sanity check
+		checkSlot(index);
 		return this.cookingProgress[index];
 	}
 
 	@Override
 	public void setCookTimeTotal(int index, int cookTimeTotal)
 	{
-		checkSlot(index); // Sanity check
+		checkSlot(index);
 		this.cookingProgress[index] = cookTimeTotal;
 	}
 

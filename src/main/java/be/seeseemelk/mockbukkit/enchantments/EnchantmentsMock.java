@@ -1,7 +1,9 @@
 package be.seeseemelk.mockbukkit.enchantments;
 
+import com.google.common.base.Preconditions;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
+import org.jetbrains.annotations.NotNull;
 
 public final class EnchantmentsMock
 {
@@ -49,8 +51,9 @@ public final class EnchantmentsMock
 		register("swift_sneak");
 	}
 
-	private static void register(String name)
+	private static void register(@NotNull String name)
 	{
+		Preconditions.checkNotNull(name, "Name cannot be null");
 		NamespacedKey key = NamespacedKey.minecraft(name);
 		if (Enchantment.getByKey(key) == null)
 			Enchantment.registerEnchantment(new EnchantmentMock(key, name));

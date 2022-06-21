@@ -61,6 +61,7 @@ public class BlockMock implements Block
 	public BlockMock(@NotNull Location location)
 	{
 		this(Material.AIR, location);
+		Preconditions.checkNotNull(location, "Location cannot be null");
 	}
 
 	/**
@@ -81,6 +82,7 @@ public class BlockMock implements Block
 	 */
 	public BlockMock(@NotNull Material material, @Nullable Location location)
 	{
+		Preconditions.checkNotNull(material, "Material cannot be null");
 		this.material = material;
 		this.location = location;
 		this.state = BlockStateMock.mockState(this);
@@ -128,14 +130,15 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public Block getRelative(BlockFace face)
+	public Block getRelative(@NotNull BlockFace face)
 	{
 		return getRelative(face, 1);
 	}
 
 	@Override
-	public Block getRelative(BlockFace face, int distance)
+	public Block getRelative(@NotNull BlockFace face, int distance)
 	{
+		Preconditions.checkNotNull(face, "Face cannot be null");
 		return getRelative(face.getModX() * distance, face.getModY() * distance, face.getModZ() * distance);
 	}
 
@@ -219,7 +222,7 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public Location getLocation(Location loc)
+	public Location getLocation(@Nullable Location loc)
 	{
 		if (loc != null)
 		{
@@ -241,15 +244,16 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public void setType(Material type)
+	public void setType(@NotNull Material type)
 	{
+		Preconditions.checkNotNull(type, "Type cannot be null");
 		material = type;
 		state = BlockStateMock.mockState(this);
 		blockData = new BlockDataMock(type);
 	}
 
 	@Override
-	public void setType(Material type, boolean applyPhysics)
+	public void setType(@NotNull Material type, boolean applyPhysics)
 	{
 		setType(material);
 	}
@@ -257,6 +261,8 @@ public class BlockMock implements Block
 	@Override
 	public BlockFace getFace(@NotNull Block block)
 	{
+		Preconditions.checkNotNull(block, "Block cannot be null");
+
 		for (BlockFace face : BlockFace.values())
 		{
 			if ((this.getX() + face.getModX() == block.getX()) && (this.getY() + face.getModY() == block.getY()) && (this.getZ() + face.getModZ() == block.getZ()))
@@ -277,13 +283,11 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public Biome getBiome()
+	public @NotNull Biome getBiome()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getWorld().getBiome(getLocation());
 	}
 
-	@Override
 	public @NotNull Biome getComputedBiome()
 	{
 		// TODO Auto-generated method stub
@@ -313,11 +317,10 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public void setBiome(Biome bio)
+	public void setBiome(@NotNull Biome bio)
 	{
-
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(bio, "Biome cannot be null");
+		getWorld().setBiome(getLocation(), bio);
 	}
 
 	@Override
@@ -335,21 +338,21 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public boolean isBlockFacePowered(BlockFace face)
+	public boolean isBlockFacePowered(@NotNull BlockFace face)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean isBlockFaceIndirectlyPowered(BlockFace face)
+	public boolean isBlockFaceIndirectlyPowered(@NotNull BlockFace face)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public int getBlockPower(BlockFace face)
+	public int getBlockPower(@NotNull BlockFace face)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -365,7 +368,7 @@ public class BlockMock implements Block
 	@Override
 	public boolean isEmpty()
 	{
-		return material == Material.AIR;
+		return material.isAir();
 	}
 
 	@Override
@@ -494,7 +497,7 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public boolean breakNaturally(ItemStack tool)
+	public boolean breakNaturally(@Nullable ItemStack tool)
 	{
 		return this.breakNaturally();
 	}
@@ -507,7 +510,7 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public Collection<ItemStack> getDrops(ItemStack tool)
+	public Collection<ItemStack> getDrops(@Nullable ItemStack tool)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -527,7 +530,7 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public void setBlockData(BlockData data, boolean applyPhysics)
+	public void setBlockData(@NotNull BlockData data, boolean applyPhysics)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -541,7 +544,7 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public RayTraceResult rayTrace(Location start, Vector direction, double maxDistance, FluidCollisionMode fluidCollisionMode)
+	public RayTraceResult rayTrace(@NotNull Location start, @NotNull Vector direction, double maxDistance, @NotNull FluidCollisionMode fluidCollisionMode)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -563,7 +566,7 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public Collection<ItemStack> getDrops(ItemStack tool, Entity entity)
+	public Collection<ItemStack> getDrops(@NotNull ItemStack tool, Entity entity)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -583,14 +586,14 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public boolean applyBoneMeal(BlockFace face)
+	public boolean applyBoneMeal(@NotNull BlockFace face)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean isPreferredTool(ItemStack tool)
+	public boolean isPreferredTool(@NotNull ItemStack tool)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -604,7 +607,7 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public boolean canPlace(BlockData data)
+	public boolean canPlace(@NotNull BlockData data)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

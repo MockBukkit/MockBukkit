@@ -21,7 +21,7 @@ public class TameableAnimalMock extends AnimalsMock implements Tameable, Creatur
 		super(server, uuid);
 	}
 
-	public void setOwnerUUID(UUID uuid)
+	public void setOwnerUUID(@Nullable UUID uuid)
 	{
 		this.owner = uuid;
 	}
@@ -50,7 +50,7 @@ public class TameableAnimalMock extends AnimalsMock implements Tameable, Creatur
 	}
 
 	@Override
-	public void setOwner(AnimalTamer tamer)
+	public void setOwner(@Nullable AnimalTamer tamer)
 	{
 		if (tamer != null)
 		{

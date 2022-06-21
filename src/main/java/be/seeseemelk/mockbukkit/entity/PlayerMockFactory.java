@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
+import com.google.common.base.Preconditions;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
@@ -15,6 +16,7 @@ public final class PlayerMockFactory
 
 	public PlayerMockFactory(@NotNull ServerMock server)
 	{
+		Preconditions.checkNotNull(server, "Server cannot be null");
 		this.currentNameIndex = 0;
 		this.server = server;
 	}
