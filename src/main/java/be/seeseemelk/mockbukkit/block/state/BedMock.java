@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.block.state;
 
+import com.destroystokyo.paper.MaterialTags;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.block.Bed;
@@ -14,11 +15,15 @@ public class BedMock extends TileStateMock implements Bed
 	public BedMock(@NotNull Material material)
 	{
 		super(material);
+		if (!MaterialTags.BEDS.isTagged(material))
+			throw new IllegalArgumentException("Cannot create a Bed state from " + material);
 	}
 
 	protected BedMock(@NotNull Block block)
 	{
 		super(block);
+		if (!MaterialTags.BEDS.isTagged(block))
+			throw new IllegalArgumentException("Cannot create a Bed state from " + block.getType());
 	}
 
 	protected BedMock(@NotNull BedMock state)

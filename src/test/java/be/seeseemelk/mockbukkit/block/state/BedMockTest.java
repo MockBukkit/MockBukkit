@@ -1,10 +1,12 @@
 package be.seeseemelk.mockbukkit.block.state;
 
 import be.seeseemelk.mockbukkit.block.BlockMock;
+import com.destroystokyo.paper.MaterialTags;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
@@ -12,6 +14,36 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 class BedMockTest
 {
+
+	@Test
+	void constructor_Material()
+	{
+		for (Material value : MaterialTags.BEDS.getValues())
+		{
+			assertDoesNotThrow(() -> new BedMock(value));
+		}
+	}
+
+	@Test
+	void constructor_Material_WrongType_ThrowsException()
+	{
+		assertThrowsExactly(IllegalArgumentException.class, () -> new BedMock(Material.BEDROCK));
+	}
+
+	@Test
+	void constructor_Block()
+	{
+		for (Material value : MaterialTags.BEDS.getValues())
+		{
+			assertDoesNotThrow(() -> new BedMock(new BlockMock(value)));
+		}
+	}
+
+	@Test
+	void constructor_Block_WrongType_ThrowsException()
+	{
+		assertThrowsExactly(IllegalArgumentException.class, () -> new BedMock(new BlockMock(Material.BEDROCK)));
+	}
 
 	@Test
 	void getColor_ReturnCorrectColor()
@@ -50,11 +82,8 @@ class BedMockTest
 	@Test
 	void blockStateMock_mockState_CorrectType()
 	{
-
-		for (Material mat : Material.values())
+		for (Material mat : MaterialTags.BEDS.getValues())
 		{
-			if (!mat.name().endsWith("_BED") || mat.name().contains("LEGACY"))
-				continue;
 			if (BlockStateMock.mockState(new BlockMock(mat)) instanceof BedMock)
 				continue;
 			fail("BlockState for '" + mat + "' is not a " + BedMock.class.getSimpleName());
