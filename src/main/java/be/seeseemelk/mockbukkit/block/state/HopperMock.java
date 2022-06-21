@@ -1,15 +1,14 @@
 package be.seeseemelk.mockbukkit.block.state;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.inventory.HopperInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Hopper;
 import org.bukkit.loot.LootTable;
 import org.jetbrains.annotations.NotNull;
-
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.inventory.HopperInventoryMock;
-import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
@@ -18,7 +17,6 @@ import java.util.UUID;
  * This {@link ContainerMock} represents a {@link Hopper}.
  *
  * @author TheBusyBiscuit
- *
  */
 public class HopperMock extends ContainerMock implements Hopper
 {
@@ -26,11 +24,15 @@ public class HopperMock extends ContainerMock implements Hopper
 	public HopperMock(@NotNull Material material)
 	{
 		super(material);
+		if (material != Material.HOPPER)
+			throw new IllegalArgumentException("Cannot create a Hopper state from " + material);
 	}
 
 	protected HopperMock(@NotNull Block block)
 	{
 		super(block);
+		if (block.getType() != Material.HOPPER)
+			throw new IllegalArgumentException("Cannot create a Hopper state from " + block.getType());
 	}
 
 	protected HopperMock(@NotNull HopperMock state)

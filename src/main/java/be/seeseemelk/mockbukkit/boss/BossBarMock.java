@@ -7,23 +7,26 @@ import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class BossBarMock implements BossBar
 {
 
-	private String title = null;
-	private BarColor color = null;
-	private BarStyle style = null;
-	private HashSet<Player> players = new HashSet<>();
-	private HashSet<BarFlag> barFlags = new HashSet<>();
+	private String title;
+	private BarColor color;
+	private BarStyle style;
+	private final Set<Player> players = new HashSet<>();
+	private final Set<BarFlag> barFlags = EnumSet.noneOf(BarFlag.class);
 	private boolean visible = true;
 	private double progress = 1.0;
 
-	public BossBarMock(String title, BarColor color, BarStyle style, BarFlag... flags)
+	public BossBarMock(@NotNull String title, @NotNull BarColor color, @NotNull BarStyle style, BarFlag... flags)
 	{
 		this.title = title;
 		this.color = color;
@@ -34,58 +37,61 @@ public class BossBarMock implements BossBar
 		}
 	}
 
-
 	@Override
-	public String getTitle()
+	public @NotNull String getTitle()
 	{
 		return title;
 	}
 
 	@Override
-	public void setTitle(String title)
+	public void setTitle(@Nullable String title)
 	{
-		this.title = title;
+		this.title = title == null ? "" : title;
 	}
 
 	@Override
-	public BarColor getColor()
+	public @NotNull BarColor getColor()
 	{
 		return color;
 	}
 
 	@Override
-	public void setColor(BarColor color)
+	public void setColor(@NotNull BarColor color)
 	{
 		this.color = color;
 	}
 
 	@Override
-	public BarStyle getStyle()
+	public @NotNull BarStyle getStyle()
 	{
 		return style;
 	}
 
 	@Override
-	public void setStyle(BarStyle style)
+	public void setStyle(@NotNull BarStyle style)
 	{
+		Preconditions.checkNotNull(style, "Style cannot be null");
 		this.style = style;
 	}
 
 	@Override
-	public void removeFlag(BarFlag flag)
+	public void removeFlag(@NotNull BarFlag flag)
 	{
+		Preconditions.checkNotNull(flag, "Flag cannot be null");
 		barFlags.remove(flag);
 	}
 
 	@Override
-	public void addFlag(BarFlag flag)
+	public void addFlag(@NotNull BarFlag flag)
 	{
+		Preconditions.checkNotNull(flag, "Flag cannot be null");
 		barFlags.add(flag);
 	}
 
 	@Override
-	public boolean hasFlag(BarFlag flag)
+	public boolean hasFlag(@NotNull BarFlag flag)
 	{
+		Preconditions.checkNotNull(flag, "Flag cannot be null");
 		return barFlags.contains(flag);
 	}
 
@@ -108,14 +114,14 @@ public class BossBarMock implements BossBar
 	@Override
 	public void addPlayer(@NotNull Player player)
 	{
-		Preconditions.checkNotNull(player, "Player cannot be null!");
+		Preconditions.checkNotNull(player, "Player cannot be null");
 		this.players.add(player);
 	}
 
 	@Override
 	public void removePlayer(@NotNull Player player)
 	{
-		Preconditions.checkNotNull(player, "Player cannot be null!");
+		Preconditions.checkNotNull(player, "Player cannot be null");
 		this.players.remove(player);
 	}
 
@@ -126,9 +132,9 @@ public class BossBarMock implements BossBar
 	}
 
 	@Override
-	public List<Player> getPlayers()
+	public @NotNull List<Player> getPlayers()
 	{
-		return new ArrayList<Player>(players);
+		return new ArrayList<>(players);
 	}
 
 	@Override

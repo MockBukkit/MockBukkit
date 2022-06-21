@@ -20,11 +20,15 @@ public class EnderChestMock extends TileStateMock implements EnderChest
 	public EnderChestMock(@NotNull Material material)
 	{
 		super(material);
+		if (material != Material.ENDER_CHEST)
+			throw new IllegalArgumentException("Cannot create an Ender Chest state from " + material);
 	}
 
 	protected EnderChestMock(@NotNull Block block)
 	{
 		super(block);
+		if (block.getType() != Material.ENDER_CHEST)
+			throw new IllegalArgumentException("Cannot create an Ender Chest state from " + block.getType());
 	}
 
 	protected EnderChestMock(@NotNull EnderChestMock state)
@@ -34,7 +38,7 @@ public class EnderChestMock extends TileStateMock implements EnderChest
 	}
 
 	@Override
-	public BlockState getSnapshot()
+	public @NotNull BlockState getSnapshot()
 	{
 		return new EnderChestMock(this);
 	}

@@ -105,7 +105,7 @@ public abstract class AbstractHorseMock extends AnimalsMock implements AbstractH
 	}
 
 	@Override
-	public void setOwner(AnimalTamer owner)
+	public void setOwner(@Nullable AnimalTamer owner)
 	{
 		if (owner != null)
 		{
@@ -119,7 +119,7 @@ public abstract class AbstractHorseMock extends AnimalsMock implements AbstractH
 		}
 	}
 
-	public void setOwnerUUID(UUID uuid)
+	public void setOwnerUUID(@Nullable UUID uuid)
 	{
 		this.owner = uuid;
 	}

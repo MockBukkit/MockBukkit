@@ -189,25 +189,4 @@ public class FishHookMock extends ProjectileMock implements FishHook
 		return "FishingHookMock";
 	}
 
-	@Override
-	public @NotNull Component name()
-	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public @Nullable Component customName()
-	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public void customName(@Nullable Component customName)
-	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
-
 }

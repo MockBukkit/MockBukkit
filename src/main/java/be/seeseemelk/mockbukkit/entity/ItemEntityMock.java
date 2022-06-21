@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import com.google.common.base.Preconditions;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
@@ -41,8 +42,9 @@ public class ItemEntityMock extends EntityMock implements Item
 	}
 
 	@Override
-	public void setItemStack(ItemStack stack)
+	public void setItemStack(@NotNull ItemStack stack)
 	{
+		Preconditions.checkNotNull(stack, "Item cannot be null");
 		// "stack" is actually nullable here, but it seems like Spigot also throws an Exception
 		// in that case anyway. Besides a "null" Item does not really make sense anyway.
 		this.item = stack.clone();

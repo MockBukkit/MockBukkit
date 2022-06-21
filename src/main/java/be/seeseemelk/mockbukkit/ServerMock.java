@@ -128,7 +128,6 @@ import java.util.stream.Collectors;
 public class ServerMock extends Server.Spigot implements Server
 {
 
-	private static final String JOIN_MESSAGE = "%s has joined the server.";
 	private static final Component MOTD = Component.text("A Minecraft Server");
 
 	private final Properties buildProperties = new Properties();

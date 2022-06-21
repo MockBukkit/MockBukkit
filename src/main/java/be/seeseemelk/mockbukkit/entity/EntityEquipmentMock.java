@@ -38,18 +38,21 @@ public class EntityEquipmentMock implements EntityEquipment
 
 	public EntityEquipmentMock(@NotNull LivingEntityMock holder)
 	{
+		Preconditions.checkNotNull(holder, "Holder cannot be null");
 		this.holder = holder;
 	}
 
 	@Override
 	public void setItem(@NotNull EquipmentSlot slot, @Nullable ItemStack item)
 	{
+		Preconditions.checkNotNull(slot, "Slot cannot be null");
 		setItem(slot, item, false);
 	}
 
 	@Override
 	public void setItem(@NotNull EquipmentSlot slot, @Nullable ItemStack item, boolean silent)
 	{
+		Preconditions.checkNotNull(slot, "Slot cannot be null");
 		switch (slot)
 		{
 		case HEAD -> setHelmet(item, silent);
@@ -67,6 +70,7 @@ public class EntityEquipmentMock implements EntityEquipment
 	@Override
 	public @NotNull ItemStack getItem(@NotNull EquipmentSlot slot)
 	{
+		Preconditions.checkNotNull(slot, "Slot cannot be null");
 		return switch (slot)
 		{
 		case CHEST -> getChestplate();
@@ -88,13 +92,13 @@ public class EntityEquipmentMock implements EntityEquipment
 	}
 
 	@Override
-	public void setItemInMainHand(ItemStack item)
+	public void setItemInMainHand(@Nullable ItemStack item)
 	{
 		setItemInMainHand(item, false);
 	}
 
 	@Override
-	public void setItemInMainHand(ItemStack item, boolean silent)
+	public void setItemInMainHand(@Nullable ItemStack item, boolean silent)
 	{
 		this.itemInMainHand = item;
 		// Sounds are not implemented here
@@ -107,13 +111,13 @@ public class EntityEquipmentMock implements EntityEquipment
 	}
 
 	@Override
-	public void setItemInOffHand(ItemStack item)
+	public void setItemInOffHand(@Nullable ItemStack item)
 	{
 		setItemInOffHand(item, false);
 	}
 
 	@Override
-	public void setItemInOffHand(ItemStack item, boolean silent)
+	public void setItemInOffHand(@Nullable ItemStack item, boolean silent)
 	{
 		this.itemInOffHand = item;
 		// Sounds are not implemented here
@@ -128,7 +132,7 @@ public class EntityEquipmentMock implements EntityEquipment
 
 	@Override
 	@Deprecated
-	public void setItemInHand(ItemStack stack)
+	public void setItemInHand(@Nullable ItemStack stack)
 	{
 		setItemInMainHand(stack);
 	}
@@ -140,13 +144,13 @@ public class EntityEquipmentMock implements EntityEquipment
 	}
 
 	@Override
-	public void setHelmet(ItemStack helmet)
+	public void setHelmet(@Nullable ItemStack helmet)
 	{
 		setHelmet(helmet, false);
 	}
 
 	@Override
-	public void setHelmet(ItemStack helmet, boolean silent)
+	public void setHelmet(@Nullable ItemStack helmet, boolean silent)
 	{
 		this.helmet = helmet;
 		// Sounds are not implemented here
@@ -159,13 +163,13 @@ public class EntityEquipmentMock implements EntityEquipment
 	}
 
 	@Override
-	public void setChestplate(ItemStack chestplate)
+	public void setChestplate(@Nullable ItemStack chestplate)
 	{
 		setChestplate(chestplate, false);
 	}
 
 	@Override
-	public void setChestplate(ItemStack chestplate, boolean silent)
+	public void setChestplate(@Nullable ItemStack chestplate, boolean silent)
 	{
 		this.chestPlate = chestplate;
 		// Sounds are not implemented here
@@ -178,13 +182,13 @@ public class EntityEquipmentMock implements EntityEquipment
 	}
 
 	@Override
-	public void setLeggings(ItemStack leggings)
+	public void setLeggings(@Nullable ItemStack leggings)
 	{
 		setLeggings(leggings, false);
 	}
 
 	@Override
-	public void setLeggings(ItemStack leggings, boolean silent)
+	public void setLeggings(@Nullable ItemStack leggings, boolean silent)
 	{
 		this.leggings = leggings;
 		// Sounds are not implemented here
@@ -197,29 +201,28 @@ public class EntityEquipmentMock implements EntityEquipment
 	}
 
 	@Override
-	public void setBoots(ItemStack boots)
+	public void setBoots(@Nullable ItemStack boots)
 	{
 		setBoots(boots, false);
 	}
 
 	@Override
-	public void setBoots(ItemStack boots, boolean silent)
+	public void setBoots(@Nullable ItemStack boots, boolean silent)
 	{
 		this.boots = boots;
 		// Sounds are not implemented here
 	}
 
 	@Override
-	public ItemStack[] getArmorContents()
+	public ItemStack @NotNull [] getArmorContents()
 	{
-		return new ItemStack[]
-		       { getBoots(), getLeggings(), getChestplate(), getHelmet() };
+		return new ItemStack[]{ getBoots(), getLeggings(), getChestplate(), getHelmet() };
 	}
 
 	@Override
 	public void setArmorContents(@NotNull ItemStack[] items)
 	{
-		Preconditions.checkNotNull(items, "The provided items must not be null.");
+		Preconditions.checkNotNull(items, "Items cannot be null");
 
 		setBoots((items.length >= 1) ? items[0] : null);
 		setLeggings((items.length >= 2) ? items[1] : null);
@@ -334,6 +337,7 @@ public class EntityEquipmentMock implements EntityEquipment
 	@Override
 	public void setDropChance(@NotNull EquipmentSlot slot, float chance)
 	{
+		Preconditions.checkNotNull(slot, "Slot cannot be null");
 		Preconditions.checkArgument(holder instanceof Mob, "Cannot set drop chance for non-Mob entity");
 
 		this.dropChances.put(slot, chance);
@@ -342,6 +346,7 @@ public class EntityEquipmentMock implements EntityEquipment
 	@Override
 	public float getDropChance(@NotNull EquipmentSlot slot)
 	{
+		Preconditions.checkNotNull(slot, "Slot cannot be null");
 		return this.dropChances.get(slot);
 	}
 
