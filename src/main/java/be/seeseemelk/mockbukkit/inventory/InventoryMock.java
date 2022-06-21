@@ -12,6 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -33,6 +34,7 @@ public class InventoryMock implements Inventory
 	private final InventoryType type;
 
 	private int maxStackSize = MAX_STACK_SIZE;
+	private List<HumanEntity> viewers = new ArrayList<>();
 
 	public InventoryMock(@Nullable InventoryHolder holder, int size, @NotNull InventoryType type)
 	{
@@ -139,6 +141,52 @@ public class InventoryMock implements Inventory
 		return amount;
 	}
 
+	/**
+	 * Adds a viewer to this inventory.
+	 *
+	 * @param viewer The viewer to add.
+	 */
+	public void addViewer(@NotNull HumanEntity viewer)
+	{
+		Preconditions.checkNotNull(viewer, "The viewer must not be null!");
+		viewers.add(viewer);
+	}
+
+	/**
+	 * Adds the given viewers to this inventory.
+	 *
+	 * @param viewers The viewers to add.
+	 */
+	public void addViewers(@NotNull HumanEntity... viewers)
+	{
+		addViewers(Arrays.asList(viewers));
+	}
+
+	/**
+	 * Adds the given viewers to this inventory.
+	 *
+	 * @param viewers The {@link List} of viewers to add.
+	 */
+	public void addViewers(@NotNull List<HumanEntity> viewers)
+	{
+		for (HumanEntity viewer : viewers)
+		{
+			Preconditions.checkNotNull(viewer, "The viewer must not be null!");
+			addViewer(viewer);
+		}
+	}
+
+	/**
+	 * Removes a viewer from this inventory.
+	 *
+	 * @param viewer The viewer to remove.
+	 */
+	public void removeViewer(@NotNull HumanEntity viewer)
+	{
+		Preconditions.checkNotNull(viewer, "The viewer must not be null!");
+		viewers.remove(viewer);
+	}
+
 	@Override
 	public int getSize()
 	{
@@ -178,7 +226,7 @@ public class InventoryMock implements Inventory
 				items[i].setAmount(toAdd);
 				item.setAmount(item.getAmount() - toAdd);
 			}
-			else 
+			else
 			{
 				final int oItemMaxStackSize = Math.min(oItem.getMaxStackSize(), this.maxStackSize);
 				if (item.isSimilar(oItem) && oItem.getAmount() < oItemMaxStackSize)
@@ -485,8 +533,7 @@ public class InventoryMock implements Inventory
 	@Override
 	public List<HumanEntity> getViewers()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.viewers;
 	}
 
 	@Override
