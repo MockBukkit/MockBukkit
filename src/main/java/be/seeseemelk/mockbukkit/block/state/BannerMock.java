@@ -19,8 +19,8 @@ public class BannerMock extends TileStateMock implements Banner
 {
 
 	private DyeColor baseColor;
-	private List<Pattern> patterns = new ArrayList<>();
-	private Component customName;
+	private @NotNull List<Pattern> patterns = new ArrayList<>();
+	private @Nullable Component customName;
 
 	public BannerMock(@NotNull Material material)
 	{

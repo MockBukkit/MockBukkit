@@ -10,7 +10,7 @@ import java.util.UUID;
 public final class PlayerMockFactory
 {
 
-	private final ServerMock server;
+	private final @NotNull ServerMock server;
 	private final Random random = new Random();
 	private int currentNameIndex;
 

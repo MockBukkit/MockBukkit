@@ -40,7 +40,7 @@ public class BlockMock implements Block
 
 	private final MetadataTable metadataTable = new MetadataTable();
 
-	private final Location location;
+	private final @Nullable Location location;
 	private BlockStateMock state;
 	private Material material;
 	private byte data;
@@ -97,7 +97,7 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public List<MetadataValue> getMetadata(String metadataKey)
+	public @NotNull List<MetadataValue> getMetadata(String metadataKey)
 	{
 		return metadataTable.getMetadata(metadataKey);
 	}
@@ -122,7 +122,7 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public Block getRelative(int modX, int modY, int modZ)
+	public @NotNull Block getRelative(int modX, int modY, int modZ)
 	{
 		int x = location.getBlockX() + modX;
 		int y = location.getBlockY() + modY;
@@ -131,13 +131,13 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public Block getRelative(@NotNull BlockFace face)
+	public @NotNull Block getRelative(@NotNull BlockFace face)
 	{
 		return getRelative(face, 1);
 	}
 
 	@Override
-	public Block getRelative(@NotNull BlockFace face, int distance)
+	public @NotNull Block getRelative(@NotNull BlockFace face, int distance)
 	{
 		Preconditions.checkNotNull(face, "Face cannot be null");
 		return getRelative(face.getModX() * distance, face.getModY() * distance, face.getModZ() * distance);
@@ -158,7 +158,7 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public Material getType()
+	public @NotNull Material getType()
 	{
 		return material;
 	}
@@ -185,7 +185,7 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public World getWorld()
+	public @NotNull World getWorld()
 	{
 		return location.getWorld();
 	}
@@ -217,7 +217,7 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public Location getLocation()
+	public @NotNull Location getLocation()
 	{
 		return location;
 	}
@@ -239,7 +239,7 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public Chunk getChunk()
+	public @NotNull Chunk getChunk()
 	{
 		return location.getWorld().getChunkAt(this);
 	}
@@ -276,7 +276,7 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public BlockState getState()
+	public @NotNull BlockState getState()
 	{
 		// This will always return a snapshot of the BlockState, not the actual state.
 		// This is optional with Paper but for Spigot it simply works like that.
@@ -480,7 +480,7 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public PistonMoveReaction getPistonMoveReaction()
+	public @NotNull PistonMoveReaction getPistonMoveReaction()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -504,21 +504,21 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public Collection<ItemStack> getDrops()
+	public @NotNull Collection<ItemStack> getDrops()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Collection<ItemStack> getDrops(@Nullable ItemStack tool)
+	public @NotNull Collection<ItemStack> getDrops(@Nullable ItemStack tool)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public BlockData getBlockData()
+	public @NotNull BlockData getBlockData()
 	{
 		return blockData;
 	}
@@ -552,7 +552,7 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public BoundingBox getBoundingBox()
+	public @NotNull BoundingBox getBoundingBox()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -567,7 +567,7 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public Collection<ItemStack> getDrops(@NotNull ItemStack tool, Entity entity)
+	public @NotNull Collection<ItemStack> getDrops(@NotNull ItemStack tool, Entity entity)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

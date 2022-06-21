@@ -21,8 +21,8 @@ public class FishHookMock extends ProjectileMock implements FishHook
 	private int maxWaitTime = 600;
 	private boolean applyLure = true;
 	private double biteChance = -1;
-	private Entity hookedEntity;
-	private HookState state = HookState.UNHOOKED;
+	private @Nullable Entity hookedEntity;
+	private @NotNull HookState state = HookState.UNHOOKED;
 
 	public FishHookMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -185,7 +185,7 @@ public class FishHookMock extends ProjectileMock implements FishHook
 	}
 
 	@Override
-	public String toString()
+	public @NotNull String toString()
 	{
 		return "FishingHookMock";
 	}

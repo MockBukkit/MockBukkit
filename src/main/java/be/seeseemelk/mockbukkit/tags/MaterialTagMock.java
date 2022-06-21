@@ -19,7 +19,7 @@ public class MaterialTagMock implements Tag<Material>
 {
 
 	private final NamespacedKey key;
-	private final Set<Material> items;
+	private final @NotNull Set<Material> items;
 
 	public MaterialTagMock(NamespacedKey key, Material... items)
 	{

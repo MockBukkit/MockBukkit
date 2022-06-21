@@ -11,7 +11,7 @@ import java.util.Objects;
 public class CompassMetaMock extends ItemMetaMock implements CompassMeta
 {
 
-	private Location lodestone;
+	private @Nullable Location lodestone;
 	private boolean tracked;
 
 	public CompassMetaMock()
@@ -19,7 +19,7 @@ public class CompassMetaMock extends ItemMetaMock implements CompassMeta
 		super();
 	}
 
-	public CompassMetaMock(CompassMeta meta)
+	public CompassMetaMock(@NotNull CompassMeta meta)
 	{
 		super(meta);
 

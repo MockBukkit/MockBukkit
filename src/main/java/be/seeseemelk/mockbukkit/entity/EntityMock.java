@@ -55,27 +55,27 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public abstract class EntityMock extends Entity.Spigot implements Entity, MessageTarget
 {
 
-	private final ServerMock server;
-	private final UUID uuid;
+	private final @NotNull ServerMock server;
+	private final @NotNull UUID uuid;
 	private Location location;
 	private boolean teleported;
 	private TeleportCause teleportCause;
 	private final MetadataTable metadataTable = new MetadataTable();
 	private final PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
 	private boolean operator = false;
-	private Component name = Component.text("entity");
-	private Component customName = null;
+	private @NotNull Component name = Component.text("entity");
+	private @Nullable Component customName = null;
 	private boolean customNameVisible = false;
 	private boolean invulnerable;
 	private boolean glowingFlag = false;
 	private final Queue<Component> messages = new LinkedTransferQueue<>();
 	private final Set<PermissionAttachment> permissionAttachments = new HashSet<>();
-	private Vector velocity = new Vector(0, 0, 0);
+	private @NotNull Vector velocity = new Vector(0, 0, 0);
 	private float fallDistance;
 	private int fireTicks = -20;
 	private int maxFireTicks = 20;
 	private boolean removed = false;
-	private EntityDamageEvent lastDamageEvent;
+	private @Nullable EntityDamageEvent lastDamageEvent;
 
 	protected EntityMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -113,7 +113,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	 * @param expectedLocation The location the player should be at.
 	 * @param maximumDistance  The distance the player may maximumly be separated from the expected location.
 	 */
-	public void assertLocation(Location expectedLocation, double maximumDistance)
+	public void assertLocation(@NotNull Location expectedLocation, double maximumDistance)
 	{
 		double distance = location.distance(expectedLocation);
 		assertEquals(expectedLocation.getWorld(), location.getWorld());
@@ -337,7 +337,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public void sendMessage(UUID sender, String... messages)
+	public void sendMessage(UUID sender, String @NotNull ... messages)
 	{
 		for (String message : messages)
 		{

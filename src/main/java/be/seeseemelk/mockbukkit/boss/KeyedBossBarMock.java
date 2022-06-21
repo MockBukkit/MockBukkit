@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 public class KeyedBossBarMock extends BossBarMock implements KeyedBossBar
 {
 
-	private final NamespacedKey key;
+	private final @NotNull NamespacedKey key;
 
 	public KeyedBossBarMock(@NotNull NamespacedKey key, @NotNull String title, @NotNull BarColor color, @NotNull BarStyle style, BarFlag... flags)
 	{

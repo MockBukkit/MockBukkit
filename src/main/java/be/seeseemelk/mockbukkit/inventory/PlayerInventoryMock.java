@@ -37,7 +37,7 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	}
 
 	@Override
-	public ItemStack[] getStorageContents()
+	public ItemStack @NotNull [] getStorageContents()
 	{
 		return Arrays.copyOfRange(getContents(), 0, 36);
 	}
@@ -50,13 +50,13 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	}
 
 	@Override
-	public ItemStack[] getArmorContents()
+	public ItemStack @NotNull [] getArmorContents()
 	{
 		return Arrays.copyOfRange(getContents(), BOOTS, BOOTS + 4);
 	}
 
 	@Override
-	public ItemStack[] getExtraContents()
+	public ItemStack @NotNull [] getExtraContents()
 	{
 		return Arrays.copyOfRange(getContents(), OFF_HAND, OFF_HAND + 1);
 	}
@@ -86,7 +86,7 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	}
 
 	@Override
-	public void setArmorContents(ItemStack[] items)
+	public void setArmorContents(ItemStack @Nullable [] items)
 	{
 		if (items == null)
 			throw new NullPointerException("ItemStack was null");
@@ -184,7 +184,7 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	}
 
 	@Override
-	public void setExtraContents(ItemStack[] items)
+	public void setExtraContents(ItemStack @Nullable [] items)
 	{
 		if (items == null)
 			throw new NullPointerException("ItemStack was null");

@@ -49,7 +49,7 @@ public class ItemFactoryMock implements ItemFactory
 
 	private final Color defaultLeatherColor = Color.fromRGB(10511680);
 
-	private Class<? extends ItemMeta> getItemMetaClass(Material material)
+	private @NotNull Class<? extends ItemMeta> getItemMetaClass(@NotNull Material material)
 	{
 		// Special cases
 		if (Tag.ITEMS_BANNERS.isTagged(material))
@@ -84,7 +84,7 @@ public class ItemFactoryMock implements ItemFactory
 	}
 
 	@Override
-	public ItemMeta getItemMeta(@NotNull Material material)
+	public @NotNull ItemMeta getItemMeta(@NotNull Material material)
 	{
 		Preconditions.checkNotNull(material, "Material cannot be null");
 
@@ -102,13 +102,13 @@ public class ItemFactoryMock implements ItemFactory
 	}
 
 	@Override
-	public boolean isApplicable(ItemMeta meta, ItemStack stack)
+	public boolean isApplicable(ItemMeta meta, @NotNull ItemStack stack)
 	{
 		return isApplicable(meta, stack.getType());
 	}
 
 	@Override
-	public boolean isApplicable(ItemMeta meta, Material material)
+	public boolean isApplicable(ItemMeta meta, @NotNull Material material)
 	{
 		Class<? extends ItemMeta> target = getItemMetaClass(material);
 		return target.isInstance(meta);
@@ -122,13 +122,13 @@ public class ItemFactoryMock implements ItemFactory
 	}
 
 	@Override
-	public ItemMeta asMetaFor(ItemMeta meta, ItemStack stack)
+	public ItemMeta asMetaFor(@NotNull ItemMeta meta, @NotNull ItemStack stack)
 	{
 		return asMetaFor(meta, stack.getType());
 	}
 
 	@Override
-	public ItemMeta asMetaFor(ItemMeta meta, Material material)
+	public ItemMeta asMetaFor(@NotNull ItemMeta meta, @NotNull Material material)
 	{
 		Class<? extends ItemMeta> target = getItemMetaClass(material);
 		try
@@ -154,7 +154,7 @@ public class ItemFactoryMock implements ItemFactory
 	}
 
 	@Override
-	public Color getDefaultLeatherColor()
+	public @NotNull Color getDefaultLeatherColor()
 	{
 		return defaultLeatherColor;
 	}
@@ -169,7 +169,7 @@ public class ItemFactoryMock implements ItemFactory
 
 	@Override
 	@Deprecated
-	public Material updateMaterial(ItemMeta meta, Material material)
+	public @NotNull Material updateMaterial(ItemMeta meta, @NotNull Material material)
 	{
 		return material;
 	}

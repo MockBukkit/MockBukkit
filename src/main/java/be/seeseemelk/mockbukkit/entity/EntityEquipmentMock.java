@@ -24,17 +24,17 @@ import java.util.Map;
 public class EntityEquipmentMock implements EntityEquipment
 {
 
-	private final LivingEntityMock holder;
+	private final @NotNull LivingEntityMock holder;
 
 	private final Map<EquipmentSlot, Float> dropChances = new EnumMap<>(EquipmentSlot.class);
 
-	private ItemStack itemInMainHand = new ItemStack(Material.AIR);
-	private ItemStack itemInOffHand = new ItemStack(Material.AIR);
+	private @Nullable ItemStack itemInMainHand = new ItemStack(Material.AIR);
+	private @Nullable ItemStack itemInOffHand = new ItemStack(Material.AIR);
 
-	private ItemStack helmet = new ItemStack(Material.AIR);
-	private ItemStack chestPlate = new ItemStack(Material.AIR);
-	private ItemStack leggings = new ItemStack(Material.AIR);
-	private ItemStack boots = new ItemStack(Material.AIR);
+	private @Nullable ItemStack helmet = new ItemStack(Material.AIR);
+	private @Nullable ItemStack chestPlate = new ItemStack(Material.AIR);
+	private @Nullable ItemStack leggings = new ItemStack(Material.AIR);
+	private @Nullable ItemStack boots = new ItemStack(Material.AIR);
 
 	public EntityEquipmentMock(@NotNull LivingEntityMock holder)
 	{
@@ -220,7 +220,7 @@ public class EntityEquipmentMock implements EntityEquipment
 	}
 
 	@Override
-	public void setArmorContents(@NotNull ItemStack[] items)
+	public void setArmorContents(@NotNull ItemStack @NotNull [] items)
 	{
 		Preconditions.checkNotNull(items, "Items cannot be null");
 
@@ -329,7 +329,7 @@ public class EntityEquipmentMock implements EntityEquipment
 	}
 
 	@Override
-	public Entity getHolder()
+	public @NotNull Entity getHolder()
 	{
 		return holder;
 	}

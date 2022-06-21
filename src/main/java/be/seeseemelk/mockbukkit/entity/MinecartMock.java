@@ -19,8 +19,8 @@ public abstract class MinecartMock extends VehicleMock implements Minecart
 	private double damage = 0;
 	private double maxSpeed = 0.4;
 	private boolean slowWhenEmpty = true;
-	private Vector flyingVelocityMod = new Vector(0.949999988079071, 0.949999988079071, 0.949999988079071);
-	private Vector derailedVelocityMod = new Vector(0.5, 0.5, 0.5);
+	private @NotNull Vector flyingVelocityMod = new Vector(0.949999988079071, 0.949999988079071, 0.949999988079071);
+	private @NotNull Vector derailedVelocityMod = new Vector(0.5, 0.5, 0.5);
 	private BlockData displayBlock;
 	private int displayBlockOffset;
 

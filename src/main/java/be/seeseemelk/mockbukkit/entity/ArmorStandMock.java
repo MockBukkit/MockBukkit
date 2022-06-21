@@ -31,12 +31,12 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	private boolean hasBasePlate = true;
 	private boolean isVisible = true;
 
-	private EulerAngle headPose = EulerAngle.ZERO;
-	private EulerAngle bodyPose = EulerAngle.ZERO;
-	private EulerAngle leftArmPose = new EulerAngle(Math.toRadians(-10.0f), 0.0f, Math.toRadians(-10.0f));
-	private EulerAngle rightArmPose = new EulerAngle(Math.toRadians(-15.0f), 0.0f, Math.toRadians(10.0f));
-	private EulerAngle leftLegPose = new EulerAngle(Math.toRadians(-1.0f), 0.0f, Math.toRadians(-1.0f));
-	private EulerAngle rightLegPose = new EulerAngle(Math.toRadians(1.0f), 0.0f, Math.toRadians(1.0f));
+	private @NotNull EulerAngle headPose = EulerAngle.ZERO;
+	private @NotNull EulerAngle bodyPose = EulerAngle.ZERO;
+	private @NotNull EulerAngle leftArmPose = new EulerAngle(Math.toRadians(-10.0f), 0.0f, Math.toRadians(-10.0f));
+	private @NotNull EulerAngle rightArmPose = new EulerAngle(Math.toRadians(-15.0f), 0.0f, Math.toRadians(10.0f));
+	private @NotNull EulerAngle leftLegPose = new EulerAngle(Math.toRadians(-1.0f), 0.0f, Math.toRadians(-1.0f));
+	private @NotNull EulerAngle rightLegPose = new EulerAngle(Math.toRadians(1.0f), 0.0f, Math.toRadians(1.0f));
 
 	private final Set<EquipmentSlot> disabledSlots = EnumSet.noneOf(EquipmentSlot.class);
 

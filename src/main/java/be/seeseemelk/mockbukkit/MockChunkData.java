@@ -16,8 +16,8 @@ import java.util.Map;
 public class MockChunkData implements ChunkGenerator.ChunkData
 {
 
-	private final Map<Coordinate, BlockData> blocks;
-	private final Map<Coordinate, Biome> biomes;
+	private final @NotNull Map<Coordinate, BlockData> blocks;
+	private final @NotNull Map<Coordinate, Biome> biomes;
 
 	private final Biome defaultBiome;
 

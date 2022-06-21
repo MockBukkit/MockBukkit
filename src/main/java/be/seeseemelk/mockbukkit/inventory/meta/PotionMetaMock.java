@@ -25,16 +25,16 @@ import java.util.Objects;
 public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 {
 
-	private List<PotionEffect> effects = new ArrayList<>();
-	private PotionData basePotionData = new PotionData(PotionType.UNCRAFTABLE);
-	private Color color;
+	private @NotNull List<PotionEffect> effects = new ArrayList<>();
+	private @NotNull PotionData basePotionData = new PotionData(PotionType.UNCRAFTABLE);
+	private @Nullable Color color;
 
 	public PotionMetaMock()
 	{
 		super();
 	}
 
-	public PotionMetaMock(PotionMeta meta)
+	public PotionMetaMock(@NotNull PotionMeta meta)
 	{
 		super(meta);
 
@@ -76,7 +76,7 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	}
 
 	@Override
-	public PotionMetaMock clone()
+	public @NotNull PotionMetaMock clone()
 	{
 		PotionMetaMock mock = (PotionMetaMock) super.clone();
 		mock.effects = new ArrayList<>(effects);

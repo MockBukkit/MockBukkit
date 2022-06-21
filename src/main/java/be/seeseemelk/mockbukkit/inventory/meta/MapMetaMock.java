@@ -16,8 +16,8 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 	private static final byte SCALING_FALSE = (byte) 2;
 
 	private Integer mapId;
-	private MapView mapView;
-	private Color color;
+	private @Nullable MapView mapView;
+	private @Nullable Color color;
 	private byte scaling = SCALING_EMPTY;
 
 	public MapMetaMock()
@@ -25,7 +25,7 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 		super();
 	}
 
-	public MapMetaMock(MapMeta meta)
+	public MapMetaMock(@NotNull MapMeta meta)
 	{
 		super(meta);
 

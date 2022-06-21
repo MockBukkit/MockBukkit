@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 public final class ActivePotionEffect
 {
 
-	private final PotionEffect effect;
+	private final @NotNull PotionEffect effect;
 	private final long timestamp;
 
 	public ActivePotionEffect(@NotNull PotionEffect effect)

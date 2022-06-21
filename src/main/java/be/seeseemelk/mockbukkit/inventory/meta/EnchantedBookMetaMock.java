@@ -17,14 +17,14 @@ import java.util.Map;
 public class EnchantedBookMetaMock extends ItemMetaMock implements EnchantmentStorageMeta
 {
 
-	private Map<Enchantment, Integer> storedEnchantments = new HashMap<>();
+	private @NotNull Map<Enchantment, Integer> storedEnchantments = new HashMap<>();
 
 	public EnchantedBookMetaMock()
 	{
 		super();
 	}
 
-	public EnchantedBookMetaMock(EnchantmentStorageMeta meta)
+	public EnchantedBookMetaMock(@NotNull EnchantmentStorageMeta meta)
 	{
 		super(meta);
 
@@ -59,7 +59,7 @@ public class EnchantedBookMetaMock extends ItemMetaMock implements EnchantmentSt
 	}
 
 	@Override
-	public EnchantedBookMetaMock clone()
+	public @NotNull EnchantedBookMetaMock clone()
 	{
 		EnchantedBookMetaMock mock = (EnchantedBookMetaMock) super.clone();
 		mock.storedEnchantments = new HashMap<>(storedEnchantments);

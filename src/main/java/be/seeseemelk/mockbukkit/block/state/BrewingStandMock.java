@@ -37,7 +37,7 @@ public class BrewingStandMock extends ContainerMock implements BrewingStand
 	}
 
 	@Override
-	protected InventoryMock createInventory()
+	protected @NotNull InventoryMock createInventory()
 	{
 //		return new BrewingStandInventory(this); TODO: Not implemented.
 		return new InventoryMock(this, InventoryType.BREWING);

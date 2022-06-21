@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit;
 
 import org.bukkit.BanEntry;
 import org.bukkit.BanList;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -29,7 +30,7 @@ public class MockBanList implements BanList
 	}
 
 	@Override
-	public Set<BanEntry> getBanEntries()
+	public @NotNull Set<BanEntry> getBanEntries()
 	{
 		return new HashSet<>(this.bans.values());
 	}
@@ -65,13 +66,13 @@ public class MockBanList implements BanList
 		}
 
 		@Override
-		public String getTarget()
+		public @NotNull String getTarget()
 		{
 			return this.target;
 		}
 
 		@Override
-		public Date getCreated()
+		public @NotNull Date getCreated()
 		{
 			return this.created;
 		}
@@ -83,7 +84,7 @@ public class MockBanList implements BanList
 		}
 
 		@Override
-		public String getSource()
+		public @NotNull String getSource()
 		{
 			return this.source;
 		}

@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 public class PersistentDataHolderMock implements PersistentDataHolder
 {
 
-	private final PersistentDataContainer container;
+	private final @NotNull PersistentDataContainer container;
 
 	public PersistentDataHolderMock()
 	{

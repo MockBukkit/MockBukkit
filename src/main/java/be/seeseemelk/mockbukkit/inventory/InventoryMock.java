@@ -29,12 +29,12 @@ public class InventoryMock implements Inventory
 
 	private static final int MAX_STACK_SIZE = 64;
 
-	private final ItemStack[] items;
-	private final InventoryHolder holder;
-	private final InventoryType type;
+	private final ItemStack @NotNull [] items;
+	private final @Nullable InventoryHolder holder;
+	private final @NotNull InventoryType type;
 
 	private int maxStackSize = MAX_STACK_SIZE;
-	private List<HumanEntity> viewers = new ArrayList<>();
+	private @NotNull List<HumanEntity> viewers = new ArrayList<>();
 
 	public InventoryMock(@Nullable InventoryHolder holder, int size, @NotNull InventoryType type)
 	{
@@ -200,7 +200,7 @@ public class InventoryMock implements Inventory
 	}
 
 	@Override
-	public void setItem(int index, ItemStack item)
+	public void setItem(int index, @Nullable ItemStack item)
 	{
 		items[index] = item == null ? null : item.clone();
 	}
@@ -247,7 +247,7 @@ public class InventoryMock implements Inventory
 	}
 
 	@Override
-	public HashMap<Integer, ItemStack> addItem(ItemStack... items) throws IllegalArgumentException
+	public @NotNull HashMap<Integer, ItemStack> addItem(ItemStack @NotNull ... items) throws IllegalArgumentException
 	{
 		HashMap<Integer, ItemStack> notSaved = new HashMap<>();
 		for (int i = 0; i < items.length; i++)
@@ -269,7 +269,7 @@ public class InventoryMock implements Inventory
 	}
 
 	@Override
-	public void setContents(ItemStack[] items)
+	public void setContents(ItemStack @NotNull [] items)
 	{
 		for (int i = 0; i < getSize(); i++)
 		{
@@ -285,7 +285,7 @@ public class InventoryMock implements Inventory
 	}
 
 	@Override
-	public InventoryHolder getHolder()
+	public @Nullable InventoryHolder getHolder()
 	{
 		return holder;
 	}
@@ -298,14 +298,14 @@ public class InventoryMock implements Inventory
 	}
 
 	@Override
-	public ListIterator<ItemStack> iterator()
+	public @NotNull ListIterator<ItemStack> iterator()
 	{
 		List<ItemStack> list = Arrays.asList(items).stream().filter(Objects::nonNull).collect(Collectors.toList());
 		return list.listIterator();
 	}
 
 	@Override
-	public InventoryType getType()
+	public @NotNull InventoryType getType()
 	{
 		return type;
 	}
@@ -332,7 +332,7 @@ public class InventoryMock implements Inventory
 	}
 
 	@Override
-	public HashMap<Integer, ItemStack> removeItem(ItemStack... items) throws IllegalArgumentException
+	public @NotNull HashMap<Integer, ItemStack> removeItem(ItemStack... items) throws IllegalArgumentException
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -352,13 +352,13 @@ public class InventoryMock implements Inventory
 	}
 
 	@Override
-	public void setStorageContents(ItemStack[] items) throws IllegalArgumentException
+	public void setStorageContents(ItemStack @NotNull [] items) throws IllegalArgumentException
 	{
 		setContents(items);
 	}
 
 	@Override
-	public boolean contains(Material material) throws IllegalArgumentException
+	public boolean contains(@Nullable Material material) throws IllegalArgumentException
 	{
 		if (material == null)
 		{
@@ -381,7 +381,7 @@ public class InventoryMock implements Inventory
 	}
 
 	@Override
-	public boolean contains(Material material, int amount) throws IllegalArgumentException
+	public boolean contains(@Nullable Material material, int amount) throws IllegalArgumentException
 	{
 		if (material == null)
 		{
@@ -391,13 +391,13 @@ public class InventoryMock implements Inventory
 	}
 
 	@Override
-	public boolean contains(ItemStack item, int amount)
+	public boolean contains(@NotNull ItemStack item, int amount)
 	{
 		return getNumberOfItems(item) == amount;
 	}
 
 	@Override
-	public boolean containsAtLeast(ItemStack item, int amount)
+	public boolean containsAtLeast(@NotNull ItemStack item, int amount)
 	{
 		return getNumberOfItems(item) >= amount;
 	}
@@ -420,7 +420,7 @@ public class InventoryMock implements Inventory
 	}
 
 	@Override
-	public @NotNull HashMap<Integer, ? extends ItemStack> all(ItemStack item)
+	public @NotNull HashMap<Integer, ? extends ItemStack> all(@Nullable ItemStack item)
 	{
 		HashMap<Integer, ItemStack> slots = new HashMap<>();
 		if (item != null)
@@ -531,13 +531,13 @@ public class InventoryMock implements Inventory
 	}
 
 	@Override
-	public List<HumanEntity> getViewers()
+	public @NotNull List<HumanEntity> getViewers()
 	{
 		return this.viewers;
 	}
 
 	@Override
-	public ListIterator<ItemStack> iterator(int index)
+	public @NotNull ListIterator<ItemStack> iterator(int index)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

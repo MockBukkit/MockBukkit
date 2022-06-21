@@ -1,5 +1,7 @@
 package be.seeseemelk.mockbukkit;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Objects;
 
 /**
@@ -34,7 +36,7 @@ public class ChunkCoordinate
 	}
 
 	@Override
-	public boolean equals(Object obj)
+	public boolean equals(@Nullable Object obj)
 	{
 		if (this == obj)
 			return true;

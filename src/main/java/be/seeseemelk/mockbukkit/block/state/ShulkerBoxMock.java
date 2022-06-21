@@ -24,7 +24,7 @@ import java.util.UUID;
 public class ShulkerBoxMock extends ContainerMock implements ShulkerBox
 {
 
-	private final DyeColor color;
+	private final @Nullable DyeColor color;
 	private boolean isOpen = false;
 
 	public ShulkerBoxMock(@NotNull Material material)
@@ -142,7 +142,7 @@ public class ShulkerBoxMock extends ContainerMock implements ShulkerBox
 	}
 
 	@Override
-	protected InventoryMock createInventory()
+	protected @NotNull InventoryMock createInventory()
 	{
 		return new ShulkerBoxInventoryMock(this);
 	}

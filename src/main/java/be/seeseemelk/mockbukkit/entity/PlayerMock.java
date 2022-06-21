@@ -137,15 +137,15 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 {
 
 	private boolean online;
-	private PlayerInventoryMock inventory = null;
-	private EnderChestInventoryMock enderChest = null;
-	private final ServerMock server;
-	private GameMode gamemode = GameMode.SURVIVAL;
+	private @Nullable PlayerInventoryMock inventory = null;
+	private @Nullable EnderChestInventoryMock enderChest = null;
+	private final @NotNull ServerMock server;
+	private @NotNull GameMode gamemode = GameMode.SURVIVAL;
 	private GameMode previousGamemode = gamemode;
-	private Component displayName = null;
-	private Component playerListName = null;
-	private Component playerListHeader = null;
-	private Component playerListFooter = null;
+	private @Nullable Component displayName = null;
+	private @Nullable Component playerListName = null;
+	private @Nullable Component playerListHeader = null;
+	private @Nullable Component playerListFooter = null;
 	private int expTotal = 0;
 	private float exp = 0;
 	private int foodLevel = 20;
@@ -159,11 +159,11 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private InventoryView inventoryView;
 
 	private Location compassTarget;
-	private Location bedSpawnLocation;
-	private ItemStack cursor = null;
+	private @Nullable Location bedSpawnLocation;
+	private @Nullable ItemStack cursor = null;
 	private long firstPlayed = 0;
 	private long lastPlayed = 0;
-	private InetSocketAddress address;
+	private @Nullable InetSocketAddress address;
 
 	private final PlayerSpigotMock playerSpigotMock = new PlayerSpigotMock();
 	private final List<AudioExperience> heardSounds = new LinkedList<>();
@@ -280,7 +280,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @param block The block to damage.
 	 * @return The event that has been fired.
 	 */
-	protected BlockDamageEvent simulateBlockDamagePure(@NotNull Block block)
+	protected @NotNull BlockDamageEvent simulateBlockDamagePure(@NotNull Block block)
 	{
 		Preconditions.checkNotNull(block, "Block cannot be null");
 		BlockDamageEvent event = new BlockDamageEvent(this, block, getItemInHand(), false);
@@ -398,7 +398,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @param slot          The slot in the provided Inventory
 	 * @return The event that was fired.
 	 */
-	public InventoryClickEvent simulateInventoryClick(@NotNull InventoryView inventoryView, ClickType clickType, int slot)
+	public @NotNull InventoryClickEvent simulateInventoryClick(@NotNull InventoryView inventoryView, @NotNull ClickType clickType, int slot)
 	{
 		Preconditions.checkNotNull(inventoryView, "InventoryView cannot be null");
 		InventoryClickEvent inventoryClickEvent = new InventoryClickEvent(inventoryView, InventoryType.SlotType.CONTAINER, slot, clickType, InventoryAction.UNKNOWN);
@@ -576,7 +576,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @param type      The {@link InventoryType} you are expecting
 	 * @param predicate A custom {@link Predicate} to check the opened {@link Inventory}.
 	 */
-	public void assertInventoryView(String message, InventoryType type, Predicate<Inventory> predicate)
+	public void assertInventoryView(String message, InventoryType type, @NotNull Predicate<Inventory> predicate)
 	{
 		InventoryView view = getOpenInventory();
 
@@ -596,7 +596,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @param type      The {@link InventoryType} you are expecting
 	 * @param predicate A custom {@link Predicate} to check the opened {@link Inventory}.
 	 */
-	public void assertInventoryView(InventoryType type, Predicate<Inventory> predicate)
+	public void assertInventoryView(InventoryType type, @NotNull Predicate<Inventory> predicate)
 	{
 		assertInventoryView("The InventoryView Assertion has failed", type, predicate);
 	}
@@ -1272,7 +1272,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 	@Override
 	@Deprecated
-	public void setDisplayName(String name)
+	public void setDisplayName(@NotNull String name)
 	{
 		this.displayName = LegacyComponentSerializer.legacySection().deserialize(name);
 	}
@@ -1644,7 +1644,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public <T> void playEffect(@NotNull Location loc, @NotNull Effect effect, T data)
+	public <T> void playEffect(@NotNull Location loc, @NotNull Effect effect, @Nullable T data)
 	{
 		Preconditions.checkNotNull(loc, "Location cannot be null");
 		Preconditions.checkNotNull(effect, "Effect cannot be null");
@@ -1727,7 +1727,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public void sendSignChange(@NotNull Location loc, @Nullable String[] lines, @NotNull DyeColor dyeColor, boolean hasGlowingText) throws IllegalArgumentException
+	public void sendSignChange(@NotNull Location loc, @Nullable String @Nullable [] lines, @NotNull DyeColor dyeColor, boolean hasGlowingText) throws IllegalArgumentException
 	{
 		Preconditions.checkNotNull(loc, "Location cannot be null");
 		Preconditions.checkNotNull(dyeColor, "DyeColor cannot be null");
@@ -1779,7 +1779,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 	@Override
 	@Deprecated
-	public void setPlayerListHeaderFooter(@Nullable BaseComponent[] header, @Nullable BaseComponent[] footer)
+	public void setPlayerListHeaderFooter(BaseComponent @NotNull [] header, BaseComponent @NotNull [] footer)
 	{
 		this.playerListHeader = BungeeComponentSerializer.get().deserialize(Arrays.stream(header).filter(Objects::nonNull).toArray(BaseComponent[]::new));
 		this.playerListFooter = BungeeComponentSerializer.get().deserialize(Arrays.stream(footer).filter(Objects::nonNull).toArray(BaseComponent[]::new));
@@ -2539,12 +2539,12 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		sendTitle(title, subtitle);
 	}
 
-	public String nextTitle()
+	public @Nullable String nextTitle()
 	{
 		return title.poll();
 	}
 
-	public String nextSubTitle()
+	public @Nullable String nextSubTitle()
 	{
 		return subitles.poll();
 	}
@@ -2636,7 +2636,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 	@Override
 	public <T> void spawnParticle(@NotNull Particle particle, double x, double y, double z, int count, double offsetX,
-								  double offsetY, double offsetZ, double extra, T data)
+								  double offsetY, double offsetZ, double extra, @Nullable T data)
 	{
 		Preconditions.checkNotNull(particle, "Particle cannot be null");
 		if (data != null && !particle.getDataType().isInstance(data))
@@ -3280,7 +3280,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 		@Override
 		@Deprecated
-		public void sendMessage(@NotNull BaseComponent... components)
+		public void sendMessage(@NotNull BaseComponent @NotNull ... components)
 		{
 			for (BaseComponent component : components)
 			{
@@ -3290,7 +3290,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 		@Override
 		@Deprecated
-		public void sendMessage(@NotNull ChatMessageType position, @NotNull BaseComponent... components)
+		public void sendMessage(@NotNull ChatMessageType position, @NotNull BaseComponent @NotNull ... components)
 		{
 			for (BaseComponent component : components)
 			{

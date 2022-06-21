@@ -69,7 +69,7 @@ public class HopperMock extends ContainerMock implements Hopper
 	}
 
 	@Override
-	protected InventoryMock createInventory()
+	protected @NotNull InventoryMock createInventory()
 	{
 		return new HopperInventoryMock(this);
 	}

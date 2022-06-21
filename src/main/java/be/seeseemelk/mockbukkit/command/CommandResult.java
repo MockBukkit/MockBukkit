@@ -13,7 +13,7 @@ public class CommandResult
 {
 
 	private final boolean success;
-	private final MessageTarget sender;
+	private final @NotNull MessageTarget sender;
 
 	public CommandResult(boolean success, @NotNull MessageTarget sender)
 	{
@@ -72,7 +72,7 @@ public class CommandResult
 	 * @param format  The formatted message to check for.
 	 * @param objects The objects to place into the formatted message.
 	 */
-	public void assertResponse(String format, Object... objects)
+	public void assertResponse(@NotNull String format, Object... objects)
 	{
 		assertResponse(String.format(format, objects));
 	}

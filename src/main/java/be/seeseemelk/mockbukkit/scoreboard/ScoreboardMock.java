@@ -24,13 +24,13 @@ import java.util.stream.Collectors;
 public class ScoreboardMock implements Scoreboard
 {
 
-	private Map<String, ObjectiveMock> objectives = new HashMap<>();
-	private Map<DisplaySlot, ObjectiveMock> objectivesByDisplaySlot = new EnumMap<>(DisplaySlot.class);
-	private Map<String, Team> teams = new HashMap<>();
+	private @NotNull Map<String, ObjectiveMock> objectives = new HashMap<>();
+	private @NotNull Map<DisplaySlot, ObjectiveMock> objectivesByDisplaySlot = new EnumMap<>(DisplaySlot.class);
+	private @NotNull Map<String, Team> teams = new HashMap<>();
 
 	@Override
 	@Deprecated
-	public ObjectiveMock registerNewObjective(String name, String criteria) throws IllegalArgumentException
+	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull String criteria) throws IllegalArgumentException
 	{
 		return registerNewObjective(name, criteria, name, RenderType.INTEGER);
 	}
@@ -51,7 +51,7 @@ public class ScoreboardMock implements Scoreboard
 
 	@Override
 	@Deprecated
-	public ObjectiveMock registerNewObjective(String name, String criteria, String displayName)
+	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull String criteria, @NotNull String displayName)
 			throws IllegalArgumentException
 	{
 		return registerNewObjective(name, criteria, displayName, RenderType.INTEGER);
@@ -59,7 +59,7 @@ public class ScoreboardMock implements Scoreboard
 
 	@Override
 	@Deprecated
-	public ObjectiveMock registerNewObjective(String name, String criteria, String displayName, RenderType renderType)
+	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull String criteria, @NotNull String displayName, @NotNull RenderType renderType)
 			throws IllegalArgumentException
 	{
 		if (objectives.containsKey(name))
@@ -78,14 +78,14 @@ public class ScoreboardMock implements Scoreboard
 	}
 
 	@Override
-	public Set<Objective> getObjectivesByCriteria(String criteria) throws IllegalArgumentException
+	public @NotNull Set<Objective> getObjectivesByCriteria(String criteria) throws IllegalArgumentException
 	{
 		return objectives.values().stream().filter(objective -> objective.getCriteria().equals(criteria))
 				.collect(Collectors.toSet());
 	}
 
 	@Override
-	public Set<Objective> getObjectives()
+	public @NotNull Set<Objective> getObjectives()
 	{
 		return Collections.unmodifiableSet(new HashSet<>(objectives.values()));
 	}
@@ -97,13 +97,13 @@ public class ScoreboardMock implements Scoreboard
 	}
 
 	@Override
-	public Set<Score> getScores(OfflinePlayer player) throws IllegalArgumentException
+	public @NotNull Set<Score> getScores(@NotNull OfflinePlayer player) throws IllegalArgumentException
 	{
 		return getScores(player.getName());
 	}
 
 	@Override
-	public Set<Score> getScores(String entry) throws IllegalArgumentException
+	public @NotNull Set<Score> getScores(@NotNull String entry) throws IllegalArgumentException
 	{
 		Set<Score> scores = new HashSet<>();
 
@@ -116,13 +116,13 @@ public class ScoreboardMock implements Scoreboard
 	}
 
 	@Override
-	public void resetScores(OfflinePlayer player) throws IllegalArgumentException
+	public void resetScores(@NotNull OfflinePlayer player) throws IllegalArgumentException
 	{
 		resetScores(player.getName());
 	}
 
 	@Override
-	public void resetScores(String entry) throws IllegalArgumentException
+	public void resetScores(@NotNull String entry) throws IllegalArgumentException
 	{
 		for (Objective o : objectives.values())
 		{
@@ -132,13 +132,13 @@ public class ScoreboardMock implements Scoreboard
 	}
 
 	@Override
-	public Team getPlayerTeam(OfflinePlayer player) throws IllegalArgumentException
+	public Team getPlayerTeam(@NotNull OfflinePlayer player) throws IllegalArgumentException
 	{
 		return getEntryTeam(player.getName());
 	}
 
 	@Override
-	public Team getEntryTeam(String entry) throws IllegalArgumentException
+	public Team getEntryTeam(@NotNull String entry) throws IllegalArgumentException
 	{
 		for (Team t : teams.values())
 		{
@@ -158,13 +158,13 @@ public class ScoreboardMock implements Scoreboard
 	}
 
 	@Override
-	public Set<Team> getTeams()
+	public @NotNull Set<Team> getTeams()
 	{
 		return Collections.unmodifiableSet(new HashSet<>(teams.values()));
 	}
 
 	@Override
-	public Team registerNewTeam(String name) throws IllegalArgumentException
+	public @NotNull Team registerNewTeam(String name) throws IllegalArgumentException
 	{
 		if (teams.containsKey(name))
 		{
@@ -178,7 +178,7 @@ public class ScoreboardMock implements Scoreboard
 	@SuppressWarnings("deprecation")
 	@Override
 	@Deprecated
-	public Set<OfflinePlayer> getPlayers()
+	public @NotNull Set<OfflinePlayer> getPlayers()
 	{
 		Set<OfflinePlayer> players = new HashSet<>();
 
@@ -191,7 +191,7 @@ public class ScoreboardMock implements Scoreboard
 	}
 
 	@Override
-	public Set<String> getEntries()
+	public @NotNull Set<String> getEntries()
 	{
 		Set<String> entries = new HashSet<>();
 

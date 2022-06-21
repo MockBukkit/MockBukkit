@@ -14,7 +14,7 @@ import java.util.UUID;
 public abstract class ProjectileMock extends AbstractProjectileMock implements Projectile
 {
 
-	private ProjectileSource source;
+	private @Nullable ProjectileSource source;
 
 	protected ProjectileMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{

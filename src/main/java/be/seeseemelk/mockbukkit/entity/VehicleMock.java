@@ -15,7 +15,7 @@ public abstract class VehicleMock extends EntityMock implements Vehicle
 	}
 
 	@Override
-	public String toString()
+	public @NotNull String toString()
 	{
 		return "VehicleMock{passenger=" + getPassenger() + '}';
 	}

@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 class DispenserProjectileSourceMock implements BlockProjectileSource
 {
 
-	private final DispenserMock dispenser;
+	private final @NotNull DispenserMock dispenser;
 
 	DispenserProjectileSourceMock(@NotNull DispenserMock dispenser)
 	{
@@ -23,21 +23,21 @@ class DispenserProjectileSourceMock implements BlockProjectileSource
 	}
 
 	@Override
-	public <T extends Projectile> T launchProjectile(Class<? extends T> projectile)
+	public <T extends Projectile> @NotNull T launchProjectile(Class<? extends T> projectile)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public <T extends Projectile> T launchProjectile(Class<? extends T> projectile, Vector velocity)
+	public <T extends Projectile> @NotNull T launchProjectile(Class<? extends T> projectile, Vector velocity)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Block getBlock()
+	public @NotNull Block getBlock()
 	{
 		return dispenser.getBlock();
 	}

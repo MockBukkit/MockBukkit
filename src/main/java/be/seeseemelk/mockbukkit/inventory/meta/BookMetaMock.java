@@ -25,16 +25,16 @@ import java.util.Objects;
 public class BookMetaMock extends ItemMetaMock implements BookMeta
 {
 
-	private String title;
-	private List<String> pages = new ArrayList<>();
-	private String author;
+	private @Nullable String title;
+	private @NotNull List<String> pages = new ArrayList<>();
+	private @Nullable String author;
 
 	public BookMetaMock()
 	{
 		super();
 	}
 
-	public BookMetaMock(BookMeta meta)
+	public BookMetaMock(@NotNull BookMeta meta)
 	{
 		super(meta);
 
@@ -155,7 +155,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	}
 
 	@Override
-	public boolean setTitle(String title)
+	public boolean setTitle(@Nullable String title)
 	{
 		if (title == null)
 		{
@@ -193,7 +193,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 
 	@Override
 	@Deprecated
-	public String getPage(int page)
+	public @NotNull String getPage(int page)
 	{
 		Preconditions.checkArgument(this.isValidPage(page), "Invalid page number");
 		return this.pages.get(page - 1);
@@ -206,7 +206,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 
 	@Override
 	@Deprecated
-	public void setPage(int page, String text)
+	public void setPage(int page, @Nullable String text)
 	{
 		if (!this.isValidPage(page))
 		{
@@ -225,7 +225,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 
 	@Override
 	@Deprecated
-	public List<String> getPages()
+	public @NotNull List<String> getPages()
 	{
 		return pages;
 	}
@@ -240,7 +240,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 
 	@Override
 	@Deprecated
-	public void setPages(List<String> pages)
+	public void setPages(@NotNull List<String> pages)
 	{
 		this.pages.clear();
 		Iterator<String> var2 = pages.iterator();
@@ -255,7 +255,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 
 	@Override
 	@Deprecated
-	public void addPage(String... pages)
+	public void addPage(String @NotNull ... pages)
 	{
 
 		for (String page1 : pages)
@@ -282,7 +282,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	}
 
 	@Override
-	public BookMetaMock clone()
+	public @NotNull BookMetaMock clone()
 	{
 		BookMetaMock mock = (BookMetaMock) super.clone();
 		mock.pages = new ArrayList<>(pages);
@@ -311,7 +311,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	}
 
 	@Override
-	public Spigot spigot()
+	public @NotNull Spigot spigot()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

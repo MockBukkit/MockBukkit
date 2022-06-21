@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 public abstract class TileStateMock extends BlockStateMock implements TileState
 {
 
-	private final PersistentDataContainerMock container;
+	private final @NotNull PersistentDataContainerMock container;
 
 	protected TileStateMock(@NotNull Material material)
 	{
@@ -39,7 +39,7 @@ public abstract class TileStateMock extends BlockStateMock implements TileState
 	}
 
 	@Override
-	public PersistentDataContainer getPersistentDataContainer()
+	public @NotNull PersistentDataContainer getPersistentDataContainer()
 	{
 		return container;
 	}
@@ -52,6 +52,6 @@ public abstract class TileStateMock extends BlockStateMock implements TileState
 	}
 
 	@Override
-	public abstract BlockState getSnapshot();
+	public abstract @NotNull BlockState getSnapshot();
 
 }

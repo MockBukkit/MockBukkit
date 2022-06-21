@@ -22,11 +22,11 @@ import java.util.Collection;
 public class BeaconMock extends TileStateMock implements Beacon
 {
 
-	private String lock;
-	private Component customName;
+	private @Nullable String lock;
+	private @Nullable Component customName;
 	private int tier;
-	private PotionEffectType primaryEffect;
-	private PotionEffectType secondaryEffect;
+	private @Nullable PotionEffectType primaryEffect;
+	private @Nullable PotionEffectType secondaryEffect;
 	private double effectRange = -1;
 
 	public BeaconMock(@NotNull Material material)
