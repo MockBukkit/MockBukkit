@@ -23,6 +23,7 @@ import be.seeseemelk.mockbukkit.inventory.meta.MapMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.CompassMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.CrossbowMetaMock;
 
+import com.destroystokyo.paper.MaterialTags;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.inventory.ItemStack;
@@ -85,7 +86,7 @@ class ItemFactoryMockTest
 		assertTrue(factory.getItemMeta(Material.ARMOR_STAND) instanceof ArmorStandMetaMock);
 		assertTrue(factory.getItemMeta(Material.TROPICAL_FISH_BUCKET) instanceof TropicalFishBucketMetaMock);
 
-		for (Material egg : Arrays.stream(Material.values()).filter(m -> m.name().endsWith("_SPAWN_EGG")).toList())
+		for (Material egg : MaterialTags.SPAWN_EGGS.getValues())
 		{
 			assertTrue(factory.getItemMeta(egg) instanceof SpawnEggMetaMock);
 		}

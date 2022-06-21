@@ -30,6 +30,7 @@ import be.seeseemelk.mockbukkit.inventory.meta.SkullMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.SuspiciousStewMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.TropicalFishBucketMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.BundleMetaMock;
+import com.destroystokyo.paper.MaterialTags;
 import com.google.common.base.Preconditions;
 
 import net.kyori.adventure.text.Component;
@@ -62,18 +63,17 @@ public class ItemFactoryMock implements ItemFactory
 
 	private Class<? extends ItemMeta> getItemMetaClass(Material material)
 	{
-		if (material.name().endsWith("_SPAWN_EGG")) {
-			return SpawnEggMetaMock.class;
-		}
-
 		// Special cases
 		if (Tag.ITEMS_BANNERS.isTagged(material))
 		{
 			return BannerMetaMock.class;
 		}
+		else if (MaterialTags.SPAWN_EGGS.isTagged(material))
+		{
+			return SpawnEggMetaMock.class;
+		}
 		return switch (material)
 		{
-
 		case ARMOR_STAND -> ArmorStandMetaMock.class;
 		case WRITABLE_BOOK, WRITTEN_BOOK -> BookMetaMock.class;
 		case ENCHANTED_BOOK -> EnchantedBookMetaMock.class;
