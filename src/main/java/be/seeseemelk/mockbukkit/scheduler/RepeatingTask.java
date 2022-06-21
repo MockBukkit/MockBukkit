@@ -1,6 +1,9 @@
 package be.seeseemelk.mockbukkit.scheduler;
 
 import org.bukkit.plugin.Plugin;
+import org.bukkit.scheduler.BukkitTask;
+
+import java.util.function.Consumer;
 
 public class RepeatingTask extends ScheduledTask
 {
@@ -10,6 +13,12 @@ public class RepeatingTask extends ScheduledTask
 	public RepeatingTask(int id, Plugin plugin, boolean isSync, long scheduledTick, long period, Runnable runnable)
 	{
 		super(id, plugin, isSync, scheduledTick, runnable);
+		this.period = period;
+	}
+
+	public RepeatingTask(int id, Plugin plugin, boolean isSync, long scheduledTick, long period, Consumer<BukkitTask> consumer)
+	{
+		super(id, plugin, isSync, scheduledTick, consumer);
 		this.period = period;
 	}
 
