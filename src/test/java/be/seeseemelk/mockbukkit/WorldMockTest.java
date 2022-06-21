@@ -3,10 +3,13 @@ package be.seeseemelk.mockbukkit;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import be.seeseemelk.mockbukkit.block.state.BlockStateMock;
+import be.seeseemelk.mockbukkit.entity.AllayMock;
 import be.seeseemelk.mockbukkit.entity.ArmorStandMock;
+import be.seeseemelk.mockbukkit.entity.EndermanMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
 import be.seeseemelk.mockbukkit.entity.FireworkMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
+import be.seeseemelk.mockbukkit.entity.SheepMock;
 import be.seeseemelk.mockbukkit.entity.ZombieMock;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
@@ -25,6 +28,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Sheep;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.ItemSpawnEvent;
@@ -35,6 +39,7 @@ import org.bukkit.event.world.TimeSkipEvent;
 import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -360,7 +365,7 @@ class WorldMockTest
 		world.setTime(6000L);
 		world.setTime(10000L);
 		server.getPluginManager().assertEventFired(TimeSkipEvent.class, event ->
-		        event.getSkipAmount() == 4000L && event.getSkipReason() == TimeSkipEvent.SkipReason.CUSTOM);
+				event.getSkipAmount() == 4000L && event.getSkipReason() == TimeSkipEvent.SkipReason.CUSTOM);
 	}
 
 	@Test
@@ -392,6 +397,14 @@ class WorldMockTest
 		assertNotNull(block.getChunk());
 		Chunk chunk = block.getChunk();
 		assertTrue(world.isChunkLoaded(chunk.getX(), chunk.getZ()));
+	}
+
+	@Test
+	void getWorldBorder_NotNull()
+	{
+		WorldMock worldMock = new WorldMock();
+
+		assertNotNull(worldMock.getWorldBorder());
 	}
 
 	@Test
@@ -856,6 +869,80 @@ class WorldMockTest
 		Entity armorStand = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ARMOR_STAND);
 		assertTrue(armorStand.isValid());
 		assertFalse(armorStand.isDead());
+	}
+
+	@Test
+	void testSpawnSheep()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.SHEEP);
+		assertInstanceOf(SheepMock.class, entity);
+		assertTrue(entity.isValid());
+	}
+
+	@Test
+	void testSpawnAllay()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ALLAY);
+		assertInstanceOf(AllayMock.class, entity);
+		assertTrue(entity.isValid());
+	}
+
+	@Test
+	void testGetAllowAnimalsDefault()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertTrue(world.getAllowAnimals());
+	}
+
+	@Test
+	void testGetAllowMonstersDefault()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertTrue(world.getAllowMonsters());
+	}
+
+	@Test
+	void testSetSpawnFlags()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+
+		world.setSpawnFlags(false, true);
+		assertFalse(world.getAllowMonsters());
+		assertTrue(world.getAllowAnimals());
+
+		world.setSpawnFlags(true, false);
+		assertTrue(world.getAllowMonsters());
+		assertFalse(world.getAllowAnimals());
+	}
+
+	@Test
+	void testCallSpawnEventOnDisallowedMonster()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setSpawnFlags(false, true);
+		Entity zombie = world.spawn(new Location(world, 0, 0, 0), Zombie.class, CreatureSpawnEvent.SpawnReason.NATURAL);
+		assertFalse(zombie.isValid());
+		assertTrue(zombie.isDead());
+	}
+
+	@Test
+	void testCallSpawnEventOnDisallowedAnimal()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setSpawnFlags(true, false);
+		Entity sheep = world.spawn(new Location(world, 0, 0, 0), Sheep.class, CreatureSpawnEvent.SpawnReason.NATURAL);
+		assertFalse(sheep.isValid());
+	}
+
+	@Test
+	void testSpawnEnderman()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ENDERMAN);
+		assertInstanceOf(EndermanMock.class, entity);
+		assertTrue(entity.isValid());
 	}
 
 }
