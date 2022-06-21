@@ -1,6 +1,10 @@
 package be.seeseemelk.mockbukkit.inventory;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.inventory.meta.BannerMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.ArmorStandMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.AxolotlBucketMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.BookMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.ArmorStandMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.BannerMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.BookMetaMock;
@@ -12,10 +16,14 @@ import be.seeseemelk.mockbukkit.inventory.meta.FireworkMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.KnowledgeBookMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.LeatherArmorMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.MapMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.PotionMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.SkullMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.SuspiciousStewMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.TropicalFishBucketMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.BundleMetaMock;
+import com.google.common.base.Preconditions;
+
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.md_5.bungee.api.chat.BaseComponent;
@@ -27,6 +35,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemFactory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
@@ -53,26 +62,28 @@ public class ItemFactoryMock implements ItemFactory
 		case KNOWLEDGE_BOOK -> KnowledgeBookMetaMock.class;
 		case LEATHER_BOOTS, LEATHER_CHESTPLATE, LEATHER_HELMET, LEATHER_LEGGINGS ->
 				LeatherArmorMetaMock.class;
-		case MAP ->
-				// TODO Auto-generated method stub
-				throw new UnimplementedOperationException();
+		case FILLED_MAP -> MapMetaMock.class;
 		case FIREWORK_STAR -> FireworkEffectMetaMock.class;
 		case FIREWORK_ROCKET -> FireworkMetaMock.class;
 		case POTION, LINGERING_POTION, SPLASH_POTION -> PotionMetaMock.class;
 		case PLAYER_HEAD -> SkullMetaMock.class;
 		case SUSPICIOUS_STEW -> SuspiciousStewMetaMock.class;
+		case AXOLOTL_BUCKET -> AxolotlBucketMetaMock.class;
+		case BUNDLE -> BundleMetaMock.class;
 		case COMPASS -> CompassMetaMock.class;
 		case CROSSBOW -> CrossbowMetaMock.class;
 		case WHITE_BANNER, ORANGE_BANNER, MAGENTA_BANNER, LIGHT_BLUE_BANNER, YELLOW_BANNER, LIME_BANNER, PINK_BANNER, GRAY_BANNER, LIGHT_GRAY_BANNER, CYAN_BANNER, PURPLE_BANNER, BLUE_BANNER, BROWN_BANNER, GREEN_BANNER, RED_BANNER, BLACK_BANNER ->
 				BannerMetaMock.class;
 		case TROPICAL_FISH_BUCKET -> TropicalFishBucketMetaMock.class;
-			default -> ItemMetaMock.class;
+		default -> ItemMetaMock.class;
 		};
 	}
 
 	@Override
-	public ItemMeta getItemMeta(Material material)
+	public ItemMeta getItemMeta(@NotNull Material material)
 	{
+		Preconditions.checkNotNull(material, "Material cannot be null");
+
 		Class<? extends ItemMeta> clazz = null;
 
 		try
@@ -80,7 +91,7 @@ public class ItemFactoryMock implements ItemFactory
 			clazz = getItemMetaClass(material);
 			return clazz.getDeclaredConstructor().newInstance();
 		}
-		catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e)
+		catch (ReflectiveOperationException e)
 		{
 			throw new UnsupportedOperationException("Can't instantiate class '" + clazz + "'");
 		}
@@ -122,17 +133,17 @@ public class ItemFactoryMock implements ItemFactory
 			{
 				// This will make sure we find the most suitable constructor for this
 				if (constructor.getParameterCount() == 1
-				        && constructor.getParameterTypes()[0].isAssignableFrom(meta.getClass()))
+						&& constructor.getParameterTypes()[0].isAssignableFrom(meta.getClass()))
 				{
 					return (ItemMeta) constructor.newInstance(meta);
 				}
 			}
 
 			throw new NoSuchMethodException(
-			    "Cannot find an ItemMeta constructor for the class \"" + meta.getClass().getName() + "\"");
+					"Cannot find an ItemMeta constructor for the class \"" + meta.getClass().getName() + "\"");
 		}
 		catch (SecurityException | InstantiationException | IllegalAccessException | InvocationTargetException
-			        | NoSuchMethodException e)
+			   | NoSuchMethodException e)
 		{
 			throw new RuntimeException(e);
 		}
@@ -176,8 +187,7 @@ public class ItemFactoryMock implements ItemFactory
 	@Override
 	public @NotNull Component displayName(@NotNull ItemStack itemStack)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return itemStack.displayName();
 	}
 
 	@Override
