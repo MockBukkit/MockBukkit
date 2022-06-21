@@ -1,33 +1,31 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
+import com.google.common.collect.ImmutableList;
 import org.bukkit.inventory.meta.SuspiciousStewMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 
-import com.google.common.collect.ImmutableList;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * This {@link ItemMetaMock} mocks the implementation of {@link SuspiciousStewMeta}.
  *
  * @author TheBusyBiscuit
- *
  */
 public class SuspiciousStewMetaMock extends ItemMetaMock implements SuspiciousStewMeta
 {
 
-	private List<PotionEffect> effects = new ArrayList<>();
+	private @NotNull List<PotionEffect> effects = new ArrayList<>();
 
 	public SuspiciousStewMetaMock()
 	{
 		super();
 	}
 
-	public SuspiciousStewMetaMock(SuspiciousStewMeta meta)
+	public SuspiciousStewMetaMock(@NotNull SuspiciousStewMeta meta)
 	{
 		super(meta);
 
@@ -45,25 +43,13 @@ public class SuspiciousStewMetaMock extends ItemMetaMock implements SuspiciousSt
 	@Override
 	public boolean equals(Object obj)
 	{
-		if (this == obj)
-		{
-			return true;
-		}
-		if (!super.equals(obj))
-		{
+		if (!(obj instanceof SuspiciousStewMetaMock meta))
 			return false;
-		}
-		if (!(obj instanceof SuspiciousStewMetaMock))
-		{
-			return false;
-		}
-
-		SuspiciousStewMetaMock other = (SuspiciousStewMetaMock) obj;
-		return effects.equals(other.effects);
+		return this.effects.equals(meta.effects);
 	}
 
 	@Override
-	public SuspiciousStewMetaMock clone()
+	public @NotNull SuspiciousStewMetaMock clone()
 	{
 		SuspiciousStewMetaMock mock = (SuspiciousStewMetaMock) super.clone();
 		mock.effects = new ArrayList<>(effects);

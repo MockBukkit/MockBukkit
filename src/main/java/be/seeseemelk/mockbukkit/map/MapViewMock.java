@@ -17,7 +17,7 @@ public class MapViewMock implements MapView
 
 	private World world;
 	private final int id;
-	private final List<MapRenderer> renderers;
+	private final @NotNull List<MapRenderer> renderers;
 	private final Map<MapRenderer, Map<PlayerMock, MapCanvasMock>> canvases = new HashMap<>();
 	private Scale scale;
 	private boolean locked;
@@ -135,7 +135,7 @@ public class MapViewMock implements MapView
 	 *
 	 * @param player Player to render for.
 	 */
-	public void render(PlayerMock player)
+	public void render(@NotNull PlayerMock player)
 	{
 		for (MapRenderer renderer : this.renderers)
 		{

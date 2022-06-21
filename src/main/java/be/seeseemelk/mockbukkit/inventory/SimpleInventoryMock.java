@@ -40,4 +40,5 @@ public class SimpleInventoryMock extends InventoryMock
 	{
 		super(null, 9, InventoryType.CHEST);
 	}
+
 }

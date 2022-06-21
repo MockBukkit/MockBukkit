@@ -13,13 +13,14 @@ import java.util.List;
 public class AttributeInstanceMock implements AttributeInstance
 {
 
-	private final Attribute attribute;
+	private final @NotNull Attribute attribute;
 	private final double defaultValue;
 	private double value;
-	private final List<AttributeModifier> modifiers;
+	private final @NotNull List<AttributeModifier> modifiers;
 
-	public AttributeInstanceMock(Attribute attribute, double value)
+	public AttributeInstanceMock(@NotNull Attribute attribute, double value)
 	{
+		Preconditions.checkNotNull(attribute, "Attribute cannot be null");
 		this.attribute = attribute;
 		this.defaultValue = value;
 		this.value = value;
@@ -53,14 +54,14 @@ public class AttributeInstanceMock implements AttributeInstance
 	@Override
 	public void addModifier(@NotNull AttributeModifier modifier)
 	{
-		Preconditions.checkArgument(modifier != null, "modifier");
+		Preconditions.checkNotNull(modifier, "Modifier cannot be null");
 		modifiers.add(modifier);
 	}
 
 	@Override
 	public void removeModifier(@NotNull AttributeModifier modifier)
 	{
-		Preconditions.checkArgument(modifier != null, "modifier");
+		Preconditions.checkNotNull(modifier, "Modifier cannot be null");
 		modifiers.remove(modifier);
 	}
 

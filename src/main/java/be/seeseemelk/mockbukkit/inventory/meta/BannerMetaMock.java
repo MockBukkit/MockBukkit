@@ -12,7 +12,7 @@ import java.util.List;
 public class BannerMetaMock extends ItemMetaMock implements BannerMeta
 {
 
-	private DyeColor baseColor;
+	private @Nullable DyeColor baseColor;
 	private List<Pattern> patterns;
 
 	public BannerMetaMock()
@@ -22,7 +22,7 @@ public class BannerMetaMock extends ItemMetaMock implements BannerMeta
 		this.patterns = new ArrayList<>();
 	}
 
-	public BannerMetaMock(BannerMeta meta)
+	public BannerMetaMock(@NotNull BannerMeta meta)
 	{
 		super(meta);
 

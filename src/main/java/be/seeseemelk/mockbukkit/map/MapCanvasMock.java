@@ -21,7 +21,7 @@ public class MapCanvasMock implements MapCanvas
 	private final MapViewMock mapView;
 	private final byte[][] pixels = new byte[MAP_SIZE][MAP_SIZE];
 	private byte[][] base;
-	private MapCursorCollection cursors = new MapCursorCollection();
+	private @NotNull MapCursorCollection cursors = new MapCursorCollection();
 
 	protected MapCanvasMock(MapViewMock mapView)
 	{
@@ -160,7 +160,7 @@ public class MapCanvasMock implements MapCanvas
 	 *
 	 * @param consumer The consumer to run. First parameter is the X coordinate, second is the Y coordinate.
 	 */
-	public static void executeForAllPixels(BiConsumer<Integer, Integer> consumer)
+	public static void executeForAllPixels(@NotNull BiConsumer<Integer, Integer> consumer)
 	{
 		for (int x = 0; x < MAP_SIZE; ++x)
 		{

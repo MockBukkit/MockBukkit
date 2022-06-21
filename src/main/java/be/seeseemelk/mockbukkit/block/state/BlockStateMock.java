@@ -3,9 +3,12 @@ package be.seeseemelk.mockbukkit.block.state;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
+import com.destroystokyo.paper.MaterialTags;
+import com.google.common.base.Preconditions;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Tag;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
@@ -13,25 +16,27 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Objects;
 
 public class BlockStateMock implements BlockState
 {
 
-	private final MetadataTable metadataTable;
-	private Block block;
+	private final @NotNull MetadataTable metadataTable;
+	private @Nullable Block block;
 	private Material material;
 
 	public BlockStateMock(@NotNull Material material)
 	{
+		Preconditions.checkNotNull(material, "Material cannot be null");
 		this.metadataTable = new MetadataTable();
 		this.material = material;
 	}
 
 	protected BlockStateMock(@NotNull Block block)
 	{
+		Preconditions.checkNotNull(block, "Block cannot be null");
 		this.metadataTable = new MetadataTable();
 		this.block = block;
 		this.material = block.getType();
@@ -39,6 +44,7 @@ public class BlockStateMock implements BlockState
 
 	protected BlockStateMock(@NotNull BlockStateMock state)
 	{
+		Preconditions.checkNotNull(state, "BlockStateMock cannot be null");
 		this.metadataTable = new MetadataTable(state.metadataTable);
 		this.material = state.getType();
 		this.block = state.isPlaced() ? state.getBlock() : null;
@@ -51,7 +57,7 @@ public class BlockStateMock implements BlockState
 	}
 
 	@Override
-	public List<MetadataValue> getMetadata(String metadataKey)
+	public @NotNull List<MetadataValue> getMetadata(String metadataKey)
 	{
 		return metadataTable.getMetadata(metadataKey);
 	}
@@ -83,13 +89,13 @@ public class BlockStateMock implements BlockState
 
 	@Override
 	@Deprecated
-	public org.bukkit.material.MaterialData getData()
+	public org.bukkit.material.@NotNull MaterialData getData()
 	{
 		return new org.bukkit.material.MaterialData(material);
 	}
 
 	@Override
-	public Material getType()
+	public @NotNull Material getType()
 	{
 		return material;
 	}
@@ -101,7 +107,7 @@ public class BlockStateMock implements BlockState
 	}
 
 	@Override
-	public World getWorld()
+	public @NotNull World getWorld()
 	{
 		return getBlock().getWorld();
 	}
@@ -125,7 +131,7 @@ public class BlockStateMock implements BlockState
 	}
 
 	@Override
-	public Location getLocation()
+	public @NotNull Location getLocation()
 	{
 		return getBlock().getLocation();
 	}
@@ -137,7 +143,7 @@ public class BlockStateMock implements BlockState
 	}
 
 	@Override
-	public Chunk getChunk()
+	public @NotNull Chunk getChunk()
 	{
 		return getBlock().getChunk();
 	}
@@ -222,7 +228,7 @@ public class BlockStateMock implements BlockState
 	}
 
 	@Override
-	public BlockData getBlockData()
+	public @NotNull BlockData getBlockData()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -264,10 +270,12 @@ public class BlockStateMock implements BlockState
 		{
 			return false;
 		}
-		if (this.isPlaced() && this.getWorld() != other.getWorld() && (this.getWorld() == null || !this.getWorld().equals(other.getWorld()))) {
+		if (this.isPlaced() && this.getWorld() != other.getWorld() && (this.getWorld() == null || !this.getWorld().equals(other.getWorld())))
+		{
 			return false;
 		}
-		if (this.isPlaced() && this.getLocation() != other.getLocation() && (this.getLocation() == null || !this.getLocation().equals(other.getLocation()))) {
+		if (this.isPlaced() && this.getLocation() != other.getLocation() && (this.getLocation() == null || !this.getLocation().equals(other.getLocation())))
+		{
 			return false;
 		}
 //		if (this.getBlockData() != other.getBlockData() && (this.getBlockData() == null || !this.getBlockData().equals(other.getBlockData()))) {
@@ -279,8 +287,43 @@ public class BlockStateMock implements BlockState
 	@NotNull
 	public static BlockStateMock mockState(@NotNull Block block)
 	{
+		// Special cases
+		if (Tag.BANNERS.isTagged(block.getType()))
+		{
+			return new BannerMock(block);
+		}
+		else if (MaterialTags.SHULKER_BOXES.isTagged(block.getType()))
+		{
+			return new ShulkerBoxMock(block);
+		}
+		else if (MaterialTags.SIGNS.isTagged(block.getType()))
+		{
+			return new SignMock(block);
+		}
+		else if (MaterialTags.BEDS.isTagged(block))
+		{
+			return new BedMock(block);
+		}
 		switch (block.getType())
 		{
+		case BEACON:
+			return new BeaconMock(block);
+		case BEEHIVE:
+			return new BeehiveMock(block);
+		case BREWING_STAND:
+			return new BrewingStandMock(block);
+		case BLAST_FURNACE:
+			return new BlastFurnaceMock(block);
+		case COMPARATOR:
+			return new ComparatorMock(block);
+		case CONDUIT:
+			return new ConduitMock(block);
+		case ENCHANTING_TABLE:
+			return new EnchantingTableMock(block);
+		case JIGSAW:
+			return new JigsawMock(block);
+		case JUKEBOX:
+			return new JukeboxMock(block);
 		case SPAWNER:
 			return new CreatureSpawnerMock(block);
 		case DAYLIGHT_DETECTOR:
@@ -309,74 +352,6 @@ public class BlockStateMock implements BlockState
 			return new ChestMock(block);
 		case ENDER_CHEST:
 			return new EnderChestMock(block);
-		case ACACIA_SIGN:
-		case ACACIA_WALL_SIGN:
-		case BIRCH_SIGN:
-		case BIRCH_WALL_SIGN:
-		case CRIMSON_SIGN:
-		case CRIMSON_WALL_SIGN:
-		case DARK_OAK_SIGN:
-		case DARK_OAK_WALL_SIGN:
-		case JUNGLE_SIGN:
-		case JUNGLE_WALL_SIGN:
-		case OAK_SIGN:
-		case OAK_WALL_SIGN:
-		case SPRUCE_SIGN:
-		case SPRUCE_WALL_SIGN:
-		case WARPED_SIGN:
-		case WARPED_WALL_SIGN:
-			return new SignMock(block);
-		case SHULKER_BOX:
-		case WHITE_SHULKER_BOX:
-		case ORANGE_SHULKER_BOX:
-		case MAGENTA_SHULKER_BOX:
-		case LIGHT_BLUE_SHULKER_BOX:
-		case YELLOW_SHULKER_BOX:
-		case LIME_SHULKER_BOX:
-		case PINK_SHULKER_BOX:
-		case GRAY_SHULKER_BOX:
-		case LIGHT_GRAY_SHULKER_BOX:
-		case CYAN_SHULKER_BOX:
-		case PURPLE_SHULKER_BOX:
-		case BLUE_SHULKER_BOX:
-		case BROWN_SHULKER_BOX:
-		case GREEN_SHULKER_BOX:
-		case RED_SHULKER_BOX:
-		case BLACK_SHULKER_BOX:
-			return new ShulkerBoxMock(block);
-		case WHITE_BANNER:
-		case ORANGE_BANNER:
-		case MAGENTA_BANNER:
-		case LIGHT_BLUE_BANNER:
-		case YELLOW_BANNER:
-		case LIME_BANNER:
-		case PINK_BANNER:
-		case GRAY_BANNER:
-		case LIGHT_GRAY_BANNER:
-		case CYAN_BANNER:
-		case PURPLE_BANNER:
-		case BLUE_BANNER:
-		case BROWN_BANNER:
-		case GREEN_BANNER:
-		case RED_BANNER:
-		case BLACK_BANNER:
-		case WHITE_WALL_BANNER:
-		case ORANGE_WALL_BANNER:
-		case MAGENTA_WALL_BANNER:
-		case LIGHT_BLUE_WALL_BANNER:
-		case YELLOW_WALL_BANNER:
-		case LIME_WALL_BANNER:
-		case PINK_WALL_BANNER:
-		case GRAY_WALL_BANNER:
-		case LIGHT_GRAY_WALL_BANNER:
-		case CYAN_WALL_BANNER:
-		case PURPLE_WALL_BANNER:
-		case BLUE_WALL_BANNER:
-		case BROWN_WALL_BANNER:
-		case GREEN_WALL_BANNER:
-		case RED_WALL_BANNER:
-		case BLACK_WALL_BANNER:
-			return new BannerMock(block);
 		default:
 			return new BlockStateMock(block);
 		}

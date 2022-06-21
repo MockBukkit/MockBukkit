@@ -10,10 +10,12 @@ import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.scheduler.BukkitWorker;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
@@ -30,10 +32,11 @@ import java.util.logging.Logger;
 
 public class BukkitSchedulerMock implements BukkitScheduler
 {
+
 	private static final String LOGGER_NAME = "BukkitSchedulerMock";
 	private final ThreadPoolExecutor pool = new ThreadPoolExecutor(0, Integer.MAX_VALUE,
-	        60L, TimeUnit.SECONDS,
-	        new SynchronousQueue<>());
+			60L, TimeUnit.SECONDS,
+			new SynchronousQueue<>());
 	private final ExecutorService asyncEventExecutor = Executors.newCachedThreadPool();
 	private final List<Future<?>> queuedAsyncEvents = new ArrayList<>();
 	private final TaskList scheduledTasks = new TaskList();
@@ -42,7 +45,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	private int id = 0;
 	private long executorTimeout = 60000;
 
-	private static Runnable wrapTask(ScheduledTask task)
+	private static @NotNull Runnable wrapTask(@NotNull ScheduledTask task)
 	{
 		return () ->
 		{
@@ -84,7 +87,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	 * @param pool The pool to shut down.
 	 * @see #setShutdownTimeout(long)
 	 */
-	private void shutdownPool(ExecutorService pool)
+	private void shutdownPool(@NotNull ExecutorService pool)
 	{
 		pool.shutdown();
 		try
@@ -101,15 +104,16 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		}
 	}
 
-	public @NotNull Future<?> executeAsyncEvent(Event event)
+	public @NotNull Future<?> executeAsyncEvent(@NotNull Event event)
 	{
 		return executeAsyncEvent(event, null);
 	}
 
-	public <T extends Event> @NotNull Future<?> executeAsyncEvent(T event, Consumer<T> func)
+	public <T extends Event> @NotNull Future<?> executeAsyncEvent(@NotNull T event, @Nullable Consumer<T> func)
 	{
 		Preconditions.checkNotNull(event, "Cannot call a null event!");
-		Future<?> future = asyncEventExecutor.submit(() -> {
+		Future<?> future = asyncEventExecutor.submit(() ->
+		{
 			MockBukkit.getMock().getPluginManager().callEvent(event);
 			if (func != null)
 			{
@@ -199,13 +203,9 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public void waitAsyncTasksFinished()
 	{
 		// Cancel repeating tasks so they don't run forever.
-		for (Map.Entry<Integer, ScheduledTask> entry : scheduledTasks.tasks.entrySet())
-		{
-			if (entry.getValue() instanceof RepeatingTask)
-			{
-				scheduledTasks.cancelTask(entry.getKey());
-			}
-		}
+		scheduledTasks.tasks.entrySet().stream()
+				.filter(entry -> entry.getValue() instanceof RepeatingTask)
+				.forEach(entry -> scheduledTasks.cancelTask(entry.getKey()));
 
 		// Make sure all tasks get to execute. (except for repeating asynchronous tasks, they only will fire once)
 		while (scheduledTasks.getScheduledTaskCount() > 0)
@@ -226,23 +226,22 @@ public class BukkitSchedulerMock implements BukkitScheduler
 				Thread.currentThread().interrupt();
 				return;
 			}
-			if (System.currentTimeMillis() > (systemTime + executorTimeout))
+
+			if (System.currentTimeMillis() <= (systemTime + executorTimeout))
+				continue;
+
+			// If a plugin has left a runnable going and not cancelled it we could call this bad practice.
+			// We should force interrupt all these runnables, forcing them to throw Interrupted Exceptions
+			// if they handle that.
+			for (ScheduledTask task : scheduledTasks.getCurrentTaskList())
 			{
-				// If a plugin has left a runnable going and not cancelled it we could call this bad practice.
-				// We should force interrupt all these runnables, forcing them to throw Interrupted Exceptions
-				// if they handle that.
-				for (ScheduledTask task : scheduledTasks.getCurrentTaskList())
-				{
-					if (task.isRunning())
-					{
-						task.cancel();
-						cancelTask(task.getTaskId());
-						throw new RuntimeException("Forced Cancellation of task owned by "
-						                           + task.getOwner().getName());
-					}
-				}
-				pool.shutdownNow();
+				if (!task.isRunning())
+					continue;
+				task.cancel();
+				cancelTask(task.getTaskId());
+				throw new RuntimeException("Forced Cancellation of task owned by " + task.getOwner().getName());
 			}
+			pool.shutdownNow();
 		}
 	}
 
@@ -361,7 +360,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public int scheduleAsyncDelayedTask(@NotNull Plugin plugin, @NotNull Runnable task, long delay)
 	{
 		Logger.getLogger(LOGGER_NAME)
-		.warning("Consider using runTaskLaterAsynchronously instead of scheduleAsyncDelayedTask");
+				.warning("Consider using runTaskLaterAsynchronously instead of scheduleAsyncDelayedTask");
 		return runTaskLaterAsynchronously(plugin, task, delay).getTaskId();
 	}
 
@@ -370,7 +369,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public int scheduleAsyncDelayedTask(@NotNull Plugin plugin, @NotNull Runnable task)
 	{
 		Logger.getLogger(LOGGER_NAME)
-		.warning("Consider using runTaskAsynchronously instead of scheduleAsyncDelayedTask");
+				.warning("Consider using runTaskAsynchronously instead of scheduleAsyncDelayedTask");
 		return runTaskAsynchronously(plugin, task).getTaskId();
 	}
 
@@ -379,7 +378,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public int scheduleAsyncRepeatingTask(@NotNull Plugin plugin, @NotNull Runnable task, long delay, long period)
 	{
 		Logger.getLogger(LOGGER_NAME)
-		.warning("Consider using runTaskTimerAsynchronously instead of scheduleAsyncRepeatingTask");
+				.warning("Consider using runTaskTimerAsynchronously instead of scheduleAsyncRepeatingTask");
 		return runTaskTimerAsynchronously(plugin, task, delay, period).getTaskId();
 	}
 
@@ -401,12 +400,9 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	{
 		for (ScheduledTask task : scheduledTasks.getCurrentTaskList())
 		{
-			if (task.getOwner() != null)
+			if (Objects.equals(task.getOwner(), plugin)) // Implicit null check
 			{
-				if (task.getOwner().equals(plugin))
-				{
-					task.cancel();
-				}
+				task.cancel();
 			}
 		}
 	}
@@ -467,7 +463,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public @NotNull BukkitTask runTaskLaterAsynchronously(@NotNull Plugin plugin, @NotNull Runnable task, long delay)
 	{
 		ScheduledTask scheduledTask = new ScheduledTask(id++, plugin, false, currentTick + delay,
-		        new AsyncRunnable(task));
+				new AsyncRunnable(task));
 		scheduledTasks.addTask(scheduledTask);
 		return scheduledTask;
 	}
@@ -482,7 +478,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public @NotNull BukkitTask runTaskTimerAsynchronously(@NotNull Plugin plugin, @NotNull Runnable task, long delay, long period)
 	{
 		RepeatingTask scheduledTask = new RepeatingTask(id++, plugin, false, currentTick + delay, period,
-		        new AsyncRunnable(task));
+				new AsyncRunnable(task));
 		scheduledTasks.addTask(scheduledTask);
 		return scheduledTask;
 	}
@@ -495,6 +491,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 
 	class AsyncRunnable implements Runnable
 	{
+
 		private final Runnable task;
 
 		private AsyncRunnable(Runnable runnable)
@@ -574,7 +571,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	private static class TaskList
 	{
 
-		private final Map<Integer, ScheduledTask> tasks;
+		private final @NotNull Map<Integer, ScheduledTask> tasks;
 
 		private TaskList()
 		{
@@ -587,7 +584,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		 * @param task the task to remove.
 		 * @return true on success.
 		 */
-		private boolean addTask(ScheduledTask task)
+		private boolean addTask(@Nullable ScheduledTask task)
 		{
 			if (task == null)
 			{
@@ -598,7 +595,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		}
 
 
-		protected final List<ScheduledTask> getCurrentTaskList()
+		protected final @NotNull List<ScheduledTask> getCurrentTaskList()
 		{
 			List<ScheduledTask> out = new ArrayList<>();
 			if (tasks.size() != 0)
@@ -637,5 +634,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			}
 			return false;
 		}
+
 	}
+
 }

@@ -24,11 +24,15 @@ public class BarrelMock extends ContainerMock implements Barrel
 	public BarrelMock(@NotNull Material material)
 	{
 		super(material);
+		if (material != Material.BARREL)
+			throw new IllegalArgumentException("Cannot create a Barrel state from " + material);
 	}
 
 	protected BarrelMock(@NotNull Block block)
 	{
 		super(block);
+		if (block.getType() != Material.BARREL)
+			throw new IllegalArgumentException("Cannot create a Barrel state from " + block.getType());
 	}
 
 	protected BarrelMock(@NotNull BarrelMock state)
@@ -84,7 +88,7 @@ public class BarrelMock extends ContainerMock implements Barrel
 	}
 
 	@Override
-	protected InventoryMock createInventory()
+	protected @NotNull InventoryMock createInventory()
 	{
 		return new BarrelInventoryMock(this);
 	}

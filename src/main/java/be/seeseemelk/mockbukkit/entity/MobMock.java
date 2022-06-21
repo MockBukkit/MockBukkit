@@ -4,8 +4,6 @@ import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.destroystokyo.paper.entity.Pathfinder;
 import org.bukkit.Location;
-import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Mob;
@@ -22,7 +20,7 @@ public abstract class MobMock extends LivingEntityMock implements Mob
 	private boolean aware = true;
 	private boolean leftHanded;
 
-	protected MobMock(ServerMock server, UUID uuid)
+	protected MobMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 	}

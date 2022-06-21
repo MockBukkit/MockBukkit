@@ -1,21 +1,19 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import java.util.UUID;
-
+import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ExperienceOrb;
 import org.jetbrains.annotations.NotNull;
-
-import be.seeseemelk.mockbukkit.ServerMock;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.UUID;
 
 /**
  * This is a simple mock of the {@link ExperienceOrb} {@link Entity}.
  *
  * @author TheBusyBiscuit
- *
  */
 public class ExperienceOrbMock extends EntityMock implements ExperienceOrb
 {

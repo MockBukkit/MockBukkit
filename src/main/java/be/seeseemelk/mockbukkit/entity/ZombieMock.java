@@ -18,7 +18,7 @@ public class ZombieMock extends MonsterMock implements Zombie
 	private boolean converting;
 	private int conversionTime;
 
-	public ZombieMock(ServerMock server, UUID uuid)
+	public ZombieMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 		setMaxHealth(20);

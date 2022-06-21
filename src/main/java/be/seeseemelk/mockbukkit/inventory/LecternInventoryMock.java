@@ -10,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class LecternInventoryMock extends InventoryMock
 {
+
 	public LecternInventoryMock(InventoryHolder holder)
 	{
 		super(holder, InventoryType.LECTERN);
@@ -23,4 +24,5 @@ public class LecternInventoryMock extends InventoryMock
 		inventory.setContents(getContents());
 		return inventory;
 	}
+
 }

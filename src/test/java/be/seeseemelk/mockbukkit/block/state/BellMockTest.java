@@ -34,7 +34,7 @@ class BellMockTest
 	}
 
 	@Test
-	void constructor_Material_NotBeehive_ThrowsException()
+	void constructor_Material_WrongType_ThrowsException()
 	{
 		assertThrowsExactly(IllegalArgumentException.class, () -> new BellMock(Material.BEDROCK));
 	}
@@ -46,7 +46,7 @@ class BellMockTest
 	}
 
 	@Test
-	void constructor_Block_NotBeehive_ThrowsException()
+	void constructor_Block_WrongType_ThrowsException()
 	{
 		assertThrowsExactly(IllegalArgumentException.class, () -> new BellMock(new BlockMock(Material.BEDROCK)));
 	}

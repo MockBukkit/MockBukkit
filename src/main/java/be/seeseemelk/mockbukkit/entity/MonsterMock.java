@@ -10,7 +10,7 @@ import java.util.UUID;
 public abstract class MonsterMock extends CreatureMock implements Monster
 {
 
-	protected MonsterMock(ServerMock server, UUID uuid)
+	protected MonsterMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 	}

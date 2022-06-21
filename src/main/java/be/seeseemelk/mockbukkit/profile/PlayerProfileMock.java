@@ -19,11 +19,11 @@ import java.util.concurrent.CompletableFuture;
 public class PlayerProfileMock implements PlayerProfile
 {
 
-	private String name;
-	private UUID uuid;
-	private final Set<ProfileProperty> properties;
+	private @Nullable String name;
+	private @Nullable UUID uuid;
+	private final @NotNull Set<ProfileProperty> properties;
 
-	public PlayerProfileMock(PlayerMock player)
+	public PlayerProfileMock(@NotNull PlayerMock player)
 	{
 		this(player.getName(), player.getUniqueId());
 	}
@@ -35,7 +35,7 @@ public class PlayerProfileMock implements PlayerProfile
 		this.properties = new HashSet<>();
 	}
 
-	public PlayerProfileMock(PlayerProfileMock profile)
+	public PlayerProfileMock(@NotNull PlayerProfileMock profile)
 	{
 		this.name = profile.getName();
 		this.uuid = profile.getUniqueId();
@@ -142,13 +142,6 @@ public class PlayerProfileMock implements PlayerProfile
 	}
 
 	@Override
-	@SuppressWarnings("MethodDoesntCallSuperMethod")
-	public org.bukkit.profile.@NotNull PlayerProfile clone()
-	{
-		return new PlayerProfileMock(this);
-	}
-
-	@Override
 	public boolean completeFromCache()
 	{
 		// TODO Auto-generated method stub
@@ -191,6 +184,12 @@ public class PlayerProfileMock implements PlayerProfile
 	}
 
 	@Override
+	public int hashCode()
+	{
+		return this.properties.hashCode();
+	}
+
+	@Override
 	public boolean equals(Object obj)
 	{
 		if (this == obj) return true;
@@ -199,7 +198,7 @@ public class PlayerProfileMock implements PlayerProfile
 	}
 
 	@Override
-	public String toString()
+	public @NotNull String toString()
 	{
 		return "CraftPlayerProfile [uniqueId=" + getId() +
 				", name=" + getName() +
@@ -207,9 +206,10 @@ public class PlayerProfileMock implements PlayerProfile
 	}
 
 	@Override
-	public int hashCode()
+	@SuppressWarnings("MethodDoesntCallSuperMethod")
+	public org.bukkit.profile.@NotNull PlayerProfile clone()
 	{
-		return this.properties.hashCode();
+		return new PlayerProfileMock(this);
 	}
 
 }

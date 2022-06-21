@@ -42,7 +42,6 @@ import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
-import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.apache.commons.lang3.StringUtils;
@@ -91,7 +90,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.loot.LootTable;
-import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.plugin.messaging.StandardMessenger;
@@ -130,7 +128,6 @@ import java.util.stream.Collectors;
 public class ServerMock extends Server.Spigot implements Server
 {
 
-	private static final String JOIN_MESSAGE = "%s has joined the server.";
 	private static final Component MOTD = Component.text("A Minecraft Server");
 
 	private final Properties buildProperties = new Properties();
@@ -158,7 +155,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private GameMode defaultGameMode = GameMode.SURVIVAL;
 	private ConsoleCommandSender consoleSender;
 	private int spawnRadius = 16;
-	private WarningState warningState = WarningState.DEFAULT;
+	private @NotNull WarningState warningState = WarningState.DEFAULT;
 
 	public ServerMock()
 	{
@@ -230,7 +227,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 *
 	 * @param player The player to add.
 	 */
-	public void addPlayer(PlayerMock player)
+	public void addPlayer(@NotNull PlayerMock player)
 	{
 		AsyncCatcher.catchOp("player add");
 		playerList.addPlayer(player);
@@ -254,7 +251,7 @@ public class ServerMock extends Server.Spigot implements Server
 
 		Component joinMessage = MiniMessage.miniMessage()
 				.deserialize("<name> has joined the Server!", Placeholder.component("name", player.displayName()));
-        
+
 		PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(player, joinMessage);
 		Bukkit.getPluginManager().callEvent(playerJoinEvent);
 
@@ -267,7 +264,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 *
 	 * @return The player that was added.
 	 */
-	public PlayerMock addPlayer()
+	public @NotNull PlayerMock addPlayer()
 	{
 		AsyncCatcher.catchOp("player add");
 		PlayerMock player = playerFactory.createRandomPlayer();
@@ -281,7 +278,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * @param name The name to give to the player.
 	 * @return The added player.
 	 */
-	public PlayerMock addPlayer(String name)
+	public @NotNull PlayerMock addPlayer(@NotNull String name)
 	{
 		AsyncCatcher.catchOp("player add");
 		PlayerMock player = new PlayerMock(this, name);
@@ -334,13 +331,14 @@ public class ServerMock extends Server.Spigot implements Server
 	 * @param num The number of the player to retrieve.
 	 * @return The chosen player.
 	 */
-	public PlayerMock getPlayer(int num)
+	public @NotNull PlayerMock getPlayer(int num)
 	{
 		return playerList.getPlayer(num);
 	}
 
 	/**
 	 * Returns the {@link MockPlayerList} instance that is used by this server.
+	 *
 	 * @return The {@link MockPlayerList} instance.
 	 */
 	public @NotNull MockPlayerList getPlayerList()
@@ -351,7 +349,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @Nullable UUID getPlayerUniqueId(@NotNull String playerName)
 	{
-		return playerList.getPlayer(playerName).getUniqueId();
+		return playerList.getOfflinePlayer(playerName).getUniqueId();
 	}
 
 	/**
@@ -360,7 +358,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * @param name The name to give to the world.
 	 * @return The {@link WorldMock} that has been created.
 	 */
-	public WorldMock addSimpleWorld(String name)
+	public @NotNull WorldMock addSimpleWorld(String name)
 	{
 		AsyncCatcher.catchOp("world creation");
 		WorldMock world = new WorldMock();
@@ -387,7 +385,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * @param args    The arguments to pass to the commands.
 	 * @return The value returned by {@link Command#execute}.
 	 */
-	public CommandResult executeConsole(Command command, String... args)
+	public CommandResult executeConsole(@NotNull Command command, String... args)
 	{
 		return execute(command, getConsoleSender(), args);
 	}
@@ -399,7 +397,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * @param args    The arguments to pass to the commands.
 	 * @return The value returned by {@link Command#execute}.
 	 */
-	public CommandResult executeConsole(String command, String... args)
+	public CommandResult executeConsole(@NotNull String command, String... args)
 	{
 		return executeConsole(getCommandMap().getCommand(command), args);
 	}
@@ -411,7 +409,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * @param args    The arguments to pass to the commands.
 	 * @return The value returned by {@link Command#execute}.
 	 */
-	public CommandResult executePlayer(Command command, String... args)
+	public CommandResult executePlayer(@NotNull Command command, String... args)
 	{
 		AsyncCatcher.catchOp("command dispatch");
 
@@ -428,7 +426,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * @param args    The arguments to pass to the commands.
 	 * @return The value returned by {@link Command#execute}.
 	 */
-	public CommandResult executePlayer(String command, String... args)
+	public CommandResult executePlayer(@NotNull String command, String... args)
 	{
 		return executePlayer(getCommandMap().getCommand(command), args);
 	}
@@ -441,7 +439,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * @param args    The arguments to pass to the commands.
 	 * @return The value returned by {@link Command#execute}.
 	 */
-	public CommandResult execute(Command command, CommandSender sender, String... args)
+	public @NotNull CommandResult execute(@NotNull Command command, CommandSender sender, String... args)
 	{
 		AsyncCatcher.catchOp("command dispatch");
 
@@ -462,14 +460,14 @@ public class ServerMock extends Server.Spigot implements Server
 	 * @param args    The arguments to pass to the commands.
 	 * @return The value returned by {@link Command#execute}.
 	 */
-	public CommandResult execute(String command, CommandSender sender, String... args)
+	public CommandResult execute(@NotNull String command, CommandSender sender, String... args)
 	{
 		AsyncCatcher.catchOp("command dispatch");
 		return execute(getCommandMap().getCommand(command), sender, args);
 	}
 
 	@Override
-	public String getName()
+	public @NotNull String getName()
 	{
 		return "ServerMock";
 	}
@@ -498,7 +496,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public Collection<? extends PlayerMock> getOnlinePlayers()
+	public @NotNull Collection<? extends PlayerMock> getOnlinePlayers()
 	{
 		return playerList.getOnlinePlayers();
 	}
@@ -517,31 +515,31 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public Player getPlayer(String name)
+	public Player getPlayer(@NotNull String name)
 	{
 		return playerList.getPlayer(name);
 	}
 
 	@Override
-	public Player getPlayerExact(String name)
+	public Player getPlayerExact(@NotNull String name)
 	{
 		return playerList.getPlayerExact(name);
 	}
 
 	@Override
-	public List<Player> matchPlayer(String name)
+	public @NotNull List<Player> matchPlayer(@NotNull String name)
 	{
 		return playerList.matchPlayer(name);
 	}
 
 	@Override
-	public Player getPlayer(UUID id)
+	public Player getPlayer(@NotNull UUID id)
 	{
 		return playerList.getPlayer(id);
 	}
 
 	@Override
-	public PluginManagerMock getPluginManager()
+	public @NotNull PluginManagerMock getPluginManager()
 	{
 		return pluginManager;
 	}
@@ -553,20 +551,20 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public PluginCommand getPluginCommand(String name)
+	public PluginCommand getPluginCommand(@NotNull String name)
 	{
 		Command command = getCommandMap().getCommand(name);
 		return command instanceof PluginCommand ? (PluginCommand) command : null;
 	}
 
 	@Override
-	public Logger getLogger()
+	public @NotNull Logger getLogger()
 	{
 		return logger;
 	}
 
 	@Override
-	public ConsoleCommandSender getConsoleSender()
+	public @NotNull ConsoleCommandSender getConsoleSender()
 	{
 		if (consoleSender == null)
 		{
@@ -584,7 +582,7 @@ public class ServerMock extends Server.Spigot implements Server
 
 	@NotNull
 	@Deprecated
-	public InventoryMock createInventory(InventoryHolder owner, InventoryType type, String title, int size)
+	public InventoryMock createInventory(InventoryHolder owner, @NotNull InventoryType type, String title, int size)
 	{
 		if (!type.isCreatable())
 		{
@@ -656,7 +654,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public InventoryMock createInventory(InventoryHolder owner, InventoryType type)
+	public @NotNull InventoryMock createInventory(InventoryHolder owner, @NotNull InventoryType type)
 	{
 		return createInventory(owner, type, "Inventory");
 	}
@@ -670,13 +668,13 @@ public class ServerMock extends Server.Spigot implements Server
 
 	@Override
 	@Deprecated
-	public InventoryMock createInventory(InventoryHolder owner, InventoryType type, String title)
+	public @NotNull InventoryMock createInventory(InventoryHolder owner, @NotNull InventoryType type, String title)
 	{
 		return createInventory(owner, type, title, -1);
 	}
 
 	@Override
-	public InventoryMock createInventory(InventoryHolder owner, int size)
+	public @NotNull InventoryMock createInventory(InventoryHolder owner, int size)
 	{
 		return createInventory(owner, size, "Inventory");
 	}
@@ -690,13 +688,13 @@ public class ServerMock extends Server.Spigot implements Server
 
 	@Override
 	@Deprecated
-	public InventoryMock createInventory(InventoryHolder owner, int size, String title)
+	public @NotNull InventoryMock createInventory(InventoryHolder owner, int size, String title)
 	{
 		return createInventory(owner, InventoryType.CHEST, title, size);
 	}
 
 	@Override
-	public Merchant createMerchant(@Nullable Component title)
+	public @NotNull Merchant createMerchant(@Nullable Component title)
 	{
 		//TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -709,7 +707,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public List<World> getWorlds()
+	public @NotNull List<World> getWorlds()
 	{
 		return new ArrayList<>(worlds);
 	}
@@ -742,7 +740,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public BukkitSchedulerMock getScheduler()
+	public @NotNull BukkitSchedulerMock getScheduler()
 	{
 		return scheduler;
 	}
@@ -760,20 +758,20 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public Set<String> getIPBans()
+	public @NotNull Set<String> getIPBans()
 	{
 		return this.playerList.getIPBans().getBanEntries().stream().map(BanEntry::getTarget)
 				.collect(Collectors.toSet());
 	}
 
 	@Override
-	public void banIP(String address)
+	public void banIP(@NotNull String address)
 	{
 		this.playerList.getIPBans().addBan(address, null, null, null);
 	}
 
 	@Override
-	public void unbanIP(String address)
+	public void unbanIP(@NotNull String address)
 	{
 		this.playerList.getIPBans().pardon(address);
 	}
@@ -789,13 +787,13 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public Set<OfflinePlayer> getOperators()
+	public @NotNull Set<OfflinePlayer> getOperators()
 	{
 		return playerList.getOperators();
 	}
 
 	@Override
-	public GameMode getDefaultGameMode()
+	public @NotNull GameMode getDefaultGameMode()
 	{
 		return this.defaultGameMode;
 	}
@@ -808,7 +806,7 @@ public class ServerMock extends Server.Spigot implements Server
 
 	@Override
 	@Deprecated
-	public int broadcastMessage(String message)
+	public int broadcastMessage(@NotNull String message)
 	{
 		Collection<? extends PlayerMock> players = getOnlinePlayers();
 
@@ -822,7 +820,7 @@ public class ServerMock extends Server.Spigot implements Server
 
 	@Override
 	@Deprecated
-	public int broadcast(String message, String permission)
+	public int broadcast(@NotNull String message, @NotNull String permission)
 	{
 		Collection<? extends PlayerMock> players = getOnlinePlayers();
 		int count = 0;
@@ -884,7 +882,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public List<Recipe> getRecipesFor(@NotNull ItemStack item)
+	public @NotNull List<Recipe> getRecipesFor(@NotNull ItemStack item)
 	{
 		return recipes.stream().filter(recipe ->
 		{
@@ -946,7 +944,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public Iterator<Recipe> recipeIterator()
+	public @NotNull Iterator<Recipe> recipeIterator()
 	{
 		return recipes.iterator();
 	}
@@ -958,7 +956,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public boolean dispatchCommand(CommandSender sender, String commandLine)
+	public boolean dispatchCommand(@NotNull CommandSender sender, @NotNull String commandLine)
 	{
 		AsyncCatcher.catchOp("command dispatch");
 		String[] commands = commandLine.split(" ");
@@ -976,7 +974,7 @@ public class ServerMock extends Server.Spigot implements Server
 		}
 	}
 
-	public List<String> getCommandTabComplete(CommandSender sender, String commandLine)
+	public @NotNull List<String> getCommandTabComplete(@NotNull CommandSender sender, @NotNull String commandLine)
 	{
 		AsyncCatcher.catchOp("command tabcomplete");
 		int idx = commandLine.indexOf(' ');
@@ -995,7 +993,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public HelpMapMock getHelpMap()
+	public @NotNull HelpMapMock getHelpMap()
 	{
 		return helpMap;
 	}
@@ -1039,14 +1037,14 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public String getIp()
+	public @NotNull String getIp()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public String getWorldType()
+	public @NotNull String getWorldType()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1133,7 +1131,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public Set<OfflinePlayer> getWhitelistedPlayers()
+	public @NotNull Set<OfflinePlayer> getWhitelistedPlayers()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1147,14 +1145,14 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public String getUpdateFolder()
+	public @NotNull String getUpdateFolder()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public File getUpdateFolderFile()
+	public @NotNull File getUpdateFolderFile()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1184,13 +1182,13 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public ServicesManagerMock getServicesManager()
+	public @NotNull ServicesManagerMock getServicesManager()
 	{
 		return servicesManager;
 	}
 
 	@Override
-	public World createWorld(WorldCreator creator)
+	public World createWorld(@NotNull WorldCreator creator)
 	{
 		WorldMock world = new WorldMock(creator);
 		addWorld(world);
@@ -1249,7 +1247,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public Map<String, String[]> getCommandAliases()
+	public @NotNull Map<String, String[]> getCommandAliases()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1265,6 +1263,20 @@ public class ServerMock extends Server.Spigot implements Server
 	public void setSpawnRadius(int spawnRadius)
 	{
 		this.spawnRadius = spawnRadius;
+	}
+
+	@Override
+	public boolean shouldSendChatPreviews()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isEnforcingSecureProfiles()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -1297,13 +1309,13 @@ public class ServerMock extends Server.Spigot implements Server
 
 	@Override
 	@Deprecated
-	public OfflinePlayer getOfflinePlayer(String name)
+	public @NotNull OfflinePlayer getOfflinePlayer(@NotNull String name)
 	{
 		return playerList.getOfflinePlayer(name);
 	}
 
 	@Override
-	public OfflinePlayer getOfflinePlayer(UUID id)
+	public @NotNull OfflinePlayer getOfflinePlayer(@NotNull UUID id)
 	{
 		OfflinePlayer player = playerList.getOfflinePlayer(id);
 
@@ -1318,14 +1330,14 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public Set<OfflinePlayer> getBannedPlayers()
+	public @NotNull Set<OfflinePlayer> getBannedPlayers()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public File getWorldContainer()
+	public @NotNull File getWorldContainer()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1339,9 +1351,16 @@ public class ServerMock extends Server.Spigot implements Server
 
 	@Override
 	@Deprecated
-	public Merchant createMerchant(String title)
+	public @NotNull Merchant createMerchant(String title)
 	{
 		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getMaxChainedNeighborUpdates()
+	{
+		//TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
@@ -1429,7 +1448,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public ScoreboardManagerMock getScoreboardManager()
+	public @NotNull ScoreboardManagerMock getScoreboardManager()
 	{
 		return scoreboardManager;
 	}
@@ -1442,14 +1461,14 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public CachedServerIcon loadServerIcon(File file)
+	public @NotNull CachedServerIcon loadServerIcon(File file)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public CachedServerIcon loadServerIcon(BufferedImage image)
+	public @NotNull CachedServerIcon loadServerIcon(BufferedImage image)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1486,7 +1505,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public BossBar createBossBar(String title, BarColor color, BarStyle style, BarFlag... flags)
+	public @NotNull BossBar createBossBar(@NotNull String title, @NotNull BarColor color, @NotNull BarStyle style, BarFlag... flags)
 	{
 		return new BossBarMock(title, color, style, flags);
 	}
@@ -1535,7 +1554,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public Iterator<Advancement> advancementIterator()
+	public @NotNull Iterator<Advancement> advancementIterator()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1543,7 +1562,7 @@ public class ServerMock extends Server.Spigot implements Server
 
 	@Override
 	@Deprecated
-	public MockUnsafeValues getUnsafe()
+	public @NotNull MockUnsafeValues getUnsafe()
 	{
 		return unsafe;
 	}
@@ -1569,14 +1588,14 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public BlockData createBlockData(String data)
+	public @NotNull BlockData createBlockData(String data)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public BlockData createBlockData(Material material, String data)
+	public @NotNull BlockData createBlockData(Material material, String data)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1699,22 +1718,22 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public ItemStack createExplorerMap(World world, Location location, StructureType structureType)
+	public @NotNull ItemStack createExplorerMap(World world, Location location, StructureType structureType)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public ItemStack createExplorerMap(World world, Location location, StructureType structureType, int radius,
-									   boolean findUnexplored)
+	public @NotNull ItemStack createExplorerMap(World world, Location location, StructureType structureType, int radius,
+												boolean findUnexplored)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public KeyedBossBar createBossBar(NamespacedKey key, String title, BarColor color, BarStyle style, BarFlag... flags)
+	public @NotNull KeyedBossBar createBossBar(@NotNull NamespacedKey key, @NotNull String title, @NotNull BarColor color, @NotNull BarStyle style, BarFlag... flags)
 	{
 		Preconditions.checkNotNull(key, "A NamespacedKey must never be null");
 		KeyedBossBarMock bar = new KeyedBossBarMock(key, title, color, style, flags);
@@ -1723,7 +1742,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public Iterator<KeyedBossBar> getBossBars()
+	public @NotNull Iterator<KeyedBossBar> getBossBars()
 	{
 		return bossBars.values().stream().map(bossbar -> (KeyedBossBar) bossbar).iterator();
 	}
@@ -1743,7 +1762,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public List<Entity> selectEntities(CommandSender sender, String selector)
+	public @NotNull List<Entity> selectEntities(CommandSender sender, String selector)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1766,7 +1785,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public <T extends Keyed> Iterable<Tag<T>> getTags(String registry, Class<T> clazz)
+	public <T extends Keyed> @NotNull Iterable<Tag<T>> getTags(String registry, Class<T> clazz)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1853,7 +1872,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public Server.Spigot spigot()
+	public Server.@NotNull Spigot spigot()
 	{
 		return this;
 	}

@@ -14,6 +14,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.function.Predicate;
@@ -97,8 +98,8 @@ public class ChunkMock implements Chunk
 	@SuppressWarnings("UnstableApiUsage")
 	public @NotNull ChunkSnapshot getChunkSnapshot(boolean includeMaxblocky, boolean includeBiome, boolean includeBiomeTempRain)
 	{
-		// Cubic size of the chunk.
-		int size = (16 << 4) * (16 << 4) * Math.abs((world.getMaxHeight() - world.getMinHeight()));
+		// Cubic size of the chunk (w * w * h).
+		int size = (16 * 16) * Math.abs((world.getMaxHeight() - world.getMinHeight()));
 		ImmutableMap.Builder<Coordinate, BlockState> blockStates = ImmutableMap.builderWithExpectedSize(size);
 		ImmutableMap.Builder<Coordinate, Biome> biomes = ImmutableMap.builderWithExpectedSize(size);
 		for (int x = 0; x < 15; x++)
@@ -188,7 +189,7 @@ public class ChunkMock implements Chunk
 	}
 
 	@Override
-	public boolean equals(Object obj)
+	public boolean equals(@Nullable Object obj)
 	{
 		if (obj == null)
 			return false;

@@ -15,7 +15,7 @@ import java.util.UUID;
 public abstract class AbstractHorseMock extends AnimalsMock implements AbstractHorse
 {
 
-	private UUID owner;
+	private @Nullable UUID owner;
 	private int maxDomestication;
 	private int domestication;
 	private double jumpStrength;
@@ -105,7 +105,7 @@ public abstract class AbstractHorseMock extends AnimalsMock implements AbstractH
 	}
 
 	@Override
-	public void setOwner(AnimalTamer owner)
+	public void setOwner(@Nullable AnimalTamer owner)
 	{
 		if (owner != null)
 		{
@@ -119,7 +119,7 @@ public abstract class AbstractHorseMock extends AnimalsMock implements AbstractH
 		}
 	}
 
-	public void setOwnerUUID(UUID uuid)
+	public void setOwnerUUID(@Nullable UUID uuid)
 	{
 		this.owner = uuid;
 	}

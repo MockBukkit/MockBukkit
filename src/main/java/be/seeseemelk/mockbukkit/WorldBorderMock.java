@@ -30,7 +30,7 @@ public class WorldBorderMock implements WorldBorder
 	private static final double MAX_BORDER_SIZE = 6.0E7D;
 	private static final double MIN_BORDER_SIZE = 1.0D;
 
-	private final World world;
+	private final @NotNull World world;
 	private double size;
 	private double damageAmount;
 	private double damageBuffer;
