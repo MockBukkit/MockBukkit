@@ -5,6 +5,7 @@ import be.seeseemelk.mockbukkit.block.BlockMock;
 import net.kyori.adventure.text.Component;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
+import org.bukkit.Tag;
 import org.bukkit.block.banner.Pattern;
 import org.bukkit.block.banner.PatternType;
 import org.junit.jupiter.api.AfterEach;
@@ -191,10 +192,8 @@ class BannerMockTest
 	@Test
 	void blockStateMock_MockState_CorrectType()
 	{
-		for (Material mat : Material.values())
+		for (Material mat : Tag.ITEMS_BANNERS.getValues())
 		{
-			if (!mat.name().endsWith("_BANNER") || mat.name().contains("LEGACY"))
-				continue;
 			if (BlockStateMock.mockState(new BlockMock(mat)) instanceof BannerMock)
 				continue;
 			fail("BlockStateMock for '" + mat + "' is not a " + BannerMock.class.getSimpleName());
