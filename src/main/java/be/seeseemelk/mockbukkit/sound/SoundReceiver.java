@@ -15,9 +15,7 @@ import static org.junit.jupiter.api.Assertions.fail;
  * the sheer amount of assertion methods did warrant a seperate a file at some point.
  *
  * @author TheBusyBiscuit
- *
  * @see PlayerMock
- *
  */
 public interface SoundReceiver
 {
@@ -72,13 +70,13 @@ public interface SoundReceiver
 	}
 
 	default void assertSoundHeard(@NotNull String message, @NotNull Sound sound,
-	                              @NotNull Predicate<AudioExperience> predicate)
+								  @NotNull Predicate<AudioExperience> predicate)
 	{
 		assertSoundHeard(message, sound.getKey().getKey(), predicate);
 	}
 
 	default void assertSoundHeard(@NotNull String message, @NotNull String sound,
-	                              @NotNull Predicate<AudioExperience> predicate)
+								  @NotNull Predicate<AudioExperience> predicate)
 	{
 		for (AudioExperience audio : getHeardSounds())
 		{

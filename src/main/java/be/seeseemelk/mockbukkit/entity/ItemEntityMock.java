@@ -18,6 +18,7 @@ import java.util.UUID;
  */
 public class ItemEntityMock extends EntityMock implements Item
 {
+
 	private ItemStack item;
 
 	// The default pickup delay

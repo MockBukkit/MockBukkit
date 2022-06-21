@@ -7,6 +7,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class Coordinate
 {
+
 	public final int x;
 	public final int y;
 	public final int z;
@@ -74,4 +75,5 @@ public class Coordinate
 			return false;
 		}
 	}
+
 }

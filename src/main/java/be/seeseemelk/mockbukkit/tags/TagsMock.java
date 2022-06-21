@@ -1,5 +1,12 @@
 package be.seeseemelk.mockbukkit.tags;
 
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.ServerMock;
+import org.bukkit.NamespacedKey;
+import org.bukkit.Server;
+import org.bukkit.Tag;
+import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -15,14 +22,6 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
-
-import org.bukkit.NamespacedKey;
-import org.bukkit.Server;
-import org.bukkit.Tag;
-import org.jetbrains.annotations.NotNull;
-
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.ServerMock;
 
 public final class TagsMock
 {
@@ -64,12 +63,11 @@ public final class TagsMock
 	 * @param server
 	 * @param registry     Our {@link TagRegistry}
 	 * @param skipIfExists Whether to skip an already loaded {@link TagRegistry}
-	 *
 	 * @throws URISyntaxException When a {@link URI} is malformed
 	 * @throws IOException        When there was an issue with I/O
 	 */
 	private static void loadRegistry(@NotNull ServerMock server, @NotNull TagRegistry registry, boolean skipIfExists)
-	throws URISyntaxException, IOException
+			throws URISyntaxException, IOException
 	{
 		if (skipIfExists && !registry.isEmpty())
 		{

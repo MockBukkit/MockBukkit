@@ -6,6 +6,7 @@ import org.bukkit.scoreboard.Scoreboard;
 
 public class ScoreMock implements Score
 {
+
 	private final ObjectiveMock objective;
 	private final String entry;
 	private OfflinePlayer player = null;
@@ -20,6 +21,7 @@ public class ScoreMock implements Score
 
 	/**
 	 * Sets the player that this score is tracking.
+	 *
 	 * @param player The player to track.
 	 */
 	public void setPlayer(OfflinePlayer player)

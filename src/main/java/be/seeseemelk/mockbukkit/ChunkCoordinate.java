@@ -7,6 +7,7 @@ import java.util.Objects;
  */
 public class ChunkCoordinate
 {
+
 	public final int x;
 	public final int z;
 
@@ -44,4 +45,5 @@ public class ChunkCoordinate
 		ChunkCoordinate other = (ChunkCoordinate) obj;
 		return x == other.x && z == other.z;
 	}
+
 }

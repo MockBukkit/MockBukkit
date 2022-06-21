@@ -7,6 +7,7 @@ import org.bukkit.inventory.InventoryView;
 
 public abstract class InventoryViewMock extends InventoryView
 {
+
 	private Inventory topInventory;
 	private Inventory bottomInventory;
 	private HumanEntity player;

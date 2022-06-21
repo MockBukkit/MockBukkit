@@ -11,10 +11,10 @@ import org.jetbrains.annotations.NotNull;
  * This class represents a {@link Sound} that was heard by a {@link Player}.
  *
  * @author TheBusyBiscuit
- *
  */
 public final class AudioExperience
 {
+
 	private final String sound;
 	private final SoundCategory category;
 	private final Location location;
@@ -22,7 +22,7 @@ public final class AudioExperience
 	private final float pitch;
 
 	public AudioExperience(@NotNull String sound, @NotNull SoundCategory category, @NotNull Location loc, float volume,
-	                       float pitch)
+						   float pitch)
 	{
 		Preconditions.checkNotNull(sound, "The played sound cannot be null!");
 		Preconditions.checkNotNull(category, "The category cannot be null!");
@@ -36,7 +36,7 @@ public final class AudioExperience
 	}
 
 	public AudioExperience(@NotNull Sound sound, @NotNull SoundCategory category, @NotNull Location loc, float volume,
-	                       float pitch)
+						   float pitch)
 	{
 		this(sound.getKey().getKey(), category, loc, volume, pitch);
 	}

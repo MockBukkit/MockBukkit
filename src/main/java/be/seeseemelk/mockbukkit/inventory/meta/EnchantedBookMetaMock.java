@@ -1,20 +1,18 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import com.google.common.collect.ImmutableMap;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.jetbrains.annotations.NotNull;
 
-import com.google.common.collect.ImmutableMap;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This {@link ItemMetaMock} mocks the implementation of {@link EnchantmentStorageMeta}.
  * It keeps an internal {@link HashMap} for all stored {@link Enchantment Enchantments}.
  *
  * @author TheBusyBiscuit
- *
  */
 public class EnchantedBookMetaMock extends ItemMetaMock implements EnchantmentStorageMeta
 {

@@ -1,13 +1,5 @@
 package be.seeseemelk.mockbukkit.scoreboard;
 
-import java.util.Collections;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import net.kyori.adventure.text.Component;
 import org.bukkit.OfflinePlayer;
@@ -21,8 +13,17 @@ import org.bukkit.scoreboard.Team;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collections;
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 public class ScoreboardMock implements Scoreboard
 {
+
 	private Map<String, ObjectiveMock> objectives = new HashMap<>();
 	private Map<DisplaySlot, ObjectiveMock> objectivesByDisplaySlot = new EnumMap<>(DisplaySlot.class);
 	private Map<String, Team> teams = new HashMap<>();
@@ -51,7 +52,7 @@ public class ScoreboardMock implements Scoreboard
 	@Override
 	@Deprecated
 	public ObjectiveMock registerNewObjective(String name, String criteria, String displayName)
-	throws IllegalArgumentException
+			throws IllegalArgumentException
 	{
 		return registerNewObjective(name, criteria, displayName, RenderType.INTEGER);
 	}
@@ -59,7 +60,7 @@ public class ScoreboardMock implements Scoreboard
 	@Override
 	@Deprecated
 	public ObjectiveMock registerNewObjective(String name, String criteria, String displayName, RenderType renderType)
-	throws IllegalArgumentException
+			throws IllegalArgumentException
 	{
 		if (objectives.containsKey(name))
 		{
@@ -80,7 +81,7 @@ public class ScoreboardMock implements Scoreboard
 	public Set<Objective> getObjectivesByCriteria(String criteria) throws IllegalArgumentException
 	{
 		return objectives.values().stream().filter(objective -> objective.getCriteria().equals(criteria))
-		       .collect(Collectors.toSet());
+				.collect(Collectors.toSet());
 	}
 
 	@Override

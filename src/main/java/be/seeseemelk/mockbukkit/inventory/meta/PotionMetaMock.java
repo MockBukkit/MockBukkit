@@ -1,10 +1,7 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
-
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import com.google.common.collect.ImmutableList;
 import org.bukkit.Color;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.inventory.meta.SuspiciousStewMeta;
@@ -15,15 +12,15 @@ import org.bukkit.potion.PotionType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import com.google.common.collect.ImmutableList;
-
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * This {@link ItemMetaMock} mocks the implementation of {@link SuspiciousStewMeta}.
  *
  * @author TheBusyBiscuit
- *
  */
 public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 {
@@ -75,7 +72,7 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 
 		PotionMetaMock other = (PotionMetaMock) obj;
 		return effects.equals(other.effects) && Objects.equals(color, other.color)
-		       && basePotionData.equals(other.basePotionData);
+				&& basePotionData.equals(other.basePotionData);
 	}
 
 	@Override

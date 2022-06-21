@@ -3,7 +3,6 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
-import net.kyori.adventure.text.Component;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -73,7 +72,8 @@ public class FishHookMock extends ProjectileMock implements FishHook
 	{
 		if (this.biteChance == -1)
 		{
-			if (!getWorld().isClearWeather()) {
+			if (!getWorld().isClearWeather())
+			{
 				return 1 / 300.0;
 			}
 			return 1 / 500.0;
@@ -130,6 +130,7 @@ public class FishHookMock extends ProjectileMock implements FishHook
 	/**
 	 * Updates the {@link HookState} of the hook.
 	 * Normally the server does this every tick.
+	 *
 	 * @see #getState()
 	 */
 	public void updateState()

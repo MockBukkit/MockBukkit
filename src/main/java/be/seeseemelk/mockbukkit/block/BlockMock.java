@@ -37,6 +37,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class BlockMock implements Block
 {
+
 	private final MetadataTable metadataTable = new MetadataTable();
 
 	private final Location location;
@@ -406,8 +407,8 @@ public class BlockMock implements Block
 	public boolean isLiquid()
 	{
 		return material == Material.LAVA
-		       || material == Material.WATER
-		       || material == Material.BUBBLE_COLUMN;
+				|| material == Material.WATER
+				|| material == Material.BUBBLE_COLUMN;
 	}
 
 	@Override
@@ -619,4 +620,5 @@ public class BlockMock implements Block
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
+
 }

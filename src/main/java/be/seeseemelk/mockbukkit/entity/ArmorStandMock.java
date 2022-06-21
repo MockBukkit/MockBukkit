@@ -2,12 +2,6 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import com.destroystokyo.paper.block.TargetBlockInfo;
-import com.destroystokyo.paper.entity.TargetEntityInfo;
-import net.kyori.adventure.text.Component;
-import org.bukkit.Location;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
 import com.google.common.base.Preconditions;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
@@ -319,14 +313,14 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	{
 		Preconditions.checkNotNull(slot, "Slot cannot be null");
 		return switch (slot)
-		{
-		case HAND -> getEquipment().getItemInMainHand();
-		case OFF_HAND -> getEquipment().getItemInOffHand();
-		case FEET -> getBoots();
-		case LEGS -> getLeggings();
-		case CHEST -> getChestplate();
-		case HEAD -> getHelmet();
-		};
+				{
+					case HAND -> getEquipment().getItemInMainHand();
+					case OFF_HAND -> getEquipment().getItemInOffHand();
+					case FEET -> getBoots();
+					case LEGS -> getLeggings();
+					case CHEST -> getChestplate();
+					case HEAD -> getHelmet();
+				};
 	}
 
 	@Override
@@ -341,7 +335,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 		case LEGS -> setLeggings(item);
 		case CHEST -> setChestplate(item);
 		case HEAD -> setHelmet(item);
-			default -> throw new UnsupportedOperationException(slot.name());
+		default -> throw new UnsupportedOperationException(slot.name());
 		}
 	}
 

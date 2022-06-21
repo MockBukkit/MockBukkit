@@ -1,6 +1,6 @@
 {
-  "replace": false,
-  "values": [
-    "#minecraft:infiniburn_overworld"
-  ]
+    "replace": false,
+    "values": [
+        "#minecraft:infiniburn_overworld"
+    ]
 }

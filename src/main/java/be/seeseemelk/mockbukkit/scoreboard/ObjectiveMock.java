@@ -18,6 +18,7 @@ import java.util.Map;
 
 public class ObjectiveMock implements Objective
 {
+
 	private ScoreboardMock scoreboard;
 	private final String name;
 	private final String criteria;
@@ -27,7 +28,7 @@ public class ObjectiveMock implements Objective
 	private RenderType renderType;
 
 	public ObjectiveMock(@NotNull ScoreboardMock scoreboard, @NotNull String name, @NotNull String displayName,
-	                     @NotNull String criteria, @NotNull RenderType renderType)
+						 @NotNull String criteria, @NotNull RenderType renderType)
 	{
 		Preconditions.checkNotNull(scoreboard, "When registering an Objective to the Scoreboard the scoreboard cannot be null.");
 		Preconditions.checkNotNull(name, "The name cannot be null");

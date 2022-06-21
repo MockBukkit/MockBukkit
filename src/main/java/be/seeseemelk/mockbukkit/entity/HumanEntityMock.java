@@ -11,6 +11,7 @@ import java.util.UUID;
 
 public abstract class HumanEntityMock extends LivingEntityMock implements HumanEntity
 {
+
 	private Location lastDeathLocation = new Location(new WorldMock(), 0, 0, 0);
 
 	protected HumanEntityMock(@NotNull ServerMock server, @NotNull UUID uuid)
@@ -29,5 +30,6 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	{
 		this.lastDeathLocation = location;
 	}
+
 }
 

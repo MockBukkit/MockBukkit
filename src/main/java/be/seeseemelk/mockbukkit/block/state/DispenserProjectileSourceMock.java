@@ -1,18 +1,16 @@
 package be.seeseemelk.mockbukkit.block.state;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Projectile;
 import org.bukkit.projectiles.BlockProjectileSource;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-
 /**
  * This is a {@link BlockProjectileSource} mock specifically for the {@link DispenserMock}.
  *
  * @author TheBusyBiscuit
- *
  */
 class DispenserProjectileSourceMock implements BlockProjectileSource
 {
