@@ -508,7 +508,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public void runTaskLater(@NotNull Plugin plugin, @NotNull Consumer<BukkitTask> task, long delay)
 	{
 		delay = Math.max(delay, 1);
-		ScheduledTask scheduledTask = new ScheduledTask(id++, plugin, true, currentTick + delay, task);
+		ScheduledTask scheduledTask = new ScheduledTask(id.getAndIncrement(), plugin, true, currentTick + delay, task);
 		scheduledTasks.addTask(scheduledTask);
 	}
 
@@ -523,7 +523,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public void runTaskTimer(@NotNull Plugin plugin, @NotNull Consumer<BukkitTask> task, long delay, long period)
 	{
 		delay = Math.max(delay, 1);
-		RepeatingTask repeatingTask = new RepeatingTask(id++, plugin, true, currentTick + delay, period, task);
+		RepeatingTask repeatingTask = new RepeatingTask(id.getAndIncrement(), plugin, true, currentTick + delay, period, task);
 		scheduledTasks.addTask(repeatingTask);
 	}
 
