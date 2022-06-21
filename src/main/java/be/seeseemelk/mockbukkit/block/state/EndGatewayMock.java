@@ -14,7 +14,7 @@ public class EndGatewayMock extends TileStateMock implements EndGateway
 
 	private long age;
 	private boolean exactTeleport;
-	private Location exitLocation;
+	private @Nullable Location exitLocation;
 
 	protected EndGatewayMock(@NotNull Material material)
 	{
