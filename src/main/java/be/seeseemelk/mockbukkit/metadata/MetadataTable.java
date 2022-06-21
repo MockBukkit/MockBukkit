@@ -1,6 +1,6 @@
 package be.seeseemelk.mockbukkit.metadata;
 
-import org.apache.commons.lang.Validate;
+import com.google.common.base.Preconditions;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.metadata.Metadatable;
 import org.bukkit.plugin.Plugin;
@@ -62,7 +62,7 @@ public class MetadataTable implements Metadatable
 	 */
 	public void clearMetadata(@NotNull Plugin plugin)
 	{
-		Validate.notNull(plugin, "Plugin cannot be null");
+		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
 		for (Iterator<Map<Plugin, MetadataValue>> iterator = metadata.values().iterator(); iterator.hasNext(); )
 		{
 			Map<Plugin, MetadataValue> values = iterator.next();

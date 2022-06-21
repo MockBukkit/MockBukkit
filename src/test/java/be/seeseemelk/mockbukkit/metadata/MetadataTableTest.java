@@ -105,7 +105,7 @@ class MetadataTableTest
 	@Test
 	void clearMetadata_NullPlugin_ThrowsException()
 	{
-		assertThrowsExactly(IllegalArgumentException.class, () -> mt.clearMetadata(null));
+		assertThrowsExactly(NullPointerException.class, () -> mt.clearMetadata(null));
 	}
 
 	@Test
