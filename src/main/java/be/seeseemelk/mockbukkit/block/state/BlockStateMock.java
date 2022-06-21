@@ -306,6 +306,8 @@ public class BlockStateMock implements BlockState
 		}
 		switch (block.getType())
 		{
+		case SCULK_CATALYST:
+			return new SculkCatalystMock(block);
 		case BEACON:
 			return new BeaconMock(block);
 		case BEEHIVE:
