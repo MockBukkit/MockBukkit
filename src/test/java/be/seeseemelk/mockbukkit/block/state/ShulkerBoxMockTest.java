@@ -3,12 +3,11 @@ package be.seeseemelk.mockbukkit.block.state;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.BlockMock;
+import com.destroystokyo.paper.MaterialTags;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.ShulkerBox;
-import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.inventory.Inventory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,9 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -51,10 +48,8 @@ class ShulkerBoxMockTest
 	@Test
 	void constructor_Material()
 	{
-		for (Material material : Material.values())
+		for (Material material : MaterialTags.SHULKER_BOXES.getValues())
 		{
-			if (!material.name().endsWith("SHULKER_BOX") || material.name().contains("LEGACY"))
-				continue;
 			assertDoesNotThrow(() -> new ShulkerBoxMock(material));
 		}
 	}
@@ -68,10 +63,8 @@ class ShulkerBoxMockTest
 	@Test
 	void constructor_Block()
 	{
-		for (Material material : Material.values())
+		for (Material material : MaterialTags.SHULKER_BOXES.getValues())
 		{
-			if (!material.name().endsWith("SHULKER_BOX") || material.name().contains("LEGACY"))
-				continue;
 			assertDoesNotThrow(() -> new ShulkerBoxMock(new BlockMock(material)));
 		}
 	}

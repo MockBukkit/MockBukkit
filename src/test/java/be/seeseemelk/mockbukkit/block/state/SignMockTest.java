@@ -3,10 +3,9 @@ package be.seeseemelk.mockbukkit.block.state;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.BlockMock;
+import com.destroystokyo.paper.MaterialTags;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.block.Sign;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,7 +18,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class SignMockTest
 {
@@ -46,10 +44,8 @@ class SignMockTest
 	@Test
 	void constructor_Material()
 	{
-		for (Material material : Material.values())
+		for (Material material : MaterialTags.SIGNS.getValues())
 		{
-			if (!material.name().endsWith("_SIGN"))
-				continue;
 			assertDoesNotThrow(() -> new SignMock(material));
 		}
 	}
@@ -63,10 +59,8 @@ class SignMockTest
 	@Test
 	void constructor_Block()
 	{
-		for (Material material : Material.values())
+		for (Material material : MaterialTags.SIGNS.getValues())
 		{
-			if (!material.name().endsWith("_SIGN"))
-				continue;
 			assertDoesNotThrow(() -> new SignMock(new BlockMock(material)));
 		}
 	}
