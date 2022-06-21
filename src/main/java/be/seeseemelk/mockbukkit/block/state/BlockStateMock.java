@@ -283,6 +283,12 @@ public class BlockStateMock implements BlockState
 		{
 		case BLAST_FURNACE:
 			return new BlastFurnaceMock(block);
+		case COMPARATOR:
+			return new ComparatorMock(block);
+		case CONDUIT:
+			return new ConduitMock(block);
+		case ENCHANTING_TABLE:
+			return new EnchantingTableMock(block);
 		case JIGSAW:
 			return new JigsawMock(block);
 		case JUKEBOX:
