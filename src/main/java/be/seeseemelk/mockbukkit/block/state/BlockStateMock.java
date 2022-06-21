@@ -281,6 +281,8 @@ public class BlockStateMock implements BlockState
 	{
 		switch (block.getType())
 		{
+		case BLAST_FURNACE:
+			return new BlastFurnaceMock(block);
 		case COMPARATOR:
 			return new ComparatorMock(block);
 		case CONDUIT:
