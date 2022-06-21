@@ -25,11 +25,15 @@ public class DispenserMock extends ContainerMock implements Dispenser
 	public DispenserMock(@NotNull Material material)
 	{
 		super(material);
+		if (material != Material.DISPENSER)
+			throw new IllegalArgumentException("Cannot create a Dispenser state from " + material);
 	}
 
 	protected DispenserMock(@NotNull Block block)
 	{
 		super(block);
+		if (block.getType() != Material.DISPENSER)
+			throw new IllegalArgumentException("Cannot create a Dispenser state from " + block.getType());
 	}
 
 	protected DispenserMock(@NotNull DispenserMock state)
