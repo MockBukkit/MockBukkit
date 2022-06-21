@@ -111,6 +111,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 
 	public <T extends Event> @NotNull Future<?> executeAsyncEvent(@NotNull T event, @Nullable Consumer<T> func)
 	{
+		MockBukkit.ensureMocking();
 		Preconditions.checkNotNull(event, "Cannot call a null event!");
 		Future<?> future = asyncEventExecutor.submit(() ->
 		{
@@ -489,36 +490,10 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		return runTaskTimerAsynchronously(plugin, (Runnable) task, delay, period);
 	}
 
-	class AsyncRunnable implements Runnable
-	{
-
-		private final Runnable task;
-
-		private AsyncRunnable(Runnable runnable)
-		{
-			task = runnable;
-		}
-
-		@Override
-		public void run()
-		{
-			try
-			{
-				task.run();
-			}
-			catch (Exception t)
-			{
-				asyncException.set(t);
-			}
-		}
-
-	}
-
 	@Override
 	public void runTask(@NotNull Plugin plugin, @NotNull Consumer<BukkitTask> task)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		runTaskLater(plugin, task, 0L);
 	}
 
 	@Override
@@ -531,8 +506,9 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public void runTaskLater(@NotNull Plugin plugin, @NotNull Consumer<BukkitTask> task, long delay)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		delay = Math.max(delay, 1);
+		ScheduledTask scheduledTask = new ScheduledTask(id++, plugin, true, currentTick + delay, task);
+		scheduledTasks.addTask(scheduledTask);
 	}
 
 	@Override
@@ -545,8 +521,9 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public void runTaskTimer(@NotNull Plugin plugin, @NotNull Consumer<BukkitTask> task, long delay, long period)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		delay = Math.max(delay, 1);
+		RepeatingTask repeatingTask = new RepeatingTask(id++, plugin, true, currentTick + delay, period, task);
+		scheduledTasks.addTask(repeatingTask);
 	}
 
 	@Override
@@ -634,6 +611,32 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			}
 			return false;
 		}
+
+	}
+
+	private final class AsyncRunnable implements Runnable
+	{
+
+		private final Runnable task;
+
+		private AsyncRunnable(Runnable task)
+		{
+			this.task = task;
+		}
+
+		@Override
+		public void run()
+		{
+			try
+			{
+				this.task.run();
+			}
+			catch (Exception t)
+			{
+				asyncException.set(t);
+			}
+		}
+
 
 	}
 

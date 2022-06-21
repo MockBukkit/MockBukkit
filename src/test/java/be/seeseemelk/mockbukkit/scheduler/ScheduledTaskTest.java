@@ -16,7 +16,7 @@ class ScheduledTaskTest
 	@Test
 	void getScheduledTick_GetsScheduledTick()
 	{
-		ScheduledTask task = new ScheduledTask(0, null, true, 5, null);
+		ScheduledTask task = new ScheduledTask(0, null, true, 5, () -> {});
 		assertEquals(5, task.getScheduledTick());
 	}
 
@@ -31,23 +31,23 @@ class ScheduledTaskTest
 	@Test
 	void getTaskId_GetsTaskId()
 	{
-		ScheduledTask task = new ScheduledTask(5, null, true, 0, null);
+		ScheduledTask task = new ScheduledTask(5, null, true, 0, () -> {});
 		assertEquals(5, task.getTaskId());
 	}
 
 	@Test
 	void isSync()
 	{
-		ScheduledTask task = new ScheduledTask(0, null, true, 0, null);
+		ScheduledTask task = new ScheduledTask(0, null, true, 0, () -> {});
 		assertTrue(task.isSync());
-		task = new ScheduledTask(0, null, false, 0, null);
+		task = new ScheduledTask(0, null, false, 0, () -> {});
 		assertFalse(task.isSync());
 	}
 
 	@Test
 	void setScheduledTick_OtherTick_TickSetExactly()
 	{
-		ScheduledTask task = new ScheduledTask(0, null, true, 5, null);
+		ScheduledTask task = new ScheduledTask(0, null, true, 5, () -> {});
 		assertEquals(5, task.getScheduledTick());
 		task.setScheduledTick(20);
 		assertEquals(20, task.getScheduledTick());
@@ -56,7 +56,7 @@ class ScheduledTaskTest
 	@Test
 	void cancel()
 	{
-		ScheduledTask task = new ScheduledTask(0, null, true, 0, null);
+		ScheduledTask task = new ScheduledTask(0, null, true, 0, () -> {});
 		assertFalse(task.isCancelled());
 		task.cancel();
 		assertTrue(task.isCancelled());

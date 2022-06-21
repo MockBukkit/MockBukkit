@@ -1,12 +1,15 @@
 package be.seeseemelk.mockbukkit.scheduler;
 
+import com.google.common.base.Preconditions;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CancellationException;
+import java.util.function.Consumer;
 
 public class ScheduledTask implements BukkitTask
 {
@@ -18,22 +21,36 @@ public class ScheduledTask implements BukkitTask
 	private long scheduledTick;
 	private boolean running;
 	private final Runnable runnable;
+	private final Consumer<BukkitTask> consumer;
 	private final List<Runnable> cancelListeners = new LinkedList<>();
 
-	public ScheduledTask(int id, Plugin plugin, boolean isSync, long scheduledTick, Runnable runnable)
+	public ScheduledTask(int id, Plugin plugin, boolean isSync, long scheduledTick, @NotNull Runnable runnable)
+	{
+		this(id, plugin, isSync, scheduledTick, runnable, null);
+		Preconditions.checkNotNull(runnable, "Runnable cannot be null");
+	}
+
+	public ScheduledTask(int id, Plugin plugin, boolean isSync, long scheduledTick, @NotNull Consumer<BukkitTask> consumer)
+	{
+		this(id, plugin, isSync, scheduledTick, null, consumer);
+		Preconditions.checkNotNull(consumer, "Consumer cannot be null");
+	}
+
+	private ScheduledTask(int id, Plugin plugin, boolean isSync, long scheduledTick, @Nullable Runnable runnable, @Nullable Consumer<BukkitTask> consumer)
 	{
 		this.id = id;
 		this.plugin = plugin;
 		this.isSync = isSync;
 		this.scheduledTick = scheduledTick;
 		this.runnable = runnable;
+		this.consumer = consumer;
 		this.running = false;
 	}
 
 
 	public boolean isRunning()
 	{
-		return running;
+		return this.running;
 	}
 
 	public void setRunning(boolean running)
@@ -49,7 +66,7 @@ public class ScheduledTask implements BukkitTask
 	 */
 	public long getScheduledTick()
 	{
-		return scheduledTick;
+		return this.scheduledTick;
 	}
 
 	/**
@@ -63,13 +80,23 @@ public class ScheduledTask implements BukkitTask
 	}
 
 	/**
-	 * Get the task itself that will be ran.
+	 * Get the task itself that will be run.
 	 *
-	 * @return The task that will be ran.
+	 * @return The task that will be run.
 	 */
 	public Runnable getRunnable()
 	{
-		return runnable;
+		return this.runnable;
+	}
+
+	/**
+	 * Get the Consumer that will be run.
+	 *
+	 * @return The consumer that will be run.
+	 */
+	public Consumer<BukkitTask> getConsumer()
+	{
+		return this.consumer;
 	}
 
 	/**
@@ -78,40 +105,47 @@ public class ScheduledTask implements BukkitTask
 	public void run()
 	{
 		if (!isCancelled())
-			runnable.run();
+		{
+			if (this.runnable != null)
+				this.runnable.run();
+			if (this.consumer != null)
+				this.consumer.accept(this);
+		}
 		else
+		{
 			throw new CancellationException("Task is cancelled");
+		}
 	}
 
 	@Override
 	public int getTaskId()
 	{
-		return id;
+		return this.id;
 	}
 
 	@Override
 	public @NotNull Plugin getOwner()
 	{
-		return plugin;
+		return this.plugin;
 	}
 
 	@Override
 	public boolean isSync()
 	{
-		return isSync;
+		return this.isSync;
 	}
 
 	@Override
 	public boolean isCancelled()
 	{
-		return isCancelled;
+		return this.isCancelled;
 	}
 
 	@Override
 	public void cancel()
 	{
-		isCancelled = true;
-		cancelListeners.forEach(Runnable::run);
+		this.isCancelled = true;
+		this.cancelListeners.forEach(Runnable::run);
 	}
 
 	/**
@@ -121,7 +155,7 @@ public class ScheduledTask implements BukkitTask
 	 */
 	public void addOnCancelled(Runnable callback)
 	{
-		cancelListeners.add(callback);
+		this.cancelListeners.add(callback);
 	}
 
 }
