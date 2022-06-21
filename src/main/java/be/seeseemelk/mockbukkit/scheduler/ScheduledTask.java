@@ -1,5 +1,9 @@
 package be.seeseemelk.mockbukkit.scheduler;
 
+import org.bukkit.plugin.Plugin;
+import org.bukkit.scheduler.BukkitTask;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CancellationException;
@@ -11,6 +15,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class ScheduledTask implements BukkitTask, BukkitWorker
 {
+
 	private final int id;
 	private final Plugin plugin;
 	private final boolean isSync;
@@ -45,6 +50,7 @@ public class ScheduledTask implements BukkitTask, BukkitWorker
 
 	/**
 	 * Get the tick at which the task is scheduled to run at.
+	 *
 	 * @return The tick the task is scheduled to run at.
 	 */
 	public long getScheduledTick()
@@ -54,6 +60,7 @@ public class ScheduledTask implements BukkitTask, BukkitWorker
 
 	/**
 	 * Sets the tick at which the task is scheduled to run at.
+	 *
 	 * @param scheduledTick The tick at which the task is scheduled to run at.
 	 */
 	protected void setScheduledTick(long scheduledTick)
@@ -63,6 +70,7 @@ public class ScheduledTask implements BukkitTask, BukkitWorker
 
 	/**
 	 * Get the task itself that will be ran.
+	 *
 	 * @return The task that will be ran.
 	 */
 	public Runnable getRunnable()

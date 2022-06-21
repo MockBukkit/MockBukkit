@@ -1,11 +1,15 @@
 package be.seeseemelk.mockbukkit.block.state;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
+import org.bukkit.Tag;
 import org.bukkit.block.Banner;
 import org.bukkit.block.Block;
 import org.bukkit.block.banner.Pattern;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,18 +19,19 @@ public class BannerMock extends TileStateMock implements Banner
 
 	private DyeColor baseColor;
 	private List<Pattern> patterns = new ArrayList<>();
+	private Component customName;
 
 	public BannerMock(@NotNull Material material)
 	{
 		super(material);
-		if (!material.name().endsWith("_BANNER") || material.name().contains("LEGACY"))
+		if (!Tag.BANNERS.isTagged(material))
 			throw new IllegalArgumentException("Cannot create a Banner state from " + material.name());
 	}
 
 	protected BannerMock(@NotNull Block block)
 	{
 		super(block);
-		if (!block.getType().name().endsWith("_BANNER") || block.getType().name().contains("LEGACY"))
+		if (!Tag.BANNERS.isTagged(block.getType()))
 			throw new IllegalArgumentException("Cannot create a Banner state from " + block.getType().name());
 	}
 
@@ -35,6 +40,7 @@ public class BannerMock extends TileStateMock implements Banner
 		super(state);
 		this.baseColor = state.baseColor;
 		this.patterns.addAll(state.patterns);
+		this.customName = state.customName;
 	}
 
 	@Override
@@ -95,6 +101,30 @@ public class BannerMock extends TileStateMock implements Banner
 	public int numberOfPatterns()
 	{
 		return this.patterns.size();
+	}
+
+	@Override
+	public @Nullable Component customName()
+	{
+		return this.customName;
+	}
+
+	@Override
+	public void customName(@Nullable Component customName)
+	{
+		this.customName = customName;
+	}
+
+	@Override
+	public @Nullable String getCustomName()
+	{
+		return this.customName == null ? null : LegacyComponentSerializer.legacySection().serialize(this.customName);
+	}
+
+	@Override
+	public void setCustomName(@Nullable String name)
+	{
+		this.customName = name == null ? null : LegacyComponentSerializer.legacySection().deserialize(name);
 	}
 
 }
