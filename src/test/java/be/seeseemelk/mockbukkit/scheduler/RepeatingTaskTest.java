@@ -10,7 +10,7 @@ class RepeatingTaskTest
 	@Test
 	void getScheduledTick_Start_IsEqualToDelay()
 	{
-		RepeatingTask task = new RepeatingTask(0, null, true, 10, 20, null);
+		RepeatingTask task = new RepeatingTask(0, null, true, 10, 20, () -> {});
 		assertEquals(10, task.getScheduledTick());
 	}
 
@@ -25,7 +25,7 @@ class RepeatingTaskTest
 	@Test
 	void getPeriod_SomePeriod_ExactPeriod()
 	{
-		RepeatingTask task = new RepeatingTask(0, null, true, 10, 20, null);
+		RepeatingTask task = new RepeatingTask(0, null, true, 10, 20, () -> {});
 		assertEquals(20, task.getPeriod());
 	}
 
