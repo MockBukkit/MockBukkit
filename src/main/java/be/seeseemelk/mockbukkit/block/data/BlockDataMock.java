@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.block.data;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.SoundGroup;
 import org.bukkit.Tag;
@@ -18,20 +19,20 @@ public class BlockDataMock implements BlockData
 	private final Material type;
 	private final Map<String, Object> data;
 
-	public BlockDataMock(Material type)
+	public BlockDataMock(@NotNull Material type)
 	{
+		Preconditions.checkNotNull(type, "Type cannot be null");
 		this.type = type;
-
 		this.data = new LinkedHashMap<>();
 	}
 
-	protected <T> void set(String key, T value)
+	protected <T> void set(@NotNull String key, T value)
 	{
 		this.data.put(key, value);
 	}
 
 	@SuppressWarnings("unchecked")
-	protected <T> T get(String key)
+	protected <T> T get(@NotNull String key)
 	{
 		T value = (T) this.data.get(key);
 		if (value == null)
@@ -44,7 +45,7 @@ public class BlockDataMock implements BlockData
 	@Override
 	public @NotNull Material getMaterial()
 	{
-		return type;
+		return this.type;
 	}
 
 	@Override
@@ -72,6 +73,7 @@ public class BlockDataMock implements BlockData
 	@Override
 	public @NotNull BlockData merge(@NotNull BlockData data)
 	{
+		Preconditions.checkNotNull(data, "Data cannot be null");
 //		Preconditions.checkArgument(?, "States have different types (got %s, expected %s)", data, this); TODO: implement this check
 		BlockDataMock mock = (BlockDataMock) this.clone();
 		mock.data.putAll(((BlockDataMock) data).data);
@@ -130,6 +132,7 @@ public class BlockDataMock implements BlockData
 
 	public static @NotNull BlockDataMock mock(@NotNull Material material)
 	{
+		Preconditions.checkNotNull(material, "Material cannot be null");
 		// Special Cases
 		if (Tag.BEDS.isTagged(material))
 		{

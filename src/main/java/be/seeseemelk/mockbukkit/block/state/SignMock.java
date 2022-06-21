@@ -71,7 +71,6 @@ public class SignMock extends TileStateMock implements Sign
 	@Override
 	public void line(int index, @NotNull Component line) throws IndexOutOfBoundsException
 	{
-
 		Preconditions.checkNotNull(line, "Line cannot be null!");
 		lines[index] = LegacyComponentSerializer.legacySection().serialize(line);
 	}

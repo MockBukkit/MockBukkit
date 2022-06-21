@@ -65,7 +65,6 @@ public class LecternMock extends ContainerMock implements Lectern
 
 	private int getMaxPages(ItemStack book)
 	{
-
 		if (book == null || !book.hasItemMeta())
 		{
 			return 1;

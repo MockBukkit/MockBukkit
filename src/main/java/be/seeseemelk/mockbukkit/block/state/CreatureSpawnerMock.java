@@ -65,12 +65,14 @@ public class CreatureSpawnerMock extends TileStateMock implements CreatureSpawne
 	@Override
 	public void setSpawnedType(@NotNull EntityType creatureType)
 	{
+		Preconditions.checkNotNull(creatureType, "CreatureType cannot be null");
 		this.spawnedType = creatureType;
 	}
 
 	@Override
 	public void setCreatureTypeByName(@NotNull String creatureType)
 	{
+		Preconditions.checkNotNull(creatureType, "CreatureType cannot be null");
 		EntityType type = EntityType.fromName(creatureType);
 		if (type == null)
 			return;
@@ -199,6 +201,7 @@ public class CreatureSpawnerMock extends TileStateMock implements CreatureSpawne
 	@Override
 	public void setSpawnedItem(@NotNull ItemStack itemStack)
 	{
+		Preconditions.checkNotNull(itemStack, "ItemStack cannot be null");
 		setSpawnedType(EntityType.DROPPED_ITEM);
 		// CraftBukkit then sets the spawned entity to an Item with this ItemStack, but we don't need to
 		// override any methods that ever return that so setting the type is enough.

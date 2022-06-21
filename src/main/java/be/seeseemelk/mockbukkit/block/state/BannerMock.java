@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.block.state;
 
+import com.google.common.base.Preconditions;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.DyeColor;
@@ -58,6 +59,7 @@ public class BannerMock extends TileStateMock implements Banner
 	@Override
 	public void setBaseColor(@NotNull DyeColor color)
 	{
+		Preconditions.checkNotNull(color, "Color cannot be null");
 		this.baseColor = color;
 	}
 
@@ -70,12 +72,14 @@ public class BannerMock extends TileStateMock implements Banner
 	@Override
 	public void setPatterns(@NotNull List<Pattern> patterns)
 	{
+		Preconditions.checkNotNull(patterns, "Patterns cannot be null");
 		this.patterns = new ArrayList<>(patterns);
 	}
 
 	@Override
 	public void addPattern(@NotNull Pattern pattern)
 	{
+		Preconditions.checkNotNull(pattern, "Pattern cannot be null");
 		this.patterns.add(pattern);
 	}
 
@@ -94,6 +98,7 @@ public class BannerMock extends TileStateMock implements Banner
 	@Override
 	public void setPattern(int i, @NotNull Pattern pattern)
 	{
+		Preconditions.checkNotNull(pattern, "Pattern cannot be null");
 		this.patterns.set(i, pattern);
 	}
 
