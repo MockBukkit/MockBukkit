@@ -1,73 +1,66 @@
 package be.seeseemelk.mockbukkit.block.state;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import be.seeseemelk.mockbukkit.WorldMock;
+import be.seeseemelk.mockbukkit.block.BlockMock;
 import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.block.EnderChest;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.block.BlockMock;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 class EnderChestMockTest
 {
 
+	private WorldMock world;
+	private BlockMock block;
+	private EnderChestMock enderChest;
+
 	@BeforeEach
-	void setUp() throws Exception
+	void setUp()
 	{
-		MockBukkit.mock();
-	}
-
-	@AfterEach
-	void tearDown() throws Exception
-	{
-		MockBukkit.unmock();
+		this.world = new WorldMock();
+		this.block = world.getBlockAt(0, 10, 0);
+		this.block.setType(Material.ENDER_CHEST);
+		this.enderChest = new EnderChestMock(this.block);
 	}
 
 	@Test
-	void testMaterialEnderChestBlockState()
+	void constructor_Material()
 	{
-		Block block = new BlockMock(Material.ENDER_CHEST);
-		assertTrue(block.getState() instanceof EnderChest);
+		assertDoesNotThrow(() -> new EnderChestMock(Material.ENDER_CHEST));
 	}
 
 	@Test
-	void testMaterialEnderChestMockConstructor()
+	void constructor_Material_WrongType_ThrowsException()
 	{
-		assertTrue(new EnderChestMock(Material.ENDER_CHEST) instanceof EnderChest);
+		assertThrowsExactly(IllegalArgumentException.class, () -> new EnderChestMock(Material.BEDROCK));
 	}
 
 	@Test
-	void testOpen()
+	void constructor_Block()
 	{
-		EnderChest chest = new EnderChestMock(Material.ENDER_CHEST);
-		chest.open();
-		assertTrue(chest.isOpen());
+		assertDoesNotThrow(() -> new EnderChestMock(new BlockMock(Material.ENDER_CHEST)));
 	}
 
 	@Test
-	void testClose()
+	void constructor_Block_WrongType_ThrowsException()
 	{
-		EnderChest chest = new EnderChestMock(Material.ENDER_CHEST);
-
-		assertFalse(chest.isOpen());
-		chest.open();
-		chest.close();
-		assertFalse(chest.isOpen());
+		assertThrowsExactly(IllegalArgumentException.class, () -> new EnderChestMock(new BlockMock(Material.BEDROCK)));
 	}
 
 	@Test
-	void testIsOpen()
+	void getSnapshot_DifferentInstance()
 	{
-		EnderChest chest = new EnderChestMock(Material.ENDER_CHEST);
+		assertNotSame(enderChest, enderChest.getSnapshot());
+	}
 
-		assertFalse(chest.isOpen());
-		chest.open();
-		assertTrue(chest.isOpen());
+	@Test
+	void blockStateMock_Mock_CorrectType()
+	{
+		assertInstanceOf(EnderChestMock.class, BlockStateMock.mockState(block));
 	}
 
 }
