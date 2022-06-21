@@ -16,13 +16,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ScoreMockTest
 {
+
 	private ServerMock server;
 	private ScoreboardMock scoreboard;
 	private ObjectiveMock objective;
 	private ScoreMock score;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		server = MockBukkit.mock();
 		scoreboard = server.getScoreboardManager().getNewScoreboard();
@@ -31,7 +32,7 @@ class ScoreMockTest
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
@@ -57,9 +58,9 @@ class ScoreMockTest
 	@Test
 	void getScore_ObjectiveUnregistered_ThrowsError()
 	{
+		objective.unregister();
 		assertThrows(IllegalStateException.class, () ->
 		{
-			objective.unregister();
 			score.getScore();
 		});
 	}

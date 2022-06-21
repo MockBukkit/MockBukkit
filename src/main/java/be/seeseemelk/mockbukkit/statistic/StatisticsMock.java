@@ -1,13 +1,14 @@
 package be.seeseemelk.mockbukkit.statistic;
 
-import java.util.EnumMap;
-import java.util.Map;
-import org.apache.commons.lang.Validate;
+import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.Statistic;
 import org.bukkit.Statistic.Type;
 import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.EnumMap;
+import java.util.Map;
 
 /**
  * An implementation of player statistics, similar to CraftStatistic
@@ -24,8 +25,8 @@ public class StatisticsMock
 	 */
 	public void setStatistic(@NotNull Statistic statistic, int amount)
 	{
-		Validate.isTrue(amount >= 0, "amount must be greater than or equal to 0");
-		Validate.isTrue(statistic.getType() == Type.UNTYPED, "statistic must be provided with parameter");
+		checkGreaterThanEqualTo0(amount);
+		Preconditions.checkArgument(statistic.getType() == Type.UNTYPED, "statistic must be provided with parameter");
 		untypedStatistics.put(statistic, amount);
 	}
 
@@ -34,8 +35,8 @@ public class StatisticsMock
 	 */
 	public void setStatistic(@NotNull Statistic statistic, @NotNull Material material, int amount)
 	{
-		Validate.isTrue(amount >= 0, "amount must be greater than or equal to 0");
-		Validate.isTrue(statistic.getType() == Type.ITEM || statistic.getType() == Type.BLOCK, "statistic must take a material parameter");
+		checkGreaterThanEqualTo0(amount);
+		Preconditions.checkArgument(statistic.getType() == Type.ITEM || statistic.getType() == Type.BLOCK, "statistic must take a material parameter");
 		materialStatistics.computeIfAbsent(statistic, k -> new EnumMap<>(Material.class)).put(material, amount);
 	}
 
@@ -44,8 +45,8 @@ public class StatisticsMock
 	 */
 	public void setStatistic(@NotNull Statistic statistic, @NotNull EntityType entity, int amount)
 	{
-		Validate.isTrue(amount >= 0, "amount must be greater than or equal to 0");
-		Validate.isTrue(statistic.getType() == Type.ENTITY, "statistic must take an entity parameter");
+		checkGreaterThanEqualTo0(amount);
+		Preconditions.checkArgument(statistic.getType() == Type.ENTITY, "statistic must take an entity parameter");
 		entityStatistics.computeIfAbsent(statistic, k -> new EnumMap<>(EntityType.class)).put(entity, amount);
 	}
 
@@ -54,7 +55,7 @@ public class StatisticsMock
 	 */
 	public void incrementStatistic(@NotNull Statistic statistic, int amount)
 	{
-		Validate.isTrue(amount > 0, "amount must be greater than 0");
+		checkGreaterThan0(amount);
 		setStatistic(statistic, getStatistic(statistic) + amount);
 	}
 
@@ -63,7 +64,7 @@ public class StatisticsMock
 	 */
 	public void incrementStatistic(@NotNull Statistic statistic, @NotNull Material material, int amount)
 	{
-		Validate.isTrue(amount > 0, "amount must be greater than 0");
+		checkGreaterThan0(amount);
 		setStatistic(statistic, material, getStatistic(statistic, material) + amount);
 	}
 
@@ -72,7 +73,7 @@ public class StatisticsMock
 	 */
 	public void incrementStatistic(@NotNull Statistic statistic, @NotNull EntityType entity, int amount)
 	{
-		Validate.isTrue(amount > 0, "amount must be greater than 0");
+		checkGreaterThan0(amount);
 		setStatistic(statistic, entity, getStatistic(statistic, entity) + amount);
 	}
 
@@ -81,7 +82,7 @@ public class StatisticsMock
 	 */
 	public void decrementStatistic(@NotNull Statistic statistic, int amount)
 	{
-		Validate.isTrue(amount > 0, "amount must be greater than 0");
+		checkGreaterThan0(amount);
 		setStatistic(statistic, getStatistic(statistic) - amount);
 	}
 
@@ -90,7 +91,7 @@ public class StatisticsMock
 	 */
 	public void decrementStatistic(@NotNull Statistic statistic, @NotNull Material material, int amount)
 	{
-		Validate.isTrue(amount > 0, "amount must be greater than 0");
+		checkGreaterThan0(amount);
 		setStatistic(statistic, material, getStatistic(statistic, material) - amount);
 	}
 
@@ -99,7 +100,7 @@ public class StatisticsMock
 	 */
 	public void decrementStatistic(@NotNull Statistic statistic, @NotNull EntityType entity, int amount)
 	{
-		Validate.isTrue(amount > 0, "amount must be greater than 0");
+		checkGreaterThan0(amount);
 		setStatistic(statistic, entity, getStatistic(statistic, entity) - amount);
 	}
 
@@ -108,7 +109,7 @@ public class StatisticsMock
 	 */
 	public int getStatistic(@NotNull Statistic statistic)
 	{
-		Validate.isTrue(statistic.getType() == Type.UNTYPED, "statistic must be provided with parameter");
+		Preconditions.checkArgument(statistic.getType() == Type.UNTYPED, "statistic must be provided with parameter");
 		return untypedStatistics.getOrDefault(statistic, 0);
 	}
 
@@ -117,7 +118,7 @@ public class StatisticsMock
 	 */
 	public int getStatistic(@NotNull Statistic statistic, @NotNull Material material)
 	{
-		Validate.isTrue(statistic.getType() == Type.ITEM || statistic.getType() == Type.BLOCK, "statistic must take a material parameter");
+		Preconditions.checkArgument(statistic.getType() == Type.ITEM || statistic.getType() == Type.BLOCK, "statistic must take a material parameter");
 		Map<Material, Integer> map = materialStatistics.get(statistic);
 		if (map == null)
 		{
@@ -131,7 +132,7 @@ public class StatisticsMock
 	 */
 	public int getStatistic(@NotNull Statistic statistic, @NotNull EntityType entity)
 	{
-		Validate.isTrue(statistic.getType() == Type.ENTITY, "statistic must take an entity parameter");
+		Preconditions.checkArgument(statistic.getType() == Type.ENTITY, "statistic must take an entity parameter");
 		Map<EntityType, Integer> map = entityStatistics.get(statistic);
 		if (map == null)
 		{
@@ -139,4 +140,25 @@ public class StatisticsMock
 		}
 		return map.getOrDefault(entity, 0);
 	}
+
+	/**
+	 * Ensures that the provided amount is greater than
+	 *
+	 * @param amount the amount to check
+	 */
+	private static void checkGreaterThan0(int amount)
+	{
+		Preconditions.checkArgument(amount > 0, "amount must be greater than 0");
+	}
+
+	/**
+	 * Ensures that the provided amount is greater than or equal to 0
+	 *
+	 * @param amount the amount to check
+	 */
+	private static void checkGreaterThanEqualTo0(int amount)
+	{
+		Preconditions.checkArgument(amount >= 0, "amount must be greater than or equal to 0");
+	}
+
 }

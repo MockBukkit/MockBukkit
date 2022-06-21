@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -32,18 +33,18 @@ class TeamMockTest
 	private PlayerMock playerB;
 
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		server = MockBukkit.mock();
 		playerA = server.addPlayer();
 		playerB = server.addPlayer();
 		ScoreboardManager managerMock = server.getScoreboardManager();
 		board = managerMock.getNewScoreboard();
-		team = new TeamMock("Test", board);
+		team = (TeamMock) board.registerNewTeam("Test");
 	}
 
 	@AfterEach
-	public void tearDown() throws Exception
+	void tearDown() throws Exception
 	{
 		MockBukkit.unmock();
 	}
@@ -178,7 +179,9 @@ class TeamMockTest
 	@Test
 	void unregister_FirstUnregister_Works()
 	{
+		assertSame(team, board.getTeam("Test"), "Team was registered");
 		assertDoesNotThrow(team::unregister);
+		assertNull(board.getTeam("Test"), "Team is no longer registered");
 	}
 
 	@Test

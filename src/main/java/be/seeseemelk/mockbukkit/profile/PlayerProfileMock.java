@@ -142,13 +142,6 @@ public class PlayerProfileMock implements PlayerProfile
 	}
 
 	@Override
-	@SuppressWarnings("MethodDoesntCallSuperMethod")
-	public org.bukkit.profile.@NotNull PlayerProfile clone()
-	{
-		return new PlayerProfileMock(this);
-	}
-
-	@Override
 	public boolean completeFromCache()
 	{
 		// TODO Auto-generated method stub
@@ -191,6 +184,12 @@ public class PlayerProfileMock implements PlayerProfile
 	}
 
 	@Override
+	public int hashCode()
+	{
+		return this.properties.hashCode();
+	}
+
+	@Override
 	public boolean equals(Object obj)
 	{
 		if (this == obj) return true;
@@ -207,9 +206,10 @@ public class PlayerProfileMock implements PlayerProfile
 	}
 
 	@Override
-	public int hashCode()
+	@SuppressWarnings("MethodDoesntCallSuperMethod")
+	public org.bukkit.profile.@NotNull PlayerProfile clone()
 	{
-		return this.properties.hashCode();
+		return new PlayerProfileMock(this);
 	}
 
 }

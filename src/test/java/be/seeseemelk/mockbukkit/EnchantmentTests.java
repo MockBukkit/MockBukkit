@@ -13,13 +13,13 @@ import be.seeseemelk.mockbukkit.enchantments.EnchantmentsMock;
 class EnchantmentTests
 {
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		MockBukkit.mock();
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}

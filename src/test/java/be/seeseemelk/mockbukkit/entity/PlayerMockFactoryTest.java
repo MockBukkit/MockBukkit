@@ -17,14 +17,14 @@ class PlayerMockFactoryTest
 	private PlayerMockFactory factory;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		server = MockBukkit.mock();
 		factory = new PlayerMockFactory(server);
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}

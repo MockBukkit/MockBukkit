@@ -1,11 +1,14 @@
 package be.seeseemelk.mockbukkit;
 
+import com.google.common.io.ByteArrayDataOutput;
+import com.google.common.io.ByteStreams;
 import be.seeseemelk.mockbukkit.command.CommandResult;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
 import be.seeseemelk.mockbukkit.entity.SimpleEntityMock;
+
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import be.seeseemelk.mockbukkit.profile.PlayerProfileMock;
 import com.google.common.io.ByteArrayDataOutput;
@@ -19,11 +22,25 @@ import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.WorldType;
 import org.bukkit.block.data.BlockData;
+import be.seeseemelk.mockbukkit.entity.*;
+import be.seeseemelk.mockbukkit.inventory.InventoryMock;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
+import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.Warning;
+import org.bukkit.World;
+import org.bukkit.WorldCreator;
+import org.bukkit.WorldType;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.event.server.MapInitializeEvent;
+import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
+import org.bukkit.map.MapView;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.jetbrains.annotations.NotNull;
@@ -31,6 +48,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.File;
@@ -40,13 +58,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
-import java.util.concurrent.atomic.AtomicReference;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -61,13 +79,13 @@ class ServerMockTest
 	private ServerMock server;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		server = MockBukkit.mock();
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
@@ -126,6 +144,20 @@ class ServerMockTest
 		assertEquals(playerA, player1);
 		assertEquals(playerB, player2);
 		assertNotEquals(player1, player2);
+	}
+
+	@Test
+	void addPlayer_Calls_AsyncPreLoginEvent()
+	{
+		PlayerMock player = server.addPlayer();
+		server.getPluginManager().assertEventFired(AsyncPlayerPreLoginEvent.class);
+	}
+
+	@Test
+	void addPlayer_Calls_PlayerJoinEvent()
+	{
+		PlayerMock player = server.addPlayer();
+		server.getPluginManager().assertEventFired(PlayerJoinEvent.class);
 	}
 
 	@Test
@@ -405,20 +437,17 @@ class ServerMockTest
 		assertTrue(entities.contains(entity2), "Set did not contain second entity");
 	}
 
-	@Test
-	void getPlayer_NameAndPlayerExists_PlayerFound()
+	@ParameterizedTest
+	@CsvSource({
+			"player, player",
+			"player, PLAYER",
+			"player_other, player",
+	})
+	void getPlayer_NameAndPlayerExists_PlayerFound(String actual, String expected)
 	{
-		PlayerMock player = new PlayerMock(server, "player");
+		PlayerMock player = new PlayerMock(server, actual);
 		server.addPlayer(player);
-		assertSame(player, server.getPlayer("player"));
-	}
-
-	@Test
-	void getPlayer_NameAndPlayerExistsButCasingWrong_PlayerNotFound()
-	{
-		PlayerMock player = new PlayerMock(server, "player");
-		server.addPlayer(player);
-		assertSame(player, server.getPlayer("PLAYER"));
+		assertSame(player, server.getPlayer(expected));
 	}
 
 	@Test
@@ -427,14 +456,6 @@ class ServerMockTest
 		PlayerMock player = new PlayerMock(server, "player");
 		server.addPlayer(player);
 		assertSame(player, server.getPlayer(player.getUniqueId()));
-	}
-
-	@Test
-	void getPlayer_PlayerNamePartiallyCorrect_PlayerFound()
-	{
-		PlayerMock player = new PlayerMock(server, "player_other");
-		server.addPlayer(player);
-		assertSame(player, server.getPlayer("player"));
 	}
 
 	@Test
@@ -535,7 +556,7 @@ class ServerMockTest
 	@Test
 	void testDefaultPotionEffects()
 	{
-		assertEquals(32, PotionEffectType.values().length);
+		assertEquals(33, PotionEffectType.values().length);
 
 		for (PotionEffectType type : PotionEffectType.values())
 		{
@@ -597,6 +618,13 @@ class ServerMockTest
 	}
 
 	@Test
+	void testGetPlayerUniqueID_OfflineMode()
+	{
+		OfflinePlayer player = new OfflinePlayerMock("OfflinePlayer");
+		assertEquals(player.getUniqueId(), server.getPlayerUniqueId(player.getName()));
+	}
+
+	@Test
 	void testSetMaxPlayers()
 	{
 		server.setMaxPlayers(69420);
@@ -615,6 +643,25 @@ class ServerMockTest
 
 		playerA.assertSaid(PlainTextComponentSerializer.plainText().serialize(component));
 		playerB.assertSaid(PlainTextComponentSerializer.plainText().serialize(component));
+	}
+
+	@Test
+	void testGetPlayerList()
+	{
+		PlayerMock playerA = server.addPlayer();
+		PlayerMock playerB = server.addPlayer();
+
+		assertThat(server.getPlayerList().getOnlinePlayers(), containsInAnyOrder(playerA, playerB));
+	}
+
+	@Test
+	void testPlayerListDisconnectPlayer()
+	{
+		MockPlayerList playerList = server.getPlayerList();
+		PlayerMock playerA = server.addPlayer();
+		playerList.disconnectPlayer(playerA);
+
+		assertFalse(playerList.getOnlinePlayers().contains(playerA));
 	}
 
 	@Test
@@ -642,6 +689,33 @@ class ServerMockTest
 
 		assertEquals("Test", profile.getName());
 		assertEquals(uuid, profile.getUniqueId());
+	}
+
+	@Test
+	void createMap_IdIncrements()
+	{
+		WorldMock world = new WorldMock();
+		assertEquals(1, server.createMap(world).getId());
+		assertEquals(2, server.createMap(world).getId());
+		assertEquals(3, server.createMap(world).getId());
+	}
+
+	@Test
+	void getMap_ValidId_ReturnsMap()
+	{
+		WorldMock world = new WorldMock();
+		int id = server.createMap(world).getId();
+
+		assertNotNull(server.getMap(id));
+		assertEquals(id, server.getMap(id).getId());
+	}
+
+	@Test
+	void createMap_CallsMapInitEvent()
+	{
+		MapView mapView = server.createMap(new WorldMock());
+
+		server.getPluginManager().assertEventFired(MapInitializeEvent.class, (e) -> e.getMap().equals(mapView));
 	}
 
 	@Test
