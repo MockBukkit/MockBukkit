@@ -1,5 +1,13 @@
 package be.seeseemelk.mockbukkit.inventory;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Objects;
+import java.util.Random;
+import java.util.function.UnaryOperator;
+
+import be.seeseemelk.mockbukkit.inventory.meta.SpawnEggMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.BannerMetaMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.inventory.meta.BannerMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.ArmorStandMetaMock;
@@ -22,6 +30,7 @@ import be.seeseemelk.mockbukkit.inventory.meta.SkullMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.SuspiciousStewMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.TropicalFishBucketMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.BundleMetaMock;
+import com.destroystokyo.paper.MaterialTags;
 import com.google.common.base.Preconditions;
 
 import net.kyori.adventure.text.Component;
@@ -59,9 +68,12 @@ public class ItemFactoryMock implements ItemFactory
 		{
 			return BannerMetaMock.class;
 		}
+		else if (MaterialTags.SPAWN_EGGS.isTagged(material))
+		{
+			return SpawnEggMetaMock.class;
+		}
 		return switch (material)
 		{
-
 		case ARMOR_STAND -> ArmorStandMetaMock.class;
 		case WRITABLE_BOOK, WRITTEN_BOOK -> BookMetaMock.class;
 		case ENCHANTED_BOOK -> EnchantedBookMetaMock.class;
