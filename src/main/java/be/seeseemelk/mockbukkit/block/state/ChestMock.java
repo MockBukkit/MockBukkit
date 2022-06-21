@@ -27,15 +27,13 @@ public class ChestMock extends ContainerMock implements Chest
 	public ChestMock(@NotNull Material material)
 	{
 		super(material);
-		if (material != Material.CHEST)
-			throw new IllegalArgumentException("Cannot create a Chest state from " + material);
+		checkType(material == Material.CHEST);
 	}
 
 	protected ChestMock(@NotNull Block block)
 	{
 		super(block);
-		if (block.getType() != Material.CHEST)
-			throw new IllegalArgumentException("Cannot create a Chest state from " + block.getType());
+		checkType(block.getType() == Material.CHEST);
 	}
 
 	protected ChestMock(@NotNull ChestMock state)

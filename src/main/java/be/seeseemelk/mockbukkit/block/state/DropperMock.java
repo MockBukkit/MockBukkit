@@ -24,15 +24,13 @@ public class DropperMock extends ContainerMock implements Dropper
 	public DropperMock(@NotNull Material material)
 	{
 		super(material);
-		if (material != Material.DROPPER)
-			throw new IllegalArgumentException("Cannot create a Dropper state from " + material);
+		checkType(material == Material.DROPPER);
 	}
 
 	protected DropperMock(@NotNull Block block)
 	{
 		super(block);
-		if (block.getType() != Material.DROPPER)
-			throw new IllegalArgumentException("Cannot create a Dropper state from " + block.getType());
+		checkType(block.getType() == Material.DROPPER);
 	}
 
 	protected DropperMock(@NotNull DropperMock state)

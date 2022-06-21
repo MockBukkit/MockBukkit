@@ -22,15 +22,13 @@ public class CampfireMock extends TileStateMock implements Campfire
 	public CampfireMock(@NotNull Material material)
 	{
 		super(material);
-		if (material != Material.CAMPFIRE && material != Material.SOUL_CAMPFIRE)
-			throw new IllegalArgumentException("Cannot create a Campfire state from " + material);
+		checkType(material == Material.CAMPFIRE || material == Material.SOUL_CAMPFIRE);
 	}
 
 	protected CampfireMock(@NotNull Block block)
 	{
 		super(block);
-		if (block.getType() != Material.CAMPFIRE && block.getType() != Material.SOUL_CAMPFIRE)
-			throw new IllegalArgumentException("Cannot create a Campfire state from " + block.getType());
+		checkType(block.getType() == Material.CAMPFIRE || block.getType() == Material.SOUL_CAMPFIRE);
 	}
 
 	protected CampfireMock(@NotNull CampfireMock state)

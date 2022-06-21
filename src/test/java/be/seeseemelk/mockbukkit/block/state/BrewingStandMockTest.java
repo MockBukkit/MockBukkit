@@ -1,8 +1,10 @@
 package be.seeseemelk.mockbukkit.block.state;
 
+import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import org.bukkit.Material;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -23,10 +25,17 @@ class BrewingStandMockTest
 	@BeforeEach
 	void setUp()
 	{
+		MockBukkit.mock();
 		this.world = new WorldMock();
 		this.block = world.getBlockAt(0, 10, 0);
 		this.block.setType(Material.BREWING_STAND);
 		this.brewingStand = new BrewingStandMock(this.block);
+	}
+
+	@AfterEach
+	void teardown()
+	{
+		MockBukkit.unmock();
 	}
 
 	@Test

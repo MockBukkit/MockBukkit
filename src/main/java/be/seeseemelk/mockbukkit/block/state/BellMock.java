@@ -12,15 +12,13 @@ public class BellMock extends TileStateMock implements Bell
 	public BellMock(@NotNull Material material)
 	{
 		super(material);
-		if (material != Material.BELL)
-			throw new IllegalArgumentException("Cannot create a Bell state from " + material);
+		checkType(material == Material.BELL);
 	}
 
 	protected BellMock(@NotNull Block block)
 	{
 		super(block);
-		if (block.getType() != Material.BELL)
-			throw new IllegalArgumentException("Cannot create a Bell state from " + block.getType());
+		checkType(block.getType() == Material.BELL);
 	}
 
 	protected BellMock(@NotNull BellMock state)

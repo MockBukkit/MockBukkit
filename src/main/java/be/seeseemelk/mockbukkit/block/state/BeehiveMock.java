@@ -25,15 +25,13 @@ public class BeehiveMock extends TileStateMock implements Beehive
 	public BeehiveMock(@NotNull Material material)
 	{
 		super(material);
-		if (material != Material.BEEHIVE)
-			throw new IllegalArgumentException("Cannot create a Beehive state from " + material);
+		checkType(material == Material.BEEHIVE);
 	}
 
 	protected BeehiveMock(@NotNull Block block)
 	{
 		super(block);
-		if (block.getType() != Material.BEEHIVE)
-			throw new IllegalArgumentException("Cannot create a Beehive state from " + block.getType());
+		checkType(block.getType() == Material.BEEHIVE);
 	}
 
 	protected BeehiveMock(@NotNull BeehiveMock state)
@@ -140,7 +138,7 @@ public class BeehiveMock extends TileStateMock implements Beehive
 	@Override
 	public void addEntity(@NotNull Bee entity)
 	{
-		Preconditions.checkArgument(entity != null, "Entity must not be null");
+		Preconditions.checkNotNull(entity, "Bee cannot be null");
 		// TODO: We currently don't have a way to serialize entities so until that's done this can't be implemented.
 		throw new UnimplementedOperationException();
 	}

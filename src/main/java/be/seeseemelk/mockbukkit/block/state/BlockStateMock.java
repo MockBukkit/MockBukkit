@@ -50,8 +50,20 @@ public class BlockStateMock implements BlockState
 		this.block = state.isPlaced() ? state.getBlock() : null;
 	}
 
+	/**
+	 * Used to ensure the material the BlockState was created with is correct
+	 * by evaluating an expression. If the expression is false, a {@link IllegalArgumentException}
+	 * will be thrown indicating that the material passed in is incorrect for the BlockState type.
+	 *
+	 * @param expression The expression to check.
+	 */
+	protected void checkType(boolean expression)
+	{
+		Preconditions.checkArgument(expression, "Cannot create a " + getClass().getSimpleName() + " from " + material);
+	}
+
 	@Override
-	public void setMetadata(String metadataKey, MetadataValue newMetadataValue)
+	public void setMetadata(String metadataKey, @NotNull MetadataValue newMetadataValue)
 	{
 		metadataTable.setMetadata(metadataKey, newMetadataValue);
 	}
@@ -274,14 +286,10 @@ public class BlockStateMock implements BlockState
 		{
 			return false;
 		}
-		if (this.isPlaced() && this.getLocation() != other.getLocation() && (this.getLocation() == null || !this.getLocation().equals(other.getLocation())))
-		{
-			return false;
-		}
+		return !this.isPlaced() || this.getLocation() == other.getLocation() || (this.getLocation() != null && this.getLocation().equals(other.getLocation()));
 //		if (this.getBlockData() != other.getBlockData() && (this.getBlockData() == null || !this.getBlockData().equals(other.getBlockData()))) {
 //			return false; Not implemented
 //		}
-		return true;
 	}
 
 	@NotNull

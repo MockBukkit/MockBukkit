@@ -17,16 +17,14 @@ public class JukeboxMock extends TileStateMock implements Jukebox
 	public JukeboxMock(@NotNull Material material)
 	{
 		super(material);
-		if (material != Material.JUKEBOX)
-			throw new IllegalArgumentException("Cannot create a Jukebox state from " + material);
+		checkType(material == Material.JUKEBOX);
 		setRecord(null);
 	}
 
 	public JukeboxMock(@NotNull Block block)
 	{
 		super(block);
-		if (block.getType() != Material.JUKEBOX)
-			throw new IllegalArgumentException("Cannot create a Jukebox state from " + block.getType());
+		checkType(block.getType() == Material.JUKEBOX);
 		setRecord(null);
 	}
 

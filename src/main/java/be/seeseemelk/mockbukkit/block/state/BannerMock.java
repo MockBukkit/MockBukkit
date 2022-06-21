@@ -25,15 +25,13 @@ public class BannerMock extends TileStateMock implements Banner
 	public BannerMock(@NotNull Material material)
 	{
 		super(material);
-		if (!Tag.BANNERS.isTagged(material))
-			throw new IllegalArgumentException("Cannot create a Banner state from " + material.name());
+		checkType(Tag.BANNERS.isTagged(material));
 	}
 
 	protected BannerMock(@NotNull Block block)
 	{
 		super(block);
-		if (!Tag.BANNERS.isTagged(block.getType()))
-			throw new IllegalArgumentException("Cannot create a Banner state from " + block.getType().name());
+		checkType(Tag.BANNERS.isTagged(block.getType()));
 	}
 
 	protected BannerMock(@NotNull BannerMock state)
