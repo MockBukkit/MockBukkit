@@ -281,6 +281,8 @@ public class BlockStateMock implements BlockState
 	{
 		switch (block.getType())
 		{
+		case COMPARATOR:
+			return new ComparatorMock(block);
 		case CONDUIT:
 			return new ConduitMock(block);
 		case ENCHANTING_TABLE:
