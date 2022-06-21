@@ -5,6 +5,7 @@ import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import be.seeseemelk.mockbukkit.block.state.BlockStateMock;
 import be.seeseemelk.mockbukkit.entity.AllayMock;
 import be.seeseemelk.mockbukkit.entity.ArmorStandMock;
+import be.seeseemelk.mockbukkit.entity.EndermanMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
 import be.seeseemelk.mockbukkit.entity.FireworkMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
@@ -26,8 +27,8 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Pig;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Sheep;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.ItemSpawnEvent;
@@ -927,14 +928,21 @@ class WorldMockTest
 	}
 
 	@Test
-	@Disabled("No Animal Mock merged yet")
 	void testCallSpawnEventOnDisallowedAnimal()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		world.setSpawnFlags(true, false);
-		Entity pig = world.spawn(new Location(world, 0, 0, 0), Pig.class, CreatureSpawnEvent.SpawnReason.NATURAL);
-		assertFalse(pig.isValid());
-		assertTrue(pig.isDead());
+		Entity sheep = world.spawn(new Location(world, 0, 0, 0), Sheep.class, CreatureSpawnEvent.SpawnReason.NATURAL);
+		assertFalse(sheep.isValid());
+	}
+
+	@Test
+	void testSpawnEnderman()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ENDERMAN);
+		assertInstanceOf(EndermanMock.class, entity);
+		assertTrue(entity.isValid());
 	}
 
 }

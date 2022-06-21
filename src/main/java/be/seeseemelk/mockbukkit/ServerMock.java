@@ -42,7 +42,6 @@ import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
-import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.apache.commons.lang3.StringUtils;
@@ -91,7 +90,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.loot.LootTable;
-import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.plugin.messaging.StandardMessenger;
@@ -130,7 +128,6 @@ import java.util.stream.Collectors;
 public class ServerMock extends Server.Spigot implements Server
 {
 
-	private static final String JOIN_MESSAGE = "%s has joined the server.";
 	private static final Component MOTD = Component.text("A Minecraft Server");
 
 	private final Properties buildProperties = new Properties();
@@ -254,7 +251,7 @@ public class ServerMock extends Server.Spigot implements Server
 
 		Component joinMessage = MiniMessage.miniMessage()
 				.deserialize("<name> has joined the Server!", Placeholder.component("name", player.displayName()));
-        
+
 		PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(player, joinMessage);
 		Bukkit.getPluginManager().callEvent(playerJoinEvent);
 
@@ -341,6 +338,7 @@ public class ServerMock extends Server.Spigot implements Server
 
 	/**
 	 * Returns the {@link MockPlayerList} instance that is used by this server.
+	 *
 	 * @return The {@link MockPlayerList} instance.
 	 */
 	public @NotNull MockPlayerList getPlayerList()
@@ -1268,6 +1266,20 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	public boolean shouldSendChatPreviews()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isEnforcingSecureProfiles()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public boolean getOnlineMode()
 	{
 		// TODO Auto-generated method stub
@@ -1342,6 +1354,13 @@ public class ServerMock extends Server.Spigot implements Server
 	public Merchant createMerchant(String title)
 	{
 		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getMaxChainedNeighborUpdates()
+	{
+		//TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 

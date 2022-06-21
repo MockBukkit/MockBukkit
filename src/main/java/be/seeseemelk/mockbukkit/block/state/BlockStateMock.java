@@ -6,6 +6,7 @@ import be.seeseemelk.mockbukkit.metadata.MetadataTable;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Tag;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
@@ -279,11 +280,33 @@ public class BlockStateMock implements BlockState
 	@NotNull
 	public static BlockStateMock mockState(@NotNull Block block)
 	{
+		// Special cases
+		if (Tag.BANNERS.isTagged(block.getType()))
+		{
+			return new BannerMock(block);
+		}
+		else if (Tag.SHULKER_BOXES.isTagged(block.getType()))
+		{
+			return new ShulkerBoxMock(block);
+		}
+		else if (Tag.SIGNS.isTagged(block.getType()))
+		{
+			return new SignMock(block);
+		}
 		switch (block.getType())
 		{
+		case BREWING_STAND:
+			return new BrewingStandMock(block);
+		case BLAST_FURNACE:
+			return new BlastFurnaceMock(block);
+		case COMPARATOR:
+			return new ComparatorMock(block);
+		case CONDUIT:
+			return new ConduitMock(block);
+		case ENCHANTING_TABLE:
+			return new EnchantingTableMock(block);
 		case JIGSAW:
 			return new JigsawMock(block);
-
 		case JUKEBOX:
 			return new JukeboxMock(block);
 		case SPAWNER:
@@ -314,76 +337,6 @@ public class BlockStateMock implements BlockState
 			return new ChestMock(block);
 		case ENDER_CHEST:
 			return new EnderChestMock(block);
-		case ACACIA_SIGN:
-		case ACACIA_WALL_SIGN:
-		case BIRCH_SIGN:
-		case BIRCH_WALL_SIGN:
-		case CRIMSON_SIGN:
-		case CRIMSON_WALL_SIGN:
-		case DARK_OAK_SIGN:
-		case DARK_OAK_WALL_SIGN:
-		case JUNGLE_SIGN:
-		case JUNGLE_WALL_SIGN:
-		case OAK_SIGN:
-		case OAK_WALL_SIGN:
-		case SPRUCE_SIGN:
-		case SPRUCE_WALL_SIGN:
-		case WARPED_SIGN:
-		case WARPED_WALL_SIGN:
-		case MANGROVE_SIGN:
-		case MANGROVE_WALL_SIGN:
-			return new SignMock(block);
-		case SHULKER_BOX:
-		case WHITE_SHULKER_BOX:
-		case ORANGE_SHULKER_BOX:
-		case MAGENTA_SHULKER_BOX:
-		case LIGHT_BLUE_SHULKER_BOX:
-		case YELLOW_SHULKER_BOX:
-		case LIME_SHULKER_BOX:
-		case PINK_SHULKER_BOX:
-		case GRAY_SHULKER_BOX:
-		case LIGHT_GRAY_SHULKER_BOX:
-		case CYAN_SHULKER_BOX:
-		case PURPLE_SHULKER_BOX:
-		case BLUE_SHULKER_BOX:
-		case BROWN_SHULKER_BOX:
-		case GREEN_SHULKER_BOX:
-		case RED_SHULKER_BOX:
-		case BLACK_SHULKER_BOX:
-			return new ShulkerBoxMock(block);
-		case WHITE_BANNER:
-		case ORANGE_BANNER:
-		case MAGENTA_BANNER:
-		case LIGHT_BLUE_BANNER:
-		case YELLOW_BANNER:
-		case LIME_BANNER:
-		case PINK_BANNER:
-		case GRAY_BANNER:
-		case LIGHT_GRAY_BANNER:
-		case CYAN_BANNER:
-		case PURPLE_BANNER:
-		case BLUE_BANNER:
-		case BROWN_BANNER:
-		case GREEN_BANNER:
-		case RED_BANNER:
-		case BLACK_BANNER:
-		case WHITE_WALL_BANNER:
-		case ORANGE_WALL_BANNER:
-		case MAGENTA_WALL_BANNER:
-		case LIGHT_BLUE_WALL_BANNER:
-		case YELLOW_WALL_BANNER:
-		case LIME_WALL_BANNER:
-		case PINK_WALL_BANNER:
-		case GRAY_WALL_BANNER:
-		case LIGHT_GRAY_WALL_BANNER:
-		case CYAN_WALL_BANNER:
-		case PURPLE_WALL_BANNER:
-		case BLUE_WALL_BANNER:
-		case BROWN_WALL_BANNER:
-		case GREEN_WALL_BANNER:
-		case RED_WALL_BANNER:
-		case BLACK_WALL_BANNER:
-			return new BannerMock(block);
 		default:
 			return new BlockStateMock(block);
 		}
