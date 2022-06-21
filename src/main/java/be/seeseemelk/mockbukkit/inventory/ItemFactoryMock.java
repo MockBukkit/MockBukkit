@@ -30,6 +30,7 @@ import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.hover.content.Content;
 import org.bukkit.Color;
 import org.bukkit.Material;
+import org.bukkit.Tag;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemFactory;
@@ -53,6 +54,11 @@ public class ItemFactoryMock implements ItemFactory
 
 	private Class<? extends ItemMeta> getItemMetaClass(Material material)
 	{
+		// Special cases
+		if (Tag.ITEMS_BANNERS.isTagged(material))
+		{
+			return BannerMetaMock.class;
+		}
 		return switch (material)
 		{
 
@@ -72,8 +78,6 @@ public class ItemFactoryMock implements ItemFactory
 		case BUNDLE -> BundleMetaMock.class;
 		case COMPASS -> CompassMetaMock.class;
 		case CROSSBOW -> CrossbowMetaMock.class;
-		case WHITE_BANNER, ORANGE_BANNER, MAGENTA_BANNER, LIGHT_BLUE_BANNER, YELLOW_BANNER, LIME_BANNER, PINK_BANNER, GRAY_BANNER, LIGHT_GRAY_BANNER, CYAN_BANNER, PURPLE_BANNER, BLUE_BANNER, BROWN_BANNER, GREEN_BANNER, RED_BANNER, BLACK_BANNER ->
-				BannerMetaMock.class;
 		case TROPICAL_FISH_BUCKET -> TropicalFishBucketMetaMock.class;
 		default -> ItemMetaMock.class;
 		};
