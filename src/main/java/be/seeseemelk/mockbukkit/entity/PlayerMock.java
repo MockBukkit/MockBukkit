@@ -45,6 +45,7 @@ import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.Statistic;
+import org.bukkit.Tag;
 import org.bukkit.WeatherType;
 import org.bukkit.World;
 import org.bukkit.WorldBorder;
@@ -2204,7 +2205,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void setBedSpawnLocation(@Nullable Location loc, boolean force)
 	{
-		if (force || loc == null || loc.getBlock().getType().name().endsWith("_BED"))
+		if (force || loc == null || Tag.BEDS.isTagged(loc.getBlock().getType()))
 		{
 			this.bedSpawnLocation = loc;
 		}
