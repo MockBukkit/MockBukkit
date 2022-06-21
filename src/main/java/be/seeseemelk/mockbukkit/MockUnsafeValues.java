@@ -52,38 +52,38 @@ public class MockUnsafeValues implements UnsafeValues
 	private String minimumApiVersion = "none";
 
 	@Override
-	public ComponentFlattener componentFlattener()
+	public @NotNull ComponentFlattener componentFlattener()
 	{
 		return FLATTENER;
 	}
 
 	@Override
 	@Deprecated(forRemoval = true)
-	public PlainComponentSerializer plainComponentSerializer()
+	public @NotNull PlainComponentSerializer plainComponentSerializer()
 	{
 		return PLAIN;
 	}
 
 	@Override
-	public PlainTextComponentSerializer plainTextSerializer()
+	public @NotNull PlainTextComponentSerializer plainTextSerializer()
 	{
 		return PLAIN_TEXT;
 	}
 
 	@Override
-	public GsonComponentSerializer gsonComponentSerializer()
+	public @NotNull GsonComponentSerializer gsonComponentSerializer()
 	{
 		return GSON;
 	}
 
 	@Override
-	public GsonComponentSerializer colorDownsamplingGsonComponentSerializer()
+	public @NotNull GsonComponentSerializer colorDownsamplingGsonComponentSerializer()
 	{
 		return COLOR_DOWNSAMPLING_GSON;
 	}
 
 	@Override
-	public LegacyComponentSerializer legacyComponentSerializer()
+	public @NotNull LegacyComponentSerializer legacyComponentSerializer()
 	{
 		return LEGACY_SECTION_UXRC;
 	}
@@ -97,7 +97,7 @@ public class MockUnsafeValues implements UnsafeValues
 
 
 	@Override
-	public Material toLegacy(Material material)
+	public @NotNull Material toLegacy(@NotNull Material material)
 	{
 		if (material.isLegacy())
 		{
@@ -157,7 +157,7 @@ public class MockUnsafeValues implements UnsafeValues
 	}
 
 	@Override
-	public void checkSupported(PluginDescriptionFile pdf) throws InvalidPluginException
+	public void checkSupported(@NotNull PluginDescriptionFile pdf) throws InvalidPluginException
 	{
 		if (pdf.getAPIVersion() == null)
 		{

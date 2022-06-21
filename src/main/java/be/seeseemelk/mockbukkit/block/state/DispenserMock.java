@@ -70,7 +70,7 @@ public class DispenserMock extends ContainerMock implements Dispenser
 	}
 
 	@Override
-	protected InventoryMock createInventory()
+	protected @NotNull InventoryMock createInventory()
 	{
 		return new DispenserInventoryMock(this);
 	}

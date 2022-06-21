@@ -14,7 +14,7 @@ public class AxolotlBucketMetaMock extends ItemMetaMock implements AxolotlBucket
 		super();
 	}
 
-	public AxolotlBucketMetaMock(AxolotlBucketMeta meta)
+	public AxolotlBucketMetaMock(@NotNull AxolotlBucketMeta meta)
 	{
 		super(meta);
 

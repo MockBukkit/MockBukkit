@@ -19,12 +19,12 @@ import java.util.Map;
 public class ObjectiveMock implements Objective
 {
 
-	private ScoreboardMock scoreboard;
-	private final String name;
-	private final String criteria;
+	private @Nullable ScoreboardMock scoreboard;
+	private final @NotNull String name;
+	private final @NotNull String criteria;
 	private final Map<String, ScoreMock> scores = new HashMap<>();
-	private Component displayName;
-	private DisplaySlot displaySlot;
+	private @Nullable Component displayName;
+	private @Nullable DisplaySlot displaySlot;
 	private RenderType renderType;
 
 	public ObjectiveMock(@NotNull ScoreboardMock scoreboard, @NotNull String name, @NotNull String displayName,
@@ -56,7 +56,7 @@ public class ObjectiveMock implements Objective
 	}
 
 	@Override
-	public String getName() throws IllegalStateException
+	public @NotNull String getName() throws IllegalStateException
 	{
 		validate();
 		return name;
@@ -76,7 +76,7 @@ public class ObjectiveMock implements Objective
 
 	@Override
 	@Deprecated
-	public String getDisplayName() throws IllegalStateException
+	public @NotNull String getDisplayName() throws IllegalStateException
 	{
 		validate();
 		return LegacyComponentSerializer.legacySection().serialize(displayName);
@@ -84,7 +84,7 @@ public class ObjectiveMock implements Objective
 
 	@Override
 	@Deprecated
-	public void setDisplayName(String displayName) throws IllegalStateException, IllegalArgumentException
+	public void setDisplayName(@NotNull String displayName) throws IllegalStateException, IllegalArgumentException
 	{
 		Preconditions.checkNotNull(displayName, "The display name cannot be null");
 		Preconditions.checkArgument(displayName.length() <= 128, "The display name cannot be longer than 128 characters");
@@ -94,7 +94,7 @@ public class ObjectiveMock implements Objective
 	}
 
 	@Override
-	public String getCriteria() throws IllegalStateException
+	public @NotNull String getCriteria() throws IllegalStateException
 	{
 		validate();
 		return criteria;
@@ -149,7 +149,7 @@ public class ObjectiveMock implements Objective
 	}
 
 	@Override
-	public RenderType getRenderType() throws IllegalStateException
+	public @NotNull RenderType getRenderType() throws IllegalStateException
 	{
 		validate();
 		return renderType;
@@ -157,7 +157,7 @@ public class ObjectiveMock implements Objective
 
 	@Override
 	@Deprecated
-	public ScoreMock getScore(@NotNull OfflinePlayer player) throws IllegalArgumentException, IllegalStateException
+	public @NotNull ScoreMock getScore(@NotNull OfflinePlayer player) throws IllegalArgumentException, IllegalStateException
 	{
 		Preconditions.checkNotNull(player, "The player cannot be null");
 		validate();
@@ -166,7 +166,7 @@ public class ObjectiveMock implements Objective
 	}
 
 	@Override
-	public ScoreMock getScore(@NotNull String entry) throws IllegalArgumentException, IllegalStateException
+	public @NotNull ScoreMock getScore(@NotNull String entry) throws IllegalArgumentException, IllegalStateException
 	{
 		Preconditions.checkNotNull(entry, "The entry cannot be null");
 		Preconditions.checkArgument(entry.length() <= 40, "Objective entries cannot be longer than 40 characters");

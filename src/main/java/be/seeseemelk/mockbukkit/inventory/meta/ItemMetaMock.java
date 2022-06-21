@@ -47,17 +47,17 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 {
 
 	// We store the raw JSON representation of all text data. See SPIGOT-5063, SPIGOT-5656, SPIGOT-5304
-	private String displayName = null;
-	private String localizedName = null;
-	private List<String> lore = null;
+	private @Nullable String displayName = null;
+	private @Nullable String localizedName = null;
+	private @Nullable List<String> lore = null;
 	private int damage = 0;
 	private int repairCost = 0;
-	private Map<Enchantment, Integer> enchants = new HashMap<>();
+	private @Nullable Map<Enchantment, Integer> enchants = new HashMap<>();
 	private Multimap<Attribute, AttributeModifier> attributeModifiers;
 	private Set<ItemFlag> hideFlags = EnumSet.noneOf(ItemFlag.class);
 	private PersistentDataContainerMock persistentDataContainer = new PersistentDataContainerMock();
 	private boolean unbreakable = false;
-	private Integer customModelData = null;
+	private @Nullable Integer customModelData = null;
 
 	public ItemMetaMock()
 	{
@@ -96,7 +96,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		}
 	}
 
-	static boolean checkConflictingEnchants(Map<Enchantment, Integer> enchantments, Enchantment ench)
+	static boolean checkConflictingEnchants(@Nullable Map<Enchantment, Integer> enchantments, @NotNull Enchantment ench)
 	{
 		if (enchantments == null || enchantments.isEmpty())
 			return false;
@@ -134,25 +134,25 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
-	public String getDisplayName()
+	public @NotNull String getDisplayName()
 	{
 		return this.displayName == null ? null : LegacyComponentSerializer.legacySection().serialize(GsonComponentSerializer.gson().deserialize(this.displayName));
 	}
 
 	@Override
-	public @NotNull BaseComponent[] getDisplayNameComponent()
+	public @NotNull BaseComponent @NotNull [] getDisplayNameComponent()
 	{
 		return BungeeComponentSerializer.get().serialize(GsonComponentSerializer.gson().deserialize(this.displayName));
 	}
 
 	@Override
-	public void setDisplayName(String name)
+	public void setDisplayName(@Nullable String name)
 	{
 		this.displayName = name == null ? null : GsonComponentSerializer.gson().serialize(LegacyComponentSerializer.legacySection().deserialize(name));
 	}
 
 	@Override
-	public void setDisplayNameComponent(@Nullable BaseComponent[] components)
+	public void setDisplayNameComponent(BaseComponent @NotNull [] components)
 	{
 		this.displayName = GsonComponentSerializer.gson().serialize(BungeeComponentSerializer.get().deserialize(Arrays.stream(components).filter(Objects::nonNull).toArray(BaseComponent[]::new)));
 	}
@@ -163,7 +163,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	 * @param meta The other item meta whose lore should be compared.
 	 * @return {@code true} if they are the same, {@code false} if they're not.
 	 */
-	private boolean isLoreEquals(ItemMeta meta)
+	private boolean isLoreEquals(@NotNull ItemMeta meta)
 	{
 		if (lore == null)
 			return !meta.hasLore();
@@ -191,7 +191,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	 * @return {@code true} if both display names are equal, {@code false} if
 	 * they're not.
 	 */
-	private boolean isDisplayNameEqual(ItemMeta meta)
+	private boolean isDisplayNameEqual(@NotNull ItemMeta meta)
 	{
 		if (displayName != null)
 		{
@@ -278,7 +278,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
-	public ItemMetaMock clone()
+	public @NotNull ItemMetaMock clone()
 	{
 		try
 		{
@@ -435,7 +435,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	 *
 	 * @param lines The lines the lore should contain
 	 */
-	public void assertLore(List<String> lines)
+	public void assertLore(@NotNull List<String> lines)
 	{
 		assertComponentLore(lines.stream().map(s -> LegacyComponentSerializer.legacySection().deserialize(s).asComponent()).toList());
 	}
@@ -445,7 +445,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	 *
 	 * @param lines The lines the lore should contain
 	 */
-	public void assertComponentLore(List<Component> lines)
+	public void assertComponentLore(@NotNull List<Component> lines)
 	{
 		if (this.lore == null)
 		{
@@ -493,7 +493,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	 * @return A HashMap of String, Object pairs representing the ItemMetaMock.
 	 */
 	@Override
-	public Map<String, Object> serialize()
+	public @NotNull Map<String, Object> serialize()
 	{
 		// Make new map and add relevant properties to it.
 		Map<String, Object> map = new HashMap<>();
@@ -550,7 +550,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	 * @return A new instance of the ItemMetaMock class.
 	 */
 	@SuppressWarnings("unchecked")
-	public static ItemMetaMock deserialize(Map<String, Object> args)
+	public static @NotNull ItemMetaMock deserialize(@NotNull Map<String, Object> args)
 	{
 		ItemMetaMock serialMock = new ItemMetaMock();
 
@@ -577,7 +577,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
-	public String getLocalizedName()
+	public @NotNull String getLocalizedName()
 	{
 		return localizedName;
 	}
@@ -607,13 +607,13 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
-	public Map<Enchantment, Integer> getEnchants()
+	public @NotNull Map<Enchantment, Integer> getEnchants()
 	{
 		return Collections.unmodifiableMap(enchants);
 	}
 
 	@Override
-	public boolean addEnchant(Enchantment ench, int level, boolean ignoreLevelRestriction)
+	public boolean addEnchant(@NotNull Enchantment ench, int level, boolean ignoreLevelRestriction)
 	{
 		Integer existingLevel = this.enchants.get(ench);
 		if (nonNull(existingLevel) && existingLevel.equals(level))
@@ -663,7 +663,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
-	public Set<ItemFlag> getItemFlags()
+	public @NotNull Set<ItemFlag> getItemFlags()
 	{
 		return Collections.unmodifiableSet(hideFlags);
 	}
@@ -745,7 +745,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
-	public void setAttributeModifiers(Multimap<Attribute, AttributeModifier> attributeModifiers)
+	public void setAttributeModifiers(@Nullable Multimap<Attribute, AttributeModifier> attributeModifiers)
 	{
 		if (attributeModifiers == null || attributeModifiers.isEmpty())
 		{

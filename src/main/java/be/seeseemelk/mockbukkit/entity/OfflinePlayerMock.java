@@ -27,8 +27,8 @@ import java.util.UUID;
 public class OfflinePlayerMock implements OfflinePlayer
 {
 
-	private final UUID uuid;
-	private final String name;
+	private final @NotNull UUID uuid;
+	private final @Nullable String name;
 
 	public OfflinePlayerMock(@NotNull UUID uuid, @Nullable String name)
 	{
@@ -42,7 +42,7 @@ public class OfflinePlayerMock implements OfflinePlayer
 		this(UUID.nameUUIDFromBytes(("OfflinePlayer:" + name).getBytes()), name);
 	}
 
-	public PlayerMock join(@NotNull ServerMock server)
+	public @NotNull PlayerMock join(@NotNull ServerMock server)
 	{
 		Preconditions.checkNotNull(server, "Server cannot be null");
 		PlayerMock player = new PlayerMock(server, this.name, this.uuid);

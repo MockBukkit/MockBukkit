@@ -19,8 +19,8 @@ import java.util.Set;
 public class TagWrapperMock implements Tag<Material>
 {
 
-	private final TagRegistry registry;
-	private final NamespacedKey key;
+	private final @NotNull TagRegistry registry;
+	private final @NotNull NamespacedKey key;
 	private final Set<Material> materials = new HashSet<>();
 	private final Set<TagWrapperMock> additionalTags = new HashSet<>();
 

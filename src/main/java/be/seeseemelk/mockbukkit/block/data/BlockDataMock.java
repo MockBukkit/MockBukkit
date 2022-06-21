@@ -16,8 +16,8 @@ import java.util.stream.Collectors;
 public class BlockDataMock implements BlockData
 {
 
-	private final Material type;
-	private final Map<String, Object> data;
+	private final @NotNull Material type;
+	private final @NotNull Map<String, Object> data;
 
 	public BlockDataMock(@NotNull Material type)
 	{
@@ -32,7 +32,7 @@ public class BlockDataMock implements BlockData
 	}
 
 	@SuppressWarnings("unchecked")
-	protected <T> T get(@NotNull String key)
+	protected <T> @NotNull T get(@NotNull String key)
 	{
 		T value = (T) this.data.get(key);
 		if (value == null)
@@ -81,7 +81,7 @@ public class BlockDataMock implements BlockData
 	}
 
 	@Override
-	public SoundGroup getSoundGroup()
+	public @NotNull SoundGroup getSoundGroup()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

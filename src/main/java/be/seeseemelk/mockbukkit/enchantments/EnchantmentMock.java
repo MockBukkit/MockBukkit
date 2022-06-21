@@ -17,7 +17,7 @@ import java.util.Set;
 public class EnchantmentMock extends Enchantment
 {
 
-	private final String name;
+	private final @NotNull String name;
 	private int maxLevel;
 	private int startLevel;
 	private EnchantmentTarget itemTarget;

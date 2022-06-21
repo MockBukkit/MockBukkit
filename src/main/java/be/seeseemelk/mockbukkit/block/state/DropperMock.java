@@ -69,7 +69,7 @@ public class DropperMock extends ContainerMock implements Dropper
 	}
 
 	@Override
-	protected InventoryMock createInventory()
+	protected @NotNull InventoryMock createInventory()
 	{
 		return new DropperInventoryMock(this);
 	}

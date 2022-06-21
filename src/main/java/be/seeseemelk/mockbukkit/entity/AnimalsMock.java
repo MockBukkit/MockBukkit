@@ -15,7 +15,7 @@ import java.util.UUID;
 public class AnimalsMock extends AgeableMock implements Animals
 {
 
-	private UUID breedCause;
+	private @Nullable UUID breedCause;
 	private int isInLoveTicks;
 
 	public AnimalsMock(@NotNull ServerMock server, @NotNull UUID uuid)

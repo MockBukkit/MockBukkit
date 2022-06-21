@@ -37,8 +37,8 @@ public class TagParser implements Keyed
 	private static final Pattern MINECRAFT_MATERIAL = Pattern.compile("minecraft:[a-z0-9_]+");
 	private static final Pattern MINECRAFT_TAG = Pattern.compile("#minecraft:[a-z_]+");
 
-	private final TagRegistry registry;
-	private final NamespacedKey key;
+	private final @NotNull TagRegistry registry;
+	private final @NotNull NamespacedKey key;
 
 	/**
 	 * This constructs a new {@link TagParser}.

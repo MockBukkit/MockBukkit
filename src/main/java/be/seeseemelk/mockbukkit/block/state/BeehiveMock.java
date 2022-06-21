@@ -17,7 +17,7 @@ import java.util.List;
 public class BeehiveMock extends TileStateMock implements Beehive
 {
 
-	private Location flowerLocation;
+	private @Nullable Location flowerLocation;
 	private int maxBees = 3;
 	private boolean sedated;
 	private final List<Bee> bees = new ArrayList<>();

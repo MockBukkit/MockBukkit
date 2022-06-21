@@ -23,14 +23,14 @@ public class PersistentDataContainerMock implements PersistentDataContainer
 {
 
 	private final PersistentDataAdapterContext context = new PersistentDataAdapterContextMock();
-	private final Map<NamespacedKey, Object> map;
+	private final @NotNull Map<NamespacedKey, Object> map;
 
 	public PersistentDataContainerMock()
 	{
 		this.map = new HashMap<>();
 	}
 
-	public PersistentDataContainerMock(PersistentDataContainerMock mock)
+	public PersistentDataContainerMock(@NotNull PersistentDataContainerMock mock)
 	{
 		this.map = new HashMap<>(mock.map);
 	}
@@ -113,17 +113,17 @@ public class PersistentDataContainerMock implements PersistentDataContainer
 	}
 
 	@Override
-	public Set<NamespacedKey> getKeys()
+	public @NotNull Set<NamespacedKey> getKeys()
 	{
 		return Collections.unmodifiableSet(map.keySet());
 	}
 
-	public Map<String, Object> serialize()
+	public @NotNull Map<String, Object> serialize()
 	{
 		return map.entrySet().stream().collect(Collectors.toMap(e -> e.getKey().toString(), Map.Entry::getValue));
 	}
 
-	public static PersistentDataContainerMock deserialize(Map<String, Object> args)
+	public static @NotNull PersistentDataContainerMock deserialize(@NotNull Map<String, Object> args)
 	{
 		PersistentDataContainerMock mock = new PersistentDataContainerMock();
 		for (Map.Entry<String, Object> entry : args.entrySet())

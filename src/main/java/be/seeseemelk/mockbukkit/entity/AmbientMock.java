@@ -15,7 +15,7 @@ public class AmbientMock extends MobMock implements Ambient
 	}
 
 	@Override
-	public String toString()
+	public @NotNull String toString()
 	{
 		return "AmbientMock";
 	}

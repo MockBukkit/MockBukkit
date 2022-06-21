@@ -26,7 +26,7 @@ public class BossBarMock implements BossBar
 	private boolean visible = true;
 	private double progress = 1.0;
 
-	public BossBarMock(@NotNull String title, @NotNull BarColor color, @NotNull BarStyle style, BarFlag... flags)
+	public BossBarMock(@NotNull String title, @NotNull BarColor color, @NotNull BarStyle style, BarFlag @NotNull ... flags)
 	{
 		this.title = title;
 		this.color = color;

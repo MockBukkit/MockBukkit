@@ -24,14 +24,14 @@ public class LeatherArmorMetaMock extends ItemMetaMock implements LeatherArmorMe
 		this.color = Bukkit.getItemFactory().getDefaultLeatherColor();
 	}
 
-	public LeatherArmorMetaMock(LeatherArmorMeta meta)
+	public LeatherArmorMetaMock(@NotNull LeatherArmorMeta meta)
 	{
 		super(meta);
 		this.color = meta.getColor();
 	}
 
 	@Override
-	public LeatherArmorMetaMock clone()
+	public @NotNull LeatherArmorMetaMock clone()
 	{
 		LeatherArmorMetaMock mock = (LeatherArmorMetaMock) super.clone();
 		mock.setColor(color);

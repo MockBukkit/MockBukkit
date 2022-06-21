@@ -144,10 +144,10 @@ public class WorldMock implements World
 	private boolean storming;
 	private int clearWeatherDuration;
 	private long seed = 0;
-	private WorldType worldType = WorldType.NORMAL;
+	private @NotNull WorldType worldType = WorldType.NORMAL;
 	private final BiomeProviderMock biomeProviderMock = new BiomeProviderMock();
-	private Map<Coordinate, Biome> biomes = new HashMap<>();
-	private Difficulty difficulty = Difficulty.NORMAL;
+	private @NotNull Map<Coordinate, Biome> biomes = new HashMap<>();
+	private @NotNull Difficulty difficulty = Difficulty.NORMAL;
 
 	private boolean allowAnimals = true;
 	private boolean allowMonsters = true;
@@ -269,7 +269,7 @@ public class WorldMock implements World
 	 * @param c Creates a block on the given coordinate.
 	 * @return A newly created block at that location.
 	 */
-	public BlockMock createBlock(Coordinate c)
+	public @NotNull BlockMock createBlock(@NotNull Coordinate c)
 	{
 		if (c.y >= maxHeight)
 		{
@@ -367,7 +367,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public @NotNull BlockMock getBlockAt(Location location)
+	public @NotNull BlockMock getBlockAt(@NotNull Location location)
 	{
 		return getBlockAt(location.getBlockX(), location.getBlockY(), location.getBlockZ());
 	}
@@ -419,7 +419,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public boolean setSpawnLocation(Location location)
+	public boolean setSpawnLocation(@NotNull Location location)
 	{
 		return setSpawnLocation(location.getBlockX(), location.getBlockY(), location.getBlockZ());
 	}
@@ -560,13 +560,13 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public Chunk getChunkAt(Location location)
+	public @NotNull Chunk getChunkAt(@NotNull Location location)
 	{
 		return getChunkAt(location.getBlockX() >> 4, location.getBlockZ() >> 4);
 	}
 
 	@Override
-	public Chunk getChunkAt(Block block)
+	public @NotNull Chunk getChunkAt(@NotNull Block block)
 	{
 		return getChunkAt(block.getLocation());
 	}
@@ -579,13 +579,13 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public Chunk[] getLoadedChunks()
+	public Chunk @NotNull [] getLoadedChunks()
 	{
 		return loadedChunks.values().toArray(new Chunk[0]);
 	}
 
 	@Override
-	public void loadChunk(Chunk chunk)
+	public void loadChunk(@NotNull Chunk chunk)
 	{
 		loadChunk(chunk.getX(), chunk.getZ());
 	}
@@ -620,7 +620,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public boolean unloadChunk(Chunk chunk)
+	public boolean unloadChunk(@NotNull Chunk chunk)
 	{
 		return this.unloadChunk(chunk.getX(), chunk.getZ());
 	}
@@ -717,7 +717,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public Arrow spawnArrow(Location location, Vector direction, float speed, float spread)
+	public @NotNull Arrow spawnArrow(Location location, Vector direction, float speed, float spread)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -768,7 +768,7 @@ public class WorldMock implements World
 	}
 
 	@SuppressWarnings("unchecked")
-	public <T extends Entity> T spawn(Location location, Class<T> clazz, Consumer<T> function, CreatureSpawnEvent.SpawnReason reason, boolean randomizeData) throws IllegalArgumentException
+	public <T extends Entity> @NotNull T spawn(@Nullable Location location, @Nullable Class<T> clazz, @Nullable Consumer<T> function, CreatureSpawnEvent.@NotNull SpawnReason reason, boolean randomizeData) throws IllegalArgumentException
 	{
 		if (location == null || clazz == null)
 		{
@@ -804,7 +804,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public @NotNull Entity spawnEntity(@NotNull Location loc, EntityType type)
+	public @NotNull Entity spawnEntity(@NotNull Location loc, @NotNull EntityType type)
 	{
 		return spawn(loc, type.getEntityClass());
 	}
@@ -816,7 +816,7 @@ public class WorldMock implements World
 		return this.spawn(loc, type.getEntityClass(), randomizeData, null);
 	}
 
-	private <T extends Entity> EntityMock mockEntity(@NotNull Location location, @NotNull Class<T> clazz, boolean randomizeData)
+	private <T extends Entity> @NotNull EntityMock mockEntity(@NotNull Location location, @NotNull Class<T> clazz, boolean randomizeData)
 	{
 		AsyncCatcher.catchOp("entity add");
 		if (clazz == ArmorStand.class)
@@ -897,7 +897,7 @@ public class WorldMock implements World
 		throw new UnimplementedOperationException();
 	}
 
-	private void callSpawnEvent(EntityMock entity, CreatureSpawnEvent.SpawnReason reason)
+	private void callSpawnEvent(EntityMock entity, CreatureSpawnEvent.@NotNull SpawnReason reason)
 	{
 
 		boolean canceled; // Here for future implementation (see below)
@@ -954,14 +954,14 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public LightningStrike strikeLightning(Location loc)
+	public @NotNull LightningStrike strikeLightning(Location loc)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public LightningStrike strikeLightningEffect(Location loc)
+	public @NotNull LightningStrike strikeLightningEffect(Location loc)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -981,7 +981,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public List<LivingEntity> getLivingEntities()
+	public @NotNull List<LivingEntity> getLivingEntities()
 	{
 		return getEntities().stream()
 				.filter(LivingEntity.class::isInstance)
@@ -991,7 +991,7 @@ public class WorldMock implements World
 
 	@Override
 	@SafeVarargs
-	public final <T extends Entity> @NotNull Collection<T> getEntitiesByClass(Class<T>... classes)
+	public final <T extends Entity> @NotNull Collection<T> getEntitiesByClass(Class<T> @NotNull ... classes)
 	{
 		List<T> entities = new ArrayList<>();
 		for (Class<T> clazz : classes)
@@ -1011,7 +1011,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public @NotNull Collection<Entity> getEntitiesByClasses(Class<?>... classes)
+	public @NotNull Collection<Entity> getEntitiesByClasses(Class<?> @NotNull ... classes)
 	{
 		List<Entity> entities = new ArrayList<>();
 		for (Class<?> clazz : classes)
@@ -1031,13 +1031,13 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public List<Player> getPlayers()
+	public @NotNull List<Player> getPlayers()
 	{
 		return Bukkit.getOnlinePlayers().stream().filter(p -> p.getWorld() == this).collect(Collectors.toList());
 	}
 
 	@Override
-	public Collection<Entity> getNearbyEntities(Location location, double x, double y, double z)
+	public @NotNull Collection<Entity> getNearbyEntities(Location location, double x, double y, double z)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1219,7 +1219,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public Environment getEnvironment()
+	public @NotNull Environment getEnvironment()
 	{
 		return this.environment;
 	}
@@ -1277,7 +1277,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public List<BlockPopulator> getPopulators()
+	public @NotNull List<BlockPopulator> getPopulators()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1285,7 +1285,7 @@ public class WorldMock implements World
 
 	@SuppressWarnings("deprecation")
 	@Override
-	public FallingBlock spawnFallingBlock(Location location, org.bukkit.material.MaterialData data) throws IllegalArgumentException
+	public @NotNull FallingBlock spawnFallingBlock(Location location, org.bukkit.material.MaterialData data) throws IllegalArgumentException
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1293,7 +1293,7 @@ public class WorldMock implements World
 
 	@Override
 	@Deprecated
-	public FallingBlock spawnFallingBlock(Location location, Material material, byte data)
+	public @NotNull FallingBlock spawnFallingBlock(Location location, Material material, byte data)
 			throws IllegalArgumentException
 	{
 		// TODO Auto-generated method stub
@@ -1321,7 +1321,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public <T> void playEffect(@NotNull Location location, @NotNull Effect effect, T data, int radius)
+	public <T> void playEffect(@NotNull Location location, @NotNull Effect effect, @Nullable T data, int radius)
 	{
 		if (data != null)
 		{
@@ -1362,14 +1362,14 @@ public class WorldMock implements World
 
 	@Override
 	@Deprecated
-	public Biome getBiome(int x, int z)
+	public @NotNull Biome getBiome(int x, int z)
 	{
 		return this.getBiome(x, 0, z);
 	}
 
 	@Override
 	@Deprecated
-	public void setBiome(int x, int z, Biome bio)
+	public void setBiome(int x, int z, @NotNull Biome bio)
 	{
 		for (int y = this.getMinHeight(); y < this.getMaxHeight(); y++)
 		{
@@ -1459,7 +1459,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public File getWorldFolder()
+	public @NotNull File getWorldFolder()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1594,19 +1594,19 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public void playSound(Location location, Sound sound, float volume, float pitch)
+	public void playSound(@NotNull Location location, @NotNull Sound sound, float volume, float pitch)
 	{
 		this.playSound(location, sound, SoundCategory.MASTER, volume, pitch);
 	}
 
 	@Override
-	public void playSound(Location location, String sound, float volume, float pitch)
+	public void playSound(@NotNull Location location, @NotNull String sound, float volume, float pitch)
 	{
 		this.playSound(location, sound, SoundCategory.MASTER, volume, pitch);
 	}
 
 	@Override
-	public void playSound(Location location, Sound sound, SoundCategory category, float volume, float pitch)
+	public void playSound(@NotNull Location location, @NotNull Sound sound, @NotNull SoundCategory category, float volume, float pitch)
 	{
 		for (Player player : getPlayers())
 		{
@@ -1615,7 +1615,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public void playSound(Location location, String sound, SoundCategory category, float volume, float pitch)
+	public void playSound(@NotNull Location location, @NotNull String sound, @NotNull SoundCategory category, float volume, float pitch)
 	{
 		for (Player player : getPlayers())
 		{
@@ -1630,7 +1630,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public void playSound(Entity entity, Sound sound, SoundCategory category, float volume, float pitch)
+	public void playSound(@Nullable Entity entity, @Nullable Sound sound, @Nullable SoundCategory category, float volume, float pitch)
 	{
 		if (entity == null || entity.getWorld() != this || sound == null || category == null)
 		{
@@ -1645,14 +1645,14 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public String[] getGameRules()
+	public String @NotNull [] getGameRules()
 	{
 		return gameRules.values().stream().map(Object::toString).collect(Collectors.toList()).toArray(new String[0]);
 	}
 
 	@Override
 	@Deprecated
-	public String getGameRuleValue(String rule)
+	public String getGameRuleValue(@Nullable String rule)
 	{
 		if (rule == null)
 		{
@@ -1669,7 +1669,7 @@ public class WorldMock implements World
 	@SuppressWarnings("unchecked")
 	@Override
 	@Deprecated
-	public boolean setGameRuleValue(String rule, String value)
+	public boolean setGameRuleValue(@Nullable String rule, @NotNull String value)
 	{
 		if (rule == null)
 		{
@@ -1704,7 +1704,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public boolean isGameRule(String rule)
+	public boolean isGameRule(@Nullable String rule)
 	{
 		return rule != null && GameRule.getByName(rule) != null;
 	}
@@ -1819,14 +1819,14 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public FallingBlock spawnFallingBlock(Location location, BlockData data) throws IllegalArgumentException
+	public @NotNull FallingBlock spawnFallingBlock(Location location, BlockData data) throws IllegalArgumentException
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public <T> T getGameRuleValue(GameRule<T> rule)
+	public <T> T getGameRuleValue(@NotNull GameRule<T> rule)
 	{
 		return rule.getType().cast(gameRules.get(rule));
 	}
@@ -1853,22 +1853,22 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public Collection<Entity> getNearbyEntities(Location location, double x, double y, double z,
-												Predicate<Entity> filter)
+	public @NotNull Collection<Entity> getNearbyEntities(Location location, double x, double y, double z,
+														 Predicate<Entity> filter)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Collection<Entity> getNearbyEntities(BoundingBox boundingBox)
+	public @NotNull Collection<Entity> getNearbyEntities(BoundingBox boundingBox)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Collection<Entity> getNearbyEntities(BoundingBox boundingBox, Predicate<Entity> filter)
+	public @NotNull Collection<Entity> getNearbyEntities(BoundingBox boundingBox, Predicate<Entity> filter)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -2057,7 +2057,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public Collection<Chunk> getForceLoadedChunks()
+	public @NotNull Collection<Chunk> getForceLoadedChunks()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -2085,22 +2085,22 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public Collection<Plugin> getPluginChunkTickets(int x, int z)
+	public @NotNull Collection<Plugin> getPluginChunkTickets(int x, int z)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Map<Plugin, Collection<Chunk>> getPluginChunkTickets()
+	public @NotNull Map<Plugin, Collection<Chunk>> getPluginChunkTickets()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public <T extends AbstractArrow> T spawnArrow(Location location, Vector direction, float speed, float spread,
-												  Class<T> clazz)
+	public <T extends AbstractArrow> @NotNull T spawnArrow(Location location, Vector direction, float speed, float spread,
+                                                           Class<T> clazz)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -2114,7 +2114,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public List<Raid> getRaids()
+	public @NotNull List<Raid> getRaids()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -2154,14 +2154,14 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public Block getHighestBlockAt(int x, int z, HeightMap heightMap)
+	public @NotNull Block getHighestBlockAt(int x, int z, HeightMap heightMap)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Block getHighestBlockAt(Location location, HeightMap heightMap)
+	public @NotNull Block getHighestBlockAt(Location location, HeightMap heightMap)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -2200,7 +2200,7 @@ public class WorldMock implements World
 		biomes.put(new Coordinate(x, y, z), bio);
 	}
 
-	protected Map<Coordinate, Biome> getBiomeMap()
+	protected @NotNull Map<Coordinate, Biome> getBiomeMap()
 	{
 		return new HashMap<>(biomes);
 	}
@@ -2541,7 +2541,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public Spigot spigot()
+	public @NotNull Spigot spigot()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

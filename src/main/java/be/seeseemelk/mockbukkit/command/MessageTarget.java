@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.command;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -14,7 +15,7 @@ public interface MessageTarget
 	 *
 	 * @return The next message sent to the target.
 	 */
-	String nextMessage();
+    @Nullable String nextMessage();
 
 	/**
 	 * Asserts that a specific message was not received next by the message target.

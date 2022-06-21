@@ -15,7 +15,7 @@ import java.util.UUID;
 public abstract class AbstractHorseMock extends AnimalsMock implements AbstractHorse
 {
 
-	private UUID owner;
+	private @Nullable UUID owner;
 	private int maxDomestication;
 	private int domestication;
 	private double jumpStrength;

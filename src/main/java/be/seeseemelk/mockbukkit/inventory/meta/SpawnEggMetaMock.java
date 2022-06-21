@@ -12,7 +12,7 @@ public class SpawnEggMetaMock extends ItemMetaMock implements SpawnEggMeta
 		super();
 	}
 
-	public SpawnEggMetaMock(SpawnEggMeta meta)
+	public SpawnEggMetaMock(@NotNull SpawnEggMeta meta)
 	{
 		super(meta);
 	}

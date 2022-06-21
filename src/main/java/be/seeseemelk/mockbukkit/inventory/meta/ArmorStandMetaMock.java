@@ -17,7 +17,7 @@ public class ArmorStandMetaMock extends ItemMetaMock implements ArmorStandMeta
 		super();
 	}
 
-	public ArmorStandMetaMock(ArmorStandMeta meta)
+	public ArmorStandMetaMock(@NotNull ArmorStandMeta meta)
 	{
 		super(meta);
 

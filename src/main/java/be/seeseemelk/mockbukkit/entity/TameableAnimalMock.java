@@ -12,7 +12,7 @@ import java.util.UUID;
 public class TameableAnimalMock extends AnimalsMock implements Tameable, Creature
 {
 
-	private UUID owner;
+	private @Nullable UUID owner;
 	private boolean tamed;
 	private boolean sitting;
 
@@ -92,7 +92,7 @@ public class TameableAnimalMock extends AnimalsMock implements Tameable, Creatur
 	}
 
 	@Override
-	public String toString()
+	public @NotNull String toString()
 	{
 		return getClass().getSimpleName() + "{owner=" + this.getOwner() + ",tamed=" + this.isTamed() + "}";
 	}

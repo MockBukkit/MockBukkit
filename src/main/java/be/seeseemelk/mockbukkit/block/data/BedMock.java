@@ -16,7 +16,7 @@ public class BedMock extends BlockDataMock implements Bed
 	private static final String OCCUPIED = "occupied";
 	private static final String FACING = "facing";
 
-	public BedMock(Material type)
+	public BedMock(@NotNull Material type)
 	{
 		super(type);
 		if (!Tag.BEDS.isTagged(type))

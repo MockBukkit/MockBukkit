@@ -7,6 +7,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.profile.PlayerProfile;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
@@ -21,14 +22,14 @@ import java.util.Objects;
 public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 {
 
-	private String owner;
+	private @Nullable String owner;
 
 	public SkullMetaMock()
 	{
 		super();
 	}
 
-	public SkullMetaMock(SkullMeta meta)
+	public SkullMetaMock(@NotNull SkullMeta meta)
 	{
 		super(meta);
 
@@ -36,7 +37,7 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	}
 
 	@Override
-	public SkullMetaMock clone()
+	public @NotNull SkullMetaMock clone()
 	{
 		SkullMetaMock mock = (SkullMetaMock) super.clone();
 		mock.setOwner(owner);
@@ -118,7 +119,7 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	}
 
 	@Override
-	public boolean setOwningPlayer(OfflinePlayer owner)
+	public boolean setOwningPlayer(@NotNull OfflinePlayer owner)
 	{
 		this.owner = owner.getName();
 

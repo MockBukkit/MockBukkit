@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.inventory.meta;
 
 import org.bukkit.FireworkEffect;
 import org.bukkit.inventory.meta.FireworkEffectMeta;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
@@ -9,14 +10,14 @@ import java.util.Objects;
 public class FireworkEffectMetaMock extends ItemMetaMock implements FireworkEffectMeta
 {
 
-	private FireworkEffect effect;
+	private @Nullable FireworkEffect effect;
 
 	public FireworkEffectMetaMock()
 	{
 		super();
 	}
 
-	public FireworkEffectMetaMock(FireworkEffectMeta meta)
+	public FireworkEffectMetaMock(@NotNull FireworkEffectMeta meta)
 	{
 		super(meta);
 
@@ -52,7 +53,7 @@ public class FireworkEffectMetaMock extends ItemMetaMock implements FireworkEffe
 	}
 
 	@Override
-	public FireworkEffectMetaMock clone()
+	public @NotNull FireworkEffectMetaMock clone()
 	{
 		FireworkEffectMetaMock mock = (FireworkEffectMetaMock) super.clone();
 		mock.effect = this.effect;

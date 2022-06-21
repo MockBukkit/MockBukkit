@@ -33,8 +33,8 @@ public class MockPlayerList
 	private final List<PlayerMock> onlinePlayers = new CopyOnWriteArrayList<>();
 	private final Set<OfflinePlayer> offlinePlayers = Collections.synchronizedSet(new HashSet<>());
 
-	private BanList ipBans = new MockBanList();
-	private BanList profileBans = new MockBanList();
+	private @NotNull BanList ipBans = new MockBanList();
+	private @NotNull BanList profileBans = new MockBanList();
 
 	public void setMaxPlayers(int maxPlayers)
 	{
@@ -89,7 +89,7 @@ public class MockPlayerList
 	}
 
 	@NotNull
-	public OfflinePlayer[] getOfflinePlayers()
+	public OfflinePlayer @NotNull [] getOfflinePlayers()
 	{
 		return offlinePlayers.toArray(new OfflinePlayer[0]);
 	}

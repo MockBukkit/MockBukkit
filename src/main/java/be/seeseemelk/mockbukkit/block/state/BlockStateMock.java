@@ -16,14 +16,15 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 public class BlockStateMock implements BlockState
 {
 
-	private final MetadataTable metadataTable;
-	private Block block;
+	private final @NotNull MetadataTable metadataTable;
+	private @Nullable Block block;
 	private Material material;
 
 	public BlockStateMock(@NotNull Material material)
@@ -56,7 +57,7 @@ public class BlockStateMock implements BlockState
 	}
 
 	@Override
-	public List<MetadataValue> getMetadata(String metadataKey)
+	public @NotNull List<MetadataValue> getMetadata(String metadataKey)
 	{
 		return metadataTable.getMetadata(metadataKey);
 	}
@@ -88,13 +89,13 @@ public class BlockStateMock implements BlockState
 
 	@Override
 	@Deprecated
-	public org.bukkit.material.MaterialData getData()
+	public org.bukkit.material.@NotNull MaterialData getData()
 	{
 		return new org.bukkit.material.MaterialData(material);
 	}
 
 	@Override
-	public Material getType()
+	public @NotNull Material getType()
 	{
 		return material;
 	}
@@ -106,7 +107,7 @@ public class BlockStateMock implements BlockState
 	}
 
 	@Override
-	public World getWorld()
+	public @NotNull World getWorld()
 	{
 		return getBlock().getWorld();
 	}
@@ -130,7 +131,7 @@ public class BlockStateMock implements BlockState
 	}
 
 	@Override
-	public Location getLocation()
+	public @NotNull Location getLocation()
 	{
 		return getBlock().getLocation();
 	}
@@ -142,7 +143,7 @@ public class BlockStateMock implements BlockState
 	}
 
 	@Override
-	public Chunk getChunk()
+	public @NotNull Chunk getChunk()
 	{
 		return getBlock().getChunk();
 	}
@@ -227,7 +228,7 @@ public class BlockStateMock implements BlockState
 	}
 
 	@Override
-	public BlockData getBlockData()
+	public @NotNull BlockData getBlockData()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

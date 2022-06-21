@@ -15,9 +15,9 @@ import org.jetbrains.annotations.NotNull;
 public final class AudioExperience
 {
 
-	private final String sound;
-	private final SoundCategory category;
-	private final Location location;
+	private final @NotNull String sound;
+	private final @NotNull SoundCategory category;
+	private final @NotNull Location location;
 	private final float volume;
 	private final float pitch;
 

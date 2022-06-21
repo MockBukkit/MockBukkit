@@ -25,7 +25,7 @@ public class KnowledgeBookMetaMock extends ItemMetaMock implements KnowledgeBook
 		super();
 	}
 
-	public KnowledgeBookMetaMock(KnowledgeBookMeta meta)
+	public KnowledgeBookMetaMock(@NotNull KnowledgeBookMeta meta)
 	{
 		super(meta);
 
@@ -61,7 +61,7 @@ public class KnowledgeBookMetaMock extends ItemMetaMock implements KnowledgeBook
 	}
 
 	@Override
-	public KnowledgeBookMetaMock clone()
+	public @NotNull KnowledgeBookMetaMock clone()
 	{
 		KnowledgeBookMetaMock mock = (KnowledgeBookMetaMock) super.clone();
 		mock.recipes.addAll(recipes);
@@ -69,7 +69,7 @@ public class KnowledgeBookMetaMock extends ItemMetaMock implements KnowledgeBook
 	}
 
 	@Override
-	public void addRecipe(@NotNull NamespacedKey... recipes)
+	public void addRecipe(@NotNull NamespacedKey @NotNull ... recipes)
 	{
 		for (NamespacedKey recipe : recipes)
 		{

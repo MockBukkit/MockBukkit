@@ -13,10 +13,10 @@ import java.util.List;
 public class AttributeInstanceMock implements AttributeInstance
 {
 
-	private final Attribute attribute;
+	private final @NotNull Attribute attribute;
 	private final double defaultValue;
 	private double value;
-	private final List<AttributeModifier> modifiers;
+	private final @NotNull List<AttributeModifier> modifiers;
 
 	public AttributeInstanceMock(@NotNull Attribute attribute, double value)
 	{

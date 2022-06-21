@@ -15,7 +15,7 @@ import java.util.UUID;
 public class EndermanMock extends MonsterMock implements Enderman
 {
 
-	private BlockData carriedBlock = null;
+	private @Nullable BlockData carriedBlock = null;
 	private boolean isScreaming = false;
 	private boolean hasBeenStaredAt = false;
 

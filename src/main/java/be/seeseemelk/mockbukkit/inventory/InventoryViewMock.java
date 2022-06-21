@@ -4,6 +4,7 @@ import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class InventoryViewMock extends InventoryView
 {
@@ -64,31 +65,31 @@ public abstract class InventoryViewMock extends InventoryView
 	}
 
 	@Override
-	public Inventory getTopInventory()
+	public @NotNull Inventory getTopInventory()
 	{
 		return topInventory;
 	}
 
 	@Override
-	public Inventory getBottomInventory()
+	public @NotNull Inventory getBottomInventory()
 	{
 		return bottomInventory;
 	}
 
 	@Override
-	public HumanEntity getPlayer()
+	public @NotNull HumanEntity getPlayer()
 	{
 		return player;
 	}
 
 	@Override
-	public InventoryType getType()
+	public @NotNull InventoryType getType()
 	{
 		return type;
 	}
 
 	@Override
-	public String getTitle()
+	public @NotNull String getTitle()
 	{
 		return name;
 	}
