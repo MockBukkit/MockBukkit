@@ -306,6 +306,8 @@ public class BlockStateMock implements BlockState
 		}
 		switch (block.getType())
 		{
+		case END_GATEWAY:
+			return new EndGatewayMock(block);
 		case BEACON:
 			return new BeaconMock(block);
 		case BEEHIVE:
