@@ -1,11 +1,5 @@
 package be.seeseemelk.mockbukkit.persistence;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import org.bukkit.NamespacedKey;
 import org.bukkit.persistence.PersistentDataAdapterContext;
 import org.bukkit.persistence.PersistentDataContainer;
@@ -13,12 +7,17 @@ import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 /**
  * This is a Mock of the {@link PersistentDataContainer} interface to allow the "persistent" storage of data. Only that
  * it isn't persistent of course since it only ever exists in a test environment.
  *
  * @author TheBusyBiscuit
- *
  */
 public class PersistentDataContainerMock implements PersistentDataContainer
 {
@@ -95,7 +94,7 @@ public class PersistentDataContainerMock implements PersistentDataContainer
 
 	@Override
 	public <T, Z> @NotNull Z getOrDefault(@NotNull NamespacedKey key, @NotNull PersistentDataType<T, Z> type,
-	                                      @NotNull Z defaultValue)
+										  @NotNull Z defaultValue)
 	{
 		Z value = get(key, type);
 		return value != null ? value : defaultValue;

@@ -24,6 +24,7 @@ import java.util.Objects;
  **/
 public class BookMetaMock extends ItemMetaMock implements BookMeta
 {
+
 	private String title;
 	private List<String> pages = new ArrayList<>();
 	private String author;
@@ -62,7 +63,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 			return false;
 		BookMetaMock other = (BookMetaMock) obj;
 		return Objects.equals(author, other.author) && Objects.equals(pages, other.pages)
-		       && Objects.equals(title, other.title);
+				&& Objects.equals(title, other.title);
 	}
 
 	@Override
@@ -315,4 +316,5 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
+
 }

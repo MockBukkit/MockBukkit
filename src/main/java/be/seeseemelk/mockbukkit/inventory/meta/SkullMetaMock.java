@@ -1,21 +1,19 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
-import java.util.Objects;
-
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
+import com.google.common.base.Strings;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.profile.PlayerProfile;
 import org.jetbrains.annotations.Nullable;
 
-import com.google.common.base.Strings;
-
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
+import java.util.Objects;
 
 /**
  * An {@link ItemMetaMock} for the {@link SkullMeta} interface. The owning {@link Player} is stored via his name.
- *
+ * <p>
  * Created by SimplyBallistic on 27/10/2018
  *
  * @author SimplyBallistic
@@ -143,4 +141,5 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
+
 }

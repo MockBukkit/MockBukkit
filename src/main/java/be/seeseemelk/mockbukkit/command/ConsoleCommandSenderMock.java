@@ -21,6 +21,7 @@ import java.util.UUID;
 
 public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTarget
 {
+
 	private final Queue<String> messages = new LinkedList<>();
 
 	@Override
@@ -219,4 +220,5 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	{
 		return Component.text(getName());
 	}
+
 }

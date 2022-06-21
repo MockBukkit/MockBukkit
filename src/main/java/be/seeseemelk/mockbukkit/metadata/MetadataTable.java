@@ -1,16 +1,17 @@
 package be.seeseemelk.mockbukkit.metadata;
 
+import org.bukkit.metadata.MetadataValue;
+import org.bukkit.metadata.Metadatable;
+import org.bukkit.plugin.Plugin;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.bukkit.metadata.MetadataValue;
-import org.bukkit.metadata.Metadatable;
-import org.bukkit.plugin.Plugin;
-
 public class MetadataTable implements Metadatable
 {
+
 	private final Map<String, Map<Plugin, MetadataValue>> metadata;
 
 	public MetadataTable()

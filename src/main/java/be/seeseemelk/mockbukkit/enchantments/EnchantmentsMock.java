@@ -7,7 +7,10 @@ import org.jetbrains.annotations.NotNull;
 
 public final class EnchantmentsMock
 {
-	private EnchantmentsMock() {}
+
+	private EnchantmentsMock()
+	{
+	}
 
 	public static void registerDefaultEnchantments()
 	{
@@ -58,4 +61,5 @@ public final class EnchantmentsMock
 		if (Enchantment.getByKey(key) == null)
 			Enchantment.registerEnchantment(new EnchantmentMock(key, name));
 	}
+
 }

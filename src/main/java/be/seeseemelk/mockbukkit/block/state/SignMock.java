@@ -23,7 +23,7 @@ import java.util.List;
 public class SignMock extends TileStateMock implements Sign
 {
 
-	private final String[] lines = {"", "", "", ""};
+	private final String[] lines = { "", "", "", "" };
 
 	public SignMock(@NotNull Material material)
 	{

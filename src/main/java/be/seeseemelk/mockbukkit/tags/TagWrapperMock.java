@@ -1,22 +1,20 @@
 package be.seeseemelk.mockbukkit.tags;
 
-import java.io.FileNotFoundException;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Tag;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.FileNotFoundException;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * This is a mock of the {@link Material} {@link Tag} wrapper in Bukkit. This will
  *
  * @author TheBusyBiscuit
- *
  * @see TagParser
- *
  */
 public class TagWrapperMock implements Tag<Material>
 {

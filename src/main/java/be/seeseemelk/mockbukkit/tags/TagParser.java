@@ -29,7 +29,6 @@ import java.util.stream.Collectors;
  * The {@link TagParser} is responsible for parsing a JSON input into a {@link TagWrapperMock}.
  *
  * @author TheBusyBiscuit
- *
  */
 public class TagParser implements Keyed
 {
@@ -74,7 +73,7 @@ public class TagParser implements Keyed
 		}
 
 		try (BufferedReader reader = new BufferedReader(
-			    new InputStreamReader(MockBukkit.class.getResourceAsStream(path), StandardCharsets.UTF_8)))
+				new InputStreamReader(MockBukkit.class.getResourceAsStream(path), StandardCharsets.UTF_8)))
 		{
 			parse(reader.lines().collect(Collectors.joining("")), callback);
 		}
@@ -90,12 +89,11 @@ public class TagParser implements Keyed
 	 *
 	 * @param json     The JSON {@link String} to parse
 	 * @param callback A callback to run after successfully parsing the input
-	 *
 	 * @throws TagMisconfigurationException This is thrown whenever the given input is malformed or no adequate
 	 *                                      {@link Material} or {@link Tag} could be found
 	 */
 	public void parse(@NotNull String json, @NotNull BiConsumer<Set<Material>, Set<TagWrapperMock>> callback)
-	throws TagMisconfigurationException
+			throws TagMisconfigurationException
 	{
 		Preconditions.checkNotNull(json, "Cannot parse a null String");
 
@@ -127,7 +125,7 @@ public class TagParser implements Keyed
 					else
 					{
 						throw new TagMisconfigurationException(key, "Unexpected value format: "
-						                                       + element.getClass().getSimpleName() + " - " + element.toString());
+								+ element.getClass().getSimpleName() + " - " + element.toString());
 					}
 				}
 
@@ -147,7 +145,7 @@ public class TagParser implements Keyed
 	}
 
 	private void parsePrimitiveValue(@NotNull String value, @NotNull Set<Material> materials,
-	                                 @NotNull Set<TagWrapperMock> tags) throws TagMisconfigurationException
+									 @NotNull Set<TagWrapperMock> tags) throws TagMisconfigurationException
 	{
 		if (MINECRAFT_MATERIAL.matcher(value).matches())
 		{
@@ -176,7 +174,7 @@ public class TagParser implements Keyed
 			else
 			{
 				throw new TagMisconfigurationException(key,
-				                                       "There is no '" + value + "' tag in Minecraft:" + registry.getRegistry());
+						"There is no '" + value + "' tag in Minecraft:" + registry.getRegistry());
 			}
 		}
 		else
@@ -187,14 +185,14 @@ public class TagParser implements Keyed
 	}
 
 	private void parseComplexValue(@NotNull JsonObject entry, @NotNull Set<Material> materials,
-	                               @NotNull Set<TagWrapperMock> tags) throws TagMisconfigurationException
+								   @NotNull Set<TagWrapperMock> tags) throws TagMisconfigurationException
 	{
 		JsonElement id = entry.get("id");
 		JsonElement required = entry.get("required");
 
 		// Check if the entry contains elements of the correct type
 		if (id instanceof JsonPrimitive && ((JsonPrimitive) id).isString() && required instanceof JsonPrimitive
-		        && ((JsonPrimitive) required).isBoolean())
+				&& ((JsonPrimitive) required).isBoolean())
 		{
 			if (required.getAsBoolean())
 			{
