@@ -9,6 +9,7 @@ import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Mob;
@@ -588,6 +589,14 @@ class EntityMockTest
 		assertTrue(player.isGliding());
 		player.setGliding(false);
 		assertFalse(player.isGliding());
+	}
+
+	@Test
+	void registerAttribute()
+	{
+		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+		zombie.registerAttribute(Attribute.HORSE_JUMP_STRENGTH);
+		assertEquals(0.7, zombie.getAttribute(Attribute.HORSE_JUMP_STRENGTH).getValue());
 	}
 
 }

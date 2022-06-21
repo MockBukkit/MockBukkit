@@ -3,11 +3,12 @@ package be.seeseemelk.mockbukkit.block.data;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.Material;
 import org.bukkit.SoundGroup;
+import org.bukkit.Tag;
 import org.bukkit.block.data.BlockData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -21,7 +22,7 @@ public class BlockDataMock implements BlockData
 	{
 		this.type = type;
 
-		this.data = new HashMap<>();
+		this.data = new LinkedHashMap<>();
 	}
 
 	protected <T> void set(String key, T value)
@@ -129,8 +130,14 @@ public class BlockDataMock implements BlockData
 
 	public static @NotNull BlockDataMock mock(@NotNull Material material)
 	{
+		// Special Cases
+		if (Tag.BEDS.isTagged(material))
+		{
+			return new BedMock(material);
+		}
 		return switch (material)
 				{
+					case AMETHYST_CLUSTER -> new AmethystClusterMock(material);
 					default -> new BlockDataMock(material);
 				};
 	}

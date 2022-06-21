@@ -11,6 +11,7 @@ import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryViewMock;
 import be.seeseemelk.mockbukkit.inventory.SimpleInventoryViewMock;
+import be.seeseemelk.mockbukkit.map.MapViewMock;
 import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
@@ -30,6 +31,7 @@ import org.bukkit.World;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -42,9 +44,11 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerExpChangeEvent;
+import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
@@ -55,8 +59,12 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.map.MapCanvas;
+import org.bukkit.map.MapRenderer;
+import org.bukkit.map.MapView;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -123,6 +131,7 @@ class PlayerMockTest
 
 		uuid = UUID.randomUUID();
 		player = new PlayerMock(server, "player", uuid);
+		server.addPlayer(player);
 	}
 
 	@AfterEach
@@ -204,11 +213,38 @@ class PlayerMockTest
 	}
 
 	@Test
+	void setGameMode_GameModeChanged_CallsEvent()
+	{
+		player.setGameMode(GameMode.CREATIVE);
+		server.getPluginManager().assertEventFired(PlayerGameModeChangeEvent.class, (e) -> e.getNewGameMode() == GameMode.CREATIVE);
+	}
+
+	@Test
+	void setGameMode_GameModeNotChanged_DoesntCallsEvent()
+	{
+		//todo: replace with PluginManagerMock#assertEventNotFired once implemented
+		AtomicBoolean bool = new AtomicBoolean(false);
+		server.getPluginManager().registerEvents(new Listener()
+		{
+			@EventHandler
+			public void onPlayerGameModeChange(PlayerGameModeChangeEvent event)
+			{
+				bool.set(true);
+			}
+		}, MockBukkit.createMockPlugin());
+
+		player.setGameMode(GameMode.SURVIVAL);
+
+		assertFalse(bool.get());
+	}
+
+	@Test
 	void getPreviousGameMode()
 	{
 		player.setGameMode(GameMode.SURVIVAL);
 		player.setGameMode(GameMode.CREATIVE);
-		assertEquals(GameMode.SURVIVAL, player.getPreviousGameMode());
+		player.setGameMode(GameMode.SURVIVAL);
+		assertEquals(GameMode.CREATIVE, player.getPreviousGameMode());
 	}
 
 	@Test
@@ -637,7 +673,7 @@ class PlayerMockTest
 	void getDisplayName_Default_SameAsPlayerUsername()
 	{
 		assertEquals(player.getName(), player.getDisplayName());
-		assertEquals(player.getDisplayName(), player.getCustomName());
+		assertNotEquals(player.getDisplayName(), player.getCustomName());
 	}
 
 	@Test
@@ -646,8 +682,7 @@ class PlayerMockTest
 		player.setDisplayName("Some Display Name");
 		player.setCustomName("Some Custom Name");
 		assertEquals("Some Display Name", player.getDisplayName());
-		assertEquals("Some Display Name", player.getCustomName());
-
+		assertEquals("Some Custom Name", player.getCustomName());
 	}
 
 	@Test
@@ -1635,6 +1670,75 @@ class PlayerMockTest
 			if (inventoryClickEvent.getClickedInventory() != inventory) return false;
 			return inventoryClickEvent.getClick() == ClickType.LEFT;
 		});
+	}
+
+	@Test
+	void testDisconnect()
+	{
+		assertTrue(player.isOnline());
+		assertTrue(player.disconnect());
+		assertFalse(player.isOnline());
+		assertFalse(server.getOnlinePlayers().contains(player));
+		server.getPluginManager().assertEventFired(PlayerQuitEvent.class);
+	}
+
+	@Test
+	void testReconnect()
+	{
+		if (player.isOnline())
+		{
+			player.disconnect();
+		}
+
+		assertFalse(player.isOnline());
+		assertTrue(player.reconnect());
+		assertTrue(player.isOnline());
+		assertTrue(server.getOnlinePlayers().contains(player));
+		assertTrue(player.hasPlayedBefore());
+		server.getPluginManager().assertEventFired(PlayerJoinEvent.class);
+	}
+
+	@Test
+	void testReconnectWithoutJoiningBefore()
+	{
+		player = new PlayerMock(server, "testPlayer");
+
+		assertThrows(IllegalStateException.class, () -> player.reconnect());
+
+	}
+
+	@Test
+	void sendMap_RendersMap()
+	{
+		MapViewMock mapView = new MapViewMock(new WorldMock(), 1);
+		AtomicBoolean b = new AtomicBoolean(false);
+		mapView.addRenderer(new MapRenderer()
+		{
+			@Override
+			public void render(@NotNull MapView map, @NotNull MapCanvas canvas, @NotNull Player player)
+			{
+				b.set(true);
+			}
+		});
+
+		mapView.render(player);
+
+		assertTrue(b.get());
+	}
+
+	@Test
+	void testPlayerLastDeathLocation_Set()
+	{
+		assertTrue(player.getLastDeathLocation().getX() == 0.0
+				&& player.getLastDeathLocation().getY() == 0.0
+				&& player.getLastDeathLocation().getZ() == 0.0);
+
+		Location loc = new Location(new WorldMock(), 69, 69, 69);
+
+		player.setLastDeathLocation(loc);
+
+		assertEquals(loc, player.getLastDeathLocation());
+
 	}
 
 }

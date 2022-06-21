@@ -1,7 +1,7 @@
 package be.seeseemelk.mockbukkit.inventory;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import org.apache.commons.lang.Validate;
+import com.google.common.base.Preconditions;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
@@ -12,12 +12,12 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Objects;
-import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -27,15 +27,20 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class InventoryMock implements Inventory
 {
 
+	private static final int MAX_STACK_SIZE = 64;
+
 	private final ItemStack[] items;
 	private final InventoryHolder holder;
 	private final InventoryType type;
 
+	private int maxStackSize = MAX_STACK_SIZE;
+	private List<HumanEntity> viewers = new ArrayList<>();
+
 	public InventoryMock(@Nullable InventoryHolder holder, int size, @NotNull InventoryType type)
 	{
-		Validate.isTrue(9 <= size && size <= 54 && size % 9 == 0,
-		                "Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got " + size + ")");
-		Validate.notNull(type, "The InventoryType must not be null!");
+		Preconditions.checkArgument(9 <= size && size <= 54 && size % 9 == 0,
+				"Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got " + size + ")");
+		Preconditions.checkNotNull(type, "The InventoryType must not be null!");
 
 		this.holder = holder;
 		this.type = type;
@@ -45,7 +50,7 @@ public class InventoryMock implements Inventory
 
 	public InventoryMock(@Nullable InventoryHolder holder, @NotNull InventoryType type)
 	{
-		Validate.notNull(type, "The InventoryType must not be null!");
+		Preconditions.checkNotNull(type, "The InventoryType must not be null!");
 
 		this.holder = holder;
 		this.type = type;
@@ -136,6 +141,52 @@ public class InventoryMock implements Inventory
 		return amount;
 	}
 
+	/**
+	 * Adds a viewer to this inventory.
+	 *
+	 * @param viewer The viewer to add.
+	 */
+	public void addViewer(@NotNull HumanEntity viewer)
+	{
+		Preconditions.checkNotNull(viewer, "The viewer must not be null!");
+		viewers.add(viewer);
+	}
+
+	/**
+	 * Adds the given viewers to this inventory.
+	 *
+	 * @param viewers The viewers to add.
+	 */
+	public void addViewers(@NotNull HumanEntity... viewers)
+	{
+		addViewers(Arrays.asList(viewers));
+	}
+
+	/**
+	 * Adds the given viewers to this inventory.
+	 *
+	 * @param viewers The {@link List} of viewers to add.
+	 */
+	public void addViewers(@NotNull List<HumanEntity> viewers)
+	{
+		for (HumanEntity viewer : viewers)
+		{
+			Preconditions.checkNotNull(viewer, "The viewer must not be null!");
+			addViewer(viewer);
+		}
+	}
+
+	/**
+	 * Removes a viewer from this inventory.
+	 *
+	 * @param viewer The viewer to remove.
+	 */
+	public void removeViewer(@NotNull HumanEntity viewer)
+	{
+		Preconditions.checkNotNull(viewer, "The viewer must not be null!");
+		viewers.remove(viewer);
+	}
+
 	@Override
 	public int getSize()
 	{
@@ -163,22 +214,27 @@ public class InventoryMock implements Inventory
 	@Nullable
 	public ItemStack addItem(@NotNull ItemStack item)
 	{
+		final int itemMaxStackSize = Math.min(item.getMaxStackSize(), this.maxStackSize);
 		item = item.clone();
 		for (int i = 0; i < items.length; i++)
 		{
 			ItemStack oItem = items[i];
 			if (oItem == null)
 			{
-				int toAdd = Math.min(item.getAmount(), item.getMaxStackSize());
+				int toAdd = Math.min(item.getAmount(), itemMaxStackSize);
 				items[i] = item.clone();
 				items[i].setAmount(toAdd);
 				item.setAmount(item.getAmount() - toAdd);
 			}
-			else if (item.isSimilar(oItem) && oItem.getAmount() < oItem.getMaxStackSize())
+			else
 			{
-				int toAdd = Math.min(item.getAmount(), item.getMaxStackSize() - oItem.getAmount());
-				oItem.setAmount(oItem.getAmount() + toAdd);
-				item.setAmount(item.getAmount() - toAdd);
+				final int oItemMaxStackSize = Math.min(oItem.getMaxStackSize(), this.maxStackSize);
+				if (item.isSimilar(oItem) && oItem.getAmount() < oItemMaxStackSize)
+				{
+					int toAdd = Math.min(item.getAmount(), oItemMaxStackSize - oItem.getAmount());
+					oItem.setAmount(oItem.getAmount() + toAdd);
+					item.setAmount(item.getAmount() - toAdd);
+				}
 			}
 
 			if (item.getAmount() == 0)
@@ -257,15 +313,22 @@ public class InventoryMock implements Inventory
 	@Override
 	public int getMaxStackSize()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return maxStackSize;
 	}
 
 	@Override
 	public void setMaxStackSize(int size)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// The following checks aren't done in CraftBukkit, but are a fair sanity check.
+		if (size < 1)
+		{
+			throw new IllegalArgumentException("Max stack size cannot be lower than 1");
+		}
+		if (size > 127)
+		{
+			throw new IllegalArgumentException("Stack sizes larger than 127 may get clipped");
+		}
+		maxStackSize = size;
 	}
 
 	@Override
@@ -342,7 +405,7 @@ public class InventoryMock implements Inventory
 	@Override
 	public @NotNull HashMap<Integer, ? extends ItemStack> all(@NotNull Material material) throws IllegalArgumentException
 	{
-		Validate.notNull(material, "Material cannot be null");
+		Preconditions.checkNotNull(material, "Material cannot be null");
 		HashMap<Integer, ItemStack> slots = new HashMap<>();
 
 		ItemStack[] items = this.getStorageContents();
@@ -377,7 +440,7 @@ public class InventoryMock implements Inventory
 	@Override
 	public int first(@NotNull Material material) throws IllegalArgumentException
 	{
-		Validate.notNull(material, "Material cannot be null");
+		Preconditions.checkNotNull(material, "Material cannot be null");
 		ItemStack[] items = this.getStorageContents();
 		for (int i = 0; i < items.length; i++)
 		{
@@ -424,7 +487,7 @@ public class InventoryMock implements Inventory
 	@Override
 	public void remove(@NotNull Material material) throws IllegalArgumentException
 	{
-		Validate.notNull(material, "Material cannot be null");
+		Preconditions.checkNotNull(material, "Material cannot be null");
 		ItemStack[] items = this.getStorageContents();
 		for (int i = 0; i < items.length; i++)
 		{
@@ -470,8 +533,7 @@ public class InventoryMock implements Inventory
 	@Override
 	public List<HumanEntity> getViewers()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.viewers;
 	}
 
 	@Override
