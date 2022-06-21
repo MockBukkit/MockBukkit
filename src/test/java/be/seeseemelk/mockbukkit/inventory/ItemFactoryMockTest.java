@@ -22,6 +22,7 @@ import be.seeseemelk.mockbukkit.inventory.meta.CompassMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.CrossbowMetaMock;
 
 import org.bukkit.Material;
+import org.bukkit.Tag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.junit.jupiter.api.AfterEach;
@@ -34,26 +35,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ItemFactoryMockTest
 {
-
-	private static final Material[] BANNERS =
-	{
-		Material.WHITE_BANNER,
-		Material.ORANGE_BANNER,
-		Material.MAGENTA_BANNER,
-		Material.LIGHT_BLUE_BANNER,
-		Material.YELLOW_BANNER,
-		Material.LIME_BANNER,
-		Material.PINK_BANNER,
-		Material.GRAY_BANNER,
-		Material.LIGHT_GRAY_BANNER,
-		Material.CYAN_BANNER,
-		Material.PURPLE_BANNER,
-		Material.BLUE_BANNER,
-		Material.BROWN_BANNER,
-		Material.GREEN_BANNER,
-		Material.RED_BANNER,
-		Material.BLACK_BANNER
-	};
 
 	private ItemFactoryMock factory;
 
@@ -100,7 +81,7 @@ class ItemFactoryMockTest
 		assertTrue(factory.getItemMeta(Material.ARMOR_STAND) instanceof ArmorStandMetaMock);
 		assertTrue(factory.getItemMeta(Material.TROPICAL_FISH_BUCKET) instanceof TropicalFishBucketMetaMock);
 
-		for (Material m : BANNERS)
+		for (Material m : Tag.ITEMS_BANNERS.getValues())
 		{
 			assertTrue(factory.getItemMeta(m) instanceof BannerMetaMock);
 		}
