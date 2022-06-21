@@ -11,29 +11,54 @@ import org.jetbrains.annotations.NotNull;
  * {@link TileStateMock}.
  *
  * @author TheBusyBiscuit
- *
  */
 public class EnderChestMock extends TileStateMock implements EnderChest
 {
 
+	private boolean isOpen = false;
+
 	public EnderChestMock(@NotNull Material material)
 	{
 		super(material);
+		if (material != Material.ENDER_CHEST)
+			throw new IllegalArgumentException("Cannot create an Ender Chest state from " + material);
 	}
 
 	protected EnderChestMock(@NotNull Block block)
 	{
 		super(block);
+		if (block.getType() != Material.ENDER_CHEST)
+			throw new IllegalArgumentException("Cannot create an Ender Chest state from " + block.getType());
 	}
 
 	protected EnderChestMock(@NotNull EnderChestMock state)
 	{
 		super(state);
+		this.isOpen = state.isOpen;
 	}
 
 	@Override
-	public BlockState getSnapshot()
+	public @NotNull BlockState getSnapshot()
 	{
 		return new EnderChestMock(this);
 	}
+
+	@Override
+	public void open()
+	{
+		isOpen = true;
+	}
+
+	@Override
+	public void close()
+	{
+		isOpen = false;
+	}
+
+	@Override
+	public boolean isOpen()
+	{
+		return isOpen;
+	}
+
 }

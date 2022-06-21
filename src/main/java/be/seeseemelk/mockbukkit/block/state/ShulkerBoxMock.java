@@ -1,5 +1,10 @@
 package be.seeseemelk.mockbukkit.block.state;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.inventory.InventoryMock;
+import be.seeseemelk.mockbukkit.inventory.ShulkerBoxInventoryMock;
+import com.destroystokyo.paper.MaterialTags;
+import com.google.common.base.Preconditions;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -9,30 +14,32 @@ import org.bukkit.loot.LootTable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.inventory.InventoryMock;
-import be.seeseemelk.mockbukkit.inventory.ShulkerBoxInventoryMock;
+import java.util.UUID;
 
 /**
  * This {@link ContainerMock} represents a {@link ShulkerBox}.
  *
  * @author TheBusyBiscuit
- *
  */
 public class ShulkerBoxMock extends ContainerMock implements ShulkerBox
 {
 
-	private final DyeColor color;
+	private final @Nullable DyeColor color;
+	private boolean isOpen = false;
 
 	public ShulkerBoxMock(@NotNull Material material)
 	{
 		super(material);
+		if (!MaterialTags.SHULKER_BOXES.isTagged(material))
+			throw new IllegalArgumentException("Cannot create a Shulker Box state from " + material);
 		this.color = getFromMaterial(material);
 	}
 
 	protected ShulkerBoxMock(@NotNull Block block)
 	{
 		super(block);
+		if (!MaterialTags.SHULKER_BOXES.isTagged(block))
+			throw new IllegalArgumentException("Cannot create a Shulker Box state from " + block.getType());
 		this.color = getFromMaterial(block.getType());
 	}
 
@@ -40,11 +47,13 @@ public class ShulkerBoxMock extends ContainerMock implements ShulkerBox
 	{
 		super(state);
 		this.color = state.color;
+		this.isOpen = state.isOpen;
 	}
 
 	@Nullable
 	private DyeColor getFromMaterial(@NotNull Material type)
 	{
+		Preconditions.checkNotNull(type, "Type cannot be null");
 		switch (type)
 		{
 		case SHULKER_BOX:
@@ -117,25 +126,29 @@ public class ShulkerBoxMock extends ContainerMock implements ShulkerBox
 	@Override
 	public void open()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		isOpen = true;
 	}
 
 	@Override
 	public void close()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		isOpen = false;
 	}
 
 	@Override
-	protected InventoryMock createInventory()
+	public boolean isOpen()
+	{
+		return isOpen;
+	}
+
+	@Override
+	protected @NotNull InventoryMock createInventory()
 	{
 		return new ShulkerBoxInventoryMock(this);
 	}
 
 	@Override
-	public BlockState getSnapshot()
+	public @NotNull BlockState getSnapshot()
 	{
 		return new ShulkerBoxMock(this);
 	}
@@ -152,6 +165,69 @@ public class ShulkerBoxMock extends ContainerMock implements ShulkerBox
 		}
 
 		return color;
+	}
+
+	@Override
+	public boolean isRefillEnabled()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean hasBeenFilled()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean hasPlayerLooted(@NotNull UUID player)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Long getLastLooted(@NotNull UUID player)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean setHasPlayerLooted(@NotNull UUID player, boolean looted)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean hasPendingRefill()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public long getLastFilled()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public long getNextRefill()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public long setNextRefill(long refillAt)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 }

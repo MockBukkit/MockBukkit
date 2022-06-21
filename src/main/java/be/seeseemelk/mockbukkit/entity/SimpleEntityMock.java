@@ -1,14 +1,14 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import java.util.UUID;
-
+import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Pose;
 import org.bukkit.util.BoundingBox;
+import org.jetbrains.annotations.NotNull;
 
-import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import java.util.UUID;
 
 /**
  * A very simple class that allows one to create an instance of an entity when a specific type of entity is not
@@ -16,19 +16,20 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
  */
 public class SimpleEntityMock extends EntityMock
 {
+
 	/**
 	 * Creates a {@code SimpleEntityMock} with a specified UUID.
 	 *
 	 * @param server The server this entity lives on.
 	 * @param uuid   The UUID that the entity should have.
 	 */
-	public SimpleEntityMock(ServerMock server, UUID uuid)
+	public SimpleEntityMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 	}
 
 	@Override
-	public EntityType getType()
+	public @NotNull EntityType getType()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -39,7 +40,7 @@ public class SimpleEntityMock extends EntityMock
 	 *
 	 * @param server The server this entity lives on.
 	 */
-	public SimpleEntityMock(ServerMock server)
+	public SimpleEntityMock(@NotNull ServerMock server)
 	{
 		this(server, UUID.randomUUID());
 	}
@@ -59,23 +60,24 @@ public class SimpleEntityMock extends EntityMock
 	}
 
 	@Override
-	public BoundingBox getBoundingBox()
+	public @NotNull BoundingBox getBoundingBox()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public BlockFace getFacing()
+	public @NotNull BlockFace getFacing()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Pose getPose()
+	public @NotNull Pose getPose()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
+
 }

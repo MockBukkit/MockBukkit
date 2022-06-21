@@ -1,87 +1,72 @@
 package be.seeseemelk.mockbukkit.block.state;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
-import org.bukkit.Material;
-import org.bukkit.block.Barrel;
-import org.bukkit.block.Block;
-import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.inventory.Inventory;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
-import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.BlockMock;
+import org.bukkit.Material;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class BarrelMockTest
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+
+class BarrelMockTest
 {
 
-	private Barrel barrel;
+	private WorldMock world;
+	private BlockMock block;
+	private BarrelMock barrel;
 
-	@Before
-	public void setUp() throws Exception
+	@BeforeEach
+	void setUp()
 	{
-		MockBukkit.mock();
-		barrel = new BarrelMock(Material.BARREL);
-	}
-
-	@After
-	public void tearDown() throws Exception
-	{
-		MockBukkit.unmock();
-	}
-
-	@Test
-	public void testMaterialBarrelBlockState()
-	{
-		Block block = new BlockMock(Material.BARREL);
-		assertTrue(block.getState() instanceof Barrel);
+		this.world = new WorldMock();
+		this.block = world.getBlockAt(0, 10, 0);
+		this.block.setType(Material.BARREL);
+		this.barrel = new BarrelMock(this.block);
 	}
 
 	@Test
-	public void testHasInventory()
+	void constructor_Material()
 	{
-		Inventory inventory = barrel.getInventory();
-		assertNotNull(inventory);
-
-		assertEquals(barrel, inventory.getHolder());
-		assertEquals(InventoryType.BARREL, inventory.getType());
+		assertDoesNotThrow(() -> new BarrelMock(Material.BARREL));
 	}
 
 	@Test
-	public void testLocking()
+	void constructor_Material_WrongType_ThrowsException()
 	{
-		String key = "key";
-
-		assertFalse(barrel.isLocked());
-		assertEquals("", barrel.getLock());
-
-		barrel.setLock("key");
-		assertTrue(barrel.isLocked());
-		assertEquals(key, barrel.getLock());
+		assertThrowsExactly(IllegalArgumentException.class, () -> new BarrelMock(Material.BEDROCK));
 	}
 
 	@Test
-	public void testNullLocking()
+	void constructor_Block()
 	{
-		barrel.setLock(null);
-		assertFalse(barrel.isLocked());
-		assertEquals("", barrel.getLock());
+		assertDoesNotThrow(() -> new BarrelMock(new BlockMock(Material.BARREL)));
 	}
 
 	@Test
-	public void testNaming()
+	void constructor_Block_WrongType_ThrowsException()
 	{
-		String name = "Cool Chest";
-
-		assertNull(barrel.getCustomName());
-
-		barrel.setCustomName(name);
-		assertEquals(name, barrel.getCustomName());
+		assertThrowsExactly(IllegalArgumentException.class, () -> new BarrelMock(new BlockMock(Material.BEDROCK)));
 	}
+
+	@Test
+	void getSnapshot_DifferentInstance()
+	{
+		assertNotSame(barrel, barrel.getSnapshot());
+	}
+
+	@Test
+	void blockStateMock_Mock_CorrectType()
+	{
+		assertInstanceOf(BarrelMock.class, BlockStateMock.mockState(block));
+	}
+
 }

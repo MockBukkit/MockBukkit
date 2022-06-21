@@ -6,14 +6,21 @@ import java.util.concurrent.CancellationException;
 
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.concurrent.CancellationException;
 
 public class ScheduledTask implements BukkitTask
 {
-	private int id;
-	private Plugin plugin;
-	private boolean isSync;
+
+	private final int id;
+	private final Plugin plugin;
+	private final boolean isSync;
 	private boolean isCancelled = false;
 	private long scheduledTick;
+	private boolean running;
 	private Runnable runnable;
 	private List<Runnable> cancelListeners = new LinkedList<>();
 
@@ -24,10 +31,24 @@ public class ScheduledTask implements BukkitTask
 		this.isSync = isSync;
 		this.scheduledTick = scheduledTick;
 		this.runnable = runnable;
+		this.running = false;
 	}
+
+
+	public boolean isRunning()
+	{
+		return running;
+	}
+
+	public void setRunning(boolean running)
+	{
+		this.running = running;
+	}
+
 
 	/**
 	 * Get the tick at which the task is scheduled to run at.
+	 *
 	 * @return The tick the task is scheduled to run at.
 	 */
 	public long getScheduledTick()
@@ -37,6 +58,7 @@ public class ScheduledTask implements BukkitTask
 
 	/**
 	 * Sets the tick at which the task is scheduled to run at.
+	 *
 	 * @param scheduledTick The tick at which the task is scheduled to run at.
 	 */
 	protected void setScheduledTick(long scheduledTick)
@@ -46,6 +68,7 @@ public class ScheduledTask implements BukkitTask
 
 	/**
 	 * Get the task itself that will be ran.
+	 *
 	 * @return The task that will be ran.
 	 */
 	public Runnable getRunnable()
@@ -71,7 +94,7 @@ public class ScheduledTask implements BukkitTask
 	}
 
 	@Override
-	public Plugin getOwner()
+	public @NotNull Plugin getOwner()
 	{
 		return plugin;
 	}

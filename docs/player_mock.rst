@@ -17,7 +17,7 @@ And lastly, if you want to add a whole bunch of players quickily, consider using
     server.setPlayers(20);
 
 This will add 20 players to the server.
-After this command you can use ```server.getPlayer(index)``` to reference each player in an easy way.
+After this command you can use ``server.getPlayer(index)`` to reference each player in an easy way.
 
 # PlayerMock methods
 The PlayerMock class adds several methods that makes unit testing player related methods nicer.
@@ -25,10 +25,19 @@ In all examples we will assume that your unit test starts with::
 
     PlayerMock player = server.addPlayer();
 
-It's possible to assert that a player is in a specific gamemode.
-If the player is not in that gamemode, an AssertionException is thrown. ::
+It's possible to assert that a player is in a specific Gamemode.
+If the player is not in that Gamemode, an ``AssertionException`` is thrown. ::
 
     player.assertGameMode(GameMode.SURVIVAL);
 
-PlayerMock extends [EntityMock](EntityMock.md) since it's possible to use those added methods too.
+To simulate a Player disconnecting, use the ``disconnect()`` method.
+This will set the Player as offline but keeps him as an OfflinePlayer. ::
 
+        player.disconnect();
+
+After a Player has been disconnected, it's possible to simulate a reconnection.
+This will set the Player as online and restore it's full Functionality. ::
+
+        player.reconnect();
+
+PlayerMock extends [EntityMock](EntityMock.md) too, so it's possible to use those added methods too.

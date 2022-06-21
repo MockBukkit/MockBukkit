@@ -1,87 +1,66 @@
 package be.seeseemelk.mockbukkit.block.state;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
-import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.block.Hopper;
-import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.inventory.Inventory;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
-import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.BlockMock;
+import org.bukkit.Material;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class HopperMockTest
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
+
+class HopperMockTest
 {
 
-	private Hopper hopper;
+	private WorldMock world;
+	private BlockMock block;
+	private HopperMock hopper;
 
-	@Before
-	public void setUp() throws Exception
+	@BeforeEach
+	void setUp()
 	{
-		MockBukkit.mock();
-		hopper = new HopperMock(Material.HOPPER);
-	}
-
-	@After
-	public void tearDown() throws Exception
-	{
-		MockBukkit.unmock();
-	}
-
-	@Test
-	public void testMaterialHopperBlockState()
-	{
-		Block block = new BlockMock(Material.HOPPER);
-		assertTrue(block.getState() instanceof Hopper);
+		this.world = new WorldMock();
+		this.block = world.getBlockAt(0, 10, 0);
+		this.block.setType(Material.HOPPER);
+		this.hopper = new HopperMock(this.block);
 	}
 
 	@Test
-	public void testHasInventory()
+	void constructor_Material()
 	{
-		Inventory inventory = hopper.getInventory();
-		assertNotNull(inventory);
-
-		assertEquals(hopper, inventory.getHolder());
-		assertEquals(InventoryType.HOPPER, inventory.getType());
+		assertDoesNotThrow(() -> new HopperMock(Material.HOPPER));
 	}
 
 	@Test
-	public void testLocking()
+	void constructor_Material_WrongType_ThrowsException()
 	{
-		String key = "key";
-
-		assertFalse(hopper.isLocked());
-		assertEquals("", hopper.getLock());
-
-		hopper.setLock("key");
-		assertTrue(hopper.isLocked());
-		assertEquals(key, hopper.getLock());
+		assertThrowsExactly(IllegalArgumentException.class, () -> new HopperMock(Material.BEDROCK));
 	}
 
 	@Test
-	public void testNullLocking()
+	void constructor_Block()
 	{
-		hopper.setLock(null);
-		assertFalse(hopper.isLocked());
-		assertEquals("", hopper.getLock());
+		assertDoesNotThrow(() -> new HopperMock(new BlockMock(Material.HOPPER)));
 	}
 
 	@Test
-	public void testNaming()
+	void constructor_Block_WrongType_ThrowsException()
 	{
-		String name = "Cool Hopper";
-
-		assertNull(hopper.getCustomName());
-
-		hopper.setCustomName(name);
-		assertEquals(name, hopper.getCustomName());
+		assertThrowsExactly(IllegalArgumentException.class, () -> new HopperMock(new BlockMock(Material.BEDROCK)));
 	}
+
+	@Test
+	void getSnapshot_DifferentInstance()
+	{
+		assertNotSame(hopper, hopper.getSnapshot());
+	}
+
+	@Test
+	void blockStateMock_Mock_CorrectType()
+	{
+		assertInstanceOf(HopperMock.class, BlockStateMock.mockState(block));
+	}
+
 }

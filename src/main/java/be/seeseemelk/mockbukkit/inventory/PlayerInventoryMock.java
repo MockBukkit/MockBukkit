@@ -1,20 +1,21 @@
 package be.seeseemelk.mockbukkit.inventory;
 
-import java.util.Arrays;
-
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import java.util.Arrays;
 
-public class PlayerInventoryMock extends InventoryMock implements PlayerInventory
+public class PlayerInventoryMock extends InventoryMock implements PlayerInventory, EntityEquipment
 {
+
 	protected static final int HOTBAR = 0;
 	protected static final int SLOT_BAR = 9;
 	protected static final int BOOTS = 36;
@@ -36,7 +37,7 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	}
 
 	@Override
-	public ItemStack[] getStorageContents()
+	public ItemStack @NotNull [] getStorageContents()
 	{
 		return Arrays.copyOfRange(getContents(), 0, 36);
 	}
@@ -49,13 +50,13 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	}
 
 	@Override
-	public ItemStack[] getArmorContents()
+	public ItemStack @NotNull [] getArmorContents()
 	{
 		return Arrays.copyOfRange(getContents(), BOOTS, BOOTS + 4);
 	}
 
 	@Override
-	public ItemStack[] getExtraContents()
+	public ItemStack @NotNull [] getExtraContents()
 	{
 		return Arrays.copyOfRange(getContents(), OFF_HAND, OFF_HAND + 1);
 	}
@@ -85,7 +86,7 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	}
 
 	@Override
-	public void setArmorContents(ItemStack[] items)
+	public void setArmorContents(ItemStack @Nullable [] items)
 	{
 		if (items == null)
 			throw new NullPointerException("ItemStack was null");
@@ -99,7 +100,91 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	}
 
 	@Override
-	public void setExtraContents(ItemStack[] items)
+	public float getItemInHandDropChance()
+	{
+		return 1;
+	}
+
+	@Override
+	public void setItemInHandDropChance(float chance)
+	{
+		throw new UnsupportedOperationException("Cannot set drop chance for PlayerInventory");
+	}
+
+	@Override
+	public float getItemInMainHandDropChance()
+	{
+		return 1;
+	}
+
+	@Override
+	public void setItemInMainHandDropChance(float chance)
+	{
+		throw new UnsupportedOperationException("Cannot set drop chance for PlayerInventory");
+	}
+
+	@Override
+	public float getItemInOffHandDropChance()
+	{
+		return 1;
+	}
+
+	@Override
+	public void setItemInOffHandDropChance(float chance)
+	{
+		throw new UnsupportedOperationException("Cannot set drop chance for PlayerInventory");
+	}
+
+	@Override
+	public float getHelmetDropChance()
+	{
+		return 1;
+	}
+
+	@Override
+	public void setHelmetDropChance(float chance)
+	{
+		throw new UnsupportedOperationException("Cannot set drop chance for PlayerInventory");
+	}
+
+	@Override
+	public float getChestplateDropChance()
+	{
+		return 1;
+	}
+
+	@Override
+	public void setChestplateDropChance(float chance)
+	{
+		throw new UnsupportedOperationException("Cannot set drop chance for PlayerInventory");
+	}
+
+	@Override
+	public float getLeggingsDropChance()
+	{
+		return 1;
+	}
+
+	@Override
+	public void setLeggingsDropChance(float chance)
+	{
+		throw new UnsupportedOperationException("Cannot set drop chance for PlayerInventory");
+	}
+
+	@Override
+	public float getBootsDropChance()
+	{
+		return 1;
+	}
+
+	@Override
+	public void setBootsDropChance(float chance)
+	{
+		throw new UnsupportedOperationException("Cannot set drop chance for PlayerInventory");
+	}
+
+	@Override
+	public void setExtraContents(ItemStack @Nullable [] items)
 	{
 		if (items == null)
 			throw new NullPointerException("ItemStack was null");
@@ -112,25 +197,53 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	@Override
 	public void setHelmet(ItemStack helmet)
 	{
+		setHelmet(helmet, false);
+	}
+
+	@Override
+	public void setHelmet(@Nullable ItemStack helmet, boolean silent)
+	{
 		setItem(HELMET, helmet);
+		// Sounds are not implemented here
 	}
 
 	@Override
 	public void setChestplate(ItemStack chestplate)
 	{
+		setChestplate(chestplate, false);
+	}
+
+	@Override
+	public void setChestplate(@Nullable ItemStack chestplate, boolean silent)
+	{
 		setItem(CHESTPLATE, chestplate);
+		// Sounds are not implemented here
 	}
 
 	@Override
 	public void setLeggings(ItemStack leggings)
 	{
+		setLeggings(leggings, false);
+	}
+
+	@Override
+	public void setLeggings(@Nullable ItemStack leggings, boolean silent)
+	{
 		setItem(LEGGINGS, leggings);
+		// Sounds are not implemented here
 	}
 
 	@Override
 	public void setBoots(ItemStack boots)
 	{
+		setBoots(boots, false);
+	}
+
+	@Override
+	public void setBoots(@Nullable ItemStack boots, boolean silent)
+	{
 		setItem(BOOTS, boots);
+		// Sounds are not implemented here
 	}
 
 	@Override
@@ -142,7 +255,14 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	@Override
 	public void setItemInMainHand(ItemStack item)
 	{
+		setItemInMainHand(item, false);
+	}
+
+	@Override
+	public void setItemInMainHand(@Nullable ItemStack item, boolean silent)
+	{
 		setItem(SLOT_BAR + mainHandSlot, item);
+		// Sounds are not implemented here
 	}
 
 	@Override
@@ -154,8 +274,14 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	@Override
 	public void setItemInOffHand(ItemStack item)
 	{
-		setItem(OFF_HAND, item);
+		setItemInOffHand(item, false);
+		// Sounds are not implemented here
+	}
 
+	@Override
+	public void setItemInOffHand(@Nullable ItemStack item, boolean silent)
+	{
+		setItem(OFF_HAND, item);
 	}
 
 	@Deprecated
@@ -170,7 +296,6 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	public void setItemInHand(ItemStack stack)
 	{
 		setItemInMainHand(stack);
-
 	}
 
 	/**
@@ -184,53 +309,42 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	 * @return the {@link ItemStack} in the given slot
 	 */
 	@Override
-	public @Nullable ItemStack getItem(@NotNull EquipmentSlot slot)
+	public @NotNull ItemStack getItem(@NotNull EquipmentSlot slot)
 	{
-		switch (slot)
-		{
-		case CHEST:
-			return getChestplate();
-		case FEET:
-			return getBoots();
-		case HAND:
-			return getItemInMainHand();
-		case HEAD:
-			return getHelmet();
-		case LEGS:
-			return getLeggings();
-		case OFF_HAND:
-			return getItemInOffHand();
-		default:
-			return new ItemStack(Material.AIR);
-		}
+		return switch (slot)
+				{
+					case CHEST -> getChestplate();
+					case FEET -> getBoots();
+					case HAND -> getItemInMainHand();
+					case HEAD -> getHelmet();
+					case LEGS -> getLeggings();
+					case OFF_HAND -> getItemInOffHand();
+					default -> new ItemStack(Material.AIR);
+				};
 	}
 
 	@Override
 	public void setItem(@NotNull EquipmentSlot slot, @Nullable ItemStack item)
 	{
+		setItem(slot, item, false);
+	}
+
+	@Override
+	public void setItem(@NotNull EquipmentSlot slot, @Nullable ItemStack item, boolean silent)
+	{
 		switch (slot)
 		{
-		case CHEST:
-			setChestplate(item);
-			break;
-		case FEET:
-			setBoots(item);
-			break;
-		case HAND:
-			setItemInMainHand(item);
-			break;
-		case HEAD:
-			setHelmet(item);
-			break;
-		case LEGS:
-			setLeggings(item);
-			break;
-		case OFF_HAND:
-			setItemInOffHand(item);
-			break;
-		default:
-			break;
+		case CHEST -> setChestplate(item);
+		case FEET -> setBoots(item);
+		case HAND -> setItemInMainHand(item);
+		case HEAD -> setHelmet(item);
+		case LEGS -> setLeggings(item);
+		case OFF_HAND -> setItemInOffHand(item);
+		default ->
+		{
 		}
+		}
+		// Sounds are not implemented here
 	}
 
 	@Override
@@ -247,8 +361,21 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 		mainHandSlot = slot;
 	}
 
+	@Override
+	public float getDropChance(@NotNull EquipmentSlot slot)
+	{
+		return 1;
+	}
+
+	@Override
+	public void setDropChance(@NotNull EquipmentSlot slot, float chance)
+	{
+		throw new UnsupportedOperationException("Cannot set drop chance for PlayerInventory");
+	}
+
 	private @NotNull ItemStack notNull(@Nullable ItemStack itemStack)
 	{
 		return itemStack == null ? new ItemStack(Material.AIR) : itemStack;
 	}
+
 }

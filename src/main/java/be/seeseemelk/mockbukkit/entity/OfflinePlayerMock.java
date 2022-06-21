@@ -1,50 +1,51 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import java.util.Map;
-import java.util.UUID;
-
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import com.google.common.base.Preconditions;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Statistic;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.profile.PlayerProfile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * A Mock specifically for {@link OfflinePlayer}. Not interchangeable with {@link PlayerMock}.
  *
- *
  * @author TheBusyBiscuit
- *
  * @see PlayerMock
- *
  */
 public class OfflinePlayerMock implements OfflinePlayer
 {
 
-	private final UUID uuid;
-	private final String name;
+	private final @NotNull UUID uuid;
+	private final @Nullable String name;
 
-	public OfflinePlayerMock(UUID uuid, String name)
+	public OfflinePlayerMock(@NotNull UUID uuid, @Nullable String name)
 	{
+		Preconditions.checkNotNull(uuid, "UUID cannot be null");
 		this.uuid = uuid;
 		this.name = name;
 	}
 
-	public OfflinePlayerMock(String name)
+	public OfflinePlayerMock(@Nullable String name)
 	{
 		this(UUID.nameUUIDFromBytes(("OfflinePlayer:" + name).getBytes()), name);
 	}
 
-	public PlayerMock join(ServerMock server)
+	public @NotNull PlayerMock join(@NotNull ServerMock server)
 	{
-		PlayerMock player = new PlayerMock(server, name, uuid);
+		Preconditions.checkNotNull(server, "Server cannot be null");
+		PlayerMock player = new PlayerMock(server, this.name, this.uuid);
 		server.addPlayer(player);
 		return player;
 	}
@@ -58,13 +59,13 @@ public class OfflinePlayerMock implements OfflinePlayer
 	@Override
 	public @Nullable String getName()
 	{
-		return name;
+		return this.name;
 	}
 
 	@Override
 	public @NotNull UUID getUniqueId()
 	{
-		return uuid;
+		return this.uuid;
 	}
 
 	@Override
@@ -84,8 +85,9 @@ public class OfflinePlayerMock implements OfflinePlayer
 	@Override
 	public @NotNull Map<String, Object> serialize()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Map<String, Object> result = new LinkedHashMap<>();
+		result.put("UUID", this.uuid.toString());
+		return result;
 	}
 
 	@Override
@@ -112,7 +114,7 @@ public class OfflinePlayerMock implements OfflinePlayer
 	@Override
 	public @Nullable Player getPlayer()
 	{
-		return MockBukkit.getMock().getPlayerExact(name);
+		return MockBukkit.getMock().getPlayerExact(this.name);
 	}
 
 	@Override
@@ -123,6 +125,7 @@ public class OfflinePlayerMock implements OfflinePlayer
 	}
 
 	@Override
+	@Deprecated
 	public long getLastPlayed()
 	{
 		// TODO Auto-generated method stub
@@ -138,6 +141,20 @@ public class OfflinePlayerMock implements OfflinePlayer
 
 	@Override
 	public @Nullable Location getBedSpawnLocation()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public long getLastLogin()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public long getLastSeen()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -264,6 +281,20 @@ public class OfflinePlayerMock implements OfflinePlayer
 
 	@Override
 	public void setStatistic(@NotNull Statistic statistic, @NotNull EntityType entityType, int newValue)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Location getLastDeathLocation()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull PlayerProfile getPlayerProfile()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

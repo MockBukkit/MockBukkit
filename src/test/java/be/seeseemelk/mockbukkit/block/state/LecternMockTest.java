@@ -1,43 +1,70 @@
 package be.seeseemelk.mockbukkit.block.state;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.WorldMock;
+import be.seeseemelk.mockbukkit.block.BlockMock;
 import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.block.Lectern;
-import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.block.BlockMock;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
-public class LecternMockTest
+class LecternMockTest
 {
 
-	private Lectern lectern;
+	private WorldMock world;
+	private BlockMock block;
+	private LecternMock lectern;
 
-	@Before
-	public void setUp() throws Exception
+	@BeforeEach
+	void setUp()
 	{
 		MockBukkit.mock();
-		lectern = new LecternMock(Material.LECTERN);
+		this.world = new WorldMock();
+		this.block = world.getBlockAt(0, 10, 0);
+		this.block.setType(Material.LECTERN);
+		this.lectern = new LecternMock(this.block);
 	}
 
-	@After
-	public void tearDown() throws Exception
+	@AfterEach
+	void teardown()
 	{
 		MockBukkit.unmock();
 	}
 
 	@Test
-	public void testSetPageValid()
+	void constructor_Material()
+	{
+		assertDoesNotThrow(() -> new LecternMock(Material.LECTERN));
+	}
+
+	@Test
+	void constructor_Material_WrongType_ThrowsException()
+	{
+		assertThrowsExactly(IllegalArgumentException.class, () -> new LecternMock(Material.BEDROCK));
+	}
+
+	@Test
+	void constructor_Block()
+	{
+		assertDoesNotThrow(() -> new LecternMock(new BlockMock(Material.LECTERN)));
+	}
+
+	@Test
+	void constructor_Block_WrongType_ThrowsException()
+	{
+		assertThrowsExactly(IllegalArgumentException.class, () -> new LecternMock(new BlockMock(Material.BEDROCK)));
+	}
+
+	@Test
+	void testSetPageValid()
 	{
 		// Given
 		ItemStack book = new ItemStack(Material.WRITABLE_BOOK);
@@ -57,7 +84,7 @@ public class LecternMockTest
 	}
 
 	@Test
-	public void testSetPageInvalid()
+	void testSetPageInvalid()
 	{
 		// Given
 		ItemStack book = new ItemStack(Material.WRITABLE_BOOK);
@@ -82,22 +109,15 @@ public class LecternMockTest
 	}
 
 	@Test
-	public void testHasInventory()
+	void getSnapshot_DifferentInstance()
 	{
-		// When
-		Inventory inventory = lectern.getInventory();
-
-		// Then
-		assertNotNull(inventory);
-
-		assertEquals(lectern, inventory.getHolder());
-		assertEquals(InventoryType.LECTERN, inventory.getType());
+		assertNotSame(lectern, lectern.getSnapshot());
 	}
 
 	@Test
-	public void testMaterialBarrelBlockState()
+	void blockStateMock_Mock_CorrectType()
 	{
-		Block block = new BlockMock(Material.LECTERN);
-		assertTrue(block.getState() instanceof Lectern);
+		assertInstanceOf(LecternMock.class, BlockStateMock.mockState(block));
 	}
+
 }

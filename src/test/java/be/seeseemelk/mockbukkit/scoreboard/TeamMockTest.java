@@ -1,24 +1,29 @@
 package be.seeseemelk.mockbukkit.scoreboard;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.entity.PlayerMock;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.bukkit.ChatColor;
-import org.bukkit.scoreboard.NameTagVisibility;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.scoreboard.Team;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.entity.PlayerMock;
 
 /**
  * Created for the AddstarMC Project. Created by Narimm on 24/12/2018.
  */
-@SuppressWarnings("deprecation")
-public class TeamMockTest
+class TeamMockTest
 {
 	private ServerMock server;
 	private TeamMock team;
@@ -27,33 +32,31 @@ public class TeamMockTest
 
 	private PlayerMock playerB;
 
-
-
-	@Before
-	public void setUp() throws Exception
+	@BeforeEach
+	void setUp() throws Exception
 	{
 		server = MockBukkit.mock();
 		playerA = server.addPlayer();
 		playerB = server.addPlayer();
 		ScoreboardManager managerMock = server.getScoreboardManager();
 		board = managerMock.getNewScoreboard();
-		team = new TeamMock("Test", board);
+		team = (TeamMock) board.registerNewTeam("Test");
 	}
 
-	@After
-	public void tearDown() throws Exception
+	@AfterEach
+	void tearDown() throws Exception
 	{
-		MockBukkit.unload();
+		MockBukkit.unmock();
 	}
 
 	@Test
-	public void getName()
+	void getName()
 	{
 		assertEquals("Test", team.getName());
 	}
 
 	@Test
-	public void getPrefix()
+	void getPrefix()
 	{
 		assertNull(team.getPrefix());
 		team.setPrefix("THIS");
@@ -61,7 +64,7 @@ public class TeamMockTest
 	}
 
 	@Test
-	public void getColor()
+	void getColor()
 	{
 		assertNull(team.getColor());
 		team.setColor(ChatColor.AQUA);
@@ -69,7 +72,7 @@ public class TeamMockTest
 	}
 
 	@Test
-	public void allowFriendlyFire()
+	void allowFriendlyFire()
 	{
 		assertFalse(team.allowFriendlyFire());
 		team.setAllowFriendlyFire(true);
@@ -77,21 +80,23 @@ public class TeamMockTest
 	}
 
 	@Test
-	public void canSeeFriendlyInvisibles()
+	void canSeeFriendlyInvisibles()
 	{
 		assertTrue(team.canSeeFriendlyInvisibles());
 		team.setCanSeeFriendlyInvisibles(false);
 		assertFalse(team.canSeeFriendlyInvisibles());
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
-	public void getNameTagVisibility()
+	void getNameTagVisibility()
 	{
-		assertEquals(NameTagVisibility.ALWAYS, team.getNameTagVisibility());
+		assertEquals(org.bukkit.scoreboard.NameTagVisibility.ALWAYS, team.getNameTagVisibility());
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
-	public void getPlayers()
+	void getPlayers()
 	{
 		assertEquals(0, team.getPlayers().size());
 		team.addEntry(playerA.getName());
@@ -100,15 +105,16 @@ public class TeamMockTest
 	}
 
 	@Test
-	public void getEntries()
+	void getEntries()
 	{
 		assertEquals(0, team.getEntries().size());
 		team.addEntry(playerA.getName());
 		assertEquals(1, team.getEntries().size());
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
-	public void getSize()
+	void getSize()
 	{
 		assertEquals(0, team.getSize());
 		team.addPlayer(playerA);
@@ -116,14 +122,14 @@ public class TeamMockTest
 	}
 
 	@Test
-	public void getScoreboard()
+	void getScoreboard()
 	{
 		assertEquals(board, team.getScoreboard());
 	}
 
-
+	@SuppressWarnings("deprecation")
 	@Test
-	public void removePlayer()
+	void removePlayer()
 	{
 		assertEquals(0, team.getSize());
 		team.addPlayer(playerA);
@@ -134,7 +140,7 @@ public class TeamMockTest
 	}
 
 	@Test
-	public void removeEntry()
+	void removeEntry()
 	{
 		assertEquals(0, team.getSize());
 		team.addEntry(playerB.getName());
@@ -143,8 +149,9 @@ public class TeamMockTest
 		assertEquals(0, team.getSize());
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
-	public void hasPlayer()
+	void hasPlayer()
 	{
 		assertFalse(team.hasPlayer(playerB));
 		team.addEntry(playerB.getName());
@@ -154,7 +161,7 @@ public class TeamMockTest
 	}
 
 	@Test
-	public void hasEntry()
+	void hasEntry()
 	{
 		assertFalse(team.hasEntry(playerB.getName()));
 		team.addEntry(playerB.getName());
@@ -163,35 +170,24 @@ public class TeamMockTest
 	}
 
 	@Test
-	public void getOption()
+	void getOption()
 	{
 		Team.OptionStatus status = team.getOption(Team.Option.NAME_TAG_VISIBILITY);
 		assertEquals(Team.OptionStatus.ALWAYS, status);
 	}
 
-	public void unregister_FirstUnregister_Works()
+	@Test
+	void unregister_FirstUnregister_Works()
 	{
-		team.unregister();
+		assertSame(team, board.getTeam("Test"), "Team was registered");
+		assertDoesNotThrow(team::unregister);
+		assertNull(board.getTeam("Test"), "Team is no longer registered");
 	}
 
-	@Test(expected = IllegalStateException.class)
-	public void unregister_UnregisteredTwice_ThrowsException()
+	@Test
+	void unregister_UnregisteredTwice_ThrowsException()
 	{
 		team.unregister();
-		team.unregister();
+		assertThrows(IllegalStateException.class, () -> team.unregister());
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

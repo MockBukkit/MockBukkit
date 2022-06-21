@@ -1,21 +1,20 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import java.util.UUID;
-
+import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import com.google.common.base.Preconditions;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import java.util.UUID;
 
 /**
  * This is a mock of a dropped {@link Item} entity. It can hold an {@link ItemStack}, that pretty much covers it all.
  *
  * @author TheBusyBiscuit
- *
  */
 public class ItemEntityMock extends EntityMock implements Item
 {
@@ -32,20 +31,21 @@ public class ItemEntityMock extends EntityMock implements Item
 	}
 
 	@Override
-	public EntityType getType()
+	public @NotNull EntityType getType()
 	{
 		return EntityType.DROPPED_ITEM;
 	}
 
 	@Override
-	public ItemStack getItemStack()
+	public @NotNull ItemStack getItemStack()
 	{
 		return item;
 	}
 
 	@Override
-	public void setItemStack(ItemStack stack)
+	public void setItemStack(@NotNull ItemStack stack)
 	{
+		Preconditions.checkNotNull(stack, "Item cannot be null");
 		// "stack" is actually nullable here, but it seems like Spigot also throws an Exception
 		// in that case anyway. Besides a "null" Item does not really make sense anyway.
 		this.item = stack.clone();
@@ -61,6 +61,20 @@ public class ItemEntityMock extends EntityMock implements Item
 	public void setPickupDelay(int delay)
 	{
 		this.delay = Math.min(delay, 32767);
+	}
+
+	@Override
+	public void setUnlimitedLifetime(boolean unlimited)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isUnlimitedLifetime()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -86,6 +100,62 @@ public class ItemEntityMock extends EntityMock implements Item
 
 	@Override
 	public @Nullable UUID getThrower()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean canMobPickup()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setCanMobPickup(boolean canMobPickup)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean canPlayerPickup()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setCanPlayerPickup(boolean canPlayerPickup)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean willAge()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setWillAge(boolean willAge)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getHealth()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setHealth(int health)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

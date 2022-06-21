@@ -1,6 +1,10 @@
 package be.seeseemelk.mockbukkit.block.state;
 
-import org.apache.commons.lang.Validate;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import com.destroystokyo.paper.MaterialTags;
+import com.google.common.base.Preconditions;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -8,13 +12,13 @@ import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
 import org.jetbrains.annotations.NotNull;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This {@link ContainerMock} represents a {@link Sign}.
  *
  * @author TheBusyBiscuit
- *
  */
 public class SignMock extends TileStateMock implements Sign
 {
@@ -24,11 +28,15 @@ public class SignMock extends TileStateMock implements Sign
 	public SignMock(@NotNull Material material)
 	{
 		super(material);
+		if (!MaterialTags.SIGNS.isTagged(material))
+			throw new IllegalArgumentException("Cannot create a Sign state from " + material);
 	}
 
 	protected SignMock(@NotNull Block block)
 	{
 		super(block);
+		if (!MaterialTags.SIGNS.isTagged(block))
+			throw new IllegalArgumentException("Cannot create a Sign state from " + block.getType());
 	}
 
 	protected SignMock(@NotNull SignMock state)
@@ -42,8 +50,35 @@ public class SignMock extends TileStateMock implements Sign
 	}
 
 	@Override
+	public @NotNull List<Component> lines()
+	{
+		List<Component> components = new ArrayList<>();
+
+		for (String line : lines)
+		{
+			components.add(LegacyComponentSerializer.legacySection().deserialize(line));
+		}
+
+		return components;
+	}
+
+	@Override
+	public @NotNull Component line(int index) throws IndexOutOfBoundsException
+	{
+		return LegacyComponentSerializer.legacySection().deserialize(getLine(index));
+	}
+
+	@Override
+	public void line(int index, @NotNull Component line) throws IndexOutOfBoundsException
+	{
+		Preconditions.checkNotNull(line, "Line cannot be null!");
+		lines[index] = LegacyComponentSerializer.legacySection().serialize(line);
+	}
+
+	@Override
 	@NotNull
-	public String[] getLines()
+	@Deprecated
+	public String @NotNull [] getLines()
 	{
 		String[] text = new String[4];
 
@@ -56,15 +91,17 @@ public class SignMock extends TileStateMock implements Sign
 	}
 
 	@Override
-	public String getLine(int index) throws IndexOutOfBoundsException
+	@Deprecated
+	public @NotNull String getLine(int index) throws IndexOutOfBoundsException
 	{
 		return lines[index];
 	}
 
 	@Override
+	@Deprecated
 	public void setLine(int index, @NotNull String line) throws IndexOutOfBoundsException
 	{
-		Validate.notNull(line, "Line cannot be null!");
+		Preconditions.checkNotNull(line, "Line cannot be null!");
 		lines[index] = line;
 	}
 
@@ -77,6 +114,20 @@ public class SignMock extends TileStateMock implements Sign
 
 	@Override
 	public void setEditable(boolean editable)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isGlowingText()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setGlowingText(boolean glowing)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -97,7 +148,7 @@ public class SignMock extends TileStateMock implements Sign
 	}
 
 	@Override
-	public BlockState getSnapshot()
+	public @NotNull BlockState getSnapshot()
 	{
 		return new SignMock(this);
 	}

@@ -1,27 +1,26 @@
 package be.seeseemelk.mockbukkit.tags;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Tag;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.FileNotFoundException;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * This is a mock of the {@link Material} {@link Tag} wrapper in Bukkit. This will
  *
  * @author TheBusyBiscuit
- *
  * @see TagParser
- *
  */
 public class TagWrapperMock implements Tag<Material>
 {
 
-	private final TagRegistry registry;
-	private final NamespacedKey key;
+	private final @NotNull TagRegistry registry;
+	private final @NotNull NamespacedKey key;
 	private final Set<Material> materials = new HashSet<>();
 	private final Set<TagWrapperMock> additionalTags = new HashSet<>();
 
@@ -44,7 +43,7 @@ public class TagWrapperMock implements Tag<Material>
 		return registry;
 	}
 
-	public void reload() throws TagMisconfigurationException
+	public void reload() throws TagMisconfigurationException, FileNotFoundException
 	{
 		this.materials.clear();
 		this.additionalTags.clear();
@@ -104,6 +103,15 @@ public class TagWrapperMock implements Tag<Material>
 	public Set<TagWrapperMock> getSubTags()
 	{
 		return Collections.unmodifiableSet(additionalTags);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public @NotNull String toString()
+	{
+		return key.toString();
 	}
 
 }

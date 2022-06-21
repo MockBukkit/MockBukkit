@@ -1,32 +1,34 @@
 package be.seeseemelk.mockbukkit;
 
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assume.assumeFalse;
-import static org.junit.Assume.assumeNotNull;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assumptions.assumeFalse;
 
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.server.PluginEnableEvent;
 import org.bukkit.plugin.Plugin;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class MockBukkitTest
+class MockBukkitTest
 {
-	@Before
-	public void setUp()
+	@BeforeEach
+	void setUp()
 	{
 		MockBukkit.setServerInstanceToNull();
 	}
 
-	@After
-	public void tearDown()
+	@AfterEach
+	void tearDown()
 	{
 		if (MockBukkit.isMocked())
 		{
@@ -35,16 +37,16 @@ public class MockBukkitTest
 	}
 
 	@Test
-	public void setServerInstanceToNull()
+	void setServerInstanceToNull()
 	{
 		MockBukkit.mock();
-		assumeNotNull(Bukkit.getServer());
+		assumeFalse(Bukkit.getServer() == null);
 		MockBukkit.setServerInstanceToNull();
 		assertNull(Bukkit.getServer());
 	}
 
 	@Test
-	public void mock_ServerMocked()
+	void mock_ServerMocked()
 	{
 		ServerMock server = MockBukkit.mock();
 		assertNotNull(server);
@@ -53,7 +55,7 @@ public class MockBukkitTest
 	}
 
 	@Test
-	public void mock_ServerSafeMocked()
+	void mock_ServerSafeMocked()
 	{
 		ServerMock server = MockBukkit.getOrCreateMock();
 		assertNotNull(server);
@@ -62,7 +64,7 @@ public class MockBukkitTest
 	}
 
 	@Test
-	public void mock_CustomServerMocked()
+	void mock_CustomServerMocked()
 	{
 		CustomServerMock server = MockBukkit.mock(new CustomServerMock());
 		assertNotNull(server);
@@ -71,20 +73,20 @@ public class MockBukkitTest
 	}
 
 	@Test
-	public void isMocked_ServerNotMocked_False()
+	void isMocked_ServerNotMocked_False()
 	{
 		assertFalse(MockBukkit.isMocked());
 	}
 
 	@Test
-	public void isMocked_ServerMocked_True()
+	void isMocked_ServerMocked_True()
 	{
 		MockBukkit.mock();
 		assertTrue(MockBukkit.isMocked());
 	}
 
 	@Test
-	public void isMocked_ServerUnloaded_False()
+	void isMocked_ServerUnloaded_False()
 	{
 		MockBukkit.mock();
 		MockBukkit.unmock();
@@ -92,49 +94,49 @@ public class MockBukkitTest
 	}
 
 	@Test
-	public void load_MyPlugin()
+	void load_MyPlugin()
 	{
 		ServerMock server = MockBukkit.mock();
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
 		server.getPluginManager().assertEventFired(PluginEnableEvent.class, event -> event.getPlugin().equals(plugin));
-		assertTrue("Plugin not enabled", plugin.isEnabled());
-		assertTrue("Plugin's onEnable method not executed", plugin.onEnableExecuted);
+		assertTrue(plugin.isEnabled(), "Plugin not enabled");
+		assertTrue(plugin.onEnableExecuted, "Plugin's onEnable method not executed");
 	}
 
 	@Test
-	public void load_TestPluginWithExtraParameter_ExtraParameterPassedOn()
+	void load_TestPluginWithExtraParameter_ExtraParameterPassedOn()
 	{
 		MockBukkit.mock();
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class, Integer.valueOf(5));
 		assertThat(plugin.extra, equalTo(5));
 	}
 
-	@Test(expected = RuntimeException.class)
-	public void load_TestPluginWithExtraIncorrectParameter_ExceptionThrown()
+	@Test
+	void load_TestPluginWithExtraIncorrectParameter_ExceptionThrown()
 	{
 		MockBukkit.mock();
-		MockBukkit.load(TestPlugin.class, "Hello");
+		assertThrows(RuntimeException.class, () -> MockBukkit.load(TestPlugin.class, "Hello"));
 	}
 
 	@Test
-	public void loadWith_SecondTextPluginAndResourceFileAsString_PluginLoaded()
+	void loadWith_SecondTextPluginAndResourceFileAsString_PluginLoaded()
 	{
 		MockBukkit.mock();
 		SecondTestPlugin plugin = MockBukkit.loadWith(SecondTestPlugin.class, "second_plugin.yml");
-		assertEquals("Name was not loaded correctly", "SecondTestPlugin", plugin.getName());
+		assertEquals("SecondTestPlugin", plugin.getName(), "Name was not loaded correctly");
 	}
 
 	@Test
-	public void loadSimple_SecondTextPlugin_PluginLoaded()
+	void loadSimple_SecondTextPlugin_PluginLoaded()
 	{
 		MockBukkit.mock();
 		SecondTestPlugin plugin = MockBukkit.loadSimple(SecondTestPlugin.class);
-		assertEquals("Name was not set correctly", "SecondTestPlugin", plugin.getName());
-		assertEquals("Version was not set correctly", "1.0.0", plugin.getDescription().getVersion());
+		assertEquals("SecondTestPlugin", plugin.getName(), "Name was not set correctly");
+		assertEquals("1.0.0", plugin.getDescription().getVersion(), "Version was not set correctly");
 	}
 
 	@Test
-	public void createMockPlugin_CreatesMockPlugin()
+	void createMockPlugin_CreatesMockPlugin()
 	{
 		MockBukkit.mock();
 		MockPlugin plugin = MockBukkit.createMockPlugin();
@@ -144,7 +146,7 @@ public class MockBukkitTest
 	}
 
 	@Test
-	public void unload_PluginLoaded_PluginDisabled()
+	void unload_PluginLoaded_PluginDisabled()
 	{
 		MockBukkit.mock();
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
@@ -155,7 +157,7 @@ public class MockBukkitTest
 	}
 
 	@Test
-	public void load_CanLoadPluginFromExternalSource_PluginLoaded()
+	void load_CanLoadPluginFromExternalSource_PluginLoaded()
 	{
 		MockBukkit.mock();
 		MockBukkit.loadJar("extra/TestPlugin/TestPlugin.jar");
@@ -164,7 +166,30 @@ public class MockBukkitTest
 		assertThat(plugins[0].getName(), equalTo("TestPlugin"));
 	}
 
-	public static class CustomServerMock extends ServerMock
+	@Test
+	void load_PluginWithConfigFile_ConfigFileParsed()
+	{
+		MockBukkit.mock();
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		FileConfiguration config = plugin.getConfig();
+		String value = config.getString("foo");
+		assertThat(value, equalTo("bar"));
+	}
+
+	@Test
+	void ensureMocking_Mocking_DoesNothing()
+	{
+		MockBukkit.mock();
+		assertDoesNotThrow(MockBukkit::ensureMocking);
+	}
+
+	@Test
+	void ensureMocking_NotMocking_ThrowsException()
+	{
+		assertThrows(IllegalStateException.class, MockBukkit::ensureMocking);
+	}
+
+	private static class CustomServerMock extends ServerMock
 	{
 	}
 }

@@ -8,7 +8,6 @@ import org.jetbrains.annotations.NotNull;
  * An {@link TagMisconfigurationException} is thrown whenever a {@link Tag} contains illegal, invalid or unknown values.
  *
  * @author TheBusyBiscuit
- *
  */
 public class TagMisconfigurationException extends Exception
 {

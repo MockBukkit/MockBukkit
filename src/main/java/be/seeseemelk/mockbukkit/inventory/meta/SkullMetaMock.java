@@ -1,18 +1,20 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
-import java.util.Objects;
-
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
+import com.google.common.base.Strings;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.profile.PlayerProfile;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import com.google.common.base.Strings;
-
-import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
+import java.util.Objects;
 
 /**
  * An {@link ItemMetaMock} for the {@link SkullMeta} interface. The owning {@link Player} is stored via his name.
- *
+ * <p>
  * Created by SimplyBallistic on 27/10/2018
  *
  * @author SimplyBallistic
@@ -20,14 +22,14 @@ import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
 public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 {
 
-	private String owner;
+	private @Nullable String owner;
 
 	public SkullMetaMock()
 	{
 		super();
 	}
 
-	public SkullMetaMock(SkullMeta meta)
+	public SkullMetaMock(@NotNull SkullMeta meta)
 	{
 		super(meta);
 
@@ -35,7 +37,7 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	}
 
 	@Override
-	public SkullMetaMock clone()
+	public @NotNull SkullMetaMock clone()
 	{
 		SkullMetaMock mock = (SkullMetaMock) super.clone();
 		mock.setOwner(owner);
@@ -71,6 +73,7 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	}
 
 	@Override
+	@Deprecated
 	public String getOwner()
 	{
 		return owner;
@@ -83,10 +86,25 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	}
 
 	@Override
+	@Deprecated
 	public boolean setOwner(String owner)
 	{
 		this.owner = owner;
 		return true;
+	}
+
+	@Override
+	public void setPlayerProfile(com.destroystokyo.paper.profile.@Nullable PlayerProfile profile)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public com.destroystokyo.paper.profile.@Nullable PlayerProfile getPlayerProfile()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -101,11 +119,28 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	}
 
 	@Override
-	public boolean setOwningPlayer(OfflinePlayer owner)
+	public boolean setOwningPlayer(@NotNull OfflinePlayer owner)
 	{
 		this.owner = owner.getName();
 
 		// CraftBukkits implementation also always returns true too, so there we go
 		return true;
 	}
+
+	@Override
+	@Deprecated
+	public PlayerProfile getOwnerProfile()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@Deprecated
+	public void setOwnerProfile(@Nullable PlayerProfile profile)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 }

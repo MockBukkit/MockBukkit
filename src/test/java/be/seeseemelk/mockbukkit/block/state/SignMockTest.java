@@ -1,47 +1,78 @@
 package be.seeseemelk.mockbukkit.block.state;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
-import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.block.Sign;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
 import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.BlockMock;
+import com.destroystokyo.paper.MaterialTags;
+import net.kyori.adventure.text.Component;
+import org.bukkit.Material;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class SignMockTest
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
+
+class SignMockTest
 {
 
-	private Sign sign;
+	private WorldMock world;
+	private BlockMock block;
+	private SignMock sign;
 
-	@Before
-	public void setUp() throws Exception
+	@BeforeEach
+	void setUp()
 	{
-		MockBukkit.mock();
-		sign = new SignMock(Material.OAK_SIGN);
+		this.world = new WorldMock();
+		this.block = world.getBlockAt(0, 10, 0);
+		this.block.setType(Material.OAK_SIGN);
+		this.sign = new SignMock(this.block);
 	}
 
-	@After
-	public void tearDown() throws Exception
+	@AfterEach
+	void tearDown() throws Exception
 	{
 		MockBukkit.unmock();
 	}
 
 	@Test
-	public void testMaterialSignBlockState()
+	void constructor_Material()
 	{
-		Block block = new BlockMock(Material.OAK_SIGN);
-		assertTrue(block.getState() instanceof Sign);
+		for (Material material : MaterialTags.SIGNS.getValues())
+		{
+			assertDoesNotThrow(() -> new SignMock(material));
+		}
 	}
 
 	@Test
-	public void testGetLines()
+	void constructor_Material_WrongType_ThrowsException()
+	{
+		assertThrowsExactly(IllegalArgumentException.class, () -> new SignMock(Material.BEDROCK));
+	}
+
+	@Test
+	void constructor_Block()
+	{
+		for (Material material : MaterialTags.SIGNS.getValues())
+		{
+			assertDoesNotThrow(() -> new SignMock(new BlockMock(material)));
+		}
+	}
+
+	@Test
+	void constructor_Block_WrongType_ThrowsException()
+	{
+		assertThrowsExactly(IllegalArgumentException.class, () -> new SignMock(new BlockMock(Material.BEDROCK)));
+	}
+
+	@Test
+	void testGetLines()
 	{
 		String[] lines = sign.getLines();
 		assertNotNull(lines);
@@ -53,7 +84,7 @@ public class SignMockTest
 	}
 
 	@Test
-	public void testSetLine()
+	void testSetLine()
 	{
 		String text = "I am a Sign";
 		sign.setLine(2, text);
@@ -61,22 +92,56 @@ public class SignMockTest
 		assertEquals(text, sign.getLines()[2]);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void testLineNotNull()
+	@Test
+	void testLineNotNull()
 	{
-		sign.setLine(0, null);
+		assertThrows(NullPointerException.class, () -> sign.setLine(0, null));
 	}
 
-	@Test(expected = IndexOutOfBoundsException.class)
-	public void testLineNegative()
+	@Test
+	void testLineNegative()
 	{
-		sign.getLine(-100);
+		assertThrows(IndexOutOfBoundsException.class, () -> sign.getLine(-100));
 	}
 
-	@Test(expected = IndexOutOfBoundsException.class)
-	public void testLineTooHigh()
+	@Test
+	void testLineTooHigh()
 	{
-		sign.getLine(100);
+		assertThrows(IndexOutOfBoundsException.class, () -> sign.getLine(100));
+	}
+
+	@Test
+	void testGetLineComponent()
+	{
+		Component component = Component.text("Hello World");
+		sign.line(2, component);
+		assertEquals(component, sign.line(2));
+	}
+
+	@Test
+	void testSetLineComponent()
+	{
+		Component component = Component.text("Hello World");
+		sign.line(2, component);
+		assertEquals(component, sign.line(2));
+	}
+
+	@Test
+	void testGetLineComponentNull()
+	{
+		assertThrows(NullPointerException.class, () -> sign.line(2, null));
+	}
+
+	@Test
+	void getSnapshot_DifferentInstance()
+	{
+		assertNotSame(sign, sign.getSnapshot());
+	}
+
+	@Test
+	void blockStateMock_Mock_CorrectType()
+	{
+		assertInstanceOf(SignMock.class, BlockStateMock.mockState(block));
 	}
 
 }

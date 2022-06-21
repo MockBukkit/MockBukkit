@@ -1,26 +1,30 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Queue;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.LinkedTransferQueue;
-
+import be.seeseemelk.mockbukkit.AsyncCatcher;
+import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.command.MessageTarget;
+import be.seeseemelk.mockbukkit.metadata.MetadataTable;
+import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
+import com.google.common.base.Preconditions;
+import net.kyori.adventure.audience.MessageType;
+import net.kyori.adventure.identity.Identity;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.event.HoverEvent;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
+import org.bukkit.Chunk;
 import org.bukkit.EntityEffect;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
 import org.bukkit.entity.Pose;
+import org.bukkit.entity.SpawnCategory;
+import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.metadata.MetadataValue;
@@ -33,33 +37,51 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.command.MessageTarget;
-import be.seeseemelk.mockbukkit.metadata.MetadataTable;
-import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Queue;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.LinkedTransferQueue;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public abstract class EntityMock extends Entity.Spigot implements Entity, MessageTarget
 {
-	private final ServerMock server;
-	private final UUID uuid;
+
+	private final @NotNull ServerMock server;
+	private final @NotNull UUID uuid;
 	private Location location;
 	private boolean teleported;
 	private TeleportCause teleportCause;
-	private MetadataTable metadataTable = new MetadataTable();
-	private PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
+	private final MetadataTable metadataTable = new MetadataTable();
+	private final PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
 	private boolean operator = false;
-	private String name = "entity";
-	private final Queue<String> messages = new LinkedTransferQueue<>();
+	private @NotNull Component name = Component.text("entity");
+	private @Nullable Component customName = null;
+	private boolean customNameVisible = false;
+	private boolean invulnerable;
+	private boolean glowingFlag = false;
+	private final Queue<Component> messages = new LinkedTransferQueue<>();
 	private final Set<PermissionAttachment> permissionAttachments = new HashSet<>();
-	private Vector velocity = new Vector(0, 0, 0);
+	private @NotNull Vector velocity = new Vector(0, 0, 0);
 	private float fallDistance;
 	private int fireTicks = -20;
 	private int maxFireTicks = 20;
+	private boolean removed = false;
+	private @Nullable EntityDamageEvent lastDamageEvent;
 
-	public EntityMock(@NotNull ServerMock server, @NotNull UUID uuid)
+	protected EntityMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
+		Preconditions.checkNotNull(server, "Server cannot be null");
+		Preconditions.checkNotNull(uuid, "UUID cannot be null");
+
 		this.server = server;
 		this.uuid = uuid;
 
@@ -78,7 +100,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public final boolean equals(Object obj)
 	{
-		if (obj instanceof EntityMock) 
+		if (obj instanceof EntityMock)
 		{
 			return uuid.equals(((EntityMock) obj).getUniqueId());
 		}
@@ -91,12 +113,12 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	 * @param expectedLocation The location the player should be at.
 	 * @param maximumDistance  The distance the player may maximumly be separated from the expected location.
 	 */
-	public void assertLocation(Location expectedLocation, double maximumDistance)
+	public void assertLocation(@NotNull Location expectedLocation, double maximumDistance)
 	{
 		double distance = location.distance(expectedLocation);
 		assertEquals(expectedLocation.getWorld(), location.getWorld());
-		assertTrue(String.format("Distance was <%.3f> but should be less than or equal to <%.3f>", distance,
-		                         maximumDistance), distance <= maximumDistance);
+		assertTrue(distance <= maximumDistance, String.format("Distance was <%.3f> but should be less than or equal to <%.3f>", distance,
+				maximumDistance));
 	}
 
 	/**
@@ -106,9 +128,9 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	 * @param expectedLocation The location the player should be at.
 	 * @param maximumDistance  The distance the player may maximumly be separated from the expected location.
 	 */
-	public void assertTeleported(Location expectedLocation, double maximumDistance)
+	public void assertTeleported(@NotNull Location expectedLocation, double maximumDistance)
 	{
-		assertTrue("Player did not teleport", teleported);
+		assertTrue(teleported, "Player did not teleport");
 		assertLocation(expectedLocation, maximumDistance);
 		teleported = false;
 	}
@@ -118,7 +140,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	 */
 	public void assertNotTeleported()
 	{
-		assertFalse("Player was teleported", teleported);
+		assertFalse(teleported, "Player was teleported");
 		teleported = false;
 	}
 
@@ -151,20 +173,30 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public UUID getUniqueId()
+	public @NotNull UUID getUniqueId()
 	{
 		return uuid;
 	}
 
 	@Override
-	public Location getLocation()
+	public @NotNull Location getLocation()
 	{
 		return location.clone();
 	}
 
 	@Override
-	public Location getLocation(Location loc)
+	public @NotNull Set<Player> getTrackedPlayers()
 	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public Location getLocation(@Nullable Location loc)
+	{
+		if (loc == null)
+			return null;
+
 		loc.setWorld(location.getWorld());
 		loc.setDirection(location.getDirection());
 		loc.setX(location.getX());
@@ -178,38 +210,43 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	 *
 	 * @param location The new location of the entity.
 	 */
-	public void setLocation(Location location)
+	public void setLocation(@NotNull Location location)
 	{
+		Preconditions.checkNotNull(location, "Location cannot be null");
 		this.location = location;
 	}
 
 	@Override
-	public World getWorld()
+	public @NotNull World getWorld()
 	{
 		return location.getWorld();
 	}
 
 	@Override
-	public void setMetadata(String metadataKey, MetadataValue newMetadataValue)
+	public void setMetadata(@NotNull String metadataKey, @NotNull MetadataValue newMetadataValue)
 	{
+		Preconditions.checkNotNull(metadataKey, "Metadata key cannot be null");
 		metadataTable.setMetadata(metadataKey, newMetadataValue);
 	}
 
 	@Override
-	public List<MetadataValue> getMetadata(String metadataKey)
+	public @NotNull List<MetadataValue> getMetadata(@NotNull String metadataKey)
 	{
+		Preconditions.checkNotNull(metadataKey, "Metadata key cannot be null");
 		return metadataTable.getMetadata(metadataKey);
 	}
 
 	@Override
-	public boolean hasMetadata(String metadataKey)
+	public boolean hasMetadata(@NotNull String metadataKey)
 	{
+		Preconditions.checkNotNull(metadataKey, "Metadata key cannot be null");
 		return metadataTable.hasMetadata(metadataKey);
 	}
 
 	@Override
-	public void removeMetadata(String metadataKey, Plugin owningPlugin)
+	public void removeMetadata(@NotNull String metadataKey, @NotNull Plugin owningPlugin)
 	{
+		Preconditions.checkNotNull(metadataKey, "Metadata key cannot be null");
 		metadataTable.removeMetadata(metadataKey, owningPlugin);
 	}
 
@@ -220,14 +257,16 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public boolean teleport(Location location)
+	public boolean teleport(@NotNull Location location)
 	{
+		Preconditions.checkNotNull(location, "Location cannot be null");
 		return teleport(location, TeleportCause.PLUGIN);
 	}
 
 	@Override
-	public boolean teleport(Location location, TeleportCause cause)
+	public boolean teleport(@NotNull Location location, @NotNull TeleportCause cause)
 	{
+		Preconditions.checkNotNull(location, "Location cannot be null");
 		this.location = location;
 		teleported = true;
 		teleportCause = cause;
@@ -235,14 +274,17 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public boolean teleport(Entity destination)
+	public boolean teleport(@NotNull Entity destination)
 	{
+		Preconditions.checkNotNull(destination, "Destination entity cannot be null");
 		return teleport(destination, TeleportCause.PLUGIN);
 	}
 
 	@Override
-	public boolean teleport(Entity destination, TeleportCause cause)
+	public boolean teleport(@NotNull Entity destination, @NotNull TeleportCause cause)
 	{
+		Preconditions.checkNotNull(destination, "Destination entity cannot be null");
+		Preconditions.checkNotNull(cause, "TeleportCause cannot be null");
 		return teleport(destination.getLocation(), cause);
 	}
 
@@ -259,9 +301,9 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public String getName()
+	public @NotNull String getName()
 	{
-		return name;
+		return LegacyComponentSerializer.legacySection().serialize(this.name);
 	}
 
 	/**
@@ -269,31 +311,33 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	 *
 	 * @param name The new name of the entity.
 	 */
-	public void setName(String name)
+	public void setName(@NotNull String name)
 	{
-		this.name = name;
+		Preconditions.checkNotNull(name, "Name cannot be null");
+		this.name = LegacyComponentSerializer.legacySection().deserialize(name);
 	}
 
 	@Override
-	public void sendMessage(String message)
+	public void sendMessage(@NotNull String message)
 	{
 		sendMessage(null, message);
 	}
 
 	@Override
-	public void sendMessage(String[] messages)
+	public void sendMessage(String... messages)
 	{
 		sendMessage(null, messages);
 	}
 
 	@Override
-	public void sendMessage(UUID sender, String message)
+	public void sendMessage(@Nullable UUID sender, @NotNull String message)
 	{
-		messages.add(message);
+		Preconditions.checkNotNull(message, "Message cannot be null");
+		sendMessage(sender == null ? Identity.nil() : Identity.identity(sender), LegacyComponentSerializer.legacySection().deserialize(message), MessageType.SYSTEM);
 	}
 
 	@Override
-	public void sendMessage(UUID sender, String[] messages)
+	public void sendMessage(UUID sender, String @NotNull ... messages)
 	{
 		for (String message : messages)
 		{
@@ -301,36 +345,47 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		}
 	}
 
+	public void sendMessage(final @NotNull Identity source, final @NotNull Component message, final @NotNull MessageType type)
+	{
+		Preconditions.checkNotNull(source, "Source cannot be null");
+		Preconditions.checkNotNull(message, "Message cannot be null");
+		Preconditions.checkNotNull(type, "MessageType cannot be null");
+		this.messages.add(message);
+	}
+
 	@Override
-	public String nextMessage()
+	public @Nullable String nextMessage()
+	{
+		if (messages.peek() == null)
+			return null;
+		return LegacyComponentSerializer.legacySection().serialize(messages.poll());
+	}
+
+	public @Nullable Component nextComponentMessage()
 	{
 		return messages.poll();
 	}
 
 	@Override
-	public boolean isPermissionSet(String name)
+	public boolean isPermissionSet(@NotNull String name)
 	{
-		for (PermissionAttachment attachment : permissionAttachments)
-		{
-			Map<String, Boolean> permissions = attachment.getPermissions();
-
-			if (permissions.containsKey(name) && permissions.get(name).booleanValue())
-			{
-				return true;
-			}
-		}
-		return false;
+		Preconditions.checkNotNull(name, "Name cannot be null");
+		return permissionAttachments.stream()
+				.map(PermissionAttachment::getPermissions)
+				.anyMatch(permissions -> permissions.containsKey(name) && permissions.get(name));
 	}
 
 	@Override
-	public boolean isPermissionSet(Permission perm)
+	public boolean isPermissionSet(@NotNull Permission perm)
 	{
+		Preconditions.checkNotNull(perm, "Permission cannot be null");
 		return isPermissionSet(perm.getName().toLowerCase(Locale.ENGLISH));
 	}
 
 	@Override
-	public boolean hasPermission(String name)
+	public boolean hasPermission(@NotNull String name)
 	{
+		Preconditions.checkNotNull(name, "Name cannot be null");
 		if (isPermissionSet(name))
 		{
 			return true;
@@ -341,48 +396,49 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public boolean hasPermission(Permission perm)
+	public boolean hasPermission(@NotNull Permission perm)
 	{
+		Preconditions.checkNotNull(perm, "Permission cannot be null");
 		return isPermissionSet(perm) || perm.getDefault().getValue(isOp());
 	}
 
 	@Override
-	public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value)
+	public @NotNull PermissionAttachment addAttachment(@NotNull Plugin plugin, @NotNull String name, boolean value)
 	{
+		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
+		Preconditions.checkNotNull(name, "Name cannot be null");
 		PermissionAttachment attachment = addAttachment(plugin);
 		attachment.setPermission(name, value);
 		return attachment;
 	}
 
 	@Override
-	public PermissionAttachment addAttachment(Plugin plugin)
+	public @NotNull PermissionAttachment addAttachment(@NotNull Plugin plugin)
 	{
+		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
 		PermissionAttachment attachment = new PermissionAttachment(plugin, this);
 		permissionAttachments.add(attachment);
 		return attachment;
 	}
 
 	@Override
-	public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value, int ticks)
+	public PermissionAttachment addAttachment(@NotNull Plugin plugin, @NotNull String name, boolean value, int ticks)
 	{
 		// TODO Auto-generated constructor stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public PermissionAttachment addAttachment(Plugin plugin, int ticks)
+	public PermissionAttachment addAttachment(@NotNull Plugin plugin, int ticks)
 	{
 		// TODO Auto-generated constructor stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void removeAttachment(PermissionAttachment attachment)
+	public void removeAttachment(@NotNull PermissionAttachment attachment)
 	{
-		if (attachment == null)
-		{
-			throw new IllegalArgumentException("Attachment cannot be null");
-		}
+		Preconditions.checkNotNull(attachment, "Attachment cannot be null");
 
 		if (permissionAttachments.contains(attachment))
 		{
@@ -409,7 +465,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public Set<PermissionAttachmentInfo> getEffectivePermissions()
+	public @NotNull Set<PermissionAttachmentInfo> getEffectivePermissions()
 	{
 		HashSet<PermissionAttachmentInfo> permissionAttachmentInfos = new HashSet<>();
 
@@ -425,27 +481,38 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public String getCustomName()
+	public @Nullable Component customName()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return this.customName;
 	}
 
 	@Override
-	public void setCustomName(String name)
+	public void customName(@Nullable Component customName)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		this.customName = customName;
+	}
+
+	@Override
+	public String getCustomName()
+	{
+		return this.customName == null ? null : LegacyComponentSerializer.legacySection().serialize(this.customName);
+	}
+
+	@Override
+	public void setCustomName(@Nullable String name)
+	{
+		this.customName = name == null ? null : LegacyComponentSerializer.legacySection().deserialize(name);
 	}
 
 	@Override
 	public void setVelocity(@NotNull Vector velocity)
 	{
+		Preconditions.checkNotNull(velocity, "Velocity cannot be null");
 		this.velocity = velocity;
 	}
 
 	@Override
-	public Vector getVelocity()
+	public @NotNull Vector getVelocity()
 	{
 		return velocity;
 	}
@@ -472,8 +539,9 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public List<Entity> getNearbyEntities(double x, double y, double z)
+	public @NotNull List<Entity> getNearbyEntities(double x, double y, double z)
 	{
+		AsyncCatcher.catchOp("getNearbyEntities");
 		// TODO Auto-generated constructor stub
 		throw new UnimplementedOperationException();
 	}
@@ -504,33 +572,88 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public void remove()
+	public void setVisualFire(boolean fire)
 	{
 		// TODO Auto-generated constructor stub
 		throw new UnimplementedOperationException();
+	}
 
+	@Override
+	public boolean isVisualFire()
+	{
+		// TODO Auto-generated constructor stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setFreezeTicks(int ticks)
+	{
+		// TODO Auto-generated constructor stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isFrozen()
+	{
+		// TODO Auto-generated constructor stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isFreezeTickingLocked()
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void lockFreezeTicks(boolean locked)
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+
+	@Override
+	public int getFreezeTicks()
+	{
+		// TODO Auto-generated constructor stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getMaxFreezeTicks()
+	{
+		// TODO Auto-generated constructor stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void remove()
+	{
+		this.removed = true;
 	}
 
 	@Override
 	public boolean isDead()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return !this.removed;
 	}
 
 	@Override
 	public boolean isValid()
 	{
-		return !isDead();
+		return !this.removed;
 	}
 
 	@Override
-	public ServerMock getServer()
+	public @NotNull ServerMock getServer()
 	{
-		return server;
+		return this.server;
 	}
 
 	@Override
+	@Deprecated
 	public Entity getPassenger()
 	{
 		// TODO Auto-generated constructor stub
@@ -538,28 +661,29 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public boolean setPassenger(Entity passenger)
+	@Deprecated
+	public boolean setPassenger(@NotNull Entity passenger)
 	{
 		// TODO Auto-generated constructor stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public List<Entity> getPassengers()
+	public @NotNull List<Entity> getPassengers()
 	{
 		// TODO Auto-generated constructor stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean addPassenger(Entity passenger)
+	public boolean addPassenger(@NotNull Entity passenger)
 	{
 		// TODO Auto-generated constructor stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean removePassenger(Entity passenger)
+	public boolean removePassenger(@NotNull Entity passenger)
 	{
 		// TODO Auto-generated constructor stub
 		throw new UnimplementedOperationException();
@@ -593,18 +717,15 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public void setLastDamageCause(EntityDamageEvent event)
+	public void setLastDamageCause(@Nullable EntityDamageEvent event)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
-
+		this.lastDamageEvent = event;
 	}
 
 	@Override
-	public EntityDamageEvent getLastDamageCause()
+	public @Nullable EntityDamageEvent getLastDamageCause()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return this.lastDamageEvent;
 	}
 
 	@Override
@@ -623,11 +744,15 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public void playEffect(EntityEffect type)
+	public void playEffect(@NotNull EntityEffect type)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(type, "Type cannot be null");
+	}
 
+	@Override
+	public @NotNull EntityType getType()
+	{
+		return EntityType.UNKNOWN;
 	}
 
 	@Override
@@ -654,46 +779,39 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public void setCustomNameVisible(boolean flag)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		customNameVisible = flag;
 
 	}
 
 	@Override
 	public boolean isCustomNameVisible()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return customNameVisible;
 	}
 
 	@Override
 	public void setGlowing(boolean flag)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		glowingFlag = flag;
 
 	}
 
 	@Override
 	public boolean isGlowing()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return glowingFlag;
 	}
 
 	@Override
 	public void setInvulnerable(boolean flag)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
-
+		invulnerable = flag;
 	}
 
 	@Override
 	public boolean isInvulnerable()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return invulnerable;
 	}
 
 	@Override
@@ -742,28 +860,28 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public Set<String> getScoreboardTags()
+	public @NotNull Set<String> getScoreboardTags()
 	{
 		// TODO Auto-generated constructor stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean addScoreboardTag(String tag)
+	public boolean addScoreboardTag(@NotNull String tag)
 	{
 		// TODO Auto-generated constructor stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean removeScoreboardTag(String tag)
+	public boolean removeScoreboardTag(@NotNull String tag)
 	{
 		// TODO Auto-generated constructor stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public PistonMoveReaction getPistonMoveReaction()
+	public @NotNull PistonMoveReaction getPistonMoveReaction()
 	{
 		// TODO Auto-generated constructor stub
 		throw new UnimplementedOperationException();
@@ -777,7 +895,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public BoundingBox getBoundingBox()
+	public @NotNull BoundingBox getBoundingBox()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -798,14 +916,14 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public BlockFace getFacing()
+	public @NotNull BlockFace getFacing()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Pose getPose()
+	public @NotNull Pose getPose()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -817,10 +935,136 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 	@Override
-	public Entity.Spigot spigot()
+	public @NotNull SpawnCategory getSpawnCategory()
+	{
+		return SpawnCategory.MISC;
+	}
+
+	@Override
+	public Entity.@NotNull Spigot spigot()
 	{
 		return this;
 	}
+
+	@Override
+	public @NotNull Component name()
+	{
+		return this.name;
+	}
+
+	// Paper start
+
+	@Override
+	public @NotNull Component teamDisplayName()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull HoverEvent<HoverEvent.ShowEntity> asHoverEvent()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Location getOrigin()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean fromMobSpawner()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Chunk getChunk()
+	{
+		return getLocation().getChunk();
+	}
+
+	@Override
+	public CreatureSpawnEvent.@NotNull SpawnReason getEntitySpawnReason()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isInRain()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isInBubbleColumn()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isInWaterOrRain()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isInWaterOrBubbleColumn()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isInWaterOrRainOrBubbleColumn()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isInLava()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isTicking()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean spawnAt(@NotNull Location location)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean spawnAt(@NotNull Location location, CreatureSpawnEvent.@NotNull SpawnReason reason)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isInPowderedSnow()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 }

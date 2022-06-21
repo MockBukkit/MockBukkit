@@ -1,36 +1,24 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
-import java.util.UUID;
-
 import be.seeseemelk.mockbukkit.ServerMock;
+import com.google.common.base.Preconditions;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Random;
+import java.util.UUID;
 
 public final class PlayerMockFactory
 {
-	private static final String[] FIRST_NAMES = { "James", "Mary", "John", "Particia", "Robert", "Jennifer", "Michael", "Elizabeth", "William", "Linda" };
-	private static final String[] LAST_NAMES = { "Smith", "Johnson", "Jones", "Brown", "Davis", "Miller", "Wilson", "Moore", "Taylor", "Anderson" };
 
-	private final ServerMock server;
-	private Random random = new Random();
-	private Set<String> usedNames = new HashSet<>();
+	private final @NotNull ServerMock server;
+	private final Random random = new Random();
+	private int currentNameIndex;
 
-	public PlayerMockFactory(ServerMock server)
+	public PlayerMockFactory(@NotNull ServerMock server)
 	{
+		Preconditions.checkNotNull(server, "Server cannot be null");
+		this.currentNameIndex = 0;
 		this.server = server;
-	}
-
-	/**
-	 * Generates a random name.
-	 *
-	 * @return A randomly generated name.
-	 */
-	private String getRandomName()
-	{
-		String firstName = FIRST_NAMES[random.nextInt(FIRST_NAMES.length)];
-		String lastName = LAST_NAMES[random.nextInt(LAST_NAMES.length)];
-		return firstName + " " + lastName;
 	}
 
 	/**
@@ -38,22 +26,16 @@ public final class PlayerMockFactory
 	 *
 	 * @return A unique random name.
 	 */
-	private String getUniqueRandomName()
+	private @NotNull String getUniqueRandomName()
 	{
-		if (usedNames.size() >= 100)
+		String name = "Player" + currentNameIndex++;
+
+		if (name.length() > 16)
 		{
-			throw new RuntimeException("Out of names");
+			throw new IllegalStateException("Maximum number of player names reached");
 		}
 
-		while (true)
-		{
-			String name = getRandomName();
-			if (!usedNames.contains(name))
-			{
-				usedNames.add(name);
-				return name;
-			}
-		}
+		return name;
 	}
 
 	/**
@@ -61,7 +43,7 @@ public final class PlayerMockFactory
 	 *
 	 * @return A newly created player mock object.
 	 */
-	public PlayerMock createRandomPlayer()
+	public @NotNull PlayerMock createRandomPlayer()
 	{
 		String name = getUniqueRandomName();
 		UUID uuid = new UUID(random.nextLong(), random.nextLong());
@@ -73,8 +55,20 @@ public final class PlayerMockFactory
 	 *
 	 * @return A newly created player mock object.
 	 */
-	public OfflinePlayerMock createRandomOfflinePlayer()
+	public @NotNull OfflinePlayerMock createRandomOfflinePlayer()
 	{
 		return new OfflinePlayerMock(getUniqueRandomName());
 	}
+
+	/**
+	 * Create a random {@link OfflinePlayerMock} object with a unique name and the given id.
+	 *
+	 * @param uuid the id of the offline player
+	 * @return A newly created offline player mock object.
+	 */
+	public @NotNull OfflinePlayerMock createOfflinePlayer(@NotNull UUID uuid)
+	{
+		return new OfflinePlayerMock(uuid, getUniqueRandomName());
+	}
+
 }

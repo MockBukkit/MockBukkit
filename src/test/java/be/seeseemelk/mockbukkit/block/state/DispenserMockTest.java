@@ -1,106 +1,66 @@
 package be.seeseemelk.mockbukkit.block.state;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
-import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.block.Dispenser;
-import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.projectiles.BlockProjectileSource;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
-import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.BlockMock;
+import org.bukkit.Material;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class DispenserMockTest
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
+
+class DispenserMockTest
 {
 
-	private Dispenser dispenser;
+	private WorldMock world;
+	private BlockMock block;
+	private DispenserMock dispenser;
 
-	@Before
-	public void setUp() throws Exception
+	@BeforeEach
+	void setUp()
 	{
-		MockBukkit.mock();
-		dispenser = new DispenserMock(Material.DISPENSER);
-	}
-
-	@After
-	public void tearDown() throws Exception
-	{
-		MockBukkit.unmock();
-	}
-
-	@Test
-	public void testMaterialDispenserBlockState()
-	{
-		Block block = new BlockMock(Material.DISPENSER);
-		assertTrue(block.getState() instanceof Dispenser);
+		this.world = new WorldMock();
+		this.block = world.getBlockAt(0, 10, 0);
+		this.block.setType(Material.DISPENSER);
+		this.dispenser = new DispenserMock(this.block);
 	}
 
 	@Test
-	public void testHasInventory()
+	void constructor_Material()
 	{
-		Inventory inventory = dispenser.getInventory();
-		assertNotNull(inventory);
-
-		assertEquals(dispenser, inventory.getHolder());
-		assertEquals(InventoryType.DISPENSER, inventory.getType());
+		assertDoesNotThrow(() -> new DispenserMock(Material.DISPENSER));
 	}
 
 	@Test
-	public void testLocking()
+	void constructor_Material_WrongType_ThrowsException()
 	{
-		String key = "key";
-
-		assertFalse(dispenser.isLocked());
-		assertEquals("", dispenser.getLock());
-
-		dispenser.setLock("key");
-		assertTrue(dispenser.isLocked());
-		assertEquals(key, dispenser.getLock());
+		assertThrowsExactly(IllegalArgumentException.class, () -> new DispenserMock(Material.BEDROCK));
 	}
 
 	@Test
-	public void testNullLocking()
+	void constructor_Block()
 	{
-		dispenser.setLock(null);
-		assertFalse(dispenser.isLocked());
-		assertEquals("", dispenser.getLock());
+		assertDoesNotThrow(() -> new DispenserMock(new BlockMock(Material.DISPENSER)));
 	}
 
 	@Test
-	public void testNaming()
+	void constructor_Block_WrongType_ThrowsException()
 	{
-		String name = "Cool Dispenser";
-
-		assertNull(dispenser.getCustomName());
-
-		dispenser.setCustomName(name);
-		assertEquals(name, dispenser.getCustomName());
+		assertThrowsExactly(IllegalArgumentException.class, () -> new DispenserMock(new BlockMock(Material.BEDROCK)));
 	}
 
 	@Test
-	public void testUnplacedProjectileSource()
+	void getSnapshot_DifferentInstance()
 	{
-		Dispenser dispenser = new DispenserMock(Material.DISPENSER);
-		assertNull(dispenser.getBlockProjectileSource());
+		assertNotSame(dispenser, dispenser.getSnapshot());
 	}
 
 	@Test
-	public void testPlacedProjectileSource()
+	void blockStateMock_Mock_CorrectType()
 	{
-		Block block = new BlockMock(Material.DISPENSER);
-		Dispenser dispenser = (Dispenser) block.getState();
-		BlockProjectileSource source = dispenser.getBlockProjectileSource();
-
-		assertNotNull(source);
-		assertEquals(block, source.getBlock());
+		assertInstanceOf(DispenserMock.class, BlockStateMock.mockState(block));
 	}
+
 }

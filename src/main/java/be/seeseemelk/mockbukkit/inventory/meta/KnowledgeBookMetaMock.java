@@ -1,18 +1,17 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.meta.KnowledgeBookMeta;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * This {@link ItemMetaMock} mocks the implementation of {@link KnowledgeBookMeta}.
  *
  * @author TheBusyBiscuit
- *
  */
 public class KnowledgeBookMetaMock extends ItemMetaMock implements KnowledgeBookMeta
 {
@@ -26,7 +25,7 @@ public class KnowledgeBookMetaMock extends ItemMetaMock implements KnowledgeBook
 		super();
 	}
 
-	public KnowledgeBookMetaMock(KnowledgeBookMeta meta)
+	public KnowledgeBookMetaMock(@NotNull KnowledgeBookMeta meta)
 	{
 		super(meta);
 
@@ -62,7 +61,7 @@ public class KnowledgeBookMetaMock extends ItemMetaMock implements KnowledgeBook
 	}
 
 	@Override
-	public KnowledgeBookMetaMock clone()
+	public @NotNull KnowledgeBookMetaMock clone()
 	{
 		KnowledgeBookMetaMock mock = (KnowledgeBookMetaMock) super.clone();
 		mock.recipes.addAll(recipes);
@@ -70,7 +69,7 @@ public class KnowledgeBookMetaMock extends ItemMetaMock implements KnowledgeBook
 	}
 
 	@Override
-	public void addRecipe(@NotNull NamespacedKey... recipes)
+	public void addRecipe(@NotNull NamespacedKey @NotNull ... recipes)
 	{
 		for (NamespacedKey recipe : recipes)
 		{

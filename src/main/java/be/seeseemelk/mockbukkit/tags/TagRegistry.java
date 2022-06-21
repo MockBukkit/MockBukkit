@@ -1,19 +1,18 @@
 package be.seeseemelk.mockbukkit.tags;
 
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Tag;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+
 /**
  * An enum for all the different {@link Material} {@link Tag} registries.
  *
  * @author TheBusyBiscuit
- *
  */
 public enum TagRegistry
 {

@@ -1,5 +1,8 @@
 package be.seeseemelk.mockbukkit.block.state;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.inventory.BarrelInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import org.bukkit.Material;
 import org.bukkit.block.Barrel;
 import org.bukkit.block.Block;
@@ -7,34 +10,35 @@ import org.bukkit.block.BlockState;
 import org.bukkit.loot.LootTable;
 import org.jetbrains.annotations.NotNull;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.inventory.BarrelInventoryMock;
-import be.seeseemelk.mockbukkit.inventory.InventoryMock;
-
 /**
  * This {@link ContainerMock} represents a {@link Barrel}
  *
  * @author TheBusyBiscuit
- *
  * @see ChestMock
- *
  */
 public class BarrelMock extends ContainerMock implements Barrel
 {
 
+	private boolean isOpen = false;
+
 	public BarrelMock(@NotNull Material material)
 	{
 		super(material);
+		if (material != Material.BARREL)
+			throw new IllegalArgumentException("Cannot create a Barrel state from " + material);
 	}
 
 	protected BarrelMock(@NotNull Block block)
 	{
 		super(block);
+		if (block.getType() != Material.BARREL)
+			throw new IllegalArgumentException("Cannot create a Barrel state from " + block.getType());
 	}
 
 	protected BarrelMock(@NotNull BarrelMock state)
 	{
 		super(state);
+		this.isOpen = state.isOpen;
 	}
 
 	@Override
@@ -68,25 +72,29 @@ public class BarrelMock extends ContainerMock implements Barrel
 	@Override
 	public void open()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		isOpen = true;
 	}
 
 	@Override
 	public void close()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		isOpen = false;
 	}
 
 	@Override
-	protected InventoryMock createInventory()
+	public boolean isOpen()
+	{
+		return isOpen;
+	}
+
+	@Override
+	protected @NotNull InventoryMock createInventory()
 	{
 		return new BarrelInventoryMock(this);
 	}
 
 	@Override
-	public BlockState getSnapshot()
+	public @NotNull BlockState getSnapshot()
 	{
 		return new BarrelMock(this);
 	}

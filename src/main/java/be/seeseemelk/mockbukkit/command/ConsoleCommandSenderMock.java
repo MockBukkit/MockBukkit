@@ -1,6 +1,8 @@
 package be.seeseemelk.mockbukkit.command;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import com.google.common.base.Preconditions;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Server;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.conversations.Conversation;
@@ -9,6 +11,8 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -17,28 +21,30 @@ import java.util.UUID;
 
 public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTarget
 {
+
 	private final Queue<String> messages = new LinkedList<>();
 
 	@Override
-	public void sendMessage(String message)
+	public void sendMessage(@NotNull String message)
 	{
 		sendMessage(null, message);
 	}
 
 	@Override
-	public void sendMessage(String[] messages)
+	public void sendMessage(String... messages)
 	{
 		sendMessage(null, messages);
 	}
 
 	@Override
-	public void sendMessage(UUID sender, String message)
+	public void sendMessage(UUID sender, @NotNull String message)
 	{
+		Preconditions.checkNotNull(message, "Message cannot be null");
 		messages.add(message);
 	}
 
 	@Override
-	public void sendMessage(UUID sender, String[] messages)
+	public void sendMessage(UUID sender, String @NotNull ... messages)
 	{
 		for (String message : messages)
 		{
@@ -47,7 +53,7 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	}
 
 	@Override
-	public String nextMessage()
+	public @Nullable String nextMessage()
 	{
 		return messages.poll();
 	}
@@ -81,14 +87,14 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	}
 
 	@Override
-	public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value)
+	public @NotNull PermissionAttachment addAttachment(Plugin plugin, String name, boolean value)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public PermissionAttachment addAttachment(Plugin plugin)
+	public @NotNull PermissionAttachment addAttachment(Plugin plugin)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -123,7 +129,7 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	}
 
 	@Override
-	public Set<PermissionAttachmentInfo> getEffectivePermissions()
+	public @NotNull Set<PermissionAttachmentInfo> getEffectivePermissions()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -142,14 +148,14 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	}
 
 	@Override
-	public Server getServer()
+	public @NotNull Server getServer()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public String getName()
+	public @NotNull String getName()
 	{
 		return "CONSOLE";
 	}
@@ -190,21 +196,29 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	}
 
 	@Override
-	public void sendRawMessage(String message)
+	public void sendRawMessage(@NotNull String message)
 	{
 		sendRawMessage(null, message);
 	}
 
 	@Override
-	public void sendRawMessage(UUID sender, String message)
+	public void sendRawMessage(@Nullable UUID sender, @NotNull String message)
 	{
+		Preconditions.checkNotNull(message, "Message cannot be null");
 		messages.add(message);
 	}
 
 	@Override
-	public Spigot spigot()
+	public @NotNull Spigot spigot()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
+
+	@Override
+	public @NotNull Component name()
+	{
+		return Component.text(getName());
+	}
+
 }

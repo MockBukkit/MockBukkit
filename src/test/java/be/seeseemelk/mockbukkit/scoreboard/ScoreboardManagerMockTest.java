@@ -1,32 +1,42 @@
 package be.seeseemelk.mockbukkit.scoreboard;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertSame;
-
+import be.seeseemelk.mockbukkit.MockBukkit;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class ScoreboardManagerMockTest
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
+
+class ScoreboardManagerMockTest
 {
+
 	private ScoreboardManager manager;
 
-	@Before
-	public void setUp() throws Exception
+	@BeforeEach
+	void setUp()
 	{
+		MockBukkit.mock();
 		manager = new ScoreboardManagerMock();
 	}
 
+	@AfterEach
+	void teardown()
+	{
+		MockBukkit.unmock();
+	}
+
 	@Test
-	public void getMainScoreboard_NotNull()
+	void getMainScoreboard_NotNull()
 	{
 		assertNotNull(manager.getMainScoreboard());
 	}
 
 	@Test
-	public void getMainScoreboard_MultipleCalls_ReturnsSame()
+	void getMainScoreboard_MultipleCalls_ReturnsSame()
 	{
 		Scoreboard scoreboardA = manager.getMainScoreboard();
 		Scoreboard scoreboardB = manager.getMainScoreboard();
@@ -34,13 +44,13 @@ public class ScoreboardManagerMockTest
 	}
 
 	@Test
-	public void getNewScoreboard_NotNull()
+	void getNewScoreboard_NotNull()
 	{
 		assertNotNull(manager.getNewScoreboard());
 	}
 
 	@Test
-	public void getNewScoreboard_MultipleCalls_ReturnsDifferentInstances()
+	void getNewScoreboard_MultipleCalls_ReturnsDifferentInstances()
 	{
 		Scoreboard scoreboardA = manager.getNewScoreboard();
 		Scoreboard scoreboardB = manager.getNewScoreboard();
