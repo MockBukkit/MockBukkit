@@ -1,12 +1,12 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
-import java.util.Objects;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Objects;
 
 /**
  * This {@link ItemMetaMock} mocks the implementation of {@link LeatherArmorMeta}.
@@ -24,14 +24,14 @@ public class LeatherArmorMetaMock extends ItemMetaMock implements LeatherArmorMe
 		this.color = Bukkit.getItemFactory().getDefaultLeatherColor();
 	}
 
-	public LeatherArmorMetaMock(LeatherArmorMeta meta)
+	public LeatherArmorMetaMock(@NotNull LeatherArmorMeta meta)
 	{
 		super(meta);
 		this.color = meta.getColor();
 	}
 
 	@Override
-	public LeatherArmorMetaMock clone()
+	public @NotNull LeatherArmorMetaMock clone()
 	{
 		LeatherArmorMetaMock mock = (LeatherArmorMetaMock) super.clone();
 		mock.setColor(color);
@@ -77,4 +77,5 @@ public class LeatherArmorMetaMock extends ItemMetaMock implements LeatherArmorMe
 	{
 		this.color = color == null ? Bukkit.getItemFactory().getDefaultLeatherColor() : color;
 	}
+
 }

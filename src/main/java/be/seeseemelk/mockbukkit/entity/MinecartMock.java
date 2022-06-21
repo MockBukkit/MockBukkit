@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
+import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Minecart;
@@ -18,8 +19,8 @@ public abstract class MinecartMock extends VehicleMock implements Minecart
 	private double damage = 0;
 	private double maxSpeed = 0.4;
 	private boolean slowWhenEmpty = true;
-	private Vector flyingVelocityMod = new Vector(0.949999988079071, 0.949999988079071, 0.949999988079071);
-	private Vector derailedVelocityMod = new Vector(0.5, 0.5, 0.5);
+	private @NotNull Vector flyingVelocityMod = new Vector(0.949999988079071, 0.949999988079071, 0.949999988079071);
+	private @NotNull Vector derailedVelocityMod = new Vector(0.5, 0.5, 0.5);
 	private BlockData displayBlock;
 	private int displayBlockOffset;
 
@@ -73,6 +74,7 @@ public abstract class MinecartMock extends VehicleMock implements Minecart
 	@Override
 	public void setFlyingVelocityMod(@NotNull Vector flying)
 	{
+		Preconditions.checkNotNull(flying, "Vector cannot be null");
 		this.flyingVelocityMod = flying.clone();
 	}
 
@@ -85,6 +87,7 @@ public abstract class MinecartMock extends VehicleMock implements Minecart
 	@Override
 	public void setDerailedVelocityMod(@NotNull Vector derailed)
 	{
+		Preconditions.checkNotNull(derailed, "Vector cannot be null");
 		this.derailedVelocityMod = derailed.clone();
 	}
 

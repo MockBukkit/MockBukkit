@@ -3,6 +3,8 @@ package be.seeseemelk.mockbukkit.block.state;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
+import com.destroystokyo.paper.MaterialTags;
+import com.google.common.base.Preconditions;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -14,25 +16,27 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Objects;
 
 public class BlockStateMock implements BlockState
 {
 
-	private final MetadataTable metadataTable;
-	private Block block;
+	private final @NotNull MetadataTable metadataTable;
+	private @Nullable Block block;
 	private Material material;
 
 	public BlockStateMock(@NotNull Material material)
 	{
+		Preconditions.checkNotNull(material, "Material cannot be null");
 		this.metadataTable = new MetadataTable();
 		this.material = material;
 	}
 
 	protected BlockStateMock(@NotNull Block block)
 	{
+		Preconditions.checkNotNull(block, "Block cannot be null");
 		this.metadataTable = new MetadataTable();
 		this.block = block;
 		this.material = block.getType();
@@ -40,6 +44,7 @@ public class BlockStateMock implements BlockState
 
 	protected BlockStateMock(@NotNull BlockStateMock state)
 	{
+		Preconditions.checkNotNull(state, "BlockStateMock cannot be null");
 		this.metadataTable = new MetadataTable(state.metadataTable);
 		this.material = state.getType();
 		this.block = state.isPlaced() ? state.getBlock() : null;
@@ -52,7 +57,7 @@ public class BlockStateMock implements BlockState
 	}
 
 	@Override
-	public List<MetadataValue> getMetadata(String metadataKey)
+	public @NotNull List<MetadataValue> getMetadata(String metadataKey)
 	{
 		return metadataTable.getMetadata(metadataKey);
 	}
@@ -84,13 +89,13 @@ public class BlockStateMock implements BlockState
 
 	@Override
 	@Deprecated
-	public org.bukkit.material.MaterialData getData()
+	public org.bukkit.material.@NotNull MaterialData getData()
 	{
 		return new org.bukkit.material.MaterialData(material);
 	}
 
 	@Override
-	public Material getType()
+	public @NotNull Material getType()
 	{
 		return material;
 	}
@@ -102,7 +107,7 @@ public class BlockStateMock implements BlockState
 	}
 
 	@Override
-	public World getWorld()
+	public @NotNull World getWorld()
 	{
 		return getBlock().getWorld();
 	}
@@ -126,7 +131,7 @@ public class BlockStateMock implements BlockState
 	}
 
 	@Override
-	public Location getLocation()
+	public @NotNull Location getLocation()
 	{
 		return getBlock().getLocation();
 	}
@@ -138,7 +143,7 @@ public class BlockStateMock implements BlockState
 	}
 
 	@Override
-	public Chunk getChunk()
+	public @NotNull Chunk getChunk()
 	{
 		return getBlock().getChunk();
 	}
@@ -223,7 +228,7 @@ public class BlockStateMock implements BlockState
 	}
 
 	@Override
-	public BlockData getBlockData()
+	public @NotNull BlockData getBlockData()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -265,10 +270,12 @@ public class BlockStateMock implements BlockState
 		{
 			return false;
 		}
-		if (this.isPlaced() && this.getWorld() != other.getWorld() && (this.getWorld() == null || !this.getWorld().equals(other.getWorld()))) {
+		if (this.isPlaced() && this.getWorld() != other.getWorld() && (this.getWorld() == null || !this.getWorld().equals(other.getWorld())))
+		{
 			return false;
 		}
-		if (this.isPlaced() && this.getLocation() != other.getLocation() && (this.getLocation() == null || !this.getLocation().equals(other.getLocation()))) {
+		if (this.isPlaced() && this.getLocation() != other.getLocation() && (this.getLocation() == null || !this.getLocation().equals(other.getLocation())))
+		{
 			return false;
 		}
 //		if (this.getBlockData() != other.getBlockData() && (this.getBlockData() == null || !this.getBlockData().equals(other.getBlockData()))) {
@@ -285,16 +292,22 @@ public class BlockStateMock implements BlockState
 		{
 			return new BannerMock(block);
 		}
-		else if (Tag.SHULKER_BOXES.isTagged(block.getType()))
+		else if (MaterialTags.SHULKER_BOXES.isTagged(block.getType()))
 		{
 			return new ShulkerBoxMock(block);
 		}
-		else if (Tag.SIGNS.isTagged(block.getType()))
+		else if (MaterialTags.SIGNS.isTagged(block.getType()))
 		{
 			return new SignMock(block);
 		}
+		else if (MaterialTags.BEDS.isTagged(block))
+		{
+			return new BedMock(block);
+		}
 		switch (block.getType())
 		{
+		case BEACON:
+			return new BeaconMock(block);
 		case BEEHIVE:
 			return new BeehiveMock(block);
 		case BREWING_STAND:

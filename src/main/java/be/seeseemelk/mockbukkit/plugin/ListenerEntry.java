@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.plugin;
 import org.bukkit.event.Event;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -25,7 +26,7 @@ public class ListenerEntry
 	 * @param listener The listener object that contains the method.
 	 * @param method   The method to call on events.
 	 */
-	public ListenerEntry(final Plugin plugin, final Listener listener, final Method method)
+	public ListenerEntry(final Plugin plugin, final Listener listener, final @NotNull Method method)
 	{
 		this.plugin = plugin;
 		this.listener = listener;

@@ -18,7 +18,7 @@ public class TropicalFishBucketMetaMock extends ItemMetaMock implements Tropical
 		super();
 	}
 
-	public TropicalFishBucketMetaMock(TropicalFishBucketMeta meta)
+	public TropicalFishBucketMetaMock(@NotNull TropicalFishBucketMeta meta)
 	{
 		super(meta);
 

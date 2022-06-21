@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.inventory;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.inventory.meta.ArmorStandMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.BannerMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.BookMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.EnchantedBookMetaMock;
@@ -11,6 +12,7 @@ import be.seeseemelk.mockbukkit.inventory.meta.KnowledgeBookMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.LeatherArmorMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.PotionMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.SkullMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.SpawnEggMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.SuspiciousStewMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.BundleMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.TropicalFishBucketMetaMock;
@@ -21,6 +23,7 @@ import be.seeseemelk.mockbukkit.inventory.meta.MapMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.CompassMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.CrossbowMetaMock;
 
+import com.destroystokyo.paper.MaterialTags;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.inventory.ItemStack;
@@ -28,6 +31,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -80,6 +85,11 @@ class ItemFactoryMockTest
 		assertTrue(factory.getItemMeta(Material.CROSSBOW) instanceof CrossbowMetaMock);
 		assertTrue(factory.getItemMeta(Material.ARMOR_STAND) instanceof ArmorStandMetaMock);
 		assertTrue(factory.getItemMeta(Material.TROPICAL_FISH_BUCKET) instanceof TropicalFishBucketMetaMock);
+
+		for (Material egg : MaterialTags.SPAWN_EGGS.getValues())
+		{
+			assertTrue(factory.getItemMeta(egg) instanceof SpawnEggMetaMock);
+		}
 
 		for (Material m : Tag.ITEMS_BANNERS.getValues())
 		{

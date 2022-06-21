@@ -37,9 +37,10 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class BlockMock implements Block
 {
+
 	private final MetadataTable metadataTable = new MetadataTable();
 
-	private final Location location;
+	private final @Nullable Location location;
 	private BlockStateMock state;
 	private Material material;
 	private byte data;
@@ -61,6 +62,7 @@ public class BlockMock implements Block
 	public BlockMock(@NotNull Location location)
 	{
 		this(Material.AIR, location);
+		Preconditions.checkNotNull(location, "Location cannot be null");
 	}
 
 	/**
@@ -81,6 +83,7 @@ public class BlockMock implements Block
 	 */
 	public BlockMock(@NotNull Material material, @Nullable Location location)
 	{
+		Preconditions.checkNotNull(material, "Material cannot be null");
 		this.material = material;
 		this.location = location;
 		this.state = BlockStateMock.mockState(this);
@@ -94,7 +97,7 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public List<MetadataValue> getMetadata(String metadataKey)
+	public @NotNull List<MetadataValue> getMetadata(String metadataKey)
 	{
 		return metadataTable.getMetadata(metadataKey);
 	}
@@ -119,7 +122,7 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public Block getRelative(int modX, int modY, int modZ)
+	public @NotNull Block getRelative(int modX, int modY, int modZ)
 	{
 		int x = location.getBlockX() + modX;
 		int y = location.getBlockY() + modY;
@@ -128,14 +131,15 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public Block getRelative(BlockFace face)
+	public @NotNull Block getRelative(@NotNull BlockFace face)
 	{
 		return getRelative(face, 1);
 	}
 
 	@Override
-	public Block getRelative(BlockFace face, int distance)
+	public @NotNull Block getRelative(@NotNull BlockFace face, int distance)
 	{
+		Preconditions.checkNotNull(face, "Face cannot be null");
 		return getRelative(face.getModX() * distance, face.getModY() * distance, face.getModZ() * distance);
 	}
 
@@ -154,7 +158,7 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public Material getType()
+	public @NotNull Material getType()
 	{
 		return material;
 	}
@@ -181,7 +185,7 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public World getWorld()
+	public @NotNull World getWorld()
 	{
 		return location.getWorld();
 	}
@@ -213,13 +217,13 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public Location getLocation()
+	public @NotNull Location getLocation()
 	{
 		return location;
 	}
 
 	@Override
-	public Location getLocation(Location loc)
+	public Location getLocation(@Nullable Location loc)
 	{
 		if (loc != null)
 		{
@@ -235,21 +239,22 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public Chunk getChunk()
+	public @NotNull Chunk getChunk()
 	{
 		return location.getWorld().getChunkAt(this);
 	}
 
 	@Override
-	public void setType(Material type)
+	public void setType(@NotNull Material type)
 	{
+		Preconditions.checkNotNull(type, "Type cannot be null");
 		material = type;
 		state = BlockStateMock.mockState(this);
 		blockData = new BlockDataMock(type);
 	}
 
 	@Override
-	public void setType(Material type, boolean applyPhysics)
+	public void setType(@NotNull Material type, boolean applyPhysics)
 	{
 		setType(material);
 	}
@@ -257,6 +262,8 @@ public class BlockMock implements Block
 	@Override
 	public BlockFace getFace(@NotNull Block block)
 	{
+		Preconditions.checkNotNull(block, "Block cannot be null");
+
 		for (BlockFace face : BlockFace.values())
 		{
 			if ((this.getX() + face.getModX() == block.getX()) && (this.getY() + face.getModY() == block.getY()) && (this.getZ() + face.getModZ() == block.getZ()))
@@ -269,7 +276,7 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public BlockState getState()
+	public @NotNull BlockState getState()
 	{
 		// This will always return a snapshot of the BlockState, not the actual state.
 		// This is optional with Paper but for Spigot it simply works like that.
@@ -311,8 +318,9 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public void setBiome(Biome bio)
+	public void setBiome(@NotNull Biome bio)
 	{
+		Preconditions.checkNotNull(bio, "Biome cannot be null");
 		getWorld().setBiome(getLocation(), bio);
 	}
 
@@ -331,21 +339,21 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public boolean isBlockFacePowered(BlockFace face)
+	public boolean isBlockFacePowered(@NotNull BlockFace face)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean isBlockFaceIndirectlyPowered(BlockFace face)
+	public boolean isBlockFaceIndirectlyPowered(@NotNull BlockFace face)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public int getBlockPower(BlockFace face)
+	public int getBlockPower(@NotNull BlockFace face)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -361,7 +369,7 @@ public class BlockMock implements Block
 	@Override
 	public boolean isEmpty()
 	{
-		return material == Material.AIR;
+		return material.isAir();
 	}
 
 	@Override
@@ -399,8 +407,8 @@ public class BlockMock implements Block
 	public boolean isLiquid()
 	{
 		return material == Material.LAVA
-		       || material == Material.WATER
-		       || material == Material.BUBBLE_COLUMN;
+				|| material == Material.WATER
+				|| material == Material.BUBBLE_COLUMN;
 	}
 
 	@Override
@@ -472,7 +480,7 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public PistonMoveReaction getPistonMoveReaction()
+	public @NotNull PistonMoveReaction getPistonMoveReaction()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -490,27 +498,27 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public boolean breakNaturally(ItemStack tool)
+	public boolean breakNaturally(@Nullable ItemStack tool)
 	{
 		return this.breakNaturally();
 	}
 
 	@Override
-	public Collection<ItemStack> getDrops()
+	public @NotNull Collection<ItemStack> getDrops()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Collection<ItemStack> getDrops(ItemStack tool)
+	public @NotNull Collection<ItemStack> getDrops(@Nullable ItemStack tool)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public BlockData getBlockData()
+	public @NotNull BlockData getBlockData()
 	{
 		return blockData;
 	}
@@ -523,7 +531,7 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public void setBlockData(BlockData data, boolean applyPhysics)
+	public void setBlockData(@NotNull BlockData data, boolean applyPhysics)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -537,14 +545,14 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public RayTraceResult rayTrace(Location start, Vector direction, double maxDistance, FluidCollisionMode fluidCollisionMode)
+	public RayTraceResult rayTrace(@NotNull Location start, @NotNull Vector direction, double maxDistance, @NotNull FluidCollisionMode fluidCollisionMode)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public BoundingBox getBoundingBox()
+	public @NotNull BoundingBox getBoundingBox()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -559,7 +567,7 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public Collection<ItemStack> getDrops(ItemStack tool, Entity entity)
+	public @NotNull Collection<ItemStack> getDrops(@NotNull ItemStack tool, Entity entity)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -579,14 +587,14 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public boolean applyBoneMeal(BlockFace face)
+	public boolean applyBoneMeal(@NotNull BlockFace face)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean isPreferredTool(ItemStack tool)
+	public boolean isPreferredTool(@NotNull ItemStack tool)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -600,7 +608,7 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public boolean canPlace(BlockData data)
+	public boolean canPlace(@NotNull BlockData data)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -612,4 +620,5 @@ public class BlockMock implements Block
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
+
 }

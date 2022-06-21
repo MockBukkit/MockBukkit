@@ -93,14 +93,14 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	public void remove()
 	{
 		this.health = 0;
-		alive = false;
+		this.alive = false;
 		super.remove();
 	}
 
 	@Override
 	public boolean isDead()
 	{
-		return !alive || !super.isValid();
+		return !this.alive || !super.isValid();
 	}
 
 	@Override
@@ -123,7 +123,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		EntityDeathEvent event = new EntityDeathEvent(this, new ArrayList<>(), 0);
 		Bukkit.getPluginManager().callEvent(event);
 
-		alive = false;
+		this.alive = false;
 	}
 
 	@Override
@@ -169,7 +169,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 
 	@SuppressWarnings("deprecation")
 	@Override
-	public void damage(double amount, Entity source)
+	public void damage(double amount, @Nullable Entity source)
 	{
 		if (isInvulnerable())
 		{
@@ -188,15 +188,15 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		Map<EntityDamageEvent.DamageModifier, Double> modifiers = new EnumMap<>(EntityDamageEvent.DamageModifier.class);
 		modifiers.put(EntityDamageEvent.DamageModifier.BASE, 1.0);
 		Map<EntityDamageEvent.DamageModifier, Function<Double, Double>> modifierFunctions = new EnumMap<>(
-		    EntityDamageEvent.DamageModifier.class);
+				EntityDamageEvent.DamageModifier.class);
 		modifierFunctions.put(EntityDamageEvent.DamageModifier.BASE, damage -> damage);
 
 		EntityDamageEvent event = source != null ?
-		                          new EntityDamageByEntityEvent(source, this,
-		                                  EntityDamageEvent.DamageCause.ENTITY_ATTACK, modifiers, modifierFunctions)
-		                          :
-		                          new EntityDamageEvent(this, EntityDamageEvent.DamageCause.CUSTOM, modifiers,
-		                                  modifierFunctions);
+				new EntityDamageByEntityEvent(source, this,
+						EntityDamageEvent.DamageCause.ENTITY_ATTACK, modifiers, modifierFunctions)
+				:
+				new EntityDamageEvent(this, EntityDamageEvent.DamageCause.CUSTOM, modifiers,
+						modifierFunctions);
 		event.setDamage(amount);
 		Bukkit.getPluginManager().callEvent(event);
 		if (!event.isCancelled())
@@ -219,7 +219,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public void registerAttribute(@NotNull Attribute attribute)
 	{
-		Preconditions.checkArgument(attribute != null, "attribute");
+		Preconditions.checkNotNull(attribute, "Attribute cannot be null");
 		this.attributes.put(attribute, new AttributeInstanceMock(attribute, AttributesMock.getDefaultValue(attribute)));
 	}
 
@@ -231,10 +231,14 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
-	public <T extends Projectile> @NotNull T launchProjectile(@NotNull Class<? extends T> projectile, Vector velocity)
+	public <T extends Projectile> @NotNull T launchProjectile(@NotNull Class<? extends T> projectile, @Nullable Vector velocity)
 	{
+		Preconditions.checkNotNull(projectile, "Projectile cannot be null");
 		T entity = launchProjectile(projectile);
-		entity.setVelocity(velocity);
+		if (velocity != null)
+		{
+			entity.setVelocity(velocity);
+		}
 		return entity;
 	}
 
@@ -315,28 +319,28 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
-	public Block getTargetBlockExact(int maxDistance)
+	public @Nullable Block getTargetBlockExact(int maxDistance)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Block getTargetBlockExact(int maxDistance, @NotNull FluidCollisionMode fluidCollisionMode)
+	public @Nullable Block getTargetBlockExact(int maxDistance, @NotNull FluidCollisionMode fluidCollisionMode)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public RayTraceResult rayTraceBlocks(double maxDistance)
+	public @Nullable RayTraceResult rayTraceBlocks(double maxDistance)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public RayTraceResult rayTraceBlocks(double maxDistance, @NotNull FluidCollisionMode fluidCollisionMode)
+	public @Nullable RayTraceResult rayTraceBlocks(double maxDistance, @NotNull FluidCollisionMode fluidCollisionMode)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -409,7 +413,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
-	public Player getKiller()
+	public @Nullable Player getKiller()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -433,22 +437,18 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	public boolean addPotionEffect(@NotNull PotionEffect effect, boolean force)
 	{
 		AsyncCatcher.catchOp("effect add");
-		if (effect != null)
-		{
-			// Bukkit now allows multiple effects of the same type,
-			// the force/success attributes are now obsolete
-			activeEffects.add(new ActivePotionEffect(effect));
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		Preconditions.checkNotNull(effect, "PotionEffect cannot be null");
+		// Bukkit now allows multiple effects of the same type,
+		// the force/success attributes are now obsolete
+		activeEffects.add(new ActivePotionEffect(effect));
+		return true;
 	}
 
 	@Override
-	public boolean addPotionEffects(Collection<PotionEffect> effects)
+	public boolean addPotionEffects(@NotNull Collection<PotionEffect> effects)
 	{
+		Preconditions.checkNotNull(effects, "PotionEffect cannot be null");
+
 		boolean successful = true;
 
 		for (PotionEffect effect : effects)
@@ -471,6 +471,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public PotionEffect getPotionEffect(@NotNull PotionEffectType type)
 	{
+		Preconditions.checkNotNull(type, "Potion type cannot be null");
 		for (PotionEffect effect : getActivePotionEffects())
 		{
 			if (effect.getType().equals(type))
@@ -485,7 +486,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public void removePotionEffect(@NotNull PotionEffectType type)
 	{
-
+		Preconditions.checkNotNull(type, "Potion type cannot be null");
 		activeEffects.removeIf(effect -> effect.hasExpired() || effect.getPotionEffect().getType().equals(type));
 	}
 
@@ -544,7 +545,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public EntityEquipment getEquipment()
 	{
-		return equipment;
+		return this.equipment;
 	}
 
 	@Override
@@ -654,7 +655,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public void attack(@NotNull Entity target)
 	{
-		Preconditions.checkArgument(target != null, "target == null");
+		Preconditions.checkNotNull(target, "Target cannot be null");
 
 		if (this instanceof Player)
 		{

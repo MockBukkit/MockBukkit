@@ -53,7 +53,7 @@ public class HangingMock extends EntityMock implements Hanging
 	}
 
 	@Override
-	public String toString()
+	public @NotNull String toString()
 	{
 		return "HangingMock";
 	}

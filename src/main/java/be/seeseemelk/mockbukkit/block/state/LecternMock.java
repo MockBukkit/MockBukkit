@@ -10,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class LecternMock extends ContainerMock implements Lectern
 {
@@ -37,7 +38,7 @@ public class LecternMock extends ContainerMock implements Lectern
 	}
 
 	@Override
-	protected InventoryMock createInventory()
+	protected @NotNull InventoryMock createInventory()
 	{
 		return new LecternInventoryMock(this);
 	}
@@ -63,9 +64,8 @@ public class LecternMock extends ContainerMock implements Lectern
 		this.currentPage = Math.min(Math.max(0, page), maxPages - 1);
 	}
 
-	private int getMaxPages(ItemStack book)
+	private int getMaxPages(@Nullable ItemStack book)
 	{
-
 		if (book == null || !book.hasItemMeta())
 		{
 			return 1;

@@ -2,7 +2,6 @@ package be.seeseemelk.mockbukkit.block.state;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.Conduit;
 import org.jetbrains.annotations.NotNull;
 

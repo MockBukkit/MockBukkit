@@ -12,7 +12,7 @@ import java.util.List;
 public class FireworkMetaMock extends ItemMetaMock implements FireworkMeta
 {
 
-	private List<FireworkEffect> effects = new ArrayList<>();
+	private @NotNull List<FireworkEffect> effects = new ArrayList<>();
 	private int power = 0;
 
 	public FireworkMetaMock()
@@ -20,7 +20,7 @@ public class FireworkMetaMock extends ItemMetaMock implements FireworkMeta
 		super();
 	}
 
-	public FireworkMetaMock(FireworkMeta meta)
+	public FireworkMetaMock(@NotNull FireworkMeta meta)
 	{
 		super(meta);
 
@@ -56,7 +56,7 @@ public class FireworkMetaMock extends ItemMetaMock implements FireworkMeta
 	}
 
 	@Override
-	public FireworkMetaMock clone()
+	public @NotNull FireworkMetaMock clone()
 	{
 		FireworkMetaMock mock = (FireworkMetaMock) super.clone();
 		mock.effects = new ArrayList<>(this.effects);
@@ -71,7 +71,7 @@ public class FireworkMetaMock extends ItemMetaMock implements FireworkMeta
 	}
 
 	@Override
-	public void addEffects(@NotNull FireworkEffect... effects)
+	public void addEffects(@NotNull FireworkEffect @NotNull ... effects)
 	{
 		Preconditions.checkNotNull(effects, "effects must never be null");
 

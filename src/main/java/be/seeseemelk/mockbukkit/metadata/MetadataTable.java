@@ -15,14 +15,14 @@ import java.util.Map;
 public class MetadataTable implements Metadatable
 {
 
-	private final Map<String, Map<Plugin, MetadataValue>> metadata;
+	private final @NotNull Map<String, Map<Plugin, MetadataValue>> metadata;
 
 	public MetadataTable()
 	{
 		metadata = new HashMap<>();
 	}
 
-	public MetadataTable(MetadataTable table)
+	public MetadataTable(@NotNull MetadataTable table)
 	{
 		this.metadata = new HashMap<>(table.metadata);
 	}

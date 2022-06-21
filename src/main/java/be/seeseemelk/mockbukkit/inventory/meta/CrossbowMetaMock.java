@@ -24,7 +24,7 @@ public class CrossbowMetaMock extends ItemMetaMock implements CrossbowMeta
 		this.projectiles = new ArrayList<>();
 	}
 
-	public CrossbowMetaMock(CrossbowMeta meta)
+	public CrossbowMetaMock(@NotNull CrossbowMeta meta)
 	{
 		super(meta);
 

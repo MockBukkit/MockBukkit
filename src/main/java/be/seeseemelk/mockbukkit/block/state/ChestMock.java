@@ -91,13 +91,13 @@ public class ChestMock extends ContainerMock implements Chest
 	}
 
 	@Override
-	public Inventory getBlockInventory()
+	public @NotNull Inventory getBlockInventory()
 	{
 		return getInventory();
 	}
 
 	@Override
-	protected InventoryMock createInventory()
+	protected @NotNull InventoryMock createInventory()
 	{
 		return new ChestInventoryMock(this, 27);
 	}

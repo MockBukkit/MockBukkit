@@ -23,7 +23,7 @@ import java.util.List;
 public class SignMock extends TileStateMock implements Sign
 {
 
-	private final String[] lines = {"", "", "", ""};
+	private final String[] lines = { "", "", "", "" };
 
 	public SignMock(@NotNull Material material)
 	{
@@ -71,7 +71,6 @@ public class SignMock extends TileStateMock implements Sign
 	@Override
 	public void line(int index, @NotNull Component line) throws IndexOutOfBoundsException
 	{
-
 		Preconditions.checkNotNull(line, "Line cannot be null!");
 		lines[index] = LegacyComponentSerializer.legacySection().serialize(line);
 	}
@@ -79,7 +78,7 @@ public class SignMock extends TileStateMock implements Sign
 	@Override
 	@NotNull
 	@Deprecated
-	public String[] getLines()
+	public String @NotNull [] getLines()
 	{
 		String[] text = new String[4];
 
@@ -93,7 +92,7 @@ public class SignMock extends TileStateMock implements Sign
 
 	@Override
 	@Deprecated
-	public String getLine(int index) throws IndexOutOfBoundsException
+	public @NotNull String getLine(int index) throws IndexOutOfBoundsException
 	{
 		return lines[index];
 	}
@@ -149,7 +148,7 @@ public class SignMock extends TileStateMock implements Sign
 	}
 
 	@Override
-	public BlockState getSnapshot()
+	public @NotNull BlockState getSnapshot()
 	{
 		return new SignMock(this);
 	}

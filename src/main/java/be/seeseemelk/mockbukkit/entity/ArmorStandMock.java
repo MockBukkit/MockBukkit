@@ -2,12 +2,6 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import com.destroystokyo.paper.block.TargetBlockInfo;
-import com.destroystokyo.paper.entity.TargetEntityInfo;
-import net.kyori.adventure.text.Component;
-import org.bukkit.Location;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
 import com.google.common.base.Preconditions;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
@@ -37,16 +31,16 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	private boolean hasBasePlate = true;
 	private boolean isVisible = true;
 
-	private EulerAngle headPose = EulerAngle.ZERO;
-	private EulerAngle bodyPose = EulerAngle.ZERO;
-	private EulerAngle leftArmPose = new EulerAngle(Math.toRadians(-10.0f), 0.0f, Math.toRadians(-10.0f));
-	private EulerAngle rightArmPose = new EulerAngle(Math.toRadians(-15.0f), 0.0f, Math.toRadians(10.0f));
-	private EulerAngle leftLegPose = new EulerAngle(Math.toRadians(-1.0f), 0.0f, Math.toRadians(-1.0f));
-	private EulerAngle rightLegPose = new EulerAngle(Math.toRadians(1.0f), 0.0f, Math.toRadians(1.0f));
+	private @NotNull EulerAngle headPose = EulerAngle.ZERO;
+	private @NotNull EulerAngle bodyPose = EulerAngle.ZERO;
+	private @NotNull EulerAngle leftArmPose = new EulerAngle(Math.toRadians(-10.0f), 0.0f, Math.toRadians(-10.0f));
+	private @NotNull EulerAngle rightArmPose = new EulerAngle(Math.toRadians(-15.0f), 0.0f, Math.toRadians(10.0f));
+	private @NotNull EulerAngle leftLegPose = new EulerAngle(Math.toRadians(-1.0f), 0.0f, Math.toRadians(-1.0f));
+	private @NotNull EulerAngle rightLegPose = new EulerAngle(Math.toRadians(1.0f), 0.0f, Math.toRadians(1.0f));
 
 	private final Set<EquipmentSlot> disabledSlots = EnumSet.noneOf(EquipmentSlot.class);
 
-	public ArmorStandMock(ServerMock server, UUID uuid)
+	public ArmorStandMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 	}
@@ -66,7 +60,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 
 	@Override
 	@Deprecated
-	public void setBoots(ItemStack item)
+	public void setBoots(@Nullable ItemStack item)
 	{
 		getEquipment().setBoots(item);
 	}
@@ -80,7 +74,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 
 	@Override
 	@Deprecated
-	public void setLeggings(ItemStack item)
+	public void setLeggings(@Nullable ItemStack item)
 	{
 		getEquipment().setLeggings(item);
 	}
@@ -94,7 +88,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 
 	@Override
 	@Deprecated
-	public void setChestplate(ItemStack item)
+	public void setChestplate(@Nullable ItemStack item)
 	{
 		getEquipment().setChestplate(item);
 	}
@@ -108,7 +102,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 
 	@Override
 	@Deprecated
-	public void setHelmet(ItemStack item)
+	public void setHelmet(@Nullable ItemStack item)
 	{
 		getEquipment().setHelmet(item);
 	}
@@ -122,7 +116,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 
 	@Override
 	@Deprecated
-	public void setItemInHand(ItemStack item)
+	public void setItemInHand(@Nullable ItemStack item)
 	{
 		getEquipment().setItemInMainHand(item);
 	}
@@ -136,6 +130,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	@Override
 	public void setBodyPose(@NotNull EulerAngle pose)
 	{
+		Preconditions.checkNotNull(pose, "Pose cannot be null");
 		this.bodyPose = pose;
 	}
 
@@ -148,6 +143,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	@Override
 	public void setLeftArmPose(@NotNull EulerAngle pose)
 	{
+		Preconditions.checkNotNull(pose, "Pose cannot be null");
 		this.leftArmPose = pose;
 	}
 
@@ -160,6 +156,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	@Override
 	public void setRightArmPose(@NotNull EulerAngle pose)
 	{
+		Preconditions.checkNotNull(pose, "Pose cannot be null");
 		this.rightArmPose = pose;
 	}
 
@@ -172,6 +169,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	@Override
 	public void setLeftLegPose(@NotNull EulerAngle pose)
 	{
+		Preconditions.checkNotNull(pose, "Pose cannot be null");
 		this.leftLegPose = pose;
 	}
 
@@ -184,6 +182,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	@Override
 	public void setRightLegPose(@NotNull EulerAngle pose)
 	{
+		Preconditions.checkNotNull(pose, "Pose cannot be null");
 		this.rightLegPose = pose;
 	}
 
@@ -196,6 +195,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	@Override
 	public void setHeadPose(@NotNull EulerAngle pose)
 	{
+		Preconditions.checkNotNull(pose, "Pose cannot be null");
 		this.headPose = pose;
 	}
 
@@ -311,22 +311,22 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	@Override
 	public @NotNull ItemStack getItem(@NotNull EquipmentSlot slot)
 	{
-		Preconditions.checkNotNull(slot, "slot");
+		Preconditions.checkNotNull(slot, "Slot cannot be null");
 		return switch (slot)
-		{
-		case HAND -> getEquipment().getItemInMainHand();
-		case OFF_HAND -> getEquipment().getItemInOffHand();
-		case FEET -> getBoots();
-		case LEGS -> getLeggings();
-		case CHEST -> getChestplate();
-		case HEAD -> getHelmet();
-		};
+				{
+					case HAND -> getEquipment().getItemInMainHand();
+					case OFF_HAND -> getEquipment().getItemInOffHand();
+					case FEET -> getBoots();
+					case LEGS -> getLeggings();
+					case CHEST -> getChestplate();
+					case HEAD -> getHelmet();
+				};
 	}
 
 	@Override
 	public void setItem(@NotNull EquipmentSlot slot, @Nullable ItemStack item)
 	{
-		Preconditions.checkNotNull(slot, "slot");
+		Preconditions.checkNotNull(slot, "Slot cannot be null");
 		switch (slot)
 		{
 		case HAND -> getEquipment().setItemInMainHand(item);
@@ -335,7 +335,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 		case LEGS -> setLeggings(item);
 		case CHEST -> setChestplate(item);
 		case HEAD -> setHelmet(item);
-			default -> throw new UnsupportedOperationException(slot.name());
+		default -> throw new UnsupportedOperationException(slot.name());
 		}
 	}
 
@@ -348,6 +348,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	@Override
 	public void setDisabledSlots(@NotNull EquipmentSlot... slots)
 	{
+		Preconditions.checkNotNull(slots, "Slots cannot be null");
 		this.disabledSlots.clear();
 		Collections.addAll(this.disabledSlots, slots);
 	}
@@ -355,18 +356,21 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	@Override
 	public void addDisabledSlots(@NotNull EquipmentSlot... slots)
 	{
+		Preconditions.checkNotNull(slots, "Slots cannot be null");
 		Collections.addAll(this.disabledSlots, slots);
 	}
 
 	@Override
 	public void removeDisabledSlots(@NotNull EquipmentSlot... slots)
 	{
+		Preconditions.checkNotNull(slots, "Slots cannot be null");
 		this.disabledSlots.removeAll(List.of(slots));
 	}
 
 	@Override
 	public boolean isSlotDisabled(@NotNull EquipmentSlot slot)
 	{
+		Preconditions.checkNotNull(slot, "Slot cannot be null");
 		return this.disabledSlots.contains(slot);
 	}
 

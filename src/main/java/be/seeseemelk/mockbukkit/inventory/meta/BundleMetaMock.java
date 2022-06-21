@@ -22,7 +22,7 @@ public class BundleMetaMock extends ItemMetaMock implements BundleMeta
 		this.items = new ArrayList<>();
 	}
 
-	public BundleMetaMock(BundleMeta meta)
+	public BundleMetaMock(@NotNull BundleMeta meta)
 	{
 		super(meta);
 
