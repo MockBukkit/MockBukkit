@@ -295,6 +295,8 @@ public class BlockStateMock implements BlockState
 		}
 		switch (block.getType())
 		{
+		case BREWING_STAND:
+			return new BrewingStandMock(block);
 		case BLAST_FURNACE:
 			return new BlastFurnaceMock(block);
 		case COMPARATOR:
