@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.block.state;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
+import com.destroystokyo.paper.MaterialTags;
 import com.google.common.base.Preconditions;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -289,13 +290,17 @@ public class BlockStateMock implements BlockState
 		{
 			return new BannerMock(block);
 		}
-		else if (Tag.SHULKER_BOXES.isTagged(block.getType()))
+		else if (MaterialTags.SHULKER_BOXES.isTagged(block.getType()))
 		{
 			return new ShulkerBoxMock(block);
 		}
-		else if (Tag.SIGNS.isTagged(block.getType()))
+		else if (MaterialTags.SIGNS.isTagged(block.getType()))
 		{
 			return new SignMock(block);
+		}
+		else if (MaterialTags.BEDS.isTagged(block))
+		{
+			return new BedMock(block);
 		}
 		switch (block.getType())
 		{
