@@ -4,10 +4,10 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.BlockMock;
+import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.potion.PotionEffectType;
 import org.junit.jupiter.api.AfterEach;
@@ -110,12 +110,13 @@ class BeaconMockTest
 	@Test
 	void getEntitiesInRange_InRange_NotEmpty()
 	{
-		Entity zombie = this.world.spawnEntity(new Location(this.world, 4, 10, 0), EntityType.ZOMBIE);
+		PlayerMock player = server.addPlayer();
+		player.setLocation(new Location(this.world, 4, 10, 0));
 		this.beacon.setEffectRange(5.0);
 
 		assertFalse(this.beacon.getEntitiesInRange().isEmpty());
 		assertEquals(1, this.beacon.getEntitiesInRange().size());
-		assertEquals(zombie, this.beacon.getEntitiesInRange().stream().findFirst().orElse(null));
+		assertEquals(player, this.beacon.getEntitiesInRange().stream().findFirst().orElse(null));
 	}
 
 	@Test
