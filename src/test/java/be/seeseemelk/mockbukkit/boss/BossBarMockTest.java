@@ -20,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BossBarMockTest
 {
+
 	private ServerMock server;
 	private BossBar bar;
 
@@ -28,7 +29,7 @@ class BossBarMockTest
 	{
 		server = MockBukkit.mock();
 		bar = server.createBossBar("Test bossbar", BarColor.BLUE, BarStyle.SOLID, BarFlag.PLAY_BOSS_MUSIC,
-		                           BarFlag.CREATE_FOG);
+				BarFlag.CREATE_FOG);
 	}
 
 	@AfterEach
