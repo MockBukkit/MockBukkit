@@ -299,6 +299,8 @@ public class BlockStateMock implements BlockState
 		}
 		switch (block.getType())
 		{
+		case BEACON:
+			return new BeaconMock(block);
 		case BEEHIVE:
 			return new BeehiveMock(block);
 		case BREWING_STAND:
