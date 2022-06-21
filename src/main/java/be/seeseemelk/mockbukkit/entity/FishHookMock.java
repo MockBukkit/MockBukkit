@@ -3,7 +3,6 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
-import net.kyori.adventure.text.Component;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -22,8 +21,8 @@ public class FishHookMock extends ProjectileMock implements FishHook
 	private int maxWaitTime = 600;
 	private boolean applyLure = true;
 	private double biteChance = -1;
-	private Entity hookedEntity;
-	private HookState state = HookState.UNHOOKED;
+	private @Nullable Entity hookedEntity;
+	private @NotNull HookState state = HookState.UNHOOKED;
 
 	public FishHookMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -73,7 +72,8 @@ public class FishHookMock extends ProjectileMock implements FishHook
 	{
 		if (this.biteChance == -1)
 		{
-			if (!getWorld().isClearWeather()) {
+			if (!getWorld().isClearWeather())
+			{
 				return 1 / 300.0;
 			}
 			return 1 / 500.0;
@@ -130,6 +130,7 @@ public class FishHookMock extends ProjectileMock implements FishHook
 	/**
 	 * Updates the {@link HookState} of the hook.
 	 * Normally the server does this every tick.
+	 *
 	 * @see #getState()
 	 */
 	public void updateState()
@@ -184,30 +185,9 @@ public class FishHookMock extends ProjectileMock implements FishHook
 	}
 
 	@Override
-	public String toString()
+	public @NotNull String toString()
 	{
 		return "FishingHookMock";
-	}
-
-	@Override
-	public @NotNull Component name()
-	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public @Nullable Component customName()
-	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public void customName(@Nullable Component customName)
-	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
 	}
 
 }

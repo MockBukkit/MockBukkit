@@ -11,6 +11,7 @@ import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.scheduler.BukkitWorker;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -54,7 +55,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	private int asyncTasksQueued = 0;
 	private ConcurrentMap<Integer, ScheduledTask> runners = new ConcurrentHashMap<>();
 
-	private static Runnable wrapTask(ScheduledTask task)
+	private static @NotNull Runnable wrapTask(@NotNull ScheduledTask task)
 	{
 		return () ->
 		{
@@ -96,7 +97,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	 * @param pool The pool to shut down.
 	 * @see #setShutdownTimeout(long)
 	 */
-	private void shutdownPool(ExecutorService pool)
+	private void shutdownPool(@NotNull ExecutorService pool)
 	{
 		pool.shutdown();
 		try
@@ -113,12 +114,12 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		}
 	}
 
-	public @NotNull Future<?> executeAsyncEvent(Event event)
+	public @NotNull Future<?> executeAsyncEvent(@NotNull Event event)
 	{
 		return executeAsyncEvent(event, null);
 	}
 
-	public <T extends Event> @NotNull Future<?> executeAsyncEvent(T event, Consumer<T> func)
+	public <T extends Event> @NotNull Future<?> executeAsyncEvent(@NotNull T event, @Nullable Consumer<T> func)
 	{
 		Preconditions.checkNotNull(event, "Cannot call a null event!");
 		Future<?> future = asyncEventExecutor.submit(() ->
@@ -612,7 +613,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	private static class TaskList
 	{
 
-		private final Map<Integer, ScheduledTask> tasks;
+		private final @NotNull Map<Integer, ScheduledTask> tasks;
 
 		private TaskList()
 		{
@@ -625,7 +626,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		 * @param task the task to remove.
 		 * @return true on success.
 		 */
-		private boolean addTask(ScheduledTask task)
+		private boolean addTask(@Nullable ScheduledTask task)
 		{
 			if (task == null)
 			{
@@ -636,7 +637,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		}
 
 
-		protected final List<ScheduledTask> getCurrentTaskList()
+		protected final @NotNull List<ScheduledTask> getCurrentTaskList()
 		{
 			List<ScheduledTask> out = new ArrayList<>();
 			if (tasks.size() != 0)

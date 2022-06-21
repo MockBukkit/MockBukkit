@@ -15,6 +15,7 @@ import java.util.Arrays;
 
 public class PlayerInventoryMock extends InventoryMock implements PlayerInventory, EntityEquipment
 {
+
 	protected static final int HOTBAR = 0;
 	protected static final int SLOT_BAR = 9;
 	protected static final int BOOTS = 36;
@@ -36,7 +37,7 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	}
 
 	@Override
-	public ItemStack[] getStorageContents()
+	public ItemStack @NotNull [] getStorageContents()
 	{
 		return Arrays.copyOfRange(getContents(), 0, 36);
 	}
@@ -49,13 +50,13 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	}
 
 	@Override
-	public ItemStack[] getArmorContents()
+	public ItemStack @NotNull [] getArmorContents()
 	{
 		return Arrays.copyOfRange(getContents(), BOOTS, BOOTS + 4);
 	}
 
 	@Override
-	public ItemStack[] getExtraContents()
+	public ItemStack @NotNull [] getExtraContents()
 	{
 		return Arrays.copyOfRange(getContents(), OFF_HAND, OFF_HAND + 1);
 	}
@@ -85,7 +86,7 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	}
 
 	@Override
-	public void setArmorContents(ItemStack[] items)
+	public void setArmorContents(ItemStack @Nullable [] items)
 	{
 		if (items == null)
 			throw new NullPointerException("ItemStack was null");
@@ -183,7 +184,7 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	}
 
 	@Override
-	public void setExtraContents(ItemStack[] items)
+	public void setExtraContents(ItemStack @Nullable [] items)
 	{
 		if (items == null)
 			throw new NullPointerException("ItemStack was null");
@@ -311,15 +312,15 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	public @NotNull ItemStack getItem(@NotNull EquipmentSlot slot)
 	{
 		return switch (slot)
-		{
-		case CHEST -> getChestplate();
-		case FEET -> getBoots();
-		case HAND -> getItemInMainHand();
-		case HEAD -> getHelmet();
-		case LEGS -> getLeggings();
-		case OFF_HAND -> getItemInOffHand();
-			default -> new ItemStack(Material.AIR);
-		};
+				{
+					case CHEST -> getChestplate();
+					case FEET -> getBoots();
+					case HAND -> getItemInMainHand();
+					case HEAD -> getHelmet();
+					case LEGS -> getLeggings();
+					case OFF_HAND -> getItemInOffHand();
+					default -> new ItemStack(Material.AIR);
+				};
 	}
 
 	@Override
@@ -339,7 +340,7 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 		case HEAD -> setHelmet(item);
 		case LEGS -> setLeggings(item);
 		case OFF_HAND -> setItemInOffHand(item);
-			default ->
+		default ->
 		{
 		}
 		}
@@ -376,4 +377,5 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	{
 		return itemStack == null ? new ItemStack(Material.AIR) : itemStack;
 	}
+
 }

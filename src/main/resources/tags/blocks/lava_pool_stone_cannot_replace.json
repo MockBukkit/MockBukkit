@@ -1,8 +1,8 @@
 {
-  "replace": false,
-  "values": [
-    "#minecraft:features_cannot_replace",
-    "#minecraft:leaves",
-    "#minecraft:logs"
-  ]
+    "replace": false,
+    "values": [
+        "#minecraft:features_cannot_replace",
+        "#minecraft:leaves",
+        "#minecraft:logs"
+    ]
 }

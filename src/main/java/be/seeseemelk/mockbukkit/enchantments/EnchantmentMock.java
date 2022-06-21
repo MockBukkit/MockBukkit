@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.enchantments;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import com.google.common.base.Preconditions;
 import io.papermc.paper.enchantments.EnchantmentRarity;
 import net.kyori.adventure.text.Component;
 import org.bukkit.NamespacedKey;
@@ -15,12 +16,21 @@ import java.util.Set;
 
 public class EnchantmentMock extends Enchantment
 {
-	private String name;
+
+	private final @NotNull String name;
 	private int maxLevel;
 	private int startLevel;
 	private EnchantmentTarget itemTarget;
 	private boolean isTreasure;
 	private boolean isCursed;
+
+	public EnchantmentMock(@NotNull NamespacedKey key, @NotNull String name)
+	{
+		super(key);
+		Preconditions.checkNotNull(key, "Key cannot be null");
+		Preconditions.checkNotNull(name, "Name cannot be null");
+		this.name = name;
+	}
 
 	@Override
 	public @NotNull Component displayName(int level)
@@ -71,15 +81,6 @@ public class EnchantmentMock extends Enchantment
 		throw new UnimplementedOperationException();
 	}
 
-	public EnchantmentMock(
-	    @NotNull NamespacedKey key,
-	    String name
-	)
-	{
-		super(key);
-		this.name = name;
-	}
-
 	@Override
 	public @NotNull String getName()
 	{
@@ -89,7 +90,7 @@ public class EnchantmentMock extends Enchantment
 	@Override
 	public int getMaxLevel()
 	{
-		return maxLevel;
+		return this.maxLevel;
 	}
 
 	public void setMaxLevel(int maxLevel)
@@ -100,7 +101,7 @@ public class EnchantmentMock extends Enchantment
 	@Override
 	public int getStartLevel()
 	{
-		return startLevel;
+		return this.startLevel;
 	}
 
 	public void setStartLevel(int startLevel)
@@ -111,18 +112,19 @@ public class EnchantmentMock extends Enchantment
 	@Override
 	public @NotNull EnchantmentTarget getItemTarget()
 	{
-		return itemTarget;
+		return this.itemTarget;
 	}
 
-	public void setItemTarget(EnchantmentTarget itemTarget)
+	public void setItemTarget(@NotNull EnchantmentTarget itemTarget)
 	{
+		Preconditions.checkNotNull(itemTarget, "EnchantmentTarget cannot be null");
 		this.itemTarget = itemTarget;
 	}
 
 	@Override
 	public boolean isTreasure()
 	{
-		return isTreasure;
+		return this.isTreasure;
 	}
 
 	public void setTreasure(boolean isTreasure)
@@ -133,7 +135,7 @@ public class EnchantmentMock extends Enchantment
 	@Override
 	public boolean isCursed()
 	{
-		return isCursed;
+		return this.isCursed;
 	}
 
 	public void setCursed(boolean isCursed)
@@ -144,12 +146,14 @@ public class EnchantmentMock extends Enchantment
 	@Override
 	public boolean conflictsWith(@NotNull Enchantment other)
 	{
+		Preconditions.checkNotNull(other, "Enchantment cannot be null");
 		return false;
 	}
 
 	@Override
 	public boolean canEnchantItem(@NotNull ItemStack item)
 	{
+		Preconditions.checkNotNull(item, "Item cannot be null");
 		return false;
 	}
 

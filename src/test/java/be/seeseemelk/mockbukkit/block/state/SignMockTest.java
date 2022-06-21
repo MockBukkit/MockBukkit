@@ -1,31 +1,38 @@
 package be.seeseemelk.mockbukkit.block.state;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.BlockMock;
+import com.destroystokyo.paper.MaterialTags;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.block.Sign;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 class SignMockTest
 {
 
-	private Sign sign;
+	private WorldMock world;
+	private BlockMock block;
+	private SignMock sign;
 
 	@BeforeEach
-	void setUp() throws Exception
+	void setUp()
 	{
-		MockBukkit.mock();
-		sign = new SignMock(Material.OAK_SIGN);
+		this.world = new WorldMock();
+		this.block = world.getBlockAt(0, 10, 0);
+		this.block.setType(Material.OAK_SIGN);
+		this.sign = new SignMock(this.block);
 	}
 
 	@AfterEach
@@ -35,10 +42,33 @@ class SignMockTest
 	}
 
 	@Test
-	void testMaterialSignBlockState()
+	void constructor_Material()
 	{
-		Block block = new BlockMock(Material.OAK_SIGN);
-		assertTrue(block.getState() instanceof Sign);
+		for (Material material : MaterialTags.SIGNS.getValues())
+		{
+			assertDoesNotThrow(() -> new SignMock(material));
+		}
+	}
+
+	@Test
+	void constructor_Material_WrongType_ThrowsException()
+	{
+		assertThrowsExactly(IllegalArgumentException.class, () -> new SignMock(Material.BEDROCK));
+	}
+
+	@Test
+	void constructor_Block()
+	{
+		for (Material material : MaterialTags.SIGNS.getValues())
+		{
+			assertDoesNotThrow(() -> new SignMock(new BlockMock(material)));
+		}
+	}
+
+	@Test
+	void constructor_Block_WrongType_ThrowsException()
+	{
+		assertThrowsExactly(IllegalArgumentException.class, () -> new SignMock(new BlockMock(Material.BEDROCK)));
 	}
 
 	@Test
@@ -102,6 +132,16 @@ class SignMockTest
 		assertThrows(NullPointerException.class, () -> sign.line(2, null));
 	}
 
+	@Test
+	void getSnapshot_DifferentInstance()
+	{
+		assertNotSame(sign, sign.getSnapshot());
+	}
 
+	@Test
+	void blockStateMock_Mock_CorrectType()
+	{
+		assertInstanceOf(SignMock.class, BlockStateMock.mockState(block));
+	}
 
 }

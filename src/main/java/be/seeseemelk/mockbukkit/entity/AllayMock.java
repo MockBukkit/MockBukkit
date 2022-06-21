@@ -8,6 +8,7 @@ import org.bukkit.entity.Allay;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,10 +20,10 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class AllayMock extends CreatureMock implements Allay
 {
 
-	private final Inventory inventory;
+	private final @NotNull Inventory inventory;
 	private Material currentItem;
 
-	public AllayMock(ServerMock server, UUID uuid)
+	public AllayMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 		this.inventory = Bukkit.createInventory(null, 9);
@@ -44,7 +45,7 @@ public class AllayMock extends CreatureMock implements Allay
 	 *
 	 * @return A {@link List} of {@link ItemStack}s that the Allay is holding
 	 */
-	public ItemStack simulateItemRetrieval()
+	public @Nullable ItemStack simulateItemRetrieval()
 	{
 		ItemStack item = this.inventory.getContents()[0];
 		this.inventory.clear();

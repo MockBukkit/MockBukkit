@@ -26,9 +26,9 @@ public class MockPotionEffectType extends PotionEffectType
 	private final String name;
 	private final boolean instant;
 	private final Color color;
-	private final Map<Attribute, AttributeModifier> attributeModifiers;
+	private final @NotNull Map<Attribute, AttributeModifier> attributeModifiers;
 
-	public MockPotionEffectType(NamespacedKey key, int id, String name, boolean instant, Color color)
+	public MockPotionEffectType(@NotNull NamespacedKey key, int id, String name, boolean instant, Color color)
 	{
 		super(id, key);
 
@@ -116,7 +116,7 @@ public class MockPotionEffectType extends PotionEffectType
 	 * @param modifier  The modifier.
 	 * @return The amplified modifier value.
 	 */
-	private double getAttributeModifierValue(int amplifier, AttributeModifier modifier)
+	private double getAttributeModifierValue(int amplifier, @NotNull AttributeModifier modifier)
 	{
 		return modifier.getAmount() * (double) (amplifier + 1);
 	}

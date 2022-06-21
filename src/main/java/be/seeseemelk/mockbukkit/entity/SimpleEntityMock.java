@@ -23,7 +23,7 @@ public class SimpleEntityMock extends EntityMock
 	 * @param server The server this entity lives on.
 	 * @param uuid   The UUID that the entity should have.
 	 */
-	public SimpleEntityMock(ServerMock server, UUID uuid)
+	public SimpleEntityMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 	}
@@ -40,7 +40,7 @@ public class SimpleEntityMock extends EntityMock
 	 *
 	 * @param server The server this entity lives on.
 	 */
-	public SimpleEntityMock(ServerMock server)
+	public SimpleEntityMock(@NotNull ServerMock server)
 	{
 		this(server, UUID.randomUUID());
 	}

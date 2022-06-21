@@ -1,87 +1,66 @@
 package be.seeseemelk.mockbukkit.block.state;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import be.seeseemelk.mockbukkit.WorldMock;
+import be.seeseemelk.mockbukkit.block.BlockMock;
 import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.block.Dropper;
-import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.inventory.Inventory;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.block.BlockMock;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 class DropperMockTest
 {
 
-	private Dropper dropper;
+	private WorldMock world;
+	private BlockMock block;
+	private DropperMock dropper;
 
 	@BeforeEach
-	void setUp() throws Exception
+	void setUp()
 	{
-		MockBukkit.mock();
-		dropper = new DropperMock(Material.DROPPER);
-	}
-
-	@AfterEach
-	void tearDown() throws Exception
-	{
-		MockBukkit.unmock();
+		this.world = new WorldMock();
+		this.block = world.getBlockAt(0, 10, 0);
+		this.block.setType(Material.DROPPER);
+		this.dropper = new DropperMock(this.block);
 	}
 
 	@Test
-	void testMaterialDropperBlockState()
+	void constructor_Material()
 	{
-		Block block = new BlockMock(Material.DROPPER);
-		assertTrue(block.getState() instanceof Dropper);
+		assertDoesNotThrow(() -> new DropperMock(Material.DROPPER));
 	}
 
 	@Test
-	void testHasInventory()
+	void constructor_Material_WrongType_ThrowsException()
 	{
-		Inventory inventory = dropper.getInventory();
-		assertNotNull(inventory);
-
-		assertEquals(dropper, inventory.getHolder());
-		assertEquals(InventoryType.DROPPER, inventory.getType());
+		assertThrowsExactly(IllegalArgumentException.class, () -> new DropperMock(Material.BEDROCK));
 	}
 
 	@Test
-	void testLocking()
+	void constructor_Block()
 	{
-		String key = "key";
-
-		assertFalse(dropper.isLocked());
-		assertEquals("", dropper.getLock());
-
-		dropper.setLock("key");
-		assertTrue(dropper.isLocked());
-		assertEquals(key, dropper.getLock());
+		assertDoesNotThrow(() -> new DropperMock(new BlockMock(Material.DROPPER)));
 	}
 
 	@Test
-	void testNullLocking()
+	void constructor_Block_WrongType_ThrowsException()
 	{
-		dropper.setLock(null);
-		assertFalse(dropper.isLocked());
-		assertEquals("", dropper.getLock());
+		assertThrowsExactly(IllegalArgumentException.class, () -> new DropperMock(new BlockMock(Material.BEDROCK)));
 	}
 
 	@Test
-	void testNaming()
+	void getSnapshot_DifferentInstance()
 	{
-		String name = "Cool Dropper";
-
-		assertNull(dropper.getCustomName());
-
-		dropper.setCustomName(name);
-		assertEquals(name, dropper.getCustomName());
+		assertNotSame(dropper, dropper.getSnapshot());
 	}
+
+	@Test
+	void blockStateMock_Mock_CorrectType()
+	{
+		assertInstanceOf(DropperMock.class, BlockStateMock.mockState(block));
+	}
+
 }

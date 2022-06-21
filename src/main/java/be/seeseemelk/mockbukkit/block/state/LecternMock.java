@@ -1,5 +1,7 @@
 package be.seeseemelk.mockbukkit.block.state;
 
+import be.seeseemelk.mockbukkit.inventory.InventoryMock;
+import be.seeseemelk.mockbukkit.inventory.LecternInventoryMock;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
@@ -8,9 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
-
-import be.seeseemelk.mockbukkit.inventory.InventoryMock;
-import be.seeseemelk.mockbukkit.inventory.LecternInventoryMock;
+import org.jetbrains.annotations.Nullable;
 
 public class LecternMock extends ContainerMock implements Lectern
 {
@@ -20,11 +20,15 @@ public class LecternMock extends ContainerMock implements Lectern
 	public LecternMock(@NotNull Material material)
 	{
 		super(material);
+		if (material != Material.LECTERN)
+			throw new IllegalArgumentException("Cannot create a Lectern state from " + material);
 	}
 
 	protected LecternMock(@NotNull Block block)
 	{
 		super(block);
+		if (block.getType() != Material.LECTERN)
+			throw new IllegalArgumentException("Cannot create a Lectern state from " + block.getType());
 	}
 
 	protected LecternMock(@NotNull LecternMock state)
@@ -34,7 +38,7 @@ public class LecternMock extends ContainerMock implements Lectern
 	}
 
 	@Override
-	protected InventoryMock createInventory()
+	protected @NotNull InventoryMock createInventory()
 	{
 		return new LecternInventoryMock(this);
 	}
@@ -60,9 +64,8 @@ public class LecternMock extends ContainerMock implements Lectern
 		this.currentPage = Math.min(Math.max(0, page), maxPages - 1);
 	}
 
-	private int getMaxPages(ItemStack book)
+	private int getMaxPages(@Nullable ItemStack book)
 	{
-
 		if (book == null || !book.hasItemMeta())
 		{
 			return 1;

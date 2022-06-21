@@ -10,10 +10,10 @@ import org.opentest4j.TestAbortedException;
  * This is a {@link TestAbortedException} and causes your Test to be skipped instead of just failing.
  *
  * @author seeseemelk
- *
  */
 public class UnimplementedOperationException extends TestAbortedException
 {
+
 	private static final long serialVersionUID = 1L;
 
 	public UnimplementedOperationException()
@@ -25,4 +25,5 @@ public class UnimplementedOperationException extends TestAbortedException
 	{
 		super(message);
 	}
+
 }

@@ -3,12 +3,15 @@ package be.seeseemelk.mockbukkit.scoreboard;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class ScoreMock implements Score
 {
+
 	private final ObjectiveMock objective;
 	private final String entry;
-	private OfflinePlayer player = null;
+	private @Nullable OfflinePlayer player = null;
 	private int score = 0;
 	private boolean set = false;
 
@@ -20,6 +23,7 @@ public class ScoreMock implements Score
 
 	/**
 	 * Sets the player that this score is tracking.
+	 *
 	 * @param player The player to track.
 	 */
 	public void setPlayer(OfflinePlayer player)
@@ -29,19 +33,19 @@ public class ScoreMock implements Score
 
 	@Override
 	@Deprecated
-	public OfflinePlayer getPlayer()
+	public @NotNull OfflinePlayer getPlayer()
 	{
 		return player;
 	}
 
 	@Override
-	public String getEntry()
+	public @NotNull String getEntry()
 	{
 		return entry;
 	}
 
 	@Override
-	public ObjectiveMock getObjective()
+	public @NotNull ObjectiveMock getObjective()
 	{
 		return objective;
 	}

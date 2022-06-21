@@ -8,13 +8,14 @@ import org.bukkit.entity.Animals;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
 public class AnimalsMock extends AgeableMock implements Animals
 {
 
-	private UUID breedCause;
+	private @Nullable UUID breedCause;
 	private int isInLoveTicks;
 
 	public AnimalsMock(@NotNull ServerMock server, @NotNull UUID uuid)
@@ -29,7 +30,7 @@ public class AnimalsMock extends AgeableMock implements Animals
 	}
 
 	@Override
-	public void setBreedCause(UUID uuid)
+	public void setBreedCause(@Nullable UUID uuid)
 	{
 		this.breedCause = uuid;
 	}
@@ -63,6 +64,7 @@ public class AnimalsMock extends AgeableMock implements Animals
 	@Override
 	public boolean isBreedItem(@NotNull Material material)
 	{
+		Preconditions.checkNotNull(material, "Material cannot be null");
 		return this.isBreedItem(new ItemStack(material));
 	}
 

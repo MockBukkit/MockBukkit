@@ -1,7 +1,7 @@
 {
-  "replace": false,
-  "values": [
-    "#minecraft:wooden_fences",
-    "minecraft:nether_brick_fence"
-  ]
+    "replace": false,
+    "values": [
+        "#minecraft:wooden_fences",
+        "minecraft:nether_brick_fence"
+    ]
 }

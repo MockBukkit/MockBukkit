@@ -18,14 +18,14 @@ import java.util.List;
 public class SuspiciousStewMetaMock extends ItemMetaMock implements SuspiciousStewMeta
 {
 
-	private List<PotionEffect> effects = new ArrayList<>();
+	private @NotNull List<PotionEffect> effects = new ArrayList<>();
 
 	public SuspiciousStewMetaMock()
 	{
 		super();
 	}
 
-	public SuspiciousStewMetaMock(SuspiciousStewMeta meta)
+	public SuspiciousStewMetaMock(@NotNull SuspiciousStewMeta meta)
 	{
 		super(meta);
 
