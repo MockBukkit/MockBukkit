@@ -5,9 +5,11 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryViewMock;
 import be.seeseemelk.mockbukkit.inventory.SimpleInventoryViewMock;
+import be.seeseemelk.mockbukkit.map.MapViewMock;
 import be.seeseemelk.mockbukkit.sound.AudioExperience;
 import be.seeseemelk.mockbukkit.sound.SoundReceiver;
 import be.seeseemelk.mockbukkit.statistic.StatisticsMock;
@@ -20,8 +22,9 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
 import io.papermc.paper.chat.ChatRenderer;
 import io.papermc.paper.event.player.AsyncChatEvent;
-import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.serializer.bungeecord.BungeeComponentSerializer;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.md_5.bungee.api.ChatMessageType;
@@ -73,10 +76,12 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerResourcePackStatusEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
@@ -123,7 +128,6 @@ import java.util.UUID;
 import java.util.concurrent.LinkedTransferQueue;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -131,12 +135,14 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 {
 
+	private boolean online;
 	private PlayerInventoryMock inventory = null;
 	private EnderChestInventoryMock enderChest = null;
+	private ServerMock server;
 	private GameMode gamemode = GameMode.SURVIVAL;
 	private GameMode previousGamemode = gamemode;
 	private Component displayName = null;
-	private String playerListName = null;
+	private Component playerListName = null;
 	private Component playerListHeader = null;
 	private Component playerListFooter = null;
 	private int expTotal = 0;
@@ -173,6 +179,8 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public PlayerMock(ServerMock server, String name)
 	{
 		this(server, name, UUID.nameUUIDFromBytes(("OfflinePlayer:" + name).getBytes(StandardCharsets.UTF_8)));
+		this.online = false;
+		this.firstPlayed = 0;
 	}
 
 	public PlayerMock(ServerMock server, String name, UUID uuid)
@@ -180,6 +188,9 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		super(server, uuid);
 		setName(name);
 		setDisplayName(name);
+		this.online = true;
+		this.server = server;
+		this.firstPlayed = System.currentTimeMillis();
 
 		if (Bukkit.getWorlds().isEmpty())
 		{
@@ -192,6 +203,55 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 		Random random = ThreadLocalRandom.current();
 		address = new InetSocketAddress("192.0.2." + random.nextInt(255), random.nextInt(32768, 65535));
+	}
+
+	/**
+	 * Simulates a disconnection from the server.
+	 *
+	 * @return True if the player was disconnected, false if they were already offline.
+	 */
+	public boolean disconnect()
+	{
+		if (!online)
+		{
+			return false;
+		}
+		this.online = false;
+		this.lastPlayed = System.currentTimeMillis();
+
+		Component message = MiniMessage.miniMessage()
+				.deserialize("<name> has left the Server!", Placeholder.component("name", this.displayName()));
+
+		PlayerQuitEvent playerQuitEvent = new PlayerQuitEvent(this, message, PlayerQuitEvent.QuitReason.DISCONNECTED);
+		Bukkit.getPluginManager().callEvent(playerQuitEvent);
+
+		this.server.getPlayerList().disconnectPlayer(this);
+
+		return true;
+	}
+
+	/**
+	 * Simulates a connection to the server.
+	 *
+	 * @return True if the player was connected, false if they were already online.
+	 */
+	public boolean reconnect()
+	{
+		if (firstPlayed == 0)
+		{
+			throw new IllegalStateException("Player was never online");
+		}
+		if (online)
+		{
+			return false;
+		}
+
+		this.online = true;
+		this.lastPlayed = System.currentTimeMillis();
+
+		server.addPlayer(this);
+
+		return true;
 	}
 
 	@Override
@@ -463,6 +523,10 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	{
 		AsyncCatcher.catchOp("open inventory");
 		closeInventory();
+		if (inventory instanceof InventoryMock inventoryMock)
+		{
+			inventoryMock.addViewers(this);
+		}
 		inventoryView = new PlayerInventoryViewMock(this, inventory);
 		return inventoryView;
 	}
@@ -474,6 +538,11 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		{
 			InventoryCloseEvent event = new InventoryCloseEvent(inventoryView);
 			Bukkit.getPluginManager().callEvent(event);
+
+			if (inventoryView.getTopInventory() instanceof InventoryMock inventoryMock)
+			{
+				inventoryMock.removeViewer(this);
+			}
 		}
 
 		// reset the cursor as it is a new InventoryView
@@ -1171,7 +1240,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public @NotNull Component displayName()
 	{
-		return displayName;
+		return this.displayName;
 	}
 
 	@Override
@@ -1184,14 +1253,14 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Deprecated
 	public @NotNull String getDisplayName()
 	{
-		return LegacyComponentSerializer.legacySection().serialize(displayName);
+		return LegacyComponentSerializer.legacySection().serialize(this.displayName);
 	}
 
 	@Override
 	@Deprecated
 	public void setDisplayName(String name)
 	{
-		this.displayName = Component.text(name);
+		this.displayName = LegacyComponentSerializer.legacySection().deserialize(name);
 	}
 
 	@Override
@@ -1224,14 +1293,14 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Deprecated
 	public @NotNull String getPlayerListName()
 	{
-		return this.playerListName == null ? getName() : this.playerListName;
+		return this.playerListName == null ? getName() : LegacyComponentSerializer.legacySection().serialize(this.playerListName);
 	}
 
 	@Override
 	@Deprecated
 	public void setPlayerListName(String name)
 	{
-		this.playerListName = name;
+		this.playerListName = LegacyComponentSerializer.legacySection().deserialize(name);
 	}
 
 	@Override
@@ -1246,6 +1315,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	{
 		return this.compassTarget;
 	}
+
 	/**
 	 * Sets the {@link InetSocketAddress} returned by {@link #getAddress}.
 	 *
@@ -1328,14 +1398,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		AsyncChatEvent asyncChatEvent = new AsyncChatEvent(
 				true,
 				this,
-				Bukkit.getOnlinePlayers().stream().map(p -> (Audience) p).collect(Collectors.toSet()),
+				new HashSet<>(Bukkit.getOnlinePlayers()),
 				ChatRenderer.defaultRenderer(),
 				Component.text(msg),
 				Component.text(msg)
 		);
-		org.bukkit.event.player.PlayerChatEvent syncEvent = new org.bukkit.event.player.PlayerChatEvent(this, msg);
+		PlayerChatEvent syncEvent = new PlayerChatEvent(this, msg);
 
-		ServerMock server = MockBukkit.getMock();
 		server.getScheduler().executeAsyncEvent(asyncChatEvent);
 		server.getScheduler().executeAsyncEvent(asyncEvent);
 		server.getPluginManager().callEvent(syncEvent);
@@ -1599,7 +1668,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 			lines = new java.util.ArrayList<>(4);
 		}
 		Preconditions.checkNotNull(loc, "Location cannot be null");
-		Preconditions.checkNotNull(dyeColor,"DyeColor cannot be null");
+		Preconditions.checkNotNull(dyeColor, "DyeColor cannot be null");
 		if (lines.size() < 4)
 		{
 			throw new IllegalArgumentException("Must have at least 4 lines");
@@ -1628,7 +1697,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		}
 
 		Preconditions.checkNotNull(loc, "Location cannot be null");
-		Preconditions.checkNotNull(dyeColor,"DyeColor cannot be null");
+		Preconditions.checkNotNull(dyeColor, "DyeColor cannot be null");
 		if (lines.length < 4)
 		{
 			throw new IllegalArgumentException("Must have at least 4 lines");
@@ -1638,7 +1707,12 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void sendMap(@NotNull MapView map)
 	{
-		// Pretend we sent the map change.
+		if (!(map instanceof MapViewMock mapView))
+			return;
+
+		mapView.render(this);
+
+		// Pretend the map packet gets sent.
 	}
 
 	@Override
@@ -1674,8 +1748,8 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Deprecated
 	public void setPlayerListHeaderFooter(@Nullable BaseComponent header, @Nullable BaseComponent footer)
 	{
-		this.playerListHeader = BungeeComponentSerializer.get().deserialize(new BaseComponent[] { header });
-		this.playerListFooter = BungeeComponentSerializer.get().deserialize(new BaseComponent[] { footer });
+		this.playerListHeader = BungeeComponentSerializer.get().deserialize(new BaseComponent[]{ header });
+		this.playerListFooter = BungeeComponentSerializer.get().deserialize(new BaseComponent[]{ footer });
 	}
 
 	@Override
@@ -1876,26 +1950,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable Component customName()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void customName(@Nullable Component customName)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public String getCustomName()
-	{
-		return getDisplayName();
 	}
 
 	@Override
@@ -3076,7 +3130,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 
-
 	@Override
 	public int getPing()
 	{
@@ -3203,11 +3256,10 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		@Deprecated
 		public void sendMessage(@NotNull ChatMessageType position, @NotNull BaseComponent component)
 		{
-			PlayerMock.this.sendMessage(component.toLegacyText());
+			Component comp = BungeeComponentSerializer.get().deserialize(new BaseComponent[]{ component });
+			PlayerMock.this.sendMessage(comp);
 		}
 
 	}
-
-
 
 }
