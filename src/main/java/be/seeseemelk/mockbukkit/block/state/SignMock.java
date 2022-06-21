@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.block.state;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import com.destroystokyo.paper.MaterialTags;
 import com.google.common.base.Preconditions;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
@@ -27,14 +28,14 @@ public class SignMock extends TileStateMock implements Sign
 	public SignMock(@NotNull Material material)
 	{
 		super(material);
-		if (!material.name().endsWith("_SIGN"))
+		if (!MaterialTags.SIGNS.isTagged(material))
 			throw new IllegalArgumentException("Cannot create a Sign state from " + material);
 	}
 
 	protected SignMock(@NotNull Block block)
 	{
 		super(block);
-		if (!block.getType().name().endsWith("_SIGN"))
+		if (!MaterialTags.SIGNS.isTagged(block))
 			throw new IllegalArgumentException("Cannot create a Sign state from " + block.getType());
 	}
 
