@@ -1,112 +1,67 @@
 package be.seeseemelk.mockbukkit.block.state;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.block.Chest;
-import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.inventory.Inventory;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 
 class ChestMockTest
 {
 
-	private Chest chest;
+	private WorldMock world;
+	private BlockMock block;
+	private ChestMock chest;
 
 	@BeforeEach
-	void setUp() throws Exception
+	void setUp()
 	{
-		MockBukkit.mock();
-		chest = new ChestMock(Material.CHEST);
-	}
-
-	@AfterEach
-	void tearDown() throws Exception
-	{
-		MockBukkit.unmock();
+		this.world = new WorldMock();
+		this.block = world.getBlockAt(0, 10, 0);
+		this.block.setType(Material.CHEST);
+		this.chest = new ChestMock(this.block);
 	}
 
 	@Test
-	void testMaterialChestBlockState()
+	void constructor_Material()
 	{
-		Block block = new BlockMock(Material.CHEST);
-		assertTrue(block.getState() instanceof Chest);
+		assertDoesNotThrow(() -> new ChestMock(Material.CHEST));
 	}
 
 	@Test
-	void testHasInventory()
+	void constructor_Material_WrongType_ThrowsException()
 	{
-		Inventory inventory = chest.getInventory();
-		assertNotNull(inventory);
-		assertEquals(inventory, chest.getBlockInventory());
-
-		assertEquals(chest, inventory.getHolder());
-		assertEquals(InventoryType.CHEST, inventory.getType());
+		assertThrowsExactly(IllegalArgumentException.class, () -> new ChestMock(Material.BEDROCK));
 	}
 
 	@Test
-	void testLocking()
+	void constructor_Block()
 	{
-		String key = "key";
-
-		assertFalse(chest.isLocked());
-		assertEquals("", chest.getLock());
-
-		chest.setLock("key");
-		assertTrue(chest.isLocked());
-		assertEquals(key, chest.getLock());
+		assertDoesNotThrow(() -> new ChestMock(new BlockMock(Material.CHEST)));
 	}
 
 	@Test
-	void testNullLocking()
+	void constructor_Block_WrongType_ThrowsException()
 	{
-		chest.setLock(null);
-		assertFalse(chest.isLocked());
-		assertEquals("", chest.getLock());
+		assertThrowsExactly(IllegalArgumentException.class, () -> new ChestMock(new BlockMock(Material.BEDROCK)));
 	}
 
 	@Test
-	void testNaming()
+	void getSnapshot_DifferentInstance()
 	{
-		String name = "Cool Chest";
-
-		assertNull(chest.getCustomName());
-
-		chest.setCustomName(name);
-		assertEquals(name, chest.getCustomName());
+		assertNotSame(chest, chest.getSnapshot());
 	}
 
 	@Test
-	void testOpen()
+	void blockStateMock_Mock_CorrectType()
 	{
-		chest.open();
-		assertTrue(chest.isOpen());
+		assertInstanceOf(ChestMock.class, BlockStateMock.mockState(block));
 	}
 
-	@Test
-	void testClose()
-	{
-		assertFalse(chest.isOpen());
-		chest.open();
-		chest.close();
-		assertFalse(chest.isOpen());
-	}
-
-	@Test
-	void testIsOpen()
-	{
-		assertFalse(chest.isOpen());
-		chest.open();
-		assertTrue(chest.isOpen());
-	}
 }

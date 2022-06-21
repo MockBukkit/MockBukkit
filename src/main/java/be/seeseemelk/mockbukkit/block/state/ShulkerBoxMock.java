@@ -4,8 +4,10 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import be.seeseemelk.mockbukkit.inventory.ShulkerBoxInventoryMock;
 import com.google.common.base.Preconditions;
+import com.destroystokyo.paper.MaterialTags;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
+import org.bukkit.Tag;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.ShulkerBox;
@@ -28,12 +30,16 @@ public class ShulkerBoxMock extends ContainerMock implements ShulkerBox
 	public ShulkerBoxMock(@NotNull Material material)
 	{
 		super(material);
+		if (!MaterialTags.SHULKER_BOXES.isTagged(material))
+			throw new IllegalArgumentException("Cannot create a Shulker Box state from " + material);
 		this.color = getFromMaterial(material);
 	}
 
 	protected ShulkerBoxMock(@NotNull Block block)
 	{
 		super(block);
+		if (!MaterialTags.SHULKER_BOXES.isTagged(block))
+			throw new IllegalArgumentException("Cannot create a Shulker Box state from " + block.getType());
 		this.color = getFromMaterial(block.getType());
 	}
 

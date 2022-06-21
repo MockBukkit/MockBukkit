@@ -1,15 +1,14 @@
 package be.seeseemelk.mockbukkit.block.state;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.inventory.DropperInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Dropper;
 import org.bukkit.loot.LootTable;
 import org.jetbrains.annotations.NotNull;
-
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.inventory.DropperInventoryMock;
-import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
@@ -18,7 +17,6 @@ import java.util.UUID;
  * This {@link ContainerMock} represents a {@link Dropper}.
  *
  * @author TheBusyBiscuit
- *
  */
 public class DropperMock extends ContainerMock implements Dropper
 {
@@ -26,11 +24,15 @@ public class DropperMock extends ContainerMock implements Dropper
 	public DropperMock(@NotNull Material material)
 	{
 		super(material);
+		if (material != Material.DROPPER)
+			throw new IllegalArgumentException("Cannot create a Dropper state from " + material);
 	}
 
 	protected DropperMock(@NotNull Block block)
 	{
 		super(block);
+		if (block.getType() != Material.DROPPER)
+			throw new IllegalArgumentException("Cannot create a Dropper state from " + block.getType());
 	}
 
 	protected DropperMock(@NotNull DropperMock state)
