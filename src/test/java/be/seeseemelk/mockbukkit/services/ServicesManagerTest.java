@@ -1,24 +1,24 @@
 package be.seeseemelk.mockbukkit.services;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.Set;
-
+import be.seeseemelk.mockbukkit.EmptyPlugin;
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.ServerMock;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.ServicePriority;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import be.seeseemelk.mockbukkit.EmptyPlugin;
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.ServerMock;
+import java.util.Set;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ServicesManagerTest
 {
+
 	private ServerMock server;
 	private EmptyPlugin plugin;
 
@@ -55,7 +55,7 @@ class ServicesManagerTest
 		// Should be the first object
 		assertEquals(obj2, server.getServicesManager().load(Object.class));
 		RegisteredServiceProvider<Object> registeredServiceProvider = server.getServicesManager()
-		        .getRegistration(Object.class);
+				.getRegistration(Object.class);
 		assertNotNull(registeredServiceProvider);
 		assertEquals(ServicePriority.High, registeredServiceProvider.getPriority());
 		assertEquals(3, server.getServicesManager().getRegistrations(Object.class).size());
@@ -89,7 +89,7 @@ class ServicesManagerTest
 		server.getServicesManager().register(Object.class, object, plugin, ServicePriority.Normal);
 
 		RegisteredServiceProvider<Object> registeredServiceProvider = server.getServicesManager()
-		        .getRegistration(Object.class);
+				.getRegistration(Object.class);
 		assertNotNull(registeredServiceProvider);
 		assertEquals(object, registeredServiceProvider.getProvider());
 	}
@@ -173,4 +173,5 @@ class ServicesManagerTest
 		assertTrue(server.getServicesManager().isProvidedFor(Object.class));
 		assertTrue(server.getServicesManager().isProvidedFor(ServicesManagerTest.class));
 	}
+
 }

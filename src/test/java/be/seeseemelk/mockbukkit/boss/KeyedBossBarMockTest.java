@@ -19,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class KeyedBossBarMockTest
 {
+
 	private ServerMock server;
 
 	@BeforeEach
@@ -38,7 +39,7 @@ class KeyedBossBarMockTest
 	void testKeyedBossBar()
 	{
 		KeyedBossBar bar = server.createBossBar(new NamespacedKey("mockbukkittest", "bossbar1"), "Boss bar 1",
-		                                        BarColor.WHITE, BarStyle.SEGMENTED_10);
+				BarColor.WHITE, BarStyle.SEGMENTED_10);
 		assertNotNull(bar);
 
 		// Make sure it initalized correctly
@@ -62,6 +63,7 @@ class KeyedBossBarMockTest
 	void testNullKey()
 	{
 		assertThrows(NullPointerException.class,
-		             () -> server.createBossBar(null, "Boss bar 1", BarColor.WHITE, BarStyle.SEGMENTED_10));
+				() -> server.createBossBar(null, "Boss bar 1", BarColor.WHITE, BarStyle.SEGMENTED_10));
 	}
+
 }

@@ -1,14 +1,15 @@
 package be.seeseemelk.mockbukkit;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.util.Date;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Date;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 class MockBanList_MockBanEntryListTest
 {
+
 	private Date date;
 	private MockBanList.MockBanEntry entry;
 
@@ -59,4 +60,5 @@ class MockBanList_MockBanEntryListTest
 		entry.setReason("other reason");
 		assertEquals("other reason", entry.getReason());
 	}
+
 }
