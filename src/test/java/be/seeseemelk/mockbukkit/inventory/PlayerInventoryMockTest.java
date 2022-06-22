@@ -1,12 +1,8 @@
 package be.seeseemelk.mockbukkit.inventory;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import org.bukkit.Material;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
@@ -14,12 +10,16 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.entity.PlayerMock;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class PlayerInventoryMockTest
 {
+
 	private ServerMock server;
 	private PlayerInventoryMock inventory;
 
@@ -210,7 +210,7 @@ class PlayerInventoryMockTest
 		ItemStack leggings = new ItemStack(Material.DIAMOND_LEGGINGS);
 		ItemStack chestplate = new ItemStack(Material.DIAMOND_CHESTPLATE);
 		ItemStack helmet = new ItemStack(Material.DIAMOND_HELMET);
-		ItemStack[] contents = {boots, leggings, chestplate, helmet};
+		ItemStack[] contents = { boots, leggings, chestplate, helmet };
 		inventory.setArmorContents(contents);
 		assertEquals(boots, inventory.getBoots());
 		assertEquals(leggings, inventory.getLeggings());
@@ -231,7 +231,7 @@ class PlayerInventoryMockTest
 	void setExtraContents_NewItem_OffHandSet()
 	{
 		ItemStack item = new ItemStack(Material.STONE);
-		inventory.setExtraContents(new ItemStack[] {item});
+		inventory.setExtraContents(new ItemStack[]{ item });
 		ItemStack[] contents = inventory.getExtraContents();
 		assertEquals(item, contents[0]);
 		assertEquals(item, inventory.getItemInOffHand());
@@ -274,4 +274,5 @@ class PlayerInventoryMockTest
 		assertNull(inventory.getItem(EquipmentSlot.CHEST));
 		assertNull(inventory.getChestplate());
 	}
+
 }

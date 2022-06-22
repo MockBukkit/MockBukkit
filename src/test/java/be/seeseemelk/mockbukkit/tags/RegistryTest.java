@@ -1,13 +1,6 @@
 package be.seeseemelk.mockbukkit.tags;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
-
-import java.io.FileNotFoundException;
-import java.util.HashSet;
-import java.util.Set;
-
+import be.seeseemelk.mockbukkit.MockBukkit;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.jetbrains.annotations.NotNull;
@@ -16,7 +9,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
+import java.io.FileNotFoundException;
+import java.util.HashSet;
+import java.util.Set;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class RegistryTest
 {

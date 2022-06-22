@@ -2,27 +2,24 @@ package be.seeseemelk.mockbukkit.inventory;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.inventory.meta.ArmorStandMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.AxolotlBucketMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.BannerMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.BookMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.BundleMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.CompassMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.CrossbowMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.EnchantedBookMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.FireworkEffectMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.FireworkMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.KnowledgeBookMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.LeatherArmorMetaMock;
+import be.seeseemelk.mockbukkit.inventory.meta.MapMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.PotionMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.SkullMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.SpawnEggMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.SuspiciousStewMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.BundleMetaMock;
 import be.seeseemelk.mockbukkit.inventory.meta.TropicalFishBucketMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.ArmorStandMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.TropicalFishBucketMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.AxolotlBucketMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.MapMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.CompassMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.CrossbowMetaMock;
-
 import com.destroystokyo.paper.MaterialTags;
 import org.bukkit.Material;
 import org.bukkit.Tag;
@@ -31,8 +28,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -160,4 +155,5 @@ class ItemFactoryMockTest
 		ItemMeta newMeta = factory.asMetaFor(meta, stack);
 		assertEquals(meta, newMeta);
 	}
+
 }
