@@ -1,15 +1,10 @@
 package be.seeseemelk.mockbukkit.block;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import be.seeseemelk.mockbukkit.ChunkCoordinate;
 import be.seeseemelk.mockbukkit.ChunkMock;
 import be.seeseemelk.mockbukkit.Coordinate;
+import be.seeseemelk.mockbukkit.WorldMock;
+import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -19,11 +14,16 @@ import org.bukkit.block.BlockFace;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import be.seeseemelk.mockbukkit.WorldMock;
-import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BlockMockTest
 {
+
 	private BlockMock block;
 
 	@BeforeEach
