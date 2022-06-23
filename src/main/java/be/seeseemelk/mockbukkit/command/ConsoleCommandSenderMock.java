@@ -61,27 +61,25 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	@Override
 	public boolean isPermissionSet(String name)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return isOp();
 	}
 
 	@Override
 	public boolean isPermissionSet(Permission perm)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return isOp();
 	}
 
 	@Override
 	public boolean hasPermission(String name)
 	{
-		return true;
+		return isOp();
 	}
 
 	@Override
 	public boolean hasPermission(Permission perm)
 	{
-		return true;
+		return isOp();
 	}
 
 	@Override
@@ -136,6 +134,7 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	@Override
 	public boolean isOp()
 	{
+		// Return true since we are the console sender
 		return true;
 	}
 
