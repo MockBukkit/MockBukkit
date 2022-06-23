@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assumptions.assumeFalse;
 
 class ObjectiveMockTest
 {
+
 	private ServerMock server;
 	private ScoreboardMock scoreboard;
 	private ObjectiveMock objective;

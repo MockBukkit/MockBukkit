@@ -1,11 +1,5 @@
 package be.seeseemelk.mockbukkit;
 
-import java.io.File;
-import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.BrokenBarrierException;
-import java.util.concurrent.CyclicBarrier;
-
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.EventHandler;
@@ -20,8 +14,15 @@ import org.bukkit.plugin.java.JavaPluginLoader;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.File;
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CyclicBarrier;
+
 public class TestPlugin extends JavaPlugin implements Listener
 {
+
 	public boolean onEnableExecuted = false;
 	public boolean onDisableExecuted = false;
 	public CommandSender commandSender;
@@ -131,4 +132,5 @@ public class TestPlugin extends JavaPlugin implements Listener
 			}
 		}
 	}
+
 }

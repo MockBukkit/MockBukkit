@@ -1,15 +1,14 @@
 package be.seeseemelk.mockbukkit.command;
 
-import org.bukkit.ChatColor;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import net.md_5.bungee.api.chat.TextComponent;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class PlayerMessagingTest
 {
@@ -45,4 +44,5 @@ class PlayerMessagingTest
 		sender.sendMessage("Spigot message");
 		assertThrows(AssertionError.class, () -> sender.assertSaid("Some other message"));
 	}
+
 }

@@ -1,5 +1,12 @@
 package be.seeseemelk.mockbukkit.scoreboard;
 
+import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.Objective;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.util.Set;
+
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -8,15 +15,9 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.Set;
-
-import org.bukkit.scoreboard.DisplaySlot;
-import org.bukkit.scoreboard.Objective;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 class ScoreboardMockTest
 {
+
 	private ScoreboardMock scoreboard;
 
 	@BeforeEach
@@ -99,4 +100,5 @@ class ScoreboardMockTest
 		assertDoesNotThrow(() -> scoreboard.registerNewTeam("blue"));
 		assertThrows(IllegalArgumentException.class, () -> scoreboard.registerNewTeam("blue"));
 	}
+
 }

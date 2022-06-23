@@ -18,7 +18,6 @@ import java.util.Set;
  * in that class only work during the server's runtime.
  *
  * @author TheBusyBiscuit
- *
  */
 class EnchantmentMock extends Enchantment
 {
@@ -131,4 +130,5 @@ class EnchantmentMock extends Enchantment
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
+
 }

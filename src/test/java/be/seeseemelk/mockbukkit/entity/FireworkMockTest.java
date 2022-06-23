@@ -109,4 +109,5 @@ class FireworkMockTest
 		Firework firework = new FireworkMock(server, UUID.randomUUID());
 		assertThrows(NullPointerException.class, () -> firework.setFireworkMeta(null));
 	}
+
 }
