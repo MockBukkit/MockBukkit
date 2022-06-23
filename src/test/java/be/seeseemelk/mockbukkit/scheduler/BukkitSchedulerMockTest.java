@@ -200,7 +200,9 @@ class BukkitSchedulerMockTest
 	void cancellingAsyncTaskDecreasesNumberOfQueuedAsyncTasks()
 	{
 		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
-		BukkitTask task = scheduler.runTaskLaterAsynchronously(null, () -> {}, 1);
+		BukkitTask task = scheduler.runTaskLaterAsynchronously(null, () ->
+		{
+		}, 1);
 		assertEquals(1, scheduler.getNumberOfQueuedAsyncTasks());
 		task.cancel();
 		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
@@ -214,9 +216,15 @@ class BukkitSchedulerMockTest
 		Plugin plugin = server.getPluginManager().getPlugin("MockBukkitTestPlugin");
 		BukkitSchedulerMock scheduler1 = server.getScheduler();
 		assertEquals(0, scheduler1.getNumberOfQueuedAsyncTasks());
-		scheduler1.runTaskLaterAsynchronously(plugin, () -> {}, 5);
-		scheduler1.runTaskLaterAsynchronously(plugin, () -> {}, 10);
-		BukkitTask task = scheduler1.runTaskLaterAsynchronously(null, () -> {}, 5);
+		scheduler1.runTaskLaterAsynchronously(plugin, () ->
+		{
+		}, 5);
+		scheduler1.runTaskLaterAsynchronously(plugin, () ->
+		{
+		}, 10);
+		BukkitTask task = scheduler1.runTaskLaterAsynchronously(null, () ->
+		{
+		}, 5);
 		assertEquals(3, scheduler1.getNumberOfQueuedAsyncTasks());
 		scheduler1.cancelTasks(plugin);
 		assertEquals(1, scheduler1.getNumberOfQueuedAsyncTasks());
@@ -266,7 +274,7 @@ class BukkitSchedulerMockTest
 		scheduler.performOneTick();
 		assertEquals(2, scheduler.getActiveRunningCount());
 		scheduler.setShutdownTimeout(300);
-		assertThrows(RuntimeException.class, ()->
+		assertThrows(RuntimeException.class, () ->
 		{
 			scheduler.shutdown();
 		});
