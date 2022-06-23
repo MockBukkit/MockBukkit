@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class HumanEntityMockTest
 {
 
-	private static int[] expRequired =
+	private static final int[] expRequired =
 			{
 					7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 42, 47, 52, 57, 62, 67, 72, 77, 82, 87, 92, 97, 102,
 					107, 112, 121, 130, 139, 148, 157, 166, 175, 184, 193
