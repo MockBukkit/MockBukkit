@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.command;
 
+import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import net.kyori.adventure.text.Component;
@@ -10,11 +11,14 @@ import org.bukkit.conversations.ConversationAbandonedEvent;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
+import org.bukkit.permissions.PermissionRemovedExecutor;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Locale;
 import java.util.Queue;
 import java.util.Set;
 import java.util.UUID;
@@ -76,12 +80,13 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	@Override
 	public boolean hasPermission(@NotNull String name)
 	{
+		MockBukkit.ensureMocking();
 		if (isPermissionSet(name))
 		{
 			return true;
 		}
 
-		Permission perm = server.getPluginManager().getPermission(name);
+		Permission perm = MockBukkit.getMock().getPluginManager().getPermission(name);
 		return perm != null ? hasPermission(perm) : Permission.DEFAULT_PERMISSION.getValue(isOp());
 	}
 
@@ -150,7 +155,7 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	@Override
 	public void recalculatePermissions()
 	{
-		
+
 	}
 
 	@Override
