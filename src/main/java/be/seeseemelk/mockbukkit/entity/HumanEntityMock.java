@@ -46,9 +46,6 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	protected int expLevel = 0;
 	private float saturation = 5.0F;
 	private int foodLevel = 20;
-
-
-
 	protected HumanEntityMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
@@ -80,8 +77,7 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	{
 		if (inventoryView instanceof PlayerInventoryViewMock)
 		{
-			InventoryCloseEvent event = new InventoryCloseEvent(inventoryView);
-			Bukkit.getPluginManager().callEvent(event);
+			new InventoryCloseEvent(inventoryView).callEvent();
 
 			if (inventoryView.getTopInventory() instanceof InventoryMock inventoryMock)
 			{
@@ -90,14 +86,14 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 		}
 
 		// reset the cursor as it is a new InventoryView
-		cursor = null;
+		this.cursor = null;
 		inventoryView = new SimpleInventoryViewMock(this, null, inventory, InventoryType.CRAFTING);
 	}
 
 	@Override
 	public @NotNull InventoryView getOpenInventory()
 	{
-		return inventoryView;
+		return this.inventoryView;
 	}
 
 	@Override
@@ -133,8 +129,6 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	{
 		this.cursor = item == null ? null : item.clone();
 	}
-
-
 	@Override
 	public @Nullable Location getLastDeathLocation()
 	{
@@ -239,8 +233,6 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
-
 	@Override
 	public @NotNull ItemStack getItemInHand()
 	{
@@ -252,8 +244,6 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	{
 		getInventory().setItemInMainHand(item);
 	}
-
-
 	@Override
 	public boolean hasCooldown(@NotNull Material material)
 	{
@@ -492,7 +482,7 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	@Override
 	public int getFoodLevel()
 	{
-		return foodLevel;
+		return this.foodLevel;
 	}
 
 	@Override
