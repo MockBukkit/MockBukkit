@@ -75,15 +75,13 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	@Override
 	public boolean hasPermission(String name)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return true;
 	}
 
 	@Override
 	public boolean hasPermission(Permission perm)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return true;
 	}
 
 	@Override
