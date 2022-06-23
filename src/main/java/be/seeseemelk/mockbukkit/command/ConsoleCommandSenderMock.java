@@ -23,6 +23,7 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 {
 
 	private final Queue<String> messages = new LinkedList<>();
+	private final Set<PermissionAttachment> permissionAttachments = new HashSet<>();
 
 	@Override
 	public void sendMessage(@NotNull String message)
@@ -59,69 +60,97 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	}
 
 	@Override
-	public boolean isPermissionSet(String name)
+	public boolean isPermissionSet(@NotNull String name)
 	{
-		return isOp();
+		return permissionAttachments.stream()
+				.map(PermissionAttachment::getPermissions)
+				.anyMatch(permissions -> permissions.containsKey(name) && permissions.get(name));
 	}
 
 	@Override
 	public boolean isPermissionSet(Permission perm)
 	{
-		return isOp();
+		return isPermissionSet(perm.getName().toLowerCase(Locale.ENGLISH));
 	}
 
 	@Override
-	public boolean hasPermission(String name)
+	public boolean hasPermission(@NotNull String name)
 	{
-		return isOp();
+		if (isPermissionSet(name))
+		{
+			return true;
+		}
+
+		Permission perm = server.getPluginManager().getPermission(name);
+		return perm != null ? hasPermission(perm) : Permission.DEFAULT_PERMISSION.getValue(isOp());
 	}
 
 	@Override
-	public boolean hasPermission(Permission perm)
+	public boolean hasPermission(@NotNull Permission perm)
 	{
-		return isOp();
+		return isPermissionSet(perm) || perm.getDefault().getValue(isOp());
 	}
 
 	@Override
-	public @NotNull PermissionAttachment addAttachment(Plugin plugin, String name, boolean value)
+	public @NotNull PermissionAttachment addAttachment(@NotNull Plugin plugin, @NotNull String name, boolean value)
 	{
-		// TODO Auto-generated method stub
+		PermissionAttachment attachment = addAttachment(plugin);
+		attachment.setPermission(name, value);
+		return attachment;
+	}
+
+	@Override
+	public @NotNull PermissionAttachment addAttachment(@NotNull Plugin plugin)
+	{
+		PermissionAttachment attachment = new PermissionAttachment(plugin, this);
+		permissionAttachments.add(attachment);
+		return attachment;
+	}
+
+	@Override
+	public PermissionAttachment addAttachment(@NotNull Plugin plugin, @NotNull String name, boolean value, int ticks)
+	{
+		// TODO Auto-generated constructor stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public @NotNull PermissionAttachment addAttachment(Plugin plugin)
+	public PermissionAttachment addAttachment(@NotNull Plugin plugin, int ticks)
 	{
-		// TODO Auto-generated method stub
+		// TODO Auto-generated constructor stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value, int ticks)
+	public void removeAttachment(@NotNull PermissionAttachment attachment)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
+		if (attachment == null)
+		{
+			throw new IllegalArgumentException("Attachment cannot be null");
+		}
 
-	@Override
-	public PermissionAttachment addAttachment(Plugin plugin, int ticks)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
+		if (permissionAttachments.contains(attachment))
+		{
+			permissionAttachments.remove(attachment);
+			PermissionRemovedExecutor ex = attachment.getRemovalCallback();
 
-	@Override
-	public void removeAttachment(PermissionAttachment attachment)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+			if (ex != null)
+			{
+				ex.attachmentRemoved(attachment);
+			}
+
+			recalculatePermissions();
+		}
+		else
+		{
+			throw new IllegalArgumentException("Given attachment is not part of Permissible object " + this);
+		}
 	}
 
 	@Override
 	public void recalculatePermissions()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		
 	}
 
 	@Override
