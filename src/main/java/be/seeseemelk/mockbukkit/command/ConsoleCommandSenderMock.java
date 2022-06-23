@@ -44,7 +44,7 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	public void sendMessage(@Nullable UUID sender, @NotNull String message)
 	{
 		Preconditions.checkNotNull(message, "Message cannot be null");
-		messages.add(message);
+		this.messages.add(message);
 	}
 
 	@Override
@@ -200,7 +200,7 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	{
 		Preconditions.checkNotNull(message, "Message cannot be null");
 		System.out.println(ChatColor.stripColor(message));
-		messages.add(message);
+		this.messages.add(message);
 	}
 
 	@Override
