@@ -469,7 +469,7 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	@Override
 	public float getSaturation()
 	{
-		return saturation;
+		return this.saturation;
 	}
 
 	@Override
