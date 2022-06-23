@@ -1,11 +1,15 @@
 package be.seeseemelk.mockbukkit.command;
 
+import be.seeseemelk.mockbukkit.MockBukkit;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ConsoleCommandSenderMockTest
@@ -14,9 +18,15 @@ class ConsoleCommandSenderMockTest
 	private ConsoleCommandSenderMock sender;
 
 	@BeforeEach
-	void setUp() throws Exception
+	void setUp()
 	{
-		sender = new ConsoleCommandSenderMock();
+		sender = MockBukkit.mock().getConsoleSender();
+	}
+
+	@AfterEach
+	void teardown()
+	{
+		MockBukkit.unmock();
 	}
 
 	@Test
@@ -37,7 +47,7 @@ class ConsoleCommandSenderMockTest
 	@Test
 	void sendMessageVararg_SomeStrings_StringsInRightOrder()
 	{
-		sender.sendMessage(new String[]{ "Hello", "world" });
+		sender.sendMessage("Hello", "world");
 		sender.assertSaid("Hello");
 		sender.assertSaid("world");
 	}
@@ -52,6 +62,12 @@ class ConsoleCommandSenderMockTest
 	void assertIsOp()
 	{
 		assertTrue(sender.isOp());
+	}
+
+	@Test
+	void assertSetOp_ThrowsException()
+	{
+		assertThrowsExactly(UnsupportedOperationException.class, () -> sender.setOp(false));
 	}
 
 	@Test
@@ -85,6 +101,26 @@ class ConsoleCommandSenderMockTest
 	{
 		sender.sendMessage("Some message");
 		assertThrows(AssertionError.class, () -> sender.assertNoMoreSaid());
+	}
+
+	@Test
+	void sendMessage_NoMessage_ThrowsException()
+	{
+		assertThrowsExactly(NullPointerException.class, () -> sender.sendMessage((String) null));
+	}
+
+	@Test
+	void addAttachment_True_Has()
+	{
+		sender.addAttachment(MockBukkit.createMockPlugin(), "test.permission", true);
+		assertTrue(sender.hasPermission("test.permission"));
+	}
+
+	@Test
+	void addAttachment_False_DoesntHave()
+	{
+		sender.addAttachment(MockBukkit.createMockPlugin(), "test.permission", false);
+		assertFalse(sender.hasPermission("test.permission"));
 	}
 
 }
