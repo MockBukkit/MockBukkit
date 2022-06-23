@@ -153,7 +153,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private int nextMapId = 1;
 
 	private GameMode defaultGameMode = GameMode.SURVIVAL;
-	private ConsoleCommandSender consoleSender;
+	private ConsoleCommandSenderMock consoleSender;
 	private int spawnRadius = 16;
 	private @NotNull WarningState warningState = WarningState.DEFAULT;
 
@@ -564,7 +564,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public @NotNull ConsoleCommandSender getConsoleSender()
+	public @NotNull ConsoleCommandSenderMock getConsoleSender()
 	{
 		if (consoleSender == null)
 		{
