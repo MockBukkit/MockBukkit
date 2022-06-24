@@ -199,7 +199,6 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	public void sendRawMessage(@Nullable UUID sender, @NotNull String message)
 	{
 		Preconditions.checkNotNull(message, "Message cannot be null");
-		System.out.println(ChatColor.stripColor(message));
 		this.messages.add(message);
 	}
 
