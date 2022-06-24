@@ -5,7 +5,7 @@
 
 # Ignore compiled files
 /bin/
-/build/
+build/
 /*.jar
 
 # Ignore server folder
