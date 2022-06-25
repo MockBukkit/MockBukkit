@@ -42,10 +42,7 @@ public class WardenMock extends MonsterMock implements Warden
 		}
 		else
 		{
-			if (increase > 150)
-			{
-				throw new IllegalStateException("Anger can't be higher than 150");
-			}
+			Preconditions.checkState(increase <= 150, "Anger can't be higher than 150");
 			angerPerEntity.put(entity, increase);
 		}
 	}
