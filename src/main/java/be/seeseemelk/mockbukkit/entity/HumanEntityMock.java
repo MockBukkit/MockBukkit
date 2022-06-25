@@ -233,6 +233,7 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
+
 	@Override
 	public @NotNull ItemStack getItemInHand()
 	{
