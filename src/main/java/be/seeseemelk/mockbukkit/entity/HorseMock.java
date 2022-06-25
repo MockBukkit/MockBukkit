@@ -18,6 +18,9 @@ public class HorseMock extends AbstractHorseMock implements Horse {
     public HorseMock(ServerMock server, UUID uuid) {
         super(server, uuid);
         inventory = new HorseInventoryMock(this);
+        color = Color.WHITE;
+        style = Style.BLACK_DOTS;
+        inventory = new HorseInventoryMock(this);
     }
 
     @Override
