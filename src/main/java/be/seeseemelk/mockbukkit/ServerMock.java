@@ -13,6 +13,7 @@ import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
 import be.seeseemelk.mockbukkit.help.HelpMapMock;
 import be.seeseemelk.mockbukkit.inventory.BarrelInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.BrewerInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.ChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.DispenserInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.DropperInventoryMock;
@@ -85,6 +86,7 @@ import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.server.MapInitializeEvent;
 import org.bukkit.generator.ChunkGenerator.ChunkData;
+import org.bukkit.inventory.BrewerInventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Merchant;
@@ -641,7 +643,7 @@ public class ServerMock extends Server.Spigot implements Server
 		case ENCHANTING:
 			// TODO: This Inventory Type needs to be implemented
 		case BREWING:
-			// TODO: This Inventory Type needs to be implemented
+			return new BrewerInventoryMock(owner);
 		case CRAFTING:
 			// TODO: This Inventory Type needs to be implemented
 		case CREATIVE:
