@@ -39,7 +39,6 @@ public class WardenMock extends MonsterMock implements Warden
 			Preconditions.checkState(newAnger <= 150, "Anger can't be higher than 150");
 
 			angerPerEntity.put(entity, newAnger);
-
 		}
 		else
 		{
