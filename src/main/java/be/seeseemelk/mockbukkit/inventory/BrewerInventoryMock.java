@@ -79,5 +79,4 @@ public class BrewerInventoryMock extends InventoryMock implements BrewerInventor
 		Preconditions.checkState(this.ingredient != null, "No ingredient has been set");
 	}
 
-
 }
