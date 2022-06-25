@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.block.state;
 
+import be.seeseemelk.mockbukkit.inventory.BrewerInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -14,6 +15,7 @@ public class BrewingStandMock extends ContainerMock implements BrewingStand
 
 	private int brewingTime;
 	private int fuelLevel;
+	private BrewerInventoryMock inventory = new BrewerInventoryMock(this);
 
 	protected BrewingStandMock(@NotNull Material material)
 	{
@@ -76,13 +78,13 @@ public class BrewingStandMock extends ContainerMock implements BrewingStand
 	@Override
 	public @NotNull BrewerInventory getInventory()
 	{
-		return (BrewerInventory) super.getInventory();
+		return this.inventory;
 	}
 
 	@Override
 	public @NotNull BrewerInventory getSnapshotInventory()
 	{
-		return (BrewerInventory) super.getSnapshotInventory();
+		return (BrewerInventory) this.inventory.getSnapshot();
 	}
 
 }
