@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 class BrewingStandMockTest
 {
 
-	ServerMock server;
+	private ServerMock server;
 	private WorldMock world;
 	private BlockMock block;
 	private BrewingStandMock brewingStand;
