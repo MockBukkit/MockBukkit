@@ -22,13 +22,13 @@ public class CampfireMock extends TileStateMock implements Campfire
 	public CampfireMock(@NotNull Material material)
 	{
 		super(material);
-		checkType(material == Material.CAMPFIRE || material == Material.SOUL_CAMPFIRE);
+		checkType(material, Material.CAMPFIRE, Material.SOUL_CAMPFIRE);
 	}
 
 	protected CampfireMock(@NotNull Block block)
 	{
 		super(block);
-		checkType(block.getType() == Material.CAMPFIRE || block.getType() == Material.SOUL_CAMPFIRE);
+		checkType(block, Material.CAMPFIRE, Material.SOUL_CAMPFIRE);
 	}
 
 	protected CampfireMock(@NotNull CampfireMock state)

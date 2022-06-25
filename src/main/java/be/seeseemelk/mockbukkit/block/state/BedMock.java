@@ -15,13 +15,13 @@ public class BedMock extends TileStateMock implements Bed
 	public BedMock(@NotNull Material material)
 	{
 		super(material);
-		checkType(MaterialTags.BEDS.isTagged(material));
+		checkType(material, MaterialTags.BEDS);
 	}
 
 	protected BedMock(@NotNull Block block)
 	{
 		super(block);
-		checkType(MaterialTags.BEDS.isTagged(block));
+		checkType(block, MaterialTags.BEDS);
 	}
 
 	protected BedMock(@NotNull BedMock state)

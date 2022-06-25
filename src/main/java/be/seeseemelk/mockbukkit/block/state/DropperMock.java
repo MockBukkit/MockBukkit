@@ -24,13 +24,13 @@ public class DropperMock extends ContainerMock implements Dropper
 	public DropperMock(@NotNull Material material)
 	{
 		super(material);
-		checkType(material == Material.DROPPER);
+		checkType(material, Material.DROPPER);
 	}
 
 	protected DropperMock(@NotNull Block block)
 	{
 		super(block);
-		checkType(block.getType() == Material.DROPPER);
+		checkType(block, Material.DROPPER);
 	}
 
 	protected DropperMock(@NotNull DropperMock state)

@@ -18,13 +18,13 @@ public class BrewingStandMock extends ContainerMock implements BrewingStand
 	protected BrewingStandMock(@NotNull Material material)
 	{
 		super(material);
-		checkType(material == Material.BREWING_STAND);
+		checkType(material, Material.BREWING_STAND);
 	}
 
 	protected BrewingStandMock(@NotNull Block block)
 	{
 		super(block);
-		checkType(block.getType() == Material.BREWING_STAND);
+		checkType(block, Material.BREWING_STAND);
 	}
 
 	protected BrewingStandMock(@NotNull BrewingStandMock state)

@@ -11,13 +11,13 @@ public class DaylightDetectorMock extends TileStateMock implements DaylightDetec
 	protected DaylightDetectorMock(@NotNull Material material)
 	{
 		super(material);
-		checkType(material == Material.DAYLIGHT_DETECTOR);
+		checkType(material, Material.DAYLIGHT_DETECTOR);
 	}
 
 	protected DaylightDetectorMock(@NotNull Block block)
 	{
 		super(block);
-		checkType(block.getType() == Material.DAYLIGHT_DETECTOR);
+		checkType(block, Material.DAYLIGHT_DETECTOR);
 	}
 
 	protected DaylightDetectorMock(@NotNull DaylightDetectorMock state)

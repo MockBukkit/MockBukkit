@@ -24,13 +24,13 @@ public class BarrelMock extends ContainerMock implements Barrel
 	public BarrelMock(@NotNull Material material)
 	{
 		super(material);
-		checkType(material == Material.BARREL);
+		checkType(material, Material.BARREL);
 	}
 
 	protected BarrelMock(@NotNull Block block)
 	{
 		super(block);
-		checkType(block.getType() == Material.BARREL);
+		checkType(block, Material.BARREL);
 	}
 
 	protected BarrelMock(@NotNull BarrelMock state)

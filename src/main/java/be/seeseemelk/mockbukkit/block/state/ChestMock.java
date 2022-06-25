@@ -27,13 +27,13 @@ public class ChestMock extends ContainerMock implements Chest
 	public ChestMock(@NotNull Material material)
 	{
 		super(material);
-		checkType(material == Material.CHEST);
+		checkType(material, Material.CHEST);
 	}
 
 	protected ChestMock(@NotNull Block block)
 	{
 		super(block);
-		checkType(block.getType() == Material.CHEST);
+		checkType(block, Material.CHEST);
 	}
 
 	protected ChestMock(@NotNull ChestMock state)

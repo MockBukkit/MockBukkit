@@ -20,13 +20,13 @@ public class EnderChestMock extends TileStateMock implements EnderChest
 	public EnderChestMock(@NotNull Material material)
 	{
 		super(material);
-		checkType(material == Material.ENDER_CHEST);
+		checkType(material, Material.ENDER_CHEST);
 	}
 
 	protected EnderChestMock(@NotNull Block block)
 	{
 		super(block);
-		checkType(block.getType() == Material.ENDER_CHEST);
+		checkType(block, Material.ENDER_CHEST);
 	}
 
 	protected EnderChestMock(@NotNull EnderChestMock state)

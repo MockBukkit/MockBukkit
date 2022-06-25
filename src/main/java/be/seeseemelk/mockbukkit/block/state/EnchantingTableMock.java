@@ -17,13 +17,13 @@ public class EnchantingTableMock extends TileStateMock implements EnchantingTabl
 	protected EnchantingTableMock(@NotNull Material material)
 	{
 		super(material);
-		checkType(material == Material.ENCHANTING_TABLE);
+		checkType(material, Material.ENCHANTING_TABLE);
 	}
 
 	protected EnchantingTableMock(@NotNull Block block)
 	{
 		super(block);
-		checkType(block.getType() == Material.ENCHANTING_TABLE);
+		checkType(block, Material.ENCHANTING_TABLE);
 	}
 
 	protected EnchantingTableMock(@NotNull EnchantingTableMock state)

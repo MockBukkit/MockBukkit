@@ -20,13 +20,13 @@ public class LecternMock extends ContainerMock implements Lectern
 	public LecternMock(@NotNull Material material)
 	{
 		super(material);
-		checkType(material == Material.LECTERN);
+		checkType(material, Material.LECTERN);
 	}
 
 	protected LecternMock(@NotNull Block block)
 	{
 		super(block);
-		checkType(block.getType() == Material.LECTERN);
+		checkType(block, Material.LECTERN);
 	}
 
 	protected LecternMock(@NotNull LecternMock state)

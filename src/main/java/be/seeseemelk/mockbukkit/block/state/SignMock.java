@@ -28,13 +28,13 @@ public class SignMock extends TileStateMock implements Sign
 	public SignMock(@NotNull Material material)
 	{
 		super(material);
-		checkType(MaterialTags.SIGNS.isTagged(material));
+		checkType(material, MaterialTags.SIGNS);
 	}
 
 	protected SignMock(@NotNull Block block)
 	{
 		super(block);
-		checkType(MaterialTags.SIGNS.isTagged(block));
+		checkType(block, MaterialTags.SIGNS);
 	}
 
 	protected SignMock(@NotNull SignMock state)

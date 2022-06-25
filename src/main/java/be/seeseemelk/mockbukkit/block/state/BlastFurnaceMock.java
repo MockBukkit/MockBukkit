@@ -14,13 +14,13 @@ public class BlastFurnaceMock extends AbstractFurnaceMock implements BlastFurnac
 	public BlastFurnaceMock(@NotNull Material material)
 	{
 		super(material);
-		checkType(material == Material.BLAST_FURNACE);
+		checkType(material, Material.BLAST_FURNACE);
 	}
 
 	protected BlastFurnaceMock(@NotNull Block block)
 	{
 		super(block);
-		checkType(block.getType() == Material.BLAST_FURNACE);
+		checkType(block, Material.BLAST_FURNACE);
 	}
 
 	@Override

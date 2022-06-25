@@ -26,13 +26,13 @@ public class CreatureSpawnerMock extends TileStateMock implements CreatureSpawne
 	protected CreatureSpawnerMock(@NotNull Material material)
 	{
 		super(material);
-		checkType(material == Material.SPAWNER);
+		checkType(material, Material.SPAWNER);
 	}
 
 	protected CreatureSpawnerMock(@NotNull Block block)
 	{
 		super(block);
-		checkType(block.getType() == Material.SPAWNER);
+		checkType(block, Material.SPAWNER);
 	}
 
 	protected CreatureSpawnerMock(@NotNull CreatureSpawnerMock state)

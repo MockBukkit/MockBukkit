@@ -12,13 +12,13 @@ public class JigsawMock extends TileStateMock implements Jigsaw
 	public JigsawMock(@NotNull Material material)
 	{
 		super(material);
-		checkType(material == Material.JIGSAW);
+		checkType(material, Material.JIGSAW);
 	}
 
 	public JigsawMock(@NotNull Block block)
 	{
 		super(block);
-		checkType(block.getType() == Material.JIGSAW);
+		checkType(block, Material.JIGSAW);
 	}
 
 	public JigsawMock(@NotNull TileStateMock state)

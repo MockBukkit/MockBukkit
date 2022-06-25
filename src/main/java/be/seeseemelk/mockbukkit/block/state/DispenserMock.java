@@ -25,13 +25,13 @@ public class DispenserMock extends ContainerMock implements Dispenser
 	public DispenserMock(@NotNull Material material)
 	{
 		super(material);
-		checkType(material == Material.DISPENSER);
+		checkType(material, Material.DISPENSER);
 	}
 
 	protected DispenserMock(@NotNull Block block)
 	{
 		super(block);
-		checkType(block.getType() == Material.DISPENSER);
+		checkType(block, Material.DISPENSER);
 	}
 
 	protected DispenserMock(@NotNull DispenserMock state)

@@ -32,13 +32,13 @@ public class BeaconMock extends TileStateMock implements Beacon
 	public BeaconMock(@NotNull Material material)
 	{
 		super(material);
-		checkType(material == Material.BEACON);
+		checkType(material, Material.BEACON);
 	}
 
 	protected BeaconMock(@NotNull Block block)
 	{
 		super(block);
-		checkType(block.getType() == Material.BEACON);
+		checkType(block, Material.BEACON);
 	}
 
 	protected BeaconMock(@NotNull BeaconMock state)

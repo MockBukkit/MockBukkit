@@ -11,13 +11,13 @@ public class ConduitMock extends TileStateMock implements Conduit
 	protected ConduitMock(@NotNull Material material)
 	{
 		super(material);
-		checkType(material == Material.CONDUIT);
+		checkType(material, Material.CONDUIT);
 	}
 
 	protected ConduitMock(@NotNull Block block)
 	{
 		super(block);
-		checkType(block.getType() == Material.CONDUIT);
+		checkType(block, Material.CONDUIT);
 	}
 
 	protected ConduitMock(@NotNull ConduitMock state)

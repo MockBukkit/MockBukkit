@@ -25,13 +25,13 @@ public class BeehiveMock extends TileStateMock implements Beehive
 	public BeehiveMock(@NotNull Material material)
 	{
 		super(material);
-		checkType(material == Material.BEEHIVE);
+		checkType(material, Material.BEEHIVE);
 	}
 
 	protected BeehiveMock(@NotNull Block block)
 	{
 		super(block);
-		checkType(block.getType() == Material.BEEHIVE);
+		checkType(block, Material.BEEHIVE);
 	}
 
 	protected BeehiveMock(@NotNull BeehiveMock state)

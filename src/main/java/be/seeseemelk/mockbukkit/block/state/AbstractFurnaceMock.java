@@ -25,15 +25,13 @@ public abstract class AbstractFurnaceMock extends ContainerMock implements Furna
 	protected AbstractFurnaceMock(@NotNull Material material)
 	{
 		super(material);
-		if (material != Material.SMOKER && material != Material.FURNACE && material != Material.BLAST_FURNACE)
-			throw new IllegalArgumentException("Cannot create a Furnace state from " + material);
+		checkType(material, Material.SMOKER, Material.FURNACE, Material.BLAST_FURNACE);
 	}
 
 	protected AbstractFurnaceMock(@NotNull Block block)
 	{
 		super(block);
-		if (block.getType() != Material.SMOKER && block.getType() != Material.FURNACE && block.getType() != Material.BLAST_FURNACE)
-			throw new IllegalArgumentException("Cannot create a Furnace state from " + block.getType().name());
+		checkType(block, Material.SMOKER, Material.FURNACE, Material.BLAST_FURNACE);
 	}
 
 	protected AbstractFurnaceMock(@NotNull AbstractFurnaceMock state)

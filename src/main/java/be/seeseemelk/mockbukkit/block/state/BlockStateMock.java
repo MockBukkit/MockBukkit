@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.block.state;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
+import com.destroystokyo.paper.MaterialSetTag;
 import com.destroystokyo.paper.MaterialTags;
 import com.google.common.base.Preconditions;
 import org.bukkit.Chunk;
@@ -18,6 +19,7 @@ import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class BlockStateMock implements BlockState
@@ -50,17 +52,27 @@ public class BlockStateMock implements BlockState
 		this.block = state.isPlaced() ? state.getBlock() : null;
 	}
 
-	/**
-	 * Used to ensure the material the BlockState was created with is correct
-	 * by evaluating an expression. If the expression is false, a {@link IllegalArgumentException}
-	 * will be thrown indicating that the material passed in is incorrect for the BlockState type.
-	 *
-	 * @param expression The expression to check.
-	 */
-	protected void checkType(boolean expression)
+	// region Type Checking
+	protected void checkType(Material material, Material... expected)
 	{
-		Preconditions.checkArgument(expression, "Cannot create a " + getClass().getSimpleName() + " from " + material);
+		Preconditions.checkArgument(Arrays.stream(expected).anyMatch(m -> material == m), "Cannot create a " + getClass().getSimpleName() + " from " + material);
 	}
+
+	protected void checkType(Block block, Material... expected)
+	{
+		checkType(block.getType(), expected);
+	}
+
+	protected void checkType(Material material, MaterialSetTag tag)
+	{
+		Preconditions.checkArgument(tag.isTagged(material), "Cannot create a " + getClass().getSimpleName() + " from " + material);
+	}
+
+	protected void checkType(Block block, MaterialSetTag expected)
+	{
+		checkType(block.getType(), expected);
+	}
+	// endregion
 
 	@Override
 	public void setMetadata(String metadataKey, @NotNull MetadataValue newMetadataValue)

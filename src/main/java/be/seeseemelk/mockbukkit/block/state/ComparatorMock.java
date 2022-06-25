@@ -11,13 +11,13 @@ public class ComparatorMock extends TileStateMock implements Comparator
 	protected ComparatorMock(@NotNull Material material)
 	{
 		super(material);
-		checkType(material == Material.COMPARATOR);
+		checkType(material, Material.COMPARATOR);
 	}
 
 	protected ComparatorMock(@NotNull Block block)
 	{
 		super(block);
-		checkType(block.getType() == Material.COMPARATOR);
+		checkType(block, Material.COMPARATOR);
 	}
 
 	protected ComparatorMock(@NotNull ComparatorMock state)

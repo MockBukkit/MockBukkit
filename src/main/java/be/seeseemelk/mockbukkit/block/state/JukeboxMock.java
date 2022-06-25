@@ -17,14 +17,14 @@ public class JukeboxMock extends TileStateMock implements Jukebox
 	public JukeboxMock(@NotNull Material material)
 	{
 		super(material);
-		checkType(material == Material.JUKEBOX);
+		checkType(material, Material.JUKEBOX);
 		setRecord(null);
 	}
 
 	public JukeboxMock(@NotNull Block block)
 	{
 		super(block);
-		checkType(block.getType() == Material.JUKEBOX);
+		checkType(block, Material.JUKEBOX);
 		setRecord(null);
 	}
 

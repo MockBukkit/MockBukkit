@@ -18,13 +18,13 @@ public class CommandBlockMock extends TileStateMock implements CommandBlock, Com
 	protected CommandBlockMock(@NotNull Material material)
 	{
 		super(material);
-		checkType(material == Material.COMMAND_BLOCK || material == Material.REPEATING_COMMAND_BLOCK || material == Material.CHAIN_COMMAND_BLOCK);
+		checkType(material, Material.COMMAND_BLOCK, Material.REPEATING_COMMAND_BLOCK, Material.CHAIN_COMMAND_BLOCK);
 	}
 
 	protected CommandBlockMock(@NotNull Block block)
 	{
 		super(block);
-		checkType(block.getType() == Material.COMMAND_BLOCK || block.getType() == Material.REPEATING_COMMAND_BLOCK || block.getType() == Material.CHAIN_COMMAND_BLOCK);
+		checkType(block, Material.COMMAND_BLOCK, Material.REPEATING_COMMAND_BLOCK, Material.CHAIN_COMMAND_BLOCK);
 	}
 
 	protected CommandBlockMock(@NotNull CommandBlockMock state)

@@ -24,13 +24,13 @@ public class HopperMock extends ContainerMock implements Hopper
 	public HopperMock(@NotNull Material material)
 	{
 		super(material);
-		checkType(material == Material.HOPPER);
+		checkType(material, Material.HOPPER);
 	}
 
 	protected HopperMock(@NotNull Block block)
 	{
 		super(block);
-		checkType(block.getType() == Material.HOPPER);
+		checkType(block, Material.HOPPER);
 	}
 
 	protected HopperMock(@NotNull HopperMock state)

@@ -12,13 +12,13 @@ public class BellMock extends TileStateMock implements Bell
 	public BellMock(@NotNull Material material)
 	{
 		super(material);
-		checkType(material == Material.BELL);
+		checkType(material, Material.BELL);
 	}
 
 	protected BellMock(@NotNull Block block)
 	{
 		super(block);
-		checkType(block.getType() == Material.BELL);
+		checkType(block, Material.BELL);
 	}
 
 	protected BellMock(@NotNull BellMock state)
