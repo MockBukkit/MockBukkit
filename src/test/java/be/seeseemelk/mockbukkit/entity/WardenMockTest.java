@@ -14,9 +14,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class WardenMockTest
 {
 
-	ServerMock server;
-	WardenMock warden;
-	PlayerMock player;
+	private ServerMock server;
+	private WardenMock warden;
+	private PlayerMock player;
 
 	@BeforeEach
 	void setup()
