@@ -11,6 +11,7 @@ import be.seeseemelk.mockbukkit.entity.FishHookMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
 import be.seeseemelk.mockbukkit.entity.MobMock;
 import be.seeseemelk.mockbukkit.entity.SheepMock;
+import be.seeseemelk.mockbukkit.entity.WardenMock;
 import be.seeseemelk.mockbukkit.entity.ZombieMock;
 import be.seeseemelk.mockbukkit.generator.BiomeProviderMock;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
@@ -72,6 +73,7 @@ import org.bukkit.entity.Projectile;
 import org.bukkit.entity.Sheep;
 import org.bukkit.entity.Slime;
 import org.bukkit.entity.SpawnCategory;
+import org.bukkit.entity.Warden;
 import org.bukkit.entity.WaterMob;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.entity.CreatureSpawnEvent;
@@ -893,6 +895,10 @@ public class WorldMock implements World
 		else if (clazz == Allay.class)
 		{
 			return new AllayMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Warden.class)
+		{
+			return new WardenMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}
