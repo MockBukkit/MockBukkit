@@ -1,11 +1,11 @@
 package be.seeseemelk.mockbukkit.block.state;
 
+import be.seeseemelk.mockbukkit.inventory.BrewerInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.BrewingStand;
-import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.BrewerInventory;
 import org.jetbrains.annotations.NotNull;
 
@@ -37,8 +37,7 @@ public class BrewingStandMock extends ContainerMock implements BrewingStand
 	@Override
 	protected @NotNull InventoryMock createInventory()
 	{
-//		return new BrewingStandInventory(this); TODO: Not implemented.
-		return new InventoryMock(this, InventoryType.BREWING);
+		return new BrewerInventoryMock(this);
 	}
 
 	@Override
