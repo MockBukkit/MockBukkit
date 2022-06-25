@@ -270,9 +270,6 @@ class WorldMockTest
 		WorldMock world = new WorldMock();
 		Location location = new Location(world, 100, 20, 50);
 		Entity horse = world.spawnEntity(location, EntityType.HORSE);
-		assertEquals(100, horse.getLocation().getBlockX());
-		assertEquals(20, horse.getLocation().getBlockY());
-		assertEquals(50, horse.getLocation().getBlockZ());
 		assertTrue(world.getEntities().size() > 0);
 		assertInstanceOf(Horse.class, horse);
 	}

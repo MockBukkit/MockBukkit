@@ -4,6 +4,7 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.HorseInventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.Nullable;
 
 public class HorseInventoryMock extends InventoryMock implements HorseInventory {
     public HorseInventoryMock(InventoryHolder holder) {
@@ -16,7 +17,7 @@ public class HorseInventoryMock extends InventoryMock implements HorseInventory 
     }
 
     @Override
-    public void setSaddle(ItemStack stack) {
+    public void setSaddle(@Nullable ItemStack stack) {
         this.setItem(0, stack);
     }
 
@@ -26,7 +27,7 @@ public class HorseInventoryMock extends InventoryMock implements HorseInventory 
     }
 
     @Override
-    public void setArmor(ItemStack stack) {
+    public void setArmor(@Nullable ItemStack stack) {
         this.setItem(1, stack);
     }
 }

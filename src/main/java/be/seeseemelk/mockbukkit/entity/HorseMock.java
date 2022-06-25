@@ -6,6 +6,8 @@ import org.bukkit.entity.Horse;
 import org.bukkit.inventory.HorseInventory;
 import org.jetbrains.annotations.NotNull;
 
+import com.google.common.base.Preconditions;
+
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.inventory.HorseInventoryMock;
@@ -25,21 +27,23 @@ public class HorseMock extends AbstractHorseMock implements Horse {
 
     @Override
     public Color getColor() {
-        return color;
+        return this.color;
     }
 
     @Override
-    public void setColor(Color color) {
+    public void setColor(@NotNull Color color) {
+        Preconditions.checkNotNull(color,"Color cannot be null");
         this.color = color;
     }
 
     @Override
     public Style getStyle() {
-        return style;
+        return this.style;
     }
 
     @Override
-    public void setStyle(Style style) {
+    public void setStyle(@NotNull Style style) {
+        Preconditions.checkNotNull(style,"Style cannot be null");
         this.style = style;
     }
 
@@ -55,7 +59,7 @@ public class HorseMock extends AbstractHorseMock implements Horse {
 
     @Override
     public HorseInventory getInventory() {
-        return inventory;
+        return this.inventory;
     }
 
     @Deprecated
