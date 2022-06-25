@@ -55,7 +55,7 @@ public class BrewerInventoryMock extends InventoryMock implements BrewerInventor
 	}
 
 	@Override
-	public @NotNull InventoryMock getSnapshot()
+	public @NotNull BrewerInventoryMock getSnapshot()
 	{
 		BrewerInventoryMock inventory = new BrewerInventoryMock(getHolder());
 		if (ingredient != null)

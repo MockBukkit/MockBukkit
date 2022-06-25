@@ -15,7 +15,6 @@ public class BrewingStandMock extends ContainerMock implements BrewingStand
 
 	private int brewingTime;
 	private int fuelLevel;
-	private BrewerInventoryMock inventory = new BrewerInventoryMock(this);
 
 	protected BrewingStandMock(@NotNull Material material)
 	{
@@ -41,8 +40,7 @@ public class BrewingStandMock extends ContainerMock implements BrewingStand
 	@Override
 	protected @NotNull InventoryMock createInventory()
 	{
-//		return new BrewingStandInventory(this); TODO: Not implemented.
-		return new InventoryMock(this, InventoryType.BREWING);
+		return new BrewerInventoryMock(this);
 	}
 
 	@Override
@@ -78,13 +76,13 @@ public class BrewingStandMock extends ContainerMock implements BrewingStand
 	@Override
 	public @NotNull BrewerInventory getInventory()
 	{
-		return this.inventory;
+		return (BrewerInventory) super.getInventory();
 	}
 
 	@Override
 	public @NotNull BrewerInventory getSnapshotInventory()
 	{
-		return (BrewerInventory) this.inventory.getSnapshot();
+		return (BrewerInventory) super.getSnapshotInventory();
 	}
 
 }
