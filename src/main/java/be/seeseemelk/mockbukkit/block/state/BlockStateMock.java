@@ -53,22 +53,22 @@ public class BlockStateMock implements BlockState
 	}
 
 	// region Type Checking
-	protected void checkType(Material material, Material... expected)
+	protected void checkType(@NotNull Material material, @NotNull Material... expected)
 	{
 		Preconditions.checkArgument(Arrays.stream(expected).anyMatch(m -> material == m), "Cannot create a " + getClass().getSimpleName() + " from " + material);
 	}
 
-	protected void checkType(Block block, Material... expected)
+	protected void checkType(@NotNull Block block, @NotNull Material... expected)
 	{
 		checkType(block.getType(), expected);
 	}
 
-	protected void checkType(Material material, Tag<Material> tag)
+	protected void checkType(@NotNull Material material, @NotNull Tag<Material> tag)
 	{
 		Preconditions.checkArgument(tag.isTagged(material), "Cannot create a " + getClass().getSimpleName() + " from " + material);
 	}
 
-	protected void checkType(Block block, Tag<Material> expected)
+	protected void checkType(@NotNull Block block, @NotNull Tag<Material> expected)
 	{
 		checkType(block.getType(), expected);
 	}
