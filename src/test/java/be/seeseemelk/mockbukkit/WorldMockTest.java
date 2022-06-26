@@ -10,6 +10,7 @@ import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
 import be.seeseemelk.mockbukkit.entity.FireworkMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
 import be.seeseemelk.mockbukkit.entity.SheepMock;
+import be.seeseemelk.mockbukkit.entity.WardenMock;
 import be.seeseemelk.mockbukkit.entity.ZombieMock;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
@@ -25,6 +26,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Horse;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -260,6 +262,16 @@ class WorldMockTest
 		assertEquals(20, zombie.getLocation().getBlockY());
 		assertEquals(50, zombie.getLocation().getBlockZ());
 		assertTrue(world.getEntities().size() > 0);
+	}
+
+	@Test
+	void spawnHorseTest()
+	{
+		WorldMock world = new WorldMock();
+		Location location = new Location(world, 100, 20, 50);
+		Entity horse = world.spawnEntity(location, EntityType.HORSE);
+		assertTrue(world.getEntities().size() > 0);
+		assertInstanceOf(Horse.class, horse);
 	}
 
 	@Test
@@ -941,6 +953,15 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ENDERMAN);
 		assertInstanceOf(EndermanMock.class, entity);
+		assertTrue(entity.isValid());
+	}
+
+	@Test
+	void testSpawnWarden()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.WARDEN);
+		assertInstanceOf(WardenMock.class, entity);
 		assertTrue(entity.isValid());
 	}
 

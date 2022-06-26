@@ -8,9 +8,11 @@ import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
 import be.seeseemelk.mockbukkit.entity.FireworkMock;
 import be.seeseemelk.mockbukkit.entity.FishHookMock;
+import be.seeseemelk.mockbukkit.entity.HorseMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
 import be.seeseemelk.mockbukkit.entity.MobMock;
 import be.seeseemelk.mockbukkit.entity.SheepMock;
+import be.seeseemelk.mockbukkit.entity.WardenMock;
 import be.seeseemelk.mockbukkit.entity.ZombieMock;
 import be.seeseemelk.mockbukkit.generator.BiomeProviderMock;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
@@ -61,6 +63,7 @@ import org.bukkit.entity.FishHook;
 import org.bukkit.entity.Ghast;
 import org.bukkit.entity.Golem;
 import org.bukkit.entity.Hanging;
+import org.bukkit.entity.Horse;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.ItemFrame;
 import org.bukkit.entity.LeashHitch;
@@ -72,6 +75,7 @@ import org.bukkit.entity.Projectile;
 import org.bukkit.entity.Sheep;
 import org.bukkit.entity.Slime;
 import org.bukkit.entity.SpawnCategory;
+import org.bukkit.entity.Warden;
 import org.bukkit.entity.WaterMob;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.entity.CreatureSpawnEvent;
@@ -891,6 +895,10 @@ public class WorldMock implements World
 		{
 			return new EndermanMock(server, UUID.randomUUID());
 		}
+		else if (clazz == Horse.class)
+		{
+			return new HorseMock(server, UUID.randomUUID());
+		}
 		else if (clazz == Sheep.class)
 		{
 			return new SheepMock(server, UUID.randomUUID());
@@ -898,6 +906,10 @@ public class WorldMock implements World
 		else if (clazz == Allay.class)
 		{
 			return new AllayMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Warden.class)
+		{
+			return new WardenMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}

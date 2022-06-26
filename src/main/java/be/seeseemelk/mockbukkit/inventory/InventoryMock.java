@@ -38,8 +38,8 @@ public class InventoryMock implements Inventory
 
 	public InventoryMock(@Nullable InventoryHolder holder, int size, @NotNull InventoryType type)
 	{
-		Preconditions.checkArgument(9 <= size && size <= 54 && size % 9 == 0,
-				"Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got " + size + ")");
+		Preconditions.checkArgument(2 == size || (9 <= size && size <= 54 && size % 9 == 0),
+				"Size for custom inventory must be two or a multiple of 9 between 9 and 54 slots (got " + size + ")");
 		Preconditions.checkNotNull(type, "The InventoryType must not be null!");
 
 		this.holder = holder;
