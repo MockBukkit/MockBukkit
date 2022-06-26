@@ -13,13 +13,13 @@ public class SculkCatalystMock extends TileStateMock implements SculkCatalyst
 	public SculkCatalystMock(@NotNull Material material)
 	{
 		super(material);
-		Preconditions.checkArgument(material == Material.SCULK_CATALYST, "Cannot create a Sculk Catalyst state from " + material);
+		checkType(material, Material.SCULK_CATALYST);
 	}
 
 	protected SculkCatalystMock(@NotNull Block block)
 	{
 		super(block);
-		Preconditions.checkArgument(block.getType() == Material.SCULK_CATALYST, "Cannot create a Sculk Catalyst state from " + block.getType());
+		checkType(block, Material.SCULK_CATALYST);
 	}
 
 	protected SculkCatalystMock(@NotNull SculkCatalystMock state)
