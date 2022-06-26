@@ -19,13 +19,13 @@ public class EndGatewayMock extends TileStateMock implements EndGateway
 	protected EndGatewayMock(@NotNull Material material)
 	{
 		super(material);
-		Preconditions.checkArgument(material == Material.END_GATEWAY, "Cannot create an End Gateway state from " + material);
+		checkType(material, Material.END_GATEWAY);
 	}
 
 	protected EndGatewayMock(@NotNull Block block)
 	{
 		super(block);
-		Preconditions.checkArgument(block.getType() == Material.END_GATEWAY, "Cannot create an End Gateway state from " + block.getType());
+		checkType(block, Material.END_GATEWAY);
 	}
 
 	protected EndGatewayMock(@NotNull EndGatewayMock state)
