@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.block.state;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
+import com.destroystokyo.paper.MaterialSetTag;
 import com.destroystokyo.paper.MaterialTags;
 import com.google.common.base.Preconditions;
 import org.bukkit.Chunk;
@@ -18,6 +19,7 @@ import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class BlockStateMock implements BlockState
@@ -50,8 +52,30 @@ public class BlockStateMock implements BlockState
 		this.block = state.isPlaced() ? state.getBlock() : null;
 	}
 
+	// region Type Checking
+	protected void checkType(@NotNull Material material, @NotNull Material... expected)
+	{
+		Preconditions.checkArgument(Arrays.stream(expected).anyMatch(m -> material == m), "Cannot create a " + getClass().getSimpleName() + " from " + material);
+	}
+
+	protected void checkType(@NotNull Block block, @NotNull Material... expected)
+	{
+		checkType(block.getType(), expected);
+	}
+
+	protected void checkType(@NotNull Material material, @NotNull Tag<Material> tag)
+	{
+		Preconditions.checkArgument(tag.isTagged(material), "Cannot create a " + getClass().getSimpleName() + " from " + material);
+	}
+
+	protected void checkType(@NotNull Block block, @NotNull Tag<Material> expected)
+	{
+		checkType(block.getType(), expected);
+	}
+	// endregion
+
 	@Override
-	public void setMetadata(String metadataKey, MetadataValue newMetadataValue)
+	public void setMetadata(String metadataKey, @NotNull MetadataValue newMetadataValue)
 	{
 		metadataTable.setMetadata(metadataKey, newMetadataValue);
 	}
@@ -274,14 +298,10 @@ public class BlockStateMock implements BlockState
 		{
 			return false;
 		}
-		if (this.isPlaced() && this.getLocation() != other.getLocation() && (this.getLocation() == null || !this.getLocation().equals(other.getLocation())))
-		{
-			return false;
-		}
+		return !this.isPlaced() || this.getLocation() == other.getLocation() || (this.getLocation() != null && this.getLocation().equals(other.getLocation()));
 //		if (this.getBlockData() != other.getBlockData() && (this.getBlockData() == null || !this.getBlockData().equals(other.getBlockData()))) {
 //			return false; Not implemented
 //		}
-		return true;
 	}
 
 	@NotNull
