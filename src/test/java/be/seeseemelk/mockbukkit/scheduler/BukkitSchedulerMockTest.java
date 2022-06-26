@@ -417,10 +417,12 @@ class BukkitSchedulerMockTest
 	void getMainThreadExecutor_RunsOnMainThread()
 	{
 		MockBukkit.mock();
-		Executor executor = scheduler.getMainThreadExecutor(MockBukkit.createMockPlugin());
 		AtomicBoolean b = new AtomicBoolean();
 
-		executor.execute(() -> b.set(true));
+		Executor executor = scheduler.getMainThreadExecutor(MockBukkit.createMockPlugin());
+		assertNotNull(executor);
+
+		executor.execute(() -> b.set(Bukkit.isPrimaryThread()));
 		scheduler.performOneTick();
 
 		assertTrue(b.get());
