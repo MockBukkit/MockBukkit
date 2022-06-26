@@ -8,6 +8,7 @@ import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.ShulkerBox;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -83,12 +84,12 @@ class ShulkerBoxMockTest
 
 	@ParameterizedTest
 	@EnumSource(DyeColor.class)
-	void testShulkerColors(DyeColor color)
+	void testShulkerColors(@NotNull DyeColor color)
 	{
 		assertDyed(Material.valueOf(color.name() + "_SHULKER_BOX"), color);
 	}
 
-	private void assertDyed(Material shulkerBox, DyeColor color)
+	private void assertDyed(@NotNull Material shulkerBox, DyeColor color)
 	{
 		Block block = new BlockMock(shulkerBox);
 		assertTrue(block.getState() instanceof ShulkerBox);

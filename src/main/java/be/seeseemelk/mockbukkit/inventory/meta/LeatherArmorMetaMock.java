@@ -57,12 +57,11 @@ public class LeatherArmorMetaMock extends ItemMetaMock implements LeatherArmorMe
 		{
 			return false;
 		}
-		if (!(obj instanceof LeatherArmorMeta))
+		if (!(obj instanceof LeatherArmorMeta other))
 		{
 			return false;
 		}
 
-		LeatherArmorMeta other = (LeatherArmorMeta) obj;
 		return Objects.equals(color, other.getColor());
 	}
 

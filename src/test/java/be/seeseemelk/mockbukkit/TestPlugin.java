@@ -35,8 +35,8 @@ public class TestPlugin extends JavaPlugin implements Listener
 	public boolean annotatedBlockBreakEventExecuted = false;
 	public boolean ignoredCancelledEvent = true;
 	public boolean asyncEventExecuted = false;
-	public CyclicBarrier barrier = new CyclicBarrier(2);
-	public final Object extra;
+	public @NotNull CyclicBarrier barrier = new CyclicBarrier(2);
+	public final @Nullable Object extra;
 
 	public TestPlugin()
 	{
@@ -44,13 +44,13 @@ public class TestPlugin extends JavaPlugin implements Listener
 		extra = null;
 	}
 
-	protected TestPlugin(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file)
+	protected TestPlugin(@NotNull JavaPluginLoader loader, @NotNull PluginDescriptionFile description, @NotNull File dataFolder, @NotNull File file)
 	{
 		super(loader, description, dataFolder, file);
 		extra = null;
 	}
 
-	protected TestPlugin(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file, Number extra)
+	protected TestPlugin(@NotNull JavaPluginLoader loader, @NotNull PluginDescriptionFile description, @NotNull File dataFolder, @NotNull File file, Number extra)
 	{
 		super(loader, description, dataFolder, file);
 		this.extra = extra;
@@ -79,7 +79,7 @@ public class TestPlugin extends JavaPlugin implements Listener
 	}
 
 	@Override
-	public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args)
+	public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String @NotNull [] args)
 	{
 		if (args.length == 1)
 		{
@@ -106,7 +106,7 @@ public class TestPlugin extends JavaPlugin implements Listener
 	}
 
 	@EventHandler(priority = EventPriority.HIGHEST)
-	public void onBlockBreakHighest(BlockBreakEvent event)
+	public void onBlockBreakHighest(@NotNull BlockBreakEvent event)
 	{
 		event.setCancelled(true);
 	}

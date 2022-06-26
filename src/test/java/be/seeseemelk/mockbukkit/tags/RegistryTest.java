@@ -98,7 +98,7 @@ class RegistryTest
 		}
 	}
 
-	private boolean isCyclic(Set<TagWrapperMock> visiting, Set<TagWrapperMock> visited, TagWrapperMock tag)
+	private boolean isCyclic(@NotNull Set<TagWrapperMock> visiting, @NotNull Set<TagWrapperMock> visited, @NotNull TagWrapperMock tag)
 	{
 		visiting.add(tag);
 
