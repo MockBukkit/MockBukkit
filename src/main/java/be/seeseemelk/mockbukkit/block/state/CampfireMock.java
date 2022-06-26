@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.block.state;
 
 import org.apache.commons.lang3.Validate;
 import org.bukkit.Material;
+import org.bukkit.Tag;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Campfire;
@@ -22,13 +23,13 @@ public class CampfireMock extends TileStateMock implements Campfire
 	public CampfireMock(@NotNull Material material)
 	{
 		super(material);
-		checkType(material, Material.CAMPFIRE, Material.SOUL_CAMPFIRE);
+		checkType(material, Tag.CAMPFIRES);
 	}
 
 	protected CampfireMock(@NotNull Block block)
 	{
 		super(block);
-		checkType(block, Material.CAMPFIRE, Material.SOUL_CAMPFIRE);
+		checkType(block, Tag.CAMPFIRES);
 	}
 
 	protected CampfireMock(@NotNull CampfireMock state)
