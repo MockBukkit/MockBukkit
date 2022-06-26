@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -25,6 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BukkitSchedulerMockTest
@@ -409,6 +411,37 @@ class BukkitSchedulerMockTest
 		assertEquals(0, count.get());
 		scheduler.performTicks(1L);
 		assertEquals(1, count.get());
+	}
+
+	@Test
+	void getMainThreadExecutor_RunsOnMainThread()
+	{
+		MockBukkit.mock();
+		Executor executor = scheduler.getMainThreadExecutor(MockBukkit.createMockPlugin());
+		AtomicBoolean b = new AtomicBoolean();
+
+		executor.execute(() -> b.set(true));
+		scheduler.performOneTick();
+
+		assertTrue(b.get());
+		MockBukkit.unmock();
+	}
+
+	@Test
+	void getMainThreadExecutor_NullPlugin_ThrowsException()
+	{
+		assertThrowsExactly(NullPointerException.class, () -> scheduler.getMainThreadExecutor(null));
+	}
+
+	@Test
+	void getMainThreadExecutor_NullCommand_ThrowsException()
+	{
+		MockBukkit.mock();
+		Executor executor = scheduler.getMainThreadExecutor(MockBukkit.createMockPlugin());
+
+		assertThrowsExactly(NullPointerException.class, () -> executor.execute(null));
+
+		MockBukkit.unmock();
 	}
 
 }
