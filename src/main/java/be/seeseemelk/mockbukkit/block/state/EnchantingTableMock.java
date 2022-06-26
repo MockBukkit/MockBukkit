@@ -17,15 +17,13 @@ public class EnchantingTableMock extends TileStateMock implements EnchantingTabl
 	protected EnchantingTableMock(@NotNull Material material)
 	{
 		super(material);
-		if (material != Material.ENCHANTING_TABLE)
-			throw new IllegalArgumentException("Cannot create an Enchanting Table state from " + material);
+		checkType(material, Material.ENCHANTING_TABLE);
 	}
 
 	protected EnchantingTableMock(@NotNull Block block)
 	{
 		super(block);
-		if (block.getType() != Material.ENCHANTING_TABLE)
-			throw new IllegalArgumentException("Cannot create an Enchanting Table state from " + block.getType());
+		checkType(block, Material.ENCHANTING_TABLE);
 	}
 
 	protected EnchantingTableMock(@NotNull EnchantingTableMock state)
