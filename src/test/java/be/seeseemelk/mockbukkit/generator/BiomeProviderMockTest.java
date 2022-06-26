@@ -31,7 +31,8 @@ class BiomeProviderMockTest
 	}
 
 	@Test
-	void getBiome() {
+	void getBiome()
+	{
 		WorldMock world = new WorldMock(Material.DIRT, Biome.BADLANDS, -64, 319, 3);
 		assertEquals(Biome.BADLANDS, world.getBiomeProvider().getBiome(world, 0, 0, 0));
 		world.setBiome(0, 0, 0, Biome.PLAINS);
@@ -39,7 +40,8 @@ class BiomeProviderMockTest
 	}
 
 	@Test
-	void getBiomes() {
+	void getBiomes()
+	{
 		WorldMock world = new WorldMock(Material.DIRT, Biome.BADLANDS, -64, 319, 3);
 		assertEquals(List.of(Biome.BADLANDS), world.getBiomeProvider().getBiomes(world));
 	}

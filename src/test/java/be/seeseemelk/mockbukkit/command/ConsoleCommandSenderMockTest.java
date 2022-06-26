@@ -1,15 +1,16 @@
 package be.seeseemelk.mockbukkit.command;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 class ConsoleCommandSenderMockTest
 {
+
 	private ConsoleCommandSenderMock sender;
 
 	@BeforeEach
@@ -36,7 +37,7 @@ class ConsoleCommandSenderMockTest
 	@Test
 	void sendMessageVararg_SomeStrings_StringsInRightOrder()
 	{
-		sender.sendMessage(new String[] {"Hello", "world"});
+		sender.sendMessage("Hello", "world");
 		sender.assertSaid("Hello");
 		sender.assertSaid("world");
 	}
@@ -85,4 +86,5 @@ class ConsoleCommandSenderMockTest
 		sender.sendMessage("Some message");
 		assertThrows(AssertionError.class, () -> sender.assertNoMoreSaid());
 	}
+
 }

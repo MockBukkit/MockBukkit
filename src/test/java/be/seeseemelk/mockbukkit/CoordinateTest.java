@@ -1,13 +1,14 @@
 package be.seeseemelk.mockbukkit;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
 class CoordinateTest
 {
+
 	private Coordinate coordinate;
 
 	@BeforeEach
@@ -100,4 +101,5 @@ class CoordinateTest
 		Coordinate local = coordinate.toLocalCoordinate();
 		assertEquals(new Coordinate(3, -15, 10), local);
 	}
+
 }

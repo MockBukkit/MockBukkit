@@ -50,11 +50,10 @@ public class EnchantedBookMetaMock extends ItemMetaMock implements EnchantmentSt
 		{
 			return false;
 		}
-		if (!(obj instanceof EnchantedBookMetaMock))
+		if (!(obj instanceof EnchantedBookMetaMock other))
 		{
 			return false;
 		}
-		EnchantedBookMetaMock other = (EnchantedBookMetaMock) obj;
 		return storedEnchantments.equals(other.storedEnchantments);
 	}
 
