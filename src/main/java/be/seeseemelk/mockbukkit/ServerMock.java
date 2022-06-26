@@ -1247,7 +1247,8 @@ public class ServerMock extends Server.Spigot implements Server
 			{
 				Thread.sleep(50); // TODO: Can we avoid busy waiting?
 			}
-			catch (InterruptedException ignored) {
+			catch (InterruptedException ignored)
+			{
 				Thread.currentThread().interrupt();
 			}
 			pollCount++;
@@ -1265,8 +1266,8 @@ public class ServerMock extends Server.Spigot implements Server
 		}
 
 		newPlugins.stream()
-		.sorted(Comparator.comparing(p -> p.getDescription().getLoad()))
-		.forEach(plugin -> getPluginManager().enablePlugin(plugin));
+				.sorted(Comparator.comparing(p -> p.getDescription().getLoad()))
+				.forEach(plugin -> getPluginManager().enablePlugin(plugin));
 
 		new ServerLoadEvent(ServerLoadEvent.LoadType.RELOAD).callEvent();
 	}
