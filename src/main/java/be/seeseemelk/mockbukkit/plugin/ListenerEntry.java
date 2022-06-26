@@ -17,7 +17,7 @@ public class ListenerEntry
 
 	private final Plugin plugin;
 	private final Listener listener;
-	private final Method method;
+	private final @NotNull Method method;
 
 	/**
 	 * Creates a new listener entry for a given method.

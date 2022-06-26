@@ -37,7 +37,7 @@ class ConsoleCommandSenderMockTest
 	@Test
 	void sendMessageVararg_SomeStrings_StringsInRightOrder()
 	{
-		sender.sendMessage(new String[]{ "Hello", "world" });
+		sender.sendMessage("Hello", "world");
 		sender.assertSaid("Hello");
 		sender.assertSaid("world");
 	}

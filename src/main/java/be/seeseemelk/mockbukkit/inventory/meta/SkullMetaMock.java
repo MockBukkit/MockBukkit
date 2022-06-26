@@ -63,12 +63,11 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 		{
 			return false;
 		}
-		if (!(obj instanceof SkullMeta))
+		if (!(obj instanceof SkullMeta other))
 		{
 			return false;
 		}
 
-		SkullMeta other = (SkullMeta) obj;
 		return Objects.equals(owner, other.getOwningPlayer().getName());
 	}
 
