@@ -63,12 +63,12 @@ public class BlockStateMock implements BlockState
 		checkType(block.getType(), expected);
 	}
 
-	protected void checkType(Material material, MaterialSetTag tag)
+	protected void checkType(Material material, Tag<Material> tag)
 	{
 		Preconditions.checkArgument(tag.isTagged(material), "Cannot create a " + getClass().getSimpleName() + " from " + material);
 	}
 
-	protected void checkType(Block block, MaterialSetTag expected)
+	protected void checkType(Block block, Tag<Material> expected)
 	{
 		checkType(block.getType(), expected);
 	}

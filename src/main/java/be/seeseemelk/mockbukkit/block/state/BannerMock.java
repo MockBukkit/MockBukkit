@@ -25,13 +25,13 @@ public class BannerMock extends TileStateMock implements Banner
 	public BannerMock(@NotNull Material material)
 	{
 		super(material);
-		checkType(material, Tag.BANNERS.getValues().toArray(new Material[0])); // Paper doesn't have the banners tag in the MaterialTags class (yet)
+		checkType(material, Tag.BANNERS); // Paper doesn't have the banners tag in the MaterialTags class (yet)
 	}
 
 	protected BannerMock(@NotNull Block block)
 	{
 		super(block);
-		checkType(block, Tag.BANNERS.getValues().toArray(new Material[0]));
+		checkType(block, Tag.BANNERS);
 	}
 
 	protected BannerMock(@NotNull BannerMock state)
