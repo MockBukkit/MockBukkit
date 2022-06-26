@@ -1,14 +1,11 @@
 package be.seeseemelk.mockbukkit;
 
-import com.google.common.io.ByteArrayDataOutput;
-import com.google.common.io.ByteStreams;
 import be.seeseemelk.mockbukkit.command.CommandResult;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
 import be.seeseemelk.mockbukkit.entity.SimpleEntityMock;
-
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import be.seeseemelk.mockbukkit.profile.PlayerProfileMock;
 import com.google.common.io.ByteArrayDataOutput;
@@ -22,22 +19,12 @@ import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.WorldType;
 import org.bukkit.block.data.BlockData;
-import be.seeseemelk.mockbukkit.entity.*;
-import be.seeseemelk.mockbukkit.inventory.InventoryMock;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
-import org.bukkit.Material;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.Warning;
-import org.bukkit.World;
-import org.bukkit.WorldCreator;
-import org.bukkit.WorldType;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.event.server.MapInitializeEvent;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.server.MapInitializeEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.map.MapView;
@@ -64,7 +51,6 @@ import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -233,7 +219,7 @@ class ServerMockTest
 
 	@ParameterizedTest
 	@ValueSource(strings = { "testcommand", "tc", "othercommand" })
-	void testPluginCommand(String cmd)
+	void testPluginCommand(@NotNull String cmd)
 	{
 		MockBukkit.load(TestPlugin.class);
 		assertNotNull(server.getPluginCommand(cmd));
@@ -443,7 +429,7 @@ class ServerMockTest
 			"player, PLAYER",
 			"player_other, player",
 	})
-	void getPlayer_NameAndPlayerExists_PlayerFound(String actual, String expected)
+	void getPlayer_NameAndPlayerExists_PlayerFound(@NotNull String actual, @NotNull String expected)
 	{
 		PlayerMock player = new PlayerMock(server, actual);
 		server.addPlayer(player);
@@ -732,7 +718,7 @@ class ServerMockTest
 class TestRecipe implements Recipe
 {
 
-	private final ItemStack result;
+	private final @NotNull ItemStack result;
 
 	public TestRecipe(@NotNull ItemStack result)
 	{

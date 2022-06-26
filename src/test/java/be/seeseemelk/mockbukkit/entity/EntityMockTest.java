@@ -568,7 +568,7 @@ class EntityMockTest
 	void playEffect()
 	{
 		assertDoesNotThrow(() -> entity.playEffect(EntityEffect.LOVE_HEARTS));
-  	}
+	}
 
 	@Test
 	void lastDamageCause()

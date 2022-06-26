@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -25,6 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BukkitSchedulerMockTest
@@ -200,7 +202,9 @@ class BukkitSchedulerMockTest
 	void cancellingAsyncTaskDecreasesNumberOfQueuedAsyncTasks()
 	{
 		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
-		BukkitTask task = scheduler.runTaskLaterAsynchronously(null, () -> {}, 1);
+		BukkitTask task = scheduler.runTaskLaterAsynchronously(null, () ->
+		{
+		}, 1);
 		assertEquals(1, scheduler.getNumberOfQueuedAsyncTasks());
 		task.cancel();
 		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
@@ -214,9 +218,15 @@ class BukkitSchedulerMockTest
 		Plugin plugin = server.getPluginManager().getPlugin("MockBukkitTestPlugin");
 		BukkitSchedulerMock scheduler1 = server.getScheduler();
 		assertEquals(0, scheduler1.getNumberOfQueuedAsyncTasks());
-		scheduler1.runTaskLaterAsynchronously(plugin, () -> {}, 5);
-		scheduler1.runTaskLaterAsynchronously(plugin, () -> {}, 10);
-		BukkitTask task = scheduler1.runTaskLaterAsynchronously(null, () -> {}, 5);
+		scheduler1.runTaskLaterAsynchronously(plugin, () ->
+		{
+		}, 5);
+		scheduler1.runTaskLaterAsynchronously(plugin, () ->
+		{
+		}, 10);
+		BukkitTask task = scheduler1.runTaskLaterAsynchronously(null, () ->
+		{
+		}, 5);
 		assertEquals(3, scheduler1.getNumberOfQueuedAsyncTasks());
 		scheduler1.cancelTasks(plugin);
 		assertEquals(1, scheduler1.getNumberOfQueuedAsyncTasks());
@@ -266,7 +276,7 @@ class BukkitSchedulerMockTest
 		scheduler.performOneTick();
 		assertEquals(2, scheduler.getActiveRunningCount());
 		scheduler.setShutdownTimeout(300);
-		assertThrows(RuntimeException.class, ()->
+		assertThrows(RuntimeException.class, () ->
 		{
 			scheduler.shutdown();
 		});
@@ -401,6 +411,39 @@ class BukkitSchedulerMockTest
 		assertEquals(0, count.get());
 		scheduler.performTicks(1L);
 		assertEquals(1, count.get());
+	}
+
+	@Test
+	void getMainThreadExecutor_RunsOnMainThread()
+	{
+		MockBukkit.mock();
+		AtomicBoolean b = new AtomicBoolean();
+
+		Executor executor = scheduler.getMainThreadExecutor(MockBukkit.createMockPlugin());
+		assertNotNull(executor);
+
+		executor.execute(() -> b.set(Bukkit.isPrimaryThread()));
+		scheduler.performOneTick();
+
+		assertTrue(b.get());
+		MockBukkit.unmock();
+	}
+
+	@Test
+	void getMainThreadExecutor_NullPlugin_ThrowsException()
+	{
+		assertThrowsExactly(NullPointerException.class, () -> scheduler.getMainThreadExecutor(null));
+	}
+
+	@Test
+	void getMainThreadExecutor_NullCommand_ThrowsException()
+	{
+		MockBukkit.mock();
+		Executor executor = scheduler.getMainThreadExecutor(MockBukkit.createMockPlugin());
+
+		assertThrowsExactly(NullPointerException.class, () -> executor.execute(null));
+
+		MockBukkit.unmock();
 	}
 
 }

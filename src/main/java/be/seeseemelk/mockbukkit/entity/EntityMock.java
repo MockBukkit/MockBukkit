@@ -73,7 +73,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private @NotNull Vector velocity = new Vector(0, 0, 0);
 	private float fallDistance;
 	private int fireTicks = -20;
-	private int maxFireTicks = 20;
+	private final int maxFireTicks = 20;
 	private boolean removed = false;
 	private @Nullable EntityDamageEvent lastDamageEvent;
 

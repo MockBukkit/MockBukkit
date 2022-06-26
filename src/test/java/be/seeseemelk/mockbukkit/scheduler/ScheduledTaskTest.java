@@ -1,29 +1,34 @@
 package be.seeseemelk.mockbukkit.scheduler;
 
+import org.junit.jupiter.api.Test;
+
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.concurrent.CancellationException;
-import java.util.concurrent.atomic.AtomicBoolean;
-
-import org.junit.jupiter.api.Test;
-
 class ScheduledTaskTest
 {
+
 	@Test
 	void getScheduledTick_GetsScheduledTick()
 	{
-		ScheduledTask task = new ScheduledTask(0, null, true, 5, () -> {});
+		ScheduledTask task = new ScheduledTask(0, null, true, 5, () ->
+		{
+		});
 		assertEquals(5, task.getScheduledTick());
 	}
 
 	@Test
 	void getRunnable_GetsRunnable()
 	{
-		Runnable runnable = () -> {};
+		Runnable runnable = () ->
+		{
+		};
 		ScheduledTask task = new ScheduledTask(0, null, true, 0, runnable);
 		assertSame(runnable, task.getRunnable());
 	}
@@ -31,23 +36,31 @@ class ScheduledTaskTest
 	@Test
 	void getTaskId_GetsTaskId()
 	{
-		ScheduledTask task = new ScheduledTask(5, null, true, 0, () -> {});
+		ScheduledTask task = new ScheduledTask(5, null, true, 0, () ->
+		{
+		});
 		assertEquals(5, task.getTaskId());
 	}
 
 	@Test
 	void isSync()
 	{
-		ScheduledTask task = new ScheduledTask(0, null, true, 0, () -> {});
+		ScheduledTask task = new ScheduledTask(0, null, true, 0, () ->
+		{
+		});
 		assertTrue(task.isSync());
-		task = new ScheduledTask(0, null, false, 0, () -> {});
+		task = new ScheduledTask(0, null, false, 0, () ->
+		{
+		});
 		assertFalse(task.isSync());
 	}
 
 	@Test
 	void setScheduledTick_OtherTick_TickSetExactly()
 	{
-		ScheduledTask task = new ScheduledTask(0, null, true, 5, () -> {});
+		ScheduledTask task = new ScheduledTask(0, null, true, 5, () ->
+		{
+		});
 		assertEquals(5, task.getScheduledTick());
 		task.setScheduledTick(20);
 		assertEquals(20, task.getScheduledTick());
@@ -56,7 +69,9 @@ class ScheduledTaskTest
 	@Test
 	void cancel()
 	{
-		ScheduledTask task = new ScheduledTask(0, null, true, 0, () -> {});
+		ScheduledTask task = new ScheduledTask(0, null, true, 0, () ->
+		{
+		});
 		assertFalse(task.isCancelled());
 		task.cancel();
 		assertTrue(task.isCancelled());

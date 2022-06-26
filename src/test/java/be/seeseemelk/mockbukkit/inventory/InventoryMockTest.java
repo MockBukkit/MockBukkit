@@ -411,7 +411,7 @@ class InventoryMockTest
 		assertEquals(30, inventory.getItem(0).getAmount());
 		assertEquals(30, inventory.getItem(1).getAmount());
 		assertEquals(4, inventory.getItem(2).getAmount());
-		assertEquals(null, inventory.getItem(3));
+		assertNull(inventory.getItem(3));
 	}
 
 	@Test
