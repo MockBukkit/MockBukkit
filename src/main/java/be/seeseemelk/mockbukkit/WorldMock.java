@@ -128,7 +128,7 @@ public class WorldMock implements World
 	private final MetadataTable metadataTable = new MetadataTable();
 	private final Map<ChunkCoordinate, ChunkMock> loadedChunks = new HashMap<>();
 	private final PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
-	private final ServerMock server;
+	private final @Nullable ServerMock server;
 	private final Material defaultBlock;
 	private final Biome defaultBiome;
 	private final int grassHeight;
@@ -150,7 +150,7 @@ public class WorldMock implements World
 	private long seed = 0;
 	private @NotNull WorldType worldType = WorldType.NORMAL;
 	private final BiomeProviderMock biomeProviderMock = new BiomeProviderMock();
-	private @NotNull Map<Coordinate, Biome> biomes = new HashMap<>();
+	private final @NotNull Map<Coordinate, Biome> biomes = new HashMap<>();
 	private @NotNull Difficulty difficulty = Difficulty.NORMAL;
 
 	private boolean allowAnimals = true;
@@ -2112,7 +2112,7 @@ public class WorldMock implements World
 
 	@Override
 	public <T extends AbstractArrow> @NotNull T spawnArrow(Location location, Vector direction, float speed, float spread,
-                                                           Class<T> clazz)
+														   Class<T> clazz)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

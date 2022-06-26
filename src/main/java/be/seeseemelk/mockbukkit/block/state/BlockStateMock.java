@@ -51,7 +51,7 @@ public class BlockStateMock implements BlockState
 	}
 
 	@Override
-	public void setMetadata(String metadataKey, MetadataValue newMetadataValue)
+	public void setMetadata(String metadataKey, @NotNull MetadataValue newMetadataValue)
 	{
 		metadataTable.setMetadata(metadataKey, newMetadataValue);
 	}
@@ -274,14 +274,10 @@ public class BlockStateMock implements BlockState
 		{
 			return false;
 		}
-		if (this.isPlaced() && this.getLocation() != other.getLocation() && (this.getLocation() == null || !this.getLocation().equals(other.getLocation())))
-		{
-			return false;
-		}
+		return !this.isPlaced() || this.getLocation() == other.getLocation() || (this.getLocation() != null && this.getLocation().equals(other.getLocation()));
 //		if (this.getBlockData() != other.getBlockData() && (this.getBlockData() == null || !this.getBlockData().equals(other.getBlockData()))) {
 //			return false; Not implemented
 //		}
-		return true;
 	}
 
 	@NotNull

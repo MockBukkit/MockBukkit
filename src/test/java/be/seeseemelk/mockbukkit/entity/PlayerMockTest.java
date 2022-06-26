@@ -99,7 +99,7 @@ class PlayerMockTest
 {
 
 	// Taken from https://minecraft.gamepedia.com/Experience#Leveling_up
-	private static int[] expRequired =
+	private static final int[] expRequired =
 			{
 					7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 42, 47, 52, 57, 62, 67, 72, 77, 82, 87, 92, 97, 102,
 					107, 112, 121, 130, 139, 148, 157, 166, 175, 184, 193
@@ -484,7 +484,7 @@ class PlayerMockTest
 		Bukkit.getPluginManager().registerEvents(new Listener()
 		{
 			@EventHandler
-			public void onBlockBreak(BlockBreakEvent event)
+			public void onBlockBreak(@NotNull BlockBreakEvent event)
 			{
 				event.setCancelled(true);
 			}
@@ -504,7 +504,7 @@ class PlayerMockTest
 		Bukkit.getPluginManager().registerEvents(new Listener()
 		{
 			@EventHandler
-			public void onBlockDamage(BlockDamageEvent event)
+			public void onBlockDamage(@NotNull BlockDamageEvent event)
 			{
 				event.setCancelled(true);
 			}
@@ -523,7 +523,7 @@ class PlayerMockTest
 		Bukkit.getPluginManager().registerEvents(new Listener()
 		{
 			@EventHandler
-			public void onBlockBreak(BlockBreakEvent event)
+			public void onBlockBreak(@NotNull BlockBreakEvent event)
 			{
 				event.setCancelled(true);
 			}
@@ -544,7 +544,7 @@ class PlayerMockTest
 		Bukkit.getPluginManager().registerEvents(new Listener()
 		{
 			@EventHandler
-			public void onBlockDamage(BlockDamageEvent event)
+			public void onBlockDamage(@NotNull BlockDamageEvent event)
 			{
 				event.setCancelled(true);
 			}
@@ -569,7 +569,7 @@ class PlayerMockTest
 
 	@ParameterizedTest
 	@EnumSource(value = GameMode.class, mode = EnumSource.Mode.EXCLUDE, names = { "SURVIVAL" })
-	void simulateBlockDamage_NotSurvival_BlockNotDamaged(GameMode nonSurvivalGameMode)
+	void simulateBlockDamage_NotSurvival_BlockNotDamaged(@NotNull GameMode nonSurvivalGameMode)
 	{
 		player.setGameMode(nonSurvivalGameMode);
 		Block block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
@@ -585,7 +585,7 @@ class PlayerMockTest
 		Bukkit.getPluginManager().registerEvents(new Listener()
 		{
 			@EventHandler
-			public void onBlockDamage(BlockDamageEvent event)
+			public void onBlockDamage(@NotNull BlockDamageEvent event)
 			{
 				event.setInstaBreak(false);
 			}
@@ -617,7 +617,7 @@ class PlayerMockTest
 		Bukkit.getPluginManager().registerEvents(new Listener()
 		{
 			@EventHandler
-			public void onBlockDamage(BlockDamageEvent event)
+			public void onBlockDamage(@NotNull BlockDamageEvent event)
 			{
 				event.setInstaBreak(true);
 			}
@@ -648,7 +648,7 @@ class PlayerMockTest
 		Bukkit.getPluginManager().registerEvents(new Listener()
 		{
 			@EventHandler
-			public void onBlockDamage(BlockDamageEvent event)
+			public void onBlockDamage(@NotNull BlockDamageEvent event)
 			{
 				event.setInstaBreak(true);
 			}
@@ -1260,7 +1260,7 @@ class PlayerMockTest
 		Bukkit.getPluginManager().registerEvents(new Listener()
 		{
 			@EventHandler
-			public void onPlayerMove(PlayerMoveEvent event)
+			public void onPlayerMove(@NotNull PlayerMoveEvent event)
 			{
 				event.setCancelled(true);
 			}
@@ -1283,7 +1283,7 @@ class PlayerMockTest
 		Bukkit.getPluginManager().registerEvents(new Listener()
 		{
 			@EventHandler
-			public void onPlayerMove(PlayerMoveEvent event)
+			public void onPlayerMove(@NotNull PlayerMoveEvent event)
 			{
 				event.getPlayer().teleport(teleportLocation);
 			}
@@ -1471,7 +1471,7 @@ class PlayerMockTest
 		Bukkit.getPluginManager().registerEvents(new Listener()
 		{
 			@EventHandler
-			public void onPlayerTeleport(PlayerTeleportEvent event)
+			public void onPlayerTeleport(@NotNull PlayerTeleportEvent event)
 			{
 				event.setCancelled(true);
 			}

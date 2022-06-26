@@ -50,7 +50,7 @@ public class MockBanList implements BanList
 	public static final class MockBanEntry implements BanEntry
 	{
 
-		private String target;
+		private final String target;
 		private String source;
 		private String reason;
 		private Date created;
@@ -138,9 +138,8 @@ public class MockBanList implements BanList
 			{
 				return true;
 			}
-			else if (obj instanceof BanEntry)
+			else if (obj instanceof BanEntry banEntry)
 			{
-				BanEntry banEntry = (BanEntry) obj;
 				return target.equals(banEntry.getTarget()) && expires.equals(banEntry.getExpiration()) && reason.equals(banEntry.getReason())
 						&& source.equals(banEntry.getSource()) && created.equals(banEntry.getCreated());
 			}
