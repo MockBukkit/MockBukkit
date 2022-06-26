@@ -34,7 +34,7 @@ public class InventoryMock implements Inventory
 	private final @NotNull InventoryType type;
 
 	private int maxStackSize = MAX_STACK_SIZE;
-	private @NotNull List<HumanEntity> viewers = new ArrayList<>();
+	private final @NotNull List<HumanEntity> viewers = new ArrayList<>();
 
 	public InventoryMock(@Nullable InventoryHolder holder, int size, @NotNull InventoryType type)
 	{
@@ -263,7 +263,7 @@ public class InventoryMock implements Inventory
 	}
 
 	@Override
-	public ItemStack[] getContents()
+	public ItemStack @NotNull [] getContents()
 	{
 		return items;
 	}

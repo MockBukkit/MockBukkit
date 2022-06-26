@@ -14,15 +14,13 @@ public class BlastFurnaceMock extends AbstractFurnaceMock implements BlastFurnac
 	public BlastFurnaceMock(@NotNull Material material)
 	{
 		super(material);
-		if (material != Material.BLAST_FURNACE)
-			throw new IllegalArgumentException("Cannot create a Blast Furnace state from " + material);
+		checkType(material, Material.BLAST_FURNACE);
 	}
 
 	protected BlastFurnaceMock(@NotNull Block block)
 	{
 		super(block);
-		if (block.getType() != Material.BLAST_FURNACE)
-			throw new IllegalArgumentException("Cannot create a Blast Furnace state from " + block.getType());
+		checkType(block, Material.BLAST_FURNACE);
 	}
 
 	@Override

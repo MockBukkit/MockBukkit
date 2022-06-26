@@ -1,9 +1,12 @@
 package be.seeseemelk.mockbukkit.block.state;
 
+import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import com.destroystokyo.paper.MaterialTags;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -14,6 +17,18 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 class BedMockTest
 {
+
+	@BeforeEach
+	void setup()
+	{
+		MockBukkit.mock();
+	}
+
+	@AfterEach
+	void teardown()
+	{
+		MockBukkit.unmock();
+	}
 
 	@Test
 	void constructor_Material()

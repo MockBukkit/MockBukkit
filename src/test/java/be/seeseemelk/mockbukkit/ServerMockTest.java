@@ -219,7 +219,7 @@ class ServerMockTest
 
 	@ParameterizedTest
 	@ValueSource(strings = { "testcommand", "tc", "othercommand" })
-	void testPluginCommand(String cmd)
+	void testPluginCommand(@NotNull String cmd)
 	{
 		MockBukkit.load(TestPlugin.class);
 		assertNotNull(server.getPluginCommand(cmd));
@@ -429,7 +429,7 @@ class ServerMockTest
 			"player, PLAYER",
 			"player_other, player",
 	})
-	void getPlayer_NameAndPlayerExists_PlayerFound(String actual, String expected)
+	void getPlayer_NameAndPlayerExists_PlayerFound(@NotNull String actual, @NotNull String expected)
 	{
 		PlayerMock player = new PlayerMock(server, actual);
 		server.addPlayer(player);
@@ -718,7 +718,7 @@ class ServerMockTest
 class TestRecipe implements Recipe
 {
 
-	private final ItemStack result;
+	private final @NotNull ItemStack result;
 
 	public TestRecipe(@NotNull ItemStack result)
 	{

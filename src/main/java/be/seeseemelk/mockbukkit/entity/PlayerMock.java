@@ -123,8 +123,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 {
 
-	private GameMode gamemode = GameMode.SURVIVAL;
-	private GameMode previousGamemode = gamemode;
+	private @NotNull GameMode gamemode = GameMode.SURVIVAL;
+	private @NotNull GameMode previousGamemode = gamemode;
 
 	private boolean online;
 	private @Nullable EnderChestInventoryMock enderChest = null;
@@ -358,7 +358,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @param slot          The slot in the provided Inventory
 	 * @return The event that was fired.
 	 */
-	public InventoryClickEvent simulateInventoryClick(@NotNull InventoryView inventoryView, int slot)
+	public @NotNull InventoryClickEvent simulateInventoryClick(@NotNull InventoryView inventoryView, int slot)
 	{
 		return simulateInventoryClick(inventoryView, ClickType.LEFT, slot);
 	}

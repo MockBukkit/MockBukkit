@@ -22,7 +22,7 @@ import java.util.Set;
 class EnchantmentMock extends Enchantment
 {
 
-	private final String name;
+	private final @NotNull String name;
 
 	@SuppressWarnings("deprecation")
 	public EnchantmentMock(@NotNull String name)
