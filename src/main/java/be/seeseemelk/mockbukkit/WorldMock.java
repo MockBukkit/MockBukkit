@@ -8,6 +8,7 @@ import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
 import be.seeseemelk.mockbukkit.entity.FireworkMock;
 import be.seeseemelk.mockbukkit.entity.FishHookMock;
+import be.seeseemelk.mockbukkit.entity.HorseMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
 import be.seeseemelk.mockbukkit.entity.MobMock;
 import be.seeseemelk.mockbukkit.entity.SheepMock;
@@ -62,6 +63,7 @@ import org.bukkit.entity.FishHook;
 import org.bukkit.entity.Ghast;
 import org.bukkit.entity.Golem;
 import org.bukkit.entity.Hanging;
+import org.bukkit.entity.Horse;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.ItemFrame;
 import org.bukkit.entity.LeashHitch;
@@ -887,6 +889,10 @@ public class WorldMock implements World
 		else if (clazz == Enderman.class)
 		{
 			return new EndermanMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Horse.class)
+		{
+			return new HorseMock(server, UUID.randomUUID());
 		}
 		else if (clazz == Sheep.class)
 		{

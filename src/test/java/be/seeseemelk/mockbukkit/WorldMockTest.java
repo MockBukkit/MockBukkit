@@ -26,6 +26,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Horse;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -261,6 +262,16 @@ class WorldMockTest
 		assertEquals(20, zombie.getLocation().getBlockY());
 		assertEquals(50, zombie.getLocation().getBlockZ());
 		assertTrue(world.getEntities().size() > 0);
+	}
+
+	@Test
+	void spawnHorseTest()
+	{
+		WorldMock world = new WorldMock();
+		Location location = new Location(world, 100, 20, 50);
+		Entity horse = world.spawnEntity(location, EntityType.HORSE);
+		assertTrue(world.getEntities().size() > 0);
+		assertInstanceOf(Horse.class, horse);
 	}
 
 	@Test
