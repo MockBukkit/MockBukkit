@@ -477,13 +477,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 
-
-
-
-
-
-
-
 	@Override
 	public void closeInventory(InventoryCloseEvent.@NotNull Reason reason)
 	{
@@ -577,7 +570,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
 
 
 	@Override
@@ -1831,9 +1823,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 
-
-
-
 	@Nullable
 	@Override
 	public Location getBedSpawnLocation()
@@ -2464,7 +2453,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 
-
 	@Override
 	public Block getTargetBlockExact(int maxDistance)
 	{
@@ -2723,8 +2711,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		Preconditions.checkNotNull(blockChanges, "BlockChanges cannot be null");
 		// Pretend we sent the block change.
 	}
-
-
 
 
 	@Override
