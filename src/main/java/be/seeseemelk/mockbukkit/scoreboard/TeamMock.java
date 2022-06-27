@@ -105,10 +105,7 @@ public class TeamMock implements Team
 	@Override
 	public @NotNull TextColor color() throws IllegalStateException
 	{
-		if (!hasColor())
-		{
-			throw new IllegalStateException("Team colors must have hex values");
-		}
+		Preconditions.checkState(hasColor(), "Team colors must have hex values");
 		return TextColor.color(this.color.asBungee().getColor().getRGB());
 	}
 

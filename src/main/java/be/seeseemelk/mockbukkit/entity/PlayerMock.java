@@ -2070,7 +2070,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public @NotNull Scoreboard getScoreboard()
 	{
-		return scoreboard;
+		return this.scoreboard;
 	}
 
 	@Override
