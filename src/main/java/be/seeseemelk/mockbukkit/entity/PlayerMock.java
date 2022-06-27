@@ -967,6 +967,12 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public @NotNull String getScoreboardEntry()
+	{
+		return getName();
+	}
+
+	@Override
 	public void playerListName(@Nullable Component name)
 	{
 		this.playerListName = name;
