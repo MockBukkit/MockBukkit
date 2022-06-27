@@ -98,6 +98,7 @@ public class TeamMock implements Team
 	@Override
 	public boolean hasColor()
 	{
+		checkRegistered();
 		return this.color.isColor();
 	}
 
@@ -269,6 +270,7 @@ public class TeamMock implements Team
 	@Override
 	public @NotNull Set<String> getEntries() throws IllegalStateException
 	{
+		checkRegistered();
 		return this.entries;
 	}
 
@@ -402,6 +404,7 @@ public class TeamMock implements Team
 	public boolean hasEntity(@NotNull Entity entity) throws IllegalStateException, IllegalArgumentException
 	{
 		Preconditions.checkNotNull(entity, "Entity cannot be null");
+		checkRegistered();
 		return this.entries.contains(((EntityMock) entity).getScoreboardEntry());
 	}
 
