@@ -65,12 +65,11 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 		{
 			return false;
 		}
-		if (!(obj instanceof PotionMetaMock))
+		if (!(obj instanceof PotionMetaMock other))
 		{
 			return false;
 		}
 
-		PotionMetaMock other = (PotionMetaMock) obj;
 		return effects.equals(other.effects) && Objects.equals(color, other.color)
 				&& basePotionData.equals(other.basePotionData);
 	}

@@ -59,9 +59,8 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 			return true;
 		if (!super.equals(obj))
 			return false;
-		if (!(obj instanceof BookMetaMock))
+		if (!(obj instanceof BookMetaMock other))
 			return false;
-		BookMetaMock other = (BookMetaMock) obj;
 		return Objects.equals(author, other.author) && Objects.equals(pages, other.pages)
 				&& Objects.equals(title, other.title);
 	}

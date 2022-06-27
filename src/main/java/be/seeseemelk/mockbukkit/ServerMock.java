@@ -13,6 +13,7 @@ import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
 import be.seeseemelk.mockbukkit.help.HelpMapMock;
 import be.seeseemelk.mockbukkit.inventory.BarrelInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.BrewerInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.ChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.DispenserInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.DropperInventoryMock;
@@ -385,7 +386,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * @param args    The arguments to pass to the commands.
 	 * @return The value returned by {@link Command#execute}.
 	 */
-	public CommandResult executeConsole(@NotNull Command command, String... args)
+	public @NotNull CommandResult executeConsole(@NotNull Command command, String... args)
 	{
 		return execute(command, getConsoleSender(), args);
 	}
@@ -409,7 +410,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * @param args    The arguments to pass to the commands.
 	 * @return The value returned by {@link Command#execute}.
 	 */
-	public CommandResult executePlayer(@NotNull Command command, String... args)
+	public @NotNull CommandResult executePlayer(@NotNull Command command, String... args)
 	{
 		AsyncCatcher.catchOp("command dispatch");
 
@@ -460,7 +461,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * @param args    The arguments to pass to the commands.
 	 * @return The value returned by {@link Command#execute}.
 	 */
-	public CommandResult execute(@NotNull String command, CommandSender sender, String... args)
+	public @NotNull CommandResult execute(@NotNull String command, CommandSender sender, String... args)
 	{
 		AsyncCatcher.catchOp("command dispatch");
 		return execute(getCommandMap().getCommand(command), sender, args);
@@ -502,7 +503,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public OfflinePlayer[] getOfflinePlayers()
+	public OfflinePlayer @NotNull [] getOfflinePlayers()
 	{
 		return playerList.getOfflinePlayers();
 	}
@@ -641,7 +642,7 @@ public class ServerMock extends Server.Spigot implements Server
 		case ENCHANTING:
 			// TODO: This Inventory Type needs to be implemented
 		case BREWING:
-			// TODO: This Inventory Type needs to be implemented
+			return new BrewerInventoryMock(owner);
 		case CRAFTING:
 			// TODO: This Inventory Type needs to be implemented
 		case CREATIVE:
