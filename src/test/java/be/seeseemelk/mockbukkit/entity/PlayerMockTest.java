@@ -63,6 +63,8 @@ import org.bukkit.map.MapRenderer;
 import org.bukkit.map.MapView;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.ScoreboardManager;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -1538,6 +1540,16 @@ class PlayerMockTest
 		{
 			player.spawnParticle(Particle.ITEM_CRACK, loc, 1, wrongObj);
 		});
+	}
+
+	@Test
+	void setScoreboard()
+	{
+		ScoreboardManager manager = server.getScoreboardManager();
+		assertSame(manager.getMainScoreboard(), player.getScoreboard());
+		Scoreboard customScoreboard = manager.getNewScoreboard();
+		player.setScoreboard(customScoreboard);
+		assertSame(customScoreboard, player.getScoreboard());
 	}
 
 	@Test
