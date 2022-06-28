@@ -12,6 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
@@ -39,7 +40,7 @@ class MockPotionEffectTypeTest
 		assertEquals(NamespacedKey.minecraft("speed"), effect.getKey());
 		assertEquals(1, effect.getId());
 		assertEquals("Speed", effect.getName());
-		assertEquals(false, effect.isInstant());
+		assertFalse(effect.isInstant());
 		assertEquals(Color.fromRGB(8171462), effect.getColor());
 		assertEquals(0, effect.getEffectAttributes().size());
 	}

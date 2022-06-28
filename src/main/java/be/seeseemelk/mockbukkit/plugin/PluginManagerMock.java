@@ -76,7 +76,7 @@ public class PluginManagerMock implements PluginManager
 	private final List<Permission> permissions = new ArrayList<>();
 	private final Map<Permissible, Set<String>> permissionSubscriptions = new HashMap<>();
 	private final Map<Boolean, Map<Permissible, Boolean>> defaultPermissionSubscriptions = new HashMap<Boolean, Map<Permissible, Boolean>>();
-	private @NotNull Map<String, List<Listener>> listeners = new HashMap<>();
+	private final @NotNull Map<String, List<Listener>> listeners = new HashMap<>();
 
 	private final List<Class<?>> pluginConstructorTypes = Arrays.asList(JavaPluginLoader.class,
 			PluginDescriptionFile.class, File.class, File.class);
@@ -396,7 +396,7 @@ public class PluginManagerMock implements PluginManager
 	 * @param class1      The plugin to load.
 	 * @return The loaded plugin.
 	 */
-	public JavaPlugin loadPlugin(@NotNull Class<? extends JavaPlugin> class1, @NotNull PluginDescriptionFile description)
+	public @NotNull JavaPlugin loadPlugin(@NotNull Class<? extends JavaPlugin> class1, @NotNull PluginDescriptionFile description)
 	{
 		return loadPlugin(class1, description, new Object[0]);
 	}
@@ -408,7 +408,7 @@ public class PluginManagerMock implements PluginManager
 	 * @param parameters Extra parameters to pass on to the plugin constructor.
 	 * @return The loaded plugin.
 	 */
-	public JavaPlugin loadPlugin(@NotNull Class<? extends JavaPlugin> class1, Object @NotNull [] parameters)
+	public @NotNull JavaPlugin loadPlugin(@NotNull Class<? extends JavaPlugin> class1, Object @NotNull [] parameters)
 	{
 		try
 		{

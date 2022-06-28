@@ -15,15 +15,13 @@ public class BedMock extends TileStateMock implements Bed
 	public BedMock(@NotNull Material material)
 	{
 		super(material);
-		if (!MaterialTags.BEDS.isTagged(material))
-			throw new IllegalArgumentException("Cannot create a Bed state from " + material);
+		checkType(material, MaterialTags.BEDS);
 	}
 
 	protected BedMock(@NotNull Block block)
 	{
 		super(block);
-		if (!MaterialTags.BEDS.isTagged(block))
-			throw new IllegalArgumentException("Cannot create a Bed state from " + block.getType());
+		checkType(block, MaterialTags.BEDS);
 	}
 
 	protected BedMock(@NotNull BedMock state)

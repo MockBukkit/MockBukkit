@@ -20,15 +20,13 @@ public class LecternMock extends ContainerMock implements Lectern
 	public LecternMock(@NotNull Material material)
 	{
 		super(material);
-		if (material != Material.LECTERN)
-			throw new IllegalArgumentException("Cannot create a Lectern state from " + material);
+		checkType(material, Material.LECTERN);
 	}
 
 	protected LecternMock(@NotNull Block block)
 	{
 		super(block);
-		if (block.getType() != Material.LECTERN)
-			throw new IllegalArgumentException("Cannot create a Lectern state from " + block.getType());
+		checkType(block, Material.LECTERN);
 	}
 
 	protected LecternMock(@NotNull LecternMock state)

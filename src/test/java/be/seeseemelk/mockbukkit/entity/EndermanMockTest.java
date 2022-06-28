@@ -13,7 +13,9 @@ import org.junit.jupiter.api.Test;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class EndermanMockTest
 {
@@ -67,27 +69,27 @@ class EndermanMockTest
 	@Test
 	void testIsScreamingDefault()
 	{
-		assertEquals(false, endermanMock.isScreaming());
+		assertFalse(endermanMock.isScreaming());
 	}
 
 	@Test
 	void testIsScreaming()
 	{
 		endermanMock.setScreaming(true);
-		assertEquals(true, endermanMock.isScreaming());
+		assertTrue(endermanMock.isScreaming());
 	}
 
 	@Test
 	void testHasBeenStaredAtDefault()
 	{
-		assertEquals(false, endermanMock.hasBeenStaredAt());
+		assertFalse(endermanMock.hasBeenStaredAt());
 	}
 
 	@Test
 	void testHasBeenStaredAt()
 	{
 		endermanMock.setHasBeenStaredAt(true);
-		assertEquals(true, endermanMock.hasBeenStaredAt());
+		assertTrue(endermanMock.hasBeenStaredAt());
 	}
 
 }

@@ -125,7 +125,7 @@ public class TagParser implements Keyed
 					else
 					{
 						throw new TagMisconfigurationException(key, "Unexpected value format: "
-								+ element.getClass().getSimpleName() + " - " + element.toString());
+								+ element.getClass().getSimpleName() + " - " + element);
 					}
 				}
 

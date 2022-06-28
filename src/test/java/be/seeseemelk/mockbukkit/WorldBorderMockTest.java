@@ -7,6 +7,7 @@ import org.bukkit.World;
 import org.bukkit.WorldBorder;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -135,7 +136,7 @@ class WorldBorderMockTest
 		server.getPluginManager().registerEvents(new Listener()
 		{
 			@EventHandler
-			public void onBorderChange(WorldBorderBoundsChangeEvent e)
+			public void onBorderChange(@NotNull WorldBorderBoundsChangeEvent e)
 			{
 				e.setNewSize(50);
 			}
@@ -152,7 +153,7 @@ class WorldBorderMockTest
 		server.getPluginManager().registerEvents(new Listener()
 		{
 			@EventHandler
-			public void onBorderChange(WorldBorderBoundsChangeEvent e)
+			public void onBorderChange(@NotNull WorldBorderBoundsChangeEvent e)
 			{
 				e.setDuration(5000);
 			}
@@ -170,7 +171,7 @@ class WorldBorderMockTest
 		server.getPluginManager().registerEvents(new Listener()
 		{
 			@EventHandler
-			public void onBorderChange(WorldBorderBoundsChangeEvent e)
+			public void onBorderChange(@NotNull WorldBorderBoundsChangeEvent e)
 			{
 				e.setCancelled(true);
 			}
@@ -211,7 +212,7 @@ class WorldBorderMockTest
 		server.getPluginManager().registerEvents(new Listener()
 		{
 			@EventHandler
-			public void onBorderChange(WorldBorderCenterChangeEvent e)
+			public void onBorderChange(@NotNull WorldBorderCenterChangeEvent e)
 			{
 				e.setCancelled(true);
 			}
