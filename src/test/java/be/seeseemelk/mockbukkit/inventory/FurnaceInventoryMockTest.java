@@ -2,6 +2,8 @@ package be.seeseemelk.mockbukkit.inventory;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.block.state.BlastFurnaceMock;
+import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.AfterEach;
@@ -9,7 +11,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class FurnaceInventoryMockTest
@@ -18,11 +19,13 @@ class FurnaceInventoryMockTest
 	private ServerMock server;
 	private FurnaceInventoryMock inventory;
 
+	private BlastFurnaceMock holder;
+
 	@BeforeEach
 	void setUp()
 	{
 		server = MockBukkit.mock();
-		inventory = new FurnaceInventoryMock(null);
+		inventory = new FurnaceInventoryMock(holder);
 	}
 
 	@AfterEach
@@ -40,35 +43,11 @@ class FurnaceInventoryMockTest
 	}
 
 	@Test
-	void testGetFuelWithNullFuel()
-	{
-		assertThrows(IllegalStateException.class, () -> inventory.getFuel());
-	}
-
-	@Test
-	void testSetFuelWithNullFuel()
-	{
-		assertThrows(NullPointerException.class, () -> inventory.setFuel(null));
-	}
-
-	@Test
 	void testGetResult()
 	{
 		ItemStack result = new ItemStack(Material.IRON_INGOT);
 		inventory.setResult(result);
 		assertEquals(result, inventory.getResult());
-	}
-
-	@Test
-	void testGetResultWithNullResult()
-	{
-		assertThrows(IllegalStateException.class, () -> inventory.getResult());
-	}
-
-	@Test
-	void testSetResultWithNullResult()
-	{
-		assertThrows(NullPointerException.class, () -> inventory.setResult(null));
 	}
 
 	@Test
@@ -80,18 +59,6 @@ class FurnaceInventoryMockTest
 	}
 
 	@Test
-	void testGetSmeltingWithNullSmelting()
-	{
-		assertThrows(IllegalStateException.class, () -> inventory.getSmelting());
-	}
-
-	@Test
-	void testSetSmeltingWithNullSmelting()
-	{
-		assertThrows(NullPointerException.class, () -> inventory.setSmelting(null));
-	}
-
-	@Test
 	void testIsFuel()
 	{
 		ItemStack fuel = new ItemStack(Material.COAL);
@@ -99,9 +66,8 @@ class FurnaceInventoryMockTest
 	}
 
 	@Test
-	void testIsFuelWithNullFuel()
+	void testGetHolder()
 	{
-		assertThrows(NullPointerException.class, () -> inventory.isFuel(null));
+		assertEquals(holder, inventory.getHolder());
 	}
-
 }
