@@ -6,7 +6,6 @@ import org.bukkit.Material;
 import org.bukkit.block.BlastFurnace;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
-import org.bukkit.event.inventory.InventoryType;
 import org.jetbrains.annotations.NotNull;
 
 public class BlastFurnaceMock extends AbstractFurnaceMock implements BlastFurnace
