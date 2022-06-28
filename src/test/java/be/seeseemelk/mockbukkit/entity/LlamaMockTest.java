@@ -147,7 +147,4 @@ class LlamaMockTest
 		assertThrows(AssertionFailedError.class, () -> llama.assertAttacked(player, 0.2f));
 	}
 
-
-
-
 }

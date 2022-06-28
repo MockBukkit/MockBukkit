@@ -125,4 +125,3 @@ public class LlamaMock extends ChestedHorseMock implements Llama
 	}
 
 }
-

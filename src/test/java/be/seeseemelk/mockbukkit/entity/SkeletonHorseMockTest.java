@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class SkeletonHorseMockTest
 {
+
 	private ServerMock server;
 	private SkeletonHorseMock skeletonHorse;
 
@@ -30,7 +31,6 @@ class SkeletonHorseMockTest
 	{
 		MockBukkit.unmock();
 	}
-
 
 	@Test
 	void testVariant()
@@ -76,6 +76,5 @@ class SkeletonHorseMockTest
 		skeletonHorse.setTrap(true);
 		assertTrue(skeletonHorse.isTrap());
 	}
-
 
 }

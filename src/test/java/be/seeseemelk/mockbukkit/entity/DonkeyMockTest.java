@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DonkeyMockTest
 {
+
 	private ServerMock server;
 	private DonkeyMock donkey;
 
@@ -29,10 +30,10 @@ class DonkeyMockTest
 		MockBukkit.unmock();
 	}
 
-
 	@Test
 	void testVariant()
 	{
 		assertEquals(Horse.Variant.DONKEY, donkey.getVariant());
 	}
+
 }

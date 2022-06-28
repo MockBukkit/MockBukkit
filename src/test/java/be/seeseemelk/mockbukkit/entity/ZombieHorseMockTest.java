@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ZombieHorseMockTest
 {
+
 	private ServerMock server;
 	private ZombieHorseMock zombieHorse;
 
@@ -30,10 +31,10 @@ class ZombieHorseMockTest
 		MockBukkit.unmock();
 	}
 
-
 	@Test
 	void testVariant()
 	{
 		assertEquals(Horse.Variant.UNDEAD_HORSE, zombieHorse.getVariant());
 	}
+
 }

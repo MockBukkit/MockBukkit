@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MuleMockTest
 {
+
 	private ServerMock server;
 	private MuleMock mule;
 
@@ -29,10 +30,10 @@ class MuleMockTest
 		MockBukkit.unmock();
 	}
 
-
 	@Test
 	void testVariant()
 	{
 		assertEquals(Horse.Variant.MULE, mule.getVariant());
 	}
+
 }

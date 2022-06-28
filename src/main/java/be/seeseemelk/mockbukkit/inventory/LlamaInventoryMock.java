@@ -28,5 +28,4 @@ public class LlamaInventoryMock extends AbstractHorseInventoryMock implements Ll
 		this.decor = stack;
 	}
 
-
 }
