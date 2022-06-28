@@ -24,15 +24,13 @@ public class HopperMock extends ContainerMock implements Hopper
 	public HopperMock(@NotNull Material material)
 	{
 		super(material);
-		if (material != Material.HOPPER)
-			throw new IllegalArgumentException("Cannot create a Hopper state from " + material);
+		checkType(material, Material.HOPPER);
 	}
 
 	protected HopperMock(@NotNull Block block)
 	{
 		super(block);
-		if (block.getType() != Material.HOPPER)
-			throw new IllegalArgumentException("Cannot create a Hopper state from " + block.getType());
+		checkType(block, Material.HOPPER);
 	}
 
 	protected HopperMock(@NotNull HopperMock state)

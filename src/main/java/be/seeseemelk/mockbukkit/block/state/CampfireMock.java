@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.block.state;
 
 import org.apache.commons.lang3.Validate;
 import org.bukkit.Material;
+import org.bukkit.Tag;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Campfire;
@@ -22,15 +23,13 @@ public class CampfireMock extends TileStateMock implements Campfire
 	public CampfireMock(@NotNull Material material)
 	{
 		super(material);
-		if (material != Material.CAMPFIRE && material != Material.SOUL_CAMPFIRE)
-			throw new IllegalArgumentException("Cannot create a Campfire state from " + material);
+		checkType(material, Tag.CAMPFIRES);
 	}
 
 	protected CampfireMock(@NotNull Block block)
 	{
 		super(block);
-		if (block.getType() != Material.CAMPFIRE && block.getType() != Material.SOUL_CAMPFIRE)
-			throw new IllegalArgumentException("Cannot create a Campfire state from " + block.getType());
+		checkType(block, Tag.CAMPFIRES);
 	}
 
 	protected CampfireMock(@NotNull CampfireMock state)

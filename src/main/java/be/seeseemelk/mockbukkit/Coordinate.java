@@ -65,9 +65,8 @@ public class Coordinate
 	@Override
 	public boolean equals(Object obj)
 	{
-		if (obj instanceof Coordinate)
+		if (obj instanceof Coordinate c)
 		{
-			Coordinate c = (Coordinate) obj;
 			return x == c.x && y == c.y && z == c.z;
 		}
 		else

@@ -138,7 +138,7 @@ public class EntityEquipmentMock implements EntityEquipment
 	}
 
 	@Override
-	public ItemStack getHelmet()
+	public @Nullable ItemStack getHelmet()
 	{
 		return helmet;
 	}
@@ -157,7 +157,7 @@ public class EntityEquipmentMock implements EntityEquipment
 	}
 
 	@Override
-	public ItemStack getChestplate()
+	public @Nullable ItemStack getChestplate()
 	{
 		return chestPlate;
 	}
@@ -176,7 +176,7 @@ public class EntityEquipmentMock implements EntityEquipment
 	}
 
 	@Override
-	public ItemStack getLeggings()
+	public @Nullable ItemStack getLeggings()
 	{
 		return leggings;
 	}
@@ -195,7 +195,7 @@ public class EntityEquipmentMock implements EntityEquipment
 	}
 
 	@Override
-	public ItemStack getBoots()
+	public @Nullable ItemStack getBoots()
 	{
 		return boots;
 	}

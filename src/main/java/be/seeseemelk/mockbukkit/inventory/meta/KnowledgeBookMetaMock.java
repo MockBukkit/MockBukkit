@@ -51,12 +51,11 @@ public class KnowledgeBookMetaMock extends ItemMetaMock implements KnowledgeBook
 		{
 			return false;
 		}
-		if (!(obj instanceof KnowledgeBookMetaMock))
+		if (!(obj instanceof KnowledgeBookMetaMock other))
 		{
 			return false;
 		}
 
-		KnowledgeBookMetaMock other = (KnowledgeBookMetaMock) obj;
 		return recipes.equals(other.recipes);
 	}
 

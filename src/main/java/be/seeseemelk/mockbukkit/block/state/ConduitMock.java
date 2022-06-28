@@ -11,15 +11,13 @@ public class ConduitMock extends TileStateMock implements Conduit
 	protected ConduitMock(@NotNull Material material)
 	{
 		super(material);
-		if (material != Material.CONDUIT)
-			throw new IllegalArgumentException("Cannot create a Conduit state from " + material);
+		checkType(material, Material.CONDUIT);
 	}
 
 	protected ConduitMock(@NotNull Block block)
 	{
 		super(block);
-		if (block.getType() != Material.CONDUIT)
-			throw new IllegalArgumentException("Cannot create a Conduit state from " + block.getType());
+		checkType(block, Material.CONDUIT);
 	}
 
 	protected ConduitMock(@NotNull ConduitMock state)

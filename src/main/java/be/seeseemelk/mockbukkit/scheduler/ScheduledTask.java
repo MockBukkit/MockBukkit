@@ -20,8 +20,8 @@ public class ScheduledTask implements BukkitTask
 	private boolean isCancelled = false;
 	private long scheduledTick;
 	private boolean running;
-	private final Runnable runnable;
-	private final Consumer<BukkitTask> consumer;
+	private final @Nullable Runnable runnable;
+	private final @Nullable Consumer<BukkitTask> consumer;
 	private final List<Runnable> cancelListeners = new LinkedList<>();
 
 	public ScheduledTask(int id, Plugin plugin, boolean isSync, long scheduledTick, @NotNull Runnable runnable)

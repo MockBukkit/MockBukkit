@@ -537,8 +537,11 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public @NotNull Executor getMainThreadExecutor(@NotNull Plugin plugin)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
+		return command -> {
+			Preconditions.checkNotNull(command, "Command cannot be null");
+			this.runTask(plugin, command);
+		};
 	}
 
 	protected int getActiveRunningCount()
