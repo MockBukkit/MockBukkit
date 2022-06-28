@@ -1,7 +1,6 @@
 package be.seeseemelk.mockbukkit.profile;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.destroystokyo.paper.profile.ProfileProperty;
 import com.google.common.base.Preconditions;
@@ -25,12 +24,12 @@ public class PlayerProfileMock implements PlayerProfile
 	private @Nullable UUID uuid;
 	private final @NotNull Set<ProfileProperty> properties;
 
-	public PlayerProfileMock(@NotNull PlayerMock player)
+	public PlayerProfileMock(@NotNull OfflinePlayer player)
 	{
 		this(player.getName(), player.getUniqueId());
 	}
 
-	public PlayerProfileMock(String name, UUID uuid)
+	public PlayerProfileMock(@Nullable String name, @Nullable UUID uuid)
 	{
 		this.name = name;
 		this.uuid = uuid;
@@ -54,7 +53,7 @@ public class PlayerProfileMock implements PlayerProfile
 	@Override
 	public @Nullable String getName()
 	{
-		return name;
+		return this.name;
 	}
 
 	@Override
@@ -68,7 +67,7 @@ public class PlayerProfileMock implements PlayerProfile
 	@Override
 	public @Nullable UUID getId()
 	{
-		return uuid;
+		return this.uuid;
 	}
 
 	@Override
@@ -222,8 +221,8 @@ public class PlayerProfileMock implements PlayerProfile
 	public static void validateSkullProfile(@NotNull PlayerProfileMock profile)
 	{
 		// The profile must contain either a uuid and textures, or a name.
-		// The profile always has a name or uuid, so just checking the uuid is sufficient.
-		boolean isValidSkullProfile = (profile.getId() != null) /*|| check for textures*/; // Textures aren't implemented yet.
+		// The profile always has a name or uuid, so just checking if it has a name and textures is sufficient.
+		boolean isValidSkullProfile = (profile.getName() != null) /*|| check for textures*/; // Textures aren't implemented yet.
 		Preconditions.checkArgument(isValidSkullProfile, "The skull profile is missing a name or textures!");
 	}
 
