@@ -9,11 +9,11 @@ import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
 
-public class RickRollMockTest
+class RickRollMockTest
 {
 
-	ServerMock server;
-	RickRollMock rickRoll;
+	private ServerMock server;
+	private RickRollMock rickRoll;
 
 	@BeforeEach
 	void setUp()
