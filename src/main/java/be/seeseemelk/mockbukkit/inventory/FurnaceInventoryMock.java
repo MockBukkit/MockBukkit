@@ -17,7 +17,6 @@ import java.util.Set;
 public class FurnaceInventoryMock extends InventoryMock implements FurnaceInventory
 {
 
-
 	public FurnaceInventoryMock(@Nullable InventoryHolder holder)
 	{
 		super(holder, InventoryType.FURNACE);
