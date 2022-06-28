@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.block.state;
 
+import be.seeseemelk.mockbukkit.inventory.FurnaceInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import org.bukkit.Material;
 import org.bukkit.block.BlastFurnace;
@@ -24,7 +25,7 @@ public class BlastFurnaceMock extends AbstractFurnaceMock implements BlastFurnac
 	}
 
 	@Override
-	protected @NotNull InventoryMock createInventory()
+	protected @NotNull FurnaceInventoryMock createInventory()
 	{
 		return new FurnaceInventoryMock(this);
 	}
