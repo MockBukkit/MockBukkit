@@ -106,5 +106,4 @@ class FurnaceInventoryMockTest
 		assertThrows(NullPointerException.class,() -> inventory.isFuel(null));
 	}
 
-
 }
