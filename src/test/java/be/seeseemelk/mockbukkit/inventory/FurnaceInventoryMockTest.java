@@ -5,12 +5,10 @@ import be.seeseemelk.mockbukkit.ServerMock;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -103,7 +101,7 @@ class FurnaceInventoryMockTest
 	@Test
 	void testIsFuelWithNullFuel()
 	{
-		assertThrows(NullPointerException.class,() -> inventory.isFuel(null));
+		assertThrows(NullPointerException.class, () -> inventory.isFuel(null));
 	}
 
 }

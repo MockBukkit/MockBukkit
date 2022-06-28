@@ -87,6 +87,7 @@ public class FurnaceInventoryMock extends InventoryMock implements FurnaceInvent
 
 	private static class FurnaceFuelProvider
 	{
+
 		static Set<Material> getFuels()
 		{
 			Set<Material> fuels = Tag.LOGS.getValues();
@@ -144,5 +145,7 @@ public class FurnaceInventoryMock extends InventoryMock implements FurnaceInvent
 
 			return fuels;
 		}
+
 	}
+
 }
