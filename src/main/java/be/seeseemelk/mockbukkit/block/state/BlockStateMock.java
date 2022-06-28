@@ -3,7 +3,6 @@ package be.seeseemelk.mockbukkit.block.state;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
-import com.destroystokyo.paper.MaterialSetTag;
 import com.destroystokyo.paper.MaterialTags;
 import com.google.common.base.Preconditions;
 import org.bukkit.Chunk;
@@ -326,6 +325,8 @@ public class BlockStateMock implements BlockState
 		}
 		switch (block.getType())
 		{
+		case SCULK_SHRIEKER:
+			return new SculkShriekerMock(block);
 		case BEACON:
 			return new BeaconMock(block);
 		case BEEHIVE:
