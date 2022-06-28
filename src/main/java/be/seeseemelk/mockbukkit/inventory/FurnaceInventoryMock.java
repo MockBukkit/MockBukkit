@@ -68,7 +68,6 @@ public class FurnaceInventoryMock extends InventoryMock implements FurnaceInvent
 	public boolean isFuel(@Nullable ItemStack item)
 	{
 		Preconditions.checkNotNull(item, "Item cannot be null");
-
 		return !Tag.NON_FLAMMABLE_WOOD.isTagged(item.getType()) && FurnaceFuelProvider.getFuels().contains(item.getType()) && !item.getType().isEmpty();
 	}
 
