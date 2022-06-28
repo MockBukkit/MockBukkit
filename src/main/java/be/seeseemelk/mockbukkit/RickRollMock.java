@@ -25,5 +25,4 @@ public class RickRollMock
 		return rickRolledEntities.contains(entity);
 	}
 
-
 }
