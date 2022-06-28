@@ -4,6 +4,8 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.destroystokyo.paper.profile.ProfileProperty;
+import com.google.common.base.Preconditions;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.profile.PlayerTextures;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -210,6 +212,19 @@ public class PlayerProfileMock implements PlayerProfile
 	public org.bukkit.profile.@NotNull PlayerProfile clone()
 	{
 		return new PlayerProfileMock(this);
+	}
+
+	/**
+	 * Checks if a PlayerProfile is valid to be on a Skull.
+	 *
+	 * @param profile The profile to check.
+	 */
+	public static void validateSkullProfile(@NotNull PlayerProfileMock profile)
+	{
+		// The profile must contain either a uuid and textures, or a name.
+		// The profile always has a name or uuid, so just checking the uuid is sufficient.
+		boolean isValidSkullProfile = (profile.getId() != null) /*|| check for textures*/; // Textures aren't implemented yet.
+		Preconditions.checkArgument(isValidSkullProfile, "The skull profile is missing a name or textures!");
 	}
 
 }
