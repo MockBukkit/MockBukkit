@@ -17,8 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class FurnaceInventoryMockTest
 {
 
-	ServerMock server;
-	FurnaceInventoryMock inventory;
+	private ServerMock server;
+	private FurnaceInventoryMock inventory;
 
 	@BeforeEach
 	void setUp()
