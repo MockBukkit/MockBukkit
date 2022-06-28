@@ -19,7 +19,6 @@ class RickRollMockTest
 	void setUp()
 	{
 		server = MockBukkit.mock();
-
 	}
 
 	@AfterEach

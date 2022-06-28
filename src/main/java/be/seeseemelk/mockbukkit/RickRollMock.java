@@ -1,25 +1,40 @@
 package be.seeseemelk.mockbukkit;
 
-import be.seeseemelk.mockbukkit.entity.EntityMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.entity.Entity;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.awt.Desktop;
+import java.net.URI;
+import java.util.HashSet;
+import java.util.Set;
 
 
 public class RickRollMock
 {
 
-	private final List<Entity> rickRolledEntities = new ArrayList<>();
+	private final Set<Entity> rickRolledEntities = new HashSet<>();
 
-	public void rickRoll(Entity entity)
+	public void rickRoll(@Nullable Entity entity)
 	{
-		Preconditions.checkNotNull(entity, "Entity cannot be null");
-		rickRolledEntities.add(entity);
+		if (entity != null)
+		{
+			rickRolledEntities.add(entity);
+			return;
+		}
+		if (!Desktop.isDesktopSupported())
+			return;
+		try
+		{
+			Desktop.getDesktop().browse(new URI("https://www.youtube.com/watch?v=dQw4w9WgXcQ"));
+		}
+		catch (Exception ignored)
+		{
+		}
 	}
 
-	public boolean isRickRolled(Entity entity)
+	public boolean isRickRolled(@NotNull Entity entity)
 	{
 		Preconditions.checkNotNull(entity, "Entity cannot be null");
 		return rickRolledEntities.contains(entity);
