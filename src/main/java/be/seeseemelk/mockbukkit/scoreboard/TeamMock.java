@@ -426,10 +426,9 @@ public class TeamMock implements Team
 	 */
 	public void checkRegistered()
 	{
-		if (this.board == null)
-		{
-			throw new IllegalStateException("Team not registered");
-		}
+		if (this.board != null)
+			return;
+		throw new IllegalStateException("Team not registered");
 	}
 
 }
