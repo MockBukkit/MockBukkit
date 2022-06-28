@@ -11,7 +11,7 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class DonkeyMockTests
+class DonkeyMockTest
 {
 	private ServerMock server;
 	private DonkeyMock donkey;

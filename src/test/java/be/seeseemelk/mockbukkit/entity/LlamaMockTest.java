@@ -8,7 +8,6 @@ import org.bukkit.entity.Horse;
 import org.bukkit.entity.Llama;
 import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AssertionsKt;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.opentest4j.AssertionFailedError;
@@ -23,8 +22,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class LlamaMockTest
 {
 
-	ServerMock server;
-	LlamaMock llama;
+	private ServerMock server;
+	private LlamaMock llama;
 
 	@BeforeEach
 	void setUp()
@@ -96,8 +95,9 @@ class LlamaMockTest
 	@Test
 	void testRangedAttackOutOfRange()
 	{
-		assertThrows(IllegalArgumentException.class, () -> llama.rangedAttack(server.addPlayer(), -1));
-		assertThrows(IllegalArgumentException.class, () -> llama.rangedAttack(server.addPlayer(), 2));
+		PlayerMock player = server.addPlayer();
+		assertThrows(IllegalArgumentException.class, () -> llama.rangedAttack(player, -1));
+		assertThrows(IllegalArgumentException.class, () -> llama.rangedAttack(player, 2));
 	}
 
 	@Test

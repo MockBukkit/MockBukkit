@@ -12,7 +12,7 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ZombieHorseMockTest
+class ZombieHorseMockTest
 {
 	private ServerMock server;
 	private ZombieHorseMock zombieHorse;

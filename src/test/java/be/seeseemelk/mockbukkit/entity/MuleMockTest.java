@@ -11,7 +11,7 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class MuleMockTest
+class MuleMockTest
 {
 	private ServerMock server;
 	private MuleMock mule;
