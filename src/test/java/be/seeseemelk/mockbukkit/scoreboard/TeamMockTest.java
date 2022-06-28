@@ -3,13 +3,19 @@ package be.seeseemelk.mockbukkit.scoreboard;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Entity;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.scoreboard.Team;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -56,19 +62,63 @@ class TeamMockTest
 	}
 
 	@Test
-	void getPrefix()
+	void getDisplayName()
 	{
-		assertNull(team.getPrefix());
-		team.setPrefix("THIS");
-		assertEquals("THIS", team.getPrefix());
+		assertEquals(team.getName(), team.getDisplayName());
+		assertEquals(Component.text(team.getName()), team.displayName());
+		team.setDisplayName("DisplayName");
+		assertEquals("DisplayName", team.getDisplayName());
+		assertEquals(Component.text("DisplayName"), team.displayName());
 	}
 
 	@Test
-	void getColor()
+	void getPrefix()
 	{
-		assertNull(team.getColor());
+		assertEquals("", team.getPrefix());
+		assertEquals(Component.empty(), team.prefix());
+		team.setPrefix("THIS");
+		assertEquals("THIS", team.getPrefix());
+		assertEquals(Component.text("THIS"), team.prefix());
+	}
+
+	@Test
+	void getSuffix()
+	{
+		assertEquals("", team.getSuffix());
+		assertEquals(Component.empty(), team.suffix());
+		team.setSuffix("THAT");
+		assertEquals("THAT", team.getSuffix());
+		assertEquals(Component.text("THAT"), team.suffix());
+	}
+
+	@Test
+	void nullComponents()
+	{
+		team.setDisplayName("something");
+		team.displayName(null);
+		assertEquals("", team.getDisplayName());
+		assertEquals(Component.empty(), team.displayName());
+	}
+
+	@Test
+	void getColor_IsFormat()
+	{
+		assertEquals(ChatColor.RESET, team.getColor());
+		assertFalse(team.hasColor());
+		assertThrows(IllegalStateException.class, () -> team.color(), "An exception should be thrown when the ChatColor is a format.");
+	}
+
+	@Test
+	void getColor_IsColor()
+	{
 		team.setColor(ChatColor.AQUA);
+		assertTrue(team.hasColor());
 		assertEquals(ChatColor.AQUA, team.getColor());
+		assertEquals(NamedTextColor.AQUA, team.color());
+
+		team.color(NamedTextColor.YELLOW);
+		assertEquals(ChatColor.YELLOW, team.getColor());
+		assertEquals(NamedTextColor.YELLOW, team.color());
 	}
 
 	@Test
@@ -124,7 +174,7 @@ class TeamMockTest
 	@Test
 	void getScoreboard()
 	{
-		assertEquals(board, team.getScoreboard());
+		assertSame(board, team.getScoreboard());
 	}
 
 	@SuppressWarnings("deprecation")
@@ -149,6 +199,30 @@ class TeamMockTest
 		assertEquals(0, team.getSize());
 	}
 
+	@Test
+	void removeEntity()
+	{
+		assertEquals(0, team.getSize());
+		team.addEntity(playerA);
+		assertEquals(1, team.getSize());
+		assertTrue(team.removeEntity(playerA));
+		assertEquals(0, team.getSize());
+		assertFalse(team.removeEntity(playerA));
+	}
+
+	@Test
+	void removeEntities()
+	{
+		Set<Entity> players = Set.of(playerA, playerB);
+		Set<String> entries = players.stream()
+				.map(Entity::getName)
+				.collect(Collectors.toSet());
+		team.addEntities(players);
+		assertEquals(entries, team.getEntries());
+		assertTrue(team.removeEntities(players));
+		assertEquals(Set.of(), team.getEntries());
+	}
+
 	@SuppressWarnings("deprecation")
 	@Test
 	void hasPlayer()
@@ -163,9 +237,12 @@ class TeamMockTest
 	@Test
 	void hasEntry()
 	{
+		assertFalse(team.hasEntity(playerB));
 		assertFalse(team.hasEntry(playerB.getName()));
 		team.addEntry(playerB.getName());
+		assertFalse(team.hasEntity(playerA));
 		assertFalse(team.hasEntry(playerA.getName()));
+		assertTrue(team.hasEntity(playerB));
 		assertTrue(team.hasEntry(playerB.getName()));
 	}
 
