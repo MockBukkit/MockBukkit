@@ -127,6 +127,7 @@ public class TeamMock implements Team
 	public void setDisplayName(@NotNull String displayName)
 	{
 		Preconditions.checkNotNull(displayName, "Display name cannot be null");
+		Preconditions.checkArgument(ChatColor.stripColor(displayName).length() <= 128, "Display name is longer than the limit of 128 characters");
 		checkRegistered();
 		this.displayName = LegacyComponentSerializer.legacySection().deserialize(displayName);
 	}
@@ -142,6 +143,7 @@ public class TeamMock implements Team
 	public void setPrefix(@NotNull String prefix)
 	{
 		Preconditions.checkNotNull(prefix, "Prefix cannot be null");
+		Preconditions.checkArgument(ChatColor.stripColor(prefix).length() <= 64, "Prefix is longer than the limit of 64 characters");
 		checkRegistered();
 		this.prefix = LegacyComponentSerializer.legacySection().deserialize(prefix);
 	}
@@ -157,6 +159,7 @@ public class TeamMock implements Team
 	public void setSuffix(@NotNull String suffix)
 	{
 		Preconditions.checkNotNull(suffix, "Suffix cannot be null");
+		Preconditions.checkArgument(ChatColor.stripColor(suffix).length() <= 64, "Suffix is longer than the limit of 64 characters");
 		checkRegistered();
 		this.suffix = LegacyComponentSerializer.legacySection().deserialize(suffix);
 	}
