@@ -52,7 +52,6 @@ public class FurnaceInventoryMock extends InventoryMock implements FurnaceInvent
 	@Override
 	public void setResult(@Nullable ItemStack stack)
 	{
-		Preconditions.checkNotNull(stack, "Result cannot be null");
 		setItem(2, stack);
 	}
 
