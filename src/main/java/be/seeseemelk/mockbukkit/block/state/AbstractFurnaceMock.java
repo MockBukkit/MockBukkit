@@ -44,7 +44,7 @@ public abstract class AbstractFurnaceMock extends ContainerMock implements Furna
 	}
 
 	@Override
-	protected @NotNull InventoryMock createInventory()
+	protected @NotNull FurnaceInventoryMock createInventory()
 	{
 		return new FurnaceInventoryMock(this);
 	}
