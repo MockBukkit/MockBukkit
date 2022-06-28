@@ -624,7 +624,7 @@ public class ServerMock extends Server.Spigot implements Server
 			// TODO: This Inventory Type needs to be implemented
 		case CARTOGRAPHY:
 			// TODO: This Inventory Type needs to be implemented
-		case SMOKER,FURNACE,BLAST_FURNACE:
+		case SMOKER, FURNACE, BLAST_FURNACE:
 			return new FurnaceInventoryMock(owner);
 		case LOOM:
 			// TODO: This Inventory Type needs to be implemented
