@@ -57,13 +57,13 @@ public class HorseMock extends AbstractHorseMock implements Horse
 	@Override
 	public boolean isCarryingChest()
 	{
-		throw new UnimplementedOperationException();
+		return false; // Horses can't carry chests.
 	}
 
 	@Override
 	public void setCarryingChest(boolean chest)
 	{
-		throw new UnimplementedOperationException();
+		throw new UnsupportedOperationException("Not supported.");
 	}
 
 	@Override
@@ -77,8 +77,7 @@ public class HorseMock extends AbstractHorseMock implements Horse
 	@Override
 	public @NotNull Variant getVariant()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return Variant.HORSE;
 	}
 
 }
