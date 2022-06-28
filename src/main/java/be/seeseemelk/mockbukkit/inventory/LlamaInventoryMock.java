@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 public class LlamaInventoryMock extends AbstractHorseInventoryMock implements LlamaInventory
 {
 
-	@Nullable ItemStack decor;
+	private @Nullable ItemStack decor;
 
 	public LlamaInventoryMock(@Nullable InventoryHolder holder)
 	{
