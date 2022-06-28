@@ -46,7 +46,6 @@ public class FurnaceInventoryMock extends InventoryMock implements FurnaceInvent
 	@Override
 	public void setFuel(@Nullable ItemStack stack)
 	{
-		Preconditions.checkNotNull(stack, "Fuel cannot be null");
 		setItem(1, stack);
 	}
 
