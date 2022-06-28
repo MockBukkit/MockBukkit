@@ -326,6 +326,8 @@ public class BlockStateMock implements BlockState
 		}
 		switch (block.getType())
 		{
+		case SMOKER:
+			return new SmokerMock(block);
 		case BEACON:
 			return new BeaconMock(block);
 		case BEEHIVE:
