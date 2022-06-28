@@ -44,7 +44,6 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerExpChangeEvent;
-import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -200,63 +199,12 @@ class PlayerMockTest
 	}
 
 	@Test
-	void getGameMode_Default_Survival()
-	{
-		assertEquals(GameMode.SURVIVAL, player.getGameMode());
-	}
-
-	@Test
-	void setGameMode_GameModeChanged_GameModeSet()
-	{
-		player.setGameMode(GameMode.CREATIVE);
-		assertEquals(GameMode.CREATIVE, player.getGameMode());
-	}
-
-	@Test
-	void setGameMode_GameModeChanged_CallsEvent()
-	{
-		player.setGameMode(GameMode.CREATIVE);
-		server.getPluginManager().assertEventFired(PlayerGameModeChangeEvent.class, (e) -> e.getNewGameMode() == GameMode.CREATIVE);
-	}
-
-	@Test
-	void setGameMode_GameModeNotChanged_DoesntCallsEvent()
-	{
-		//todo: replace with PluginManagerMock#assertEventNotFired once implemented
-		AtomicBoolean bool = new AtomicBoolean(false);
-		server.getPluginManager().registerEvents(new Listener()
-		{
-			@EventHandler
-			public void onPlayerGameModeChange(PlayerGameModeChangeEvent event)
-			{
-				bool.set(true);
-			}
-		}, MockBukkit.createMockPlugin());
-
-		player.setGameMode(GameMode.SURVIVAL);
-
-		assertFalse(bool.get());
-	}
-
-	@Test
 	void getPreviousGameMode()
 	{
 		player.setGameMode(GameMode.SURVIVAL);
 		player.setGameMode(GameMode.CREATIVE);
 		player.setGameMode(GameMode.SURVIVAL);
 		assertEquals(GameMode.CREATIVE, player.getPreviousGameMode());
-	}
-
-	@Test
-	void assertGameMode_CorrectGameMode_DoesNotAssert()
-	{
-		player.assertGameMode(GameMode.SURVIVAL);
-	}
-
-	@Test
-	void assertGameMode_WrongGameMode_Asserts()
-	{
-		assertThrows(AssertionError.class, () -> player.assertGameMode(GameMode.CREATIVE));
 	}
 
 	@Test
@@ -785,16 +733,6 @@ class PlayerMockTest
 	}
 
 	@Test
-	void getExpToLevel_CorrectExp()
-	{
-		for (int i = 0; i < expRequired.length; i++)
-		{
-			player.setLevel(i);
-			assertEquals(expRequired[i], player.getExpToLevel());
-		}
-	}
-
-	@Test
 	void giveExpLevel_Negative_ClampedAtZero()
 	{
 		player.setExp(0.5F);
@@ -885,20 +823,6 @@ class PlayerMockTest
 		}, plugin);
 
 		player.giveExp(0);
-	}
-
-	@Test
-	void getFood_LevelDefault20()
-	{
-		int foodLevel = player.getFoodLevel();
-		assertEquals(20, foodLevel);
-	}
-
-	@Test
-	void getFood_LevelChange()
-	{
-		player.setFoodLevel(10);
-		assertEquals(10, player.getFoodLevel());
 	}
 
 	@Test
@@ -1104,22 +1028,6 @@ class PlayerMockTest
 		server.getPluginManager().assertEventFired(InventoryCloseEvent.class,
 				e -> e.getPlayer() == player && e.getInventory() == inv);
 		assertTrue(player.getItemOnCursor().getType().isAir());
-	}
-
-	@Test
-	void testSaturation()
-	{
-		// Default level
-		assertEquals(5.0F, player.getSaturation(), 0.1F);
-
-		player.setFoodLevel(20);
-		player.setSaturation(8);
-		assertEquals(8.0F, player.getSaturation(), 0.1F);
-
-		// Testing the constraint
-		player.setFoodLevel(20);
-		player.setSaturation(10000);
-		assertEquals(20.0F, player.getSaturation(), 0.1F);
 	}
 
 	@Test
