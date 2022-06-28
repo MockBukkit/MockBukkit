@@ -307,6 +307,16 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	/**
+	 * Gets the scoreboard entry for this entity.
+	 *
+	 * @return The scoreboard entry.
+	 */
+	public @NotNull String getScoreboardEntry()
+	{
+		return uuid.toString();
+	}
+
+	/**
 	 * Sets the name of this entity.
 	 *
 	 * @param name The new name of the entity.
