@@ -5,12 +5,17 @@ import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import be.seeseemelk.mockbukkit.block.state.BlockStateMock;
 import be.seeseemelk.mockbukkit.entity.AllayMock;
 import be.seeseemelk.mockbukkit.entity.ArmorStandMock;
+import be.seeseemelk.mockbukkit.entity.DonkeyMock;
 import be.seeseemelk.mockbukkit.entity.EndermanMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
 import be.seeseemelk.mockbukkit.entity.FireworkMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
+import be.seeseemelk.mockbukkit.entity.LlamaMock;
+import be.seeseemelk.mockbukkit.entity.MuleMock;
 import be.seeseemelk.mockbukkit.entity.SheepMock;
+import be.seeseemelk.mockbukkit.entity.SkeletonHorseMock;
 import be.seeseemelk.mockbukkit.entity.WardenMock;
+import be.seeseemelk.mockbukkit.entity.ZombieHorseMock;
 import be.seeseemelk.mockbukkit.entity.ZombieMock;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
@@ -965,4 +970,48 @@ class WorldMockTest
 		assertTrue(entity.isValid());
 	}
 
+	@Test
+	void testSpawnDonkey()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.DONKEY);
+		assertInstanceOf(DonkeyMock.class, entity);
+		assertTrue(entity.isValid());
+	}
+
+	@Test
+	void testSpawnLlama()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.LLAMA);
+		assertInstanceOf(LlamaMock.class, entity);
+		assertTrue(entity.isValid());
+	}
+
+	@Test
+	void testSpawnMule()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.MULE);
+		assertInstanceOf(MuleMock.class, entity);
+		assertTrue(entity.isValid());
+	}
+
+	@Test
+	void testSpawnSkeletonHorse()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.SKELETON_HORSE);
+		assertInstanceOf(SkeletonHorseMock.class, entity);
+		assertTrue(entity.isValid());
+	}
+
+	@Test
+	void testSpawnZombieHorse()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ZOMBIE_HORSE);
+		assertInstanceOf(ZombieHorseMock.class, entity);
+		assertTrue(entity.isValid());
+	}
 }
