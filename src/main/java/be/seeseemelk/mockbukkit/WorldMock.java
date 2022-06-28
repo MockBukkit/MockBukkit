@@ -8,6 +8,7 @@ import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
 import be.seeseemelk.mockbukkit.entity.FireworkMock;
 import be.seeseemelk.mockbukkit.entity.FishHookMock;
+import be.seeseemelk.mockbukkit.entity.HorseMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
 import be.seeseemelk.mockbukkit.entity.MobMock;
 import be.seeseemelk.mockbukkit.entity.SheepMock;
@@ -62,6 +63,7 @@ import org.bukkit.entity.FishHook;
 import org.bukkit.entity.Ghast;
 import org.bukkit.entity.Golem;
 import org.bukkit.entity.Hanging;
+import org.bukkit.entity.Horse;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.ItemFrame;
 import org.bukkit.entity.LeashHitch;
@@ -126,7 +128,7 @@ public class WorldMock implements World
 	private final MetadataTable metadataTable = new MetadataTable();
 	private final Map<ChunkCoordinate, ChunkMock> loadedChunks = new HashMap<>();
 	private final PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
-	private final ServerMock server;
+	private final @Nullable ServerMock server;
 	private final Material defaultBlock;
 	private final Biome defaultBiome;
 	private final int grassHeight;
@@ -148,7 +150,7 @@ public class WorldMock implements World
 	private long seed = 0;
 	private @NotNull WorldType worldType = WorldType.NORMAL;
 	private final BiomeProviderMock biomeProviderMock = new BiomeProviderMock();
-	private @NotNull Map<Coordinate, Biome> biomes = new HashMap<>();
+	private final @NotNull Map<Coordinate, Biome> biomes = new HashMap<>();
 	private @NotNull Difficulty difficulty = Difficulty.NORMAL;
 
 	private boolean allowAnimals = true;
@@ -887,6 +889,10 @@ public class WorldMock implements World
 		else if (clazz == Enderman.class)
 		{
 			return new EndermanMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Horse.class)
+		{
+			return new HorseMock(server, UUID.randomUUID());
 		}
 		else if (clazz == Sheep.class)
 		{
@@ -2106,7 +2112,7 @@ public class WorldMock implements World
 
 	@Override
 	public <T extends AbstractArrow> @NotNull T spawnArrow(Location location, Vector direction, float speed, float spread,
-                                                           Class<T> clazz)
+														   Class<T> clazz)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

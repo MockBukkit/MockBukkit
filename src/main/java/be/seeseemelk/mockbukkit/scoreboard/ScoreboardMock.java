@@ -24,9 +24,9 @@ import java.util.stream.Collectors;
 public class ScoreboardMock implements Scoreboard
 {
 
-	private @NotNull Map<String, ObjectiveMock> objectives = new HashMap<>();
-	private @NotNull Map<DisplaySlot, ObjectiveMock> objectivesByDisplaySlot = new EnumMap<>(DisplaySlot.class);
-	private @NotNull Map<String, Team> teams = new HashMap<>();
+	private final @NotNull Map<String, ObjectiveMock> objectives = new HashMap<>();
+	private final @NotNull Map<DisplaySlot, ObjectiveMock> objectivesByDisplaySlot = new EnumMap<>(DisplaySlot.class);
+	private final @NotNull Map<String, Team> teams = new HashMap<>();
 
 	@Override
 	@Deprecated

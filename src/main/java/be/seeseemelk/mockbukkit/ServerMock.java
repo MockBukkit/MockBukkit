@@ -86,7 +86,6 @@ import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.server.MapInitializeEvent;
 import org.bukkit.generator.ChunkGenerator.ChunkData;
-import org.bukkit.inventory.BrewerInventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Merchant;
@@ -387,7 +386,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * @param args    The arguments to pass to the commands.
 	 * @return The value returned by {@link Command#execute}.
 	 */
-	public CommandResult executeConsole(@NotNull Command command, String... args)
+	public @NotNull CommandResult executeConsole(@NotNull Command command, String... args)
 	{
 		return execute(command, getConsoleSender(), args);
 	}
@@ -411,7 +410,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * @param args    The arguments to pass to the commands.
 	 * @return The value returned by {@link Command#execute}.
 	 */
-	public CommandResult executePlayer(@NotNull Command command, String... args)
+	public @NotNull CommandResult executePlayer(@NotNull Command command, String... args)
 	{
 		AsyncCatcher.catchOp("command dispatch");
 
@@ -462,7 +461,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * @param args    The arguments to pass to the commands.
 	 * @return The value returned by {@link Command#execute}.
 	 */
-	public CommandResult execute(@NotNull String command, CommandSender sender, String... args)
+	public @NotNull CommandResult execute(@NotNull String command, CommandSender sender, String... args)
 	{
 		AsyncCatcher.catchOp("command dispatch");
 		return execute(getCommandMap().getCommand(command), sender, args);
@@ -504,7 +503,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public OfflinePlayer[] getOfflinePlayers()
+	public OfflinePlayer @NotNull [] getOfflinePlayers()
 	{
 		return playerList.getOfflinePlayers();
 	}

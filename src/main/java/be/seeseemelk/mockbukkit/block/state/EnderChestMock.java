@@ -20,15 +20,13 @@ public class EnderChestMock extends TileStateMock implements EnderChest
 	public EnderChestMock(@NotNull Material material)
 	{
 		super(material);
-		if (material != Material.ENDER_CHEST)
-			throw new IllegalArgumentException("Cannot create an Ender Chest state from " + material);
+		checkType(material, Material.ENDER_CHEST);
 	}
 
 	protected EnderChestMock(@NotNull Block block)
 	{
 		super(block);
-		if (block.getType() != Material.ENDER_CHEST)
-			throw new IllegalArgumentException("Cannot create an Ender Chest state from " + block.getType());
+		checkType(block, Material.ENDER_CHEST);
 	}
 
 	protected EnderChestMock(@NotNull EnderChestMock state)

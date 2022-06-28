@@ -9,7 +9,6 @@ import org.bukkit.inventory.BrewerInventory;
 import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -105,4 +104,5 @@ class BrewingStandMockTest
 		assertEquals(brewingStand.getInventory().getFuel(), brewingStand.getSnapshotInventory().getFuel());
 		assertEquals(brewingStand.getInventory().getIngredient(), brewingStand.getSnapshotInventory().getIngredient());
 	}
+
 }
