@@ -25,21 +25,18 @@ public class FurnaceInventoryMock extends InventoryMock implements FurnaceInvent
 	@Override
 	public @Nullable ItemStack getResult()
 	{
-		Preconditions.checkState(getItem(2) != null, "Result not set");
 		return getItem(2);
 	}
 
 	@Override
 	public @Nullable ItemStack getFuel()
 	{
-		Preconditions.checkState(getItem(1) != null, "No Fuel has been set");
 		return getItem(1);
 	}
 
 	@Override
 	public @Nullable ItemStack getSmelting()
 	{
-		Preconditions.checkState(getItem(0) != null, "No Smelting has been set");
 		return getItem(0);
 	}
 
@@ -58,15 +55,13 @@ public class FurnaceInventoryMock extends InventoryMock implements FurnaceInvent
 	@Override
 	public void setSmelting(@Nullable ItemStack stack)
 	{
-		Preconditions.checkNotNull(stack, "Smelting cannot be null");
 		setItem(0, stack);
 	}
 
 	@Override
 	public boolean isFuel(@Nullable ItemStack item)
 	{
-		Preconditions.checkNotNull(item, "Item cannot be null");
-		return !item.getType().isEmpty() && !Tag.NON_FLAMMABLE_WOOD.isTagged(item.getType()) && FurnaceFuelProvider.getFuels().contains(item.getType());
+		return item != null && !item.getType().isEmpty() && !Tag.NON_FLAMMABLE_WOOD.isTagged(item.getType()) && FurnaceFuelProvider.getFuels().contains(item.getType());
 	}
 
 	@Override
