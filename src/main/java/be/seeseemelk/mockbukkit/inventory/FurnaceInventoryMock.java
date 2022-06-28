@@ -1,13 +1,11 @@
 package be.seeseemelk.mockbukkit.inventory;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.WorldMock;
 import com.destroystokyo.paper.MaterialTags;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.Furnace;
-import org.bukkit.block.Lectern;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.FurnaceInventory;
 import org.bukkit.inventory.InventoryHolder;
@@ -28,36 +26,42 @@ public class FurnaceInventoryMock extends InventoryMock implements FurnaceInvent
 	@Override
 	public @Nullable ItemStack getResult()
 	{
+		Preconditions.checkState(getItem(2) != null, "Result not set");
 		return getItem(2);
 	}
 
 	@Override
 	public @Nullable ItemStack getFuel()
 	{
+		Preconditions.checkState(getItem(1) != null, "No Fuel has been set");
 		return getItem(1);
 	}
 
 	@Override
 	public @Nullable ItemStack getSmelting()
 	{
+		Preconditions.checkState(getItem(0) != null, "No Smelting has been set");
 		return getItem(0);
 	}
 
 	@Override
 	public void setFuel(@Nullable ItemStack stack)
 	{
+		Preconditions.checkNotNull(stack, "Fuel cannot be null");
 		setItem(1, stack);
 	}
 
 	@Override
 	public void setResult(@Nullable ItemStack stack)
 	{
+		Preconditions.checkNotNull(stack, "Result cannot be null");
 		setItem(2, stack);
 	}
 
 	@Override
 	public void setSmelting(@Nullable ItemStack stack)
 	{
+		Preconditions.checkNotNull(stack, "Smelting cannot be null");
 		setItem(0, stack);
 	}
 
@@ -143,5 +147,4 @@ public class FurnaceInventoryMock extends InventoryMock implements FurnaceInvent
 			return fuels;
 		}
 	}
-
 }

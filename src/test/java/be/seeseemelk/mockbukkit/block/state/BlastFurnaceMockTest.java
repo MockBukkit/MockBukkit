@@ -53,7 +53,6 @@ class BlastFurnaceMockTest
 	}
 
 	@Test
-	@Disabled("FurnaceInventoryMock isn't implemented yet")
 	void getSnapshot_DifferentInstance()
 	{
 		assertNotSame(furnace, furnace.getSnapshot());

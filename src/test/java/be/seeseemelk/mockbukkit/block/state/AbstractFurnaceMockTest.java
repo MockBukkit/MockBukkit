@@ -69,7 +69,7 @@ class AbstractFurnaceMockTest
 	}
 
 	@Test
-	@Disabled("FurnaceInventoryMock isn't implemented yet")
+//	@Disabled("FurnaceInventoryMock isn't implemented yet")
 	void constructor_Copy_CopiesValues()
 	{
 		furnace.setBurnTime((short) 10);

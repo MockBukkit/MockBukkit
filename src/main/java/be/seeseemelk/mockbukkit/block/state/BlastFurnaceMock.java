@@ -28,7 +28,6 @@ public class BlastFurnaceMock extends AbstractFurnaceMock implements BlastFurnac
 	@Override
 	protected @NotNull InventoryMock createInventory()
 	{
-//		return new BlastFurnaceInventoryMock(this); TODO: Not implemented
 		return new InventoryMock(this, InventoryType.BLAST_FURNACE);
 	}
 

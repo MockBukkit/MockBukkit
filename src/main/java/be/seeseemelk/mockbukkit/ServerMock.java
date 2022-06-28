@@ -18,6 +18,7 @@ import be.seeseemelk.mockbukkit.inventory.ChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.DispenserInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.DropperInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.FurnaceInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.GrindstoneInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.HopperInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
@@ -624,19 +625,15 @@ public class ServerMock extends Server.Spigot implements Server
 			// TODO: This Inventory Type needs to be implemented
 		case CARTOGRAPHY:
 			// TODO: This Inventory Type needs to be implemented
-		case SMOKER:
-			// TODO: This Inventory Type needs to be implemented
+		case SMOKER,FURNACE,BLAST_FURNACE:
+			return new FurnaceInventoryMock(owner);
 		case LOOM:
-			// TODO: This Inventory Type needs to be implemented
-		case BLAST_FURNACE:
 			// TODO: This Inventory Type needs to be implemented
 		case ANVIL:
 			// TODO: This Inventory Type needs to be implemented
 		case SMITHING:
 			// TODO: This Inventory Type needs to be implemented
 		case BEACON:
-			// TODO: This Inventory Type needs to be implemented
-		case FURNACE:
 			// TODO: This Inventory Type needs to be implemented
 		case WORKBENCH:
 			// TODO: This Inventory Type needs to be implemented
