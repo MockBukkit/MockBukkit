@@ -1,7 +1,5 @@
 package be.seeseemelk.mockbukkit.block.state;
 
-import be.seeseemelk.mockbukkit.inventory.FurnaceInventoryMock;
-import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import org.bukkit.Material;
 import org.bukkit.block.BlastFurnace;
 import org.bukkit.block.Block;
@@ -21,12 +19,6 @@ public class BlastFurnaceMock extends AbstractFurnaceMock implements BlastFurnac
 	{
 		super(block);
 		checkType(block, Material.BLAST_FURNACE);
-	}
-
-	@Override
-	protected @NotNull InventoryMock createInventory()
-	{
-		return new FurnaceInventoryMock(this);
 	}
 
 	protected BlastFurnaceMock(@NotNull BlastFurnaceMock state)
