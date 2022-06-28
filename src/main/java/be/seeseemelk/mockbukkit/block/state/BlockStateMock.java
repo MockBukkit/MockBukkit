@@ -3,7 +3,6 @@ package be.seeseemelk.mockbukkit.block.state;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
-import com.destroystokyo.paper.MaterialSetTag;
 import com.destroystokyo.paper.MaterialTags;
 import com.google.common.base.Preconditions;
 import org.bukkit.Chunk;
@@ -323,6 +322,10 @@ public class BlockStateMock implements BlockState
 		else if (MaterialTags.BEDS.isTagged(block))
 		{
 			return new BedMock(block);
+		}
+		else if (MaterialTags.SKULLS.isTagged(block))
+		{
+			return new SkullMock(block);
 		}
 		switch (block.getType())
 		{
