@@ -70,4 +70,5 @@ class FurnaceInventoryMockTest
 	{
 		assertEquals(holder, inventory.getHolder());
 	}
+
 }
