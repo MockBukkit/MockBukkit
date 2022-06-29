@@ -59,7 +59,7 @@ class EndGatewayMockTest
 	{
 		gateway.setExactTeleport(true);
 		gateway.setAge(15L);
-		gateway.setExitLocation(new Location(null, 4, 2, 0));
+		gateway.setExitLocation(new Location(this.world, 4, 2, 0));
 
 		EndGatewayMock clone = new EndGatewayMock(gateway);
 
