@@ -326,6 +326,8 @@ public class BlockStateMock implements BlockState
 		}
 		switch (block.getType())
 		{
+		case SCULK_SENSOR:
+			return new SculkSensorMock(block);
 		case BEACON:
 			return new BeaconMock(block);
 		case BEEHIVE:
