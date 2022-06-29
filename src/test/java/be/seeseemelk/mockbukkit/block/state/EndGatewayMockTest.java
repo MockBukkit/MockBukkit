@@ -1,9 +1,12 @@
 package be.seeseemelk.mockbukkit.block.state;
 
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,12 +14,14 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class EndGatewayMockTest
 {
 
+	private ServerMock server;
 	private WorldMock world;
 	private BlockMock block;
 	private EndGatewayMock gateway;
@@ -24,10 +29,16 @@ class EndGatewayMockTest
 	@BeforeEach
 	void setUp()
 	{
+		this.server = MockBukkit.mock();
 		this.world = new WorldMock();
 		this.block = world.getBlockAt(0, 10, 0);
 		this.block.setType(Material.END_GATEWAY);
 		this.gateway = new EndGatewayMock(this.block);
+	}
+
+	@AfterEach
+	void teardown() {
+		MockBukkit.unmock();
 	}
 
 	@Test
@@ -68,6 +79,37 @@ class EndGatewayMockTest
 		assertEquals(4, clone.getExitLocation().getX());
 		assertEquals(2, clone.getExitLocation().getY());
 		assertEquals(0, clone.getExitLocation().getZ());
+	}
+
+	@Test
+	void setExitLocation()
+	{
+		gateway.setExitLocation(new Location(this.world, 0, 6, 9));
+
+		assertEquals(new Location(this.world, 0, 6, 9), gateway.getExitLocation());
+	}
+
+	@Test
+	void setExitLocation_Null_SetsToNull()
+	{
+		gateway.setExitLocation(null);
+		assertNull(gateway.getExitLocation());
+	}
+
+	@Test
+	void setExitLocation_DifferentWorld_ThrowsException()
+	{
+		Location loc = new Location(new WorldMock(), 0, 0, 0);
+		assertThrowsExactly(IllegalArgumentException.class, () -> gateway.setExitLocation(loc));
+	}
+
+	@Test
+	void getExitLocation_ReturnsClone()
+	{
+		Location loc = new Location(this.world, 0, 6, 9);
+		gateway.setExitLocation(loc);
+
+		assertNotSame(loc, gateway.getExitLocation());
 	}
 
 	@Test
