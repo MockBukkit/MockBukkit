@@ -51,7 +51,8 @@ public class EndGatewayMock extends TileStateMock implements EndGateway
 	@Override
 	public void setExitLocation(@Nullable Location location)
 	{
-		this.exitLocation = location;
+		Preconditions.checkArgument(location == null || Objects.equals(location.getWorld(), isPlaced() ? getWorld() : null), "Cannot set exit location to different world");
+		this.exitLocation = location == null ? null : location.toBlockLocation();
 	}
 
 	@Override
