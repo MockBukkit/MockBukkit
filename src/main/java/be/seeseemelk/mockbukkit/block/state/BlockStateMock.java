@@ -327,6 +327,8 @@ public class BlockStateMock implements BlockState
 		{
 		case SCULK_SHRIEKER:
 			return new SculkShriekerMock(block);
+		case SCULK_SENSOR:
+			return new SculkSensorMock(block);
 		case BEACON:
 			return new BeaconMock(block);
 		case BEEHIVE:
