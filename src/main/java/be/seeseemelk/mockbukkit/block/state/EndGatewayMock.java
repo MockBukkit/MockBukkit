@@ -9,6 +9,8 @@ import org.bukkit.block.EndGateway;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
+
 public class EndGatewayMock extends TileStateMock implements EndGateway
 {
 
