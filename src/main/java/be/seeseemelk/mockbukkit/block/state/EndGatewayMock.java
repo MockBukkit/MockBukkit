@@ -45,7 +45,7 @@ public class EndGatewayMock extends TileStateMock implements EndGateway
 	@Override
 	public @Nullable Location getExitLocation()
 	{
-		return this.exitLocation;
+		return this.exitLocation == null ? null : this.exitLocation.clone();
 	}
 
 	@Override
