@@ -200,4 +200,14 @@ class BannerMockTest
 		}
 	}
 
+
+	@Test
+	void testSetCustomName()
+	{
+		String customName = "Custom Name";
+		meta.setCustomName(customName);
+		assertEquals(customName, meta.getCustomName());
+	}
+
+
 }
