@@ -74,6 +74,7 @@ public class LlamaMock extends ChestedHorseMock implements Llama
 
 	/**
 	 * Asserts that the given entity was attacked by this llama with the given charge.
+	 *
 	 * @param entity The {@link LivingEntity} to check.
 	 * @param charge The charge of the attack.
 	 */
@@ -82,11 +83,7 @@ public class LlamaMock extends ChestedHorseMock implements Llama
 		Preconditions.checkNotNull(entity, "Entity cannot be null");
 		Preconditions.checkArgument(charge >= 0 && charge <= 1, "Charge must be between 0 and 1");
 
-		if (!attackedMobs.containsKey(entity))
-		{
-			fail();
-		}
-		if (attackedMobs.get(entity).getLeft() != charge)
+		if (!attackedMobs.containsKey(entity) || attackedMobs.get(entity).getLeft() != charge)
 		{
 			fail();
 		}
@@ -94,6 +91,7 @@ public class LlamaMock extends ChestedHorseMock implements Llama
 
 	/**
 	 * Asserts that the given entity was attacked by this llama with the given charge and is agressive.
+	 *
 	 * @param entity The {@link LivingEntity} to check.
 	 * @param charge The charge of the attack.
 	 */
