@@ -1,13 +1,13 @@
 package be.seeseemelk.mockbukkit.block.state;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.inventory.FurnaceInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
 import org.bukkit.block.Furnace;
-import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.CookingRecipe;
 import org.bukkit.inventory.FurnaceInventory;
 import org.jetbrains.annotations.NotNull;
@@ -44,10 +44,9 @@ public abstract class AbstractFurnaceMock extends ContainerMock implements Furna
 	}
 
 	@Override
-	protected @NotNull InventoryMock createInventory()
+	protected @NotNull FurnaceInventoryMock createInventory()
 	{
-//		return new FurnaceInventoryMock(this); TODO: Not implemented
-		return new InventoryMock(null, InventoryType.FURNACE);
+		return new FurnaceInventoryMock(this);
 	}
 
 	@Override
