@@ -60,7 +60,7 @@ class SmokerMockTest
 	@Test
 	void blockStateMock_Mock_CorrectType()
 	{
-		assertInstanceOf(BlastFurnaceMock.class, BlockStateMock.mockState(block));
+		assertInstanceOf(SmokerMock.class, BlockStateMock.mockState(block));
 	}
 
 }
