@@ -14,6 +14,7 @@ public class DonkeyMock extends ChestedHorseMock implements Donkey
 	{
 		super(server, uuid);
 	}
+
 	@Override
 	public Horse.@NotNull Variant getVariant()
 	{

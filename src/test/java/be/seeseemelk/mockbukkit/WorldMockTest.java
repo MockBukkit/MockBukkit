@@ -1014,4 +1014,5 @@ class WorldMockTest
 		assertInstanceOf(ZombieHorseMock.class, entity);
 		assertTrue(entity.isValid());
 	}
+
 }
