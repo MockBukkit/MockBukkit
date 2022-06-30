@@ -2,7 +2,6 @@ package be.seeseemelk.mockbukkit.block.state;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.inventory.FurnaceInventoryMock;
-import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
