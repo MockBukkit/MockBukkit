@@ -98,4 +98,10 @@ class BedMockTest
 		}
 	}
 
+	@Test
+	void testConstructor_InvalidMaterial()
+	{
+		assertThrowsExactly(IllegalArgumentException.class, () -> new BedMock(Material.BARRIER));
+	}
+
 }
