@@ -1,6 +1,5 @@
 package be.seeseemelk.mockbukkit.inventory;
 
-import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.HorseInventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;

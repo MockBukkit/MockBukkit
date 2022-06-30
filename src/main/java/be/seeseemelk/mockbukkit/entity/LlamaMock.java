@@ -24,7 +24,7 @@ public class LlamaMock extends ChestedHorseMock implements Llama
 	private final Map<LivingEntity, Pair<Float, Boolean>> attackedMobs = new HashMap<>();
 	private boolean isAgressive = false;
 
-	private LlamaInventoryMock inventory;
+	private final LlamaInventoryMock inventory;
 
 	public LlamaMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
