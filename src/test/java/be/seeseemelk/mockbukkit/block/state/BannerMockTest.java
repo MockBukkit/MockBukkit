@@ -200,7 +200,6 @@ class BannerMockTest
 		}
 	}
 
-
 	@Test
 	void testSetCustomName()
 	{
