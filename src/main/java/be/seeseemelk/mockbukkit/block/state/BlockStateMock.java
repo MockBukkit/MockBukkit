@@ -3,7 +3,6 @@ package be.seeseemelk.mockbukkit.block.state;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
-import com.destroystokyo.paper.MaterialSetTag;
 import com.destroystokyo.paper.MaterialTags;
 import com.google.common.base.Preconditions;
 import org.bukkit.Chunk;
@@ -328,6 +327,10 @@ public class BlockStateMock implements BlockState
 		{
 		case SMOKER:
 			return new SmokerMock(block);
+		case SCULK_SHRIEKER:
+			return new SculkShriekerMock(block);
+		case SCULK_SENSOR:
+			return new SculkSensorMock(block);
 		case BEACON:
 			return new BeaconMock(block);
 		case BEEHIVE:
