@@ -325,6 +325,8 @@ public class BlockStateMock implements BlockState
 		}
 		switch (block.getType())
 		{
+		case STRUCTURE_BLOCK:
+			return new StructureMock(block);
 		case SCULK_SHRIEKER:
 			return new SculkShriekerMock(block);
 		case SCULK_SENSOR:
