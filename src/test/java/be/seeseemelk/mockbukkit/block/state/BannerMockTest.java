@@ -209,5 +209,4 @@ class BannerMockTest
 		assertEquals(customName, meta.getCustomName());
 	}
 
-
 }
