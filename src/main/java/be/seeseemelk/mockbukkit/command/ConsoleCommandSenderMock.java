@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.command;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Server;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.conversations.Conversation;
@@ -27,24 +28,11 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	@Override
 	public void sendMessage(@NotNull String message)
 	{
-		sendMessage(null, message);
+		sendRawMessage(message);
 	}
 
 	@Override
 	public void sendMessage(String... messages)
-	{
-		sendMessage(null, messages);
-	}
-
-	@Override
-	public void sendMessage(UUID sender, @NotNull String message)
-	{
-		Preconditions.checkNotNull(message, "Message cannot be null");
-		messages.add(message);
-	}
-
-	@Override
-	public void sendMessage(UUID sender, String @NotNull ... messages)
 	{
 		for (String message : messages)
 		{
@@ -53,9 +41,25 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	}
 
 	@Override
-	public @Nullable String nextMessage()
+	public void sendMessage(UUID sender, @NotNull String message)
 	{
-		return messages.poll();
+		sendRawMessage(message);
+	}
+
+	@Override
+	public void sendMessage(UUID sender, String @NotNull ... messages)
+	{
+		sendMessage(messages);
+	}
+
+	@Override
+	public @Nullable Component nextComponentMessage()
+	{
+		if (messages.peek() == null)
+		{
+			return null;
+		}
+		return LegacyComponentSerializer.legacySection().deserialize(messages.poll());
 	}
 
 	@Override
