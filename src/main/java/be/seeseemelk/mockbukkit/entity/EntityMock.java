@@ -26,6 +26,7 @@ import org.bukkit.entity.Pose;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityTeleportEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.permissions.Permission;
@@ -259,7 +260,6 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public boolean teleport(@NotNull Location location)
 	{
-		Preconditions.checkNotNull(location, "Location cannot be null");
 		return teleport(location, TeleportCause.PLUGIN);
 	}
 
@@ -267,10 +267,29 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	public boolean teleport(@NotNull Location location, @NotNull TeleportCause cause)
 	{
 		Preconditions.checkNotNull(location, "Location cannot be null");
-		this.location = location;
-		teleported = true;
-		teleportCause = cause;
-		return true;
+		Preconditions.checkNotNull(location.getWorld(), "World cannot be null");
+		location.checkFinite();
+		if (this.removed)
+		{
+			return false;
+		}
+
+		EntityTeleportEvent event = new EntityTeleportEvent(this, getLocation(), location);
+		if (event.callEvent())
+		{
+			// There is actually no non-null check in the CraftBukkit implementation
+			Preconditions.checkNotNull(event.getTo(), "The location where the entity moved to in the event cannot be null");
+			teleportWithoutEvent(event.getTo(), cause);
+			return true;
+		}
+		return false;
+	}
+
+	protected void teleportWithoutEvent(@NotNull Location location, @NotNull TeleportCause cause)
+	{
+		this.location = location.clone();
+		this.teleported = true;
+		this.teleportCause = cause;
 	}
 
 	@Override

@@ -2754,7 +2754,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		}
 
 		World previousWorld = getWorld();
-		super.teleport(playerTeleportEvent.getTo(), cause);
+		teleportWithoutEvent(playerTeleportEvent.getTo(), cause);
 		if (!location.getWorld().equals(previousWorld))
 		{
 			new PlayerChangedWorldEvent(this, previousWorld).callEvent();
