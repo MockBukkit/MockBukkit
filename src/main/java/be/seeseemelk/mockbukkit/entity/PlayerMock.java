@@ -69,6 +69,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerKickEvent;
@@ -2736,7 +2737,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public boolean teleport(@NotNull Location location, @NotNull PlayerTeleportEvent.TeleportCause cause)
 	{
 		Preconditions.checkNotNull(location, "Location cannot be null");
+		Preconditions.checkNotNull(location.getWorld(), "World cannot be null");
 		Preconditions.checkNotNull(cause, "Cause cannot be null");
+		location.checkFinite();
+		if (isDead())
+		{
+			return false;
+		}
 
 		PlayerTeleportEvent playerTeleportEvent = new PlayerTeleportEvent(this, getLocation(), location, cause);
 		Bukkit.getPluginManager().callEvent(playerTeleportEvent);
@@ -2746,7 +2753,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 			return false;
 		}
 
-		return super.teleport(playerTeleportEvent.getTo(), cause);
+		World previousWorld = getWorld();
+		super.teleport(playerTeleportEvent.getTo(), cause);
+		if (!location.getWorld().equals(previousWorld))
+		{
+			new PlayerChangedWorldEvent(this, previousWorld).callEvent();
+		}
+		return true;
 	}
 
 	@Override
