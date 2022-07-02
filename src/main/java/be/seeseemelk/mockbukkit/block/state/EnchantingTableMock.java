@@ -14,7 +14,7 @@ public class EnchantingTableMock extends TileStateMock implements EnchantingTabl
 
 	private Component customName;
 
-	protected EnchantingTableMock(@NotNull Material material)
+	public EnchantingTableMock(@NotNull Material material)
 	{
 		super(material);
 		checkType(material, Material.ENCHANTING_TABLE);

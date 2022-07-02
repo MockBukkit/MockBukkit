@@ -21,14 +21,14 @@ public class JukeboxMock extends TileStateMock implements Jukebox
 		setRecord(null);
 	}
 
-	public JukeboxMock(@NotNull Block block)
+	protected JukeboxMock(@NotNull Block block)
 	{
 		super(block);
 		checkType(block, Material.JUKEBOX);
 		setRecord(null);
 	}
 
-	public JukeboxMock(@NotNull JukeboxMock state)
+	protected JukeboxMock(@NotNull JukeboxMock state)
 	{
 		super(state);
 		this.recordItem = state.recordItem;

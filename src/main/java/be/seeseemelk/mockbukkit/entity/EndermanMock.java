@@ -24,6 +24,10 @@ public class EndermanMock extends MonsterMock implements Enderman
 		super(server, uuid);
 	}
 
+	/**
+	 * We're not implementing this as this would randomly fail tests.
+	 * This is not a bug, it's a feature.
+	 */
 	@Override
 	public boolean teleportRandomly()
 	{
