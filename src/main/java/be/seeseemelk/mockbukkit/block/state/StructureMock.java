@@ -31,7 +31,7 @@ public class StructureMock extends TileStateMock implements Structure
 	private long seed = 0L;
 	private String metadata = "";
 
-	protected StructureMock(@NotNull Material material)
+	public StructureMock(@NotNull Material material)
 	{
 		super(material);
 		checkType(material, Material.STRUCTURE_BLOCK);
