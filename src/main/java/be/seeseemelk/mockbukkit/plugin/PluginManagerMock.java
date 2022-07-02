@@ -908,7 +908,9 @@ public class PluginManagerMock implements PluginManager
 		Map<Permissible, Boolean> map = this.defaultPermissionSubscriptions.get(op);
 
 		if (map == null)
+		{
 			return;
+		}
 
 		map.remove(permissible);
 		if (map.isEmpty())
