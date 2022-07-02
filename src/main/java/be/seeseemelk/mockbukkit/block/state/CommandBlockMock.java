@@ -15,7 +15,7 @@ public class CommandBlockMock extends TileStateMock implements CommandBlock, Com
 	private Component name;
 	private String command;
 
-	protected CommandBlockMock(@NotNull Material material)
+	public CommandBlockMock(@NotNull Material material)
 	{
 		super(material);
 		checkType(material, Material.COMMAND_BLOCK, Material.REPEATING_COMMAND_BLOCK, Material.CHAIN_COMMAND_BLOCK);
