@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 public class DaylightDetectorMock extends TileStateMock implements DaylightDetector
 {
 
-	protected DaylightDetectorMock(@NotNull Material material)
+	public DaylightDetectorMock(@NotNull Material material)
 	{
 		super(material);
 		checkType(material, Material.DAYLIGHT_DETECTOR);
