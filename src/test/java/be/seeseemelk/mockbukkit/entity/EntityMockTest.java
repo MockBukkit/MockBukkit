@@ -237,6 +237,17 @@ class EntityMockTest
 	}
 
 	@Test
+	void teleport_UseCurrentWorldInsteadOfNull()
+	{
+		Location to = new Location(null, 50, 200, 80);
+		assertTrue(entity.teleport(to));
+		assertEquals(world, entity.getWorld());
+		to = to.clone();
+		to.setWorld(world);
+		assertEquals(to, entity.getLocation());
+	}
+
+	@Test
 	void hasTeleport_Teleportation_CorrectStatus()
 	{
 		assertFalse(entity.hasTeleported());

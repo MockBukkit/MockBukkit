@@ -214,7 +214,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	public void setLocation(@NotNull Location location)
 	{
 		Preconditions.checkNotNull(location, "Location cannot be null");
-		this.location = location;
+		// An entity can be teleported to a null world, i.e. the current world.
+		Location position = location.clone();
+		if (position.getWorld() == null)
+		{
+			position.setWorld(getWorld());
+		}
+		this.location = position;
 	}
 
 	@Override
@@ -266,8 +272,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public boolean teleport(@NotNull Location location, @NotNull TeleportCause cause)
 	{
-		Preconditions.checkNotNull(location, "Location cannot be null");
-		Preconditions.checkNotNull(location.getWorld(), "World cannot be null");
+		Preconditions.checkNotNull(location, "Location cannot be null"); // The world can be null if it's not a player
 		location.checkFinite();
 		if (this.removed)
 		{
@@ -287,7 +292,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 
 	protected void teleportWithoutEvent(@NotNull Location location, @NotNull TeleportCause cause)
 	{
-		this.location = location.clone();
+		setLocation(location);
 		this.teleported = true;
 		this.teleportCause = cause;
 	}
