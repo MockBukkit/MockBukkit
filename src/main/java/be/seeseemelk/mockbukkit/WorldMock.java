@@ -19,6 +19,7 @@ import be.seeseemelk.mockbukkit.entity.SkeletonHorseMock;
 import be.seeseemelk.mockbukkit.entity.SkeletonMock;
 import be.seeseemelk.mockbukkit.entity.StrayMock;
 import be.seeseemelk.mockbukkit.entity.WardenMock;
+import be.seeseemelk.mockbukkit.entity.WitherSkeletonMock;
 import be.seeseemelk.mockbukkit.entity.ZombieHorseMock;
 import be.seeseemelk.mockbukkit.entity.ZombieMock;
 import be.seeseemelk.mockbukkit.generator.BiomeProviderMock;
@@ -90,6 +91,7 @@ import org.bukkit.entity.SpawnCategory;
 import org.bukkit.entity.Stray;
 import org.bukkit.entity.Warden;
 import org.bukkit.entity.WaterMob;
+import org.bukkit.entity.WitherSkeleton;
 import org.bukkit.entity.Zombie;
 import org.bukkit.entity.ZombieHorse;
 import org.bukkit.event.entity.CreatureSpawnEvent;
@@ -947,6 +949,10 @@ public class WorldMock implements World
 		else if (clazz == Stray.class)
 		{
 			return new StrayMock(server, UUID.randomUUID());
+		}
+		else if (clazz == WitherSkeleton.class)
+		{
+			return new WitherSkeletonMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}
