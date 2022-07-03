@@ -14,6 +14,7 @@ import be.seeseemelk.mockbukkit.entity.LlamaMock;
 import be.seeseemelk.mockbukkit.entity.MuleMock;
 import be.seeseemelk.mockbukkit.entity.SheepMock;
 import be.seeseemelk.mockbukkit.entity.SkeletonHorseMock;
+import be.seeseemelk.mockbukkit.entity.SkeletonMock;
 import be.seeseemelk.mockbukkit.entity.WardenMock;
 import be.seeseemelk.mockbukkit.entity.ZombieHorseMock;
 import be.seeseemelk.mockbukkit.entity.ZombieMock;
@@ -1012,6 +1013,15 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ZOMBIE_HORSE);
 		assertInstanceOf(ZombieHorseMock.class, entity);
+		assertTrue(entity.isValid());
+	}
+
+	@Test
+	void testSpawnSkeleton()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.SKELETON);
+		assertInstanceOf(SkeletonMock.class, entity);
 		assertTrue(entity.isValid());
 	}
 
