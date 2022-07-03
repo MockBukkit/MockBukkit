@@ -1376,19 +1376,18 @@ class PlayerMockTest
 	{
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
 		World from = player.getWorld();
-		World[] playerWorldWhenEvent = new World[1];
+		Location to = new Location(new WorldMock(), 0, 80, 0);
 		server.getPluginManager().registerEvents(new Listener()
 		{
 			@EventHandler
 			public void onChangedWorld(@NotNull PlayerChangedWorldEvent event)
 			{
-				playerWorldWhenEvent[0] = event.getPlayer().getWorld();
+				assertSame(to, event.getPlayer().getLocation(), "The location should already have changed when the PlayerChangedWorldEvent is fired");
 			}
 		}, plugin);
-		player.teleport(new Location(new WorldMock(), 0, 80, 0));
+		player.teleport(to);
 		server.getPluginManager().assertEventFired(PlayerTeleportEvent.class);
 		server.getPluginManager().assertEventFired(PlayerChangedWorldEvent.class, event -> event.getFrom() == from);
-		assertSame(player.getWorld(), playerWorldWhenEvent[0], "The world should already have changed when the PlayerChangedWorldEvent is fired");
 	}
 
 	@Test
