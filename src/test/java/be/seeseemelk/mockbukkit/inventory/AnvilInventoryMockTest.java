@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class AnvilInventoryMockTest
@@ -50,7 +51,7 @@ class AnvilInventoryMockTest
 	@Test
 	void testGetRenameTextNotSet()
 	{
-		assertThrows(IllegalStateException.class, () -> inventory.getRenameText());
+		assertNull(inventory.getRenameText());
 	}
 
 	@Test
