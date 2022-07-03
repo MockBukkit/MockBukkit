@@ -17,6 +17,7 @@ import be.seeseemelk.mockbukkit.entity.MuleMock;
 import be.seeseemelk.mockbukkit.entity.SheepMock;
 import be.seeseemelk.mockbukkit.entity.SkeletonHorseMock;
 import be.seeseemelk.mockbukkit.entity.SkeletonMock;
+import be.seeseemelk.mockbukkit.entity.StrayMock;
 import be.seeseemelk.mockbukkit.entity.WardenMock;
 import be.seeseemelk.mockbukkit.entity.ZombieHorseMock;
 import be.seeseemelk.mockbukkit.entity.ZombieMock;
@@ -86,6 +87,7 @@ import org.bukkit.entity.Skeleton;
 import org.bukkit.entity.SkeletonHorse;
 import org.bukkit.entity.Slime;
 import org.bukkit.entity.SpawnCategory;
+import org.bukkit.entity.Stray;
 import org.bukkit.entity.Warden;
 import org.bukkit.entity.WaterMob;
 import org.bukkit.entity.Zombie;
@@ -941,6 +943,10 @@ public class WorldMock implements World
 		else if (clazz == Skeleton.class)
 		{
 			return new SkeletonMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Stray.class)
+		{
+			return new StrayMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}
