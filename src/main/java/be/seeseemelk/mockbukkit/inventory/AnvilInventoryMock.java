@@ -22,7 +22,6 @@ public class AnvilInventoryMock extends InventoryMock implements AnvilInventory
 	@Override
 	public @Nullable String getRenameText()
 	{
-		Preconditions.checkState(renameText != null, "Rename Test hasn't been set");
 		return renameText;
 	}
 
@@ -65,7 +64,11 @@ public class AnvilInventoryMock extends InventoryMock implements AnvilInventory
 		this.maxRepairCost = levels;
 	}
 
-	public void setRenameText(String text)
+	/**
+	 * Sets the rename Text.
+	 * @param text The text to set.
+	 */
+	public void setRenameText(@Nullable String text)
 	{
 		this.renameText = text;
 	}
