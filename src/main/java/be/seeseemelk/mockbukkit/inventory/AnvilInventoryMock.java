@@ -22,7 +22,7 @@ public class AnvilInventoryMock extends InventoryMock implements AnvilInventory
 	@Override
 	public @Nullable String getRenameText()
 	{
-		return renameText;
+		return this.renameText;
 	}
 
 	@Override
