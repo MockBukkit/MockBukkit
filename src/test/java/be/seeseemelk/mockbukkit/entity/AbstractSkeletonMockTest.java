@@ -93,7 +93,8 @@ class AbstractSkeletonMockTest
 	@Test
 	void testAssertAttackedThrowsWithNoAttack()
 	{
-		assertThrows(AssertionFailedError.class, () -> skeleton.assertAttacked(server.addPlayer(), 0.5f));
+		Player player = server.addPlayer();
+		assertThrows(AssertionFailedError.class, () -> skeleton.assertAttacked(player, 0.5f));
 	}
 
 	@Test
