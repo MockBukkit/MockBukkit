@@ -59,6 +59,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.Registry;
 import org.bukkit.Server;
 import org.bukkit.StructureType;
 import org.bukkit.Tag;
@@ -1774,6 +1775,13 @@ public class ServerMock extends Server.Spigot implements Server
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 
+	}
+
+	@Override
+	public @Nullable <T extends Keyed> Registry<T> getRegistry(@NotNull Class<T> tClass)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
