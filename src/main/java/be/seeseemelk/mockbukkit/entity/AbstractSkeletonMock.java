@@ -20,6 +20,7 @@ public abstract class AbstractSkeletonMock extends MonsterMock implements Abstra
 	private boolean shouldBurnInDay = true;
 	private boolean isChargingAttack = false;
 	private final Map<LivingEntity, Pair<Float, Boolean>> attackedMobs = new HashMap<>();
+
 	protected AbstractSkeletonMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
