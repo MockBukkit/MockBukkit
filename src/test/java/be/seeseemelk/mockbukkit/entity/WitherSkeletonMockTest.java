@@ -35,4 +35,5 @@ public class WitherSkeletonMockTest
 	{
 		assertEquals(Skeleton.SkeletonType.WITHER, witherSkeleton.getSkeletonType());
 	}
+
 }
