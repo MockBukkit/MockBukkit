@@ -12,7 +12,7 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class WitherSkeletonMockTest
+class WitherSkeletonMockTest
 {
 	private ServerMock server;
 	private WitherSkeletonMock witherSkeleton;
