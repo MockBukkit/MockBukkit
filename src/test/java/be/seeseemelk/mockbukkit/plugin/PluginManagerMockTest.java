@@ -5,6 +5,8 @@ import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.TestPlugin;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.server.PluginDisableEvent;
@@ -19,12 +21,12 @@ import org.junit.jupiter.api.Test;
 import java.util.Collection;
 import java.util.Iterator;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class PluginManagerMockTest
@@ -248,6 +250,34 @@ class PluginManagerMockTest
 		pluginManager.unsubscribeFromDefaultPerms(true, player);
 
 		assertFalse(pluginManager.getDefaultPermSubscriptions(true).contains(player));
+	}
+
+	@Test
+	void eventThrowsException_RuntimeException_RethrowsSame()
+	{
+		pluginManager.registerEvents(new Listener()
+		{
+			@EventHandler
+			public void event(BlockBreakEvent e)
+			{
+				throw new IllegalStateException();
+			}
+		}, MockBukkit.createMockPlugin());
+		assertThrowsExactly(IllegalStateException.class, () -> pluginManager.callEvent(new BlockBreakEvent(null, null)));
+	}
+
+	@Test
+	void eventThrowsException_NotRuntimeException_ThrowsRuntime()
+	{
+		pluginManager.registerEvents(new Listener()
+		{
+			@EventHandler
+			public void event(BlockBreakEvent e) throws Exception
+			{
+				throw new Exception();
+			}
+		}, MockBukkit.createMockPlugin());
+		assertThrowsExactly(RuntimeException.class, () -> pluginManager.callEvent(new BlockBreakEvent(null, null)));
 	}
 
 }
