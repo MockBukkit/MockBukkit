@@ -1,9 +1,7 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
-import com.google.errorprone.annotations.Var;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Axolotl;
