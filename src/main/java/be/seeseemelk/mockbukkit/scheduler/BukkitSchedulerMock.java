@@ -538,7 +538,8 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public @NotNull Executor getMainThreadExecutor(@NotNull Plugin plugin)
 	{
 		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
-		return command -> {
+		return command ->
+		{
 			Preconditions.checkNotNull(command, "Command cannot be null");
 			this.runTask(plugin, command);
 		};

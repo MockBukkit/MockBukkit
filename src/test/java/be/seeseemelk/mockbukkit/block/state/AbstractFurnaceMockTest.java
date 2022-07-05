@@ -8,7 +8,6 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -69,7 +68,6 @@ class AbstractFurnaceMockTest
 	}
 
 	@Test
-	@Disabled("FurnaceInventoryMock isn't implemented yet")
 	void constructor_Copy_CopiesValues()
 	{
 		furnace.setBurnTime((short) 10);

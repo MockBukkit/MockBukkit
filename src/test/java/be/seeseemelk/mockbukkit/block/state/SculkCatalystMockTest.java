@@ -11,56 +11,56 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
-class BlastFurnaceMockTest
+class SculkCatalystMockTest
 {
 
 	private WorldMock world;
 	private BlockMock block;
-	private BlastFurnaceMock furnace;
+	private SculkCatalystMock sculkCatalyst;
 
 	@BeforeEach
 	void setUp()
 	{
 		this.world = new WorldMock();
 		this.block = world.getBlockAt(0, 10, 0);
-		this.block.setType(Material.BLAST_FURNACE);
-		this.furnace = new BlastFurnaceMock(this.block);
+		this.block.setType(Material.SCULK_CATALYST);
+		this.sculkCatalyst = new SculkCatalystMock(this.block);
 	}
 
 	@Test
 	void constructor_Material()
 	{
-		assertDoesNotThrow(() -> new BlastFurnaceMock(Material.BLAST_FURNACE));
+		assertDoesNotThrow(() -> new SculkCatalystMock(Material.SCULK_CATALYST));
 	}
 
 	@Test
-	void constructor_Material_NotBlastFurnace_ThrowsException()
+	void constructor_Material_WrongType_ThrowsException()
 	{
-		assertThrowsExactly(IllegalArgumentException.class, () -> new BlastFurnaceMock(Material.FURNACE));
+		assertThrowsExactly(IllegalArgumentException.class, () -> new SculkCatalystMock(Material.BEDROCK));
 	}
 
 	@Test
 	void constructor_Block()
 	{
-		assertDoesNotThrow(() -> new BlastFurnaceMock(new BlockMock(Material.BLAST_FURNACE)));
+		assertDoesNotThrow(() -> new SculkCatalystMock(new BlockMock(Material.SCULK_CATALYST)));
 	}
 
 	@Test
-	void constructor_Block_NotBlastFurnace_ThrowsException()
+	void constructor_Block_WrongType_ThrowsException()
 	{
-		assertThrowsExactly(IllegalArgumentException.class, () -> new BlastFurnaceMock(new BlockMock(Material.FURNACE)));
+		assertThrowsExactly(IllegalArgumentException.class, () -> new SculkCatalystMock(new BlockMock(Material.BEDROCK)));
 	}
 
 	@Test
 	void getSnapshot_DifferentInstance()
 	{
-		assertNotSame(furnace, furnace.getSnapshot());
+		assertNotSame(sculkCatalyst, sculkCatalyst.getSnapshot());
 	}
 
 	@Test
 	void blockStateMock_Mock_CorrectType()
 	{
-		assertInstanceOf(BlastFurnaceMock.class, BlockStateMock.mockState(block));
+		assertInstanceOf(SculkCatalystMock.class, BlockStateMock.mockState(block));
 	}
 
 }

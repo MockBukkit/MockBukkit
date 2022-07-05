@@ -16,6 +16,7 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.FishHook;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Villager;
 import org.bukkit.event.inventory.InventoryCloseEvent;
@@ -298,6 +299,13 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	}
 
 	@Override
+	public @Nullable FishHook getFishHook()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public boolean sleep(@NotNull Location location, boolean force)
 	{
 		// TODO Auto-generated method stub
@@ -538,4 +546,3 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	}
 
 }
-
