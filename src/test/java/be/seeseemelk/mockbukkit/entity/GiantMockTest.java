@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GiantMockTest
 {
+
 	private ServerMock serverMock;
 	private GiantMock giant;
 

@@ -3,7 +3,6 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Spider;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SpiderMockTest
 {
+
 	private ServerMock serverMock;
 	private SpiderMock spider;
 
@@ -35,4 +35,5 @@ public class SpiderMockTest
 	{
 		assertEquals(EntityType.SPIDER, spider.getType());
 	}
+
 }
