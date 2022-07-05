@@ -63,11 +63,12 @@ public class SkeletonMock extends AbstractSkeletonMock implements Skeleton
 
 	/**
 	 * Sets the Time the Entity is in powdered Snow
+	 *
 	 * @param time The Time in ticks
 	 */
 	public void setInPowderedSnowTime(int time)
 	{
-		Preconditions.checkArgument(time > 0,"Time cannot be smaller than 1");
+		Preconditions.checkArgument(time > 0, "Time cannot be smaller than 1");
 		this.inPowderedSnow = time;
 	}
 
