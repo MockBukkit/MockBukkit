@@ -1054,4 +1054,5 @@ class WorldMockTest
 		assertInstanceOf(GiantMock.class, entity);
 		assertTrue(entity.isValid());
 	}
+
 }
