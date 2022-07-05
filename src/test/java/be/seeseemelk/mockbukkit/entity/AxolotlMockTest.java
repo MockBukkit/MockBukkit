@@ -76,14 +76,14 @@ class AxolotlMockTest
 	@Test
 	void testGetVariantDefault()
 	{
-		assertEquals(Axolotl.Variant.LUCY,axolotl.getVariant());
+		assertEquals(Axolotl.Variant.LUCY, axolotl.getVariant());
 	}
 
 	@Test
 	void testSetVariant()
 	{
 		axolotl.setVariant(Axolotl.Variant.CYAN);
-		assertEquals(Axolotl.Variant.CYAN,axolotl.getVariant());
+		assertEquals(Axolotl.Variant.CYAN, axolotl.getVariant());
 	}
 
 	@Test

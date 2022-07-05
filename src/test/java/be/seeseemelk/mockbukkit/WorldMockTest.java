@@ -1015,6 +1015,7 @@ class WorldMockTest
 		assertInstanceOf(ZombieHorseMock.class, entity);
 		assertTrue(entity.isValid());
 	}
+
 	@Test
 	void testSpawnAxolotl()
 	{
@@ -1023,4 +1024,5 @@ class WorldMockTest
 		assertInstanceOf(AxolotlMock.class, entity);
 		assertTrue(entity.isValid());
 	}
+
 }
