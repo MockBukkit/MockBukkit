@@ -92,5 +92,4 @@ class AxolotlMockTest
 		assertThrows(NullPointerException.class, () -> axolotl.setVariant(null));
 	}
 
-
 }
