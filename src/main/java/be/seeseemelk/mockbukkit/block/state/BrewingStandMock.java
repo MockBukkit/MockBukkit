@@ -15,7 +15,7 @@ public class BrewingStandMock extends ContainerMock implements BrewingStand
 	private int brewingTime;
 	private int fuelLevel;
 
-	protected BrewingStandMock(@NotNull Material material)
+	public BrewingStandMock(@NotNull Material material)
 	{
 		super(material);
 		checkType(material, Material.BREWING_STAND);

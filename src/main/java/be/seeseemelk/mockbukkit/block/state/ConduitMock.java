@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 public class ConduitMock extends TileStateMock implements Conduit
 {
 
-	protected ConduitMock(@NotNull Material material)
+	public ConduitMock(@NotNull Material material)
 	{
 		super(material);
 		checkType(material, Material.CONDUIT);
