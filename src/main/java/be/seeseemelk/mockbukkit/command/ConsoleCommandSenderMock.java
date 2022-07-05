@@ -23,7 +23,7 @@ import java.util.UUID;
 public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTarget
 {
 
-	private final Queue<String> messages = new LinkedList<>();
+	private final Queue<Component> messages = new LinkedList<>();
 
 	@Override
 	public void sendMessage(@NotNull String message)
@@ -55,15 +55,11 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	@Override
 	public @Nullable Component nextComponentMessage()
 	{
-		if (messages.peek() == null)
-		{
-			return null;
-		}
-		return LegacyComponentSerializer.legacySection().deserialize(messages.poll());
+		return messages.poll();
 	}
 
 	@Override
-	public boolean isPermissionSet(String name)
+	public boolean isPermissionSet(@NotNull String name)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -209,7 +205,7 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	public void sendRawMessage(@Nullable UUID sender, @NotNull String message)
 	{
 		Preconditions.checkNotNull(message, "Message cannot be null");
-		messages.add(message);
+		messages.add(LegacyComponentSerializer.legacySection().deserialize(message));
 	}
 
 	@Override
