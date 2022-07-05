@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class WitherSkeletonMockTest
 {
+
 	private ServerMock server;
 	private WitherSkeletonMock witherSkeleton;
 
