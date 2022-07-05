@@ -5,6 +5,7 @@ import be.seeseemelk.mockbukkit.entity.AllayMock;
 import be.seeseemelk.mockbukkit.entity.ArmorStandMock;
 import be.seeseemelk.mockbukkit.entity.BlazeMock;
 import be.seeseemelk.mockbukkit.entity.CaveSpiderMock;
+import be.seeseemelk.mockbukkit.entity.AxolotlMock;
 import be.seeseemelk.mockbukkit.entity.DonkeyMock;
 import be.seeseemelk.mockbukkit.entity.EndermanMock;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
@@ -64,6 +65,7 @@ import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Blaze;
 import org.bukkit.entity.CaveSpider;
+import org.bukkit.entity.Axolotl;
 import org.bukkit.entity.Donkey;
 import org.bukkit.entity.Enderman;
 import org.bukkit.entity.Entity;
@@ -961,6 +963,10 @@ public class WorldMock implements World
 		else if (clazz == Giant.class)
 		{
 			return new GiantMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Axolotl.class)
+		{
+			return new AxolotlMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}

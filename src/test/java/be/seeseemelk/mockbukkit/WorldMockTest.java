@@ -7,6 +7,7 @@ import be.seeseemelk.mockbukkit.entity.AllayMock;
 import be.seeseemelk.mockbukkit.entity.ArmorStandMock;
 import be.seeseemelk.mockbukkit.entity.BlazeMock;
 import be.seeseemelk.mockbukkit.entity.CaveSpiderMock;
+import be.seeseemelk.mockbukkit.entity.AxolotlMock;
 import be.seeseemelk.mockbukkit.entity.DonkeyMock;
 import be.seeseemelk.mockbukkit.entity.EndermanMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
@@ -1052,6 +1053,15 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.GIANT);
 		assertInstanceOf(GiantMock.class, entity);
+		assertTrue(entity.isValid());
+	}
+
+	@Test
+	void testSpawnAxolotl()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.AXOLOTL);
+		assertInstanceOf(AxolotlMock.class, entity);
 		assertTrue(entity.isValid());
 	}
 
