@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.server.PluginDisableEvent;
+import org.bukkit.permissions.Permissible;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.Plugin;
@@ -18,6 +19,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Collection;
 import java.util.Iterator;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -225,6 +227,27 @@ class PluginManagerMockTest
 		assertFalse(plugin.isEnabled(), "Plugin was not disabled");
 		Plugin[] plugins = pluginManager.getPlugins();
 		assertEquals(0, plugins.length);
+	}
+
+	@Test
+	void subscribeToDefaultPerms()
+	{
+		Permissible player = server.addPlayer();
+
+		pluginManager.subscribeToDefaultPerms(true, player);
+
+		assertTrue(pluginManager.getDefaultPermSubscriptions(true).contains(player));
+	}
+
+	@Test
+	void unsubscribeToDefaultPerms()
+	{
+		Permissible player = server.addPlayer();
+		pluginManager.subscribeToDefaultPerms(true, player);
+
+		pluginManager.unsubscribeFromDefaultPerms(true, player);
+
+		assertFalse(pluginManager.getDefaultPermSubscriptions(true).contains(player));
 	}
 
 }

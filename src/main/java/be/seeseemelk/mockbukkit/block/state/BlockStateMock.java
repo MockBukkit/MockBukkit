@@ -325,6 +325,10 @@ public class BlockStateMock implements BlockState
 		}
 		switch (block.getType())
 		{
+		case END_GATEWAY:
+			return new EndGatewayMock(block);
+		case SCULK_CATALYST:
+			return new SculkCatalystMock(block);
 		case SCULK_SHRIEKER:
 			return new SculkShriekerMock(block);
 		case SCULK_SENSOR:
