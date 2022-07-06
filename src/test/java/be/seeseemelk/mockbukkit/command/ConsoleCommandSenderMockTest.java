@@ -1,6 +1,8 @@
 package be.seeseemelk.mockbukkit.command;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
+import org.bukkit.permissions.Permission;
+import org.bukkit.permissions.PermissionAttachment;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -121,6 +123,81 @@ class ConsoleCommandSenderMockTest
 	{
 		sender.addAttachment(MockBukkit.createMockPlugin(), "test.permission", false);
 		assertFalse(sender.hasPermission("test.permission"));
+	}
+
+	@Test
+	void removeAttachment_RemovesAttachment()
+	{
+		PermissionAttachment att = sender.addAttachment(MockBukkit.createMockPlugin(), "test.permission", false);
+		assertFalse(sender.hasPermission("test.permission"));
+		sender.removeAttachment(att);
+		assertTrue(sender.hasPermission("test.permission"));
+	}
+
+	@Test
+	void isPermissionSet_String_IsSet_True()
+	{
+		sender.addAttachment(MockBukkit.createMockPlugin(), "test.permission", true);
+		assertTrue(sender.isPermissionSet("test.permission"));
+	}
+
+	@Test
+	void isPermissionSet_String_IsntSet_False()
+	{
+		assertFalse(sender.isPermissionSet("test.permission"));
+	}
+
+	@Test
+	void isPermissionSet_Permission_IsSet_True()
+	{
+		sender.addAttachment(MockBukkit.createMockPlugin(), "test.permission", true);
+		assertTrue(sender.isPermissionSet(new Permission("test.permission")));
+	}
+
+	@Test
+	void isPermissionSet_Permission_IsntSet_False()
+	{
+		assertFalse(sender.isPermissionSet(new Permission("test.permission")));
+	}
+
+	@Test
+	void hasPermission_String_SetTrue_True()
+	{
+		sender.addAttachment(MockBukkit.createMockPlugin(), "test.permission", true);
+		assertTrue(sender.hasPermission("test.permission"));
+	}
+
+	@Test
+	void hasPermission_String_SetFalse_True()
+	{
+		sender.addAttachment(MockBukkit.createMockPlugin(), "test.permission", false);
+		assertFalse(sender.hasPermission("test.permission"));
+	}
+
+	@Test
+	void hasPermission_String_NotSet_True()
+	{
+		assertTrue(sender.hasPermission("test.permission"));
+	}
+
+	@Test
+	void hasPermission_Permission_SetTrue_True()
+	{
+		sender.addAttachment(MockBukkit.createMockPlugin(), "test.permission", true);
+		assertTrue(sender.hasPermission(new Permission("test.permission")));
+	}
+
+	@Test
+	void hasPermission_Permission_SetFalse_True()
+	{
+		sender.addAttachment(MockBukkit.createMockPlugin(), "test.permission", false);
+		assertFalse(sender.hasPermission(new Permission("test.permission")));
+	}
+
+	@Test
+	void hasPermission_Permission_NotSet_True()
+	{
+		assertTrue(sender.hasPermission(new Permission("test.permission")));
 	}
 
 }
