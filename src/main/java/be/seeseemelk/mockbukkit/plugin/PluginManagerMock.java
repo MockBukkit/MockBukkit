@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.plugin;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.exception.EventHandlerException;
 import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
 import com.destroystokyo.paper.event.server.ServerExceptionEvent;
 import com.destroystokyo.paper.exception.ServerEventException;
@@ -515,7 +516,7 @@ public class PluginManagerMock implements PluginManager
 			}
 			else
 			{
-				throw new RuntimeException(ex);
+				throw new EventHandlerException(ex);
 			}
 		}
 	}

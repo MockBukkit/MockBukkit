@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.plugin;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.TestPlugin;
+import be.seeseemelk.mockbukkit.exception.EventHandlerException;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -267,7 +268,7 @@ class PluginManagerMockTest
 	}
 
 	@Test
-	void eventThrowsException_NotRuntimeException_ThrowsRuntime()
+	void eventThrowsException_NotRuntimeException_ThrowsEventHandlerException()
 	{
 		pluginManager.registerEvents(new Listener()
 		{
@@ -277,7 +278,7 @@ class PluginManagerMockTest
 				throw new Exception();
 			}
 		}, MockBukkit.createMockPlugin());
-		assertThrowsExactly(RuntimeException.class, () -> pluginManager.callEvent(new BlockBreakEvent(null, null)));
+		assertThrowsExactly(EventHandlerException.class, () -> pluginManager.callEvent(new BlockBreakEvent(null, null)));
 	}
 
 }
