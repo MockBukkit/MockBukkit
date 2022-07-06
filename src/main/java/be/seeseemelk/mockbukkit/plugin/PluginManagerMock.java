@@ -3,6 +3,8 @@ package be.seeseemelk.mockbukkit.plugin;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
+import com.destroystokyo.paper.event.server.ServerExceptionEvent;
+import com.destroystokyo.paper.exception.ServerEventException;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
 import org.bukkit.command.PluginCommand;
@@ -502,6 +504,11 @@ public class PluginManagerMock implements PluginManager
 		}
 		catch (Throwable ex)
 		{
+			if (!(event instanceof ServerExceptionEvent))
+			{ // Don't cause an endless loop
+				String msg = "Could not pass event " + event.getEventName() + " to " + registration.getPlugin().getDescription().getFullName();
+				callEvent(new ServerExceptionEvent(new ServerEventException(msg, ex, registration.getPlugin(), registration.getListener(), event)));
+			}
 			if (ex instanceof RuntimeException r)
 			{
 				throw r; // Rethrow same exception if possible
