@@ -1324,6 +1324,12 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public void stopSound(@NotNull SoundCategory category)
+	{
+		// We will just pretend the Sound has stopped.
+	}
+
+	@Override
 	public void stopAllSounds()
 	{
 		// We will just pretend all Sounds have stopped.

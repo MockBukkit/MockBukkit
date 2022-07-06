@@ -12,6 +12,7 @@ import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
 import be.seeseemelk.mockbukkit.help.HelpMapMock;
+import be.seeseemelk.mockbukkit.inventory.AnvilInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.BarrelInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.BrewerInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.ChestInventoryMock;
@@ -58,6 +59,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.Registry;
 import org.bukkit.Server;
 import org.bukkit.StructureType;
 import org.bukkit.Tag;
@@ -629,7 +631,7 @@ public class ServerMock extends Server.Spigot implements Server
 		case LOOM:
 			// TODO: This Inventory Type needs to be implemented
 		case ANVIL:
-			// TODO: This Inventory Type needs to be implemented
+			return new AnvilInventoryMock(owner);
 		case SMITHING:
 			// TODO: This Inventory Type needs to be implemented
 		case BEACON:
@@ -1773,6 +1775,13 @@ public class ServerMock extends Server.Spigot implements Server
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 
+	}
+
+	@Override
+	public @Nullable <T extends Keyed> Registry<T> getRegistry(@NotNull Class<T> tClass)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

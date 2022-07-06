@@ -327,6 +327,10 @@ public class BlockStateMock implements BlockState
 		{
 		case SMOKER:
 			return new SmokerMock(block);
+		case END_GATEWAY:
+			return new EndGatewayMock(block);
+		case SCULK_CATALYST:
+			return new SculkCatalystMock(block);
 		case SCULK_SHRIEKER:
 			return new SculkShriekerMock(block);
 		case SCULK_SENSOR:
