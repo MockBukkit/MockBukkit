@@ -2,7 +2,10 @@ package be.seeseemelk.mockbukkit.plugin;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.exception.EventHandlerException;
 import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
+import com.destroystokyo.paper.event.server.ServerExceptionEvent;
+import com.destroystokyo.paper.exception.ServerEventException;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
 import org.bukkit.command.PluginCommand;
@@ -17,7 +20,6 @@ import org.bukkit.event.server.PluginEnableEvent;
 import org.bukkit.permissions.Permissible;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
-import org.bukkit.plugin.AuthorNagException;
 import org.bukkit.plugin.EventExecutor;
 import org.bukkit.plugin.IllegalPluginAccessException;
 import org.bukkit.plugin.InvalidDescriptionException;
@@ -501,24 +503,21 @@ public class PluginManagerMock implements PluginManager
 		{
 			registration.callEvent(event);
 		}
-		catch (AuthorNagException ex)
-		{
-			Plugin plugin = registration.getPlugin();
-			if (plugin.isNaggable())
-			{
-				plugin.setNaggable(false);
-				server.getLogger().log(Level.SEVERE, String.format(
-						"Nag author(s): '%s' of '%s' about the following: %s",
-						plugin.getDescription().getAuthors(),
-						plugin.getDescription().getFullName(),
-						ex.getMessage()
-				));
-			}
-		}
 		catch (Throwable ex)
 		{
-			String msg = "Could not pass event " + event.getEventName() + " to " + registration.getPlugin().getDescription().getFullName();
-			server.getLogger().log(Level.SEVERE, msg, ex);
+			if (!(event instanceof ServerExceptionEvent))
+			{ // Don't cause an endless loop
+				String msg = "Could not pass event " + event.getEventName() + " to " + registration.getPlugin().getDescription().getFullName();
+				callEvent(new ServerExceptionEvent(new ServerEventException(msg, ex, registration.getPlugin(), registration.getListener(), event)));
+			}
+			if (ex instanceof RuntimeException r)
+			{
+				throw r; // Rethrow same exception if possible
+			}
+			else
+			{
+				throw new EventHandlerException(ex);
+			}
 		}
 	}
 
