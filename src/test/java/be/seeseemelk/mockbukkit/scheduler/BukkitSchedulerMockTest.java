@@ -355,4 +355,14 @@ class BukkitSchedulerMockTest
 		MockBukkit.unmock();
 	}
 
+	@Test
+	void runTaskLater_DoesntHang()
+	{
+		scheduler.runTaskLater(null, () ->
+		{
+		}, 1L);
+		scheduler.performTicks(2);
+		scheduler.shutdown();
+	}
+
 }
