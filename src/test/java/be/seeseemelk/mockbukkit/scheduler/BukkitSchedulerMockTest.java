@@ -295,4 +295,15 @@ class BukkitSchedulerMockTest
 			scheduler.shutdown();
 		});
 	}
+
+	@Test
+	void runTaskLater_DoesntHang()
+	{
+		scheduler.runTaskLater(null, () ->
+		{
+		}, 1L);
+		scheduler.performTicks(2);
+		scheduler.shutdown();
+	}
+
 }
