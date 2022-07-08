@@ -301,10 +301,10 @@ class BukkitSchedulerMockTest
 		scheduler.performTicks(10);
 		scheduler.setShutdownTimeout(10);
 		assertThrows(RuntimeException.class,
-				() ->
-				{
-					scheduler.shutdown();
-				});
+		             () ->
+		{
+			scheduler.shutdown();
+		});
 	}
 
 	@Test

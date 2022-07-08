@@ -31,8 +31,8 @@ public class BukkitSchedulerMock implements BukkitScheduler
 {
 	private static final String LOGGER_NAME = "BukkitSchedulerMock";
 	private final ThreadPoolExecutor pool = new ThreadPoolExecutor(0, Integer.MAX_VALUE,
-			60L, TimeUnit.SECONDS,
-			new SynchronousQueue<>());
+	        60L, TimeUnit.SECONDS,
+	        new SynchronousQueue<>());
 	private final ExecutorService asyncEventExecutor = Executors.newCachedThreadPool();
 	private final List<Future<?>> queuedAsyncEvents = new ArrayList<>();
 	private final TaskList scheduledTasks = new TaskList();
@@ -108,7 +108,8 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public <T extends Event> @NotNull Future<?> executeAsyncEvent(T event, Consumer<T> func)
 	{
 		Validate.notNull(event, "Cannot call a null event!");
-		Future<?> future = asyncEventExecutor.submit(() -> {
+		Future<?> future = asyncEventExecutor.submit(() ->
+		{
 			MockBukkit.getMock().getPluginManager().callEvent(event);
 			if (func != null)
 			{
@@ -237,7 +238,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 						task.cancel();
 						cancelTask(task.getTaskId());
 						throw new RuntimeException("Forced Cancellation of task owned by "
-														   + task.getOwner().getName());
+						                           + task.getOwner().getName());
 					}
 				}
 				pool.shutdownNow();
@@ -360,7 +361,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public int scheduleAsyncDelayedTask(@NotNull Plugin plugin, @NotNull Runnable task, long delay)
 	{
 		Logger.getLogger(LOGGER_NAME)
-				.warning("Consider using runTaskLaterAsynchronously instead of scheduleAsyncDelayedTask");
+		.warning("Consider using runTaskLaterAsynchronously instead of scheduleAsyncDelayedTask");
 		return runTaskLaterAsynchronously(plugin, task, delay).getTaskId();
 	}
 
@@ -369,7 +370,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public int scheduleAsyncDelayedTask(@NotNull Plugin plugin, @NotNull Runnable task)
 	{
 		Logger.getLogger(LOGGER_NAME)
-				.warning("Consider using runTaskAsynchronously instead of scheduleAsyncDelayedTask");
+		.warning("Consider using runTaskAsynchronously instead of scheduleAsyncDelayedTask");
 		return runTaskAsynchronously(plugin, task).getTaskId();
 	}
 
@@ -378,7 +379,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public int scheduleAsyncRepeatingTask(@NotNull Plugin plugin, @NotNull Runnable task, long delay, long period)
 	{
 		Logger.getLogger(LOGGER_NAME)
-				.warning("Consider using runTaskTimerAsynchronously instead of scheduleAsyncRepeatingTask");
+		.warning("Consider using runTaskTimerAsynchronously instead of scheduleAsyncRepeatingTask");
 		return runTaskTimerAsynchronously(plugin, task, delay, period).getTaskId();
 	}
 
@@ -466,7 +467,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public @NotNull BukkitTask runTaskLaterAsynchronously(@NotNull Plugin plugin, @NotNull Runnable task, long delay)
 	{
 		ScheduledTask scheduledTask = new ScheduledTask(id++, plugin, false, currentTick + delay,
-				new AsyncRunnable(task));
+		        new AsyncRunnable(task));
 		scheduledTasks.addTask(scheduledTask);
 		return scheduledTask;
 	}
@@ -481,7 +482,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public @NotNull BukkitTask runTaskTimerAsynchronously(@NotNull Plugin plugin, @NotNull Runnable task, long delay, long period)
 	{
 		RepeatingTask scheduledTask = new RepeatingTask(id++, plugin, false, currentTick + delay, period,
-				new AsyncRunnable(task));
+		        new AsyncRunnable(task));
 		scheduledTasks.addTask(scheduledTask);
 		return scheduledTask;
 	}
