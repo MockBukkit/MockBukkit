@@ -106,10 +106,14 @@ public class BukkitSchedulerMock implements BukkitScheduler
 					pool.submit(wrapTask(task));
 				}
 
-				if (task instanceof RepeatingTask && !task.isCancelled())
+				if (task instanceof RepeatingTask)
 				{
-					((RepeatingTask) task).updateScheduledTick();
-					scheduledTasks.addTask(task);
+					if (!task.isCancelled()) {
+						((RepeatingTask) task).updateScheduledTick();
+						scheduledTasks.addTask(task);
+					}
+				} else {
+					task.cancel();
 				}
 			}
 		}
