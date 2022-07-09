@@ -2742,20 +2742,24 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		{
 			return false;
 		}
-		//todo: Add passenger logic
-		PlayerTeleportEvent playerTeleportEvent = new PlayerTeleportEvent(this, getLocation(), location, cause);
-		if (!playerTeleportEvent.callEvent())
+		//todo: Add passenger logic: don't teleport if it's a vehicle / dismount from the current vehicle if it's a passenger
+
+		PlayerTeleportEvent event = new PlayerTeleportEvent(this, getLocation(), location, cause);
+		if (!event.callEvent())
 		{
 			return false;
 		}
 
+		// Close any foreign inventory
 		if (getOpenInventory().getType() != InventoryType.CRAFTING)
 		{
 			closeInventory(InventoryCloseEvent.Reason.TELEPORT);
 		}
 
 		World previousWorld = getWorld();
-		teleportWithoutEvent(playerTeleportEvent.getTo(), cause);
+		teleportWithoutEvent(event.getTo(), cause);
+
+		// Detect player dimension change
 		if (!location.getWorld().equals(previousWorld))
 		{
 			new PlayerChangedWorldEvent(this, previousWorld).callEvent();
