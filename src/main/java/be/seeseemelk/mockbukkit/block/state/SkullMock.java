@@ -64,7 +64,9 @@ public class SkullMock extends TileStateMock implements Skull
 	@Override
 	public boolean setOwner(@Nullable String name)
 	{
-		Preconditions.checkNotNull(name, "Name cannot be null");
+		if (name == null) {
+			return false;
+		}
 		Preconditions.checkArgument(name.length() <= MAX_OWNER_LENGTH, "Name cannot be longer than " + MAX_OWNER_LENGTH + " characters.");
 		this.profile = new PlayerProfileMock(name, null);
 		return true;
