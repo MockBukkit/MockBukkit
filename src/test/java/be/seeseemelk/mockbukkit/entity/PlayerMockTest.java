@@ -1382,7 +1382,7 @@ class PlayerMockTest
 			@EventHandler
 			public void onChangedWorld(@NotNull PlayerChangedWorldEvent event)
 			{
-				assertSame(to, event.getPlayer().getLocation(), "The location should already have changed when the PlayerChangedWorldEvent is fired");
+				assertEquals(to, event.getPlayer().getLocation(), "The location should already have changed when the PlayerChangedWorldEvent is fired");
 			}
 		}, plugin);
 		player.teleport(to);
