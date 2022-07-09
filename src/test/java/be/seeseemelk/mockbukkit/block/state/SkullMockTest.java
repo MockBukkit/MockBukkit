@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
@@ -97,9 +98,9 @@ class SkullMockTest
 	}
 
 	@Test
-	void setOwner_Null_ThrowsException()
+	void setOwner_Null_ReturnsFalse()
 	{
-		assertThrowsExactly(NullPointerException.class, () -> skull.setOwner(null));
+		assertFalse(skull.setOwner(null));
 	}
 
 	@Test
