@@ -323,6 +323,10 @@ public class BlockStateMock implements BlockState
 		{
 			return new BedMock(block);
 		}
+		else if (MaterialTags.SKULLS.isTagged(block))
+		{
+			return new SkullMock(block);
+		}
 		switch (block.getType())
 		{
 		case STRUCTURE_BLOCK:
