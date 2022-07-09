@@ -2752,9 +2752,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		}
 		//todo: Add passenger logic
 		PlayerTeleportEvent playerTeleportEvent = new PlayerTeleportEvent(this, getLocation(), location, cause);
-		Bukkit.getPluginManager().callEvent(playerTeleportEvent);
-
-		if (playerTeleportEvent.isCancelled())
+		if (!playerTeleportEvent.callEvent())
 		{
 			return false;
 		}
