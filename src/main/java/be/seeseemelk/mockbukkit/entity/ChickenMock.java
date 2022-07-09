@@ -31,11 +31,4 @@ public class ChickenMock extends AnimalsMock implements Chicken
 		return stack.getType() == Material.WHEAT_SEEDS;
 	}
 
-	@Override
-	public boolean isBreedItem(@NotNull Material material)
-	{
-		Preconditions.checkNotNull(material, "Material cannot be null");
-		return isBreedItem(new ItemStack(material));
-	}
-
 }
