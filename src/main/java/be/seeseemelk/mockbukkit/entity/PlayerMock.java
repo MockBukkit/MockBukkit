@@ -480,14 +480,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		return MockBukkit.getMock().getBanList(BanList.Type.NAME).isBanned(getName());
 	}
 
-
-	@Override
-	public void closeInventory(InventoryCloseEvent.@NotNull Reason reason)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
 	/**
 	 * This method is an assertion for the currently open {@link InventoryView} for this {@link Player}. The
 	 * {@link Predicate} refers to the top inventory, not the {@link PlayerInventory}. It uses the method
@@ -2755,6 +2747,11 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		if (!playerTeleportEvent.callEvent())
 		{
 			return false;
+		}
+
+		if (getOpenInventory().getType() != InventoryType.CRAFTING)
+		{
+			closeInventory(InventoryCloseEvent.Reason.TELEPORT);
 		}
 
 		World previousWorld = getWorld();

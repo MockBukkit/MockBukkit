@@ -1439,6 +1439,26 @@ class PlayerMockTest
 	}
 
 	@Test
+	void testTeleport_CloseInventory()
+	{
+		Inventory inventory = Bukkit.createInventory(null, 9);
+		player.openInventory(inventory);
+		assertTrue(player.teleport(player.getLocation().add(8, 9, 10)));
+		assertEquals(InventoryType.CRAFTING, player.getOpenInventory().getType());
+		server.getPluginManager().assertEventFired(InventoryCloseEvent.class, e -> e.getReason() == InventoryCloseEvent.Reason.TELEPORT);
+	}
+
+	@Test
+	void testTeleport_DontCloseCraftingInventory()
+	{
+		ItemStack itemStack = new ItemStack(Material.DEEPSLATE);
+		player.getOpenInventory().setCursor(itemStack);
+		assertTrue(player.teleport(player.getLocation().add(0, 10, 0)));
+		assertEquals(itemStack, player.getOpenInventory().getCursor());
+		server.getPluginManager().assertEventNotFired(InventoryCloseEvent.class);
+	}
+
+	@Test
 	void testPlayerSendSignChange_Valid()
 	{
 		assertDoesNotThrow(() ->
