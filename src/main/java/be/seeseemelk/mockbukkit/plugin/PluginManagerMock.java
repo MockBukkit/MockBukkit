@@ -2,8 +2,12 @@ package be.seeseemelk.mockbukkit.plugin;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.exception.EventHandlerException;
 import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
+import com.destroystokyo.paper.event.server.ServerExceptionEvent;
+import com.destroystokyo.paper.exception.ServerEventException;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableSet;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.PluginCommandUtils;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -16,7 +20,6 @@ import org.bukkit.event.server.PluginEnableEvent;
 import org.bukkit.permissions.Permissible;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
-import org.bukkit.plugin.AuthorNagException;
 import org.bukkit.plugin.EventExecutor;
 import org.bukkit.plugin.IllegalPluginAccessException;
 import org.bukkit.plugin.InvalidDescriptionException;
@@ -53,6 +56,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
+import java.util.WeakHashMap;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -73,6 +77,7 @@ public class PluginManagerMock implements PluginManager
 	private File parentTemporaryDirectory;
 	private final List<Permission> permissions = new ArrayList<>();
 	private final Map<Permissible, Set<String>> permissionSubscriptions = new HashMap<>();
+	private final Map<Boolean, Map<Permissible, Boolean>> defaultPermissionSubscriptions = new HashMap<Boolean, Map<Permissible, Boolean>>();
 	private final @NotNull Map<String, List<Listener>> listeners = new HashMap<>();
 
 	private final List<Class<?>> pluginConstructorTypes = Arrays.asList(JavaPluginLoader.class,
@@ -498,24 +503,21 @@ public class PluginManagerMock implements PluginManager
 		{
 			registration.callEvent(event);
 		}
-		catch (AuthorNagException ex)
-		{
-			Plugin plugin = registration.getPlugin();
-			if (plugin.isNaggable())
-			{
-				plugin.setNaggable(false);
-				server.getLogger().log(Level.SEVERE, String.format(
-						"Nag author(s): '%s' of '%s' about the following: %s",
-						plugin.getDescription().getAuthors(),
-						plugin.getDescription().getFullName(),
-						ex.getMessage()
-				));
-			}
-		}
 		catch (Throwable ex)
 		{
-			String msg = "Could not pass event " + event.getEventName() + " to " + registration.getPlugin().getDescription().getFullName();
-			server.getLogger().log(Level.SEVERE, msg, ex);
+			if (!(event instanceof ServerExceptionEvent))
+			{ // Don't cause an endless loop
+				String msg = "Could not pass event " + event.getEventName() + " to " + registration.getPlugin().getDescription().getFullName();
+				callEvent(new ServerExceptionEvent(new ServerEventException(msg, ex, registration.getPlugin(), registration.getListener(), event)));
+			}
+			if (ex instanceof RuntimeException r)
+			{
+				throw r; // Rethrow same exception if possible
+			}
+			else
+			{
+				throw new EventHandlerException(ex);
+			}
 		}
 	}
 
@@ -895,28 +897,39 @@ public class PluginManagerMock implements PluginManager
 	@Override
 	public void subscribeToDefaultPerms(boolean op, @NotNull Permissible permissible)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Map<Permissible, Boolean> map = this.defaultPermissionSubscriptions.computeIfAbsent(op, k -> new WeakHashMap<>());
+		map.put(permissible, true);
 	}
 
 	@Override
 	public void unsubscribeFromDefaultPerms(boolean op, @NotNull Permissible permissible)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Map<Permissible, Boolean> map = this.defaultPermissionSubscriptions.get(op);
+
+		if (map == null)
+		{
+			return;
+		}
+
+		map.remove(permissible);
+		if (map.isEmpty())
+		{
+			this.defaultPermissionSubscriptions.remove(op);
+		}
 	}
 
 	@Override
 	public @NotNull Set<Permissible> getDefaultPermSubscriptions(boolean op)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Map<Permissible, Boolean> map = this.defaultPermissionSubscriptions.get(op);
+
+		return map == null ? ImmutableSet.of() : ImmutableSet.copyOf(map.keySet());
 	}
 
 	@Override
 	public @NotNull Set<Permission> getPermissions()
 	{
-		return Collections.unmodifiableSet(new HashSet<>(permissions));
+		return Set.copyOf(permissions);
 	}
 
 	/**

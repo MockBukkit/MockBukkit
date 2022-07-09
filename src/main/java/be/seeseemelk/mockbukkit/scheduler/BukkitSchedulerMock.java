@@ -157,10 +157,14 @@ public class BukkitSchedulerMock implements BukkitScheduler
 					pool.submit(wrapTask(task));
 				}
 
-				if (task instanceof RepeatingTask && !task.isCancelled())
+				if (task instanceof RepeatingTask)
 				{
-					((RepeatingTask) task).updateScheduledTick();
-					scheduledTasks.addTask(task);
+					if (!task.isCancelled()) {
+						((RepeatingTask) task).updateScheduledTick();
+						scheduledTasks.addTask(task);
+					}
+				} else {
+					task.cancel();
 				}
 			}
 		}
@@ -538,7 +542,8 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public @NotNull Executor getMainThreadExecutor(@NotNull Plugin plugin)
 	{
 		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
-		return command -> {
+		return command ->
+		{
 			Preconditions.checkNotNull(command, "Command cannot be null");
 			this.runTask(plugin, command);
 		};

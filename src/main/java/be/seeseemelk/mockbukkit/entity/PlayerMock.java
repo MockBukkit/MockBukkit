@@ -155,6 +155,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private final Queue<String> title = new LinkedTransferQueue<>();
 	private final Queue<String> subitles = new LinkedTransferQueue<>();
 
+	private Scoreboard scoreboard;
 	private final StatisticsMock statistics = new StatisticsMock();
 
 	private final Set<String> channels = new HashSet<>();
@@ -164,6 +165,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		this(server, name, UUID.nameUUIDFromBytes(("OfflinePlayer:" + name).getBytes(StandardCharsets.UTF_8)));
 		this.online = false;
 		this.firstPlayed = 0;
+		this.scoreboard = server.getScoreboardManager().getMainScoreboard();
 	}
 
 	public PlayerMock(@NotNull ServerMock server, @NotNull String name, @NotNull UUID uuid)
@@ -187,6 +189,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 		Random random = ThreadLocalRandom.current();
 		address = new InetSocketAddress("192.0.2." + random.nextInt(255), random.nextInt(32768, 65535));
+		scoreboard = server.getScoreboardManager().getMainScoreboard();
 	}
 
 	/**
@@ -964,6 +967,12 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public @NotNull String getScoreboardEntry()
+	{
+		return getName();
+	}
+
+	@Override
 	public void playerListName(@Nullable Component name)
 	{
 		this.playerListName = name;
@@ -1311,6 +1320,12 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public void stopSound(@NotNull String sound, @Nullable SoundCategory category)
 	{
 		Preconditions.checkNotNull(sound, "Sound cannot be null");
+		// We will just pretend the Sound has stopped.
+	}
+
+	@Override
+	public void stopSound(@NotNull SoundCategory category)
+	{
 		// We will just pretend the Sound has stopped.
 	}
 
@@ -2061,15 +2076,14 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public @NotNull Scoreboard getScoreboard()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.scoreboard;
 	}
 
 	@Override
 	public void setScoreboard(@NotNull Scoreboard scoreboard)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(scoreboard, "Scoreboard cannot be null");
+		this.scoreboard = scoreboard;
 	}
 
 	@Override

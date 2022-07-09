@@ -5,12 +5,27 @@ import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import be.seeseemelk.mockbukkit.block.state.BlockStateMock;
 import be.seeseemelk.mockbukkit.entity.AllayMock;
 import be.seeseemelk.mockbukkit.entity.ArmorStandMock;
+import be.seeseemelk.mockbukkit.entity.AxolotlMock;
+import be.seeseemelk.mockbukkit.entity.BlazeMock;
+import be.seeseemelk.mockbukkit.entity.CaveSpiderMock;
+import be.seeseemelk.mockbukkit.entity.ChickenMock;
+import be.seeseemelk.mockbukkit.entity.CowMock;
+import be.seeseemelk.mockbukkit.entity.DonkeyMock;
 import be.seeseemelk.mockbukkit.entity.EndermanMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
 import be.seeseemelk.mockbukkit.entity.FireworkMock;
+import be.seeseemelk.mockbukkit.entity.GiantMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
+import be.seeseemelk.mockbukkit.entity.LlamaMock;
+import be.seeseemelk.mockbukkit.entity.MuleMock;
 import be.seeseemelk.mockbukkit.entity.SheepMock;
+import be.seeseemelk.mockbukkit.entity.SkeletonHorseMock;
+import be.seeseemelk.mockbukkit.entity.SkeletonMock;
+import be.seeseemelk.mockbukkit.entity.SpiderMock;
+import be.seeseemelk.mockbukkit.entity.StrayMock;
 import be.seeseemelk.mockbukkit.entity.WardenMock;
+import be.seeseemelk.mockbukkit.entity.WitherSkeletonMock;
+import be.seeseemelk.mockbukkit.entity.ZombieHorseMock;
 import be.seeseemelk.mockbukkit.entity.ZombieMock;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
@@ -962,6 +977,141 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.WARDEN);
 		assertInstanceOf(WardenMock.class, entity);
+		assertTrue(entity.isValid());
+	}
+
+	@Test
+	void testSpawnDonkey()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.DONKEY);
+		assertInstanceOf(DonkeyMock.class, entity);
+		assertTrue(entity.isValid());
+	}
+
+	@Test
+	void testSpawnLlama()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.LLAMA);
+		assertInstanceOf(LlamaMock.class, entity);
+		assertTrue(entity.isValid());
+	}
+
+	@Test
+	void testSpawnMule()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.MULE);
+		assertInstanceOf(MuleMock.class, entity);
+		assertTrue(entity.isValid());
+	}
+
+	@Test
+	void testSpawnSkeletonHorse()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.SKELETON_HORSE);
+		assertInstanceOf(SkeletonHorseMock.class, entity);
+		assertTrue(entity.isValid());
+	}
+
+	@Test
+	void testSpawnZombieHorse()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ZOMBIE_HORSE);
+		assertInstanceOf(ZombieHorseMock.class, entity);
+		assertTrue(entity.isValid());
+	}
+
+	@Test
+	void testSpawnCow()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.COW);
+		assertInstanceOf(CowMock.class, entity);
+		assertTrue(entity.isValid());
+	}
+
+	@Test
+	void testSpawnSkeleton()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.SKELETON);
+		assertInstanceOf(SkeletonMock.class, entity);
+		assertTrue(entity.isValid());
+	}
+
+	@Test
+	void testSpawnChicken()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.CHICKEN);
+		assertInstanceOf(ChickenMock.class, entity);
+		assertTrue(entity.isValid());
+	}
+
+	@Test
+	void testSpawnBlaze()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.BLAZE);
+		assertInstanceOf(BlazeMock.class, entity);
+		assertTrue(entity.isValid());
+	}
+
+	@Test
+	void testSpawnStray()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.STRAY);
+		assertInstanceOf(StrayMock.class, entity);
+		assertTrue(entity.isValid());
+	}
+
+	@Test
+	void testSpawnSpider()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.SPIDER);
+		assertInstanceOf(SpiderMock.class, entity);
+		assertTrue(entity.isValid());
+	}
+
+	@Test
+	void testSpawnWitherSkeleton()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.WITHER_SKELETON);
+		assertInstanceOf(WitherSkeletonMock.class, entity);
+		assertTrue(entity.isValid());
+	}
+
+	@Test
+	void testSpawnCaveSpider()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.CAVE_SPIDER);
+		assertInstanceOf(CaveSpiderMock.class, entity);
+		assertTrue(entity.isValid());
+	}
+
+	@Test
+	void testSpawnGiant()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.GIANT);
+		assertInstanceOf(GiantMock.class, entity);
+		assertTrue(entity.isValid());
+	}
+
+	@Test
+	void testSpawnAxolotl()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.AXOLOTL);
+		assertInstanceOf(AxolotlMock.class, entity);
 		assertTrue(entity.isValid());
 	}
 
