@@ -446,4 +446,25 @@ class BukkitSchedulerMockTest
 		MockBukkit.unmock();
 	}
 
+	@Test
+	void repeatingTask_DoesntHang()
+	{
+		scheduler.runTaskTimer(null, () ->
+		{
+		}, 1L, 1L);
+		scheduler.setShutdownTimeout(1000L);
+		scheduler.shutdown();
+	}
+
+	@Test
+	void runTaskLater_DoesntHang()
+	{
+		scheduler.runTaskLater(null, () ->
+		{
+		}, 1L);
+		scheduler.performTicks(2);
+		scheduler.setShutdownTimeout(1000L);
+		scheduler.shutdown();
+	}
+
 }
