@@ -8,6 +8,13 @@ body:
       options:
         - label: I have searched the existing issues
           required: true
+  - type: checkboxes
+    attributes:
+      label: Are you using the latest version of MockBukkit?
+      description: Please make sure you're using the latest version of MockBukkit as it's possible your issue has already been fixed.
+      options:
+        - label: I am using the latest version of MockBukkit.
+          required: true
   - type: textarea
     id: bug-description
     attributes:
