@@ -4,14 +4,14 @@ Contributing to MockBukkit
 intro here
 
 
-## Requirements
+## :toolbox: Software requirements
 
 To get started contributing to MockBukkit, you will need a few things.
 - [Git](https://git-scm.com/downloads)
 - Java 17 or newer ([Windows Download](https://download.oracle.com/java/17/archive/jdk-17.0.3.1_windows-x64_bin.exe)).
 
 
-## Setting up the project
+## :wrench: Setting up the project
 
 The first step in contributing to MockBukkit, is to create a fork of it. You can do this by clicking the `Fork` button in the top-right of the GitHub repository.
 Once your fork is created, you will need to clone it to your local system.
@@ -30,7 +30,7 @@ There cannot be two branches with the same name. The recommended naming scheme f
 Now you can get to coding!
 
 
-## Formatting
+## :black_nib: Code formatting
 
 All pull requests should adhere to our code style.
 If you're using a modern IDE like Intellij, we have a `.editorconfig` file which will tell it how code should be formatted.
@@ -38,14 +38,14 @@ This allows you to use auto code formatting without changing more than you modif
 If for whatever reason your IDE does not follow our style, please, do **not** commit changes that unnecessarily modify code.
 
 
-## Writing tests
+## :pencil2: Writing unit tests
 
 All code you write should have unit tests to accompany it.
 The unit test class is always the same fully qualified name, but with `Test` appended to the end.
 Please create tests that cover all possible execution paths and not just one, assuming there is more than one.
 
 
-## Testing your changes
+## :test_tube: Testing your changes
 
 Once you've completed your changes and wrote tests for them, you can test to see if they're working but running the Gradle `test` task.
 If on Linux, you can run `./gradlew test` from the terminal.
@@ -53,14 +53,14 @@ If on Windows, you can run `gradlew.bat test` from the command prompt.
 If using an IDE like IntelliJ, you can open the Gradle panel, navigate to `MockBukkit-1.xx` -> `Tasks` -> `verification`, then double click `test`.
 
 
-## Committing and Pushing your changes
+## :hammer_and_wrench: Committing and pushing your changes
 
 Once you've completed your changes and confirmed that they work, you'll need to commit, then push your changes.
 To commit your changes, run `git add .` to add all your changes, then `git commit -m "<commit message>"` with `<commit message>` stating what you've done in 70 characters or less.
 Now you're ready to push your changes to GitHub. To do this, run `git push -u origin <branch name>` with `<branch name>` being the name of your branch you created earlier.
 
 
-## Creating a pull request
+## :star: Creating your pull request
 
 To create the pull request, head back to your fork on GitHub, and go to the `Pull Requests` tab, and click the `New Pull Request` button.
 On the left, make sure `Base repository` is set to `MockBukkit/MockBukkit` and the branch next to it is set to the latest version (e.g. `v1.19`).
