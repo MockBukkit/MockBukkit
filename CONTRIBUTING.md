@@ -1,8 +1,18 @@
-Contributing to MockBukkit
-==========================
+Creating Issues
+===============
 
-intro here
+## :beetle: Reporting bugs
 
+reporting bugs
+
+
+## :sparkles: Requesting features
+
+requesting features
+
+
+Contributing Code to MockBukkit
+===============================
 
 ## :toolbox: Software requirements
 
