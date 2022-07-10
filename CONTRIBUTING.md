@@ -38,6 +38,12 @@ This allows you to use auto code formatting without changing more than you modif
 If for whatever reason your IDE does not follow our style, please, do **not** commit changes that unnecessarily modify code.
 
 
+## :books: Writing documentation
+
+When overriding Bukkit methods there's no need to write your own JavaDocs.
+However, any methods or classes that are specific to MockBukkit should have JavaDocs written for them.
+
+
 ## :pencil2: Writing unit tests
 
 All code you write should have unit tests to accompany it.
