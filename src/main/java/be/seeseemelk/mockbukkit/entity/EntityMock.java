@@ -364,13 +364,6 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public @Nullable String nextMessage()
-	{
-		if (messages.peek() == null)
-			return null;
-		return LegacyComponentSerializer.legacySection().serialize(messages.poll());
-	}
-
 	public @Nullable Component nextComponentMessage()
 	{
 		return messages.poll();
