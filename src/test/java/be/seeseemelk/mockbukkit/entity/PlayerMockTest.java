@@ -1636,7 +1636,7 @@ class PlayerMockTest
 	}
 
 	@Test
-	void testDisConnectWithPlayerOffline()
+	void testDisconnectWithPlayerOffline()
 	{
 		server.addPlayer(player);
 		player.disconnect();
