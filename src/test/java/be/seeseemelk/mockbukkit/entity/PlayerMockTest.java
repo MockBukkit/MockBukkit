@@ -1628,6 +1628,23 @@ class PlayerMockTest
 	}
 
 	@Test
+	void testReconnectWithPlayerOnline()
+	{
+		server.addPlayer(player);
+		assertFalse(player.reconnect());
+		assertTrue(server.getOnlinePlayers().contains(player));
+	}
+
+	@Test
+	void testDisConnectWithPlayerOffline()
+	{
+		server.addPlayer(player);
+		player.disconnect();
+		assertFalse(player.disconnect());
+		assertFalse(server.getOnlinePlayers().contains(player));
+	}
+
+	@Test
 	void sendMap_RendersMap()
 	{
 		MapViewMock mapView = new MapViewMock(new WorldMock(), 1);
