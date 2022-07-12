@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: "Get Support"
+    url: "https://discord.gg/s4cWYgsFaV"
+    about: "Need help using MockBukkit or have a question about it? Join our Discord Server for help!"
