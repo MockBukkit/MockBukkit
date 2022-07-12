@@ -15,6 +15,23 @@ body:
       options:
         - label: I am using the latest version of MockBukkit.
           required: true
+  - type: dropdown
+    id: mv-version
+    attributes:
+      label: Minecraft Version
+      description: What Minecraft version of MockBukkit are you using?
+      options:
+        - 1.8
+        - 1.12
+        - 1.13
+        - 1.14
+        - 1.15
+        - 1.16
+        - 1.17
+        - 1.18
+        - 1.19
+    validations:
+      required: true
   - type: textarea
     id: bug-description
     attributes:
