@@ -1,5 +1,7 @@
 package be.seeseemelk.mockbukkit.command;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -15,7 +17,40 @@ public interface MessageTarget
 	 *
 	 * @return The next message sent to the target.
 	 */
-	@Nullable String nextMessage();
+	@Nullable Component nextComponentMessage();
+
+	/**
+	 * Returns the next message that was sent to the target.
+	 *
+	 * @return The next message sent to the target.
+	 */
+	default String nextMessage()
+	{
+		Component comp = nextComponentMessage();
+		if (comp == null)
+		{
+			return null;
+		}
+		return LegacyComponentSerializer.legacySection().serialize(comp);
+	}
+
+	/**
+	 * Asserts that a specific message was not received next by the message target.
+	 *
+	 * @param expected The message that should have been received by the target.
+	 */
+	default void assertSaid(@NotNull Component expected)
+	{
+		Component comp = nextComponentMessage();
+		if (comp == null)
+		{
+			fail("No more messages were sent");
+		}
+		else
+		{
+			assertEquals(expected, comp);
+		}
+	}
 
 	/**
 	 * Asserts that a specific message was not received next by the message target.
@@ -24,15 +59,7 @@ public interface MessageTarget
 	 */
 	default void assertSaid(@NotNull String expected)
 	{
-		String message = nextMessage();
-		if (message == null)
-		{
-			fail("No more messages were sent");
-		}
-		else
-		{
-			assertEquals(expected, message);
-		}
+		assertSaid(LegacyComponentSerializer.legacySection().deserialize(expected));
 	}
 
 	/**
@@ -40,7 +67,7 @@ public interface MessageTarget
 	 */
 	default void assertNoMoreSaid()
 	{
-		if (nextMessage() != null)
+		if (nextComponentMessage() != null)
 		{
 			fail("More messages were available");
 		}

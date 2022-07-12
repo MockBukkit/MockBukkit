@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.command;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Server;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.conversations.Conversation;
@@ -22,29 +23,16 @@ import java.util.UUID;
 public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTarget
 {
 
-	private final Queue<String> messages = new LinkedList<>();
+	private final Queue<Component> messages = new LinkedList<>();
 
 	@Override
 	public void sendMessage(@NotNull String message)
 	{
-		sendMessage(null, message);
+		sendRawMessage(message);
 	}
 
 	@Override
 	public void sendMessage(String... messages)
-	{
-		sendMessage(null, messages);
-	}
-
-	@Override
-	public void sendMessage(UUID sender, @NotNull String message)
-	{
-		Preconditions.checkNotNull(message, "Message cannot be null");
-		messages.add(message);
-	}
-
-	@Override
-	public void sendMessage(UUID sender, String @NotNull ... messages)
 	{
 		for (String message : messages)
 		{
@@ -53,13 +41,25 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	}
 
 	@Override
-	public @Nullable String nextMessage()
+	public void sendMessage(UUID sender, @NotNull String message)
+	{
+		sendRawMessage(message);
+	}
+
+	@Override
+	public void sendMessage(UUID sender, String @NotNull ... messages)
+	{
+		sendMessage(messages);
+	}
+
+	@Override
+	public @Nullable Component nextComponentMessage()
 	{
 		return messages.poll();
 	}
 
 	@Override
-	public boolean isPermissionSet(String name)
+	public boolean isPermissionSet(@NotNull String name)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -205,7 +205,7 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	public void sendRawMessage(@Nullable UUID sender, @NotNull String message)
 	{
 		Preconditions.checkNotNull(message, "Message cannot be null");
-		messages.add(message);
+		messages.add(LegacyComponentSerializer.legacySection().deserialize(message));
 	}
 
 	@Override
