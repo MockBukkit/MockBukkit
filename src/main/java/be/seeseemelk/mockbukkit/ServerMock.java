@@ -39,6 +39,7 @@ import be.seeseemelk.mockbukkit.tags.TagRegistry;
 import be.seeseemelk.mockbukkit.tags.TagWrapperMock;
 import be.seeseemelk.mockbukkit.tags.TagsMock;
 import com.destroystokyo.paper.entity.ai.MobGoals;
+import com.destroystokyo.paper.event.player.PlayerConnectionCloseEvent;
 import com.google.common.base.Preconditions;
 import io.papermc.paper.datapack.DatapackManager;
 import net.kyori.adventure.audience.Audience;
@@ -115,6 +116,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -160,6 +162,10 @@ public class ServerMock extends Server.Spigot implements Server
 	private ConsoleCommandSender consoleSender;
 	private int spawnRadius = 16;
 	private @NotNull WarningState warningState = WarningState.DEFAULT;
+
+	private boolean isWhitelistEnabled = false;
+	private boolean isWhitelistEnforced = false;
+	private final @NotNull Set<OfflinePlayer> whitelistedPlayers = new LinkedHashSet<>();
 
 	public ServerMock()
 	{
@@ -241,7 +247,6 @@ public class ServerMock extends Server.Spigot implements Server
 		AsyncPlayerPreLoginEvent preLoginEvent = new AsyncPlayerPreLoginEvent(player.getName(),
 				player.getAddress().getAddress(), player.getUniqueId());
 		getPluginManager().callEventAsynchronously(preLoginEvent, (e) -> conditionLatch.countDown());
-
 		try
 		{
 			conditionLatch.await();
@@ -258,6 +263,20 @@ public class ServerMock extends Server.Spigot implements Server
 
 		PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(player, joinMessage);
 		Bukkit.getPluginManager().callEvent(playerJoinEvent);
+
+		if (isWhitelistEnabled && !whitelistedPlayers.contains(player))
+		{
+			PlayerConnectionCloseEvent playerConnectionCloseEvent =
+					new PlayerConnectionCloseEvent(player.getUniqueId(),
+							player.getName(),
+							player.getAddress().getAddress(),
+							false);
+
+			getPluginManager().callEvent(playerConnectionCloseEvent);
+			playerList.disconnectPlayer(player);
+			return;
+		}
+
 
 		player.setLastPlayed(getCurrentServerTime());
 		registerEntity(player);
@@ -1105,43 +1124,47 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public boolean hasWhitelist()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.isWhitelistEnabled;
 	}
 
 	@Override
 	public void setWhitelist(boolean value)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.isWhitelistEnabled = value;
 	}
 
 	@Override
 	public boolean isWhitelistEnforced()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.isWhitelistEnforced;
 	}
 
 	@Override
 	public void setWhitelistEnforced(boolean value)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.isWhitelistEnforced = value;
 	}
 
 	@Override
 	public @NotNull Set<OfflinePlayer> getWhitelistedPlayers()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.whitelistedPlayers;
 	}
 
-	@Override
+
 	public void reloadWhitelist()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		//Pretend we load the Whitelist from Disk
+		if (isWhitelistEnforced && isWhitelistEnabled)
+		{
+			MockBukkit.getMock().getOnlinePlayers().forEach(p ->
+			{
+				if (!MockBukkit.getMock().getWhitelistedPlayers().contains(p))
+				{
+					p.kick();
+				}
+			});
+		}
 	}
 
 	@Override

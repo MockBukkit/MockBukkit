@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.entity;
 
+import be.seeseemelk.mockbukkit.AsyncCatcher;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
@@ -139,8 +140,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private boolean sprinting = false;
 	private boolean allowFlight = false;
 	private boolean flying = false;
-	private boolean whitelisted = true;
-
 	private Location compassTarget;
 	private @Nullable Location bedSpawnLocation;
 	private long firstPlayed = 0;
@@ -227,6 +226,10 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		if (firstPlayed == 0)
 		{
 			throw new IllegalStateException("Player was never online");
+		}
+		if (server.hasWhitelist() && !server.getWhitelistedPlayers().contains(this))
+		{
+			return false;
 		}
 		if (online)
 		{
@@ -452,13 +455,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public boolean isWhitelisted()
 	{
-		return this.whitelisted;
+		return server.getWhitelistedPlayers().contains(this);
 	}
 
 	@Override
 	public void setWhitelisted(boolean value)
 	{
-		this.whitelisted = value;
+		server.getWhitelistedPlayers().add(this);
 	}
 
 	@Override
@@ -1072,29 +1075,37 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Deprecated
 	public void kickPlayer(String message)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		kick(Component.text(message));
 	}
 
 	@Override
 	public void kick()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Component defaultKickComponent = Component.translatable("multiplayer.disconnect.kicked");
+		kick(defaultKickComponent);
 	}
 
 	@Override
 	public void kick(@Nullable Component message)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		kick(message, PlayerKickEvent.Cause.PLUGIN);
 	}
 
 	@Override
 	public void kick(@Nullable Component message, PlayerKickEvent.@NotNull Cause cause)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		AsyncCatcher.catchOp("player kick");
+		if (isOnline())
+		{
+			PlayerKickEvent event =
+					new PlayerKickEvent(this,
+							Component.text("Plugin"),
+							message == null ? net.kyori.adventure.text.Component.empty() : message,
+							cause);
+
+			Bukkit.getPluginManager().callEvent(event);
+			server.getPlayerList().disconnectPlayer(this);
+		}
 	}
 
 	@Override

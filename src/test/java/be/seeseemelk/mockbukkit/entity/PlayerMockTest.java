@@ -1661,4 +1661,51 @@ class PlayerMockTest
 
 	}
 
+	@Test
+	void testIsWhiteListed()
+	{
+		server.getWhitelistedPlayers().add(player);
+		assertTrue(player.isWhitelisted());
+	}
+
+	@Test
+	void testSetWhiteListed()
+	{
+		player.setWhitelisted(true);
+		assertTrue(player.isWhitelisted());
+	}
+
+	@Test
+	void testIsBannedDefault()
+	{
+		assertFalse(player.isBanned());
+	}
+
+	@Test
+	void testIsBanned()
+	{
+		player.banPlayer("test");
+		assertTrue(player.isBanned());
+	}
+
+	@Test
+	void testReconnectWithWhiteListEnabled()
+	{
+		server.setWhitelist(true);
+
+		player.disconnect();
+		player.reconnect();
+		assertFalse(server.getOnlinePlayers().contains(player));
+	}
+
+	@Test
+	void testReconnectWithWhiteListEnabledAndPlayerWhiteListed()
+	{
+		server.setWhitelist(true);
+		player.setWhitelisted(true);
+		player.disconnect();
+		player.reconnect();
+		assertTrue(server.getOnlinePlayers().contains(player));
+	}
+
 }
