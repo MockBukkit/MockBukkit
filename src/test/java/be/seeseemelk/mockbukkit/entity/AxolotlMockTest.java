@@ -5,6 +5,7 @@ import be.seeseemelk.mockbukkit.ServerMock;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Axolotl;
+import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -91,5 +92,42 @@ class AxolotlMockTest
 	{
 		assertThrows(NullPointerException.class, () -> axolotl.setVariant(null));
 	}
+
+	@Test
+	void testIsBreedItemItemStack()
+	{
+		assertTrue(axolotl.isBreedItem(new ItemStack(Material.TROPICAL_FISH_BUCKET)));
+	}
+
+	@Test
+	void testIsBreedItemMaterial()
+	{
+		assertTrue(axolotl.isBreedItem(Material.TROPICAL_FISH_BUCKET));
+	}
+
+	@Test
+	void testIsBreedItemItemStackFalse()
+	{
+		assertFalse(axolotl.isBreedItem(new ItemStack(Material.STONE)));
+	}
+
+	@Test
+	void testIsBreedItemMaterialFalse()
+	{
+		assertFalse(axolotl.isBreedItem(Material.STONE));
+	}
+
+	@Test
+	void testIsBreedItemNull()
+	{
+		assertThrows(NullPointerException.class, () -> axolotl.isBreedItem((ItemStack) null));
+	}
+
+	@Test
+	void testIsBreedItemNullWithMaterial()
+	{
+		assertThrows(NullPointerException.class, () -> axolotl.isBreedItem((Material) null));
+	}
+
 
 }

@@ -1,0 +1,17 @@
+name: ✨ Feature Request
+description: Request a new feature to MockBukkit.
+body:
+  - type: checkboxes
+    attributes:
+      label: Is there an existing issue for this?
+      description: Please search to see if an issue already exists for the feature you want.
+      options:
+        - label: I have searched the existing issues
+          required: true
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: Describe the feature
+      description: Describe the feature in as much detail as you can.
+    validations:
+      required: true
