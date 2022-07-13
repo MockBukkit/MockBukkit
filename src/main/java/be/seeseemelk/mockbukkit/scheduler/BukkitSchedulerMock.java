@@ -203,13 +203,9 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public void waitAsyncTasksFinished()
 	{
 		// Cancel repeating tasks so they don't run forever.
-		for (Map.Entry<Integer, ScheduledTask> entry : scheduledTasks.tasks.entrySet())
-		{
-			if (entry.getValue() instanceof RepeatingTask)
-			{
-				scheduledTasks.cancelTask(entry.getKey());
-			}
-		}
+		scheduledTasks.tasks.entrySet().stream()
+				.filter(entry -> entry.getValue() instanceof RepeatingTask)
+				.forEach(entry -> scheduledTasks.cancelTask(entry.getKey()));
 
 		// Make sure all tasks get to execute. (except for repeating asynchronous tasks, they only will fire once)
 		while (scheduledTasks.getScheduledTaskCount() > 0)
@@ -230,23 +226,22 @@ public class BukkitSchedulerMock implements BukkitScheduler
 				Thread.currentThread().interrupt();
 				return;
 			}
-			if (System.currentTimeMillis() > (systemTime + executorTimeout))
+
+			if (System.currentTimeMillis() <= (systemTime + executorTimeout))
+				continue;
+
+			// If a plugin has left a runnable going and not cancelled it we could call this bad practice.
+			// We should force interrupt all these runnables, forcing them to throw Interrupted Exceptions
+			// if they handle that.
+			for (ScheduledTask task : scheduledTasks.getCurrentTaskList())
 			{
-				// If a plugin has left a runnable going and not cancelled it we could call this bad practice.
-				// We should force interrupt all these runnables, forcing them to throw Interrupted Exceptions
-				// if they handle that.
-				for (ScheduledTask task : scheduledTasks.getCurrentTaskList())
-				{
-					if (task.isRunning())
-					{
-						task.cancel();
-						cancelTask(task.getTaskId());
-						throw new RuntimeException("Forced Cancellation of task owned by "
-						                           + task.getOwner().getName());
-					}
-				}
-				pool.shutdownNow();
+				if (!task.isRunning())
+					continue;
+				task.cancel();
+				cancelTask(task.getTaskId());
+				throw new RuntimeException("Forced Cancellation of task owned by " + task.getOwner().getName());
 			}
+			pool.shutdownNow();
 		}
 	}
 
