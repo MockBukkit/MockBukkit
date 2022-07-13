@@ -19,6 +19,7 @@ import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -362,7 +363,7 @@ class BukkitSchedulerMockTest
 		{
 		}, 1L, 1L);
 		scheduler.setShutdownTimeout(1000L);
-		scheduler.shutdown();
+		assertDoesNotThrow(() -> scheduler.shutdown());
 	}
 
 	@Test
@@ -373,7 +374,7 @@ class BukkitSchedulerMockTest
 		}, 1L);
 		scheduler.performTicks(2);
 		scheduler.setShutdownTimeout(1000L);
-		scheduler.shutdown();
+		assertDoesNotThrow(() -> scheduler.shutdown());
 	}
 
 }
