@@ -14,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
@@ -400,12 +401,9 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	{
 		for (ScheduledTask task : scheduledTasks.getCurrentTaskList())
 		{
-			if (task.getOwner() != null)
+			if (Objects.equals(task.getOwner(), plugin))
 			{
-				if (task.getOwner().equals(plugin))
-				{
-					task.cancel();
-				}
+				task.cancel();
 			}
 		}
 	}
