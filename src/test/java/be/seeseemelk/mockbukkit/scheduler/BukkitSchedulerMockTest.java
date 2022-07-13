@@ -19,6 +19,7 @@ import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -353,6 +354,27 @@ class BukkitSchedulerMockTest
 
 		assertTrue(done.get());
 		MockBukkit.unmock();
+	}
+
+	@Test
+	void repeatingTask_DoesntHang()
+	{
+		scheduler.runTaskTimer(null, () ->
+		{
+		}, 1L, 1L);
+		scheduler.setShutdownTimeout(1000L);
+		assertDoesNotThrow(() -> scheduler.shutdown());
+	}
+
+	@Test
+	void runTaskLater_DoesntHang()
+	{
+		scheduler.runTaskLater(null, () ->
+		{
+		}, 1L);
+		scheduler.performTicks(2);
+		scheduler.setShutdownTimeout(1000L);
+		assertDoesNotThrow(() -> scheduler.shutdown());
 	}
 
 }
