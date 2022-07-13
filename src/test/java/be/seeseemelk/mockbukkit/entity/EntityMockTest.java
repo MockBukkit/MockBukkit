@@ -5,6 +5,12 @@ import be.seeseemelk.mockbukkit.MockPlugin;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.TestPlugin;
 import be.seeseemelk.mockbukkit.WorldMock;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.event.ClickEvent;
+import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import org.bukkit.ChatColor;
 import org.bukkit.EntityEffect;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -305,6 +311,14 @@ class EntityMockTest
 		assertEquals("hello", entity.nextMessage());
 		assertEquals("my", entity.nextMessage());
 		assertEquals("world", entity.nextMessage());
+	}
+
+	@Test
+	void sendMessage_StoredAsComponent()
+	{
+		TextComponent comp = Component.text().content("hi").clickEvent(ClickEvent.openUrl("https://www.youtube.com/watch?v=dQw4w9WgXcQ")).build();
+		entity.sendMessage(comp);
+		entity.assertSaid(comp);
 	}
 
 	@Test
