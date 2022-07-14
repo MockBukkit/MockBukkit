@@ -4,6 +4,10 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.junit.jupiter.api.AfterEach;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -198,6 +202,14 @@ class ConsoleCommandSenderMockTest
 	void hasPermission_Permission_NotSet_True()
 	{
 		assertTrue(sender.hasPermission(new Permission("test.permission")));
+	}
+
+	@Test
+	void sendMessage_StoredAsComponent()
+	{
+		TextComponent comp = Component.text().content("hi").color(TextColor.color(11141120)).build();
+		sender.sendMessage(comp);
+		sender.assertSaid(comp);
 	}
 
 }
