@@ -1,13 +1,13 @@
 package be.seeseemelk.mockbukkit.command;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
-import org.bukkit.permissions.Permission;
-import org.bukkit.permissions.PermissionAttachment;
-import org.junit.jupiter.api.AfterEach;
+import be.seeseemelk.mockbukkit.ServerMock;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.TextColor;
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import org.bukkit.permissions.Permission;
+import org.bukkit.permissions.PermissionAttachment;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,12 +21,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class ConsoleCommandSenderMockTest
 {
 
+	private ServerMock server;
 	private ConsoleCommandSenderMock sender;
 
 	@BeforeEach
 	void setUp()
 	{
-		sender = MockBukkit.mock().getConsoleSender();
+		server = MockBukkit.mock();
+		sender = server.getConsoleSender();
 	}
 
 	@AfterEach
@@ -127,6 +129,17 @@ class ConsoleCommandSenderMockTest
 	{
 		sender.addAttachment(MockBukkit.createMockPlugin(), "test.permission", false);
 		assertFalse(sender.hasPermission("test.permission"));
+	}
+
+	@Test
+	void addAttachment_RemovedAfterTicks()
+	{
+		sender.addAttachment(MockBukkit.createMockPlugin(), "test.permission", true, 10);
+		assertTrue(sender.isPermissionSet("test.permission"));
+		server.getScheduler().performTicks(9);
+		assertTrue(sender.isPermissionSet("test.permission"));
+		server.getScheduler().performTicks(10);
+		assertFalse(sender.isPermissionSet("test.permission"));
 	}
 
 	@Test
