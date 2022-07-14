@@ -1681,13 +1681,15 @@ class PlayerMockTest
 	@Test
 	void testSimulateConsumeItemWithInvalidItem()
 	{
-		assertThrows(IllegalArgumentException.class, () -> player.simulateConsumeItem(new ItemStack(Material.STONE)));
+		ItemStack nonConsumable = new ItemStack(Material.STONE);
+		assertThrows(IllegalArgumentException.class, () -> player.simulateConsumeItem(nonConsumable));
 	}
 
 	@Test
 	void testAssertItemConsumedWithNotConsumedItem()
 	{
-		assertThrows(AssertionFailedError.class, () -> player.assertItemConsumed(new ItemStack(Material.APPLE)));
+		ItemStack notConsumed = new ItemStack(Material.APPLE);
+		assertThrows(AssertionFailedError.class, () -> player.assertItemConsumed(notConsumed));
 	}
 
 	@Test
