@@ -32,6 +32,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityToggleSwimEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
@@ -560,6 +561,16 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean teleport(@NotNull Location location, PlayerTeleportEvent.@NotNull TeleportCause cause)
+	{
+		if (isDead())
+		{
+			return false;
+		}
+		return super.teleport(location, cause);
 	}
 
 	@Override
