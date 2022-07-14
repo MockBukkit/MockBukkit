@@ -1,0 +1,12 @@
+# Modifications to the source code should be handled by the code review team
+*.java                             @MockBukkit/code-reviewers
+
+# Modifications to sensitive files should be reviewed by maintainers
+/.github/                          @MockBukkit/maintainers
+build.gradle                       @MockBukkit/maintainers
+settings.gradle                    @MockBukkit/maintainers
+CONTRIBUTING.md                    @MockBukkit/maintainers
+README.md                          @MockBukkit/maintainers
+
+# This file is handled by Seeseemelk (admins have overwrite access anyway)
+/.github/CODEOWNERS                @seeseemelk
