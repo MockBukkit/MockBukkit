@@ -1639,7 +1639,7 @@ class PlayerMockTest
 	void testDisconnectWithPlayerOffline()
 	{
 		server.addPlayer(player);
-		player.disconnect();
+		assertTrue(player.disconnect());
 		assertFalse(player.disconnect());
 		assertFalse(server.getOnlinePlayers().contains(player));
 	}
