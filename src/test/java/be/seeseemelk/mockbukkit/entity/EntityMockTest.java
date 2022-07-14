@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.MockPlugin;
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.TestPlugin;
 import be.seeseemelk.mockbukkit.WorldMock;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
@@ -20,7 +21,10 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityTeleportEvent;
 import org.bukkit.event.entity.EntityToggleSwimEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.metadata.FixedMetadataValue;
@@ -29,6 +33,7 @@ import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -161,6 +166,91 @@ class EntityMockTest
 		entity2.teleport(location);
 		entity.teleport(entity2);
 		entity.assertTeleported(location, 0);
+	}
+
+	@Test
+	void teleport_RaiseEvent()
+	{
+		entity.teleport(entity.getLocation().add(10, 0, 5));
+		server.getPluginManager().assertEventFired(EntityTeleportEvent.class);
+	}
+
+	@Test
+	void teleport_Removed()
+	{
+		entity.remove();
+		Location from = entity.getLocation();
+		Location to = entity.getLocation().add(0, 5, 0);
+		assertFalse(entity.teleport(to));
+		assertEquals(from, entity.getLocation());
+	}
+
+	@Test
+	void teleport_Dead()
+	{
+		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+		zombie.setHealth(0D);
+		Location from = zombie.getLocation();
+		Location to = zombie.getLocation().add(0, 5, 0);
+		assertFalse(zombie.teleport(to));
+		assertEquals(from, zombie.getLocation());
+	}
+
+	@Test
+	void teleport_CancelEvent()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		Location from = entity.getLocation();
+		Location to = entity.getLocation().add(0, 5, 0);
+		server.getPluginManager().registerEvents(new Listener()
+		{
+			@EventHandler
+			public void onPlayerTeleport(@NotNull EntityTeleportEvent event)
+			{
+				event.setCancelled(true);
+			}
+		}, plugin);
+		assertFalse(entity.teleport(to));
+		assertEquals(from, entity.getLocation());
+	}
+
+	@Test
+	void teleport_ChangeDestinationInEvent()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		Location changedTo = entity.getLocation().set(60, 90, -150);
+		server.getPluginManager().registerEvents(new Listener()
+		{
+			@EventHandler
+			public void onEntityTeleport(@NotNull EntityTeleportEvent event)
+			{
+				event.setTo(new Location(event.getTo().getWorld(), 60, 90, -150));
+			}
+		}, plugin);
+		assertTrue(entity.teleport(entity.getLocation().add(0, 0, 20)));
+		assertEquals(changedTo, entity.getLocation());
+	}
+
+	@Test
+	void teleport_LocationIsCloned()
+	{
+		Location to = entity.getLocation().add(40, 750, 10);
+		Location mutableTo = to.clone();
+		entity.teleport(mutableTo);
+		mutableTo.set(0, 0, 0);
+		assertNotSame(mutableTo, entity.getLocation());
+		assertEquals(to, entity.getLocation());
+	}
+
+	@Test
+	void teleport_UseCurrentWorldInsteadOfNull()
+	{
+		Location to = new Location(null, 50, 200, 80);
+		assertTrue(entity.teleport(to));
+		assertEquals(world, entity.getWorld());
+		to = to.clone();
+		to.setWorld(world);
+		assertEquals(to, entity.getLocation());
 	}
 
 	@Test
