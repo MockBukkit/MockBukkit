@@ -77,9 +77,15 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	@Override
 	public void closeInventory()
 	{
+		closeInventory(InventoryCloseEvent.Reason.UNKNOWN);
+	}
+
+	@Override
+	public void closeInventory(InventoryCloseEvent.@NotNull Reason reason)
+	{
 		if (inventoryView instanceof PlayerInventoryViewMock)
 		{
-			new InventoryCloseEvent(inventoryView).callEvent();
+			new InventoryCloseEvent(inventoryView, reason).callEvent();
 
 			if (inventoryView.getTopInventory() instanceof InventoryMock inventoryMock)
 			{
