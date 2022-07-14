@@ -71,6 +71,7 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
+import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -160,6 +161,8 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 	private final Set<String> channels = new HashSet<>();
 
+	private final List<ItemStack> consumedItems = new LinkedList<>();
+
 	public PlayerMock(@NotNull ServerMock server, @NotNull String name)
 	{
 		this(server, name, UUID.nameUUIDFromBytes(("OfflinePlayer:" + name).getBytes(StandardCharsets.UTF_8)));
@@ -239,6 +242,34 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		server.addPlayer(this);
 
 		return true;
+	}
+
+	/**
+	 * Simulates a Player consuming an Edible Item
+	 * @param consumable The Item to consume
+	 */
+	public void simulateConsumeItem(@NotNull ItemStack consumable)
+	{
+		Preconditions.checkNotNull(consumable, "Consumed Item can't be null");
+		Preconditions.checkArgument(consumable.getType().isEdible(), "Item is not Consumable");
+
+		PlayerItemConsumeEvent event = new PlayerItemConsumeEvent(this, consumable);
+		Bukkit.getPluginManager().callEvent(event);
+
+		consumedItems.add(consumable);
+	}
+
+	/**
+	 * Asserts a Player has consumed the given Item
+	 * @param consumable The Item to asserts has been consumed
+	 */
+	public void assertItemConsumed(@NotNull ItemStack consumable)
+	{
+		Preconditions.checkNotNull(consumable, "Consumed Item can't be null");
+		if (!consumedItems.contains(consumable))
+		{
+			fail();
+		}
 	}
 
 	@Override

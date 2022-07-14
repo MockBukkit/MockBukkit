@@ -71,6 +71,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
+import org.opentest4j.AssertionFailedError;
 
 import java.net.InetSocketAddress;
 import java.util.Arrays;
@@ -1659,6 +1660,40 @@ class PlayerMockTest
 
 		assertEquals(loc, player.getLastDeathLocation());
 
+	}
+
+	@Test
+	void testSimulateConsumeItem()
+	{
+		ItemStack consumable = new ItemStack(Material.POTATO);
+
+		player.simulateConsumeItem(consumable);
+
+		player.assertItemConsumed(consumable);
+	}
+
+	@Test
+	void testSimulateConsumeItemWithNullItem()
+	{
+		assertThrows(NullPointerException.class, () -> player.simulateConsumeItem(null));
+	}
+
+	@Test
+	void testSimulateConsumeItemWithInvalidItem()
+	{
+		assertThrows(IllegalArgumentException.class, () -> player.simulateConsumeItem(new ItemStack(Material.STONE)));
+	}
+
+	@Test
+	void testAssertItemConsumedWithNotConsumedItem()
+	{
+		assertThrows(AssertionFailedError.class, () -> player.assertItemConsumed(new ItemStack(Material.APPLE)));
+	}
+
+	@Test
+	void testAssertItemConsumedWithNullItem()
+	{
+		assertThrows(NullPointerException.class, () -> player.assertItemConsumed(null));
 	}
 
 }
