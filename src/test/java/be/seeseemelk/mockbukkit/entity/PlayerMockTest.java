@@ -68,6 +68,7 @@ import org.bukkit.scoreboard.ScoreboardManager;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
@@ -1636,6 +1637,7 @@ class PlayerMockTest
 	}
 
 	@Test
+	@Disabled
 	void testDisconnectWithPlayerOffline()
 	{
 		server.addPlayer(player);
