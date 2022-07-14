@@ -1,0 +1,22 @@
+# Modifications to the source code should be handled by the code review team
+*.java                             @MockBukkit/project-members
+
+# Modifications to sensitive files should be reviewed by maintainers
+/.github/                          @MockBukkit/maintainers
+/.readthedocs.yml                  @MockBukkit/maintainers
+/jitpack.yml                       @MockBukkit/maintainers
+/build.gradle                      @MockBukkit/maintainers
+/settings.gradle                   @MockBukkit/maintainers
+/gradle/                           @MockBukkit/maintainers
+/gradlew                           @MockBukkit/maintainers
+/gradlew.bat                       @MockBukkit/maintainers
+/gradle.properties                 @MockBukkit/maintainers
+/CONTRIBUTING.md                   @MockBukkit/maintainers
+/README.md                         @MockBukkit/maintainers
+/LICENSE                           @MockBukkit/maintainers
+
+# Modifications to the logo should require be reviewed by maintainers and logo designer.
+/logo.png                          @MockBukkit/maintainers
+
+# This file is handled by Seeseemelk (admins have overwrite access anyway)
+/.github/CODEOWNERS                @seeseemelk
