@@ -16,7 +16,7 @@
 /LICENSE                           @MockBukkit/maintainers
 
 # Modifications to the logo should require be reviewed by maintainers and logo designer.
-/logo.png                          @MockBukkit/maintainers, @HuffleAnimations
+/logo.png                          @MockBukkit/maintainers @HuffleAnimations
 
 # This file is handled by Seeseemelk (admins have overwrite access anyway)
 /.github/CODEOWNERS                @seeseemelk
