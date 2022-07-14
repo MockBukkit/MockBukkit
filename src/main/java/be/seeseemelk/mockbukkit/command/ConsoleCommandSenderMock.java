@@ -25,6 +25,7 @@ import java.util.UUID;
 public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTarget
 {
 
+	private final Spigot spigot = new Spigot();
 	private final PermissibleBase perm = new PermissibleBase(this);
 	private final Queue<Component> messages = new LinkedList<>();
 
@@ -204,7 +205,7 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	@Override
 	public @NotNull Spigot spigot()
 	{
-		return new Spigot();
+		return this.spigot;
 	}
 
 	@Override
