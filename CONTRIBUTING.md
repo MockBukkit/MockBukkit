@@ -50,8 +50,13 @@ If for whatever reason your IDE does not follow our style, please, do **not** co
 
 ## :books: Writing documentation
 
-When overriding Bukkit methods there's no need to write your own JavaDocs.
-However, any methods or classes that are specific to MockBukkit should have JavaDocs written for them.
+Code documentation is a great way to improve the maintainability of this project.
+Of course we do not expect you to add JavaDocs to methods that are just simple getters, setters or simply override methods from the Bukkit API.
+
+But documentation does help us review your changes more efficiently and also enables us to maintain these changes in the future much more effectively.
+So, when you add new methods or classes - that are specific to MockBukkit - JavaDocs will be mandatory.
+But adding a short JavaDocs section to any class - including mocks but excluding tests - is also very much appreciated ❤️. 
+When inside a method, using single-line comments before some statements can also help to improve the readibility of the code. Just a few short explanatory comments in cases where you expect some confusion can go a long way!
 
 
 ## :pencil2: Writing unit tests
