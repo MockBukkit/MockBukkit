@@ -1,5 +1,5 @@
 # Modifications to the source code should be handled by the code review team
-*.java                             @MockBukkit/code-reviewers
+*.java                             @MockBukkit/project-members
 
 # Modifications to sensitive files should be reviewed by maintainers
 /.github/                          @MockBukkit/maintainers
