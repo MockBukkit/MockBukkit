@@ -7,6 +7,7 @@ build.gradle                       @MockBukkit/maintainers
 settings.gradle                    @MockBukkit/maintainers
 CONTRIBUTING.md                    @MockBukkit/maintainers
 README.md                          @MockBukkit/maintainers
+logo.png                           @MockBukkit/maintainers
 
 # This file is handled by Seeseemelk (admins have overwrite access anyway)
 /.github/CODEOWNERS                @seeseemelk
