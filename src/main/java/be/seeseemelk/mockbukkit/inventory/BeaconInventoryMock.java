@@ -11,7 +11,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class BeaconInventoryMock extends InventoryMock implements BeaconInventory
 {
-	@Nullable ItemStack item;
+
+	private @Nullable ItemStack item;
 
 	public BeaconInventoryMock(@Nullable InventoryHolder holder)
 	{
@@ -37,4 +38,5 @@ public class BeaconInventoryMock extends InventoryMock implements BeaconInventor
 		inventory.setItem(getItem());
 		return inventory;
 	}
+
 }

@@ -17,8 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 public class BeaconInventoryMockTest
 {
 
-	ServerMock server;
-	BeaconInventoryMock inventory;
+	private ServerMock server;
+	private BeaconInventoryMock inventory;
 
 	@BeforeEach
 	void setUp()
@@ -64,6 +64,5 @@ public class BeaconInventoryMockTest
 		assertNotEquals(inventory, inventory.getSnapshot());
 		assertEquals(inventory.getItem(), inventory.getSnapshot().getItem());
 	}
-
 
 }
