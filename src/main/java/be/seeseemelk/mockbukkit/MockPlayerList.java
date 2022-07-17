@@ -16,6 +16,7 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -30,7 +31,7 @@ public class MockPlayerList
 
 	private int maxPlayers = Integer.MAX_VALUE;
 
-	private final List<PlayerMock> onlinePlayers = new CopyOnWriteArrayList<>();
+	private final Set<PlayerMock> onlinePlayers = new HashSet<>();
 	private final Set<OfflinePlayer> offlinePlayers = Collections.synchronizedSet(new HashSet<>());
 
 	private final @NotNull BanList ipBans = new MockBanList();
@@ -85,7 +86,7 @@ public class MockPlayerList
 	@NotNull
 	public Collection<PlayerMock> getOnlinePlayers()
 	{
-		return Collections.unmodifiableList(onlinePlayers);
+		return Collections.unmodifiableSet(onlinePlayers);
 	}
 
 	@NotNull
@@ -168,7 +169,20 @@ public class MockPlayerList
 		}
 		else
 		{
-			return onlinePlayers.get(num);
+			PlayerMock player = null;
+
+			int i = 0;
+			for (PlayerMock p : onlinePlayers)
+			{
+				if (i == num)
+				{
+					player = p;
+					break;
+				}
+				i++;
+			}
+
+			return player;
 		}
 	}
 
