@@ -186,7 +186,7 @@ class ServerMockTest
 	@Test
 	void getBukkitVersion_CorrectPattern()
 	{
-		assertTrue(server.getBukkitVersion().matches("1\\.[0-9]+(\\.[0-9]+)?-R[0-9].[0-9]-SNAPSHOT"));
+		assertTrue(server.getBukkitVersion().matches("1\\.[0-9]+(\\.[0-9]+)?-.*SNAPSHOT.*"));
 	}
 
 	@Test
