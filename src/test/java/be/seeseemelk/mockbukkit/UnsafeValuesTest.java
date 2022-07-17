@@ -51,9 +51,9 @@ class UnsafeValuesTest
 	}
 
 	@Test
-	void checkSupported_currentServerVersion() throws InvalidPluginException
+	void checkSupported_currentServerVersion()
 	{
-		String currentVersion = server.getBukkitVersion();
+		String currentVersion = server.getMinecraftVersion();
 		// if version is in pattern MAJOR.MINOR.FIX, transform to MAJOR.MINOR
 		if (Pattern.matches(".{1,3}\\..{1,3}\\..*", currentVersion))
 		{

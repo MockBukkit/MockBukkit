@@ -486,18 +486,16 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull String getBukkitVersion()
 	{
-		return getMinecraftVersion();
+		Preconditions.checkNotNull(this.buildProperties, "Failed to load build properties!");
+		String apiVersion = buildProperties.getProperty("full-api-version");
+		Preconditions.checkNotNull(apiVersion, "Failed to get full-api-version from the build properties!");
+		return apiVersion;
 	}
 
 	@Override
 	public @NotNull String getMinecraftVersion()
 	{
-		String apiVersion;
-		if (buildProperties == null || (apiVersion = buildProperties.getProperty("full-api-version")) == null)
-		{
-			throw new IllegalStateException("Minecraft version could not be determined");
-		}
-		return apiVersion.split("-")[0];
+		return this.getBukkitVersion().split("-")[0];
 	}
 
 	@Override
