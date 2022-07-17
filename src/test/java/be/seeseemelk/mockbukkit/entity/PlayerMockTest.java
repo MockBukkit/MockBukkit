@@ -15,6 +15,7 @@ import be.seeseemelk.mockbukkit.map.MapViewMock;
 import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
 import org.bukkit.Effect;
@@ -45,6 +46,7 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerExpChangeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -1708,4 +1710,18 @@ class PlayerMockTest
 		assertTrue(server.getOnlinePlayers().contains(player));
 	}
 
+	@Test
+	void testKickWithOfflinePlayer()
+	{
+		PlayerMock player = new PlayerMock(server, "testPlayer");
+		player.kick(Component.text("test"), PlayerKickEvent.Cause.KICK_COMMAND);
+		server.getPluginManager().assertEventNotFired(PlayerKickEvent.class);
+	}
+
+	@Test
+	void testKickWithNullMessage()
+	{
+		player.kick(null, PlayerKickEvent.Cause.KICK_COMMAND);
+		server.getPluginManager().assertEventFired(PlayerKickEvent.class);
+	}
 }

@@ -1081,7 +1081,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void kick()
 	{
-		Component defaultKickComponent = Component.translatable("multiplayer.disconnect.kicked");
+		Component defaultKickComponent = Component.text("You are not whitelisted on this server!");
 		kick(defaultKickComponent);
 	}
 
