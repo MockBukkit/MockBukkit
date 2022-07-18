@@ -184,6 +184,24 @@ class ServerMockTest
 	}
 
 	@Test
+	void getBukkitVersion_CorrectPattern()
+	{
+		assertTrue(server.getBukkitVersion().matches("1\\.[0-9]+(\\.[0-9]+)?-.*SNAPSHOT.*"));
+	}
+
+	@Test
+	void getMinecraftVersion_NotNull()
+	{
+		assertNotNull(server.getMinecraftVersion());
+	}
+
+	@Test
+	void getMinecraftVersion_CorrectPattern()
+	{
+		assertTrue(server.getMinecraftVersion().matches("1\\.[0-9]+(\\.[0-9]+)?"));
+	}
+
+	@Test
 	void getName_NotNull()
 	{
 		assertNotNull(server.getName());
