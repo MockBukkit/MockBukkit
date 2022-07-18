@@ -38,4 +38,5 @@ class LecternInventoryMockTest
 	{
 		assertEquals(block, inventory.getHolder());
 	}
+
 }
