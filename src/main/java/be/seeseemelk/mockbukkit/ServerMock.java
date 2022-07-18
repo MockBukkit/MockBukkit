@@ -19,6 +19,7 @@ import be.seeseemelk.mockbukkit.inventory.BrewerInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.ChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.DispenserInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.DropperInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.EnchantingInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.FurnaceInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.GrindstoneInventoryMock;
@@ -638,7 +639,7 @@ public class ServerMock extends Server.Spigot implements Server
 		case WORKBENCH:
 			// TODO: This Inventory Type needs to be implemented
 		case ENCHANTING:
-			// TODO: This Inventory Type needs to be implemented
+			return new EnchantingInventoryMock(owner);
 		case BREWING:
 			return new BrewerInventoryMock(owner);
 		case CRAFTING:
