@@ -21,4 +21,5 @@ public class CartographyInventoryMock extends InventoryMock implements Cartograp
 		inventory.setContents(getContents());
 		return inventory;
 	}
+
 }
