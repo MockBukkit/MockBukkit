@@ -14,6 +14,7 @@ import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
 import be.seeseemelk.mockbukkit.help.HelpMapMock;
 import be.seeseemelk.mockbukkit.inventory.AnvilInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.BarrelInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.BeaconInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.BrewerInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.ChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.DispenserInventoryMock;
@@ -486,18 +487,16 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull String getBukkitVersion()
 	{
-		return getMinecraftVersion();
+		Preconditions.checkNotNull(this.buildProperties, "Failed to load build properties!");
+		String apiVersion = buildProperties.getProperty("full-api-version");
+		Preconditions.checkNotNull(apiVersion, "Failed to get full-api-version from the build properties!");
+		return apiVersion;
 	}
 
 	@Override
 	public @NotNull String getMinecraftVersion()
 	{
-		String apiVersion;
-		if (buildProperties == null || (apiVersion = buildProperties.getProperty("full-api-version")) == null)
-		{
-			throw new IllegalStateException("Minecraft version could not be determined");
-		}
-		return apiVersion.split("-")[0];
+		return this.getBukkitVersion().split("-")[0];
 	}
 
 	@Override
@@ -636,7 +635,7 @@ public class ServerMock extends Server.Spigot implements Server
 		case SMITHING:
 			// TODO: This Inventory Type needs to be implemented
 		case BEACON:
-			// TODO: This Inventory Type needs to be implemented
+			return new BeaconInventoryMock(owner);
 		case WORKBENCH:
 			// TODO: This Inventory Type needs to be implemented
 		case ENCHANTING:
