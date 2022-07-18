@@ -33,7 +33,7 @@ class CartographyInventoryMockTest
 		InventoryMock snapshot = inventory.getSnapshot();
 
 		assertInstanceOf(CartographyInventoryMock.class, snapshot);
-		assertNotEquals(inventory, snapshot);
+		assertNotSame(inventory, snapshot);
 	}
 
 }
