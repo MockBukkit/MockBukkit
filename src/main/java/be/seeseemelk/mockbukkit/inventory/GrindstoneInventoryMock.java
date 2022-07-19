@@ -1,10 +1,11 @@
 package be.seeseemelk.mockbukkit.inventory;
 
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.GrindstoneInventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.jetbrains.annotations.NotNull;
 
-public class GrindstoneInventoryMock extends InventoryMock
+public class GrindstoneInventoryMock extends InventoryMock implements GrindstoneInventory
 {
 
 	public GrindstoneInventoryMock(InventoryHolder holder)
