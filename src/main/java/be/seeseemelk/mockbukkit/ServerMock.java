@@ -643,12 +643,6 @@ public class ServerMock extends Server.Spigot implements Server
 			return new EnchantingInventoryMock(owner);
 		case BREWING:
 			return new BrewerInventoryMock(owner);
-		case CRAFTING:
-			// TODO: This Inventory Type needs to be implemented
-		case CREATIVE:
-			// TODO: This Inventory Type needs to be implemented
-		case MERCHANT:
-			// TODO: This Inventory Type needs to be implemented
 		default:
 			throw new UnimplementedOperationException("Inventory type not yet supported");
 		}
