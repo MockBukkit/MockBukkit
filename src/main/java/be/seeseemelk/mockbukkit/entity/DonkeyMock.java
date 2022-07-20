@@ -16,6 +16,7 @@ public class DonkeyMock extends ChestedHorseMock implements Donkey
 	}
 
 	@Override
+	@Deprecated
 	public Horse.@NotNull Variant getVariant()
 	{
 		return Horse.Variant.DONKEY;

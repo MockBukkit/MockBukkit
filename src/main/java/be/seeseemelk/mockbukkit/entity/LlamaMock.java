@@ -105,6 +105,7 @@ public class LlamaMock extends ChestedHorseMock implements Llama
 	}
 
 	@Override
+	@Deprecated
 	public Horse.@NotNull Variant getVariant()
 	{
 		return Horse.Variant.LLAMA;

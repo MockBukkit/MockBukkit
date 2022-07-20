@@ -16,14 +16,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class ChunkSnapshotMockTest
 {
 
-	private ServerMock server;
 	private World world;
 	private Chunk chunk;
 
 	@BeforeEach
 	void setUp()
 	{
-		server = MockBukkit.mock();
+		MockBukkit.mock();
 		world = new WorldMock(Material.GRASS, 0, 319, 4);
 		chunk = world.getChunkAt(1, 1);
 	}

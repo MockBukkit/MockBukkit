@@ -120,12 +120,14 @@ public class SkullMock extends TileStateMock implements Skull
 	}
 
 	@Override
+	@Deprecated
 	public org.bukkit.profile.@Nullable PlayerProfile getOwnerProfile()
 	{
 		return !this.hasOwner() ? null : this.profile;
 	}
 
 	@Override
+	@Deprecated
 	public void setOwnerProfile(org.bukkit.profile.@Nullable PlayerProfile profile)
 	{
 		if (profile == null)
@@ -161,6 +163,7 @@ public class SkullMock extends TileStateMock implements Skull
 	}
 
 	@Override
+	@Deprecated
 	public @NotNull SkullType getSkullType()
 	{
 		return switch (getType())
@@ -176,6 +179,7 @@ public class SkullMock extends TileStateMock implements Skull
 	}
 
 	@Override
+	@Deprecated
 	public void setSkullType(SkullType skullType)
 	{
 		throw new UnsupportedOperationException("Must change block type");

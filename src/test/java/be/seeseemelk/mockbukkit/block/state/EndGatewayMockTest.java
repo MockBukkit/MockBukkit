@@ -1,7 +1,6 @@
 package be.seeseemelk.mockbukkit.block.state;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import org.bukkit.Location;
@@ -21,7 +20,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class EndGatewayMockTest
 {
 
-	private ServerMock server;
 	private WorldMock world;
 	private BlockMock block;
 	private EndGatewayMock gateway;
@@ -29,7 +27,7 @@ class EndGatewayMockTest
 	@BeforeEach
 	void setUp()
 	{
-		this.server = MockBukkit.mock();
+		MockBukkit.mock();
 		this.world = new WorldMock();
 		this.block = world.getBlockAt(0, 10, 0);
 		this.block.setType(Material.END_GATEWAY);

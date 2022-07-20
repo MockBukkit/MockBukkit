@@ -577,7 +577,7 @@ class WorldMockTest
 	void drop_Item_CorrectEvent()
 	{
 		WorldMock world = new WorldMock();
-		Entity entity = world.dropItem(new Location(world, 0, 5, 0), new ItemStack(Material.STONE));
+		world.dropItem(new Location(world, 0, 5, 0), new ItemStack(Material.STONE));
 		server.getPluginManager().assertEventFired(ItemSpawnEvent.class, (e) -> !e.isCancelled());
 	}
 
@@ -808,7 +808,7 @@ class WorldMockTest
 	void spawn_ArmorStand_CorrectEvent()
 	{
 		WorldMock world = new WorldMock();
-		Entity entity = world.spawnEntity(new Location(world, 0, 5, 0), EntityType.ARMOR_STAND);
+		world.spawnEntity(new Location(world, 0, 5, 0), EntityType.ARMOR_STAND);
 		server.getPluginManager().assertEventFired(CreatureSpawnEvent.class, (e) -> e.getSpawnReason() == CreatureSpawnEvent.SpawnReason.CUSTOM);
 		server.getPluginManager().assertEventFired(CreatureSpawnEvent.class, (e) -> !e.isCancelled());
 	}
@@ -833,7 +833,7 @@ class WorldMockTest
 	void spawn_Firework_CorrectEvent()
 	{
 		WorldMock world = new WorldMock();
-		Entity entity = world.spawnEntity(new Location(world, 0, 5, 0), EntityType.FIREWORK);
+		world.spawnEntity(new Location(world, 0, 5, 0), EntityType.FIREWORK);
 		server.getPluginManager().assertEventFired(ProjectileLaunchEvent.class, (e) -> !e.isCancelled());
 	}
 
@@ -863,7 +863,7 @@ class WorldMockTest
 	void spawn_Zombie_CorrectEvent()
 	{
 		WorldMock world = new WorldMock();
-		Entity entity = world.spawnEntity(new Location(world, 0, 5, 0), EntityType.ZOMBIE);
+		world.spawnEntity(new Location(world, 0, 5, 0), EntityType.ZOMBIE);
 		server.getPluginManager().assertEventFired(CreatureSpawnEvent.class, (e) -> e.getSpawnReason() == CreatureSpawnEvent.SpawnReason.CUSTOM);
 		server.getPluginManager().assertEventFired(CreatureSpawnEvent.class, (e) -> !e.isCancelled());
 	}
