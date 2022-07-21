@@ -1,5 +1,7 @@
 package be.seeseemelk.mockbukkit.command;
 
+import be.seeseemelk.mockbukkit.MockBukkit;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +17,13 @@ class CommandResultTest
 	@BeforeEach
 	void setUp()
 	{
-		this.target = new ConsoleCommandSenderMock();
+		this.target = MockBukkit.mock().getConsoleSender();
+	}
+
+	@AfterEach
+	void teardown()
+	{
+		MockBukkit.unmock();
 	}
 
 	@Test
