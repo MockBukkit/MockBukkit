@@ -9,6 +9,7 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.FurnaceInventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
@@ -80,7 +81,7 @@ public class FurnaceInventoryMock extends InventoryMock implements FurnaceInvent
 	private static class FurnaceFuelProvider
 	{
 
-		static Set<Material> getFuels()
+		static @NotNull Set<Material> getFuels()
 		{
 			Set<Material> fuels = Tag.LOGS.getValues();
 			fuels.addAll(Tag.PLANKS.getValues());

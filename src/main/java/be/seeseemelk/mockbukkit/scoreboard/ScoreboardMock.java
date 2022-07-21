@@ -164,7 +164,7 @@ public class ScoreboardMock implements Scoreboard
 	}
 
 	@Override
-	public @NotNull Team registerNewTeam(String name) throws IllegalArgumentException
+	public @NotNull Team registerNewTeam(@NotNull String name) throws IllegalArgumentException
 	{
 		if (teams.containsKey(name))
 		{

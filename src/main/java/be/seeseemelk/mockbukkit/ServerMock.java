@@ -404,7 +404,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * @param args    The arguments to pass to the commands.
 	 * @return The value returned by {@link Command#execute}.
 	 */
-	public CommandResult executeConsole(@NotNull String command, String... args)
+	public @NotNull CommandResult executeConsole(@NotNull String command, String... args)
 	{
 		return executeConsole(getCommandMap().getCommand(command), args);
 	}
@@ -433,7 +433,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * @param args    The arguments to pass to the commands.
 	 * @return The value returned by {@link Command#execute}.
 	 */
-	public CommandResult executePlayer(@NotNull String command, String... args)
+	public @NotNull CommandResult executePlayer(@NotNull String command, String... args)
 	{
 		return executePlayer(getCommandMap().getCommand(command), args);
 	}

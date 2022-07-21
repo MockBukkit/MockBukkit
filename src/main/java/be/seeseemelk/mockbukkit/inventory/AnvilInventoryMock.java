@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 public class AnvilInventoryMock extends InventoryMock implements AnvilInventory
 {
 
-	private String renameText;
+	private @Nullable String renameText;
 	private int repairCostAmount = 0;
 	private int repairCost = 0;
 	private int maxRepairCost = 40;

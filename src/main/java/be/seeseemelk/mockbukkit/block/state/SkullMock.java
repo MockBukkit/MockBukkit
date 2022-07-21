@@ -23,7 +23,7 @@ public class SkullMock extends TileStateMock implements Skull
 
 	private static final int MAX_OWNER_LENGTH = 16;
 
-	private PlayerProfileMock profile;
+	private @Nullable PlayerProfileMock profile;
 
 	public SkullMock(@NotNull Material material)
 	{

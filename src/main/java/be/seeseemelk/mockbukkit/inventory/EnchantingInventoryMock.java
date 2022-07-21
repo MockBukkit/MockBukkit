@@ -9,8 +9,8 @@ import org.jetbrains.annotations.Nullable;
 public class EnchantingInventoryMock extends InventoryMock implements EnchantingInventory
 {
 
-	private ItemStack primaryItem = null;
-	private ItemStack secondaryItem = null;
+	private @Nullable ItemStack primaryItem = null;
+	private @Nullable ItemStack secondaryItem = null;
 
 	public EnchantingInventoryMock(@Nullable InventoryHolder holder)
 	{

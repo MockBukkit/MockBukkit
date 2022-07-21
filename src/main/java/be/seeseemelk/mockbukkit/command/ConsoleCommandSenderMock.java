@@ -32,7 +32,7 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	}
 
 	@Override
-	public void sendMessage(String... messages)
+	public void sendMessage(String @NotNull ... messages)
 	{
 		for (String message : messages)
 		{
