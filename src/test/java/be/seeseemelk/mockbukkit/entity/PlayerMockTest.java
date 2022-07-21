@@ -38,13 +38,14 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityTeleportEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerExpChangeEvent;
-import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -64,6 +65,8 @@ import org.bukkit.map.MapRenderer;
 import org.bukkit.map.MapView;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.ScoreboardManager;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -99,7 +102,7 @@ class PlayerMockTest
 {
 
 	// Taken from https://minecraft.gamepedia.com/Experience#Leveling_up
-	private static int[] expRequired =
+	private static final int[] expRequired =
 			{
 					7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 42, 47, 52, 57, 62, 67, 72, 77, 82, 87, 92, 97, 102,
 					107, 112, 121, 130, 139, 148, 157, 166, 175, 184, 193
@@ -200,63 +203,12 @@ class PlayerMockTest
 	}
 
 	@Test
-	void getGameMode_Default_Survival()
-	{
-		assertEquals(GameMode.SURVIVAL, player.getGameMode());
-	}
-
-	@Test
-	void setGameMode_GameModeChanged_GameModeSet()
-	{
-		player.setGameMode(GameMode.CREATIVE);
-		assertEquals(GameMode.CREATIVE, player.getGameMode());
-	}
-
-	@Test
-	void setGameMode_GameModeChanged_CallsEvent()
-	{
-		player.setGameMode(GameMode.CREATIVE);
-		server.getPluginManager().assertEventFired(PlayerGameModeChangeEvent.class, (e) -> e.getNewGameMode() == GameMode.CREATIVE);
-	}
-
-	@Test
-	void setGameMode_GameModeNotChanged_DoesntCallsEvent()
-	{
-		//todo: replace with PluginManagerMock#assertEventNotFired once implemented
-		AtomicBoolean bool = new AtomicBoolean(false);
-		server.getPluginManager().registerEvents(new Listener()
-		{
-			@EventHandler
-			public void onPlayerGameModeChange(PlayerGameModeChangeEvent event)
-			{
-				bool.set(true);
-			}
-		}, MockBukkit.createMockPlugin());
-
-		player.setGameMode(GameMode.SURVIVAL);
-
-		assertFalse(bool.get());
-	}
-
-	@Test
 	void getPreviousGameMode()
 	{
 		player.setGameMode(GameMode.SURVIVAL);
 		player.setGameMode(GameMode.CREATIVE);
 		player.setGameMode(GameMode.SURVIVAL);
 		assertEquals(GameMode.CREATIVE, player.getPreviousGameMode());
-	}
-
-	@Test
-	void assertGameMode_CorrectGameMode_DoesNotAssert()
-	{
-		player.assertGameMode(GameMode.SURVIVAL);
-	}
-
-	@Test
-	void assertGameMode_WrongGameMode_Asserts()
-	{
-		assertThrows(AssertionError.class, () -> player.assertGameMode(GameMode.CREATIVE));
 	}
 
 	@Test
@@ -484,7 +436,7 @@ class PlayerMockTest
 		Bukkit.getPluginManager().registerEvents(new Listener()
 		{
 			@EventHandler
-			public void onBlockBreak(BlockBreakEvent event)
+			public void onBlockBreak(@NotNull BlockBreakEvent event)
 			{
 				event.setCancelled(true);
 			}
@@ -504,7 +456,7 @@ class PlayerMockTest
 		Bukkit.getPluginManager().registerEvents(new Listener()
 		{
 			@EventHandler
-			public void onBlockDamage(BlockDamageEvent event)
+			public void onBlockDamage(@NotNull BlockDamageEvent event)
 			{
 				event.setCancelled(true);
 			}
@@ -523,7 +475,7 @@ class PlayerMockTest
 		Bukkit.getPluginManager().registerEvents(new Listener()
 		{
 			@EventHandler
-			public void onBlockBreak(BlockBreakEvent event)
+			public void onBlockBreak(@NotNull BlockBreakEvent event)
 			{
 				event.setCancelled(true);
 			}
@@ -544,7 +496,7 @@ class PlayerMockTest
 		Bukkit.getPluginManager().registerEvents(new Listener()
 		{
 			@EventHandler
-			public void onBlockDamage(BlockDamageEvent event)
+			public void onBlockDamage(@NotNull BlockDamageEvent event)
 			{
 				event.setCancelled(true);
 			}
@@ -569,7 +521,7 @@ class PlayerMockTest
 
 	@ParameterizedTest
 	@EnumSource(value = GameMode.class, mode = EnumSource.Mode.EXCLUDE, names = { "SURVIVAL" })
-	void simulateBlockDamage_NotSurvival_BlockNotDamaged(GameMode nonSurvivalGameMode)
+	void simulateBlockDamage_NotSurvival_BlockNotDamaged(@NotNull GameMode nonSurvivalGameMode)
 	{
 		player.setGameMode(nonSurvivalGameMode);
 		Block block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
@@ -585,7 +537,7 @@ class PlayerMockTest
 		Bukkit.getPluginManager().registerEvents(new Listener()
 		{
 			@EventHandler
-			public void onBlockDamage(BlockDamageEvent event)
+			public void onBlockDamage(@NotNull BlockDamageEvent event)
 			{
 				event.setInstaBreak(false);
 			}
@@ -617,7 +569,7 @@ class PlayerMockTest
 		Bukkit.getPluginManager().registerEvents(new Listener()
 		{
 			@EventHandler
-			public void onBlockDamage(BlockDamageEvent event)
+			public void onBlockDamage(@NotNull BlockDamageEvent event)
 			{
 				event.setInstaBreak(true);
 			}
@@ -648,7 +600,7 @@ class PlayerMockTest
 		Bukkit.getPluginManager().registerEvents(new Listener()
 		{
 			@EventHandler
-			public void onBlockDamage(BlockDamageEvent event)
+			public void onBlockDamage(@NotNull BlockDamageEvent event)
 			{
 				event.setInstaBreak(true);
 			}
@@ -785,16 +737,6 @@ class PlayerMockTest
 	}
 
 	@Test
-	void getExpToLevel_CorrectExp()
-	{
-		for (int i = 0; i < expRequired.length; i++)
-		{
-			player.setLevel(i);
-			assertEquals(expRequired[i], player.getExpToLevel());
-		}
-	}
-
-	@Test
 	void giveExpLevel_Negative_ClampedAtZero()
 	{
 		player.setExp(0.5F);
@@ -885,20 +827,6 @@ class PlayerMockTest
 		}, plugin);
 
 		player.giveExp(0);
-	}
-
-	@Test
-	void getFood_LevelDefault20()
-	{
-		int foodLevel = player.getFoodLevel();
-		assertEquals(20, foodLevel);
-	}
-
-	@Test
-	void getFood_LevelChange()
-	{
-		player.setFoodLevel(10);
-		assertEquals(10, player.getFoodLevel());
 	}
 
 	@Test
@@ -1107,22 +1035,6 @@ class PlayerMockTest
 	}
 
 	@Test
-	void testSaturation()
-	{
-		// Default level
-		assertEquals(5.0F, player.getSaturation(), 0.1F);
-
-		player.setFoodLevel(20);
-		player.setSaturation(8);
-		assertEquals(8.0F, player.getSaturation(), 0.1F);
-
-		// Testing the constraint
-		player.setFoodLevel(20);
-		player.setSaturation(10000);
-		assertEquals(20.0F, player.getSaturation(), 0.1F);
-	}
-
-	@Test
 	void testPotionEffects()
 	{
 		PotionEffect effect = new PotionEffect(PotionEffectType.CONFUSION, 3, 1);
@@ -1260,7 +1172,7 @@ class PlayerMockTest
 		Bukkit.getPluginManager().registerEvents(new Listener()
 		{
 			@EventHandler
-			public void onPlayerMove(PlayerMoveEvent event)
+			public void onPlayerMove(@NotNull PlayerMoveEvent event)
 			{
 				event.setCancelled(true);
 			}
@@ -1283,7 +1195,7 @@ class PlayerMockTest
 		Bukkit.getPluginManager().registerEvents(new Listener()
 		{
 			@EventHandler
-			public void onPlayerMove(PlayerMoveEvent event)
+			public void onPlayerMove(@NotNull PlayerMoveEvent event)
 			{
 				event.getPlayer().teleport(teleportLocation);
 			}
@@ -1442,9 +1354,12 @@ class PlayerMockTest
 	@Test
 	void testPlayerTeleport_WithCause_EventFired()
 	{
-		player.teleport(player.getLocation().add(10, 10, 10), PlayerTeleportEvent.TeleportCause.CHORUS_FRUIT);
+		Location from = player.getLocation();
+		Location to = player.getLocation().add(10, 10, 10);
+		player.teleport(to, PlayerTeleportEvent.TeleportCause.CHORUS_FRUIT);
 
-		server.getPluginManager().assertEventFired(PlayerTeleportEvent.class);
+		server.getPluginManager().assertEventFired(PlayerTeleportEvent.class, event -> from.equals(event.getFrom()) && to.equals(event.getTo()));
+		server.getPluginManager().assertEventNotFired(EntityTeleportEvent.class);
 	}
 
 	@Test
@@ -1453,6 +1368,26 @@ class PlayerMockTest
 		player.teleport(player.getLocation().add(10, 10, 10));
 
 		server.getPluginManager().assertEventFired(PlayerTeleportEvent.class);
+		server.getPluginManager().assertEventNotFired(EntityTeleportEvent.class);
+	}
+
+	@Test
+	void testPlayerTeleport_ChangedWorldEvent()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		World from = player.getWorld();
+		Location to = new Location(new WorldMock(), 0, 80, 0);
+		server.getPluginManager().registerEvents(new Listener()
+		{
+			@EventHandler
+			public void onChangedWorld(@NotNull PlayerChangedWorldEvent event)
+			{
+				assertEquals(to, event.getPlayer().getLocation(), "The location should already have changed when the PlayerChangedWorldEvent is fired");
+			}
+		}, plugin);
+		player.teleport(to);
+		server.getPluginManager().assertEventFired(PlayerTeleportEvent.class);
+		server.getPluginManager().assertEventFired(PlayerChangedWorldEvent.class, event -> event.getFrom() == from);
 	}
 
 	@Test
@@ -1471,7 +1406,7 @@ class PlayerMockTest
 		Bukkit.getPluginManager().registerEvents(new Listener()
 		{
 			@EventHandler
-			public void onPlayerTeleport(PlayerTeleportEvent event)
+			public void onPlayerTeleport(@NotNull PlayerTeleportEvent event)
 			{
 				event.setCancelled(true);
 			}
@@ -1484,6 +1419,43 @@ class PlayerMockTest
 		player.assertNotTeleported();
 		player.assertLocation(originalLocation, 0);
 
+	}
+
+	@Test
+	void testTeleport_ChangeDestinationInEvent()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		Location changedTo = player.getLocation().set(60, 90, -150);
+		server.getPluginManager().registerEvents(new Listener()
+		{
+			@EventHandler
+			public void onPlayerTeleport(@NotNull PlayerTeleportEvent event)
+			{
+				event.setTo(new Location(event.getTo().getWorld(), 60, 90, -150));
+			}
+		}, plugin);
+		assertTrue(player.teleport(player.getLocation().add(0, 0, 20)));
+		assertEquals(changedTo, player.getLocation());
+	}
+
+	@Test
+	void testTeleport_CloseInventory()
+	{
+		Inventory inventory = Bukkit.createInventory(null, 9);
+		player.openInventory(inventory);
+		assertTrue(player.teleport(player.getLocation().add(8, 9, 10)));
+		assertEquals(InventoryType.CRAFTING, player.getOpenInventory().getType());
+		server.getPluginManager().assertEventFired(InventoryCloseEvent.class, e -> e.getReason() == InventoryCloseEvent.Reason.TELEPORT);
+	}
+
+	@Test
+	void testTeleport_DontCloseCraftingInventory()
+	{
+		ItemStack itemStack = new ItemStack(Material.DEEPSLATE);
+		player.getOpenInventory().setCursor(itemStack);
+		assertTrue(player.teleport(player.getLocation().add(0, 10, 0)));
+		assertEquals(itemStack, player.getOpenInventory().getCursor());
+		server.getPluginManager().assertEventNotFired(InventoryCloseEvent.class);
 	}
 
 	@Test
@@ -1630,6 +1602,16 @@ class PlayerMockTest
 		{
 			player.spawnParticle(Particle.ITEM_CRACK, loc, 1, wrongObj);
 		});
+	}
+
+	@Test
+	void setScoreboard()
+	{
+		ScoreboardManager manager = server.getScoreboardManager();
+		assertSame(manager.getMainScoreboard(), player.getScoreboard());
+		Scoreboard customScoreboard = manager.getNewScoreboard();
+		player.setScoreboard(customScoreboard);
+		assertSame(customScoreboard, player.getScoreboard());
 	}
 
 	@Test

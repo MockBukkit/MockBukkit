@@ -7,12 +7,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -67,6 +64,26 @@ class BarrelMockTest
 	void blockStateMock_Mock_CorrectType()
 	{
 		assertInstanceOf(BarrelMock.class, BlockStateMock.mockState(block));
+	}
+
+	@Test
+	void testIsOpenDefault()
+	{
+		assertFalse(barrel.isOpen());
+	}
+
+	@Test
+	void testOpen()
+	{
+		barrel.open();
+		assertTrue(barrel.isOpen());
+	}
+
+	@Test
+	void testClose()
+	{
+		barrel.close();
+		assertFalse(barrel.isOpen());
 	}
 
 }

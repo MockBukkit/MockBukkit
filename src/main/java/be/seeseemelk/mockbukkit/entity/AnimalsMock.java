@@ -57,8 +57,8 @@ public class AnimalsMock extends AgeableMock implements Animals
 	@Override
 	public boolean isBreedItem(@NotNull ItemStack stack)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(stack, "ItemStack cannot be null");
+		return stack.getType() == Material.WHEAT;
 	}
 
 	@Override
@@ -76,7 +76,7 @@ public class AnimalsMock extends AgeableMock implements Animals
 	}
 
 	@Override
-	public String toString()
+	public @NotNull String toString()
 	{
 		return "AnimalsMock";
 	}

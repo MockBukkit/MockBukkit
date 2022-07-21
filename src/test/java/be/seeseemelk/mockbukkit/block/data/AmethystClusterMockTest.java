@@ -79,4 +79,10 @@ class AmethystClusterMockTest
 		assertInstanceOf(AmethystClusterMock.class, BlockDataMock.mock(Material.AMETHYST_CLUSTER));
 	}
 
+	@Test
+	void testConstructor_InvalidType()
+	{
+		assertThrowsExactly(IllegalArgumentException.class, () -> new AmethystClusterMock(Material.BARRIER));
+	}
+
 }

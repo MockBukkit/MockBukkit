@@ -13,7 +13,7 @@ public abstract class InventoryViewMock extends InventoryView
 	private Inventory bottomInventory;
 	private HumanEntity player;
 	private InventoryType type;
-	private String name;
+	private final String name;
 
 	protected InventoryViewMock(HumanEntity player, String name, Inventory top, Inventory bottom, InventoryType type)
 	{

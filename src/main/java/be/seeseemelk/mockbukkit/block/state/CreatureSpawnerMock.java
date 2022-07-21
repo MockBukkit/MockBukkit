@@ -23,18 +23,16 @@ public class CreatureSpawnerMock extends TileStateMock implements CreatureSpawne
 	private int requiredPlayerRange = 16;
 	private int spawnRange = 4;
 
-	protected CreatureSpawnerMock(@NotNull Material material)
+	public CreatureSpawnerMock(@NotNull Material material)
 	{
 		super(material);
-		if (material != Material.SPAWNER)
-			throw new IllegalArgumentException("Cannot create a Spawner state from " + material);
+		checkType(material, Material.SPAWNER);
 	}
 
 	protected CreatureSpawnerMock(@NotNull Block block)
 	{
 		super(block);
-		if (block.getType() != Material.SPAWNER)
-			throw new IllegalArgumentException("Cannot create a Spawner state from " + block.getType());
+		checkType(block, Material.SPAWNER);
 	}
 
 	protected CreatureSpawnerMock(@NotNull CreatureSpawnerMock state)

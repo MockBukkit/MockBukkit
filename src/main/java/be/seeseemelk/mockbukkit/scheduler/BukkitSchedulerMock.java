@@ -26,6 +26,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 import java.util.logging.Logger;
@@ -42,7 +43,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	private final TaskList scheduledTasks = new TaskList();
 	private final AtomicReference<Exception> asyncException = new AtomicReference<>();
 	private long currentTick = 0;
-	private int id = 0;
+	private final AtomicInteger id = new AtomicInteger();
 	private long executorTimeout = 60000;
 
 	private static @NotNull Runnable wrapTask(@NotNull ScheduledTask task)
@@ -111,6 +112,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 
 	public <T extends Event> @NotNull Future<?> executeAsyncEvent(@NotNull T event, @Nullable Consumer<T> func)
 	{
+		MockBukkit.ensureMocking();
 		Preconditions.checkNotNull(event, "Cannot call a null event!");
 		Future<?> future = asyncEventExecutor.submit(() ->
 		{
@@ -155,10 +157,14 @@ public class BukkitSchedulerMock implements BukkitScheduler
 					pool.submit(wrapTask(task));
 				}
 
-				if (task instanceof RepeatingTask && !task.isCancelled())
+				if (task instanceof RepeatingTask)
 				{
-					((RepeatingTask) task).updateScheduledTick();
-					scheduledTasks.addTask(task);
+					if (!task.isCancelled()) {
+						((RepeatingTask) task).updateScheduledTick();
+						scheduledTasks.addTask(task);
+					}
+				} else {
+					task.cancel();
 				}
 			}
 		}
@@ -289,7 +295,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public @NotNull BukkitTask runTaskLater(@NotNull Plugin plugin, @NotNull Runnable task, long delay)
 	{
 		delay = Math.max(delay, 1);
-		ScheduledTask scheduledTask = new ScheduledTask(id++, plugin, true, currentTick + delay, task);
+		ScheduledTask scheduledTask = new ScheduledTask(id.getAndIncrement(), plugin, true, currentTick + delay, task);
 		scheduledTasks.addTask(scheduledTask);
 		return scheduledTask;
 	}
@@ -298,7 +304,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	public @NotNull BukkitTask runTaskTimer(@NotNull Plugin plugin, @NotNull Runnable task, long delay, long period)
 	{
 		delay = Math.max(delay, 1);
-		RepeatingTask repeatingTask = new RepeatingTask(id++, plugin, true, currentTick + delay, period, task);
+		RepeatingTask repeatingTask = new RepeatingTask(id.getAndIncrement(), plugin, true, currentTick + delay, period, task);
 		scheduledTasks.addTask(repeatingTask);
 		return repeatingTask;
 	}
@@ -442,7 +448,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public @NotNull BukkitTask runTaskAsynchronously(@NotNull Plugin plugin, @NotNull Runnable task)
 	{
-		ScheduledTask scheduledTask = new ScheduledTask(id++, plugin, false, currentTick, new AsyncRunnable(task));
+		ScheduledTask scheduledTask = new ScheduledTask(id.getAndIncrement(), plugin, false, currentTick, new AsyncRunnable(task));
 		pool.execute(wrapTask(scheduledTask));
 		return scheduledTask;
 	}
@@ -462,7 +468,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public @NotNull BukkitTask runTaskLaterAsynchronously(@NotNull Plugin plugin, @NotNull Runnable task, long delay)
 	{
-		ScheduledTask scheduledTask = new ScheduledTask(id++, plugin, false, currentTick + delay,
+		ScheduledTask scheduledTask = new ScheduledTask(id.getAndIncrement(), plugin, false, currentTick + delay,
 				new AsyncRunnable(task));
 		scheduledTasks.addTask(scheduledTask);
 		return scheduledTask;
@@ -477,7 +483,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public @NotNull BukkitTask runTaskTimerAsynchronously(@NotNull Plugin plugin, @NotNull Runnable task, long delay, long period)
 	{
-		RepeatingTask scheduledTask = new RepeatingTask(id++, plugin, false, currentTick + delay, period,
+		RepeatingTask scheduledTask = new RepeatingTask(id.getAndIncrement(), plugin, false, currentTick + delay, period,
 				new AsyncRunnable(task));
 		scheduledTasks.addTask(scheduledTask);
 		return scheduledTask;
@@ -489,36 +495,10 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		return runTaskTimerAsynchronously(plugin, (Runnable) task, delay, period);
 	}
 
-	class AsyncRunnable implements Runnable
-	{
-
-		private final Runnable task;
-
-		private AsyncRunnable(Runnable runnable)
-		{
-			task = runnable;
-		}
-
-		@Override
-		public void run()
-		{
-			try
-			{
-				task.run();
-			}
-			catch (Exception t)
-			{
-				asyncException.set(t);
-			}
-		}
-
-	}
-
 	@Override
 	public void runTask(@NotNull Plugin plugin, @NotNull Consumer<BukkitTask> task)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		runTaskLater(plugin, task, 0L);
 	}
 
 	@Override
@@ -531,8 +511,9 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public void runTaskLater(@NotNull Plugin plugin, @NotNull Consumer<BukkitTask> task, long delay)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		delay = Math.max(delay, 1);
+		ScheduledTask scheduledTask = new ScheduledTask(id.getAndIncrement(), plugin, true, currentTick + delay, task);
+		scheduledTasks.addTask(scheduledTask);
 	}
 
 	@Override
@@ -545,8 +526,9 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public void runTaskTimer(@NotNull Plugin plugin, @NotNull Consumer<BukkitTask> task, long delay, long period)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		delay = Math.max(delay, 1);
+		RepeatingTask repeatingTask = new RepeatingTask(id.getAndIncrement(), plugin, true, currentTick + delay, period, task);
+		scheduledTasks.addTask(repeatingTask);
 	}
 
 	@Override
@@ -559,8 +541,12 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public @NotNull Executor getMainThreadExecutor(@NotNull Plugin plugin)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
+		return command ->
+		{
+			Preconditions.checkNotNull(command, "Command cannot be null");
+			this.runTask(plugin, command);
+		};
 	}
 
 	protected int getActiveRunningCount()
@@ -633,6 +619,31 @@ public class BukkitSchedulerMock implements BukkitScheduler
 				return true;
 			}
 			return false;
+		}
+
+	}
+
+	private final class AsyncRunnable implements Runnable
+	{
+
+		private final Runnable task;
+
+		private AsyncRunnable(Runnable task)
+		{
+			this.task = task;
+		}
+
+		@Override
+		public void run()
+		{
+			try
+			{
+				this.task.run();
+			}
+			catch (Exception t)
+			{
+				asyncException.set(t);
+			}
 		}
 
 	}

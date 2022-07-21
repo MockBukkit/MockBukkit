@@ -46,7 +46,7 @@ public class MockBukkit
 	}
 
 	/**
-	 * Start mocking the <code>Bukkit</code> singleton. Also returns the {@link ServerMock} that was created for ease of
+	 * Start mocking the {@code Bukkit} singleton. Also returns the {@link ServerMock} that was created for ease of
 	 * use.
 	 *
 	 * @return The created {@link ServerMock}.
@@ -57,7 +57,7 @@ public class MockBukkit
 	}
 
 	/**
-	 * Start mocking the <code>Bukkit</code> singleton. You can pass your own implementation of the {@link ServerMock}
+	 * Start mocking the {@code Bukkit} singleton. You can pass your own implementation of the {@link ServerMock}
 	 * instance. The instance you passed is returned.
 	 *
 	 * @param <T>                      The mock implementation to use.
@@ -88,7 +88,7 @@ public class MockBukkit
 	 *
 	 * @return The {@link ServerMock} instance.
 	 */
-	public static ServerMock getOrCreateMock()
+	public static @Nullable ServerMock getOrCreateMock()
 	{
 		if (!isMocked())
 		{
@@ -103,7 +103,7 @@ public class MockBukkit
 	 *
 	 * @return The {@link ServerMock} instance or {@code null} if none is set up yet.
 	 */
-	public static ServerMock getMock()
+	public static @Nullable ServerMock getMock()
 	{
 		return mock;
 	}
@@ -160,7 +160,7 @@ public class MockBukkit
 	 * @param plugin The plugin to load for mocking.
 	 * @return An instance of the plugin's main class.
 	 */
-	public static <T extends JavaPlugin> T load(@NotNull Class<T> plugin)
+	public static <T extends JavaPlugin> @NotNull T load(@NotNull Class<T> plugin)
 	{
 		return load(plugin, new Object[0]);
 	}
@@ -209,7 +209,7 @@ public class MockBukkit
 	 * @param parameters       Extra parameters to pass on to the plugin constructor.
 	 * @return An instance of the plugin's main class.
 	 */
-	public static <T extends JavaPlugin> T loadWith(@NotNull Class<T> plugin, @NotNull InputStream descriptionInput, Object... parameters)
+	public static <T extends JavaPlugin> @NotNull T loadWith(@NotNull Class<T> plugin, @NotNull InputStream descriptionInput, Object... parameters)
 	{
 		try
 		{
@@ -231,7 +231,7 @@ public class MockBukkit
 	 * @param parameters      Extra parameters to pass on to the plugin constructor.
 	 * @return An instance of the plugin's main class.
 	 */
-	public static <T extends JavaPlugin> T loadWith(@NotNull Class<T> plugin, @NotNull File descriptionFile, Object... parameters)
+	public static <T extends JavaPlugin> @NotNull T loadWith(@NotNull Class<T> plugin, @NotNull File descriptionFile, Object... parameters)
 	{
 		try
 		{
@@ -253,7 +253,7 @@ public class MockBukkit
 	 * @param parameters          Extra parameters to pass on to the plugin constructor.
 	 * @return An instance of the plugin's main class.
 	 */
-	public static <T extends JavaPlugin> T loadWith(@NotNull Class<T> plugin, String descriptionFileName, Object... parameters)
+	public static <T extends JavaPlugin> @NotNull T loadWith(@NotNull Class<T> plugin, String descriptionFileName, Object... parameters)
 	{
 		return loadWith(plugin, ClassLoader.getSystemResourceAsStream(descriptionFileName), parameters);
 	}

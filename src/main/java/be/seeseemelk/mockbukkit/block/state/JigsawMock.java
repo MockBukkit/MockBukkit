@@ -12,18 +12,16 @@ public class JigsawMock extends TileStateMock implements Jigsaw
 	public JigsawMock(@NotNull Material material)
 	{
 		super(material);
-		if (material != Material.JIGSAW)
-			throw new IllegalArgumentException("Cannot create a Jigsaw state from " + material);
+		checkType(material, Material.JIGSAW);
 	}
 
-	public JigsawMock(@NotNull Block block)
+	protected JigsawMock(@NotNull Block block)
 	{
 		super(block);
-		if (block.getType() != Material.JIGSAW)
-			throw new IllegalArgumentException("Cannot create a Jigsaw state from " + block.getType());
+		checkType(block, Material.JIGSAW);
 	}
 
-	public JigsawMock(@NotNull TileStateMock state)
+	protected JigsawMock(@NotNull JigsawMock state)
 	{
 		super(state);
 	}

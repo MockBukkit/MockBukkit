@@ -26,6 +26,7 @@ import org.bukkit.entity.Pose;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityTeleportEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.permissions.Permission;
@@ -73,7 +74,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private @NotNull Vector velocity = new Vector(0, 0, 0);
 	private float fallDistance;
 	private int fireTicks = -20;
-	private int maxFireTicks = 20;
+	private final int maxFireTicks = 20;
 	private boolean removed = false;
 	private @Nullable EntityDamageEvent lastDamageEvent;
 
@@ -213,7 +214,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	public void setLocation(@NotNull Location location)
 	{
 		Preconditions.checkNotNull(location, "Location cannot be null");
-		this.location = location;
+		// An entity can be teleported to a null world, i.e. the current world.
+		Location position = location.clone();
+		if (position.getWorld() == null)
+		{
+			position.setWorld(getWorld());
+		}
+		this.location = position;
 	}
 
 	@Override
@@ -259,18 +266,35 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public boolean teleport(@NotNull Location location)
 	{
-		Preconditions.checkNotNull(location, "Location cannot be null");
 		return teleport(location, TeleportCause.PLUGIN);
 	}
 
 	@Override
 	public boolean teleport(@NotNull Location location, @NotNull TeleportCause cause)
 	{
-		Preconditions.checkNotNull(location, "Location cannot be null");
-		this.location = location;
-		teleported = true;
-		teleportCause = cause;
-		return true;
+		Preconditions.checkNotNull(location, "Location cannot be null"); // The world can be null if it's not a player
+		location.checkFinite();
+		if (this.removed)
+		{
+			return false;
+		}
+		//todo: Add passenger logic: don't teleport if it's a vehicle / dismount from the current vehicle if it's a passenger
+		EntityTeleportEvent event = new EntityTeleportEvent(this, getLocation(), location);
+		if (event.callEvent())
+		{
+			// There is actually no non-null check in the CraftBukkit implementation
+			Preconditions.checkNotNull(event.getTo(), "The location where the entity moved to in the event cannot be null");
+			teleportWithoutEvent(event.getTo(), cause);
+			return true;
+		}
+		return false;
+	}
+
+	protected void teleportWithoutEvent(@NotNull Location location, @NotNull TeleportCause cause)
+	{
+		setLocation(location);
+		this.teleported = true;
+		this.teleportCause = cause;
 	}
 
 	@Override
@@ -304,6 +328,16 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	public @NotNull String getName()
 	{
 		return LegacyComponentSerializer.legacySection().serialize(this.name);
+	}
+
+	/**
+	 * Gets the scoreboard entry for this entity.
+	 *
+	 * @return The scoreboard entry.
+	 */
+	public @NotNull String getScoreboardEntry()
+	{
+		return uuid.toString();
 	}
 
 	/**
@@ -354,13 +388,6 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public @Nullable String nextMessage()
-	{
-		if (messages.peek() == null)
-			return null;
-		return LegacyComponentSerializer.legacySection().serialize(messages.poll());
-	}
-
 	public @Nullable Component nextComponentMessage()
 	{
 		return messages.poll();

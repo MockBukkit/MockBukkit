@@ -8,18 +8,16 @@ import org.jetbrains.annotations.NotNull;
 public class DaylightDetectorMock extends TileStateMock implements DaylightDetector
 {
 
-	protected DaylightDetectorMock(@NotNull Material material)
+	public DaylightDetectorMock(@NotNull Material material)
 	{
 		super(material);
-		if (material != Material.DAYLIGHT_DETECTOR)
-			throw new IllegalArgumentException("Cannot create a Daylight Detector state from " + material);
+		checkType(material, Material.DAYLIGHT_DETECTOR);
 	}
 
 	protected DaylightDetectorMock(@NotNull Block block)
 	{
 		super(block);
-		if (block.getType() != Material.DAYLIGHT_DETECTOR)
-			throw new IllegalArgumentException("Cannot create a Daylight Detector state from " + block.getType());
+		checkType(block, Material.DAYLIGHT_DETECTOR);
 	}
 
 	protected DaylightDetectorMock(@NotNull DaylightDetectorMock state)

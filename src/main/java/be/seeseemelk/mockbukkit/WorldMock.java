@@ -3,14 +3,31 @@ package be.seeseemelk.mockbukkit;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.entity.AllayMock;
 import be.seeseemelk.mockbukkit.entity.ArmorStandMock;
+import be.seeseemelk.mockbukkit.entity.AxolotlMock;
+import be.seeseemelk.mockbukkit.entity.BlazeMock;
+import be.seeseemelk.mockbukkit.entity.CaveSpiderMock;
+import be.seeseemelk.mockbukkit.entity.ChickenMock;
+import be.seeseemelk.mockbukkit.entity.CowMock;
+import be.seeseemelk.mockbukkit.entity.DonkeyMock;
 import be.seeseemelk.mockbukkit.entity.EndermanMock;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
 import be.seeseemelk.mockbukkit.entity.FireworkMock;
 import be.seeseemelk.mockbukkit.entity.FishHookMock;
+import be.seeseemelk.mockbukkit.entity.GiantMock;
+import be.seeseemelk.mockbukkit.entity.HorseMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
+import be.seeseemelk.mockbukkit.entity.LlamaMock;
 import be.seeseemelk.mockbukkit.entity.MobMock;
+import be.seeseemelk.mockbukkit.entity.MuleMock;
 import be.seeseemelk.mockbukkit.entity.SheepMock;
+import be.seeseemelk.mockbukkit.entity.SkeletonHorseMock;
+import be.seeseemelk.mockbukkit.entity.SkeletonMock;
+import be.seeseemelk.mockbukkit.entity.SpiderMock;
+import be.seeseemelk.mockbukkit.entity.StrayMock;
+import be.seeseemelk.mockbukkit.entity.WardenMock;
+import be.seeseemelk.mockbukkit.entity.WitherSkeletonMock;
+import be.seeseemelk.mockbukkit.entity.ZombieHorseMock;
 import be.seeseemelk.mockbukkit.entity.ZombieMock;
 import be.seeseemelk.mockbukkit.generator.BiomeProviderMock;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
@@ -51,6 +68,12 @@ import org.bukkit.entity.Allay;
 import org.bukkit.entity.Animals;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Axolotl;
+import org.bukkit.entity.Blaze;
+import org.bukkit.entity.CaveSpider;
+import org.bukkit.entity.Chicken;
+import org.bukkit.entity.Cow;
+import org.bukkit.entity.Donkey;
 import org.bukkit.entity.Enderman;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -59,21 +82,32 @@ import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.FishHook;
 import org.bukkit.entity.Ghast;
+import org.bukkit.entity.Giant;
 import org.bukkit.entity.Golem;
 import org.bukkit.entity.Hanging;
+import org.bukkit.entity.Horse;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.ItemFrame;
 import org.bukkit.entity.LeashHitch;
 import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Llama;
 import org.bukkit.entity.Monster;
+import org.bukkit.entity.Mule;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.entity.Sheep;
+import org.bukkit.entity.Skeleton;
+import org.bukkit.entity.SkeletonHorse;
 import org.bukkit.entity.Slime;
 import org.bukkit.entity.SpawnCategory;
+import org.bukkit.entity.Spider;
+import org.bukkit.entity.Stray;
+import org.bukkit.entity.Warden;
 import org.bukkit.entity.WaterMob;
+import org.bukkit.entity.WitherSkeleton;
 import org.bukkit.entity.Zombie;
+import org.bukkit.entity.ZombieHorse;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.entity.ItemSpawnEvent;
@@ -84,6 +118,7 @@ import org.bukkit.event.world.TimeSkipEvent;
 import org.bukkit.generator.BiomeProvider;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator;
+import org.bukkit.generator.structure.Structure;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.persistence.PersistentDataContainer;
@@ -92,6 +127,7 @@ import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Consumer;
 import org.bukkit.util.RayTraceResult;
+import org.bukkit.util.StructureSearchResult;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -124,7 +160,7 @@ public class WorldMock implements World
 	private final MetadataTable metadataTable = new MetadataTable();
 	private final Map<ChunkCoordinate, ChunkMock> loadedChunks = new HashMap<>();
 	private final PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
-	private final ServerMock server;
+	private final @Nullable ServerMock server;
 	private final Material defaultBlock;
 	private final Biome defaultBiome;
 	private final int grassHeight;
@@ -146,7 +182,7 @@ public class WorldMock implements World
 	private long seed = 0;
 	private @NotNull WorldType worldType = WorldType.NORMAL;
 	private final BiomeProviderMock biomeProviderMock = new BiomeProviderMock();
-	private @NotNull Map<Coordinate, Biome> biomes = new HashMap<>();
+	private final @NotNull Map<Coordinate, Biome> biomes = new HashMap<>();
 	private @NotNull Difficulty difficulty = Difficulty.NORMAL;
 
 	private boolean allowAnimals = true;
@@ -886,6 +922,10 @@ public class WorldMock implements World
 		{
 			return new EndermanMock(server, UUID.randomUUID());
 		}
+		else if (clazz == Horse.class)
+		{
+			return new HorseMock(server, UUID.randomUUID());
+		}
 		else if (clazz == Sheep.class)
 		{
 			return new SheepMock(server, UUID.randomUUID());
@@ -893,6 +933,70 @@ public class WorldMock implements World
 		else if (clazz == Allay.class)
 		{
 			return new AllayMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Warden.class)
+		{
+			return new WardenMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Donkey.class)
+		{
+			return new DonkeyMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Llama.class)
+		{
+			return new LlamaMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Mule.class)
+		{
+			return new MuleMock(server, UUID.randomUUID());
+		}
+		else if (clazz == SkeletonHorse.class)
+		{
+			return new SkeletonHorseMock(server, UUID.randomUUID());
+		}
+		else if (clazz == ZombieHorse.class)
+		{
+			return new ZombieHorseMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Cow.class)
+		{
+			return new CowMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Chicken.class)
+		{
+			return new ChickenMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Skeleton.class)
+		{
+			return new SkeletonMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Stray.class)
+		{
+			return new StrayMock(server, UUID.randomUUID());
+		}
+		else if (clazz == WitherSkeleton.class)
+		{
+			return new WitherSkeletonMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Spider.class)
+		{
+			return new SpiderMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Blaze.class)
+		{
+			return new BlazeMock(server, UUID.randomUUID());
+		}
+		else if (clazz == CaveSpider.class)
+		{
+			return new CaveSpiderMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Giant.class)
+		{
+			return new GiantMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Axolotl.class)
+		{
+			return new AxolotlMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}
@@ -1961,6 +2065,20 @@ public class WorldMock implements World
 	}
 
 	@Override
+	public @Nullable StructureSearchResult locateNearestStructure(@NotNull Location origin, org.bukkit.generator.structure.@NotNull StructureType structureType, int radius, boolean findUnexplored)
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public @Nullable StructureSearchResult locateNearestStructure(@NotNull Location origin, @NotNull Structure structure, int radius, boolean findUnexplored)
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
 	public @Nullable Location locateNearestBiome(@NotNull Location origin, @NotNull Biome biome, int radius)
 	{
 		// TODO Auto-generated method stub
@@ -2100,7 +2218,7 @@ public class WorldMock implements World
 
 	@Override
 	public <T extends AbstractArrow> @NotNull T spawnArrow(Location location, Vector direction, float speed, float spread,
-                                                           Class<T> clazz)
+														   Class<T> clazz)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

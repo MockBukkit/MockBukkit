@@ -12,11 +12,17 @@ import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
 import be.seeseemelk.mockbukkit.help.HelpMapMock;
+import be.seeseemelk.mockbukkit.inventory.AnvilInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.BarrelInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.BeaconInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.BrewerInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.CartographyInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.ChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.DispenserInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.DropperInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.EnchantingInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.FurnaceInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.GrindstoneInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.HopperInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
@@ -56,6 +62,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.Registry;
 import org.bukkit.Server;
 import org.bukkit.StructureType;
 import org.bukkit.Tag;
@@ -385,7 +392,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * @param args    The arguments to pass to the commands.
 	 * @return The value returned by {@link Command#execute}.
 	 */
-	public CommandResult executeConsole(@NotNull Command command, String... args)
+	public @NotNull CommandResult executeConsole(@NotNull Command command, String... args)
 	{
 		return execute(command, getConsoleSender(), args);
 	}
@@ -409,7 +416,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * @param args    The arguments to pass to the commands.
 	 * @return The value returned by {@link Command#execute}.
 	 */
-	public CommandResult executePlayer(@NotNull Command command, String... args)
+	public @NotNull CommandResult executePlayer(@NotNull Command command, String... args)
 	{
 		AsyncCatcher.catchOp("command dispatch");
 
@@ -460,7 +467,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * @param args    The arguments to pass to the commands.
 	 * @return The value returned by {@link Command#execute}.
 	 */
-	public CommandResult execute(@NotNull String command, CommandSender sender, String... args)
+	public @NotNull CommandResult execute(@NotNull String command, CommandSender sender, String... args)
 	{
 		AsyncCatcher.catchOp("command dispatch");
 		return execute(getCommandMap().getCommand(command), sender, args);
@@ -481,18 +488,16 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull String getBukkitVersion()
 	{
-		return getMinecraftVersion();
+		Preconditions.checkNotNull(this.buildProperties, "Failed to load build properties!");
+		String apiVersion = buildProperties.getProperty("full-api-version");
+		Preconditions.checkNotNull(apiVersion, "Failed to get full-api-version from the build properties!");
+		return apiVersion;
 	}
 
 	@Override
 	public @NotNull String getMinecraftVersion()
 	{
-		String apiVersion;
-		if (buildProperties == null || (apiVersion = buildProperties.getProperty("full-api-version")) == null)
-		{
-			throw new IllegalStateException("Minecraft version could not be determined");
-		}
-		return apiVersion.split("-")[0];
+		return this.getBukkitVersion().split("-")[0];
 	}
 
 	@Override
@@ -502,7 +507,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public OfflinePlayer[] getOfflinePlayers()
+	public OfflinePlayer @NotNull [] getOfflinePlayers()
 	{
 		return playerList.getOfflinePlayers();
 	}
@@ -621,33 +626,23 @@ public class ServerMock extends Server.Spigot implements Server
 		case STONECUTTER:
 			// TODO: This Inventory Type needs to be implemented
 		case CARTOGRAPHY:
-			// TODO: This Inventory Type needs to be implemented
-		case SMOKER:
-			// TODO: This Inventory Type needs to be implemented
+			return new CartographyInventoryMock(owner);
+		case SMOKER, FURNACE, BLAST_FURNACE:
+			return new FurnaceInventoryMock(owner);
 		case LOOM:
 			// TODO: This Inventory Type needs to be implemented
-		case BLAST_FURNACE:
-			// TODO: This Inventory Type needs to be implemented
 		case ANVIL:
-			// TODO: This Inventory Type needs to be implemented
+			return new AnvilInventoryMock(owner);
 		case SMITHING:
 			// TODO: This Inventory Type needs to be implemented
 		case BEACON:
-			// TODO: This Inventory Type needs to be implemented
-		case FURNACE:
-			// TODO: This Inventory Type needs to be implemented
+			return new BeaconInventoryMock(owner);
 		case WORKBENCH:
 			// TODO: This Inventory Type needs to be implemented
 		case ENCHANTING:
-			// TODO: This Inventory Type needs to be implemented
+			return new EnchantingInventoryMock(owner);
 		case BREWING:
-			// TODO: This Inventory Type needs to be implemented
-		case CRAFTING:
-			// TODO: This Inventory Type needs to be implemented
-		case CREATIVE:
-			// TODO: This Inventory Type needs to be implemented
-		case MERCHANT:
-			// TODO: This Inventory Type needs to be implemented
+			return new BrewerInventoryMock(owner);
 		default:
 			throw new UnimplementedOperationException("Inventory type not yet supported");
 		}
@@ -1775,6 +1770,13 @@ public class ServerMock extends Server.Spigot implements Server
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 
+	}
+
+	@Override
+	public @Nullable <T extends Keyed> Registry<T> getRegistry(@NotNull Class<T> tClass)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

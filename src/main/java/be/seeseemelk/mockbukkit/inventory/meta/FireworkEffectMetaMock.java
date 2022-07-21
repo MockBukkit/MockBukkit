@@ -43,12 +43,11 @@ public class FireworkEffectMetaMock extends ItemMetaMock implements FireworkEffe
 		{
 			return false;
 		}
-		if (!(obj instanceof FireworkEffectMetaMock))
+		if (!(obj instanceof FireworkEffectMetaMock other))
 		{
 			return false;
 		}
 
-		FireworkEffectMetaMock other = (FireworkEffectMetaMock) obj;
 		return Objects.equals(effect, other.effect);
 	}
 

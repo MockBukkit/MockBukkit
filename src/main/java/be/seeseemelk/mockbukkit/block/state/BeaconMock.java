@@ -32,15 +32,13 @@ public class BeaconMock extends TileStateMock implements Beacon
 	public BeaconMock(@NotNull Material material)
 	{
 		super(material);
-		if (material != Material.BEACON)
-			throw new IllegalArgumentException("Cannot create a Beacon state from " + material);
+		checkType(material, Material.BEACON);
 	}
 
 	protected BeaconMock(@NotNull Block block)
 	{
 		super(block);
-		if (block.getType() != Material.BEACON)
-			throw new IllegalArgumentException("Cannot create a Beacon state from " + block.getType());
+		checkType(block, Material.BEACON);
 	}
 
 	protected BeaconMock(@NotNull BeaconMock state)

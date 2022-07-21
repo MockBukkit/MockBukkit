@@ -1,20 +1,17 @@
 package be.seeseemelk.mockbukkit.plugin;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import java.util.Collection;
-import java.util.Iterator;
-
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.TestPlugin;
+import be.seeseemelk.mockbukkit.exception.EventHandlerException;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.server.PluginDisableEvent;
+import org.bukkit.permissions.Permissible;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.Plugin;
@@ -22,12 +19,20 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.TestPlugin;
+import java.util.Collection;
+import java.util.Iterator;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class PluginManagerMockTest
 {
+
 	private ServerMock server;
 	private PluginManagerMock pluginManager;
 	private TestPlugin plugin;
@@ -125,8 +130,8 @@ class PluginManagerMockTest
 		BlockBreakEvent eventToFire = new BlockBreakEvent(null, player);
 		pluginManager.callEvent(eventToFire);
 		pluginManager.assertEventFired(event ->
-		                               event instanceof BlockBreakEvent && ((BlockBreakEvent) event).getPlayer().equals(player)
-		                              );
+				event instanceof BlockBreakEvent && ((BlockBreakEvent) event).getPlayer().equals(player)
+		);
 	}
 
 	@Test
@@ -225,6 +230,55 @@ class PluginManagerMockTest
 		assertFalse(plugin.isEnabled(), "Plugin was not disabled");
 		Plugin[] plugins = pluginManager.getPlugins();
 		assertEquals(0, plugins.length);
+	}
+
+	@Test
+	void subscribeToDefaultPerms()
+	{
+		Permissible player = server.addPlayer();
+
+		pluginManager.subscribeToDefaultPerms(true, player);
+
+		assertTrue(pluginManager.getDefaultPermSubscriptions(true).contains(player));
+	}
+
+	@Test
+	void unsubscribeToDefaultPerms()
+	{
+		Permissible player = server.addPlayer();
+		pluginManager.subscribeToDefaultPerms(true, player);
+
+		pluginManager.unsubscribeFromDefaultPerms(true, player);
+
+		assertFalse(pluginManager.getDefaultPermSubscriptions(true).contains(player));
+	}
+
+	@Test
+	void eventThrowsException_RuntimeException_RethrowsSame()
+	{
+		pluginManager.registerEvents(new Listener()
+		{
+			@EventHandler
+			public void event(BlockBreakEvent e)
+			{
+				throw new IllegalStateException();
+			}
+		}, MockBukkit.createMockPlugin());
+		assertThrowsExactly(IllegalStateException.class, () -> pluginManager.callEvent(new BlockBreakEvent(null, null)));
+	}
+
+	@Test
+	void eventThrowsException_NotRuntimeException_ThrowsEventHandlerException()
+	{
+		pluginManager.registerEvents(new Listener()
+		{
+			@EventHandler
+			public void event(BlockBreakEvent e) throws Exception
+			{
+				throw new Exception();
+			}
+		}, MockBukkit.createMockPlugin());
+		assertThrowsExactly(EventHandlerException.class, () -> pluginManager.callEvent(new BlockBreakEvent(null, null)));
 	}
 
 }
