@@ -2,6 +2,8 @@ package be.seeseemelk.mockbukkit.exception;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serial;
+
 /**
  * Thrown when an event handler throws a non-{@link RuntimeException}
  */
