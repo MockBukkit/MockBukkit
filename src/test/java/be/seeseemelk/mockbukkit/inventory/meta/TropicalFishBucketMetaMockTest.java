@@ -44,9 +44,9 @@ class TropicalFishBucketMetaMockTest
 		assertEquals(DyeColor.MAGENTA, meta.getBodyColor());
 		assertEquals(TropicalFish.Pattern.BETTY, meta.getPattern());
 
-        assertEquals(DyeColor.CYAN, otherMeta.getPatternColor());
-        assertEquals(DyeColor.MAGENTA, otherMeta.getBodyColor());
-        assertEquals(TropicalFish.Pattern.BETTY, otherMeta.getPattern());
+		assertEquals(DyeColor.CYAN, otherMeta.getPatternColor());
+		assertEquals(DyeColor.MAGENTA, otherMeta.getBodyColor());
+		assertEquals(TropicalFish.Pattern.BETTY, otherMeta.getPattern());
 	}
 
 	@Test
