@@ -136,7 +136,7 @@ public class PlayerProfileMock implements PlayerProfile
 	}
 
 	@Override
-	public @NotNull CompletableFuture<org.bukkit.profile.PlayerProfile> update()
+	public @NotNull CompletableFuture<PlayerProfile> update()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
