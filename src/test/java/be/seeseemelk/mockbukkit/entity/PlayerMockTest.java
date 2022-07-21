@@ -1699,7 +1699,7 @@ class PlayerMockTest
 	}
 
 	@Test
-	@Disabled
+	@Disabled("Waiting for Player Handling to be fixed")
 	void testDisconnectWithPlayerOffline()
 	{
 		server.addPlayer(player);
