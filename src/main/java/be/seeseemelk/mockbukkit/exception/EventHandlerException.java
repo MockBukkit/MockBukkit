@@ -8,9 +8,10 @@ import org.jetbrains.annotations.NotNull;
 public class EventHandlerException extends RuntimeException
 {
 
-    private static final long serialVersionUID = 6093700474770834429L;
+	@Serial
+	private static final long serialVersionUID = 6093700474770834429L;
 
-    public EventHandlerException(@NotNull Throwable cause)
+	public EventHandlerException(@NotNull Throwable cause)
 	{
 		super(cause);
 	}
