@@ -15,8 +15,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class AgeableMockTest
 {
 
-	ServerMock serverMock;
-	AgeableMock ageable;
+	private ServerMock serverMock;
+	private AgeableMock ageable;
 
 	@BeforeEach
 	void setUp()

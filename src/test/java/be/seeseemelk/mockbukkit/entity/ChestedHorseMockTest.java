@@ -50,4 +50,5 @@ class ChestedHorseMockTest
 		chestedHorse.setCarryingChest(true);
 		assertTrue(chestedHorse.isCarryingChest());
 	}
+
 }

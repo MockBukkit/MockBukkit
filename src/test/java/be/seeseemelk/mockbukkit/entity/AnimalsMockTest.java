@@ -73,7 +73,6 @@ class AnimalsMockTest
 		assertFalse(animal.isBreedItem(Material.DIRT));
 	}
 
-
 	@Test
 	void testGetBreedCauseDefault()
 	{
@@ -138,4 +137,5 @@ class AnimalsMockTest
 	{
 		assertEquals("AnimalsMock", animal.toString());
 	}
+
 }
