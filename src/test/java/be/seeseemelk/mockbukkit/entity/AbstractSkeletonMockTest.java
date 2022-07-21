@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AbstractSkeletonMockTest
 {
+
 	private ServerMock server;
 	private AbstractSkeletonMock skeleton;
 

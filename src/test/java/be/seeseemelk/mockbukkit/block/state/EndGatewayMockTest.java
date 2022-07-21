@@ -35,7 +35,8 @@ class EndGatewayMockTest
 	}
 
 	@AfterEach
-	void teardown() {
+	void teardown()
+	{
 		MockBukkit.unmock();
 	}
 

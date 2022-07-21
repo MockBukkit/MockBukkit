@@ -66,6 +66,7 @@ public class AnvilInventoryMock extends InventoryMock implements AnvilInventory
 
 	/**
 	 * Sets the rename Text.
+	 *
 	 * @param text The text to set.
 	 */
 	public void setRenameText(@Nullable String text)
