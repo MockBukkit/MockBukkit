@@ -42,10 +42,14 @@ Now you can get to coding!
 
 ## :black_nib: Code formatting
 
-All pull requests should adhere to our code style.
-If you're using a modern IDE like Intellij, we have a `.editorconfig` file which will tell it how code should be formatted.
-This allows you to use auto code formatting without changing more than you modified.
-If for whatever reason your IDE does not follow our style, please, do **not** commit changes that unnecessarily modify code.
+Every larger project has a certain formatting style which dictates how code is formatted.
+If you're using a modern IDE like Intellij, we have a `.editorconfig` file within the project which will automatically tell your IDE how our code should be formatted.
+This allows you to use auto code formatting without disrupting the project's code style.
+
+We would appreciate it if all pull requests adhere to this project's code style.
+If for whatever reason your IDE does not support this or enforces a different code style, try to manually keep the style as consistent as possible in regards to the surrounding code.
+But don't worry, we won't reject your hard work just because of a misaligned bracket.
+We will help you out with formatting mistakes by suggesting changes to your PR!
 
 
 ## :books: Writing documentation
