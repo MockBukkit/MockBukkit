@@ -70,6 +70,7 @@ import org.bukkit.scoreboard.ScoreboardManager;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
@@ -1687,6 +1688,24 @@ class PlayerMockTest
 
 		assertThrows(IllegalStateException.class, () -> player.reconnect());
 
+	}
+
+	@Test
+	void testReconnectWithPlayerOnline()
+	{
+		server.addPlayer(player);
+		assertFalse(player.reconnect());
+		assertTrue(server.getOnlinePlayers().contains(player));
+	}
+
+	@Test
+	@Disabled("Waiting for Player Handling to be fixed")
+	void testDisconnectWithPlayerOffline()
+	{
+		server.addPlayer(player);
+		assertTrue(player.disconnect());
+		assertFalse(player.disconnect());
+		assertFalse(server.getOnlinePlayers().contains(player));
 	}
 
 	@Test
