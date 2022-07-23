@@ -72,7 +72,6 @@ import org.bukkit.scoreboard.ScoreboardManager;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
@@ -1802,6 +1801,7 @@ class PlayerMockTest
 	void testKickWithNullMessage()
 	{
 		player.kick(null, PlayerKickEvent.Cause.KICK_COMMAND);
-		server.getPluginManager().assertEventFired(PlayerKickEvent.class);
+		server.getPluginManager().assertEventFired(PlayerKickEvent.class, event -> event.leaveMessage() == Component.empty());
 	}
+
 }

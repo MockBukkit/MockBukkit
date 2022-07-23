@@ -80,7 +80,6 @@ import org.bukkit.boss.BossBar;
 import org.bukkit.boss.KeyedBossBar;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
@@ -1146,20 +1145,22 @@ public class ServerMock extends Server.Spigot implements Server
 		return this.whitelistedPlayers;
 	}
 
-
+	@Override
 	public void reloadWhitelist()
 	{
 		//Pretend we load the Whitelist from Disk
-		if (isWhitelistEnforced && isWhitelistEnabled)
+		if (!isWhitelistEnforced && isWhitelistEnabled)
 		{
-			MockBukkit.getMock().getOnlinePlayers().forEach(p ->
-			{
-				if (!MockBukkit.getMock().getWhitelistedPlayers().contains(p))
-				{
-					p.kick();
-				}
-			});
+			return;
 		}
+
+		MockBukkit.getMock().getOnlinePlayers().forEach(p ->
+		{
+			if (!MockBukkit.getMock().getWhitelistedPlayers().contains(p))
+			{
+				p.kick();
+			}
+		});
 	}
 
 	@Override

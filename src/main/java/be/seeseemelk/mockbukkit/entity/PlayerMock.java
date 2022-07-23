@@ -127,6 +127,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 {
 
+	private final Component defaultKickComponent = Component.text("You are not whitelisted on this server!");
+
 	private @NotNull GameMode gamemode = GameMode.SURVIVAL;
 	private @NotNull GameMode previousGamemode = gamemode;
 
@@ -1076,8 +1078,8 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void kick()
 	{
-		Component defaultKickComponent = Component.text("You are not whitelisted on this server!");
-		kick(defaultKickComponent);
+
+		kick(this.defaultKickComponent);
 	}
 
 	@Override
