@@ -13,6 +13,7 @@ import org.bukkit.block.data.BlockData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -29,6 +30,28 @@ public class BlockDataMock implements BlockData
 		this.type = type;
 		this.data = new LinkedHashMap<>();
 	}
+
+	// region Type Checking
+	protected void checkType(@NotNull Material material, @NotNull Material... expected)
+	{
+		Preconditions.checkArgument(Arrays.stream(expected).anyMatch(m -> material == m), "Cannot create a " + getClass().getSimpleName() + " from " + material);
+	}
+
+	protected void checkType(@NotNull Block block, @NotNull Material... expected)
+	{
+		checkType(block.getType(), expected);
+	}
+
+	protected void checkType(@NotNull Material material, @NotNull Tag<Material> tag)
+	{
+		Preconditions.checkArgument(tag.isTagged(material), "Cannot create a " + getClass().getSimpleName() + " from " + material);
+	}
+
+	protected void checkType(@NotNull Block block, @NotNull Tag<Material> expected)
+	{
+		checkType(block.getType(), expected);
+	}
+	// endregion
 
 	protected <T> void set(@NotNull String key, T value)
 	{
