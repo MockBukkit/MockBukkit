@@ -1,7 +1,7 @@
 .. MockBukkit documentation master file, created by
-   sphinx-quickstart on Fri Apr 17 15:32:39 2020.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+sphinx-quickstart on Fri Apr 17 15:32:39 2020.
+You can adapt this file completely to your liking, but it should at least
+contain the root `toctree` directive.
 
 MockBukkit documentation!
 ======================================
@@ -15,7 +15,7 @@ testing of plugins that use timers or delays.
 .. toctree::
    :maxdepth: 2
    :caption: Contents
-   
+
    getting_started.rst
    first_tests.rst
    player_mock.rst
@@ -25,4 +25,3 @@ testing of plugins that use timers or delays.
    message_target.rst
    dependencies.rst
    custom_server_mock.rst
-

@@ -9,6 +9,7 @@ import org.bukkit.plugin.java.JavaPluginLoader;
 
 public class TestPlugin extends JavaPlugin
 {
+
 	private static TestPlugin plugin;
 
 	public TestPlugin()
@@ -39,42 +40,12 @@ public class TestPlugin extends JavaPlugin
 
 	/**
 	 * Gets the global test plugin.
+	 *
 	 * @return The global test plugin
 	 */
 	public static TestPlugin getPlugin()
 	{
 		return plugin;
 	}
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
