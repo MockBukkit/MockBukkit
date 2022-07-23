@@ -32,6 +32,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
 import org.bukkit.Effect;
 import org.bukkit.FluidCollisionMode;
+import org.bukkit.GameEvent;
 import org.bukkit.GameMode;
 import org.bukkit.GameRule;
 import org.bukkit.Instrument;
@@ -86,6 +87,7 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.event.player.PlayerToggleSprintEvent;
+import org.bukkit.event.world.GenericGameEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
@@ -254,6 +256,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 	/**
 	 * Simulates a Player consuming an Edible Item
+	 *
 	 * @param consumable The Item to consume
 	 */
 	public void simulateConsumeItem(@NotNull ItemStack consumable)
@@ -261,14 +264,43 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		Preconditions.checkNotNull(consumable, "Consumed Item can't be null");
 		Preconditions.checkArgument(consumable.getType().isEdible(), "Item is not Consumable");
 
+		//Since we have no Bukkit way of differentiating between drinks and food, here is a rough estimation of
+		//how it would sound like
+
+		//Drinks:Slurp Slurp Slurp
+		//Food: Yum Yum Yum
+
+		GenericGameEvent consumeStartEvent =
+				new GenericGameEvent(
+						GameEvent.ITEM_INTERACT_START,
+						this.getLocation(),
+						this,
+						16,
+						!Bukkit.isPrimaryThread());
+
+		Bukkit.getPluginManager().callEvent(consumeStartEvent);
+
 		PlayerItemConsumeEvent event = new PlayerItemConsumeEvent(this, consumable);
 		Bukkit.getPluginManager().callEvent(event);
+
+		if (event.isCancelled())
+		{
+			GenericGameEvent stopConsumeEvent =
+					new GenericGameEvent(
+							GameEvent.ITEM_INTERACT_FINISH,
+							this.getLocation(),
+							this,
+							16,
+							!Bukkit.isPrimaryThread());
+			Bukkit.getPluginManager().callEvent(stopConsumeEvent);
+		}
 
 		consumedItems.add(consumable);
 	}
 
 	/**
 	 * Asserts a Player has consumed the given Item
+	 *
 	 * @param consumable The Item to asserts has been consumed
 	 */
 	public void assertItemConsumed(@NotNull ItemStack consumable)
