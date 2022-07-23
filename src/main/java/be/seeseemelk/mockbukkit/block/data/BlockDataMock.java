@@ -66,7 +66,7 @@ public class BlockDataMock implements BlockData
 	{
 		Preconditions.checkNotNull(key, "Key cannot be null");
 		T value = (T) this.data.get(key);
-		Preconditions.checkNotNull(value, "Cannot get property " + key + " as it does not exist");
+		Preconditions.checkArgument(value != null, "Cannot get property " + key + " as it does not exist");
 		return value;
 	}
 
