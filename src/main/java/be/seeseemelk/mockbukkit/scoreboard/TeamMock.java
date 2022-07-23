@@ -28,16 +28,16 @@ public class TeamMock implements Team
 
 	private final String name;
 	private Component displayName;
-	private Component prefix = Component.empty();
-	private Component suffix = Component.empty();
-	private ChatColor color = ChatColor.RESET;
+	private @NotNull Component prefix = Component.empty();
+	private @NotNull Component suffix = Component.empty();
+	private @NotNull ChatColor color = ChatColor.RESET;
 	private boolean allowFriendlyFire = false;
 	private final @NotNull HashSet<String> entries;
 	private boolean canSeeFriendly = true;
 	private final EnumMap<Option, OptionStatus> options = new EnumMap<>(Option.class);
 	private @Nullable ScoreboardMock board;
 
-	public TeamMock(String name, ScoreboardMock board)
+	public TeamMock(@NotNull String name, ScoreboardMock board)
 	{
 		this.name = name;
 		this.displayName = Component.text(name);

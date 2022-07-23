@@ -1,7 +1,6 @@
 package be.seeseemelk.mockbukkit.inventory;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.block.state.BlastFurnaceMock;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -15,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class FurnaceInventoryMockTest
 {
 
-	private ServerMock server;
 	private FurnaceInventoryMock inventory;
 
 	private BlastFurnaceMock holder;
@@ -23,7 +21,7 @@ class FurnaceInventoryMockTest
 	@BeforeEach
 	void setUp()
 	{
-		server = MockBukkit.mock();
+		MockBukkit.mock();
 		inventory = new FurnaceInventoryMock(holder);
 	}
 
