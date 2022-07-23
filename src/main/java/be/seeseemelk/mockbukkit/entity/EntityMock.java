@@ -67,7 +67,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private boolean invulnerable;
 	private boolean glowingFlag = false;
 	private final Queue<Component> messages = new LinkedTransferQueue<>();
-	private final PermissibleBase perms = new PermissibleBase(this);
+	private final PermissibleBase perms;
 	private @NotNull Vector velocity = new Vector(0, 0, 0);
 	private float fallDistance;
 	private int fireTicks = -20;
@@ -82,6 +82,8 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 
 		this.server = server;
 		this.uuid = uuid;
+
+		this.perms = new PermissibleBase(this);
 
 		if (!Bukkit.getWorlds().isEmpty())
 			location = Bukkit.getWorlds().get(0).getSpawnLocation();
