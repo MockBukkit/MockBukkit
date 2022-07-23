@@ -42,7 +42,7 @@ public class AmethystClusterMock extends BlockDataMock implements AmethystCluste
 	@Override
 	public @NotNull Set<BlockFace> getFaces()
 	{
-		return ImmutableSet.of(BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST, BlockFace.UP, BlockFace.DOWN);
+		return Set.of(BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST, BlockFace.UP, BlockFace.DOWN);
 	}
 
 	@Override
