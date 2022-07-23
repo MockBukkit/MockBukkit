@@ -1,7 +1,6 @@
 package be.seeseemelk.mockbukkit.generator;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.WorldMock;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
@@ -16,12 +15,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class BiomeProviderMockTest
 {
 
-	private ServerMock server;
-
 	@BeforeEach
 	public void setUp()
 	{
-		server = MockBukkit.mock();
+		MockBukkit.mock();
 	}
 
 	@AfterEach

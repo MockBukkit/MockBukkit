@@ -14,14 +14,13 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 class LecternInventoryMockTest
 {
 
-	private ServerMock server;
 	private LecternInventoryMock inventory;
 	private LecternMock block;
 
 	@BeforeEach
 	void setup()
 	{
-		server = new ServerMock();
+		new ServerMock();
 		block = new LecternMock(Material.LECTERN);
 		inventory = new LecternInventoryMock(block);
 	}

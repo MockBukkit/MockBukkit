@@ -1,6 +1,5 @@
 package be.seeseemelk.mockbukkit.block.state;
 
-import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;

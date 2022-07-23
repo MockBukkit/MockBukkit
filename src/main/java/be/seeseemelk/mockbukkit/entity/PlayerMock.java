@@ -357,7 +357,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @param slot The slot in the player's open inventory
 	 * @return The event that was fired.
 	 */
-	public InventoryClickEvent simulateInventoryClick(int slot)
+	public @NotNull InventoryClickEvent simulateInventoryClick(int slot)
 	{
 		return simulateInventoryClick(getOpenInventory(), slot);
 	}
