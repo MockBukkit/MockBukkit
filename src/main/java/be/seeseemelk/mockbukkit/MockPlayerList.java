@@ -30,7 +30,7 @@ public class MockPlayerList
 
 	private int maxPlayers = Integer.MAX_VALUE;
 
-	private final Set<PlayerMock> onlinePlayers = new LinkedHashSet<>();
+	private final Set<PlayerMock> onlinePlayers = Collections.synchronizedSet(new LinkedHashSet<>());
 	private final Set<OfflinePlayer> offlinePlayers = Collections.synchronizedSet(new HashSet<>());
 
 	private final @NotNull BanList ipBans = new MockBanList();
