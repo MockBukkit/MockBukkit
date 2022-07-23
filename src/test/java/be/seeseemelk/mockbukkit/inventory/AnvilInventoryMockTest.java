@@ -1,7 +1,6 @@
 package be.seeseemelk.mockbukkit.inventory;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.ServerMock;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,13 +12,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class AnvilInventoryMockTest
 {
 
-	private ServerMock server;
 	private AnvilInventoryMock inventory;
 
 	@BeforeEach
 	void setUp()
 	{
-		this.server = MockBukkit.mock();
+		MockBukkit.mock();
 		this.inventory = new AnvilInventoryMock(null);
 	}
 

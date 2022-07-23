@@ -44,7 +44,7 @@ public class ListenerEntry
 		return listener;
 	}
 
-	public Method getMethod()
+	public @NotNull Method getMethod()
 	{
 		return method;
 	}

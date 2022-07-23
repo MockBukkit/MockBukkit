@@ -1,7 +1,6 @@
 package be.seeseemelk.mockbukkit.inventory;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.ServerMock;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.AfterEach;
@@ -13,16 +12,15 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class BrewerInventoryMockTest
+class BrewerInventoryMockTest
 {
 
-	private ServerMock server;
 	private BrewerInventoryMock inventory;
 
 	@BeforeEach
 	void setUp()
 	{
-		this.server = MockBukkit.mock();
+		MockBukkit.mock();
 		this.inventory = new BrewerInventoryMock(null);
 	}
 

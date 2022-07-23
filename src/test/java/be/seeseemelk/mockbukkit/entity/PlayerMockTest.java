@@ -15,6 +15,7 @@ import be.seeseemelk.mockbukkit.map.MapViewMock;
 import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
 import org.bukkit.Effect;
@@ -47,6 +48,7 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerExpChangeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -70,7 +72,6 @@ import org.bukkit.scoreboard.ScoreboardManager;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
@@ -1699,7 +1700,6 @@ class PlayerMockTest
 	}
 
 	@Test
-	@Disabled("Waiting for Player Handling to be fixed")
 	void testDisconnectWithPlayerOffline()
 	{
 		server.addPlayer(player);
@@ -1740,6 +1740,68 @@ class PlayerMockTest
 
 		assertEquals(loc, player.getLastDeathLocation());
 
+	}
+
+	@Test
+	void testIsWhiteListed()
+	{
+		server.getWhitelistedPlayers().add(player);
+		assertTrue(player.isWhitelisted());
+	}
+
+	@Test
+	void testSetWhiteListed()
+	{
+		player.setWhitelisted(true);
+		assertTrue(player.isWhitelisted());
+	}
+
+	@Test
+	void testIsBannedDefault()
+	{
+		assertFalse(player.isBanned());
+	}
+
+	@Test
+	void testIsBanned()
+	{
+		player.banPlayer("test");
+		assertTrue(player.isBanned());
+	}
+
+	@Test
+	void testReconnectWithWhiteListEnabled()
+	{
+		server.setWhitelist(true);
+
+		player.disconnect();
+		player.reconnect();
+		assertFalse(server.getOnlinePlayers().contains(player));
+	}
+
+	@Test
+	void testReconnectWithWhiteListEnabledAndPlayerWhiteListed()
+	{
+		server.setWhitelist(true);
+		player.setWhitelisted(true);
+		player.disconnect();
+		player.reconnect();
+		assertTrue(server.getOnlinePlayers().contains(player));
+	}
+
+	@Test
+	void testKickWithOfflinePlayer()
+	{
+		PlayerMock player = new PlayerMock(server, "testPlayer");
+		player.kick(Component.text("test"), PlayerKickEvent.Cause.KICK_COMMAND);
+		server.getPluginManager().assertEventNotFired(PlayerKickEvent.class);
+	}
+
+	@Test
+	void testKickWithNullMessage()
+	{
+		player.kick(null, PlayerKickEvent.Cause.KICK_COMMAND);
+		server.getPluginManager().assertEventFired(PlayerKickEvent.class, event -> event.leaveMessage() == Component.empty());
 	}
 
 }
