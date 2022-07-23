@@ -11,6 +11,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -29,7 +30,7 @@ public class MockPlayerList
 
 	private int maxPlayers = Integer.MAX_VALUE;
 
-	private final Set<PlayerMock> onlinePlayers = new HashSet<>();
+	private final Set<PlayerMock> onlinePlayers = new LinkedHashSet<>();
 	private final Set<OfflinePlayer> offlinePlayers = Collections.synchronizedSet(new HashSet<>());
 
 	private final @NotNull BanList ipBans = new MockBanList();
