@@ -162,27 +162,7 @@ public class MockPlayerList
 	@NotNull
 	public PlayerMock getPlayer(int num)
 	{
-		if (num < 0 || num >= this.onlinePlayers.size())
-		{
-			throw new ArrayIndexOutOfBoundsException();
-		}
-		else
-		{
-			PlayerMock player = null;
-
-			int i = 0;
-			for (PlayerMock p : this.onlinePlayers)
-			{
-				if (i == num)
-				{
-					player = p;
-					break;
-				}
-				i++;
-			}
-
-			return player;
-		}
+		return List.copyOf(this.onlinePlayers).get(num);
 	}
 
 	@NotNull
