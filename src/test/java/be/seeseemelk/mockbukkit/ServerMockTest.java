@@ -161,14 +161,14 @@ class ServerMockTest
 	void getPlayers_Negative_ArrayIndexOutOfBoundsException()
 	{
 		server.setPlayers(2);
-		assertThrows(ArrayIndexOutOfBoundsException.class, () -> server.getPlayer(-1));
+		assertThrows(IndexOutOfBoundsException.class, () -> server.getPlayer(-1));
 	}
 
 	@Test
 	void getPlayers_LargerThanNumberOfPlayers_ArrayIndexOutOfBoundsException()
 	{
 		server.setPlayers(2);
-		assertThrows(ArrayIndexOutOfBoundsException.class, () -> server.getPlayer(2));
+		assertThrows(IndexOutOfBoundsException.class, () -> server.getPlayer(2));
 	}
 
 	@Test
