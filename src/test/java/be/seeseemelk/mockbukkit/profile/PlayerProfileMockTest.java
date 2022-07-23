@@ -7,9 +7,12 @@ import com.destroystokyo.paper.profile.ProfileProperty;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -165,6 +168,27 @@ class PlayerProfileMockTest
 		profile.clearProperties();
 
 		assertEquals(0, profile.getProperties().size());
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "a4a7d8f6-c2df-4a0a-b12d-f0181dc85f61,Test,!?", ",Test,!?", "a4a7d8f6-c2df-4a0a-b12d-f0181dc85f61,,!?", "a4a7d8f6-c2df-4a0a-b12d-f0181dc85f61,Test," })
+	void serialize(String uuid, String name, String signature)
+	{
+		PlayerProfileMock profile = new PlayerProfileMock(name, uuid == null ? null : UUID.fromString(uuid));
+		profile.setProperty(new ProfileProperty("Key", "Value", signature));
+
+		Map<String, Object> ser = profile.serialize();
+
+		assertEquals(uuid, ser.get("uniqueId"));
+		assertEquals(name, ser.get("name"));
+		if (signature == null)
+		{
+			assertEquals("[{name=Key, value=Value}]", ser.get("properties").toString());
+		}
+		else
+		{
+			assertEquals("[{name=Key, value=Value, signature=" + signature + "}]", ser.get("properties").toString());
+		}
 	}
 
 	@Test

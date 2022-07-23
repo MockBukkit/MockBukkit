@@ -9,8 +9,11 @@ import org.bukkit.profile.PlayerTextures;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -180,8 +183,43 @@ public class PlayerProfileMock implements PlayerProfile
 	@Override
 	public @NotNull Map<String, Object> serialize()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Map<String, Object> map = new LinkedHashMap<>();
+		if (this.getId() != null)
+		{
+			map.put("uniqueId", this.getId().toString());
+		}
+		if (this.getName() != null)
+		{
+			map.put("name", getName());
+		}
+		if (!this.properties.isEmpty())
+		{
+			List<Object> propertiesData = new ArrayList<>();
+			for (ProfileProperty property : this.properties)
+			{
+				propertiesData.add(PlayerProfileMock.serialize(property));
+			}
+			map.put("properties", propertiesData);
+		}
+		return map;
+	}
+
+	/**
+	 * Serializes a specific ProfileProperty.
+	 *
+	 * @param property The property to serialize.
+	 * @return The serialized {@link ProfileProperty}.
+	 */
+	private static Map<String, Object> serialize(@NotNull ProfileProperty property)
+	{
+		Map<String, Object> map = new LinkedHashMap<>();
+		map.put("name", property.getName());
+		map.put("value", property.getValue());
+		if (property.isSigned())
+		{
+			map.put("signature", property.getSignature());
+		}
+		return map;
 	}
 
 	@Override
