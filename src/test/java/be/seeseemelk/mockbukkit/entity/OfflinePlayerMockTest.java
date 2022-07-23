@@ -10,6 +10,8 @@ import java.util.Map;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class OfflinePlayerMockTest
 {
@@ -36,6 +38,29 @@ class OfflinePlayerMockTest
 	{
 		Map<String, Object> serialized = player.serialize();
 		assertEquals(uuid.toString(), serialized.get("UUID").toString());
+	}
+
+	@Test
+	void testIsBanned()
+	{
+		assertFalse(player.isBanned());
+		player.banPlayer(null);
+		assertTrue(player.isBanned());
+	}
+
+	@Test
+	void testIsWhiteListed()
+	{
+		player.setWhitelisted(true);
+
+		assertTrue(player.isWhitelisted());
+	}
+
+	@Test
+	void setWhiteListed()
+	{
+		player.setWhitelisted(true);
+		assertTrue(player.isWhitelisted());
 	}
 
 }

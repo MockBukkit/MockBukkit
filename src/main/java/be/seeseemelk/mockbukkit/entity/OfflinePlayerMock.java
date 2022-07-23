@@ -4,6 +4,7 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
+import org.bukkit.BanList;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
@@ -93,22 +94,19 @@ public class OfflinePlayerMock implements OfflinePlayer
 	@Override
 	public boolean isBanned()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return MockBukkit.getMock().getBanList(BanList.Type.NAME).isBanned(getName());
 	}
 
 	@Override
 	public boolean isWhitelisted()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return MockBukkit.getMock().getWhitelistedPlayers().contains(this);
 	}
 
 	@Override
 	public void setWhitelisted(boolean value)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		MockBukkit.getMock().getWhitelistedPlayers().add(this);
 	}
 
 	@Override
