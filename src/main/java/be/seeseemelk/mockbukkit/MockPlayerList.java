@@ -15,8 +15,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import java.util.UUID;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -62,48 +60,48 @@ public class MockPlayerList
 
 	public void addPlayer(@NotNull PlayerMock player)
 	{
-		onlinePlayers.add(player);
-		offlinePlayers.add(player);
+		this.onlinePlayers.add(player);
+		this.offlinePlayers.add(player);
 	}
 
 	public void disconnectPlayer(@NotNull PlayerMock player)
 	{
-		onlinePlayers.remove(player);
+		this.onlinePlayers.remove(player);
 	}
 
 	public void addOfflinePlayer(@NotNull OfflinePlayer player)
 	{
-		offlinePlayers.add(player);
+		this.offlinePlayers.add(player);
 	}
 
 	@NotNull
 	public Set<OfflinePlayer> getOperators()
 	{
-		return Stream.concat(onlinePlayers.stream(), offlinePlayers.stream()).filter(OfflinePlayer::isOp)
+		return Stream.concat(this.onlinePlayers.stream(), this.offlinePlayers.stream()).filter(OfflinePlayer::isOp)
 				.collect(Collectors.toSet());
 	}
 
 	@NotNull
 	public Collection<PlayerMock> getOnlinePlayers()
 	{
-		return Collections.unmodifiableSet(onlinePlayers);
+		return Collections.unmodifiableSet(this.onlinePlayers);
 	}
 
 	@NotNull
 	public OfflinePlayer @NotNull [] getOfflinePlayers()
 	{
-		return offlinePlayers.toArray(new OfflinePlayer[0]);
+		return this.offlinePlayers.toArray(new OfflinePlayer[0]);
 	}
 
 	public boolean isSomeoneOnline()
 	{
-		return !onlinePlayers.isEmpty();
+		return !this.onlinePlayers.isEmpty();
 	}
 
 	@NotNull
 	public List<Player> matchPlayer(@NotNull String name)
 	{
-		return onlinePlayers.stream().filter(
+		return this.onlinePlayers.stream().filter(
 						player -> player.getName().toLowerCase(Locale.ENGLISH).startsWith(name.toLowerCase(Locale.ENGLISH)))
 				.collect(Collectors.toList());
 	}
@@ -111,7 +109,7 @@ public class MockPlayerList
 	@Nullable
 	public Player getPlayerExact(@NotNull String name)
 	{
-		return onlinePlayers.stream()
+		return this.onlinePlayers.stream()
 				.filter(player -> player.getName().toLowerCase(Locale.ENGLISH).equals(name.toLowerCase(Locale.ENGLISH)))
 				.findFirst().orElse(null);
 	}
@@ -129,7 +127,7 @@ public class MockPlayerList
 		final String lowercase = name.toLowerCase(Locale.ENGLISH);
 		int delta = Integer.MAX_VALUE;
 
-		for (Player namedPlayer : onlinePlayers)
+		for (Player namedPlayer : this.onlinePlayers)
 		{
 			if (namedPlayer.getName().toLowerCase(Locale.ENGLISH).startsWith(lowercase))
 			{
@@ -149,7 +147,7 @@ public class MockPlayerList
 	@Nullable
 	public Player getPlayer(@NotNull UUID id)
 	{
-		for (Player player : onlinePlayers)
+		for (Player player : this.onlinePlayers)
 		{
 			if (id.equals(player.getUniqueId()))
 			{
@@ -163,7 +161,7 @@ public class MockPlayerList
 	@NotNull
 	public PlayerMock getPlayer(int num)
 	{
-		if (num < 0 || num >= onlinePlayers.size())
+		if (num < 0 || num >= this.onlinePlayers.size())
 		{
 			throw new ArrayIndexOutOfBoundsException();
 		}
@@ -172,7 +170,7 @@ public class MockPlayerList
 			PlayerMock player = null;
 
 			int i = 0;
-			for (PlayerMock p : onlinePlayers)
+			for (PlayerMock p : this.onlinePlayers)
 			{
 				if (i == num)
 				{
@@ -196,7 +194,7 @@ public class MockPlayerList
 			return player;
 		}
 
-		for (OfflinePlayer offlinePlayer : offlinePlayers)
+		for (OfflinePlayer offlinePlayer : this.offlinePlayers)
 		{
 			if (offlinePlayer.getName().equals(name))
 			{
@@ -230,12 +228,12 @@ public class MockPlayerList
 
 	public void clearOnlinePlayers()
 	{
-		onlinePlayers.clear();
+		this.onlinePlayers.clear();
 	}
 
 	public void clearOfflinePlayers()
 	{
-		offlinePlayers.clear();
+		this.offlinePlayers.clear();
 	}
 
 }
