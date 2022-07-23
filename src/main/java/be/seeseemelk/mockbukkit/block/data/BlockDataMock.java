@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.block.data;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import com.destroystokyo.paper.MaterialTags;
 import com.google.common.base.Preconditions;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -53,19 +54,19 @@ public class BlockDataMock implements BlockData
 	}
 	// endregion
 
-	protected <T> void set(@NotNull String key, T value)
+	protected <T> void set(@NotNull String key, @NotNull T value)
 	{
+		Preconditions.checkNotNull(key, "Key cannot be null");
+		Preconditions.checkNotNull(value, "Value cannot be null");
 		this.data.put(key, value);
 	}
 
 	@SuppressWarnings("unchecked")
 	protected <T> @NotNull T get(@NotNull String key)
 	{
+		Preconditions.checkNotNull(key, "Key cannot be null");
 		T value = (T) this.data.get(key);
-		if (value == null)
-		{
-			throw new IllegalArgumentException("Cannot get property " + key + " as it does not exist.");
-		}
+		Preconditions.checkNotNull(value, "Cannot get property " + key + " as it does not exist");
 		return value;
 	}
 
@@ -80,10 +81,10 @@ public class BlockDataMock implements BlockData
 	{
 		StringBuilder stateString = new StringBuilder("minecraft:" + getMaterial().name().toLowerCase());
 
-		if (!data.isEmpty())
+		if (!this.data.isEmpty())
 		{
 			stateString.append('[');
-			stateString.append(data.entrySet().stream().map(entry -> entry.getKey() + "=" + entry.getValue().toString().toLowerCase()).collect(Collectors.joining(",")));
+			stateString.append(this.data.entrySet().stream().map(entry -> entry.getKey() + "=" + entry.getValue().toString().toLowerCase()).collect(Collectors.joining(",")));
 			stateString.append(']');
 		}
 
@@ -159,7 +160,7 @@ public class BlockDataMock implements BlockData
 	@Override
 	public int hashCode()
 	{
-		return type.hashCode() * this.data.hashCode();
+		return this.type.hashCode() * this.data.hashCode();
 	}
 
 	@Override
@@ -185,7 +186,7 @@ public class BlockDataMock implements BlockData
 	{
 		Preconditions.checkNotNull(material, "Material cannot be null");
 		// Special Cases
-		if (Tag.BEDS.isTagged(material))
+		if (MaterialTags.BEDS.isTagged(material))
 		{
 			return new BedMock(material);
 		}
