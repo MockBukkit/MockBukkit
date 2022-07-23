@@ -127,7 +127,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 {
 
-	private final Component defaultKickComponent = Component.text("You are not whitelisted on this server!");
+	private static final Component DEFAULT_KICK_COMPONENT = Component.text("You are not whitelisted on this server!");
 
 	private @NotNull GameMode gamemode = GameMode.SURVIVAL;
 	private @NotNull GameMode previousGamemode = gamemode;
@@ -466,7 +466,14 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void setWhitelisted(boolean value)
 	{
-		server.getWhitelistedPlayers().add(this);
+		if (value)
+		{
+			server.getWhitelistedPlayers().add(this);
+		}
+		else
+		{
+			server.getWhitelistedPlayers().remove(this);
+		}
 	}
 
 	@Override
@@ -1078,8 +1085,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void kick()
 	{
-
-		kick(this.defaultKickComponent);
+		kick(DEFAULT_KICK_COMPONENT);
 	}
 
 	@Override
@@ -1092,17 +1098,15 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public void kick(@Nullable Component message, PlayerKickEvent.@NotNull Cause cause)
 	{
 		AsyncCatcher.catchOp("player kick");
-		if (isOnline())
-		{
-			PlayerKickEvent event =
-					new PlayerKickEvent(this,
-							Component.text("Plugin"),
-							message == null ? net.kyori.adventure.text.Component.empty() : message,
-							cause);
+		if (!isOnline()) return;
+		PlayerKickEvent event =
+				new PlayerKickEvent(this,
+						Component.text("Plugin"),
+						message == null ? net.kyori.adventure.text.Component.empty() : message,
+						cause);
 
-			Bukkit.getPluginManager().callEvent(event);
-			server.getPlayerList().disconnectPlayer(this);
-		}
+		Bukkit.getPluginManager().callEvent(event);
+		server.getPlayerList().disconnectPlayer(this);
 	}
 
 	@Override
