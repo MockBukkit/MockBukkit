@@ -346,7 +346,7 @@ public class InventoryMock implements Inventory
 	}
 
 	@Override
-	public ItemStack[] getStorageContents()
+	public ItemStack @NotNull [] getStorageContents()
 	{
 		return getContents();
 	}

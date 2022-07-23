@@ -20,8 +20,7 @@ public class AmethystClusterMock extends BlockDataMock implements AmethystCluste
 	public AmethystClusterMock(@NotNull Material type)
 	{
 		super(type);
-		if (type != Material.AMETHYST_CLUSTER)
-			throw new IllegalArgumentException("Cannot create an AmethystClusterMock for " + type.name());
+		checkType(type, Material.AMETHYST_CLUSTER);
 		setFacing(BlockFace.NORTH);
 		setWaterlogged(false);
 	}
@@ -43,7 +42,7 @@ public class AmethystClusterMock extends BlockDataMock implements AmethystCluste
 	@Override
 	public @NotNull Set<BlockFace> getFaces()
 	{
-		return ImmutableSet.of(BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST, BlockFace.UP, BlockFace.DOWN);
+		return Set.of(BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST, BlockFace.UP, BlockFace.DOWN);
 	}
 
 	@Override

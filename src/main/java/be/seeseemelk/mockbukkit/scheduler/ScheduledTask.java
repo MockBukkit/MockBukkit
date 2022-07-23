@@ -84,7 +84,7 @@ public class ScheduledTask implements BukkitTask
 	 *
 	 * @return The task that will be run.
 	 */
-	public Runnable getRunnable()
+	public @Nullable Runnable getRunnable()
 	{
 		return this.runnable;
 	}
@@ -94,7 +94,7 @@ public class ScheduledTask implements BukkitTask
 	 *
 	 * @return The consumer that will be run.
 	 */
-	public Consumer<BukkitTask> getConsumer()
+	public @Nullable Consumer<BukkitTask> getConsumer()
 	{
 		return this.consumer;
 	}

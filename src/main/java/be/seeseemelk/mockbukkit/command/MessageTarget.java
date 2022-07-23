@@ -24,7 +24,7 @@ public interface MessageTarget
 	 *
 	 * @return The next message sent to the target.
 	 */
-	default String nextMessage()
+	default @Nullable String nextMessage()
 	{
 		Component comp = nextComponentMessage();
 		if (comp == null)

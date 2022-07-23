@@ -805,7 +805,6 @@ class ItemMetaMockTest
 	void removeAttribute_Slot_RemovesAllNoSlots()
 	{
 		ItemMetaMock meta = new ItemMetaMock();
-		Multimap<Attribute, AttributeModifier> modifiers = LinkedHashMultimap.create();
 		AttributeModifier modifier1 = new AttributeModifier("test_1", 1, AttributeModifier.Operation.ADD_NUMBER);
 		AttributeModifier modifier2 = new AttributeModifier("test_2", 1, AttributeModifier.Operation.ADD_NUMBER);
 		meta.addAttributeModifier(Attribute.GENERIC_ARMOR, modifier1);
@@ -820,7 +819,6 @@ class ItemMetaMockTest
 	void removeAttribute_SpecificModifier_Removes()
 	{
 		ItemMetaMock meta = new ItemMetaMock();
-		Multimap<Attribute, AttributeModifier> modifiers = LinkedHashMultimap.create();
 		AttributeModifier modifier1 = new AttributeModifier(UUID.randomUUID(), "test_1", 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HEAD);
 		AttributeModifier modifier2 = new AttributeModifier(UUID.randomUUID(), "test_2", 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.CHEST);
 		meta.addAttributeModifier(Attribute.GENERIC_ARMOR, modifier1);

@@ -36,6 +36,7 @@ public class EndermanMock extends MonsterMock implements Enderman
 	}
 
 	@Override
+	@Deprecated
 	public @NotNull MaterialData getCarriedMaterial()
 	{
 		checkHasBlock();
@@ -43,6 +44,7 @@ public class EndermanMock extends MonsterMock implements Enderman
 	}
 
 	@Override
+	@Deprecated
 	public void setCarriedMaterial(@NotNull MaterialData material)
 	{
 		Preconditions.checkNotNull(material, "MaterialData cannot be null");

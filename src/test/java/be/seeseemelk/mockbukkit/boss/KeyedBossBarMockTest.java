@@ -35,7 +35,6 @@ class KeyedBossBarMockTest
 	}
 
 	@Test
-	@SuppressWarnings("deprecation")
 	void testKeyedBossBar()
 	{
 		KeyedBossBar bar = server.createBossBar(new NamespacedKey("mockbukkittest", "bossbar1"), "Boss bar 1",

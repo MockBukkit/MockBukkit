@@ -14,10 +14,13 @@ import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
 import be.seeseemelk.mockbukkit.help.HelpMapMock;
 import be.seeseemelk.mockbukkit.inventory.AnvilInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.BarrelInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.BeaconInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.BrewerInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.CartographyInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.ChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.DispenserInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.DropperInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.EnchantingInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.FurnaceInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.GrindstoneInventoryMock;
@@ -39,6 +42,8 @@ import be.seeseemelk.mockbukkit.tags.TagRegistry;
 import be.seeseemelk.mockbukkit.tags.TagWrapperMock;
 import be.seeseemelk.mockbukkit.tags.TagsMock;
 import com.destroystokyo.paper.entity.ai.MobGoals;
+import com.destroystokyo.paper.event.player.PlayerConnectionCloseEvent;
+import com.destroystokyo.paper.event.server.WhitelistToggleEvent;
 import com.google.common.base.Preconditions;
 import io.papermc.paper.datapack.DatapackManager;
 import net.kyori.adventure.audience.Audience;
@@ -76,7 +81,6 @@ import org.bukkit.boss.BossBar;
 import org.bukkit.boss.KeyedBossBar;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
@@ -115,6 +119,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -157,9 +162,13 @@ public class ServerMock extends Server.Spigot implements Server
 	private int nextMapId = 1;
 
 	private GameMode defaultGameMode = GameMode.SURVIVAL;
-	private ConsoleCommandSender consoleSender;
+	private ConsoleCommandSenderMock consoleSender;
 	private int spawnRadius = 16;
 	private @NotNull WarningState warningState = WarningState.DEFAULT;
+
+	private boolean isWhitelistEnabled = false;
+	private boolean isWhitelistEnforced = false;
+	private final @NotNull Set<OfflinePlayer> whitelistedPlayers = new LinkedHashSet<>();
 
 	public ServerMock()
 	{
@@ -241,7 +250,6 @@ public class ServerMock extends Server.Spigot implements Server
 		AsyncPlayerPreLoginEvent preLoginEvent = new AsyncPlayerPreLoginEvent(player.getName(),
 				player.getAddress().getAddress(), player.getUniqueId());
 		getPluginManager().callEventAsynchronously(preLoginEvent, (e) -> conditionLatch.countDown());
-
 		try
 		{
 			conditionLatch.await();
@@ -258,6 +266,19 @@ public class ServerMock extends Server.Spigot implements Server
 
 		PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(player, joinMessage);
 		Bukkit.getPluginManager().callEvent(playerJoinEvent);
+
+		if (isWhitelistEnabled && !whitelistedPlayers.contains(player))
+		{
+			PlayerConnectionCloseEvent playerConnectionCloseEvent =
+					new PlayerConnectionCloseEvent(player.getUniqueId(),
+							player.getName(),
+							player.getAddress().getAddress(),
+							false);
+
+			getPluginManager().callEvent(playerConnectionCloseEvent);
+			playerList.disconnectPlayer(player);
+			return;
+		}
 
 		player.setLastPlayed(getCurrentServerTime());
 		registerEntity(player);
@@ -401,7 +422,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * @param args    The arguments to pass to the commands.
 	 * @return The value returned by {@link Command#execute}.
 	 */
-	public CommandResult executeConsole(@NotNull String command, String... args)
+	public @NotNull CommandResult executeConsole(@NotNull String command, String... args)
 	{
 		return executeConsole(getCommandMap().getCommand(command), args);
 	}
@@ -430,7 +451,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * @param args    The arguments to pass to the commands.
 	 * @return The value returned by {@link Command#execute}.
 	 */
-	public CommandResult executePlayer(@NotNull String command, String... args)
+	public @NotNull CommandResult executePlayer(@NotNull String command, String... args)
 	{
 		return executePlayer(getCommandMap().getCommand(command), args);
 	}
@@ -485,18 +506,16 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull String getBukkitVersion()
 	{
-		return getMinecraftVersion();
+		Preconditions.checkNotNull(this.buildProperties, "Failed to load build properties!");
+		String apiVersion = buildProperties.getProperty("full-api-version");
+		Preconditions.checkNotNull(apiVersion, "Failed to get full-api-version from the build properties!");
+		return apiVersion;
 	}
 
 	@Override
 	public @NotNull String getMinecraftVersion()
 	{
-		String apiVersion;
-		if (buildProperties == null || (apiVersion = buildProperties.getProperty("full-api-version")) == null)
-		{
-			throw new IllegalStateException("Minecraft version could not be determined");
-		}
-		return apiVersion.split("-")[0];
+		return this.getBukkitVersion().split("-")[0];
 	}
 
 	@Override
@@ -568,7 +587,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public @NotNull ConsoleCommandSender getConsoleSender()
+	public @NotNull ConsoleCommandSenderMock getConsoleSender()
 	{
 		if (consoleSender == null)
 		{
@@ -625,7 +644,7 @@ public class ServerMock extends Server.Spigot implements Server
 		case STONECUTTER:
 			// TODO: This Inventory Type needs to be implemented
 		case CARTOGRAPHY:
-			// TODO: This Inventory Type needs to be implemented
+			return new CartographyInventoryMock(owner);
 		case SMOKER, FURNACE, BLAST_FURNACE:
 			return new FurnaceInventoryMock(owner);
 		case LOOM:
@@ -635,19 +654,13 @@ public class ServerMock extends Server.Spigot implements Server
 		case SMITHING:
 			// TODO: This Inventory Type needs to be implemented
 		case BEACON:
-			// TODO: This Inventory Type needs to be implemented
+			return new BeaconInventoryMock(owner);
 		case WORKBENCH:
 			// TODO: This Inventory Type needs to be implemented
 		case ENCHANTING:
-			// TODO: This Inventory Type needs to be implemented
+			return new EnchantingInventoryMock(owner);
 		case BREWING:
 			return new BrewerInventoryMock(owner);
-		case CRAFTING:
-			// TODO: This Inventory Type needs to be implemented
-		case CREATIVE:
-			// TODO: This Inventory Type needs to be implemented
-		case MERCHANT:
-			// TODO: This Inventory Type needs to be implemented
 		default:
 			throw new UnimplementedOperationException("Inventory type not yet supported");
 		}
@@ -1105,43 +1118,51 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public boolean hasWhitelist()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.isWhitelistEnabled;
 	}
 
 	@Override
 	public void setWhitelist(boolean value)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.isWhitelistEnabled = value;
+		WhitelistToggleEvent event = new WhitelistToggleEvent(value);
+		this.getPluginManager().callEvent(event);
 	}
 
 	@Override
 	public boolean isWhitelistEnforced()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.isWhitelistEnforced;
 	}
 
 	@Override
 	public void setWhitelistEnforced(boolean value)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.isWhitelistEnforced = value;
 	}
 
 	@Override
 	public @NotNull Set<OfflinePlayer> getWhitelistedPlayers()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.whitelistedPlayers;
 	}
 
 	@Override
 	public void reloadWhitelist()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		//Pretend we load the Whitelist from Disk
+		if (!isWhitelistEnforced && isWhitelistEnabled)
+		{
+			return;
+		}
+
+		MockBukkit.getMock().getOnlinePlayers().forEach(p ->
+		{
+			if (!MockBukkit.getMock().getWhitelistedPlayers().contains(p))
+			{
+				p.kick();
+			}
+		});
 	}
 
 	@Override

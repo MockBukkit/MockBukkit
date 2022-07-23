@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.entity;
 
+import be.seeseemelk.mockbukkit.AsyncCatcher;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
@@ -16,6 +17,8 @@ import com.destroystokyo.paper.profile.PlayerProfile;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
 import io.papermc.paper.chat.ChatRenderer;
+import io.papermc.paper.entity.LookAnchor;
+import io.papermc.paper.entity.RelativeTeleportFlag;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -125,6 +128,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 {
 
+	private static final Component DEFAULT_KICK_COMPONENT = Component.text("You are not whitelisted on this server!");
+
 	private @NotNull GameMode gamemode = GameMode.SURVIVAL;
 	private @NotNull GameMode previousGamemode = gamemode;
 
@@ -141,8 +146,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private boolean sprinting = false;
 	private boolean allowFlight = false;
 	private boolean flying = false;
-	private boolean whitelisted = true;
-
 	private Location compassTarget;
 	private @Nullable Location bedSpawnLocation;
 	private long firstPlayed = 0;
@@ -231,6 +234,10 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		if (firstPlayed == 0)
 		{
 			throw new IllegalStateException("Player was never online");
+		}
+		if (server.hasWhitelist() && !server.getWhitelistedPlayers().contains(this))
+		{
+			return false;
 		}
 		if (online)
 		{
@@ -381,7 +388,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @param slot The slot in the player's open inventory
 	 * @return The event that was fired.
 	 */
-	public InventoryClickEvent simulateInventoryClick(int slot)
+	public @NotNull InventoryClickEvent simulateInventoryClick(int slot)
 	{
 		return simulateInventoryClick(getOpenInventory(), slot);
 	}
@@ -484,13 +491,20 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public boolean isWhitelisted()
 	{
-		return this.whitelisted;
+		return server.getWhitelistedPlayers().contains(this);
 	}
 
 	@Override
 	public void setWhitelisted(boolean value)
 	{
-		this.whitelisted = value;
+		if (value)
+		{
+			server.getWhitelistedPlayers().add(this);
+		}
+		else
+		{
+			server.getWhitelistedPlayers().remove(this);
+		}
 	}
 
 	@Override
@@ -1096,29 +1110,34 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Deprecated
 	public void kickPlayer(String message)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		kick(Component.text(message));
 	}
 
 	@Override
 	public void kick()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		kick(DEFAULT_KICK_COMPONENT);
 	}
 
 	@Override
 	public void kick(@Nullable Component message)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		kick(message, PlayerKickEvent.Cause.PLUGIN);
 	}
 
 	@Override
 	public void kick(@Nullable Component message, PlayerKickEvent.@NotNull Cause cause)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		AsyncCatcher.catchOp("player kick");
+		if (!isOnline()) return;
+		PlayerKickEvent event =
+				new PlayerKickEvent(this,
+						Component.text("Plugin"),
+						message == null ? net.kyori.adventure.text.Component.empty() : message,
+						cause);
+
+		Bukkit.getPluginManager().callEvent(event);
+		server.getPlayerList().disconnectPlayer(this);
 	}
 
 	@Override
@@ -2693,6 +2712,27 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean teleport(@NotNull Location location, PlayerTeleportEvent.@NotNull TeleportCause cause, boolean ignorePassengers, boolean dismount, @NotNull RelativeTeleportFlag @NotNull ... teleportFlags)
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void lookAt(double x, double y, double z, @NotNull LookAnchor playerAnchor)
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void lookAt(@NotNull Entity entity, @NotNull LookAnchor playerAnchor, @NotNull LookAnchor entityAnchor)
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

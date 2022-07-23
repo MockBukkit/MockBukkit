@@ -23,7 +23,7 @@ public class SkullMock extends TileStateMock implements Skull
 
 	private static final int MAX_OWNER_LENGTH = 16;
 
-	private PlayerProfileMock profile;
+	private @Nullable PlayerProfileMock profile;
 
 	public SkullMock(@NotNull Material material)
 	{
@@ -64,7 +64,8 @@ public class SkullMock extends TileStateMock implements Skull
 	@Override
 	public boolean setOwner(@Nullable String name)
 	{
-		if (name == null) {
+		if (name == null)
+		{
 			return false;
 		}
 		Preconditions.checkArgument(name.length() <= MAX_OWNER_LENGTH, "Name cannot be longer than " + MAX_OWNER_LENGTH + " characters.");
@@ -120,12 +121,14 @@ public class SkullMock extends TileStateMock implements Skull
 	}
 
 	@Override
+	@Deprecated
 	public org.bukkit.profile.@Nullable PlayerProfile getOwnerProfile()
 	{
 		return !this.hasOwner() ? null : this.profile;
 	}
 
 	@Override
+	@Deprecated
 	public void setOwnerProfile(org.bukkit.profile.@Nullable PlayerProfile profile)
 	{
 		if (profile == null)
@@ -161,6 +164,7 @@ public class SkullMock extends TileStateMock implements Skull
 	}
 
 	@Override
+	@Deprecated
 	public @NotNull SkullType getSkullType()
 	{
 		return switch (getType())
@@ -176,6 +180,7 @@ public class SkullMock extends TileStateMock implements Skull
 	}
 
 	@Override
+	@Deprecated
 	public void setSkullType(SkullType skullType)
 	{
 		throw new UnsupportedOperationException("Must change block type");

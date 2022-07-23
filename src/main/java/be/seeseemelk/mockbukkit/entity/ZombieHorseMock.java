@@ -16,6 +16,7 @@ public class ZombieHorseMock extends AbstractHorseMock implements ZombieHorse
 	}
 
 	@Override
+	@Deprecated
 	public Horse.@NotNull Variant getVariant()
 	{
 		return Horse.Variant.UNDEAD_HORSE;
