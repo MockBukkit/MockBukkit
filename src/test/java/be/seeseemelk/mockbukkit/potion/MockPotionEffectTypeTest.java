@@ -1,7 +1,6 @@
 package be.seeseemelk.mockbukkit.potion;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.ServerMock;
 import com.google.common.collect.ImmutableMap;
 import org.bukkit.Color;
 import org.bukkit.NamespacedKey;
@@ -19,12 +18,10 @@ import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 class MockPotionEffectTypeTest
 {
 
-	private ServerMock server;
-
 	@BeforeEach
 	public void setUp()
 	{
-		server = MockBukkit.mock();
+		MockBukkit.mock();
 	}
 
 	@AfterEach

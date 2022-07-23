@@ -1,9 +1,7 @@
 package be.seeseemelk.mockbukkit.inventory;
 
-import org.bukkit.entity.Item;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.BeaconInventory;
-import org.bukkit.inventory.BrewerInventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
