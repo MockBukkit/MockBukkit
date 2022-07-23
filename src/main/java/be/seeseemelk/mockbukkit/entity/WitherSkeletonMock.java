@@ -16,6 +16,7 @@ public class WitherSkeletonMock extends AbstractSkeletonMock implements WitherSk
 	}
 
 	@Override
+	@Deprecated
 	public Skeleton.@NotNull SkeletonType getSkeletonType()
 	{
 		return Skeleton.SkeletonType.WITHER;

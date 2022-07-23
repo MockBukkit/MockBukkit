@@ -2057,6 +2057,7 @@ public class WorldMock implements World
 	}
 
 	@Override
+	@Deprecated
 	public Location locateNearestStructure(Location origin, StructureType structureType, int radius,
 										   boolean findUnexplored)
 	{

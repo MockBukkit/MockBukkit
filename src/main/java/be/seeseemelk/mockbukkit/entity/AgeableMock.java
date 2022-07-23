@@ -86,7 +86,7 @@ public class AgeableMock extends CreatureMock implements Ageable
 	}
 
 	@Override
-	public String toString()
+	public @NotNull String toString()
 	{
 		return "AgeableMock";
 	}

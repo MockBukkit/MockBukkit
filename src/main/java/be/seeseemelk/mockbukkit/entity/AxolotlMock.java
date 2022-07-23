@@ -15,7 +15,7 @@ public class AxolotlMock extends AnimalsMock implements Axolotl
 {
 
 	private boolean isPlayingDead = false;
-	private Variant variant = Variant.LUCY;
+	private @NotNull Variant variant = Variant.LUCY;
 
 	private boolean fromBucket = false;
 

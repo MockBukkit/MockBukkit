@@ -54,7 +54,7 @@ class BlockDataMockTest
 		assertEquals(blockData2.hashCode(), blockData.hashCode());
 
 		blockData.set("key", "value");
-		assertNotEquals(blockData2.hashCode(),blockData.hashCode());
+		assertNotEquals(blockData2.hashCode(), blockData.hashCode());
 	}
 
 	@Test
