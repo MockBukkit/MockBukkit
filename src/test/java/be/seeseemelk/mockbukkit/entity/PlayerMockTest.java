@@ -39,11 +39,13 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityTeleportEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerExpChangeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
@@ -70,6 +72,7 @@ import org.bukkit.scoreboard.ScoreboardManager;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
@@ -1354,9 +1357,12 @@ class PlayerMockTest
 	@Test
 	void testPlayerTeleport_WithCause_EventFired()
 	{
-		player.teleport(player.getLocation().add(10, 10, 10), PlayerTeleportEvent.TeleportCause.CHORUS_FRUIT);
+		Location from = player.getLocation();
+		Location to = player.getLocation().add(10, 10, 10);
+		player.teleport(to, PlayerTeleportEvent.TeleportCause.CHORUS_FRUIT);
 
-		server.getPluginManager().assertEventFired(PlayerTeleportEvent.class);
+		server.getPluginManager().assertEventFired(PlayerTeleportEvent.class, event -> from.equals(event.getFrom()) && to.equals(event.getTo()));
+		server.getPluginManager().assertEventNotFired(EntityTeleportEvent.class);
 	}
 
 	@Test
@@ -1365,6 +1371,26 @@ class PlayerMockTest
 		player.teleport(player.getLocation().add(10, 10, 10));
 
 		server.getPluginManager().assertEventFired(PlayerTeleportEvent.class);
+		server.getPluginManager().assertEventNotFired(EntityTeleportEvent.class);
+	}
+
+	@Test
+	void testPlayerTeleport_ChangedWorldEvent()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		World from = player.getWorld();
+		Location to = new Location(new WorldMock(), 0, 80, 0);
+		server.getPluginManager().registerEvents(new Listener()
+		{
+			@EventHandler
+			public void onChangedWorld(@NotNull PlayerChangedWorldEvent event)
+			{
+				assertEquals(to, event.getPlayer().getLocation(), "The location should already have changed when the PlayerChangedWorldEvent is fired");
+			}
+		}, plugin);
+		player.teleport(to);
+		server.getPluginManager().assertEventFired(PlayerTeleportEvent.class);
+		server.getPluginManager().assertEventFired(PlayerChangedWorldEvent.class, event -> event.getFrom() == from);
 	}
 
 	@Test
@@ -1396,6 +1422,43 @@ class PlayerMockTest
 		player.assertNotTeleported();
 		player.assertLocation(originalLocation, 0);
 
+	}
+
+	@Test
+	void testTeleport_ChangeDestinationInEvent()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		Location changedTo = player.getLocation().set(60, 90, -150);
+		server.getPluginManager().registerEvents(new Listener()
+		{
+			@EventHandler
+			public void onPlayerTeleport(@NotNull PlayerTeleportEvent event)
+			{
+				event.setTo(new Location(event.getTo().getWorld(), 60, 90, -150));
+			}
+		}, plugin);
+		assertTrue(player.teleport(player.getLocation().add(0, 0, 20)));
+		assertEquals(changedTo, player.getLocation());
+	}
+
+	@Test
+	void testTeleport_CloseInventory()
+	{
+		Inventory inventory = Bukkit.createInventory(null, 9);
+		player.openInventory(inventory);
+		assertTrue(player.teleport(player.getLocation().add(8, 9, 10)));
+		assertEquals(InventoryType.CRAFTING, player.getOpenInventory().getType());
+		server.getPluginManager().assertEventFired(InventoryCloseEvent.class, e -> e.getReason() == InventoryCloseEvent.Reason.TELEPORT);
+	}
+
+	@Test
+	void testTeleport_DontCloseCraftingInventory()
+	{
+		ItemStack itemStack = new ItemStack(Material.DEEPSLATE);
+		player.getOpenInventory().setCursor(itemStack);
+		assertTrue(player.teleport(player.getLocation().add(0, 10, 0)));
+		assertEquals(itemStack, player.getOpenInventory().getCursor());
+		server.getPluginManager().assertEventNotFired(InventoryCloseEvent.class);
 	}
 
 	@Test
@@ -1627,6 +1690,24 @@ class PlayerMockTest
 
 		assertThrows(IllegalStateException.class, () -> player.reconnect());
 
+	}
+
+	@Test
+	void testReconnectWithPlayerOnline()
+	{
+		server.addPlayer(player);
+		assertFalse(player.reconnect());
+		assertTrue(server.getOnlinePlayers().contains(player));
+	}
+
+	@Test
+	@Disabled("Waiting for Player Handling to be fixed")
+	void testDisconnectWithPlayerOffline()
+	{
+		server.addPlayer(player);
+		assertTrue(player.disconnect());
+		assertFalse(player.disconnect());
+		assertFalse(server.getOnlinePlayers().contains(player));
 	}
 
 	@Test

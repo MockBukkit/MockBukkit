@@ -164,14 +164,14 @@ class ServerMockTest
 	void getPlayers_Negative_ArrayIndexOutOfBoundsException()
 	{
 		server.setPlayers(2);
-		assertThrows(ArrayIndexOutOfBoundsException.class, () -> server.getPlayer(-1));
+		assertThrows(IndexOutOfBoundsException.class, () -> server.getPlayer(-1));
 	}
 
 	@Test
 	void getPlayers_LargerThanNumberOfPlayers_ArrayIndexOutOfBoundsException()
 	{
 		server.setPlayers(2);
-		assertThrows(ArrayIndexOutOfBoundsException.class, () -> server.getPlayer(2));
+		assertThrows(IndexOutOfBoundsException.class, () -> server.getPlayer(2));
 	}
 
 	@Test
@@ -184,6 +184,24 @@ class ServerMockTest
 	void getBukkitVersion_NotNull()
 	{
 		assertNotNull(server.getBukkitVersion());
+	}
+
+	@Test
+	void getBukkitVersion_CorrectPattern()
+	{
+		assertTrue(server.getBukkitVersion().matches("1\\.[0-9]+(\\.[0-9]+)?-.*SNAPSHOT.*"));
+	}
+
+	@Test
+	void getMinecraftVersion_NotNull()
+	{
+		assertNotNull(server.getMinecraftVersion());
+	}
+
+	@Test
+	void getMinecraftVersion_CorrectPattern()
+	{
+		assertTrue(server.getMinecraftVersion().matches("1\\.[0-9]+(\\.[0-9]+)?"));
 	}
 
 	@Test

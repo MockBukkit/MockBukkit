@@ -17,6 +17,8 @@ import com.destroystokyo.paper.profile.PlayerProfile;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
 import io.papermc.paper.chat.ChatRenderer;
+import io.papermc.paper.entity.LookAnchor;
+import io.papermc.paper.entity.RelativeTeleportFlag;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -70,6 +72,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerKickEvent;
@@ -480,14 +483,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public boolean isBanned()
 	{
 		return MockBukkit.getMock().getBanList(BanList.Type.NAME).isBanned(getName());
-	}
-
-
-	@Override
-	public void closeInventory(InventoryCloseEvent.@NotNull Reason reason)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	/**
@@ -2683,6 +2678,27 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public boolean teleport(@NotNull Location location, PlayerTeleportEvent.@NotNull TeleportCause cause, boolean ignorePassengers, boolean dismount, @NotNull RelativeTeleportFlag @NotNull ... teleportFlags)
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void lookAt(double x, double y, double z, @NotNull LookAnchor playerAnchor)
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void lookAt(@NotNull Entity entity, @NotNull LookAnchor playerAnchor, @NotNull LookAnchor entityAnchor)
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
 	public void attack(@NotNull Entity target)
 	{
 		// TODO Auto-generated method stub
@@ -2753,17 +2769,36 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public boolean teleport(@NotNull Location location, @NotNull PlayerTeleportEvent.TeleportCause cause)
 	{
 		Preconditions.checkNotNull(location, "Location cannot be null");
+		Preconditions.checkNotNull(location.getWorld(), "World cannot be null");
 		Preconditions.checkNotNull(cause, "Cause cannot be null");
+		location.checkFinite();
+		if (isDead())
+		{
+			return false;
+		}
+		//todo: Add passenger logic: don't teleport if it's a vehicle / dismount from the current vehicle if it's a passenger
 
-		PlayerTeleportEvent playerTeleportEvent = new PlayerTeleportEvent(this, getLocation(), location, cause);
-		Bukkit.getPluginManager().callEvent(playerTeleportEvent);
-
-		if (playerTeleportEvent.isCancelled())
+		PlayerTeleportEvent event = new PlayerTeleportEvent(this, getLocation(), location, cause);
+		if (!event.callEvent())
 		{
 			return false;
 		}
 
-		return super.teleport(playerTeleportEvent.getTo(), cause);
+		// Close any foreign inventory
+		if (getOpenInventory().getType() != InventoryType.CRAFTING)
+		{
+			closeInventory(InventoryCloseEvent.Reason.TELEPORT);
+		}
+
+		World previousWorld = getWorld();
+		teleportWithoutEvent(event.getTo(), cause);
+
+		// Detect player dimension change
+		if (!location.getWorld().equals(previousWorld))
+		{
+			new PlayerChangedWorldEvent(this, previousWorld).callEvent();
+		}
+		return true;
 	}
 
 	@Override
