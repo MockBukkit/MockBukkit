@@ -43,6 +43,7 @@ import be.seeseemelk.mockbukkit.tags.TagWrapperMock;
 import be.seeseemelk.mockbukkit.tags.TagsMock;
 import com.destroystokyo.paper.entity.ai.MobGoals;
 import com.destroystokyo.paper.event.player.PlayerConnectionCloseEvent;
+import com.destroystokyo.paper.event.server.WhitelistToggleEvent;
 import com.google.common.base.Preconditions;
 import io.papermc.paper.datapack.DatapackManager;
 import net.kyori.adventure.audience.Audience;
@@ -1124,6 +1125,8 @@ public class ServerMock extends Server.Spigot implements Server
 	public void setWhitelist(boolean value)
 	{
 		this.isWhitelistEnabled = value;
+		WhitelistToggleEvent event = new WhitelistToggleEvent(value);
+		this.getPluginManager().callEvent(event);
 	}
 
 	@Override
