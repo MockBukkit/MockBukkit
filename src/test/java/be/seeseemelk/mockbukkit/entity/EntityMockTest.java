@@ -397,10 +397,10 @@ class EntityMockTest
 	@Test
 	void removeAttachment_RemovesAttachment()
 	{
-		PermissionAttachment att = entity.addAttachment(MockBukkit.createMockPlugin(), "test.permission", false);
-		assertFalse(entity.hasPermission("test.permission"));
-		entity.removeAttachment(att);
+		PermissionAttachment att = entity.addAttachment(MockBukkit.createMockPlugin(), "test.permission", true);
 		assertTrue(entity.hasPermission("test.permission"));
+		entity.removeAttachment(att);
+		assertFalse(entity.hasPermission("test.permission"));
 	}
 
 	@Test
@@ -446,7 +446,7 @@ class EntityMockTest
 	@Test
 	void hasPermission_String_NotSet_True()
 	{
-		assertTrue(entity.hasPermission("test.permission"));
+		assertFalse(entity.hasPermission("test.permission"));
 	}
 
 	@Test
@@ -466,7 +466,7 @@ class EntityMockTest
 	@Test
 	void hasPermission_Permission_NotSet_True()
 	{
-		assertTrue(entity.hasPermission(new Permission("test.permission")));
+		assertTrue(entity.hasPermission(new Permission("test.permission", PermissionDefault.TRUE)));
 	}
 
 	@Test
