@@ -16,9 +16,11 @@ import be.seeseemelk.mockbukkit.inventory.AnvilInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.BarrelInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.BeaconInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.BrewerInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.CartographyInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.ChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.DispenserInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.DropperInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.EnchantingInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.FurnaceInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.GrindstoneInventoryMock;
@@ -158,7 +160,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private int nextMapId = 1;
 
 	private GameMode defaultGameMode = GameMode.SURVIVAL;
-	private ConsoleCommandSender consoleSender;
+	private ConsoleCommandSenderMock consoleSender;
 	private int spawnRadius = 16;
 	private @NotNull WarningState warningState = WarningState.DEFAULT;
 
@@ -486,18 +488,16 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull String getBukkitVersion()
 	{
-		return getMinecraftVersion();
+		Preconditions.checkNotNull(this.buildProperties, "Failed to load build properties!");
+		String apiVersion = buildProperties.getProperty("full-api-version");
+		Preconditions.checkNotNull(apiVersion, "Failed to get full-api-version from the build properties!");
+		return apiVersion;
 	}
 
 	@Override
 	public @NotNull String getMinecraftVersion()
 	{
-		String apiVersion;
-		if (buildProperties == null || (apiVersion = buildProperties.getProperty("full-api-version")) == null)
-		{
-			throw new IllegalStateException("Minecraft version could not be determined");
-		}
-		return apiVersion.split("-")[0];
+		return this.getBukkitVersion().split("-")[0];
 	}
 
 	@Override
@@ -569,7 +569,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public @NotNull ConsoleCommandSender getConsoleSender()
+	public @NotNull ConsoleCommandSenderMock getConsoleSender()
 	{
 		if (consoleSender == null)
 		{
@@ -626,7 +626,7 @@ public class ServerMock extends Server.Spigot implements Server
 		case STONECUTTER:
 			// TODO: This Inventory Type needs to be implemented
 		case CARTOGRAPHY:
-			// TODO: This Inventory Type needs to be implemented
+			return new CartographyInventoryMock(owner);
 		case SMOKER, FURNACE, BLAST_FURNACE:
 			return new FurnaceInventoryMock(owner);
 		case LOOM:
@@ -640,15 +640,9 @@ public class ServerMock extends Server.Spigot implements Server
 		case WORKBENCH:
 			// TODO: This Inventory Type needs to be implemented
 		case ENCHANTING:
-			// TODO: This Inventory Type needs to be implemented
+			return new EnchantingInventoryMock(owner);
 		case BREWING:
 			return new BrewerInventoryMock(owner);
-		case CRAFTING:
-			// TODO: This Inventory Type needs to be implemented
-		case CREATIVE:
-			// TODO: This Inventory Type needs to be implemented
-		case MERCHANT:
-			// TODO: This Inventory Type needs to be implemented
 		default:
 			throw new UnimplementedOperationException("Inventory type not yet supported");
 		}
