@@ -33,6 +33,18 @@ class AmethystClusterMockTest
 	}
 
 	@Test
+	void constructor_Material()
+	{
+		assertDoesNotThrow(() -> new AmethystClusterMock(Material.AMETHYST_CLUSTER));
+	}
+
+	@Test
+	void constructor_Material_WrongType_ThrowsException()
+	{
+		assertThrowsExactly(IllegalArgumentException.class, () -> new AmethystClusterMock(Material.BEDROCK));
+	}
+
+	@Test
 	void setFacing_Valid()
 	{
 		for (BlockFace face : BlockFace.values())
@@ -77,12 +89,6 @@ class AmethystClusterMockTest
 	void blockDataMock_Mock_CorrectType()
 	{
 		assertInstanceOf(AmethystClusterMock.class, BlockDataMock.mock(Material.AMETHYST_CLUSTER));
-	}
-
-	@Test
-	void testConstructor_InvalidType()
-	{
-		assertThrowsExactly(IllegalArgumentException.class, () -> new AmethystClusterMock(Material.BARRIER));
 	}
 
 }
