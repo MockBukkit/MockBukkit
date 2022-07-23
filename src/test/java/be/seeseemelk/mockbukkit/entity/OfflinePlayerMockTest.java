@@ -51,7 +51,7 @@ class OfflinePlayerMockTest
 	@Test
 	void testIsWhiteListed()
 	{
-		server.getWhitelistedPlayers().add(player);
+		player.setWhitelisted(true);
 
 		assertTrue(player.isWhitelisted());
 	}
