@@ -4,7 +4,7 @@ root = true
 charset = utf-8
 end_of_line = lf
 indent_size = 4
-indent_style = space
+indent_style = tab
 insert_final_newline = true
 max_line_length = 120
 tab_width = 4
@@ -18,7 +18,6 @@ ij_visual_guides = none
 ij_wrap_on_typing = false
 
 [*.java]
-indent_style = tab
 ij_java_align_consecutive_assignments = false
 ij_java_align_consecutive_variable_declarations = false
 ij_java_align_group_field_declarations = false
