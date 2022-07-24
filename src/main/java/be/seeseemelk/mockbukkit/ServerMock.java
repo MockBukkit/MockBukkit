@@ -28,6 +28,7 @@ import be.seeseemelk.mockbukkit.inventory.HopperInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import be.seeseemelk.mockbukkit.inventory.ItemFactoryMock;
 import be.seeseemelk.mockbukkit.inventory.LecternInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.LoomInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.ShulkerBoxInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.StonecutterInventoryMock;
@@ -649,7 +650,7 @@ public class ServerMock extends Server.Spigot implements Server
 		case SMOKER, FURNACE, BLAST_FURNACE:
 			return new FurnaceInventoryMock(owner);
 		case LOOM:
-			// TODO: This Inventory Type needs to be implemented
+			return new LoomInventoryMock(owner);
 		case ANVIL:
 			return new AnvilInventoryMock(owner);
 		case SMITHING:
