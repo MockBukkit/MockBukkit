@@ -31,6 +31,7 @@ import be.seeseemelk.mockbukkit.inventory.LecternInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.LoomInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.ShulkerBoxInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.StonecutterInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
 import be.seeseemelk.mockbukkit.map.MapViewMock;
 import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
@@ -643,7 +644,7 @@ public class ServerMock extends Server.Spigot implements Server
 		case GRINDSTONE:
 			return new GrindstoneInventoryMock(owner);
 		case STONECUTTER:
-			// TODO: This Inventory Type needs to be implemented
+			return new StonecutterInventoryMock(owner);
 		case CARTOGRAPHY:
 			return new CartographyInventoryMock(owner);
 		case SMOKER, FURNACE, BLAST_FURNACE:
