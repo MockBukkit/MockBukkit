@@ -8,20 +8,20 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 
-public class StonecutterInventoryTest
+class StonecutterInventoryTest
 {
 
 	private StonecutterInventoryMock inventory;
 
 	@BeforeEach
-	void setUp() throws Exception
+	void setUp()
 	{
 		MockBukkit.mock();
 		inventory = new StonecutterInventoryMock(null);
 	}
 
 	@AfterEach
-	void tearDown() throws Exception
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
@@ -34,4 +34,5 @@ public class StonecutterInventoryTest
 		assertInstanceOf(StonecutterInventoryMock.class, snapshot);
 		assertNotSame(inventory, snapshot);
 	}
+
 }
