@@ -71,6 +71,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	private double absorptionAmount;
 	private int arrowCooldown;
 	private int arrowsInBody;
+	private Player killer;
 
 	private final Set<ActivePotionEffect> activeEffects = new HashSet<>();
 
@@ -416,15 +417,13 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public @Nullable Player getKiller()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.killer;
 	}
 
 	@Override
 	public void setKiller(@Nullable Player killer)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.killer = killer;
 	}
 
 	@Override
