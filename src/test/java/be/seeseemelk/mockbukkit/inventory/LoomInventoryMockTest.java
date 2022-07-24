@@ -14,14 +14,14 @@ class LoomInventoryMockTest
 	private LoomInventoryMock inventory;
 
 	@BeforeEach
-	void setUp() throws Exception
+	void setUp()
 	{
 		MockBukkit.mock();
 		inventory = new LoomInventoryMock(null);
 	}
 
 	@AfterEach
-	void tearDown() throws Exception
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
