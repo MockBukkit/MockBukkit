@@ -51,7 +51,7 @@ class SmithingInventoryMockTest
 
 		inventory.setResult(item);
 
-		assertEquals(item, inventory.getItem(1));
+		assertEquals(item, inventory.getItem(0));
 	}
 
 }
