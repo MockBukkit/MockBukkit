@@ -49,7 +49,8 @@ class LivingEntityMockTest
 	@Test
 	void testSetKillerNullDoesNotThrow()
 	{
-		assertDoesNotThrow(() -> livingEntity.setKiller(null));
+		livingEntity.setKiller(null);
+		assertNull(livingEntity.getKiller());
 	}
 
 }

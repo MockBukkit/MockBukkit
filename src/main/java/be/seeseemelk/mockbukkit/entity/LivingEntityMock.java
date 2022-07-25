@@ -71,7 +71,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	private double absorptionAmount;
 	private int arrowCooldown;
 	private int arrowsInBody;
-	private Player killer;
+	private @Nullable Player killer;
 
 	private final Set<ActivePotionEffect> activeEffects = new HashSet<>();
 
