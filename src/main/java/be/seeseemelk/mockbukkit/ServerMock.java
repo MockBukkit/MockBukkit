@@ -32,6 +32,7 @@ import be.seeseemelk.mockbukkit.inventory.LoomInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.ShulkerBoxInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.StonecutterInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.WorkbenchInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
 import be.seeseemelk.mockbukkit.map.MapViewMock;
 import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
@@ -658,7 +659,7 @@ public class ServerMock extends Server.Spigot implements Server
 		case BEACON:
 			return new BeaconInventoryMock(owner);
 		case WORKBENCH:
-			// TODO: This Inventory Type needs to be implemented
+			return new WorkbenchInventoryMock(owner);
 		case ENCHANTING:
 			return new EnchantingInventoryMock(owner);
 		case BREWING:
