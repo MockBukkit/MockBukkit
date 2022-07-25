@@ -48,10 +48,10 @@ class BrewerInventoryMockTest
 		inventory.setFuel(fuel);
 		inventory.setIngredient(ingredient);
 
-		InventoryMock snapshot = inventory.getSnapshot();
+		BrewerInventoryMock snapshot = inventory.getSnapshot();
 
-		assertEquals(ingredient, ((BrewerInventoryMock) snapshot).getIngredient());
-		assertEquals(fuel, ((BrewerInventoryMock) snapshot).getFuel());
+		assertEquals(ingredient, snapshot.getIngredient());
+		assertEquals(fuel, snapshot.getFuel());
 	}
 
 	@Test

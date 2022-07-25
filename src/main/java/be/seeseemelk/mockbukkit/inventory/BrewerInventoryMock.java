@@ -58,8 +58,8 @@ public class BrewerInventoryMock extends InventoryMock implements BrewerInventor
 	public @NotNull BrewerInventoryMock getSnapshot()
 	{
 		BrewerInventoryMock inventory = new BrewerInventoryMock(getHolder());
-		inventory.setIngredient(getFuel());
-		inventory.setFuel(getFuel());
+		inventory.setItem(INGREDIENT_SLOT, getItem(INGREDIENT_SLOT));
+		inventory.setItem(FUEL_SLOT, getItem(FUEL_SLOT));
 		return inventory;
 	}
 
