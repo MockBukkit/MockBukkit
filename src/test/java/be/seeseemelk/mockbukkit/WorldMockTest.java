@@ -6,6 +6,7 @@ import be.seeseemelk.mockbukkit.block.state.BlockStateMock;
 import be.seeseemelk.mockbukkit.entity.AllayMock;
 import be.seeseemelk.mockbukkit.entity.ArmorStandMock;
 import be.seeseemelk.mockbukkit.entity.AxolotlMock;
+import be.seeseemelk.mockbukkit.entity.BatMock;
 import be.seeseemelk.mockbukkit.entity.BlazeMock;
 import be.seeseemelk.mockbukkit.entity.CaveSpiderMock;
 import be.seeseemelk.mockbukkit.entity.ChickenMock;
@@ -1112,6 +1113,15 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.AXOLOTL);
 		assertInstanceOf(AxolotlMock.class, entity);
+		assertTrue(entity.isValid());
+	}
+
+	@Test
+	void testSpawnBat()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.BAT);
+		assertInstanceOf(BatMock.class, entity);
 		assertTrue(entity.isValid());
 	}
 
