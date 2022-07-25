@@ -502,7 +502,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull String getVersion()
 	{
-		return String.format("MockBukkit (MC: %s)", getBukkitVersion());
+		return String.format("MockBukkit (MC: %s)", getMinecraftVersion());
 	}
 
 	@Override
