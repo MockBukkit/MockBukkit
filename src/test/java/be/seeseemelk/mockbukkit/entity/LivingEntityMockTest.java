@@ -14,13 +14,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class LivingEntityMockTest
 {
 
-	private ServerMock server;
 	private CowMock livingEntity;
 
 	@BeforeEach
 	void setup()
 	{
-		server = MockBukkit.mock();
+		ServerMock server = MockBukkit.mock();
 		livingEntity = new CowMock(server, UUID.randomUUID());
 	}
 
