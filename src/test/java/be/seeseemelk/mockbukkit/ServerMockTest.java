@@ -857,6 +857,22 @@ class ServerMockTest
 		server.getPluginManager().assertEventFired(PlayerConnectionCloseEvent.class);
 	}
 
+	@Test
+	void testGetBannedPlayersDefault()
+	{
+		assertEquals(0, server.getBannedPlayers().size());
+	}
+
+	@Test
+	void testGetBannedPlayers()
+	{
+		PlayerMock player = server.addPlayer();
+		player.banPlayer("test");
+
+		assertEquals(1, server.getBannedPlayers().size());
+		assertTrue(server.getBannedPlayers().contains(player));
+	}
+
 }
 
 class TestRecipe implements Recipe
