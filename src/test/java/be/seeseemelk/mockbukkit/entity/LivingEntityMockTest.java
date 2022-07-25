@@ -8,6 +8,9 @@ import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
 
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -32,6 +35,19 @@ class LivingEntityMockTest
 	}
 
 	@Test
+	void testIsJumpingDefault()
+	{
+		assertFalse(livingEntity.isJumping());
+	}
+
+	@Test
+	void testSetJumping()
+	{
+	  livingEntity.setJumping(true);
+		assertTrue(livingEntity.isJumping());
+  }
+
+  @Test
 	void testGetKillerDefault()
 	{
 		assertNull(livingEntity.getKiller());

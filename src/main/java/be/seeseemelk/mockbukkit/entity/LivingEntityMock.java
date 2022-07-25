@@ -62,6 +62,8 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	private int remainingAirTicks = 300;
 	protected boolean alive = true;
 	private boolean gliding = false;
+	private boolean jumping = false;
+
 	protected Map<Attribute, AttributeInstanceMock> attributes;
 	private final EntityEquipment equipment = new EntityEquipmentMock(this);
 	private final Set<UUID> collidableExemptions = new HashSet<>();
@@ -872,15 +874,13 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public boolean isJumping()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.jumping;
 	}
 
 	@Override
 	public void setJumping(boolean jumping)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.jumping = jumping;
 	}
 
 	@Override
