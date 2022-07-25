@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 class SmithingInventoryMockTest
 {
 
-	SmithingInventoryMock inventory;
+	private SmithingInventoryMock inventory;
 
 	@BeforeEach
 	void setUp()
