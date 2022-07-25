@@ -94,4 +94,22 @@ class BrewerInventoryMockTest
 		assertEquals(ingredient, inventory.getIngredient());
 	}
 
+	@Test
+	void testSetFuel_SetsSlot() {
+		ItemStack fuel = new ItemStack(Material.BLAZE_POWDER);
+
+		inventory.setFuel(fuel);
+
+		assertEquals(fuel, inventory.getItem(4));
+	}
+
+	@Test
+	void testSetIngredient_SetsSlot() {
+		ItemStack fuel = new ItemStack(Material.BLAZE_POWDER);
+
+		inventory.setIngredient(fuel);
+
+		assertEquals(fuel, inventory.getItem(3));
+	}
+
 }

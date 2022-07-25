@@ -47,6 +47,17 @@ class BeaconInventoryMockTest
 	}
 
 	@Test
+	void testSetItem_SetsSlot()
+	{
+		ItemStack item = new ItemStack(Material.EMERALD);
+
+		inventory.setItem(item);
+
+		assertNotNull(inventory.getItem(0));
+		assertEquals(item, inventory.getItem(0));
+	}
+
+	@Test
 	void testSetItemNull()
 	{
 		assertDoesNotThrow(() -> inventory.setItem(null));
