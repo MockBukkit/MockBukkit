@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import org.bukkit.entity.Bat;
+import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
@@ -26,6 +27,12 @@ public class BatMock extends AmbientMock implements Bat
 	public void setAwake(boolean state)
 	{
 		this.awake = state;
+	}
+
+	@Override
+	public @NotNull EntityType getType()
+	{
+		return EntityType.BAT;
 	}
 
 }
