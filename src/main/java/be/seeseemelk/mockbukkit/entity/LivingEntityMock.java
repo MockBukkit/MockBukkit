@@ -76,6 +76,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	private @Nullable Player killer;
 
 	private final Set<ActivePotionEffect> activeEffects = new HashSet<>();
+	private boolean invisible = false;
 
 	protected LivingEntityMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -790,15 +791,13 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public void setInvisible(boolean invisible)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.invisible = invisible;
 	}
 
 	@Override
 	public boolean isInvisible()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.invisible;
 	}
 
 	@Override
