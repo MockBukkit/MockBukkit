@@ -8,12 +8,10 @@ import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
 
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class LivingEntityMockTest
 {
@@ -43,11 +41,11 @@ class LivingEntityMockTest
 	@Test
 	void testSetJumping()
 	{
-	  livingEntity.setJumping(true);
+		livingEntity.setJumping(true);
 		assertTrue(livingEntity.isJumping());
-  }
+	}
 
-  @Test
+	@Test
 	void testGetKillerDefault()
 	{
 		assertNull(livingEntity.getKiller());
@@ -67,6 +65,19 @@ class LivingEntityMockTest
 	{
 		livingEntity.setKiller(null);
 		assertNull(livingEntity.getKiller());
+	}
+
+	@Test
+	void testIsInvisibleDefault()
+	{
+		assertFalse(livingEntity.isInvisible());
+	}
+
+	@Test
+	void testSetInvisible()
+	{
+		livingEntity.setInvisible(true);
+		assertTrue(livingEntity.isInvisible());
 	}
 
 }
