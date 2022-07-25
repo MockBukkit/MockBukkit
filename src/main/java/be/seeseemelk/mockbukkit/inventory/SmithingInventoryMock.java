@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 public class SmithingInventoryMock extends InventoryMock implements SmithingInventory
 {
 
-	private @Nullable ItemStack result = null;
+	private static final int RESULT_SLOT = 0;
 
 	public SmithingInventoryMock(@Nullable InventoryHolder holder)
 	{
@@ -22,13 +22,13 @@ public class SmithingInventoryMock extends InventoryMock implements SmithingInve
 	@Override
 	public @Nullable ItemStack getResult()
 	{
-		return this.result;
+		return getItem(RESULT_SLOT);
 	}
 
 	@Override
-	public void setResult(@Nullable ItemStack newResult)
+	public void setResult(@Nullable ItemStack result)
 	{
-		this.result = newResult;
+		setItem(RESULT_SLOT, result);
 	}
 
 	@Override

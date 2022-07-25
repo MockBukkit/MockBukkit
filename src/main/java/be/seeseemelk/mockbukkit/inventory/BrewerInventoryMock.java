@@ -12,8 +12,8 @@ import org.jetbrains.annotations.Nullable;
 public class BrewerInventoryMock extends InventoryMock implements BrewerInventory
 {
 
-	private ItemStack ingredient;
-	private ItemStack fuel;
+	private static final int INGREDIENT_SLOT = 3;
+	private static final int FUEL_SLOT = 4;
 
 	public BrewerInventoryMock(InventoryHolder holder)
 	{
@@ -24,28 +24,28 @@ public class BrewerInventoryMock extends InventoryMock implements BrewerInventor
 	public @Nullable ItemStack getIngredient()
 	{
 		checkHasIngredient();
-		return this.ingredient;
+		return getItem(INGREDIENT_SLOT);
 	}
 
 	@Override
 	public void setIngredient(@Nullable ItemStack ingredient)
 	{
 		Preconditions.checkNotNull(ingredient, "Ingredient cannot be null");
-		this.ingredient = ingredient;
+		setItem(INGREDIENT_SLOT, ingredient);
 	}
 
 	@Override
 	public @Nullable ItemStack getFuel()
 	{
 		checkHasFuel();
-		return this.fuel;
+		return getItem(FUEL_SLOT);
 	}
 
 	@Override
 	public void setFuel(@Nullable ItemStack fuel)
 	{
 		Preconditions.checkNotNull(fuel, "Fuel cannot be null");
-		this.fuel = fuel;
+		setItem(FUEL_SLOT, fuel);
 	}
 
 	@Override
@@ -58,25 +58,19 @@ public class BrewerInventoryMock extends InventoryMock implements BrewerInventor
 	public @NotNull BrewerInventoryMock getSnapshot()
 	{
 		BrewerInventoryMock inventory = new BrewerInventoryMock(getHolder());
-		if (ingredient != null)
-		{
-			inventory.setIngredient(ingredient);
-		}
-		if (fuel != null)
-		{
-			inventory.setFuel(fuel);
-		}
+		inventory.setIngredient(getFuel());
+		inventory.setFuel(getFuel());
 		return inventory;
 	}
 
 	private void checkHasFuel()
 	{
-		Preconditions.checkState(this.fuel != null, "No fuel has been set");
+		Preconditions.checkState(getItem(FUEL_SLOT) != null, "No fuel has been set");
 	}
 
 	private void checkHasIngredient()
 	{
-		Preconditions.checkState(this.ingredient != null, "No ingredient has been set");
+		Preconditions.checkState(getItem(INGREDIENT_SLOT) != null, "No ingredient has been set");
 	}
 
 }
