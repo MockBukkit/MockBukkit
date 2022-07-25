@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class BatMockTest
 {
 
-	BatMock bat;
+	private BatMock bat;
 
 	@BeforeEach
 	void setup()
