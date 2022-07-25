@@ -182,6 +182,12 @@ class ServerMockTest
 	}
 
 	@Test
+	void getVersion_CorrectPattern()
+	{
+		assertTrue(server.getVersion().matches("MockBukkit \\(MC: (\\d)\\.(\\d+)\\.?(\\d+?)?\\)"));
+	}
+
+	@Test
 	void getBukkitVersion_NotNull()
 	{
 		assertNotNull(server.getBukkitVersion());
