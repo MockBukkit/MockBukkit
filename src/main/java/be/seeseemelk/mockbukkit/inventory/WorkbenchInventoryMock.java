@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.inventory;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import com.google.common.base.Preconditions;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.InventoryHolder;
@@ -9,11 +10,12 @@ import org.bukkit.inventory.Recipe;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
+
 public class WorkbenchInventoryMock extends InventoryMock implements CraftingInventory
 {
 
 	private @Nullable ItemStack result = null;
-	private @Nullable ItemStack[] matrix = null;
 
 	public WorkbenchInventoryMock(@Nullable InventoryHolder holder)
 	{
@@ -29,7 +31,7 @@ public class WorkbenchInventoryMock extends InventoryMock implements CraftingInv
 	@Override
 	public @Nullable ItemStack @NotNull [] getMatrix()
 	{
-		return this.matrix;
+		return this.getContents();
 	}
 
 	@Override
@@ -41,7 +43,8 @@ public class WorkbenchInventoryMock extends InventoryMock implements CraftingInv
 	@Override
 	public void setMatrix(@Nullable ItemStack @NotNull [] contents)
 	{
-		this.matrix = contents;
+		Preconditions.checkArgument(contents.length <= 9, "Matrix must be at most 9 items long");
+		super.setContents(contents);
 	}
 
 	@Override
