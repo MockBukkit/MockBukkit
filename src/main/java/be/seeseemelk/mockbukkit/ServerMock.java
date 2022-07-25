@@ -31,6 +31,7 @@ import be.seeseemelk.mockbukkit.inventory.LecternInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.LoomInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.ShulkerBoxInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.SmithingInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.StonecutterInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
 import be.seeseemelk.mockbukkit.map.MapViewMock;
@@ -654,7 +655,7 @@ public class ServerMock extends Server.Spigot implements Server
 		case ANVIL:
 			return new AnvilInventoryMock(owner);
 		case SMITHING:
-			// TODO: This Inventory Type needs to be implemented
+			return new SmithingInventoryMock(owner);
 		case BEACON:
 			return new BeaconInventoryMock(owner);
 		case WORKBENCH:
@@ -1355,8 +1356,11 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull Set<OfflinePlayer> getBannedPlayers()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getBanList(Type.NAME)
+				.getBanEntries()
+				.stream()
+				.map(banEntry -> getOfflinePlayer(banEntry.getTarget()))
+				.collect(Collectors.toSet());
 	}
 
 	@Override
