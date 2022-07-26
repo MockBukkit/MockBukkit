@@ -395,43 +395,36 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public boolean isPermissionSet(@NotNull String name)
 	{
-		Preconditions.checkNotNull(name, "Name cannot be null");
 		return this.perms.isPermissionSet(name);
 	}
 
 	@Override
 	public boolean isPermissionSet(@NotNull Permission perm)
 	{
-		Preconditions.checkNotNull(perm, "Permission cannot be null");
 		return this.perms.isPermissionSet(perm);
 	}
 
 	@Override
 	public boolean hasPermission(@NotNull String name)
 	{
-		Preconditions.checkNotNull(name, "Name cannot be null");
 		return this.perms.hasPermission(name);
 	}
 
 	@Override
 	public boolean hasPermission(@NotNull Permission perm)
 	{
-		Preconditions.checkNotNull(perm, "Permission cannot be null");
 		return this.perms.hasPermission(perm);
 	}
 
 	@Override
 	public @NotNull PermissionAttachment addAttachment(@NotNull Plugin plugin, @NotNull String name, boolean value)
 	{
-		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
-		Preconditions.checkNotNull(name, "Name cannot be null");
 		return this.perms.addAttachment(plugin, name, value);
 	}
 
 	@Override
 	public @NotNull PermissionAttachment addAttachment(@NotNull Plugin plugin)
 	{
-		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
 		return this.perms.addAttachment(plugin);
 	}
 
@@ -450,7 +443,6 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public void removeAttachment(@NotNull PermissionAttachment attachment)
 	{
-		Preconditions.checkNotNull(attachment, "Attachment cannot be null");
 		this.perms.removeAttachment(attachment);
 	}
 
