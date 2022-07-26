@@ -35,6 +35,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
@@ -47,6 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -698,6 +700,54 @@ class EntityMockTest
 		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
 		zombie.registerAttribute(Attribute.HORSE_JUMP_STRENGTH);
 		assertEquals(0.7, zombie.getAttribute(Attribute.HORSE_JUMP_STRENGTH).getValue());
+	}
+
+	@Test
+	void addPassenger()
+	{
+		SimpleEntityMock mock = new SimpleEntityMock(server);
+		assertTrue(entity.addPassenger(mock));
+		assertFalse(entity.addPassenger(mock));
+		assertEquals(List.of(mock), entity.getPassengers());
+		assertFalse(entity.isEmpty());
+	}
+
+	@Test
+	void addPassenger_self()
+	{
+		assertThrows(IllegalArgumentException.class, () -> entity.addPassenger(entity));
+	}
+
+	@Test
+	void getPassenger()
+	{
+		SimpleEntityMock mock = new SimpleEntityMock(server);
+		assertNull(entity.getPassenger());
+		entity.setPassenger(mock);
+		assertSame(mock, entity.getPassenger());
+	}
+
+	@Test
+	void removePassenger()
+	{
+		SimpleEntityMock mock = new SimpleEntityMock(server);
+		entity.addPassenger(mock);
+		assertTrue(entity.removePassenger(mock));
+		assertTrue(entity.removePassenger(mock));
+		assertEquals(List.of(), entity.getPassengers());
+		assertTrue(entity.isEmpty());
+	}
+
+	@Test
+	void eject()
+	{
+		assertFalse(entity.eject());
+		for (int i = 0; i < 3; i++)
+		{
+			entity.addPassenger(new SimpleEntityMock(server));
+		}
+		assertTrue(entity.eject());
+		assertTrue(entity.isEmpty());
 	}
 
 }

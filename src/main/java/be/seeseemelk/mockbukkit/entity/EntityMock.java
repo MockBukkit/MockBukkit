@@ -40,6 +40,8 @@ import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -61,6 +63,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private Location location;
 	private boolean teleported;
 	private TeleportCause teleportCause;
+	private final List<Entity> passengers = new ArrayList<>(0);
 	private final MetadataTable metadataTable = new MetadataTable();
 	private final PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
 	private boolean operator = false;
@@ -683,51 +686,58 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Deprecated
 	public Entity getPassenger()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return isEmpty() ? null : this.passengers.get(0);
 	}
 
 	@Override
 	@Deprecated
 	public boolean setPassenger(@NotNull Entity passenger)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		eject(); // Make sure there is only one passenger
+		return addPassenger(passenger);
 	}
 
 	@Override
 	public @NotNull List<Entity> getPassengers()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return Collections.unmodifiableList(this.passengers);
 	}
 
 	@Override
 	public boolean addPassenger(@NotNull Entity passenger)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(passenger, "Passenger cannot be null.");
+		Preconditions.checkArgument(!equals(passenger), "Entity cannot ride itself.");
+		if (this.passengers.contains(passenger))
+		{
+			return false;
+		}
+		return this.passengers.add(passenger);
 	}
 
 	@Override
 	public boolean removePassenger(@NotNull Entity passenger)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(passenger, "Passenger cannot be null.");
+		this.passengers.remove(passenger);
+		return true;
 	}
 
 	@Override
 	public boolean isEmpty()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return this.passengers.isEmpty();
 	}
 
 	@Override
 	public boolean eject()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		if (isEmpty())
+		{
+			return false;
+		}
+		this.passengers.clear();
+		return true;
 	}
 
 	@Override
