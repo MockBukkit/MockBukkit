@@ -4,10 +4,11 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 class WorkbenchInventoryMockTest
@@ -39,13 +40,13 @@ class WorkbenchInventoryMockTest
 	{
 		ItemStack item = new ItemStack(Material.OAK_BOAT);
 		workbench.setResult(item);
-		Assertions.assertEquals(item, workbench.getResult());
+		assertEquals(item, workbench.getResult());
 	}
 
 	@Test
 	void testGetMatrixDefault()
 	{
-		assertNull(workbench.getMatrix());
+		assertNotNull(workbench.getMatrix());
 	}
 
 	@Test
@@ -54,7 +55,7 @@ class WorkbenchInventoryMockTest
 		ItemStack[] matrix = new ItemStack[9];
 		matrix[0] = new ItemStack(Material.OAK_BOAT);
 		workbench.setMatrix(matrix);
-		Assertions.assertEquals(matrix, workbench.getMatrix());
+		assertEquals(matrix, workbench.getMatrix());
 	}
 
 }
