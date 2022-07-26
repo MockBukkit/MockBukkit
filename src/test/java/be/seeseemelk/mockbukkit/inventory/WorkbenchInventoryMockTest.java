@@ -7,6 +7,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -52,10 +53,10 @@ class WorkbenchInventoryMockTest
 	@Test
 	void testSetMatrix()
 	{
-		ItemStack[] matrix = new ItemStack[9];
+		ItemStack[] matrix = new ItemStack[10];
 		matrix[0] = new ItemStack(Material.OAK_BOAT);
 		workbench.setMatrix(matrix);
-		assertEquals(matrix, workbench.getMatrix());
+		assertArrayEquals(matrix, workbench.getMatrix());
 	}
 
 }
