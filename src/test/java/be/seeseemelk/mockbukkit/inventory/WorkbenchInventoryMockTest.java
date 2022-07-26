@@ -54,9 +54,22 @@ class WorkbenchInventoryMockTest
 	void testSetMatrix()
 	{
 		ItemStack[] matrix = new ItemStack[10];
-		matrix[0] = new ItemStack(Material.OAK_BOAT);
+		matrix[4] = new ItemStack(Material.OAK_BOAT);
+
 		workbench.setMatrix(matrix);
+
 		assertArrayEquals(matrix, workbench.getMatrix());
+	}
+
+	@Test
+	void testSetMatrix_SetsItems()
+	{
+		ItemStack[] matrix = new ItemStack[10];
+		matrix[4] = new ItemStack(Material.OAK_BOAT);
+
+		workbench.setMatrix(matrix);
+
+		assertArrayEquals(matrix, workbench.getContents());
 	}
 
 }
