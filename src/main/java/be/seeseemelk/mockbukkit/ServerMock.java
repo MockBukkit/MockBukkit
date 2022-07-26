@@ -1357,8 +1357,11 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull Set<OfflinePlayer> getBannedPlayers()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getBanList(Type.NAME)
+				.getBanEntries()
+				.stream()
+				.map(banEntry -> getOfflinePlayer(banEntry.getTarget()))
+				.collect(Collectors.toSet());
 	}
 
 	@Override
