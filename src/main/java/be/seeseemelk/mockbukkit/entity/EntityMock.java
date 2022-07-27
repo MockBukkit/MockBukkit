@@ -744,7 +744,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	public boolean removePassenger(@NotNull Entity passenger)
 	{
 		Preconditions.checkNotNull(passenger, "Passenger cannot be null.");
-		passenger.leaveVehicle();
+		passenger.leaveVehicle(); // Only the passenger is used by the CraftBukkit implementation
 		return true;
 	}
 
