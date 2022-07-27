@@ -34,6 +34,8 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.spigotmc.event.entity.EntityDismountEvent;
+import org.spigotmc.event.entity.EntityMountEvent;
 
 import java.util.List;
 import java.util.Optional;
@@ -707,6 +709,8 @@ class EntityMockTest
 	{
 		SimpleEntityMock mock = new SimpleEntityMock(server);
 		assertTrue(entity.addPassenger(mock));
+		server.getPluginManager().assertEventFired(EntityMountEvent.class, event -> event.getMount() == entity && event.getEntity() == mock);
+
 		assertFalse(entity.addPassenger(mock), "The passenger should not be added a second time");
 		assertEquals(List.of(mock), entity.getPassengers(), "There should be only one passenger");
 		assertSame(entity, mock.getVehicle(), "The rider should known the vehicle");
@@ -714,13 +718,25 @@ class EntityMockTest
 	}
 
 	@Test
-	void addPassenger_self()
+	void addPassenger_DifferentWorld()
+	{
+		SimpleEntityMock mock = new SimpleEntityMock(server);
+		Location loc = mock.getLocation();
+		loc.setWorld(new WorldMock());
+		mock.teleport(loc);
+
+		assertFalse(entity.addPassenger(mock));
+		assertTrue(entity.isEmpty());
+	}
+
+	@Test
+	void addPassenger_Self()
 	{
 		assertThrows(IllegalArgumentException.class, () -> entity.addPassenger(entity), "The entity should not be able to ride itself");
 	}
 
 	@Test
-	void addPassenger_stack()
+	void addPassenger_Stack()
 	{
 		EntityMock[] mocks = new EntityMock[3];
 		for (int i = 0; i < mocks.length; i++)
@@ -737,7 +753,7 @@ class EntityMockTest
 	}
 
 	@Test
-	void addPassenger_preventCircularRiding()
+	void addPassenger_PreventCircularRiding()
 	{
 		EntityMock a = new SimpleEntityMock(server);
 		EntityMock b = new SimpleEntityMock(server);
@@ -746,6 +762,23 @@ class EntityMockTest
 		// b rides a which rides entity
 		assertFalse(a.addPassenger(entity), "An entity shouldn't be the vehicle it currently rides");
 		assertFalse(b.addPassenger(entity));
+	}
+
+	@Test
+	void addPassenger_CancelMountEvent()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		EntityMock mock = new SimpleEntityMock(server);
+		server.getPluginManager().registerEvents(new Listener()
+		{
+			@EventHandler
+			public void onMount(@NotNull EntityMountEvent event)
+			{
+				event.setCancelled(true);
+			}
+		}, plugin);
+		assertFalse(entity.addPassenger(mock));
+		assertTrue(entity.isEmpty());
 	}
 
 	@Test
@@ -763,6 +796,8 @@ class EntityMockTest
 		SimpleEntityMock mock = new SimpleEntityMock(server);
 		entity.addPassenger(mock);
 		assertTrue(entity.removePassenger(mock));
+		server.getPluginManager().assertEventFired(EntityDismountEvent.class, event -> event.getDismounted() == entity && event.getEntity() == mock);
+
 		assertTrue(entity.removePassenger(mock), "The method should always return true, even if it was not a passenger");
 		assertEquals(List.of(), entity.getPassengers());
 		assertNull(mock.getVehicle(), "The vehicle should no longer be referenced");
@@ -770,14 +805,33 @@ class EntityMockTest
 	}
 
 	@Test
-	void removePassenger_notSelf()
+	void removePassenger_NotSelf()
 	{
 		SimpleEntityMock a = new SimpleEntityMock(server);
 		SimpleEntityMock b = new SimpleEntityMock(server);
 		a.addPassenger(b);
 		entity.removePassenger(b);
+		server.getPluginManager().assertEventFired(EntityDismountEvent.class, event -> event.getDismounted() == a && event.getEntity() == b);
 		assertNull(b.getVehicle(), "b should not longer have a vehicle");
 		assertTrue(a.isEmpty(), "a should not longer have a passenger");
+	}
+
+	@Test
+	void removePassenger_CancelDismountEvent()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		EntityMock mock = new SimpleEntityMock(server);
+		entity.addPassenger(mock);
+		server.getPluginManager().registerEvents(new Listener()
+		{
+			@EventHandler
+			public void onMount(@NotNull EntityDismountEvent event)
+			{
+				event.setCancelled(true);
+			}
+		}, plugin);
+		assertTrue(entity.removePassenger(mock));
+		assertFalse(entity.isEmpty());
 	}
 
 	@Test
