@@ -299,7 +299,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 			// Don't allow teleporting between worlds while keeping passengers
 			// and if remaining on vehicle.
 			if ((ignorePassengers && hasPassengers())
-					|| (!dismount && this.vehicle != null))
+					|| (!dismount && isInsideVehicle()))
 			{
 				return false;
 			}

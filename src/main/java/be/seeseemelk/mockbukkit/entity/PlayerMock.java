@@ -2850,7 +2850,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 			// Don't allow teleporting between worlds while keeping passengers
 			// and if remaining on vehicle.
 			if ((ignorePassengers && hasPassengers())
-					|| (!dismount && getVehicle() != null))
+					|| (!dismount && isInsideVehicle()))
 			{
 				return false;
 			}
