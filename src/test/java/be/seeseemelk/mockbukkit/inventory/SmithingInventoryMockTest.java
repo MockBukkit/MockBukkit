@@ -1,14 +1,13 @@
 package be.seeseemelk.mockbukkit.inventory;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.ServerMock;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 class SmithingInventoryMockTest
@@ -39,8 +38,20 @@ class SmithingInventoryMockTest
 	void testSetResult()
 	{
 		ItemStack item = new ItemStack(Material.OAK_BOAT);
+
 		inventory.setResult(item);
-		Assertions.assertEquals(item, inventory.getResult());
+
+		assertEquals(item, inventory.getResult());
+	}
+
+	@Test
+	void testSetResult_SetsItemInSlot()
+	{
+		ItemStack item = new ItemStack(Material.OAK_BOAT);
+
+		inventory.setResult(item);
+
+		assertEquals(item, inventory.getItem(0));
 	}
 
 }
