@@ -282,13 +282,33 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public boolean teleport(@NotNull Location location, @NotNull TeleportCause cause)
 	{
+		return teleport(location, cause, false);
+	}
+
+	@Override
+	public boolean teleport(@NotNull Location location, @NotNull TeleportCause cause, boolean ignorePassengers, boolean dismount)
+	{
 		Preconditions.checkNotNull(location, "Location cannot be null"); // The world can be null if it's not a player
 		location.checkFinite();
-		if (this.removed)
+		if (this.removed || (!ignorePassengers && hasPassengers()))
 		{
 			return false;
 		}
-		//todo: Add passenger logic: don't teleport if it's a vehicle / dismount from the current vehicle if it's a passenger
+		if (location.getWorld() != getWorld())
+		{
+			// Don't allow teleporting between worlds while keeping passengers
+			// and if remaining on vehicle.
+			if ((ignorePassengers && hasPassengers())
+					|| (!dismount && this.vehicle != null))
+			{
+				return false;
+			}
+		}
+		if (dismount)
+		{
+			leaveVehicle();
+		}
+
 		EntityTeleportEvent event = new EntityTeleportEvent(this, getLocation(), location);
 		if (event.callEvent())
 		{
@@ -754,6 +774,18 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		return this.passengers.isEmpty();
 	}
 
+	/**
+	 * Check if the entity has passengers.
+	 * <p>
+	 * Convenience method for {@link #isEmpty()}.
+	 *
+	 * @return {@code true} if there is at least one passenger.
+	 */
+	public boolean hasPassengers()
+	{
+		return !isEmpty();
+	}
+
 	@Override
 	public boolean eject()
 	{
@@ -1001,13 +1033,6 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean teleport(@NotNull Location location, @NotNull TeleportCause cause, boolean ignorePassengers, boolean dismount)
-	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
 	}
 
 	@Override

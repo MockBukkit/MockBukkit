@@ -198,6 +198,27 @@ class EntityMockTest
 	}
 
 	@Test
+	void teleport_Vehicle()
+	{
+		EntityMock mock = new SimpleEntityMock(server);
+		entity.addPassenger(mock);
+		Location from = entity.getLocation();
+		Location to = entity.getLocation().add(0, 1.5, 0);
+		assertFalse(entity.teleport(to));
+		assertEquals(from, entity.getLocation());
+	}
+
+	@Test
+	void teleport_Passenger()
+	{
+		EntityMock mock = new SimpleEntityMock(server);
+		mock.addPassenger(entity);
+		Location to = entity.getLocation().add(0, 1.5, 0);
+		assertTrue(entity.teleport(to));
+		assertEquals(to, entity.getLocation());
+	}
+
+	@Test
 	void teleport_CancelEvent()
 	{
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
