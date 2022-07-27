@@ -21,13 +21,17 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Pose;
 import org.bukkit.entity.SpawnCategory;
+import org.bukkit.entity.Vehicle;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityTeleportEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
+import org.bukkit.event.vehicle.VehicleEnterEvent;
+import org.bukkit.event.vehicle.VehicleExitEvent;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
@@ -39,6 +43,8 @@ import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.spigotmc.event.entity.EntityDismountEvent;
+import org.spigotmc.event.entity.EntityMountEvent;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -63,6 +69,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private Location location;
 	private boolean teleported;
 	private TeleportCause teleportCause;
+	private @Nullable EntityMock vehicle;
 	private final List<Entity> passengers = new ArrayList<>(0);
 	private final MetadataTable metadataTable = new MetadataTable();
 	private final PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
@@ -708,18 +715,36 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	{
 		Preconditions.checkNotNull(passenger, "Passenger cannot be null.");
 		Preconditions.checkArgument(!equals(passenger), "Entity cannot ride itself.");
-		if (this.passengers.contains(passenger))
+
+		if (passenger.getVehicle() == this)
 		{
 			return false;
 		}
-		return this.passengers.add(passenger);
+
+		// Go down into the passenger stack to see if it is already a passenger further down.
+		// This prevents circular entity riding.
+		for (Entity current = this.getVehicle(); current != null; current = current.getVehicle())
+		{
+			if (current == passenger)
+			{
+				return false;
+			}
+		}
+
+		((EntityMock) passenger).vehicle = this;
+		if (!tryAddingPassenger(passenger))
+		{
+			((EntityMock) passenger).vehicle = null;
+			return false;
+		}
+		return true;
 	}
 
 	@Override
 	public boolean removePassenger(@NotNull Entity passenger)
 	{
 		Preconditions.checkNotNull(passenger, "Passenger cannot be null.");
-		this.passengers.remove(passenger);
+		passenger.leaveVehicle();
 		return true;
 	}
 
@@ -795,22 +820,69 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public boolean isInsideVehicle()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return this.vehicle != null;
 	}
 
 	@Override
 	public boolean leaveVehicle()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		if (this.vehicle == null)
+		{
+			return false;
+		}
+		EntityMock previousVehicle = this.vehicle;
+		this.vehicle = null;
+		if (!previousVehicle.tryRemovingPassenger(this))
+		{
+			this.vehicle = previousVehicle;
+		}
+		return true;
 	}
 
 	@Override
-	public Entity getVehicle()
+	public @Nullable Entity getVehicle()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return this.vehicle;
+	}
+
+	private boolean tryAddingPassenger(@NotNull Entity entity)
+	{
+		if (getWorld() != entity.getWorld())
+		{
+			// Entity passenger world must match
+			return false;
+		}
+
+		if (this instanceof Vehicle vehicle && entity instanceof LivingEntity)
+		{
+			// If the event is cancelled or the vehicle has since changed, abort
+			if (!new VehicleEnterEvent(vehicle, entity).callEvent() || entity.getVehicle() != this)
+			{
+				return false;
+			}
+		}
+		if (!new EntityMountEvent(entity, this).callEvent())
+		{
+			return false;
+		}
+		return this.passengers.add(entity);
+	}
+
+	private boolean tryRemovingPassenger(@NotNull Entity entity)
+	{
+		if (this instanceof Vehicle vehicle && entity instanceof LivingEntity livingEntity)
+		{
+			// If the event is cancelled or the vehicle has since changed, abort
+			if (!new VehicleExitEvent(vehicle, livingEntity).callEvent() || entity.getVehicle() != this)
+			{
+				return false;
+			}
+		}
+		if (!new EntityDismountEvent(entity, this).callEvent())
+		{
+			return false;
+		}
+		return this.passengers.remove(entity);
 	}
 
 	@Override

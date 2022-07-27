@@ -707,15 +707,45 @@ class EntityMockTest
 	{
 		SimpleEntityMock mock = new SimpleEntityMock(server);
 		assertTrue(entity.addPassenger(mock));
-		assertFalse(entity.addPassenger(mock));
-		assertEquals(List.of(mock), entity.getPassengers());
+		assertFalse(entity.addPassenger(mock), "The passenger should not be added a second time");
+		assertEquals(List.of(mock), entity.getPassengers(), "There should be only one passenger");
+		assertSame(entity, mock.getVehicle(), "The rider should known the vehicle");
 		assertFalse(entity.isEmpty());
 	}
 
 	@Test
 	void addPassenger_self()
 	{
-		assertThrows(IllegalArgumentException.class, () -> entity.addPassenger(entity));
+		assertThrows(IllegalArgumentException.class, () -> entity.addPassenger(entity), "The entity should not be able to ride itself");
+	}
+
+	@Test
+	void addPassenger_stack()
+	{
+		EntityMock[] mocks = new EntityMock[3];
+		for (int i = 0; i < mocks.length; i++)
+		{
+			mocks[i] = new SimpleEntityMock(server);
+			if (i != 0)
+			{
+				mocks[i - 1].addPassenger(mocks[i]);
+			}
+		}
+		assertEquals(List.of(mocks[1]), mocks[0].getPassengers());
+		assertEquals(List.of(mocks[2]), mocks[1].getPassengers());
+		assertEquals(List.of(), mocks[2].getPassengers());
+	}
+
+	@Test
+	void addPassenger_preventCircularRiding()
+	{
+		EntityMock a = new SimpleEntityMock(server);
+		EntityMock b = new SimpleEntityMock(server);
+		entity.addPassenger(a);
+		a.addPassenger(b);
+		// b rides a which rides entity
+		assertFalse(a.addPassenger(entity), "An entity shouldn't be the vehicle it currently rides");
+		assertFalse(b.addPassenger(entity));
 	}
 
 	@Test
@@ -733,9 +763,21 @@ class EntityMockTest
 		SimpleEntityMock mock = new SimpleEntityMock(server);
 		entity.addPassenger(mock);
 		assertTrue(entity.removePassenger(mock));
-		assertTrue(entity.removePassenger(mock));
+		assertTrue(entity.removePassenger(mock), "The method should always return true, even if it was not a passenger");
 		assertEquals(List.of(), entity.getPassengers());
+		assertNull(mock.getVehicle(), "The vehicle should no longer be referenced");
 		assertTrue(entity.isEmpty());
+	}
+
+	@Test
+	void removePassenger_notSelf()
+	{
+		SimpleEntityMock a = new SimpleEntityMock(server);
+		SimpleEntityMock b = new SimpleEntityMock(server);
+		a.addPassenger(b);
+		entity.removePassenger(b);
+		assertNull(b.getVehicle(), "b should not longer have a vehicle");
+		assertTrue(a.isEmpty(), "a should not longer have a passenger");
 	}
 
 	@Test
