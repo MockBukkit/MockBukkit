@@ -528,7 +528,6 @@ public class InventoryMock implements Inventory
 	public int close()
 	{
 		int count = this.viewers.size();
-		System.out.println(viewers);
 		Lists.newArrayList(this.viewers).forEach(HumanEntity::closeInventory);
 		return count;
 	}

@@ -23,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -603,7 +604,7 @@ class InventoryMockTest
 		assertEquals(1, inventory.getViewers().size());
 		assertEquals(1, inventory.close());
 		assertEquals(0, inventory.getViewers().size());
+		assertNotSame(inventory,player.getOpenInventory().getTopInventory());
 	}
-
 
 }
