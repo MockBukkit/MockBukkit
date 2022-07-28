@@ -30,7 +30,7 @@ dependencies {
     api "io.papermc.paper:paper-api:${gradle.ext.apiVersionFull}"
 
     //Dependencies for Unit Tests
-    implementation 'org.junit.jupiter:junit-jupiter:5.8.2'
+    implementation 'org.junit.jupiter:junit-jupiter:5.9.0'
     implementation 'org.hamcrest:hamcrest-library:2.2'
 
     // General utilities for the project
