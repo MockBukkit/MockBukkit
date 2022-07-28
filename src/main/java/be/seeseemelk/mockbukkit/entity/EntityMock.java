@@ -877,6 +877,15 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		return this.vehicle;
 	}
 
+	/**
+	 * Adds the entity to the passenger list.
+	 * <p>
+	 * This method only does the logic for the vehicle and could cause illegal states if
+	 * used directly. Use {@link #addPassenger(Entity)}.
+	 *
+	 * @param entity The entity that will be a passenger.
+	 * @return {@code true} if the entity has become a passenger for this vehicle, {@code false} otherwise.
+	 */
 	private boolean tryAddingPassenger(@NotNull Entity entity)
 	{
 		if (getWorld() != entity.getWorld())
@@ -900,6 +909,15 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		return this.passengers.add(entity);
 	}
 
+	/**
+	 * Removes the entity to the passenger list.
+	 * <p>
+	 * This method only does the logic for the vehicle and could cause illegal states if
+	 * used directly. Use {@link #removePassenger(Entity)} or {@link #leaveVehicle()}.
+	 *
+	 * @param entity The entity that will leave this vehicle.
+	 * @return {@code true} if the entity is no longer a passenger for this vehicle, {@code false} otherwise.
+	 */
 	private boolean tryRemovingPassenger(@NotNull Entity entity)
 	{
 		if (this instanceof Vehicle vehicle && entity instanceof LivingEntity livingEntity)
