@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.inventory;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Lists;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
@@ -526,8 +527,10 @@ public class InventoryMock implements Inventory
 	@Override
 	public int close()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		int count = this.viewers.size();
+		System.out.println(viewers);
+		Lists.newArrayList(this.viewers).forEach(HumanEntity::closeInventory);
+		return count;
 	}
 
 	@Override

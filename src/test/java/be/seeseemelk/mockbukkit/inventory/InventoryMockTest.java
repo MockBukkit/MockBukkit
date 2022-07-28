@@ -595,4 +595,15 @@ class InventoryMockTest
 		assertFalse(inventory.getViewers().contains(player));
 	}
 
+	@Test
+	void testClose()
+	{
+		Player player = server.addPlayer();
+		player.openInventory(inventory);
+		assertEquals(1, inventory.getViewers().size());
+		assertEquals(1, inventory.close());
+		assertEquals(0, inventory.getViewers().size());
+	}
+
+
 }
