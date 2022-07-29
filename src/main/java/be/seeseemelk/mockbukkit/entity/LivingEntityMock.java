@@ -566,13 +566,13 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
-	public boolean teleport(@NotNull Location location, PlayerTeleportEvent.@NotNull TeleportCause cause, boolean ignorePassengers, boolean dismount)
+	public boolean teleport(@NotNull Location location, PlayerTeleportEvent.@NotNull TeleportCause cause)
 	{
 		if (isDead())
 		{
 			return false;
 		}
-		return super.teleport(location, cause, ignorePassengers, dismount);
+		return super.teleport(location, cause);
 	}
 
 	@Override
