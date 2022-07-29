@@ -11,8 +11,8 @@ import java.util.UUID;
 public class CatMock extends TameableAnimalMock implements Cat
 {
 
-	private Type type = Type.SIAMESE;
-	private DyeColor collarColour = DyeColor.WHITE;
+	private Type type = Type.CALICO;
+	private DyeColor collarColour = DyeColor.RED;
 	private boolean isLyingDown = false;
 	private boolean isHeadUp = false;
 

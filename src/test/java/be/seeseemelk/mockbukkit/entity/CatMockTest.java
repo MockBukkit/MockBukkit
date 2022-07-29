@@ -15,35 +15,35 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class CatMockTest
+class CatMockTest
 {
 
 	private CatMock cat;
 
 	@BeforeEach
-	public void setup()
+	void setup()
 	{
 		ServerMock server = MockBukkit.mock();
 		cat = new CatMock(server, UUID.randomUUID());
 	}
 
 	@AfterEach
-	public void teardown()
+	void teardown()
 	{
 		MockBukkit.unmock();
 	}
 
 	@Test
-	public void testGetCatTypeDefault()
+	void testGetCatTypeDefault()
 	{
-		assertEquals(Type.SIAMESE, cat.getCatType());
+		assertEquals(Type.CALICO, cat.getCatType());
 	}
 
 	@Test
 	void testSetCatType()
 	{
-		cat.setCatType(Type.CALICO);
-		assertEquals(Type.CALICO, cat.getCatType());
+		cat.setCatType(Type.TABBY);
+		assertEquals(Type.TABBY, cat.getCatType());
 	}
 
 	@Test
@@ -55,7 +55,7 @@ public class CatMockTest
 	@Test
 	void testGetCollarColorDefault()
 	{
-		assertEquals(DyeColor.WHITE, cat.getCollarColor());
+		assertEquals(DyeColor.RED, cat.getCollarColor());
 	}
 
 	@Test
