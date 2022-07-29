@@ -688,6 +688,11 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public void remove()
 	{
+		leaveVehicle();
+		if (hasPassengers())
+		{
+			new ArrayList<>(this.passengers).forEach(Entity::leaveVehicle);
+		}
 		this.removed = true;
 	}
 

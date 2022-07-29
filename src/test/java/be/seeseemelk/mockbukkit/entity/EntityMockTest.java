@@ -867,4 +867,16 @@ class EntityMockTest
 		assertTrue(entity.isEmpty());
 	}
 
+	@Test
+	void eject_WhenRemoved()
+	{
+		EntityMock vehicle = new SimpleEntityMock(server);
+		EntityMock passenger = new SimpleEntityMock(server);
+		vehicle.addPassenger(entity);
+		entity.addPassenger(passenger);
+		entity.remove();
+		assertNull(passenger.getVehicle());
+		assertEquals(List.of(), vehicle.getPassengers());
+	}
+
 }
