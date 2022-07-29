@@ -910,7 +910,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	/**
-	 * Removes the entity to the passenger list.
+	 * Removes the entity from the passenger list.
 	 * <p>
 	 * This method only does the logic for the vehicle and could cause illegal states if
 	 * used directly. Use {@link #removePassenger(Entity)} or {@link #leaveVehicle()}.
