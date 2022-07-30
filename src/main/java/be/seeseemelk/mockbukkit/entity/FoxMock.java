@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.ServerMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.entity.AnimalTamer;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Fox;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -150,6 +151,12 @@ public class FoxMock extends AnimalsMock implements Fox
 	public void setSitting(boolean sitting)
 	{
 		this.sitting = sitting;
+	}
+
+	@Override
+	public @NotNull EntityType getType()
+	{
+		return EntityType.FOX;
 	}
 
 }

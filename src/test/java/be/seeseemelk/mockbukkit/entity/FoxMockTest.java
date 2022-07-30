@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Fox;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -185,6 +186,12 @@ public class FoxMockTest
 	{
 		fox.setSitting(true);
 		assertTrue(fox.isSitting());
+	}
+
+	@Test
+	void testGetType()
+	{
+		assertEquals(EntityType.FOX, fox.getType());
 	}
 
 }
