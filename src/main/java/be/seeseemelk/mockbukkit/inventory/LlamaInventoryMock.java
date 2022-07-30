@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 public class LlamaInventoryMock extends AbstractHorseInventoryMock implements LlamaInventory
 {
 
-	private @Nullable ItemStack decor;
+	private static final int DECOR_SLOT = 1;
 
 	public LlamaInventoryMock(@Nullable InventoryHolder holder)
 	{
@@ -19,13 +19,13 @@ public class LlamaInventoryMock extends AbstractHorseInventoryMock implements Ll
 	@Override
 	public @Nullable ItemStack getDecor()
 	{
-		return this.decor;
+		return getItem(DECOR_SLOT);
 	}
 
 	@Override
 	public void setDecor(@Nullable ItemStack stack)
 	{
-		this.decor = stack;
+		setItem(DECOR_SLOT, stack);
 	}
 
 }

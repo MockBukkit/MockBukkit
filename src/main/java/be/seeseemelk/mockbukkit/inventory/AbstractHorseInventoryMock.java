@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 public class AbstractHorseInventoryMock extends InventoryMock implements AbstractHorseInventory
 {
 
-	private @Nullable ItemStack saddle;
+	private static final int SADDLE_SLOT = 0;
 
 	public AbstractHorseInventoryMock(@Nullable InventoryHolder holder)
 	{
@@ -19,13 +19,13 @@ public class AbstractHorseInventoryMock extends InventoryMock implements Abstrac
 	@Override
 	public @Nullable ItemStack getSaddle()
 	{
-		return this.saddle;
+		return getItem(SADDLE_SLOT);
 	}
 
 	@Override
 	public void setSaddle(@Nullable ItemStack saddle)
 	{
-		this.saddle = saddle;
+		setItem(SADDLE_SLOT, saddle);
 	}
 
 }

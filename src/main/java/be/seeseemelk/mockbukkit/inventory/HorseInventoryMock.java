@@ -8,6 +8,8 @@ import org.jetbrains.annotations.Nullable;
 public class HorseInventoryMock extends AbstractHorseInventoryMock implements HorseInventory
 {
 
+	private static final int ARMOR_SLOT = 1;
+
 	public HorseInventoryMock(InventoryHolder holder)
 	{
 		super(holder);
@@ -16,13 +18,13 @@ public class HorseInventoryMock extends AbstractHorseInventoryMock implements Ho
 	@Override
 	public ItemStack getArmor()
 	{
-		return this.getItem(1);
+		return this.getItem(ARMOR_SLOT);
 	}
 
 	@Override
 	public void setArmor(@Nullable ItemStack stack)
 	{
-		this.setItem(1, stack);
+		this.setItem(ARMOR_SLOT, stack);
 	}
 
 }

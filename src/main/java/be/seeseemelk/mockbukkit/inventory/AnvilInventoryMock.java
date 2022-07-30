@@ -65,7 +65,7 @@ public class AnvilInventoryMock extends InventoryMock implements AnvilInventory
 	}
 
 	/**
-	 * Sets the rename Text.
+	 * Sets the result of {@link #getRenameText()}.
 	 *
 	 * @param text The text to set.
 	 */

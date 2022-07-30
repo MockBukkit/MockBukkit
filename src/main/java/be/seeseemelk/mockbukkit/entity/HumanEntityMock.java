@@ -77,7 +77,7 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	@Override
 	public void closeInventory()
 	{
-		closeInventory(InventoryCloseEvent.Reason.UNKNOWN);
+		closeInventory(InventoryCloseEvent.Reason.PLUGIN);
 	}
 
 	@Override
