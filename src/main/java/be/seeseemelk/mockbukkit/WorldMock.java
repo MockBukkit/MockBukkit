@@ -6,6 +6,7 @@ import be.seeseemelk.mockbukkit.entity.ArmorStandMock;
 import be.seeseemelk.mockbukkit.entity.AxolotlMock;
 import be.seeseemelk.mockbukkit.entity.BatMock;
 import be.seeseemelk.mockbukkit.entity.BlazeMock;
+import be.seeseemelk.mockbukkit.entity.CatMock;
 import be.seeseemelk.mockbukkit.entity.CaveSpiderMock;
 import be.seeseemelk.mockbukkit.entity.ChickenMock;
 import be.seeseemelk.mockbukkit.entity.CowMock;
@@ -72,6 +73,7 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Axolotl;
 import org.bukkit.entity.Bat;
 import org.bukkit.entity.Blaze;
+import org.bukkit.entity.Cat;
 import org.bukkit.entity.CaveSpider;
 import org.bukkit.entity.Chicken;
 import org.bukkit.entity.Cow;
@@ -1003,6 +1005,10 @@ public class WorldMock implements World
 		else if (clazz == Bat.class)
 		{
 			return new BatMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Cat.class)
+		{
+			return new CatMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}
