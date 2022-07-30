@@ -64,4 +64,5 @@ class FrogMockTest
 	{
 		assertEquals(EntityType.FROG, frog.getType());
 	}
+
 }
