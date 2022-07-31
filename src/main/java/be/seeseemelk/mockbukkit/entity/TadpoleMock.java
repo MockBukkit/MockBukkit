@@ -41,7 +41,7 @@ public class TadpoleMock extends FishMock implements Tadpole
 	@Override
 	public void setAge(int age)
 	{
-		Preconditions.checkArgument(age < 24000 || (this.age + age) < 24000, "Tadpole age can't be greater than 24000");
+		Preconditions.checkArgument((this.age + age) < 24000, "Tadpole age can't be greater than 24000");
 		this.age = age;
 	}
 

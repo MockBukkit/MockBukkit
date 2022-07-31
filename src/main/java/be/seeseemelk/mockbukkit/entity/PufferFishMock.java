@@ -35,7 +35,7 @@ public class PufferFishMock extends FishMock implements PufferFish
 	@Override
 	public void setPuffState(int state)
 	{
-		Preconditions.checkArgument((0 <= state) && (state <= 2), "State has to be between 0 and 2");
+		Preconditions.checkArgument((state >= 0) && (state <= 2), "State has to be between 0 and 2");
 		this.puffState = state;
 	}
 

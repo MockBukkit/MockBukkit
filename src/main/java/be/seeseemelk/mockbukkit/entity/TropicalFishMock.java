@@ -19,14 +19,10 @@ public class TropicalFishMock extends FishMock implements TropicalFish
 	private @NotNull DyeColor bodyColor;
 	private @NotNull Pattern pattern;
 
-
 	public TropicalFishMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
-
 		super(server, uuid);
 
-		System.out.println(DyeColor.values().length);
-		System.out.println(Pattern.values().length);
 		patternColor = DyeColor.values()[ThreadLocalRandom.current().nextInt(DyeColor.values().length)];
 		bodyColor = DyeColor.values()[ThreadLocalRandom.current().nextInt(DyeColor.values().length)];
 		pattern = Pattern.values()[ThreadLocalRandom.current().nextInt(Pattern.values().length)];

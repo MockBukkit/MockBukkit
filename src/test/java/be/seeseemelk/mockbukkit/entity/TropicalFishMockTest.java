@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TropicalFishMockTest
@@ -49,7 +50,7 @@ class TropicalFishMockTest
 	@Test
 	void testGetPatternColor()
 	{
-		assertTrue(Arrays.stream(DyeColor.values()).anyMatch(dyeColor -> tropicalFish.getPatternColor().equals(dyeColor)));
+		assertNotNull(tropicalFish.getPatternColor());
 	}
 
 	@Test
@@ -62,20 +63,20 @@ class TropicalFishMockTest
 	@Test
 	void testGetBodyColor()
 	{
-		assertTrue(Arrays.stream(DyeColor.values()).anyMatch(dyeColor -> tropicalFish.getBodyColor().equals(dyeColor)));
+		assertNotNull(tropicalFish.getBodyColor());
 	}
 
 	@Test
 	void testSetBodyColor()
 	{
 		tropicalFish.setBodyColor(DyeColor.RED);
-		assertEquals(DyeColor.RED,tropicalFish.getBodyColor());
+		assertEquals(DyeColor.RED, tropicalFish.getBodyColor());
 	}
 
 	@Test
 	void testGetPattern()
 	{
-		assertTrue(Arrays.stream(Pattern.values()).anyMatch(pattern -> tropicalFish.getPattern().equals(pattern)));
+		assertNotNull(tropicalFish.getPattern());;
 	}
 
 	@Test
@@ -84,4 +85,5 @@ class TropicalFishMockTest
 		tropicalFish.setPattern(Pattern.BETTY);
 		assertEquals(Pattern.BETTY, tropicalFish.getPattern());
 	}
+
 }
