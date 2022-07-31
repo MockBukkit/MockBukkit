@@ -15,7 +15,7 @@ public class TadpoleMock extends FishMock implements Tadpole
 
 	private int age = 0;
 
-	protected TadpoleMock(@NotNull ServerMock server, @NotNull UUID uuid)
+	public TadpoleMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 	}
