@@ -20,6 +20,7 @@ import be.seeseemelk.mockbukkit.entity.FireworkMock;
 import be.seeseemelk.mockbukkit.entity.FoxMock;
 import be.seeseemelk.mockbukkit.entity.FrogMock;
 import be.seeseemelk.mockbukkit.entity.GiantMock;
+import be.seeseemelk.mockbukkit.entity.GhastMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
 import be.seeseemelk.mockbukkit.entity.LlamaMock;
 import be.seeseemelk.mockbukkit.entity.MuleMock;
@@ -1158,6 +1159,15 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.FOX);
 		assertInstanceOf(FoxMock.class, entity);
+		assertTrue(entity.isValid());
+	}
+
+	@Test
+	void testSpawnGhast()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.GHAST);
+		assertInstanceOf(GhastMock.class, entity);
 		assertTrue(entity.isValid());
 	}
 

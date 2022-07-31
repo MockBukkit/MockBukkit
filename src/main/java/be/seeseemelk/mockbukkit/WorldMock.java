@@ -19,6 +19,7 @@ import be.seeseemelk.mockbukkit.entity.FireworkMock;
 import be.seeseemelk.mockbukkit.entity.FishHookMock;
 import be.seeseemelk.mockbukkit.entity.FoxMock;
 import be.seeseemelk.mockbukkit.entity.FrogMock;
+import be.seeseemelk.mockbukkit.entity.GhastMock;
 import be.seeseemelk.mockbukkit.entity.GiantMock;
 import be.seeseemelk.mockbukkit.entity.HorseMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
@@ -1033,6 +1034,10 @@ public class WorldMock implements World
 		else if (clazz == Fox.class)
 		{
 			return new FoxMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Ghast.class)
+		{
+			return new GhastMock(server, UUID.randomUUID());
 		}
 		else if (clazz == MushroomCow.class)
 		{
