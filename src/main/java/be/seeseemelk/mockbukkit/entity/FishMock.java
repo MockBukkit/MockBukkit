@@ -34,7 +34,8 @@ public abstract class FishMock extends CreatureMock implements Fish
 	public abstract @NotNull ItemStack getBaseBucketItem();
 
 	@Override
-	public @NotNull Sound getPickupSound() {
+	public @NotNull Sound getPickupSound()
+	{
 		return Sound.ITEM_BUCKET_FILL_FISH;
 	}
 

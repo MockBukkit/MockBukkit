@@ -34,7 +34,7 @@ class PufferFishMockTest
 	@Test
 	void testGetBaseBucketItem()
 	{
-		assertEquals(Material.PUFFERFISH_BUCKET,pufferFish.getBaseBucketItem().getType());
+		assertEquals(Material.PUFFERFISH_BUCKET, pufferFish.getBaseBucketItem().getType());
 	}
 
 	@Test
@@ -47,7 +47,7 @@ class PufferFishMockTest
 	void testSetPuffState()
 	{
 		pufferFish.setPuffState(1);
-		assertEquals(1,pufferFish.getPuffState());
+		assertEquals(1, pufferFish.getPuffState());
 	}
 
 	@Test
@@ -65,7 +65,7 @@ class PufferFishMockTest
 	@Test
 	void testGetType()
 	{
-		assertEquals(EntityType.PUFFERFISH,pufferFish.getType());
+		assertEquals(EntityType.PUFFERFISH, pufferFish.getType());
 	}
 
 }
