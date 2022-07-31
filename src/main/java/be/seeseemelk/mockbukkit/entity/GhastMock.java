@@ -3,14 +3,12 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.ServerMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Flying;
 import org.bukkit.entity.Ghast;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
-
-public class GhastMock extends MobMock implements Ghast, Flying
+public class GhastMock extends FlyingMock implements Ghast
 {
 
 	private boolean isCharging = false;

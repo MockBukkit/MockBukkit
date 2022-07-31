@@ -75,4 +75,5 @@ class GhastMockTest
 	{
 		assertEquals(EntityType.GHAST, ghast.getType());
 	}
+
 }
