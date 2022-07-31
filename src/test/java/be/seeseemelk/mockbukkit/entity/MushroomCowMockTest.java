@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.MushroomCow;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -48,6 +49,12 @@ class MushroomCowMockTest
 	void testSetVariantNullThrows()
 	{
 		assertThrows(NullPointerException.class, () -> mushroom.setVariant(null));
+	}
+
+	@Test
+	void testGetType()
+	{
+		assertEquals(EntityType.MUSHROOM_COW, mushroom.getType());
 	}
 
 }

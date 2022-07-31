@@ -1037,6 +1037,7 @@ public class WorldMock implements World
 		else if (clazz == MushroomCow.class)
 		{
 			return new MushroomCowMock(server, UUID.randomUUID());
+		}
 		else if (clazz == Tadpole.class)
 		{
 			return new TadpoleMock(server, UUID.randomUUID());

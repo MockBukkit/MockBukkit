@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import com.google.common.base.Preconditions;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.MushroomCow;
 import org.jetbrains.annotations.NotNull;
 
@@ -28,6 +29,12 @@ public class MushroomCowMock extends CowMock implements MushroomCow
 	{
 		Preconditions.checkNotNull(variant, "Variant cannot be null");
 		this.variant = variant;
+	}
+
+	@Override
+	public @NotNull EntityType getType()
+	{
+		return EntityType.MUSHROOM_COW;
 	}
 
 }
