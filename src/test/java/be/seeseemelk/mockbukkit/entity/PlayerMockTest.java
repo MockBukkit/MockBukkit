@@ -47,6 +47,7 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerExpChangeEvent;
+import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
@@ -57,6 +58,7 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.event.player.PlayerToggleSprintEvent;
+import org.bukkit.event.world.GenericGameEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
@@ -75,6 +77,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
+import org.opentest4j.AssertionFailedError;
 
 import java.net.InetSocketAddress;
 import java.util.Arrays;
@@ -1802,6 +1805,44 @@ class PlayerMockTest
 	{
 		player.kick(null, PlayerKickEvent.Cause.KICK_COMMAND);
 		server.getPluginManager().assertEventFired(PlayerKickEvent.class, event -> event.leaveMessage() == Component.empty());
+	}
+
+	@Test
+	void testSimulateConsumeItem()
+	{
+		ItemStack consumable = new ItemStack(Material.POTATO);
+
+		player.simulateConsumeItem(consumable);
+
+		player.assertItemConsumed(consumable);
+		server.getPluginManager().assertEventFired(GenericGameEvent.class);
+		server.getPluginManager().assertEventFired(PlayerItemConsumeEvent.class);
+	}
+
+	@Test
+	void testSimulateConsumeItemWithNullItem()
+	{
+		assertThrows(NullPointerException.class, () -> player.simulateConsumeItem(null));
+	}
+
+	@Test
+	void testSimulateConsumeItemWithInvalidItem()
+	{
+		ItemStack nonConsumable = new ItemStack(Material.STONE);
+		assertThrows(IllegalArgumentException.class, () -> player.simulateConsumeItem(nonConsumable));
+	}
+
+	@Test
+	void testAssertItemConsumedWithNotConsumedItem()
+	{
+		ItemStack notConsumed = new ItemStack(Material.APPLE);
+		assertThrows(AssertionFailedError.class, () -> player.assertItemConsumed(notConsumed));
+	}
+
+	@Test
+	void testAssertItemConsumedWithNullItem()
+	{
+		assertThrows(NullPointerException.class, () -> player.assertItemConsumed(null));
 	}
 
 }

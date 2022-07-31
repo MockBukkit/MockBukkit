@@ -4,7 +4,9 @@ import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.entity.AllayMock;
 import be.seeseemelk.mockbukkit.entity.ArmorStandMock;
 import be.seeseemelk.mockbukkit.entity.AxolotlMock;
+import be.seeseemelk.mockbukkit.entity.BatMock;
 import be.seeseemelk.mockbukkit.entity.BlazeMock;
+import be.seeseemelk.mockbukkit.entity.CatMock;
 import be.seeseemelk.mockbukkit.entity.CaveSpiderMock;
 import be.seeseemelk.mockbukkit.entity.ChickenMock;
 import be.seeseemelk.mockbukkit.entity.CowMock;
@@ -14,6 +16,8 @@ import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
 import be.seeseemelk.mockbukkit.entity.FireworkMock;
 import be.seeseemelk.mockbukkit.entity.FishHookMock;
+import be.seeseemelk.mockbukkit.entity.FoxMock;
+import be.seeseemelk.mockbukkit.entity.FrogMock;
 import be.seeseemelk.mockbukkit.entity.GiantMock;
 import be.seeseemelk.mockbukkit.entity.HorseMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
@@ -69,7 +73,9 @@ import org.bukkit.entity.Animals;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Axolotl;
+import org.bukkit.entity.Bat;
 import org.bukkit.entity.Blaze;
+import org.bukkit.entity.Cat;
 import org.bukkit.entity.CaveSpider;
 import org.bukkit.entity.Chicken;
 import org.bukkit.entity.Cow;
@@ -81,6 +87,8 @@ import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.FishHook;
+import org.bukkit.entity.Fox;
+import org.bukkit.entity.Frog;
 import org.bukkit.entity.Ghast;
 import org.bukkit.entity.Giant;
 import org.bukkit.entity.Golem;
@@ -997,6 +1005,22 @@ public class WorldMock implements World
 		else if (clazz == Axolotl.class)
 		{
 			return new AxolotlMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Bat.class)
+		{
+			return new BatMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Cat.class)
+		{
+			return new CatMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Frog.class)
+		{
+			return new FrogMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Fox.class)
+		{
+			return new FoxMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}

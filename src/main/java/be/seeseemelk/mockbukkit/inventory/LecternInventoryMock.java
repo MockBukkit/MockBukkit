@@ -14,8 +14,6 @@ import org.jetbrains.annotations.Nullable;
 public class LecternInventoryMock extends InventoryMock implements LecternInventory
 {
 
-	private @Nullable Lectern holder;
-
 	public LecternInventoryMock(InventoryHolder holder)
 	{
 		super(holder, InventoryType.LECTERN);

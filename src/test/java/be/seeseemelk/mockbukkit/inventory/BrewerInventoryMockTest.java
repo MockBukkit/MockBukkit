@@ -48,10 +48,10 @@ class BrewerInventoryMockTest
 		inventory.setFuel(fuel);
 		inventory.setIngredient(ingredient);
 
-		InventoryMock snapshot = inventory.getSnapshot();
+		BrewerInventoryMock snapshot = inventory.getSnapshot();
 
-		assertEquals(ingredient, ((BrewerInventoryMock) snapshot).getIngredient());
-		assertEquals(fuel, ((BrewerInventoryMock) snapshot).getFuel());
+		assertEquals(ingredient, snapshot.getIngredient());
+		assertEquals(fuel, snapshot.getFuel());
 	}
 
 	@Test
@@ -92,6 +92,24 @@ class BrewerInventoryMockTest
 		ItemStack ingredient = new ItemStack(Material.SPIDER_EYE);
 		inventory.setIngredient(ingredient);
 		assertEquals(ingredient, inventory.getIngredient());
+	}
+
+	@Test
+	void testSetFuel_SetsSlot() {
+		ItemStack fuel = new ItemStack(Material.BLAZE_POWDER);
+
+		inventory.setFuel(fuel);
+
+		assertEquals(fuel, inventory.getItem(4));
+	}
+
+	@Test
+	void testSetIngredient_SetsSlot() {
+		ItemStack fuel = new ItemStack(Material.BLAZE_POWDER);
+
+		inventory.setIngredient(fuel);
+
+		assertEquals(fuel, inventory.getItem(3));
 	}
 
 }

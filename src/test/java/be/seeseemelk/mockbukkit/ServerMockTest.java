@@ -182,6 +182,12 @@ class ServerMockTest
 	}
 
 	@Test
+	void getVersion_CorrectPattern()
+	{
+		assertTrue(server.getVersion().matches("MockBukkit \\(MC: (\\d)\\.(\\d+)\\.?(\\d+?)?\\)"));
+	}
+
+	@Test
 	void getBukkitVersion_NotNull()
 	{
 		assertNotNull(server.getBukkitVersion());
@@ -849,6 +855,22 @@ class ServerMockTest
 
 		assertFalse(server.getOnlinePlayers().contains(player));
 		server.getPluginManager().assertEventFired(PlayerConnectionCloseEvent.class);
+	}
+
+	@Test
+	void testGetBannedPlayersDefault()
+	{
+		assertEquals(0, server.getBannedPlayers().size());
+	}
+
+	@Test
+	void testGetBannedPlayers()
+	{
+		PlayerMock player = server.addPlayer();
+		player.banPlayer("test");
+
+		assertEquals(1, server.getBannedPlayers().size());
+		assertTrue(server.getBannedPlayers().contains(player));
 	}
 
 }

@@ -12,12 +12,12 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-class HorseInventoryMockTest
+class LlamaInventoryMockTest
 {
 
 	private ServerMock server;
 	private WorldMock world;
-	private HorseInventoryMock inventory;
+	private LlamaInventoryMock inventory;
 
 	@BeforeEach
 	void setUp()
@@ -27,7 +27,7 @@ class HorseInventoryMockTest
 		world.setName("world");
 		server.addWorld(world);
 
-		inventory = new HorseInventoryMock(null);
+		inventory = new LlamaInventoryMock(null);
 	}
 
 	@AfterEach
@@ -43,22 +43,22 @@ class HorseInventoryMockTest
 	}
 
 	@Test
-	void setArmor()
+	void setDecor()
 	{
-		assertNull(inventory.getArmor());
+		assertNull(inventory.getDecor());
 		ItemStack item = new ItemStack(Material.IRON_HORSE_ARMOR);
 
-		inventory.setArmor(item);
+		inventory.setDecor(item);
 
-		assertEquals(item, inventory.getArmor());
+		assertEquals(item, inventory.getDecor());
 	}
 
 	@Test
-	void setArmor_SetsItemInSlot()
+	void setDecor_SetsItemInSlot()
 	{
 		ItemStack item = new ItemStack(Material.IRON_HORSE_ARMOR);
 
-		inventory.setArmor(item);
+		inventory.setDecor(item);
 
 		assertEquals(item, inventory.getItem(1));
 	}
