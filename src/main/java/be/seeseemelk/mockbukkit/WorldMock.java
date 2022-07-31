@@ -26,6 +26,7 @@ import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
 import be.seeseemelk.mockbukkit.entity.LlamaMock;
 import be.seeseemelk.mockbukkit.entity.MobMock;
 import be.seeseemelk.mockbukkit.entity.MuleMock;
+import be.seeseemelk.mockbukkit.entity.MushroomCowMock;
 import be.seeseemelk.mockbukkit.entity.PufferFishMock;
 import be.seeseemelk.mockbukkit.entity.SalmonMock;
 import be.seeseemelk.mockbukkit.entity.SheepMock;
@@ -109,6 +110,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Llama;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Mule;
+import org.bukkit.entity.MushroomCow;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.entity.PufferFish;
@@ -1036,7 +1038,11 @@ public class WorldMock implements World
 		else if (clazz == Ghast.class)
 		{
 			return new GhastMock(server, UUID.randomUUID());
-    }
+		}
+		else if (clazz == MushroomCow.class)
+		{
+			return new MushroomCowMock(server, UUID.randomUUID());
+		}
 		else if (clazz == Tadpole.class)
 		{
 			return new TadpoleMock(server, UUID.randomUUID());
