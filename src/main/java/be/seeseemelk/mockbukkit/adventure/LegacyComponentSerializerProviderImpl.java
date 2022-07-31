@@ -33,4 +33,5 @@ public class LegacyComponentSerializerProviderImpl implements LegacyComponentSer
 	{
 		return builder -> {};
 	}
+	
 }

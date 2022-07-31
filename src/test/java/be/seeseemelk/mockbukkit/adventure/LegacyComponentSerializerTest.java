@@ -19,4 +19,5 @@ class LegacyComponentSerializerTest
 		String exceptedOutput = ChatColor.of("#9f392b") + "colored text";
 		assertEquals(exceptedOutput, legacySection().serialize(input));
 	}
+	
 }
