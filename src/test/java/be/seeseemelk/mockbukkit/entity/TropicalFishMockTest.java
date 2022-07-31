@@ -10,12 +10,10 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TropicalFishMockTest
 {
@@ -44,7 +42,7 @@ class TropicalFishMockTest
 	@Test
 	void testGetBaseBucketItem()
 	{
-		assertEquals(Material.TROPICAL_FISH_BUCKET,tropicalFish.getBaseBucketItem().getType());
+		assertEquals(Material.TROPICAL_FISH_BUCKET, tropicalFish.getBaseBucketItem().getType());
 	}
 
 	@Test
@@ -57,7 +55,7 @@ class TropicalFishMockTest
 	void testSetPatternColor()
 	{
 		tropicalFish.setPatternColor(DyeColor.RED);
-		assertEquals(DyeColor.RED,tropicalFish.getPatternColor());
+		assertEquals(DyeColor.RED, tropicalFish.getPatternColor());
 	}
 
 	@Test
@@ -76,7 +74,7 @@ class TropicalFishMockTest
 	@Test
 	void testGetPattern()
 	{
-		assertNotNull(tropicalFish.getPattern());;
+		assertNotNull(tropicalFish.getPattern());
 	}
 
 	@Test

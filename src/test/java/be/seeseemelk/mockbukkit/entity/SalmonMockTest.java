@@ -41,4 +41,5 @@ class SalmonMockTest
 	{
 		assertEquals(EntityType.SALMON, salmon.getType());
 	}
+
 }

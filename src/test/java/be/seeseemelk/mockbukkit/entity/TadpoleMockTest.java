@@ -34,26 +34,26 @@ class TadpoleMockTest
 	@Test
 	void testGetBaseBucketItem()
 	{
-		assertEquals(Material.TADPOLE_BUCKET,tadpole.getBaseBucketItem().getType());
+		assertEquals(Material.TADPOLE_BUCKET, tadpole.getBaseBucketItem().getType());
 	}
 
 	@Test
 	void testGetPickupSound()
 	{
-		assertEquals(Sound.ITEM_BUCKET_FILL_TADPOLE,tadpole.getPickupSound());
+		assertEquals(Sound.ITEM_BUCKET_FILL_TADPOLE, tadpole.getPickupSound());
 	}
 
 	@Test
 	void testGetAge()
 	{
-		assertEquals(0,tadpole.getAge());
+		assertEquals(0, tadpole.getAge());
 	}
 
 	@Test
 	void testSetAge()
 	{
 		tadpole.setAge(15000);
-		assertEquals(15000,tadpole.getAge());
+		assertEquals(15000, tadpole.getAge());
 	}
 
 	@Test
@@ -68,4 +68,5 @@ class TadpoleMockTest
 		tadpole.setAge(15000);
 		assertThrows(IllegalArgumentException.class, () -> tadpole.setAge(426900));
 	}
+
 }
