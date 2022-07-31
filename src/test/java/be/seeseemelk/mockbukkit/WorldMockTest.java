@@ -1204,4 +1204,5 @@ class WorldMockTest
 		assertInstanceOf(PufferFishMock.class, entity);
 		assertTrue(entity.isValid());
 	}
+
 }
