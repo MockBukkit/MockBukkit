@@ -23,6 +23,7 @@ import be.seeseemelk.mockbukkit.entity.GiantMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
 import be.seeseemelk.mockbukkit.entity.LlamaMock;
 import be.seeseemelk.mockbukkit.entity.MuleMock;
+import be.seeseemelk.mockbukkit.entity.MushroomCowMock;
 import be.seeseemelk.mockbukkit.entity.PufferFishMock;
 import be.seeseemelk.mockbukkit.entity.SalmonMock;
 import be.seeseemelk.mockbukkit.entity.SheepMock;
@@ -1160,6 +1161,14 @@ class WorldMockTest
 		assertTrue(entity.isValid());
 	}
 
+	@Test
+	void testSpawnMushroomCow()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.MUSHROOM_COW);
+		assertInstanceOf(MushroomCowMock.class, entity);
+	}	
+	
 	@Test
 	void testSpawnTadPole()
 	{
