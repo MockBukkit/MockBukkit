@@ -2134,14 +2134,14 @@ public class WorldMock implements World
 	public @Nullable StructureSearchResult locateNearestStructure(@NotNull Location origin, org.bukkit.generator.structure.@NotNull StructureType structureType, int radius, boolean findUnexplored)
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public @Nullable StructureSearchResult locateNearestStructure(@NotNull Location origin, @NotNull Structure structure, int radius, boolean findUnexplored)
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

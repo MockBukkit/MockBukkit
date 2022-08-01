@@ -2750,21 +2750,21 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public boolean teleport(@NotNull Location location, PlayerTeleportEvent.@NotNull TeleportCause cause, boolean ignorePassengers, boolean dismount, @NotNull RelativeTeleportFlag @NotNull ... teleportFlags)
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public void lookAt(double x, double y, double z, @NotNull LookAnchor playerAnchor)
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public void lookAt(@NotNull Entity entity, @NotNull LookAnchor playerAnchor, @NotNull LookAnchor entityAnchor)
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
