@@ -109,6 +109,7 @@ import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -2740,6 +2741,20 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public void addAdditionalChatCompletions(@NotNull Collection<String> completions)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void removeAdditionalChatCompletions(@NotNull Collection<String> completions)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @Nullable String getClientBrandName()
 	{
 		// TODO Auto-generated method stub
@@ -2928,6 +2943,20 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean collidesAt(@NotNull Location location)
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean wouldCollideUsing(@NotNull BoundingBox boundingBox)
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

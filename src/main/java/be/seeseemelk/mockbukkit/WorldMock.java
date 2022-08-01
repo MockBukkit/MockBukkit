@@ -406,6 +406,13 @@ public class WorldMock implements World
 	}
 
 	@Override
+	public boolean hasCollisionsIn(@NotNull BoundingBox boundingBox)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull BlockMock getBlockAt(int x, int y, int z)
 	{
 		return getBlockAt(new Coordinate(x, y, z));
