@@ -2946,20 +2946,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public boolean collidesAt(@NotNull Location location)
-	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public boolean wouldCollideUsing(@NotNull BoundingBox boundingBox)
-	{
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
 	public void registerAttribute(@NotNull Attribute attribute)
 	{
 		// TODO Auto-generated method stub
