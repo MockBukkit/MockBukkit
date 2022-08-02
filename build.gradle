@@ -49,14 +49,15 @@ jar {
     }
 }
 
-task javadocJar(type: Jar) {
-    classifier('javadoc')
-    from javadoc
+java {
+    withSourcesJar()
+    withJavadocJar()
 }
 
-task sourcesJar(type: Jar) {
-    classifier('sources')
-    from sourceSets.main.allSource
+javadoc {
+    options {
+        links "https://jd.papermc.io/paper/${gradle.ext.apiVersion}/"
+    }
 }
 
 processResources {
@@ -73,10 +74,6 @@ sourceCompatibility = gradle.ext.javaVersion
 targetCompatibility = gradle.ext.javaVersion
 tasks.withType(JavaCompile) {
     options.release.set(gradle.ext.javaVersion)
-}
-
-artifacts {
-    archives javadocJar, sourcesJar
 }
 
 def isFork = isFork()
@@ -114,8 +111,6 @@ publishing {
             artifactId = "MockBukkit-v${gradle.ext.apiVersion}"
             from components.java
 
-            artifact sourcesJar
-            artifact javadocJar
             version = property('mockbukkit.version')
             pom {
                 name = "MockBukkit-v${gradle.ext.apiVersion}"
