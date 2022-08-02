@@ -160,14 +160,14 @@ public class FishHookMock extends ProjectileMock implements FishHook
 	public int getWaitTime()
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public void setWaitTime(int ticks)
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@NotNull
