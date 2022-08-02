@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.map;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import org.bukkit.World;
 import org.bukkit.map.MapRenderer;
@@ -59,28 +60,28 @@ public class MapViewMock implements MapView
 	public int getCenterX()
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public int getCenterZ()
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public void setCenterX(int x)
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public void setCenterZ(int z)
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -160,28 +161,28 @@ public class MapViewMock implements MapView
 	public boolean isTrackingPosition()
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public void setTrackingPosition(boolean trackingPosition)
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public boolean isUnlimitedTracking()
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public void setUnlimitedTracking(boolean unlimited)
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
