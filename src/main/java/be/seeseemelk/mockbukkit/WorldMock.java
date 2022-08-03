@@ -4,9 +4,12 @@ import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.entity.AllayMock;
 import be.seeseemelk.mockbukkit.entity.ArmorStandMock;
 import be.seeseemelk.mockbukkit.entity.AxolotlMock;
+import be.seeseemelk.mockbukkit.entity.BatMock;
 import be.seeseemelk.mockbukkit.entity.BlazeMock;
+import be.seeseemelk.mockbukkit.entity.CatMock;
 import be.seeseemelk.mockbukkit.entity.CaveSpiderMock;
 import be.seeseemelk.mockbukkit.entity.ChickenMock;
+import be.seeseemelk.mockbukkit.entity.CodMock;
 import be.seeseemelk.mockbukkit.entity.CowMock;
 import be.seeseemelk.mockbukkit.entity.DonkeyMock;
 import be.seeseemelk.mockbukkit.entity.EndermanMock;
@@ -14,17 +17,25 @@ import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
 import be.seeseemelk.mockbukkit.entity.FireworkMock;
 import be.seeseemelk.mockbukkit.entity.FishHookMock;
+import be.seeseemelk.mockbukkit.entity.FoxMock;
+import be.seeseemelk.mockbukkit.entity.FrogMock;
+import be.seeseemelk.mockbukkit.entity.GhastMock;
 import be.seeseemelk.mockbukkit.entity.GiantMock;
 import be.seeseemelk.mockbukkit.entity.HorseMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
 import be.seeseemelk.mockbukkit.entity.LlamaMock;
 import be.seeseemelk.mockbukkit.entity.MobMock;
 import be.seeseemelk.mockbukkit.entity.MuleMock;
+import be.seeseemelk.mockbukkit.entity.MushroomCowMock;
+import be.seeseemelk.mockbukkit.entity.PufferFishMock;
+import be.seeseemelk.mockbukkit.entity.SalmonMock;
 import be.seeseemelk.mockbukkit.entity.SheepMock;
 import be.seeseemelk.mockbukkit.entity.SkeletonHorseMock;
 import be.seeseemelk.mockbukkit.entity.SkeletonMock;
 import be.seeseemelk.mockbukkit.entity.SpiderMock;
 import be.seeseemelk.mockbukkit.entity.StrayMock;
+import be.seeseemelk.mockbukkit.entity.TadpoleMock;
+import be.seeseemelk.mockbukkit.entity.TropicalFishMock;
 import be.seeseemelk.mockbukkit.entity.WardenMock;
 import be.seeseemelk.mockbukkit.entity.WitherSkeletonMock;
 import be.seeseemelk.mockbukkit.entity.ZombieHorseMock;
@@ -69,9 +80,12 @@ import org.bukkit.entity.Animals;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Axolotl;
+import org.bukkit.entity.Bat;
 import org.bukkit.entity.Blaze;
+import org.bukkit.entity.Cat;
 import org.bukkit.entity.CaveSpider;
 import org.bukkit.entity.Chicken;
+import org.bukkit.entity.Cod;
 import org.bukkit.entity.Cow;
 import org.bukkit.entity.Donkey;
 import org.bukkit.entity.Enderman;
@@ -81,6 +95,8 @@ import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.FishHook;
+import org.bukkit.entity.Fox;
+import org.bukkit.entity.Frog;
 import org.bukkit.entity.Ghast;
 import org.bukkit.entity.Giant;
 import org.bukkit.entity.Golem;
@@ -94,8 +110,11 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Llama;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Mule;
+import org.bukkit.entity.MushroomCow;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
+import org.bukkit.entity.PufferFish;
+import org.bukkit.entity.Salmon;
 import org.bukkit.entity.Sheep;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.entity.SkeletonHorse;
@@ -103,6 +122,8 @@ import org.bukkit.entity.Slime;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.entity.Spider;
 import org.bukkit.entity.Stray;
+import org.bukkit.entity.Tadpole;
+import org.bukkit.entity.TropicalFish;
 import org.bukkit.entity.Warden;
 import org.bukkit.entity.WaterMob;
 import org.bukkit.entity.WitherSkeleton;
@@ -997,6 +1018,50 @@ public class WorldMock implements World
 		else if (clazz == Axolotl.class)
 		{
 			return new AxolotlMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Bat.class)
+		{
+			return new BatMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Cat.class)
+		{
+			return new CatMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Frog.class)
+		{
+			return new FrogMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Fox.class)
+		{
+			return new FoxMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Ghast.class)
+		{
+			return new GhastMock(server, UUID.randomUUID());
+		}
+		else if (clazz == MushroomCow.class)
+		{
+			return new MushroomCowMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Tadpole.class)
+		{
+			return new TadpoleMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Cod.class)
+		{
+			return new CodMock(server, UUID.randomUUID());
+		}
+		else if (clazz == TropicalFish.class)
+		{
+			return new TropicalFishMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Salmon.class)
+		{
+			return new SalmonMock(server, UUID.randomUUID());
+		}
+		else if (clazz == PufferFish.class)
+		{
+			return new PufferFishMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}
@@ -2057,6 +2122,7 @@ public class WorldMock implements World
 	}
 
 	@Override
+	@Deprecated
 	public Location locateNearestStructure(Location origin, StructureType structureType, int radius,
 										   boolean findUnexplored)
 	{
@@ -2068,14 +2134,14 @@ public class WorldMock implements World
 	public @Nullable StructureSearchResult locateNearestStructure(@NotNull Location origin, org.bukkit.generator.structure.@NotNull StructureType structureType, int radius, boolean findUnexplored)
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public @Nullable StructureSearchResult locateNearestStructure(@NotNull Location origin, @NotNull Structure structure, int radius, boolean findUnexplored)
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

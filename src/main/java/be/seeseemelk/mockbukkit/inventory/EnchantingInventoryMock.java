@@ -9,8 +9,8 @@ import org.jetbrains.annotations.Nullable;
 public class EnchantingInventoryMock extends InventoryMock implements EnchantingInventory
 {
 
-	private ItemStack primaryItem = null;
-	private ItemStack secondaryItem = null;
+	private static final int ITEM_SLOT = 0;
+	private static final int SECONDARY_SLOT = 1;
 
 	public EnchantingInventoryMock(@Nullable InventoryHolder holder)
 	{
@@ -20,25 +20,25 @@ public class EnchantingInventoryMock extends InventoryMock implements Enchanting
 	@Override
 	public void setItem(@Nullable ItemStack item)
 	{
-		this.primaryItem = item;
+		setItem(ITEM_SLOT, item);
 	}
 
 	@Override
 	public @Nullable ItemStack getItem()
 	{
-		return this.primaryItem;
+		return getItem(ITEM_SLOT);
 	}
 
 	@Override
 	public void setSecondary(@Nullable ItemStack item)
 	{
-		this.secondaryItem = item;
+		setItem(SECONDARY_SLOT, item);
 	}
 
 	@Override
 	public @Nullable ItemStack getSecondary()
 	{
-		return this.secondaryItem;
+		return getItem(SECONDARY_SLOT);
 	}
 
 }

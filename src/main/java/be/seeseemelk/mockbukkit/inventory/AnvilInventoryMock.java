@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 public class AnvilInventoryMock extends InventoryMock implements AnvilInventory
 {
 
-	private String renameText;
+	private @Nullable String renameText;
 	private int repairCostAmount = 0;
 	private int repairCost = 0;
 	private int maxRepairCost = 40;
@@ -65,7 +65,8 @@ public class AnvilInventoryMock extends InventoryMock implements AnvilInventory
 	}
 
 	/**
-	 * Sets the rename Text.
+	 * Sets the result of {@link #getRenameText()}.
+	 *
 	 * @param text The text to set.
 	 */
 	public void setRenameText(@Nullable String text)

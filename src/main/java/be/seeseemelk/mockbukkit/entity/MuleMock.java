@@ -16,6 +16,7 @@ public class MuleMock extends ChestedHorseMock implements Mule
 	}
 
 	@Override
+	@Deprecated
 	public Horse.@NotNull Variant getVariant()
 	{
 		return Horse.Variant.MULE;

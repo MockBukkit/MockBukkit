@@ -9,12 +9,17 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.FurnaceInventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
 
 public class FurnaceInventoryMock extends InventoryMock implements FurnaceInventory
 {
+
+	private static final int SMELTING_SLOT = 0;
+	private static final int FUEL_SLOT = 1;
+	private static final int RESULT_SLOT = 2;
 
 	public FurnaceInventoryMock(@Nullable InventoryHolder holder)
 	{
@@ -24,37 +29,37 @@ public class FurnaceInventoryMock extends InventoryMock implements FurnaceInvent
 	@Override
 	public @Nullable ItemStack getResult()
 	{
-		return getItem(2);
+		return getItem(RESULT_SLOT);
 	}
 
 	@Override
 	public @Nullable ItemStack getFuel()
 	{
-		return getItem(1);
+		return getItem(FUEL_SLOT);
 	}
 
 	@Override
 	public @Nullable ItemStack getSmelting()
 	{
-		return getItem(0);
+		return getItem(SMELTING_SLOT);
 	}
 
 	@Override
 	public void setFuel(@Nullable ItemStack stack)
 	{
-		setItem(1, stack);
+		setItem(FUEL_SLOT, stack);
 	}
 
 	@Override
 	public void setResult(@Nullable ItemStack stack)
 	{
-		setItem(2, stack);
+		setItem(RESULT_SLOT, stack);
 	}
 
 	@Override
 	public void setSmelting(@Nullable ItemStack stack)
 	{
-		setItem(0, stack);
+		setItem(SMELTING_SLOT, stack);
 	}
 
 	@Override
@@ -80,7 +85,7 @@ public class FurnaceInventoryMock extends InventoryMock implements FurnaceInvent
 	private static class FurnaceFuelProvider
 	{
 
-		static Set<Material> getFuels()
+		static @NotNull Set<Material> getFuels()
 		{
 			Set<Material> fuels = Tag.LOGS.getValues();
 			fuels.addAll(Tag.PLANKS.getValues());

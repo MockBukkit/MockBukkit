@@ -73,6 +73,7 @@ public class SkeletonMock extends AbstractSkeletonMock implements Skeleton
 	}
 
 	@Override
+	@Deprecated
 	public @NotNull SkeletonType getSkeletonType()
 	{
 		return SkeletonType.NORMAL;

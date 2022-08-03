@@ -1,8 +1,7 @@
 package be.seeseemelk.mockbukkit.block.data;
 
-import com.google.common.collect.ImmutableSet;
+import com.destroystokyo.paper.MaterialTags;
 import org.bukkit.Material;
-import org.bukkit.Tag;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.type.Bed;
 import org.jetbrains.annotations.NotNull;
@@ -19,10 +18,7 @@ public class BedMock extends BlockDataMock implements Bed
 	public BedMock(@NotNull Material type)
 	{
 		super(type);
-		if (!Tag.BEDS.isTagged(type))
-		{
-			throw new IllegalArgumentException("Cannot create a BedMock from " + type);
-		}
+		checkType(type, MaterialTags.BEDS);
 		this.setFacing(BlockFace.NORTH);
 		super.set(OCCUPIED, false);
 		this.setPart(Part.FOOT);
@@ -66,7 +62,7 @@ public class BedMock extends BlockDataMock implements Bed
 	@Override
 	public @NotNull Set<BlockFace> getFaces()
 	{
-		return ImmutableSet.of(BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST);
+		return Set.of(BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST);
 	}
 
 }

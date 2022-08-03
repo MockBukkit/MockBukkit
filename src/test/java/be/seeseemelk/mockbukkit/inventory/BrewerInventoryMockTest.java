@@ -1,7 +1,6 @@
 package be.seeseemelk.mockbukkit.inventory;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.ServerMock;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.AfterEach;
@@ -13,16 +12,15 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class BrewerInventoryMockTest
+class BrewerInventoryMockTest
 {
 
-	private ServerMock server;
 	private BrewerInventoryMock inventory;
 
 	@BeforeEach
 	void setUp()
 	{
-		this.server = MockBukkit.mock();
+		MockBukkit.mock();
 		this.inventory = new BrewerInventoryMock(null);
 	}
 
@@ -50,10 +48,10 @@ public class BrewerInventoryMockTest
 		inventory.setFuel(fuel);
 		inventory.setIngredient(ingredient);
 
-		InventoryMock snapshot = inventory.getSnapshot();
+		BrewerInventoryMock snapshot = inventory.getSnapshot();
 
-		assertEquals(ingredient, ((BrewerInventoryMock) snapshot).getIngredient());
-		assertEquals(fuel, ((BrewerInventoryMock) snapshot).getFuel());
+		assertEquals(ingredient, snapshot.getIngredient());
+		assertEquals(fuel, snapshot.getFuel());
 	}
 
 	@Test
@@ -94,6 +92,24 @@ public class BrewerInventoryMockTest
 		ItemStack ingredient = new ItemStack(Material.SPIDER_EYE);
 		inventory.setIngredient(ingredient);
 		assertEquals(ingredient, inventory.getIngredient());
+	}
+
+	@Test
+	void testSetFuel_SetsSlot() {
+		ItemStack fuel = new ItemStack(Material.BLAZE_POWDER);
+
+		inventory.setFuel(fuel);
+
+		assertEquals(fuel, inventory.getItem(4));
+	}
+
+	@Test
+	void testSetIngredient_SetsSlot() {
+		ItemStack fuel = new ItemStack(Material.BLAZE_POWDER);
+
+		inventory.setIngredient(fuel);
+
+		assertEquals(fuel, inventory.getItem(3));
 	}
 
 }

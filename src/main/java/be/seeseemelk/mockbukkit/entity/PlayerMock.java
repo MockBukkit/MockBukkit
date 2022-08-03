@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.entity;
 
+import be.seeseemelk.mockbukkit.AsyncCatcher;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
@@ -31,6 +32,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
 import org.bukkit.Effect;
 import org.bukkit.FluidCollisionMode;
+import org.bukkit.GameEvent;
 import org.bukkit.GameMode;
 import org.bukkit.GameRule;
 import org.bukkit.Instrument;
@@ -74,6 +76,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
+import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -84,6 +87,7 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.event.player.PlayerToggleSprintEvent;
+import org.bukkit.event.world.GenericGameEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
@@ -126,6 +130,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 {
 
+	private static final Component DEFAULT_KICK_COMPONENT = Component.text("You are not whitelisted on this server!");
+
 	private @NotNull GameMode gamemode = GameMode.SURVIVAL;
 	private @NotNull GameMode previousGamemode = gamemode;
 
@@ -142,8 +148,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private boolean sprinting = false;
 	private boolean allowFlight = false;
 	private boolean flying = false;
-	private boolean whitelisted = true;
-
 	private Location compassTarget;
 	private @Nullable Location bedSpawnLocation;
 	private long firstPlayed = 0;
@@ -162,6 +166,8 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private final StatisticsMock statistics = new StatisticsMock();
 
 	private final Set<String> channels = new HashSet<>();
+
+	private final List<ItemStack> consumedItems = new LinkedList<>();
 
 	public PlayerMock(@NotNull ServerMock server, @NotNull String name)
 	{
@@ -231,6 +237,10 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		{
 			throw new IllegalStateException("Player was never online");
 		}
+		if (server.hasWhitelist() && !server.getWhitelistedPlayers().contains(this))
+		{
+			return false;
+		}
 		if (online)
 		{
 			return false;
@@ -242,6 +252,64 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		server.addPlayer(this);
 
 		return true;
+	}
+
+	/**
+	 * Simulates a Player consuming an Edible Item
+	 *
+	 * @param consumable The Item to consume
+	 */
+	public void simulateConsumeItem(@NotNull ItemStack consumable)
+	{
+		Preconditions.checkNotNull(consumable, "Consumed Item can't be null");
+		Preconditions.checkArgument(consumable.getType().isEdible(), "Item is not Consumable");
+
+		//Since we have no Bukkit way of differentiating between drinks and food, here is a rough estimation of
+		//how it would sound like
+
+		//Drinks:Slurp Slurp Slurp
+		//Food: Yum Yum Yum
+
+		GenericGameEvent consumeStartEvent =
+				new GenericGameEvent(
+						GameEvent.ITEM_INTERACT_START,
+						this.getLocation(),
+						this,
+						16,
+						!Bukkit.isPrimaryThread());
+
+		Bukkit.getPluginManager().callEvent(consumeStartEvent);
+
+		PlayerItemConsumeEvent event = new PlayerItemConsumeEvent(this, consumable);
+		Bukkit.getPluginManager().callEvent(event);
+
+		if (event.isCancelled())
+		{
+			GenericGameEvent stopConsumeEvent =
+					new GenericGameEvent(
+							GameEvent.ITEM_INTERACT_FINISH,
+							this.getLocation(),
+							this,
+							16,
+							!Bukkit.isPrimaryThread());
+			Bukkit.getPluginManager().callEvent(stopConsumeEvent);
+		}
+
+		consumedItems.add(consumable);
+	}
+
+	/**
+	 * Asserts a Player has consumed the given Item
+	 *
+	 * @param consumable The Item to asserts has been consumed
+	 */
+	public void assertItemConsumed(@NotNull ItemStack consumable)
+	{
+		Preconditions.checkNotNull(consumable, "Consumed Item can't be null");
+		if (!consumedItems.contains(consumable))
+		{
+			fail();
+		}
 	}
 
 	@Override
@@ -352,7 +420,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @param slot The slot in the player's open inventory
 	 * @return The event that was fired.
 	 */
-	public InventoryClickEvent simulateInventoryClick(int slot)
+	public @NotNull InventoryClickEvent simulateInventoryClick(int slot)
 	{
 		return simulateInventoryClick(getOpenInventory(), slot);
 	}
@@ -455,13 +523,20 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public boolean isWhitelisted()
 	{
-		return this.whitelisted;
+		return server.getWhitelistedPlayers().contains(this);
 	}
 
 	@Override
 	public void setWhitelisted(boolean value)
 	{
-		this.whitelisted = value;
+		if (value)
+		{
+			server.getWhitelistedPlayers().add(this);
+		}
+		else
+		{
+			server.getWhitelistedPlayers().remove(this);
+		}
 	}
 
 	@Override
@@ -1067,29 +1142,34 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Deprecated
 	public void kickPlayer(String message)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		kick(Component.text(message));
 	}
 
 	@Override
 	public void kick()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		kick(DEFAULT_KICK_COMPONENT);
 	}
 
 	@Override
 	public void kick(@Nullable Component message)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		kick(message, PlayerKickEvent.Cause.PLUGIN);
 	}
 
 	@Override
 	public void kick(@Nullable Component message, PlayerKickEvent.@NotNull Cause cause)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		AsyncCatcher.catchOp("player kick");
+		if (!isOnline()) return;
+		PlayerKickEvent event =
+				new PlayerKickEvent(this,
+						Component.text("Plugin"),
+						message == null ? net.kyori.adventure.text.Component.empty() : message,
+						cause);
+
+		Bukkit.getPluginManager().callEvent(event);
+		server.getPlayerList().disconnectPlayer(this);
 	}
 
 	@Override
@@ -2670,21 +2750,21 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public boolean teleport(@NotNull Location location, PlayerTeleportEvent.@NotNull TeleportCause cause, boolean ignorePassengers, boolean dismount, @NotNull RelativeTeleportFlag @NotNull ... teleportFlags)
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public void lookAt(double x, double y, double z, @NotNull LookAnchor playerAnchor)
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public void lookAt(@NotNull Entity entity, @NotNull LookAnchor playerAnchor, @NotNull LookAnchor entityAnchor)
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -2755,17 +2835,26 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public boolean teleport(@NotNull Location location, @NotNull PlayerTeleportEvent.TeleportCause cause)
+	public boolean teleport(@NotNull Location location, @NotNull PlayerTeleportEvent.TeleportCause cause, boolean ignorePassengers, boolean dismount)
 	{
 		Preconditions.checkNotNull(location, "Location cannot be null");
 		Preconditions.checkNotNull(location.getWorld(), "World cannot be null");
 		Preconditions.checkNotNull(cause, "Cause cannot be null");
 		location.checkFinite();
-		if (isDead())
+		if (isDead() || (!ignorePassengers && hasPassengers()))
 		{
 			return false;
 		}
-		//todo: Add passenger logic: don't teleport if it's a vehicle / dismount from the current vehicle if it's a passenger
+		if (location.getWorld() != getWorld())
+		{
+			// Don't allow teleporting between worlds while keeping passengers
+			// and if remaining on vehicle.
+			if ((ignorePassengers && hasPassengers())
+					|| (!dismount && isInsideVehicle()))
+			{
+				return false;
+			}
+		}
 
 		PlayerTeleportEvent event = new PlayerTeleportEvent(this, getLocation(), location, cause);
 		if (!event.callEvent())

@@ -67,6 +67,7 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 	}
 
 	@Override
+	@Deprecated
 	public void setBlock(int x, int y, int z, @NotNull MaterialData material)
 	{
 		this.setBlock(x, y, z, new BlockDataMock(material.getItemType()));
@@ -86,6 +87,7 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 	}
 
 	@Override
+	@Deprecated
 	public void setRegion(int xMin, int yMin, int zMin, int xMax, int yMax, int zMax, @NotNull MaterialData material)
 	{
 		this.setRegion(xMin, yMin, zMin, xMax, yMax, zMax, new BlockDataMock(material.getItemType()));
@@ -119,6 +121,7 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 
 	@NotNull
 	@Override
+	@Deprecated
 	public MaterialData getTypeAndData(int x, int y, int z)
 	{
 		return new MaterialData(this.getType(x, y, z));
@@ -135,6 +138,7 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 	}
 
 	@Override
+	@Deprecated
 	public byte getData(int x, int y, int z)
 	{
 		return this.getTypeAndData(x, y, z).getData();

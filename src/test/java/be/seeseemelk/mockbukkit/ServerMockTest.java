@@ -8,6 +8,8 @@ import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
 import be.seeseemelk.mockbukkit.entity.SimpleEntityMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import be.seeseemelk.mockbukkit.profile.PlayerProfileMock;
+import com.destroystokyo.paper.event.player.PlayerConnectionCloseEvent;
+import com.destroystokyo.paper.event.server.WhitelistToggleEvent;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import net.kyori.adventure.text.Component;
@@ -24,6 +26,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.server.MapInitializeEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
@@ -49,6 +52,7 @@ import java.util.UUID;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.equalTo;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -161,20 +165,26 @@ class ServerMockTest
 	void getPlayers_Negative_ArrayIndexOutOfBoundsException()
 	{
 		server.setPlayers(2);
-		assertThrows(ArrayIndexOutOfBoundsException.class, () -> server.getPlayer(-1));
+		assertThrows(IndexOutOfBoundsException.class, () -> server.getPlayer(-1));
 	}
 
 	@Test
 	void getPlayers_LargerThanNumberOfPlayers_ArrayIndexOutOfBoundsException()
 	{
 		server.setPlayers(2);
-		assertThrows(ArrayIndexOutOfBoundsException.class, () -> server.getPlayer(2));
+		assertThrows(IndexOutOfBoundsException.class, () -> server.getPlayer(2));
 	}
 
 	@Test
 	void getVersion_NotNull()
 	{
 		assertNotNull(server.getVersion());
+	}
+
+	@Test
+	void getVersion_CorrectPattern()
+	{
+		assertTrue(server.getVersion().matches("MockBukkit \\(MC: (\\d)\\.(\\d+)\\.?(\\d+?)?\\)"));
 	}
 
 	@Test
@@ -729,6 +739,138 @@ class ServerMockTest
 		Player player = server.addPlayer();
 		assertEquals(Arrays.asList("Tab", "Complete", "Results"), server.getCommandTabComplete(player, "mockcommand "));
 		assertEquals(Arrays.asList("Other", "Results"), server.getCommandTabComplete(player, "mockcommand argA "));
+	}
+
+	@Test
+	void testHasWhiteListDefault()
+	{
+		assertFalse(server.hasWhitelist());
+	}
+
+	@Test
+	void testSetWhiteList()
+	{
+		server.setWhitelist(true);
+		assertTrue(server.hasWhitelist());
+		server.getPluginManager().assertEventFired(WhitelistToggleEvent.class, WhitelistToggleEvent::isEnabled);
+	}
+
+	@Test
+	void testIsWhiteListEnforcedDefault()
+	{
+		assertFalse(server.isWhitelistEnforced());
+	}
+
+	@Test
+	void testSetWhiteListEnforced()
+	{
+		server.setWhitelistEnforced(true);
+		assertTrue(server.isWhitelistEnforced());
+	}
+
+	@Test
+	void testReloadWhiteList()
+	{
+		assertDoesNotThrow(() -> server.reloadWhitelist());
+	}
+
+	@Test
+	void testReloadWhiteListWithEnforcedWhiteList()
+	{
+		PlayerMock playerMock = server.addPlayer();
+
+		server.setWhitelist(true);
+		server.setWhitelistEnforced(true);
+
+
+		server.reloadWhitelist();
+
+		assertFalse(server.getOnlinePlayers().contains(playerMock));
+		server.getPluginManager().assertEventFired(PlayerKickEvent.class);
+	}
+
+	@Test
+	void tstReloadWhiteListWithNotEnforcedWhiteList()
+	{
+		PlayerMock playerMock = server.addPlayer();
+
+		server.setWhitelist(true);
+		server.setWhitelistEnforced(false);
+
+		server.reloadWhitelist();
+
+		assertTrue(server.getOnlinePlayers().contains(playerMock));
+		server.getPluginManager().assertEventNotFired(PlayerKickEvent.class);
+	}
+
+	@Test
+	void testReloadWhiteListWithNotEnforcedWhiteListAndPlayerIsWhitelisted()
+	{
+		PlayerMock playerMock = server.addPlayer();
+		playerMock.setWhitelisted(true);
+		server.setWhitelist(true);
+		server.setWhitelistEnforced(true);
+
+		server.reloadWhitelist();
+
+		assertTrue(server.getOnlinePlayers().contains(playerMock));
+		server.getPluginManager().assertEventNotFired(PlayerKickEvent.class);
+	}
+
+	@Test
+	void testReloadWithListWithoutWhitelistEnabled()
+	{
+		PlayerMock playerMock = server.addPlayer();
+		playerMock.setWhitelisted(true);
+		server.setWhitelist(false);
+		server.setWhitelistEnforced(true);
+
+		server.reloadWhitelist();
+
+		assertTrue(server.getOnlinePlayers().contains(playerMock));
+		server.getPluginManager().assertEventNotFired(PlayerKickEvent.class);
+	}
+
+	@Test
+	void testAddPlayerWithWhitelistEnabled()
+	{
+		server.setWhitelist(true);
+
+		PlayerMock playerMock = new PlayerMock(server,"Player", UUID.randomUUID());
+		playerMock.setWhitelisted(true);
+
+		server.addPlayer(playerMock);
+
+		assertTrue(server.getOnlinePlayers().contains(playerMock));
+		server.getPluginManager().assertEventNotFired(PlayerKickEvent.class);
+	}
+
+	@Test
+	void testAddPlayerWithWhitelistEnabledAndNotWhitelisted()
+	{
+		server.setWhitelist(true);
+
+
+		PlayerMock player = server.addPlayer();
+
+		assertFalse(server.getOnlinePlayers().contains(player));
+		server.getPluginManager().assertEventFired(PlayerConnectionCloseEvent.class);
+	}
+
+	@Test
+	void testGetBannedPlayersDefault()
+	{
+		assertEquals(0, server.getBannedPlayers().size());
+	}
+
+	@Test
+	void testGetBannedPlayers()
+	{
+		PlayerMock player = server.addPlayer();
+		player.banPlayer("test");
+
+		assertEquals(1, server.getBannedPlayers().size());
+		assertTrue(server.getBannedPlayers().contains(player));
 	}
 
 }
