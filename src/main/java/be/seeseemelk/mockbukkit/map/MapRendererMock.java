@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.map;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.entity.Player;
 import org.bukkit.map.MapCanvas;
 import org.bukkit.map.MapRenderer;
@@ -13,7 +14,7 @@ public class MapRendererMock extends MapRenderer
 	public void render(@NotNull MapView map, @NotNull MapCanvas canvas, @NotNull Player player)
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 }
