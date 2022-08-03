@@ -33,10 +33,10 @@ import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.event.vehicle.VehicleEnterEvent;
 import org.bukkit.event.vehicle.VehicleExitEvent;
 import org.bukkit.metadata.MetadataValue;
+import org.bukkit.permissions.PermissibleBase;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
-import org.bukkit.permissions.PermissionRemovedExecutor;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.BoundingBox;
@@ -50,8 +50,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 import java.util.UUID;
@@ -80,7 +78,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private boolean invulnerable;
 	private boolean glowingFlag = false;
 	private final Queue<Component> messages = new LinkedTransferQueue<>();
-	private final Set<PermissionAttachment> permissionAttachments = new HashSet<>();
+	private final PermissibleBase perms;
 	private @NotNull Vector velocity = new Vector(0, 0, 0);
 	private float fallDistance;
 	private int fireTicks = -20;
@@ -95,6 +93,8 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 
 		this.server = server;
 		this.uuid = uuid;
+
+		this.perms = new PermissibleBase(this);
 
 		if (!Bukkit.getWorlds().isEmpty())
 			location = Bukkit.getWorlds().get(0).getSpawnLocation();
@@ -426,115 +426,67 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public boolean isPermissionSet(@NotNull String name)
 	{
-		Preconditions.checkNotNull(name, "Name cannot be null");
-		return permissionAttachments.stream()
-				.map(PermissionAttachment::getPermissions)
-				.anyMatch(permissions -> permissions.containsKey(name) && permissions.get(name));
+		return this.perms.isPermissionSet(name);
 	}
 
 	@Override
 	public boolean isPermissionSet(@NotNull Permission perm)
 	{
-		Preconditions.checkNotNull(perm, "Permission cannot be null");
-		return isPermissionSet(perm.getName().toLowerCase(Locale.ENGLISH));
+		return this.perms.isPermissionSet(perm);
 	}
 
 	@Override
 	public boolean hasPermission(@NotNull String name)
 	{
-		Preconditions.checkNotNull(name, "Name cannot be null");
-		if (isPermissionSet(name))
-		{
-			return true;
-		}
-
-		Permission perm = server.getPluginManager().getPermission(name);
-		return perm != null ? hasPermission(perm) : Permission.DEFAULT_PERMISSION.getValue(isOp());
+		return this.perms.hasPermission(name);
 	}
 
 	@Override
 	public boolean hasPermission(@NotNull Permission perm)
 	{
-		Preconditions.checkNotNull(perm, "Permission cannot be null");
-		return isPermissionSet(perm) || perm.getDefault().getValue(isOp());
+		return this.perms.hasPermission(perm);
 	}
 
 	@Override
 	public @NotNull PermissionAttachment addAttachment(@NotNull Plugin plugin, @NotNull String name, boolean value)
 	{
-		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
-		Preconditions.checkNotNull(name, "Name cannot be null");
-		PermissionAttachment attachment = addAttachment(plugin);
-		attachment.setPermission(name, value);
-		return attachment;
+		return this.perms.addAttachment(plugin, name, value);
 	}
 
 	@Override
 	public @NotNull PermissionAttachment addAttachment(@NotNull Plugin plugin)
 	{
-		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
-		PermissionAttachment attachment = new PermissionAttachment(plugin, this);
-		permissionAttachments.add(attachment);
-		return attachment;
+		return this.perms.addAttachment(plugin);
 	}
 
 	@Override
 	public PermissionAttachment addAttachment(@NotNull Plugin plugin, @NotNull String name, boolean value, int ticks)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return this.perms.addAttachment(plugin, name, value, ticks);
 	}
 
 	@Override
 	public PermissionAttachment addAttachment(@NotNull Plugin plugin, int ticks)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return this.perms.addAttachment(plugin, ticks);
 	}
 
 	@Override
 	public void removeAttachment(@NotNull PermissionAttachment attachment)
 	{
-		Preconditions.checkNotNull(attachment, "Attachment cannot be null");
-
-		if (permissionAttachments.contains(attachment))
-		{
-			permissionAttachments.remove(attachment);
-			PermissionRemovedExecutor ex = attachment.getRemovalCallback();
-
-			if (ex != null)
-			{
-				ex.attachmentRemoved(attachment);
-			}
-
-			recalculatePermissions();
-		}
-		else
-		{
-			throw new IllegalArgumentException("Given attachment is not part of Permissible object " + this);
-		}
+		this.perms.removeAttachment(attachment);
 	}
 
 	@Override
 	public void recalculatePermissions()
 	{
-
+		this.perms.recalculatePermissions();
 	}
 
 	@Override
 	public @NotNull Set<PermissionAttachmentInfo> getEffectivePermissions()
 	{
-		HashSet<PermissionAttachmentInfo> permissionAttachmentInfos = new HashSet<>();
-
-		for (PermissionAttachment permissionAttachment : permissionAttachments)
-		{
-			for (Map.Entry<String, Boolean> entry : permissionAttachment.getPermissions().entrySet())
-			{
-				permissionAttachmentInfos.add(new PermissionAttachmentInfo(this, entry.getKey(), permissionAttachment, entry.getValue()));
-			}
-		}
-
-		return permissionAttachmentInfos;
+		return this.perms.getEffectivePermissions();
 	}
 
 	@Override
