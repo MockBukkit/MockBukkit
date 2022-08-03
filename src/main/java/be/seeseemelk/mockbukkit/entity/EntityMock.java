@@ -1183,4 +1183,18 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		throw new UnimplementedOperationException();
 	}
 
+	@Override
+	public boolean collidesAt(@NotNull Location location)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean wouldCollideUsing(@NotNull BoundingBox boundingBox)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 }
