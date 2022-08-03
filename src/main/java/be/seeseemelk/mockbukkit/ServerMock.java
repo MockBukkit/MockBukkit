@@ -1940,7 +1940,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull String getPermissionMessage()
 	{
-		return net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer.legacyAmpersand().serialize(noPermission);
+		return unsafe.legacyComponentSerializer().serialize(noPermission);
 	}
 
 	@Override
