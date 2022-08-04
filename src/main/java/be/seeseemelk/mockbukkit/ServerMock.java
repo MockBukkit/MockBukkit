@@ -145,7 +145,6 @@ public class ServerMock extends Server.Spigot implements Server
 	private static final Component MOTD = Component.text("A Minecraft Server");
 	private static final Component NO_PERMISSION = Component.text("I'm sorry, but you do not have permission to perform this command. Please contact the server administrators if you believe that this is in error.", NamedTextColor.RED);
 
-
 	private final Properties buildProperties = new Properties();
 	private final Logger logger = Logger.getLogger("ServerMock");
 	private final Thread mainThread = Thread.currentThread();
