@@ -143,6 +143,8 @@ public class ServerMock extends Server.Spigot implements Server
 {
 
 	private static final Component MOTD = Component.text("A Minecraft Server");
+	private static final Component NO_PERMISSION = Component.text("I'm sorry, but you do not have permission to perform this command. Please contact the server administrators if you believe that this is in error.", NamedTextColor.RED);
+
 
 	private final Properties buildProperties = new Properties();
 	private final Logger logger = Logger.getLogger("ServerMock");
@@ -1935,18 +1937,16 @@ public class ServerMock extends Server.Spigot implements Server
 		throw new UnimplementedOperationException();
 	}
 
-	private static final Component noPermission = Component.text("I'm sorry, but you do not have permission to perform this command. Please contact the server administrators if you believe that this is in error.", NamedTextColor.RED);
-
 	@Override
 	public @NotNull String getPermissionMessage()
 	{
-		return unsafe.legacyComponentSerializer().serialize(noPermission);
+		return unsafe.legacyComponentSerializer().serialize(NO_PERMISSION);
 	}
 
 	@Override
 	public @NotNull Component permissionMessage()
 	{
-		return noPermission;
+		return NO_PERMISSION;
 	}
 
 	@Override
