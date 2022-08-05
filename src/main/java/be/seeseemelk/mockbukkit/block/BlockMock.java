@@ -458,6 +458,20 @@ public class BlockMock implements Block
 	}
 
 	@Override
+	public void tick()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void randomTick()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public boolean breakNaturally(boolean triggerEffect)
 	{
 		// TODO Auto-generated method stub
