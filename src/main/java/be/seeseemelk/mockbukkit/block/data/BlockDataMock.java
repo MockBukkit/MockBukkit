@@ -140,6 +140,13 @@ public class BlockDataMock implements BlockData
 	}
 
 	@Override
+	public boolean isRandomlyTicked()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public boolean matches(@Nullable BlockData data)
 	{
 		if (data == null || data.getMaterial() != this.type)
