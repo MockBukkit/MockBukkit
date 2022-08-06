@@ -12,6 +12,8 @@ import org.bukkit.util.BoundingBox;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * A mock world border object.
  */
@@ -104,6 +106,13 @@ public class WorldBorderMock implements WorldBorder
 
 		double distance = newSize - this.size;
 		moveBorderOverTime(distance, millis, newSize);
+	}
+
+	@Override
+	public void setSize(double newSize, @NotNull TimeUnit unit, long time)
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	private void moveBorderOverTime(double distance, double millis, double newSize)
@@ -215,6 +224,20 @@ public class WorldBorderMock implements WorldBorder
 				this.centerX + this.size, Double.MAX_VALUE * -1, this.centerZ + size);
 
 		return worldBorderBoundingBox.contains(location.toVector()) && location.getWorld() == this.world;
+	}
+
+	@Override
+	public double getMaxSize()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public double getMaxCenterCoordinate()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 }

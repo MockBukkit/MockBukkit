@@ -873,6 +873,18 @@ class ServerMockTest
 		assertTrue(server.getBannedPlayers().contains(player));
 	}
 
+	@Test
+	void getPermissionMessage_NotNull()
+	{
+		assertNotNull(server.getPermissionMessage());
+	}
+
+	@Test
+	void permissionMessage_NotNull()
+	{
+		assertNotNull(server.permissionMessage());
+	}
+
 }
 
 class TestRecipe implements Recipe
