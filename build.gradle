@@ -34,7 +34,7 @@ dependencies {
     implementation 'org.hamcrest:hamcrest-library:2.2'
 
     // General utilities for the project
-    implementation 'net.kyori:adventure-platform-bungeecord:4.1.1'
+    implementation 'net.kyori:adventure-platform-bungeecord:4.1.2'
     implementation 'org.jetbrains:annotations:23.0.0'
 
     // LibraryLoader dependencies
@@ -79,7 +79,7 @@ tasks.withType(JavaCompile) {
 def isFork = isFork()
 
 signing {
-    required { !isFork && System.getenv('JITPACK') == null }
+    required { !isFork && System.getenv('CI') != null }
     sign publishing.publications
 }
 
@@ -94,7 +94,7 @@ jacoco {
 }
 
 group = 'com.github.seeseemelk'
-version = property('mockbukkit.version')
+version = this.getVersion()
 
 nexusPublishing {
     repositories {
@@ -111,7 +111,6 @@ publishing {
             artifactId = "MockBukkit-v${gradle.ext.apiVersion}"
             from components.java
 
-            version = property('mockbukkit.version')
             pom {
                 name = "MockBukkit-v${gradle.ext.apiVersion}"
                 packaging = 'jar'
@@ -140,6 +139,12 @@ publishing {
     }
 }
 
+publishToMavenLocal {
+    doLast {
+        println("Published to Maven local with version '${this.getVersion()}'")
+    }
+}
+
 test {
     useJUnitPlatform()
 }
@@ -158,4 +163,12 @@ def isFork() {
     } catch (e) {
     }
     return true
+}
+
+def getVersion() {
+    if (System.getenv('CI') == null) {
+        return 'dev-' + 'git rev-parse --verify --short HEAD'.execute().text.trim()
+    } else {
+        return property('mockbukkit.version')
+    }
 }

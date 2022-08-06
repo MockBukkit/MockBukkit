@@ -52,6 +52,7 @@ import com.google.common.base.Preconditions;
 import io.papermc.paper.datapack.DatapackManager;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
@@ -142,6 +143,7 @@ public class ServerMock extends Server.Spigot implements Server
 {
 
 	private static final Component MOTD = Component.text("A Minecraft Server");
+	private static final Component NO_PERMISSION = Component.text("I'm sorry, but you do not have permission to perform this command. Please contact the server administrators if you believe that this is in error.", NamedTextColor.RED);
 
 	private final Properties buildProperties = new Properties();
 	private final Logger logger = Logger.getLogger("ServerMock");
@@ -1937,15 +1939,13 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull String getPermissionMessage()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return unsafe.legacyComponentSerializer().serialize(NO_PERMISSION);
 	}
 
 	@Override
 	public @NotNull Component permissionMessage()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return NO_PERMISSION;
 	}
 
 	@Override
