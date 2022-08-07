@@ -4,19 +4,26 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.WorldMock;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
+import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.EulerAngle;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ArmorStandMockTest
@@ -25,11 +32,14 @@ class ArmorStandMockTest
 	private ServerMock server;
 	private World world;
 
+	private ArmorStandMock armorStand;
+
 	@BeforeEach
 	void setUp()
 	{
 		server = MockBukkit.mock();
 		world = new WorldMock();
+		armorStand = new ArmorStandMock(server, UUID.randomUUID());
 	}
 
 	@AfterEach
@@ -41,7 +51,6 @@ class ArmorStandMockTest
 	@Test
 	void testEntityType()
 	{
-		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
 		assertEquals(EntityType.ARMOR_STAND, armorStand.getType());
 	}
 
@@ -61,15 +70,12 @@ class ArmorStandMockTest
 	@Test
 	void testHasEquipment()
 	{
-		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
 		assertNotNull(armorStand.getEquipment());
 	}
 
 	@Test
 	void testArms()
 	{
-		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
-
 		armorStand.setArms(true);
 		assertTrue(armorStand.hasArms());
 		armorStand.setArms(false);
@@ -79,8 +85,6 @@ class ArmorStandMockTest
 	@Test
 	void testSmall()
 	{
-		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
-
 		armorStand.setSmall(true);
 		assertTrue(armorStand.isSmall());
 		armorStand.setSmall(false);
@@ -90,8 +94,6 @@ class ArmorStandMockTest
 	@Test
 	void testMarker()
 	{
-		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
-
 		armorStand.setMarker(true);
 		assertTrue(armorStand.isMarker());
 		armorStand.setMarker(false);
@@ -101,8 +103,6 @@ class ArmorStandMockTest
 	@Test
 	void testBasePlate()
 	{
-		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
-
 		armorStand.setBasePlate(true);
 		assertTrue(armorStand.hasBasePlate());
 		armorStand.setBasePlate(false);
@@ -112,8 +112,6 @@ class ArmorStandMockTest
 	@Test
 	void testVisible()
 	{
-		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
-
 		armorStand.setVisible(true);
 		assertTrue(armorStand.isVisible());
 		armorStand.setVisible(false);
@@ -123,8 +121,6 @@ class ArmorStandMockTest
 	@Test
 	void testHeadPose()
 	{
-		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
-
 		armorStand.setHeadPose(new EulerAngle(5, 5, 5));
 		assertEquals(armorStand.getHeadPose(), new EulerAngle(5, 5, 5));
 	}
@@ -132,8 +128,6 @@ class ArmorStandMockTest
 	@Test
 	void testBodyPose()
 	{
-		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
-
 		armorStand.setBodyPose(new EulerAngle(5, 5, 5));
 		assertEquals(armorStand.getBodyPose(), new EulerAngle(5, 5, 5));
 	}
@@ -141,8 +135,6 @@ class ArmorStandMockTest
 	@Test
 	void testLeftArm()
 	{
-		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
-
 		armorStand.setLeftArmPose(new EulerAngle(5, 5, 5));
 		assertEquals(armorStand.getLeftArmPose(), new EulerAngle(5, 5, 5));
 	}
@@ -150,8 +142,6 @@ class ArmorStandMockTest
 	@Test
 	void testRightArm()
 	{
-		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
-
 		armorStand.setRightArmPose(new EulerAngle(5, 5, 5));
 		assertEquals(armorStand.getRightArmPose(), new EulerAngle(5, 5, 5));
 	}
@@ -159,8 +149,6 @@ class ArmorStandMockTest
 	@Test
 	void testLeftLeg()
 	{
-		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
-
 		armorStand.setLeftLegPose(new EulerAngle(5, 5, 5));
 		assertEquals(armorStand.getLeftLegPose(), new EulerAngle(5, 5, 5));
 	}
@@ -168,10 +156,242 @@ class ArmorStandMockTest
 	@Test
 	void testRightLeg()
 	{
-		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
-
 		armorStand.setRightLegPose(new EulerAngle(5, 5, 5));
 		assertEquals(armorStand.getRightLegPose(), new EulerAngle(5, 5, 5));
+	}
+
+	@Test
+	void testGetBootsDefault()
+	{
+		assertEquals(Material.AIR, armorStand.getBoots().getType());
+	}
+
+	@Test
+	void testSetBoots()
+	{
+		armorStand.setBoots(new ItemStack(Material.IRON_BOOTS));
+		assertEquals(Material.IRON_BOOTS, armorStand.getBoots().getType());
+	}
+
+	@Test
+	void testGetLeggingsDefault()
+	{
+		assertEquals(Material.AIR, armorStand.getLeggings().getType());
+	}
+
+	@Test
+	void testSetLeggings()
+	{
+		armorStand.setLeggings(new ItemStack(Material.IRON_LEGGINGS));
+		assertEquals(Material.IRON_LEGGINGS, armorStand.getLeggings().getType());
+	}
+
+	@Test
+	void testGetChestPlate()
+	{
+		assertEquals(Material.AIR, armorStand.getChestplate().getType());
+	}
+
+	@Test
+	void testSetChestPlate()
+	{
+		armorStand.setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
+		assertEquals(Material.IRON_CHESTPLATE, armorStand.getChestplate().getType());
+	}
+
+	@Test
+	void testGetHelmetDefault()
+	{
+		assertEquals(Material.AIR, armorStand.getHelmet().getType());
+	}
+
+	@Test
+	void testSetHelmet()
+	{
+		armorStand.setHelmet(new ItemStack(Material.IRON_HELMET));
+		assertEquals(Material.IRON_HELMET, armorStand.getHelmet().getType());
+	}
+
+	@Test
+	void testGetItemInHandDefault()
+	{
+		assertEquals(Material.AIR, armorStand.getItemInHand().getType());
+	}
+
+	@Test
+	void testSetItemInHand()
+	{
+		armorStand.setItemInHand(new ItemStack(Material.DIAMOND_SWORD));
+		assertEquals(Material.DIAMOND_SWORD, armorStand.getItemInHand().getType());
+	}
+
+	@Test
+	void testGetItemHand()
+	{
+		armorStand.setItemInHand(new ItemStack(Material.DIAMOND_SWORD));
+		assertEquals(Material.DIAMOND_SWORD, armorStand.getItem(EquipmentSlot.HAND).getType());
+	}
+
+	@Test
+	void testGetItemOffHand()
+	{
+		armorStand.getEquipment().setItemInOffHand(new ItemStack(Material.DIAMOND_SWORD));
+		assertEquals(Material.DIAMOND_SWORD, armorStand.getItem(EquipmentSlot.OFF_HAND).getType());
+	}
+
+	@Test
+	void testGetItemBoots()
+	{
+		armorStand.setBoots(new ItemStack(Material.IRON_BOOTS));
+		assertEquals(Material.IRON_BOOTS, armorStand.getItem(EquipmentSlot.FEET).getType());
+	}
+
+	@Test
+	void testGetItemLeggings()
+	{
+		armorStand.setLeggings(new ItemStack(Material.IRON_LEGGINGS));
+		assertEquals(Material.IRON_LEGGINGS, armorStand.getItem(EquipmentSlot.LEGS).getType());
+	}
+
+	@Test
+	void testGetItemChestplate()
+	{
+		armorStand.setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
+		assertEquals(Material.IRON_CHESTPLATE, armorStand.getItem(EquipmentSlot.CHEST).getType());
+	}
+
+	@Test
+	void testGetItemHelmet()
+	{
+		armorStand.setHelmet(new ItemStack(Material.IRON_HELMET));
+		assertEquals(Material.IRON_HELMET, armorStand.getItem(EquipmentSlot.HEAD).getType());
+	}
+
+	@Test
+	void testGetItemNulLThrows()
+	{
+		assertThrows(NullPointerException.class, () -> armorStand.getItem(null));
+	}
+
+	@Test
+	void testSetItemNulLThrows()
+	{
+		ItemStack item = new ItemStack(Material.DIAMOND_SWORD);
+		assertThrows(NullPointerException.class, () -> armorStand.setItem(null, item));
+	}
+
+	@Test
+	void testSetItemNullSetsAir()
+	{
+		armorStand.setItem(EquipmentSlot.HAND, null);
+		assertEquals(Material.AIR, armorStand.getItem(EquipmentSlot.HAND).getType());
+	}
+
+	@Test
+	void testSetItemMainHand()
+	{
+		armorStand.setItem(EquipmentSlot.HAND, new ItemStack(Material.DIAMOND_SWORD));
+		assertEquals(Material.DIAMOND_SWORD, armorStand.getItem(EquipmentSlot.HAND).getType());
+	}
+
+	@Test
+	void testSetItemOffHand()
+	{
+		armorStand.setItem(EquipmentSlot.OFF_HAND, new ItemStack(Material.DIAMOND_SWORD));
+		assertEquals(Material.DIAMOND_SWORD, armorStand.getItem(EquipmentSlot.OFF_HAND).getType());
+	}
+
+	@Test
+	void testSetItemBoots()
+	{
+		armorStand.setItem(EquipmentSlot.FEET, new ItemStack(Material.IRON_BOOTS));
+		assertEquals(Material.IRON_BOOTS, armorStand.getItem(EquipmentSlot.FEET).getType());
+	}
+
+	@Test
+	void testSetItemLeggings()
+	{
+		armorStand.setItem(EquipmentSlot.LEGS, new ItemStack(Material.IRON_LEGGINGS));
+		assertEquals(Material.IRON_LEGGINGS, armorStand.getItem(EquipmentSlot.LEGS).getType());
+	}
+
+	@Test
+	void testSetItemChestplate()
+	{
+		armorStand.setItem(EquipmentSlot.CHEST, new ItemStack(Material.IRON_CHESTPLATE));
+		assertEquals(Material.IRON_CHESTPLATE, armorStand.getItem(EquipmentSlot.CHEST).getType());
+	}
+
+	@Test
+	void testSetItemHelmet()
+	{
+		armorStand.setItem(EquipmentSlot.HEAD, new ItemStack(Material.IRON_HELMET));
+		assertEquals(Material.IRON_HELMET, armorStand.getItem(EquipmentSlot.HEAD).getType());
+	}
+
+	@Test
+	void testGetDisabledSlotsDefault()
+	{
+		assertEquals(0, armorStand.getDisabledSlots().size());
+	}
+
+	@Test
+	void testSetDisabledSlots()
+	{
+		armorStand.setDisabledSlots(EquipmentSlot.CHEST, EquipmentSlot.FEET);
+		assertEquals(2, armorStand.getDisabledSlots().size());
+		assertTrue(armorStand.getDisabledSlots().containsAll(Set.of(EquipmentSlot.CHEST, EquipmentSlot.FEET)));
+	}
+
+	@Test
+	void testSetDisabledSlotsNullThrows()
+	{
+		assertThrows(NullPointerException.class, () -> armorStand.setDisabledSlots(null));
+	}
+
+	@Test
+	void testAddDisabledSlots()
+	{
+		armorStand.addDisabledSlots(EquipmentSlot.FEET);
+		assertEquals(1, armorStand.getDisabledSlots().size());
+		armorStand.addDisabledSlots(EquipmentSlot.HAND);
+		assertEquals(2, armorStand.getDisabledSlots().size());
+		assertTrue(armorStand.getDisabledSlots().containsAll(Set.of(EquipmentSlot.HAND, EquipmentSlot.FEET)));
+	}
+
+	@Test
+	void testAddDisabledSlotsNullThrows()
+	{
+		assertThrows(NullPointerException.class, () -> armorStand.addDisabledSlots(null));
+	}
+
+	@Test
+	void testRemoveDisabledSlots()
+	{
+		armorStand.setDisabledSlots(EquipmentSlot.HAND, EquipmentSlot.FEET);
+		assertTrue(armorStand.getDisabledSlots().containsAll(Set.of(EquipmentSlot.HAND, EquipmentSlot.FEET)));
+		armorStand.removeDisabledSlots(EquipmentSlot.HAND);
+		assertFalse(armorStand.getDisabledSlots().containsAll(Set.of(EquipmentSlot.HAND, EquipmentSlot.FEET)));
+	}
+
+	@Test
+	void testRemoveDisabledSlotsNullThrows()
+	{
+		assertThrows(NullPointerException.class, () -> armorStand.removeDisabledSlots(null));
+	}
+
+	@Test
+	void testIsSlotDisabled()
+	{
+		armorStand.addDisabledSlots(EquipmentSlot.FEET);
+		assertTrue(armorStand.isSlotDisabled(EquipmentSlot.FEET));
+		assertFalse(armorStand.isSlotDisabled(EquipmentSlot.HAND));
+	}
+
+	@Test
+	void testIsSlotDisabledNullThrows()
+	{
+		assertThrows(NullPointerException.class, () -> armorStand.isSlotDisabled(null));
 	}
 
 }

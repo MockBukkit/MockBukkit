@@ -186,4 +186,10 @@ class FishHookMockTest
 		assertEquals(SpawnCategory.MISC, hook.getSpawnCategory());
 	}
 
+	@Test
+	void testToString()
+	{
+		assertEquals("FishingHookMock", hook.toString());
+	}
+
 }

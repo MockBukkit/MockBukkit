@@ -11,22 +11,31 @@ import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 
+import java.util.Arrays;
 import java.util.UUID;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class EntityEquipmentMockTest
 {
 
+	private EntityEquipment equipment;
+	private ZombieMock holder;
 	private ServerMock server;
 
 	@BeforeEach
 	void setUp()
 	{
 		server = MockBukkit.mock();
+		holder = new ZombieMock(server, UUID.randomUUID());
+		equipment = holder.getEquipment();
 	}
 
 	@AfterEach
@@ -38,8 +47,6 @@ class EntityEquipmentMockTest
 	@Test
 	void testMainHand()
 	{
-		Zombie zombie = new ZombieMock(server, UUID.randomUUID());
-		EntityEquipment equipment = zombie.getEquipment();
 
 		assertNotNull(equipment.getItemInMainHand());
 
@@ -53,9 +60,6 @@ class EntityEquipmentMockTest
 	@Test
 	void testOffHand()
 	{
-		Zombie zombie = new ZombieMock(server, UUID.randomUUID());
-		EntityEquipment equipment = zombie.getEquipment();
-
 		assertNotNull(equipment.getItemInOffHand());
 
 		ItemStack item = new ItemStack(Material.DIAMOND);
@@ -68,9 +72,6 @@ class EntityEquipmentMockTest
 	@Test
 	void testHelmet()
 	{
-		Zombie zombie = new ZombieMock(server, UUID.randomUUID());
-		EntityEquipment equipment = zombie.getEquipment();
-
 		assertNotNull(equipment.getHelmet());
 
 		ItemStack item = new ItemStack(Material.DIAMOND);
@@ -83,9 +84,6 @@ class EntityEquipmentMockTest
 	@Test
 	void testChestplate()
 	{
-		Zombie zombie = new ZombieMock(server, UUID.randomUUID());
-		EntityEquipment equipment = zombie.getEquipment();
-
 		assertNotNull(equipment.getChestplate());
 
 		ItemStack item = new ItemStack(Material.DIAMOND);
@@ -98,9 +96,6 @@ class EntityEquipmentMockTest
 	@Test
 	void testLeggings()
 	{
-		Zombie zombie = new ZombieMock(server, UUID.randomUUID());
-		EntityEquipment equipment = zombie.getEquipment();
-
 		assertNotNull(equipment.getLeggings());
 
 		ItemStack item = new ItemStack(Material.DIAMOND);
@@ -113,9 +108,6 @@ class EntityEquipmentMockTest
 	@Test
 	void testBoots()
 	{
-		Zombie zombie = new ZombieMock(server, UUID.randomUUID());
-		EntityEquipment equipment = zombie.getEquipment();
-
 		assertNotNull(equipment.getBoots());
 
 		ItemStack item = new ItemStack(Material.DIAMOND);
@@ -128,9 +120,6 @@ class EntityEquipmentMockTest
 	@Test
 	void testMainHandDropChance()
 	{
-		Zombie zombie = new ZombieMock(server, UUID.randomUUID());
-		EntityEquipment equipment = zombie.getEquipment();
-
 		equipment.setItemInMainHandDropChance(0.75f);
 
 		assertEquals(0.75f, equipment.getItemInMainHandDropChance());
@@ -139,9 +128,6 @@ class EntityEquipmentMockTest
 	@Test
 	void testOffHandDropChance()
 	{
-		Zombie zombie = new ZombieMock(server, UUID.randomUUID());
-		EntityEquipment equipment = zombie.getEquipment();
-
 		equipment.setItemInOffHandDropChance(0.75f);
 
 		assertEquals(0.75f, equipment.getItemInOffHandDropChance());
@@ -150,9 +136,6 @@ class EntityEquipmentMockTest
 	@Test
 	void testHelmetDropChance()
 	{
-		Zombie zombie = new ZombieMock(server, UUID.randomUUID());
-		EntityEquipment equipment = zombie.getEquipment();
-
 		equipment.setHelmetDropChance(0.75f);
 
 		assertEquals(0.75f, equipment.getHelmetDropChance());
@@ -161,9 +144,6 @@ class EntityEquipmentMockTest
 	@Test
 	void testChestplateDropChance()
 	{
-		Zombie zombie = new ZombieMock(server, UUID.randomUUID());
-		EntityEquipment equipment = zombie.getEquipment();
-
 		equipment.setChestplateDropChance(0.75f);
 
 		assertEquals(0.75f, equipment.getChestplateDropChance());
@@ -172,9 +152,6 @@ class EntityEquipmentMockTest
 	@Test
 	void testLeggingsDropChance()
 	{
-		Zombie zombie = new ZombieMock(server, UUID.randomUUID());
-		EntityEquipment equipment = zombie.getEquipment();
-
 		equipment.setLeggingsDropChance(0.75f);
 
 		assertEquals(0.75f, equipment.getLeggingsDropChance());
@@ -183,9 +160,6 @@ class EntityEquipmentMockTest
 	@Test
 	void testBootsDropChance()
 	{
-		Zombie zombie = new ZombieMock(server, UUID.randomUUID());
-		EntityEquipment equipment = zombie.getEquipment();
-
 		equipment.setBootsDropChance(0.75f);
 
 		assertEquals(0.75f, equipment.getBootsDropChance());
@@ -200,6 +174,77 @@ class EntityEquipmentMockTest
 		{
 			equipment.setHelmetDropChance(0.5f);
 		});
+	}
+
+	@Test
+	void testGetArmorContentsDefault()
+	{
+
+		assertEquals(4, equipment.getArmorContents().length);
+		Arrays.stream(equipment.getArmorContents()).forEach(entry ->
+		{
+			assertEquals(Material.AIR, entry.getType());
+		});
+	}
+
+	@Test
+	void testSetArmorContents()
+	{
+		ItemStack[] contents = new ItemStack[4];
+		contents[0] = new ItemStack(Material.DIAMOND);
+		contents[1] = new ItemStack(Material.DIAMOND);
+		contents[2] = new ItemStack(Material.DIAMOND);
+		contents[3] = new ItemStack(Material.DIAMOND);
+		equipment.setArmorContents(contents);
+		assertArrayEquals(contents, equipment.getArmorContents());
+	}
+
+	@Test
+	void testSetArmorContentsNullThrows()
+	{
+		assertThrows(NullPointerException.class, () -> equipment.setArmorContents(null));
+	}
+
+	@Test
+	void testClear()
+	{
+		ItemStack[] contents = new ItemStack[4];
+		contents[0] = new ItemStack(Material.DIAMOND);
+		contents[1] = new ItemStack(Material.DIAMOND);
+		contents[2] = new ItemStack(Material.DIAMOND);
+		contents[3] = new ItemStack(Material.DIAMOND);
+		equipment.setArmorContents(contents);
+		equipment.clear();
+		assertArrayEquals(new ItemStack[4], equipment.getArmorContents());
+	}
+
+	@ParameterizedTest
+	@EnumSource(EquipmentSlot.class)
+	void testGetItem(EquipmentSlot slot)
+	{
+		ItemStack item = new ItemStack(Material.DIAMOND);
+		equipment.setItem(slot, item);
+		assertEquals(item, equipment.getItem(slot));
+	}
+
+	@Test
+	void testGetItemInHandDefault()
+	{
+		assertEquals(Material.AIR, equipment.getItemInMainHand().getType());
+	}
+
+	@Test
+	void testSetItemInHand()
+	{
+		ItemStack item = new ItemStack(Material.DIAMOND);
+		equipment.setItemInHand(item);
+		assertEquals(item, equipment.getItemInHand());
+	}
+
+	@Test
+	void testGetHolder()
+	{
+		assertEquals(holder, equipment.getHolder());
 	}
 
 }

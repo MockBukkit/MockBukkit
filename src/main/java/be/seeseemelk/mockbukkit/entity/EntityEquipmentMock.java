@@ -61,9 +61,6 @@ public class EntityEquipmentMock implements EntityEquipment
 		case FEET -> setBoots(item, silent);
 		case HAND -> setItemInMainHand(item, silent);
 		case OFF_HAND -> setItemInOffHand(item, silent);
-		default ->
-			// This should never be reached unless Mojang adds new slots
-				throw new UnimplementedOperationException("EquipmentSlot '" + slot + "' has no implementation!");
 		}
 	}
 
@@ -79,9 +76,6 @@ public class EntityEquipmentMock implements EntityEquipment
 					case HEAD -> getHelmet();
 					case LEGS -> getLeggings();
 					case OFF_HAND -> getItemInOffHand();
-					default ->
-						// This should never be reached unless Mojang adds new slots
-							throw new UnimplementedOperationException("EquipmentSlot '" + slot + "' has no implementation!");
 				};
 	}
 
