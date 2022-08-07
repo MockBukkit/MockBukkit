@@ -105,7 +105,8 @@ class AllayMockTest
 	@Test
 	void testAssertInventoryContainsWithWrongItem()
 	{
-		assertThrows(AssertionFailedError.class, () -> allayMock.assertInventoryContains(new ItemStack(Material.IRON_INGOT)));
+		ItemStack item = new ItemStack(Material.IRON_INGOT);
+		assertThrows(AssertionFailedError.class, () -> allayMock.assertInventoryContains(item));
 	}
 
 }

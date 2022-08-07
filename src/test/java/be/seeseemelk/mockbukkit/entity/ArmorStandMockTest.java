@@ -276,7 +276,8 @@ class ArmorStandMockTest
 	@Test
 	void testSetItemNulLThrows()
 	{
-		assertThrows(NullPointerException.class, () -> armorStand.setItem(null, new ItemStack(Material.DIAMOND_SWORD)));
+		ItemStack item = new ItemStack(Material.DIAMOND_SWORD);
+		assertThrows(NullPointerException.class, () -> armorStand.setItem(null, item));
 	}
 
 	@Test
@@ -286,7 +287,7 @@ class ArmorStandMockTest
 		assertEquals(Material.AIR, armorStand.getItem(EquipmentSlot.HAND).getType());
 	}
 
-    @Test
+	@Test
 	void testSetItemMainHand()
 	{
 		armorStand.setItem(EquipmentSlot.HAND, new ItemStack(Material.DIAMOND_SWORD));
