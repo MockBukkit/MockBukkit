@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
+import org.bukkit.entity.AnimalTamer;
 import org.bukkit.entity.Horse;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -11,17 +12,22 @@ import org.junit.jupiter.api.Test;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class AbstractHorseMockTest
+class AbstractHorseMockTest
 {
 
+	private ServerMock server;
 	private HorseMock horse;
 
 	@BeforeEach
 	void setUp()
 	{
-		ServerMock server = MockBukkit.mock();
+		server = MockBukkit.mock();
 		horse = new HorseMock(server, UUID.randomUUID());
 	}
 
@@ -86,6 +92,98 @@ public class AbstractHorseMockTest
 	{
 		horse.setMaxDomestication(50);
 		assertThrows(IllegalArgumentException.class, () -> horse.setDomestication(51));
+	}
+
+	@Test
+	void testGetOwnerUniqueIdDefault()
+	{
+		assertNull(horse.getOwnerUniqueId());
+	}
+
+	@Test
+	void testSetOwnerUUID()
+	{
+		UUID owner = UUID.randomUUID();
+		horse.setOwnerUUID(owner);
+		assertEquals(owner, horse.getOwnerUniqueId());
+	}
+
+	@Test
+	void testGetOwnerDefault()
+	{
+		assertNull(horse.getOwner());
+	}
+
+	@Test
+	void testSetOwner()
+	{
+		AnimalTamer owner = server.addPlayer();
+		horse.setOwner(owner);
+		assertEquals(owner, horse.getOwner());
+		assertTrue(horse.isTamed());
+	}
+
+	@Test
+	void testSetOwnerNull()
+	{
+		AnimalTamer owner = server.addPlayer();
+		horse.setOwner(owner);
+		assertNotNull(horse.getOwner());
+		horse.setOwner(null);
+		assertNull(horse.getOwner());
+		assertFalse(horse.isTamed());
+	}
+
+	@Test
+	void testIsEatingHayStackDefault()
+	{
+		assertFalse(horse.isEatingHaystack());
+	}
+
+	@Test
+	void testSetEatingHayStack()
+	{
+		horse.setEatingHaystack(true);
+		assertTrue(horse.isEatingHaystack());
+	}
+
+	@Test
+	void testIsEatingGrassDefault()
+	{
+		assertFalse(horse.isEatingGrass());
+	}
+
+	@Test
+	void testSetEatingGrass()
+	{
+		horse.setEatingGrass(true);
+		assertTrue(horse.isEatingGrass());
+	}
+
+	@Test
+	void testIsEatingDefault()
+	{
+		assertFalse(horse.isEating());
+	}
+
+	@Test
+	void testSetEating()
+	{
+		horse.setEating(true);
+		assertTrue(horse.isEating());
+	}
+
+	@Test
+	void testIsRearingDefault()
+	{
+		assertFalse(horse.isRearing());
+	}
+
+	@Test
+	void testSetRearing()
+	{
+		horse.setRearing(true);
+		assertTrue(horse.isRearing());
 	}
 
 }

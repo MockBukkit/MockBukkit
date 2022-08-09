@@ -108,6 +108,7 @@ import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.potion.PotionBrewer;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scoreboard.Criteria;
 import org.bukkit.structure.StructureManager;
 import org.bukkit.util.CachedServerIcon;
 import org.jetbrains.annotations.NotNull;
@@ -1481,6 +1482,13 @@ public class ServerMock extends Server.Spigot implements Server
 	public @NotNull ScoreboardManagerMock getScoreboardManager()
 	{
 		return scoreboardManager;
+	}
+
+	@Override
+	public @NotNull Criteria getScoreboardCriteria(@NotNull String name)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

@@ -22,12 +22,14 @@ public abstract class AbstractProjectileMock extends EntityMock implements Proje
 	}
 
 	@Override
+	@Deprecated(forRemoval = true)
 	public boolean doesBounce()
 	{
 		return this.doesBounce;
 	}
 
 	@Override
+	@Deprecated(forRemoval = true)
 	public void setBounce(boolean doesBounce)
 	{
 		this.doesBounce = doesBounce;

@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
+import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.EquipmentSlot;
@@ -327,6 +328,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	public void setItem(@NotNull EquipmentSlot slot, @Nullable ItemStack item)
 	{
 		Preconditions.checkNotNull(slot, "Slot cannot be null");
+		if (item == null) item = new ItemStack(Material.AIR);
 		switch (slot)
 		{
 		case HAND -> getEquipment().setItemInMainHand(item);
@@ -335,7 +337,6 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 		case LEGS -> setLeggings(item);
 		case CHEST -> setChestplate(item);
 		case HEAD -> setHelmet(item);
-		default -> throw new UnsupportedOperationException(slot.name());
 		}
 	}
 
@@ -364,7 +365,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	public void removeDisabledSlots(@NotNull EquipmentSlot... slots)
 	{
 		Preconditions.checkNotNull(slots, "Slots cannot be null");
-		this.disabledSlots.removeAll(List.of(slots));
+		List.of(slots).forEach(this.disabledSlots::remove);
 	}
 
 	@Override

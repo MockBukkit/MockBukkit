@@ -44,7 +44,6 @@ class AgeableMockTest
 		assertEquals(10, ageable.getAge());
 	}
 
-
 	@Test
 	void testGetAgeLock()
 	{
@@ -113,6 +112,14 @@ class AgeableMockTest
 	void testToString()
 	{
 		assertEquals("AgeableMock", ageable.toString());
+	}
+
+	@Test
+	void testSetAdultWhenBaby()
+	{
+		ageable.setBaby();
+		ageable.setAdult();
+		assertEquals(0, ageable.getAge());
 	}
 
 }
