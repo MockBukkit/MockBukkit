@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class BeeMockTest
+class BeeMockTest
 {
 
 	private BeeMock bee;
@@ -70,7 +70,8 @@ public class BeeMockTest
 	void testSetHiveDifferentWorld()
 	{
 		World world = new WorldCreator("world2").createWorld();
-		assertThrows(IllegalArgumentException.class, () -> bee.setHive(new Location(world, 0, 0, 0)));
+		Location location = new Location(world, 0, 0, 0);
+		assertThrows(IllegalArgumentException.class, () -> bee.setHive(location));
 	}
 	@Test
 	void testGetFlowerDefault()
@@ -97,7 +98,8 @@ public class BeeMockTest
 	void testSetFlowerDifferentWorld()
 	{
 		World world = new WorldCreator("world2").createWorld();
-		assertThrows(IllegalArgumentException.class, () -> bee.setFlower(new Location(world, 0, 0, 0)));
+		Location location = new Location(world, 0, 0, 0);
+		assertThrows(IllegalArgumentException.class, () -> bee.setFlower(location));
 	}
 
 	@Test
