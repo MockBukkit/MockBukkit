@@ -115,7 +115,8 @@ class CreeperMockTest
 	@Test
 	void testSetFuseTicksGreaterThanMaxThrows()
 	{
-		assertThrows(IllegalArgumentException.class, () -> creeper.setFuseTicks(creeper.getMaxFuseTicks() + 1));
+		creeper.setMaxFuseTicks(10);
+		assertThrows(IllegalArgumentException.class, () -> creeper.setFuseTicks(11));
 	}
 
 	@Test
