@@ -36,7 +36,7 @@ public class CreeperMock extends MonsterMock implements Creeper
 	{
 		CreeperPowerEvent.PowerCause cause = powered ? CreeperPowerEvent.PowerCause.SET_ON : CreeperPowerEvent.PowerCause.SET_OFF;
 
-		if (new CreeperPowerEvent( this, cause).callEvent())
+		if (new CreeperPowerEvent(this, cause).callEvent())
 		{
 			this.powered = value;
 		}
@@ -46,7 +46,6 @@ public class CreeperMock extends MonsterMock implements Creeper
 	public void setMaxFuseTicks(int ticks)
 	{
 		Preconditions.checkArgument(ticks >= 0, "Ticks need to be bigger than 0");
-
 		this.maxFuseTicks = ticks;
 	}
 
