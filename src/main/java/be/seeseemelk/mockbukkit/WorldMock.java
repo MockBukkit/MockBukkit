@@ -40,6 +40,7 @@ import be.seeseemelk.mockbukkit.entity.TadpoleMock;
 import be.seeseemelk.mockbukkit.entity.TropicalFishMock;
 import be.seeseemelk.mockbukkit.entity.WardenMock;
 import be.seeseemelk.mockbukkit.entity.WitherSkeletonMock;
+import be.seeseemelk.mockbukkit.entity.WolfMock;
 import be.seeseemelk.mockbukkit.entity.ZombieHorseMock;
 import be.seeseemelk.mockbukkit.entity.ZombieMock;
 import be.seeseemelk.mockbukkit.generator.BiomeProviderMock;
@@ -131,6 +132,7 @@ import org.bukkit.entity.TropicalFish;
 import org.bukkit.entity.Warden;
 import org.bukkit.entity.WaterMob;
 import org.bukkit.entity.WitherSkeleton;
+import org.bukkit.entity.Wolf;
 import org.bukkit.entity.Zombie;
 import org.bukkit.entity.ZombieHorse;
 import org.bukkit.event.entity.CreatureSpawnEvent;
@@ -1081,6 +1083,10 @@ public class WorldMock implements World
 		else if (clazz == Creeper.class)
 		{
 			return new CreeperMock(server, UUID.randomUUID());
+    }
+		else if (clazz == Wolf.class)
+		{
+			return new WolfMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}
