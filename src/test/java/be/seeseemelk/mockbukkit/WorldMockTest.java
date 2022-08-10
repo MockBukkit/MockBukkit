@@ -14,6 +14,8 @@ import be.seeseemelk.mockbukkit.entity.CaveSpiderMock;
 import be.seeseemelk.mockbukkit.entity.ChickenMock;
 import be.seeseemelk.mockbukkit.entity.CodMock;
 import be.seeseemelk.mockbukkit.entity.CowMock;
+import be.seeseemelk.mockbukkit.entity.CreeperMock;
+import be.seeseemelk.mockbukkit.entity.CreeperMock;
 import be.seeseemelk.mockbukkit.entity.DonkeyMock;
 import be.seeseemelk.mockbukkit.entity.EndermanMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
@@ -1235,6 +1237,14 @@ class WorldMockTest
 		assertTrue(entity.isValid());
 	}
 
+	@Test
+	void testSpawnCreeper()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.CREEPER);
+		assertInstanceOf(CreeperMock.class, entity);
+	}
+	
 	@Test
 	void testSpawnWolf()
 	{

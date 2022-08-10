@@ -12,6 +12,7 @@ import be.seeseemelk.mockbukkit.entity.CaveSpiderMock;
 import be.seeseemelk.mockbukkit.entity.ChickenMock;
 import be.seeseemelk.mockbukkit.entity.CodMock;
 import be.seeseemelk.mockbukkit.entity.CowMock;
+import be.seeseemelk.mockbukkit.entity.CreeperMock;
 import be.seeseemelk.mockbukkit.entity.DonkeyMock;
 import be.seeseemelk.mockbukkit.entity.EndermanMock;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
@@ -90,6 +91,7 @@ import org.bukkit.entity.CaveSpider;
 import org.bukkit.entity.Chicken;
 import org.bukkit.entity.Cod;
 import org.bukkit.entity.Cow;
+import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Donkey;
 import org.bukkit.entity.Enderman;
 import org.bukkit.entity.Entity;
@@ -1078,6 +1080,10 @@ public class WorldMock implements World
 		{
 			return new BeeMock(server, UUID.randomUUID());
 		}
+		else if (clazz == Creeper.class)
+		{
+			return new CreeperMock(server, UUID.randomUUID());
+    }
 		else if (clazz == Wolf.class)
 		{
 			return new WolfMock(server, UUID.randomUUID());
