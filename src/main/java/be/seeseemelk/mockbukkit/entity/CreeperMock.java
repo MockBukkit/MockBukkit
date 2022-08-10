@@ -36,17 +36,10 @@ public class CreeperMock extends MonsterMock implements Creeper
 	{
 		CreeperPowerEvent.PowerCause cause = powered ? CreeperPowerEvent.PowerCause.SET_ON : CreeperPowerEvent.PowerCause.SET_OFF;
 
-		if (!this.callPowerEvent(cause))
+		if (new CreeperPowerEvent( this, cause).callEvent())
 		{
 			this.powered = value;
 		}
-	}
-
-	private boolean callPowerEvent(CreeperPowerEvent.PowerCause cause)
-	{
-		CreeperPowerEvent event = new CreeperPowerEvent( this, cause);
-		this.getServer().getPluginManager().callEvent(event);
-		return event.isCancelled();
 	}
 
 	@Override
@@ -108,13 +101,15 @@ public class CreeperMock extends MonsterMock implements Creeper
 	@Override
 	public void setIgnited(boolean ignited)
 	{
-		if (isIgnited() != ignited)
+		if (isIgnited() == ignited)
 		{
-			CreeperIgniteEvent event = new CreeperIgniteEvent(this, ignited);
-			if (event.callEvent())
-			{
-				this.ignited = ignited;
-			}
+			return;
+		}
+
+		CreeperIgniteEvent event = new CreeperIgniteEvent(this, ignited);
+		if (event.callEvent())
+		{
+			this.ignited = ignited;
 		}
 	}
 
