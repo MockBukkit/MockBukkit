@@ -65,7 +65,6 @@ public class WolfMock extends TameableAnimalMock implements Wolf
 	@Override
 	public float getTailAngle()
 	{
-
 		return this.isAngry() ? 1.5393804F : calculateNonAngryTailAngle();
 	}
 
