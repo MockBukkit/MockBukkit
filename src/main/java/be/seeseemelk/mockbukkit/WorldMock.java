@@ -23,6 +23,7 @@ import be.seeseemelk.mockbukkit.entity.FoxMock;
 import be.seeseemelk.mockbukkit.entity.FrogMock;
 import be.seeseemelk.mockbukkit.entity.GhastMock;
 import be.seeseemelk.mockbukkit.entity.GiantMock;
+import be.seeseemelk.mockbukkit.entity.GoatMock;
 import be.seeseemelk.mockbukkit.entity.HorseMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
 import be.seeseemelk.mockbukkit.entity.LlamaMock;
@@ -104,6 +105,7 @@ import org.bukkit.entity.Fox;
 import org.bukkit.entity.Frog;
 import org.bukkit.entity.Ghast;
 import org.bukkit.entity.Giant;
+import org.bukkit.entity.Goat;
 import org.bukkit.entity.Golem;
 import org.bukkit.entity.Hanging;
 import org.bukkit.entity.Horse;
@@ -1087,6 +1089,10 @@ public class WorldMock implements World
 		else if (clazz == Wolf.class)
 		{
 			return new WolfMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Goat.class)
+		{
+			return new GoatMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}
