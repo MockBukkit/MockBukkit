@@ -21,14 +21,14 @@ class EggMockTest
 	private EggMock egg;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		ServerMock server = MockBukkit.mock();
 		egg = new EggMock(server, UUID.randomUUID());
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
