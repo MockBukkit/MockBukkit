@@ -15,10 +15,4 @@ public abstract class ThrowableProjectileMock extends ProjectileMock implements 
 		super(server, uuid);
 	}
 
-	@Override
-	public abstract @NotNull ItemStack getItem();
-
-	@Override
-	public abstract void setItem(@NotNull ItemStack item);
-
 }
