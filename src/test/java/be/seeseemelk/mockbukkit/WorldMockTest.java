@@ -28,6 +28,7 @@ import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
 import be.seeseemelk.mockbukkit.entity.LlamaMock;
 import be.seeseemelk.mockbukkit.entity.MuleMock;
 import be.seeseemelk.mockbukkit.entity.MushroomCowMock;
+import be.seeseemelk.mockbukkit.entity.PigMock;
 import be.seeseemelk.mockbukkit.entity.PufferFishMock;
 import be.seeseemelk.mockbukkit.entity.SalmonMock;
 import be.seeseemelk.mockbukkit.entity.SheepMock;
@@ -1181,6 +1182,7 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.MUSHROOM_COW);
 		assertInstanceOf(MushroomCowMock.class, entity);
+		assertTrue(entity.isValid());
 	}
 
 	@Test
@@ -1243,6 +1245,7 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.CREEPER);
 		assertInstanceOf(CreeperMock.class, entity);
+		assertTrue(entity.isValid());
 	}
 
 	@Test
@@ -1260,6 +1263,15 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.EGG);
 		assertInstanceOf(EggMock.class, entity);
+		assertTrue(entity.isValid());
+	}
+
+	@Test
+	void testSpawnPig()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.PIG);
+		assertInstanceOf(PigMock.class, entity);
 		assertTrue(entity.isValid());
 	}
 
