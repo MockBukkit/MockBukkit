@@ -29,6 +29,7 @@ import be.seeseemelk.mockbukkit.entity.LlamaMock;
 import be.seeseemelk.mockbukkit.entity.MobMock;
 import be.seeseemelk.mockbukkit.entity.MuleMock;
 import be.seeseemelk.mockbukkit.entity.MushroomCowMock;
+import be.seeseemelk.mockbukkit.entity.PigMock;
 import be.seeseemelk.mockbukkit.entity.PufferFishMock;
 import be.seeseemelk.mockbukkit.entity.SalmonMock;
 import be.seeseemelk.mockbukkit.entity.SheepMock;
@@ -116,6 +117,7 @@ import org.bukkit.entity.Llama;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Mule;
 import org.bukkit.entity.MushroomCow;
+import org.bukkit.entity.Pig;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.entity.PufferFish;
@@ -1083,10 +1085,14 @@ public class WorldMock implements World
 		else if (clazz == Creeper.class)
 		{
 			return new CreeperMock(server, UUID.randomUUID());
-    }
+		}
 		else if (clazz == Wolf.class)
 		{
 			return new WolfMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Pig.class)
+		{
+			return new PigMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}
