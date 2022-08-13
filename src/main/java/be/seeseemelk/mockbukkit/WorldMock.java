@@ -14,6 +14,7 @@ import be.seeseemelk.mockbukkit.entity.CodMock;
 import be.seeseemelk.mockbukkit.entity.CowMock;
 import be.seeseemelk.mockbukkit.entity.CreeperMock;
 import be.seeseemelk.mockbukkit.entity.DonkeyMock;
+import be.seeseemelk.mockbukkit.entity.EggMock;
 import be.seeseemelk.mockbukkit.entity.EndermanMock;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
@@ -94,6 +95,7 @@ import org.bukkit.entity.Cod;
 import org.bukkit.entity.Cow;
 import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Donkey;
+import org.bukkit.entity.Egg;
 import org.bukkit.entity.Enderman;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -1089,6 +1091,10 @@ public class WorldMock implements World
 		else if (clazz == Wolf.class)
 		{
 			return new WolfMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Egg.class)
+		{
+			return new EggMock(server, UUID.randomUUID());
 		}
 		else if (clazz == Pig.class)
 		{
