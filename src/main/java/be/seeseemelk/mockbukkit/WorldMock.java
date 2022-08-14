@@ -14,6 +14,7 @@ import be.seeseemelk.mockbukkit.entity.CodMock;
 import be.seeseemelk.mockbukkit.entity.CowMock;
 import be.seeseemelk.mockbukkit.entity.CreeperMock;
 import be.seeseemelk.mockbukkit.entity.DonkeyMock;
+import be.seeseemelk.mockbukkit.entity.EggMock;
 import be.seeseemelk.mockbukkit.entity.EndermanMock;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
@@ -30,6 +31,7 @@ import be.seeseemelk.mockbukkit.entity.LlamaMock;
 import be.seeseemelk.mockbukkit.entity.MobMock;
 import be.seeseemelk.mockbukkit.entity.MuleMock;
 import be.seeseemelk.mockbukkit.entity.MushroomCowMock;
+import be.seeseemelk.mockbukkit.entity.PigMock;
 import be.seeseemelk.mockbukkit.entity.PufferFishMock;
 import be.seeseemelk.mockbukkit.entity.SalmonMock;
 import be.seeseemelk.mockbukkit.entity.SheepMock;
@@ -94,6 +96,7 @@ import org.bukkit.entity.Cod;
 import org.bukkit.entity.Cow;
 import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Donkey;
+import org.bukkit.entity.Egg;
 import org.bukkit.entity.Enderman;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -118,6 +121,7 @@ import org.bukkit.entity.Llama;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Mule;
 import org.bukkit.entity.MushroomCow;
+import org.bukkit.entity.Pig;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.entity.PufferFish;
@@ -1085,7 +1089,7 @@ public class WorldMock implements World
 		else if (clazz == Creeper.class)
 		{
 			return new CreeperMock(server, UUID.randomUUID());
-    }
+		}
 		else if (clazz == Wolf.class)
 		{
 			return new WolfMock(server, UUID.randomUUID());
@@ -1093,6 +1097,14 @@ public class WorldMock implements World
 		else if (clazz == Goat.class)
 		{
 			return new GoatMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Egg.class)
+		{
+			return new EggMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Pig.class)
+		{
+			return new PigMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}
