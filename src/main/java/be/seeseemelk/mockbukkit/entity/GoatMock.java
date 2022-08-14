@@ -79,7 +79,7 @@ public class GoatMock extends AnimalsMock implements Goat
 		Preconditions.checkNotNull(entity, "Entity cannot be null");
 		if (!this.attackedMobs.contains(entity))
 		{
-			fail();
+			fail("Expected Goat to have rammed " + entity.getName() + " but it did not!");
 		}
 	}
 
