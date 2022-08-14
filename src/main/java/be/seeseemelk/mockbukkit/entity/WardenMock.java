@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Warden;
@@ -25,6 +26,13 @@ public class WardenMock extends MonsterMock implements Warden
 	{
 		Preconditions.checkNotNull(entity, "Entity cannot be null");
 		return angerPerEntity.getOrDefault(entity, 0);
+	}
+
+	@Override
+	public int getHighestAnger()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

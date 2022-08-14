@@ -11,6 +11,7 @@ import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Keyed;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.RegionAccessor;
 import org.bukkit.Registry;
 import org.bukkit.UnsafeValues;
 import org.bukkit.World;
@@ -365,10 +366,25 @@ public class MockUnsafeValues implements UnsafeValues
 	}
 
 	@Override
+	public @NotNull NamespacedKey getBiomeKey(RegionAccessor accessor, int x, int y, int z)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setBiomeKey(RegionAccessor accessor, int x, int y, int z, NamespacedKey biomeKey)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public Material getMaterial(String material, int version)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
+
 
 }
