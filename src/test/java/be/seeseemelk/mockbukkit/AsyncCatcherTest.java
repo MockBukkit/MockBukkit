@@ -4,10 +4,10 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AsyncCatcherTest
 {
@@ -33,11 +33,11 @@ class AsyncCatcherTest
 	}
 
 	@Test
-	void catchOp_NotMainThread_ThrowsException()
+	void catchOp_NotMainThread_ThrowsException() throws InterruptedException
 	{
-		AtomicReference<Exception> exceptionThrown = new AtomicReference<>();
+		AtomicBoolean exceptionThrown = new AtomicBoolean();
 
-		server.getScheduler().runTaskAsynchronously(null, () ->
+		Thread thread = new Thread(() ->
 		{
 			try
 			{
@@ -45,13 +45,13 @@ class AsyncCatcherTest
 			}
 			catch (IllegalStateException e)
 			{
-				exceptionThrown.set(e);
+				exceptionThrown.set(true);
 			}
 		});
+		thread.start();
+		thread.join();
 
-		server.getScheduler().waitAsyncTasksFinished();
-
-		assertNotNull(exceptionThrown.get());
+		assertTrue(exceptionThrown.get(), "No exception thrown");
 	}
 
 }
