@@ -4,6 +4,8 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.TestPlugin;
 import be.seeseemelk.mockbukkit.exception.EventHandlerException;
+import org.bukkit.World;
+import org.bukkit.WorldCreator;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,8 +17,12 @@ import org.bukkit.permissions.Permissible;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.ServicePriority;
+import org.bukkit.plugin.java.JavaPluginUtils;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
@@ -205,8 +211,9 @@ class PluginManagerMockTest
 	{
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
 		assertTrue(plugin.isEnabled());
+
 		pluginManager.disablePlugin(plugin);
-		pluginManager.assertEventFired(PluginDisableEvent.class, event -> event.getPlugin().equals(plugin));
+
 		assertFalse(plugin.isEnabled(), "Plugin was not disabled");
 		assertTrue(plugin.onDisableExecuted);
 	}
@@ -214,11 +221,99 @@ class PluginManagerMockTest
 	@Test
 	void disablePlugins_LoadedPlugins_AllDisabled()
 	{
-		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
-		assertTrue(plugin.isEnabled());
+		TestPlugin plugin1 = MockBukkit.load(TestPlugin.class);
+		TestPlugin plugin2 = MockBukkit.load(TestPlugin.class);
+		assertTrue(plugin1.isEnabled());
+		assertTrue(plugin2.isEnabled());
+
 		pluginManager.disablePlugins();
-		assertFalse(plugin.isEnabled(), "Plugin was not disabled");
-		assertTrue(plugin.onDisableExecuted);
+
+		assertFalse(plugin1.isEnabled(), "Plugin1 was not disabled");
+		assertFalse(plugin2.isEnabled(), "Plugin2 was not disabled");
+		assertTrue(plugin1.onDisableExecuted);
+		assertTrue(plugin2.onDisableExecuted);
+	}
+
+	@Test
+	void disablePlugin_PluginDisableEvent_IsFired()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+
+		pluginManager.disablePlugin(plugin);
+
+		pluginManager.assertEventFired(PluginDisableEvent.class, event -> event.getPlugin().equals(plugin));
+	}
+
+	@Test
+	void disablePlugin_Unloaded_PluginDisableEvent_NotFired()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		JavaPluginUtils.setEnabled(plugin, false);
+
+		pluginManager.disablePlugin(plugin);
+
+		pluginManager.assertEventNotFired(PluginDisableEvent.class);
+	}
+
+	@Test
+	void disablePlugin_TasksCanceled()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		BukkitRunnable runnable = new BukkitRunnable()
+		{
+			@Override
+			public void run()
+			{
+			}
+		};
+		runnable.runTaskTimer(plugin, 1, 1);
+
+		pluginManager.disablePlugin(plugin);
+
+		assertTrue(runnable.isCancelled());
+	}
+
+	@Test
+	void disablePlugin_ServicesUnregistered()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		server.getServicesManager().register(Object.class, new Object(), plugin, ServicePriority.High);
+		assertTrue(server.getServicesManager().isProvidedFor(Object.class));
+
+		pluginManager.disablePlugin(plugin);
+
+		assertFalse(server.getServicesManager().isProvidedFor(Object.class));
+	}
+
+	@Test
+	void disablePlugin_DisablesPluginChannels()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		server.getMessenger().registerOutgoingPluginChannel(plugin, "BungeeCord");
+		server.getMessenger().registerIncomingPluginChannel(plugin, "BungeeCord", (channel, player, message) ->
+		{
+		});
+		assertTrue(server.getMessenger().isOutgoingChannelRegistered(plugin, "BungeeCord"));
+		assertTrue(server.getMessenger().isIncomingChannelRegistered(plugin, "BungeeCord"));
+
+		pluginManager.disablePlugin(plugin);
+
+		assertFalse(server.getMessenger().isOutgoingChannelRegistered(plugin, "BungeeCord"));
+		assertFalse(server.getMessenger().isIncomingChannelRegistered(plugin, "BungeeCord"));
+	}
+
+	@Test
+	@Disabled("Not implemented yet")
+	void disablePlugin_WorldChunkTicketsRemoved()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		World world = server.createWorld(new WorldCreator(""));
+		world.addPluginChunkTicket(0, 0, plugin);
+		assertTrue(world.getPluginChunkTickets(0, 0).contains(plugin));
+
+		pluginManager.disablePlugin(plugin);
+
+		assertFalse(world.getPluginChunkTickets(0, 0).contains(plugin));
 	}
 
 	@Test

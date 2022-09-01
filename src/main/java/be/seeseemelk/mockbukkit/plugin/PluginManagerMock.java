@@ -15,7 +15,6 @@ import org.bukkit.event.Event;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
-import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.event.server.PluginEnableEvent;
 import org.bukkit.permissions.Permissible;
 import org.bukkit.permissions.Permission;
@@ -784,19 +783,26 @@ public class PluginManagerMock implements PluginManager
 	@Override
 	public void disablePlugin(@NotNull Plugin plugin)
 	{
-		if (plugin instanceof JavaPlugin)
-		{
-			if (plugin.isEnabled())
-			{
-				unregisterPluginEvents(plugin);
-				JavaPluginUtils.setEnabled((JavaPlugin) plugin, false);
-				callEvent(new PluginDisableEvent(plugin));
-			}
-		}
-		else
-		{
-			throw new IllegalArgumentException("Not a JavaPlugin");
-		}
+		Preconditions.checkArgument(plugin instanceof JavaPlugin, "Not a JavaPlugin");
+		if (!plugin.isEnabled())
+			return;
+
+		// Don't print the "disabling x plugin" message
+		Level prevLevel = plugin.getLogger().getLevel();
+		plugin.getLogger().setLevel(Level.WARNING);
+		plugin.getPluginLoader().disablePlugin(plugin);
+		plugin.getLogger().setLevel(prevLevel);
+
+		unregisterPluginEvents(plugin);
+		server.getScheduler().cancelTasks(plugin);
+		server.getServicesManager().unregisterAll(plugin);
+		server.getMessenger().unregisterIncomingPluginChannel(plugin);
+		server.getMessenger().unregisterOutgoingPluginChannel(plugin);
+		// todo: implement chunk tickets
+//		for (World world : server.getWorlds())
+//		{
+//			world.removePluginChunkTickets(plugin);
+//		}
 	}
 
 	@Override
