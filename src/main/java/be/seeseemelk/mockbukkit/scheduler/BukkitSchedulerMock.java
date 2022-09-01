@@ -1,9 +1,9 @@
 package be.seeseemelk.mockbukkit.scheduler;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
+import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
+import org.bukkit.plugin.IllegalPluginAccessException;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
@@ -13,174 +13,641 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
+import java.util.PriorityQueue;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import java.util.concurrent.SynchronousQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
-import java.util.logging.Logger;
+import java.util.function.Function;
+import java.util.function.IntUnaryOperator;
 
+/**
+ * Taken and heavily modified from <a href="https://hub.spigotmc.org/stash/projects/SPIGOT/repos/craftbukkit/browse/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java">CraftBukkit's scheduler</a>.
+ */
 public class BukkitSchedulerMock implements BukkitScheduler
 {
 
-	private static final String LOGGER_NAME = "BukkitSchedulerMock";
-	private final ThreadPoolExecutor pool = new ThreadPoolExecutor(0, Integer.MAX_VALUE,
-			60L, TimeUnit.SECONDS,
-			new SynchronousQueue<>());
-	private final ExecutorService asyncEventExecutor = Executors.newCachedThreadPool();
-	private final List<Future<?>> queuedAsyncEvents = new ArrayList<>();
-	private final TaskList scheduledTasks = new TaskList();
-	private final AtomicReference<Exception> asyncException = new AtomicReference<>();
-	private long currentTick = 0;
-	private final AtomicInteger id = new AtomicInteger();
-	private long executorTimeout = 60000;
-
-	private static @NotNull Runnable wrapTask(@NotNull ScheduledTask task)
-	{
-		return () ->
-		{
-			task.setRunning(true);
-			task.run();
-			task.setRunning(false);
-		};
-	}
+	private static final int START_ID = 1;
 
 	/**
-	 * Sets the maximum time to wait for async tasks to finish before terminating them.
-	 *
-	 * @param timeout The timeout in milliseconds.
+	 * Prevents the ID from overflowing.
 	 */
-	public void setShutdownTimeout(long timeout)
-	{
-		this.executorTimeout = timeout;
-	}
+	private static final IntUnaryOperator INCREMENT_IDS = previous -> (previous == Integer.MAX_VALUE) ? START_ID : previous + 1;
 
 	/**
-	 * Shuts the scheduler down. Note that this function will throw exception that where thrown by old asynchronous
-	 * tasks.
+	 * The ID of the previous task. Should be updated before creating a new task.
 	 */
-	public void shutdown()
-	{
-		waitAsyncTasksFinished();
-		shutdownPool(pool);
-
-		if (asyncException.get() != null)
-			throw new AsyncTaskException(asyncException.get());
-
-		waitAsyncEventsFinished();
-		shutdownPool(asyncEventExecutor);
-	}
+	private final AtomicInteger taskId = new AtomicInteger(BukkitSchedulerMock.START_ID);
 
 	/**
-	 * Shuts down the given executor service, waiting up to the shutdown timeout for all tasks to finish.
-	 *
-	 * @param pool The pool to shut down.
-	 * @see #setShutdownTimeout(long)
+	 * A queue of all tasks that need to be run.
 	 */
-	private void shutdownPool(@NotNull ExecutorService pool)
+	private final LinkedList<Task> tasks = new LinkedList<>();
+
+	/**
+	 * Pending synchronous tasks. Sync only.
+	 */
+	protected final PriorityQueue<Task> pendingSync = new PriorityQueue<>(Comparator.comparingLong(Task::getNextRun).thenComparing(Task::getCreationTime));
+
+	/**
+	 * Sync only.
+	 */
+	private final List<Task> tempSync = new ArrayList<>();
+
+	/**
+	 * Currently running tasks. Only used to see what tasks are running.
+	 */
+	protected final Map<Integer, Task> runners = new ConcurrentHashMap<>();
+
+	/**
+	 * The sync task that's currently executing.
+	 */
+	private volatile Task currentTask;
+
+	/**
+	 * The current tick of the scheduler.
+	 */
+	protected volatile AtomicInteger currentTick = new AtomicInteger(-1);
+
+	private final BukkitSchedulerMock asyncScheduler;
+	private final boolean isAsyncScheduler;
+
+	public BukkitSchedulerMock()
 	{
-		pool.shutdown();
-		try
-		{
-			if (!pool.awaitTermination(this.executorTimeout, TimeUnit.MILLISECONDS))
-			{
-				pool.shutdownNow();
-			}
-		}
-		catch (InterruptedException e)
-		{
-			pool.shutdownNow();
-			Thread.currentThread().interrupt();
-		}
+		this(false);
 	}
 
-	public @NotNull Future<?> executeAsyncEvent(@NotNull Event event)
+	public BukkitSchedulerMock(boolean isAsync)
 	{
-		return executeAsyncEvent(event, null);
+		this.isAsyncScheduler = isAsync;
+		this.asyncScheduler = (isAsync) ? this : new AsyncSchedulerMock();
 	}
 
-	public <T extends Event> @NotNull Future<?> executeAsyncEvent(@NotNull T event, @Nullable Consumer<T> func)
+	@Override
+	public int scheduleSyncDelayedTask(@NotNull Plugin plugin, @NotNull Runnable task)
 	{
-		MockBukkit.ensureMocking();
-		Preconditions.checkNotNull(event, "Cannot call a null event!");
-		Future<?> future = asyncEventExecutor.submit(() ->
-		{
-			MockBukkit.getMock().getPluginManager().callEvent(event);
-			if (func != null)
-			{
-				func.accept(event);
-			}
-		});
-		queuedAsyncEvents.add(future);
+		return this.scheduleSyncDelayedTask(plugin, task, 0L);
+	}
+
+	@Override
+	public @NotNull BukkitTask runTask(@NotNull Plugin plugin, @NotNull Runnable runnable)
+	{
+		return this.runTaskLater(plugin, runnable, 0L);
+	}
+
+	@Override
+	public void runTask(@NotNull Plugin plugin, @NotNull Consumer<BukkitTask> task) throws IllegalArgumentException
+	{
+		this.runTaskLater(plugin, task, 0L);
+	}
+
+	@Override
+	public @NotNull BukkitTask runTaskAsynchronously(@NotNull Plugin plugin, @NotNull Runnable runnable)
+	{
+		return this.runTaskLaterAsynchronously(plugin, runnable, 0L);
+	}
+
+	@Override
+	public void runTaskAsynchronously(@NotNull Plugin plugin, @NotNull Consumer<BukkitTask> task) throws IllegalArgumentException
+	{
+		this.runTaskLaterAsynchronously(plugin, task, 0L);
+	}
+
+	@Override
+	public int scheduleSyncDelayedTask(@NotNull Plugin plugin, @NotNull Runnable task, long delay)
+	{
+		return this.scheduleSyncRepeatingTask(plugin, task, delay, Task.NO_REPEATING);
+	}
+
+	@Override
+	public @NotNull BukkitTask runTaskLater(@NotNull Plugin plugin, @NotNull Runnable runnable, long delay)
+	{
+		return this.runTaskTimer(plugin, runnable, delay, Task.NO_REPEATING);
+	}
+
+	@Override
+	public void runTaskLater(@NotNull Plugin plugin, @NotNull Consumer<BukkitTask> task, long delay) throws IllegalArgumentException
+	{
+		this.runTaskTimer(plugin, task, delay, Task.NO_REPEATING);
+	}
+
+	@Override
+	public @NotNull BukkitTask runTaskLaterAsynchronously(@NotNull Plugin plugin, @NotNull Runnable runnable, long delay)
+	{
+		return this.runTaskTimerAsynchronously(plugin, runnable, delay, Task.NO_REPEATING);
+	}
+
+	@Override
+	public void runTaskLaterAsynchronously(@NotNull Plugin plugin, @NotNull Consumer<BukkitTask> task, long delay) throws IllegalArgumentException
+	{
+		this.runTaskTimerAsynchronously(plugin, task, delay, Task.NO_REPEATING);
+	}
+
+	@Override
+	public void runTaskTimerAsynchronously(@NotNull Plugin plugin, @NotNull Consumer<BukkitTask> task, long delay, long period) throws IllegalArgumentException
+	{
+		this.runTaskTimerAsynchronously(plugin, (Object) task, delay, period);
+	}
+
+	@Override
+	public int scheduleSyncRepeatingTask(@NotNull Plugin plugin, @NotNull Runnable runnable, long delay, long period)
+	{
+		return this.runTaskTimer(plugin, runnable, delay, period).getTaskId();
+	}
+
+	@Override
+	public @NotNull BukkitTask runTaskTimer(@NotNull Plugin plugin, @NotNull Runnable runnable, long delay, long period)
+	{
+		return this.runTaskTimer(plugin, (Object) runnable, delay, period);
+	}
+
+	@Override
+	public void runTaskTimer(@NotNull Plugin plugin, @NotNull Consumer<BukkitTask> task, long delay, long period) throws IllegalArgumentException
+	{
+		this.runTaskTimer(plugin, (Object) task, delay, period);
+	}
+
+	public BukkitTask runTaskTimer(Plugin plugin, Object runnable, long delay, long period)
+	{
+		BukkitSchedulerMock.validateTaskObj(plugin, runnable);
+		delay = Math.max(delay, 0L);
+		period = (period < Task.NO_REPEATING) ? Task.NO_REPEATING : Math.min(period, 1L);
+		return this.handleTask(new Task(this, this.nextId(), plugin, period, runnable), delay);
+	}
+
+	@Override
+	public @NotNull BukkitTask runTaskTimerAsynchronously(@NotNull Plugin plugin, @NotNull Runnable runnable, long delay, long period)
+	{
+		return this.runTaskTimerAsynchronously(plugin, (Object) runnable, delay, period);
+	}
+
+	public BukkitTask runTaskTimerAsynchronously(Plugin plugin, Object runnable, long delay, long period)
+	{
+		BukkitSchedulerMock.validateTaskObj(plugin, runnable);
+		delay = Math.max(delay, 0L);
+		period = (period < Task.NO_REPEATING) ? Task.NO_REPEATING : Math.min(period, 1L);
+		return this.handleTask(new AsyncTask(this, this.asyncScheduler.runners, this.nextId(), plugin, period, runnable), delay);
+	}
+
+	@Override
+	public <T> @NotNull FutureTask<T> callSyncMethod(@NotNull Plugin plugin, @NotNull Callable<T> task)
+	{
+		BukkitSchedulerMock.validateTaskObj(plugin, task);
+		FutureTask<T> future = new FutureTask<>(this, this.nextId(), plugin, task);
+		this.handleTask(future, 0L);
 		return future;
 	}
 
-	/**
-	 * Get the current tick of the server.
-	 *
-	 * @return The current tick of the server.
-	 */
-	public long getCurrentTick()
+	@Override
+	public void cancelTask(int taskId)
 	{
-		return currentTick;
+		if (taskId <= 0)
+			return;
+		if (!this.isAsyncScheduler)
+			this.asyncScheduler.cancelTask(taskId);
+
+		Task task = this.runners.get(taskId);
+		if (task != null)
+			task.cancel0();
+
+		task = new Task(this, () ->
+		{
+			if (!tryCancel(BukkitSchedulerMock.this.tempSync, t -> t.getTaskId() == taskId))
+			{
+				tryCancel(BukkitSchedulerMock.this.pendingSync, t -> t.getTaskId() == taskId);
+			}
+		});
+
+		this.handleTask(task, 0L);
+
+		Task pendingTask;
+		synchronized (this.tasks)
+		{
+			while ((pendingTask = tasks.poll()) != null)
+			{
+				if (pendingTask == task)
+					return;
+				if (pendingTask.getTaskId() == taskId)
+					pendingTask.cancel0();
+			}
+		}
 	}
 
-	/**
-	 * Perform one tick on the server.
-	 */
-	public void performOneTick()
+	@Override
+	public void cancelTasks(@NotNull Plugin plugin)
 	{
-		currentTick++;
-		List<ScheduledTask> oldTasks = scheduledTasks.getCurrentTaskList();
-
-		for (ScheduledTask task : oldTasks)
+		Preconditions.checkNotNull(plugin, "Cannot cancel tasks of null plugin");
+		if (!this.isAsyncScheduler)
 		{
-			if (task.getScheduledTick() == currentTick && !task.isCancelled())
-			{
-				if (task.isSync())
-				{
-					wrapTask(task).run();
-				}
-				else
-				{
-					pool.submit(wrapTask(task));
-				}
+			this.asyncScheduler.cancelTasks(plugin);
+		}
+		Task task = new Task(this, () ->
+		{
+			tryCancel(BukkitSchedulerMock.this.pendingSync, t -> t.getOwner().equals(plugin));
+			tryCancel(BukkitSchedulerMock.this.tempSync, t -> t.getOwner().equals(plugin));
+		});
+		this.handleTask(task, 0L);
 
-				if (task instanceof RepeatingTask)
+		synchronized (this.tasks)
+		{
+			Task pendingTask;
+			while ((pendingTask = this.tasks.poll()) != null)
+			{
+				if (pendingTask == task)
+					break;
+				if (pendingTask.getTaskId() != -1 && pendingTask.getOwner().equals(plugin))
 				{
-					if (!task.isCancelled())
-					{
-						((RepeatingTask) task).updateScheduledTick();
-						scheduledTasks.addTask(task);
-					}
-				}
-				else
-				{
-					task.cancel();
+					pendingTask.cancel0();
 				}
 			}
 		}
+
+		for (Task runner : this.runners.values())
+		{
+			if (runner.getOwner().equals(plugin))
+			{
+				runner.cancel0();
+			}
+		}
+	}
+
+	/**
+	 * Utility method for the cancelTask methods.
+	 *
+	 * @param collection What tasks to filter through.
+	 * @param filter     A function for how tasks should be filtered. The first task to meet this filter is canceled.
+	 * @return True if a task was canceled, false otherwise.
+	 */
+	private boolean tryCancel(Collection<Task> collection, Function<Task, Boolean> filter)
+	{
+		Iterator<Task> iter = collection.iterator();
+		while (iter.hasNext())
+		{
+			Task task = iter.next();
+			if (!filter.apply(task))
+				continue;
+			task.cancel0();
+			iter.remove();
+			if (!task.isSync())
+				continue;
+			BukkitSchedulerMock.this.runners.remove(task.getTaskId());
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean isCurrentlyRunning(int taskId)
+	{
+		if (!this.isAsyncScheduler && this.asyncScheduler.isCurrentlyRunning(taskId))
+			return true;
+
+		Task task = this.runners.get(taskId);
+		if (task == null)
+			return false;
+
+		if (task.isSync())
+			return (task == this.currentTask);
+
+		AsyncTask asyncTask = (AsyncTask) task;
+		synchronized (asyncTask.getWorkers())
+		{
+			return !asyncTask.getWorkers().isEmpty();
+		}
+	}
+
+	@Override
+	public boolean isQueued(int taskId)
+	{
+		if (taskId <= 0)
+			return false;
+		if (!this.isAsyncScheduler && this.asyncScheduler.isQueued(taskId))
+			return true;
+
+		synchronized (this.tasks)
+		{
+			Task pendingTask;
+			while ((pendingTask = tasks.poll()) != null)
+			{
+				if (pendingTask.getTaskId() != taskId)
+					continue;
+				return pendingTask.getPeriod() >= Task.NO_REPEATING;
+			}
+		}
+
+		Task task = this.runners.get(taskId);
+		return task != null && task.getPeriod() >= Task.NO_REPEATING;
+	}
+
+	@Override
+	public @NotNull List<BukkitWorker> getActiveWorkers()
+	{
+		if (!isAsyncScheduler)
+		{
+			return this.asyncScheduler.getActiveWorkers();
+		}
+		List<BukkitWorker> workers = new ArrayList<>();
+		for (Task taskObj : this.runners.values())
+		{
+			if (taskObj.isSync())
+				continue;
+
+			AsyncTask task = (AsyncTask) taskObj;
+			synchronized (task.getWorkers())
+			{
+				workers.addAll(task.getWorkers());
+			}
+		}
+		return workers;
+	}
+
+	@Override
+	public @NotNull List<BukkitTask> getPendingTasks()
+	{
+		List<Task> truePending = new ArrayList<>();
+
+		synchronized (this.tasks)
+		{
+			Task pendingTask;
+			while ((pendingTask = this.tasks.poll()) != null)
+			{
+				if (pendingTask.getTaskId() != Task.NO_REPEATING)
+				{
+					truePending.add(pendingTask);
+				}
+			}
+		}
+
+		List<BukkitTask> pending = new ArrayList<>();
+		for (Task task : this.runners.values())
+		{
+			if (task.getPeriod() >= Task.NO_REPEATING)
+			{
+				pending.add(task);
+			}
+		}
+
+		for (Task task : truePending)
+		{
+			if (task.getPeriod() >= Task.NO_REPEATING && !pending.contains(task))
+			{
+				pending.add(task);
+			}
+		}
+		if (!this.isAsyncScheduler)
+		{
+			pending.addAll(this.asyncScheduler.getPendingTasks());
+		}
+		return pending;
+	}
+
+	/**
+	 * Preforms one scheduler tick.
+	 */
+	public void performOneTick()
+	{
+		if (!this.isAsyncScheduler)
+		{
+			this.asyncScheduler.performOneTick();
+		}
+
+		this.currentTick.incrementAndGet();
+		this.parsePending();
+
+		while (!this.pendingSync.isEmpty() && this.pendingSync.peek().getNextRun() <= this.currentTick.get())
+		{
+			Task task = this.pendingSync.remove();
+			if (task.getPeriod() < Task.NO_REPEATING)
+			{
+				if (task.isSync())
+				{
+					this.runners.remove(task.getTaskId(), task);
+				}
+				this.parsePending();
+				continue;
+			}
+			this.currentTask = task;
+			try
+			{
+				task.run();
+			}
+			finally
+			{
+				this.currentTask = null;
+			}
+			this.parsePending();
+			long period = task.getPeriod();
+			if (period > 0)
+			{
+				task.setNextRun(this.currentTick.get() + period);
+				this.tempSync.add(task);
+			}
+			else if (task.isSync())
+			{
+				this.runners.remove(task.getTaskId());
+			}
+		}
+		this.pendingSync.addAll(this.tempSync);
+		this.tempSync.clear();
+	}
+
+	protected void addTask(Task task)
+	{
+		synchronized (this.tasks)
+		{
+			this.tasks.addLast(task);
+		}
+	}
+
+	protected Task handleTask(Task task, long delay)
+	{
+		if (!this.isAsyncScheduler && !task.isSync())
+		{
+			this.asyncScheduler.handleTask(task, delay);
+			return task;
+		}
+		task.setNextRun(this.currentTick.get() + delay);
+		this.addTask(task);
+		return task;
+	}
+
+	private static void validateTaskObj(Plugin plugin, Object task)
+	{
+		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
+		Preconditions.checkNotNull(task, "Task cannot be null");
+		Preconditions.checkArgument(task instanceof Runnable || task instanceof Consumer || task instanceof Callable, "Task must be Runnable, Consumer, or Callable");
+		checkPluginEnabled(plugin);
+	}
+
+	private static void checkPluginEnabled(Plugin plugin)
+	{
+		if (plugin.isEnabled())
+			return;
+		throw new IllegalPluginAccessException("Plugin attempted to register task while disabled");
+	}
+
+	/**
+	 * Increments {@link BukkitSchedulerMock#taskId} and returns it's value. Will continue to increment if tasks with the selected ID are still running.
+	 *
+	 * @return The next task ID that should be used.
+	 */
+	private int nextId()
+	{
+		Preconditions.checkArgument(this.runners.size() < Integer.MAX_VALUE, "There are already " + Integer.MAX_VALUE + " tasks scheduled! Cannot schedule more.");
+		int nextId;
+		do
+		{
+			nextId = this.taskId.updateAndGet(INCREMENT_IDS);
+		} while (this.runners.containsKey(nextId)); // Prevent duplicate ID's after the ID counter resets.
+		return nextId;
+	}
+
+	protected void parsePending()
+	{
+		synchronized (this.tasks)
+		{
+			Task task;
+			while ((task = this.tasks.poll()) != null)
+			{
+				if (task.getTaskId() == Task.NO_REPEATING)
+				{
+					task.run();
+				}
+				else if (task.getPeriod() >= Task.NO_REPEATING)
+				{
+					this.pendingSync.add(task);
+					this.runners.put(task.getTaskId(), task);
+				}
+			}
+		}
+	}
+
+	// region Deprecated Bukkit Runnables
+	@Deprecated
+	@Override
+	public int scheduleAsyncDelayedTask(@NotNull Plugin plugin, @NotNull Runnable task)
+	{
+		throw new UnsupportedOperationException("Deprecated. Use #runTaskAsynchronously instead");
+	}
+
+	@Deprecated
+	@Override
+	public int scheduleAsyncDelayedTask(@NotNull Plugin plugin, @NotNull Runnable task, long delay)
+	{
+		throw new UnsupportedOperationException("Deprecated. Use #runTaskTimerAsynchronously instead");
+	}
+
+	@Deprecated
+	@Override
+	public int scheduleAsyncRepeatingTask(@NotNull Plugin plugin, @NotNull Runnable runnable, long delay, long period)
+	{
+		throw new UnsupportedOperationException("Deprecated. Use #runTaskTimerAsynchronously instead");
+	}
+
+	@Deprecated
+	@Override
+	public int scheduleSyncDelayedTask(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay)
+	{
+		throw new UnsupportedOperationException("Use BukkitRunnable#runTaskLater(Plugin, long)");
+	}
+
+	@Deprecated
+	@Override
+	public int scheduleSyncDelayedTask(@NotNull Plugin plugin, @NotNull BukkitRunnable task)
+	{
+		throw new UnsupportedOperationException("Use BukkitRunnable#runTask(Plugin)");
+	}
+
+	@Deprecated
+	@Override
+	public int scheduleSyncRepeatingTask(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay, long period)
+	{
+		throw new UnsupportedOperationException("Use BukkitRunnable#runTaskTimer(Plugin, long, long)");
+	}
+
+	@Deprecated
+	@Override
+	public @NotNull BukkitTask runTask(@NotNull Plugin plugin, @NotNull BukkitRunnable task) throws IllegalArgumentException
+	{
+		throw new UnsupportedOperationException("Use BukkitRunnable#runTask(Plugin)");
+	}
+
+	@Deprecated
+	@Override
+	public @NotNull BukkitTask runTaskAsynchronously(@NotNull Plugin plugin, @NotNull BukkitRunnable task) throws IllegalArgumentException
+	{
+		throw new UnsupportedOperationException("Use BukkitRunnable#runTaskAsynchronously(Plugin)");
+	}
+
+	@Deprecated
+	@Override
+	public @NotNull BukkitTask runTaskLater(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay) throws IllegalArgumentException
+	{
+		throw new UnsupportedOperationException("Use BukkitRunnable#runTaskLater(Plugin, long)");
+	}
+
+	@Deprecated
+	@Override
+	public @NotNull BukkitTask runTaskLaterAsynchronously(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay) throws IllegalArgumentException
+	{
+		throw new UnsupportedOperationException("Use BukkitRunnable#runTaskLaterAsynchronously(Plugin, long)");
+	}
+
+	@Deprecated
+	@Override
+	public @NotNull BukkitTask runTaskTimer(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay, long period) throws IllegalArgumentException
+	{
+		throw new UnsupportedOperationException("Use BukkitRunnable#runTaskTimer(Plugin, long, long)");
+	}
+
+	@Deprecated
+	@Override
+	public @NotNull BukkitTask runTaskTimerAsynchronously(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay, long period) throws IllegalArgumentException
+	{
+		throw new UnsupportedOperationException("Use BukkitRunnable#runTaskTimerAsynchronously(Plugin, long, long)");
+	}
+	// endregion
+
+	@Override
+	public @NotNull Executor getMainThreadExecutor(@NotNull Plugin plugin)
+	{
+		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
+		checkPluginEnabled(plugin);
+		return command ->
+		{
+			Preconditions.checkNotNull(command, "Command cannot be null");
+			this.runTask(plugin, command);
+		};
+	}
+
+	// region Custom Methods
+
+	/**
+	 * Gets the current tick of the scheduler.
+	 *
+	 * @return The current scheduler tick.
+	 */
+	public int getCurrentTick()
+	{
+		return this.currentTick.get();
 	}
 
 	/**
 	 * Perform a number of ticks on the server.
 	 *
-	 * @param ticks The number of ticks to executed.
+	 * @param ticks The amount of ticks to perform.
 	 */
-	public void performTicks(long ticks)
+	public void performTicks(int ticks)
 	{
-		for (long i = 0; i < ticks; i++)
+		for (int i = 0; i < ticks; i++)
 		{
 			performOneTick();
 		}
@@ -189,466 +656,38 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	/**
 	 * Gets the number of async tasks which are awaiting execution.
 	 *
-	 * @return The number of async tasks which are pending execution.
+	 * @return The number of queued async tasks.
 	 */
 	public int getNumberOfQueuedAsyncTasks()
 	{
-		int queuedAsync = 0;
-		for (ScheduledTask task : scheduledTasks.getCurrentTaskList())
+		return asyncScheduler.getNumberOfQueuedAsyncTasks();
+	}
+
+	public @NotNull Future<Void> executeAsyncEvent(@NotNull Event event)
+	{
+		return executeAsyncEvent(event, null);
+	}
+
+	@SuppressWarnings("unchecked")
+	public <T extends Event> @NotNull Future<Void> executeAsyncEvent(@NotNull T event, @Nullable Consumer<T> func)
+	{
+		Preconditions.checkNotNull(event, "Cannot call a null event!");
+		Preconditions.checkState(event.isAsynchronous(), "Cannot invoke a non-asynchronous event asynchronously!");
+		return (Future<Void>) ((AsyncSchedulerMock) this.asyncScheduler).execute(() ->
 		{
-			if (task.isSync() || task.isCancelled() || task.isRunning())
+			Bukkit.getPluginManager().callEvent(event);
+			if (func != null)
 			{
-				continue;
+				func.accept(event);
 			}
-			queuedAsync++;
-		}
-		return queuedAsync;
+		});
 	}
 
-	/**
-	 * Waits until all asynchronous tasks have finished executing. If you have an asynchronous task that runs
-	 * indefinitely, this function will never return. Note that this will not wait for async events to finish.
-	 */
-	public void waitAsyncTasksFinished()
-	{
-		// Cancel repeating tasks so they don't run forever.
-		scheduledTasks.tasks.entrySet().stream()
-				.filter(entry -> entry.getValue() instanceof RepeatingTask)
-				.forEach(entry -> scheduledTasks.cancelTask(entry.getKey()));
+	// TODO: void shutdown() - Shuts the scheduler down.
+	// TODO: void waitAsyncEventsFinished() - Waits until all asynchronous events have finished executing.
+	// TODO: void waitAsyncTasksFinished() - Waits until all asynchronous tasks have finished executing.
+	// TODO: Other old methods that I'm forgetting.
 
-		// Make sure all tasks get to execute. (except for repeating asynchronous tasks, they only will fire once)
-		while (scheduledTasks.getScheduledTaskCount() > 0)
-		{
-			performOneTick();
-		}
-
-		// Wait for all tasks to finish executing.
-		long systemTime = System.currentTimeMillis();
-		while (pool.getActiveCount() > 0)
-		{
-			try
-			{
-				Thread.sleep(10L);
-			}
-			catch (InterruptedException e)
-			{
-				Thread.currentThread().interrupt();
-				return;
-			}
-
-			if (System.currentTimeMillis() <= (systemTime + executorTimeout))
-				continue;
-
-			// If a plugin has left a runnable going and not cancelled it we could call this bad practice.
-			// We should force interrupt all these runnables, forcing them to throw Interrupted Exceptions
-			// if they handle that.
-			for (ScheduledTask task : scheduledTasks.getCurrentTaskList())
-			{
-				if (!task.isRunning())
-					continue;
-				task.cancel();
-				cancelTask(task.getTaskId());
-				throw new RuntimeException("Forced Cancellation of task owned by " + task.getOwner().getName());
-			}
-			pool.shutdownNow();
-		}
-	}
-
-	public void waitAsyncEventsFinished()
-	{
-		for (Future<?> futureEvent : List.copyOf(queuedAsyncEvents))
-		{
-			if (futureEvent.isDone())
-			{
-				queuedAsyncEvents.remove(futureEvent);
-			}
-			else
-			{
-				try
-				{
-					queuedAsyncEvents.remove(futureEvent);
-					futureEvent.get();
-				}
-				catch (InterruptedException e)
-				{
-					Thread.currentThread().interrupt();
-				}
-				catch (ExecutionException e)
-				{
-					throw new RuntimeException(e);
-				}
-			}
-		}
-	}
-
-	@Override
-	public @NotNull BukkitTask runTask(@NotNull Plugin plugin, @NotNull Runnable task)
-	{
-		return runTaskLater(plugin, task, 1L);
-	}
-
-	@Override
-	@Deprecated
-	public @NotNull BukkitTask runTask(@NotNull Plugin plugin, @NotNull BukkitRunnable task)
-	{
-		return runTask(plugin, (Runnable) task);
-	}
-
-	@Override
-	public @NotNull BukkitTask runTaskLater(@NotNull Plugin plugin, @NotNull Runnable task, long delay)
-	{
-		delay = Math.max(delay, 1);
-		ScheduledTask scheduledTask = new ScheduledTask(id.getAndIncrement(), plugin, true, currentTick + delay, task);
-		scheduledTasks.addTask(scheduledTask);
-		return scheduledTask;
-	}
-
-	@Override
-	public @NotNull BukkitTask runTaskTimer(@NotNull Plugin plugin, @NotNull Runnable task, long delay, long period)
-	{
-		delay = Math.max(delay, 1);
-		RepeatingTask repeatingTask = new RepeatingTask(id.getAndIncrement(), plugin, true, currentTick + delay, period, task);
-		scheduledTasks.addTask(repeatingTask);
-		return repeatingTask;
-	}
-
-	@Override
-	@Deprecated
-	public @NotNull BukkitTask runTaskTimer(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay, long period)
-	{
-		return runTaskTimer(plugin, (Runnable) task, delay, period);
-	}
-
-	@Override
-	public int scheduleSyncDelayedTask(@NotNull Plugin plugin, @NotNull Runnable task, long delay)
-	{
-		Logger.getLogger(LOGGER_NAME).warning("Consider using runTaskLater instead of scheduleSyncDelayTask");
-		return runTaskLater(plugin, task, delay).getTaskId();
-	}
-
-	@Override
-	@Deprecated
-	public int scheduleSyncDelayedTask(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay)
-	{
-		Logger.getLogger(LOGGER_NAME).warning("Consider using runTaskLater instead of scheduleSyncDelayTask");
-		return runTaskLater(plugin, (Runnable) task, delay).getTaskId();
-	}
-
-	@Override
-	public int scheduleSyncDelayedTask(@NotNull Plugin plugin, @NotNull Runnable task)
-	{
-		Logger.getLogger(LOGGER_NAME).warning("Consider using runTask instead of scheduleSyncDelayTask");
-		return runTask(plugin, task).getTaskId();
-	}
-
-	@Override
-	@Deprecated
-	public int scheduleSyncDelayedTask(@NotNull Plugin plugin, @NotNull BukkitRunnable task)
-	{
-		Logger.getLogger(LOGGER_NAME).warning("Consider using runTask instead of scheduleSyncDelayTask");
-		return runTask(plugin, (Runnable) task).getTaskId();
-	}
-
-	@Override
-	public int scheduleSyncRepeatingTask(@NotNull Plugin plugin, @NotNull Runnable task, long delay, long period)
-	{
-		Logger.getLogger(LOGGER_NAME).warning("Consider using runTaskTimer instead of scheduleSyncRepeatingTask");
-		return runTaskTimer(plugin, task, delay, period).getTaskId();
-	}
-
-	@Override
-	@Deprecated
-	public int scheduleSyncRepeatingTask(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay, long period)
-	{
-		Logger.getLogger(LOGGER_NAME).warning("Consider using runTaskTimer instead of scheduleSyncRepeatingTask");
-		return runTaskTimer(plugin, (Runnable) task, delay, period).getTaskId();
-	}
-
-	@Override
-	@Deprecated
-	public int scheduleAsyncDelayedTask(@NotNull Plugin plugin, @NotNull Runnable task, long delay)
-	{
-		Logger.getLogger(LOGGER_NAME)
-				.warning("Consider using runTaskLaterAsynchronously instead of scheduleAsyncDelayedTask");
-		return runTaskLaterAsynchronously(plugin, task, delay).getTaskId();
-	}
-
-	@Override
-	@Deprecated
-	public int scheduleAsyncDelayedTask(@NotNull Plugin plugin, @NotNull Runnable task)
-	{
-		Logger.getLogger(LOGGER_NAME)
-				.warning("Consider using runTaskAsynchronously instead of scheduleAsyncDelayedTask");
-		return runTaskAsynchronously(plugin, task).getTaskId();
-	}
-
-	@Override
-	@Deprecated
-	public int scheduleAsyncRepeatingTask(@NotNull Plugin plugin, @NotNull Runnable task, long delay, long period)
-	{
-		Logger.getLogger(LOGGER_NAME)
-				.warning("Consider using runTaskTimerAsynchronously instead of scheduleAsyncRepeatingTask");
-		return runTaskTimerAsynchronously(plugin, task, delay, period).getTaskId();
-	}
-
-	@Override
-	public <T> @NotNull Future<T> callSyncMethod(@NotNull Plugin plugin, @NotNull Callable<T> task)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void cancelTask(int taskId)
-	{
-		scheduledTasks.cancelTask(taskId);
-	}
-
-	@Override
-	public void cancelTasks(@NotNull Plugin plugin)
-	{
-		for (ScheduledTask task : scheduledTasks.getCurrentTaskList())
-		{
-			if (Objects.equals(task.getOwner(), plugin)) // Implicit null check
-			{
-				task.cancel();
-			}
-		}
-	}
-
-	@Override
-	public boolean isCurrentlyRunning(int taskId)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean isQueued(int taskId)
-	{
-		for (ScheduledTask task : scheduledTasks.getCurrentTaskList())
-		{
-			if (task.getTaskId() == taskId)
-				return !task.isCancelled();
-		}
-		return false;
-	}
-
-	@Override
-	public @NotNull List<BukkitWorker> getActiveWorkers()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull List<BukkitTask> getPendingTasks()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull BukkitTask runTaskAsynchronously(@NotNull Plugin plugin, @NotNull Runnable task)
-	{
-		ScheduledTask scheduledTask = new ScheduledTask(id.getAndIncrement(), plugin, false, currentTick, new AsyncRunnable(task));
-		pool.execute(wrapTask(scheduledTask));
-		return scheduledTask;
-	}
-
-	@Override
-	public @NotNull BukkitTask runTaskAsynchronously(@NotNull Plugin plugin, @NotNull BukkitRunnable task)
-	{
-		return runTaskAsynchronously(plugin, (Runnable) task);
-	}
-
-	@Override
-	public @NotNull BukkitTask runTaskLater(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay)
-	{
-		return runTaskLater(plugin, (Runnable) task, delay);
-	}
-
-	@Override
-	public @NotNull BukkitTask runTaskLaterAsynchronously(@NotNull Plugin plugin, @NotNull Runnable task, long delay)
-	{
-		ScheduledTask scheduledTask = new ScheduledTask(id.getAndIncrement(), plugin, false, currentTick + delay,
-				new AsyncRunnable(task));
-		scheduledTasks.addTask(scheduledTask);
-		return scheduledTask;
-	}
-
-	@Override
-	public @NotNull BukkitTask runTaskLaterAsynchronously(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay)
-	{
-		return runTaskLaterAsynchronously(plugin, (Runnable) task, delay);
-	}
-
-	@Override
-	public @NotNull BukkitTask runTaskTimerAsynchronously(@NotNull Plugin plugin, @NotNull Runnable task, long delay, long period)
-	{
-		RepeatingTask scheduledTask = new RepeatingTask(id.getAndIncrement(), plugin, false, currentTick + delay, period,
-				new AsyncRunnable(task));
-		scheduledTasks.addTask(scheduledTask);
-		return scheduledTask;
-	}
-
-	@Override
-	public @NotNull BukkitTask runTaskTimerAsynchronously(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay, long period)
-	{
-		return runTaskTimerAsynchronously(plugin, (Runnable) task, delay, period);
-	}
-
-	@Override
-	public void runTask(@NotNull Plugin plugin, @NotNull Consumer<BukkitTask> task)
-	{
-		runTaskLater(plugin, task, 0L);
-	}
-
-	@Override
-	public void runTaskAsynchronously(@NotNull Plugin plugin, @NotNull Consumer<BukkitTask> task)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void runTaskLater(@NotNull Plugin plugin, @NotNull Consumer<BukkitTask> task, long delay)
-	{
-		delay = Math.max(delay, 1);
-		ScheduledTask scheduledTask = new ScheduledTask(id.getAndIncrement(), plugin, true, currentTick + delay, task);
-		scheduledTasks.addTask(scheduledTask);
-	}
-
-	@Override
-	public void runTaskLaterAsynchronously(@NotNull Plugin plugin, @NotNull Consumer<BukkitTask> task, long delay)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void runTaskTimer(@NotNull Plugin plugin, @NotNull Consumer<BukkitTask> task, long delay, long period)
-	{
-		delay = Math.max(delay, 1);
-		RepeatingTask repeatingTask = new RepeatingTask(id.getAndIncrement(), plugin, true, currentTick + delay, period, task);
-		scheduledTasks.addTask(repeatingTask);
-	}
-
-	@Override
-	public void runTaskTimerAsynchronously(@NotNull Plugin plugin, @NotNull Consumer<BukkitTask> task, long delay, long period)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull Executor getMainThreadExecutor(@NotNull Plugin plugin)
-	{
-		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
-		return command ->
-		{
-			Preconditions.checkNotNull(command, "Command cannot be null");
-			this.runTask(plugin, command);
-		};
-	}
-
-	protected int getActiveRunningCount()
-	{
-		return pool.getActiveCount();
-	}
-
-	private static class TaskList
-	{
-
-		private final @NotNull Map<Integer, ScheduledTask> tasks;
-
-		private TaskList()
-		{
-			tasks = new ConcurrentHashMap<>();
-		}
-
-		/**
-		 * Add a task but locks the Task list to other writes while adding it.
-		 *
-		 * @param task the task to remove.
-		 * @return true on success.
-		 */
-		private boolean addTask(@Nullable ScheduledTask task)
-		{
-			if (task == null)
-			{
-				return false;
-			}
-			tasks.put(task.getTaskId(), task);
-			return true;
-		}
-
-
-		protected final @NotNull List<ScheduledTask> getCurrentTaskList()
-		{
-			List<ScheduledTask> out = new ArrayList<>();
-			if (tasks.size() != 0)
-			{
-				out.addAll(tasks.values());
-			}
-			return out;
-
-		}
-
-		protected int getScheduledTaskCount()
-		{
-			int scheduled = 0;
-			if (tasks.size() == 0)
-			{
-				return 0;
-			}
-
-			for (ScheduledTask task : tasks.values())
-			{
-				if (task.isCancelled() || task.isRunning())
-					continue;
-				scheduled++;
-			}
-			return scheduled;
-		}
-
-		protected boolean cancelTask(int taskID)
-		{
-			if (tasks.containsKey(taskID))
-			{
-				ScheduledTask task = tasks.get(taskID);
-				task.cancel();
-				tasks.put(taskID, task);
-				return true;
-			}
-			return false;
-		}
-
-	}
-
-	private final class AsyncRunnable implements Runnable
-	{
-
-		private final Runnable task;
-
-		private AsyncRunnable(Runnable task)
-		{
-			this.task = task;
-		}
-
-		@Override
-		public void run()
-		{
-			try
-			{
-				this.task.run();
-			}
-			catch (Exception t)
-			{
-				asyncException.set(t);
-			}
-		}
-
-	}
+	// endregion
 
 }
