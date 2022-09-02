@@ -41,9 +41,14 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import javax.imageio.ImageIO;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -836,7 +841,7 @@ class ServerMockTest
 	{
 		server.setWhitelist(true);
 
-		PlayerMock playerMock = new PlayerMock(server,"Player", UUID.randomUUID());
+		PlayerMock playerMock = new PlayerMock(server, "Player", UUID.randomUUID());
 		playerMock.setWhitelisted(true);
 
 		server.addPlayer(playerMock);
@@ -883,6 +888,64 @@ class ServerMockTest
 	void permissionMessage_NotNull()
 	{
 		assertNotNull(server.permissionMessage());
+	}
+
+	@Test
+	void loadServerIcon_NullFile_ThrowsException()
+	{
+		assertThrows(NullPointerException.class, () -> server.loadServerIcon((File) null));
+	}
+
+	@Test
+	void loadServerIcon_NullImage_ThrowsException()
+	{
+		assertThrows(NullPointerException.class, () -> server.loadServerIcon((BufferedImage) null));
+	}
+
+	@Test
+	void loadServerIcon_WrongWidth_ThrowsException()
+	{
+		BufferedImage image63 = new BufferedImage(63, 64, BufferedImage.TYPE_INT_RGB);
+		BufferedImage image65 = new BufferedImage(65, 64, BufferedImage.TYPE_INT_RGB);
+		assertThrows(IllegalArgumentException.class, () -> server.loadServerIcon(image63));
+		assertThrows(IllegalArgumentException.class, () -> server.loadServerIcon(image65));
+	}
+
+	@Test
+	void loadServerIcon_WrongHeight_ThrowsException()
+	{
+		BufferedImage image63 = new BufferedImage(64, 63, BufferedImage.TYPE_INT_RGB);
+		BufferedImage image65 = new BufferedImage(64, 65, BufferedImage.TYPE_INT_RGB);
+		assertThrows(IllegalArgumentException.class, () -> server.loadServerIcon(image63));
+		assertThrows(IllegalArgumentException.class, () -> server.loadServerIcon(image65));
+	}
+
+	@Test
+	void loadServerIcon_CorrectSize()
+	{
+		BufferedImage image = new BufferedImage(64, 64, BufferedImage.TYPE_INT_RGB);
+		assertDoesNotThrow(() -> server.loadServerIcon(image));
+	}
+
+	@Test
+	void loadServerIcon_CorrectData() throws IOException
+	{
+		BufferedImage image = new BufferedImage(64, 64, BufferedImage.TYPE_INT_RGB);
+		Graphics2D g = image.createGraphics();
+		g.drawOval(0, 0, 64, 64);
+		g.dispose();
+
+		CachedServerIconMock icon = server.loadServerIcon(image);
+		byte[] decodedBase64 = Base64.getDecoder().decode(icon.getData().replace(CachedServerIconMock.PNG_BASE64_PREFIX, ""));
+		BufferedImage decodedImage = ImageIO.read(new ByteArrayInputStream(decodedBase64));
+
+		for (int x = 0; x < 64; x++)
+		{
+			for (int y = 0; y < 64; y++)
+			{
+				assertEquals(image.getRGB(x, y), decodedImage.getRGB(x, y));
+			}
+		}
 	}
 
 }
