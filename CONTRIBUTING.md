@@ -18,7 +18,7 @@ Contributing Code to MockBukkit
 
 To get started contributing to MockBukkit, you will need a few things.
 - [Git](https://git-scm.com/downloads)
-- Java 17 or newer ([Windows Download](https://download.oracle.com/java/17/archive/jdk-17.0.3.1_windows-x64_bin.exe)).
+- [Java 17 or newer](https://adoptium.net/).
 
 
 ## :wrench: Setting up the project
