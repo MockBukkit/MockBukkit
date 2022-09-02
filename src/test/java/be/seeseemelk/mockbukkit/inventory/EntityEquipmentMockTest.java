@@ -1,10 +1,11 @@
-package be.seeseemelk.mockbukkit.entity;
+package be.seeseemelk.mockbukkit.inventory;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.entity.ArmorStandMock;
+import be.seeseemelk.mockbukkit.entity.ZombieMock;
 import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.Zombie;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
@@ -20,8 +21,8 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class EntityEquipmentMockTest
 {
@@ -54,6 +55,7 @@ class EntityEquipmentMockTest
 		equipment.setItemInMainHand(item);
 
 		assertEquals(item, equipment.getItemInMainHand());
+		assertNotSame(item, equipment.getItemInMainHand());
 		assertEquals(item, equipment.getItem(EquipmentSlot.HAND));
 	}
 
@@ -66,6 +68,7 @@ class EntityEquipmentMockTest
 		equipment.setItemInOffHand(item);
 
 		assertEquals(item, equipment.getItemInOffHand());
+		assertNotSame(item, equipment.getItemInOffHand());
 		assertEquals(item, equipment.getItem(EquipmentSlot.OFF_HAND));
 	}
 
@@ -78,6 +81,7 @@ class EntityEquipmentMockTest
 		equipment.setHelmet(item);
 
 		assertEquals(item, equipment.getHelmet());
+		assertNotSame(item, equipment.getHelmet());
 		assertEquals(item, equipment.getItem(EquipmentSlot.HEAD));
 	}
 
@@ -90,6 +94,7 @@ class EntityEquipmentMockTest
 		equipment.setChestplate(item);
 
 		assertEquals(item, equipment.getChestplate());
+		assertNotSame(item, equipment.getChestplate());
 		assertEquals(item, equipment.getItem(EquipmentSlot.CHEST));
 	}
 
@@ -102,6 +107,7 @@ class EntityEquipmentMockTest
 		equipment.setLeggings(item);
 
 		assertEquals(item, equipment.getLeggings());
+		assertNotSame(item, equipment.getLeggings());
 		assertEquals(item, equipment.getItem(EquipmentSlot.LEGS));
 	}
 
@@ -114,6 +120,7 @@ class EntityEquipmentMockTest
 		equipment.setBoots(item);
 
 		assertEquals(item, equipment.getBoots());
+		assertNotSame(item, equipment.getBoots());
 		assertEquals(item, equipment.getItem(EquipmentSlot.FEET));
 	}
 
@@ -215,13 +222,17 @@ class EntityEquipmentMockTest
 		contents[3] = new ItemStack(Material.DIAMOND);
 		equipment.setArmorContents(contents);
 		equipment.clear();
-		assertArrayEquals(new ItemStack[4], equipment.getArmorContents());
+		ItemStack[] excepted = new ItemStack[4];
+		Arrays.fill(excepted, new ItemStack(Material.AIR));
+		assertArrayEquals(excepted, equipment.getArmorContents());
 	}
 
 	@ParameterizedTest
 	@EnumSource(EquipmentSlot.class)
 	void testGetItem(EquipmentSlot slot)
 	{
+		equipment.setItem(slot, null);
+		assertEquals(new ItemStack(Material.AIR), equipment.getItem(slot));
 		ItemStack item = new ItemStack(Material.DIAMOND);
 		equipment.setItem(slot, item);
 		assertEquals(item, equipment.getItem(slot));

@@ -1,6 +1,6 @@
-package be.seeseemelk.mockbukkit.entity;
+package be.seeseemelk.mockbukkit.inventory;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.entity.LivingEntityMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
@@ -28,13 +28,13 @@ public class EntityEquipmentMock implements EntityEquipment
 
 	private final Map<EquipmentSlot, Float> dropChances = new EnumMap<>(EquipmentSlot.class);
 
-	private @Nullable ItemStack itemInMainHand = new ItemStack(Material.AIR);
-	private @Nullable ItemStack itemInOffHand = new ItemStack(Material.AIR);
+	private @NotNull ItemStack itemInMainHand = new ItemStack(Material.AIR);
+	private @NotNull ItemStack itemInOffHand = new ItemStack(Material.AIR);
 
-	private @Nullable ItemStack helmet = new ItemStack(Material.AIR);
-	private @Nullable ItemStack chestPlate = new ItemStack(Material.AIR);
-	private @Nullable ItemStack leggings = new ItemStack(Material.AIR);
-	private @Nullable ItemStack boots = new ItemStack(Material.AIR);
+	private @NotNull ItemStack helmet = new ItemStack(Material.AIR);
+	private @NotNull ItemStack chestPlate = new ItemStack(Material.AIR);
+	private @NotNull ItemStack leggings = new ItemStack(Material.AIR);
+	private @NotNull ItemStack boots = new ItemStack(Material.AIR);
 
 	public EntityEquipmentMock(@NotNull LivingEntityMock holder)
 	{
@@ -94,7 +94,7 @@ public class EntityEquipmentMock implements EntityEquipment
 	@Override
 	public void setItemInMainHand(@Nullable ItemStack item, boolean silent)
 	{
-		this.itemInMainHand = item;
+		this.itemInMainHand = notNullClone(item);
 		// Sounds are not implemented here
 	}
 
@@ -113,7 +113,7 @@ public class EntityEquipmentMock implements EntityEquipment
 	@Override
 	public void setItemInOffHand(@Nullable ItemStack item, boolean silent)
 	{
-		this.itemInOffHand = item;
+		this.itemInOffHand = notNullClone(item);
 		// Sounds are not implemented here
 	}
 
@@ -132,9 +132,9 @@ public class EntityEquipmentMock implements EntityEquipment
 	}
 
 	@Override
-	public @Nullable ItemStack getHelmet()
+	public @NotNull ItemStack getHelmet()
 	{
-		return helmet;
+		return this.helmet.clone();
 	}
 
 	@Override
@@ -146,14 +146,14 @@ public class EntityEquipmentMock implements EntityEquipment
 	@Override
 	public void setHelmet(@Nullable ItemStack helmet, boolean silent)
 	{
-		this.helmet = helmet;
+		this.helmet = notNullClone(helmet);
 		// Sounds are not implemented here
 	}
 
 	@Override
-	public @Nullable ItemStack getChestplate()
+	public @NotNull ItemStack getChestplate()
 	{
-		return chestPlate;
+		return this.chestPlate.clone();
 	}
 
 	@Override
@@ -165,14 +165,14 @@ public class EntityEquipmentMock implements EntityEquipment
 	@Override
 	public void setChestplate(@Nullable ItemStack chestplate, boolean silent)
 	{
-		this.chestPlate = chestplate;
+		this.chestPlate = notNullClone(chestplate);
 		// Sounds are not implemented here
 	}
 
 	@Override
-	public @Nullable ItemStack getLeggings()
+	public @NotNull ItemStack getLeggings()
 	{
-		return leggings;
+		return this.leggings.clone();
 	}
 
 	@Override
@@ -184,14 +184,14 @@ public class EntityEquipmentMock implements EntityEquipment
 	@Override
 	public void setLeggings(@Nullable ItemStack leggings, boolean silent)
 	{
-		this.leggings = leggings;
+		this.leggings = notNullClone(leggings);
 		// Sounds are not implemented here
 	}
 
 	@Override
-	public @Nullable ItemStack getBoots()
+	public @NotNull ItemStack getBoots()
 	{
-		return boots;
+		return this.boots.clone();
 	}
 
 	@Override
@@ -203,7 +203,7 @@ public class EntityEquipmentMock implements EntityEquipment
 	@Override
 	public void setBoots(@Nullable ItemStack boots, boolean silent)
 	{
-		this.boots = boots;
+		this.boots = notNullClone(boots);
 		// Sounds are not implemented here
 	}
 
@@ -342,6 +342,11 @@ public class EntityEquipmentMock implements EntityEquipment
 	{
 		Preconditions.checkNotNull(slot, "Slot cannot be null");
 		return this.dropChances.get(slot);
+	}
+
+	static @NotNull ItemStack notNullClone(@Nullable ItemStack itemStack)
+	{
+		return itemStack == null ? new ItemStack(Material.AIR) : itemStack.clone();
 	}
 
 }

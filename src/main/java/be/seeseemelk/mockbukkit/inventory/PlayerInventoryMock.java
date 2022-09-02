@@ -359,7 +359,7 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 		throw new UnsupportedOperationException("Cannot set drop chance for PlayerInventory");
 	}
 
-	private @NotNull ItemStack notNull(@Nullable ItemStack itemStack)
+	static @NotNull ItemStack notNull(@Nullable ItemStack itemStack)
 	{
 		return itemStack == null ? new ItemStack(Material.AIR) : itemStack;
 	}
