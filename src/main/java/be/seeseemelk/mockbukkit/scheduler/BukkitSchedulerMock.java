@@ -78,7 +78,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	protected volatile AtomicInteger currentTick = new AtomicInteger(-1);
 
 	protected int shutdownTimeout = 5000;
-	protected boolean shutdown = false;
+	protected boolean isRunning = true;
 
 	private final BukkitSchedulerMock asyncScheduler;
 	private final boolean isAsyncScheduler;
@@ -180,6 +180,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 
 	public BukkitTask runTaskTimer(Plugin plugin, Object runnable, long delay, long period)
 	{
+		Preconditions.checkState(this.isRunning, "Scheduler shutdown!");
 		BukkitSchedulerMock.validateTaskObj(plugin, runnable);
 		delay = Math.max(delay, 0L);
 		period = (period < Task.NO_REPEATING) ? Task.NO_REPEATING : Math.min(period, 1L);
@@ -194,6 +195,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 
 	public BukkitTask runTaskTimerAsynchronously(Plugin plugin, Object runnable, long delay, long period)
 	{
+		Preconditions.checkState(this.isRunning, "Scheduler shutdown!");
 		BukkitSchedulerMock.validateTaskObj(plugin, runnable);
 		delay = Math.max(delay, 0L);
 		period = (period < Task.NO_REPEATING) ? Task.NO_REPEATING : Math.min(period, 1L);
@@ -203,6 +205,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public <T> @NotNull FutureTask<T> callSyncMethod(@NotNull Plugin plugin, @NotNull Callable<T> task)
 	{
+		Preconditions.checkState(this.isRunning, "Scheduler shutdown!");
 		BukkitSchedulerMock.validateTaskObj(plugin, task);
 		FutureTask<T> future = new FutureTask<>(this, this.nextId(), plugin, task);
 		this.handleTask(future, 0L);
@@ -472,7 +475,6 @@ public class BukkitSchedulerMock implements BukkitScheduler
 
 	protected Task handleTask(Task task, long delay)
 	{
-		Preconditions.checkState(this.shutdown, "Scheduler shutdown!");
 		if (!this.isAsyncScheduler && !task.isSync())
 		{
 			this.asyncScheduler.handleTask(task, delay);
@@ -699,7 +701,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 
 	public void shutdown()
 	{
-		this.shutdown = true;
+		this.isRunning = false;
 		for (Plugin plugin : Bukkit.getPluginManager().getPlugins())
 		{
 			cancelTasks(plugin);
