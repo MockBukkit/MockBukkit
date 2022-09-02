@@ -180,7 +180,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 
 	public BukkitTask runTaskTimer(Plugin plugin, Object runnable, long delay, long period)
 	{
-		Preconditions.checkState(this.isRunning, "Scheduler shutdown!");
+		checkRunning();
 		BukkitSchedulerMock.validateTaskObj(plugin, runnable);
 		delay = Math.max(delay, 0L);
 		period = (period < Task.NO_REPEATING) ? Task.NO_REPEATING : Math.min(period, 1L);
@@ -195,7 +195,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 
 	public BukkitTask runTaskTimerAsynchronously(Plugin plugin, Object runnable, long delay, long period)
 	{
-		Preconditions.checkState(this.isRunning, "Scheduler shutdown!");
+		checkRunning();
 		BukkitSchedulerMock.validateTaskObj(plugin, runnable);
 		delay = Math.max(delay, 0L);
 		period = (period < Task.NO_REPEATING) ? Task.NO_REPEATING : Math.min(period, 1L);
@@ -205,7 +205,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public <T> @NotNull FutureTask<T> callSyncMethod(@NotNull Plugin plugin, @NotNull Callable<T> task)
 	{
-		Preconditions.checkState(this.isRunning, "Scheduler shutdown!");
+		checkRunning();
 		BukkitSchedulerMock.validateTaskObj(plugin, task);
 		FutureTask<T> future = new FutureTask<>(this, this.nextId(), plugin, task);
 		this.handleTask(future, 0L);
@@ -735,6 +735,14 @@ public class BukkitSchedulerMock implements BukkitScheduler
 			if (false) continue; // Get rid of "make exception conditional" warning
 			throw new IllegalStateException("Plugin " + overdueWorker.getOwner() + " is not properly shutting down its async tasks!");
 		}
+	}
+
+	/**
+	 * Checks that the scheduler is running, throwing an {@link IllegalStateException} if not.
+	 */
+	protected void checkRunning()
+	{
+		Preconditions.checkState(this.isRunning, "Scheduler not running!");
 	}
 
 	// endregion

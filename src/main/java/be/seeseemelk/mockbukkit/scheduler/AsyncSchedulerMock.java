@@ -105,7 +105,7 @@ public class AsyncSchedulerMock extends BukkitSchedulerMock
 	 */
 	private boolean executeTask(Task task)
 	{
-		Preconditions.checkState(this.isRunning, "Scheduler shutdown!");
+		checkRunning();
 		if (task.getPeriod() < Task.NO_REPEATING)
 			return false;
 
@@ -133,7 +133,7 @@ public class AsyncSchedulerMock extends BukkitSchedulerMock
 	 */
 	protected Future<?> execute(Runnable r)
 	{
-		Preconditions.checkState(this.isRunning, "Scheduler shutdown!");
+		checkRunning();
 		return this.executor.submit(r);
 	}
 
