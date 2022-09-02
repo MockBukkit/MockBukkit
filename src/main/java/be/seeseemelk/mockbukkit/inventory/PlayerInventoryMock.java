@@ -62,25 +62,25 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	}
 
 	@Override
-	public ItemStack getHelmet()
+	public @Nullable ItemStack getHelmet()
 	{
 		return getItem(HELMET);
 	}
 
 	@Override
-	public ItemStack getChestplate()
+	public @Nullable ItemStack getChestplate()
 	{
 		return getItem(CHESTPLATE);
 	}
 
 	@Override
-	public ItemStack getLeggings()
+	public @Nullable ItemStack getLeggings()
 	{
 		return getItem(LEGGINGS);
 	}
 
 	@Override
-	public ItemStack getBoots()
+	public @Nullable ItemStack getBoots()
 	{
 		return getItem(BOOTS);
 	}
@@ -298,28 +298,17 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 		setItemInMainHand(stack);
 	}
 
-	/**
-	 * Gets the {@link ItemStack} at the given equipment slot in the inventory.
-	 *
-	 * <p>Implementation note: only the contents of the main hand
-	 * and the off hand are guaranteed not to be {@code null},
-	 * despite the annotation present in the Bukkit api.</p>
-	 *
-	 * @param slot the slot to get the {@link ItemStack}
-	 * @return the {@link ItemStack} in the given slot
-	 */
 	@Override
 	public @NotNull ItemStack getItem(@NotNull EquipmentSlot slot)
 	{
 		return switch (slot)
 				{
-					case CHEST -> getChestplate();
-					case FEET -> getBoots();
+					case CHEST -> notNull(getChestplate());
+					case FEET -> notNull(getBoots());
 					case HAND -> getItemInMainHand();
-					case HEAD -> getHelmet();
-					case LEGS -> getLeggings();
+					case HEAD -> notNull(getHelmet());
+					case LEGS -> notNull(getLeggings());
 					case OFF_HAND -> getItemInOffHand();
-					default -> new ItemStack(Material.AIR);
 				};
 	}
 
@@ -340,9 +329,6 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 		case HEAD -> setHelmet(item);
 		case LEGS -> setLeggings(item);
 		case OFF_HAND -> setItemInOffHand(item);
-		default ->
-		{
-		}
 		}
 		// Sounds are not implemented here
 	}
