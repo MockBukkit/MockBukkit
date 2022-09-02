@@ -131,7 +131,7 @@ public class AsyncSchedulerMock extends BukkitSchedulerMock
 	 * @param r Runnable to execute
 	 * @return A future representing the task.
 	 */
-	public Future<?> execute(Runnable r)
+	protected Future<?> execute(Runnable r)
 	{
 		Preconditions.checkState(this.isRunning, "Scheduler shutdown!");
 		return this.executor.submit(r);
