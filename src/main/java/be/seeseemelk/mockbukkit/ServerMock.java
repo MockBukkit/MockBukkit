@@ -12,18 +12,28 @@ import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
 import be.seeseemelk.mockbukkit.help.HelpMapMock;
+import be.seeseemelk.mockbukkit.inventory.AnvilInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.BarrelInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.BeaconInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.BrewerInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.CartographyInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.ChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.DispenserInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.DropperInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.EnchantingInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.FurnaceInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.GrindstoneInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.HopperInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import be.seeseemelk.mockbukkit.inventory.ItemFactoryMock;
 import be.seeseemelk.mockbukkit.inventory.LecternInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.LoomInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.ShulkerBoxInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.SmithingInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.StonecutterInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.WorkbenchInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
 import be.seeseemelk.mockbukkit.map.MapViewMock;
 import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
@@ -36,10 +46,13 @@ import be.seeseemelk.mockbukkit.tags.TagRegistry;
 import be.seeseemelk.mockbukkit.tags.TagWrapperMock;
 import be.seeseemelk.mockbukkit.tags.TagsMock;
 import com.destroystokyo.paper.entity.ai.MobGoals;
+import com.destroystokyo.paper.event.player.PlayerConnectionCloseEvent;
+import com.destroystokyo.paper.event.server.WhitelistToggleEvent;
 import com.google.common.base.Preconditions;
 import io.papermc.paper.datapack.DatapackManager;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
@@ -56,6 +69,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.Registry;
 import org.bukkit.Server;
 import org.bukkit.StructureType;
 import org.bukkit.Tag;
@@ -72,7 +86,6 @@ import org.bukkit.boss.BossBar;
 import org.bukkit.boss.KeyedBossBar;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
@@ -95,6 +108,7 @@ import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.potion.PotionBrewer;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scoreboard.Criteria;
 import org.bukkit.structure.StructureManager;
 import org.bukkit.util.CachedServerIcon;
 import org.jetbrains.annotations.NotNull;
@@ -111,6 +125,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -129,6 +144,7 @@ public class ServerMock extends Server.Spigot implements Server
 {
 
 	private static final Component MOTD = Component.text("A Minecraft Server");
+	private static final Component NO_PERMISSION = Component.text("I'm sorry, but you do not have permission to perform this command. Please contact the server administrators if you believe that this is in error.", NamedTextColor.RED);
 
 	private final Properties buildProperties = new Properties();
 	private final Logger logger = Logger.getLogger("ServerMock");
@@ -153,9 +169,13 @@ public class ServerMock extends Server.Spigot implements Server
 	private int nextMapId = 1;
 
 	private GameMode defaultGameMode = GameMode.SURVIVAL;
-	private ConsoleCommandSender consoleSender;
+	private ConsoleCommandSenderMock consoleSender;
 	private int spawnRadius = 16;
 	private @NotNull WarningState warningState = WarningState.DEFAULT;
+
+	private boolean isWhitelistEnabled = false;
+	private boolean isWhitelistEnforced = false;
+	private final @NotNull Set<OfflinePlayer> whitelistedPlayers = new LinkedHashSet<>();
 
 	public ServerMock()
 	{
@@ -237,7 +257,6 @@ public class ServerMock extends Server.Spigot implements Server
 		AsyncPlayerPreLoginEvent preLoginEvent = new AsyncPlayerPreLoginEvent(player.getName(),
 				player.getAddress().getAddress(), player.getUniqueId());
 		getPluginManager().callEventAsynchronously(preLoginEvent, (e) -> conditionLatch.countDown());
-
 		try
 		{
 			conditionLatch.await();
@@ -254,6 +273,19 @@ public class ServerMock extends Server.Spigot implements Server
 
 		PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(player, joinMessage);
 		Bukkit.getPluginManager().callEvent(playerJoinEvent);
+
+		if (isWhitelistEnabled && !whitelistedPlayers.contains(player))
+		{
+			PlayerConnectionCloseEvent playerConnectionCloseEvent =
+					new PlayerConnectionCloseEvent(player.getUniqueId(),
+							player.getName(),
+							player.getAddress().getAddress(),
+							false);
+
+			getPluginManager().callEvent(playerConnectionCloseEvent);
+			playerList.disconnectPlayer(player);
+			return;
+		}
 
 		player.setLastPlayed(getCurrentServerTime());
 		registerEntity(player);
@@ -385,7 +417,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * @param args    The arguments to pass to the commands.
 	 * @return The value returned by {@link Command#execute}.
 	 */
-	public CommandResult executeConsole(@NotNull Command command, String... args)
+	public @NotNull CommandResult executeConsole(@NotNull Command command, String... args)
 	{
 		return execute(command, getConsoleSender(), args);
 	}
@@ -397,7 +429,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * @param args    The arguments to pass to the commands.
 	 * @return The value returned by {@link Command#execute}.
 	 */
-	public CommandResult executeConsole(@NotNull String command, String... args)
+	public @NotNull CommandResult executeConsole(@NotNull String command, String... args)
 	{
 		return executeConsole(getCommandMap().getCommand(command), args);
 	}
@@ -409,7 +441,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * @param args    The arguments to pass to the commands.
 	 * @return The value returned by {@link Command#execute}.
 	 */
-	public CommandResult executePlayer(@NotNull Command command, String... args)
+	public @NotNull CommandResult executePlayer(@NotNull Command command, String... args)
 	{
 		AsyncCatcher.catchOp("command dispatch");
 
@@ -426,7 +458,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * @param args    The arguments to pass to the commands.
 	 * @return The value returned by {@link Command#execute}.
 	 */
-	public CommandResult executePlayer(@NotNull String command, String... args)
+	public @NotNull CommandResult executePlayer(@NotNull String command, String... args)
 	{
 		return executePlayer(getCommandMap().getCommand(command), args);
 	}
@@ -460,7 +492,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * @param args    The arguments to pass to the commands.
 	 * @return The value returned by {@link Command#execute}.
 	 */
-	public CommandResult execute(@NotNull String command, CommandSender sender, String... args)
+	public @NotNull CommandResult execute(@NotNull String command, CommandSender sender, String... args)
 	{
 		AsyncCatcher.catchOp("command dispatch");
 		return execute(getCommandMap().getCommand(command), sender, args);
@@ -475,24 +507,22 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull String getVersion()
 	{
-		return String.format("MockBukkit (MC: %s)", getBukkitVersion());
+		return String.format("MockBukkit (MC: %s)", getMinecraftVersion());
 	}
 
 	@Override
 	public @NotNull String getBukkitVersion()
 	{
-		return getMinecraftVersion();
+		Preconditions.checkNotNull(this.buildProperties, "Failed to load build properties!");
+		String apiVersion = buildProperties.getProperty("full-api-version");
+		Preconditions.checkNotNull(apiVersion, "Failed to get full-api-version from the build properties!");
+		return apiVersion;
 	}
 
 	@Override
 	public @NotNull String getMinecraftVersion()
 	{
-		String apiVersion;
-		if (buildProperties == null || (apiVersion = buildProperties.getProperty("full-api-version")) == null)
-		{
-			throw new IllegalStateException("Minecraft version could not be determined");
-		}
-		return apiVersion.split("-")[0];
+		return this.getBukkitVersion().split("-")[0];
 	}
 
 	@Override
@@ -502,7 +532,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public OfflinePlayer[] getOfflinePlayers()
+	public OfflinePlayer @NotNull [] getOfflinePlayers()
 	{
 		return playerList.getOfflinePlayers();
 	}
@@ -564,7 +594,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public @NotNull ConsoleCommandSender getConsoleSender()
+	public @NotNull ConsoleCommandSenderMock getConsoleSender()
 	{
 		if (consoleSender == null)
 		{
@@ -619,35 +649,25 @@ public class ServerMock extends Server.Spigot implements Server
 		case GRINDSTONE:
 			return new GrindstoneInventoryMock(owner);
 		case STONECUTTER:
-			// TODO: This Inventory Type needs to be implemented
+			return new StonecutterInventoryMock(owner);
 		case CARTOGRAPHY:
-			// TODO: This Inventory Type needs to be implemented
-		case SMOKER:
-			// TODO: This Inventory Type needs to be implemented
+			return new CartographyInventoryMock(owner);
+		case SMOKER, FURNACE, BLAST_FURNACE:
+			return new FurnaceInventoryMock(owner);
 		case LOOM:
-			// TODO: This Inventory Type needs to be implemented
-		case BLAST_FURNACE:
-			// TODO: This Inventory Type needs to be implemented
+			return new LoomInventoryMock(owner);
 		case ANVIL:
-			// TODO: This Inventory Type needs to be implemented
+			return new AnvilInventoryMock(owner);
 		case SMITHING:
-			// TODO: This Inventory Type needs to be implemented
+			return new SmithingInventoryMock(owner);
 		case BEACON:
-			// TODO: This Inventory Type needs to be implemented
-		case FURNACE:
-			// TODO: This Inventory Type needs to be implemented
+			return new BeaconInventoryMock(owner);
 		case WORKBENCH:
-			// TODO: This Inventory Type needs to be implemented
+			return new WorkbenchInventoryMock(owner);
 		case ENCHANTING:
-			// TODO: This Inventory Type needs to be implemented
+			return new EnchantingInventoryMock(owner);
 		case BREWING:
-			// TODO: This Inventory Type needs to be implemented
-		case CRAFTING:
-			// TODO: This Inventory Type needs to be implemented
-		case CREATIVE:
-			// TODO: This Inventory Type needs to be implemented
-		case MERCHANT:
-			// TODO: This Inventory Type needs to be implemented
+			return new BrewerInventoryMock(owner);
 		default:
 			throw new UnimplementedOperationException("Inventory type not yet supported");
 		}
@@ -1105,43 +1125,51 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public boolean hasWhitelist()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.isWhitelistEnabled;
 	}
 
 	@Override
 	public void setWhitelist(boolean value)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.isWhitelistEnabled = value;
+		WhitelistToggleEvent event = new WhitelistToggleEvent(value);
+		this.getPluginManager().callEvent(event);
 	}
 
 	@Override
 	public boolean isWhitelistEnforced()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.isWhitelistEnforced;
 	}
 
 	@Override
 	public void setWhitelistEnforced(boolean value)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.isWhitelistEnforced = value;
 	}
 
 	@Override
 	public @NotNull Set<OfflinePlayer> getWhitelistedPlayers()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.whitelistedPlayers;
 	}
 
 	@Override
 	public void reloadWhitelist()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		//Pretend we load the Whitelist from Disk
+		if (!isWhitelistEnforced && isWhitelistEnabled)
+		{
+			return;
+		}
+
+		MockBukkit.getMock().getOnlinePlayers().forEach(p ->
+		{
+			if (!MockBukkit.getMock().getWhitelistedPlayers().contains(p))
+			{
+				p.kick();
+			}
+		});
 	}
 
 	@Override
@@ -1332,8 +1360,11 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull Set<OfflinePlayer> getBannedPlayers()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getBanList(Type.NAME)
+				.getBanEntries()
+				.stream()
+				.map(banEntry -> getOfflinePlayer(banEntry.getTarget()))
+				.collect(Collectors.toSet());
 	}
 
 	@Override
@@ -1451,6 +1482,13 @@ public class ServerMock extends Server.Spigot implements Server
 	public @NotNull ScoreboardManagerMock getScoreboardManager()
 	{
 		return scoreboardManager;
+	}
+
+	@Override
+	public @NotNull Criteria getScoreboardCriteria(@NotNull String name)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -1778,6 +1816,13 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	public @Nullable <T extends Keyed> Registry<T> getRegistry(@NotNull Class<T> tClass)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	@Deprecated
 	public MapViewMock getMap(int id)
 	{
@@ -1902,15 +1947,13 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull String getPermissionMessage()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return unsafe.legacyComponentSerializer().serialize(NO_PERMISSION);
 	}
 
 	@Override
 	public @NotNull Component permissionMessage()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return NO_PERMISSION;
 	}
 
 	@Override

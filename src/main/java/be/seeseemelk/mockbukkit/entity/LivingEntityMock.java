@@ -32,6 +32,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityToggleSwimEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
@@ -61,6 +62,8 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	private int remainingAirTicks = 300;
 	protected boolean alive = true;
 	private boolean gliding = false;
+	private boolean jumping = false;
+
 	protected Map<Attribute, AttributeInstanceMock> attributes;
 	private final EntityEquipment equipment = new EntityEquipmentMock(this);
 	private final Set<UUID> collidableExemptions = new HashSet<>();
@@ -70,8 +73,10 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	private double absorptionAmount;
 	private int arrowCooldown;
 	private int arrowsInBody;
+	private @Nullable Player killer;
 
 	private final Set<ActivePotionEffect> activeEffects = new HashSet<>();
+	private boolean invisible = false;
 
 	protected LivingEntityMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -415,15 +420,13 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public @Nullable Player getKiller()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.killer;
 	}
 
 	@Override
 	public void setKiller(@Nullable Player killer)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.killer = killer;
 	}
 
 	@Override
@@ -560,6 +563,16 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean teleport(@NotNull Location location, PlayerTeleportEvent.@NotNull TeleportCause cause)
+	{
+		if (isDead())
+		{
+			return false;
+		}
+		return super.teleport(location, cause);
 	}
 
 	@Override
@@ -778,15 +791,13 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public void setInvisible(boolean invisible)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.invisible = invisible;
 	}
 
 	@Override
 	public boolean isInvisible()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.invisible;
 	}
 
 	@Override
@@ -862,15 +873,13 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public boolean isJumping()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.jumping;
 	}
 
 	@Override
 	public void setJumping(boolean jumping)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.jumping = jumping;
 	}
 
 	@Override

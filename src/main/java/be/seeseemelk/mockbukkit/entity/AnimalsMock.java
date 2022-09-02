@@ -1,7 +1,6 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.entity.Animals;
@@ -57,8 +56,8 @@ public class AnimalsMock extends AgeableMock implements Animals
 	@Override
 	public boolean isBreedItem(@NotNull ItemStack stack)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(stack, "ItemStack cannot be null");
+		return stack.getType() == Material.WHEAT;
 	}
 
 	@Override
@@ -76,7 +75,7 @@ public class AnimalsMock extends AgeableMock implements Animals
 	}
 
 	@Override
-	public String toString()
+	public @NotNull String toString()
 	{
 		return "AnimalsMock";
 	}

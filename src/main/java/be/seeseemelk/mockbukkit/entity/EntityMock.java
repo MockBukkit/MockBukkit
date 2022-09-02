@@ -21,28 +21,35 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Pose;
 import org.bukkit.entity.SpawnCategory;
+import org.bukkit.entity.Vehicle;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityTeleportEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
+import org.bukkit.event.vehicle.VehicleEnterEvent;
+import org.bukkit.event.vehicle.VehicleExitEvent;
 import org.bukkit.metadata.MetadataValue;
+import org.bukkit.permissions.PermissibleBase;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
-import org.bukkit.permissions.PermissionRemovedExecutor;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.spigotmc.event.entity.EntityDismountEvent;
+import org.spigotmc.event.entity.EntityMountEvent;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 import java.util.UUID;
@@ -60,6 +67,8 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private Location location;
 	private boolean teleported;
 	private TeleportCause teleportCause;
+	private @Nullable EntityMock vehicle;
+	private final List<Entity> passengers = new ArrayList<>(0);
 	private final MetadataTable metadataTable = new MetadataTable();
 	private final PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
 	private boolean operator = false;
@@ -69,11 +78,11 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private boolean invulnerable;
 	private boolean glowingFlag = false;
 	private final Queue<Component> messages = new LinkedTransferQueue<>();
-	private final Set<PermissionAttachment> permissionAttachments = new HashSet<>();
+	private final PermissibleBase perms;
 	private @NotNull Vector velocity = new Vector(0, 0, 0);
 	private float fallDistance;
 	private int fireTicks = -20;
-	private int maxFireTicks = 20;
+	private final int maxFireTicks = 20;
 	private boolean removed = false;
 	private @Nullable EntityDamageEvent lastDamageEvent;
 
@@ -84,6 +93,8 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 
 		this.server = server;
 		this.uuid = uuid;
+
+		this.perms = new PermissibleBase(this);
 
 		if (!Bukkit.getWorlds().isEmpty())
 			location = Bukkit.getWorlds().get(0).getSpawnLocation();
@@ -213,7 +224,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	public void setLocation(@NotNull Location location)
 	{
 		Preconditions.checkNotNull(location, "Location cannot be null");
-		this.location = location;
+		// An entity can be teleported to a null world, i.e. the current world.
+		Location position = location.clone();
+		if (position.getWorld() == null)
+		{
+			position.setWorld(getWorld());
+		}
+		this.location = position;
 	}
 
 	@Override
@@ -259,18 +276,55 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public boolean teleport(@NotNull Location location)
 	{
-		Preconditions.checkNotNull(location, "Location cannot be null");
 		return teleport(location, TeleportCause.PLUGIN);
 	}
 
 	@Override
 	public boolean teleport(@NotNull Location location, @NotNull TeleportCause cause)
 	{
-		Preconditions.checkNotNull(location, "Location cannot be null");
-		this.location = location;
-		teleported = true;
-		teleportCause = cause;
-		return true;
+		return teleport(location, cause, false);
+	}
+
+	@Override
+	public boolean teleport(@NotNull Location location, @NotNull TeleportCause cause, boolean ignorePassengers, boolean dismount)
+	{
+		Preconditions.checkNotNull(location, "Location cannot be null"); // The world can be null if it's not a player
+		location.checkFinite();
+		if (this.removed || (!ignorePassengers && hasPassengers()))
+		{
+			return false;
+		}
+		if (location.getWorld() != getWorld())
+		{
+			// Don't allow teleporting between worlds while keeping passengers
+			// and if remaining on vehicle.
+			if ((ignorePassengers && hasPassengers())
+					|| (!dismount && isInsideVehicle()))
+			{
+				return false;
+			}
+		}
+		if (dismount)
+		{
+			leaveVehicle();
+		}
+
+		EntityTeleportEvent event = new EntityTeleportEvent(this, getLocation(), location);
+		if (event.callEvent())
+		{
+			// There is actually no non-null check in the CraftBukkit implementation
+			Preconditions.checkNotNull(event.getTo(), "The location where the entity moved to in the event cannot be null");
+			teleportWithoutEvent(event.getTo(), cause);
+			return true;
+		}
+		return false;
+	}
+
+	protected void teleportWithoutEvent(@NotNull Location location, @NotNull TeleportCause cause)
+	{
+		setLocation(location);
+		this.teleported = true;
+		this.teleportCause = cause;
 	}
 
 	@Override
@@ -304,6 +358,16 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	public @NotNull String getName()
 	{
 		return LegacyComponentSerializer.legacySection().serialize(this.name);
+	}
+
+	/**
+	 * Gets the scoreboard entry for this entity.
+	 *
+	 * @return The scoreboard entry.
+	 */
+	public @NotNull String getScoreboardEntry()
+	{
+		return uuid.toString();
 	}
 
 	/**
@@ -354,13 +418,6 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public @Nullable String nextMessage()
-	{
-		if (messages.peek() == null)
-			return null;
-		return LegacyComponentSerializer.legacySection().serialize(messages.poll());
-	}
-
 	public @Nullable Component nextComponentMessage()
 	{
 		return messages.poll();
@@ -369,115 +426,67 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public boolean isPermissionSet(@NotNull String name)
 	{
-		Preconditions.checkNotNull(name, "Name cannot be null");
-		return permissionAttachments.stream()
-				.map(PermissionAttachment::getPermissions)
-				.anyMatch(permissions -> permissions.containsKey(name) && permissions.get(name));
+		return this.perms.isPermissionSet(name);
 	}
 
 	@Override
 	public boolean isPermissionSet(@NotNull Permission perm)
 	{
-		Preconditions.checkNotNull(perm, "Permission cannot be null");
-		return isPermissionSet(perm.getName().toLowerCase(Locale.ENGLISH));
+		return this.perms.isPermissionSet(perm);
 	}
 
 	@Override
 	public boolean hasPermission(@NotNull String name)
 	{
-		Preconditions.checkNotNull(name, "Name cannot be null");
-		if (isPermissionSet(name))
-		{
-			return true;
-		}
-
-		Permission perm = server.getPluginManager().getPermission(name);
-		return perm != null ? hasPermission(perm) : Permission.DEFAULT_PERMISSION.getValue(isOp());
+		return this.perms.hasPermission(name);
 	}
 
 	@Override
 	public boolean hasPermission(@NotNull Permission perm)
 	{
-		Preconditions.checkNotNull(perm, "Permission cannot be null");
-		return isPermissionSet(perm) || perm.getDefault().getValue(isOp());
+		return this.perms.hasPermission(perm);
 	}
 
 	@Override
 	public @NotNull PermissionAttachment addAttachment(@NotNull Plugin plugin, @NotNull String name, boolean value)
 	{
-		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
-		Preconditions.checkNotNull(name, "Name cannot be null");
-		PermissionAttachment attachment = addAttachment(plugin);
-		attachment.setPermission(name, value);
-		return attachment;
+		return this.perms.addAttachment(plugin, name, value);
 	}
 
 	@Override
 	public @NotNull PermissionAttachment addAttachment(@NotNull Plugin plugin)
 	{
-		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
-		PermissionAttachment attachment = new PermissionAttachment(plugin, this);
-		permissionAttachments.add(attachment);
-		return attachment;
+		return this.perms.addAttachment(plugin);
 	}
 
 	@Override
 	public PermissionAttachment addAttachment(@NotNull Plugin plugin, @NotNull String name, boolean value, int ticks)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return this.perms.addAttachment(plugin, name, value, ticks);
 	}
 
 	@Override
 	public PermissionAttachment addAttachment(@NotNull Plugin plugin, int ticks)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return this.perms.addAttachment(plugin, ticks);
 	}
 
 	@Override
 	public void removeAttachment(@NotNull PermissionAttachment attachment)
 	{
-		Preconditions.checkNotNull(attachment, "Attachment cannot be null");
-
-		if (permissionAttachments.contains(attachment))
-		{
-			permissionAttachments.remove(attachment);
-			PermissionRemovedExecutor ex = attachment.getRemovalCallback();
-
-			if (ex != null)
-			{
-				ex.attachmentRemoved(attachment);
-			}
-
-			recalculatePermissions();
-		}
-		else
-		{
-			throw new IllegalArgumentException("Given attachment is not part of Permissible object " + this);
-		}
+		this.perms.removeAttachment(attachment);
 	}
 
 	@Override
 	public void recalculatePermissions()
 	{
-
+		this.perms.recalculatePermissions();
 	}
 
 	@Override
 	public @NotNull Set<PermissionAttachmentInfo> getEffectivePermissions()
 	{
-		HashSet<PermissionAttachmentInfo> permissionAttachmentInfos = new HashSet<>();
-
-		for (PermissionAttachment permissionAttachment : permissionAttachments)
-		{
-			for (Map.Entry<String, Boolean> entry : permissionAttachment.getPermissions().entrySet())
-			{
-				permissionAttachmentInfos.add(new PermissionAttachmentInfo(this, entry.getKey(), permissionAttachment, entry.getValue()));
-			}
-		}
-
-		return permissionAttachmentInfos;
+		return this.perms.getEffectivePermissions();
 	}
 
 	@Override
@@ -631,6 +640,11 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public void remove()
 	{
+		leaveVehicle();
+		if (hasPassengers())
+		{
+			new ArrayList<>(this.passengers).forEach(Entity::leaveVehicle);
+		}
 		this.removed = true;
 	}
 
@@ -656,51 +670,88 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Deprecated
 	public Entity getPassenger()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return isEmpty() ? null : this.passengers.get(0);
 	}
 
 	@Override
 	@Deprecated
 	public boolean setPassenger(@NotNull Entity passenger)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		eject(); // Make sure there is only one passenger
+		return addPassenger(passenger);
 	}
 
 	@Override
 	public @NotNull List<Entity> getPassengers()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return Collections.unmodifiableList(this.passengers);
 	}
 
 	@Override
 	public boolean addPassenger(@NotNull Entity passenger)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(passenger, "Passenger cannot be null.");
+		Preconditions.checkArgument(!equals(passenger), "Entity cannot ride itself.");
+
+		if (passenger.getVehicle() == this)
+		{
+			return false;
+		}
+
+		// Go down into the passenger stack to see if it is already a passenger further down.
+		// This prevents circular entity riding.
+		for (Entity current = this.getVehicle(); current != null; current = current.getVehicle())
+		{
+			if (current == passenger)
+			{
+				return false;
+			}
+		}
+
+		((EntityMock) passenger).vehicle = this;
+		if (!tryAddingPassenger(passenger))
+		{
+			((EntityMock) passenger).vehicle = null;
+			return false;
+		}
+		return true;
 	}
 
 	@Override
 	public boolean removePassenger(@NotNull Entity passenger)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(passenger, "Passenger cannot be null.");
+		passenger.leaveVehicle(); // Only the passenger is used by the CraftBukkit implementation
+		return true;
 	}
 
 	@Override
 	public boolean isEmpty()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return this.passengers.isEmpty();
+	}
+
+	/**
+	 * Check if the entity has passengers.
+	 * <p>
+	 * Convenience method for {@link #isEmpty()}.
+	 *
+	 * @return {@code true} if there is at least one passenger.
+	 */
+	public boolean hasPassengers()
+	{
+		return !isEmpty();
 	}
 
 	@Override
 	public boolean eject()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		if (isEmpty())
+		{
+			return false;
+		}
+		this.passengers.clear();
+		return true;
 	}
 
 	@Override
@@ -758,22 +809,87 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public boolean isInsideVehicle()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return this.vehicle != null;
 	}
 
 	@Override
 	public boolean leaveVehicle()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		if (this.vehicle == null)
+		{
+			return false;
+		}
+		EntityMock previousVehicle = this.vehicle;
+		this.vehicle = null;
+		if (!previousVehicle.tryRemovingPassenger(this))
+		{
+			this.vehicle = previousVehicle;
+		}
+		return true;
 	}
 
 	@Override
-	public Entity getVehicle()
+	public @Nullable Entity getVehicle()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return this.vehicle;
+	}
+
+	/**
+	 * Adds the entity to the passenger list.
+	 * <p>
+	 * This method only does the logic for the vehicle and could cause illegal states if
+	 * used directly. Use {@link #addPassenger(Entity)}.
+	 *
+	 * @param entity The entity that will be a passenger.
+	 * @return {@code true} if the entity has become a passenger for this vehicle, {@code false} otherwise.
+	 */
+	private boolean tryAddingPassenger(@NotNull Entity entity)
+	{
+		if (getWorld() != entity.getWorld())
+		{
+			// Entity passenger world must match
+			return false;
+		}
+
+		if (this instanceof Vehicle vehicle && entity instanceof LivingEntity)
+		{
+			// If the event is cancelled or the vehicle has since changed, abort
+			if (!new VehicleEnterEvent(vehicle, entity).callEvent() || entity.getVehicle() != this)
+			{
+				return false;
+			}
+		}
+		if (!new EntityMountEvent(entity, this).callEvent())
+		{
+			return false;
+		}
+		return this.passengers.add(entity);
+	}
+
+	/**
+	 * Removes the entity from the passenger list.
+	 * <p>
+	 * This method only does the logic for the vehicle and could cause illegal states if
+	 * used directly. Use {@link #removePassenger(Entity)} or {@link #leaveVehicle()}.
+	 *
+	 * @param entity The entity that will leave this vehicle.
+	 * @return {@code true} if the entity is no longer a passenger for this vehicle, {@code false} otherwise.
+	 */
+	private boolean tryRemovingPassenger(@NotNull Entity entity)
+	{
+		if (this instanceof Vehicle vehicle && entity instanceof LivingEntity livingEntity)
+		{
+			// If the event is cancelled or the vehicle has since changed, abort
+			if (!new VehicleExitEvent(vehicle, livingEntity).callEvent() || entity.getVehicle() != this)
+			{
+				return false;
+			}
+		}
+		if (!new EntityDismountEvent(entity, this).callEvent())
+		{
+			return false;
+		}
+		return this.passengers.remove(entity);
 	}
 
 	@Override
@@ -1062,6 +1178,20 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 
 	@Override
 	public boolean isInPowderedSnow()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean collidesAt(@NotNull Location location)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean wouldCollideUsing(@NotNull BoundingBox boundingBox)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

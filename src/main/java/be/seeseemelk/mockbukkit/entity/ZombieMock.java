@@ -5,6 +5,7 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.Zombie;
+import org.bukkit.entity.ZombieVillager;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
@@ -12,17 +13,15 @@ import java.util.UUID;
 public class ZombieMock extends MonsterMock implements Zombie
 {
 
+	private static final String VILLAGER_OPERATION_NOT_SUPPORTED = "Not supported. Please spawn a new Zombie Villager instead.";
+
 	private boolean baby;
-	private boolean villager;
-	private Villager.Profession profession;
 	private boolean converting;
 	private int conversionTime;
 
 	public ZombieMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
-		setMaxHealth(20);
-		setHealth(20);
 	}
 
 	@Override
@@ -34,48 +33,38 @@ public class ZombieMock extends MonsterMock implements Zombie
 	@Override
 	public boolean isVillager()
 	{
-		return villager;
+		return this instanceof ZombieVillager;
 	}
 
-	/**
-	 * This are unimplemented because they Bukkit specifies they should always fail? (@Contract Tag)
-	 *
-	 * @param villager If the zombie is a village
-	 */
 	@Override
 	public void setVillager(boolean villager)
 	{
-		this.villager = villager;
-		throw new UnimplementedOperationException();
+		throw new UnsupportedOperationException(VILLAGER_OPERATION_NOT_SUPPORTED);
 	}
 
-	/**
-	 * This are unimplemented because they Bukkit specifies they should always fail? (@Contract Tag)
-	 *
-	 * @param profession Villager profession to use
-	 */
 	@Override
 	public void setVillagerProfession(Villager.Profession profession)
 	{
-		throw new UnimplementedOperationException();
+		throw new UnsupportedOperationException(VILLAGER_OPERATION_NOT_SUPPORTED);
 	}
 
 	@Override
 	public Villager.Profession getVillagerProfession()
 	{
-		return profession;
+		// The CraftBukkit implementation returns null here, but throwing an exception is more fitting.
+		throw new UnsupportedOperationException(VILLAGER_OPERATION_NOT_SUPPORTED);
 	}
 
 	@Override
 	public boolean isConverting()
 	{
-		return converting;
+		return this.converting;
 	}
 
 	@Override
 	public int getConversionTime()
 	{
-		return conversionTime;
+		return this.conversionTime;
 	}
 
 	@Override
@@ -181,7 +170,7 @@ public class ZombieMock extends MonsterMock implements Zombie
 	@Override
 	public boolean isBaby()
 	{
-		return baby;
+		return this.baby;
 	}
 
 	@Override

@@ -1,15 +1,19 @@
 package be.seeseemelk.mockbukkit.profile;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.destroystokyo.paper.profile.ProfileProperty;
+import com.google.common.base.Preconditions;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.profile.PlayerTextures;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -23,12 +27,12 @@ public class PlayerProfileMock implements PlayerProfile
 	private @Nullable UUID uuid;
 	private final @NotNull Set<ProfileProperty> properties;
 
-	public PlayerProfileMock(@NotNull PlayerMock player)
+	public PlayerProfileMock(@NotNull OfflinePlayer player)
 	{
 		this(player.getName(), player.getUniqueId());
 	}
 
-	public PlayerProfileMock(String name, UUID uuid)
+	public PlayerProfileMock(@Nullable String name, @Nullable UUID uuid)
 	{
 		this.name = name;
 		this.uuid = uuid;
@@ -52,7 +56,7 @@ public class PlayerProfileMock implements PlayerProfile
 	@Override
 	public @Nullable String getName()
 	{
-		return name;
+		return this.name;
 	}
 
 	@Override
@@ -66,7 +70,7 @@ public class PlayerProfileMock implements PlayerProfile
 	@Override
 	public @Nullable UUID getId()
 	{
-		return uuid;
+		return this.uuid;
 	}
 
 	@Override
@@ -135,7 +139,7 @@ public class PlayerProfileMock implements PlayerProfile
 	}
 
 	@Override
-	public @NotNull CompletableFuture<org.bukkit.profile.PlayerProfile> update()
+	public @NotNull CompletableFuture<PlayerProfile> update()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -179,8 +183,43 @@ public class PlayerProfileMock implements PlayerProfile
 	@Override
 	public @NotNull Map<String, Object> serialize()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Map<String, Object> map = new LinkedHashMap<>();
+		if (this.getId() != null)
+		{
+			map.put("uniqueId", this.getId().toString());
+		}
+		if (this.getName() != null)
+		{
+			map.put("name", getName());
+		}
+		if (!this.properties.isEmpty())
+		{
+			List<Object> propertiesData = new ArrayList<>();
+			for (ProfileProperty property : this.properties)
+			{
+				propertiesData.add(PlayerProfileMock.serialize(property));
+			}
+			map.put("properties", propertiesData);
+		}
+		return map;
+	}
+
+	/**
+	 * Serializes a specific ProfileProperty.
+	 *
+	 * @param property The property to serialize.
+	 * @return The serialized {@link ProfileProperty}.
+	 */
+	private static Map<String, Object> serialize(@NotNull ProfileProperty property)
+	{
+		Map<String, Object> map = new LinkedHashMap<>();
+		map.put("name", property.getName());
+		map.put("value", property.getValue());
+		if (property.isSigned())
+		{
+			map.put("signature", property.getSignature());
+		}
+		return map;
 	}
 
 	@Override
@@ -210,6 +249,19 @@ public class PlayerProfileMock implements PlayerProfile
 	public org.bukkit.profile.@NotNull PlayerProfile clone()
 	{
 		return new PlayerProfileMock(this);
+	}
+
+	/**
+	 * Checks if a PlayerProfile is valid to be on a Skull.
+	 *
+	 * @param profile The profile to check.
+	 */
+	public static void validateSkullProfile(@NotNull PlayerProfileMock profile)
+	{
+		// The profile must contain either a uuid and textures, or a name.
+		// The profile always has a name or uuid, so just checking if it has a name and textures is sufficient.
+		boolean isValidSkullProfile = (profile.getName() != null) /*|| check for textures*/; // Textures aren't implemented yet.
+		Preconditions.checkArgument(isValidSkullProfile, "The skull profile is missing a name or textures!");
 	}
 
 }

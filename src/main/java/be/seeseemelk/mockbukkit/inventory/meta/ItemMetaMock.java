@@ -226,12 +226,10 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public boolean equals(Object obj)
 	{
-		if (!(obj instanceof ItemMeta))
+		if (!(obj instanceof ItemMeta meta))
 		{
 			return false;
 		}
-
-		ItemMeta meta = (ItemMeta) obj;
 
 		if (!isDisplayNameEqual(meta))
 		{
@@ -241,9 +239,8 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		{
 			return false;
 		}
-		if (obj instanceof Damageable)
+		if (obj instanceof Damageable damageable)
 		{
-			Damageable damageable = (Damageable) obj;
 			if (hasDamage() != damageable.hasDamage() || hasDamage() && getDamage() != damageable.getDamage())
 			{
 				return false;

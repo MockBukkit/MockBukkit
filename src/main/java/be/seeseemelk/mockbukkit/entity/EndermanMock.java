@@ -24,6 +24,10 @@ public class EndermanMock extends MonsterMock implements Enderman
 		super(server, uuid);
 	}
 
+	/**
+	 * We're not implementing this as this would randomly fail tests.
+	 * This is not a bug, it's a feature.
+	 */
 	@Override
 	public boolean teleportRandomly()
 	{
@@ -32,6 +36,7 @@ public class EndermanMock extends MonsterMock implements Enderman
 	}
 
 	@Override
+	@Deprecated
 	public @NotNull MaterialData getCarriedMaterial()
 	{
 		checkHasBlock();
@@ -39,6 +44,7 @@ public class EndermanMock extends MonsterMock implements Enderman
 	}
 
 	@Override
+	@Deprecated
 	public void setCarriedMaterial(@NotNull MaterialData material)
 	{
 		Preconditions.checkNotNull(material, "MaterialData cannot be null");

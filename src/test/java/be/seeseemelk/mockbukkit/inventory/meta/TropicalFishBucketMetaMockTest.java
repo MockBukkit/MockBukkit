@@ -40,9 +40,9 @@ class TropicalFishBucketMetaMockTest
 
 		TropicalFishBucketMetaMock otherMeta = new TropicalFishBucketMetaMock(meta);
 
-		assertEquals(DyeColor.CYAN, meta.getPatternColor());
-		assertEquals(DyeColor.MAGENTA, meta.getBodyColor());
-		assertEquals(TropicalFish.Pattern.BETTY, meta.getPattern());
+		assertEquals(DyeColor.CYAN, otherMeta.getPatternColor());
+		assertEquals(DyeColor.MAGENTA, otherMeta.getBodyColor());
+		assertEquals(TropicalFish.Pattern.BETTY, otherMeta.getPattern());
 	}
 
 	@Test

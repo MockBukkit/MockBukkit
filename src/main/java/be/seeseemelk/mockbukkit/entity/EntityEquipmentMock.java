@@ -61,9 +61,6 @@ public class EntityEquipmentMock implements EntityEquipment
 		case FEET -> setBoots(item, silent);
 		case HAND -> setItemInMainHand(item, silent);
 		case OFF_HAND -> setItemInOffHand(item, silent);
-		default ->
-			// This should never be reached unless Mojang adds new slots
-				throw new UnimplementedOperationException("EquipmentSlot '" + slot + "' has no implementation!");
 		}
 	}
 
@@ -79,9 +76,6 @@ public class EntityEquipmentMock implements EntityEquipment
 					case HEAD -> getHelmet();
 					case LEGS -> getLeggings();
 					case OFF_HAND -> getItemInOffHand();
-					default ->
-						// This should never be reached unless Mojang adds new slots
-							throw new UnimplementedOperationException("EquipmentSlot '" + slot + "' has no implementation!");
 				};
 	}
 
@@ -138,7 +132,7 @@ public class EntityEquipmentMock implements EntityEquipment
 	}
 
 	@Override
-	public ItemStack getHelmet()
+	public @Nullable ItemStack getHelmet()
 	{
 		return helmet;
 	}
@@ -157,7 +151,7 @@ public class EntityEquipmentMock implements EntityEquipment
 	}
 
 	@Override
-	public ItemStack getChestplate()
+	public @Nullable ItemStack getChestplate()
 	{
 		return chestPlate;
 	}
@@ -176,7 +170,7 @@ public class EntityEquipmentMock implements EntityEquipment
 	}
 
 	@Override
-	public ItemStack getLeggings()
+	public @Nullable ItemStack getLeggings()
 	{
 		return leggings;
 	}
@@ -195,7 +189,7 @@ public class EntityEquipmentMock implements EntityEquipment
 	}
 
 	@Override
-	public ItemStack getBoots()
+	public @Nullable ItemStack getBoots()
 	{
 		return boots;
 	}

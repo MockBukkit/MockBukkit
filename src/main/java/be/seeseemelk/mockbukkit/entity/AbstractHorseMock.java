@@ -16,7 +16,7 @@ public abstract class AbstractHorseMock extends AnimalsMock implements AbstractH
 {
 
 	private @Nullable UUID owner;
-	private int maxDomestication;
+	private int maxDomestication = 100;
 	private int domestication;
 	private double jumpStrength;
 	private boolean tamed;
@@ -30,6 +30,7 @@ public abstract class AbstractHorseMock extends AnimalsMock implements AbstractH
 	}
 
 	@Override
+	@Deprecated
 	public void setVariant(Horse.Variant variant)
 	{
 		throw new UnsupportedOperationException("Not supported.");
@@ -44,7 +45,6 @@ public abstract class AbstractHorseMock extends AnimalsMock implements AbstractH
 	@Override
 	public void setDomestication(int value)
 	{
-
 		Preconditions.checkArgument(value >= 0, "Domestication cannot be less than zero");
 		Preconditions.checkArgument(value <= this.getMaxDomestication(), "Domestication cannot be greater than the max domestication");
 		this.domestication = value;

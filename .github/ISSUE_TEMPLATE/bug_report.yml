@@ -1,0 +1,55 @@
+name: 🐞 Bug Report
+description: Report a bug with MockBukkit.
+body:
+  - type: checkboxes
+    attributes:
+      label: Is there an existing issue for this?
+      description: Please search to see if an issue already exists for the bug you encountered.
+      options:
+        - label: I have searched the existing issues
+          required: true
+  - type: checkboxes
+    attributes:
+      label: Are you using the latest version of MockBukkit?
+      description: Please make sure you're using the latest version of MockBukkit as it's possible your issue has already been fixed.
+      options:
+        - label: I am using the latest version of MockBukkit.
+          required: true
+  - type: dropdown
+    id: mv-version
+    attributes:
+      label: Minecraft Version
+      description: What Minecraft version of MockBukkit are you using?
+      options:
+        - 1.8
+        - 1.12
+        - 1.13
+        - 1.14
+        - 1.15
+        - 1.16
+        - 1.17
+        - 1.18
+        - 1.19
+    validations:
+      required: true
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: Describe the bug
+      description: Describe the bug in as much detail as you can.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproducible Test
+      description: Please write a test that can reliably reproduce the bug.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Anything else?
+      description: |
+        Links? References? Anything that will give us more context about the issue you are encountering!
+    validations:
+      required: false

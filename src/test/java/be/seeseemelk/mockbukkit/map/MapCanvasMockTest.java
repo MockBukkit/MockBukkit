@@ -1,7 +1,6 @@
 package be.seeseemelk.mockbukkit.map;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.ServerMock;
 import org.bukkit.map.MinecraftFont;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,13 +19,12 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 class MapCanvasMockTest
 {
 
-	private ServerMock server;
 	private MapCanvasMock canvas;
 
 	@BeforeEach
 	void setUp()
 	{
-		server = MockBukkit.mock();
+		MockBukkit.mock();
 		canvas = new MapCanvasMock(null);
 	}
 
