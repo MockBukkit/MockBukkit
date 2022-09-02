@@ -669,17 +669,16 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		return asyncScheduler.getNumberOfQueuedAsyncTasks();
 	}
 
-	public @NotNull Future<Void> executeAsyncEvent(@NotNull Event event)
+	public @NotNull Future<?> executeAsyncEvent(@NotNull Event event)
 	{
 		return executeAsyncEvent(event, null);
 	}
 
-	@SuppressWarnings("unchecked")
-	public <T extends Event> @NotNull Future<Void> executeAsyncEvent(@NotNull T event, @Nullable Consumer<T> func)
+	public <T extends Event> @NotNull Future<?> executeAsyncEvent(@NotNull T event, @Nullable Consumer<T> func)
 	{
 		Preconditions.checkNotNull(event, "Cannot call a null event!");
 		Preconditions.checkState(event.isAsynchronous(), "Cannot invoke a non-asynchronous event asynchronously!");
-		return (Future<Void>) ((AsyncSchedulerMock) this.asyncScheduler).execute(() ->
+		return ((AsyncSchedulerMock) this.asyncScheduler).execute(() ->
 		{
 			Bukkit.getPluginManager().callEvent(event);
 			if (func != null)
