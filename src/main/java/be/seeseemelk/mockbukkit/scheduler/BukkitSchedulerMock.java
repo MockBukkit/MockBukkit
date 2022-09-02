@@ -669,11 +669,25 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		return asyncScheduler.getNumberOfQueuedAsyncTasks();
 	}
 
+	/**
+	 * Executes an asynchronous event on an asynchronous thread.
+	 *
+	 * @param event The event to execute.
+	 * @return A future representing the completion of the event.
+	 */
 	public @NotNull Future<?> executeAsyncEvent(@NotNull Event event)
 	{
 		return executeAsyncEvent(event, null);
 	}
 
+	/**
+	 * Executes an asynchronous event on an asynchronous thread.
+	 *
+	 * @param event The event to execute.
+	 * @param func  A function to run with the event after being called. Can be null.
+	 * @param <T>   The event type.
+	 * @return A future representing the completion of the event.
+	 */
 	public <T extends Event> @NotNull Future<?> executeAsyncEvent(@NotNull T event, @Nullable Consumer<T> func)
 	{
 		Preconditions.checkNotNull(event, "Cannot call a null event!");
@@ -698,6 +712,10 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		this.shutdownTimeout = shutdownTimeout;
 	}
 
+	/**
+	 * Shuts down the scheduler and waits up to shutdownTimeout for asynchronous tasks to finish.
+	 * No more tasks can be submitted after called.
+	 */
 	public void shutdown()
 	{
 		this.isRunning = false;
