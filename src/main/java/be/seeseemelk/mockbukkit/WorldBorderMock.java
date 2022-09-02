@@ -136,7 +136,7 @@ public class WorldBorderMock implements WorldBorder
 					this.cancel();
 				}
 			}
-		}.runTaskTimer(null, 1, 1);
+		}.runTaskTimer(MockBukkit.createMockPlugin(), 1, 1);
 	}
 
 	@Override
