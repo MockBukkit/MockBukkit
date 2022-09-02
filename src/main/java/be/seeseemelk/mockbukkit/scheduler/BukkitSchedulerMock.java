@@ -193,7 +193,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		return this.runTaskTimerAsynchronously(plugin, (Object) runnable, delay, period);
 	}
 
-	public BukkitTask runTaskTimerAsynchronously(Plugin plugin, Object runnable, long delay, long period)
+	private BukkitTask runTaskTimerAsynchronously(@NotNull Plugin plugin, @NotNull Object runnable, long delay, long period)
 	{
 		checkRunning();
 		BukkitSchedulerMock.validateTaskObj(plugin, runnable);
