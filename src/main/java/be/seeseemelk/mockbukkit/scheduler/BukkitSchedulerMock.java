@@ -286,13 +286,13 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	 * @param filter     A function for how tasks should be filtered. The first task to meet this filter is canceled.
 	 * @return True if a task was canceled, false otherwise.
 	 */
-	private boolean tryCancel(Collection<Task> collection, Function<Task, Boolean> filter)
+	private boolean tryCancel(Collection<Task> collection, Predicate<Task> filter)
 	{
 		Iterator<Task> iter = collection.iterator();
 		while (iter.hasNext())
 		{
 			Task task = iter.next();
-			if (!filter.apply(task))
+			if (!filter.test(task))
 				continue;
 			task.cancel0();
 			iter.remove();
