@@ -59,7 +59,7 @@ class PlayerInventoryMockTest
 		inventory.setItemInMainHand(item);
 		assertEquals(item, inventory.getItemInMainHand());
 		assertEquals(item, inventory.getItemInHand());
-		assertEquals(item, inventory.getContents()[PlayerInventoryMock.SLOT_BAR]);
+		assertEquals(item, inventory.getContents()[inventory.getHeldItemSlot()]);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -82,7 +82,7 @@ class PlayerInventoryMockTest
 		item.setAmount(25);
 		inventory.setItemInMainHand(item);
 		assertEquals(item, inventory.getItemInMainHand());
-		assertEquals(item, inventory.getItem(PlayerInventoryMock.SLOT_BAR + 1));
+		assertEquals(item, inventory.getItem(PlayerInventoryMock.HOTBAR + 1));
 	}
 
 	@Test

@@ -249,7 +249,7 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	@Override
 	public @NotNull ItemStack getItemInMainHand()
 	{
-		return notNull(getItem(SLOT_BAR + mainHandSlot));
+		return notNull(getItem(HOTBAR + mainHandSlot));
 	}
 
 	@Override
@@ -261,7 +261,7 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	@Override
 	public void setItemInMainHand(@Nullable ItemStack item, boolean silent)
 	{
-		setItem(SLOT_BAR + mainHandSlot, item);
+		setItem(HOTBAR + mainHandSlot, item);
 		// Sounds are not implemented here
 	}
 
