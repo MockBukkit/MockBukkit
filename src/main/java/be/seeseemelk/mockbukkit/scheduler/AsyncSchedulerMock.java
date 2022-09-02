@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.SynchronousQueue;
@@ -24,7 +24,7 @@ public class AsyncSchedulerMock extends BukkitSchedulerMock
 {
 
 	private final ThreadPoolExecutor executor = new ThreadPoolExecutor(4, Integer.MAX_VALUE, 30L, TimeUnit.SECONDS, new SynchronousQueue<>());
-	private final Executor managerThread = Executors.newSingleThreadExecutor();
+	private final ExecutorService managerThread = Executors.newSingleThreadExecutor();
 	private final List<Task> temp = new ArrayList<>();
 	private final AtomicReference<Throwable> asyncException = new AtomicReference<>();
 
@@ -105,6 +105,7 @@ public class AsyncSchedulerMock extends BukkitSchedulerMock
 	 */
 	private boolean executeTask(Task task)
 	{
+		Preconditions.checkState(this.shutdown, "Scheduler shutdown!");
 		if (task.getPeriod() < Task.NO_REPEATING)
 			return false;
 
@@ -115,7 +116,7 @@ public class AsyncSchedulerMock extends BukkitSchedulerMock
 			{
 				task.run();
 			}
-			catch (Throwable t)
+			catch (Exception t)
 			{
 				new ServerExceptionEvent(new ServerSchedulerException(t, task)).callEvent();
 				asyncException.set(t);
@@ -132,6 +133,7 @@ public class AsyncSchedulerMock extends BukkitSchedulerMock
 	 */
 	public Future<?> execute(Runnable r)
 	{
+		Preconditions.checkState(this.shutdown, "Scheduler shutdown!");
 		return this.executor.submit(r);
 	}
 
@@ -156,6 +158,31 @@ public class AsyncSchedulerMock extends BukkitSchedulerMock
 	public int getNumberOfQueuedAsyncTasks()
 	{
 		return this.runners.size();
+	}
+
+	@Override
+	public void shutdown()
+	{
+		super.shutdown();
+		shutdownExecutor(executor);
+		shutdownExecutor(managerThread);
+	}
+
+	private void shutdownExecutor(ExecutorService executor)
+	{
+		executor.shutdown();
+		try
+		{
+			if (!executor.awaitTermination(this.shutdownTimeout, TimeUnit.MILLISECONDS))
+			{
+				executor.shutdownNow();
+			}
+		}
+		catch (InterruptedException e)
+		{
+			executor.shutdownNow();
+			Thread.currentThread().interrupt();
+		}
 	}
 
 }

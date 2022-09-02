@@ -308,14 +308,11 @@ public class MockBukkit
 			return;
 		}
 
-		if (mock.getPluginManager() != null)
-		{
-			mock.getPluginManager().disablePlugins();
-		}
-
 		try
 		{
+			mock.getPluginManager().disablePlugins();
 			mock.getScheduler().shutdown();
+			mock.getScheduler().waitAsyncTasksFinished();
 		}
 		finally
 		{

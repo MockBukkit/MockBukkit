@@ -26,8 +26,8 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
-import java.util.function.Function;
 import java.util.function.IntUnaryOperator;
+import java.util.function.Predicate;
 
 /**
  * Taken and heavily modified from <a href="https://hub.spigotmc.org/stash/projects/SPIGOT/repos/craftbukkit/browse/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java">CraftBukkit's scheduler</a>.
@@ -76,6 +76,9 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	 * The current tick of the scheduler.
 	 */
 	protected volatile AtomicInteger currentTick = new AtomicInteger(-1);
+
+	protected int shutdownTimeout = 5000;
+	protected boolean shutdown = false;
 
 	private final BukkitSchedulerMock asyncScheduler;
 	private final boolean isAsyncScheduler;
@@ -469,6 +472,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 
 	protected Task handleTask(Task task, long delay)
 	{
+		Preconditions.checkState(this.shutdown, "Scheduler shutdown!");
 		if (!this.isAsyncScheduler && !task.isSync())
 		{
 			this.asyncScheduler.handleTask(task, delay);
@@ -683,10 +687,54 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		});
 	}
 
-	// TODO: void shutdown() - Shuts the scheduler down.
-	// TODO: void waitAsyncEventsFinished() - Waits until all asynchronous events have finished executing.
-	// TODO: void waitAsyncTasksFinished() - Waits until all asynchronous tasks have finished executing.
-	// TODO: Other old methods that I'm forgetting.
+	/**
+	 * Sets the timeout for waiting for asynchronous tasks to finish.
+	 *
+	 * @param shutdownTimeout The timeout, in milliseconds.
+	 */
+	public void setShutdownTimeout(int shutdownTimeout)
+	{
+		this.shutdownTimeout = shutdownTimeout;
+	}
+
+	public void shutdown()
+	{
+		this.shutdown = true;
+		for (Plugin plugin : Bukkit.getPluginManager().getPlugins())
+		{
+			cancelTasks(plugin);
+		}
+		waitAsyncTasksFinished();
+	}
+
+	/**
+	 * Waits up to shutdownTimeout milliseconds for asynchronous tasks to finish.
+	 * This does NOT prevent new async tasks from being added.
+	 *
+	 * @see #setShutdownTimeout(int)
+	 */
+	public void waitAsyncTasksFinished()
+	{
+		long startTime = System.currentTimeMillis();
+
+		while (System.currentTimeMillis() - startTime > shutdownTimeout && !getActiveWorkers().isEmpty())
+		{
+			try
+			{
+				Thread.sleep(50L);
+			}
+			catch (InterruptedException e)
+			{
+				Thread.currentThread().interrupt();
+			}
+		}
+
+		for (BukkitWorker overdueWorker : getActiveWorkers())
+		{
+			if (false) continue; // Get rid of "make exception conditional" warning
+			throw new IllegalStateException("Plugin " + overdueWorker.getOwner() + " is not properly shutting down its async tasks!");
+		}
+	}
 
 	// endregion
 
