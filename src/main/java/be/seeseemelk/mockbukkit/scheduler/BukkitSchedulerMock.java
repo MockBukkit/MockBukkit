@@ -88,7 +88,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		this(false);
 	}
 
-	public BukkitSchedulerMock(boolean isAsync)
+	protected BukkitSchedulerMock(boolean isAsync)
 	{
 		this.isAsyncScheduler = isAsync;
 		this.asyncScheduler = (isAsync) ? this : new AsyncSchedulerMock();
@@ -501,7 +501,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	}
 
 	/**
-	 * Increments {@link BukkitSchedulerMock#taskId} and returns it's value. Will continue to increment if tasks with the selected ID are still running.
+	 * Increments {@link BukkitSchedulerMock#taskId} and returns its value. Will continue to increment if tasks with the selected ID are still running.
 	 *
 	 * @return The next task ID that should be used.
 	 */
