@@ -62,6 +62,7 @@ public class FoxMock extends AnimalsMock implements Fox
 
 	/**
 	 * Checks if the Fox is sleeping
+	 *
 	 * @return True if he is sleeping, false if not
 	 */
 	public boolean isSleeping()
