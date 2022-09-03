@@ -82,7 +82,7 @@ public class EntityEquipmentMock implements EntityEquipment
 	@Override
 	public @NotNull ItemStack getItemInMainHand()
 	{
-		return itemInMainHand;
+		return this.itemInMainHand.clone();
 	}
 
 	@Override
@@ -101,7 +101,7 @@ public class EntityEquipmentMock implements EntityEquipment
 	@Override
 	public @NotNull ItemStack getItemInOffHand()
 	{
-		return itemInOffHand;
+		return this.itemInOffHand.clone();
 	}
 
 	@Override
