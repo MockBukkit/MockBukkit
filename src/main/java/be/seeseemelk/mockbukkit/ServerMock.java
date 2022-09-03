@@ -1528,7 +1528,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private void loadDefaultIcon()
 	{
 		this.serverIcon = new CachedServerIconMock(null);
-		File file = new File(new File("."), "server-icon.png");
+		File file = new File("server-icon.png");
 		if (!file.isFile())
 			return;
 		try
