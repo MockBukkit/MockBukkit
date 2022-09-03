@@ -168,7 +168,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private final HelpMapMock helpMap = new HelpMapMock();
 	private final StandardMessenger messenger = new StandardMessenger();
 	private final Map<Integer, MapViewMock> mapViews = new HashMap<>();
-	private CachedServerIconMock serverIcon;
+	private CachedServerIconMock serverIcon = new CachedServerIconMock(null);
 	private int nextMapId = 1;
 
 	private GameMode defaultGameMode = GameMode.SURVIVAL;
@@ -208,8 +208,6 @@ public class ServerMock extends Server.Spigot implements Server
 		{
 			logger.warning("Could not load build properties");
 		}
-
-		loadDefaultIcon();
 	}
 
 	/**
@@ -1494,6 +1492,16 @@ public class ServerMock extends Server.Spigot implements Server
 		throw new UnimplementedOperationException();
 	}
 
+	/**
+	 * Sets the return value of {@link #getServerIcon()}.
+	 *
+	 * @param serverIcon The icon to set.
+	 */
+	public void setServerIcon(CachedServerIconMock serverIcon)
+	{
+		this.serverIcon = serverIcon;
+	}
+
 	@Override
 	public CachedServerIconMock getServerIcon()
 	{
@@ -1520,25 +1528,6 @@ public class ServerMock extends Server.Spigot implements Server
 		String encoded = Base64.getEncoder().encodeToString(out.toByteArray());
 
 		return new CachedServerIconMock(CachedServerIconMock.PNG_BASE64_PREFIX + encoded);
-	}
-
-	/**
-	 * Loads the server icon from the "server-icon.png" in the servers running directory.
-	 */
-	private void loadDefaultIcon()
-	{
-		this.serverIcon = new CachedServerIconMock(null);
-		File file = new File("server-icon.png");
-		if (!file.isFile())
-			return;
-		try
-		{
-			this.serverIcon = loadServerIcon(file);
-		}
-		catch (Exception ex)
-		{
-			throw new IllegalArgumentException(ex);
-		}
 	}
 
 	@Override
