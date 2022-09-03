@@ -72,6 +72,7 @@ public class GoatMock extends AnimalsMock implements Goat
 
 	/**
 	 * Asserts that the goat attacked the given entity.
+	 *
 	 * @param entity The entity to assert.
 	 */
 	public void assertEntityRammed(@NotNull LivingEntity entity)

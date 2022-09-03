@@ -55,6 +55,7 @@ public class WolfMock extends TameableAnimalMock implements Wolf
 
 	/**
 	 * Sets whether the wolf is wet or not.
+	 *
 	 * @param wet Whether the wolf is wet or not.
 	 */
 	public void setWet(boolean wet)
