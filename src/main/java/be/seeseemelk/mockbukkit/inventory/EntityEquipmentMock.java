@@ -94,7 +94,7 @@ public class EntityEquipmentMock implements EntityEquipment
 	@Override
 	public void setItemInMainHand(@Nullable ItemStack item, boolean silent)
 	{
-		this.itemInMainHand = notNullClone(item);
+		this.itemInMainHand = nonNullClone(item);
 		// Sounds are not implemented here
 	}
 
@@ -113,7 +113,7 @@ public class EntityEquipmentMock implements EntityEquipment
 	@Override
 	public void setItemInOffHand(@Nullable ItemStack item, boolean silent)
 	{
-		this.itemInOffHand = notNullClone(item);
+		this.itemInOffHand = nonNullClone(item);
 		// Sounds are not implemented here
 	}
 
@@ -146,7 +146,7 @@ public class EntityEquipmentMock implements EntityEquipment
 	@Override
 	public void setHelmet(@Nullable ItemStack helmet, boolean silent)
 	{
-		this.helmet = notNullClone(helmet);
+		this.helmet = nonNullClone(helmet);
 		// Sounds are not implemented here
 	}
 
@@ -165,7 +165,7 @@ public class EntityEquipmentMock implements EntityEquipment
 	@Override
 	public void setChestplate(@Nullable ItemStack chestplate, boolean silent)
 	{
-		this.chestPlate = notNullClone(chestplate);
+		this.chestPlate = nonNullClone(chestplate);
 		// Sounds are not implemented here
 	}
 
@@ -184,7 +184,7 @@ public class EntityEquipmentMock implements EntityEquipment
 	@Override
 	public void setLeggings(@Nullable ItemStack leggings, boolean silent)
 	{
-		this.leggings = notNullClone(leggings);
+		this.leggings = nonNullClone(leggings);
 		// Sounds are not implemented here
 	}
 
@@ -203,7 +203,7 @@ public class EntityEquipmentMock implements EntityEquipment
 	@Override
 	public void setBoots(@Nullable ItemStack boots, boolean silent)
 	{
-		this.boots = notNullClone(boots);
+		this.boots = nonNullClone(boots);
 		// Sounds are not implemented here
 	}
 
@@ -344,7 +344,7 @@ public class EntityEquipmentMock implements EntityEquipment
 		return this.dropChances.get(slot);
 	}
 
-	static @NotNull ItemStack notNullClone(@Nullable ItemStack itemStack)
+	static @NotNull ItemStack nonNullClone(@Nullable ItemStack itemStack)
 	{
 		return itemStack == null ? new ItemStack(Material.AIR) : itemStack.clone();
 	}
