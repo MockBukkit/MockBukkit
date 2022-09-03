@@ -74,13 +74,25 @@ class ChunkSnapshotMockTest
 		AmethystClusterMock blockData = (AmethystClusterMock) Bukkit.createBlockData(Material.AMETHYST_CLUSTER);
 		blockData.setWaterlogged(true);
 		blockData.setFacing(BlockFace.SOUTH);
-		chunk.getBlock(0, 1, 0).setBlockData(Bukkit.createBlockData(Material.AMETHYST_CLUSTER));
+		chunk.getBlock(0, 1, 0).setBlockData(blockData);
 
 		AmethystClusterMock snapshotData = (AmethystClusterMock) chunk.getChunkSnapshot().getBlockData(0, 1, 0);
 
 		assertEquals(Material.AMETHYST_CLUSTER, snapshotData.getMaterial());
 		assertTrue(snapshotData.isWaterlogged());
 		assertEquals(BlockFace.SOUTH, snapshotData.getFacing());
+	}
+
+	@Test
+	void contains_BlockExists_True()
+	{
+		assertTrue(chunk.getChunkSnapshot().contains(Bukkit.createBlockData(Material.GRASS)));
+	}
+
+	@Test
+	void contains_BlockDoesntExist_False()
+	{
+		assertFalse(chunk.getChunkSnapshot().contains(Bukkit.createBlockData(Material.DIAMOND_BLOCK)));
 	}
 
 	@Test
