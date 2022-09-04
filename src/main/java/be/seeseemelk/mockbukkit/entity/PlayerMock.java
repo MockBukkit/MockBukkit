@@ -109,6 +109,7 @@ import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -808,20 +809,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 	@Override
 	public void setNoDamageTicks(int ticks)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public Player getKiller()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setKiller(@Nullable Player killer)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -2740,6 +2727,20 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public void addAdditionalChatCompletions(@NotNull Collection<String> completions)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void removeAdditionalChatCompletions(@NotNull Collection<String> completions)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @Nullable String getClientBrandName()
 	{
 		// TODO Auto-generated method stub
@@ -2750,21 +2751,21 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public boolean teleport(@NotNull Location location, PlayerTeleportEvent.@NotNull TeleportCause cause, boolean ignorePassengers, boolean dismount, @NotNull RelativeTeleportFlag @NotNull ... teleportFlags)
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public void lookAt(double x, double y, double z, @NotNull LookAnchor playerAnchor)
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public void lookAt(@NotNull Entity entity, @NotNull LookAnchor playerAnchor, @NotNull LookAnchor entityAnchor)
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

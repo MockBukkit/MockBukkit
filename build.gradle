@@ -33,10 +33,9 @@ dependencies {
     implementation 'org.junit.jupiter:junit-jupiter:5.9.0'
     implementation 'org.hamcrest:hamcrest-library:2.2'
 
-
-	// General utilities for the project
-	implementation 'net.kyori:adventure-platform-bungeecord:4.1.1'
-	implementation 'org.jetbrains:annotations:23.0.0'
+    // General utilities for the project
+    implementation 'net.kyori:adventure-platform-bungeecord:4.1.2'
+    implementation 'org.jetbrains:annotations:23.0.0'
 
 	// LibraryLoader dependencies
 	implementation 'org.apache.maven:maven-resolver-provider:3.8.6'
@@ -50,14 +49,15 @@ jar {
 	}
 }
 
-task javadocJar(type: Jar) {
-	classifier('javadoc')
-	from javadoc
+java {
+    withSourcesJar()
+    withJavadocJar()
 }
 
-task sourcesJar(type: Jar) {
-	classifier('sources')
-	from sourceSets.main.allSource
+javadoc {
+    options {
+        links "https://jd.papermc.io/paper/${gradle.ext.apiVersion}/"
+    }
 }
 
 processResources {
@@ -98,7 +98,7 @@ jacoco {
 }
 
 group = 'com.github.seeseemelk'
-version = property('mockbukkit.version')
+version = this.getVersion()
 
 nexusPublishing {
 	repositories {
@@ -115,8 +115,6 @@ publishing {
 			artifactId = "MockBukkit-v${gradle.ext.apiVersion}"
 			from components.java
 
-			artifact sourcesJar
-			artifact javadocJar
 			version = property('mockbukkit.version')
 			pom {
 				name = "MockBukkit-v${gradle.ext.apiVersion}"
@@ -146,6 +144,12 @@ publishing {
 	}
 }
 
+publishToMavenLocal {
+    doLast {
+        println("Published to Maven local with version '${this.getVersion()}'")
+    }
+}
+
 test {
 	useJUnitPlatform()
 }
@@ -164,4 +168,12 @@ def isFork() {
 	} catch (e) {
 	}
 	return true
+}
+
+def getVersion() {
+    if (System.getenv('CI') == null) {
+        return 'dev-' + 'git rev-parse --verify --short HEAD'.execute().text.trim()
+    } else {
+        return property('mockbukkit.version')
+    }
 }

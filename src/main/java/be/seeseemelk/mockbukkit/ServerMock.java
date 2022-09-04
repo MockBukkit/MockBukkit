@@ -52,6 +52,7 @@ import com.google.common.base.Preconditions;
 import io.papermc.paper.datapack.DatapackManager;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
@@ -107,6 +108,7 @@ import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.potion.PotionBrewer;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scoreboard.Criteria;
 import org.bukkit.structure.StructureManager;
 import org.bukkit.util.CachedServerIcon;
 import org.jetbrains.annotations.NotNull;
@@ -142,6 +144,7 @@ public class ServerMock extends Server.Spigot implements Server
 {
 
 	private static final Component MOTD = Component.text("A Minecraft Server");
+	private static final Component NO_PERMISSION = Component.text("I'm sorry, but you do not have permission to perform this command. Please contact the server administrators if you believe that this is in error.", NamedTextColor.RED);
 
 	private final Properties buildProperties = new Properties();
 	private final Logger logger = Logger.getLogger("ServerMock");
@@ -1482,6 +1485,13 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	public @NotNull Criteria getScoreboardCriteria(@NotNull String name)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public CachedServerIcon getServerIcon()
 	{
 		// TODO Auto-generated method stub
@@ -1937,15 +1947,13 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull String getPermissionMessage()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return unsafe.legacyComponentSerializer().serialize(NO_PERMISSION);
 	}
 
 	@Override
 	public @NotNull Component permissionMessage()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return NO_PERMISSION;
 	}
 
 	@Override

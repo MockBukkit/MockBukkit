@@ -392,89 +392,103 @@ class EntityMockTest
 	}
 
 	@Test
-	void hasPermission_NotAddedNotDefault_DoesNotHavePermission()
+	void addAttachment_True_Has()
 	{
-		Permission permission = new Permission("mockbukkit.perm", PermissionDefault.FALSE);
-		server.getPluginManager().addPermission(permission);
-		assertFalse(entity.hasPermission("mockbukkit.perm"));
+		entity.addAttachment(MockBukkit.createMockPlugin(), "test.permission", true);
+		assertTrue(entity.hasPermission("test.permission"));
 	}
 
 	@Test
-	void hasPermission_NotAddedButDefault_DoesPermission()
+	void addAttachment_False_DoesntHave()
 	{
-		MockPlugin plugin = MockBukkit.createMockPlugin();
-		Permission permission = new Permission("mockbukkit.perm", PermissionDefault.TRUE);
-		server.getPluginManager().addPermission(permission);
-		entity.addAttachment(plugin, "mockbukkit.perm", true);
-		assertTrue(entity.hasPermission("mockbukkit.perm"));
+		entity.addAttachment(MockBukkit.createMockPlugin(), "test.permission", false);
+		assertFalse(entity.hasPermission("test.permission"));
 	}
 
 	@Test
-	void addAttachment_PermissionObject_PermissionAdded()
+	void addAttachment_RemovedAfterTicks()
 	{
-		MockPlugin plugin = MockBukkit.createMockPlugin();
-		Permission permission = new Permission("mockbukkit.perm", PermissionDefault.FALSE);
-		server.getPluginManager().addPermission(permission);
-		PermissionAttachment attachment = entity.addAttachment(plugin);
-		attachment.setPermission(permission, true);
-		assertTrue(entity.hasPermission("mockbukkit.perm"));
+		entity.addAttachment(MockBukkit.createMockPlugin(), "test.permission", true, 10);
+		assertTrue(entity.isPermissionSet("test.permission"));
+		server.getScheduler().performTicks(9);
+		assertTrue(entity.isPermissionSet("test.permission"));
+		server.getScheduler().performTicks(10);
+		assertFalse(entity.isPermissionSet("test.permission"));
 	}
 
 	@Test
-	void addAttachment_PermissionName_PermissionAdded()
+	void removeAttachment_RemovesAttachment()
 	{
-		MockPlugin plugin = MockBukkit.createMockPlugin();
-		Permission permission = new Permission("mockbukkit.perm", PermissionDefault.TRUE);
-		server.getPluginManager().addPermission(permission);
-		PermissionAttachment attachment = entity.addAttachment(plugin);
-		attachment.setPermission(permission.getName(), true);
-		assertTrue(entity.hasPermission("mockbukkit.perm"));
+		PermissionAttachment att = entity.addAttachment(MockBukkit.createMockPlugin(), "test.permission", true);
+		assertTrue(entity.hasPermission("test.permission"));
+		entity.removeAttachment(att);
+		assertFalse(entity.hasPermission("test.permission"));
 	}
 
 	@Test
-	void addPermission_String_PermissionAdded()
+	void isPermissionSet_String_IsSet_True()
 	{
-		MockPlugin plugin = MockBukkit.createMockPlugin();
-		Permission permission = new Permission("mockbukkit.perm", PermissionDefault.TRUE);
-		server.getPluginManager().addPermission(permission);
-		PermissionAttachment attachment = entity.addAttachment(plugin);
-		attachment.setPermission(permission.getName(), true);
-		assertTrue(entity.hasPermission("mockbukkit.perm"));
+		entity.addAttachment(MockBukkit.createMockPlugin(), "test.permission", true);
+		assertTrue(entity.isPermissionSet("test.permission"));
 	}
 
 	@Test
-	void getEffectivePermissions_GetPermissionsList()
+	void isPermissionSet_String_IsntSet_False()
 	{
-		MockPlugin plugin = MockBukkit.createMockPlugin();
-		entity.addAttachment(plugin, "mockbukkit.perm", true);
-		entity.addAttachment(plugin, "mockbukkit.perm2", true);
-		entity.addAttachment(plugin, "mockbukkit.perm3", false);
-
-		Set<PermissionAttachmentInfo> effectivePermissions = entity.getEffectivePermissions();
-		assertEquals(3, effectivePermissions.size());
-
-		Set<String> permissions = effectivePermissions.stream().map(PermissionAttachmentInfo::getPermission).collect(Collectors.toSet());
-		assertTrue(permissions.contains("mockbukkit.perm"));
-		assertTrue(permissions.contains("mockbukkit.perm2"));
-		assertTrue(permissions.contains("mockbukkit.perm3"));
-
-		Optional<PermissionAttachmentInfo> first = effectivePermissions.stream().filter(permissionAttachmentInfo -> permissionAttachmentInfo.getPermission().equals("mockbukkit.perm3")).findFirst();
-		assertTrue(first.isPresent());
-		assertFalse(first.get().getValue());
+		assertFalse(entity.isPermissionSet("test.permission"));
 	}
 
 	@Test
-	void removeAttachment_RemovesPermission()
+	void isPermissionSet_Permission_IsSet_True()
 	{
-		MockPlugin plugin = MockBukkit.createMockPlugin();
-		Permission permission = new Permission("mockbukkit.perm");
-		server.getPluginManager().addPermission(permission);
-		PermissionAttachment attachment = entity.addAttachment(plugin);
-		attachment.setPermission(permission.getName(), true);
-		assertTrue(entity.hasPermission("mockbukkit.perm"));
+		entity.addAttachment(MockBukkit.createMockPlugin(), "test.permission", true);
+		assertTrue(entity.isPermissionSet(new Permission("test.permission")));
+	}
 
-		entity.removeAttachment(attachment);
-		assertFalse(entity.hasPermission("mockbukkit.perm"));
+	@Test
+	void isPermissionSet_Permission_IsntSet_False()
+	{
+		assertFalse(entity.isPermissionSet(new Permission("test.permission")));
+	}
+
+	@Test
+	void hasPermission_String_SetTrue_True()
+	{
+		entity.addAttachment(MockBukkit.createMockPlugin(), "test.permission", true);
+		assertTrue(entity.hasPermission("test.permission"));
+	}
+
+	@Test
+	void hasPermission_String_SetFalse_True()
+	{
+		entity.addAttachment(MockBukkit.createMockPlugin(), "test.permission", false);
+		assertFalse(entity.hasPermission("test.permission"));
+	}
+
+	@Test
+	void hasPermission_String_NotSet_True()
+	{
+		assertFalse(entity.hasPermission("test.permission"));
+	}
+
+	@Test
+	void hasPermission_Permission_SetTrue_True()
+	{
+		entity.addAttachment(MockBukkit.createMockPlugin(), "test.permission", true);
+		assertTrue(entity.hasPermission(new Permission("test.permission")));
+	}
+
+	@Test
+	void hasPermission_Permission_SetFalse_True()
+	{
+		entity.addAttachment(MockBukkit.createMockPlugin(), "test.permission", false);
+		assertFalse(entity.hasPermission(new Permission("test.permission")));
+	}
+
+	@Test
+	void hasPermission_Permission_NotSet_True()
+	{
+		assertTrue(entity.hasPermission(new Permission("test.permission", PermissionDefault.TRUE)));
 	}
 
 	@Test

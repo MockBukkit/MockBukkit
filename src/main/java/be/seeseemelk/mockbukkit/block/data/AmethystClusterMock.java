@@ -1,7 +1,6 @@
 package be.seeseemelk.mockbukkit.block.data;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.ImmutableSet;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.Directional;

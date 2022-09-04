@@ -4,6 +4,7 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import net.kyori.adventure.text.Component;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Entity;
+import org.bukkit.scoreboard.Criteria;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.RenderType;
@@ -50,6 +51,20 @@ public class ScoreboardMock implements Scoreboard
 	}
 
 	@Override
+	public @NotNull Objective registerNewObjective(@NotNull String name, @NotNull Criteria criteria, @Nullable Component displayName) throws IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Objective registerNewObjective(@NotNull String name, @NotNull Criteria criteria, @Nullable Component displayName, @NotNull RenderType renderType) throws IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	@Deprecated
 	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull String criteria, @NotNull String displayName)
 			throws IllegalArgumentException
@@ -72,6 +87,20 @@ public class ScoreboardMock implements Scoreboard
 	}
 
 	@Override
+	public @NotNull Objective registerNewObjective(@NotNull String name, @NotNull Criteria criteria, @NotNull String displayName) throws IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Objective registerNewObjective(@NotNull String name, @NotNull Criteria criteria, @NotNull String displayName, @NotNull RenderType renderType) throws IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public ObjectiveMock getObjective(String name) throws IllegalArgumentException
 	{
 		return objectives.get(name);
@@ -82,6 +111,13 @@ public class ScoreboardMock implements Scoreboard
 	{
 		return objectives.values().stream().filter(objective -> objective.getCriteria().equals(criteria))
 				.collect(Collectors.toSet());
+	}
+
+	@Override
+	public @NotNull Set<Objective> getObjectivesByCriteria(@NotNull Criteria criteria) throws IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
