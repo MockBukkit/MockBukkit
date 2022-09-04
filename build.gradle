@@ -8,7 +8,6 @@ plugins {
 	id 'io.github.gradle-nexus.publish-plugin' version '1.1.0'
 }
 
-
 repositories {
 	mavenCentral()
 
@@ -29,13 +28,13 @@ dependencies {
 	//Paper API
 	api "io.papermc.paper:paper-api:${gradle.ext.apiVersionFull}"
 
-    //Dependencies for Unit Tests
-    implementation 'org.junit.jupiter:junit-jupiter:5.9.0'
-    implementation 'org.hamcrest:hamcrest-library:2.2'
+	//Dependencies for Unit Tests
+	implementation 'org.junit.jupiter:junit-jupiter:5.9.0'
+	implementation 'org.hamcrest:hamcrest-library:2.2'
 
-    // General utilities for the project
-    implementation 'net.kyori:adventure-platform-bungeecord:4.1.2'
-    implementation 'org.jetbrains:annotations:23.0.0'
+	// General utilities for the project
+	implementation 'net.kyori:adventure-platform-bungeecord:4.1.2'
+	implementation 'org.jetbrains:annotations:23.0.0'
 
 	// LibraryLoader dependencies
 	implementation 'org.apache.maven:maven-resolver-provider:3.8.6'
@@ -50,14 +49,14 @@ jar {
 }
 
 java {
-    withSourcesJar()
-    withJavadocJar()
+	withSourcesJar()
+	withJavadocJar()
 }
 
 javadoc {
-    options {
-        links "https://jd.papermc.io/paper/${gradle.ext.apiVersion}/"
-    }
+	options {
+		links "https://jd.papermc.io/paper/${gradle.ext.apiVersion}/"
+	}
 }
 
 processResources {
@@ -76,14 +75,10 @@ tasks.withType(JavaCompile) {
 	options.release.set(gradle.ext.javaVersion)
 }
 
-artifacts {
-	archives javadocJar, sourcesJar
-}
-
 def isFork = isFork()
 
 signing {
-	required { !isFork && System.getenv('JITPACK') == null }
+	required { !isFork && System.getenv('CI') != null }
 	sign publishing.publications
 }
 
@@ -115,7 +110,6 @@ publishing {
 			artifactId = "MockBukkit-v${gradle.ext.apiVersion}"
 			from components.java
 
-			version = property('mockbukkit.version')
 			pom {
 				name = "MockBukkit-v${gradle.ext.apiVersion}"
 				packaging = 'jar'
@@ -145,9 +139,9 @@ publishing {
 }
 
 publishToMavenLocal {
-    doLast {
-        println("Published to Maven local with version '${this.getVersion()}'")
-    }
+	doLast {
+		println("Published to Maven local with version '${this.getVersion()}'")
+	}
 }
 
 test {
@@ -171,9 +165,9 @@ def isFork() {
 }
 
 def getVersion() {
-    if (System.getenv('CI') == null) {
-        return 'dev-' + 'git rev-parse --verify --short HEAD'.execute().text.trim()
-    } else {
-        return property('mockbukkit.version')
-    }
+	if (System.getenv('CI') == null) {
+		return 'dev-' + 'git rev-parse --verify --short HEAD'.execute().text.trim()
+	} else {
+		return property('mockbukkit.version')
+	}
 }
