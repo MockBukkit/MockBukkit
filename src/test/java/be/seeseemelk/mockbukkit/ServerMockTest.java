@@ -836,7 +836,7 @@ class ServerMockTest
 	{
 		server.setWhitelist(true);
 
-		PlayerMock playerMock = new PlayerMock(server,"Player", UUID.randomUUID());
+		PlayerMock playerMock = new PlayerMock(server, "Player", UUID.randomUUID());
 		playerMock.setWhitelisted(true);
 
 		server.addPlayer(playerMock);
