@@ -5,6 +5,7 @@ import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.attribute.AttributeInstanceMock;
 import be.seeseemelk.mockbukkit.attribute.AttributesMock;
+import be.seeseemelk.mockbukkit.inventory.EntityEquipmentMock;
 import be.seeseemelk.mockbukkit.potion.ActivePotionEffect;
 import com.destroystokyo.paper.block.TargetBlockInfo;
 import com.destroystokyo.paper.entity.TargetEntityInfo;
