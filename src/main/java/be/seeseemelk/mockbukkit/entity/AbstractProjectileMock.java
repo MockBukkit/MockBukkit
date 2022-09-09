@@ -13,26 +13,23 @@ import java.util.UUID;
 public abstract class AbstractProjectileMock extends EntityMock implements Projectile
 {
 
-	private boolean doesBounce;
-
 	protected AbstractProjectileMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
-		this.doesBounce = false;
 	}
 
 	@Override
 	@Deprecated(forRemoval = true)
 	public boolean doesBounce()
 	{
-		return this.doesBounce;
+		throw new UnsupportedOperationException("Deprecated; Does not do anything");
 	}
 
 	@Override
 	@Deprecated(forRemoval = true)
 	public void setBounce(boolean doesBounce)
 	{
-		this.doesBounce = doesBounce;
+		throw new UnsupportedOperationException("Deprecated; Does not do anything");
 	}
 
 }
