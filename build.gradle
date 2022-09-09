@@ -62,7 +62,7 @@ javadoc {
 
 processResources {
     doLast {
-        file("${buildDir}/resources/main/build.properties").withWriter { w ->
+        file("${buildDir}/resources/main/mockbukkit.properties").withWriter { w ->
             Properties p = new Properties()
             p['full-api-version'] = gradle.ext.apiVersionFull
             p.store w, null

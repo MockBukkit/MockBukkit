@@ -198,7 +198,7 @@ public class ServerMock extends Server.Spigot implements Server
 
 		try
 		{
-			buildProperties.load(ClassLoader.getSystemResourceAsStream("build.properties"));
+			buildProperties.load(ClassLoader.getSystemResourceAsStream("mockbukkit.properties"));
 		}
 		catch (IOException | NullPointerException e)
 		{
