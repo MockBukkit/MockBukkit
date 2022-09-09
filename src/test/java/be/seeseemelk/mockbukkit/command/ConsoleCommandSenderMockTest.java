@@ -112,6 +112,19 @@ class ConsoleCommandSenderMockTest
 	}
 
 	@Test
+	void assertMore_NoMessages_DoesNotAssert()
+	{
+		sender.sendMessage("Some message");
+		sender.assertMoreSaid();
+	}
+
+	@Test
+	void assertMore_MoreMessages_Asserts()
+	{
+		assertThrows(AssertionError.class, () -> sender.assertMoreSaid());
+	}
+
+	@Test
 	void sendMessage_NoMessage_ThrowsException()
 	{
 		assertThrowsExactly(NullPointerException.class, () -> sender.sendMessage((String) null));

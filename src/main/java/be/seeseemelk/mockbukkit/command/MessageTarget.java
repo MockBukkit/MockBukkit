@@ -63,13 +63,24 @@ public interface MessageTarget
 	}
 
 	/**
-	 * Asserts that more messages were received by the message target.
+	 * Asserts that no more messages were received by the message target.
 	 */
 	default void assertNoMoreSaid()
 	{
 		if (nextComponentMessage() != null)
 		{
 			fail("More messages were available");
+		}
+	}
+
+	/**
+	 * Asserts that more messages were received by the message target.
+	 */
+	default void assertMoreSaid()
+	{
+		if (nextComponentMessage() == null)
+		{
+			fail("No more messages were available");
 		}
 	}
 
