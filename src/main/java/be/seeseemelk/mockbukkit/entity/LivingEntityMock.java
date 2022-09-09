@@ -728,6 +728,13 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		throw new UnimplementedOperationException();
 	}
 
+	@Override
+	public boolean canBreatheUnderwater()
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
 	@NotNull
 	@Override
 	public EntityCategory getCategory()

@@ -96,6 +96,7 @@ import org.bukkit.entity.SpawnCategory;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.server.MapInitializeEvent;
 import org.bukkit.generator.ChunkGenerator.ChunkData;
 import org.bukkit.inventory.InventoryHolder;
@@ -119,6 +120,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
@@ -255,8 +257,9 @@ public class ServerMock extends Server.Spigot implements Server
 
 		CountDownLatch conditionLatch = new CountDownLatch(1);
 
+		InetSocketAddress address = player.getAddress();
 		AsyncPlayerPreLoginEvent preLoginEvent = new AsyncPlayerPreLoginEvent(player.getName(),
-				player.getAddress().getAddress(), player.getUniqueId());
+				address.getAddress(), player.getUniqueId());
 		getPluginManager().callEventAsynchronously(preLoginEvent, (e) -> conditionLatch.countDown());
 		try
 		{
@@ -268,6 +271,9 @@ public class ServerMock extends Server.Spigot implements Server
 					(StringUtils.isEmpty(e.getMessage()) ? "" : e.getMessage()));
 			Thread.currentThread().interrupt();
 		}
+
+		PlayerLoginEvent playerLoginEvent = new PlayerLoginEvent(player, address.getHostName(), address.getAddress());
+		Bukkit.getPluginManager().callEvent(playerLoginEvent);
 
 		Component joinMessage = MiniMessage.miniMessage()
 				.deserialize("<name> has joined the Server!", Placeholder.component("name", player.displayName()));

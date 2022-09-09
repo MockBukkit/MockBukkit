@@ -27,6 +27,7 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
+import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.server.MapInitializeEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
@@ -153,6 +154,13 @@ class ServerMockTest
 	{
 		PlayerMock player = server.addPlayer();
 		server.getPluginManager().assertEventFired(PlayerJoinEvent.class);
+	}
+
+	@Test
+	void addPlayer_Calls_PlayerLoginEvent()
+	{
+		PlayerMock player = server.addPlayer();
+		server.getPluginManager().assertEventFired(PlayerLoginEvent.class);
 	}
 
 	@Test
