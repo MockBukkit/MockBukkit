@@ -4,6 +4,7 @@ import be.seeseemelk.mockbukkit.AsyncCatcher;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.WorldMock;
+import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryViewMock;
@@ -24,6 +25,7 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.MainHand;
 import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.PlayerInventory;
 import org.jetbrains.annotations.NotNull;
@@ -39,7 +41,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public abstract class HumanEntityMock extends LivingEntityMock implements HumanEntity
 {
 
-	private @Nullable PlayerInventoryMock inventory = null;
+	private final PlayerInventoryMock inventory = new PlayerInventoryMock(this);
+	private final EnderChestInventoryMock enderChest = new EnderChestInventoryMock(this);
 	private InventoryView inventoryView;
 	private @Nullable ItemStack cursor = null;
 	private @NotNull GameMode gameMode = GameMode.SURVIVAL;
@@ -66,11 +69,20 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	@Override
 	public @NotNull PlayerInventory getInventory()
 	{
-		if (inventory == null)
-		{
-			inventory = (PlayerInventoryMock) Bukkit.createInventory(this, InventoryType.PLAYER);
-		}
-		return inventory;
+		return this.inventory;
+	}
+
+	@Override
+	public @NotNull Inventory getEnderChest()
+	{
+		return this.enderChest;
+	}
+
+	@Override
+	public @NotNull MainHand getMainHand()
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
 	}
 
 
