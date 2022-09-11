@@ -52,6 +52,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
@@ -75,7 +76,7 @@ public class PluginManagerMock implements PluginManager
 	private final List<PluginCommand> commands = new ArrayList<>();
 	private final List<Event> events = new ArrayList<>();
 	private File parentTemporaryDirectory;
-	private final List<Permission> permissions = new ArrayList<>();
+	private final Map<String, Permission> permissions = new HashMap<>();
 	private final Map<Permissible, Set<String>> permissionSubscriptions = new HashMap<>();
 	private final Map<Boolean, Map<Permissible, Boolean>> defaultPermissionSubscriptions = new HashMap<Boolean, Map<Permissible, Boolean>>();
 	private final @NotNull Map<String, List<Listener>> listeners = new HashMap<>();
@@ -802,41 +803,34 @@ public class PluginManagerMock implements PluginManager
 	@Override
 	public Permission getPermission(@NotNull String name)
 	{
-		return permissions.stream().filter(permission -> permission.getName().equals(name)).findFirst().orElse(null);
+		return permissions.get(name.toLowerCase(Locale.ENGLISH));
 	}
 
 	@Override
 	public void addPermission(@NotNull Permission perm)
 	{
-		permissions.add(perm);
+		permissions.put(perm.getName().toLowerCase(Locale.ENGLISH), perm);
 	}
 
 	@Override
 	public void removePermission(@NotNull Permission perm)
 	{
-		permissions.remove(perm);
+		permissions.remove(perm.getName().toLowerCase(Locale.ENGLISH));
 	}
 
 	@Override
 	public void removePermission(@NotNull String name)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		permissions.remove(name.toLowerCase(Locale.ENGLISH));
 	}
 
 	@Override
 	public @NotNull Set<Permission> getDefaultPermissions(boolean op)
 	{
-		Set<Permission> perms = new HashSet<>();
-		for (Permission perm : this.permissions)
-		{
-			PermissionDefault permDefault = perm.getDefault();
-			if (permDefault == PermissionDefault.TRUE || (op && permDefault == PermissionDefault.OP))
-			{
-				perms.add(perm);
-			}
-		}
-		return perms;
+		return this.permissions.values()
+				.stream()
+				.filter(perm -> perm.getDefault() == PermissionDefault.TRUE || op && perm.getDefault() == PermissionDefault.OP)
+				.collect(Collectors.toSet());
 	}
 
 	@Override
@@ -929,7 +923,7 @@ public class PluginManagerMock implements PluginManager
 	@Override
 	public @NotNull Set<Permission> getPermissions()
 	{
-		return Set.copyOf(permissions);
+		return Set.copyOf(permissions.values());
 	}
 
 	/**

@@ -346,7 +346,7 @@ class ArmorStandMockTest
 	@Test
 	void testSetDisabledSlotsNullThrows()
 	{
-		assertThrows(NullPointerException.class, () -> armorStand.setDisabledSlots(null));
+		assertThrows(NullPointerException.class, () -> armorStand.setDisabledSlots((EquipmentSlot) null));
 	}
 
 	@Test
@@ -362,7 +362,7 @@ class ArmorStandMockTest
 	@Test
 	void testAddDisabledSlotsNullThrows()
 	{
-		assertThrows(NullPointerException.class, () -> armorStand.addDisabledSlots(null));
+		assertThrows(NullPointerException.class, () -> armorStand.addDisabledSlots((EquipmentSlot) null));
 	}
 
 	@Test
@@ -377,7 +377,7 @@ class ArmorStandMockTest
 	@Test
 	void testRemoveDisabledSlotsNullThrows()
 	{
-		assertThrows(NullPointerException.class, () -> armorStand.removeDisabledSlots(null));
+		assertThrows(NullPointerException.class, () -> armorStand.removeDisabledSlots((EquipmentSlot) null));
 	}
 
 	@Test
