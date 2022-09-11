@@ -10,10 +10,12 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -32,6 +34,9 @@ public class MockPlayerList
 
 	private final Set<PlayerMock> onlinePlayers = Collections.synchronizedSet(new LinkedHashSet<>());
 	private final Set<OfflinePlayer> offlinePlayers = Collections.synchronizedSet(new HashSet<>());
+	private final Map<UUID, Long> lastLogins = Collections.synchronizedMap(new HashMap<>());
+	private final Map<UUID, Long> lastSeen = Collections.synchronizedMap(new HashMap<>());
+	private final Map<UUID, Long> firstPlayed = Collections.synchronizedMap(new HashMap<>());
 
 	private final @NotNull BanList ipBans = new MockBanList();
 	private final @NotNull BanList profileBans = new MockBanList();
@@ -61,18 +66,62 @@ public class MockPlayerList
 
 	public void addPlayer(@NotNull PlayerMock player)
 	{
+		this.firstPlayed.putIfAbsent(player.getUniqueId(), System.currentTimeMillis());
+		this.lastLogins.put(player.getUniqueId(), System.currentTimeMillis());
 		this.onlinePlayers.add(player);
 		this.offlinePlayers.add(player);
 	}
 
 	public void disconnectPlayer(@NotNull PlayerMock player)
 	{
+		this.lastSeen.put(player.getUniqueId(), System.currentTimeMillis());
 		this.onlinePlayers.remove(player);
 	}
 
 	public void addOfflinePlayer(@NotNull OfflinePlayer player)
 	{
 		this.offlinePlayers.add(player);
+	}
+
+	/**
+	 * Gets the last time a player was seen online.
+	 *
+	 * @param uuid The UUID of the player.
+	 * @return The last time the player was seen online.
+	 * @see OfflinePlayer#getFirstPlayed()
+	 */
+	public long getFirstPlayed(UUID uuid)
+	{
+		return this.firstPlayed.getOrDefault(uuid, 0L);
+	}
+
+	/**
+	 * Gets the last time a player was seen online.
+	 *
+	 * @param uuid The UUID of the player.
+	 * @return The last time the player was seen online.
+	 * @see OfflinePlayer#getLastSeen()
+	 */
+	public long getLastSeen(UUID uuid)
+	{
+		OfflinePlayer player = getOfflinePlayer(uuid);
+		if (player.isOnline())
+		{
+			return System.currentTimeMillis();
+		}
+		return this.lastSeen.getOrDefault(uuid, 0L);
+	}
+
+	/**
+	 * Gets the last time a player was seen online.
+	 *
+	 * @param uuid The UUID of the player.
+	 * @return The last time the player was seen online.
+	 * @see OfflinePlayer#getLastLogin()
+	 */
+	public long getLastLogin(UUID uuid)
+	{
+		return this.lastLogins.getOrDefault(uuid, 0L);
 	}
 
 	@NotNull

@@ -15,6 +15,7 @@ import org.bukkit.profile.PlayerProfile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -118,23 +119,22 @@ public class OfflinePlayerMock implements OfflinePlayer
 	@Override
 	public long getFirstPlayed()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		MockBukkit.ensureMocking();
+		return MockBukkit.getMock().getPlayerList().getFirstPlayed(getUniqueId());
 	}
 
 	@Override
 	@Deprecated
 	public long getLastPlayed()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getLastSeen();
 	}
 
 	@Override
 	public boolean hasPlayedBefore()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		MockBukkit.ensureMocking();
+		return Arrays.stream(MockBukkit.getMock().getPlayerList().getOfflinePlayers()).anyMatch(p -> p.getUniqueId().equals(getUniqueId()));
 	}
 
 	@Override
@@ -147,15 +147,15 @@ public class OfflinePlayerMock implements OfflinePlayer
 	@Override
 	public long getLastLogin()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		MockBukkit.ensureMocking();
+		return MockBukkit.getMock().getPlayerList().getLastLogin(getUniqueId());
 	}
 
 	@Override
 	public long getLastSeen()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		MockBukkit.ensureMocking();
+		return MockBukkit.getMock().getPlayerList().getLastSeen(getUniqueId());
 	}
 
 	@Override
