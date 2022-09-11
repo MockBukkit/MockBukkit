@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.entity;
 
+import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
@@ -91,24 +92,28 @@ public class OfflinePlayerMock implements OfflinePlayer
 	@Override
 	public boolean isBanned()
 	{
+		MockBukkit.ensureMocking();
 		return Bukkit.getBanList(BanList.Type.NAME).isBanned(getName());
 	}
 
 	@Override
 	public boolean isWhitelisted()
 	{
+		MockBukkit.ensureMocking();
 		return Bukkit.getWhitelistedPlayers().contains(this);
 	}
 
 	@Override
 	public void setWhitelisted(boolean value)
 	{
+		MockBukkit.ensureMocking();
 		Bukkit.getWhitelistedPlayers().add(this);
 	}
 
 	@Override
 	public @Nullable Player getPlayer()
 	{
+		MockBukkit.ensureMocking();
 		return Bukkit.getPlayer(this.getUniqueId());
 	}
 
