@@ -111,17 +111,19 @@ import org.bukkit.potion.PotionBrewer;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.Criteria;
 import org.bukkit.structure.StructureManager;
-import org.bukkit.util.CachedServerIcon;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -168,6 +170,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private final HelpMapMock helpMap = new HelpMapMock();
 	private final StandardMessenger messenger = new StandardMessenger();
 	private final Map<Integer, MapViewMock> mapViews = new HashMap<>();
+	private CachedServerIconMock serverIcon = new CachedServerIconMock(null);
 	private int nextMapId = 1;
 
 	private GameMode defaultGameMode = GameMode.SURVIVAL;
@@ -197,6 +200,7 @@ public class ServerMock extends Server.Spigot implements Server
 		{
 			logger.warning("Could not load file logger.properties");
 		}
+		logger.setLevel(Level.ALL);
 
 		try
 		{
@@ -206,9 +210,6 @@ public class ServerMock extends Server.Spigot implements Server
 		{
 			logger.warning("Could not load build properties");
 		}
-
-		logger.setLevel(Level.ALL);
-
 	}
 
 	/**
@@ -1497,25 +1498,42 @@ public class ServerMock extends Server.Spigot implements Server
 		throw new UnimplementedOperationException();
 	}
 
-	@Override
-	public CachedServerIcon getServerIcon()
+	/**
+	 * Sets the return value of {@link #getServerIcon()}.
+	 *
+	 * @param serverIcon The icon to set.
+	 */
+	public void setServerIcon(CachedServerIconMock serverIcon)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.serverIcon = serverIcon;
 	}
 
 	@Override
-	public @NotNull CachedServerIcon loadServerIcon(File file)
+	public CachedServerIconMock getServerIcon()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.serverIcon;
 	}
 
 	@Override
-	public @NotNull CachedServerIcon loadServerIcon(BufferedImage image)
+	public @NotNull CachedServerIconMock loadServerIcon(@NotNull File file) throws IOException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(file, "File cannot be null");
+		Preconditions.checkArgument(file.isFile(), file + " isn't a file");
+		return loadServerIcon(ImageIO.read(file));
+	}
+
+	@Override
+	public @NotNull CachedServerIconMock loadServerIcon(@NotNull BufferedImage image) throws IOException
+	{
+		Preconditions.checkNotNull(image, "Image cannot be null");
+		Preconditions.checkArgument(image.getWidth() == 64, "Image must be 64 pixels wide");
+		Preconditions.checkArgument(image.getHeight() == 64, "Image must be 64 pixels high");
+
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		ImageIO.write(image, "PNG", out);
+		String encoded = Base64.getEncoder().encodeToString(out.toByteArray());
+
+		return new CachedServerIconMock(CachedServerIconMock.PNG_BASE64_PREFIX + encoded);
 	}
 
 	@Override
