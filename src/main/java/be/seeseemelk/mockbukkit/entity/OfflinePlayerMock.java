@@ -1,10 +1,10 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import org.bukkit.BanList;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
@@ -15,7 +15,6 @@ import org.bukkit.profile.PlayerProfile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -54,7 +53,7 @@ public class OfflinePlayerMock implements OfflinePlayer
 	@Override
 	public boolean isOnline()
 	{
-		return false;
+		return getPlayer() != null;
 	}
 
 	@Override
@@ -86,33 +85,31 @@ public class OfflinePlayerMock implements OfflinePlayer
 	@Override
 	public @NotNull Map<String, Object> serialize()
 	{
-		Map<String, Object> result = new LinkedHashMap<>();
-		result.put("UUID", this.uuid.toString());
-		return result;
+		return Map.of("UUID", this.uuid.toString());
 	}
 
 	@Override
 	public boolean isBanned()
 	{
-		return MockBukkit.getMock().getBanList(BanList.Type.NAME).isBanned(getName());
+		return Bukkit.getBanList(BanList.Type.NAME).isBanned(getName());
 	}
 
 	@Override
 	public boolean isWhitelisted()
 	{
-		return MockBukkit.getMock().getWhitelistedPlayers().contains(this);
+		return Bukkit.getWhitelistedPlayers().contains(this);
 	}
 
 	@Override
 	public void setWhitelisted(boolean value)
 	{
-		MockBukkit.getMock().getWhitelistedPlayers().add(this);
+		Bukkit.getWhitelistedPlayers().add(this);
 	}
 
 	@Override
 	public @Nullable Player getPlayer()
 	{
-		return MockBukkit.getMock().getPlayerExact(this.name);
+		return Bukkit.getPlayer(this.getUniqueId());
 	}
 
 	@Override
