@@ -2778,15 +2778,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void swingMainHand()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// Pretend packet gets sent.
 	}
 
 	@Override
 	public void swingOffHand()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// Pretend packet gets sent.
 	}
 
 	@Override

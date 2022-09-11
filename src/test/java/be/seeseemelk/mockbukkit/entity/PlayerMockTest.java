@@ -1573,6 +1573,18 @@ class PlayerMockTest
 		});
 	}
 
+	@Test
+	void testPlayerSwingMainHand()
+	{
+		assertDoesNotThrow(() -> player.swingMainHand());
+	}
+
+	@Test
+	void testPlayerSwingOffHand()
+	{
+		assertDoesNotThrow(() -> player.swingOffHand());
+	}
+
 	@SuppressWarnings("UnstableApiUsage")
 	void testPlayerSendPluginMessage()
 	{
