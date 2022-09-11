@@ -8,18 +8,16 @@ import org.jetbrains.annotations.NotNull;
 public class ComparatorMock extends TileStateMock implements Comparator
 {
 
-	protected ComparatorMock(@NotNull Material material)
+	public ComparatorMock(@NotNull Material material)
 	{
 		super(material);
-		if (material != Material.COMPARATOR)
-			throw new IllegalArgumentException("Cannot create a Comparator state from " + material);
+		checkType(material, Material.COMPARATOR);
 	}
 
 	protected ComparatorMock(@NotNull Block block)
 	{
 		super(block);
-		if (block.getType() != Material.COMPARATOR)
-			throw new IllegalArgumentException("Cannot create a Comparator state from " + block.getType());
+		checkType(block, Material.COMPARATOR);
 	}
 
 	protected ComparatorMock(@NotNull ComparatorMock state)

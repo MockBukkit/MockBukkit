@@ -1,14 +1,20 @@
 package be.seeseemelk.mockbukkit.block.data;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import com.destroystokyo.paper.MaterialTags;
 import com.google.common.base.Preconditions;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.SoundGroup;
 import org.bukkit.Tag;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
+import org.bukkit.block.BlockSupport;
 import org.bukkit.block.data.BlockData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -26,19 +32,41 @@ public class BlockDataMock implements BlockData
 		this.data = new LinkedHashMap<>();
 	}
 
-	protected <T> void set(@NotNull String key, T value)
+	// region Type Checking
+	protected void checkType(@NotNull Material material, @NotNull Material... expected)
 	{
+		Preconditions.checkArgument(Arrays.stream(expected).anyMatch(m -> material == m), "Cannot create a " + getClass().getSimpleName() + " from " + material);
+	}
+
+	protected void checkType(@NotNull Block block, @NotNull Material... expected)
+	{
+		checkType(block.getType(), expected);
+	}
+
+	protected void checkType(@NotNull Material material, @NotNull Tag<Material> tag)
+	{
+		Preconditions.checkArgument(tag.isTagged(material), "Cannot create a " + getClass().getSimpleName() + " from " + material);
+	}
+
+	protected void checkType(@NotNull Block block, @NotNull Tag<Material> expected)
+	{
+		checkType(block.getType(), expected);
+	}
+	// endregion
+
+	protected <T> void set(@NotNull String key, @NotNull T value)
+	{
+		Preconditions.checkNotNull(key, "Key cannot be null");
+		Preconditions.checkNotNull(value, "Value cannot be null");
 		this.data.put(key, value);
 	}
 
 	@SuppressWarnings("unchecked")
 	protected <T> @NotNull T get(@NotNull String key)
 	{
+		Preconditions.checkNotNull(key, "Key cannot be null");
 		T value = (T) this.data.get(key);
-		if (value == null)
-		{
-			throw new IllegalArgumentException("Cannot get property " + key + " as it does not exist.");
-		}
+		Preconditions.checkArgument(value != null, "Cannot get property " + key + " as it does not exist");
 		return value;
 	}
 
@@ -53,10 +81,10 @@ public class BlockDataMock implements BlockData
 	{
 		StringBuilder stateString = new StringBuilder("minecraft:" + getMaterial().name().toLowerCase());
 
-		if (!data.isEmpty())
+		if (!this.data.isEmpty())
 		{
 			stateString.append('[');
-			stateString.append(data.entrySet().stream().map(entry -> entry.getKey() + "=" + entry.getValue().toString().toLowerCase()).collect(Collectors.joining(",")));
+			stateString.append(this.data.entrySet().stream().map(entry -> entry.getKey() + "=" + entry.getValue().toString().toLowerCase()).collect(Collectors.joining(",")));
 			stateString.append(']');
 		}
 
@@ -88,6 +116,37 @@ public class BlockDataMock implements BlockData
 	}
 
 	@Override
+	public boolean isSupported(@NotNull Block block)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+
+	}
+
+	@Override
+	public boolean isSupported(@NotNull Location location)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+
+	}
+
+	@Override
+	public boolean isFaceSturdy(@NotNull BlockFace face, @NotNull BlockSupport support)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+
+	}
+
+	@Override
+	public boolean isRandomlyTicked()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public boolean matches(@Nullable BlockData data)
 	{
 		if (data == null || data.getMaterial() != this.type)
@@ -108,7 +167,7 @@ public class BlockDataMock implements BlockData
 	@Override
 	public int hashCode()
 	{
-		return type.hashCode() * this.data.hashCode();
+		return this.type.hashCode() * this.data.hashCode();
 	}
 
 	@Override
@@ -134,7 +193,7 @@ public class BlockDataMock implements BlockData
 	{
 		Preconditions.checkNotNull(material, "Material cannot be null");
 		// Special Cases
-		if (Tag.BEDS.isTagged(material))
+		if (MaterialTags.BEDS.isTagged(material))
 		{
 			return new BedMock(material);
 		}

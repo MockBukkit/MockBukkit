@@ -25,8 +25,8 @@ public class ScheduledTask implements BukkitTask, BukkitWorker
 	private boolean isCancelled = false;
 	private long scheduledTick;
 	private boolean running;
-	private final Runnable runnable;
-	private final Consumer<BukkitTask> consumer;
+	private final @Nullable Runnable runnable;
+	private final @Nullable Consumer<BukkitTask> consumer;
 	private final List<Runnable> cancelListeners = new LinkedList<>();
 	private Thread thread;
 
@@ -90,7 +90,7 @@ public class ScheduledTask implements BukkitTask, BukkitWorker
 	 *
 	 * @return The task that will be run.
 	 */
-	public Runnable getRunnable()
+	public @Nullable Runnable getRunnable()
 	{
 		return this.runnable;
 	}
@@ -100,7 +100,7 @@ public class ScheduledTask implements BukkitTask, BukkitWorker
 	 *
 	 * @return The consumer that will be run.
 	 */
-	public Consumer<BukkitTask> getConsumer()
+	public @Nullable Consumer<BukkitTask> getConsumer()
 	{
 		return this.consumer;
 	}

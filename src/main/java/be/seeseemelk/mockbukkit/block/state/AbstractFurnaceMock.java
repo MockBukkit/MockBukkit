@@ -1,13 +1,12 @@
 package be.seeseemelk.mockbukkit.block.state;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.inventory.InventoryMock;
+import be.seeseemelk.mockbukkit.inventory.FurnaceInventoryMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
 import org.bukkit.block.Furnace;
-import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.CookingRecipe;
 import org.bukkit.inventory.FurnaceInventory;
 import org.jetbrains.annotations.NotNull;
@@ -25,15 +24,13 @@ public abstract class AbstractFurnaceMock extends ContainerMock implements Furna
 	protected AbstractFurnaceMock(@NotNull Material material)
 	{
 		super(material);
-		if (material != Material.SMOKER && material != Material.FURNACE && material != Material.BLAST_FURNACE)
-			throw new IllegalArgumentException("Cannot create a Furnace state from " + material);
+		checkType(material, Material.SMOKER, Material.FURNACE, Material.BLAST_FURNACE);
 	}
 
 	protected AbstractFurnaceMock(@NotNull Block block)
 	{
 		super(block);
-		if (block.getType() != Material.SMOKER && block.getType() != Material.FURNACE && block.getType() != Material.BLAST_FURNACE)
-			throw new IllegalArgumentException("Cannot create a Furnace state from " + block.getType().name());
+		checkType(block, Material.SMOKER, Material.FURNACE, Material.BLAST_FURNACE);
 	}
 
 	protected AbstractFurnaceMock(@NotNull AbstractFurnaceMock state)
@@ -46,10 +43,9 @@ public abstract class AbstractFurnaceMock extends ContainerMock implements Furna
 	}
 
 	@Override
-	protected @NotNull InventoryMock createInventory()
+	protected @NotNull FurnaceInventoryMock createInventory()
 	{
-//		return new FurnaceInventoryMock(this); TODO: Not implemented
-		return new InventoryMock(null, InventoryType.FURNACE);
+		return new FurnaceInventoryMock(this);
 	}
 
 	@Override

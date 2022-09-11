@@ -3,7 +3,11 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.MockPlugin;
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.TestPlugin;
 import be.seeseemelk.mockbukkit.WorldMock;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.event.ClickEvent;
 import org.bukkit.EntityEffect;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -14,7 +18,10 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityTeleportEvent;
 import org.bukkit.event.entity.EntityToggleSwimEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.metadata.FixedMetadataValue;
@@ -23,10 +30,14 @@ import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.spigotmc.event.entity.EntityDismountEvent;
+import org.spigotmc.event.entity.EntityMountEvent;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
@@ -39,6 +50,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -158,6 +170,112 @@ class EntityMockTest
 	}
 
 	@Test
+	void teleport_RaiseEvent()
+	{
+		entity.teleport(entity.getLocation().add(10, 0, 5));
+		server.getPluginManager().assertEventFired(EntityTeleportEvent.class);
+	}
+
+	@Test
+	void teleport_Removed()
+	{
+		entity.remove();
+		Location from = entity.getLocation();
+		Location to = entity.getLocation().add(0, 5, 0);
+		assertFalse(entity.teleport(to));
+		assertEquals(from, entity.getLocation());
+	}
+
+	@Test
+	void teleport_Dead()
+	{
+		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+		zombie.setHealth(0D);
+		Location from = zombie.getLocation();
+		Location to = zombie.getLocation().add(0, 5, 0);
+		assertFalse(zombie.teleport(to));
+		assertEquals(from, zombie.getLocation());
+	}
+
+	@Test
+	void teleport_Vehicle()
+	{
+		EntityMock mock = new SimpleEntityMock(server);
+		entity.addPassenger(mock);
+		Location from = entity.getLocation();
+		Location to = entity.getLocation().add(0, 1.5, 0);
+		assertFalse(entity.teleport(to));
+		assertEquals(from, entity.getLocation());
+	}
+
+	@Test
+	void teleport_Passenger()
+	{
+		EntityMock mock = new SimpleEntityMock(server);
+		mock.addPassenger(entity);
+		Location to = entity.getLocation().add(0, 1.5, 0);
+		assertTrue(entity.teleport(to));
+		assertEquals(to, entity.getLocation());
+	}
+
+	@Test
+	void teleport_CancelEvent()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		Location from = entity.getLocation();
+		Location to = entity.getLocation().add(0, 5, 0);
+		server.getPluginManager().registerEvents(new Listener()
+		{
+			@EventHandler
+			public void onPlayerTeleport(@NotNull EntityTeleportEvent event)
+			{
+				event.setCancelled(true);
+			}
+		}, plugin);
+		assertFalse(entity.teleport(to));
+		assertEquals(from, entity.getLocation());
+	}
+
+	@Test
+	void teleport_ChangeDestinationInEvent()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		Location changedTo = entity.getLocation().set(60, 90, -150);
+		server.getPluginManager().registerEvents(new Listener()
+		{
+			@EventHandler
+			public void onEntityTeleport(@NotNull EntityTeleportEvent event)
+			{
+				event.setTo(new Location(event.getTo().getWorld(), 60, 90, -150));
+			}
+		}, plugin);
+		assertTrue(entity.teleport(entity.getLocation().add(0, 0, 20)));
+		assertEquals(changedTo, entity.getLocation());
+	}
+
+	@Test
+	void teleport_LocationIsCloned()
+	{
+		Location to = entity.getLocation().add(40, 750, 10);
+		Location mutableTo = to.clone();
+		entity.teleport(mutableTo);
+		mutableTo.set(0, 0, 0);
+		assertNotSame(mutableTo, entity.getLocation());
+		assertEquals(to, entity.getLocation());
+	}
+
+	@Test
+	void teleport_UseCurrentWorldInsteadOfNull()
+	{
+		Location to = new Location(null, 50, 200, 80);
+		assertTrue(entity.teleport(to));
+		assertEquals(world, entity.getWorld());
+		to = to.clone();
+		to.setWorld(world);
+		assertEquals(to, entity.getLocation());
+	}
+
+	@Test
 	void hasTeleport_Teleportation_CorrectStatus()
 	{
 		assertFalse(entity.hasTeleported());
@@ -218,6 +336,14 @@ class EntityMockTest
 	}
 
 	@Test
+	void sendMessage_StoredAsComponent()
+	{
+		TextComponent comp = Component.text().content("hi").clickEvent(ClickEvent.openUrl("https://www.youtube.com/watch?v=dQw4w9WgXcQ")).build();
+		entity.sendMessage(comp);
+		entity.assertSaid(comp);
+	}
+
+	@Test
 	void equals_SameUUID_Equal()
 	{
 		EntityMock entity2 = new SimpleEntityMock(server, entity.getUniqueId());
@@ -266,89 +392,103 @@ class EntityMockTest
 	}
 
 	@Test
-	void hasPermission_NotAddedNotDefault_DoesNotHavePermission()
+	void addAttachment_True_Has()
 	{
-		Permission permission = new Permission("mockbukkit.perm", PermissionDefault.FALSE);
-		server.getPluginManager().addPermission(permission);
-		assertFalse(entity.hasPermission("mockbukkit.perm"));
+		entity.addAttachment(MockBukkit.createMockPlugin(), "test.permission", true);
+		assertTrue(entity.hasPermission("test.permission"));
 	}
 
 	@Test
-	void hasPermission_NotAddedButDefault_DoesPermission()
+	void addAttachment_False_DoesntHave()
 	{
-		MockPlugin plugin = MockBukkit.createMockPlugin();
-		Permission permission = new Permission("mockbukkit.perm", PermissionDefault.TRUE);
-		server.getPluginManager().addPermission(permission);
-		entity.addAttachment(plugin, "mockbukkit.perm", true);
-		assertTrue(entity.hasPermission("mockbukkit.perm"));
+		entity.addAttachment(MockBukkit.createMockPlugin(), "test.permission", false);
+		assertFalse(entity.hasPermission("test.permission"));
 	}
 
 	@Test
-	void addAttachment_PermissionObject_PermissionAdded()
+	void addAttachment_RemovedAfterTicks()
 	{
-		MockPlugin plugin = MockBukkit.createMockPlugin();
-		Permission permission = new Permission("mockbukkit.perm", PermissionDefault.FALSE);
-		server.getPluginManager().addPermission(permission);
-		PermissionAttachment attachment = entity.addAttachment(plugin);
-		attachment.setPermission(permission, true);
-		assertTrue(entity.hasPermission("mockbukkit.perm"));
+		entity.addAttachment(MockBukkit.createMockPlugin(), "test.permission", true, 10);
+		assertTrue(entity.isPermissionSet("test.permission"));
+		server.getScheduler().performTicks(9);
+		assertTrue(entity.isPermissionSet("test.permission"));
+		server.getScheduler().performTicks(10);
+		assertFalse(entity.isPermissionSet("test.permission"));
 	}
 
 	@Test
-	void addAttachment_PermissionName_PermissionAdded()
+	void removeAttachment_RemovesAttachment()
 	{
-		MockPlugin plugin = MockBukkit.createMockPlugin();
-		Permission permission = new Permission("mockbukkit.perm", PermissionDefault.TRUE);
-		server.getPluginManager().addPermission(permission);
-		PermissionAttachment attachment = entity.addAttachment(plugin);
-		attachment.setPermission(permission.getName(), true);
-		assertTrue(entity.hasPermission("mockbukkit.perm"));
+		PermissionAttachment att = entity.addAttachment(MockBukkit.createMockPlugin(), "test.permission", true);
+		assertTrue(entity.hasPermission("test.permission"));
+		entity.removeAttachment(att);
+		assertFalse(entity.hasPermission("test.permission"));
 	}
 
 	@Test
-	void addPermission_String_PermissionAdded()
+	void isPermissionSet_String_IsSet_True()
 	{
-		MockPlugin plugin = MockBukkit.createMockPlugin();
-		Permission permission = new Permission("mockbukkit.perm", PermissionDefault.TRUE);
-		server.getPluginManager().addPermission(permission);
-		PermissionAttachment attachment = entity.addAttachment(plugin);
-		attachment.setPermission(permission.getName(), true);
-		assertTrue(entity.hasPermission("mockbukkit.perm"));
+		entity.addAttachment(MockBukkit.createMockPlugin(), "test.permission", true);
+		assertTrue(entity.isPermissionSet("test.permission"));
 	}
 
 	@Test
-	void getEffectivePermissions_GetPermissionsList()
+	void isPermissionSet_String_IsntSet_False()
 	{
-		MockPlugin plugin = MockBukkit.createMockPlugin();
-		entity.addAttachment(plugin, "mockbukkit.perm", true);
-		entity.addAttachment(plugin, "mockbukkit.perm2", true);
-		entity.addAttachment(plugin, "mockbukkit.perm3", false);
-
-		Set<PermissionAttachmentInfo> effectivePermissions = entity.getEffectivePermissions();
-		assertEquals(3, effectivePermissions.size());
-
-		Set<String> permissions = effectivePermissions.stream().map(PermissionAttachmentInfo::getPermission).collect(Collectors.toSet());
-		assertTrue(permissions.contains("mockbukkit.perm"));
-		assertTrue(permissions.contains("mockbukkit.perm2"));
-		assertTrue(permissions.contains("mockbukkit.perm3"));
-
-		Optional<PermissionAttachmentInfo> first = effectivePermissions.stream().filter(permissionAttachmentInfo -> permissionAttachmentInfo.getPermission().equals("mockbukkit.perm3")).findFirst();
-		assertTrue(first.isPresent());
-		assertFalse(first.get().getValue());
+		assertFalse(entity.isPermissionSet("test.permission"));
 	}
 
 	@Test
-	void removeAttachment_RemovesPermission()
+	void isPermissionSet_Permission_IsSet_True()
 	{
-		MockPlugin plugin = MockBukkit.createMockPlugin();
-		Permission permission = new Permission("mockbukkit.perm");
-		server.getPluginManager().addPermission(permission);
-		PermissionAttachment attachment = entity.addAttachment(plugin);
-		attachment.setPermission(permission.getName(), true);
-		assertTrue(entity.hasPermission("mockbukkit.perm"));
+		entity.addAttachment(MockBukkit.createMockPlugin(), "test.permission", true);
+		assertTrue(entity.isPermissionSet(new Permission("test.permission")));
+	}
 
-		entity.removeAttachment(attachment);
-		assertFalse(entity.hasPermission("mockbukkit.perm"));
+	@Test
+	void isPermissionSet_Permission_IsntSet_False()
+	{
+		assertFalse(entity.isPermissionSet(new Permission("test.permission")));
+	}
+
+	@Test
+	void hasPermission_String_SetTrue_True()
+	{
+		entity.addAttachment(MockBukkit.createMockPlugin(), "test.permission", true);
+		assertTrue(entity.hasPermission("test.permission"));
+	}
+
+	@Test
+	void hasPermission_String_SetFalse_True()
+	{
+		entity.addAttachment(MockBukkit.createMockPlugin(), "test.permission", false);
+		assertFalse(entity.hasPermission("test.permission"));
+	}
+
+	@Test
+	void hasPermission_String_NotSet_True()
+	{
+		assertFalse(entity.hasPermission("test.permission"));
+	}
+
+	@Test
+	void hasPermission_Permission_SetTrue_True()
+	{
+		entity.addAttachment(MockBukkit.createMockPlugin(), "test.permission", true);
+		assertTrue(entity.hasPermission(new Permission("test.permission")));
+	}
+
+	@Test
+	void hasPermission_Permission_SetFalse_True()
+	{
+		entity.addAttachment(MockBukkit.createMockPlugin(), "test.permission", false);
+		assertFalse(entity.hasPermission(new Permission("test.permission")));
+	}
+
+	@Test
+	void hasPermission_Permission_NotSet_True()
+	{
+		assertTrue(entity.hasPermission(new Permission("test.permission", PermissionDefault.TRUE)));
 	}
 
 	@Test
@@ -597,6 +737,160 @@ class EntityMockTest
 		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
 		zombie.registerAttribute(Attribute.HORSE_JUMP_STRENGTH);
 		assertEquals(0.7, zombie.getAttribute(Attribute.HORSE_JUMP_STRENGTH).getValue());
+	}
+
+	@Test
+	void addPassenger()
+	{
+		SimpleEntityMock mock = new SimpleEntityMock(server);
+		assertTrue(entity.addPassenger(mock));
+		server.getPluginManager().assertEventFired(EntityMountEvent.class, event -> event.getMount() == entity && event.getEntity() == mock);
+
+		assertFalse(entity.addPassenger(mock), "The passenger should not be added a second time");
+		assertEquals(List.of(mock), entity.getPassengers(), "There should be only one passenger");
+		assertSame(entity, mock.getVehicle(), "The rider should known the vehicle");
+		assertFalse(entity.isEmpty());
+	}
+
+	@Test
+	void addPassenger_DifferentWorld()
+	{
+		SimpleEntityMock mock = new SimpleEntityMock(server);
+		Location loc = mock.getLocation();
+		loc.setWorld(new WorldMock());
+		mock.teleport(loc);
+
+		assertFalse(entity.addPassenger(mock));
+		assertTrue(entity.isEmpty());
+	}
+
+	@Test
+	void addPassenger_Self()
+	{
+		assertThrows(IllegalArgumentException.class, () -> entity.addPassenger(entity), "The entity should not be able to ride itself");
+	}
+
+	@Test
+	void addPassenger_Stack()
+	{
+		EntityMock[] mocks = new EntityMock[3];
+		for (int i = 0; i < mocks.length; i++)
+		{
+			mocks[i] = new SimpleEntityMock(server);
+			if (i != 0)
+			{
+				mocks[i - 1].addPassenger(mocks[i]);
+			}
+		}
+		assertEquals(List.of(mocks[1]), mocks[0].getPassengers());
+		assertEquals(List.of(mocks[2]), mocks[1].getPassengers());
+		assertEquals(List.of(), mocks[2].getPassengers());
+	}
+
+	@Test
+	void addPassenger_PreventCircularRiding()
+	{
+		EntityMock a = new SimpleEntityMock(server);
+		EntityMock b = new SimpleEntityMock(server);
+		entity.addPassenger(a);
+		a.addPassenger(b);
+		// b rides a which rides entity
+		assertFalse(a.addPassenger(entity), "An entity shouldn't be the vehicle it currently rides");
+		assertFalse(b.addPassenger(entity));
+	}
+
+	@Test
+	void addPassenger_CancelMountEvent()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		EntityMock mock = new SimpleEntityMock(server);
+		server.getPluginManager().registerEvents(new Listener()
+		{
+			@EventHandler
+			public void onMount(@NotNull EntityMountEvent event)
+			{
+				event.setCancelled(true);
+			}
+		}, plugin);
+		assertFalse(entity.addPassenger(mock));
+		assertTrue(entity.isEmpty());
+	}
+
+	@Test
+	void getPassenger()
+	{
+		SimpleEntityMock mock = new SimpleEntityMock(server);
+		assertNull(entity.getPassenger());
+		entity.setPassenger(mock);
+		assertSame(mock, entity.getPassenger());
+	}
+
+	@Test
+	void removePassenger()
+	{
+		SimpleEntityMock mock = new SimpleEntityMock(server);
+		entity.addPassenger(mock);
+		assertTrue(entity.removePassenger(mock));
+		server.getPluginManager().assertEventFired(EntityDismountEvent.class, event -> event.getDismounted() == entity && event.getEntity() == mock);
+
+		assertTrue(entity.removePassenger(mock), "The method should always return true, even if it was not a passenger");
+		assertEquals(List.of(), entity.getPassengers());
+		assertNull(mock.getVehicle(), "The vehicle should no longer be referenced");
+		assertTrue(entity.isEmpty());
+	}
+
+	@Test
+	void removePassenger_NotSelf()
+	{
+		SimpleEntityMock a = new SimpleEntityMock(server);
+		SimpleEntityMock b = new SimpleEntityMock(server);
+		a.addPassenger(b);
+		entity.removePassenger(b);
+		server.getPluginManager().assertEventFired(EntityDismountEvent.class, event -> event.getDismounted() == a && event.getEntity() == b);
+		assertNull(b.getVehicle(), "b should not longer have a vehicle");
+		assertTrue(a.isEmpty(), "a should not longer have a passenger");
+	}
+
+	@Test
+	void removePassenger_CancelDismountEvent()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		EntityMock mock = new SimpleEntityMock(server);
+		entity.addPassenger(mock);
+		server.getPluginManager().registerEvents(new Listener()
+		{
+			@EventHandler
+			public void onMount(@NotNull EntityDismountEvent event)
+			{
+				event.setCancelled(true);
+			}
+		}, plugin);
+		assertTrue(entity.removePassenger(mock));
+		assertFalse(entity.isEmpty());
+	}
+
+	@Test
+	void eject()
+	{
+		assertFalse(entity.eject());
+		for (int i = 0; i < 3; i++)
+		{
+			entity.addPassenger(new SimpleEntityMock(server));
+		}
+		assertTrue(entity.eject());
+		assertTrue(entity.isEmpty());
+	}
+
+	@Test
+	void eject_WhenRemoved()
+	{
+		EntityMock vehicle = new SimpleEntityMock(server);
+		EntityMock passenger = new SimpleEntityMock(server);
+		vehicle.addPassenger(entity);
+		entity.addPassenger(passenger);
+		entity.remove();
+		assertNull(passenger.getVehicle());
+		assertEquals(List.of(), vehicle.getPassengers());
 	}
 
 }

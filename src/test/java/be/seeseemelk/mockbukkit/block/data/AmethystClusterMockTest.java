@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 class AmethystClusterMockTest
@@ -30,6 +31,18 @@ class AmethystClusterMockTest
 	{
 		assertEquals(BlockFace.NORTH, cluster.getFacing());
 		assertFalse(cluster.isWaterlogged());
+	}
+
+	@Test
+	void constructor_Material()
+	{
+		assertDoesNotThrow(() -> new AmethystClusterMock(Material.AMETHYST_CLUSTER));
+	}
+
+	@Test
+	void constructor_Material_WrongType_ThrowsException()
+	{
+		assertThrowsExactly(IllegalArgumentException.class, () -> new AmethystClusterMock(Material.BEDROCK));
 	}
 
 	@Test
@@ -64,7 +77,8 @@ class AmethystClusterMockTest
 	@Test
 	void getFacing_ImmutableSet()
 	{
-		assertInstanceOf(ImmutableSet.class, cluster.getFaces());
+		Set<BlockFace> faces = cluster.getFaces();
+		assertThrows(UnsupportedOperationException.class, () -> faces.add(BlockFace.NORTH_EAST));
 	}
 
 	@Test

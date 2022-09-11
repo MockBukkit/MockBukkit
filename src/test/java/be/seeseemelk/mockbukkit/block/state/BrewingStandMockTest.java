@@ -1,7 +1,6 @@
 package be.seeseemelk.mockbukkit.block.state;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import org.bukkit.Material;
@@ -9,7 +8,6 @@ import org.bukkit.inventory.BrewerInventory;
 import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -21,7 +19,6 @@ import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 class BrewingStandMockTest
 {
 
-	private ServerMock server;
 	private WorldMock world;
 	private BlockMock block;
 	private BrewingStandMock brewingStand;
@@ -29,7 +26,7 @@ class BrewingStandMockTest
 	@BeforeEach
 	void setUp()
 	{
-		this.server = MockBukkit.mock();
+		MockBukkit.mock();
 		this.world = new WorldMock();
 		this.block = world.getBlockAt(0, 10, 0);
 		this.block.setType(Material.BREWING_STAND);
@@ -105,4 +102,5 @@ class BrewingStandMockTest
 		assertEquals(brewingStand.getInventory().getFuel(), brewingStand.getSnapshotInventory().getFuel());
 		assertEquals(brewingStand.getInventory().getIngredient(), brewingStand.getSnapshotInventory().getIngredient());
 	}
+
 }

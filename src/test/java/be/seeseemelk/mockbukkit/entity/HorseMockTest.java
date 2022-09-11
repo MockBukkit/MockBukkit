@@ -1,5 +1,11 @@
 package be.seeseemelk.mockbukkit.entity;
 
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.ServerMock;
+import org.bukkit.entity.Horse;
+import org.bukkit.entity.Horse.Color;
+import org.bukkit.entity.Horse.Style;
+import org.bukkit.inventory.HorseInventory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,14 +15,8 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import org.bukkit.entity.Horse.Color;
-import org.bukkit.entity.Horse.Style;
-import org.bukkit.inventory.HorseInventory;
-
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.ServerMock;
 
 class HorseMockTest
 {
@@ -38,30 +38,53 @@ class HorseMockTest
 	}
 
 	@Test
-	void testTamed() {
+	void testTamed()
+	{
 		assertFalse(horse.isTamed());
 		horse.setTamed(true);
 		assertTrue(horse.isTamed());
 	}
 
 	@Test
-	void testColor() {
+	void testColor()
+	{
 		assertEquals(Color.WHITE, horse.getColor());
 		horse.setColor(Color.CHESTNUT);
 		assertEquals(Color.CHESTNUT, horse.getColor());
 	}
 
 	@Test
-	void testStyle() {
+	void testStyle()
+	{
 		assertEquals(Style.BLACK_DOTS, horse.getStyle());
 		horse.setStyle(Style.WHITE_DOTS);
 		assertEquals(Style.WHITE_DOTS, horse.getStyle());
 	}
 
 	@Test
-	void testInventory() {
+	void testIsCarryingChest()
+	{
+		assertFalse(horse.isCarryingChest());
+	}
+
+	@Test
+	void testSetCarryingChest_ThrowsException()
+	{
+		assertThrowsExactly(UnsupportedOperationException.class, () -> horse.setCarryingChest(true));
+	}
+
+	@Test
+	void testInventory()
+	{
 		HorseInventory inventory = horse.getInventory();
 		assertInstanceOf(HorseInventory.class, inventory);
 		assertTrue(inventory.isEmpty());
 	}
+
+	@Test
+	void testGetVariant()
+	{
+		assertEquals(Horse.Variant.HORSE, horse.getVariant());
+	}
+
 }

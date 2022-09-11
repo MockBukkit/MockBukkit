@@ -23,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -411,7 +412,7 @@ class InventoryMockTest
 		assertEquals(30, inventory.getItem(0).getAmount());
 		assertEquals(30, inventory.getItem(1).getAmount());
 		assertEquals(4, inventory.getItem(2).getAmount());
-		assertEquals(null, inventory.getItem(3));
+		assertNull(inventory.getItem(3));
 	}
 
 	@Test
@@ -593,6 +594,17 @@ class InventoryMockTest
 
 		assertEquals(0, inventory.getViewers().size());
 		assertFalse(inventory.getViewers().contains(player));
+	}
+
+	@Test
+	void testClose()
+	{
+		Player player = server.addPlayer();
+		player.openInventory(inventory);
+		assertEquals(1, inventory.getViewers().size());
+		assertEquals(1, inventory.close());
+		assertEquals(0, inventory.getViewers().size());
+		assertNotSame(inventory, player.getOpenInventory().getTopInventory());
 	}
 
 }

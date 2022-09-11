@@ -11,11 +11,11 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import java.util.UUID;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -30,11 +30,11 @@ public class MockPlayerList
 
 	private int maxPlayers = Integer.MAX_VALUE;
 
-	private final List<PlayerMock> onlinePlayers = new CopyOnWriteArrayList<>();
+	private final Set<PlayerMock> onlinePlayers = Collections.synchronizedSet(new LinkedHashSet<>());
 	private final Set<OfflinePlayer> offlinePlayers = Collections.synchronizedSet(new HashSet<>());
 
-	private @NotNull BanList ipBans = new MockBanList();
-	private @NotNull BanList profileBans = new MockBanList();
+	private final @NotNull BanList ipBans = new MockBanList();
+	private final @NotNull BanList profileBans = new MockBanList();
 
 	public void setMaxPlayers(int maxPlayers)
 	{
@@ -61,48 +61,48 @@ public class MockPlayerList
 
 	public void addPlayer(@NotNull PlayerMock player)
 	{
-		onlinePlayers.add(player);
-		offlinePlayers.add(player);
+		this.onlinePlayers.add(player);
+		this.offlinePlayers.add(player);
 	}
 
 	public void disconnectPlayer(@NotNull PlayerMock player)
 	{
-		onlinePlayers.remove(player);
+		this.onlinePlayers.remove(player);
 	}
 
 	public void addOfflinePlayer(@NotNull OfflinePlayer player)
 	{
-		offlinePlayers.add(player);
+		this.offlinePlayers.add(player);
 	}
 
 	@NotNull
 	public Set<OfflinePlayer> getOperators()
 	{
-		return Stream.concat(onlinePlayers.stream(), offlinePlayers.stream()).filter(OfflinePlayer::isOp)
+		return Stream.concat(this.onlinePlayers.stream(), this.offlinePlayers.stream()).filter(OfflinePlayer::isOp)
 				.collect(Collectors.toSet());
 	}
 
 	@NotNull
 	public Collection<PlayerMock> getOnlinePlayers()
 	{
-		return Collections.unmodifiableList(onlinePlayers);
+		return Collections.unmodifiableSet(this.onlinePlayers);
 	}
 
 	@NotNull
 	public OfflinePlayer @NotNull [] getOfflinePlayers()
 	{
-		return offlinePlayers.toArray(new OfflinePlayer[0]);
+		return this.offlinePlayers.toArray(new OfflinePlayer[0]);
 	}
 
 	public boolean isSomeoneOnline()
 	{
-		return !onlinePlayers.isEmpty();
+		return !this.onlinePlayers.isEmpty();
 	}
 
 	@NotNull
 	public List<Player> matchPlayer(@NotNull String name)
 	{
-		return onlinePlayers.stream().filter(
+		return this.onlinePlayers.stream().filter(
 						player -> player.getName().toLowerCase(Locale.ENGLISH).startsWith(name.toLowerCase(Locale.ENGLISH)))
 				.collect(Collectors.toList());
 	}
@@ -110,7 +110,7 @@ public class MockPlayerList
 	@Nullable
 	public Player getPlayerExact(@NotNull String name)
 	{
-		return onlinePlayers.stream()
+		return this.onlinePlayers.stream()
 				.filter(player -> player.getName().toLowerCase(Locale.ENGLISH).equals(name.toLowerCase(Locale.ENGLISH)))
 				.findFirst().orElse(null);
 	}
@@ -128,7 +128,7 @@ public class MockPlayerList
 		final String lowercase = name.toLowerCase(Locale.ENGLISH);
 		int delta = Integer.MAX_VALUE;
 
-		for (Player namedPlayer : onlinePlayers)
+		for (Player namedPlayer : this.onlinePlayers)
 		{
 			if (namedPlayer.getName().toLowerCase(Locale.ENGLISH).startsWith(lowercase))
 			{
@@ -148,7 +148,7 @@ public class MockPlayerList
 	@Nullable
 	public Player getPlayer(@NotNull UUID id)
 	{
-		for (Player player : onlinePlayers)
+		for (Player player : this.onlinePlayers)
 		{
 			if (id.equals(player.getUniqueId()))
 			{
@@ -162,14 +162,7 @@ public class MockPlayerList
 	@NotNull
 	public PlayerMock getPlayer(int num)
 	{
-		if (num < 0 || num >= onlinePlayers.size())
-		{
-			throw new ArrayIndexOutOfBoundsException();
-		}
-		else
-		{
-			return onlinePlayers.get(num);
-		}
+		return List.copyOf(this.onlinePlayers).get(num);
 	}
 
 	@NotNull
@@ -182,7 +175,7 @@ public class MockPlayerList
 			return player;
 		}
 
-		for (OfflinePlayer offlinePlayer : offlinePlayers)
+		for (OfflinePlayer offlinePlayer : this.offlinePlayers)
 		{
 			if (offlinePlayer.getName().equals(name))
 			{
@@ -216,12 +209,12 @@ public class MockPlayerList
 
 	public void clearOnlinePlayers()
 	{
-		onlinePlayers.clear();
+		this.onlinePlayers.clear();
 	}
 
 	public void clearOfflinePlayers()
 	{
-		offlinePlayers.clear();
+		this.offlinePlayers.clear();
 	}
 
 }

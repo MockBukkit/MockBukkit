@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.inventory;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Lists;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
@@ -34,7 +35,7 @@ public class InventoryMock implements Inventory
 	private final @NotNull InventoryType type;
 
 	private int maxStackSize = MAX_STACK_SIZE;
-	private @NotNull List<HumanEntity> viewers = new ArrayList<>();
+	private final @NotNull List<HumanEntity> viewers = new ArrayList<>();
 
 	public InventoryMock(@Nullable InventoryHolder holder, int size, @NotNull InventoryType type)
 	{
@@ -263,7 +264,7 @@ public class InventoryMock implements Inventory
 	}
 
 	@Override
-	public ItemStack[] getContents()
+	public ItemStack @NotNull [] getContents()
 	{
 		return items;
 	}
@@ -346,7 +347,7 @@ public class InventoryMock implements Inventory
 	}
 
 	@Override
-	public ItemStack[] getStorageContents()
+	public ItemStack @NotNull [] getStorageContents()
 	{
 		return getContents();
 	}
@@ -526,8 +527,9 @@ public class InventoryMock implements Inventory
 	@Override
 	public int close()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		int count = this.viewers.size();
+		Lists.newArrayList(this.viewers).forEach(HumanEntity::closeInventory);
+		return count;
 	}
 
 	@Override

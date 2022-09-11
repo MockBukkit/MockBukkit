@@ -17,7 +17,7 @@ public class ListenerEntry
 
 	private final Plugin plugin;
 	private final Listener listener;
-	private final Method method;
+	private final @NotNull Method method;
 
 	/**
 	 * Creates a new listener entry for a given method.
@@ -44,7 +44,7 @@ public class ListenerEntry
 		return listener;
 	}
 
-	public Method getMethod()
+	public @NotNull Method getMethod()
 	{
 		return method;
 	}

@@ -5,6 +5,7 @@ import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.attribute.AttributeInstanceMock;
 import be.seeseemelk.mockbukkit.attribute.AttributesMock;
+import be.seeseemelk.mockbukkit.inventory.EntityEquipmentMock;
 import be.seeseemelk.mockbukkit.potion.ActivePotionEffect;
 import com.destroystokyo.paper.block.TargetBlockInfo;
 import com.destroystokyo.paper.entity.TargetEntityInfo;
@@ -32,6 +33,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityToggleSwimEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
@@ -55,12 +57,13 @@ import java.util.UUID;
 public abstract class LivingEntityMock extends EntityMock implements LivingEntity
 {
 
-	private static final double MAX_HEALTH = 20.0;
 	protected double health;
 	private int maxAirTicks = 300;
 	private int remainingAirTicks = 300;
 	protected boolean alive = true;
 	private boolean gliding = false;
+	private boolean jumping = false;
+
 	protected Map<Attribute, AttributeInstanceMock> attributes;
 	private final EntityEquipment equipment = new EntityEquipmentMock(this);
 	private final Set<UUID> collidableExemptions = new HashSet<>();
@@ -70,17 +73,20 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	private double absorptionAmount;
 	private int arrowCooldown;
 	private int arrowsInBody;
+	private @Nullable Player killer;
 
 	private final Set<ActivePotionEffect> activeEffects = new HashSet<>();
+	private boolean invisible = false;
 
 	protected LivingEntityMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 
 		attributes = new EnumMap<>(Attribute.class);
-		attributes.put(Attribute.GENERIC_MAX_HEALTH, new AttributeInstanceMock(Attribute.GENERIC_MAX_HEALTH, AttributesMock.getDefaultValue(Attribute.GENERIC_MAX_HEALTH)));
-		this.setMaxHealth(MAX_HEALTH);
-		this.setHealth(MAX_HEALTH);
+		double maxHealth = AttributesMock.getDefaultValue(Attribute.GENERIC_MAX_HEALTH);
+		attributes.put(Attribute.GENERIC_MAX_HEALTH, new AttributeInstanceMock(Attribute.GENERIC_MAX_HEALTH, maxHealth));
+		resetMaxHealth();
+		setHealth(maxHealth);
 	}
 
 	@Override
@@ -158,7 +164,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public void resetMaxHealth()
 	{
-		setMaxHealth(MAX_HEALTH);
+		setMaxHealth(AttributesMock.getDefaultValue(Attribute.GENERIC_MAX_HEALTH));
 	}
 
 	@Override
@@ -415,15 +421,13 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public @Nullable Player getKiller()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.killer;
 	}
 
 	@Override
 	public void setKiller(@Nullable Player killer)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.killer = killer;
 	}
 
 	@Override
@@ -560,6 +564,16 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean teleport(@NotNull Location location, PlayerTeleportEvent.@NotNull TeleportCause cause)
+	{
+		if (isDead())
+		{
+			return false;
+		}
+		return super.teleport(location, cause);
 	}
 
 	@Override
@@ -714,6 +728,13 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		throw new UnimplementedOperationException();
 	}
 
+	@Override
+	public boolean canBreatheUnderwater()
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
 	@NotNull
 	@Override
 	public EntityCategory getCategory()
@@ -778,15 +799,13 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public void setInvisible(boolean invisible)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.invisible = invisible;
 	}
 
 	@Override
 	public boolean isInvisible()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.invisible;
 	}
 
 	@Override
@@ -862,15 +881,13 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public boolean isJumping()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.jumping;
 	}
 
 	@Override
 	public void setJumping(boolean jumping)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.jumping = jumping;
 	}
 
 	@Override

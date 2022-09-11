@@ -3,7 +3,6 @@ package be.seeseemelk.mockbukkit.inventory;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.WorldMock;
-
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.AfterEach;
@@ -11,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class HorseInventoryMockTest
 {
@@ -20,12 +20,12 @@ class HorseInventoryMockTest
 	private HorseInventoryMock inventory;
 
 	@BeforeEach
-	void setUp() throws Exception
+	void setUp()
 	{
 		server = MockBukkit.mock();
 		world = new WorldMock();
-        world.setName("world");
-        server.addWorld(world);
+		world.setName("world");
+		server.addWorld(world);
 
 		inventory = new HorseInventoryMock(null);
 	}
@@ -43,22 +43,24 @@ class HorseInventoryMockTest
 	}
 
 	@Test
-	void setSaddle()
+	void setArmor()
 	{
-		assertEquals(null, inventory.getSaddle());
-		ItemStack item = new ItemStack(Material.SADDLE);
-		item.setAmount(1);
-		inventory.setSaddle(item);
-		assertEquals(item, inventory.getSaddle());
+		assertNull(inventory.getArmor());
+		ItemStack item = new ItemStack(Material.IRON_HORSE_ARMOR);
+
+		inventory.setArmor(item);
+
+		assertEquals(item, inventory.getArmor());
 	}
 
 	@Test
-	void setArmor()
+	void setArmor_SetsItemInSlot()
 	{
-		assertEquals(null, inventory.getArmor());
 		ItemStack item = new ItemStack(Material.IRON_HORSE_ARMOR);
-		item.setAmount(1);
+
 		inventory.setArmor(item);
-		assertEquals(item, inventory.getArmor());
+
+		assertEquals(item, inventory.getItem(1));
 	}
+
 }

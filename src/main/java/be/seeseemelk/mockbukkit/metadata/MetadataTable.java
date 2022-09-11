@@ -6,7 +6,6 @@ import org.bukkit.metadata.Metadatable;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -37,7 +36,8 @@ public class MetadataTable implements Metadatable
 	@Override
 	public @NotNull List<MetadataValue> getMetadata(@NotNull String metadataKey)
 	{
-		return new ArrayList<>(metadata.get(metadataKey).values());
+		Map<Plugin, MetadataValue> values = this.metadata.get(metadataKey);
+		return values == null ? List.of() : List.copyOf(values.values());
 	}
 
 	@Override

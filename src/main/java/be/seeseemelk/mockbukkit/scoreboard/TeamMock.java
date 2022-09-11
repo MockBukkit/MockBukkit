@@ -1,10 +1,12 @@
 package be.seeseemelk.mockbukkit.scoreboard;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.entity.EntityMock;
+import com.google.common.base.Preconditions;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Entity;
@@ -17,6 +19,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collection;
 import java.util.EnumMap;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 import java.util.logging.Level;
 
@@ -24,19 +27,20 @@ public class TeamMock implements Team
 {
 
 	private final String name;
-	private String displayName;
-	private String prefix;
-	private String suffix;
-	private ChatColor color;
+	private Component displayName;
+	private @NotNull Component prefix = Component.empty();
+	private @NotNull Component suffix = Component.empty();
+	private @NotNull ChatColor color = ChatColor.RESET;
 	private boolean allowFriendlyFire = false;
 	private final @NotNull HashSet<String> entries;
 	private boolean canSeeFriendly = true;
 	private final EnumMap<Option, OptionStatus> options = new EnumMap<>(Option.class);
 	private @Nullable ScoreboardMock board;
 
-	public TeamMock(String name, ScoreboardMock board)
+	public TeamMock(@NotNull String name, ScoreboardMock board)
 	{
 		this.name = name;
+		this.displayName = Component.text(name);
 		this.board = board;
 		this.entries = new HashSet<>();
 		this.options.put(Option.NAME_TAG_VISIBILITY, OptionStatus.ALWAYS);
@@ -52,107 +56,112 @@ public class TeamMock implements Team
 	@Override
 	public @NotNull Component displayName() throws IllegalStateException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void displayName(@Nullable Component displayName) throws IllegalStateException, IllegalArgumentException
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull Component prefix() throws IllegalStateException
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void prefix(@Nullable Component prefix) throws IllegalStateException, IllegalArgumentException
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull Component suffix() throws IllegalStateException
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void suffix(@Nullable Component suffix) throws IllegalStateException, IllegalArgumentException
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean hasColor()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull TextColor color() throws IllegalStateException
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void color(@Nullable NamedTextColor color)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull String getDisplayName() throws IllegalStateException
-	{
 		checkRegistered();
 		return this.displayName;
 	}
 
 	@Override
-	public void setDisplayName(String s)
+	public void displayName(@Nullable Component displayName) throws IllegalStateException, IllegalArgumentException
 	{
 		checkRegistered();
-		this.displayName = s;
+		this.displayName = displayName == null ? Component.empty() : displayName;
 	}
 
 	@Override
-	public @NotNull String getPrefix() throws IllegalStateException
+	public @NotNull Component prefix() throws IllegalStateException
 	{
 		checkRegistered();
 		return this.prefix;
 	}
 
 	@Override
-	public void setPrefix(String s)
+	public void prefix(@Nullable Component prefix) throws IllegalStateException, IllegalArgumentException
 	{
 		checkRegistered();
-
-		this.prefix = s;
+		this.prefix = prefix == null ? Component.empty() : prefix;
 	}
 
 	@Override
-	public @NotNull String getSuffix() throws IllegalStateException
+	public @NotNull Component suffix() throws IllegalStateException
 	{
 		checkRegistered();
 		return this.suffix;
 	}
 
 	@Override
-	public void setSuffix(String s)
+	public void suffix(@Nullable Component suffix) throws IllegalStateException, IllegalArgumentException
 	{
 		checkRegistered();
-		this.suffix = s;
+		this.prefix = suffix == null ? Component.empty() : suffix;
+	}
+
+	@Override
+	public boolean hasColor()
+	{
+		checkRegistered();
+		return this.color.isColor();
+	}
+
+	@Override
+	public @NotNull TextColor color() throws IllegalStateException
+	{
+		Preconditions.checkState(hasColor(), "Team colors must have hex values");
+		return TextColor.color(this.color.asBungee().getColor().getRGB());
+	}
+
+	@Override
+	public void color(@Nullable NamedTextColor color)
+	{
+		checkRegistered();
+		this.color = color == null ? ChatColor.RESET : ChatColor.valueOf(color.toString().toUpperCase(Locale.ROOT));
+	}
+
+	@Override
+	public @NotNull String getDisplayName() throws IllegalStateException
+	{
+		checkRegistered();
+		return LegacyComponentSerializer.legacySection().serialize(this.displayName);
+	}
+
+	@Override
+	public void setDisplayName(@NotNull String displayName)
+	{
+		Preconditions.checkNotNull(displayName, "Display name cannot be null");
+		Preconditions.checkArgument(ChatColor.stripColor(displayName).length() <= 128, "Display name is longer than the limit of 128 characters");
+		checkRegistered();
+		this.displayName = LegacyComponentSerializer.legacySection().deserialize(displayName);
+	}
+
+	@Override
+	public @NotNull String getPrefix() throws IllegalStateException
+	{
+		checkRegistered();
+		return LegacyComponentSerializer.legacySection().serialize(this.prefix);
+	}
+
+	@Override
+	public void setPrefix(@NotNull String prefix)
+	{
+		Preconditions.checkNotNull(prefix, "Prefix cannot be null");
+		Preconditions.checkArgument(ChatColor.stripColor(prefix).length() <= 64, "Prefix is longer than the limit of 64 characters");
+		checkRegistered();
+		this.prefix = LegacyComponentSerializer.legacySection().deserialize(prefix);
+	}
+
+	@Override
+	public @NotNull String getSuffix() throws IllegalStateException
+	{
+		checkRegistered();
+		return LegacyComponentSerializer.legacySection().serialize(this.suffix);
+	}
+
+	@Override
+	public void setSuffix(@NotNull String suffix)
+	{
+		Preconditions.checkNotNull(suffix, "Suffix cannot be null");
+		Preconditions.checkArgument(ChatColor.stripColor(suffix).length() <= 64, "Suffix is longer than the limit of 64 characters");
+		checkRegistered();
+		this.suffix = LegacyComponentSerializer.legacySection().deserialize(suffix);
 	}
 
 	@Override
@@ -163,8 +172,9 @@ public class TeamMock implements Team
 	}
 
 	@Override
-	public void setColor(ChatColor chatColor)
+	public void setColor(@NotNull ChatColor chatColor)
 	{
+		Preconditions.checkNotNull(chatColor, "Color cannot be null");
 		checkRegistered();
 		this.color = chatColor;
 	}
@@ -260,6 +270,7 @@ public class TeamMock implements Team
 	@Override
 	public @NotNull Set<String> getEntries() throws IllegalStateException
 	{
+		checkRegistered();
 		return this.entries;
 	}
 
@@ -280,29 +291,32 @@ public class TeamMock implements Team
 	@Deprecated
 	public void addPlayer(@NotNull OfflinePlayer offlinePlayer)
 	{
+		Preconditions.checkNotNull(offlinePlayer, "OfflinePlayer cannot be null");
 		checkRegistered();
 		this.entries.add(offlinePlayer.getName());
 	}
 
 	@Override
-	public void addEntry(String s)
+	public void addEntry(@NotNull String entry)
 	{
+		Preconditions.checkNotNull(entry, "Entry cannot be null");
 		checkRegistered();
-		this.entries.add(s);
+		this.entries.add(entry);
 	}
 
 	@Override
 	public void addEntities(@NotNull Collection<Entity> entities) throws IllegalStateException, IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(entities, "Entities cannot be null");
+		addEntries(entities.stream().map(entity -> ((EntityMock) entity).getScoreboardEntry()).toList());
 	}
 
 	@Override
 	public void addEntries(@NotNull Collection<String> entries) throws IllegalStateException, IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(entries, "Entries cannot be null");
+		checkRegistered();
+		this.entries.addAll(entries);
 	}
 
 	/**
@@ -312,29 +326,32 @@ public class TeamMock implements Team
 	@Deprecated
 	public boolean removePlayer(@NotNull OfflinePlayer offlinePlayer)
 	{
+		Preconditions.checkNotNull(offlinePlayer, "OfflinePlayer cannot be null");
 		checkRegistered();
 		return this.entries.remove(offlinePlayer.getName());
 	}
 
 	@Override
-	public boolean removeEntry(String s)
+	public boolean removeEntry(@NotNull String entry)
 	{
+		Preconditions.checkNotNull(entry, "Entry cannot be null");
 		checkRegistered();
-		return this.entries.remove(s);
+		return this.entries.remove(entry);
 	}
 
 	@Override
 	public boolean removeEntities(@NotNull Collection<Entity> entities) throws IllegalStateException, IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(entities, "Entities cannot be null");
+		return removeEntries(entities.stream().map(entity -> ((EntityMock) entity).getScoreboardEntry()).toList());
 	}
 
 	@Override
 	public boolean removeEntries(@NotNull Collection<String> entries) throws IllegalStateException, IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(entries, "Entries cannot be null");
+		checkRegistered();
+		return this.entries.removeAll(entries);
 	}
 
 	@Override
@@ -352,27 +369,32 @@ public class TeamMock implements Team
 	@Deprecated
 	public boolean hasPlayer(@NotNull OfflinePlayer offlinePlayer)
 	{
+		Preconditions.checkNotNull(offlinePlayer, "OfflinePlayer cannot be null");
 		checkRegistered();
 		return this.entries.contains(offlinePlayer.getName());
 	}
 
 	@Override
-	public boolean hasEntry(String s)
+	public boolean hasEntry(@NotNull String entry)
 	{
+		Preconditions.checkNotNull(entry, "Entry cannot be null");
 		checkRegistered();
-		return this.entries.contains(s);
+		return this.entries.contains(entry);
 	}
 
 	@Override
-	public @NotNull OptionStatus getOption(Option option) throws IllegalStateException
+	public @NotNull OptionStatus getOption(@NotNull Option option) throws IllegalStateException
 	{
+		Preconditions.checkNotNull(option, "Option cannot be null");
 		checkRegistered();
 		return this.options.get(option);
 	}
 
 	@Override
-	public void setOption(Option option, OptionStatus optionStatus) throws IllegalStateException
+	public void setOption(@NotNull Option option, @NotNull OptionStatus optionStatus) throws IllegalStateException
 	{
+		Preconditions.checkNotNull(option, "Option cannot be null");
+		Preconditions.checkNotNull(optionStatus, "OptionStatus cannot be null");
 		checkRegistered();
 		this.options.put(option, optionStatus);
 	}
@@ -380,22 +402,23 @@ public class TeamMock implements Team
 	@Override
 	public void addEntity(@NotNull Entity entity) throws IllegalStateException, IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(entity, "Entity cannot be null");
+		addEntry(((EntityMock) entity).getScoreboardEntry());
 	}
 
 	@Override
 	public boolean removeEntity(@NotNull Entity entity) throws IllegalStateException, IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(entity, "Entity cannot be null");
+		return removeEntry(((EntityMock) entity).getScoreboardEntry());
 	}
 
 	@Override
 	public boolean hasEntity(@NotNull Entity entity) throws IllegalStateException, IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(entity, "Entity cannot be null");
+		checkRegistered();
+		return this.entries.contains(((EntityMock) entity).getScoreboardEntry());
 	}
 
 	/**
@@ -403,10 +426,9 @@ public class TeamMock implements Team
 	 */
 	public void checkRegistered()
 	{
-		if (this.board == null)
-		{
-			throw new IllegalStateException("Team not registered");
-		}
+		if (this.board != null)
+			return;
+		throw new IllegalStateException("Team not registered");
 	}
 
 }

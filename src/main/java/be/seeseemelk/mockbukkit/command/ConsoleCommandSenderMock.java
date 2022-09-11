@@ -1,12 +1,15 @@
 package be.seeseemelk.mockbukkit.command;
 
+import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Server;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationAbandonedEvent;
+import org.bukkit.permissions.PermissibleBase;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
@@ -22,29 +25,18 @@ import java.util.UUID;
 public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTarget
 {
 
-	private final Queue<String> messages = new LinkedList<>();
+	private final Spigot spigot = new Spigot();
+	private final PermissibleBase perm = new PermissibleBase(this);
+	private final Queue<Component> messages = new LinkedList<>();
 
 	@Override
 	public void sendMessage(@NotNull String message)
 	{
-		sendMessage(null, message);
+		sendRawMessage(message);
 	}
 
 	@Override
-	public void sendMessage(String... messages)
-	{
-		sendMessage(null, messages);
-	}
-
-	@Override
-	public void sendMessage(UUID sender, @NotNull String message)
-	{
-		Preconditions.checkNotNull(message, "Message cannot be null");
-		messages.add(message);
-	}
-
-	@Override
-	public void sendMessage(UUID sender, String @NotNull ... messages)
+	public void sendMessage(String @NotNull ... messages)
 	{
 		for (String message : messages)
 		{
@@ -53,105 +45,107 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	}
 
 	@Override
-	public @Nullable String nextMessage()
+	public void sendMessage(@Nullable UUID sender, @NotNull String message)
 	{
-		return messages.poll();
+		sendRawMessage(message);
 	}
 
 	@Override
-	public boolean isPermissionSet(String name)
+	public void sendMessage(UUID sender, String @NotNull ... messages)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		sendMessage(messages);
 	}
 
 	@Override
-	public boolean isPermissionSet(Permission perm)
+	public @Nullable Component nextComponentMessage()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.messages.poll();
 	}
 
 	@Override
-	public boolean hasPermission(String name)
+	public boolean isPermissionSet(@NotNull String name)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.perm.isPermissionSet(name);
 	}
 
 	@Override
-	public boolean hasPermission(Permission perm)
+	public boolean isPermissionSet(@NotNull Permission perm)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.perm.isPermissionSet(perm);
 	}
 
 	@Override
-	public @NotNull PermissionAttachment addAttachment(Plugin plugin, String name, boolean value)
+	public boolean hasPermission(@NotNull String name)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.perm.hasPermission(name);
 	}
 
 	@Override
-	public @NotNull PermissionAttachment addAttachment(Plugin plugin)
+	public boolean hasPermission(@NotNull Permission perm)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.perm.hasPermission(perm);
 	}
 
 	@Override
-	public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value, int ticks)
+	public @NotNull PermissionAttachment addAttachment(@NotNull Plugin plugin, @NotNull String name, boolean value)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.perm.addAttachment(plugin, name, value);
 	}
 
 	@Override
-	public PermissionAttachment addAttachment(Plugin plugin, int ticks)
+	public @NotNull PermissionAttachment addAttachment(@NotNull Plugin plugin)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.perm.addAttachment(plugin);
 	}
 
 	@Override
-	public void removeAttachment(PermissionAttachment attachment)
+	public PermissionAttachment addAttachment(@NotNull Plugin plugin, @NotNull String name, boolean value, int ticks)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.perm.addAttachment(plugin, name, value, ticks);
+	}
+
+	@Override
+	public PermissionAttachment addAttachment(@NotNull Plugin plugin, int ticks)
+	{
+		return this.perm.addAttachment(plugin, ticks);
+	}
+
+	@Override
+	public void removeAttachment(@NotNull PermissionAttachment attachment)
+	{
+		this.perm.removeAttachment(attachment);
 	}
 
 	@Override
 	public void recalculatePermissions()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.perm.recalculatePermissions();
 	}
 
 	@Override
 	public @NotNull Set<PermissionAttachmentInfo> getEffectivePermissions()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.perm.getEffectivePermissions();
 	}
 
 	@Override
 	public boolean isOp()
 	{
+		// Return true since we are the console sender
 		return true;
 	}
 
 	@Override
 	public void setOp(boolean value)
 	{
-		throw new UnsupportedOperationException("Console is op and its status cannot be changed");
+		throw new UnsupportedOperationException("Cannot change operator status of server console");
 	}
 
 	@Override
 	public @NotNull Server getServer()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		MockBukkit.ensureMocking();
+		return MockBukkit.getMock();
 	}
 
 	@Override
@@ -168,28 +162,28 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	}
 
 	@Override
-	public void acceptConversationInput(String input)
+	public void acceptConversationInput(@NotNull String input)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean beginConversation(Conversation conversation)
+	public boolean beginConversation(@NotNull Conversation conversation)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void abandonConversation(Conversation conversation)
+	public void abandonConversation(@NotNull Conversation conversation)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void abandonConversation(Conversation conversation, ConversationAbandonedEvent details)
+	public void abandonConversation(@NotNull Conversation conversation, @NotNull ConversationAbandonedEvent details)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -205,14 +199,13 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	public void sendRawMessage(@Nullable UUID sender, @NotNull String message)
 	{
 		Preconditions.checkNotNull(message, "Message cannot be null");
-		messages.add(message);
+		this.messages.add(LegacyComponentSerializer.legacySection().deserialize(message));
 	}
 
 	@Override
 	public @NotNull Spigot spigot()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.spigot;
 	}
 
 	@Override
