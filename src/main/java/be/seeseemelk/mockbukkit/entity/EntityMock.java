@@ -810,21 +810,21 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	public @NotNull Sound getSwimSound()
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public @NotNull Sound getSwimSplashSound()
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public @NotNull Sound getSwimHighSpeedSplashSound()
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

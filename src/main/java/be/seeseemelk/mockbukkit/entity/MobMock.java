@@ -127,7 +127,7 @@ public abstract class MobMock extends LivingEntityMock implements Mob
 	public @Nullable Sound getAmbientSound()
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

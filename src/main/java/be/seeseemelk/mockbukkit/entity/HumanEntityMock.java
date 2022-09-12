@@ -83,7 +83,7 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	public @NotNull MainHand getMainHand()
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 
@@ -167,7 +167,7 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	public @Nullable Firework fireworkBoost(@NotNull ItemStack fireworkItemStack)
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

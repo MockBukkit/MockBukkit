@@ -62,14 +62,14 @@ public class FireworkMock extends ProjectileMock implements Firework
 	public boolean setAttachedTo(@Nullable LivingEntity entity)
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public @Nullable LivingEntity getAttachedTo()
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -77,7 +77,7 @@ public class FireworkMock extends ProjectileMock implements Firework
 	public boolean setLife(int ticks)
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -85,7 +85,7 @@ public class FireworkMock extends ProjectileMock implements Firework
 	public int getLife()
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -93,7 +93,7 @@ public class FireworkMock extends ProjectileMock implements Firework
 	public boolean setMaxLife(int ticks)
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -101,7 +101,7 @@ public class FireworkMock extends ProjectileMock implements Firework
 	public int getMaxLife()
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -115,7 +115,7 @@ public class FireworkMock extends ProjectileMock implements Firework
 	public boolean isDetonated()
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
