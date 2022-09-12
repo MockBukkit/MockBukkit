@@ -4,6 +4,7 @@ import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.destroystokyo.paper.entity.Pathfinder;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Mob;
@@ -120,6 +121,13 @@ public abstract class MobMock extends LivingEntityMock implements Mob
 	public boolean isAware()
 	{
 		return this.aware;
+	}
+
+	@Override
+	public @Nullable Sound getAmbientSound()
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

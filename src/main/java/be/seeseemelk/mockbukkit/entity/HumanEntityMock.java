@@ -17,6 +17,7 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Firework;
 import org.bukkit.entity.FishHook;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Villager;
@@ -160,6 +161,13 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	public void setLastDeathLocation(@Nullable Location location)
 	{
 		this.lastDeathLocation = location;
+	}
+
+	@Override
+	public @Nullable Firework fireworkBoost(@NotNull ItemStack fireworkItemStack)
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
