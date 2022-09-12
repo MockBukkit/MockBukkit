@@ -1573,8 +1573,6 @@ class PlayerMockTest
 		});
 	}
 
-
-
 	@SuppressWarnings("UnstableApiUsage")
 	void testPlayerSendPluginMessage()
 	{
