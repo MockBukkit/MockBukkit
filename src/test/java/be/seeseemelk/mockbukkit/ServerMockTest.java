@@ -569,7 +569,7 @@ class ServerMockTest
 
 		PlayerMock onlinePlayer = offlinePlayer.join(server);
 
-		assertFalse(offlinePlayer.isOnline());
+		assertTrue(offlinePlayer.isOnline());
 		assertTrue(onlinePlayer.isOnline());
 
 		// Assert that this is still the same Player (as far as name and uuid are concerned)
