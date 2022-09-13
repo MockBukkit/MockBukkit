@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit;
 
 import be.seeseemelk.mockbukkit.command.CommandResult;
+import be.seeseemelk.mockbukkit.configuration.GlobalServerConfiguration;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
@@ -954,6 +955,220 @@ class ServerMockTest
 				assertEquals(image.getRGB(x, y), decodedImage.getRGB(x, y));
 			}
 		}
+	}
+
+	@Test
+	void testGetViewDistanceDefault()
+	{
+		assertEquals(10,server.getViewDistance());
+	}
+
+	@Test
+	void testSetViewDistance()
+	{
+		server.setViewDistance(2);
+		assertEquals(2,server.getViewDistance());
+	}
+
+	@Test
+	public void testGetWorldTypeDefault()
+	{
+		assertEquals(GlobalServerConfiguration.LevelType.DEFAULT.getKey(), server.getWorldType());
+	}
+
+	@Test
+	public void testSetLevelType()
+	{
+		server.setWorldType(GlobalServerConfiguration.LevelType.FLAT);
+		assertEquals(GlobalServerConfiguration.LevelType.FLAT.getKey(), server.getWorldType());
+	}
+
+	@Test
+	public void testIsGenerateStructuresDefault()
+	{
+		assertTrue(server.getGenerateStructures());
+	}
+
+	@Test
+	public void testSetGenerateStructures()
+	{
+		server.setGenerateStructures(false);
+		assertFalse(server.getGenerateStructures());
+	}
+
+	@Test
+	public void testIsAllowEndDefault()
+	{
+		assertTrue(server.getAllowEnd());
+	}
+
+	@Test
+	public void testSetAllowEnd()
+	{
+		server.setAllowEnd(false);
+		assertFalse(server.getAllowEnd());
+	}
+
+	@Test
+	public void testIsAllowNetherDefault()
+	{
+		assertTrue(server.getAllowNether());
+	}
+
+	@Test
+	public void testSetAllowNether()
+	{
+		server.setAllowNether(false);
+		assertFalse(server.getAllowNether());
+	}
+
+	@Test
+	public void testGetUpdateFolderDefault()
+	{
+		assertEquals("update", server.getUpdateFolder());
+	}
+
+	@Test
+	public void testSetUpdateFolder()
+	{
+		server.setUpdateFolder("test");
+		assertEquals("test", server.getUpdateFolder());
+	}
+
+	@Test
+	public void testGetSimulationDistanceDefault()
+	{
+		assertEquals(10, server.getSimulationDistance());
+	}
+
+	@Test
+	public void testSetSimulationDistance()
+	{
+		server.setSimulationDistance(12);
+		assertEquals(12, server.getSimulationDistance());
+	}
+
+	@Test
+	public void testIsHideOnlinePlayersDefault()
+	{
+		assertFalse(server.getHideOnlinePlayers());
+	}
+
+	@Test
+	public void testSetHideOnlinePlayers()
+	{
+		server.setHideOnlinePlayers(true);
+		assertTrue(server.getHideOnlinePlayers());
+	}
+
+	@Test
+	void testIsShouldSendingChatPreviewsDefault()
+	{
+		assertFalse(server.shouldSendChatPreviews());
+	}
+
+	@Test
+	void testSetShouldSendingChatPreviews()
+	{
+		server.setShouldSendChatPreviews(true);
+		assertTrue(server.shouldSendChatPreviews());
+	}
+
+	@Test
+	void testGetOnlineModeDefault()
+	{
+		assertTrue(server.getOnlineMode());
+	}
+
+	@Test
+	void testSetOnlineMode()
+	{
+		server.setOnlineMode(false);
+		assertFalse(server.getOnlineMode());
+	}
+
+	@Test
+	void testIsEnforcingSecureProfiles()
+	{
+		assertTrue(server.isEnforcingSecureProfiles());
+	}
+
+	@Test
+	void testSetEnforcingSecureProfiles()
+	{
+		server.setEnforcingSecureProfiles(false);
+		assertFalse(server.isEnforcingSecureProfiles());
+	}
+
+	@Test
+	void testIsAllowFlight()
+	{
+		assertFalse(server.getAllowFlight());
+	}
+
+	@Test
+	void testSetAllowFlight()
+	{
+		server.setAllowFlight(true);
+		assertTrue(server.getAllowFlight());
+	}
+
+	@Test
+	void testIsHardcoreDefault()
+	{
+		assertFalse(server.isHardcore());
+	}
+
+	@Test
+	void testSetHardCore()
+	{
+		server.setHardcore(true);
+		assertTrue(server.isHardcore());
+	}
+
+	@Test
+	void testGetMaxChainedNeighborUpdatesDefault()
+	{
+		assertEquals(1000000, server.getMaxChainedNeighborUpdates());
+	}
+
+	@Test
+	void testSetMaxChainedNeighborUpdates()
+	{
+		server.setMaxChainedNeighborUpdates(1);
+		assertEquals(1, server.getMaxChainedNeighborUpdates());
+	}
+
+	@Test
+	void testGetShutdownMessageDefault()
+	{
+		assertEquals("Server closed", server.getShutdownMessage());
+	}
+
+	@Test
+	void testSetShutdownMessage()
+	{
+		server.setShutdownMessage(Component.text("Test"));
+		assertEquals("Test", server.getShutdownMessage());
+	}
+
+	@Test
+	void testShutdownMessage()
+	{
+		assertEquals(Component.text("Server closed"), server.shutdownMessage());
+	}
+
+	@Test
+	void testGetMaxWorldSizeDefault()
+	{
+		assertEquals(29999984, server.getMaxWorldSize());
+	}
+
+	@Test
+	void testSetMaxWorldSize()
+	{
+		server.setMaxWorldSize(42);
+		assertEquals(42, server.getMaxWorldSize());
 	}
 
 }
