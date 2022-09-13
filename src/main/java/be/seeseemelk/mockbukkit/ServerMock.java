@@ -7,6 +7,7 @@ import be.seeseemelk.mockbukkit.command.CommandResult;
 import be.seeseemelk.mockbukkit.command.ConsoleCommandSenderMock;
 import be.seeseemelk.mockbukkit.command.MessageTarget;
 import be.seeseemelk.mockbukkit.command.MockCommandMap;
+import be.seeseemelk.mockbukkit.configuration.GlobalServerConfiguration;
 import be.seeseemelk.mockbukkit.enchantments.EnchantmentsMock;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
@@ -181,6 +182,8 @@ public class ServerMock extends Server.Spigot implements Server
 	private boolean isWhitelistEnabled = false;
 	private boolean isWhitelistEnforced = false;
 	private final @NotNull Set<OfflinePlayer> whitelistedPlayers = new LinkedHashSet<>();
+
+	private final @NotNull GlobalServerConfiguration serverConfiguration = new GlobalServerConfiguration();
 
 	public ServerMock()
 	{
@@ -1059,8 +1062,17 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public int getViewDistance()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.serverConfiguration.getViewDistance();
+	}
+
+	/**
+	 * Sets the global view distance for all players.
+	 *
+	 * @param viewDistance The new view distance.
+	 */
+	public void setViewDistance(int viewDistance)
+	{
+		this.serverConfiguration.setViewDistance(viewDistance);
 	}
 
 	@Override
@@ -1073,29 +1085,65 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull String getWorldType()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.serverConfiguration.getLevelType().getKey();
+	}
+
+	/**
+	 * Sets the global default World Type
+	 *
+	 * @param worldType The new {@link GlobalServerConfiguration.LevelType}
+	 */
+	public void setWorldType(@NotNull GlobalServerConfiguration.LevelType worldType)
+	{
+		this.serverConfiguration.setLevelType(worldType);
 	}
 
 	@Override
 	public boolean getGenerateStructures()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.serverConfiguration.isGenerateStructures();
+	}
+
+	/**
+	 * Sets whether structures should be generated.
+	 *
+	 * @param generateStructures Whether structures should be generated.
+	 */
+	public void setGenerateStructures(boolean generateStructures)
+	{
+		this.serverConfiguration.setGenerateStructures(generateStructures);
 	}
 
 	@Override
 	public boolean getAllowEnd()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.serverConfiguration.isAllowEnd();
+	}
+
+	/**
+	 * Sets whether the End should be allowed.
+	 *
+	 * @param allowEnd Whether the End should be allowed.
+	 */
+	public void setAllowEnd(boolean allowEnd)
+	{
+		this.serverConfiguration.setAllowEnd(allowEnd);
 	}
 
 	@Override
 	public boolean getAllowNether()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.serverConfiguration.isAllowNether();
+	}
+
+	/**
+	 * Sets whether the Nether should be allowed.
+	 *
+	 * @param allowNether Whether the Nether should be allowed.
+	 */
+	public void setAllowNether(boolean allowNether)
+	{
+		this.serverConfiguration.setAllowNether(allowNether);
 	}
 
 	@NotNull
@@ -1182,15 +1230,23 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull String getUpdateFolder()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.serverConfiguration.getUpdateFolder();
+	}
+
+	/**
+	 * Sets the global update folder.
+	 *
+	 * @param updateFolder The new update folder.
+	 */
+	public void setUpdateFolder(@NotNull String updateFolder)
+	{
+		this.serverConfiguration.setUpdateFolder(updateFolder);
 	}
 
 	@Override
 	public @NotNull File getUpdateFolderFile()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return new File(this.getPluginsFolder(), this.getUpdateFolder());
 	}
 
 	@Override
@@ -1303,36 +1359,76 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public boolean shouldSendChatPreviews()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.serverConfiguration.shouldSendChatPreviews();
+	}
+
+	/**
+	 * Sets whether the server should send chat previews.
+	 * @param shouldSendChatPreviews Whether the server should send chat previews.
+	 */
+	public void setShouldSendChatPreviews(boolean shouldSendChatPreviews)
+	{
+		this.serverConfiguration.setShouldSendChatPreviews(shouldSendChatPreviews);
 	}
 
 	@Override
 	public boolean isEnforcingSecureProfiles()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.serverConfiguration.isEnforceSecureProfiles() && this.getOnlineMode();
+	}
+
+	/**
+	 * Sets whether the server should enforce secure profiles.
+	 * @param enforcingSecureProfiles Whether the server should enforce secure profiles.
+	 */
+	public void setEnforcingSecureProfiles(boolean enforcingSecureProfiles)
+	{
+		this.serverConfiguration.setEnforceSecureProfiles(enforcingSecureProfiles);
 	}
 
 	@Override
 	public boolean getOnlineMode()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.serverConfiguration.isOnlineMode();
+	}
+
+	/**
+	 * Sets whether the server should be in online mode.
+	 * @param onlineMode Whether the server should be in online mode.
+	 */
+	public void setOnlineMode(boolean onlineMode)
+	{
+		this.serverConfiguration.setOnlineMode(onlineMode);
 	}
 
 	@Override
 	public boolean getAllowFlight()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.serverConfiguration.isAllowFlight();
+	}
+
+	/**
+	 * Sets whether the server should allow flight.
+	 * @param allowFlight Whether the server should allow flight.
+	 */
+	public void setAllowFlight(boolean allowFlight)
+	{
+		this.serverConfiguration.setAllowFlight(allowFlight);
 	}
 
 	@Override
 	public boolean isHardcore()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.serverConfiguration.isHardcore();
+	}
+
+	/**
+	 * Sets whether the server should be in hardcore mode.
+	 * @param hardcore Whether the server should be in hardcore mode.
+	 */
+	public void setHardcore(boolean hardcore)
+	{
+		this.serverConfiguration.setHardcore(hardcore);
 	}
 
 	@Override
@@ -1398,8 +1494,17 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public int getMaxChainedNeighborUpdates()
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.serverConfiguration.getMaxChainedNeighbourUpdates();
+	}
+
+	/**
+	 * Sets the maximum number of chained neighbour updates before skipping additional ones.
+	 * Negative values remove the limit.
+	 * @param maxChainedNeighborUpdates The maximum number of chained neighbour updates.
+	 */
+	public void setMaxChainedNeighborUpdates(int maxChainedNeighborUpdates)
+	{
+		this.serverConfiguration.setMaxChainedNeighbourUpdates(maxChainedNeighborUpdates);
 	}
 
 	@Override
@@ -1456,16 +1561,19 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @Nullable Component shutdownMessage()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.serverConfiguration.getShutdownMessage();
+	}
+
+	public void setShutdownMessage(@NotNull Component shutdownMessage)
+	{
+		this.serverConfiguration.setShutdownMessage(shutdownMessage);
 	}
 
 	@Override
 	@Deprecated
 	public String getShutdownMessage()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return LegacyComponentSerializer.legacySection().serialize(this.serverConfiguration.getShutdownMessage());
 	}
 
 	/**
@@ -1922,22 +2030,46 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public int getMaxWorldSize()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.serverConfiguration.getMaxWorldSize();
+	}
+
+	/**
+	 * Set the maximum world size
+	 * @param maxWorldSize The maximum world size
+	 */
+	public void setMaxWorldSize(int maxWorldSize)
+	{
+		this.serverConfiguration.setMaxWorldSize(maxWorldSize);
 	}
 
 	@Override
 	public int getSimulationDistance()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.serverConfiguration.getSimulationDistance();
+	}
+
+	/**
+	 * Set the simulation distance
+	 * @param simulationDistance The simulation distance
+	 */
+	public void setSimulationDistance(int simulationDistance)
+	{
+		this.serverConfiguration.setSimulationDistance(simulationDistance);
 	}
 
 	@Override
 	public boolean getHideOnlinePlayers()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.serverConfiguration.isHideOnlinePlayers();
+	}
+
+	/**
+	 * Set whether to hide online players
+	 * @param hideOnlinePlayers Whether to hide online players
+	 */
+	public void setHideOnlinePlayers(boolean hideOnlinePlayers)
+	{
+		this.serverConfiguration.setHideOnlinePlayers(hideOnlinePlayers);
 	}
 
 	@Override
