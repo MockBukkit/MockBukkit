@@ -6,7 +6,26 @@ import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
 import be.seeseemelk.mockbukkit.entity.SimpleEntityMock;
+import be.seeseemelk.mockbukkit.inventory.AnvilInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.BarrelInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.BeaconInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.BrewerInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.CartographyInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.DispenserInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.DropperInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.EnchantingInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.FurnaceInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.GrindstoneInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.HopperInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
+import be.seeseemelk.mockbukkit.inventory.LecternInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.LoomInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.ShulkerBoxInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.SmithingInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.StonecutterInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.WorkbenchInventoryMock;
 import be.seeseemelk.mockbukkit.profile.PlayerProfileMock;
 import com.destroystokyo.paper.event.player.PlayerConnectionCloseEvent;
 import com.destroystokyo.paper.event.server.WhitelistToggleEvent;
@@ -14,12 +33,14 @@ import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Warning;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.WorldType;
+import org.bukkit.block.Lectern;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
@@ -34,9 +55,11 @@ import org.bukkit.inventory.Recipe;
 import org.bukkit.map.MapView;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.ScoreboardManager;
+import org.checkerframework.checker.units.qual.C;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -61,6 +84,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -954,6 +978,148 @@ class ServerMockTest
 				assertEquals(image.getRGB(x, y), decodedImage.getRGB(x, y));
 			}
 		}
+	}
+
+	@Test
+	void testGetDefaultGamemodeDefault()
+	{
+		assertEquals(GameMode.SURVIVAL, server.getDefaultGameMode());
+	}
+
+	@Test
+	void testSetDefaultGameMode()
+	{
+		server.setDefaultGameMode(GameMode.CREATIVE);
+		assertEquals(GameMode.CREATIVE, server.getDefaultGameMode());
+	}
+
+	@Test
+	void testCreateUncreateableInventory()
+	{
+		assertThrows(IllegalArgumentException.class, () -> server.createInventory(null, InventoryType.CREATIVE, "", 9));
+	}
+
+	@Test
+	void testCreateDispenserInventory()
+	{
+		assertInstanceOf(DispenserInventoryMock.class, server.createInventory(null, InventoryType.DISPENSER, "", 9));
+	}
+
+	@Test
+	void testCreateDropperInventory()
+	{
+		assertInstanceOf(DropperInventoryMock.class, server.createInventory(null, InventoryType.DROPPER, "", 9));
+	}
+
+	@Test
+	void testCreatePlayerInventory()
+	{
+		PlayerMock playerMock = server.addPlayer();
+		assertInstanceOf(PlayerInventoryMock.class, server.createInventory(playerMock, InventoryType.PLAYER, "", 9));
+	}
+
+	@Test
+	void testCreatePlayerWithNonPlayerHolderThrows()
+	{
+		assertThrows(IllegalArgumentException.class, () -> server.createInventory(null, InventoryType.PLAYER, "", 9));
+	}
+
+	@Test
+	void testCreateEnderChestInventory()
+	{
+		assertInstanceOf(EnderChestInventoryMock.class, server.createInventory(null, InventoryType.ENDER_CHEST, "", 9));
+	}
+
+	@Test
+	void testCreateHopperInventory()
+	{
+		assertInstanceOf(HopperInventoryMock.class, server.createInventory(null, InventoryType.HOPPER, "", 9));
+	}
+
+	@Test
+	void testCreateShulkerBoxInventory()
+	{
+		assertInstanceOf(ShulkerBoxInventoryMock.class, server.createInventory(null, InventoryType.SHULKER_BOX, "", 9));
+	}
+
+	@Test
+	void testCreateBarrelInventory()
+	{
+		assertInstanceOf(BarrelInventoryMock.class, server.createInventory(null, InventoryType.BARREL, "", 9));
+	}
+
+	@Test
+	void testCreateLecternInventory()
+	{
+		assertInstanceOf(LecternInventoryMock.class, server.createInventory(null, InventoryType.LECTERN, "", 9));
+	}
+
+	@Test
+	void testCreateGrindstoneInventory()
+	{
+		assertInstanceOf(GrindstoneInventoryMock.class, server.createInventory(null, InventoryType.GRINDSTONE, "", 9));
+	}
+
+	@Test
+	void testCreateStonecutterInventory()
+	{
+		assertInstanceOf(StonecutterInventoryMock.class, server.createInventory(null, InventoryType.STONECUTTER, "", 9));
+	}
+
+	@Test
+	void testCreateCartographyInventory()
+	{
+		assertInstanceOf(CartographyInventoryMock.class, server.createInventory(null, InventoryType.CARTOGRAPHY, "", 9));
+	}
+
+	@Test
+	void testCreateFurnaceInventory()
+	{
+		assertInstanceOf(FurnaceInventoryMock.class, server.createInventory(null, InventoryType.FURNACE, "", 9));
+		assertInstanceOf(FurnaceInventoryMock.class, server.createInventory(null, InventoryType.BLAST_FURNACE, "", 9));
+		assertInstanceOf(FurnaceInventoryMock.class, server.createInventory(null, InventoryType.SMOKER, "", 9));
+	}
+
+	@Test
+	void testCreateLoomInventory()
+	{
+		assertInstanceOf(LoomInventoryMock.class, server.createInventory(null, InventoryType.LOOM, "", 9));
+	}
+
+	@Test
+	void testCreateAnvilInventory()
+	{
+		assertInstanceOf(AnvilInventoryMock.class, server.createInventory(null, InventoryType.ANVIL, "", 9));
+	}
+
+	@Test
+	void testCreateSmithingInventory()
+	{
+		assertInstanceOf(SmithingInventoryMock.class, server.createInventory(null, InventoryType.SMITHING, "", 9));
+	}
+
+	@Test
+	void testCreateBeaconInventory()
+	{
+		assertInstanceOf(BeaconInventoryMock.class, server.createInventory(null, InventoryType.BEACON, "", 9));
+	}
+
+	@Test
+	void testCreateWorkbenchInventory()
+	{
+		assertInstanceOf(WorkbenchInventoryMock.class, server.createInventory(null, InventoryType.WORKBENCH, "", 9));
+	}
+
+	@Test
+	void testCreateEnchantingInventory()
+	{
+		assertInstanceOf(EnchantingInventoryMock.class, server.createInventory(null, InventoryType.ENCHANTING, "", 9));
+	}
+
+	@Test
+	void testCreateBrewerInventory()
+	{
+		assertInstanceOf(BrewerInventoryMock.class, server.createInventory(null, InventoryType.BREWING , "", 9));
 	}
 
 }
