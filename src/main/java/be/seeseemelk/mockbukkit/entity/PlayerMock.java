@@ -2548,20 +2548,17 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		@Deprecated
 		public void sendMessage(@NotNull BaseComponent @NotNull ... components)
 		{
-			for (BaseComponent component : components)
-			{
-				sendMessage(component);
-			}
+			sendMessage(ChatMessageType.CHAT, components);
 		}
 
 		@Override
 		@Deprecated
 		public void sendMessage(@NotNull ChatMessageType position, @NotNull BaseComponent @NotNull ... components)
 		{
-			for (BaseComponent component : components)
-			{
-				sendMessage(position, component);
-			}
+			Preconditions.checkNotNull(position, "Position must not be null");
+			Preconditions.checkNotNull(components, "Component must not be null");
+			Component comp = BungeeComponentSerializer.get().deserialize(components);
+			PlayerMock.this.sendMessage(comp);
 		}
 
 		@Override
@@ -2575,10 +2572,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		@Deprecated
 		public void sendMessage(@NotNull ChatMessageType position, @NotNull BaseComponent component)
 		{
-			Preconditions.checkNotNull(position, "Position must not be null");
-			Preconditions.checkNotNull(component, "Component must not be null");
-			Component comp = BungeeComponentSerializer.get().deserialize(new BaseComponent[]{ component });
-			PlayerMock.this.sendMessage(comp);
+			sendMessage(position, new BaseComponent[]{ component });
 		}
 
 	}
