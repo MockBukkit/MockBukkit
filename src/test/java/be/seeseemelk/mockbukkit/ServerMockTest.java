@@ -971,91 +971,91 @@ class ServerMockTest
 	}
 
 	@Test
-	public void testGetWorldTypeDefault()
+	void testGetWorldTypeDefault()
 	{
 		assertEquals(GlobalServerConfiguration.LevelType.DEFAULT.getKey(), server.getWorldType());
 	}
 
 	@Test
-	public void testSetLevelType()
+	void testSetLevelType()
 	{
 		server.setWorldType(GlobalServerConfiguration.LevelType.FLAT);
 		assertEquals(GlobalServerConfiguration.LevelType.FLAT.getKey(), server.getWorldType());
 	}
 
 	@Test
-	public void testIsGenerateStructuresDefault()
+	void testIsGenerateStructuresDefault()
 	{
 		assertTrue(server.getGenerateStructures());
 	}
 
 	@Test
-	public void testSetGenerateStructures()
+	void testSetGenerateStructures()
 	{
 		server.setGenerateStructures(false);
 		assertFalse(server.getGenerateStructures());
 	}
 
 	@Test
-	public void testIsAllowEndDefault()
+	void testIsAllowEndDefault()
 	{
 		assertTrue(server.getAllowEnd());
 	}
 
 	@Test
-	public void testSetAllowEnd()
+	void testSetAllowEnd()
 	{
 		server.setAllowEnd(false);
 		assertFalse(server.getAllowEnd());
 	}
 
 	@Test
-	public void testIsAllowNetherDefault()
+	void testIsAllowNetherDefault()
 	{
 		assertTrue(server.getAllowNether());
 	}
 
 	@Test
-	public void testSetAllowNether()
+	void testSetAllowNether()
 	{
 		server.setAllowNether(false);
 		assertFalse(server.getAllowNether());
 	}
 
 	@Test
-	public void testGetUpdateFolderDefault()
+	void testGetUpdateFolderDefault()
 	{
 		assertEquals("update", server.getUpdateFolder());
 	}
 
 	@Test
-	public void testSetUpdateFolder()
+	void testSetUpdateFolder()
 	{
 		server.setUpdateFolder("test");
 		assertEquals("test", server.getUpdateFolder());
 	}
 
 	@Test
-	public void testGetSimulationDistanceDefault()
+	void testGetSimulationDistanceDefault()
 	{
 		assertEquals(10, server.getSimulationDistance());
 	}
 
 	@Test
-	public void testSetSimulationDistance()
+	void testSetSimulationDistance()
 	{
 		server.setSimulationDistance(12);
 		assertEquals(12, server.getSimulationDistance());
 	}
 
 	@Test
-	public void testIsHideOnlinePlayersDefault()
+	void testIsHideOnlinePlayersDefault()
 	{
 		assertFalse(server.getHideOnlinePlayers());
 	}
 
 	@Test
-	public void testSetHideOnlinePlayers()
+	void testSetHideOnlinePlayers()
 	{
 		server.setHideOnlinePlayers(true);
 		assertTrue(server.getHideOnlinePlayers());

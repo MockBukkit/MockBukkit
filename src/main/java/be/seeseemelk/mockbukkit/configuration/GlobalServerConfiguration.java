@@ -184,7 +184,7 @@ public class GlobalServerConfiguration
 		this.hideOnlinePlayers = hideOnlinePlayers;
 	}
 
-	public static enum LevelType
+	public enum LevelType
 	{
 		DEFAULT("minecraft:normal"),
 		FLAT("minecraft:flat"),

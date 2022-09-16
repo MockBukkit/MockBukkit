@@ -1,20 +1,13 @@
 package be.seeseemelk.mockbukkit.configuration;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.ServerMock;
 import net.kyori.adventure.text.Component;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.awt.*;
-import java.util.logging.Level;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class GlobalServerConfigurationTest
+class GlobalServerConfigurationTest
 {
 
 	GlobalServerConfiguration config = new GlobalServerConfiguration();
@@ -26,98 +19,98 @@ public class GlobalServerConfigurationTest
 	}
 
 	@Test
-	public void testViewDistance()
+	void testViewDistance()
 	{
 		config.setViewDistance(12);
 		assertEquals(12, config.getViewDistance());
 	}
 
 	@Test
-	public void testGetLevelTypeDefault()
+	void testGetLevelTypeDefault()
 	{
 		assertEquals(GlobalServerConfiguration.LevelType.DEFAULT, config.getLevelType());
 	}
 
 	@Test
-	public void testSetLevelType()
+	void testSetLevelType()
 	{
 		config.setLevelType(GlobalServerConfiguration.LevelType.FLAT);
 		assertEquals(GlobalServerConfiguration.LevelType.FLAT, config.getLevelType());
 	}
 
 	@Test
-	public void testIsGenerateStructuresDefault()
+	void testIsGenerateStructuresDefault()
 	{
 		assertTrue(config.isGenerateStructures());
 	}
 
 	@Test
-	public void testSetGenerateStructures()
+	void testSetGenerateStructures()
 	{
 		config.setGenerateStructures(false);
 		assertFalse(config.isGenerateStructures());
 	}
 
 	@Test
-	public void testIsAllowEndDefault()
+	void testIsAllowEndDefault()
 	{
 		assertTrue(config.isAllowEnd());
 	}
 
 	@Test
-	public void testSetAllowEnd()
+	void testSetAllowEnd()
 	{
 		config.setAllowEnd(false);
 		assertFalse(config.isAllowEnd());
 	}
 
 	@Test
-	public void testIsAllowNetherDefault()
+	void testIsAllowNetherDefault()
 	{
 		assertTrue(config.isAllowNether());
 	}
 
 	@Test
-	public void testSetAllowNether()
+	void testSetAllowNether()
 	{
 		config.setAllowNether(false);
 		assertFalse(config.isAllowNether());
 	}
 
 	@Test
-	public void testGetUpdateFolderDefault()
+	void testGetUpdateFolderDefault()
 	{
 		assertEquals("update", config.getUpdateFolder());
 	}
 
 	@Test
-	public void testSetUpdateFolder()
+	void testSetUpdateFolder()
 	{
 		config.setUpdateFolder("test");
 		assertEquals("test", config.getUpdateFolder());
 	}
 
 	@Test
-	public void testGetSimulationDistanceDefault()
+	void testGetSimulationDistanceDefault()
 	{
 		assertEquals(10, config.getSimulationDistance());
 	}
 
 	@Test
-	public void testSetSimulationDistance()
+	void testSetSimulationDistance()
 	{
 		config.setSimulationDistance(12);
 		assertEquals(12, config.getSimulationDistance());
 	}
 
 	@Test
-	public void testIsHideOnlinePlayersDefault()
+	void testIsHideOnlinePlayersDefault()
 	{
 		assertFalse(config.isHideOnlinePlayers());
 	}
 
 	@Test
-	public void testSetHideOnlinePlayers()
+	void testSetHideOnlinePlayers()
 	{
 		config.setHideOnlinePlayers(true);
 		assertTrue(config.isHideOnlinePlayers());
