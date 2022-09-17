@@ -10,8 +10,6 @@ import org.bukkit.inventory.Recipe;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
-
 public class WorkbenchInventoryMock extends InventoryMock implements CraftingInventory
 {
 

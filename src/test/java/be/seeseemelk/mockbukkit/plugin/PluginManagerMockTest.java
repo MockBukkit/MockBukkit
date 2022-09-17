@@ -207,6 +207,17 @@ class PluginManagerMockTest
 	}
 
 	@Test
+	void removePermission_String() {
+		Permission permission = new Permission("mockbukkit.perm");
+		pluginManager.addPermission(permission);
+		assertTrue(pluginManager.getPermissions().contains(permission));
+
+		pluginManager.removePermission("mockbukkit.perm");
+
+		assertFalse(pluginManager.getPermissions().contains(permission));
+	}
+
+	@Test
 	void disablePlugin_LoadedPlugin_PluginDisabled()
 	{
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
