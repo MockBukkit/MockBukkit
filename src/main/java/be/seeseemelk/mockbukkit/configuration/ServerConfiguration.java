@@ -3,7 +3,7 @@ package be.seeseemelk.mockbukkit.configuration;
 import net.kyori.adventure.text.Component;
 import org.jetbrains.annotations.NotNull;
 
-public class GlobalServerConfiguration
+public class ServerConfiguration
 {
 
 	private int viewDistance = 10;
@@ -25,7 +25,6 @@ public class GlobalServerConfiguration
 
 	public int getViewDistance()
 	{
-
 		return this.viewDistance;
 	}
 

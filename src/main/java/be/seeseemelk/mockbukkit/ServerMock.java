@@ -7,7 +7,7 @@ import be.seeseemelk.mockbukkit.command.CommandResult;
 import be.seeseemelk.mockbukkit.command.ConsoleCommandSenderMock;
 import be.seeseemelk.mockbukkit.command.MessageTarget;
 import be.seeseemelk.mockbukkit.command.MockCommandMap;
-import be.seeseemelk.mockbukkit.configuration.GlobalServerConfiguration;
+import be.seeseemelk.mockbukkit.configuration.ServerConfiguration;
 import be.seeseemelk.mockbukkit.enchantments.EnchantmentsMock;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
@@ -183,7 +183,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private boolean isWhitelistEnforced = false;
 	private final @NotNull Set<OfflinePlayer> whitelistedPlayers = new LinkedHashSet<>();
 
-	private final @NotNull GlobalServerConfiguration serverConfiguration = new GlobalServerConfiguration();
+	private final @NotNull ServerConfiguration serverConfiguration = new ServerConfiguration();
 
 	public ServerMock()
 	{
@@ -1091,9 +1091,9 @@ public class ServerMock extends Server.Spigot implements Server
 	/**
 	 * Sets the global default World Type
 	 *
-	 * @param worldType The new {@link GlobalServerConfiguration.LevelType}
+	 * @param worldType The new {@link ServerConfiguration.LevelType}
 	 */
-	public void setWorldType(@NotNull GlobalServerConfiguration.LevelType worldType)
+	public void setWorldType(@NotNull ServerConfiguration.LevelType worldType)
 	{
 		this.serverConfiguration.setLevelType(worldType);
 	}
@@ -1364,6 +1364,7 @@ public class ServerMock extends Server.Spigot implements Server
 
 	/**
 	 * Sets whether the server should send chat previews.
+	 *
 	 * @param shouldSendChatPreviews Whether the server should send chat previews.
 	 */
 	public void setShouldSendChatPreviews(boolean shouldSendChatPreviews)
@@ -1379,6 +1380,7 @@ public class ServerMock extends Server.Spigot implements Server
 
 	/**
 	 * Sets whether the server should enforce secure profiles.
+	 *
 	 * @param enforcingSecureProfiles Whether the server should enforce secure profiles.
 	 */
 	public void setEnforcingSecureProfiles(boolean enforcingSecureProfiles)
@@ -1394,6 +1396,7 @@ public class ServerMock extends Server.Spigot implements Server
 
 	/**
 	 * Sets whether the server should be in online mode.
+	 *
 	 * @param onlineMode Whether the server should be in online mode.
 	 */
 	public void setOnlineMode(boolean onlineMode)
@@ -1409,6 +1412,7 @@ public class ServerMock extends Server.Spigot implements Server
 
 	/**
 	 * Sets whether the server should allow flight.
+	 *
 	 * @param allowFlight Whether the server should allow flight.
 	 */
 	public void setAllowFlight(boolean allowFlight)
@@ -1424,6 +1428,7 @@ public class ServerMock extends Server.Spigot implements Server
 
 	/**
 	 * Sets whether the server should be in hardcore mode.
+	 *
 	 * @param hardcore Whether the server should be in hardcore mode.
 	 */
 	public void setHardcore(boolean hardcore)
@@ -1500,6 +1505,7 @@ public class ServerMock extends Server.Spigot implements Server
 	/**
 	 * Sets the maximum number of chained neighbour updates before skipping additional ones.
 	 * Negative values remove the limit.
+	 *
 	 * @param maxChainedNeighborUpdates The maximum number of chained neighbour updates.
 	 */
 	public void setMaxChainedNeighborUpdates(int maxChainedNeighborUpdates)
@@ -1564,6 +1570,11 @@ public class ServerMock extends Server.Spigot implements Server
 		return this.serverConfiguration.getShutdownMessage();
 	}
 
+	/**
+	 * Sets the shutdown message.
+	 *
+	 * @param shutdownMessage The shutdown message.
+	 */
 	public void setShutdownMessage(@NotNull Component shutdownMessage)
 	{
 		this.serverConfiguration.setShutdownMessage(shutdownMessage);
@@ -2050,6 +2061,7 @@ public class ServerMock extends Server.Spigot implements Server
 
 	/**
 	 * Set the simulation distance
+	 *
 	 * @param simulationDistance The simulation distance
 	 */
 	public void setSimulationDistance(int simulationDistance)
@@ -2065,6 +2077,7 @@ public class ServerMock extends Server.Spigot implements Server
 
 	/**
 	 * Set whether to hide online players
+	 *
 	 * @param hideOnlinePlayers Whether to hide online players
 	 */
 	public void setHideOnlinePlayers(boolean hideOnlinePlayers)

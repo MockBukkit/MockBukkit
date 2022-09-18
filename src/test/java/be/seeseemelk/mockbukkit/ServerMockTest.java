@@ -1,7 +1,7 @@
 package be.seeseemelk.mockbukkit;
 
 import be.seeseemelk.mockbukkit.command.CommandResult;
-import be.seeseemelk.mockbukkit.configuration.GlobalServerConfiguration;
+import be.seeseemelk.mockbukkit.configuration.ServerConfiguration;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
@@ -973,14 +973,14 @@ class ServerMockTest
 	@Test
 	void testGetWorldTypeDefault()
 	{
-		assertEquals(GlobalServerConfiguration.LevelType.DEFAULT.getKey(), server.getWorldType());
+		assertEquals(ServerConfiguration.LevelType.DEFAULT.getKey(), server.getWorldType());
 	}
 
 	@Test
 	void testSetLevelType()
 	{
-		server.setWorldType(GlobalServerConfiguration.LevelType.FLAT);
-		assertEquals(GlobalServerConfiguration.LevelType.FLAT.getKey(), server.getWorldType());
+		server.setWorldType(ServerConfiguration.LevelType.FLAT);
+		assertEquals(ServerConfiguration.LevelType.FLAT.getKey(), server.getWorldType());
 	}
 
 	@Test

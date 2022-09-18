@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class GlobalServerConfigurationTest
 {
 
-	GlobalServerConfiguration config = new GlobalServerConfiguration();
+	ServerConfiguration config = new ServerConfiguration();
 
 	@Test
 	void testGetViewDistanceDefault()
@@ -28,14 +28,14 @@ class GlobalServerConfigurationTest
 	@Test
 	void testGetLevelTypeDefault()
 	{
-		assertEquals(GlobalServerConfiguration.LevelType.DEFAULT, config.getLevelType());
+		assertEquals(ServerConfiguration.LevelType.DEFAULT, config.getLevelType());
 	}
 
 	@Test
 	void testSetLevelType()
 	{
-		config.setLevelType(GlobalServerConfiguration.LevelType.FLAT);
-		assertEquals(GlobalServerConfiguration.LevelType.FLAT, config.getLevelType());
+		config.setLevelType(ServerConfiguration.LevelType.FLAT);
+		assertEquals(ServerConfiguration.LevelType.FLAT, config.getLevelType());
 	}
 
 	@Test
@@ -223,7 +223,7 @@ class GlobalServerConfigurationTest
 	@Test
 	void testLevelTypeGetKey()
 	{
-		assertEquals("minecraft:normal", GlobalServerConfiguration.LevelType.DEFAULT.getKey());
+		assertEquals("minecraft:normal", ServerConfiguration.LevelType.DEFAULT.getKey());
 	}
 
 }
