@@ -4,7 +4,6 @@ import com.google.common.base.Preconditions;
 import org.bukkit.ChunkSnapshot;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.data.BlockData;
 import org.jetbrains.annotations.NotNull;
 
@@ -19,10 +18,10 @@ public class ChunkSnapshotMock implements ChunkSnapshot
 	private final int minY;
 	private final int maxY;
 	private final long worldTime;
-	private final Map<Coordinate, BlockState> blockStates;
+	private final Map<Coordinate, BlockData> blockData;
 	private final Map<Coordinate, Biome> biomes;
 
-	ChunkSnapshotMock(int x, int z, int minY, int maxY, String worldName, long worldTime, Map<Coordinate, BlockState> blockStates, Map<Coordinate, Biome> biomes)
+	ChunkSnapshotMock(int x, int z, int minY, int maxY, String worldName, long worldTime, Map<Coordinate, BlockData> blockData, Map<Coordinate, Biome> biomes)
 	{
 		this.x = x;
 		this.z = z;
@@ -30,7 +29,7 @@ public class ChunkSnapshotMock implements ChunkSnapshot
 		this.maxY = maxY;
 		this.worldName = worldName;
 		this.worldTime = worldTime;
-		this.blockStates = blockStates;
+		this.blockData = blockData;
 		this.biomes = biomes;
 	}
 
@@ -59,15 +58,16 @@ public class ChunkSnapshotMock implements ChunkSnapshot
 	{
 		validateChunkCoordinates(x, y, z);
 
-		return blockStates.get(new Coordinate(x, y, z)).getType();
+		return this.blockData.get(new Coordinate(x, y, z)).getMaterial();
 	}
 
 	@NotNull
 	@Override
 	public BlockData getBlockData(int x, int y, int z)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		validateChunkCoordinates(x, y, z);
+
+		return this.blockData.get(new Coordinate(x, y, z));
 	}
 
 	@Override
@@ -167,8 +167,8 @@ public class ChunkSnapshotMock implements ChunkSnapshot
 	@Override
 	public boolean contains(@NotNull BlockData block)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(block, "BlockData cannot be null");
+		return this.blockData.containsValue(block);
 	}
 
 	private void validateChunkCoordinates(int x, int y, int z)
