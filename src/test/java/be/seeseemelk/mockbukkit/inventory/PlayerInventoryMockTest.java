@@ -9,11 +9,12 @@ import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -59,7 +60,7 @@ class PlayerInventoryMockTest
 		inventory.setItemInMainHand(item);
 		assertEquals(item, inventory.getItemInMainHand());
 		assertEquals(item, inventory.getItemInHand());
-		assertEquals(item, inventory.getContents()[PlayerInventoryMock.SLOT_BAR]);
+		assertEquals(item, inventory.getContents()[inventory.getHeldItemSlot()]);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -82,7 +83,7 @@ class PlayerInventoryMockTest
 		item.setAmount(25);
 		inventory.setItemInMainHand(item);
 		assertEquals(item, inventory.getItemInMainHand());
-		assertEquals(item, inventory.getItem(PlayerInventoryMock.SLOT_BAR + 1));
+		assertEquals(item, inventory.getItem(PlayerInventoryMock.HOTBAR + 1));
 	}
 
 	@Test
@@ -261,18 +262,15 @@ class PlayerInventoryMockTest
 		assertThrows(IllegalArgumentException.class, () -> inventory.setExtraContents(new ItemStack[2]));
 	}
 
-	@Test
-	void getItem_Nullability()
+	@ParameterizedTest
+	@EnumSource(EquipmentSlot.class)
+	void getItem_Mirror(EquipmentSlot slot)
 	{
-		inventory.setItemInMainHand(null);
-		inventory.setItemInOffHand(null);
-		inventory.setChestplate(null);
-		assertNotNull(inventory.getItem(EquipmentSlot.HAND));
-		assertNotNull(inventory.getItemInMainHand());
-		assertNotNull(inventory.getItem(EquipmentSlot.OFF_HAND));
-		assertNotNull(inventory.getItemInOffHand());
-		assertNull(inventory.getItem(EquipmentSlot.CHEST));
-		assertNull(inventory.getChestplate());
+		ItemStack apiItemStack = new ItemStack(Material.SCULK);
+		inventory.setItem(slot, apiItemStack);
+		ItemStack mirrorItemStack = inventory.getItem(slot);
+		assertNotSame(apiItemStack, mirrorItemStack);
+		assertSame(mirrorItemStack, inventory.getItem(slot));
 	}
 
 }

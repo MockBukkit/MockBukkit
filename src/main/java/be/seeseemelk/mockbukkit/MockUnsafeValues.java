@@ -11,6 +11,7 @@ import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Keyed;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.RegionAccessor;
 import org.bukkit.Registry;
 import org.bukkit.UnsafeValues;
 import org.bukkit.World;
@@ -38,54 +39,44 @@ public class MockUnsafeValues implements UnsafeValues
 {
 
 	private static final List<String> COMPATIBLE_API_VERSIONS = Arrays.asList("1.13", "1.14", "1.15", "1.16", "1.17", "1.18", "1.19");
-	public static final ComponentFlattener FLATTENER = ComponentFlattener.basic().toBuilder()
-			.build();
-	public static final LegacyComponentSerializer LEGACY_SECTION_UXRC = LegacyComponentSerializer.builder().flattener(FLATTENER).hexColors().useUnusualXRepeatedCharacterHexFormat().build();
-	public static final PlainComponentSerializer PLAIN = PlainComponentSerializer.builder().flattener(FLATTENER).build();
-	public static final PlainTextComponentSerializer PLAIN_TEXT = PlainTextComponentSerializer.builder().flattener(FLATTENER).build();
-	public static final GsonComponentSerializer GSON = GsonComponentSerializer.builder()
-			.build();
-	public static final GsonComponentSerializer COLOR_DOWNSAMPLING_GSON = GsonComponentSerializer.builder()
-			.downsampleColors()
-			.build();
 
 	private String minimumApiVersion = "none";
 
 	@Override
 	public @NotNull ComponentFlattener componentFlattener()
 	{
-		return FLATTENER;
+		return ComponentFlattener.basic();
 	}
 
 	@Override
 	@Deprecated(forRemoval = true)
 	public @NotNull PlainComponentSerializer plainComponentSerializer()
 	{
-		return PLAIN;
+		return PlainComponentSerializer.plain();
 	}
 
 	@Override
 	public @NotNull PlainTextComponentSerializer plainTextSerializer()
 	{
-		return PLAIN_TEXT;
+		return PlainTextComponentSerializer.plainText();
 	}
 
 	@Override
 	public @NotNull GsonComponentSerializer gsonComponentSerializer()
 	{
-		return GSON;
+		return GsonComponentSerializer.gson();
 	}
 
 	@Override
 	public @NotNull GsonComponentSerializer colorDownsamplingGsonComponentSerializer()
 	{
-		return COLOR_DOWNSAMPLING_GSON;
+		return GsonComponentSerializer.colorDownsamplingGson();
 	}
 
 	@Override
 	public @NotNull LegacyComponentSerializer legacyComponentSerializer()
 	{
-		return LEGACY_SECTION_UXRC;
+		return LegacyComponentSerializer.legacySection();
 	}
 
 	@Override
@@ -375,10 +366,25 @@ public class MockUnsafeValues implements UnsafeValues
 	}
 
 	@Override
+	public @NotNull NamespacedKey getBiomeKey(RegionAccessor accessor, int x, int y, int z)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setBiomeKey(RegionAccessor accessor, int x, int y, int z, NamespacedKey biomeKey)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public Material getMaterial(String material, int version)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
+
 
 }

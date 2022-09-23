@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.Color;
 import org.bukkit.inventory.meta.MapMeta;
 import org.bukkit.map.MapView;
@@ -94,21 +95,21 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 	public boolean hasLocationName()
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public @Nullable String getLocationName()
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public void setLocationName(@Nullable String name)
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

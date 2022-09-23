@@ -52,6 +52,7 @@ import com.google.common.base.Preconditions;
 import io.papermc.paper.datapack.DatapackManager;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
@@ -95,6 +96,7 @@ import org.bukkit.entity.SpawnCategory;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.server.MapInitializeEvent;
 import org.bukkit.generator.ChunkGenerator.ChunkData;
 import org.bukkit.inventory.InventoryHolder;
@@ -107,17 +109,21 @@ import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.potion.PotionBrewer;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scoreboard.Criteria;
 import org.bukkit.structure.StructureManager;
-import org.bukkit.util.CachedServerIcon;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -142,6 +148,7 @@ public class ServerMock extends Server.Spigot implements Server
 {
 
 	private static final Component MOTD = Component.text("A Minecraft Server");
+	private static final Component NO_PERMISSION = Component.text("I'm sorry, but you do not have permission to perform this command. Please contact the server administrators if you believe that this is in error.", NamedTextColor.RED);
 
 	private final Properties buildProperties = new Properties();
 	private final Logger logger = Logger.getLogger("ServerMock");
@@ -163,6 +170,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private final HelpMapMock helpMap = new HelpMapMock();
 	private final StandardMessenger messenger = new StandardMessenger();
 	private final Map<Integer, MapViewMock> mapViews = new HashMap<>();
+	private CachedServerIconMock serverIcon = new CachedServerIconMock(null);
 	private int nextMapId = 1;
 
 	private GameMode defaultGameMode = GameMode.SURVIVAL;
@@ -192,6 +200,7 @@ public class ServerMock extends Server.Spigot implements Server
 		{
 			logger.warning("Could not load file logger.properties");
 		}
+		logger.setLevel(Level.ALL);
 
 		try
 		{
@@ -201,9 +210,6 @@ public class ServerMock extends Server.Spigot implements Server
 		{
 			logger.warning("Could not load build properties");
 		}
-
-		logger.setLevel(Level.ALL);
-
 	}
 
 	/**
@@ -251,8 +257,9 @@ public class ServerMock extends Server.Spigot implements Server
 
 		CountDownLatch conditionLatch = new CountDownLatch(1);
 
+		InetSocketAddress address = player.getAddress();
 		AsyncPlayerPreLoginEvent preLoginEvent = new AsyncPlayerPreLoginEvent(player.getName(),
-				player.getAddress().getAddress(), player.getUniqueId());
+				address.getAddress(), player.getUniqueId());
 		getPluginManager().callEventAsynchronously(preLoginEvent, (e) -> conditionLatch.countDown());
 		try
 		{
@@ -264,6 +271,9 @@ public class ServerMock extends Server.Spigot implements Server
 					(StringUtils.isEmpty(e.getMessage()) ? "" : e.getMessage()));
 			Thread.currentThread().interrupt();
 		}
+
+		PlayerLoginEvent playerLoginEvent = new PlayerLoginEvent(player, address.getHostString(), address.getAddress());
+		Bukkit.getPluginManager().callEvent(playerLoginEvent);
 
 		Component joinMessage = MiniMessage.miniMessage()
 				.deserialize("<name> has joined the Server!", Placeholder.component("name", player.displayName()));
@@ -1482,24 +1492,48 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public CachedServerIcon getServerIcon()
+	public @NotNull Criteria getScoreboardCriteria(@NotNull String name)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
-	@Override
-	public @NotNull CachedServerIcon loadServerIcon(File file)
+	/**
+	 * Sets the return value of {@link #getServerIcon()}.
+	 *
+	 * @param serverIcon The icon to set.
+	 */
+	public void setServerIcon(CachedServerIconMock serverIcon)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.serverIcon = serverIcon;
 	}
 
 	@Override
-	public @NotNull CachedServerIcon loadServerIcon(BufferedImage image)
+	public CachedServerIconMock getServerIcon()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.serverIcon;
+	}
+
+	@Override
+	public @NotNull CachedServerIconMock loadServerIcon(@NotNull File file) throws IOException
+	{
+		Preconditions.checkNotNull(file, "File cannot be null");
+		Preconditions.checkArgument(file.isFile(), file + " isn't a file");
+		return loadServerIcon(ImageIO.read(file));
+	}
+
+	@Override
+	public @NotNull CachedServerIconMock loadServerIcon(@NotNull BufferedImage image) throws IOException
+	{
+		Preconditions.checkNotNull(image, "Image cannot be null");
+		Preconditions.checkArgument(image.getWidth() == 64, "Image must be 64 pixels wide");
+		Preconditions.checkArgument(image.getHeight() == 64, "Image must be 64 pixels high");
+
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		ImageIO.write(image, "PNG", out);
+		String encoded = Base64.getEncoder().encodeToString(out.toByteArray());
+
+		return new CachedServerIconMock(CachedServerIconMock.PNG_BASE64_PREFIX + encoded);
 	}
 
 	@Override
@@ -1937,15 +1971,13 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull String getPermissionMessage()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return unsafe.legacyComponentSerializer().serialize(NO_PERMISSION);
 	}
 
 	@Override
 	public @NotNull Component permissionMessage()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return NO_PERMISSION;
 	}
 
 	@Override
