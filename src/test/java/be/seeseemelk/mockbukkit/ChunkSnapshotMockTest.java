@@ -1,9 +1,12 @@
 package be.seeseemelk.mockbukkit;
 
+import be.seeseemelk.mockbukkit.block.data.AmethystClusterMock;
+import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
+import org.bukkit.block.BlockFace;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -56,6 +59,40 @@ class ChunkSnapshotMockTest
 	{
 		assertEquals(Material.GRASS, chunk.getChunkSnapshot().getBlockType(0, 1, 0));
 		assertEquals(Material.AIR, chunk.getChunkSnapshot().getBlockType(0, 10, 0));
+	}
+
+	@Test
+	void getBlockData()
+	{
+		assertEquals(Material.GRASS, chunk.getChunkSnapshot().getBlockData(0, 1, 0).getMaterial());
+		assertEquals(Material.AIR, chunk.getChunkSnapshot().getBlockData(0, 10, 0).getMaterial());
+	}
+
+	@Test
+	void getBlockData_PreservesData()
+	{
+		AmethystClusterMock blockData = (AmethystClusterMock) Bukkit.createBlockData(Material.AMETHYST_CLUSTER);
+		blockData.setWaterlogged(true);
+		blockData.setFacing(BlockFace.SOUTH);
+		chunk.getBlock(0, 1, 0).setBlockData(blockData);
+
+		AmethystClusterMock snapshotData = (AmethystClusterMock) chunk.getChunkSnapshot().getBlockData(0, 1, 0);
+
+		assertEquals(Material.AMETHYST_CLUSTER, snapshotData.getMaterial());
+		assertTrue(snapshotData.isWaterlogged());
+		assertEquals(BlockFace.SOUTH, snapshotData.getFacing());
+	}
+
+	@Test
+	void contains_BlockExists_True()
+	{
+		assertTrue(chunk.getChunkSnapshot().contains(Bukkit.createBlockData(Material.GRASS)));
+	}
+
+	@Test
+	void contains_BlockDoesntExist_False()
+	{
+		assertFalse(chunk.getChunkSnapshot().contains(Bukkit.createBlockData(Material.DIAMOND_BLOCK)));
 	}
 
 	@Test

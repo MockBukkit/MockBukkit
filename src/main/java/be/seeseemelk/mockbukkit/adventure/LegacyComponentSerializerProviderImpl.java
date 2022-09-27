@@ -31,7 +31,9 @@ public class LegacyComponentSerializerProviderImpl implements LegacyComponentSer
 	@Override
 	public @NotNull Consumer<LegacyComponentSerializer.Builder> legacy()
 	{
-		return builder -> {};
+		return builder ->
+		{
+		};
 	}
-	
+
 }

@@ -16,6 +16,7 @@ import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import net.kyori.adventure.text.Component;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
 import org.bukkit.Effect;
@@ -1843,6 +1844,20 @@ class PlayerMockTest
 	void testAssertItemConsumedWithNullItem()
 	{
 		assertThrows(NullPointerException.class, () -> player.assertItemConsumed(null));
+	}
+
+	@Test
+	void assertSaid_Spigot_CorrectMessage_DoesNotAssert()
+	{
+		player.spigot().sendMessage(TextComponent.fromLegacyText("Spigot message"));
+		player.assertSaid("Spigot message");
+	}
+
+	@Test
+	void assertSaid_Spigot_WrongMessage_Asserts()
+	{
+		player.sendMessage("Spigot message");
+		assertThrows(AssertionError.class, () -> player.assertSaid("Some other message"));
 	}
 
 }
