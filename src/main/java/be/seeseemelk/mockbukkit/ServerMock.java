@@ -740,6 +740,13 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	public boolean isTickingWorlds()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public World getWorld(String name)
 	{
 		return worlds.stream().filter(world -> world.getName().equals(name)).findAny().orElse(null);

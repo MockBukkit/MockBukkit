@@ -1227,6 +1227,11 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		// Pretend we sent the block change.
 	}
 
+	@Override
+	public void sendBlockChanges(@NotNull Collection<BlockState> blocks, boolean suppressLightUpdates)
+	{
+		// Pretend we sent the block change.
+	}
 
 	@Override
 	public void sendSignChange(@NotNull Location loc, @Nullable List<Component> lines, @NotNull DyeColor dyeColor, boolean hasGlowingText) throws IllegalArgumentException
