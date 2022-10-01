@@ -197,6 +197,10 @@ public class BlockDataMock implements BlockData
 		{
 			return new BedMock(material);
 		}
+		else if (Tag.SLABS.isTagged(material))
+		{
+			return new SlabMock(material);
+		}
 		return switch (material)
 				{
 					case AMETHYST_CLUSTER -> new AmethystClusterMock(material);
