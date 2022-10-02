@@ -1,6 +1,9 @@
 package be.seeseemelk.mockbukkit.block.data;
 
+import be.seeseemelk.mockbukkit.MockBukkit;
 import org.bukkit.Material;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -11,6 +14,18 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BlockDataMockTest
 {
+
+	@BeforeEach
+	void setUp()
+	{
+		MockBukkit.mock();
+	}
+
+	@AfterEach
+	void teardown()
+	{
+		MockBukkit.unmock();
+	}
 
 	@Test
 	void matches_DoesMatch()
@@ -65,6 +80,13 @@ class BlockDataMockTest
 		blockData2.set("key", "value");
 
 		assertTrue(blockData.matches(blockData2));
+	}
+
+	@Test
+	void mock_StairsMaterial_CreatesStairsMock()
+	{
+		final BlockDataMock stairs = BlockDataMock.mock(Material.BIRCH_STAIRS);
+		assertTrue(stairs instanceof StairsMock);
 	}
 
 }
