@@ -16,12 +16,18 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class StairsMockTest
 {
-	private static final Set<BlockFace> VALID_FACES = Set.of(BlockFace.NORTH, BlockFace.SOUTH, BlockFace.EAST,
-			BlockFace.WEST);
+	private static final Set<BlockFace> VALID_FACES = Set.of(
+			BlockFace.NORTH,
+			BlockFace.SOUTH,
+			BlockFace.EAST,
+			BlockFace.WEST
+	);
 
 	private StairsMock stairs;
 
@@ -67,10 +73,22 @@ class StairsMockTest
 	}
 
 	@Test
+	void setShape_NullInput_ThrowsException()
+	{
+		assertThrowsExactly(NullPointerException.class, () -> stairs.setShape(null));
+	}
+
+	@Test
 	void setHalf_Valid()
 	{
 		stairs.setHalf(Bisected.Half.TOP);
 		assertEquals(Bisected.Half.TOP, stairs.getHalf());
+	}
+
+	@Test
+	void setHalf_NullInput_ThrowsException()
+	{
+		assertThrowsExactly(NullPointerException.class, () -> stairs.setHalf(null));
 	}
 
 	@Test
@@ -96,6 +114,12 @@ class StairsMockTest
 	}
 
 	@Test
+	void setFacing_NullInput_ThrowsException()
+	{
+		assertThrowsExactly(NullPointerException.class, () -> stairs.setFacing(null));
+	}
+
+	@Test
 	void getFaces_HasCorrectValues()
 	{
 		assertEquals(VALID_FACES, stairs.getFaces());
@@ -104,7 +128,14 @@ class StairsMockTest
 	@Test
 	void setWaterlogged()
 	{
-		stairs.setWaterlogged(false);
-		assertFalse(stairs.isWaterlogged());
+		stairs.setWaterlogged(true);
+		assertTrue(stairs.isWaterlogged());
 	}
+
+	@Test
+	void blockDataMock_Mock_CorrectType()
+	{
+		assertInstanceOf(StairsMock.class, BlockDataMock.mock(Material.BIRCH_STAIRS));
+	}
+
 }

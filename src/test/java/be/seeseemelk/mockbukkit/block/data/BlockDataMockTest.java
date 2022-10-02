@@ -82,11 +82,4 @@ class BlockDataMockTest
 		assertTrue(blockData.matches(blockData2));
 	}
 
-	@Test
-	void mock_StairsMaterial_CreatesStairsMock()
-	{
-		final BlockDataMock stairs = BlockDataMock.mock(Material.BIRCH_STAIRS);
-		assertTrue(stairs instanceof StairsMock);
-	}
-
 }

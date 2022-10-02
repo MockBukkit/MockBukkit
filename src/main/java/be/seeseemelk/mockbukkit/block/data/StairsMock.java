@@ -36,6 +36,7 @@ public class StairsMock extends BlockDataMock implements Stairs
 	@Override
 	public void setShape(@NotNull Shape shape)
 	{
+		Preconditions.checkNotNull("Shape cannot be null");
 		set(SHAPE, shape);
 	}
 
@@ -48,6 +49,7 @@ public class StairsMock extends BlockDataMock implements Stairs
 	@Override
 	public void setHalf(@NotNull Half half)
 	{
+		Preconditions.checkNotNull(half, "Half cannot be null");
 		set(HALF, half);
 	}
 
@@ -60,6 +62,7 @@ public class StairsMock extends BlockDataMock implements Stairs
 	@Override
 	public void setFacing(@NotNull BlockFace facing)
 	{
+		Preconditions.checkNotNull(facing, "BlockFace cannot be null");
 		Preconditions.checkArgument(getFaces().contains(facing), "Invalid face. Must be one of " + getFaces());
 		set(FACING, facing);
 	}
