@@ -1,9 +1,6 @@
 package be.seeseemelk.mockbukkit.block.data;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
 import org.bukkit.Material;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,18 +11,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BlockDataMockTest
 {
-
-	@BeforeEach
-	void setUp()
-	{
-		MockBukkit.mock();
-	}
-
-	@AfterEach
-	void teardown()
-	{
-		MockBukkit.unmock();
-	}
 
 	@Test
 	void matches_DoesMatch()
