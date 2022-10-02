@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
@@ -104,6 +105,24 @@ class BedMockTest
 		for (Material material : MaterialTags.BEDS.getValues())
 		{
 			assertInstanceOf(BedMock.class, BlockDataMock.mock(material));
+		}
+	}
+
+	@Test
+	void blockDataMock_AttemptMockByPaperMaterialTags_CorrectType()
+	{
+		for (Material material : MaterialTags.BEDS.getValues())
+		{
+			assertInstanceOf(BedMock.class, BlockDataMock.mock(material));
+		}
+	}
+
+	@Test
+	void blockDataMock_AttemptMockByTag_ReturnsNull()
+	{
+		for (Material material : MaterialTags.BEDS.getValues())
+		{
+			assertNull(BlockDataMock.attemptMockByTag(material));
 		}
 	}
 

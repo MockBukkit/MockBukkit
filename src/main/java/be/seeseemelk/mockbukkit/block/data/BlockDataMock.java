@@ -23,6 +23,16 @@ import java.util.stream.Collectors;
 public class BlockDataMock implements BlockData
 {
 
+	protected static final String FACING = "facing";
+	protected static final String HALF = "half";
+	protected static final String OCCUPIED = "occupied";
+	protected static final String OPEN = "open";
+	protected static final String PART = "part";
+	protected static final String POWERED = "powered";
+	protected static final String SHAPE = "shape";
+	protected static final String TYPE = "type";
+	protected static final String WATERLOGGED = "waterlogged";
+
 	private final @NotNull Material type;
 	private final @NotNull Map<String, Object> data;
 
@@ -201,11 +211,53 @@ public class BlockDataMock implements BlockData
 	{
 		Preconditions.checkNotNull(material, "Material cannot be null");
 		// Special Cases
+		BlockDataMock mock = attemptMockByPaperMaterialTags(material);
+		if (mock != null)
+		{
+			return mock;
+		}
+
+		mock = attemptMockByTag(material);
+		if (mock != null)
+		{
+			return mock;
+		}
+
+		return switch (material)
+				{
+					case AMETHYST_CLUSTER -> new AmethystClusterMock(material);
+					default -> new BlockDataMock(material);
+				};
+	}
+
+	/**
+	 * Attempts to construct a BlockDataMock object by matching against Paper MaterialTags. Returns null if the given
+	 * material does not match any supported MaterialSetTag.
+	 *
+	 * @param material Material which we will attempt to mock
+	 * @return BlockDataMock if matched, null otherwise
+	 */
+	static BlockDataMock attemptMockByPaperMaterialTags(@NotNull Material material)
+	{
+		Preconditions.checkNotNull(material, "Material cannot be null");
 		if (MaterialTags.BEDS.isTagged(material))
 		{
 			return new BedMock(material);
 		}
-		else if (Tag.SLABS.isTagged(material))
+		return null;
+	}
+
+	/**
+	 * Attempts to construct a BlockDataMock object by matching against Bukkit Tags. Returns null if the given material
+	 * does not match any supported Tag.
+	 *
+	 * @param material Material which we will attempt to mock
+	 * @return BlockDataMock if matched, null otherwise
+	 */
+	static BlockDataMock attemptMockByTag(@NotNull Material material)
+	{
+		Preconditions.checkNotNull(material, "Material cannot be null");
+		if (Tag.SLABS.isTagged(material))
 		{
 			return new SlabMock(material);
 		}
@@ -213,11 +265,11 @@ public class BlockDataMock implements BlockData
 		{
 			return new StairsMock(material);
 		}
-		return switch (material)
-				{
-					case AMETHYST_CLUSTER -> new AmethystClusterMock(material);
-					default -> new BlockDataMock(material);
-				};
+		else if (Tag.TRAPDOORS.isTagged(material))
+		{
+			return new TrapDoorMock(material);
+		}
+		return null;
 	}
 
 }

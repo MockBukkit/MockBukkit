@@ -13,9 +13,6 @@ import java.util.Set;
 public class AmethystClusterMock extends BlockDataMock implements AmethystCluster, Directional, Waterlogged
 {
 
-	private static final String FACING = "facing";
-	private static final String WATERLOGGED = "waterlogged";
-
 	public AmethystClusterMock(@NotNull Material type)
 	{
 		super(type);

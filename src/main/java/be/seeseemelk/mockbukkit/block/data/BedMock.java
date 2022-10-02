@@ -11,10 +11,6 @@ import java.util.Set;
 public class BedMock extends BlockDataMock implements Bed
 {
 
-	private static final String PART = "part";
-	private static final String OCCUPIED = "occupied";
-	private static final String FACING = "facing";
-
 	public BedMock(@NotNull Material type)
 	{
 		super(type);

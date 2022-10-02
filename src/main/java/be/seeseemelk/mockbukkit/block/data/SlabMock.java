@@ -9,9 +9,6 @@ import org.jetbrains.annotations.NotNull;
 public class SlabMock extends BlockDataMock implements Slab
 {
 
-	private static final String TYPE = "type";
-	private static final String WATERLOGGED = "waterlogged";
-
 	public SlabMock(@NotNull Material type)
 	{
 		super(type);
