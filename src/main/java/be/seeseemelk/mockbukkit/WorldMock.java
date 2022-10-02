@@ -1129,11 +1129,11 @@ public class WorldMock implements World
 			}
 
 
-			canceled = new CreatureSpawnEvent(living, reason).callEvent();
+			canceled = !new CreatureSpawnEvent(living, reason).callEvent();
 		}
 		else if (entity instanceof Item item)
 		{
-			canceled = new ItemSpawnEvent(item).callEvent();
+			canceled = !new ItemSpawnEvent(item).callEvent();
 		}
 		else if (entity instanceof Player)
 		{
@@ -1141,11 +1141,11 @@ public class WorldMock implements World
 		}
 		else if (entity instanceof Projectile)
 		{
-			canceled = new ProjectileLaunchEvent(entity).callEvent();
+			canceled = !new ProjectileLaunchEvent(entity).callEvent();
 		}
 		else
 		{
-			canceled = new EntitySpawnEvent(entity).callEvent();
+			canceled = !new EntitySpawnEvent(entity).callEvent();
 		}
 
 		/* EntityMock#getPassengers() and #getVehicle() isn't implemented
