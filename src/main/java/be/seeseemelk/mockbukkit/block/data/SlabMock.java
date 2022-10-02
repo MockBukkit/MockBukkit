@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.block.data;
 
+import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.data.type.Slab;
@@ -28,6 +29,7 @@ public class SlabMock extends BlockDataMock implements Slab
 	@Override
 	public void setType(@NotNull Type type)
 	{
+		Preconditions.checkNotNull(type, "Type cannot be null");
 		set(TYPE, type);
 	}
 
