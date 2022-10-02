@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -54,6 +55,12 @@ class SlabMockTest
 	{
 		slab.setType(Slab.Type.TOP);
 		assertEquals(Slab.Type.TOP, slab.getType());
+	}
+
+	@Test
+	void setType_Null_ThrowsException()
+	{
+		assertThrows(NullPointerException.class, () -> slab.setType(null));
 	}
 
 	@Test
