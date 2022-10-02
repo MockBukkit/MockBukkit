@@ -272,7 +272,7 @@ public class ServerMock extends Server.Spigot implements Server
 			Thread.currentThread().interrupt();
 		}
 
-		PlayerLoginEvent playerLoginEvent = new PlayerLoginEvent(player, address.getHostName(), address.getAddress());
+		PlayerLoginEvent playerLoginEvent = new PlayerLoginEvent(player, address.getHostString(), address.getAddress());
 		Bukkit.getPluginManager().callEvent(playerLoginEvent);
 
 		Component joinMessage = MiniMessage.miniMessage()
@@ -737,6 +737,13 @@ public class ServerMock extends Server.Spigot implements Server
 	public @NotNull List<World> getWorlds()
 	{
 		return new ArrayList<>(worlds);
+	}
+
+	@Override
+	public boolean isTickingWorlds()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

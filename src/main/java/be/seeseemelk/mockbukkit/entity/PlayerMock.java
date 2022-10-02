@@ -57,6 +57,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
@@ -92,6 +93,8 @@ import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.util.Consumer;
+import org.bukkit.util.Vector;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -1211,6 +1214,11 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		// Pretend we sent the block change.
 	}
 
+	@Override
+	public void sendBlockChanges(@NotNull Collection<BlockState> blocks, boolean suppressLightUpdates)
+	{
+		// Pretend we sent the block change.
+	}
 
 	@Override
 	public void sendSignChange(@NotNull Location loc, @Nullable List<Component> lines, @NotNull DyeColor dyeColor, boolean hasGlowingText) throws IllegalArgumentException
@@ -2432,6 +2440,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public void sendBlockDamage(@NotNull Location loc, float progress, int destroyerIdentity)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public void sendMultiBlockChange(@NotNull Map<Location, BlockData> blockChanges)
 	{
 		Preconditions.checkNotNull(blockChanges, "BlockChanges cannot be null");
@@ -2524,20 +2539,17 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		@Deprecated
 		public void sendMessage(@NotNull BaseComponent @NotNull ... components)
 		{
-			for (BaseComponent component : components)
-			{
-				sendMessage(component);
-			}
+			sendMessage(ChatMessageType.CHAT, components);
 		}
 
 		@Override
 		@Deprecated
 		public void sendMessage(@NotNull ChatMessageType position, @NotNull BaseComponent @NotNull ... components)
 		{
-			for (BaseComponent component : components)
-			{
-				sendMessage(position, component);
-			}
+			Preconditions.checkNotNull(position, "Position must not be null");
+			Preconditions.checkNotNull(components, "Component must not be null");
+			Component comp = BungeeComponentSerializer.get().deserialize(components);
+			PlayerMock.this.sendMessage(comp);
 		}
 
 		@Override
@@ -2551,10 +2563,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		@Deprecated
 		public void sendMessage(@NotNull ChatMessageType position, @NotNull BaseComponent component)
 		{
-			Preconditions.checkNotNull(position, "Position must not be null");
-			Preconditions.checkNotNull(component, "Component must not be null");
-			Component comp = BungeeComponentSerializer.get().deserialize(new BaseComponent[]{ component });
-			PlayerMock.this.sendMessage(comp);
+			sendMessage(position, new BaseComponent[]{ component });
 		}
 
 	}

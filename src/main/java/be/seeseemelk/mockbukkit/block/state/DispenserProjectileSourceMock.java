@@ -4,8 +4,10 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Projectile;
 import org.bukkit.projectiles.BlockProjectileSource;
+import org.bukkit.util.Consumer;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * This is a {@link BlockProjectileSource} mock specifically for the {@link DispenserMock}.
@@ -31,6 +33,13 @@ class DispenserProjectileSourceMock implements BlockProjectileSource
 
 	@Override
 	public <T extends Projectile> @NotNull T launchProjectile(@NotNull Class<? extends T> projectile, Vector velocity)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public <T extends Projectile> @NotNull T launchProjectile(@NotNull Class<? extends T> projectile, @Nullable Vector velocity, @Nullable Consumer<T> function)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

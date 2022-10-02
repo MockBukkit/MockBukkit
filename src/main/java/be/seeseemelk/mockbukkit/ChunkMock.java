@@ -100,7 +100,7 @@ public class ChunkMock implements Chunk
 	{
 		// Cubic size of the chunk (w * w * h).
 		int size = (16 * 16) * Math.abs((world.getMaxHeight() - world.getMinHeight()));
-		ImmutableMap.Builder<Coordinate, BlockState> blockStates = ImmutableMap.builderWithExpectedSize(size);
+		ImmutableMap.Builder<Coordinate, BlockData> blockData = ImmutableMap.builderWithExpectedSize(size);
 		ImmutableMap.Builder<Coordinate, Biome> biomes = ImmutableMap.builderWithExpectedSize(size);
 		for (int x = 0; x < 15; x++)
 		{
@@ -109,7 +109,7 @@ public class ChunkMock implements Chunk
 				for (int z = 0; z < 15; z++)
 				{
 					Coordinate coord = new Coordinate(x, y, z);
-					blockStates.put(coord, getBlock(x, y, z).getState());
+					blockData.put(coord, getBlock(x, y, z).getBlockData());
 					if (includeBiome)
 					{
 						biomes.put(coord, world.getBiome(x << 4, y, z << 4));
@@ -117,7 +117,7 @@ public class ChunkMock implements Chunk
 				}
 			}
 		}
-		return new ChunkSnapshotMock(x, z, world.getMinHeight(), world.getMaxHeight(), world.getName(), world.getFullTime(), blockStates.build(), biomes.build());
+		return new ChunkSnapshotMock(x, z, world.getMinHeight(), world.getMaxHeight(), world.getName(), world.getFullTime(), blockData.build(), biomes.build());
 	}
 
 
