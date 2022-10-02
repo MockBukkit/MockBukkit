@@ -756,7 +756,7 @@ public class WorldMock implements World
 		}
 
 		server.registerEntity(entity);
-		callSpawnEvent(entity, null);
+		callSpawnEvent(entity, CreatureSpawnEvent.SpawnReason.CUSTOM);
 
 		return entity;
 	}
