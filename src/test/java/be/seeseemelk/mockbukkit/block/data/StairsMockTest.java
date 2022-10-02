@@ -22,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class StairsMockTest
 {
+
 	private static final Set<BlockFace> VALID_FACES = Set.of(
 			BlockFace.NORTH,
 			BlockFace.SOUTH,
