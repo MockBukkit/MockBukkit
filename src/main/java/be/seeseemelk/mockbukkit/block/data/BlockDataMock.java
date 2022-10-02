@@ -11,6 +11,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockSupport;
 import org.bukkit.block.data.BlockData;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -147,6 +148,13 @@ public class BlockDataMock implements BlockData
 	}
 
 	@Override
+	public boolean isPreferredTool(@NotNull ItemStack tool)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public boolean matches(@Nullable BlockData data)
 	{
 		if (data == null || data.getMaterial() != this.type)
@@ -196,6 +204,10 @@ public class BlockDataMock implements BlockData
 		if (MaterialTags.BEDS.isTagged(material))
 		{
 			return new BedMock(material);
+		}
+		else if (Tag.SLABS.isTagged(material))
+		{
+			return new SlabMock(material);
 		}
 		return switch (material)
 				{

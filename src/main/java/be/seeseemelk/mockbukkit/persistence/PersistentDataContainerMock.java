@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.persistence;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.NamespacedKey;
 import org.bukkit.persistence.PersistentDataAdapterContext;
 import org.bukkit.persistence.PersistentDataContainer;
@@ -7,6 +8,7 @@ import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -90,6 +92,20 @@ public class PersistentDataContainerMock implements PersistentDataContainer
 	public boolean has(@NotNull NamespacedKey key)
 	{
 		return map.containsKey(key);
+	}
+
+	@Override
+	public byte @NotNull [] serializeToBytes() throws IOException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void readFromBytes(byte @NotNull [] bytes, boolean clear) throws IOException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

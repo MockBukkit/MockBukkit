@@ -20,7 +20,7 @@ repositories {
 	}
 
 	maven {
-		url 'https://papermc.io/repo/repository/maven-public/'
+		url 'https://repo.papermc.io/repository/maven-public/'
 	}
 }
 
@@ -29,7 +29,7 @@ dependencies {
 	api "io.papermc.paper:paper-api:${gradle.ext.apiVersionFull}"
 
 	//Dependencies for Unit Tests
-	implementation 'org.junit.jupiter:junit-jupiter:5.9.0'
+	implementation 'org.junit.jupiter:junit-jupiter:5.9.1'
 	implementation 'org.hamcrest:hamcrest-library:2.2'
 
 	// General utilities for the project

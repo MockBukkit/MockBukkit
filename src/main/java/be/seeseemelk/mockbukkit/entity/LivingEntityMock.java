@@ -16,6 +16,7 @@ import org.bukkit.FluidCollisionMode;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.block.Block;
@@ -39,6 +40,7 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.util.Consumer;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
@@ -57,7 +59,6 @@ import java.util.UUID;
 public abstract class LivingEntityMock extends EntityMock implements LivingEntity
 {
 
-	private static final double MAX_HEALTH = 20.0;
 	protected double health;
 	private int maxAirTicks = 300;
 	private int remainingAirTicks = 300;
@@ -84,9 +85,10 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		super(server, uuid);
 
 		attributes = new EnumMap<>(Attribute.class);
-		attributes.put(Attribute.GENERIC_MAX_HEALTH, new AttributeInstanceMock(Attribute.GENERIC_MAX_HEALTH, AttributesMock.getDefaultValue(Attribute.GENERIC_MAX_HEALTH)));
-		this.setMaxHealth(MAX_HEALTH);
-		this.setHealth(MAX_HEALTH);
+		double maxHealth = AttributesMock.getDefaultValue(Attribute.GENERIC_MAX_HEALTH);
+		attributes.put(Attribute.GENERIC_MAX_HEALTH, new AttributeInstanceMock(Attribute.GENERIC_MAX_HEALTH, maxHealth));
+		resetMaxHealth();
+		setHealth(maxHealth);
 	}
 
 	@Override
@@ -164,7 +166,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public void resetMaxHealth()
 	{
-		setMaxHealth(MAX_HEALTH);
+		setMaxHealth(AttributesMock.getDefaultValue(Attribute.GENERIC_MAX_HEALTH));
 	}
 
 	@Override
@@ -728,6 +730,62 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		throw new UnimplementedOperationException();
 	}
 
+	@Override
+	public @Nullable Sound getHurtSound()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Sound getDeathSound()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Sound getFallDamageSound(int fallHeight)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Sound getFallDamageSoundSmall()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Sound getFallDamageSoundBig()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Sound getDrinkingSound(@NotNull ItemStack itemStack)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Sound getEatingSound(@NotNull ItemStack itemStack)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean canBreatheUnderwater()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 	@NotNull
 	@Override
 	public EntityCategory getCategory()
@@ -899,6 +957,13 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 
 	@Override
 	public void setHurtDirection(float hurtDirection)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public <T extends Projectile> @NotNull T launchProjectile(@NotNull Class<? extends T> projectile, @Nullable Vector velocity, @Nullable Consumer<T> function)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
