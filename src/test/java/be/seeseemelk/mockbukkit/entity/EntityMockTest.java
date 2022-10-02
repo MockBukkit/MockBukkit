@@ -27,7 +27,6 @@ import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
-import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
@@ -38,10 +37,7 @@ import org.spigotmc.event.entity.EntityDismountEvent;
 import org.spigotmc.event.entity.EntityMountEvent;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -785,6 +781,18 @@ class EntityMockTest
 		assertEquals(List.of(mocks[1]), mocks[0].getPassengers());
 		assertEquals(List.of(mocks[2]), mocks[1].getPassengers());
 		assertEquals(List.of(), mocks[2].getPassengers());
+	}
+
+	@Test
+	void getIndirectPassengers_ReturnsAll()
+	{
+		EntityMock mock1 = new SimpleEntityMock(server);
+		EntityMock mock2 = new SimpleEntityMock(server);
+		mock1.addPassenger(mock2);
+		EntityMock mock3 = new SimpleEntityMock(server);
+		mock2.addPassenger(mock3);
+
+		assertEquals(List.of(mock2, mock3), mock1.getIndirectPassengers());
 	}
 
 	@Test

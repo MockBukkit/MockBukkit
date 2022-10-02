@@ -687,6 +687,29 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		return Collections.unmodifiableList(this.passengers);
 	}
 
+	/**
+	 * Returns all passengers, and passengers of passengers.
+	 *
+	 * @return All indirect passengers.
+	 */
+	public @NotNull List<Entity> getIndirectPassengers()
+	{
+		List<Entity> entities = new ArrayList<>();
+		for (Entity passenger : this.passengers)
+		{
+			entities.add(passenger);
+			if (passenger instanceof EntityMock mock)
+			{
+				entities.addAll(mock.getIndirectPassengers());
+			}
+			else
+			{
+				entities.addAll(passenger.getPassengers());
+			}
+		}
+		return Collections.unmodifiableList(entities);
+	}
+
 	@Override
 	public boolean addPassenger(@NotNull Entity passenger)
 	{
