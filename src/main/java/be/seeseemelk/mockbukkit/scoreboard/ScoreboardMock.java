@@ -1,6 +1,6 @@
 package be.seeseemelk.mockbukkit.scoreboard;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.entity.EntityMock;
 import net.kyori.adventure.text.Component;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Entity;
@@ -15,7 +15,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.platform.commons.util.Preconditions;
 
-import java.util.Collections;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -98,13 +97,14 @@ public class ScoreboardMock implements Scoreboard
 	}
 
 	@Override
-	public ObjectiveMock getObjective(String name) throws IllegalArgumentException
+	public ObjectiveMock getObjective(@NotNull String name) throws IllegalArgumentException
 	{
+		Preconditions.notNull(name, "Name cannot be null");
 		return objectives.get(name);
 	}
 
 	@Override
-	public @NotNull Set<Objective> getObjectivesByCriteria(String criteria) throws IllegalArgumentException
+	public @NotNull Set<Objective> getObjectivesByCriteria(@NotNull String criteria) throws IllegalArgumentException
 	{
 		return objectives.values().stream().filter(objective -> objective.getCriteria().equals(criteria))
 				.collect(Collectors.toSet());
@@ -120,11 +120,11 @@ public class ScoreboardMock implements Scoreboard
 	@Override
 	public @NotNull Set<Objective> getObjectives()
 	{
-		return Collections.unmodifiableSet(new HashSet<>(objectives.values()));
+		return Set.copyOf(objectives.values());
 	}
 
 	@Override
-	public ObjectiveMock getObjective(DisplaySlot slot) throws IllegalArgumentException
+	public ObjectiveMock getObjective(@NotNull DisplaySlot slot) throws IllegalArgumentException
 	{
 		return objectivesByDisplaySlot.get(slot);
 	}
@@ -132,6 +132,7 @@ public class ScoreboardMock implements Scoreboard
 	@Override
 	public @NotNull Set<Score> getScores(@NotNull OfflinePlayer player) throws IllegalArgumentException
 	{
+		Preconditions.notNull(player, "OfflinePlayer cannot be null");
 		return getScores(player.getName());
 	}
 
@@ -151,6 +152,7 @@ public class ScoreboardMock implements Scoreboard
 	@Override
 	public void resetScores(@NotNull OfflinePlayer player) throws IllegalArgumentException
 	{
+		Preconditions.notNull(player, "OfflinePlayer cannot be null");
 		resetScores(player.getName());
 	}
 
@@ -167,6 +169,7 @@ public class ScoreboardMock implements Scoreboard
 	@Override
 	public Team getPlayerTeam(@NotNull OfflinePlayer player) throws IllegalArgumentException
 	{
+		Preconditions.notNull(player, "OfflinePlayer cannot be null");
 		return getEntryTeam(player.getName());
 	}
 
@@ -185,15 +188,16 @@ public class ScoreboardMock implements Scoreboard
 	}
 
 	@Override
-	public Team getTeam(String teamName) throws IllegalArgumentException
+	public Team getTeam(@NotNull String teamName) throws IllegalArgumentException
 	{
+		Preconditions.notNull(teamName, "Team name cannot be null");
 		return teams.get(teamName);
 	}
 
 	@Override
 	public @NotNull Set<Team> getTeams()
 	{
-		return Collections.unmodifiableSet(new HashSet<>(teams.values()));
+		return Set.copyOf(teams.values());
 	}
 
 	@Override
@@ -236,30 +240,31 @@ public class ScoreboardMock implements Scoreboard
 	}
 
 	@Override
-	public void clearSlot(DisplaySlot slot) throws IllegalArgumentException
+	public void clearSlot(@NotNull DisplaySlot slot) throws IllegalArgumentException
 	{
+		Preconditions.notNull(slot, "Slot cannot be null");
 		objectivesByDisplaySlot.remove(slot);
 	}
 
 	@Override
 	public @NotNull Set<Score> getScoresFor(@NotNull Entity entity) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.notNull(entity, "Entity cannot be null");
+		return getScores(((EntityMock) entity).getScoreboardEntry());
 	}
 
 	@Override
 	public void resetScoresFor(@NotNull Entity entity) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.notNull(entity, "Entity cannot be null");
+		resetScores(((EntityMock) entity).getScoreboardEntry());
 	}
 
 	@Override
 	public @Nullable Team getEntityTeam(@NotNull Entity entity) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.notNull(entity, "Entity cannot be null");
+		return getEntryTeam(((EntityMock) entity).getScoreboardEntry());
 	}
 
 	/**
