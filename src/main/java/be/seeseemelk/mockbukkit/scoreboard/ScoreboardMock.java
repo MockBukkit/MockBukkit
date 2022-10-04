@@ -13,6 +13,7 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.junit.platform.commons.util.Preconditions;
 
 import java.util.Collections;
 import java.util.EnumMap;
@@ -21,6 +22,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import static net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer.legacySection;
 
 public class ScoreboardMock implements Scoreboard
 {
@@ -37,31 +40,33 @@ public class ScoreboardMock implements Scoreboard
 	}
 
 	@Override
-	public @NotNull Objective registerNewObjective(@NotNull String name, @NotNull String criteria, @Nullable Component displayName) throws IllegalArgumentException
+	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull String criteria, @Nullable Component displayName) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return registerNewObjective(name, criteria, displayName, RenderType.INTEGER);
 	}
 
 	@Override
-	public @NotNull Objective registerNewObjective(@NotNull String name, @NotNull String criteria, @Nullable Component displayName, @NotNull RenderType renderType) throws IllegalArgumentException
+	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull String criteria, @Nullable Component displayName, @NotNull RenderType renderType) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return registerNewObjective(name, Criteria.create(criteria), displayName, renderType);
 	}
 
 	@Override
-	public @NotNull Objective registerNewObjective(@NotNull String name, @NotNull Criteria criteria, @Nullable Component displayName) throws IllegalArgumentException
+	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull Criteria criteria, @Nullable Component displayName) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return registerNewObjective(name, criteria, displayName, RenderType.INTEGER);
 	}
 
 	@Override
-	public @NotNull Objective registerNewObjective(@NotNull String name, @NotNull Criteria criteria, @Nullable Component displayName, @NotNull RenderType renderType) throws IllegalArgumentException
+	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull Criteria criteria, @Nullable Component displayName, @NotNull RenderType renderType) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (this.objectives.containsKey(name))
+		{
+			throw new IllegalArgumentException("An objective of name '" + name + "' already exists");
+		}
+		ObjectiveMock objective = new ObjectiveMock(this, name, displayName, criteria, renderType);
+		this.objectives.put(name, objective);
+		return objective;
 	}
 
 	@Override
@@ -77,27 +82,19 @@ public class ScoreboardMock implements Scoreboard
 	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull String criteria, @NotNull String displayName, @NotNull RenderType renderType)
 			throws IllegalArgumentException
 	{
-		if (objectives.containsKey(name))
-		{
-			throw new IllegalArgumentException("An objective of name '" + name + "' already exists");
-		}
-		ObjectiveMock objective = new ObjectiveMock(this, name, displayName, criteria, renderType);
-		objectives.put(name, objective);
-		return objective;
+		return registerNewObjective(name, criteria, legacySection().deserialize(displayName), renderType);
 	}
 
 	@Override
-	public @NotNull Objective registerNewObjective(@NotNull String name, @NotNull Criteria criteria, @NotNull String displayName) throws IllegalArgumentException
+	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull Criteria criteria, @NotNull String displayName) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return registerNewObjective(name, criteria, displayName, RenderType.INTEGER);
 	}
 
 	@Override
-	public @NotNull Objective registerNewObjective(@NotNull String name, @NotNull Criteria criteria, @NotNull String displayName, @NotNull RenderType renderType) throws IllegalArgumentException
+	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull Criteria criteria, @NotNull String displayName, @NotNull RenderType renderType) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return registerNewObjective(name, criteria, legacySection().deserialize(displayName), renderType);
 	}
 
 	@Override
@@ -116,8 +113,8 @@ public class ScoreboardMock implements Scoreboard
 	@Override
 	public @NotNull Set<Objective> getObjectivesByCriteria(@NotNull Criteria criteria) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return objectives.values().stream().filter(objective -> objective.getTrackedCriteria().equals(criteria))
+				.collect(Collectors.toSet());
 	}
 
 	@Override

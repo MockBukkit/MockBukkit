@@ -40,6 +40,7 @@ import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 import be.seeseemelk.mockbukkit.potion.MockPotionEffectType;
 import be.seeseemelk.mockbukkit.profile.PlayerProfileMock;
 import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
+import be.seeseemelk.mockbukkit.scoreboard.CriteriaMock;
 import be.seeseemelk.mockbukkit.scoreboard.ScoreboardManagerMock;
 import be.seeseemelk.mockbukkit.services.ServicesManagerMock;
 import be.seeseemelk.mockbukkit.tags.TagRegistry;
@@ -163,6 +164,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private final PlayerMockFactory playerFactory = new PlayerMockFactory(this);
 	private final PluginManagerMock pluginManager = new PluginManagerMock(this);
 	private final ScoreboardManagerMock scoreboardManager = new ScoreboardManagerMock();
+	private final Map<String, Criteria> criteria = new HashMap<>();
 	private final BukkitSchedulerMock scheduler = new BukkitSchedulerMock();
 	private final ServicesManagerMock servicesManager = new ServicesManagerMock();
 	private final MockPlayerList playerList = new MockPlayerList();
@@ -1501,8 +1503,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull Criteria getScoreboardCriteria(@NotNull String name)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.criteria.computeIfAbsent(name, CriteriaMock::new);
 	}
 
 	/**
