@@ -1155,7 +1155,7 @@ public class WorldMock implements World
 			{
 				vehicle.remove();
 			}
-			for (Entity passenger : entity.getIndirectPassengers())
+			for (Entity passenger : entity.getPassengers(true))
 			{
 				passenger.remove();
 			}

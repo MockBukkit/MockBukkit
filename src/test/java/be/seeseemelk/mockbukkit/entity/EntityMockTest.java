@@ -784,7 +784,7 @@ class EntityMockTest
 	}
 
 	@Test
-	void getIndirectPassengers_ReturnsAll()
+	void getPassengers_Transitive_ReturnsAll()
 	{
 		EntityMock mock1 = new SimpleEntityMock(server);
 		EntityMock mock2 = new SimpleEntityMock(server);
@@ -792,7 +792,19 @@ class EntityMockTest
 		EntityMock mock3 = new SimpleEntityMock(server);
 		mock2.addPassenger(mock3);
 
-		assertEquals(List.of(mock2, mock3), mock1.getIndirectPassengers());
+		assertEquals(List.of(mock2, mock3), mock1.getPassengers(true));
+	}
+
+	@Test
+	void getPassengers_NotTransitive_ReturnsFirst()
+	{
+		EntityMock mock1 = new SimpleEntityMock(server);
+		EntityMock mock2 = new SimpleEntityMock(server);
+		mock1.addPassenger(mock2);
+		EntityMock mock3 = new SimpleEntityMock(server);
+		mock2.addPassenger(mock3);
+
+		assertEquals(List.of(mock2), mock1.getPassengers(false));
 	}
 
 	@Test

@@ -688,26 +688,31 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	/**
-	 * Returns all passengers, and passengers of passengers.
+	 * Gets a list of passengers on this vehicle.
 	 *
-	 * @return All indirect passengers.
+	 * @param transitive Whether transitive passengers should be included (passengers of passengers).
+	 * @return An immutable list of passengers.
 	 */
-	public @NotNull List<Entity> getIndirectPassengers()
+	public @NotNull List<Entity> getPassengers(boolean transitive)
 	{
+		if (!transitive)
+		{
+			return getPassengers();
+		}
 		List<Entity> entities = new ArrayList<>();
 		for (Entity passenger : this.passengers)
 		{
 			entities.add(passenger);
 			if (passenger instanceof EntityMock mock)
 			{
-				entities.addAll(mock.getIndirectPassengers());
+				entities.addAll(mock.getPassengers(true));
 			}
 			else
 			{
 				entities.addAll(passenger.getPassengers());
 			}
 		}
-		return Collections.unmodifiableList(entities);
+		return List.copyOf(entities);
 	}
 
 	@Override
