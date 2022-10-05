@@ -84,6 +84,7 @@ signing {
 }
 
 jacocoTestReport {
+    dependsOn test
     reports {
         xml.enabled true
     }
@@ -147,6 +148,7 @@ publishToMavenLocal {
 
 test {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
 }
 
 eclipse.classpath.downloadJavadoc = true
