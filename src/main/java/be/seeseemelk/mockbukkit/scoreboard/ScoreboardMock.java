@@ -26,6 +26,9 @@ import static net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializ
 
 public class ScoreboardMock implements Scoreboard
 {
+	private static final String OFFLINE_PLAYER_CANNOT_BE_NULL = "OfflinePlayer cannot be null";
+	private static final String ENTITY_CANNOT_BE_NULL = "Entity cannot be null";
+
 
 	private final @NotNull Map<String, ObjectiveMock> objectives = new HashMap<>();
 	private final @NotNull Map<DisplaySlot, ObjectiveMock> objectivesByDisplaySlot = new EnumMap<>(DisplaySlot.class);
@@ -132,7 +135,7 @@ public class ScoreboardMock implements Scoreboard
 	@Override
 	public @NotNull Set<Score> getScores(@NotNull OfflinePlayer player) throws IllegalArgumentException
 	{
-		Preconditions.notNull(player, "OfflinePlayer cannot be null");
+		Preconditions.notNull(player, OFFLINE_PLAYER_CANNOT_BE_NULL);
 		return getScores(player.getName());
 	}
 
@@ -152,7 +155,7 @@ public class ScoreboardMock implements Scoreboard
 	@Override
 	public void resetScores(@NotNull OfflinePlayer player) throws IllegalArgumentException
 	{
-		Preconditions.notNull(player, "OfflinePlayer cannot be null");
+		Preconditions.notNull(player, OFFLINE_PLAYER_CANNOT_BE_NULL);
 		resetScores(player.getName());
 	}
 
@@ -169,7 +172,7 @@ public class ScoreboardMock implements Scoreboard
 	@Override
 	public Team getPlayerTeam(@NotNull OfflinePlayer player) throws IllegalArgumentException
 	{
-		Preconditions.notNull(player, "OfflinePlayer cannot be null");
+		Preconditions.notNull(player, OFFLINE_PLAYER_CANNOT_BE_NULL);
 		return getEntryTeam(player.getName());
 	}
 
@@ -249,21 +252,21 @@ public class ScoreboardMock implements Scoreboard
 	@Override
 	public @NotNull Set<Score> getScoresFor(@NotNull Entity entity) throws IllegalArgumentException
 	{
-		Preconditions.notNull(entity, "Entity cannot be null");
+		Preconditions.notNull(entity, ENTITY_CANNOT_BE_NULL);
 		return getScores(((EntityMock) entity).getScoreboardEntry());
 	}
 
 	@Override
 	public void resetScoresFor(@NotNull Entity entity) throws IllegalArgumentException
 	{
-		Preconditions.notNull(entity, "Entity cannot be null");
+		Preconditions.notNull(entity, ENTITY_CANNOT_BE_NULL);
 		resetScores(((EntityMock) entity).getScoreboardEntry());
 	}
 
 	@Override
 	public @Nullable Team getEntityTeam(@NotNull Entity entity) throws IllegalArgumentException
 	{
-		Preconditions.notNull(entity, "Entity cannot be null");
+		Preconditions.notNull(entity, ENTITY_CANNOT_BE_NULL);
 		return getEntryTeam(((EntityMock) entity).getScoreboardEntry());
 	}
 
