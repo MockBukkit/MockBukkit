@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.scoreboard;
 
+import com.google.common.base.Preconditions;
 import org.bukkit.scoreboard.Criteria;
 import org.bukkit.scoreboard.RenderType;
 import org.jetbrains.annotations.NotNull;
@@ -13,6 +14,7 @@ public class CriteriaMock implements Criteria
 
 	public CriteriaMock(@NotNull String name)
 	{
+		Preconditions.checkNotNull(name, "Name cannot be null");
 		this.name = name;
 		this.readOnly = switch (name) {
 			case "health", "food", "air", "armor", "xp", "level" -> true;
