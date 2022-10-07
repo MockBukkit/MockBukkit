@@ -10,7 +10,7 @@ public class CriteriaMock implements Criteria
 	private final boolean readOnly;
 	private final RenderType defaultRenderType;
 
-	public CriteriaMock(String name)
+	public CriteriaMock(@NotNull String name)
 	{
 		this.name = name;
 		this.readOnly = switch (name) {

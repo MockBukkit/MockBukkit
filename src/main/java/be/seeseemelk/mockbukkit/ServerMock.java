@@ -1503,6 +1503,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull Criteria getScoreboardCriteria(@NotNull String name)
 	{
+		Preconditions.checkNotNull(name, "Scoreboard criteria name cannot be null");
 		return this.criteria.computeIfAbsent(name, CriteriaMock::new);
 	}
 

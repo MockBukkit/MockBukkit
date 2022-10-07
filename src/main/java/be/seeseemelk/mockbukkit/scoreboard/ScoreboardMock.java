@@ -62,6 +62,11 @@ public class ScoreboardMock implements Scoreboard
 	@Override
 	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull Criteria criteria, @Nullable Component displayName, @NotNull RenderType renderType) throws IllegalArgumentException
 	{
+		Preconditions.notNull(name, "Objective name cannot be null");
+		Preconditions.notNull(criteria, "Criteria cannot be null");
+		Preconditions.notNull(displayName, "Display name cannot be null");
+		Preconditions.notNull(renderType, "RenderType cannot be null");
+		Preconditions.condition(name.length() <= Short.MAX_VALUE, "The name '" + name + "' is longer than the limit of 32767 characters");
 		if (this.objectives.containsKey(name))
 		{
 			throw new IllegalArgumentException("An objective of name '" + name + "' already exists");
@@ -109,6 +114,7 @@ public class ScoreboardMock implements Scoreboard
 	@Override
 	public @NotNull Set<Objective> getObjectivesByCriteria(@NotNull String criteria) throws IllegalArgumentException
 	{
+		Preconditions.notNull(criteria, "Criteria cannot be null");
 		return objectives.values().stream().filter(objective -> objective.getCriteria().equals(criteria))
 				.collect(Collectors.toSet());
 	}
@@ -116,6 +122,7 @@ public class ScoreboardMock implements Scoreboard
 	@Override
 	public @NotNull Set<Objective> getObjectivesByCriteria(@NotNull Criteria criteria) throws IllegalArgumentException
 	{
+		Preconditions.notNull(criteria, "Criteria cannot be null");
 		return objectives.values().stream().filter(objective -> objective.getTrackedCriteria().equals(criteria))
 				.collect(Collectors.toSet());
 	}
