@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.scoreboard;
 
 import be.seeseemelk.mockbukkit.entity.EntityMock;
+import com.google.common.base.Preconditions;
 import net.kyori.adventure.text.Component;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Entity;
@@ -13,7 +14,6 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.junit.platform.commons.util.Preconditions;
 
 import java.util.EnumMap;
 import java.util.HashMap;
@@ -62,11 +62,11 @@ public class ScoreboardMock implements Scoreboard
 	@Override
 	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull Criteria criteria, @Nullable Component displayName, @NotNull RenderType renderType) throws IllegalArgumentException
 	{
-		Preconditions.notNull(name, "Objective name cannot be null");
-		Preconditions.notNull(criteria, "Criteria cannot be null");
-		Preconditions.notNull(displayName, "Display name cannot be null");
-		Preconditions.notNull(renderType, "RenderType cannot be null");
-		Preconditions.condition(name.length() <= Short.MAX_VALUE, "The name '" + name + "' is longer than the limit of 32767 characters");
+		Preconditions.checkNotNull(name, "Objective name cannot be null");
+		Preconditions.checkNotNull(criteria, "Criteria cannot be null");
+		Preconditions.checkNotNull(displayName, "Display name cannot be null");
+		Preconditions.checkNotNull(renderType, "RenderType cannot be null");
+		Preconditions.checkArgument(name.length() <= Short.MAX_VALUE, "The name '" + name + "' is longer than the limit of 32767 characters");
 		Preconditions.checkArgument(!this.objectives.containsKey(name), "An objective of name '" + name + "' already exists");
 		ObjectiveMock objective = new ObjectiveMock(this, name, displayName, criteria, renderType);
 		this.objectives.put(name, objective);
@@ -104,14 +104,14 @@ public class ScoreboardMock implements Scoreboard
 	@Override
 	public ObjectiveMock getObjective(@NotNull String name) throws IllegalArgumentException
 	{
-		Preconditions.notNull(name, "Name cannot be null");
+		Preconditions.checkNotNull(name, "Name cannot be null");
 		return objectives.get(name);
 	}
 
 	@Override
 	public @NotNull Set<Objective> getObjectivesByCriteria(@NotNull String criteria) throws IllegalArgumentException
 	{
-		Preconditions.notNull(criteria, "Criteria cannot be null");
+		Preconditions.checkNotNull(criteria, "Criteria cannot be null");
 		return objectives.values().stream().filter(objective -> objective.getCriteria().equals(criteria))
 				.collect(Collectors.toSet());
 	}
@@ -119,7 +119,7 @@ public class ScoreboardMock implements Scoreboard
 	@Override
 	public @NotNull Set<Objective> getObjectivesByCriteria(@NotNull Criteria criteria) throws IllegalArgumentException
 	{
-		Preconditions.notNull(criteria, "Criteria cannot be null");
+		Preconditions.checkNotNull(criteria, "Criteria cannot be null");
 		return objectives.values().stream()
 				.filter(objective -> objective.getTrackedCriteria().equals(criteria))
 				.collect(Collectors.toSet());
@@ -140,7 +140,7 @@ public class ScoreboardMock implements Scoreboard
 	@Override
 	public @NotNull Set<Score> getScores(@NotNull OfflinePlayer player) throws IllegalArgumentException
 	{
-		Preconditions.notNull(player, OFFLINE_PLAYER_CANNOT_BE_NULL);
+		Preconditions.checkNotNull(player, OFFLINE_PLAYER_CANNOT_BE_NULL);
 		return getScores(player.getName());
 	}
 
@@ -160,7 +160,7 @@ public class ScoreboardMock implements Scoreboard
 	@Override
 	public void resetScores(@NotNull OfflinePlayer player) throws IllegalArgumentException
 	{
-		Preconditions.notNull(player, OFFLINE_PLAYER_CANNOT_BE_NULL);
+		Preconditions.checkNotNull(player, OFFLINE_PLAYER_CANNOT_BE_NULL);
 		resetScores(player.getName());
 	}
 
@@ -177,7 +177,7 @@ public class ScoreboardMock implements Scoreboard
 	@Override
 	public Team getPlayerTeam(@NotNull OfflinePlayer player) throws IllegalArgumentException
 	{
-		Preconditions.notNull(player, OFFLINE_PLAYER_CANNOT_BE_NULL);
+		Preconditions.checkNotNull(player, OFFLINE_PLAYER_CANNOT_BE_NULL);
 		return getEntryTeam(player.getName());
 	}
 
@@ -198,7 +198,7 @@ public class ScoreboardMock implements Scoreboard
 	@Override
 	public Team getTeam(@NotNull String teamName) throws IllegalArgumentException
 	{
-		Preconditions.notNull(teamName, "Team name cannot be null");
+		Preconditions.checkNotNull(teamName, "Team name cannot be null");
 		return teams.get(teamName);
 	}
 
@@ -250,28 +250,28 @@ public class ScoreboardMock implements Scoreboard
 	@Override
 	public void clearSlot(@NotNull DisplaySlot slot) throws IllegalArgumentException
 	{
-		Preconditions.notNull(slot, "Slot cannot be null");
+		Preconditions.checkNotNull(slot, "Slot cannot be null");
 		objectivesByDisplaySlot.remove(slot);
 	}
 
 	@Override
 	public @NotNull Set<Score> getScoresFor(@NotNull Entity entity) throws IllegalArgumentException
 	{
-		Preconditions.notNull(entity, ENTITY_CANNOT_BE_NULL);
+		Preconditions.checkNotNull(entity, ENTITY_CANNOT_BE_NULL);
 		return getScores(((EntityMock) entity).getScoreboardEntry());
 	}
 
 	@Override
 	public void resetScoresFor(@NotNull Entity entity) throws IllegalArgumentException
 	{
-		Preconditions.notNull(entity, ENTITY_CANNOT_BE_NULL);
+		Preconditions.checkNotNull(entity, ENTITY_CANNOT_BE_NULL);
 		resetScores(((EntityMock) entity).getScoreboardEntry());
 	}
 
 	@Override
 	public @Nullable Team getEntityTeam(@NotNull Entity entity) throws IllegalArgumentException
 	{
-		Preconditions.notNull(entity, ENTITY_CANNOT_BE_NULL);
+		Preconditions.checkNotNull(entity, ENTITY_CANNOT_BE_NULL);
 		return getEntryTeam(((EntityMock) entity).getScoreboardEntry());
 	}
 
