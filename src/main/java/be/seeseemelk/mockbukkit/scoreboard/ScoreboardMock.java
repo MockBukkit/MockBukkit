@@ -26,9 +26,9 @@ import static net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializ
 
 public class ScoreboardMock implements Scoreboard
 {
+
 	private static final String OFFLINE_PLAYER_CANNOT_BE_NULL = "OfflinePlayer cannot be null";
 	private static final String ENTITY_CANNOT_BE_NULL = "Entity cannot be null";
-
 
 	private final @NotNull Map<String, ObjectiveMock> objectives = new HashMap<>();
 	private final @NotNull Map<DisplaySlot, ObjectiveMock> objectivesByDisplaySlot = new EnumMap<>(DisplaySlot.class);
@@ -123,7 +123,8 @@ public class ScoreboardMock implements Scoreboard
 	public @NotNull Set<Objective> getObjectivesByCriteria(@NotNull Criteria criteria) throws IllegalArgumentException
 	{
 		Preconditions.notNull(criteria, "Criteria cannot be null");
-		return objectives.values().stream().filter(objective -> objective.getTrackedCriteria().equals(criteria))
+		return objectives.values().stream()
+				.filter(objective -> objective.getTrackedCriteria().equals(criteria))
 				.collect(Collectors.toSet());
 	}
 

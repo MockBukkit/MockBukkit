@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class CriteriaMock implements Criteria
 {
+
 	private final String name;
 	private final boolean readOnly;
 	private final RenderType defaultRenderType;
