@@ -16,10 +16,11 @@ public class CriteriaMock implements Criteria
 	{
 		Preconditions.checkNotNull(name, "Name cannot be null");
 		this.name = name;
-		this.readOnly = switch (name) {
-			case "health", "food", "air", "armor", "xp", "level" -> true;
-			default -> false;
-		};
+		this.readOnly = switch (name)
+				{
+					case "health", "food", "air", "armor", "xp", "level" -> true;
+					default -> false;
+				};
 		this.defaultRenderType = "health".equals(name) ? RenderType.HEARTS : RenderType.INTEGER;
 	}
 

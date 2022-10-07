@@ -181,10 +181,12 @@ class ScoreboardMockTest
 			score2.setScore(i);
 		}
 		this.scoreboard.resetScoresFor(entity);
-		for (Score score : this.scoreboard.getScoresFor(entity)) {
+		for (Score score : this.scoreboard.getScoresFor(entity))
+		{
 			assertEquals(0, score.getScore());
 		}
-		for (Score score : this.scoreboard.getScoresFor(entity2)) {
+		for (Score score : this.scoreboard.getScoresFor(entity2))
+		{
 			assertNotEquals(0, score.getScore());
 		}
 	}
