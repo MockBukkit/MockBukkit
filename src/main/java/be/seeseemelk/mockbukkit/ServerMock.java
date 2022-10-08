@@ -232,6 +232,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 */
 	public void registerEntity(@NotNull EntityMock entity)
 	{
+		Preconditions.checkNotNull(entity, "Entity cannot be null");
 		AsyncCatcher.catchOp("entity add");
 		entities.add(entity);
 	}
@@ -243,6 +244,8 @@ public class ServerMock extends Server.Spigot implements Server
 	 */
 	public void unregisterEntity(@NotNull EntityMock entity)
 	{
+		Preconditions.checkNotNull(entity, "Entity cannot be null");
+		Preconditions.checkArgument(!entity.isValid(), "Entity is not marked for removal");
 		AsyncCatcher.catchOp("entity remove");
 		entities.remove(entity);
 	}
