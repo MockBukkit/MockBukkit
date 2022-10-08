@@ -237,6 +237,17 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	/**
+	 * Unregisters an entity from the server. Should only be used internally.
+	 *
+	 * @param entity The entity to unregister
+	 */
+	public void unregisterEntity(@NotNull EntityMock entity)
+	{
+		AsyncCatcher.catchOp("entity remove");
+		entities.remove(entity);
+	}
+
+	/**
 	 * Returns a set of entities that exist on the server instance.
 	 *
 	 * @return A set of entities that exist on this server instance.
