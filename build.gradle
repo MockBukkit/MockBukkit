@@ -54,6 +54,10 @@ java {
     withJavadocJar()
 }
 
+tasks.withType(JavaCompile) {
+    options.warnings = false
+}
+
 javadoc {
     options {
         links "https://jd.papermc.io/paper/${gradle.ext.apiVersion}/"
