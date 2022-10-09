@@ -11,7 +11,6 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
@@ -91,18 +90,6 @@ class AmethystClusterMockTest
 	void blockDataMock_Mock_CorrectType()
 	{
 		assertInstanceOf(AmethystClusterMock.class, BlockDataMock.mock(Material.AMETHYST_CLUSTER));
-	}
-
-	@Test
-	void blockDataMock_AttemptMockByPaperMaterialTags_ReturnsNull()
-	{
-		assertNull(BlockDataMock.attemptMockByPaperMaterialTags(Material.AMETHYST_CLUSTER));
-	}
-
-	@Test
-	void blockDataMock_AttemptMockByTag_Null()
-	{
-		assertNull(BlockDataMock.attemptMockByTag(Material.AMETHYST_CLUSTER));
 	}
 
 }

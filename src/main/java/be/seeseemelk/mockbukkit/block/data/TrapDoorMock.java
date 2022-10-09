@@ -9,6 +9,12 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 
+import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.FACING;
+import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.HALF;
+import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.OPEN;
+import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.POWERED;
+import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.WATERLOGGED;
+
 public class TrapDoorMock extends BlockDataMock implements TrapDoor
 {
 

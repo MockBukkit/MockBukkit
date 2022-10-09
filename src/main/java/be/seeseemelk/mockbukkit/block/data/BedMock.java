@@ -8,6 +8,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 
+import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.FACING;
+import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.OCCUPIED;
+import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.PART;
+
 public class BedMock extends BlockDataMock implements Bed
 {
 

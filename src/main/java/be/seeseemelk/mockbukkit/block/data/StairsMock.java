@@ -9,6 +9,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 
+import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.FACING;
+import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.HALF;
+import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.SHAPE;
+import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.WATERLOGGED;
+
 public class StairsMock extends BlockDataMock implements Stairs
 {
 

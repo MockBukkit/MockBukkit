@@ -10,7 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -77,24 +76,6 @@ class SlabMockTest
 		for (Material material : Tag.SLABS.getValues())
 		{
 			assertInstanceOf(SlabMock.class, BlockDataMock.mock(material));
-		}
-	}
-
-	@Test
-	void blockDataMock_AttemptMockByPaperMaterialTags_ReturnsNull()
-	{
-		for (Material material : Tag.SLABS.getValues())
-		{
-			assertNull(BlockDataMock.attemptMockByPaperMaterialTags(material));
-		}
-	}
-
-	@Test
-	void blockDataMock_AttemptMockByTag_CorrectType()
-	{
-		for (Material material : Tag.SLABS.getValues())
-		{
-			assertInstanceOf(SlabMock.class, BlockDataMock.attemptMockByTag(material));
 		}
 	}
 

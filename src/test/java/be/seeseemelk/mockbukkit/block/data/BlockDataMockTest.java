@@ -73,16 +73,4 @@ class BlockDataMockTest
 		assertThrowsExactly(NullPointerException.class, () -> BlockDataMock.mock(null));
 	}
 
-	@Test
-	void attemptMockByPaperMaterialTags_NullInput_ThrowsException()
-	{
-		assertThrowsExactly(NullPointerException.class, () -> BlockDataMock.attemptMockByPaperMaterialTags(null));
-	}
-
-	@Test
-	void attemptMockByTag_NullInput_ThrowsException()
-	{
-		assertThrowsExactly(NullPointerException.class, () -> BlockDataMock.attemptMockByTag(null));
-	}
-
 }

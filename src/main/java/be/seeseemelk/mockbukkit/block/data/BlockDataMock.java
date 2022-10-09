@@ -22,16 +22,7 @@ import java.util.stream.Collectors;
 
 public class BlockDataMock implements BlockData
 {
-
-	protected static final String FACING = "facing";
-	protected static final String HALF = "half";
-	protected static final String OCCUPIED = "occupied";
-	protected static final String OPEN = "open";
-	protected static final String PART = "part";
-	protected static final String POWERED = "powered";
-	protected static final String SHAPE = "shape";
-	protected static final String TYPE = "type";
-	protected static final String WATERLOGGED = "waterlogged";
+	private static final String NULL_MATERIAL_EXCEPTION_MESSAGE = "Material cannot be null";
 
 	private final @NotNull Material type;
 	private final @NotNull Map<String, Object> data;
@@ -209,7 +200,7 @@ public class BlockDataMock implements BlockData
 
 	public static @NotNull BlockDataMock mock(@NotNull Material material)
 	{
-		Preconditions.checkNotNull(material, "Material cannot be null");
+		Preconditions.checkNotNull(material, NULL_MATERIAL_EXCEPTION_MESSAGE);
 		// Special Cases
 		BlockDataMock mock = attemptMockByPaperMaterialTags(material);
 		if (mock != null)
@@ -237,9 +228,9 @@ public class BlockDataMock implements BlockData
 	 * @param material Material which we will attempt to mock
 	 * @return BlockDataMock if matched, null otherwise
 	 */
-	static BlockDataMock attemptMockByPaperMaterialTags(@NotNull Material material)
+	private static BlockDataMock attemptMockByPaperMaterialTags(@NotNull Material material)
 	{
-		Preconditions.checkNotNull(material, "Material cannot be null");
+		Preconditions.checkNotNull(material, NULL_MATERIAL_EXCEPTION_MESSAGE);
 		if (MaterialTags.BEDS.isTagged(material))
 		{
 			return new BedMock(material);
@@ -254,9 +245,9 @@ public class BlockDataMock implements BlockData
 	 * @param material Material which we will attempt to mock
 	 * @return BlockDataMock if matched, null otherwise
 	 */
-	static BlockDataMock attemptMockByTag(@NotNull Material material)
+	private static BlockDataMock attemptMockByTag(@NotNull Material material)
 	{
-		Preconditions.checkNotNull(material, "Material cannot be null");
+		Preconditions.checkNotNull(material, NULL_MATERIAL_EXCEPTION_MESSAGE);
 		if (Tag.SLABS.isTagged(material))
 		{
 			return new SlabMock(material);
