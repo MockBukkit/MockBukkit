@@ -900,4 +900,17 @@ class EntityMockTest
 		assertNull(server.getEntity(zombie.getUniqueId()));
 	}
 
+	@Test
+	void testIsDeadDefault()
+	{
+		assertFalse(entity.isDead());
+	}
+
+	@Test
+	void testIsDead()
+	{
+		entity.remove();
+		assertTrue(entity.isDead());
+	}
+
 }
