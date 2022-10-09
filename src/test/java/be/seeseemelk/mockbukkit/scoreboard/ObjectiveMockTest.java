@@ -4,6 +4,7 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import net.kyori.adventure.text.Component;
+import org.bukkit.scoreboard.Criteria;
 import org.bukkit.scoreboard.Score;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -43,6 +44,7 @@ class ObjectiveMockTest
 		assertEquals("Objective", objective.getName());
 		assertEquals("Objective", objective.getDisplayName());
 		assertEquals("dummy", objective.getCriteria());
+		assertEquals(Criteria.DUMMY, objective.getTrackedCriteria());
 		assertNull(objective.getDisplaySlot());
 	}
 

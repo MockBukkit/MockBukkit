@@ -247,10 +247,13 @@ class TeamMockTest
 	}
 
 	@Test
-	void getOption()
+	void setOption()
 	{
 		Team.OptionStatus status = team.getOption(Team.Option.NAME_TAG_VISIBILITY);
 		assertEquals(Team.OptionStatus.ALWAYS, status);
+		team.setOption(Team.Option.NAME_TAG_VISIBILITY, Team.OptionStatus.FOR_OWN_TEAM);
+		status = team.getOption(Team.Option.NAME_TAG_VISIBILITY);
+		assertEquals(Team.OptionStatus.FOR_OWN_TEAM, status);
 	}
 
 	@Test
