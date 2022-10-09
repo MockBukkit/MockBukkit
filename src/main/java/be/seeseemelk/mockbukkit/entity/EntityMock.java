@@ -652,7 +652,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public boolean isDead()
 	{
-		return !this.removed;
+		return this.removed;
 	}
 
 	@Override
