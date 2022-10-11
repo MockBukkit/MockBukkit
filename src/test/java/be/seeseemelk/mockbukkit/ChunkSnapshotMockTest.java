@@ -89,13 +89,14 @@ class ChunkSnapshotMockTest
 	@Test
 	void containsAllBlocks()
 	{
+		ChunkSnapshot snapshot = chunk.getChunkSnapshot();
 		for (int x = 0; x < 16; x++)
 		{
 			for (int y = world.getMinHeight(); y < world.getMaxHeight(); y++)
 			{
 				for (int z = 0; z < 16; z++)
 				{
-					assertNotNull(chunk.getChunkSnapshot().getBlockData(x, y, z));
+					assertNotNull(snapshot.getBlockData(x, y, z));
 				}
 			}
 		}
