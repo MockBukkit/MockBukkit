@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit;
 import be.seeseemelk.mockbukkit.block.data.AmethystClusterMock;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
+import org.bukkit.ChunkSnapshot;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
@@ -13,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -124,6 +126,23 @@ class ChunkSnapshotMockTest
 		world.setBiome(0, 0, 0, Biome.BADLANDS);
 		assertEquals(Biome.BADLANDS, chunk.getChunkSnapshot(false, true, false).getBiome(0, 0));
 		assertEquals(Biome.BADLANDS, chunk.getChunkSnapshot(false, true, false).getBiome(0, 0, 0));
+	}
+
+	@Test
+	void getBiome_NoBiomes_ThrowsException()
+	{
+		ChunkSnapshot snapshot = chunk.getChunkSnapshot(false, false, false);
+
+		assertThrows(IllegalStateException.class, () -> snapshot.getBiome(0, 0, 0));
+	}
+
+	@Test
+	void getBiome_EitherBiome_ReturnsBiomes()
+	{
+		world.setBiome(0, 0, 0, Biome.BADLANDS);
+
+		assertEquals(Biome.BADLANDS, chunk.getChunkSnapshot(false, true, false).getBiome(0, 0, 0));
+		assertEquals(Biome.BADLANDS, chunk.getChunkSnapshot(false, false, true).getBiome(0, 0, 0));
 	}
 
 }
