@@ -110,14 +110,14 @@ public class ChunkMock implements Chunk
 				{
 					Coordinate coord = new Coordinate(x, y, z);
 					blockData.put(coord, getBlock(x, y, z).getBlockData());
-					if (includeBiome)
+					if (includeBiome || includeBiomeTempRain)
 					{
 						biomes.put(coord, world.getBiome(x << 4, y, z << 4));
 					}
 				}
 			}
 		}
-		return new ChunkSnapshotMock(x, z, world.getMinHeight(), world.getMaxHeight(), world.getName(), world.getFullTime(), blockData.build(), biomes.build());
+		return new ChunkSnapshotMock(x, z, world.getMinHeight(), world.getMaxHeight(), world.getName(), world.getFullTime(), blockData.build(), (includeBiome || includeBiomeTempRain) ? biomes.build() : null);
 	}
 
 
