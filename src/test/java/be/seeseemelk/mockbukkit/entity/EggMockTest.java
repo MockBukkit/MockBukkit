@@ -3,7 +3,6 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import org.bukkit.Material;
-import org.bukkit.Server;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.AfterEach;
