@@ -1360,7 +1360,7 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.GRASS_BLOCK, -64, 319, 3);
 		ChunkSnapshot snapshot = world.getEmptyChunkSnapshot(0, 0, false, false);
 
-		assertEquals("world", snapshot.getWorldName());
+		assertEquals("World", snapshot.getWorldName());
 	}
 
 	@Test
