@@ -292,7 +292,7 @@ class WorldBorderMockTest
 	@Test
 	void testGetWorld()
 	{
-		assertEquals(world,worldBorderMock.getWorld());
+		assertEquals(world, worldBorderMock.getWorld());
 	}
 
 }

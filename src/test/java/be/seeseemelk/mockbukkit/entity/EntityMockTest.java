@@ -915,7 +915,6 @@ class EntityMockTest
 		assertTrue(entity.isDead());
 	}
 
-
 	@Test
 	void testGetLocationWithNullLocation()
 	{

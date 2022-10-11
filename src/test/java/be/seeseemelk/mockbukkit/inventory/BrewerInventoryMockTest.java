@@ -95,7 +95,8 @@ class BrewerInventoryMockTest
 	}
 
 	@Test
-	void testSetFuel_SetsSlot() {
+	void testSetFuel_SetsSlot()
+	{
 		ItemStack fuel = new ItemStack(Material.BLAZE_POWDER);
 
 		inventory.setFuel(fuel);
@@ -104,7 +105,8 @@ class BrewerInventoryMockTest
 	}
 
 	@Test
-	void testSetIngredient_SetsSlot() {
+	void testSetIngredient_SetsSlot()
+	{
 		ItemStack fuel = new ItemStack(Material.BLAZE_POWDER);
 
 		inventory.setIngredient(fuel);

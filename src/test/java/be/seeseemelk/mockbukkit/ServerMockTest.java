@@ -1119,7 +1119,7 @@ class ServerMockTest
 	@Test
 	void testCreateBrewerInventory()
 	{
-		assertInstanceOf(BrewerInventoryMock.class, server.createInventory(null, InventoryType.BREWING , "", 9));
+		assertInstanceOf(BrewerInventoryMock.class, server.createInventory(null, InventoryType.BREWING, "", 9));
 	}
 
 }
