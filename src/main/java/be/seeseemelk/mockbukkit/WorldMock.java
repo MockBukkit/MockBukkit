@@ -1557,11 +1557,11 @@ public class WorldMock implements World
 		int size = (16 * 16) * Math.abs((getMaxHeight() - getMinHeight()));
 		ImmutableMap.Builder<Coordinate, BlockData> chunkBlockData = ImmutableMap.builderWithExpectedSize(size);
 		ImmutableMap.Builder<Coordinate, Biome> chunkBiomes = ImmutableMap.builderWithExpectedSize(size);
-		for (int x = 0; x < 15; x++)
+		for (int x = 0; x < 16; x++)
 		{
 			for (int y = getMinHeight(); y < getMaxHeight(); y++)
 			{
-				for (int z = 0; z < 15; z++)
+				for (int z = 0; z < 16; z++)
 				{
 					Coordinate coord = new Coordinate(x, y, z);
 					chunkBlockData.put(coord, new BlockDataMock(Material.AIR));

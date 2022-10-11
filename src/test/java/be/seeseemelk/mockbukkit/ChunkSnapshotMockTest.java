@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -86,6 +87,22 @@ class ChunkSnapshotMockTest
 	}
 
 	@Test
+	void containsAllBlocks()
+	{
+		ChunkSnapshot snapshot = chunk.getChunkSnapshot();
+		for (int x = 0; x < 16; x++)
+		{
+			for (int y = world.getMinHeight(); y < world.getMaxHeight(); y++)
+			{
+				for (int z = 0; z < 16; z++)
+				{
+					assertNotNull(snapshot.getBlockData(x, y, z));
+				}
+			}
+		}
+	}
+
+	@Test
 	void contains_BlockExists_True()
 	{
 		assertTrue(chunk.getChunkSnapshot().contains(Bukkit.createBlockData(Material.GRASS)));
@@ -114,10 +131,7 @@ class ChunkSnapshotMockTest
 	@Test
 	void getBiome_DoesntIncludeBiome_ThrowsException()
 	{
-		assertThrowsExactly(IllegalStateException.class, () ->
-		{
-			chunk.getChunkSnapshot().getBiome(0, 0, 0);
-		});
+		assertThrowsExactly(IllegalStateException.class, () -> chunk.getChunkSnapshot().getBiome(0, 0, 0));
 	}
 
 	@Test
