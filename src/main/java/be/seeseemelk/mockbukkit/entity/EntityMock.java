@@ -931,7 +931,6 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	public void setGlowing(boolean flag)
 	{
 		glowingFlag = flag;
-
 	}
 
 	@Override
