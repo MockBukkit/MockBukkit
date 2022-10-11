@@ -150,9 +150,9 @@ public class ChunkSnapshotMock implements ChunkSnapshot
 				// isn't divisible by 16 we could get an error.
 				break;
 			}
-			for (int x = 0; x < 15; x++)
+			for (int x = 0; x < 16; x++)
 			{
-				for (int z = 0; z < 15; z++)
+				for (int z = 0; z < 16; z++)
 				{
 					if (!getBlockType(x, y, z).isAir())
 					{

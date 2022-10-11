@@ -1292,11 +1292,11 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		ChunkSnapshot snapshot = world.getEmptyChunkSnapshot(0, 0, true, true);
 
-		for (int x = 0; x < 15; x++)
+		for (int x = 0; x < 16; x++)
 		{
 			for (int y = world.getMinHeight(); y < world.getMaxHeight(); y++)
 			{
-				for (int z = 0; z < 15; z++)
+				for (int z = 0; z < 16; z++)
 				{
 					assertEquals(Material.AIR, snapshot.getBlockData(x, y, z).getMaterial());
 				}
@@ -1310,11 +1310,11 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		ChunkSnapshot snapshot = world.getEmptyChunkSnapshot(0, 0, true, true);
 
-		for (int x = 0; x < 15; x++)
+		for (int x = 0; x < 16; x++)
 		{
 			for (int y = world.getMinHeight(); y < world.getMaxHeight(); y++)
 			{
-				for (int z = 0; z < 15; z++)
+				for (int z = 0; z < 16; z++)
 				{
 					assertEquals(Biome.PLAINS, snapshot.getBiome(x, y, z));
 				}

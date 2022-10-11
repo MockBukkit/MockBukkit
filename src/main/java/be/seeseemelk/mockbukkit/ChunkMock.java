@@ -102,11 +102,11 @@ public class ChunkMock implements Chunk
 		int size = (16 * 16) * Math.abs((world.getMaxHeight() - world.getMinHeight()));
 		ImmutableMap.Builder<Coordinate, BlockData> blockData = ImmutableMap.builderWithExpectedSize(size);
 		ImmutableMap.Builder<Coordinate, Biome> biomes = ImmutableMap.builderWithExpectedSize(size);
-		for (int x = 0; x < 15; x++)
+		for (int x = 0; x < 16; x++)
 		{
 			for (int y = world.getMinHeight(); y < world.getMaxHeight(); y++)
 			{
-				for (int z = 0; z < 15; z++)
+				for (int z = 0; z < 16; z++)
 				{
 					Coordinate coord = new Coordinate(x, y, z);
 					blockData.put(coord, getBlock(x, y, z).getBlockData());
