@@ -105,7 +105,7 @@ public class MockPlayerList
 	public long getLastSeen(UUID uuid)
 	{
 		OfflinePlayer player = getOfflinePlayer(uuid);
-		if (player.isOnline())
+		if (player != null && player.isOnline())
 		{
 			return System.currentTimeMillis();
 		}
