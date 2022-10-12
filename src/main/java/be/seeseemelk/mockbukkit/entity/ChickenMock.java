@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.entity.Chicken;
@@ -29,6 +30,35 @@ public class ChickenMock extends AnimalsMock implements Chicken
 	{
 		Preconditions.checkNotNull(stack, "ItemStack cannot be null");
 		return stack.getType() == Material.WHEAT_SEEDS;
+	}
+
+	@Override
+	public boolean isChickenJockey()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setIsChickenJockey(boolean isChickenJockey)
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+
+	}
+
+	@Override
+	public int getEggLayTime()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setEggLayTime(int eggLayTime)
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 }

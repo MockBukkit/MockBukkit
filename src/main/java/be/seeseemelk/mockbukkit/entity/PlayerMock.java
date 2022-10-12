@@ -1054,9 +1054,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 					case SNARE_DRUM -> Sound.BLOCK_NOTE_BLOCK_SNARE;
 					case STICKS -> Sound.BLOCK_NOTE_BLOCK_HAT;
 					case XYLOPHONE -> Sound.BLOCK_NOTE_BLOCK_XYLOPHONE;
-					default ->
-						// This should never be reached unless Mojang adds new instruments
-							throw new UnimplementedOperationException("Instrument '" + instrument + "' has no implementation!");
 				};
 		float pitch = (float) Math.pow(2.0D, (note - 12.0D) / 12.0D);
 		playSound(loc, sound, SoundCategory.RECORDS, 3, pitch);

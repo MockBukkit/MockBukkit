@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit;
 import be.seeseemelk.mockbukkit.block.data.AmethystClusterMock;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
+import org.bukkit.ChunkSnapshot;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
@@ -13,6 +14,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -84,6 +87,22 @@ class ChunkSnapshotMockTest
 	}
 
 	@Test
+	void containsAllBlocks()
+	{
+		ChunkSnapshot snapshot = chunk.getChunkSnapshot();
+		for (int x = 0; x < 16; x++)
+		{
+			for (int y = world.getMinHeight(); y < world.getMaxHeight(); y++)
+			{
+				for (int z = 0; z < 16; z++)
+				{
+					assertNotNull(snapshot.getBlockData(x, y, z));
+				}
+			}
+		}
+	}
+
+	@Test
 	void contains_BlockExists_True()
 	{
 		assertTrue(chunk.getChunkSnapshot().contains(Bukkit.createBlockData(Material.GRASS)));
@@ -112,10 +131,7 @@ class ChunkSnapshotMockTest
 	@Test
 	void getBiome_DoesntIncludeBiome_ThrowsException()
 	{
-		assertThrowsExactly(IllegalStateException.class, () ->
-		{
-			chunk.getChunkSnapshot().getBiome(0, 0, 0);
-		});
+		assertThrowsExactly(IllegalStateException.class, () -> chunk.getChunkSnapshot().getBiome(0, 0, 0));
 	}
 
 	@Test
@@ -124,6 +140,23 @@ class ChunkSnapshotMockTest
 		world.setBiome(0, 0, 0, Biome.BADLANDS);
 		assertEquals(Biome.BADLANDS, chunk.getChunkSnapshot(false, true, false).getBiome(0, 0));
 		assertEquals(Biome.BADLANDS, chunk.getChunkSnapshot(false, true, false).getBiome(0, 0, 0));
+	}
+
+	@Test
+	void getBiome_NoBiomes_ThrowsException()
+	{
+		ChunkSnapshot snapshot = chunk.getChunkSnapshot(false, false, false);
+
+		assertThrows(IllegalStateException.class, () -> snapshot.getBiome(0, 0, 0));
+	}
+
+	@Test
+	void getBiome_EitherBiome_ReturnsBiomes()
+	{
+		world.setBiome(0, 0, 0, Biome.BADLANDS);
+
+		assertEquals(Biome.BADLANDS, chunk.getChunkSnapshot(false, true, false).getBiome(0, 0, 0));
+		assertEquals(Biome.BADLANDS, chunk.getChunkSnapshot(false, false, true).getBiome(0, 0, 0));
 	}
 
 }

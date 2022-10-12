@@ -4,8 +4,6 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.TestPlugin;
 import be.seeseemelk.mockbukkit.exception.EventHandlerException;
-import org.bukkit.World;
-import org.bukkit.WorldCreator;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -22,7 +20,6 @@ import org.bukkit.plugin.java.JavaPluginUtils;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
@@ -312,20 +309,6 @@ class PluginManagerMockTest
 
 		assertFalse(server.getMessenger().isOutgoingChannelRegistered(plugin, "BungeeCord"));
 		assertFalse(server.getMessenger().isIncomingChannelRegistered(plugin, "BungeeCord"));
-	}
-
-	@Test
-	@Disabled("Not implemented yet")
-	void disablePlugin_WorldChunkTicketsRemoved()
-	{
-		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
-		World world = server.createWorld(new WorldCreator(""));
-		world.addPluginChunkTicket(0, 0, plugin);
-		assertTrue(world.getPluginChunkTickets(0, 0).contains(plugin));
-
-		pluginManager.disablePlugin(plugin);
-
-		assertFalse(world.getPluginChunkTickets(0, 0).contains(plugin));
 	}
 
 	@Test

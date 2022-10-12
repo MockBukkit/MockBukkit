@@ -14,6 +14,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Mob;
@@ -42,6 +43,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
@@ -887,6 +889,127 @@ class EntityMockTest
 		entity.remove();
 		assertNull(passenger.getVehicle());
 		assertEquals(List.of(), vehicle.getPassengers());
+	}
+
+	@Test
+	void remove()
+	{
+		EntityMock zombie = (EntityMock) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+		assertTrue(server.getEntities().contains(zombie), "Entity should be referenced.");
+		zombie.remove();
+		assertFalse(zombie.isValid());
+		assertFalse(server.getEntities().contains(zombie), "Entity should no longer be referenced.");
+		assertNull(server.getEntity(zombie.getUniqueId()));
+	}
+
+	@Test
+	void testIsDeadDefault()
+	{
+		assertFalse(entity.isDead());
+	}
+
+	@Test
+	void testIsDead()
+	{
+		entity.remove();
+		assertTrue(entity.isDead());
+	}
+
+	@Test
+	void testGetLocationWithNullLocation()
+	{
+		assertNull(entity.getLocation(null));
+	}
+
+	@Test
+	void testCustomNameDefault()
+	{
+		assertNull(entity.customName());
+	}
+
+	@Test
+	void testCustomName()
+	{
+		entity.customName(Component.text("Hello World"));
+		assertEquals(Component.text("Hello World"), entity.customName());
+	}
+
+	@Test
+	void testGetCustomNameDefault()
+	{
+		assertNull(entity.getCustomName());
+	}
+
+	@Test
+	void testGetCustomName()
+	{
+		entity.customName(Component.text("Hello World"));
+		assertEquals("Hello World", entity.getCustomName());
+	}
+
+	@Test
+	void testSetCustomName()
+	{
+		entity.setCustomName("Hello World");
+		assertEquals(Component.text("Hello World"), entity.customName());
+	}
+
+	@Test
+	void testSetCustomNameNull()
+	{
+		entity.setCustomName(null);
+		assertNull(entity.customName());
+	}
+
+	@Test
+	void testGetMaxFireTicks()
+	{
+		assertEquals(20, entity.getMaxFireTicks());
+	}
+
+	@Test
+	void testGetFallDistanceDefault()
+	{
+		assertEquals(0, entity.getFallDistance());
+	}
+
+	@Test
+	void testSetFallDistance()
+	{
+		entity.setFallDistance(10);
+		assertEquals(10, entity.getFallDistance());
+	}
+
+	@Test
+	void testIsCustomNameVisibleDefault()
+	{
+		assertFalse(entity.isCustomNameVisible());
+	}
+
+	@Test
+	void testSetCustomNameVisible()
+	{
+		entity.setCustomNameVisible(true);
+		assertTrue(entity.isCustomNameVisible());
+	}
+
+	@Test
+	void testIsGlowingDefault()
+	{
+		assertFalse(entity.isGlowing());
+	}
+
+	@Test
+	void testSetGlowing()
+	{
+		entity.setGlowing(true);
+		assertTrue(entity.isGlowing());
+	}
+
+	@Test
+	void testSpigot()
+	{
+		assertInstanceOf(Entity.Spigot.class, entity.spigot());
 	}
 
 }
