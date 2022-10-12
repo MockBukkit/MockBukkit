@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 
 public class BlockDataMock implements BlockData
 {
+
 	private static final String NULL_MATERIAL_EXCEPTION_MESSAGE = "Material cannot be null";
 
 	private final @NotNull Material type;
@@ -201,7 +202,6 @@ public class BlockDataMock implements BlockData
 	public static @NotNull BlockDataMock mock(@NotNull Material material)
 	{
 		Preconditions.checkNotNull(material, NULL_MATERIAL_EXCEPTION_MESSAGE);
-		// Special Cases
 		BlockDataMock mock = attemptMockByPaperMaterialTags(material);
 		if (mock != null)
 		{
@@ -214,6 +214,7 @@ public class BlockDataMock implements BlockData
 			return mock;
 		}
 
+		// Special cases
 		return switch (material)
 				{
 					case AMETHYST_CLUSTER -> new AmethystClusterMock(material);
