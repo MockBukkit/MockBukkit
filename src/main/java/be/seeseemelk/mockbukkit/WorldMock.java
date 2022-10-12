@@ -57,7 +57,6 @@ import io.papermc.paper.world.MoonPhase;
 import org.bukkit.BlockChangeDelegate;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
-import org.bukkit.ChunkSnapshot;
 import org.bukkit.Difficulty;
 import org.bukkit.Effect;
 import org.bukkit.FluidCollisionMode;

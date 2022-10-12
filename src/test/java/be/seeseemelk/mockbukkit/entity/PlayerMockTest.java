@@ -1869,7 +1869,6 @@ class PlayerMockTest
 	@Test
 	void testAssertInventoryViewDefault()
 	{
-		;
 		player.assertInventoryView(InventoryType.CRAFTING);
 	}
 
