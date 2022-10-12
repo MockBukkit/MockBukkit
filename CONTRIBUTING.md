@@ -1,15 +1,3 @@
-Creating Issues
-===============
-
-## :beetle: Reporting bugs
-
-reporting bugs
-
-## :sparkles: Requesting features
-
-requesting features
-
-
 Contributing Code to MockBukkit
 ===============================
 
