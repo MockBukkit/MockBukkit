@@ -10,12 +10,14 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Set;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class MockPlayerListTest
@@ -195,6 +197,63 @@ class MockPlayerListTest
 		server.addPlayer("player");
 
 		assertNull(playerList.getPlayerExact("pla"));
+	}
+
+	@Test
+	void setFirstPlayed()
+	{
+		UUID uuid = UUID.randomUUID();
+
+		playerList.setFirstPlayed(uuid, 10L);
+
+		assertEquals(10, playerList.getFirstPlayed(uuid));
+	}
+
+	@Test
+	void setFirstPlayed_NegativeNumber_ThrowsException()
+	{
+		UUID uuid = UUID.randomUUID();
+
+		assertThrows(IllegalArgumentException.class, () -> playerList.setFirstPlayed(uuid, -1));
+	}
+
+	@Test
+	void setLastSeen()
+	{
+		UUID uuid = UUID.randomUUID();
+
+		playerList.setLastSeen(uuid, 10L);
+
+		assertEquals(10, playerList.getLastSeen(uuid));
+	}
+
+	@Test
+	void setLastSeen_NegativeNumber_ThrowsException()
+	{
+		UUID uuid = UUID.randomUUID();
+
+		assertThrows(IllegalArgumentException.class, () -> playerList.setLastSeen(uuid, -1));
+	}
+
+	@Test
+	void setLastSeen_PlayerOnline()
+	{
+		PlayerMock player = server.addPlayer();
+		UUID uuid = player.getUniqueId();
+
+		playerList.setLastSeen(uuid, 10L);
+
+		assertNotEquals(10L, playerList.getLastSeen(uuid));
+	}
+
+	@Test
+	void setLastLogin()
+	{
+		UUID uuid = UUID.randomUUID();
+
+		playerList.setLastLogin(uuid, 10L);
+
+		assertEquals(10, playerList.getLastLogin(uuid));
 	}
 
 }

@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit;
 
 import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
+import com.google.common.base.Preconditions;
 import org.bukkit.BanList;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
@@ -96,6 +97,18 @@ public class MockPlayerList
 	}
 
 	/**
+	 * Sets the return value of {@link #getFirstPlayed(UUID)}.
+	 *
+	 * @param uuid        UUID of the player to set first played time for.
+	 * @param firstPlayed The first played time. Must be non-negative.
+	 */
+	public void setFirstPlayed(UUID uuid, long firstPlayed)
+	{
+		Preconditions.checkArgument(firstPlayed > 0, "First played time must be non-negative");
+		this.firstPlayed.put(uuid, firstPlayed);
+	}
+
+	/**
 	 * Gets the last time a player was seen online.
 	 *
 	 * @param uuid The UUID of the player.
@@ -113,6 +126,19 @@ public class MockPlayerList
 	}
 
 	/**
+	 * Sets the return value of {@link #getLastLogin(UUID)} <i>while the player is offline</i>.
+	 * If the player is online, this will not have an effect.
+	 *
+	 * @param uuid     UUID of the player to set last seen time for.
+	 * @param lastSeen The last seen time. Must be non-negative.
+	 */
+	public void setLastSeen(UUID uuid, long lastSeen)
+	{
+		Preconditions.checkArgument(lastSeen > 0, "Last seen time must be non-negative");
+		this.lastSeen.put(uuid, lastSeen);
+	}
+
+	/**
 	 * Gets the last time a player was seen online.
 	 *
 	 * @param uuid The UUID of the player.
@@ -122,6 +148,18 @@ public class MockPlayerList
 	public long getLastLogin(UUID uuid)
 	{
 		return this.lastLogins.getOrDefault(uuid, 0L);
+	}
+
+	/**
+	 * Sets the return value of {@link #getLastLogin(UUID)}.
+	 *
+	 * @param uuid     UUID of the player to set last login time for.
+	 * @param lastLogin The last login time. Must be non-negative.
+	 */
+	public void setLastLogin(UUID uuid, long lastLogin)
+	{
+		Preconditions.checkArgument(lastLogin > 0, "Last login time must be non-negative");
+		this.lastLogins.put(uuid, lastLogin);
 	}
 
 	@NotNull
