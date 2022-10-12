@@ -5,6 +5,7 @@ import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import org.bukkit.OfflinePlayer;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -111,6 +112,7 @@ class MockPlayerListTest
 	}
 
 	@Test
+	@Disabled("OfflinePlayerMock#setOp isn't implemented")
 	void getOperators()
 	{
 		PlayerMock player1 = server.addPlayer();
