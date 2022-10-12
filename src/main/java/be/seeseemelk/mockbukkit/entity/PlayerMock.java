@@ -723,7 +723,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Deprecated(forRemoval = true)
 	public void setLastPlayed(long time)
 	{
-		throw new UnimplementedOperationException("Deprecated; Does not do anything");
+		throw new UnsupportedOperationException("Deprecated; Does not do anything");
 	}
 
 	@Override
