@@ -127,7 +127,8 @@ public class MockPlayerList
 	@NotNull
 	public Set<OfflinePlayer> getOperators()
 	{
-		return Stream.concat(this.onlinePlayers.stream(), this.offlinePlayers.stream()).filter(OfflinePlayer::isOp)
+		return Stream.concat(this.onlinePlayers.stream(), this.offlinePlayers.stream())
+				.filter(OfflinePlayer::isOp)
 				.collect(Collectors.toSet());
 	}
 
@@ -151,16 +152,18 @@ public class MockPlayerList
 	@NotNull
 	public List<Player> matchPlayer(@NotNull String name)
 	{
-		return this.onlinePlayers.stream().filter(
-						player -> player.getName().toLowerCase(Locale.ENGLISH).startsWith(name.toLowerCase(Locale.ENGLISH)))
+		String nameLower = name.toLowerCase(Locale.ENGLISH);
+		return this.onlinePlayers.stream()
+				.filter(player -> player.getName().toLowerCase(Locale.ENGLISH).startsWith(nameLower))
 				.collect(Collectors.toList());
 	}
 
 	@Nullable
 	public Player getPlayerExact(@NotNull String name)
 	{
+		String nameLower = name.toLowerCase(Locale.ENGLISH);
 		return this.onlinePlayers.stream()
-				.filter(player -> player.getName().toLowerCase(Locale.ENGLISH).equals(name.toLowerCase(Locale.ENGLISH)))
+				.filter(player -> player.getName().toLowerCase(Locale.ENGLISH).equals(nameLower))
 				.findFirst().orElse(null);
 	}
 
@@ -226,7 +229,7 @@ public class MockPlayerList
 
 		for (OfflinePlayer offlinePlayer : this.offlinePlayers)
 		{
-			if (offlinePlayer.getName().equals(name))
+			if (name.equals(offlinePlayer.getName()))
 			{
 				return offlinePlayer;
 			}
