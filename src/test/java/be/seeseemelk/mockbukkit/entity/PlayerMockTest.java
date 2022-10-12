@@ -1080,29 +1080,6 @@ class PlayerMockTest
 	}
 
 	@Test
-	void testFirstPlayed() throws InterruptedException
-	{
-		PlayerMock player = new PlayerMock(server, "FirstPlayed123");
-
-		assertFalse(player.hasPlayedBefore());
-		assertEquals(0, player.getFirstPlayed());
-		assertEquals(0, player.getLastPlayed());
-
-		server.addPlayer(player);
-		long firstPlayed = player.getFirstPlayed();
-
-		assertTrue(player.hasPlayedBefore());
-		assertTrue(firstPlayed > 0);
-		assertEquals(player.getFirstPlayed(), player.getLastPlayed());
-
-		// Player reconnects
-		server.addPlayer(player);
-
-		assertEquals(firstPlayed, player.getFirstPlayed());
-		assertNotEquals(player.getFirstPlayed(), player.getLastPlayed());
-	}
-
-	@Test
 	void testIllegalArgumentForSpawning()
 	{
 		World world = new WorldMock();
