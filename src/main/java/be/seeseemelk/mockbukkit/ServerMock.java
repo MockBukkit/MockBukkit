@@ -232,8 +232,22 @@ public class ServerMock extends Server.Spigot implements Server
 	 */
 	public void registerEntity(@NotNull EntityMock entity)
 	{
+		Preconditions.checkNotNull(entity, "Entity cannot be null");
 		AsyncCatcher.catchOp("entity add");
 		entities.add(entity);
+	}
+
+	/**
+	 * Unregisters an entity from the server. Should only be used internally.
+	 *
+	 * @param entity The entity to unregister
+	 */
+	public void unregisterEntity(@NotNull EntityMock entity)
+	{
+		Preconditions.checkNotNull(entity, "Entity cannot be null");
+		Preconditions.checkArgument(!entity.isValid(), "Entity is not marked for removal");
+		AsyncCatcher.catchOp("entity remove");
+		entities.remove(entity);
 	}
 
 	/**
@@ -296,7 +310,6 @@ public class ServerMock extends Server.Spigot implements Server
 			return;
 		}
 
-		player.setLastPlayed(getCurrentServerTime());
 		registerEntity(player);
 	}
 

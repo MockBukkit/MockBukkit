@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit;
 
 import be.seeseemelk.mockbukkit.block.BlockMock;
+import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import be.seeseemelk.mockbukkit.entity.AllayMock;
 import be.seeseemelk.mockbukkit.entity.ArmorStandMock;
 import be.seeseemelk.mockbukkit.entity.AxolotlMock;
@@ -51,6 +52,7 @@ import be.seeseemelk.mockbukkit.metadata.MetadataTable;
 import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
 import com.destroystokyo.paper.HeightmapType;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableMap;
 import io.papermc.paper.world.MoonPhase;
 import org.bukkit.BlockChangeDelegate;
 import org.bukkit.Bukkit;
@@ -1548,9 +1550,29 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public @NotNull ChunkSnapshot getEmptyChunkSnapshot(int x, int z, boolean includeBiome, boolean includeBiomeTempRain)
+	@SuppressWarnings("UnstableApiUsage")
+	public @NotNull ChunkSnapshotMock getEmptyChunkSnapshot(int chunkX, int chunkZ, boolean includeBiome, boolean includeBiomeTempRain)
 	{
-		return new ChunkSnapshotMock(x, z, getMinHeight(), getMaxHeight(), getName(), getFullTime(), Map.of(), (includeBiome || includeBiomeTempRain) ? Map.of() : null);
+		// Cubic size of the chunk (w * w * h).
+		int size = (16 * 16) * Math.abs((getMaxHeight() - getMinHeight()));
+		ImmutableMap.Builder<Coordinate, BlockData> chunkBlockData = ImmutableMap.builderWithExpectedSize(size);
+		ImmutableMap.Builder<Coordinate, Biome> chunkBiomes = ImmutableMap.builderWithExpectedSize(size);
+		for (int x = 0; x < 16; x++)
+		{
+			for (int y = getMinHeight(); y < getMaxHeight(); y++)
+			{
+				for (int z = 0; z < 16; z++)
+				{
+					Coordinate coord = new Coordinate(x, y, z);
+					chunkBlockData.put(coord, new BlockDataMock(Material.AIR));
+					if (includeBiome || includeBiomeTempRain)
+					{
+						chunkBiomes.put(coord, Biome.PLAINS);
+					}
+				}
+			}
+		}
+		return new ChunkSnapshotMock(chunkX, chunkZ, getMinHeight(), getMaxHeight(), getName(), getFullTime(), chunkBlockData.build(), (includeBiome || includeBiomeTempRain) ? chunkBiomes.build() : null);
 	}
 
 	@Override
