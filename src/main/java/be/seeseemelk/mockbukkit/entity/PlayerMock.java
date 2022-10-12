@@ -57,7 +57,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Projectile;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
@@ -93,8 +92,6 @@ import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.util.Consumer;
-import org.bukkit.util.Vector;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -1044,9 +1041,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 					case SNARE_DRUM -> Sound.BLOCK_NOTE_BLOCK_SNARE;
 					case STICKS -> Sound.BLOCK_NOTE_BLOCK_HAT;
 					case XYLOPHONE -> Sound.BLOCK_NOTE_BLOCK_XYLOPHONE;
-					default ->
-						// This should never be reached unless Mojang adds new instruments
-							throw new UnimplementedOperationException("Instrument '" + instrument + "' has no implementation!");
 				};
 		float pitch = (float) Math.pow(2.0D, (note - 12.0D) / 12.0D);
 		playSound(loc, sound, SoundCategory.RECORDS, 3, pitch);
