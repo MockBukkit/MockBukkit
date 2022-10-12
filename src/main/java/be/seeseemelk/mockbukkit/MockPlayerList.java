@@ -84,10 +84,10 @@ public class MockPlayerList
 	}
 
 	/**
-	 * Gets the last time a player was seen online.
+	 * Gets the first time that this player was seen on the server.
 	 *
 	 * @param uuid The UUID of the player.
-	 * @return The last time the player was seen online.
+	 * @return The time of first log-in, or 0.
 	 * @see OfflinePlayer#getFirstPlayed()
 	 */
 	public long getFirstPlayed(UUID uuid)
