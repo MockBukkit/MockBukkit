@@ -1095,6 +1095,32 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public void playSound(net.kyori.adventure.sound.@NotNull Sound sound)
+	{
+		playSound(sound, net.kyori.adventure.sound.Sound.Emitter.self()); // Not strictly equivalent since normally the sound does not follow the entity.
+	}
+
+	@Override
+	public void playSound(net.kyori.adventure.sound.@NotNull Sound sound, double x, double y, double z)
+	{
+		Preconditions.checkNotNull(sound, "Sound cannot be null");
+		heardSounds.add(new AudioExperience(sound, new Location(getWorld(), x, y, z)));
+	}
+
+	@Override
+	public void playSound(net.kyori.adventure.sound.@NotNull Sound sound, net.kyori.adventure.sound.Sound.@NotNull Emitter emitter)
+	{
+		Preconditions.checkNotNull(emitter, "Emitter cannot be null");
+		Preconditions.checkNotNull(sound, "Sound cannot be null");
+		if (emitter == net.kyori.adventure.sound.Sound.Emitter.self())
+		{
+			emitter = this;
+		}
+		Preconditions.checkArgument(emitter instanceof Entity, "Sound emitter must be an Entity or self()");
+		heardSounds.add(new AudioExperience(sound, ((Entity) emitter).getLocation()));
+	}
+
+	@Override
 	public @NotNull List<AudioExperience> getHeardSounds()
 	{
 		return heardSounds;

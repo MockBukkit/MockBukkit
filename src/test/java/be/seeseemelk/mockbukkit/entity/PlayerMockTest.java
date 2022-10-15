@@ -1005,6 +1005,66 @@ class PlayerMockTest
 	}
 
 	@Test
+	void testPlaySound_Adventure()
+	{
+		net.kyori.adventure.sound.Sound sound = net.kyori.adventure.sound.Sound.sound(
+				Sound.BLOCK_ANVIL_FALL,
+				net.kyori.adventure.sound.Sound.Source.BLOCK,
+				0.9f,
+				0.8f
+		);
+		player.playSound(sound);
+		player.assertSoundHeard(sound, audio -> player.getLocation().equals(audio.getLocation()));
+	}
+
+	@Test
+	void testPlaySoundSelfEmitter_Adventure()
+	{
+		net.kyori.adventure.sound.Sound sound = net.kyori.adventure.sound.Sound.sound(
+				Sound.ENTITY_CREEPER_PRIMED,
+				net.kyori.adventure.sound.Sound.Source.HOSTILE,
+				0.9f,
+				0.8f
+		);
+		player.playSound(sound, net.kyori.adventure.sound.Sound.Emitter.self());
+		player.assertSoundHeard(sound, audio -> player.getLocation().equals(audio.getLocation()));
+	}
+
+	@Test
+	void testPlaySoundLocation_Adventure()
+	{
+		net.kyori.adventure.sound.Sound sound = net.kyori.adventure.sound.Sound.sound(
+				Sound.AMBIENT_CAVE,
+				net.kyori.adventure.sound.Sound.Source.AMBIENT,
+				0.5f,
+				1f
+		);
+		Location loc = new Location(player.getWorld(), 80D, 30D, 50D);
+		player.playSound(sound, loc.getX(), loc.getY(), loc.getZ());
+		player.assertSoundHeard(sound, audio -> loc.equals(audio.getLocation()));
+	}
+
+	@Test
+	void testAssertSoundHeard_Adventure()
+	{
+		net.kyori.adventure.sound.Sound soundA = net.kyori.adventure.sound.Sound.sound(
+				Sound.BLOCK_DEEPSLATE_FALL,
+				net.kyori.adventure.sound.Sound.Source.BLOCK,
+				1f,
+				1f
+		);
+		net.kyori.adventure.sound.Sound soundB = net.kyori.adventure.sound.Sound.sound(
+				soundA.name(),
+				net.kyori.adventure.sound.Sound.Source.MASTER,
+				soundA.volume(),
+				soundA.pitch()
+		);
+		player.playSound(soundA);
+		player.assertSoundHeard(soundA);
+		assertThrows(AssertionFailedError.class, () -> player.assertSoundHeard(soundB));
+	}
+
+	@Test
 	void testPlayNote_NewMethod()
 	{
 		int note = 10;

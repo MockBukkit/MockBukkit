@@ -41,6 +41,23 @@ public final class AudioExperience
 		this(sound.getKey().getKey(), category, loc, volume, pitch);
 	}
 
+	public AudioExperience(@NotNull net.kyori.adventure.sound.Sound sound, @NotNull Location loc)
+	{
+		this(sound.name().asString(), switch (sound.source())
+				{
+					case MASTER -> SoundCategory.MASTER;
+					case MUSIC -> SoundCategory.MUSIC;
+					case RECORD -> SoundCategory.RECORDS;
+					case WEATHER -> SoundCategory.WEATHER;
+					case BLOCK -> SoundCategory.BLOCKS;
+					case HOSTILE -> SoundCategory.HOSTILE;
+					case NEUTRAL -> SoundCategory.NEUTRAL;
+					case PLAYER -> SoundCategory.PLAYERS;
+					case AMBIENT -> SoundCategory.AMBIENT;
+					case VOICE -> SoundCategory.VOICE;
+				}, loc, sound.volume(), sound.pitch());
+	}
+
 	/**
 	 * This returns the {@link Sound} that was played. We return the {@link String} representation of the actual sound,
 	 * not the sound itself.
@@ -62,6 +79,29 @@ public final class AudioExperience
 	public SoundCategory getCategory()
 	{
 		return category;
+	}
+
+	/**
+	 * This method returns the {@link net.kyori.adventure.sound.Sound.Source} with which the {@link Sound} was played.
+	 *
+	 * @return The {@link net.kyori.adventure.sound.Sound.Source}
+	 */
+	@NotNull
+	public net.kyori.adventure.sound.Sound.Source getSource()
+	{
+		return switch (category)
+				{
+					case MASTER -> net.kyori.adventure.sound.Sound.Source.MASTER;
+					case MUSIC -> net.kyori.adventure.sound.Sound.Source.MUSIC;
+					case RECORDS -> net.kyori.adventure.sound.Sound.Source.RECORD;
+					case WEATHER -> net.kyori.adventure.sound.Sound.Source.WEATHER;
+					case BLOCKS -> net.kyori.adventure.sound.Sound.Source.BLOCK;
+					case HOSTILE -> net.kyori.adventure.sound.Sound.Source.HOSTILE;
+					case NEUTRAL -> net.kyori.adventure.sound.Sound.Source.NEUTRAL;
+					case PLAYERS -> net.kyori.adventure.sound.Sound.Source.PLAYER;
+					case AMBIENT -> net.kyori.adventure.sound.Sound.Source.AMBIENT;
+					case VOICE -> net.kyori.adventure.sound.Sound.Source.VOICE;
+				};
 	}
 
 	/**
