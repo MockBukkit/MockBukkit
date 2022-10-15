@@ -43,6 +43,12 @@ public class BedMock extends BlockDataMock implements Bed
 	}
 
 	@Override
+	public void setOccupied(boolean occupied)
+	{
+		super.set(OCCUPIED, occupied);
+	}
+
+	@Override
 	public @NotNull BlockFace getFacing()
 	{
 		return super.get(FACING);
