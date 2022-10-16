@@ -79,7 +79,7 @@ public interface SoundReceiver
 		assertSoundHeard("Sound Heard Assertion failed", sound, predicate);
 	}
 
-	default void assertSoundHeard(@NotNull net.kyori.adventure.sound.Sound sound, @NotNull Predicate<AudioExperience> predicate)
+	default void assertSoundHeard(net.kyori.adventure.sound.@NotNull Sound sound, @NotNull Predicate<AudioExperience> predicate)
 	{
 		assertSoundHeard("Sound Heard Assertion failed", sound, predicate);
 	}

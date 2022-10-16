@@ -41,7 +41,7 @@ public final class AudioExperience
 		this(sound.getKey().getKey(), category, loc, volume, pitch);
 	}
 
-	public AudioExperience(@NotNull net.kyori.adventure.sound.Sound sound, @NotNull Location loc)
+	public AudioExperience(net.kyori.adventure.sound.@NotNull Sound sound, @NotNull Location loc)
 	{
 		this(sound.name().asString(), switch (sound.source())
 				{
@@ -86,8 +86,7 @@ public final class AudioExperience
 	 *
 	 * @return The {@link net.kyori.adventure.sound.Sound.Source}
 	 */
-	@NotNull
-	public net.kyori.adventure.sound.Sound.Source getSource()
+	public net.kyori.adventure.sound.Sound.@NotNull Source getSource()
 	{
 		return switch (category)
 				{
