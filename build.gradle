@@ -83,7 +83,12 @@ signing {
     sign publishing.publications
 }
 
+check {
+    dependsOn jacocoTestReport
+}
+
 jacocoTestReport {
+    dependsOn test
     reports {
         xml.enabled true
     }
