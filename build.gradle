@@ -83,6 +83,10 @@ signing {
     sign publishing.publications
 }
 
+check {
+    dependsOn jacocoTestReport
+}
+
 jacocoTestReport {
     dependsOn test
     reports {
@@ -148,7 +152,6 @@ publishToMavenLocal {
 
 test {
     useJUnitPlatform()
-    finalizedBy jacocoTestReport
 }
 
 eclipse.classpath.downloadJavadoc = true
