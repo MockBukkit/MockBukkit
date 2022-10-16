@@ -152,6 +152,7 @@ publishToMavenLocal {
 
 test {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
 }
 
 eclipse.classpath.downloadJavadoc = true
