@@ -1,10 +1,13 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.MushroomCow;
+import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
@@ -29,6 +32,34 @@ public class MushroomCowMock extends CowMock implements MushroomCow
 	{
 		Preconditions.checkNotNull(variant, "Variant cannot be null");
 		this.variant = variant;
+	}
+
+	@Override
+	public int getStewEffectDuration()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setStewEffectDuration(int duration)
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable PotionEffectType getStewEffectType()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setStewEffect(@Nullable PotionEffectType type)
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

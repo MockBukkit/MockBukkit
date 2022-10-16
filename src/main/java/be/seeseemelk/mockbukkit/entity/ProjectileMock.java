@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.entity.Projectile;
 import org.bukkit.projectiles.ProjectileSource;
 import org.jetbrains.annotations.NotNull;
@@ -32,6 +33,34 @@ public abstract class ProjectileMock extends AbstractProjectileMock implements P
 	public void setShooter(@Nullable ProjectileSource source)
 	{
 		this.source = source;
+	}
+
+	@Override
+	public boolean hasLeftShooter()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setHasLeftShooter(boolean leftShooter)
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean hasBeenShot()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setHasBeenShot(boolean beenShot)
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 }
