@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.block.data;
 
 import com.destroystokyo.paper.MaterialTags;
+import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.type.Bed;
@@ -33,6 +34,7 @@ public class BedMock extends BlockDataMock implements Bed
 	@Override
 	public void setPart(@NotNull Part part)
 	{
+		Preconditions.checkNotNull(part, "Part cannot be null");
 		super.set(PART, part);
 	}
 
@@ -40,6 +42,12 @@ public class BedMock extends BlockDataMock implements Bed
 	public boolean isOccupied()
 	{
 		return super.get(OCCUPIED);
+	}
+
+	@Override
+	public void setOccupied(boolean occupied)
+	{
+		super.set(OCCUPIED, occupied);
 	}
 
 	@Override

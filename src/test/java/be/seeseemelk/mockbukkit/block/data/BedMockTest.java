@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BedMockTest
 {
@@ -54,6 +55,26 @@ class BedMockTest
 	void constructor_Material_WrongType_ThrowsException()
 	{
 		assertThrowsExactly(IllegalArgumentException.class, () -> new BedMock(Material.BEDROCK));
+	}
+
+	@Test
+	void setPart_Null_ThrowsException()
+	{
+		assertThrowsExactly(NullPointerException.class, () -> bed.setPart(null));
+	}
+
+	@Test
+	void setPart_Valid()
+	{
+		bed.setPart(Bed.Part.HEAD);
+		assertEquals(Bed.Part.HEAD, bed.getPart());
+	}
+
+	@Test
+	void setOccupied_Valid()
+	{
+		bed.setOccupied(true);
+		assertTrue(bed.isOccupied());
 	}
 
 	@Test

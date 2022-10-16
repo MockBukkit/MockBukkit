@@ -2407,6 +2407,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public void showElderGuardian(boolean silent)
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public void attack(@NotNull Entity target)
 	{
 		// TODO Auto-generated method stub
