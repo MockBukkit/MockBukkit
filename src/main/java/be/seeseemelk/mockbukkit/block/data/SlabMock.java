@@ -6,11 +6,11 @@ import org.bukkit.Tag;
 import org.bukkit.block.data.type.Slab;
 import org.jetbrains.annotations.NotNull;
 
+import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.TYPE;
+import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.WATERLOGGED;
+
 public class SlabMock extends BlockDataMock implements Slab
 {
-
-	private static final String TYPE = "type";
-	private static final String WATERLOGGED = "waterlogged";
 
 	public SlabMock(@NotNull Material type)
 	{

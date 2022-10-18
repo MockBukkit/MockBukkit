@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.block.data;
 
 import org.bukkit.Material;
+import org.bukkit.Tag;
 import org.bukkit.block.data.type.Slab;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -72,7 +73,10 @@ class SlabMockTest
 	@Test
 	void blockDataMock_Mock_CorrectType()
 	{
-		assertInstanceOf(SlabMock.class, BlockDataMock.mock(Material.OAK_SLAB));
+		for (Material material : Tag.SLABS.getValues())
+		{
+			assertInstanceOf(SlabMock.class, BlockDataMock.mock(material));
+		}
 	}
 
 }

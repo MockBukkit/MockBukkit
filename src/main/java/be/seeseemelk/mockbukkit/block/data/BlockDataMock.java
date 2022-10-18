@@ -23,6 +23,8 @@ import java.util.stream.Collectors;
 public class BlockDataMock implements BlockData
 {
 
+	private static final String NULL_MATERIAL_EXCEPTION_MESSAGE = "Material cannot be null";
+
 	private final @NotNull Material type;
 	private final @NotNull Map<String, Object> data;
 
@@ -199,13 +201,55 @@ public class BlockDataMock implements BlockData
 
 	public static @NotNull BlockDataMock mock(@NotNull Material material)
 	{
-		Preconditions.checkNotNull(material, "Material cannot be null");
-		// Special Cases
+		Preconditions.checkNotNull(material, NULL_MATERIAL_EXCEPTION_MESSAGE);
+		BlockDataMock mock = attemptMockByPaperMaterialTags(material);
+		if (mock != null)
+		{
+			return mock;
+		}
+
+		mock = attemptMockByTag(material);
+		if (mock != null)
+		{
+			return mock;
+		}
+
+		// Special cases
+		return switch (material)
+				{
+					case AMETHYST_CLUSTER -> new AmethystClusterMock(material);
+					default -> new BlockDataMock(material);
+				};
+	}
+
+	/**
+	 * Attempts to construct a BlockDataMock object by matching against Paper MaterialTags. Returns null if the given
+	 * material does not match any supported MaterialSetTag.
+	 *
+	 * @param material Material which we will attempt to mock
+	 * @return BlockDataMock if matched, null otherwise
+	 */
+	private static BlockDataMock attemptMockByPaperMaterialTags(@NotNull Material material)
+	{
+		Preconditions.checkNotNull(material, NULL_MATERIAL_EXCEPTION_MESSAGE);
 		if (MaterialTags.BEDS.isTagged(material))
 		{
 			return new BedMock(material);
 		}
-		else if (Tag.SLABS.isTagged(material))
+		return null;
+	}
+
+	/**
+	 * Attempts to construct a BlockDataMock object by matching against Bukkit Tags. Returns null if the given material
+	 * does not match any supported Tag.
+	 *
+	 * @param material Material which we will attempt to mock
+	 * @return BlockDataMock if matched, null otherwise
+	 */
+	private static BlockDataMock attemptMockByTag(@NotNull Material material)
+	{
+		Preconditions.checkNotNull(material, NULL_MATERIAL_EXCEPTION_MESSAGE);
+		if (Tag.SLABS.isTagged(material))
 		{
 			return new SlabMock(material);
 		}
@@ -213,11 +257,11 @@ public class BlockDataMock implements BlockData
 		{
 			return new StairsMock(material);
 		}
-		return switch (material)
-				{
-					case AMETHYST_CLUSTER -> new AmethystClusterMock(material);
-					default -> new BlockDataMock(material);
-				};
+		else if (Tag.TRAPDOORS.isTagged(material))
+		{
+			return new TrapDoorMock(material);
+		}
+		return null;
 	}
 
 }

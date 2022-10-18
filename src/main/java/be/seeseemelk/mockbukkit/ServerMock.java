@@ -310,7 +310,6 @@ public class ServerMock extends Server.Spigot implements Server
 			return;
 		}
 
-		player.setLastPlayed(getCurrentServerTime());
 		registerEntity(player);
 	}
 

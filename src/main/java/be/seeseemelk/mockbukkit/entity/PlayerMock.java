@@ -141,8 +141,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private boolean flying = false;
 	private Location compassTarget;
 	private @Nullable Location bedSpawnLocation;
-	private long firstPlayed = 0;
-	private long lastPlayed = 0;
 	private @Nullable InetSocketAddress address;
 
 	private final PlayerSpigotMock playerSpigotMock = new PlayerSpigotMock();
@@ -164,7 +162,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	{
 		this(server, name, UUID.nameUUIDFromBytes(("OfflinePlayer:" + name).getBytes(StandardCharsets.UTF_8)));
 		this.online = false;
-		this.firstPlayed = 0;
 		this.scoreboard = server.getScoreboardManager().getMainScoreboard();
 	}
 
@@ -176,7 +173,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		setDisplayName(name);
 		this.online = true;
 		this.server = server;
-		this.firstPlayed = System.currentTimeMillis();
 
 		if (Bukkit.getWorlds().isEmpty())
 		{
@@ -204,7 +200,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 			return false;
 		}
 		this.online = false;
-		this.lastPlayed = System.currentTimeMillis();
 
 		Component message = MiniMessage.miniMessage()
 				.deserialize("<name> has left the Server!", Placeholder.component("name", this.displayName()));
@@ -224,7 +219,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 */
 	public boolean reconnect()
 	{
-		if (firstPlayed == 0)
+		if (!hasPlayedBefore())
 		{
 			throw new IllegalStateException("Player was never online");
 		}
@@ -238,7 +233,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		}
 
 		this.online = true;
-		this.lastPlayed = System.currentTimeMillis();
 
 		server.addPlayer(this);
 
@@ -710,33 +704,26 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public long getFirstPlayed()
 	{
-		return firstPlayed;
+		return this.server.getPlayerList().getFirstPlayed(getUniqueId());
 	}
 
 	@Override
+	@Deprecated
 	public long getLastPlayed()
 	{
-		return lastPlayed;
+		return getLastSeen();
 	}
 
 	@Override
 	public boolean hasPlayedBefore()
 	{
-		return firstPlayed > 0;
+		return Arrays.stream(this.server.getPlayerList().getOfflinePlayers()).anyMatch(p -> p.getUniqueId().equals(getUniqueId()));
 	}
 
+	@Deprecated(forRemoval = true)
 	public void setLastPlayed(long time)
 	{
-		if (time > 0)
-		{
-			lastPlayed = time;
-
-			// Set firstPlayed if this is the first time
-			if (firstPlayed == 0)
-			{
-				firstPlayed = time;
-			}
-		}
+		throw new UnsupportedOperationException("Deprecated; Does not do anything");
 	}
 
 	@Override
@@ -1105,6 +1092,32 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		Preconditions.checkNotNull(sound, "Sound cannot be null");
 		Preconditions.checkNotNull(category, "Category cannot be null");
 		heardSounds.add(new AudioExperience(sound, category, entity.getLocation(), volume, pitch));
+	}
+
+	@Override
+	public void playSound(net.kyori.adventure.sound.@NotNull Sound sound)
+	{
+		playSound(sound, net.kyori.adventure.sound.Sound.Emitter.self()); // Not strictly equivalent since normally the sound does not follow the entity.
+	}
+
+	@Override
+	public void playSound(net.kyori.adventure.sound.@NotNull Sound sound, double x, double y, double z)
+	{
+		Preconditions.checkNotNull(sound, "Sound cannot be null");
+		heardSounds.add(new AudioExperience(sound, new Location(getWorld(), x, y, z)));
+	}
+
+	@Override
+	public void playSound(net.kyori.adventure.sound.@NotNull Sound sound, net.kyori.adventure.sound.Sound.@NotNull Emitter emitter)
+	{
+		Preconditions.checkNotNull(emitter, "Emitter cannot be null");
+		Preconditions.checkNotNull(sound, "Sound cannot be null");
+		if (emitter == net.kyori.adventure.sound.Sound.Emitter.self())
+		{
+			emitter = this;
+		}
+		Preconditions.checkArgument(emitter instanceof Entity, "Sound emitter must be an Entity or self()");
+		heardSounds.add(new AudioExperience(sound, ((Entity) emitter).getLocation()));
 	}
 
 	@Override
@@ -1676,15 +1689,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public long getLastLogin()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.server.getPlayerList().getLastLogin(getUniqueId());
 	}
 
 	@Override
 	public long getLastSeen()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.server.getPlayerList().getLastSeen(getUniqueId());
 	}
 
 	@Override
@@ -2416,6 +2427,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 	@Override
 	public void lookAt(@NotNull Entity entity, @NotNull LookAnchor playerAnchor, @NotNull LookAnchor entityAnchor)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void showElderGuardian(boolean silent)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

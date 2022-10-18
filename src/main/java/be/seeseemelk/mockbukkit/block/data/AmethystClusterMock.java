@@ -10,11 +10,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 
+import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.FACING;
+import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.WATERLOGGED;
+
 public class AmethystClusterMock extends BlockDataMock implements AmethystCluster, Directional, Waterlogged
 {
-
-	private static final String FACING = "facing";
-	private static final String WATERLOGGED = "waterlogged";
 
 	public AmethystClusterMock(@NotNull Material type)
 	{
