@@ -153,7 +153,7 @@ public class MockPlayerList
 	/**
 	 * Sets the return value of {@link #getLastLogin(UUID)}.
 	 *
-	 * @param uuid     UUID of the player to set last login time for.
+	 * @param uuid      UUID of the player to set last login time for.
 	 * @param lastLogin The last login time. Must be non-negative.
 	 */
 	public void setLastLogin(UUID uuid, long lastLogin)
