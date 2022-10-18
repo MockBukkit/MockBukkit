@@ -652,7 +652,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public boolean isDead()
 	{
-		return !this.removed;
+		return this.removed;
 	}
 
 	@Override
@@ -931,7 +931,6 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	public void setGlowing(boolean flag)
 	{
 		glowingFlag = flag;
-
 	}
 
 	@Override
@@ -1130,6 +1129,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 
 	@Override
 	public CreatureSpawnEvent.@NotNull SpawnReason getEntitySpawnReason()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isUnderWater()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

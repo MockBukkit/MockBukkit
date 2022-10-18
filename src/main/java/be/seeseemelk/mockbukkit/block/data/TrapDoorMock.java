@@ -4,40 +4,29 @@ import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.BlockFace;
-import org.bukkit.block.data.type.Stairs;
+import org.bukkit.block.data.type.TrapDoor;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 
 import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.FACING;
 import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.HALF;
-import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.SHAPE;
+import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.OPEN;
+import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.POWERED;
 import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.WATERLOGGED;
 
-public class StairsMock extends BlockDataMock implements Stairs
+public class TrapDoorMock extends BlockDataMock implements TrapDoor
 {
 
-	public StairsMock(@NotNull Material type)
+	public TrapDoorMock(@NotNull Material type)
 	{
 		super(type);
-		checkType(type, Tag.STAIRS);
-		setShape(Shape.STRAIGHT);
+		checkType(type, Tag.TRAPDOORS);
+		setHalf(Half.BOTTOM);
+		setOpen(false);
+		setPowered(false);
 		setWaterlogged(false);
 		setFacing(BlockFace.NORTH);
-		setHalf(Half.BOTTOM);
-	}
-
-	@Override
-	public @NotNull Shape getShape()
-	{
-		return get(SHAPE);
-	}
-
-	@Override
-	public void setShape(@NotNull Shape shape)
-	{
-		Preconditions.checkNotNull("Shape cannot be null");
-		set(SHAPE, shape);
 	}
 
 	@Override
@@ -71,6 +60,30 @@ public class StairsMock extends BlockDataMock implements Stairs
 	public @NotNull Set<BlockFace> getFaces()
 	{
 		return Set.of(BlockFace.NORTH, BlockFace.SOUTH, BlockFace.WEST, BlockFace.EAST);
+	}
+
+	@Override
+	public boolean isOpen()
+	{
+		return get(OPEN);
+	}
+
+	@Override
+	public void setOpen(boolean open)
+	{
+		set(OPEN, open);
+	}
+
+	@Override
+	public boolean isPowered()
+	{
+		return get(POWERED);
+	}
+
+	@Override
+	public void setPowered(boolean powered)
+	{
+		set(POWERED, powered);
 	}
 
 	@Override

@@ -67,4 +67,10 @@ class BlockDataMockTest
 		assertTrue(blockData.matches(blockData2));
 	}
 
+	@Test
+	void mock_NullInput_ThrowsException()
+	{
+		assertThrowsExactly(NullPointerException.class, () -> BlockDataMock.mock(null));
+	}
+
 }
