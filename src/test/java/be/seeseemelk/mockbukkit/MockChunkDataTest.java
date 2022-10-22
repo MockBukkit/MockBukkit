@@ -9,7 +9,6 @@ import org.bukkit.block.data.type.TrapDoor;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.material.MaterialData;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +23,6 @@ class MockChunkDataTest
 	private ServerMock server;
 	private WorldMock world;
 	private ChunkGenerator.ChunkData chunkData;
-
 
 	@BeforeEach
 	void setUp()
@@ -45,7 +43,7 @@ class MockChunkDataTest
 		ChunkGenerator.ChunkData data = server.createChunkData(dummy);
 
 		data.setBlock(0, 0, 0, Material.STONE);
-		Assertions.assertEquals(Material.STONE, data.getType(0, 0, 0));
+		assertEquals(Material.STONE, data.getType(0, 0, 0));
 	}
 
 	@Test
@@ -98,7 +96,7 @@ class MockChunkDataTest
 		chunkData = server.createChunkData(world);
 
 		chunkData.setBlock(0, -40, 0, Material.OBSIDIAN);
-		Assertions.assertEquals(Material.OBSIDIAN, chunkData.getType(0, -40, 0));
+		assertEquals(Material.OBSIDIAN, chunkData.getType(0, -40, 0));
 	}
 
 	@Test
@@ -108,7 +106,7 @@ class MockChunkDataTest
 		chunkData = server.createChunkData(world);
 
 		chunkData.setBlock(0, 80, 0, Material.OBSIDIAN);
-		Assertions.assertEquals(Material.OBSIDIAN, chunkData.getType(0, 80, 0));
+		assertEquals(Material.OBSIDIAN, chunkData.getType(0, 80, 0));
 	}
 
 	@Test
