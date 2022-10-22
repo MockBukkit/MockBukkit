@@ -28,6 +28,8 @@ class MockChunkDataTest
 	void setUp()
 	{
 		server = MockBukkit.mock();
+		world = server.addSimpleWorld("dummy");
+		chunkData = server.createChunkData(world);
 	}
 
 	@AfterEach
@@ -55,7 +57,6 @@ class MockChunkDataTest
 	@Test
 	void setBlock_MaterialWithBlockDataMockSubclass()
 	{
-		setUpDummyWorldAndChunkData();
 		chunkData.setBlock(0, 0, 0, Material.BLUE_BED);
 		assertInstanceOf(Bed.class, chunkData.getBlockData(0, 0, 0));
 	}
@@ -69,7 +70,6 @@ class MockChunkDataTest
 	@Test
 	void setBlock_MaterialDataWithBlockDataMockSubclass()
 	{
-		setUpDummyWorldAndChunkData();
 		MaterialData materialData = new MaterialData(Material.AMETHYST_CLUSTER);
 		chunkData.setBlock(0, 0, 0, materialData);
 		assertInstanceOf(AmethystCluster.class, chunkData.getBlockData(0, 0, 0));
@@ -78,14 +78,12 @@ class MockChunkDataTest
 	@Test
 	void test_set_out_of_bounds()
 	{
-		setUpDummyWorldAndChunkData();
 		assertThrowsExactly(IllegalArgumentException.class, () -> chunkData.setBlock(33, 1000, 33, Material.STONE));
 	}
 
 	@Test
 	void test_get_out_of_bounds()
 	{
-		setUpDummyWorldAndChunkData();
 		assertThrowsExactly(IllegalArgumentException.class, () -> chunkData.getType(33, 1000, 33));
 	}
 
@@ -134,7 +132,6 @@ class MockChunkDataTest
 	@Test
 	void setRegion_MaterialWithBlockDataMockSubclass()
 	{
-		setUpDummyWorldAndChunkData();
 		int min = 0;
 		int max = 2;
 		chunkData.setRegion(min, min, min, max, max, max, Material.BIRCH_STAIRS);
@@ -151,18 +148,11 @@ class MockChunkDataTest
 	@Test
 	void setRegion_MaterialDataWithBlockDataMockSubclass()
 	{
-		setUpDummyWorldAndChunkData();
 		int min = 0;
 		int max = 2;
 		MaterialData materialData = new MaterialData(Material.WARPED_TRAPDOOR);
 		chunkData.setRegion(min, min, min, max, max, max, materialData);
 		assertInstanceOfForVolume(TrapDoor.class, min, max);
-	}
-
-	private void setUpDummyWorldAndChunkData()
-	{
-		world = server.addSimpleWorld("dummy");
-		chunkData = server.createChunkData(world);
 	}
 
 	private <T> void assertInstanceOfForVolume(Class<T> clazz, int min, int max)
