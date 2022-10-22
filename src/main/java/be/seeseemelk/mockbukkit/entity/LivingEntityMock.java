@@ -969,4 +969,11 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		throw new UnimplementedOperationException();
 	}
 
+	@Override
+	public void knockback(double strength, double directionX, double directionZ)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 }

@@ -195,7 +195,7 @@ public class BlockDataMock implements BlockData
 		}
 		catch (CloneNotSupportedException e)
 		{
-			return new BlockDataMock(type);
+			return BlockDataMock.mock(type);
 		}
 	}
 
