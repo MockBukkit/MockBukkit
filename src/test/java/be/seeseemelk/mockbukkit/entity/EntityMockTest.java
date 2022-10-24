@@ -1025,4 +1025,17 @@ class EntityMockTest
 		assertTrue(entity.isVisualFire());
 	}
 
+	@Test
+	void testIsSilentDefault()
+	{
+		assertFalse(entity.isSilent());
+	}
+
+	@Test
+	void testSetSilent()
+	{
+		entity.setSilent(true);
+		assertTrue(entity.isSilent());
+	}
+
 }
