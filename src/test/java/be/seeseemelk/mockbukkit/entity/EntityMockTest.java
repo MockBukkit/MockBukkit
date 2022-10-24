@@ -1038,4 +1038,17 @@ class EntityMockTest
 		assertTrue(entity.isSilent());
 	}
 
+	@Test
+	void testHasGravityDefault()
+	{
+		assertTrue(entity.hasGravity());
+	}
+
+	@Test
+	void testSetGravity()
+	{
+		entity.setGravity(false);
+		assertFalse(entity.hasGravity());
+	}
+
 }
