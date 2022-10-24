@@ -1025,4 +1025,30 @@ class EntityMockTest
 		assertTrue(entity.isVisualFire());
 	}
 
+	@Test
+	void testIsSilentDefault()
+	{
+		assertFalse(entity.isSilent());
+	}
+
+	@Test
+	void testSetSilent()
+	{
+		entity.setSilent(true);
+		assertTrue(entity.isSilent());
+	}
+
+	@Test
+	void testHasGravityDefault()
+	{
+		assertTrue(entity.hasGravity());
+	}
+
+	@Test
+	void testSetGravity()
+	{
+		entity.setGravity(false);
+		assertFalse(entity.hasGravity());
+	}
+
 }
