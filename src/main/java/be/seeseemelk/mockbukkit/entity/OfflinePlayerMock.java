@@ -31,6 +31,7 @@ public class OfflinePlayerMock implements OfflinePlayer
 
 	private final @NotNull UUID uuid;
 	private final @Nullable String name;
+	private boolean operator;
 
 	public OfflinePlayerMock(@NotNull UUID uuid, @Nullable String name)
 	{
@@ -73,15 +74,13 @@ public class OfflinePlayerMock implements OfflinePlayer
 	@Override
 	public boolean isOp()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.operator;
 	}
 
 	@Override
 	public void setOp(boolean value)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.operator = value;
 	}
 
 	@Override
