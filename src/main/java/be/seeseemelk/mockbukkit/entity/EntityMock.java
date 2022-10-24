@@ -91,7 +91,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	protected EntityMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		Preconditions.checkNotNull(server, "Server cannot be null");
-		Preconditions.checkNotNull(uuid, "UUID cannot be nul");
+		Preconditions.checkNotNull(uuid, "UUID cannot be null");
 
 		this.server = server;
 		this.uuid = uuid;
