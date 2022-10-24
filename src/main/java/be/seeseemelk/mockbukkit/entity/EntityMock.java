@@ -86,6 +86,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private boolean removed = false;
 	private @Nullable EntityDamageEvent lastDamageEvent;
 	private boolean visualFire;
+	private boolean gravity = true;
 
 	protected EntityMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -968,16 +969,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public boolean hasGravity()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return this.gravity;
 	}
 
 	@Override
 	public void setGravity(boolean gravity)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
-
+		this.gravity = gravity;
 	}
 
 	@Override
