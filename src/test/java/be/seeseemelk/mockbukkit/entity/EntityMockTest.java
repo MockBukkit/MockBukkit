@@ -1037,4 +1037,5 @@ class EntityMockTest
 		entity.setGravity(false);
 		assertFalse(entity.hasGravity());
 	}
+
 }
