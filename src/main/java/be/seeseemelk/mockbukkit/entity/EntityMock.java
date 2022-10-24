@@ -85,6 +85,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private final int maxFireTicks = 20;
 	private boolean removed = false;
 	private @Nullable EntityDamageEvent lastDamageEvent;
+	private boolean visualFire;
 
 	protected EntityMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -583,15 +584,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public void setVisualFire(boolean fire)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		this.visualFire = fire;
 	}
 
 	@Override
 	public boolean isVisualFire()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return this.visualFire;
 	}
 
 	@Override
