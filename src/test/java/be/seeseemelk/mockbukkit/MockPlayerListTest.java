@@ -111,7 +111,6 @@ class MockPlayerListTest
 	}
 
 	@Test
-//	@Disabled("OfflinePlayerMock#setOp isn't implemented")
 	void getOperators()
 	{
 		PlayerMock player1 = server.addPlayer();
