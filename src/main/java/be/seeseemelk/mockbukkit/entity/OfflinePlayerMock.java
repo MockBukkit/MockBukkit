@@ -81,6 +81,14 @@ public class OfflinePlayerMock implements OfflinePlayer
 	public void setOp(boolean value)
 	{
 		this.operator = value;
+		if (value)
+		{
+			MockBukkit.getMock().getPlayerList().addOperator(this.uuid);
+		}
+		else
+		{
+			MockBukkit.getMock().getPlayerList().removeOperator(this.uuid);
+		}
 	}
 
 	@Override

@@ -42,6 +42,8 @@ public class MockPlayerList
 	private final @NotNull BanList ipBans = new MockBanList();
 	private final @NotNull BanList profileBans = new MockBanList();
 
+	private Set<UUID> operators = Collections.synchronizedSet(new HashSet<>());
+
 	public void setMaxPlayers(int maxPlayers)
 	{
 		// TODO: The maxPlayers setting is currently not enforced.
@@ -305,6 +307,24 @@ public class MockPlayerList
 	public void clearOfflinePlayers()
 	{
 		this.offlinePlayers.clear();
+	}
+
+	/**
+	 * Adds a Player to the list of known Operators.
+	 * @param operator The {@link UUID} of the Operator to add.
+	 */
+	public void addOperator(UUID operator)
+	{
+		this.operators.add(operator);
+	}
+
+	/**
+	 * Removes a Player from the list of known Operators.
+	 * @param operator The {@link UUID} of the Operator to remove.
+	 */
+	public void removeOperator(UUID operator)
+	{
+		this.operators.remove(operator);
 	}
 
 }

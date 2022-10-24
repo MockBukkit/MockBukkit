@@ -157,6 +157,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private final Set<String> channels = new HashSet<>();
 
 	private final List<ItemStack> consumedItems = new LinkedList<>();
+	private boolean op;
 
 	public PlayerMock(@NotNull ServerMock server, @NotNull String name)
 	{
@@ -2551,6 +2552,28 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		Preconditions.checkNotNull(slot, "slot must not be null");
 		Preconditions.checkNotNull(item, "item must not be null");
 		// Pretend the packet gets sent.
+	}
+
+	@Override
+	public boolean isOp()
+	{
+		return this.op;
+	}
+
+	@Override
+	public void setOp(boolean isOperator)
+	{
+		this.op = isOperator;
+
+		if (isOperator)
+		{
+			MockBukkit.getMock().getPlayerList().addOperator(this.getUniqueId());
+		}
+		else
+		{
+			MockBukkit.getMock().getPlayerList().removeOperator(this.getUniqueId());
+		}
+
 	}
 
 	@Override

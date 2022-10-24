@@ -71,7 +71,6 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private final List<Entity> passengers = new ArrayList<>(0);
 	private final MetadataTable metadataTable = new MetadataTable();
 	private final PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
-	private boolean operator = false;
 	private @NotNull Component name = Component.text("entity");
 	private @Nullable Component customName = null;
 	private boolean customNameVisible = false;
@@ -346,13 +345,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public boolean isOp()
 	{
-		return operator;
+		return false;
 	}
 
 	@Override
 	public void setOp(boolean isOperator)
 	{
-		operator = isOperator;
+		//CraftBukkit does nothing here
 	}
 
 	@Override

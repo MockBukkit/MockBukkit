@@ -2247,4 +2247,12 @@ class PlayerMockTest
 		assertFalse(player.hasPlayedBefore());
 	}
 
+	@Test
+	void testSetOpFalse()
+	{
+		PlayerMock player = server.addPlayer();
+		player.setOp(false);
+		assertFalse(player.isOp());
+	}
+
 }

@@ -123,4 +123,12 @@ class OfflinePlayerMockTest
 		assertTrue(MockBukkit.getMock().getOperators().contains(player));
 	}
 
+	@Test
+	void setOpFalse()
+	{
+		player.setOp(true);
+		player.setOp(false);
+		assertFalse(player.isOp());
+		assertFalse(MockBukkit.getMock().getOperators().contains(player));
+	}
 }
