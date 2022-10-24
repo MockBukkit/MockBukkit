@@ -1012,4 +1012,17 @@ class EntityMockTest
 		assertInstanceOf(Entity.Spigot.class, entity.spigot());
 	}
 
+	@Test
+	void testIsVisualFireDefault()
+	{
+		assertFalse(entity.isVisualFire());
+	}
+
+	@Test
+	void testSetVisualFire()
+	{
+		entity.setVisualFire(true);
+		assertTrue(entity.isVisualFire());
+	}
+
 }
