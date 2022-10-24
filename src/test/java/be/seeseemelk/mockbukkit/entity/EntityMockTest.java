@@ -1025,4 +1025,16 @@ class EntityMockTest
 		assertTrue(entity.isVisualFire());
 	}
 
+	@Test
+	void testHasGravityDefault()
+	{
+		assertTrue(entity.hasGravity());
+	}
+
+	@Test
+	void testSetGravity()
+	{
+		entity.setGravity(false);
+		assertFalse(entity.hasGravity());
+	}
 }
