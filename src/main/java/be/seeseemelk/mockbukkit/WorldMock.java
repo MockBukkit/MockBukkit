@@ -1112,7 +1112,7 @@ public class WorldMock implements World
 	private void callSpawnEvent(EntityMock entity, CreatureSpawnEvent.@NotNull SpawnReason reason)
 	{
 
-		boolean cancelled; // Here for future implementation (see below)
+		boolean success; // Here for future implementation (see below)
 
 		if (entity instanceof LivingEntity living && !(entity instanceof Player))
 		{
@@ -1128,27 +1128,26 @@ public class WorldMock implements World
 				}
 			}
 
-
-			cancelled = !new CreatureSpawnEvent(living, reason).callEvent();
+			success = new CreatureSpawnEvent(living, reason).callEvent();
 		}
 		else if (entity instanceof Item item)
 		{
-			cancelled = !new ItemSpawnEvent(item).callEvent();
+			success = new ItemSpawnEvent(item).callEvent();
 		}
 		else if (entity instanceof Player)
 		{
-			cancelled = true; // Shouldn't ever be called here but just for parody.
+			success = false; // Shouldn't ever be called here but just for parody.
 		}
 		else if (entity instanceof Projectile)
 		{
-			cancelled = !new ProjectileLaunchEvent(entity).callEvent();
+			success = new ProjectileLaunchEvent(entity).callEvent();
 		}
 		else
 		{
-			cancelled = !new EntitySpawnEvent(entity).callEvent();
+			success = new EntitySpawnEvent(entity).callEvent();
 		}
 
-		if (cancelled || !entity.isValid())
+		if (!success || !entity.isValid())
 		{
 			Entity vehicle = entity.getVehicle();
 			if (vehicle != null)
