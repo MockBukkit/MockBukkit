@@ -7,6 +7,9 @@ import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.KeyedBossBar;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Mock implementation of {@link KeyedBossBar}.
+ */
 public class KeyedBossBarMock extends BossBarMock implements KeyedBossBar
 {
 
