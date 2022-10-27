@@ -1091,7 +1091,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * Sets the global view distance for all players.
 	 *
 	 * @param viewDistance The new view distance.
-	 * @see ServerConfiguration#setViewDistance(int)
+	 * @see ServerMock#getViewDistance()
 	 */
 	public void setViewDistance(int viewDistance)
 	{
@@ -1115,7 +1115,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * Sets the global default World Type
 	 *
 	 * @param worldType The new {@link ServerConfiguration.LevelType}
-	 * @see ServerConfiguration#setLevelType(ServerConfiguration.LevelType)
+	 * @see ServerMock#getWorldType()
 	 */
 	public void setWorldType(@NotNull ServerConfiguration.LevelType worldType)
 	{
@@ -1132,7 +1132,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * Sets whether structures should be generated.
 	 *
 	 * @param generateStructures Whether structures should be generated.
-	 * @see ServerConfiguration#setGenerateStructures(boolean)
+	 * @see ServerMock#getGenerateStructures()
 	 */
 	public void setGenerateStructures(boolean generateStructures)
 	{
@@ -1149,7 +1149,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * Sets whether the End should be allowed.
 	 *
 	 * @param allowEnd Whether the End should be allowed.
-	 * @see ServerConfiguration#setAllowEnd(boolean)
+	 * @see ServerMock#getAllowEnd()
 	 */
 	public void setAllowEnd(boolean allowEnd)
 	{
@@ -1166,7 +1166,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * Sets whether the Nether should be allowed.
 	 *
 	 * @param allowNether Whether the Nether should be allowed.
-	 * @see ServerConfiguration#setAllowNether(boolean)
+	 * @see ServerMock#getAllowNether()
 	 */
 	public void setAllowNether(boolean allowNether)
 	{
@@ -1394,7 +1394,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * Sets whether the server should send chat previews.
 	 *
 	 * @param shouldSendChatPreviews Whether the server should send chat previews.
-	 * @see ServerConfiguration#setShouldSendChatPreviews(boolean)
+	 * @see ServerMock#shouldSendChatPreviews()
 	 */
 	public void setShouldSendChatPreviews(boolean shouldSendChatPreviews)
 	{
@@ -1411,7 +1411,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * Sets whether the server should enforce secure profiles.
 	 *
 	 * @param enforcingSecureProfiles Whether the server should enforce secure profiles.
-	 * @see ServerConfiguration#setEnforceSecureProfiles(boolean)
+	 * @see ServerMock#isEnforcingSecureProfiles()
 	 */
 	public void setEnforcingSecureProfiles(boolean enforcingSecureProfiles)
 	{
@@ -1428,7 +1428,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * Sets whether the server should be in online mode.
 	 *
 	 * @param onlineMode Whether the server should be in online mode.
-	 * @see ServerConfiguration#setOnlineMode(boolean)
+	 * @see ServerMock#getOnlineMode()
 	 */
 	public void setOnlineMode(boolean onlineMode)
 	{
@@ -1445,7 +1445,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * Sets whether the server should allow flight.
 	 *
 	 * @param allowFlight Whether the server should allow flight.
-	 * @see ServerConfiguration#setAllowFlight(boolean)
+	 * @see ServerMock#getAllowFlight()
 	 */
 	public void setAllowFlight(boolean allowFlight)
 	{
@@ -1462,7 +1462,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * Sets whether the server should be in hardcore mode.
 	 *
 	 * @param hardcore Whether the server should be in hardcore mode.
-	 * @see ServerConfiguration#setHardcore(boolean)
+	 * @see ServerMock#isHardcore()
 	 */
 	public void setHardcore(boolean hardcore)
 	{
@@ -1540,7 +1540,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * Negative values remove the limit.
 	 *
 	 * @param maxChainedNeighborUpdates The maximum number of chained neighbour updates.
-	 * @see ServerConfiguration#setMaxChainedNeighbourUpdates(int)
+	 * @see ServerMock#getMaxChainedNeighborUpdates()
 	 */
 	public void setMaxChainedNeighborUpdates(int maxChainedNeighborUpdates)
 	{
@@ -1608,7 +1608,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * Sets the shutdown message.
 	 *
 	 * @param shutdownMessage The shutdown message.
-	 * @see ServerConfiguration#setShutdownMessage(Component)
+	 * @see ServerMock#shutdownMessage()
 	 */
 	public void setShutdownMessage(@NotNull Component shutdownMessage)
 	{
@@ -2083,7 +2083,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * Set the maximum world size
 	 *
 	 * @param maxWorldSize The maximum world size
-	 * @see ServerConfiguration#setMaxWorldSize(int)
+	 * @see ServerMock#getMaxWorldSize()
 	 */
 	public void setMaxWorldSize(int maxWorldSize)
 	{
@@ -2100,7 +2100,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * Set the simulation distance
 	 *
 	 * @param simulationDistance The simulation distance
-	 * @see ServerConfiguration#setSimulationDistance(int)
+	 * @see ServerMock#getSimulationDistance()
 	 */
 	public void setSimulationDistance(int simulationDistance)
 	{
@@ -2117,7 +2117,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * Set whether to hide online players
 	 *
 	 * @param hideOnlinePlayers Whether to hide online players
-	 * @see ServerConfiguration#setHideOnlinePlayers(boolean)
+	 * @see ServerMock#getHideOnlinePlayers()
 	 */
 	public void setHideOnlinePlayers(boolean hideOnlinePlayers)
 	{
