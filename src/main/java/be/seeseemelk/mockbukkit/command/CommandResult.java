@@ -9,6 +9,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 
+/**
+ * Represents the result of a command invocation.
+ */
 public class CommandResult
 {
 
@@ -25,7 +28,7 @@ public class CommandResult
 	/**
 	 * Check if the command executed successfully.
 	 *
-	 * @return {@code true} if the command executed successfully, {@code false} if a problem occured.
+	 * @return {@code true} if the command executed successfully, {@code false} if a problem occurred.
 	 */
 	public boolean hasSucceeded()
 	{
@@ -52,6 +55,7 @@ public class CommandResult
 	 * Assets if the given message was not the next message send to the command sender.
 	 *
 	 * @param message The message to check for.
+	 * @see MessageTarget#nextMessage()
 	 */
 	public void assertResponse(String message)
 	{
@@ -71,6 +75,8 @@ public class CommandResult
 	 *
 	 * @param format  The formatted message to check for.
 	 * @param objects The objects to place into the formatted message.
+	 * @see #assertResponse(String)
+	 * @see MessageTarget#nextMessage()
 	 */
 	public void assertResponse(@NotNull String format, Object... objects)
 	{
@@ -79,6 +85,8 @@ public class CommandResult
 
 	/**
 	 * Asserts if more messages have been sent to the command sender.
+	 *
+	 * @see MessageTarget#nextMessage()
 	 */
 	public void assertNoResponse()
 	{
