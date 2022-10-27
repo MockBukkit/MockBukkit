@@ -4,14 +4,12 @@ import be.seeseemelk.mockbukkit.AsyncCatcher;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
 import be.seeseemelk.mockbukkit.map.MapViewMock;
 import be.seeseemelk.mockbukkit.sound.AudioExperience;
 import be.seeseemelk.mockbukkit.sound.SoundReceiver;
 import be.seeseemelk.mockbukkit.statistic.StatisticsMock;
 import com.destroystokyo.paper.ClientOption;
 import com.destroystokyo.paper.Title;
-import com.destroystokyo.paper.block.TargetBlockInfo;
 import com.destroystokyo.paper.entity.TargetEntityInfo;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.google.common.base.Preconditions;
@@ -31,7 +29,6 @@ import org.bukkit.BanList;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
 import org.bukkit.Effect;
-import org.bukkit.FluidCollisionMode;
 import org.bukkit.GameEvent;
 import org.bukkit.GameMode;
 import org.bukkit.GameRule;
@@ -51,7 +48,6 @@ import org.bukkit.advancement.Advancement;
 import org.bukkit.advancement.AdvancementProgress;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.conversations.Conversation;
@@ -59,10 +55,8 @@ import org.bukkit.conversations.ConversationAbandonedEvent;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Pose;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
@@ -93,14 +87,11 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.MainHand;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.util.BoundingBox;
-import org.bukkit.util.RayTraceResult;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -150,8 +141,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private boolean flying = false;
 	private Location compassTarget;
 	private @Nullable Location bedSpawnLocation;
-	private long firstPlayed = 0;
-	private long lastPlayed = 0;
 	private @Nullable InetSocketAddress address;
 
 	private final PlayerSpigotMock playerSpigotMock = new PlayerSpigotMock();
@@ -173,7 +162,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	{
 		this(server, name, UUID.nameUUIDFromBytes(("OfflinePlayer:" + name).getBytes(StandardCharsets.UTF_8)));
 		this.online = false;
-		this.firstPlayed = 0;
 		this.scoreboard = server.getScoreboardManager().getMainScoreboard();
 	}
 
@@ -185,7 +173,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		setDisplayName(name);
 		this.online = true;
 		this.server = server;
-		this.firstPlayed = System.currentTimeMillis();
 
 		if (Bukkit.getWorlds().isEmpty())
 		{
@@ -213,7 +200,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 			return false;
 		}
 		this.online = false;
-		this.lastPlayed = System.currentTimeMillis();
 
 		Component message = MiniMessage.miniMessage()
 				.deserialize("<name> has left the Server!", Placeholder.component("name", this.displayName()));
@@ -233,7 +219,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 */
 	public boolean reconnect()
 	{
-		if (firstPlayed == 0)
+		if (!hasPlayedBefore())
 		{
 			throw new IllegalStateException("Player was never online");
 		}
@@ -247,7 +233,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		}
 
 		this.online = true;
-		this.lastPlayed = System.currentTimeMillis();
 
 		server.addPlayer(this);
 
@@ -719,33 +704,26 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public long getFirstPlayed()
 	{
-		return firstPlayed;
+		return this.server.getPlayerList().getFirstPlayed(getUniqueId());
 	}
 
 	@Override
+	@Deprecated
 	public long getLastPlayed()
 	{
-		return lastPlayed;
+		return getLastSeen();
 	}
 
 	@Override
 	public boolean hasPlayedBefore()
 	{
-		return firstPlayed > 0;
+		return Arrays.stream(this.server.getPlayerList().getOfflinePlayers()).anyMatch(p -> p.getUniqueId().equals(getUniqueId()));
 	}
 
+	@Deprecated(forRemoval = true)
 	public void setLastPlayed(long time)
 	{
-		if (time > 0)
-		{
-			lastPlayed = time;
-
-			// Set firstPlayed if this is the first time
-			if (firstPlayed == 0)
-			{
-				firstPlayed = time;
-			}
-		}
+		throw new UnsupportedOperationException("Deprecated; Does not do anything");
 	}
 
 	@Override
@@ -1063,9 +1041,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 					case SNARE_DRUM -> Sound.BLOCK_NOTE_BLOCK_SNARE;
 					case STICKS -> Sound.BLOCK_NOTE_BLOCK_HAT;
 					case XYLOPHONE -> Sound.BLOCK_NOTE_BLOCK_XYLOPHONE;
-					default ->
-						// This should never be reached unless Mojang adds new instruments
-							throw new UnimplementedOperationException("Instrument '" + instrument + "' has no implementation!");
 				};
 		float pitch = (float) Math.pow(2.0D, (note - 12.0D) / 12.0D);
 		playSound(loc, sound, SoundCategory.RECORDS, 3, pitch);
@@ -1117,6 +1092,32 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		Preconditions.checkNotNull(sound, "Sound cannot be null");
 		Preconditions.checkNotNull(category, "Category cannot be null");
 		heardSounds.add(new AudioExperience(sound, category, entity.getLocation(), volume, pitch));
+	}
+
+	@Override
+	public void playSound(net.kyori.adventure.sound.@NotNull Sound sound)
+	{
+		playSound(sound, net.kyori.adventure.sound.Sound.Emitter.self()); // Not strictly equivalent since normally the sound does not follow the entity.
+	}
+
+	@Override
+	public void playSound(net.kyori.adventure.sound.@NotNull Sound sound, double x, double y, double z)
+	{
+		Preconditions.checkNotNull(sound, "Sound cannot be null");
+		heardSounds.add(new AudioExperience(sound, new Location(getWorld(), x, y, z)));
+	}
+
+	@Override
+	public void playSound(net.kyori.adventure.sound.@NotNull Sound sound, net.kyori.adventure.sound.Sound.@NotNull Emitter emitter)
+	{
+		Preconditions.checkNotNull(emitter, "Emitter cannot be null");
+		Preconditions.checkNotNull(sound, "Sound cannot be null");
+		if (emitter == net.kyori.adventure.sound.Sound.Emitter.self())
+		{
+			emitter = this;
+		}
+		Preconditions.checkArgument(emitter instanceof Entity, "Sound emitter must be an Entity or self()");
+		heardSounds.add(new AudioExperience(sound, ((Entity) emitter).getLocation()));
 	}
 
 	@Override
@@ -1233,6 +1234,11 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		// Pretend we sent the block change.
 	}
 
+	@Override
+	public void sendBlockChanges(@NotNull Collection<BlockState> blocks, boolean suppressLightUpdates)
+	{
+		// Pretend we sent the block change.
+	}
 
 	@Override
 	public void sendSignChange(@NotNull Location loc, @Nullable List<Component> lines, @NotNull DyeColor dyeColor, boolean hasGlowingText) throws IllegalArgumentException
@@ -1683,15 +1689,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public long getLastLogin()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.server.getPlayerList().getLastLogin(getUniqueId());
 	}
 
 	@Override
 	public long getLastSeen()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.server.getPlayerList().getLastSeen(getUniqueId());
 	}
 
 	@Override
@@ -2429,6 +2433,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public void showElderGuardian(boolean silent)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public void attack(@NotNull Entity target)
 	{
 		// TODO Auto-generated method stub
@@ -2453,6 +2464,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	{
 		Preconditions.checkNotNull(loc, "Location cannot be null");
 		Preconditions.checkArgument(progress >= 0.0 && progress <= 1.0, "progress must be between 0.0 and 1.0 (inclusive)");
+	}
+
+	@Override
+	public void sendBlockDamage(@NotNull Location loc, float progress, int destroyerIdentity)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -2548,20 +2566,17 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		@Deprecated
 		public void sendMessage(@NotNull BaseComponent @NotNull ... components)
 		{
-			for (BaseComponent component : components)
-			{
-				sendMessage(component);
-			}
+			sendMessage(ChatMessageType.CHAT, components);
 		}
 
 		@Override
 		@Deprecated
 		public void sendMessage(@NotNull ChatMessageType position, @NotNull BaseComponent @NotNull ... components)
 		{
-			for (BaseComponent component : components)
-			{
-				sendMessage(position, component);
-			}
+			Preconditions.checkNotNull(position, "Position must not be null");
+			Preconditions.checkNotNull(components, "Component must not be null");
+			Component comp = BungeeComponentSerializer.get().deserialize(components);
+			PlayerMock.this.sendMessage(comp);
 		}
 
 		@Override
@@ -2575,10 +2590,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		@Deprecated
 		public void sendMessage(@NotNull ChatMessageType position, @NotNull BaseComponent component)
 		{
-			Preconditions.checkNotNull(position, "Position must not be null");
-			Preconditions.checkNotNull(component, "Component must not be null");
-			Component comp = BungeeComponentSerializer.get().deserialize(new BaseComponent[]{ component });
-			PlayerMock.this.sendMessage(comp);
+			sendMessage(position, new BaseComponent[]{ component });
 		}
 
 	}

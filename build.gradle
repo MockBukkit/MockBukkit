@@ -21,7 +21,7 @@ repositories {
     }
 
     maven {
-        url 'https://papermc.io/repo/repository/maven-public/'
+        url 'https://repo.papermc.io/repository/maven-public/'
     }
 }
 
@@ -30,7 +30,7 @@ dependencies {
     api "io.papermc.paper:paper-api:${gradle.ext.apiVersionFull}"
 
     //Dependencies for Unit Tests
-    implementation 'org.junit.jupiter:junit-jupiter:5.9.0'
+    implementation 'org.junit.jupiter:junit-jupiter:5.9.1'
     implementation 'org.hamcrest:hamcrest-library:2.2'
 
     // General utilities for the project
@@ -38,9 +38,9 @@ dependencies {
     implementation 'org.jetbrains:annotations:23.0.0'
 
     // LibraryLoader dependencies
-    implementation 'org.apache.maven:maven-resolver-provider:3.8.6'
-    implementation 'org.apache.maven.resolver:maven-resolver-connector-basic:1.8.1'
-    implementation 'org.apache.maven.resolver:maven-resolver-transport-http:1.8.1'
+    implementation 'org.apache.maven:maven-resolver-provider:3.8.5'
+    implementation 'org.apache.maven.resolver:maven-resolver-connector-basic:1.7.3'
+    implementation 'org.apache.maven.resolver:maven-resolver-transport-http:1.7.3'
 }
 
 jar {

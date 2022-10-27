@@ -41,6 +41,23 @@ public final class AudioExperience
 		this(sound.getKey().getKey(), category, loc, volume, pitch);
 	}
 
+	public AudioExperience(net.kyori.adventure.sound.@NotNull Sound sound, @NotNull Location loc)
+	{
+		this(sound.name().asString(), switch (sound.source())
+				{
+					case MASTER -> SoundCategory.MASTER;
+					case MUSIC -> SoundCategory.MUSIC;
+					case RECORD -> SoundCategory.RECORDS;
+					case WEATHER -> SoundCategory.WEATHER;
+					case BLOCK -> SoundCategory.BLOCKS;
+					case HOSTILE -> SoundCategory.HOSTILE;
+					case NEUTRAL -> SoundCategory.NEUTRAL;
+					case PLAYER -> SoundCategory.PLAYERS;
+					case AMBIENT -> SoundCategory.AMBIENT;
+					case VOICE -> SoundCategory.VOICE;
+				}, loc, sound.volume(), sound.pitch());
+	}
+
 	/**
 	 * This returns the {@link Sound} that was played. We return the {@link String} representation of the actual sound,
 	 * not the sound itself.
@@ -62,6 +79,16 @@ public final class AudioExperience
 	public SoundCategory getCategory()
 	{
 		return category;
+	}
+
+	/**
+	 * This method returns the {@link net.kyori.adventure.sound.Sound.Source} with which the {@link Sound} was played.
+	 *
+	 * @return The {@link net.kyori.adventure.sound.Sound.Source}
+	 */
+	public net.kyori.adventure.sound.Sound.@NotNull Source getSource()
+	{
+		return category.soundSource();
 	}
 
 	/**
