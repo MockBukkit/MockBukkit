@@ -1,14 +1,17 @@
 package be.seeseemelk.mockbukkit.block.state;
 
+import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -25,10 +28,17 @@ class BeehiveMockTest
 	@BeforeEach
 	void setUp()
 	{
+		MockBukkit.mock();
 		this.world = new WorldMock();
 		this.block = world.getBlockAt(0, 10, 0);
 		this.block.setType(Material.BEEHIVE);
 		this.beehive = new BeehiveMock(this.block);
+	}
+
+	@AfterEach
+	void teardown()
+	{
+		MockBukkit.unmock();
 	}
 
 	@Test
@@ -123,6 +133,23 @@ class BeehiveMockTest
 	void setMaxEntities_LessThanZero_ThrowsException()
 	{
 		assertThrowsExactly(IllegalArgumentException.class, () -> beehive.setMaxEntities(-1));
+	}
+
+	@Test
+	void updateSedated_CampfireBelow_True()
+	{
+		assertFalse(beehive.isSedated());
+		world.getBlockAt(0, 5, 0).setType(Material.CAMPFIRE);
+		beehive.updateSedated();
+		assertTrue(beehive.isSedated());
+	}
+
+	@Test
+	void updateSedated_NoCampfireBelow_False()
+	{
+		assertFalse(beehive.isSedated());
+		beehive.updateSedated();
+		assertFalse(beehive.isSedated());
 	}
 
 	@Test

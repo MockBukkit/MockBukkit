@@ -261,6 +261,10 @@ public class BlockDataMock implements BlockData
 		{
 			return new TrapDoorMock(material);
 		}
+		else if (Tag.CAMPFIRES.isTagged(material))
+		{
+			return new CampfireMock(material);
+		}
 		return null;
 	}
 
