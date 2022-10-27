@@ -15,6 +15,9 @@ import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.OPEN;
 import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.POWERED;
 import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.WATERLOGGED;
 
+/**
+ * Mock implementation of {@link TrapDoor}.
+ */
 public class TrapDoorMock extends BlockDataMock implements TrapDoor
 {
 

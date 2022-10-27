@@ -12,6 +12,9 @@ import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.FACING;
 import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.OCCUPIED;
 import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.PART;
 
+/**
+ * Mock implementation of {@link Bed}.
+ */
 public class BedMock extends BlockDataMock implements Bed
 {
 

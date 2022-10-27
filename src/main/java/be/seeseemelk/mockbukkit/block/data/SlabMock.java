@@ -9,6 +9,9 @@ import org.jetbrains.annotations.NotNull;
 import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.TYPE;
 import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.WATERLOGGED;
 
+/**
+ * Mock implementation of {@link Slab}.
+ */
 public class SlabMock extends BlockDataMock implements Slab
 {
 

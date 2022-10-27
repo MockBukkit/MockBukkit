@@ -14,6 +14,9 @@ import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.HALF;
 import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.SHAPE;
 import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.WATERLOGGED;
 
+/**
+ * Mock implementation of {@link Stairs}.
+ */
 public class StairsMock extends BlockDataMock implements Stairs
 {
 

@@ -20,6 +20,10 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Mock implementation of {@link BlockData}.
+ * Also manages the creation of new BlockData with the appropriate mock class.
+ */
 public class BlockDataMock implements BlockData
 {
 
