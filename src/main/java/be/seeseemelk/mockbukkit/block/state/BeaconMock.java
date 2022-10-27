@@ -19,6 +19,9 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
 
+/**
+ * Mock implementation of {@link Beacon}.
+ */
 public class BeaconMock extends TileStateMock implements Beacon
 {
 

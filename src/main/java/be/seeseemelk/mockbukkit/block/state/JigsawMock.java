@@ -6,6 +6,9 @@ import org.bukkit.block.BlockState;
 import org.bukkit.block.Jigsaw;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Mock implementation of a {@link Jigsaw}.
+ */
 public class JigsawMock extends TileStateMock implements Jigsaw
 {
 

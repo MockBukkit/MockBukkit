@@ -24,6 +24,10 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Mock implementation of {@link BlockState}.
+ * Also manages the creation of new BlockStates with the appropriate mock class.
+ */
 public class BlockStateMock implements BlockState
 {
 

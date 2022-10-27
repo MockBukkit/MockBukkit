@@ -6,6 +6,9 @@ import org.bukkit.block.BlockState;
 import org.bukkit.block.Smoker;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Mock implementation of a {@link Smoker}.
+ */
 public class SmokerMock extends AbstractFurnaceMock implements Smoker
 {
 

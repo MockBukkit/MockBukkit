@@ -11,6 +11,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Mock implementation of {@link CreatureSpawner}.
+ */
 public class CreatureSpawnerMock extends TileStateMock implements CreatureSpawner
 {
 

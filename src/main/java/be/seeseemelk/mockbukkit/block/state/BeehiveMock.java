@@ -15,6 +15,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Mock implementation of {@link Beehive}.
+ */
 public class BeehiveMock extends TileStateMock implements Beehive
 {
 

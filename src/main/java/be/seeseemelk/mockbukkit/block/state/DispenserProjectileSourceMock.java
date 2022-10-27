@@ -10,9 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * This is a {@link BlockProjectileSource} mock specifically for the {@link DispenserMock}.
- *
- * @author TheBusyBiscuit
+ * Mock implementation of a {@link BlockProjectileSource}, specifically for the {@link DispenserMock}.
  */
 class DispenserProjectileSourceMock implements BlockProjectileSource
 {

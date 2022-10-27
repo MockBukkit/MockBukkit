@@ -12,6 +12,9 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.BlockVector;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Mock implementation of a {@link Structure}.
+ */
 public class StructureMock extends TileStateMock implements Structure
 {
 

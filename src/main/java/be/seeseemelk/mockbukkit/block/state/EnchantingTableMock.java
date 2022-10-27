@@ -9,6 +9,9 @@ import org.bukkit.block.EnchantingTable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * Mock implementation of an {@link EnchantingTable}.
+ */
 public class EnchantingTableMock extends TileStateMock implements EnchantingTable
 {
 

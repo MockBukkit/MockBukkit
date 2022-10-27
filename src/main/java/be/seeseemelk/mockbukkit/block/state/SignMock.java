@@ -16,9 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This {@link ContainerMock} represents a {@link Sign}.
- *
- * @author TheBusyBiscuit
+ * Mock implementation of a {@link Sign}.
  */
 public class SignMock extends TileStateMock implements Sign
 {

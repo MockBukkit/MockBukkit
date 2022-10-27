@@ -9,6 +9,9 @@ import org.bukkit.block.BrewingStand;
 import org.bukkit.inventory.BrewerInventory;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Mock implementation of {@link BrewingStand}.
+ */
 public class BrewingStandMock extends ContainerMock implements BrewingStand
 {
 

@@ -12,6 +12,9 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * Mock implementation of a {@link Lectern}.
+ */
 public class LecternMock extends ContainerMock implements Lectern
 {
 

@@ -6,6 +6,9 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Mock implementation of {@link BlastFurnace}.
+ */
 public class BlastFurnaceMock extends AbstractFurnaceMock implements BlastFurnace
 {
 

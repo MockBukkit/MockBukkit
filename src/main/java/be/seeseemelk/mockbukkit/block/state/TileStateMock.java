@@ -10,10 +10,7 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * This {@link BlockStateMock} represents a {@link TileState} which is capable of storing persistent data using a
- * {@link PersistentDataContainerMock}.
- *
- * @author TheBusyBiscuit
+ * Mock implementation of {@link TileState}.
  */
 public abstract class TileStateMock extends BlockStateMock implements TileState
 {

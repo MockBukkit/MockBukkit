@@ -5,6 +5,9 @@ import org.bukkit.block.Block;
 import org.bukkit.block.Comparator;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Mock implementation of {@link Comparator}.
+ */
 public class ComparatorMock extends TileStateMock implements Comparator
 {
 

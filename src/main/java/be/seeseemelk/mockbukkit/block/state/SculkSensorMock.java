@@ -7,6 +7,9 @@ import org.bukkit.block.BlockState;
 import org.bukkit.block.SculkSensor;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Mock implementation of a {@link SculkSensor}.
+ */
 public class SculkSensorMock extends TileStateMock implements SculkSensor
 {
 

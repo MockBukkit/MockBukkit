@@ -6,6 +6,9 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Mock implementation of {@link Bell}.
+ */
 public class BellMock extends TileStateMock implements Bell
 {
 

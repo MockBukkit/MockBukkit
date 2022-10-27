@@ -5,6 +5,9 @@ import org.bukkit.block.Block;
 import org.bukkit.block.Conduit;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Mock implementation of {@link Conduit}.
+ */
 public class ConduitMock extends TileStateMock implements Conduit
 {
 

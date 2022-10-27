@@ -8,6 +8,9 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * Mock implementation of a {@link Jukebox}.
+ */
 public class JukeboxMock extends TileStateMock implements Jukebox
 {
 

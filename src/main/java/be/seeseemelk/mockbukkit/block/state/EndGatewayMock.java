@@ -11,6 +11,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
+/**
+ * Mock implementation of a {@link EndGateway}.
+ */
 public class EndGatewayMock extends TileStateMock implements EndGateway
 {
 

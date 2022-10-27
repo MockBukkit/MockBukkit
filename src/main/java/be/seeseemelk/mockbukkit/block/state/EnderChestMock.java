@@ -7,10 +7,7 @@ import org.bukkit.block.EnderChest;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * A simple mock of the {@link EnderChest} {@link BlockState}, it is a pretty generic implementation of
- * {@link TileStateMock}.
- *
- * @author TheBusyBiscuit
+ * Mock implementation of an {@link EnderChest}.
  */
 public class EnderChestMock extends TileStateMock implements EnderChest
 {

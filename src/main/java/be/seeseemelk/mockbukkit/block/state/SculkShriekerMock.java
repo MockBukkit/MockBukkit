@@ -6,6 +6,9 @@ import org.bukkit.block.BlockState;
 import org.bukkit.block.SculkShrieker;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Mock implementation of a {@link SculkShrieker}.
+ */
 public class SculkShriekerMock extends TileStateMock implements SculkShrieker
 {
 

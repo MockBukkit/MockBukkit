@@ -15,6 +15,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Mock implementation of {@link Banner}.
+ */
 public class BannerMock extends TileStateMock implements Banner
 {
 

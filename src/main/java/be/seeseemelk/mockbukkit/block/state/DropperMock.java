@@ -14,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.UUID;
 
 /**
- * This {@link ContainerMock} represents a {@link Dropper}.
+ * Mock implementation of a {@link Dropper}.
  *
  * @author TheBusyBiscuit
  */

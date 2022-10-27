@@ -11,10 +11,7 @@ import org.bukkit.loot.LootTable;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * This {@link ContainerMock} represents a {@link Barrel}
- *
- * @author TheBusyBiscuit
- * @see ChestMock
+ * Mock implementation of {@link Barrel}.
  */
 public class BarrelMock extends ContainerMock implements Barrel
 {

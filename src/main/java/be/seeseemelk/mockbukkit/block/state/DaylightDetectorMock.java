@@ -5,6 +5,9 @@ import org.bukkit.block.Block;
 import org.bukkit.block.DaylightDetector;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Mock implementation of {@link DaylightDetector}.
+ */
 public class DaylightDetectorMock extends TileStateMock implements DaylightDetector
 {
 

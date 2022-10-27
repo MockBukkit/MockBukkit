@@ -18,6 +18,9 @@ import org.bukkit.block.data.Rotatable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * Mock implementation of a {@link Skull}.
+ */
 public class SkullMock extends TileStateMock implements Skull
 {
 

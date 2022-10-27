@@ -15,9 +15,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.UUID;
 
 /**
- * This {@link ContainerMock} represents a {@link Dispenser}.
- *
- * @author TheBusyBiscuit
+ * Mock implementation of {@link Dispenser}.
  */
 public class DispenserMock extends ContainerMock implements Dispenser
 {

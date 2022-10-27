@@ -17,9 +17,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.UUID;
 
 /**
- * This {@link ContainerMock} represents a {@link ShulkerBox}.
- *
- * @author TheBusyBiscuit
+ * Mock implementation of a {@link ShulkerBox}.
  */
 public class ShulkerBoxMock extends ContainerMock implements ShulkerBox
 {

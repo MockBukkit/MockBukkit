@@ -10,6 +10,9 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * Mock implementation of {@link Campfire}.
+ */
 public class CampfireMock extends TileStateMock implements Campfire
 {
 

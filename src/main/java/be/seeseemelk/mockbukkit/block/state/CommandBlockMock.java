@@ -9,6 +9,9 @@ import org.bukkit.block.CommandBlock;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * Mock implementation of {@link CommandBlock} and {@link CommandBlockHolderMock}.
+ */
 public class CommandBlockMock extends TileStateMock implements CommandBlock, CommandBlockHolderMock
 {
 

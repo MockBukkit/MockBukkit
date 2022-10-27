@@ -14,9 +14,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.UUID;
 
 /**
- * This {@link ContainerMock} represents a {@link Hopper}.
- *
- * @author TheBusyBiscuit
+ * Mock implementation of a {@link Hopper}.
  */
 public class HopperMock extends ContainerMock implements Hopper
 {

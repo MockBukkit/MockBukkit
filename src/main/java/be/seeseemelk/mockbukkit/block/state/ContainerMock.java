@@ -12,9 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * The {@link ContainerMock} is an extension of a {@link TileStateMock} which can also hold an {@link Inventory}.
- *
- * @author TheBusyBiscuit
+ * Mock implementation of {@link Container}.
  */
 public abstract class ContainerMock extends TileStateMock implements Container
 {

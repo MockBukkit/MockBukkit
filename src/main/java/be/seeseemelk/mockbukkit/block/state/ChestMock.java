@@ -15,9 +15,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.UUID;
 
 /**
- * This {@link ContainerMock} represents a {@link Chest} or Trapped {@link Chest}.
- *
- * @author TheBusyBiscuit
+ * Mock implementation of {@link Chest}.
  */
 public class ChestMock extends ContainerMock implements Chest
 {

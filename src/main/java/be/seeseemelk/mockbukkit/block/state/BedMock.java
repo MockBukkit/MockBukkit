@@ -9,6 +9,9 @@ import org.bukkit.block.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * Mock implementation of {@link Bed}.
+ */
 public class BedMock extends TileStateMock implements Bed
 {
 

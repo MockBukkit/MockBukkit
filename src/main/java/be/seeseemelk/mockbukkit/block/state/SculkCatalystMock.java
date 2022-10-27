@@ -6,6 +6,9 @@ import org.bukkit.block.BlockState;
 import org.bukkit.block.SculkCatalyst;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Mock implementation of a {@link SculkCatalyst}.
+ */
 public class SculkCatalystMock extends TileStateMock implements SculkCatalyst
 {
 

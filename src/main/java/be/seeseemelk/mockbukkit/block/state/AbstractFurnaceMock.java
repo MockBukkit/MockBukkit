@@ -13,6 +13,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
+/**
+ * Mock implementation of {@link Furnace}.
+ */
 public abstract class AbstractFurnaceMock extends ContainerMock implements Furnace
 {
 
