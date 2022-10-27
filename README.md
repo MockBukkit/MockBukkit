@@ -280,3 +280,8 @@ If you want to see some projects that are using MockBukkit right now, feel free 
 You can also have a look at our documentation where we outline various examples and tricks on how to use MockBukkit
 already:
 https://mockbukkit.readthedocs.io/en/latest/index.html
+
+## :gift_heart: Sponsors
+
+Thanks to JetBrains, the creators of IntelliJ IDEA, for providing us with licenses as part of their [Open Source program](https://www.jetbrains.com/opensource/).  
+[![JetBrains](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg)](https://www.jetbrains.com/opensource/)
