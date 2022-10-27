@@ -9,6 +9,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashSet;
@@ -123,6 +124,11 @@ public final class PluginClassLoader extends URLClassLoader { // Spigot
 		}
 	}
 	// Paper end
+
+	@NotNull
+	Collection<Class<?>> getClasses() {
+		return loadedClasses.values();
+	}
 
 	@Override
 	protected Class<?> findClass(String name) throws ClassNotFoundException
