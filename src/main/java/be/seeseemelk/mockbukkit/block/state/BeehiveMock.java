@@ -80,10 +80,7 @@ public class BeehiveMock extends TileStateMock implements Beehive
 	 */
 	public void updateSedated()
 	{
-		if (!isPlaced())
-		{
-			throw new IllegalStateException("Cannot update sedated status of a beehive that is not placed");
-		}
+		Preconditions.checkState(isPlaced(), "Cannot update sedated status of a beehive that is not placed");
 		for (int y = getY() - 1; y > getY() - 6; y--)
 		{
 			Block block = getWorld().getBlockAt(getX(), y, getZ());
