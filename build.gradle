@@ -94,7 +94,7 @@ jacoco {
 }
 
 group = 'com.github.seeseemelk'
-version = this.getVersion()
+//version = this.getVersion()
 
 nexusPublishing {
     repositories {
