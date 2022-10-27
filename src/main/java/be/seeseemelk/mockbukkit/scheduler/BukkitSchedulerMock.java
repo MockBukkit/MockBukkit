@@ -159,11 +159,14 @@ public class BukkitSchedulerMock implements BukkitScheduler
 
 				if (task instanceof RepeatingTask)
 				{
-					if (!task.isCancelled()) {
+					if (!task.isCancelled())
+					{
 						((RepeatingTask) task).updateScheduledTick();
 						scheduledTasks.addTask(task);
 					}
-				} else {
+				}
+				else
+				{
 					task.cancel();
 				}
 			}

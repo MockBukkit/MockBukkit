@@ -43,23 +43,24 @@ class HorseInventoryMockTest
 	}
 
 	@Test
-	void setSaddle()
-	{
-		assertNull(inventory.getSaddle());
-		ItemStack item = new ItemStack(Material.SADDLE);
-		item.setAmount(1);
-		inventory.setSaddle(item);
-		assertEquals(item, inventory.getSaddle());
-	}
-
-	@Test
 	void setArmor()
 	{
 		assertNull(inventory.getArmor());
 		ItemStack item = new ItemStack(Material.IRON_HORSE_ARMOR);
-		item.setAmount(1);
+
 		inventory.setArmor(item);
+
 		assertEquals(item, inventory.getArmor());
+	}
+
+	@Test
+	void setArmor_SetsItemInSlot()
+	{
+		ItemStack item = new ItemStack(Material.IRON_HORSE_ARMOR);
+
+		inventory.setArmor(item);
+
+		assertEquals(item, inventory.getItem(1));
 	}
 
 }

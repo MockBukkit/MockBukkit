@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.inventory.LlamaInventoryMock;
 import com.google.common.base.Preconditions;
 import org.apache.commons.lang3.tuple.Pair;
@@ -8,6 +9,7 @@ import org.bukkit.entity.Horse;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Llama;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +26,7 @@ public class LlamaMock extends ChestedHorseMock implements Llama
 	private final Map<LivingEntity, Pair<Float, Boolean>> attackedMobs = new HashMap<>();
 	private boolean isAgressive = false;
 
-	private final LlamaInventoryMock inventory;
+	private final @NotNull LlamaInventoryMock inventory;
 
 	public LlamaMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -105,6 +107,7 @@ public class LlamaMock extends ChestedHorseMock implements Llama
 	}
 
 	@Override
+	@Deprecated
 	public Horse.@NotNull Variant getVariant()
 	{
 		return Horse.Variant.LLAMA;
@@ -114,6 +117,48 @@ public class LlamaMock extends ChestedHorseMock implements Llama
 	public @NotNull LlamaInventoryMock getInventory()
 	{
 		return this.inventory;
+	}
+
+	@Override
+	public boolean inCaravan()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void joinCaravan(@NotNull Llama llama)
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void leaveCaravan()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Llama getCaravanHead()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean hasCaravanTail()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Llama getCaravanTail()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

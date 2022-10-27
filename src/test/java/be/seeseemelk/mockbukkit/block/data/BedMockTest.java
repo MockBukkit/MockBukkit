@@ -1,9 +1,8 @@
 package be.seeseemelk.mockbukkit.block.data;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
-import com.google.common.collect.ImmutableSet;
+import com.destroystokyo.paper.MaterialTags;
 import org.bukkit.Material;
-import org.bukkit.Tag;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.type.Bed;
 import org.junit.jupiter.api.AfterEach;
@@ -16,8 +15,8 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
-import static org.junit.jupiter.api.Assertions.fail;
 
 class BedMockTest
 {
@@ -43,6 +42,18 @@ class BedMockTest
 		assertEquals(Bed.Part.FOOT, bed.getPart());
 		assertFalse(bed.isOccupied());
 		assertEquals(BlockFace.NORTH, bed.getFacing());
+	}
+
+	@Test
+	void constructor_Material()
+	{
+		assertDoesNotThrow(() -> new BedMock(Material.RED_BED));
+	}
+
+	@Test
+	void constructor_Material_WrongType_ThrowsException()
+	{
+		assertThrowsExactly(IllegalArgumentException.class, () -> new BedMock(Material.BEDROCK));
 	}
 
 	@Test
@@ -75,9 +86,10 @@ class BedMockTest
 	}
 
 	@Test
-	void getFacing_ImmutableSet()
+	void getFacing_Immutable()
 	{
-		assertInstanceOf(ImmutableSet.class, bed.getFaces());
+		Set<BlockFace> faces = bed.getFaces();
+		assertThrows(UnsupportedOperationException.class, () -> faces.add(BlockFace.NORTH_EAST));
 	}
 
 	@Test
@@ -89,19 +101,10 @@ class BedMockTest
 	@Test
 	void blockDataMock_Mock_CorrectType()
 	{
-		for (Material material : Material.values())
+		for (Material material : MaterialTags.BEDS.getValues())
 		{
-			if (Tag.BEDS.isTagged(material) && !(BlockDataMock.mock(material) instanceof BedMock))
-			{
-				fail("BlockDataMock for '" + material + "' is not a " + BedMock.class.getSimpleName());
-			}
+			assertInstanceOf(BedMock.class, BlockDataMock.mock(material));
 		}
-	}
-
-	@Test
-	void testConstructor_InvalidMaterial()
-	{
-		assertThrowsExactly(IllegalArgumentException.class, () -> new BedMock(Material.BARRIER));
 	}
 
 }

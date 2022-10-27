@@ -9,6 +9,9 @@
     <a href="https://search.maven.org/search?q=MockBukkit">
         <img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.github.seeseemelk/MockBukkit-v1.19?color=1bcc94&logo=apache-maven" />
     </a>
+    <a href="https://javadoc.io/doc/com.github.seeseemelk/MockBukkit-v1.19">
+        <img alt="Javadocs" src="https://javadoc.io/badge2/com.github.seeseemelk/MockBukkit-v1.19/javadoc.svg" />
+    </a>
     <a href="https://sonarcloud.io/project/issues?resolved=false&types=CODE_SMELL&id=MockBukkit_MockBukkit">
         <img alt="Code Smells" src="https://sonarcloud.io/api/project_badges/measure?project=MockBukkit_MockBukkit&metric=code_smells">
     </a>
@@ -277,3 +280,8 @@ If you want to see some projects that are using MockBukkit right now, feel free 
 You can also have a look at our documentation where we outline various examples and tricks on how to use MockBukkit
 already:
 https://mockbukkit.readthedocs.io/en/latest/index.html
+
+## :gift_heart: Sponsors
+
+Thanks to JetBrains, the creators of IntelliJ IDEA, for providing us with licenses as part of their [Open Source program](https://www.jetbrains.com/opensource/).  
+[![JetBrains](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg)](https://www.jetbrains.com/opensource/)

@@ -289,4 +289,10 @@ class WorldBorderMockTest
 		assertFalse(worldBorderMock.isInside(new Location(world, 101, 0, 101)));
 	}
 
+	@Test
+	void testGetWorld()
+	{
+		assertEquals(world, worldBorderMock.getWorld());
+	}
+
 }

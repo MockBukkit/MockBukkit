@@ -87,7 +87,7 @@ public class BlockMock implements Block
 		this.material = material;
 		this.location = location;
 		this.state = BlockStateMock.mockState(this);
-		this.blockData = new BlockDataMock(material);
+		this.blockData = BlockDataMock.mock(material);
 	}
 
 	@Override
@@ -250,7 +250,7 @@ public class BlockMock implements Block
 		Preconditions.checkNotNull(type, "Type cannot be null");
 		material = type;
 		state = BlockStateMock.mockState(this);
-		blockData = new BlockDataMock(type);
+		blockData = BlockDataMock.mock(type);
 	}
 
 	@Override
@@ -455,6 +455,20 @@ public class BlockMock implements Block
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 
+	}
+
+	@Override
+	public void tick()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void randomTick()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

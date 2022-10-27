@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.sound;
 
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import com.google.common.base.Preconditions;
+import net.kyori.adventure.util.ShadyPines;
 import org.bukkit.Sound;
 import org.jetbrains.annotations.NotNull;
 
@@ -39,17 +40,46 @@ public interface SoundReceiver
 		getHeardSounds().clear();
 	}
 
+	/**
+	 * Assert that a sound type has been played for this sound receiver.
+	 * <p>
+	 * The {@link #assertSoundHeard(net.kyori.adventure.sound.Sound) adventure method} also checks the source of the sound, the volume and the pitch.
+	 *
+	 * @param sound The sound type to check.
+	 */
 	default void assertSoundHeard(@NotNull Sound sound)
 	{
 		assertSoundHeard("Sound Heard Assertion failed", sound);
 	}
 
+	/**
+	 * Assert that a sound with a given source, volume and pitch have been played for this sound receiver.
+	 *
+	 * @param sound The sound to check.
+	 */
+	default void assertSoundHeard(net.kyori.adventure.sound.@NotNull Sound sound)
+	{
+		assertSoundHeard("Sound Heard Assertion failed", sound);
+	}
+
+	/**
+	 * Assert that a sound key has been played for this sound receiver.
+	 * <p>
+	 * The {@link #assertSoundHeard(net.kyori.adventure.sound.Sound) adventure method} also checks the source of the sound, the volume and the pitch.
+	 *
+	 * @param sound The sound key to check.
+	 */
 	default void assertSoundHeard(@NotNull String sound)
 	{
 		assertSoundHeard("Sound Heard Assertion failed", sound);
 	}
 
 	default void assertSoundHeard(@NotNull Sound sound, @NotNull Predicate<AudioExperience> predicate)
+	{
+		assertSoundHeard("Sound Heard Assertion failed", sound, predicate);
+	}
+
+	default void assertSoundHeard(net.kyori.adventure.sound.@NotNull Sound sound, @NotNull Predicate<AudioExperience> predicate)
 	{
 		assertSoundHeard("Sound Heard Assertion failed", sound, predicate);
 	}
@@ -64,6 +94,11 @@ public interface SoundReceiver
 		assertSoundHeard(message, sound, e -> true);
 	}
 
+	default void assertSoundHeard(@NotNull String message, net.kyori.adventure.sound.@NotNull Sound sound)
+	{
+		assertSoundHeard(message, sound, e -> true);
+	}
+
 	default void assertSoundHeard(@NotNull String message, @NotNull String sound)
 	{
 		assertSoundHeard(message, sound, e -> true);
@@ -73,6 +108,15 @@ public interface SoundReceiver
 								  @NotNull Predicate<AudioExperience> predicate)
 	{
 		assertSoundHeard(message, sound.getKey().getKey(), predicate);
+	}
+
+	default void assertSoundHeard(@NotNull String message, net.kyori.adventure.sound.@NotNull Sound sound,
+								  @NotNull Predicate<AudioExperience> predicate)
+	{
+		Predicate<AudioExperience> test = e -> e.getSource() == sound.source()
+				&& ShadyPines.equals(sound.volume(), e.getVolume())
+				&& ShadyPines.equals(sound.pitch(), e.getPitch());
+		assertSoundHeard(message, sound.name().asString(), test.and(predicate));
 	}
 
 	default void assertSoundHeard(@NotNull String message, @NotNull String sound,

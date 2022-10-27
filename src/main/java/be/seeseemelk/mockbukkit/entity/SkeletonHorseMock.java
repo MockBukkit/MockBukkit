@@ -57,6 +57,7 @@ public class SkeletonHorseMock extends AbstractHorseMock implements SkeletonHors
 	}
 
 	@Override
+	@Deprecated
 	public Horse.@NotNull Variant getVariant()
 	{
 		return Horse.Variant.SKELETON_HORSE;

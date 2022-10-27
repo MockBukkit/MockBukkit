@@ -13,12 +13,15 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.data.BlockData;
+import org.bukkit.entity.Entity;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 public class BlockStateMock implements BlockState
@@ -52,7 +55,7 @@ public class BlockStateMock implements BlockState
 	}
 
 	// region Type Checking
-	protected void checkType(@NotNull Material material, @NotNull Material... expected)
+	protected void checkType(@NotNull Material material, @NotNull Material @NotNull ... expected)
 	{
 		Preconditions.checkArgument(Arrays.stream(expected).anyMatch(m -> material == m), "Cannot create a " + getClass().getSimpleName() + " from " + material);
 	}
@@ -245,6 +248,27 @@ public class BlockStateMock implements BlockState
 
 	@Override
 	public boolean isCollidable()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Collection<ItemStack> getDrops()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Collection<ItemStack> getDrops(@Nullable ItemStack tool)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Collection<ItemStack> getDrops(@NotNull ItemStack tool, @Nullable Entity entity)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

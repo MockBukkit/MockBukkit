@@ -54,7 +54,7 @@ class BlockDataMockTest
 		assertEquals(blockData2.hashCode(), blockData.hashCode());
 
 		blockData.set("key", "value");
-		assertNotEquals(blockData2.hashCode(),blockData.hashCode());
+		assertNotEquals(blockData2.hashCode(), blockData.hashCode());
 	}
 
 	@Test
@@ -65,6 +65,12 @@ class BlockDataMockTest
 		blockData2.set("key", "value");
 
 		assertTrue(blockData.matches(blockData2));
+	}
+
+	@Test
+	void mock_NullInput_ThrowsException()
+	{
+		assertThrowsExactly(NullPointerException.class, () -> BlockDataMock.mock(null));
 	}
 
 }

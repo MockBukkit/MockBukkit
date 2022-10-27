@@ -6,12 +6,34 @@ import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
 import be.seeseemelk.mockbukkit.entity.SimpleEntityMock;
+import be.seeseemelk.mockbukkit.inventory.AnvilInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.BarrelInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.BeaconInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.BrewerInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.CartographyInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.DispenserInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.DropperInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.EnchantingInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.FurnaceInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.GrindstoneInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.HopperInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
+import be.seeseemelk.mockbukkit.inventory.LecternInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.LoomInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.ShulkerBoxInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.SmithingInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.StonecutterInventoryMock;
+import be.seeseemelk.mockbukkit.inventory.WorkbenchInventoryMock;
 import be.seeseemelk.mockbukkit.profile.PlayerProfileMock;
+import com.destroystokyo.paper.event.player.PlayerConnectionCloseEvent;
+import com.destroystokyo.paper.event.server.WhitelistToggleEvent;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Warning;
@@ -24,6 +46,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerKickEvent;
+import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.server.MapInitializeEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
@@ -38,9 +62,14 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import javax.imageio.ImageIO;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -49,8 +78,10 @@ import java.util.UUID;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.equalTo;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -147,6 +178,13 @@ class ServerMockTest
 	}
 
 	@Test
+	void addPlayer_Calls_PlayerLoginEvent()
+	{
+		PlayerMock player = server.addPlayer();
+		server.getPluginManager().assertEventFired(PlayerLoginEvent.class);
+	}
+
+	@Test
 	void setPlayers_Two_TwoUniquePlayers()
 	{
 		server.setPlayers(2);
@@ -161,14 +199,14 @@ class ServerMockTest
 	void getPlayers_Negative_ArrayIndexOutOfBoundsException()
 	{
 		server.setPlayers(2);
-		assertThrows(ArrayIndexOutOfBoundsException.class, () -> server.getPlayer(-1));
+		assertThrows(IndexOutOfBoundsException.class, () -> server.getPlayer(-1));
 	}
 
 	@Test
 	void getPlayers_LargerThanNumberOfPlayers_ArrayIndexOutOfBoundsException()
 	{
 		server.setPlayers(2);
-		assertThrows(ArrayIndexOutOfBoundsException.class, () -> server.getPlayer(2));
+		assertThrows(IndexOutOfBoundsException.class, () -> server.getPlayer(2));
 	}
 
 	@Test
@@ -178,9 +216,33 @@ class ServerMockTest
 	}
 
 	@Test
+	void getVersion_CorrectPattern()
+	{
+		assertTrue(server.getVersion().matches("MockBukkit \\(MC: (\\d)\\.(\\d+)\\.?(\\d+?)?\\)"));
+	}
+
+	@Test
 	void getBukkitVersion_NotNull()
 	{
 		assertNotNull(server.getBukkitVersion());
+	}
+
+	@Test
+	void getBukkitVersion_CorrectPattern()
+	{
+		assertTrue(server.getBukkitVersion().matches("1\\.[0-9]+(\\.[0-9]+)?-.*SNAPSHOT.*"));
+	}
+
+	@Test
+	void getMinecraftVersion_NotNull()
+	{
+		assertNotNull(server.getMinecraftVersion());
+	}
+
+	@Test
+	void getMinecraftVersion_CorrectPattern()
+	{
+		assertTrue(server.getMinecraftVersion().matches("1\\.[0-9]+(\\.[0-9]+)?"));
 	}
 
 	@Test
@@ -528,7 +590,7 @@ class ServerMockTest
 
 		PlayerMock onlinePlayer = offlinePlayer.join(server);
 
-		assertFalse(offlinePlayer.isOnline());
+		assertTrue(offlinePlayer.isOnline());
 		assertTrue(onlinePlayer.isOnline());
 
 		// Assert that this is still the same Player (as far as name and uuid are concerned)
@@ -711,6 +773,350 @@ class ServerMockTest
 		Player player = server.addPlayer();
 		assertEquals(Arrays.asList("Tab", "Complete", "Results"), server.getCommandTabComplete(player, "mockcommand "));
 		assertEquals(Arrays.asList("Other", "Results"), server.getCommandTabComplete(player, "mockcommand argA "));
+	}
+
+	@Test
+	void testHasWhiteListDefault()
+	{
+		assertFalse(server.hasWhitelist());
+	}
+
+	@Test
+	void testSetWhiteList()
+	{
+		server.setWhitelist(true);
+		assertTrue(server.hasWhitelist());
+		server.getPluginManager().assertEventFired(WhitelistToggleEvent.class, WhitelistToggleEvent::isEnabled);
+	}
+
+	@Test
+	void testIsWhiteListEnforcedDefault()
+	{
+		assertFalse(server.isWhitelistEnforced());
+	}
+
+	@Test
+	void testSetWhiteListEnforced()
+	{
+		server.setWhitelistEnforced(true);
+		assertTrue(server.isWhitelistEnforced());
+	}
+
+	@Test
+	void testReloadWhiteList()
+	{
+		assertDoesNotThrow(() -> server.reloadWhitelist());
+	}
+
+	@Test
+	void testReloadWhiteListWithEnforcedWhiteList()
+	{
+		PlayerMock playerMock = server.addPlayer();
+
+		server.setWhitelist(true);
+		server.setWhitelistEnforced(true);
+
+
+		server.reloadWhitelist();
+
+		assertFalse(server.getOnlinePlayers().contains(playerMock));
+		server.getPluginManager().assertEventFired(PlayerKickEvent.class);
+	}
+
+	@Test
+	void tstReloadWhiteListWithNotEnforcedWhiteList()
+	{
+		PlayerMock playerMock = server.addPlayer();
+
+		server.setWhitelist(true);
+		server.setWhitelistEnforced(false);
+
+		server.reloadWhitelist();
+
+		assertTrue(server.getOnlinePlayers().contains(playerMock));
+		server.getPluginManager().assertEventNotFired(PlayerKickEvent.class);
+	}
+
+	@Test
+	void testReloadWhiteListWithNotEnforcedWhiteListAndPlayerIsWhitelisted()
+	{
+		PlayerMock playerMock = server.addPlayer();
+		playerMock.setWhitelisted(true);
+		server.setWhitelist(true);
+		server.setWhitelistEnforced(true);
+
+		server.reloadWhitelist();
+
+		assertTrue(server.getOnlinePlayers().contains(playerMock));
+		server.getPluginManager().assertEventNotFired(PlayerKickEvent.class);
+	}
+
+	@Test
+	void testReloadWithListWithoutWhitelistEnabled()
+	{
+		PlayerMock playerMock = server.addPlayer();
+		playerMock.setWhitelisted(true);
+		server.setWhitelist(false);
+		server.setWhitelistEnforced(true);
+
+		server.reloadWhitelist();
+
+		assertTrue(server.getOnlinePlayers().contains(playerMock));
+		server.getPluginManager().assertEventNotFired(PlayerKickEvent.class);
+	}
+
+	@Test
+	void testAddPlayerWithWhitelistEnabled()
+	{
+		server.setWhitelist(true);
+
+		PlayerMock playerMock = new PlayerMock(server, "Player", UUID.randomUUID());
+		playerMock.setWhitelisted(true);
+
+		server.addPlayer(playerMock);
+
+		assertTrue(server.getOnlinePlayers().contains(playerMock));
+		server.getPluginManager().assertEventNotFired(PlayerKickEvent.class);
+	}
+
+	@Test
+	void testAddPlayerWithWhitelistEnabledAndNotWhitelisted()
+	{
+		server.setWhitelist(true);
+
+
+		PlayerMock player = server.addPlayer();
+
+		assertFalse(server.getOnlinePlayers().contains(player));
+		server.getPluginManager().assertEventFired(PlayerConnectionCloseEvent.class);
+	}
+
+	@Test
+	void testGetBannedPlayersDefault()
+	{
+		assertEquals(0, server.getBannedPlayers().size());
+	}
+
+	@Test
+	void testGetBannedPlayers()
+	{
+		PlayerMock player = server.addPlayer();
+		player.banPlayer("test");
+
+		assertEquals(1, server.getBannedPlayers().size());
+		assertTrue(server.getBannedPlayers().contains(player));
+	}
+
+	@Test
+	void getPermissionMessage_NotNull()
+	{
+		assertNotNull(server.getPermissionMessage());
+	}
+
+	@Test
+	void permissionMessage_NotNull()
+	{
+		assertNotNull(server.permissionMessage());
+	}
+
+	@Test
+	void loadServerIcon_NullFile_ThrowsException()
+	{
+		assertThrows(NullPointerException.class, () -> server.loadServerIcon((File) null));
+	}
+
+	@Test
+	void loadServerIcon_NullImage_ThrowsException()
+	{
+		assertThrows(NullPointerException.class, () -> server.loadServerIcon((BufferedImage) null));
+	}
+
+	@Test
+	void loadServerIcon_WrongWidth_ThrowsException()
+	{
+		BufferedImage image63 = new BufferedImage(63, 64, BufferedImage.TYPE_INT_RGB);
+		BufferedImage image65 = new BufferedImage(65, 64, BufferedImage.TYPE_INT_RGB);
+		assertThrows(IllegalArgumentException.class, () -> server.loadServerIcon(image63));
+		assertThrows(IllegalArgumentException.class, () -> server.loadServerIcon(image65));
+	}
+
+	@Test
+	void loadServerIcon_WrongHeight_ThrowsException()
+	{
+		BufferedImage image63 = new BufferedImage(64, 63, BufferedImage.TYPE_INT_RGB);
+		BufferedImage image65 = new BufferedImage(64, 65, BufferedImage.TYPE_INT_RGB);
+		assertThrows(IllegalArgumentException.class, () -> server.loadServerIcon(image63));
+		assertThrows(IllegalArgumentException.class, () -> server.loadServerIcon(image65));
+	}
+
+	@Test
+	void loadServerIcon_CorrectSize()
+	{
+		BufferedImage image = new BufferedImage(64, 64, BufferedImage.TYPE_INT_RGB);
+		assertDoesNotThrow(() -> server.loadServerIcon(image));
+	}
+
+	@Test
+	void loadServerIcon_CorrectData() throws IOException
+	{
+		BufferedImage image = new BufferedImage(64, 64, BufferedImage.TYPE_INT_RGB);
+		Graphics2D g = image.createGraphics();
+		g.drawOval(0, 0, 64, 64);
+		g.dispose();
+
+		CachedServerIconMock icon = server.loadServerIcon(image);
+		byte[] decodedBase64 = Base64.getDecoder().decode(icon.getData().replace(CachedServerIconMock.PNG_BASE64_PREFIX, ""));
+		BufferedImage decodedImage = ImageIO.read(new ByteArrayInputStream(decodedBase64));
+
+		for (int x = 0; x < 64; x++)
+		{
+			for (int y = 0; y < 64; y++)
+			{
+				assertEquals(image.getRGB(x, y), decodedImage.getRGB(x, y));
+			}
+		}
+	}
+
+	@Test
+	void testGetDefaultGamemodeDefault()
+	{
+		assertEquals(GameMode.SURVIVAL, server.getDefaultGameMode());
+	}
+
+	@Test
+	void testSetDefaultGameMode()
+	{
+		server.setDefaultGameMode(GameMode.CREATIVE);
+		assertEquals(GameMode.CREATIVE, server.getDefaultGameMode());
+	}
+
+	@Test
+	void testCreateUncreateableInventory()
+	{
+		assertThrows(IllegalArgumentException.class, () -> server.createInventory(null, InventoryType.CREATIVE, "", 9));
+	}
+
+	@Test
+	void testCreateDispenserInventory()
+	{
+		assertInstanceOf(DispenserInventoryMock.class, server.createInventory(null, InventoryType.DISPENSER, "", 9));
+	}
+
+	@Test
+	void testCreateDropperInventory()
+	{
+		assertInstanceOf(DropperInventoryMock.class, server.createInventory(null, InventoryType.DROPPER, "", 9));
+	}
+
+	@Test
+	void testCreatePlayerInventory()
+	{
+		PlayerMock playerMock = server.addPlayer();
+		assertInstanceOf(PlayerInventoryMock.class, server.createInventory(playerMock, InventoryType.PLAYER, "", 9));
+	}
+
+	@Test
+	void testCreatePlayerWithNonPlayerHolderThrows()
+	{
+		assertThrows(IllegalArgumentException.class, () -> server.createInventory(null, InventoryType.PLAYER, "", 9));
+	}
+
+	@Test
+	void testCreateEnderChestInventory()
+	{
+		assertInstanceOf(EnderChestInventoryMock.class, server.createInventory(null, InventoryType.ENDER_CHEST, "", 9));
+	}
+
+	@Test
+	void testCreateHopperInventory()
+	{
+		assertInstanceOf(HopperInventoryMock.class, server.createInventory(null, InventoryType.HOPPER, "", 9));
+	}
+
+	@Test
+	void testCreateShulkerBoxInventory()
+	{
+		assertInstanceOf(ShulkerBoxInventoryMock.class, server.createInventory(null, InventoryType.SHULKER_BOX, "", 9));
+	}
+
+	@Test
+	void testCreateBarrelInventory()
+	{
+		assertInstanceOf(BarrelInventoryMock.class, server.createInventory(null, InventoryType.BARREL, "", 9));
+	}
+
+	@Test
+	void testCreateLecternInventory()
+	{
+		assertInstanceOf(LecternInventoryMock.class, server.createInventory(null, InventoryType.LECTERN, "", 9));
+	}
+
+	@Test
+	void testCreateGrindstoneInventory()
+	{
+		assertInstanceOf(GrindstoneInventoryMock.class, server.createInventory(null, InventoryType.GRINDSTONE, "", 9));
+	}
+
+	@Test
+	void testCreateStonecutterInventory()
+	{
+		assertInstanceOf(StonecutterInventoryMock.class, server.createInventory(null, InventoryType.STONECUTTER, "", 9));
+	}
+
+	@Test
+	void testCreateCartographyInventory()
+	{
+		assertInstanceOf(CartographyInventoryMock.class, server.createInventory(null, InventoryType.CARTOGRAPHY, "", 9));
+	}
+
+	@Test
+	void testCreateFurnaceInventory()
+	{
+		assertInstanceOf(FurnaceInventoryMock.class, server.createInventory(null, InventoryType.FURNACE, "", 9));
+		assertInstanceOf(FurnaceInventoryMock.class, server.createInventory(null, InventoryType.BLAST_FURNACE, "", 9));
+		assertInstanceOf(FurnaceInventoryMock.class, server.createInventory(null, InventoryType.SMOKER, "", 9));
+	}
+
+	@Test
+	void testCreateLoomInventory()
+	{
+		assertInstanceOf(LoomInventoryMock.class, server.createInventory(null, InventoryType.LOOM, "", 9));
+	}
+
+	@Test
+	void testCreateAnvilInventory()
+	{
+		assertInstanceOf(AnvilInventoryMock.class, server.createInventory(null, InventoryType.ANVIL, "", 9));
+	}
+
+	@Test
+	void testCreateSmithingInventory()
+	{
+		assertInstanceOf(SmithingInventoryMock.class, server.createInventory(null, InventoryType.SMITHING, "", 9));
+	}
+
+	@Test
+	void testCreateBeaconInventory()
+	{
+		assertInstanceOf(BeaconInventoryMock.class, server.createInventory(null, InventoryType.BEACON, "", 9));
+	}
+
+	@Test
+	void testCreateWorkbenchInventory()
+	{
+		assertInstanceOf(WorkbenchInventoryMock.class, server.createInventory(null, InventoryType.WORKBENCH, "", 9));
+	}
+
+	@Test
+	void testCreateEnchantingInventory()
+	{
+		assertInstanceOf(EnchantingInventoryMock.class, server.createInventory(null, InventoryType.ENCHANTING, "", 9));
+	}
+
+	@Test
+	void testCreateBrewerInventory()
+	{
+		assertInstanceOf(BrewerInventoryMock.class, server.createInventory(null, InventoryType.BREWING, "", 9));
 	}
 
 }
