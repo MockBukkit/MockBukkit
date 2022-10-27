@@ -22,8 +22,8 @@ import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
 import be.seeseemelk.mockbukkit.entity.FireworkMock;
 import be.seeseemelk.mockbukkit.entity.FoxMock;
 import be.seeseemelk.mockbukkit.entity.FrogMock;
-import be.seeseemelk.mockbukkit.entity.GiantMock;
 import be.seeseemelk.mockbukkit.entity.GhastMock;
+import be.seeseemelk.mockbukkit.entity.GiantMock;
 import be.seeseemelk.mockbukkit.entity.GoatMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
 import be.seeseemelk.mockbukkit.entity.LlamaMock;
@@ -47,6 +47,7 @@ import be.seeseemelk.mockbukkit.entity.ZombieMock;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import org.bukkit.Chunk;
+import org.bukkit.ChunkSnapshot;
 import org.bukkit.Difficulty;
 import org.bukkit.Effect;
 import org.bukkit.GameRule;
@@ -1283,6 +1284,93 @@ class WorldMockTest
 		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.PIG);
 		assertInstanceOf(PigMock.class, entity);
 		assertTrue(entity.isValid());
+	}
+
+	@Test
+	void getEmptyChunkSnapshot_AllBlocksAir()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		ChunkSnapshot snapshot = world.getEmptyChunkSnapshot(0, 0, true, true);
+
+		for (int x = 0; x < 16; x++)
+		{
+			for (int y = world.getMinHeight(); y < world.getMaxHeight(); y++)
+			{
+				for (int z = 0; z < 16; z++)
+				{
+					assertEquals(Material.AIR, snapshot.getBlockData(x, y, z).getMaterial());
+				}
+			}
+		}
+	}
+
+	@Test
+	void getEmptyChunkSnapshot_AllBiomesPlains()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		ChunkSnapshot snapshot = world.getEmptyChunkSnapshot(0, 0, true, true);
+
+		for (int x = 0; x < 16; x++)
+		{
+			for (int y = world.getMinHeight(); y < world.getMaxHeight(); y++)
+			{
+				for (int z = 0; z < 16; z++)
+				{
+					assertEquals(Biome.PLAINS, snapshot.getBiome(x, y, z));
+				}
+			}
+		}
+	}
+
+	@Test
+	void getEmptyChunkSnapshot_NoBiome_Error()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		ChunkSnapshot snapshot = world.getEmptyChunkSnapshot(0, 0, false, false);
+
+		assertThrowsExactly(IllegalStateException.class, () -> snapshot.getBiome(0, 0, 0));
+	}
+
+	@Test
+	void getEmptyChunkSnapshot_EitherBiome_ReturnsBiome()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+
+		ChunkSnapshot snapshot = world.getEmptyChunkSnapshot(0, 0, true, false);
+		assertEquals(Biome.PLAINS, snapshot.getBiome(0, 0, 0));
+
+		snapshot = world.getEmptyChunkSnapshot(0, 0, false, true);
+		assertEquals(Biome.PLAINS, snapshot.getBiome(0, 0, 0));
+	}
+
+	@Test
+	void getEmptyChunkSnapshot_CorrectCoords()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		ChunkSnapshot snapshot = world.getEmptyChunkSnapshot(69, 420, false, false);
+
+		assertEquals(69, snapshot.getX());
+		assertEquals(420, snapshot.getZ());
+	}
+
+	@Test
+	void getEmptyChunkSnapshot_CorrectName()
+	{
+		WorldMock world = new WorldMock(Material.GRASS_BLOCK, -64, 319, 3);
+		ChunkSnapshot snapshot = world.getEmptyChunkSnapshot(0, 0, false, false);
+
+		assertEquals("World", snapshot.getWorldName());
+	}
+
+	@Test
+	void getEmptyChunkSnapshot_CorrectTime()
+	{
+		WorldMock world = new WorldMock(Material.GRASS_BLOCK, -64, 319, 3);
+		world.setFullTime(69);
+
+		ChunkSnapshot snapshot = world.getEmptyChunkSnapshot(0, 0, false, false);
+
+		assertEquals(69, snapshot.getCaptureFullTime());
 	}
 
 }

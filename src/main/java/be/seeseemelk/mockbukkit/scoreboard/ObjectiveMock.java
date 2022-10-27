@@ -1,6 +1,6 @@
 package be.seeseemelk.mockbukkit.scoreboard;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.entity.EntityMock;
 import com.google.common.base.Preconditions;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
@@ -22,14 +22,14 @@ public class ObjectiveMock implements Objective
 
 	private @Nullable ScoreboardMock scoreboard;
 	private final @NotNull String name;
-	private final @NotNull String criteria;
+	private final @NotNull Criteria criteria;
 	private final Map<String, ScoreMock> scores = new HashMap<>();
-	private @Nullable Component displayName;
+	private @NotNull Component displayName;
 	private @Nullable DisplaySlot displaySlot;
 	private RenderType renderType;
 
-	public ObjectiveMock(@NotNull ScoreboardMock scoreboard, @NotNull String name, @NotNull String displayName,
-						 @NotNull String criteria, @NotNull RenderType renderType)
+	public ObjectiveMock(@NotNull ScoreboardMock scoreboard, @NotNull String name, @Nullable Component displayName,
+						 @NotNull Criteria criteria, @NotNull RenderType renderType)
 	{
 		Preconditions.checkNotNull(scoreboard, "When registering an Objective to the Scoreboard the scoreboard cannot be null.");
 		Preconditions.checkNotNull(name, "The name cannot be null");
@@ -37,7 +37,7 @@ public class ObjectiveMock implements Objective
 
 		this.scoreboard = scoreboard;
 		this.name = name;
-		this.displayName = Component.text(displayName);
+		this.displayName = displayName == null ? Component.empty() : displayName;
 		this.criteria = criteria;
 		this.renderType = renderType;
 	}
@@ -98,14 +98,14 @@ public class ObjectiveMock implements Objective
 	public @NotNull String getCriteria() throws IllegalStateException
 	{
 		validate();
-		return criteria;
+		return this.criteria.getName();
 	}
 
 	@Override
 	public @NotNull Criteria getTrackedCriteria() throws IllegalStateException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		validate();
+		return this.criteria;
 	}
 
 	@Override
@@ -197,15 +197,14 @@ public class ObjectiveMock implements Objective
 	@Override
 	public @NotNull Score getScoreFor(@NotNull Entity entity) throws IllegalArgumentException, IllegalStateException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(entity, "Entity cannot be null");
+		return getScore(((EntityMock) entity).getScoreboardEntry());
 	}
 
 	@Override
 	public boolean isModifiable() throws IllegalStateException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return !getTrackedCriteria().isReadOnly();
 	}
 
 }

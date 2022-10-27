@@ -8,12 +8,12 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 
+import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.FACING;
+import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.OCCUPIED;
+import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.PART;
+
 public class BedMock extends BlockDataMock implements Bed
 {
-
-	private static final String PART = "part";
-	private static final String OCCUPIED = "occupied";
-	private static final String FACING = "facing";
 
 	public BedMock(@NotNull Material type)
 	{
@@ -40,6 +40,12 @@ public class BedMock extends BlockDataMock implements Bed
 	public boolean isOccupied()
 	{
 		return super.get(OCCUPIED);
+	}
+
+	@Override
+	public void setOccupied(boolean occupied)
+	{
+		super.set(OCCUPIED, occupied);
 	}
 
 	@Override
