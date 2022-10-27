@@ -1,8 +1,19 @@
 package be.seeseemelk.mockbukkit.configuration;
 
+import be.seeseemelk.mockbukkit.ServerMock;
 import net.kyori.adventure.text.Component;
+import org.bukkit.Server;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Represents all configuration options that can be retrieved from a {@link Server}.
+ * This class is used internally, and should not be considered public API.
+ * As such, breaking changes may occur here at any time.
+ *
+ * @see ServerMock
+ */
+@ApiStatus.Internal
 public class ServerConfiguration
 {
 
@@ -195,7 +206,7 @@ public class ServerConfiguration
 
 		private final String key;
 
-		private LevelType(String key)
+		LevelType(String key)
 		{
 			this.key = key;
 		}
