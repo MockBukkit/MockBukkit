@@ -64,7 +64,7 @@ Please create tests that cover all possible execution paths and not just one, as
 
 ## :test_tube: Testing your changes
 
-Once you've completed your changes and wrote tests for them, you can test to see if they're working but running the
+Once you've completed your changes and wrote tests for them, you can test to see if they're working by running the
 Gradle `test` task.
 If on Linux, you can run `./gradlew test` from the terminal.
 If on Windows, you can run `gradlew.bat test` from the command prompt.
