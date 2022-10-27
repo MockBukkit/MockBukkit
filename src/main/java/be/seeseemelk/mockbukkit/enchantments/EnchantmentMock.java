@@ -14,6 +14,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 
+/**
+ * Mock implementation of an {@link Enchantment}.
+ */
 public class EnchantmentMock extends Enchantment
 {
 
