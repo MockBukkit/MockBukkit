@@ -14,6 +14,9 @@ import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.LIT;
 import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.SIGNAL_FIRE;
 import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.WATERLOGGED;
 
+/**
+ * Mock implementation of {@link Campfire}.
+ */
 public class CampfireMock extends BlockDataMock implements Campfire
 {
 
