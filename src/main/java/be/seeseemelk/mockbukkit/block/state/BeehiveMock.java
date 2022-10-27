@@ -7,6 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Beehive;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
+import org.bukkit.block.data.type.Campfire;
 import org.bukkit.entity.Bee;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -79,21 +80,18 @@ public class BeehiveMock extends TileStateMock implements Beehive
 	 */
 	public void updateSedated()
 	{
-		throw new UnimplementedOperationException("Campfires aren't implemented yet.");
-//		if (!isPlaced())
-//		{
-//			throw new IllegalStateException("Cannot update sedated status of a beehive that is not placed");
-//		}
-//		for (int y = getY(); y < getY() - 5; y++)
-//		{
-//			Block block = getWorld().getBlockAt(getX(), y, getZ());
-//			if (!Bukkit.getTag(Tag.REGISTRY_BLOCKS, NamespacedKey.minecraft("campfires"), Material.class).isTagged(block.getType()))
-//				continue;
-//			if (!((Campfire) block.getBlockData()).isLit())
-//				continue;
-//			this.sedated = true;
-//		}
-//		this.sedated = false;
+		Preconditions.checkState(isPlaced(), "Cannot update sedated status of a beehive that is not placed");
+		for (int y = getY() - 1; y > getY() - 6; y--)
+		{
+			Block block = getWorld().getBlockAt(getX(), y, getZ());
+			if (!(block.getBlockData() instanceof Campfire campfire))
+				continue;
+			if (!campfire.isLit())
+				continue;
+			this.sedated = true;
+			return;
+		}
+		this.sedated = false;
 	}
 
 	@Override
