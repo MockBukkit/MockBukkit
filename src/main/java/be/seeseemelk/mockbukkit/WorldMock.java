@@ -16,6 +16,7 @@ import be.seeseemelk.mockbukkit.entity.CowMock;
 import be.seeseemelk.mockbukkit.entity.CreeperMock;
 import be.seeseemelk.mockbukkit.entity.DonkeyMock;
 import be.seeseemelk.mockbukkit.entity.EggMock;
+import be.seeseemelk.mockbukkit.entity.ElderGuardianMock;
 import be.seeseemelk.mockbukkit.entity.EndermanMock;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
@@ -26,6 +27,7 @@ import be.seeseemelk.mockbukkit.entity.FrogMock;
 import be.seeseemelk.mockbukkit.entity.GhastMock;
 import be.seeseemelk.mockbukkit.entity.GiantMock;
 import be.seeseemelk.mockbukkit.entity.GoatMock;
+import be.seeseemelk.mockbukkit.entity.GuardianMock;
 import be.seeseemelk.mockbukkit.entity.HorseMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
 import be.seeseemelk.mockbukkit.entity.LlamaMock;
@@ -99,6 +101,7 @@ import org.bukkit.entity.Cow;
 import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Donkey;
 import org.bukkit.entity.Egg;
+import org.bukkit.entity.ElderGuardian;
 import org.bukkit.entity.Enderman;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -112,6 +115,7 @@ import org.bukkit.entity.Ghast;
 import org.bukkit.entity.Giant;
 import org.bukkit.entity.Goat;
 import org.bukkit.entity.Golem;
+import org.bukkit.entity.Guardian;
 import org.bukkit.entity.Hanging;
 import org.bukkit.entity.Horse;
 import org.bukkit.entity.Item;
@@ -1107,6 +1111,14 @@ public class WorldMock implements World
 		else if (clazz == Pig.class)
 		{
 			return new PigMock(server, UUID.randomUUID());
+		}
+		else if (clazz == ElderGuardian.class)
+		{
+			return new ElderGuardianMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Guardian.class)
+		{
+			return new GuardianMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}
