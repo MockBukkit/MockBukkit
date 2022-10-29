@@ -21,7 +21,8 @@ public class GuardianMock extends MonsterMock implements Guardian
 	@Override
 	public boolean setLaser(boolean activated)
 	{
-		return this.laser = activated;
+		this.laser = activated;
+		return activated;
 	}
 
 	@Override
