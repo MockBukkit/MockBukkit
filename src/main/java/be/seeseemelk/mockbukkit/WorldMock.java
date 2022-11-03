@@ -1111,7 +1111,7 @@ public class WorldMock implements World
 		}
 		else if (clazz == PolarBearMock.class)
 		{
-			return new PigMock(server, UUID.randomUUID());
+			return new PolarBearMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}
