@@ -33,6 +33,7 @@ import be.seeseemelk.mockbukkit.entity.MobMock;
 import be.seeseemelk.mockbukkit.entity.MuleMock;
 import be.seeseemelk.mockbukkit.entity.MushroomCowMock;
 import be.seeseemelk.mockbukkit.entity.PigMock;
+import be.seeseemelk.mockbukkit.entity.PolarBearMock;
 import be.seeseemelk.mockbukkit.entity.PufferFishMock;
 import be.seeseemelk.mockbukkit.entity.SalmonMock;
 import be.seeseemelk.mockbukkit.entity.SheepMock;
@@ -1105,6 +1106,10 @@ public class WorldMock implements World
 			return new EggMock(server, UUID.randomUUID());
 		}
 		else if (clazz == Pig.class)
+		{
+			return new PigMock(server, UUID.randomUUID());
+		}
+		else if (clazz == PolarBearMock.class)
 		{
 			return new PigMock(server, UUID.randomUUID());
 		}
