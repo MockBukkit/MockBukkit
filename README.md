@@ -270,10 +270,10 @@ If you want to see some projects that are using MockBukkit right now, feel free 
   (1700+ Unit Tests)
 - [Insprill/custom-join-messages](https://github.com/Insprill/custom-join-messages/tree/master/src/test/kotlin/net/insprill/cjm)
   (120+ Unit Tests)
-- [lluiscamino/MultiverseHardcore](https://github.com/lluiscamino/MultiverseHardcore/tree/master/src/test/java/me/lluiscamino/multiversehardcore)
-  (75+ Unit Tests)
 - [carelesshippo/SpectatorModeRewrite](https://github.com/carelesshippo/SpectatorModeRewrite/tree/dev/src/test/java/me/ohowe12/spectatormode)
   (80+ Unit Tests)
+- [lluiscamino/MultiverseHardcore](https://github.com/lluiscamino/MultiverseHardcore/tree/master/src/test/java/me/lluiscamino/multiversehardcore)
+  (75+ Unit Tests)
 - [axelrindle/PocketKnife](https://github.com/axelrindle/PocketKnife/tree/main/api/src/test/kotlin)
   (50+ Unit Tests)
 - *and more! (If you want to see your plugin here, open up an issue and we'll consider adding it)*
