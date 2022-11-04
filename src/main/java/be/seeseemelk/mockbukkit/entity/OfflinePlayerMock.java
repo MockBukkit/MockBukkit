@@ -16,7 +16,6 @@ import org.bukkit.profile.PlayerProfile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
 import java.util.Map;
 import java.util.UUID;
 
@@ -136,7 +135,7 @@ public class OfflinePlayerMock implements OfflinePlayer
 	public boolean hasPlayedBefore()
 	{
 		MockBukkit.ensureMocking();
-		return Arrays.stream(MockBukkit.getMock().getPlayerList().getOfflinePlayers()).anyMatch(p -> p.getUniqueId().equals(getUniqueId()));
+		return MockBukkit.getMock().getPlayerList().hasPlayedBefore(getUniqueId());
 	}
 
 	@Override
