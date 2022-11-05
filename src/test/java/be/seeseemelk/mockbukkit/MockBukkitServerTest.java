@@ -9,8 +9,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class MockBukkitServerTest
 {
 
-//	@MockBukkitServer
-//	private ServerMock fieldServerMock;
+	@MockBukkitServer
+	private ServerMock fieldServerMock;
 
 	private ServerMock constructorParameterServerMock;
 
@@ -19,11 +19,11 @@ public class MockBukkitServerTest
 		this.constructorParameterServerMock = serverMock;
 	}
 
-//	@Test
-//	void mockBukkitServerAnnotation_InjectsField()
-//	{
-//		assertNotNull(fieldServerMock);
-//	}
+	@Test
+	void mockBukkitServerAnnotation_InjectsField()
+	{
+		assertNotNull(fieldServerMock);
+	}
 
 	@Test
 	void mockBukkitServerAnnotation_InjectsConstructorParameter()
