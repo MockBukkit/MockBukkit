@@ -63,6 +63,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.logging.Level;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -70,6 +71,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class PluginManagerMock implements PluginManager
 {
+
+	private static final Pattern VALID_NAMES = Pattern.compile("^[A-Za-z0-9_.-]+$");
 
 	private final @NotNull ServerMock server;
 	private final @NotNull JavaPluginLoader loader;
@@ -397,9 +400,8 @@ public class PluginManagerMock implements PluginManager
 			throw new RuntimeException("Restricted Name");
 		}
 
-		if (name.contains(" "))
-		{
-			throw new RuntimeException("Name cannot contain spaces (0x20)");
+		if (!VALID_NAMES.matcher(name).matches()) {
+			throw new RuntimeException("Invalid name. Must match " + VALID_NAMES.pattern());
 		}
 
 		try
