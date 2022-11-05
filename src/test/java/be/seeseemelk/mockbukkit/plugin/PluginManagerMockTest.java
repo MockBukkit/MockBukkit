@@ -14,7 +14,9 @@ import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.permissions.Permissible;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
+import org.bukkit.plugin.InvalidDescriptionException;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPluginUtils;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -22,6 +24,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -369,6 +372,27 @@ class PluginManagerMockTest
 			}
 		}, MockBukkit.createMockPlugin());
 		assertThrowsExactly(EventHandlerException.class, () -> pluginManager.callEvent(new BlockBreakEvent(null, null)));
+	}
+
+	@Test
+	void loadPlugin_InvalidName_DoesntLoad() throws ReflectiveOperationException
+	{
+		// Won't let us create an invalid name.
+		Field nameField = PluginDescriptionFile.class.getDeclaredField("name");
+		nameField.setAccessible(true);
+
+		PluginDescriptionFile sillyName = new PluginDescriptionFile("Name", "1.0.0", TestPlugin.class.getName());
+		nameField.set(sillyName, "Name(with)[other]<chars>!");
+		assertThrows(RuntimeException.class, () -> pluginManager.loadPlugin(TestPlugin.class, sillyName));
+
+		PluginDescriptionFile bukkit = new PluginDescriptionFile("bukkit", "1.0.0", TestPlugin.class.getName());
+		assertThrows(RuntimeException.class, () -> pluginManager.loadPlugin(TestPlugin.class, bukkit));
+
+		PluginDescriptionFile minecraft = new PluginDescriptionFile("minecraft", "1.0.0", TestPlugin.class.getName());
+		assertThrows(RuntimeException.class, () -> pluginManager.loadPlugin(TestPlugin.class, minecraft));
+
+		PluginDescriptionFile mojang = new PluginDescriptionFile("mojang", "1.0.0", TestPlugin.class.getName());
+		assertThrows(RuntimeException.class, () -> pluginManager.loadPlugin(TestPlugin.class, mojang));
 	}
 
 }
