@@ -16,7 +16,7 @@ import java.util.Optional;
 
 /**
  * Extension that mocks the Bukkit singleton before each test and subsequently unmocks it after each test. It will also
- * inject an instance of {@link ServerMock} to any field or parameter annotated with {@link MockBukkitServer}.
+ * inject this instance of {@link ServerMock} to any field or parameter of that type in the extended test class.
  *
  * <p>Example field usage:</p>
  *
@@ -25,15 +25,14 @@ import java.util.Optional;
  * class FieldExampleTest
  * {
  *
- * 	&#064;MockBukkitServer
  * 	private ServerMock serverMock;
  *
  * 	&#064;Test
  * 	void aUnitTest()
- *    {
- * 	    assert serverMock != null;
- * 	    // ...
- *    }
+ *	{
+ *		assert serverMock != null;
+ *		// ...
+ *	}
  *
  * }
  * </code></pre>
@@ -47,17 +46,17 @@ import java.util.Optional;
  *
  * 	private ServerMock serverMock;
  *
- * 	public ConstructorExampleTest(&#064;MockBukkitServer ServerMock serverMock)
- *    {
+ * 	public ConstructorExampleTest(ServerMock serverMock)
+ *	{
  * 		this.serverMock = serverMock;
- *    }
+ *	}
  *
  * 	&#064;Test
  * 	void aUnitTest()
- *    {
+ *	{
  * 		assert serverMock != null;
  * 		// ...
- *    }
+ *	}
  *
  * }
  * </code></pre>
@@ -70,11 +69,11 @@ import java.util.Optional;
  * {
  *
  * 	&#064;Test
- * 	void aUnitTest(&#064;MockBukkitServer ServerMock serverMock)
- *    {
+ * 	void aUnitTest(ServerMock serverMock)
+ *	{
  * 		assert serverMock != null;
  * 		// ...
- *    }
+ *	}
  *
  * }
  * </code></pre>
@@ -87,15 +86,18 @@ public class MockBukkitExtension implements BeforeEachCallback, AfterEachCallbac
 	public void beforeEach(ExtensionContext context) throws Exception
 	{
 		MockBukkit.getOrCreateMock();
+		injectServerMockIntoFields(context);
+	}
 
+	private void injectServerMockIntoFields(ExtensionContext context) throws IllegalAccessException
+	{
 		final Optional<Class<?>> classOptional = context.getTestClass();
 		if (classOptional.isEmpty())
 			return;
 
-		final List<Field> fields = FieldUtils.getAllFieldsList(classOptional.get())
+		final List<Field> serverMockFields = FieldUtils.getAllFieldsList(classOptional.get())
 				.stream()
 				.filter(field -> field.getType() == ServerMock.class)
-				.filter(field -> field.getDeclaredAnnotation(MockBukkitServer.class) != null)
 				.toList();
 
 		final Optional<Object> optionalTestInstance = context.getTestInstance();
@@ -103,12 +105,11 @@ public class MockBukkitExtension implements BeforeEachCallback, AfterEachCallbac
 			return;
 
 		final Object testInstance = optionalTestInstance.get();
-		for (final Field field : fields)
+		for (final Field field : serverMockFields)
 		{
 			final String name = field.getName();
 			FieldUtils.writeDeclaredField(testInstance, name, MockBukkit.getOrCreateMock(), true);
 		}
-
 	}
 
 	@Override
@@ -120,10 +121,7 @@ public class MockBukkitExtension implements BeforeEachCallback, AfterEachCallbac
 	@Override
 	public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException
 	{
-		// we only currently support ServerMock instances annotated with MockBukkitServer
-		final boolean typeIsSupported = parameterContext.getParameter().getType() == ServerMock.class;
-		final boolean annotationIsSupported = parameterContext.isAnnotated(MockBukkitServer.class);
-		return typeIsSupported && annotationIsSupported;
+		return parameterContext.getParameter().getType() == ServerMock.class;
 	}
 
 	@Override
@@ -132,11 +130,6 @@ public class MockBukkitExtension implements BeforeEachCallback, AfterEachCallbac
 		final Parameter parameter = parameterContext.getParameter();
 		if (parameter.getType() != ServerMock.class)
 			return null;
-
-		final MockBukkitServer annotation = parameter.getAnnotation(MockBukkitServer.class);
-		if (annotation == null)
-			return null;
-
 		return MockBukkit.getOrCreateMock();
 	}
 
