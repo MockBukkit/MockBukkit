@@ -72,9 +72,8 @@ import org.bukkit.event.weather.ThunderChangeEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
 import org.bukkit.event.world.TimeSkipEvent;
 import org.bukkit.inventory.ItemStack;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.util.List;
 
@@ -88,22 +87,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class WorldMockTest
 {
 
 	private ServerMock server;
-
-	@BeforeEach
-	void setUp()
-	{
-		server = MockBukkit.mock();
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
-	}
 
 	@Test
 	void getBlockAt_StandardWorld_DefaultBlocks()
