@@ -91,6 +91,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class WorldMockTest
 {
 
+	@MockBukkitServer
 	private ServerMock server;
 
 	@Test
