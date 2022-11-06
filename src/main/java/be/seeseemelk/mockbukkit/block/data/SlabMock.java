@@ -15,6 +15,12 @@ import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.WATERLOGGED;
 public class SlabMock extends BlockDataMock implements Slab
 {
 
+	/**
+	 * Constructs a new {@link BedMock} for the provided {@link Material}.
+	 * Only supports materials in {@link Tag#SLABS}
+	 *
+	 * @param type The material this data is for.
+	 */
 	public SlabMock(@NotNull Material type)
 	{
 		super(type);

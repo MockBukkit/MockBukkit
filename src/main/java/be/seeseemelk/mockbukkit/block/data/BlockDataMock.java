@@ -32,6 +32,11 @@ public class BlockDataMock implements BlockData
 	private final @NotNull Material type;
 	private final @NotNull Map<String, Object> data;
 
+	/**
+	 * Constructs a new {@link BlockDataMock} for the provided {@link Material}.
+	 *
+	 * @param type The material this data is for.
+	 */
 	public BlockDataMock(@NotNull Material type)
 	{
 		Preconditions.checkNotNull(type, "Type cannot be null");

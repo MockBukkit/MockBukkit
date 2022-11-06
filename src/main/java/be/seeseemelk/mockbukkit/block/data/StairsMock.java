@@ -20,6 +20,12 @@ import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.WATERLOGGED;
 public class StairsMock extends BlockDataMock implements Stairs
 {
 
+	/**
+	 * Constructs a new {@link BedMock} for the provided {@link Material}.
+	 * Only supports materials in {@link Tag#STAIRS}
+	 *
+	 * @param type The material this data is for.
+	 */
 	public StairsMock(@NotNull Material type)
 	{
 		super(type);
