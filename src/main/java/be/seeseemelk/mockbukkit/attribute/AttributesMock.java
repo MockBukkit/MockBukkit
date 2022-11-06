@@ -29,6 +29,12 @@ public class AttributesMock
 			Map.entry(Attribute.ZOMBIE_SPAWN_REINFORCEMENTS, 0.0)
 	);
 
+	/**
+	 * Gets the default value of an {@link Attribute}.
+	 *
+	 * @param attribute The attribute to get.
+	 * @return The default value of the attribute.
+	 */
 	public static double getDefaultValue(@NotNull Attribute attribute)
 	{
 		Preconditions.checkNotNull(attribute, "Attribute cannot be null");
