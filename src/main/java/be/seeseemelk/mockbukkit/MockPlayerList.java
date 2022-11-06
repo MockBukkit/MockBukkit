@@ -38,6 +38,7 @@ public class MockPlayerList
 	private final Map<UUID, Long> lastLogins = Collections.synchronizedMap(new HashMap<>());
 	private final Map<UUID, Long> lastSeen = Collections.synchronizedMap(new HashMap<>());
 	private final Map<UUID, Long> firstPlayed = Collections.synchronizedMap(new HashMap<>());
+	private final Map<UUID, Boolean> hasPlayedBefore = Collections.synchronizedMap(new HashMap<>());
 
 	private final @NotNull BanList ipBans = new MockBanList();
 	private final @NotNull BanList profileBans = new MockBanList();
@@ -71,12 +72,26 @@ public class MockPlayerList
 		this.lastLogins.put(player.getUniqueId(), System.currentTimeMillis());
 		this.onlinePlayers.add(player);
 		this.offlinePlayers.add(player);
+		this.hasPlayedBefore.put(player.getUniqueId(), this.hasPlayedBefore.containsKey(player.getUniqueId()));
 	}
 
 	public void disconnectPlayer(@NotNull PlayerMock player)
 	{
 		this.lastSeen.put(player.getUniqueId(), System.currentTimeMillis());
 		this.onlinePlayers.remove(player);
+	}
+
+	/**
+	 * Checks if a player has played before.
+	 *
+	 * @param uuid The UUID of the player.
+	 * @return Whether the player has played before.
+	 * @see Player#hasPlayedBefore()
+	 */
+	public boolean hasPlayedBefore(@NotNull UUID uuid)
+	{
+		Preconditions.checkNotNull(uuid, "UUID cannot be null");
+		return this.hasPlayedBefore.getOrDefault(uuid, false);
 	}
 
 	public void addOfflinePlayer(@NotNull OfflinePlayer player)
@@ -153,7 +168,7 @@ public class MockPlayerList
 	/**
 	 * Sets the return value of {@link #getLastLogin(UUID)}.
 	 *
-	 * @param uuid     UUID of the player to set last login time for.
+	 * @param uuid      UUID of the player to set last login time for.
 	 * @param lastLogin The last login time. Must be non-negative.
 	 */
 	public void setLastLogin(UUID uuid, long lastLogin)
