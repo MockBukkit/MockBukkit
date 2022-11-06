@@ -1906,7 +1906,6 @@ class PlayerMockTest
 	@Test
 	void testAssertInventoryViewDefault()
 	{
-		;
 		player.assertInventoryView(InventoryType.CRAFTING);
 	}
 
@@ -2229,22 +2228,6 @@ class PlayerMockTest
 		PlayerMock player = server.addPlayer();
 
 		assertThrows(UnsupportedOperationException.class, () -> player.setLastPlayed(0));
-	}
-
-	@Test
-	void hasPlayedBefore_AddedToServer_True()
-	{
-		PlayerMock player = server.addPlayer();
-
-		assertTrue(player.hasPlayedBefore());
-	}
-
-	@Test
-	void hasPlayedBefore_NotAddedToServer_False()
-	{
-		PlayerMock player = new PlayerMock(server, "player");
-
-		assertFalse(player.hasPlayedBefore());
 	}
 
 }
