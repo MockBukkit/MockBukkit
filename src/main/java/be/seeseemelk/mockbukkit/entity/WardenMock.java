@@ -14,11 +14,22 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+/**
+ * Mock implementation of a {@link Warden}.
+ *
+ * @see MonsterMock
+ */
 public class WardenMock extends MonsterMock implements Warden
 {
 
 	private final Map<Entity, Integer> angerPerEntity = new HashMap<>();
 
+	/**
+	 * Constructs a new {@link WardenMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	public WardenMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);

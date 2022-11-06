@@ -19,9 +19,9 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- * This is the mock of an {@link ArmorStand}.
+ * Mock implementation of an {@link ArmorStand}.
  *
- * @author TheBusyBiscuit
+ * @see LivingEntityMock
  */
 public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 {
@@ -41,6 +41,12 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 
 	private final Set<EquipmentSlot> disabledSlots = EnumSet.noneOf(EquipmentSlot.class);
 
+	/**
+	 * Constructs a new {@link ArmorStandMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	public ArmorStandMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);

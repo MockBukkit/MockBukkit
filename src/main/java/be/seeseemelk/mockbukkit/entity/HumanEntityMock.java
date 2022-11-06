@@ -10,7 +10,6 @@ import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryViewMock;
 import be.seeseemelk.mockbukkit.inventory.SimpleInventoryViewMock;
 import com.google.common.base.Preconditions;
-import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -39,6 +38,12 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Mock implementation of a {@link HumanEntity}.
+ *
+ * @see LivingEntityMock
+ * @see PlayerMock
+ */
 public abstract class HumanEntityMock extends LivingEntityMock implements HumanEntity
 {
 
@@ -52,6 +57,12 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	private float saturation = 5.0F;
 	private int foodLevel = 20;
 
+	/**
+	 * Constructs a new {@link HumanEntityMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	protected HumanEntityMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);

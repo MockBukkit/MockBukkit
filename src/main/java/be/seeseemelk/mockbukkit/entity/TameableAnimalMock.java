@@ -9,6 +9,11 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
+/**
+ * Mock implementation of a {@link Tameable} {@link Creature}.
+ *
+ * @see AnimalsMock
+ */
 public class TameableAnimalMock extends AnimalsMock implements Tameable, Creature
 {
 
@@ -16,6 +21,12 @@ public class TameableAnimalMock extends AnimalsMock implements Tameable, Creatur
 	private boolean tamed;
 	private boolean sitting;
 
+	/**
+	 * Constructs a new {@link TameableAnimalMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	public TameableAnimalMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);

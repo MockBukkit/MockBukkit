@@ -14,6 +14,11 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
+/**
+ * Mock implementation of a {@link FishHook}.
+ *
+ * @see ProjectileMock
+ */
 public class FishHookMock extends ProjectileMock implements FishHook
 {
 
@@ -24,6 +29,12 @@ public class FishHookMock extends ProjectileMock implements FishHook
 	private @Nullable Entity hookedEntity;
 	private @NotNull HookState state = HookState.UNHOOKED;
 
+	/**
+	 * Constructs a new {@link FishHookMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	public FishHookMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);

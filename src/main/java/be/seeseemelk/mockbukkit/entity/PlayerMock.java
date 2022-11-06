@@ -119,6 +119,11 @@ import java.util.function.Predicate;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * Mock implementation of a {@link Player}.
+ *
+ * @see HumanEntityMock
+ */
 public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 {
 

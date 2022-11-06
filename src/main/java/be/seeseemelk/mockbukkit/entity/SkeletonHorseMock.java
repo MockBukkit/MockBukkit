@@ -7,12 +7,23 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
+/**
+ * Mock implementation of a {@link SkeletonHorse}.
+ *
+ * @see AbstractHorseMock
+ */
 public class SkeletonHorseMock extends AbstractHorseMock implements SkeletonHorse
 {
 
 	private boolean isTrapped = false;
 	private int trapTime = 0;
 
+	/**
+	 * Constructs a new {@link SkeletonHorseMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	public SkeletonHorseMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);

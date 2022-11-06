@@ -56,6 +56,11 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
+/**
+ * Mock implementation of a {@link LivingEntity}.
+ *
+ * @see EntityMock
+ */
 public abstract class LivingEntityMock extends EntityMock implements LivingEntity
 {
 
@@ -80,6 +85,12 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	private final Set<ActivePotionEffect> activeEffects = new HashSet<>();
 	private boolean invisible = false;
 
+	/**
+	 * Constructs a new {@link LivingEntityMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	protected LivingEntityMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);

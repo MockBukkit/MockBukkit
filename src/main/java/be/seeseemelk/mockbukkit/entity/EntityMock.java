@@ -59,6 +59,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Mock implementation of an {@link Entity}.
+ *
+ * @see Entity.Spigot
+ * @see MessageTarget
+ */
 public abstract class EntityMock extends Entity.Spigot implements Entity, MessageTarget
 {
 
@@ -89,6 +95,12 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private boolean silent;
 	private boolean gravity = true;
 
+	/**
+	 * Constructs a new EntityMock on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	protected EntityMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		Preconditions.checkNotNull(server, "Server cannot be null");
