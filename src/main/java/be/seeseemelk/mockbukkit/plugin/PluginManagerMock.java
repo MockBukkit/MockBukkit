@@ -72,7 +72,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class PluginManagerMock implements PluginManager
 {
 
-	private static final Pattern VALID_NAMES = Pattern.compile("^[A-Za-z0-9_.-]+$");
+	private static final Pattern VALID_PLUGIN_NAMES = Pattern.compile("^[A-Za-z0-9_.-]+$");
 
 	private final @NotNull ServerMock server;
 	private final @NotNull JavaPluginLoader loader;
@@ -400,8 +400,8 @@ public class PluginManagerMock implements PluginManager
 			throw new RuntimeException("Restricted Name");
 		}
 
-		if (!VALID_NAMES.matcher(name).matches()) {
-			throw new RuntimeException("Invalid name. Must match " + VALID_NAMES.pattern());
+		if (!VALID_PLUGIN_NAMES.matcher(name).matches()) {
+			throw new RuntimeException("Invalid name. Must match " + VALID_PLUGIN_NAMES.pattern());
 		}
 
 		try
