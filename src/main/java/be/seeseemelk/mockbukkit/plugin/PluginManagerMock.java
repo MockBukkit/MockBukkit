@@ -400,7 +400,8 @@ public class PluginManagerMock implements PluginManager
 			throw new RuntimeException("Restricted Name");
 		}
 
-		if (!VALID_PLUGIN_NAMES.matcher(name).matches()) {
+		if (!VALID_PLUGIN_NAMES.matcher(name).matches())
+		{
 			throw new RuntimeException("Invalid name. Must match " + VALID_PLUGIN_NAMES.pattern());
 		}
 
