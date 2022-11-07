@@ -195,7 +195,7 @@ public class ServerConfiguration
 
 		private final String key;
 
-		private LevelType(String key)
+		LevelType(String key)
 		{
 			this.key = key;
 		}

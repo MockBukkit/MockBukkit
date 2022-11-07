@@ -981,14 +981,14 @@ class ServerMockTest
 	@Test
 	void testGetViewDistanceDefault()
 	{
-		assertEquals(10,server.getViewDistance());
+		assertEquals(10, server.getViewDistance());
 	}
 
 	@Test
 	void testSetViewDistance()
 	{
 		server.setViewDistance(2);
-		assertEquals(2,server.getViewDistance());
+		assertEquals(2, server.getViewDistance());
 	}
 
 	@Test
