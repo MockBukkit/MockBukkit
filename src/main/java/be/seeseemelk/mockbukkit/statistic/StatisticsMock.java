@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.statistic;
 
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.Statistic;
 import org.bukkit.Statistic.Type;
 import org.bukkit.entity.EntityType;
@@ -21,91 +22,138 @@ public class StatisticsMock
 	private final Map<Statistic, Map<EntityType, Integer>> entityStatistics = new EnumMap<>(Statistic.class);
 
 	/**
-	 * Implementation of {@link org.bukkit.OfflinePlayer#setStatistic(Statistic, int)}
+	 * Sets the given statistic for this player.
+	 *
+	 * @param statistic Statistic to set
+	 * @param value     The value to set this statistic to
+	 * @see OfflinePlayer#setStatistic(Statistic, int)
 	 */
-	public void setStatistic(@NotNull Statistic statistic, int amount)
+	public void setStatistic(@NotNull Statistic statistic, int value)
 	{
-		checkGreaterThanEqualTo0(amount);
+		checkGreaterThanEqualTo0(value);
 		Preconditions.checkArgument(statistic.getType() == Type.UNTYPED, "statistic must be provided with parameter");
-		untypedStatistics.put(statistic, amount);
+		untypedStatistics.put(statistic, value);
 	}
 
 	/**
-	 * Implementation of {@link org.bukkit.OfflinePlayer#setStatistic(Statistic, Material, int)}
+	 * Sets the given statistic for this player for the given material.
+	 *
+	 * @param statistic Statistic to set
+	 * @param material  Material to offset the statistic with
+	 * @param value     The value to set this statistic to
+	 * @see OfflinePlayer#setStatistic(Statistic, Material, int)
 	 */
-	public void setStatistic(@NotNull Statistic statistic, @NotNull Material material, int amount)
+	public void setStatistic(@NotNull Statistic statistic, @NotNull Material material, int value)
 	{
-		checkGreaterThanEqualTo0(amount);
+		checkGreaterThanEqualTo0(value);
 		Preconditions.checkArgument(statistic.getType() == Type.ITEM || statistic.getType() == Type.BLOCK, "statistic must take a material parameter");
-		materialStatistics.computeIfAbsent(statistic, k -> new EnumMap<>(Material.class)).put(material, amount);
+		materialStatistics.computeIfAbsent(statistic, k -> new EnumMap<>(Material.class)).put(material, value);
 	}
 
 	/**
-	 * Implementation of {@link org.bukkit.OfflinePlayer#setStatistic(Statistic, EntityType, int)}
+	 * Sets the given statistic for this player for the given entity.
+	 *
+	 * @param statistic  Statistic to set
+	 * @param entityType EntityType to offset the statistic with
+	 * @param value      The value to set this statistic to
+	 * @see OfflinePlayer#setStatistic(Statistic, EntityType, int)
 	 */
-	public void setStatistic(@NotNull Statistic statistic, @NotNull EntityType entity, int amount)
+	public void setStatistic(@NotNull Statistic statistic, @NotNull EntityType entityType, int value)
 	{
-		checkGreaterThanEqualTo0(amount);
+		checkGreaterThanEqualTo0(value);
 		Preconditions.checkArgument(statistic.getType() == Type.ENTITY, "statistic must take an entity parameter");
-		entityStatistics.computeIfAbsent(statistic, k -> new EnumMap<>(EntityType.class)).put(entity, amount);
+		entityStatistics.computeIfAbsent(statistic, k -> new EnumMap<>(EntityType.class)).put(entityType, value);
 	}
 
 	/**
-	 * Implementation of {@link org.bukkit.OfflinePlayer#incrementStatistic(Statistic, int)}
+	 * Increments the given statistic for this player.
+	 *
+	 * @param statistic Statistic to increment
+	 * @param value     Amount to increment this statistic by
+	 * @see OfflinePlayer#incrementStatistic(Statistic, int)
 	 */
-	public void incrementStatistic(@NotNull Statistic statistic, int amount)
+	public void incrementStatistic(@NotNull Statistic statistic, int value)
 	{
-		checkGreaterThan0(amount);
-		setStatistic(statistic, getStatistic(statistic) + amount);
+		checkGreaterThan0(value);
+		setStatistic(statistic, getStatistic(statistic) + value);
 	}
 
 	/**
-	 * Implementation of {@link org.bukkit.OfflinePlayer#incrementStatistic(Statistic, Material, int)}
+	 * Increments the given statistic for this player for the given material.
+	 *
+	 * @param statistic Statistic to increment
+	 * @param material  Material to offset the statistic with
+	 * @param value     Amount to increment this statistic by
+	 * @see OfflinePlayer#incrementStatistic(Statistic, Material, int)
 	 */
-	public void incrementStatistic(@NotNull Statistic statistic, @NotNull Material material, int amount)
+	public void incrementStatistic(@NotNull Statistic statistic, @NotNull Material material, int value)
 	{
-		checkGreaterThan0(amount);
-		setStatistic(statistic, material, getStatistic(statistic, material) + amount);
+		checkGreaterThan0(value);
+		setStatistic(statistic, material, getStatistic(statistic, material) + value);
 	}
 
 	/**
-	 * Implementation of {@link org.bukkit.OfflinePlayer#incrementStatistic(Statistic, EntityType, int)}
+	 * Increments the given statistic for this player for the given entity.
+	 *
+	 * @param statistic  Statistic to increment
+	 * @param entityType EntityType to offset the statistic with
+	 * @param value      Amount to increment this statistic by
+	 * @see OfflinePlayer#incrementStatistic(Statistic, EntityType, int)
 	 */
-	public void incrementStatistic(@NotNull Statistic statistic, @NotNull EntityType entity, int amount)
+	public void incrementStatistic(@NotNull Statistic statistic, @NotNull EntityType entityType, int value)
 	{
-		checkGreaterThan0(amount);
-		setStatistic(statistic, entity, getStatistic(statistic, entity) + amount);
+		checkGreaterThan0(value);
+		setStatistic(statistic, entityType, getStatistic(statistic, entityType) + value);
 	}
 
 	/**
-	 * Implementation of {@link org.bukkit.OfflinePlayer#decrementStatistic(Statistic, int)}
+	 * Decrements the given statistic for this player.
+	 *
+	 * @param statistic Statistic to decrement
+	 * @param value     Amount to decrement this statistic by
+	 * @see OfflinePlayer#decrementStatistic(Statistic, int)
 	 */
-	public void decrementStatistic(@NotNull Statistic statistic, int amount)
+	public void decrementStatistic(@NotNull Statistic statistic, int value)
 	{
-		checkGreaterThan0(amount);
-		setStatistic(statistic, getStatistic(statistic) - amount);
+		checkGreaterThan0(value);
+		setStatistic(statistic, getStatistic(statistic) - value);
 	}
 
 	/**
-	 * Implementation of {@link org.bukkit.OfflinePlayer#decrementStatistic(Statistic, Material, int)}
+	 * Decrements the given statistic for this player for the given material.
+	 *
+	 * @param statistic Statistic to decrement
+	 * @param material  Material to offset the statistic with
+	 * @param value     Amount to decrement this statistic by
+	 * @see OfflinePlayer#decrementStatistic(Statistic, Material, int)
 	 */
-	public void decrementStatistic(@NotNull Statistic statistic, @NotNull Material material, int amount)
+	public void decrementStatistic(@NotNull Statistic statistic, @NotNull Material material, int value)
 	{
-		checkGreaterThan0(amount);
-		setStatistic(statistic, material, getStatistic(statistic, material) - amount);
+		checkGreaterThan0(value);
+		setStatistic(statistic, material, getStatistic(statistic, material) - value);
 	}
 
 	/**
-	 * Implementation of {@link org.bukkit.OfflinePlayer#decrementStatistic(Statistic, EntityType, int)}
+	 * Decrements the given statistic for this player for the given entity.
+	 *
+	 * @param statistic  Statistic to decrement
+	 * @param entityType EntityType to offset the statistic with
+	 * @param value      Amount to decrement this statistic by
+	 *                   for the statistic
+	 * @see OfflinePlayer#decrementStatistic(Statistic, EntityType, int)
 	 */
-	public void decrementStatistic(@NotNull Statistic statistic, @NotNull EntityType entity, int amount)
+	public void decrementStatistic(@NotNull Statistic statistic, @NotNull EntityType entityType, int value)
 	{
-		checkGreaterThan0(amount);
-		setStatistic(statistic, entity, getStatistic(statistic, entity) - amount);
+		checkGreaterThan0(value);
+		setStatistic(statistic, entityType, getStatistic(statistic, entityType) - value);
 	}
 
 	/**
-	 * Implementation of {@link org.bukkit.OfflinePlayer#getStatistic(Statistic)}
+	 * Gets the value of the given statistic for this player.
+	 *
+	 * @param statistic Statistic to check
+	 * @return the value of the given statistic
+	 * @see OfflinePlayer#getStatistic(Statistic)
 	 */
 	public int getStatistic(@NotNull Statistic statistic)
 	{
@@ -114,7 +162,12 @@ public class StatisticsMock
 	}
 
 	/**
-	 * Implementation of {@link org.bukkit.OfflinePlayer#getStatistic(Statistic, Material)}
+	 * Gets the value of the given statistic for this player.
+	 *
+	 * @param statistic Statistic to check
+	 * @param material  Material offset of the statistic
+	 * @return the value of the given statistic
+	 * @see OfflinePlayer#getStatistic(Statistic, Material)
 	 */
 	public int getStatistic(@NotNull Statistic statistic, @NotNull Material material)
 	{
@@ -128,9 +181,14 @@ public class StatisticsMock
 	}
 
 	/**
-	 * Implementation of {@link org.bukkit.OfflinePlayer#getStatistic(Statistic, EntityType)}
+	 * Gets the value of the given statistic for this player.
+	 *
+	 * @param statistic  Statistic to check
+	 * @param entityType EntityType offset of the statistic
+	 * @return the value of the given statistic for the statistic
+	 * @see OfflinePlayer#getStatistic(Statistic, EntityType)
 	 */
-	public int getStatistic(@NotNull Statistic statistic, @NotNull EntityType entity)
+	public int getStatistic(@NotNull Statistic statistic, @NotNull EntityType entityType)
 	{
 		Preconditions.checkArgument(statistic.getType() == Type.ENTITY, "statistic must take an entity parameter");
 		Map<EntityType, Integer> map = entityStatistics.get(statistic);
@@ -138,11 +196,11 @@ public class StatisticsMock
 		{
 			return 0;
 		}
-		return map.getOrDefault(entity, 0);
+		return map.getOrDefault(entityType, 0);
 	}
 
 	/**
-	 * Ensures that the provided amount is greater than
+	 * Ensures that the provided value is greater than
 	 *
 	 * @param amount the amount to check
 	 */
