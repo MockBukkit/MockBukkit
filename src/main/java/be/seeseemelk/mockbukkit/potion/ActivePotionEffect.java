@@ -19,6 +19,11 @@ public final class ActivePotionEffect
 	private final @NotNull PotionEffect effect;
 	private final long timestamp;
 
+	/**
+	 * Constructs a new {@link ActivePotionEffect} with the provided {@link PotionEffect}.
+	 *
+	 * @param effect The effect that's been applied.
+	 */
 	public ActivePotionEffect(@NotNull PotionEffect effect)
 	{
 		this.effect = effect;
