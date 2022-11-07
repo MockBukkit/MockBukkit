@@ -6,6 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.Furnace;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.AbstractHorseInventory;
 import org.bukkit.inventory.FurnaceInventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
@@ -14,6 +15,11 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
 
+/**
+ * Mock implementation of a {@link FurnaceInventory}.
+ *
+ * @see InventoryMock
+ */
 public class FurnaceInventoryMock extends InventoryMock implements FurnaceInventory
 {
 
@@ -21,6 +27,11 @@ public class FurnaceInventoryMock extends InventoryMock implements FurnaceInvent
 	private static final int FUEL_SLOT = 1;
 	private static final int RESULT_SLOT = 2;
 
+	/**
+	 * Constructs a new {@link FurnaceInventoryMock} for the given holder.
+	 *
+	 * @param holder The holder of the inventory.
+	 */
 	public FurnaceInventoryMock(@Nullable InventoryHolder holder)
 	{
 		super(holder, InventoryType.FURNACE);

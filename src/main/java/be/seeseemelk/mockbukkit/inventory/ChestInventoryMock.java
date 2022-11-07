@@ -5,9 +5,20 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Mock implementation of a Chest {@link InventoryType}.
+ *
+ * @see InventoryMock
+ * @see InventoryType#CHEST
+ */
 public class ChestInventoryMock extends InventoryMock
 {
 
+	/**
+	 * Constructs a new {@link ChestInventoryMock} for the given holder.
+	 *
+	 * @param holder The holder of the inventory.
+	 */
 	public ChestInventoryMock(InventoryHolder holder, int size)
 	{
 		super(holder, size, InventoryType.CHEST);

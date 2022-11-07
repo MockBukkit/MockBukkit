@@ -13,6 +13,11 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 
+/**
+ * Mock implementation of a {@link PlayerInventory}.
+ *
+ * @see InventoryMock
+ */
 public class PlayerInventoryMock extends InventoryMock implements PlayerInventory, EntityEquipment
 {
 
@@ -25,6 +30,11 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	protected static final int OFF_HAND = 40;
 	private int mainHandSlot = 0;
 
+	/**
+	 * Constructs a new {@link PlayerInventoryMock}.
+	 *
+	 * @param holder The holder of the inventory.
+	 */
 	public PlayerInventoryMock(HumanEntity holder)
 	{
 		super(holder, InventoryType.PLAYER);
@@ -359,7 +369,11 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 		throw new UnsupportedOperationException("Cannot set drop chance for PlayerInventory");
 	}
 
-	static @NotNull ItemStack notNull(@Nullable ItemStack itemStack)
+	/**
+	 * @param itemStack The item.
+	 * @return A new ItemStack of AIR if the provided item is null, otherwise the provided item.
+	 */
+	private static @NotNull ItemStack notNull(@Nullable ItemStack itemStack)
 	{
 		return itemStack == null ? new ItemStack(Material.AIR) : itemStack;
 	}
