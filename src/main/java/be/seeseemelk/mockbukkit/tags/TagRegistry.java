@@ -41,6 +41,9 @@ public enum TagRegistry
 		return tags;
 	}
 
+	/**
+	 * @return Whether the tags are empty.
+	 */
 	public boolean isEmpty()
 	{
 		return tags.isEmpty();

@@ -24,6 +24,12 @@ public class TagWrapperMock implements Tag<Material>
 	private final Set<Material> materials = new HashSet<>();
 	private final Set<TagWrapperMock> additionalTags = new HashSet<>();
 
+	/**
+	 * Constructs a new {@link TagWrapperMock} with the provided {@link TagRegistry} and {@link NamespacedKey}.
+	 *
+	 * @param registry The registry this wrapper is part of.
+	 * @param key      The key of this wrapper.
+	 */
 	public TagWrapperMock(@NotNull TagRegistry registry, @NotNull NamespacedKey key)
 	{
 		this.registry = registry;
@@ -43,6 +49,12 @@ public class TagWrapperMock implements Tag<Material>
 		return registry;
 	}
 
+	/**
+	 * Reloads all tags.
+	 *
+	 * @throws TagMisconfigurationException If something goes wrong while reading a tag.
+	 * @throws FileNotFoundException        If a tag file isn't found.
+	 */
 	public void reload() throws TagMisconfigurationException, FileNotFoundException
 	{
 		this.materials.clear();

@@ -23,11 +23,15 @@ import java.util.logging.Level;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
+/**
+ * Used for loading the internal registry of tags.
+ */
 public final class TagsMock
 {
 
 	private TagsMock()
 	{
+		throw new UnsupportedOperationException("Utility class");
 	}
 
 	/**
@@ -60,7 +64,7 @@ public final class TagsMock
 	/**
 	 * This will load all {@link Tag Tags} for the given {@link TagRegistry}.
 	 *
-	 * @param server
+	 * @param server       The server to add the tags to.
 	 * @param registry     Our {@link TagRegistry}
 	 * @param skipIfExists Whether to skip an already loaded {@link TagRegistry}
 	 * @throws URISyntaxException When a {@link URI} is malformed
