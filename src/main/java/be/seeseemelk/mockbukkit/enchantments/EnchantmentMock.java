@@ -27,6 +27,12 @@ public class EnchantmentMock extends Enchantment
 	private boolean isTreasure;
 	private boolean isCursed;
 
+	/**
+	 * Constructs a new {@link EnchantmentMock} with the provided {@link NamespacedKey} and name.
+	 *
+	 * @param key  The key for the enchantment.
+	 * @param name The name of the enchantment.
+	 */
 	public EnchantmentMock(@NotNull NamespacedKey key, @NotNull String name)
 	{
 		super(key);
