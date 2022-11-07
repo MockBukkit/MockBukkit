@@ -220,7 +220,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 */
 	public boolean reconnect()
 	{
-		if (!hasPlayedBefore())
+		if (Arrays.stream(server.getPlayerList().getOfflinePlayers()).noneMatch(it -> it.getUniqueId().equals(this.getUniqueId())))
 		{
 			throw new IllegalStateException("Player was never online");
 		}
@@ -718,7 +718,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public boolean hasPlayedBefore()
 	{
-		return Arrays.stream(this.server.getPlayerList().getOfflinePlayers()).anyMatch(p -> p.getUniqueId().equals(getUniqueId()));
+		return server.getPlayerList().hasPlayedBefore(getUniqueId());
 	}
 
 	@Deprecated(forRemoval = true)
