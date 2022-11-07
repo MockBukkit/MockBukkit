@@ -7,6 +7,9 @@ import org.bukkit.map.MapRenderer;
 import org.bukkit.map.MapView;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Mock implementation of a {@link MapRenderer}.
+ */
 public class MapRendererMock extends MapRenderer
 {
 
