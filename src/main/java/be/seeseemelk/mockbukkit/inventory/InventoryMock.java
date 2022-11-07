@@ -583,6 +583,11 @@ public class InventoryMock implements Inventory
 		return true;
 	}
 
+	/**
+	 * Creates a snapshot of the inventory.
+	 *
+	 * @return An inventory snapshot.
+	 */
 	@NotNull
 	public Inventory getSnapshot()
 	{

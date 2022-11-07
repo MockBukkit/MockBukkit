@@ -74,21 +74,46 @@ public class BlockStateMock implements BlockState
 	}
 
 	// region Type Checking
+
+	/**
+	 * Ensures the provided material is one of the expected materials provided.
+	 *
+	 * @param material The material to test.
+	 * @param expected The expected materials.
+	 */
 	protected void checkType(@NotNull Material material, @NotNull Material @NotNull ... expected)
 	{
 		Preconditions.checkArgument(Arrays.stream(expected).anyMatch(m -> material == m), "Cannot create a " + getClass().getSimpleName() + " from " + material);
 	}
 
+	/**
+	 * Ensures the provided block type is one of the expected materials provided.
+	 *
+	 * @param block    The block to test.
+	 * @param expected The expected materials.
+	 */
 	protected void checkType(@NotNull Block block, @NotNull Material... expected)
 	{
 		checkType(block.getType(), expected);
 	}
 
-	protected void checkType(@NotNull Material material, @NotNull Tag<Material> tag)
+	/**
+	 * Ensures the provided material is contained in the {@link Tag}.
+	 *
+	 * @param material The material to test.
+	 * @param expected The expected tag.
+	 */
+	protected void checkType(@NotNull Material material, @NotNull Tag<Material> expected)
 	{
-		Preconditions.checkArgument(tag.isTagged(material), "Cannot create a " + getClass().getSimpleName() + " from " + material);
+		Preconditions.checkArgument(expected.isTagged(material), "Cannot create a " + getClass().getSimpleName() + " from " + material);
 	}
 
+	/**
+	 * Ensures the provided block type is contained in the {@link Tag}.
+	 *
+	 * @param block    The material to test.
+	 * @param expected The expected tag.
+	 */
 	protected void checkType(@NotNull Block block, @NotNull Tag<Material> expected)
 	{
 		checkType(block.getType(), expected);
@@ -346,6 +371,13 @@ public class BlockStateMock implements BlockState
 //		}
 	}
 
+	/**
+	 * Attempts to construct a BlockStateMock by the provided block.
+	 * Will return a basic {@link BlockStateMock} if no implementation is found.
+	 *
+	 * @param block The block to create the BlockState from.
+	 * @return The BlockState.
+	 */
 	@NotNull
 	public static BlockStateMock mockState(@NotNull Block block)
 	{

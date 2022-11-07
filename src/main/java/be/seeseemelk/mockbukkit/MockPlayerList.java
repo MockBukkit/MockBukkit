@@ -229,7 +229,7 @@ public class MockPlayerList
 	}
 
 	/**
-	 * @return All offline & online players.
+	 * @return All offline and online players.
 	 */
 	@NotNull
 	public OfflinePlayer @NotNull [] getOfflinePlayers()

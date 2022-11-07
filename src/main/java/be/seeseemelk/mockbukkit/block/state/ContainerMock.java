@@ -58,6 +58,9 @@ public abstract class ContainerMock extends TileStateMock implements Container
 		this.lock = state.getLock();
 	}
 
+	/**
+	 * @return A new inventory, of the correct type for the state.
+	 */
 	protected abstract InventoryMock createInventory();
 
 	@Override

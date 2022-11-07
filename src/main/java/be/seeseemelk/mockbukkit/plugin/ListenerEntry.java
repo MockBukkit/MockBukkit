@@ -50,6 +50,9 @@ public class ListenerEntry
 		return listener;
 	}
 
+	/**
+	 * @return The method this listener is attached to.
+	 */
 	public @NotNull Method getMethod()
 	{
 		return method;

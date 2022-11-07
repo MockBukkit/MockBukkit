@@ -642,14 +642,22 @@ public class ServerMock extends Server.Spigot implements Server
 		throw new UnimplementedOperationException();
 	}
 
+	/**
+	 * Creates an inventory with the provided parameters.
+	 *
+	 * @param owner The holder of the inventory.
+	 * @param type  The type of the inventory.
+	 * @param title The title of the inventory view.
+	 * @param size  The size of the inventory.
+	 * @return The created inventory.
+	 * @throws IllegalArgumentException If the InventoryType is not creatable.
+	 * @see InventoryType#isCreatable()
+	 */
 	@NotNull
 	@Deprecated
 	public InventoryMock createInventory(InventoryHolder owner, @NotNull InventoryType type, String title, int size)
 	{
-		if (!type.isCreatable())
-		{
-			throw new IllegalArgumentException("Inventory Type is not creatable!");
-		}
+		Preconditions.checkArgument(type.isCreatable(), "Inventory Type '" + type + "' is not creatable!");
 
 		switch (type)
 		{
@@ -660,9 +668,9 @@ public class ServerMock extends Server.Spigot implements Server
 		case DROPPER:
 			return new DropperInventoryMock(owner);
 		case PLAYER:
-			if (owner instanceof HumanEntity)
+			if (owner instanceof HumanEntity he)
 			{
-				return new PlayerInventoryMock((HumanEntity) owner);
+				return new PlayerInventoryMock(he);
 			}
 			else
 			{
@@ -1033,6 +1041,13 @@ public class ServerMock extends Server.Spigot implements Server
 		}
 	}
 
+	/**
+	 * Gets the tab completion result for a command.
+	 *
+	 * @param sender      The command sender.
+	 * @param commandLine The command string, without a leading slash.
+	 * @return The tab completion result, or an empty list.
+	 */
 	public @NotNull List<String> getCommandTabComplete(@NotNull CommandSender sender, @NotNull String commandLine)
 	{
 		AsyncCatcher.catchOp("command tabcomplete");
@@ -1845,6 +1860,11 @@ public class ServerMock extends Server.Spigot implements Server
 		return tag;
 	}
 
+	/**
+	 * Adds a tag registry.
+	 *
+	 * @param registry The registry to add.
+	 */
 	public void addTagRegistry(@NotNull TagRegistry registry)
 	{
 		materialTags.put(registry.getRegistry(), registry);

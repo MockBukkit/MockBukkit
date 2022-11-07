@@ -335,6 +335,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		return false;
 	}
 
+	/**
+	 * Handles teleporting an entity without firing an event.
+	 * This will set the entity to the new location, mark teleport as true, and set the teleport cause.
+	 *
+	 * @param location The location to teleport to.
+	 * @param cause    The teleport cause.
+	 */
 	protected void teleportWithoutEvent(@NotNull Location location, @NotNull TeleportCause cause)
 	{
 		setLocation(location);

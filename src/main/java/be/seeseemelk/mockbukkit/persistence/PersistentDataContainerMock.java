@@ -142,6 +142,12 @@ public class PersistentDataContainerMock implements PersistentDataContainer
 		return Collections.unmodifiableSet(map.keySet());
 	}
 
+	/**
+	 * Serializes the held data.
+	 *
+	 * @return The serialized data.
+	 * @see #deserialize(Map)
+	 */
 	public @NotNull Map<String, Object> serialize()
 	{
 		return map.entrySet().stream().collect(Collectors.toMap(e -> e.getKey().toString(), Map.Entry::getValue));

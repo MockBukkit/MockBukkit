@@ -53,6 +53,9 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	private @Nullable ItemStack cursor = null;
 	private @NotNull GameMode gameMode = GameMode.SURVIVAL;
 	private @Nullable Location lastDeathLocation = new Location(new WorldMock(), 0, 0, 0);
+	/**
+	 * How much EXP this {@link HumanEntity} has.
+	 */
 	protected int expLevel = 0;
 	private float saturation = 5.0F;
 	private int foodLevel = 20;

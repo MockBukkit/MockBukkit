@@ -64,13 +64,22 @@ import java.util.UUID;
 public abstract class LivingEntityMock extends EntityMock implements LivingEntity
 {
 
+	/**
+	 * How much health the entity has.
+	 */
 	protected double health;
 	private int maxAirTicks = 300;
 	private int remainingAirTicks = 300;
+	/**
+	 * Whether the entity is alive.
+	 */
 	protected boolean alive = true;
 	private boolean gliding = false;
 	private boolean jumping = false;
 
+	/**
+	 * The attributes this entity has.
+	 */
 	protected Map<Attribute, AttributeInstanceMock> attributes;
 	private final EntityEquipment equipment = new EntityEquipmentMock(this);
 	private final Set<UUID> collidableExemptions = new HashSet<>();

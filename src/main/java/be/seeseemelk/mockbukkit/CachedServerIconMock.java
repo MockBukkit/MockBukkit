@@ -9,6 +9,9 @@ import org.jetbrains.annotations.Nullable;
 public class CachedServerIconMock implements CachedServerIcon
 {
 
+	/**
+	 * The prefix used for base 64 images.
+	 */
 	public static final String PNG_BASE64_PREFIX = "data:image/png;base64,";
 
 	private final @Nullable String data;

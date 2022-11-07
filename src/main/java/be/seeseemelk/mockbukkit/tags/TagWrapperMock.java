@@ -43,6 +43,9 @@ public class TagWrapperMock implements Tag<Material>
 		return key;
 	}
 
+	/**
+	 * @return The registry this tag wrapper is part of.
+	 */
 	@NotNull
 	public TagRegistry getRegistry()
 	{
@@ -111,6 +114,9 @@ public class TagWrapperMock implements Tag<Material>
 		}
 	}
 
+	/**
+	 * @return All additional tags this tag inherits.
+	 */
 	@NotNull
 	public Set<TagWrapperMock> getSubTags()
 	{

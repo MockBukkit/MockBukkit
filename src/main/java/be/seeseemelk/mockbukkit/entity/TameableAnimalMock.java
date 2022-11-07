@@ -1,8 +1,10 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
+import com.google.common.base.Preconditions;
 import org.bukkit.entity.AnimalTamer;
 import org.bukkit.entity.Creature;
+import org.bukkit.entity.Sittable;
 import org.bukkit.entity.Tameable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -22,7 +24,7 @@ public class TameableAnimalMock extends AnimalsMock implements Tameable, Creatur
 	private boolean sitting;
 
 	/**
-	 * Constructs a new {@link TameableAnimalMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new  on the provided {@link ServerMock} with a specified {@link UUID}.
 	 *
 	 * @param server The server to create the entity on.
 	 * @param uuid   The UUID of the entity.
@@ -32,6 +34,13 @@ public class TameableAnimalMock extends AnimalsMock implements Tameable, Creatur
 		super(server, uuid);
 	}
 
+	/**
+	 * Sets the owner of this animal by UUID.
+	 *
+	 * @param uuid The UUID.
+	 * @see #getOwner()
+	 * @see #getOwnerUniqueId()
+	 */
 	public void setOwnerUUID(@Nullable UUID uuid)
 	{
 		this.owner = uuid;
@@ -91,14 +100,30 @@ public class TameableAnimalMock extends AnimalsMock implements Tameable, Creatur
 		return this.owner;
 	}
 
+	/**
+	 * Checks if the animal is sitting.
+	 *
+	 * @return Whether the animal is sitting.
+	 * @throws IllegalStateException If the animal doesn't implement {@link Sittable}.
+	 * @see Sittable#isSitting
+	 */
 	// Sitting methods implemented here for animals that implement Sittable.
 	public boolean isSitting()
 	{
+		Preconditions.checkState(this instanceof Sittable, "Not sittable");
 		return this.sitting;
 	}
 
+	/**
+	 * Sets whether the animal is sitting.
+	 *
+	 * @param sitting Whether the animal is sitting.
+	 * @throws IllegalStateException If the animal doesn't implement {@link Sittable}.
+	 * @see Sittable#setSitting(boolean)
+	 */
 	public void setSitting(boolean sitting)
 	{
+		Preconditions.checkState(this instanceof Sittable, "Not sittable");
 		this.sitting = sitting;
 	}
 

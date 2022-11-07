@@ -21,12 +21,33 @@ import java.util.Arrays;
 public class PlayerInventoryMock extends InventoryMock implements PlayerInventory, EntityEquipment
 {
 
+	/**
+	 * The starting slot of the hotbar.
+	 */
 	protected static final int HOTBAR = 0;
+	/**
+	 * The ending slot of the hotbar.
+	 */
 	protected static final int SLOT_BAR = 9;
+	/**
+	 * The slot boots are in.
+	 */
 	protected static final int BOOTS = 36;
+	/**
+	 * The slot leggings are in.
+	 */
 	protected static final int LEGGINGS = 37;
+	/**
+	 * The slot the chestplate is in.
+	 */
 	protected static final int CHESTPLATE = 38;
+	/**
+	 * The slot the helmet is in.
+	 */
 	protected static final int HELMET = 39;
+	/**
+	 * The slot of the offhand.
+	 */
 	protected static final int OFF_HAND = 40;
 	private int mainHandSlot = 0;
 

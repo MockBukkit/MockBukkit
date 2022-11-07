@@ -497,6 +497,7 @@ public class PluginManagerMock implements PluginManager
 	 *
 	 * @param event The asynchronous {@link Event} to call.
 	 * @param func  A function to invoke after the event has been called.
+	 * @param <T>   The event type.
 	 */
 	public <T extends Event> void callEventAsynchronously(@NotNull T event, Consumer<T> func)
 	{

@@ -18,6 +18,8 @@ public class ChestInventoryMock extends InventoryMock
 	 * Constructs a new {@link ChestInventoryMock} for the given holder.
 	 *
 	 * @param holder The holder of the inventory.
+	 * @param size   The size of the inventory.
+	 * @see InventoryMock#InventoryMock(InventoryHolder, int, InventoryType)
 	 */
 	public ChestInventoryMock(InventoryHolder holder, int size)
 	{

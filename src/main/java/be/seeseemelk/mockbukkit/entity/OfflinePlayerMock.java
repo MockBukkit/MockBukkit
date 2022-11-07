@@ -54,9 +54,18 @@ public class OfflinePlayerMock implements OfflinePlayer
 		this(UUID.nameUUIDFromBytes(("OfflinePlayer:" + name).getBytes()), name);
 	}
 
+	/**
+	 * Makes this offline player join the server.
+	 * A new PlayerMock will be constructed, and added to the server.
+	 * Will throw an {@link IllegalStateException} if the player is already online.
+	 *
+	 * @param server The server to join.
+	 * @return The created PlayerMock.
+	 */
 	public @NotNull PlayerMock join(@NotNull ServerMock server)
 	{
 		Preconditions.checkNotNull(server, "Server cannot be null");
+		Preconditions.checkState(!isOnline(), "Player already online");
 		PlayerMock player = new PlayerMock(server, this.name, this.uuid);
 		server.addPlayer(player);
 		return player;

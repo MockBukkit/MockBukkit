@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.AsyncCatcher;
 import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.MockPlayerList;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.map.MapViewMock;
@@ -163,6 +164,14 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 	private final List<ItemStack> consumedItems = new LinkedList<>();
 
+	/**
+	 * Constructs a new {@link PlayerMock} for the provided server with the specified name.
+	 * The players UUID will be generated from the name.
+	 *
+	 * @param server The player's server.
+	 * @param name   The player's name.
+	 * @see ServerMock#addPlayer
+	 */
 	public PlayerMock(@NotNull ServerMock server, @NotNull String name)
 	{
 		this(server, name, UUID.nameUUIDFromBytes(("OfflinePlayer:" + name).getBytes(StandardCharsets.UTF_8)));
@@ -170,6 +179,15 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		this.scoreboard = server.getScoreboardManager().getMainScoreboard();
 	}
 
+	/**
+	 * Constructs a new {@link PlayerMock} for the provided server with the specified name and {@link UUID}.
+	 * Does NOT add the player to the server.
+	 *
+	 * @param server The player's server.
+	 * @param name   The player's name.
+	 * @param uuid   The player's {@link UUID}.
+	 * @see ServerMock#addPlayer
+	 */
 	public PlayerMock(@NotNull ServerMock server, @NotNull String name, @NotNull UUID uuid)
 	{
 		super(server, uuid);
@@ -725,6 +743,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		return server.getPlayerList().hasPlayedBefore(getUniqueId());
 	}
 
+	/**
+	 * No longer used.
+	 *
+	 * @param time N/A.
+	 * @see MockPlayerList#setLastSeen(UUID, long)
+	 * @deprecated Moved to {@link MockPlayerList}.
+	 */
 	@Deprecated(forRemoval = true)
 	public void setLastPlayed(long time)
 	{
@@ -949,6 +974,12 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		this.sneaking = sneaking;
 	}
 
+	/**
+	 * Simulates sneaking.
+	 *
+	 * @param sneak Whether the player is beginning to sneak.
+	 * @return The event.
+	 */
 	public @NotNull PlayerToggleSneakEvent simulateSneak(boolean sneak)
 	{
 		PlayerToggleSneakEvent event = new PlayerToggleSneakEvent(this, sneak);
@@ -972,6 +1003,12 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		this.sprinting = sprinting;
 	}
 
+	/**
+	 * Simulates sprinting.
+	 *
+	 * @param sprint Whether the player is beginning to sprint.
+	 * @return The event.
+	 */
 	public @NotNull PlayerToggleSprintEvent simulateSprint(boolean sprint)
 	{
 		PlayerToggleSprintEvent event = new PlayerToggleSprintEvent(this, sprint);
@@ -1825,6 +1862,12 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		this.flying = value;
 	}
 
+	/**
+	 * Simulates toggling flight.
+	 *
+	 * @param fly Whether the player is starting to fly.
+	 * @return The event.
+	 */
 	public @NotNull PlayerToggleFlightEvent simulateToggleFlight(boolean fly)
 	{
 		PlayerToggleFlightEvent event = new PlayerToggleFlightEvent(this, fly);
@@ -2045,11 +2088,17 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		sendTitle(title, subtitle);
 	}
 
+	/**
+	 * @return The next title sent to the player.
+	 */
 	public @Nullable String nextTitle()
 	{
 		return title.poll();
 	}
 
+	/**
+	 * @return The next subtitle sent to the player.
+	 */
 	public @Nullable String nextSubTitle()
 	{
 		return subitles.poll();
@@ -2564,6 +2613,9 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		return playerSpigotMock;
 	}
 
+	/**
+	 * Mock implementation of a {@link Player.Spigot}.
+	 */
 	public class PlayerSpigotMock extends Player.Spigot
 	{
 

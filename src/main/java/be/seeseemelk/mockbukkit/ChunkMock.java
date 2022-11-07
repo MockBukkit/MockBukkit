@@ -86,6 +86,12 @@ public class ChunkMock implements Chunk
 		return world.getBlockAt((this.x << 4) + x, y, (this.z << 4) + z);
 	}
 
+	/**
+	 * Gets a block at a {@link Coordinate}.
+	 *
+	 * @param coordinate The coordinate at which to get the block.
+	 * @return The block at the provided coordinate.
+	 */
 	public @NotNull Block getBlock(@NotNull Coordinate coordinate)
 	{
 		return getBlock(coordinate.x, coordinate.y, coordinate.z);

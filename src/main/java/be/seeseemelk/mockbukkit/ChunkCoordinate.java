@@ -10,14 +10,21 @@ import java.util.Objects;
 public class ChunkCoordinate
 {
 
+	/**
+	 * The X coordinate.
+	 */
 	public final int x;
+
+	/**
+	 * The Z coordinate.
+	 */
 	public final int z;
 
 	/**
 	 * Constructs a new {@link ChunkCoordinate}.
 	 *
 	 * @param x The X coordinate.
-	 * @param z The Y coordinate.
+	 * @param z The Z coordinate.
 	 */
 	public ChunkCoordinate(int x, int z)
 	{
@@ -25,11 +32,17 @@ public class ChunkCoordinate
 		this.z = z;
 	}
 
+	/**
+	 * @return The X coordinate.
+	 */
 	public int getX()
 	{
 		return x;
 	}
 
+	/**
+	 * @return The Z coordinate.
+	 */
 	public int getZ()
 	{
 		return z;

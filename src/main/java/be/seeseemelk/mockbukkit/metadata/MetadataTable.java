@@ -29,6 +29,8 @@ public class MetadataTable implements Metadatable
 
 	/**
 	 * Constructs a new empty {@link MetadataTable} with the contents cloned from another.
+	 *
+	 * @param table The table to clone.
 	 */
 	@ApiStatus.Internal
 	public MetadataTable(@NotNull MetadataTable table)
