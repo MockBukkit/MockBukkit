@@ -14,7 +14,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Map;
 
 /**
- * Mock implementation of {@link Furnace}.
+ * Mock implementation of a {@link Furnace}.
+ *
+ * @see ContainerMock
  */
 public abstract class AbstractFurnaceMock extends ContainerMock implements Furnace
 {
@@ -24,18 +26,35 @@ public abstract class AbstractFurnaceMock extends ContainerMock implements Furna
 	private int cookTimeTotal;
 	private double cookSpeedMultiplier = 1.0;
 
+	/**
+	 * Constructs a new {@link AbstractFurnaceMock} for the provided {@link Material}.
+	 * Only supports {@link Material#SMOKER}, {@link Material#FURNACE}, and {@link Material#BLAST_FURNACE}.
+	 *
+	 * @param material The material this state is for.
+	 */
 	protected AbstractFurnaceMock(@NotNull Material material)
 	{
 		super(material);
 		checkType(material, Material.SMOKER, Material.FURNACE, Material.BLAST_FURNACE);
 	}
 
+	/**
+	 * Constructs a new {@link AbstractFurnaceMock} for the provided {@link Block}.
+	 * Only supports {@link Material#SMOKER}, {@link Material#FURNACE}, and {@link Material#BLAST_FURNACE}.
+	 *
+	 * @param block The block this state is for.
+	 */
 	protected AbstractFurnaceMock(@NotNull Block block)
 	{
 		super(block);
 		checkType(block, Material.SMOKER, Material.FURNACE, Material.BLAST_FURNACE);
 	}
 
+	/**
+	 * Constructs a new {@link AbstractFurnaceMock} by cloning the data from an existing one.
+	 *
+	 * @param state The state to clone.
+	 */
 	protected AbstractFurnaceMock(@NotNull AbstractFurnaceMock state)
 	{
 		super(state);

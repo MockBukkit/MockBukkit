@@ -8,24 +8,43 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * Mock implementation of a {@link SculkShrieker}.
+ *
+ * @see TileStateMock
  */
 public class SculkShriekerMock extends TileStateMock implements SculkShrieker
 {
 
 	private int warningLevel;
 
+	/**
+	 * Constructs a new {@link SculkShriekerMock} for the provided {@link Material}.
+	 * Only supports {@link Material#SCULK_SHRIEKER}
+	 *
+	 * @param material The material this state is for.
+	 */
 	public SculkShriekerMock(@NotNull Material material)
 	{
 		super(material);
 		checkType(material, Material.SCULK_SHRIEKER);
 	}
 
+	/**
+	 * Constructs a new {@link SculkShriekerMock} for the provided {@link Block}.
+	 * Only supports {@link Material#SCULK_SHRIEKER}
+	 *
+	 * @param block The block this state is for.
+	 */
 	protected SculkShriekerMock(@NotNull Block block)
 	{
 		super(block);
 		checkType(block, Material.SCULK_SHRIEKER);
 	}
 
+	/**
+	 * Constructs a new {@link SculkShriekerMock} by cloning the data from an existing one.
+	 *
+	 * @param state The state to clone.
+	 */
 	protected SculkShriekerMock(@NotNull SculkShriekerMock state)
 	{
 		super(state);

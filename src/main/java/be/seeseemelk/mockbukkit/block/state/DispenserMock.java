@@ -15,23 +15,42 @@ import org.jetbrains.annotations.Nullable;
 import java.util.UUID;
 
 /**
- * Mock implementation of {@link Dispenser}.
+ * Mock implementation of a {@link Dispenser}.
+ *
+ * @see ContainerMock
  */
 public class DispenserMock extends ContainerMock implements Dispenser
 {
 
+	/**
+	 * Constructs a new {@link DispenserMock} for the provided {@link Material}.
+	 * Only supports {@link Material#DISPENSER}
+	 *
+	 * @param material The material this state is for.
+	 */
 	public DispenserMock(@NotNull Material material)
 	{
 		super(material);
 		checkType(material, Material.DISPENSER);
 	}
 
+	/**
+	 * Constructs a new {@link DispenserMock} for the provided {@link Block}.
+	 * Only supports {@link Material#DISPENSER}
+	 *
+	 * @param block The block this state is for.
+	 */
 	protected DispenserMock(@NotNull Block block)
 	{
 		super(block);
 		checkType(block, Material.DISPENSER);
 	}
 
+	/**
+	 * Constructs a new {@link DispenserMock} by cloning the data from an existing one.
+	 *
+	 * @param state The state to clone.
+	 */
 	protected DispenserMock(@NotNull DispenserMock state)
 	{
 		super(state);

@@ -12,7 +12,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Mock implementation of {@link Container}.
+ * Mock implementation of a {@link Container}.
+ *
+ * @see TileStateMock
  */
 public abstract class ContainerMock extends TileStateMock implements Container
 {
@@ -21,18 +23,33 @@ public abstract class ContainerMock extends TileStateMock implements Container
 	private @Nullable Component customName;
 	private @NotNull String lock = "";
 
+	/**
+	 * Constructs a new {@link ContainerMock} for the provided {@link Material}.
+	 *
+	 * @param material The material this state is for.
+	 */
 	protected ContainerMock(@NotNull Material material)
 	{
 		super(material);
 		this.inventory = createInventory();
 	}
 
+	/**
+	 * Constructs a new {@link ContainerMock} for the provided {@link Block}.
+	 *
+	 * @param block The block this state is for.
+	 */
 	protected ContainerMock(@NotNull Block block)
 	{
 		super(block);
 		this.inventory = createInventory();
 	}
 
+	/**
+	 * Constructs a new {@link ContainerMock} by cloning the data from an existing one.
+	 *
+	 * @param state The state to clone.
+	 */
 	protected ContainerMock(@NotNull ContainerMock state)
 	{
 		super(state);

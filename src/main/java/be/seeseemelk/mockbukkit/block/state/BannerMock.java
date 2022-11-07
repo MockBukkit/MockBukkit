@@ -16,7 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Mock implementation of {@link Banner}.
+ * Mock implementation of a {@link Banner}.
+ *
+ * @see TileStateMock
  */
 public class BannerMock extends TileStateMock implements Banner
 {
@@ -25,18 +27,35 @@ public class BannerMock extends TileStateMock implements Banner
 	private @NotNull List<Pattern> patterns = new ArrayList<>();
 	private @Nullable Component customName;
 
+	/**
+	 * Constructs a new {@link BannerMock} for the provided {@link Material}.
+	 * Only supports materials in {@link Tag#BANNERS}
+	 *
+	 * @param material The material this state is for.
+	 */
 	public BannerMock(@NotNull Material material)
 	{
 		super(material);
 		checkType(material, Tag.BANNERS);
 	}
 
+	/**
+	 * Constructs a new {@link BannerMock} for the provided {@link Block}.
+	 * Only supports materials in {@link Tag#BANNERS}
+	 *
+	 * @param block The block this state is for.
+	 */
 	protected BannerMock(@NotNull Block block)
 	{
 		super(block);
 		checkType(block, Tag.BANNERS);
 	}
 
+	/**
+	 * Constructs a new {@link BannerMock} by cloning the data from an existing one.
+	 *
+	 * @param state The state to clone.
+	 */
 	protected BannerMock(@NotNull BannerMock state)
 	{
 		super(state);

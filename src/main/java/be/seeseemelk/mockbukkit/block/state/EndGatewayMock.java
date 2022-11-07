@@ -13,6 +13,8 @@ import java.util.Objects;
 
 /**
  * Mock implementation of a {@link EndGateway}.
+ *
+ * @see TileStateMock
  */
 public class EndGatewayMock extends TileStateMock implements EndGateway
 {
@@ -21,18 +23,35 @@ public class EndGatewayMock extends TileStateMock implements EndGateway
 	private boolean exactTeleport;
 	private @Nullable Location exitLocation;
 
+	/**
+	 * Constructs a new {@link EndGatewayMock} for the provided {@link Material}.
+	 * Only supports {@link Material#END_GATEWAY}
+	 *
+	 * @param material The material this state is for.
+	 */
 	public EndGatewayMock(@NotNull Material material)
 	{
 		super(material);
 		checkType(material, Material.END_GATEWAY);
 	}
 
+	/**
+	 * Constructs a new {@link EndGatewayMock} for the provided {@link Block}.
+	 * Only supports {@link Material#END_GATEWAY}
+	 *
+	 * @param block The block this state is for.
+	 */
 	protected EndGatewayMock(@NotNull Block block)
 	{
 		super(block);
 		checkType(block, Material.END_GATEWAY);
 	}
 
+	/**
+	 * Constructs a new {@link EndGatewayMock} by cloning the data from an existing one.
+	 *
+	 * @param state The state to clone.
+	 */
 	protected EndGatewayMock(@NotNull EndGatewayMock state)
 	{
 		super(state);

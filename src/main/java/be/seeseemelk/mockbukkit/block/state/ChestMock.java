@@ -15,25 +15,44 @@ import org.jetbrains.annotations.Nullable;
 import java.util.UUID;
 
 /**
- * Mock implementation of {@link Chest}.
+ * Mock implementation of a {@link Chest}.
+ *
+ * @see TileStateMock
  */
 public class ChestMock extends ContainerMock implements Chest
 {
 
 	private boolean isOpen = false;
 
+	/**
+	 * Constructs a new {@link ChestMock} for the provided {@link Material}.
+	 * Only supports {@link Material#CHEST} and {@link Material#TRAPPED_CHEST}.
+	 *
+	 * @param material The material this state is for.
+	 */
 	public ChestMock(@NotNull Material material)
 	{
 		super(material);
-		checkType(material, Material.CHEST);
+		checkType(material, Material.CHEST, Material.TRAPPED_CHEST);
 	}
 
+	/**
+	 * Constructs a new {@link ChestMock} for the provided {@link Block}.
+	 * Only supports {@link Material#CHEST} and {@link Material#TRAPPED_CHEST}.
+	 *
+	 * @param block The block this state is for.
+	 */
 	protected ChestMock(@NotNull Block block)
 	{
 		super(block);
-		checkType(block, Material.CHEST);
+		checkType(block, Material.CHEST, Material.TRAPPED_CHEST);
 	}
 
+	/**
+	 * Constructs a new {@link ChestMock} by cloning the data from an existing one.
+	 *
+	 * @param state The state to clone.
+	 */
 	protected ChestMock(@NotNull ChestMock state)
 	{
 		super(state);

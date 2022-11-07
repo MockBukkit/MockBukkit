@@ -20,6 +20,8 @@ import org.jetbrains.annotations.Nullable;
 
 /**
  * Mock implementation of a {@link Skull}.
+ *
+ * @see TileStateMock
  */
 public class SkullMock extends TileStateMock implements Skull
 {
@@ -28,18 +30,35 @@ public class SkullMock extends TileStateMock implements Skull
 
 	private @Nullable PlayerProfileMock profile;
 
+	/**
+	 * Constructs a new {@link SkullMock} for the provided {@link Material}.
+	 * Only supports materials in {@link MaterialTags#SKULLS}
+	 *
+	 * @param material The material this state is for.
+	 */
 	public SkullMock(@NotNull Material material)
 	{
 		super(material);
 		checkType(material, MaterialTags.SKULLS);
 	}
 
+	/**
+	 * Constructs a new {@link SkullMock} for the provided {@link Block}.
+	 * Only supports materials in {@link MaterialTags#SKULLS}
+	 *
+	 * @param block The block this state is for.
+	 */
 	protected SkullMock(@NotNull Block block)
 	{
 		super(block);
 		checkType(block, MaterialTags.SKULLS);
 	}
 
+	/**
+	 * Constructs a new {@link SkullMock} by cloning the data from an existing one.
+	 *
+	 * @param state The state to clone.
+	 */
 	protected SkullMock(@NotNull SkullMock state)
 	{
 		super(state);

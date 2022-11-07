@@ -16,23 +16,40 @@ import java.util.UUID;
 /**
  * Mock implementation of a {@link Dropper}.
  *
- * @author TheBusyBiscuit
+ * @see ContainerMock
  */
 public class DropperMock extends ContainerMock implements Dropper
 {
 
+	/**
+	 * Constructs a new {@link DispenserMock} for the provided {@link Material}.
+	 * Only supports {@link Material#DISPENSER}
+	 *
+	 * @param material The material this state is for.
+	 */
 	public DropperMock(@NotNull Material material)
 	{
 		super(material);
 		checkType(material, Material.DROPPER);
 	}
 
+	/**
+	 * Constructs a new {@link DispenserMock} for the provided {@link Block}.
+	 * Only supports {@link Material#DISPENSER}
+	 *
+	 * @param block The block this state is for.
+	 */
 	protected DropperMock(@NotNull Block block)
 	{
 		super(block);
 		checkType(block, Material.DROPPER);
 	}
 
+	/**
+	 * Constructs a new {@link DispenserMock} by cloning the data from an existing one.
+	 *
+	 * @param state The state to clone.
+	 */
 	protected DropperMock(@NotNull DropperMock state)
 	{
 		super(state);

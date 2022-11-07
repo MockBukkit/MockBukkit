@@ -9,6 +9,8 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * Mock implementation of a {@link SculkSensor}.
+ *
+ * @see TileStateMock
  */
 public class SculkSensorMock extends TileStateMock implements SculkSensor
 {
@@ -16,18 +18,35 @@ public class SculkSensorMock extends TileStateMock implements SculkSensor
 	private int lastVibrationFrequency;
 	private int listenerRange;
 
+	/**
+	 * Constructs a new {@link SculkSensorMock} for the provided {@link Material}.
+	 * Only supports {@link Material#SCULK_SENSOR}
+	 *
+	 * @param material The material this state is for.
+	 */
 	public SculkSensorMock(@NotNull Material material)
 	{
 		super(material);
 		checkType(material, Material.SCULK_SENSOR);
 	}
 
+	/**
+	 * Constructs a new {@link SculkSensorMock} for the provided {@link Block}.
+	 * Only supports {@link Material#SCULK_SENSOR}
+	 *
+	 * @param block The block this state is for.
+	 */
 	protected SculkSensorMock(@NotNull Block block)
 	{
 		super(block);
 		checkType(block, Material.SCULK_SENSOR);
 	}
 
+	/**
+	 * Constructs a new {@link SculkSensorMock} by cloning the data from an existing one.
+	 *
+	 * @param state The state to clone.
+	 */
 	protected SculkSensorMock(@NotNull SculkSensorMock state)
 	{
 		super(state);

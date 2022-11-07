@@ -10,25 +10,42 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Mock implementation of {@link TileState}.
+ * Mock implementation of a {@link TileState}.
+ *
+ * @see BlockStateMock
  */
 public abstract class TileStateMock extends BlockStateMock implements TileState
 {
 
 	private final @NotNull PersistentDataContainerMock container;
 
+	/**
+	 * Constructs a new {@link SculkCatalystMock} for the provided {@link Material}.
+	 *
+	 * @param material The material this state is for.
+	 */
 	protected TileStateMock(@NotNull Material material)
 	{
 		super(material);
 		this.container = new PersistentDataContainerMock();
 	}
 
+	/**
+	 * Constructs a new {@link SculkCatalystMock} for the provided {@link Block}.
+	 *
+	 * @param block The block this state is for.
+	 */
 	protected TileStateMock(@NotNull Block block)
 	{
 		super(block);
 		this.container = new PersistentDataContainerMock();
 	}
 
+	/**
+	 * Constructs a new {@link SculkCatalystMock} by cloning the data from an existing one.
+	 *
+	 * @param state The state to clone.
+	 */
 	protected TileStateMock(@NotNull TileStateMock state)
 	{
 		super(state);

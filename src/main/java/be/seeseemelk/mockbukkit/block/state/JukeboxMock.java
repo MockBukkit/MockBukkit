@@ -10,6 +10,8 @@ import org.jetbrains.annotations.Nullable;
 
 /**
  * Mock implementation of a {@link Jukebox}.
+ *
+ * @see TileStateMock
  */
 public class JukeboxMock extends TileStateMock implements Jukebox
 {
@@ -17,6 +19,12 @@ public class JukeboxMock extends TileStateMock implements Jukebox
 	private ItemStack recordItem;
 	private boolean playing;
 
+	/**
+	 * Constructs a new {@link JukeboxMock} for the provided {@link Material}.
+	 * Only supports {@link Material#JUKEBOX}
+	 *
+	 * @param material The material this state is for.
+	 */
 	public JukeboxMock(@NotNull Material material)
 	{
 		super(material);
@@ -24,6 +32,12 @@ public class JukeboxMock extends TileStateMock implements Jukebox
 		setRecord(null);
 	}
 
+	/**
+	 * Constructs a new {@link JukeboxMock} for the provided {@link Block}.
+	 * Only supports {@link Material#JUKEBOX}
+	 *
+	 * @param block The block this state is for.
+	 */
 	protected JukeboxMock(@NotNull Block block)
 	{
 		super(block);
@@ -31,6 +45,11 @@ public class JukeboxMock extends TileStateMock implements Jukebox
 		setRecord(null);
 	}
 
+	/**
+	 * Constructs a new {@link JukeboxMock} by cloning the data from an existing one.
+	 *
+	 * @param state The state to clone.
+	 */
 	protected JukeboxMock(@NotNull JukeboxMock state)
 	{
 		super(state);

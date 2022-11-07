@@ -25,7 +25,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * Mock implementation of {@link BlockState}.
+ * Mock implementation of a {@link BlockState}.
  * Also manages the creation of new BlockStates with the appropriate mock class.
  */
 public class BlockStateMock implements BlockState
@@ -35,6 +35,11 @@ public class BlockStateMock implements BlockState
 	private @Nullable Block block;
 	private Material material;
 
+	/**
+	 * Constructs a new {@link BlockStateMock} for the provided {@link Material}.
+	 *
+	 * @param material The material this state is for.
+	 */
 	public BlockStateMock(@NotNull Material material)
 	{
 		Preconditions.checkNotNull(material, "Material cannot be null");
@@ -42,6 +47,11 @@ public class BlockStateMock implements BlockState
 		this.material = material;
 	}
 
+	/**
+	 * Constructs a new {@link BlockStateMock} for the provided {@link Block}.
+	 *
+	 * @param block The block this state is for.
+	 */
 	protected BlockStateMock(@NotNull Block block)
 	{
 		Preconditions.checkNotNull(block, "Block cannot be null");
@@ -50,6 +60,11 @@ public class BlockStateMock implements BlockState
 		this.material = block.getType();
 	}
 
+	/**
+	 * Constructs a new {@link BlockStateMock} by cloning the data from an existing one.
+	 *
+	 * @param state The state to clone.
+	 */
 	protected BlockStateMock(@NotNull BlockStateMock state)
 	{
 		Preconditions.checkNotNull(state, "BlockStateMock cannot be null");

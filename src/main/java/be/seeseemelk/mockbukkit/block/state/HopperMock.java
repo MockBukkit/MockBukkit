@@ -15,22 +15,41 @@ import java.util.UUID;
 
 /**
  * Mock implementation of a {@link Hopper}.
+ *
+ * @see ContainerMock
  */
 public class HopperMock extends ContainerMock implements Hopper
 {
 
+	/**
+	 * Constructs a new {@link HopperMock} for the provided {@link Material}.
+	 * Only supports {@link Material#HOPPER}
+	 *
+	 * @param material The material this state is for.
+	 */
 	public HopperMock(@NotNull Material material)
 	{
 		super(material);
 		checkType(material, Material.HOPPER);
 	}
 
+	/**
+	 * Constructs a new {@link HopperMock} for the provided {@link Block}.
+	 * Only supports {@link Material#HOPPER}
+	 *
+	 * @param block The block this state is for.
+	 */
 	protected HopperMock(@NotNull Block block)
 	{
 		super(block);
 		checkType(block, Material.HOPPER);
 	}
 
+	/**
+	 * Constructs a new {@link HopperMock} by cloning the data from an existing one.
+	 *
+	 * @param state The state to clone.
+	 */
 	protected HopperMock(@NotNull HopperMock state)
 	{
 		super(state);

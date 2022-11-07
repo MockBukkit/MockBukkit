@@ -11,24 +11,43 @@ import org.jetbrains.annotations.Nullable;
 
 /**
  * Mock implementation of an {@link EnchantingTable}.
+ *
+ * @see TileStateMock
  */
 public class EnchantingTableMock extends TileStateMock implements EnchantingTable
 {
 
 	private Component customName;
 
+	/**
+	 * Constructs a new {@link EnchantingTableMock} for the provided {@link Material}.
+	 * Only supports {@link Material#ENCHANTING_TABLE}
+	 *
+	 * @param material The material this state is for.
+	 */
 	public EnchantingTableMock(@NotNull Material material)
 	{
 		super(material);
 		checkType(material, Material.ENCHANTING_TABLE);
 	}
 
+	/**
+	 * Constructs a new {@link EnchantingTableMock} for the provided {@link Block}.
+	 * Only supports {@link Material#ENCHANTING_TABLE}
+	 *
+	 * @param block The block this state is for.
+	 */
 	protected EnchantingTableMock(@NotNull Block block)
 	{
 		super(block);
 		checkType(block, Material.ENCHANTING_TABLE);
 	}
 
+	/**
+	 * Constructs a new {@link EnchantingTableMock} by cloning the data from an existing one.
+	 *
+	 * @param state The state to clone.
+	 */
 	protected EnchantingTableMock(@NotNull EnchantingTableMock state)
 	{
 		super(state);
