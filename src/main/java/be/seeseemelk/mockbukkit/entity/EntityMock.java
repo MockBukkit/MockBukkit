@@ -703,14 +703,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		for (Entity passenger : this.passengers)
 		{
 			entities.add(passenger);
-			if (passenger instanceof EntityMock mock)
-			{
-				entities.addAll(mock.getPassengers(true));
-			}
-			else
-			{
-				entities.addAll(passenger.getPassengers());
-			}
+			entities.addAll(((EntityMock) passenger).getPassengers(true));
 		}
 		return List.copyOf(entities);
 	}
