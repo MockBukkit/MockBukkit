@@ -34,6 +34,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Mock implementation of an {@link UnsafeValues}.
+ */
 @Deprecated
 public class MockUnsafeValues implements UnsafeValues
 {

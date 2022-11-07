@@ -13,6 +13,12 @@ public class ChunkCoordinate
 	public final int x;
 	public final int z;
 
+	/**
+	 * Constructs a new {@link ChunkCoordinate}.
+	 *
+	 * @param x The X coordinate.
+	 * @param z The Y coordinate.
+	 */
 	public ChunkCoordinate(int x, int z)
 	{
 		this.x = x;

@@ -24,9 +24,6 @@ import java.util.stream.Stream;
 
 /**
  * Replica of the Bukkit internal PlayerList and CraftPlayerList implementation
- *
- * @author seeseemelk
- * @author TheBusyBiscuit
  */
 public class MockPlayerList
 {

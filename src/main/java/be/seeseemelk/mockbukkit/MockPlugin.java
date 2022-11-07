@@ -7,6 +7,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 
+/**
+ * A simple plugin that does nothing.
+ */
 public class MockPlugin extends JavaPlugin
 {
 

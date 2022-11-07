@@ -146,6 +146,9 @@ import java.util.logging.LogManager;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+/**
+ * Mock implementation of a {@link Server} and {@link Server.Spigot}.
+ */
 public class ServerMock extends Server.Spigot implements Server
 {
 
@@ -187,6 +190,10 @@ public class ServerMock extends Server.Spigot implements Server
 
 	private final @NotNull ServerConfiguration serverConfiguration = new ServerConfiguration();
 
+	/**
+	 * Constructs a new ServerMock and sets it up.
+	 * Does <b>NOT</b> set the server returned from {@link Bukkit#getServer()}.
+	 */
 	public ServerMock()
 	{
 		ServerMock.registerSerializables();

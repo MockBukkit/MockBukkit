@@ -5,7 +5,7 @@ import org.opentest4j.TestAbortedException;
 
 /**
  * Sometimes your code may use a method that is not yet implemented in MockBukkit. When this happens {@link MockBukkit}
- * will, instead of returning placeholder values, throw an {@link UnimplementedOperationException}.
+ * will, instead of returning placeholder values or failing your test, throw an {@link UnimplementedOperationException}.
  * <p>
  * This is a {@link TestAbortedException} and causes your Test to be skipped instead of just failing.
  *

@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit;
 
+@Deprecated(forRemoval = true)
 public class ThreadAccessException extends RuntimeException
 {
 

@@ -58,7 +58,6 @@ import io.papermc.paper.world.MoonPhase;
 import org.bukkit.BlockChangeDelegate;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
-import org.bukkit.ChunkSnapshot;
 import org.bukkit.Difficulty;
 import org.bukkit.Effect;
 import org.bukkit.FluidCollisionMode;
@@ -185,7 +184,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
- * A mock world object. Note that it is made to be as simple as possible. It is by no means an efficient implementation.
+ * Mock implementation of a {@link World}.
  */
 public class WorldMock implements World
 {
