@@ -34,11 +34,17 @@ public class ListenerEntry
 		method.setAccessible(true);
 	}
 
+	/**
+	 * @return The plugin that owns the listener.
+	 */
 	public Plugin getPlugin()
 	{
 		return plugin;
 	}
 
+	/**
+	 * @return The listener.
+	 */
 	public Listener getListener()
 	{
 		return listener;

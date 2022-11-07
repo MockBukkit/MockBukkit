@@ -32,6 +32,7 @@ import org.bukkit.plugin.UnknownDependencyException;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;
 import org.bukkit.plugin.java.JavaPluginUtils;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -66,6 +67,9 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * Mock implementation of a {@link PluginManager}.
+ */
 public class PluginManagerMock implements PluginManager
 {
 
@@ -83,6 +87,12 @@ public class PluginManagerMock implements PluginManager
 	private final List<Class<?>> pluginConstructorTypes = Arrays.asList(JavaPluginLoader.class,
 			PluginDescriptionFile.class, File.class, File.class);
 
+	/**
+	 * Constructs a new {@link PluginManagerMock} for the provided {@link ServerMock}.
+	 *
+	 * @param server The server this is for.
+	 */
+	@ApiStatus.Internal
 	@SuppressWarnings("deprecation")
 	public PluginManagerMock(@NotNull ServerMock server)
 	{
@@ -299,6 +309,12 @@ public class PluginManagerMock implements PluginManager
 				"No compatible constructor for " + class1.getName() + " with parameters " + str);
 	}
 
+	/**
+	 * Creates a new unique temporary directory.
+	 *
+	 * @return The directory.
+	 * @throws IOException If an IO error occurs.
+	 */
 	public @NotNull File getParentTemporaryDirectory() throws IOException
 	{
 		if (parentTemporaryDirectory == null)
@@ -705,6 +721,11 @@ public class PluginManagerMock implements PluginManager
 		}
 	}
 
+	/**
+	 * Unregisters all listeners for a plugin.
+	 *
+	 * @param plugin The plugin.
+	 */
 	public void unregisterPluginEvents(@NotNull Plugin plugin)
 	{
 		List<Listener> listListener = listeners.get(plugin.getName());
