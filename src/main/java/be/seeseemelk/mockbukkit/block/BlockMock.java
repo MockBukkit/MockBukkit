@@ -35,6 +35,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * Mock implementation of a {@link Block}.
+ */
 public class BlockMock implements Block
 {
 
