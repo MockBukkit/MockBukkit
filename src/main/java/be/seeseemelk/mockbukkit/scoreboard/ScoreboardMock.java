@@ -24,6 +24,9 @@ import java.util.stream.Collectors;
 
 import static net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer.legacySection;
 
+/**
+ * Mock implementation of a {@link Scoreboard}.
+ */
 public class ScoreboardMock implements Scoreboard
 {
 
