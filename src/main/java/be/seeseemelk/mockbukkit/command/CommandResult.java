@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.command;
 
 import com.google.common.base.Preconditions;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -18,6 +19,13 @@ public class CommandResult
 	private final boolean success;
 	private final @NotNull MessageTarget sender;
 
+	/**
+	 * Constructs a new {@link CommandResult} with the provided parameters.
+	 *
+	 * @param success Whether the command succeeded (returned true).
+	 * @param sender  The message target who executed the command.
+	 */
+	@ApiStatus.Internal
 	public CommandResult(boolean success, @NotNull MessageTarget sender)
 	{
 		Preconditions.checkNotNull(sender, "Sender cannot be null");
