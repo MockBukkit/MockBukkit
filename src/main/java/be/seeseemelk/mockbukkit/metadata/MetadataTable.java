@@ -3,22 +3,34 @@ package be.seeseemelk.mockbukkit.metadata;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.metadata.Metadatable;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Mock implementation of a {@link Metadatable}.
+ */
 public class MetadataTable implements Metadatable
 {
 
 	private final @NotNull Map<String, Map<Plugin, MetadataValue>> metadata;
 
+	/**
+	 * Constructs a new empty {@link MetadataTable}.
+	 */
+	@ApiStatus.Internal
 	public MetadataTable()
 	{
 		metadata = new HashMap<>();
 	}
 
+	/**
+	 * Constructs a new empty {@link MetadataTable} with the contents cloned from another.
+	 */
+	@ApiStatus.Internal
 	public MetadataTable(@NotNull MetadataTable table)
 	{
 		this.metadata = new HashMap<>(table.metadata);
