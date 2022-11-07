@@ -195,7 +195,7 @@ public class BlockDataMock implements BlockData
 		}
 		catch (CloneNotSupportedException e)
 		{
-			return new BlockDataMock(type);
+			return BlockDataMock.mock(type);
 		}
 	}
 
@@ -260,6 +260,10 @@ public class BlockDataMock implements BlockData
 		else if (Tag.TRAPDOORS.isTagged(material))
 		{
 			return new TrapDoorMock(material);
+		}
+		else if (Tag.CAMPFIRES.isTagged(material))
+		{
+			return new CampfireMock(material);
 		}
 		return null;
 	}

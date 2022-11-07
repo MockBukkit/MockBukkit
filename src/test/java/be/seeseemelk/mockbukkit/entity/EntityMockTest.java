@@ -1012,4 +1012,43 @@ class EntityMockTest
 		assertInstanceOf(Entity.Spigot.class, entity.spigot());
 	}
 
+	@Test
+	void testIsVisualFireDefault()
+	{
+		assertFalse(entity.isVisualFire());
+	}
+
+	@Test
+	void testSetVisualFire()
+	{
+		entity.setVisualFire(true);
+		assertTrue(entity.isVisualFire());
+	}
+
+	@Test
+	void testIsSilentDefault()
+	{
+		assertFalse(entity.isSilent());
+	}
+
+	@Test
+	void testSetSilent()
+	{
+		entity.setSilent(true);
+		assertTrue(entity.isSilent());
+	}
+
+	@Test
+	void testHasGravityDefault()
+	{
+		assertTrue(entity.hasGravity());
+	}
+
+	@Test
+	void testSetGravity()
+	{
+		entity.setGravity(false);
+		assertFalse(entity.hasGravity());
+	}
+
 }

@@ -33,6 +33,7 @@ import be.seeseemelk.mockbukkit.entity.MobMock;
 import be.seeseemelk.mockbukkit.entity.MuleMock;
 import be.seeseemelk.mockbukkit.entity.MushroomCowMock;
 import be.seeseemelk.mockbukkit.entity.PigMock;
+import be.seeseemelk.mockbukkit.entity.PolarBearMock;
 import be.seeseemelk.mockbukkit.entity.PufferFishMock;
 import be.seeseemelk.mockbukkit.entity.SalmonMock;
 import be.seeseemelk.mockbukkit.entity.SheepMock;
@@ -124,6 +125,7 @@ import org.bukkit.entity.Mule;
 import org.bukkit.entity.MushroomCow;
 import org.bukkit.entity.Pig;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.PolarBear;
 import org.bukkit.entity.Projectile;
 import org.bukkit.entity.PufferFish;
 import org.bukkit.entity.Salmon;
@@ -1106,6 +1108,10 @@ public class WorldMock implements World
 		else if (clazz == Pig.class)
 		{
 			return new PigMock(server, UUID.randomUUID());
+		}
+		else if (clazz == PolarBear.class)
+		{
+			return new PolarBearMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}

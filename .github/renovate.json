@@ -5,5 +5,10 @@
 	"labels": [
 		"release/none"
 	],
-	"dependencyDashboard": false
+	"dependencyDashboard": false,
+	"ignoreDeps": [
+		"org.apache.maven:maven-resolver-provider",
+		"org.apache.maven.resolver:maven-resolver-connector-basic",
+		"org.apache.maven.resolver:maven-resolver-transport-http"
+	]
 }

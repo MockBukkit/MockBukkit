@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.block;
 import be.seeseemelk.mockbukkit.ChunkCoordinate;
 import be.seeseemelk.mockbukkit.ChunkMock;
 import be.seeseemelk.mockbukkit.Coordinate;
+import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import org.bukkit.Location;
@@ -11,26 +12,61 @@ import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.block.data.BlockData;
+import org.bukkit.block.data.type.Slab;
+import org.bukkit.block.data.type.TrapDoor;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BlockMockTest
 {
 
 	private BlockMock block;
+	private Location location;
 
 	@BeforeEach
 	void setUp()
 	{
+		MockBukkit.mock();
 		World world = new WorldMock();
-		block = new BlockMock(new Location(world, 120, 60, 120));
+		location = new Location(world, 120, 60, 120);
+		block = new BlockMock(location);
+	}
+
+	@AfterEach
+	void teardown()
+	{
+		MockBukkit.unmock();
+	}
+
+	@Test
+	void constructor_NullMaterial_ThrowsException()
+	{
+		assertThrowsExactly(NullPointerException.class, () -> new BlockMock((Material) null));
+	}
+
+	@Test
+	void constructorWithLocation_NullMaterial_ThrowsException()
+	{
+		assertThrowsExactly(NullPointerException.class, () -> new BlockMock(null, null));
+	}
+
+	@Test
+	void constructor_MaterialWithBlockDataMockSubclass_CorrectBlockDataType()
+	{
+		BlockMock slabBlock = new BlockMock(Material.ACACIA_SLAB, location);
+		BlockData blockData = slabBlock.getBlockData();
+		assertInstanceOf(Slab.class, blockData);
 	}
 
 	@Test
@@ -40,10 +76,23 @@ class BlockMockTest
 	}
 
 	@Test
+	void setType_NullParameter_ThrowsException()
+	{
+		assertThrowsExactly(NullPointerException.class, () -> block.setType(null));
+	}
+
+	@Test
 	void setType_Stone_Set()
 	{
 		block.setType(Material.STONE);
 		assertEquals(Material.STONE, block.getType());
+	}
+
+	@Test
+	void setType_SetToMaterialWithBlockDataMockSubclass()
+	{
+		block.setType(Material.JUNGLE_TRAPDOOR);
+		assertInstanceOf(TrapDoor.class, block.getBlockData());
 	}
 
 	@Test
@@ -145,7 +194,7 @@ class BlockMockTest
 	}
 
 	@Test
-	void testGetRelativeCordinates()
+	void testGetRelativeCoordinates()
 	{
 		Block relative = block.getRelative(2, 6, 0);
 		assertEquals(block.getX() + 2, relative.getX());
@@ -242,7 +291,7 @@ class BlockMockTest
 	void testGetFace_Valid()
 	{
 		Block b = block.getRelative(BlockFace.NORTH);
-		assertEquals(block.getFace(b), BlockFace.NORTH);
+		assertEquals(BlockFace.NORTH, block.getFace(b));
 	}
 
 	@Test
