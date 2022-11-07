@@ -29,6 +29,14 @@ public class BossBarMock implements BossBar
 	private boolean visible = true;
 	private double progress = 1.0;
 
+	/**
+	 * Constructs a new {@link BossBarMock} with the provided parameters.
+	 *
+	 * @param title The title of the bossbar.
+	 * @param color The color of the bossbar.
+	 * @param style The style of the bossbar.
+	 * @param flags The flags to set on the bossbar.
+	 */
 	public BossBarMock(@NotNull String title, @NotNull BarColor color, @NotNull BarStyle style, BarFlag @NotNull ... flags)
 	{
 		this.title = title;
