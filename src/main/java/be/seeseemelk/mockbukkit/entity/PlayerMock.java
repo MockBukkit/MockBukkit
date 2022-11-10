@@ -139,6 +139,9 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private boolean sprinting = false;
 	private boolean allowFlight = false;
 	private boolean flying = false;
+	private boolean healthScaled = false;
+	private double healthScale = 20d;
+	private float walkSpeed = 0.2f;
 	private Location compassTarget;
 	private @Nullable Location bedSpawnLocation;
 	private @Nullable InetSocketAddress address;
@@ -1848,15 +1851,22 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public float getWalkSpeed()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return walkSpeed;
 	}
 
 	@Override
 	public void setWalkSpeed(float value)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if(value < -1)
+		{
+			throw new IllegalArgumentException(value + " is too low!");
+		}
+		else if (value > 1)
+		{
+			throw new IllegalArgumentException(value + " is too high!");
+		}
+
+		walkSpeed = value;
 	}
 
 	@Override
@@ -1974,29 +1984,35 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public boolean isHealthScaled()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return healthScaled;
 	}
 
 	@Override
 	public void setHealthScaled(boolean scale)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		healthScaled = scale;
 	}
 
 	@Override
 	public double getHealthScale()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return healthScale;
 	}
 
 	@Override
 	public void setHealthScale(double scale)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (scale < 0)
+		{
+			throw new IllegalArgumentException(scale + " is too low!");
+		}
+		else if (scale == Double.NaN)
+		{
+			throw new IllegalArgumentException("Health scale is not a number");
+		}
+		// There is also too high but... what constitutes too high?
+
+		healthScale = scale;
 	}
 
 	@Override

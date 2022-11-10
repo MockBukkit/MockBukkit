@@ -61,9 +61,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public abstract class EntityMock extends Entity.Spigot implements Entity, MessageTarget
 {
+	private static int _id = 0;
 
 	private final @NotNull ServerMock server;
 	private final @NotNull UUID uuid;
+	private final int id;
 	private Location location;
 	private boolean teleported;
 	private TeleportCause teleportCause;
@@ -96,6 +98,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 
 		this.server = server;
 		this.uuid = uuid;
+		this.id = _id++;
 
 		this.perms = new PermissibleBase(this);
 
@@ -561,8 +564,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public int getEntityId()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return id;
 	}
 
 	@Override
