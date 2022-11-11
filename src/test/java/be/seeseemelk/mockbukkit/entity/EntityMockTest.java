@@ -1051,4 +1051,10 @@ class EntityMockTest
 		assertFalse(entity.hasGravity());
 	}
 
+	@Test
+	void getEntityId()
+	{
+		assertTrue(entity.getEntityId() > 0);
+	}
+
 }

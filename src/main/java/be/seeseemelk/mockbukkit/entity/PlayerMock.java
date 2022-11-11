@@ -1851,22 +1851,16 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public float getWalkSpeed()
 	{
-		return walkSpeed;
+		return this.walkSpeed;
 	}
 
 	@Override
 	public void setWalkSpeed(float value)
 	{
-		if(value < -1)
-		{
-			throw new IllegalArgumentException(value + " is too low!");
-		}
-		else if (value > 1)
-		{
-			throw new IllegalArgumentException(value + " is too high!");
-		}
+		Preconditions.checkArgument(value > -1, value + " is too low!");
+		Preconditions.checkArgument(value < 1, value + " is too high!");
 
-		walkSpeed = value;
+		this.walkSpeed = value;
 	}
 
 	@Override
@@ -1984,35 +1978,29 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public boolean isHealthScaled()
 	{
-		return healthScaled;
+		return this.healthScaled;
 	}
 
 	@Override
 	public void setHealthScaled(boolean scale)
 	{
-		healthScaled = scale;
+		this.healthScaled = scale;
 	}
 
 	@Override
 	public double getHealthScale()
 	{
-		return healthScale;
+		return this.healthScale;
 	}
 
 	@Override
 	public void setHealthScale(double scale)
 	{
-		if (scale < 0)
-		{
-			throw new IllegalArgumentException(scale + " is too low!");
-		}
-		else if (scale == Double.NaN)
-		{
-			throw new IllegalArgumentException("Health scale is not a number");
-		}
+		Preconditions.checkArgument(scale >= 0, scale + " is too low!");
+		Preconditions.checkArgument(scale != Double.NaN, scale + " is not a number!");
 		// There is also too high but... what constitutes too high?
 
-		healthScale = scale;
+		this.healthScale = scale;
 	}
 
 	@Override
