@@ -2241,7 +2241,6 @@ class PlayerMockTest
 	{
 		player.setWalkSpeed(0.4f);
 		assertEquals(0.4f, player.getWalkSpeed());
-		player.setWalkSpeed(0.2f);
 	}
 
 	@Test
@@ -2267,7 +2266,6 @@ class PlayerMockTest
 	{
 		player.setHealthScaled(true);
 		assertEquals(true, player.isHealthScaled());
-		player.setHealthScaled(false);
 	}
 
 	@Test
@@ -2281,7 +2279,7 @@ class PlayerMockTest
 	{
 		player.setHealthScale(10d);
 		assertEquals(10d, player.getHealthScale());
-		player.setHealthScale(20d);
+		assertTrue(player.isHealthScaled());
 	}
 
 	@Test

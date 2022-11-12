@@ -139,8 +139,8 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private boolean sprinting = false;
 	private boolean allowFlight = false;
 	private boolean flying = false;
-	private boolean healthScaled = false;
-	private double healthScale = 20d;
+	private boolean scaledHealth = false;
+	private double healthScale = 20;
 	private float walkSpeed = 0.2f;
 	private Location compassTarget;
 	private @Nullable Location bedSpawnLocation;
@@ -1851,16 +1851,16 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public float getWalkSpeed()
 	{
-		return this.walkSpeed;
+		return (float) (this.attributes.get(Attribute.GENERIC_MOVEMENT_SPEED).getValue() * 2);
 	}
 
 	@Override
 	public void setWalkSpeed(float value)
 	{
-		Preconditions.checkArgument(value > -1, value + " is too low!");
-		Preconditions.checkArgument(value < 1, value + " is too high!");
+		Preconditions.checkArgument(value > -1, value + " is too low");
+		Preconditions.checkArgument(value < 1, value + " is too high");
 
-		this.walkSpeed = value;
+		this.attributes.get(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(value / 2);
 	}
 
 	@Override
@@ -1978,13 +1978,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public boolean isHealthScaled()
 	{
-		return this.healthScaled;
+		return this.scaledHealth;
 	}
 
 	@Override
 	public void setHealthScaled(boolean scale)
 	{
-		this.healthScaled = scale;
+		this.scaledHealth = scale;
 	}
 
 	@Override
@@ -1996,11 +1996,12 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void setHealthScale(double scale)
 	{
-		Preconditions.checkArgument(scale >= 0, scale + " is too low!");
+		Preconditions.checkArgument(scale >= 0, "Must be greater than 0");
 		Preconditions.checkArgument(scale != Double.NaN, scale + " is not a number!");
 		// There is also too high but... what constitutes too high?
 
 		this.healthScale = scale;
+		this.scaledHealth = true;
 	}
 
 	@Override

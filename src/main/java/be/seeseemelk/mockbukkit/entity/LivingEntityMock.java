@@ -87,6 +87,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		attributes = new EnumMap<>(Attribute.class);
 		double maxHealth = AttributesMock.getDefaultValue(Attribute.GENERIC_MAX_HEALTH);
 		attributes.put(Attribute.GENERIC_MAX_HEALTH, new AttributeInstanceMock(Attribute.GENERIC_MAX_HEALTH, maxHealth));
+		attributes.put(Attribute.GENERIC_MOVEMENT_SPEED, new AttributeInstanceMock(Attribute.GENERIC_MOVEMENT_SPEED, 0.1));
 		resetMaxHealth();
 		setHealth(maxHealth);
 	}
