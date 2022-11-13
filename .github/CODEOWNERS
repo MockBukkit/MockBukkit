@@ -5,8 +5,8 @@
 /.github/                          @MockBukkit/maintainers
 /.readthedocs.yml                  @MockBukkit/maintainers
 /jitpack.yml                       @MockBukkit/maintainers
-/build.gradle                      @MockBukkit/maintainers
-/settings.gradle                   @MockBukkit/maintainers
+/build.gradle.kts                  @MockBukkit/maintainers
+/settings.gradle.kts               @MockBukkit/maintainers
 /gradle/                           @MockBukkit/maintainers
 /gradlew                           @MockBukkit/maintainers
 /gradlew.bat                       @MockBukkit/maintainers
