@@ -61,7 +61,7 @@ tasks {
                 // Custom options
                 addBooleanOption("html5", true)
                 addStringOption("-release", "17")
-                links("https://jd.papermc.io/paper/${property("mockbukkit.api.version")}/")
+                links("https://jd.papermc.io/paper/${project.property("mockbukkit.api.version")}/")
             }
         }
     }
@@ -70,7 +70,7 @@ tasks {
         doLast {
             file("${buildDir}/resources/main/build.properties").bufferedWriter().use {
                 val p = Properties()
-                p["full-api-version"] = property("mockbukkit.api.full-version")
+                p["full-api-version"] = project.property("mockbukkit.api.full-version")
                 p.store(it, null)
             }
         }
