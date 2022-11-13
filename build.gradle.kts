@@ -94,7 +94,7 @@ java {
 }
 
 signing {
-    isRequired = !isFork() && System.getenv("CI") != null
+    isRequired = !isFork() && isAction()
     sign(publishing.publications)
 }
 
@@ -140,11 +140,15 @@ fun isFork(): Boolean {
     return run("git", "config", "--get", "remote.origin.url").contains("MockBukkit/MockBukkit")
 }
 
+fun isAction(): Boolean {
+    return System.getenv("CI") != null
+}
+
 fun getFullVersion(): String {
-    if (System.getenv("CI") == null) {
-        return "dev-${run("git", "rev-parse", "--verify", "--short", "HEAD")}"
+    return if (!isAction()) {
+        "dev-${run("git", "rev-parse", "--verify", "--short", "HEAD")}"
     } else {
-        return property("mockbukkit.version") as String
+        property("mockbukkit.version") as String
     }
 }
 
