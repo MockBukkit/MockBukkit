@@ -100,13 +100,22 @@ public abstract class AbstractSkeletonMock extends MonsterMock implements Abstra
 	 * @param entity The {@link LivingEntity} to check.
 	 * @param charge The charge of the attack.
 	 */
-	public void assertAgressiveAttack(LivingEntity entity, float charge)
+	public void assertAggressiveAttack(LivingEntity entity, float charge)
 	{
 		assertAttacked(entity, charge);
 		if (!attackedMobs.get(entity).getRight())
 		{
 			fail();
 		}
+	}
+
+	/**
+	 * @deprecated Use {@link #assertAggressiveAttack(LivingEntity, float)}.
+	 */
+	@Deprecated(forRemoval = true)
+	public void assertAgressiveAttack(LivingEntity entity, float charge)
+	{
+		assertAggressiveAttack(entity, charge);
 	}
 
 }
