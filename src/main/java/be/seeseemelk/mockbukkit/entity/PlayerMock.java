@@ -139,6 +139,8 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private boolean sprinting = false;
 	private boolean allowFlight = false;
 	private boolean flying = false;
+	private boolean scaledHealth = false;
+	private double healthScale = 20;
 	private Location compassTarget;
 	private @Nullable Location bedSpawnLocation;
 	private @Nullable InetSocketAddress address;
@@ -182,6 +184,9 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		setLocation(Bukkit.getWorlds().get(0).getSpawnLocation().clone());
 		setCompassTarget(getLocation());
 		closeInventory();
+
+		// NMS Player#createAttributes
+		attributes.get(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.10000000149011612D);
 
 		Random random = ThreadLocalRandom.current();
 		address = new InetSocketAddress("192.0.2." + random.nextInt(255), random.nextInt(32768, 65535));
@@ -1848,15 +1853,16 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public float getWalkSpeed()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return (float) (this.attributes.get(Attribute.GENERIC_MOVEMENT_SPEED).getValue() * 2);
 	}
 
 	@Override
 	public void setWalkSpeed(float value)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(value > -1, value + " is too low");
+		Preconditions.checkArgument(value < 1, value + " is too high");
+
+		this.attributes.get(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(value / 2);
 	}
 
 	@Override
@@ -1974,29 +1980,30 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public boolean isHealthScaled()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.scaledHealth;
 	}
 
 	@Override
 	public void setHealthScaled(boolean scale)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.scaledHealth = scale;
 	}
 
 	@Override
 	public double getHealthScale()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.healthScale;
 	}
 
 	@Override
 	public void setHealthScale(double scale)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(scale >= 0, "Must be greater than 0");
+		Preconditions.checkArgument(scale != Double.NaN, scale + " is not a number!");
+		// There is also too high but... what constitutes too high?
+
+		this.healthScale = scale;
+		this.scaledHealth = true;
 	}
 
 	@Override

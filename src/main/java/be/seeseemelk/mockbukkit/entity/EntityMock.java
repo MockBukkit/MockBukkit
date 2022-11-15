@@ -54,6 +54,7 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.LinkedTransferQueue;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -62,8 +63,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public abstract class EntityMock extends Entity.Spigot implements Entity, MessageTarget
 {
 
+	private static final AtomicInteger ENTITY_COUNTER = new AtomicInteger();
+
 	private final @NotNull ServerMock server;
 	private final @NotNull UUID uuid;
+	private final int id;
 	private Location location;
 	private boolean teleported;
 	private TeleportCause teleportCause;
@@ -96,6 +100,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 
 		this.server = server;
 		this.uuid = uuid;
+		this.id = ENTITY_COUNTER.incrementAndGet();
 
 		this.perms = new PermissibleBase(this);
 
@@ -561,8 +566,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public int getEntityId()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return this.id;
 	}
 
 	@Override
