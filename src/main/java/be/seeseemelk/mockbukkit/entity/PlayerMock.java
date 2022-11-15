@@ -185,6 +185,9 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		setCompassTarget(getLocation());
 		closeInventory();
 
+		// NMS Player#createAttributes
+		attributes.get(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.10000000149011612D);
+
 		Random random = ThreadLocalRandom.current();
 		address = new InetSocketAddress("192.0.2." + random.nextInt(255), random.nextInt(32768, 65535));
 		scoreboard = server.getScoreboardManager().getMainScoreboard();
