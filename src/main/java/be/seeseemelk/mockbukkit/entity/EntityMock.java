@@ -62,6 +62,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public abstract class EntityMock extends Entity.Spigot implements Entity, MessageTarget
 {
+
 	private static final AtomicInteger ENTITY_COUNTER = new AtomicInteger();
 
 	private final @NotNull ServerMock server;

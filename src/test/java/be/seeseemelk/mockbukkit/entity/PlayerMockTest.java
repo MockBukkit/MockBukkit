@@ -2258,14 +2258,14 @@ class PlayerMockTest
 	@Test
 	void isHealthScaled()
 	{
-		assertEquals(false, player.isHealthScaled());
+		assertFalse(player.isHealthScaled());
 	}
 
 	@Test
 	void setHealthScaled()
 	{
 		player.setHealthScaled(true);
-		assertEquals(true, player.isHealthScaled());
+		assertTrue(player.isHealthScaled());
 	}
 
 	@Test

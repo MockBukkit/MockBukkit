@@ -141,7 +141,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private boolean flying = false;
 	private boolean scaledHealth = false;
 	private double healthScale = 20;
-	private float walkSpeed = 0.2f;
 	private Location compassTarget;
 	private @Nullable Location bedSpawnLocation;
 	private @Nullable InetSocketAddress address;
