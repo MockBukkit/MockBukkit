@@ -20,6 +20,10 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Mock implementation of {@link BlockData}.
+ * Also manages the creation of new BlockData with the appropriate mock class.
+ */
 public class BlockDataMock implements BlockData
 {
 
@@ -28,6 +32,11 @@ public class BlockDataMock implements BlockData
 	private final @NotNull Material type;
 	private final @NotNull Map<String, Object> data;
 
+	/**
+	 * Constructs a new {@link BlockDataMock} for the provided {@link Material}.
+	 *
+	 * @param type The material this data is for.
+	 */
 	public BlockDataMock(@NotNull Material type)
 	{
 		Preconditions.checkNotNull(type, "Type cannot be null");
@@ -36,27 +45,60 @@ public class BlockDataMock implements BlockData
 	}
 
 	// region Type Checking
+
+	/**
+	 * Ensures the provided material is one of the expected materials provided.
+	 *
+	 * @param material The material to test.
+	 * @param expected The expected materials.
+	 */
 	protected void checkType(@NotNull Material material, @NotNull Material... expected)
 	{
 		Preconditions.checkArgument(Arrays.stream(expected).anyMatch(m -> material == m), "Cannot create a " + getClass().getSimpleName() + " from " + material);
 	}
 
+	/**
+	 * Ensures the provided block type is one of the expected materials provided.
+	 *
+	 * @param block    The block to test.
+	 * @param expected The expected materials.
+	 */
 	protected void checkType(@NotNull Block block, @NotNull Material... expected)
 	{
 		checkType(block.getType(), expected);
 	}
 
-	protected void checkType(@NotNull Material material, @NotNull Tag<Material> tag)
+	/**
+	 * Ensures the provided material is contained in the {@link Tag}.
+	 *
+	 * @param material The material to test.
+	 * @param expected The expected tag.
+	 */
+	protected void checkType(@NotNull Material material, @NotNull Tag<Material> expected)
 	{
-		Preconditions.checkArgument(tag.isTagged(material), "Cannot create a " + getClass().getSimpleName() + " from " + material);
+		Preconditions.checkArgument(expected.isTagged(material), "Cannot create a " + getClass().getSimpleName() + " from " + material);
 	}
 
+	/**
+	 * Ensures the provided block type is contained in the {@link Tag}.
+	 *
+	 * @param block    The material to test.
+	 * @param expected The expected tag.
+	 */
 	protected void checkType(@NotNull Block block, @NotNull Tag<Material> expected)
 	{
 		checkType(block.getType(), expected);
 	}
 	// endregion
 
+	/**
+	 * Sets a data value.
+	 *
+	 * @param key   The data key.
+	 * @param value The data value.
+	 * @param <T>   The type of the data.
+	 * @see BlockDataKey
+	 */
 	protected <T> void set(@NotNull String key, @NotNull T value)
 	{
 		Preconditions.checkNotNull(key, "Key cannot be null");
@@ -64,6 +106,15 @@ public class BlockDataMock implements BlockData
 		this.data.put(key, value);
 	}
 
+	/**
+	 * Gets a data value.
+	 * Will throw an {@link IllegalArgumentException} if no data is set for the provided key.
+	 *
+	 * @param key The data key.
+	 * @param <T> The type of the data.
+	 * @return The data attached to the key.
+	 * @see BlockDataKey
+	 */
 	@SuppressWarnings("unchecked")
 	protected <T> @NotNull T get(@NotNull String key)
 	{
@@ -199,6 +250,13 @@ public class BlockDataMock implements BlockData
 		}
 	}
 
+	/**
+	 * Attempts to construct a BlockDataMock by the provided material.
+	 * Will return a basic {@link BlockDataMock} if no implementation is found.
+	 *
+	 * @param material The material to create the BlockData from.
+	 * @return The BlockData.
+	 */
 	public static @NotNull BlockDataMock mock(@NotNull Material material)
 	{
 		Preconditions.checkNotNull(material, NULL_MATERIAL_EXCEPTION_MESSAGE);

@@ -15,7 +15,7 @@ import java.util.Map;
 
 /**
  * This {@link MockPotionEffectType} mocks an actual {@link PotionEffectType} by taking an id, a name, whether it is
- * instant and a RGB {@link Color} variable.
+ * instant and an RGB {@link Color} variable.
  *
  * @author TheBusyBiscuit
  */
@@ -28,6 +28,15 @@ public class MockPotionEffectType extends PotionEffectType
 	private final Color color;
 	private final @NotNull Map<Attribute, AttributeModifier> attributeModifiers;
 
+	/**
+	 * Constructs a new {@link MockPotionEffectType} with the provided parameters.
+	 *
+	 * @param key     The key of the effect type.
+	 * @param id      The numerical ID of the effect type.
+	 * @param name    The name of the effect type.
+	 * @param instant Whether the effect type is instantly applied.
+	 * @param color   The color of the effect type.
+	 */
 	public MockPotionEffectType(@NotNull NamespacedKey key, int id, String name, boolean instant, Color color)
 	{
 		super(id, key);

@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import com.destroystokyo.paper.inventory.meta.ArmorStandMeta;
 import com.google.common.collect.ImmutableList;
 import org.bukkit.Color;
 import org.bukkit.inventory.meta.PotionMeta;
@@ -18,9 +19,9 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * This {@link ItemMetaMock} mocks the implementation of {@link SuspiciousStewMeta}.
+ * Mock implementation of a {@link PotionMeta}.
  *
- * @author TheBusyBiscuit
+ * @see ItemMetaMock
  */
 public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 {
@@ -29,11 +30,19 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	private @NotNull PotionData basePotionData = new PotionData(PotionType.UNCRAFTABLE);
 	private @Nullable Color color;
 
+	/**
+	 * Constructs a new {@link PotionMetaMock}.
+	 */
 	public PotionMetaMock()
 	{
 		super();
 	}
 
+	/**
+	 * Constructs a new {@link PotionMetaMock}, cloning the data from another.
+	 *
+	 * @param meta The meta to clone.
+	 */
 	public PotionMetaMock(@NotNull PotionMeta meta)
 	{
 		super(meta);

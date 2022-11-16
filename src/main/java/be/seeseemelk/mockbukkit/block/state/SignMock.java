@@ -1,12 +1,12 @@
 package be.seeseemelk.mockbukkit.block.state;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import com.destroystokyo.paper.MaterialTags;
 import com.google.common.base.Preconditions;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
+import org.bukkit.Tag;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
@@ -16,27 +16,44 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This {@link ContainerMock} represents a {@link Sign}.
+ * Mock implementation of a {@link Sign}.
  *
- * @author TheBusyBiscuit
+ * @see TileStateMock
  */
 public class SignMock extends TileStateMock implements Sign
 {
 
 	private final String[] lines = { "", "", "", "" };
 
+	/**
+	 * Constructs a new {@link SignMock} for the provided {@link Material}.
+	 * Only supports materials in {@link Tag#SIGNS}
+	 *
+	 * @param material The material this state is for.
+	 */
 	public SignMock(@NotNull Material material)
 	{
 		super(material);
-		checkType(material, MaterialTags.SIGNS);
+		checkType(material, Tag.SIGNS);
 	}
 
+	/**
+	 * Constructs a new {@link SignMock} for the provided {@link Block}.
+	 * Only supports materials in {@link Tag#SIGNS}
+	 *
+	 * @param block The block this state is for.
+	 */
 	protected SignMock(@NotNull Block block)
 	{
 		super(block);
-		checkType(block, MaterialTags.SIGNS);
+		checkType(block, Tag.SIGNS);
 	}
 
+	/**
+	 * Constructs a new {@link SignMock} by cloning the data from an existing one.
+	 *
+	 * @param state The state to clone.
+	 */
 	protected SignMock(@NotNull SignMock state)
 	{
 		super(state);

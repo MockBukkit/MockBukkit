@@ -11,6 +11,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
+/**
+ * Mock implementation of a {@link Creeper}.
+ *
+ * @see MonsterMock
+ */
 public class CreeperMock extends MonsterMock implements Creeper
 {
 
@@ -20,6 +25,12 @@ public class CreeperMock extends MonsterMock implements Creeper
 	private int explosionRadius = 3;
 	private boolean ignited = false;
 
+	/**
+	 * Constructs a new {@link CreeperMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	public CreeperMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);

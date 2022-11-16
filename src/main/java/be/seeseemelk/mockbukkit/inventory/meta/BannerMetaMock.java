@@ -9,12 +9,20 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Mock implementation of an {@link BannerMeta}.
+ *
+ * @see ItemMetaMock
+ */
 public class BannerMetaMock extends ItemMetaMock implements BannerMeta
 {
 
 	private @Nullable DyeColor baseColor;
 	private List<Pattern> patterns;
 
+	/**
+	 * Constructs a new {@link BannerMetaMock}.
+	 */
 	public BannerMetaMock()
 	{
 		super();
@@ -22,6 +30,11 @@ public class BannerMetaMock extends ItemMetaMock implements BannerMeta
 		this.patterns = new ArrayList<>();
 	}
 
+	/**
+	 * Constructs a new {@link BannerMetaMock}, cloning the data from another.
+	 *
+	 * @param meta The meta to clone.
+	 */
 	public BannerMetaMock(@NotNull BannerMeta meta)
 	{
 		super(meta);

@@ -1,19 +1,22 @@
 package be.seeseemelk.mockbukkit.inventory;
 
-import be.seeseemelk.mockbukkit.entity.PlayerMock;
-import org.bukkit.block.EnderChest;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.InventoryHolder;
 
 /**
- * This {@link InventoryMock} mocks an {@link EnderChest} but pretty much behaves like any small chest. A
- * {@link PlayerMock} carries an instance of an {@link EnderChestInventoryMock}.
+ * Mock implementation of an Ender Chest {@link InventoryType}.
  *
- * @author TheBusyBiscuit
+ * @see InventoryMock
+ * @see InventoryType#ENDER_CHEST
  */
 public class EnderChestInventoryMock extends InventoryMock
 {
 
+	/**
+	 * Constructs a new {@link EnderChestInventoryMock} for the given holder.
+	 *
+	 * @param holder The holder of the inventory.
+	 */
 	public EnderChestInventoryMock(InventoryHolder holder)
 	{
 		super(holder, 27, InventoryType.ENDER_CHEST);

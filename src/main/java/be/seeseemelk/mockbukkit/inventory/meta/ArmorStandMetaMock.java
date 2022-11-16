@@ -3,6 +3,11 @@ package be.seeseemelk.mockbukkit.inventory.meta;
 import com.destroystokyo.paper.inventory.meta.ArmorStandMeta;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Mock implementation of an {@link ArmorStandMeta}.
+ *
+ * @see ItemMetaMock
+ */
 public class ArmorStandMetaMock extends ItemMetaMock implements ArmorStandMeta
 {
 
@@ -12,11 +17,19 @@ public class ArmorStandMetaMock extends ItemMetaMock implements ArmorStandMeta
 	private boolean small;
 	private boolean marker;
 
+	/**
+	 * Constructs a new {@link ArmorStandMetaMock}.
+	 */
 	public ArmorStandMetaMock()
 	{
 		super();
 	}
 
+	/**
+	 * Constructs a new {@link ArmorStandMetaMock}, cloning the data from another.
+	 *
+	 * @param meta The meta to clone.
+	 */
 	public ArmorStandMetaMock(@NotNull ArmorStandMeta meta)
 	{
 		super(meta);

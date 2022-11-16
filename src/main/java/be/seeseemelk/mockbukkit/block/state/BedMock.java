@@ -9,21 +9,43 @@ import org.bukkit.block.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * Mock implementation of a {@link Bed}.
+ *
+ * @see TileStateMock
+ */
 public class BedMock extends TileStateMock implements Bed
 {
 
+	/**
+	 * Constructs a new {@link BedMock} for the provided {@link Material}.
+	 * Only supports materials in {@link MaterialTags#BEDS}
+	 *
+	 * @param material The material this state is for.
+	 */
 	public BedMock(@NotNull Material material)
 	{
 		super(material);
 		checkType(material, MaterialTags.BEDS);
 	}
 
+	/**
+	 * Constructs a new {@link BedMock} for the provided {@link Block}.
+	 * Only supports materials in {@link MaterialTags#BEDS}
+	 *
+	 * @param block The block this state is for.
+	 */
 	protected BedMock(@NotNull Block block)
 	{
 		super(block);
 		checkType(block, MaterialTags.BEDS);
 	}
 
+	/**
+	 * Constructs a new {@link BedMock} by cloning the data from an existing one.
+	 *
+	 * @param state The state to clone.
+	 */
 	protected BedMock(@NotNull BedMock state)
 	{
 		super(state);

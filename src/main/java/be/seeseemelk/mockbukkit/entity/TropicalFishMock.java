@@ -12,6 +12,11 @@ import org.jetbrains.annotations.NotNull;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Mock implementation of a {@link TropicalFish}.
+ *
+ * @see FishMock
+ */
 public class TropicalFishMock extends FishMock implements TropicalFish
 {
 
@@ -19,6 +24,12 @@ public class TropicalFishMock extends FishMock implements TropicalFish
 	private @NotNull DyeColor bodyColor;
 	private @NotNull Pattern pattern;
 
+	/**
+	 * Constructs a new {@link TropicalFishMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	public TropicalFishMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);

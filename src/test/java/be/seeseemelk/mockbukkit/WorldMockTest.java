@@ -604,14 +604,21 @@ class WorldMockTest
 	void spawn_NullLocation_ThrowsException()
 	{
 		WorldMock world = new WorldMock();
-		assertThrowsExactly(IllegalArgumentException.class, () -> world.spawn(null, Zombie.class));
+		assertThrowsExactly(NullPointerException.class, () -> world.spawn(null, Zombie.class));
 	}
 
 	@Test
 	void spawn_NullClass_ThrowsException()
 	{
 		WorldMock world = new WorldMock();
-		assertThrowsExactly(IllegalArgumentException.class, () -> world.spawn(new Location(world, 0, 5, 0), null));
+		assertThrowsExactly(NullPointerException.class, () -> world.spawn(new Location(world, 0, 5, 0), null));
+	}
+
+	@Test
+	void spawn_NullReason_ThrowsException()
+	{
+		WorldMock world = new WorldMock();
+		assertThrowsExactly(NullPointerException.class, () -> world.spawn(new Location(world, 0, 5, 0), Zombie.class, (CreatureSpawnEvent.SpawnReason) null));
 	}
 
 	@Test

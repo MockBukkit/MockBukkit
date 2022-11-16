@@ -2,7 +2,6 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ExperienceOrb;
 import org.jetbrains.annotations.NotNull;
@@ -11,20 +10,33 @@ import org.jetbrains.annotations.Nullable;
 import java.util.UUID;
 
 /**
- * This is a simple mock of the {@link ExperienceOrb} {@link Entity}.
+ * Mock implementation of an {@link ExperienceOrb}.
  *
- * @author TheBusyBiscuit
+ * @see EntityMock
  */
 public class ExperienceOrbMock extends EntityMock implements ExperienceOrb
 {
 
 	private int experience;
 
+	/**
+	 * Constructs a new {@link ExperienceOrbMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	public ExperienceOrbMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		this(server, uuid, 0);
 	}
 
+	/**
+	 * Constructs a new {@link ExperienceOrbMock} on the provided {@link ServerMock} with a specified {@link UUID} an experience amount.
+	 *
+	 * @param server     The server to create the entity on.
+	 * @param uuid       The UUID of the entity.
+	 * @param experience The amount of experience the orb has.
+	 */
 	public ExperienceOrbMock(@NotNull ServerMock server, @NotNull UUID uuid, int experience)
 	{
 		super(server, uuid);

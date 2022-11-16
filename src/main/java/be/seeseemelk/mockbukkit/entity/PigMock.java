@@ -9,6 +9,11 @@ import org.jetbrains.annotations.NotNull;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Mock implementation of an {@link Pig}.
+ *
+ * @see AnimalsMock
+ */
 public class PigMock extends AnimalsMock implements Pig
 {
 
@@ -16,6 +21,12 @@ public class PigMock extends AnimalsMock implements Pig
 	private int boostTicks = 0;
 	private int currentBoostTicks = 0;
 
+	/**
+	 * Constructs a new {@link PigMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	public PigMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);

@@ -6,6 +6,7 @@ import com.google.common.base.Preconditions;
 import org.bukkit.BanList;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -24,9 +25,6 @@ import java.util.stream.Stream;
 
 /**
  * Replica of the Bukkit internal PlayerList and CraftPlayerList implementation
- *
- * @author seeseemelk
- * @author TheBusyBiscuit
  */
 public class MockPlayerList
 {
@@ -43,29 +41,50 @@ public class MockPlayerList
 	private final @NotNull BanList ipBans = new MockBanList();
 	private final @NotNull BanList profileBans = new MockBanList();
 
+	/**
+	 * Sets the maximum number of online players.
+	 * <b>This is not currently enforced.</b>
+	 *
+	 * @param maxPlayers The maximum amount of players.
+	 */
 	public void setMaxPlayers(int maxPlayers)
 	{
 		// TODO: The maxPlayers setting is currently not enforced.
 		this.maxPlayers = maxPlayers;
 	}
 
+	/**
+	 * @return The maximum number of online players.
+	 */
 	public int getMaxPlayers()
 	{
 		return this.maxPlayers;
 	}
 
+	/**
+	 * @return All IP bans.
+	 */
 	@NotNull
 	public BanList getIPBans()
 	{
 		return this.ipBans;
 	}
 
+	/**
+	 * @return All profile bans.
+	 */
 	@NotNull
 	public BanList getProfileBans()
 	{
 		return this.profileBans;
 	}
 
+	/**
+	 * Marks a player as on the server, and sets related data like hasPlayedBefore and lastLogin.
+	 *
+	 * @param player The player to add.
+	 */
+	@ApiStatus.Internal
 	public void addPlayer(@NotNull PlayerMock player)
 	{
 		this.firstPlayed.putIfAbsent(player.getUniqueId(), System.currentTimeMillis());
@@ -75,6 +94,12 @@ public class MockPlayerList
 		this.hasPlayedBefore.put(player.getUniqueId(), this.hasPlayedBefore.containsKey(player.getUniqueId()));
 	}
 
+	/**
+	 * Marks a player as disconnected, and sets related data like lastSeen.
+	 *
+	 * @param player The player to disconnect.
+	 */
+	@ApiStatus.Internal
 	public void disconnectPlayer(@NotNull PlayerMock player)
 	{
 		this.lastSeen.put(player.getUniqueId(), System.currentTimeMillis());
@@ -94,6 +119,12 @@ public class MockPlayerList
 		return this.hasPlayedBefore.getOrDefault(uuid, false);
 	}
 
+	/**
+	 * Adds an offline player to the offline players set.
+	 *
+	 * @param player The player.
+	 */
+	@ApiStatus.Internal
 	public void addOfflinePlayer(@NotNull OfflinePlayer player)
 	{
 		this.offlinePlayers.add(player);
@@ -177,6 +208,9 @@ public class MockPlayerList
 		this.lastLogins.put(uuid, lastLogin);
 	}
 
+	/**
+	 * @return All server operators.
+	 */
 	@NotNull
 	public Set<OfflinePlayer> getOperators()
 	{
@@ -185,23 +219,38 @@ public class MockPlayerList
 				.collect(Collectors.toSet());
 	}
 
+	/**
+	 * @return All online players.
+	 */
 	@NotNull
 	public Collection<PlayerMock> getOnlinePlayers()
 	{
 		return Collections.unmodifiableSet(this.onlinePlayers);
 	}
 
+	/**
+	 * @return All offline and online players.
+	 */
 	@NotNull
 	public OfflinePlayer @NotNull [] getOfflinePlayers()
 	{
 		return this.offlinePlayers.toArray(new OfflinePlayer[0]);
 	}
 
+	/**
+	 * @return Whether anyone is online.
+	 */
 	public boolean isSomeoneOnline()
 	{
 		return !this.onlinePlayers.isEmpty();
 	}
 
+	/**
+	 * Matches a player by partial name.
+	 *
+	 * @param name The name to match by.
+	 * @return All online players whose names start with the provided name.
+	 */
 	@NotNull
 	public List<Player> matchPlayer(@NotNull String name)
 	{
@@ -211,6 +260,12 @@ public class MockPlayerList
 				.collect(Collectors.toList());
 	}
 
+	/**
+	 * Matches a player by their exact name.
+	 *
+	 * @param name The name to match by.
+	 * @return The player with the exact name provided, or null.
+	 */
 	@Nullable
 	public Player getPlayerExact(@NotNull String name)
 	{
@@ -220,6 +275,12 @@ public class MockPlayerList
 				.findFirst().orElse(null);
 	}
 
+	/**
+	 * Finds the player with the closest matching name.
+	 *
+	 * @param name The name to search with.
+	 * @return The closest matching player.
+	 */
 	@Nullable
 	public Player getPlayer(@NotNull String name)
 	{
@@ -250,6 +311,10 @@ public class MockPlayerList
 		return player;
 	}
 
+	/**
+	 * @param id The UUID of the player.
+	 * @return The player with the provided UUID, or null.
+	 */
 	@Nullable
 	public Player getPlayer(@NotNull UUID id)
 	{
@@ -264,12 +329,25 @@ public class MockPlayerList
 		return null;
 	}
 
+	/**
+	 * Gets a player at the provided index. Note player indexes will change whenever they join/leave.
+	 *
+	 * @param index The index.
+	 * @return The player at the provided index.
+	 */
 	@NotNull
-	public PlayerMock getPlayer(int num)
+	public PlayerMock getPlayer(int index)
 	{
-		return List.copyOf(this.onlinePlayers).get(num);
+		return List.copyOf(this.onlinePlayers).get(index);
 	}
 
+	/**
+	 * Gets an offline, or online player by name.
+	 *
+	 * @param name The name to match.
+	 * @return The player, or offline player with the provided name.
+	 * @see #getPlayer(String)
+	 */
 	@NotNull
 	public OfflinePlayer getOfflinePlayer(@NotNull String name)
 	{
@@ -291,6 +369,13 @@ public class MockPlayerList
 		return new OfflinePlayerMock(name);
 	}
 
+	/**
+	 * Gets an offline, or online player by UUID.
+	 *
+	 * @param id The UUID to match.
+	 * @return The player, or offline player with the provided UUID.
+	 * @see #getPlayer(UUID)
+	 */
 	@Nullable
 	public OfflinePlayer getOfflinePlayer(@NotNull UUID id)
 	{
@@ -312,11 +397,17 @@ public class MockPlayerList
 		return null;
 	}
 
+	/**
+	 * Clears all online players.
+	 */
 	public void clearOnlinePlayers()
 	{
 		this.onlinePlayers.clear();
 	}
 
+	/**
+	 * Clears all offline players.
+	 */
 	public void clearOfflinePlayers()
 	{
 		this.offlinePlayers.clear();
