@@ -12,9 +12,9 @@ import java.util.UUID;
 /**
  * Mock implementation of a {@link Cod}.
  *
- * @see FishMock
+ * @see SchoolableFishMock
  */
-public class CodMock extends FishMock implements Cod
+public class CodMock extends SchoolableFishMock implements Cod
 {
 
 	/**

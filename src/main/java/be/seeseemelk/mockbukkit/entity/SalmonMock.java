@@ -13,9 +13,9 @@ import java.util.UUID;
 /**
  * Mock implementation of a {@link Salmon}.
  *
- * @see FishMock
+ * @see SchoolableFishMock
  */
-public class SalmonMock extends FishMock implements Salmon
+public class SalmonMock extends SchoolableFishMock implements Salmon
 {
 
 	/**
