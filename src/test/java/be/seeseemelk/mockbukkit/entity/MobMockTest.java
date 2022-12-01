@@ -6,19 +6,22 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.bukkit.entity.EntityType.ELDER_GUARDIAN;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.UUID;
 
-class ElderGuardianMockTest
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
+public class MobMockTest
 {
-	private ElderGuardianMock guardian;
+
+	private MobMock mob;
+	ServerMock server;
 
 	@BeforeEach
 	void setUp()
 	{
-		ServerMock server = MockBukkit.mock();
-		guardian = new ElderGuardianMock(server, java.util.UUID.randomUUID());
+		server = MockBukkit.mock();
+		mob = new SimpleMobMock(server, UUID.randomUUID());
 	}
 
 	@AfterEach
@@ -28,14 +31,16 @@ class ElderGuardianMockTest
 	}
 
 	@Test
-	void testGetType()
+	void testGetTargetDefault()
 	{
-		assertEquals(ELDER_GUARDIAN, guardian.getType());
+		assertNull(mob.getTarget());
 	}
 
 	@Test
-	void testIsElder()
+	void testSetTarget()
 	{
-		assertTrue(guardian.isElder());
+		PlayerMock player = server.addPlayer();
+		mob.setTarget(player);
+		assertEquals(player, mob.getTarget());
 	}
 }

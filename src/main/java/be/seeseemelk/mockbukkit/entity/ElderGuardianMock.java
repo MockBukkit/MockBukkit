@@ -21,4 +21,10 @@ public class ElderGuardianMock extends GuardianMock implements ElderGuardian
 		return EntityType.ELDER_GUARDIAN;
 	}
 
+	@Override
+	public boolean isElder()
+	{
+		return true;
+	}
+
 }

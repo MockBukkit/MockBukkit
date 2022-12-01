@@ -9,8 +9,6 @@ import java.util.UUID;
 
 public class GuardianMock extends MonsterMock implements Guardian
 {
-
-	private boolean elder = false;
 	private boolean laser = false;
 
 	public GuardianMock(@NotNull ServerMock server, @NotNull UUID uuid)
@@ -21,6 +19,11 @@ public class GuardianMock extends MonsterMock implements Guardian
 	@Override
 	public boolean setLaser(boolean activated)
 	{
+		if (this.getTarget() == null)
+		{
+			return false;
+		}
+
 		this.laser = activated;
 		return activated;
 	}
@@ -34,13 +37,13 @@ public class GuardianMock extends MonsterMock implements Guardian
 	@Override
 	public boolean isElder()
 	{
-		return this.elder;
+		return false;
 	}
 
 	@Override
 	public void setElder(boolean shouldBeElder)
 	{
-		this.elder = shouldBeElder;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

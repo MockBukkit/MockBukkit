@@ -11,6 +11,7 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class GuardianMockTest
@@ -38,12 +39,17 @@ class GuardianMockTest
 	}
 
 	@Test
-	void testSetLaser()
+	void testSetLaserWithNullTargetThrows()
 	{
-		guardian.setLaser(true);
-		assertTrue(guardian.hasLaser());
+		assertFalse(guardian.setLaser(true));
 	}
 
+	@Test
+	void testSetLaser()
+	{
+		guardian.setTarget(new PlayerMock(MockBukkit.getMock(), "player"));
+		assertTrue(guardian.setLaser(true));
+	}
 	@Test
 	void testIsElderDefault()
 	{
@@ -53,8 +59,7 @@ class GuardianMockTest
 	@Test
 	void testSetElder()
 	{
-		guardian.setElder(true);
-		assertTrue(guardian.isElder());
+		assertThrows(UnsupportedOperationException.class, () -> guardian.setElder(true));
 	}
 
 	@Test
