@@ -24,6 +24,7 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.serializer.bungeecord.BungeeComponentSerializer;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import net.kyori.adventure.util.TriState;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.BanList;
@@ -2501,7 +2502,84 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public int getWardenWarningCooldown()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setWardenWarningCooldown(int cooldown)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getWardenTimeSinceLastWarning()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setWardenTimeSinceLastWarning(int time)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getWardenWarningLevel()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setWardenWarningLevel(int warningLevel)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void increaseWardenWarningLevel()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public void attack(@NotNull Entity target)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void broadcastSlotBreak(@NotNull EquipmentSlot slot)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void broadcastSlotBreak(@NotNull EquipmentSlot slot, @NotNull Collection<Player> players)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull ItemStack damageItemStack(@NotNull ItemStack stack, int amount)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void damageItemStack(@NotNull EquipmentSlot slot, int amount)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -2618,6 +2696,18 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public Player.@NotNull Spigot spigot()
 	{
 		return playerSpigotMock;
+	}
+
+	@Override
+	public @NotNull TriState getFrictionState()
+	{
+		return null;
+	}
+
+	@Override
+	public void setFrictionState(@NotNull TriState state)
+	{
+
 	}
 
 	/**

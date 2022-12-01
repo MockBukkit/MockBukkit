@@ -15,9 +15,9 @@ import java.util.concurrent.ThreadLocalRandom;
 /**
  * Mock implementation of a {@link TropicalFish}.
  *
- * @see FishMock
+ * @see SchoolableFishMock
  */
-public class TropicalFishMock extends FishMock implements TropicalFish
+public class TropicalFishMock extends SchoolableFishMock implements TropicalFish
 {
 
 	private @NotNull DyeColor patternColor;

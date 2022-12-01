@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit;
 import com.destroystokyo.paper.util.VersionFetcher;
 import com.google.common.collect.Multimap;
 import io.papermc.paper.inventory.ItemRarity;
+import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.flattener.ComponentFlattener;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
@@ -21,6 +22,7 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.CreativeCategory;
@@ -31,6 +33,7 @@ import org.bukkit.plugin.InvalidPluginException;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -80,6 +83,13 @@ public class MockUnsafeValues implements UnsafeValues
 	public @NotNull LegacyComponentSerializer legacyComponentSerializer()
 	{
 		return LegacyComponentSerializer.legacySection();
+	}
+
+	@Override
+	public Component resolveWithContext(Component component, CommandSender context, Entity scoreboardSubject, boolean bypassPermissions) throws IOException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

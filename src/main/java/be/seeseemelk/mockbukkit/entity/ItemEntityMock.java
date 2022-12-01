@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
+import net.kyori.adventure.util.TriState;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
@@ -164,6 +165,20 @@ public class ItemEntityMock extends EntityMock implements Item
 
 	@Override
 	public void setHealth(int health)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull TriState getFrictionState()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setFrictionState(@NotNull TriState state)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
