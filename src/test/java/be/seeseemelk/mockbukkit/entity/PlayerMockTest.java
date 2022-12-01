@@ -1906,7 +1906,6 @@ class PlayerMockTest
 	@Test
 	void testAssertInventoryViewDefault()
 	{
-		;
 		player.assertInventoryView(InventoryType.CRAFTING);
 	}
 
@@ -2232,19 +2231,67 @@ class PlayerMockTest
 	}
 
 	@Test
-	void hasPlayedBefore_AddedToServer_True()
+	void getWalkSpeed()
 	{
-		PlayerMock player = server.addPlayer();
-
-		assertTrue(player.hasPlayedBefore());
+		assertEquals(0.2f, player.getWalkSpeed());
 	}
 
 	@Test
-	void hasPlayedBefore_NotAddedToServer_False()
+	void setWalkSpeed()
 	{
-		PlayerMock player = new PlayerMock(server, "player");
+		player.setWalkSpeed(0.4f);
+		assertEquals(0.4f, player.getWalkSpeed());
+	}
 
-		assertFalse(player.hasPlayedBefore());
+	@Test
+	void setWalkSpeed_TooLow_ThrowsException()
+	{
+		assertThrows(IllegalArgumentException.class, () -> player.setWalkSpeed(-1.1f));
+	}
+
+	@Test
+	void setWalkSpeed_TooHigh_ThrowsException()
+	{
+		assertThrows(IllegalArgumentException.class, () -> player.setWalkSpeed(1.1f));
+	}
+
+	@Test
+	void isHealthScaled()
+	{
+		assertFalse(player.isHealthScaled());
+	}
+
+	@Test
+	void setHealthScaled()
+	{
+		player.setHealthScaled(true);
+		assertTrue(player.isHealthScaled());
+	}
+
+	@Test
+	void getHealthScale()
+	{
+		assertEquals(20d, player.getHealthScale());
+	}
+
+	@Test
+	void setHealthScale()
+	{
+		player.setHealthScale(10d);
+		assertEquals(10d, player.getHealthScale());
+		assertTrue(player.isHealthScaled());
+	}
+
+	@Test
+	void setHealthScale_Negative_ThrowsException()
+	{
+		assertThrows(IllegalArgumentException.class, () -> player.setHealthScale(-0.1d));
+	}
+
+	@Test
+	void setHealthScale_NaN_ThrowsException()
+	{
+		assertThrows(IllegalArgumentException.class, () -> player.setHealthScale(Double.NaN));
 	}
 
 }

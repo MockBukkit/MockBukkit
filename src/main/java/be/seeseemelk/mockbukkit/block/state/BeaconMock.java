@@ -19,6 +19,11 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
 
+/**
+ * Mock implementation of a {@link Beacon}.
+ *
+ * @see TileStateMock
+ */
 public class BeaconMock extends TileStateMock implements Beacon
 {
 
@@ -29,18 +34,35 @@ public class BeaconMock extends TileStateMock implements Beacon
 	private @Nullable PotionEffectType secondaryEffect;
 	private double effectRange = -1;
 
+	/**
+	 * Constructs a new {@link BeaconMock} for the provided {@link Material}.
+	 * Only supports {@link Material#BARREL}
+	 *
+	 * @param material The material this state is for.
+	 */
 	public BeaconMock(@NotNull Material material)
 	{
 		super(material);
 		checkType(material, Material.BEACON);
 	}
 
+	/**
+	 * Constructs a new {@link BeaconMock} for the provided {@link Block}.
+	 * Only supports {@link Material#BEACON}
+	 *
+	 * @param block The block this state is for.
+	 */
 	protected BeaconMock(@NotNull Block block)
 	{
 		super(block);
 		checkType(block, Material.BEACON);
 	}
 
+	/**
+	 * Constructs a new {@link BeaconMock} by cloning the data from an existing one.
+	 *
+	 * @param state The state to clone.
+	 */
 	protected BeaconMock(@NotNull BeaconMock state)
 	{
 		super(state);

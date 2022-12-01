@@ -13,6 +13,11 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
+/**
+ * Mock implementation of a {@link Minecart}.
+ *
+ * @see VehicleMock
+ */
 public abstract class MinecartMock extends VehicleMock implements Minecart
 {
 
@@ -24,6 +29,12 @@ public abstract class MinecartMock extends VehicleMock implements Minecart
 	private BlockData displayBlock;
 	private int displayBlockOffset;
 
+	/**
+	 * Constructs a new {@link MinecartMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	protected MinecartMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);

@@ -17,6 +17,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Mock implementation of an {@link Objective}.
+ */
 public class ObjectiveMock implements Objective
 {
 
@@ -28,6 +31,15 @@ public class ObjectiveMock implements Objective
 	private @Nullable DisplaySlot displaySlot;
 	private RenderType renderType;
 
+	/**
+	 * Constructs a new {@link ObjectiveMock} with the provided parameters.
+	 *
+	 * @param scoreboard  The scoreboard this objective is part of.
+	 * @param name        The name of the objective.
+	 * @param displayName The display name of the objective.
+	 * @param criteria    The criteria of the objective.
+	 * @param renderType  The render type of the objective.
+	 */
 	public ObjectiveMock(@NotNull ScoreboardMock scoreboard, @NotNull String name, @Nullable Component displayName,
 						 @NotNull Criteria criteria, @NotNull RenderType renderType)
 	{

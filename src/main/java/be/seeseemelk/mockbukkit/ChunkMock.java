@@ -19,6 +19,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collection;
 import java.util.function.Predicate;
 
+/**
+ * Mock implementation of a {@link Chunk}.
+ */
 public class ChunkMock implements Chunk
 {
 
@@ -28,6 +31,13 @@ public class ChunkMock implements Chunk
 	private boolean loaded = true;
 	private final PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
 
+	/**
+	 * Constructs a new {@link ChunkMock} for the provided world, at the specified coordinates.
+	 *
+	 * @param world The world the chunk is in.
+	 * @param x     The X coordinate of the chunk.
+	 * @param z     The Y coordinate of the chunk.
+	 */
 	protected ChunkMock(final World world, final int x, final int z)
 	{
 		this.world = world;
@@ -62,13 +72,6 @@ public class ChunkMock implements Chunk
 	}
 
 	@Override
-	public long getChunkKey()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public @NotNull World getWorld()
 	{
 		return world;
@@ -83,6 +86,12 @@ public class ChunkMock implements Chunk
 		return world.getBlockAt((this.x << 4) + x, y, (this.z << 4) + z);
 	}
 
+	/**
+	 * Gets a block at a {@link Coordinate}.
+	 *
+	 * @param coordinate The coordinate at which to get the block.
+	 * @return The block at the provided coordinate.
+	 */
 	public @NotNull Block getBlock(@NotNull Coordinate coordinate)
 	{
 		return getBlock(coordinate.x, coordinate.y, coordinate.z);

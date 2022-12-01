@@ -15,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.concurrent.TimeUnit;
 
 /**
- * A mock world border object.
+ * Mock implementation of a {@link WorldBorder}.
  */
 public class WorldBorderMock implements WorldBorder
 {

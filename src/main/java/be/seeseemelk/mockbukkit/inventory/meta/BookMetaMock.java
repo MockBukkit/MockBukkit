@@ -18,10 +18,10 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Created by SimplyBallistic on 26/10/2018
+ * Mock implementation of a {@link BookMeta}.
  *
- * @author SimplyBallistic
- **/
+ * @see ItemMetaMock
+ */
 public class BookMetaMock extends ItemMetaMock implements BookMeta
 {
 
@@ -29,11 +29,19 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	private @NotNull List<String> pages = new ArrayList<>();
 	private @Nullable String author;
 
+	/**
+	 * Constructs a new {@link BookMetaMock}.
+	 */
 	public BookMetaMock()
 	{
 		super();
 	}
 
+	/**
+	 * Constructs a new {@link BookMetaMock}, cloning the data from another.
+	 *
+	 * @param meta The meta to clone.
+	 */
 	public BookMetaMock(@NotNull BookMeta meta)
 	{
 		super(meta);
