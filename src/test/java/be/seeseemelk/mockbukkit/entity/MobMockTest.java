@@ -43,4 +43,5 @@ class MobMockTest
 		mob.setTarget(player);
 		assertEquals(player, mob.getTarget());
 	}
+
 }
