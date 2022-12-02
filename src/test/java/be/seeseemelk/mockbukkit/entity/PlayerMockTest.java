@@ -2318,4 +2318,12 @@ class PlayerMockTest
 		assertFalse(player.isOp());
 	}
 
+	@Test
+	void testSetOpTrue()
+	{
+		PlayerMock player = server.addPlayer();
+		player.setOp(true);
+		assertTrue(player.isOp());
+	}
+
 }

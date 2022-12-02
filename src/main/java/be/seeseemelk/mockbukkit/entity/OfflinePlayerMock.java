@@ -93,7 +93,7 @@ public class OfflinePlayerMock implements OfflinePlayer
 	@Override
 	public boolean isOp()
 	{
-		return this.operator;
+		return MockBukkit.getMock().getPlayerList().getOperators().contains(this);
 	}
 
 	@Override

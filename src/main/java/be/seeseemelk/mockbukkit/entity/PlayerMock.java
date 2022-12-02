@@ -166,7 +166,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private final Set<String> channels = new HashSet<>();
 
 	private final List<ItemStack> consumedItems = new LinkedList<>();
-	private boolean op;
 
 	/**
 	 * Constructs a new {@link PlayerMock} for the provided server with the specified name.
@@ -2696,13 +2695,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public boolean isOp()
 	{
-		return this.op;
+		return MockBukkit.getMock().getPlayerList().getOperators().stream()
+				.anyMatch(op -> op.getPlayer() == this);
 	}
 
 	@Override
 	public void setOp(boolean isOperator)
 	{
-		this.op = isOperator;
 
 		if (isOperator)
 		{
