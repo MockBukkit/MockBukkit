@@ -3,9 +3,13 @@ package be.seeseemelk.mockbukkit.command;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
+import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.bungeecord.BungeeComponentSerializer;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.Server;
+import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationAbandonedEvent;
@@ -215,6 +219,38 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	public @NotNull Component name()
 	{
 		return Component.text(getName());
+	}
+
+	@SuppressWarnings("deprecation")
+	class Spigot extends CommandSender.Spigot
+	{
+
+		@Override
+		public void sendMessage(@NotNull BaseComponent component)
+		{
+			sendMessage(null, component);
+		}
+
+		@Override
+		public void sendMessage(@NotNull BaseComponent... components)
+		{
+			sendMessage(null, components);
+		}
+
+		@Override
+		public void sendMessage(@Nullable UUID sender, @NotNull BaseComponent component)
+		{
+			sendMessage(sender, new BaseComponent[]{ component });
+		}
+
+		@Override
+		public void sendMessage(@Nullable UUID sender, @NotNull BaseComponent... components)
+		{
+			Preconditions.checkNotNull(components, "Component must not be null");
+			Component comp = BungeeComponentSerializer.get().deserialize(components);
+			ConsoleCommandSenderMock.this.sendMessage(sender == null ? Identity.nil() : Identity.identity(sender), comp);
+		}
+
 	}
 
 }
