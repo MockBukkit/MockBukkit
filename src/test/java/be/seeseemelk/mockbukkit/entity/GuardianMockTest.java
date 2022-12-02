@@ -50,6 +50,7 @@ class GuardianMockTest
 		guardian.setTarget(new PlayerMock(MockBukkit.getMock(), "player"));
 		assertTrue(guardian.setLaser(true));
 	}
+
 	@Test
 	void testIsElderDefault()
 	{

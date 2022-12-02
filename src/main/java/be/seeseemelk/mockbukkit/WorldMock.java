@@ -1142,7 +1142,7 @@ public class WorldMock implements World
 		else if (clazz == Guardian.class)
 		{
 			return new GuardianMock(server, UUID.randomUUID());
-    }
+		}
 		else if (clazz == PolarBear.class)
 		{
 			return new PolarBearMock(server, UUID.randomUUID());

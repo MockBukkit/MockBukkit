@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ElderGuardianMockTest
 {
+
 	private ElderGuardianMock guardian;
 
 	@BeforeEach
@@ -38,4 +39,5 @@ class ElderGuardianMockTest
 	{
 		assertTrue(guardian.isElder());
 	}
+
 }
