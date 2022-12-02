@@ -20,9 +20,9 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * A Mock specifically for {@link OfflinePlayer}. Not interchangeable with {@link PlayerMock}.
+ * Mock implementation of an {@link OfflinePlayer}.
+ * Not interchangeable with {@link PlayerMock}.
  *
- * @author TheBusyBiscuit
  * @see PlayerMock
  */
 public class OfflinePlayerMock implements OfflinePlayer
@@ -32,6 +32,12 @@ public class OfflinePlayerMock implements OfflinePlayer
 	private final @Nullable String name;
 	private boolean operator;
 
+	/**
+	 * Constructs a new {@link OfflinePlayerMock} on the provided {@link ServerMock} with a specified {@link UUID} and name.
+	 *
+	 * @param uuid The UUID of the player.
+	 * @param name The name of the player.
+	 */
 	public OfflinePlayerMock(@NotNull UUID uuid, @Nullable String name)
 	{
 		Preconditions.checkNotNull(uuid, "UUID cannot be null");
@@ -39,14 +45,28 @@ public class OfflinePlayerMock implements OfflinePlayer
 		this.name = name;
 	}
 
+	/**
+	 * Constructs a new {@link OfflinePlayerMock} on the provided {@link ServerMock} with a random {@link UUID} and specified name.
+	 *
+	 * @param name The name of the player.
+	 */
 	public OfflinePlayerMock(@Nullable String name)
 	{
 		this(UUID.nameUUIDFromBytes(("OfflinePlayer:" + name).getBytes()), name);
 	}
 
+	/**
+	 * Makes this offline player join the server.
+	 * A new PlayerMock will be constructed, and added to the server.
+	 * Will throw an {@link IllegalStateException} if the player is already online.
+	 *
+	 * @param server The server to join.
+	 * @return The created PlayerMock.
+	 */
 	public @NotNull PlayerMock join(@NotNull ServerMock server)
 	{
 		Preconditions.checkNotNull(server, "Server cannot be null");
+		Preconditions.checkState(!isOnline(), "Player already online");
 		PlayerMock player = new PlayerMock(server, this.name, this.uuid);
 		server.addPlayer(player);
 		return player;

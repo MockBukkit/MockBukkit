@@ -2231,6 +2231,70 @@ class PlayerMockTest
 	}
 
 	@Test
+	void getWalkSpeed()
+	{
+		assertEquals(0.2f, player.getWalkSpeed());
+	}
+
+	@Test
+	void setWalkSpeed()
+	{
+		player.setWalkSpeed(0.4f);
+		assertEquals(0.4f, player.getWalkSpeed());
+	}
+
+	@Test
+	void setWalkSpeed_TooLow_ThrowsException()
+	{
+		assertThrows(IllegalArgumentException.class, () -> player.setWalkSpeed(-1.1f));
+	}
+
+	@Test
+	void setWalkSpeed_TooHigh_ThrowsException()
+	{
+		assertThrows(IllegalArgumentException.class, () -> player.setWalkSpeed(1.1f));
+	}
+
+	@Test
+	void isHealthScaled()
+	{
+		assertFalse(player.isHealthScaled());
+	}
+
+	@Test
+	void setHealthScaled()
+	{
+		player.setHealthScaled(true);
+		assertTrue(player.isHealthScaled());
+	}
+
+	@Test
+	void getHealthScale()
+	{
+		assertEquals(20d, player.getHealthScale());
+	}
+
+	@Test
+	void setHealthScale()
+	{
+		player.setHealthScale(10d);
+		assertEquals(10d, player.getHealthScale());
+		assertTrue(player.isHealthScaled());
+	}
+
+	@Test
+	void setHealthScale_Negative_ThrowsException()
+	{
+		assertThrows(IllegalArgumentException.class, () -> player.setHealthScale(-0.1d));
+	}
+
+	@Test
+	void setHealthScale_NaN_ThrowsException()
+	{
+		assertThrows(IllegalArgumentException.class, () -> player.setHealthScale(Double.NaN));
+	}
+
+	@Test
 	void hasPlayedBefore_AddedToServer_False()
 	{
 		PlayerMock player = server.addPlayer();

@@ -9,12 +9,22 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * Mock implementation of a {@link BrewerInventory}.
+ *
+ * @see InventoryMock
+ */
 public class BrewerInventoryMock extends InventoryMock implements BrewerInventory
 {
 
 	private static final int INGREDIENT_SLOT = 3;
 	private static final int FUEL_SLOT = 4;
 
+	/**
+	 * Constructs a new {@link BrewerInventoryMock} for the given holder.
+	 *
+	 * @param holder The holder of the inventory.
+	 */
 	public BrewerInventoryMock(InventoryHolder holder)
 	{
 		super(holder, InventoryType.BREWING);

@@ -4,7 +4,6 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
 import com.google.common.base.Strings;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.profile.PlayerProfile;
 import org.jetbrains.annotations.NotNull;
@@ -13,22 +12,28 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 
 /**
- * An {@link ItemMetaMock} for the {@link SkullMeta} interface. The owning {@link Player} is stored via his name.
- * <p>
- * Created by SimplyBallistic on 27/10/2018
+ * Mock implementation of a {@link SkullMeta}.
  *
- * @author SimplyBallistic
- **/
+ * @see ItemMetaMock
+ */
 public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 {
 
 	private @Nullable String owner;
 
+	/**
+	 * Constructs a new {@link SkullMetaMock}.
+	 */
 	public SkullMetaMock()
 	{
 		super();
 	}
 
+	/**
+	 * Constructs a new {@link SkullMetaMock}, cloning the data from another.
+	 *
+	 * @param meta The meta to clone.
+	 */
 	public SkullMetaMock(@NotNull SkullMeta meta)
 	{
 		super(meta);

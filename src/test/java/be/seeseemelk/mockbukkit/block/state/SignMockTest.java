@@ -6,6 +6,7 @@ import be.seeseemelk.mockbukkit.block.BlockMock;
 import com.destroystokyo.paper.MaterialTags;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
+import org.bukkit.Tag;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,7 +37,7 @@ class SignMockTest
 	}
 
 	@AfterEach
-	void tearDown() throws Exception
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
@@ -44,7 +45,7 @@ class SignMockTest
 	@Test
 	void constructor_Material()
 	{
-		for (Material material : MaterialTags.SIGNS.getValues())
+		for (Material material : Tag.SIGNS.getValues())
 		{
 			assertDoesNotThrow(() -> new SignMock(material));
 		}
@@ -59,7 +60,7 @@ class SignMockTest
 	@Test
 	void constructor_Block()
 	{
-		for (Material material : MaterialTags.SIGNS.getValues())
+		for (Material material : Tag.SIGNS.getValues())
 		{
 			assertDoesNotThrow(() -> new SignMock(new BlockMock(material)));
 		}

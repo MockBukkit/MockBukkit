@@ -4,6 +4,9 @@ import be.seeseemelk.mockbukkit.AsyncCatcher;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Mock implementation of a {@link ScoreboardManager}.
+ */
 public class ScoreboardManagerMock implements ScoreboardManager
 {
 

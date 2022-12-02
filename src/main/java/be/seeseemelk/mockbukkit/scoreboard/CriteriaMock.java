@@ -5,6 +5,9 @@ import org.bukkit.scoreboard.Criteria;
 import org.bukkit.scoreboard.RenderType;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Mock implementation of a {@link Criteria}.
+ */
 public class CriteriaMock implements Criteria
 {
 
@@ -12,6 +15,11 @@ public class CriteriaMock implements Criteria
 	private final boolean readOnly;
 	private final RenderType defaultRenderType;
 
+	/**
+	 * Constructs a new {@link CriteriaMock} with the provided name.
+	 *
+	 * @param name The name of the criteria.
+	 */
 	public CriteriaMock(@NotNull String name)
 	{
 		Preconditions.checkNotNull(name, "Name cannot be null");
