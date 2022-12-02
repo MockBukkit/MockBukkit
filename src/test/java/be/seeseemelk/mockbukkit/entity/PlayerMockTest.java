@@ -1906,7 +1906,6 @@ class PlayerMockTest
 	@Test
 	void testAssertInventoryViewDefault()
 	{
-		;
 		player.assertInventoryView(InventoryType.CRAFTING);
 	}
 
@@ -2232,11 +2231,11 @@ class PlayerMockTest
 	}
 
 	@Test
-	void hasPlayedBefore_AddedToServer_True()
+	void hasPlayedBefore_AddedToServer_False()
 	{
 		PlayerMock player = server.addPlayer();
 
-		assertTrue(player.hasPlayedBefore());
+		assertFalse(player.hasPlayedBefore());
 	}
 
 	@Test

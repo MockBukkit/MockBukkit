@@ -256,4 +256,38 @@ class MockPlayerListTest
 		assertEquals(10, playerList.getLastLogin(uuid));
 	}
 
+	@Test
+	void hasPlayedBefore_NeverOnline_False()
+	{
+		assertFalse(playerList.hasPlayedBefore(UUID.randomUUID()));
+	}
+
+	@Test
+	void hasPlayedBefore_FirstJoin_False()
+	{
+		PlayerMock player = server.addPlayer();
+		assertFalse(playerList.hasPlayedBefore(player.getUniqueId()));
+	}
+
+	@Test
+	void hasPlayedBefore_SecondJoin_True()
+	{
+		PlayerMock player = server.addPlayer();
+		player.disconnect();
+		player.reconnect();
+
+		assertTrue(playerList.hasPlayedBefore(player.getUniqueId()));
+	}
+
+	@Test
+	void hasPlayedBefore_SecondJoin_Offline_True()
+	{
+		PlayerMock player = server.addPlayer();
+		player.disconnect();
+		player.reconnect();
+		player.disconnect();
+
+		assertTrue(playerList.hasPlayedBefore(player.getUniqueId()));
+	}
+
 }
