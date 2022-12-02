@@ -24,6 +24,7 @@ public class ItemEntityMock extends EntityMock implements Item
 
 	// The default pickup delay
 	private int delay = 10;
+	private TriState frictionState = TriState.NOT_SET;
 
 	/**
 	 * Constructs a new {@link ItemEntityMock} on the provided {@link ServerMock} with a specified {@link UUID} and {@link ItemStack}.
@@ -173,15 +174,14 @@ public class ItemEntityMock extends EntityMock implements Item
 	@Override
 	public @NotNull TriState getFrictionState()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.frictionState;
 	}
 
 	@Override
 	public void setFrictionState(@NotNull TriState state)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(state, "State cannot be null");
+		this.frictionState = state;
 	}
 
 }
