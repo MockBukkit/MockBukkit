@@ -240,13 +240,14 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 		@Override
 		public void sendMessage(@Nullable UUID sender, @NotNull BaseComponent component)
 		{
+			Preconditions.checkNotNull(component, "Component must not be null");
 			sendMessage(sender, new BaseComponent[]{ component });
 		}
 
 		@Override
 		public void sendMessage(@Nullable UUID sender, @NotNull BaseComponent... components)
 		{
-			Preconditions.checkNotNull(components, "Component must not be null");
+			Preconditions.checkNotNull(components, "Components must not be null");
 			Component comp = BungeeComponentSerializer.get().deserialize(components);
 			ConsoleCommandSenderMock.this.sendMessage(sender == null ? Identity.nil() : Identity.identity(sender), comp);
 		}

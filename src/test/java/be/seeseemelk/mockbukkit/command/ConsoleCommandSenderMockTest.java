@@ -234,10 +234,20 @@ class ConsoleCommandSenderMockTest
 	}
 
 	@Test
+	void spigot_sendMessage_SingleComponent_Null_ThrowsException() {
+		assertThrowsExactly(NullPointerException.class, () -> sender.spigot().sendMessage((BaseComponent) null));
+	}
+
+	@Test
 	void spigot_sendMessage_MultipleComponents() {
 		sender.spigot().sendMessage(new BaseComponent[] { new net.md_5.bungee.api.chat.TextComponent("Hello,"), new net.md_5.bungee.api.chat.TextComponent("world!")});
 		sender.assertSaid("Hello,world!");
 		sender.assertNoMoreSaid();
+	}
+
+	@Test
+	void spigot_sendMessage_MultipleComponents_Null_ThrowsException() {
+		assertThrowsExactly(NullPointerException.class, () -> sender.spigot().sendMessage((BaseComponent[]) null));
 	}
 
 }
