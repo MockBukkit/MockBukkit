@@ -377,7 +377,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public void setOp(boolean isOperator)
 	{
-		//CraftBukkit does nothing here
+		throw new UnsupportedOperationException("This does nothing in CraftBukkit");
 	}
 
 	@Override

@@ -30,7 +30,6 @@ public class OfflinePlayerMock implements OfflinePlayer
 
 	private final @NotNull UUID uuid;
 	private final @Nullable String name;
-	private boolean operator;
 
 	/**
 	 * Constructs a new {@link OfflinePlayerMock} on the provided {@link ServerMock} with a specified {@link UUID} and name.
@@ -99,7 +98,6 @@ public class OfflinePlayerMock implements OfflinePlayer
 	@Override
 	public void setOp(boolean value)
 	{
-		this.operator = value;
 		if (value)
 		{
 			MockBukkit.getMock().getPlayerList().addOperator(this.uuid);

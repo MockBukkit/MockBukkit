@@ -2694,7 +2694,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public boolean isOp()
 	{
-		return MockBukkit.getMock().getPlayerList().getOperators().stream()
+		return server.getPlayerList().getOperators().stream()
 				.anyMatch(op -> op.getPlayer() == this);
 	}
 
@@ -2704,11 +2704,11 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 		if (isOperator)
 		{
-			MockBukkit.getMock().getPlayerList().addOperator(this.getUniqueId());
+			server.getPlayerList().addOperator(this.getUniqueId());
 		}
 		else
 		{
-			MockBukkit.getMock().getPlayerList().removeOperator(this.getUniqueId());
+			server.getPlayerList().removeOperator(this.getUniqueId());
 		}
 
 	}
