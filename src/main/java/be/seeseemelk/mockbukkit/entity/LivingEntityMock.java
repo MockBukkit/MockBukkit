@@ -94,6 +94,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 
 	private final Set<ActivePotionEffect> activeEffects = new HashSet<>();
 	private boolean invisible = false;
+	private TriState frictionState = TriState.NOT_SET;
 
 	/**
 	 * Constructs a new {@link LivingEntityMock} on the provided {@link ServerMock} with a specified {@link UUID}.
@@ -1030,15 +1031,14 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public @NotNull TriState getFrictionState()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.frictionState;
 	}
 
 	@Override
 	public void setFrictionState(@NotNull TriState state)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(state, "State cannot be null");
+		this.frictionState = state;
 	}
 
 }
