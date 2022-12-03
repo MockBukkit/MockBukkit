@@ -414,6 +414,7 @@ public class MockPlayerList
 
 	/**
 	 * Adds a Player to the list of known Operators.
+	 *
 	 * @param operator The {@link UUID} of the Operator to add.
 	 */
 	public void addOperator(UUID operator)
@@ -423,6 +424,7 @@ public class MockPlayerList
 
 	/**
 	 * Removes a Player from the list of known Operators.
+	 *
 	 * @param operator The {@link UUID} of the Operator to remove.
 	 */
 	public void removeOperator(UUID operator)
