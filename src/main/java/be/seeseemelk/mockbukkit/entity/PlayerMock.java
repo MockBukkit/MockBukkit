@@ -134,7 +134,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private @NotNull GameMode previousGamemode = gamemode;
 
 	private boolean online;
-	private final @NotNull ServerMock server;
 	private @Nullable Component displayName = null;
 	private @Nullable Component playerListName = null;
 	private @Nullable Component playerListHeader = null;
@@ -197,7 +196,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		setName(name);
 		setDisplayName(name);
 		this.online = true;
-		this.server = server;
 
 		if (Bukkit.getWorlds().isEmpty())
 		{
@@ -2689,6 +2687,28 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		Preconditions.checkNotNull(slot, "slot must not be null");
 		Preconditions.checkNotNull(item, "item must not be null");
 		// Pretend the packet gets sent.
+	}
+
+	@Override
+	public boolean isOp()
+	{
+		return server.getPlayerList().getOperators().stream()
+				.anyMatch(op -> op.getPlayer() == this);
+	}
+
+	@Override
+	public void setOp(boolean isOperator)
+	{
+
+		if (isOperator)
+		{
+			server.getPlayerList().addOperator(this.getUniqueId());
+		}
+		else
+		{
+			server.getPlayerList().removeOperator(this.getUniqueId());
+		}
+
 	}
 
 	@Override

@@ -21,7 +21,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Replica of the Bukkit internal PlayerList and CraftPlayerList implementation
@@ -40,6 +39,8 @@ public class MockPlayerList
 
 	private final @NotNull BanList ipBans = new MockBanList();
 	private final @NotNull BanList profileBans = new MockBanList();
+
+	private final Set<UUID> operators = Collections.synchronizedSet(new HashSet<>());
 
 	/**
 	 * Sets the maximum number of online players.
@@ -214,9 +215,7 @@ public class MockPlayerList
 	@NotNull
 	public Set<OfflinePlayer> getOperators()
 	{
-		return Stream.concat(this.onlinePlayers.stream(), this.offlinePlayers.stream())
-				.filter(OfflinePlayer::isOp)
-				.collect(Collectors.toSet());
+		return this.operators.stream().map(this::getOfflinePlayer).collect(Collectors.toSet());
 	}
 
 	/**
@@ -411,6 +410,26 @@ public class MockPlayerList
 	public void clearOfflinePlayers()
 	{
 		this.offlinePlayers.clear();
+	}
+
+	/**
+	 * Adds a Player to the list of known Operators.
+	 *
+	 * @param operator The {@link UUID} of the Operator to add.
+	 */
+	public void addOperator(UUID operator)
+	{
+		this.operators.add(operator);
+	}
+
+	/**
+	 * Removes a Player from the list of known Operators.
+	 *
+	 * @param operator The {@link UUID} of the Operator to remove.
+	 */
+	public void removeOperator(UUID operator)
+	{
+		this.operators.remove(operator);
 	}
 
 }

@@ -92,15 +92,20 @@ public class OfflinePlayerMock implements OfflinePlayer
 	@Override
 	public boolean isOp()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return MockBukkit.getMock().getPlayerList().getOperators().contains(this);
 	}
 
 	@Override
 	public void setOp(boolean value)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (value)
+		{
+			MockBukkit.getMock().getPlayerList().addOperator(this.uuid);
+		}
+		else
+		{
+			MockBukkit.getMock().getPlayerList().removeOperator(this.uuid);
+		}
 	}
 
 	@Override

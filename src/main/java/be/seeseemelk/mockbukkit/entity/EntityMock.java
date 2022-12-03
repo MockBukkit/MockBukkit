@@ -71,7 +71,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 
 	private static final AtomicInteger ENTITY_COUNTER = new AtomicInteger();
 
-	private final @NotNull ServerMock server;
+	protected final @NotNull ServerMock server;
 	private final @NotNull UUID uuid;
 	private final int id;
 	private Location location;
@@ -81,7 +81,6 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private final List<Entity> passengers = new ArrayList<>(0);
 	private final MetadataTable metadataTable = new MetadataTable();
 	private final PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
-	private boolean operator = false;
 	private @NotNull Component name = Component.text("entity");
 	private @Nullable Component customName = null;
 	private boolean customNameVisible = false;
@@ -372,13 +371,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public boolean isOp()
 	{
-		return operator;
+		return false;
 	}
 
 	@Override
 	public void setOp(boolean isOperator)
 	{
-		operator = isOperator;
+		throw new UnsupportedOperationException("This does nothing in CraftBukkit");
 	}
 
 	@Override

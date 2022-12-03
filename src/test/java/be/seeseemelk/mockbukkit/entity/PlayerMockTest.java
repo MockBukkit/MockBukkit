@@ -2294,4 +2294,36 @@ class PlayerMockTest
 		assertThrows(IllegalArgumentException.class, () -> player.setHealthScale(Double.NaN));
 	}
 
+	@Test
+	void hasPlayedBefore_AddedToServer_False()
+	{
+		PlayerMock player = server.addPlayer();
+
+		assertFalse(player.hasPlayedBefore());
+	}
+
+	@Test
+	void hasPlayedBefore_NotAddedToServer_False()
+	{
+		PlayerMock player = new PlayerMock(server, "player");
+
+		assertFalse(player.hasPlayedBefore());
+	}
+
+	@Test
+	void testSetOpFalse()
+	{
+		PlayerMock player = server.addPlayer();
+		player.setOp(false);
+		assertFalse(player.isOp());
+	}
+
+	@Test
+	void testSetOpTrue()
+	{
+		PlayerMock player = server.addPlayer();
+		player.setOp(true);
+		assertTrue(player.isOp());
+	}
+
 }
