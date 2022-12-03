@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * This interface provides methods to assert sounds that were heard. This is implemented by {@link PlayerMock}, however
- * the sheer amount of assertion methods did warrant a seperate a file at some point.
+ * the sheer amount of assertion methods did warrant a separate a file at some point.
  *
  * @author TheBusyBiscuit
  * @see PlayerMock
@@ -29,12 +29,20 @@ public interface SoundReceiver
 	@NotNull
 	List<AudioExperience> getHeardSounds();
 
+	/**
+	 * Adds a heard sound.
+	 *
+	 * @param audioExperience An {@link AudioExperience} representing the heard sound.
+	 */
 	default void addHeardSound(@NotNull AudioExperience audioExperience)
 	{
 		Preconditions.checkNotNull(audioExperience, "An audio experience must not be null.");
 		getHeardSounds().add(audioExperience);
 	}
 
+	/**
+	 * Clears all heard sounds.
+	 */
 	default void clearSounds()
 	{
 		getHeardSounds().clear();
@@ -74,42 +82,92 @@ public interface SoundReceiver
 		assertSoundHeard("Sound Heard Assertion failed", sound);
 	}
 
+	/**
+	 * Asserts that a sound was heard.
+	 *
+	 * @param sound     The sound that should've been heard.
+	 * @param predicate A predicate to test the {@link AudioExperience} against.
+	 */
 	default void assertSoundHeard(@NotNull Sound sound, @NotNull Predicate<AudioExperience> predicate)
 	{
 		assertSoundHeard("Sound Heard Assertion failed", sound, predicate);
 	}
 
+	/**
+	 * Asserts that a sound was heard.
+	 *
+	 * @param sound     The sound that should've been heard.
+	 * @param predicate A predicate to test the {@link AudioExperience} against.
+	 */
 	default void assertSoundHeard(net.kyori.adventure.sound.@NotNull Sound sound, @NotNull Predicate<AudioExperience> predicate)
 	{
 		assertSoundHeard("Sound Heard Assertion failed", sound, predicate);
 	}
 
+	/**
+	 * Asserts that a sound was heard.
+	 *
+	 * @param sound     The sound name that should've been heard.
+	 * @param predicate A predicate to test the {@link AudioExperience} against.
+	 */
 	default void assertSoundHeard(@NotNull String sound, @NotNull Predicate<AudioExperience> predicate)
 	{
 		assertSoundHeard("Sound Heard Assertion failed", sound, predicate);
 	}
 
+	/**
+	 * Asserts that a sound was heard.
+	 *
+	 * @param message The message to fail with.
+	 * @param sound   The sound that should've been heard.
+	 */
 	default void assertSoundHeard(@NotNull String message, @NotNull Sound sound)
 	{
 		assertSoundHeard(message, sound, e -> true);
 	}
 
+	/**
+	 * Asserts that a sound was heard.
+	 *
+	 * @param message The message to fail with.
+	 * @param sound   The sound that should've been heard.
+	 */
 	default void assertSoundHeard(@NotNull String message, net.kyori.adventure.sound.@NotNull Sound sound)
 	{
 		assertSoundHeard(message, sound, e -> true);
 	}
 
+	/**
+	 * Asserts that a sound was heard.
+	 *
+	 * @param message The message to fail with.
+	 * @param sound   The sound name that should've been heard.
+	 */
 	default void assertSoundHeard(@NotNull String message, @NotNull String sound)
 	{
 		assertSoundHeard(message, sound, e -> true);
 	}
 
+	/**
+	 * Asserts that a sound was heard.
+	 *
+	 * @param message   The message to fail with.
+	 * @param sound     The sound that should've been heard.
+	 * @param predicate A predicate to test the {@link AudioExperience} against.
+	 */
 	default void assertSoundHeard(@NotNull String message, @NotNull Sound sound,
 								  @NotNull Predicate<AudioExperience> predicate)
 	{
 		assertSoundHeard(message, sound.getKey().getKey(), predicate);
 	}
 
+	/**
+	 * Asserts that a sound was heard.
+	 *
+	 * @param message   The message to fail with.
+	 * @param sound     The sound that should've been heard.
+	 * @param predicate A predicate to test the {@link AudioExperience} against.
+	 */
 	default void assertSoundHeard(@NotNull String message, net.kyori.adventure.sound.@NotNull Sound sound,
 								  @NotNull Predicate<AudioExperience> predicate)
 	{
@@ -119,6 +177,13 @@ public interface SoundReceiver
 		assertSoundHeard(message, sound.name().asString(), test.and(predicate));
 	}
 
+	/**
+	 * Asserts that a sound was heard.
+	 *
+	 * @param message   The message to fail with.
+	 * @param sound     The sound name that should've been heard.
+	 * @param predicate A predicate to test the {@link AudioExperience} against.
+	 */
 	default void assertSoundHeard(@NotNull String message, @NotNull String sound,
 								  @NotNull Predicate<AudioExperience> predicate)
 	{

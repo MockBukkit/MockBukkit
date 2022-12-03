@@ -12,6 +12,11 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
+/**
+ * Mock implementation of a {@link Bee}.
+ *
+ * @see AnimalsMock
+ */
 public class BeeMock extends AnimalsMock implements Bee
 {
 
@@ -23,6 +28,12 @@ public class BeeMock extends AnimalsMock implements Bee
 	private int cannotEnterHiveTicks = 0;
 	private @NotNull TriState rollingOverride = TriState.NOT_SET;
 
+	/**
+	 * Constructs a new {@link BeeMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	public BeeMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);

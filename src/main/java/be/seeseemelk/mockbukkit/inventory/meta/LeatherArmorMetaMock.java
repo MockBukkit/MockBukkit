@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
+import com.destroystokyo.paper.inventory.meta.ArmorStandMeta;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
@@ -9,21 +10,29 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 
 /**
- * This {@link ItemMetaMock} mocks the implementation of {@link LeatherArmorMeta}.
+ * Mock implementation of an {@link LeatherArmorMeta}.
  *
- * @author TheBusyBiscuit
- **/
+ * @see ItemMetaMock
+ */
 public class LeatherArmorMetaMock extends ItemMetaMock implements LeatherArmorMeta
 {
 
 	private Color color;
 
+	/**
+	 * Constructs a new {@link LeatherArmorMetaMock}.
+	 */
 	public LeatherArmorMetaMock()
 	{
 		super();
 		this.color = Bukkit.getItemFactory().getDefaultLeatherColor();
 	}
 
+	/**
+	 * Constructs a new {@link LeatherArmorMetaMock}, cloning the data from another.
+	 *
+	 * @param meta The meta to clone.
+	 */
 	public LeatherArmorMetaMock(@NotNull LeatherArmorMeta meta)
 	{
 		super(meta);

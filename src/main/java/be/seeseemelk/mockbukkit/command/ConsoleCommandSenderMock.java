@@ -22,6 +22,9 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.UUID;
 
+/**
+ * Mock implementation of a {@link ConsoleCommandSender}.
+ */
 public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTarget
 {
 

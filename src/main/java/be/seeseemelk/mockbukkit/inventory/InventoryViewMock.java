@@ -6,6 +6,9 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Mock implementation of an {@link InventoryView}.
+ */
 public abstract class InventoryViewMock extends InventoryView
 {
 
@@ -15,6 +18,15 @@ public abstract class InventoryViewMock extends InventoryView
 	private InventoryType type;
 	private final String name;
 
+	/**
+	 * Constructs a new {@link InventoryViewMock} with the provided parameters.
+	 *
+	 * @param player The player this view is for.
+	 * @param name   The name of the view (title).
+	 * @param top    The top inventory.
+	 * @param bottom The bottom inventory.
+	 * @param type   The type of the inventory.
+	 */
 	protected InventoryViewMock(HumanEntity player, String name, Inventory top, Inventory bottom, InventoryType type)
 	{
 		this.player = player;
