@@ -25,6 +25,7 @@ public abstract class MobMock extends LivingEntityMock implements Mob
 
 	private boolean aware = true;
 	private boolean leftHanded;
+	private LivingEntity target;
 
 	/**
 	 * Constructs a new {@link MobMock} on the provided {@link ServerMock} with a specified {@link UUID}.
@@ -110,16 +111,14 @@ public abstract class MobMock extends LivingEntityMock implements Mob
 	@Override
 	public void setTarget(@Nullable LivingEntity target)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.target = target;
 	}
 
 	@Nullable
 	@Override
 	public LivingEntity getTarget()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.target;
 	}
 
 	@Override

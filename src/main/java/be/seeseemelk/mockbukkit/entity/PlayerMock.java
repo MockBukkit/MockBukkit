@@ -24,7 +24,6 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.serializer.bungeecord.BungeeComponentSerializer;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
-import net.kyori.adventure.util.TriState;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.BanList;
@@ -135,7 +134,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private @NotNull GameMode previousGamemode = gamemode;
 
 	private boolean online;
-	private final @NotNull ServerMock server;
 	private @Nullable Component displayName = null;
 	private @Nullable Component playerListName = null;
 	private @Nullable Component playerListHeader = null;
@@ -198,7 +196,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		setName(name);
 		setDisplayName(name);
 		this.online = true;
-		this.server = server;
 
 		if (Bukkit.getWorlds().isEmpty())
 		{
@@ -2693,21 +2690,31 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public boolean isOp()
+	{
+		return server.getPlayerList().getOperators().stream()
+				.anyMatch(op -> op.getPlayer() == this);
+	}
+
+	@Override
+	public void setOp(boolean isOperator)
+	{
+
+		if (isOperator)
+		{
+			server.getPlayerList().addOperator(this.getUniqueId());
+		}
+		else
+		{
+			server.getPlayerList().removeOperator(this.getUniqueId());
+		}
+
+	}
+
+	@Override
 	public Player.@NotNull Spigot spigot()
 	{
 		return playerSpigotMock;
-	}
-
-	@Override
-	public @NotNull TriState getFrictionState()
-	{
-		return null;
-	}
-
-	@Override
-	public void setFrictionState(@NotNull TriState state)
-	{
-
 	}
 
 	/**
