@@ -12,20 +12,20 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class LargeFireballMockTest
+class LargeFireballMockTest
 {
 
 	private LargeFireball fireball;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		ServerMock server = MockBukkit.mock();
 		fireball = new LargeFireballMock(server, UUID.randomUUID());
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
@@ -35,5 +35,5 @@ public class LargeFireballMockTest
 	{
 		assertEquals(EntityType.FIREBALL, fireball.getType());
 	}
-	
+
 }

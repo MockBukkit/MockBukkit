@@ -13,20 +13,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class WitherSkullMockTest
+class WitherSkullMockTest
 {
 
 	private WitherSkullMock witherSkull;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		ServerMock server = MockBukkit.mock();
 		witherSkull = new WitherSkullMock(server, UUID.randomUUID());
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}

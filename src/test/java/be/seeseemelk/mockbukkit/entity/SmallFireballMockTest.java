@@ -12,20 +12,20 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class SmallFireballMockTest
+class SmallFireballMockTest
 {
 
 	private SmallFireball smallFireball;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		ServerMock server = MockBukkit.mock();
 		smallFireball = new SmallFireballMock(server, UUID.randomUUID());
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}

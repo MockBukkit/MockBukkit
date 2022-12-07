@@ -13,7 +13,7 @@ public class FireballMock extends ProjectileMock implements Fireball
 
 	private boolean isIncendiary;
 	private @NotNull Vector direction = new Vector();
-	private float yield = 1.0f;
+	private float blastYield = 1.0f;
 
 	/**
 	 * Constructs a new {@link ProjectileMock} on the provided {@link ServerMock} with a specified {@link UUID}.
@@ -42,13 +42,13 @@ public class FireballMock extends ProjectileMock implements Fireball
 	@Override
 	public void setYield(float yield)
 	{
-		this.yield = yield;
+		this.blastYield = yield;
 	}
 
 	@Override
 	public float getYield()
 	{
-		return this.yield;
+		return this.blastYield;
 	}
 
 	@Override
