@@ -40,9 +40,9 @@ public class FireballMock extends ProjectileMock implements Fireball
 	}
 
 	@Override
-	public void setYield(float yield)
+	public void setYield(float blastYield)
 	{
-		this.blastYield = yield;
+		this.blastYield = blastYield;
 	}
 
 	@Override
