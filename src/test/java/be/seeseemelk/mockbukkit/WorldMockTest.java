@@ -1451,4 +1451,5 @@ class WorldMockTest
 		assertInstanceOf(WitherSkullMock.class, entity);
 		assertTrue(entity.isValid());
 	}
+
 }
