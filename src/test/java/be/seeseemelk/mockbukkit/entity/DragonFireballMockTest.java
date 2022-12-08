@@ -35,4 +35,5 @@ class DragonFireballMockTest
 	{
 		assertEquals(EntityType.DRAGON_FIREBALL, dragonFireball.getType());
 	}
+
 }

@@ -49,4 +49,5 @@ class WitherSkullMockTest
 	{
 		assertEquals(EntityType.WITHER_SKULL, witherSkull.getType());
 	}
+
 }

@@ -59,4 +59,5 @@ class SizedFireballMockTest
 	{
 		assertEquals(EntityType.FIREBALL, fireball.getType());
 	}
+
 }
