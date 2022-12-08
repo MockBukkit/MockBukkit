@@ -10,13 +10,18 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
+/**
+ * Mock implementation of a {@link SizedFireball}.
+ *
+ * @see FireballMock
+ */
 public class SizedFireballMock extends FireballMock implements SizedFireball
 {
 
 	private ItemStack displayItem = new ItemStack(Material.FIRE_CHARGE);
 
 	/**
-	 * Constructs a new {@link ProjectileMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link SizedFireballMock} on the provided {@link ServerMock} with a specified {@link UUID}.
 	 *
 	 * @param server The server to create the entity on.
 	 * @param uuid   The UUID of the entity.
