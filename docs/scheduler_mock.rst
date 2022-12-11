@@ -5,12 +5,16 @@ This schedulers is used in the same way as a normal scheduler except that it add
 
 Executing ticks
 ---------------
-The scheduler can be asked to perform a single tick during tick. ::
+The scheduler can be asked to perform a single tick during tick.
+
+.. code-block:: java
 
     server.getScheduler().performOneTick();
 
 If more ticks need to be executed in quick succession, it's possible to execute many ticks at once.
-The following code will perform a hundred ticks. ::
+The following code will perform a hundred ticks.
+
+.. code-block:: java
 
     server.getScheduler().performTicks(100L);
 
@@ -18,6 +22,8 @@ Using this method executes all ticks in order, as if they were executed on a rea
 
 Getting the current tick.
 -------------------------
-MockBukkit has an extra method that allows to get the number of ticks since MockBukkit was last started. ::
+MockBukkit has an extra method that allows to get the number of ticks since MockBukkit was last started.
+
+.. code-block:: java
 
     long tick = server.getScheduler().getCurrentTick();
