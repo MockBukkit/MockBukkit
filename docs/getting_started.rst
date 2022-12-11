@@ -43,7 +43,7 @@ Kotlin DSL
 ^^^^^^^^^^
 This is how you add the dependencies in Kotlin DSL
 
-.. code-block:: kotlin
+.. code-block::
     :linenos:
 
     repositories {
