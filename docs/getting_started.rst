@@ -28,7 +28,6 @@ Groovy DSL
 This is how you add the dependencies in Groovy DSL
 
 .. code-block:: groovy
-    :linenos:
 
     repositories {
         mavenCentral()
@@ -43,8 +42,7 @@ Kotlin DSL
 ^^^^^^^^^^
 This is how you add the dependencies in Kotlin DSL
 
-.. code-block::
-    :linenos:
+::
 
     repositories {
         mavenCentral()
