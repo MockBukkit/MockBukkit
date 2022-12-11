@@ -2326,4 +2326,87 @@ class PlayerMockTest
 		assertTrue(player.isOp());
 	}
 
+	@Test
+	void testPlayNoteZombie()
+	{
+		int note = 10;
+		player.playNote(player.getEyeLocation(), Instrument.ZOMBIE, new Note(note));
+		player.assertSoundHeard(Sound.BLOCK_NOTE_BLOCK_IMITATE_ZOMBIE, audio ->
+		{
+			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
+					&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
+		});
+	}
+
+	@Test
+	void testPlayNoteSkeleton()
+	{
+		int note = 10;
+		player.playNote(player.getEyeLocation(), Instrument.SKELETON, new Note(note));
+		player.assertSoundHeard(Sound.BLOCK_NOTE_BLOCK_IMITATE_SKELETON, audio ->
+		{
+			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
+					&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
+		});
+	}
+
+	@Test
+	void testPlayNoteCreeper()
+	{
+		int note = 10;
+		player.playNote(player.getEyeLocation(), Instrument.CREEPER, new Note(note));
+		player.assertSoundHeard(Sound.BLOCK_NOTE_BLOCK_IMITATE_CREEPER, audio ->
+		{
+			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
+					&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
+		});
+	}
+
+	@Test
+	void testPlayNoteDragon()
+	{
+		int note = 10;
+		player.playNote(player.getEyeLocation(), Instrument.DRAGON, new Note(note));
+		player.assertSoundHeard(Sound.BLOCK_NOTE_BLOCK_IMITATE_ENDER_DRAGON, audio ->
+		{
+			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
+					&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
+		});
+	}
+
+	@Test
+	void testPlayNoteWitherSkeleton()
+	{
+		int note = 10;
+		player.playNote(player.getEyeLocation(), Instrument.WITHER_SKELETON, new Note(note));
+		player.assertSoundHeard(Sound.BLOCK_NOTE_BLOCK_IMITATE_WITHER_SKELETON, audio ->
+		{
+			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
+					&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
+		});
+	}
+
+	@Test
+	void testPlayNotePiglin()
+	{
+		int note = 10;
+		player.playNote(player.getEyeLocation(), Instrument.PIGLIN, new Note(note));
+		player.assertSoundHeard(Sound.BLOCK_NOTE_BLOCK_IMITATE_PIGLIN, audio ->
+		{
+			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
+					&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
+		});
+	}
+
+	@Test
+	void testPlayNoteCustomHead()
+	{
+		int note = 10;
+		player.playNote(player.getEyeLocation(), Instrument.CUSTOM_HEAD, new Note(note));
+		player.assertSoundHeard(Sound.UI_BUTTON_CLICK, audio ->
+		{
+			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
+					&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
+		});
+	}
 }

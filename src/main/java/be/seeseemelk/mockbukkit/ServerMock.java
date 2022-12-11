@@ -1407,6 +1407,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	@Deprecated //v 1.19.3
 	public boolean shouldSendChatPreviews()
 	{
 		return this.serverConfiguration.shouldSendChatPreviews();
