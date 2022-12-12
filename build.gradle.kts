@@ -28,8 +28,8 @@ dependencies {
     implementation("org.hamcrest:hamcrest-library:2.2")
 
     // General utilities for the project
-    implementation("net.kyori:adventure-platform-bungeecord:4.1.2")
-    implementation("org.jetbrains:annotations:23.0.0")
+    implementation("net.kyori:adventure-platform-bungeecord:4.2.0")
+    implementation("org.jetbrains:annotations:23.1.0")
 
     // LibraryLoader dependencies
     implementation("org.apache.maven:maven-resolver-provider:3.8.5")
