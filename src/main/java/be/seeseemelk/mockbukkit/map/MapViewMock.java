@@ -1,10 +1,12 @@
 package be.seeseemelk.mockbukkit.map;
 
+import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import org.bukkit.World;
 import org.bukkit.map.MapRenderer;
 import org.bukkit.map.MapView;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -13,6 +15,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Mock implementation of a {@link MapView}.
+ */
 public class MapViewMock implements MapView
 {
 
@@ -23,6 +28,15 @@ public class MapViewMock implements MapView
 	private Scale scale;
 	private boolean locked;
 
+	/**
+	 * Constructs a new {@link MapViewMock} for the given world with the specified ID.
+	 * This is for internal use only, please use {@link ServerMock#createMap(World)} for creating maps.
+	 *
+	 * @param world The world this map is for.
+	 * @param id    The ID of the mop.
+	 * @see ServerMock#createMap(World)
+	 */
+	@ApiStatus.Internal
 	public MapViewMock(World world, int id)
 	{
 		this.world = world;
@@ -41,7 +55,7 @@ public class MapViewMock implements MapView
 	@Override
 	public boolean isVirtual()
 	{
-		return this.renderers.size() > 0 && !(this.renderers.get(0) instanceof MapRendererMock);
+		return !this.renderers.isEmpty() && !(this.renderers.get(0) instanceof MapRendererMock);
 	}
 
 	@Override

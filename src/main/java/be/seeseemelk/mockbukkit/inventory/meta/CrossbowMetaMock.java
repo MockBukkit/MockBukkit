@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.CompassMeta;
 import org.bukkit.inventory.meta.CrossbowMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -12,11 +13,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Mock implementation of a {@link CrossbowMeta}.
+ *
+ * @see ItemMetaMock
+ */
 public class CrossbowMetaMock extends ItemMetaMock implements CrossbowMeta
 {
 
 	private List<ItemStack> projectiles;
 
+	/**
+	 * Constructs a new {@link CrossbowMetaMock}.
+	 */
 	public CrossbowMetaMock()
 	{
 		super();
@@ -24,6 +33,11 @@ public class CrossbowMetaMock extends ItemMetaMock implements CrossbowMeta
 		this.projectiles = new ArrayList<>();
 	}
 
+	/**
+	 * Constructs a new {@link CrossbowMetaMock}, cloning the data from another.
+	 *
+	 * @param meta The meta to clone.
+	 */
 	public CrossbowMetaMock(@NotNull CrossbowMeta meta)
 	{
 		super(meta);

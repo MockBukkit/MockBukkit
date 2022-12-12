@@ -10,6 +10,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
+/**
+ * Mock implementation of a {@link Zombie}.
+ *
+ * @see MonsterMock
+ */
 public class ZombieMock extends MonsterMock implements Zombie
 {
 
@@ -19,6 +24,12 @@ public class ZombieMock extends MonsterMock implements Zombie
 	private boolean converting;
 	private int conversionTime;
 
+	/**
+	 * Constructs a new {@link ZombieMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	public ZombieMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);

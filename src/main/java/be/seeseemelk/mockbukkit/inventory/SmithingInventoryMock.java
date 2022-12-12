@@ -2,18 +2,28 @@ package be.seeseemelk.mockbukkit.inventory;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.AbstractHorseInventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.SmithingInventory;
 import org.jetbrains.annotations.Nullable;
 
-
+/**
+ * Mock implementation of an {@link SmithingInventory}.
+ *
+ * @see InventoryMock
+ */
 public class SmithingInventoryMock extends InventoryMock implements SmithingInventory
 {
 
 	private static final int RESULT_SLOT = 0;
 
+	/**
+	 * Constructs a new {@link SmithingInventoryMock} for the given holder.
+	 *
+	 * @param holder The holder of the inventory.
+	 */
 	public SmithingInventoryMock(@Nullable InventoryHolder holder)
 	{
 		super(holder, InventoryType.SMITHING);

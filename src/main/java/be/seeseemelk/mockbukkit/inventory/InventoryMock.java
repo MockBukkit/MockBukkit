@@ -25,6 +25,9 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * Mock implementation of an {@link Inventory}.
+ */
 public class InventoryMock implements Inventory
 {
 
@@ -37,6 +40,13 @@ public class InventoryMock implements Inventory
 	private int maxStackSize = MAX_STACK_SIZE;
 	private final @NotNull List<HumanEntity> viewers = new ArrayList<>();
 
+	/**
+	 * Constructs a new {@link InventoryMock} for the given holder, with a specific size and {@link InventoryType}.
+	 *
+	 * @param holder The holder of the inventory.
+	 * @param size   The size of the inventory. Must be 2, or a multiple of 9 between 9 and 54.
+	 * @param type   The type of the inventory.
+	 */
 	public InventoryMock(@Nullable InventoryHolder holder, int size, @NotNull InventoryType type)
 	{
 		Preconditions.checkArgument(2 == size || (9 <= size && size <= 54 && size % 9 == 0),
@@ -49,6 +59,13 @@ public class InventoryMock implements Inventory
 		items = new ItemStack[size];
 	}
 
+	/**
+	 * Constructs a new {@link InventoryMock} for the given holder with a specific {@link InventoryType}.
+	 * The size will be {@link InventoryType#getDefaultSize()}.
+	 *
+	 * @param holder The holder of the inventory.
+	 * @param type   The type of the inventory.
+	 */
 	public InventoryMock(@Nullable InventoryHolder holder, @NotNull InventoryType type)
 	{
 		Preconditions.checkNotNull(type, "The InventoryType must not be null!");
@@ -566,6 +583,11 @@ public class InventoryMock implements Inventory
 		return true;
 	}
 
+	/**
+	 * Creates a snapshot of the inventory.
+	 *
+	 * @return An inventory snapshot.
+	 */
 	@NotNull
 	public Inventory getSnapshot()
 	{

@@ -7,6 +7,10 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Random;
 import java.util.UUID;
 
+
+/**
+ * Used to construct random {@link PlayerMock}s and {@link OfflinePlayerMock}s.
+ */
 public final class PlayerMockFactory
 {
 
@@ -14,6 +18,11 @@ public final class PlayerMockFactory
 	private final Random random = new Random();
 	private int currentNameIndex;
 
+	/**
+	 * Constructs a new {@link PlayerMockFactory} for the provided {@link ServerMock}.
+	 *
+	 * @param server The server to create the factory for.
+	 */
 	public PlayerMockFactory(@NotNull ServerMock server)
 	{
 		Preconditions.checkNotNull(server, "Server cannot be null");

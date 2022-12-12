@@ -5,6 +5,7 @@ import be.seeseemelk.mockbukkit.ServerMock;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.TextColor;
+import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.junit.jupiter.api.AfterEach;
@@ -223,6 +224,30 @@ class ConsoleCommandSenderMockTest
 		TextComponent comp = Component.text().content("hi").color(TextColor.color(11141120)).build();
 		sender.sendMessage(comp);
 		sender.assertSaid(comp);
+	}
+
+	@Test
+	void spigot_sendMessage_SingleComponent() {
+		sender.spigot().sendMessage(new net.md_5.bungee.api.chat.TextComponent("Howdy"));
+		sender.assertSaid("Howdy");
+		sender.assertNoMoreSaid();
+	}
+
+	@Test
+	void spigot_sendMessage_SingleComponent_Null_ThrowsException() {
+		assertThrowsExactly(NullPointerException.class, () -> sender.spigot().sendMessage((BaseComponent) null));
+	}
+
+	@Test
+	void spigot_sendMessage_MultipleComponents() {
+		sender.spigot().sendMessage(new BaseComponent[] { new net.md_5.bungee.api.chat.TextComponent("Hello,"), new net.md_5.bungee.api.chat.TextComponent("world!")});
+		sender.assertSaid("Hello,world!");
+		sender.assertNoMoreSaid();
+	}
+
+	@Test
+	void spigot_sendMessage_MultipleComponents_Null_ThrowsException() {
+		assertThrowsExactly(NullPointerException.class, () -> sender.spigot().sendMessage((BaseComponent[]) null));
 	}
 
 }

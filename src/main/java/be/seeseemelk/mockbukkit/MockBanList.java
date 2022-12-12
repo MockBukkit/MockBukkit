@@ -10,6 +10,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Mock implementation of a {@link BanList}.
+ */
 public class MockBanList implements BanList
 {
 
@@ -47,6 +50,9 @@ public class MockBanList implements BanList
 		this.bans.remove(target);
 	}
 
+	/**
+	 * Mock implementation of a {@link BanEntry}.
+	 */
 	public static final class MockBanEntry implements BanEntry
 	{
 
@@ -56,6 +62,14 @@ public class MockBanList implements BanList
 		private Date created;
 		private Date expires;
 
+		/**
+		 * Constructs a new {@link MockBanEntry}.
+		 *
+		 * @param target  The target of the ban.
+		 * @param expires When the ban expires, or null for a permanent ban.
+		 * @param reason  The reason for the ban.
+		 * @param source  The source of the ban.
+		 */
 		public MockBanEntry(final String target, final Date expires, final String reason, final String source)
 		{
 			this.target = target;

@@ -8,6 +8,9 @@ import org.jetbrains.annotations.Nullable;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * Represents an object that can receive messages.
+ */
 @FunctionalInterface
 public interface MessageTarget
 {

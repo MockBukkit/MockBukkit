@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import com.destroystokyo.paper.inventory.meta.ArmorStandMeta;
 import org.bukkit.Color;
 import org.bukkit.inventory.meta.MapMeta;
 import org.bukkit.map.MapView;
@@ -9,6 +10,11 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
+/**
+ * Mock implementation of an {@link MapMeta}.
+ *
+ * @see ItemMetaMock
+ */
 public class MapMetaMock extends ItemMetaMock implements MapMeta
 {
 
@@ -21,11 +27,19 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 	private @Nullable Color color;
 	private byte scaling = SCALING_EMPTY;
 
+	/**
+	 * Constructs a new {@link MapMetaMock}.
+	 */
 	public MapMetaMock()
 	{
 		super();
 	}
 
+	/**
+	 * Constructs a new {@link MapMetaMock}, cloning the data from another.
+	 *
+	 * @param meta The meta to clone.
+	 */
 	public MapMetaMock(@NotNull MapMeta meta)
 	{
 		super(meta);

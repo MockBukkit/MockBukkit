@@ -16,15 +16,19 @@ import be.seeseemelk.mockbukkit.entity.CodMock;
 import be.seeseemelk.mockbukkit.entity.CowMock;
 import be.seeseemelk.mockbukkit.entity.CreeperMock;
 import be.seeseemelk.mockbukkit.entity.DonkeyMock;
+import be.seeseemelk.mockbukkit.entity.DragonFireballMock;
 import be.seeseemelk.mockbukkit.entity.EggMock;
+import be.seeseemelk.mockbukkit.entity.ElderGuardianMock;
 import be.seeseemelk.mockbukkit.entity.EndermanMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
+import be.seeseemelk.mockbukkit.entity.FireballMock;
 import be.seeseemelk.mockbukkit.entity.FireworkMock;
 import be.seeseemelk.mockbukkit.entity.FoxMock;
 import be.seeseemelk.mockbukkit.entity.FrogMock;
 import be.seeseemelk.mockbukkit.entity.GhastMock;
 import be.seeseemelk.mockbukkit.entity.GiantMock;
 import be.seeseemelk.mockbukkit.entity.GoatMock;
+import be.seeseemelk.mockbukkit.entity.GuardianMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
 import be.seeseemelk.mockbukkit.entity.LlamaMock;
 import be.seeseemelk.mockbukkit.entity.MuleMock;
@@ -36,12 +40,14 @@ import be.seeseemelk.mockbukkit.entity.SalmonMock;
 import be.seeseemelk.mockbukkit.entity.SheepMock;
 import be.seeseemelk.mockbukkit.entity.SkeletonHorseMock;
 import be.seeseemelk.mockbukkit.entity.SkeletonMock;
+import be.seeseemelk.mockbukkit.entity.SmallFireballMock;
 import be.seeseemelk.mockbukkit.entity.SpiderMock;
 import be.seeseemelk.mockbukkit.entity.StrayMock;
 import be.seeseemelk.mockbukkit.entity.TadpoleMock;
 import be.seeseemelk.mockbukkit.entity.TropicalFishMock;
 import be.seeseemelk.mockbukkit.entity.WardenMock;
 import be.seeseemelk.mockbukkit.entity.WitherSkeletonMock;
+import be.seeseemelk.mockbukkit.entity.WitherSkullMock;
 import be.seeseemelk.mockbukkit.entity.WolfMock;
 import be.seeseemelk.mockbukkit.entity.ZombieHorseMock;
 import be.seeseemelk.mockbukkit.entity.ZombieMock;
@@ -604,14 +610,21 @@ class WorldMockTest
 	void spawn_NullLocation_ThrowsException()
 	{
 		WorldMock world = new WorldMock();
-		assertThrowsExactly(IllegalArgumentException.class, () -> world.spawn(null, Zombie.class));
+		assertThrowsExactly(NullPointerException.class, () -> world.spawn(null, Zombie.class));
 	}
 
 	@Test
 	void spawn_NullClass_ThrowsException()
 	{
 		WorldMock world = new WorldMock();
-		assertThrowsExactly(IllegalArgumentException.class, () -> world.spawn(new Location(world, 0, 5, 0), null));
+		assertThrowsExactly(NullPointerException.class, () -> world.spawn(new Location(world, 0, 5, 0), null));
+	}
+
+	@Test
+	void spawn_NullReason_ThrowsException()
+	{
+		WorldMock world = new WorldMock();
+		assertThrowsExactly(NullPointerException.class, () -> world.spawn(new Location(world, 0, 5, 0), Zombie.class, (CreatureSpawnEvent.SpawnReason) null));
 	}
 
 	@Test
@@ -1381,6 +1394,62 @@ class WorldMockTest
 		ChunkSnapshot snapshot = world.getEmptyChunkSnapshot(0, 0, false, false);
 
 		assertEquals(69, snapshot.getCaptureFullTime());
+	}
+
+	@Test
+	void testSpawnGuardian()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.GUARDIAN);
+		assertInstanceOf(GuardianMock.class, entity);
+		assertTrue(entity.isValid());
+	}
+
+	@Test
+	void testSpawnElderGuardian()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ELDER_GUARDIAN);
+		assertInstanceOf(ElderGuardianMock.class, entity);
+		assertTrue(entity.isValid());
+	}
+
+	@Test
+	void testSpawnSmallFireball()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.SMALL_FIREBALL);
+		assertInstanceOf(SmallFireballMock.class, entity);
+		assertTrue(entity.isValid());
+	}
+
+	@Test
+	void testSpawnLargeFireball()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.FIREBALL);
+		assertInstanceOf(FireballMock.class, entity);
+		assertTrue(entity.isValid());
+	}
+
+
+	@Test
+	void testSpawnDragonFireball()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.DRAGON_FIREBALL);
+		assertInstanceOf(DragonFireballMock.class, entity);
+		assertTrue(entity.isValid());
+	}
+
+
+	@Test
+	void testSpawnWitherSkull()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.WITHER_SKULL);
+		assertInstanceOf(WitherSkullMock.class, entity);
+		assertTrue(entity.isValid());
 	}
 
 }

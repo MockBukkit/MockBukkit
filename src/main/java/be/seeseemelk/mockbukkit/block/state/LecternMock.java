@@ -12,23 +12,45 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * Mock implementation of a {@link Lectern}.
+ *
+ * @see ContainerMock
+ */
 public class LecternMock extends ContainerMock implements Lectern
 {
 
 	private int currentPage;
 
+	/**
+	 * Constructs a new {@link LecternMock} for the provided {@link Material}.
+	 * Only supports {@link Material#LECTERN}
+	 *
+	 * @param material The material this state is for.
+	 */
 	public LecternMock(@NotNull Material material)
 	{
 		super(material);
 		checkType(material, Material.LECTERN);
 	}
 
+	/**
+	 * Constructs a new {@link LecternMock} for the provided {@link Block}.
+	 * Only supports {@link Material#LECTERN}
+	 *
+	 * @param block The block this state is for.
+	 */
 	protected LecternMock(@NotNull Block block)
 	{
 		super(block);
 		checkType(block, Material.LECTERN);
 	}
 
+	/**
+	 * Constructs a new {@link LecternMock} by cloning the data from an existing one.
+	 *
+	 * @param state The state to clone.
+	 */
 	protected LecternMock(@NotNull LecternMock state)
 	{
 		super(state);

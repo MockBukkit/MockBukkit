@@ -4,6 +4,8 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.Tag;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serial;
+
 /**
  * An {@link TagMisconfigurationException} is thrown whenever a {@link Tag} contains illegal, invalid or unknown values.
  *
@@ -12,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
 public class TagMisconfigurationException extends Exception
 {
 
+	@Serial
 	private static final long serialVersionUID = 5412127960821774280L;
 
 	/**

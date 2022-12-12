@@ -1051,4 +1051,28 @@ class EntityMockTest
 		assertFalse(entity.hasGravity());
 	}
 
+	@Test
+	void getEntityId()
+	{
+		assertNotEquals(0, entity.getEntityId());
+	}
+
+	@Test
+	void entityIdIncrements()
+	{
+		assertEquals(entity.getEntityId() + 1, new SimpleEntityMock(server).getEntityId());
+	}
+
+	@Test
+	void testSetOpThrowsException()
+	{
+		assertThrows(UnsupportedOperationException.class, () -> entity.setOp(true));
+	}
+
+	@Test
+	void testIsOpReturnsFalse()
+	{
+		assertFalse(entity.isOp());
+	}
+
 }

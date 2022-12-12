@@ -9,24 +9,46 @@ import org.bukkit.block.CommandBlock;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * Mock implementation of a {@link CommandBlock}.
+ *
+ * @see TileStateMock
+ */
 public class CommandBlockMock extends TileStateMock implements CommandBlock, CommandBlockHolderMock
 {
 
 	private Component name;
 	private String command;
 
+	/**
+	 * Constructs a new {@link CommandBlockMock} for the provided {@link Material}.
+	 * Only supports {@link Material#COMMAND_BLOCK}, {@link Material#REPEATING_COMMAND_BLOCK}, and {@link Material#CHAIN_COMMAND_BLOCK}.
+	 *
+	 * @param material The material this state is for.
+	 */
 	public CommandBlockMock(@NotNull Material material)
 	{
 		super(material);
 		checkType(material, Material.COMMAND_BLOCK, Material.REPEATING_COMMAND_BLOCK, Material.CHAIN_COMMAND_BLOCK);
 	}
 
+	/**
+	 * Constructs a new {@link CommandBlockMock} for the provided {@link Block}.
+	 * Only supports {@link Material#COMMAND_BLOCK}, {@link Material#REPEATING_COMMAND_BLOCK}, and {@link Material#CHAIN_COMMAND_BLOCK}.
+	 *
+	 * @param block The block this state is for.
+	 */
 	protected CommandBlockMock(@NotNull Block block)
 	{
 		super(block);
 		checkType(block, Material.COMMAND_BLOCK, Material.REPEATING_COMMAND_BLOCK, Material.CHAIN_COMMAND_BLOCK);
 	}
 
+	/**
+	 * Constructs a new {@link CommandBlockMock} by cloning the data from an existing one.
+	 *
+	 * @param state The state to clone.
+	 */
 	protected CommandBlockMock(@NotNull CommandBlockMock state)
 	{
 		super(state);
