@@ -2409,4 +2409,5 @@ class PlayerMockTest
 					&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
 		});
 	}
+
 }
