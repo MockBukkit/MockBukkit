@@ -1424,6 +1424,7 @@ public class ServerMock extends Server.Spigot implements Server
 	 * @see ServerMock#shouldSendChatPreviews()
 	 * @deprecated Chat previews were removed in 1.19.3.
 	 */
+	@Deprecated(forRemoval = true)
 	public void setShouldSendChatPreviews(boolean shouldSendChatPreviews)
 	{
 		this.serverConfiguration.setShouldSendChatPreviews(shouldSendChatPreviews);
