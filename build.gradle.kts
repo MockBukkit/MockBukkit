@@ -2,8 +2,6 @@ import java.io.ByteArrayOutputStream
 
 plugins {
     id("java-library")
-    id("eclipse")
-    id("idea")
     id("jacoco")
     id("maven-publish")
     id("signing")
