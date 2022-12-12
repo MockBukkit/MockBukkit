@@ -13,6 +13,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -35,6 +36,13 @@ class MockBukkitTest
 		{
 			MockBukkit.unmock();
 		}
+	}
+
+	@Test
+	void paperApiFullVersion_IsReplaced()
+	{
+		assertNotNull(MockBukkit.PAPER_API_FULL_VERSION);
+		assertNotEquals("{paper.api.full-version}", MockBukkit.PAPER_API_FULL_VERSION);
 	}
 
 	@Test

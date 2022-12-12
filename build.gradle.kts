@@ -1,5 +1,4 @@
 import java.io.ByteArrayOutputStream
-import java.util.Properties
 
 plugins {
     id("java-library")
@@ -8,6 +7,7 @@ plugins {
     id("jacoco")
     id("maven-publish")
     id("signing")
+    id("net.kyori.blossom") version "1.3.1"
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
 }
 
@@ -23,7 +23,7 @@ repositories {
 
 dependencies {
     // Paper API
-    api("io.papermc.paper:paper-api:${property("mockbukkit.api.full-version")}")
+    api("io.papermc.paper:paper-api:${property("paper.api.full-version")}")
 
     // Dependencies for Unit Tests
     implementation("org.junit.jupiter:junit-jupiter:5.9.1")
@@ -61,17 +61,7 @@ tasks {
                 // Custom options
                 addBooleanOption("html5", true)
                 addStringOption("-release", "17")
-                links("https://jd.papermc.io/paper/${project.property("mockbukkit.api.version")}/")
-            }
-        }
-    }
-
-    processResources {
-        doLast {
-            file("${buildDir}/resources/main/build.properties").bufferedWriter().use {
-                val p = Properties()
-                p["full-api-version"] = project.property("mockbukkit.api.full-version")
-                p.store(it, null)
+                links("https://jd.papermc.io/paper/${project.property("paper.api.version")}/")
             }
         }
     }
@@ -85,6 +75,14 @@ tasks {
     test {
         useJUnitPlatform()
     }
+}
+
+blossom {
+    val metadata = "src/main/java/be/seeseemelk/mockbukkit/MockBukkit.java"
+    fun repl(token: String) {
+        replaceToken("\"{$token}\"", "\"${project.property(token)}\"", metadata)
+    }
+    repl("paper.api.full-version")
 }
 
 java {
@@ -116,12 +114,12 @@ publishing {
                 scm {
                     connection.set("scm:git:git://github.com/MockBukkit/MockBukkit.git")
                     developerConnection.set("scm:git:ssh://github.com:MockBukkit/MockBukkit.git")
-                    url.set("https://github.com/MockBukkit/MockBukkit/tree/v${property("mockbukkit.api.version")}")
+                    url.set("https://github.com/MockBukkit/MockBukkit/tree/v${property("paper.api.version")}")
                 }
                 licenses {
                     license {
                         name.set("MIT License")
-                        url.set("https://github.com/MockBukkit/MockBukkit/blob/v${property("mockbukkit.api.version")}/LICENSE")
+                        url.set("https://github.com/MockBukkit/MockBukkit/blob/v${property("paper.api.version")}/LICENSE")
                     }
                 }
                 developers {
