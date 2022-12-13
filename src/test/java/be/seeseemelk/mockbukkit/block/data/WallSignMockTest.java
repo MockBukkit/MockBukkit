@@ -3,7 +3,6 @@ package be.seeseemelk.mockbukkit.block.data;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Set;
 
 import org.bukkit.Location;
@@ -11,7 +10,6 @@ import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
-import org.bukkit.block.data.type.WallSign;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -22,7 +20,6 @@ import org.junit.jupiter.api.Test;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.WorldMock;
-import be.seeseemelk.mockbukkit.block.state.SignMock;
 
 class WallSignMockTest {
 
@@ -48,7 +45,7 @@ class WallSignMockTest {
         Block signBlock = world.getBlockAt(new Location(world,0,2,1));
         signBlock.setType(Material.OAK_SIGN);
 
-        Assertions.assertEquals(SignMock.class,signBlock.getBlockData().getClass());
+        Assertions.assertEquals(WallSignMock.class,signBlock.getBlockData().getClass());
     }
     
     
