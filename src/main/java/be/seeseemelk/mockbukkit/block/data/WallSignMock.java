@@ -13,8 +13,12 @@ import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.WATERLOGGED;
 
 public class WallSignMock extends BlockDataMock implements WallSign{
     
-    private final static Set<BlockFace> possibleFaces = Set.of(BlockFace.EAST, BlockFace.NORTH,BlockFace.WEST, BlockFace.SOUTH);
-    
+    /**
+     * Constructs a new {@link WallSignMock} for the provided {@link Material}.
+     * Only supports materials in {@link Tag#WALL_SIGNS}
+     * 
+     * @param type The material this data is for.
+     */
     WallSignMock(@NotNull Material type) {
         super(type);
         checkType(type, Tag.WALL_SIGNS);
@@ -38,7 +42,7 @@ public class WallSignMock extends BlockDataMock implements WallSign{
 
     @Override
     public @NotNull Set<BlockFace> getFaces() {
-        return possibleFaces;
+        return Set.of(BlockFace.EAST, BlockFace.NORTH,BlockFace.WEST, BlockFace.SOUTH);
     }
 
     @Override
