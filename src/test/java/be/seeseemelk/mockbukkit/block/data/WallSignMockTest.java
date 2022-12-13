@@ -43,7 +43,7 @@ class WallSignMockTest {
     void constructor_FullConstruction() {
         WorldMock world = new WorldMock();
         Block signBlock = world.getBlockAt(new Location(world,0,2,1));
-        signBlock.setType(Material.OAK_SIGN);
+        signBlock.setType(Material.OAK_WALL_SIGN);
 
         Assertions.assertEquals(WallSignMock.class,signBlock.getBlockData().getClass());
     }
