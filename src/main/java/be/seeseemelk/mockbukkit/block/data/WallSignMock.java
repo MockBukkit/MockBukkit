@@ -22,7 +22,7 @@ public class WallSignMock extends BlockDataMock implements WallSign {
 	 * 
 	 * @param type The material this data is for.
 	 */
-	WallSignMock(@NotNull Material type) {
+	public WallSignMock(@NotNull Material type) {
 		super(type);
 		checkType(type, Tag.WALL_SIGNS);
 		this.setFacing(BlockFace.NORTH);
