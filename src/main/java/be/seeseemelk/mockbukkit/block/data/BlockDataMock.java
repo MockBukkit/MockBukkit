@@ -322,8 +322,9 @@ public class BlockDataMock implements BlockData
 		else if (Tag.CAMPFIRES.isTagged(material))
 		{
 			return new CampfireMock(material);
-		} 
-		else if (Tag.WALL_SIGNS.isTagged(material)) {
+		}
+		else if (Tag.WALL_SIGNS.isTagged(material))
+		{
 			return new WallSignMock(material);
 		}
 		return null;
