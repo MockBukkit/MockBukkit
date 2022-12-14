@@ -84,6 +84,11 @@ class WallSignMockTest {
 		Set<BlockFace> faces = sign.getFaces();
 		assertThrows(UnsupportedOperationException.class, () -> faces.add(BlockFace.NORTH_EAST));
 	}
+	
+	@Test
+	void getFacing_notNull() {
+		assertThrows(NullPointerException.class, () -> sign.setFacing(null));
+	}
 
 	@Test
 	void setWaterLogged() {
@@ -106,4 +111,6 @@ class WallSignMockTest {
 			assertInstanceOf(WallSignMock.class, BlockDataMock.mock(material));
 		}
 	}
+	
+	
 }
