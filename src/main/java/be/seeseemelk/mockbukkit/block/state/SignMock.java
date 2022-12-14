@@ -24,6 +24,8 @@ public class SignMock extends TileStateMock implements Sign
 {
 
 	private final String[] lines = { "", "", "", "" };
+	private DyeColor color = DyeColor.BLACK;
+	private boolean glowing;
 
 	/**
 	 * Constructs a new {@link SignMock} for the provided {@link Material}.
@@ -137,29 +139,26 @@ public class SignMock extends TileStateMock implements Sign
 	@Override
 	public boolean isGlowingText()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return glowing;
 	}
 
 	@Override
 	public void setGlowingText(boolean glowing)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.glowing = glowing;
 	}
 
 	@Override
 	public DyeColor getColor()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return color;
 	}
 
 	@Override
 	public void setColor(DyeColor color)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(color, "Color can not be null!");
+		this.color = color;
 	}
 
 	@Override

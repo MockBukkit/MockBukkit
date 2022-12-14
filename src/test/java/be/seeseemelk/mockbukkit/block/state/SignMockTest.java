@@ -5,6 +5,8 @@ import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import com.destroystokyo.paper.MaterialTags;
 import net.kyori.adventure.text.Component;
+
+import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.junit.jupiter.api.AfterEach;
@@ -19,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class SignMockTest
 {
@@ -145,4 +148,17 @@ class SignMockTest
 		assertInstanceOf(SignMock.class, BlockStateMock.mockState(block));
 	}
 
+	@Test
+	void setGetColor()
+	{
+		sign.setColor(DyeColor.BLUE);
+		assertEquals(DyeColor.BLUE, sign.getColor());
+		assertThrows(NullPointerException.class, () -> sign.setColor(null));
+	}
+	
+	@Test
+	void setGetGlowing() {
+		sign.setGlowingText(true);
+		assertTrue(sign.isGlowingText());
+	}
 }
