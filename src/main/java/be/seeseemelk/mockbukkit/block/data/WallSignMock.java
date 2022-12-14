@@ -36,9 +36,7 @@ public class WallSignMock extends BlockDataMock implements WallSign {
 
 	@Override
 	public void setFacing(@NotNull BlockFace facing) {
-		if (!getFaces().contains(facing)) {
-			throw new IllegalArgumentException("Invalid face: " + facing);
-		}
+		Preconditions.checkArgument(getFaces().contains(facing), "Invalid face. Must be one of " + getFaces());
 		super.set(FACING, facing);
 	}
 
