@@ -17,6 +17,7 @@ public class ChunkMock implements Chunk
 	private final int x;
 	private final int z;
 	private boolean loaded = true;
+	private boolean slimeChunk = false;
 
 	protected ChunkMock(final World world, final int x, final int z)
 	{
@@ -110,11 +111,14 @@ public class ChunkMock implements Chunk
 		return true;
 	}
 
+	public void setSlimeChunk(boolean slimeChunk) {
+		this.slimeChunk = slimeChunk;
+	}
+
 	@Override
 	public boolean isSlimeChunk()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return slimeChunk;
 	}
 	
 	@Override
