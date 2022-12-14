@@ -1,18 +1,12 @@
 package be.seeseemelk.mockbukkit;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.ThreadLocalRandom;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-
+import be.seeseemelk.mockbukkit.block.BlockMock;
+import be.seeseemelk.mockbukkit.entity.EntityMock;
+import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
+import be.seeseemelk.mockbukkit.entity.FireworkMock;
+import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
+import be.seeseemelk.mockbukkit.entity.ZombieMock;
+import com.google.common.base.Preconditions;
 import org.bukkit.BlockChangeDelegate;
 import org.bukkit.Chunk;
 import org.bukkit.ChunkSnapshot;
@@ -58,48 +52,58 @@ import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
-import com.google.common.base.Preconditions;
-
-import be.seeseemelk.mockbukkit.block.BlockMock;
-import be.seeseemelk.mockbukkit.entity.EntityMock;
-import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
-import be.seeseemelk.mockbukkit.entity.FireworkMock;
-import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
-import be.seeseemelk.mockbukkit.entity.ZombieMock;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * A mock world object. Note that it is made to be as simple as possible. It is
  * by no means an efficient implementation.
  */
 @SuppressWarnings("deprecation")
-public class WorldMock implements World {
-	private Map<Coordinate, BlockMock> blocks = new HashMap<>();
-	private ServerMock server;
-	private Material defaultBlock;
-	private int height;
-	private int grassHeight;
+public class WorldMock implements World
+{
+
+	private final Map<Coordinate, BlockMock> blocks = new HashMap<>();
+	private final ServerMock server;
+	private final Material defaultBlock;
+	private final int height;
+	private final int grassHeight;
 	private String name = "World";
-	private UUID uuid = UUID.randomUUID();
+	private final UUID uuid = UUID.randomUUID();
 	private Location spawnLocation;
 	private long fullTime = 0;
 	private int weatherDuration = 0;
 	private int thunderDuration = 0;
 	private boolean storming = false;
-	private Map<GameRule<?>, Object> gameRules = new HashMap<>();
+	private final Map<GameRule<?>, Object> gameRules = new HashMap<>();
 	private Environment environment = Environment.NORMAL;
-	private Map<IntTuple2, ChunkMock> alreadyCreatedChunks = new HashMap<>();
+	private final Map<IntTuple2, ChunkMock> alreadyCreatedChunks = new HashMap<>();
 
-	static class IntTuple2 {
-		private int x;
-		private int y;
+	static class IntTuple2
+	{
 
-		public IntTuple2(int x, int y) {
+		private final int x;
+		private final int y;
+
+		public IntTuple2(int x, int y)
+		{
 			this.x = x;
 			this.y = y;
 		}
 
 		@Override
-		public int hashCode() {
+		public int hashCode()
+		{
 			final int prime = 31;
 			int result = 1;
 			result = prime * result + x;
@@ -108,7 +112,8 @@ public class WorldMock implements World {
 		}
 
 		@Override
-		public boolean equals(Object obj) {
+		public boolean equals(Object obj)
+		{
 			if (this == obj)
 				return true;
 			if (obj == null)
@@ -118,23 +123,22 @@ public class WorldMock implements World {
 			IntTuple2 other = (IntTuple2) obj;
 			if (x != other.x)
 				return false;
-			if (y != other.y)
-				return false;
-			return true;
+			return y == other.y;
 		}
 
 	}
 
 	/**
 	 * Creates a new mock world.
-	 * 
+	 *
 	 * @param defaultBlock The block that is spawned at locations 1 to
 	 *                     {@code grassHeight}
 	 * @param height       The height of the world.
 	 * @param grassHeight  The last {@code y} at which {@code defaultBlock} will
 	 *                     spawn.
 	 */
-	public WorldMock(Material defaultBlock, int height, int grassHeight) {
+	public WorldMock(Material defaultBlock, int height, int grassHeight)
+	{
 		this.defaultBlock = defaultBlock;
 		this.height = height;
 		this.grassHeight = grassHeight;
@@ -168,13 +172,14 @@ public class WorldMock implements World {
 
 	/**
 	 * Creates a new mock world with a height of 128.
-	 * 
+	 *
 	 * @param defaultBlock The block that is spawned at locations 1 to
 	 *                     {@code grassHeight}
 	 * @param grassHeight  The last {@code y} at which {@code defaultBlock} will
 	 *                     spawn.
 	 */
-	public WorldMock(Material defaultBlock, int grassHeight) {
+	public WorldMock(Material defaultBlock, int grassHeight)
+	{
 		this(defaultBlock, 128, grassHeight);
 	}
 
@@ -182,17 +187,19 @@ public class WorldMock implements World {
 	 * Creates a new mock world with a height of 128 and will spawn grass until a
 	 * {@code y} of 4.
 	 */
-	public WorldMock() {
+	public WorldMock()
+	{
 		this(Material.GRASS, 4);
 	}
 
 	/**
 	 * Makes sure that a certain block exists on the coordinate. Returns that block.
-	 * 
+	 *
 	 * @param c Creates a block on the given coordinate.
 	 * @return A newly created block at that location.
 	 */
-	public BlockMock createBlock(Coordinate c) {
+	public BlockMock createBlock(Coordinate c)
+	{
 		if (c.y >= height)
 			throw new ArrayIndexOutOfBoundsException("Y larger than height");
 		else if (c.y < 0)
@@ -212,57 +219,72 @@ public class WorldMock implements World {
 	}
 
 	@Override
-	public BlockMock getBlockAt(int x, int y, int z) {
+	public BlockMock getBlockAt(int x, int y, int z)
+	{
 		Coordinate coordinate = new Coordinate(x, y, z);
-		if (blocks.containsKey(coordinate)) {
+		if (blocks.containsKey(coordinate))
+		{
 			return blocks.get(coordinate);
-		} else {
+		}
+		else
+		{
 			return createBlock(coordinate);
 		}
 	}
 
 	@Override
-	public BlockMock getBlockAt(Location location) {
+	public BlockMock getBlockAt(Location location)
+	{
 		return getBlockAt(location.getBlockX(), location.getBlockY(), location.getBlockZ());
 	}
 
 	@Override
-	public String getName() {
+	public String getName()
+	{
 		return name;
 	}
 
 	/**
 	 * Give a new name to this world.
-	 * 
+	 *
 	 * @param name The new name of this world.
 	 */
-	public void setName(String name) {
+	public void setName(String name)
+	{
 		this.name = name;
 	}
 
 	@Override
-	public UUID getUID() {
+	public UUID getUID()
+	{
 		return uuid;
 	}
 
 	@Override
-	public Location getSpawnLocation() {
-		if (spawnLocation == null) {
+	public Location getSpawnLocation()
+	{
+		if (spawnLocation == null)
+		{
 			setSpawnLocation(0, grassHeight + 1, 0);
 		}
 		return spawnLocation;
 	}
 
 	@Override
-	public boolean setSpawnLocation(Location location) {
+	public boolean setSpawnLocation(Location location)
+	{
 		return setSpawnLocation(location.getBlockX(), location.getBlockY(), location.getBlockZ());
 	}
 
 	@Override
-	public boolean setSpawnLocation(int x, int y, int z) {
-		if (spawnLocation == null) {
+	public boolean setSpawnLocation(int x, int y, int z)
+	{
+		if (spawnLocation == null)
+		{
 			spawnLocation = new Location(this, x, y, z);
-		} else {
+		}
+		else
+		{
 			spawnLocation.setX(x);
 			spawnLocation.setY(y);
 			spawnLocation.setZ(z);
@@ -271,7 +293,8 @@ public class WorldMock implements World {
 	}
 
 	@Override
-	public List<Entity> getEntities() {
+	public List<Entity> getEntities()
+	{
 		// MockBukkit.assertMocking();
 		List<Entity> entities = new ArrayList<>();
 
@@ -282,10 +305,12 @@ public class WorldMock implements World {
 	}
 
 	@Override
-	public ChunkMock getChunkAt(int x, int z) {
+	public ChunkMock getChunkAt(int x, int z)
+	{
 		final IntTuple2 intTuple2 = new IntTuple2(x, z);
 		final ChunkMock existingChunk = alreadyCreatedChunks.get(intTuple2);
-		if (existingChunk == null) {
+		if (existingChunk == null)
+		{
 			final ChunkMock chunk = new ChunkMock(this, x, z);
 			alreadyCreatedChunks.put(intTuple2, chunk);
 			return chunk;
@@ -294,152 +319,179 @@ public class WorldMock implements World {
 	}
 
 	@Override
-	public void sendPluginMessage(Plugin source, String channel, byte[] message) {
+	public void sendPluginMessage(Plugin source, String channel, byte[] message)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Set<String> getListeningPluginChannels() {
+	public Set<String> getListeningPluginChannels()
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void setMetadata(String metadataKey, MetadataValue newMetadataValue) {
+	public void setMetadata(String metadataKey, MetadataValue newMetadataValue)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public List<MetadataValue> getMetadata(String metadataKey) {
+	public List<MetadataValue> getMetadata(String metadataKey)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean hasMetadata(String metadataKey) {
+	public boolean hasMetadata(String metadataKey)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void removeMetadata(String metadataKey, Plugin owningPlugin) {
+	public void removeMetadata(String metadataKey, Plugin owningPlugin)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public int getHighestBlockYAt(int x, int z) {
+	public int getHighestBlockYAt(int x, int z)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public int getHighestBlockYAt(Location location) {
+	public int getHighestBlockYAt(Location location)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Block getHighestBlockAt(int x, int z) {
+	public Block getHighestBlockAt(int x, int z)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Block getHighestBlockAt(Location location) {
+	public Block getHighestBlockAt(Location location)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Chunk getChunkAt(Location location) {
+	public Chunk getChunkAt(Location location)
+	{
 		return getChunkAt(location.getBlockX() >> 4, location.getBlockZ() >> 4);
 	}
 
 	@Override
-	public Chunk getChunkAt(Block block) {
+	public Chunk getChunkAt(Block block)
+	{
 		Preconditions.checkArgument(block != null, "null block");
-        return this.getChunkAt(block.getX() >> 4, block.getZ() >> 4);
+		return this.getChunkAt(block.getX() >> 4, block.getZ() >> 4);
 	}
 
 	@Override
-	public boolean isChunkLoaded(Chunk chunk) {
+	public boolean isChunkLoaded(Chunk chunk)
+	{
 		Preconditions.checkArgument(chunk != null, "null chunk");
 		return chunk.isLoaded();
 	}
 
 	@Override
-	public Chunk[] getLoadedChunks() {
+	public Chunk[] getLoadedChunks()
+	{
 		return this.alreadyCreatedChunks.values().stream().filter(Chunk::isLoaded).toArray(Chunk[]::new);
 	}
 
 	@Override
-	public void loadChunk(Chunk chunk) {
+	public void loadChunk(Chunk chunk)
+	{
 		Preconditions.checkArgument(chunk != null, "null chunk");
 		chunk.load();
 	}
 
 	@Override
-	public boolean isChunkLoaded(int x, int z) {
+	public boolean isChunkLoaded(int x, int z)
+	{
 		return getChunkAt(x, z).isLoaded();
 	}
 
 	@Override
-	public boolean isChunkInUse(int x, int z) {
+	public boolean isChunkInUse(int x, int z)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void loadChunk(int x, int z) {
+	public void loadChunk(int x, int z)
+	{
 		getChunkAt(x, z).load();
 	}
 
 	@Override
-	public boolean loadChunk(int x, int z, boolean generate) {
+	public boolean loadChunk(int x, int z, boolean generate)
+	{
 		return getChunkAt(x, z).load(generate);
 	}
 
 	@Override
-	public boolean unloadChunk(Chunk chunk) {
+	public boolean unloadChunk(Chunk chunk)
+	{
 		Preconditions.checkArgument(chunk != null, "null chunk");
 		return chunk.unload();
 	}
 
 	@Override
-	public boolean unloadChunk(int x, int z) {
+	public boolean unloadChunk(int x, int z)
+	{
 		return getChunkAt(x, z).unload();
 	}
 
 	@Override
-	public boolean unloadChunk(int x, int z, boolean save) {
+	public boolean unloadChunk(int x, int z, boolean save)
+	{
 		return getChunkAt(x, z).unload(save);
 	}
 
 	@Override
-	public boolean unloadChunkRequest(int x, int z) {
+	public boolean unloadChunkRequest(int x, int z)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean regenerateChunk(int x, int z) {
+	public boolean regenerateChunk(int x, int z)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	@Deprecated
-	public boolean refreshChunk(int x, int z) {
+	public boolean refreshChunk(int x, int z)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Item dropItem(@NotNull Location loc, ItemStack item) {
-		if (item == null || item.getType() == Material.AIR) {
+	public Item dropItem(@NotNull Location loc, ItemStack item)
+	{
+		if (item == null || item.getType() == Material.AIR)
+		{
 			throw new IllegalArgumentException("Cannot drop null or air");
 		}
 
@@ -450,7 +502,8 @@ public class WorldMock implements World {
 	}
 
 	@Override
-	public Item dropItemNaturally(@NotNull Location location, ItemStack item) {
+	public Item dropItemNaturally(@NotNull Location location, ItemStack item)
+	{
 		Random random = ThreadLocalRandom.current();
 
 		double xs = random.nextFloat() * 0.5F + 0.25;
@@ -466,25 +519,29 @@ public class WorldMock implements World {
 	}
 
 	@Override
-	public Arrow spawnArrow(Location location, Vector direction, float speed, float spread) {
+	public Arrow spawnArrow(Location location, Vector direction, float speed, float spread)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean generateTree(Location location, TreeType type) {
+	public boolean generateTree(Location location, TreeType type)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean generateTree(Location loc, TreeType type, BlockChangeDelegate delegate) {
+	public boolean generateTree(Location loc, TreeType type, BlockChangeDelegate delegate)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Entity spawnEntity(Location loc, EntityType type) {
+	public Entity spawnEntity(Location loc, EntityType type)
+	{
 		EntityMock entity = mockEntity(type);
 		entity.setLocation(loc);
 		server.registerEntity(entity);
@@ -492,39 +549,44 @@ public class WorldMock implements World {
 		return entity;
 	}
 
-	private EntityMock mockEntity(@NotNull EntityType type) {
-		switch (type) {
-			case ZOMBIE:
-				return new ZombieMock(server, UUID.randomUUID());
-			case FIREWORK:
-				return new FireworkMock(server, UUID.randomUUID());
-			case EXPERIENCE_ORB:
-				return new ExperienceOrbMock(server, UUID.randomUUID());
-			case PLAYER:
-				throw new IllegalArgumentException("Player Entities cannot be spawned, use ServerMock#addPlayer(...)");
-			case DROPPED_ITEM:
-				throw new IllegalArgumentException("Items must be spawned using World#dropItem(...)");
-			default:
-				// If that specific Mob Type has not been implemented yet, it may be better
-				// to throw an UnimplementedOperationException for consistency
-				throw new UnimplementedOperationException();
+	private EntityMock mockEntity(@NotNull EntityType type)
+	{
+		switch (type)
+		{
+		case ZOMBIE:
+			return new ZombieMock(server, UUID.randomUUID());
+		case FIREWORK:
+			return new FireworkMock(server, UUID.randomUUID());
+		case EXPERIENCE_ORB:
+			return new ExperienceOrbMock(server, UUID.randomUUID());
+		case PLAYER:
+			throw new IllegalArgumentException("Player Entities cannot be spawned, use ServerMock#addPlayer(...)");
+		case DROPPED_ITEM:
+			throw new IllegalArgumentException("Items must be spawned using World#dropItem(...)");
+		default:
+			// If that specific Mob Type has not been implemented yet, it may be better
+			// to throw an UnimplementedOperationException for consistency
+			throw new UnimplementedOperationException();
 		}
 	}
 
 	@Override
-	public LightningStrike strikeLightning(Location loc) {
+	public LightningStrike strikeLightning(Location loc)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public LightningStrike strikeLightningEffect(Location loc) {
+	public LightningStrike strikeLightningEffect(Location loc)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public List<LivingEntity> getLivingEntities() {
+	public List<LivingEntity> getLivingEntities()
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
@@ -532,132 +594,156 @@ public class WorldMock implements World {
 	@SuppressWarnings("unchecked")
 	@Override
 	@Deprecated
-	public <T extends Entity> Collection<T> getEntitiesByClass(Class<T>... classes) {
+	public <T extends Entity> Collection<T> getEntitiesByClass(Class<T>... classes)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public <T extends Entity> Collection<T> getEntitiesByClass(Class<T> cls) {
+	public <T extends Entity> Collection<T> getEntitiesByClass(Class<T> cls)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Collection<Entity> getEntitiesByClasses(Class<?>... classes) {
+	public Collection<Entity> getEntitiesByClasses(Class<?>... classes)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public List<Player> getPlayers() {
+	public List<Player> getPlayers()
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Collection<Entity> getNearbyEntities(Location location, double x, double y, double z) {
+	public Collection<Entity> getNearbyEntities(Location location, double x, double y, double z)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public long getTime() {
+	public long getTime()
+	{
 		return this.getFullTime() % 24000L;
 	}
 
 	@Override
-	public void setTime(long time) {
+	public void setTime(long time)
+	{
 		long base = this.getFullTime() - this.getFullTime() % 24000L;
 		this.setFullTime(base + time % 24000L);
 	}
 
 	@Override
-	public long getFullTime() {
+	public long getFullTime()
+	{
 		return this.fullTime;
 	}
 
 	@Override
-	public void setFullTime(long time) {
+	public void setFullTime(long time)
+	{
 		TimeSkipEvent event = new TimeSkipEvent(this, TimeSkipEvent.SkipReason.CUSTOM, time - this.getFullTime());
 		this.server.getPluginManager().callEvent(event);
-		if (!event.isCancelled()) {
+		if (!event.isCancelled())
+		{
 			this.fullTime += event.getSkipAmount();
 		}
 	}
 
 	@Override
-	public boolean hasStorm() {
+	public boolean hasStorm()
+	{
 		return storming;
 	}
 
 	@Override
-	public void setStorm(boolean hasStorm) {
+	public void setStorm(boolean hasStorm)
+	{
 		storming = hasStorm;
 	}
 
 	@Override
-	public int getWeatherDuration() {
+	public int getWeatherDuration()
+	{
 		return weatherDuration;
 	}
 
 	@Override
-	public void setWeatherDuration(int duration) {
+	public void setWeatherDuration(int duration)
+	{
 		weatherDuration = duration;
 	}
 
 	@Override
-	public boolean isThundering() {
+	public boolean isThundering()
+	{
 		return thunderDuration > 0;
 	}
 
 	@Override
-	public void setThundering(boolean thundering) {
+	public void setThundering(boolean thundering)
+	{
 		thunderDuration = thundering ? 600 : 0;
 	}
 
 	@Override
-	public int getThunderDuration() {
+	public int getThunderDuration()
+	{
 		return thunderDuration;
 	}
 
 	@Override
-	public void setThunderDuration(int duration) {
+	public void setThunderDuration(int duration)
+	{
 		thunderDuration = duration;
 	}
 
 	@Override
-	public boolean createExplosion(double x, double y, double z, float power) {
+	public boolean createExplosion(double x, double y, double z, float power)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean createExplosion(double x, double y, double z, float power, boolean setFire) {
+	public boolean createExplosion(double x, double y, double z, float power, boolean setFire)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean createExplosion(double x, double y, double z, float power, boolean setFire, boolean breakBlocks) {
+	public boolean createExplosion(double x, double y, double z, float power, boolean setFire, boolean breakBlocks)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean createExplosion(Location loc, float power) {
+	public boolean createExplosion(Location loc, float power)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean createExplosion(Location loc, float power, boolean setFire) {
+	public boolean createExplosion(Location loc, float power, boolean setFire)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Environment getEnvironment() {
+	public Environment getEnvironment()
+	{
 		return this.environment;
 	}
 
@@ -666,61 +752,71 @@ public class WorldMock implements World {
 	 *
 	 * @param environment The world environnement type.
 	 */
-	public void setEnvironment(Environment environment) {
+	public void setEnvironment(Environment environment)
+	{
 		this.environment = environment;
 	}
 
 	@Override
-	public long getSeed() {
+	public long getSeed()
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean getPVP() {
+	public boolean getPVP()
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void setPVP(boolean pvp) {
+	public void setPVP(boolean pvp)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public ChunkGenerator getGenerator() {
+	public ChunkGenerator getGenerator()
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void save() {
+	public void save()
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public List<BlockPopulator> getPopulators() {
+	public List<BlockPopulator> getPopulators()
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public <T extends Entity> T spawn(Location location, Class<T> clazz) throws IllegalArgumentException {
+	public <T extends Entity> T spawn(Location location, Class<T> clazz) throws IllegalArgumentException
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public <T extends Entity> T spawn(Location location, Class<T> clazz, Consumer<T> function)
-			throws IllegalArgumentException {
+			throws IllegalArgumentException
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public FallingBlock spawnFallingBlock(Location location, MaterialData data) throws IllegalArgumentException {
+	public FallingBlock spawnFallingBlock(Location location, MaterialData data) throws IllegalArgumentException
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
@@ -728,252 +824,294 @@ public class WorldMock implements World {
 	@Override
 	@Deprecated
 	public FallingBlock spawnFallingBlock(Location location, Material material, byte data)
-			throws IllegalArgumentException {
+			throws IllegalArgumentException
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void playEffect(Location location, Effect effect, int data) {
+	public void playEffect(Location location, Effect effect, int data)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void playEffect(Location location, Effect effect, int data, int radius) {
+	public void playEffect(Location location, Effect effect, int data, int radius)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public <T> void playEffect(Location location, Effect effect, T data) {
+	public <T> void playEffect(Location location, Effect effect, T data)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public <T> void playEffect(Location location, Effect effect, T data, int radius) {
+	public <T> void playEffect(Location location, Effect effect, T data, int radius)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public ChunkSnapshot getEmptyChunkSnapshot(int x, int z, boolean includeBiome, boolean includeBiomeTempRain) {
+	public ChunkSnapshot getEmptyChunkSnapshot(int x, int z, boolean includeBiome, boolean includeBiomeTempRain)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void setSpawnFlags(boolean allowMonsters, boolean allowAnimals) {
+	public void setSpawnFlags(boolean allowMonsters, boolean allowAnimals)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean getAllowAnimals() {
+	public boolean getAllowAnimals()
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean getAllowMonsters() {
+	public boolean getAllowMonsters()
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Biome getBiome(int x, int z) {
+	public Biome getBiome(int x, int z)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void setBiome(int x, int z, Biome bio) {
+	public void setBiome(int x, int z, Biome bio)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public double getTemperature(int x, int z) {
+	public double getTemperature(int x, int z)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public double getHumidity(int x, int z) {
+	public double getHumidity(int x, int z)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public int getMaxHeight() {
+	public int getMaxHeight()
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public int getSeaLevel() {
+	public int getSeaLevel()
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean getKeepSpawnInMemory() {
+	public boolean getKeepSpawnInMemory()
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void setKeepSpawnInMemory(boolean keepLoaded) {
+	public void setKeepSpawnInMemory(boolean keepLoaded)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean isAutoSave() {
+	public boolean isAutoSave()
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void setAutoSave(boolean value) {
+	public void setAutoSave(boolean value)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void setDifficulty(Difficulty difficulty) {
+	public void setDifficulty(Difficulty difficulty)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Difficulty getDifficulty() {
+	public Difficulty getDifficulty()
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public File getWorldFolder() {
+	public File getWorldFolder()
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public WorldType getWorldType() {
+	public WorldType getWorldType()
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean canGenerateStructures() {
+	public boolean canGenerateStructures()
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public long getTicksPerAnimalSpawns() {
+	public long getTicksPerAnimalSpawns()
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void setTicksPerAnimalSpawns(int ticksPerAnimalSpawns) {
+	public void setTicksPerAnimalSpawns(int ticksPerAnimalSpawns)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public long getTicksPerMonsterSpawns() {
+	public long getTicksPerMonsterSpawns()
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void setTicksPerMonsterSpawns(int ticksPerMonsterSpawns) {
+	public void setTicksPerMonsterSpawns(int ticksPerMonsterSpawns)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public int getMonsterSpawnLimit() {
+	public int getMonsterSpawnLimit()
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void setMonsterSpawnLimit(int limit) {
+	public void setMonsterSpawnLimit(int limit)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public int getAnimalSpawnLimit() {
+	public int getAnimalSpawnLimit()
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void setAnimalSpawnLimit(int limit) {
+	public void setAnimalSpawnLimit(int limit)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public int getWaterAnimalSpawnLimit() {
+	public int getWaterAnimalSpawnLimit()
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void setWaterAnimalSpawnLimit(int limit) {
+	public void setWaterAnimalSpawnLimit(int limit)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public int getAmbientSpawnLimit() {
+	public int getAmbientSpawnLimit()
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void setAmbientSpawnLimit(int limit) {
+	public void setAmbientSpawnLimit(int limit)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void playSound(Location location, Sound sound, float volume, float pitch) {
+	public void playSound(Location location, Sound sound, float volume, float pitch)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void playSound(Location location, String sound, float volume, float pitch) {
+	public void playSound(Location location, String sound, float volume, float pitch)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void playSound(Location location, Sound sound, SoundCategory category, float volume, float pitch) {
+	public void playSound(Location location, Sound sound, SoundCategory category, float volume, float pitch)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void playSound(Location location, String sound, SoundCategory category, float volume, float pitch) {
+	public void playSound(Location location, String sound, SoundCategory category, float volume, float pitch)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public String[] getGameRules() {
+	public String[] getGameRules()
+	{
 		return gameRules.values().stream().map(Object::toString).collect(Collectors.toList()).toArray(new String[0]);
 	}
 
 	@Override
-	public String getGameRuleValue(String rule) {
+	public String getGameRuleValue(String rule)
+	{
 		if (rule == null)
 			return null;
 		GameRule<?> gameRule = GameRule.getByName(rule);
@@ -984,7 +1122,8 @@ public class WorldMock implements World {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public boolean setGameRuleValue(String rule, String value) {
+	public boolean setGameRuleValue(String rule, String value)
+	{
 		if (rule == null)
 			return false;
 		GameRule<?> gameRule = GameRule.getByName(rule);
@@ -993,401 +1132,469 @@ public class WorldMock implements World {
 		if (gameRule.getType().equals(Boolean.TYPE)
 				&& (value.equalsIgnoreCase("true") || value.equalsIgnoreCase("false")))
 			return setGameRule((GameRule<Boolean>) gameRule, value.equalsIgnoreCase("true"));
-		else if (gameRule.getType().equals(Integer.TYPE)) {
-			try {
+		else if (gameRule.getType().equals(Integer.TYPE))
+		{
+			try
+			{
 				int intValue = Integer.parseInt(value);
 				return setGameRule((GameRule<Integer>) gameRule, intValue);
-			} catch (NumberFormatException e) {
+			}
+			catch (NumberFormatException e)
+			{
 				return false;
 			}
-		} else
+		}
+		else
 			return false;
 	}
 
 	@Override
-	public boolean isGameRule(String rule) {
+	public boolean isGameRule(String rule)
+	{
 		return rule != null && GameRule.getByName(rule) != null;
 	}
 
 	@Override
-	public WorldBorder getWorldBorder() {
+	public WorldBorder getWorldBorder()
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void spawnParticle(Particle particle, Location location, int count) {
+	public void spawnParticle(Particle particle, Location location, int count)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void spawnParticle(Particle particle, double x, double y, double z, int count) {
+	public void spawnParticle(Particle particle, double x, double y, double z, int count)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public <T> void spawnParticle(Particle particle, Location location, int count, T data) {
+	public <T> void spawnParticle(Particle particle, Location location, int count, T data)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public <T> void spawnParticle(Particle particle, double x, double y, double z, int count, T data) {
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void spawnParticle(Particle particle, Location location, int count, double offsetX, double offsetY,
-			double offsetZ) {
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void spawnParticle(Particle particle, double x, double y, double z, int count, double offsetX,
-			double offsetY, double offsetZ) {
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public <T> void spawnParticle(Particle particle, Location location, int count, double offsetX, double offsetY,
-			double offsetZ, T data) {
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public <T> void spawnParticle(Particle particle, double x, double y, double z, int count, double offsetX,
-			double offsetY, double offsetZ, T data) {
+	public <T> void spawnParticle(Particle particle, double x, double y, double z, int count, T data)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public void spawnParticle(Particle particle, Location location, int count, double offsetX, double offsetY,
-			double offsetZ, double extra) {
+							  double offsetZ)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public void spawnParticle(Particle particle, double x, double y, double z, int count, double offsetX,
-			double offsetY, double offsetZ, double extra) {
+							  double offsetY, double offsetZ)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public <T> void spawnParticle(Particle particle, Location location, int count, double offsetX, double offsetY,
-			double offsetZ, double extra, T data) {
+								  double offsetZ, T data)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public <T> void spawnParticle(Particle particle, double x, double y, double z, int count, double offsetX,
-			double offsetY, double offsetZ, double extra, T data) {
+								  double offsetY, double offsetZ, T data)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public FallingBlock spawnFallingBlock(Location location, BlockData data) throws IllegalArgumentException {
+	public void spawnParticle(Particle particle, Location location, int count, double offsetX, double offsetY,
+							  double offsetZ, double extra)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public <T> T getGameRuleValue(GameRule<T> rule) {
+	public void spawnParticle(Particle particle, double x, double y, double z, int count, double offsetX,
+							  double offsetY, double offsetZ, double extra)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public <T> void spawnParticle(Particle particle, Location location, int count, double offsetX, double offsetY,
+								  double offsetZ, double extra, T data)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public <T> void spawnParticle(Particle particle, double x, double y, double z, int count, double offsetX,
+								  double offsetY, double offsetZ, double extra, T data)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public FallingBlock spawnFallingBlock(Location location, BlockData data) throws IllegalArgumentException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public <T> T getGameRuleValue(GameRule<T> rule)
+	{
 		return rule.getType().cast(gameRules.get(rule));
 	}
 
 	@Override
-	public <T> T getGameRuleDefault(GameRule<T> rule) {
+	public <T> T getGameRuleDefault(GameRule<T> rule)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public <T> boolean setGameRule(GameRule<T> rule, T newValue) {
+	public <T> boolean setGameRule(GameRule<T> rule, T newValue)
+	{
 		gameRules.put(rule, newValue);
 		return true;
 	}
 
 	@Override
-	public boolean isChunkGenerated(int x, int z) {
+	public boolean isChunkGenerated(int x, int z)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public Collection<Entity> getNearbyEntities(Location location, double x, double y, double z,
-			Predicate<Entity> filter) {
+												Predicate<Entity> filter)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Collection<Entity> getNearbyEntities(BoundingBox boundingBox) {
+	public Collection<Entity> getNearbyEntities(BoundingBox boundingBox)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Collection<Entity> getNearbyEntities(BoundingBox boundingBox, Predicate<Entity> filter) {
+	public Collection<Entity> getNearbyEntities(BoundingBox boundingBox, Predicate<Entity> filter)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public RayTraceResult rayTraceEntities(Location start, Vector direction, double maxDistance) {
+	public RayTraceResult rayTraceEntities(Location start, Vector direction, double maxDistance)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public RayTraceResult rayTraceEntities(Location start, Vector direction, double maxDistance, double raySize) {
+	public RayTraceResult rayTraceEntities(Location start, Vector direction, double maxDistance, double raySize)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public RayTraceResult rayTraceEntities(Location start, Vector direction, double maxDistance,
-			Predicate<Entity> filter) {
+										   Predicate<Entity> filter)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public RayTraceResult rayTraceEntities(Location start, Vector direction, double maxDistance, double raySize,
-			Predicate<Entity> filter) {
+										   Predicate<Entity> filter)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public RayTraceResult rayTraceBlocks(Location start, Vector direction, double maxDistance) {
+	public RayTraceResult rayTraceBlocks(Location start, Vector direction, double maxDistance)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public RayTraceResult rayTraceBlocks(Location start, Vector direction, double maxDistance,
-			FluidCollisionMode fluidCollisionMode) {
+										 FluidCollisionMode fluidCollisionMode)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public RayTraceResult rayTraceBlocks(Location start, Vector direction, double maxDistance,
-			FluidCollisionMode fluidCollisionMode, boolean ignorePassableBlocks) {
+										 FluidCollisionMode fluidCollisionMode, boolean ignorePassableBlocks)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public RayTraceResult rayTrace(Location start, Vector direction, double maxDistance,
-			FluidCollisionMode fluidCollisionMode, boolean ignorePassableBlocks, double raySize,
-			Predicate<Entity> filter) {
+								   FluidCollisionMode fluidCollisionMode, boolean ignorePassableBlocks, double raySize,
+								   Predicate<Entity> filter)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public <T> void spawnParticle(Particle particle, Location location, int count, double offsetX, double offsetY,
-			double offsetZ, double extra, T data, boolean force) {
+								  double offsetZ, double extra, T data, boolean force)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public <T> void spawnParticle(Particle particle, double x, double y, double z, int count, double offsetX,
-			double offsetY, double offsetZ, double extra, T data, boolean force) {
+								  double offsetY, double offsetZ, double extra, T data, boolean force)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public Location locateNearestStructure(Location origin, StructureType structureType, int radius,
-			boolean findUnexplored) {
+										   boolean findUnexplored)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean isChunkForceLoaded(int x, int z) {
+	public boolean isChunkForceLoaded(int x, int z)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void setChunkForceLoaded(int x, int z, boolean forced) {
+	public void setChunkForceLoaded(int x, int z, boolean forced)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Collection<Chunk> getForceLoadedChunks() {
+	public Collection<Chunk> getForceLoadedChunks()
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean addPluginChunkTicket(int x, int z, Plugin plugin) {
+	public boolean addPluginChunkTicket(int x, int z, Plugin plugin)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean removePluginChunkTicket(int x, int z, Plugin plugin) {
+	public boolean removePluginChunkTicket(int x, int z, Plugin plugin)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void removePluginChunkTickets(Plugin plugin) {
+	public void removePluginChunkTickets(Plugin plugin)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Collection<Plugin> getPluginChunkTickets(int x, int z) {
+	public Collection<Plugin> getPluginChunkTickets(int x, int z)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Map<Plugin, Collection<Chunk>> getPluginChunkTickets() {
+	public Map<Plugin, Collection<Chunk>> getPluginChunkTickets()
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public <T extends AbstractArrow> T spawnArrow(Location location, Vector direction, float speed, float spread,
-			Class<T> clazz) {
+												  Class<T> clazz)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Raid locateNearestRaid(Location location, int radius) {
+	public Raid locateNearestRaid(Location location, int radius)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public List<Raid> getRaids() {
+	public List<Raid> getRaids()
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	public boolean createExplosion(double x, double y, double z, float power, boolean setFire, boolean breakBlocks,
-			Entity source) {
+								   Entity source)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
-	public boolean createExplosion(Location loc, float power, boolean setFire, boolean breakBlocks) {
+	public boolean createExplosion(Location loc, float power, boolean setFire, boolean breakBlocks)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
-	public boolean createExplosion(Location loc, float power, boolean setFire, boolean breakBlocks, Entity source) {
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public int getHighestBlockYAt(int x, int z, HeightMap heightMap) {
+	public boolean createExplosion(Location loc, float power, boolean setFire, boolean breakBlocks, Entity source)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public int getHighestBlockYAt(Location location, HeightMap heightMap) {
+	public int getHighestBlockYAt(int x, int z, HeightMap heightMap)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Block getHighestBlockAt(int x, int z, HeightMap heightMap) {
+	public int getHighestBlockYAt(Location location, HeightMap heightMap)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Block getHighestBlockAt(Location location, HeightMap heightMap) {
+	public Block getHighestBlockAt(int x, int z, HeightMap heightMap)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public Biome getBiome(int x, int y, int z) {
+	public Block getHighestBlockAt(Location location, HeightMap heightMap)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void setBiome(int x, int y, int z, Biome bio) {
+	public Biome getBiome(int x, int y, int z)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public double getTemperature(int x, int y, int z) {
+	public void setBiome(int x, int y, int z, Biome bio)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public double getHumidity(int x, int y, int z) {
+	public double getTemperature(int x, int y, int z)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public boolean isHardcore() {
+	public double getHumidity(int x, int y, int z)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void setHardcore(boolean hardcore) {
+	public boolean isHardcore()
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public long getTicksPerWaterSpawns() {
+	public void setHardcore(boolean hardcore)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void setTicksPerWaterSpawns(int ticksPerWaterSpawns) {
+	public long getTicksPerWaterSpawns()
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public long getTicksPerAmbientSpawns() {
+	public void setTicksPerWaterSpawns(int ticksPerWaterSpawns)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void setTicksPerAmbientSpawns(int ticksPerAmbientSpawns) {
+	public long getTicksPerAmbientSpawns()
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public DragonBattle getEnderDragonBattle() {
+	public void setTicksPerAmbientSpawns(int ticksPerAmbientSpawns)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
+
+	@Override
+	public DragonBattle getEnderDragonBattle()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 }

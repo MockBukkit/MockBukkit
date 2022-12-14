@@ -1,7 +1,5 @@
 package be.seeseemelk.mockbukkit;
 
-import java.util.Collection;
-
 import org.bukkit.Chunk;
 import org.bukkit.ChunkSnapshot;
 import org.bukkit.World;
@@ -11,8 +9,11 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Entity;
 import org.bukkit.plugin.Plugin;
 
+import java.util.Collection;
+
 public class ChunkMock implements Chunk
 {
+
 	private final World world;
 	private final int x;
 	private final int z;
@@ -111,7 +112,8 @@ public class ChunkMock implements Chunk
 		return true;
 	}
 
-	public void setSlimeChunk(boolean slimeChunk) {
+	public void setSlimeChunk(boolean slimeChunk)
+	{
 		this.slimeChunk = slimeChunk;
 	}
 
@@ -120,21 +122,20 @@ public class ChunkMock implements Chunk
 	{
 		return slimeChunk;
 	}
-	
+
 	@Override
 	public int hashCode()
 	{
 		return world.hashCode() + x + z;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj)
 	{
 		if (obj == null)
 			return false;
-		else if (obj instanceof ChunkMock)
+		else if (obj instanceof ChunkMock chunk)
 		{
-			ChunkMock chunk = (ChunkMock) obj;
 			return x == chunk.x && z == chunk.z && world.equals(chunk.world);
 		}
 		else
