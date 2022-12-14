@@ -15,6 +15,7 @@ import be.seeseemelk.mockbukkit.entity.CodMock;
 import be.seeseemelk.mockbukkit.entity.CowMock;
 import be.seeseemelk.mockbukkit.entity.CreeperMock;
 import be.seeseemelk.mockbukkit.entity.DonkeyMock;
+import be.seeseemelk.mockbukkit.entity.DragonFireballMock;
 import be.seeseemelk.mockbukkit.entity.EggMock;
 import be.seeseemelk.mockbukkit.entity.ElderGuardianMock;
 import be.seeseemelk.mockbukkit.entity.EndermanMock;
@@ -30,6 +31,7 @@ import be.seeseemelk.mockbukkit.entity.GoatMock;
 import be.seeseemelk.mockbukkit.entity.GuardianMock;
 import be.seeseemelk.mockbukkit.entity.HorseMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
+import be.seeseemelk.mockbukkit.entity.LargeFireballMock;
 import be.seeseemelk.mockbukkit.entity.LlamaMock;
 import be.seeseemelk.mockbukkit.entity.MobMock;
 import be.seeseemelk.mockbukkit.entity.MuleMock;
@@ -41,12 +43,14 @@ import be.seeseemelk.mockbukkit.entity.SalmonMock;
 import be.seeseemelk.mockbukkit.entity.SheepMock;
 import be.seeseemelk.mockbukkit.entity.SkeletonHorseMock;
 import be.seeseemelk.mockbukkit.entity.SkeletonMock;
+import be.seeseemelk.mockbukkit.entity.SmallFireballMock;
 import be.seeseemelk.mockbukkit.entity.SpiderMock;
 import be.seeseemelk.mockbukkit.entity.StrayMock;
 import be.seeseemelk.mockbukkit.entity.TadpoleMock;
 import be.seeseemelk.mockbukkit.entity.TropicalFishMock;
 import be.seeseemelk.mockbukkit.entity.WardenMock;
 import be.seeseemelk.mockbukkit.entity.WitherSkeletonMock;
+import be.seeseemelk.mockbukkit.entity.WitherSkullMock;
 import be.seeseemelk.mockbukkit.entity.WolfMock;
 import be.seeseemelk.mockbukkit.entity.ZombieHorseMock;
 import be.seeseemelk.mockbukkit.entity.ZombieMock;
@@ -100,6 +104,7 @@ import org.bukkit.entity.Cod;
 import org.bukkit.entity.Cow;
 import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Donkey;
+import org.bukkit.entity.DragonFireball;
 import org.bukkit.entity.Egg;
 import org.bukkit.entity.ElderGuardian;
 import org.bukkit.entity.Enderman;
@@ -120,6 +125,7 @@ import org.bukkit.entity.Hanging;
 import org.bukkit.entity.Horse;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.ItemFrame;
+import org.bukkit.entity.LargeFireball;
 import org.bukkit.entity.LeashHitch;
 import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.LivingEntity;
@@ -137,6 +143,7 @@ import org.bukkit.entity.Sheep;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.entity.SkeletonHorse;
 import org.bukkit.entity.Slime;
+import org.bukkit.entity.SmallFireball;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.entity.Spider;
 import org.bukkit.entity.Stray;
@@ -145,6 +152,7 @@ import org.bukkit.entity.TropicalFish;
 import org.bukkit.entity.Warden;
 import org.bukkit.entity.WaterMob;
 import org.bukkit.entity.WitherSkeleton;
+import org.bukkit.entity.WitherSkull;
 import org.bukkit.entity.Wolf;
 import org.bukkit.entity.Zombie;
 import org.bukkit.entity.ZombieHorse;
@@ -1146,6 +1154,22 @@ public class WorldMock implements World
 		else if (clazz == PolarBear.class)
 		{
 			return new PolarBearMock(server, UUID.randomUUID());
+		}
+		else if (clazz == SmallFireball.class)
+		{
+			return new SmallFireballMock(server, UUID.randomUUID());
+		}
+		else if (clazz == LargeFireball.class)
+		{
+			return new LargeFireballMock(server, UUID.randomUUID());
+		}
+		else if (clazz == DragonFireball.class)
+		{
+			return new DragonFireballMock(server, UUID.randomUUID());
+		}
+		else if (clazz == WitherSkull.class)
+		{
+			return new WitherSkullMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}
