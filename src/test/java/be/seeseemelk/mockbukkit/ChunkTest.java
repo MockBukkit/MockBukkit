@@ -2,9 +2,12 @@ package be.seeseemelk.mockbukkit;
 
 import static org.junit.Assert.*;
 
+import org.bukkit.Location;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import be.seeseemelk.mockbukkit.entity.PlayerMock;
 
 public class ChunkTest
 {
@@ -63,6 +66,38 @@ public class ChunkTest
 		chunk.unload();
 		assertTrue(chunk.load());
 		assertTrue(chunk.isLoaded());
+	}
+
+	@Test
+	public void isSlimeChunk_AfterSetSlimeChunkTrue_True() {
+		ChunkMock chunk = world.getChunkAt(0, 0);
+		chunk.setSlimeChunk(true);
+		assertTrue(chunk.isSlimeChunk());
+	}
+
+	@Test
+	public void isSlimeChunk_AfterSetSlimeChunkFalse_False() {
+		ChunkMock chunk = world.getChunkAt(0, 0);
+		chunk.setSlimeChunk(false);
+		assertFalse(chunk.isSlimeChunk());
+	}
+
+	@Test
+	public void isSlimeChunk_AtPlayerLocation_AfterSetSlimeChunkTrue_True() {
+		ChunkMock chunk = world.getChunkAt(0, 0);
+		chunk.setSlimeChunk(true);
+		PlayerMock player = server.addPlayer();
+		player.setLocation(new Location(world, 0, 0, 0));
+		assertTrue(player.getLocation().getChunk().isSlimeChunk());
+	}
+
+	@Test
+	public void isSlimeChunk_AtPlayerLocation_AfterSetSlimeChunkFalse_False() {
+		ChunkMock chunk = world.getChunkAt(0, 0);
+		chunk.setSlimeChunk(false);
+		PlayerMock player = server.addPlayer();
+		player.setLocation(new Location(world, 0, 0, 0));
+		assertFalse(player.getLocation().getChunk().isSlimeChunk());
 	}
 
 	@Test
