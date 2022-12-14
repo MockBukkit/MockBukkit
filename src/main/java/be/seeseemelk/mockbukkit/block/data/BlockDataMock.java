@@ -323,6 +323,10 @@ public class BlockDataMock implements BlockData
 		{
 			return new CampfireMock(material);
 		}
+		else if (Tag.WALL_SIGNS.isTagged(material))
+		{
+			return new WallSignMock(material);
+		}
 		return null;
 	}
 
