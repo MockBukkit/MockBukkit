@@ -134,8 +134,9 @@ public class ChunkMock implements Chunk
 	{
 		if (obj == null)
 			return false;
-		else if (obj instanceof ChunkMock chunk)
+		else if (obj instanceof ChunkMock)
 		{
+			ChunkMock chunk = (ChunkMock) obj;
 			return x == chunk.x && z == chunk.z && world.equals(chunk.world);
 		}
 		else
