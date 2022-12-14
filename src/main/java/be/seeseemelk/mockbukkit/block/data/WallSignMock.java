@@ -8,6 +8,8 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.type.WallSign;
 import org.jetbrains.annotations.NotNull;
 
+import com.google.common.base.Preconditions;
+
 import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.FACING;
 import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.WATERLOGGED;
 
