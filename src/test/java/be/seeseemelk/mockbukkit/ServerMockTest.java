@@ -76,9 +76,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -277,7 +274,7 @@ class ServerMockTest
 	{
 		UUID id = UUID.randomUUID();
 		OfflinePlayer offlinePlayer = server.getOfflinePlayer(id);
-		assertThat(offlinePlayer.getUniqueId(), equalTo(id));
+		assertEquals(id, offlinePlayer.getUniqueId());
 	}
 
 	@ParameterizedTest
@@ -580,7 +577,8 @@ class ServerMockTest
 		PlayerMock playerAB = server.addPlayer("PlayerAB");
 		server.addPlayer("PlayerB");
 		List<Player> players = server.matchPlayer("PlayerA");
-		assertThat(players, containsInAnyOrder(playerA, playerAB));
+		assertTrue(players.contains(playerA));
+		assertTrue(players.contains(playerAB));
 	}
 
 	@Test
@@ -700,7 +698,8 @@ class ServerMockTest
 		PlayerMock playerA = server.addPlayer();
 		PlayerMock playerB = server.addPlayer();
 
-		assertThat(server.getPlayerList().getOnlinePlayers(), containsInAnyOrder(playerA, playerB));
+		assertTrue(server.getPlayerList().getOnlinePlayers().contains(playerA));
+		assertTrue(server.getPlayerList().getOnlinePlayers().contains(playerB));
 	}
 
 	@Test
@@ -981,14 +980,14 @@ class ServerMockTest
 	@Test
 	void testGetViewDistanceDefault()
 	{
-		assertEquals(10,server.getViewDistance());
+		assertEquals(10, server.getViewDistance());
 	}
 
 	@Test
 	void testSetViewDistance()
 	{
 		server.setViewDistance(2);
-		assertEquals(2,server.getViewDistance());
+		assertEquals(2, server.getViewDistance());
 	}
 
 	@Test
