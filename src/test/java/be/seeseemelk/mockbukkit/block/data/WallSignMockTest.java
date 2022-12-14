@@ -97,7 +97,7 @@ class WallSignMockTest {
 	void getAsString() {
 		sign.setWaterlogged(true);
 		sign.setFacing(BlockFace.SOUTH);
-		assertEquals("inecraft:acacia_wall_sign[facing=south,waterlogged=true]",sign.getAsString());
+		assertEquals("minecraft:acacia_wall_sign[facing=south,waterlogged=true]",sign.getAsString());
 	}
 
 	@Test
