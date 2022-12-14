@@ -11,6 +11,9 @@ import org.jetbrains.annotations.NotNull;
 import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.FACING;
 import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.WATERLOGGED;
 
+/**
+ * Mock implementation of a {@link WallSign}.
+ */
 public class WallSignMock extends BlockDataMock implements WallSign {
 
 	/**
