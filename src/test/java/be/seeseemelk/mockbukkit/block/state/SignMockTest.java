@@ -147,15 +147,20 @@ class SignMockTest
 	}
 
 	@Test
-	void setGetColor()
+	void setColor()
 	{
 		sign.setColor(DyeColor.BLUE);
 		assertEquals(DyeColor.BLUE, sign.getColor());
+	}
+
+	@Test
+	void setColor_Null_ThrowsException()
+	{
 		assertThrows(NullPointerException.class, () -> sign.setColor(null));
 	}
 
 	@Test
-	void setGetGlowing()
+	void setGlowing()
 	{
 		sign.setGlowingText(true);
 		assertTrue(sign.isGlowingText());
