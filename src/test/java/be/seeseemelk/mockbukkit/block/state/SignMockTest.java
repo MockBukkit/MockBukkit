@@ -3,7 +3,6 @@ package be.seeseemelk.mockbukkit.block.state;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.BlockMock;
-import com.destroystokyo.paper.MaterialTags;
 import net.kyori.adventure.text.Component;
 
 import org.bukkit.DyeColor;
