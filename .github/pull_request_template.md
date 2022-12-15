@@ -3,5 +3,5 @@
 
 # Checklist
 The following items should be checked before the pull request can be merged.
-- [ ] Code follows existing code format.
+- [ ] Code follows existing style.
 - [ ] Unit tests added (if applicable).
