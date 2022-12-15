@@ -64,8 +64,8 @@ public class SignMock extends TileStateMock implements Sign
 		{
 			lines[i] = state.getLine(i);
 		}
-		color = state.getColor();
-		glowing = state.isGlowingText();
+		this.color = state.getColor();
+		this.glowing = state.isGlowingText();
 	}
 
 	@Override
