@@ -64,8 +64,8 @@ public class SignMock extends TileStateMock implements Sign
 		{
 			lines[i] = state.getLine(i);
 		}
-		color = state.getColor();
-		glowing = state.isGlowingText();
+		this.color = state.getColor();
+		this.glowing = state.isGlowingText();
 	}
 
 	@Override
@@ -141,7 +141,7 @@ public class SignMock extends TileStateMock implements Sign
 	@Override
 	public boolean isGlowingText()
 	{
-		return glowing;
+		return this.glowing;
 	}
 
 	@Override
@@ -153,7 +153,7 @@ public class SignMock extends TileStateMock implements Sign
 	@Override
 	public @NotNull DyeColor getColor()
 	{
-		return color;
+		return this.color;
 	}
 
 	@Override
