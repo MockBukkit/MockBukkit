@@ -63,7 +63,11 @@ final class BlockDataKey
 	 * Stores whether a {@link Waterlogged} block is waterlogged.
 	 */
 	static final String WATERLOGGED = "waterlogged";
-
+	/**
+	 * Stores the {@link AttachedFace} a {@link FaceAttachable} is facing
+	 */
+	static final String FACE = "face";
+	
 	private BlockDataKey()
 	{
 		throw new UnsupportedOperationException("Utility class");

@@ -327,6 +327,10 @@ public class BlockDataMock implements BlockData
 		{
 			return new WallSignMock(material);
 		}
+		else if (Tag.BUTTONS.isTagged(material))
+		{
+			return new ButtonMock(material);
+		}
 		return null;
 	}
 
