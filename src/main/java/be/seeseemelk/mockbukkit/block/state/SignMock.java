@@ -153,7 +153,7 @@ public class SignMock extends TileStateMock implements Sign
 	@Override
 	public DyeColor getColor()
 	{
-		return color;
+		return this.color;
 	}
 
 	@Override
