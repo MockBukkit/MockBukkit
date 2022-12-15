@@ -16,19 +16,21 @@ import com.google.common.base.Preconditions;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
-public class ButtonMock extends BlockDataMock implements Switch
+public class SwitchMock extends BlockDataMock implements Switch
 {
 
 	/**
-	 * Constructs a new {@link ButtonMock} for the provided {@link Material}. Only
+	 * Constructs a new {@link SwitchMock} for the provided {@link Material}. Only
 	 * supports materials in {@link Tag#BUTTONS}
 	 *
 	 * @param type The material this data is for.
 	 */
-	public ButtonMock(@NotNull Material type)
+	public SwitchMock(@NotNull Material type)
 	{
 		super(type);
-		checkType(type, Tag.BUTTONS);
+		Set<Material> possibleTypes = Tag.BUTTONS.getValues();
+		possibleTypes.add(Material.LEVER);
+		checkType(type, possibleTypes.toArray(new Material[possibleTypes.size()]));
 		this.set(FACE, AttachedFace.WALL);
 		this.set(FACING, BlockFace.NORTH);
 		this.set(POWERED, false);

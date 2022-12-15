@@ -14,16 +14,16 @@ import org.junit.jupiter.api.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 
-class ButtonMockTest
+class SwitchMockTest
 {
 
-	ButtonMock button;
+	SwitchMock switchMock;
 
 	@BeforeEach
 	void setUp()
 	{
 		MockBukkit.mock();
-		button = new ButtonMock(Material.ACACIA_BUTTON);
+		switchMock = new SwitchMock(Material.ACACIA_BUTTON);
 	}
 
 	@AfterEach
@@ -35,8 +35,8 @@ class ButtonMockTest
 	@Test
 	void constructor_DefaultValues()
 	{
-		assertEquals(BlockFace.NORTH, button.getFacing());
-		assertFalse(button.isPowered());
+		assertEquals(BlockFace.NORTH, switchMock.getFacing());
+		assertFalse(switchMock.isPowered());
 	}
 
 	@Test
@@ -44,8 +44,9 @@ class ButtonMockTest
 	{
 		for (Material button : Tag.BUTTONS.getValues())
 		{
-			assertDoesNotThrow(() -> new ButtonMock(button));
+			assertDoesNotThrow(() -> new SwitchMock(button));
 		}
+		assertDoesNotThrow(() -> new SwitchMock(Material.LEVER));
 
 	}
 
@@ -60,10 +61,10 @@ class ButtonMockTest
 	{
 		for (BlockFace face : BlockFace.values())
 		{
-			if (!button.getFaces().contains(face))
+			if (!switchMock.getFaces().contains(face))
 				continue;
-			assertDoesNotThrow(() -> button.setFacing(face));
-			assertEquals(face, button.getFacing());
+			assertDoesNotThrow(() -> switchMock.setFacing(face));
+			assertEquals(face, switchMock.getFacing());
 		}
 	}
 
@@ -72,9 +73,9 @@ class ButtonMockTest
 	{
 		for (BlockFace face : BlockFace.values())
 		{
-			if (button.getFaces().contains(face))
+			if (switchMock.getFaces().contains(face))
 				continue;
-			assertThrowsExactly(IllegalArgumentException.class, () -> button.setFacing(face));
+			assertThrowsExactly(IllegalArgumentException.class, () -> switchMock.setFacing(face));
 		}
 	}
 
@@ -82,50 +83,50 @@ class ButtonMockTest
 	void getFaces()
 	{
 		Set<BlockFace> validFaces = Set.of(BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST);
-		assertEquals(validFaces, button.getFaces());
+		assertEquals(validFaces, switchMock.getFaces());
 	}
 	
 	@Test
 	void getFacing_Immutable()
 	{
-		Set<BlockFace> faces = button.getFaces();
+		Set<BlockFace> faces = switchMock.getFaces();
 		assertThrows(UnsupportedOperationException.class, () -> faces.add(BlockFace.NORTH_EAST));
 	}
 
 	@Test
 	void setFacing_notNull()
 	{
-		assertThrows(NullPointerException.class, () -> button.setFacing(null));
+		assertThrows(NullPointerException.class, () -> switchMock.setFacing(null));
 	}
 	
 	@Test
 	void setPowered() {
-		button.setPowered(true);
-		assertTrue(button.isPowered());
-		button.setPowered(false);
-		assertFalse(button.isPowered());
+		switchMock.setPowered(true);
+		assertTrue(switchMock.isPowered());
+		switchMock.setPowered(false);
+		assertFalse(switchMock.isPowered());
 	}
 	
 	@Test
 	void getAsString()
 	{
-		button.setFacing(BlockFace.NORTH);
-		button.setAttachedFace(AttachedFace.WALL);
-		button.setPowered(false);
-		assertEquals("minecraft:acacia_button[face=wall,facing=north,powered=false]", button.getAsString());
+		switchMock.setFacing(BlockFace.NORTH);
+		switchMock.setAttachedFace(AttachedFace.WALL);
+		switchMock.setPowered(false);
+		assertEquals("minecraft:acacia_button[face=wall,facing=north,powered=false]", switchMock.getAsString());
 	}
 	
 	void setAttachedFace() {
 		for(AttachedFace face : AttachedFace.values()) {
-			button.setAttachedFace(face);
-			assertEquals(face,button.getAttachedFace());
+			switchMock.setAttachedFace(face);
+			assertEquals(face,switchMock.getAttachedFace());
 		}
 	}
 	
 	@Test
 	void setAttachedFace_notNull()
 	{
-		assertThrows(NullPointerException.class, () -> button.setAttachedFace(null));
+		assertThrows(NullPointerException.class, () -> switchMock.setAttachedFace(null));
 	}
 
 	@Test
@@ -133,8 +134,9 @@ class ButtonMockTest
 	{
 		for (Material material : Tag.BUTTONS.getValues())
 		{
-			assertInstanceOf(ButtonMock.class, BlockDataMock.mock(material));
+			assertInstanceOf(SwitchMock.class, BlockDataMock.mock(material));
 		}
+		assertInstanceOf(SwitchMock.class, BlockDataMock.mock(Material.LEVER));
 	}
 	
 	
