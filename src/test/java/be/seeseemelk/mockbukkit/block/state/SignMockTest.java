@@ -4,7 +4,6 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import net.kyori.adventure.text.Component;
-
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.Tag;
@@ -154,10 +153,12 @@ class SignMockTest
 		assertEquals(DyeColor.BLUE, sign.getColor());
 		assertThrows(NullPointerException.class, () -> sign.setColor(null));
 	}
-	
+
 	@Test
-	void setGetGlowing() {
+	void setGetGlowing()
+	{
 		sign.setGlowingText(true);
 		assertTrue(sign.isGlowingText());
 	}
+
 }
