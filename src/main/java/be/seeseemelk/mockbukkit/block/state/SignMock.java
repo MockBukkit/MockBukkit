@@ -141,7 +141,7 @@ public class SignMock extends TileStateMock implements Sign
 	@Override
 	public boolean isGlowingText()
 	{
-		return glowing;
+		return this.glowing;
 	}
 
 	@Override
