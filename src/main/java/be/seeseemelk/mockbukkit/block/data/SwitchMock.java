@@ -21,7 +21,7 @@ public class SwitchMock extends BlockDataMock implements Switch
 
 	/**
 	 * Constructs a new {@link SwitchMock} for the provided {@link Material}. Only
-	 * supports materials in {@link Tag#BUTTONS}
+	 * supports materials in {@link Tag#BUTTONS} and {@link Material#LEVER}
 	 *
 	 * @param type The material this data is for.
 	 */
