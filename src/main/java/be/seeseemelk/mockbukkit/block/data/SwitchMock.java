@@ -31,9 +31,9 @@ public class SwitchMock extends BlockDataMock implements Switch
 		Set<Material> possibleTypes = Tag.BUTTONS.getValues();
 		possibleTypes.add(Material.LEVER);
 		checkType(type, possibleTypes.toArray(new Material[possibleTypes.size()]));
-		this.set(FACE, AttachedFace.WALL);
-		this.set(FACING, BlockFace.NORTH);
-		this.set(POWERED, false);
+		super.set(FACE, AttachedFace.WALL);
+		super.set(FACING, BlockFace.NORTH);
+		super.set(POWERED, false);
 	}
 
 	@Override
@@ -81,6 +81,7 @@ public class SwitchMock extends BlockDataMock implements Switch
 		return Set.of(BlockFace.SOUTH, BlockFace.EAST, BlockFace.NORTH, BlockFace.WEST);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public @NotNull Face getFace()
 	{
@@ -88,7 +89,7 @@ public class SwitchMock extends BlockDataMock implements Switch
 	}
 
 	@Override
-	public void setFace(@NotNull Face face)
+	public void setFace(@SuppressWarnings("deprecation") @NotNull Face face)
 	{
 		throw new UnimplementedOperationException();
 	}
