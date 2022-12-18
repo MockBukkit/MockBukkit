@@ -2189,4 +2189,5 @@ class PlayerMockTest
 				Arguments.of(Instrument.STICKS, Sound.BLOCK_NOTE_BLOCK_HAT)
 				);
 	}
+
 }
