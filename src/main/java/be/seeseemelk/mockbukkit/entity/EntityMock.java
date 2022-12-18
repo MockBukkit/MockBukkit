@@ -573,12 +573,18 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		throw new UnimplementedOperationException();
 	}
 
-	@Override
 	public @NotNull List<Entity> getNearbyEntities(double x, double y, double z)
 	{
 		AsyncCatcher.catchOp("getNearbyEntities");
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		List<Entity> nearbyEntities = new ArrayList<>();
+		getWorld().getEntities().forEach(entity ->
+		{
+			Vector distance = entity.getLocation().clone().subtract(getLocation()).toVector();
+			if (Math.abs(distance.getX()) <= x && Math.abs(distance.getY()) <= y
+					&& Math.abs(distance.getZ()) <= z && entity != this)
+				nearbyEntities.add(entity);
+		});
+		return nearbyEntities;
 	}
 
 	@Override

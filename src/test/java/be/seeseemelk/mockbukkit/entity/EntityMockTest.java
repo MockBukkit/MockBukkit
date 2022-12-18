@@ -1075,4 +1075,26 @@ class EntityMockTest
 		assertFalse(entity.isOp());
 	}
 
+	@Test
+	void getNearbyEntities() {
+		entity.teleport(new Location(world,0,0,0));
+		Entity nearbyEntity = world.spawnEntity(new Location(world,0,5,0), EntityType.BAT);
+		List<Entity> nearbyEntities = entity.getNearbyEntities(7, 7, 7);
+		assertTrue(nearbyEntities.contains(nearbyEntity));
+	}
+	
+	@Test
+	void getNearbyEntitiesNotSelf() {
+		entity.teleport(new Location(world,0,0,0));
+		List<Entity> nearbyEntities = entity.getNearbyEntities(7, 7, 7);
+		assertFalse(nearbyEntities.contains(entity));
+	}
+	
+	@Test
+	void getNearbyEntitiesNotNearby() {
+		entity.teleport(new Location(world,0,0,0));
+		Entity nearbyEntity = world.spawnEntity(new Location(world,0,10,0), EntityType.BAT);
+		List<Entity> nearbyEntities = entity.getNearbyEntities(7, 7, 7);
+		assertFalse(nearbyEntities.contains(nearbyEntity));
+	}
 }
