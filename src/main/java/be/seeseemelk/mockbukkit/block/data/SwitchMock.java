@@ -85,13 +85,13 @@ public class SwitchMock extends BlockDataMock implements Switch
 	@Override
 	public @NotNull Face getFace()
 	{
-		throw new UnimplementedOperationException();
+		return Face.valueOf(super.get(FACE).toString());
 	}
 
 	@Override
 	public void setFace(@SuppressWarnings("deprecation") @NotNull Face face)
 	{
-		throw new UnimplementedOperationException();
+		super.set(FACE, AttachedFace.valueOf(face.toString()));
 	}
 
 }
