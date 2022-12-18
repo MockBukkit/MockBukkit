@@ -19,7 +19,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 
-@SuppressWarnings("deprecation")
 class SwitchMockTest
 {
 
