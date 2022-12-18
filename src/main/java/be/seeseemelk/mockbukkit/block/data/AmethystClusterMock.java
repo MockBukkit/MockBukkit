@@ -3,8 +3,6 @@ package be.seeseemelk.mockbukkit.block.data;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
-import org.bukkit.block.data.Directional;
-import org.bukkit.block.data.Waterlogged;
 import org.bukkit.block.data.type.AmethystCluster;
 import org.jetbrains.annotations.NotNull;
 
@@ -13,9 +11,18 @@ import java.util.Set;
 import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.FACING;
 import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.WATERLOGGED;
 
-public class AmethystClusterMock extends BlockDataMock implements AmethystCluster, Directional, Waterlogged
+/**
+ * Mock implementation of {@link AmethystCluster}.
+ */
+public class AmethystClusterMock extends BlockDataMock implements AmethystCluster
 {
 
+	/**
+	 * Constructs a new {@link BedMock} for the provided {@link Material}.
+	 * Only supports {@link Material#AMETHYST_CLUSTER}
+	 *
+	 * @param type The material this data is for.
+	 */
 	public AmethystClusterMock(@NotNull Material type)
 	{
 		super(type);

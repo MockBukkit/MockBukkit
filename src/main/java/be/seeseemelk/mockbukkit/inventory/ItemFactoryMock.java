@@ -31,6 +31,7 @@ import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.inventory.AbstractHorseInventory;
 import org.bukkit.inventory.ItemFactory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -44,6 +45,9 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.function.UnaryOperator;
 
+/**
+ * Mock implementation of an {@link ItemFactory}.
+ */
 public class ItemFactoryMock implements ItemFactory
 {
 

@@ -11,6 +11,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Mock implementation of a {@link CreatureSpawner}.
+ *
+ * @see TileStateMock
+ */
 public class CreatureSpawnerMock extends TileStateMock implements CreatureSpawner
 {
 
@@ -23,18 +28,35 @@ public class CreatureSpawnerMock extends TileStateMock implements CreatureSpawne
 	private int requiredPlayerRange = 16;
 	private int spawnRange = 4;
 
+	/**
+	 * Constructs a new {@link CreatureSpawnerMock} for the provided {@link Material}.
+	 * Only supports {@link Material#SPAWNER}
+	 *
+	 * @param material The material this state is for.
+	 */
 	public CreatureSpawnerMock(@NotNull Material material)
 	{
 		super(material);
 		checkType(material, Material.SPAWNER);
 	}
 
+	/**
+	 * Constructs a new {@link CreatureSpawnerMock} for the provided {@link Block}.
+	 * Only supports {@link Material#SPAWNER}
+	 *
+	 * @param block The block this state is for.
+	 */
 	protected CreatureSpawnerMock(@NotNull Block block)
 	{
 		super(block);
 		checkType(block, Material.SPAWNER);
 	}
 
+	/**
+	 * Constructs a new {@link CreatureSpawnerMock} by cloning the data from an existing one.
+	 *
+	 * @param state The state to clone.
+	 */
 	protected CreatureSpawnerMock(@NotNull CreatureSpawnerMock state)
 	{
 		super(state);

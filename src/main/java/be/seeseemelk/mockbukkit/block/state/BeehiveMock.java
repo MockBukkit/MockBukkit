@@ -15,6 +15,11 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Mock implementation of a {@link Beehive}.
+ *
+ * @see TileStateMock
+ */
 public class BeehiveMock extends TileStateMock implements Beehive
 {
 
@@ -23,18 +28,35 @@ public class BeehiveMock extends TileStateMock implements Beehive
 	private boolean sedated;
 	private final List<Bee> bees = new ArrayList<>();
 
+	/**
+	 * Constructs a new {@link BeehiveMock} for the provided {@link Material}.
+	 * Only supports {@link Material#BEEHIVE}
+	 *
+	 * @param material The material this state is for.
+	 */
 	public BeehiveMock(@NotNull Material material)
 	{
 		super(material);
 		checkType(material, Material.BEEHIVE);
 	}
 
+	/**
+	 * Constructs a new {@link BeehiveMock} for the provided {@link Block}.
+	 * Only supports {@link Material#BEEHIVE}
+	 *
+	 * @param block The block this state is for.
+	 */
 	protected BeehiveMock(@NotNull Block block)
 	{
 		super(block);
 		checkType(block, Material.BEEHIVE);
 	}
 
+	/**
+	 * Constructs a new {@link BeehiveMock} by cloning the data from an existing one.
+	 *
+	 * @param state The state to clone.
+	 */
 	protected BeehiveMock(@NotNull BeehiveMock state)
 	{
 		super(state);

@@ -11,11 +11,22 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
+/**
+ * Mock implementation of a {@link MushroomCow}.
+ *
+ * @see CowMock
+ */
 public class MushroomCowMock extends CowMock implements MushroomCow
 {
 
 	private @NotNull Variant variant = Variant.RED;
 
+	/**
+	 * Constructs a new {@link MushroomCowMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	public MushroomCowMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);

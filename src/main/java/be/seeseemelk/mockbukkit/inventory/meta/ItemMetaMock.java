@@ -43,6 +43,9 @@ import java.util.stream.Collectors;
 
 import static java.util.Objects.nonNull;
 
+/**
+ * Mock implementation of an {@link ItemMeta}, {@link Damageable}, and {@link Repairable}.
+ */
 public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 {
 
@@ -59,10 +62,18 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	private boolean unbreakable = false;
 	private @Nullable Integer customModelData = null;
 
+	/**
+	 * Constructs a new {@link ItemMetaMock}.
+	 */
 	public ItemMetaMock()
 	{
 	}
 
+	/**
+	 * Constructs a new {@link ItemMetaMock}, cloning the data from another.
+	 *
+	 * @param meta The meta to clone.
+	 */
 	public ItemMetaMock(@NotNull ItemMeta meta)
 	{
 		unbreakable = meta.isUnbreakable();
@@ -78,17 +89,17 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		{
 			lore = meta.lore().stream().map(c -> GsonComponentSerializer.gson().serialize(c)).collect(Collectors.toList());
 		}
-		if (meta instanceof Damageable)
+		if (meta instanceof Damageable d)
 		{
-			this.damage = ((Damageable) meta).getDamage();
+			this.damage = d.getDamage();
 		}
-		if (meta instanceof Repairable)
+		if (meta instanceof Repairable r)
 		{
-			this.repairCost = ((Repairable) meta).getRepairCost();
+			this.repairCost = r.getRepairCost();
 		}
-		if (meta instanceof ItemMetaMock)
+		if (meta instanceof ItemMetaMock m)
 		{
-			this.persistentDataContainer = ((ItemMetaMock) meta).persistentDataContainer;
+			this.persistentDataContainer = m.persistentDataContainer;
 		}
 		if (meta.hasAttributeModifiers())
 		{

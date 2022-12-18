@@ -4,7 +4,9 @@ Often times one needs to interact with the minecraft world.
 MockBukkit always the creation of superflat worlds on the fly.
 Each block in the world is generated the moment it is accessed for the first time, so creation new worlds is a very cheap operation.
 
-The following code will create a flat world::
+The following code will create a flat world
+
+.. code-block:: java
 
     WorldMock = server.addSimpleWorld("my_world");
 

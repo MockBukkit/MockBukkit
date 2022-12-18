@@ -9,9 +9,20 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
-public class CodMock extends FishMock implements Cod
+/**
+ * Mock implementation of a {@link Cod}.
+ *
+ * @see SchoolableFishMock
+ */
+public class CodMock extends SchoolableFishMock implements Cod
 {
 
+	/**
+	 * Constructs a new {@link CodMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	public CodMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
