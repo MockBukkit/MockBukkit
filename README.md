@@ -66,8 +66,7 @@ dependencies {
 ```
 
 If you prefer to always have the latest Git version or need a specific commit/branch, you can always
-use [JitPack](https://jitpack.io/#MockBukkit/MockBukkit) as your
-maven repository:
+use [JitPack](https://jitpack.io/#MockBukkit/MockBukkit) as your maven repository:
 
 ```gradle
 repositories {
@@ -118,8 +117,7 @@ The `test` scope is important here since you are likely to only be using MockBuk
 Maven lifecycle and not in your final product.
 
 If you prefer to always have the latest Git version or need a specific commit/branch, you can always
-use [JitPack](https://jitpack.io/#MockBukkit/MockBukkit) as your
-maven repository:
+use [JitPack](https://jitpack.io/#MockBukkit/MockBukkit) as your maven repository:
 
 ```xml
 <repositories>
