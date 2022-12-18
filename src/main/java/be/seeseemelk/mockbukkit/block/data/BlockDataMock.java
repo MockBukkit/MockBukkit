@@ -276,6 +276,7 @@ public class BlockDataMock implements BlockData
 		return switch (material)
 				{
 					case AMETHYST_CLUSTER -> new AmethystClusterMock(material);
+					case LEVER -> new SwitchMock(material);
 					default -> new BlockDataMock(material);
 				};
 	}
@@ -326,6 +327,10 @@ public class BlockDataMock implements BlockData
 		else if (Tag.WALL_SIGNS.isTagged(material))
 		{
 			return new WallSignMock(material);
+		}
+		else if (Tag.BUTTONS.isTagged(material))
+		{
+			return new SwitchMock(material);
 		}
 		return null;
 	}
