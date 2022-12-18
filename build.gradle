@@ -26,16 +26,15 @@ repositories {
 }
 
 dependencies {
-    //Paper API
+    // Paper API
     api "io.papermc.paper:paper-api:${gradle.ext.apiVersionFull}"
 
-    //Dependencies for Unit Tests
+    // Dependencies for Unit Tests
     implementation 'org.junit.jupiter:junit-jupiter:5.9.1'
-    implementation 'org.hamcrest:hamcrest-library:2.2'
 
     // General utilities for the project
     implementation 'net.kyori:adventure-platform-bungeecord:4.1.2'
-    implementation 'org.jetbrains:annotations:23.0.0'
+    implementation 'org.jetbrains:annotations:23.1.0'
 
     // LibraryLoader dependencies
     implementation 'org.apache.maven:maven-resolver-provider:3.8.5'
@@ -90,7 +89,7 @@ jacocoTestReport {
 }
 
 jacoco {
-    toolVersion = "0.8.7"
+    toolVersion = "0.8.8"
 }
 
 group = 'com.github.seeseemelk'

@@ -24,6 +24,8 @@ public class SignMock extends TileStateMock implements Sign
 {
 
 	private final String[] lines = { "", "", "", "" };
+	private @NotNull DyeColor color = DyeColor.BLACK;
+	private boolean glowing = false;
 
 	/**
 	 * Constructs a new {@link SignMock} for the provided {@link Material}.
@@ -60,8 +62,10 @@ public class SignMock extends TileStateMock implements Sign
 
 		for (int i = 0; i < 4; i++)
 		{
-			lines[i] = state.getLine(i);
+			this.lines[i] = state.getLine(i);
 		}
+		this.color = state.getColor();
+		this.glowing = state.isGlowingText();
 	}
 
 	@Override
@@ -69,7 +73,7 @@ public class SignMock extends TileStateMock implements Sign
 	{
 		List<Component> components = new ArrayList<>();
 
-		for (String line : lines)
+		for (String line : this.lines)
 		{
 			components.add(LegacyComponentSerializer.legacySection().deserialize(line));
 		}
@@ -87,7 +91,7 @@ public class SignMock extends TileStateMock implements Sign
 	public void line(int index, @NotNull Component line) throws IndexOutOfBoundsException
 	{
 		Preconditions.checkNotNull(line, "Line cannot be null!");
-		lines[index] = LegacyComponentSerializer.legacySection().serialize(line);
+		this.lines[index] = LegacyComponentSerializer.legacySection().serialize(line);
 	}
 
 	@Override
@@ -109,7 +113,7 @@ public class SignMock extends TileStateMock implements Sign
 	@Deprecated
 	public @NotNull String getLine(int index) throws IndexOutOfBoundsException
 	{
-		return lines[index];
+		return this.lines[index];
 	}
 
 	@Override
@@ -117,7 +121,7 @@ public class SignMock extends TileStateMock implements Sign
 	public void setLine(int index, @NotNull String line) throws IndexOutOfBoundsException
 	{
 		Preconditions.checkNotNull(line, "Line cannot be null!");
-		lines[index] = line;
+		this.lines[index] = line;
 	}
 
 	@Override
@@ -137,29 +141,26 @@ public class SignMock extends TileStateMock implements Sign
 	@Override
 	public boolean isGlowingText()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.glowing;
 	}
 
 	@Override
 	public void setGlowingText(boolean glowing)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.glowing = glowing;
 	}
 
 	@Override
-	public DyeColor getColor()
+	public @NotNull DyeColor getColor()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.color;
 	}
 
 	@Override
-	public void setColor(DyeColor color)
+	public void setColor(@NotNull DyeColor color)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(color, "Color can not be null!");
+		this.color = color;
 	}
 
 	@Override
