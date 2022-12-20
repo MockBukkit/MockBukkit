@@ -1,6 +1,5 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
-import com.destroystokyo.paper.inventory.meta.ArmorStandMeta;
 import com.google.common.collect.ImmutableMap;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;

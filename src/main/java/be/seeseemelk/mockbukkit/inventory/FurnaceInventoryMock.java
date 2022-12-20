@@ -6,7 +6,6 @@ import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.Furnace;
 import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.inventory.AbstractHorseInventory;
 import org.bukkit.inventory.FurnaceInventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;

@@ -1,6 +1,5 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
-import com.destroystokyo.paper.inventory.meta.ArmorStandMeta;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.inventory.meta.LeatherArmorMeta;

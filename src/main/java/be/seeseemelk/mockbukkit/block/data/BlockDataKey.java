@@ -4,6 +4,7 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.Bisected;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Directional;
+import org.bukkit.block.data.FaceAttachable;
 import org.bukkit.block.data.Lightable;
 import org.bukkit.block.data.Openable;
 import org.bukkit.block.data.Powerable;
@@ -64,10 +65,10 @@ final class BlockDataKey
 	 */
 	static final String WATERLOGGED = "waterlogged";
 	/**
-	 * Stores the {@link AttachedFace} a {@link FaceAttachable} is facing
+	 * Stores the {@link FaceAttachable.AttachedFace} a {@link FaceAttachable} is facing
 	 */
 	static final String FACE = "face";
-	
+
 	private BlockDataKey()
 	{
 		throw new UnsupportedOperationException("Utility class");
