@@ -9,6 +9,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
+/**
+ * Mock implementation of a {@link Wolf}.
+ *
+ * @see TameableAnimalMock
+ */
 public class WolfMock extends TameableAnimalMock implements Wolf
 {
 
@@ -17,6 +22,12 @@ public class WolfMock extends TameableAnimalMock implements Wolf
 	private boolean isWet = false;
 	private boolean interested = false;
 
+	/**
+	 * Constructs a new {@link WolfMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	public WolfMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
@@ -55,6 +66,7 @@ public class WolfMock extends TameableAnimalMock implements Wolf
 
 	/**
 	 * Sets whether the wolf is wet or not.
+	 *
 	 * @param wet Whether the wolf is wet or not.
 	 */
 	public void setWet(boolean wet)

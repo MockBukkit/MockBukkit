@@ -6,6 +6,7 @@ import com.destroystokyo.paper.profile.ProfileProperty;
 import com.google.common.base.Preconditions;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.profile.PlayerTextures;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -20,6 +21,9 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
+/**
+ * Mock implementation of a {@link PlayerProfile}.
+ */
 public class PlayerProfileMock implements PlayerProfile
 {
 
@@ -27,11 +31,24 @@ public class PlayerProfileMock implements PlayerProfile
 	private @Nullable UUID uuid;
 	private final @NotNull Set<ProfileProperty> properties;
 
+	/**
+	 * Constructs a new {@link PlayerProfileMock} for an {@link OfflinePlayer}.
+	 *
+	 * @param player The player.
+	 */
+	@ApiStatus.Internal
 	public PlayerProfileMock(@NotNull OfflinePlayer player)
 	{
 		this(player.getName(), player.getUniqueId());
 	}
 
+	/**
+	 * Constructs a new {@link PlayerProfileMock} with a name and {@link UUID}.
+	 *
+	 * @param name The name of the player.
+	 * @param uuid The UUID of the player.
+	 */
+	@ApiStatus.Internal
 	public PlayerProfileMock(@Nullable String name, @Nullable UUID uuid)
 	{
 		this.name = name;
@@ -39,10 +56,16 @@ public class PlayerProfileMock implements PlayerProfile
 		this.properties = new HashSet<>();
 	}
 
+	/**
+	 * Constructs a new {@link PlayerProfileMock}, cloning the data from another.
+	 *
+	 * @param profile The profile to clone.
+	 */
+	@ApiStatus.Internal
 	public PlayerProfileMock(@NotNull PlayerProfileMock profile)
 	{
 		this.name = profile.getName();
-		this.uuid = profile.getUniqueId();
+		this.uuid = profile.getId();
 		this.properties = new HashSet<>(profile.getProperties());
 	}
 

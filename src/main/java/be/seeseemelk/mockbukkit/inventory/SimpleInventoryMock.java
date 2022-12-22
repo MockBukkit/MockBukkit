@@ -5,6 +5,10 @@ import org.bukkit.inventory.InventoryHolder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * A basic inventory.
+ * @see InventoryMock
+ */
 public class SimpleInventoryMock extends InventoryMock
 {
 

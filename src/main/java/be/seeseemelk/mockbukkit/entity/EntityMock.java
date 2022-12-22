@@ -16,6 +16,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.EntityEffect;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.PistonMoveReaction;
@@ -48,22 +49,31 @@ import org.spigotmc.event.entity.EntityMountEvent;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Queue;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.LinkedTransferQueue;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Mock implementation of an {@link Entity}.
+ *
+ * @see Entity.Spigot
+ * @see MessageTarget
+ */
 public abstract class EntityMock extends Entity.Spigot implements Entity, MessageTarget
 {
 
-	private final @NotNull ServerMock server;
+	private static final AtomicInteger ENTITY_COUNTER = new AtomicInteger();
+
+	protected final @NotNull ServerMock server;
 	private final @NotNull UUID uuid;
+	private final int id;
 	private Location location;
 	private boolean teleported;
 	private TeleportCause teleportCause;
@@ -71,7 +81,6 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private final List<Entity> passengers = new ArrayList<>(0);
 	private final MetadataTable metadataTable = new MetadataTable();
 	private final PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
-	private boolean operator = false;
 	private @NotNull Component name = Component.text("entity");
 	private @Nullable Component customName = null;
 	private boolean customNameVisible = false;
@@ -85,7 +94,16 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private final int maxFireTicks = 20;
 	private boolean removed = false;
 	private @Nullable EntityDamageEvent lastDamageEvent;
+	private boolean visualFire;
+	private boolean silent;
+	private boolean gravity = true;
 
+	/**
+	 * Constructs a new EntityMock on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	protected EntityMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		Preconditions.checkNotNull(server, "Server cannot be null");
@@ -93,6 +111,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 
 		this.server = server;
 		this.uuid = uuid;
+		this.id = ENTITY_COUNTER.incrementAndGet();
 
 		this.perms = new PermissibleBase(this);
 
@@ -320,6 +339,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		return false;
 	}
 
+	/**
+	 * Handles teleporting an entity without firing an event.
+	 * This will set the entity to the new location, mark teleport as true, and set the teleport cause.
+	 *
+	 * @param location The location to teleport to.
+	 * @param cause    The teleport cause.
+	 */
 	protected void teleportWithoutEvent(@NotNull Location location, @NotNull TeleportCause cause)
 	{
 		setLocation(location);
@@ -345,13 +371,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public boolean isOp()
 	{
-		return operator;
+		return false;
 	}
 
 	@Override
 	public void setOp(boolean isOperator)
 	{
-		operator = isOperator;
+		throw new UnsupportedOperationException("This does nothing in CraftBukkit");
 	}
 
 	@Override
@@ -558,8 +584,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public int getEntityId()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return this.id;
 	}
 
 	@Override
@@ -583,15 +608,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public void setVisualFire(boolean fire)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		this.visualFire = fire;
 	}
 
 	@Override
 	public boolean isVisualFire()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return this.visualFire;
 	}
 
 	@Override
@@ -646,12 +669,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 			new ArrayList<>(this.passengers).forEach(Entity::leaveVehicle);
 		}
 		this.removed = true;
+		this.server.unregisterEntity(this);
 	}
 
 	@Override
 	public boolean isDead()
 	{
-		return !this.removed;
+		return this.removed;
 	}
 
 	@Override
@@ -807,6 +831,27 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
+	public @NotNull Sound getSwimSound()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Sound getSwimSplashSound()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Sound getSwimHighSpeedSplashSound()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public boolean isInsideVehicle()
 	{
 		return this.vehicle != null;
@@ -909,7 +954,6 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	public void setGlowing(boolean flag)
 	{
 		glowingFlag = flag;
-
 	}
 
 	@Override
@@ -933,31 +977,25 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public boolean isSilent()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return this.silent;
 	}
 
 	@Override
-	public void setSilent(boolean flag)
+	public void setSilent(boolean silent)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
-
+		this.silent = silent;
 	}
 
 	@Override
 	public boolean hasGravity()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return this.gravity;
 	}
 
 	@Override
 	public void setGravity(boolean gravity)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
-
+		this.gravity = gravity;
 	}
 
 	@Override
@@ -1108,6 +1146,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 
 	@Override
 	public CreatureSpawnEvent.@NotNull SpawnReason getEntitySpawnReason()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isUnderWater()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

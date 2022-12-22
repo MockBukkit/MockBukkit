@@ -13,14 +13,21 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.data.BlockData;
+import org.bukkit.entity.Entity;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
+/**
+ * Mock implementation of a {@link BlockState}.
+ * Also manages the creation of new BlockStates with the appropriate mock class.
+ */
 public class BlockStateMock implements BlockState
 {
 
@@ -28,6 +35,11 @@ public class BlockStateMock implements BlockState
 	private @Nullable Block block;
 	private Material material;
 
+	/**
+	 * Constructs a new {@link BlockStateMock} for the provided {@link Material}.
+	 *
+	 * @param material The material this state is for.
+	 */
 	public BlockStateMock(@NotNull Material material)
 	{
 		Preconditions.checkNotNull(material, "Material cannot be null");
@@ -35,6 +47,11 @@ public class BlockStateMock implements BlockState
 		this.material = material;
 	}
 
+	/**
+	 * Constructs a new {@link BlockStateMock} for the provided {@link Block}.
+	 *
+	 * @param block The block this state is for.
+	 */
 	protected BlockStateMock(@NotNull Block block)
 	{
 		Preconditions.checkNotNull(block, "Block cannot be null");
@@ -43,6 +60,11 @@ public class BlockStateMock implements BlockState
 		this.material = block.getType();
 	}
 
+	/**
+	 * Constructs a new {@link BlockStateMock} by cloning the data from an existing one.
+	 *
+	 * @param state The state to clone.
+	 */
 	protected BlockStateMock(@NotNull BlockStateMock state)
 	{
 		Preconditions.checkNotNull(state, "BlockStateMock cannot be null");
@@ -52,21 +74,46 @@ public class BlockStateMock implements BlockState
 	}
 
 	// region Type Checking
+
+	/**
+	 * Ensures the provided material is one of the expected materials provided.
+	 *
+	 * @param material The material to test.
+	 * @param expected The expected materials.
+	 */
 	protected void checkType(@NotNull Material material, @NotNull Material @NotNull ... expected)
 	{
 		Preconditions.checkArgument(Arrays.stream(expected).anyMatch(m -> material == m), "Cannot create a " + getClass().getSimpleName() + " from " + material);
 	}
 
+	/**
+	 * Ensures the provided block type is one of the expected materials provided.
+	 *
+	 * @param block    The block to test.
+	 * @param expected The expected materials.
+	 */
 	protected void checkType(@NotNull Block block, @NotNull Material... expected)
 	{
 		checkType(block.getType(), expected);
 	}
 
-	protected void checkType(@NotNull Material material, @NotNull Tag<Material> tag)
+	/**
+	 * Ensures the provided material is contained in the {@link Tag}.
+	 *
+	 * @param material The material to test.
+	 * @param expected The expected tag.
+	 */
+	protected void checkType(@NotNull Material material, @NotNull Tag<Material> expected)
 	{
-		Preconditions.checkArgument(tag.isTagged(material), "Cannot create a " + getClass().getSimpleName() + " from " + material);
+		Preconditions.checkArgument(expected.isTagged(material), "Cannot create a " + getClass().getSimpleName() + " from " + material);
 	}
 
+	/**
+	 * Ensures the provided block type is contained in the {@link Tag}.
+	 *
+	 * @param block    The material to test.
+	 * @param expected The expected tag.
+	 */
 	protected void checkType(@NotNull Block block, @NotNull Tag<Material> expected)
 	{
 		checkType(block.getType(), expected);
@@ -251,6 +298,27 @@ public class BlockStateMock implements BlockState
 	}
 
 	@Override
+	public @NotNull Collection<ItemStack> getDrops()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Collection<ItemStack> getDrops(@Nullable ItemStack tool)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Collection<ItemStack> getDrops(@NotNull ItemStack tool, @Nullable Entity entity)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull BlockData getBlockData()
 	{
 		// TODO Auto-generated method stub
@@ -303,6 +371,13 @@ public class BlockStateMock implements BlockState
 //		}
 	}
 
+	/**
+	 * Attempts to construct a BlockStateMock by the provided block.
+	 * Will return a basic {@link BlockStateMock} if no implementation is found.
+	 *
+	 * @param block The block to create the BlockState from.
+	 * @return The BlockState.
+	 */
 	@NotNull
 	public static BlockStateMock mockState(@NotNull Block block)
 	{

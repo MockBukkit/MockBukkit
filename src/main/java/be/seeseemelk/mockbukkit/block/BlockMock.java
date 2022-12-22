@@ -35,6 +35,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * Mock implementation of a {@link Block}.
+ */
 public class BlockMock implements Block
 {
 
@@ -87,7 +90,7 @@ public class BlockMock implements Block
 		this.material = material;
 		this.location = location;
 		this.state = BlockStateMock.mockState(this);
-		this.blockData = new BlockDataMock(material);
+		this.blockData = BlockDataMock.mock(material);
 	}
 
 	@Override
@@ -250,7 +253,7 @@ public class BlockMock implements Block
 		Preconditions.checkNotNull(type, "Type cannot be null");
 		material = type;
 		state = BlockStateMock.mockState(this);
-		blockData = new BlockDataMock(type);
+		blockData = BlockDataMock.mock(type);
 	}
 
 	@Override

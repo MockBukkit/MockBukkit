@@ -5,6 +5,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
+/**
+ * Mock implementation of {@link LegacyComponentSerializer.Provider} based on {@code io.papermc.paper.adventure.providers.LegacyComponentSerializerProviderImpl}.
+ */
+@SuppressWarnings("UnstableApiUsage") // We are the internal
 public class LegacyComponentSerializerProviderImpl implements LegacyComponentSerializer.Provider
 {
 
@@ -31,7 +35,9 @@ public class LegacyComponentSerializerProviderImpl implements LegacyComponentSer
 	@Override
 	public @NotNull Consumer<LegacyComponentSerializer.Builder> legacy()
 	{
-		return builder -> {};
+		return builder ->
+		{
+		};
 	}
-	
+
 }

@@ -3,10 +3,10 @@ package be.seeseemelk.mockbukkit.block.state;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import be.seeseemelk.mockbukkit.inventory.ShulkerBoxInventoryMock;
-import com.destroystokyo.paper.MaterialTags;
 import com.google.common.base.Preconditions;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
+import org.bukkit.Tag;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.ShulkerBox;
@@ -17,9 +17,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.UUID;
 
 /**
- * This {@link ContainerMock} represents a {@link ShulkerBox}.
+ * Mock implementation of a {@link ShulkerBox}.
  *
- * @author TheBusyBiscuit
+ * @see ContainerMock
  */
 public class ShulkerBoxMock extends ContainerMock implements ShulkerBox
 {
@@ -27,20 +27,37 @@ public class ShulkerBoxMock extends ContainerMock implements ShulkerBox
 	private final @Nullable DyeColor color;
 	private boolean isOpen = false;
 
+	/**
+	 * Constructs a new {@link ShulkerBoxMock} for the provided {@link Material}.
+	 * Only supports materials in {@link Tag#SHULKER_BOXES}
+	 *
+	 * @param material The material this state is for.
+	 */
 	public ShulkerBoxMock(@NotNull Material material)
 	{
 		super(material);
-		checkType(material, MaterialTags.SHULKER_BOXES);
+		checkType(material, Tag.SHULKER_BOXES);
 		this.color = getFromMaterial(material);
 	}
 
+	/**
+	 * Constructs a new {@link ShulkerBoxMock} for the provided {@link Block}.
+	 * Only supports materials in {@link Tag#SHULKER_BOXES}
+	 *
+	 * @param block The block this state is for.
+	 */
 	protected ShulkerBoxMock(@NotNull Block block)
 	{
 		super(block);
-		checkType(block, MaterialTags.SHULKER_BOXES);
+		checkType(block, Tag.SHULKER_BOXES);
 		this.color = getFromMaterial(block.getType());
 	}
 
+	/**
+	 * Constructs a new {@link ShulkerBoxMock} by cloning the data from an existing one.
+	 *
+	 * @param state The state to clone.
+	 */
 	protected ShulkerBoxMock(@NotNull ShulkerBoxMock state)
 	{
 		super(state);

@@ -15,8 +15,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -346,7 +344,7 @@ class ArmorStandMockTest
 	@Test
 	void testSetDisabledSlotsNullThrows()
 	{
-		assertThrows(NullPointerException.class, () -> armorStand.setDisabledSlots(null));
+		assertThrows(NullPointerException.class, () -> armorStand.setDisabledSlots((EquipmentSlot) null));
 	}
 
 	@Test
@@ -362,7 +360,7 @@ class ArmorStandMockTest
 	@Test
 	void testAddDisabledSlotsNullThrows()
 	{
-		assertThrows(NullPointerException.class, () -> armorStand.addDisabledSlots(null));
+		assertThrows(NullPointerException.class, () -> armorStand.addDisabledSlots((EquipmentSlot) null));
 	}
 
 	@Test
@@ -377,7 +375,7 @@ class ArmorStandMockTest
 	@Test
 	void testRemoveDisabledSlotsNullThrows()
 	{
-		assertThrows(NullPointerException.class, () -> armorStand.removeDisabledSlots(null));
+		assertThrows(NullPointerException.class, () -> armorStand.removeDisabledSlots((EquipmentSlot) null));
 	}
 
 	@Test

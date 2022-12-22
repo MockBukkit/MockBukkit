@@ -7,6 +7,7 @@ import be.seeseemelk.mockbukkit.command.CommandResult;
 import be.seeseemelk.mockbukkit.command.ConsoleCommandSenderMock;
 import be.seeseemelk.mockbukkit.command.MessageTarget;
 import be.seeseemelk.mockbukkit.command.MockCommandMap;
+import be.seeseemelk.mockbukkit.configuration.ServerConfiguration;
 import be.seeseemelk.mockbukkit.enchantments.EnchantmentsMock;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
@@ -40,6 +41,7 @@ import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 import be.seeseemelk.mockbukkit.potion.MockPotionEffectType;
 import be.seeseemelk.mockbukkit.profile.PlayerProfileMock;
 import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
+import be.seeseemelk.mockbukkit.scoreboard.CriteriaMock;
 import be.seeseemelk.mockbukkit.scoreboard.ScoreboardManagerMock;
 import be.seeseemelk.mockbukkit.services.ServicesManagerMock;
 import be.seeseemelk.mockbukkit.tags.TagRegistry;
@@ -96,6 +98,7 @@ import org.bukkit.entity.SpawnCategory;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.server.MapInitializeEvent;
 import org.bukkit.generator.ChunkGenerator.ChunkData;
 import org.bukkit.inventory.InventoryHolder;
@@ -110,16 +113,19 @@ import org.bukkit.potion.PotionBrewer;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.Criteria;
 import org.bukkit.structure.StructureManager;
-import org.bukkit.util.CachedServerIcon;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -140,6 +146,9 @@ import java.util.logging.LogManager;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+/**
+ * Mock implementation of a {@link Server} and {@link Server.Spigot}.
+ */
 public class ServerMock extends Server.Spigot implements Server
 {
 
@@ -159,6 +168,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private final PlayerMockFactory playerFactory = new PlayerMockFactory(this);
 	private final PluginManagerMock pluginManager = new PluginManagerMock(this);
 	private final ScoreboardManagerMock scoreboardManager = new ScoreboardManagerMock();
+	private final Map<String, Criteria> criteria = new HashMap<>();
 	private final BukkitSchedulerMock scheduler = new BukkitSchedulerMock();
 	private final ServicesManagerMock servicesManager = new ServicesManagerMock();
 	private final MockPlayerList playerList = new MockPlayerList();
@@ -166,6 +176,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private final HelpMapMock helpMap = new HelpMapMock();
 	private final StandardMessenger messenger = new StandardMessenger();
 	private final Map<Integer, MapViewMock> mapViews = new HashMap<>();
+	private CachedServerIconMock serverIcon = new CachedServerIconMock(null);
 	private int nextMapId = 1;
 
 	private GameMode defaultGameMode = GameMode.SURVIVAL;
@@ -177,6 +188,12 @@ public class ServerMock extends Server.Spigot implements Server
 	private boolean isWhitelistEnforced = false;
 	private final @NotNull Set<OfflinePlayer> whitelistedPlayers = new LinkedHashSet<>();
 
+	private final @NotNull ServerConfiguration serverConfiguration = new ServerConfiguration();
+
+	/**
+	 * Constructs a new ServerMock and sets it up.
+	 * Does <b>NOT</b> set the server returned from {@link Bukkit#getServer()}.
+	 */
 	public ServerMock()
 	{
 		ServerMock.registerSerializables();
@@ -195,6 +212,7 @@ public class ServerMock extends Server.Spigot implements Server
 		{
 			logger.warning("Could not load file logger.properties");
 		}
+		logger.setLevel(Level.ALL);
 
 		try
 		{
@@ -204,9 +222,6 @@ public class ServerMock extends Server.Spigot implements Server
 		{
 			logger.warning("Could not load build properties");
 		}
-
-		logger.setLevel(Level.ALL);
-
 	}
 
 	/**
@@ -227,8 +242,22 @@ public class ServerMock extends Server.Spigot implements Server
 	 */
 	public void registerEntity(@NotNull EntityMock entity)
 	{
+		Preconditions.checkNotNull(entity, "Entity cannot be null");
 		AsyncCatcher.catchOp("entity add");
 		entities.add(entity);
+	}
+
+	/**
+	 * Unregisters an entity from the server. Should only be used internally.
+	 *
+	 * @param entity The entity to unregister
+	 */
+	public void unregisterEntity(@NotNull EntityMock entity)
+	{
+		Preconditions.checkNotNull(entity, "Entity cannot be null");
+		Preconditions.checkArgument(!entity.isValid(), "Entity is not marked for removal");
+		AsyncCatcher.catchOp("entity remove");
+		entities.remove(entity);
 	}
 
 	/**
@@ -254,8 +283,9 @@ public class ServerMock extends Server.Spigot implements Server
 
 		CountDownLatch conditionLatch = new CountDownLatch(1);
 
+		InetSocketAddress address = player.getAddress();
 		AsyncPlayerPreLoginEvent preLoginEvent = new AsyncPlayerPreLoginEvent(player.getName(),
-				player.getAddress().getAddress(), player.getUniqueId());
+				address.getAddress(), player.getUniqueId());
 		getPluginManager().callEventAsynchronously(preLoginEvent, (e) -> conditionLatch.countDown());
 		try
 		{
@@ -267,6 +297,9 @@ public class ServerMock extends Server.Spigot implements Server
 					(StringUtils.isEmpty(e.getMessage()) ? "" : e.getMessage()));
 			Thread.currentThread().interrupt();
 		}
+
+		PlayerLoginEvent playerLoginEvent = new PlayerLoginEvent(player, address.getHostString(), address.getAddress());
+		Bukkit.getPluginManager().callEvent(playerLoginEvent);
 
 		Component joinMessage = MiniMessage.miniMessage()
 				.deserialize("<name> has joined the Server!", Placeholder.component("name", player.displayName()));
@@ -287,7 +320,6 @@ public class ServerMock extends Server.Spigot implements Server
 			return;
 		}
 
-		player.setLastPlayed(getCurrentServerTime());
 		registerEntity(player);
 	}
 
@@ -610,14 +642,22 @@ public class ServerMock extends Server.Spigot implements Server
 		throw new UnimplementedOperationException();
 	}
 
+	/**
+	 * Creates an inventory with the provided parameters.
+	 *
+	 * @param owner The holder of the inventory.
+	 * @param type  The type of the inventory.
+	 * @param title The title of the inventory view.
+	 * @param size  The size of the inventory.
+	 * @return The created inventory.
+	 * @throws IllegalArgumentException If the InventoryType is not creatable.
+	 * @see InventoryType#isCreatable()
+	 */
 	@NotNull
 	@Deprecated
 	public InventoryMock createInventory(InventoryHolder owner, @NotNull InventoryType type, String title, int size)
 	{
-		if (!type.isCreatable())
-		{
-			throw new IllegalArgumentException("Inventory Type is not creatable!");
-		}
+		Preconditions.checkArgument(type.isCreatable(), "Inventory Type '" + type + "' is not creatable!");
 
 		switch (type)
 		{
@@ -628,9 +668,9 @@ public class ServerMock extends Server.Spigot implements Server
 		case DROPPER:
 			return new DropperInventoryMock(owner);
 		case PLAYER:
-			if (owner instanceof HumanEntity)
+			if (owner instanceof HumanEntity he)
 			{
-				return new PlayerInventoryMock((HumanEntity) owner);
+				return new PlayerInventoryMock(he);
 			}
 			else
 			{
@@ -730,6 +770,13 @@ public class ServerMock extends Server.Spigot implements Server
 	public @NotNull List<World> getWorlds()
 	{
 		return new ArrayList<>(worlds);
+	}
+
+	@Override
+	public boolean isTickingWorlds()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -994,6 +1041,13 @@ public class ServerMock extends Server.Spigot implements Server
 		}
 	}
 
+	/**
+	 * Gets the tab completion result for a command.
+	 *
+	 * @param sender      The command sender.
+	 * @param commandLine The command string, without a leading slash.
+	 * @return The tab completion result, or an empty list.
+	 */
 	public @NotNull List<String> getCommandTabComplete(@NotNull CommandSender sender, @NotNull String commandLine)
 	{
 		AsyncCatcher.catchOp("command tabcomplete");
@@ -1052,8 +1106,18 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public int getViewDistance()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.serverConfiguration.getViewDistance();
+	}
+
+	/**
+	 * Sets the global view distance for all players.
+	 *
+	 * @param viewDistance The new view distance.
+	 * @see ServerMock#getViewDistance()
+	 */
+	public void setViewDistance(int viewDistance)
+	{
+		this.serverConfiguration.setViewDistance(viewDistance);
 	}
 
 	@Override
@@ -1066,29 +1130,69 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull String getWorldType()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.serverConfiguration.getLevelType().getKey();
+	}
+
+	/**
+	 * Sets the global default World Type
+	 *
+	 * @param worldType The new {@link ServerConfiguration.LevelType}
+	 * @see ServerMock#getWorldType()
+	 */
+	public void setWorldType(@NotNull ServerConfiguration.LevelType worldType)
+	{
+		this.serverConfiguration.setLevelType(worldType);
 	}
 
 	@Override
 	public boolean getGenerateStructures()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.serverConfiguration.isGenerateStructures();
+	}
+
+	/**
+	 * Sets whether structures should be generated.
+	 *
+	 * @param generateStructures Whether structures should be generated.
+	 * @see ServerMock#getGenerateStructures()
+	 */
+	public void setGenerateStructures(boolean generateStructures)
+	{
+		this.serverConfiguration.setGenerateStructures(generateStructures);
 	}
 
 	@Override
 	public boolean getAllowEnd()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.serverConfiguration.isAllowEnd();
+	}
+
+	/**
+	 * Sets whether the End should be allowed.
+	 *
+	 * @param allowEnd Whether the End should be allowed.
+	 * @see ServerMock#getAllowEnd()
+	 */
+	public void setAllowEnd(boolean allowEnd)
+	{
+		this.serverConfiguration.setAllowEnd(allowEnd);
 	}
 
 	@Override
 	public boolean getAllowNether()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.serverConfiguration.isAllowNether();
+	}
+
+	/**
+	 * Sets whether the Nether should be allowed.
+	 *
+	 * @param allowNether Whether the Nether should be allowed.
+	 * @see ServerMock#getAllowNether()
+	 */
+	public void setAllowNether(boolean allowNether)
+	{
+		this.serverConfiguration.setAllowNether(allowNether);
 	}
 
 	@NotNull
@@ -1175,15 +1279,24 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull String getUpdateFolder()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.serverConfiguration.getUpdateFolder();
+	}
+
+	/**
+	 * Sets the global update folder.
+	 *
+	 * @param updateFolder The new update folder.
+	 * @see ServerConfiguration#setUpdateFolder(String)
+	 */
+	public void setUpdateFolder(@NotNull String updateFolder)
+	{
+		this.serverConfiguration.setUpdateFolder(updateFolder);
 	}
 
 	@Override
 	public @NotNull File getUpdateFolderFile()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return new File(this.getPluginsFolder(), this.getUpdateFolder());
 	}
 
 	@Override
@@ -1296,36 +1409,86 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public boolean shouldSendChatPreviews()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.serverConfiguration.shouldSendChatPreviews();
+	}
+
+	/**
+	 * Sets whether the server should send chat previews.
+	 *
+	 * @param shouldSendChatPreviews Whether the server should send chat previews.
+	 * @see ServerMock#shouldSendChatPreviews()
+	 */
+	public void setShouldSendChatPreviews(boolean shouldSendChatPreviews)
+	{
+		this.serverConfiguration.setShouldSendChatPreviews(shouldSendChatPreviews);
 	}
 
 	@Override
 	public boolean isEnforcingSecureProfiles()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.serverConfiguration.isEnforceSecureProfiles() && this.getOnlineMode();
+	}
+
+	/**
+	 * Sets whether the server should enforce secure profiles.
+	 *
+	 * @param enforcingSecureProfiles Whether the server should enforce secure profiles.
+	 * @see ServerMock#isEnforcingSecureProfiles()
+	 */
+	public void setEnforcingSecureProfiles(boolean enforcingSecureProfiles)
+	{
+		this.serverConfiguration.setEnforceSecureProfiles(enforcingSecureProfiles);
 	}
 
 	@Override
 	public boolean getOnlineMode()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.serverConfiguration.isOnlineMode();
+	}
+
+	/**
+	 * Sets whether the server should be in online mode.
+	 *
+	 * @param onlineMode Whether the server should be in online mode.
+	 * @see ServerMock#getOnlineMode()
+	 */
+	public void setOnlineMode(boolean onlineMode)
+	{
+		this.serverConfiguration.setOnlineMode(onlineMode);
 	}
 
 	@Override
 	public boolean getAllowFlight()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.serverConfiguration.isAllowFlight();
+	}
+
+	/**
+	 * Sets whether the server should allow flight.
+	 *
+	 * @param allowFlight Whether the server should allow flight.
+	 * @see ServerMock#getAllowFlight()
+	 */
+	public void setAllowFlight(boolean allowFlight)
+	{
+		this.serverConfiguration.setAllowFlight(allowFlight);
 	}
 
 	@Override
 	public boolean isHardcore()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.serverConfiguration.isHardcore();
+	}
+
+	/**
+	 * Sets whether the server should be in hardcore mode.
+	 *
+	 * @param hardcore Whether the server should be in hardcore mode.
+	 * @see ServerMock#isHardcore()
+	 */
+	public void setHardcore(boolean hardcore)
+	{
+		this.serverConfiguration.setHardcore(hardcore);
 	}
 
 	@Override
@@ -1391,8 +1554,19 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public int getMaxChainedNeighborUpdates()
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.serverConfiguration.getMaxChainedNeighbourUpdates();
+	}
+
+	/**
+	 * Sets the maximum number of chained neighbour updates before skipping additional ones.
+	 * Negative values remove the limit.
+	 *
+	 * @param maxChainedNeighborUpdates The maximum number of chained neighbour updates.
+	 * @see ServerMock#getMaxChainedNeighborUpdates()
+	 */
+	public void setMaxChainedNeighborUpdates(int maxChainedNeighborUpdates)
+	{
+		this.serverConfiguration.setMaxChainedNeighbourUpdates(maxChainedNeighborUpdates);
 	}
 
 	@Override
@@ -1449,16 +1623,25 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @Nullable Component shutdownMessage()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.serverConfiguration.getShutdownMessage();
+	}
+
+	/**
+	 * Sets the shutdown message.
+	 *
+	 * @param shutdownMessage The shutdown message.
+	 * @see ServerMock#shutdownMessage()
+	 */
+	public void setShutdownMessage(@NotNull Component shutdownMessage)
+	{
+		this.serverConfiguration.setShutdownMessage(shutdownMessage);
 	}
 
 	@Override
 	@Deprecated
 	public String getShutdownMessage()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return LegacyComponentSerializer.legacySection().serialize(this.serverConfiguration.getShutdownMessage());
 	}
 
 	/**
@@ -1487,29 +1670,46 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull Criteria getScoreboardCriteria(@NotNull String name)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(name, "Scoreboard criteria name cannot be null");
+		return this.criteria.computeIfAbsent(name, CriteriaMock::new);
+	}
+
+	/**
+	 * Sets the return value of {@link #getServerIcon()}.
+	 *
+	 * @param serverIcon The icon to set.
+	 */
+	public void setServerIcon(CachedServerIconMock serverIcon)
+	{
+		this.serverIcon = serverIcon;
 	}
 
 	@Override
-	public CachedServerIcon getServerIcon()
+	public CachedServerIconMock getServerIcon()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.serverIcon;
 	}
 
 	@Override
-	public @NotNull CachedServerIcon loadServerIcon(File file)
+	public @NotNull CachedServerIconMock loadServerIcon(@NotNull File file) throws IOException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(file, "File cannot be null");
+		Preconditions.checkArgument(file.isFile(), file + " isn't a file");
+		return loadServerIcon(ImageIO.read(file));
 	}
 
 	@Override
-	public @NotNull CachedServerIcon loadServerIcon(BufferedImage image)
+	public @NotNull CachedServerIconMock loadServerIcon(@NotNull BufferedImage image) throws IOException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(image, "Image cannot be null");
+		Preconditions.checkArgument(image.getWidth() == 64, "Image must be 64 pixels wide");
+		Preconditions.checkArgument(image.getHeight() == 64, "Image must be 64 pixels high");
+
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		ImageIO.write(image, "PNG", out);
+		String encoded = Base64.getEncoder().encodeToString(out.toByteArray());
+
+		return new CachedServerIconMock(CachedServerIconMock.PNG_BASE64_PREFIX + encoded);
 	}
 
 	@Override
@@ -1660,6 +1860,11 @@ public class ServerMock extends Server.Spigot implements Server
 		return tag;
 	}
 
+	/**
+	 * Adds a tag registry.
+	 *
+	 * @param registry The registry to add.
+	 */
 	public void addTagRegistry(@NotNull TagRegistry registry)
 	{
 		materialTags.put(registry.getRegistry(), registry);
@@ -1898,22 +2103,52 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public int getMaxWorldSize()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.serverConfiguration.getMaxWorldSize();
+	}
+
+	/**
+	 * Set the maximum world size
+	 *
+	 * @param maxWorldSize The maximum world size
+	 * @see ServerMock#getMaxWorldSize()
+	 */
+	public void setMaxWorldSize(int maxWorldSize)
+	{
+		this.serverConfiguration.setMaxWorldSize(maxWorldSize);
 	}
 
 	@Override
 	public int getSimulationDistance()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.serverConfiguration.getSimulationDistance();
+	}
+
+	/**
+	 * Set the simulation distance
+	 *
+	 * @param simulationDistance The simulation distance
+	 * @see ServerMock#getSimulationDistance()
+	 */
+	public void setSimulationDistance(int simulationDistance)
+	{
+		this.serverConfiguration.setSimulationDistance(simulationDistance);
 	}
 
 	@Override
 	public boolean getHideOnlinePlayers()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.serverConfiguration.isHideOnlinePlayers();
+	}
+
+	/**
+	 * Set whether to hide online players
+	 *
+	 * @param hideOnlinePlayers Whether to hide online players
+	 * @see ServerMock#getHideOnlinePlayers()
+	 */
+	public void setHideOnlinePlayers(boolean hideOnlinePlayers)
+	{
+		this.serverConfiguration.setHideOnlinePlayers(hideOnlinePlayers);
 	}
 
 	@Override

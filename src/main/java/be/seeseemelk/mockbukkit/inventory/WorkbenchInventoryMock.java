@@ -10,13 +10,21 @@ import org.bukkit.inventory.Recipe;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
-
+/**
+ * Mock implementation of a {@link CraftingInventory}.
+ *
+ * @see InventoryMock
+ */
 public class WorkbenchInventoryMock extends InventoryMock implements CraftingInventory
 {
 
 	private @Nullable ItemStack result = null;
 
+	/**
+	 * Constructs a new {@link WorkbenchInventoryMock} for the given holder.
+	 *
+	 * @param holder The holder of the inventory.
+	 */
 	public WorkbenchInventoryMock(@Nullable InventoryHolder holder)
 	{
 		super(holder, InventoryType.WORKBENCH);

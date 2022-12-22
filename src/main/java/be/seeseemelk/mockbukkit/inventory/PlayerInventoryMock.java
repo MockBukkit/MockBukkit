@@ -13,18 +13,49 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 
+/**
+ * Mock implementation of a {@link PlayerInventory}.
+ *
+ * @see InventoryMock
+ */
 public class PlayerInventoryMock extends InventoryMock implements PlayerInventory, EntityEquipment
 {
 
+	/**
+	 * The starting slot of the hotbar.
+	 */
 	protected static final int HOTBAR = 0;
+	/**
+	 * The ending slot of the hotbar.
+	 */
 	protected static final int SLOT_BAR = 9;
+	/**
+	 * The slot boots are in.
+	 */
 	protected static final int BOOTS = 36;
+	/**
+	 * The slot leggings are in.
+	 */
 	protected static final int LEGGINGS = 37;
+	/**
+	 * The slot the chestplate is in.
+	 */
 	protected static final int CHESTPLATE = 38;
+	/**
+	 * The slot the helmet is in.
+	 */
 	protected static final int HELMET = 39;
+	/**
+	 * The slot of the offhand.
+	 */
 	protected static final int OFF_HAND = 40;
 	private int mainHandSlot = 0;
 
+	/**
+	 * Constructs a new {@link PlayerInventoryMock}.
+	 *
+	 * @param holder The holder of the inventory.
+	 */
 	public PlayerInventoryMock(HumanEntity holder)
 	{
 		super(holder, InventoryType.PLAYER);
@@ -62,25 +93,25 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	}
 
 	@Override
-	public ItemStack getHelmet()
+	public @Nullable ItemStack getHelmet()
 	{
 		return getItem(HELMET);
 	}
 
 	@Override
-	public ItemStack getChestplate()
+	public @Nullable ItemStack getChestplate()
 	{
 		return getItem(CHESTPLATE);
 	}
 
 	@Override
-	public ItemStack getLeggings()
+	public @Nullable ItemStack getLeggings()
 	{
 		return getItem(LEGGINGS);
 	}
 
 	@Override
-	public ItemStack getBoots()
+	public @Nullable ItemStack getBoots()
 	{
 		return getItem(BOOTS);
 	}
@@ -249,7 +280,7 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	@Override
 	public @NotNull ItemStack getItemInMainHand()
 	{
-		return notNull(getItem(SLOT_BAR + mainHandSlot));
+		return notNull(getItem(HOTBAR + mainHandSlot));
 	}
 
 	@Override
@@ -261,7 +292,7 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	@Override
 	public void setItemInMainHand(@Nullable ItemStack item, boolean silent)
 	{
-		setItem(SLOT_BAR + mainHandSlot, item);
+		setItem(HOTBAR + mainHandSlot, item);
 		// Sounds are not implemented here
 	}
 
@@ -298,28 +329,17 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 		setItemInMainHand(stack);
 	}
 
-	/**
-	 * Gets the {@link ItemStack} at the given equipment slot in the inventory.
-	 *
-	 * <p>Implementation note: only the contents of the main hand
-	 * and the off hand are guaranteed not to be {@code null},
-	 * despite the annotation present in the Bukkit api.</p>
-	 *
-	 * @param slot the slot to get the {@link ItemStack}
-	 * @return the {@link ItemStack} in the given slot
-	 */
 	@Override
 	public @NotNull ItemStack getItem(@NotNull EquipmentSlot slot)
 	{
 		return switch (slot)
 				{
-					case CHEST -> getChestplate();
-					case FEET -> getBoots();
+					case CHEST -> notNull(getChestplate());
+					case FEET -> notNull(getBoots());
 					case HAND -> getItemInMainHand();
-					case HEAD -> getHelmet();
-					case LEGS -> getLeggings();
+					case HEAD -> notNull(getHelmet());
+					case LEGS -> notNull(getLeggings());
 					case OFF_HAND -> getItemInOffHand();
-					default -> new ItemStack(Material.AIR);
 				};
 	}
 
@@ -340,9 +360,6 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 		case HEAD -> setHelmet(item);
 		case LEGS -> setLeggings(item);
 		case OFF_HAND -> setItemInOffHand(item);
-		default ->
-		{
-		}
 		}
 		// Sounds are not implemented here
 	}
@@ -373,7 +390,11 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 		throw new UnsupportedOperationException("Cannot set drop chance for PlayerInventory");
 	}
 
-	private @NotNull ItemStack notNull(@Nullable ItemStack itemStack)
+	/**
+	 * @param itemStack The item.
+	 * @return A new ItemStack of AIR if the provided item is null, otherwise the provided item.
+	 */
+	private static @NotNull ItemStack notNull(@Nullable ItemStack itemStack)
 	{
 		return itemStack == null ? new ItemStack(Material.AIR) : itemStack;
 	}

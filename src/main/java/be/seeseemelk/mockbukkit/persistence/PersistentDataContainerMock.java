@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.persistence;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.NamespacedKey;
 import org.bukkit.persistence.PersistentDataAdapterContext;
 import org.bukkit.persistence.PersistentDataContainer;
@@ -7,6 +8,7 @@ import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +16,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * This is a Mock of the {@link PersistentDataContainer} interface to allow the "persistent" storage of data. Only that
+ * This is a mock of the {@link PersistentDataContainer} interface to allow the "persistent" storage of data. Only that
  * it isn't persistent of course since it only ever exists in a test environment.
  *
  * @author TheBusyBiscuit
@@ -25,11 +27,19 @@ public class PersistentDataContainerMock implements PersistentDataContainer
 	private final PersistentDataAdapterContext context = new PersistentDataAdapterContextMock();
 	private final @NotNull Map<NamespacedKey, Object> map;
 
+	/**
+	 * Constructs a new {@link PersistentDataContainerMock} with no stored data.
+	 */
 	public PersistentDataContainerMock()
 	{
 		this.map = new HashMap<>();
 	}
 
+	/**
+	 * Constructs a new {@link PersistentDataContainerMock}, cloning the data of another.
+	 *
+	 * @param mock The {@link PersistentDataContainerMock} to clone.
+	 */
 	public PersistentDataContainerMock(@NotNull PersistentDataContainerMock mock)
 	{
 		this.map = new HashMap<>(mock.map);
@@ -93,6 +103,20 @@ public class PersistentDataContainerMock implements PersistentDataContainer
 	}
 
 	@Override
+	public byte @NotNull [] serializeToBytes() throws IOException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void readFromBytes(byte @NotNull [] bytes, boolean clear) throws IOException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public <T, Z> @NotNull Z getOrDefault(@NotNull NamespacedKey key, @NotNull PersistentDataType<T, Z> type,
 										  @NotNull Z defaultValue)
 	{
@@ -118,11 +142,23 @@ public class PersistentDataContainerMock implements PersistentDataContainer
 		return Collections.unmodifiableSet(map.keySet());
 	}
 
+	/**
+	 * Serializes the held data.
+	 *
+	 * @return The serialized data.
+	 * @see #deserialize(Map)
+	 */
 	public @NotNull Map<String, Object> serialize()
 	{
 		return map.entrySet().stream().collect(Collectors.toMap(e -> e.getKey().toString(), Map.Entry::getValue));
 	}
 
+	/**
+	 * Deserializes a {@link PersistentDataContainerMock} from a map.
+	 *
+	 * @param args The map to deserialize.
+	 * @return The deserialized {@link PersistentDataContainerMock}.
+	 */
 	public static @NotNull PersistentDataContainerMock deserialize(@NotNull Map<String, Object> args)
 	{
 		PersistentDataContainerMock mock = new PersistentDataContainerMock();

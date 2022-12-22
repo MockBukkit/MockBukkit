@@ -14,6 +14,11 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * Mock implementation of an {@link AbstractSkeleton}.
+ *
+ * @see MonsterMock
+ */
 public abstract class AbstractSkeletonMock extends MonsterMock implements AbstractSkeleton
 {
 
@@ -21,6 +26,12 @@ public abstract class AbstractSkeletonMock extends MonsterMock implements Abstra
 	private boolean isChargingAttack = false;
 	private final Map<LivingEntity, Pair<Float, Boolean>> attackedMobs = new HashMap<>();
 
+	/**
+	 * Constructs a new {@link AbstractSkeletonMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	protected AbstractSkeletonMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
@@ -89,13 +100,22 @@ public abstract class AbstractSkeletonMock extends MonsterMock implements Abstra
 	 * @param entity The {@link LivingEntity} to check.
 	 * @param charge The charge of the attack.
 	 */
-	public void assertAgressiveAttack(LivingEntity entity, float charge)
+	public void assertAggressiveAttack(LivingEntity entity, float charge)
 	{
 		assertAttacked(entity, charge);
 		if (!attackedMobs.get(entity).getRight())
 		{
 			fail();
 		}
+	}
+
+	/**
+	 * @deprecated Use {@link #assertAggressiveAttack(LivingEntity, float)}.
+	 */
+	@Deprecated(forRemoval = true)
+	public void assertAgressiveAttack(LivingEntity entity, float charge)
+	{
+		assertAggressiveAttack(entity, charge);
 	}
 
 }

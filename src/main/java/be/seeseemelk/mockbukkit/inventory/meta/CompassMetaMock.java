@@ -2,23 +2,37 @@ package be.seeseemelk.mockbukkit.inventory.meta;
 
 import com.google.common.base.Preconditions;
 import org.bukkit.Location;
+import org.bukkit.inventory.meta.BundleMeta;
 import org.bukkit.inventory.meta.CompassMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
+/**
+ * Mock implementation of a {@link CompassMeta}.
+ *
+ * @see ItemMetaMock
+ */
 public class CompassMetaMock extends ItemMetaMock implements CompassMeta
 {
 
 	private @Nullable Location lodestone;
 	private boolean tracked;
 
+	/**
+	 * Constructs a new {@link CompassMetaMock}.
+	 */
 	public CompassMetaMock()
 	{
 		super();
 	}
 
+	/**
+	 * Constructs a new {@link CompassMetaMock}, cloning the data from another.
+	 *
+	 * @param meta The meta to clone.
+	 */
 	public CompassMetaMock(@NotNull CompassMeta meta)
 	{
 		super(meta);

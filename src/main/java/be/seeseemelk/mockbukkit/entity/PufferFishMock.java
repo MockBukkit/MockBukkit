@@ -10,11 +10,22 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
+/**
+ * Mock implementation of a {@link PufferFish}.
+ *
+ * @see FishMock
+ */
 public class PufferFishMock extends FishMock implements PufferFish
 {
 
 	private int puffState = 0;
 
+	/**
+	 * Constructs a new {@link PufferFishMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	public PufferFishMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);

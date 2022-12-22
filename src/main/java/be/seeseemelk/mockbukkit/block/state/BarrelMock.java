@@ -11,28 +11,44 @@ import org.bukkit.loot.LootTable;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * This {@link ContainerMock} represents a {@link Barrel}
+ * Mock implementation of a {@link Barrel}.
  *
- * @author TheBusyBiscuit
- * @see ChestMock
+ * @see ContainerMock
  */
 public class BarrelMock extends ContainerMock implements Barrel
 {
 
 	private boolean isOpen = false;
 
+	/**
+	 * Constructs a new {@link BarrelMock} for the provided {@link Material}.
+	 * Only supports {@link Material#BARREL}
+	 *
+	 * @param material The material this state is for.
+	 */
 	public BarrelMock(@NotNull Material material)
 	{
 		super(material);
 		checkType(material, Material.BARREL);
 	}
 
+	/**
+	 * Constructs a new {@link BarrelMock} for the provided {@link Block}.
+	 * Only supports {@link Material#BARREL}
+	 *
+	 * @param block The block this state is for.
+	 */
 	protected BarrelMock(@NotNull Block block)
 	{
 		super(block);
 		checkType(block, Material.BARREL);
 	}
 
+	/**
+	 * Constructs a new {@link BarrelMock} by cloning the data from an existing one.
+	 *
+	 * @param state The state to clone.
+	 */
 	protected BarrelMock(@NotNull BarrelMock state)
 	{
 		super(state);

@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
+import com.destroystokyo.paper.inventory.meta.ArmorStandMeta;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import org.bukkit.inventory.ItemStack;
@@ -10,11 +11,19 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Mock implementation of a {@link BundleMeta}.
+ *
+ * @see ItemMetaMock
+ */
 public class BundleMetaMock extends ItemMetaMock implements BundleMeta
 {
 
 	private List<ItemStack> items;
 
+	/**
+	 * Constructs a new {@link BundleMetaMock}.
+	 */
 	public BundleMetaMock()
 	{
 		super();
@@ -22,6 +31,11 @@ public class BundleMetaMock extends ItemMetaMock implements BundleMeta
 		this.items = new ArrayList<>();
 	}
 
+	/**
+	 * Constructs a new {@link BundleMetaMock}, cloning the data from another.
+	 *
+	 * @param meta The meta to clone.
+	 */
 	public BundleMetaMock(@NotNull BundleMeta meta)
 	{
 		super(meta);

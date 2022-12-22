@@ -13,6 +13,11 @@ public class EventHandlerException extends RuntimeException
 	@Serial
 	private static final long serialVersionUID = 6093700474770834429L;
 
+	/**
+	 * Constructs a new runtime exception with the specified cause and a detail message of (cause==null ? null : cause.toString())
+	 *
+	 * @param cause The cause of the exception.
+	 */
 	public EventHandlerException(@NotNull Throwable cause)
 	{
 		super(cause);

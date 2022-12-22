@@ -13,10 +13,6 @@ import java.util.Map;
 public class AttributesMock
 {
 
-	private AttributesMock()
-	{
-	}
-
 	private static final Map<Attribute, Double> DEFAULT_ATTRIBUTE_VALUES = ImmutableMap.ofEntries(
 			Map.entry(Attribute.GENERIC_MAX_HEALTH, 20.0),
 			Map.entry(Attribute.GENERIC_FOLLOW_RANGE, 32.0),
@@ -33,10 +29,21 @@ public class AttributesMock
 			Map.entry(Attribute.ZOMBIE_SPAWN_REINFORCEMENTS, 0.0)
 	);
 
+	/**
+	 * Gets the default value of an {@link Attribute}.
+	 *
+	 * @param attribute The attribute to get.
+	 * @return The default value of the attribute.
+	 */
 	public static double getDefaultValue(@NotNull Attribute attribute)
 	{
 		Preconditions.checkNotNull(attribute, "Attribute cannot be null");
 		return DEFAULT_ATTRIBUTE_VALUES.get(attribute);
+	}
+
+	private AttributesMock()
+	{
+		throw new UnsupportedOperationException("Utility class");
 	}
 
 }

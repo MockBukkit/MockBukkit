@@ -2,15 +2,18 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
+import net.kyori.adventure.util.TriState;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class LivingEntityMockTest
@@ -78,6 +81,37 @@ class LivingEntityMockTest
 	{
 		livingEntity.setInvisible(true);
 		assertTrue(livingEntity.isInvisible());
+	}
+
+	@Test
+	void testSwingMainHand()
+	{
+		assertDoesNotThrow(() -> livingEntity.swingMainHand());
+	}
+
+	@Test
+	void testSwingOffHand()
+	{
+		assertDoesNotThrow(() -> livingEntity.swingOffHand());
+	}
+
+	@Test
+	void testGetFrictionStateDefault()
+	{
+		assertEquals(TriState.NOT_SET,livingEntity.getFrictionState());
+	}
+
+	@Test
+	void testSetFrictionState()
+	{
+		livingEntity.setFrictionState(TriState.TRUE);
+		assertEquals(TriState.TRUE,livingEntity.getFrictionState());
+	}
+
+	@Test
+	void testSetFrictionStateNullDoesThrow()
+	{
+		assertThrows(NullPointerException.class, () -> livingEntity.setFrictionState(null));
 	}
 
 }

@@ -4,18 +4,19 @@ import be.seeseemelk.mockbukkit.AsyncCatcher;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.WorldMock;
+import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryViewMock;
 import be.seeseemelk.mockbukkit.inventory.SimpleInventoryViewMock;
 import com.google.common.base.Preconditions;
-import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Firework;
 import org.bukkit.entity.FishHook;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Villager;
@@ -24,6 +25,7 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.MainHand;
 import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.PlayerInventory;
 import org.jetbrains.annotations.NotNull;
@@ -36,18 +38,34 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Mock implementation of a {@link HumanEntity}.
+ *
+ * @see LivingEntityMock
+ * @see PlayerMock
+ */
 public abstract class HumanEntityMock extends LivingEntityMock implements HumanEntity
 {
 
-	private @Nullable PlayerInventoryMock inventory = null;
+	private final PlayerInventoryMock inventory = new PlayerInventoryMock(this);
+	private final EnderChestInventoryMock enderChest = new EnderChestInventoryMock(this);
 	private InventoryView inventoryView;
 	private @Nullable ItemStack cursor = null;
 	private @NotNull GameMode gameMode = GameMode.SURVIVAL;
 	private @Nullable Location lastDeathLocation = new Location(new WorldMock(), 0, 0, 0);
+	/**
+	 * How much EXP this {@link HumanEntity} has.
+	 */
 	protected int expLevel = 0;
 	private float saturation = 5.0F;
 	private int foodLevel = 20;
 
+	/**
+	 * Constructs a new {@link HumanEntityMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	protected HumanEntityMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
@@ -66,11 +84,20 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	@Override
 	public @NotNull PlayerInventory getInventory()
 	{
-		if (inventory == null)
-		{
-			inventory = (PlayerInventoryMock) Bukkit.createInventory(this, InventoryType.PLAYER);
-		}
-		return inventory;
+		return this.inventory;
+	}
+
+	@Override
+	public @NotNull Inventory getEnderChest()
+	{
+		return this.enderChest;
+	}
+
+	@Override
+	public @NotNull MainHand getMainHand()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 
@@ -148,6 +175,13 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	public void setLastDeathLocation(@Nullable Location location)
 	{
 		this.lastDeathLocation = location;
+	}
+
+	@Override
+	public @Nullable Firework fireworkBoost(@NotNull ItemStack fireworkItemStack)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

@@ -4,16 +4,29 @@ import org.bukkit.entity.Axolotl;
 import org.bukkit.inventory.meta.AxolotlBucketMeta;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Mock implementation of an {@link AxolotlBucketMeta}.
+ *
+ * @see ItemMetaMock
+ */
 public class AxolotlBucketMetaMock extends ItemMetaMock implements AxolotlBucketMeta
 {
 
 	private Axolotl.Variant variant;
 
+	/**
+	 * Constructs a new {@link AxolotlBucketMetaMock}.
+	 */
 	public AxolotlBucketMetaMock()
 	{
 		super();
 	}
 
+	/**
+	 * Constructs a new {@link AxolotlBucketMetaMock}, cloning the data from another.
+	 *
+	 * @param meta The meta to clone.
+	 */
 	public AxolotlBucketMetaMock(@NotNull AxolotlBucketMeta meta)
 	{
 		super(meta);

@@ -10,6 +10,11 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
+/**
+ * Mock implementation of a {@link Fox}.
+ *
+ * @see AnimalsMock
+ */
 public class FoxMock extends AnimalsMock implements Fox
 {
 
@@ -24,6 +29,12 @@ public class FoxMock extends AnimalsMock implements Fox
 	private boolean defending = false;
 	private boolean sitting = false;
 
+	/**
+	 * Constructs a new {@link FoxMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	public FoxMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
@@ -60,10 +71,7 @@ public class FoxMock extends AnimalsMock implements Fox
 		this.sleeping = sleeping;
 	}
 
-	/**
-	 * Checks if the Fox is sleeping
-	 * @return True if he is sleeping, false if not
-	 */
+	@Override
 	public boolean isSleeping()
 	{
 		return this.sleeping;

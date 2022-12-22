@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.entity.Chicken;
@@ -10,9 +11,20 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
+/**
+ * Mock implementation of a {@link Chicken}.
+ *
+ * @see AnimalsMock
+ */
 public class ChickenMock extends AnimalsMock implements Chicken
 {
 
+	/**
+	 * Constructs a new {@link ChickenMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	public ChickenMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
@@ -29,6 +41,35 @@ public class ChickenMock extends AnimalsMock implements Chicken
 	{
 		Preconditions.checkNotNull(stack, "ItemStack cannot be null");
 		return stack.getType() == Material.WHEAT_SEEDS;
+	}
+
+	@Override
+	public boolean isChickenJockey()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setIsChickenJockey(boolean isChickenJockey)
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+
+	}
+
+	@Override
+	public int getEggLayTime()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setEggLayTime(int eggLayTime)
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 }

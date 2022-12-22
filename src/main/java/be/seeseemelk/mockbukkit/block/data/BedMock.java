@@ -1,24 +1,33 @@
 package be.seeseemelk.mockbukkit.block.data;
 
-import com.destroystokyo.paper.MaterialTags;
 import org.bukkit.Material;
+import org.bukkit.Tag;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.type.Bed;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 
+import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.FACING;
+import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.OCCUPIED;
+import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.PART;
+
+/**
+ * Mock implementation of {@link Bed}.
+ */
 public class BedMock extends BlockDataMock implements Bed
 {
 
-	private static final String PART = "part";
-	private static final String OCCUPIED = "occupied";
-	private static final String FACING = "facing";
-
+	/**
+	 * Constructs a new {@link BedMock} for the provided {@link Material}.
+	 * Only supports materials in {@link Tag#BEDS}
+	 *
+	 * @param type The material this data is for.
+	 */
 	public BedMock(@NotNull Material type)
 	{
 		super(type);
-		checkType(type, MaterialTags.BEDS);
+		checkType(type, Tag.BEDS);
 		this.setFacing(BlockFace.NORTH);
 		super.set(OCCUPIED, false);
 		this.setPart(Part.FOOT);
@@ -40,6 +49,12 @@ public class BedMock extends BlockDataMock implements Bed
 	public boolean isOccupied()
 	{
 		return super.get(OCCUPIED);
+	}
+
+	@Override
+	public void setOccupied(boolean occupied)
+	{
+		super.set(OCCUPIED, occupied);
 	}
 
 	@Override

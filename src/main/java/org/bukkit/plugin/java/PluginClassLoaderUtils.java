@@ -17,9 +17,22 @@ public class PluginClassLoaderUtils
 
 	private PluginClassLoaderUtils()
 	{
-		// Do not instantiate this.
+		throw new UnsupportedOperationException("Utility class");
 	}
 
+	/**
+	 * Constructs a new {@link PluginClassLoader}.
+	 *
+	 * @param loader        The plugin loader.
+	 * @param parent        The classloader parent.
+	 * @param description   The plugin description file.
+	 * @param dataFolder    The plugin's data folder.
+	 * @param file          The plugin's file.
+	 * @param libraryLoader The library loader.
+	 * @return The constructed {@link PluginClassLoader}.
+	 * @throws IOException            If an IO exception occurs.
+	 * @throws InvalidPluginException If the plugin is invalid.
+	 */
 	public static @NotNull PluginClassLoader createPluginClassLoader(@NotNull JavaPluginLoader loader,
 																	 @Nullable ClassLoader parent, @NotNull PluginDescriptionFile description, @NotNull File dataFolder,
 																	 @NotNull File file, @NotNull ClassLoader libraryLoader) throws IOException, InvalidPluginException

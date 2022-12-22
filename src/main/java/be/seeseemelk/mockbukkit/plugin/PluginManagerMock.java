@@ -15,7 +15,6 @@ import org.bukkit.event.Event;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
-import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.event.server.PluginEnableEvent;
 import org.bukkit.permissions.Permissible;
 import org.bukkit.permissions.Permission;
@@ -33,6 +32,7 @@ import org.bukkit.plugin.UnknownDependencyException;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;
 import org.bukkit.plugin.java.JavaPluginUtils;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -52,6 +52,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
@@ -66,6 +67,9 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * Mock implementation of a {@link PluginManager}.
+ */
 public class PluginManagerMock implements PluginManager
 {
 
@@ -75,7 +79,7 @@ public class PluginManagerMock implements PluginManager
 	private final List<PluginCommand> commands = new ArrayList<>();
 	private final List<Event> events = new ArrayList<>();
 	private File parentTemporaryDirectory;
-	private final List<Permission> permissions = new ArrayList<>();
+	private final Map<String, Permission> permissions = new HashMap<>();
 	private final Map<Permissible, Set<String>> permissionSubscriptions = new HashMap<>();
 	private final Map<Boolean, Map<Permissible, Boolean>> defaultPermissionSubscriptions = new HashMap<Boolean, Map<Permissible, Boolean>>();
 	private final @NotNull Map<String, List<Listener>> listeners = new HashMap<>();
@@ -83,6 +87,12 @@ public class PluginManagerMock implements PluginManager
 	private final List<Class<?>> pluginConstructorTypes = Arrays.asList(JavaPluginLoader.class,
 			PluginDescriptionFile.class, File.class, File.class);
 
+	/**
+	 * Constructs a new {@link PluginManagerMock} for the provided {@link ServerMock}.
+	 *
+	 * @param server The server this is for.
+	 */
+	@ApiStatus.Internal
 	@SuppressWarnings("deprecation")
 	public PluginManagerMock(@NotNull ServerMock server)
 	{
@@ -299,6 +309,12 @@ public class PluginManagerMock implements PluginManager
 				"No compatible constructor for " + class1.getName() + " with parameters " + str);
 	}
 
+	/**
+	 * Creates a new unique temporary directory.
+	 *
+	 * @return The directory.
+	 * @throws IOException If an IO error occurs.
+	 */
 	public @NotNull File getParentTemporaryDirectory() throws IOException
 	{
 		if (parentTemporaryDirectory == null)
@@ -481,6 +497,7 @@ public class PluginManagerMock implements PluginManager
 	 *
 	 * @param event The asynchronous {@link Event} to call.
 	 * @param func  A function to invoke after the event has been called.
+	 * @param <T>   The event type.
 	 */
 	public <T extends Event> void callEventAsynchronously(@NotNull T event, Consumer<T> func)
 	{
@@ -705,6 +722,11 @@ public class PluginManagerMock implements PluginManager
 		}
 	}
 
+	/**
+	 * Unregisters all listeners for a plugin.
+	 *
+	 * @param plugin The plugin.
+	 */
 	public void unregisterPluginEvents(@NotNull Plugin plugin)
 	{
 		List<Listener> listListener = listeners.get(plugin.getName());
@@ -784,59 +806,59 @@ public class PluginManagerMock implements PluginManager
 	@Override
 	public void disablePlugin(@NotNull Plugin plugin)
 	{
-		if (plugin instanceof JavaPlugin)
-		{
-			if (plugin.isEnabled())
-			{
-				unregisterPluginEvents(plugin);
-				JavaPluginUtils.setEnabled((JavaPlugin) plugin, false);
-				callEvent(new PluginDisableEvent(plugin));
-			}
-		}
-		else
-		{
-			throw new IllegalArgumentException("Not a JavaPlugin");
-		}
+		Preconditions.checkArgument(plugin instanceof JavaPlugin, "Not a JavaPlugin");
+		if (!plugin.isEnabled())
+			return;
+
+		// Don't print the "disabling x plugin" message
+		Level prevLevel = plugin.getLogger().getLevel();
+		plugin.getLogger().setLevel(Level.WARNING);
+		plugin.getPluginLoader().disablePlugin(plugin);
+		plugin.getLogger().setLevel(prevLevel);
+
+		unregisterPluginEvents(plugin);
+		server.getScheduler().cancelTasks(plugin);
+		server.getServicesManager().unregisterAll(plugin);
+		server.getMessenger().unregisterIncomingPluginChannel(plugin);
+		server.getMessenger().unregisterOutgoingPluginChannel(plugin);
+		// todo: implement chunk tickets
+//		for (World world : server.getWorlds())
+//		{
+//			world.removePluginChunkTickets(plugin);
+//		}
 	}
 
 	@Override
 	public Permission getPermission(@NotNull String name)
 	{
-		return permissions.stream().filter(permission -> permission.getName().equals(name)).findFirst().orElse(null);
+		return permissions.get(name.toLowerCase(Locale.ENGLISH));
 	}
 
 	@Override
 	public void addPermission(@NotNull Permission perm)
 	{
-		permissions.add(perm);
+		permissions.put(perm.getName().toLowerCase(Locale.ENGLISH), perm);
 	}
 
 	@Override
 	public void removePermission(@NotNull Permission perm)
 	{
-		permissions.remove(perm);
+		permissions.remove(perm.getName().toLowerCase(Locale.ENGLISH));
 	}
 
 	@Override
 	public void removePermission(@NotNull String name)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		permissions.remove(name.toLowerCase(Locale.ENGLISH));
 	}
 
 	@Override
 	public @NotNull Set<Permission> getDefaultPermissions(boolean op)
 	{
-		Set<Permission> perms = new HashSet<>();
-		for (Permission perm : this.permissions)
-		{
-			PermissionDefault permDefault = perm.getDefault();
-			if (permDefault == PermissionDefault.TRUE || (op && permDefault == PermissionDefault.OP))
-			{
-				perms.add(perm);
-			}
-		}
-		return perms;
+		return this.permissions.values()
+				.stream()
+				.filter(perm -> perm.getDefault() == PermissionDefault.TRUE || op && perm.getDefault() == PermissionDefault.OP)
+				.collect(Collectors.toSet());
 	}
 
 	@Override
@@ -929,7 +951,7 @@ public class PluginManagerMock implements PluginManager
 	@Override
 	public @NotNull Set<Permission> getPermissions()
 	{
-		return Set.copyOf(permissions);
+		return Set.copyOf(permissions.values());
 	}
 
 	/**

@@ -3,9 +3,9 @@ package be.seeseemelk.mockbukkit.block.state;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.BlockMock;
-import com.destroystokyo.paper.MaterialTags;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
+import org.bukkit.Tag;
 import org.bukkit.block.Block;
 import org.bukkit.block.ShulkerBox;
 import org.jetbrains.annotations.NotNull;
@@ -49,7 +49,7 @@ class ShulkerBoxMockTest
 	@Test
 	void constructor_Material()
 	{
-		for (Material material : MaterialTags.SHULKER_BOXES.getValues())
+		for (Material material : Tag.SHULKER_BOXES.getValues())
 		{
 			assertDoesNotThrow(() -> new ShulkerBoxMock(material));
 		}
@@ -64,7 +64,7 @@ class ShulkerBoxMockTest
 	@Test
 	void constructor_Block()
 	{
-		for (Material material : MaterialTags.SHULKER_BOXES.getValues())
+		for (Material material : Tag.SHULKER_BOXES.getValues())
 		{
 			assertDoesNotThrow(() -> new ShulkerBoxMock(new BlockMock(material)));
 		}

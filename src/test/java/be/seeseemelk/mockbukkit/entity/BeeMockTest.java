@@ -73,6 +73,7 @@ class BeeMockTest
 		Location location = new Location(world, 0, 0, 0);
 		assertThrows(IllegalArgumentException.class, () -> bee.setHive(location));
 	}
+
 	@Test
 	void testGetFlowerDefault()
 	{
@@ -144,33 +145,33 @@ class BeeMockTest
 	@Test
 	void testGetCannotEnterHiveTicksDefault()
 	{
-		assertEquals(0,bee.getCannotEnterHiveTicks());
+		assertEquals(0, bee.getCannotEnterHiveTicks());
 	}
 
 	@Test
 	void testSetCannotEnterHiveTicks()
 	{
 		bee.setCannotEnterHiveTicks(1);
-		assertEquals(1,bee.getCannotEnterHiveTicks());
+		assertEquals(1, bee.getCannotEnterHiveTicks());
 	}
 
 	@Test
 	void testGetRollingOverrideDefault()
 	{
-		assertEquals(TriState.NOT_SET,bee.getRollingOverride());
+		assertEquals(TriState.NOT_SET, bee.getRollingOverride());
 	}
 
 	@Test
 	void testSetRollingOverride()
 	{
 		bee.setRollingOverride(TriState.TRUE);
-		assertEquals(TriState.TRUE,bee.getRollingOverride());
+		assertEquals(TriState.TRUE, bee.getRollingOverride());
 	}
 
 	@Test
 	void testSetRollingOverrideNull()
 	{
-		assertThrows(NullPointerException.class,()->bee.setRollingOverride(null));
+		assertThrows(NullPointerException.class, () -> bee.setRollingOverride(null));
 	}
 
 	@Test
