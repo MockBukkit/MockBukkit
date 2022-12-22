@@ -1,0 +1,10 @@
+{
+	"default":{
+		"height":2.9,
+		"width":0.6
+	},
+	"angry":{
+		"height":3.25,
+		"width":0.6
+	}
+}
