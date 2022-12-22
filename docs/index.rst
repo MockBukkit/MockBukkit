@@ -26,4 +26,3 @@ testing of plugins that use timers or delays.
    dependencies.rst
    custom_server_mock.rst
    maintainers.rst
-

@@ -6,7 +6,6 @@ import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.Furnace;
 import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.inventory.AbstractHorseInventory;
 import org.bukkit.inventory.FurnaceInventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
@@ -76,7 +75,7 @@ public class FurnaceInventoryMock extends InventoryMock implements FurnaceInvent
 	@Override
 	public boolean isFuel(@Nullable ItemStack item)
 	{
-		return item != null && !item.getType().isEmpty() && !Tag.NON_FLAMMABLE_WOOD.isTagged(item.getType()) && FurnaceFuelProvider.getFuels().contains(item.getType());
+		return item != null && !item.getType().isEmpty() && FurnaceFuelProvider.getFuels().contains(item.getType());
 	}
 
 	@Override

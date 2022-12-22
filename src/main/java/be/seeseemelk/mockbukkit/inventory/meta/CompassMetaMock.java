@@ -2,7 +2,6 @@ package be.seeseemelk.mockbukkit.inventory.meta;
 
 import com.google.common.base.Preconditions;
 import org.bukkit.Location;
-import org.bukkit.inventory.meta.BundleMeta;
 import org.bukkit.inventory.meta.CompassMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

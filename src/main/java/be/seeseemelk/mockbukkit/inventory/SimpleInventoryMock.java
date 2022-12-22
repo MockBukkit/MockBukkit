@@ -7,6 +7,7 @@ import org.jetbrains.annotations.Nullable;
 
 /**
  * A basic inventory.
+ *
  * @see InventoryMock
  */
 public class SimpleInventoryMock extends InventoryMock

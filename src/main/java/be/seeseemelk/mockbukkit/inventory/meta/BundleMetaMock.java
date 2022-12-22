@@ -1,6 +1,5 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
-import com.destroystokyo.paper.inventory.meta.ArmorStandMeta;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import org.bukkit.inventory.ItemStack;
