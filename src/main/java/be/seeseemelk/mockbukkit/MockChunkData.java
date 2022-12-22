@@ -13,6 +13,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Mock implementation of a {@link ChunkGenerator.ChunkData}.
+ */
 public class MockChunkData implements ChunkGenerator.ChunkData
 {
 
@@ -24,6 +27,11 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 	private final int minHeight;
 	private final int maxHeight;
 
+	/**
+	 * Constructs a new {@link MockChunkData} for the provided {@link World}.
+	 *
+	 * @param world The world the chunk is in.
+	 */
 	public MockChunkData(@NotNull World world)
 	{
 		this.minHeight = world.getMinHeight();

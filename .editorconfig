@@ -4,7 +4,7 @@ root = true
 charset = utf-8
 end_of_line = lf
 indent_size = 4
-indent_style = space
+indent_style = tab
 insert_final_newline = true
 max_line_length = 120
 tab_width = 4
@@ -18,7 +18,6 @@ ij_visual_guides = none
 ij_wrap_on_typing = false
 
 [*.java]
-indent_style = tab
 ij_java_align_consecutive_assignments = false
 ij_java_align_consecutive_variable_declarations = false
 ij_java_align_group_field_declarations = false
@@ -120,7 +119,7 @@ ij_java_for_statement_wrap = off
 ij_java_generate_final_locals = false
 ij_java_generate_final_parameters = false
 ij_java_if_brace_force = never
-ij_java_imports_layout = *,|,javax.**,java.**,|,$*
+ij_java_imports_layout = *, |, javax.**, java.**, |, $*
 ij_java_indent_case_from_switch = false
 ij_java_insert_inner_class_imports = false
 ij_java_insert_override_annotation = true
@@ -286,6 +285,7 @@ ij_editorconfig_spaces_around_assignment_operators = true
 
 [{*.yaml,*.yml}]
 indent_size = 2
+indent_style = space
 ij_yaml_align_values_properties = do_not_align
 ij_yaml_autoinsert_sequence_marker = true
 ij_yaml_block_mapping_on_new_line = false
@@ -297,8 +297,24 @@ ij_yaml_space_before_colon = false
 ij_yaml_spaces_within_braces = true
 ij_yaml_spaces_within_brackets = true
 
-[*md]
+[*.md]
+indent_style = space
 trim_trailing_whitespace = false
+ij_markdown_force_one_space_after_blockquote_symbol = true
+ij_markdown_force_one_space_after_header_symbol = true
+ij_markdown_force_one_space_after_list_bullet = true
+ij_markdown_force_one_space_between_words = true
+ij_markdown_insert_quote_arrows_on_wrap = true
+ij_markdown_keep_indents_on_empty_lines = false
+ij_markdown_keep_line_breaks_inside_text_blocks = true
+ij_markdown_max_lines_around_block_elements = 1
+ij_markdown_max_lines_around_header = 1
+ij_markdown_max_lines_between_paragraphs = 1
+ij_markdown_min_lines_around_block_elements = 1
+ij_markdown_min_lines_around_header = 1
+ij_markdown_min_lines_between_paragraphs = 1
+ij_markdown_wrap_text_if_long = true
+ij_markdown_wrap_text_inside_blockquotes = true
 
 [*.bat]
 end_of_line = crlf

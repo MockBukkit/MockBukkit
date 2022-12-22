@@ -13,6 +13,9 @@ import java.awt.Image;
 import java.util.Arrays;
 import java.util.function.BiConsumer;
 
+/**
+ * Mock implementation of a {@link MapCanvas}.
+ */
 public class MapCanvasMock implements MapCanvas
 {
 
@@ -23,6 +26,11 @@ public class MapCanvasMock implements MapCanvas
 	private byte[][] base;
 	private @NotNull MapCursorCollection cursors = new MapCursorCollection();
 
+	/**
+	 * Constructs a new {@link MapCanvasMock} for the provided {@link MapViewMock}.
+	 *
+	 * @param mapView The map view this canvas is for.
+	 */
 	protected MapCanvasMock(MapViewMock mapView)
 	{
 		this.mapView = mapView;
@@ -83,7 +91,14 @@ public class MapCanvasMock implements MapCanvas
 		return base[x][y];
 	}
 
-	protected void setBase(byte[][] base)
+	/**
+	 * Sets the base for use in {@link #getBasePixel(int, int)} and {@link #getBasePixelColor(int, int)}.
+	 *
+	 * @param base The base to set.
+	 * @see #getBasePixel(int, int)
+	 * @see #getBasePixelColor(int, int)
+	 */
+	public void setBase(byte[][] base)
 	{
 		this.base = base;
 	}

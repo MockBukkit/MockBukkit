@@ -4,14 +4,27 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.meta.SpawnEggMeta;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Mock implementation of an {@link SpawnEggMeta}.
+ *
+ * @see ItemMetaMock
+ */
 public class SpawnEggMetaMock extends ItemMetaMock implements SpawnEggMeta
 {
 
+	/**
+	 * Constructs a new {@link SpawnEggMetaMock}.
+	 */
 	public SpawnEggMetaMock()
 	{
 		super();
 	}
 
+	/**
+	 * Constructs a new {@link SpawnEggMetaMock}, cloning the data from another.
+	 *
+	 * @param meta The meta to clone.
+	 */
 	public SpawnEggMetaMock(@NotNull SpawnEggMeta meta)
 	{
 		super(meta);

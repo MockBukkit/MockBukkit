@@ -1,174 +1,172 @@
 plugins {
-    id 'java-library'
-    id 'eclipse'
-    id 'idea'
-    id 'jacoco'
-    id 'maven-publish'
-    id 'signing'
-    id 'io.github.gradle-nexus.publish-plugin' version '1.1.0'
+	id 'java-library'
+	id 'eclipse'
+	id 'idea'
+	id 'jacoco'
+	id 'maven-publish'
+	id 'signing'
+	id 'io.github.gradle-nexus.publish-plugin' version '1.1.0'
 }
 
-
 repositories {
-    mavenCentral()
+	mavenCentral()
 
-    maven {
-        url 'https://hub.spigotmc.org/nexus/content/repositories/public/'
-    }
+	maven {
+		url 'https://hub.spigotmc.org/nexus/content/repositories/public/'
+	}
 
-    maven {
-        url 'https://repo.md-5.net/content/groups/public/'
-    }
+	maven {
+		url 'https://repo.md-5.net/content/groups/public/'
+	}
 
-    maven {
-        url 'https://repo.papermc.io/repository/maven-public/'
-    }
+	maven {
+		url 'https://repo.papermc.io/repository/maven-public/'
+	}
 }
 
 dependencies {
-    //Paper API
-    api "io.papermc.paper:paper-api:${gradle.ext.apiVersionFull}"
+	// Paper API
+	api "io.papermc.paper:paper-api:${gradle.ext.apiVersionFull}"
 
-    //Dependencies for Unit Tests
-    implementation 'org.junit.jupiter:junit-jupiter:5.9.1'
-    implementation 'org.hamcrest:hamcrest-library:2.2'
+	// Dependencies for Unit Tests
+	implementation 'org.junit.jupiter:junit-jupiter:5.9.1'
 
-    // General utilities for the project
-    implementation 'net.kyori:adventure-platform-bungeecord:4.1.2'
-    implementation 'org.jetbrains:annotations:23.0.0'
+	// General utilities for the project
+	implementation 'net.kyori:adventure-platform-bungeecord:4.1.2'
+	implementation 'org.jetbrains:annotations:23.1.0'
 
-    // LibraryLoader dependencies
-    implementation 'org.apache.maven:maven-resolver-provider:3.8.5'
-    implementation 'org.apache.maven.resolver:maven-resolver-connector-basic:1.7.3'
-    implementation 'org.apache.maven.resolver:maven-resolver-transport-http:1.7.3'
+	// LibraryLoader dependencies
+	implementation 'org.apache.maven:maven-resolver-provider:3.8.5'
+	implementation 'org.apache.maven.resolver:maven-resolver-connector-basic:1.7.3'
+	implementation 'org.apache.maven.resolver:maven-resolver-transport-http:1.7.3'
 }
 
 jar {
-    manifest {
-        attributes 'Automatic-Module-Name': "be.seeseemelk.mockbukkit"
-    }
+	manifest {
+		attributes 'Automatic-Module-Name': "be.seeseemelk.mockbukkit"
+	}
 }
 
 java {
-    withSourcesJar()
-    withJavadocJar()
+	withSourcesJar()
+	withJavadocJar()
 }
 
 javadoc {
-    options {
-        links "https://jd.papermc.io/paper/${gradle.ext.apiVersion}/"
-    }
+	options {
+		links "https://jd.papermc.io/paper/${gradle.ext.apiVersion}/"
+	}
 }
 
 processResources {
-    doLast {
-        file("${buildDir}/resources/main/build.properties").withWriter { w ->
-            Properties p = new Properties()
-            p['full-api-version'] = gradle.ext.apiVersionFull
-            p.store w, null
-        }
-    }
+	doLast {
+		file("${buildDir}/resources/main/build.properties").withWriter { w ->
+			Properties p = new Properties()
+			p['full-api-version'] = gradle.ext.apiVersionFull
+			p.store w, null
+		}
+	}
 }
 
 sourceCompatibility = gradle.ext.javaVersion
 targetCompatibility = gradle.ext.javaVersion
 tasks.withType(JavaCompile) {
-    options.release.set(gradle.ext.javaVersion)
+	options.release.set(gradle.ext.javaVersion)
 }
 
 def isFork = isFork()
 
 signing {
-    required { !isFork && System.getenv('CI') != null }
-    sign publishing.publications
+	required { !isFork && System.getenv('CI') != null }
+	sign publishing.publications
 }
 
 jacocoTestReport {
-    reports {
-        xml.enabled true
-    }
+	reports {
+		xml.enabled true
+	}
 }
 
 jacoco {
-    toolVersion = "0.8.7"
+	toolVersion = "0.8.8"
 }
 
 group = 'com.github.seeseemelk'
 version = this.getVersion()
 
 nexusPublishing {
-    repositories {
-        sonatype {
-            username = findProperty('ossrhUsername')
-            password = findProperty('ossrhPassword')
-        }
-    }
+	repositories {
+		sonatype {
+			username = findProperty('ossrhUsername')
+			password = findProperty('ossrhPassword')
+		}
+	}
 }
 
 publishing {
-    publications {
-        mockBukkit(MavenPublication) {
-            artifactId = "MockBukkit-v${gradle.ext.apiVersion}"
-            from components.java
+	publications {
+		mockBukkit(MavenPublication) {
+			artifactId = "MockBukkit-v${gradle.ext.apiVersion}"
+			from components.java
 
-            pom {
-                name = "MockBukkit-v${gradle.ext.apiVersion}"
-                packaging = 'jar'
-                description = 'MockBukkit is a mocking framework for bukkit to allow the easy unit testing of Bukkit plugins.'
-                url = 'https://github.com/MockBukkit/MockBukkit'
-                scm {
-                    connection = 'scm:git:git://github.com/MockBukkit/MockBukkit.git'
-                    developerConnection = 'scm:git:ssh://github.com:MockBukkit/MockBukkit.git'
-                    url = "https://github.com/MockBukkit/MockBukkit/tree/v${gradle.ext.apiVersion}"
-                }
-                licenses {
-                    license {
-                        name = 'MIT License'
-                        url = "https://github.com/MockBukkit/MockBukkit/blob/v${gradle.ext.apiVersion}/LICENSE"
-                    }
-                }
-                developers {
-                    developer {
-                        id = 'seeseemelk'
-                        name = 'Sebastiaan de Schaetzen'
-                        email = 'sebastiaan.de.schaetzen@gmail.com'
-                    }
-                }
-            }
-        }
-    }
+			pom {
+				name = "MockBukkit-v${gradle.ext.apiVersion}"
+				packaging = 'jar'
+				description = 'MockBukkit is a mocking framework for bukkit to allow the easy unit testing of Bukkit plugins.'
+				url = 'https://github.com/MockBukkit/MockBukkit'
+				scm {
+					connection = 'scm:git:git://github.com/MockBukkit/MockBukkit.git'
+					developerConnection = 'scm:git:ssh://github.com:MockBukkit/MockBukkit.git'
+					url = "https://github.com/MockBukkit/MockBukkit/tree/v${gradle.ext.apiVersion}"
+				}
+				licenses {
+					license {
+						name = 'MIT License'
+						url = "https://github.com/MockBukkit/MockBukkit/blob/v${gradle.ext.apiVersion}/LICENSE"
+					}
+				}
+				developers {
+					developer {
+						id = 'seeseemelk'
+						name = 'Sebastiaan de Schaetzen'
+						email = 'sebastiaan.de.schaetzen@gmail.com'
+					}
+				}
+			}
+		}
+	}
 }
 
 publishToMavenLocal {
-    doLast {
-        println("Published to Maven local with version '${this.getVersion()}'")
-    }
+	doLast {
+		println("Published to Maven local with version '${this.getVersion()}'")
+	}
 }
 
 test {
-    useJUnitPlatform()
+	useJUnitPlatform()
 }
 
 eclipse.classpath.downloadJavadoc = true
 eclipse.classpath.downloadSources = true
 
 def isFork() {
-    try {
-        def workingDir = new File("${project.projectDir}")
-        def result = 'git config --get remote.origin.url'.execute(null, workingDir)
-        result.waitFor()
-        if (result.exitValue() == 0) {
-            return !result.text.contains("MockBukkit/MockBukkit")
-        }
-    } catch (e) {
-    }
-    return true
+	try {
+		def workingDir = new File("${project.projectDir}")
+		def result = 'git config --get remote.origin.url'.execute(null, workingDir)
+		result.waitFor()
+		if (result.exitValue() == 0) {
+			return !result.text.contains("MockBukkit/MockBukkit")
+		}
+	} catch (e) {
+	}
+	return true
 }
 
 def getVersion() {
-    if (System.getenv('CI') == null) {
-        return 'dev-' + 'git rev-parse --verify --short HEAD'.execute().text.trim()
-    } else {
-        return property('mockbukkit.version')
-    }
+	if (System.getenv('CI') == null) {
+		return 'dev-' + 'git rev-parse --verify --short HEAD'.execute().text.trim()
+	} else {
+		return property('mockbukkit.version')
+	}
 }

@@ -35,6 +35,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * Mock implementation of a {@link Block}.
+ */
 public class BlockMock implements Block
 {
 
@@ -473,6 +476,22 @@ public class BlockMock implements Block
 
 	@Override
 	public boolean breakNaturally(boolean triggerEffect)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+
+	}
+
+	@Override
+	public boolean breakNaturally(@NotNull ItemStack tool, boolean triggerEffect, boolean dropExperience)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+
+	}
+
+	@Override
+	public boolean breakNaturally(boolean triggerEffect, boolean dropExperience)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

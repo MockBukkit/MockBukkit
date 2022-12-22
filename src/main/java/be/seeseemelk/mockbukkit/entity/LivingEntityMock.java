@@ -11,6 +11,7 @@ import com.destroystokyo.paper.block.TargetBlockInfo;
 import com.destroystokyo.paper.entity.TargetEntityInfo;
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
+import net.kyori.adventure.util.TriState;
 import org.bukkit.Bukkit;
 import org.bukkit.FluidCollisionMode;
 import org.bukkit.GameMode;
@@ -56,16 +57,30 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
+/**
+ * Mock implementation of a {@link LivingEntity}.
+ *
+ * @see EntityMock
+ */
 public abstract class LivingEntityMock extends EntityMock implements LivingEntity
 {
 
+	/**
+	 * How much health the entity has.
+	 */
 	protected double health;
 	private int maxAirTicks = 300;
 	private int remainingAirTicks = 300;
+	/**
+	 * Whether the entity is alive.
+	 */
 	protected boolean alive = true;
 	private boolean gliding = false;
 	private boolean jumping = false;
 
+	/**
+	 * The attributes this entity has.
+	 */
 	protected Map<Attribute, AttributeInstanceMock> attributes;
 	private final EntityEquipment equipment = new EntityEquipmentMock(this);
 	private final Set<UUID> collidableExemptions = new HashSet<>();
@@ -79,7 +94,14 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 
 	private final Set<ActivePotionEffect> activeEffects = new HashSet<>();
 	private boolean invisible = false;
+	private TriState frictionState = TriState.NOT_SET;
 
+	/**
+	 * Constructs a new {@link LivingEntityMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	protected LivingEntityMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
@@ -87,6 +109,8 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		attributes = new EnumMap<>(Attribute.class);
 		double maxHealth = AttributesMock.getDefaultValue(Attribute.GENERIC_MAX_HEALTH);
 		attributes.put(Attribute.GENERIC_MAX_HEALTH, new AttributeInstanceMock(Attribute.GENERIC_MAX_HEALTH, maxHealth));
+		double movementSpeed = AttributesMock.getDefaultValue(Attribute.GENERIC_MOVEMENT_SPEED);
+		attributes.put(Attribute.GENERIC_MOVEMENT_SPEED, new AttributeInstanceMock(Attribute.GENERIC_MOVEMENT_SPEED, movementSpeed));
 		resetMaxHealth();
 		setHealth(maxHealth);
 	}
@@ -971,6 +995,61 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 
 	@Override
 	public void knockback(double strength, double directionX, double directionZ)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void broadcastSlotBreak(@NotNull EquipmentSlot slot)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void broadcastSlotBreak(@NotNull EquipmentSlot slot, @NotNull Collection<Player> players)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull ItemStack damageItemStack(@NotNull ItemStack stack, int amount)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void damageItemStack(@NotNull EquipmentSlot slot, int amount)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull TriState getFrictionState()
+	{
+		return this.frictionState;
+	}
+
+	@Override
+	public void setFrictionState(@NotNull TriState state)
+	{
+		Preconditions.checkNotNull(state, "State cannot be null");
+		this.frictionState = state;
+	}
+
+	@Override
+	public @Nullable BlockFace getTargetBlockFace(int maxDistance, @NotNull FluidCollisionMode fluidMode)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable RayTraceResult rayTraceEntities(int maxDistance, boolean ignoreBlocks)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

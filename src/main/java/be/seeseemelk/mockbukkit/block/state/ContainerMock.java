@@ -12,9 +12,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * The {@link ContainerMock} is an extension of a {@link TileStateMock} which can also hold an {@link Inventory}.
+ * Mock implementation of a {@link Container}.
  *
- * @author TheBusyBiscuit
+ * @see TileStateMock
  */
 public abstract class ContainerMock extends TileStateMock implements Container
 {
@@ -23,18 +23,33 @@ public abstract class ContainerMock extends TileStateMock implements Container
 	private @Nullable Component customName;
 	private @NotNull String lock = "";
 
+	/**
+	 * Constructs a new {@link ContainerMock} for the provided {@link Material}.
+	 *
+	 * @param material The material this state is for.
+	 */
 	protected ContainerMock(@NotNull Material material)
 	{
 		super(material);
 		this.inventory = createInventory();
 	}
 
+	/**
+	 * Constructs a new {@link ContainerMock} for the provided {@link Block}.
+	 *
+	 * @param block The block this state is for.
+	 */
 	protected ContainerMock(@NotNull Block block)
 	{
 		super(block);
 		this.inventory = createInventory();
 	}
 
+	/**
+	 * Constructs a new {@link ContainerMock} by cloning the data from an existing one.
+	 *
+	 * @param state The state to clone.
+	 */
 	protected ContainerMock(@NotNull ContainerMock state)
 	{
 		super(state);
@@ -43,6 +58,9 @@ public abstract class ContainerMock extends TileStateMock implements Container
 		this.lock = state.getLock();
 	}
 
+	/**
+	 * @return A new inventory, of the correct type for the state.
+	 */
 	protected abstract InventoryMock createInventory();
 
 	@Override

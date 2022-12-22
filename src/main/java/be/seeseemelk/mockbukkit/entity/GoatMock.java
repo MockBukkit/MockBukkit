@@ -13,6 +13,11 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * Mock implementation of a {@link Goat}.
+ *
+ * @see AnimalsMock
+ */
 public class GoatMock extends AnimalsMock implements Goat
 {
 
@@ -22,6 +27,12 @@ public class GoatMock extends AnimalsMock implements Goat
 
 	private final List<LivingEntity> attackedMobs = new LinkedList<>();
 
+	/**
+	 * Constructs a new {@link GoatMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	public GoatMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);

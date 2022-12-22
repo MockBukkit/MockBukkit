@@ -12,6 +12,11 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
+/**
+ * Mock implementation of an {@link Enderman}.
+ *
+ * @see MonsterMock
+ */
 public class EndermanMock extends MonsterMock implements Enderman
 {
 
@@ -19,6 +24,12 @@ public class EndermanMock extends MonsterMock implements Enderman
 	private boolean isScreaming = false;
 	private boolean hasBeenStaredAt = false;
 
+	/**
+	 * Constructs a new {@link EndermanMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	public EndermanMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
@@ -39,7 +50,7 @@ public class EndermanMock extends MonsterMock implements Enderman
 	@Deprecated
 	public @NotNull MaterialData getCarriedMaterial()
 	{
-		checkHasBlock();
+		assertHasBlock();
 		return new MaterialData(carriedBlock.getMaterial());
 	}
 
@@ -54,7 +65,7 @@ public class EndermanMock extends MonsterMock implements Enderman
 	@Override
 	public @Nullable BlockData getCarriedBlock()
 	{
-		checkHasBlock();
+		assertHasBlock();
 		return this.carriedBlock;
 	}
 
@@ -89,7 +100,10 @@ public class EndermanMock extends MonsterMock implements Enderman
 		this.hasBeenStaredAt = hasBeenStaredAt;
 	}
 
-	private void checkHasBlock()
+	/**
+	 * Asserts that this Enderman is holding a block.
+	 */
+	public void assertHasBlock()
 	{
 		Preconditions.checkState(this.carriedBlock != null, "Carried Block must be set before using this method");
 	}

@@ -8,6 +8,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
+/**
+ * Mock implementation of a {@link BiomeProvider}.
+ */
 public class BiomeProviderMock extends BiomeProvider
 {
 

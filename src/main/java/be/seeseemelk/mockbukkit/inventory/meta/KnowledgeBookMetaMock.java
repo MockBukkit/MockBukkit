@@ -8,10 +8,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+
 /**
- * This {@link ItemMetaMock} mocks the implementation of {@link KnowledgeBookMeta}.
+ * Mock implementation of an {@link KnowledgeBookMeta}.
  *
- * @author TheBusyBiscuit
+ * @see ItemMetaMock
  */
 public class KnowledgeBookMetaMock extends ItemMetaMock implements KnowledgeBookMeta
 {
@@ -20,11 +21,19 @@ public class KnowledgeBookMetaMock extends ItemMetaMock implements KnowledgeBook
 
 	private final List<NamespacedKey> recipes = new ArrayList<>();
 
+	/**
+	 * Constructs a new {@link KnowledgeBookMetaMock}.
+	 */
 	public KnowledgeBookMetaMock()
 	{
 		super();
 	}
 
+	/**
+	 * Constructs a new {@link KnowledgeBookMetaMock}, cloning the data from another.
+	 *
+	 * @param meta The meta to clone.
+	 */
 	public KnowledgeBookMetaMock(@NotNull KnowledgeBookMeta meta)
 	{
 		super(meta);

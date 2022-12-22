@@ -6,6 +6,9 @@ import net.kyori.adventure.text.Component;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * Mock interface of a {@link CommandBlockHolder}.
+ */
 public interface CommandBlockHolderMock extends CommandBlockHolder
 {
 

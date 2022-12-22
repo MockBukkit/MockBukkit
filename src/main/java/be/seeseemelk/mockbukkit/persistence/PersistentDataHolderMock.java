@@ -15,6 +15,9 @@ public class PersistentDataHolderMock implements PersistentDataHolder
 
 	private final @NotNull PersistentDataContainer container;
 
+	/**
+	 * Constructs a new {@link PersistentDataHolderMock}.
+	 */
 	public PersistentDataHolderMock()
 	{
 		this.container = new PersistentDataContainerMock();
