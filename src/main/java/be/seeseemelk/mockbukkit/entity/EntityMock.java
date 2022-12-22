@@ -1242,4 +1242,18 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		throw new UnimplementedOperationException();
 	}
 
+	@Override
+	public boolean isSneaking()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setSneaking(boolean sneak)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 }
