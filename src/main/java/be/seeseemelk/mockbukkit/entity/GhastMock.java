@@ -8,12 +8,23 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
+/**
+ * Mock implementation of a {@link Ghast}.
+ *
+ * @see FlyingMock
+ */
 public class GhastMock extends FlyingMock implements Ghast
 {
 
 	private boolean isCharging = false;
 	private int explosionPower = 1;
 
+	/**
+	 * Constructs a new {@link GhastMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	public GhastMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);

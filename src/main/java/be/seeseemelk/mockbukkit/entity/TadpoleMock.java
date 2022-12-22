@@ -10,11 +10,22 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
+/**
+ * Mock implementation of a {@link Tadpole}.
+ *
+ * @see FishMock
+ */
 public class TadpoleMock extends FishMock implements Tadpole
 {
 
 	private int age = 0;
 
+	/**
+	 * Constructs a new {@link TadpoleMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	public TadpoleMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);

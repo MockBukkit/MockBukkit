@@ -19,12 +19,23 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * Mock implementation of an {@link Allay}.
+ *
+ * @see CreatureMock
+ */
 public class AllayMock extends CreatureMock implements Allay
 {
 
 	private final @NotNull Inventory inventory;
 	private Material currentItem;
 
+	/**
+	 * Constructs a new {@link AgeableMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	public AllayMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
@@ -97,7 +108,7 @@ public class AllayMock extends CreatureMock implements Allay
 	 * @param item    The {@link Material} to pick up
 	 * @param message The message to display if the assertion fails
 	 */
-	public void assertCurrentItem(@NotNull Material item, String message)
+	public void assertCurrentItem(@NotNull Material item, @Nullable String message)
 	{
 		if (item != this.currentItem)
 		{
@@ -111,12 +122,23 @@ public class AllayMock extends CreatureMock implements Allay
 		return this.inventory;
 	}
 
+	/**
+	 * Asserts that the Allay's inventory contains an item.
+	 *
+	 * @param item The item to check.
+	 */
 	public void assertInventoryContains(ItemStack item)
 	{
 		assertInventoryContains(item, "Inventory does not contain the given ItemStack");
 	}
 
-	private void assertInventoryContains(ItemStack item, String s)
+	/**
+	 * Asserts that the Allay's inventory contains an item.
+	 *
+	 * @param item The item to check.
+	 * @param s    The message to fail with.
+	 */
+	public void assertInventoryContains(ItemStack item, String s)
 	{
 		if (!inventory.contains(item))
 		{

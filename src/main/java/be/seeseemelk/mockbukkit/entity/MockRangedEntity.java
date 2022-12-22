@@ -3,10 +3,14 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.destroystokyo.paper.entity.RangedEntity;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Mob;
 import org.jetbrains.annotations.NotNull;
 
-public interface MockRangedEntity<T extends Mob> extends RangedEntity
+/**
+ * Mock implementation of a {@link RangedEntity}.
+ *
+ * @see MobMock
+ */
+public interface MockRangedEntity<T extends MobMock> extends RangedEntity
 {
 
 	@Override

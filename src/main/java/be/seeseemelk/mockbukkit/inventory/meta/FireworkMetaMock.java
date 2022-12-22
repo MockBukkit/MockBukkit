@@ -9,17 +9,30 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Mock implementation of an {@link FireworkMeta}.
+ *
+ * @see ItemMetaMock
+ */
 public class FireworkMetaMock extends ItemMetaMock implements FireworkMeta
 {
 
 	private @NotNull List<FireworkEffect> effects = new ArrayList<>();
 	private int power = 0;
 
+	/**
+	 * Constructs a new {@link FireworkMetaMock}.
+	 */
 	public FireworkMetaMock()
 	{
 		super();
 	}
 
+	/**
+	 * Constructs a new {@link FireworkMetaMock}, cloning the data from another.
+	 *
+	 * @param meta The meta to clone.
+	 */
 	public FireworkMetaMock(@NotNull FireworkMeta meta)
 	{
 		super(meta);

@@ -44,6 +44,9 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.function.UnaryOperator;
 
+/**
+ * Mock implementation of an {@link ItemFactory}.
+ */
 public class ItemFactoryMock implements ItemFactory
 {
 

@@ -12,11 +12,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Mock implementation of a {@link CrossbowMeta}.
+ *
+ * @see ItemMetaMock
+ */
 public class CrossbowMetaMock extends ItemMetaMock implements CrossbowMeta
 {
 
 	private List<ItemStack> projectiles;
 
+	/**
+	 * Constructs a new {@link CrossbowMetaMock}.
+	 */
 	public CrossbowMetaMock()
 	{
 		super();
@@ -24,6 +32,11 @@ public class CrossbowMetaMock extends ItemMetaMock implements CrossbowMeta
 		this.projectiles = new ArrayList<>();
 	}
 
+	/**
+	 * Constructs a new {@link CrossbowMetaMock}, cloning the data from another.
+	 *
+	 * @param meta The meta to clone.
+	 */
 	public CrossbowMetaMock(@NotNull CrossbowMeta meta)
 	{
 		super(meta);

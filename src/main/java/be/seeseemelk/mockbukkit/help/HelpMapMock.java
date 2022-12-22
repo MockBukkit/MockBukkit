@@ -19,9 +19,7 @@ import java.util.TreeMap;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * The {@link HelpMapMock} is our mock of Bukkit's {@link HelpMap}.
- *
- * @author NeumimTo
+ * Mock implementation of a {@link HelpMap}.
  */
 public class HelpMapMock implements HelpMap
 {
@@ -83,6 +81,11 @@ public class HelpMapMock implements HelpMap
 		factories.put(commandClass, factory);
 	}
 
+	/**
+	 * Asserts that a {@link HelpTopicFactory} is registered.
+	 *
+	 * @param factory The factory to check.
+	 */
 	public void assertRegistered(@NotNull HelpTopicFactory<?> factory)
 	{
 		Preconditions.checkNotNull(factory, "Factory cannot be null");
