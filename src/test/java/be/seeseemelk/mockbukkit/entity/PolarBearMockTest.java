@@ -33,23 +33,28 @@ class PolarBearMockTest
 	}
 
 	@Test
-	void testIsStandingDefault() {
+	void testIsStandingDefault()
+	{
 		assertFalse(polarBear.isStanding());
 	}
 
 	@Test
-	void testSetStanding() {
+	void testSetStanding()
+	{
 		polarBear.setStanding(true);
 		assertTrue(polarBear.isStanding());
 	}
 
 	@Test
-	void testCanBreed() {
+	void testCanBreed()
+	{
 		assertFalse(polarBear.canBreed());
 	}
 
 	@Test
-	void testGetType() {
+	void testGetType()
+	{
 		assertEquals(EntityType.POLAR_BEAR, polarBear.getType());
 	}
+
 }

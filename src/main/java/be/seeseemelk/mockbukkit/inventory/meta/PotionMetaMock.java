@@ -1,11 +1,9 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import com.destroystokyo.paper.inventory.meta.ArmorStandMeta;
 import com.google.common.collect.ImmutableList;
 import org.bukkit.Color;
 import org.bukkit.inventory.meta.PotionMeta;
-import org.bukkit.inventory.meta.SuspiciousStewMeta;
 import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;

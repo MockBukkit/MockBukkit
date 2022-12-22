@@ -1,6 +1,5 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
-import com.destroystokyo.paper.inventory.meta.ArmorStandMeta;
 import org.apache.commons.lang3.Validate;
 import org.bukkit.DyeColor;
 import org.bukkit.entity.TropicalFish;

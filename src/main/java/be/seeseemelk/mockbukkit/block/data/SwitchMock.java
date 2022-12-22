@@ -1,20 +1,17 @@
 package be.seeseemelk.mockbukkit.block.data;
 
-import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.FACING;
-import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.POWERED;
-import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.FACE;
-
-import java.util.Set;
-
+import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.type.Switch;
 import org.jetbrains.annotations.NotNull;
 
-import com.google.common.base.Preconditions;
+import java.util.Set;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.FACE;
+import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.FACING;
+import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.POWERED;
 
 public class SwitchMock extends BlockDataMock implements Switch
 {

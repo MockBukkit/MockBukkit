@@ -2,7 +2,6 @@ package be.seeseemelk.mockbukkit.inventory;
 
 import org.bukkit.block.Lectern;
 import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.inventory.AbstractHorseInventory;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.LecternInventory;
