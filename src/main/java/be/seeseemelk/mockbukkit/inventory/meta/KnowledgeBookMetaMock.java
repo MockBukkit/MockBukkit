@@ -1,6 +1,5 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
-import com.destroystokyo.paper.inventory.meta.ArmorStandMeta;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.meta.KnowledgeBookMeta;
 import org.jetbrains.annotations.NotNull;

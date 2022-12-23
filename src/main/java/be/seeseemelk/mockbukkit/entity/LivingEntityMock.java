@@ -1041,4 +1041,18 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		this.frictionState = state;
 	}
 
+	@Override
+	public @Nullable BlockFace getTargetBlockFace(int maxDistance, @NotNull FluidCollisionMode fluidMode)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable RayTraceResult rayTraceEntities(int maxDistance, boolean ignoreBlocks)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 }
