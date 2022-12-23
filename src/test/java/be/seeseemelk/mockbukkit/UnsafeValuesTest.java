@@ -65,13 +65,13 @@ class UnsafeValuesTest
 
 	@MockBukkitInject
 	private ServerMock server;
-	private MockUnsafeValues mockUnsafeValues;
+	private UnsafeValuesMock unsafeValuesMock;
 
 	@BeforeEach
 	void setUp()
 	{
 		WorldCreator.name("world").createWorld();
-		mockUnsafeValues = server.getUnsafe();
+		unsafeValuesMock = server.getUnsafe();
 	}
 
 	private void checkVersion(String version) throws InvalidPluginException
@@ -80,7 +80,7 @@ class UnsafeValuesTest
 		try (StringReader stringReader = new StringReader(pluginInfo))
 		{
 			PluginDescriptionFile pluginDescriptionFile = new PluginDescriptionFile(stringReader);
-			mockUnsafeValues.checkSupported(pluginDescriptionFile);
+			unsafeValuesMock.checkSupported(pluginDescriptionFile);
 		}
 		catch (InvalidDescriptionException ex)
 		{
@@ -99,7 +99,7 @@ class UnsafeValuesTest
 			currentVersion = currentVersion.substring(0, currentVersion.indexOf(".", currentVersion.indexOf(".") + 1));
 		}
 
-		assertTrue(mockUnsafeValues.isSupportedApiVersion(currentVersion));
+		assertTrue(unsafeValuesMock.isSupportedApiVersion(currentVersion));
 	}
 
 	private static Stream<Arguments> provideTestItems() throws IOException
@@ -134,8 +134,8 @@ class UnsafeValuesTest
 	void serializeItemTest(ItemStack expected)
 	{
 		populateItemMeta(expected);
-		byte[] serialized = mockUnsafeValues.serializeItem(expected);
-		ItemStack actual = mockUnsafeValues.deserializeItem(serialized);
+		byte[] serialized = unsafeValuesMock.serializeItem(expected);
+		ItemStack actual = unsafeValuesMock.deserializeItem(serialized);
 		assertEquals(expected, actual);
 		assertEquals(expected.getItemMeta(), actual.getItemMeta());
 		System.out.println(actual.getItemMeta());
@@ -251,7 +251,7 @@ class UnsafeValuesTest
 		assertDoesNotThrow(() ->
 		{
 			PluginDescriptionFile pluginDescriptionFile = new PluginDescriptionFile("VersionTest", "1.0", "not.exists");
-			mockUnsafeValues.checkSupported(pluginDescriptionFile);
+			unsafeValuesMock.checkSupported(pluginDescriptionFile);
 		});
 	}
 
@@ -260,7 +260,7 @@ class UnsafeValuesTest
 	{
 		assertThrows(InvalidPluginException.class, () ->
 		{
-			mockUnsafeValues.setMinimumApiVersion("1.15");
+			unsafeValuesMock.setMinimumApiVersion("1.15");
 			checkVersion("1.13");
 		});
 	}
@@ -272,7 +272,7 @@ class UnsafeValuesTest
 		{
 			if (material.isLegacy())
 				continue;
-			assertEquals(material, mockUnsafeValues.fromLegacy(material));
+			assertEquals(material, unsafeValuesMock.fromLegacy(material));
 		}
 	}
 
@@ -283,14 +283,14 @@ class UnsafeValuesTest
 		{
 			if (!material.isLegacy())
 				continue;
-			assertThrows(UnimplementedOperationException.class, () -> mockUnsafeValues.fromLegacy(material));
+			assertThrows(UnimplementedOperationException.class, () -> unsafeValuesMock.fromLegacy(material));
 		}
 	}
 
 	@Test
 	void fromLegacy_Material_Null_ReturnsNull()
 	{
-		assertNull(mockUnsafeValues.fromLegacy((Material) null));
+		assertNull(unsafeValuesMock.fromLegacy((Material) null));
 	}
 
 	@Test
@@ -300,7 +300,7 @@ class UnsafeValuesTest
 		{
 			if (material.isLegacy())
 				continue;
-			assertEquals(material, mockUnsafeValues.fromLegacy(new MaterialData(material)));
+			assertEquals(material, unsafeValuesMock.fromLegacy(new MaterialData(material)));
 		}
 	}
 
@@ -312,14 +312,14 @@ class UnsafeValuesTest
 			if (!material.isLegacy())
 				continue;
 			MaterialData materialData = new MaterialData(material);
-			assertThrows(UnimplementedOperationException.class, () -> mockUnsafeValues.fromLegacy(materialData));
+			assertThrows(UnimplementedOperationException.class, () -> unsafeValuesMock.fromLegacy(materialData));
 		}
 	}
 
 	@Test
 	void fromLegacy_MaterialData_Null_ReturnsNull()
 	{
-		assertThrows(NullPointerException.class, () -> mockUnsafeValues.fromLegacy((MaterialData) null));
+		assertThrows(NullPointerException.class, () -> unsafeValuesMock.fromLegacy((MaterialData) null));
 	}
 
 	@Test
@@ -333,8 +333,8 @@ class UnsafeValuesTest
 	@MethodSource("materialAndBlockTranslationKeyProvider")
 	void testMaterialThatIsItemAndBlockTranslationKey(String expectedBlockKey, String expectedItemKey, Material material)
 	{
-		assertEquals(expectedBlockKey, mockUnsafeValues.getBlockTranslationKey(material));
-		assertEquals(expectedItemKey, mockUnsafeValues.getItemTranslationKey(material));
+		assertEquals(expectedBlockKey, unsafeValuesMock.getBlockTranslationKey(material));
+		assertEquals(expectedItemKey, unsafeValuesMock.getItemTranslationKey(material));
 	}
 
 	static Stream<Arguments> materialAndBlockTranslationKeyProvider()
@@ -375,15 +375,15 @@ class UnsafeValuesTest
 	@Test
 	void testEntityTranslationKey()
 	{
-		assertEquals("entity.minecraft.pig", mockUnsafeValues.getTranslationKey(EntityType.PIG));
-		assertThrows(IllegalArgumentException.class, () -> mockUnsafeValues.getTranslationKey(EntityType.UNKNOWN));
+		assertEquals("entity.minecraft.pig", unsafeValuesMock.getTranslationKey(EntityType.PIG));
+		assertThrows(IllegalArgumentException.class, () -> unsafeValuesMock.getTranslationKey(EntityType.UNKNOWN));
 	}
 
 	@ParameterizedTest
 	@MethodSource("itemStackTranslationKeyProvider")
 	void testItemStackTranslationKey(String expectedKey, ItemStack itemStack)
 	{
-		assertEquals(expectedKey, mockUnsafeValues.getTranslationKey(itemStack));
+		assertEquals(expectedKey, unsafeValuesMock.getTranslationKey(itemStack));
 	}
 
 	static Stream<Arguments> itemStackTranslationKeyProvider()
