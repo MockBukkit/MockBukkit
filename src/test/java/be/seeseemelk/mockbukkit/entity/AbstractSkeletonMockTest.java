@@ -123,7 +123,7 @@ class AbstractSkeletonMockTest
 		Player player = server.addPlayer();
 		skeleton.setChargingAttack(true);
 		skeleton.rangedAttack(player, 0.5f);
-		skeleton.assertAgressiveAttack(player, 0.5f);
+		skeleton.assertAggressiveAttack(player, 0.5f);
 	}
 
 	@Test
@@ -131,7 +131,7 @@ class AbstractSkeletonMockTest
 	{
 		Player player = server.addPlayer();
 		skeleton.rangedAttack(player, 0.5f);
-		assertThrows(AssertionFailedError.class, () -> skeleton.assertAgressiveAttack(player, 0.5f));
+		assertThrows(AssertionFailedError.class, () -> skeleton.assertAggressiveAttack(player, 0.5f));
 	}
 
 

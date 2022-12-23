@@ -26,7 +26,6 @@ public class ServerConfiguration
 	private boolean allowEnd = true;
 	private boolean allowNether = true;
 	private String updateFolder = "update";
-	private boolean sendChatPreviews = false;
 	private boolean enforceSecureProfiles = true;
 	private boolean onlineMode = true;
 	private boolean allowFlight = false;
@@ -41,6 +40,7 @@ public class ServerConfiguration
 	private boolean pvpEnabled = true;
 	private final Object2LongOpenHashMap<SpawnCategory> ticksPerSpawn = new Object2LongOpenHashMap<>();
 	private final Object2IntOpenHashMap<SpawnCategory> spawnLimits = new Object2IntOpenHashMap<>();
+	private boolean sendChatPreviews = false;
 
 	public ServerConfiguration()
 	{

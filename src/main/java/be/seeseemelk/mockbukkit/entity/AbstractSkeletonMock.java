@@ -109,13 +109,4 @@ public abstract class AbstractSkeletonMock extends MonsterMock implements Abstra
 		}
 	}
 
-	/**
-	 * @deprecated Use {@link #assertAggressiveAttack(LivingEntity, float)}.
-	 */
-	@Deprecated(forRemoval = true)
-	public void assertAgressiveAttack(LivingEntity entity, float charge)
-	{
-		assertAggressiveAttack(entity, charge);
-	}
-
 }
