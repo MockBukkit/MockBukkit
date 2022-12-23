@@ -38,7 +38,7 @@ class InventoryMockTest
 	void setUp() throws Exception
 	{
 		server = MockBukkit.mock();
-		inventory = new SimpleInventoryMock(null, 9, InventoryType.CHEST);
+		inventory = new InventoryMock(null, 9, InventoryType.CHEST);
 	}
 
 	@AfterEach
@@ -50,27 +50,39 @@ class InventoryMockTest
 	@Test
 	void constructor_SetsSize()
 	{
-		assertEquals(9, new SimpleInventoryMock(null, 9, InventoryType.CHEST).getSize());
-		assertEquals(18, new SimpleInventoryMock(null, 18, InventoryType.CHEST).getSize());
+		assertEquals(9, new InventoryMock(null, 9, InventoryType.CHEST).getSize());
+		assertEquals(18, new InventoryMock(null, 18, InventoryType.CHEST).getSize());
 	}
 
 	@Test
 	void constructor_SetsSizeTooSmall()
 	{
-		assertThrows(IllegalArgumentException.class, () -> new SimpleInventoryMock(null, -1, InventoryType.CHEST));
+		assertThrows(IllegalArgumentException.class, () -> new InventoryMock(null, -1, InventoryType.CHEST));
+	}
+
+	@Test
+	void constructor_SetsSizeTooBig()
+	{
+		assertThrows(IllegalArgumentException.class, () -> new InventoryMock(null, 63, InventoryType.CHEST));
+	}
+
+	@Test
+	void constructor_SetsSizeTooNotDivisibleByNine()
+	{
+		assertThrows(IllegalArgumentException.class, () -> new InventoryMock(null, 10, InventoryType.CHEST));
 	}
 
 	@Test
 	void constructor_SetsSizeTwoParamConstructor()
 	{
-		assertEquals(10, new SimpleInventoryMock(null, InventoryType.WORKBENCH).getSize());
+		assertEquals(10, new InventoryMock(null, InventoryType.WORKBENCH).getSize());
 	}
 
 	@Test
 	void constructor_SetsType()
 	{
-		assertEquals(InventoryType.CHEST, new SimpleInventoryMock(null, 9, InventoryType.CHEST).getType());
-		assertEquals(InventoryType.DROPPER, new SimpleInventoryMock(null, 9, InventoryType.DROPPER).getType());
+		assertEquals(InventoryType.CHEST, new InventoryMock(null, 9, InventoryType.CHEST).getType());
+		assertEquals(InventoryType.DROPPER, new InventoryMock(null, 9, InventoryType.DROPPER).getType());
 	}
 
 	@Test
