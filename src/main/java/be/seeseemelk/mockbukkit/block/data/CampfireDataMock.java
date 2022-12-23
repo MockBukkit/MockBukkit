@@ -17,16 +17,16 @@ import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.WATERLOGGED;
 /**
  * Mock implementation of {@link Campfire}.
  */
-public class CampfireMock extends BlockDataMock implements Campfire
+public class CampfireDataMock extends BlockDataMock implements Campfire
 {
 
 	/**
-	 * Constructs a new {@link BedMock} for the provided {@link Material}.
+	 * Constructs a new {@link CampfireDataMock} for the provided {@link Material}.
 	 * Only supports materials in {@link Tag#CAMPFIRES}
 	 *
 	 * @param type The material this data is for.
 	 */
-	public CampfireMock(@NotNull Material type)
+	public CampfireDataMock(@NotNull Material type)
 	{
 		super(type);
 		checkType(type, Tag.CAMPFIRES);

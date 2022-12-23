@@ -19,15 +19,15 @@ import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
-class WallSignMockTest
+class WallSignDataMockTest
 {
 
-	private WallSignMock sign;
+	private WallSignDataMock sign;
 
 	@BeforeEach
 	void setUp()
 	{
-		sign = new WallSignMock(Material.ACACIA_WALL_SIGN);
+		sign = new WallSignDataMock(Material.ACACIA_WALL_SIGN);
 	}
 
 	@Test
@@ -42,14 +42,14 @@ class WallSignMockTest
 	{
 		for (Material wallSignType : Tag.WALL_SIGNS.getValues())
 		{
-			assertDoesNotThrow(() -> new WallSignMock(wallSignType));
+			assertDoesNotThrow(() -> new WallSignDataMock(wallSignType));
 		}
 	}
 
 	@Test
 	void constructor_Material_WrongType_ThrowsException()
 	{
-		assertThrowsExactly(IllegalArgumentException.class, () -> new WallSignMock(Material.BEDROCK));
+		assertThrowsExactly(IllegalArgumentException.class, () -> new WallSignDataMock(Material.BEDROCK));
 	}
 
 	@Test
@@ -117,7 +117,7 @@ class WallSignMockTest
 	{
 		for (Material material : Tag.WALL_SIGNS.getValues())
 		{
-			assertInstanceOf(WallSignMock.class, BlockDataMock.mock(material));
+			assertInstanceOf(WallSignDataMock.class, BlockDataMock.mock(material));
 		}
 	}
 

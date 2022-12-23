@@ -1,6 +1,6 @@
 package be.seeseemelk.mockbukkit;
 
-import be.seeseemelk.mockbukkit.block.data.AmethystClusterMock;
+import be.seeseemelk.mockbukkit.block.data.AmethystClusterDataMock;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.ChunkSnapshot;
@@ -68,12 +68,12 @@ class ChunkSnapshotMockTest
 	@Test
 	void getBlockData_PreservesData()
 	{
-		AmethystClusterMock blockData = (AmethystClusterMock) Bukkit.createBlockData(Material.AMETHYST_CLUSTER);
+		AmethystClusterDataMock blockData = (AmethystClusterDataMock) Bukkit.createBlockData(Material.AMETHYST_CLUSTER);
 		blockData.setWaterlogged(true);
 		blockData.setFacing(BlockFace.SOUTH);
 		chunk.getBlock(0, 1, 0).setBlockData(blockData);
 
-		AmethystClusterMock snapshotData = (AmethystClusterMock) chunk.getChunkSnapshot().getBlockData(0, 1, 0);
+		AmethystClusterDataMock snapshotData = (AmethystClusterDataMock) chunk.getChunkSnapshot().getBlockData(0, 1, 0);
 
 		assertEquals(Material.AMETHYST_CLUSTER, snapshotData.getMaterial());
 		assertTrue(snapshotData.isWaterlogged());

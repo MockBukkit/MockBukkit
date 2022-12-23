@@ -388,11 +388,11 @@ public class BlockDataMock implements BlockData
 
 		// Special cases
 		return switch (material)
-		{
-			case AMETHYST_CLUSTER -> new AmethystClusterMock(material);
-			case LEVER -> new SwitchMock(material);
-			default -> new BlockDataMock(material);
-		};
+				{
+					case AMETHYST_CLUSTER -> new AmethystClusterDataMock(material);
+					case LEVER -> new SwitchDataMock(material);
+					default -> new BlockDataMock(material);
+				};
 	}
 
 	private static @NotNull BlockDataMock mock(@NotNull Material material, @NotNull Map<String, Object> previousData)
@@ -416,7 +416,7 @@ public class BlockDataMock implements BlockData
 		Preconditions.checkNotNull(material, NULL_MATERIAL_EXCEPTION_MESSAGE);
 		if (MaterialTags.BEDS.isTagged(material))
 		{
-			return new BedMock(material);
+			return new BedDataMock(material);
 		}
 		return null;
 	}
@@ -433,27 +433,27 @@ public class BlockDataMock implements BlockData
 		Preconditions.checkNotNull(material, NULL_MATERIAL_EXCEPTION_MESSAGE);
 		if (Tag.SLABS.isTagged(material))
 		{
-			return new SlabMock(material);
+			return new SlabDataMock(material);
 		}
 		else if (Tag.STAIRS.isTagged(material))
 		{
-			return new StairsMock(material);
+			return new StairsDataMock(material);
 		}
 		else if (Tag.TRAPDOORS.isTagged(material))
 		{
-			return new TrapDoorMock(material);
+			return new TrapDoorDataMock(material);
 		}
 		else if (Tag.CAMPFIRES.isTagged(material))
 		{
-			return new CampfireMock(material);
+			return new CampfireDataMock(material);
 		}
 		else if (Tag.WALL_SIGNS.isTagged(material))
 		{
-			return new WallSignMock(material);
+			return new WallSignDataMock(material);
 		}
 		else if (Tag.BUTTONS.isTagged(material))
 		{
-			return new SwitchMock(material);
+			return new SwitchDataMock(material);
 		}
 		return null;
 	}

@@ -20,15 +20,15 @@ import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
-class BedMockTest
+class BedDataMockTest
 {
 
-	private BedMock bed;
+	private BedDataMock bed;
 
 	@BeforeEach
 	void setUp()
 	{
-		this.bed = new BedMock(Material.RED_BED);
+		this.bed = new BedDataMock(Material.RED_BED);
 	}
 
 	@Test
@@ -42,13 +42,13 @@ class BedMockTest
 	@Test
 	void constructor_Material()
 	{
-		assertDoesNotThrow(() -> new BedMock(Material.RED_BED));
+		assertDoesNotThrow(() -> new BedDataMock(Material.RED_BED));
 	}
 
 	@Test
 	void constructor_Material_WrongType_ThrowsException()
 	{
-		assertThrowsExactly(IllegalArgumentException.class, () -> new BedMock(Material.BEDROCK));
+		assertThrowsExactly(IllegalArgumentException.class, () -> new BedDataMock(Material.BEDROCK));
 	}
 
 	@Test
@@ -98,7 +98,7 @@ class BedMockTest
 	{
 		for (Material material : MaterialTags.BEDS.getValues())
 		{
-			assertInstanceOf(BedMock.class, BlockDataMock.mock(material));
+			assertInstanceOf(BedDataMock.class, BlockDataMock.mock(material));
 		}
 	}
 

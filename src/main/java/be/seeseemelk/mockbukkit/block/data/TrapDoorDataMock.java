@@ -18,16 +18,16 @@ import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.WATERLOGGED;
 /**
  * Mock implementation of {@link TrapDoor}.
  */
-public class TrapDoorMock extends BlockDataMock implements TrapDoor
+public class TrapDoorDataMock extends BlockDataMock implements TrapDoor
 {
 
 	/**
-	 * Constructs a new {@link BedMock} for the provided {@link Material}.
+	 * Constructs a new {@link TrapDoorDataMock} for the provided {@link Material}.
 	 * Only supports materials in {@link Tag#TRAPDOORS}
 	 *
 	 * @param type The material this data is for.
 	 */
-	public TrapDoorMock(@NotNull Material type)
+	public TrapDoorDataMock(@NotNull Material type)
 	{
 		super(type);
 		checkType(type, Tag.TRAPDOORS);

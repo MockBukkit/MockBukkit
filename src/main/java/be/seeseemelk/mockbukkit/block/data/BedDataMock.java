@@ -15,16 +15,16 @@ import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.PART;
 /**
  * Mock implementation of {@link Bed}.
  */
-public class BedMock extends BlockDataMock implements Bed
+public class BedDataMock extends BlockDataMock implements Bed
 {
 
 	/**
-	 * Constructs a new {@link BedMock} for the provided {@link Material}.
+	 * Constructs a new {@link BedDataMock} for the provided {@link Material}.
 	 * Only supports materials in {@link Tag#BEDS}
 	 *
 	 * @param type The material this data is for.
 	 */
-	public BedMock(@NotNull Material type)
+	public BedDataMock(@NotNull Material type)
 	{
 		super(type);
 		checkType(type, Tag.BEDS);
