@@ -20,12 +20,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+
 @ExtendWith(MockBukkitExtension.class)
-class MockPlayerListTest
+class PlayerListMockTest
 {
 	@MockBukkitInject
 	private ServerMock server;
-	private MockPlayerList playerList;
+	private PlayerListMock playerList;
 
 	@BeforeEach
 	void setUp()

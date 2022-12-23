@@ -2,7 +2,7 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.AsyncCatcher;
 import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.MockPlayerList;
+import be.seeseemelk.mockbukkit.PlayerListMock;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.boss.BossBarImplementationMock;
@@ -878,8 +878,8 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * No longer used.
 	 *
 	 * @param time N/A.
-	 * @see MockPlayerList#setLastSeen(UUID, long)
-	 * @deprecated Moved to {@link MockPlayerList}.
+	 * @see PlayerListMock#setLastSeen(UUID, long)
+	 * @deprecated Moved to {@link PlayerListMock}.
 	 */
 	@Deprecated(forRemoval = true)
 	public void setLastPlayed(long time)

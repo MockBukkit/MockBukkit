@@ -16,7 +16,7 @@ import be.seeseemelk.mockbukkit.inventory.MenuTypeMock;
 import be.seeseemelk.mockbukkit.inventory.meta.trim.TrimMaterialMock;
 import be.seeseemelk.mockbukkit.inventory.meta.trim.TrimPatternMock;
 import be.seeseemelk.mockbukkit.map.MapCursorTypeMock;
-import be.seeseemelk.mockbukkit.potion.MockPotionEffectType;
+import be.seeseemelk.mockbukkit.potion.PotionEffectTypeMock;
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -86,7 +86,7 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		factoryMap.put(RegistryKey.INSTRUMENT, MusicInstrumentMock::from);
 		factoryMap.put(RegistryKey.GAME_EVENT, GameEventMock::from);
 		factoryMap.put(RegistryKey.ENCHANTMENT, EnchantmentMock::from);
-		factoryMap.put(RegistryKey.MOB_EFFECT, MockPotionEffectType::from);
+		factoryMap.put(RegistryKey.MOB_EFFECT, PotionEffectTypeMock::from);
 		factoryMap.put(RegistryKey.DAMAGE_TYPE, DamageTypeMock::from);
 		factoryMap.put(RegistryKey.ITEM, ItemTypeMock::from);
 		factoryMap.put(RegistryKey.BLOCK, BlockTypeMock::from);

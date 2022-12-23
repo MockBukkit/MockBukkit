@@ -19,12 +19,12 @@ import java.util.EnumMap;
 import java.util.Map;
 
 /**
- * This {@link MockPotionEffectType} mocks an actual {@link PotionEffectType} by taking an id, a name, whether it is
+ * This {@link PotionEffectTypeMock} mocks an actual {@link PotionEffectType} by taking an id, a name, whether it is
  * instant and an RGB {@link Color} variable.
  *
  * @author TheBusyBiscuit
  */
-public class MockPotionEffectType extends PotionEffectType
+public class PotionEffectTypeMock extends PotionEffectType
 {
 
 	private final int id;
@@ -47,7 +47,7 @@ public class MockPotionEffectType extends PotionEffectType
 	 * @param translationKey The translation key for this potion effect type
 	 */
 	@ApiStatus.Internal
-	public MockPotionEffectType(@NotNull NamespacedKey key, int id, @NotNull String name, boolean instant, @NotNull Color color, @NotNull Category category, String translationKey)
+	public PotionEffectTypeMock(@NotNull NamespacedKey key, int id, @NotNull String name, boolean instant, @NotNull Color color, @NotNull Category category, String translationKey)
 	{
 		super();
 
@@ -62,7 +62,7 @@ public class MockPotionEffectType extends PotionEffectType
 	}
 
 	/**
-	 * Constructs a new {@link MockPotionEffectType} with the provided parameters.
+	 * Constructs a new {@link PotionEffectTypeMock} with the provided parameters.
 	 *
 	 * @param key     The key of the effect type.
 	 * @param id      The numerical ID of the effect type.
@@ -70,8 +70,9 @@ public class MockPotionEffectType extends PotionEffectType
 	 * @param instant Whether the effect type is instantly applied.
 	 * @param color   The color of the effect type.
 	 */
+
 	@Deprecated(forRemoval = true)
-	public MockPotionEffectType(@NotNull NamespacedKey key, int id, String name, boolean instant, Color color)
+	public PotionEffectTypeMock(@NotNull NamespacedKey key, int id, String name, boolean instant, Color color)
 	{
 		this(key, id, name, instant, color, Category.NEUTRAL, "effect.mockbukkit.placeholder");
 	}
@@ -80,7 +81,7 @@ public class MockPotionEffectType extends PotionEffectType
 	 * @param data Json data
 	 */
 	@Deprecated(forRemoval = true)
-	public MockPotionEffectType(JsonObject data)
+	public PotionEffectTypeMock(JsonObject data)
 	{
 		this(NamespacedKey.fromString(data.get("key").getAsString()),
 				data.get("id").getAsInt(),
@@ -222,7 +223,7 @@ public class MockPotionEffectType extends PotionEffectType
 		Color color = Color.fromRGB(data.get("rgb").getAsInt());
 		Category category = Category.valueOf(data.get("category").getAsString());
 		String translationKey = data.get("translationKey").getAsString();
-		return new MockPotionEffectType(key, id, name, instant, color, category, translationKey);
+		return new PotionEffectTypeMock(key, id, name, instant, color, category, translationKey);
 	}
 
 	@Override

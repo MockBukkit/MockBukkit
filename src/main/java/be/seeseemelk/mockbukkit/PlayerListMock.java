@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 /**
  * Replica of the Bukkit internal PlayerList and CraftPlayerList implementation
  */
-public class MockPlayerList
+public class PlayerListMock
 {
 
 	private int maxPlayers = Integer.MAX_VALUE;
