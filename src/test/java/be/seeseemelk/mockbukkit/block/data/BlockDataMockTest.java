@@ -4,6 +4,7 @@ import be.seeseemelk.mockbukkit.MockBukkitExtension;
 import be.seeseemelk.mockbukkit.MockBukkitInject;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.block.BlockMock;
+import be.seeseemelk.mockbukkit.block.state.BedStateMock;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.Block;
@@ -210,7 +211,7 @@ class BlockDataMockTest
 		BedDataMock bed = (BedDataMock) BlockDataMock.mock(bedMaterial);
 		BlockState actual = bed.createBlockState();
 		assertNotNull(actual);
-		assertInstanceOf(be.seeseemelk.mockbukkit.block.state.BedMock.class, actual);
+		assertInstanceOf(BedStateMock.class, actual);
 	}
 
 }

@@ -73,7 +73,7 @@ class BlockStateMockTest
 	void testUpdateWrongType()
 	{
 		Block block = new BlockMock(Material.CHEST);
-		BlockState chest = new ChestMock(block);
+		BlockState chest = new ChestStateMock(block);
 		block.setType(Material.IRON_BLOCK);
 		assertFalse(chest.update());
 	}
@@ -90,7 +90,7 @@ class BlockStateMockTest
 	void testUpdateForce()
 	{
 		Block block = new BlockMock(Material.CHEST);
-		BlockState chest = new ChestMock(block);
+		BlockState chest = new ChestStateMock(block);
 		block.setType(Material.IRON_BLOCK);
 
 		assertFalse(block.getState() instanceof Chest);
@@ -110,7 +110,7 @@ class BlockStateMockTest
 	void testUpdateForceChangesType()
 	{
 		Block block = new BlockMock(Material.CHEST);
-		BlockState chest = new ChestMock(block);
+		BlockState chest = new ChestStateMock(block);
 		chest.setType(Material.IRON_BLOCK);
 
 		assertTrue(chest.update(true));
@@ -138,7 +138,7 @@ class BlockStateMockTest
 	void clone_copyBlockData()
 	{
 		Block block = new BlockMock(Material.CHEST);
-		BlockStateMock state = new ChestMock(block);
+		BlockStateMock state = new ChestStateMock(block);
 		BlockState stateCopy = state.getSnapshot();
 		assertNotSame(stateCopy.getBlockData(), state.getBlockData());
 		assertEquals(stateCopy.getBlockData(), state.getBlockData());
@@ -148,7 +148,7 @@ class BlockStateMockTest
 	void setBlockData_assertClone()
 	{
 		Block block = new BlockMock(Material.CHEST);
-		BlockStateMock state = new ChestMock(block);
+		BlockStateMock state = new ChestStateMock(block);
 		BlockDataMock data = BlockDataMock.mock(Material.CHEST);
 		state.setBlockData(data);
 		BlockData dataCopy = state.getBlockData();
@@ -223,68 +223,68 @@ class BlockStateMockTest
 	{
 		return Stream.of(
 				// Banners
-				Arguments.of(Material.WHITE_BANNER, be.seeseemelk.mockbukkit.block.state.BannerMock.class),
-				Arguments.of(Material.ORANGE_BANNER, be.seeseemelk.mockbukkit.block.state.BannerMock.class),
-				Arguments.of(Material.MAGENTA_BANNER, be.seeseemelk.mockbukkit.block.state.BannerMock.class),
-				Arguments.of(Material.LIGHT_BLUE_BANNER, be.seeseemelk.mockbukkit.block.state.BannerMock.class),
-				Arguments.of(Material.YELLOW_BANNER, be.seeseemelk.mockbukkit.block.state.BannerMock.class),
-				Arguments.of(Material.LIME_BANNER, be.seeseemelk.mockbukkit.block.state.BannerMock.class),
-				Arguments.of(Material.PINK_BANNER, be.seeseemelk.mockbukkit.block.state.BannerMock.class),
-				Arguments.of(Material.GRAY_BANNER, be.seeseemelk.mockbukkit.block.state.BannerMock.class),
-				Arguments.of(Material.LIGHT_GRAY_BANNER, be.seeseemelk.mockbukkit.block.state.BannerMock.class),
-				Arguments.of(Material.CYAN_BANNER, be.seeseemelk.mockbukkit.block.state.BannerMock.class),
-				Arguments.of(Material.PURPLE_BANNER, be.seeseemelk.mockbukkit.block.state.BannerMock.class),
-				Arguments.of(Material.BLUE_BANNER, be.seeseemelk.mockbukkit.block.state.BannerMock.class),
-				Arguments.of(Material.BROWN_BANNER, be.seeseemelk.mockbukkit.block.state.BannerMock.class),
-				Arguments.of(Material.GREEN_BANNER, be.seeseemelk.mockbukkit.block.state.BannerMock.class),
-				Arguments.of(Material.RED_BANNER, be.seeseemelk.mockbukkit.block.state.BannerMock.class),
-				Arguments.of(Material.BLACK_BANNER, be.seeseemelk.mockbukkit.block.state.BannerMock.class),
+				Arguments.of(Material.WHITE_BANNER, BannerStateMock.class),
+				Arguments.of(Material.ORANGE_BANNER, BannerStateMock.class),
+				Arguments.of(Material.MAGENTA_BANNER, BannerStateMock.class),
+				Arguments.of(Material.LIGHT_BLUE_BANNER, BannerStateMock.class),
+				Arguments.of(Material.YELLOW_BANNER, BannerStateMock.class),
+				Arguments.of(Material.LIME_BANNER, BannerStateMock.class),
+				Arguments.of(Material.PINK_BANNER, BannerStateMock.class),
+				Arguments.of(Material.GRAY_BANNER, BannerStateMock.class),
+				Arguments.of(Material.LIGHT_GRAY_BANNER, BannerStateMock.class),
+				Arguments.of(Material.CYAN_BANNER, BannerStateMock.class),
+				Arguments.of(Material.PURPLE_BANNER, BannerStateMock.class),
+				Arguments.of(Material.BLUE_BANNER, BannerStateMock.class),
+				Arguments.of(Material.BROWN_BANNER, BannerStateMock.class),
+				Arguments.of(Material.GREEN_BANNER, BannerStateMock.class),
+				Arguments.of(Material.RED_BANNER, BannerStateMock.class),
+				Arguments.of(Material.BLACK_BANNER, BannerStateMock.class),
 				// Beds
-				Arguments.of(Material.WHITE_BED, be.seeseemelk.mockbukkit.block.state.BedMock.class),
-				Arguments.of(Material.ORANGE_BED, be.seeseemelk.mockbukkit.block.state.BedMock.class),
-				Arguments.of(Material.MAGENTA_BED, be.seeseemelk.mockbukkit.block.state.BedMock.class),
-				Arguments.of(Material.LIGHT_BLUE_BED, be.seeseemelk.mockbukkit.block.state.BedMock.class),
-				Arguments.of(Material.YELLOW_BED, be.seeseemelk.mockbukkit.block.state.BedMock.class),
-				Arguments.of(Material.LIME_BED, be.seeseemelk.mockbukkit.block.state.BedMock.class),
-				Arguments.of(Material.PINK_BED, be.seeseemelk.mockbukkit.block.state.BedMock.class),
-				Arguments.of(Material.GRAY_BED, be.seeseemelk.mockbukkit.block.state.BedMock.class),
-				Arguments.of(Material.LIGHT_GRAY_BED, be.seeseemelk.mockbukkit.block.state.BedMock.class),
-				Arguments.of(Material.CYAN_BED, be.seeseemelk.mockbukkit.block.state.BedMock.class),
-				Arguments.of(Material.PURPLE_BED, be.seeseemelk.mockbukkit.block.state.BedMock.class),
-				Arguments.of(Material.BLUE_BED, be.seeseemelk.mockbukkit.block.state.BedMock.class),
-				Arguments.of(Material.BROWN_BED, be.seeseemelk.mockbukkit.block.state.BedMock.class),
-				Arguments.of(Material.GREEN_BED, be.seeseemelk.mockbukkit.block.state.BedMock.class),
-				Arguments.of(Material.RED_BED, be.seeseemelk.mockbukkit.block.state.BedMock.class),
-				Arguments.of(Material.BLACK_BED, be.seeseemelk.mockbukkit.block.state.BedMock.class),
+				Arguments.of(Material.WHITE_BED, BedStateMock.class),
+				Arguments.of(Material.ORANGE_BED, BedStateMock.class),
+				Arguments.of(Material.MAGENTA_BED, BedStateMock.class),
+				Arguments.of(Material.LIGHT_BLUE_BED, BedStateMock.class),
+				Arguments.of(Material.YELLOW_BED, BedStateMock.class),
+				Arguments.of(Material.LIME_BED, BedStateMock.class),
+				Arguments.of(Material.PINK_BED, BedStateMock.class),
+				Arguments.of(Material.GRAY_BED, BedStateMock.class),
+				Arguments.of(Material.LIGHT_GRAY_BED, BedStateMock.class),
+				Arguments.of(Material.CYAN_BED, BedStateMock.class),
+				Arguments.of(Material.PURPLE_BED, BedStateMock.class),
+				Arguments.of(Material.BLUE_BED, BedStateMock.class),
+				Arguments.of(Material.BROWN_BED, BedStateMock.class),
+				Arguments.of(Material.GREEN_BED, BedStateMock.class),
+				Arguments.of(Material.RED_BED, BedStateMock.class),
+				Arguments.of(Material.BLACK_BED, BedStateMock.class),
 				// Skulker Boxes
-				Arguments.of(Material.WHITE_SHULKER_BOX, be.seeseemelk.mockbukkit.block.state.ShulkerBoxMock.class),
-				Arguments.of(Material.ORANGE_SHULKER_BOX, be.seeseemelk.mockbukkit.block.state.ShulkerBoxMock.class),
-				Arguments.of(Material.MAGENTA_SHULKER_BOX, be.seeseemelk.mockbukkit.block.state.ShulkerBoxMock.class),
-				Arguments.of(Material.LIGHT_BLUE_SHULKER_BOX, be.seeseemelk.mockbukkit.block.state.ShulkerBoxMock.class),
-				Arguments.of(Material.YELLOW_SHULKER_BOX, be.seeseemelk.mockbukkit.block.state.ShulkerBoxMock.class),
-				Arguments.of(Material.LIME_SHULKER_BOX, be.seeseemelk.mockbukkit.block.state.ShulkerBoxMock.class),
-				Arguments.of(Material.PINK_SHULKER_BOX, be.seeseemelk.mockbukkit.block.state.ShulkerBoxMock.class),
-				Arguments.of(Material.GRAY_SHULKER_BOX, be.seeseemelk.mockbukkit.block.state.ShulkerBoxMock.class),
-				Arguments.of(Material.LIGHT_GRAY_SHULKER_BOX, be.seeseemelk.mockbukkit.block.state.ShulkerBoxMock.class),
-				Arguments.of(Material.CYAN_SHULKER_BOX, be.seeseemelk.mockbukkit.block.state.ShulkerBoxMock.class),
-				Arguments.of(Material.PURPLE_SHULKER_BOX, be.seeseemelk.mockbukkit.block.state.ShulkerBoxMock.class),
-				Arguments.of(Material.BLUE_SHULKER_BOX, be.seeseemelk.mockbukkit.block.state.ShulkerBoxMock.class),
-				Arguments.of(Material.BROWN_SHULKER_BOX, be.seeseemelk.mockbukkit.block.state.ShulkerBoxMock.class),
-				Arguments.of(Material.GREEN_SHULKER_BOX, be.seeseemelk.mockbukkit.block.state.ShulkerBoxMock.class),
-				Arguments.of(Material.RED_SHULKER_BOX, be.seeseemelk.mockbukkit.block.state.ShulkerBoxMock.class),
-				Arguments.of(Material.BLACK_SHULKER_BOX, be.seeseemelk.mockbukkit.block.state.ShulkerBoxMock.class),
+				Arguments.of(Material.WHITE_SHULKER_BOX, ShulkerBoxStateMock.class),
+				Arguments.of(Material.ORANGE_SHULKER_BOX, ShulkerBoxStateMock.class),
+				Arguments.of(Material.MAGENTA_SHULKER_BOX, ShulkerBoxStateMock.class),
+				Arguments.of(Material.LIGHT_BLUE_SHULKER_BOX, ShulkerBoxStateMock.class),
+				Arguments.of(Material.YELLOW_SHULKER_BOX, ShulkerBoxStateMock.class),
+				Arguments.of(Material.LIME_SHULKER_BOX, ShulkerBoxStateMock.class),
+				Arguments.of(Material.PINK_SHULKER_BOX, ShulkerBoxStateMock.class),
+				Arguments.of(Material.GRAY_SHULKER_BOX, ShulkerBoxStateMock.class),
+				Arguments.of(Material.LIGHT_GRAY_SHULKER_BOX, ShulkerBoxStateMock.class),
+				Arguments.of(Material.CYAN_SHULKER_BOX, ShulkerBoxStateMock.class),
+				Arguments.of(Material.PURPLE_SHULKER_BOX, ShulkerBoxStateMock.class),
+				Arguments.of(Material.BLUE_SHULKER_BOX, ShulkerBoxStateMock.class),
+				Arguments.of(Material.BROWN_SHULKER_BOX, ShulkerBoxStateMock.class),
+				Arguments.of(Material.GREEN_SHULKER_BOX, ShulkerBoxStateMock.class),
+				Arguments.of(Material.RED_SHULKER_BOX, ShulkerBoxStateMock.class),
+				Arguments.of(Material.BLACK_SHULKER_BOX, ShulkerBoxStateMock.class),
 				// Sign
-				Arguments.of(Material.OAK_SIGN, be.seeseemelk.mockbukkit.block.state.SignMock.class),
-				Arguments.of(Material.SPRUCE_SIGN, be.seeseemelk.mockbukkit.block.state.SignMock.class),
-				Arguments.of(Material.BIRCH_SIGN, be.seeseemelk.mockbukkit.block.state.SignMock.class),
-				Arguments.of(Material.JUNGLE_SIGN, be.seeseemelk.mockbukkit.block.state.SignMock.class),
-				Arguments.of(Material.ACACIA_SIGN, be.seeseemelk.mockbukkit.block.state.SignMock.class),
-				Arguments.of(Material.CHERRY_SIGN, be.seeseemelk.mockbukkit.block.state.SignMock.class),
-				Arguments.of(Material.DARK_OAK_SIGN, be.seeseemelk.mockbukkit.block.state.SignMock.class),
-				Arguments.of(Material.MANGROVE_SIGN, be.seeseemelk.mockbukkit.block.state.SignMock.class),
-				Arguments.of(Material.BAMBOO_SIGN, be.seeseemelk.mockbukkit.block.state.SignMock.class),
-				Arguments.of(Material.CRIMSON_SIGN, be.seeseemelk.mockbukkit.block.state.SignMock.class),
-				Arguments.of(Material.WARPED_SIGN, be.seeseemelk.mockbukkit.block.state.SignMock.class),
+				Arguments.of(Material.OAK_SIGN, SignStateMock.class),
+				Arguments.of(Material.SPRUCE_SIGN, SignStateMock.class),
+				Arguments.of(Material.BIRCH_SIGN, SignStateMock.class),
+				Arguments.of(Material.JUNGLE_SIGN, SignStateMock.class),
+				Arguments.of(Material.ACACIA_SIGN, SignStateMock.class),
+				Arguments.of(Material.CHERRY_SIGN, SignStateMock.class),
+				Arguments.of(Material.DARK_OAK_SIGN, SignStateMock.class),
+				Arguments.of(Material.MANGROVE_SIGN, SignStateMock.class),
+				Arguments.of(Material.BAMBOO_SIGN, SignStateMock.class),
+				Arguments.of(Material.CRIMSON_SIGN, SignStateMock.class),
+				Arguments.of(Material.WARPED_SIGN, SignStateMock.class),
 				// Hanging Sign (TODO: Not implemented yet, see issue https://github.com/MockBukkit/MockBukkit/issues/1088)
 //				Arguments.of(Material.OAK_HANGING_SIGN, be.seeseemelk.mockbukkit.block.state.HangingSignMock.class),
 //				Arguments.of(Material.SPRUCE_HANGING_SIGN, be.seeseemelk.mockbukkit.block.state.HangingSignMock.class),
@@ -320,41 +320,41 @@ class BlockStateMockTest
 //				Arguments.of(Material.WARPED_WALL_HANGING_SIGN, be.seeseemelk.mockbukkit.block.state.WallHangingSignMock.class),
 //				Arguments.of(Material.BAMBOO_WALL_HANGING_SIGN, be.seeseemelk.mockbukkit.block.state.WallHangingSignMock.class),
 				// Skulls
-				Arguments.of(Material.SKELETON_SKULL, be.seeseemelk.mockbukkit.block.state.SkullMock.class),
-				Arguments.of(Material.SKELETON_WALL_SKULL, be.seeseemelk.mockbukkit.block.state.SkullMock.class),
-				Arguments.of(Material.WITHER_SKELETON_SKULL, be.seeseemelk.mockbukkit.block.state.SkullMock.class),
-				Arguments.of(Material.WITHER_SKELETON_WALL_SKULL, be.seeseemelk.mockbukkit.block.state.SkullMock.class),
+				Arguments.of(Material.SKELETON_SKULL, SkullStateMock.class),
+				Arguments.of(Material.SKELETON_WALL_SKULL, SkullStateMock.class),
+				Arguments.of(Material.WITHER_SKELETON_SKULL, SkullStateMock.class),
+				Arguments.of(Material.WITHER_SKELETON_WALL_SKULL, SkullStateMock.class),
 				// Other blocks
-				Arguments.of(Material.STRUCTURE_BLOCK, be.seeseemelk.mockbukkit.block.state.StructureMock.class),
-				Arguments.of(Material.SMOKER, be.seeseemelk.mockbukkit.block.state.SmokerMock.class),
-				Arguments.of(Material.END_GATEWAY, be.seeseemelk.mockbukkit.block.state.EndGatewayMock.class),
-				Arguments.of(Material.SCULK_CATALYST, be.seeseemelk.mockbukkit.block.state.SculkCatalystMock.class),
-				Arguments.of(Material.SCULK_SHRIEKER, be.seeseemelk.mockbukkit.block.state.SculkShriekerMock.class),
-				Arguments.of(Material.SCULK_SENSOR, be.seeseemelk.mockbukkit.block.state.SculkSensorMock.class),
-				Arguments.of(Material.BEACON, be.seeseemelk.mockbukkit.block.state.BeaconMock.class),
-				Arguments.of(Material.BEEHIVE, be.seeseemelk.mockbukkit.block.state.BeehiveMock.class),
-				Arguments.of(Material.BREWING_STAND, be.seeseemelk.mockbukkit.block.state.BrewingStandMock.class),
-				Arguments.of(Material.BLAST_FURNACE, be.seeseemelk.mockbukkit.block.state.BlastFurnaceMock.class),
-				Arguments.of(Material.COMPARATOR, be.seeseemelk.mockbukkit.block.state.ComparatorMock.class),
-				Arguments.of(Material.ENCHANTING_TABLE, be.seeseemelk.mockbukkit.block.state.EnchantingTableMock.class),
-				Arguments.of(Material.JIGSAW, be.seeseemelk.mockbukkit.block.state.JigsawMock.class),
-				Arguments.of(Material.JUKEBOX, be.seeseemelk.mockbukkit.block.state.JukeboxMock.class),
-				Arguments.of(Material.SPAWNER, be.seeseemelk.mockbukkit.block.state.CreatureSpawnerMock.class),
-				Arguments.of(Material.DAYLIGHT_DETECTOR, be.seeseemelk.mockbukkit.block.state.DaylightDetectorMock.class),
-				Arguments.of(Material.COMMAND_BLOCK, be.seeseemelk.mockbukkit.block.state.CommandBlockMock.class),
-				Arguments.of(Material.CHAIN_COMMAND_BLOCK, be.seeseemelk.mockbukkit.block.state.CommandBlockMock.class),
-				Arguments.of(Material.REPEATING_COMMAND_BLOCK, be.seeseemelk.mockbukkit.block.state.CommandBlockMock.class),
-				Arguments.of(Material.CAMPFIRE, be.seeseemelk.mockbukkit.block.state.CampfireMock.class),
-				Arguments.of(Material.SOUL_CAMPFIRE, be.seeseemelk.mockbukkit.block.state.CampfireMock.class),
-				Arguments.of(Material.BELL, be.seeseemelk.mockbukkit.block.state.BellMock.class),
-				Arguments.of(Material.LECTERN, be.seeseemelk.mockbukkit.block.state.LecternMock.class),
-				Arguments.of(Material.HOPPER, be.seeseemelk.mockbukkit.block.state.HopperMock.class),
-				Arguments.of(Material.BARREL, be.seeseemelk.mockbukkit.block.state.BarrelMock.class),
-				Arguments.of(Material.DISPENSER, be.seeseemelk.mockbukkit.block.state.DispenserMock.class),
-				Arguments.of(Material.DROPPER, be.seeseemelk.mockbukkit.block.state.DropperMock.class),
-				Arguments.of(Material.CHEST, be.seeseemelk.mockbukkit.block.state.ChestMock.class),
-				Arguments.of(Material.TRAPPED_CHEST, be.seeseemelk.mockbukkit.block.state.ChestMock.class),
-				Arguments.of(Material.ENDER_CHEST, be.seeseemelk.mockbukkit.block.state.EnderChestMock.class)
+				Arguments.of(Material.STRUCTURE_BLOCK, StructureStateMock.class),
+				Arguments.of(Material.SMOKER, SmokerStateMock.class),
+				Arguments.of(Material.END_GATEWAY, EndGatewayStateMock.class),
+				Arguments.of(Material.SCULK_CATALYST, SculkCatalystStateMock.class),
+				Arguments.of(Material.SCULK_SHRIEKER, SculkShriekerStateMock.class),
+				Arguments.of(Material.SCULK_SENSOR, SculkSensorStateMock.class),
+				Arguments.of(Material.BEACON, BeaconStateMock.class),
+				Arguments.of(Material.BEEHIVE, BeehiveStateMock.class),
+				Arguments.of(Material.BREWING_STAND, BrewingStandStateMock.class),
+				Arguments.of(Material.BLAST_FURNACE, BlastFurnaceStateMock.class),
+				Arguments.of(Material.COMPARATOR, ComparatorStateMock.class),
+				Arguments.of(Material.ENCHANTING_TABLE, EnchantingTableStateMock.class),
+				Arguments.of(Material.JIGSAW, JigsawStateMock.class),
+				Arguments.of(Material.JUKEBOX, JukeboxStateMock.class),
+				Arguments.of(Material.SPAWNER, CreatureSpawnerStateMock.class),
+				Arguments.of(Material.DAYLIGHT_DETECTOR, DaylightDetectorStateMock.class),
+				Arguments.of(Material.COMMAND_BLOCK, CommandBlockStateMock.class),
+				Arguments.of(Material.CHAIN_COMMAND_BLOCK, CommandBlockStateMock.class),
+				Arguments.of(Material.REPEATING_COMMAND_BLOCK, CommandBlockStateMock.class),
+				Arguments.of(Material.CAMPFIRE, CampfireStateMock.class),
+				Arguments.of(Material.SOUL_CAMPFIRE, CampfireStateMock.class),
+				Arguments.of(Material.BELL, BellStateMock.class),
+				Arguments.of(Material.LECTERN, LecternStateMock.class),
+				Arguments.of(Material.HOPPER, HopperStateMock.class),
+				Arguments.of(Material.BARREL, BarrelStateMock.class),
+				Arguments.of(Material.DISPENSER, DispenserStateMock.class),
+				Arguments.of(Material.DROPPER, DropperStateMock.class),
+				Arguments.of(Material.CHEST, ChestStateMock.class),
+				Arguments.of(Material.TRAPPED_CHEST, ChestStateMock.class),
+				Arguments.of(Material.ENDER_CHEST, EnderChestStateMock.class)
 		);
 	}
 

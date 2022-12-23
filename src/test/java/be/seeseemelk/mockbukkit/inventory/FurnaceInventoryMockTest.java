@@ -1,7 +1,7 @@
 package be.seeseemelk.mockbukkit.inventory;
 
 import be.seeseemelk.mockbukkit.MockBukkitExtension;
-import be.seeseemelk.mockbukkit.block.state.BlastFurnaceMock;
+import be.seeseemelk.mockbukkit.block.state.BlastFurnaceStateMock;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,12 +17,12 @@ class FurnaceInventoryMockTest
 
 	private FurnaceInventoryMock inventory;
 
-	private BlastFurnaceMock holder;
+	private BlastFurnaceStateMock holder;
 
 	@BeforeEach
 	void setUp()
 	{
-		holder = new BlastFurnaceMock(Material.BLAST_FURNACE);
+		holder = new BlastFurnaceStateMock(Material.BLAST_FURNACE);
 		inventory = new FurnaceInventoryMock(holder);
 	}
 
