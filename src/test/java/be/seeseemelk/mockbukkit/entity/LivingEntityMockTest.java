@@ -104,14 +104,14 @@ class LivingEntityMockTest
 	@Test
 	void testGetFrictionStateDefault()
 	{
-		assertEquals(TriState.NOT_SET,livingEntity.getFrictionState());
+		assertEquals(TriState.NOT_SET, livingEntity.getFrictionState());
 	}
 
 	@Test
 	void testSetFrictionState()
 	{
 		livingEntity.setFrictionState(TriState.TRUE);
-		assertEquals(TriState.TRUE,livingEntity.getFrictionState());
+		assertEquals(TriState.TRUE, livingEntity.getFrictionState());
 	}
 
 	@Test

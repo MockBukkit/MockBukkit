@@ -12,7 +12,6 @@ import be.seeseemelk.mockbukkit.sound.SoundReceiver;
 import be.seeseemelk.mockbukkit.statistic.StatisticsMock;
 import com.destroystokyo.paper.ClientOption;
 import com.destroystokyo.paper.Title;
-import com.destroystokyo.paper.entity.TargetEntityInfo;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
@@ -667,13 +666,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public @Nullable TargetEntityInfo getTargetEntityInfo(int maxDistance, boolean ignoreBlocks)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public int getNoDamageTicks()
 	{
 		// TODO Auto-generated method stub
@@ -1087,6 +1079,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 					case SNARE_DRUM -> Sound.BLOCK_NOTE_BLOCK_SNARE;
 					case STICKS -> Sound.BLOCK_NOTE_BLOCK_HAT;
 					case XYLOPHONE -> Sound.BLOCK_NOTE_BLOCK_XYLOPHONE;
+					case ZOMBIE -> Sound.BLOCK_NOTE_BLOCK_IMITATE_ZOMBIE;
+					case SKELETON -> Sound.BLOCK_NOTE_BLOCK_IMITATE_SKELETON;
+					case CREEPER -> Sound.BLOCK_NOTE_BLOCK_IMITATE_CREEPER;
+					case DRAGON -> Sound.BLOCK_NOTE_BLOCK_IMITATE_ENDER_DRAGON;
+					case WITHER_SKELETON -> Sound.BLOCK_NOTE_BLOCK_IMITATE_WITHER_SKELETON;
+					case PIGLIN -> Sound.BLOCK_NOTE_BLOCK_IMITATE_PIGLIN;
+					case CUSTOM_HEAD -> Sound.UI_BUTTON_CLICK; // What the Fuck Mojang?
 				};
 		float pitch = (float) Math.pow(2.0D, (note - 12.0D) / 12.0D);
 		playSound(loc, sound, SoundCategory.RECORDS, 3, pitch);

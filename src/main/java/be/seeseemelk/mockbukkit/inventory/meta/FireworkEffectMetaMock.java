@@ -1,7 +1,6 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
 import org.bukkit.FireworkEffect;
-import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.FireworkEffectMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

@@ -3,7 +3,6 @@ package be.seeseemelk.mockbukkit.inventory.meta;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import org.bukkit.FireworkEffect;
-import org.bukkit.inventory.meta.FireworkEffectMeta;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.jetbrains.annotations.NotNull;
 
