@@ -15,16 +15,16 @@ import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.WATERLOGGED;
 /**
  * Mock implementation of a {@link WallSign}.
  */
-public class WallSignMock extends BlockDataMock implements WallSign
+public class WallSignDataMock extends BlockDataMock implements WallSign
 {
 
 	/**
-	 * Constructs a new {@link WallSignMock} for the provided {@link Material}. Only
+	 * Constructs a new {@link WallSignDataMock} for the provided {@link Material}. Only
 	 * supports materials in {@link Tag#WALL_SIGNS}
 	 *
 	 * @param type The material this data is for.
 	 */
-	public WallSignMock(@NotNull Material type)
+	public WallSignDataMock(@NotNull Material type)
 	{
 		super(type);
 		checkType(type, Tag.WALL_SIGNS);
