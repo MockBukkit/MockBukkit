@@ -41,7 +41,7 @@ import java.util.List;
  * Mock implementation of an {@link UnsafeValues}.
  */
 @Deprecated
-public class MockUnsafeValues implements UnsafeValues
+public class UnsafeValuesMock implements UnsafeValues
 {
 
 	private static final List<String> COMPATIBLE_API_VERSIONS = Arrays.asList("1.13", "1.14", "1.15", "1.16", "1.17", "1.18", "1.19");

@@ -20,13 +20,13 @@ class UnsafeValuesTest
 	private static final String PLUGIN_INFO_FORMAT = "name: VersionTest\nversion: 1.0\nmain: not.exists\napi-version: %s";
 
 	private ServerMock server;
-	private MockUnsafeValues mockUnsafeValues;
+	private UnsafeValuesMock unsafeValuesMock;
 
 	@BeforeEach
 	void setUp()
 	{
 		server = MockBukkit.mock();
-		mockUnsafeValues = server.getUnsafe();
+		unsafeValuesMock = server.getUnsafe();
 	}
 
 	@AfterEach
@@ -41,7 +41,7 @@ class UnsafeValuesTest
 		try (StringReader stringReader = new StringReader(pluginInfo))
 		{
 			PluginDescriptionFile pluginDescriptionFile = new PluginDescriptionFile(stringReader);
-			mockUnsafeValues.checkSupported(pluginDescriptionFile);
+			unsafeValuesMock.checkSupported(pluginDescriptionFile);
 		}
 		catch (InvalidDescriptionException ex)
 		{
@@ -60,7 +60,7 @@ class UnsafeValuesTest
 			currentVersion = currentVersion.substring(0, currentVersion.indexOf(".", currentVersion.indexOf(".") + 1));
 		}
 
-		assertTrue(mockUnsafeValues.isSupportedApiVersion(currentVersion));
+		assertTrue(unsafeValuesMock.isSupportedApiVersion(currentVersion));
 	}
 
 	@Test
@@ -81,7 +81,7 @@ class UnsafeValuesTest
 		assertDoesNotThrow(() ->
 		{
 			PluginDescriptionFile pluginDescriptionFile = new PluginDescriptionFile("VersionTest", "1.0", "not.exists");
-			mockUnsafeValues.checkSupported(pluginDescriptionFile);
+			unsafeValuesMock.checkSupported(pluginDescriptionFile);
 		});
 	}
 
@@ -90,7 +90,7 @@ class UnsafeValuesTest
 	{
 		assertThrows(InvalidPluginException.class, () ->
 		{
-			mockUnsafeValues.setMinimumApiVersion("1.15");
+			unsafeValuesMock.setMinimumApiVersion("1.15");
 			checkVersion("1.13");
 		});
 	}
