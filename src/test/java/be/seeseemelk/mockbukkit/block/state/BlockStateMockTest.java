@@ -70,7 +70,7 @@ class BlockStateMockTest
 	void testUpdateWrongType()
 	{
 		Block block = new BlockMock(Material.CHEST);
-		BlockState chest = new ChestMock(block);
+		BlockState chest = new ChestStateMock(block);
 		block.setType(Material.IRON_BLOCK);
 		assertFalse(chest.update());
 	}
@@ -87,7 +87,7 @@ class BlockStateMockTest
 	void testUpdateForce()
 	{
 		Block block = new BlockMock(Material.CHEST);
-		BlockState chest = new ChestMock(block);
+		BlockState chest = new ChestStateMock(block);
 		block.setType(Material.IRON_BLOCK);
 
 		assertFalse(block.getState() instanceof Chest);
@@ -99,7 +99,7 @@ class BlockStateMockTest
 	void testUpdateForceChangesType()
 	{
 		Block block = new BlockMock(Material.CHEST);
-		BlockState chest = new ChestMock(block);
+		BlockState chest = new ChestStateMock(block);
 		chest.setType(Material.IRON_BLOCK);
 
 		assertTrue(chest.update(true));
