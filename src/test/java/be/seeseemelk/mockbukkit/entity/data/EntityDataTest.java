@@ -21,42 +21,76 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 
 class EntityDataTest
 {
-	
+
 	String fakeData;
 	private EntityData entityData;
-	
+
 	@BeforeEach
-	void setUp() throws IOException {
-		fakeData = "{'default':{'width':2,'height':3},'baby':{'width':1}}";
+	void setUp() throws IOException
+	{
+		fakeData = "{'default':{'width':2,'height':3, 'states':{'sleeping':{'height':0.2}}},'baby':{'width':1, 'height':0.5}}";
 		entityData = new EntityData(EntityType.BAT, fakeData);
 	}
-	
+
 	@AfterEach
-	void tearDown() {
+	void tearDown()
+	{
 		MockBukkit.unmock();
 	}
-	
 
 	@Test
-	void defaultValueTest() {
-		assertEquals(2,entityData.getWidth(EntityState.DEFAULT));
-		assertEquals(3,entityData.getHeight(EntityState.DEFAULT));
-	}
-	
-	@Test
-	void nonDefaultValueTest() {
-		assertEquals(1,entityData.getWidth(EntityState.BABY));
-		assertEquals(3,entityData.getHeight(EntityState.BABY));
+	void defaultValueTest()
+	{
+		try
+		{
+			assertEquals(2, entityData.getWidth(EntitySubType.DEFAULT, EntityState.DEFAULT));
+			assertEquals(3, entityData.getHeight(EntitySubType.DEFAULT, EntityState.DEFAULT));
+		}
+		catch (UnimplementedOperationException e)
+		{
+			throw new AssertionFailedError("");
+		}
 	}
 
 	@Test
-	void invalidKeyTest() {
-		assertThrows(UnimplementedOperationException.class,() -> entityData.getValueFromKey("invalid",EntityState.DEFAULT));
+	void subTypeValueTest()
+	{
+		try
+		{
+			assertEquals(1, entityData.getWidth(EntitySubType.BABY, EntityState.DEFAULT));
+			assertEquals(0.5, entityData.getHeight(EntitySubType.BABY, EntityState.DEFAULT));
+		}
+		catch (UnimplementedOperationException e)
+		{
+			throw new AssertionFailedError("");
+		}
 	}
-	
+
 	@Test
-	void invalidStateTest() {
-		assertThrows(UnimplementedOperationException.class,() -> entityData.getWidth(EntityState.SNEAKING));
+	void stateValueTest()
+	{
+		try
+		{
+			assertEquals(2, entityData.getWidth(EntitySubType.DEFAULT, EntityState.SLEEPING));
+			assertEquals(0.2, entityData.getHeight(EntitySubType.DEFAULT, EntityState.SLEEPING));
+		}
+		catch (UnimplementedOperationException e)
+		{
+			throw new AssertionFailedError("");
+		}
+	}
+
+	@Test
+	void invalidKeyTest()
+	{
+		assertThrows(UnimplementedOperationException.class,
+				() -> entityData.getValueFromKey("invalid",EntitySubType.DEFAULT ,EntityState.DEFAULT));
+	}
+
+	@Test
+	void invalidStateTest()
+	{
+		assertThrows(UnimplementedOperationException.class, () -> entityData.getWidth(EntitySubType.DEFAULT, EntityState.SNEAKING));
 	}
 
 }

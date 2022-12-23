@@ -4,6 +4,7 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.MockPlugin;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.TestPlugin;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.WorldMock;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
@@ -1076,25 +1077,34 @@ class EntityMockTest
 	}
 
 	@Test
-	void getNearbyEntities() {
-		entity.teleport(new Location(world,0,0,0));
-		Entity nearbyEntity = world.spawnEntity(new Location(world,0,5,0), EntityType.BAT);
+	void getNearbyEntities()
+	{
+		entity.teleport(new Location(world, 0, 0, 0));
+		Entity nearbyEntity = world.spawnEntity(new Location(world, 0, 5, 0), EntityType.BAT);
 		List<Entity> nearbyEntities = entity.getNearbyEntities(7, 7, 7);
 		assertTrue(nearbyEntities.contains(nearbyEntity));
 	}
-	
+
 	@Test
-	void getNearbyEntitiesNotSelf() {
-		entity.teleport(new Location(world,0,0,0));
+	void getNearbyEntitiesNotSelf()
+	{
+		entity.teleport(new Location(world, 0, 0, 0));
 		List<Entity> nearbyEntities = entity.getNearbyEntities(7, 7, 7);
 		assertFalse(nearbyEntities.contains(entity));
 	}
-	
+
 	@Test
-	void getNearbyEntitiesNotNearby() {
-		entity.teleport(new Location(world,0,0,0));
-		Entity nearbyEntity = world.spawnEntity(new Location(world,0,10,0), EntityType.BAT);
+	void getNearbyEntitiesNotNearby()
+	{
+		entity.teleport(new Location(world, 0, 0, 0));
+		Entity nearbyEntity = world.spawnEntity(new Location(world, 0, 10, 0), EntityType.BAT);
 		List<Entity> nearbyEntities = entity.getNearbyEntities(7, 7, 7);
 		assertFalse(nearbyEntities.contains(nearbyEntity));
+	}
+	
+	@Test
+	void getWidthImplemented() {
+		EntityMock entity = (EntityMock) world.spawnEntity(new Location(world, 0, 0, 0), EntityType.BAT);
+		assertDoesNotThrow(entity::getWidth);
 	}
 }

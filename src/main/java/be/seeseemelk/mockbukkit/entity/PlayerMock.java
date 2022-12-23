@@ -5,6 +5,7 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.MockPlayerList;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.entity.data.EntityState;
 import be.seeseemelk.mockbukkit.map.MapViewMock;
 import be.seeseemelk.mockbukkit.sound.AudioExperience;
 import be.seeseemelk.mockbukkit.sound.SoundReceiver;
@@ -2709,6 +2710,28 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 			server.getPlayerList().removeOperator(this.getUniqueId());
 		}
 
+	}
+	
+	@Override
+	protected EntityState getEntityState()
+	{
+		if (this.isSneaking())
+		{
+			return EntityState.SNEAKING;
+		}
+		if (this.isGliding())
+		{
+			return EntityState.GLIDING;
+		}
+		if (this.isSwimming())
+		{
+			return EntityState.SWIMMING;
+		}
+		if (this.isSleeping())
+		{
+			return EntityState.SLEEPING;
+		}
+		return super.getEntityState();
 	}
 
 	@Override
