@@ -754,7 +754,7 @@ class ServerMockTest
 	@Test
 	void testPlayerListDisconnectPlayer()
 	{
-		MockPlayerList playerList = server.getPlayerList();
+		PlayerListMock playerList = server.getPlayerList();
 		PlayerMock playerA = server.addPlayer();
 		playerList.disconnectPlayer(playerA);
 

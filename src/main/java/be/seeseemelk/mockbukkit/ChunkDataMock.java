@@ -16,7 +16,7 @@ import java.util.Map;
 /**
  * Mock implementation of a {@link ChunkGenerator.ChunkData}.
  */
-public class MockChunkData implements ChunkGenerator.ChunkData
+public class ChunkDataMock implements ChunkGenerator.ChunkData
 {
 
 	private final @NotNull Map<Coordinate, BlockData> blocks;
@@ -28,11 +28,11 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 	private final int maxHeight;
 
 	/**
-	 * Constructs a new {@link MockChunkData} for the provided {@link World}.
+	 * Constructs a new {@link ChunkDataMock} for the provided {@link World}.
 	 *
 	 * @param world The world the chunk is in.
 	 */
-	public MockChunkData(@NotNull World world)
+	public ChunkDataMock(@NotNull World world)
 	{
 		this.minHeight = world.getMinHeight();
 		this.maxHeight = world.getMaxHeight();

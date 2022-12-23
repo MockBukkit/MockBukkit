@@ -70,7 +70,7 @@ import java.util.function.BooleanSupplier;
  * Mock implementation of an {@link UnsafeValues}.
  */
 @Deprecated(since = "1.7.2")
-public class MockUnsafeValues implements UnsafeValues
+public class UnsafeValuesMock implements UnsafeValues
 {
 
 	private static final List<String> COMPATIBLE_API_VERSIONS =
