@@ -11,21 +11,21 @@ import org.jetbrains.annotations.Nullable;
 import java.util.function.Consumer;
 
 /**
- * Mock implementation of a {@link BlockProjectileSource}, specifically for the {@link DispenserMock}.
+ * Mock implementation of a {@link BlockProjectileSource}, specifically for the {@link DispenserStateMock}.
  *
- * @see DispenserMock
+ * @see DispenserStateMock
  */
 class DispenserProjectileSourceMock implements BlockProjectileSource
 {
 
-	private final @NotNull DispenserMock dispenser;
+	private final @NotNull DispenserStateMock dispenser;
 
 	/**
-	 * Constructs a new {@link DispenserProjectileSourceMock} for the provided {@link DispenserMock}.
+	 * Constructs a new {@link DispenserProjectileSourceMock} for the provided {@link DispenserStateMock}.
 	 *
 	 * @param dispenser The dispenser this projectile source is for.
 	 */
-	DispenserProjectileSourceMock(@NotNull DispenserMock dispenser)
+	DispenserProjectileSourceMock(@NotNull DispenserStateMock dispenser)
 	{
 		this.dispenser = dispenser;
 	}
