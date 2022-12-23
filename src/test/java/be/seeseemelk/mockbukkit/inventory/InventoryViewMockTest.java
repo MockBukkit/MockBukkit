@@ -44,8 +44,8 @@ class InventoryViewMockTest
 	void constructorParameterised_ValuesSet()
 	{
 		Player player = server.addPlayer();
-		InventoryMock top = new SimpleInventoryMock();
-		InventoryMock bottom = new SimpleInventoryMock();
+		InventoryMock top = new InventoryMock(null, 9, InventoryType.CHEST);
+		InventoryMock bottom = new InventoryMock(null, 9, InventoryType.CHEST);
 		view = new SimpleInventoryViewMock(player, top, bottom, InventoryType.DROPPER);
 		assertSame(player, view.getPlayer());
 		assertSame(top, view.getTopInventory());
@@ -62,7 +62,7 @@ class InventoryViewMockTest
 	@Test
 	void getTopInventory_TopInventorySet_SameReturned()
 	{
-		InventoryMock inventory = new SimpleInventoryMock();
+		InventoryMock inventory = new InventoryMock(null, 9, InventoryType.CHEST);
 		view.setTopInventory(inventory);
 		assertSame(inventory, view.getTopInventory());
 	}
@@ -70,7 +70,7 @@ class InventoryViewMockTest
 	@Test
 	void getBottomInventory_BottomInventorySet_SameReturned()
 	{
-		InventoryMock inventory = new SimpleInventoryMock();
+		InventoryMock inventory = new InventoryMock(null, 9, InventoryType.CHEST);
 		view.setBottomInventory(inventory);
 		assertSame(inventory, view.getBottomInventory());
 	}
