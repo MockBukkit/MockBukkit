@@ -384,84 +384,84 @@ public class BlockStateMock implements BlockState
 		// Special cases
 		if (Tag.BANNERS.isTagged(block.getType()))
 		{
-			return new BannerMock(block);
+			return new BannerStateMock(block);
 		}
 		else if (MaterialTags.SHULKER_BOXES.isTagged(block.getType()))
 		{
-			return new ShulkerBoxMock(block);
+			return new ShulkerBoxStateMock(block);
 		}
 		else if (MaterialTags.SIGNS.isTagged(block.getType()))
 		{
-			return new SignMock(block);
+			return new SignStateMock(block);
 		}
 		else if (MaterialTags.BEDS.isTagged(block))
 		{
-			return new BedMock(block);
+			return new BedStateMock(block);
 		}
 		else if (MaterialTags.SKULLS.isTagged(block))
 		{
-			return new SkullMock(block);
+			return new SkullStateMock(block);
 		}
 		switch (block.getType())
 		{
 		case STRUCTURE_BLOCK:
-			return new StructureMock(block);
+			return new StructureStateMock(block);
 		case SMOKER:
-			return new SmokerMock(block);
+			return new SmokerStateMock(block);
 		case END_GATEWAY:
-			return new EndGatewayMock(block);
+			return new EndGatewayStateMock(block);
 		case SCULK_CATALYST:
-			return new SculkCatalystMock(block);
+			return new SculkCatalystStateMock(block);
 		case SCULK_SHRIEKER:
-			return new SculkShriekerMock(block);
+			return new SculkShriekerStateMock(block);
 		case SCULK_SENSOR:
-			return new SculkSensorMock(block);
+			return new SculkSensorStateMock(block);
 		case BEACON:
-			return new BeaconMock(block);
+			return new BeaconStateMock(block);
 		case BEEHIVE:
-			return new BeehiveMock(block);
+			return new BeehiveStateMock(block);
 		case BREWING_STAND:
-			return new BrewingStandMock(block);
+			return new BrewingStandStateMock(block);
 		case BLAST_FURNACE:
-			return new BlastFurnaceMock(block);
+			return new BlastFurnaceStateMock(block);
 		case COMPARATOR:
-			return new ComparatorMock(block);
+			return new ComparatorStateMock(block);
 		case CONDUIT:
-			return new ConduitMock(block);
+			return new ConduitStateMock(block);
 		case ENCHANTING_TABLE:
-			return new EnchantingTableMock(block);
+			return new EnchantingTableStateMock(block);
 		case JIGSAW:
-			return new JigsawMock(block);
+			return new JigsawStateMock(block);
 		case JUKEBOX:
-			return new JukeboxMock(block);
+			return new JukeboxStateMock(block);
 		case SPAWNER:
-			return new CreatureSpawnerMock(block);
+			return new CreatureSpawnerStateMock(block);
 		case DAYLIGHT_DETECTOR:
-			return new DaylightDetectorMock(block);
+			return new DaylightDetectorStateMock(block);
 		case COMMAND_BLOCK:
 		case CHAIN_COMMAND_BLOCK:
 		case REPEATING_COMMAND_BLOCK:
-			return new CommandBlockMock(block);
+			return new CommandBlockStateMock(block);
 		case CAMPFIRE:
 		case SOUL_CAMPFIRE:
-			return new CampfireMock(block);
+			return new CampfireStateMock(block);
 		case BELL:
-			return new BellMock(block);
+			return new BellStateMock(block);
 		case LECTERN:
-			return new LecternMock(block);
+			return new LecternStateMock(block);
 		case HOPPER:
-			return new HopperMock(block);
+			return new HopperStateMock(block);
 		case BARREL:
-			return new BarrelMock(block);
+			return new BarrelStateMock(block);
 		case DISPENSER:
-			return new DispenserMock(block);
+			return new DispenserStateMock(block);
 		case DROPPER:
-			return new DropperMock(block);
+			return new DropperStateMock(block);
 		case CHEST:
 		case TRAPPED_CHEST:
-			return new ChestMock(block);
+			return new ChestStateMock(block);
 		case ENDER_CHEST:
-			return new EnderChestMock(block);
+			return new EnderChestStateMock(block);
 		default:
 			return new BlockStateMock(block);
 		}

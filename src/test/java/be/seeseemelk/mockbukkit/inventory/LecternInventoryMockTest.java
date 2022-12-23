@@ -1,7 +1,7 @@
 package be.seeseemelk.mockbukkit.inventory;
 
 import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.block.state.LecternMock;
+import be.seeseemelk.mockbukkit.block.state.LecternStateMock;
 import org.bukkit.Material;
 import org.bukkit.inventory.LecternInventory;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,13 +15,13 @@ class LecternInventoryMockTest
 {
 
 	private LecternInventoryMock inventory;
-	private LecternMock block;
+	private LecternStateMock block;
 
 	@BeforeEach
 	void setup()
 	{
 		new ServerMock();
-		block = new LecternMock(Material.LECTERN);
+		block = new LecternStateMock(Material.LECTERN);
 		inventory = new LecternInventoryMock(block);
 	}
 

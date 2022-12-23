@@ -20,7 +20,7 @@ public abstract class TileStateMock extends BlockStateMock implements TileState
 	private final @NotNull PersistentDataContainerMock container;
 
 	/**
-	 * Constructs a new {@link SculkCatalystMock} for the provided {@link Material}.
+	 * Constructs a new {@link SculkCatalystStateMock} for the provided {@link Material}.
 	 *
 	 * @param material The material this state is for.
 	 */
@@ -31,7 +31,7 @@ public abstract class TileStateMock extends BlockStateMock implements TileState
 	}
 
 	/**
-	 * Constructs a new {@link SculkCatalystMock} for the provided {@link Block}.
+	 * Constructs a new {@link SculkCatalystStateMock} for the provided {@link Block}.
 	 *
 	 * @param block The block this state is for.
 	 */
@@ -42,7 +42,7 @@ public abstract class TileStateMock extends BlockStateMock implements TileState
 	}
 
 	/**
-	 * Constructs a new {@link SculkCatalystMock} by cloning the data from an existing one.
+	 * Constructs a new {@link SculkCatalystStateMock} by cloning the data from an existing one.
 	 *
 	 * @param state The state to clone.
 	 */
