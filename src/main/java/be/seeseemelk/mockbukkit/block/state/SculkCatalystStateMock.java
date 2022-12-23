@@ -1,44 +1,43 @@
 package be.seeseemelk.mockbukkit.block.state;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
+import io.papermc.paper.math.Position;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
-import org.bukkit.block.TileState;
-import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.block.SculkCatalyst;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Mock implementation of a {@link TileState}.
+ * Mock implementation of a {@link SculkCatalyst}.
  *
- * @see BlockStateMock
+ * @see TileStateMock
  */
-public abstract class TileStateMock extends BlockStateMock implements TileState
+public class SculkCatalystStateMock extends TileStateMock implements SculkCatalyst
 {
-
-	private final @NotNull PersistentDataContainerMock container;
 
 	/**
 	 * Constructs a new {@link SculkCatalystStateMock} for the provided {@link Material}.
+	 * Only supports {@link Material#SCULK_CATALYST}
 	 *
 	 * @param material The material this state is for.
 	 */
-	protected TileStateMock(@NotNull Material material)
+	public SculkCatalystStateMock(@NotNull Material material)
 	{
 		super(material);
-		this.container = new PersistentDataContainerMock();
+		checkType(material, Material.SCULK_CATALYST);
 	}
 
 	/**
 	 * Constructs a new {@link SculkCatalystStateMock} for the provided {@link Block}.
+	 * Only supports {@link Material#SCULK_CATALYST}
 	 *
 	 * @param block The block this state is for.
 	 */
-	protected TileStateMock(@NotNull Block block)
+	protected SculkCatalystStateMock(@NotNull Block block)
 	{
 		super(block);
-		this.container = new PersistentDataContainerMock();
+		checkType(block, Material.SCULK_CATALYST);
 	}
 
 	/**
@@ -46,26 +45,29 @@ public abstract class TileStateMock extends BlockStateMock implements TileState
 	 *
 	 * @param state The state to clone.
 	 */
-	protected TileStateMock(@NotNull TileStateMock state)
+	protected SculkCatalystStateMock(@NotNull SculkCatalystStateMock state)
 	{
 		super(state);
-		this.container = new PersistentDataContainerMock(state.container);
 	}
 
 	@Override
-	public @NotNull PersistentDataContainer getPersistentDataContainer()
+	public @NotNull BlockState getSnapshot()
 	{
-		return container;
+		return new SculkCatalystStateMock(this);
 	}
 
 	@Override
-	public boolean isSnapshot()
+	public void bloom(@NotNull Block block, int charges)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public abstract @NotNull BlockState getSnapshot();
+	public void bloom(@NotNull Position position, int charge)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
 
 }
