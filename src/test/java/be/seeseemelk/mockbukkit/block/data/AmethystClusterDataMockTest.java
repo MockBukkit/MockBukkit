@@ -14,15 +14,15 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
-class AmethystClusterMockTest
+class AmethystClusterDataMockTest
 {
 
-	private AmethystClusterMock cluster;
+	private AmethystClusterDataMock cluster;
 
 	@BeforeEach
 	void setUp()
 	{
-		this.cluster = new AmethystClusterMock(Material.AMETHYST_CLUSTER);
+		this.cluster = new AmethystClusterDataMock(Material.AMETHYST_CLUSTER);
 	}
 
 	@Test
@@ -35,13 +35,13 @@ class AmethystClusterMockTest
 	@Test
 	void constructor_Material()
 	{
-		assertDoesNotThrow(() -> new AmethystClusterMock(Material.AMETHYST_CLUSTER));
+		assertDoesNotThrow(() -> new AmethystClusterDataMock(Material.AMETHYST_CLUSTER));
 	}
 
 	@Test
 	void constructor_Material_WrongType_ThrowsException()
 	{
-		assertThrowsExactly(IllegalArgumentException.class, () -> new AmethystClusterMock(Material.BEDROCK));
+		assertThrowsExactly(IllegalArgumentException.class, () -> new AmethystClusterDataMock(Material.BEDROCK));
 	}
 
 	@Test
@@ -89,7 +89,7 @@ class AmethystClusterMockTest
 	@Test
 	void blockDataMock_Mock_CorrectType()
 	{
-		assertInstanceOf(AmethystClusterMock.class, BlockDataMock.mock(Material.AMETHYST_CLUSTER));
+		assertInstanceOf(AmethystClusterDataMock.class, BlockDataMock.mock(Material.AMETHYST_CLUSTER));
 	}
 
 }

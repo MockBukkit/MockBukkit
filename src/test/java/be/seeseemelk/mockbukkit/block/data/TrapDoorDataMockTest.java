@@ -5,7 +5,6 @@ import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.Bisected;
-import org.bukkit.block.data.type.Stairs;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
-class StairsMockTest
+class TrapDoorDataMockTest
 {
 
 	private static final Set<BlockFace> VALID_FACES = Set.of(
@@ -32,59 +31,47 @@ class StairsMockTest
 			BlockFace.WEST
 	);
 
-	private StairsMock stairs;
+	private TrapDoorDataMock trapDoor;
 
 	@BeforeEach
 	void setUp()
 	{
-		this.stairs = new StairsMock(Material.BIRCH_STAIRS);
+		this.trapDoor = new TrapDoorDataMock(Material.BIRCH_TRAPDOOR);
 	}
 
 	@Test
 	void constructor_DefaultValues()
 	{
-		assertEquals(Stairs.Shape.STRAIGHT, stairs.getShape());
-		assertFalse(stairs.isWaterlogged());
-		assertEquals(BlockFace.NORTH, stairs.getFacing());
-		assertEquals(Bisected.Half.BOTTOM, stairs.getHalf());
+		assertEquals(Bisected.Half.BOTTOM, trapDoor.getHalf());
+		assertFalse(trapDoor.isOpen());
+		assertFalse(trapDoor.isPowered());
+		assertFalse(trapDoor.isWaterlogged());
+		assertEquals(BlockFace.NORTH, trapDoor.getFacing());
 	}
 
 	@Test
 	void constructor_Material()
 	{
-		assertDoesNotThrow(() -> new StairsMock(Material.BIRCH_STAIRS));
+		assertDoesNotThrow(() -> new TrapDoorDataMock(Material.BIRCH_TRAPDOOR));
 	}
 
 	@Test
 	void constructor_Material_WrongType_ThrowsException()
 	{
-		assertThrowsExactly(IllegalArgumentException.class, () -> new StairsMock(Material.CHISELED_DEEPSLATE));
-	}
-
-	@Test
-	void setShape_Valid()
-	{
-		stairs.setShape(Stairs.Shape.INNER_RIGHT);
-		assertEquals(Stairs.Shape.INNER_RIGHT, stairs.getShape());
-	}
-
-	@Test
-	void setShape_NullInput_ThrowsException()
-	{
-		assertThrowsExactly(NullPointerException.class, () -> stairs.setShape(null));
+		assertThrowsExactly(IllegalArgumentException.class, () -> new TrapDoorDataMock(Material.WET_SPONGE));
 	}
 
 	@Test
 	void setHalf_Valid()
 	{
-		stairs.setHalf(Bisected.Half.TOP);
-		assertEquals(Bisected.Half.TOP, stairs.getHalf());
+		trapDoor.setHalf(Bisected.Half.TOP);
+		assertEquals(Bisected.Half.TOP, trapDoor.getHalf());
 	}
 
 	@Test
 	void setHalf_NullInput_ThrowsException()
 	{
-		assertThrowsExactly(NullPointerException.class, () -> stairs.setHalf(null));
+		assertThrowsExactly(NullPointerException.class, () -> trapDoor.setHalf(null));
 	}
 
 	@Test
@@ -92,8 +79,8 @@ class StairsMockTest
 	{
 		for (BlockFace face : VALID_FACES)
 		{
-			stairs.setFacing(face);
-			assertEquals(face, stairs.getFacing());
+			trapDoor.setFacing(face);
+			assertEquals(face, trapDoor.getFacing());
 		}
 	}
 
@@ -103,37 +90,51 @@ class StairsMockTest
 		final Set<BlockFace> invalidFaces = Arrays.stream(BlockFace.values())
 				.filter(face -> !VALID_FACES.contains(face))
 				.collect(Collectors.toSet());
-		for (BlockFace face : invalidFaces)
+		for (BlockFace invalid : invalidFaces)
 		{
-			assertThrowsExactly(IllegalArgumentException.class, () -> stairs.setFacing(face));
+			assertThrowsExactly(IllegalArgumentException.class, () -> trapDoor.setFacing(invalid));
 		}
 	}
 
 	@Test
 	void setFacing_NullInput_ThrowsException()
 	{
-		assertThrowsExactly(NullPointerException.class, () -> stairs.setFacing(null));
+		assertThrowsExactly(NullPointerException.class, () -> trapDoor.setFacing(null));
 	}
 
 	@Test
 	void getFaces_HasCorrectValues()
 	{
-		assertEquals(VALID_FACES, stairs.getFaces());
+		assertEquals(VALID_FACES, trapDoor.getFaces());
 	}
 
 	@Test
-	void setWaterlogged()
+	void setOpen_Valid()
 	{
-		stairs.setWaterlogged(true);
-		assertTrue(stairs.isWaterlogged());
+		trapDoor.setOpen(true);
+		assertTrue(trapDoor.isOpen());
+	}
+
+	@Test
+	void setPowered_Valid()
+	{
+		trapDoor.setPowered(true);
+		assertTrue(trapDoor.isPowered());
+	}
+
+	@Test
+	void setWaterlogged_Valid()
+	{
+		trapDoor.setWaterlogged(true);
+		assertTrue(trapDoor.isWaterlogged());
 	}
 
 	@Test
 	void blockDataMock_Mock_CorrectType()
 	{
-		for (Material material : Tag.STAIRS.getValues())
+		for (Material material : Tag.TRAPDOORS.getValues())
 		{
-			assertInstanceOf(StairsMock.class, BlockDataMock.mock(material));
+			assertInstanceOf(TrapDoorDataMock.class, BlockDataMock.mock(material));
 		}
 	}
 

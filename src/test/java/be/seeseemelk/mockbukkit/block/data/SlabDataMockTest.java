@@ -14,27 +14,27 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class SlabMockTest
+class SlabDataMockTest
 {
 
-	private SlabMock slab;
+	private SlabDataMock slab;
 
 	@BeforeEach
 	void setUp()
 	{
-		this.slab = new SlabMock(Material.OAK_SLAB);
+		this.slab = new SlabDataMock(Material.OAK_SLAB);
 	}
 
 	@Test
 	void constructor_Material()
 	{
-		assertDoesNotThrow(() -> new SlabMock(Material.OAK_SLAB));
+		assertDoesNotThrow(() -> new SlabDataMock(Material.OAK_SLAB));
 	}
 
 	@Test
 	void constructor_Material_WrongType_ThrowsException()
 	{
-		assertThrowsExactly(IllegalArgumentException.class, () -> new SlabMock(Material.BEDROCK));
+		assertThrowsExactly(IllegalArgumentException.class, () -> new SlabDataMock(Material.BEDROCK));
 	}
 
 	@Test
@@ -75,7 +75,7 @@ class SlabMockTest
 	{
 		for (Material material : Tag.SLABS.getValues())
 		{
-			assertInstanceOf(SlabMock.class, BlockDataMock.mock(material));
+			assertInstanceOf(SlabDataMock.class, BlockDataMock.mock(material));
 		}
 	}
 

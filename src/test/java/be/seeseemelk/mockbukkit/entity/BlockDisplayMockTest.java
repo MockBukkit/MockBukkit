@@ -2,7 +2,7 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.block.data.WallSignMock;
+import be.seeseemelk.mockbukkit.block.data.WallSignDataMock;
 import org.bukkit.Material;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.EntityType;
@@ -41,7 +41,7 @@ class BlockDisplayMockTest
 	@Test
 	void setBlock()
 	{
-		BlockData blockData = new WallSignMock(Material.OAK_WALL_SIGN);
+		BlockData blockData = new WallSignDataMock(Material.OAK_WALL_SIGN);
 		blockDisplay.setBlock(blockData);
 		assertEquals(blockData, blockDisplay.getBlock());
 	}

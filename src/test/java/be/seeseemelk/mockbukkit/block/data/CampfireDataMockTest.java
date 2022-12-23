@@ -16,28 +16,29 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+
 @ExtendWith(MockBukkitExtension.class)
-class CampfireMockTest
+class CampfireDataMockTest
 {
 
-	private CampfireMock campfire;
+	private CampfireDataMock campfire;
 
 	@BeforeEach
 	void setUp()
 	{
-		this.campfire = new CampfireMock(Material.CAMPFIRE);
+		this.campfire = new CampfireDataMock(Material.CAMPFIRE);
 	}
 
 	@Test
 	void constructor_Material()
 	{
-		assertDoesNotThrow(() -> new CampfireMock(Material.CAMPFIRE));
+		assertDoesNotThrow(() -> new CampfireDataMock(Material.CAMPFIRE));
 	}
 
 	@Test
 	void constructor_Material_WrongType_ThrowsException()
 	{
-		assertThrowsExactly(IllegalArgumentException.class, () -> new CampfireMock(Material.BEDROCK));
+		assertThrowsExactly(IllegalArgumentException.class, () -> new CampfireDataMock(Material.BEDROCK));
 	}
 
 	@Test
@@ -87,7 +88,7 @@ class CampfireMockTest
 	{
 		for (Material material : Tag.CAMPFIRES.getValues())
 		{
-			assertInstanceOf(CampfireMock.class, BlockDataMock.mock(material));
+			assertInstanceOf(CampfireDataMock.class, BlockDataMock.mock(material));
 		}
 	}
 
