@@ -207,7 +207,7 @@ class BlockDataMockTest
 	})
 	void createBlockState_GivenBedMaterial(Material bedMaterial)
 	{
-		BedMock bed = (BedMock) BlockDataMock.mock(bedMaterial);
+		BedDataMock bed = (BedDataMock) BlockDataMock.mock(bedMaterial);
 		BlockState actual = bed.createBlockState();
 		assertNotNull(actual);
 		assertInstanceOf(be.seeseemelk.mockbukkit.block.state.BedMock.class, actual);
