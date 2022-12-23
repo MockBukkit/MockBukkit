@@ -3,10 +3,10 @@ package be.seeseemelk.mockbukkit;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import be.seeseemelk.mockbukkit.boss.BossBarMock;
 import be.seeseemelk.mockbukkit.boss.KeyedBossBarMock;
+import be.seeseemelk.mockbukkit.command.CommandMapMock;
 import be.seeseemelk.mockbukkit.command.CommandResult;
 import be.seeseemelk.mockbukkit.command.ConsoleCommandSenderMock;
 import be.seeseemelk.mockbukkit.command.MessageTarget;
-import be.seeseemelk.mockbukkit.command.MockCommandMap;
 import be.seeseemelk.mockbukkit.configuration.ServerConfiguration;
 import be.seeseemelk.mockbukkit.enchantments.EnchantmentsMock;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
@@ -38,7 +38,7 @@ import be.seeseemelk.mockbukkit.inventory.WorkbenchInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
 import be.seeseemelk.mockbukkit.map.MapViewMock;
 import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
-import be.seeseemelk.mockbukkit.potion.MockPotionEffectType;
+import be.seeseemelk.mockbukkit.potion.PotionEffectTypeMock;
 import be.seeseemelk.mockbukkit.profile.PlayerProfileMock;
 import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
 import be.seeseemelk.mockbukkit.scoreboard.CriteriaMock;
@@ -158,7 +158,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private final Properties buildProperties = new Properties();
 	private final Logger logger = Logger.getLogger("ServerMock");
 	private final Thread mainThread = Thread.currentThread();
-	private final MockUnsafeValues unsafe = new MockUnsafeValues();
+	private final UnsafeValuesMock unsafe = new UnsafeValuesMock();
 	private final Map<String, TagRegistry> materialTags = new HashMap<>();
 	private final Set<EntityMock> entities = new HashSet<>();
 	private final List<World> worlds = new ArrayList<>();
@@ -171,8 +171,8 @@ public class ServerMock extends Server.Spigot implements Server
 	private final Map<String, Criteria> criteria = new HashMap<>();
 	private final BukkitSchedulerMock scheduler = new BukkitSchedulerMock();
 	private final ServicesManagerMock servicesManager = new ServicesManagerMock();
-	private final MockPlayerList playerList = new MockPlayerList();
-	private final MockCommandMap commandMap = new MockCommandMap(this);
+	private final PlayerListMock playerList = new PlayerListMock();
+	private final CommandMapMock commandMap = new CommandMapMock(this);
 	private final HelpMapMock helpMap = new HelpMapMock();
 	private final StandardMessenger messenger = new StandardMessenger();
 	private final Map<Integer, MapViewMock> mapViews = new HashMap<>();
@@ -401,11 +401,11 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	/**
-	 * Returns the {@link MockPlayerList} instance that is used by this server.
+	 * Returns the {@link PlayerListMock} instance that is used by this server.
 	 *
-	 * @return The {@link MockPlayerList} instance.
+	 * @return The {@link PlayerListMock} instance.
 	 */
-	public @NotNull MockPlayerList getPlayerList()
+	public @NotNull PlayerListMock getPlayerList()
 	{
 		return playerList;
 	}
@@ -607,7 +607,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@NotNull
-	public MockCommandMap getCommandMap()
+	public CommandMapMock getCommandMap()
 	{
 		return commandMap;
 	}
@@ -1737,7 +1737,7 @@ public class ServerMock extends Server.Spigot implements Server
 	public @NotNull ChunkData createChunkData(@NotNull World world)
 	{
 		Preconditions.checkNotNull(world, "World cannot be null");
-		return new MockChunkData(world);
+		return new ChunkDataMock(world);
 	}
 
 	@Override
@@ -1807,7 +1807,7 @@ public class ServerMock extends Server.Spigot implements Server
 
 	@Override
 	@Deprecated
-	public @NotNull MockUnsafeValues getUnsafe()
+	public @NotNull UnsafeValuesMock getUnsafe()
 	{
 		return unsafe;
 	}
@@ -1956,7 +1956,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private void registerPotionEffectType(int id, @NotNull String name, boolean instant, int rgb)
 	{
 		NamespacedKey key = NamespacedKey.minecraft(name.toLowerCase(Locale.ROOT));
-		PotionEffectType type = new MockPotionEffectType(key, id, name, instant, Color.fromRGB(rgb));
+		PotionEffectType type = new PotionEffectTypeMock(key, id, name, instant, Color.fromRGB(rgb));
 		PotionEffectType.registerPotionEffectType(type);
 	}
 

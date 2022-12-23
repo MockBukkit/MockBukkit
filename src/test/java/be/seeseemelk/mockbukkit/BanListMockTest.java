@@ -13,15 +13,15 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class MockBanListTest
+class BanListMockTest
 {
 
-	private MockBanList banList;
+	private BanListMock banList;
 
 	@BeforeEach
 	void setUp() throws Exception
 	{
-		banList = new MockBanList();
+		banList = new BanListMock();
 	}
 
 	@Test

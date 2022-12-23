@@ -10,14 +10,14 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Mock implementation of a {@link CommandMap}.
  */
-public class MockCommandMap extends SimpleCommandMap implements CommandMap
+public class CommandMapMock extends SimpleCommandMap implements CommandMap
 {
 
 	/**
 	 * @param serverMock The ServerMock this command map is for.
 	 */
 	@ApiStatus.Internal
-	public MockCommandMap(@NotNull ServerMock serverMock)
+	public CommandMapMock(@NotNull ServerMock serverMock)
 	{
 		super(serverMock);
 		Preconditions.checkNotNull(serverMock, "ServerMock cannot be null");

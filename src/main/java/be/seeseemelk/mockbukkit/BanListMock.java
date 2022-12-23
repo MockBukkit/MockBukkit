@@ -13,7 +13,7 @@ import java.util.Set;
 /**
  * Mock implementation of a {@link BanList}.
  */
-public class MockBanList implements BanList
+public class BanListMock implements BanList
 {
 
 	private final Map<String, BanEntry> bans = new HashMap<>();
@@ -27,7 +27,7 @@ public class MockBanList implements BanList
 	@Override
 	public BanEntry addBan(String target, String reason, Date expires, String source)
 	{
-		final BanEntry entry = new MockBanEntry(target, expires, reason, source);
+		final BanEntry entry = new BanEntryMock(target, expires, reason, source);
 		this.bans.put(target, entry);
 		return entry;
 	}
@@ -53,7 +53,7 @@ public class MockBanList implements BanList
 	/**
 	 * Mock implementation of a {@link BanEntry}.
 	 */
-	public static final class MockBanEntry implements BanEntry
+	public static final class BanEntryMock implements BanEntry
 	{
 
 		private final String target;
@@ -63,14 +63,14 @@ public class MockBanList implements BanList
 		private Date expires;
 
 		/**
-		 * Constructs a new {@link MockBanEntry}.
+		 * Constructs a new {@link BanEntryMock}.
 		 *
 		 * @param target  The target of the ban.
 		 * @param expires When the ban expires, or null for a permanent ban.
 		 * @param reason  The reason for the ban.
 		 * @param source  The source of the ban.
 		 */
-		public MockBanEntry(final String target, final Date expires, final String reason, final String source)
+		public BanEntryMock(final String target, final Date expires, final String reason, final String source)
 		{
 			this.target = target;
 			this.expires = expires;

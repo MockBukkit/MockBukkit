@@ -7,17 +7,17 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class MockBanList_MockBanEntryListTest
+class BanListMock_BanEntryMockTest
 {
 
 	private Date date;
-	private MockBanList.MockBanEntry entry;
+	private BanListMock.BanEntryMock entry;
 
 	@BeforeEach
 	void setUp()
 	{
 		date = new Date();
-		entry = new MockBanList.MockBanEntry("target", date, "reason", "source");
+		entry = new BanListMock.BanEntryMock("target", date, "reason", "source");
 	}
 
 	@Test

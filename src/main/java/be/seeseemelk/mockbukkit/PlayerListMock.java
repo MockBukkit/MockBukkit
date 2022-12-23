@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 /**
  * Replica of the Bukkit internal PlayerList and CraftPlayerList implementation
  */
-public class MockPlayerList
+public class PlayerListMock
 {
 
 	private int maxPlayers = Integer.MAX_VALUE;
@@ -37,8 +37,8 @@ public class MockPlayerList
 	private final Map<UUID, Long> firstPlayed = Collections.synchronizedMap(new HashMap<>());
 	private final Map<UUID, Boolean> hasPlayedBefore = Collections.synchronizedMap(new HashMap<>());
 
-	private final @NotNull BanList ipBans = new MockBanList();
-	private final @NotNull BanList profileBans = new MockBanList();
+	private final @NotNull BanList ipBans = new BanListMock();
+	private final @NotNull BanList profileBans = new BanListMock();
 
 	private final Set<UUID> operators = Collections.synchronizedSet(new HashSet<>());
 
