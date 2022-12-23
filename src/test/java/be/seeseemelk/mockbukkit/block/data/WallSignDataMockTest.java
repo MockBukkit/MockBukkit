@@ -1,10 +1,9 @@
 package be.seeseemelk.mockbukkit.block.data;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
-import com.destroystokyo.paper.MaterialTags;
 import org.bukkit.Material;
+import org.bukkit.Tag;
 import org.bukkit.block.BlockFace;
-import org.bukkit.block.data.type.Bed;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,21 +16,22 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class BedMockTest
+class WallSignDataMockTest
 {
 
-	private BedMock bed;
+	private WallSignDataMock sign;
 
 	@BeforeEach
 	void setUp()
 	{
 		MockBukkit.mock();
-		this.bed = new BedMock(Material.RED_BED);
+		sign = new WallSignDataMock(Material.ACACIA_WALL_SIGN);
 	}
 
 	@AfterEach
-	void teardown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
@@ -39,21 +39,23 @@ class BedMockTest
 	@Test
 	void constructor_DefaultValues()
 	{
-		assertEquals(Bed.Part.FOOT, bed.getPart());
-		assertFalse(bed.isOccupied());
-		assertEquals(BlockFace.NORTH, bed.getFacing());
+		assertEquals(BlockFace.NORTH, sign.getFacing());
+		assertFalse(sign.isWaterlogged());
 	}
 
 	@Test
 	void constructor_Material()
 	{
-		assertDoesNotThrow(() -> new BedMock(Material.RED_BED));
+		for (Material wallSignType : Tag.WALL_SIGNS.getValues())
+		{
+			assertDoesNotThrow(() -> new WallSignDataMock(wallSignType));
+		}
 	}
 
 	@Test
 	void constructor_Material_WrongType_ThrowsException()
 	{
-		assertThrowsExactly(IllegalArgumentException.class, () -> new BedMock(Material.BEDROCK));
+		assertThrowsExactly(IllegalArgumentException.class, () -> new WallSignDataMock(Material.BEDROCK));
 	}
 
 	@Test
@@ -61,9 +63,10 @@ class BedMockTest
 	{
 		for (BlockFace face : BlockFace.values())
 		{
-			if (!bed.getFaces().contains(face))
+			if (!sign.getFaces().contains(face))
 				continue;
-			assertDoesNotThrow(() -> bed.setFacing(face));
+			assertDoesNotThrow(() -> sign.setFacing(face));
+			assertEquals(face, sign.getFacing());
 		}
 	}
 
@@ -72,9 +75,9 @@ class BedMockTest
 	{
 		for (BlockFace face : BlockFace.values())
 		{
-			if (bed.getFaces().contains(face))
+			if (sign.getFaces().contains(face))
 				continue;
-			assertThrowsExactly(IllegalArgumentException.class, () -> bed.setFacing(face));
+			assertThrowsExactly(IllegalArgumentException.class, () -> sign.setFacing(face));
 		}
 	}
 
@@ -82,28 +85,45 @@ class BedMockTest
 	void getFaces()
 	{
 		Set<BlockFace> validFaces = Set.of(BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST);
-		assertEquals(validFaces, bed.getFaces());
+		assertEquals(validFaces, sign.getFaces());
 	}
 
 	@Test
 	void getFacing_Immutable()
 	{
-		Set<BlockFace> faces = bed.getFaces();
+		Set<BlockFace> faces = sign.getFaces();
 		assertThrows(UnsupportedOperationException.class, () -> faces.add(BlockFace.NORTH_EAST));
+	}
+
+	@Test
+	void getFacing_notNull()
+	{
+		assertThrows(NullPointerException.class, () -> sign.setFacing(null));
+	}
+
+	@Test
+	void setWaterLogged()
+	{
+		sign.setWaterlogged(true);
+		assertTrue(sign.isWaterlogged());
+		sign.setWaterlogged(false);
+		assertFalse(sign.isWaterlogged());
 	}
 
 	@Test
 	void getAsString()
 	{
-		assertEquals("minecraft:red_bed[facing=north,occupied=false,part=foot]", bed.getAsString());
+		sign.setWaterlogged(true);
+		sign.setFacing(BlockFace.SOUTH);
+		assertEquals("minecraft:acacia_wall_sign[facing=south,waterlogged=true]", sign.getAsString());
 	}
 
 	@Test
 	void blockDataMock_Mock_CorrectType()
 	{
-		for (Material material : MaterialTags.BEDS.getValues())
+		for (Material material : Tag.WALL_SIGNS.getValues())
 		{
-			assertInstanceOf(BedMock.class, BlockDataMock.mock(material));
+			assertInstanceOf(WallSignDataMock.class, BlockDataMock.mock(material));
 		}
 	}
 

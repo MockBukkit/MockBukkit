@@ -14,16 +14,16 @@ import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.WATERLOGGED;
 /**
  * Mock implementation of {@link AmethystCluster}.
  */
-public class AmethystClusterMock extends BlockDataMock implements AmethystCluster
+public class AmethystClusterDataMock extends BlockDataMock implements AmethystCluster
 {
 
 	/**
-	 * Constructs a new {@link BedMock} for the provided {@link Material}.
+	 * Constructs a new {@link AmethystClusterDataMock} for the provided {@link Material}.
 	 * Only supports {@link Material#AMETHYST_CLUSTER}
 	 *
 	 * @param type The material this data is for.
 	 */
-	public AmethystClusterMock(@NotNull Material type)
+	public AmethystClusterDataMock(@NotNull Material type)
 	{
 		super(type);
 		checkType(type, Material.AMETHYST_CLUSTER);

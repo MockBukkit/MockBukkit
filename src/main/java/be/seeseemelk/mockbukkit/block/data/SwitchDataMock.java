@@ -13,16 +13,16 @@ import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.FACE;
 import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.FACING;
 import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.POWERED;
 
-public class SwitchMock extends BlockDataMock implements Switch
+public class SwitchDataMock extends BlockDataMock implements Switch
 {
 
 	/**
-	 * Constructs a new {@link SwitchMock} for the provided {@link Material}. Only
+	 * Constructs a new {@link SwitchDataMock} for the provided {@link Material}. Only
 	 * supports materials in {@link Tag#BUTTONS} and {@link Material#LEVER}
 	 *
 	 * @param type The material this data is for.
 	 */
-	public SwitchMock(@NotNull Material type)
+	public SwitchDataMock(@NotNull Material type)
 	{
 		super(type);
 		Set<Material> possibleTypes = Tag.BUTTONS.getValues();
