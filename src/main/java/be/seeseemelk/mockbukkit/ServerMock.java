@@ -1406,30 +1406,6 @@ public class ServerMock extends Server.Spigot implements Server
 		this.spawnRadius = spawnRadius;
 	}
 
-	/**
-	 * @return true if the server should send a preview, false otherwise
-	 * @deprecated Chat previews were removed in 1.19.3.
-	 */
-	@Override
-	@Deprecated(forRemoval = true)
-	public boolean shouldSendChatPreviews()
-	{
-		return this.serverConfiguration.shouldSendChatPreviews();
-	}
-
-	/**
-	 * Sets whether the server should send chat previews.
-	 *
-	 * @param shouldSendChatPreviews Whether the server should send chat previews.
-	 * @see ServerMock#shouldSendChatPreviews()
-	 * @deprecated Chat previews were removed in 1.19.3.
-	 */
-	@Deprecated(forRemoval = true)
-	public void setShouldSendChatPreviews(boolean shouldSendChatPreviews)
-	{
-		this.serverConfiguration.setShouldSendChatPreviews(shouldSendChatPreviews);
-	}
-
 	@Override
 	public boolean isEnforcingSecureProfiles()
 	{

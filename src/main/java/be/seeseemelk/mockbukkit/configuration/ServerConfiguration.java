@@ -23,7 +23,6 @@ public class ServerConfiguration
 	private boolean allowEnd = true;
 	private boolean allowNether = true;
 	private String updateFolder = "update";
-	private boolean sendChatPreviews = false;
 	private boolean enforceSecureProfiles = true;
 	private boolean onlineMode = true;
 	private boolean allowFlight = false;
@@ -139,24 +138,6 @@ public class ServerConfiguration
 	public void setUpdateFolder(String updateFolder)
 	{
 		this.updateFolder = updateFolder;
-	}
-
-	/**
-	 * @return Send chat previews.
-	 * @see ServerMock#setShouldSendChatPreviews(boolean)
-	 */
-	public boolean shouldSendChatPreviews()
-	{
-		return this.sendChatPreviews;
-	}
-
-	/**
-	 * @param shouldSendChatPreviews Send chat previews.
-	 * @see ServerMock#setShouldSendChatPreviews(boolean)
-	 */
-	public void setShouldSendChatPreviews(boolean shouldSendChatPreviews)
-	{
-		this.sendChatPreviews = shouldSendChatPreviews;
 	}
 
 	/**
