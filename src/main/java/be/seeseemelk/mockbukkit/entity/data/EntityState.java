@@ -20,7 +20,11 @@ public enum EntityState
 
 	SWIMMING("swimming"),
 
-	ANGRY("angry");
+	ANGRY("angry"),
+	
+	PEEKING("peeking"),
+	
+	OPEN("open");
 
 	private String state;
 
