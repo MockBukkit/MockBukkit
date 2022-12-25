@@ -15,18 +15,21 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 
 public class EntityDataRegistry
 {
-	
-	static final Map<EntityType,String> entityJsonDataMap = new HashMap<>();
-	
+
+	static final Map<EntityType, String> entityJsonDataMap = new HashMap<>();
+
 	/**
-	 * Load all entity data 
+	 * Load all entity data
+	 * 
 	 * @param repository The repository to load from
 	 */
-	public static void loadData(String repository) {
-		for(EntityType type : EntityType.values()) {
+	public static void loadData(String repository)
+	{
+		for (EntityType type : EntityType.values())
+		{
 			try
 			{
-				entityJsonDataMap.put(type,load(repository,type));
+				entityJsonDataMap.put(type, load(repository, type));
 			}
 			catch (IOException e)
 			{
@@ -34,11 +37,12 @@ public class EntityDataRegistry
 			}
 		}
 	}
-	
+
 	/**
 	 * Load entity data json string
+	 * 
 	 * @param repository The repository to look in
-	 * @param type The type of entity to look for
+	 * @param type       The type of entity to look for
 	 * @return A json string containing the data
 	 * @throws IOException
 	 */
@@ -57,18 +61,21 @@ public class EntityDataRegistry
 			return reader.lines().collect(Collectors.joining(""));
 		}
 	}
-	
+
 	/**
 	 * Construcy entity data based on entity type
+	 * 
 	 * @param type The type of the entity
 	 * @return A new instance of entitydata
 	 */
-	public static EntityData loadEntityData(EntityType type) {
-		if(entityJsonDataMap.isEmpty()) {
+	public static EntityData loadEntityData(EntityType type)
+	{
+		if (entityJsonDataMap.isEmpty())
+		{
 			loadData("/entities/");
 		}
 		String data = entityJsonDataMap.get(type);
-		
-		return new EntityData(type,data);
+
+		return new EntityData(type, data);
 	}
 }

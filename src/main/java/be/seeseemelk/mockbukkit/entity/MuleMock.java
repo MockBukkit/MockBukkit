@@ -35,8 +35,9 @@ public class MuleMock extends ChestedHorseMock implements Mule
 		return Horse.Variant.MULE;
 	}
 	
-	@Override 
-	public EntityType getType(){
+	@Override
+	public EntityType getType()
+	{
 		return EntityType.MULE;
 	}
 

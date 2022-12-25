@@ -117,8 +117,9 @@ public class WardenMock extends MonsterMock implements Warden
 			return AngerLevel.ANGRY;
 	}
 	
-	@Override 
-	public EntityType getType(){
+	@Override
+	public EntityType getType()
+	{
 		return EntityType.WARDEN;
 	}
 

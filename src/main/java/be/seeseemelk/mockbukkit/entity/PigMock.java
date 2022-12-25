@@ -82,8 +82,9 @@ public class PigMock extends AnimalsMock implements Pig
 		return Material.CARROT_ON_A_STICK;
 	}
 
-	@Override 
-	public EntityType getType(){
+	@Override
+	public EntityType getType()
+	{
 		return EntityType.PIG;
 	}
 }

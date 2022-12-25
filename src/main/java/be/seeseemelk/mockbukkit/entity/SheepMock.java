@@ -55,8 +55,9 @@ public class SheepMock extends AnimalsMock implements Sheep
 		this.color = color;
 	}
 	
-	@Override 
-	public EntityType getType(){
+	@Override
+	public EntityType getType()
+	{
 		return EntityType.SHEEP;
 	}
 

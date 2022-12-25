@@ -83,8 +83,9 @@ public class CatMock extends TameableAnimalMock implements Cat
 		return this.isHeadUp;
 	}
 
-	@Override 
-	public EntityType getType(){
+	@Override
+	public EntityType getType()
+	{
 		return EntityType.CAT;
 	}
 }

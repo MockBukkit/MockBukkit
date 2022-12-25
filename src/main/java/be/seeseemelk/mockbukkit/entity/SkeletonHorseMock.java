@@ -76,8 +76,9 @@ public class SkeletonHorseMock extends AbstractHorseMock implements SkeletonHors
 		return Horse.Variant.SKELETON_HORSE;
 	}
 	
-	@Override 
-	public EntityType getType(){
+	@Override
+	public EntityType getType()
+	{
 		return EntityType.SKELETON_HORSE;
 	}
 

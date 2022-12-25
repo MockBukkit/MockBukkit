@@ -72,8 +72,9 @@ public class TadpoleMock extends FishMock implements Tadpole
 		throw new UnimplementedOperationException();
 	}
 	
-	@Override 
-	public EntityType getType(){
+	@Override
+	public EntityType getType()
+	{
 		return EntityType.TADPOLE;
 	}
 

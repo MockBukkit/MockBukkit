@@ -223,9 +223,10 @@ public class AllayMock extends CreatureMock implements Allay
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
-	@Override 
-	public EntityType getType(){
+
+	@Override
+	public EntityType getType()
+	{
 		return EntityType.ALLAY;
 	}
 

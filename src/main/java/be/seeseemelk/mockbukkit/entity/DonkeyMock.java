@@ -34,8 +34,9 @@ public class DonkeyMock extends ChestedHorseMock implements Donkey
 		return Horse.Variant.DONKEY;
 	}
 
-	@Override 
-	public EntityType getType(){
+	@Override
+	public EntityType getType()
+	{
 		return EntityType.DONKEY;
 	}
 }

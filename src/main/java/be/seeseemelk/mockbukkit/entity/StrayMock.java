@@ -35,8 +35,9 @@ public class StrayMock extends AbstractSkeletonMock implements Stray
 		return Skeleton.SkeletonType.STRAY;
 	}
 
-	@Override 
-	public EntityType getType(){
+	@Override
+	public EntityType getType()
+	{
 		return EntityType.STRAY;
 	}
 }

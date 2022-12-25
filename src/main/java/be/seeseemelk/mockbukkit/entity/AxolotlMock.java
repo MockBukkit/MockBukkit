@@ -92,8 +92,9 @@ public class AxolotlMock extends AnimalsMock implements Axolotl
 		return Tag.AXOLOTL_TEMPT_ITEMS.isTagged(stack.getType());
 	}
 	
-	@Override 
-	public EntityType getType(){
+	@Override
+	public EntityType getType()
+	{
 		return EntityType.AXOLOTL;
 	}
 

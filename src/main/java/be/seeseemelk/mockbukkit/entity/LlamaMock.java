@@ -179,8 +179,9 @@ public class LlamaMock extends ChestedHorseMock implements Llama
 		return this.isAgressive;
 	}
 
-	@Override 
-	public EntityType getType(){
+	@Override
+	public EntityType getType()
+	{
 		return EntityType.LLAMA;
 	}
 }

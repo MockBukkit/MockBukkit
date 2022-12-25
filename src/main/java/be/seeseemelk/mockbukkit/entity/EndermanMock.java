@@ -122,8 +122,9 @@ public class EndermanMock extends MonsterMock implements Enderman
 		return super.getEntityState();
 	}
 	
-	@Override 
-	public EntityType getType(){
+	@Override
+	public EntityType getType()
+	{
 		return EntityType.ENDERMAN;
 	}
 

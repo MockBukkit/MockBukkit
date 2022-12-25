@@ -35,8 +35,9 @@ public class ZombieHorseMock extends AbstractHorseMock implements ZombieHorse
 		return Horse.Variant.UNDEAD_HORSE;
 	}
 
-	@Override 
-	public EntityType getType(){
+	@Override
+	public EntityType getType()
+	{
 		return EntityType.ZOMBIE_HORSE;
 	}
 }

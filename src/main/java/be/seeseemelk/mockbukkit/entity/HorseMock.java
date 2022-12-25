@@ -91,9 +91,10 @@ public class HorseMock extends AbstractHorseMock implements Horse
 	{
 		return Variant.HORSE;
 	}
-	
-	@Override 
-	public EntityType getType(){
+
+	@Override
+	public EntityType getType()
+	{
 		return EntityType.HORSE;
 	}
 

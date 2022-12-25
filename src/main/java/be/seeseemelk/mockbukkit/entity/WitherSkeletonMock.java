@@ -35,8 +35,9 @@ public class WitherSkeletonMock extends AbstractSkeletonMock implements WitherSk
 		return Skeleton.SkeletonType.WITHER;
 	}
 
-	@Override 
-	public EntityType getType(){
+	@Override
+	public EntityType getType()
+	{
 		return EntityType.WITHER_SKELETON;
 	}
 }

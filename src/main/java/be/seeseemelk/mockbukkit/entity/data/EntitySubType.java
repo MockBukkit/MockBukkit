@@ -1,7 +1,8 @@
 package be.seeseemelk.mockbukkit.entity.data;
 
 /**
- * A type of a entity, it still has the same {@link org.bukkit.entity.EntityType}.
+ * A type of a entity, it still has the same
+ * {@link org.bukkit.entity.EntityType}.
  */
 public enum EntitySubType
 {
@@ -9,38 +10,39 @@ public enum EntitySubType
 	 * The default subtype (adult or ageless)
 	 */
 	DEFAULT("default"),
-	
+
 	/**
 	 * Baby
 	 */
-	BABY("baby"), 
+	BABY("baby"),
 
 	/**
 	 * Big slime/magma cube
 	 */
-	BIG("big"), 
-	
+	BIG("big"),
+
 	/**
 	 * Medium slime/magma cube
 	 */
-	MEDIUM("medium"), 
-	
+	MEDIUM("medium"),
+
 	/**
 	 * Small slime/magma cube
 	 */
 	SMALL("small");
-	
-	
+
 	private String subTypeName;
 
-	EntitySubType(String subTypeName){
+	EntitySubType(String subTypeName)
+	{
 		this.subTypeName = subTypeName;
 	}
-	
+
 	/**
 	 * @return The key this property is assigned to
 	 */
-	public String getName() {
+	public String getName()
+	{
 		return this.subTypeName;
 	}
 }
