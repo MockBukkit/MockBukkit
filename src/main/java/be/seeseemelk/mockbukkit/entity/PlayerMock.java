@@ -19,6 +19,7 @@ import io.papermc.paper.chat.ChatRenderer;
 import io.papermc.paper.entity.LookAnchor;
 import io.papermc.paper.entity.RelativeTeleportFlag;
 import io.papermc.paper.event.player.AsyncChatEvent;
+import net.kyori.adventure.chat.SignedMessage;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
@@ -949,7 +950,8 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 				new HashSet<>(Bukkit.getOnlinePlayers()),
 				ChatRenderer.defaultRenderer(),
 				Component.text(msg),
-				Component.text(msg)
+				Component.text(msg),
+				SignedMessage.system(msg, Component.text(msg))
 		);
 		PlayerChatEvent syncEvent = new PlayerChatEvent(this, msg);
 
