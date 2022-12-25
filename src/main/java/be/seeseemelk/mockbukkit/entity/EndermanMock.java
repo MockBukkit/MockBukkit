@@ -8,6 +8,7 @@ import be.seeseemelk.mockbukkit.entity.data.EntityState;
 import com.google.common.base.Preconditions;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Enderman;
+import org.bukkit.entity.EntityType;
 import org.bukkit.material.MaterialData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -119,6 +120,11 @@ public class EndermanMock extends MonsterMock implements Enderman
 			return EntityState.ANGRY;
 		}
 		return super.getEntityState();
+	}
+	
+	@Override 
+	public EntityType getType(){
+		return EntityType.ENDERMAN;
 	}
 
 }

@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import org.bukkit.DyeColor;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Sheep;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -52,6 +53,11 @@ public class SheepMock extends AnimalsMock implements Sheep
 	public void setColor(DyeColor color)
 	{
 		this.color = color;
+	}
+	
+	@Override 
+	public EntityType getType(){
+		return EntityType.SHEEP;
 	}
 
 }

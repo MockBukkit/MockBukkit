@@ -5,6 +5,7 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Warden;
 import org.jetbrains.annotations.NotNull;
@@ -114,6 +115,11 @@ public class WardenMock extends MonsterMock implements Warden
 			return AngerLevel.AGITATED;
 		else
 			return AngerLevel.ANGRY;
+	}
+	
+	@Override 
+	public EntityType getType(){
+		return EntityType.WARDEN;
 	}
 
 }

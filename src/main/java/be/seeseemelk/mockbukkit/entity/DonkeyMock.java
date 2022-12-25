@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import org.bukkit.entity.Donkey;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Horse;
 import org.jetbrains.annotations.NotNull;
 
@@ -33,4 +34,8 @@ public class DonkeyMock extends ChestedHorseMock implements Donkey
 		return Horse.Variant.DONKEY;
 	}
 
+	@Override 
+	public EntityType getType(){
+		return EntityType.DONKEY;
+	}
 }

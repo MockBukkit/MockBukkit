@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.ServerMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Pig;
 import org.jetbrains.annotations.NotNull;
 
@@ -81,4 +82,8 @@ public class PigMock extends AnimalsMock implements Pig
 		return Material.CARROT_ON_A_STICK;
 	}
 
+	@Override 
+	public EntityType getType(){
+		return EntityType.PIG;
+	}
 }

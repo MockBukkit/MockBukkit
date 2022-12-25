@@ -5,6 +5,7 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.inventory.LlamaInventoryMock;
 import com.google.common.base.Preconditions;
 import org.apache.commons.lang3.tuple.Pair;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Horse;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Llama;
@@ -178,4 +179,8 @@ public class LlamaMock extends ChestedHorseMock implements Llama
 		return this.isAgressive;
 	}
 
+	@Override 
+	public EntityType getType(){
+		return EntityType.LLAMA;
+	}
 }

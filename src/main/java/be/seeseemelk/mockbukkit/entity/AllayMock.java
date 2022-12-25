@@ -7,6 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Allay;
+import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -221,6 +222,11 @@ public class AllayMock extends CreatureMock implements Allay
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+	
+	@Override 
+	public EntityType getType(){
+		return EntityType.ALLAY;
 	}
 
 }

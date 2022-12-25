@@ -6,6 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.Tag;
 import org.bukkit.entity.Axolotl;
+import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
@@ -89,6 +90,11 @@ public class AxolotlMock extends AnimalsMock implements Axolotl
 	{
 		Preconditions.checkNotNull(stack, "ItemStack cannot be null");
 		return Tag.AXOLOTL_TEMPT_ITEMS.isTagged(stack.getType());
+	}
+	
+	@Override 
+	public EntityType getType(){
+		return EntityType.AXOLOTL;
 	}
 
 }
