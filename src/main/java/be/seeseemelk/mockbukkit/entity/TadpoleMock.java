@@ -5,6 +5,7 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Tadpole;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -69,6 +70,12 @@ public class TadpoleMock extends FishMock implements Tadpole
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+	
+	@Override
+	public EntityType getType()
+	{
+		return EntityType.TADPOLE;
 	}
 
 }

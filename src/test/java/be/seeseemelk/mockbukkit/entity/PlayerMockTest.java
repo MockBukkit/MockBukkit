@@ -6,6 +6,7 @@ import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.TestPlugin;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.BlockMock;
+import be.seeseemelk.mockbukkit.entity.data.EntityState;
 import be.seeseemelk.mockbukkit.inventory.ChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
@@ -2149,6 +2150,37 @@ class PlayerMockTest
 		assertTrue(player.isOp());
 	}
 
+	@Test
+	void testGetEntityStateDefault()
+	{
+		PlayerMock player = server.addPlayer();
+		assertEquals(EntityState.DEFAULT, player.getEntityState());
+	}
+
+	@Test
+	void testGetEntityStateSneaking()
+	{
+		PlayerMock player = server.addPlayer();
+		player.setSneaking(true);
+		assertEquals(EntityState.SNEAKING, player.getEntityState());
+	}
+
+	@Test
+	void testGetEntityStateSwimming()
+	{
+		PlayerMock player = server.addPlayer();
+		player.setSwimming(true);
+		assertEquals(EntityState.SWIMMING, player.getEntityState());
+	}
+
+	@Test
+	void testGetEntityStateFlying()
+	{
+		PlayerMock player = server.addPlayer();
+		player.setGliding(true);
+		assertEquals(EntityState.GLIDING, player.getEntityState());
+	}
+
 	@ParameterizedTest
 	@MethodSource("provideInstrument")
 	void testPlayNote(Instrument instrument, Sound sound)
@@ -2189,5 +2221,4 @@ class PlayerMockTest
 				Arguments.of(Instrument.STICKS, Sound.BLOCK_NOTE_BLOCK_HAT)
 				);
 	}
-
 }
