@@ -45,32 +45,4 @@ class EntityDataRegistryTest
 		assertNotNull(data);
 	}
 
-	@ParameterizedTest
-	@EnumSource
-	void checkEntityImplemented(EntityType type)
-	{
-		Entity entity;
-		try
-		{
-			entity = switch (type)
-			{
-			case PLAYER -> server.addPlayer();
-			case UNKNOWN -> null;
-			case DROPPED_ITEM -> world.dropItem(new Location(world, 0, 0, 0), new ItemStack(Material.ACACIA_BOAT));
-			default -> world.spawnEntity(new Location(world, 0, 0, 0), type);
-			};
-		}
-		catch (UnimplementedOperationException e)
-		{
-			// Skipp entity if not implemented at all
-			return;
-		}
-
-		if(entity==null) {
-			return;
-		}
-		entity.getWidth();
-		entity.getHeight();
-	}
-
 }
