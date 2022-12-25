@@ -1,5 +1,8 @@
 package be.seeseemelk.mockbukkit.entity.data;
 
+/**
+ * A type of a entity, it still has the same {@link org.bukkit.entity.EntityType}.
+ */
 public enum EntitySubType
 {
 	/**
@@ -34,6 +37,9 @@ public enum EntitySubType
 		this.subTypeName = subTypeName;
 	}
 	
+	/**
+	 * @return The key this property is assigned to
+	 */
 	public String getName() {
 		return this.subTypeName;
 	}

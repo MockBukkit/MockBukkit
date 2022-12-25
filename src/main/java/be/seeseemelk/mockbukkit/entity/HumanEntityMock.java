@@ -324,6 +324,10 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 		return this.sleeping;
 	}
 	
+	/**
+	 *  Set whether this entity is slumbering.
+	 * @param sleeping If this entity is slumbering
+	 */
 	public void setSleeping(boolean sleeping) {
 		this.sleeping = sleeping;
 	}

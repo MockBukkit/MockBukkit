@@ -572,11 +572,19 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		return entityData.getWidth(this.getSubType(),this.getEntityState());
 	}
 
+	/**
+	 * Get the current state of this entity
+	 * @return  The current state of this entity
+	 */
 	protected EntityState getEntityState()
 	{
 		return EntityState.DEFAULT;
 	}
 
+	/**
+	 * Get the current subtype of the entity 
+	 * @return The current subtype of the entity 
+	 */
 	protected EntitySubType getSubType()
 	{
 		return EntitySubType.DEFAULT;

@@ -4,26 +4,59 @@ import org.jetbrains.annotations.NotNull;
 
 import com.google.common.base.Preconditions;
 
+/**
+ * A state a entity is in
+ */
 public enum EntityState
 {
+	/**
+	 * Default state
+	 */
 	DEFAULT("default"),
 
+	/**
+	 * Entity is sleeping
+	 */
 	SLEEPING("sleeping"),
 
+	/**
+	 * Entity is sneaking
+	 */
 	SNEAKING("sneaking"),
 
+	/**
+	 * Entity is semi-puffed ({@link org.bukkit.entity.PufferFish})
+	 */
 	SEMI_PUFFED("semi_puffed"),
 
+	/**
+	 * Entity is fully puffed ({@link org.bukkit.entity.PufferFish})
+	 */
 	PUFFED("puffed"),
 
+	/**
+	 * Entity is gliding, for example a player using elytra
+	 */
 	GLIDING("gliding"),
 
+	/**
+	 * Entity is swimming
+	 */
 	SWIMMING("swimming"),
 
+	/**
+	 * Entity is angry ({@link org.bukkit.entity.Enderman})
+	 */
 	ANGRY("angry"),
 	
+	/**
+	 * Entity is peeking ({@link org.bukkit.entity.Shulker})
+	 */
 	PEEKING("peeking"),
 	
+	/**
+	 * Entity is open ({@link org.bukkit.entity.Shulker})
+	 */
 	OPEN("open");
 
 	private String state;
@@ -34,7 +67,11 @@ public enum EntityState
 		this.state = state;
 	}
 
-	public @NotNull String getState()
+	/**
+	 * 
+	 * @return The key this property is assigned to
+	 */
+	public @NotNull String getName()
 	{
 		return this.state;
 	}

@@ -18,12 +18,15 @@ public class EntityDataRegistry
 	
 	static final Map<EntityType,String> entityJsonDataMap = new HashMap<>();
 	
-	
+	/**
+	 * Load all entity data 
+	 * @param repository The repository to load from
+	 */
 	public static void loadData(String repository) {
 		for(EntityType type : EntityType.values()) {
 			try
 			{
-				entityJsonDataMap.put(type,parse(repository,type));
+				entityJsonDataMap.put(type,load(repository,type));
 			}
 			catch (IOException e)
 			{
@@ -32,7 +35,14 @@ public class EntityDataRegistry
 		}
 	}
 	
-	static String parse(String repository, EntityType type) throws IOException
+	/**
+	 * Load entity data json string
+	 * @param repository The repository to look in
+	 * @param type The type of entity to look for
+	 * @return A json string containing the data
+	 * @throws IOException
+	 */
+	private static String load(String repository, EntityType type) throws IOException
 	{
 		String path = repository + type.toString().toLowerCase() + ".json";
 
@@ -48,6 +58,11 @@ public class EntityDataRegistry
 		}
 	}
 	
+	/**
+	 * Construcy entity data based on entity type
+	 * @param type The type of the entity
+	 * @return A new instance of entitydata
+	 */
 	public static EntityData loadEntityData(EntityType type) {
 		if(entityJsonDataMap.isEmpty()) {
 			loadData("/entities/");
