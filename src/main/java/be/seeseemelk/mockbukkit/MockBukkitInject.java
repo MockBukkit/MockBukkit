@@ -16,7 +16,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @ApiStatus.Experimental
-public @interface MockBukkitServer
+public @interface MockBukkitInject
 {
 
 }

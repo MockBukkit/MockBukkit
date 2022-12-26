@@ -12,11 +12,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class MockBukkitExtensionTest
 {
 
-	@MockBukkitServer
+	@MockBukkitInject
 	private ServerMock fieldServerMock;
 	private final ServerMock constructorParameterServerMock;
 
-	public MockBukkitExtensionTest(@MockBukkitServer ServerMock constructorParameterServerMock)
+	public MockBukkitExtensionTest(@MockBukkitInject ServerMock constructorParameterServerMock)
 	{
 		this.constructorParameterServerMock = constructorParameterServerMock;
 	}
@@ -34,7 +34,7 @@ class MockBukkitExtensionTest
 	}
 
 	@Test
-	void test_MethodParameterServerMock_IsInjected(@MockBukkitServer ServerMock methodParameterServerMock)
+	void test_MethodParameterServerMock_IsInjected(@MockBukkitInject ServerMock methodParameterServerMock)
 	{
 		assertNotNull(methodParameterServerMock);
 	}

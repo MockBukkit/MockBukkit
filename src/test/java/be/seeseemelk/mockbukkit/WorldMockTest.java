@@ -102,7 +102,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class WorldMockTest
 {
 
-	@MockBukkitServer
+	@MockBukkitInject
 	private ServerMock server;
 
 	@Test

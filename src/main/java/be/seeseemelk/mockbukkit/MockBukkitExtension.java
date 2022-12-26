@@ -16,7 +16,7 @@ import java.util.Optional;
 /**
  * Extension that mocks the Bukkit singleton before each test and subsequently unmocks it after each test. It will also
  * inject this instance of {@link ServerMock} to any field or parameter of that type in the extended test class that is
- * annotated with {@link MockBukkitServer}.
+ * annotated with {@link MockBukkitInject}.
  *
  * <p>Example field usage:</p>
  *
@@ -25,7 +25,7 @@ import java.util.Optional;
  * class FieldExampleTest
  * {
  *
- * 	<b>&#064;MockBukkitServer</b>
+ * 	<b>&#064;MockBukkitInject</b>
  * 	private ServerMock serverMock;
  *
  * 	&#064;Test
@@ -70,7 +70,7 @@ import java.util.Optional;
  * {
  *
  * 	&#064;Test
- * 	void aUnitTest(<b>&#064;MockBukkitServer</b> ServerMock serverMock)
+ * 	void aUnitTest(<b>&#064;MockBukkitInject</b> ServerMock serverMock)
  *	{
  * 		assert serverMock != null;
  * 		// ...
@@ -99,7 +99,7 @@ public class MockBukkitExtension implements BeforeEachCallback, AfterEachCallbac
 		final List<Field> serverMockFields = FieldUtils.getAllFieldsList(classOptional.get())
 				.stream()
 				.filter(field -> field.getType() == ServerMock.class)
-				.filter(field -> field.getAnnotation(MockBukkitServer.class) != null)
+				.filter(field -> field.getAnnotation(MockBukkitInject.class) != null)
 				.toList();
 
 		final Optional<Object> optionalTestInstance = context.getTestInstance();
@@ -124,7 +124,7 @@ public class MockBukkitExtension implements BeforeEachCallback, AfterEachCallbac
 	public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException
 	{
 		final boolean paramIsCorrectType = parameterContext.getParameter().getType() == ServerMock.class;
-		final boolean paramHasCorrectAnnotation = parameterContext.isAnnotated(MockBukkitServer.class);
+		final boolean paramHasCorrectAnnotation = parameterContext.isAnnotated(MockBukkitInject.class);
 		return paramIsCorrectType && paramHasCorrectAnnotation;
 	}
 
