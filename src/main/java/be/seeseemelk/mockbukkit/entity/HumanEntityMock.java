@@ -59,6 +59,7 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	protected int expLevel = 0;
 	private float saturation = 5.0F;
 	private int foodLevel = 20;
+	private boolean sleeping;
 
 	/**
 	 * Constructs a new {@link HumanEntityMock} on the provided {@link ServerMock} with a specified {@link UUID}.
@@ -320,8 +321,16 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	@Override
 	public boolean isSleeping()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.sleeping;
+	}
+	
+	/**
+	 *  Set whether this entity is slumbering.
+	 * @param sleeping If this entity is slumbering
+	 */
+	public void setSleeping(boolean sleeping)
+	{
+		this.sleeping = sleeping;
 	}
 
 	@Override

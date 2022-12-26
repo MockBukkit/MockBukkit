@@ -1,0 +1,14 @@
+{
+	"big":{
+		"height":2.04,
+		"width":2.04
+	},
+	"medium":{
+		"height":1.02,
+		"width":1.02
+	},
+	"small":{
+		"height":0.51,
+		"width":0.51
+	}
+}
