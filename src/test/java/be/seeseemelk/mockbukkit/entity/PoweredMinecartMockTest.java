@@ -39,7 +39,7 @@ class PoweredMinecartMockTest
 	}
 
 	@Test
-	public void getFuel()
+	void getFuel()
 	{
 		minecartFurnace.setFuel(20);
 		assertEquals(20, minecartFurnace.getFuel());
