@@ -18,7 +18,7 @@ class PoweredMinecartMockTest
 	private PoweredMinecartMock minecartFurnace;
 
 	@BeforeEach
-	public void setup()
+	void setup()
 	{
 		server = MockBukkit.mock();
 		minecartFurnace = new PoweredMinecartMock(server, UUID.randomUUID());
