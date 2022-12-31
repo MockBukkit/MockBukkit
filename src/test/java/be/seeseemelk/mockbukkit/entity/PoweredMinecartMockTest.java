@@ -46,7 +46,7 @@ class PoweredMinecartMockTest
 	}
 
 	@Test
-	public void setFuel_Negative()
+	void setFuel_Negative()
 	{
 		assertThrows(IllegalArgumentException.class, () -> minecartFurnace.setFuel(-1));
 	}
