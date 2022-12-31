@@ -59,7 +59,7 @@ class PoweredMinecartMockTest
 	}
 
 	@Test
-	public void getPushZ()
+	void getPushZ()
 	{
 		minecartFurnace.setPushZ(-1);
 		assertEquals(-1, minecartFurnace.getPushZ());
