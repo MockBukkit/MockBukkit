@@ -31,7 +31,7 @@ class PoweredMinecartMockTest
 	}
 
 	@Test
-	public void defaultValues()
+	void defaultValues()
 	{
 		assertEquals(0, minecartFurnace.getFuel());
 		assertEquals(0, minecartFurnace.getPushX());
