@@ -18,20 +18,20 @@ class PoweredMinecartMockTest
 	private PoweredMinecartMock minecartFurnace;
 
 	@BeforeEach
-	public void setup()
+	void setup()
 	{
 		server = MockBukkit.mock();
 		minecartFurnace = new PoweredMinecartMock(server, UUID.randomUUID());
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
 
 	@Test
-	public void defaultValues()
+	void defaultValues()
 	{
 		assertEquals(0, minecartFurnace.getFuel());
 		assertEquals(0, minecartFurnace.getPushX());
@@ -39,27 +39,27 @@ class PoweredMinecartMockTest
 	}
 
 	@Test
-	public void getFuel()
+	void getFuel()
 	{
 		minecartFurnace.setFuel(20);
 		assertEquals(20, minecartFurnace.getFuel());
 	}
 
 	@Test
-	public void setFuel_Negative()
+	void setFuel_Negative()
 	{
 		assertThrows(IllegalArgumentException.class, () -> minecartFurnace.setFuel(-1));
 	}
 
 	@Test
-	public void getPushX()
+	void getPushX()
 	{
 		minecartFurnace.setPushX(1);
 		assertEquals(1, minecartFurnace.getPushX());
 	}
 
 	@Test
-	public void getPushZ()
+	void getPushZ()
 	{
 		minecartFurnace.setPushZ(-1);
 		assertEquals(-1, minecartFurnace.getPushZ());
