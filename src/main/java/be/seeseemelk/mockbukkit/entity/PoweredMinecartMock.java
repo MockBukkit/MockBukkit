@@ -17,7 +17,7 @@ public class PoweredMinecartMock extends MinecartMock implements PoweredMinecart
 	private double xPush;
 	private int fuel;
 
-	protected PoweredMinecartMock(@NotNull ServerMock server, @NotNull UUID uuid)
+	public PoweredMinecartMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 		this.fuel = 0;
