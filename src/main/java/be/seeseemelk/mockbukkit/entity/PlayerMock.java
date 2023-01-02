@@ -167,8 +167,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 	private final List<ItemStack> consumedItems = new LinkedList<>();
 
-	private @NotNull TriState flyingFallDamage = TriState.NOT_SET;
-
 	/**
 	 * Constructs a new {@link PlayerMock} for the provided server with the specified name.
 	 * The players UUID will be generated from the name.
@@ -2786,14 +2784,15 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void setFlyingFallDamage(@NotNull TriState flyingFallDamage)
 	{
-		Preconditions.checkNotNull(flyingFallDamage);
-		this.flyingFallDamage = flyingFallDamage;
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public @NotNull TriState hasFlyingFallDamage()
 	{
-		return this.flyingFallDamage;
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 }

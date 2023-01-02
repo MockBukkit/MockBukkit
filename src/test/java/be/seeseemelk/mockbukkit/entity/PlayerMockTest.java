@@ -2194,11 +2194,6 @@ class PlayerMockTest
 		});
 	}
 
-	@Test
-	void testSetFlyingFallDamage() {
-		
-	}
-	
 	public static Stream<Arguments> provideInstrument()
 	{
 		return Stream.of(
