@@ -14,7 +14,7 @@ class WallMockTest
 	private WallMock wall;
 
 	@BeforeEach
-	void setup()
+	void setUp()
 	{
 		this.wall = new WallMock(Material.COBBLESTONE_WALL);
 	}
@@ -44,7 +44,7 @@ class WallMockTest
 
 
 	@Test
-	void setUp()
+	void setWallUp()
 	{
 		wall.setUp(true);
 		assertTrue(wall.isUp());
@@ -108,7 +108,7 @@ class WallMockTest
 	{
 		assertThrows(NullPointerException.class, () -> wall.getHeight(BlockFace.NORTH_EAST));
 	}
-	
+
 
 	// TODO: setHeight test w/ invalid BlockFace
 	// TODO: setHeight w/ null BF

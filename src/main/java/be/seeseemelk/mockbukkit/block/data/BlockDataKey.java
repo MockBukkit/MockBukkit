@@ -14,7 +14,6 @@ import org.bukkit.block.data.type.Campfire;
 import org.bukkit.block.data.type.Slab;
 import org.bukkit.block.data.type.Stairs;
 import org.bukkit.block.data.type.Wall;
-//import org.bukkit.block.BlockFace.Up;
 
 /**
  * Stores all {@link BlockData} keys.
@@ -71,14 +70,15 @@ final class BlockDataKey
 	 */
 	static final String FACE = "face";
 
-	static final String HEIGHT = "height";
 	/**
 	 * Stores the {@link Wall.Height} of a {@link Wall} is facing
 	 */
-	static final String UP = "up";
+	static final String HEIGHT = "height";
+
 	/**
-	 * Stores whether a {@link Wall} wall is up
+	 * Stores whether a {@link Wall} is up
 	 */
+	static final String UP = "up";
 
 	private BlockDataKey()
 	{
