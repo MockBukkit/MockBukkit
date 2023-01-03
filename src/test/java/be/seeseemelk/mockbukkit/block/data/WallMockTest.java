@@ -88,33 +88,26 @@ class WallMockTest
 	@Test
 	void setHeight_Null_ThrowsException()
 	{
-		assertThrows(NullPointerException.class, () -> wall.setHeight(null, null));
+		assertThrowsExactly(NullPointerException.class, () -> wall.setHeight(null, null));
 	}
 
 	@Test
 	void setHeight_InvalidBlockFace()
 	{
-		assertThrows(NullPointerException.class, () -> wall.setHeight(BlockFace.NORTH_EAST, Wall.Height.TALL));
+		assertThrowsExactly(IllegalArgumentException.class, () -> wall.setHeight(BlockFace.NORTH_EAST, Wall.Height.TALL));
 	}
 
 	@Test
 	void getHeight_Null_ThrowsException()
 	{
-		assertThrows(NullPointerException.class, () -> wall.getHeight(null));
+		assertThrowsExactly(NullPointerException.class, () -> wall.getHeight(null));
 	}
 
 	@Test
 	void getHeight_InvalidBlockFace()
 	{
-		assertThrows(NullPointerException.class, () -> wall.getHeight(BlockFace.NORTH_EAST));
+		assertThrowsExactly(IllegalArgumentException.class, () -> wall.getHeight(BlockFace.NORTH_EAST));
 	}
-
-
-	// TODO: setHeight test w/ invalid BlockFace
-	// TODO: setHeight w/ null BF
-	// TODO: getHeight test w/ invalid BlockFace
-	// TODO: getheight w/ null
-
 
 	@Test
 	void getAsString()
