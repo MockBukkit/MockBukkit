@@ -10,6 +10,10 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Set;
 
 import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.HEIGHT;
+//import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.EAST;
+//import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.WEST;
+//import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.NORTH;
+//import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.SOUTH;
 import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.UP;
 import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.WATERLOGGED;
 
@@ -48,6 +52,11 @@ public class WallMock extends BlockDataMock implements Wall
 		return get(HEIGHT);
 	}
 
+		/**if(face == BlockFace.EAST) { get(EAST); }
+		else if(face == BlockFace.WEST) { get(WEST); }
+		else if(face == BlockFace.NORTH) { get(NORTH); }
+		else if(face == BlockFace.SOUTH) { get(SOUTH); }*/
+
 	@Override
 	public void setHeight(@NotNull BlockFace face, @NotNull Height height)
 	{
@@ -55,6 +64,11 @@ public class WallMock extends BlockDataMock implements Wall
 		Preconditions.checkArgument(getFaces().contains(face), "Invalid face. Must be one of " + getFaces());
 		set(HEIGHT, height);
 	}
+
+		/**if(face == BlockFace.EAST) { set(EAST, height); }
+		else if(face == BlockFace.WEST) { set(WEST, height); }
+		else if(face == BlockFace.NORTH) { set(NORTH, height); }
+		else if(face == BlockFace.SOUTH) { set(SOUTH, height); }*/
 
 	@Override
 	public boolean isUp()

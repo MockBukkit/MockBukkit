@@ -75,10 +75,30 @@ final class BlockDataKey
 	 */
 	static final String HEIGHT = "height";
 
-	/**
-	 * Stores whether a {@link Wall} is up
-	 */
+//	/**
+//	 * Stores the {@link Wall.Height} of a {@link Wall} facing east
+//	 */
+//	static final String EAST = "east";
+//
+//	/**
+//	 * Stores the {@link Wall.Height} of a {@link Wall} facing west
+//	 */
+//	static final String WEST = "west";
+//
+//	/**
+//	 * Stores the {@link Wall.Height} of a {@link Wall} facing north
+//	 */
+//	static final String NORTH = "north";
+//
+//	/**
+//	 * Stores the {@link Wall.Height} of a {@link Wall} facing south
+//	 */
+//	static final String SOUTH = "south";
+
 	static final String UP = "up";
+	/**
+	 * Stores whether a {@link Wall} wall is up
+	 */
 
 	private BlockDataKey()
 	{

@@ -25,6 +25,7 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.serializer.bungeecord.BungeeComponentSerializer;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import net.kyori.adventure.util.TriState;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.BanList;
@@ -1777,6 +1778,20 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public void setFlyingFallDamage(@NotNull TriState flyingFallDamage)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull TriState hasFlyingFallDamage()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	@Deprecated
 	public void hidePlayer(@NotNull Player player)
 	{
@@ -2712,7 +2727,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		}
 
 	}
-	
+
 	@Override
 	protected EntityState getEntityState()
 	{
