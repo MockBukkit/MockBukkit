@@ -75,6 +75,9 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 
 	private static final AtomicInteger ENTITY_COUNTER = new AtomicInteger();
 
+	/**
+	 * Mock {@link ServerMock} for {@link org.bukkit.Server}
+	 */
 	protected final @NotNull ServerMock server;
 	private final @NotNull UUID uuid;
 	private final int id;
@@ -125,7 +128,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 			location = Bukkit.getWorlds().get(0).getSpawnLocation();
 		else
 			location = new Location(null, 0, 0, 0);
-		
+
 		this.entityData = EntityDataRegistry.loadEntityData(this.getType());
 	}
 
@@ -582,8 +585,8 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	/**
-	 * Get the current subtype of the entity 
-	 * @return The current subtype of the entity 
+	 * Get the current subtype of the entity
+	 * @return The current subtype of the entity
 	 */
 	protected EntitySubType getSubType()
 	{

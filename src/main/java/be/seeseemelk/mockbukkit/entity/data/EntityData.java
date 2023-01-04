@@ -14,13 +14,24 @@ import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.entity.BatMock;
 
+/**
+ * Class for {@link EntityData}
+ */
 public class EntityData
 {
+
+	/**
+	 * Width key string for {@link EntityData}
+	 */
 	public static final String WIDTH = "width";
+
+	/**
+	 * Height key string for {@link EntityData}
+	 */
 	public static final String HEIGHT = "height";
-	
+
 	private static final String STATES = "states";
-	
+
 	private EntityType type;
 	private @NotNull String data;
 
@@ -59,7 +70,7 @@ public class EntityData
 	{
 		return getValueFromKey(HEIGHT, subType, state).getAsDouble();
 	}
-	
+
 	/**
 	 * Gets data of a state given a entity subtype
 	 * @param subType Subtype of entity
@@ -90,9 +101,9 @@ public class EntityData
 	}
 
 	/**
-	 * Gets entity data for a specific key. Defaults to a default state, if the 
+	 * Gets entity data for a specific key. Defaults to a default state, if the
 	 * state does not provide a value for the key.
-	 * @param key The specific key 
+	 * @param key The specific key
 	 * @param subType Subtype of entity
 	 * @param state State of entity
 	 * @return The value matching the specified key

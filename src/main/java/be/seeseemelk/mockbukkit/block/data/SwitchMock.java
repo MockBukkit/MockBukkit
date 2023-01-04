@@ -13,6 +13,9 @@ import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.FACE;
 import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.FACING;
 import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.POWERED;
 
+/**
+ * Mock {@link SwitchMock} for {@link Switch}
+ */
 public class SwitchMock extends BlockDataMock implements Switch
 {
 

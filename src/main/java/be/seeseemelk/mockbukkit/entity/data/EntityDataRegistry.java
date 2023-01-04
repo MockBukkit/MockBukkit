@@ -13,6 +13,9 @@ import org.bukkit.entity.EntityType;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 
+/**
+ * Class for {@link EntityDataRegistry}
+ */
 public class EntityDataRegistry
 {
 
@@ -20,7 +23,7 @@ public class EntityDataRegistry
 
 	/**
 	 * Load all entity data
-	 * 
+	 *
 	 * @param repository The repository to load from
 	 */
 	public static void loadData(String repository)
@@ -40,7 +43,7 @@ public class EntityDataRegistry
 
 	/**
 	 * Load entity data json string
-	 * 
+	 *
 	 * @param repository The repository to look in
 	 * @param type       The type of entity to look for
 	 * @return A json string containing the data
@@ -64,7 +67,7 @@ public class EntityDataRegistry
 
 	/**
 	 * Construcy entity data based on entity type
-	 * 
+	 *
 	 * @param type The type of the entity
 	 * @return A new instance of entitydata
 	 */
