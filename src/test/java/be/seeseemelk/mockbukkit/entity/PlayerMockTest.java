@@ -46,6 +46,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerExpChangeEvent;
@@ -1078,6 +1079,15 @@ class PlayerMockTest
 			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
 					&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
 		});
+	}
+
+	@Test
+	void testOpenInventoryEventFired()
+	{
+		Inventory inv = server.createInventory(null, 36);
+		player.openInventory(inv);
+		server.getPluginManager().assertEventFired(InventoryOpenEvent.class,
+				e -> e.getPlayer() == player && e.getInventory() == inv);
 	}
 
 	@Test

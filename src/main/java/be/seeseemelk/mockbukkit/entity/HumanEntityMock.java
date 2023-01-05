@@ -21,6 +21,7 @@ import org.bukkit.entity.FishHook;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Villager;
 import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
@@ -138,6 +139,7 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 		Preconditions.checkNotNull(inventory, "Inventory cannot be null");
 		closeInventory();
 		inventoryView = inventory;
+		new InventoryOpenEvent(inventoryView).callEvent();
 	}
 
 	@Override
@@ -151,6 +153,7 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 			inventoryMock.addViewers(this);
 		}
 		inventoryView = new PlayerInventoryViewMock(this, inventory);
+		new InventoryOpenEvent(inventoryView).callEvent();
 		return inventoryView;
 	}
 
