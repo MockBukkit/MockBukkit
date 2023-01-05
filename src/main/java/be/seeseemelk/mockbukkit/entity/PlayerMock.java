@@ -1778,6 +1778,18 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public void setFlyingFallDamage(@NotNull TriState flyingFallDamage) {
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull TriState hasFlyingFallDamage() {
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	@Deprecated
 	public void hidePlayer(@NotNull Player player)
 	{
