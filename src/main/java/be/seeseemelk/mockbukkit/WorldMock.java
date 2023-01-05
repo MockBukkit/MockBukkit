@@ -1173,8 +1173,9 @@ public class WorldMock implements World
 		{
 			return new WitherSkullMock(server, UUID.randomUUID());
 		}
-		else if (clazz == PoweredMinecart.class) {
-		    return new PoweredMinecartMock(server, UUID.randomUUID());
+		else if (clazz == PoweredMinecart.class)
+		{
+			return new PoweredMinecartMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}

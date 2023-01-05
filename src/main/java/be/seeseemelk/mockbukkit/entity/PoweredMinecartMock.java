@@ -1,15 +1,12 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import java.util.UUID;
-
+import be.seeseemelk.mockbukkit.ServerMock;
+import com.google.common.base.Preconditions;
 import org.bukkit.Material;
-import org.bukkit.entity.Pig;
 import org.bukkit.entity.minecart.PoweredMinecart;
 import org.jetbrains.annotations.NotNull;
 
-import com.google.common.base.Preconditions;
-
-import be.seeseemelk.mockbukkit.ServerMock;
+import java.util.UUID;
 
 /**
  * Mock implementation of an {@link PoweredMinecart}.
@@ -25,8 +22,9 @@ public class PoweredMinecartMock extends MinecartMock implements PoweredMinecart
 
 	/**
 	 * Constructs a new {@link PoweredMinecartMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
 	 * @param server The server to create the entity on.
-	 * @param uuid The UUID of the entity.
+	 * @param uuid   The UUID of the entity.
 	 */
 	public PoweredMinecartMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{

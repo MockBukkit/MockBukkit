@@ -1,15 +1,15 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.UUID;
-
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.ServerMock;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.ServerMock;
+import java.util.UUID;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class PoweredMinecartMockTest
 {
@@ -64,4 +64,5 @@ class PoweredMinecartMockTest
 		minecartFurnace.setPushZ(-1);
 		assertEquals(-1, minecartFurnace.getPushZ());
 	}
+
 }
