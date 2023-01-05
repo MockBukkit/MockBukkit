@@ -88,7 +88,7 @@ class SwitchMockTest
 	@Test
 	void getFaces()
 	{
-		Set<BlockFace> validFaces = Set.of(BlockFace.UP, BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST, BlockFace.DOWN);
+		Set<BlockFace> validFaces = Set.of(BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST);
 		assertEquals(validFaces, switchMock.getFaces());
 	}
 
