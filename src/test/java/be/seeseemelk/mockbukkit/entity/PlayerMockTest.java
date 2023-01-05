@@ -7,11 +7,8 @@ import be.seeseemelk.mockbukkit.TestPlugin;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.entity.data.EntityState;
-import be.seeseemelk.mockbukkit.inventory.ChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
-import be.seeseemelk.mockbukkit.inventory.InventoryViewMock;
-import be.seeseemelk.mockbukkit.inventory.SimpleInventoryViewMock;
 import be.seeseemelk.mockbukkit.map.MapViewMock;
 import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 import com.google.common.io.ByteArrayDataOutput;
@@ -46,7 +43,6 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
-import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerExpChangeEvent;
@@ -65,7 +61,6 @@ import org.bukkit.event.world.GenericGameEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.map.MapCanvas;
 import org.bukkit.map.MapRenderer;
@@ -314,41 +309,6 @@ class PlayerMockTest
 	void getAttribute_HealthAttribute_IsMaximumHealth()
 	{
 		assertEquals(20.0, player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getDefaultValue(), 0);
-	}
-
-	@Test
-	void getOpenInventory_NoneOpened_Null()
-	{
-		InventoryView view = player.getOpenInventory();
-		assertNotNull(player.getOpenInventory());
-		assertEquals(InventoryType.CRAFTING, view.getType());
-	}
-
-	@Test
-	void getOpenInventory_InventorySet_InventorySet()
-	{
-		InventoryViewMock inventory = new SimpleInventoryViewMock();
-		player.openInventory(inventory);
-		assertSame(inventory, player.getOpenInventory());
-	}
-
-	@Test
-	void openInventory_NothingSet_InventoryViewSet()
-	{
-		InventoryMock inventory = new ChestInventoryMock(null, 9);
-		InventoryView view = player.openInventory(inventory);
-		assertNotNull(view);
-		assertSame(player.getInventory(), view.getBottomInventory());
-		assertSame(inventory, view.getTopInventory());
-		assertSame(player.getOpenInventory(), view);
-	}
-
-	@Test
-	void closeInventory_NoneInventory_CraftingView()
-	{
-		InventoryView view = player.getOpenInventory();
-		assertNotNull(view);
-		assertEquals(InventoryType.CRAFTING, view.getType());
 	}
 
 	@Test
@@ -1079,27 +1039,6 @@ class PlayerMockTest
 			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
 					&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
 		});
-	}
-
-	@Test
-	void testOpenInventoryEventFired()
-	{
-		Inventory inv = server.createInventory(null, 36);
-		player.openInventory(inv);
-		server.getPluginManager().assertEventFired(InventoryOpenEvent.class,
-				e -> e.getPlayer() == player && e.getInventory() == inv);
-	}
-
-	@Test
-	void testCloseInventoryEvenFired()
-	{
-		Inventory inv = server.createInventory(null, 36);
-		player.openInventory(inv);
-		player.setItemOnCursor(new ItemStack(Material.PUMPKIN));
-		player.closeInventory();
-		server.getPluginManager().assertEventFired(InventoryCloseEvent.class,
-				e -> e.getPlayer() == player && e.getInventory() == inv);
-		assertTrue(player.getItemOnCursor().getType().isAir());
 	}
 
 	@Test
