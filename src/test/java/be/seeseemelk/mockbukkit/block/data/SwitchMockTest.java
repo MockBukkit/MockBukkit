@@ -54,13 +54,12 @@ class SwitchMockTest
 	void constructor_Material(Material material)
 	{
 		assertDoesNotThrow(() -> new SwitchMock(material));
-
 	}
 
 	@Test
 	void constructor_Material_WrongType_ThrowsException()
 	{
-		assertThrowsExactly(IllegalArgumentException.class, () -> new WallSignMock(Material.BEDROCK));
+		assertThrowsExactly(IllegalArgumentException.class, () -> new SwitchMock(Material.BEDROCK));
 	}
 
 	@Test
