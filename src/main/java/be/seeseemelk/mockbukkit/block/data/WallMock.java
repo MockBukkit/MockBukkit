@@ -69,8 +69,6 @@ public class WallMock extends BlockDataMock implements Wall
 		else  { set(SOUTH, height); }
 	}
 
-
-
 	@Override
 	public boolean isUp()
 	{
