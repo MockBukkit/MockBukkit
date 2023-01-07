@@ -36,6 +36,7 @@ import be.seeseemelk.mockbukkit.entity.MuleMock;
 import be.seeseemelk.mockbukkit.entity.MushroomCowMock;
 import be.seeseemelk.mockbukkit.entity.PigMock;
 import be.seeseemelk.mockbukkit.entity.PolarBearMock;
+import be.seeseemelk.mockbukkit.entity.PoweredMinecartMock;
 import be.seeseemelk.mockbukkit.entity.PufferFishMock;
 import be.seeseemelk.mockbukkit.entity.SalmonMock;
 import be.seeseemelk.mockbukkit.entity.SheepMock;
@@ -1037,7 +1038,7 @@ class WorldMockTest
 				Arguments.of(EntityType.PIG, PigMock.class),
 				Arguments.of(EntityType.EGG, EggMock.class),
 				Arguments.of(EntityType.WOLF, WolfMock.class),
-				Arguments.of(EntityType.CREEPER,CreeperMock.class),
+				Arguments.of(EntityType.CREEPER, CreeperMock.class),
 				Arguments.of(EntityType.GOAT, GoatMock.class),
 				Arguments.of(EntityType.BEE, BeeMock.class),
 				Arguments.of(EntityType.PUFFERFISH, PufferFishMock.class),
@@ -1074,7 +1075,8 @@ class WorldMockTest
 				Arguments.of(EntityType.ARMOR_STAND, ArmorStandMock.class),
 				Arguments.of(EntityType.ZOMBIE, ZombieMock.class),
 				Arguments.of(EntityType.FIREWORK, FireworkMock.class),
-				Arguments.of(EntityType.EXPERIENCE_ORB, ExperienceOrbMock.class)
+				Arguments.of(EntityType.EXPERIENCE_ORB, ExperienceOrbMock.class),
+				Arguments.of(EntityType.MINECART_FURNACE, PoweredMinecartMock.class)
 		);
 	}
 
