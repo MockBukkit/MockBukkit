@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.ServerMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.minecart.PoweredMinecart;
 import org.jetbrains.annotations.NotNull;
 
@@ -75,6 +76,12 @@ public class PoweredMinecartMock extends MinecartMock implements PoweredMinecart
 	public void setPushZ(double zPush)
 	{
 		this.zPush = zPush;
+	}
+	
+	@Override
+	public EntityType getType()
+	{
+		return EntityType.MINECART_FURNACE;
 	}
 
 }
