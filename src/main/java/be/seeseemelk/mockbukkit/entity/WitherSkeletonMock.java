@@ -1,6 +1,8 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
+
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.entity.WitherSkeleton;
 import org.jetbrains.annotations.NotNull;
@@ -33,4 +35,9 @@ public class WitherSkeletonMock extends AbstractSkeletonMock implements WitherSk
 		return Skeleton.SkeletonType.WITHER;
 	}
 
+	@Override
+	public EntityType getType()
+	{
+		return EntityType.WITHER_SKELETON;
+	}
 }

@@ -16,6 +16,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class HumanEntityMockTest
 {
@@ -133,4 +134,12 @@ class HumanEntityMockTest
 		assertEquals(10, human.getFoodLevel());
 	}
 
+	@Test
+	void isSleeping()
+	{
+		human.setSleeping(false);
+		assertFalse(human.isSleeping());
+		human.setSleeping(true);
+		assertTrue(human.isSleeping());
+	}
 }

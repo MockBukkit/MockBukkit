@@ -5,6 +5,7 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.MockPlayerList;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.entity.data.EntityState;
 import be.seeseemelk.mockbukkit.map.MapViewMock;
 import be.seeseemelk.mockbukkit.sound.AudioExperience;
 import be.seeseemelk.mockbukkit.sound.SoundReceiver;
@@ -18,11 +19,13 @@ import io.papermc.paper.chat.ChatRenderer;
 import io.papermc.paper.entity.LookAnchor;
 import io.papermc.paper.entity.RelativeTeleportFlag;
 import io.papermc.paper.event.player.AsyncChatEvent;
+import net.kyori.adventure.chat.SignedMessage;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.serializer.bungeecord.BungeeComponentSerializer;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import net.kyori.adventure.util.TriState;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.BanList;
@@ -948,7 +951,8 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 				new HashSet<>(Bukkit.getOnlinePlayers()),
 				ChatRenderer.defaultRenderer(),
 				Component.text(msg),
-				Component.text(msg)
+				Component.text(msg),
+				SignedMessage.system(msg, Component.text(msg))
 		);
 		PlayerChatEvent syncEvent = new PlayerChatEvent(this, msg);
 
@@ -1771,6 +1775,18 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 			flying = false;
 		}
 		this.allowFlight = flight;
+	}
+
+	@Override
+	public void setFlyingFallDamage(@NotNull TriState flyingFallDamage) {
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull TriState hasFlyingFallDamage() {
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -2708,6 +2724,28 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 			server.getPlayerList().removeOperator(this.getUniqueId());
 		}
 
+	}
+	
+	@Override
+	protected EntityState getEntityState()
+	{
+		if (this.isSneaking())
+		{
+			return EntityState.SNEAKING;
+		}
+		if (this.isGliding())
+		{
+			return EntityState.GLIDING;
+		}
+		if (this.isSwimming())
+		{
+			return EntityState.SWIMMING;
+		}
+		if (this.isSleeping())
+		{
+			return EntityState.SLEEPING;
+		}
+		return super.getEntityState();
 	}
 
 	@Override

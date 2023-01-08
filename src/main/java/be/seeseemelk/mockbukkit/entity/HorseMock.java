@@ -3,6 +3,8 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.inventory.HorseInventoryMock;
 import com.google.common.base.Preconditions;
+
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Horse;
 import org.bukkit.inventory.HorseInventory;
 import org.jetbrains.annotations.NotNull;
@@ -88,6 +90,12 @@ public class HorseMock extends AbstractHorseMock implements Horse
 	public @NotNull Variant getVariant()
 	{
 		return Variant.HORSE;
+	}
+
+	@Override
+	public EntityType getType()
+	{
+		return EntityType.HORSE;
 	}
 
 }

@@ -6,6 +6,7 @@ import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.TestPlugin;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.BlockMock;
+import be.seeseemelk.mockbukkit.entity.data.EntityState;
 import be.seeseemelk.mockbukkit.inventory.ChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
@@ -45,6 +46,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerExpChangeEvent;
@@ -1077,6 +1079,15 @@ class PlayerMockTest
 			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
 					&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
 		});
+	}
+
+	@Test
+	void testOpenInventoryEventFired()
+	{
+		Inventory inv = server.createInventory(null, 36);
+		player.openInventory(inv);
+		server.getPluginManager().assertEventFired(InventoryOpenEvent.class,
+				e -> e.getPlayer() == player && e.getInventory() == inv);
 	}
 
 	@Test
@@ -2149,6 +2160,37 @@ class PlayerMockTest
 		assertTrue(player.isOp());
 	}
 
+	@Test
+	void testGetEntityStateDefault()
+	{
+		PlayerMock player = server.addPlayer();
+		assertEquals(EntityState.DEFAULT, player.getEntityState());
+	}
+
+	@Test
+	void testGetEntityStateSneaking()
+	{
+		PlayerMock player = server.addPlayer();
+		player.setSneaking(true);
+		assertEquals(EntityState.SNEAKING, player.getEntityState());
+	}
+
+	@Test
+	void testGetEntityStateSwimming()
+	{
+		PlayerMock player = server.addPlayer();
+		player.setSwimming(true);
+		assertEquals(EntityState.SWIMMING, player.getEntityState());
+	}
+
+	@Test
+	void testGetEntityStateFlying()
+	{
+		PlayerMock player = server.addPlayer();
+		player.setGliding(true);
+		assertEquals(EntityState.GLIDING, player.getEntityState());
+	}
+
 	@ParameterizedTest
 	@MethodSource("provideInstrument")
 	void testPlayNote(Instrument instrument, Sound sound)
@@ -2189,5 +2231,4 @@ class PlayerMockTest
 				Arguments.of(Instrument.STICKS, Sound.BLOCK_NOTE_BLOCK_HAT)
 				);
 	}
-
 }
