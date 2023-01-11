@@ -14,20 +14,11 @@ import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.entity.BatMock;
 
-/**
- * Class for {@link EntityData}
- */
 public class EntityData
 {
 
-	/**
-	 * Width key string for {@link EntityData}
-	 */
 	public static final String WIDTH = "width";
 
-	/**
-	 * Height key string for {@link EntityData}
-	 */
 	public static final String HEIGHT = "height";
 
 	private static final String STATES = "states";

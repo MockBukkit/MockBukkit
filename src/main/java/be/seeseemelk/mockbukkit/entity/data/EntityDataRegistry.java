@@ -13,9 +13,6 @@ import org.bukkit.entity.EntityType;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 
-/**
- * Class for {@link EntityDataRegistry}
- */
 public class EntityDataRegistry
 {
 

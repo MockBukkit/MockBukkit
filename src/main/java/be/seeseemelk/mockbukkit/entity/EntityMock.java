@@ -75,9 +75,6 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 
 	private static final AtomicInteger ENTITY_COUNTER = new AtomicInteger();
 
-	/**
-	 * Mock {@link ServerMock} for {@link org.bukkit.Server}
-	 */
 	protected final @NotNull ServerMock server;
 	private final @NotNull UUID uuid;
 	private final int id;
