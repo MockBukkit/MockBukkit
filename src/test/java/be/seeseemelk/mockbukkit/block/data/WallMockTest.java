@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class WallMockTest
 {
+
 	private WallMock wall;
 
 	@BeforeEach

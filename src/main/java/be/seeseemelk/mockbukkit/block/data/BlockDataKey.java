@@ -1,19 +1,8 @@
 package be.seeseemelk.mockbukkit.block.data;
 
 import org.bukkit.block.BlockFace;
-import org.bukkit.block.data.Bisected;
-import org.bukkit.block.data.BlockData;
-import org.bukkit.block.data.Directional;
-import org.bukkit.block.data.FaceAttachable;
-import org.bukkit.block.data.Lightable;
-import org.bukkit.block.data.Openable;
-import org.bukkit.block.data.Powerable;
-import org.bukkit.block.data.Waterlogged;
-import org.bukkit.block.data.type.Bed;
-import org.bukkit.block.data.type.Campfire;
-import org.bukkit.block.data.type.Slab;
-import org.bukkit.block.data.type.Stairs;
-import org.bukkit.block.data.type.Wall;
+import org.bukkit.block.data.*;
+import org.bukkit.block.data.type.*;
 
 /**
  * Stores all {@link BlockData} keys.
@@ -69,31 +58,26 @@ final class BlockDataKey
 	 * Stores the {@link FaceAttachable.AttachedFace} a {@link FaceAttachable} is facing
 	 */
 	static final String FACE = "face";
-
 	/**
 	 * Stores the {@link Wall.Height} of a {@link Wall} facing east
 	 */
 	static final String EAST = "east";
-
 	/**
 	 * Stores the {@link Wall.Height} of a {@link Wall} facing west
 	 */
 	static final String WEST = "west";
-
 	/**
 	 * Stores the {@link Wall.Height} of a {@link Wall} facing north
 	 */
 	static final String NORTH = "north";
-
 	/**
 	 * Stores the {@link Wall.Height} of a {@link Wall} facing south
 	 */
 	static final String SOUTH = "south";
-
-	static final String UP = "up";
 	/**
 	 * Stores whether a {@link Wall} wall is up
 	 */
+	static final String UP = "up";
 
 	private BlockDataKey()
 	{

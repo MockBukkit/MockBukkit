@@ -9,18 +9,14 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 
-import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.EAST;
-import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.WEST;
-import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.NORTH;
-import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.SOUTH;
-import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.UP;
-import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.WATERLOGGED;
+import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.*;
 
 /**
  * Mock implementation of {@link Wall}.
  */
 public class WallMock extends BlockDataMock implements Wall
 {
+
 	/**
 	 * Constructs a new {@link WallMock} for the provided {@link Material}.
 	 * Only supports materials in {@link Tag#WALLS}
@@ -51,10 +47,22 @@ public class WallMock extends BlockDataMock implements Wall
 	public @NotNull Height getHeight(@NotNull BlockFace face)
 	{
 		Preconditions.checkArgument(getFaces().contains(face), "Invalid face. Must be one of " + getFaces());
-		if(face == BlockFace.EAST) { return get(EAST); }
-	 	else if(face == BlockFace.WEST) { return get(WEST); }
-	 	else if(face == BlockFace.NORTH) { return get(NORTH); }
-	 	else { return get(SOUTH); }
+		if (face == BlockFace.EAST)
+		{
+			return get(EAST);
+		}
+		else if (face == BlockFace.WEST)
+		{
+			return get(WEST);
+		}
+		else if (face == BlockFace.NORTH)
+		{
+			return get(NORTH);
+		}
+		else
+		{
+			return get(SOUTH);
+		}
 
 	}
 
@@ -63,10 +71,22 @@ public class WallMock extends BlockDataMock implements Wall
 	{
 		Preconditions.checkNotNull(height, "Height cannot be null");
 		Preconditions.checkArgument(getFaces().contains(face), "Invalid face. Must be one of " + getFaces());
-		if(face == BlockFace.EAST) { set(EAST, height); }
-		else if(face == BlockFace.WEST) { set(WEST, height); }
-		else if(face == BlockFace.NORTH) { set(NORTH, height); }
-		else  { set(SOUTH, height); }
+		if (face == BlockFace.EAST)
+		{
+			set(EAST, height);
+		}
+		else if (face == BlockFace.WEST)
+		{
+			set(WEST, height);
+		}
+		else if (face == BlockFace.NORTH)
+		{
+			set(NORTH, height);
+		}
+		else
+		{
+			set(SOUTH, height);
+		}
 	}
 
 	@Override
