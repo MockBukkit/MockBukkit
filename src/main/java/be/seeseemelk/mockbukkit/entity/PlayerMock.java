@@ -1344,6 +1344,12 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public void showWinScreen()
+	{
+		// You won!
+	}
+
+	@Override
 	@Deprecated
 	public void sendActionBar(@NotNull String message)
 	{
@@ -2705,6 +2711,12 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public void sendEquipmentChange(@NotNull LivingEntity entity, @NotNull Map<EquipmentSlot, ItemStack> equipmentChanges)
+	{
+		equipmentChanges.forEach((slot, stack) -> sendEquipmentChange(entity, slot, stack));
+	}
+
+	@Override
 	public boolean isOp()
 	{
 		return server.getPlayerList().getOperators().stream()
@@ -2725,7 +2737,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		}
 
 	}
-	
+
 	@Override
 	protected EntityState getEntityState()
 	{

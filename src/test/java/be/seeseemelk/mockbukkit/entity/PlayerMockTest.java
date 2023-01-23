@@ -1500,10 +1500,19 @@ class PlayerMockTest
 	@Test
 	void testPlayerSendEquipmentChange()
 	{
-		assertDoesNotThrow(() ->
-		{
-			player.sendEquipmentChange(player, EquipmentSlot.CHEST, new ItemStack(Material.DIAMOND_CHESTPLATE));
-		});
+		assertDoesNotThrow(() -> player.sendEquipmentChange(player, EquipmentSlot.CHEST, new ItemStack(Material.DIAMOND_CHESTPLATE)));
+	}
+
+	@Test
+	void testPlayerSendEquipmentChange_Map()
+	{
+		assertDoesNotThrow(() -> player.sendEquipmentChange(player, Map.of(EquipmentSlot.CHEST, new ItemStack(Material.DIAMOND_CHESTPLATE))));
+	}
+
+	@Test
+	void showWinScreen_DoesntThrow()
+	{
+		assertDoesNotThrow(() -> player.showWinScreen());
 	}
 
 	@Test
