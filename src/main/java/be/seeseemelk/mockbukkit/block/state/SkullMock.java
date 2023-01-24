@@ -1,11 +1,13 @@
 package be.seeseemelk.mockbukkit.block.state;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.profile.PlayerProfileMock;
 import com.destroystokyo.paper.MaterialTags;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.google.common.base.Preconditions;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.SkullType;
 import org.bukkit.block.Block;
@@ -161,6 +163,20 @@ public class SkullMock extends TileStateMock implements Skull
 		Preconditions.checkArgument(profile instanceof PlayerProfileMock, "Profile must be a PlayerProfileMock!");
 		PlayerProfileMock.validateSkullProfile((PlayerProfileMock) profile);
 		this.profile = (PlayerProfileMock) profile;
+	}
+
+	@Override
+	public @Nullable NamespacedKey getNoteBlockSound()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setNoteBlockSound(@Nullable NamespacedKey noteBlockSound)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

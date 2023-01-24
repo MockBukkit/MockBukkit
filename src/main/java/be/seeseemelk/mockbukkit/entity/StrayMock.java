@@ -1,6 +1,8 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
+
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.entity.Stray;
 import org.jetbrains.annotations.NotNull;
@@ -33,4 +35,9 @@ public class StrayMock extends AbstractSkeletonMock implements Stray
 		return Skeleton.SkeletonType.STRAY;
 	}
 
+	@Override
+	public EntityType getType()
+	{
+		return EntityType.STRAY;
+	}
 }

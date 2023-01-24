@@ -1,6 +1,8 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.entity.data.EntityState;
+
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
@@ -21,7 +23,8 @@ public class PufferFishMock extends FishMock implements PufferFish
 	private int puffState = 0;
 
 	/**
-	 * Constructs a new {@link PufferFishMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link PufferFishMock} on the provided {@link ServerMock}
+	 * with a specified {@link UUID}.
 	 *
 	 * @param server The server to create the entity on.
 	 * @param uuid   The UUID of the entity.
@@ -54,6 +57,17 @@ public class PufferFishMock extends FishMock implements PufferFish
 	public @NotNull EntityType getType()
 	{
 		return EntityType.PUFFERFISH;
+	}
+
+	@Override
+	protected EntityState getEntityState()
+	{
+		return switch (getPuffState())
+		{
+		case 1 -> EntityState.SEMI_PUFFED;
+		case 2 -> EntityState.PUFFED;
+		default -> super.getEntityState();
+		};
 	}
 
 }

@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.inventory.meta;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
 import com.google.common.base.Strings;
+import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.profile.PlayerProfile;
@@ -142,6 +143,20 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	@Override
 	@Deprecated
 	public void setOwnerProfile(@Nullable PlayerProfile profile)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setNoteBlockSound(@Nullable NamespacedKey noteBlockSound)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable NamespacedKey getNoteBlockSound()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

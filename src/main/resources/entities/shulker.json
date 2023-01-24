@@ -1,0 +1,16 @@
+{
+	"default": {
+		"height": 1,
+		"width": 1,
+		"states": {
+			"peeking": {
+				"height": 1.2,
+				"width": 1
+			},
+			"open": {
+				"height": 2,
+				"width": 1
+			}
+		}
+	}
+}
