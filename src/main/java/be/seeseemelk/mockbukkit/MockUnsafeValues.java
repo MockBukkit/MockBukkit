@@ -221,6 +221,20 @@ public class MockUnsafeValues implements UnsafeValues
 	}
 
 	@Override
+	public String getBlockTranslationKey(Material material)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public String getItemTranslationKey(Material material)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public String getTimingsServerName()
 	{
 		// TODO Auto-generated method stub
@@ -269,20 +283,6 @@ public class MockUnsafeValues implements UnsafeValues
 
 	@Override
 	public Entity deserializeEntity(byte[] data, World world, boolean preserveUUID)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public String getTranslationKey(Material mat)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public String getTranslationKey(Block block)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
