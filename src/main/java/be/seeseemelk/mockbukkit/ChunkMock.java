@@ -267,6 +267,13 @@ public class ChunkMock implements Chunk
 	}
 
 	@Override
+	public boolean contains(@NotNull Biome biome)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull PersistentDataContainer getPersistentDataContainer()
 	{
 		return persistentDataContainer;
