@@ -43,7 +43,7 @@ dependencies {
 
 jar {
 	manifest {
-		attributes 'Automatic-Module-Name': "be.seeseemelk.mockbukkit"
+		attributes 'Automatic-Module-Name': "org.mockbukkit.mockbukkit"
 	}
 }
 
