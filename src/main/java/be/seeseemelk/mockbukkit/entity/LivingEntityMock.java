@@ -622,14 +622,14 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		return this.leashHolder;
 	}
 
-	
+
 	@Override
 	public boolean setLeashHolder(Entity holder)
 	{
 		if(this instanceof Wither || !(this instanceof Mob)) {
 			return false;
 		}
-		
+
 		if(holder != null && holder.isDead()) {
 			return false;
 		}
@@ -1064,6 +1064,27 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 
 	@Override
 	public @Nullable RayTraceResult rayTraceEntities(int maxDistance, boolean ignoreBlocks)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setArrowsInBody(int count, boolean fireEvent)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public float getBodyYaw()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setBodyYaw(float bodyYaw)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

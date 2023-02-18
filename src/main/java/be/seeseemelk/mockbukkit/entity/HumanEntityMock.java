@@ -218,6 +218,20 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	}
 
 	@Override
+	public int getEnchantmentSeed()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setEnchantmentSeed(int seed)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public InventoryView openWorkbench(Location location, boolean force)
 	{
 		// TODO Auto-generated method stub
