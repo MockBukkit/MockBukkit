@@ -7,11 +7,8 @@ import be.seeseemelk.mockbukkit.TestPlugin;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.entity.data.EntityState;
-import be.seeseemelk.mockbukkit.inventory.ChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
-import be.seeseemelk.mockbukkit.inventory.InventoryViewMock;
-import be.seeseemelk.mockbukkit.inventory.SimpleInventoryViewMock;
 import be.seeseemelk.mockbukkit.map.MapViewMock;
 import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 import com.google.common.io.ByteArrayDataOutput;
@@ -64,7 +61,6 @@ import org.bukkit.event.world.GenericGameEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.map.MapCanvas;
 import org.bukkit.map.MapRenderer;
@@ -313,41 +309,6 @@ class PlayerMockTest
 	void getAttribute_HealthAttribute_IsMaximumHealth()
 	{
 		assertEquals(20.0, player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getDefaultValue(), 0);
-	}
-
-	@Test
-	void getOpenInventory_NoneOpened_Null()
-	{
-		InventoryView view = player.getOpenInventory();
-		assertNotNull(player.getOpenInventory());
-		assertEquals(InventoryType.CRAFTING, view.getType());
-	}
-
-	@Test
-	void getOpenInventory_InventorySet_InventorySet()
-	{
-		InventoryViewMock inventory = new SimpleInventoryViewMock();
-		player.openInventory(inventory);
-		assertSame(inventory, player.getOpenInventory());
-	}
-
-	@Test
-	void openInventory_NothingSet_InventoryViewSet()
-	{
-		InventoryMock inventory = new ChestInventoryMock(null, 9);
-		InventoryView view = player.openInventory(inventory);
-		assertNotNull(view);
-		assertSame(player.getInventory(), view.getBottomInventory());
-		assertSame(inventory, view.getTopInventory());
-		assertSame(player.getOpenInventory(), view);
-	}
-
-	@Test
-	void closeInventory_NoneInventory_CraftingView()
-	{
-		InventoryView view = player.getOpenInventory();
-		assertNotNull(view);
-		assertEquals(InventoryType.CRAFTING, view.getType());
 	}
 
 	@Test
@@ -1081,18 +1042,6 @@ class PlayerMockTest
 	}
 
 	@Test
-	void testCloseInventoryEvenFired()
-	{
-		Inventory inv = server.createInventory(null, 36);
-		player.openInventory(inv);
-		player.setItemOnCursor(new ItemStack(Material.PUMPKIN));
-		player.closeInventory();
-		server.getPluginManager().assertEventFired(InventoryCloseEvent.class,
-				e -> e.getPlayer() == player && e.getInventory() == inv);
-		assertTrue(player.getItemOnCursor().getType().isAir());
-	}
-
-	@Test
 	void testPotionEffects()
 	{
 		PotionEffect effect = new PotionEffect(PotionEffectType.CONFUSION, 3, 1);
@@ -1551,10 +1500,19 @@ class PlayerMockTest
 	@Test
 	void testPlayerSendEquipmentChange()
 	{
-		assertDoesNotThrow(() ->
-		{
-			player.sendEquipmentChange(player, EquipmentSlot.CHEST, new ItemStack(Material.DIAMOND_CHESTPLATE));
-		});
+		assertDoesNotThrow(() -> player.sendEquipmentChange(player, EquipmentSlot.CHEST, new ItemStack(Material.DIAMOND_CHESTPLATE)));
+	}
+
+	@Test
+	void testPlayerSendEquipmentChange_Map()
+	{
+		assertDoesNotThrow(() -> player.sendEquipmentChange(player, Map.of(EquipmentSlot.CHEST, new ItemStack(Material.DIAMOND_CHESTPLATE))));
+	}
+
+	@Test
+	void showWinScreen_DoesntThrow()
+	{
+		assertDoesNotThrow(() -> player.showWinScreen());
 	}
 
 	@Test

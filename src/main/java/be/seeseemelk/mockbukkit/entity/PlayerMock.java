@@ -1400,6 +1400,12 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public void showWinScreen()
+	{
+		// You won!
+	}
+
+	@Override
 	@Deprecated
 	public void sendActionBar(@NotNull String message)
 	{
@@ -1831,6 +1837,18 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 			flying = false;
 		}
 		this.allowFlight = flight;
+	}
+
+	@Override
+	public void setFlyingFallDamage(@NotNull TriState flyingFallDamage) {
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull TriState hasFlyingFallDamage() {
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -2746,6 +2764,12 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		Preconditions.checkNotNull(slot, "slot must not be null");
 		Preconditions.checkNotNull(item, "item must not be null");
 		// Pretend the packet gets sent.
+	}
+
+	@Override
+	public void sendEquipmentChange(@NotNull LivingEntity entity, @NotNull Map<EquipmentSlot, ItemStack> equipmentChanges)
+	{
+		equipmentChanges.forEach((slot, stack) -> sendEquipmentChange(entity, slot, stack));
 	}
 
 	@Override
