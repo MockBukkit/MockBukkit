@@ -1176,21 +1176,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
-	@Override
-	public void showWinScreen()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void sendEquipmentChange(@NotNull LivingEntity entity, @NotNull Map<EquipmentSlot, ItemStack> equipmentChanges)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
 	@Override
 	public void playSound(@NotNull Entity entity, @NotNull String sound, @NotNull SoundCategory category, float volume, float pitch)
 	{
@@ -1837,18 +1822,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 			flying = false;
 		}
 		this.allowFlight = flight;
-	}
-
-	@Override
-	public void setFlyingFallDamage(@NotNull TriState flyingFallDamage) {
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull TriState hasFlyingFallDamage() {
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
