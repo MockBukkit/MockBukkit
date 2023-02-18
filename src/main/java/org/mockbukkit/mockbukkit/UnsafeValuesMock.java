@@ -103,7 +103,6 @@ public class UnsafeValuesMock implements UnsafeValues
 		throw new UnimplementedOperationException();
 	}
 
-
 	@Override
 	public @NotNull Material toLegacy(@NotNull Material material)
 	{
@@ -225,13 +224,6 @@ public class UnsafeValuesMock implements UnsafeValues
 	}
 
 	@Override
-	public String getBlockTranslationKey(Material material)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public String getItemTranslationKey(Material material)
 	{
 		// TODO Auto-generated method stub
@@ -294,13 +286,6 @@ public class UnsafeValuesMock implements UnsafeValues
 
 	@Override
 	public String getBlockTranslationKey(Material material)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public String getItemTranslationKey(Material material)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -416,6 +401,5 @@ public class UnsafeValuesMock implements UnsafeValues
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
 
 }

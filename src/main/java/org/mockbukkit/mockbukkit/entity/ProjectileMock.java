@@ -95,25 +95,4 @@ public abstract class ProjectileMock extends AbstractProjectileMock implements P
 		throw new UnimplementedOperationException();
 	}
 
-	@Override
-	public boolean canHitEntity(@NotNull Entity entity)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void hitEntity(@NotNull Entity entity)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void hitEntity(@NotNull Entity entity, @NotNull Vector vector)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
 }

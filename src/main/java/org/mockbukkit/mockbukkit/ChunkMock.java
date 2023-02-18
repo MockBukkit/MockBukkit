@@ -267,13 +267,6 @@ public class ChunkMock implements Chunk
 	}
 
 	@Override
-	public long getChunkKey()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public boolean contains(@NotNull Biome biome)
 	{
 		// TODO Auto-generated method stub
