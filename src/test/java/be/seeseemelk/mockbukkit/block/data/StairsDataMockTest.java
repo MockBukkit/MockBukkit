@@ -1,14 +1,14 @@
 package be.seeseemelk.mockbukkit.block.data;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.MockBukkitExtension;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.Bisected;
 import org.bukkit.block.data.type.Stairs;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -21,7 +21,8 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class StairsDataMockTest
+@ExtendWith(MockBukkitExtension.class)
+class StairsMockTest
 {
 
 	private static final Set<BlockFace> VALID_FACES = Set.of(
@@ -36,14 +37,7 @@ class StairsDataMockTest
 	@BeforeEach
 	void setUp()
 	{
-		MockBukkit.mock();
-		this.stairs = new StairsDataMock(Material.BIRCH_STAIRS);
-	}
-
-	@AfterEach
-	void teardown()
-	{
-		MockBukkit.unmock();
+		this.stairs = new StairsMock(Material.BIRCH_STAIRS);
 	}
 
 	@Test

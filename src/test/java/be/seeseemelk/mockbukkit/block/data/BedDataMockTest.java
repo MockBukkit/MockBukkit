@@ -1,13 +1,13 @@
 package be.seeseemelk.mockbukkit.block.data;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.MockBukkitExtension;
 import com.destroystokyo.paper.MaterialTags;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.type.Bed;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.util.Set;
 
@@ -18,7 +18,8 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
-class BedDataMockTest
+@ExtendWith(MockBukkitExtension.class)
+class BedMockTest
 {
 
 	private BedDataMock bed;
@@ -26,14 +27,7 @@ class BedDataMockTest
 	@BeforeEach
 	void setUp()
 	{
-		MockBukkit.mock();
-		this.bed = new BedDataMock(Material.RED_BED);
-	}
-
-	@AfterEach
-	void teardown()
-	{
-		MockBukkit.unmock();
+		this.bed = new BedMock(Material.RED_BED);
 	}
 
 	@Test

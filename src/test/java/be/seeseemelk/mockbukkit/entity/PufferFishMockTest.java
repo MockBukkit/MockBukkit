@@ -2,6 +2,8 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.entity.data.EntityState;
+
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.junit.jupiter.api.AfterEach;
@@ -66,6 +68,16 @@ class PufferFishMockTest
 	void testGetType()
 	{
 		assertEquals(EntityType.PUFFERFISH, pufferFish.getType());
+	}
+	
+	@Test
+	void testGetEntityState() {
+		pufferFish.setPuffState(0);
+		assertEquals(EntityState.DEFAULT,pufferFish.getEntityState());
+		pufferFish.setPuffState(1);
+		assertEquals(EntityState.SEMI_PUFFED,pufferFish.getEntityState());
+		pufferFish.setPuffState(2);
+		assertEquals(EntityState.PUFFED,pufferFish.getEntityState());
 	}
 
 }

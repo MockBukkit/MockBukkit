@@ -328,7 +328,7 @@ class BukkitSchedulerMockTest
 				done.set(true);
 			}
 		}, MockBukkit.createMockPlugin());
-		AsyncChatEvent event = new AsyncChatEvent(true, null, null, null, null, null);
+		AsyncChatEvent event = new AsyncChatEvent(true, null, null, null, null, null, null);
 		scheduler.executeAsyncEvent(event);
 		assertFalse(done.get());
 
@@ -352,7 +352,7 @@ class BukkitSchedulerMockTest
 				done.set(true);
 			}
 		}, MockBukkit.createMockPlugin());
-		AsyncChatEvent event = new AsyncChatEvent(true, null, null, null, null, null);
+		AsyncChatEvent event = new AsyncChatEvent(true, null, null, null, null, null, null);
 		scheduler.executeAsyncEvent(event);
 		assertFalse(done.get());
 

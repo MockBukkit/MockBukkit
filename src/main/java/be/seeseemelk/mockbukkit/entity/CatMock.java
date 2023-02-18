@@ -4,6 +4,7 @@ import be.seeseemelk.mockbukkit.ServerMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.DyeColor;
 import org.bukkit.entity.Cat;
+import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
@@ -82,4 +83,9 @@ public class CatMock extends TameableAnimalMock implements Cat
 		return this.isHeadUp;
 	}
 
+	@Override
+	public EntityType getType()
+	{
+		return EntityType.CAT;
+	}
 }
