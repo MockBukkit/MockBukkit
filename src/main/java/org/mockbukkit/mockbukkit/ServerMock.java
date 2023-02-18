@@ -1418,8 +1418,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Deprecated(forRemoval = true)
 	public boolean shouldSendChatPreviews()
 	{
-		//TODO: talk about this with insprill
-		return false;
+		throw new UnsupportedOperationException("Chat previews were removed in v.1.19.3");
 	}
 
 	@Override
