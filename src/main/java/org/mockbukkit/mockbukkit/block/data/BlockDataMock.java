@@ -11,6 +11,7 @@ import org.bukkit.Tag;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockSupport;
+import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -212,7 +213,6 @@ public class BlockDataMock implements BlockData
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-
 	}
 
 	@Override

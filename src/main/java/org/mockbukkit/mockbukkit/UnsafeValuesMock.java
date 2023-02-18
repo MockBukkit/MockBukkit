@@ -20,7 +20,6 @@ import org.bukkit.advancement.Advancement;
 import org.bukkit.attribute.Attributable;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
-import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
@@ -288,6 +287,20 @@ public class UnsafeValuesMock implements UnsafeValues
 
 	@Override
 	public Entity deserializeEntity(byte[] data, World world, boolean preserveUUID)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public String getBlockTranslationKey(Material material)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public String getItemTranslationKey(Material material)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

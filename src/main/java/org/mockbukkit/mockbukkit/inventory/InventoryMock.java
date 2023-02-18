@@ -352,8 +352,38 @@ public class InventoryMock implements Inventory
 	@Override
 	public @NotNull HashMap<Integer, ItemStack> removeItem(ItemStack... items) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(items, "Items cannot be null");
+		HashMap<Integer, ItemStack> leftover = new HashMap<>();
+
+		for (int i = 0; i < items.length; i++) {
+			ItemStack item = items[i];
+			int toDelete = item.getAmount();
+
+			while (toDelete > 0) {
+				int first = first(item, false);
+
+				// Drat! we don't have this type in the inventory
+				if (first == -1) {
+					item.setAmount(toDelete);
+					leftover.put(i, item);
+					break;
+				}
+
+				ItemStack itemStack = getItem(first);
+				int amount = itemStack.getAmount();
+				if (amount <= toDelete) {
+					toDelete -= amount;
+					// clear the slot, all used up
+					clear(first);
+				} else {
+					// split the stack and store
+					itemStack.setAmount(amount - toDelete);
+					setItem(first, itemStack);
+					toDelete = 0;
+				}
+			}
+		}
+		return leftover;
 	}
 
 	@Override
@@ -481,6 +511,26 @@ public class InventoryMock implements Inventory
 		for (int i = 0; i < items.length; i++)
 		{
 			if (items[i] != null && item.equals(items[i]))
+			{
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	private int first(@NotNull ItemStack item, boolean withAmount)
+	{
+		Preconditions.checkNotNull(item, "ItemStack cannot be null");
+
+		ItemStack[] inventory = this.getStorageContents();
+		for (int i = 0; i < inventory.length; i++)
+		{
+			if (inventory[i] == null)
+			{
+				continue;
+			}
+
+			if (withAmount ? item.equals(inventory[i]) : item.isSimilar(inventory[i]))
 			{
 				return i;
 			}
