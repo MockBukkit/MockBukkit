@@ -38,7 +38,7 @@ public class WallMock extends BlockDataMock implements Wall
 	/**
 	 * @return the set of possible block faces for {@link Wall}
 	 */
-	public @NotNull Set<BlockFace> getFaces()
+	private static final @NotNull Set<BlockFace> getFaces()
 	{
 		return Set.of(BlockFace.EAST, BlockFace.NORTH, BlockFace.WEST, BlockFace.SOUTH);
 	}
