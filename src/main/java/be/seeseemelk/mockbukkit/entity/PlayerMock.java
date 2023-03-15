@@ -1116,6 +1116,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public void playSound(@NotNull Entity entity, @NotNull String sound, float volume, float pitch)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public void playSound(@NotNull Location location, @NotNull String sound, @NotNull SoundCategory category, float volume, float pitch)
 	{
 		Preconditions.checkNotNull(location, "Location cannot be null");
@@ -1140,6 +1147,40 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		Preconditions.checkNotNull(sound, "Sound cannot be null");
 		Preconditions.checkNotNull(category, "Category cannot be null");
 		heardSounds.add(new AudioExperience(sound, category, entity.getLocation(), volume, pitch));
+	}
+
+	@Override
+	public @NotNull TriState hasFlyingFallDamage()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setFlyingFallDamage(@NotNull TriState flyingFallDamage)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setHasSeenWinScreen(boolean hasSeenWinScreen)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean hasSeenWinScreen()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+	@Override
+	public void playSound(@NotNull Entity entity, @NotNull String sound, @NotNull SoundCategory category, float volume, float pitch)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -1341,6 +1382,12 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		mapView.render(this);
 
 		// Pretend the map packet gets sent.
+	}
+
+	@Override
+	public void showWinScreen()
+	{
+		// You won!
 	}
 
 	@Override
@@ -1776,22 +1823,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		}
 		this.allowFlight = flight;
 	}
-
-	@Override
-	public void setFlyingFallDamage(@NotNull TriState flyingFallDamage)
-  {
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull TriState hasFlyingFallDamage()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
+  
 	@Deprecated
 	public void hidePlayer(@NotNull Player player)
 	{
@@ -2704,6 +2736,12 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		Preconditions.checkNotNull(slot, "slot must not be null");
 		Preconditions.checkNotNull(item, "item must not be null");
 		// Pretend the packet gets sent.
+	}
+
+	@Override
+	public void sendEquipmentChange(@NotNull LivingEntity entity, @NotNull Map<EquipmentSlot, ItemStack> equipmentChanges)
+	{
+		equipmentChanges.forEach((slot, stack) -> sendEquipmentChange(entity, slot, stack));
 	}
 
 	@Override

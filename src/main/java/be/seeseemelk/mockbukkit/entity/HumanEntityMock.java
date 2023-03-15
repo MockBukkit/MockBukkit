@@ -138,8 +138,9 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	{
 		Preconditions.checkNotNull(inventory, "Inventory cannot be null");
 		closeInventory();
-		inventoryView = inventory;
-		new InventoryOpenEvent(inventoryView).callEvent();
+		if (!new InventoryOpenEvent(inventory).callEvent())
+			return;
+		this.inventoryView = inventory;
 	}
 
 	@Override
@@ -147,14 +148,19 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	{
 		AsyncCatcher.catchOp("open inventory");
 		Preconditions.checkNotNull(inventory, "Inventory cannot be null");
+		InventoryView prev = this.inventoryView;
 		closeInventory();
-		if (inventory instanceof InventoryMock inventoryMock)
+		InventoryView newView = new PlayerInventoryViewMock(this, inventory);
+		if (new InventoryOpenEvent(newView).callEvent())
 		{
-			inventoryMock.addViewers(this);
+			if (inventory instanceof InventoryMock inventoryMock)
+			{
+				inventoryMock.addViewers(this);
+			}
+			this.inventoryView = newView;
 		}
-		inventoryView = new PlayerInventoryViewMock(this, inventory);
-		new InventoryOpenEvent(inventoryView).callEvent();
-		return inventoryView;
+
+		return this.inventoryView == prev ? null : this.inventoryView;
 	}
 
 	@Override
@@ -206,6 +212,20 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 
 	@Override
 	public boolean setWindowProperty(@NotNull InventoryView.Property prop, int value)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getEnchantmentSeed()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setEnchantmentSeed(int seed)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -326,9 +346,10 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	{
 		return this.sleeping;
 	}
-	
+
 	/**
-	 *  Set whether this entity is slumbering.
+	 * Set whether this entity is slumbering.
+	 *
 	 * @param sleeping If this entity is slumbering
 	 */
 	public void setSleeping(boolean sleeping)

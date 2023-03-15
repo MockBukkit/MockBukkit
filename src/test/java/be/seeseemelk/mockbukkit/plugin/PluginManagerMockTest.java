@@ -15,13 +15,17 @@ import org.bukkit.permissions.Permissible;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPluginUtils;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
+import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -369,6 +373,19 @@ class PluginManagerMockTest
 			}
 		}, MockBukkit.createMockPlugin());
 		assertThrowsExactly(EventHandlerException.class, () -> pluginManager.callEvent(new BlockBreakEvent(null, null)));
+	}
+
+	@ParameterizedTest
+	@CsvSource("Name(with)[other]<chars>!,bukkit,minecraft,mojang")
+	void loadPlugin_InvalidName_DoesntLoad(String name) throws ReflectiveOperationException
+	{
+		// Won't let us create an invalid name.
+		Field nameField = PluginDescriptionFile.class.getDeclaredField("name");
+		nameField.setAccessible(true);
+		PluginDescriptionFile sillyName = new PluginDescriptionFile("Name", "1.0.0", TestPlugin.class.getName());
+		nameField.set(sillyName, name);
+
+		assertThrows(RuntimeException.class, () -> pluginManager.loadPlugin(TestPlugin.class, sillyName));
 	}
 
 }
