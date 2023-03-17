@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.plugin;
 
+import be.seeseemelk.mockbukkit.PermissionManagerMock;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.exception.EventHandlerException;
@@ -8,6 +9,8 @@ import com.destroystokyo.paper.event.server.ServerExceptionEvent;
 import com.destroystokyo.paper.exception.ServerEventException;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
+import io.papermc.paper.plugin.PermissionManager;
+import io.papermc.paper.plugin.configuration.PluginMeta;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.PluginCommandUtils;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -73,7 +76,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 /**
  * Mock implementation of a {@link PluginManager}.
  */
-public class PluginManagerMock implements PluginManager
+public class PluginManagerMock extends PermissionManagerMock implements PluginManager
 {
 
 	private static final Pattern VALID_PLUGIN_NAMES = Pattern.compile("^[A-Za-z0-9_.-]+$");
@@ -1036,6 +1039,20 @@ public class PluginManagerMock implements PluginManager
 	public boolean useTimings()
 	{
 		return false;
+	}
+
+	@Override
+	public boolean isTransitiveDependency(PluginMeta pluginMeta, PluginMeta dependencyConfig)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void overridePermissionManager(@NotNull Plugin plugin, @Nullable PermissionManager permissionManager)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 }

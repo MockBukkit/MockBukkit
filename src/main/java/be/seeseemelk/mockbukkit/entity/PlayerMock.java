@@ -17,7 +17,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
 import io.papermc.paper.chat.ChatRenderer;
 import io.papermc.paper.entity.LookAnchor;
-import io.papermc.paper.entity.RelativeTeleportFlag;
+import io.papermc.paper.entity.TeleportFlag;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import net.kyori.adventure.chat.SignedMessage;
 import net.kyori.adventure.text.Component;
@@ -330,7 +330,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	{
 		return EntityType.PLAYER;
 	}
-
 
 	/**
 	 * Simulates the player damaging a block just like {@link #simulateBlockDamage(Block)}. However, if
@@ -2521,7 +2520,21 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public boolean teleport(@NotNull Location location, PlayerTeleportEvent.@NotNull TeleportCause cause, boolean ignorePassengers, boolean dismount, @NotNull RelativeTeleportFlag @NotNull ... teleportFlags)
+	public void addCustomChatCompletions(@NotNull Collection<String> completions)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void removeCustomChatCompletions(@NotNull Collection<String> completions)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setCustomChatCompletions(@NotNull Collection<String> completions)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -2686,11 +2699,19 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public boolean teleport(@NotNull Location location, @NotNull PlayerTeleportEvent.TeleportCause cause, boolean ignorePassengers, boolean dismount)
+	public boolean teleport(@NotNull Location location, @NotNull PlayerTeleportEvent.TeleportCause cause,
+							TeleportFlag... flags)
 	{
 		Preconditions.checkNotNull(location, "Location cannot be null");
 		Preconditions.checkNotNull(location.getWorld(), "World cannot be null");
 		Preconditions.checkNotNull(cause, "Cause cannot be null");
+
+		boolean ignorePassengers = Arrays.stream(flags)
+				.anyMatch(flag -> flag == TeleportFlag.EntityState.RETAIN_PASSENGERS);
+
+		boolean dismount = Arrays.stream(flags)
+				.anyMatch(flag -> flag == TeleportFlag.EntityState.RETAIN_VEHICLE);
+
 		location.checkFinite();
 		if (isDead() || (!ignorePassengers && hasPassengers()))
 		{

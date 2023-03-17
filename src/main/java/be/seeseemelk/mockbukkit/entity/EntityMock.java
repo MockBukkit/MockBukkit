@@ -11,6 +11,7 @@ import be.seeseemelk.mockbukkit.entity.data.EntitySubType;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
 import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
 import com.google.common.base.Preconditions;
+import io.papermc.paper.entity.TeleportFlag;
 import net.kyori.adventure.audience.MessageType;
 import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.text.Component;
@@ -52,6 +53,7 @@ import org.spigotmc.event.entity.EntityDismountEvent;
 import org.spigotmc.event.entity.EntityMountEvent;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Queue;
@@ -125,7 +127,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 			location = Bukkit.getWorlds().get(0).getSpawnLocation();
 		else
 			location = new Location(null, 0, 0, 0);
-		
+
 		this.entityData = EntityDataRegistry.loadEntityData(this.getType());
 	}
 
@@ -309,14 +311,22 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public boolean teleport(@NotNull Location location, @NotNull TeleportCause cause)
 	{
-		return teleport(location, cause, false);
+		return teleport(location, cause,
+				TeleportFlag.EntityState.RETAIN_PASSENGERS, TeleportFlag.EntityState.RETAIN_VEHICLE);
 	}
 
 	@Override
-	public boolean teleport(@NotNull Location location, @NotNull TeleportCause cause, boolean ignorePassengers, boolean dismount)
+	public boolean teleport(@NotNull Location location, @NotNull TeleportCause cause, TeleportFlag... flags)
 	{
 		Preconditions.checkNotNull(location, "Location cannot be null"); // The world can be null if it's not a player
 		location.checkFinite();
+
+		boolean ignorePassengers = Arrays.stream(flags)
+				.anyMatch(flag -> flag == TeleportFlag.EntityState.RETAIN_PASSENGERS);
+
+		boolean dismount = Arrays.stream(flags)
+				.anyMatch(flag -> flag == TeleportFlag.EntityState.RETAIN_VEHICLE);
+
 		if (this.removed || (!ignorePassengers && hasPassengers()))
 		{
 			return false;
@@ -582,8 +592,8 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	/**
-	 * Get the current subtype of the entity 
-	 * @return The current subtype of the entity 
+	 * Get the current subtype of the entity
+	 * @return The current subtype of the entity
 	 */
 	protected EntitySubType getSubType()
 	{
@@ -1286,4 +1296,17 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		throw new UnimplementedOperationException();
 	}
 
+	@Override
+	public void setVisibleByDefault(boolean visible)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isVisibleByDefault()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
 }
