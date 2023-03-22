@@ -91,6 +91,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private @Nullable Component customName = null;
 	private boolean customNameVisible = false;
 	private boolean invulnerable;
+	private boolean persistent = true;
 	private boolean glowingFlag = false;
 	private final Queue<Component> messages = new LinkedTransferQueue<>();
 	private final PermissibleBase perms;
@@ -1098,15 +1099,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public boolean isPersistent()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.persistent;
 	}
 
 	@Override
 	public void setPersistent(boolean persistent)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.persistent = persistent;
 	}
 
 	@Override
