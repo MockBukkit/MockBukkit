@@ -38,6 +38,7 @@ import be.seeseemelk.mockbukkit.entity.MuleMock;
 import be.seeseemelk.mockbukkit.entity.MushroomCowMock;
 import be.seeseemelk.mockbukkit.entity.PigMock;
 import be.seeseemelk.mockbukkit.entity.PolarBearMock;
+import be.seeseemelk.mockbukkit.entity.PoweredMinecartMock;
 import be.seeseemelk.mockbukkit.entity.PufferFishMock;
 import be.seeseemelk.mockbukkit.entity.SalmonMock;
 import be.seeseemelk.mockbukkit.entity.SheepMock;
@@ -156,6 +157,7 @@ import org.bukkit.entity.WitherSkull;
 import org.bukkit.entity.Wolf;
 import org.bukkit.entity.Zombie;
 import org.bukkit.entity.ZombieHorse;
+import org.bukkit.entity.minecart.PoweredMinecart;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.entity.ItemSpawnEvent;
@@ -1171,6 +1173,10 @@ public class WorldMock implements World
 		{
 			return new WitherSkullMock(server, UUID.randomUUID());
 		}
+		else if (clazz == PoweredMinecart.class)
+		{
+			return new PoweredMinecartMock(server, UUID.randomUUID());
+		}
 		throw new UnimplementedOperationException();
 	}
 
@@ -1926,6 +1932,19 @@ public class WorldMock implements World
 		this.playSound(entity, sound, SoundCategory.MASTER, volume, pitch);
 	}
 
+	@Override
+	public void playSound(@NotNull Entity entity, @NotNull String sound, float volume, float pitch)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void playSound(@NotNull Entity entity, @NotNull String sound, @NotNull SoundCategory category, float volume, float pitch)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
 	@Override
 	public void playSound(@Nullable Entity entity, @Nullable Sound sound, @Nullable SoundCategory category, float volume, float pitch)
 	{

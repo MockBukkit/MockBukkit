@@ -30,6 +30,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
+import org.bukkit.entity.Wither;
 import org.bukkit.entity.memory.MemoryKey;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -95,6 +96,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	private final Set<ActivePotionEffect> activeEffects = new HashSet<>();
 	private boolean invisible = false;
 	private TriState frictionState = TriState.NOT_SET;
+	private Entity leashHolder;
 
 	/**
 	 * Constructs a new {@link LivingEntityMock} on the provided {@link ServerMock} with a specified {@link UUID}.
@@ -605,22 +607,34 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public boolean isLeashed()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if(!(this.leashHolder instanceof Mob)) {
+			return false;
+		}
+		return this.leashHolder != null;
 	}
 
 	@Override
 	public @NotNull Entity getLeashHolder() throws IllegalStateException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if(!this.isLeashed()) {
+			throw new IllegalStateException("Entity is currently not leashed");
+		}
+		return this.leashHolder;
 	}
+
 
 	@Override
 	public boolean setLeashHolder(Entity holder)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if(this instanceof Wither || !(this instanceof Mob)) {
+			return false;
+		}
+
+		if(holder != null && holder.isDead()) {
+			return false;
+		}
+		this.leashHolder = holder;
+		return true;
 	}
 
 	@Override
@@ -1039,6 +1053,41 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	{
 		Preconditions.checkNotNull(state, "State cannot be null");
 		this.frictionState = state;
+	}
+
+	@Override
+	public @Nullable BlockFace getTargetBlockFace(int maxDistance, @NotNull FluidCollisionMode fluidMode)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable RayTraceResult rayTraceEntities(int maxDistance, boolean ignoreBlocks)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setArrowsInBody(int count, boolean fireEvent)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public float getBodyYaw()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setBodyYaw(float bodyYaw)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 }

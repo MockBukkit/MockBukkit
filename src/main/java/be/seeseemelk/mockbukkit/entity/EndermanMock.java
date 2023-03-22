@@ -3,9 +3,12 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
+import be.seeseemelk.mockbukkit.entity.data.EntityState;
+
 import com.google.common.base.Preconditions;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Enderman;
+import org.bukkit.entity.EntityType;
 import org.bukkit.material.MaterialData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -25,7 +28,8 @@ public class EndermanMock extends MonsterMock implements Enderman
 	private boolean hasBeenStaredAt = false;
 
 	/**
-	 * Constructs a new {@link EndermanMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link EndermanMock} on the provided {@link ServerMock} with
+	 * a specified {@link UUID}.
 	 *
 	 * @param server The server to create the entity on.
 	 * @param uuid   The UUID of the entity.
@@ -36,8 +40,8 @@ public class EndermanMock extends MonsterMock implements Enderman
 	}
 
 	/**
-	 * We're not implementing this as this would randomly fail tests.
-	 * This is not a bug, it's a feature.
+	 * We're not implementing this as this would randomly fail tests. This is not a
+	 * bug, it's a feature.
 	 */
 	@Override
 	public boolean teleportRandomly()
@@ -106,6 +110,22 @@ public class EndermanMock extends MonsterMock implements Enderman
 	public void assertHasBlock()
 	{
 		Preconditions.checkState(this.carriedBlock != null, "Carried Block must be set before using this method");
+	}
+
+	@Override
+	protected EntityState getEntityState()
+	{
+		if (this.isScreaming())
+		{
+			return EntityState.ANGRY;
+		}
+		return super.getEntityState();
+	}
+	
+	@Override
+	public EntityType getType()
+	{
+		return EntityType.ENDERMAN;
 	}
 
 }

@@ -53,6 +53,7 @@ MockBukkit can easily be included in your project using either Maven or gradle.
 
 MockBukkit can easily be included in Gradle using the Maven Central and PaperMC repositories.
 Make sure to update the version as necessary.
+
 ```gradle
 repositories {
     mavenCentral()
@@ -64,8 +65,8 @@ dependencies {
 }
 ```
 
-If you prefer to always have the latest Git version or need a specific commit/branch, you can always use [JitPack](https://jitpack.io/#MockBukkit/MockBukkit) as your
-maven repository:
+If you prefer to always have the latest Git version or need a specific commit/branch, you can always
+use [JitPack](https://jitpack.io/#MockBukkit/MockBukkit) as your maven repository:
 
 ```gradle
 repositories {
@@ -93,6 +94,7 @@ development of MockBukkit.
 
 MockBukkit can easily be included in Maven using the default Maven Central and PaperMC repositories.
 Make sure to update the version as necessary.
+
 ```xml
 <repositories>
     <repository>
@@ -110,11 +112,13 @@ Make sure to update the version as necessary.
   </dependency>
 </dependencies>
 ```
+
 The `test` scope is important here since you are likely to only be using MockBukkit during the `test` stage of your
 Maven lifecycle and not in your final product.
 
-If you prefer to always have the latest Git version or need a specific commit/branch, you can always use [JitPack](https://jitpack.io/#MockBukkit/MockBukkit) as your
-maven repository:
+If you prefer to always have the latest Git version or need a specific commit/branch, you can always
+use [JitPack](https://jitpack.io/#MockBukkit/MockBukkit) as your maven repository:
+
 ```xml
 <repositories>
     <repository>
@@ -145,7 +149,6 @@ This is because back-porting every single patch on every branch is incredibly ti
 development of MockBukkit.
 
 </details>
-
 
 ### Using MockBukkit
 

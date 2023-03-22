@@ -4,6 +4,10 @@ import be.seeseemelk.mockbukkit.AsyncCatcher;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.command.MessageTarget;
+import be.seeseemelk.mockbukkit.entity.data.EntityData;
+import be.seeseemelk.mockbukkit.entity.data.EntityDataRegistry;
+import be.seeseemelk.mockbukkit.entity.data.EntityState;
+import be.seeseemelk.mockbukkit.entity.data.EntitySubType;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
 import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
 import com.google.common.base.Preconditions;
@@ -98,6 +102,8 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private boolean silent;
 	private boolean gravity = true;
 
+	private final EntityData entityData;
+
 	/**
 	 * Constructs a new EntityMock on the provided {@link ServerMock} with a specified {@link UUID}.
 	 *
@@ -119,6 +125,8 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 			location = Bukkit.getWorlds().get(0).getSpawnLocation();
 		else
 			location = new Location(null, 0, 0, 0);
+		
+		this.entityData = EntityDataRegistry.loadEntityData(this.getType());
 	}
 
 	@Override
@@ -555,15 +563,31 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public double getHeight()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return entityData.getHeight(this.getSubType(),this.getEntityState());
 	}
 
 	@Override
 	public double getWidth()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return entityData.getWidth(this.getSubType(),this.getEntityState());
+	}
+
+	/**
+	 * Get the current state of this entity
+	 * @return  The current state of this entity
+	 */
+	protected EntityState getEntityState()
+	{
+		return EntityState.DEFAULT;
+	}
+
+	/**
+	 * Get the current subtype of the entity 
+	 * @return The current subtype of the entity 
+	 */
+	protected EntitySubType getSubType()
+	{
+		return EntitySubType.DEFAULT;
 	}
 
 	@Override
@@ -573,12 +597,18 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		throw new UnimplementedOperationException();
 	}
 
-	@Override
 	public @NotNull List<Entity> getNearbyEntities(double x, double y, double z)
 	{
 		AsyncCatcher.catchOp("getNearbyEntities");
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		List<Entity> nearbyEntities = new ArrayList<>();
+		getWorld().getEntities().forEach(entity ->
+		{
+			Vector distance = entity.getLocation().clone().subtract(getLocation()).toVector();
+			if (Math.abs(distance.getX()) <= x && Math.abs(distance.getY()) <= y
+					&& Math.abs(distance.getZ()) <= z && entity != this)
+				nearbyEntities.add(entity);
+		});
+		return nearbyEntities;
 	}
 
 	@Override
@@ -1237,6 +1267,20 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 
 	@Override
 	public boolean wouldCollideUsing(@NotNull BoundingBox boundingBox)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isSneaking()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setSneaking(boolean sneak)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

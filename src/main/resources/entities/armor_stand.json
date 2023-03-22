@@ -1,0 +1,10 @@
+{
+	"default":{
+		"width":0.5,
+		"height":1.975
+	},
+	"small":{
+		"width":0.25,
+		"height":0.9875
+	}
+}

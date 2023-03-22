@@ -123,9 +123,6 @@ public class TagWrapperMock implements Tag<Material>
 		return Collections.unmodifiableSet(additionalTags);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public @NotNull String toString()
 	{

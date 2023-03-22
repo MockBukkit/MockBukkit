@@ -76,7 +76,7 @@ jobs:
           message: '${{ steps.bump-semver.outputs.new_version }}: PR #${{ github.event.pull_request.number }} ${{ github.event.pull_request.title }}'
 
       - name: Store Private key
-        uses: DamianReeves/write-file-action@v1.1
+        uses: DamianReeves/write-file-action@v1.2
         if: ${{ steps.bump-semver.outputs.new_version != null }}
         with:
           path: private.key

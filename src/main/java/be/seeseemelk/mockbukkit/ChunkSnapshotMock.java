@@ -186,6 +186,13 @@ public class ChunkSnapshotMock implements ChunkSnapshot
 		return this.blockData.containsValue(block);
 	}
 
+	@Override
+	public boolean contains(@NotNull Biome biome)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 	/**
 	 * Validates that the chunk coordinates are within the proper range.
 	 * <p>

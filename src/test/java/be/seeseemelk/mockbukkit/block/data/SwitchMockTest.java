@@ -1,10 +1,6 @@
 package be.seeseemelk.mockbukkit.block.data;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.Set;
-import java.util.stream.Stream;
-
+import be.seeseemelk.mockbukkit.MockBukkit;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.BlockFace;
@@ -17,7 +13,16 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
+import java.util.Set;
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class SwitchMockTest
 {
@@ -49,13 +54,12 @@ class SwitchMockTest
 	void constructor_Material(Material material)
 	{
 		assertDoesNotThrow(() -> new SwitchMock(material));
-
 	}
 
 	@Test
 	void constructor_Material_WrongType_ThrowsException()
 	{
-		assertThrowsExactly(IllegalArgumentException.class, () -> new WallSignMock(Material.BEDROCK));
+		assertThrowsExactly(IllegalArgumentException.class, () -> new SwitchMock(Material.BEDROCK));
 	}
 
 	@Test

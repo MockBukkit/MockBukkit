@@ -2,7 +2,6 @@ package be.seeseemelk.mockbukkit.inventory;
 
 import com.google.common.base.Preconditions;
 import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.inventory.AbstractHorseInventory;
 import org.bukkit.inventory.AnvilInventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.jetbrains.annotations.Nullable;

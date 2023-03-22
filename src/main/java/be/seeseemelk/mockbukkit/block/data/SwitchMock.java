@@ -1,21 +1,21 @@
 package be.seeseemelk.mockbukkit.block.data;
 
-import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.FACING;
-import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.POWERED;
-import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.FACE;
-
-import java.util.Set;
-
+import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.type.Switch;
 import org.jetbrains.annotations.NotNull;
 
-import com.google.common.base.Preconditions;
+import java.util.Set;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.FACE;
+import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.FACING;
+import static be.seeseemelk.mockbukkit.block.data.BlockDataKey.POWERED;
 
+/**
+ * Mock implementation of a {@link Switch}.
+ */
 public class SwitchMock extends BlockDataMock implements Switch
 {
 
@@ -30,7 +30,7 @@ public class SwitchMock extends BlockDataMock implements Switch
 		super(type);
 		Set<Material> possibleTypes = Tag.BUTTONS.getValues();
 		possibleTypes.add(Material.LEVER);
-		checkType(type, possibleTypes.toArray(new Material[possibleTypes.size()]));
+		checkType(type, possibleTypes.toArray(new Material[0]));
 		super.set(FACE, AttachedFace.WALL);
 		super.set(FACING, BlockFace.NORTH);
 		super.set(POWERED, false);
@@ -78,20 +78,21 @@ public class SwitchMock extends BlockDataMock implements Switch
 	@Override
 	public @NotNull Set<BlockFace> getFaces()
 	{
-		return Set.of(BlockFace.SOUTH, BlockFace.EAST, BlockFace.NORTH, BlockFace.WEST);
+		return Set.of(BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST);
 	}
 
 	@SuppressWarnings("deprecation")
 	@Override
 	public @NotNull Face getFace()
 	{
-		return Face.valueOf(super.get(FACE).toString());
+		return Face.valueOf(getAttachedFace().name());
 	}
 
 	@Override
 	public void setFace(@SuppressWarnings("deprecation") @NotNull Face face)
 	{
-		super.set(FACE, AttachedFace.valueOf(face.toString()));
+		Preconditions.checkNotNull(face, "BlockFace cannot be null");
+		setAttachedFace(AttachedFace.valueOf(face.name()));
 	}
 
 }
