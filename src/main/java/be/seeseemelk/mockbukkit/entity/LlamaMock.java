@@ -5,6 +5,7 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.inventory.LlamaInventoryMock;
 import com.google.common.base.Preconditions;
 import org.apache.commons.lang3.tuple.Pair;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Horse;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Llama;
@@ -17,6 +18,11 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * Mock implementation of a {@link Llama}.
+ *
+ * @see ChestedHorseMock
+ */
 public class LlamaMock extends ChestedHorseMock implements Llama
 {
 
@@ -28,6 +34,12 @@ public class LlamaMock extends ChestedHorseMock implements Llama
 
 	private final @NotNull LlamaInventoryMock inventory;
 
+	/**
+	 * Constructs a new {@link LlamaMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	public LlamaMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
@@ -167,4 +179,9 @@ public class LlamaMock extends ChestedHorseMock implements Llama
 		return this.isAgressive;
 	}
 
+	@Override
+	public EntityType getType()
+	{
+		return EntityType.LLAMA;
+	}
 }

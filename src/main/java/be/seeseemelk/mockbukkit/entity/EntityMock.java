@@ -4,6 +4,10 @@ import be.seeseemelk.mockbukkit.AsyncCatcher;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.command.MessageTarget;
+import be.seeseemelk.mockbukkit.entity.data.EntityData;
+import be.seeseemelk.mockbukkit.entity.data.EntityDataRegistry;
+import be.seeseemelk.mockbukkit.entity.data.EntityState;
+import be.seeseemelk.mockbukkit.entity.data.EntitySubType;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
 import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
 import com.google.common.base.Preconditions;
@@ -54,16 +58,26 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.LinkedTransferQueue;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Mock implementation of an {@link Entity}.
+ *
+ * @see Entity.Spigot
+ * @see MessageTarget
+ */
 public abstract class EntityMock extends Entity.Spigot implements Entity, MessageTarget
 {
 
-	private final @NotNull ServerMock server;
+	private static final AtomicInteger ENTITY_COUNTER = new AtomicInteger();
+
+	protected final @NotNull ServerMock server;
 	private final @NotNull UUID uuid;
+	private final int id;
 	private Location location;
 	private boolean teleported;
 	private TeleportCause teleportCause;
@@ -71,7 +85,6 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private final List<Entity> passengers = new ArrayList<>(0);
 	private final MetadataTable metadataTable = new MetadataTable();
 	private final PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
-	private boolean operator = false;
 	private @NotNull Component name = Component.text("entity");
 	private @Nullable Component customName = null;
 	private boolean customNameVisible = false;
@@ -85,7 +98,18 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private final int maxFireTicks = 20;
 	private boolean removed = false;
 	private @Nullable EntityDamageEvent lastDamageEvent;
+	private boolean visualFire;
+	private boolean silent;
+	private boolean gravity = true;
 
+	private final EntityData entityData;
+
+	/**
+	 * Constructs a new EntityMock on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	protected EntityMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		Preconditions.checkNotNull(server, "Server cannot be null");
@@ -93,6 +117,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 
 		this.server = server;
 		this.uuid = uuid;
+		this.id = ENTITY_COUNTER.incrementAndGet();
 
 		this.perms = new PermissibleBase(this);
 
@@ -100,6 +125,8 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 			location = Bukkit.getWorlds().get(0).getSpawnLocation();
 		else
 			location = new Location(null, 0, 0, 0);
+		
+		this.entityData = EntityDataRegistry.loadEntityData(this.getType());
 	}
 
 	@Override
@@ -320,6 +347,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		return false;
 	}
 
+	/**
+	 * Handles teleporting an entity without firing an event.
+	 * This will set the entity to the new location, mark teleport as true, and set the teleport cause.
+	 *
+	 * @param location The location to teleport to.
+	 * @param cause    The teleport cause.
+	 */
 	protected void teleportWithoutEvent(@NotNull Location location, @NotNull TeleportCause cause)
 	{
 		setLocation(location);
@@ -345,13 +379,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public boolean isOp()
 	{
-		return operator;
+		return false;
 	}
 
 	@Override
 	public void setOp(boolean isOperator)
 	{
-		operator = isOperator;
+		throw new UnsupportedOperationException("This does nothing in CraftBukkit");
 	}
 
 	@Override
@@ -529,15 +563,31 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public double getHeight()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return entityData.getHeight(this.getSubType(),this.getEntityState());
 	}
 
 	@Override
 	public double getWidth()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return entityData.getWidth(this.getSubType(),this.getEntityState());
+	}
+
+	/**
+	 * Get the current state of this entity
+	 * @return  The current state of this entity
+	 */
+	protected EntityState getEntityState()
+	{
+		return EntityState.DEFAULT;
+	}
+
+	/**
+	 * Get the current subtype of the entity 
+	 * @return The current subtype of the entity 
+	 */
+	protected EntitySubType getSubType()
+	{
+		return EntitySubType.DEFAULT;
 	}
 
 	@Override
@@ -547,19 +597,24 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		throw new UnimplementedOperationException();
 	}
 
-	@Override
 	public @NotNull List<Entity> getNearbyEntities(double x, double y, double z)
 	{
 		AsyncCatcher.catchOp("getNearbyEntities");
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		List<Entity> nearbyEntities = new ArrayList<>();
+		getWorld().getEntities().forEach(entity ->
+		{
+			Vector distance = entity.getLocation().clone().subtract(getLocation()).toVector();
+			if (Math.abs(distance.getX()) <= x && Math.abs(distance.getY()) <= y
+					&& Math.abs(distance.getZ()) <= z && entity != this)
+				nearbyEntities.add(entity);
+		});
+		return nearbyEntities;
 	}
 
 	@Override
 	public int getEntityId()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return this.id;
 	}
 
 	@Override
@@ -583,15 +638,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public void setVisualFire(boolean fire)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		this.visualFire = fire;
 	}
 
 	@Override
 	public boolean isVisualFire()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return this.visualFire;
 	}
 
 	@Override
@@ -954,31 +1007,25 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public boolean isSilent()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return this.silent;
 	}
 
 	@Override
-	public void setSilent(boolean flag)
+	public void setSilent(boolean silent)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
-
+		this.silent = silent;
 	}
 
 	@Override
 	public boolean hasGravity()
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
+		return this.gravity;
 	}
 
 	@Override
 	public void setGravity(boolean gravity)
 	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
-
+		this.gravity = gravity;
 	}
 
 	@Override
@@ -1220,6 +1267,20 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 
 	@Override
 	public boolean wouldCollideUsing(@NotNull BoundingBox boundingBox)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isSneaking()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setSneaking(boolean sneak)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

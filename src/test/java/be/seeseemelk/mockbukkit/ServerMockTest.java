@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit;
 
 import be.seeseemelk.mockbukkit.command.CommandResult;
+import be.seeseemelk.mockbukkit.configuration.ServerConfiguration;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
@@ -75,9 +76,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -276,7 +274,7 @@ class ServerMockTest
 	{
 		UUID id = UUID.randomUUID();
 		OfflinePlayer offlinePlayer = server.getOfflinePlayer(id);
-		assertThat(offlinePlayer.getUniqueId(), equalTo(id));
+		assertEquals(id, offlinePlayer.getUniqueId());
 	}
 
 	@ParameterizedTest
@@ -579,7 +577,8 @@ class ServerMockTest
 		PlayerMock playerAB = server.addPlayer("PlayerAB");
 		server.addPlayer("PlayerB");
 		List<Player> players = server.matchPlayer("PlayerA");
-		assertThat(players, containsInAnyOrder(playerA, playerAB));
+		assertTrue(players.contains(playerA));
+		assertTrue(players.contains(playerAB));
 	}
 
 	@Test
@@ -699,7 +698,8 @@ class ServerMockTest
 		PlayerMock playerA = server.addPlayer();
 		PlayerMock playerB = server.addPlayer();
 
-		assertThat(server.getPlayerList().getOnlinePlayers(), containsInAnyOrder(playerA, playerB));
+		assertTrue(server.getPlayerList().getOnlinePlayers().contains(playerA));
+		assertTrue(server.getPlayerList().getOnlinePlayers().contains(playerB));
 	}
 
 	@Test
@@ -975,6 +975,220 @@ class ServerMockTest
 				assertEquals(image.getRGB(x, y), decodedImage.getRGB(x, y));
 			}
 		}
+	}
+
+	@Test
+	void testGetViewDistanceDefault()
+	{
+		assertEquals(10, server.getViewDistance());
+	}
+
+	@Test
+	void testSetViewDistance()
+	{
+		server.setViewDistance(2);
+		assertEquals(2, server.getViewDistance());
+	}
+
+	@Test
+	void testGetWorldTypeDefault()
+	{
+		assertEquals(ServerConfiguration.LevelType.DEFAULT.getKey(), server.getWorldType());
+	}
+
+	@Test
+	void testSetLevelType()
+	{
+		server.setWorldType(ServerConfiguration.LevelType.FLAT);
+		assertEquals(ServerConfiguration.LevelType.FLAT.getKey(), server.getWorldType());
+	}
+
+	@Test
+	void testIsGenerateStructuresDefault()
+	{
+		assertTrue(server.getGenerateStructures());
+	}
+
+	@Test
+	void testSetGenerateStructures()
+	{
+		server.setGenerateStructures(false);
+		assertFalse(server.getGenerateStructures());
+	}
+
+	@Test
+	void testIsAllowEndDefault()
+	{
+		assertTrue(server.getAllowEnd());
+	}
+
+	@Test
+	void testSetAllowEnd()
+	{
+		server.setAllowEnd(false);
+		assertFalse(server.getAllowEnd());
+	}
+
+	@Test
+	void testIsAllowNetherDefault()
+	{
+		assertTrue(server.getAllowNether());
+	}
+
+	@Test
+	void testSetAllowNether()
+	{
+		server.setAllowNether(false);
+		assertFalse(server.getAllowNether());
+	}
+
+	@Test
+	void testGetUpdateFolderDefault()
+	{
+		assertEquals("update", server.getUpdateFolder());
+	}
+
+	@Test
+	void testSetUpdateFolder()
+	{
+		server.setUpdateFolder("test");
+		assertEquals("test", server.getUpdateFolder());
+	}
+
+	@Test
+	void testGetSimulationDistanceDefault()
+	{
+		assertEquals(10, server.getSimulationDistance());
+	}
+
+	@Test
+	void testSetSimulationDistance()
+	{
+		server.setSimulationDistance(12);
+		assertEquals(12, server.getSimulationDistance());
+	}
+
+	@Test
+	void testIsHideOnlinePlayersDefault()
+	{
+		assertFalse(server.getHideOnlinePlayers());
+	}
+
+	@Test
+	void testSetHideOnlinePlayers()
+	{
+		server.setHideOnlinePlayers(true);
+		assertTrue(server.getHideOnlinePlayers());
+	}
+
+	@Test
+	void testIsShouldSendingChatPreviewsDefault()
+	{
+		assertFalse(server.shouldSendChatPreviews());
+	}
+
+	@Test
+	void testSetShouldSendingChatPreviews()
+	{
+		server.setShouldSendChatPreviews(true);
+		assertTrue(server.shouldSendChatPreviews());
+	}
+
+	@Test
+	void testGetOnlineModeDefault()
+	{
+		assertTrue(server.getOnlineMode());
+	}
+
+	@Test
+	void testSetOnlineMode()
+	{
+		server.setOnlineMode(false);
+		assertFalse(server.getOnlineMode());
+	}
+
+	@Test
+	void testIsEnforcingSecureProfiles()
+	{
+		assertTrue(server.isEnforcingSecureProfiles());
+	}
+
+	@Test
+	void testSetEnforcingSecureProfiles()
+	{
+		server.setEnforcingSecureProfiles(false);
+		assertFalse(server.isEnforcingSecureProfiles());
+	}
+
+	@Test
+	void testIsAllowFlight()
+	{
+		assertFalse(server.getAllowFlight());
+	}
+
+	@Test
+	void testSetAllowFlight()
+	{
+		server.setAllowFlight(true);
+		assertTrue(server.getAllowFlight());
+	}
+
+	@Test
+	void testIsHardcoreDefault()
+	{
+		assertFalse(server.isHardcore());
+	}
+
+	@Test
+	void testSetHardCore()
+	{
+		server.setHardcore(true);
+		assertTrue(server.isHardcore());
+	}
+
+	@Test
+	void testGetMaxChainedNeighborUpdatesDefault()
+	{
+		assertEquals(1000000, server.getMaxChainedNeighborUpdates());
+	}
+
+	@Test
+	void testSetMaxChainedNeighborUpdates()
+	{
+		server.setMaxChainedNeighborUpdates(1);
+		assertEquals(1, server.getMaxChainedNeighborUpdates());
+	}
+
+	@Test
+	void testGetShutdownMessageDefault()
+	{
+		assertEquals("Server closed", server.getShutdownMessage());
+	}
+
+	@Test
+	void testSetShutdownMessage()
+	{
+		server.setShutdownMessage(Component.text("Test"));
+		assertEquals("Test", server.getShutdownMessage());
+	}
+
+	@Test
+	void testShutdownMessage()
+	{
+		assertEquals(Component.text("Server closed"), server.shutdownMessage());
+	}
+
+	@Test
+	void testGetMaxWorldSizeDefault()
+	{
+		assertEquals(29999984, server.getMaxWorldSize());
+	}
+
+	@Test
+	void testSetMaxWorldSize()
+	{
+		server.setMaxWorldSize(42);
+		assertEquals(42, server.getMaxWorldSize());
 	}
 
 	@Test

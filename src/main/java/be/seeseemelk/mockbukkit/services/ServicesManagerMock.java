@@ -2,7 +2,11 @@ package be.seeseemelk.mockbukkit.services;
 
 import org.bukkit.plugin.SimpleServicesManager;
 
-//We can use the default Service Manager (SimpleServicesManager) from Bukkit
+/**
+ * The default service manager.
+ *
+ * @see SimpleServicesManager
+ */
 public class ServicesManagerMock extends SimpleServicesManager
 {
 

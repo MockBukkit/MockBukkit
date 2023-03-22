@@ -3,12 +3,19 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.inventory.HorseInventoryMock;
 import com.google.common.base.Preconditions;
+
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Horse;
 import org.bukkit.inventory.HorseInventory;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
+/**
+ * Mock implementation of a {@link Horse}.
+ *
+ * @see AbstractHorseMock
+ */
 public class HorseMock extends AbstractHorseMock implements Horse
 {
 
@@ -16,6 +23,12 @@ public class HorseMock extends AbstractHorseMock implements Horse
 	private Style style;
 	private HorseInventory inventory;
 
+	/**
+	 * Constructs a new {@link HorseMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	public HorseMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
@@ -77,6 +90,12 @@ public class HorseMock extends AbstractHorseMock implements Horse
 	public @NotNull Variant getVariant()
 	{
 		return Variant.HORSE;
+	}
+
+	@Override
+	public EntityType getType()
+	{
+		return EntityType.HORSE;
 	}
 
 }

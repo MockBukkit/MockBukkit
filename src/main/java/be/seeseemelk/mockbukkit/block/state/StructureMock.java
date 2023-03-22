@@ -12,6 +12,11 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.BlockVector;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Mock implementation of a {@link Structure}.
+ *
+ * @see TileStateMock
+ */
 public class StructureMock extends TileStateMock implements Structure
 {
 
@@ -31,18 +36,35 @@ public class StructureMock extends TileStateMock implements Structure
 	private long seed = 0L;
 	private String metadata = "";
 
+	/**
+	 * Constructs a new {@link StructureMock} for the provided {@link Material}.
+	 * Only supports {@link Material#STRUCTURE_BLOCK}
+	 *
+	 * @param material The material this state is for.
+	 */
 	public StructureMock(@NotNull Material material)
 	{
 		super(material);
 		checkType(material, Material.STRUCTURE_BLOCK);
 	}
 
+	/**
+	 * Constructs a new {@link StructureMock} for the provided {@link Block}.
+	 * Only supports {@link Material#STRUCTURE_BLOCK}
+	 *
+	 * @param block The block this state is for.
+	 */
 	protected StructureMock(@NotNull Block block)
 	{
 		super(block);
 		checkType(block, Material.STRUCTURE_BLOCK);
 	}
 
+	/**
+	 * Constructs a new {@link StructureMock} by cloning the data from an existing one.
+	 *
+	 * @param state The state to clone.
+	 */
 	protected StructureMock(@NotNull StructureMock state)
 	{
 		super(state);

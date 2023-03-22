@@ -23,6 +23,9 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.logging.Level;
 
+/**
+ * Mock implementation of a {@link Team}.
+ */
 public class TeamMock implements Team
 {
 
@@ -37,6 +40,12 @@ public class TeamMock implements Team
 	private final EnumMap<Option, OptionStatus> options = new EnumMap<>(Option.class);
 	private @Nullable ScoreboardMock board;
 
+	/**
+	 * Constructs a new {@link TeamMock} for the provided {@link ScoreboardMock} with the specified name.
+	 *
+	 * @param name  The name of the team.
+	 * @param board The scoreboard the team is for.
+	 */
 	public TeamMock(@NotNull String name, ScoreboardMock board)
 	{
 		this.name = name;

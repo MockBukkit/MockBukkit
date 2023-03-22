@@ -17,6 +17,9 @@ import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.util.logging.Level;
 
+/**
+ * Handles mocking the {@link Bukkit} server, along with containing some handy utility methods.
+ */
 public class MockBukkit
 {
 
@@ -24,7 +27,7 @@ public class MockBukkit
 
 	private MockBukkit()
 	{
-		// This class should never be instantiated.
+		throw new UnsupportedOperationException("Utility class");
 	}
 
 	/**

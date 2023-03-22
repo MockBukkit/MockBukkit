@@ -1,11 +1,13 @@
 package be.seeseemelk.mockbukkit.block.state;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.profile.PlayerProfileMock;
 import com.destroystokyo.paper.MaterialTags;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.google.common.base.Preconditions;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.SkullType;
 import org.bukkit.block.Block;
@@ -18,6 +20,11 @@ import org.bukkit.block.data.Rotatable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * Mock implementation of a {@link Skull}.
+ *
+ * @see TileStateMock
+ */
 public class SkullMock extends TileStateMock implements Skull
 {
 
@@ -25,18 +32,35 @@ public class SkullMock extends TileStateMock implements Skull
 
 	private @Nullable PlayerProfileMock profile;
 
+	/**
+	 * Constructs a new {@link SkullMock} for the provided {@link Material}.
+	 * Only supports materials in {@link MaterialTags#SKULLS}
+	 *
+	 * @param material The material this state is for.
+	 */
 	public SkullMock(@NotNull Material material)
 	{
 		super(material);
 		checkType(material, MaterialTags.SKULLS);
 	}
 
+	/**
+	 * Constructs a new {@link SkullMock} for the provided {@link Block}.
+	 * Only supports materials in {@link MaterialTags#SKULLS}
+	 *
+	 * @param block The block this state is for.
+	 */
 	protected SkullMock(@NotNull Block block)
 	{
 		super(block);
 		checkType(block, MaterialTags.SKULLS);
 	}
 
+	/**
+	 * Constructs a new {@link SkullMock} by cloning the data from an existing one.
+	 *
+	 * @param state The state to clone.
+	 */
 	protected SkullMock(@NotNull SkullMock state)
 	{
 		super(state);
@@ -139,6 +163,20 @@ public class SkullMock extends TileStateMock implements Skull
 		Preconditions.checkArgument(profile instanceof PlayerProfileMock, "Profile must be a PlayerProfileMock!");
 		PlayerProfileMock.validateSkullProfile((PlayerProfileMock) profile);
 		this.profile = (PlayerProfileMock) profile;
+	}
+
+	@Override
+	public @Nullable NamespacedKey getNoteBlockSound()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setNoteBlockSound(@Nullable NamespacedKey noteBlockSound)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

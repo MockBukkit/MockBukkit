@@ -6,6 +6,11 @@ import org.bukkit.entity.TropicalFish;
 import org.bukkit.inventory.meta.TropicalFishBucketMeta;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Mock implementation of an {@link TropicalFishBucketMeta}.
+ *
+ * @see ItemMetaMock
+ */
 public class TropicalFishBucketMetaMock extends ItemMetaMock implements TropicalFishBucketMeta
 {
 
@@ -13,11 +18,19 @@ public class TropicalFishBucketMetaMock extends ItemMetaMock implements Tropical
 	private DyeColor bodyColor;
 	private TropicalFish.Pattern pattern;
 
+	/**
+	 * Constructs a new {@link TropicalFishBucketMetaMock}.
+	 */
 	public TropicalFishBucketMetaMock()
 	{
 		super();
 	}
 
+	/**
+	 * Constructs a new {@link TropicalFishBucketMetaMock}, cloning the data from another.
+	 *
+	 * @param meta The meta to clone.
+	 */
 	public TropicalFishBucketMetaMock(@NotNull TropicalFishBucketMeta meta)
 	{
 		super(meta);

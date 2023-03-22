@@ -5,7 +5,6 @@ import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import org.bukkit.OfflinePlayer;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -112,7 +111,6 @@ class MockPlayerListTest
 	}
 
 	@Test
-	@Disabled("OfflinePlayerMock#setOp isn't implemented")
 	void getOperators()
 	{
 		PlayerMock player1 = server.addPlayer();
@@ -256,6 +254,40 @@ class MockPlayerListTest
 		playerList.setLastLogin(uuid, 10L);
 
 		assertEquals(10, playerList.getLastLogin(uuid));
+	}
+
+	@Test
+	void hasPlayedBefore_NeverOnline_False()
+	{
+		assertFalse(playerList.hasPlayedBefore(UUID.randomUUID()));
+	}
+
+	@Test
+	void hasPlayedBefore_FirstJoin_False()
+	{
+		PlayerMock player = server.addPlayer();
+		assertFalse(playerList.hasPlayedBefore(player.getUniqueId()));
+	}
+
+	@Test
+	void hasPlayedBefore_SecondJoin_True()
+	{
+		PlayerMock player = server.addPlayer();
+		player.disconnect();
+		player.reconnect();
+
+		assertTrue(playerList.hasPlayedBefore(player.getUniqueId()));
+	}
+
+	@Test
+	void hasPlayedBefore_SecondJoin_Offline_True()
+	{
+		PlayerMock player = server.addPlayer();
+		player.disconnect();
+		player.reconnect();
+		player.disconnect();
+
+		assertTrue(playerList.hasPlayedBefore(player.getUniqueId()));
 	}
 
 }

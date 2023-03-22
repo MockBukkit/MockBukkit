@@ -10,6 +10,11 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * Mock implementation of a {@link Campfire}.
+ *
+ * @see TileStateMock
+ */
 public class CampfireMock extends TileStateMock implements Campfire
 {
 
@@ -20,18 +25,35 @@ public class CampfireMock extends TileStateMock implements Campfire
 	private int[] cookingTime = new int[MAX_SLOTS];
 	private boolean[] cookingDisabled = new boolean[MAX_SLOTS];
 
+	/**
+	 * Constructs a new {@link CampfireMock} for the provided {@link Material}.
+	 * Only supports materials in {@link Tag#CAMPFIRES}
+	 *
+	 * @param material The material this state is for.
+	 */
 	public CampfireMock(@NotNull Material material)
 	{
 		super(material);
 		checkType(material, Tag.CAMPFIRES);
 	}
 
+	/**
+	 * Constructs a new {@link CampfireMock} for the provided {@link Block}.
+	 * Only supports materials in {@link Tag#CAMPFIRES}
+	 *
+	 * @param block The block this state is for.
+	 */
 	protected CampfireMock(@NotNull Block block)
 	{
 		super(block);
 		checkType(block, Tag.CAMPFIRES);
 	}
 
+	/**
+	 * Constructs a new {@link CampfireMock} by cloning the data from an existing one.
+	 *
+	 * @param state The state to clone.
+	 */
 	protected CampfireMock(@NotNull CampfireMock state)
 	{
 		super(state);

@@ -1,0 +1,16 @@
+{
+	"default": {
+		"width": 0.35,
+		"height": 0.35,
+		"states": {
+			"semi_puffed": {
+				"width": 0.49,
+				"height": 0.49
+			},
+			"puffed": {
+				"width": 0.7,
+				"height": 0.7
+			}
+		}
+	}
+}

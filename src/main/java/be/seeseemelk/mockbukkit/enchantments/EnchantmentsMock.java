@@ -3,15 +3,19 @@ package be.seeseemelk.mockbukkit.enchantments;
 import com.google.common.base.Preconditions;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Used to keep track of all vanilla enchantments.
+ */
+@ApiStatus.Internal
 public final class EnchantmentsMock
 {
 
-	private EnchantmentsMock()
-	{
-	}
-
+	/**
+	 * Registers all vanilla enchantments.
+	 */
 	public static void registerDefaultEnchantments()
 	{
 		register("protection");
@@ -54,12 +58,22 @@ public final class EnchantmentsMock
 		register("swift_sneak");
 	}
 
+	/**
+	 * Registers an enchantment.
+	 *
+	 * @param name Name of the enchantment.
+	 */
 	private static void register(@NotNull String name)
 	{
 		Preconditions.checkNotNull(name, "Name cannot be null");
 		NamespacedKey key = NamespacedKey.minecraft(name);
 		if (Enchantment.getByKey(key) == null)
 			Enchantment.registerEnchantment(new EnchantmentMock(key, name));
+	}
+
+	private EnchantmentsMock()
+	{
+		throw new UnsupportedOperationException("Utility class");
 	}
 
 }

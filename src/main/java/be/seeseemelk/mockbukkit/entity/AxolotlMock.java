@@ -6,11 +6,17 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.Tag;
 import org.bukkit.entity.Axolotl;
+import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
+/**
+ * Mock implementation of an {@link Axolotl}.
+ *
+ * @see AnimalsMock
+ */
 public class AxolotlMock extends AnimalsMock implements Axolotl
 {
 
@@ -19,6 +25,12 @@ public class AxolotlMock extends AnimalsMock implements Axolotl
 
 	private boolean fromBucket = false;
 
+	/**
+	 * Constructs a new {@link AxolotlMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	public AxolotlMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
@@ -78,6 +90,12 @@ public class AxolotlMock extends AnimalsMock implements Axolotl
 	{
 		Preconditions.checkNotNull(stack, "ItemStack cannot be null");
 		return Tag.AXOLOTL_TEMPT_ITEMS.isTagged(stack.getType());
+	}
+	
+	@Override
+	public EntityType getType()
+	{
+		return EntityType.AXOLOTL;
 	}
 
 }

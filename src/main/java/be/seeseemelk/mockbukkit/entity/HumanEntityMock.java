@@ -10,7 +10,6 @@ import be.seeseemelk.mockbukkit.inventory.PlayerInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.PlayerInventoryViewMock;
 import be.seeseemelk.mockbukkit.inventory.SimpleInventoryViewMock;
 import com.google.common.base.Preconditions;
-import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -22,6 +21,7 @@ import org.bukkit.entity.FishHook;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Villager;
 import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
@@ -39,6 +39,12 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Mock implementation of a {@link HumanEntity}.
+ *
+ * @see LivingEntityMock
+ * @see PlayerMock
+ */
 public abstract class HumanEntityMock extends LivingEntityMock implements HumanEntity
 {
 
@@ -48,10 +54,20 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	private @Nullable ItemStack cursor = null;
 	private @NotNull GameMode gameMode = GameMode.SURVIVAL;
 	private @Nullable Location lastDeathLocation = new Location(new WorldMock(), 0, 0, 0);
+	/**
+	 * How much EXP this {@link HumanEntity} has.
+	 */
 	protected int expLevel = 0;
 	private float saturation = 5.0F;
 	private int foodLevel = 20;
+	private boolean sleeping;
 
+	/**
+	 * Constructs a new {@link HumanEntityMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	protected HumanEntityMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
@@ -122,7 +138,9 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	{
 		Preconditions.checkNotNull(inventory, "Inventory cannot be null");
 		closeInventory();
-		inventoryView = inventory;
+		if (!new InventoryOpenEvent(inventory).callEvent())
+			return;
+		this.inventoryView = inventory;
 	}
 
 	@Override
@@ -130,13 +148,19 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	{
 		AsyncCatcher.catchOp("open inventory");
 		Preconditions.checkNotNull(inventory, "Inventory cannot be null");
+		InventoryView prev = this.inventoryView;
 		closeInventory();
-		if (inventory instanceof InventoryMock inventoryMock)
+		InventoryView newView = new PlayerInventoryViewMock(this, inventory);
+		if (new InventoryOpenEvent(newView).callEvent())
 		{
-			inventoryMock.addViewers(this);
+			if (inventory instanceof InventoryMock inventoryMock)
+			{
+				inventoryMock.addViewers(this);
+			}
+			this.inventoryView = newView;
 		}
-		inventoryView = new PlayerInventoryViewMock(this, inventory);
-		return inventoryView;
+
+		return this.inventoryView == prev ? null : this.inventoryView;
 	}
 
 	@Override
@@ -188,6 +212,20 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 
 	@Override
 	public boolean setWindowProperty(@NotNull InventoryView.Property prop, int value)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getEnchantmentSeed()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setEnchantmentSeed(int seed)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -306,8 +344,17 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	@Override
 	public boolean isSleeping()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.sleeping;
+	}
+
+	/**
+	 * Set whether this entity is slumbering.
+	 *
+	 * @param sleeping If this entity is slumbering
+	 */
+	public void setSleeping(boolean sleeping)
+	{
+		this.sleeping = sleeping;
 	}
 
 	@Override

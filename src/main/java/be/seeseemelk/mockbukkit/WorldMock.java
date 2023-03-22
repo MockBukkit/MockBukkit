@@ -15,7 +15,9 @@ import be.seeseemelk.mockbukkit.entity.CodMock;
 import be.seeseemelk.mockbukkit.entity.CowMock;
 import be.seeseemelk.mockbukkit.entity.CreeperMock;
 import be.seeseemelk.mockbukkit.entity.DonkeyMock;
+import be.seeseemelk.mockbukkit.entity.DragonFireballMock;
 import be.seeseemelk.mockbukkit.entity.EggMock;
+import be.seeseemelk.mockbukkit.entity.ElderGuardianMock;
 import be.seeseemelk.mockbukkit.entity.EndermanMock;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
@@ -26,24 +28,30 @@ import be.seeseemelk.mockbukkit.entity.FrogMock;
 import be.seeseemelk.mockbukkit.entity.GhastMock;
 import be.seeseemelk.mockbukkit.entity.GiantMock;
 import be.seeseemelk.mockbukkit.entity.GoatMock;
+import be.seeseemelk.mockbukkit.entity.GuardianMock;
 import be.seeseemelk.mockbukkit.entity.HorseMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
+import be.seeseemelk.mockbukkit.entity.LargeFireballMock;
 import be.seeseemelk.mockbukkit.entity.LlamaMock;
 import be.seeseemelk.mockbukkit.entity.MobMock;
 import be.seeseemelk.mockbukkit.entity.MuleMock;
 import be.seeseemelk.mockbukkit.entity.MushroomCowMock;
 import be.seeseemelk.mockbukkit.entity.PigMock;
+import be.seeseemelk.mockbukkit.entity.PolarBearMock;
+import be.seeseemelk.mockbukkit.entity.PoweredMinecartMock;
 import be.seeseemelk.mockbukkit.entity.PufferFishMock;
 import be.seeseemelk.mockbukkit.entity.SalmonMock;
 import be.seeseemelk.mockbukkit.entity.SheepMock;
 import be.seeseemelk.mockbukkit.entity.SkeletonHorseMock;
 import be.seeseemelk.mockbukkit.entity.SkeletonMock;
+import be.seeseemelk.mockbukkit.entity.SmallFireballMock;
 import be.seeseemelk.mockbukkit.entity.SpiderMock;
 import be.seeseemelk.mockbukkit.entity.StrayMock;
 import be.seeseemelk.mockbukkit.entity.TadpoleMock;
 import be.seeseemelk.mockbukkit.entity.TropicalFishMock;
 import be.seeseemelk.mockbukkit.entity.WardenMock;
 import be.seeseemelk.mockbukkit.entity.WitherSkeletonMock;
+import be.seeseemelk.mockbukkit.entity.WitherSkullMock;
 import be.seeseemelk.mockbukkit.entity.WolfMock;
 import be.seeseemelk.mockbukkit.entity.ZombieHorseMock;
 import be.seeseemelk.mockbukkit.entity.ZombieMock;
@@ -57,7 +65,6 @@ import io.papermc.paper.world.MoonPhase;
 import org.bukkit.BlockChangeDelegate;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
-import org.bukkit.ChunkSnapshot;
 import org.bukkit.Difficulty;
 import org.bukkit.Effect;
 import org.bukkit.FluidCollisionMode;
@@ -98,7 +105,9 @@ import org.bukkit.entity.Cod;
 import org.bukkit.entity.Cow;
 import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Donkey;
+import org.bukkit.entity.DragonFireball;
 import org.bukkit.entity.Egg;
+import org.bukkit.entity.ElderGuardian;
 import org.bukkit.entity.Enderman;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -112,10 +121,12 @@ import org.bukkit.entity.Ghast;
 import org.bukkit.entity.Giant;
 import org.bukkit.entity.Goat;
 import org.bukkit.entity.Golem;
+import org.bukkit.entity.Guardian;
 import org.bukkit.entity.Hanging;
 import org.bukkit.entity.Horse;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.ItemFrame;
+import org.bukkit.entity.LargeFireball;
 import org.bukkit.entity.LeashHitch;
 import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.LivingEntity;
@@ -125,6 +136,7 @@ import org.bukkit.entity.Mule;
 import org.bukkit.entity.MushroomCow;
 import org.bukkit.entity.Pig;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.PolarBear;
 import org.bukkit.entity.Projectile;
 import org.bukkit.entity.PufferFish;
 import org.bukkit.entity.Salmon;
@@ -132,6 +144,7 @@ import org.bukkit.entity.Sheep;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.entity.SkeletonHorse;
 import org.bukkit.entity.Slime;
+import org.bukkit.entity.SmallFireball;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.entity.Spider;
 import org.bukkit.entity.Stray;
@@ -140,9 +153,11 @@ import org.bukkit.entity.TropicalFish;
 import org.bukkit.entity.Warden;
 import org.bukkit.entity.WaterMob;
 import org.bukkit.entity.WitherSkeleton;
+import org.bukkit.entity.WitherSkull;
 import org.bukkit.entity.Wolf;
 import org.bukkit.entity.Zombie;
 import org.bukkit.entity.ZombieHorse;
+import org.bukkit.entity.minecart.PoweredMinecart;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.entity.ItemSpawnEvent;
@@ -183,7 +198,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
- * A mock world object. Note that it is made to be as simple as possible. It is by no means an efficient implementation.
+ * Mock implementation of a {@link World}.
  */
 public class WorldMock implements World
 {
@@ -281,6 +296,11 @@ public class WorldMock implements World
 		gameRules.put(GameRule.SPECTATORS_GENERATE_CHUNKS, true);
 	}
 
+	/**
+	 * Creates a new mock world.
+	 *
+	 * @param creator The {@link WorldCreator} to use to create the world.
+	 */
 	public WorldMock(@NotNull WorldCreator creator)
 	{
 		this();
@@ -432,6 +452,12 @@ public class WorldMock implements World
 		return getBlockAt(new Coordinate(x, y, z));
 	}
 
+	/**
+	 * Gets the block at a coordinate.
+	 *
+	 * @param coordinate The coordinate at which to get the block.
+	 * @return The block.
+	 */
 	public @NotNull BlockMock getBlockAt(@NotNull Coordinate coordinate)
 	{
 		if (blocks.containsKey(coordinate))
@@ -840,18 +866,29 @@ public class WorldMock implements World
 		return this.spawn(location, clazz, function, CreatureSpawnEvent.SpawnReason.CUSTOM, randomizeData);
 	}
 
+	@Override
 	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz, Consumer<T> function, CreatureSpawnEvent.@NotNull SpawnReason reason) throws IllegalArgumentException
 	{
 		return this.spawn(location, clazz, function, reason, true);
 	}
 
+	/**
+	 * Spawns an entity.
+	 *
+	 * @param location      The location to spawn the entity at.
+	 * @param clazz         The class of entity to spawn. This should be the class of the Bukkit interface, not the mock.
+	 * @param function      A function to call once the entity has been spawned.
+	 * @param reason        The reason for spawning the entity.
+	 * @param randomizeData Whether data should be randomized. Currently, does nothing.
+	 * @param <T>           The entity type.
+	 * @return The spawned entity.
+	 */
 	@SuppressWarnings("unchecked")
-	public <T extends Entity> @NotNull T spawn(@Nullable Location location, @Nullable Class<T> clazz, @Nullable Consumer<T> function, CreatureSpawnEvent.@NotNull SpawnReason reason, boolean randomizeData) throws IllegalArgumentException
+	public <T extends Entity> @NotNull T spawn(@Nullable Location location, @Nullable Class<T> clazz, @Nullable Consumer<T> function, CreatureSpawnEvent.@NotNull SpawnReason reason, boolean randomizeData)
 	{
-		if (location == null || clazz == null)
-		{
-			throw new IllegalArgumentException("Location or entity class cannot be null");
-		}
+		Preconditions.checkNotNull(location, "Location cannot be null");
+		Preconditions.checkNotNull(clazz, "Class cannot be null");
+		Preconditions.checkNotNull(reason, "Reason cannot be null");
 
 		EntityMock entity = this.mockEntity(location, clazz, randomizeData);
 
@@ -1107,6 +1144,38 @@ public class WorldMock implements World
 		else if (clazz == Pig.class)
 		{
 			return new PigMock(server, UUID.randomUUID());
+		}
+		else if (clazz == ElderGuardian.class)
+		{
+			return new ElderGuardianMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Guardian.class)
+		{
+			return new GuardianMock(server, UUID.randomUUID());
+		}
+		else if (clazz == PolarBear.class)
+		{
+			return new PolarBearMock(server, UUID.randomUUID());
+		}
+		else if (clazz == SmallFireball.class)
+		{
+			return new SmallFireballMock(server, UUID.randomUUID());
+		}
+		else if (clazz == LargeFireball.class)
+		{
+			return new LargeFireballMock(server, UUID.randomUUID());
+		}
+		else if (clazz == DragonFireball.class)
+		{
+			return new DragonFireballMock(server, UUID.randomUUID());
+		}
+		else if (clazz == WitherSkull.class)
+		{
+			return new WitherSkullMock(server, UUID.randomUUID());
+		}
+		else if (clazz == PoweredMinecart.class)
+		{
+			return new PoweredMinecartMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}
@@ -1864,6 +1933,19 @@ public class WorldMock implements World
 	}
 
 	@Override
+	public void playSound(@NotNull Entity entity, @NotNull String sound, float volume, float pitch)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void playSound(@NotNull Entity entity, @NotNull String sound, @NotNull SoundCategory category, float volume, float pitch)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+	@Override
 	public void playSound(@Nullable Entity entity, @Nullable Sound sound, @Nullable SoundCategory category, float volume, float pitch)
 	{
 		if (entity == null || entity.getWorld() != this || sound == null || category == null)
@@ -2449,6 +2531,11 @@ public class WorldMock implements World
 		biomes.put(new Coordinate(x, y, z), bio);
 	}
 
+	/**
+	 * Gets a map of what biome is at each coordinate.
+	 *
+	 * @return A clone of the internal biome map.
+	 */
 	protected @NotNull Map<Coordinate, Biome> getBiomeMap()
 	{
 		return new HashMap<>(biomes);

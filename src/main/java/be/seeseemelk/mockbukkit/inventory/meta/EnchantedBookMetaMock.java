@@ -9,21 +9,28 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * This {@link ItemMetaMock} mocks the implementation of {@link EnchantmentStorageMeta}.
- * It keeps an internal {@link HashMap} for all stored {@link Enchantment Enchantments}.
+ * Mock implementation of an {@link EnchantmentStorageMeta}.
  *
- * @author TheBusyBiscuit
+ * @see ItemMetaMock
  */
 public class EnchantedBookMetaMock extends ItemMetaMock implements EnchantmentStorageMeta
 {
 
 	private @NotNull Map<Enchantment, Integer> storedEnchantments = new HashMap<>();
 
+	/**
+	 * Constructs a new {@link EnchantedBookMetaMock}.
+	 */
 	public EnchantedBookMetaMock()
 	{
 		super();
 	}
 
+	/**
+	 * Constructs a new {@link EnchantedBookMetaMock}, cloning the data from another.
+	 *
+	 * @param meta The meta to clone.
+	 */
 	public EnchantedBookMetaMock(@NotNull EnchantmentStorageMeta meta)
 	{
 		super(meta);

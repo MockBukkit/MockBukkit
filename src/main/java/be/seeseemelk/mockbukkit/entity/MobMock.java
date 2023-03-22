@@ -15,12 +15,24 @@ import org.jetbrains.annotations.Nullable;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Mock implementation of a {@link Mob}.
+ *
+ * @see LivingEntityMock
+ */
 public abstract class MobMock extends LivingEntityMock implements Mob
 {
 
 	private boolean aware = true;
 	private boolean leftHanded;
+	private LivingEntity target;
 
+	/**
+	 * Constructs a new {@link MobMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	protected MobMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
@@ -99,16 +111,14 @@ public abstract class MobMock extends LivingEntityMock implements Mob
 	@Override
 	public void setTarget(@Nullable LivingEntity target)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.target = target;
 	}
 
 	@Nullable
 	@Override
 	public LivingEntity getTarget()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.target;
 	}
 
 	@Override

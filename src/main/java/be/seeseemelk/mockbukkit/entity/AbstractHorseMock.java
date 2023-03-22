@@ -12,6 +12,11 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
+/**
+ * Mock implementation of an {@link AbstractHorse}.
+ *
+ * @see AnimalsMock
+ */
 public abstract class AbstractHorseMock extends AnimalsMock implements AbstractHorse
 {
 
@@ -24,6 +29,12 @@ public abstract class AbstractHorseMock extends AnimalsMock implements AbstractH
 	private boolean isMouthOpen;
 	private boolean rearing;
 
+	/**
+	 * Constructs a new {@link AbstractHorseMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	protected AbstractHorseMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
@@ -119,6 +130,11 @@ public abstract class AbstractHorseMock extends AnimalsMock implements AbstractH
 		}
 	}
 
+	/**
+	 * Sets the return value of {@link #getOwner()} and {@link #getOwnerUniqueId()}.
+	 *
+	 * @param uuid The UUID to set.
+	 */
 	public void setOwnerUUID(@Nullable UUID uuid)
 	{
 		this.owner = uuid;

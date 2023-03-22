@@ -42,6 +42,15 @@ class ChunkTest
 	}
 
 	@Test
+	void getChunkKey()
+	{
+		long chunkKey = 10L | (20L << 32); // x = 10, y = 20
+		ChunkMock chunk = world.getChunkAt(10, 20);
+		assertEquals(chunkKey, chunk.getChunkKey());
+		assertEquals(chunk, world.getChunkAt(chunkKey));
+	}
+
+	@Test
 	void getWorld_AnyChunkFromWorld_ExactWorldReference()
 	{
 		assertSame(world, world.getChunkAt(0, 0).getWorld());

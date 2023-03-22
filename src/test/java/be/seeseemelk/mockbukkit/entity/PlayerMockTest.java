@@ -6,11 +6,9 @@ import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.TestPlugin;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.BlockMock;
-import be.seeseemelk.mockbukkit.inventory.ChestInventoryMock;
+import be.seeseemelk.mockbukkit.entity.data.EntityState;
 import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
-import be.seeseemelk.mockbukkit.inventory.InventoryViewMock;
-import be.seeseemelk.mockbukkit.inventory.SimpleInventoryViewMock;
 import be.seeseemelk.mockbukkit.map.MapViewMock;
 import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 import com.google.common.io.ByteArrayDataOutput;
@@ -63,7 +61,6 @@ import org.bukkit.event.world.GenericGameEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.map.MapCanvas;
 import org.bukkit.map.MapRenderer;
@@ -77,7 +74,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.EnumSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.opentest4j.AssertionFailedError;
 
 import java.net.InetSocketAddress;
@@ -91,6 +90,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -309,41 +309,6 @@ class PlayerMockTest
 	void getAttribute_HealthAttribute_IsMaximumHealth()
 	{
 		assertEquals(20.0, player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getDefaultValue(), 0);
-	}
-
-	@Test
-	void getOpenInventory_NoneOpened_Null()
-	{
-		InventoryView view = player.getOpenInventory();
-		assertNotNull(player.getOpenInventory());
-		assertEquals(InventoryType.CRAFTING, view.getType());
-	}
-
-	@Test
-	void getOpenInventory_InventorySet_InventorySet()
-	{
-		InventoryViewMock inventory = new SimpleInventoryViewMock();
-		player.openInventory(inventory);
-		assertSame(inventory, player.getOpenInventory());
-	}
-
-	@Test
-	void openInventory_NothingSet_InventoryViewSet()
-	{
-		InventoryMock inventory = new ChestInventoryMock(null, 9);
-		InventoryView view = player.openInventory(inventory);
-		assertNotNull(view);
-		assertSame(player.getInventory(), view.getBottomInventory());
-		assertSame(inventory, view.getTopInventory());
-		assertSame(player.getOpenInventory(), view);
-	}
-
-	@Test
-	void closeInventory_NoneInventory_CraftingView()
-	{
-		InventoryView view = player.getOpenInventory();
-		assertNotNull(view);
-		assertEquals(InventoryType.CRAFTING, view.getType());
 	}
 
 	@Test
@@ -1065,18 +1030,6 @@ class PlayerMockTest
 	}
 
 	@Test
-	void testPlayNote_NewMethod()
-	{
-		int note = 10;
-		player.playNote(player.getEyeLocation(), Instrument.BANJO, new Note(note));
-		player.assertSoundHeard(Sound.BLOCK_NOTE_BLOCK_BANJO, audio ->
-		{
-			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
-					&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
-		});
-	}
-
-	@Test
 	void testPlayNote_OldMethod()
 	{
 		int note = 10;
@@ -1086,18 +1039,6 @@ class PlayerMockTest
 			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
 					&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
 		});
-	}
-
-	@Test
-	void testCloseInventoryEvenFired()
-	{
-		Inventory inv = server.createInventory(null, 36);
-		player.openInventory(inv);
-		player.setItemOnCursor(new ItemStack(Material.PUMPKIN));
-		player.closeInventory();
-		server.getPluginManager().assertEventFired(InventoryCloseEvent.class,
-				e -> e.getPlayer() == player && e.getInventory() == inv);
-		assertTrue(player.getItemOnCursor().getType().isAir());
 	}
 
 	@Test
@@ -1559,10 +1500,19 @@ class PlayerMockTest
 	@Test
 	void testPlayerSendEquipmentChange()
 	{
-		assertDoesNotThrow(() ->
-		{
-			player.sendEquipmentChange(player, EquipmentSlot.CHEST, new ItemStack(Material.DIAMOND_CHESTPLATE));
-		});
+		assertDoesNotThrow(() -> player.sendEquipmentChange(player, EquipmentSlot.CHEST, new ItemStack(Material.DIAMOND_CHESTPLATE)));
+	}
+
+	@Test
+	void testPlayerSendEquipmentChange_Map()
+	{
+		assertDoesNotThrow(() -> player.sendEquipmentChange(player, Map.of(EquipmentSlot.CHEST, new ItemStack(Material.DIAMOND_CHESTPLATE))));
+	}
+
+	@Test
+	void showWinScreen_DoesntThrow()
+	{
+		assertDoesNotThrow(() -> player.showWinScreen());
 	}
 
 	@Test
@@ -1906,7 +1856,6 @@ class PlayerMockTest
 	@Test
 	void testAssertInventoryViewDefault()
 	{
-		;
 		player.assertInventoryView(InventoryType.CRAFTING);
 	}
 
@@ -1994,174 +1943,6 @@ class PlayerMockTest
 	}
 
 	@Test
-	void testPlayNoteBassDrum()
-	{
-		int note = 10;
-		player.playNote(player.getEyeLocation(), Instrument.BASS_DRUM, new Note(note));
-		player.assertSoundHeard(Sound.BLOCK_NOTE_BLOCK_BASEDRUM, audio ->
-		{
-			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
-					&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
-		});
-	}
-
-	@Test
-	void testPlayNoteBassGuitar()
-	{
-		int note = 10;
-		player.playNote(player.getEyeLocation(), Instrument.BASS_GUITAR, new Note(note));
-		player.assertSoundHeard(Sound.BLOCK_NOTE_BLOCK_BASS, audio ->
-		{
-			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
-					&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
-		});
-	}
-
-	@Test
-	void testPlayNoteBell()
-	{
-		int note = 10;
-		player.playNote(player.getEyeLocation(), Instrument.BELL, new Note(note));
-		player.assertSoundHeard(Sound.BLOCK_NOTE_BLOCK_BELL, audio ->
-		{
-			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
-					&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
-		});
-	}
-
-	@Test
-	void testPlayNoteBit()
-	{
-		int note = 10;
-		player.playNote(player.getEyeLocation(), Instrument.BIT, new Note(note));
-		player.assertSoundHeard(Sound.BLOCK_NOTE_BLOCK_BIT, audio ->
-		{
-			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
-					&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
-		});
-	}
-
-	@Test
-	void testPlayNoteBassChime()
-	{
-		int note = 10;
-		player.playNote(player.getEyeLocation(), Instrument.CHIME, new Note(note));
-		player.assertSoundHeard(Sound.BLOCK_NOTE_BLOCK_CHIME, audio ->
-		{
-			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
-					&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
-		});
-	}
-
-	@Test
-	void testPlayNoteCowbell()
-	{
-		int note = 10;
-		player.playNote(player.getEyeLocation(), Instrument.COW_BELL, new Note(note));
-		player.assertSoundHeard(Sound.BLOCK_NOTE_BLOCK_COW_BELL, audio ->
-		{
-			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
-					&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
-		});
-	}
-
-	@Test
-	void testPlayNoteDidgeridoo()
-	{
-		int note = 10;
-		player.playNote(player.getEyeLocation(), Instrument.DIDGERIDOO, new Note(note));
-		player.assertSoundHeard(Sound.BLOCK_NOTE_BLOCK_DIDGERIDOO, audio ->
-		{
-			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
-					&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
-		});
-	}
-
-	@Test
-	void testPlayNoteFlute()
-	{
-		int note = 10;
-		player.playNote(player.getEyeLocation(), Instrument.FLUTE, new Note(note));
-		player.assertSoundHeard(Sound.BLOCK_NOTE_BLOCK_FLUTE, audio ->
-		{
-			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
-					&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
-		});
-	}
-
-	@Test
-	void testPlayNoteGuitar()
-	{
-		int note = 10;
-		player.playNote(player.getEyeLocation(), Instrument.GUITAR, new Note(note));
-		player.assertSoundHeard(Sound.BLOCK_NOTE_BLOCK_GUITAR, audio ->
-		{
-			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
-					&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
-		});
-	}
-
-	@Test
-	void testPlayNoteIronXylophone()
-	{
-		int note = 10;
-		player.playNote(player.getEyeLocation(), Instrument.IRON_XYLOPHONE, new Note(note));
-		player.assertSoundHeard(Sound.BLOCK_NOTE_BLOCK_IRON_XYLOPHONE, audio ->
-		{
-			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
-					&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
-		});
-	}
-
-	@Test
-	void testPlayNotePling()
-	{
-		int note = 10;
-		player.playNote(player.getEyeLocation(), Instrument.PLING, new Note(note));
-		player.assertSoundHeard(Sound.BLOCK_NOTE_BLOCK_PLING, audio ->
-		{
-			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
-					&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
-		});
-	}
-
-	@Test
-	void testPlayNoteSnareDrum()
-	{
-		int note = 10;
-		player.playNote(player.getEyeLocation(), Instrument.SNARE_DRUM, new Note(note));
-		player.assertSoundHeard(Sound.BLOCK_NOTE_BLOCK_SNARE, audio ->
-		{
-			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
-					&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
-		});
-	}
-
-	@Test
-	void testPlayNoteSticks()
-	{
-		int note = 10;
-		player.playNote(player.getEyeLocation(), Instrument.STICKS, new Note(note));
-		player.assertSoundHeard(Sound.BLOCK_NOTE_BLOCK_HAT, audio ->
-		{
-			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
-					&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
-		});
-	}
-
-	@Test
-	void testPlayNoteXylophone()
-	{
-		int note = 10;
-		player.playNote(player.getEyeLocation(), Instrument.XYLOPHONE, new Note(note));
-		player.assertSoundHeard(Sound.BLOCK_NOTE_BLOCK_XYLOPHONE, audio ->
-		{
-			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
-					&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
-		});
-	}
-
-	@Test
 	void testPlaySoundWithLocationSoundVolumePitch()
 	{
 		Sound sound = Sound.ENTITY_SLIME_SQUISH;
@@ -2232,11 +2013,75 @@ class PlayerMockTest
 	}
 
 	@Test
-	void hasPlayedBefore_AddedToServer_True()
+	void getWalkSpeed()
+	{
+		assertEquals(0.2f, player.getWalkSpeed());
+	}
+
+	@Test
+	void setWalkSpeed()
+	{
+		player.setWalkSpeed(0.4f);
+		assertEquals(0.4f, player.getWalkSpeed());
+	}
+
+	@Test
+	void setWalkSpeed_TooLow_ThrowsException()
+	{
+		assertThrows(IllegalArgumentException.class, () -> player.setWalkSpeed(-1.1f));
+	}
+
+	@Test
+	void setWalkSpeed_TooHigh_ThrowsException()
+	{
+		assertThrows(IllegalArgumentException.class, () -> player.setWalkSpeed(1.1f));
+	}
+
+	@Test
+	void isHealthScaled()
+	{
+		assertFalse(player.isHealthScaled());
+	}
+
+	@Test
+	void setHealthScaled()
+	{
+		player.setHealthScaled(true);
+		assertTrue(player.isHealthScaled());
+	}
+
+	@Test
+	void getHealthScale()
+	{
+		assertEquals(20d, player.getHealthScale());
+	}
+
+	@Test
+	void setHealthScale()
+	{
+		player.setHealthScale(10d);
+		assertEquals(10d, player.getHealthScale());
+		assertTrue(player.isHealthScaled());
+	}
+
+	@Test
+	void setHealthScale_Negative_ThrowsException()
+	{
+		assertThrows(IllegalArgumentException.class, () -> player.setHealthScale(-0.1d));
+	}
+
+	@Test
+	void setHealthScale_NaN_ThrowsException()
+	{
+		assertThrows(IllegalArgumentException.class, () -> player.setHealthScale(Double.NaN));
+	}
+
+	@Test
+	void hasPlayedBefore_AddedToServer_False()
 	{
 		PlayerMock player = server.addPlayer();
 
-		assertTrue(player.hasPlayedBefore());
+		assertFalse(player.hasPlayedBefore());
 	}
 
 	@Test
@@ -2247,4 +2092,91 @@ class PlayerMockTest
 		assertFalse(player.hasPlayedBefore());
 	}
 
+	@Test
+	void testSetOpFalse()
+	{
+		PlayerMock player = server.addPlayer();
+		player.setOp(false);
+		assertFalse(player.isOp());
+	}
+
+	@Test
+	void testSetOpTrue()
+	{
+		PlayerMock player = server.addPlayer();
+		player.setOp(true);
+		assertTrue(player.isOp());
+	}
+
+	@Test
+	void testGetEntityStateDefault()
+	{
+		PlayerMock player = server.addPlayer();
+		assertEquals(EntityState.DEFAULT, player.getEntityState());
+	}
+
+	@Test
+	void testGetEntityStateSneaking()
+	{
+		PlayerMock player = server.addPlayer();
+		player.setSneaking(true);
+		assertEquals(EntityState.SNEAKING, player.getEntityState());
+	}
+
+	@Test
+	void testGetEntityStateSwimming()
+	{
+		PlayerMock player = server.addPlayer();
+		player.setSwimming(true);
+		assertEquals(EntityState.SWIMMING, player.getEntityState());
+	}
+
+	@Test
+	void testGetEntityStateFlying()
+	{
+		PlayerMock player = server.addPlayer();
+		player.setGliding(true);
+		assertEquals(EntityState.GLIDING, player.getEntityState());
+	}
+
+	@ParameterizedTest
+	@MethodSource("provideInstrument")
+	void testPlayNote(Instrument instrument, Sound sound)
+	{
+		int note = 10;
+		player.playNote(player.getEyeLocation(), instrument, new Note(note));
+		player.assertSoundHeard(sound, audio ->
+		{
+			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
+					&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
+		});
+	}
+
+	public static Stream<Arguments> provideInstrument()
+	{
+		return Stream.of(
+				Arguments.of(Instrument.CUSTOM_HEAD, Sound.UI_BUTTON_CLICK),
+				Arguments.of(Instrument.PIGLIN, Sound.BLOCK_NOTE_BLOCK_IMITATE_PIGLIN),
+				Arguments.of(Instrument.WITHER_SKELETON, Sound.BLOCK_NOTE_BLOCK_IMITATE_WITHER_SKELETON),
+				Arguments.of(Instrument.DRAGON, Sound.BLOCK_NOTE_BLOCK_IMITATE_ENDER_DRAGON),
+				Arguments.of(Instrument.CREEPER, Sound.BLOCK_NOTE_BLOCK_IMITATE_CREEPER),
+				Arguments.of(Instrument.SKELETON, Sound.BLOCK_NOTE_BLOCK_IMITATE_SKELETON),
+				Arguments.of(Instrument.ZOMBIE, Sound.BLOCK_NOTE_BLOCK_IMITATE_ZOMBIE),
+				Arguments.of(Instrument.XYLOPHONE, Sound.BLOCK_NOTE_BLOCK_XYLOPHONE),
+				Arguments.of(Instrument.BANJO, Sound.BLOCK_NOTE_BLOCK_BANJO),
+				Arguments.of(Instrument.BASS_DRUM, Sound.BLOCK_NOTE_BLOCK_BASEDRUM),
+				Arguments.of(Instrument.BASS_GUITAR, Sound.BLOCK_NOTE_BLOCK_BASS),
+				Arguments.of(Instrument.BELL, Sound.BLOCK_NOTE_BLOCK_BELL),
+				Arguments.of(Instrument.BIT, Sound.BLOCK_NOTE_BLOCK_BIT),
+				Arguments.of(Instrument.CHIME, Sound.BLOCK_NOTE_BLOCK_CHIME),
+				Arguments.of(Instrument.COW_BELL, Sound.BLOCK_NOTE_BLOCK_COW_BELL),
+				Arguments.of(Instrument.DIDGERIDOO, Sound.BLOCK_NOTE_BLOCK_DIDGERIDOO),
+				Arguments.of(Instrument.FLUTE, Sound.BLOCK_NOTE_BLOCK_FLUTE),
+				Arguments.of(Instrument.GUITAR, Sound.BLOCK_NOTE_BLOCK_GUITAR),
+				Arguments.of(Instrument.IRON_XYLOPHONE, Sound.BLOCK_NOTE_BLOCK_IRON_XYLOPHONE),
+				Arguments.of(Instrument.PLING, Sound.BLOCK_NOTE_BLOCK_PLING),
+				Arguments.of(Instrument.SNARE_DRUM, Sound.BLOCK_NOTE_BLOCK_SNARE),
+				Arguments.of(Instrument.STICKS, Sound.BLOCK_NOTE_BLOCK_HAT)
+				);
+	}
 }

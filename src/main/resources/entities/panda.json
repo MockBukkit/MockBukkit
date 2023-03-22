@@ -1,0 +1,10 @@
+{
+	"default":{
+		"height":1.25,
+		"width":1.3
+	},
+	"baby":{
+		"height":0.625,
+		"width":0.65
+	}
+}

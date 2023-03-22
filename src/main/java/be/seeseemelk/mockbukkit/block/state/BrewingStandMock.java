@@ -9,24 +9,46 @@ import org.bukkit.block.BrewingStand;
 import org.bukkit.inventory.BrewerInventory;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Mock implementation of a {@link BrewingStand}.
+ *
+ * @see ContainerMock
+ */
 public class BrewingStandMock extends ContainerMock implements BrewingStand
 {
 
 	private int brewingTime;
 	private int fuelLevel;
 
+	/**
+	 * Constructs a new {@link BrewingStandMock} for the provided {@link Material}.
+	 * Only supports {@link Material#BREWING_STAND}
+	 *
+	 * @param material The material this state is for.
+	 */
 	public BrewingStandMock(@NotNull Material material)
 	{
 		super(material);
 		checkType(material, Material.BREWING_STAND);
 	}
 
+	/**
+	 * Constructs a new {@link BrewingStandMock} for the provided {@link Block}.
+	 * Only supports {@link Material#BREWING_STAND}
+	 *
+	 * @param block The block this state is for.
+	 */
 	protected BrewingStandMock(@NotNull Block block)
 	{
 		super(block);
 		checkType(block, Material.BREWING_STAND);
 	}
 
+	/**
+	 * Constructs a new {@link BrewingStandMock} by cloning the data from an existing one.
+	 *
+	 * @param state The state to clone.
+	 */
 	protected BrewingStandMock(@NotNull BrewingStandMock state)
 	{
 		super(state);
