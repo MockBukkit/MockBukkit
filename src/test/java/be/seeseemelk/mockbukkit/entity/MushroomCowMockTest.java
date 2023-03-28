@@ -19,7 +19,6 @@ import org.bukkit.event.entity.EntityTransformEvent;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
@@ -197,8 +196,6 @@ class MushroomCowMockTest
 	@Test
 	void shear_EntityTransformEvent_Cancelled()
 	{
-		mushroom.shear();
-
 		server.getPluginManager().registerEvents(new Listener()
 		{
 			@EventHandler
@@ -207,6 +204,8 @@ class MushroomCowMockTest
 				e.setCancelled(true);
 			}
 		}, MockBukkit.createMockPlugin());
+
+		mushroom.shear();
 
 		assertTrue(mushroom.isValid());
 		List<Cow> cows = List.copyOf(mushroom.getWorld().getEntitiesByClass(Cow.class));
