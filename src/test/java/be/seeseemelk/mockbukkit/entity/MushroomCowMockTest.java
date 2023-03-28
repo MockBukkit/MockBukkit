@@ -195,7 +195,6 @@ class MushroomCowMockTest
 	}
 
 	@Test
-	@Disabled("Plugin loading is broken")
 	void shear_EntityTransformEvent_Cancelled()
 	{
 		mushroom.shear();

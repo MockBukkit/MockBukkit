@@ -19,3 +19,5 @@ rootProject.name = 'MockBukkit-' + gradle.ext.apiVersion
   The Java version we are building against.
 */
 gradle.ext.javaVersion = 17
+
+includeBuild("extra/TestPlugin")
