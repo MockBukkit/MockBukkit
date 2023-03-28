@@ -7,6 +7,7 @@ import org.bukkit.block.BlockState;
 import org.bukkit.block.Jukebox;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.JukeboxInventory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -118,17 +119,16 @@ public class JukeboxMock extends TileStateMock implements Jukebox
 	}
 
 	@Override
-	public @NotNull Inventory getInventory()
+	public @NotNull JukeboxInventory getInventory()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public @NotNull Inventory getSnapshotInventory()
+	public @NotNull JukeboxInventory getSnapshotInventory()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
 }
