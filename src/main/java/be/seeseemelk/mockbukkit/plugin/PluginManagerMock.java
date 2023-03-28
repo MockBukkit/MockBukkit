@@ -15,6 +15,7 @@ import org.bukkit.command.PluginCommand;
 import org.bukkit.command.PluginCommandUtils;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.Event;
+import org.bukkit.event.EventException;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
@@ -543,8 +544,9 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 		{
 			registration.callEvent(event);
 		}
-		catch (Exception ex)
+		catch (EventException eventException)
 		{
+			Throwable ex = eventException.getCause();
 			if (!(event instanceof ServerExceptionEvent))
 			{ // Don't cause an endless loop
 				String msg = "Could not pass event " + event.getEventName() + " to " + registration.getPlugin().getDescription().getFullName();
