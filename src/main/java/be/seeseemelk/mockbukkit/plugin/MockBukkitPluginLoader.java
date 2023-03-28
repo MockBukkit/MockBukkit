@@ -12,6 +12,7 @@ import org.bukkit.plugin.PluginLoader;
 import org.bukkit.plugin.RegisteredListener;
 import org.bukkit.plugin.UnknownDependencyException;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.plugin.java.JavaPluginLoader;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -48,8 +49,7 @@ public class MockBukkitPluginLoader implements PluginLoader
 			@NotNull Plugin plugin
 	)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return new JavaPluginLoader(plugin.getServer()).createRegisteredListeners(listener, plugin);
 	}
 
 	@Override
