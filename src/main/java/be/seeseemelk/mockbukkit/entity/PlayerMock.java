@@ -104,6 +104,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -2699,20 +2700,39 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	@SuppressWarnings("UnstableApiUsage")
 	public boolean teleport(@NotNull Location location, @NotNull PlayerTeleportEvent.TeleportCause cause,
-							TeleportFlag... flags)
+							TeleportFlag @NotNull ... flags)
 	{
 		Preconditions.checkNotNull(location, "Location cannot be null");
 		Preconditions.checkNotNull(location.getWorld(), "World cannot be null");
 		Preconditions.checkNotNull(cause, "Cause cannot be null");
 
-		boolean ignorePassengers = Arrays.stream(flags)
-				.anyMatch(flag -> flag == TeleportFlag.EntityState.RETAIN_PASSENGERS);
+		Set<TeleportFlag.Relative> relativeArguments = EnumSet.noneOf(TeleportFlag.Relative.class);
+		Set<TeleportFlag> allFlags = new HashSet<>();
+		for (TeleportFlag flag : flags)
+		{
+			if (flag instanceof TeleportFlag.Relative relativeTeleportFlag)
+			{
+				relativeArguments.add(relativeTeleportFlag);
+			}
+			allFlags.add(flag);
+		}
 
-		boolean dismount = Arrays.stream(flags)
-				.anyMatch(flag -> flag == TeleportFlag.EntityState.RETAIN_VEHICLE);
+		boolean dismount = !allFlags.contains(TeleportFlag.EntityState.RETAIN_VEHICLE);
+		boolean ignorePassengers = allFlags.contains(TeleportFlag.EntityState.RETAIN_PASSENGERS);
+
+		if (ignorePassengers && hasPassengers() && location.getWorld() != this.getWorld())
+		{
+			return false;
+		}
+		if (!dismount && getVehicle() != null && location.getWorld() != this.getWorld())
+		{
+			return false;
+		}
 
 		location.checkFinite();
+
 		if (isDead() || (!ignorePassengers && hasPassengers()))
 		{
 			return false;

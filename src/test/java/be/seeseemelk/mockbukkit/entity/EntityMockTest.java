@@ -197,7 +197,6 @@ class EntityMockTest
 	}
 
 	@Test
-	@Disabled("Needs fixing by Insprill")
 	void teleport_Vehicle()
 	{
 		EntityMock mock = new SimpleEntityMock(server);

@@ -53,7 +53,6 @@ import org.spigotmc.event.entity.EntityDismountEvent;
 import org.spigotmc.event.entity.EntityMountEvent;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Queue;
@@ -310,23 +309,31 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
+	@SuppressWarnings("UnstableApiUsage")
 	public boolean teleport(@NotNull Location location, @NotNull TeleportCause cause)
 	{
-		return teleport(location, cause,
-				TeleportFlag.EntityState.RETAIN_PASSENGERS, TeleportFlag.EntityState.RETAIN_VEHICLE);
+		return teleport(location, cause, new TeleportFlag[0]);
 	}
 
 	@Override
-	public boolean teleport(@NotNull Location location, @NotNull TeleportCause cause, TeleportFlag... flags)
+	@SuppressWarnings("UnstableApiUsage")
+	public boolean teleport(@NotNull Location location, @NotNull TeleportCause cause, TeleportFlag @NotNull ... flags)
 	{
 		Preconditions.checkNotNull(location, "Location cannot be null"); // The world can be null if it's not a player
 		location.checkFinite();
 
-		boolean ignorePassengers = Arrays.stream(flags)
-				.anyMatch(flag -> flag == TeleportFlag.EntityState.RETAIN_PASSENGERS);
+		Set<TeleportFlag> flagSet = Set.of(flags);
+		boolean dismount = !flagSet.contains(TeleportFlag.EntityState.RETAIN_VEHICLE);
+		boolean ignorePassengers = flagSet.contains(TeleportFlag.EntityState.RETAIN_PASSENGERS);
 
-		boolean dismount = Arrays.stream(flags)
-				.anyMatch(flag -> flag == TeleportFlag.EntityState.RETAIN_VEHICLE);
+		if (flagSet.contains(TeleportFlag.EntityState.RETAIN_PASSENGERS) && this.hasPassengers() && location.getWorld() != this.getWorld())
+		{
+			return false;
+		}
+		if (!dismount && getVehicle() != null && location.getWorld() != this.getWorld())
+		{
+			return false;
+		}
 
 		if (this.removed || (!ignorePassengers && hasPassengers()))
 		{
@@ -1308,4 +1315,5 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
+
 }
