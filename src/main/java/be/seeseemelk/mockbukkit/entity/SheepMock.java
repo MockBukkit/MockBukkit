@@ -71,7 +71,7 @@ public class SheepMock extends AnimalsMock implements Sheep
 	{
 		this.getWorld().playSound(this, org.bukkit.Sound.ENTITY_SHEEP_SHEAR, AdventureConverters.soundSourceToCategory(source), 1.0F, 1.0F);
 		this.setSheared(true);
-		int i = 1 + ThreadLocalRandom.current().nextInt(3);
+		int i = ThreadLocalRandom.current().nextInt(1, 4); 
 
 		for (int j = 0; j < i; ++j)
 		{
