@@ -94,11 +94,11 @@ public class MushroomCowMock extends CowMock implements MushroomCow
 	@Override
 	public void shear(Sound.@NotNull Source source)
 	{
-		WorldMock world = (WorldMock) this.getWorld();
+		WorldMock world = this.getWorld();
 		Location location = this.getLocation();
 		world.playSound(this, org.bukkit.Sound.ENTITY_MOOSHROOM_SHEAR, AdventureConverters.soundSourceToCategory(source), 1.0F, 1.0F);
 		Cow cow = world.spawn(this.getLocation(), Cow.class, null, CreatureSpawnEvent.SpawnReason.CUSTOM, true, false);
-//		world.spawnParticle(Particle.EXPLOSION_NORMAL, location.getX(), location.getY() + 0.5, location.getZ(), 1);
+//		world.spawnParticle(Particle.EXPLOSION_NORMAL, location.getX(), location.getY() + 0.5, location.getZ(), 1); // Not implemented
 
 		cow.teleport(this);
 		cow.setHealth(this.getHealth());

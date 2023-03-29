@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.AsyncCatcher;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.command.MessageTarget;
 import be.seeseemelk.mockbukkit.entity.data.EntityData;
 import be.seeseemelk.mockbukkit.entity.data.EntityDataRegistry;
@@ -263,9 +264,9 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public @NotNull World getWorld()
+	public @NotNull WorldMock getWorld()
 	{
-		return location.getWorld();
+		return (WorldMock) location.getWorld();
 	}
 
 	@Override
