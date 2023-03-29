@@ -326,7 +326,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		boolean dismount = !flagSet.contains(TeleportFlag.EntityState.RETAIN_VEHICLE);
 		boolean ignorePassengers = flagSet.contains(TeleportFlag.EntityState.RETAIN_PASSENGERS);
 
-		if (flagSet.contains(TeleportFlag.EntityState.RETAIN_PASSENGERS) && this.hasPassengers() && location.getWorld() != this.getWorld())
+		if (flagSet.contains(TeleportFlag.EntityState.RETAIN_PASSENGERS) && this.hasPassengers() && location.getWorld().equals(this.getWorld()))
 		{
 			return false;
 		}
