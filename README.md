@@ -152,27 +152,6 @@ development of MockBukkit.
 
 ### Using MockBukkit
 
-In order to use MockBukkit the plugin to be tested needs an extra constructor and it has to be initialised before each
-test.
-The plugin will need both a default constructor and an extra one that will call a super constructor.
-Your plugins constructor will look like this if your plugin was called ```MyPlugin```.
-
-```java
-public class MyPlugin extends JavaPlugin
-{
-    public MyPlugin()
-    {
-        super();
-    }
-
-    protected MyPlugin(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file)
-    {
-        super(loader, description, dataFolder, file);
-    }
-}
-```
-
-The plugin is now ready to be tested by MockBukkit.
 A plugin can be loaded in this initialiser block.
 
 ```java

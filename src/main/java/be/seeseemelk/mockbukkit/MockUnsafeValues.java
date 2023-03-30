@@ -313,13 +313,6 @@ public class MockUnsafeValues implements UnsafeValues
 	}
 
 	@Override
-	public @NotNull <T extends Keyed> Registry<T> registryFor(Class<T> classOfT)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public @NotNull String getMainLevelName()
 	{
 		return "world"; // TODO: Allow this to be changed when server properties are implemented.
