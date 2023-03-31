@@ -3,3 +3,5 @@
   the API version of Minecraft we are targeting.
 */
 rootProject.name = "MockBukkit-${extensions.extraProperties.get("paper.api.version")}"
+
+include(":extra:TestPlugin")
