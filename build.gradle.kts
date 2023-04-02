@@ -29,6 +29,7 @@ dependencies {
 	// General utilities for the project
 	implementation("net.kyori:adventure-platform-bungeecord:4.3.0")
 	implementation("org.jetbrains:annotations:24.0.1")
+	implementation("net.bytebuddy:byte-buddy:1.14.3")
 
 	// LibraryLoader dependencies
 	implementation("org.apache.maven:maven-resolver-provider:3.8.5")
@@ -70,7 +71,24 @@ tasks {
 	}
 
 	test {
+		dependsOn(project(":extra:TestPlugin").tasks.jar)
 		useJUnitPlatform()
+	}
+
+	check {
+		finalizedBy(jacocoTestReport)
+	}
+
+	jacocoTestReport {
+		reports {
+			xml.required.set(true)
+			html.required.set(true)
+			html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
+		}
+	}
+
+	jacoco {
+		toolVersion = "0.8.8"
 	}
 }
 
