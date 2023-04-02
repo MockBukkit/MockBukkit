@@ -9,6 +9,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
+/**
+ * Mock implementation of a {@link ChunkSnapshot}.
+ */
 public class ChunkSnapshotMock implements ChunkSnapshot
 {
 
@@ -21,6 +24,18 @@ public class ChunkSnapshotMock implements ChunkSnapshot
 	private final Map<Coordinate, BlockData> blockData;
 	private final Map<Coordinate, Biome> biomes;
 
+	/**
+	 * Constructs a new {@link ChunkSnapshotMock} with the provided parameters.
+	 *
+	 * @param x         The X coordinate of the chunk.
+	 * @param z         The Y coordinate of the chunk.
+	 * @param minY      The minimum Y level of the world.
+	 * @param maxY      The maximum Y level of the world.
+	 * @param worldName The name of the world.
+	 * @param worldTime The time of the world at snapshot creation.
+	 * @param blockData A map of all {@link BlockData} in this chunk.
+	 * @param biomes    A map of all {@link Biome}s in this chunk.
+	 */
 	ChunkSnapshotMock(int x, int z, int minY, int maxY, String worldName, long worldTime, Map<Coordinate, BlockData> blockData, Map<Coordinate, Biome> biomes)
 	{
 		this.x = x;
@@ -150,9 +165,9 @@ public class ChunkSnapshotMock implements ChunkSnapshot
 				// isn't divisible by 16 we could get an error.
 				break;
 			}
-			for (int x = 0; x < 15; x++)
+			for (int x = 0; x < 16; x++)
 			{
-				for (int z = 0; z < 15; z++)
+				for (int z = 0; z < 16; z++)
 				{
 					if (!getBlockType(x, y, z).isAir())
 					{
@@ -171,6 +186,24 @@ public class ChunkSnapshotMock implements ChunkSnapshot
 		return this.blockData.containsValue(block);
 	}
 
+	@Override
+	public boolean contains(@NotNull Biome biome)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	/**
+	 * Validates that the chunk coordinates are within the proper range.
+	 * <p>
+	 * X: 0-15 (inclusive)<p>
+	 * Y: {@link #minY}-{@link #maxY} (inclusive)<p>
+	 * Z: 0-15 (inclusive)
+	 *
+	 * @param x The X coordinate.
+	 * @param y The Y coordinate.
+	 * @param z The Z coordinate.
+	 */
 	private void validateChunkCoordinates(int x, int y, int z)
 	{
 		Preconditions.checkArgument(0 <= x && x <= 15, "x out of range (expected 0-15, got %s)", x);

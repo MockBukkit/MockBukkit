@@ -7,7 +7,7 @@ gradle.ext.apiVersion = '1.19'
 /*
   The Spigot version we are building MockBukkit against.
 */
-gradle.ext.apiVersionFull = '1.19.2-R0.1-SNAPSHOT'
+gradle.ext.apiVersionFull = '1.19.4-R0.1-SNAPSHOT'
 
 /*
   This is the name of our MockBukkit artifact, it includes
@@ -19,3 +19,5 @@ rootProject.name = 'MockBukkit-' + gradle.ext.apiVersion
   The Java version we are building against.
 */
 gradle.ext.javaVersion = 17
+
+includeBuild("extra/TestPlugin")

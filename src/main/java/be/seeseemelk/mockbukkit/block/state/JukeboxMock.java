@@ -1,19 +1,33 @@
 package be.seeseemelk.mockbukkit.block.state;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Jukebox;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.JukeboxInventory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * Mock implementation of a {@link Jukebox}.
+ *
+ * @see TileStateMock
+ */
 public class JukeboxMock extends TileStateMock implements Jukebox
 {
 
 	private ItemStack recordItem;
 	private boolean playing;
 
+	/**
+	 * Constructs a new {@link JukeboxMock} for the provided {@link Material}.
+	 * Only supports {@link Material#JUKEBOX}
+	 *
+	 * @param material The material this state is for.
+	 */
 	public JukeboxMock(@NotNull Material material)
 	{
 		super(material);
@@ -21,6 +35,12 @@ public class JukeboxMock extends TileStateMock implements Jukebox
 		setRecord(null);
 	}
 
+	/**
+	 * Constructs a new {@link JukeboxMock} for the provided {@link Block}.
+	 * Only supports {@link Material#JUKEBOX}
+	 *
+	 * @param block The block this state is for.
+	 */
 	protected JukeboxMock(@NotNull Block block)
 	{
 		super(block);
@@ -28,6 +48,11 @@ public class JukeboxMock extends TileStateMock implements Jukebox
 		setRecord(null);
 	}
 
+	/**
+	 * Constructs a new {@link JukeboxMock} by cloning the data from an existing one.
+	 *
+	 * @param state The state to clone.
+	 */
 	protected JukeboxMock(@NotNull JukeboxMock state)
 	{
 		super(state);
@@ -54,6 +79,13 @@ public class JukeboxMock extends TileStateMock implements Jukebox
 	}
 
 	@Override
+	public boolean hasRecord()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull ItemStack getRecord()
 	{
 		return this.recordItem;
@@ -70,6 +102,13 @@ public class JukeboxMock extends TileStateMock implements Jukebox
 	public boolean isPlaying()
 	{
 		return this.playing;
+	}
+
+	@Override
+	public boolean startPlaying()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -91,6 +130,20 @@ public class JukeboxMock extends TileStateMock implements Jukebox
 
 		setRecord(null);
 		return true;
+	}
+
+	@Override
+	public @NotNull JukeboxInventory getInventory()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull JukeboxInventory getSnapshotInventory()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 }

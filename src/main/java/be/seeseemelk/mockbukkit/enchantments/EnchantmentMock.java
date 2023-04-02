@@ -14,6 +14,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 
+/**
+ * Mock implementation of an {@link Enchantment}.
+ */
 public class EnchantmentMock extends Enchantment
 {
 
@@ -24,6 +27,12 @@ public class EnchantmentMock extends Enchantment
 	private boolean isTreasure;
 	private boolean isCursed;
 
+	/**
+	 * Constructs a new {@link EnchantmentMock} with the provided {@link NamespacedKey} and name.
+	 *
+	 * @param key  The key for the enchantment.
+	 * @param name The name of the enchantment.
+	 */
 	public EnchantmentMock(@NotNull NamespacedKey key, @NotNull String name)
 	{
 		super(key);
@@ -93,6 +102,12 @@ public class EnchantmentMock extends Enchantment
 		return this.maxLevel;
 	}
 
+	/**
+	 * Sets the return value of {@link #getMaxLevel()}.
+	 *
+	 * @param maxLevel The max level.
+	 * @see #getMaxLevel()
+	 */
 	public void setMaxLevel(int maxLevel)
 	{
 		this.maxLevel = maxLevel;
@@ -104,6 +119,12 @@ public class EnchantmentMock extends Enchantment
 		return this.startLevel;
 	}
 
+	/**
+	 * Sets the return value of {@link #getStartLevel()}.
+	 *
+	 * @param startLevel The start level.
+	 * @see #getStartLevel()
+	 */
 	public void setStartLevel(int startLevel)
 	{
 		this.startLevel = startLevel;
@@ -115,6 +136,12 @@ public class EnchantmentMock extends Enchantment
 		return this.itemTarget;
 	}
 
+	/**
+	 * Sets the return value of {@link #getItemTarget()}.
+	 *
+	 * @param itemTarget The item target.
+	 * @see #getItemTarget()
+	 */
 	public void setItemTarget(@NotNull EnchantmentTarget itemTarget)
 	{
 		Preconditions.checkNotNull(itemTarget, "EnchantmentTarget cannot be null");
@@ -127,6 +154,12 @@ public class EnchantmentMock extends Enchantment
 		return this.isTreasure;
 	}
 
+	/**
+	 * Sets the return value of {@link #isTreasure()}.
+	 *
+	 * @param isTreasure Whether the enchantment is treasure.
+	 * @see #isTreasure()
+	 */
 	public void setTreasure(boolean isTreasure)
 	{
 		this.isTreasure = isTreasure;
@@ -138,6 +171,12 @@ public class EnchantmentMock extends Enchantment
 		return this.isCursed;
 	}
 
+	/**
+	 * Sets the return value of {@link #isCursed()}.
+	 *
+	 * @param isCursed Whether the enchantment is cursed.
+	 * @see #isCursed()
+	 */
 	public void setCursed(boolean isCursed)
 	{
 		this.isCursed = isCursed;

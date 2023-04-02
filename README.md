@@ -53,6 +53,7 @@ MockBukkit can easily be included in your project using either Maven or gradle.
 
 MockBukkit can easily be included in Gradle using the Maven Central and PaperMC repositories.
 Make sure to update the version as necessary.
+
 ```gradle
 repositories {
     mavenCentral()
@@ -64,8 +65,8 @@ dependencies {
 }
 ```
 
-If you prefer to always have the latest Git version or need a specific commit/branch, you can always use [JitPack](https://jitpack.io/#MockBukkit/MockBukkit) as your
-maven repository:
+If you prefer to always have the latest Git version or need a specific commit/branch, you can always
+use [JitPack](https://jitpack.io/#MockBukkit/MockBukkit) as your maven repository:
 
 ```gradle
 repositories {
@@ -93,6 +94,7 @@ development of MockBukkit.
 
 MockBukkit can easily be included in Maven using the default Maven Central and PaperMC repositories.
 Make sure to update the version as necessary.
+
 ```xml
 <repositories>
     <repository>
@@ -110,11 +112,13 @@ Make sure to update the version as necessary.
   </dependency>
 </dependencies>
 ```
+
 The `test` scope is important here since you are likely to only be using MockBukkit during the `test` stage of your
 Maven lifecycle and not in your final product.
 
-If you prefer to always have the latest Git version or need a specific commit/branch, you can always use [JitPack](https://jitpack.io/#MockBukkit/MockBukkit) as your
-maven repository:
+If you prefer to always have the latest Git version or need a specific commit/branch, you can always
+use [JitPack](https://jitpack.io/#MockBukkit/MockBukkit) as your maven repository:
+
 ```xml
 <repositories>
     <repository>
@@ -146,30 +150,8 @@ development of MockBukkit.
 
 </details>
 
-
 ### Using MockBukkit
 
-In order to use MockBukkit the plugin to be tested needs an extra constructor and it has to be initialised before each
-test.
-The plugin will need both a default constructor and an extra one that will call a super constructor.
-Your plugins constructor will look like this if your plugin was called ```MyPlugin```.
-
-```java
-public class MyPlugin extends JavaPlugin
-{
-    public MyPlugin()
-    {
-        super();
-    }
-
-    protected MyPlugin(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file)
-    {
-        super(loader, description, dataFolder, file);
-    }
-}
-```
-
-The plugin is now ready to be tested by MockBukkit.
 A plugin can be loaded in this initialiser block.
 
 ```java
@@ -266,17 +248,25 @@ members of the community.
 Several projects have utilized MockBukkit for their needs already.
 If you want to see some projects that are using MockBukkit right now, feel free to take a peak:
 
-- [Slimefun/Slimefun4](https://github.com/Slimefun/Slimefun4/tree/master/src/test/java/io/github/thebusybiscuit/slimefun4) (
-  400+ Unit Tests)
-- [lluiscamino/MultiverseHardcore](https://github.com/lluiscamino/MultiverseHardcore/tree/master/src/test/java/me/lluiscamino/multiversehardcore) (
-  75+ Unit Tests)
-- [carelesshippo/SpectatorModeRewrite](https://github.com/carelesshippo/SpectatorModeRewrite/tree/dev/src/test/java/me/ohowe12/spectatormode) (
-  50+ Unit Tests)
-- [JacksonChen666/treecapitator](https://github.com/JacksonChen666/treecapitator/tree/master/src/test/java/com/jacksonchen666/treecapitator) (
-  30+ Unit Tests)
-- [axelrindle/PocketKnife](https://github.com/axelrindle/PocketKnife/tree/main/api/src/test/kotlin) (30+ Unit Tests)
+- [Slimefun/Slimefun4](https://github.com/Slimefun/Slimefun4/tree/master/src/test/java/io/github/thebusybiscuit/slimefun4)
+  (1700+ Unit Tests)
+- [Insprill/custom-join-messages](https://github.com/Insprill/custom-join-messages/tree/master/src/test/kotlin/net/insprill/cjm)
+  (170+ Unit Tests)
+- [carelesshippo/SpectatorModeRewrite](https://github.com/carelesshippo/SpectatorModeRewrite/tree/dev/src/test/java/me/ohowe12/spectatormode)
+  (80+ Unit Tests)
+- [lluiscamino/MultiverseHardcore](https://github.com/lluiscamino/MultiverseHardcore/tree/master/src/test/java/me/lluiscamino/multiversehardcore)
+  (75+ Unit Tests)
+- [axelrindle/PocketKnife](https://github.com/axelrindle/PocketKnife/tree/main/api/src/test/kotlin)
+  (50+ Unit Tests)
+- [JacksonChen666/treecapitator](https://gitlab.com/JacksonChen666/treecapitator/-/tree/master/src/test/java/com/jacksonchen666/treecapitator)
+  (30+ Unit Tests)
 - *and more! (If you want to see your plugin here, open up an issue and we'll consider adding it)*
 
 You can also have a look at our documentation where we outline various examples and tricks on how to use MockBukkit
 already:
 https://mockbukkit.readthedocs.io/en/latest/index.html
+
+## :gift_heart: Sponsors
+
+Thanks to JetBrains, the creators of IntelliJ IDEA, for providing us with licenses as part of their [Open Source program](https://www.jetbrains.com/opensource/).  
+[![JetBrains](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg)](https://www.jetbrains.com/opensource/)

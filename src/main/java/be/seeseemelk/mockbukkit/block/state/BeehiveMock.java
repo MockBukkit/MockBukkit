@@ -7,6 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Beehive;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
+import org.bukkit.block.data.type.Campfire;
 import org.bukkit.entity.Bee;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -14,6 +15,11 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Mock implementation of a {@link Beehive}.
+ *
+ * @see TileStateMock
+ */
 public class BeehiveMock extends TileStateMock implements Beehive
 {
 
@@ -22,18 +28,35 @@ public class BeehiveMock extends TileStateMock implements Beehive
 	private boolean sedated;
 	private final List<Bee> bees = new ArrayList<>();
 
+	/**
+	 * Constructs a new {@link BeehiveMock} for the provided {@link Material}.
+	 * Only supports {@link Material#BEEHIVE}
+	 *
+	 * @param material The material this state is for.
+	 */
 	public BeehiveMock(@NotNull Material material)
 	{
 		super(material);
 		checkType(material, Material.BEEHIVE);
 	}
 
+	/**
+	 * Constructs a new {@link BeehiveMock} for the provided {@link Block}.
+	 * Only supports {@link Material#BEEHIVE}
+	 *
+	 * @param block The block this state is for.
+	 */
 	protected BeehiveMock(@NotNull Block block)
 	{
 		super(block);
 		checkType(block, Material.BEEHIVE);
 	}
 
+	/**
+	 * Constructs a new {@link BeehiveMock} by cloning the data from an existing one.
+	 *
+	 * @param state The state to clone.
+	 */
 	protected BeehiveMock(@NotNull BeehiveMock state)
 	{
 		super(state);
@@ -79,21 +102,18 @@ public class BeehiveMock extends TileStateMock implements Beehive
 	 */
 	public void updateSedated()
 	{
-		throw new UnimplementedOperationException("Campfires aren't implemented yet.");
-//		if (!isPlaced())
-//		{
-//			throw new IllegalStateException("Cannot update sedated status of a beehive that is not placed");
-//		}
-//		for (int y = getY(); y < getY() - 5; y++)
-//		{
-//			Block block = getWorld().getBlockAt(getX(), y, getZ());
-//			if (!Bukkit.getTag(Tag.REGISTRY_BLOCKS, NamespacedKey.minecraft("campfires"), Material.class).isTagged(block.getType()))
-//				continue;
-//			if (!((Campfire) block.getBlockData()).isLit())
-//				continue;
-//			this.sedated = true;
-//		}
-//		this.sedated = false;
+		Preconditions.checkState(isPlaced(), "Cannot update sedated status of a beehive that is not placed");
+		for (int y = getY() - 1; y > getY() - 6; y--)
+		{
+			Block block = getWorld().getBlockAt(getX(), y, getZ());
+			if (!(block.getBlockData() instanceof Campfire campfire))
+				continue;
+			if (!campfire.isLit())
+				continue;
+			this.sedated = true;
+			return;
+		}
+		this.sedated = false;
 	}
 
 	@Override

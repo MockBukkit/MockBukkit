@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.plugin;
 
+import be.seeseemelk.mockbukkit.PermissionManagerMock;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.exception.EventHandlerException;
@@ -8,10 +9,13 @@ import com.destroystokyo.paper.event.server.ServerExceptionEvent;
 import com.destroystokyo.paper.exception.ServerEventException;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
+import io.papermc.paper.plugin.PermissionManager;
+import io.papermc.paper.plugin.configuration.PluginMeta;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.PluginCommandUtils;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.Event;
+import org.bukkit.event.EventException;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
@@ -22,7 +26,6 @@ import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.EventExecutor;
 import org.bukkit.plugin.IllegalPluginAccessException;
 import org.bukkit.plugin.InvalidDescriptionException;
-import org.bukkit.plugin.InvalidPluginException;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginLoader;
@@ -30,20 +33,22 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredListener;
 import org.bukkit.plugin.UnknownDependencyException;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.plugin.java.JavaPluginLoader;
 import org.bukkit.plugin.java.JavaPluginUtils;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.UnknownNullability;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -60,34 +65,43 @@ import java.util.WeakHashMap;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
+import java.util.jar.JarFile;
 import java.util.logging.Level;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class PluginManagerMock implements PluginManager
+/**
+ * Mock implementation of a {@link PluginManager}.
+ */
+public class PluginManagerMock extends PermissionManagerMock implements PluginManager
 {
 
+	private static final Pattern VALID_PLUGIN_NAMES = Pattern.compile("^[A-Za-z0-9_.-]+$");
+
 	private final @NotNull ServerMock server;
-	private final @NotNull JavaPluginLoader loader;
 	private final List<Plugin> plugins = new ArrayList<>();
 	private final List<PluginCommand> commands = new ArrayList<>();
 	private final List<Event> events = new ArrayList<>();
 	private File parentTemporaryDirectory;
 	private final Map<String, Permission> permissions = new HashMap<>();
 	private final Map<Permissible, Set<String>> permissionSubscriptions = new HashMap<>();
-	private final Map<Boolean, Map<Permissible, Boolean>> defaultPermissionSubscriptions = new HashMap<Boolean, Map<Permissible, Boolean>>();
+	private final Map<Boolean, Map<Permissible, Boolean>> defaultPermissionSubscriptions = new HashMap<>();
 	private final @NotNull Map<String, List<Listener>> listeners = new HashMap<>();
 
-	private final List<Class<?>> pluginConstructorTypes = Arrays.asList(JavaPluginLoader.class,
-			PluginDescriptionFile.class, File.class, File.class);
-
+	/**
+	 * Constructs a new {@link PluginManagerMock} for the provided {@link ServerMock}.
+	 *
+	 * @param server The server this is for.
+	 */
+	@ApiStatus.Internal
 	@SuppressWarnings("deprecation")
 	public PluginManagerMock(@NotNull ServerMock server)
 	{
+		Preconditions.checkNotNull(server, "Server cannot be null");
 		this.server = server;
-		loader = new JavaPluginLoader(this.server);
 	}
 
 	/**
@@ -117,8 +131,10 @@ public class PluginManagerMock implements PluginManager
 	 * @param message   The message to display when no event conforms.
 	 * @param predicate The predicate to test against.
 	 */
-	public void assertEventFired(@NotNull String message, @NotNull Predicate<Event> predicate)
+	public void assertEventFired(@Nullable String message, @NotNull Predicate<Event> predicate)
 	{
+		Preconditions.checkNotNull(predicate, "Predicate cannot be null");
+
 		for (Event event : events)
 		{
 			if (predicate.test(event))
@@ -137,6 +153,7 @@ public class PluginManagerMock implements PluginManager
 	 */
 	public void assertEventFired(@NotNull Predicate<Event> predicate)
 	{
+		Preconditions.checkNotNull(predicate, "Predicate cannot be null");
 		assertEventFired("Event assert failed", predicate);
 	}
 
@@ -148,8 +165,10 @@ public class PluginManagerMock implements PluginManager
 	 * @param eventClass The class type that the event should be an instance of.
 	 * @param predicate  The predicate to test the event against.
 	 */
-	public <T extends Event> void assertEventFired(String message, @NotNull Class<T> eventClass, @NotNull Predicate<T> predicate)
+	public <T extends Event> void assertEventFired(@Nullable String message, @NotNull Class<T> eventClass, @NotNull Predicate<T> predicate)
 	{
+		Preconditions.checkNotNull(eventClass, "Class cannot be null");
+
 		for (Event event : events)
 		{
 			if (eventClass.isInstance(event) && predicate.test(eventClass.cast(event)))
@@ -170,6 +189,7 @@ public class PluginManagerMock implements PluginManager
 	 */
 	public <T extends Event> void assertEventFired(@NotNull Class<T> eventClass, @NotNull Predicate<T> predicate)
 	{
+		Preconditions.checkNotNull(eventClass, "Class cannot be null");
 		assertEventFired("No event of the correct class tested true", eventClass, predicate);
 	}
 
@@ -180,6 +200,7 @@ public class PluginManagerMock implements PluginManager
 	 */
 	public void assertEventFired(@NotNull Class<? extends Event> eventClass)
 	{
+		Preconditions.checkNotNull(eventClass, "Class cannot be null");
 		assertEventFired("No event of that type has been fired", eventClass::isInstance);
 	}
 
@@ -190,6 +211,7 @@ public class PluginManagerMock implements PluginManager
 	 */
 	public void assertEventNotFired(@NotNull Class<? extends Event> eventClass)
 	{
+		Preconditions.checkNotNull(eventClass, "Class cannot be null");
 		assertEventNotFired(eventClass, "An event of type " + eventClass.getSimpleName() + " has been fired when it shouldn't have been");
 	}
 
@@ -199,8 +221,9 @@ public class PluginManagerMock implements PluginManager
 	 * @param eventClass The class of the event to check for.
 	 * @param message    The message to print when failed.
 	 */
-	public void assertEventNotFired(@NotNull Class<? extends Event> eventClass, String message)
+	public void assertEventNotFired(@NotNull Class<? extends Event> eventClass, @Nullable String message)
 	{
+		Preconditions.checkNotNull(eventClass, "Class cannot be null");
 		for (Event event : this.events)
 		{
 			if (eventClass.isAssignableFrom(event.getClass()))
@@ -213,6 +236,7 @@ public class PluginManagerMock implements PluginManager
 	@Override
 	public Plugin getPlugin(@NotNull String name)
 	{
+		Preconditions.checkNotNull(name, "Name cannot be null");
 		for (Plugin plugin : plugins)
 		{
 			if (name.equals(plugin.getName()))
@@ -243,25 +267,23 @@ public class PluginManagerMock implements PluginManager
 	 * Checks if a constructor is compatible with an array of types.
 	 *
 	 * @param constructor The constructor to check.
-	 * @param types       The array of parameter types the constructor must support. Note that the first 4 parameters
-	 *                    should be an exact match while the rest don't have to be.
+	 * @param types       The array of parameter types the constructor must support.
 	 * @return {@code true} if the constructor is compatible, {@code false} if it isn't.
 	 */
 	private boolean isConstructorCompatible(@NotNull Constructor<?> constructor, @NotNull Class<?> @NotNull [] types)
 	{
+		Preconditions.checkNotNull(constructor, "Constructor cannot be null");
+		Preconditions.checkNotNull(types, "Types cannot be null");
+
 		Class<?>[] parameters = constructor.getParameterTypes();
+		if (parameters.length < types.length)
+			return false;
 		for (int i = 0; i < types.length; i++)
 		{
 			Class<?> type = types[i];
+			Preconditions.checkNotNull(type, "Type cannot be null");
 			Class<?> parameter = parameters[i];
-			if (i < 4)
-			{
-				if (!type.equals(parameter))
-				{
-					return false;
-				}
-			}
-			else if (!parameter.isAssignableFrom(type))
+			if (!parameter.isAssignableFrom(type))
 			{
 				return false;
 			}
@@ -273,15 +295,16 @@ public class PluginManagerMock implements PluginManager
 	 * Looks for a compatible constructor of a plugin with a certain constructor.
 	 *
 	 * @param class1 The plugin class for which a constructor should be found.
-	 * @param types  The types of parameters that the constructor should be able to except. Note that the first 4
-	 *               parameters should be an exact match while the rest don't have to be.
+	 * @param types  The types of parameters that the constructor should be able to except.
 	 * @return A constructor that will take the given types.
 	 * @throws NoSuchMethodException if no compatible constructor could be found.
 	 */
 	@SuppressWarnings("unchecked")
 	private @NotNull Constructor<? extends JavaPlugin> getCompatibleConstructor(@NotNull Class<? extends JavaPlugin> class1,
-																				Class<?> @NotNull [] types) throws NoSuchMethodException
+																				@NotNull Class<?> @NotNull [] types) throws NoSuchMethodException
 	{
+		Preconditions.checkNotNull(class1, "Class cannot be null");
+		Preconditions.checkNotNull(types, "Types cannot be null");
 		for (Constructor<?> constructor : class1.getDeclaredConstructors())
 		{
 			Class<?>[] parameters = constructor.getParameterTypes();
@@ -299,6 +322,12 @@ public class PluginManagerMock implements PluginManager
 				"No compatible constructor for " + class1.getName() + " with parameters " + str);
 	}
 
+	/**
+	 * Creates a new unique temporary directory.
+	 *
+	 * @return The directory.
+	 * @throws IOException If an IO error occurs.
+	 */
 	public @NotNull File getParentTemporaryDirectory() throws IOException
 	{
 		if (parentTemporaryDirectory == null)
@@ -318,6 +347,7 @@ public class PluginManagerMock implements PluginManager
 	 */
 	public @NotNull File createTemporaryDirectory(@NotNull String name) throws IOException
 	{
+		Preconditions.checkNotNull(name, "Name cannot be null");
 		File directory = new File(getParentTemporaryDirectory(), name);
 		directory.mkdirs();
 		return directory;
@@ -332,6 +362,7 @@ public class PluginManagerMock implements PluginManager
 	 */
 	public @NotNull File createTemporaryPluginFile(@NotNull String name) throws IOException
 	{
+		Preconditions.checkNotNull(name, "Name cannot be null");
 		File pluginFile = new File(getParentTemporaryDirectory(), name + ".jar");
 		if (!pluginFile.exists() && !pluginFile.createNewFile())
 		{
@@ -347,6 +378,7 @@ public class PluginManagerMock implements PluginManager
 	 */
 	public void registerLoadedPlugin(@NotNull Plugin plugin)
 	{
+		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
 		addCommandsFrom(plugin);
 		plugins.add(plugin);
 		plugin.onLoad();
@@ -361,27 +393,26 @@ public class PluginManagerMock implements PluginManager
 	 * @return The loaded plugin.
 	 */
 	public @NotNull JavaPlugin loadPlugin(@NotNull Class<? extends JavaPlugin> class1, @NotNull PluginDescriptionFile description,
-										  Object @NotNull [] parameters)
+										  @NotNull Object @NotNull [] parameters)
 	{
+		Preconditions.checkNotNull(class1, "Class cannot be null");
+		Preconditions.checkNotNull(description, "Description cannot be null");
+		Preconditions.checkNotNull(parameters, "Parameters cannot be null");
 		try
 		{
-			List<Class<?>> types = new ArrayList<>(pluginConstructorTypes);
+			class1 = createClassLoader(description).loadProxyClass(class1);
+
+			List<Class<?>> types = new ArrayList<>();
 			for (Object parameter : parameters)
 			{
+				Preconditions.checkNotNull(parameter, "Parameters cannot be null");
 				types.add(parameter.getClass());
 			}
 
 			Constructor<? extends JavaPlugin> constructor = getCompatibleConstructor(class1, types.toArray(new Class<?>[0]));
 			constructor.setAccessible(true);
 
-			Object[] arguments = new Object[types.size()];
-			arguments[0] = loader;
-			arguments[1] = description;
-			arguments[2] = createTemporaryDirectory(description.getName() + "-" + description.getVersion());
-			arguments[3] = createTemporaryPluginFile(description.getName() + "-" + description.getVersion());
-			System.arraycopy(parameters, 0, arguments, 4, parameters.length);
-
-			JavaPlugin plugin = constructor.newInstance(arguments);
+			JavaPlugin plugin = constructor.newInstance(parameters);
 			registerLoadedPlugin(plugin);
 			return plugin;
 		}
@@ -391,16 +422,20 @@ public class PluginManagerMock implements PluginManager
 		}
 	}
 
-	/**
-	 * Load a plugin from a class. It will use the system resource {@code plugin.yml} as the resource file.
-	 *
-	 * @param description The {@link PluginDescriptionFile} that contains information about the plugin.
-	 * @param class1      The plugin to load.
-	 * @return The loaded plugin.
-	 */
-	public @NotNull JavaPlugin loadPlugin(@NotNull Class<? extends JavaPlugin> class1, @NotNull PluginDescriptionFile description)
+	private MockBukkitConfiguredPluginClassLoader createClassLoader(PluginDescriptionFile description) throws IOException
 	{
-		return loadPlugin(class1, description, new Object[0]);
+		String name = description.getName();
+		if (name.equalsIgnoreCase("bukkit") || name.equalsIgnoreCase("minecraft") || name.equalsIgnoreCase("mojang"))
+		{
+			throw new RuntimeException("Restricted Name");
+		}
+		if (!VALID_PLUGIN_NAMES.matcher(name).matches())
+		{
+			throw new RuntimeException("Invalid name. Must match " + VALID_PLUGIN_NAMES.pattern());
+		}
+		File dataFolder = createTemporaryDirectory(name + "-" + description.getVersion());
+		File pluginFile = createTemporaryPluginFile(name + "-" + description.getVersion());
+		return new MockBukkitConfiguredPluginClassLoader(server, description, dataFolder, pluginFile);
 	}
 
 	/**
@@ -435,6 +470,7 @@ public class PluginManagerMock implements PluginManager
 	private @NotNull PluginDescriptionFile findPluginDescription(@NotNull Class<? extends JavaPlugin> class1)
 			throws IOException, InvalidDescriptionException
 	{
+		Preconditions.checkNotNull(class1, "Class cannot be null");
 		Enumeration<URL> resources = class1.getClassLoader().getResources("plugin.yml");
 		while (resources.hasMoreElements())
 		{
@@ -451,6 +487,7 @@ public class PluginManagerMock implements PluginManager
 	@Override
 	public void callEvent(@NotNull Event event)
 	{
+		Preconditions.checkNotNull(event, "Event cannot be null");
 		if (event.isAsynchronous() && server.isOnMainThread())
 		{
 			throw new IllegalStateException("Asynchronous Events cannot be called on the main Thread.");
@@ -481,9 +518,11 @@ public class PluginManagerMock implements PluginManager
 	 *
 	 * @param event The asynchronous {@link Event} to call.
 	 * @param func  A function to invoke after the event has been called.
+	 * @param <T>   The event type.
 	 */
-	public <T extends Event> void callEventAsynchronously(@NotNull T event, Consumer<T> func)
+	public <T extends Event> void callEventAsynchronously(@NotNull T event, @Nullable Consumer<T> func)
 	{
+		Preconditions.checkNotNull(event, "Event cannot be null");
 		if (!event.isAsynchronous())
 		{
 			throw new IllegalStateException("Synchronous Events cannot be called asynchronously.");
@@ -495,6 +534,8 @@ public class PluginManagerMock implements PluginManager
 
 	private void callRegisteredListener(@NotNull RegisteredListener registration, @NotNull Event event)
 	{
+		Preconditions.checkNotNull(registration, "Listener cannot be null");
+		Preconditions.checkNotNull(event, "Event cannot be null");
 		if (!registration.getPlugin().isEnabled())
 		{
 			return;
@@ -503,8 +544,9 @@ public class PluginManagerMock implements PluginManager
 		{
 			registration.callEvent(event);
 		}
-		catch (Throwable ex)
+		catch (EventException eventException)
 		{
+			Throwable ex = eventException.getCause();
 			if (!(event instanceof ServerExceptionEvent))
 			{ // Don't cause an endless loop
 				String msg = "Could not pass event " + event.getEventName() + " to " + registration.getPlugin().getDescription().getFullName();
@@ -525,17 +567,12 @@ public class PluginManagerMock implements PluginManager
 	@Override
 	public void enablePlugin(@NotNull Plugin plugin)
 	{
-		if (plugin instanceof JavaPlugin)
+		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
+		Preconditions.checkArgument(plugin instanceof JavaPlugin, "Not a JavaPlugin");
+		if (!plugin.isEnabled())
 		{
-			if (!plugin.isEnabled())
-			{
-				JavaPluginUtils.setEnabled((JavaPlugin) plugin, true);
-				callEvent(new PluginEnableEvent(plugin));
-			}
-		}
-		else
-		{
-			throw new IllegalArgumentException("Not a JavaPlugin");
+			JavaPluginUtils.setEnabled((JavaPlugin) plugin, true);
+			callEvent(new PluginEnableEvent(plugin));
 		}
 	}
 
@@ -546,18 +583,22 @@ public class PluginManagerMock implements PluginManager
 	 * @param name    The name of the section, as read in a configuration file.
 	 * @param value   The value of the section, as parsed by {@link YamlConfiguration}
 	 */
-	private void addSection(@NotNull PluginCommand command, @NotNull String name, Object value)
+	private void addSection(@NotNull PluginCommand command, @NotNull String name, @UnknownNullability Object value)
 	{
+		Preconditions.checkNotNull(command, "Command cannot be null");
+		Preconditions.checkNotNull(name, "Name cannot be null");
 		switch (name)
 		{
 		case "description":
+			Preconditions.checkNotNull(value, "Value cannot be null");
+			Preconditions.checkArgument(value instanceof String, "Not a String");
 			command.setDescription((String) value);
 			break;
 		case "aliases":
 			if (value instanceof List<?>)
 			{
 				command.setAliases(
-						((List<?>) value).stream().map(Object::toString).collect(Collectors.toList()));
+						((List<?>) value).stream().map(Object::toString).toList());
 			}
 			else if (value != null)
 			{
@@ -569,12 +610,16 @@ public class PluginManagerMock implements PluginManager
 			}
 			break;
 		case "permission":
-			command.setPermission((String) value);
+			Preconditions.checkArgument(value == null || value instanceof String, "Not a String");
+			command.setPermission(value == null ? null : (String) value);
 			break;
 		case "permission-message":
-			command.setPermissionMessage((String) value);
+			Preconditions.checkArgument(value == null || value instanceof String, "Not a String");
+			command.setPermissionMessage(value == null ? null : (String) value);
 			break;
 		case "usage":
+			Preconditions.checkNotNull(value, "Value cannot be null");
+			Preconditions.checkArgument(value instanceof String, "Not a String");
 			command.setUsage((String) value);
 			break;
 		default:
@@ -589,6 +634,7 @@ public class PluginManagerMock implements PluginManager
 	 */
 	protected void addCommandsFrom(@NotNull Plugin plugin)
 	{
+		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
 		Map<String, Map<String, Object>> pluginCommands = plugin.getDescription().getCommands();
 		for (Entry<String, Map<String, Object>> entry : pluginCommands.entrySet())
 		{
@@ -612,6 +658,7 @@ public class PluginManagerMock implements PluginManager
 	@Override
 	public boolean isPluginEnabled(@NotNull String name)
 	{
+		Preconditions.checkNotNull(name, "Name cannot be null");
 		boolean result = false;
 
 		for (Plugin mockedPlugin : plugins)
@@ -626,7 +673,7 @@ public class PluginManagerMock implements PluginManager
 	}
 
 	@Override
-	public boolean isPluginEnabled(@NotNull Plugin plugin)
+	public boolean isPluginEnabled(@Nullable Plugin plugin)
 	{
 		boolean result = false;
 
@@ -642,11 +689,25 @@ public class PluginManagerMock implements PluginManager
 	}
 
 	@Override
-	public Plugin loadPlugin(@NotNull File file)
-			throws InvalidPluginException, InvalidDescriptionException, UnknownDependencyException
+	public Plugin loadPlugin(@NotNull File file) throws UnknownDependencyException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		try
+		{
+			JarFile jarFile = new JarFile(file);
+			PluginDescriptionFile descriptionFile = new PluginDescriptionFile(jarFile.getInputStream(jarFile.getEntry("plugin.yml")));
+			MockBukkitConfiguredPluginClassLoader classLoader = createClassLoader(descriptionFile);
+			classLoader.setJarFile(jarFile);
+
+			Class<?> pluginClass = classLoader.loadClass(descriptionFile.getMainClass(), true, false, false);
+			JavaPlugin plugin = (JavaPlugin) pluginClass.getConstructor().newInstance();
+			registerLoadedPlugin(plugin);
+			return plugin;
+		}
+		catch (IOException | InvalidDescriptionException | ClassNotFoundException | NoSuchMethodException |
+			   InstantiationException | IllegalAccessException | InvocationTargetException e)
+		{
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Override
@@ -683,6 +744,8 @@ public class PluginManagerMock implements PluginManager
 	@Override
 	public void registerEvents(@NotNull Listener listener, @NotNull Plugin plugin)
 	{
+		Preconditions.checkNotNull(listener, "Listener cannot be null");
+		Preconditions.checkNotNull(plugin, "Listener cannot be null");
 		if (!plugin.isEnabled())
 		{
 			throw new IllegalPluginAccessException("Plugin attempted to register " + listener + " while not enabled");
@@ -695,8 +758,10 @@ public class PluginManagerMock implements PluginManager
 
 	}
 
-	private void addListener(Listener listener, @NotNull Plugin plugin)
+	private void addListener(@NotNull Listener listener, @NotNull Plugin plugin)
 	{
+		Preconditions.checkNotNull(listener, "Listener cannot be null");
+		Preconditions.checkNotNull(plugin, "Listener cannot be null");
 		List<Listener> l = listeners.getOrDefault(plugin.getName(), new ArrayList<>());
 		if (!l.contains(listener))
 		{
@@ -705,8 +770,14 @@ public class PluginManagerMock implements PluginManager
 		}
 	}
 
+	/**
+	 * Unregisters all listeners for a plugin.
+	 *
+	 * @param plugin The plugin.
+	 */
 	public void unregisterPluginEvents(@NotNull Plugin plugin)
 	{
+		Preconditions.checkNotNull(plugin, "Listener cannot be null");
 		List<Listener> listListener = listeners.get(plugin.getName());
 		if (listListener != null)
 		{
@@ -747,6 +818,7 @@ public class PluginManagerMock implements PluginManager
 
 	private HandlerList getEventListeners(@NotNull Class<? extends Event> type)
 	{
+		Preconditions.checkNotNull(type, "Type cannot be null");
 		try
 		{
 			Method method = getRegistrationClass(type).getDeclaredMethod("getHandlerList");
@@ -761,6 +833,7 @@ public class PluginManagerMock implements PluginManager
 
 	private @NotNull Class<? extends Event> getRegistrationClass(@NotNull Class<? extends Event> clazz)
 	{
+		Preconditions.checkNotNull(clazz, "Class cannot be null");
 		try
 		{
 			clazz.getDeclaredMethod("getHandlerList");
@@ -784,6 +857,7 @@ public class PluginManagerMock implements PluginManager
 	@Override
 	public void disablePlugin(@NotNull Plugin plugin)
 	{
+		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
 		Preconditions.checkArgument(plugin instanceof JavaPlugin, "Not a JavaPlugin");
 		if (!plugin.isEnabled())
 			return;
@@ -809,24 +883,28 @@ public class PluginManagerMock implements PluginManager
 	@Override
 	public Permission getPermission(@NotNull String name)
 	{
+		Preconditions.checkNotNull(name, "Name cannot be null");
 		return permissions.get(name.toLowerCase(Locale.ENGLISH));
 	}
 
 	@Override
 	public void addPermission(@NotNull Permission perm)
 	{
+		Preconditions.checkNotNull(perm, "Permission cannot be null");
 		permissions.put(perm.getName().toLowerCase(Locale.ENGLISH), perm);
 	}
 
 	@Override
 	public void removePermission(@NotNull Permission perm)
 	{
+		Preconditions.checkNotNull(perm, "Permission cannot be null");
 		permissions.remove(perm.getName().toLowerCase(Locale.ENGLISH));
 	}
 
 	@Override
 	public void removePermission(@NotNull String name)
 	{
+		Preconditions.checkNotNull(name, "Name cannot be null");
 		permissions.remove(name.toLowerCase(Locale.ENGLISH));
 	}
 
@@ -852,8 +930,9 @@ public class PluginManagerMock implements PluginManager
 	 * @return A {@link Set} of permissions the permissible is subscribed to. Is the {@link Permissible} isn't
 	 * subscribed to any, returns an empty set.
 	 */
-	private Set<String> getPermissionSubscriptions(Permissible permissible)
+	private Set<String> getPermissionSubscriptions(@NotNull Permissible permissible)
 	{
+		Preconditions.checkNotNull(permissible, "Permissible cannot be null");
 		if (permissionSubscriptions.containsKey(permissible))
 		{
 			return permissionSubscriptions.get(permissible);
@@ -869,18 +948,23 @@ public class PluginManagerMock implements PluginManager
 	@Override
 	public void subscribeToPermission(@NotNull String permission, @NotNull Permissible permissible)
 	{
+		Preconditions.checkNotNull(permission, "Permission cannot be null");
+		Preconditions.checkNotNull(permissible, "Permissible cannot be null");
 		getPermissionSubscriptions(permissible).add(permission);
 	}
 
 	@Override
 	public void unsubscribeFromPermission(@NotNull String permission, @NotNull Permissible permissible)
 	{
+		Preconditions.checkNotNull(permission, "Permission cannot be null");
+		Preconditions.checkNotNull(permissible, "Permissible cannot be null");
 		getPermissionSubscriptions(permissible).remove(permission);
 	}
 
 	@Override
 	public @NotNull Set<Permissible> getPermissionSubscriptions(@NotNull String permission)
 	{
+		Preconditions.checkNotNull(permission, "Permission cannot be null");
 		Set<Permissible> subscriptions = new HashSet<>();
 		for (Entry<Permissible, Set<String>> entry : permissionSubscriptions.entrySet())
 		{
@@ -897,6 +981,7 @@ public class PluginManagerMock implements PluginManager
 	@Override
 	public void subscribeToDefaultPerms(boolean op, @NotNull Permissible permissible)
 	{
+		Preconditions.checkNotNull(permissible, "Permissible cannot be null");
 		Map<Permissible, Boolean> map = this.defaultPermissionSubscriptions.computeIfAbsent(op, k -> new WeakHashMap<>());
 		map.put(permissible, true);
 	}
@@ -904,6 +989,7 @@ public class PluginManagerMock implements PluginManager
 	@Override
 	public void unsubscribeFromDefaultPerms(boolean op, @NotNull Permissible permissible)
 	{
+		Preconditions.checkNotNull(permissible, "Permissible cannot be null");
 		Map<Permissible, Boolean> map = this.defaultPermissionSubscriptions.get(op);
 
 		if (map == null)
@@ -941,6 +1027,20 @@ public class PluginManagerMock implements PluginManager
 	public boolean useTimings()
 	{
 		return false;
+	}
+
+	@Override
+	public boolean isTransitiveDependency(PluginMeta pluginMeta, PluginMeta dependencyConfig)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void overridePermissionManager(@NotNull Plugin plugin, @Nullable PermissionManager permissionManager)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 }

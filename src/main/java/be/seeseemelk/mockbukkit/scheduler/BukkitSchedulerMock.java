@@ -31,6 +31,9 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 import java.util.logging.Logger;
 
+/**
+ * Mock implementation of a {@link BukkitScheduler}.
+ */
 public class BukkitSchedulerMock implements BukkitScheduler
 {
 
@@ -105,11 +108,25 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		}
 	}
 
+	/**
+	 * Executes an asynchronous event.
+	 *
+	 * @param event The event to execute.
+	 * @return A future representing the task.
+	 */
 	public @NotNull Future<?> executeAsyncEvent(@NotNull Event event)
 	{
 		return executeAsyncEvent(event, null);
 	}
 
+	/**
+	 * Executes an asynchronous event.
+	 *
+	 * @param event The event to execute.
+	 * @param func  A consumer to call after the event is invoked.
+	 * @param <T>   The event type.
+	 * @return A future representing the task.
+	 */
 	public <T extends Event> @NotNull Future<?> executeAsyncEvent(@NotNull T event, @Nullable Consumer<T> func)
 	{
 		MockBukkit.ensureMocking();
@@ -254,6 +271,9 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		}
 	}
 
+	/**
+	 * Blocks until all asynchronous event invocations are finished.
+	 */
 	public void waitAsyncEventsFinished()
 	{
 		for (Future<?> futureEvent : List.copyOf(queuedAsyncEvents))
@@ -552,6 +572,11 @@ public class BukkitSchedulerMock implements BukkitScheduler
 		};
 	}
 
+	/**
+	 * Gets the amount of thread currently executing asynchronous tasks.
+	 *
+	 * @return The amount of active task threads.
+	 */
 	protected int getActiveRunningCount()
 	{
 		return pool.getActiveCount();

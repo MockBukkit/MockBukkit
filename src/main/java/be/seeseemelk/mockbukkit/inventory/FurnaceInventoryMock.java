@@ -14,6 +14,11 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
 
+/**
+ * Mock implementation of a {@link FurnaceInventory}.
+ *
+ * @see InventoryMock
+ */
 public class FurnaceInventoryMock extends InventoryMock implements FurnaceInventory
 {
 
@@ -21,6 +26,11 @@ public class FurnaceInventoryMock extends InventoryMock implements FurnaceInvent
 	private static final int FUEL_SLOT = 1;
 	private static final int RESULT_SLOT = 2;
 
+	/**
+	 * Constructs a new {@link FurnaceInventoryMock} for the given holder.
+	 *
+	 * @param holder The holder of the inventory.
+	 */
 	public FurnaceInventoryMock(@Nullable InventoryHolder holder)
 	{
 		super(holder, InventoryType.FURNACE);
@@ -65,7 +75,7 @@ public class FurnaceInventoryMock extends InventoryMock implements FurnaceInvent
 	@Override
 	public boolean isFuel(@Nullable ItemStack item)
 	{
-		return item != null && !item.getType().isEmpty() && !Tag.NON_FLAMMABLE_WOOD.isTagged(item.getType()) && FurnaceFuelProvider.getFuels().contains(item.getType());
+		return item != null && !item.getType().isEmpty() && FurnaceFuelProvider.getFuels().contains(item.getType());
 	}
 
 	@Override

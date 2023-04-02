@@ -3,6 +3,8 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
+import be.seeseemelk.mockbukkit.entity.data.EntityState;
+
 import org.bukkit.Material;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.material.MaterialData;
@@ -92,4 +94,12 @@ class EndermanMockTest
 		assertTrue(endermanMock.hasBeenStaredAt());
 	}
 
+	@Test
+	void testGetEntityState()
+	{
+		endermanMock.setScreaming(false);
+		assertEquals(EntityState.DEFAULT, endermanMock.getEntityState());
+		endermanMock.setScreaming(true);
+		assertEquals(EntityState.ANGRY, endermanMock.getEntityState());
+	}
 }

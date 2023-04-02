@@ -8,16 +8,27 @@ import org.jetbrains.annotations.NotNull;
 public class Coordinate
 {
 
+	/**
+	 * The X coordinate.
+	 */
 	public final int x;
+
+	/**
+	 * The Y coordinate.
+	 */
 	public final int y;
+
+	/**
+	 * The Z coordinate.
+	 */
 	public final int z;
 
 	/**
 	 * Creates a new coordinate object with a specified (x, y, z).
 	 *
-	 * @param x The x coordinate to set.
-	 * @param y The y coordinate to set.
-	 * @param z The z coordinate to set.
+	 * @param x The X coordinate to set.
+	 * @param y The Y coordinate to set.
+	 * @param z The Z coordinate to set.
 	 */
 	public Coordinate(int x, int y, int z)
 	{
@@ -73,6 +84,16 @@ public class Coordinate
 		{
 			return false;
 		}
+	}
+
+	@Override
+	public String toString()
+	{
+		return "Coordinate{" +
+				"x=" + x +
+				", y=" + y +
+				", z=" + z +
+				'}';
 	}
 
 }

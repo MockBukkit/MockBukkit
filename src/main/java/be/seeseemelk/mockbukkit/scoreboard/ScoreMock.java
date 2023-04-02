@@ -6,6 +6,9 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * Mock implementation of a {@link Score}.
+ */
 public class ScoreMock implements Score
 {
 
@@ -15,6 +18,12 @@ public class ScoreMock implements Score
 	private int score = 0;
 	private boolean set = false;
 
+	/**
+	 * Constructs a new {@link ScoreMock} for the provided objective with the specified entry.
+	 *
+	 * @param objective The objective.
+	 * @param entry     The entry.
+	 */
 	public ScoreMock(ObjectiveMock objective, String entry)
 	{
 		this.objective = objective;

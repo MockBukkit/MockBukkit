@@ -29,6 +29,7 @@ class OfflinePlayerMockTest
 		server = MockBukkit.mock();
 		uuid = UUID.randomUUID();
 		player = new OfflinePlayerMock(uuid, "player");
+		server.getPlayerList().addOfflinePlayer(player);
 	}
 
 	@AfterEach
@@ -105,6 +106,30 @@ class OfflinePlayerMockTest
 		player.join(server);
 
 		assertNotNull(player.getPlayer());
+	}
+
+	@Test
+	void isOpDefault()
+	{
+		assertFalse(player.isOp());
+		assertFalse(MockBukkit.getMock().getOperators().contains(player));
+	}
+
+	@Test
+	void setOp()
+	{
+		player.setOp(true);
+		assertTrue(player.isOp());
+		assertTrue(MockBukkit.getMock().getOperators().contains(player));
+	}
+
+	@Test
+	void setOpFalse()
+	{
+		player.setOp(true);
+		player.setOp(false);
+		assertFalse(player.isOp());
+		assertFalse(MockBukkit.getMock().getOperators().contains(player));
 	}
 
 }

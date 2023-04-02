@@ -19,6 +19,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collection;
 import java.util.function.Predicate;
 
+/**
+ * Mock implementation of a {@link Chunk}.
+ */
 public class ChunkMock implements Chunk
 {
 
@@ -28,6 +31,13 @@ public class ChunkMock implements Chunk
 	private boolean loaded = true;
 	private final PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
 
+	/**
+	 * Constructs a new {@link ChunkMock} for the provided world, at the specified coordinates.
+	 *
+	 * @param world The world the chunk is in.
+	 * @param x     The X coordinate of the chunk.
+	 * @param z     The Y coordinate of the chunk.
+	 */
 	protected ChunkMock(final World world, final int x, final int z)
 	{
 		this.world = world;
@@ -62,13 +72,6 @@ public class ChunkMock implements Chunk
 	}
 
 	@Override
-	public long getChunkKey()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public @NotNull World getWorld()
 	{
 		return world;
@@ -83,6 +86,12 @@ public class ChunkMock implements Chunk
 		return world.getBlockAt((this.x << 4) + x, y, (this.z << 4) + z);
 	}
 
+	/**
+	 * Gets a block at a {@link Coordinate}.
+	 *
+	 * @param coordinate The coordinate at which to get the block.
+	 * @return The block at the provided coordinate.
+	 */
 	public @NotNull Block getBlock(@NotNull Coordinate coordinate)
 	{
 		return getBlock(coordinate.x, coordinate.y, coordinate.z);
@@ -102,22 +111,22 @@ public class ChunkMock implements Chunk
 		int size = (16 * 16) * Math.abs((world.getMaxHeight() - world.getMinHeight()));
 		ImmutableMap.Builder<Coordinate, BlockData> blockData = ImmutableMap.builderWithExpectedSize(size);
 		ImmutableMap.Builder<Coordinate, Biome> biomes = ImmutableMap.builderWithExpectedSize(size);
-		for (int x = 0; x < 15; x++)
+		for (int x = 0; x < 16; x++)
 		{
 			for (int y = world.getMinHeight(); y < world.getMaxHeight(); y++)
 			{
-				for (int z = 0; z < 15; z++)
+				for (int z = 0; z < 16; z++)
 				{
 					Coordinate coord = new Coordinate(x, y, z);
 					blockData.put(coord, getBlock(x, y, z).getBlockData());
-					if (includeBiome)
+					if (includeBiome || includeBiomeTempRain)
 					{
 						biomes.put(coord, world.getBiome(x << 4, y, z << 4));
 					}
 				}
 			}
 		}
-		return new ChunkSnapshotMock(x, z, world.getMinHeight(), world.getMaxHeight(), world.getName(), world.getFullTime(), blockData.build(), biomes.build());
+		return new ChunkSnapshotMock(x, z, world.getMinHeight(), world.getMaxHeight(), world.getName(), world.getFullTime(), blockData.build(), (includeBiome || includeBiomeTempRain) ? biomes.build() : null);
 	}
 
 
@@ -252,6 +261,13 @@ public class ChunkMock implements Chunk
 
 	@Override
 	public boolean contains(@NotNull BlockData block)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean contains(@NotNull Biome biome)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

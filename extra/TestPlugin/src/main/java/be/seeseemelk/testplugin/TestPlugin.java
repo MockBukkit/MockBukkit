@@ -9,12 +9,8 @@ import org.bukkit.plugin.java.JavaPluginLoader;
 
 public class TestPlugin extends JavaPlugin
 {
-	private static TestPlugin plugin;
 
-	public TestPlugin()
-	{
-		super();
-	}
+	private static TestPlugin plugin;
 
 	@Override
 	public void onEnable()
@@ -39,42 +35,12 @@ public class TestPlugin extends JavaPlugin
 
 	/**
 	 * Gets the global test plugin.
+	 *
 	 * @return The global test plugin
 	 */
 	public static TestPlugin getPlugin()
 	{
 		return plugin;
 	}
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

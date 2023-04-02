@@ -18,8 +18,8 @@
 # -- Project information -----------------------------------------------------
 
 project = 'MockBukkit'
-copyright = '2020, Sebastiaan de Schaetzen'
-author = 'Sebastiaan de Schaetzen'
+copyright = '2022, MockBukkit'
+author = 'MockBukkit'
 
 
 # -- General configuration ---------------------------------------------------

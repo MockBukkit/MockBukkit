@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
+import net.kyori.adventure.util.TriState;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
@@ -12,9 +13,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.UUID;
 
 /**
- * This is a mock of a dropped {@link Item} entity. It can hold an {@link ItemStack}, that pretty much covers it all.
+ * Mock implementation of an {@link Item}.
  *
- * @author TheBusyBiscuit
+ * @see EntityMock
  */
 public class ItemEntityMock extends EntityMock implements Item
 {
@@ -23,10 +24,19 @@ public class ItemEntityMock extends EntityMock implements Item
 
 	// The default pickup delay
 	private int delay = 10;
+	private TriState frictionState = TriState.NOT_SET;
 
+	/**
+	 * Constructs a new {@link ItemEntityMock} on the provided {@link ServerMock} with a specified {@link UUID} and {@link ItemStack}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 * @param item   The item this entity represents.
+	 */
 	public ItemEntityMock(@NotNull ServerMock server, @NotNull UUID uuid, @NotNull ItemStack item)
 	{
 		super(server, uuid);
+		Preconditions.checkNotNull(item, "Item cannot be null");
 		this.item = item.clone();
 	}
 
@@ -159,6 +169,19 @@ public class ItemEntityMock extends EntityMock implements Item
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull TriState getFrictionState()
+	{
+		return this.frictionState;
+	}
+
+	@Override
+	public void setFrictionState(@NotNull TriState state)
+	{
+		Preconditions.checkNotNull(state, "State cannot be null");
+		this.frictionState = state;
 	}
 
 }

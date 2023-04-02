@@ -5,6 +5,7 @@ import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -21,6 +22,16 @@ public final class AudioExperience
 	private final float volume;
 	private final float pitch;
 
+	/**
+	 * Constructs a new {@link AudioExperience} with the provided parameters.
+	 *
+	 * @param sound    The sound name that was heard.
+	 * @param category The category of the sound.
+	 * @param loc      The location the sound was played at.
+	 * @param volume   The volume of the sound.
+	 * @param pitch    The pitch of the sound.
+	 */
+	@ApiStatus.Internal
 	public AudioExperience(@NotNull String sound, @NotNull SoundCategory category, @NotNull Location loc, float volume,
 						   float pitch)
 	{
@@ -35,10 +46,44 @@ public final class AudioExperience
 		this.pitch = pitch;
 	}
 
+	/**
+	 * Constructs a new {@link AudioExperience} with the provided parameters.
+	 *
+	 * @param sound    The sound name that was heard.
+	 * @param category The category of the sound.
+	 * @param loc      The location the sound was played at.
+	 * @param volume   The volume of the sound.
+	 * @param pitch    The pitch of the sound.
+	 */
+	@ApiStatus.Internal
 	public AudioExperience(@NotNull Sound sound, @NotNull SoundCategory category, @NotNull Location loc, float volume,
 						   float pitch)
 	{
 		this(sound.getKey().getKey(), category, loc, volume, pitch);
+	}
+
+	/**
+	 * Constructs a new {@link AudioExperience} with the provided sound and location.
+	 *
+	 * @param sound The sound name that was heard.
+	 * @param loc   The location the sound was played at.
+	 */
+	@ApiStatus.Internal
+	public AudioExperience(net.kyori.adventure.sound.@NotNull Sound sound, @NotNull Location loc)
+	{
+		this(sound.name().asString(), switch (sound.source())
+				{
+					case MASTER -> SoundCategory.MASTER;
+					case MUSIC -> SoundCategory.MUSIC;
+					case RECORD -> SoundCategory.RECORDS;
+					case WEATHER -> SoundCategory.WEATHER;
+					case BLOCK -> SoundCategory.BLOCKS;
+					case HOSTILE -> SoundCategory.HOSTILE;
+					case NEUTRAL -> SoundCategory.NEUTRAL;
+					case PLAYER -> SoundCategory.PLAYERS;
+					case AMBIENT -> SoundCategory.AMBIENT;
+					case VOICE -> SoundCategory.VOICE;
+				}, loc, sound.volume(), sound.pitch());
 	}
 
 	/**
@@ -62,6 +107,16 @@ public final class AudioExperience
 	public SoundCategory getCategory()
 	{
 		return category;
+	}
+
+	/**
+	 * This method returns the {@link net.kyori.adventure.sound.Sound.Source} with which the {@link Sound} was played.
+	 *
+	 * @return The {@link net.kyori.adventure.sound.Sound.Source}
+	 */
+	public net.kyori.adventure.sound.Sound.@NotNull Source getSource()
+	{
+		return category.soundSource();
 	}
 
 	/**

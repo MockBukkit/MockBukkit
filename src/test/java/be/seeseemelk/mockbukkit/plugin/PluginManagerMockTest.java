@@ -4,8 +4,6 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.TestPlugin;
 import be.seeseemelk.mockbukkit.exception.EventHandlerException;
-import org.bukkit.World;
-import org.bukkit.WorldCreator;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,14 +15,17 @@ import org.bukkit.permissions.Permissible;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPluginUtils;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
+import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -207,7 +208,8 @@ class PluginManagerMockTest
 	}
 
 	@Test
-	void removePermission_String() {
+	void removePermission_String()
+	{
 		Permission permission = new Permission("mockbukkit.perm");
 		pluginManager.addPermission(permission);
 		assertTrue(pluginManager.getPermissions().contains(permission));
@@ -314,20 +316,6 @@ class PluginManagerMockTest
 	}
 
 	@Test
-	@Disabled("Not implemented yet")
-	void disablePlugin_WorldChunkTicketsRemoved()
-	{
-		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
-		World world = server.createWorld(new WorldCreator(""));
-		world.addPluginChunkTicket(0, 0, plugin);
-		assertTrue(world.getPluginChunkTickets(0, 0).contains(plugin));
-
-		pluginManager.disablePlugin(plugin);
-
-		assertFalse(world.getPluginChunkTickets(0, 0).contains(plugin));
-	}
-
-	@Test
 	void clearPlugins_LoadedPlugins_AllPluginsRemove()
 	{
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
@@ -385,6 +373,19 @@ class PluginManagerMockTest
 			}
 		}, MockBukkit.createMockPlugin());
 		assertThrowsExactly(EventHandlerException.class, () -> pluginManager.callEvent(new BlockBreakEvent(null, null)));
+	}
+
+	@ParameterizedTest
+	@CsvSource("Name(with)[other]<chars>!,bukkit,minecraft,mojang")
+	void loadPlugin_InvalidName_DoesntLoad(String name) throws ReflectiveOperationException
+	{
+		// Won't let us create an invalid name.
+		Field nameField = PluginDescriptionFile.class.getDeclaredField("name");
+		nameField.setAccessible(true);
+		PluginDescriptionFile sillyName = new PluginDescriptionFile("Name", "1.0.0", TestPlugin.class.getName());
+		nameField.set(sillyName, name);
+
+		assertThrows(RuntimeException.class, () -> pluginManager.loadPlugin(TestPlugin.class, sillyName, new Object[0]));
 	}
 
 }

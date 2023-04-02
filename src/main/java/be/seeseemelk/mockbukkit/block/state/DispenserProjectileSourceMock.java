@@ -10,15 +10,20 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * This is a {@link BlockProjectileSource} mock specifically for the {@link DispenserMock}.
+ * Mock implementation of a {@link BlockProjectileSource}, specifically for the {@link DispenserMock}.
  *
- * @author TheBusyBiscuit
+ * @see DispenserMock
  */
 class DispenserProjectileSourceMock implements BlockProjectileSource
 {
 
 	private final @NotNull DispenserMock dispenser;
 
+	/**
+	 * Constructs a new {@link DispenserProjectileSourceMock} for the provided {@link DispenserMock}.
+	 *
+	 * @param dispenser The dispenser this projectile source is for.
+	 */
 	DispenserProjectileSourceMock(@NotNull DispenserMock dispenser)
 	{
 		this.dispenser = dispenser;

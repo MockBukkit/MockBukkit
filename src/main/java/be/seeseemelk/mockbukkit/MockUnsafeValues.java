@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit;
 import com.destroystokyo.paper.util.VersionFetcher;
 import com.google.common.collect.Multimap;
 import io.papermc.paper.inventory.ItemRarity;
+import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.flattener.ComponentFlattener;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
@@ -19,8 +20,8 @@ import org.bukkit.advancement.Advancement;
 import org.bukkit.attribute.Attributable;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
-import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.CreativeCategory;
@@ -31,9 +32,13 @@ import org.bukkit.plugin.InvalidPluginException;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Mock implementation of an {@link UnsafeValues}.
+ */
 @Deprecated
 public class MockUnsafeValues implements UnsafeValues
 {
@@ -56,27 +61,38 @@ public class MockUnsafeValues implements UnsafeValues
 	}
 
 	@Override
+	@Deprecated(forRemoval = true)
 	public @NotNull PlainTextComponentSerializer plainTextSerializer()
 	{
 		return PlainTextComponentSerializer.plainText();
 	}
 
 	@Override
+	@Deprecated(forRemoval = true)
 	public @NotNull GsonComponentSerializer gsonComponentSerializer()
 	{
 		return GsonComponentSerializer.gson();
 	}
 
 	@Override
+	@Deprecated(forRemoval = true)
 	public @NotNull GsonComponentSerializer colorDownsamplingGsonComponentSerializer()
 	{
 		return GsonComponentSerializer.colorDownsamplingGson();
 	}
 
 	@Override
+	@Deprecated(forRemoval = true)
 	public @NotNull LegacyComponentSerializer legacyComponentSerializer()
 	{
 		return LegacyComponentSerializer.legacySection();
+	}
+
+	@Override
+	public Component resolveWithContext(Component component, CommandSender context, Entity scoreboardSubject, boolean bypassPermissions) throws IOException
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -262,14 +278,14 @@ public class MockUnsafeValues implements UnsafeValues
 	}
 
 	@Override
-	public String getTranslationKey(Material mat)
+	public String getBlockTranslationKey(Material material)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public String getTranslationKey(Block block)
+	public String getItemTranslationKey(Material material)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -291,13 +307,6 @@ public class MockUnsafeValues implements UnsafeValues
 
 	@Override
 	public int nextEntityId()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull <T extends Keyed> Registry<T> registryFor(Class<T> classOfT)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
