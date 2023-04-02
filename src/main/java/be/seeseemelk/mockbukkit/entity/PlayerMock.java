@@ -16,7 +16,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
 import io.papermc.paper.chat.ChatRenderer;
 import io.papermc.paper.entity.LookAnchor;
-import io.papermc.paper.entity.RelativeTeleportFlag;
+import io.papermc.paper.entity.TeleportFlag;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import net.kyori.adventure.chat.SignedMessage;
 import net.kyori.adventure.text.Component;
@@ -103,6 +103,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -329,7 +330,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	{
 		return EntityType.PLAYER;
 	}
-
 
 	/**
 	 * Simulates the player damaging a block just like {@link #simulateBlockDamage(Block)}. However, if
@@ -1102,6 +1102,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public void playSound(@NotNull Entity entity, @NotNull String sound, float volume, float pitch)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public void playSound(@NotNull Location location, @NotNull String sound, @NotNull SoundCategory category, float volume, float pitch)
 	{
 		Preconditions.checkNotNull(location, "Location cannot be null");
@@ -1126,6 +1133,40 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		Preconditions.checkNotNull(sound, "Sound cannot be null");
 		Preconditions.checkNotNull(category, "Category cannot be null");
 		heardSounds.add(new AudioExperience(sound, category, entity.getLocation(), volume, pitch));
+	}
+
+	@Override
+	public @NotNull TriState hasFlyingFallDamage()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setFlyingFallDamage(@NotNull TriState flyingFallDamage)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setHasSeenWinScreen(boolean hasSeenWinScreen)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean hasSeenWinScreen()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+	@Override
+	public void playSound(@NotNull Entity entity, @NotNull String sound, @NotNull SoundCategory category, float volume, float pitch)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -1275,7 +1316,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public void sendSignChange(@NotNull Location loc, @Nullable List<Component> lines, @NotNull DyeColor dyeColor, boolean hasGlowingText) throws IllegalArgumentException
+	public void sendSignChange(@NotNull Location loc, @Nullable List<? extends Component> lines, @NotNull DyeColor dyeColor, boolean hasGlowingText) throws IllegalArgumentException
 	{
 		Preconditions.checkNotNull(loc, "Location cannot be null");
 		Preconditions.checkNotNull(dyeColor, "DyeColor cannot be null");
@@ -1767,18 +1808,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 			flying = false;
 		}
 		this.allowFlight = flight;
-	}
-
-	@Override
-	public void setFlyingFallDamage(@NotNull TriState flyingFallDamage) {
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull TriState hasFlyingFallDamage() {
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -2478,7 +2507,21 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public boolean teleport(@NotNull Location location, PlayerTeleportEvent.@NotNull TeleportCause cause, boolean ignorePassengers, boolean dismount, @NotNull RelativeTeleportFlag @NotNull ... teleportFlags)
+	public void addCustomChatCompletions(@NotNull Collection<String> completions)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void removeCustomChatCompletions(@NotNull Collection<String> completions)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setCustomChatCompletions(@NotNull Collection<String> completions)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -2643,12 +2686,39 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public boolean teleport(@NotNull Location location, @NotNull PlayerTeleportEvent.TeleportCause cause, boolean ignorePassengers, boolean dismount)
+	@SuppressWarnings("UnstableApiUsage")
+	public boolean teleport(@NotNull Location location, @NotNull PlayerTeleportEvent.TeleportCause cause,
+							TeleportFlag @NotNull ... flags)
 	{
 		Preconditions.checkNotNull(location, "Location cannot be null");
 		Preconditions.checkNotNull(location.getWorld(), "World cannot be null");
 		Preconditions.checkNotNull(cause, "Cause cannot be null");
+
+		Set<TeleportFlag.Relative> relativeArguments = EnumSet.noneOf(TeleportFlag.Relative.class);
+		Set<TeleportFlag> allFlags = new HashSet<>();
+		for (TeleportFlag flag : flags)
+		{
+			if (flag instanceof TeleportFlag.Relative relativeTeleportFlag)
+			{
+				relativeArguments.add(relativeTeleportFlag);
+			}
+			allFlags.add(flag);
+		}
+
+		boolean dismount = !allFlags.contains(TeleportFlag.EntityState.RETAIN_VEHICLE);
+		boolean ignorePassengers = allFlags.contains(TeleportFlag.EntityState.RETAIN_PASSENGERS);
+
+		if (ignorePassengers && hasPassengers() && location.getWorld() != this.getWorld())
+		{
+			return false;
+		}
+		if (!dismount && getVehicle() != null && location.getWorld() != this.getWorld())
+		{
+			return false;
+		}
+
 		location.checkFinite();
+
 		if (isDead() || (!ignorePassengers && hasPassengers()))
 		{
 			return false;

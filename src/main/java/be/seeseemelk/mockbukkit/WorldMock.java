@@ -863,13 +863,13 @@ public class WorldMock implements World
 	@Override
 	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz, boolean randomizeData, Consumer<T> function) throws IllegalArgumentException
 	{
-		return this.spawn(location, clazz, function, CreatureSpawnEvent.SpawnReason.CUSTOM, randomizeData);
+		return this.spawn(location, clazz, function, CreatureSpawnEvent.SpawnReason.CUSTOM, randomizeData, true);
 	}
 
 	@Override
 	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz, Consumer<T> function, CreatureSpawnEvent.@NotNull SpawnReason reason) throws IllegalArgumentException
 	{
-		return this.spawn(location, clazz, function, reason, true);
+		return this.spawn(location, clazz, function, reason, true, true);
 	}
 
 	/**
@@ -880,11 +880,12 @@ public class WorldMock implements World
 	 * @param function      A function to call once the entity has been spawned.
 	 * @param reason        The reason for spawning the entity.
 	 * @param randomizeData Whether data should be randomized. Currently, does nothing.
+	 * @param callSpawnEvent Whether the entities spawn event should be called
 	 * @param <T>           The entity type.
 	 * @return The spawned entity.
 	 */
 	@SuppressWarnings("unchecked")
-	public <T extends Entity> @NotNull T spawn(@Nullable Location location, @Nullable Class<T> clazz, @Nullable Consumer<T> function, CreatureSpawnEvent.@NotNull SpawnReason reason, boolean randomizeData)
+	public <T extends Entity> @NotNull T spawn(@Nullable Location location, @Nullable Class<T> clazz, @Nullable Consumer<T> function, CreatureSpawnEvent.@NotNull SpawnReason reason, boolean randomizeData, boolean callSpawnEvent)
 	{
 		Preconditions.checkNotNull(location, "Location cannot be null");
 		Preconditions.checkNotNull(clazz, "Class cannot be null");
@@ -913,7 +914,10 @@ public class WorldMock implements World
 		}
 
 		server.registerEntity(entity);
-		callSpawnEvent(entity, reason);
+		if (callSpawnEvent)
+		{
+			callSpawnEvent(entity, reason);
+		}
 
 		return (T) entity;
 	}
@@ -1930,6 +1934,20 @@ public class WorldMock implements World
 	public void playSound(Entity entity, Sound sound, float volume, float pitch)
 	{
 		this.playSound(entity, sound, SoundCategory.MASTER, volume, pitch);
+	}
+
+	@Override
+	public void playSound(@NotNull Entity entity, @NotNull String sound, float volume, float pitch)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void playSound(@NotNull Entity entity, @NotNull String sound, @NotNull SoundCategory category, float volume, float pitch)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

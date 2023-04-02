@@ -607,4 +607,53 @@ class InventoryMockTest
 		assertNotSame(inventory, player.getOpenInventory().getTopInventory());
 	}
 
+	@Test
+	void removeItem_ShouldOnlyRemoveSimilarItems()
+	{
+
+		ItemStack diamond = new ItemStack(Material.DIAMOND);
+		ItemStack emerald = new ItemStack(Material.EMERALD);
+
+		inventory.addItem(emerald);
+
+		HashMap<Integer, ItemStack> result = inventory.removeItem(diamond);
+
+		assertEquals(1, result.values().size());
+		assertEquals(0, inventory.getNumberOfItems(diamond));
+		assertEquals(1, inventory.getNumberOfItems(emerald));
+	}
+
+	@Test
+	void removeItem_ShouldOnlyRemoveTheCorrectAmount()
+	{
+		ItemStack diamond = new ItemStack(Material.DIAMOND);
+		ItemStack emerald = new ItemStack(Material.EMERALD);
+
+		// Add 2x diamonds and 1x emerald
+		inventory.addItem(diamond, diamond);
+		inventory.addItem(emerald);
+
+		HashMap<Integer, ItemStack> result = inventory.removeItem(diamond);
+
+		assertTrue(result.isEmpty());
+		assertEquals(1, inventory.getNumberOfItems(diamond));
+		assertEquals(1, inventory.getNumberOfItems(emerald));
+	}
+
+	@Test
+	void removeItem_WhenInExcessive()
+	{
+		ItemStack diamond = new ItemStack(Material.DIAMOND);
+		ItemStack emerald = new ItemStack(Material.EMERALD);
+
+		inventory.addItem(diamond);
+		inventory.addItem(emerald);
+
+		HashMap<Integer, ItemStack> result = inventory.removeItem(diamond, diamond);
+
+		assertEquals(1, result.values().size());
+		assertEquals(0, inventory.getNumberOfItems(diamond));
+		assertEquals(1, inventory.getNumberOfItems(emerald));
+	}
+
 }
