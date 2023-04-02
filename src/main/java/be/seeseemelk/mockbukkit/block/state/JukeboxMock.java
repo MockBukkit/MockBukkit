@@ -79,6 +79,13 @@ public class JukeboxMock extends TileStateMock implements Jukebox
 	}
 
 	@Override
+	public boolean hasRecord()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull ItemStack getRecord()
 	{
 		return this.recordItem;
@@ -95,6 +102,13 @@ public class JukeboxMock extends TileStateMock implements Jukebox
 	public boolean isPlaying()
 	{
 		return this.playing;
+	}
+
+	@Override
+	public boolean startPlaying()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -131,4 +145,5 @@ public class JukeboxMock extends TileStateMock implements Jukebox
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
+
 }

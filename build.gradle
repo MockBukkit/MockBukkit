@@ -84,7 +84,9 @@ signing {
 
 jacocoTestReport {
 	reports {
-		xml.enabled true
+		xml.required = true
+		html.required = true
+		html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
 	}
 }
 
