@@ -10,37 +10,6 @@ For instance, if you have a class at ``src/main/com/github/username/MyPlugin.jav
 you would probably put unit tests for this class at
 ``src/test/com/github/username/MyPluginTests.java``.
 
-Extra Constructor
-^^^^^^^^^^^^^^^^^
-Before you can start running unit tests, your plugin will need an extra constructor.
-This is because the ``JavaPlugin`` class expects that the plugin was loaded by a
-special class loader.
-However, it is not possible to use this class loader during the unit test phase.
-
-The workaround is easy though, a constructor with a visibility of ``protected``.
-
-.. code-block:: java
-    :linenos:
-
-    public class MyPlugin extends JavaPlugin {
-        public MyPlugin() {
-            super();
-        }
-
-        protected MyPlugin(JavaPluginLoader loader, PluginDescriptionFile descriptionFile, File dataFolder, File file) {
-            super(loader, descriptionFile, dataFolder, file);
-        }
-
-        @Override
-        public void onEnable() {
-            // Executed when your plugin is enabled.
-        }
-
-        @Override
-        public void onDisable() {
-            // Executed when your plugin is disabled.
-        }
-    }
 
 Creating the Test Class
 ^^^^^^^^^^^^^^^^^^^^^^^
