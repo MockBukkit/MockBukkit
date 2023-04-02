@@ -167,7 +167,7 @@ class MockBukkitTest
 	void load_CanLoadPluginFromExternalSource_PluginLoaded()
 	{
 		MockBukkit.mock();
-		MockBukkit.loadJar("extra/TestPlugin/TestPlugin.jar");
+		MockBukkit.loadJar("extra/TestPlugin/build/libs/TestPlugin.jar");
 		Plugin[] plugins = MockBukkit.getMock().getPluginManager().getPlugins();
 		assertEquals(1, plugins.length);
 		assertEquals("TestPlugin", plugins[0].getName());

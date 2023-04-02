@@ -8,13 +8,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.plugin.java.JavaPluginLoader;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.BrokenBarrierException;
@@ -40,19 +37,11 @@ public class TestPlugin extends JavaPlugin implements Listener
 
 	public TestPlugin()
 	{
-		super();
-		extra = null;
+		this(null);
 	}
 
-	protected TestPlugin(@NotNull JavaPluginLoader loader, @NotNull PluginDescriptionFile description, @NotNull File dataFolder, @NotNull File file)
+	protected TestPlugin(Number extra)
 	{
-		super(loader, description, dataFolder, file);
-		extra = null;
-	}
-
-	protected TestPlugin(@NotNull JavaPluginLoader loader, @NotNull PluginDescriptionFile description, @NotNull File dataFolder, @NotNull File file, Number extra)
-	{
-		super(loader, description, dataFolder, file);
 		this.extra = extra;
 	}
 

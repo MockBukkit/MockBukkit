@@ -1,10 +1,13 @@
 package be.seeseemelk.mockbukkit.block.state;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Jukebox;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.JukeboxInventory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -76,6 +79,13 @@ public class JukeboxMock extends TileStateMock implements Jukebox
 	}
 
 	@Override
+	public boolean hasRecord()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull ItemStack getRecord()
 	{
 		return this.recordItem;
@@ -92,6 +102,13 @@ public class JukeboxMock extends TileStateMock implements Jukebox
 	public boolean isPlaying()
 	{
 		return this.playing;
+	}
+
+	@Override
+	public boolean startPlaying()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -113,6 +130,20 @@ public class JukeboxMock extends TileStateMock implements Jukebox
 
 		setRecord(null);
 		return true;
+	}
+
+	@Override
+	public @NotNull JukeboxInventory getInventory()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull JukeboxInventory getSnapshotInventory()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 }

@@ -3,10 +3,8 @@ package be.seeseemelk.mockbukkit;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.InvalidDescriptionException;
 import org.bukkit.plugin.InvalidPluginException;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.plugin.java.JavaPluginLoader;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -152,10 +150,7 @@ public class MockBukkit
 	@SuppressWarnings("deprecation")
 	public static void loadJar(@NotNull File jarFile) throws InvalidPluginException
 	{
-		JavaPluginLoader loader = new JavaPluginLoader(mock);
-		Plugin plugin = loader.loadPlugin(jarFile);
-		mock.getPluginManager().registerLoadedPlugin(plugin);
-		mock.getPluginManager().enablePlugin(plugin);
+			mock.getPluginManager().loadPlugin(jarFile);
 	}
 
 	/**
@@ -351,7 +346,7 @@ public class MockBukkit
 	{
 		ensureMocking();
 		PluginDescriptionFile description = new PluginDescriptionFile(pluginName, "1.0.0", MockPlugin.class.getName());
-		JavaPlugin instance = mock.getPluginManager().loadPlugin(MockPlugin.class, description);
+		JavaPlugin instance = mock.getPluginManager().loadPlugin(MockPlugin.class, description, new Object[0]);
 		mock.getPluginManager().enablePlugin(instance);
 		return (MockPlugin) instance;
 	}
