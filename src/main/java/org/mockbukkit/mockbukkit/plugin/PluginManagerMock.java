@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.plugin;
 
+import org.mockbukkit.mockbukkit.PermissionManagerMock;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.exception.EventHandlerException;
@@ -8,10 +9,13 @@ import com.destroystokyo.paper.event.server.ServerExceptionEvent;
 import com.destroystokyo.paper.exception.ServerEventException;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
+import io.papermc.paper.plugin.PermissionManager;
+import io.papermc.paper.plugin.configuration.PluginMeta;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.PluginCommandUtils;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.Event;
+import org.bukkit.event.EventException;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
@@ -22,7 +26,6 @@ import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.EventExecutor;
 import org.bukkit.plugin.IllegalPluginAccessException;
 import org.bukkit.plugin.InvalidDescriptionException;
-import org.bukkit.plugin.InvalidPluginException;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginLoader;
@@ -30,7 +33,6 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredListener;
 import org.bukkit.plugin.UnknownDependencyException;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.plugin.java.JavaPluginLoader;
 import org.bukkit.plugin.java.JavaPluginUtils;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
@@ -41,12 +43,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -63,6 +65,7 @@ import java.util.WeakHashMap;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
+import java.util.jar.JarFile;
 import java.util.logging.Level;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -73,13 +76,12 @@ import static org.junit.jupiter.api.Assertions.fail;
 /**
  * Mock implementation of a {@link PluginManager}.
  */
-public class PluginManagerMock implements PluginManager
+public class PluginManagerMock extends PermissionManagerMock implements PluginManager
 {
 
 	private static final Pattern VALID_PLUGIN_NAMES = Pattern.compile("^[A-Za-z0-9_.-]+$");
 
 	private final @NotNull ServerMock server;
-	private final @NotNull JavaPluginLoader loader;
 	private final List<Plugin> plugins = new ArrayList<>();
 	private final List<PluginCommand> commands = new ArrayList<>();
 	private final List<Event> events = new ArrayList<>();
@@ -88,9 +90,6 @@ public class PluginManagerMock implements PluginManager
 	private final Map<Permissible, Set<String>> permissionSubscriptions = new HashMap<>();
 	private final Map<Boolean, Map<Permissible, Boolean>> defaultPermissionSubscriptions = new HashMap<>();
 	private final @NotNull Map<String, List<Listener>> listeners = new HashMap<>();
-
-	private final List<Class<?>> pluginConstructorTypes = Arrays.asList(JavaPluginLoader.class,
-			PluginDescriptionFile.class, File.class, File.class);
 
 	/**
 	 * Constructs a new {@link PluginManagerMock} for the provided {@link ServerMock}.
@@ -103,7 +102,6 @@ public class PluginManagerMock implements PluginManager
 	{
 		Preconditions.checkNotNull(server, "Server cannot be null");
 		this.server = server;
-		loader = new JavaPluginLoader(this.server);
 	}
 
 	/**
@@ -269,8 +267,7 @@ public class PluginManagerMock implements PluginManager
 	 * Checks if a constructor is compatible with an array of types.
 	 *
 	 * @param constructor The constructor to check.
-	 * @param types       The array of parameter types the constructor must support. Note that the first 4 parameters
-	 *                    should be an exact match while the rest don't have to be.
+	 * @param types       The array of parameter types the constructor must support.
 	 * @return {@code true} if the constructor is compatible, {@code false} if it isn't.
 	 */
 	private boolean isConstructorCompatible(@NotNull Constructor<?> constructor, @NotNull Class<?> @NotNull [] types)
@@ -286,14 +283,7 @@ public class PluginManagerMock implements PluginManager
 			Class<?> type = types[i];
 			Preconditions.checkNotNull(type, "Type cannot be null");
 			Class<?> parameter = parameters[i];
-			if (i < 4)
-			{
-				if (!type.equals(parameter))
-				{
-					return false;
-				}
-			}
-			else if (!parameter.isAssignableFrom(type))
+			if (!parameter.isAssignableFrom(type))
 			{
 				return false;
 			}
@@ -305,8 +295,7 @@ public class PluginManagerMock implements PluginManager
 	 * Looks for a compatible constructor of a plugin with a certain constructor.
 	 *
 	 * @param class1 The plugin class for which a constructor should be found.
-	 * @param types  The types of parameters that the constructor should be able to except. Note that the first 4
-	 *               parameters should be an exact match while the rest don't have to be.
+	 * @param types  The types of parameters that the constructor should be able to except.
 	 * @return A constructor that will take the given types.
 	 * @throws NoSuchMethodException if no compatible constructor could be found.
 	 */
@@ -409,21 +398,11 @@ public class PluginManagerMock implements PluginManager
 		Preconditions.checkNotNull(class1, "Class cannot be null");
 		Preconditions.checkNotNull(description, "Description cannot be null");
 		Preconditions.checkNotNull(parameters, "Parameters cannot be null");
-
-		String name = description.getName();
-		if (name.equalsIgnoreCase("bukkit") || name.equalsIgnoreCase("minecraft") || name.equalsIgnoreCase("mojang"))
-		{
-			throw new RuntimeException("Restricted Name");
-		}
-
-		if (!VALID_PLUGIN_NAMES.matcher(name).matches())
-		{
-			throw new RuntimeException("Invalid name. Must match " + VALID_PLUGIN_NAMES.pattern());
-		}
-
 		try
 		{
-			List<Class<?>> types = new ArrayList<>(pluginConstructorTypes);
+			class1 = createClassLoader(description).loadProxyClass(class1);
+
+			List<Class<?>> types = new ArrayList<>();
 			for (Object parameter : parameters)
 			{
 				Preconditions.checkNotNull(parameter, "Parameters cannot be null");
@@ -433,14 +412,7 @@ public class PluginManagerMock implements PluginManager
 			Constructor<? extends JavaPlugin> constructor = getCompatibleConstructor(class1, types.toArray(new Class<?>[0]));
 			constructor.setAccessible(true);
 
-			Object[] arguments = new Object[types.size()];
-			arguments[0] = loader;
-			arguments[1] = description;
-			arguments[2] = createTemporaryDirectory(name + "-" + description.getVersion());
-			arguments[3] = createTemporaryPluginFile(name + "-" + description.getVersion());
-			System.arraycopy(parameters, 0, arguments, 4, parameters.length);
-
-			JavaPlugin plugin = constructor.newInstance(arguments);
+			JavaPlugin plugin = constructor.newInstance(parameters);
 			registerLoadedPlugin(plugin);
 			return plugin;
 		}
@@ -450,16 +422,20 @@ public class PluginManagerMock implements PluginManager
 		}
 	}
 
-	/**
-	 * Load a plugin from a class. It will use the system resource {@code plugin.yml} as the resource file.
-	 *
-	 * @param description The {@link PluginDescriptionFile} that contains information about the plugin.
-	 * @param class1      The plugin to load.
-	 * @return The loaded plugin.
-	 */
-	public @NotNull JavaPlugin loadPlugin(@NotNull Class<? extends JavaPlugin> class1, @NotNull PluginDescriptionFile description)
+	private MockBukkitConfiguredPluginClassLoader createClassLoader(PluginDescriptionFile description) throws IOException
 	{
-		return loadPlugin(class1, description, new Object[0]);
+		String name = description.getName();
+		if (name.equalsIgnoreCase("bukkit") || name.equalsIgnoreCase("minecraft") || name.equalsIgnoreCase("mojang"))
+		{
+			throw new RuntimeException("Restricted Name");
+		}
+		if (!VALID_PLUGIN_NAMES.matcher(name).matches())
+		{
+			throw new RuntimeException("Invalid name. Must match " + VALID_PLUGIN_NAMES.pattern());
+		}
+		File dataFolder = createTemporaryDirectory(name + "-" + description.getVersion());
+		File pluginFile = createTemporaryPluginFile(name + "-" + description.getVersion());
+		return new MockBukkitConfiguredPluginClassLoader(server, description, dataFolder, pluginFile);
 	}
 
 	/**
@@ -568,8 +544,9 @@ public class PluginManagerMock implements PluginManager
 		{
 			registration.callEvent(event);
 		}
-		catch (Exception ex)
+		catch (EventException eventException)
 		{
+			Throwable ex = eventException.getCause();
 			if (!(event instanceof ServerExceptionEvent))
 			{ // Don't cause an endless loop
 				String msg = "Could not pass event " + event.getEventName() + " to " + registration.getPlugin().getDescription().getFullName();
@@ -712,11 +689,25 @@ public class PluginManagerMock implements PluginManager
 	}
 
 	@Override
-	public Plugin loadPlugin(@NotNull File file)
-			throws InvalidPluginException, InvalidDescriptionException, UnknownDependencyException
+	public Plugin loadPlugin(@NotNull File file) throws UnknownDependencyException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		try
+		{
+			JarFile jarFile = new JarFile(file);
+			PluginDescriptionFile descriptionFile = new PluginDescriptionFile(jarFile.getInputStream(jarFile.getEntry("plugin.yml")));
+			MockBukkitConfiguredPluginClassLoader classLoader = createClassLoader(descriptionFile);
+			classLoader.setJarFile(jarFile);
+
+			Class<?> pluginClass = classLoader.loadClass(descriptionFile.getMainClass(), true, false, false);
+			JavaPlugin plugin = (JavaPlugin) pluginClass.getConstructor().newInstance();
+			registerLoadedPlugin(plugin);
+			return plugin;
+		}
+		catch (IOException | InvalidDescriptionException | ClassNotFoundException | NoSuchMethodException |
+			   InstantiationException | IllegalAccessException | InvocationTargetException e)
+		{
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Override
@@ -1036,6 +1027,20 @@ public class PluginManagerMock implements PluginManager
 	public boolean useTimings()
 	{
 		return false;
+	}
+
+	@Override
+	public boolean isTransitiveDependency(PluginMeta pluginMeta, PluginMeta dependencyConfig)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void overridePermissionManager(@NotNull Plugin plugin, @Nullable PermissionManager permissionManager)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 }

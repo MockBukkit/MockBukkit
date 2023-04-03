@@ -216,6 +216,13 @@ public class BlockDataMock implements BlockData
 	}
 
 	@Override
+	public @NotNull Material getPlacementMaterial()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public boolean isRandomlyTicked()
 	{
 		// TODO Auto-generated method stub

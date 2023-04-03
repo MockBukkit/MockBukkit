@@ -395,7 +395,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
-	public void lore(@Nullable List<Component> lore)
+	public void lore(@Nullable List<? extends Component> lore)
 	{
 		if (lore != null && !lore.isEmpty())
 		{

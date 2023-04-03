@@ -1,13 +1,18 @@
 package org.mockbukkit.mockbukkit.entity;
 
+import net.kyori.adventure.sound.Sound;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.bukkit.DyeColor;
+import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Sheep;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.util.AdventureConverters;
 
 import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Mock implementation of a {@link Sheep}.
@@ -59,6 +64,25 @@ public class SheepMock extends AnimalsMock implements Sheep
 	public EntityType getType()
 	{
 		return EntityType.SHEEP;
+	}
+
+	@Override
+	public void shear(Sound.@NotNull Source source)
+	{
+		this.getWorld().playSound(this, org.bukkit.Sound.ENTITY_SHEEP_SHEAR, AdventureConverters.soundSourceToCategory(source), 1.0F, 1.0F);
+		this.setSheared(true);
+		int i = ThreadLocalRandom.current().nextInt(1, 4);
+
+		for (int j = 0; j < i; ++j)
+		{
+			this.getWorld().dropItem(this.getLocation(), new ItemStack(Material.valueOf(this.color.name() + "_WOOL")));
+		}
+	}
+
+	@Override
+	public boolean readyToBeSheared()
+	{
+		return !this.isDead() && !this.isSheared() && this.isAdult();
 	}
 
 }

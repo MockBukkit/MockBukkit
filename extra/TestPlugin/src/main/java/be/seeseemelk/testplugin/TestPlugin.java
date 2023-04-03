@@ -12,11 +12,6 @@ public class TestPlugin extends JavaPlugin
 
 	private static TestPlugin plugin;
 
-	public TestPlugin()
-	{
-		super();
-	}
-
 	@Override
 	public void onEnable()
 	{

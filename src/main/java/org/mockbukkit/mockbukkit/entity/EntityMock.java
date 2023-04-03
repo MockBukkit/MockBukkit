@@ -3,6 +3,7 @@ package org.mockbukkit.mockbukkit.entity;
 import org.mockbukkit.mockbukkit.AsyncCatcher;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.WorldMock;
 import org.mockbukkit.mockbukkit.command.MessageTarget;
 import org.mockbukkit.mockbukkit.entity.data.EntityData;
 import org.mockbukkit.mockbukkit.entity.data.EntityDataRegistry;
@@ -11,6 +12,7 @@ import org.mockbukkit.mockbukkit.entity.data.EntitySubType;
 import org.mockbukkit.mockbukkit.metadata.MetadataTable;
 import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerMock;
 import com.google.common.base.Preconditions;
+import io.papermc.paper.entity.TeleportFlag;
 import net.kyori.adventure.audience.MessageType;
 import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.text.Component;
@@ -89,6 +91,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private @Nullable Component customName = null;
 	private boolean customNameVisible = false;
 	private boolean invulnerable;
+	private boolean persistent = true;
 	private boolean glowingFlag = false;
 	private final Queue<Component> messages = new LinkedTransferQueue<>();
 	private final PermissibleBase perms;
@@ -261,9 +264,9 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public @NotNull World getWorld()
+	public @NotNull WorldMock getWorld()
 	{
-		return location.getWorld();
+		return (WorldMock) location.getWorld();
 	}
 
 	@Override
@@ -307,16 +310,32 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
+	@SuppressWarnings("UnstableApiUsage")
 	public boolean teleport(@NotNull Location location, @NotNull TeleportCause cause)
 	{
-		return teleport(location, cause, false);
+		return teleport(location, cause, new TeleportFlag[0]);
 	}
 
 	@Override
-	public boolean teleport(@NotNull Location location, @NotNull TeleportCause cause, boolean ignorePassengers, boolean dismount)
+	@SuppressWarnings("UnstableApiUsage")
+	public boolean teleport(@NotNull Location location, @NotNull TeleportCause cause, TeleportFlag @NotNull ... flags)
 	{
 		Preconditions.checkNotNull(location, "Location cannot be null"); // The world can be null if it's not a player
 		location.checkFinite();
+
+		Set<TeleportFlag> flagSet = Set.of(flags);
+		boolean dismount = !flagSet.contains(TeleportFlag.EntityState.RETAIN_VEHICLE);
+		boolean ignorePassengers = flagSet.contains(TeleportFlag.EntityState.RETAIN_PASSENGERS);
+
+		if (flagSet.contains(TeleportFlag.EntityState.RETAIN_PASSENGERS) && this.hasPassengers() && location.getWorld().equals(this.getWorld()))
+		{
+			return false;
+		}
+		if (!dismount && getVehicle() != null && location.getWorld() != this.getWorld())
+		{
+			return false;
+		}
+
 		if (this.removed || (!ignorePassengers && hasPassengers()))
 		{
 			return false;
@@ -1088,15 +1107,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public boolean isPersistent()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.persistent;
 	}
 
 	@Override
 	public void setPersistent(boolean persistent)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.persistent = persistent;
 	}
 
 	@Override
@@ -1281,6 +1298,20 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 
 	@Override
 	public void setSneaking(boolean sneak)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setVisibleByDefault(boolean visible)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isVisibleByDefault()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
