@@ -15,7 +15,7 @@ public class CamelMock extends AbstractHorseMock implements Camel
 	private boolean isSitting = false;
 
 	/**
-	 * Constructs a new {@link AbstractHorseMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link CamelMock} on the provided {@link ServerMock} with a specified {@link UUID}.
 	 *
 	 * @param server The server to create the entity on.
 	 * @param uuid   The UUID of the entity.
