@@ -561,6 +561,13 @@ public class WorldMock implements World
 		return getChunkAt(new ChunkCoordinate(x, z));
 	}
 
+	@Override
+	public @NotNull Chunk getChunkAt(int x, int z, boolean generate)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 	/**
 	 * Gets the chunk at a specific chunk coordinate.
 	 * <p>
