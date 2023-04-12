@@ -29,6 +29,7 @@ import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.Iterator;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -388,4 +389,10 @@ class PluginManagerMockTest
 		assertThrows(RuntimeException.class, () -> pluginManager.loadPlugin(TestPlugin.class, sillyName, new Object[0]));
 	}
 
+	@Test
+	void test_customClassLoader()
+	{
+		assertDoesNotThrow(() -> plugin.createCustomClass());
+		assertTrue(plugin.classLoadSucceed);
+	}
 }

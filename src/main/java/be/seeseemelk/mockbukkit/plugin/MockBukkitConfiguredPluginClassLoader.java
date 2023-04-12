@@ -54,17 +54,23 @@ public class MockBukkitConfiguredPluginClassLoader extends ClassLoader implement
 	}
 
 	@Override
-	public Class<?> loadClass(@NotNull String name, boolean resolve, boolean checkGlobal, boolean checkLibraries) throws ClassNotFoundException
+	protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException
 	{
 		Class<?> groupLoadedClass = classLoaderGroup.getClassByName(name, resolve, this);
 		if (groupLoadedClass == null)
 		{
-			return loadClass(name, resolve);
+			return super.loadClass(name, resolve);
 		}
 		else
 		{
 			return groupLoadedClass;
 		}
+	}
+
+	@Override
+	public Class<?> loadClass(@NotNull String name, boolean resolve, boolean checkGlobal, boolean checkLibraries) throws ClassNotFoundException
+	{
+		return loadClass(name, resolve);
 	}
 
 	@Override
