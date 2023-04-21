@@ -47,7 +47,7 @@ class GuardianMockTest
 	@Test
 	void testSetLaser()
 	{
-		guardian.setTarget(new PlayerMock(MockBukkit.getMock(), "player"));
+		guardian.setTarget(new PlayerMock(MockBukkit.getMock(), "player", UUID.randomUUID()));
 		assertTrue(guardian.setLaser(true));
 	}
 

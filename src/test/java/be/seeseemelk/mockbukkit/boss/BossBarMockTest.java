@@ -12,6 +12,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.UUID;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -95,7 +97,7 @@ class BossBarMockTest
 	{
 		assertEquals(0, bar.getPlayers().size());
 
-		Player player1 = new PlayerMock(server, "TestPlayer");
+		Player player1 = new PlayerMock(server, "TestPlayer", UUID.randomUUID());
 		bar.addPlayer(player1);
 		assertEquals(1, bar.getPlayers().size());
 		assertEquals(player1, bar.getPlayers().get(0));
@@ -103,7 +105,7 @@ class BossBarMockTest
 		bar.getPlayers().clear();
 		assertEquals(1, bar.getPlayers().size());
 
-		Player player2 = new PlayerMock(server, "TestPlayer2");
+		Player player2 = new PlayerMock(server, "TestPlayer2", UUID.randomUUID());
 		bar.addPlayer(player2);
 		assertEquals(2, bar.getPlayers().size());
 

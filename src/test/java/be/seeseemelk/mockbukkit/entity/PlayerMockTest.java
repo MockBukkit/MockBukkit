@@ -1626,7 +1626,7 @@ class PlayerMockTest
 	@Test
 	void getAddress_NullWhenNotOnline()
 	{
-		PlayerMock player = new PlayerMock(server, "testPlayer");
+		PlayerMock player = new PlayerMock(server, "testPlayer", UUID.randomUUID());
 		assertNull(player.getAddress());
 		server.addPlayer(player);
 		assertNotNull(player.getAddress());
@@ -1676,7 +1676,7 @@ class PlayerMockTest
 	@Test
 	void testReconnectWithoutJoiningBefore()
 	{
-		player = new PlayerMock(server, "testPlayer");
+		player = new PlayerMock(server, "testPlayer", UUID.randomUUID());
 
 		assertThrows(IllegalStateException.class, () -> player.reconnect());
 
@@ -1783,7 +1783,7 @@ class PlayerMockTest
 	@Test
 	void testKickWithOfflinePlayer()
 	{
-		PlayerMock player = new PlayerMock(server, "testPlayer");
+		PlayerMock player = new PlayerMock(server, "testPlayer", UUID.randomUUID());
 		player.kick(Component.text("test"), PlayerKickEvent.Cause.KICK_COMMAND);
 		server.getPluginManager().assertEventNotFired(PlayerKickEvent.class);
 	}
@@ -2087,7 +2087,7 @@ class PlayerMockTest
 	@Test
 	void hasPlayedBefore_NotAddedToServer_False()
 	{
-		PlayerMock player = new PlayerMock(server, "player");
+		PlayerMock player = new PlayerMock(server, "player", UUID.randomUUID());
 
 		assertFalse(player.hasPlayedBefore());
 	}
@@ -2150,6 +2150,14 @@ class PlayerMockTest
 			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
 					&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
 		});
+	}
+
+	@Test
+	void testPlayerQuitEventGetFired()
+	{
+		PlayerMock player = server.addPlayer("Player");
+		player.disconnect();
+		server.getPluginManager().assertEventFired(PlayerQuitEvent.class);
 	}
 
 	public static Stream<Arguments> provideInstrument()
