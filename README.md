@@ -48,13 +48,14 @@ It aims to be provide complete mock implementation of CraftBukkit that can be co
 
 MockBukkit can easily be included in your project using either Maven or gradle.
 
+> Note: The Breaking Changes intended for 3.0 were already made in 2.145.1. Due to an Error it didn't get properly tagged
+
 <details>
 <summary><h3>Adding MockBukkit via Gradle</h3></summary>
 
 MockBukkit can easily be included in Gradle using the Maven Central and PaperMC repositories.
 Make sure to update the version as necessary.
 
-> Note: The Breaking Changes intended for 3.0 were already made in 2.145.1. Due to an Error it didn't get properly tagged
 
 ```gradle
 repositories {
