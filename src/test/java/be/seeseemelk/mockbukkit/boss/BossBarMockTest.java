@@ -97,7 +97,7 @@ class BossBarMockTest
 	{
 		assertEquals(0, bar.getPlayers().size());
 
-		Player player1 = new PlayerMock(server, "TestPlayer", UUID.randomUUID());
+		Player player1 = new PlayerMock(server, "TestPlayer");
 		bar.addPlayer(player1);
 		assertEquals(1, bar.getPlayers().size());
 		assertEquals(player1, bar.getPlayers().get(0));
@@ -105,7 +105,7 @@ class BossBarMockTest
 		bar.getPlayers().clear();
 		assertEquals(1, bar.getPlayers().size());
 
-		Player player2 = new PlayerMock(server, "TestPlayer2", UUID.randomUUID());
+		Player player2 = new PlayerMock(server, "TestPlayer2");
 		bar.addPlayer(player2);
 		assertEquals(2, bar.getPlayers().size());
 

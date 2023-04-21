@@ -170,6 +170,21 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private final List<ItemStack> consumedItems = new LinkedList<>();
 
 	/**
+	 * Constructs a new {@link PlayerMock} for the provided server with the specified name.
+	 * The players UUID will be generated from the name.
+	 *
+	 * @param server The player's server.
+	 * @param name   The player's name.
+	 * @see ServerMock#addPlayer
+	 */
+	public PlayerMock(@NotNull ServerMock server, @NotNull String name)
+	{
+		this(server, name, UUID.nameUUIDFromBytes(("OfflinePlayer:" + name).getBytes(StandardCharsets.UTF_8)));
+		this.online = false;
+		this.scoreboard = server.getScoreboardManager().getMainScoreboard();
+	}
+
+	/**
 	 * Constructs a new {@link PlayerMock} for the provided server with the specified name and {@link UUID}.
 	 * Does NOT add the player to the server.
 	 *

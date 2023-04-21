@@ -1626,7 +1626,7 @@ class PlayerMockTest
 	@Test
 	void getAddress_NullWhenNotOnline()
 	{
-		PlayerMock player = new PlayerMock(server, "testPlayer", UUID.randomUUID());
+		PlayerMock player = new PlayerMock(server, "testPlayer");
 		assertNull(player.getAddress());
 		server.addPlayer(player);
 		assertNotNull(player.getAddress());
@@ -1676,7 +1676,7 @@ class PlayerMockTest
 	@Test
 	void testReconnectWithoutJoiningBefore()
 	{
-		player = new PlayerMock(server, "testPlayer", UUID.randomUUID());
+		player = new PlayerMock(server, "testPlayer");
 
 		assertThrows(IllegalStateException.class, () -> player.reconnect());
 
@@ -2087,7 +2087,7 @@ class PlayerMockTest
 	@Test
 	void hasPlayedBefore_NotAddedToServer_False()
 	{
-		PlayerMock player = new PlayerMock(server, "player", UUID.randomUUID());
+		PlayerMock player = new PlayerMock(server, "player");
 
 		assertFalse(player.hasPlayedBefore());
 	}

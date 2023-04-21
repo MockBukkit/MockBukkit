@@ -491,7 +491,7 @@ class ServerMockTest
 	})
 	void getPlayer_NameAndPlayerExists_PlayerFound(@NotNull String actual, @NotNull String expected)
 	{
-		PlayerMock player = new PlayerMock(server, actual, UUID.randomUUID());
+		PlayerMock player = new PlayerMock(server, actual);
 		server.addPlayer(player);
 		assertSame(player, server.getPlayer(expected));
 	}
@@ -499,7 +499,7 @@ class ServerMockTest
 	@Test
 	void getPlayer_UUIDAndPlayerExists_PlayerFound()
 	{
-		PlayerMock player = new PlayerMock(server, "player", UUID.randomUUID());
+		PlayerMock player = new PlayerMock(server, "player");
 		server.addPlayer(player);
 		assertSame(player, server.getPlayer(player.getUniqueId()));
 	}
@@ -507,7 +507,7 @@ class ServerMockTest
 	@Test
 	void getPlayer_PlayerNameIncorrect_PlayerNotFound()
 	{
-		PlayerMock player = new PlayerMock(server, "player_other", UUID.randomUUID());
+		PlayerMock player = new PlayerMock(server, "player_other");
 		server.addPlayer(player);
 		assertNull(server.getPlayer("other_player"));
 	}
@@ -515,7 +515,7 @@ class ServerMockTest
 	@Test
 	void getPlayer_PlayerNameCasingIncorrect_PlayerFound()
 	{
-		PlayerMock player = new PlayerMock(server, "player", UUID.randomUUID());
+		PlayerMock player = new PlayerMock(server, "player");
 		server.addPlayer(player);
 		assertSame(player, server.getPlayer("PLAYER"));
 	}
@@ -523,7 +523,7 @@ class ServerMockTest
 	@Test
 	void getPlayerExact_CasingMatches_PlayerFound()
 	{
-		PlayerMock player = new PlayerMock(server, "player", UUID.randomUUID());
+		PlayerMock player = new PlayerMock(server, "player");
 		server.addPlayer(player);
 		assertSame(player, server.getPlayerExact("player"));
 	}
@@ -531,7 +531,7 @@ class ServerMockTest
 	@Test
 	void getPlayerExact_CasingDoesNotMatch_PlayerFound()
 	{
-		PlayerMock player = new PlayerMock(server, "player", UUID.randomUUID());
+		PlayerMock player = new PlayerMock(server, "player");
 		server.addPlayer(player);
 		assertNotNull(server.getPlayerExact("PLAYER"));
 	}
@@ -539,7 +539,7 @@ class ServerMockTest
 	@Test
 	void getPlayerExact_PlayerNameIncorrect_PlayerNotFound()
 	{
-		PlayerMock player = new PlayerMock(server, "player_other", UUID.randomUUID());
+		PlayerMock player = new PlayerMock(server, "player_other");
 		server.addPlayer(player);
 		assertNull(server.getPlayerExact("player"));
 	}
@@ -547,7 +547,7 @@ class ServerMockTest
 	@Test
 	void getOperators_OneOperator()
 	{
-		PlayerMock player = new PlayerMock(server, "operator", UUID.randomUUID());
+		PlayerMock player = new PlayerMock(server, "operator");
 		server.addPlayer(player);
 		player.setOp(true);
 
@@ -658,7 +658,7 @@ class ServerMockTest
 	@Test
 	void testGetPlayerUniqueID()
 	{
-		PlayerMock player = new PlayerMock(server, "player", UUID.randomUUID());
+		PlayerMock player = new PlayerMock(server, "player");
 		server.addPlayer(player);
 		UUID uuid = player.getUniqueId();
 		assertEquals(uuid, server.getPlayerUniqueId(player.getName()));
