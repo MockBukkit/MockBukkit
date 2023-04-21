@@ -179,9 +179,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 */
 	public PlayerMock(@NotNull ServerMock server, @NotNull String name)
 	{
-		this(server, name, UUID.nameUUIDFromBytes(("OfflinePlayer:" + name).getBytes(StandardCharsets.UTF_8)));
-		this.online = false;
-		this.scoreboard = server.getScoreboardManager().getMainScoreboard();
+		this(server, name, UUID.randomUUID());
 	}
 
 	/**

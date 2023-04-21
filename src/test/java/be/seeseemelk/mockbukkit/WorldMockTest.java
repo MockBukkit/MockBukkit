@@ -9,6 +9,7 @@ import be.seeseemelk.mockbukkit.entity.AxolotlMock;
 import be.seeseemelk.mockbukkit.entity.BatMock;
 import be.seeseemelk.mockbukkit.entity.BeeMock;
 import be.seeseemelk.mockbukkit.entity.BlazeMock;
+import be.seeseemelk.mockbukkit.entity.CamelMock;
 import be.seeseemelk.mockbukkit.entity.CatMock;
 import be.seeseemelk.mockbukkit.entity.CaveSpiderMock;
 import be.seeseemelk.mockbukkit.entity.ChickenMock;
@@ -1076,7 +1077,8 @@ class WorldMockTest
 				Arguments.of(EntityType.ZOMBIE, ZombieMock.class),
 				Arguments.of(EntityType.FIREWORK, FireworkMock.class),
 				Arguments.of(EntityType.EXPERIENCE_ORB, ExperienceOrbMock.class),
-				Arguments.of(EntityType.MINECART_FURNACE, PoweredMinecartMock.class)
+				Arguments.of(EntityType.MINECART_FURNACE, PoweredMinecartMock.class),
+				Arguments.of(EntityType.CAMEL, CamelMock.class)
 		);
 	}
 
