@@ -8,6 +8,7 @@ import org.mockbukkit.mockbukkit.entity.AxolotlMock;
 import org.mockbukkit.mockbukkit.entity.BatMock;
 import org.mockbukkit.mockbukkit.entity.BeeMock;
 import org.mockbukkit.mockbukkit.entity.BlazeMock;
+import org.mockbukkit.mockbukkit.entity.CamelMock;
 import org.mockbukkit.mockbukkit.entity.CatMock;
 import org.mockbukkit.mockbukkit.entity.CaveSpiderMock;
 import org.mockbukkit.mockbukkit.entity.ChickenMock;
