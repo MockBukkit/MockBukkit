@@ -349,7 +349,7 @@ public class ServerMock extends Server.Spigot implements Server
 	public @NotNull PlayerMock addPlayer(@NotNull String name)
 	{
 		AsyncCatcher.catchOp("player add");
-		PlayerMock player = new PlayerMock(this, name);
+		PlayerMock player = new PlayerMock(this, name, UUID.randomUUID());
 		addPlayer(player);
 		return player;
 	}

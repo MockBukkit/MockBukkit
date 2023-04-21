@@ -65,6 +65,13 @@ public class ChunkMock implements Chunk
 	}
 
 	@Override
+	public boolean isGenerated()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull BlockState[] getTileEntities(boolean useSnapshot)
 	{
 		// TODO Auto-generated method stub

@@ -98,6 +98,7 @@ import org.bukkit.entity.Axolotl;
 import org.bukkit.entity.Bat;
 import org.bukkit.entity.Bee;
 import org.bukkit.entity.Blaze;
+import org.bukkit.entity.Camel;
 import org.bukkit.entity.Cat;
 import org.bukkit.entity.CaveSpider;
 import org.bukkit.entity.Chicken;
@@ -557,6 +558,13 @@ public class WorldMock implements World
 	public @NotNull ChunkMock getChunkAt(int x, int z)
 	{
 		return getChunkAt(new ChunkCoordinate(x, z));
+	}
+
+	@Override
+	public @NotNull Chunk getChunkAt(int x, int z, boolean generate)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	/**
@@ -1180,6 +1188,10 @@ public class WorldMock implements World
 		else if (clazz == PoweredMinecart.class)
 		{
 			return new PoweredMinecartMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Camel.class)
+		{
+			return new CamelMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}

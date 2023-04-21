@@ -22,6 +22,7 @@ import java.util.zip.ZipEntry;
 
 public class MockBukkitConfiguredPluginClassLoader extends ClassLoader implements ConfiguredPluginClassLoader
 {
+
 	private final ServerMock server;
 	private final PluginDescriptionFile description;
 	private final File dataFolder;
@@ -92,7 +93,7 @@ public class MockBukkitConfiguredPluginClassLoader extends ClassLoader implement
 	@Override
 	public void init(JavaPlugin plugin)
 	{
-		plugin.init(server, description, dataFolder, pluginFile, this, getConfiguration());
+		plugin.init(server, description, dataFolder, pluginFile, this, getConfiguration(), PaperPluginLogger.getLogger(getConfiguration()));
 	}
 
 	@Override

@@ -47,6 +47,27 @@ public class GuardianMock extends MonsterMock implements Guardian
 	}
 
 	@Override
+	public int getLaserDuration()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setLaserTicks(int ticks)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getLaserTicks()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public boolean isElder()
 	{
 		return false;
@@ -56,6 +77,13 @@ public class GuardianMock extends MonsterMock implements Guardian
 	public void setElder(boolean shouldBeElder)
 	{
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean isMoving()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

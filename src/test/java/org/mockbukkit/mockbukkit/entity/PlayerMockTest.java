@@ -1783,7 +1783,7 @@ class PlayerMockTest
 	@Test
 	void testKickWithOfflinePlayer()
 	{
-		PlayerMock player = new PlayerMock(server, "testPlayer");
+		PlayerMock player = new PlayerMock(server, "testPlayer", UUID.randomUUID());
 		player.kick(Component.text("test"), PlayerKickEvent.Cause.KICK_COMMAND);
 		server.getPluginManager().assertEventNotFired(PlayerKickEvent.class);
 	}
@@ -2142,6 +2142,14 @@ class PlayerMockTest
 			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
 					&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
 		});
+	}
+
+	@Test
+	void testPlayerQuitEventGetFired()
+	{
+		PlayerMock player = server.addPlayer("Player");
+		player.disconnect();
+		server.getPluginManager().assertEventFired(PlayerQuitEvent.class);
 	}
 
 	public static Stream<Arguments> provideInstrument()

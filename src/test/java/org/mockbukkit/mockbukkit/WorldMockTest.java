@@ -1079,7 +1079,8 @@ class WorldMockTest
 				Arguments.of(EntityType.ZOMBIE, ZombieMock.class),
 				Arguments.of(EntityType.FIREWORK, FireworkMock.class),
 				Arguments.of(EntityType.EXPERIENCE_ORB, ExperienceOrbMock.class),
-				Arguments.of(EntityType.MINECART_FURNACE, PoweredMinecartMock.class)
+				Arguments.of(EntityType.MINECART_FURNACE, PoweredMinecartMock.class),
+				Arguments.of(EntityType.CAMEL, CamelMock.class)
 		);
 	}
 
