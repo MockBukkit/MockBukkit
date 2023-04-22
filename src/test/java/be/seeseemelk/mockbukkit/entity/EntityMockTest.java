@@ -33,7 +33,6 @@ import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.spigotmc.event.entity.EntityDismountEvent;
 import org.spigotmc.event.entity.EntityMountEvent;
@@ -784,6 +783,18 @@ class EntityMockTest
 		assertEquals(List.of(mocks[1]), mocks[0].getPassengers());
 		assertEquals(List.of(mocks[2]), mocks[1].getPassengers());
 		assertEquals(List.of(), mocks[2].getPassengers());
+	}
+
+	@Test
+	void getPassengers_Transitive_ReturnsAll()
+	{
+		EntityMock mock1 = new SimpleEntityMock(server);
+		EntityMock mock2 = new SimpleEntityMock(server);
+		mock1.addPassenger(mock2);
+		EntityMock mock3 = new SimpleEntityMock(server);
+		mock2.addPassenger(mock3);
+
+		assertEquals(List.of(mock2, mock3), mock1.getTransitivePassengers());
 	}
 
 	@Test
