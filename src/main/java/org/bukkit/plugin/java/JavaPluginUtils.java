@@ -11,7 +11,7 @@ public final class JavaPluginUtils
 
 	private JavaPluginUtils()
 	{
-		// Do not instantiate this.
+		throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
 	}
 
 	/**
