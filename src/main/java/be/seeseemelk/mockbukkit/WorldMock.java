@@ -1242,7 +1242,7 @@ public class WorldMock implements World
 			{
 				vehicle.remove();
 			}
-			for (Entity passenger : entity.getPassengers(true))
+			for (Entity passenger : entity.getTransitivePassengers())
 			{
 				passenger.remove();
 			}
