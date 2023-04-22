@@ -1,6 +1,5 @@
 package org.plugin.java;
 
-import org.bukkit.command.PluginCommandUtils;
 import org.bukkit.plugin.java.JavaPluginUtils;
 import org.junit.jupiter.api.Test;
 
@@ -13,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class JavaPluginUtilsTest
 {
+
 	@Test
 	void testConstructorIsPrivate() throws NoSuchMethodException
 	{
@@ -23,4 +23,5 @@ class JavaPluginUtilsTest
 		assertTrue(exception.getCause() instanceof UnsupportedOperationException);
 		assertTrue(exception.getCause().getMessage().contains("This is a utility class and cannot be instantiated"));
 	}
+
 }

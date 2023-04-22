@@ -101,7 +101,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.net.InetSocketAddress;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -1064,31 +1063,31 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		Preconditions.checkNotNull(loc, "Location cannot be null");
 		Preconditions.checkNotNull(instrument, "Instrument cannot be null");
 		Sound sound = switch (instrument)
-				{
-					case BANJO -> Sound.BLOCK_NOTE_BLOCK_BANJO;
-					case BASS_DRUM -> Sound.BLOCK_NOTE_BLOCK_BASEDRUM;
-					case BASS_GUITAR -> Sound.BLOCK_NOTE_BLOCK_BASS;
-					case BELL -> Sound.BLOCK_NOTE_BLOCK_BELL;
-					case BIT -> Sound.BLOCK_NOTE_BLOCK_BIT;
-					case CHIME -> Sound.BLOCK_NOTE_BLOCK_CHIME;
-					case COW_BELL -> Sound.BLOCK_NOTE_BLOCK_COW_BELL;
-					case DIDGERIDOO -> Sound.BLOCK_NOTE_BLOCK_DIDGERIDOO;
-					case FLUTE -> Sound.BLOCK_NOTE_BLOCK_FLUTE;
-					case GUITAR -> Sound.BLOCK_NOTE_BLOCK_GUITAR;
-					case IRON_XYLOPHONE -> Sound.BLOCK_NOTE_BLOCK_IRON_XYLOPHONE;
-					case PIANO -> Sound.BLOCK_NOTE_BLOCK_HARP;
-					case PLING -> Sound.BLOCK_NOTE_BLOCK_PLING;
-					case SNARE_DRUM -> Sound.BLOCK_NOTE_BLOCK_SNARE;
-					case STICKS -> Sound.BLOCK_NOTE_BLOCK_HAT;
-					case XYLOPHONE -> Sound.BLOCK_NOTE_BLOCK_XYLOPHONE;
-					case ZOMBIE -> Sound.BLOCK_NOTE_BLOCK_IMITATE_ZOMBIE;
-					case SKELETON -> Sound.BLOCK_NOTE_BLOCK_IMITATE_SKELETON;
-					case CREEPER -> Sound.BLOCK_NOTE_BLOCK_IMITATE_CREEPER;
-					case DRAGON -> Sound.BLOCK_NOTE_BLOCK_IMITATE_ENDER_DRAGON;
-					case WITHER_SKELETON -> Sound.BLOCK_NOTE_BLOCK_IMITATE_WITHER_SKELETON;
-					case PIGLIN -> Sound.BLOCK_NOTE_BLOCK_IMITATE_PIGLIN;
-					case CUSTOM_HEAD -> Sound.UI_BUTTON_CLICK; // What the Fuck Mojang?
-				};
+		{
+			case BANJO -> Sound.BLOCK_NOTE_BLOCK_BANJO;
+			case BASS_DRUM -> Sound.BLOCK_NOTE_BLOCK_BASEDRUM;
+			case BASS_GUITAR -> Sound.BLOCK_NOTE_BLOCK_BASS;
+			case BELL -> Sound.BLOCK_NOTE_BLOCK_BELL;
+			case BIT -> Sound.BLOCK_NOTE_BLOCK_BIT;
+			case CHIME -> Sound.BLOCK_NOTE_BLOCK_CHIME;
+			case COW_BELL -> Sound.BLOCK_NOTE_BLOCK_COW_BELL;
+			case DIDGERIDOO -> Sound.BLOCK_NOTE_BLOCK_DIDGERIDOO;
+			case FLUTE -> Sound.BLOCK_NOTE_BLOCK_FLUTE;
+			case GUITAR -> Sound.BLOCK_NOTE_BLOCK_GUITAR;
+			case IRON_XYLOPHONE -> Sound.BLOCK_NOTE_BLOCK_IRON_XYLOPHONE;
+			case PIANO -> Sound.BLOCK_NOTE_BLOCK_HARP;
+			case PLING -> Sound.BLOCK_NOTE_BLOCK_PLING;
+			case SNARE_DRUM -> Sound.BLOCK_NOTE_BLOCK_SNARE;
+			case STICKS -> Sound.BLOCK_NOTE_BLOCK_HAT;
+			case XYLOPHONE -> Sound.BLOCK_NOTE_BLOCK_XYLOPHONE;
+			case ZOMBIE -> Sound.BLOCK_NOTE_BLOCK_IMITATE_ZOMBIE;
+			case SKELETON -> Sound.BLOCK_NOTE_BLOCK_IMITATE_SKELETON;
+			case CREEPER -> Sound.BLOCK_NOTE_BLOCK_IMITATE_CREEPER;
+			case DRAGON -> Sound.BLOCK_NOTE_BLOCK_IMITATE_ENDER_DRAGON;
+			case WITHER_SKELETON -> Sound.BLOCK_NOTE_BLOCK_IMITATE_WITHER_SKELETON;
+			case PIGLIN -> Sound.BLOCK_NOTE_BLOCK_IMITATE_PIGLIN;
+			case CUSTOM_HEAD -> Sound.UI_BUTTON_CLICK; // What the Fuck Mojang?
+		};
 		float pitch = (float) Math.pow(2.0D, (note - 12.0D) / 12.0D);
 		playSound(loc, sound, SoundCategory.RECORDS, 3, pitch);
 	}
@@ -1175,6 +1174,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
+
 	@Override
 	public void playSound(@NotNull Entity entity, @NotNull String sound, @NotNull SoundCategory category, float volume, float pitch)
 	{

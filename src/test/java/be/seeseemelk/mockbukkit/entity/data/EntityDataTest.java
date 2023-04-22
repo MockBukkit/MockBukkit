@@ -1,23 +1,17 @@
 package be.seeseemelk.mockbukkit.entity.data;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-import java.util.stream.Collectors;
-
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.entity.EntityType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.opentest4j.AssertionFailedError;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import java.io.IOException;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class EntityDataTest
 {
@@ -84,7 +78,7 @@ class EntityDataTest
 	void invalidKeyTest()
 	{
 		assertThrows(UnimplementedOperationException.class,
-				() -> entityData.getValueFromKey("invalid",EntitySubType.DEFAULT ,EntityState.DEFAULT));
+				() -> entityData.getValueFromKey("invalid", EntitySubType.DEFAULT, EntityState.DEFAULT));
 	}
 
 	@Test

@@ -327,7 +327,7 @@ class PlayerMockTest
 	{
 		MockBukkit.load(TestPlugin.class);
 		player.setGameMode(GameMode.SURVIVAL);
-		BlockMock block = (BlockMock) player.getWorld().getBlockAt(0, 0, 0);
+		BlockMock block = player.getWorld().getBlockAt(0, 0, 0);
 		block.setType(Material.STONE);
 		boolean broken = player.breakBlock(block);
 		assertTrue(broken);
@@ -341,7 +341,7 @@ class PlayerMockTest
 		MockBukkit.load(TestPlugin.class);
 		player.setGameMode(GameMode.CREATIVE);
 		player.setItemInHand(new ItemStack(Material.DIAMOND_SWORD));
-		BlockMock block = (BlockMock) player.getWorld().getBlockAt(0, 0, 0);
+		BlockMock block = player.getWorld().getBlockAt(0, 0, 0);
 		block.setType(Material.STONE);
 		boolean broken = player.breakBlock(block);
 		assertFalse(broken);
@@ -2185,6 +2185,7 @@ class PlayerMockTest
 				Arguments.of(Instrument.PLING, Sound.BLOCK_NOTE_BLOCK_PLING),
 				Arguments.of(Instrument.SNARE_DRUM, Sound.BLOCK_NOTE_BLOCK_SNARE),
 				Arguments.of(Instrument.STICKS, Sound.BLOCK_NOTE_BLOCK_HAT)
-				);
+		);
 	}
+
 }

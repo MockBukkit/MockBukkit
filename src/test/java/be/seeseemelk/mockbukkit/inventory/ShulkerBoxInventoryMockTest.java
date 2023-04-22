@@ -35,4 +35,5 @@ public class ShulkerBoxInventoryMockTest
 		assertNotEquals(inventory, inventory.getSnapshot());
 		assertTrue(Arrays.stream(inventory.getContents()).anyMatch(stack -> stack != null && stack.isSimilar(item)));
 	}
+
 }

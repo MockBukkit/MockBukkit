@@ -2,7 +2,6 @@ package be.seeseemelk.mockbukkit.help;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.defaults.VersionCommand;
 import org.bukkit.help.HelpTopic;
 import org.bukkit.help.HelpTopicFactory;
@@ -15,7 +14,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
 
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -103,11 +101,10 @@ class HelpMapMockTest
 				return new IndexHelpTopic("", "short text", "perm", Collections.emptyList());
 			}
 		};
-		helpMap.registerHelpTopicFactory(VersionCommand.class,helpTopicFactory );
+		helpMap.registerHelpTopicFactory(VersionCommand.class, helpTopicFactory);
 
 		helpMap.assertRegistered(helpTopicFactory);
 	}
-
 
 
 }

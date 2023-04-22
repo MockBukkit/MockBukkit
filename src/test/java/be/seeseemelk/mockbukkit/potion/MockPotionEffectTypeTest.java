@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 class MockPotionEffectTypeTest
@@ -114,14 +115,14 @@ class MockPotionEffectTypeTest
 	{
 		MockPotionEffectType effect = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
 		MockPotionEffectType effect2 = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 2, "Speed", false, Color.fromRGB(8171462));
-		assertFalse(effect.equals(effect2));
+		assertNotEquals(effect, effect2);
 	}
 
 	@Test
 	void testEquals_DifferentType()
 	{
 		MockPotionEffectType effect = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
-		assertFalse(effect.equals(new Object()));
+		assertNotEquals(effect, new Object());
 	}
 
 }

@@ -1114,8 +1114,10 @@ class EntityMockTest
 	}
 
 	@Test
-	void getWidthImplemented() {
+	void getWidthImplemented()
+	{
 		EntityMock entity = (EntityMock) world.spawnEntity(new Location(world, 0, 0, 0), EntityType.BAT);
 		assertDoesNotThrow(entity::getWidth);
 	}
+
 }

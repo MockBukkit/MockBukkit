@@ -148,7 +148,7 @@ public class MockBukkit
 	@SuppressWarnings("deprecation")
 	public static void loadJar(@NotNull File jarFile) throws InvalidPluginException
 	{
-			mock.getPluginManager().loadPlugin(jarFile);
+		mock.getPluginManager().loadPlugin(jarFile);
 	}
 
 	/**
