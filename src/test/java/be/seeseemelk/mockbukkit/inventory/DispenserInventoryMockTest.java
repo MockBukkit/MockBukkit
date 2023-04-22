@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
-public class DispenserInventoryMockTest
+class DispenserInventoryMockTest
 {
 
 	private DispenserInventoryMock inventory;
