@@ -19,6 +19,7 @@ import io.papermc.paper.chat.ChatRenderer;
 import io.papermc.paper.entity.LookAnchor;
 import io.papermc.paper.entity.TeleportFlag;
 import io.papermc.paper.event.player.AsyncChatEvent;
+import io.papermc.paper.math.Position;
 import net.kyori.adventure.chat.SignedMessage;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -178,9 +179,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 */
 	public PlayerMock(@NotNull ServerMock server, @NotNull String name)
 	{
-		this(server, name, UUID.nameUUIDFromBytes(("OfflinePlayer:" + name).getBytes(StandardCharsets.UTF_8)));
-		this.online = false;
-		this.scoreboard = server.getScoreboardManager().getMainScoreboard();
+		this(server, name, UUID.randomUUID());
 	}
 
 	/**
@@ -2674,19 +2673,25 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public void sendMultiBlockChange(@NotNull Map<Location, BlockData> blockChanges)
+	public void sendHurtAnimation(float yaw)
 	{
-		Preconditions.checkNotNull(blockChanges, "BlockChanges cannot be null");
-		// Pretend we sent the block change.
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void sendMultiBlockChange(@NotNull Map<Location, BlockData> blockChanges, boolean suppressLightUpdates)
+	public void sendMultiBlockChange(@NotNull Map<? extends Position, BlockData> blockChanges, boolean suppressLightUpdates)
 	{
-		Preconditions.checkNotNull(blockChanges, "BlockChanges cannot be null");
-		// Pretend we sent the block change.
+		Preconditions.checkNotNull(blockChanges, "Block changes cannot be null");
+		//Pretend to send the packet
 	}
 
+	@Override
+	public void sendBlockDamage(@NotNull Location loc, float progress, @NotNull Entity source)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
 
 	@Override
 	public int getPing()
