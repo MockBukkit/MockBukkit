@@ -101,7 +101,7 @@ public class TeamMock implements Team
 	public void suffix(@Nullable Component suffix) throws IllegalStateException, IllegalArgumentException
 	{
 		checkRegistered();
-		this.prefix = suffix == null ? Component.empty() : suffix;
+		this.suffix = suffix == null ? Component.empty() : suffix;
 	}
 
 	@Override
