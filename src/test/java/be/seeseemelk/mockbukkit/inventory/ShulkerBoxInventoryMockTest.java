@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
-public class ShulkerBoxInventoryMockTest
+class ShulkerBoxInventoryMockTest
 {
 
 	private ShulkerBoxInventoryMock inventory;
@@ -35,4 +35,5 @@ public class ShulkerBoxInventoryMockTest
 		assertNotEquals(inventory, inventory.getSnapshot());
 		assertTrue(Arrays.stream(inventory.getContents()).anyMatch(stack -> stack != null && stack.isSimilar(item)));
 	}
+
 }

@@ -1,8 +1,7 @@
 package be.seeseemelk.mockbukkit.entity.data;
 
-import org.jetbrains.annotations.NotNull;
-
 import com.google.common.base.Preconditions;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * A state a entity is in
@@ -48,27 +47,26 @@ public enum EntityState
 	 * Entity is angry ({@link org.bukkit.entity.Enderman})
 	 */
 	ANGRY("angry"),
-	
+
 	/**
 	 * Entity is peeking ({@link org.bukkit.entity.Shulker})
 	 */
 	PEEKING("peeking"),
-	
+
 	/**
 	 * Entity is open ({@link org.bukkit.entity.Shulker})
 	 */
 	OPEN("open");
 
-	private String state;
+	private final String state;
 
-	private EntityState(@NotNull String state)
+	EntityState(@NotNull String state)
 	{
 		Preconditions.checkNotNull(state);
 		this.state = state;
 	}
 
 	/**
-	 * 
 	 * @return The key this property is assigned to
 	 */
 	public @NotNull String getName()

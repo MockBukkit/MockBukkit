@@ -77,7 +77,7 @@ public class PoweredMinecartMock extends MinecartMock implements PoweredMinecart
 	{
 		this.zPush = zPush;
 	}
-	
+
 	@Override
 	public EntityType getType()
 	{

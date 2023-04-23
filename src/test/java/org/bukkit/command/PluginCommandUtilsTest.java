@@ -1,6 +1,5 @@
 package org.bukkit.command;
 
-import be.seeseemelk.mockbukkit.attribute.AttributesMock;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Constructor;
@@ -23,4 +22,5 @@ class PluginCommandUtilsTest
 		assertTrue(exception.getCause() instanceof UnsupportedOperationException);
 		assertTrue(exception.getCause().getMessage().contains("This is a utility class and cannot be instantiated"));
 	}
+
 }

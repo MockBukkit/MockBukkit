@@ -14,8 +14,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
-public class DispenserInventoryMockTest
+class DispenserInventoryMockTest
 {
+
 	private DispenserInventoryMock inventory;
 
 	@BeforeEach
@@ -34,4 +35,5 @@ public class DispenserInventoryMockTest
 		assertNotEquals(inventory, inventory.getSnapshot());
 		assertTrue(Arrays.stream(inventory.getContents()).anyMatch(stack -> stack != null && stack.isSimilar(item)));
 	}
+
 }

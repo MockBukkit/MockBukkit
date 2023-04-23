@@ -1,7 +1,6 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
-
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Horse;
 import org.bukkit.entity.SkeletonHorse;
@@ -75,7 +74,7 @@ public class SkeletonHorseMock extends AbstractHorseMock implements SkeletonHors
 	{
 		return Horse.Variant.SKELETON_HORSE;
 	}
-	
+
 	@Override
 	public EntityType getType()
 	{

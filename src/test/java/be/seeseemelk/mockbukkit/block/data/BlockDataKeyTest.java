@@ -22,4 +22,5 @@ class BlockDataKeyTest
 		assertTrue(exception.getCause() instanceof UnsupportedOperationException);
 		assertTrue(exception.getCause().getMessage().contains("Utility class"));
 	}
+
 }

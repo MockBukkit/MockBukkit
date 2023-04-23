@@ -39,4 +39,5 @@ public class DonkeyMock extends ChestedHorseMock implements Donkey
 	{
 		return EntityType.DONKEY;
 	}
+
 }

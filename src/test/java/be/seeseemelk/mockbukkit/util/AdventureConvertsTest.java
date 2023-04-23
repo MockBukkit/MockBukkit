@@ -37,6 +37,7 @@ class AdventureConvertsTest
 		SoundCategory actual = AdventureConverters.soundSourceToCategory(name);
 		assertEquals(expected, actual);
 	}
+
 	public static Stream<Arguments> getSoundSourceToCategoryTestCases()
 	{
 		return Stream.of(
@@ -52,8 +53,6 @@ class AdventureConvertsTest
 				Arguments.of(Sound.Source.VOICE, SoundCategory.VOICE)
 		);
 	}
-
-
 
 
 }
