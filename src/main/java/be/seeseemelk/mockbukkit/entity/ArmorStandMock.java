@@ -321,14 +321,14 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	{
 		Preconditions.checkNotNull(slot, "Slot cannot be null");
 		return switch (slot)
-				{
-					case HAND -> getEquipment().getItemInMainHand();
-					case OFF_HAND -> getEquipment().getItemInOffHand();
-					case FEET -> getBoots();
-					case LEGS -> getLeggings();
-					case CHEST -> getChestplate();
-					case HEAD -> getHelmet();
-				};
+		{
+			case HAND -> getEquipment().getItemInMainHand();
+			case OFF_HAND -> getEquipment().getItemInOffHand();
+			case FEET -> getBoots();
+			case LEGS -> getLeggings();
+			case CHEST -> getChestplate();
+			case HEAD -> getHelmet();
+		};
 	}
 
 	@Override

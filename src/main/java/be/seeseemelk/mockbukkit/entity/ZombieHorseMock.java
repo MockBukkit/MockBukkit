@@ -1,7 +1,6 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
-
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Horse;
 import org.bukkit.entity.ZombieHorse;
@@ -40,4 +39,5 @@ public class ZombieHorseMock extends AbstractHorseMock implements ZombieHorse
 	{
 		return EntityType.ZOMBIE_HORSE;
 	}
+
 }

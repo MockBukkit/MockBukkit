@@ -1,5 +1,8 @@
 package be.seeseemelk.mockbukkit.entity.data;
 
+import be.seeseemelk.mockbukkit.MockBukkit;
+import org.bukkit.entity.EntityType;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -9,10 +12,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.bukkit.entity.EntityType;
-
-import be.seeseemelk.mockbukkit.MockBukkit;
-
 public class EntityDataRegistry
 {
 
@@ -20,7 +19,7 @@ public class EntityDataRegistry
 
 	/**
 	 * Load all entity data
-	 * 
+	 *
 	 * @param repository The repository to load from
 	 */
 	public static void loadData(String repository)
@@ -40,7 +39,7 @@ public class EntityDataRegistry
 
 	/**
 	 * Load entity data json string
-	 * 
+	 *
 	 * @param repository The repository to look in
 	 * @param type       The type of entity to look for
 	 * @return A json string containing the data
@@ -64,7 +63,7 @@ public class EntityDataRegistry
 
 	/**
 	 * Construcy entity data based on entity type
-	 * 
+	 *
 	 * @param type The type of the entity
 	 * @return A new instance of entitydata
 	 */
@@ -78,4 +77,5 @@ public class EntityDataRegistry
 
 		return new EntityData(type, data);
 	}
+
 }

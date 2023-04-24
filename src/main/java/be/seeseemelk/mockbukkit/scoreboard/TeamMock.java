@@ -227,13 +227,13 @@ public class TeamMock implements Team
 
 		OptionStatus s = options.get(Option.NAME_TAG_VISIBILITY);
 		return switch (s)
-				{
-					case NEVER -> NameTagVisibility.NEVER;
-					case ALWAYS -> NameTagVisibility.ALWAYS;
-					case FOR_OTHER_TEAMS -> NameTagVisibility.HIDE_FOR_OTHER_TEAMS;
-					case FOR_OWN_TEAM -> NameTagVisibility.HIDE_FOR_OWN_TEAM;
-					default -> throw new IllegalArgumentException("Option not compatible");
-				};
+		{
+			case NEVER -> NameTagVisibility.NEVER;
+			case ALWAYS -> NameTagVisibility.ALWAYS;
+			case FOR_OTHER_TEAMS -> NameTagVisibility.HIDE_FOR_OTHER_TEAMS;
+			case FOR_OWN_TEAM -> NameTagVisibility.HIDE_FOR_OWN_TEAM;
+			default -> throw new IllegalArgumentException("Option not compatible");
+		};
 	}
 
 	/**
