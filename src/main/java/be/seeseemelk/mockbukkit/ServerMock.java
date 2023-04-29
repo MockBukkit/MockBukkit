@@ -205,7 +205,7 @@ public class ServerMock extends Server.Spigot implements Server
 
 		try
 		{
-			InputStream stream = ClassLoader.getSystemResourceAsStream("logger.properties");
+			InputStream stream = getClass().getClassLoader().getResourceAsStream("logger.properties");
 			LogManager.getLogManager().readConfiguration(stream);
 		}
 		catch (IOException e)
@@ -216,7 +216,7 @@ public class ServerMock extends Server.Spigot implements Server
 
 		try
 		{
-			buildProperties.load(ClassLoader.getSystemResourceAsStream("build.properties"));
+			buildProperties.load(getClass().getClassLoader().getResourceAsStream("build.properties"));
 		}
 		catch (IOException | NullPointerException e)
 		{
@@ -847,10 +847,10 @@ public class ServerMock extends Server.Spigot implements Server
 	public @NotNull BanList getBanList(@NotNull Type type)
 	{
 		return switch (type)
-				{
-					case IP -> playerList.getIPBans();
-					case NAME -> playerList.getProfileBans();
-				};
+		{
+			case IP -> playerList.getIPBans();
+			case NAME -> playerList.getProfileBans();
+		};
 	}
 
 	@Override

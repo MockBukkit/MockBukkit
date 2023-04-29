@@ -31,7 +31,7 @@ public enum EntitySubType
 	 */
 	SMALL("small");
 
-	private String subTypeName;
+	private final String subTypeName;
 
 	EntitySubType(String subTypeName)
 	{

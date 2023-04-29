@@ -71,7 +71,7 @@ public class TadpoleMock extends FishMock implements Tadpole
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-	
+
 	@Override
 	public EntityType getType()
 	{

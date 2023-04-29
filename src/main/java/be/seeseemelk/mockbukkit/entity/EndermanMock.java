@@ -4,7 +4,6 @@ import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import be.seeseemelk.mockbukkit.entity.data.EntityState;
-
 import com.google.common.base.Preconditions;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Enderman;
@@ -121,7 +120,7 @@ public class EndermanMock extends MonsterMock implements Enderman
 		}
 		return super.getEntityState();
 	}
-	
+
 	@Override
 	public EntityType getType()
 	{

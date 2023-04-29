@@ -91,7 +91,7 @@ public class AxolotlMock extends AnimalsMock implements Axolotl
 		Preconditions.checkNotNull(stack, "ItemStack cannot be null");
 		return Tag.AXOLOTL_TEMPT_ITEMS.isTagged(stack.getType());
 	}
-	
+
 	@Override
 	public EntityType getType()
 	{

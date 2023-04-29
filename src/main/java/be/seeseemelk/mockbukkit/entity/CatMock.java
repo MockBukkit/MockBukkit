@@ -88,4 +88,5 @@ public class CatMock extends TameableAnimalMock implements Cat
 	{
 		return EntityType.CAT;
 	}
+
 }

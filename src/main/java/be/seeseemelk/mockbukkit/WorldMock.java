@@ -793,7 +793,7 @@ public class WorldMock implements World
 		}
 
 		server.registerEntity(entity);
-		callSpawnEvent(entity, null);
+		callSpawnEvent(entity, CreatureSpawnEvent.SpawnReason.CUSTOM);
 
 		return entity;
 	}
@@ -884,13 +884,13 @@ public class WorldMock implements World
 	/**
 	 * Spawns an entity.
 	 *
-	 * @param location      The location to spawn the entity at.
-	 * @param clazz         The class of entity to spawn. This should be the class of the Bukkit interface, not the mock.
-	 * @param function      A function to call once the entity has been spawned.
-	 * @param reason        The reason for spawning the entity.
-	 * @param randomizeData Whether data should be randomized. Currently, does nothing.
+	 * @param location       The location to spawn the entity at.
+	 * @param clazz          The class of entity to spawn. This should be the class of the Bukkit interface, not the mock.
+	 * @param function       A function to call once the entity has been spawned.
+	 * @param reason         The reason for spawning the entity.
+	 * @param randomizeData  Whether data should be randomized. Currently, does nothing.
 	 * @param callSpawnEvent Whether the entities spawn event should be called
-	 * @param <T>           The entity type.
+	 * @param <T>            The entity type.
 	 * @return The spawned entity.
 	 */
 	@SuppressWarnings("unchecked")
@@ -1200,7 +1200,7 @@ public class WorldMock implements World
 	private void callSpawnEvent(EntityMock entity, CreatureSpawnEvent.@NotNull SpawnReason reason)
 	{
 
-		boolean canceled; // Here for future implementation (see below)
+		boolean success; // Here for future implementation (see below)
 
 		if (entity instanceof LivingEntity living && !(entity instanceof Player))
 		{
@@ -1216,41 +1216,38 @@ public class WorldMock implements World
 				}
 			}
 
-
-			canceled = new CreatureSpawnEvent(living, reason).callEvent();
+			success = new CreatureSpawnEvent(living, reason).callEvent();
 		}
 		else if (entity instanceof Item item)
 		{
-			canceled = new ItemSpawnEvent(item).callEvent();
+			success = new ItemSpawnEvent(item).callEvent();
 		}
 		else if (entity instanceof Player)
 		{
-			canceled = true; // Shouldn't ever be called here but just for parody.
+			success = false; // Shouldn't ever be called here but just for parody.
 		}
 		else if (entity instanceof Projectile)
 		{
-			canceled = new ProjectileLaunchEvent(entity).callEvent();
+			success = new ProjectileLaunchEvent(entity).callEvent();
 		}
 		else
 		{
-			canceled = new EntitySpawnEvent(entity).callEvent();
+			success = new EntitySpawnEvent(entity).callEvent();
 		}
 
-		/* EntityMock#getPassengers() and #getVehicle() isn't implemented
-		if (canceled || entity.isValid())
+		if (!success || !entity.isValid())
 		{
 			Entity vehicle = entity.getVehicle();
 			if (vehicle != null)
 			{
 				vehicle.remove();
 			}
-			for (Entity passenger : entity.getPassengers())
+			for (Entity passenger : entity.getTransitivePassengers())
 			{
 				passenger.remove();
 			}
 			entity.remove();
 		}
-		*/
 	}
 
 	@Override

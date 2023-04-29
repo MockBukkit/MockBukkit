@@ -74,14 +74,14 @@ public class EntityEquipmentMock implements EntityEquipment
 	{
 		Preconditions.checkNotNull(slot, "Slot cannot be null");
 		return switch (slot)
-				{
-					case CHEST -> getChestplate();
-					case FEET -> getBoots();
-					case HAND -> getItemInMainHand();
-					case HEAD -> getHelmet();
-					case LEGS -> getLeggings();
-					case OFF_HAND -> getItemInOffHand();
-				};
+		{
+			case CHEST -> getChestplate();
+			case FEET -> getBoots();
+			case HAND -> getItemInMainHand();
+			case HEAD -> getHelmet();
+			case LEGS -> getLeggings();
+			case OFF_HAND -> getItemInOffHand();
+		};
 	}
 
 	@Override

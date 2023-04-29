@@ -23,7 +23,6 @@ import org.bukkit.Chunk;
 import org.bukkit.EntityEffect;
 import org.bukkit.Location;
 import org.bukkit.Sound;
-import org.bukkit.World;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.entity.Entity;
@@ -582,18 +581,19 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public double getHeight()
 	{
-		return entityData.getHeight(this.getSubType(),this.getEntityState());
+		return entityData.getHeight(this.getSubType(), this.getEntityState());
 	}
 
 	@Override
 	public double getWidth()
 	{
-		return entityData.getWidth(this.getSubType(),this.getEntityState());
+		return entityData.getWidth(this.getSubType(), this.getEntityState());
 	}
 
 	/**
 	 * Get the current state of this entity
-	 * @return  The current state of this entity
+	 *
+	 * @return The current state of this entity
 	 */
 	protected EntityState getEntityState()
 	{
@@ -602,6 +602,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 
 	/**
 	 * Get the current subtype of the entity
+	 *
 	 * @return The current subtype of the entity
 	 */
 	protected EntitySubType getSubType()
@@ -758,6 +759,22 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	public @NotNull List<Entity> getPassengers()
 	{
 		return Collections.unmodifiableList(this.passengers);
+	}
+
+	/**
+	 * Gets a list of transitive passengers on this vehicle (passengers of passengers).
+	 *
+	 * @return An immutable list of passengers.
+	 */
+	public @NotNull List<Entity> getTransitivePassengers()
+	{
+		List<Entity> entities = new ArrayList<>();
+		for (Entity passenger : this.passengers)
+		{
+			entities.add(passenger);
+			entities.addAll(((EntityMock) passenger).getTransitivePassengers());
+		}
+		return List.copyOf(entities);
 	}
 
 	@Override

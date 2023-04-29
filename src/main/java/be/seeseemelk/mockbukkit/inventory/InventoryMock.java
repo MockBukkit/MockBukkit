@@ -355,15 +355,18 @@ public class InventoryMock implements Inventory
 		Preconditions.checkNotNull(items, "Items cannot be null");
 		HashMap<Integer, ItemStack> leftover = new HashMap<>();
 
-		for (int i = 0; i < items.length; i++) {
+		for (int i = 0; i < items.length; i++)
+		{
 			ItemStack item = items[i];
 			int toDelete = item.getAmount();
 
-			while (toDelete > 0) {
+			while (toDelete > 0)
+			{
 				int first = first(item, false);
 
 				// Drat! we don't have this type in the inventory
-				if (first == -1) {
+				if (first == -1)
+				{
 					item.setAmount(toDelete);
 					leftover.put(i, item);
 					break;
@@ -371,11 +374,14 @@ public class InventoryMock implements Inventory
 
 				ItemStack itemStack = getItem(first);
 				int amount = itemStack.getAmount();
-				if (amount <= toDelete) {
+				if (amount <= toDelete)
+				{
 					toDelete -= amount;
 					// clear the slot, all used up
 					clear(first);
-				} else {
+				}
+				else
+				{
 					// split the stack and store
 					itemStack.setAmount(amount - toDelete);
 					setItem(first, itemStack);
