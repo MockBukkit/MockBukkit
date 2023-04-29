@@ -133,8 +133,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 	private static final Component DEFAULT_KICK_COMPONENT = Component.text("You are not whitelisted on this server!");
 
-	private @NotNull GameMode gamemode = GameMode.SURVIVAL;
-	private @NotNull GameMode previousGamemode = gamemode;
+	private @NotNull GameMode previousGamemode = super.getGameMode();
 
 	private boolean online;
 	private @Nullable Component displayName = null;
@@ -359,7 +358,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public @Nullable BlockDamageEvent simulateBlockDamage(@NotNull Block block)
 	{
 		Preconditions.checkNotNull(block, "Block cannot be null");
-		if (gamemode != GameMode.SURVIVAL)
+		if (super.getGameMode() != GameMode.SURVIVAL)
 		{
 			return null;
 		}
@@ -387,8 +386,8 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public @Nullable BlockBreakEvent simulateBlockBreak(@NotNull Block block)
 	{
 		Preconditions.checkNotNull(block, "Block cannot be null");
-		if ((gamemode == GameMode.SPECTATOR || gamemode == GameMode.ADVENTURE)
-				|| (gamemode == GameMode.SURVIVAL && simulateBlockDamagePure(block).isCancelled()))
+		if ((super.getGameMode() == GameMode.SPECTATOR || super.getGameMode() == GameMode.ADVENTURE)
+				|| (super.getGameMode() == GameMode.SURVIVAL && simulateBlockDamagePure(block).isCancelled()))
 			return null;
 
 		BlockBreakEvent event = new BlockBreakEvent(block, this);
@@ -411,7 +410,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	{
 		Preconditions.checkNotNull(material, "Material cannot be null");
 		Preconditions.checkNotNull(location, "Location cannot be null");
-		if (gamemode == GameMode.ADVENTURE || gamemode == GameMode.SPECTATOR)
+		if (super.getGameMode() == GameMode.ADVENTURE || super.getGameMode() == GameMode.SPECTATOR)
 			return null;
 		Block block = location.getBlock();
 		BlockState blockState = block.getState();
@@ -511,24 +510,18 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public @NotNull GameMode getGameMode()
-	{
-		return this.gamemode;
-	}
-
-	@Override
 	public void setGameMode(@NotNull GameMode mode)
 	{
 		Preconditions.checkNotNull(mode, "GameMode cannot be null");
-		if (this.gamemode == mode)
+		if (super.getGameMode() == mode)
 			return;
 
 		PlayerGameModeChangeEvent event = new PlayerGameModeChangeEvent(this, mode, PlayerGameModeChangeEvent.Cause.UNKNOWN, null);
 		if (!event.callEvent())
 			return;
 
-		this.previousGamemode = this.gamemode;
-		this.gamemode = mode;
+		this.previousGamemode = super.getGameMode();
+		super.setGameMode(mode);
 	}
 
 	@Override
