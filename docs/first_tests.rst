@@ -10,6 +10,11 @@ For instance, if you have a class at ``src/main/com/github/username/MyPlugin.jav
 you would probably put unit tests for this class at
 ``src/test/com/github/username/MyPluginTests.java``.
 
+.. note::
+	The name of the test class does not matter, but it is common to name it
+	``<ClassName>Tests`` or ``<ClassName>Test``.
+
+Your Main Class can't be ``final``. If you use Kotlin, you main class needs to be an ``open`` class.
 
 Creating the Test Class
 ^^^^^^^^^^^^^^^^^^^^^^^
