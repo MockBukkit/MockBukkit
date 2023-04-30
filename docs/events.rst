@@ -7,8 +7,8 @@ Asserting that Events were fired
 Mockbukkit also provides a way to check if Events are fired. Events are Classes that extend ``org.bukkit.event.Event``
 and are fired by Bukkit.
 
-To check if an event is fired, you can use the``PluginManagerMock#assertEventFired(Class<? extends Event> eventClass)``
-method.This method takes a class that extends``org.bukkit.event.Event``.
+To check if an event is fired, you can use the ``PluginManagerMock#assertEventFired(Class<? extends Event>)``
+method. This method takes a class that extends ``org.bukkit.event.Event``.
 It will then check if an event of that type was fired.
 
 .. code-block:: java
@@ -37,7 +37,7 @@ It will then check if an event of that type was fired.
     }
 
 If you want to check if an event was fired with a specific value, you can use the
-``PluginManagerMock#assertEventFired(Class<? extends Event> eventClass, Predicate<Event> predicate)`` method.
+``PluginManagerMock#assertEventFired(Class<? extends Event>, Predicate<Event>)`` method.
 
 .. code-block:: java
     :linenos:
@@ -67,7 +67,7 @@ If you want to check if an event was fired with a specific value, you can use th
     }
 
 You can also set a custom failure message for the assertion by using the
-``PluginManagerMock#assertEventFired(Class<? extends Event> eventClass, String message)`` method.
+``PluginManagerMock#assertEventFired(Class<? extends Event>, String)`` method.
 
 .. code-block:: java
     :linenos:
@@ -98,7 +98,7 @@ Asserting that Events were not fired
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 You can also check if an event was not fired by using the
-``PluginManagerMock#assertEventNotFired(Class<? extends Event> eventClass)`` method.
+``PluginManagerMock#assertEventNotFired(Class<? extends Event>)`` method.
 
 .. code-block:: java
     :linenos:
@@ -126,7 +126,7 @@ You can also check if an event was not fired by using the
     }
 
 You can also set a custom failure message for the assertion by using the
-``PluginManagerMock#assertEventNotFired(Class<? extends Event> eventClass, String message)`` method.
+``PluginManagerMock#assertEventNotFired(Class<? extends Event>, String)`` method.
 
 .. code-block:: java
     :linenos:
