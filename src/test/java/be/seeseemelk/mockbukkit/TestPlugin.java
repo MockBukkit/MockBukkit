@@ -1,5 +1,7 @@
 package be.seeseemelk.mockbukkit;
 
+import be.seeseemelk.mockbukkit.plugin.MockCustomConfiguredPluginClassLoader;
+import io.papermc.paper.plugin.provider.classloader.ConfiguredPluginClassLoader;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.EventHandler;
@@ -12,6 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.BrokenBarrierException;
@@ -34,6 +37,7 @@ public class TestPlugin extends JavaPlugin implements Listener
 	public boolean asyncEventExecuted = false;
 	public @NotNull CyclicBarrier barrier = new CyclicBarrier(2);
 	public final @Nullable Object extra;
+	public boolean classLoadSucceed = false;
 
 	public TestPlugin()
 	{
@@ -120,6 +124,16 @@ public class TestPlugin extends JavaPlugin implements Listener
 			{
 			}
 		}
+	}
+
+	public void createCustomClass() throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException
+	{
+		ConfiguredPluginClassLoader cpcl = (ConfiguredPluginClassLoader) getClassLoader();
+		MockCustomConfiguredPluginClassLoader ccl = new MockCustomConfiguredPluginClassLoader(cpcl);
+		cpcl.getGroup().add(ccl);
+		ccl.createCustomClass();
+		Class<?> testClass = Class.forName("TestClass", false, getClassLoader());
+		testClass.getMethod("testMethod", TestPlugin.class).invoke(null, this);
 	}
 
 }
