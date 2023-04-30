@@ -395,4 +395,5 @@ class PluginManagerMockTest
 		assertDoesNotThrow(() -> plugin.createCustomClass());
 		assertTrue(plugin.classLoadSucceed);
 	}
+
 }

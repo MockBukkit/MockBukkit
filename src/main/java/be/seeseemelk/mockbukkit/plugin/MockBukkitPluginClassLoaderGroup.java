@@ -10,6 +10,7 @@ import java.util.Set;
 
 public class MockBukkitPluginClassLoaderGroup implements PluginClassLoaderGroup
 {
+
 	private final Set<ConfiguredPluginClassLoader> classLoaders = new HashSet<>();
 
 	@Override

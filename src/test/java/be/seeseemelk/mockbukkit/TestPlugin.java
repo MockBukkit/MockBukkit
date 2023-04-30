@@ -135,4 +135,5 @@ public class TestPlugin extends JavaPlugin implements Listener
 		Class<?> testClass = Class.forName("TestClass", false, getClassLoader());
 		testClass.getMethod("testMethod", TestPlugin.class).invoke(null, this);
 	}
+
 }

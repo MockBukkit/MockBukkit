@@ -15,7 +15,7 @@ import java.io.IOException;
 public class MockCustomConfiguredPluginClassLoader extends ClassLoader implements ConfiguredPluginClassLoader
 {
 
-	private ConfiguredPluginClassLoader parent;
+	private final ConfiguredPluginClassLoader parent;
 
 	public MockCustomConfiguredPluginClassLoader(ConfiguredPluginClassLoader parent)
 	{
