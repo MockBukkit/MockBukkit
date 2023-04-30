@@ -34,7 +34,7 @@ dependencies {
 
 	// General utilities for the project
 	implementation 'net.kyori:adventure-platform-bungeecord:4.2.0'
-	implementation 'org.jetbrains:annotations:24.0.0'
+	implementation 'org.jetbrains:annotations:24.0.1'
 
 	// LibraryLoader dependencies
 	implementation 'org.apache.maven:maven-resolver-provider:3.8.5'
