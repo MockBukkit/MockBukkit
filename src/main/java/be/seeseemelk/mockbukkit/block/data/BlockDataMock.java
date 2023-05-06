@@ -325,11 +325,11 @@ public class BlockDataMock implements BlockData
 
 		// Special cases
 		return switch (material)
-				{
-					case AMETHYST_CLUSTER -> new AmethystClusterMock(material);
-					case LEVER -> new SwitchMock(material);
-					default -> new BlockDataMock(material);
-				};
+		{
+			case AMETHYST_CLUSTER -> new AmethystClusterMock(material);
+			case LEVER -> new SwitchMock(material);
+			default -> new BlockDataMock(material);
+		};
 	}
 
 	/**

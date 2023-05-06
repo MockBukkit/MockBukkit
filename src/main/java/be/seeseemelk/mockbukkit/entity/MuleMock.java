@@ -1,7 +1,6 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
-
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Horse;
 import org.bukkit.entity.Mule;
@@ -34,7 +33,7 @@ public class MuleMock extends ChestedHorseMock implements Mule
 	{
 		return Horse.Variant.MULE;
 	}
-	
+
 	@Override
 	public EntityType getType()
 	{

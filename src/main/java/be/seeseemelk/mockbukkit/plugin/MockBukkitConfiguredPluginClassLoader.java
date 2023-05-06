@@ -29,6 +29,7 @@ public class MockBukkitConfiguredPluginClassLoader extends ClassLoader implement
 	private final File dataFolder;
 	private final File pluginFile;
 	private JarFile jarFile = null;
+	private final PluginClassLoaderGroup classLoaderGroup = new MockBukkitPluginClassLoaderGroup();
 
 	public MockBukkitConfiguredPluginClassLoader(
 			ServerMock server,
@@ -55,6 +56,20 @@ public class MockBukkitConfiguredPluginClassLoader extends ClassLoader implement
 	}
 
 	@Override
+	protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException
+	{
+		Class<?> groupLoadedClass = classLoaderGroup.getClassByName(name, resolve, this);
+		if (groupLoadedClass == null)
+		{
+			return super.loadClass(name, resolve);
+		}
+		else
+		{
+			return groupLoadedClass;
+		}
+	}
+
+	@Override
 	public Class<?> loadClass(@NotNull String name, boolean resolve, boolean checkGlobal, boolean checkLibraries) throws ClassNotFoundException
 	{
 		return loadClass(name, resolve);
@@ -68,8 +83,6 @@ public class MockBukkitConfiguredPluginClassLoader extends ClassLoader implement
 			if (jarFile == null)
 				throw new IllegalStateException("No jar file selected");
 			ZipEntry entry = jarFile.getEntry(name.replace('.', '/') + ".class");
-			if (entry == null)
-				throw new ClassNotFoundException();
 			InputStream inputStream = jarFile.getInputStream(entry);
 			byte[] array = inputStream.readAllBytes();
 			return defineClass(name, array, 0, array.length);
@@ -108,7 +121,7 @@ public class MockBukkitConfiguredPluginClassLoader extends ClassLoader implement
 	public @Nullable PluginClassLoaderGroup getGroup()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return classLoaderGroup;
 	}
 
 	@Override

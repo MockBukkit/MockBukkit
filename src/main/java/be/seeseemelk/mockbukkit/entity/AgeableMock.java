@@ -1,9 +1,7 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.entity.data.EntityState;
 import be.seeseemelk.mockbukkit.entity.data.EntitySubType;
-
 import org.bukkit.entity.Ageable;
 import org.jetbrains.annotations.NotNull;
 
@@ -106,11 +104,13 @@ public class AgeableMock extends CreatureMock implements Ageable
 	}
 
 	@Override
-	protected EntitySubType getSubType() {
+	protected EntitySubType getSubType()
+	{
 		if (!this.isAdult())
 		{
 			return EntitySubType.BABY;
 		}
 		return super.getSubType();
 	}
+
 }

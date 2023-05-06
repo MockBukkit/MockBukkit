@@ -607,7 +607,8 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public boolean isLeashed()
 	{
-		if(!(this.leashHolder instanceof Mob)) {
+		if (!(this.leashHolder instanceof Mob))
+		{
 			return false;
 		}
 		return this.leashHolder != null;
@@ -616,7 +617,8 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public @NotNull Entity getLeashHolder() throws IllegalStateException
 	{
-		if(!this.isLeashed()) {
+		if (!this.isLeashed())
+		{
 			throw new IllegalStateException("Entity is currently not leashed");
 		}
 		return this.leashHolder;
@@ -626,11 +628,13 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public boolean setLeashHolder(Entity holder)
 	{
-		if(this instanceof Wither || !(this instanceof Mob)) {
+		if (this instanceof Wither || !(this instanceof Mob))
+		{
 			return false;
 		}
 
-		if(holder != null && holder.isDead()) {
+		if (holder != null && holder.isDead())
+		{
 			return false;
 		}
 		this.leashHolder = holder;

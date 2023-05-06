@@ -72,18 +72,18 @@ public final class AudioExperience
 	public AudioExperience(net.kyori.adventure.sound.@NotNull Sound sound, @NotNull Location loc)
 	{
 		this(sound.name().asString(), switch (sound.source())
-				{
-					case MASTER -> SoundCategory.MASTER;
-					case MUSIC -> SoundCategory.MUSIC;
-					case RECORD -> SoundCategory.RECORDS;
-					case WEATHER -> SoundCategory.WEATHER;
-					case BLOCK -> SoundCategory.BLOCKS;
-					case HOSTILE -> SoundCategory.HOSTILE;
-					case NEUTRAL -> SoundCategory.NEUTRAL;
-					case PLAYER -> SoundCategory.PLAYERS;
-					case AMBIENT -> SoundCategory.AMBIENT;
-					case VOICE -> SoundCategory.VOICE;
-				}, loc, sound.volume(), sound.pitch());
+		{
+			case MASTER -> SoundCategory.MASTER;
+			case MUSIC -> SoundCategory.MUSIC;
+			case RECORD -> SoundCategory.RECORDS;
+			case WEATHER -> SoundCategory.WEATHER;
+			case BLOCK -> SoundCategory.BLOCKS;
+			case HOSTILE -> SoundCategory.HOSTILE;
+			case NEUTRAL -> SoundCategory.NEUTRAL;
+			case PLAYER -> SoundCategory.PLAYERS;
+			case AMBIENT -> SoundCategory.AMBIENT;
+			case VOICE -> SoundCategory.VOICE;
+		}, loc, sound.volume(), sound.pitch());
 	}
 
 	/**

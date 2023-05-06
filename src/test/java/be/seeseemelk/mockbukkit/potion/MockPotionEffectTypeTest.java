@@ -13,19 +13,20 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 class MockPotionEffectTypeTest
 {
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		MockBukkit.mock();
 	}
 
 	@AfterEach
-	public void tearDown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
@@ -85,6 +86,43 @@ class MockPotionEffectTypeTest
 		MockPotionEffectType effect = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
 
 		assertThrowsExactly(IllegalArgumentException.class, () -> effect.getAttributeModifierAmount(Attribute.GENERIC_ARMOR, 2));
+	}
+
+	@Test
+	void testGetDurationModifier()
+	{
+		MockPotionEffectType effect = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
+		assertEquals(1.0, effect.getDurationModifier());
+	}
+
+	@Test
+	void testHashcode()
+	{
+		MockPotionEffectType effect = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
+		assertEquals(1, effect.hashCode());
+	}
+
+	@Test
+	void testEquals()
+	{
+		MockPotionEffectType effect = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
+		MockPotionEffectType effect2 = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
+		assertEquals(effect, effect2);
+	}
+
+	@Test
+	void testEquals_DifferentId()
+	{
+		MockPotionEffectType effect = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
+		MockPotionEffectType effect2 = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 2, "Speed", false, Color.fromRGB(8171462));
+		assertNotEquals(effect, effect2);
+	}
+
+	@Test
+	void testEquals_DifferentType()
+	{
+		MockPotionEffectType effect = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
+		assertNotEquals(effect, new Object());
 	}
 
 }
