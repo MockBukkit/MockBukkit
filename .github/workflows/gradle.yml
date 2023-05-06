@@ -26,9 +26,9 @@ jobs:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/build.gradle', '**/*.gradle*', 'gradle-wrapper.properties') }}
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', 'gradle-wrapper.properties') }}
           restore-keys: |
-            ${{ runner.os }}-gradle-${{ hashFiles('**/build.gradle', '**/*.gradle*' ,'gradle-wrapper.properties') }}
+            ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*' ,'gradle-wrapper.properties') }}
             ${{ runner.os }}-gradle-
 
       - name: Grant execute permission for gradlew
