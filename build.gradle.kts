@@ -6,7 +6,7 @@ plugins {
 	id("maven-publish")
 	id("signing")
 	id("net.kyori.blossom") version "1.3.1"
-	id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
+	id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
 }
 
 group = "com.github.seeseemelk"
