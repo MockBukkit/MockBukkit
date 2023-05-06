@@ -1,5 +1,6 @@
 version: 2
 sphinx:
+  os: ubuntu-22.04
   builder: html
   configuration: docs/conf.py
   fail_on_warning: true
