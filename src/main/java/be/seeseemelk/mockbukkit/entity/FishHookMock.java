@@ -24,7 +24,13 @@ public class FishHookMock extends ProjectileMock implements FishHook
 
 	private int minWaitTime = 100;
 	private int maxWaitTime = 600;
+	private int minLureTime = 20;
+	private int maxLureTime = 80;
+	private float minLureAngle = 0;
+	private float maxLureAngle = 360;
 	private boolean applyLure = true;
+	private boolean skyInfluenced = true;
+	private boolean rainInfluenced = true;
 	private double biteChance = -1;
 	private @Nullable Entity hookedEntity;
 	private @NotNull HookState state = HookState.UNHOOKED;
@@ -64,6 +70,79 @@ public class FishHookMock extends ProjectileMock implements FishHook
 	{
 		Preconditions.checkArgument(maxWaitTime >= 0 && maxWaitTime >= this.getMinWaitTime(), "The maximum wait time should be higher than or equal to 0 and the minimum wait time.");
 		this.maxWaitTime = maxWaitTime;
+	}
+
+	@Override
+	public void setWaitTime(int min, int max)
+	{
+		this.setMinWaitTime(min);
+		this.setMaxWaitTime(max);
+	}
+
+	@Override
+	public int getMinLureTime()
+	{
+		return this.minLureTime;
+	}
+
+	@Override
+	public void setMinLureTime(int minLureTime)
+	{
+		Preconditions.checkArgument(minLureTime >= 0 && minLureTime <= this.getMaxWaitTime(), "The minimum lure time should be between 0 and the maximum lure time.");
+		this.minLureTime = minLureTime;
+	}
+
+	@Override
+	public int getMaxLureTime()
+	{
+		return this.maxLureTime;
+	}
+
+	@Override
+	public void setMaxLureTime(int maxLureTime)
+	{
+		Preconditions.checkArgument(maxLureTime >= 0 && maxLureTime >= this.getMinWaitTime(), "The maximum lure time should be higher than or equal to 0 and the minimum lure time.");
+		this.maxLureTime = maxLureTime;
+	}
+
+	@Override
+	public void setLureTime(int min, int max)
+	{
+		this.setMinLureTime(min);
+		this.setMaxLureTime(max);
+	}
+
+	@Override
+	public float getMinLureAngle()
+	{
+		return this.minLureAngle;
+	}
+
+	@Override
+	public void setMinLureAngle(float minLureAngle)
+	{
+		Preconditions.checkArgument(minLureAngle >= 0 && minLureAngle <= this.getMaxLureAngle(), "The minimum lure angle should be between 0 and the maximum lure angle.");
+		this.minLureAngle = minLureAngle;
+	}
+
+	@Override
+	public float getMaxLureAngle()
+	{
+		return this.maxLureAngle;
+	}
+
+	@Override
+	public void setMaxLureAngle(float maxLureAngle)
+	{
+		Preconditions.checkArgument(maxLureAngle >= 0 && maxLureAngle >= this.getMinLureAngle() && maxLureAngle <= 360, "The maximum lure angle should be higher than or equal to 0 and the minimum lure angle but also less than or equal to 360.");
+		this.maxLureAngle = maxLureAngle;
+	}
+
+	@Override
+	public void setLureAngle(float min, float max)
+	{
+		this.setMinLureAngle(min);
+		this.setMaxLureAngle(max);
 	}
 
 	@Override
@@ -136,6 +215,30 @@ public class FishHookMock extends ProjectileMock implements FishHook
 			hookedEntity.setVelocity(hookedEntity.getVelocity().add(velocity));
 		}
 		return true;
+	}
+
+	@Override
+	public boolean isSkyInfluenced()
+	{
+		return this.skyInfluenced;
+	}
+
+	@Override
+	public void setSkyInfluenced(boolean skyInfluenced)
+	{
+		this.skyInfluenced = skyInfluenced;
+	}
+
+	@Override
+	public boolean isRainInfluenced()
+	{
+		return this.rainInfluenced;
+	}
+
+	@Override
+	public void setRainInfluenced(boolean rainInfluenced)
+	{
+		this.rainInfluenced = rainInfluenced;
 	}
 
 	/**
