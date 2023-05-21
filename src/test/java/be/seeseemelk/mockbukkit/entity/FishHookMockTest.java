@@ -192,4 +192,59 @@ class FishHookMockTest
 		assertEquals("FishingHookMock", hook.toString());
 	}
 
+    @Test
+    void setWaitTime() {
+		hook.setWaitTime(50);
+		assertEquals(50, hook.getWaitTime());
+    }
+
+    @Test
+    void setMinLureTime() {
+		hook.setMinLureTime(50);
+		assertEquals(50, hook.getMinLureTime());
+    }
+
+    @Test
+    void setMaxLureTime() {
+		hook.setMaxLureTime(50);
+		assertEquals(50, hook.getMaxLureTime());
+    }
+
+    @Test
+    void setLureTime() {
+		hook.setLureTime(50, 100);
+		assertEquals(50, hook.getMinLureTime());
+		assertEquals(100, hook.getMaxLureTime());
+    }
+
+    @Test
+    void setMinLureAngle() {
+		hook.setMinLureAngle(50);
+		assertEquals(50, hook.getMinLureAngle());
+    }
+
+    @Test
+    void setMaxLureAngle() {
+		hook.setMaxLureAngle(50);
+		assertEquals(50, hook.getMaxLureAngle());
+    }
+
+    @Test
+    void setLureAngle() {
+		hook.setLureAngle(50, 100);
+		assertEquals(50, hook.getMinLureAngle());
+		assertEquals(100, hook.getMaxLureAngle());
+    }
+
+    @Test
+    void setSkyInfluenced() {
+		hook.setSkyInfluenced(false);
+		assertFalse(hook.isSkyInfluenced());
+    }
+
+    @Test
+    void setRainInfluenced() {
+		hook.setRainInfluenced(false);
+		assertFalse(hook.isRainInfluenced());
+    }
 }
