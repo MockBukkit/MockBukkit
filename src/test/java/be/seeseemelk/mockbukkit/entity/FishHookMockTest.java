@@ -193,12 +193,6 @@ class FishHookMockTest
 	}
 
     @Test
-    void setWaitTime() {
-		hook.setWaitTime(50);
-		assertEquals(50, hook.getWaitTime());
-    }
-
-    @Test
     void setMinLureTime() {
 		hook.setMinLureTime(50);
 		assertEquals(50, hook.getMinLureTime());

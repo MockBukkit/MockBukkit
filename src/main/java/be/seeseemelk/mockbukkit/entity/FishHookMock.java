@@ -88,7 +88,7 @@ public class FishHookMock extends ProjectileMock implements FishHook
 	@Override
 	public void setMinLureTime(int minLureTime)
 	{
-		Preconditions.checkArgument(minLureTime >= 0 && minLureTime <= this.getMaxWaitTime(), "The minimum lure time should be between 0 and the maximum lure time.");
+		Preconditions.checkArgument(minLureTime >= 0 && minLureTime <= this.getMaxLureTime(), "The minimum lure time should be between 0 and the maximum lure time.");
 		this.minLureTime = minLureTime;
 	}
 
@@ -101,7 +101,7 @@ public class FishHookMock extends ProjectileMock implements FishHook
 	@Override
 	public void setMaxLureTime(int maxLureTime)
 	{
-		Preconditions.checkArgument(maxLureTime >= 0 && maxLureTime >= this.getMinWaitTime(), "The maximum lure time should be higher than or equal to 0 and the minimum lure time.");
+		Preconditions.checkArgument(maxLureTime >= 0 && maxLureTime >= this.getMinLureTime(), "The maximum lure time should be higher than or equal to 0 and the minimum lure time.");
 		this.maxLureTime = maxLureTime;
 	}
 
