@@ -134,7 +134,9 @@ public class FishHookMock extends ProjectileMock implements FishHook
 	@Override
 	public void setMaxLureAngle(float maxLureAngle)
 	{
-		Preconditions.checkArgument(maxLureAngle >= 0 && maxLureAngle >= this.getMinLureAngle() && maxLureAngle <= 360, "The maximum lure angle should be higher than or equal to 0 and the minimum lure angle but also less than or equal to 360.");
+		Preconditions.checkArgument(
+				maxLureAngle >= 0 && maxLureAngle >= this.getMinLureAngle() && maxLureAngle <= 360,
+				"The maximum lure angle should be higher than or equal to 0 and the minimum lure angle but also less than or equal to 360.");
 		this.maxLureAngle = maxLureAngle;
 	}
 

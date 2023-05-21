@@ -192,6 +192,16 @@ class FishHookMockTest
 		assertEquals("FishingHookMock", hook.toString());
 	}
 
+	@Test
+	void testDefaultMinLureTime() {
+		assertEquals(20, hook.getMinLureTime());
+	}
+
+	@Test
+	void testDefaultMaxLureTime() {
+		assertEquals(80, hook.getMaxLureTime());
+	}
+
     @Test
     void setMinLureTime() {
 		hook.setMinLureTime(50);
@@ -210,6 +220,16 @@ class FishHookMockTest
 		assertEquals(50, hook.getMinLureTime());
 		assertEquals(100, hook.getMaxLureTime());
     }
+
+	@Test
+	void testDefaultMinLureAngle() {
+		assertEquals(0, hook.getMinLureAngle());
+	}
+
+	@Test
+	void testDefaultMaxLureAngle() {
+		assertEquals(360, hook.getMaxLureAngle());
+	}
 
     @Test
     void setMinLureAngle() {
