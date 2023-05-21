@@ -281,6 +281,13 @@ public class ChunkMock implements Chunk
 	}
 
 	@Override
+	public @NotNull LoadLevel getLoadLevel()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull PersistentDataContainer getPersistentDataContainer()
 	{
 		return persistentDataContainer;
