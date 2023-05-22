@@ -73,6 +73,7 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerChatEvent;
+import org.bukkit.event.player.PlayerExpCooldownChangeEvent;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerKickEvent;
@@ -142,6 +143,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private @Nullable Component playerListFooter = null;
 	private int expTotal = 0;
 	private float exp = 0;
+	private int expCooldown = 0;
 	private boolean sneaking = false;
 	private boolean sprinting = false;
 	private boolean allowFlight = false;
@@ -1694,6 +1696,22 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 			this.giveExpLevels(1);
 			this.exp /= this.getExpToLevel();
 		}
+	}
+
+	@Override
+	public int getExpCooldown()
+	{
+		return this.expCooldown;
+	}
+
+	@Override
+	public void setExpCooldown(int ticks)
+	{
+		Preconditions.checkArgument(ticks >= 0, "Cooldown ticks must be greater than or equal to 0");
+		this.expCooldown = ticks;
+
+		PlayerExpCooldownChangeEvent event = new PlayerExpCooldownChangeEvent(this, ticks, PlayerExpCooldownChangeEvent.ChangeReason.PLUGIN);
+		Bukkit.getPluginManager().callEvent(event);
 	}
 
 	@Override
