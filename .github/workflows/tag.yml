@@ -1,8 +1,6 @@
 name: Tag
 
 on:
-  pull_request:
-    branches: [ v1.* ]
   push:
     branches: [ v1.* ]
 
