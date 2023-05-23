@@ -76,10 +76,11 @@ tasks {
 	}
 
 	check {
-		finalizedBy(jacocoTestReport)
+		 dependsOn(jacocoTestReport)
 	}
 
 	jacocoTestReport {
+		dependsOn(test)
 		reports {
 			xml.required.set(true)
 			html.required.set(true)
@@ -112,7 +113,7 @@ signing {
 }
 
 nexusPublishing {
-	repositories {
+	this.repositories {
 		sonatype {
 			username.set(findProperty("ossrhUsername") as String?)
 			password.set(findProperty("ossrhPassword") as String?)
