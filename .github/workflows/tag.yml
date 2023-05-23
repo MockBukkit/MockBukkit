@@ -1,4 +1,4 @@
-name: Build
+name: Tag
 
 on:
   pull_request:
