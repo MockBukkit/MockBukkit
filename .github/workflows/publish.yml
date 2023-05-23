@@ -1,6 +1,8 @@
 name: Build
 
 on:
+  pull_request:
+    branches: [ v1.* ]
   push:
     tags:  [ v* ]
 
@@ -38,14 +40,14 @@ jobs:
 
       - name: Store Private key
         uses: DamianReeves/write-file-action@v1.2
-        if: ${{ steps.bump-semver.outputs.new_version != null }}
+        if: ${{ github.ref_type == 'tag' }}
         with:
           path: private.key
           contents: ${{ secrets.PRIV_KEY }}
           write-mode: overwrite
 
       - name: Publish
-        if: ${{ steps.bump-semver.outputs.new_version != null }}
+        if: ${{ github.ref_type == 'tag' }}
         env:
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
           SIGN_KEY: ${{ secrets.PRIV_KEY_PASS }}
@@ -58,7 +60,7 @@ jobs:
           gpg --batch --export-secret-keys --passphrase $SIGN_KEY "Sebastiaan de Schaetzen <sebastiaan.de.schaetzen@gmail.com>" > private.gpg
 
           ./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository \
-            -Pmockbukkit.version=$(echo ${{ steps.bump-semver.outputs.new_version }} | sed -e 's:v::') \
+            -Pmockbukkit.version=$(echo ${{ github.ref_name }} | sed -e 's:v::') \
             -PossrhUsername=seeseemelk \
             -PossrhPassword=$OSSRH_PASSWORD \
             -Psigning.secretKeyRingFile=private.gpg \
