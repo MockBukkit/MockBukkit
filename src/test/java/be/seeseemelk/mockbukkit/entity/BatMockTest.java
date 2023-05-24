@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
+import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,6 +12,8 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BatMockTest
@@ -50,4 +53,25 @@ class BatMockTest
 		assertEquals(EntityType.BAT, bat.getType());
 	}
 
+	@Test
+	void testTargetLocationDefault()
+	{
+		assertNull(bat.getTargetLocation());
+	}
+
+	@Test
+	void testTargetLocation()
+	{
+		bat.setTargetLocation(bat.getLocation());
+		assertEquals(bat.getLocation(), bat.getTargetLocation());
+	}
+
+	@Test
+	void testSetTargetLocationNull()
+	{
+		bat.setTargetLocation(new Location(null, 0, 0, 0));
+		assertNotNull(bat.getTargetLocation());
+		bat.setTargetLocation(null);
+		assertNull(bat.getTargetLocation());
+	}
 }
