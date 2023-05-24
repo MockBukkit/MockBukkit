@@ -125,6 +125,7 @@ publishing {
 	publications {
 		create<MavenPublication>("maven") {
 			pom {
+				name.set("MockBukkit")
 				description.set("MockBukkit is a mocking framework for bukkit to allow the easy unit testing of Bukkit plugins.")
 				url.set("https://github.com/MockBukkit/MockBukkit")
 				scm {
