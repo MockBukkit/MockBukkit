@@ -14,6 +14,7 @@ import be.seeseemelk.mockbukkit.entity.CatMock;
 import be.seeseemelk.mockbukkit.entity.CaveSpiderMock;
 import be.seeseemelk.mockbukkit.entity.ChickenMock;
 import be.seeseemelk.mockbukkit.entity.CodMock;
+import be.seeseemelk.mockbukkit.entity.CommandMinecartMock;
 import be.seeseemelk.mockbukkit.entity.CowMock;
 import be.seeseemelk.mockbukkit.entity.CreeperMock;
 import be.seeseemelk.mockbukkit.entity.DonkeyMock;
@@ -22,6 +23,7 @@ import be.seeseemelk.mockbukkit.entity.EggMock;
 import be.seeseemelk.mockbukkit.entity.ElderGuardianMock;
 import be.seeseemelk.mockbukkit.entity.EndermanMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
+import be.seeseemelk.mockbukkit.entity.ExplosiveMinecartMock;
 import be.seeseemelk.mockbukkit.entity.FireballMock;
 import be.seeseemelk.mockbukkit.entity.FireworkMock;
 import be.seeseemelk.mockbukkit.entity.FoxMock;
@@ -30,6 +32,7 @@ import be.seeseemelk.mockbukkit.entity.GhastMock;
 import be.seeseemelk.mockbukkit.entity.GiantMock;
 import be.seeseemelk.mockbukkit.entity.GoatMock;
 import be.seeseemelk.mockbukkit.entity.GuardianMock;
+import be.seeseemelk.mockbukkit.entity.HopperMinecartMock;
 import be.seeseemelk.mockbukkit.entity.HorseMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
 import be.seeseemelk.mockbukkit.entity.LlamaMock;
@@ -39,12 +42,15 @@ import be.seeseemelk.mockbukkit.entity.PigMock;
 import be.seeseemelk.mockbukkit.entity.PolarBearMock;
 import be.seeseemelk.mockbukkit.entity.PoweredMinecartMock;
 import be.seeseemelk.mockbukkit.entity.PufferFishMock;
+import be.seeseemelk.mockbukkit.entity.RideableMinecartMock;
 import be.seeseemelk.mockbukkit.entity.SalmonMock;
 import be.seeseemelk.mockbukkit.entity.SheepMock;
 import be.seeseemelk.mockbukkit.entity.SkeletonHorseMock;
 import be.seeseemelk.mockbukkit.entity.SkeletonMock;
 import be.seeseemelk.mockbukkit.entity.SmallFireballMock;
+import be.seeseemelk.mockbukkit.entity.SpawnerMinecartMock;
 import be.seeseemelk.mockbukkit.entity.SpiderMock;
+import be.seeseemelk.mockbukkit.entity.StorageMinecartMock;
 import be.seeseemelk.mockbukkit.entity.StrayMock;
 import be.seeseemelk.mockbukkit.entity.TadpoleMock;
 import be.seeseemelk.mockbukkit.entity.TropicalFishMock;
@@ -1078,7 +1084,13 @@ class WorldMockTest
 				Arguments.of(EntityType.FIREWORK, FireworkMock.class),
 				Arguments.of(EntityType.EXPERIENCE_ORB, ExperienceOrbMock.class),
 				Arguments.of(EntityType.MINECART_FURNACE, PoweredMinecartMock.class),
-				Arguments.of(EntityType.CAMEL, CamelMock.class)
+				Arguments.of(EntityType.CAMEL, CamelMock.class),
+				Arguments.of(EntityType.MINECART_COMMAND, CommandMinecartMock.class),
+				Arguments.of(EntityType.MINECART_TNT, ExplosiveMinecartMock.class),
+				Arguments.of(EntityType.MINECART_HOPPER, HopperMinecartMock.class),
+				Arguments.of(EntityType.MINECART_MOB_SPAWNER, SpawnerMinecartMock.class),
+				Arguments.of(EntityType.MINECART, RideableMinecartMock.class),
+				Arguments.of(EntityType.MINECART_CHEST, StorageMinecartMock.class)
 		);
 	}
 
