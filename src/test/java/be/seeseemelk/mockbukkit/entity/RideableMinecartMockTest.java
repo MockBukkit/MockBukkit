@@ -4,6 +4,7 @@ import be.seeseemelk.mockbukkit.MockBukkitExtension;
 import be.seeseemelk.mockbukkit.MockBukkitInject;
 import be.seeseemelk.mockbukkit.ServerMock;
 import org.bukkit.Material;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.minecart.RideableMinecart;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,4 +34,9 @@ class RideableMinecartMockTest
 		assertEquals(minecart.getMinecartMaterial(), Material.MINECART);
 	}
 
+	@Test
+	void testGetType()
+	{
+		assertEquals(minecart.getType(), EntityType.MINECART);
+	}
 }

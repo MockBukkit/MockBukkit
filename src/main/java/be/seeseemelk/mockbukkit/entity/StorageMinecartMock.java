@@ -3,8 +3,8 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.ServerMock;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.minecart.StorageMinecart;
-import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.jetbrains.annotations.NotNull;
 
@@ -43,6 +43,12 @@ public class StorageMinecartMock extends LootableMinecart implements StorageMine
 	public @NotNull Inventory getInventory()
 	{
 		return this.inventory;
+	}
+
+	@Override
+	public @NotNull EntityType getType()
+	{
+		return EntityType.MINECART_CHEST;
 	}
 
 }

@@ -12,6 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.util.UUID;
 
+import static org.bukkit.entity.EntityType.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockBukkitExtension.class)
@@ -45,6 +46,12 @@ public class StorageMinecartMockTest
 	void testGetEntity()
 	{
 		assertEquals(minecart, minecart.getEntity());
+	}
+
+	@Test
+	void testGetType()
+	{
+		assertEquals(minecart.getType(), MINECART_CHEST);
 	}
 
 }

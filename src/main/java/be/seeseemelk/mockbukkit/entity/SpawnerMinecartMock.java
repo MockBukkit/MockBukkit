@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import org.bukkit.Material;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.minecart.SpawnerMinecart;
 import org.jetbrains.annotations.NotNull;
 
@@ -25,6 +26,12 @@ public class SpawnerMinecartMock extends MinecartMock implements SpawnerMinecart
 	public @NotNull Material getMinecartMaterial()
 	{
 		return Material.MINECART;
+	}
+
+	@Override
+	public @NotNull EntityType getType()
+	{
+		return EntityType.MINECART_MOB_SPAWNER;
 	}
 
 }

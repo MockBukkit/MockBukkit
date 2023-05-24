@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import org.bukkit.Material;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.minecart.RideableMinecart;
 import org.jetbrains.annotations.NotNull;
 
@@ -25,6 +26,12 @@ public class RideableMinecartMock extends MinecartMock implements RideableMineca
 	public @NotNull Material getMinecartMaterial()
 	{
 		return Material.MINECART;
+	}
+
+	@Override
+	public @NotNull EntityType getType()
+	{
+		return EntityType.MINECART;
 	}
 
 }
