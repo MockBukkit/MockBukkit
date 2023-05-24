@@ -10,6 +10,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.BUILD_TOKEN }}
+      
       - name: Get merged pull request
         uses: actions-ecosystem/action-get-merged-pull-request@v1.0.1
         if: ${{ github.event_name == 'push' }}
