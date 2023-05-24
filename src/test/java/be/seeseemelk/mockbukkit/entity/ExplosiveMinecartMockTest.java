@@ -100,4 +100,5 @@ class ExplosiveMinecartMockTest
 	{
 		assertThrows(IllegalArgumentException.class, () -> minecart.explode(6.0f));
 	}
+
 }

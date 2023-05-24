@@ -86,4 +86,5 @@ public class CommandMinecartMock extends MinecartMock implements CommandMinecart
 	{
 		return EntityType.MINECART_COMMAND;
 	}
+
 }

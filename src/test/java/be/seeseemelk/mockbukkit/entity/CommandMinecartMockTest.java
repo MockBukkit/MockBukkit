@@ -76,5 +76,4 @@ class CommandMinecartMockTest
 		assertEquals(0, minecart.getSuccessCount());
 	}
 
-
 }

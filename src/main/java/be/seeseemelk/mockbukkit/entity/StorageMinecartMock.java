@@ -12,6 +12,7 @@ import java.util.UUID;
 
 public class StorageMinecartMock extends LootableMinecart implements StorageMinecart
 {
+
 	private Inventory inventory;
 
 	/**

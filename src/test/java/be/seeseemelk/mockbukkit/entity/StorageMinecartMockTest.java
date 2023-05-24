@@ -46,4 +46,5 @@ public class StorageMinecartMockTest
 	{
 		assertEquals(minecart, minecart.getEntity());
 	}
+
 }
