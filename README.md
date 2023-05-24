@@ -1,7 +1,7 @@
 <p align="center">
     <!-- Badges -->
     <a href="https://github.com/MockBukkit/MockBukkit/actions/">
-        <img alt="Build Status" src="https://github.com/MockBukkit/MockBukkit/actions/workflows/gradle.yml/badge.svg" />
+        <img alt="Build Status" src="https://github.com/MockBukkit/MockBukkit/actions/workflows/publish.yml/badge.svg" />
     </a>
     <a href="https://mockbukkit.readthedocs.io/en/v1.19/?badge=v1.19">
         <img alt="Documentation Status" src="https://readthedocs.org/projects/mockbukkit/badge/?version=v1.19" />
