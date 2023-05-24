@@ -74,4 +74,5 @@ class BatMockTest
 		bat.setTargetLocation(null);
 		assertNull(bat.getTargetLocation());
 	}
+
 }
