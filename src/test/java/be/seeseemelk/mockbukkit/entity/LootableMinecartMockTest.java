@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
@@ -124,6 +125,12 @@ public class LootableMinecartMockTest
 		assertFalse(minecart.hasPendingRefill());
 		minecart.setNextRefill(1);
 		assertTrue(minecart.hasPendingRefill());
+	}
+
+	@Test
+	void testGetLastLootedMapNull()
+	{
+		assertNull(minecart.getLastLooted(UUID.randomUUID()));
 	}
 
 }
