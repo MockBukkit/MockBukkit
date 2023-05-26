@@ -1,4 +1,4 @@
-package be.seeseemelk.mockbukkit.plugin;
+package org.mockbukkit.mockbukkit.plugin;
 
 import io.papermc.paper.plugin.provider.classloader.ClassLoaderAccess;
 import io.papermc.paper.plugin.provider.classloader.ConfiguredPluginClassLoader;

@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit;
 
-import be.seeseemelk.mockbukkit.plugin.MockCustomConfiguredPluginClassLoader;
 import io.papermc.paper.plugin.provider.classloader.ConfiguredPluginClassLoader;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -13,7 +12,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.plugin.MockCustomConfiguredPluginClassLoader;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;

@@ -1,10 +1,10 @@
-package be.seeseemelk.mockbukkit.entity;
+package org.mockbukkit.mockbukkit.entity;
 
-import be.seeseemelk.mockbukkit.ServerMock;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.minecart.SpawnerMinecart;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
 

@@ -1,4 +1,4 @@
-package be.seeseemelk.mockbukkit.attribute;
+package org.mockbukkit.mockbukkit.attribute;
 
 import org.junit.jupiter.api.Test;
 

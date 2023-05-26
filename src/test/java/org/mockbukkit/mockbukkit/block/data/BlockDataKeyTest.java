@@ -1,4 +1,4 @@
-package be.seeseemelk.mockbukkit.block.data;
+package org.mockbukkit.mockbukkit.block.data;
 
 import org.junit.jupiter.api.Test;
 

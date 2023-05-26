@@ -1,4 +1,4 @@
-package be.seeseemelk.testplugin;
+package org.mockbukkit.testplugin;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;

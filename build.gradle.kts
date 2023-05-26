@@ -41,7 +41,7 @@ tasks {
 	jar {
 		manifest {
 			attributes(
-				"Automatic-Module-Name" to "be.seeseemelk.mockbukkit"
+				"Automatic-Module-Name" to "org.mockbukkit.mockbukkit",
 			)
 		}
 	}
@@ -94,7 +94,7 @@ tasks {
 }
 
 blossom {
-	val metadata = "src/main/java/be/seeseemelk/mockbukkit/MockBukkit.java"
+	val metadata = "src/main/java/org/mockbukkit/mockbukkit/MockBukkit.java"
 	fun repl(token: String) {
 		replaceToken("\"{$token}\"", "\"${project.property(token)}\"", metadata)
 	}
