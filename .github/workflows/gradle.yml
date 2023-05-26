@@ -2,9 +2,9 @@ name: Build and test with Gradle
 
 on:
   pull_request:
-    branches: [ 4.0.* ]
+    branches: [ 4.0* ]
   push:
-    branches: [ 4.0.* ]
+    branches: [ 4.0* ]
 
 jobs:
   build:
