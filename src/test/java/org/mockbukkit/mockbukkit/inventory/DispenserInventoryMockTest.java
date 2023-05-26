@@ -1,6 +1,6 @@
-package be.seeseemelk.mockbukkit.inventory;
+package org.mockbukkit.mockbukkit.inventory;
 
-import be.seeseemelk.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.BeforeEach;

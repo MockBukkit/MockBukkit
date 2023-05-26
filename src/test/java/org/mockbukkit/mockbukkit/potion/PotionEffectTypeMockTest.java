@@ -91,37 +91,37 @@ class PotionEffectTypeMockTest
 	@Test
 	void testGetDurationModifier()
 	{
-		MockPotionEffectType effect = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
+		PotionEffectTypeMock effect = new PotionEffectTypeMock(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
 		assertEquals(1.0, effect.getDurationModifier());
 	}
 
 	@Test
 	void testHashcode()
 	{
-		MockPotionEffectType effect = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
+		PotionEffectTypeMock effect = new PotionEffectTypeMock(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
 		assertEquals(1, effect.hashCode());
 	}
 
 	@Test
 	void testEquals()
 	{
-		MockPotionEffectType effect = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
-		MockPotionEffectType effect2 = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
+		PotionEffectTypeMock effect = new PotionEffectTypeMock(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
+		PotionEffectTypeMock effect2 = new PotionEffectTypeMock(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
 		assertEquals(effect, effect2);
 	}
 
 	@Test
 	void testEquals_DifferentId()
 	{
-		MockPotionEffectType effect = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
-		MockPotionEffectType effect2 = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 2, "Speed", false, Color.fromRGB(8171462));
+		PotionEffectTypeMock effect = new PotionEffectTypeMock(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
+		PotionEffectTypeMock effect2 = new PotionEffectTypeMock(NamespacedKey.minecraft("speed"), 2, "Speed", false, Color.fromRGB(8171462));
 		assertNotEquals(effect, effect2);
 	}
 
 	@Test
 	void testEquals_DifferentType()
 	{
-		MockPotionEffectType effect = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
+		PotionEffectTypeMock effect = new PotionEffectTypeMock(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
 		assertNotEquals(effect, new Object());
 	}
 

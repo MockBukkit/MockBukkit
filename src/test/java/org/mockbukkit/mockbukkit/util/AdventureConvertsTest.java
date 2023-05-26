@@ -1,4 +1,4 @@
-package be.seeseemelk.mockbukkit.util;
+package org.mockbukkit.mockbukkit.util;
 
 import net.kyori.adventure.sound.Sound;
 import org.bukkit.SoundCategory;
