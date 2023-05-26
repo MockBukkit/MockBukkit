@@ -23,6 +23,8 @@ import java.util.logging.Level;
 public class MockBukkit
 {
 
+	static final String PAPER_API_FULL_VERSION = "{paper.api.full-version}";
+
 	private static @Nullable ServerMock mock = null;
 
 	private MockBukkit()
@@ -150,7 +152,7 @@ public class MockBukkit
 	@SuppressWarnings("deprecation")
 	public static void loadJar(@NotNull File jarFile) throws InvalidPluginException
 	{
-			mock.getPluginManager().loadPlugin(jarFile);
+		mock.getPluginManager().loadPlugin(jarFile);
 	}
 
 	/**

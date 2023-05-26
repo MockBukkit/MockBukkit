@@ -3,7 +3,6 @@ package org.mockbukkit.mockbukkit.entity;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.inventory.HorseInventoryMock;
 import com.google.common.base.Preconditions;
-
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Horse;
 import org.bukkit.inventory.HorseInventory;

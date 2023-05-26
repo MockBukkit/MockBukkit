@@ -40,4 +40,5 @@ public class ZombieHorseMock extends AbstractHorseMock implements ZombieHorse
 	{
 		return EntityType.ZOMBIE_HORSE;
 	}
+
 }

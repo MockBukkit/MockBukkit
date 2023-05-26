@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
 class BedMockTest
@@ -99,6 +100,13 @@ class BedMockTest
 		{
 			assertInstanceOf(BedDataMock.class, BlockDataMock.mock(material));
 		}
+	}
+
+	@Test
+	void testSetOccupied()
+	{
+		bed.setOccupied(true);
+		assertTrue(bed.isOccupied());
 	}
 
 }

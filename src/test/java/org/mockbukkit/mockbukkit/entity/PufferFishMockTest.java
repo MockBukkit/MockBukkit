@@ -72,13 +72,14 @@ class PufferFishMockTest
 	}
 
 	@Test
-	void testGetEntityState() {
+	void testGetEntityState()
+	{
 		pufferFish.setPuffState(0);
-		assertEquals(EntityState.DEFAULT,pufferFish.getEntityState());
+		assertEquals(EntityState.DEFAULT, pufferFish.getEntityState());
 		pufferFish.setPuffState(1);
-		assertEquals(EntityState.SEMI_PUFFED,pufferFish.getEntityState());
+		assertEquals(EntityState.SEMI_PUFFED, pufferFish.getEntityState());
 		pufferFish.setPuffState(2);
-		assertEquals(EntityState.PUFFED,pufferFish.getEntityState());
+		assertEquals(EntityState.PUFFED, pufferFish.getEntityState());
 	}
 
 }

@@ -46,6 +46,7 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerExpChangeEvent;
+import org.bukkit.event.player.PlayerExpCooldownChangeEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
@@ -327,7 +328,7 @@ class PlayerMockTest
 	{
 		MockBukkit.load(TestPlugin.class);
 		player.setGameMode(GameMode.SURVIVAL);
-		BlockMock block = (BlockMock) player.getWorld().getBlockAt(0, 0, 0);
+		BlockMock block = player.getWorld().getBlockAt(0, 0, 0);
 		block.setType(Material.STONE);
 		boolean broken = player.breakBlock(block);
 		assertTrue(broken);
@@ -341,7 +342,7 @@ class PlayerMockTest
 		MockBukkit.load(TestPlugin.class);
 		player.setGameMode(GameMode.CREATIVE);
 		player.setItemInHand(new ItemStack(Material.DIAMOND_SWORD));
-		BlockMock block = (BlockMock) player.getWorld().getBlockAt(0, 0, 0);
+		BlockMock block = player.getWorld().getBlockAt(0, 0, 0);
 		block.setType(Material.STONE);
 		boolean broken = player.breakBlock(block);
 		assertFalse(broken);
@@ -2177,6 +2178,38 @@ class PlayerMockTest
 				Arguments.of(Instrument.PLING, Sound.BLOCK_NOTE_BLOCK_PLING),
 				Arguments.of(Instrument.SNARE_DRUM, Sound.BLOCK_NOTE_BLOCK_SNARE),
 				Arguments.of(Instrument.STICKS, Sound.BLOCK_NOTE_BLOCK_HAT)
-				);
+		);
 	}
+
+	@Test
+	void setExpCooldown()
+	{
+		player.setExpCooldown(10);
+		assertEquals(10, player.getExpCooldown());
+	}
+
+	@Test
+	void setExpCooldown_Negative_ThrowsException()
+	{
+		assertThrows(IllegalArgumentException.class, () -> player.setExpCooldown(-1));
+	}
+
+	@Test
+	void setExpCooldown_CallsEvent()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+
+		Bukkit.getPluginManager().registerEvents(new Listener()
+		{
+			@EventHandler
+			public void expCooldownChange(@NotNull PlayerExpCooldownChangeEvent event)
+			{
+			}
+		}, plugin);
+
+		player.setExpCooldown(10);
+		server.getPluginManager().assertEventFired(PlayerExpCooldownChangeEvent.class);
+		assertEquals(10, player.getExpCooldown());
+	}
+
 }

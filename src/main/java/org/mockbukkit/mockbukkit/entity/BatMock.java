@@ -19,6 +19,7 @@ public class BatMock extends AmbientMock implements Bat
 {
 
 	private boolean awake = true;
+	private Location targetPosition;
 
 	/**
 	 * Constructs a new {@link BatMock} on the provided {@link ServerMock} with a specified {@link UUID}.
@@ -46,15 +47,13 @@ public class BatMock extends AmbientMock implements Bat
 	@Override
 	public @Nullable Location getTargetLocation()
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.targetPosition;
 	}
 
 	@Override
 	public void setTargetLocation(@Nullable Location location)
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.targetPosition = location;
 	}
 
 	@Override

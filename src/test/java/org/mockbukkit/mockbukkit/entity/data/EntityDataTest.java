@@ -11,11 +11,15 @@ import org.junit.jupiter.api.Test;
 import org.mockbukkit.mockbukkit.entity.data.EntityData;
 import org.mockbukkit.mockbukkit.entity.data.EntityState;
 import org.mockbukkit.mockbukkit.entity.data.EntitySubType;
-import org.opentest4j.AssertionFailedError;
-
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.UnimplementedOperationException;
 
+import org.opentest4j.AssertionFailedError;
+
+import java.io.IOException;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 class EntityDataTest
 {
 
@@ -81,7 +85,7 @@ class EntityDataTest
 	void invalidKeyTest()
 	{
 		assertThrows(UnimplementedOperationException.class,
-				() -> entityData.getValueFromKey("invalid",EntitySubType.DEFAULT ,EntityState.DEFAULT));
+				() -> entityData.getValueFromKey("invalid", EntitySubType.DEFAULT, EntityState.DEFAULT));
 	}
 
 	@Test

@@ -1078,7 +1078,13 @@ class WorldMockTest
 				Arguments.of(EntityType.FIREWORK, FireworkMock.class),
 				Arguments.of(EntityType.EXPERIENCE_ORB, ExperienceOrbMock.class),
 				Arguments.of(EntityType.MINECART_FURNACE, PoweredMinecartMock.class),
-				Arguments.of(EntityType.CAMEL, CamelMock.class)
+				Arguments.of(EntityType.CAMEL, CamelMock.class),
+				Arguments.of(EntityType.MINECART_COMMAND, CommandMinecartMock.class),
+				Arguments.of(EntityType.MINECART_TNT, ExplosiveMinecartMock.class),
+				Arguments.of(EntityType.MINECART_HOPPER, HopperMinecartMock.class),
+				Arguments.of(EntityType.MINECART_MOB_SPAWNER, SpawnerMinecartMock.class),
+				Arguments.of(EntityType.MINECART, RideableMinecartMock.class),
+				Arguments.of(EntityType.MINECART_CHEST, StorageMinecartMock.class)
 		);
 	}
 

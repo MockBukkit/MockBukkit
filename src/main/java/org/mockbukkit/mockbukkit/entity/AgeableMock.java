@@ -105,11 +105,13 @@ public class AgeableMock extends CreatureMock implements Ageable
 	}
 
 	@Override
-	protected EntitySubType getSubType() {
+	protected EntitySubType getSubType()
+	{
 		if (!this.isAdult())
 		{
 			return EntitySubType.BABY;
 		}
 		return super.getSubType();
 	}
+
 }

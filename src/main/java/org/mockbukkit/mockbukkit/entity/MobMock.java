@@ -193,4 +193,11 @@ public abstract class MobMock extends LivingEntityMock implements Mob
 		this.setLeftHanded(ThreadLocalRandom.current().nextFloat() < 0.05F);
 	}
 
+	@Override
+	public int getPossibleExperienceReward()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 }

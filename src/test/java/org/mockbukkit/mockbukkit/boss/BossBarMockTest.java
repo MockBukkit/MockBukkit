@@ -64,12 +64,32 @@ class BossBarMockTest
 	}
 
 	@Test
+	void testSetProgressNegative()
+	{
+		assertThrows(IllegalArgumentException.class, () -> bar.setProgress(-0.5));
+	}
+
+	@Test
+	void testSetProgressOverOne()
+	{
+		assertThrows(IllegalArgumentException.class, () -> bar.setProgress(1.5));
+	}
+
+	@Test
 	void testSetName()
 	{
 		assertEquals("Test bossbar", bar.getTitle());
 
 		bar.setTitle("Hello world");
 		assertEquals("Hello world", bar.getTitle());
+	}
+
+	@Test
+	void testSetNameNull()
+	{
+		assertEquals("Test bossbar", bar.getTitle());
+		bar.setTitle(null);
+		assertEquals("", bar.getTitle());
 	}
 
 	@Test
@@ -125,6 +145,33 @@ class BossBarMockTest
 	void testRemovingNullPlayer()
 	{
 		assertThrows(NullPointerException.class, () -> bar.removePlayer(null));
+	}
+
+	@Test
+	void testIsVisible()
+	{
+		assertTrue(bar.isVisible());
+
+		bar.setVisible(false);
+		assertFalse(bar.isVisible());
+	}
+
+	@Test
+	void testShow()
+	{
+		bar.setVisible(false);
+		assertFalse(bar.isVisible());
+		bar.show();
+		assertTrue(bar.isVisible());
+	}
+
+	@Test
+	void testHide()
+	{
+		bar.setVisible(true);
+		assertTrue(bar.isVisible());
+		bar.hide();
+		assertFalse(bar.isVisible());
 	}
 
 }

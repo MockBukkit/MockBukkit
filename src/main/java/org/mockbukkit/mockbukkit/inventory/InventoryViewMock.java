@@ -16,7 +16,9 @@ public abstract class InventoryViewMock extends InventoryView
 	private Inventory bottomInventory;
 	private HumanEntity player;
 	private InventoryType type;
-	private final String name;
+	private String name;
+	private String originalTitle;
+	private boolean titleChanged = false;
 
 	/**
 	 * Constructs a new {@link InventoryViewMock} with the provided parameters.
@@ -104,6 +106,22 @@ public abstract class InventoryViewMock extends InventoryView
 	public @NotNull String getTitle()
 	{
 		return name;
+	}
+
+	@Override
+	public @NotNull String getOriginalTitle()
+	{
+		return this.originalTitle;
+	}
+
+	@Override
+	public void setTitle(@NotNull String title)
+	{
+		if (!this.titleChanged) {
+			this.originalTitle = this.name;
+			this.titleChanged = true;
+		}
+		this.name = title;
 	}
 
 }

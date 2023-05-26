@@ -140,7 +140,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
@@ -159,7 +158,6 @@ public class ServerMock extends Server.Spigot implements Server
 	private static final Component MOTD = Component.text("A Minecraft Server");
 	private static final Component NO_PERMISSION = Component.text("I'm sorry, but you do not have permission to perform this command. Please contact the server administrators if you believe that this is in error.", NamedTextColor.RED);
 
-	private final Properties buildProperties = new Properties();
 	private final Logger logger = Logger.getLogger("ServerMock");
 	private final Thread mainThread = Thread.currentThread();
 	private final UnsafeValuesMock unsafe = new UnsafeValuesMock();
@@ -209,7 +207,7 @@ public class ServerMock extends Server.Spigot implements Server
 
 		try
 		{
-			InputStream stream = ClassLoader.getSystemResourceAsStream("logger.properties");
+			InputStream stream = getClass().getClassLoader().getResourceAsStream("logger.properties");
 			LogManager.getLogManager().readConfiguration(stream);
 		}
 		catch (IOException e)
@@ -217,15 +215,6 @@ public class ServerMock extends Server.Spigot implements Server
 			logger.warning("Could not load file logger.properties");
 		}
 		logger.setLevel(Level.ALL);
-
-		try
-		{
-			buildProperties.load(ClassLoader.getSystemResourceAsStream("build.properties"));
-		}
-		catch (IOException | NullPointerException e)
-		{
-			logger.warning("Could not load build properties");
-		}
 	}
 
 	/**
@@ -549,10 +538,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull String getBukkitVersion()
 	{
-		Preconditions.checkNotNull(this.buildProperties, "Failed to load build properties!");
-		String apiVersion = buildProperties.getProperty("full-api-version");
-		Preconditions.checkNotNull(apiVersion, "Failed to get full-api-version from the build properties!");
-		return apiVersion;
+		return MockBukkit.PAPER_API_FULL_VERSION;
 	}
 
 	@Override
@@ -851,10 +837,10 @@ public class ServerMock extends Server.Spigot implements Server
 	public @NotNull BanList getBanList(@NotNull Type type)
 	{
 		return switch (type)
-				{
-					case IP -> playerList.getIPBans();
-					case NAME -> playerList.getProfileBans();
-				};
+		{
+			case IP -> playerList.getIPBans();
+			case NAME -> playerList.getProfileBans();
+		};
 	}
 
 	@Override

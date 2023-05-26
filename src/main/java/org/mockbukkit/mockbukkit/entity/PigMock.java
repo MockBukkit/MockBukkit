@@ -87,4 +87,5 @@ public class PigMock extends AnimalsMock implements Pig
 	{
 		return EntityType.PIG;
 	}
+
 }

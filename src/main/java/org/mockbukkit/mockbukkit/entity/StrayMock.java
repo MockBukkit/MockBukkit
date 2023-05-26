@@ -40,4 +40,5 @@ public class StrayMock extends AbstractSkeletonMock implements Stray
 	{
 		return EntityType.STRAY;
 	}
+
 }

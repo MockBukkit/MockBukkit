@@ -4,6 +4,8 @@ import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.FishMock;
 import org.mockbukkit.mockbukkit.entity.data.EntityState;
 
+import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.entity.data.EntityState;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
@@ -65,9 +67,9 @@ public class PufferFishMock extends FishMock implements PufferFish
 	{
 		return switch (getPuffState())
 		{
-		case 1 -> EntityState.SEMI_PUFFED;
-		case 2 -> EntityState.PUFFED;
-		default -> super.getEntityState();
+			case 1 -> EntityState.SEMI_PUFFED;
+			case 2 -> EntityState.PUFFED;
+			default -> super.getEntityState();
 		};
 	}
 

@@ -72,6 +72,7 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerChatEvent;
+import org.bukkit.event.player.PlayerExpCooldownChangeEvent;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerKickEvent;
@@ -100,7 +101,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.net.InetSocketAddress;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -133,8 +133,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 	private static final Component DEFAULT_KICK_COMPONENT = Component.text("You are not whitelisted on this server!");
 
-	private @NotNull GameMode gamemode = GameMode.SURVIVAL;
-	private @NotNull GameMode previousGamemode = gamemode;
+	private @NotNull GameMode previousGamemode = super.getGameMode();
 
 	private boolean online;
 	private @Nullable Component displayName = null;
@@ -143,6 +142,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private @Nullable Component playerListFooter = null;
 	private int expTotal = 0;
 	private float exp = 0;
+	private int expCooldown = 0;
 	private boolean sneaking = false;
 	private boolean sprinting = false;
 	private boolean allowFlight = false;
@@ -359,7 +359,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public @Nullable BlockDamageEvent simulateBlockDamage(@NotNull Block block)
 	{
 		Preconditions.checkNotNull(block, "Block cannot be null");
-		if (gamemode != GameMode.SURVIVAL)
+		if (super.getGameMode() != GameMode.SURVIVAL)
 		{
 			return null;
 		}
@@ -387,8 +387,8 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public @Nullable BlockBreakEvent simulateBlockBreak(@NotNull Block block)
 	{
 		Preconditions.checkNotNull(block, "Block cannot be null");
-		if ((gamemode == GameMode.SPECTATOR || gamemode == GameMode.ADVENTURE)
-				|| (gamemode == GameMode.SURVIVAL && simulateBlockDamagePure(block).isCancelled()))
+		if ((super.getGameMode() == GameMode.SPECTATOR || super.getGameMode() == GameMode.ADVENTURE)
+				|| (super.getGameMode() == GameMode.SURVIVAL && simulateBlockDamagePure(block).isCancelled()))
 			return null;
 
 		BlockBreakEvent event = new BlockBreakEvent(block, this);
@@ -411,7 +411,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	{
 		Preconditions.checkNotNull(material, "Material cannot be null");
 		Preconditions.checkNotNull(location, "Location cannot be null");
-		if (gamemode == GameMode.ADVENTURE || gamemode == GameMode.SPECTATOR)
+		if (super.getGameMode() == GameMode.ADVENTURE || super.getGameMode() == GameMode.SPECTATOR)
 			return null;
 		Block block = location.getBlock();
 		BlockState blockState = block.getState();
@@ -511,24 +511,18 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public @NotNull GameMode getGameMode()
-	{
-		return this.gamemode;
-	}
-
-	@Override
 	public void setGameMode(@NotNull GameMode mode)
 	{
 		Preconditions.checkNotNull(mode, "GameMode cannot be null");
-		if (this.gamemode == mode)
+		if (super.getGameMode() == mode)
 			return;
 
 		PlayerGameModeChangeEvent event = new PlayerGameModeChangeEvent(this, mode, PlayerGameModeChangeEvent.Cause.UNKNOWN, null);
 		if (!event.callEvent())
 			return;
 
-		this.previousGamemode = this.gamemode;
-		this.gamemode = mode;
+		this.previousGamemode = super.getGameMode();
+		super.setGameMode(mode);
 	}
 
 	@Override
@@ -1050,31 +1044,31 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		Preconditions.checkNotNull(loc, "Location cannot be null");
 		Preconditions.checkNotNull(instrument, "Instrument cannot be null");
 		Sound sound = switch (instrument)
-				{
-					case BANJO -> Sound.BLOCK_NOTE_BLOCK_BANJO;
-					case BASS_DRUM -> Sound.BLOCK_NOTE_BLOCK_BASEDRUM;
-					case BASS_GUITAR -> Sound.BLOCK_NOTE_BLOCK_BASS;
-					case BELL -> Sound.BLOCK_NOTE_BLOCK_BELL;
-					case BIT -> Sound.BLOCK_NOTE_BLOCK_BIT;
-					case CHIME -> Sound.BLOCK_NOTE_BLOCK_CHIME;
-					case COW_BELL -> Sound.BLOCK_NOTE_BLOCK_COW_BELL;
-					case DIDGERIDOO -> Sound.BLOCK_NOTE_BLOCK_DIDGERIDOO;
-					case FLUTE -> Sound.BLOCK_NOTE_BLOCK_FLUTE;
-					case GUITAR -> Sound.BLOCK_NOTE_BLOCK_GUITAR;
-					case IRON_XYLOPHONE -> Sound.BLOCK_NOTE_BLOCK_IRON_XYLOPHONE;
-					case PIANO -> Sound.BLOCK_NOTE_BLOCK_HARP;
-					case PLING -> Sound.BLOCK_NOTE_BLOCK_PLING;
-					case SNARE_DRUM -> Sound.BLOCK_NOTE_BLOCK_SNARE;
-					case STICKS -> Sound.BLOCK_NOTE_BLOCK_HAT;
-					case XYLOPHONE -> Sound.BLOCK_NOTE_BLOCK_XYLOPHONE;
-					case ZOMBIE -> Sound.BLOCK_NOTE_BLOCK_IMITATE_ZOMBIE;
-					case SKELETON -> Sound.BLOCK_NOTE_BLOCK_IMITATE_SKELETON;
-					case CREEPER -> Sound.BLOCK_NOTE_BLOCK_IMITATE_CREEPER;
-					case DRAGON -> Sound.BLOCK_NOTE_BLOCK_IMITATE_ENDER_DRAGON;
-					case WITHER_SKELETON -> Sound.BLOCK_NOTE_BLOCK_IMITATE_WITHER_SKELETON;
-					case PIGLIN -> Sound.BLOCK_NOTE_BLOCK_IMITATE_PIGLIN;
-					case CUSTOM_HEAD -> Sound.UI_BUTTON_CLICK; // What the Fuck Mojang?
-				};
+		{
+			case BANJO -> Sound.BLOCK_NOTE_BLOCK_BANJO;
+			case BASS_DRUM -> Sound.BLOCK_NOTE_BLOCK_BASEDRUM;
+			case BASS_GUITAR -> Sound.BLOCK_NOTE_BLOCK_BASS;
+			case BELL -> Sound.BLOCK_NOTE_BLOCK_BELL;
+			case BIT -> Sound.BLOCK_NOTE_BLOCK_BIT;
+			case CHIME -> Sound.BLOCK_NOTE_BLOCK_CHIME;
+			case COW_BELL -> Sound.BLOCK_NOTE_BLOCK_COW_BELL;
+			case DIDGERIDOO -> Sound.BLOCK_NOTE_BLOCK_DIDGERIDOO;
+			case FLUTE -> Sound.BLOCK_NOTE_BLOCK_FLUTE;
+			case GUITAR -> Sound.BLOCK_NOTE_BLOCK_GUITAR;
+			case IRON_XYLOPHONE -> Sound.BLOCK_NOTE_BLOCK_IRON_XYLOPHONE;
+			case PIANO -> Sound.BLOCK_NOTE_BLOCK_HARP;
+			case PLING -> Sound.BLOCK_NOTE_BLOCK_PLING;
+			case SNARE_DRUM -> Sound.BLOCK_NOTE_BLOCK_SNARE;
+			case STICKS -> Sound.BLOCK_NOTE_BLOCK_HAT;
+			case XYLOPHONE -> Sound.BLOCK_NOTE_BLOCK_XYLOPHONE;
+			case ZOMBIE -> Sound.BLOCK_NOTE_BLOCK_IMITATE_ZOMBIE;
+			case SKELETON -> Sound.BLOCK_NOTE_BLOCK_IMITATE_SKELETON;
+			case CREEPER -> Sound.BLOCK_NOTE_BLOCK_IMITATE_CREEPER;
+			case DRAGON -> Sound.BLOCK_NOTE_BLOCK_IMITATE_ENDER_DRAGON;
+			case WITHER_SKELETON -> Sound.BLOCK_NOTE_BLOCK_IMITATE_WITHER_SKELETON;
+			case PIGLIN -> Sound.BLOCK_NOTE_BLOCK_IMITATE_PIGLIN;
+			case CUSTOM_HEAD -> Sound.UI_BUTTON_CLICK; // What the Fuck Mojang?
+		};
 		float pitch = (float) Math.pow(2.0D, (note - 12.0D) / 12.0D);
 		playSound(loc, sound, SoundCategory.RECORDS, 3, pitch);
 	}
@@ -1157,6 +1151,20 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 	@Override
 	public void setFlyingFallDamage(@NotNull TriState flyingFallDamage)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setHasSeenWinScreen(boolean hasSeenWinScreen)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean hasSeenWinScreen()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1688,6 +1696,22 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 			this.giveExpLevels(1);
 			this.exp /= this.getExpToLevel();
 		}
+	}
+
+	@Override
+	public int getExpCooldown()
+	{
+		return this.expCooldown;
+	}
+
+	@Override
+	public void setExpCooldown(int ticks)
+	{
+		Preconditions.checkArgument(ticks >= 0, "Cooldown ticks must be greater than or equal to 0");
+		this.expCooldown = ticks;
+
+		PlayerExpCooldownChangeEvent event = new PlayerExpCooldownChangeEvent(this, ticks, PlayerExpCooldownChangeEvent.ChangeReason.PLUGIN);
+		Bukkit.getPluginManager().callEvent(event);
 	}
 
 	@Override

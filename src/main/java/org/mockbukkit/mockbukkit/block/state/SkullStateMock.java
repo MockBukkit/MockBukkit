@@ -206,15 +206,15 @@ public class SkullStateMock extends TileStateMock implements Skull
 	public @NotNull SkullType getSkullType()
 	{
 		return switch (getType())
-				{
-					case SKELETON_SKULL, SKELETON_WALL_SKULL -> SkullType.SKELETON;
-					case WITHER_SKELETON_SKULL, WITHER_SKELETON_WALL_SKULL -> SkullType.WITHER;
-					case ZOMBIE_HEAD, ZOMBIE_WALL_HEAD -> SkullType.ZOMBIE;
-					case PLAYER_HEAD, PLAYER_WALL_HEAD -> SkullType.PLAYER;
-					case CREEPER_HEAD, CREEPER_WALL_HEAD -> SkullType.CREEPER;
-					case DRAGON_HEAD, DRAGON_WALL_HEAD -> SkullType.DRAGON;
-					default -> throw new IllegalArgumentException("Unknown SkullType for " + getType());
-				};
+		{
+			case SKELETON_SKULL, SKELETON_WALL_SKULL -> SkullType.SKELETON;
+			case WITHER_SKELETON_SKULL, WITHER_SKELETON_WALL_SKULL -> SkullType.WITHER;
+			case ZOMBIE_HEAD, ZOMBIE_WALL_HEAD -> SkullType.ZOMBIE;
+			case PLAYER_HEAD, PLAYER_WALL_HEAD -> SkullType.PLAYER;
+			case CREEPER_HEAD, CREEPER_WALL_HEAD -> SkullType.CREEPER;
+			case DRAGON_HEAD, DRAGON_WALL_HEAD -> SkullType.DRAGON;
+			default -> throw new IllegalArgumentException("Unknown SkullType for " + getType());
+		};
 	}
 
 	@Override

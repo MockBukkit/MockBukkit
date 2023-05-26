@@ -102,4 +102,5 @@ class EndermanMockTest
 		endermanMock.setScreaming(true);
 		assertEquals(EntityState.ANGRY, endermanMock.getEntityState());
 	}
+
 }

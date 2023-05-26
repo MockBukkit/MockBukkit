@@ -1,7 +1,7 @@
 <p align="center">
     <!-- Badges -->
     <a href="https://github.com/MockBukkit/MockBukkit/actions/">
-        <img alt="Build Status" src="https://github.com/MockBukkit/MockBukkit/actions/workflows/gradle.yml/badge.svg" />
+        <img alt="Build Status" src="https://github.com/MockBukkit/MockBukkit/actions/workflows/publish.yml/badge.svg" />
     </a>
     <a href="https://mockbukkit.readthedocs.io/en/v1.19/?badge=v1.19">
         <img alt="Documentation Status" src="https://readthedocs.org/projects/mockbukkit/badge/?version=v1.19" />
@@ -48,11 +48,14 @@ It aims to be provide complete mock implementation of CraftBukkit that can be co
 
 MockBukkit can easily be included in your project using either Maven or gradle.
 
+> Note: The Breaking Changes intended for 3.0 were already made in 2.145.1. Due to an Error it didn't get properly tagged
+
 <details>
 <summary><h3>Adding MockBukkit via Gradle</h3></summary>
 
 MockBukkit can easily be included in Gradle using the Maven Central and PaperMC repositories.
 Make sure to update the version as necessary.
+
 
 ```gradle
 repositories {

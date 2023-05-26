@@ -65,4 +65,12 @@ class KeyedBossBarMockTest
 				() -> server.createBossBar(null, "Boss bar 1", BarColor.WHITE, BarStyle.SEGMENTED_10));
 	}
 
+	@Test
+	void testGetKey()
+	{
+		KeyedBossBar bar = server.createBossBar(new NamespacedKey("mockbukkittest", "bossbar1"), "Boss bar 1",
+				BarColor.WHITE, BarStyle.SEGMENTED_10);
+		assertEquals(new NamespacedKey("mockbukkittest", "bossbar1"), bar.getKey());
+	}
+
 }

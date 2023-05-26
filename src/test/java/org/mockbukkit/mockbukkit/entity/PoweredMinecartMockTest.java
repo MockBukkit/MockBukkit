@@ -73,4 +73,10 @@ class PoweredMinecartMockTest
 		assertEquals(EntityType.MINECART_FURNACE, minecartFurnace.getType());
 	}
 
+	@Test
+	void testGetMinecartMaterial()
+	{
+		assertEquals(minecartFurnace.getMinecartMaterial(), Material.FURNACE_MINECART);
+	}
+
 }

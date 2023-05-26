@@ -1,5 +1,8 @@
 package org.mockbukkit.mockbukkit.entity.data;
 
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.bukkit.entity.EntityType;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -78,4 +81,5 @@ public class EntityDataRegistry
 
 		return new EntityData(type, data);
 	}
+
 }

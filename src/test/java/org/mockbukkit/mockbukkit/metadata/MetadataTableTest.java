@@ -84,6 +84,14 @@ class MetadataTableTest
 	}
 
 	@Test
+	void getMetadata_NoneSet_EmptyList()
+	{
+		MockPlugin plugin1 = MockBukkit.createMockPlugin();
+		List<MetadataValue> metadata = mt.getMetadata("MyMetadata");
+		assertEquals(0, metadata.size());
+	}
+
+	@Test
 	void removeMetadata_NoneSet_NothingHappens()
 	{
 		MockPlugin plugin1 = MockBukkit.createMockPlugin();

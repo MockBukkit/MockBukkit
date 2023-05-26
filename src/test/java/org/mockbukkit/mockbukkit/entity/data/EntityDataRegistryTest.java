@@ -3,6 +3,8 @@ package org.mockbukkit.mockbukkit.entity.data;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.bukkit.entity.EntityType;
+import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -15,8 +17,11 @@ import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.WorldMock;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 class EntityDataRegistryTest
 {
+
 	private WorldMock world;
 	private ServerMock server;
 

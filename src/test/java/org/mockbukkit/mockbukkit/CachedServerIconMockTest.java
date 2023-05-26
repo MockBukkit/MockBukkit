@@ -1,7 +1,5 @@
 package org.mockbukkit.mockbukkit;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockbukkit.mockbukkit.CachedServerIconMock;
 import org.mockbukkit.mockbukkit.MockBukkit;
@@ -12,20 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 class CachedServerIconMockTest
 {
-
-	private ServerMock mock;
-
-	@BeforeEach
-	public void setUp()
-	{
-		mock = MockBukkit.mock();
-	}
-
-	@AfterEach
-	public void teardown()
-	{
-		MockBukkit.unmock();
-	}
 
 	@Test
 	void constructor_NotNull_SetsData()

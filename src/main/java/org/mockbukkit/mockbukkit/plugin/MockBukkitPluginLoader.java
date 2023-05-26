@@ -22,6 +22,7 @@ import java.util.regex.Pattern;
 
 public class MockBukkitPluginLoader implements PluginLoader
 {
+
 	@Override
 	public @NotNull Plugin loadPlugin(@NotNull File file) throws InvalidPluginException, UnknownDependencyException
 	{
@@ -63,7 +64,7 @@ public class MockBukkitPluginLoader implements PluginLoader
 	public void disablePlugin(@NotNull Plugin plugin)
 	{
 		plugin.onDisable();
-		((JavaPlugin)plugin).setEnabled(false);
+		((JavaPlugin) plugin).setEnabled(false);
 		plugin.getServer().getPluginManager().callEvent(new PluginDisableEvent(plugin));
 	}
 

@@ -64,26 +64,25 @@ public class ItemFactoryMock implements ItemFactory
 			return SpawnEggMetaMock.class;
 		}
 		return switch (material)
-				{
-					case ARMOR_STAND -> ArmorStandMetaMock.class;
-					case WRITABLE_BOOK, WRITTEN_BOOK -> BookMetaMock.class;
-					case ENCHANTED_BOOK -> EnchantedBookMetaMock.class;
-					case KNOWLEDGE_BOOK -> KnowledgeBookMetaMock.class;
-					case LEATHER_BOOTS, LEATHER_CHESTPLATE, LEATHER_HELMET, LEATHER_LEGGINGS ->
-							LeatherArmorMetaMock.class;
-					case FILLED_MAP -> MapMetaMock.class;
-					case FIREWORK_STAR -> FireworkEffectMetaMock.class;
-					case FIREWORK_ROCKET -> FireworkMetaMock.class;
-					case POTION, LINGERING_POTION, SPLASH_POTION -> PotionMetaMock.class;
-					case PLAYER_HEAD -> SkullMetaMock.class;
-					case SUSPICIOUS_STEW -> SuspiciousStewMetaMock.class;
-					case AXOLOTL_BUCKET -> AxolotlBucketMetaMock.class;
-					case BUNDLE -> BundleMetaMock.class;
-					case COMPASS -> CompassMetaMock.class;
-					case CROSSBOW -> CrossbowMetaMock.class;
-					case TROPICAL_FISH_BUCKET -> TropicalFishBucketMetaMock.class;
-					default -> ItemMetaMock.class;
-				};
+		{
+			case ARMOR_STAND -> ArmorStandMetaMock.class;
+			case WRITABLE_BOOK, WRITTEN_BOOK -> BookMetaMock.class;
+			case ENCHANTED_BOOK -> EnchantedBookMetaMock.class;
+			case KNOWLEDGE_BOOK -> KnowledgeBookMetaMock.class;
+			case LEATHER_BOOTS, LEATHER_CHESTPLATE, LEATHER_HELMET, LEATHER_LEGGINGS -> LeatherArmorMetaMock.class;
+			case FILLED_MAP -> MapMetaMock.class;
+			case FIREWORK_STAR -> FireworkEffectMetaMock.class;
+			case FIREWORK_ROCKET -> FireworkMetaMock.class;
+			case POTION, LINGERING_POTION, SPLASH_POTION -> PotionMetaMock.class;
+			case PLAYER_HEAD -> SkullMetaMock.class;
+			case SUSPICIOUS_STEW -> SuspiciousStewMetaMock.class;
+			case AXOLOTL_BUCKET -> AxolotlBucketMetaMock.class;
+			case BUNDLE -> BundleMetaMock.class;
+			case COMPASS -> CompassMetaMock.class;
+			case CROSSBOW -> CrossbowMetaMock.class;
+			case TROPICAL_FISH_BUCKET -> TropicalFishBucketMetaMock.class;
+			default -> ItemMetaMock.class;
+		};
 	}
 
 	@Override

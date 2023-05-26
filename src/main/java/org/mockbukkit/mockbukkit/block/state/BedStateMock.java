@@ -55,25 +55,25 @@ public class BedStateMock extends TileStateMock implements Bed
 	public @Nullable DyeColor getColor()
 	{
 		return switch (getType())
-				{
-					case BLACK_BED -> DyeColor.BLACK;
-					case BLUE_BED -> DyeColor.BLUE;
-					case BROWN_BED -> DyeColor.BROWN;
-					case CYAN_BED -> DyeColor.CYAN;
-					case GRAY_BED -> DyeColor.GRAY;
-					case GREEN_BED -> DyeColor.GREEN;
-					case LIGHT_BLUE_BED -> DyeColor.LIGHT_BLUE;
-					case LIGHT_GRAY_BED -> DyeColor.LIGHT_GRAY;
-					case LIME_BED -> DyeColor.LIME;
-					case MAGENTA_BED -> DyeColor.MAGENTA;
-					case ORANGE_BED -> DyeColor.ORANGE;
-					case PINK_BED -> DyeColor.PINK;
-					case PURPLE_BED -> DyeColor.PURPLE;
-					case RED_BED -> DyeColor.RED;
-					case WHITE_BED -> DyeColor.WHITE;
-					case YELLOW_BED -> DyeColor.YELLOW;
-					default -> throw new IllegalArgumentException("Unknown DyeColor for " + getType());
-				};
+		{
+			case BLACK_BED -> DyeColor.BLACK;
+			case BLUE_BED -> DyeColor.BLUE;
+			case BROWN_BED -> DyeColor.BROWN;
+			case CYAN_BED -> DyeColor.CYAN;
+			case GRAY_BED -> DyeColor.GRAY;
+			case GREEN_BED -> DyeColor.GREEN;
+			case LIGHT_BLUE_BED -> DyeColor.LIGHT_BLUE;
+			case LIGHT_GRAY_BED -> DyeColor.LIGHT_GRAY;
+			case LIME_BED -> DyeColor.LIME;
+			case MAGENTA_BED -> DyeColor.MAGENTA;
+			case ORANGE_BED -> DyeColor.ORANGE;
+			case PINK_BED -> DyeColor.PINK;
+			case PURPLE_BED -> DyeColor.PURPLE;
+			case RED_BED -> DyeColor.RED;
+			case WHITE_BED -> DyeColor.WHITE;
+			case YELLOW_BED -> DyeColor.YELLOW;
+			default -> throw new IllegalArgumentException("Unknown DyeColor for " + getType());
+		};
 	}
 
 	@Override

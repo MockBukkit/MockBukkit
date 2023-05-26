@@ -132,4 +132,5 @@ class AgeableMockTest
 		ageable.setBaby();
 		assertEquals(EntitySubType.BABY, ageable.getSubType());
 	}
+
 }

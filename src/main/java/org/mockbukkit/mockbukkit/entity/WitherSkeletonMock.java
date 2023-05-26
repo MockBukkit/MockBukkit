@@ -41,4 +41,5 @@ public class WitherSkeletonMock extends AbstractSkeletonMock implements WitherSk
 	{
 		return EntityType.WITHER_SKELETON;
 	}
+
 }
