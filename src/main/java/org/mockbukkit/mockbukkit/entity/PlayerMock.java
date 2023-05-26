@@ -1087,19 +1087,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		playSound(location, sound, SoundCategory.MASTER, volume, pitch);
 	}
 
-	@Override
-	public void setHasSeenWinScreen(boolean hasSeenWinScreen)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean hasSeenWinScreen()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
 
 	@Override
 	public void playSound(@NotNull Entity entity, @NotNull Sound sound, float volume, float pitch)
