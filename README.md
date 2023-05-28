@@ -96,7 +96,7 @@ development of MockBukkit.
 <summary><h3>Adding MockBukkit via Maven</h3></summary>
 
 MockBukkit can easily be included in Maven using the default Maven Central and PaperMC repositories.
-Make sure to update the version as necessary.
+> Note: Make sure to update the version as necessary and put this dependency above your dependency that provides bukkit.
 
 ```xml
 <repositories>
