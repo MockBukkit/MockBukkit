@@ -161,14 +161,14 @@ A plugin can be loaded in this initialiser block.
 private ServerMock server;
 private MyPlugin plugin;
 
-@Before
+@BeforeEach
 public void setUp()
 {
     server = MockBukkit.mock();
     plugin = MockBukkit.load(MyPlugin.class);
 }
 
-@After
+@AfterEach
 public void tearDown()
 {
     MockBukkit.unmock();
