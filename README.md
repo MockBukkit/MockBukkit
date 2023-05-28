@@ -110,7 +110,7 @@ Make sure to update the version as necessary.
   <dependency>
     <groupId>com.github.seeseemelk</groupId>
     <artifactId>MockBukkit-v1.19</artifactId>
-    <version>2.29.0</version>
+    <version>3.3.0</version>
     <scope>test</scope>
   </dependency>
 </dependencies>
