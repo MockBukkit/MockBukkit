@@ -1320,6 +1320,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public void sendBlockChanges(@NotNull Collection<BlockState> blocks)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public void sendBlockChanges(@NotNull Collection<BlockState> blocks, boolean suppressLightUpdates)
 	{
 		// Pretend we sent the block change.
@@ -2683,6 +2690,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	{
 		Preconditions.checkNotNull(loc, "Location cannot be null");
 		Preconditions.checkArgument(progress >= 0.0 && progress <= 1.0, "progress must be between 0.0 and 1.0 (inclusive)");
+	}
+
+	@Override
+	public void sendMultiBlockChange(@NotNull Map<? extends Position, BlockData> blockChanges)
+	{
+		Preconditions.checkNotNull(blockChanges, "Block changes cannot be null");
+		//Pretend to send the packet
 	}
 
 	@Override
