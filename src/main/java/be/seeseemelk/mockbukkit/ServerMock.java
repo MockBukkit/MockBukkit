@@ -106,6 +106,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.loot.LootTable;
+import org.bukkit.packs.DataPackManager;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.plugin.messaging.StandardMessenger;
@@ -1611,6 +1612,27 @@ public class ServerMock extends Server.Spigot implements Server
 	public @NotNull String getMotd()
 	{
 		return LegacyComponentSerializer.legacySection().serialize(MOTD);
+	}
+
+	@Override
+	public @NotNull List<String> getInitialEnabledPacks()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull List<String> getInitialDisabledPacks()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull DataPackManager getDataPackManager()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
