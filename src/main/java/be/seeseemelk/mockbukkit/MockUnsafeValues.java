@@ -48,6 +48,13 @@ public class MockUnsafeValues implements UnsafeValues
 	private String minimumApiVersion = "none";
 
 	@Override
+	public @Nullable FeatureFlag getFeatureFlag(@NotNull NamespacedKey key)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull ComponentFlattener componentFlattener()
 	{
 		return ComponentFlattener.basic();
