@@ -74,6 +74,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Difficulty;
 import org.bukkit.Effect;
+import org.bukkit.FeatureFlag;
 import org.bukkit.FluidCollisionMode;
 import org.bukkit.GameEvent;
 import org.bukkit.GameRule;
@@ -2808,6 +2809,13 @@ public class WorldMock implements World
 	@Override
 	@Deprecated
 	public void setTicksPerAmbientSpawns(int ticksPerAmbientSpawns)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Set<FeatureFlag> getFeatureFlags()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
