@@ -13,6 +13,7 @@ import be.seeseemelk.mockbukkit.metadata.MetadataTable;
 import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
 import com.google.common.base.Preconditions;
 import io.papermc.paper.entity.TeleportFlag;
+import io.papermc.paper.threadedregions.scheduler.EntityScheduler;
 import net.kyori.adventure.audience.MessageType;
 import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.text.Component;
@@ -1307,6 +1308,12 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
+	public @NotNull EntityScheduler getScheduler()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public boolean isSneaking()
 	{
 		// TODO Auto-generated method stub
@@ -1333,5 +1340,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
+
+
 
 }

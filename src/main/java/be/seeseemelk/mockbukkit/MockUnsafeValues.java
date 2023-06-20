@@ -306,6 +306,12 @@ public class MockUnsafeValues implements UnsafeValues
 	}
 
 	@Override
+	public @Nullable FeatureFlag getFeatureFlag(@NotNull NamespacedKey key)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public int nextEntityId()
 	{
 		// TODO Auto-generated method stub

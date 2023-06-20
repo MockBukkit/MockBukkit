@@ -55,6 +55,7 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
+import org.bukkit.block.TileState;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.sign.Side;
 import org.bukkit.conversations.Conversation;
@@ -1382,6 +1383,14 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		{
 			throw new IllegalArgumentException("Must have at least 4 lines");
 		}
+	}
+
+	@Override
+	public void sendBlockUpdate(@NotNull Location loc, @NotNull TileState tileState) throws IllegalArgumentException
+	{
+		Preconditions.checkNotNull(loc);
+		Preconditions.checkNotNull(tileState);
+		//Pretend we sent block update
 	}
 
 	@Override
