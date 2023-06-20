@@ -1060,6 +1060,14 @@ class PlayerMockTest
 	}
 
 	@Test
+	void clearPotionEffects()
+	{
+		PotionEffect effect = new PotionEffect(PotionEffectType.CONFUSION, 5, 1);
+		player.addPotionEffect(effect);
+		assertTrue(player.clearActivePotionEffects());
+	}
+
+	@Test
 	void testInstantEffect()
 	{
 		PotionEffect instant = new PotionEffect(PotionEffectType.HEAL, 0, 1);
