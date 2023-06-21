@@ -1342,5 +1342,4 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 
-
 }

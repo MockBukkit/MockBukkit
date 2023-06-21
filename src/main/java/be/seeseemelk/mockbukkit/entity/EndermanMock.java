@@ -26,7 +26,7 @@ import java.util.UUID;
 public class EndermanMock extends MonsterMock implements Enderman
 {
 
-	private static SplittableRandom random = new SplittableRandom();
+	private static final SplittableRandom random = new SplittableRandom();
 	private @Nullable BlockData carriedBlock = null;
 	private boolean isScreaming = false;
 	private boolean hasBeenStaredAt = false;
@@ -87,7 +87,8 @@ public class EndermanMock extends MonsterMock implements Enderman
 	@Override
 	public boolean teleport()
 	{
-		if(alive) {
+		if (alive)
+		{
 			double x = this.getLocation().x() + (random.nextDouble() - 0.5D) * 64.0D;
 			double y = this.getLocation().y() + (double) (random.nextInt(64) - 32);
 			double z = this.getLocation().z() + (random.nextDouble() - 0.5D) * 64.0D;
@@ -99,7 +100,8 @@ public class EndermanMock extends MonsterMock implements Enderman
 	@Override
 	public boolean teleportTowards(@NotNull Entity entity)
 	{
-		if(alive) {
+		if (alive)
+		{
 			Vector vector = new Vector(this.getLocation().x() - entity.getLocation().x(),
 					(this.getLocation().y() + 1.45) - entity.getLocation().y(), this.getLocation().z() - entity.getLocation().z());
 
