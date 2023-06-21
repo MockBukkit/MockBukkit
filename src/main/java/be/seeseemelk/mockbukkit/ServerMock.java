@@ -52,6 +52,10 @@ import com.destroystokyo.paper.event.player.PlayerConnectionCloseEvent;
 import com.destroystokyo.paper.event.server.WhitelistToggleEvent;
 import com.google.common.base.Preconditions;
 import io.papermc.paper.datapack.DatapackManager;
+import io.papermc.paper.math.Position;
+import io.papermc.paper.threadedregions.scheduler.AsyncScheduler;
+import io.papermc.paper.threadedregions.scheduler.GlobalRegionScheduler;
+import io.papermc.paper.threadedregions.scheduler.RegionScheduler;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -1169,6 +1173,24 @@ public class ServerMock extends Server.Spigot implements Server
 	public boolean getAllowNether()
 	{
 		return this.serverConfiguration.isAllowNether();
+	}
+
+	@Override
+	public @NotNull List<String> getInitialEnabledPacks()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull List<String> getInitialDisabledPacks()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull DataPackManager getDataPackManager()
+	{
+		throw new UnimplementedOperationException();
 	}
 
 	/**
@@ -2324,6 +2346,66 @@ public class ServerMock extends Server.Spigot implements Server
 	public @NotNull PotionBrewer getPotionBrewer()
 	{
 		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull RegionScheduler getRegionScheduler()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull AsyncScheduler getAsyncScheduler()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull GlobalRegionScheduler getGlobalRegionScheduler()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isOwnedByCurrentRegion(@NotNull World world, @NotNull Position position)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isOwnedByCurrentRegion(@NotNull World world, @NotNull Position position, int squareRadiusChunks)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isOwnedByCurrentRegion(@NotNull Location location)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isOwnedByCurrentRegion(@NotNull Location location, int squareRadiusChunks)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isOwnedByCurrentRegion(@NotNull World world, int chunkX, int chunkZ)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isOwnedByCurrentRegion(@NotNull World world, int chunkX, int chunkZ, int squareRadiusChunks)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isOwnedByCurrentRegion(@NotNull Entity entity)
+	{
 		throw new UnimplementedOperationException();
 	}
 

@@ -69,6 +69,12 @@ public class AttributeInstanceMock implements AttributeInstance
 	}
 
 	@Override
+	public void addTransientModifier(@NotNull AttributeModifier modifier)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public void removeModifier(@NotNull AttributeModifier modifier)
 	{
 		Preconditions.checkNotNull(modifier, "Modifier cannot be null");
