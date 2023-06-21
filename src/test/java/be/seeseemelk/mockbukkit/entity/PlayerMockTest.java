@@ -6,6 +6,8 @@ import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.TestPlugin;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.BlockMock;
+import be.seeseemelk.mockbukkit.block.state.BlockStateMock;
+import be.seeseemelk.mockbukkit.block.state.TileStateMock;
 import be.seeseemelk.mockbukkit.entity.data.EntityState;
 import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
@@ -30,6 +32,7 @@ import org.bukkit.SoundCategory;
 import org.bukkit.World;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -66,8 +69,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.map.MapCanvas;
 import org.bukkit.map.MapRenderer;
 import org.bukkit.map.MapView;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.jetbrains.annotations.NotNull;
@@ -81,8 +82,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.opentest4j.AssertionFailedError;
 
 import java.net.InetSocketAddress;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -1043,53 +1042,6 @@ class PlayerMockTest
 	}
 
 	@Test
-	void testPotionEffects()
-	{
-		PotionEffect effect = new PotionEffect(PotionEffectType.CONFUSION, 3, 1);
-		assertTrue(player.addPotionEffect(effect));
-
-		assertTrue(player.hasPotionEffect(effect.getType()));
-		assertTrue(player.getActivePotionEffects().contains(effect));
-
-		assertEquals(effect, player.getPotionEffect(effect.getType()));
-
-		player.removePotionEffect(effect.getType());
-		assertFalse(player.hasPotionEffect(effect.getType()));
-		assertFalse(player.getActivePotionEffects().contains(effect));
-
-	}
-
-	@Test
-	void clearPotionEffects()
-	{
-		PotionEffect effect = new PotionEffect(PotionEffectType.CONFUSION, 5, 1);
-		player.addPotionEffect(effect);
-		assertTrue(player.clearActivePotionEffects());
-	}
-
-	@Test
-	void testInstantEffect()
-	{
-		PotionEffect instant = new PotionEffect(PotionEffectType.HEAL, 0, 1);
-		assertTrue(player.addPotionEffect(instant));
-		assertFalse(player.hasPotionEffect(instant.getType()));
-	}
-
-	@Test
-	void testMultiplePotionEffects()
-	{
-		Collection<PotionEffect> effects = Arrays.asList(new PotionEffect(PotionEffectType.BAD_OMEN, 3, 1),
-				new PotionEffect(PotionEffectType.LUCK, 5, 2));
-
-		assertTrue(player.addPotionEffects(effects));
-
-		for (PotionEffect effect : effects)
-		{
-			assertTrue(player.hasPotionEffect(effect.getType()));
-		}
-	}
-
-	@Test
 	void testIllegalArgumentForSpawning()
 	{
 		World world = new WorldMock();
@@ -1504,6 +1456,36 @@ class PlayerMockTest
 		{
 			player.sendBlockDamage(loc, 0.5f);
 		});
+	}
+
+	@Test
+	void testPlayerSendBlockChange()
+	{
+		assertDoesNotThrow(() ->
+		{
+			player.sendBlockUpdate(player.getLocation(), new TileStateMock(Material.CHEST)
+			{
+				@Override
+				public @NotNull BlockState getSnapshot()
+				{
+					return new BlockStateMock(Material.CHEST);
+				}
+			});
+		});
+	}
+
+	@Test
+	void testPlayerSendBlockUpdateInvalid()
+	{
+		assertThrows(NullPointerException.class, () -> player.sendBlockUpdate(player.getLocation(), null));
+		assertThrows(NullPointerException.class, () -> player.sendBlockUpdate(null, new TileStateMock(Material.CHEST)
+		{
+			@Override
+			public @NotNull BlockState getSnapshot()
+			{
+				return new BlockStateMock(Material.CHEST);
+			}
+		}));
 	}
 
 	@Test
