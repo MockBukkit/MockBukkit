@@ -10,6 +10,8 @@ import org.bukkit.Tag;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
+import org.bukkit.block.sign.Side;
+import org.bukkit.block.sign.SignSide;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -161,6 +163,13 @@ public class SignMock extends TileStateMock implements Sign
 	{
 		Preconditions.checkNotNull(color, "Color can not be null!");
 		this.color = color;
+	}
+
+	@Override
+	public @NotNull SignSide getSide(@NotNull Side side)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
