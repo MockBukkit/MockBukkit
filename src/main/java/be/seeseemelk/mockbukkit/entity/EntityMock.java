@@ -14,6 +14,7 @@ import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
 import com.google.common.base.Preconditions;
 import io.papermc.paper.entity.TeleportFlag;
 import net.kyori.adventure.audience.MessageType;
+import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
@@ -103,6 +104,8 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private boolean visualFire;
 	private boolean silent;
 	private boolean gravity = true;
+
+	private final List<BossBar> bossBars = new ArrayList<>();
 
 	private final EntityData entityData;
 
@@ -1062,6 +1065,29 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	public void setGravity(boolean gravity)
 	{
 		this.gravity = gravity;
+	}
+
+	@Override
+	public void showBossBar(@NotNull BossBar bar)
+	{
+		this.bossBars.add(bar);
+	}
+
+	@Override
+	public void hideBossBar(@NotNull BossBar bar)
+	{
+		this.bossBars.remove(bar);
+	}
+
+	/**
+	 * Gets the boss bars that are currently visible to this entity.
+	 *
+	 * @return A set of boss bars that are visible to this entity.
+	 */
+	@NotNull
+	public List<BossBar> getBossBars()
+	{
+		return this.bossBars;
 	}
 
 	@Override
