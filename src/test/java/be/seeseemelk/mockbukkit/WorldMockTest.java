@@ -1155,5 +1155,41 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		world.setGameRuleValue("announceAdvancements", "false");
 		assertEquals("false", world.getGameRuleValue("announceAdvancements"));
+		world.setGameRuleValue("announceAdvancements", "true");
+		assertEquals("true", world.getGameRuleValue("announceAdvancements"));
 	}
+
+	@Test
+	void testSetGameRuleValueNull()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setGameRuleValue(null, "false");
+		assertNull(world.getGameRuleValue((String) null));
+	}
+
+	@Test
+	void testSetGameRuleValueNonExistent()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setGameRuleValue("test", "false");
+		assertNull(world.getGameRuleValue("test"));
+	}
+
+	@Test
+	void testSetGameRuleValueInteger()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setGameRuleValue("randomTickSpeed", "10");
+		assertEquals("10", world.getGameRuleValue("randomTickSpeed"));
+	}
+
+	@Test
+	void testSetGameRuleValueIntegerNonParseable()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		String randomTickSpeed = world.getGameRuleValue("randomTickSpeed");
+		world.setGameRuleValue("randomTickSpeed", "test");
+		assertEquals(randomTickSpeed, world.getGameRuleValue("randomTickSpeed"));
+	}
+
 }
