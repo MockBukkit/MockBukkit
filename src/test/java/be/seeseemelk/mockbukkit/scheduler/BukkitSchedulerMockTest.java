@@ -9,10 +9,14 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
+import org.checkerframework.checker.units.qual.C;
+import org.jetbrains.annotations.NotNull;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
@@ -467,4 +471,31 @@ class BukkitSchedulerMockTest
 		scheduler.shutdown();
 	}
 
+	@Test
+	void taskIsRunning()
+	{
+		BukkitTask bukkitTask = scheduler.runTaskTimer(null, () ->
+		{
+		}, 1L, 1L);
+		scheduler.performOneTick();
+		Assertions.assertTrue(scheduler.isCurrentlyRunning(bukkitTask.getTaskId()));
+	}
+
+	@Test
+	void taskNotRunning()
+	{
+		Assertions.assertFalse(scheduler.isCurrentlyRunning(Integer.MAX_VALUE));
+	}
+
+	@Test
+	void runTask_AsyncConsumer() throws Exception
+	{
+		CountDownLatch countDownLatch = new CountDownLatch(1);
+
+		scheduler.runTaskAsynchronously(null, bukkitTask -> {
+			countDownLatch.countDown();
+		});
+		scheduler.performTicks(10);
+		countDownLatch.await(2, TimeUnit.SECONDS);
+	}
 }
