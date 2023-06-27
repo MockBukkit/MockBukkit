@@ -52,6 +52,10 @@ import com.destroystokyo.paper.event.player.PlayerConnectionCloseEvent;
 import com.destroystokyo.paper.event.server.WhitelistToggleEvent;
 import com.google.common.base.Preconditions;
 import io.papermc.paper.datapack.DatapackManager;
+import io.papermc.paper.math.Position;
+import io.papermc.paper.threadedregions.scheduler.AsyncScheduler;
+import io.papermc.paper.threadedregions.scheduler.GlobalRegionScheduler;
+import io.papermc.paper.threadedregions.scheduler.RegionScheduler;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -152,7 +156,7 @@ import java.util.stream.Collectors;
 public class ServerMock extends Server.Spigot implements Server
 {
 
-	private static final Component MOTD = Component.text("A Minecraft Server");
+	private Component motd = Component.text("A Minecraft Server");
 	private static final Component NO_PERMISSION = Component.text("I'm sorry, but you do not have permission to perform this command. Please contact the server administrators if you believe that this is in error.", NamedTextColor.RED);
 
 	private final Logger logger = Logger.getLogger("ServerMock");
@@ -1171,6 +1175,24 @@ public class ServerMock extends Server.Spigot implements Server
 		return this.serverConfiguration.isAllowNether();
 	}
 
+	@Override
+	public @NotNull List<String> getInitialEnabledPacks()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull List<String> getInitialDisabledPacks()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull DataPackManager getDataPackManager()
+	{
+		throw new UnimplementedOperationException();
+	}
+
 	/**
 	 * Sets whether the Nether should be allowed.
 	 *
@@ -1604,14 +1626,28 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull Component motd()
 	{
-		return MOTD;
+		return this.motd;
+	}
+
+	@Override
+	public void motd(@NotNull Component motd)
+	{
+		Preconditions.checkNotNull(motd, "motd cannot be null");
+		this.motd = motd;
 	}
 
 	@Override
 	@Deprecated
 	public @NotNull String getMotd()
 	{
-		return LegacyComponentSerializer.legacySection().serialize(MOTD);
+		return LegacyComponentSerializer.legacySection().serialize(this.motd);
+	}
+
+	@Override
+	public void setMotd(@NotNull String motd)
+	{
+		Preconditions.checkNotNull(motd, "motd cannot be null");
+		this.motd = LegacyComponentSerializer.legacySection().deserialize(motd);
 	}
 
 	@Override
@@ -2314,6 +2350,66 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	public @NotNull RegionScheduler getRegionScheduler()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull AsyncScheduler getAsyncScheduler()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull GlobalRegionScheduler getGlobalRegionScheduler()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isOwnedByCurrentRegion(@NotNull World world, @NotNull Position position)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isOwnedByCurrentRegion(@NotNull World world, @NotNull Position position, int squareRadiusChunks)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isOwnedByCurrentRegion(@NotNull Location location)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isOwnedByCurrentRegion(@NotNull Location location, int squareRadiusChunks)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isOwnedByCurrentRegion(@NotNull World world, int chunkX, int chunkZ)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isOwnedByCurrentRegion(@NotNull World world, int chunkX, int chunkZ, int squareRadiusChunks)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isOwnedByCurrentRegion(@NotNull Entity entity)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull File getPluginsFolder()
 	{
 		try
@@ -2330,27 +2426,6 @@ public class ServerMock extends Server.Spigot implements Server
 	public @NotNull Iterable<? extends Audience> audiences()
 	{
 		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull List<String> getInitialEnabledPacks()
-	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull List<String> getInitialDisabledPacks()
-	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull DataPackManager getDataPackManager()
-	{
-		//TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 

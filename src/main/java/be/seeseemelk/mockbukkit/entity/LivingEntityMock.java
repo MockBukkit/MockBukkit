@@ -546,6 +546,14 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
+	public boolean clearActivePotionEffects()
+	{
+		final boolean res = activeEffects.size() != 0;
+		activeEffects.clear();
+		return res;
+	}
+
+	@Override
 	public boolean hasLineOfSight(@NotNull Entity other)
 	{
 		// TODO Auto-generated method stub

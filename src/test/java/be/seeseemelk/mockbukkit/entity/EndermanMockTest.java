@@ -4,8 +4,10 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import be.seeseemelk.mockbukkit.entity.data.EntityState;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.data.BlockData;
+import org.bukkit.entity.Player;
 import org.bukkit.material.MaterialData;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,6 +17,7 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -100,6 +103,23 @@ class EndermanMockTest
 		assertEquals(EntityState.DEFAULT, endermanMock.getEntityState());
 		endermanMock.setScreaming(true);
 		assertEquals(EntityState.ANGRY, endermanMock.getEntityState());
+	}
+
+	@Test
+	void testRandomTeleport()
+	{
+		Location loc = endermanMock.getLocation();
+		assertTrue(endermanMock.teleport());
+		assertNotEquals(loc, endermanMock.getLocation());
+	}
+
+	@Test
+	void testRandomTeleportToEntity()
+	{
+		Location loc = endermanMock.getLocation();
+		Player player = serverMock.addPlayer();
+		assertTrue(endermanMock.teleportTowards(player));
+		assertNotEquals(loc, endermanMock.getLocation());
 	}
 
 }

@@ -71,7 +71,6 @@ public class AttributeInstanceMock implements AttributeInstance
 	@Override
 	public void addTransientModifier(@NotNull AttributeModifier modifier)
 	{
-		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
