@@ -2048,12 +2048,12 @@ public class WorldMock implements World
 		{
 			return false;
 		}
-		if (gameRule.getType().equals(Boolean.TYPE)
+		if (gameRule.getType().equals(Boolean.class)
 				&& (value.equalsIgnoreCase("true") || value.equalsIgnoreCase("false")))
 		{
 			return setGameRule((GameRule<Boolean>) gameRule, value.equalsIgnoreCase("true"));
 		}
-		else if (gameRule.getType().equals(Integer.TYPE))
+		else if (gameRule.getType().equals(Integer.class))
 		{
 			try
 			{

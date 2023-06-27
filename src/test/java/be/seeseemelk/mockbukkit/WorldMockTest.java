@@ -93,6 +93,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -101,6 +102,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
@@ -1092,6 +1094,102 @@ class WorldMockTest
 				Arguments.of(EntityType.MINECART, RideableMinecartMock.class),
 				Arguments.of(EntityType.MINECART_CHEST, StorageMinecartMock.class)
 		);
+	}
+
+	@Test
+	void testGetGameRules()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		String[] gameRules = world.getGameRules();
+		assertNotEquals(0, Arrays.stream(gameRules).count());
+	}
+
+	@Test
+	void testGetGameRuleValue()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		String gameRuleValue = world.getGameRuleValue("doFireTick");
+		assertEquals("true", gameRuleValue);
+	}
+
+	@Test
+	void testGetGameRuleValueNull()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		String gameRuleValue = world.getGameRuleValue((String) null);
+		assertNull(gameRuleValue);
+	}
+
+	@Test
+	void testGetGameRuleNonExistent()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		String gameRuleValue = world.getGameRuleValue("test");
+		assertNull(gameRuleValue);
+	}
+
+	@Test
+	void testIsGameRule()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertTrue(world.isGameRule("doFireTick"));
+	}
+
+	@Test
+	void testIsGameRuleNull()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertFalse(world.isGameRule(null));
+	}
+
+	@Test
+	void testIsGameRuleNonExistent()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertFalse(world.isGameRule("test"));
+	}
+
+	@Test
+	void testSetGameRuleValue()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setGameRuleValue("announceAdvancements", "false");
+		assertEquals("false", world.getGameRuleValue("announceAdvancements"));
+		world.setGameRuleValue("announceAdvancements", "true");
+		assertEquals("true", world.getGameRuleValue("announceAdvancements"));
+	}
+
+	@Test
+	void testSetGameRuleValueNull()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setGameRuleValue(null, "false");
+		assertNull(world.getGameRuleValue((String) null));
+	}
+
+	@Test
+	void testSetGameRuleValueNonExistent()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setGameRuleValue("test", "false");
+		assertNull(world.getGameRuleValue("test"));
+	}
+
+	@Test
+	void testSetGameRuleValueInteger()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setGameRuleValue("randomTickSpeed", "10");
+		assertEquals("10", world.getGameRuleValue("randomTickSpeed"));
+	}
+
+	@Test
+	void testSetGameRuleValueIntegerNonParseable()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		String randomTickSpeed = world.getGameRuleValue("randomTickSpeed");
+		world.setGameRuleValue("randomTickSpeed", "test");
+		assertEquals(randomTickSpeed, world.getGameRuleValue("randomTickSpeed"));
 	}
 
 }
