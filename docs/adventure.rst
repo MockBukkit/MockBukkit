@@ -1,7 +1,7 @@
 Adventure
 =========
 
-When using MockBukkit with `Adventure <https://github.com/KyoriPowered/adventure>`_, 
+When using MockBukkit with `the non-native implementation of Adventure <https://github.com/KyoriPowered/adventure-platform>`_, 
 you may run into issues with static fields persisting with audiences, even after executing
 ``MockBukkit.unmock()``. This can cause undesired issues when running consecutive tests 
 like chat messages not sending. 
