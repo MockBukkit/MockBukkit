@@ -526,7 +526,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public void runTaskAsynchronously(@NotNull Plugin plugin, @NotNull Consumer<BukkitTask> task)
 	{
-		ScheduledTask scheduledTask = new ScheduledTask(id.getAndIncrement(), plugin, false, currentTick, task);
+		ScheduledTask scheduledTask = new ScheduledTask(this.id.getAndIncrement(), plugin, false, this.currentTick, task);
 		pool.execute(wrapTask(scheduledTask));
 	}
 
