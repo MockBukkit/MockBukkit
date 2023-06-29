@@ -124,8 +124,9 @@ nexusPublishing {
 publishing {
 	publications {
 		create<MavenPublication>("maven") {
+			artifactId = "MockBukkit-v${property("paper.api.version")}"
 			pom {
-				name.set("MockBukkit")
+				name.set("MockBukkit-v${property("paper.api.version")}")
 				description.set("MockBukkit is a mocking framework for bukkit to allow the easy unit testing of Bukkit plugins.")
 				url.set("https://github.com/MockBukkit/MockBukkit")
 				scm {
