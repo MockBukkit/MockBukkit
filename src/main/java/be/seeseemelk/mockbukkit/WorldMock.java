@@ -2048,12 +2048,12 @@ public class WorldMock implements World
 		{
 			return false;
 		}
-		if (gameRule.getType().equals(Boolean.TYPE)
+		if (gameRule.getType().equals(Boolean.class)
 				&& (value.equalsIgnoreCase("true") || value.equalsIgnoreCase("false")))
 		{
 			return setGameRule((GameRule<Boolean>) gameRule, value.equalsIgnoreCase("true"));
 		}
-		else if (gameRule.getType().equals(Integer.TYPE))
+		else if (gameRule.getType().equals(Integer.class))
 		{
 			try
 			{
@@ -2825,6 +2825,12 @@ public class WorldMock implements World
 	public DragonBattle getEnderDragonBattle()
 	{
 		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Set<FeatureFlag> getFeatureFlags()
+	{
 		throw new UnimplementedOperationException();
 	}
 

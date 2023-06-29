@@ -5,13 +5,17 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import be.seeseemelk.mockbukkit.entity.data.EntityState;
 import com.google.common.base.Preconditions;
+import org.bukkit.Location;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Enderman;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.material.MaterialData;
+import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.SplittableRandom;
 import java.util.UUID;
 
 /**
@@ -22,6 +26,7 @@ import java.util.UUID;
 public class EndermanMock extends MonsterMock implements Enderman
 {
 
+	private static final SplittableRandom random = new SplittableRandom();
 	private @Nullable BlockData carriedBlock = null;
 	private boolean isScreaming = false;
 	private boolean hasBeenStaredAt = false;
@@ -77,6 +82,36 @@ public class EndermanMock extends MonsterMock implements Enderman
 	{
 		Preconditions.checkNotNull(blockData, "BlockData cannot be null");
 		this.carriedBlock = blockData;
+	}
+
+	@Override
+	public boolean teleport()
+	{
+		if (alive)
+		{
+			double x = this.getLocation().x() + (random.nextDouble() - 0.5D) * 64.0D;
+			double y = this.getLocation().y() + (double) (random.nextInt(64) - 32);
+			double z = this.getLocation().z() + (random.nextDouble() - 0.5D) * 64.0D;
+			return teleport(new Location(getWorld(), x, y, z));
+		}
+		return false;
+	}
+
+	@Override
+	public boolean teleportTowards(@NotNull Entity entity)
+	{
+		if (alive)
+		{
+			Vector vector = new Vector(this.getLocation().x() - entity.getLocation().x(),
+					(this.getLocation().y() + 1.45) - entity.getLocation().y(), this.getLocation().z() - entity.getLocation().z());
+
+			vector = vector.normalize();
+			double x = this.getLocation().x() + (random.nextDouble() - 0.5D) * 8.0D - vector.getX() * 16.0D;
+			double y = this.getLocation().y() + (double) (random.nextInt(16) - 8) - vector.getY() * 16.0D;
+			double z = this.getLocation().z() + (random.nextDouble() - 0.5D) * 8.0D - vector.getZ() * 16.0D;
+			return this.teleport(new Location(getWorld(), x, y, z));
+		}
+		return false;
 	}
 
 	@Override

@@ -20,6 +20,7 @@ import io.papermc.paper.entity.LookAnchor;
 import io.papermc.paper.entity.TeleportFlag;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import io.papermc.paper.math.Position;
+import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.chat.SignedMessage;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -54,6 +55,7 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
+import org.bukkit.block.TileState;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.sign.Side;
 import org.bukkit.conversations.Conversation;
@@ -102,6 +104,7 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.UnmodifiableView;
 
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
@@ -772,6 +775,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public @UnmodifiableView @NotNull Iterable<? extends BossBar> activeBossBars()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull Component displayName()
 	{
 		return this.displayName;
@@ -1320,6 +1330,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public void sendBlockChanges(@NotNull Collection<BlockState> blocks)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public void sendBlockChanges(@NotNull Collection<BlockState> blocks, boolean suppressLightUpdates)
 	{
 		// Pretend we sent the block change.
@@ -1366,6 +1383,14 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		{
 			throw new IllegalArgumentException("Must have at least 4 lines");
 		}
+	}
+
+	@Override
+	public void sendBlockUpdate(@NotNull Location loc, @NotNull TileState tileState) throws IllegalArgumentException
+	{
+		Preconditions.checkNotNull(loc);
+		Preconditions.checkNotNull(tileState);
+		//Pretend we sent block update
 	}
 
 	@Override
@@ -2683,6 +2708,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	{
 		Preconditions.checkNotNull(loc, "Location cannot be null");
 		Preconditions.checkArgument(progress >= 0.0 && progress <= 1.0, "progress must be between 0.0 and 1.0 (inclusive)");
+	}
+
+	@Override
+	public void sendMultiBlockChange(@NotNull Map<? extends Position, BlockData> blockChanges)
+	{
+		Preconditions.checkNotNull(blockChanges, "Block changes cannot be null");
+		//Pretend to send the packet
 	}
 
 	@Override
