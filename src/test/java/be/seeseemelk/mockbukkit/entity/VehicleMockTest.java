@@ -11,7 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import java.util.UUID;
 
 @ExtendWith(MockBukkitExtension.class)
-public class VehicleMockTest
+class VehicleMockTest
 {
 
 	@MockBukkitInject
@@ -19,7 +19,7 @@ public class VehicleMockTest
 	private VehicleMock vehicle;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		vehicle = new RideableMinecartMock(server, UUID.randomUUID());
 	}

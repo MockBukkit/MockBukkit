@@ -12,7 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import java.util.UUID;
 
 @ExtendWith(MockBukkitExtension.class)
-public class MonsterMockTest
+class MonsterMockTest
 {
 
 	@MockBukkitInject
@@ -20,7 +20,7 @@ public class MonsterMockTest
 	ZombieMock monster;
 
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		monster = new ZombieMock(server, UUID.randomUUID());
 	}
