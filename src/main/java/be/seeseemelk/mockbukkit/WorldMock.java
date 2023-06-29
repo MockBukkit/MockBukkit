@@ -2052,7 +2052,8 @@ public class WorldMock implements World
 		if (gameRule.getType().equals(Boolean.class)
 				&& (value.equalsIgnoreCase("true") || value.equalsIgnoreCase("false")))
 		{
-			WorldGameRuleChangeEvent event = new WorldGameRuleChangeEvent(this, null, gameRule, value);
+			WorldGameRuleChangeEvent event =
+					new WorldGameRuleChangeEvent(this, null, gameRule, value);
 			if (!event.callEvent())
 			{
 				return false;
@@ -2064,7 +2065,8 @@ public class WorldMock implements World
 			try
 			{
 				int intValue = Integer.parseInt(value);
-				WorldGameRuleChangeEvent event = new WorldGameRuleChangeEvent(this, null, gameRule, value);
+				WorldGameRuleChangeEvent event =
+						new WorldGameRuleChangeEvent(this, null, gameRule, value);
 				if (!event.callEvent())
 				{
 					return false;
