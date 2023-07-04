@@ -110,7 +110,7 @@ MockBukkit can easily be included in Maven using the default Maven Central and P
   <dependency>
     <groupId>com.github.seeseemelk</groupId>
     <artifactId>MockBukkit-v1.20</artifactId>
-    <version>3.3.0</version>
+    <version>3.4.3</version>
     <scope>test</scope>
   </dependency>
 </dependencies>
