@@ -28,11 +28,11 @@ public class LlamaMock extends ChestedHorseMock implements Llama
 
 	private @NotNull Color color = Color.BROWN;
 	private int strength = 1;
-
 	private final Map<LivingEntity, Pair<Float, Boolean>> attackedMobs = new HashMap<>();
 	private boolean isAgressive = false;
-
 	private final @NotNull LlamaInventoryMock inventory;
+	private LlamaMock caravanaHead;
+	private LlamaMock caravanaTail;
 
 	/**
 	 * Constructs a new {@link LlamaMock} on the provided {@link ServerMock} with a specified {@link UUID}.
@@ -134,43 +134,43 @@ public class LlamaMock extends ChestedHorseMock implements Llama
 	@Override
 	public boolean inCaravan()
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.caravanaHead != null;
 	}
 
 	@Override
 	public void joinCaravan(@NotNull Llama llama)
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(llama, "Llama cannot be null");
+		this.caravanaHead = (LlamaMock) llama;
+		((LlamaMock) llama).caravanaTail = this;
 	}
 
 	@Override
 	public void leaveCaravan()
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (this.caravanaHead != null)
+		{
+			this.caravanaHead.caravanaTail = null;
+			this.caravanaHead = null;
+		}
 	}
 
 	@Override
 	public @Nullable Llama getCaravanHead()
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.caravanaHead;
 	}
 
 	@Override
 	public boolean hasCaravanTail()
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.caravanaTail != null;
 	}
 
 	@Override
 	public @Nullable Llama getCaravanTail()
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.caravanaTail;
 	}
 
 	@Override
