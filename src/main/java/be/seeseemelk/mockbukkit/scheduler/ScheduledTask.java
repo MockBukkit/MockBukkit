@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.scheduler;
 import com.google.common.base.Preconditions;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
+import org.bukkit.scheduler.BukkitWorker;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -15,7 +16,7 @@ import java.util.function.Consumer;
 /**
  * Mock implementation of a {@link BukkitTask}.
  */
-public class ScheduledTask implements BukkitTask
+public class ScheduledTask implements BukkitTask, BukkitWorker
 {
 
 	private final int id;
@@ -27,6 +28,7 @@ public class ScheduledTask implements BukkitTask
 	private final @Nullable Runnable runnable;
 	private final @Nullable Consumer<BukkitTask> consumer;
 	private final List<Runnable> cancelListeners = new LinkedList<>();
+	private Thread thread;
 
 	/**
 	 * Constructs a new {@link ScheduledTask} with the provided parameters.
@@ -146,6 +148,7 @@ public class ScheduledTask implements BukkitTask
 	 */
 	public void run()
 	{
+		thread = Thread.currentThread();
 		if (!isCancelled())
 		{
 			if (this.runnable != null)
@@ -169,6 +172,12 @@ public class ScheduledTask implements BukkitTask
 	public @NotNull Plugin getOwner()
 	{
 		return this.plugin;
+	}
+
+	@Override
+	public @NotNull Thread getThread()
+	{
+		return thread;
 	}
 
 	@Override
