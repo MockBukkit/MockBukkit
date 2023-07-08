@@ -45,6 +45,7 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.event.server.ServerLoadEvent;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
@@ -52,6 +53,7 @@ import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.server.MapInitializeEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.map.MapView;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.ScoreboardManager;
@@ -691,6 +693,35 @@ class ServerMockTest
 
 		playerA.assertSaid(PlainTextComponentSerializer.plainText().serialize(component));
 		playerB.assertSaid(PlainTextComponentSerializer.plainText().serialize(component));
+	}
+
+	@Test
+	void reload()
+	{
+		assertDoesNotThrow(server::reload);
+	}
+
+	@Test
+	void reload_ServerLoadEvent_IsCalled()
+	{
+		server.reload();
+		server.getPluginManager().assertEventFired(ServerLoadEvent.class, (e) -> e.getType() == ServerLoadEvent.LoadType.RELOAD);
+	}
+
+	@Test
+	void reload_ReEnablesPlugins()
+	{
+		Plugin plugin1 = MockBukkit.createMockPlugin("plugin1");
+		Plugin plugin2 = MockBukkit.createMockPlugin("plugin2");
+
+		server.reload();
+
+		assertEquals(2, server.getPluginManager().getPlugins().length);
+		assertTrue(server.getPluginManager().getPlugin("plugin1").isEnabled());
+		assertTrue(server.getPluginManager().getPlugin("plugin2").isEnabled());
+		// A new instance of the plugin should be created.
+		assertFalse(server.getPluginManager().isPluginEnabled(plugin1));
+		assertFalse(server.getPluginManager().isPluginEnabled(plugin2));
 	}
 
 	@Test
