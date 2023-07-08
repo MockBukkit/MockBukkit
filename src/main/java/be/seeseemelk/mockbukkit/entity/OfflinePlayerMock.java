@@ -5,6 +5,7 @@ import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.google.common.base.Preconditions;
+import org.bukkit.BanEntry;
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -16,6 +17,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
 
@@ -119,6 +121,12 @@ public class OfflinePlayerMock implements OfflinePlayer
 	{
 		MockBukkit.ensureMocking();
 		return Bukkit.getBanList(BanList.Type.NAME).isBanned(getName());
+	}
+	@Override
+	public @Nullable BanEntry<org.bukkit.profile.PlayerProfile> ban(@Nullable String reason, @Nullable Date expires, @Nullable String source)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
