@@ -23,7 +23,7 @@ public abstract class AbstractHorseMock extends AnimalsMock implements AbstractH
 	private @Nullable UUID owner;
 	private int maxDomestication = 100;
 	private int domestication;
-	private double jumpStrength;
+	private double jumpStrength = 0.7;
 	private boolean tamed;
 	private boolean isEating;
 	private boolean isMouthOpen;

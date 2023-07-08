@@ -62,6 +62,7 @@ import be.seeseemelk.mockbukkit.entity.ZombieHorseMock;
 import be.seeseemelk.mockbukkit.entity.ZombieMock;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
+import io.papermc.paper.event.world.WorldGameRuleChangeEvent;
 import org.bukkit.Chunk;
 import org.bukkit.ChunkSnapshot;
 import org.bukkit.Difficulty;
@@ -1155,8 +1156,16 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		world.setGameRuleValue("announceAdvancements", "false");
 		assertEquals("false", world.getGameRuleValue("announceAdvancements"));
+		server.getPluginManager().assertEventFired(WorldGameRuleChangeEvent.class, worldGameRuleChangeEvent -> {
+			return worldGameRuleChangeEvent.getGameRule().equals(GameRule.ANNOUNCE_ADVANCEMENTS)
+					&& worldGameRuleChangeEvent.getValue().equals("false");
+		});
 		world.setGameRuleValue("announceAdvancements", "true");
 		assertEquals("true", world.getGameRuleValue("announceAdvancements"));
+		server.getPluginManager().assertEventFired(WorldGameRuleChangeEvent.class, worldGameRuleChangeEvent -> {
+			return worldGameRuleChangeEvent.getGameRule().equals(GameRule.ANNOUNCE_ADVANCEMENTS)
+					&& worldGameRuleChangeEvent.getValue().equals("true");
+		});
 	}
 
 	@Test
@@ -1181,6 +1190,10 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		world.setGameRuleValue("randomTickSpeed", "10");
 		assertEquals("10", world.getGameRuleValue("randomTickSpeed"));
+		server.getPluginManager().assertEventFired(WorldGameRuleChangeEvent.class, worldGameRuleChangeEvent -> {
+			return worldGameRuleChangeEvent.getGameRule().equals(GameRule.RANDOM_TICK_SPEED)
+					&& worldGameRuleChangeEvent.getValue().equals("10");
+		});
 	}
 
 	@Test

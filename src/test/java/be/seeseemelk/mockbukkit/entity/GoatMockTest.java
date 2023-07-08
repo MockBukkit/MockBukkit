@@ -97,7 +97,8 @@ class GoatMockTest
 	void testAssertEntityRammedWithNotRammedEntity()
 	{
 		LivingEntity entity = server.addPlayer();
-		assertThrows(AssertionError.class, () -> goat.assertEntityRammed(entity));
+		AssertionError assertionError = assertThrows(AssertionError.class, () -> goat.assertEntityRammed(entity));
+		assertEquals("Expected Goat to have rammed Player0 but it did not!", assertionError.getMessage());
 	}
 
 }
