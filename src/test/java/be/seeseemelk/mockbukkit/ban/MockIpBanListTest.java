@@ -13,10 +13,11 @@ import java.net.UnknownHostException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
-public class MockIpBanListTest
+class MockIpBanListTest
 {
 
 	@MockBukkitInject
@@ -24,7 +25,7 @@ public class MockIpBanListTest
 	MockIpBanList banList;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		banList = new MockIpBanList();
 	}
@@ -96,6 +97,28 @@ public class MockIpBanListTest
 	}
 
 	@Test
+	void testGetBanEntryStringNullThrows()
+	{
+		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
+		{
+			banList.getBanEntry((String) null);
+		});
+
+		assertEquals("Target cannot be null", nullPointerException.getMessage());
+	}
+
+	@Test
+	void testGetBanEntryInetAddressNullThrows()
+	{
+		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
+		{
+			banList.getBanEntry((InetAddress) null);
+		});
+
+		assertEquals("Target cannot be null", nullPointerException.getMessage());
+	}
+
+	@Test
 	void testIsBannedString()
 	{
 		banList.addBan("127.0.0.1", "reason", null, "source");
@@ -123,6 +146,29 @@ public class MockIpBanListTest
 		banList.addBan("127.0.0.1", "reason", null, "source");
 		banList.pardon(InetAddress.getByName("127.0.0.1"));
 		assertFalse(banList.isBanned(InetAddress.getByName("127.0.0.1")));
+	}
+
+	@Test
+	void testPardonStringNull()
+	{
+		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
+		{
+			banList.pardon((String) null);
+		});
+
+		assertEquals("Target cannot be null", nullPointerException.getMessage());
+
+	}
+
+	@Test
+	void testPardonInetAddressNull()
+	{
+		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
+		{
+			banList.pardon((InetAddress) null);
+		});
+
+		assertEquals("Target cannot be null", nullPointerException.getMessage());
 	}
 
 }

@@ -19,19 +19,20 @@ public class MockProfileBanList implements ProfileBanList
 {
 
 	private final Map<String, BanEntry<PlayerProfile>> bans = new HashMap<>();
+	private static final String TARGET_CANNOT_BE_NULL = "Target cannot be null";
 
 	@Override
 	@Deprecated
 	public @Nullable BanEntry<PlayerProfile> getBanEntry(@NotNull String target)
 	{
-		Preconditions.checkNotNull(target, "Target cannot be null");
+		Preconditions.checkNotNull(target, TARGET_CANNOT_BE_NULL);
 		return bans.getOrDefault(target, null);
 	}
 
 	@Override
 	public @Nullable BanEntry<PlayerProfile> getBanEntry(@NotNull PlayerProfile target)
 	{
-		Preconditions.checkNotNull(target, "Target cannot be null");
+		Preconditions.checkNotNull(target, TARGET_CANNOT_BE_NULL);
 		return bans.getOrDefault(target.getName(), null);
 	}
 
@@ -46,7 +47,7 @@ public class MockProfileBanList implements ProfileBanList
 	@Override
 	public @Nullable BanEntry<PlayerProfile> addBan(@NotNull PlayerProfile target, @Nullable String reason, @Nullable Date expires, @Nullable String source)
 	{
-		Preconditions.checkNotNull(target, "Target cannot be null");
+		Preconditions.checkNotNull(target, TARGET_CANNOT_BE_NULL);
 
 		final BanEntry<PlayerProfile> entry = new MockProfileBanEntry(
 				target,
@@ -105,12 +106,14 @@ public class MockProfileBanList implements ProfileBanList
 	@Override
 	public void pardon(@NotNull PlayerProfile target)
 	{
+		Preconditions.checkNotNull(target, TARGET_CANNOT_BE_NULL);
 		this.bans.remove(target.getName());
 	}
 
 	@Override
 	public void pardon(@NotNull String target)
 	{
+		Preconditions.checkNotNull(target, TARGET_CANNOT_BE_NULL);
 		this.bans.remove(target);
 	}
 

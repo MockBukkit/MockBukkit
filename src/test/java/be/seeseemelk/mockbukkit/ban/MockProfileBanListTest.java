@@ -12,10 +12,11 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
-public class MockProfileBanListTest
+class MockProfileBanListTest
 {
 
 	@MockBukkitInject
@@ -23,7 +24,7 @@ public class MockProfileBanListTest
 	MockProfileBanList banList;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		banList = new MockProfileBanList();
 	}
@@ -68,6 +69,28 @@ public class MockProfileBanListTest
 				null);
 
 		assertEquals("TestReason", banList.getBanEntry("TestPlayer").getReason());
+	}
+
+	@Test
+	void testGetBanEntryNullThrows()
+	{
+		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
+		{
+			banList.getBanEntry((String) null);
+		});
+
+		assertEquals("Target cannot be null", nullPointerException.getMessage());
+	}
+
+	@Test
+	void testGetBanEntryNullThrowsPlayerProfile()
+	{
+		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
+		{
+			banList.getBanEntry((PlayerProfileMock) null);
+		});
+
+		assertEquals("Target cannot be null", nullPointerException.getMessage());
 	}
 
 	@Test
@@ -124,6 +147,30 @@ public class MockProfileBanListTest
 		assertTrue(banList.isBanned(profileMock));
 		banList.pardon("TestPlayer");
 		assertFalse(banList.isBanned(profileMock));
+	}
+
+	@Test
+	void testPardonStringNull()
+	{
+		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
+		{
+			banList.pardon((String) null);
+		});
+
+		assertEquals("Target cannot be null", nullPointerException.getMessage());
+
+	}
+
+	@Test
+	void testPardonProfileNull()
+	{
+		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
+		{
+			banList.pardon((PlayerProfileMock) null);
+		});
+
+		assertEquals("Target cannot be null", nullPointerException.getMessage());
+
 	}
 
 }

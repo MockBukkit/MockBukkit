@@ -17,18 +17,19 @@ public class MockIpBanList implements org.bukkit.ban.IpBanList
 {
 
 	private final Map<String, BanEntry<InetAddress>> bans = new HashMap<>();
+	private static final String TARGET_CANNOT_BE_NULL = "Target cannot be null";
 
 	@Override
 	public @Nullable BanEntry<InetAddress> getBanEntry(@NotNull String target)
 	{
-		Preconditions.checkArgument(target != null, "Target cannot be null");
+		Preconditions.checkNotNull(target, TARGET_CANNOT_BE_NULL);
 		return bans.getOrDefault(target, null);
 	}
 
 	@Override
 	public @Nullable BanEntry<InetAddress> getBanEntry(@NotNull InetAddress target)
 	{
-		Preconditions.checkArgument(target != null, "Target cannot be null");
+		Preconditions.checkNotNull(target, TARGET_CANNOT_BE_NULL);
 		return bans.getOrDefault(InetAddresses.toAddrString(target), null);
 	}
 
@@ -36,7 +37,7 @@ public class MockIpBanList implements org.bukkit.ban.IpBanList
 
 	public @Nullable BanEntry<InetAddress> addBan(@NotNull String target, @Nullable String reason, @Nullable Date expires, @Nullable String source)
 	{
-		Preconditions.checkArgument(target != null, "Ban target cannot be null");
+		Preconditions.checkNotNull(target, TARGET_CANNOT_BE_NULL);
 		BanEntry<InetAddress> entry = new MockIpBanEntry(
 				target,
 				(reason == null || reason.isBlank()) ? null : reason,
@@ -111,13 +112,14 @@ public class MockIpBanList implements org.bukkit.ban.IpBanList
 	@Override
 	public void pardon(@NotNull InetAddress target)
 	{
+		Preconditions.checkNotNull(target, TARGET_CANNOT_BE_NULL);
 		this.pardon(InetAddresses.toAddrString(target));
 	}
 
 	@Override
 	public void pardon(@NotNull String target)
 	{
-		Preconditions.checkArgument(target != null, "Target cannot be null");
+		Preconditions.checkNotNull(target, TARGET_CANNOT_BE_NULL);
 		this.bans.remove(target);
 	}
 
