@@ -90,23 +90,13 @@ public class MockIpBanList implements org.bukkit.ban.IpBanList
 	@Override
 	public boolean isBanned(@NotNull InetAddress target)
 	{
-		return this.bans.values()
-				.stream()
-				.filter(banEntry -> banEntry.getBanTarget().equals(target))
-				.findFirst()
-				.orElse(null)
-				!= null;
+		return this.bans.values().stream().anyMatch(banEntry -> banEntry.getBanTarget().equals(target));
 	}
 
 	@Override
 	public boolean isBanned(@NotNull String target)
 	{
-		return this.bans.values()
-				.stream()
-				.filter(banEntry -> InetAddresses.toAddrString(banEntry.getBanTarget()).equals(target))
-				.findFirst()
-				.orElse(null)
-				!= null;
+		return this.bans.values().stream().anyMatch(banEntry -> InetAddresses.toAddrString(banEntry.getBanTarget()).equals(target));
 	}
 
 	@Override

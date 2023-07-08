@@ -13,6 +13,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 public class MockProfileBanList implements ProfileBanList
@@ -86,21 +87,13 @@ public class MockProfileBanList implements ProfileBanList
 	@Override
 	public boolean isBanned(@NotNull PlayerProfile target)
 	{
-		return this.bans.values().stream()
-				.filter(banEntry -> banEntry.getBanTarget().equals(target))
-				.findFirst()
-				.orElse(null)
-				!= null;
+		return this.bans.values().stream().anyMatch(banEntry -> banEntry.getBanTarget().equals(target));
 	}
 
 	@Override
 	public boolean isBanned(@NotNull String target)
 	{
-		return this.bans.values().stream()
-				.filter(banEntry -> banEntry.getBanTarget().getName().equals(target))
-				.findFirst()
-				.orElse(null)
-				!= null;
+		return this.bans.values().stream().anyMatch(banEntry -> Objects.equals(banEntry.getBanTarget().getName(), target));
 	}
 
 	@Override
