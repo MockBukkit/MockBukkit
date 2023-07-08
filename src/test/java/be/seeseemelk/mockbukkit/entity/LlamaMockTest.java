@@ -15,7 +15,9 @@ import org.opentest4j.AssertionFailedError;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -147,4 +149,75 @@ class LlamaMockTest
 		assertThrows(AssertionFailedError.class, () -> llama.assertAttacked(player, 0.2f));
 	}
 
+	@Test
+	void testInCaravanDefault()
+	{
+		assertFalse(llama.inCaravan());
+	}
+
+	@Test
+	void testInCaravan()
+	{
+		LlamaMock llama2 = new LlamaMock(server, UUID.randomUUID());
+		llama.joinCaravan(llama2);
+		assertTrue(llama.inCaravan());
+	}
+
+	@Test
+	void testLeaveCaravan()
+	{
+		LlamaMock llama2 = new LlamaMock(server, UUID.randomUUID());
+		llama.joinCaravan(llama2);
+		assertTrue(llama.inCaravan());
+		llama.leaveCaravan();
+		assertFalse(llama.inCaravan());
+	}
+
+	@Test
+	void testJoinCaravanNull()
+	{
+		assertThrows(NullPointerException.class, () -> llama.joinCaravan(null));
+	}
+
+	@Test
+	void testGetCaravanHead()
+	{
+		LlamaMock llama2 = new LlamaMock(server, UUID.randomUUID());
+		llama.joinCaravan(llama2);
+		assertEquals(llama2, llama.getCaravanHead());
+	}
+
+	@Test
+	void testGetCaravanHeadNoCaravan()
+	{
+		assertNull(llama.getCaravanHead());
+	}
+
+	@Test
+	void testHasCaravanTailDefault()
+	{
+		assertFalse(llama.hasCaravanTail());
+	}
+
+	@Test
+	void testHasCaravanTail()
+	{
+		LlamaMock llama2 = new LlamaMock(server, UUID.randomUUID());
+		llama.joinCaravan(llama2);
+		assertTrue(llama2.hasCaravanTail());
+	}
+
+	@Test
+	void testGetCaravanTail()
+	{
+		LlamaMock llama2 = new LlamaMock(server, UUID.randomUUID());
+		llama.joinCaravan(llama2);
+		assertEquals(llama, llama2.getCaravanTail());
+	}
+
+	@Test
+	void testGetCaravanTailNoCaravan()
+	{
+		assertNull(llama.getCaravanTail());
+	}
 }

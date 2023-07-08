@@ -166,7 +166,28 @@ public class SignMock extends TileStateMock implements Sign
 	}
 
 	@Override
+	public boolean isWaxed()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setWaxed(boolean waxed)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull SignSide getSide(@NotNull Side side)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Side getInteractableSideFor(double x, double z)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

@@ -50,8 +50,13 @@ import be.seeseemelk.mockbukkit.tags.TagsMock;
 import com.destroystokyo.paper.entity.ai.MobGoals;
 import com.destroystokyo.paper.event.player.PlayerConnectionCloseEvent;
 import com.destroystokyo.paper.event.server.WhitelistToggleEvent;
+import com.destroystokyo.paper.profile.PlayerProfile;
 import com.google.common.base.Preconditions;
 import io.papermc.paper.datapack.DatapackManager;
+import io.papermc.paper.math.Position;
+import io.papermc.paper.threadedregions.scheduler.AsyncScheduler;
+import io.papermc.paper.threadedregions.scheduler.GlobalRegionScheduler;
+import io.papermc.paper.threadedregions.scheduler.RegionScheduler;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -125,6 +130,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -148,6 +154,7 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Mock implementation of a {@link Server} and {@link Server.Spigot}.
@@ -155,7 +162,7 @@ import java.util.stream.Collectors;
 public class ServerMock extends Server.Spigot implements Server
 {
 
-	private static final Component MOTD = Component.text("A Minecraft Server");
+	private Component motd = Component.text("A Minecraft Server");
 	private static final Component NO_PERMISSION = Component.text("I'm sorry, but you do not have permission to perform this command. Please contact the server administrators if you believe that this is in error.", NamedTextColor.RED);
 
 	private final Logger logger = Logger.getLogger("ServerMock");
@@ -817,7 +824,9 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull Set<String> getIPBans()
 	{
-		return this.playerList.getIPBans().getBanEntries().stream().map(BanEntry::getTarget)
+		return this.playerList.getIPBans().getEntries().stream()
+				.map(BanEntry::getBanTarget)
+				.map(InetAddress::getHostAddress)
 				.collect(Collectors.toSet());
 	}
 
@@ -834,12 +843,26 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	public void banIP(@NotNull InetAddress address)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void unbanIP(@NotNull InetAddress address)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull BanList getBanList(@NotNull Type type)
 	{
 		return switch (type)
 		{
 			case IP -> playerList.getIPBans();
-			case NAME -> playerList.getProfileBans();
+			case NAME, PROFILE -> playerList.getProfileBans();
 		};
 	}
 
@@ -1172,6 +1195,24 @@ public class ServerMock extends Server.Spigot implements Server
 	public boolean getAllowNether()
 	{
 		return this.serverConfiguration.isAllowNether();
+	}
+
+	@Override
+	public @NotNull List<String> getInitialEnabledPacks()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull List<String> getInitialDisabledPacks()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull DataPackManager getDataPackManager()
+	{
+		throw new UnimplementedOperationException();
 	}
 
 	/**
@@ -1560,12 +1601,17 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public @NotNull Set<OfflinePlayer> getBannedPlayers()
 	{
-		return this.getBanList(Type.NAME)
-				.getBanEntries()
+		return (Set<OfflinePlayer>) this.getBanList(Type.PROFILE)
+				.getEntries()
 				.stream()
-				.map(banEntry -> getOfflinePlayer(banEntry.getTarget()))
+				.map(banEntry ->
+				{
+					return ((BanEntry<PlayerProfile>) banEntry).getBanTarget().getId();
+				})
+				.map(uuid -> this.getOfflinePlayer((UUID) uuid))
 				.collect(Collectors.toSet());
 	}
 
@@ -1649,14 +1695,28 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull Component motd()
 	{
-		return MOTD;
+		return this.motd;
+	}
+
+	@Override
+	public void motd(@NotNull Component motd)
+	{
+		Preconditions.checkNotNull(motd, "motd cannot be null");
+		this.motd = motd;
 	}
 
 	@Override
 	@Deprecated
 	public @NotNull String getMotd()
 	{
-		return LegacyComponentSerializer.legacySection().serialize(MOTD);
+		return LegacyComponentSerializer.legacySection().serialize(this.motd);
+	}
+
+	@Override
+	public void setMotd(@NotNull String motd)
+	{
+		Preconditions.checkNotNull(motd, "motd cannot be null");
+		this.motd = LegacyComponentSerializer.legacySection().deserialize(motd);
 	}
 
 	@Override
@@ -2376,6 +2436,66 @@ public class ServerMock extends Server.Spigot implements Server
 	public @NotNull PotionBrewer getPotionBrewer()
 	{
 		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull RegionScheduler getRegionScheduler()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull AsyncScheduler getAsyncScheduler()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull GlobalRegionScheduler getGlobalRegionScheduler()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isOwnedByCurrentRegion(@NotNull World world, @NotNull Position position)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isOwnedByCurrentRegion(@NotNull World world, @NotNull Position position, int squareRadiusChunks)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isOwnedByCurrentRegion(@NotNull Location location)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isOwnedByCurrentRegion(@NotNull Location location, int squareRadiusChunks)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isOwnedByCurrentRegion(@NotNull World world, int chunkX, int chunkZ)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isOwnedByCurrentRegion(@NotNull World world, int chunkX, int chunkZ, int squareRadiusChunks)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isOwnedByCurrentRegion(@NotNull Entity entity)
+	{
 		throw new UnimplementedOperationException();
 	}
 

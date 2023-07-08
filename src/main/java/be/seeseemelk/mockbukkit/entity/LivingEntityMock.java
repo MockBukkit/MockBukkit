@@ -447,6 +447,22 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
+	public int getNoActionTicks()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+
+	}
+
+	@Override
+	public void setNoActionTicks(int ticks)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+
+	}
+
+	@Override
 	public @Nullable Player getKiller()
 	{
 		return this.killer;
@@ -543,6 +559,14 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		}
 
 		return effects;
+	}
+
+	@Override
+	public boolean clearActivePotionEffects()
+	{
+		final boolean res = activeEffects.size() != 0;
+		activeEffects.clear();
+		return res;
 	}
 
 	@Override
@@ -736,6 +760,13 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	public void swingOffHand()
 	{
 		// Pretend packet gets sent.
+	}
+
+	@Override
+	public void playHurtAnimation(float yaw)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

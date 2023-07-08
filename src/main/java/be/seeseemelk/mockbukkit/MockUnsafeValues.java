@@ -43,7 +43,7 @@ import java.util.List;
 public class MockUnsafeValues implements UnsafeValues
 {
 
-	private static final List<String> COMPATIBLE_API_VERSIONS = Arrays.asList("1.13", "1.14", "1.15", "1.16", "1.17", "1.18", "1.19");
+	private static final List<String> COMPATIBLE_API_VERSIONS = Arrays.asList("1.13", "1.14", "1.15", "1.16", "1.17", "1.18", "1.19", "1.20");
 
 	private String minimumApiVersion = "none";
 
@@ -307,6 +307,13 @@ public class MockUnsafeValues implements UnsafeValues
 
 	@Override
 	public String getTranslationKey(ItemStack itemStack)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable FeatureFlag getFeatureFlag(@NotNull NamespacedKey key)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

@@ -441,8 +441,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public boolean isCurrentlyRunning(int taskId)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return scheduledTasks.tasks.containsKey(taskId);
 	}
 
 	@Override
@@ -529,8 +528,8 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public void runTaskAsynchronously(@NotNull Plugin plugin, @NotNull Consumer<BukkitTask> task)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		ScheduledTask scheduledTask = new ScheduledTask(this.id.getAndIncrement(), plugin, false, this.currentTick, task);
+		pool.execute(wrapTask(scheduledTask));
 	}
 
 	@Override

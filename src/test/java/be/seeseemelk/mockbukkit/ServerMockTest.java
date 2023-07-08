@@ -60,6 +60,7 @@ import org.bukkit.scoreboard.ScoreboardManager;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -1362,6 +1363,32 @@ class ServerMockTest
 	void testCreateBrewerInventory()
 	{
 		assertInstanceOf(BrewerInventoryMock.class, server.createInventory(null, InventoryType.BREWING, "", 9));
+	}
+
+	@Test
+	void testMotdDefault()
+	{
+		assertEquals(Component.text("A Minecraft Server"), server.motd());
+	}
+
+	@Test
+	void testMotd()
+	{
+		server.motd(Component.text("Test"));
+		assertEquals(Component.text("Test"), server.motd());
+	}
+
+	@Test
+	void testGetMotdDefault()
+	{
+		assertEquals("A Minecraft Server", server.getMotd());
+	}
+
+	@Test
+	void testSetMotd()
+	{
+		server.setMotd("Test");
+		assertEquals("Test", server.getMotd());
 	}
 
 }
