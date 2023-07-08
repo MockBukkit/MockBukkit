@@ -185,4 +185,23 @@ class AbstractHorseMockTest
 		assertTrue(horse.isRearing());
 	}
 
+	@Test
+	void testGetJumpStrengthDefault()
+	{
+		assertEquals(0.7, horse.getJumpStrength());
+	}
+
+	@Test
+	void testSetJumpStrength()
+	{
+		horse.setJumpStrength(0.5);
+		assertEquals(0.5, horse.getJumpStrength());
+	}
+
+	@Test
+	void testSetJumpStrengthTooLow()
+	{
+		assertThrows(IllegalArgumentException.class, () -> horse.setJumpStrength(-0.1));
+	}
+
 }

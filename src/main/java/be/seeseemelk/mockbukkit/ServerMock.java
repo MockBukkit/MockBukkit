@@ -50,6 +50,7 @@ import be.seeseemelk.mockbukkit.tags.TagsMock;
 import com.destroystokyo.paper.entity.ai.MobGoals;
 import com.destroystokyo.paper.event.player.PlayerConnectionCloseEvent;
 import com.destroystokyo.paper.event.server.WhitelistToggleEvent;
+import com.destroystokyo.paper.profile.PlayerProfile;
 import com.google.common.base.Preconditions;
 import io.papermc.paper.datapack.DatapackManager;
 import io.papermc.paper.math.Position;
@@ -127,6 +128,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -149,6 +151,7 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Mock implementation of a {@link Server} and {@link Server.Spigot}.
@@ -818,7 +821,9 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull Set<String> getIPBans()
 	{
-		return this.playerList.getIPBans().getBanEntries().stream().map(BanEntry::getTarget)
+		return this.playerList.getIPBans().getEntries().stream()
+				.map(BanEntry::getBanTarget)
+				.map(InetAddress::getHostAddress)
 				.collect(Collectors.toSet());
 	}
 
@@ -835,12 +840,26 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	public void banIP(@NotNull InetAddress address)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void unbanIP(@NotNull InetAddress address)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull BanList getBanList(@NotNull Type type)
 	{
 		return switch (type)
 		{
 			case IP -> playerList.getIPBans();
-			case NAME -> playerList.getProfileBans();
+			case NAME, PROFILE -> playerList.getProfileBans();
 		};
 	}
 
@@ -1537,12 +1556,17 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public @NotNull Set<OfflinePlayer> getBannedPlayers()
 	{
-		return this.getBanList(Type.NAME)
-				.getBanEntries()
+		return (Set<OfflinePlayer>) this.getBanList(Type.PROFILE)
+				.getEntries()
 				.stream()
-				.map(banEntry -> getOfflinePlayer(banEntry.getTarget()))
+				.map(banEntry ->
+				{
+					return ((BanEntry<PlayerProfile>) banEntry).getBanTarget().getId();
+				})
+				.map(uuid -> this.getOfflinePlayer((UUID) uuid))
 				.collect(Collectors.toSet());
 	}
 
