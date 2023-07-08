@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.metadata;
 
+import com.google.common.base.Preconditions;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.metadata.Metadatable;
 import org.bukkit.plugin.Plugin;
@@ -7,6 +8,7 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -64,6 +66,25 @@ public class MetadataTable implements Metadatable
 		if (metadata.containsKey(metadataKey))
 		{
 			metadata.get(metadataKey).remove(owningPlugin);
+		}
+	}
+
+	/**
+	 * Clears all metadata belonging to a plugin.
+	 *
+	 * @param plugin The plugin to clear metadata for.
+	 */
+	public void clearMetadata(@NotNull Plugin plugin)
+	{
+		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
+		for (Iterator<Map<Plugin, MetadataValue>> iterator = metadata.values().iterator(); iterator.hasNext(); )
+		{
+			Map<Plugin, MetadataValue> values = iterator.next();
+			values.remove(plugin);
+			if (values.isEmpty())
+			{
+				iterator.remove();
+			}
 		}
 	}
 
