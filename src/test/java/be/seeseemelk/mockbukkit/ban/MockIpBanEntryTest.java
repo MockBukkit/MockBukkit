@@ -2,9 +2,7 @@ package be.seeseemelk.mockbukkit.ban;
 
 
 import com.google.common.net.InetAddresses;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import java.util.Date;
@@ -28,7 +26,7 @@ class MockIpBanEntryTest
 	@Test
 	void testGetTarget()
 	{
-		assertEquals("127.0.0.1", entry.getTarget());;
+		assertEquals("127.0.0.1", entry.getTarget());
 	}
 
 	@Test

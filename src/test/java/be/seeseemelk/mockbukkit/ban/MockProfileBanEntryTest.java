@@ -70,7 +70,7 @@ class MockProfileBanEntryTest
 	@Test
 	void testGetExpiration()
 	{
-		assertEquals(null, entry.getExpiration());
+		assertNull(entry.getExpiration());
 	}
 
 	@Test
