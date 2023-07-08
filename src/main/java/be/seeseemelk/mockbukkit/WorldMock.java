@@ -2836,13 +2836,6 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public @NotNull Set<FeatureFlag> getFeatureFlags()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public DragonBattle getEnderDragonBattle()
 	{
 		// TODO Auto-generated method stub
