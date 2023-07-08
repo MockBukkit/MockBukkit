@@ -6,7 +6,12 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Modifier;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class EnchantmentTests
@@ -39,6 +44,17 @@ class EnchantmentTests
 		EnchantmentsMock.registerDefaultEnchantments();
 		int newLength = Enchantment.values().length;
 		assertEquals(originalLength, newLength);
+	}
+
+	@Test
+	void testEnchantmentsConstructorPrivate() throws NoSuchMethodException
+	{
+		Constructor<EnchantmentsMock> constructor = EnchantmentsMock.class.getDeclaredConstructor();
+		assertTrue(Modifier.isPrivate(constructor.getModifiers()));
+		constructor.setAccessible(true);
+		Exception exception = assertThrows(InvocationTargetException.class, constructor::newInstance);
+		assertTrue(exception.getCause() instanceof UnsupportedOperationException);
+		assertTrue(exception.getCause().getMessage().contains("Utility class"));
 	}
 
 }
