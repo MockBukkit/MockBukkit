@@ -3,16 +3,26 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.ServerMock;
 import org.bukkit.Sound;
 import org.bukkit.entity.Fish;
-import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
+/**
+ * Mock implementation of a {@link Fish}.
+ *
+ * @see CreatureMock
+ */
 public abstract class FishMock extends CreatureMock implements Fish
 {
 
 	private boolean isFromBucket = false;
 
+	/**
+	 * Constructs a new {@link FishMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	protected FishMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
@@ -29,9 +39,6 @@ public abstract class FishMock extends CreatureMock implements Fish
 	{
 		this.isFromBucket = fromBucket;
 	}
-
-	@Override
-	public abstract @NotNull ItemStack getBaseBucketItem();
 
 	@Override
 	public @NotNull Sound getPickupSound()

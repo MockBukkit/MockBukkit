@@ -25,6 +25,9 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * Mock implementation of an {@link Inventory}.
+ */
 public class InventoryMock implements Inventory
 {
 
@@ -37,6 +40,13 @@ public class InventoryMock implements Inventory
 	private int maxStackSize = MAX_STACK_SIZE;
 	private final @NotNull List<HumanEntity> viewers = new ArrayList<>();
 
+	/**
+	 * Constructs a new {@link InventoryMock} for the given holder, with a specific size and {@link InventoryType}.
+	 *
+	 * @param holder The holder of the inventory.
+	 * @param size   The size of the inventory. Must be 2, or a multiple of 9 between 9 and 54.
+	 * @param type   The type of the inventory.
+	 */
 	public InventoryMock(@Nullable InventoryHolder holder, int size, @NotNull InventoryType type)
 	{
 		Preconditions.checkArgument(2 == size || (9 <= size && size <= 54 && size % 9 == 0),
@@ -49,6 +59,13 @@ public class InventoryMock implements Inventory
 		items = new ItemStack[size];
 	}
 
+	/**
+	 * Constructs a new {@link InventoryMock} for the given holder with a specific {@link InventoryType}.
+	 * The size will be {@link InventoryType#getDefaultSize()}.
+	 *
+	 * @param holder The holder of the inventory.
+	 * @param type   The type of the inventory.
+	 */
 	public InventoryMock(@Nullable InventoryHolder holder, @NotNull InventoryType type)
 	{
 		Preconditions.checkNotNull(type, "The InventoryType must not be null!");
@@ -335,8 +352,44 @@ public class InventoryMock implements Inventory
 	@Override
 	public @NotNull HashMap<Integer, ItemStack> removeItem(ItemStack... items) throws IllegalArgumentException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(items, "Items cannot be null");
+		HashMap<Integer, ItemStack> leftover = new HashMap<>();
+
+		for (int i = 0; i < items.length; i++)
+		{
+			ItemStack item = items[i];
+			int toDelete = item.getAmount();
+
+			while (toDelete > 0)
+			{
+				int first = first(item, false);
+
+				// Drat! we don't have this type in the inventory
+				if (first == -1)
+				{
+					item.setAmount(toDelete);
+					leftover.put(i, item);
+					break;
+				}
+
+				ItemStack itemStack = getItem(first);
+				int amount = itemStack.getAmount();
+				if (amount <= toDelete)
+				{
+					toDelete -= amount;
+					// clear the slot, all used up
+					clear(first);
+				}
+				else
+				{
+					// split the stack and store
+					itemStack.setAmount(amount - toDelete);
+					setItem(first, itemStack);
+					toDelete = 0;
+				}
+			}
+		}
+		return leftover;
 	}
 
 	@Override
@@ -471,6 +524,26 @@ public class InventoryMock implements Inventory
 		return -1;
 	}
 
+	private int first(@NotNull ItemStack item, boolean withAmount)
+	{
+		Preconditions.checkNotNull(item, "ItemStack cannot be null");
+
+		ItemStack[] inventory = this.getStorageContents();
+		for (int i = 0; i < inventory.length; i++)
+		{
+			if (inventory[i] == null)
+			{
+				continue;
+			}
+
+			if (withAmount ? item.equals(inventory[i]) : item.isSimilar(inventory[i]))
+			{
+				return i;
+			}
+		}
+		return -1;
+	}
+
 	@Override
 	public int firstEmpty()
 	{
@@ -566,6 +639,11 @@ public class InventoryMock implements Inventory
 		return true;
 	}
 
+	/**
+	 * Creates a snapshot of the inventory.
+	 *
+	 * @return An inventory snapshot.
+	 */
 	@NotNull
 	public Inventory getSnapshot()
 	{

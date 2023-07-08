@@ -6,6 +6,11 @@ import org.bukkit.inventory.AnvilInventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * Mock implementation of an {@link AnvilInventory}.
+ *
+ * @see InventoryMock
+ */
 public class AnvilInventoryMock extends InventoryMock implements AnvilInventory
 {
 
@@ -14,6 +19,11 @@ public class AnvilInventoryMock extends InventoryMock implements AnvilInventory
 	private int repairCost = 0;
 	private int maxRepairCost = 40;
 
+	/**
+	 * Constructs a new {@link AnvilInventoryMock} for the given holder.
+	 *
+	 * @param holder The holder of the inventory.
+	 */
 	public AnvilInventoryMock(@Nullable InventoryHolder holder)
 	{
 		super(holder, InventoryType.ANVIL);

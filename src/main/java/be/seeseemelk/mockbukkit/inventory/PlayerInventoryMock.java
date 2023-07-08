@@ -13,18 +13,49 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 
+/**
+ * Mock implementation of a {@link PlayerInventory}.
+ *
+ * @see InventoryMock
+ */
 public class PlayerInventoryMock extends InventoryMock implements PlayerInventory, EntityEquipment
 {
 
+	/**
+	 * The starting slot of the hotbar.
+	 */
 	protected static final int HOTBAR = 0;
+	/**
+	 * The ending slot of the hotbar.
+	 */
 	protected static final int SLOT_BAR = 9;
+	/**
+	 * The slot boots are in.
+	 */
 	protected static final int BOOTS = 36;
+	/**
+	 * The slot leggings are in.
+	 */
 	protected static final int LEGGINGS = 37;
+	/**
+	 * The slot the chestplate is in.
+	 */
 	protected static final int CHESTPLATE = 38;
+	/**
+	 * The slot the helmet is in.
+	 */
 	protected static final int HELMET = 39;
+	/**
+	 * The slot of the offhand.
+	 */
 	protected static final int OFF_HAND = 40;
 	private int mainHandSlot = 0;
 
+	/**
+	 * Constructs a new {@link PlayerInventoryMock}.
+	 *
+	 * @param holder The holder of the inventory.
+	 */
 	public PlayerInventoryMock(HumanEntity holder)
 	{
 		super(holder, InventoryType.PLAYER);
@@ -302,14 +333,14 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	public @NotNull ItemStack getItem(@NotNull EquipmentSlot slot)
 	{
 		return switch (slot)
-				{
-					case CHEST -> notNull(getChestplate());
-					case FEET -> notNull(getBoots());
-					case HAND -> getItemInMainHand();
-					case HEAD -> notNull(getHelmet());
-					case LEGS -> notNull(getLeggings());
-					case OFF_HAND -> getItemInOffHand();
-				};
+		{
+			case CHEST -> notNull(getChestplate());
+			case FEET -> notNull(getBoots());
+			case HAND -> getItemInMainHand();
+			case HEAD -> notNull(getHelmet());
+			case LEGS -> notNull(getLeggings());
+			case OFF_HAND -> getItemInOffHand();
+		};
 	}
 
 	@Override
@@ -359,7 +390,11 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 		throw new UnsupportedOperationException("Cannot set drop chance for PlayerInventory");
 	}
 
-	static @NotNull ItemStack notNull(@Nullable ItemStack itemStack)
+	/**
+	 * @param itemStack The item.
+	 * @return A new ItemStack of AIR if the provided item is null, otherwise the provided item.
+	 */
+	private static @NotNull ItemStack notNull(@Nullable ItemStack itemStack)
 	{
 		return itemStack == null ? new ItemStack(Material.AIR) : itemStack;
 	}

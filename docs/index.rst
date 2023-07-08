@@ -15,7 +15,7 @@ testing of plugins that use timers or delays.
 .. toctree::
    :maxdepth: 2
    :caption: Contents
-   
+
    getting_started.rst
    first_tests.rst
    player_mock.rst
@@ -23,6 +23,7 @@ testing of plugins that use timers or delays.
    scheduler_mock.rst
    entity_mock.rst
    message_target.rst
+   events.rst
    dependencies.rst
    custom_server_mock.rst
-
+   maintainers.rst

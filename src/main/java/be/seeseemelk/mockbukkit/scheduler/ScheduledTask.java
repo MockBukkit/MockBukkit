@@ -3,6 +3,8 @@ package be.seeseemelk.mockbukkit.scheduler;
 import com.google.common.base.Preconditions;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
+import org.bukkit.scheduler.BukkitWorker;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -11,11 +13,9 @@ import java.util.List;
 import java.util.concurrent.CancellationException;
 import java.util.function.Consumer;
 
-import org.bukkit.plugin.Plugin;
-import org.bukkit.scheduler.BukkitTask;
-import org.bukkit.scheduler.BukkitWorker;
-import org.jetbrains.annotations.NotNull;
-
+/**
+ * Mock implementation of a {@link BukkitTask}.
+ */
 public class ScheduledTask implements BukkitTask, BukkitWorker
 {
 
@@ -30,18 +30,46 @@ public class ScheduledTask implements BukkitTask, BukkitWorker
 	private final List<Runnable> cancelListeners = new LinkedList<>();
 	private Thread thread;
 
+	/**
+	 * Constructs a new {@link ScheduledTask} with the provided parameters.
+	 *
+	 * @param id            The task ID.
+	 * @param plugin        The plugin owning the task.
+	 * @param isSync        Whether the task is synchronous.
+	 * @param scheduledTick The tick the task is scheduled to run at.
+	 * @param runnable      The runnable to run.
+	 */
 	public ScheduledTask(int id, Plugin plugin, boolean isSync, long scheduledTick, @NotNull Runnable runnable)
 	{
 		this(id, plugin, isSync, scheduledTick, runnable, null);
 		Preconditions.checkNotNull(runnable, "Runnable cannot be null");
 	}
 
+	/**
+	 * Constructs a new {@link ScheduledTask} with the provided parameters.
+	 *
+	 * @param id            The task ID.
+	 * @param plugin        The plugin owning the task.
+	 * @param isSync        Whether the task is synchronous.
+	 * @param scheduledTick The tick the task is scheduled to run at.
+	 * @param consumer      The consumer to run.
+	 */
 	public ScheduledTask(int id, Plugin plugin, boolean isSync, long scheduledTick, @NotNull Consumer<BukkitTask> consumer)
 	{
 		this(id, plugin, isSync, scheduledTick, null, consumer);
 		Preconditions.checkNotNull(consumer, "Consumer cannot be null");
 	}
 
+	/**
+	 * Constructs a new {@link ScheduledTask} with the provided parameters.
+	 *
+	 * @param id            The task ID.
+	 * @param plugin        The plugin owning the task.
+	 * @param isSync        Whether the task is synchronous.
+	 * @param scheduledTick The tick the task is scheduled to run at.
+	 * @param runnable      The runnable to run.
+	 * @param consumer      The consumer to run.
+	 */
 	private ScheduledTask(int id, Plugin plugin, boolean isSync, long scheduledTick, @Nullable Runnable runnable, @Nullable Consumer<BukkitTask> consumer)
 	{
 		this.id = id;
@@ -54,11 +82,21 @@ public class ScheduledTask implements BukkitTask, BukkitWorker
 	}
 
 
+	/**
+	 * @return Whether the task is running.
+	 */
 	public boolean isRunning()
 	{
 		return this.running;
 	}
 
+	/**
+	 * Sets whether the task is running.
+	 * Should not be used outside of {@link BukkitSchedulerMock}.
+	 *
+	 * @param running Whether the task is running.
+	 */
+	@ApiStatus.Internal
 	public void setRunning(boolean running)
 	{
 		this.running = running;

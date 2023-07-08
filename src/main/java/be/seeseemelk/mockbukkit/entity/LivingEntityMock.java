@@ -11,11 +11,13 @@ import com.destroystokyo.paper.block.TargetBlockInfo;
 import com.destroystokyo.paper.entity.TargetEntityInfo;
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
+import net.kyori.adventure.util.TriState;
 import org.bukkit.Bukkit;
 import org.bukkit.FluidCollisionMode;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.block.Block;
@@ -28,6 +30,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
+import org.bukkit.entity.Wither;
 import org.bukkit.entity.memory.MemoryKey;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -39,6 +42,7 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.util.Consumer;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
@@ -54,16 +58,30 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
+/**
+ * Mock implementation of a {@link LivingEntity}.
+ *
+ * @see EntityMock
+ */
 public abstract class LivingEntityMock extends EntityMock implements LivingEntity
 {
 
+	/**
+	 * How much health the entity has.
+	 */
 	protected double health;
 	private int maxAirTicks = 300;
 	private int remainingAirTicks = 300;
+	/**
+	 * Whether the entity is alive.
+	 */
 	protected boolean alive = true;
 	private boolean gliding = false;
 	private boolean jumping = false;
 
+	/**
+	 * The attributes this entity has.
+	 */
 	protected Map<Attribute, AttributeInstanceMock> attributes;
 	private final EntityEquipment equipment = new EntityEquipmentMock(this);
 	private final Set<UUID> collidableExemptions = new HashSet<>();
@@ -77,7 +95,15 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 
 	private final Set<ActivePotionEffect> activeEffects = new HashSet<>();
 	private boolean invisible = false;
+	private TriState frictionState = TriState.NOT_SET;
+	private Entity leashHolder;
 
+	/**
+	 * Constructs a new {@link LivingEntityMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	protected LivingEntityMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
@@ -85,6 +111,8 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		attributes = new EnumMap<>(Attribute.class);
 		double maxHealth = AttributesMock.getDefaultValue(Attribute.GENERIC_MAX_HEALTH);
 		attributes.put(Attribute.GENERIC_MAX_HEALTH, new AttributeInstanceMock(Attribute.GENERIC_MAX_HEALTH, maxHealth));
+		double movementSpeed = AttributesMock.getDefaultValue(Attribute.GENERIC_MOVEMENT_SPEED);
+		attributes.put(Attribute.GENERIC_MOVEMENT_SPEED, new AttributeInstanceMock(Attribute.GENERIC_MOVEMENT_SPEED, movementSpeed));
 		resetMaxHealth();
 		setHealth(maxHealth);
 	}
@@ -579,22 +607,38 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public boolean isLeashed()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (!(this.leashHolder instanceof Mob))
+		{
+			return false;
+		}
+		return this.leashHolder != null;
 	}
 
 	@Override
 	public @NotNull Entity getLeashHolder() throws IllegalStateException
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (!this.isLeashed())
+		{
+			throw new IllegalStateException("Entity is currently not leashed");
+		}
+		return this.leashHolder;
 	}
+
 
 	@Override
 	public boolean setLeashHolder(Entity holder)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (this instanceof Wither || !(this instanceof Mob))
+		{
+			return false;
+		}
+
+		if (holder != null && holder.isDead())
+		{
+			return false;
+		}
+		this.leashHolder = holder;
+		return true;
 	}
 
 	@Override
@@ -729,10 +773,59 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
+	public @Nullable Sound getHurtSound()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Sound getDeathSound()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Sound getFallDamageSound(int fallHeight)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Sound getFallDamageSoundSmall()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Sound getFallDamageSoundBig()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Sound getDrinkingSound(@NotNull ItemStack itemStack)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Sound getEatingSound(@NotNull ItemStack itemStack)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public boolean canBreatheUnderwater()
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@NotNull
@@ -906,6 +999,96 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 
 	@Override
 	public void setHurtDirection(float hurtDirection)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public <T extends Projectile> @NotNull T launchProjectile(@NotNull Class<? extends T> projectile, @Nullable Vector velocity, @Nullable Consumer<T> function)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void knockback(double strength, double directionX, double directionZ)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void broadcastSlotBreak(@NotNull EquipmentSlot slot)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void broadcastSlotBreak(@NotNull EquipmentSlot slot, @NotNull Collection<Player> players)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull ItemStack damageItemStack(@NotNull ItemStack stack, int amount)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void damageItemStack(@NotNull EquipmentSlot slot, int amount)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull TriState getFrictionState()
+	{
+		return this.frictionState;
+	}
+
+	@Override
+	public void setFrictionState(@NotNull TriState state)
+	{
+		Preconditions.checkNotNull(state, "State cannot be null");
+		this.frictionState = state;
+	}
+
+	@Override
+	public @Nullable BlockFace getTargetBlockFace(int maxDistance, @NotNull FluidCollisionMode fluidMode)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable RayTraceResult rayTraceEntities(int maxDistance, boolean ignoreBlocks)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setArrowsInBody(int count, boolean fireEvent)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public float getBodyYaw()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setBodyYaw(float bodyYaw)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

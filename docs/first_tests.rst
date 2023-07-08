@@ -10,44 +10,24 @@ For instance, if you have a class at ``src/main/com/github/username/MyPlugin.jav
 you would probably put unit tests for this class at
 ``src/test/com/github/username/MyPluginTests.java``.
 
-Extra Constructor
-^^^^^^^^^^^^^^^^^
-Before you can start running unit tests, your plugin will need an extra constructor.
-This is because the ``JavaPlugin`` class expects that the plugin was loaded by a
-special class loader.
-However, it is not possible to use this class loader during the unit test phase.
+.. note::
+	The name of the test class does not matter, but it is common to name it
+	``<ClassName>Tests`` or ``<ClassName>Test``.
 
-The workaround is easy though, a constructor with a visibility of ``protected``. ::
-
-    public class MyPlugin extends JavaPlugin {
-        public MyPlugin() {
-            super();
-        }
-
-        protected MyPlugin(JavaPluginLoader loader, PluginDescriptionFile descriptionFile, File dataFolder, File file) {
-            super(loader, descriptionFile, dataFolder, file);
-        }
-
-        @Override
-        public void onEnable() {
-            // Executed when your plugin is enabled.
-        }
-
-        @Override
-        public void onDisable() {
-            // Executed when your plugin is disabled.
-        }
-    }
+Your Main Class can't be ``final``. If you use Kotlin, you main class needs to be an ``open`` class.
 
 Creating the Test Class
 ^^^^^^^^^^^^^^^^^^^^^^^
-Once your directories are set up, you can create unit tests like this::
+Once your directories are set up, you can create unit tests like this
+
+.. code-block:: java
+    :linenos:
 
     public class MyPluginTests {
         private ServerMock server;
         private MyPlugin plugin;
 
-        @Before
+        @BeforeEach
         public void setUp() {
             // Start the mock server
             server = MockBukkit.mock();
@@ -55,7 +35,7 @@ Once your directories are set up, you can create unit tests like this::
             plugin = MockBukkit.load(MyPlugin.class);
         }
 
-        @After
+        @AfterEach
         public void tearDown() {
             // Stop the mock server
             MockBukkit.unmock();
@@ -67,7 +47,7 @@ Once your directories are set up, you can create unit tests like this::
         }
     }
 
-UnimplementationOperationException
+UnimplementedOperationException
 ----------------------------------
 Sometimes your code may use a method that is not yet implemented in MockBukkit.
 When this happens MockBukkit will, instead of returning placeholder values, throw
@@ -78,6 +58,8 @@ These exceptions should just be ignored, though pull requests that add functiona
 to MockBukkit are always welcome!
 
 As an alternative you can always extend ``ServerMock`` and implement those missing methods.
-Simply pass your custom implementation of ServerMock to the `MockBukkit.mock(...)` method.::
+Simply pass your custom implementation of ServerMock to the `MockBukkit.mock(...)` method.
+
+.. code-block:: java
 
     MyCustomServerMock server = MockBukkit.mock(new MyCustomServerMock());

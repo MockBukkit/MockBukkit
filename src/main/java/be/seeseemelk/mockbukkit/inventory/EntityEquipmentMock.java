@@ -36,6 +36,11 @@ public class EntityEquipmentMock implements EntityEquipment
 	private @NotNull ItemStack leggings = new ItemStack(Material.AIR);
 	private @NotNull ItemStack boots = new ItemStack(Material.AIR);
 
+	/**
+	 * Constructs a new {@link EntityEquipmentMock} for the given holder.
+	 *
+	 * @param holder The holder of the inventory.
+	 */
 	public EntityEquipmentMock(@NotNull LivingEntityMock holder)
 	{
 		Preconditions.checkNotNull(holder, "Holder cannot be null");
@@ -69,14 +74,14 @@ public class EntityEquipmentMock implements EntityEquipment
 	{
 		Preconditions.checkNotNull(slot, "Slot cannot be null");
 		return switch (slot)
-				{
-					case CHEST -> getChestplate();
-					case FEET -> getBoots();
-					case HAND -> getItemInMainHand();
-					case HEAD -> getHelmet();
-					case LEGS -> getLeggings();
-					case OFF_HAND -> getItemInOffHand();
-				};
+		{
+			case CHEST -> getChestplate();
+			case FEET -> getBoots();
+			case HAND -> getItemInMainHand();
+			case HEAD -> getHelmet();
+			case LEGS -> getLeggings();
+			case OFF_HAND -> getItemInOffHand();
+		};
 	}
 
 	@Override

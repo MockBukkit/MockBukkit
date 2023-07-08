@@ -1,50 +1,73 @@
 package be.seeseemelk.mockbukkit.block.state;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import com.destroystokyo.paper.MaterialTags;
 import com.google.common.base.Preconditions;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
+import org.bukkit.Tag;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
+import org.bukkit.block.sign.Side;
+import org.bukkit.block.sign.SignSide;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This {@link ContainerMock} represents a {@link Sign}.
+ * Mock implementation of a {@link Sign}.
  *
- * @author TheBusyBiscuit
+ * @see TileStateMock
  */
 public class SignMock extends TileStateMock implements Sign
 {
 
 	private final String[] lines = { "", "", "", "" };
+	private @NotNull DyeColor color = DyeColor.BLACK;
+	private boolean glowing = false;
 
+	/**
+	 * Constructs a new {@link SignMock} for the provided {@link Material}.
+	 * Only supports materials in {@link Tag#SIGNS}
+	 *
+	 * @param material The material this state is for.
+	 */
 	public SignMock(@NotNull Material material)
 	{
 		super(material);
-		checkType(material, MaterialTags.SIGNS);
+		checkType(material, Tag.SIGNS);
 	}
 
+	/**
+	 * Constructs a new {@link SignMock} for the provided {@link Block}.
+	 * Only supports materials in {@link Tag#SIGNS}
+	 *
+	 * @param block The block this state is for.
+	 */
 	protected SignMock(@NotNull Block block)
 	{
 		super(block);
-		checkType(block, MaterialTags.SIGNS);
+		checkType(block, Tag.SIGNS);
 	}
 
+	/**
+	 * Constructs a new {@link SignMock} by cloning the data from an existing one.
+	 *
+	 * @param state The state to clone.
+	 */
 	protected SignMock(@NotNull SignMock state)
 	{
 		super(state);
 
 		for (int i = 0; i < 4; i++)
 		{
-			lines[i] = state.getLine(i);
+			this.lines[i] = state.getLine(i);
 		}
+		this.color = state.getColor();
+		this.glowing = state.isGlowingText();
 	}
 
 	@Override
@@ -52,7 +75,7 @@ public class SignMock extends TileStateMock implements Sign
 	{
 		List<Component> components = new ArrayList<>();
 
-		for (String line : lines)
+		for (String line : this.lines)
 		{
 			components.add(LegacyComponentSerializer.legacySection().deserialize(line));
 		}
@@ -70,7 +93,7 @@ public class SignMock extends TileStateMock implements Sign
 	public void line(int index, @NotNull Component line) throws IndexOutOfBoundsException
 	{
 		Preconditions.checkNotNull(line, "Line cannot be null!");
-		lines[index] = LegacyComponentSerializer.legacySection().serialize(line);
+		this.lines[index] = LegacyComponentSerializer.legacySection().serialize(line);
 	}
 
 	@Override
@@ -92,7 +115,7 @@ public class SignMock extends TileStateMock implements Sign
 	@Deprecated
 	public @NotNull String getLine(int index) throws IndexOutOfBoundsException
 	{
-		return lines[index];
+		return this.lines[index];
 	}
 
 	@Override
@@ -100,7 +123,7 @@ public class SignMock extends TileStateMock implements Sign
 	public void setLine(int index, @NotNull String line) throws IndexOutOfBoundsException
 	{
 		Preconditions.checkNotNull(line, "Line cannot be null!");
-		lines[index] = line;
+		this.lines[index] = line;
 	}
 
 	@Override
@@ -120,26 +143,30 @@ public class SignMock extends TileStateMock implements Sign
 	@Override
 	public boolean isGlowingText()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.glowing;
 	}
 
 	@Override
 	public void setGlowingText(boolean glowing)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.glowing = glowing;
 	}
 
 	@Override
-	public DyeColor getColor()
+	public @NotNull DyeColor getColor()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.color;
 	}
 
 	@Override
-	public void setColor(DyeColor color)
+	public void setColor(@NotNull DyeColor color)
+	{
+		Preconditions.checkNotNull(color, "Color can not be null!");
+		this.color = color;
+	}
+
+	@Override
+	public @NotNull SignSide getSide(@NotNull Side side)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

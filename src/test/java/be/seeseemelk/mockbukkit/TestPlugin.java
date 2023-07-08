@@ -1,5 +1,7 @@
 package be.seeseemelk.mockbukkit;
 
+import be.seeseemelk.mockbukkit.plugin.MockCustomConfiguredPluginClassLoader;
+import io.papermc.paper.plugin.provider.classloader.ConfiguredPluginClassLoader;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.EventHandler;
@@ -8,13 +10,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.plugin.java.JavaPluginLoader;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.File;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.BrokenBarrierException;
@@ -37,22 +37,15 @@ public class TestPlugin extends JavaPlugin implements Listener
 	public boolean asyncEventExecuted = false;
 	public @NotNull CyclicBarrier barrier = new CyclicBarrier(2);
 	public final @Nullable Object extra;
+	public boolean classLoadSucceed = false;
 
 	public TestPlugin()
 	{
-		super();
-		extra = null;
+		this(null);
 	}
 
-	protected TestPlugin(@NotNull JavaPluginLoader loader, @NotNull PluginDescriptionFile description, @NotNull File dataFolder, @NotNull File file)
+	protected TestPlugin(Number extra)
 	{
-		super(loader, description, dataFolder, file);
-		extra = null;
-	}
-
-	protected TestPlugin(@NotNull JavaPluginLoader loader, @NotNull PluginDescriptionFile description, @NotNull File dataFolder, @NotNull File file, Number extra)
-	{
-		super(loader, description, dataFolder, file);
 		this.extra = extra;
 	}
 
@@ -131,6 +124,16 @@ public class TestPlugin extends JavaPlugin implements Listener
 			{
 			}
 		}
+	}
+
+	public void createCustomClass() throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException
+	{
+		ConfiguredPluginClassLoader cpcl = (ConfiguredPluginClassLoader) getClassLoader();
+		MockCustomConfiguredPluginClassLoader ccl = new MockCustomConfiguredPluginClassLoader(cpcl);
+		cpcl.getGroup().add(ccl);
+		ccl.createCustomClass();
+		Class<?> testClass = Class.forName("TestClass", false, getClassLoader());
+		testClass.getMethod("testMethod", TestPlugin.class).invoke(null, this);
 	}
 
 }

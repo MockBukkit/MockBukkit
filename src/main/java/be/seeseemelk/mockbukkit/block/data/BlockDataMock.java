@@ -10,7 +10,11 @@ import org.bukkit.Tag;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockSupport;
+import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.block.data.BlockData;
+import org.bukkit.block.structure.Mirror;
+import org.bukkit.block.structure.StructureRotation;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -19,12 +23,23 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Mock implementation of {@link BlockData}.
+ * Also manages the creation of new BlockData with the appropriate mock class.
+ */
 public class BlockDataMock implements BlockData
 {
+
+	private static final String NULL_MATERIAL_EXCEPTION_MESSAGE = "Material cannot be null";
 
 	private final @NotNull Material type;
 	private final @NotNull Map<String, Object> data;
 
+	/**
+	 * Constructs a new {@link BlockDataMock} for the provided {@link Material}.
+	 *
+	 * @param type The material this data is for.
+	 */
 	public BlockDataMock(@NotNull Material type)
 	{
 		Preconditions.checkNotNull(type, "Type cannot be null");
@@ -33,27 +48,60 @@ public class BlockDataMock implements BlockData
 	}
 
 	// region Type Checking
+
+	/**
+	 * Ensures the provided material is one of the expected materials provided.
+	 *
+	 * @param material The material to test.
+	 * @param expected The expected materials.
+	 */
 	protected void checkType(@NotNull Material material, @NotNull Material... expected)
 	{
 		Preconditions.checkArgument(Arrays.stream(expected).anyMatch(m -> material == m), "Cannot create a " + getClass().getSimpleName() + " from " + material);
 	}
 
+	/**
+	 * Ensures the provided block type is one of the expected materials provided.
+	 *
+	 * @param block    The block to test.
+	 * @param expected The expected materials.
+	 */
 	protected void checkType(@NotNull Block block, @NotNull Material... expected)
 	{
 		checkType(block.getType(), expected);
 	}
 
-	protected void checkType(@NotNull Material material, @NotNull Tag<Material> tag)
+	/**
+	 * Ensures the provided material is contained in the {@link Tag}.
+	 *
+	 * @param material The material to test.
+	 * @param expected The expected tag.
+	 */
+	protected void checkType(@NotNull Material material, @NotNull Tag<Material> expected)
 	{
-		Preconditions.checkArgument(tag.isTagged(material), "Cannot create a " + getClass().getSimpleName() + " from " + material);
+		Preconditions.checkArgument(expected.isTagged(material), "Cannot create a " + getClass().getSimpleName() + " from " + material);
 	}
 
+	/**
+	 * Ensures the provided block type is contained in the {@link Tag}.
+	 *
+	 * @param block    The material to test.
+	 * @param expected The expected tag.
+	 */
 	protected void checkType(@NotNull Block block, @NotNull Tag<Material> expected)
 	{
 		checkType(block.getType(), expected);
 	}
 	// endregion
 
+	/**
+	 * Sets a data value.
+	 *
+	 * @param key   The data key.
+	 * @param value The data value.
+	 * @param <T>   The type of the data.
+	 * @see BlockDataKey
+	 */
 	protected <T> void set(@NotNull String key, @NotNull T value)
 	{
 		Preconditions.checkNotNull(key, "Key cannot be null");
@@ -61,6 +109,15 @@ public class BlockDataMock implements BlockData
 		this.data.put(key, value);
 	}
 
+	/**
+	 * Gets a data value.
+	 * Will throw an {@link IllegalArgumentException} if no data is set for the provided key.
+	 *
+	 * @param key The data key.
+	 * @param <T> The type of the data.
+	 * @return The data attached to the key.
+	 * @see BlockDataKey
+	 */
 	@SuppressWarnings("unchecked")
 	protected <T> @NotNull T get(@NotNull String key)
 	{
@@ -116,6 +173,27 @@ public class BlockDataMock implements BlockData
 	}
 
 	@Override
+	public int getLightEmission()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isOccluding()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean requiresCorrectToolForDrops()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public boolean isSupported(@NotNull Block block)
 	{
 		// TODO Auto-generated method stub
@@ -136,11 +214,45 @@ public class BlockDataMock implements BlockData
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
 
+	@Override
+	public @NotNull Material getPlacementMaterial()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void rotate(@NotNull StructureRotation rotation)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void mirror(@NotNull Mirror mirror)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public boolean isRandomlyTicked()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isPreferredTool(@NotNull ItemStack tool)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull PistonMoveReaction getPistonMoveReaction()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -185,23 +297,93 @@ public class BlockDataMock implements BlockData
 		}
 		catch (CloneNotSupportedException e)
 		{
-			return new BlockDataMock(type);
+			return BlockDataMock.mock(type);
 		}
 	}
 
+	/**
+	 * Attempts to construct a BlockDataMock by the provided material.
+	 * Will return a basic {@link BlockDataMock} if no implementation is found.
+	 *
+	 * @param material The material to create the BlockData from.
+	 * @return The BlockData.
+	 */
 	public static @NotNull BlockDataMock mock(@NotNull Material material)
 	{
-		Preconditions.checkNotNull(material, "Material cannot be null");
-		// Special Cases
+		Preconditions.checkNotNull(material, NULL_MATERIAL_EXCEPTION_MESSAGE);
+		BlockDataMock mock = attemptMockByPaperMaterialTags(material);
+		if (mock != null)
+		{
+			return mock;
+		}
+
+		mock = attemptMockByTag(material);
+		if (mock != null)
+		{
+			return mock;
+		}
+
+		// Special cases
+		return switch (material)
+		{
+			case AMETHYST_CLUSTER -> new AmethystClusterMock(material);
+			case LEVER -> new SwitchMock(material);
+			default -> new BlockDataMock(material);
+		};
+	}
+
+	/**
+	 * Attempts to construct a BlockDataMock object by matching against Paper MaterialTags. Returns null if the given
+	 * material does not match any supported MaterialSetTag.
+	 *
+	 * @param material Material which we will attempt to mock
+	 * @return BlockDataMock if matched, null otherwise
+	 */
+	private static BlockDataMock attemptMockByPaperMaterialTags(@NotNull Material material)
+	{
+		Preconditions.checkNotNull(material, NULL_MATERIAL_EXCEPTION_MESSAGE);
 		if (MaterialTags.BEDS.isTagged(material))
 		{
 			return new BedMock(material);
 		}
-		return switch (material)
-				{
-					case AMETHYST_CLUSTER -> new AmethystClusterMock(material);
-					default -> new BlockDataMock(material);
-				};
+		return null;
+	}
+
+	/**
+	 * Attempts to construct a BlockDataMock object by matching against Bukkit Tags. Returns null if the given material
+	 * does not match any supported Tag.
+	 *
+	 * @param material Material which we will attempt to mock
+	 * @return BlockDataMock if matched, null otherwise
+	 */
+	private static BlockDataMock attemptMockByTag(@NotNull Material material)
+	{
+		Preconditions.checkNotNull(material, NULL_MATERIAL_EXCEPTION_MESSAGE);
+		if (Tag.SLABS.isTagged(material))
+		{
+			return new SlabMock(material);
+		}
+		else if (Tag.STAIRS.isTagged(material))
+		{
+			return new StairsMock(material);
+		}
+		else if (Tag.TRAPDOORS.isTagged(material))
+		{
+			return new TrapDoorMock(material);
+		}
+		else if (Tag.CAMPFIRES.isTagged(material))
+		{
+			return new CampfireMock(material);
+		}
+		else if (Tag.WALL_SIGNS.isTagged(material))
+		{
+			return new WallSignMock(material);
+		}
+		else if (Tag.BUTTONS.isTagged(material))
+		{
+			return new SwitchMock(material);
+		}
+		return null;
 	}
 
 }

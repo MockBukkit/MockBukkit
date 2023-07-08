@@ -13,6 +13,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Mock implementation of a {@link ChunkGenerator.ChunkData}.
+ */
 public class MockChunkData implements ChunkGenerator.ChunkData
 {
 
@@ -24,6 +27,11 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 	private final int minHeight;
 	private final int maxHeight;
 
+	/**
+	 * Constructs a new {@link MockChunkData} for the provided {@link World}.
+	 *
+	 * @param world The world the chunk is in.
+	 */
 	public MockChunkData(@NotNull World world)
 	{
 		this.minHeight = world.getMinHeight();
@@ -63,14 +71,16 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 	@Override
 	public void setBlock(int x, int y, int z, @NotNull Material material)
 	{
-		this.setBlock(x, y, z, new BlockDataMock(material));
+		Preconditions.checkNotNull(material, "Material cannot be null");
+		this.setBlock(x, y, z, BlockDataMock.mock(material));
 	}
 
 	@Override
 	@Deprecated
 	public void setBlock(int x, int y, int z, @NotNull MaterialData material)
 	{
-		this.setBlock(x, y, z, new BlockDataMock(material.getItemType()));
+		Preconditions.checkNotNull(material, "MaterialData cannot be null");
+		this.setBlock(x, y, z, BlockDataMock.mock(material.getItemType()));
 	}
 
 	@Override
@@ -83,14 +93,16 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 	@Override
 	public void setRegion(int xMin, int yMin, int zMin, int xMax, int yMax, int zMax, @NotNull Material material)
 	{
-		this.setRegion(xMin, yMin, zMin, xMax, yMax, zMax, new BlockDataMock(material));
+		Preconditions.checkNotNull(material, "Material cannot be null");
+		this.setRegion(xMin, yMin, zMin, xMax, yMax, zMax, BlockDataMock.mock(material));
 	}
 
 	@Override
 	@Deprecated
 	public void setRegion(int xMin, int yMin, int zMin, int xMax, int yMax, int zMax, @NotNull MaterialData material)
 	{
-		this.setRegion(xMin, yMin, zMin, xMax, yMax, zMax, new BlockDataMock(material.getItemType()));
+		Preconditions.checkNotNull(material, "MaterialData cannot be null");
+		this.setRegion(xMin, yMin, zMin, xMax, yMax, zMax, BlockDataMock.mock(material.getItemType()));
 	}
 
 	@Override

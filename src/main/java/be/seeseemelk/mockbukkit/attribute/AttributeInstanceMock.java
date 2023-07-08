@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.attribute;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
@@ -10,6 +11,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Mock implementation of {@link AttributeInstance}.
+ */
 public class AttributeInstanceMock implements AttributeInstance
 {
 
@@ -18,6 +22,12 @@ public class AttributeInstanceMock implements AttributeInstance
 	private double value;
 	private final @NotNull List<AttributeModifier> modifiers;
 
+	/**
+	 * Constructs a new {@link AttributeInstanceMock} for the provided {@link Attribute} and with the specified value.
+	 *
+	 * @param attribute The Attribute this is an instance of.
+	 * @param value     The value of the attribute.
+	 */
 	public AttributeInstanceMock(@NotNull Attribute attribute, double value)
 	{
 		Preconditions.checkNotNull(attribute, "Attribute cannot be null");
@@ -56,6 +66,13 @@ public class AttributeInstanceMock implements AttributeInstance
 	{
 		Preconditions.checkNotNull(modifier, "Modifier cannot be null");
 		modifiers.add(modifier);
+	}
+
+	@Override
+	public void addTransientModifier(@NotNull AttributeModifier modifier)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

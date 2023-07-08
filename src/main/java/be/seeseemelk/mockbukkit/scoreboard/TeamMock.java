@@ -23,6 +23,9 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.logging.Level;
 
+/**
+ * Mock implementation of a {@link Team}.
+ */
 public class TeamMock implements Team
 {
 
@@ -37,6 +40,12 @@ public class TeamMock implements Team
 	private final EnumMap<Option, OptionStatus> options = new EnumMap<>(Option.class);
 	private @Nullable ScoreboardMock board;
 
+	/**
+	 * Constructs a new {@link TeamMock} for the provided {@link ScoreboardMock} with the specified name.
+	 *
+	 * @param name  The name of the team.
+	 * @param board The scoreboard the team is for.
+	 */
 	public TeamMock(@NotNull String name, ScoreboardMock board)
 	{
 		this.name = name;
@@ -92,7 +101,7 @@ public class TeamMock implements Team
 	public void suffix(@Nullable Component suffix) throws IllegalStateException, IllegalArgumentException
 	{
 		checkRegistered();
-		this.prefix = suffix == null ? Component.empty() : suffix;
+		this.suffix = suffix == null ? Component.empty() : suffix;
 	}
 
 	@Override
@@ -218,13 +227,13 @@ public class TeamMock implements Team
 
 		OptionStatus s = options.get(Option.NAME_TAG_VISIBILITY);
 		return switch (s)
-				{
-					case NEVER -> NameTagVisibility.NEVER;
-					case ALWAYS -> NameTagVisibility.ALWAYS;
-					case FOR_OTHER_TEAMS -> NameTagVisibility.HIDE_FOR_OTHER_TEAMS;
-					case FOR_OWN_TEAM -> NameTagVisibility.HIDE_FOR_OWN_TEAM;
-					default -> throw new IllegalArgumentException("Option not compatible");
-				};
+		{
+			case NEVER -> NameTagVisibility.NEVER;
+			case ALWAYS -> NameTagVisibility.ALWAYS;
+			case FOR_OTHER_TEAMS -> NameTagVisibility.HIDE_FOR_OTHER_TEAMS;
+			case FOR_OWN_TEAM -> NameTagVisibility.HIDE_FOR_OWN_TEAM;
+			default -> throw new IllegalArgumentException("Option not compatible");
+		};
 	}
 
 	/**

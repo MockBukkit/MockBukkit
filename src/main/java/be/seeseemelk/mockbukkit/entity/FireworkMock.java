@@ -4,7 +4,6 @@ import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.inventory.meta.FireworkMetaMock;
 import com.google.common.base.Preconditions;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.LivingEntity;
@@ -16,10 +15,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.UUID;
 
 /**
- * This is a simple mock of the {@link Firework} {@link Entity}. It takes a {@link FireworkMeta} to carry all
- * properties.
+ * Mock implementation of a {@link Firework}.
  *
- * @author TheBusyBiscuit
+ * @see ProjectileMock
  */
 public class FireworkMock extends ProjectileMock implements Firework
 {
@@ -27,11 +25,24 @@ public class FireworkMock extends ProjectileMock implements Firework
 	private FireworkMeta meta;
 	private boolean shotAtAngle = false;
 
+	/**
+	 * Constructs a new {@link FireworkMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	public FireworkMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		this(server, uuid, new FireworkMetaMock());
 	}
 
+	/**
+	 * Constructs a new {@link FireworkMock} on the provided {@link ServerMock} with a specified {@link UUID} and {@link FireworkMeta}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 * @param meta   The FireworkMeta to apply.
+	 */
 	public FireworkMock(@NotNull ServerMock server, @NotNull UUID uuid, @NotNull FireworkMeta meta)
 	{
 		super(server, uuid);
@@ -59,7 +70,60 @@ public class FireworkMock extends ProjectileMock implements Firework
 	}
 
 	@Override
+	public boolean setAttachedTo(@Nullable LivingEntity entity)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable LivingEntity getAttachedTo()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@Deprecated(forRemoval = true)
+	public boolean setLife(int ticks)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@Deprecated(forRemoval = true)
+	public int getLife()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@Deprecated(forRemoval = true)
+	public boolean setMaxLife(int ticks)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@Deprecated(forRemoval = true)
+	public int getMaxLife()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public void detonate()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isDetonated()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

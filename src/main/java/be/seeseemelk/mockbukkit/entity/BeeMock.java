@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import net.kyori.adventure.util.TriState;
 import org.bukkit.Location;
@@ -11,6 +12,11 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
+/**
+ * Mock implementation of a {@link Bee}.
+ *
+ * @see AnimalsMock
+ */
 public class BeeMock extends AnimalsMock implements Bee
 {
 
@@ -22,6 +28,12 @@ public class BeeMock extends AnimalsMock implements Bee
 	private int cannotEnterHiveTicks = 0;
 	private @NotNull TriState rollingOverride = TriState.NOT_SET;
 
+	/**
+	 * Constructs a new {@link BeeMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	public BeeMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
@@ -118,6 +130,34 @@ public class BeeMock extends AnimalsMock implements Bee
 	public boolean isRolling()
 	{
 		return this.rollingOverride.toBooleanOrElse(false);
+	}
+
+	@Override
+	public void setCropsGrownSincePollination(int crops)
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getCropsGrownSincePollination()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setTicksSincePollination(int ticks)
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getTicksSincePollination()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

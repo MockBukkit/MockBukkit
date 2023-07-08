@@ -3,12 +3,18 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.ServerMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Pig;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Mock implementation of an {@link Pig}.
+ *
+ * @see AnimalsMock
+ */
 public class PigMock extends AnimalsMock implements Pig
 {
 
@@ -16,6 +22,12 @@ public class PigMock extends AnimalsMock implements Pig
 	private int boostTicks = 0;
 	private int currentBoostTicks = 0;
 
+	/**
+	 * Constructs a new {@link PigMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	public PigMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
@@ -68,6 +80,12 @@ public class PigMock extends AnimalsMock implements Pig
 	public @NotNull Material getSteerMaterial()
 	{
 		return Material.CARROT_ON_A_STICK;
+	}
+
+	@Override
+	public EntityType getType()
+	{
+		return EntityType.PIG;
 	}
 
 }

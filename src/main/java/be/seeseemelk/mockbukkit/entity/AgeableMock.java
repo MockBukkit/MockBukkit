@@ -1,17 +1,29 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.entity.data.EntitySubType;
 import org.bukkit.entity.Ageable;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
+/**
+ * Mock implementation of an {@link Ageable}.
+ *
+ * @see CreatureMock
+ */
 public class AgeableMock extends CreatureMock implements Ageable
 {
 
 	private int age;
 	private boolean ageLocked;
 
+	/**
+	 * Constructs a new {@link AgeableMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	public AgeableMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
@@ -89,6 +101,16 @@ public class AgeableMock extends CreatureMock implements Ageable
 	public @NotNull String toString()
 	{
 		return "AgeableMock";
+	}
+
+	@Override
+	protected EntitySubType getSubType()
+	{
+		if (!this.isAdult())
+		{
+			return EntitySubType.BABY;
+		}
+		return super.getSubType();
 	}
 
 }

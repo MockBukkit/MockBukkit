@@ -9,11 +9,18 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * This {@link InventoryMock} mocks an {@link org.bukkit.block.Lectern} but pretty much behaves like any small chest.
+ * Mock implementation of a {@link LecternInventory}.
+ *
+ * @see InventoryMock
  */
 public class LecternInventoryMock extends InventoryMock implements LecternInventory
 {
 
+	/**
+	 * Constructs a new {@link LecternInventoryMock} for the given holder.
+	 *
+	 * @param holder The holder of the inventory.
+	 */
 	public LecternInventoryMock(InventoryHolder holder)
 	{
 		super(holder, InventoryType.LECTERN);

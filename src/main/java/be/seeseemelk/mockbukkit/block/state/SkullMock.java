@@ -1,11 +1,13 @@
 package be.seeseemelk.mockbukkit.block.state;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.profile.PlayerProfileMock;
 import com.destroystokyo.paper.MaterialTags;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.google.common.base.Preconditions;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.SkullType;
 import org.bukkit.block.Block;
@@ -18,6 +20,11 @@ import org.bukkit.block.data.Rotatable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * Mock implementation of a {@link Skull}.
+ *
+ * @see TileStateMock
+ */
 public class SkullMock extends TileStateMock implements Skull
 {
 
@@ -25,18 +32,35 @@ public class SkullMock extends TileStateMock implements Skull
 
 	private @Nullable PlayerProfileMock profile;
 
+	/**
+	 * Constructs a new {@link SkullMock} for the provided {@link Material}.
+	 * Only supports materials in {@link MaterialTags#SKULLS}
+	 *
+	 * @param material The material this state is for.
+	 */
 	public SkullMock(@NotNull Material material)
 	{
 		super(material);
 		checkType(material, MaterialTags.SKULLS);
 	}
 
+	/**
+	 * Constructs a new {@link SkullMock} for the provided {@link Block}.
+	 * Only supports materials in {@link MaterialTags#SKULLS}
+	 *
+	 * @param block The block this state is for.
+	 */
 	protected SkullMock(@NotNull Block block)
 	{
 		super(block);
 		checkType(block, MaterialTags.SKULLS);
 	}
 
+	/**
+	 * Constructs a new {@link SkullMock} by cloning the data from an existing one.
+	 *
+	 * @param state The state to clone.
+	 */
 	protected SkullMock(@NotNull SkullMock state)
 	{
 		super(state);
@@ -142,6 +166,20 @@ public class SkullMock extends TileStateMock implements Skull
 	}
 
 	@Override
+	public @Nullable NamespacedKey getNoteBlockSound()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setNoteBlockSound(@Nullable NamespacedKey noteBlockSound)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull BlockFace getRotation()
 	{
 		BlockData blockData = getBlockData();
@@ -168,15 +206,15 @@ public class SkullMock extends TileStateMock implements Skull
 	public @NotNull SkullType getSkullType()
 	{
 		return switch (getType())
-				{
-					case SKELETON_SKULL, SKELETON_WALL_SKULL -> SkullType.SKELETON;
-					case WITHER_SKELETON_SKULL, WITHER_SKELETON_WALL_SKULL -> SkullType.WITHER;
-					case ZOMBIE_HEAD, ZOMBIE_WALL_HEAD -> SkullType.ZOMBIE;
-					case PLAYER_HEAD, PLAYER_WALL_HEAD -> SkullType.PLAYER;
-					case CREEPER_HEAD, CREEPER_WALL_HEAD -> SkullType.CREEPER;
-					case DRAGON_HEAD, DRAGON_WALL_HEAD -> SkullType.DRAGON;
-					default -> throw new IllegalArgumentException("Unknown SkullType for " + getType());
-				};
+		{
+			case SKELETON_SKULL, SKELETON_WALL_SKULL -> SkullType.SKELETON;
+			case WITHER_SKELETON_SKULL, WITHER_SKELETON_WALL_SKULL -> SkullType.WITHER;
+			case ZOMBIE_HEAD, ZOMBIE_WALL_HEAD -> SkullType.ZOMBIE;
+			case PLAYER_HEAD, PLAYER_WALL_HEAD -> SkullType.PLAYER;
+			case CREEPER_HEAD, CREEPER_WALL_HEAD -> SkullType.CREEPER;
+			case DRAGON_HEAD, DRAGON_WALL_HEAD -> SkullType.DRAGON;
+			default -> throw new IllegalArgumentException("Unknown SkullType for " + getType());
+		};
 	}
 
 	@Override

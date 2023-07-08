@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
+import io.papermc.paper.math.Rotations;
 import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
@@ -19,9 +20,9 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- * This is the mock of an {@link ArmorStand}.
+ * Mock implementation of an {@link ArmorStand}.
  *
- * @author TheBusyBiscuit
+ * @see LivingEntityMock
  */
 public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 {
@@ -41,6 +42,12 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 
 	private final Set<EquipmentSlot> disabledSlots = EnumSet.noneOf(EquipmentSlot.class);
 
+	/**
+	 * Constructs a new {@link ArmorStandMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	public ArmorStandMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
@@ -314,14 +321,14 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	{
 		Preconditions.checkNotNull(slot, "Slot cannot be null");
 		return switch (slot)
-				{
-					case HAND -> getEquipment().getItemInMainHand();
-					case OFF_HAND -> getEquipment().getItemInOffHand();
-					case FEET -> getBoots();
-					case LEGS -> getLeggings();
-					case CHEST -> getChestplate();
-					case HEAD -> getHelmet();
-				};
+		{
+			case HAND -> getEquipment().getItemInMainHand();
+			case OFF_HAND -> getEquipment().getItemInOffHand();
+			case FEET -> getBoots();
+			case LEGS -> getLeggings();
+			case CHEST -> getChestplate();
+			case HEAD -> getHelmet();
+		};
 	}
 
 	@Override
@@ -373,6 +380,90 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	{
 		Preconditions.checkNotNull(slot, "Slot cannot be null");
 		return this.disabledSlots.contains(slot);
+	}
+
+	@Override
+	public @NotNull Rotations getBodyRotations()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setBodyRotations(@NotNull Rotations rotations)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Rotations getLeftArmRotations()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setLeftArmRotations(@NotNull Rotations rotations)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Rotations getRightArmRotations()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setRightArmRotations(@NotNull Rotations rotations)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Rotations getLeftLegRotations()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setLeftLegRotations(@NotNull Rotations rotations)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Rotations getRightLegRotations()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setRightLegRotations(@NotNull Rotations rotations)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Rotations getHeadRotations()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setHeadRotations(@NotNull Rotations rotations)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 }

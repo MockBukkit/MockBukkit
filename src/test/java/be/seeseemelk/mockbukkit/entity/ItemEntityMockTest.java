@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.WorldMock;
+import net.kyori.adventure.util.TriState;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
@@ -102,6 +103,40 @@ class ItemEntityMockTest
 
 		// Spigot really just throws a NPE here, so this is accurate behaviour
 		assertThrows(NullPointerException.class, () -> entity.setItemStack(null));
+	}
+
+	@Test
+	void testGetFrictionStateDefault()
+	{
+		ItemStack item = new ItemStack(Material.QUARTZ);
+		Location location = new Location(world, 500, 100, 500);
+
+		Item entity = world.dropItem(location, item);
+
+		assertEquals(TriState.NOT_SET, entity.getFrictionState());
+	}
+
+	@Test
+	void testSetFrictionState()
+	{
+		ItemStack item = new ItemStack(Material.QUARTZ);
+		Location location = new Location(world, 500, 100, 500);
+
+		Item entity = world.dropItem(location, item);
+
+		entity.setFrictionState(TriState.TRUE);
+		assertEquals(TriState.TRUE, entity.getFrictionState());
+	}
+
+	@Test
+	void testSetFrictionStateNull()
+	{
+		ItemStack item = new ItemStack(Material.QUARTZ);
+		Location location = new Location(world, 500, 100, 500);
+
+		Item entity = world.dropItem(location, item);
+
+		assertThrows(NullPointerException.class, () -> entity.setFrictionState(null));
 	}
 
 }

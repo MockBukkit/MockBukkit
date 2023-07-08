@@ -11,20 +11,28 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * This {@link ItemMetaMock} mocks the implementation of {@link SuspiciousStewMeta}.
+ * Mock implementation of a {@link SuspiciousStewMeta}.
  *
- * @author TheBusyBiscuit
+ * @see ItemMetaMock
  */
 public class SuspiciousStewMetaMock extends ItemMetaMock implements SuspiciousStewMeta
 {
 
 	private @NotNull List<PotionEffect> effects = new ArrayList<>();
 
+	/**
+	 * Constructs a new {@link ArmorStandMetaMock}.
+	 */
 	public SuspiciousStewMetaMock()
 	{
 		super();
 	}
 
+	/**
+	 * Constructs a new {@link ArmorStandMetaMock}, cloning the data from another.
+	 *
+	 * @param meta The meta to clone.
+	 */
 	public SuspiciousStewMetaMock(@NotNull SuspiciousStewMeta meta)
 	{
 		super(meta);

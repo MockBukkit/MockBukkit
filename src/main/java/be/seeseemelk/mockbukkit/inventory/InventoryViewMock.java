@@ -6,6 +6,9 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Mock implementation of an {@link InventoryView}.
+ */
 public abstract class InventoryViewMock extends InventoryView
 {
 
@@ -13,8 +16,19 @@ public abstract class InventoryViewMock extends InventoryView
 	private Inventory bottomInventory;
 	private HumanEntity player;
 	private InventoryType type;
-	private final String name;
+	private String name;
+	private String originalTitle;
+	private boolean titleChanged = false;
 
+	/**
+	 * Constructs a new {@link InventoryViewMock} with the provided parameters.
+	 *
+	 * @param player The player this view is for.
+	 * @param name   The name of the view (title).
+	 * @param top    The top inventory.
+	 * @param bottom The bottom inventory.
+	 * @param type   The type of the inventory.
+	 */
 	protected InventoryViewMock(HumanEntity player, String name, Inventory top, Inventory bottom, InventoryType type)
 	{
 		this.player = player;
@@ -92,6 +106,22 @@ public abstract class InventoryViewMock extends InventoryView
 	public @NotNull String getTitle()
 	{
 		return name;
+	}
+
+	@Override
+	public @NotNull String getOriginalTitle()
+	{
+		return this.originalTitle;
+	}
+
+	@Override
+	public void setTitle(@NotNull String title)
+	{
+		if (!this.titleChanged) {
+			this.originalTitle = this.name;
+			this.titleChanged = true;
+		}
+		this.name = title;
 	}
 
 }

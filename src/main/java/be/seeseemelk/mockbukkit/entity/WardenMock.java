@@ -5,6 +5,7 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Warden;
 import org.jetbrains.annotations.NotNull;
@@ -14,11 +15,22 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+/**
+ * Mock implementation of a {@link Warden}.
+ *
+ * @see MonsterMock
+ */
 public class WardenMock extends MonsterMock implements Warden
 {
 
 	private final Map<Entity, Integer> angerPerEntity = new HashMap<>();
 
+	/**
+	 * Constructs a new {@link WardenMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 *
+	 * @param server The server to create the entity on.
+	 * @param uuid   The UUID of the entity.
+	 */
 	public WardenMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
@@ -28,7 +40,7 @@ public class WardenMock extends MonsterMock implements Warden
 	public int getAnger()
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -77,21 +89,21 @@ public class WardenMock extends MonsterMock implements Warden
 	public void clearAnger(@NotNull Entity entity)
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public @Nullable LivingEntity getEntityAngryAt()
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public void setDisturbanceLocation(@NotNull Location location)
 	{
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -103,6 +115,12 @@ public class WardenMock extends MonsterMock implements Warden
 			return AngerLevel.AGITATED;
 		else
 			return AngerLevel.ANGRY;
+	}
+
+	@Override
+	public EntityType getType()
+	{
+		return EntityType.WARDEN;
 	}
 
 }

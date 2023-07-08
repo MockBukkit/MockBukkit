@@ -29,18 +29,27 @@ public enum TagRegistry
 
 	private final Map<NamespacedKey, TagWrapperMock> tags = new HashMap<>();
 
+	/**
+	 * @return The name of the registry.
+	 */
 	@NotNull
 	public final String getRegistry()
 	{
 		return name().toLowerCase(Locale.ROOT);
 	}
 
+	/**
+	 * @return A map of all tags.
+	 */
 	@NotNull
 	public final Map<NamespacedKey, TagWrapperMock> getTags()
 	{
 		return tags;
 	}
 
+	/**
+	 * @return Whether the tags are empty.
+	 */
 	public boolean isEmpty()
 	{
 		return tags.isEmpty();
