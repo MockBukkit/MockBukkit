@@ -187,6 +187,13 @@ public class SignMock extends TileStateMock implements Sign
 	}
 
 	@Override
+	public @NotNull Side getInteractableSideFor(double x, double z)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull BlockState getSnapshot()
 	{
 		return new SignMock(this);
