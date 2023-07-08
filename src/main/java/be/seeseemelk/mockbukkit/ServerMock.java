@@ -154,7 +154,6 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Mock implementation of a {@link Server} and {@link Server.Spigot}.
@@ -1408,7 +1407,7 @@ public class ServerMock extends Server.Spigot implements Server
 
 		// Wait up to 2.5 seconds for plugins to finish async tasks.
 		int pollCount = 0;
-		while (pollCount < 50 && getScheduler().getPendingTasks().size() > 0)   // TODO: Not implemented
+		while (pollCount < 50 && getScheduler().getActiveWorkers().size() > 0)   // TODO: Not implemented
 		{
 			try
 			{
@@ -1428,8 +1427,12 @@ public class ServerMock extends Server.Spigot implements Server
 		{
 			if (!(oldPlugin instanceof JavaPlugin oldJavaPlugin))
 				continue;
+			// This is a little sketchy, but we have to do it since when initializing plugins we create a subclass of the main class.
+			// If we try to then load that subclass as the plugin, it doesn't work, so we need to get the origional class to subclass from again.
+			@SuppressWarnings("unchecked")
+			Class<? extends JavaPlugin> originalClass = (Class<? extends JavaPlugin>) oldJavaPlugin.getClass().getSuperclass();
 			// Don't use MockBukkit#load here since we enable later.
-			JavaPlugin plugin = getPluginManager().loadPlugin(oldJavaPlugin.getClass(), oldJavaPlugin.getDescription(), new Object[0]);
+			JavaPlugin plugin = getPluginManager().loadPlugin(originalClass, oldJavaPlugin.getDescription(), new Object[0]);
 			newPlugins.add(plugin);
 		}
 
