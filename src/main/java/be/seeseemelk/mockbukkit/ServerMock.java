@@ -1428,7 +1428,7 @@ public class ServerMock extends Server.Spigot implements Server
 			if (!(oldPlugin instanceof JavaPlugin oldJavaPlugin))
 				continue;
 			// This is a little sketchy, but we have to do it since when initializing plugins we create a subclass of the main class.
-			// If we try to then load that subclass as the plugin, it doesn't work, so we need to get the origional class to subclass from again.
+			// If we try to then load that subclass as the plugin, it doesn't work, so we need to get the original class to subclass from again.
 			@SuppressWarnings("unchecked")
 			Class<? extends JavaPlugin> originalClass = (Class<? extends JavaPlugin>) oldJavaPlugin.getClass().getSuperclass();
 			// Don't use MockBukkit#load here since we enable later.
