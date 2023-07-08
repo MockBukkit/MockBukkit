@@ -11,8 +11,11 @@ import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.scheduler.BukkitWorker;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.UnmodifiableView;
+import org.opentest4j.AssertionFailedError;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -44,17 +47,21 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	private final ExecutorService asyncEventExecutor = Executors.newCachedThreadPool();
 	private final List<Future<?>> queuedAsyncEvents = new ArrayList<>();
 	private final TaskList scheduledTasks = new TaskList();
+	private final List<BukkitWorker> activeWorkers = new ArrayList<>();
 	private final AtomicReference<Exception> asyncException = new AtomicReference<>();
 	private long currentTick = 0;
 	private final AtomicInteger id = new AtomicInteger();
 	private long executorTimeout = 60000;
+	private final List<BukkitWorker> overdueTasks = new ArrayList<>();
 
-	private static @NotNull Runnable wrapTask(@NotNull ScheduledTask task)
+	private @NotNull Runnable wrapTask(@NotNull ScheduledTask task)
 	{
 		return () ->
 		{
 			task.setRunning(true);
+			if (!task.isSync()) this.activeWorkers.add(task);
 			task.run();
+			if (!task.isSync()) this.activeWorkers.remove(task);
 			task.setRunning(false);
 		};
 	}
@@ -439,8 +446,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public boolean isCurrentlyRunning(int taskId)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return scheduledTasks.tasks.containsKey(taskId);
 	}
 
 	@Override
@@ -457,8 +463,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public @NotNull List<BukkitWorker> getActiveWorkers()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.activeWorkers;
 	}
 
 	@Override
@@ -527,8 +532,8 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public void runTaskAsynchronously(@NotNull Plugin plugin, @NotNull Consumer<BukkitTask> task)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		ScheduledTask scheduledTask = new ScheduledTask(this.id.getAndIncrement(), plugin, false, this.currentTick, task);
+		pool.execute(wrapTask(scheduledTask));
 	}
 
 	@Override
@@ -580,6 +585,32 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	protected int getActiveRunningCount()
 	{
 		return pool.getActiveCount();
+	}
+
+	/**
+	 * Adds any active workers to the overdue tasks list.
+	 */
+	public void saveOverdueTasks()
+	{
+		this.overdueTasks.clear();
+		this.overdueTasks.addAll(getActiveWorkers());
+	}
+
+	/**
+	 * @return A list of overdue tasks saved by {@link #saveOverdueTasks()}.
+	 */
+	public @NotNull @UnmodifiableView List<BukkitWorker> getOverdueTasks()
+	{
+		return Collections.unmodifiableList(this.overdueTasks);
+	}
+
+	/**
+	 * Asserts that there were no overdue tasks from {@link #saveOverdueTasks()}.
+	 */
+	public void assertNoOverdueTasks()
+	{
+		if (!overdueTasks.isEmpty())
+			throw new AssertionFailedError("There are overdue tasks: " + overdueTasks);
 	}
 
 	private static class TaskList

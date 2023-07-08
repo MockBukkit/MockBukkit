@@ -9,10 +9,13 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.opentest4j.AssertionFailedError;
 
 import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
@@ -315,6 +318,64 @@ class BukkitSchedulerMockTest
 	}
 
 	@Test
+	void saveOverdueTasks_EmptyByDefault()
+	{
+		scheduler.saveOverdueTasks();
+		assertTrue(scheduler.getOverdueTasks().isEmpty());
+	}
+
+	@Test
+	void saveOverdueTasks_SavesOverdueTasks() throws InterruptedException
+	{
+		CountDownLatch tasksSaved = new CountDownLatch(1);
+		CountDownLatch taskStarted = new CountDownLatch(1);
+		scheduler.runTaskAsynchronously(null, () ->
+		{
+			try
+			{
+				taskStarted.countDown();
+				tasksSaved.await();
+			}
+			catch (InterruptedException e)
+			{
+			}
+		});
+		taskStarted.await();
+		scheduler.saveOverdueTasks();
+		tasksSaved.countDown();
+		assertFalse(scheduler.getOverdueTasks().isEmpty());
+	}
+
+	@Test
+	void assertNoOverdueTasks()
+	{
+		scheduler.saveOverdueTasks();
+		scheduler.assertNoOverdueTasks();
+	}
+
+	@Test
+	void assertNoOverdueTasks_FailedWhenOverdue() throws InterruptedException
+	{
+		CountDownLatch tasksSaved = new CountDownLatch(1);
+		CountDownLatch taskStarted = new CountDownLatch(1);
+		scheduler.runTaskAsynchronously(null, () ->
+		{
+			try
+			{
+				taskStarted.countDown();
+				tasksSaved.await();
+			}
+			catch (InterruptedException e)
+			{
+			}
+		});
+		taskStarted.await();
+		scheduler.saveOverdueTasks();
+		tasksSaved.countDown();
+		assertThrowsExactly(AssertionFailedError.class, () -> scheduler.assertNoOverdueTasks());
+	}
+
+	@Test
 	void waitAsyncEventsFinished()
 	{
 		MockBukkit.mock();
@@ -465,6 +526,31 @@ class BukkitSchedulerMockTest
 		scheduler.performTicks(2);
 		scheduler.setShutdownTimeout(1000L);
 		scheduler.shutdown();
+	}
+
+	@Test
+	void taskIsRunning()
+	{
+		BukkitTask bukkitTask = scheduler.runTaskTimer(null, () ->
+		{
+		}, 1L, 1L);
+		scheduler.performOneTick();
+		Assertions.assertTrue(scheduler.isCurrentlyRunning(bukkitTask.getTaskId()));
+	}
+
+	@Test
+	void taskNotRunning()
+	{
+		Assertions.assertFalse(scheduler.isCurrentlyRunning(Integer.MAX_VALUE));
+	}
+
+	@Test
+	void runTask_AsyncConsumer() throws Exception
+	{
+		CountDownLatch countDownLatch = new CountDownLatch(1);
+
+		scheduler.runTaskAsynchronously(null, bukkitTask -> countDownLatch.countDown());
+		assertTrue(countDownLatch.await(2, TimeUnit.SECONDS));
 	}
 
 }

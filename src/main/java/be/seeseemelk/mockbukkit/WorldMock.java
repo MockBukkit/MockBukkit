@@ -68,6 +68,7 @@ import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
 import com.destroystokyo.paper.HeightmapType;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
+import io.papermc.paper.event.world.WorldGameRuleChangeEvent;
 import io.papermc.paper.world.MoonPhase;
 import org.bukkit.BlockChangeDelegate;
 import org.bukkit.Bukkit;
@@ -647,6 +648,14 @@ public class WorldMock implements World
 	public void removeMetadata(@NotNull String metadataKey, @NotNull Plugin owningPlugin)
 	{
 		metadataTable.removeMetadata(metadataKey, owningPlugin);
+	}
+
+	/**
+	 * @see MetadataTable#clearMetadata(Plugin)
+	 */
+	public void clearMetadata(Plugin plugin)
+	{
+		metadataTable.clearMetadata(plugin);
 	}
 
 	@Override
@@ -2051,6 +2060,12 @@ public class WorldMock implements World
 		if (gameRule.getType().equals(Boolean.class)
 				&& (value.equalsIgnoreCase("true") || value.equalsIgnoreCase("false")))
 		{
+			WorldGameRuleChangeEvent event =
+					new WorldGameRuleChangeEvent(this, null, gameRule, value);
+			if (!event.callEvent())
+			{
+				return false;
+			}
 			return setGameRule((GameRule<Boolean>) gameRule, value.equalsIgnoreCase("true"));
 		}
 		else if (gameRule.getType().equals(Integer.class))
@@ -2058,6 +2073,12 @@ public class WorldMock implements World
 			try
 			{
 				int intValue = Integer.parseInt(value);
+				WorldGameRuleChangeEvent event =
+						new WorldGameRuleChangeEvent(this, null, gameRule, value);
+				if (!event.callEvent())
+				{
+					return false;
+				}
 				return setGameRule((GameRule<Integer>) gameRule, intValue);
 			}
 			catch (NumberFormatException e)

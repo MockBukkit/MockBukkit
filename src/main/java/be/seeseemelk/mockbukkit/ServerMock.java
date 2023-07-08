@@ -50,6 +50,7 @@ import be.seeseemelk.mockbukkit.tags.TagsMock;
 import com.destroystokyo.paper.entity.ai.MobGoals;
 import com.destroystokyo.paper.event.player.PlayerConnectionCloseEvent;
 import com.destroystokyo.paper.event.server.WhitelistToggleEvent;
+import com.destroystokyo.paper.profile.PlayerProfile;
 import com.google.common.base.Preconditions;
 import io.papermc.paper.datapack.DatapackManager;
 import io.papermc.paper.math.Position;
@@ -104,6 +105,7 @@ import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.server.MapInitializeEvent;
+import org.bukkit.event.server.ServerLoadEvent;
 import org.bukkit.generator.ChunkGenerator.ChunkData;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
@@ -112,6 +114,7 @@ import org.bukkit.inventory.Recipe;
 import org.bukkit.loot.LootTable;
 import org.bukkit.packs.DataPackManager;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.potion.PotionBrewer;
@@ -127,12 +130,14 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -818,7 +823,9 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull Set<String> getIPBans()
 	{
-		return this.playerList.getIPBans().getBanEntries().stream().map(BanEntry::getTarget)
+		return this.playerList.getIPBans().getEntries().stream()
+				.map(BanEntry::getBanTarget)
+				.map(InetAddress::getHostAddress)
 				.collect(Collectors.toSet());
 	}
 
@@ -835,12 +842,26 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	public void banIP(@NotNull InetAddress address)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void unbanIP(@NotNull InetAddress address)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull BanList getBanList(@NotNull Type type)
 	{
 		return switch (type)
 		{
 			case IP -> playerList.getIPBans();
-			case NAME -> playerList.getProfileBans();
+			case NAME, PROFILE -> playerList.getProfileBans();
 		};
 	}
 
@@ -1371,8 +1392,55 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public void reload()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Plugin[] pluginsClone = pluginManager.getPlugins().clone();
+		this.pluginManager.clearPlugins();
+		this.commandMap.clearCommands();
+		for (Plugin plugin : pluginsClone)
+		{
+			getPluginManager().disablePlugin(plugin);
+			getWorlds().stream().map(WorldMock.class::cast).forEach(w -> w.clearMetadata(plugin));
+			getEntities().forEach(e -> e.clearMetadata(plugin));
+			getOnlinePlayers().forEach(p -> p.clearMetadata(plugin));
+		}
+
+//		reloadData(); Not implemented.
+
+		// Wait up to 2.5 seconds for plugins to finish async tasks.
+		int pollCount = 0;
+		while (pollCount < 50 && getScheduler().getActiveWorkers().size() > 0)
+		{
+			try
+			{
+				Thread.sleep(50); // TODO: Can we avoid busy waiting?
+			}
+			catch (InterruptedException ignored)
+			{
+				Thread.currentThread().interrupt();
+			}
+			pollCount++;
+		}
+
+		getScheduler().saveOverdueTasks();
+
+		List<Plugin> newPlugins = new ArrayList<>(pluginsClone.length);
+		for (Plugin oldPlugin : pluginsClone)
+		{
+			if (!(oldPlugin instanceof JavaPlugin oldJavaPlugin))
+				continue;
+			// This is a little sketchy, but we have to do it since when initializing plugins we create a subclass of the main class.
+			// If we try to then load that subclass as the plugin, it doesn't work, so we need to get the original class to subclass from again.
+			@SuppressWarnings("unchecked")
+			Class<? extends JavaPlugin> originalClass = (Class<? extends JavaPlugin>) oldJavaPlugin.getClass().getSuperclass();
+			// Don't use MockBukkit#load here since we enable later.
+			JavaPlugin plugin = getPluginManager().loadPlugin(originalClass, oldJavaPlugin.getDescription(), new Object[0]);
+			newPlugins.add(plugin);
+		}
+
+		newPlugins.stream()
+				.sorted(Comparator.comparing(p -> p.getDescription().getLoad()))
+				.forEach(plugin -> getPluginManager().enablePlugin(plugin));
+
+		new ServerLoadEvent(ServerLoadEvent.LoadType.RELOAD).callEvent();
 	}
 
 	@Override
@@ -1537,12 +1605,17 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public @NotNull Set<OfflinePlayer> getBannedPlayers()
 	{
-		return this.getBanList(Type.NAME)
-				.getBanEntries()
+		return (Set<OfflinePlayer>) this.getBanList(Type.PROFILE)
+				.getEntries()
 				.stream()
-				.map(banEntry -> getOfflinePlayer(banEntry.getTarget()))
+				.map(banEntry ->
+				{
+					return ((BanEntry<PlayerProfile>) banEntry).getBanTarget().getId();
+				})
+				.map(uuid -> this.getOfflinePlayer((UUID) uuid))
 				.collect(Collectors.toSet());
 	}
 

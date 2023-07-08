@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -96,6 +97,30 @@ class MetadataTableTest
 	{
 		MockPlugin plugin1 = MockBukkit.createMockPlugin();
 		assertDoesNotThrow(() -> mt.removeMetadata("MyMetadata", plugin1));
+	}
+
+	@Test
+	void clearMetadata()
+	{
+		MockPlugin plugin1 = MockBukkit.createMockPlugin();
+		mt.setMetadata("MyMetadata", new FixedMetadataValue(plugin1, "wee"));
+		mt.setMetadata("MyMetadata", new FixedMetadataValue(plugin1, "woo"));
+		mt.clearMetadata(plugin1);
+		assertFalse(mt.hasMetadata("MyMetadata"));
+	}
+
+	@Test
+	void clearMetadata_NullPlugin_ThrowsException()
+	{
+		assertThrowsExactly(NullPointerException.class, () -> mt.clearMetadata(null));
+	}
+
+	@Test
+	void clearMetadata_NoneSet_NothingHappens()
+	{
+		MockPlugin plugin1 = MockBukkit.createMockPlugin();
+		mt.clearMetadata(plugin1);
+		assertFalse(mt.hasMetadata("MyMetadata"));
 	}
 
 }
