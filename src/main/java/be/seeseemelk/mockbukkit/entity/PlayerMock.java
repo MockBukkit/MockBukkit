@@ -30,6 +30,7 @@ import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.kyori.adventure.util.TriState;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.BaseComponent;
+import org.bukkit.BanEntry;
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
@@ -106,10 +107,12 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.UnmodifiableView;
 
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Date;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -568,6 +571,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		return MockBukkit.getMock().getBanList(BanList.Type.NAME).isBanned(getName());
 	}
 
+	@Override
+	public @Nullable BanEntry<org.bukkit.profile.PlayerProfile> ban(@Nullable String reason, @Nullable Date expires, @Nullable String source)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 	/**
 	 * This method is an assertion for the currently open {@link InventoryView} for this {@link Player}. The
 	 * {@link Predicate} refers to the top inventory, not the {@link PlayerInventory}. It uses the method
@@ -964,6 +974,20 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		server.getScheduler().executeAsyncEvent(asyncChatEvent);
 		server.getScheduler().executeAsyncEvent(asyncEvent);
 		server.getPluginManager().callEvent(syncEvent);
+	}
+
+	@Override
+	public @Nullable BanEntry<org.bukkit.profile.PlayerProfile> ban(@Nullable String reason, @Nullable Date expires, @Nullable String source, boolean kickPlayer)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable BanEntry<InetAddress> banIp(@Nullable String reason, @Nullable Date expires, @Nullable String source, boolean kickPlayer)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
