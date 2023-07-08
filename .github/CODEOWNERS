@@ -1,16 +1,16 @@
 # Modifications to the source code should be handled by the code review team
 *.java                             @MockBukkit/project-members
+/.readthedocs.yml                  @MockBukkit/project-members
+/jitpack.yml                       @MockBukkit/project-members
+/build.gradle.kts                  @MockBukkit/project-members
+/settings.gradle.kts               @MockBukkit/project-members
+/gradle/                           @MockBukkit/project-members
+/gradlew                           @MockBukkit/project-members
+/gradlew.bat                       @MockBukkit/project-members
+/gradle.properties                 @MockBukkit/project-members
 
 # Modifications to sensitive files should be reviewed by maintainers
 /.github/                          @MockBukkit/maintainers
-/.readthedocs.yml                  @MockBukkit/maintainers
-/jitpack.yml                       @MockBukkit/maintainers
-/build.gradle.kts                  @MockBukkit/maintainers
-/settings.gradle.kts               @MockBukkit/maintainers
-/gradle/                           @MockBukkit/maintainers
-/gradlew                           @MockBukkit/maintainers
-/gradlew.bat                       @MockBukkit/maintainers
-/gradle.properties                 @MockBukkit/maintainers
 /CONTRIBUTING.md                   @MockBukkit/maintainers
 /README.md                         @MockBukkit/maintainers
 /LICENSE                           @MockBukkit/maintainers
