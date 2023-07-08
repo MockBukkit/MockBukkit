@@ -9,8 +9,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
-import org.checkerframework.checker.units.qual.C;
-import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -492,10 +490,8 @@ class BukkitSchedulerMockTest
 	{
 		CountDownLatch countDownLatch = new CountDownLatch(1);
 
-		scheduler.runTaskAsynchronously(null, bukkitTask -> {
-			countDownLatch.countDown();
-		});
-		scheduler.performTicks(10);
-		countDownLatch.await(2, TimeUnit.SECONDS);
+		scheduler.runTaskAsynchronously(null, bukkitTask -> countDownLatch.countDown());
+		assertTrue(countDownLatch.await(2, TimeUnit.SECONDS));
 	}
+
 }
