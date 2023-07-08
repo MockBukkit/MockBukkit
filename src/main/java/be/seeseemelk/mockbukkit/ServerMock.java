@@ -1407,7 +1407,7 @@ public class ServerMock extends Server.Spigot implements Server
 
 		// Wait up to 2.5 seconds for plugins to finish async tasks.
 		int pollCount = 0;
-		while (pollCount < 50 && getScheduler().getActiveWorkers().size() > 0)   // TODO: Not implemented
+		while (pollCount < 50 && getScheduler().getActiveWorkers().size() > 0)
 		{
 			try
 			{
