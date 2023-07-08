@@ -5,7 +5,6 @@ import be.seeseemelk.mockbukkit.MockPlugin;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.TestPlugin;
 import be.seeseemelk.mockbukkit.WorldMock;
-import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.event.ClickEvent;
@@ -38,7 +37,6 @@ import org.junit.jupiter.api.Test;
 import org.spigotmc.event.entity.EntityDismountEvent;
 import org.spigotmc.event.entity.EntityMountEvent;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -1120,92 +1118,6 @@ class EntityMockTest
 	{
 		EntityMock entity = (EntityMock) world.spawnEntity(new Location(world, 0, 0, 0), EntityType.BAT);
 		assertDoesNotThrow(entity::getWidth);
-	}
-
-	@Test
-	void addAndRemoveBossBar()
-	{
-		BossBar bar = BossBar.bossBar(Component.text("Test"), 1, BossBar.Color.BLUE, BossBar.Overlay.PROGRESS);
-		entity.showBossBar(bar);
-		assertEquals(1, entity.getBossBars().size());
-		assertTrue(entity.getBossBars().contains(bar));
-
-		Component name = entity.getBossBars().get(0).name();
-		assertTrue(name instanceof TextComponent);
-		assertEquals("Test", ((TextComponent) name).content());
-		assertEquals(1, entity.getBossBars().get(0).progress());
-		assertEquals(BossBar.Color.BLUE, entity.getBossBars().get(0).color());
-		assertEquals(BossBar.Overlay.PROGRESS, entity.getBossBars().get(0).overlay());
-
-		entity.hideBossBar(bar);
-		assertEquals(0, entity.getBossBars().size());
-		assertFalse(entity.getBossBars().contains(bar));
-	}
-
-	@Test
-	void addAndRemoveMultipleBossBar()
-	{
-		BossBar bar1 = BossBar.bossBar(Component.text("Test1"), 1, BossBar.Color.BLUE, BossBar.Overlay.PROGRESS);
-		BossBar bar2 = BossBar.bossBar(Component.text("Test2"), 1, BossBar.Color.BLUE, BossBar.Overlay.PROGRESS);
-		BossBar bar3 = BossBar.bossBar(Component.text("Test3"), 1, BossBar.Color.BLUE, BossBar.Overlay.PROGRESS);
-
-		entity.showBossBar(bar1);
-		entity.showBossBar(bar2);
-		entity.showBossBar(bar3);
-
-		assertEquals(3, entity.getBossBars().size());
-
-		entity.hideBossBar(bar2);
-
-		assertEquals(2, entity.getBossBars().size());
-		assertTrue(entity.getBossBars().contains(bar1));
-		assertFalse(entity.getBossBars().contains(bar2));
-
-		entity.hideBossBar(bar1);
-
-		assertEquals(1, entity.getBossBars().size());
-		assertFalse(entity.getBossBars().contains(bar1));
-
-		entity.showBossBar(bar2);
-
-		assertEquals(2, entity.getBossBars().size());
-		assertTrue(entity.getBossBars().contains(bar2));
-		assertTrue(entity.getBossBars().contains(bar3));
-	}
-
-	@Test
-	void updateViewedBossBar()
-	{
-		BossBar bar = BossBar.bossBar(Component.text("Test"), 1, BossBar.Color.BLUE, BossBar.Overlay.PROGRESS, Collections.singleton(BossBar.Flag.PLAY_BOSS_MUSIC));
-		entity.showBossBar(bar);
-
-		assertEquals(1, entity.getBossBars().size());
-		assertTrue(entity.getBossBars().contains(bar));
-
-		Component name = entity.getBossBars().get(0).name();
-		assertTrue(name instanceof TextComponent);
-		assertEquals("Test", ((TextComponent) name).content());
-		assertEquals(1, entity.getBossBars().get(0).progress());
-		assertEquals(BossBar.Color.BLUE, entity.getBossBars().get(0).color());
-		assertEquals(BossBar.Overlay.PROGRESS, entity.getBossBars().get(0).overlay());
-		assertEquals(Collections.singleton(BossBar.Flag.PLAY_BOSS_MUSIC), entity.getBossBars().get(0).flags());
-
-		bar.name(Component.text("Test2"));
-		name = entity.getBossBars().get(0).name();
-		assertTrue(name instanceof TextComponent);
-		assertEquals("Test2", ((TextComponent) name).content());
-
-		bar.progress(0.5f);
-		assertEquals(0.5f, entity.getBossBars().get(0).progress());
-
-		bar.color(BossBar.Color.GREEN);
-		assertEquals(BossBar.Color.GREEN, entity.getBossBars().get(0).color());
-
-		bar.overlay(BossBar.Overlay.NOTCHED_10);
-		assertEquals(BossBar.Overlay.NOTCHED_10, entity.getBossBars().get(0).overlay());
-
-		bar.flags(Collections.singleton(BossBar.Flag.DARKEN_SCREEN));
-		assertEquals(Collections.singleton(BossBar.Flag.DARKEN_SCREEN), entity.getBossBars().get(0).flags());
 	}
 
 }

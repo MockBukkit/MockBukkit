@@ -112,6 +112,7 @@ import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.EnumSet;
 import java.util.HashMap;
@@ -169,6 +170,8 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 	private final Queue<String> title = new LinkedTransferQueue<>();
 	private final Queue<String> subitles = new LinkedTransferQueue<>();
+
+	private final Set<BossBar> bossBars = new HashSet<>();
 
 	private Scoreboard scoreboard;
 	private final StatisticsMock statistics = new StatisticsMock();
@@ -782,13 +785,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public @NotNull Set<String> getListeningPluginChannels()
 	{
 		return ImmutableSet.copyOf(channels);
-	}
-
-	@Override
-	public @UnmodifiableView @NotNull Iterable<? extends BossBar> activeBossBars()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -2226,6 +2222,35 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void showBossBar(@NotNull BossBar bar)
+	{
+		this.bossBars.add(bar);
+	}
+
+	@Override
+	public void hideBossBar(@NotNull BossBar bar)
+	{
+		this.bossBars.remove(bar);
+	}
+
+	/**
+	 * Gets an unmodifiable set of all active boss bars currently shown to this player.
+	 * Helper method to {@link PlayerMock#activeBossBars()}.
+	 *
+	 * @see #activeBossBars()
+	 */
+	public @UnmodifiableView @NotNull Set<BossBar> getBossBars()
+	{
+		return Collections.unmodifiableSet(this.bossBars);
+	}
+
+	@Override
+	public @UnmodifiableView @NotNull Iterable<? extends BossBar> activeBossBars()
+	{
+		return getBossBars();
 	}
 
 	@Override
