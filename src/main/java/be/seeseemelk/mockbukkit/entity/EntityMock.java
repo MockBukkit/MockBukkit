@@ -1071,14 +1071,14 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public void showBossBar(@NotNull BossBar bar)
 	{
-        Preconditions.checkNotNull(bar, "Bossbar cannot be null");
+		Preconditions.checkNotNull(bar, "Bossbar cannot be null");
 		this.bossBars.add(bar);
 	}
 
 	@Override
 	public void hideBossBar(@NotNull BossBar bar)
 	{
-        Preconditions.checkNotNull(bar, "Bossbar cannot be null");
+		Preconditions.checkNotNull(bar, "Bossbar cannot be null");
 		this.bossBars.remove(bar);
 	}
 

@@ -1123,10 +1123,11 @@ class EntityMockTest
 	}
 
 	@Test
-	void addAndRemoveBossBar() {
+	void addAndRemoveBossBar()
+	{
 		BossBar bar = BossBar.bossBar(Component.text("Test"), 1, BossBar.Color.BLUE, BossBar.Overlay.PROGRESS);
 		entity.showBossBar(bar);
-		assertEquals( 1, entity.getBossBars().size());
+		assertEquals(1, entity.getBossBars().size());
 		assertTrue(entity.getBossBars().contains(bar));
 
 		Component name = entity.getBossBars().get(0).name();
@@ -1137,12 +1138,13 @@ class EntityMockTest
 		assertEquals(BossBar.Overlay.PROGRESS, entity.getBossBars().get(0).overlay());
 
 		entity.hideBossBar(bar);
-		assertEquals( 0, entity.getBossBars().size());
+		assertEquals(0, entity.getBossBars().size());
 		assertFalse(entity.getBossBars().contains(bar));
 	}
 
 	@Test
-	void addAndRemoveMultipleBossBar() {
+	void addAndRemoveMultipleBossBar()
+	{
 		BossBar bar1 = BossBar.bossBar(Component.text("Test1"), 1, BossBar.Color.BLUE, BossBar.Overlay.PROGRESS);
 		BossBar bar2 = BossBar.bossBar(Component.text("Test2"), 1, BossBar.Color.BLUE, BossBar.Overlay.PROGRESS);
 		BossBar bar3 = BossBar.bossBar(Component.text("Test3"), 1, BossBar.Color.BLUE, BossBar.Overlay.PROGRESS);
@@ -1151,32 +1153,33 @@ class EntityMockTest
 		entity.showBossBar(bar2);
 		entity.showBossBar(bar3);
 
-		assertEquals( 3, entity.getBossBars().size());
+		assertEquals(3, entity.getBossBars().size());
 
 		entity.hideBossBar(bar2);
 
-		assertEquals( 2, entity.getBossBars().size());
+		assertEquals(2, entity.getBossBars().size());
 		assertTrue(entity.getBossBars().contains(bar1));
 		assertFalse(entity.getBossBars().contains(bar2));
 
 		entity.hideBossBar(bar1);
 
-		assertEquals( 1, entity.getBossBars().size());
+		assertEquals(1, entity.getBossBars().size());
 		assertFalse(entity.getBossBars().contains(bar1));
 
 		entity.showBossBar(bar2);
 
-		assertEquals( 2, entity.getBossBars().size());
+		assertEquals(2, entity.getBossBars().size());
 		assertTrue(entity.getBossBars().contains(bar2));
 		assertTrue(entity.getBossBars().contains(bar3));
 	}
 
 	@Test
-	void updateViewedBossBar() {
+	void updateViewedBossBar()
+	{
 		BossBar bar = BossBar.bossBar(Component.text("Test"), 1, BossBar.Color.BLUE, BossBar.Overlay.PROGRESS, Collections.singleton(BossBar.Flag.PLAY_BOSS_MUSIC));
 		entity.showBossBar(bar);
 
-		assertEquals( 1, entity.getBossBars().size());
+		assertEquals(1, entity.getBossBars().size());
 		assertTrue(entity.getBossBars().contains(bar));
 
 		Component name = entity.getBossBars().get(0).name();
@@ -1204,4 +1207,5 @@ class EntityMockTest
 		bar.flags(Collections.singleton(BossBar.Flag.DARKEN_SCREEN));
 		assertEquals(Collections.singleton(BossBar.Flag.DARKEN_SCREEN), entity.getBossBars().get(0).flags());
 	}
+
 }
