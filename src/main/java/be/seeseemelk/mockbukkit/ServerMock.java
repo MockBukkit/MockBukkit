@@ -1428,7 +1428,8 @@ public class ServerMock extends Server.Spigot implements Server
 		{
 			if (!(oldPlugin instanceof JavaPlugin oldJavaPlugin))
 				continue;
-			JavaPlugin plugin = getPluginManager().loadPlugin(oldJavaPlugin.getClass(), oldJavaPlugin.getDescription());
+			// Don't use MockBukkit#load here since we enable later.
+			JavaPlugin plugin = getPluginManager().loadPlugin(oldJavaPlugin.getClass(), oldJavaPlugin.getDescription(), new Object[0]);
 			newPlugins.add(plugin);
 		}
 
@@ -1717,27 +1718,6 @@ public class ServerMock extends Server.Spigot implements Server
 	{
 		Preconditions.checkNotNull(motd, "motd cannot be null");
 		this.motd = LegacyComponentSerializer.legacySection().deserialize(motd);
-	}
-
-	@Override
-	public @NotNull List<String> getInitialEnabledPacks()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull List<String> getInitialDisabledPacks()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull DataPackManager getDataPackManager()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override

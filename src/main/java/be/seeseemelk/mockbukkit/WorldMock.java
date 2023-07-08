@@ -650,6 +650,9 @@ public class WorldMock implements World
 		metadataTable.removeMetadata(metadataKey, owningPlugin);
 	}
 
+	/**
+	 * @see MetadataTable#clearMetadata(Plugin)
+	 */
 	public void clearMetadata(Plugin plugin)
 	{
 		metadataTable.clearMetadata(plugin);
@@ -2827,13 +2830,6 @@ public class WorldMock implements World
 	@Override
 	@Deprecated
 	public void setTicksPerAmbientSpawns(int ticksPerAmbientSpawns)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull Set<FeatureFlag> getFeatureFlags()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
