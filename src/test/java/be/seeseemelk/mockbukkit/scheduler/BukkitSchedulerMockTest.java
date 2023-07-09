@@ -12,6 +12,7 @@ import org.bukkit.scheduler.BukkitTask;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.opentest4j.AssertionFailedError;
 
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CountDownLatch;
@@ -314,6 +315,64 @@ class BukkitSchedulerMockTest
 		scheduler.performTicks(10);
 		scheduler.setShutdownTimeout(10);
 		assertThrows(RuntimeException.class, () -> scheduler.shutdown());
+	}
+
+	@Test
+	void saveOverdueTasks_EmptyByDefault()
+	{
+		scheduler.saveOverdueTasks();
+		assertTrue(scheduler.getOverdueTasks().isEmpty());
+	}
+
+	@Test
+	void saveOverdueTasks_SavesOverdueTasks() throws InterruptedException
+	{
+		CountDownLatch tasksSaved = new CountDownLatch(1);
+		CountDownLatch taskStarted = new CountDownLatch(1);
+		scheduler.runTaskAsynchronously(null, () ->
+		{
+			try
+			{
+				taskStarted.countDown();
+				tasksSaved.await();
+			}
+			catch (InterruptedException e)
+			{
+			}
+		});
+		taskStarted.await();
+		scheduler.saveOverdueTasks();
+		tasksSaved.countDown();
+		assertFalse(scheduler.getOverdueTasks().isEmpty());
+	}
+
+	@Test
+	void assertNoOverdueTasks()
+	{
+		scheduler.saveOverdueTasks();
+		scheduler.assertNoOverdueTasks();
+	}
+
+	@Test
+	void assertNoOverdueTasks_FailedWhenOverdue() throws InterruptedException
+	{
+		CountDownLatch tasksSaved = new CountDownLatch(1);
+		CountDownLatch taskStarted = new CountDownLatch(1);
+		scheduler.runTaskAsynchronously(null, () ->
+		{
+			try
+			{
+				taskStarted.countDown();
+				tasksSaved.await();
+			}
+			catch (InterruptedException e)
+			{
+			}
+		});
+		taskStarted.await();
+		scheduler.saveOverdueTasks();
+		tasksSaved.countDown();
+		assertThrowsExactly(AssertionFailedError.class, () -> scheduler.assertNoOverdueTasks());
 	}
 
 	@Test

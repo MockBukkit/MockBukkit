@@ -650,6 +650,14 @@ public class WorldMock implements World
 		metadataTable.removeMetadata(metadataKey, owningPlugin);
 	}
 
+	/**
+	 * @see MetadataTable#clearMetadata(Plugin)
+	 */
+	public void clearMetadata(Plugin plugin)
+	{
+		metadataTable.clearMetadata(plugin);
+	}
+
 	@Override
 	public int getHighestBlockYAt(int x, int z)
 	{
