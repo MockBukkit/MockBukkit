@@ -64,7 +64,7 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'com.github.seeseemelk:MockBukkit-v1.20:3.3.0'
+    testImplementation 'com.github.seeseemelk:MockBukkit-v1.20:3.9.0'
 }
 ```
 
@@ -110,7 +110,7 @@ MockBukkit can easily be included in Maven using the default Maven Central and P
   <dependency>
     <groupId>com.github.seeseemelk</groupId>
     <artifactId>MockBukkit-v1.20</artifactId>
-    <version>3.4.3</version>
+    <version>3.9.0</version>
     <scope>test</scope>
   </dependency>
 </dependencies>
