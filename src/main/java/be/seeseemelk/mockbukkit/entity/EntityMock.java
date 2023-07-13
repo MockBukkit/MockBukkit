@@ -972,10 +972,10 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 			return false;
 		}
 
-		if (this instanceof Vehicle vehicle && entity instanceof LivingEntity)
+		if (this instanceof Vehicle selfVehicle && entity instanceof LivingEntity)
 		{
 			// If the event is cancelled or the vehicle has since changed, abort
-			if (!new VehicleEnterEvent(vehicle, entity).callEvent() || entity.getVehicle() != this)
+			if (!new VehicleEnterEvent(selfVehicle, entity).callEvent() || entity.getVehicle() != this)
 			{
 				return false;
 			}
@@ -998,10 +998,10 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	 */
 	private boolean tryRemovingPassenger(@NotNull Entity entity)
 	{
-		if (this instanceof Vehicle vehicle && entity instanceof LivingEntity livingEntity)
+		if (this instanceof Vehicle selfVehicle && entity instanceof LivingEntity livingEntity)
 		{
 			// If the event is cancelled or the vehicle has since changed, abort
-			if (!new VehicleExitEvent(vehicle, livingEntity).callEvent() || entity.getVehicle() != this)
+			if (!new VehicleExitEvent(selfVehicle, livingEntity).callEvent() || entity.getVehicle() != this)
 			{
 				return false;
 			}
