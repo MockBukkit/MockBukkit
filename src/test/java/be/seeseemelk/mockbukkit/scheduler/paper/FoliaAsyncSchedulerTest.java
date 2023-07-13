@@ -1,5 +1,7 @@
 package be.seeseemelk.mockbukkit.scheduler.paper;
 
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.MockPlugin;
 import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,7 +9,10 @@ import org.junit.jupiter.api.Test;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class FoliaAsyncSchedulerTest
@@ -32,6 +37,12 @@ class FoliaAsyncSchedulerTest
 	}
 
 	@Test
+	void runNow_NullTask_ThrowsExceptions()
+	{
+		assertThrows(NullPointerException.class, () -> scheduler.runNow(null, null));
+	}
+
+	@Test
 	void runDelayed_RunsTaskLater() throws InterruptedException
 	{
 		CountDownLatch latch = new CountDownLatch(1);
@@ -42,6 +53,41 @@ class FoliaAsyncSchedulerTest
 		assertNotEquals(0, latch.getCount());
 		bukkitScheduler.performTicks(1);
 		assertTrue(latch.await(1, TimeUnit.SECONDS));
+	}
+
+	@Test
+	void runDelayed_NullTask_ThrowsExceptions()
+	{
+		assertThrows(NullPointerException.class, () -> scheduler.runDelayed(null, null, 1, TimeUnit.SECONDS));
+	}
+
+	@Test
+	void runDelayed_NullTimeUnit_ThrowsExceptions()
+	{
+		assertThrows(NullPointerException.class, () -> scheduler.runDelayed(null, (task) ->
+		{
+		}, 1, null));
+	}
+
+	@Test
+	void cancelTasks() throws InterruptedException
+	{
+		MockBukkit.mock();
+		CountDownLatch latch = new CountDownLatch(3);
+		MockPlugin plugin = MockBukkit.createMockPlugin();
+		scheduler.runDelayed(plugin, task -> latch.countDown(), 1, TimeUnit.NANOSECONDS);
+		scheduler.runDelayed(plugin, task -> latch.countDown(), 1, TimeUnit.NANOSECONDS);
+		scheduler.runDelayed(plugin, task -> latch.countDown(), 1, TimeUnit.NANOSECONDS);
+		scheduler.cancelTasks(plugin);
+		bukkitScheduler.performOneTick();
+		assertFalse(latch.await(500, TimeUnit.MILLISECONDS));
+		MockBukkit.unmock();
+	}
+
+	@Test
+	void cancelTasks_NullPlugin_ThrowsException()
+	{
+		assertThrows(NullPointerException.class, () -> scheduler.cancelTasks(null));
 	}
 
 }
