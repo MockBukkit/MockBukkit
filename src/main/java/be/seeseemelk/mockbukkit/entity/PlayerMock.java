@@ -2984,7 +2984,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	public void setLocale(@NotNull Locale locale) {
-		Preconditions.checkNotNull(locale, "Player`s Locale must be not null");
+		Preconditions.checkNotNull(locale, "locale cannot be null");
 		this.locale = locale;
 	}
 }
