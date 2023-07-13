@@ -141,13 +141,13 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public void displayName(@Nullable Component displayName)
 	{
-		this.displayName = GsonComponentSerializer.gson().serialize(displayName);
+		this.displayName = displayName == null ? null : GsonComponentSerializer.gson().serialize(displayName);
 	}
 
 	@Override
 	public @NotNull String getDisplayName()
 	{
-		return this.displayName == null ? null : LegacyComponentSerializer.legacySection().serialize(GsonComponentSerializer.gson().deserialize(this.displayName));
+		return this.displayName == null ? "" : LegacyComponentSerializer.legacySection().serialize(GsonComponentSerializer.gson().deserialize(this.displayName));
 	}
 
 	@Override
