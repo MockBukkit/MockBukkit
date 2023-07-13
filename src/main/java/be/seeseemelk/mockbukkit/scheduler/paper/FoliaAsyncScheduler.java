@@ -47,6 +47,7 @@ public class FoliaAsyncScheduler implements AsyncScheduler
 	{
 		Preconditions.checkNotNull(task, "task cannot be null");
 		Preconditions.checkNotNull(unit, "unit cannot be null");
+		Preconditions.checkNotNull(plugin, "plugin cannot be null");
 		PaperScheduledTask scheduledTask = new PaperScheduledTask(plugin, task);
 		scheduler.runTaskTimerAsynchronously(plugin, scheduledTask::run, toTicks(initialDelay, unit), toTicks(period, unit));
 		return scheduledTask;
