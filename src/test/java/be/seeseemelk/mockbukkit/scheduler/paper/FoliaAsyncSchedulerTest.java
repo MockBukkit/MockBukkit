@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class FoliaAsyncSchedulerTest
+class FoliaAsyncSchedulerTest
 {
 
 	private BukkitSchedulerMock bukkitScheduler;
