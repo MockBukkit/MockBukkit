@@ -20,6 +20,11 @@ import java.util.stream.Stream;
 public class RegistryMock
 {
 
+	private RegistryMock()
+	{
+		throw new UnsupportedOperationException("Utility class");
+	}
+
 	public static <T extends Keyed> Registry<?> createRegistry(Class<T> tClass)
 	{
 
@@ -46,7 +51,6 @@ public class RegistryMock
 			};
 		}
 
-
 		return Stream.of(Registry.class.getDeclaredFields())
 				.filter(a -> Registry.class.isAssignableFrom(a.getType()))
 				.filter(a -> Modifier.isPublic(a.getModifiers()))
@@ -57,7 +61,7 @@ public class RegistryMock
 				.orElseThrow(() -> new UnimplementedOperationException("Could not find registry for " + tClass.getSimpleName()));
 	}
 
-	private static boolean genericTypeMatches(Field a, Class clazz)
+	private static boolean genericTypeMatches(Field a, Class<?> clazz)
 	{
 		if (a.getGenericType() instanceof ParameterizedType type)
 		{
