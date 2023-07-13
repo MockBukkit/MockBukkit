@@ -36,12 +36,13 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Art;
 import org.bukkit.Bukkit;
-import org.bukkit.DyeColor;
 import org.bukkit.Fluid;
 import org.bukkit.GameEvent;
 import org.bukkit.GameMode;
+import org.bukkit.Keyed;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.Registry;
 import org.bukkit.Sound;
 import org.bukkit.Statistic;
 import org.bukkit.Warning;
@@ -61,12 +62,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.memory.MemoryKey;
 import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.event.server.ServerLoadEvent;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.server.MapInitializeEvent;
+import org.bukkit.event.server.ServerLoadEvent;
 import org.bukkit.generator.structure.Structure;
 import org.bukkit.generator.structure.StructureType;
 import org.bukkit.inventory.ItemStack;
@@ -74,23 +75,20 @@ import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.meta.trim.TrimMaterial;
 import org.bukkit.inventory.meta.trim.TrimPattern;
 import org.bukkit.loot.LootTables;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.map.MapView;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import javax.imageio.ImageIO;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -101,8 +99,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -1416,33 +1412,49 @@ class ServerMockTest
 		assertEquals("Test", server.getMotd());
 	}
 
-	@Test
-	void getRegistry() {
-		assertTrue(Bukkit.getRegistry(Art.class).iterator().hasNext());
-		assertTrue(Bukkit.getRegistry(Attribute.class).iterator().hasNext());
-		assertTrue(Bukkit.getRegistry(Biome.class).iterator().hasNext());
-		assertTrue(Bukkit.getRegistry(Enchantment.class).iterator().hasNext());
-		assertTrue(Bukkit.getRegistry(EntityType.class).iterator().hasNext());
-		assertTrue(Bukkit.getRegistry(LootTables.class).iterator().hasNext());
-		assertTrue(Bukkit.getRegistry(Material.class).iterator().hasNext());
-		assertTrue(Bukkit.getRegistry(Statistic.class).iterator().hasNext());
-		assertTrue(Bukkit.getRegistry(Sound.class).iterator().hasNext());
-		assertTrue(Bukkit.getRegistry(Villager.Profession.class).iterator().hasNext());
-		assertTrue(Bukkit.getRegistry(Villager.Type.class).iterator().hasNext());
-		assertTrue(Bukkit.getRegistry(MemoryKey.class).iterator().hasNext());
-		assertTrue(Bukkit.getRegistry(Fluid.class).iterator().hasNext());
-		assertTrue(Bukkit.getRegistry(Frog.Variant.class).iterator().hasNext());
-		assertTrue(Bukkit.getRegistry(GameEvent.class).iterator().hasNext());
-		assertTrue(Bukkit.getRegistry(PotionEffectType.class).iterator().hasNext());
-
-		assertNotNull(Bukkit.getRegistry(KeyedBossBar.class).iterator());
-
-		assertThrows(UnimplementedOperationException.class, () -> Bukkit.getRegistry(Advancement.class).iterator());
-		assertThrows(UnimplementedOperationException.class, () -> Bukkit.getRegistry(TrimMaterial.class).iterator());
-		assertThrows(UnimplementedOperationException.class, () -> Bukkit.getRegistry(TrimPattern.class).iterator());
-		assertThrows(UnimplementedOperationException.class, () -> Bukkit.getRegistry(Structure.class).iterator());
-		assertThrows(UnimplementedOperationException.class, () -> Bukkit.getRegistry(StructureType.class).iterator());
+	@ValueSource(classes = {
+			Art.class,
+			Attribute.class,
+			Biome.class,
+			Enchantment.class,
+			EntityType.class,
+			Fluid.class,
+			Frog.Variant.class,
+			GameEvent.class,
+			KeyedBossBar.class,
+			LootTables.class,
+			Material.class,
+			MemoryKey.class,
+			PotionEffectType.class,
+			Sound.class,
+			Statistic.class,
+			Villager.Profession.class,
+			Villager.Type.class,
+	})
+	@ParameterizedTest
+	void getRegistry_ValidType_HasValues(Class<? extends Keyed> clazz)
+	{
+		Registry<?> registry = Bukkit.getRegistry(clazz);
+		assertNotNull(registry);
+		if (clazz != KeyedBossBar.class)
+			assertTrue(registry.iterator().hasNext());
 	}
+
+	@ValueSource(classes = {
+			Advancement.class,
+			Structure.class,
+			StructureType.class,
+			TrimMaterial.class,
+			TrimPattern.class,
+	})
+	@ParameterizedTest
+	void getRegistry_InvalidType_Throws(Class<? extends Keyed> clazz)
+	{
+		Registry<? extends Keyed> registry = Bukkit.getRegistry(clazz);
+		assertNotNull(registry);
+		assertThrows(UnimplementedOperationException.class, () -> registry.iterator());
+	}
+
 }
 
 class TestRecipe implements Recipe

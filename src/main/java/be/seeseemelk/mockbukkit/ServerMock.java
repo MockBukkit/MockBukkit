@@ -2128,6 +2128,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public @Nullable <T extends Keyed> Registry<T> getRegistry(@NotNull Class<T> tClass)
 	{
 		if (!registry.containsKey(tClass))
