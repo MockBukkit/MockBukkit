@@ -72,16 +72,16 @@ class FoliaAsyncSchedulerTest
 	@Test
 	void cancelTasks() throws InterruptedException
 	{
-		MockBukkit.mock();
 		CountDownLatch latch = new CountDownLatch(3);
+		MockBukkit.mock();
 		MockPlugin plugin = MockBukkit.createMockPlugin();
+		MockBukkit.unmock();
 		scheduler.runDelayed(plugin, task -> latch.countDown(), 1, TimeUnit.NANOSECONDS);
 		scheduler.runDelayed(plugin, task -> latch.countDown(), 1, TimeUnit.NANOSECONDS);
 		scheduler.runDelayed(plugin, task -> latch.countDown(), 1, TimeUnit.NANOSECONDS);
 		scheduler.cancelTasks(plugin);
 		bukkitScheduler.performOneTick();
 		assertFalse(latch.await(500, TimeUnit.MILLISECONDS));
-		MockBukkit.unmock();
 	}
 
 	@Test
