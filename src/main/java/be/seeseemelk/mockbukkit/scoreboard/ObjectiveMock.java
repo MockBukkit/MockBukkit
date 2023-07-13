@@ -84,7 +84,7 @@ public class ObjectiveMock implements Objective
 	@Override
 	public void displayName(@Nullable Component displayName) throws IllegalStateException, IllegalArgumentException
 	{
-		this.displayName = displayName;
+		this.displayName = displayName == null ? Component.empty() : displayName;
 	}
 
 	@Override
