@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.scheduler.paper;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
+import com.google.common.base.Preconditions;
 import io.papermc.paper.threadedregions.scheduler.AsyncScheduler;
 import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import org.bukkit.plugin.Plugin;
@@ -25,6 +26,7 @@ public class FoliaAsyncScheduler implements AsyncScheduler
 	@Override
 	public @NotNull ScheduledTask runNow(@NotNull Plugin plugin, @NotNull Consumer<ScheduledTask> task)
 	{
+		Preconditions.checkNotNull(task, "task cannot be null");
 		PaperScheduledTask scheduledTask = new PaperScheduledTask(plugin, task);
 		scheduler.runTaskAsynchronously(plugin, scheduledTask::run);
 		return scheduledTask;
@@ -33,6 +35,8 @@ public class FoliaAsyncScheduler implements AsyncScheduler
 	@Override
 	public @NotNull ScheduledTask runDelayed(@NotNull Plugin plugin, @NotNull Consumer<ScheduledTask> task, long delay, @NotNull TimeUnit unit)
 	{
+		Preconditions.checkNotNull(task, "task cannot be null");
+		Preconditions.checkNotNull(unit, "unit cannot be null");
 		PaperScheduledTask scheduledTask = new PaperScheduledTask(plugin, task);
 		scheduler.runTaskLaterAsynchronously(plugin, scheduledTask::run, toTicks(delay, unit));
 		return scheduledTask;
@@ -47,6 +51,7 @@ public class FoliaAsyncScheduler implements AsyncScheduler
 	@Override
 	public void cancelTasks(@NotNull Plugin plugin)
 	{
+		Preconditions.checkNotNull(plugin, "plugin cannot be null");
 		scheduler.cancelTasks(plugin);
 	}
 
