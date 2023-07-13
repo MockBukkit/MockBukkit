@@ -29,6 +29,7 @@ public class ScheduledTask implements BukkitTask, BukkitWorker
 	private final @Nullable Consumer<BukkitTask> consumer;
 	private final List<Runnable> cancelListeners = new LinkedList<>();
 	private Thread thread;
+	private boolean submitted = false;
 
 	/**
 	 * Constructs a new {@link ScheduledTask} with the provided parameters.
@@ -144,13 +145,23 @@ public class ScheduledTask implements BukkitTask, BukkitWorker
 	}
 
 	/**
+	 * Marks the task as being submitted to the async thread pool.
+	 * This is used to bypass the #isCancelled check if it gets updated before the task is run.
+	 */
+	@ApiStatus.Internal
+	protected void submitted() {
+		submitted = true;
+	}
+
+	/**
 	 * Runs the task if it has not been cancelled.
 	 */
 	public void run()
 	{
 		thread = Thread.currentThread();
-		if (!isCancelled())
+		if (!isSync && submitted || !isCancelled())
 		{
+			submitted = false;
 			if (this.runnable != null)
 				this.runnable.run();
 			if (this.consumer != null)
