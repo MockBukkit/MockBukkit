@@ -45,7 +45,11 @@ public class FoliaAsyncScheduler implements AsyncScheduler
 	@Override
 	public @NotNull ScheduledTask runAtFixedRate(@NotNull Plugin plugin, @NotNull Consumer<ScheduledTask> task, long initialDelay, long period, @NotNull TimeUnit unit)
 	{
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(task, "task cannot be null");
+		Preconditions.checkNotNull(unit, "unit cannot be null");
+		PaperScheduledTask scheduledTask = new PaperScheduledTask(plugin, task);
+		scheduler.runTaskTimerAsynchronously(plugin, scheduledTask::run, toTicks(initialDelay, unit), toTicks(period, unit));
+		return scheduledTask;
 	}
 
 	@Override
