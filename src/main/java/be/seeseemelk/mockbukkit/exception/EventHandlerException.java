@@ -7,7 +7,7 @@ import java.io.Serial;
 /**
  * Thrown when an event handler throws a non-{@link RuntimeException}
  */
-public class EventHandlerException extends RuntimeException
+public class EventHandlerException extends MockBukkitException
 {
 
 	@Serial

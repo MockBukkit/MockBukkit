@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit;
 
+import be.seeseemelk.mockbukkit.exception.MockBukkitException;
 import io.papermc.paper.world.structure.ConfiguredStructure;
 import org.bukkit.Keyed;
 import org.bukkit.NamespacedKey;
@@ -78,7 +79,7 @@ public class RegistryMock
 		}
 		catch (IllegalAccessException e)
 		{
-			throw new ReflectionAccessException("Could not access field " + a.getDeclaringClass().getSimpleName() + "." + a.getName());
+			throw new MockBukkitException("Could not access field " + a, e);
 		}
 	}
 
