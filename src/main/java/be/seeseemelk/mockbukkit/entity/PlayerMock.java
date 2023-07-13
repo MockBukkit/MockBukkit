@@ -2478,7 +2478,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public @NotNull Locale locale()
 	{
-		return locale;
+		return this.locale;
 	}
 
 	@Override
