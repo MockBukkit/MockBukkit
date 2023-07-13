@@ -179,6 +179,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private final Set<String> channels = new HashSet<>();
 
 	private final List<ItemStack> consumedItems = new LinkedList<>();
+	private Locale locale;
 
 	/**
 	 * Constructs a new {@link PlayerMock} for the provided server with the specified name.
@@ -225,6 +226,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		Random random = ThreadLocalRandom.current();
 		address = new InetSocketAddress("192.0.2." + random.nextInt(255), random.nextInt(32768, 65535));
 		scoreboard = server.getScoreboardManager().getMainScoreboard();
+		locale = Locale.ENGLISH;
 	}
 
 	/**
@@ -2353,8 +2355,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public @NotNull String getLocale()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return locale().toLanguageTag();
 	}
 
 	@Override
@@ -2477,8 +2478,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public @NotNull Locale locale()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return locale;
 	}
 
 	@Override
@@ -2983,4 +2983,8 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 	}
 
+	public void setLocale(@NotNull Locale locale) {
+		Objects.requireNonNull(locale, "Player`s Locale must be not null");
+		this.locale = locale;
+	}
 }
