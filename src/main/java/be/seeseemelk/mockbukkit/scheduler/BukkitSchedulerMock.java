@@ -165,12 +165,12 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	 */
 	public void performOneTick()
 	{
-		currentTick++;
+		long tick = currentTick++;
 		List<ScheduledTask> oldTasks = scheduledTasks.getCurrentTaskList();
 
 		for (ScheduledTask task : oldTasks)
 		{
-			if (task.getScheduledTick() == currentTick && !task.isCancelled())
+			if (task.getScheduledTick() == tick && !task.isCancelled())
 			{
 				if (task.isSync())
 				{
