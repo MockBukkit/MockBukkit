@@ -2478,7 +2478,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public @NotNull Locale locale()
 	{
-		return locale;
+		return this.locale;
 	}
 
 	@Override
@@ -2983,8 +2983,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 	}
 
+	/**
+	 * Sets player locale
+	 *
+	 * @param locale the locale
+	 */
 	public void setLocale(@NotNull Locale locale) {
-		Objects.requireNonNull(locale, "Player`s Locale must be not null");
+		Preconditions.checkNotNull(locale, "locale cannot be null");
 		this.locale = locale;
 	}
 }
