@@ -146,7 +146,8 @@ class UnsafeValuesTest
 		{
 			if (!material.isLegacy())
 				continue;
-			assertThrows(UnimplementedOperationException.class, () -> mockUnsafeValues.fromLegacy(new MaterialData(material)));
+			MaterialData materialData = new MaterialData(material);
+			assertThrows(UnimplementedOperationException.class, () -> mockUnsafeValues.fromLegacy(materialData));
 		}
 	}
 
