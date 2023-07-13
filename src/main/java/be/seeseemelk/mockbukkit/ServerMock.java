@@ -37,6 +37,7 @@ import be.seeseemelk.mockbukkit.inventory.StonecutterInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.WorkbenchInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
 import be.seeseemelk.mockbukkit.map.MapViewMock;
+import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
 import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 import be.seeseemelk.mockbukkit.potion.MockPotionEffectType;
 import be.seeseemelk.mockbukkit.profile.PlayerProfileMock;
@@ -197,6 +198,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private final @NotNull Set<OfflinePlayer> whitelistedPlayers = new LinkedHashSet<>();
 
 	private final @NotNull ServerConfiguration serverConfiguration = new ServerConfiguration();
+	private final Map<Class<?>, Registry<?>> registry = new HashMap<>();
 
 	/**
 	 * Constructs a new ServerMock and sets it up.
@@ -2126,8 +2128,11 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @Nullable <T extends Keyed> Registry<T> getRegistry(@NotNull Class<T> tClass)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (!registry.containsKey(tClass))
+		{
+			registry.put(tClass, RegistryMock.createRegistry(tClass));
+		}
+		return (Registry<T>) registry.get(tClass);
 	}
 
 	@Override
