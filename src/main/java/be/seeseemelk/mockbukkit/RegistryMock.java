@@ -74,7 +74,7 @@ public class RegistryMock
 		}
 		catch (IllegalAccessException e)
 		{
-			throw new RuntimeException(e);
+			throw new ReflectionAccessException("Could not access field " + a.getDeclaringClass().getSimpleName() + "." + a.getName());
 		}
 	}
 
