@@ -1,12 +1,12 @@
 package be.seeseemelk.mockbukkit.ban;
 
 import be.seeseemelk.mockbukkit.profile.PlayerProfileMock;
+import com.destroystokyo.paper.profile.PlayerProfile;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
 import org.bukkit.BanEntry;
 import org.bukkit.Bukkit;
 import org.bukkit.ban.ProfileBanList;
-import org.bukkit.profile.PlayerProfile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class MockProfileBanList implements ProfileBanList
 {
 
@@ -46,11 +47,26 @@ public class MockProfileBanList implements ProfileBanList
 	}
 
 	@Override
+	@Deprecated
+	public <E extends BanEntry<? super PlayerProfile>> @Nullable E addBan(org.bukkit.profile.@NotNull PlayerProfile target, @Nullable String reason, @Nullable Date expires, @Nullable String source)
+	{
+		Preconditions.checkNotNull(target, "Target cannot be null");
+		PlayerProfile profile = Bukkit.createProfile(target.getUniqueId(), target.getName());
+		BanEntry<PlayerProfile> entry = addBan(profile, reason, expires, source);
+
+		return (E) new MockBukkitProfileBanEntry(
+				Bukkit.createPlayerProfile(profile.getUniqueId(), profile.getName()),
+				entry.getSource(),
+				entry.getExpiration(),
+				entry.getReason());
+	}
+
+	@Override
 	public @Nullable BanEntry<PlayerProfile> addBan(@NotNull PlayerProfile target, @Nullable String reason, @Nullable Date expires, @Nullable String source)
 	{
 		Preconditions.checkNotNull(target, TARGET_CANNOT_BE_NULL);
 
-		final BanEntry<PlayerProfile> entry = new MockProfileBanEntry(
+		final BanEntry<PlayerProfile> entry = new MockPaperProfileBanEntry(
 				target,
 				(source == null || source.isBlank()) ? null : source,
 				expires,
@@ -59,6 +75,33 @@ public class MockProfileBanList implements ProfileBanList
 
 		this.bans.put(target.getName(), entry);
 		return entry;
+	}
+
+	@Override
+	@Deprecated
+	public <E extends BanEntry<? super PlayerProfile>> @Nullable E getBanEntry(org.bukkit.profile.@NotNull PlayerProfile target)
+	{
+		Preconditions.checkNotNull(target, TARGET_CANNOT_BE_NULL);
+		PlayerProfile profile = Bukkit.createProfile(target.getUniqueId(), target.getName());
+		return (E) getBanEntry(profile);
+	}
+
+	@Override
+	@Deprecated
+	public boolean isBanned(org.bukkit.profile.@NotNull PlayerProfile target)
+	{
+		Preconditions.checkNotNull(target, TARGET_CANNOT_BE_NULL);
+		PlayerProfile profile = Bukkit.createProfile(target.getUniqueId(), target.getName());
+		return isBanned(profile);
+	}
+
+	@Override
+	@Deprecated
+	public void pardon(org.bukkit.profile.@NotNull PlayerProfile target)
+	{
+		Preconditions.checkNotNull(target, TARGET_CANNOT_BE_NULL);
+		PlayerProfile profile = Bukkit.createProfile(target.getUniqueId(), target.getName());
+		pardon(profile);
 	}
 
 	@Override
