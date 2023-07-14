@@ -15,6 +15,9 @@ public class FoliaAsyncScheduler implements AsyncScheduler
 {
 
 	private static final long NANOS_PER_TICK = 50_000_000;
+	private static final String TASK_CANNOT_BE_NULL = "task cannot be null";
+	private static final String UNIT_CANNOT_BE_NULL = "unit cannot be null";
+	private static final String PLUGIN_CANNOT_BE_NULL = "plugin cannot be null";
 
 	private final BukkitSchedulerMock scheduler;
 
@@ -26,7 +29,7 @@ public class FoliaAsyncScheduler implements AsyncScheduler
 	@Override
 	public @NotNull ScheduledTask runNow(@NotNull Plugin plugin, @NotNull Consumer<ScheduledTask> task)
 	{
-		Preconditions.checkNotNull(task, "task cannot be null");
+		Preconditions.checkNotNull(task, TASK_CANNOT_BE_NULL);
 		PaperScheduledTask scheduledTask = new PaperScheduledTask(plugin, task);
 		scheduler.runTaskAsynchronously(plugin, scheduledTask::run);
 		return scheduledTask;
@@ -35,8 +38,8 @@ public class FoliaAsyncScheduler implements AsyncScheduler
 	@Override
 	public @NotNull ScheduledTask runDelayed(@NotNull Plugin plugin, @NotNull Consumer<ScheduledTask> task, long delay, @NotNull TimeUnit unit)
 	{
-		Preconditions.checkNotNull(task, "task cannot be null");
-		Preconditions.checkNotNull(unit, "unit cannot be null");
+		Preconditions.checkNotNull(task, TASK_CANNOT_BE_NULL);
+		Preconditions.checkNotNull(unit, UNIT_CANNOT_BE_NULL);
 		PaperScheduledTask scheduledTask = new PaperScheduledTask(plugin, task);
 		scheduler.runTaskLaterAsynchronously(plugin, scheduledTask::run, toTicks(delay, unit));
 		return scheduledTask;
@@ -45,9 +48,9 @@ public class FoliaAsyncScheduler implements AsyncScheduler
 	@Override
 	public @NotNull ScheduledTask runAtFixedRate(@NotNull Plugin plugin, @NotNull Consumer<ScheduledTask> task, long initialDelay, long period, @NotNull TimeUnit unit)
 	{
-		Preconditions.checkNotNull(task, "task cannot be null");
-		Preconditions.checkNotNull(unit, "unit cannot be null");
-		Preconditions.checkNotNull(plugin, "plugin cannot be null");
+		Preconditions.checkNotNull(task, TASK_CANNOT_BE_NULL);
+		Preconditions.checkNotNull(unit, UNIT_CANNOT_BE_NULL);
+		Preconditions.checkNotNull(plugin, PLUGIN_CANNOT_BE_NULL);
 		PaperScheduledTask scheduledTask = new PaperScheduledTask(plugin, task);
 		scheduler.runTaskTimerAsynchronously(plugin, scheduledTask::run, toTicks(initialDelay, unit), toTicks(period, unit));
 		return scheduledTask;
@@ -56,7 +59,7 @@ public class FoliaAsyncScheduler implements AsyncScheduler
 	@Override
 	public void cancelTasks(@NotNull Plugin plugin)
 	{
-		Preconditions.checkNotNull(plugin, "plugin cannot be null");
+		Preconditions.checkNotNull(plugin, PLUGIN_CANNOT_BE_NULL);
 		scheduler.cancelTasks(plugin);
 	}
 

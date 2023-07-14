@@ -113,7 +113,8 @@ class FoliaAsyncSchedulerTest
 	@Test
 	void runAtFixedRate_NullTimeUnit_ThrowsExceptions()
 	{
-		assertThrows(NullPointerException.class, () -> scheduler.runAtFixedRate(MockBukkit.createMockPlugin(), (task) ->
+		MockPlugin mockPlugin = MockBukkit.createMockPlugin();
+		assertThrows(NullPointerException.class, () -> scheduler.runAtFixedRate(mockPlugin, (task) ->
 		{
 		}, 1, 1, null));
 	}
