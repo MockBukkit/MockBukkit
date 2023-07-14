@@ -50,7 +50,7 @@ public class MockProfileBanList implements ProfileBanList
 	@Deprecated
 	public <E extends BanEntry<? super PlayerProfile>> @Nullable E addBan(org.bukkit.profile.@NotNull PlayerProfile target, @Nullable String reason, @Nullable Date expires, @Nullable String source)
 	{
-		Preconditions.checkNotNull(target, "Target cannot be null");
+		Preconditions.checkNotNull(target, TARGET_CANNOT_BE_NULL);
 		PlayerProfile profile = Bukkit.createProfile(target.getUniqueId(), target.getName());
 		BanEntry<PlayerProfile> entry = addBan(profile, reason, expires, source);
 
