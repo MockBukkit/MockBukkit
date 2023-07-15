@@ -497,6 +497,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public @NotNull BukkitTask runTaskLaterAsynchronously(@NotNull Plugin plugin, @NotNull Runnable task, long delay)
 	{
+		delay = Math.max(delay, 1);
 		ScheduledTask scheduledTask = new ScheduledTask(id.getAndIncrement(), plugin, false, currentTick + delay,
 				new AsyncRunnable(task));
 		scheduledTasks.addTask(scheduledTask);
@@ -512,6 +513,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	@Override
 	public @NotNull BukkitTask runTaskTimerAsynchronously(@NotNull Plugin plugin, @NotNull Runnable task, long delay, long period)
 	{
+		delay = Math.max(delay, 1);
 		RepeatingTask scheduledTask = new RepeatingTask(id.getAndIncrement(), plugin, false, currentTick + delay, period,
 				new AsyncRunnable(task));
 		scheduledTasks.addTask(scheduledTask);
