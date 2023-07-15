@@ -34,40 +34,61 @@ import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
+import org.bukkit.Art;
+import org.bukkit.Bukkit;
+import org.bukkit.Fluid;
+import org.bukkit.GameEvent;
 import org.bukkit.GameMode;
+import org.bukkit.Keyed;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.Registry;
+import org.bukkit.Sound;
+import org.bukkit.Statistic;
 import org.bukkit.Warning;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.WorldType;
+import org.bukkit.advancement.Advancement;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.block.Biome;
 import org.bukkit.block.data.BlockData;
+import org.bukkit.boss.KeyedBossBar;
 import org.bukkit.command.Command;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Frog;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Villager;
+import org.bukkit.entity.memory.MemoryKey;
 import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.event.server.ServerLoadEvent;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.server.MapInitializeEvent;
+import org.bukkit.event.server.ServerLoadEvent;
+import org.bukkit.generator.structure.Structure;
+import org.bukkit.generator.structure.StructureType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
-import org.bukkit.plugin.Plugin;
+import org.bukkit.inventory.meta.trim.TrimMaterial;
+import org.bukkit.inventory.meta.trim.TrimPattern;
+import org.bukkit.loot.LootTables;
 import org.bukkit.map.MapView;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import javax.imageio.ImageIO;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -1389,6 +1410,49 @@ class ServerMockTest
 	{
 		server.setMotd("Test");
 		assertEquals("Test", server.getMotd());
+	}
+
+	@ValueSource(classes = {
+			Art.class,
+			Attribute.class,
+			Biome.class,
+			Enchantment.class,
+			EntityType.class,
+			Fluid.class,
+			Frog.Variant.class,
+			GameEvent.class,
+			KeyedBossBar.class,
+			LootTables.class,
+			Material.class,
+			MemoryKey.class,
+			PotionEffectType.class,
+			Sound.class,
+			Statistic.class,
+			Villager.Profession.class,
+			Villager.Type.class,
+	})
+	@ParameterizedTest
+	void getRegistry_ValidType_HasValues(Class<? extends Keyed> clazz)
+	{
+		Registry<?> registry = Bukkit.getRegistry(clazz);
+		assertNotNull(registry);
+		if (clazz != KeyedBossBar.class)
+			assertTrue(registry.iterator().hasNext());
+	}
+
+	@ValueSource(classes = {
+			Advancement.class,
+			Structure.class,
+			StructureType.class,
+			TrimMaterial.class,
+			TrimPattern.class,
+	})
+	@ParameterizedTest
+	void getRegistry_InvalidType_Throws(Class<? extends Keyed> clazz)
+	{
+		Registry<? extends Keyed> registry = Bukkit.getRegistry(clazz);
+		assertNotNull(registry);
+		assertThrows(UnimplementedOperationException.class, () -> registry.iterator());
 	}
 
 }

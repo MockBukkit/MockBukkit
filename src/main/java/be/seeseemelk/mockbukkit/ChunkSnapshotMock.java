@@ -157,19 +157,19 @@ public class ChunkSnapshotMock implements ChunkSnapshot
 			throw new ArrayIndexOutOfBoundsException("Index %d out of bounds for length %d".formatted(sy, totalSections));
 		}
 
-		for (int y = minY + (sy << 4); y < (minY + (sy << 4)) + 16; y++)
+		for (int blockY = minY + (sy << 4); blockY < (minY + (sy << 4)) + 16; blockY++)
 		{
-			if (y < minY || y >= maxY)
+			if (blockY < minY || blockY >= maxY)
 			{
 				// We round up when checking if section is too big, so if the height
 				// isn't divisible by 16 we could get an error.
 				break;
 			}
-			for (int x = 0; x < 16; x++)
+			for (int blockX = 0; blockX < 16; blockX++)
 			{
-				for (int z = 0; z < 16; z++)
+				for (int blockZ = 0; blockZ < 16; blockZ++)
 				{
-					if (!getBlockType(x, y, z).isAir())
+					if (!getBlockType(blockX, blockY, blockZ).isAir())
 					{
 						return false;
 					}

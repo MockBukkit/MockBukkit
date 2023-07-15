@@ -37,10 +37,12 @@ import be.seeseemelk.mockbukkit.inventory.StonecutterInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.WorkbenchInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
 import be.seeseemelk.mockbukkit.map.MapViewMock;
+import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
 import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 import be.seeseemelk.mockbukkit.potion.MockPotionEffectType;
 import be.seeseemelk.mockbukkit.profile.PlayerProfileMock;
 import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
+import be.seeseemelk.mockbukkit.scheduler.paper.FoliaAsyncScheduler;
 import be.seeseemelk.mockbukkit.scoreboard.CriteriaMock;
 import be.seeseemelk.mockbukkit.scoreboard.ScoreboardManagerMock;
 import be.seeseemelk.mockbukkit.services.ServicesManagerMock;
@@ -178,6 +180,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private final ScoreboardManagerMock scoreboardManager = new ScoreboardManagerMock();
 	private final Map<String, Criteria> criteria = new HashMap<>();
 	private final BukkitSchedulerMock scheduler = new BukkitSchedulerMock();
+	private final FoliaAsyncScheduler foliaAsyncScheduler = new FoliaAsyncScheduler(scheduler);
 	private final ServicesManagerMock servicesManager = new ServicesManagerMock();
 	private final MockPlayerList playerList = new MockPlayerList();
 	private final MockCommandMap commandMap = new MockCommandMap(this);
@@ -197,6 +200,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private final @NotNull Set<OfflinePlayer> whitelistedPlayers = new LinkedHashSet<>();
 
 	private final @NotNull ServerConfiguration serverConfiguration = new ServerConfiguration();
+	private final Map<Class<?>, Registry<?>> registry = new HashMap<>();
 
 	/**
 	 * Constructs a new ServerMock and sets it up.
@@ -2124,10 +2128,14 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public @Nullable <T extends Keyed> Registry<T> getRegistry(@NotNull Class<T> tClass)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (!registry.containsKey(tClass))
+		{
+			registry.put(tClass, RegistryMock.createRegistry(tClass));
+		}
+		return (Registry<T>) registry.get(tClass);
 	}
 
 	@Override
@@ -2431,7 +2439,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull AsyncScheduler getAsyncScheduler()
 	{
-		throw new UnimplementedOperationException();
+		return this.foliaAsyncScheduler;
 	}
 
 	@Override
