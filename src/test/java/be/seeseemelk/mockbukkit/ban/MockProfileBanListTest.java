@@ -4,6 +4,9 @@ import be.seeseemelk.mockbukkit.MockBukkitExtension;
 import be.seeseemelk.mockbukkit.MockBukkitInject;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.profile.PlayerProfileMock;
+import org.bukkit.BanEntry;
+import org.bukkit.Bukkit;
+import org.bukkit.profile.PlayerProfile;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -173,4 +176,41 @@ class MockProfileBanListTest
 
 	}
 
+	@Test
+	void testAddBanBukkitProfile()
+	{
+		PlayerProfile testPlayer = Bukkit.createPlayerProfile(UUID.randomUUID(), "TestPlayer");
+		banList.addBan(testPlayer,
+				"TestReason",
+				null,
+				null);
+
+		assertTrue(banList.isBanned(testPlayer));
+	}
+
+	@Test
+	void testGetBanEntryBukkit()
+	{
+		PlayerProfile testPlayer = Bukkit.createPlayerProfile(UUID.randomUUID(), "TestPlayer");
+		BanEntry<? super com.destroystokyo.paper.profile.PlayerProfile> banEntry = banList.addBan(testPlayer,
+				"TestReason",
+				null,
+				null);
+
+		assertEquals("TestReason", banList.getBanEntry(testPlayer).getReason());
+	}
+
+	@Test
+	void testPardonBukkit()
+	{
+		PlayerProfile testPlayer = Bukkit.createPlayerProfile(UUID.randomUUID(), "TestPlayer");
+		banList.addBan(testPlayer,
+				"TestReason",
+				null,
+				null);
+
+		assertTrue(banList.isBanned(testPlayer));
+		banList.pardon(testPlayer);
+		assertFalse(banList.isBanned(testPlayer));
+	}
 }

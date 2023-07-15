@@ -16,19 +16,19 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockBukkitExtension.class)
-class MockProfileBanEntryTest
+class MockPaperProfileBanEntryTest
 {
 
 	@MockBukkitInject
 	ServerMock server;
-	MockProfileBanEntry entry;
+	MockPaperProfileBanEntry entry;
 	Player player;
 
 	@BeforeEach
 	void setUp()
 	{
 		player = server.addPlayer();
-		entry = new MockProfileBanEntry(
+		entry = new MockPaperProfileBanEntry(
 				new PlayerProfileMock(player),
 				"source",
 				null,
