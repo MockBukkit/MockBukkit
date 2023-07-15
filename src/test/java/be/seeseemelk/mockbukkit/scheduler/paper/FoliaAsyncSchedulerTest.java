@@ -1,23 +1,29 @@
 package be.seeseemelk.mockbukkit.scheduler.paper;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.MockBukkitExtension;
+import be.seeseemelk.mockbukkit.MockBukkitInject;
 import be.seeseemelk.mockbukkit.MockPlugin;
+import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
+@ExtendWith(MockBukkitExtension.class)
 class FoliaAsyncSchedulerTest
 {
 
+	@MockBukkitInject
+	ServerMock server;
 	private BukkitSchedulerMock bukkitScheduler;
 	private FoliaAsyncScheduler scheduler;
 
@@ -73,9 +79,7 @@ class FoliaAsyncSchedulerTest
 	void cancelTasks() throws InterruptedException
 	{
 		CountDownLatch latch = new CountDownLatch(3);
-		MockBukkit.mock();
 		MockPlugin plugin = MockBukkit.createMockPlugin();
-		MockBukkit.unmock();
 		scheduler.runDelayed(plugin, task -> latch.countDown(), 1, TimeUnit.NANOSECONDS);
 		scheduler.runDelayed(plugin, task -> latch.countDown(), 1, TimeUnit.NANOSECONDS);
 		scheduler.runDelayed(plugin, task -> latch.countDown(), 1, TimeUnit.NANOSECONDS);
@@ -90,4 +94,45 @@ class FoliaAsyncSchedulerTest
 		assertThrows(NullPointerException.class, () -> scheduler.cancelTasks(null));
 	}
 
+	@Test
+	void runAtFixedRate_NullPlugin_ThrowsException()
+	{
+		assertThrows(NullPointerException.class, () -> scheduler.runAtFixedRate(null, (task) ->
+		{
+		}, 1, 1, TimeUnit.SECONDS));
+	}
+
+	@Test
+	void runAtFixedRate_NullTimeUnit_ThrowsExceptions()
+	{
+		MockPlugin mockPlugin = MockBukkit.createMockPlugin();
+		assertThrows(NullPointerException.class, () -> scheduler.runAtFixedRate(mockPlugin, (task) ->
+		{
+		}, 1, 1, null));
+	}
+
+	@Test
+	void runAtFixedRate_NullTask_ThrowsExceptions()
+	{
+		MockPlugin mockPlugin = MockBukkit.createMockPlugin();
+		assertThrows(NullPointerException.class, () ->
+		{
+			scheduler.runAtFixedRate(mockPlugin, null, 1, 1, TimeUnit.SECONDS);
+		});
+	}
+
+	@Test
+	void runAtFixedRate_RunsTask()
+	{
+		CompletableFuture<Boolean> future = new CompletableFuture<>();
+		future.completeOnTimeout(false, 2, TimeUnit.SECONDS);
+		String threadName = Thread.currentThread().getName();
+		scheduler.runAtFixedRate(MockBukkit.createMockPlugin(), (task) ->
+		{
+			future.complete(!Thread.currentThread().getName().equals(threadName));
+		}, 50, 1, TimeUnit.MILLISECONDS);
+
+		bukkitScheduler.performTicks(1L);
+		assertTrue(future.join());
+	}
 }
