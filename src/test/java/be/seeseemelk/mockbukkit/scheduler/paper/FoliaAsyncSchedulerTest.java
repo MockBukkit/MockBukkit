@@ -18,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
 @ExtendWith(MockBukkitExtension.class)
 class FoliaAsyncSchedulerTest
 {
@@ -38,8 +39,26 @@ class FoliaAsyncSchedulerTest
 	void runNow_RunsTask() throws InterruptedException
 	{
 		CountDownLatch latch = new CountDownLatch(1);
-		scheduler.runNow(null, task -> latch.countDown());
-		assertTrue(latch.await(1, java.util.concurrent.TimeUnit.SECONDS));
+		MockPlugin mockPlugin = MockBukkit.createMockPlugin();
+		scheduler.runNow(mockPlugin, task -> latch.countDown());
+		assertTrue(latch.await(1, TimeUnit.SECONDS));
+	}
+
+	@Test
+	void runNow_RunsOnDifferentThread()
+	{
+		CompletableFuture<Boolean> future = new CompletableFuture<>();
+		future.completeOnTimeout(false, 2, TimeUnit.SECONDS);
+		scheduler.runNow(MockBukkit.createMockPlugin(), (task) -> future.complete(!server.isPrimaryThread()));
+		assertTrue(future.join());
+	}
+
+	@Test
+	void runNow_Null_Plugin_ThrowsException()
+	{
+		assertThrows(NullPointerException.class, () -> scheduler.runNow(null, task ->
+		{
+		}));
 	}
 
 	@Test
@@ -52,13 +71,24 @@ class FoliaAsyncSchedulerTest
 	void runDelayed_RunsTaskLater() throws InterruptedException
 	{
 		CountDownLatch latch = new CountDownLatch(1);
-		scheduler.runDelayed(null, task ->
-				latch.countDown(), 100, TimeUnit.MILLISECONDS);
+		MockPlugin mockPlugin = MockBukkit.createMockPlugin();
+		scheduler.runDelayed(mockPlugin, task -> latch.countDown(), 100, TimeUnit.MILLISECONDS);
 		assertNotEquals(0, latch.getCount());
 		bukkitScheduler.performTicks(1);
 		assertNotEquals(0, latch.getCount());
 		bukkitScheduler.performTicks(1);
 		assertTrue(latch.await(1, TimeUnit.SECONDS));
+	}
+
+	@Test
+	void runDelayed_RunsOnDifferentThread()
+	{
+		CompletableFuture<Boolean> future = new CompletableFuture<>();
+		future.completeOnTimeout(false, 2, TimeUnit.SECONDS);
+		MockPlugin mockPlugin = MockBukkit.createMockPlugin();
+		scheduler.runDelayed(mockPlugin, task -> future.complete(!server.isPrimaryThread()), 100, TimeUnit.MILLISECONDS);
+		bukkitScheduler.performTicks(2);
+		assertTrue(future.join());
 	}
 
 	@Test
@@ -115,24 +145,26 @@ class FoliaAsyncSchedulerTest
 	void runAtFixedRate_NullTask_ThrowsExceptions()
 	{
 		MockPlugin mockPlugin = MockBukkit.createMockPlugin();
-		assertThrows(NullPointerException.class, () ->
-		{
-			scheduler.runAtFixedRate(mockPlugin, null, 1, 1, TimeUnit.SECONDS);
-		});
+		assertThrows(NullPointerException.class, () -> scheduler.runAtFixedRate(mockPlugin, null, 1, 1, TimeUnit.SECONDS));
 	}
 
 	@Test
-	void runAtFixedRate_RunsTask()
+	void runAtFixedRate_RunsRepeatedly() throws InterruptedException
+	{
+		CountDownLatch latch = new CountDownLatch(3);
+		scheduler.runAtFixedRate(MockBukkit.createMockPlugin(), (task) -> latch.countDown(), 50, 50, TimeUnit.MILLISECONDS);
+		bukkitScheduler.performTicks(3);
+		assertTrue(latch.await(1, TimeUnit.SECONDS));
+	}
+
+	@Test
+	void runAtFixedRate_RunsOnDifferentThread()
 	{
 		CompletableFuture<Boolean> future = new CompletableFuture<>();
-		future.completeOnTimeout(false, 2, TimeUnit.SECONDS);
-		String threadName = Thread.currentThread().getName();
-		scheduler.runAtFixedRate(MockBukkit.createMockPlugin(), (task) ->
-		{
-			future.complete(!Thread.currentThread().getName().equals(threadName));
-		}, 50, 1, TimeUnit.MILLISECONDS);
-
-		bukkitScheduler.performTicks(1L);
+		future.completeOnTimeout(false, 1, TimeUnit.SECONDS);
+		scheduler.runAtFixedRate(MockBukkit.createMockPlugin(), (task) -> future.complete(!server.isPrimaryThread()), 50, 50, TimeUnit.MILLISECONDS);
+		bukkitScheduler.performTicks(1);
 		assertTrue(future.join());
 	}
+
 }
