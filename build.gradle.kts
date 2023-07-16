@@ -148,14 +148,12 @@ publishing {
 						email.set("sebastiaan.de.schaetzen@gmail.com")
 					}
 					developer{
-						id.set("TheBusyBiscuit")
+						id.set("thebusybiscuit")
 						name.set("TheBusyBiscuit")
-						email.set("mrCookieSlime@gmail.com")
 					}
 					developer {
 						id.set("insprill")
 						name.set("Pierce Thompson")
-						email.set("insprill@gmail.com")
 					}
 					developer {
 						id.set("thelooter")
