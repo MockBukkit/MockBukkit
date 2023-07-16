@@ -564,7 +564,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public boolean clearActivePotionEffects()
 	{
-		final boolean res = activeEffects.size() != 0;
+		final boolean res = !activeEffects.isEmpty();
 		activeEffects.clear();
 		return res;
 	}

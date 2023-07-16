@@ -1,7 +1,6 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.inventory.LlamaInventoryMock;
 import com.google.common.base.Preconditions;
 import org.apache.commons.lang3.tuple.Pair;
@@ -23,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.fail;
  *
  * @see ChestedHorseMock
  */
-public class LlamaMock extends ChestedHorseMock implements Llama
+public class LlamaMock extends ChestedHorseMock implements Llama, MockRangedEntity<LlamaMock>
 {
 
 	private @NotNull Color color = Color.BROWN;
