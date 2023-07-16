@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit;
 
 import com.destroystokyo.paper.util.VersionFetcher;
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Multimap;
 import io.papermc.paper.inventory.ItemRarity;
 import net.kyori.adventure.text.Component;
@@ -104,9 +105,9 @@ public class MockUnsafeValues implements UnsafeValues
 
 
 	@Override
-	public @NotNull Material toLegacy(@NotNull Material material)
+	public Material toLegacy(Material material)
 	{
-		if (material.isLegacy())
+		if (material == null || material.isLegacy())
 		{
 			return material;
 		}
@@ -116,20 +117,29 @@ public class MockUnsafeValues implements UnsafeValues
 	@Override
 	public Material fromLegacy(Material material)
 	{
-		return material;
+		if (material == null || !material.isLegacy())
+		{
+			return material;
+		}
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public Material fromLegacy(MaterialData material)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return fromLegacy(material, false);
 	}
 
 	@Override
-	public Material fromLegacy(MaterialData material, boolean itemPriority)
+	public Material fromLegacy(MaterialData materialData, boolean itemPriority)
 	{
-		// TODO Auto-generated method stub
+		// Paper will blindly call #getItemType even if materialData is null, so we might as well enforce that it isn't.
+		Preconditions.checkNotNull(materialData, "materialData cannot be null");
+		Material material = materialData.getItemType();
+		if (material == null || !material.isLegacy())
+		{
+			return material;
+		}
 		throw new UnimplementedOperationException();
 	}
 
