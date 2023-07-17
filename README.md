@@ -64,7 +64,7 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'com.github.seeseemelk:MockBukkit-v1.20:3.3.0'
+    testImplementation 'com.github.seeseemelk:MockBukkit-v1.20:3.9.0'
 }
 ```
 
@@ -96,7 +96,7 @@ development of MockBukkit.
 <summary><h3>Adding MockBukkit via Maven</h3></summary>
 
 MockBukkit can easily be included in Maven using the default Maven Central and PaperMC repositories.
-Make sure to update the version as necessary.
+> Note: Make sure to update the version as necessary and put this dependency above your dependency that provides bukkit.
 
 ```xml
 <repositories>
@@ -110,7 +110,7 @@ Make sure to update the version as necessary.
   <dependency>
     <groupId>com.github.seeseemelk</groupId>
     <artifactId>MockBukkit-v1.20</artifactId>
-    <version>3.3.0</version>
+    <version>3.9.0</version>
     <scope>test</scope>
   </dependency>
 </dependencies>
@@ -161,14 +161,14 @@ A plugin can be loaded in this initialiser block.
 private ServerMock server;
 private MyPlugin plugin;
 
-@Before
+@BeforeEach
 public void setUp()
 {
     server = MockBukkit.mock();
     plugin = MockBukkit.load(MyPlugin.class);
 }
 
-@After
+@AfterEach
 public void tearDown()
 {
     MockBukkit.unmock();
