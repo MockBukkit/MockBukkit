@@ -1388,8 +1388,7 @@ public class WorldMock implements World
 	@Override
 	public @NotNull Collection<Entity> getNearbyEntities(Location location, double x, double y, double z)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getNearbyEntities(location, x, y, z, null);
 	}
 
 	@Override
@@ -2251,22 +2250,22 @@ public class WorldMock implements World
 	public @NotNull Collection<Entity> getNearbyEntities(Location location, double x, double y, double z,
 														 Predicate<Entity> filter)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getNearbyEntities(BoundingBox.of(location, x, y, z), filter);
 	}
 
 	@Override
 	public @NotNull Collection<Entity> getNearbyEntities(BoundingBox boundingBox)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getNearbyEntities(boundingBox, null);
 	}
 
 	@Override
 	public @NotNull Collection<Entity> getNearbyEntities(BoundingBox boundingBox, Predicate<Entity> filter)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getEntities().stream()
+				.filter(entity -> filter == null || filter.test(entity))
+				.filter(entity -> boundingBox.contains(entity.getLocation().toVector()))
+				.collect(Collectors.toSet());
 	}
 
 	@Override
