@@ -277,7 +277,7 @@ class WorldMockTest
 		WorldMock world = server.addSimpleWorld("world");
 		Location centerLoc = new Location(world, 0, 0, 0);
 		world.spawnEntity(centerLoc, EntityType.ZOMBIE);
-		world.spawnEntity(centerLoc, EntityType.PLAYER);
+		world.spawnEntity(centerLoc, EntityType.ARMOR_STAND);
 		assertEquals(1, world.getNearbyEntities(
 				centerLoc, 1, 1, 1, (e) -> e instanceof ZombieMock).size());
 	}
