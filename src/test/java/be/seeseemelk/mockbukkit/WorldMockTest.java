@@ -265,8 +265,8 @@ class WorldMockTest
 	{
 		WorldMock world = server.addSimpleWorld("world");
 		Location centerLoc = new Location(world, 0, 0, 0);
-		world.spawnEntity(centerLoc, EntityType.CHICKEN);
-		world.spawnEntity(centerLoc.add(64, 0, 64), EntityType.CHICKEN);
+		world.spawnEntity(centerLoc, EntityType.ZOMBIE);
+		world.spawnEntity(centerLoc.add(64, 0, 64), EntityType.ZOMBIE);
 		assertEquals(1, world.getNearbyEntities(
 				centerLoc, 16, 1, 16).size());
 	}
@@ -276,10 +276,10 @@ class WorldMockTest
 	{
 		WorldMock world = server.addSimpleWorld("world");
 		Location centerLoc = new Location(world, 0, 0, 0);
-		world.spawnEntity(centerLoc, EntityType.CHICKEN);
-		world.spawnEntity(centerLoc, EntityType.RABBIT);
+		world.spawnEntity(centerLoc, EntityType.ZOMBIE);
+		world.spawnEntity(centerLoc, EntityType.PLAYER);
 		assertEquals(1, world.getNearbyEntities(
-				centerLoc, 1, 1, 1, (e) -> e instanceof ChickenMock).size());
+				centerLoc, 1, 1, 1, (e) -> e instanceof ZombieMock).size());
 	}
 
 	@Test
