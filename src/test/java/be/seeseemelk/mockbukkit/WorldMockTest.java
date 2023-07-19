@@ -4,6 +4,7 @@ import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import be.seeseemelk.mockbukkit.block.state.BlockStateMock;
 import be.seeseemelk.mockbukkit.entity.AllayMock;
+import be.seeseemelk.mockbukkit.entity.AreaEffectCloudMock;
 import be.seeseemelk.mockbukkit.entity.ArmorStandMock;
 import be.seeseemelk.mockbukkit.entity.AxolotlMock;
 import be.seeseemelk.mockbukkit.entity.BatMock;
@@ -1093,7 +1094,8 @@ class WorldMockTest
 				Arguments.of(EntityType.MINECART_HOPPER, HopperMinecartMock.class),
 				Arguments.of(EntityType.MINECART_MOB_SPAWNER, SpawnerMinecartMock.class),
 				Arguments.of(EntityType.MINECART, RideableMinecartMock.class),
-				Arguments.of(EntityType.MINECART_CHEST, StorageMinecartMock.class)
+				Arguments.of(EntityType.MINECART_CHEST, StorageMinecartMock.class),
+				Arguments.of(EntityType.AREA_EFFECT_CLOUD, AreaEffectCloudMock.class)
 		);
 	}
 
