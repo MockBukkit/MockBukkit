@@ -88,6 +88,7 @@ import org.bukkit.event.weather.ThunderChangeEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
 import org.bukkit.event.world.TimeSkipEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.BoundingBox;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -258,6 +259,58 @@ class WorldMockTest
 		assertEquals(1, world.getEntitiesByClass(new Class[]{ ZombieMock.class }).size());
 		assertEquals(1, world.getEntitiesByClass(new Class[]{ ItemEntityMock.class }).size());
 		assertEquals(2, world.getEntitiesByClass(new Class[]{ ZombieMock.class, ItemEntityMock.class }).size());
+	}
+
+	@Test
+	void getNearbyEntities_DifferentLocations()
+	{
+		WorldMock world = server.addSimpleWorld("world");
+		Location centerLoc = new Location(world, 0, 0, 0);
+		world.spawnEntity(centerLoc, EntityType.ZOMBIE);
+		world.spawnEntity(centerLoc.add(64, 0, 64), EntityType.ZOMBIE);
+		assertEquals(1, world.getNearbyEntities(
+				centerLoc, 16, 1, 16).size());
+	}
+
+	@Test
+	void getNearbyEntities_TypeFilter()
+	{
+		WorldMock world = server.addSimpleWorld("world");
+		Location centerLoc = new Location(world, 0, 0, 0);
+		world.spawnEntity(centerLoc, EntityType.ZOMBIE);
+		world.spawnEntity(centerLoc, EntityType.ARMOR_STAND);
+		assertEquals(1, world.getNearbyEntities(
+				centerLoc, 1, 1, 1, (e) -> e instanceof ZombieMock).size());
+	}
+
+	@Test
+	void getNearbyEntities_InBoundingBox()
+	{
+		WorldMock world = server.addSimpleWorld("world");
+		Location centerLoc = new Location(world, 0, 0, 0);
+		Location insideLoc = new Location(world, 0, 1, 7);
+		Location outsideLoc = new Location(world, 0, 1, 8);
+		world.spawnEntity(insideLoc, EntityType.LLAMA);
+		world.spawnEntity(insideLoc, EntityType.LLAMA);
+		world.spawnEntity(insideLoc, EntityType.FROG);
+		world.spawnEntity(outsideLoc, EntityType.POLAR_BEAR);
+		BoundingBox box = BoundingBox.of(centerLoc, 1,2,8);
+		assertEquals(3, world.getNearbyEntities(box).size());
+	}
+
+	@Test
+	void getNearbyEntities_InBoundingBox_TypeFilter()
+	{
+		WorldMock world = server.addSimpleWorld("world");
+		Location centerLoc = new Location(world, 0, 0, 0);
+		Location insideLoc = new Location(world, 0, 63, 7);
+		Location outsideLoc = new Location(world, 0, 63, 8);
+		world.spawnEntity(insideLoc, EntityType.LLAMA);
+		world.spawnEntity(insideLoc, EntityType.LLAMA);
+		world.spawnEntity(insideLoc, EntityType.FROG);
+		world.spawnEntity(outsideLoc, EntityType.POLAR_BEAR);
+		BoundingBox box = BoundingBox.of(centerLoc, 1,64,8);
+		assertEquals(2, world.getNearbyEntities(box, (e) -> e instanceof LlamaMock).size());
 	}
 
 	@Test
