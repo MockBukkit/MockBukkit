@@ -158,7 +158,6 @@ publishing {
 					developer {
 						id.set("thelooter")
 						name.set("Eve Kolb")
-						email.set("evekolb2204@gmail.com")
 					}
 				}
 			}
