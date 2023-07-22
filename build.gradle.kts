@@ -147,6 +147,18 @@ publishing {
 						name.set("Sebastiaan de Schaetzen")
 						email.set("sebastiaan.de.schaetzen@gmail.com")
 					}
+					developer{
+						id.set("thebusybiscuit")
+						name.set("TheBusyBiscuit")
+					}
+					developer {
+						id.set("insprill")
+						name.set("Pierce Thompson")
+					}
+					developer {
+						id.set("thelooter")
+						name.set("Eve Kolb")
+					}
 				}
 			}
 		}
