@@ -19,7 +19,6 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
@@ -192,7 +191,7 @@ class AreaEffectCloudMockTest
 	void testAddCustomEffect()
 	{
 		assertTrue(areaEffectCloud.addCustomEffect(
-				new PotionEffect(PotionEffectType.ABSORPTION,1,1),
+				new PotionEffect(PotionEffectType.ABSORPTION, 1, 1),
 				true));
 		assertEquals(1, areaEffectCloud.getCustomEffects().size());
 	}
@@ -200,7 +199,7 @@ class AreaEffectCloudMockTest
 	@Test
 	void testHasCustomEffect()
 	{
-		PotionEffect effect = new PotionEffect(PotionEffectType.ABSORPTION,1,1);
+		PotionEffect effect = new PotionEffect(PotionEffectType.ABSORPTION, 1, 1);
 		areaEffectCloud.addCustomEffect(effect, true);
 		assertTrue(areaEffectCloud.hasCustomEffect(effect.getType()));
 	}
@@ -215,7 +214,7 @@ class AreaEffectCloudMockTest
 	@Test
 	void testHasCustomEffects()
 	{
-		PotionEffect effect = new PotionEffect(PotionEffectType.ABSORPTION,1,1);
+		PotionEffect effect = new PotionEffect(PotionEffectType.ABSORPTION, 1, 1);
 		areaEffectCloud.addCustomEffect(effect, true);
 		assertTrue(areaEffectCloud.hasCustomEffects());
 	}
@@ -231,7 +230,7 @@ class AreaEffectCloudMockTest
 	void testHasCustomEffectWithBasePotionDataWithEffect()
 	{
 		areaEffectCloud.setBasePotionData(new PotionData(PotionType.INSTANT_HEAL));
-		PotionEffect effect = new PotionEffect(PotionEffectType.ABSORPTION,1,1);
+		PotionEffect effect = new PotionEffect(PotionEffectType.ABSORPTION, 1, 1);
 		assertTrue(areaEffectCloud.addCustomEffect(effect, true));
 	}
 
@@ -239,7 +238,7 @@ class AreaEffectCloudMockTest
 	void testHasCustomEffectWithBasePotionDataWithoutEffectAndMatchingInCustom()
 	{
 		areaEffectCloud.setBasePotionData(new PotionData(PotionType.INSTANT_HEAL));
-		PotionEffect effect = new PotionEffect(PotionEffectType.HEAL,1,1);
+		PotionEffect effect = new PotionEffect(PotionEffectType.HEAL, 1, 1);
 		assertFalse(areaEffectCloud.hasCustomEffects());
 	}
 
@@ -247,9 +246,9 @@ class AreaEffectCloudMockTest
 	void testAddCustomEffectWithBasePotionDataWithEffect()
 	{
 		areaEffectCloud.setBasePotionData(new PotionData(PotionType.INSTANT_HEAL));
-		PotionEffect effect = new PotionEffect(PotionEffectType.HEAL,1,1);
+		PotionEffect effect = new PotionEffect(PotionEffectType.HEAL, 1, 1);
 		assertTrue(areaEffectCloud.addCustomEffect(effect, true));
-		PotionEffect effect2 = new PotionEffect(PotionEffectType.HEAL,1,1);
+		PotionEffect effect2 = new PotionEffect(PotionEffectType.HEAL, 1, 1);
 		assertTrue(areaEffectCloud.addCustomEffect(effect2, true));
 		assertNotSame(effect, areaEffectCloud.getCustomEffects().get(0));
 	}
@@ -258,9 +257,9 @@ class AreaEffectCloudMockTest
 	void testAddCustomEffectWithBasePotionDataWithEffectOverrideFalse()
 	{
 		areaEffectCloud.setBasePotionData(new PotionData(PotionType.INSTANT_HEAL));
-		PotionEffect effect = new PotionEffect(PotionEffectType.HEAL,1,1);
+		PotionEffect effect = new PotionEffect(PotionEffectType.HEAL, 1, 1);
 		assertTrue(areaEffectCloud.addCustomEffect(effect, true));
-		PotionEffect effect2 = new PotionEffect(PotionEffectType.HEAL,1,1);
+		PotionEffect effect2 = new PotionEffect(PotionEffectType.HEAL, 1, 1);
 		assertFalse(areaEffectCloud.addCustomEffect(effect2, false));
 		assertSame(effect, areaEffectCloud.getCustomEffects().get(0));
 	}
@@ -268,7 +267,7 @@ class AreaEffectCloudMockTest
 	@Test
 	void testRemoveCustomEffect()
 	{
-		PotionEffect effect = new PotionEffect(PotionEffectType.ABSORPTION,1,1);
+		PotionEffect effect = new PotionEffect(PotionEffectType.ABSORPTION, 1, 1);
 		areaEffectCloud.addCustomEffect(effect, true);
 		assertTrue(areaEffectCloud.removeCustomEffect(effect.getType()));
 	}
@@ -282,7 +281,7 @@ class AreaEffectCloudMockTest
 	@Test
 	void testClearCustomEffects()
 	{
-		PotionEffect effect = new PotionEffect(PotionEffectType.ABSORPTION,1,1);
+		PotionEffect effect = new PotionEffect(PotionEffectType.ABSORPTION, 1, 1);
 		areaEffectCloud.addCustomEffect(effect, true);
 		assertEquals(1, areaEffectCloud.getCustomEffects().size());
 		areaEffectCloud.clearCustomEffects();
@@ -349,4 +348,5 @@ class AreaEffectCloudMockTest
 		areaEffectCloud.setOwnerUniqueId(uuid);
 		assertEquals(uuid, areaEffectCloud.getOwnerUniqueId());
 	}
+
 }

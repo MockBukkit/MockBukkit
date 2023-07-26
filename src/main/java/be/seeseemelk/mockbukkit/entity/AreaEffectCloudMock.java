@@ -30,7 +30,7 @@ public class AreaEffectCloudMock extends EntityMock implements AreaEffectCloud
 	private float radiusPerTick = 0.0f;
 	private Particle particle = Particle.SPELL_MOB;
 	private PotionData basePotionData = new PotionData(PotionType.UNCRAFTABLE);
-	private List<PotionEffect> customEffects = new ArrayList<>();
+	private final List<PotionEffect> customEffects = new ArrayList<>();
 	private int color = 0;
 	private ProjectileSource source = null;
 	private UUID ownerId = null;
@@ -192,6 +192,7 @@ public class AreaEffectCloudMock extends EntityMock implements AreaEffectCloud
 				.orElse(null);
 
 		if (existingEffect != null)
+		{
 			if (overwrite)
 			{
 				this.customEffects.remove(existingEffect);
@@ -202,6 +203,7 @@ public class AreaEffectCloudMock extends EntityMock implements AreaEffectCloud
 			{
 				return false;
 			}
+		}
 
 		this.customEffects.add(effect);
 		return true;
