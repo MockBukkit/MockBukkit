@@ -553,4 +553,211 @@ class BukkitSchedulerMockTest
 		assertTrue(countDownLatch.await(2, TimeUnit.SECONDS));
 	}
 
+	@Test
+	void registerOneTasksAsynchronously()
+	{
+		final Thread mainThread = Thread.currentThread();
+
+		AtomicBoolean executed = new AtomicBoolean();
+		AtomicBoolean completed = new AtomicBoolean();
+		AtomicBoolean notPrimaryThread = new AtomicBoolean();
+		Thread thread = new Thread(() ->
+		{
+			try
+			{
+				scheduler.runTaskLater(null, bukkitTask ->
+				{
+					if (mainThread != Thread.currentThread())
+					{
+						notPrimaryThread.set(true);
+					}
+					executed.set(true);
+				}, 1);
+			}
+			finally
+			{
+				completed.set(true);
+			}
+		});
+		thread.start();
+
+		// Wait for thread to register the task
+		while (!completed.get())
+		{
+			scheduler.performOneTick();
+			Thread.yield();
+		}
+
+		while (!executed.get())
+		{
+			scheduler.performOneTick();
+		}
+
+		assertTrue(executed.get());
+		assertFalse(notPrimaryThread.get());
+	}
+
+	@Test
+	void registerMultipleTasksAsynchronously()
+	{
+		final int toExecute = 100;
+		final Thread mainThread = Thread.currentThread();
+
+		AtomicInteger executed = new AtomicInteger();
+		AtomicBoolean completed = new AtomicBoolean();
+		AtomicBoolean notPrimaryThread = new AtomicBoolean();
+		Thread thread = new Thread(() ->
+		{
+			try
+			{
+				for (int i = 0; i < toExecute; i++)
+				{
+					scheduler.runTaskLater(null, bukkitTask ->
+					{
+						if (mainThread != Thread.currentThread())
+						{
+							notPrimaryThread.set(true);
+						}
+						executed.incrementAndGet();
+					}, 1);
+				}
+			}
+			finally
+			{
+				completed.set(true);
+			}
+		});
+		thread.start();
+
+		// Wait for thread to register the task
+		while (!completed.get())
+		{
+			scheduler.performOneTick();
+			Thread.yield();
+		}
+
+		while (executed.get() < toExecute)
+		{
+			scheduler.performOneTick();
+		}
+
+		assertEquals(toExecute, executed.get());
+		assertFalse(notPrimaryThread.get());
+	}
+
+	@Test
+	void registerOneTimerTasksAsynchronously()
+	{
+		final int toExecute = 100;
+		final Thread mainThread = Thread.currentThread();
+
+		AtomicBoolean executed = new AtomicBoolean();
+		AtomicBoolean completed = new AtomicBoolean();
+		AtomicBoolean notPrimaryThread = new AtomicBoolean();
+		Thread thread = new Thread(() ->
+		{
+			try
+			{
+				scheduler.runTaskTimer(null, new Consumer<>()
+				{
+					int executions = 0;
+
+					@Override
+					public void accept(BukkitTask bukkitTask)
+					{
+						if (mainThread != Thread.currentThread())
+						{
+							notPrimaryThread.set(true);
+						}
+						executions++;
+						if (executions == toExecute)
+						{
+							executed.set(true);
+							bukkitTask.cancel();
+						}
+					}
+				}, 0, 1);
+			}
+			finally
+			{
+				completed.set(true);
+			}
+		});
+		thread.start();
+
+		// Wait for thread to register the task
+		while (!completed.get())
+		{
+			scheduler.performOneTick();
+			Thread.yield();
+		}
+
+		while (!executed.get())
+		{
+			scheduler.performOneTick();
+		}
+
+		assertTrue(executed.get());
+		assertFalse(notPrimaryThread.get());
+	}
+
+	@Test
+	void registerMultipleTimerTasksAsynchronously()
+	{
+		final int toExecute = 100;
+		final Thread mainThread = Thread.currentThread();
+
+		AtomicInteger executed = new AtomicInteger();
+		AtomicBoolean completed = new AtomicBoolean();
+		AtomicBoolean notPrimaryThread = new AtomicBoolean();
+		Thread thread = new Thread(() ->
+		{
+			try
+			{
+				for (int i = 0; i < toExecute; i++)
+				{
+					scheduler.runTaskTimer(null, new Consumer<>()
+					{
+						int executions = 0;
+
+						@Override
+						public void accept(BukkitTask bukkitTask)
+						{
+							if (mainThread != Thread.currentThread())
+							{
+								notPrimaryThread.set(true);
+							}
+							executions++;
+							if (executions == toExecute)
+							{
+								executed.incrementAndGet();
+								bukkitTask.cancel();
+							}
+						}
+					}, 0, 1);
+				}
+			}
+			finally
+			{
+				completed.set(true);
+			}
+		});
+		thread.start();
+
+		// Wait for thread to register the task
+		while (!completed.get())
+		{
+			scheduler.performOneTick();
+			Thread.yield();
+		}
+
+		while (executed.get() < toExecute)
+		{
+			scheduler.performOneTick();
+		}
+
+		assertEquals(toExecute, executed.get());
+		assertFalse(notPrimaryThread.get());
+	}
+
 }
