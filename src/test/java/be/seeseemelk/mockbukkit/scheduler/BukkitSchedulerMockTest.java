@@ -31,6 +31,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class BukkitSchedulerMockTest
 {
@@ -581,15 +582,19 @@ class BukkitSchedulerMockTest
 		});
 		thread.start();
 
+		long startTime = System.currentTimeMillis();
+
 		// Wait for thread to register the task
 		while (!completed.get())
 		{
+			checkTimeout(startTime, thread);
 			scheduler.performOneTick();
 			Thread.yield();
 		}
 
 		while (!executed.get())
 		{
+			checkTimeout(startTime);
 			scheduler.performOneTick();
 		}
 
@@ -610,7 +615,7 @@ class BukkitSchedulerMockTest
 		{
 			try
 			{
-				for (int i = 0; i < toExecute; i++)
+				for (int i = 0; i < toExecute && !Thread.interrupted(); i++)
 				{
 					scheduler.runTaskLater(null, bukkitTask ->
 					{
@@ -629,15 +634,19 @@ class BukkitSchedulerMockTest
 		});
 		thread.start();
 
+		long startTime = System.currentTimeMillis();
+
 		// Wait for thread to register the task
 		while (!completed.get())
 		{
+			checkTimeout(startTime, thread);
 			scheduler.performOneTick();
 			Thread.yield();
 		}
 
 		while (executed.get() < toExecute)
 		{
+			checkTimeout(startTime);
 			scheduler.performOneTick();
 		}
 
@@ -685,15 +694,19 @@ class BukkitSchedulerMockTest
 		});
 		thread.start();
 
+		long startTime = System.currentTimeMillis();
+
 		// Wait for thread to register the task
 		while (!completed.get())
 		{
+			checkTimeout(startTime, thread);
 			scheduler.performOneTick();
 			Thread.yield();
 		}
 
 		while (!executed.get())
 		{
+			checkTimeout(startTime);
 			scheduler.performOneTick();
 		}
 
@@ -714,7 +727,7 @@ class BukkitSchedulerMockTest
 		{
 			try
 			{
-				for (int i = 0; i < toExecute; i++)
+				for (int i = 0; i < toExecute && !Thread.interrupted(); i++)
 				{
 					scheduler.runTaskTimer(null, new Consumer<>()
 					{
@@ -744,20 +757,37 @@ class BukkitSchedulerMockTest
 		});
 		thread.start();
 
+		long startTime = System.currentTimeMillis();
+
 		// Wait for thread to register the task
 		while (!completed.get())
 		{
+			checkTimeout(startTime, thread);
 			scheduler.performOneTick();
 			Thread.yield();
 		}
 
 		while (executed.get() < toExecute)
 		{
+			checkTimeout(startTime);
 			scheduler.performOneTick();
 		}
 
 		assertEquals(toExecute, executed.get());
 		assertFalse(notPrimaryThread.get());
+	}
+
+	private void checkTimeout(long startTime) {
+		if (System.currentTimeMillis() - startTime > 60000L) {
+			fail("Timeout");
+		}
+	}
+
+	private void checkTimeout(long startTime, Thread thread) {
+		if (System.currentTimeMillis() - startTime > 60000L) {
+			thread.interrupt();
+			fail("Timeout");
+		}
 	}
 
 }
