@@ -125,6 +125,7 @@ import org.bukkit.scoreboard.Criteria;
 import org.bukkit.structure.StructureManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.spigotmc.event.player.PlayerSpawnLocationEvent;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -322,6 +323,10 @@ public class ServerMock extends Server.Spigot implements Server
 			playerList.disconnectPlayer(player);
 			return;
 		}
+
+		PlayerSpawnLocationEvent playerSpawnLocationEvent = new PlayerSpawnLocationEvent(player, player.getLocation());
+		getPluginManager().callEvent(playerSpawnLocationEvent);
+		player.setLocation(playerSpawnLocationEvent.getSpawnLocation());
 
 		registerEntity(player);
 	}
