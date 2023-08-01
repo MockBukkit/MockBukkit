@@ -86,6 +86,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.spigotmc.event.player.PlayerSpawnLocationEvent;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -204,6 +205,13 @@ class ServerMockTest
 	{
 		PlayerMock player = server.addPlayer();
 		server.getPluginManager().assertEventFired(PlayerLoginEvent.class);
+	}
+
+	@Test
+	void addPlayer_Calls_PlayerSpawnLocationEvent()
+	{
+		PlayerMock player = server.addPlayer();
+		server.getPluginManager().assertEventFired(PlayerSpawnLocationEvent.class);
 	}
 
 	@Test
