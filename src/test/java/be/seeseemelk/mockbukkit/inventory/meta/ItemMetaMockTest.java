@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.inventory.meta;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.MockPlugin;
+import com.destroystokyo.paper.Namespaced;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import org.bukkit.Material;
@@ -24,10 +25,12 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -516,6 +519,28 @@ class ItemMetaMockTest
 	}
 
 	@Test
+	void testDestroyableKeysSet() {
+		Set<Namespaced> expectedKeys = Set.of(
+				Material.CAKE.getKey(),
+				Material.CHEST.getKey(),
+				Material.ACACIA_SLAB.getKey()
+		);
+		meta.setDestroyableKeys(expectedKeys);
+		assertEquals(expectedKeys, meta.getDestroyableKeys());
+	}
+
+	@Test
+	void testPlaceableKeys() {
+		Set<Namespaced> expectedKeys = Set.of(
+				Material.ACACIA_PRESSURE_PLATE.getKey(),
+				Material.BLACK_WOOL.getKey(),
+				Material.CRIMSON_NYLIUM.getKey()
+		);
+		meta.setPlaceableKeys(expectedKeys);
+		assertEquals(expectedKeys, meta.getPlaceableKeys());
+	}
+
+	@Test
 	void testDamageCorrectlySet()
 	{
 		int value = 500;
@@ -590,6 +615,17 @@ class ItemMetaMockTest
 		meta.setDamage(5);
 		meta.setRepairCost(3);
 
+		Set<Namespaced> expectedPlaceableKeys = Set.of(
+				Material.STONE.getKey(),
+				Material.ACACIA_BOAT.getKey()
+		);
+		meta.setPlaceableKeys(expectedPlaceableKeys);
+
+		Set<Namespaced> expectedDestroyableKeys = Set.of(
+				Material.BEEHIVE.getKey()
+		);
+		meta.setDestroyableKeys(expectedDestroyableKeys);
+
 		Map<String, Object> actual = meta.serialize();
 
 		// Perform tests
@@ -598,6 +634,8 @@ class ItemMetaMockTest
 		assertEquals(true, actual.get("Unbreakable"));
 		assertEquals(5, actual.get("Damage"));
 		assertEquals(3, actual.get("repair-cost"));
+		assertEquals(expectedPlaceableKeys, actual.get("placeable-keys"));
+		assertEquals(expectedDestroyableKeys, actual.get("destroyable-keys"));
 	}
 
 	@Test
