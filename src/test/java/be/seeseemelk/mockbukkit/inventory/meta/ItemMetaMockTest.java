@@ -376,6 +376,39 @@ class ItemMetaMockTest
 	}
 
 	@Test
+	void clone_WithPlaceableKeys_ClonedExactly()
+	{
+		meta.setPlaceableKeys(Set.of(
+				Material.STONE.getKey(),
+				Material.DIRT.getKey(),
+				Material.GRASS.getKey()
+		));
+		ItemMetaMock cloned = meta.clone();
+		assertEquals(meta, cloned);
+		assertEquals(meta.hashCode(), cloned.hashCode());
+
+		Set<Namespaced> clonedKeys = cloned.getPlaceableKeys();
+		assertEquals(3, clonedKeys.size());
+	}
+
+	@Test
+	void clone_WithDestroyableKeys_ClonedExactly()
+	{
+		meta.setDestroyableKeys(Set.of(
+				Material.STONE.getKey(),
+				Material.DIRT.getKey(),
+				Material.GRASS.getKey(),
+				Material.GRANITE.getKey()
+		));
+		ItemMetaMock cloned = meta.clone();
+		assertEquals(meta, cloned);
+		assertEquals(meta.hashCode(), cloned.hashCode());
+
+		Set<Namespaced> clonedKeys = cloned.getDestroyableKeys();
+		assertEquals(4, clonedKeys.size());
+	}
+
+	@Test
 	void hasLore_NoLore_False()
 	{
 		assertFalse(meta.hasLore());
