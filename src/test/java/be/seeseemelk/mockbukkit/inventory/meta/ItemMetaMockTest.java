@@ -66,12 +66,22 @@ class ItemMetaMockTest
 		meta.setLore(List.of("lore"));
 		meta.setUnbreakable(true);
 		meta.addItemFlags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES);
+		meta.setPlaceableKeys(List.of(
+				Material.DIAMOND_SWORD.getKey(),
+				Material.DIAMOND_AXE.getKey()
+		));
+		meta.setDestroyableKeys(List.of(
+				Material.ACACIA_BOAT.getKey(),
+				Material.BLACK_WOOL.getKey()
+		));
 		ItemMetaMock meta2 = new ItemMetaMock(meta);
 		meta2.setLore(List.of("lore"));
 		assertEquals(meta2, meta);
 		assertEquals(meta, meta2);
 		assertEquals(meta.hashCode(), meta2.hashCode());
 		assertEquals(meta.getItemFlags(), meta2.getItemFlags());
+		assertEquals(meta.getPlaceableKeys(), meta2.getPlaceableKeys());
+		assertEquals(meta.getDestroyableKeys(), meta2.getDestroyableKeys());
 	}
 
 	@Test
