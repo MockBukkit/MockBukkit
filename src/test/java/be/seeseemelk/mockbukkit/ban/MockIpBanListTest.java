@@ -9,6 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -36,14 +37,11 @@ class MockIpBanListTest
 		banList.addBan(
 				InetAddress.getByName("127.0.0.1"),
 				"reason",
-				null,
+				(Date) null,
 				"source"
 		);
 
-		banList.getEntries().stream().anyMatch(banEntry ->
-		{
-			return banEntry.getBanTarget().getHostAddress().equals("127.0.0.1)");
-		});
+		assertTrue(banList.getEntries().stream().anyMatch(banEntry -> banEntry.getBanTarget().getHostAddress().equals("127.0.0.1")));
 	}
 
 	@Test
@@ -51,10 +49,7 @@ class MockIpBanListTest
 	{
 		banList.addBan("127.0.0.1", "reason", null, "source");
 
-		assertTrue(banList.getEntries().stream().anyMatch(banEntry ->
-		{
-			return banEntry.getBanTarget().getHostAddress().equals("127.0.0.1");
-		}));
+		assertTrue(banList.getEntries().stream().anyMatch(banEntry -> banEntry.getBanTarget().getHostAddress().equals("127.0.0.1")));
 	}
 
 	@Test
@@ -63,23 +58,17 @@ class MockIpBanListTest
 		assertTrue(banList.getEntries().isEmpty());
 		banList.addBan("127.0.0.1", "reason", null, "source");
 		assertEquals(1, banList.getEntries().size());
-		assertTrue(banList.getEntries().stream().anyMatch(banEntry ->
-		{
-			return banEntry.getBanTarget().getHostAddress().equals("127.0.0.1");
-		}));
+		assertTrue(banList.getEntries().stream().anyMatch(banEntry -> banEntry.getBanTarget().getHostAddress().equals("127.0.0.1")));
 	}
 
 	@Test
+	@SuppressWarnings("deprecation")
 	void testGetBanEntries()
 	{
 		assertTrue(banList.getBanEntries().isEmpty());
 		banList.addBan("127.0.0.1", "reason", null, "source");
 		assertEquals(1, banList.getBanEntries().size());
-		assertTrue(banList.getBanEntries().stream().anyMatch(banEntry ->
-		{
-			return ((InetAddress) banEntry.getBanTarget()).getHostAddress().equals("127.0.0.1");
-		}));
-
+		assertTrue(banList.getBanEntries().stream().anyMatch(banEntry -> ((InetAddress) banEntry.getBanTarget()).getHostAddress().equals("127.0.0.1")));
 	}
 
 	@Test

@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.ban.MockProfileBanList;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.google.common.base.Preconditions;
 import org.bukkit.BanEntry;
@@ -12,11 +13,14 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Statistic;
+import org.bukkit.ban.ProfileBanList;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
@@ -120,13 +124,31 @@ public class OfflinePlayerMock implements OfflinePlayer
 	public boolean isBanned()
 	{
 		MockBukkit.ensureMocking();
-		return Bukkit.getBanList(BanList.Type.NAME).isBanned(getName());
+		return ((MockProfileBanList) Bukkit.getBanList(BanList.Type.PROFILE)).isBanned(getPlayerProfile());
 	}
+
 	@Override
-	public @Nullable BanEntry<org.bukkit.profile.PlayerProfile> ban(@Nullable String reason, @Nullable Date expires, @Nullable String source)
+	@SuppressWarnings("unchecked") // Paper does it too ¯\_(ツ)_/¯
+	public @Nullable BanEntry<PlayerProfile> ban(@Nullable String reason, @Nullable Date expires, @Nullable String source)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		MockBukkit.ensureMocking();
+		return ((ProfileBanList) Bukkit.getBanList(BanList.Type.PROFILE)).addBan(this.getPlayerProfile(), reason, expires, source);
+	}
+
+	@Override
+	@SuppressWarnings("unchecked") // Paper does it too ¯\_(ツ)_/¯
+	public @Nullable BanEntry<PlayerProfile> ban(@Nullable String reason, @Nullable Instant expires, @Nullable String source)
+	{
+		MockBukkit.ensureMocking();
+		return ((ProfileBanList) Bukkit.getBanList(BanList.Type.PROFILE)).addBan(this.getPlayerProfile(), reason, expires, source);
+	}
+
+	@Override
+	@SuppressWarnings("unchecked") // Paper does it too ¯\_(ツ)_/¯
+	public @Nullable BanEntry<PlayerProfile> ban(@Nullable String reason, @Nullable Duration duration, @Nullable String source)
+	{
+		MockBukkit.ensureMocking();
+		return ((ProfileBanList) Bukkit.getBanList(BanList.Type.PROFILE)).addBan(this.getPlayerProfile(), reason, duration, source);
 	}
 
 	@Override
