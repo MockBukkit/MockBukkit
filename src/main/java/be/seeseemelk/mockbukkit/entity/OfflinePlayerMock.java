@@ -4,6 +4,7 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.ban.MockProfileBanList;
+import be.seeseemelk.mockbukkit.profile.PlayerProfileMock;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.google.common.base.Preconditions;
 import org.bukkit.BanEntry;
@@ -350,8 +351,7 @@ public class OfflinePlayerMock implements OfflinePlayer
 	@Override
 	public @NotNull PlayerProfile getPlayerProfile()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return new PlayerProfileMock(this); // Paper does not cache this.
 	}
 
 }
