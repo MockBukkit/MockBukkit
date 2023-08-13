@@ -1348,7 +1348,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		Preconditions.checkNotNull(effect, "Effect cannot be null");
 		if (data != null)
 		{
-			Preconditions.checkArgument(effect.getData() != null && effect.getData().isAssignableFrom(data.getClass()), "Wrong kind of data for this effect!");
+			Preconditions.checkArgument(effect.getData() != null && effect.getData().isAssignableFrom(data.getClass()), "Wrong kind of data for this effect! (Expected " + effect.getData() + ", got " + data.getClass());
 		}
 		else
 		{
@@ -3032,8 +3032,10 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 *
 	 * @param locale the locale
 	 */
-	public void setLocale(@NotNull Locale locale) {
+	public void setLocale(@NotNull Locale locale)
+	{
 		Preconditions.checkNotNull(locale, "locale cannot be null");
 		this.locale = locale;
 	}
+
 }

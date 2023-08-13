@@ -14,6 +14,7 @@ import org.bukkit.FeatureFlag;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.RegionAccessor;
+import org.bukkit.Statistic;
 import org.bukkit.UnsafeValues;
 import org.bukkit.World;
 import org.bukkit.advancement.Advancement;
@@ -400,6 +401,13 @@ public class MockUnsafeValues implements UnsafeValues
 
 	@Override
 	public void setBiomeKey(RegionAccessor accessor, int x, int y, int z, NamespacedKey biomeKey)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public String getStatisticCriteriaKey(@NotNull Statistic statistic)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
