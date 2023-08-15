@@ -6,6 +6,7 @@ import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.TestPlugin;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.BlockMock;
+import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import be.seeseemelk.mockbukkit.block.state.BlockStateMock;
 import be.seeseemelk.mockbukkit.block.state.TileStateMock;
 import be.seeseemelk.mockbukkit.entity.data.EntityState;
@@ -1429,7 +1430,8 @@ class PlayerMockTest
 	void testPlayerPlayEffect()
 	{
 		Location loc = player.getLocation();
-		assertDoesNotThrow(() -> player.playEffect(loc, Effect.STEP_SOUND, Material.STONE));
+		BlockDataMock blockData = new BlockDataMock(Material.STONE);
+		assertDoesNotThrow(() -> player.playEffect(loc, Effect.STEP_SOUND, blockData));
 	}
 
 	@Test

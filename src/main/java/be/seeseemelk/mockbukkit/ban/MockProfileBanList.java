@@ -10,6 +10,8 @@ import org.bukkit.ban.ProfileBanList;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -78,6 +80,20 @@ public class MockProfileBanList implements ProfileBanList
 	}
 
 	@Override
+	public @Nullable BanEntry<PlayerProfile> addBan(@NotNull PlayerProfile target, @Nullable String reason, @Nullable Instant expires, @Nullable String source)
+	{
+		Date date = expires != null ? Date.from(expires) : null;
+		return this.addBan(target, reason, date, source);
+	}
+
+	@Override
+	public @Nullable BanEntry<PlayerProfile> addBan(@NotNull PlayerProfile target, @Nullable String reason, @Nullable Duration duration, @Nullable String source)
+	{
+		Instant instant = duration != null ? Instant.now().plus(duration) : null;
+		return this.addBan(target, reason, instant, source);
+	}
+
+	@Override
 	@Deprecated
 	public <E extends BanEntry<? super PlayerProfile>> @Nullable E getBanEntry(org.bukkit.profile.@NotNull PlayerProfile target)
 	{
@@ -102,6 +118,20 @@ public class MockProfileBanList implements ProfileBanList
 		Preconditions.checkNotNull(target, TARGET_CANNOT_BE_NULL);
 		PlayerProfile profile = Bukkit.createProfile(target.getUniqueId(), target.getName());
 		pardon(profile);
+	}
+
+	@Override
+	public <E extends BanEntry<? super PlayerProfile>> @Nullable E addBan(org.bukkit.profile.@NotNull PlayerProfile target, @Nullable String reason, @Nullable Instant expires, @Nullable String source)
+	{
+		Date date = expires != null ? Date.from(expires) : null;
+		return this.addBan(target, reason, date, source);
+	}
+
+	@Override
+	public <E extends BanEntry<? super PlayerProfile>> @Nullable E addBan(org.bukkit.profile.@NotNull PlayerProfile target, @Nullable String reason, @Nullable Duration duration, @Nullable String source)
+	{
+		Instant instant = duration != null ? Instant.now().plus(duration) : null;
+		return this.addBan(target, reason, instant, source);
 	}
 
 	@Override

@@ -131,6 +131,13 @@ public class DispenserMock extends ContainerMock implements Dispenser
 	}
 
 	@Override
+	public boolean canPlayerLoot(@NotNull UUID player)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public boolean hasPlayerLooted(@NotNull UUID player)
 	{
 		// TODO Auto-generated method stub

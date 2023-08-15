@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -49,6 +50,13 @@ public class StorageMinecartMock extends LootableMinecart implements StorageMine
 	public @NotNull EntityType getType()
 	{
 		return EntityType.MINECART_CHEST;
+	}
+
+	@Override
+	public boolean canPlayerLoot(@NotNull UUID player)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 }

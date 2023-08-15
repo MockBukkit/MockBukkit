@@ -8,6 +8,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.net.InetAddress;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -53,6 +55,20 @@ public class MockIpBanList implements org.bukkit.ban.IpBanList
 	public @Nullable BanEntry<InetAddress> addBan(@NotNull InetAddress target, @Nullable String reason, @Nullable Date expires, @Nullable String source)
 	{
 		return addBan(InetAddresses.toAddrString(target), reason, expires, source);
+	}
+
+	@Override
+	public @Nullable BanEntry<InetAddress> addBan(@NotNull InetAddress target, @Nullable String reason, @Nullable Instant expires, @Nullable String source)
+	{
+		Date date = expires != null ? Date.from(expires) : null;
+		return this.addBan(target, reason, date, source);
+	}
+
+	@Override
+	public @Nullable BanEntry<InetAddress> addBan(@NotNull InetAddress target, @Nullable String reason, @Nullable Duration duration, @Nullable String source)
+	{
+		Instant instant = duration != null ? Instant.now().plus(duration) : null;
+		return this.addBan(target, reason, instant, source);
 	}
 
 	@Override
