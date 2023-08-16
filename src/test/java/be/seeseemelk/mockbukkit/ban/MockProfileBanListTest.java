@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import java.util.Date;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -40,7 +41,7 @@ class MockProfileBanListTest
 				"TestPlayer", UUID.randomUUID());
 		banList.addBan(profileMock,
 				"TestReason",
-				null,
+				(Date) null,
 				null);
 
 		assertEquals(1, banList.getBanEntries().size());
@@ -55,7 +56,7 @@ class MockProfileBanListTest
 				"TestPlayer", UUID.randomUUID());
 		banList.addBan(profileMock,
 				"TestReason",
-				null,
+				(Date) null,
 				null);
 
 		assertEquals("TestReason", banList.getBanEntry(profileMock).getReason());
@@ -68,7 +69,7 @@ class MockProfileBanListTest
 				"TestPlayer", UUID.randomUUID());
 		banList.addBan(profileMock,
 				"TestReason",
-				null,
+				(Date) null,
 				null);
 
 		assertEquals("TestReason", banList.getBanEntry("TestPlayer").getReason());
@@ -103,7 +104,7 @@ class MockProfileBanListTest
 				"TestPlayer", UUID.randomUUID());
 		banList.addBan(profileMock,
 				"TestReason",
-				null,
+				(Date) null,
 				null);
 
 		assertTrue(banList.isBanned(profileMock));
@@ -116,7 +117,7 @@ class MockProfileBanListTest
 				"TestPlayer", UUID.randomUUID());
 		banList.addBan(profileMock,
 				"TestReason",
-				null,
+				(Date) null,
 				null);
 
 		assertTrue(banList.isBanned("TestPlayer"));
@@ -129,7 +130,7 @@ class MockProfileBanListTest
 				"TestPlayer", UUID.randomUUID());
 		banList.addBan(profileMock,
 				"TestReason",
-				null,
+				(Date)null,
 				null);
 
 		assertTrue(banList.isBanned(profileMock));
@@ -144,7 +145,7 @@ class MockProfileBanListTest
 				"TestPlayer", UUID.randomUUID());
 		banList.addBan(profileMock,
 				"TestReason",
-				null,
+				(Date) null,
 				null);
 
 		assertTrue(banList.isBanned(profileMock));
@@ -182,7 +183,7 @@ class MockProfileBanListTest
 		PlayerProfile testPlayer = Bukkit.createPlayerProfile(UUID.randomUUID(), "TestPlayer");
 		banList.addBan(testPlayer,
 				"TestReason",
-				null,
+				(Date) null,
 				null);
 
 		assertTrue(banList.isBanned(testPlayer));
@@ -194,7 +195,7 @@ class MockProfileBanListTest
 		PlayerProfile testPlayer = Bukkit.createPlayerProfile(UUID.randomUUID(), "TestPlayer");
 		BanEntry<? super com.destroystokyo.paper.profile.PlayerProfile> banEntry = banList.addBan(testPlayer,
 				"TestReason",
-				null,
+				(Date) null,
 				null);
 
 		assertEquals("TestReason", banList.getBanEntry(testPlayer).getReason());
@@ -206,11 +207,12 @@ class MockProfileBanListTest
 		PlayerProfile testPlayer = Bukkit.createPlayerProfile(UUID.randomUUID(), "TestPlayer");
 		banList.addBan(testPlayer,
 				"TestReason",
-				null,
+				(Date) null,
 				null);
 
 		assertTrue(banList.isBanned(testPlayer));
 		banList.pardon(testPlayer);
 		assertFalse(banList.isBanned(testPlayer));
 	}
+
 }

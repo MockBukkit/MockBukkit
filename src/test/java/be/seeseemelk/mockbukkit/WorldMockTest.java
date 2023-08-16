@@ -588,7 +588,8 @@ class WorldMockTest
 	void worldPlayEffect()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
-		world.playEffect(new Location(world, 0, 0, 0), Effect.STEP_SOUND, Material.STONE);
+		BlockDataMock blockData = new BlockDataMock(Material.STONE);
+		world.playEffect(new Location(world, 0, 0, 0), Effect.STEP_SOUND, blockData);
 	}
 
 	@Test

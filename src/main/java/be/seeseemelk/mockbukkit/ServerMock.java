@@ -37,7 +37,6 @@ import be.seeseemelk.mockbukkit.inventory.StonecutterInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.WorkbenchInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
 import be.seeseemelk.mockbukkit.map.MapViewMock;
-import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
 import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 import be.seeseemelk.mockbukkit.potion.MockPotionEffectType;
 import be.seeseemelk.mockbukkit.profile.PlayerProfileMock;
@@ -965,28 +964,42 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public boolean addRecipe(Recipe recipe)
 	{
-		recipes.add(recipe);
-		return true;
+		Preconditions.checkNotNull(recipe, "recipe cannot be null");
+		return addRecipe(recipe, false);
 	}
 
 	@Override
+	public boolean addRecipe(@Nullable Recipe recipe, boolean resendRecipes)
+	{
+		AsyncCatcher.catchOp("Recipe add");
+		if (recipe == null)
+			return false;
+		// Pretend we sent the packet if resendRecipes is true
+		return recipes.add(recipe);
+	}
+
+	@Override
+	@SuppressWarnings("deprecation")
 	public @NotNull List<Recipe> getRecipesFor(@NotNull ItemStack item)
 	{
+		Preconditions.checkNotNull(item, "item cannot be null");
 		return recipes.stream().filter(recipe ->
 		{
 			ItemStack result = recipe.getResult();
-			// Amount is explicitly ignored here
-			return result.getType() == item.getType() && result.getItemMeta().equals(item.getItemMeta());
-		}).collect(Collectors.toList());
+			return result.getType() == item.getType() && (result.getDurability() == -1 || result.getDurability() == item.getDurability());
+		}).toList();
 	}
 
+	@Nullable
 	@Override
-	public Recipe getRecipe(NamespacedKey key)
+	public Recipe getRecipe(@NotNull NamespacedKey key)
 	{
+		Preconditions.checkNotNull(key, "key cannot be null");
+
 		for (Recipe recipe : recipes)
 		{
 			// Seriously why can't the Recipe interface itself just extend Keyed...
-			if (recipe instanceof Keyed && ((Keyed) recipe).getKey().equals(key))
+			if (recipe instanceof Keyed keyed && keyed.getKey().equals(key))
 			{
 				return recipe;
 			}
@@ -1012,8 +1025,15 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public boolean removeRecipe(NamespacedKey key)
+	public boolean removeRecipe(@NotNull NamespacedKey key)
 	{
+		return removeRecipe(key, false);
+	}
+
+	@Override
+	public boolean removeRecipe(@NotNull NamespacedKey key, boolean resendRecipes)
+	{
+		Preconditions.checkNotNull(key, "key cannot be null");
 		Iterator<Recipe> iterator = recipeIterator();
 
 		while (iterator.hasNext())
@@ -1021,7 +1041,7 @@ public class ServerMock extends Server.Spigot implements Server
 			Recipe recipe = iterator.next();
 
 			// Seriously why can't the Recipe interface itself just extend Keyed...
-			if (recipe instanceof Keyed && ((Keyed) recipe).getKey().equals(key))
+			if (recipe instanceof Keyed keyed && keyed.getKey().equals(key))
 			{
 				iterator.remove();
 				return true;
@@ -1457,6 +1477,18 @@ public class ServerMock extends Server.Spigot implements Server
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void updateResources()
+	{
+		// This only sends packets to players in Paper.
+	}
+
+	@Override
+	public void updateRecipes()
+	{
+		// This only sends packets to players in Paper.
 	}
 
 	@Override

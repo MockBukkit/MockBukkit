@@ -1,6 +1,5 @@
 package be.seeseemelk.mockbukkit.entity;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.Material;
@@ -9,13 +8,8 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.minecart.HopperMinecart;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.loot.LootTable;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 public class HopperMinecartMock extends LootableMinecart implements HopperMinecart
@@ -76,7 +70,8 @@ public class HopperMinecartMock extends LootableMinecart implements HopperMineca
 	@Override
 	public @NotNull Inventory getInventory()
 	{
-		if (this.inventory == null) {
+		if (this.inventory == null)
+		{
 			this.inventory = server.createInventory(null, InventoryType.HOPPER);
 		}
 		return this.inventory;
@@ -86,6 +81,13 @@ public class HopperMinecartMock extends LootableMinecart implements HopperMineca
 	public EntityType getType()
 	{
 		return EntityType.MINECART_HOPPER;
+	}
+
+	@Override
+	public boolean canPlayerLoot(@NotNull UUID player)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 }

@@ -117,6 +117,13 @@ public class DropperMock extends ContainerMock implements Dropper
 	}
 
 	@Override
+	public boolean canPlayerLoot(@NotNull UUID player)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public boolean hasPlayerLooted(@NotNull UUID player)
 	{
 		// TODO Auto-generated method stub
