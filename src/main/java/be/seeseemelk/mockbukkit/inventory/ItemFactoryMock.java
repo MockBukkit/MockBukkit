@@ -252,7 +252,7 @@ public class ItemFactoryMock implements ItemFactory
 	}
 
 	@Override
-	public @Nullable ItemStack getSpawnEgg(@Nullable EntityType type)
+	public @Nullable Material getSpawnEgg(@Nullable EntityType type)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
