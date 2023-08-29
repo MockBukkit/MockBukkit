@@ -573,6 +573,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public boolean isConnected()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public boolean isBanned()
 	{
 		return MockBukkit.getMock().getBanList(BanList.Type.NAME).isBanned(getName());
@@ -1996,6 +2003,27 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 	@Override
 	public boolean canSee(@NotNull Entity entity)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isListed(@NotNull Player other)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean unlistPlayer(@NotNull Player other)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean listPlayer(@NotNull Player other)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
