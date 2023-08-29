@@ -245,13 +245,6 @@ public class BlockDataMock implements BlockData
 	}
 
 	@Override
-	public float getDestroySpeed(@NotNull ItemStack itemStack, boolean considerEnchants)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public boolean isRandomlyTicked()
 	{
 		// TODO Auto-generated method stub
