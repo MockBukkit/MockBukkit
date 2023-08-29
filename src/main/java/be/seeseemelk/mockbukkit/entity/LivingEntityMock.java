@@ -75,7 +75,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	/**
 	 * NoDamage ticks
 	 */
-	private int noDamageTicks = 10;
+	private int noDamageTicks = 0;
 	private int maxNoDamageTicks = 20;
 	/**
 	 * Whether the entity is alive.
