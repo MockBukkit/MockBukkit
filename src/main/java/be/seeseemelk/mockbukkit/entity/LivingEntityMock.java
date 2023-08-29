@@ -73,6 +73,11 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	private int maxAirTicks = 300;
 	private int remainingAirTicks = 300;
 	/**
+	 * NoDamage ticks
+	 */
+	private int noDamageTicks = 10;
+	private int maxNoDamageTicks = 20;
+	/**
 	 * Whether the entity is alive.
 	 */
 	protected boolean alive = true;
@@ -407,15 +412,13 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public int getMaximumNoDamageTicks()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.maxNoDamageTicks;
 	}
 
 	@Override
 	public void setMaximumNoDamageTicks(int ticks)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.maxNoDamageTicks = ticks;
 	}
 
 	@Override
@@ -435,15 +438,13 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public int getNoDamageTicks()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.noDamageTicks;
 	}
 
 	@Override
 	public void setNoDamageTicks(int ticks)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.noDamageTicks = ticks;
 	}
 
 	@Override

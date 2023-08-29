@@ -13,6 +13,7 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Entity;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.util.BoundingBox;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -148,8 +149,13 @@ public class ChunkMock implements Chunk
 	@Override
 	public Entity[] getEntities()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		BoundingBox boundingBox = new BoundingBox(x << 4,
+				world.getMinHeight(),
+				z << 4,
+				(x << 4) + 16,
+				world.getMaxHeight(),
+				(z << 4) + 16);
+		return world.getNearbyEntities(boundingBox).toArray(new Entity[0]);
 	}
 
 	@Override
