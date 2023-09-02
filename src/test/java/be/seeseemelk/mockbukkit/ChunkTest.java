@@ -1,5 +1,9 @@
 package be.seeseemelk.mockbukkit;
 
+import be.seeseemelk.mockbukkit.entity.EntityMock;
+import org.bukkit.Location;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Zombie;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -109,6 +113,34 @@ class ChunkTest
 		ChunkMock chunk = world.getChunkAt(0, 0);
 		Object obj = new Object();
 		assertNotEquals(chunk, obj);
+	}
+
+	@Test
+	void getEntities_EmptyChunk_EmptyList()
+	{
+		ChunkMock chunk = world.getChunkAt(0, 0);
+		assertEquals(0, chunk.getEntities().length);
+	}
+
+	@Test
+	void getEntities_OneEntity_OneEntity()
+	{
+		ChunkMock chunk = world.getChunkAt(10 >> 4, 20 >> 4);
+		Entity entity = world.spawn(new Location(world, 10, 5, 20), Zombie.class);
+		assertEquals(1, chunk.getEntities().length);
+		assertEquals(entity, chunk.getEntities()[0]);
+	}
+
+	@Test
+	void getEntities_TwoEntities_TwoEntities_ExcludesOutOfChunk()
+	{
+		ChunkMock chunk = world.getChunkAt(10 >> 4, 20 >> 4);
+		Entity entity1 = world.spawn(new Location(world, 10, 5, 20), Zombie.class);
+		Entity entity2 = world.spawn(new Location(world, 10, 5, 20), Zombie.class);
+		world.spawn(new Location(world, 60, 5, 20), Zombie.class);
+		assertEquals(2, chunk.getEntities().length);
+		assertEquals(entity1, chunk.getEntities()[0]);
+		assertEquals(entity2, chunk.getEntities()[1]);
 	}
 
 }
