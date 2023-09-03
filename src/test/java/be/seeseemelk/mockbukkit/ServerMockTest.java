@@ -1039,6 +1039,19 @@ class ServerMockTest
 	}
 
 	@Test
+	void testGetPortDefault()
+	{
+		assertEquals(25565, server.getPort());
+	}
+
+	@Test
+	void testSetPort()
+	{
+		server.setPort(2212);
+		assertEquals(2212, server.getPort());
+	}
+
+	@Test
 	void testGetViewDistanceDefault()
 	{
 		assertEquals(10, server.getViewDistance());
@@ -1049,6 +1062,19 @@ class ServerMockTest
 	{
 		server.setViewDistance(2);
 		assertEquals(2, server.getViewDistance());
+	}
+
+	@Test
+	void testGetIpDefault()
+	{
+		assertEquals("", server.getIp());
+	}
+
+	@Test
+	void testSetIp()
+	{
+		server.setIp("::1");
+		assertEquals("::1", server.getIp());
 	}
 
 	@Test
