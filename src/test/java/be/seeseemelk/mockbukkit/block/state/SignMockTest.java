@@ -97,7 +97,8 @@ class SignMockTest
 	@Test
 	void testLineNull()
 	{
-		assertDoesNotThrow(() -> sign.setLine(0, null));
+		sign.setLine(0, null);
+		assertEquals("",sign.getLine(0));
 	}
 
 	@Test
