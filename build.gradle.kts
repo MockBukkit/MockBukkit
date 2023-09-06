@@ -5,7 +5,7 @@ plugins {
 	id("jacoco")
 	id("maven-publish")
 	id("signing")
-	id("net.kyori.blossom") version "1.3.1"
+	id("net.kyori.blossom") version "2.0.1"
 	id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
 }
 
