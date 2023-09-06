@@ -63,7 +63,6 @@ public class MockBukkitPluginLoader implements PluginLoader
 	@Override
 	public void disablePlugin(@NotNull Plugin plugin)
 	{
-		plugin.onDisable();
 		((JavaPlugin) plugin).setEnabled(false);
 		plugin.getServer().getPluginManager().callEvent(new PluginDisableEvent(plugin));
 	}
