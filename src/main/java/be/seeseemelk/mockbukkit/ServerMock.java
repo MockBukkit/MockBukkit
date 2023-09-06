@@ -450,6 +450,11 @@ public class ServerMock extends Server.Spigot implements Server
 		worlds.add(world);
 	}
 
+	public boolean removeWorld(WorldMock world) {
+		AsyncCatcher.catchOp("world remove");
+		return worlds.remove(world);
+	}
+
 	/**
 	 * Executes a command as the console.
 	 *
@@ -1399,15 +1404,17 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public boolean unloadWorld(String name, boolean save)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return unloadWorld(getWorld(name), save);
 	}
 
 	@Override
 	public boolean unloadWorld(World world, boolean save)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// TODO Handle save
+		if (world instanceof WorldMock worldMock) {
+			return removeWorld(worldMock);
+		}
+		return false;
 	}
 
 	@Override
