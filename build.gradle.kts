@@ -93,12 +93,14 @@ tasks {
 	}
 }
 
-blossom {
-	val metadata = "src/main/java/be/seeseemelk/mockbukkit/MockBukkit.java"
-	fun repl(token: String) {
-		replaceToken("\"{$token}\"", "\"${project.property(token)}\"", metadata)
+sourceSets {
+	main {
+		blossom {
+			javaSources {
+				property("paperApiFullVersion", project.property("paper.api.full-version").toString())
+			}
+		}
 	}
-	repl("paper.api.full-version")
 }
 
 java {
