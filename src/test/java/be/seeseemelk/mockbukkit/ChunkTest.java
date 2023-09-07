@@ -1,12 +1,13 @@
 package be.seeseemelk.mockbukkit;
 
-import be.seeseemelk.mockbukkit.entity.EntityMock;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Zombie;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -137,10 +138,14 @@ class ChunkTest
 		ChunkMock chunk = world.getChunkAt(10 >> 4, 20 >> 4);
 		Entity entity1 = world.spawn(new Location(world, 10, 5, 20), Zombie.class);
 		Entity entity2 = world.spawn(new Location(world, 10, 5, 20), Zombie.class);
-		world.spawn(new Location(world, 60, 5, 20), Zombie.class);
-		assertEquals(2, chunk.getEntities().length);
-		assertEquals(entity1, chunk.getEntities()[0]);
-		assertEquals(entity2, chunk.getEntities()[1]);
+		Zombie entity3 = world.spawn(new Location(world, 60, 5, 20), Zombie.class);
+
+		List<Entity> entities = List.of(chunk.getEntities());
+
+		assertEquals(2, entities.size());
+		assertTrue(entities.contains(entity1));
+		assertTrue(entities.contains(entity2));
+		assertFalse(entities.contains(entity3));
 	}
 
 }

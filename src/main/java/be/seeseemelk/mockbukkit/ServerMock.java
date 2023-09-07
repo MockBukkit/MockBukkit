@@ -553,7 +553,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull String getBukkitVersion()
 	{
-		return MockBukkit.PAPER_API_FULL_VERSION;
+		return BuildParameters.PAPER_API_FULL_VERSION;
 	}
 
 	@Override

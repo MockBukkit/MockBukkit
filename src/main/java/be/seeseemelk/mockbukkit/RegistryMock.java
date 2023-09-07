@@ -1,7 +1,9 @@
 package be.seeseemelk.mockbukkit;
 
 import io.papermc.paper.world.structure.ConfiguredStructure;
+import org.bukkit.GameEvent;
 import org.bukkit.Keyed;
+import org.bukkit.MusicInstrument;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.bukkit.generator.structure.Structure;
@@ -15,6 +17,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 public class RegistryMock
@@ -32,7 +35,9 @@ public class RegistryMock
 				|| tClass == StructureType.class
 				|| tClass == TrimMaterial.class
 				|| tClass == TrimPattern.class
-				|| tClass == ConfiguredStructure.class)
+				|| tClass == ConfiguredStructure.class
+				|| tClass == MusicInstrument.class
+				|| tClass == GameEvent.class)
 		{
 			return new Registry<>()
 			{
@@ -57,6 +62,7 @@ public class RegistryMock
 				.filter(a -> Modifier.isStatic(a.getModifiers()))
 				.filter(a -> genericTypeMatches(a, tClass))
 				.map(RegistryMock::getValue)
+				.filter(Objects::nonNull)
 				.findAny()
 				.orElseThrow(() -> new UnimplementedOperationException("Could not find registry for " + tClass.getSimpleName()));
 	}
