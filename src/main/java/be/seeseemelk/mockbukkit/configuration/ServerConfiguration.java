@@ -33,6 +33,8 @@ public class ServerConfiguration
 	private int maxWorldSize = 29999984;
 	private int simulationDistance = 10;
 	private boolean hideOnlinePlayers = false;
+	private String serverIp = "";
+	private int serverPort = 25565;
 
 	/**
 	 * @return The view distance.
@@ -319,6 +321,42 @@ public class ServerConfiguration
 	public void setHideOnlinePlayers(boolean hideOnlinePlayers)
 	{
 		this.hideOnlinePlayers = hideOnlinePlayers;
+	}
+
+	/**
+	 * @return The server listen IP
+	 * @see ServerMock#getIp
+	 */
+	public String getServerIp()
+	{
+		return serverIp;
+	}
+
+	/**
+	 * @param serverIp The server listen IP
+	 * @see ServerMock#setIp
+	 */
+	public void setServerIp(String serverIp)
+	{
+		this.serverIp = serverIp;
+	}
+
+	/**
+	 * @return The server listen port
+	 * @see ServerMock#getPort
+	 */
+	public int getServerPort()
+	{
+		return serverPort;
+	}
+
+	/**
+	 * @param serverPort The server listen port
+	 * @see ServerMock#setPort
+	 */
+	public void setServerPort(int serverPort)
+	{
+		this.serverPort = serverPort;
 	}
 
 	/**

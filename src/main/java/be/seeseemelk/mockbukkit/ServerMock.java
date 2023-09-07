@@ -1141,8 +1141,16 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public int getPort()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.serverConfiguration.getServerPort();
+	}
+
+	/**
+	 * Sets the server listen port.
+	 * @param port The server listen port.
+	 * @see ServerMock#getPort()
+	 */
+	public void setPort(int port) {
+		this.serverConfiguration.setServerPort(port);
 	}
 
 	@Override
@@ -1165,8 +1173,17 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull String getIp()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.serverConfiguration.getServerIp();
+	}
+
+	/**
+	 * Sets the server listen IP.
+	 * @param serverIp The server listen IP.
+	 * @see ServerMock#getIp()
+	 */
+	public void setIp(@NotNull String serverIp)
+	{
+		this.serverConfiguration.setServerIp(serverIp);
 	}
 
 	@Override
