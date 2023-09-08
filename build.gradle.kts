@@ -5,7 +5,7 @@ plugins {
 	id("jacoco")
 	id("maven-publish")
 	id("signing")
-	id("net.kyori.blossom") version "1.3.1"
+	id("net.kyori.blossom") version "2.0.1"
 	id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
 }
 
@@ -29,7 +29,7 @@ dependencies {
 	// General utilities for the project
 	implementation("net.kyori:adventure-platform-bungeecord:4.3.0")
 	implementation("org.jetbrains:annotations:24.0.1")
-	implementation("net.bytebuddy:byte-buddy:1.14.6")
+	implementation("net.bytebuddy:byte-buddy:1.14.7")
 
 	// LibraryLoader dependencies
 	implementation("org.apache.maven:maven-resolver-provider:3.8.5")
@@ -93,12 +93,14 @@ tasks {
 	}
 }
 
-blossom {
-	val metadata = "src/main/java/be/seeseemelk/mockbukkit/MockBukkit.java"
-	fun repl(token: String) {
-		replaceToken("\"{$token}\"", "\"${project.property(token)}\"", metadata)
+sourceSets {
+	main {
+		blossom {
+			javaSources {
+				property("paperApiFullVersion", project.property("paper.api.full-version").toString())
+			}
+		}
 	}
-	repl("paper.api.full-version")
 }
 
 java {

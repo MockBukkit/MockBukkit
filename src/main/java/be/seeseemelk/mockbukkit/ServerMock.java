@@ -113,6 +113,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.loot.LootTable;
+import org.bukkit.map.MapCursor;
 import org.bukkit.packs.DataPackManager;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -552,7 +553,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull String getBukkitVersion()
 	{
-		return MockBukkit.PAPER_API_FULL_VERSION;
+		return BuildParameters.PAPER_API_FULL_VERSION;
 	}
 
 	@Override
@@ -1140,8 +1141,16 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public int getPort()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.serverConfiguration.getServerPort();
+	}
+
+	/**
+	 * Sets the server listen port.
+	 * @param port The server listen port.
+	 * @see ServerMock#getPort()
+	 */
+	public void setPort(int port) {
+		this.serverConfiguration.setServerPort(port);
 	}
 
 	@Override
@@ -1164,8 +1173,17 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull String getIp()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.serverConfiguration.getServerIp();
+	}
+
+	/**
+	 * Sets the server listen IP.
+	 * @param serverIp The server listen IP.
+	 * @see ServerMock#getIp()
+	 */
+	public void setIp(@NotNull String serverIp)
+	{
+		this.serverConfiguration.setServerIp(serverIp);
 	}
 
 	@Override
@@ -2114,6 +2132,18 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull ItemStack createExplorerMap(World world, Location location, StructureType structureType, int radius,
 												boolean findUnexplored)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable ItemStack createExplorerMap(@NotNull World world,
+												 @NotNull Location location,
+												 @NotNull org.bukkit.generator.structure.StructureType structureType,
+												 @NotNull MapCursor.Type mapIcon,
+												 int radius,
+												 boolean findUnexplored)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

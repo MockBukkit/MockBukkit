@@ -32,6 +32,7 @@ import com.destroystokyo.paper.event.player.PlayerConnectionCloseEvent;
 import com.destroystokyo.paper.event.server.WhitelistToggleEvent;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
+import io.papermc.paper.world.structure.ConfiguredStructure;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Art;
@@ -41,6 +42,7 @@ import org.bukkit.GameEvent;
 import org.bukkit.GameMode;
 import org.bukkit.Keyed;
 import org.bukkit.Material;
+import org.bukkit.MusicInstrument;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Registry;
 import org.bukkit.Sound;
@@ -1039,6 +1041,19 @@ class ServerMockTest
 	}
 
 	@Test
+	void testGetPortDefault()
+	{
+		assertEquals(25565, server.getPort());
+	}
+
+	@Test
+	void testSetPort()
+	{
+		server.setPort(2212);
+		assertEquals(2212, server.getPort());
+	}
+
+	@Test
 	void testGetViewDistanceDefault()
 	{
 		assertEquals(10, server.getViewDistance());
@@ -1049,6 +1064,19 @@ class ServerMockTest
 	{
 		server.setViewDistance(2);
 		assertEquals(2, server.getViewDistance());
+	}
+
+	@Test
+	void testGetIpDefault()
+	{
+		assertEquals("", server.getIp());
+	}
+
+	@Test
+	void testSetIp()
+	{
+		server.setIp("::1");
+		assertEquals("::1", server.getIp());
 	}
 
 	@Test
@@ -1428,7 +1456,6 @@ class ServerMockTest
 			EntityType.class,
 			Fluid.class,
 			Frog.Variant.class,
-			GameEvent.class,
 			KeyedBossBar.class,
 			LootTables.class,
 			Material.class,
@@ -1454,6 +1481,9 @@ class ServerMockTest
 			StructureType.class,
 			TrimMaterial.class,
 			TrimPattern.class,
+			ConfiguredStructure.class,
+			MusicInstrument.class,
+			GameEvent.class
 	})
 	@ParameterizedTest
 	void getRegistry_InvalidType_Throws(Class<? extends Keyed> clazz)

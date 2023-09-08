@@ -48,6 +48,7 @@ import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.BoundingBox;
+import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -1350,5 +1351,55 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		throw new UnimplementedOperationException();
 	}
 
+	@Override
+	public void setPose(@NotNull Pose pose, boolean fixed)
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean hasFixedPose()
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public double getX()
+	{
+		return this.getLocation().getX();
+	}
+
+	@Override
+	public double getY()
+	{
+		return this.getLocation().getY();
+	}
+
+	@Override
+	public double getZ()
+	{
+		return this.getLocation().getZ();
+	}
+
+	@Override
+	public float getPitch()
+	{
+		return this.getLocation().getPitch();
+	}
+
+	@Override
+	public float getYaw()
+	{
+		return this.getLocation().getYaw();
+	}
+
+	@Override
+	public @NotNull String getScoreboardEntryName()
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
 
 }
