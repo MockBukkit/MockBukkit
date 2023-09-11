@@ -1418,20 +1418,20 @@ public class ServerMock extends Server.Spigot implements Server
 	public boolean unloadWorld(World world, boolean save)
 	{
 		// TODO Handle save
-        if (!(world instanceof WorldMock worldMock))
-		{
-            return false;
-        }
-        if (!worldMock.getPlayers().isEmpty())
-		{
-            return false;
-        }
-        if (new WorldUnloadEvent(worldMock).callEvent())
+		if (!(world instanceof WorldMock worldMock))
 		{
 			return false;
 		}
-        return removeWorld(worldMock);
-    }
+		if (!worldMock.getPlayers().isEmpty())
+		{
+			return false;
+		}
+		if (new WorldUnloadEvent(worldMock).callEvent())
+		{
+			return false;
+		}
+		return removeWorld(worldMock);
+	}
 
 	@Override
 	public @NotNull MapViewMock createMap(@NotNull World world)
