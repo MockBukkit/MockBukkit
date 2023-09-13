@@ -75,7 +75,7 @@ public class BlockStateMock implements BlockState
 		this.metadataTable = new MetadataTable(state.metadataTable);
 		this.material = state.getType();
 		this.block = state.isPlaced() ? state.getBlock() : null;
-		this.blockData = state.blockData;
+		this.blockData = state.blockData.clone();
 	}
 
 	// region Type Checking
@@ -327,14 +327,14 @@ public class BlockStateMock implements BlockState
 	@Override
 	public @NotNull BlockData getBlockData()
 	{
-		return this.blockData;
+		return this.blockData.clone();
 	}
 
 	@Override
 	public void setBlockData(BlockData data)
 	{
 		this.material = data.getMaterial();
-		this.blockData = data;
+		this.blockData = data.clone();
 	}
 
 	/**

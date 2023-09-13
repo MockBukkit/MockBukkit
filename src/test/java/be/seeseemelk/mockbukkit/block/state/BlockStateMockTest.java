@@ -3,11 +3,13 @@ package be.seeseemelk.mockbukkit.block.state;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.BlockMock;
+import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Chest;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.type.TrapDoor;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +18,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -123,5 +127,25 @@ class BlockStateMockTest
 		Block block = new BlockMock(Material.JUNGLE_TRAPDOOR);
 		BlockState state = block.getState();
 		assertInstanceOf(TrapDoor.class, state.getBlockData());
+	}
+
+	@Test
+	void clone_copyBlockData(){
+		Block block = new BlockMock(Material.CHEST);
+		BlockStateMock state = new ChestMock(block);
+		BlockState stateCopy = state.getSnapshot();
+		assertNotSame(stateCopy.getBlockData(), state.getBlockData());
+		assertEquals(stateCopy.getBlockData(), state.getBlockData());
+	}
+
+	@Test
+	void setBlockData_assertClone(){
+		Block block = new BlockMock(Material.CHEST);
+		BlockStateMock state = new ChestMock(block);
+		BlockDataMock data = BlockDataMock.mock(Material.CHEST);
+		state.setBlockData(data);
+		BlockData dataCopy = state.getBlockData();
+		assertNotSame(data, dataCopy);
+		assertEquals(data, dataCopy);
 	}
 }
