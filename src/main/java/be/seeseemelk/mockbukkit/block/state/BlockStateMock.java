@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.block.state;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.block.BlockMock;
+import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
 import com.destroystokyo.paper.MaterialTags;
 import com.google.common.base.Preconditions;
@@ -32,6 +33,7 @@ public class BlockStateMock implements BlockState
 {
 
 	private final @NotNull MetadataTable metadataTable;
+	private BlockData blockData;
 	private @Nullable Block block;
 	private Material material;
 
@@ -45,6 +47,7 @@ public class BlockStateMock implements BlockState
 		Preconditions.checkNotNull(material, "Material cannot be null");
 		this.metadataTable = new MetadataTable();
 		this.material = material;
+		this.blockData = BlockDataMock.mock(material);
 	}
 
 	/**
@@ -58,6 +61,7 @@ public class BlockStateMock implements BlockState
 		this.metadataTable = new MetadataTable();
 		this.block = block;
 		this.material = block.getType();
+		this.blockData = BlockDataMock.mock(material);
 	}
 
 	/**
@@ -71,6 +75,7 @@ public class BlockStateMock implements BlockState
 		this.metadataTable = new MetadataTable(state.metadataTable);
 		this.material = state.getType();
 		this.block = state.isPlaced() ? state.getBlock() : null;
+		this.blockData = state.blockData;
 	}
 
 	// region Type Checking
@@ -229,6 +234,7 @@ public class BlockStateMock implements BlockState
 	public void setType(Material type)
 	{
 		this.material = type;
+		this.blockData = BlockDataMock.mock(type);
 	}
 
 	@Override
@@ -321,15 +327,14 @@ public class BlockStateMock implements BlockState
 	@Override
 	public @NotNull BlockData getBlockData()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.blockData;
 	}
 
 	@Override
 	public void setBlockData(BlockData data)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.material = data.getMaterial();
+		this.blockData = data;
 	}
 
 	/**

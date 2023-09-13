@@ -8,12 +8,14 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Chest;
+import org.bukkit.block.data.type.TrapDoor;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -106,4 +108,19 @@ class BlockStateMockTest
 		assertEquals(Material.IRON_BLOCK, block.getType());
 	}
 
+	@Test
+	void setType_SetToMaterialWithBlockDataMockSubclass()
+	{
+		Block block = new BlockMock();
+		BlockState state = block.getState();
+		state.setType(Material.JUNGLE_TRAPDOOR);
+		assertInstanceOf(TrapDoor.class, state.getBlockData());
+	}
+
+	@Test
+	void constructor_blockDataIsSet(){
+		Block block = new BlockMock(Material.JUNGLE_TRAPDOOR);
+		BlockState state = block.getState();
+		assertInstanceOf(TrapDoor.class, state.getBlockData());
+	}
 }
