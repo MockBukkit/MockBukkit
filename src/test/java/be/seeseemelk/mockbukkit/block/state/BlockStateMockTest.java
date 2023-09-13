@@ -118,7 +118,8 @@ class BlockStateMockTest
 	}
 
 	@Test
-	void constructor_blockDataIsSet(){
+	void constructor_blockDataIsSet()
+	{
 		Block block = new BlockMock(Material.JUNGLE_TRAPDOOR);
 		BlockState state = block.getState();
 		assertInstanceOf(TrapDoor.class, state.getBlockData());
