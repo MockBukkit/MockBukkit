@@ -10,9 +10,11 @@ import be.seeseemelk.mockbukkit.entity.AxolotlMock;
 import be.seeseemelk.mockbukkit.entity.BatMock;
 import be.seeseemelk.mockbukkit.entity.BeeMock;
 import be.seeseemelk.mockbukkit.entity.BlazeMock;
+import be.seeseemelk.mockbukkit.entity.BoatMock;
 import be.seeseemelk.mockbukkit.entity.CamelMock;
 import be.seeseemelk.mockbukkit.entity.CatMock;
 import be.seeseemelk.mockbukkit.entity.CaveSpiderMock;
+import be.seeseemelk.mockbukkit.entity.ChestBoatMock;
 import be.seeseemelk.mockbukkit.entity.ChickenMock;
 import be.seeseemelk.mockbukkit.entity.CodMock;
 import be.seeseemelk.mockbukkit.entity.CommandMinecartMock;
@@ -1149,7 +1151,9 @@ class WorldMockTest
 				Arguments.of(EntityType.MINECART_MOB_SPAWNER, SpawnerMinecartMock.class),
 				Arguments.of(EntityType.MINECART, RideableMinecartMock.class),
 				Arguments.of(EntityType.MINECART_CHEST, StorageMinecartMock.class),
-				Arguments.of(EntityType.AREA_EFFECT_CLOUD, AreaEffectCloudMock.class)
+				Arguments.of(EntityType.AREA_EFFECT_CLOUD, AreaEffectCloudMock.class),
+				Arguments.of(EntityType.BOAT, BoatMock.class),
+				Arguments.of(EntityType.CHEST_BOAT, ChestBoatMock.class)
 		);
 	}
 

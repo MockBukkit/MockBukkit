@@ -9,9 +9,11 @@ import be.seeseemelk.mockbukkit.entity.AxolotlMock;
 import be.seeseemelk.mockbukkit.entity.BatMock;
 import be.seeseemelk.mockbukkit.entity.BeeMock;
 import be.seeseemelk.mockbukkit.entity.BlazeMock;
+import be.seeseemelk.mockbukkit.entity.BoatMock;
 import be.seeseemelk.mockbukkit.entity.CamelMock;
 import be.seeseemelk.mockbukkit.entity.CatMock;
 import be.seeseemelk.mockbukkit.entity.CaveSpiderMock;
+import be.seeseemelk.mockbukkit.entity.ChestBoatMock;
 import be.seeseemelk.mockbukkit.entity.ChickenMock;
 import be.seeseemelk.mockbukkit.entity.CodMock;
 import be.seeseemelk.mockbukkit.entity.CommandMinecartMock;
@@ -109,9 +111,11 @@ import org.bukkit.entity.Axolotl;
 import org.bukkit.entity.Bat;
 import org.bukkit.entity.Bee;
 import org.bukkit.entity.Blaze;
+import org.bukkit.entity.Boat;
 import org.bukkit.entity.Camel;
 import org.bukkit.entity.Cat;
 import org.bukkit.entity.CaveSpider;
+import org.bukkit.entity.ChestBoat;
 import org.bukkit.entity.Chicken;
 import org.bukkit.entity.Cod;
 import org.bukkit.entity.Cow;
@@ -1245,6 +1249,14 @@ public class WorldMock implements World
 		else if (clazz == AreaEffectCloud.class)
 		{
 			return new AreaEffectCloudMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Boat.class)
+		{
+			return new BoatMock(server, UUID.randomUUID());
+		}
+		else if (clazz == ChestBoat.class)
+		{
+			return new ChestBoatMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}
