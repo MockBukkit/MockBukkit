@@ -22,6 +22,7 @@ import be.seeseemelk.mockbukkit.entity.DonkeyMock;
 import be.seeseemelk.mockbukkit.entity.DragonFireballMock;
 import be.seeseemelk.mockbukkit.entity.EggMock;
 import be.seeseemelk.mockbukkit.entity.ElderGuardianMock;
+import be.seeseemelk.mockbukkit.entity.EnderPearlMock;
 import be.seeseemelk.mockbukkit.entity.EndermanMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
 import be.seeseemelk.mockbukkit.entity.ExplosiveMinecartMock;
@@ -1149,7 +1150,8 @@ class WorldMockTest
 				Arguments.of(EntityType.MINECART_MOB_SPAWNER, SpawnerMinecartMock.class),
 				Arguments.of(EntityType.MINECART, RideableMinecartMock.class),
 				Arguments.of(EntityType.MINECART_CHEST, StorageMinecartMock.class),
-				Arguments.of(EntityType.AREA_EFFECT_CLOUD, AreaEffectCloudMock.class)
+				Arguments.of(EntityType.AREA_EFFECT_CLOUD, AreaEffectCloudMock.class),
+				Arguments.of(EntityType.ENDER_PEARL, EnderPearlMock.class)
 		);
 	}
 
