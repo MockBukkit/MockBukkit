@@ -255,6 +255,7 @@ public class WorldMock implements World
 
 	private boolean allowAnimals = true;
 	private boolean allowMonsters = true;
+	private boolean pvp = true;
 
 
 	/**
@@ -1591,15 +1592,13 @@ public class WorldMock implements World
 	@Override
 	public boolean getPVP()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.pvp;
 	}
 
 	@Override
 	public void setPVP(boolean pvp)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.pvp = pvp;
 	}
 
 	@Override
