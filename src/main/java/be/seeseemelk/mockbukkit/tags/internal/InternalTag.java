@@ -20,7 +20,6 @@ public class InternalTag<T>
 	private InternalTag(InternalTagRegistry registry, String name, Class<T> relatedClass)
 	{
 		registry.getRelatedTags().add(this);
-		System.out.println(registry.getRelatedTags());
 		this.values = new HashSet<>();
 		this.name = name;
 		this.relatedClass = relatedClass;
