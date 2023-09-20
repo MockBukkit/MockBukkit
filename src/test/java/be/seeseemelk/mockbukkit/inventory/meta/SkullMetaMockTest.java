@@ -1,7 +1,9 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
+import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,10 +16,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class SkullMetaMockTest
 {
 
+	private ServerMock server;
+
 	@BeforeEach
 	void setUp()
 	{
-		MockBukkit.mock();
+		server = MockBukkit.mock();
 	}
 
 	@AfterEach
@@ -56,6 +60,34 @@ class SkullMetaMockTest
 		assertTrue(meta.hasOwner());
 		assertEquals("TheBusyBiscuit", meta.getOwner());
 		assertEquals("TheBusyBiscuit", meta.getOwningPlayer().getName());
+	}
+
+	@Test
+	void testNoPlayerProfile()
+	{
+		SkullMetaMock meta = new SkullMetaMock();
+
+		assertNull(meta.getPlayerProfile());
+	}
+
+	@Test
+	void testSetNullPlayerProfile()
+	{
+		SkullMetaMock meta = new SkullMetaMock();
+
+		assertNull(meta.getPlayerProfile());
+		meta.setPlayerProfile(null);
+		assertNull(meta.getPlayerProfile());
+	}
+
+	@Test
+	void testSetPlayerProfile()
+	{
+		SkullMetaMock meta = new SkullMetaMock();
+		PlayerMock playerMock = server.addPlayer();
+
+		meta.setPlayerProfile(playerMock.getPlayerProfile());
+		assertEquals(playerMock.getPlayerProfile(), meta.getPlayerProfile());
 	}
 
 	@Test
