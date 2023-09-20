@@ -27,7 +27,6 @@ public class InternalTagParser
 		String path = "/internal_tags/" + internalTagRegistry.name().toLowerCase() + "/";
 		for(InternalTag<?> internalTag : internalTagRegistry.getRelatedTags()){
 			String filePath = path + internalTag.getName().toLowerCase() + ".json";
-			System.out.println(filePath);
 			try(InputStream inputStream = MockBukkit.class.getResourceAsStream(filePath))
 			{
 				JsonObject object = (JsonObject) JsonParser.parseReader(new InputStreamReader(inputStream));
