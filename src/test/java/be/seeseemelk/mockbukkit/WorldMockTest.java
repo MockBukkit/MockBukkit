@@ -1323,4 +1323,13 @@ class WorldMockTest
 		Assertions.assertEquals(3, worldMock.getHighestBlockYAt(2,3, HeightMap.MOTION_BLOCKING_NO_LEAVES));
 		Assertions.assertEquals(20, worldMock.getHighestBlockYAt(2,3, HeightMap.MOTION_BLOCKING));
 	}
+
+	@Test
+	void getHighestBlockYAt_NoBlockInCoordinate()
+	{
+		WorldMock worldMock = new WorldMock(Material.COAL_BLOCK, 0);
+		Location location = new Location(worldMock,2,0,3);
+		location.getBlock().setType(Material.AIR);
+		Assertions.assertEquals(-1, worldMock.getHighestBlockYAt(2,3, HeightMap.WORLD_SURFACE));
+	}
 }
