@@ -18,18 +18,21 @@ class InternalTagParserTest
 	}
 
 	@Test
-	void insertInternalTagValues_registries(){
+	void insertInternalTagValues_registries()
+	{
 		assertFalse(InternalTag.SOLID_BLOCKS.getValues().isEmpty());
 		assertFalse(InternalTag.NON_SOLID_BLOCKS.getValues().isEmpty());
 	}
 
 	@Test
-	void checkTagged_fromTag(){
+	void checkTagged_fromTag()
+	{
 		assertTrue(InternalTag.NON_SOLID_BLOCKS.isTagged(Material.ACACIA_WALL_SIGN));
 	}
 
 	@Test
-	void checkTagged_fromMaterial(){
+	void checkTagged_fromMaterial()
+	{
 		assertTrue(InternalTag.SOLID_BLOCKS.isTagged(Material.SPONGE));
 	}
 }
