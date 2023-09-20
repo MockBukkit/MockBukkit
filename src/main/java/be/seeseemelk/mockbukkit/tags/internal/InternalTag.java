@@ -48,7 +48,7 @@ public class InternalTag<T>
 	}
 
 
-	public static void loadRegistries(){
+	public static void loadInternalTags(){
 		for(InternalTagRegistry registry : InternalTagRegistry.values()){
 			InternalTagParser parser = new InternalTagParser();
 			try
