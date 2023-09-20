@@ -2621,6 +2621,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void setPlayerProfile(@NotNull PlayerProfile profile)
 	{
+		Preconditions.checkNotNull(profile, "Profile cannot be null");
 		this.playerProfile = profile;
 	}
 
