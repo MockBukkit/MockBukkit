@@ -26,15 +26,18 @@ public class InternalTag<T>
 		this.relatedClass = relatedClass;
 	}
 
-	public Set<T> getValues(){
+	public Set<T> getValues()
+	{
 		return this.values;
 	}
 
-	public Class<T> getRelatedClass(){
+	public Class<T> getRelatedClass()
+	{
 		return this.relatedClass;
 	}
 
-	void addValues(Collection<T> value){
+	void addValues(Collection<T> value)
+	{
 		values.addAll(value);
 	}
 
@@ -43,13 +46,16 @@ public class InternalTag<T>
 		return this.name;
 	}
 
-	public boolean isTagged(T value){
+	public boolean isTagged(T value)
+	{
 		return values.contains(value);
 	}
 
 
-	public static void loadInternalTags(){
-		for(InternalTagRegistry registry : InternalTagRegistry.values()){
+	public static void loadInternalTags()
+	{
+		for(InternalTagRegistry registry : InternalTagRegistry.values())
+		{
 			InternalTagParser parser = new InternalTagParser();
 			try
 			{
