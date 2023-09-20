@@ -89,6 +89,7 @@ import org.bukkit.Raid;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.StructureType;
+import org.bukkit.Tag;
 import org.bukkit.TreeType;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
@@ -98,6 +99,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.data.BlockData;
+import org.bukkit.block.data.Waterlogged;
 import org.bukkit.boss.DragonBattle;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Allay;
@@ -212,7 +214,9 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 /**
@@ -663,36 +667,31 @@ public class WorldMock implements World
 	@Override
 	public int getHighestBlockYAt(int x, int z)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getHighestBlockYAt(x, z, HeightMap.MOTION_BLOCKING);
 	}
 
 	@Override
 	public int getHighestBlockYAt(@NotNull Location location)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getHighestBlockYAt(location.getBlockX(), location.getBlockZ());
 	}
 
 	@Override
 	public @NotNull Block getHighestBlockAt(int x, int z)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getHighestBlockAt(x,z,HeightMap.MOTION_BLOCKING);
 	}
 
 	@Override
 	public @NotNull Block getHighestBlockAt(Location location)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getHighestBlockAt(location,HeightMap.MOTION_BLOCKING);
 	}
 
 	@Override
 	@Deprecated
 	public int getHighestBlockYAt(int x, int z, @NotNull HeightmapType heightmap) throws UnsupportedOperationException
 	{
-		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
@@ -2548,32 +2547,66 @@ public class WorldMock implements World
 		throw new UnimplementedOperationException();
 	}
 
+
 	@Override
-	public int getHighestBlockYAt(int x, int z, HeightMap heightMap)
+	public int getHighestBlockYAt(int x, int z, @NotNull HeightMap heightMap)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(heightMap);
+		return getHighestBlockYAt(x,z, (block) -> isOfHeightMap(block,heightMap));
+	}
+
+	private int getHighestBlockYAt(int x, int z, Function<Block, Boolean> filter)
+	{
+		for(int y = this.getMaxHeight()-1; y >= this.getMinHeight(); y--){
+			Block block = this.getBlockAt(x,y,z);
+			if(filter.apply(block)){
+				return block.getY();
+			}
+		}
+		return this.getMinHeight()-1;
+	}
+
+	private boolean isOfHeightMap(Block block, HeightMap heightMap)
+	{
+		return switch (heightMap) {
+		case MOTION_BLOCKING ->
+		{
+			boolean isWaterLogged = false;
+			if(block.getBlockData() instanceof Waterlogged waterlogged){
+				isWaterLogged = waterlogged.isWaterlogged();
+			}
+			yield block.isSolid() || isWaterLogged;
+		}
+		case MOTION_BLOCKING_NO_LEAVES ->
+		{
+			boolean isWaterLogged = false;
+			if(block.getBlockData() instanceof Waterlogged waterlogged){
+				isWaterLogged = waterlogged.isWaterlogged();
+			}
+			yield (block.isSolid() || isWaterLogged) && !Tag.LEAVES.isTagged(block.getType());
+		}
+		case OCEAN_FLOOR -> block.isSolid();
+		case OCEAN_FLOOR_WG, WORLD_SURFACE_WG -> throw new UnimplementedOperationException();
+		case WORLD_SURFACE -> !block.getType().isAir();
+		};
 	}
 
 	@Override
-	public int getHighestBlockYAt(Location location, HeightMap heightMap)
+	public int getHighestBlockYAt(Location location, @NotNull HeightMap heightMap)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getHighestBlockYAt(location.getBlockX(),location.getBlockZ(),heightMap);
 	}
 
 	@Override
-	public @NotNull Block getHighestBlockAt(int x, int z, HeightMap heightMap)
+	public @NotNull Block getHighestBlockAt(int x, int z, @NotNull HeightMap heightMap)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getBlockAt(x,getHighestBlockYAt(x,z),z);
 	}
 
 	@Override
-	public @NotNull Block getHighestBlockAt(Location location, HeightMap heightMap)
+	public @NotNull Block getHighestBlockAt(Location location, @NotNull HeightMap heightMap)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getBlockAt(location.getBlockX(),getHighestBlockYAt(location),location.getBlockZ());
 	}
 
 	@NotNull

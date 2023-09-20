@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit;
 
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
+import be.seeseemelk.mockbukkit.block.data.WallSignMock;
 import be.seeseemelk.mockbukkit.block.state.BlockStateMock;
 import be.seeseemelk.mockbukkit.entity.AllayMock;
 import be.seeseemelk.mockbukkit.entity.AreaEffectCloudMock;
@@ -69,12 +70,14 @@ import org.bukkit.ChunkSnapshot;
 import org.bukkit.Difficulty;
 import org.bukkit.Effect;
 import org.bukkit.GameRule;
+import org.bukkit.HeightMap;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
+import org.bukkit.block.data.type.WallSign;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
@@ -90,6 +93,7 @@ import org.bukkit.event.weather.WeatherChangeEvent;
 import org.bukkit.event.world.TimeSkipEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.BoundingBox;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -1261,4 +1265,56 @@ class WorldMockTest
 		assertEquals(randomTickSpeed, world.getGameRuleValue("randomTickSpeed"));
 	}
 
+	@Test
+	void getHighestBlockYAt_FlatWorld(){
+		WorldMock world = new WorldMock(Material.COAL_BLOCK, 3);
+		Assertions.assertEquals(3, world.getHighestBlockYAt(0,0));
+	}
+
+	@Test
+	void getHighestBlockAt_FlatWorld(){
+		WorldMock world = new WorldMock(Material.COAL_BLOCK, 3);
+		Assertions.assertEquals(3, world.getHighestBlockAt(0,0).getY());
+	}
+
+	@Test
+	void getHighestBlockYAt_AddedMaterial(){
+		WorldMock worldMock = new WorldMock(Material.COAL_BLOCK, 3);
+		Location location = new Location(worldMock,2,20,3);
+		location.getBlock().setType(Material.GRASS_BLOCK);
+		Assertions.assertEquals(20, worldMock.getHighestBlockYAt(2,3));
+	}
+
+	@Test
+	void getHighestBlockYAt_Water(){
+		WorldMock worldMock = new WorldMock(Material.COAL_BLOCK, 3);
+		Location location = new Location(worldMock,2,20,3);
+		location.getBlock().setType(Material.WATER);
+		Assertions.assertEquals(3, worldMock.getHighestBlockYAt(2,3, HeightMap.OCEAN_FLOOR));
+		Assertions.assertEquals(20, worldMock.getHighestBlockYAt(2,3, HeightMap.WORLD_SURFACE));
+		Assertions.assertEquals(20, worldMock.getHighestBlockYAt(2,3, HeightMap.MOTION_BLOCKING));
+	}
+
+	@Test
+	void getHighestBlockYAt_Waterlogged(){
+		WorldMock worldMock = new WorldMock(Material.COAL_BLOCK, 3);
+		Location location = new Location(worldMock,2,20,3);
+		Block block = location.getBlock();
+		WallSign wallSign = new WallSignMock(Material.ACACIA_WALL_SIGN);
+		wallSign.setWaterlogged(true);
+		Assertions.assertEquals(3, worldMock.getHighestBlockYAt(2,3, HeightMap.OCEAN_FLOOR));
+		Assertions.assertEquals(20, worldMock.getHighestBlockYAt(2,3, HeightMap.MOTION_BLOCKING));
+		wallSign.setWaterlogged(false);
+		Assertions.assertEquals(3, worldMock.getHighestBlockYAt(2,3, HeightMap.MOTION_BLOCKING));
+		Assertions.assertEquals(20, worldMock.getHighestBlockYAt(2,3, HeightMap.WORLD_SURFACE));
+	}
+
+	@Test
+	void getHighestBlockYAt_Leaves(){
+		WorldMock worldMock = new WorldMock(Material.COAL_BLOCK, 3);
+		Location location = new Location(worldMock,2,20,3);
+		location.getBlock().setType(Material.ACACIA_LEAVES);
+		Assertions.assertEquals(3, worldMock.getHighestBlockYAt(2,3, HeightMap.MOTION_BLOCKING_NO_LEAVES));
+		Assertions.assertEquals(20, worldMock.getHighestBlockYAt(2,3, HeightMap.MOTION_BLOCKING));
+	}
 }
