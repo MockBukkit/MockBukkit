@@ -51,7 +51,7 @@ public class LootableMinecartMockTest
 		Player player = server.addPlayer();
 		long time = System.currentTimeMillis();
 		minecart.setHasPlayerLooted(player, true);
-		assertEquals(time, minecart.getLastLooted(player));
+		assertTrue(time <= minecart.getLastLooted(player));
 	}
 
 	@Test
