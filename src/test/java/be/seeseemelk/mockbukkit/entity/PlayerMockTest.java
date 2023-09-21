@@ -14,6 +14,7 @@ import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import be.seeseemelk.mockbukkit.map.MapViewMock;
 import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
+import com.destroystokyo.paper.profile.PlayerProfile;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import net.kyori.adventure.bossbar.BossBar;
@@ -2301,6 +2302,25 @@ class PlayerMockTest
 
 		bar.flags(Collections.singleton(BossBar.Flag.DARKEN_SCREEN));
 		assertEquals(Collections.singleton(BossBar.Flag.DARKEN_SCREEN), bossBar.flags());
+	}
+
+	@Test
+	void testPlayerProfile()
+	{
+		PlayerProfile profile = player.getPlayerProfile();
+
+		assertEquals(player.getUniqueId(), profile.getId());
+		assertEquals(player.getName(), profile.getName());
+	}
+
+	@Test
+	void testSetPlayerProfile()
+	{
+		UUID uuid = UUID.randomUUID();
+		PlayerProfile profile = Bukkit.createProfile(uuid, "Test");
+		player.setPlayerProfile(profile);
+
+		assertEquals(profile, player.getPlayerProfile());
 	}
 
 }

@@ -107,6 +107,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.server.MapInitializeEvent;
 import org.bukkit.event.server.ServerLoadEvent;
+import org.bukkit.event.world.WorldUnloadEvent;
 import org.bukkit.generator.ChunkGenerator.ChunkData;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
@@ -448,6 +449,17 @@ public class ServerMock extends Server.Spigot implements Server
 	{
 		AsyncCatcher.catchOp("world add");
 		worlds.add(world);
+	}
+
+	/**
+	 * Removes a mocked world from this server.
+	 *
+	 * @param world	The world to remove.
+	 * @return true if the world was removed, otherwise false.
+	 */
+	public boolean removeWorld(WorldMock world) {
+		AsyncCatcher.catchOp("world remove");
+		return worlds.remove(world);
 	}
 
 	/**
@@ -1416,15 +1428,26 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public boolean unloadWorld(String name, boolean save)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return unloadWorld(getWorld(name), save);
 	}
 
 	@Override
 	public boolean unloadWorld(World world, boolean save)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// TODO Handle save
+		if (!(world instanceof WorldMock worldMock))
+		{
+			return false;
+		}
+		if (!worldMock.getPlayers().isEmpty())
+		{
+			return false;
+		}
+		if (new WorldUnloadEvent(worldMock).callEvent())
+		{
+			return false;
+		}
+		return removeWorld(worldMock);
 	}
 
 	@Override
