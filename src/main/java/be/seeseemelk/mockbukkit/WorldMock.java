@@ -197,6 +197,7 @@ import org.bukkit.util.Consumer;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.StructureSearchResult;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -2384,7 +2385,8 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(forRemoval = true)
+	@ApiStatus.ScheduledForRemoval(inVersion = "1.21")
 	public boolean isUltrawarm()
 	{
 		// TODO Auto-generated method stub
@@ -2399,7 +2401,8 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(forRemoval = true)
+	@ApiStatus.ScheduledForRemoval(inVersion = "1.21")
 	public boolean hasSkylight()
 	{
 		// TODO Auto-generated method stub
@@ -2407,7 +2410,8 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(forRemoval = true)
+	@ApiStatus.ScheduledForRemoval(inVersion = "1.21")
 	public boolean hasBedrockCeiling()
 	{
 		// TODO Auto-generated method stub
@@ -2415,7 +2419,8 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(forRemoval = true)
+	@ApiStatus.ScheduledForRemoval(inVersion = "1.21")
 	public boolean doesBedWork()
 	{
 		// TODO Auto-generated method stub
@@ -2423,7 +2428,8 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(forRemoval = true)
+	@ApiStatus.ScheduledForRemoval(inVersion = "1.21")
 	public boolean doesRespawnAnchorWork()
 	{
 		// TODO Auto-generated method stub
