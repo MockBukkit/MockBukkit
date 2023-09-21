@@ -686,7 +686,7 @@ class ServerMockTest
 		out.writeUTF("Forward");
 		out.writeUTF("ALL");
 		out.writeUTF("MockBukkit");
-		server.sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
+		assertDoesNotThrow(() -> server.sendPluginMessage(plugin, "BungeeCord", out.toByteArray()));
 	}
 
 	@Test
