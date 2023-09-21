@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.tags.internal;
 
+import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 
 import java.io.IOException;
@@ -47,6 +48,7 @@ public class InternalTag<T>
 
 	public boolean isTagged(T value)
 	{
+		Preconditions.checkState(!values.isEmpty(), "Requires MockBukkit to be mocking");
 		return values.contains(value);
 	}
 
