@@ -47,6 +47,12 @@ public class RegistryMock
 					throw new UnimplementedOperationException("Registry for type " + tClass + " not implemented");
 				}
 
+				@Override
+				public @NotNull Stream<Keyed> stream()
+				{
+					throw new UnimplementedOperationException("Registry for type " + tClass + " not implemented");
+				}
+
 				@NotNull
 				@Override
 				public Iterator<Keyed> iterator()
