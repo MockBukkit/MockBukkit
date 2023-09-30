@@ -57,6 +57,13 @@ public class SculkCatalystMock extends TileStateMock implements SculkCatalyst
 	}
 
 	@Override
+	public void bloom(@NotNull Block block, int charges)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public void bloom(@NotNull Position position, int charge)
 	{
 		// TODO Auto-generated method stub
