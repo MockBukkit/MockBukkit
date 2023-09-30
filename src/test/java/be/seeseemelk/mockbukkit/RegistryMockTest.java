@@ -1,9 +1,9 @@
 package be.seeseemelk.mockbukkit;
 
-import io.papermc.paper.world.structure.ConfiguredStructure;
 import org.bukkit.GameEvent;
 import org.bukkit.Keyed;
 import org.bukkit.MusicInstrument;
+import org.bukkit.NamespacedKey;
 import org.bukkit.generator.structure.Structure;
 import org.bukkit.generator.structure.StructureType;
 import org.bukkit.inventory.meta.trim.TrimMaterial;
@@ -20,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RegistryMockTest
 {
+
 	@BeforeEach
 	void setUp()
 	{
@@ -53,9 +54,23 @@ class RegistryMockTest
 		assertTrue(new RegistryMock<>(tClass).iterator().hasNext());
 	}
 
-	static Stream<Class<? extends Keyed>> getValues(){
+	@Test
+	void key_NotNull()
+	{
+		assertThrows(NullPointerException.class, () -> new RegistryMock<>(Structure.class).get(null));
+	}
+
+	@Test
+	void key_Invalid()
+	{
+		assertNull(new RegistryMock<>(Structure.class).get(NamespacedKey.minecraft("invalid")));
+	}
+
+	static Stream<Class<? extends Keyed>> getValues()
+	{
 		return Stream.of(Structure.class,
 				StructureType.class, TrimMaterial.class, TrimPattern.class,
 				MusicInstrument.class, GameEvent.class);
 	}
+
 }

@@ -4,6 +4,8 @@ import be.seeseemelk.mockbukkit.generator.structure.StructureMock;
 import be.seeseemelk.mockbukkit.generator.structure.StructureTypeMock;
 import be.seeseemelk.mockbukkit.inventory.meta.trim.TrimMaterialMock;
 import be.seeseemelk.mockbukkit.inventory.meta.trim.TrimPatternMock;
+import com.google.common.base.Preconditions;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -42,8 +44,8 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 	/**
 	 * These classes have registries that are an exception to the others, as they are wrappers to minecraft internals
 	 */
-	private final Map<NamespacedKey,T> keyedMap = new HashMap<>();
-	private final Map<NamespacedKey, JsonObject> keyedData = new HashMap<>();
+	private final Map<NamespacedKey, T> keyedMap = new HashMap<>();
+	private JsonArray keyedData;
 	private Function<JsonObject, T> constructor;
 
 	RegistryMock(Class<T> tClass)
@@ -51,7 +53,9 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		try
 		{
 			loadKeyedToRegistry(tClass);
-		} catch (IOException e){
+		}
+		catch (IOException e)
+		{
 			throw new RuntimeException(e);
 		}
 	}
@@ -59,32 +63,26 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 	private void loadKeyedToRegistry(Class<T> tClass) throws IOException
 	{
 		String classNameLowerCase = tClass.getSimpleName().toLowerCase();
-		String fileName = "/keyed/"+ classNameLowerCase +".json";
+		String fileName = "/keyed/" + classNameLowerCase + ".json";
 		this.constructor = (Function<JsonObject, T>) getConstructor(tClass);
-		try(InputStream stream = MockBukkit.class.getResourceAsStream(fileName))
+		try (InputStream stream = MockBukkit.class.getResourceAsStream(fileName))
 		{
-			if(stream == null)
+			if (stream == null)
 			{
 				throw new FileNotFoundException(fileName);
 			}
 			JsonElement element = JsonParser.parseReader(new InputStreamReader(stream));
-			for(JsonElement structureJSONElement : element.getAsJsonObject().get("values").getAsJsonArray())
-			{
-				JsonObject structureJSONObject = structureJSONElement.getAsJsonObject();
-				String key = structureJSONObject.get("key").getAsString();
-				NamespacedKey namespacedKey = NamespacedKey.fromString(key);
-				keyedData.put(namespacedKey, structureJSONObject);
-			}
+			keyedData = element.getAsJsonObject().get("values").getAsJsonArray();
 		}
 	}
 
 	private Function<JsonObject, ? extends Keyed> getConstructor(Class<T> tClass)
 	{
-		if(tClass == Structure.class)
+		if (tClass == Structure.class)
 		{
 			return StructureMock::new;
 		}
-		else if(tClass == StructureType.class)
+		else if (tClass == StructureType.class)
 		{
 			return StructureTypeMock::new;
 		}
@@ -109,7 +107,7 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 
 	public static <T extends Keyed> Registry<?> createRegistry(Class<T> tClass)
 	{
-		if(tClass == ConfiguredStructure.class)
+		if (tClass == ConfiguredStructure.class)
 		{
 			return new Registry<T>()
 			{
@@ -180,7 +178,8 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 	@Override
 	public @Nullable T get(@NotNull NamespacedKey key)
 	{
-		keyedMap.putIfAbsent(key,constructor.apply(keyedData.get(key)));
+		Preconditions.checkNotNull(key);
+		loadIfEmpty();
 		return keyedMap.get(key);
 	}
 
@@ -199,12 +198,15 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		return keyedMap.values().iterator();
 	}
 
-	private void loadIfEmpty(){
-		if(keyedMap.isEmpty())
+	private void loadIfEmpty()
+	{
+		if (keyedMap.isEmpty())
 		{
-			for(NamespacedKey key : keyedData.keySet())
+			for (JsonElement structureJSONElement : keyedData.getAsJsonArray())
 			{
-				keyedMap.put(key, constructor.apply(keyedData.get(key)));
+				JsonObject structureJSONObject = structureJSONElement.getAsJsonObject();
+				T tObject = constructor.apply(structureJSONObject);
+				keyedMap.put(tObject.getKey(), tObject);
 			}
 		}
 	}
