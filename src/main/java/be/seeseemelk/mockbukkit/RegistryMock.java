@@ -1,5 +1,12 @@
 package be.seeseemelk.mockbukkit;
 
+import be.seeseemelk.mockbukkit.generator.structure.StructureMock;
+import be.seeseemelk.mockbukkit.generator.structure.StructureTypeMock;
+import be.seeseemelk.mockbukkit.inventory.meta.trim.TrimMaterialMock;
+import be.seeseemelk.mockbukkit.inventory.meta.trim.TrimPatternMock;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import io.papermc.paper.world.structure.ConfiguredStructure;
 import org.bukkit.GameEvent;
 import org.bukkit.Keyed;
@@ -13,53 +20,122 @@ import org.bukkit.inventory.meta.trim.TrimPattern;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
 import java.util.stream.Stream;
 
-public class RegistryMock
+public class RegistryMock<T extends Keyed> implements Registry<T>
 {
 
-	private RegistryMock()
+
+	/**
+	 * These classes have registries that are an exception to the others, as they are wrappers to minecraft internals
+	 */
+	private final Map<NamespacedKey,T> keyedMap = new HashMap<>();
+	private final Map<NamespacedKey, JsonObject> keyedData = new HashMap<>();
+	private Function<JsonObject, T> constructor;
+
+	RegistryMock(Class<T> tClass)
 	{
-		throw new UnsupportedOperationException("Utility class");
+		try
+		{
+			loadKeyedToRegistry(tClass);
+		} catch (IOException e){
+			throw new RuntimeException(e);
+		}
+	}
+
+	private void loadKeyedToRegistry(Class<T> tClass) throws IOException
+	{
+		String classNameLowerCase = tClass.getSimpleName().toLowerCase();
+		String fileName = "/keyed/"+ classNameLowerCase +".json";
+		this.constructor = (Function<JsonObject, T>) getConstructor(tClass);
+		try(InputStream stream = MockBukkit.class.getResourceAsStream(fileName))
+		{
+			if(stream == null)
+			{
+				throw new FileNotFoundException(fileName);
+			}
+			JsonElement element = JsonParser.parseReader(new InputStreamReader(stream));
+			for(JsonElement structureJSONElement : element.getAsJsonObject().get("values").getAsJsonArray())
+			{
+				JsonObject structureJSONObject = structureJSONElement.getAsJsonObject();
+				String key = structureJSONObject.get("key").getAsString();
+				NamespacedKey namespacedKey = NamespacedKey.fromString(key);
+				keyedData.put(namespacedKey, structureJSONObject);
+			}
+		}
+	}
+
+	private Function<JsonObject, ? extends Keyed> getConstructor(Class<T> tClass)
+	{
+		if(tClass == Structure.class)
+		{
+			return StructureMock::new;
+		}
+		else if(tClass == StructureType.class)
+		{
+			return StructureTypeMock::new;
+		}
+		else if (tClass == TrimMaterial.class)
+		{
+			return TrimMaterialMock::new;
+		}
+		else if (tClass == TrimPattern.class)
+		{
+			return TrimPatternMock::new;
+		}
+		else if (tClass == MusicInstrument.class)
+		{
+			return MusicInstrumentMock::new;
+		}
+		else if (tClass == GameEvent.class)
+		{
+			return GameEventMock::new;
+		}
+		else throw new UnimplementedOperationException();
 	}
 
 	public static <T extends Keyed> Registry<?> createRegistry(Class<T> tClass)
 	{
-
-		if (tClass == Structure.class
-				|| tClass == StructureType.class
-				|| tClass == TrimMaterial.class
-				|| tClass == TrimPattern.class
-				|| tClass == ConfiguredStructure.class
-				|| tClass == MusicInstrument.class
-				|| tClass == GameEvent.class)
+		if(tClass == ConfiguredStructure.class)
 		{
-			return new Registry<>()
+			return new Registry<T>()
 			{
 				@Override
-				public @Nullable Keyed get(@NotNull NamespacedKey key)
+				public @Nullable T get(@NotNull NamespacedKey key)
 				{
-					throw new UnimplementedOperationException("Registry for type " + tClass + " not implemented");
+					throw new UnimplementedOperationException();
 				}
 
 				@Override
-				public @NotNull Stream<Keyed> stream()
+				public @NotNull Stream<T> stream()
 				{
-					throw new UnimplementedOperationException("Registry for type " + tClass + " not implemented");
+					throw new UnimplementedOperationException();
 				}
 
 				@NotNull
 				@Override
-				public Iterator<Keyed> iterator()
+				public Iterator<T> iterator()
 				{
-					throw new UnimplementedOperationException("Registry for type " + tClass + " not implemented");
+					throw new UnimplementedOperationException();
 				}
 			};
+		}
+		if (getOutlierKeyedClasses().contains(tClass))
+		{
+			return new RegistryMock<>(tClass);
 		}
 
 		return Stream.of(Registry.class.getDeclaredFields())
@@ -91,6 +167,45 @@ public class RegistryMock
 		catch (IllegalAccessException e)
 		{
 			throw new ReflectionAccessException("Could not access field " + a.getDeclaringClass().getSimpleName() + "." + a.getName());
+		}
+	}
+
+	private static List<Class<? extends Keyed>> getOutlierKeyedClasses()
+	{
+		return List.of(Structure.class,
+				StructureType.class, TrimMaterial.class, TrimPattern.class,
+				MusicInstrument.class, GameEvent.class);
+	}
+
+	@Override
+	public @Nullable T get(@NotNull NamespacedKey key)
+	{
+		keyedMap.putIfAbsent(key,constructor.apply(keyedData.get(key)));
+		return keyedMap.get(key);
+	}
+
+	@Override
+	public @NotNull Stream<T> stream()
+	{
+		loadIfEmpty();
+		return keyedMap.values().stream();
+	}
+
+	@NotNull
+	@Override
+	public Iterator<T> iterator()
+	{
+		loadIfEmpty();
+		return keyedMap.values().iterator();
+	}
+
+	private void loadIfEmpty(){
+		if(keyedMap.isEmpty())
+		{
+			for(NamespacedKey key : keyedData.keySet())
+			{
+				keyedMap.put(key, constructor.apply(keyedData.get(key)));
+			}
 		}
 	}
 
