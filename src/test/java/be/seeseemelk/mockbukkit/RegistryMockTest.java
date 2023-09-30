@@ -4,6 +4,7 @@ import org.bukkit.GameEvent;
 import org.bukkit.Keyed;
 import org.bukkit.MusicInstrument;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
 import org.bukkit.generator.structure.Structure;
 import org.bukkit.generator.structure.StructureType;
 import org.bukkit.inventory.meta.trim.TrimMaterial;
@@ -16,7 +17,11 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class RegistryMockTest
 {
@@ -38,6 +43,13 @@ class RegistryMockTest
 	{
 		RegistryMock<Structure> structureRegistryMock = new RegistryMock<>(Structure.class);
 		assertNotNull(structureRegistryMock.get(Structure.MANSION.getKey()));
+	}
+
+	@ParameterizedTest
+	@MethodSource("getStructures")
+	void getStructureType_NonNull(Structure structure)
+	{
+		assertNotNull(structure.getStructureType());
 	}
 
 	@ParameterizedTest
@@ -71,6 +83,11 @@ class RegistryMockTest
 		return Stream.of(Structure.class,
 				StructureType.class, TrimMaterial.class, TrimPattern.class,
 				MusicInstrument.class, GameEvent.class);
+	}
+
+	static Stream<Structure> getStructures()
+	{
+		return Registry.STRUCTURE.stream();
 	}
 
 }
