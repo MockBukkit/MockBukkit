@@ -12,6 +12,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 
 public abstract class LootableContainerMock extends ContainerMock implements LootableBlockInventory
@@ -185,6 +186,23 @@ public abstract class LootableContainerMock extends ContainerMock implements Loo
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		if (!super.equals(o)) return false;
+		LootableContainerMock that = (LootableContainerMock) o;
+		return refillEnabled == that.refillEnabled && lastFilled == that.lastFilled && nextRefill == that.nextRefill &&
+				Objects.equals(lootedPlayers, that.lootedPlayers);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(super.hashCode(), refillEnabled, lastFilled, nextRefill, lootedPlayers);
 	}
 
 }
