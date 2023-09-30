@@ -114,20 +114,20 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 				@Override
 				public @Nullable T get(@NotNull NamespacedKey key)
 				{
-					throw new UnimplementedOperationException();
+					throw new UnimplementedOperationException("Registry for type " + tClass + " not implemented");
 				}
 
 				@Override
 				public @NotNull Stream<T> stream()
 				{
-					throw new UnimplementedOperationException();
+					throw new UnimplementedOperationException("Registry for type " + tClass + " not implemented");
 				}
 
 				@NotNull
 				@Override
 				public Iterator<T> iterator()
 				{
-					throw new UnimplementedOperationException();
+					throw new UnimplementedOperationException("Registry for type " + tClass + " not implemented");
 				}
 			};
 		}
@@ -202,7 +202,7 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 	{
 		if (keyedMap.isEmpty())
 		{
-			for (JsonElement structureJSONElement : keyedData.getAsJsonArray())
+			for (JsonElement structureJSONElement : keyedData)
 			{
 				JsonObject structureJSONObject = structureJSONElement.getAsJsonObject();
 				T tObject = constructor.apply(structureJSONObject);
