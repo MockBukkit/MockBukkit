@@ -21,16 +21,16 @@ body:
       label: Minecraft Version
       description: What Minecraft version of MockBukkit are you using?
       options:
-        - 1.8
-        - 1.12
-        - 1.13
-        - 1.14
-        - 1.15
-        - 1.16
-        - 1.17
-        - 1.18
-        - 1.19
-        - 1.20
+        - "1.8"
+        - "1.12"
+        - "1.13"
+        - "1.14"
+        - "1.15"
+        - "1.16"
+        - "1.17"
+        - "1.18"
+        - "1.19"
+        - "1.20"
     validations:
       required: true
   - type: textarea
