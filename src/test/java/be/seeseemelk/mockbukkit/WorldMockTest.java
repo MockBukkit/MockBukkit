@@ -1161,7 +1161,7 @@ class WorldMockTest
 				Arguments.of(EntityType.MINECART, RideableMinecartMock.class),
 				Arguments.of(EntityType.MINECART_CHEST, StorageMinecartMock.class),
 				Arguments.of(EntityType.AREA_EFFECT_CLOUD, AreaEffectCloudMock.class),
-				Arguments.of(EntityType.FISHING_HOOK, FishHookMock.class)
+				Arguments.of(EntityType.FISHING_HOOK, FishHookMock.class),
 				Arguments.of(EntityType.PANDA, PandaMock.class)
 		);
 	}
