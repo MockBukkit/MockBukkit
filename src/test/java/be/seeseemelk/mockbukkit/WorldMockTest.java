@@ -1319,7 +1319,8 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		assertThrows(ArrayIndexOutOfBoundsException.class, () ->
 		{
-			world.createBlock(new Coordinate(0, 256, 0));
+			Coordinate coordinate = new Coordinate(0, 256, 0);
+			world.createBlock(coordinate);
 		});
 	}
 
@@ -1329,7 +1330,8 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		assertThrows(ArrayIndexOutOfBoundsException.class, () ->
 		{
-			world.createBlock(new Coordinate(0, -1, 0));
+			Coordinate coordinate = new Coordinate(0, -1, 0);
+			world.createBlock(coordinate);
 		});
 	}
 
@@ -1479,7 +1481,8 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
 		{
-			world.playEffect(new Location(world, 0, 0, 0), null, 1);
+			Location location = new Location(world, 0, 0, 0);
+			world.playEffect(location, null, 1);
 		});
 
 		assertEquals("Effect cannot be null", nullPointerException.getMessage());
@@ -1491,7 +1494,8 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
 		{
-			world.playEffect(new Location(null, 0, 0, 0), Effect.STEP_SOUND, 1);
+			Location location = new Location(null, 0, 0, 0);
+			world.playEffect(location, Effect.STEP_SOUND, 1);
 		});
 
 		assertEquals("World cannot be null", nullPointerException.getMessage());
