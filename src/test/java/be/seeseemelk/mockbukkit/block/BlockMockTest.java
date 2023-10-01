@@ -4,6 +4,7 @@ import be.seeseemelk.mockbukkit.ChunkCoordinate;
 import be.seeseemelk.mockbukkit.ChunkMock;
 import be.seeseemelk.mockbukkit.Coordinate;
 import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import org.bukkit.Location;
@@ -306,4 +307,19 @@ class BlockMockTest
 		Block b = block.getRelative(BlockFace.NORTH, 2);
 		assertNull(block.getFace(b));
 	}
+
+	@Test
+	void isSolid_Solid()
+	{
+		Block block = new BlockMock(Material.ANCIENT_DEBRIS);
+		assertTrue(block.isSolid());
+	}
+
+	@Test
+	void isSolid_NonSolid()
+	{
+		Block block = new BlockMock(Material.BLACK_BANNER);
+		assertFalse(block.isSolid());
+	}
+  
 }
