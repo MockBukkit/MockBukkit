@@ -71,6 +71,12 @@ class BlockMockTest
 	}
 
 	@Test
+	void constructor_MaterialNotABLock()
+	{
+		assertThrows(IllegalArgumentException.class, () -> new BlockMock(Material.IRON_AXE));
+	}
+
+	@Test
 	void getType_Default_Air()
 	{
 		assertEquals(Material.AIR, block.getType());
@@ -315,4 +321,5 @@ class BlockMockTest
 		Block block = new BlockMock(Material.BLACK_BANNER);
 		assertFalse(block.isSolid());
 	}
+  
 }
