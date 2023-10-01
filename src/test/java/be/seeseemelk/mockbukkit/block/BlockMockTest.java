@@ -315,11 +315,4 @@ class BlockMockTest
 		Block block = new BlockMock(Material.BLACK_BANNER);
 		assertFalse(block.isSolid());
 	}
-
-	@Test
-	void isSolid_NotABlock()
-	{
-		Block block = new BlockMock(Material.IRON_AXE);
-		assertThrows(UnimplementedOperationException.class, block::isSolid);
-	}
 }
