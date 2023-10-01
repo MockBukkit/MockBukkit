@@ -12,6 +12,7 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class OcelotMockTest
@@ -48,8 +49,7 @@ public class OcelotMockTest
 
 	@Test
 	public void testSetOcelotType() {
-		ocelot.setCatType(Ocelot.Type.BLACK_CAT);
-		assertEquals(Ocelot.Type.BLACK_CAT, ocelot.getCatType());
+		assertThrows(UnsupportedOperationException.class, () -> ocelot.setCatType(Ocelot.Type.BLACK_CAT));
 	}
 
 	@Test
