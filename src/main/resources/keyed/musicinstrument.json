@@ -1,0 +1,28 @@
+{
+	"values": [
+		{
+			"key": "minecraft:ponder_goat_horn"
+		},
+		{
+			"key": "minecraft:sing_goat_horn"
+		},
+		{
+			"key": "minecraft:seek_goat_horn"
+		},
+		{
+			"key": "minecraft:feel_goat_horn"
+		},
+		{
+			"key": "minecraft:admire_goat_horn"
+		},
+		{
+			"key": "minecraft:call_goat_horn"
+		},
+		{
+			"key": "minecraft:yearn_goat_horn"
+		},
+		{
+			"key": "minecraft:dream_goat_horn"
+		}
+	]
+}
