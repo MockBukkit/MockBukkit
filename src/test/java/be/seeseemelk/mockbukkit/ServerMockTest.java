@@ -1486,6 +1486,13 @@ class ServerMockTest
 		assertThrows(UnimplementedOperationException.class, () -> registry.iterator());
 	}
 
+	@Test
+	void testGetServerConfiguration()
+	{
+		assertNotNull(server.getServerConfiguration());
+		assertInstanceOf(ServerConfiguration.class, server.getServerConfiguration());
+	}
+
 }
 
 class TestRecipe implements Recipe

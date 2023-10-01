@@ -45,6 +45,7 @@ import be.seeseemelk.mockbukkit.entity.PigMock;
 import be.seeseemelk.mockbukkit.entity.PolarBearMock;
 import be.seeseemelk.mockbukkit.entity.PoweredMinecartMock;
 import be.seeseemelk.mockbukkit.entity.PufferFishMock;
+import be.seeseemelk.mockbukkit.entity.RabbitMock;
 import be.seeseemelk.mockbukkit.entity.RideableMinecartMock;
 import be.seeseemelk.mockbukkit.entity.SalmonMock;
 import be.seeseemelk.mockbukkit.entity.SheepMock;
@@ -312,7 +313,7 @@ class WorldMockTest
 		world.spawnEntity(insideLoc, EntityType.LLAMA);
 		world.spawnEntity(insideLoc, EntityType.FROG);
 		world.spawnEntity(outsideLoc, EntityType.POLAR_BEAR);
-		BoundingBox box = BoundingBox.of(centerLoc, 1,64,8);
+		BoundingBox box = BoundingBox.of(centerLoc, 1, 64, 8);
 		assertEquals(2, world.getNearbyEntities(box, (e) -> e instanceof LlamaMock).size());
 	}
 
@@ -1153,7 +1154,8 @@ class WorldMockTest
 				Arguments.of(EntityType.MINECART_CHEST, StorageMinecartMock.class),
 				Arguments.of(EntityType.AREA_EFFECT_CLOUD, AreaEffectCloudMock.class),
 				Arguments.of(EntityType.PANDA, PandaMock.class),
-				Arguments.of(EntityType.OCELOT, OcelotMock.class)
+				Arguments.of(EntityType.RABBIT, RabbitMock.class),
+        Arguments.of(EntityType.OCELOT, OcelotMock.class)
 		);
 	}
 
@@ -1216,13 +1218,15 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		world.setGameRuleValue("announceAdvancements", "false");
 		assertEquals("false", world.getGameRuleValue("announceAdvancements"));
-		server.getPluginManager().assertEventFired(WorldGameRuleChangeEvent.class, worldGameRuleChangeEvent -> {
+		server.getPluginManager().assertEventFired(WorldGameRuleChangeEvent.class, worldGameRuleChangeEvent ->
+		{
 			return worldGameRuleChangeEvent.getGameRule().equals(GameRule.ANNOUNCE_ADVANCEMENTS)
 					&& worldGameRuleChangeEvent.getValue().equals("false");
 		});
 		world.setGameRuleValue("announceAdvancements", "true");
 		assertEquals("true", world.getGameRuleValue("announceAdvancements"));
-		server.getPluginManager().assertEventFired(WorldGameRuleChangeEvent.class, worldGameRuleChangeEvent -> {
+		server.getPluginManager().assertEventFired(WorldGameRuleChangeEvent.class, worldGameRuleChangeEvent ->
+		{
 			return worldGameRuleChangeEvent.getGameRule().equals(GameRule.ANNOUNCE_ADVANCEMENTS)
 					&& worldGameRuleChangeEvent.getValue().equals("true");
 		});
@@ -1250,7 +1254,8 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		world.setGameRuleValue("randomTickSpeed", "10");
 		assertEquals("10", world.getGameRuleValue("randomTickSpeed"));
-		server.getPluginManager().assertEventFired(WorldGameRuleChangeEvent.class, worldGameRuleChangeEvent -> {
+		server.getPluginManager().assertEventFired(WorldGameRuleChangeEvent.class, worldGameRuleChangeEvent ->
+		{
 			return worldGameRuleChangeEvent.getGameRule().equals(GameRule.RANDOM_TICK_SPEED)
 					&& worldGameRuleChangeEvent.getValue().equals("10");
 		});
@@ -1263,6 +1268,21 @@ class WorldMockTest
 		String randomTickSpeed = world.getGameRuleValue("randomTickSpeed");
 		world.setGameRuleValue("randomTickSpeed", "test");
 		assertEquals(randomTickSpeed, world.getGameRuleValue("randomTickSpeed"));
+	}
+
+	@Test
+	void testGetPvpDefault()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertEquals(server.getServerConfiguration().isPvpEnabled(), world.getPVP());
+	}
+
+	@Test
+	void testSetPvp()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setPVP(false);
+		assertFalse(world.getPVP());
 	}
 
 }
