@@ -10,8 +10,6 @@ import java.util.UUID;
 public class OcelotMock extends AnimalsMock implements Ocelot
 {
 
-	@Deprecated
-	private Ocelot.Type type = Ocelot.Type.WILD_OCELOT;
 	private boolean isTrusting = false;
 
 	/**
@@ -41,14 +39,14 @@ public class OcelotMock extends AnimalsMock implements Ocelot
 	@Deprecated
 	public @NotNull Type getCatType()
 	{
-		return this.type;
+		return Type.WILD_OCELOT;
 	}
 
 	@Override
 	@Deprecated
 	public void setCatType(@NotNull Type type)
 	{
-		this.type = type;
+		throw new UnsupportedOperationException("Cats are a different entity!");
 	}
 
 	@NotNull
