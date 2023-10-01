@@ -312,7 +312,7 @@ class WorldMockTest
 		world.spawnEntity(insideLoc, EntityType.LLAMA);
 		world.spawnEntity(insideLoc, EntityType.FROG);
 		world.spawnEntity(outsideLoc, EntityType.POLAR_BEAR);
-		BoundingBox box = BoundingBox.of(centerLoc, 1,64,8);
+		BoundingBox box = BoundingBox.of(centerLoc, 1, 64, 8);
 		assertEquals(2, world.getNearbyEntities(box, (e) -> e instanceof LlamaMock).size());
 	}
 
@@ -1216,13 +1216,15 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		world.setGameRuleValue("announceAdvancements", "false");
 		assertEquals("false", world.getGameRuleValue("announceAdvancements"));
-		server.getPluginManager().assertEventFired(WorldGameRuleChangeEvent.class, worldGameRuleChangeEvent -> {
+		server.getPluginManager().assertEventFired(WorldGameRuleChangeEvent.class, worldGameRuleChangeEvent ->
+		{
 			return worldGameRuleChangeEvent.getGameRule().equals(GameRule.ANNOUNCE_ADVANCEMENTS)
 					&& worldGameRuleChangeEvent.getValue().equals("false");
 		});
 		world.setGameRuleValue("announceAdvancements", "true");
 		assertEquals("true", world.getGameRuleValue("announceAdvancements"));
-		server.getPluginManager().assertEventFired(WorldGameRuleChangeEvent.class, worldGameRuleChangeEvent -> {
+		server.getPluginManager().assertEventFired(WorldGameRuleChangeEvent.class, worldGameRuleChangeEvent ->
+		{
 			return worldGameRuleChangeEvent.getGameRule().equals(GameRule.ANNOUNCE_ADVANCEMENTS)
 					&& worldGameRuleChangeEvent.getValue().equals("true");
 		});
@@ -1250,7 +1252,8 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		world.setGameRuleValue("randomTickSpeed", "10");
 		assertEquals("10", world.getGameRuleValue("randomTickSpeed"));
-		server.getPluginManager().assertEventFired(WorldGameRuleChangeEvent.class, worldGameRuleChangeEvent -> {
+		server.getPluginManager().assertEventFired(WorldGameRuleChangeEvent.class, worldGameRuleChangeEvent ->
+		{
 			return worldGameRuleChangeEvent.getGameRule().equals(GameRule.RANDOM_TICK_SPEED)
 					&& worldGameRuleChangeEvent.getValue().equals("10");
 		});
@@ -1269,7 +1272,7 @@ class WorldMockTest
 	void testGetPvpDefault()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
-		assertTrue(world.getPVP());
+		assertEquals(server.getServerConfiguration().isPvpEnabled(), world.getPVP());
 	}
 
 	@Test

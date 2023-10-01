@@ -259,7 +259,7 @@ public class WorldMock implements World
 
 	private boolean allowAnimals = true;
 	private boolean allowMonsters = true;
-	private boolean pvp = true;
+	private boolean pvp;
 
 
 	/**
@@ -293,6 +293,12 @@ public class WorldMock implements World
 		this.grassHeight = grassHeight;
 		this.server = MockBukkit.getMock();
 
+		if (this.server != null)
+		{
+			this.pvp = this.server.getServerConfiguration().isPvpEnabled();
+		}else {
+			this.pvp = true;
+		}
 		// Set the default gamerule values.
 		gameRules.put(GameRule.ANNOUNCE_ADVANCEMENTS, true);
 		gameRules.put(GameRule.COMMAND_BLOCK_OUTPUT, true);

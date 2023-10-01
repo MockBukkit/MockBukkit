@@ -2603,4 +2603,13 @@ public class ServerMock extends Server.Spigot implements Server
 		throw new UnimplementedOperationException();
 	}
 
+	/**
+	 * Exposes the {@link ServerConfiguration} of this {@link ServerMock}.
+	 * @return The {@link ServerConfiguration} of this {@link ServerMock}.
+	 */
+	public @NotNull ServerConfiguration getServerConfiguration()
+	{
+		return this.serverConfiguration;
+	}
+
 }
