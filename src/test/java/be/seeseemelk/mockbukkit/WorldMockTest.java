@@ -301,7 +301,7 @@ class WorldMockTest
 		world.spawnEntity(insideLoc, EntityType.LLAMA);
 		world.spawnEntity(insideLoc, EntityType.FROG);
 		world.spawnEntity(outsideLoc, EntityType.POLAR_BEAR);
-		BoundingBox box = BoundingBox.of(centerLoc, 1,2,8);
+		BoundingBox box = BoundingBox.of(centerLoc, 1, 2, 8);
 		assertEquals(3, world.getNearbyEntities(box).size());
 	}
 
@@ -1276,69 +1276,72 @@ class WorldMockTest
 	void getHighestBlockYAt_FlatWorld()
 	{
 		WorldMock world = new WorldMock(Material.COAL_BLOCK, 3);
-		Assertions.assertEquals(3, world.getHighestBlockYAt(0,0, HeightMap.WORLD_SURFACE));
+		Assertions.assertEquals(3, world.getHighestBlockYAt(0, 0, HeightMap.WORLD_SURFACE));
 	}
 
 	@Test
 	void getHighestBlockAt_FlatWorld()
 	{
 		WorldMock world = new WorldMock(Material.COAL_BLOCK, 3);
-		Assertions.assertEquals(3, world.getHighestBlockAt(0,0, HeightMap.WORLD_SURFACE).getY());
+		Assertions.assertEquals(3, world.getHighestBlockAt(0, 0, HeightMap.WORLD_SURFACE).getY());
 	}
 
 	@Test
 	void getHighestBlockYAt_AddedMaterial()
 	{
 		WorldMock worldMock = new WorldMock(Material.COAL_BLOCK, 3);
-		Location location = new Location(worldMock,2,20,3);
+		Location location = new Location(worldMock, 2, 20, 3);
 		location.getBlock().setType(Material.GRASS_BLOCK);
-		Assertions.assertEquals(20, worldMock.getHighestBlockYAt(2,3, HeightMap.WORLD_SURFACE));
+		Assertions.assertEquals(20, worldMock.getHighestBlockYAt(2, 3, HeightMap.WORLD_SURFACE));
 	}
 
 	@Test
 	void getHighestBlockYAt_Water()
 	{
 		WorldMock worldMock = new WorldMock(Material.COAL_BLOCK, 3);
-		Location location = new Location(worldMock,2,20,3);
+		Location location = new Location(worldMock, 2, 20, 3);
 		location.getBlock().setType(Material.WATER);
-		Assertions.assertEquals(3, worldMock.getHighestBlockYAt(2,3, HeightMap.OCEAN_FLOOR));
-		Assertions.assertEquals(20, worldMock.getHighestBlockYAt(2,3, HeightMap.WORLD_SURFACE));
-		Assertions.assertEquals(20, worldMock.getHighestBlockYAt(2,3, HeightMap.MOTION_BLOCKING));
+		Assertions.assertEquals(3, worldMock.getHighestBlockYAt(2, 3, HeightMap.OCEAN_FLOOR));
+		Assertions.assertEquals(20, worldMock.getHighestBlockYAt(2, 3, HeightMap.WORLD_SURFACE));
+		Assertions.assertEquals(20, worldMock.getHighestBlockYAt(2, 3, HeightMap.MOTION_BLOCKING));
 	}
 
 	@Test
 	void getHighestBlockYAt_Waterlogged()
 	{
 		WorldMock worldMock = new WorldMock(Material.COAL_BLOCK, 3);
-		Location location = new Location(worldMock,2,20,3);
+		Location location = new Location(worldMock, 2, 20, 3);
 		Block block = location.getBlock();
 		WallSign wallSign = new WallSignMock(Material.ACACIA_WALL_SIGN);
 		wallSign.setWaterlogged(true);
-		Assertions.assertEquals(3, worldMock.getHighestBlockYAt(2,3, HeightMap.OCEAN_FLOOR));
-		Assertions.assertEquals(20, worldMock.getHighestBlockYAt(2,3, HeightMap.MOTION_BLOCKING));
+		block.setBlockData(wallSign);
+		Assertions.assertEquals(3, worldMock.getHighestBlockYAt(2, 3, HeightMap.OCEAN_FLOOR));
+		Assertions.assertEquals(20, worldMock.getHighestBlockYAt(2, 3, HeightMap.MOTION_BLOCKING));
 		wallSign.setWaterlogged(false);
-		Assertions.assertEquals(3, worldMock.getHighestBlockYAt(2,3, HeightMap.MOTION_BLOCKING));
-		Assertions.assertEquals(20, worldMock.getHighestBlockYAt(2,3, HeightMap.WORLD_SURFACE));
+		block.setBlockData(wallSign);
+		Assertions.assertEquals(3, worldMock.getHighestBlockYAt(2, 3, HeightMap.MOTION_BLOCKING));
+		Assertions.assertEquals(20, worldMock.getHighestBlockYAt(2, 3, HeightMap.WORLD_SURFACE));
 	}
 
 	@Test
 	void getHighestBlockYAt_Leaves()
 	{
 		WorldMock worldMock = new WorldMock(Material.COAL_BLOCK, 3);
-		Location location = new Location(worldMock,2,20,3);
+		Location location = new Location(worldMock, 2, 20, 3);
 		location.getBlock().setType(Material.ACACIA_LEAVES);
-		Assertions.assertEquals(3, worldMock.getHighestBlockYAt(2,3, HeightMap.MOTION_BLOCKING_NO_LEAVES));
-		Assertions.assertEquals(20, worldMock.getHighestBlockYAt(2,3, HeightMap.MOTION_BLOCKING));
+		Assertions.assertEquals(3, worldMock.getHighestBlockYAt(2, 3, HeightMap.MOTION_BLOCKING_NO_LEAVES));
+		Assertions.assertEquals(20, worldMock.getHighestBlockYAt(2, 3, HeightMap.MOTION_BLOCKING));
 	}
 
 	@Test
 	void getHighestBlockYAt_NoBlockInCoordinate()
 	{
 		WorldMock worldMock = new WorldMock(Material.COAL_BLOCK, 0);
-		Location location = new Location(worldMock,2,0,3);
+		Location location = new Location(worldMock, 2, 0, 3);
 		location.getBlock().setType(Material.AIR);
-		Assertions.assertEquals(-1, worldMock.getHighestBlockYAt(2,3, HeightMap.WORLD_SURFACE));
+		Assertions.assertEquals(-1, worldMock.getHighestBlockYAt(2, 3, HeightMap.WORLD_SURFACE));
 	}
+
 	void testGetPvpDefault()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
@@ -1352,5 +1355,5 @@ class WorldMockTest
 		world.setPVP(false);
 		assertFalse(world.getPVP());
 	}
-	
+
 }

@@ -2,69 +2,7 @@ package be.seeseemelk.mockbukkit;
 
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
-import be.seeseemelk.mockbukkit.entity.AllayMock;
-import be.seeseemelk.mockbukkit.entity.AreaEffectCloudMock;
-import be.seeseemelk.mockbukkit.entity.ArmorStandMock;
-import be.seeseemelk.mockbukkit.entity.AxolotlMock;
-import be.seeseemelk.mockbukkit.entity.BatMock;
-import be.seeseemelk.mockbukkit.entity.BeeMock;
-import be.seeseemelk.mockbukkit.entity.BlazeMock;
-import be.seeseemelk.mockbukkit.entity.CamelMock;
-import be.seeseemelk.mockbukkit.entity.CatMock;
-import be.seeseemelk.mockbukkit.entity.CaveSpiderMock;
-import be.seeseemelk.mockbukkit.entity.ChickenMock;
-import be.seeseemelk.mockbukkit.entity.CodMock;
-import be.seeseemelk.mockbukkit.entity.CommandMinecartMock;
-import be.seeseemelk.mockbukkit.entity.CowMock;
-import be.seeseemelk.mockbukkit.entity.CreeperMock;
-import be.seeseemelk.mockbukkit.entity.DonkeyMock;
-import be.seeseemelk.mockbukkit.entity.DragonFireballMock;
-import be.seeseemelk.mockbukkit.entity.EggMock;
-import be.seeseemelk.mockbukkit.entity.ElderGuardianMock;
-import be.seeseemelk.mockbukkit.entity.EndermanMock;
-import be.seeseemelk.mockbukkit.entity.EntityMock;
-import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
-import be.seeseemelk.mockbukkit.entity.ExplosiveMinecartMock;
-import be.seeseemelk.mockbukkit.entity.FireworkMock;
-import be.seeseemelk.mockbukkit.entity.FishHookMock;
-import be.seeseemelk.mockbukkit.entity.FoxMock;
-import be.seeseemelk.mockbukkit.entity.FrogMock;
-import be.seeseemelk.mockbukkit.entity.GhastMock;
-import be.seeseemelk.mockbukkit.entity.GiantMock;
-import be.seeseemelk.mockbukkit.entity.GoatMock;
-import be.seeseemelk.mockbukkit.entity.GuardianMock;
-import be.seeseemelk.mockbukkit.entity.HopperMinecartMock;
-import be.seeseemelk.mockbukkit.entity.HorseMock;
-import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
-import be.seeseemelk.mockbukkit.entity.LargeFireballMock;
-import be.seeseemelk.mockbukkit.entity.LlamaMock;
-import be.seeseemelk.mockbukkit.entity.MobMock;
-import be.seeseemelk.mockbukkit.entity.MuleMock;
-import be.seeseemelk.mockbukkit.entity.MushroomCowMock;
-import be.seeseemelk.mockbukkit.entity.PandaMock;
-import be.seeseemelk.mockbukkit.entity.PigMock;
-import be.seeseemelk.mockbukkit.entity.PolarBearMock;
-import be.seeseemelk.mockbukkit.entity.PoweredMinecartMock;
-import be.seeseemelk.mockbukkit.entity.PufferFishMock;
-import be.seeseemelk.mockbukkit.entity.RabbitMock;
-import be.seeseemelk.mockbukkit.entity.RideableMinecartMock;
-import be.seeseemelk.mockbukkit.entity.SalmonMock;
-import be.seeseemelk.mockbukkit.entity.SheepMock;
-import be.seeseemelk.mockbukkit.entity.SkeletonHorseMock;
-import be.seeseemelk.mockbukkit.entity.SkeletonMock;
-import be.seeseemelk.mockbukkit.entity.SmallFireballMock;
-import be.seeseemelk.mockbukkit.entity.SpawnerMinecartMock;
-import be.seeseemelk.mockbukkit.entity.SpiderMock;
-import be.seeseemelk.mockbukkit.entity.StorageMinecartMock;
-import be.seeseemelk.mockbukkit.entity.StrayMock;
-import be.seeseemelk.mockbukkit.entity.TadpoleMock;
-import be.seeseemelk.mockbukkit.entity.TropicalFishMock;
-import be.seeseemelk.mockbukkit.entity.WardenMock;
-import be.seeseemelk.mockbukkit.entity.WitherSkeletonMock;
-import be.seeseemelk.mockbukkit.entity.WitherSkullMock;
-import be.seeseemelk.mockbukkit.entity.WolfMock;
-import be.seeseemelk.mockbukkit.entity.ZombieHorseMock;
-import be.seeseemelk.mockbukkit.entity.ZombieMock;
+import be.seeseemelk.mockbukkit.entity.*;
 import be.seeseemelk.mockbukkit.generator.BiomeProviderMock;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
 import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
@@ -73,29 +11,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import io.papermc.paper.event.world.WorldGameRuleChangeEvent;
 import io.papermc.paper.world.MoonPhase;
-import org.bukkit.BlockChangeDelegate;
-import org.bukkit.Bukkit;
-import org.bukkit.Chunk;
-import org.bukkit.Difficulty;
-import org.bukkit.Effect;
-import org.bukkit.FeatureFlag;
-import org.bukkit.FluidCollisionMode;
-import org.bukkit.GameEvent;
-import org.bukkit.GameRule;
-import org.bukkit.HeightMap;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
-import org.bukkit.Particle;
-import org.bukkit.Raid;
-import org.bukkit.Sound;
-import org.bukkit.SoundCategory;
-import org.bukkit.StructureType;
-import org.bukkit.Tag;
-import org.bukkit.TreeType;
-import org.bukkit.World;
-import org.bukkit.WorldCreator;
-import org.bukkit.WorldType;
+import org.bukkit.*;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -103,85 +19,8 @@ import org.bukkit.block.BlockState;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Waterlogged;
 import org.bukkit.boss.DragonBattle;
-import org.bukkit.entity.AbstractArrow;
-import org.bukkit.entity.Allay;
-import org.bukkit.entity.Animals;
-import org.bukkit.entity.AreaEffectCloud;
-import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Axolotl;
-import org.bukkit.entity.Bat;
-import org.bukkit.entity.Bee;
-import org.bukkit.entity.Blaze;
-import org.bukkit.entity.Camel;
-import org.bukkit.entity.Cat;
-import org.bukkit.entity.CaveSpider;
-import org.bukkit.entity.Chicken;
-import org.bukkit.entity.Cod;
-import org.bukkit.entity.Cow;
-import org.bukkit.entity.Creeper;
-import org.bukkit.entity.Donkey;
-import org.bukkit.entity.DragonFireball;
-import org.bukkit.entity.Egg;
-import org.bukkit.entity.ElderGuardian;
-import org.bukkit.entity.Enderman;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.ExperienceOrb;
-import org.bukkit.entity.FallingBlock;
-import org.bukkit.entity.Firework;
-import org.bukkit.entity.FishHook;
-import org.bukkit.entity.Fox;
-import org.bukkit.entity.Frog;
-import org.bukkit.entity.Ghast;
-import org.bukkit.entity.Giant;
-import org.bukkit.entity.Goat;
-import org.bukkit.entity.Golem;
-import org.bukkit.entity.Guardian;
-import org.bukkit.entity.Hanging;
-import org.bukkit.entity.Horse;
-import org.bukkit.entity.Item;
-import org.bukkit.entity.ItemFrame;
-import org.bukkit.entity.LargeFireball;
-import org.bukkit.entity.LeashHitch;
-import org.bukkit.entity.LightningStrike;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Llama;
-import org.bukkit.entity.Monster;
-import org.bukkit.entity.Mule;
-import org.bukkit.entity.MushroomCow;
-import org.bukkit.entity.Panda;
-import org.bukkit.entity.Pig;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.PolarBear;
-import org.bukkit.entity.Projectile;
-import org.bukkit.entity.PufferFish;
-import org.bukkit.entity.Rabbit;
-import org.bukkit.entity.Salmon;
-import org.bukkit.entity.Sheep;
-import org.bukkit.entity.Skeleton;
-import org.bukkit.entity.SkeletonHorse;
-import org.bukkit.entity.Slime;
-import org.bukkit.entity.SmallFireball;
-import org.bukkit.entity.SpawnCategory;
-import org.bukkit.entity.Spider;
-import org.bukkit.entity.Stray;
-import org.bukkit.entity.Tadpole;
-import org.bukkit.entity.TropicalFish;
-import org.bukkit.entity.Warden;
-import org.bukkit.entity.WaterMob;
-import org.bukkit.entity.WitherSkeleton;
-import org.bukkit.entity.WitherSkull;
-import org.bukkit.entity.Wolf;
-import org.bukkit.entity.Zombie;
-import org.bukkit.entity.ZombieHorse;
-import org.bukkit.entity.minecart.CommandMinecart;
-import org.bukkit.entity.minecart.ExplosiveMinecart;
-import org.bukkit.entity.minecart.HopperMinecart;
-import org.bukkit.entity.minecart.PoweredMinecart;
-import org.bukkit.entity.minecart.RideableMinecart;
-import org.bukkit.entity.minecart.SpawnerMinecart;
-import org.bukkit.entity.minecart.StorageMinecart;
+import org.bukkit.entity.*;
+import org.bukkit.entity.minecart.*;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.entity.ItemSpawnEvent;
@@ -198,29 +37,17 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.messaging.StandardMessenger;
-import org.bukkit.util.BoundingBox;
-import org.bukkit.util.Consumer;
-import org.bukkit.util.RayTraceResult;
-import org.bukkit.util.StructureSearchResult;
 import org.bukkit.util.Vector;
+import org.bukkit.util.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 /**
@@ -300,7 +127,9 @@ public class WorldMock implements World
 		if (this.server != null)
 		{
 			this.pvp = this.server.getServerConfiguration().isPvpEnabled();
-		}else {
+		}
+		else
+		{
 			this.pvp = true;
 		}
 		// Set the default gamerule values.
@@ -690,13 +519,13 @@ public class WorldMock implements World
 	@Override
 	public @NotNull Block getHighestBlockAt(int x, int z)
 	{
-		return getHighestBlockAt(x,z,HeightMap.MOTION_BLOCKING);
+		return getHighestBlockAt(x, z, HeightMap.MOTION_BLOCKING);
 	}
 
 	@Override
 	public @NotNull Block getHighestBlockAt(Location location)
 	{
-		return getHighestBlockAt(location,HeightMap.MOTION_BLOCKING);
+		return getHighestBlockAt(location, HeightMap.MOTION_BLOCKING);
 	}
 
 	@Override
@@ -2569,61 +2398,66 @@ public class WorldMock implements World
 	public int getHighestBlockYAt(int x, int z, @NotNull HeightMap heightMap)
 	{
 		Preconditions.checkNotNull(heightMap);
-		return getHighestBlockYAt(x,z, (block) -> isOfHeightMap(block,heightMap));
+		return getHighestBlockYAt(x, z, (block) -> isOfHeightMap(block, heightMap));
 	}
 
 	private int getHighestBlockYAt(int x, int z, Function<Block, Boolean> filter)
 	{
-		for(int y = this.getMaxHeight()-1; y >= this.getMinHeight(); y--){
-			Block block = this.getBlockAt(x,y,z);
-			if(filter.apply(block)){
+		for (int y = this.getMaxHeight() - 1; y >= this.getMinHeight(); y--)
+		{
+			Block block = this.getBlockAt(x, y, z);
+			if (filter.apply(block))
+			{
 				return block.getY();
 			}
 		}
-		return this.getMinHeight()-1;
+		return this.getMinHeight() - 1;
 	}
 
 	private boolean isOfHeightMap(Block block, HeightMap heightMap)
 	{
-		return switch (heightMap) {
-		case MOTION_BLOCKING ->
+		return switch (heightMap)
 		{
-			boolean isWaterLogged = false;
-			if(block.getBlockData() instanceof Waterlogged waterlogged){
-				isWaterLogged = waterlogged.isWaterlogged();
+			case MOTION_BLOCKING ->
+			{
+				boolean isWaterLogged = false;
+				if (block.getBlockData() instanceof Waterlogged waterlogged)
+				{
+					isWaterLogged = waterlogged.isWaterlogged();
+				}
+				yield block.isSolid() || isWaterLogged || block.isLiquid();
 			}
-			yield block.isSolid() || isWaterLogged;
-		}
-		case MOTION_BLOCKING_NO_LEAVES ->
-		{
-			boolean isWaterLogged = false;
-			if(block.getBlockData() instanceof Waterlogged waterlogged){
-				isWaterLogged = waterlogged.isWaterlogged();
+			case MOTION_BLOCKING_NO_LEAVES ->
+			{
+				boolean isWaterLogged = false;
+				if (block.getBlockData() instanceof Waterlogged waterlogged)
+				{
+					isWaterLogged = waterlogged.isWaterlogged();
+				}
+				yield (block.isSolid() || isWaterLogged || block.isLiquid()) && !Tag.LEAVES.isTagged(block.getType());
 			}
-			yield (block.isSolid() || isWaterLogged) && !Tag.LEAVES.isTagged(block.getType());
-		}
-		case OCEAN_FLOOR -> block.isSolid();
-		case OCEAN_FLOOR_WG, WORLD_SURFACE_WG -> throw new UnimplementedOperationException();
-		case WORLD_SURFACE -> !block.getType().isAir();
+			case OCEAN_FLOOR -> block.isSolid();
+			case OCEAN_FLOOR_WG, WORLD_SURFACE_WG -> throw new UnimplementedOperationException();
+			case WORLD_SURFACE -> !block.getType().isAir();
 		};
 	}
 
 	@Override
 	public int getHighestBlockYAt(Location location, @NotNull HeightMap heightMap)
 	{
-		return getHighestBlockYAt(location.getBlockX(),location.getBlockZ(),heightMap);
+		return getHighestBlockYAt(location.getBlockX(), location.getBlockZ(), heightMap);
 	}
 
 	@Override
 	public @NotNull Block getHighestBlockAt(int x, int z, @NotNull HeightMap heightMap)
 	{
-		return getBlockAt(x,getHighestBlockYAt(x,z),z);
+		return getBlockAt(x, getHighestBlockYAt(x, z), z);
 	}
 
 	@Override
 	public @NotNull Block getHighestBlockAt(Location location, @NotNull HeightMap heightMap)
 	{
-		return getBlockAt(location.getBlockX(),getHighestBlockYAt(location),location.getBlockZ());
+		return getBlockAt(location.getBlockX(), getHighestBlockYAt(location), location.getBlockZ());
 	}
 
 	@NotNull
