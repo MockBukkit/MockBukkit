@@ -1267,10 +1267,10 @@ public class WorldMock implements World
 		{
 			return new RabbitMock(server, UUID.randomUUID());
 		}
-    else if (clazz == Ocelot.class)
+    	else if (clazz == Ocelot.class)
 		{
 			return new OcelotMock(server, UUID.randomUUID());
-    }
+		}
 		throw new UnimplementedOperationException();
 	}
 

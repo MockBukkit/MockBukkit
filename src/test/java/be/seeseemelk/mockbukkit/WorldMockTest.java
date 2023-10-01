@@ -1155,7 +1155,7 @@ class WorldMockTest
 				Arguments.of(EntityType.AREA_EFFECT_CLOUD, AreaEffectCloudMock.class),
 				Arguments.of(EntityType.PANDA, PandaMock.class),
 				Arguments.of(EntityType.RABBIT, RabbitMock.class),
-        Arguments.of(EntityType.OCELOT, OcelotMock.class)
+        		Arguments.of(EntityType.OCELOT, OcelotMock.class)
 		);
 	}
 
