@@ -87,6 +87,7 @@ public class BlockMock implements Block
 	public BlockMock(@NotNull Material material, @Nullable Location location)
 	{
 		Preconditions.checkNotNull(material, "Material cannot be null");
+		Preconditions.checkArgument(material.isBlock(), "Material has to be a block");
 		this.material = material;
 		this.location = location;
 		this.state = BlockStateMock.mockState(this);
