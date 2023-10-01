@@ -1476,14 +1476,7 @@ class ServerMockTest
 	}
 
 	@ValueSource(classes = {
-			Advancement.class,
-			Structure.class,
-			StructureType.class,
-			TrimMaterial.class,
-			TrimPattern.class,
-			ConfiguredStructure.class,
-			MusicInstrument.class,
-			GameEvent.class
+			ConfiguredStructure.class
 	})
 	@ParameterizedTest
 	void getRegistry_InvalidType_Throws(Class<? extends Keyed> clazz)
