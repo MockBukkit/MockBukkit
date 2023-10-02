@@ -1642,6 +1642,8 @@ class WorldMockTest
 		world.setGameRuleValue("randomTickSpeed", "10");
 		assertEquals("3", world.getGameRuleValue("randomTickSpeed"));
 	}
+
+	@Test
 	void testGetPvpDefault()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
