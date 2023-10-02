@@ -35,6 +35,7 @@ public class ServerConfiguration
 	private boolean hideOnlinePlayers = false;
 	private String serverIp = "";
 	private int serverPort = 25565;
+	private boolean pvpEnabled = true;
 
 	/**
 	 * @return The view distance.
@@ -357,6 +358,22 @@ public class ServerConfiguration
 	public void setServerPort(int serverPort)
 	{
 		this.serverPort = serverPort;
+	}
+
+	/**
+	 * @return PVP enabled
+	 */
+	public boolean isPvpEnabled()
+	{
+		return this.pvpEnabled;
+	}
+
+	/**
+	 * @param pvpEnabled PVP enabled
+	 */
+	public void setPvpEnabled(boolean pvpEnabled)
+	{
+		this.pvpEnabled = pvpEnabled;
 	}
 
 	/**

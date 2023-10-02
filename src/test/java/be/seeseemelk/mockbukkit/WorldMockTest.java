@@ -46,6 +46,7 @@ import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import be.seeseemelk.mockbukkit.entity.PolarBearMock;
 import be.seeseemelk.mockbukkit.entity.PoweredMinecartMock;
 import be.seeseemelk.mockbukkit.entity.PufferFishMock;
+import be.seeseemelk.mockbukkit.entity.RabbitMock;
 import be.seeseemelk.mockbukkit.entity.RideableMinecartMock;
 import be.seeseemelk.mockbukkit.entity.SalmonMock;
 import be.seeseemelk.mockbukkit.entity.SheepMock;
@@ -1162,7 +1163,8 @@ class WorldMockTest
 				Arguments.of(EntityType.MINECART_CHEST, StorageMinecartMock.class),
 				Arguments.of(EntityType.AREA_EFFECT_CLOUD, AreaEffectCloudMock.class),
 				Arguments.of(EntityType.FISHING_HOOK, FishHookMock.class),
-				Arguments.of(EntityType.PANDA, PandaMock.class)
+				Arguments.of(EntityType.PANDA, PandaMock.class),
+				Arguments.of(EntityType.RABBIT, RabbitMock.class)
 		);
 	}
 
@@ -1640,4 +1642,18 @@ class WorldMockTest
 		world.setGameRuleValue("randomTickSpeed", "10");
 		assertEquals("3", world.getGameRuleValue("randomTickSpeed"));
 	}
+	void testGetPvpDefault()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertEquals(server.getServerConfiguration().isPvpEnabled(), world.getPVP());
+	}
+
+	@Test
+	void testSetPvp()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setPVP(false);
+		assertFalse(world.getPVP());
+	}
+
 }
