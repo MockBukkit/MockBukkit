@@ -2,7 +2,70 @@ package be.seeseemelk.mockbukkit;
 
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
-import be.seeseemelk.mockbukkit.entity.*;
+import be.seeseemelk.mockbukkit.entity.AllayMock;
+import be.seeseemelk.mockbukkit.entity.AreaEffectCloudMock;
+import be.seeseemelk.mockbukkit.entity.ArmorStandMock;
+import be.seeseemelk.mockbukkit.entity.AxolotlMock;
+import be.seeseemelk.mockbukkit.entity.BatMock;
+import be.seeseemelk.mockbukkit.entity.BeeMock;
+import be.seeseemelk.mockbukkit.entity.BlazeMock;
+import be.seeseemelk.mockbukkit.entity.CamelMock;
+import be.seeseemelk.mockbukkit.entity.CatMock;
+import be.seeseemelk.mockbukkit.entity.CaveSpiderMock;
+import be.seeseemelk.mockbukkit.entity.ChickenMock;
+import be.seeseemelk.mockbukkit.entity.CodMock;
+import be.seeseemelk.mockbukkit.entity.CommandMinecartMock;
+import be.seeseemelk.mockbukkit.entity.CowMock;
+import be.seeseemelk.mockbukkit.entity.CreeperMock;
+import be.seeseemelk.mockbukkit.entity.DonkeyMock;
+import be.seeseemelk.mockbukkit.entity.DragonFireballMock;
+import be.seeseemelk.mockbukkit.entity.EggMock;
+import be.seeseemelk.mockbukkit.entity.ElderGuardianMock;
+import be.seeseemelk.mockbukkit.entity.EndermanMock;
+import be.seeseemelk.mockbukkit.entity.EntityMock;
+import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
+import be.seeseemelk.mockbukkit.entity.ExplosiveMinecartMock;
+import be.seeseemelk.mockbukkit.entity.FireworkMock;
+import be.seeseemelk.mockbukkit.entity.FishHookMock;
+import be.seeseemelk.mockbukkit.entity.FoxMock;
+import be.seeseemelk.mockbukkit.entity.FrogMock;
+import be.seeseemelk.mockbukkit.entity.GhastMock;
+import be.seeseemelk.mockbukkit.entity.GiantMock;
+import be.seeseemelk.mockbukkit.entity.GoatMock;
+import be.seeseemelk.mockbukkit.entity.GuardianMock;
+import be.seeseemelk.mockbukkit.entity.HopperMinecartMock;
+import be.seeseemelk.mockbukkit.entity.HorseMock;
+import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
+import be.seeseemelk.mockbukkit.entity.LargeFireballMock;
+import be.seeseemelk.mockbukkit.entity.LlamaMock;
+import be.seeseemelk.mockbukkit.entity.MobMock;
+import be.seeseemelk.mockbukkit.entity.MuleMock;
+import be.seeseemelk.mockbukkit.entity.MushroomCowMock;
+import be.seeseemelk.mockbukkit.entity.OcelotMock;
+import be.seeseemelk.mockbukkit.entity.PandaMock;
+import be.seeseemelk.mockbukkit.entity.PigMock;
+import be.seeseemelk.mockbukkit.entity.PolarBearMock;
+import be.seeseemelk.mockbukkit.entity.PoweredMinecartMock;
+import be.seeseemelk.mockbukkit.entity.PufferFishMock;
+import be.seeseemelk.mockbukkit.entity.RabbitMock;
+import be.seeseemelk.mockbukkit.entity.RideableMinecartMock;
+import be.seeseemelk.mockbukkit.entity.SalmonMock;
+import be.seeseemelk.mockbukkit.entity.SheepMock;
+import be.seeseemelk.mockbukkit.entity.SkeletonHorseMock;
+import be.seeseemelk.mockbukkit.entity.SkeletonMock;
+import be.seeseemelk.mockbukkit.entity.SmallFireballMock;
+import be.seeseemelk.mockbukkit.entity.SpawnerMinecartMock;
+import be.seeseemelk.mockbukkit.entity.SpiderMock;
+import be.seeseemelk.mockbukkit.entity.StorageMinecartMock;
+import be.seeseemelk.mockbukkit.entity.StrayMock;
+import be.seeseemelk.mockbukkit.entity.TadpoleMock;
+import be.seeseemelk.mockbukkit.entity.TropicalFishMock;
+import be.seeseemelk.mockbukkit.entity.WardenMock;
+import be.seeseemelk.mockbukkit.entity.WitherSkeletonMock;
+import be.seeseemelk.mockbukkit.entity.WitherSkullMock;
+import be.seeseemelk.mockbukkit.entity.WolfMock;
+import be.seeseemelk.mockbukkit.entity.ZombieHorseMock;
+import be.seeseemelk.mockbukkit.entity.ZombieMock;
 import be.seeseemelk.mockbukkit.generator.BiomeProviderMock;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
 import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
@@ -19,8 +82,86 @@ import org.bukkit.block.BlockState;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Waterlogged;
 import org.bukkit.boss.DragonBattle;
-import org.bukkit.entity.*;
-import org.bukkit.entity.minecart.*;
+import org.bukkit.entity.AbstractArrow;
+import org.bukkit.entity.Allay;
+import org.bukkit.entity.Animals;
+import org.bukkit.entity.AreaEffectCloud;
+import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Axolotl;
+import org.bukkit.entity.Bat;
+import org.bukkit.entity.Bee;
+import org.bukkit.entity.Blaze;
+import org.bukkit.entity.Camel;
+import org.bukkit.entity.Cat;
+import org.bukkit.entity.CaveSpider;
+import org.bukkit.entity.Chicken;
+import org.bukkit.entity.Cod;
+import org.bukkit.entity.Cow;
+import org.bukkit.entity.Creeper;
+import org.bukkit.entity.Donkey;
+import org.bukkit.entity.DragonFireball;
+import org.bukkit.entity.Egg;
+import org.bukkit.entity.ElderGuardian;
+import org.bukkit.entity.Enderman;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.ExperienceOrb;
+import org.bukkit.entity.FallingBlock;
+import org.bukkit.entity.Firework;
+import org.bukkit.entity.FishHook;
+import org.bukkit.entity.Fox;
+import org.bukkit.entity.Frog;
+import org.bukkit.entity.Ghast;
+import org.bukkit.entity.Giant;
+import org.bukkit.entity.Goat;
+import org.bukkit.entity.Golem;
+import org.bukkit.entity.Guardian;
+import org.bukkit.entity.Hanging;
+import org.bukkit.entity.Horse;
+import org.bukkit.entity.Item;
+import org.bukkit.entity.ItemFrame;
+import org.bukkit.entity.LargeFireball;
+import org.bukkit.entity.LeashHitch;
+import org.bukkit.entity.LightningStrike;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Llama;
+import org.bukkit.entity.Monster;
+import org.bukkit.entity.Mule;
+import org.bukkit.entity.MushroomCow;
+import org.bukkit.entity.Ocelot;
+import org.bukkit.entity.Panda;
+import org.bukkit.entity.Pig;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.PolarBear;
+import org.bukkit.entity.Projectile;
+import org.bukkit.entity.PufferFish;
+import org.bukkit.entity.Rabbit;
+import org.bukkit.entity.Salmon;
+import org.bukkit.entity.Sheep;
+import org.bukkit.entity.Skeleton;
+import org.bukkit.entity.SkeletonHorse;
+import org.bukkit.entity.Slime;
+import org.bukkit.entity.SmallFireball;
+import org.bukkit.entity.SpawnCategory;
+import org.bukkit.entity.Spider;
+import org.bukkit.entity.Stray;
+import org.bukkit.entity.Tadpole;
+import org.bukkit.entity.TropicalFish;
+import org.bukkit.entity.Warden;
+import org.bukkit.entity.WaterMob;
+import org.bukkit.entity.WitherSkeleton;
+import org.bukkit.entity.WitherSkull;
+import org.bukkit.entity.Wolf;
+import org.bukkit.entity.Zombie;
+import org.bukkit.entity.ZombieHorse;
+import org.bukkit.entity.minecart.CommandMinecart;
+import org.bukkit.entity.minecart.ExplosiveMinecart;
+import org.bukkit.entity.minecart.HopperMinecart;
+import org.bukkit.entity.minecart.PoweredMinecart;
+import org.bukkit.entity.minecart.RideableMinecart;
+import org.bukkit.entity.minecart.SpawnerMinecart;
+import org.bukkit.entity.minecart.StorageMinecart;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.entity.ItemSpawnEvent;
@@ -37,8 +178,12 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.messaging.StandardMessenger;
+import org.bukkit.util.BoundingBox;
+import org.bukkit.util.Consumer;
+import org.bukkit.util.RayTraceResult;
+import org.bukkit.util.StructureSearchResult;
 import org.bukkit.util.Vector;
-import org.bukkit.util.*;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -1092,6 +1237,10 @@ public class WorldMock implements World
 		else if (clazz == Rabbit.class)
 		{
 			return new RabbitMock(server, UUID.randomUUID());
+		}
+    	else if (clazz == Ocelot.class)
+		{
+			return new OcelotMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}
@@ -2229,7 +2378,8 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(forRemoval = true)
+	@ApiStatus.ScheduledForRemoval(inVersion = "1.21")
 	public boolean isUltrawarm()
 	{
 		// TODO Auto-generated method stub
@@ -2244,7 +2394,8 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(forRemoval = true)
+	@ApiStatus.ScheduledForRemoval(inVersion = "1.21")
 	public boolean hasSkylight()
 	{
 		// TODO Auto-generated method stub
@@ -2252,7 +2403,8 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(forRemoval = true)
+	@ApiStatus.ScheduledForRemoval(inVersion = "1.21")
 	public boolean hasBedrockCeiling()
 	{
 		// TODO Auto-generated method stub
@@ -2260,7 +2412,8 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(forRemoval = true)
+	@ApiStatus.ScheduledForRemoval(inVersion = "1.21")
 	public boolean doesBedWork()
 	{
 		// TODO Auto-generated method stub
@@ -2268,7 +2421,8 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(forRemoval = true)
+	@ApiStatus.ScheduledForRemoval(inVersion = "1.21")
 	public boolean doesRespawnAnchorWork()
 	{
 		// TODO Auto-generated method stub
