@@ -686,7 +686,7 @@ class ServerMockTest
 		out.writeUTF("Forward");
 		out.writeUTF("ALL");
 		out.writeUTF("MockBukkit");
-		server.sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
+		assertDoesNotThrow(() -> server.sendPluginMessage(plugin, "BungeeCord", out.toByteArray()));
 	}
 
 	@Test
@@ -1484,6 +1484,13 @@ class ServerMockTest
 		Registry<? extends Keyed> registry = Bukkit.getRegistry(clazz);
 		assertNotNull(registry);
 		assertThrows(UnimplementedOperationException.class, () -> registry.iterator());
+	}
+
+	@Test
+	void testGetServerConfiguration()
+	{
+		assertNotNull(server.getServerConfiguration());
+		assertInstanceOf(ServerConfiguration.class, server.getServerConfiguration());
 	}
 
 }

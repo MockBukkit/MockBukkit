@@ -1567,7 +1567,7 @@ class PlayerMockTest
 		out.writeUTF("Forward");
 		out.writeUTF("ALL");
 		out.writeUTF("MockBukkit");
-		player.sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
+		assertDoesNotThrow(() -> player.sendPluginMessage(plugin, "BungeeCord", out.toByteArray()));
 	}
 
 	@Test

@@ -41,11 +41,13 @@ import be.seeseemelk.mockbukkit.entity.LlamaMock;
 import be.seeseemelk.mockbukkit.entity.MobMock;
 import be.seeseemelk.mockbukkit.entity.MuleMock;
 import be.seeseemelk.mockbukkit.entity.MushroomCowMock;
+import be.seeseemelk.mockbukkit.entity.OcelotMock;
 import be.seeseemelk.mockbukkit.entity.PandaMock;
 import be.seeseemelk.mockbukkit.entity.PigMock;
 import be.seeseemelk.mockbukkit.entity.PolarBearMock;
 import be.seeseemelk.mockbukkit.entity.PoweredMinecartMock;
 import be.seeseemelk.mockbukkit.entity.PufferFishMock;
+import be.seeseemelk.mockbukkit.entity.RabbitMock;
 import be.seeseemelk.mockbukkit.entity.RideableMinecartMock;
 import be.seeseemelk.mockbukkit.entity.SalmonMock;
 import be.seeseemelk.mockbukkit.entity.SheepMock;
@@ -147,12 +149,14 @@ import org.bukkit.entity.Llama;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Mule;
 import org.bukkit.entity.MushroomCow;
+import org.bukkit.entity.Ocelot;
 import org.bukkit.entity.Panda;
 import org.bukkit.entity.Pig;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.PolarBear;
 import org.bukkit.entity.Projectile;
 import org.bukkit.entity.PufferFish;
+import org.bukkit.entity.Rabbit;
 import org.bukkit.entity.Salmon;
 import org.bukkit.entity.Sheep;
 import org.bukkit.entity.Skeleton;
@@ -199,6 +203,7 @@ import org.bukkit.util.Consumer;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.StructureSearchResult;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -257,6 +262,7 @@ public class WorldMock implements World
 
 	private boolean allowAnimals = true;
 	private boolean allowMonsters = true;
+	private boolean pvp;
 
 
 	/**
@@ -290,6 +296,12 @@ public class WorldMock implements World
 		this.grassHeight = grassHeight;
 		this.server = MockBukkit.getMock();
 
+		if (this.server != null)
+		{
+			this.pvp = this.server.getServerConfiguration().isPvpEnabled();
+		}else {
+			this.pvp = true;
+		}
 		// Set the default gamerule values.
 		gameRules.put(GameRule.ANNOUNCE_ADVANCEMENTS, true);
 		gameRules.put(GameRule.COMMAND_BLOCK_OUTPUT, true);
@@ -1252,6 +1264,14 @@ public class WorldMock implements World
 		{
 			return new PandaMock(server, UUID.randomUUID());
 		}
+		else if (clazz == Rabbit.class)
+		{
+			return new RabbitMock(server, UUID.randomUUID());
+		}
+    	else if (clazz == Ocelot.class)
+		{
+			return new OcelotMock(server, UUID.randomUUID());
+		}
 		throw new UnimplementedOperationException();
 	}
 
@@ -1597,15 +1617,13 @@ public class WorldMock implements World
 	@Override
 	public boolean getPVP()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.pvp;
 	}
 
 	@Override
 	public void setPVP(boolean pvp)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.pvp = pvp;
 	}
 
 	@Override
@@ -2390,7 +2408,8 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(forRemoval = true)
+	@ApiStatus.ScheduledForRemoval(inVersion = "1.21")
 	public boolean isUltrawarm()
 	{
 		// TODO Auto-generated method stub
@@ -2405,7 +2424,8 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(forRemoval = true)
+	@ApiStatus.ScheduledForRemoval(inVersion = "1.21")
 	public boolean hasSkylight()
 	{
 		// TODO Auto-generated method stub
@@ -2413,7 +2433,8 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(forRemoval = true)
+	@ApiStatus.ScheduledForRemoval(inVersion = "1.21")
 	public boolean hasBedrockCeiling()
 	{
 		// TODO Auto-generated method stub
@@ -2421,7 +2442,8 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(forRemoval = true)
+	@ApiStatus.ScheduledForRemoval(inVersion = "1.21")
 	public boolean doesBedWork()
 	{
 		// TODO Auto-generated method stub
@@ -2429,7 +2451,8 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(forRemoval = true)
+	@ApiStatus.ScheduledForRemoval(inVersion = "1.21")
 	public boolean doesRespawnAnchorWork()
 	{
 		// TODO Auto-generated method stub
