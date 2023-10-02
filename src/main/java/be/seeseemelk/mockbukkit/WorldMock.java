@@ -1095,8 +1095,7 @@ public class WorldMock implements World
 		}
 		else if (clazz == Chicken.class)
 		{
-			return new ChickenMoc
-1 change requested k(server, UUID.randomUUID());
+			return new ChickenMock(server, UUID.randomUUID());
 		}
 		else if (clazz == Skeleton.class)
 		{
