@@ -103,7 +103,6 @@ import org.bukkit.event.world.TimeSkipEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.util.BoundingBox;
-import org.junit.jupiter.api.Assertions;
 import org.bukkit.util.Consumer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -1289,14 +1288,14 @@ class WorldMockTest
 	void getHighestBlockYAt_FlatWorld()
 	{
 		WorldMock world = new WorldMock(Material.COAL_BLOCK, 3);
-		Assertions.assertEquals(3, world.getHighestBlockYAt(0, 0, HeightMap.WORLD_SURFACE));
+		assertEquals(3, world.getHighestBlockYAt(0, 0, HeightMap.WORLD_SURFACE));
 	}
 
 	@Test
 	void getHighestBlockAt_FlatWorld()
 	{
 		WorldMock world = new WorldMock(Material.COAL_BLOCK, 3);
-		Assertions.assertEquals(3, world.getHighestBlockAt(0, 0, HeightMap.WORLD_SURFACE).getY());
+		assertEquals(3, world.getHighestBlockAt(0, 0, HeightMap.WORLD_SURFACE).getY());
 	}
 
 	@Test
@@ -1305,7 +1304,7 @@ class WorldMockTest
 		WorldMock worldMock = new WorldMock(Material.COAL_BLOCK, 3);
 		Location location = new Location(worldMock, 2, 20, 3);
 		location.getBlock().setType(Material.GRASS_BLOCK);
-		Assertions.assertEquals(20, worldMock.getHighestBlockYAt(2, 3, HeightMap.WORLD_SURFACE));
+		assertEquals(20, worldMock.getHighestBlockYAt(2, 3, HeightMap.WORLD_SURFACE));
 	}
 
 	@Test
@@ -1314,9 +1313,9 @@ class WorldMockTest
 		WorldMock worldMock = new WorldMock(Material.COAL_BLOCK, 3);
 		Location location = new Location(worldMock, 2, 20, 3);
 		location.getBlock().setType(Material.WATER);
-		Assertions.assertEquals(3, worldMock.getHighestBlockYAt(2, 3, HeightMap.OCEAN_FLOOR));
-		Assertions.assertEquals(20, worldMock.getHighestBlockYAt(2, 3, HeightMap.WORLD_SURFACE));
-		Assertions.assertEquals(20, worldMock.getHighestBlockYAt(2, 3, HeightMap.MOTION_BLOCKING));
+		assertEquals(3, worldMock.getHighestBlockYAt(2, 3, HeightMap.OCEAN_FLOOR));
+		assertEquals(20, worldMock.getHighestBlockYAt(2, 3, HeightMap.WORLD_SURFACE));
+		assertEquals(20, worldMock.getHighestBlockYAt(2, 3, HeightMap.MOTION_BLOCKING));
 	}
 
 	@Test
@@ -1328,12 +1327,12 @@ class WorldMockTest
 		WallSign wallSign = new WallSignMock(Material.ACACIA_WALL_SIGN);
 		wallSign.setWaterlogged(true);
 		block.setBlockData(wallSign);
-		Assertions.assertEquals(3, worldMock.getHighestBlockYAt(2, 3, HeightMap.OCEAN_FLOOR));
-		Assertions.assertEquals(20, worldMock.getHighestBlockYAt(2, 3, HeightMap.MOTION_BLOCKING));
+		assertEquals(3, worldMock.getHighestBlockYAt(2, 3, HeightMap.OCEAN_FLOOR));
+		assertEquals(20, worldMock.getHighestBlockYAt(2, 3, HeightMap.MOTION_BLOCKING));
 		wallSign.setWaterlogged(false);
 		block.setBlockData(wallSign);
-		Assertions.assertEquals(3, worldMock.getHighestBlockYAt(2, 3, HeightMap.MOTION_BLOCKING));
-		Assertions.assertEquals(20, worldMock.getHighestBlockYAt(2, 3, HeightMap.WORLD_SURFACE));
+		assertEquals(3, worldMock.getHighestBlockYAt(2, 3, HeightMap.MOTION_BLOCKING));
+		assertEquals(20, worldMock.getHighestBlockYAt(2, 3, HeightMap.WORLD_SURFACE));
 	}
 
 	@Test
@@ -1342,8 +1341,8 @@ class WorldMockTest
 		WorldMock worldMock = new WorldMock(Material.COAL_BLOCK, 3);
 		Location location = new Location(worldMock, 2, 20, 3);
 		location.getBlock().setType(Material.ACACIA_LEAVES);
-		Assertions.assertEquals(3, worldMock.getHighestBlockYAt(2, 3, HeightMap.MOTION_BLOCKING_NO_LEAVES));
-		Assertions.assertEquals(20, worldMock.getHighestBlockYAt(2, 3, HeightMap.MOTION_BLOCKING));
+		assertEquals(3, worldMock.getHighestBlockYAt(2, 3, HeightMap.MOTION_BLOCKING_NO_LEAVES));
+		assertEquals(20, worldMock.getHighestBlockYAt(2, 3, HeightMap.MOTION_BLOCKING));
 	}
 
 	@Test
@@ -1352,9 +1351,10 @@ class WorldMockTest
 		WorldMock worldMock = new WorldMock(Material.COAL_BLOCK, 0);
 		Location location = new Location(worldMock, 2, 0, 3);
 		location.getBlock().setType(Material.AIR);
-		Assertions.assertEquals(-1, worldMock.getHighestBlockYAt(2, 3, HeightMap.WORLD_SURFACE));
+		assertEquals(-1, worldMock.getHighestBlockYAt(2, 3, HeightMap.WORLD_SURFACE));
 	}
 
+	@Test
 	void setThundering_cancelled()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
