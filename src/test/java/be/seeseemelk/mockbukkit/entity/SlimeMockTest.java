@@ -43,6 +43,15 @@ class SlimeMockTest
 	{
 		slime.setSize(2);
 		assertEquals(2, slime.getSize());
+		assertEquals(4, slime.getHealth());
+	}
+
+	@Test
+	void testSetMaxSize()
+	{
+		slime.setSize(127);
+		assertEquals(127, slime.getSize());
+		assertEquals(16129, slime.getHealth());
 	}
 
 	@Test

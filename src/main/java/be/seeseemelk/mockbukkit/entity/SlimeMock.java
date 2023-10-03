@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Slime;
 import org.jetbrains.annotations.NotNull;
@@ -40,6 +41,11 @@ public class SlimeMock extends MobMock implements Slime
 		if (size > 127)
 		{
 			throw new IllegalArgumentException("Size cannot be greater than 127");
+		}
+		if (this.getHealth() > 0)
+		{
+			this.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(size * size);
+			this.setHealth(this.getMaxHealth());
 		}
 		this.size = size;
 	}
