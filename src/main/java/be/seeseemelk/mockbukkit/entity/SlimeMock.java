@@ -31,17 +31,17 @@ public class SlimeMock extends MobMock implements Slime
 	}
 
 	@Override
-	public void setSize(int sz)
+	public void setSize(int size)
 	{
-		if (sz < 1)
+		if (size < 1)
 		{
 			throw new IllegalArgumentException("Size cannot be less than 1");
 		}
-		if (sz > 127)
+		if (size > 127)
 		{
 			throw new IllegalArgumentException("Size cannot be greater than 127");
 		}
-		this.size = sz;
+		this.size = size;
 	}
 
 	@Override
