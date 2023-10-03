@@ -41,6 +41,7 @@ class EnderPearlMockTest
 	{
 		pearl.setItem(new ItemStack(Material.APPLE));
 		assertEquals(Material.APPLE, pearl.getItem().getType());
+		assertEquals(1, pearl.getItem().getAmount());
 	}
 
 	@Test
