@@ -1272,8 +1272,8 @@ public class WorldMock implements World
 		else if (clazz == Slime.class)
 		{
 			return new SlimeMock(server, UUID.randomUUID());
-    }
-    else if (clazz == Ocelot.class)
+        }
+        else if (clazz == Ocelot.class)
 		{
 			return new OcelotMock(server, UUID.randomUUID());
 		}
