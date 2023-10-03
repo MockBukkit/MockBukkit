@@ -1,0 +1,52 @@
+{
+	"values": [
+		{
+			"key": "minecraft:sentry"
+		},
+		{
+			"key": "minecraft:dune"
+		},
+		{
+			"key": "minecraft:coast"
+		},
+		{
+			"key": "minecraft:wild"
+		},
+		{
+			"key": "minecraft:ward"
+		},
+		{
+			"key": "minecraft:eye"
+		},
+		{
+			"key": "minecraft:vex"
+		},
+		{
+			"key": "minecraft:tide"
+		},
+		{
+			"key": "minecraft:snout"
+		},
+		{
+			"key": "minecraft:rib"
+		},
+		{
+			"key": "minecraft:spire"
+		},
+		{
+			"key": "minecraft:wayfinder"
+		},
+		{
+			"key": "minecraft:shaper"
+		},
+		{
+			"key": "minecraft:silence"
+		},
+		{
+			"key": "minecraft:raiser"
+		},
+		{
+			"key": "minecraft:host"
+		}
+	]
+}

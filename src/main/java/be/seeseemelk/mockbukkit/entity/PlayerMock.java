@@ -182,6 +182,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 	private final List<ItemStack> consumedItems = new LinkedList<>();
 	private Locale locale;
+	private @NotNull PlayerProfile playerProfile;
 
 	/**
 	 * Constructs a new {@link PlayerMock} for the provided server with the specified name.
@@ -229,6 +230,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		address = new InetSocketAddress("192.0.2." + random.nextInt(255), random.nextInt(32768, 65535));
 		scoreboard = server.getScoreboardManager().getMainScoreboard();
 		locale = Locale.ENGLISH;
+		playerProfile = Bukkit.createProfile(uuid, name);
 	}
 
 	/**
@@ -2613,15 +2615,14 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public @NotNull PlayerProfile getPlayerProfile()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.playerProfile;
 	}
 
 	@Override
 	public void setPlayerProfile(@NotNull PlayerProfile profile)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(profile, "Profile cannot be null");
+		this.playerProfile = profile;
 	}
 
 	@Override
