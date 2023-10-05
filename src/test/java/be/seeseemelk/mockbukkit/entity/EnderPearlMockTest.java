@@ -14,6 +14,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockBukkitExtension.class)
@@ -39,9 +41,12 @@ class EnderPearlMockTest
 	@Test
 	void testSetItem()
 	{
-		pearl.setItem(new ItemStack(Material.APPLE));
+		ItemStack item = new ItemStack(Material.APPLE);
+		pearl.setItem(item);
 		assertEquals(Material.APPLE, pearl.getItem().getType());
 		assertEquals(1, pearl.getItem().getAmount());
+		assertNotSame(item, pearl.getItem());
+		assertEquals(item, pearl.getItem());
 	}
 
 	@Test
