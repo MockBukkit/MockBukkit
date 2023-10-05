@@ -53,6 +53,7 @@ import be.seeseemelk.mockbukkit.entity.SalmonMock;
 import be.seeseemelk.mockbukkit.entity.SheepMock;
 import be.seeseemelk.mockbukkit.entity.SkeletonHorseMock;
 import be.seeseemelk.mockbukkit.entity.SkeletonMock;
+import be.seeseemelk.mockbukkit.entity.SlimeMock;
 import be.seeseemelk.mockbukkit.entity.SmallFireballMock;
 import be.seeseemelk.mockbukkit.entity.SpawnerMinecartMock;
 import be.seeseemelk.mockbukkit.entity.SpiderMock;
@@ -1238,7 +1239,11 @@ public class WorldMock implements World
 		{
 			return new RabbitMock(server, UUID.randomUUID());
 		}
-    	else if (clazz == Ocelot.class)
+		else if (clazz == Slime.class)
+		{
+			return new SlimeMock(server, UUID.randomUUID());
+        }
+        else if (clazz == Ocelot.class)
 		{
 			return new OcelotMock(server, UUID.randomUUID());
 		}
