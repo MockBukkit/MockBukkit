@@ -122,8 +122,7 @@ public class SignMock extends TileStateMock implements Sign
 	@Deprecated
 	public void setLine(int index, @NotNull String line) throws IndexOutOfBoundsException
 	{
-		Preconditions.checkNotNull(line, "Line cannot be null!");
-		this.lines[index] = line;
+		this.lines[index] = line != null ? line : "";
 	}
 
 	@Override

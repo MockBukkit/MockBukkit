@@ -48,6 +48,7 @@ import be.seeseemelk.mockbukkit.services.ServicesManagerMock;
 import be.seeseemelk.mockbukkit.tags.TagRegistry;
 import be.seeseemelk.mockbukkit.tags.TagWrapperMock;
 import be.seeseemelk.mockbukkit.tags.TagsMock;
+import be.seeseemelk.mockbukkit.tags.internal.InternalTag;
 import com.destroystokyo.paper.entity.ai.MobGoals;
 import com.destroystokyo.paper.event.player.PlayerConnectionCloseEvent;
 import com.destroystokyo.paper.event.server.WhitelistToggleEvent;
@@ -110,6 +111,7 @@ import org.bukkit.event.server.ServerLoadEvent;
 import org.bukkit.event.world.WorldUnloadEvent;
 import org.bukkit.generator.ChunkGenerator.ChunkData;
 import org.bukkit.inventory.InventoryHolder;
+import org.bukkit.inventory.ItemFactory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.Recipe;
@@ -215,6 +217,7 @@ public class ServerMock extends Server.Spigot implements Server
 		// Register default Minecraft Potion Effect Types
 		createPotionEffectTypes();
 		TagsMock.loadDefaultTags(this, true);
+		InternalTag.loadInternalTags();
 		EnchantmentsMock.registerDefaultEnchantments();
 
 		try
@@ -778,7 +781,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public @NotNull ItemFactoryMock getItemFactory()
+	public @NotNull ItemFactory getItemFactory()
 	{
 		return factory;
 	}
@@ -2598,6 +2601,15 @@ public class ServerMock extends Server.Spigot implements Server
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	/**
+	 * Exposes the {@link ServerConfiguration} of this {@link ServerMock}.
+	 * @return The {@link ServerConfiguration} of this {@link ServerMock}.
+	 */
+	public @NotNull ServerConfiguration getServerConfiguration()
+	{
+		return this.serverConfiguration;
 	}
 
 }

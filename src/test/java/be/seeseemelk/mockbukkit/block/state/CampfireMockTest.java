@@ -189,4 +189,9 @@ class CampfireMockTest
 		assertInstanceOf(CampfireMock.class, BlockStateMock.mockState(new BlockMock(Material.SOUL_CAMPFIRE)));
 	}
 
+	@Test
+	void testGetSize()
+	{
+		assertEquals(4, campfire.getSize());
+	}
 }
