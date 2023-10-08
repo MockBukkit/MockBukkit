@@ -378,7 +378,7 @@ public class ServerConfiguration
 
 	/**
 	 * Enum representing all different world types.
-	 * <a href="https://minecraft.fandom.com/wiki/World_preset">Wiki</a>
+	 * <a href="https://minecraft.wiki/w/World_preset">Wiki</a>
 	 */
 	public enum LevelType
 	{
