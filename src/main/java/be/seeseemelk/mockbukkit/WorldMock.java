@@ -264,6 +264,7 @@ public class WorldMock implements World
 	private boolean allowAnimals = true;
 	private boolean allowMonsters = true;
 	private boolean pvp;
+	private boolean hardcore;
 
 
 	/**
@@ -447,15 +448,13 @@ public class WorldMock implements World
 	@Override
 	public int getChunkCount()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return loadedChunks.size();
 	}
 
 	@Override
 	public int getPlayerCount()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getPlayers().size();
 	}
 
 	@Override
@@ -513,8 +512,7 @@ public class WorldMock implements World
 	@Deprecated
 	public @NotNull Block getBlockAtKey(long key)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getBlockAt(getLocationAtKey(key));
 	}
 
 	@Override
@@ -2058,7 +2056,7 @@ public class WorldMock implements World
 	@Override
 	public String @NotNull [] getGameRules()
 	{
-		return gameRules.values().stream().map(Object::toString).collect(Collectors.toList()).toArray(new String[0]);
+		return gameRules.values().stream().map(Object::toString).toList().toArray(new String[0]);
 	}
 
 	@Override
@@ -2775,36 +2773,40 @@ public class WorldMock implements World
 	@Override
 	public boolean isNatural()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return switch (environment) {
+			case THE_END, NETHER -> false;
+			default -> true;
+		};
 	}
 
 	@Override
 	public boolean isBedWorks()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return switch (environment) {
+			case THE_END, NETHER -> false;
+			default -> true;
+		};
 	}
 
 	@Override
 	public boolean hasSkyLight()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return switch (environment) {
+			case THE_END, NETHER -> false;
+			default -> true;
+		};
 	}
 
 	@Override
 	public boolean hasCeiling()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return environment == Environment.NETHER;
 	}
 
 	@Override
 	public boolean isPiglinSafe()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return environment == Environment.NETHER;
 	}
 
 	@Override
@@ -2817,29 +2819,25 @@ public class WorldMock implements World
 	@Override
 	public boolean hasRaids()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return environment != Environment.NETHER;
 	}
 
 	@Override
 	public boolean isUltraWarm()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return environment == Environment.NETHER;
 	}
 
 	@Override
 	public boolean isHardcore()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return hardcore;
 	}
 
 	@Override
 	public void setHardcore(boolean hardcore)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.hardcore = hardcore;
 	}
 
 	@Override
