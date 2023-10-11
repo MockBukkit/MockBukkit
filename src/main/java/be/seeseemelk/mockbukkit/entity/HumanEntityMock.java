@@ -424,7 +424,7 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	@Override
 	public int getExpToLevel()
 	{
-		// Formula from https://minecraft.gamepedia.com/Experience#Leveling_up
+		// Formula from https://minecraft.wiki/w/Experience#Leveling_up
 		if (this.expLevel >= 31)
 			return (9 * this.expLevel) - 158;
 		if (this.expLevel >= 16)

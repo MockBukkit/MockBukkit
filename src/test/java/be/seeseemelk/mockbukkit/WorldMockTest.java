@@ -235,6 +235,45 @@ class WorldMockTest
 	}
 
 	@Test
+	void hardcore()
+	{
+		WorldMock world = new WorldMock();
+		assertFalse(world.isHardcore());
+		world.setHardcore(true);
+		assertTrue(world.isHardcore());
+	}
+
+	@Test
+	void getChunkCount()
+	{
+		WorldMock world = new WorldMock();
+		assertEquals(0, world.getChunkCount());
+		world.getChunkAt(0, 0);
+		assertEquals(1, world.getChunkCount());
+		/* getting an already loaded chunk should not increase the count */
+		world.getChunkAt(0, 0);
+		assertEquals(1, world.getChunkCount());
+	}
+
+	@Test
+	void getPlayerCount()
+	{
+		World worldA = server.addSimpleWorld("worldA");
+		World worldB = server.addSimpleWorld("worldB");
+		assertEquals(0, worldA.getPlayerCount());
+		assertEquals(0, worldB.getPlayerCount());
+		PlayerMock player = server.addPlayer();
+		assertEquals(1, worldA.getPlayerCount());
+		assertEquals(0, worldB.getPlayerCount());
+		player.teleport(worldB.getSpawnLocation());
+		assertEquals(0, worldA.getPlayerCount());
+		assertEquals(1, worldB.getPlayerCount());
+		player.disconnect();
+		assertEquals(0, worldA.getPlayerCount());
+		assertEquals(0, worldB.getPlayerCount());
+	}
+
+	@Test
 	void getLivingEntities_EmptyList()
 	{
 		WorldMock world = new WorldMock();
@@ -1348,6 +1387,15 @@ class WorldMockTest
 		Location location = new Location(world, 0, 0, 0);
 		long blockKey = location.toBlockKey();
 		assertEquals(location, world.getLocationAtKey(blockKey));
+	}
+
+	@Test
+	void testGetBlockAtKey()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Location location = new Location(world, 100, 44, 0);
+		long blockKey = location.toBlockKey();
+		assertEquals(location, world.getBlockAtKey(blockKey).getLocation());
 	}
 
 	@Test

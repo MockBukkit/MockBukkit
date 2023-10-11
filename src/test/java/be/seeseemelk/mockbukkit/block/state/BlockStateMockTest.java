@@ -98,6 +98,14 @@ class BlockStateMockTest
 	}
 
 	@Test
+	void testEquals()
+	{
+		Block block1 = new BlockMock(Material.DIRT);
+		Block block2 = new BlockMock(Material.DIRT);
+		assertEquals(block1.getState(), block2.getState());
+	}
+
+	@Test
 	void testUpdateForceChangesType()
 	{
 		Block block = new BlockMock(Material.CHEST);
