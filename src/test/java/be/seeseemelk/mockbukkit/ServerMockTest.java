@@ -955,6 +955,30 @@ class ServerMockTest
 	}
 
 	@Test
+	void testAddPlayerWithDisallowedAsyncPreLoginResult()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		server.getPluginManager().registerEvents(plugin, plugin);
+		plugin.denyAsyncPreLoginEvent = true;
+		PlayerMock player = server.addPlayer();
+
+		assertFalse(server.getOnlinePlayers().contains(player));
+		server.getPluginManager().assertEventFired(PlayerConnectionCloseEvent.class);
+	}
+
+	@Test
+	void testAddPlayerWithDisallowedLoginResult()
+	{
+		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
+		server.getPluginManager().registerEvents(plugin, plugin);
+		plugin.denyLoginEvent = true;
+		PlayerMock player = server.addPlayer();
+
+		assertFalse(server.getOnlinePlayers().contains(player));
+		server.getPluginManager().assertEventFired(PlayerConnectionCloseEvent.class);
+	}
+
+	@Test
 	void testGetBannedPlayersDefault()
 	{
 		assertEquals(0, server.getBannedPlayers().size());

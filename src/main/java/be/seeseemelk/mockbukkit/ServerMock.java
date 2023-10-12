@@ -298,6 +298,18 @@ public class ServerMock extends Server.Spigot implements Server
 		try
 		{
 			conditionLatch.await();
+			if (preLoginEvent.getLoginResult() != AsyncPlayerPreLoginEvent.Result.ALLOWED)
+			{
+				PlayerConnectionCloseEvent playerConnectionCloseEvent =
+						new PlayerConnectionCloseEvent(player.getUniqueId(),
+								player.getName(),
+								player.getAddress().getAddress(),
+								false);
+
+				getPluginManager().callEvent(playerConnectionCloseEvent);
+				playerList.disconnectPlayer(player);
+				return;
+			}
 		}
 		catch (InterruptedException e)
 		{
@@ -308,6 +320,19 @@ public class ServerMock extends Server.Spigot implements Server
 
 		PlayerLoginEvent playerLoginEvent = new PlayerLoginEvent(player, address.getHostString(), address.getAddress());
 		Bukkit.getPluginManager().callEvent(playerLoginEvent);
+
+		if (playerLoginEvent.getResult() != PlayerLoginEvent.Result.ALLOWED)
+		{
+			PlayerConnectionCloseEvent playerConnectionCloseEvent =
+					new PlayerConnectionCloseEvent(player.getUniqueId(),
+							player.getName(),
+							player.getAddress().getAddress(),
+							false);
+
+			getPluginManager().callEvent(playerConnectionCloseEvent);
+			playerList.disconnectPlayer(player);
+			return;
+		}
 
 		Component joinMessage = MiniMessage.miniMessage()
 				.deserialize("<name> has joined the Server!", Placeholder.component("name", player.displayName()));
@@ -457,10 +482,11 @@ public class ServerMock extends Server.Spigot implements Server
 	/**
 	 * Removes a mocked world from this server.
 	 *
-	 * @param world	The world to remove.
+	 * @param world The world to remove.
 	 * @return true if the world was removed, otherwise false.
 	 */
-	public boolean removeWorld(WorldMock world) {
+	public boolean removeWorld(WorldMock world)
+	{
 		AsyncCatcher.catchOp("world remove");
 		return worlds.remove(world);
 	}
@@ -1161,10 +1187,12 @@ public class ServerMock extends Server.Spigot implements Server
 
 	/**
 	 * Sets the server listen port.
+	 *
 	 * @param port The server listen port.
 	 * @see ServerMock#getPort()
 	 */
-	public void setPort(int port) {
+	public void setPort(int port)
+	{
 		this.serverConfiguration.setServerPort(port);
 	}
 
