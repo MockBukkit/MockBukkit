@@ -78,7 +78,6 @@ import org.bukkit.GameRule;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
-import org.bukkit.SoundCategory;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
@@ -119,6 +118,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -253,6 +253,19 @@ class WorldMockTest
 		/* getting an already loaded chunk should not increase the count */
 		world.getChunkAt(0, 0);
 		assertEquals(1, world.getChunkCount());
+	}
+
+	@Test
+	void getChunkCount_Unload()
+	{
+		WorldMock world = new WorldMock();
+		world.loadChunk(0, 1);
+		assertEquals(1, world.getChunkCount());
+		/* unloading a different chunk should not decrease the count */
+		world.unloadChunk(0, 2);
+		assertEquals(1, world.getChunkCount());
+		world.unloadChunk(0, 1);
+		assertEquals(0, world.getChunkCount());
 	}
 
 	@Test
@@ -532,6 +545,68 @@ class WorldMockTest
 	{
 		WorldMock world = new WorldMock();
 		assertEquals(0, world.getLoadedChunks().length);
+	}
+
+	@Test
+	void getLoadedChunks_LoadTwice()
+	{
+		WorldMock world = new WorldMock();
+		Chunk chunk = world.getChunkAt(0, 1);
+		world.getChunkAt(0, 1);
+		Chunk[] loaded = world.getLoadedChunks();
+		assertEquals(1, loaded.length);
+		assertEquals(chunk, loaded[0]);
+	}
+
+	@Test
+	void getLoadedChunks_Unload()
+	{
+		WorldMock world = new WorldMock();
+		world.getChunkAt(0, 1);
+		world.unloadChunk(0, 1);
+		assertEquals(0, world.getLoadedChunks().length);
+	}
+
+	@Test
+	void loadChunk_AfterUnload()
+	{
+		WorldMock world = new WorldMock();
+		world.loadChunk(0, 1);
+		assertTrue(world.isChunkLoaded(0, 1));
+		world.unloadChunk(0, 1);
+		assertFalse(world.isChunkLoaded(0, 1));
+		world.loadChunk(0, 1);
+		assertTrue(world.isChunkLoaded(0, 1));
+	}
+
+	@Test
+	void unloadChunk_NoSaving()
+	{
+		WorldMock world = new WorldMock();
+		Chunk chunk = world.getChunkAt(0, 1);
+		chunk.unload(false);
+		assertNotSame(chunk, world.getChunkAt(0, 1));
+		assertEquals(chunk, world.getChunkAt(0, 1));
+	}
+
+	@Test
+	void unloadChunk_Save()
+	{
+		WorldMock world = new WorldMock();
+		Chunk chunk = world.getChunkAt(0, 1);
+		chunk.unload();
+		assertSame(chunk, world.getChunkAt(0, 1));
+	}
+
+	@Test
+	void unloadChunk_Overwrite()
+	{
+		WorldMock world = new WorldMock();
+		Chunk chunk = world.getChunkAt(0, 1);
+		world.unloadChunk(0, 1);
+		world.loadChunk(0, 1);
+		world.unloadChunk(0, 1, false);
+		assertSame(chunk, world.getChunkAt(0, 1));
 	}
 
 	@Test

@@ -1,5 +1,7 @@
 package be.seeseemelk.mockbukkit;
 
+import org.bukkit.Chunk;
+import org.bukkit.Chunk.LoadLevel;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Zombie;
@@ -148,4 +150,14 @@ class ChunkTest
 		assertFalse(entities.contains(entity3));
 	}
 
+	@Test
+	void getLoadLevel()
+	{
+		ChunkMock chunk = world.getChunkAt(0, 1);
+		assertEquals(LoadLevel.ENTITY_TICKING, chunk.getLoadLevel());
+		chunk.unload();
+		assertEquals(LoadLevel.UNLOADED, chunk.getLoadLevel());
+		chunk.load();
+		assertEquals(LoadLevel.ENTITY_TICKING, chunk.getLoadLevel());
+	}
 }
