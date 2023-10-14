@@ -42,6 +42,7 @@ import be.seeseemelk.mockbukkit.entity.MuleMock;
 import be.seeseemelk.mockbukkit.entity.MushroomCowMock;
 import be.seeseemelk.mockbukkit.entity.OcelotMock;
 import be.seeseemelk.mockbukkit.entity.PandaMock;
+import be.seeseemelk.mockbukkit.entity.ParrotMock;
 import be.seeseemelk.mockbukkit.entity.PigMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import be.seeseemelk.mockbukkit.entity.PolarBearMock;
@@ -1282,7 +1283,8 @@ class WorldMockTest
 				Arguments.of(EntityType.PANDA, PandaMock.class),
 				Arguments.of(EntityType.RABBIT, RabbitMock.class),
 				Arguments.of(EntityType.SLIME, SlimeMock.class),
-        		Arguments.of(EntityType.OCELOT, OcelotMock.class)
+        		Arguments.of(EntityType.OCELOT, OcelotMock.class),
+				Arguments.of(EntityType.PARROT, ParrotMock.class)
 		);
 	}
 
