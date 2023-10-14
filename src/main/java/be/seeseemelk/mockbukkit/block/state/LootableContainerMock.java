@@ -122,7 +122,7 @@ public abstract class LootableContainerMock extends ContainerMock implements Loo
 	@Override
 	public boolean hasPendingRefill()
 	{
-		return nextRefill != -1;
+		return nextRefill != -1 && nextRefill > lastFilled;
 	}
 
 	@Override
@@ -141,6 +141,11 @@ public abstract class LootableContainerMock extends ContainerMock implements Loo
 	public long setNextRefill(long refillAt)
 	{
 		final long oldRefill = this.nextRefill;
+
+		if (refillAt < -1)
+		{
+			refillAt = -1;
+		}
 		this.nextRefill = refillAt;
 
 		new BukkitRunnable()
@@ -155,7 +160,7 @@ public abstract class LootableContainerMock extends ContainerMock implements Loo
 				}
 
 			}
-		}.runTaskTimer(null, 1, 1);
+		}.runTaskTimer(null, 0, 1);
 
 		return oldRefill;
 	}
