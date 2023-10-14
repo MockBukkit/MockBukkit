@@ -53,6 +53,7 @@ import be.seeseemelk.mockbukkit.entity.SalmonMock;
 import be.seeseemelk.mockbukkit.entity.SheepMock;
 import be.seeseemelk.mockbukkit.entity.SkeletonHorseMock;
 import be.seeseemelk.mockbukkit.entity.SkeletonMock;
+import be.seeseemelk.mockbukkit.entity.SlimeMock;
 import be.seeseemelk.mockbukkit.entity.SmallFireballMock;
 import be.seeseemelk.mockbukkit.entity.SpawnerMinecartMock;
 import be.seeseemelk.mockbukkit.entity.SpiderMock;
@@ -234,6 +235,7 @@ public class WorldMock implements World
 	private final Map<GameRule<?>, Object> gameRules = new HashMap<>();
 	private final MetadataTable metadataTable = new MetadataTable();
 	private final Map<ChunkCoordinate, ChunkMock> loadedChunks = new HashMap<>();
+	private final Map<ChunkCoordinate, ChunkMock> savedChunks = new HashMap<>();
 	private final PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
 	private final @Nullable ServerMock server;
 	private final Material defaultBlock;
@@ -263,6 +265,7 @@ public class WorldMock implements World
 	private boolean allowAnimals = true;
 	private boolean allowMonsters = true;
 	private boolean pvp;
+	private boolean hardcore;
 
 
 	/**
@@ -446,15 +449,13 @@ public class WorldMock implements World
 	@Override
 	public int getChunkCount()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return loadedChunks.size();
 	}
 
 	@Override
 	public int getPlayerCount()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getPlayers().size();
 	}
 
 	@Override
@@ -512,8 +513,7 @@ public class WorldMock implements World
 	@Deprecated
 	public @NotNull Block getBlockAtKey(long key)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getBlockAt(getLocationAtKey(key));
 	}
 
 	@Override
@@ -588,14 +588,13 @@ public class WorldMock implements World
 	@Override
 	public @NotNull ChunkMock getChunkAt(int x, int z)
 	{
-		return getChunkAt(new ChunkCoordinate(x, z));
+		return getChunkAt(x, z, false);
 	}
 
 	@Override
-	public @NotNull Chunk getChunkAt(int x, int z, boolean generate)
+	public @NotNull ChunkMock getChunkAt(int x, int z, boolean generate)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getChunkAt(new ChunkCoordinate(x, z));
 	}
 
 	/**
@@ -612,7 +611,11 @@ public class WorldMock implements World
 		ChunkMock chunk = loadedChunks.get(coordinate);
 		if (chunk == null)
 		{
-			chunk = new ChunkMock(this, coordinate.getX(), coordinate.getZ());
+			chunk = savedChunks.get(coordinate);
+			if (chunk == null)
+			{
+				chunk = new ChunkMock(this, coordinate.getX(), coordinate.getZ());
+			}
 			loadedChunks.put(coordinate, chunk);
 		}
 		return chunk;
@@ -725,8 +728,7 @@ public class WorldMock implements World
 	@Override
 	public boolean isChunkLoaded(Chunk chunk)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return isChunkLoaded(chunk.getX(), chunk.getZ());
 	}
 
 	@Override
@@ -766,8 +768,8 @@ public class WorldMock implements World
 	public boolean loadChunk(int x, int z, boolean generate)
 	{
 		AsyncCatcher.catchOp("chunk load");
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		getChunkAt(x, z, generate);
+		return true;
 	}
 
 	@Override
@@ -786,8 +788,15 @@ public class WorldMock implements World
 	public boolean unloadChunk(int x, int z, boolean save)
 	{
 		AsyncCatcher.catchOp("chunk unload");
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		ChunkCoordinate chunkCoordinate = new ChunkCoordinate(x, z);
+		ChunkMock chunk = loadedChunks.remove(chunkCoordinate);
+		if (chunk == null) {
+			return true;
+		}
+		if (save) {
+			savedChunks.put(chunkCoordinate, chunk);
+		}
+		return true;
 	}
 
 	@Override
@@ -1268,7 +1277,11 @@ public class WorldMock implements World
 		{
 			return new RabbitMock(server, UUID.randomUUID());
 		}
-    	else if (clazz == Ocelot.class)
+		else if (clazz == Slime.class)
+		{
+			return new SlimeMock(server, UUID.randomUUID());
+        }
+        else if (clazz == Ocelot.class)
 		{
 			return new OcelotMock(server, UUID.randomUUID());
 		}
@@ -2053,7 +2066,7 @@ public class WorldMock implements World
 	@Override
 	public String @NotNull [] getGameRules()
 	{
-		return gameRules.values().stream().map(Object::toString).collect(Collectors.toList()).toArray(new String[0]);
+		return gameRules.values().stream().map(Object::toString).toList().toArray(new String[0]);
 	}
 
 	@Override
@@ -2770,36 +2783,40 @@ public class WorldMock implements World
 	@Override
 	public boolean isNatural()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return switch (environment) {
+			case THE_END, NETHER -> false;
+			default -> true;
+		};
 	}
 
 	@Override
 	public boolean isBedWorks()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return switch (environment) {
+			case THE_END, NETHER -> false;
+			default -> true;
+		};
 	}
 
 	@Override
 	public boolean hasSkyLight()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return switch (environment) {
+			case THE_END, NETHER -> false;
+			default -> true;
+		};
 	}
 
 	@Override
 	public boolean hasCeiling()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return environment == Environment.NETHER;
 	}
 
 	@Override
 	public boolean isPiglinSafe()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return environment == Environment.NETHER;
 	}
 
 	@Override
@@ -2812,29 +2829,25 @@ public class WorldMock implements World
 	@Override
 	public boolean hasRaids()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return environment != Environment.NETHER;
 	}
 
 	@Override
 	public boolean isUltraWarm()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return environment == Environment.NETHER;
 	}
 
 	@Override
 	public boolean isHardcore()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return hardcore;
 	}
 
 	@Override
 	public void setHardcore(boolean hardcore)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.hardcore = hardcore;
 	}
 
 	@Override
