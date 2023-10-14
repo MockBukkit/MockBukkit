@@ -207,4 +207,15 @@ class ChunkTest
 		assertEquals(LoadLevel.ENTITY_TICKING, chunk.getLoadLevel());
 	}
 
+	@Test
+	void setSlimeChunk()
+	{
+		ChunkMock chunk = world.getChunkAt(0, 0);
+		assertFalse(chunk.isSlimeChunk());
+		chunk.setSlimeChunk(true);
+		assertTrue(chunk.isSlimeChunk());
+		chunk.setSlimeChunk(false);
+		assertFalse(chunk.isSlimeChunk());
+	}
+  
 }
