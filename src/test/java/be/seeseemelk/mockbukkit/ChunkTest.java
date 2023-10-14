@@ -1,6 +1,5 @@
 package be.seeseemelk.mockbukkit;
 
-import org.bukkit.Chunk;
 import org.bukkit.Chunk.LoadLevel;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
@@ -159,5 +158,16 @@ class ChunkTest
 		assertEquals(LoadLevel.UNLOADED, chunk.getLoadLevel());
 		chunk.load();
 		assertEquals(LoadLevel.ENTITY_TICKING, chunk.getLoadLevel());
+	}
+
+	@Test
+	void setSlimeChunk()
+	{
+		ChunkMock chunk = world.getChunkAt(0, 0);
+		assertFalse(chunk.isSlimeChunk());
+		chunk.setSlimeChunk(true);
+		assertTrue(chunk.isSlimeChunk());
+		chunk.setSlimeChunk(false);
+		assertFalse(chunk.isSlimeChunk());
 	}
 }
