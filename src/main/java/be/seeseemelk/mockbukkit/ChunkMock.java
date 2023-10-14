@@ -30,6 +30,7 @@ public class ChunkMock implements Chunk
 	private final int x;
 	private final int z;
 	private final PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
+	private boolean isSlimeChunk;
 
 	/**
 	 * Constructs a new {@link ChunkMock} for the provided world, at the specified coordinates.
@@ -192,11 +193,20 @@ public class ChunkMock implements Chunk
 		return world.unloadChunk(this);
 	}
 
+	/**
+	 * Sets the return value of {@link #isSlimeChunk()}.
+	 *
+	 * @param isSlimeChunk Whether this is a slime chunk.
+	 */
+	public void setSlimeChunk(boolean isSlimeChunk)
+	{
+		this.isSlimeChunk = isSlimeChunk;
+	}
+
 	@Override
 	public boolean isSlimeChunk()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.isSlimeChunk;
 	}
 
 	@Override
