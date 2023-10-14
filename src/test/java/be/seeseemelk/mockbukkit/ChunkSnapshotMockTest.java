@@ -137,7 +137,9 @@ class ChunkSnapshotMockTest
 	@Test
 	void getBiome()
 	{
-		world.setBiome(0, 0, 0, Biome.BADLANDS);
+		// Chunk is at world 1, 1. Chunk 0, 0 = world 16, 16
+		world.setBiome(16, 0, 16, Biome.BADLANDS);
+
 		assertEquals(Biome.BADLANDS, chunk.getChunkSnapshot(false, true, false).getBiome(0, 0));
 		assertEquals(Biome.BADLANDS, chunk.getChunkSnapshot(false, true, false).getBiome(0, 0, 0));
 	}
@@ -153,7 +155,8 @@ class ChunkSnapshotMockTest
 	@Test
 	void getBiome_EitherBiome_ReturnsBiomes()
 	{
-		world.setBiome(0, 0, 0, Biome.BADLANDS);
+		// Chunk is at world 1, 1. Chunk 0, 0 = world 16, 16
+		world.setBiome(16, 0, 16, Biome.BADLANDS);
 
 		assertEquals(Biome.BADLANDS, chunk.getChunkSnapshot(false, true, false).getBiome(0, 0, 0));
 		assertEquals(Biome.BADLANDS, chunk.getChunkSnapshot(false, false, true).getBiome(0, 0, 0));
