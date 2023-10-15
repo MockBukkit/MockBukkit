@@ -47,6 +47,9 @@ public class ParrotMock extends AnimalsMock implements Parrot
 		return this.isDancing;
 	}
 
+	public void setDancing(boolean isDancing){
+		this.isDancing = isDancing;
+	}
 	@Override
 	public boolean isTamed()
 	{

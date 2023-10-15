@@ -50,6 +50,12 @@ public class ParrotMockTest
 	}
 
 	@Test
+	void testSetDancing(){
+		parrot.setDancing(true);
+		assertTrue(parrot.isDancing());
+	}
+
+	@Test
 	void testIsTamed()
 	{
 		assertFalse(parrot.isTamed());
