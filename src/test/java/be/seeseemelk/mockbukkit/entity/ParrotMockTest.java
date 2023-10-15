@@ -37,42 +37,42 @@ public class ParrotMockTest
 		assertEquals(EntityType.PARROT, parrot.getType());
 	}
 	@Test
-	public void testSetVariant()
+	void testSetVariant()
 	{
 		Parrot.Variant newVariant = Parrot.Variant.BLUE;
 		parrot.setVariant(newVariant);
 		assertEquals(newVariant, parrot.getVariant());
 	}
 	@Test
-	public void testIsDancing()
+	void testIsDancing()
 	{
 		assertFalse(parrot.isDancing());
 	}
 
 	@Test
-	public void testIsTamed()
+	void testIsTamed()
 	{
 		assertFalse(parrot.isTamed());
 	}
 	@Test
-	public void testSetTamed()
+	void testSetTamed()
 	{
 		parrot.setTamed(true);
 		assertTrue(parrot.isTamed());
 	}
 	@Test
-	public void testIsSitting()
+	void testIsSitting()
 	{
 		assertFalse(parrot.isSitting());
 	}
 	@Test
-	public void testSetSitting()
+	void testSetSitting()
 	{
 		parrot.setSitting(true);
 		assertTrue(parrot.isSitting());
 	}
 	@Test
-	public void testSetOwner()
+	void testSetOwner()
 	{
 		AnimalTamer owner = server.addPlayer();
 		parrot.setOwner(owner);
