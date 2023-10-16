@@ -29,8 +29,8 @@ public class ChunkMock implements Chunk
 	private final World world;
 	private final int x;
 	private final int z;
-	private boolean loaded = true;
 	private final PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
+	private boolean isSlimeChunk;
 
 	/**
 	 * Constructs a new {@link ChunkMock} for the provided world, at the specified coordinates.
@@ -68,8 +68,7 @@ public class ChunkMock implements Chunk
 	@Override
 	public boolean isGenerated()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return true;
 	}
 
 	@Override
@@ -141,9 +140,7 @@ public class ChunkMock implements Chunk
 	@Override
 	public boolean isEntitiesLoaded()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		return isLoaded();
 	}
 
 	@Override
@@ -168,7 +165,7 @@ public class ChunkMock implements Chunk
 	@Override
 	public boolean isLoaded()
 	{
-		return loaded;
+		return world.isChunkLoaded(this);
 	}
 
 	@Override
@@ -180,28 +177,36 @@ public class ChunkMock implements Chunk
 	@Override
 	public boolean load()
 	{
-		loaded = true;
+		world.loadChunk(this);
 		return true;
 	}
 
 	@Override
 	public boolean unload(boolean save)
 	{
-		return unload();
+		return world.unloadChunk(x, z, save);
 	}
 
 	@Override
 	public boolean unload()
 	{
-		loaded = false;
-		return true;
+		return world.unloadChunk(this);
+	}
+
+	/**
+	 * Sets the return value of {@link #isSlimeChunk()}.
+	 *
+	 * @param isSlimeChunk Whether this is a slime chunk.
+	 */
+	public void setSlimeChunk(boolean isSlimeChunk)
+	{
+		this.isSlimeChunk = isSlimeChunk;
 	}
 
 	@Override
 	public boolean isSlimeChunk()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.isSlimeChunk;
 	}
 
 	@Override
@@ -289,8 +294,7 @@ public class ChunkMock implements Chunk
 	@Override
 	public @NotNull LoadLevel getLoadLevel()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return isLoaded() ? LoadLevel.ENTITY_TICKING : LoadLevel.UNLOADED;
 	}
 
 	@Override

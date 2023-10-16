@@ -235,6 +235,7 @@ public class WorldMock implements World
 	private final Map<GameRule<?>, Object> gameRules = new HashMap<>();
 	private final MetadataTable metadataTable = new MetadataTable();
 	private final Map<ChunkCoordinate, ChunkMock> loadedChunks = new HashMap<>();
+	private final Map<ChunkCoordinate, ChunkMock> savedChunks = new HashMap<>();
 	private final PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
 	private final @Nullable ServerMock server;
 	private final Material defaultBlock;
@@ -587,14 +588,13 @@ public class WorldMock implements World
 	@Override
 	public @NotNull ChunkMock getChunkAt(int x, int z)
 	{
-		return getChunkAt(new ChunkCoordinate(x, z));
+		return getChunkAt(x, z, false);
 	}
 
 	@Override
-	public @NotNull Chunk getChunkAt(int x, int z, boolean generate)
+	public @NotNull ChunkMock getChunkAt(int x, int z, boolean generate)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getChunkAt(new ChunkCoordinate(x, z));
 	}
 
 	/**
@@ -611,7 +611,11 @@ public class WorldMock implements World
 		ChunkMock chunk = loadedChunks.get(coordinate);
 		if (chunk == null)
 		{
-			chunk = new ChunkMock(this, coordinate.getX(), coordinate.getZ());
+			chunk = savedChunks.get(coordinate);
+			if (chunk == null)
+			{
+				chunk = new ChunkMock(this, coordinate.getX(), coordinate.getZ());
+			}
 			loadedChunks.put(coordinate, chunk);
 		}
 		return chunk;
@@ -724,8 +728,7 @@ public class WorldMock implements World
 	@Override
 	public boolean isChunkLoaded(Chunk chunk)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return isChunkLoaded(chunk.getX(), chunk.getZ());
 	}
 
 	@Override
@@ -765,8 +768,8 @@ public class WorldMock implements World
 	public boolean loadChunk(int x, int z, boolean generate)
 	{
 		AsyncCatcher.catchOp("chunk load");
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		getChunkAt(x, z, generate);
+		return true;
 	}
 
 	@Override
@@ -785,8 +788,15 @@ public class WorldMock implements World
 	public boolean unloadChunk(int x, int z, boolean save)
 	{
 		AsyncCatcher.catchOp("chunk unload");
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		ChunkCoordinate chunkCoordinate = new ChunkCoordinate(x, z);
+		ChunkMock chunk = loadedChunks.remove(chunkCoordinate);
+		if (chunk == null) {
+			return true;
+		}
+		if (save) {
+			savedChunks.put(chunkCoordinate, chunk);
+		}
+		return true;
 	}
 
 	@Override
