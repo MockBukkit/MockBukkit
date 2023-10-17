@@ -44,7 +44,7 @@ public class BlockMock implements Block
 
 	private final MetadataTable metadataTable = new MetadataTable();
 
-	private final @Nullable Location location;
+	private final Location location;
 	private BlockStateMock state;
 	private Material material;
 	private byte data;

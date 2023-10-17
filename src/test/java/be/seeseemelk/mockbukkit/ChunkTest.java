@@ -2,6 +2,8 @@ package be.seeseemelk.mockbukkit;
 
 import org.bukkit.Chunk.LoadLevel;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Zombie;
 import org.junit.jupiter.api.AfterEach;
@@ -60,6 +62,51 @@ class ChunkTest
 	void getWorld_AnyChunkFromWorld_ExactWorldReference()
 	{
 		assertSame(world, world.getChunkAt(0, 0).getWorld());
+	}
+
+	@Test
+	void getBlock_CorrectBlock()
+	{
+		world.getBlockAt(16 + 8, 0, 16 + 6).setType(Material.STONE);
+		ChunkMock chunk = world.getChunkAt(1, 1);
+
+		Material type = chunk.getBlock(8, 0, 6).getType();
+
+		assertEquals(Material.STONE, type);
+	}
+
+	@Test
+	void getBlock_Coordinate_CorrectBlock()
+	{
+		world.getBlockAt(16 + 8, 0, 16 + 6).setType(Material.STONE);
+		ChunkMock chunk = world.getChunkAt(1, 1);
+
+		Material type = chunk.getBlock(new Coordinate(8, 0, 6)).getType();
+
+		assertEquals(Material.STONE, type);
+	}
+
+	@Test
+	void getBlocks_CorrectSize()
+	{
+		ChunkMock chunk = world.getChunkAt(0, 0);
+
+		// w * w * h
+		assertEquals(32768, chunk.getBlocks().size());
+	}
+
+	@Test
+	void getBlocks_CorrectBlocks()
+	{
+		world.getBlockAt(16, 0, 16).setType(Material.STONE);
+		world.getBlockAt(16, 0, 17).setType(Material.STONE_BRICKS);
+		ChunkMock chunk = world.getChunkAt(1, 1);
+
+		Block block1 = chunk.getBlocks().get(0);
+		Block block2 = chunk.getBlocks().get(1);
+
+		assertEquals(Material.STONE, block1.getType());
+		assertEquals(Material.STONE_BRICKS, block2.getType());
 	}
 
 	@Test
@@ -170,4 +217,5 @@ class ChunkTest
 		chunk.setSlimeChunk(false);
 		assertFalse(chunk.isSlimeChunk());
 	}
+  
 }
