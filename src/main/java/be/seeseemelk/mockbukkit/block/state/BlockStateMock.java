@@ -228,6 +228,7 @@ public class BlockStateMock implements BlockState
 	public void setData(@NotNull org.bukkit.material.MaterialData data)
 	{
 		this.material = data.getItemType();
+		this.blockData = BlockDataMock.mock(this.material);
 	}
 
 	@Override
@@ -264,7 +265,7 @@ public class BlockStateMock implements BlockState
 			return false;
 		}
 
-		b.setType(this.getType());
+		b.setBlockData(blockData);
 
 		if (b instanceof BlockMock bm)
 		{
@@ -355,7 +356,7 @@ public class BlockStateMock implements BlockState
 		int hash = 1;
 		hash = prime * hash + (this.isPlaced() ? this.getWorld().hashCode() : 0);
 		hash = prime * hash + (this.isPlaced() ? this.getLocation().hashCode() : 0);
-//		hash = prime * hash + (this.getBlockData() != null ? this.getBlockData().hashCode() : 0); Not implemented
+		hash = prime * hash + (this.getBlockData() != null ? this.getBlockData().hashCode() : 0);
 		return hash;
 	}
 
@@ -366,10 +367,12 @@ public class BlockStateMock implements BlockState
 		{
 			return false;
 		}
+		if (this.getBlockData() != other.getBlockData() && (this.getBlockData() == null || !this.getBlockData().equals(other.getBlockData())))
+		{
+			return false;
+		}
 		return !this.isPlaced() || this.getLocation() == other.getLocation() || (this.getLocation() != null && this.getLocation().equals(other.getLocation()));
-//		if (this.getBlockData() != other.getBlockData() && (this.getBlockData() == null || !this.getBlockData().equals(other.getBlockData()))) {
-//			return false; Not implemented
-//		}
+
 	}
 
 	/**

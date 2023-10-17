@@ -251,4 +251,5 @@ class ChunkTest
 		chunk.setSlimeChunk(false);
 		assertFalse(chunk.isSlimeChunk());
 	}
+  
 }
