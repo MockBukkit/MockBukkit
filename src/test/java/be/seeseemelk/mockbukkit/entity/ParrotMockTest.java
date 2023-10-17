@@ -15,16 +15,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ParrotMockTest
+class ParrotMockTest
 {
+
 	private ParrotMock parrot;
 	private ServerMock server;
+
 	@BeforeEach
 	void setUp()
 	{
 		server = MockBukkit.mock();
 		parrot = new ParrotMock(server, UUID.randomUUID());
 	}
+
 	@AfterEach
 	void tearDown()
 	{
@@ -36,6 +39,7 @@ public class ParrotMockTest
 	{
 		assertEquals(EntityType.PARROT, parrot.getType());
 	}
+
 	@Test
 	void testSetVariant()
 	{
@@ -44,29 +48,32 @@ public class ParrotMockTest
 		assertEquals(newVariant, parrot.getVariant());
 	}
 
-
 	@Test
 	void testIsTamed()
 	{
 		assertFalse(parrot.isTamed());
 	}
+
 	@Test
 	void testSetTamed()
 	{
 		parrot.setTamed(true);
 		assertTrue(parrot.isTamed());
 	}
+
 	@Test
 	void testIsSitting()
 	{
 		assertFalse(parrot.isSitting());
 	}
+
 	@Test
 	void testSetSitting()
 	{
 		parrot.setSitting(true);
 		assertTrue(parrot.isSitting());
 	}
+
 	@Test
 	void testSetOwner()
 	{
@@ -74,6 +81,5 @@ public class ParrotMockTest
 		parrot.setOwner(owner);
 		assertEquals(owner, parrot.getOwner());
 	}
-
 
 }

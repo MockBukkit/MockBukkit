@@ -13,11 +13,13 @@ import java.util.UUID;
 
 public class ParrotMock extends AnimalsMock implements Parrot
 {
+
 	private @NotNull Parrot.Variant variant = Variant.RED;
 	private boolean isDancing = false;
 	private boolean isSitting = false;
 	private boolean isTamed = false;
 	private AnimalTamer animalTamer = null;
+
 	/**
 	 * Constructs a new {@link ParrotMock} on the provided {@link ServerMock} with a specified {@link UUID}.
 	 *
@@ -48,6 +50,7 @@ public class ParrotMock extends AnimalsMock implements Parrot
 		// TODO Setdancing() method when startPlaying in jukebox will be implemented
 		throw new UnimplementedOperationException();
 	}
+
 	@Override
 	public boolean isTamed()
 	{
@@ -95,4 +98,5 @@ public class ParrotMock extends AnimalsMock implements Parrot
 	{
 		return EntityType.PARROT;
 	}
+
 }
