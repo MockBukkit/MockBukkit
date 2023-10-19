@@ -2422,8 +2422,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public int getCurrentTick()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return (int) getScheduler().getCurrentTick();
 	}
 
 	@Override
