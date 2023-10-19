@@ -1483,15 +1483,17 @@ class PlayerMockTest
 	@Test
 	void testPlayerSendBlockUpdateInvalid()
 	{
-		assertThrows(NullPointerException.class, () -> player.sendBlockUpdate(player.getLocation(), null));
-		assertThrows(NullPointerException.class, () -> player.sendBlockUpdate(null, new TileStateMock(Material.CHEST)
+		Location location = player.getLocation();
+		assertThrows(NullPointerException.class, () -> player.sendBlockUpdate(location, null));
+		TileStateMock tileStateMock = new TileStateMock(Material.CHEST)
 		{
 			@Override
 			public @NotNull BlockState getSnapshot()
 			{
 				return new BlockStateMock(Material.CHEST);
 			}
-		}));
+		};
+		assertThrows(NullPointerException.class, () -> player.sendBlockUpdate(null, tileStateMock));
 	}
 
 	@Test
