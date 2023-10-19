@@ -442,12 +442,9 @@ public class BlockStateMock implements BlockState
 			return new CreatureSpawnerMock(block);
 		case DAYLIGHT_DETECTOR:
 			return new DaylightDetectorMock(block);
-		case COMMAND_BLOCK:
-		case CHAIN_COMMAND_BLOCK:
-		case REPEATING_COMMAND_BLOCK:
+		case COMMAND_BLOCK, CHAIN_COMMAND_BLOCK, REPEATING_COMMAND_BLOCK:
 			return new CommandBlockMock(block);
-		case CAMPFIRE:
-		case SOUL_CAMPFIRE:
+		case CAMPFIRE, SOUL_CAMPFIRE:
 			return new CampfireMock(block);
 		case BELL:
 			return new BellMock(block);
@@ -461,8 +458,7 @@ public class BlockStateMock implements BlockState
 			return new DispenserMock(block);
 		case DROPPER:
 			return new DropperMock(block);
-		case CHEST:
-		case TRAPPED_CHEST:
+		case CHEST, TRAPPED_CHEST:
 			return new ChestMock(block);
 		case ENDER_CHEST:
 			return new EnderChestMock(block);
