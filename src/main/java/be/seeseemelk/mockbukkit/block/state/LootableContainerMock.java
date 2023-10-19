@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.block.state;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
 import com.destroystokyo.paper.loottable.LootableBlockInventory;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -137,6 +138,13 @@ public abstract class LootableContainerMock extends ContainerMock implements Loo
 		return this.nextRefill;
 	}
 
+
+	/**
+	 * Sets the next refill time. This uses the Bukkit Scheduler,
+	 * therefore you have to tick it with {@link BukkitSchedulerMock#performTicks(long)}.
+	 * @param refillAt timestamp in milliseconds. -1 to clear next refill
+	 * @return The previous refill time
+	 */
 	@Override
 	public long setNextRefill(long refillAt)
 	{

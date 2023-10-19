@@ -116,7 +116,7 @@ class LootableContainerMockTest
 		Player player = server.addPlayer();
 		long time = System.currentTimeMillis();
 		barrel.setHasPlayerLooted(player, true);
-		assertTrue(time <= barrel.getLastLooted(player));;
+		assertTrue(time <= barrel.getLastLooted(player));
 	}
 
 	@Test
