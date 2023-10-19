@@ -101,7 +101,7 @@ public class ChestBoatMock extends BoatMock implements ChestBoat
 	@Override
 	public boolean hasPendingRefill()
 	{
-		return this.nextRefill != -1;
+		return this.nextRefill != -1  && nextRefill > lastFilled;
 	}
 
 	@Override
@@ -120,7 +120,7 @@ public class ChestBoatMock extends BoatMock implements ChestBoat
 	public long setNextRefill(long refillAt)
 	{
 		final long oldRefill = this.nextRefill;
-		this.nextRefill = refillAt;
+		this.nextRefill = (refillAt < -1) ? -1 : refillAt;
 
 		new BukkitRunnable()
 		{
