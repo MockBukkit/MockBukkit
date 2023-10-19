@@ -29,7 +29,7 @@ dependencies {
 	// General utilities for the project
 	implementation("net.kyori:adventure-platform-bungeecord:4.3.1")
 	implementation("org.jetbrains:annotations:24.0.1")
-	implementation("net.bytebuddy:byte-buddy:1.14.8")
+	implementation("net.bytebuddy:byte-buddy:1.14.9")
 
 	// LibraryLoader dependencies
 	implementation("org.apache.maven:maven-resolver-provider:3.8.5")
@@ -89,7 +89,7 @@ tasks {
 	}
 
 	jacoco {
-		toolVersion = "0.8.10"
+		toolVersion = "0.8.11"
 	}
 }
 
