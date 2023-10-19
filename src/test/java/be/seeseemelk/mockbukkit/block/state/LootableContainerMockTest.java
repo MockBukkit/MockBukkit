@@ -17,6 +17,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -138,6 +139,37 @@ class LootableContainerMockTest
 		assertTrue(barrel.hasPlayerLooted(player));
 		barrel.setHasPlayerLooted(player, false);
 		assertFalse(barrel.hasPlayerLooted(player));
+	}
+
+	@Test
+	void testSetNextRefillNegative()
+	{
+		barrel.setNextRefill(-2);
+		assertEquals(-1, barrel.getNextRefill());
+	}
+
+	@Test
+	void testEquals()
+	{
+		BarrelMock barrel2 = new BarrelMock(barrel);
+		assertEquals(barrel, barrel2);
+	}
+
+	@Test
+	void testNotEquals()
+	{
+		World world = new WorldMock();
+		Block block = world.getBlockAt(0, 10, 0);
+		block.setType(Material.BARREL);
+		BarrelMock barrel2 = new BarrelMock(block);
+		assertNotEquals(barrel, barrel2);
+	}
+
+	@Test
+	void testHashcode()
+	{
+		BarrelMock barrel2 = new BarrelMock(barrel);
+		assertEquals(barrel.hashCode(), barrel2.hashCode());
 	}
 
 }
