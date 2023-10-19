@@ -69,7 +69,8 @@ class RegistryMockTest
 	@Test
 	void key_NotNull()
 	{
-		assertThrows(NullPointerException.class, () -> new RegistryMock<>(Structure.class).get(null));
+		RegistryMock<Structure> structureRegistryMock = new RegistryMock<>(Structure.class);
+		assertThrows(NullPointerException.class, () -> structureRegistryMock.get(null));
 	}
 
 	@Test

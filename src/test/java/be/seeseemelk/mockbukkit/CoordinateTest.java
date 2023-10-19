@@ -60,7 +60,7 @@ class CoordinateTest
 	@Test
 	void equals_Null_False()
 	{
-		assertNotEquals(coordinate, null);
+		assertNotEquals(null, coordinate);
 	}
 
 	@Test
