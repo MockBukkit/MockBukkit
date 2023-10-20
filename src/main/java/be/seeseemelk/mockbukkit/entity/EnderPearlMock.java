@@ -28,7 +28,7 @@ public class EnderPearlMock extends ThrowableProjectileMock implements EnderPear
 	@Override
 	public @NotNull ItemStack getItem()
 	{
-		return this.item;
+		return new ItemStack(this.item);
 	}
 
 	@Override

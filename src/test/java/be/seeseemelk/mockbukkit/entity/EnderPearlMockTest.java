@@ -69,6 +69,15 @@ class EnderPearlMockTest
 	}
 
 	@Test
+	void testGetItem_ReturnsCopy()
+	{
+		ItemStack item = new ItemStack(Material.APPLE);
+		pearl.setItem(item);
+		assertNotSame(item, pearl.getItem());
+		assertEquals(item, pearl.getItem());
+	}
+
+	@Test
 	void getType()
 	{
 		assertEquals(EntityType.ENDER_PEARL, pearl.getType());
