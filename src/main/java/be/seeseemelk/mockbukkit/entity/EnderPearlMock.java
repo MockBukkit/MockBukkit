@@ -35,7 +35,9 @@ public class EnderPearlMock extends ThrowableProjectileMock implements EnderPear
 	public void setItem(@NotNull ItemStack item)
 	{
 		Preconditions.checkNotNull(item, "Item cannot be null");
-		this.item = new ItemStack(item);
+		ItemStack localCopy = new ItemStack(item);
+		localCopy.setAmount(1);
+		this.item = localCopy;
 	}
 
 	@Override

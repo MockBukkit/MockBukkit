@@ -50,6 +50,14 @@ class EnderPearlMockTest
 	}
 
 	@Test
+	void testSetItem_AlwaysOne()
+	{
+		ItemStack item = new ItemStack(Material.APPLE, 5);
+		pearl.setItem(item);
+		assertEquals(1, pearl.getItem().getAmount());
+	}
+
+	@Test
 	void testSetItem_Null()
 	{
 		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
