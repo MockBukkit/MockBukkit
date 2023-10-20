@@ -38,11 +38,9 @@ import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Art;
 import org.bukkit.Bukkit;
 import org.bukkit.Fluid;
-import org.bukkit.GameEvent;
 import org.bukkit.GameMode;
 import org.bukkit.Keyed;
 import org.bukkit.Material;
-import org.bukkit.MusicInstrument;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Registry;
 import org.bukkit.Sound;
@@ -51,7 +49,6 @@ import org.bukkit.Warning;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.WorldType;
-import org.bukkit.advancement.Advancement;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Biome;
 import org.bukkit.block.data.BlockData;
@@ -70,12 +67,8 @@ import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.server.MapInitializeEvent;
 import org.bukkit.event.server.ServerLoadEvent;
-import org.bukkit.generator.structure.Structure;
-import org.bukkit.generator.structure.StructureType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
-import org.bukkit.inventory.meta.trim.TrimMaterial;
-import org.bukkit.inventory.meta.trim.TrimPattern;
 import org.bukkit.loot.LootTables;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
@@ -91,7 +84,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.spigotmc.event.player.PlayerSpawnLocationEvent;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -800,6 +793,16 @@ class ServerMockTest
 
 		assertEquals("Test", profile.getName());
 		assertEquals(uuid, profile.getUniqueId());
+	}
+
+	@Test
+	void getCurrentTick_CorrectTick()
+	{
+		assertEquals(0, server.getCurrentTick());
+		server.getScheduler().performOneTick();
+		assertEquals(1, server.getCurrentTick());
+		server.getScheduler().performTicks(10);
+		assertEquals(11, server.getCurrentTick());
 	}
 
 	@Test
