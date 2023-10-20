@@ -153,7 +153,7 @@ class ChunkTest
 	void equals_Null_False()
 	{
 		ChunkMock chunk = world.getChunkAt(0, 0);
-		assertNotEquals(chunk, null);
+		assertNotEquals(null, chunk);
 	}
 
 	@Test
@@ -217,5 +217,5 @@ class ChunkTest
 		chunk.setSlimeChunk(false);
 		assertFalse(chunk.isSlimeChunk());
 	}
-  
+
 }

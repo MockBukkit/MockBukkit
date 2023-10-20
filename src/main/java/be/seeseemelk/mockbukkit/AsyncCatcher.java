@@ -21,7 +21,7 @@ public class AsyncCatcher
 	 */
 	public static void catchOp(String reason)
 	{
-		Preconditions.checkState(Bukkit.getServer().isPrimaryThread(), "Asynchronous " + reason + "!");
+		Preconditions.checkState(Bukkit.getServer().isPrimaryThread(), "Asynchronous %s!",reason);
 	}
 
 }
