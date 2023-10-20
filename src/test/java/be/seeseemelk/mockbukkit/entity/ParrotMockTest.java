@@ -82,4 +82,12 @@ class ParrotMockTest
 		assertEquals(owner, parrot.getOwner());
 	}
 
+	@Test
+	void testGetOwnerUniqueId()
+	{
+		AnimalTamer owner = server.addPlayer();
+		parrot.setOwner(owner);
+		assertEquals(owner.getUniqueId(), parrot.getOwnerUniqueId());
+	}
+
 }
