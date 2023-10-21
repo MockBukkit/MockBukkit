@@ -15,7 +15,6 @@ public class ParrotMock extends AnimalsMock implements Parrot
 {
 
 	private @NotNull Parrot.Variant variant = Variant.RED;
-	private boolean isDancing = false;
 	private boolean isSitting = false;
 	private boolean isTamed = false;
 	private AnimalTamer animalTamer = null;
@@ -47,7 +46,7 @@ public class ParrotMock extends AnimalsMock implements Parrot
 	@Override
 	public boolean isDancing()
 	{
-		// TODO Setdancing() method when startPlaying in jukebox will be implemented
+		// TODO Implement when startPlaying in jukebox is implemented
 		throw new UnimplementedOperationException();
 	}
 
