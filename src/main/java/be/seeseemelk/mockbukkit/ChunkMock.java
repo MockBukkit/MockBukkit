@@ -295,15 +295,13 @@ public class ChunkMock implements Chunk
 	@Override
 	public boolean contains(@NotNull BlockData block)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getBlocks().stream().anyMatch(b -> b.getBlockData().equals(block));
 	}
 
 	@Override
 	public boolean contains(@NotNull Biome biome)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getBlocks().stream().anyMatch(b -> b.getBiome() == biome);
 	}
 
 	@Override

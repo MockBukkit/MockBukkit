@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit;
 import org.bukkit.Chunk.LoadLevel;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Zombie;
@@ -208,6 +209,39 @@ class ChunkTest
 	}
 
 	@Test
+	void contains_BlockData_True()
+	{
+		ChunkMock chunk = world.getChunkAt(0, 0);
+		Block block = chunk.getBlock(0, 1, 0);
+		assertTrue(chunk.contains(block.getBlockData()));
+	}
+
+	@Test
+	void contains_BlockData_False()
+	{
+		ChunkMock chunk = world.getChunkAt(0, 0);
+		Block block = chunk.getBlock(0, 0, 0);
+		assertTrue(chunk.contains(block.getBlockData()));
+	}
+
+	@Test
+	void contains_Biome_True()
+	{
+		ChunkMock chunk = world.getChunkAt(0, 0);
+		Block block = chunk.getBlock(0, 1, 0);
+		block.setBiome(Biome.BADLANDS);
+		assertTrue(chunk.contains(Biome.BADLANDS));
+	}
+
+	@Test
+	void contains_Biome_False()
+	{
+		ChunkMock chunk = world.getChunkAt(0, 0);
+		Block block = chunk.getBlock(0, 0, 0);
+		assertFalse(chunk.contains(Biome.BADLANDS));
+	}
+
+  @Test
 	void setSlimeChunk()
 	{
 		ChunkMock chunk = world.getChunkAt(0, 0);
