@@ -1284,9 +1284,9 @@ class WorldMockTest
 				Arguments.of(EntityType.FISHING_HOOK, FishHookMock.class),
 				Arguments.of(EntityType.PANDA, PandaMock.class),
 				Arguments.of(EntityType.RABBIT, RabbitMock.class),
-        Arguments.of(EntityType.OCELOT, OcelotMock.class),
+				Arguments.of(EntityType.OCELOT, OcelotMock.class),
 				Arguments.of(EntityType.SLIME, SlimeMock.class),
-        Arguments.of(EntityType.OCELOT, OcelotMock.class),
+				Arguments.of(EntityType.OCELOT, OcelotMock.class),
 				Arguments.of(EntityType.PARROT, ParrotMock.class)
 		);
 	}
