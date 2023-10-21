@@ -14,7 +14,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -82,4 +81,5 @@ class EnderPearlMockTest
 	{
 		assertEquals(EntityType.ENDER_PEARL, pearl.getType());
 	}
+
 }
