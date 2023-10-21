@@ -21,6 +21,7 @@ import be.seeseemelk.mockbukkit.entity.DonkeyMock;
 import be.seeseemelk.mockbukkit.entity.DragonFireballMock;
 import be.seeseemelk.mockbukkit.entity.EggMock;
 import be.seeseemelk.mockbukkit.entity.ElderGuardianMock;
+import be.seeseemelk.mockbukkit.entity.EnderPearlMock;
 import be.seeseemelk.mockbukkit.entity.EndermanMock;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
@@ -43,6 +44,7 @@ import be.seeseemelk.mockbukkit.entity.MuleMock;
 import be.seeseemelk.mockbukkit.entity.MushroomCowMock;
 import be.seeseemelk.mockbukkit.entity.OcelotMock;
 import be.seeseemelk.mockbukkit.entity.PandaMock;
+import be.seeseemelk.mockbukkit.entity.ParrotMock;
 import be.seeseemelk.mockbukkit.entity.PigMock;
 import be.seeseemelk.mockbukkit.entity.PolarBearMock;
 import be.seeseemelk.mockbukkit.entity.PoweredMinecartMock;
@@ -124,6 +126,7 @@ import org.bukkit.entity.Donkey;
 import org.bukkit.entity.DragonFireball;
 import org.bukkit.entity.Egg;
 import org.bukkit.entity.ElderGuardian;
+import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.Enderman;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -152,6 +155,7 @@ import org.bukkit.entity.Mule;
 import org.bukkit.entity.MushroomCow;
 import org.bukkit.entity.Ocelot;
 import org.bukkit.entity.Panda;
+import org.bukkit.entity.Parrot;
 import org.bukkit.entity.Pig;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.PolarBear;
@@ -1269,6 +1273,10 @@ public class WorldMock implements World
 		{
 			return new AreaEffectCloudMock(server, UUID.randomUUID());
 		}
+		else if (clazz == EnderPearl.class)
+		{
+			return new EnderPearlMock(server, UUID.randomUUID());
+		}
 		else if (clazz == Panda.class)
 		{
 			return new PandaMock(server, UUID.randomUUID());
@@ -1280,10 +1288,14 @@ public class WorldMock implements World
 		else if (clazz == Slime.class)
 		{
 			return new SlimeMock(server, UUID.randomUUID());
-        }
-        else if (clazz == Ocelot.class)
+		}
+		else if (clazz == Ocelot.class)
 		{
 			return new OcelotMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Parrot.class)
+		{
+			return new ParrotMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}
@@ -2471,7 +2483,6 @@ public class WorldMock implements World
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
 	@Override
 	public boolean isFixedTime()
 	{

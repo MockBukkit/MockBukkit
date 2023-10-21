@@ -22,6 +22,7 @@ import be.seeseemelk.mockbukkit.entity.DonkeyMock;
 import be.seeseemelk.mockbukkit.entity.DragonFireballMock;
 import be.seeseemelk.mockbukkit.entity.EggMock;
 import be.seeseemelk.mockbukkit.entity.ElderGuardianMock;
+import be.seeseemelk.mockbukkit.entity.EnderPearlMock;
 import be.seeseemelk.mockbukkit.entity.EndermanMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
 import be.seeseemelk.mockbukkit.entity.ExplosiveMinecartMock;
@@ -42,6 +43,7 @@ import be.seeseemelk.mockbukkit.entity.MuleMock;
 import be.seeseemelk.mockbukkit.entity.MushroomCowMock;
 import be.seeseemelk.mockbukkit.entity.OcelotMock;
 import be.seeseemelk.mockbukkit.entity.PandaMock;
+import be.seeseemelk.mockbukkit.entity.ParrotMock;
 import be.seeseemelk.mockbukkit.entity.PigMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import be.seeseemelk.mockbukkit.entity.PolarBearMock;
@@ -1278,11 +1280,14 @@ class WorldMockTest
 				Arguments.of(EntityType.MINECART, RideableMinecartMock.class),
 				Arguments.of(EntityType.MINECART_CHEST, StorageMinecartMock.class),
 				Arguments.of(EntityType.AREA_EFFECT_CLOUD, AreaEffectCloudMock.class),
+				Arguments.of(EntityType.ENDER_PEARL, EnderPearlMock.class),
 				Arguments.of(EntityType.FISHING_HOOK, FishHookMock.class),
 				Arguments.of(EntityType.PANDA, PandaMock.class),
 				Arguments.of(EntityType.RABBIT, RabbitMock.class),
+				Arguments.of(EntityType.OCELOT, OcelotMock.class),
 				Arguments.of(EntityType.SLIME, SlimeMock.class),
-        		Arguments.of(EntityType.OCELOT, OcelotMock.class)
+				Arguments.of(EntityType.OCELOT, OcelotMock.class),
+				Arguments.of(EntityType.PARROT, ParrotMock.class)
 		);
 	}
 
@@ -1436,23 +1441,17 @@ class WorldMockTest
 	@Test
 	void testCreateBlockYToBig()
 	{
+		Coordinate coordinate = new Coordinate(0, 256, 0);
 		WorldMock world = new WorldMock(Material.DIRT, 3);
-		assertThrows(ArrayIndexOutOfBoundsException.class, () ->
-		{
-			Coordinate coordinate = new Coordinate(0, 256, 0);
-			world.createBlock(coordinate);
-		});
+		assertThrows(ArrayIndexOutOfBoundsException.class, () -> world.createBlock(coordinate));
 	}
 
 	@Test
 	void testCreateBlockYToSmall()
 	{
+		Coordinate coordinate = new Coordinate(0, -1, 0);
 		WorldMock world = new WorldMock(Material.DIRT, 3);
-		assertThrows(ArrayIndexOutOfBoundsException.class, () ->
-		{
-			Coordinate coordinate = new Coordinate(0, -1, 0);
-			world.createBlock(coordinate);
-		});
+		assertThrows(ArrayIndexOutOfBoundsException.class, () -> world.createBlock(coordinate));
 	}
 
 	@Test
@@ -1607,10 +1606,11 @@ class WorldMockTest
 	@Test
 	void testPlayEffectNullEffect()
 	{
+
 		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Location location = new Location(world, 0, 0, 0);
 		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
 		{
-			Location location = new Location(world, 0, 0, 0);
 			world.playEffect(location, null, 1);
 		});
 
@@ -1621,9 +1621,10 @@ class WorldMockTest
 	void testPlayEffectNullWorld()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Location location = new Location(null, 0, 0, 0);
 		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
 		{
-			Location location = new Location(null, 0, 0, 0);
+
 			world.playEffect(location, Effect.STEP_SOUND, 1);
 		});
 
