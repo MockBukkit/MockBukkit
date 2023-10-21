@@ -21,6 +21,7 @@ import be.seeseemelk.mockbukkit.entity.DonkeyMock;
 import be.seeseemelk.mockbukkit.entity.DragonFireballMock;
 import be.seeseemelk.mockbukkit.entity.EggMock;
 import be.seeseemelk.mockbukkit.entity.ElderGuardianMock;
+import be.seeseemelk.mockbukkit.entity.EnderPearlMock;
 import be.seeseemelk.mockbukkit.entity.EndermanMock;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
@@ -125,6 +126,7 @@ import org.bukkit.entity.Donkey;
 import org.bukkit.entity.DragonFireball;
 import org.bukkit.entity.Egg;
 import org.bukkit.entity.ElderGuardian;
+import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.Enderman;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -1271,6 +1273,10 @@ public class WorldMock implements World
 		{
 			return new AreaEffectCloudMock(server, UUID.randomUUID());
 		}
+		else if (clazz == EnderPearl.class)
+		{
+			return new EnderPearlMock(server, UUID.randomUUID());
+		}
 		else if (clazz == Panda.class)
 		{
 			return new PandaMock(server, UUID.randomUUID());
@@ -1282,8 +1288,8 @@ public class WorldMock implements World
 		else if (clazz == Slime.class)
 		{
 			return new SlimeMock(server, UUID.randomUUID());
-        }
-        else if (clazz == Ocelot.class)
+		}
+		else if (clazz == Ocelot.class)
 		{
 			return new OcelotMock(server, UUID.randomUUID());
 		}
@@ -2477,7 +2483,6 @@ public class WorldMock implements World
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
 	@Override
 	public boolean isFixedTime()
 	{
