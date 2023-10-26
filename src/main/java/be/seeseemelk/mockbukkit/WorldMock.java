@@ -32,6 +32,7 @@ import be.seeseemelk.mockbukkit.entity.FoxMock;
 import be.seeseemelk.mockbukkit.entity.FrogMock;
 import be.seeseemelk.mockbukkit.entity.GhastMock;
 import be.seeseemelk.mockbukkit.entity.GiantMock;
+import be.seeseemelk.mockbukkit.entity.GlowSquidMock;
 import be.seeseemelk.mockbukkit.entity.GoatMock;
 import be.seeseemelk.mockbukkit.entity.GuardianMock;
 import be.seeseemelk.mockbukkit.entity.HopperMinecartMock;
@@ -59,6 +60,7 @@ import be.seeseemelk.mockbukkit.entity.SlimeMock;
 import be.seeseemelk.mockbukkit.entity.SmallFireballMock;
 import be.seeseemelk.mockbukkit.entity.SpawnerMinecartMock;
 import be.seeseemelk.mockbukkit.entity.SpiderMock;
+import be.seeseemelk.mockbukkit.entity.SquidMock;
 import be.seeseemelk.mockbukkit.entity.StorageMinecartMock;
 import be.seeseemelk.mockbukkit.entity.StrayMock;
 import be.seeseemelk.mockbukkit.entity.TadpoleMock;
@@ -138,6 +140,7 @@ import org.bukkit.entity.Fox;
 import org.bukkit.entity.Frog;
 import org.bukkit.entity.Ghast;
 import org.bukkit.entity.Giant;
+import org.bukkit.entity.GlowSquid;
 import org.bukkit.entity.Goat;
 import org.bukkit.entity.Golem;
 import org.bukkit.entity.Guardian;
@@ -170,6 +173,7 @@ import org.bukkit.entity.Slime;
 import org.bukkit.entity.SmallFireball;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.entity.Spider;
+import org.bukkit.entity.Squid;
 import org.bukkit.entity.Stray;
 import org.bukkit.entity.Tadpole;
 import org.bukkit.entity.TropicalFish;
@@ -1296,6 +1300,14 @@ public class WorldMock implements World
 		else if (clazz == Parrot.class)
 		{
 			return new ParrotMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Squid.class)
+		{
+			return new SquidMock(server, UUID.randomUUID());
+		}
+		else if (clazz == GlowSquid.class)
+		{
+			return new GlowSquidMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}
