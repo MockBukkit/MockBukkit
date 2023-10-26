@@ -33,6 +33,7 @@ import be.seeseemelk.mockbukkit.entity.FoxMock;
 import be.seeseemelk.mockbukkit.entity.FrogMock;
 import be.seeseemelk.mockbukkit.entity.GhastMock;
 import be.seeseemelk.mockbukkit.entity.GiantMock;
+import be.seeseemelk.mockbukkit.entity.GlowSquidMock;
 import be.seeseemelk.mockbukkit.entity.GoatMock;
 import be.seeseemelk.mockbukkit.entity.GuardianMock;
 import be.seeseemelk.mockbukkit.entity.HopperMinecartMock;
@@ -1288,8 +1289,9 @@ class WorldMockTest
 				Arguments.of(EntityType.OCELOT, OcelotMock.class),
 				Arguments.of(EntityType.SLIME, SlimeMock.class),
 				Arguments.of(EntityType.OCELOT, OcelotMock.class),
-				Arguments.of(EntityType.PARROT, ParrotMock.class)
+				Arguments.of(EntityType.PARROT, ParrotMock.class),
 				Arguments.of(EntityType.SQUID, SquidMock.class),
+				Arguments.of(EntityType.GLOW_SQUID, GlowSquidMock.class)
 		);
 	}
 
