@@ -155,7 +155,7 @@ development of MockBukkit.
 
 ### Using MockBukkit
 
-A plugin can be loaded in this initialiser block.
+A plugin can be loaded in this initializer block.
 
 ```java
 private ServerMock server;
