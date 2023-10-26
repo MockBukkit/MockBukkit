@@ -16,7 +16,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockBukkitExtension.class)
-public class DolphinMockTest
+class DolphinMockTest
 {
 
 	@MockBukkitInject
@@ -24,7 +24,7 @@ public class DolphinMockTest
 	private Dolphin dolphin;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		dolphin = new DolphinMock(server, UUID.randomUUID());
 	}
