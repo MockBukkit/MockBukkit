@@ -17,6 +17,7 @@ import be.seeseemelk.mockbukkit.entity.CodMock;
 import be.seeseemelk.mockbukkit.entity.CommandMinecartMock;
 import be.seeseemelk.mockbukkit.entity.CowMock;
 import be.seeseemelk.mockbukkit.entity.CreeperMock;
+import be.seeseemelk.mockbukkit.entity.DolphinMock;
 import be.seeseemelk.mockbukkit.entity.DonkeyMock;
 import be.seeseemelk.mockbukkit.entity.DragonFireballMock;
 import be.seeseemelk.mockbukkit.entity.EggMock;
@@ -125,6 +126,7 @@ import org.bukkit.entity.Chicken;
 import org.bukkit.entity.Cod;
 import org.bukkit.entity.Cow;
 import org.bukkit.entity.Creeper;
+import org.bukkit.entity.Dolphin;
 import org.bukkit.entity.Donkey;
 import org.bukkit.entity.DragonFireball;
 import org.bukkit.entity.Egg;
@@ -1314,6 +1316,10 @@ public class WorldMock implements World
 		else if (clazz == LlamaSpit.class)
 		{
 			return new LlamaSpitMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Dolphin.class)
+		{
+			return new DolphinMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}
