@@ -29,4 +29,5 @@ class MagmaCubeMockTest{
 	void testGetType() {
 		assertEquals(EntityType.MAGMA_CUBE, magmaCubeMock.getType());
 	}
+
 }
