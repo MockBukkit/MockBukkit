@@ -25,6 +25,7 @@ import be.seeseemelk.mockbukkit.entity.EggMock;
 import be.seeseemelk.mockbukkit.entity.ElderGuardianMock;
 import be.seeseemelk.mockbukkit.entity.EnderPearlMock;
 import be.seeseemelk.mockbukkit.entity.EndermanMock;
+import be.seeseemelk.mockbukkit.entity.EndermiteMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
 import be.seeseemelk.mockbukkit.entity.ExplosiveMinecartMock;
 import be.seeseemelk.mockbukkit.entity.FireballMock;
@@ -1297,7 +1298,8 @@ class WorldMockTest
 				Arguments.of(EntityType.GLOW_SQUID, GlowSquidMock.class),
 				Arguments.of(EntityType.LLAMA_SPIT, LlamaSpitMock.class),
 				Arguments.of(EntityType.DOLPHIN, DolphinMock.class),
-				Arguments.of(EntityType.MAGMA_CUBE, MagmaCubeMock.class)
+				Arguments.of(EntityType.MAGMA_CUBE, MagmaCubeMock.class),
+				Arguments.of(EntityType.ENDERMITE, EndermiteMock.class)
 		);
 	}
 
