@@ -1357,6 +1357,15 @@ class WorldMockTest
 	}
 
 	@Test
+	void getHighestBlockYAt_Worldgen()
+	{
+		WorldMock worldMock = new WorldMock(Material.COAL_BLOCK, 2);
+		Location location = new Location(worldMock, 2, 3, 3);
+		location.getBlock().setType(Material.COAL_BLOCK);
+		assertEquals(2, worldMock.getHighestBlockYAt(2, 3, HeightMap.WORLD_SURFACE_WG));
+	}
+
+	@Test
 	void setThundering_cancelled()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);

@@ -2618,7 +2618,8 @@ public class WorldMock implements World
 				yield (block.isSolid() || isWaterLogged || block.isLiquid()) && !Tag.LEAVES.isTagged(block.getType());
 			}
 			case OCEAN_FLOOR -> block.isSolid();
-			case OCEAN_FLOOR_WG, WORLD_SURFACE_WG -> throw new UnimplementedOperationException();
+			case OCEAN_FLOOR_WG -> (block.getY() <= this.grassHeight && this.defaultBlock.isSolid()) || block.getY() == 0;
+			case WORLD_SURFACE_WG -> (block.getY() <= this.grassHeight && !this.defaultBlock.isAir()) || block.getY() == 0;
 			case WORLD_SURFACE -> !block.getType().isAir();
 		};
 	}
