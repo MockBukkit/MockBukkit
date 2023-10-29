@@ -24,6 +24,7 @@ import be.seeseemelk.mockbukkit.entity.EggMock;
 import be.seeseemelk.mockbukkit.entity.ElderGuardianMock;
 import be.seeseemelk.mockbukkit.entity.EnderPearlMock;
 import be.seeseemelk.mockbukkit.entity.EndermanMock;
+import be.seeseemelk.mockbukkit.entity.EndermiteMock;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
 import be.seeseemelk.mockbukkit.entity.ExplosiveMinecartMock;
@@ -134,6 +135,7 @@ import org.bukkit.entity.Egg;
 import org.bukkit.entity.ElderGuardian;
 import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.Enderman;
+import org.bukkit.entity.Endermite;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ExperienceOrb;
@@ -1326,6 +1328,10 @@ public class WorldMock implements World
 		else if (clazz == MagmaCube.class)
 		{
 			return new MagmaCubeMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Endermite.class)
+		{
+			return new EndermiteMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}
