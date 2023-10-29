@@ -38,6 +38,7 @@ public class CamelMock extends AbstractHorseMock implements Camel
 	}
 
 	@Override
+	@Deprecated(since = "1.11")
 	public Horse.@NotNull Variant getVariant()
 	{
 		return Horse.Variant.CAMEL;

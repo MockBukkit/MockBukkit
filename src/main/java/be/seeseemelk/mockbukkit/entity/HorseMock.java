@@ -84,8 +84,8 @@ public class HorseMock extends AbstractHorseMock implements Horse
 		return this.inventory;
 	}
 
-	@Deprecated
 	@Override
+	@Deprecated(since = "1.11")
 	public @NotNull Variant getVariant()
 	{
 		return Variant.HORSE;

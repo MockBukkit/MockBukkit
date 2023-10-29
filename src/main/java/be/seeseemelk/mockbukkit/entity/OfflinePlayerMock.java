@@ -188,7 +188,7 @@ public class OfflinePlayerMock implements OfflinePlayer
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.13")
 	public long getLastPlayed()
 	{
 		return getLastSeen();

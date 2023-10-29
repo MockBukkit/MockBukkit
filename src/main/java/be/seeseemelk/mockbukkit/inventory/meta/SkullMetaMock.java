@@ -81,7 +81,7 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.13")
 	public String getOwner()
 	{
 		return owner;
@@ -94,7 +94,7 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.13")
 	public boolean setOwner(String owner)
 	{
 		this.owner = owner;
@@ -134,7 +134,7 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public PlayerProfile getOwnerProfile()
 	{
 		// TODO Auto-generated method stub
@@ -142,7 +142,7 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setOwnerProfile(@Nullable PlayerProfile profile)
 	{
 		// TODO Auto-generated method stub

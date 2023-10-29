@@ -160,15 +160,15 @@ public class BossBarMock implements BossBar
 		return visible;
 	}
 
-	@Deprecated
 	@Override
+	@Deprecated(since = "1.9")
 	public void show()
 	{
 		setVisible(true);
 	}
 
-	@Deprecated
 	@Override
+	@Deprecated(since = "1.9")
 	public void hide()
 	{
 		setVisible(false);

@@ -524,7 +524,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public @NotNull Block getBlockAtKey(long key)
 	{
 		return getBlockAt(getLocationAtKey(key));
@@ -720,7 +720,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.15")
 	public int getHighestBlockYAt(int x, int z, @NotNull HeightmapType heightmap) throws UnsupportedOperationException
 	{
 		// TODO Auto-generated method stub
@@ -765,7 +765,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.14")
 	public boolean isChunkInUse(int x, int z)
 	{
 		// TODO Auto-generated method stub
@@ -822,7 +822,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.13")
 	public boolean regenerateChunk(int x, int z)
 	{
 		AsyncCatcher.catchOp("chunk regenerate");
@@ -831,7 +831,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.8")
 	public boolean refreshChunk(int x, int z)
 	{
 		// TODO Auto-generated method stub
@@ -905,7 +905,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.17")
 	public boolean generateTree(Location loc, TreeType type, BlockChangeDelegate delegate)
 	{
 		// TODO Auto-generated method stub
@@ -1719,7 +1719,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.7.5")
 	public @NotNull FallingBlock spawnFallingBlock(Location location, Material material, byte data)
 			throws IllegalArgumentException
 	{
@@ -1808,14 +1808,14 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.15")
 	public @NotNull Biome getBiome(int x, int z)
 	{
 		return this.getBiome(x, 0, z);
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.15")
 	public void setBiome(int x, int z, @NotNull Biome bio)
 	{
 		for (int y = this.getMinHeight(); y < this.getMaxHeight(); y++)
@@ -1825,7 +1825,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.15")
 	public double getTemperature(int x, int z)
 	{
 		// TODO Auto-generated method stub
@@ -1833,7 +1833,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.15")
 	public double getHumidity(int x, int z)
 	{
 		// TODO Auto-generated method stub
@@ -1913,7 +1913,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.16")
 	public WorldType getWorldType()
 	{
 		return this.worldType;
@@ -1927,7 +1927,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public long getTicksPerAnimalSpawns()
 	{
 		// TODO Auto-generated method stub
@@ -1935,7 +1935,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setTicksPerAnimalSpawns(int ticksPerAnimalSpawns)
 	{
 		// TODO Auto-generated method stub
@@ -1943,7 +1943,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public long getTicksPerMonsterSpawns()
 	{
 		// TODO Auto-generated method stub
@@ -1951,7 +1951,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setTicksPerMonsterSpawns(int ticksPerMonsterSpawns)
 	{
 		// TODO Auto-generated method stub
@@ -1959,7 +1959,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public int getMonsterSpawnLimit()
 	{
 		// TODO Auto-generated method stub
@@ -1967,7 +1967,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setMonsterSpawnLimit(int limit)
 	{
 		// TODO Auto-generated method stub
@@ -1975,7 +1975,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public int getAnimalSpawnLimit()
 	{
 		// TODO Auto-generated method stub
@@ -1983,7 +1983,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setAnimalSpawnLimit(int limit)
 	{
 		// TODO Auto-generated method stub
@@ -1991,7 +1991,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public int getWaterAnimalSpawnLimit()
 	{
 		// TODO Auto-generated method stub
@@ -1999,7 +1999,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setWaterAnimalSpawnLimit(int limit)
 	{
 		// TODO Auto-generated method stub
@@ -2007,7 +2007,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public int getWaterUndergroundCreatureSpawnLimit()
 	{
 		// TODO Auto-generated method stub
@@ -2016,7 +2016,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setWaterUndergroundCreatureSpawnLimit(int limit)
 	{
 		// TODO Auto-generated method stub
@@ -2025,7 +2025,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public int getAmbientSpawnLimit()
 	{
 		// TODO Auto-generated method stub
@@ -2033,7 +2033,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setAmbientSpawnLimit(int limit)
 	{
 		// TODO Auto-generated method stub
@@ -2112,7 +2112,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.13")
 	public String getGameRuleValue(@Nullable String rule)
 	{
 		if (rule == null)
@@ -2129,7 +2129,7 @@ public class WorldMock implements World
 
 	@SuppressWarnings("unchecked")
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.13")
 	public boolean setGameRuleValue(@Nullable String rule, @NotNull String value)
 	{
 		if (rule == null)
@@ -2426,7 +2426,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.19")
 	public Location locateNearestStructure(Location origin, StructureType structureType, int radius,
 										   boolean findUnexplored)
 	{
@@ -2892,7 +2892,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public long getTicksPerWaterSpawns()
 	{
 		// TODO Auto-generated method stub
@@ -2900,7 +2900,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setTicksPerWaterSpawns(int ticksPerWaterSpawns)
 	{
 		// TODO Auto-generated method stub
@@ -2908,7 +2908,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public long getTicksPerAmbientSpawns()
 	{
 		// TODO Auto-generated method stub
@@ -2916,7 +2916,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setTicksPerAmbientSpawns(int ticksPerAmbientSpawns)
 	{
 		// TODO Auto-generated method stub
@@ -2944,7 +2944,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public long getTicksPerWaterAmbientSpawns()
 	{
 		// TODO Auto-generated method stub
@@ -2952,7 +2952,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setTicksPerWaterAmbientSpawns(int ticksPerAmbientSpawns)
 	{
 		// TODO Auto-generated method stub
@@ -2960,7 +2960,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public long getTicksPerWaterUndergroundCreatureSpawns()
 	{
 		// TODO Auto-generated method stub
@@ -2969,7 +2969,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setTicksPerWaterUndergroundCreatureSpawns(int ticksPerWaterUndergroundCreatureSpawns)
 	{
 		// TODO Auto-generated method stub
@@ -3014,7 +3014,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public int getNoTickViewDistance()
 	{
 		// TODO Auto-generated method stub
@@ -3022,7 +3022,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setNoTickViewDistance(int viewDistance)
 	{
 		// TODO Auto-generated method stub

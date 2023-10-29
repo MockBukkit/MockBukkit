@@ -120,7 +120,7 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.6.2")
 	public byte getData()
 	{
 		return data;
@@ -214,7 +214,7 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public long getBlockKey()
 	{
 		// TODO Auto-generated method stub
@@ -447,6 +447,7 @@ public class BlockMock implements Block
 	}
 
 	@Override
+	@Deprecated(forRemoval = true)
 	public @NotNull String getTranslationKey()
 	{
 		// TODO Auto-generated method stub

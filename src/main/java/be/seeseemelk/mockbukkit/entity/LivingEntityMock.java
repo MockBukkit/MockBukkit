@@ -482,7 +482,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.15")
 	public boolean addPotionEffect(@NotNull PotionEffect effect, boolean force)
 	{
 		AsyncCatcher.catchOp("effect add");
