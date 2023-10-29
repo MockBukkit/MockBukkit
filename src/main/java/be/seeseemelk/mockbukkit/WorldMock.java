@@ -17,10 +17,12 @@ import be.seeseemelk.mockbukkit.entity.CodMock;
 import be.seeseemelk.mockbukkit.entity.CommandMinecartMock;
 import be.seeseemelk.mockbukkit.entity.CowMock;
 import be.seeseemelk.mockbukkit.entity.CreeperMock;
+import be.seeseemelk.mockbukkit.entity.DolphinMock;
 import be.seeseemelk.mockbukkit.entity.DonkeyMock;
 import be.seeseemelk.mockbukkit.entity.DragonFireballMock;
 import be.seeseemelk.mockbukkit.entity.EggMock;
 import be.seeseemelk.mockbukkit.entity.ElderGuardianMock;
+import be.seeseemelk.mockbukkit.entity.EnderPearlMock;
 import be.seeseemelk.mockbukkit.entity.EndermanMock;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
@@ -31,6 +33,7 @@ import be.seeseemelk.mockbukkit.entity.FoxMock;
 import be.seeseemelk.mockbukkit.entity.FrogMock;
 import be.seeseemelk.mockbukkit.entity.GhastMock;
 import be.seeseemelk.mockbukkit.entity.GiantMock;
+import be.seeseemelk.mockbukkit.entity.GlowSquidMock;
 import be.seeseemelk.mockbukkit.entity.GoatMock;
 import be.seeseemelk.mockbukkit.entity.GuardianMock;
 import be.seeseemelk.mockbukkit.entity.HopperMinecartMock;
@@ -38,11 +41,14 @@ import be.seeseemelk.mockbukkit.entity.HorseMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
 import be.seeseemelk.mockbukkit.entity.LargeFireballMock;
 import be.seeseemelk.mockbukkit.entity.LlamaMock;
+import be.seeseemelk.mockbukkit.entity.LlamaSpitMock;
+import be.seeseemelk.mockbukkit.entity.MagmaCubeMock;
 import be.seeseemelk.mockbukkit.entity.MobMock;
 import be.seeseemelk.mockbukkit.entity.MuleMock;
 import be.seeseemelk.mockbukkit.entity.MushroomCowMock;
 import be.seeseemelk.mockbukkit.entity.OcelotMock;
 import be.seeseemelk.mockbukkit.entity.PandaMock;
+import be.seeseemelk.mockbukkit.entity.ParrotMock;
 import be.seeseemelk.mockbukkit.entity.PigMock;
 import be.seeseemelk.mockbukkit.entity.PolarBearMock;
 import be.seeseemelk.mockbukkit.entity.PoweredMinecartMock;
@@ -57,6 +63,7 @@ import be.seeseemelk.mockbukkit.entity.SlimeMock;
 import be.seeseemelk.mockbukkit.entity.SmallFireballMock;
 import be.seeseemelk.mockbukkit.entity.SpawnerMinecartMock;
 import be.seeseemelk.mockbukkit.entity.SpiderMock;
+import be.seeseemelk.mockbukkit.entity.SquidMock;
 import be.seeseemelk.mockbukkit.entity.StorageMinecartMock;
 import be.seeseemelk.mockbukkit.entity.StrayMock;
 import be.seeseemelk.mockbukkit.entity.TadpoleMock;
@@ -122,10 +129,12 @@ import org.bukkit.entity.Chicken;
 import org.bukkit.entity.Cod;
 import org.bukkit.entity.Cow;
 import org.bukkit.entity.Creeper;
+import org.bukkit.entity.Dolphin;
 import org.bukkit.entity.Donkey;
 import org.bukkit.entity.DragonFireball;
 import org.bukkit.entity.Egg;
 import org.bukkit.entity.ElderGuardian;
+import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.Enderman;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -137,6 +146,7 @@ import org.bukkit.entity.Fox;
 import org.bukkit.entity.Frog;
 import org.bukkit.entity.Ghast;
 import org.bukkit.entity.Giant;
+import org.bukkit.entity.GlowSquid;
 import org.bukkit.entity.Goat;
 import org.bukkit.entity.Golem;
 import org.bukkit.entity.Guardian;
@@ -149,11 +159,14 @@ import org.bukkit.entity.LeashHitch;
 import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Llama;
+import org.bukkit.entity.LlamaSpit;
+import org.bukkit.entity.MagmaCube;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Mule;
 import org.bukkit.entity.MushroomCow;
 import org.bukkit.entity.Ocelot;
 import org.bukkit.entity.Panda;
+import org.bukkit.entity.Parrot;
 import org.bukkit.entity.Pig;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.PolarBear;
@@ -168,6 +181,7 @@ import org.bukkit.entity.Slime;
 import org.bukkit.entity.SmallFireball;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.entity.Spider;
+import org.bukkit.entity.Squid;
 import org.bukkit.entity.Stray;
 import org.bukkit.entity.Tadpole;
 import org.bukkit.entity.TropicalFish;
@@ -238,6 +252,7 @@ public class WorldMock implements World
 	private final Map<GameRule<?>, Object> gameRules = new HashMap<>();
 	private final MetadataTable metadataTable = new MetadataTable();
 	private final Map<ChunkCoordinate, ChunkMock> loadedChunks = new HashMap<>();
+	private final Map<ChunkCoordinate, ChunkMock> savedChunks = new HashMap<>();
 	private final PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
 	private final @Nullable ServerMock server;
 	private final Material defaultBlock;
@@ -267,6 +282,7 @@ public class WorldMock implements World
 	private boolean allowAnimals = true;
 	private boolean allowMonsters = true;
 	private boolean pvp;
+	private boolean hardcore;
 
 
 	/**
@@ -452,15 +468,13 @@ public class WorldMock implements World
 	@Override
 	public int getChunkCount()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return loadedChunks.size();
 	}
 
 	@Override
 	public int getPlayerCount()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getPlayers().size();
 	}
 
 	@Override
@@ -518,8 +532,7 @@ public class WorldMock implements World
 	@Deprecated
 	public @NotNull Block getBlockAtKey(long key)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getBlockAt(getLocationAtKey(key));
 	}
 
 	@Override
@@ -594,14 +607,13 @@ public class WorldMock implements World
 	@Override
 	public @NotNull ChunkMock getChunkAt(int x, int z)
 	{
-		return getChunkAt(new ChunkCoordinate(x, z));
+		return getChunkAt(x, z, false);
 	}
 
 	@Override
-	public @NotNull Chunk getChunkAt(int x, int z, boolean generate)
+	public @NotNull ChunkMock getChunkAt(int x, int z, boolean generate)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getChunkAt(new ChunkCoordinate(x, z));
 	}
 
 	/**
@@ -618,7 +630,11 @@ public class WorldMock implements World
 		ChunkMock chunk = loadedChunks.get(coordinate);
 		if (chunk == null)
 		{
-			chunk = new ChunkMock(this, coordinate.getX(), coordinate.getZ());
+			chunk = savedChunks.get(coordinate);
+			if (chunk == null)
+			{
+				chunk = new ChunkMock(this, coordinate.getX(), coordinate.getZ());
+			}
 			loadedChunks.put(coordinate, chunk);
 		}
 		return chunk;
@@ -726,8 +742,7 @@ public class WorldMock implements World
 	@Override
 	public boolean isChunkLoaded(Chunk chunk)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return isChunkLoaded(chunk.getX(), chunk.getZ());
 	}
 
 	@Override
@@ -767,8 +782,8 @@ public class WorldMock implements World
 	public boolean loadChunk(int x, int z, boolean generate)
 	{
 		AsyncCatcher.catchOp("chunk load");
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		getChunkAt(x, z, generate);
+		return true;
 	}
 
 	@Override
@@ -787,8 +802,15 @@ public class WorldMock implements World
 	public boolean unloadChunk(int x, int z, boolean save)
 	{
 		AsyncCatcher.catchOp("chunk unload");
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		ChunkCoordinate chunkCoordinate = new ChunkCoordinate(x, z);
+		ChunkMock chunk = loadedChunks.remove(chunkCoordinate);
+		if (chunk == null) {
+			return true;
+		}
+		if (save) {
+			savedChunks.put(chunkCoordinate, chunk);
+		}
+		return true;
 	}
 
 	@Override
@@ -1261,6 +1283,10 @@ public class WorldMock implements World
 		{
 			return new AreaEffectCloudMock(server, UUID.randomUUID());
 		}
+		else if (clazz == EnderPearl.class)
+		{
+			return new EnderPearlMock(server, UUID.randomUUID());
+		}
 		else if (clazz == Panda.class)
 		{
 			return new PandaMock(server, UUID.randomUUID());
@@ -1276,6 +1302,30 @@ public class WorldMock implements World
 		else if (clazz == Ocelot.class)
 		{
 			return new OcelotMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Parrot.class)
+		{
+			return new ParrotMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Squid.class)
+		{
+			return new SquidMock(server, UUID.randomUUID());
+		}
+		else if (clazz == GlowSquid.class)
+		{
+			return new GlowSquidMock(server, UUID.randomUUID());
+		}
+		else if (clazz == LlamaSpit.class)
+		{
+			return new LlamaSpitMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Dolphin.class)
+		{
+			return new DolphinMock(server, UUID.randomUUID());
+		}
+		else if (clazz == MagmaCube.class)
+		{
+			return new MagmaCubeMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}
@@ -2058,7 +2108,7 @@ public class WorldMock implements World
 	@Override
 	public String @NotNull [] getGameRules()
 	{
-		return gameRules.values().stream().map(Object::toString).collect(Collectors.toList()).toArray(new String[0]);
+		return gameRules.values().stream().map(Object::toString).toList().toArray(new String[0]);
 	}
 
 	@Override
@@ -2463,7 +2513,6 @@ public class WorldMock implements World
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
 	@Override
 	public boolean isFixedTime()
 	{
@@ -2807,36 +2856,40 @@ public class WorldMock implements World
 	@Override
 	public boolean isNatural()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return switch (environment) {
+			case THE_END, NETHER -> false;
+			default -> true;
+		};
 	}
 
 	@Override
 	public boolean isBedWorks()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return switch (environment) {
+			case THE_END, NETHER -> false;
+			default -> true;
+		};
 	}
 
 	@Override
 	public boolean hasSkyLight()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return switch (environment) {
+			case THE_END, NETHER -> false;
+			default -> true;
+		};
 	}
 
 	@Override
 	public boolean hasCeiling()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return environment == Environment.NETHER;
 	}
 
 	@Override
 	public boolean isPiglinSafe()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return environment == Environment.NETHER;
 	}
 
 	@Override
@@ -2849,29 +2902,25 @@ public class WorldMock implements World
 	@Override
 	public boolean hasRaids()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return environment != Environment.NETHER;
 	}
 
 	@Override
 	public boolean isUltraWarm()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return environment == Environment.NETHER;
 	}
 
 	@Override
 	public boolean isHardcore()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return hardcore;
 	}
 
 	@Override
 	public void setHardcore(boolean hardcore)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.hardcore = hardcore;
 	}
 
 	@Override

@@ -228,6 +228,7 @@ public class BlockStateMock implements BlockState
 	public void setData(@NotNull org.bukkit.material.MaterialData data)
 	{
 		this.material = data.getItemType();
+		this.blockData = BlockDataMock.mock(this.material);
 	}
 
 	@Override
@@ -264,7 +265,7 @@ public class BlockStateMock implements BlockState
 			return false;
 		}
 
-		b.setType(this.getType());
+		b.setBlockData(blockData);
 
 		if (b instanceof BlockMock bm)
 		{
@@ -355,7 +356,7 @@ public class BlockStateMock implements BlockState
 		int hash = 1;
 		hash = prime * hash + (this.isPlaced() ? this.getWorld().hashCode() : 0);
 		hash = prime * hash + (this.isPlaced() ? this.getLocation().hashCode() : 0);
-//		hash = prime * hash + (this.getBlockData() != null ? this.getBlockData().hashCode() : 0); Not implemented
+		hash = prime * hash + (this.getBlockData() != null ? this.getBlockData().hashCode() : 0);
 		return hash;
 	}
 
@@ -366,14 +367,12 @@ public class BlockStateMock implements BlockState
 		{
 			return false;
 		}
-		if (this.isPlaced() && this.getWorld() != other.getWorld() && (this.getWorld() == null || !this.getWorld().equals(other.getWorld())))
+		if (this.getBlockData() != other.getBlockData() && (this.getBlockData() == null || !this.getBlockData().equals(other.getBlockData())))
 		{
 			return false;
 		}
 		return !this.isPlaced() || this.getLocation() == other.getLocation() || (this.getLocation() != null && this.getLocation().equals(other.getLocation()));
-//		if (this.getBlockData() != other.getBlockData() && (this.getBlockData() == null || !this.getBlockData().equals(other.getBlockData()))) {
-//			return false; Not implemented
-//		}
+
 	}
 
 	/**
@@ -443,12 +442,9 @@ public class BlockStateMock implements BlockState
 			return new CreatureSpawnerMock(block);
 		case DAYLIGHT_DETECTOR:
 			return new DaylightDetectorMock(block);
-		case COMMAND_BLOCK:
-		case CHAIN_COMMAND_BLOCK:
-		case REPEATING_COMMAND_BLOCK:
+		case COMMAND_BLOCK, CHAIN_COMMAND_BLOCK, REPEATING_COMMAND_BLOCK:
 			return new CommandBlockMock(block);
-		case CAMPFIRE:
-		case SOUL_CAMPFIRE:
+		case CAMPFIRE, SOUL_CAMPFIRE:
 			return new CampfireMock(block);
 		case BELL:
 			return new BellMock(block);
@@ -462,8 +458,7 @@ public class BlockStateMock implements BlockState
 			return new DispenserMock(block);
 		case DROPPER:
 			return new DropperMock(block);
-		case CHEST:
-		case TRAPPED_CHEST:
+		case CHEST, TRAPPED_CHEST:
 			return new ChestMock(block);
 		case ENDER_CHEST:
 			return new EnderChestMock(block);

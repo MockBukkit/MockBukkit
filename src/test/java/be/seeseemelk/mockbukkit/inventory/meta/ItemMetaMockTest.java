@@ -163,7 +163,7 @@ class ItemMetaMockTest
 	@Test
 	void equals_Null_False()
 	{
-		assertNotEquals(meta, null);
+		assertNotEquals(null, meta);
 		assertNotEquals(null, meta);
 	}
 

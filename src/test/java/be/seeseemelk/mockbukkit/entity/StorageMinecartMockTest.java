@@ -16,7 +16,7 @@ import static org.bukkit.entity.EntityType.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockBukkitExtension.class)
-public class StorageMinecartMockTest
+class StorageMinecartMockTest
 {
 
 	@MockBukkitInject
@@ -24,7 +24,7 @@ public class StorageMinecartMockTest
 	StorageMinecart minecart;
 
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		minecart = new StorageMinecartMock(server, UUID.randomUUID());
 	}
