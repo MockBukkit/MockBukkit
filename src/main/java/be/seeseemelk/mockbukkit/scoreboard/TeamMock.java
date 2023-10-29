@@ -220,7 +220,7 @@ public class TeamMock implements Team
 	 * @deprecated
 	 */
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.9")
 	public @NotNull NameTagVisibility getNameTagVisibility()
 	{
 		checkRegistered();
@@ -240,7 +240,7 @@ public class TeamMock implements Team
 	 * @deprecated
 	 */
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.9")
 	public void setNameTagVisibility(@NotNull NameTagVisibility nameTagVisibility)
 	{
 		MockBukkit.getMock().getLogger().log(Level.WARNING, "Consider USE setOption() DEPRECATED");
@@ -260,7 +260,7 @@ public class TeamMock implements Team
 	 * @deprecated
 	 */
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.8.7")
 	public @NotNull Set<OfflinePlayer> getPlayers() throws IllegalStateException
 	{
 		checkRegistered();
@@ -297,7 +297,7 @@ public class TeamMock implements Team
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.8.7")
 	public void addPlayer(@NotNull OfflinePlayer offlinePlayer)
 	{
 		Preconditions.checkNotNull(offlinePlayer, "OfflinePlayer cannot be null");
@@ -332,7 +332,7 @@ public class TeamMock implements Team
 	 * @deprecated
 	 */
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.8.7")
 	public boolean removePlayer(@NotNull OfflinePlayer offlinePlayer)
 	{
 		Preconditions.checkNotNull(offlinePlayer, "OfflinePlayer cannot be null");
@@ -375,7 +375,7 @@ public class TeamMock implements Team
 	 * @deprecated
 	 */
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.8.7")
 	public boolean hasPlayer(@NotNull OfflinePlayer offlinePlayer)
 	{
 		Preconditions.checkNotNull(offlinePlayer, "OfflinePlayer cannot be null");
