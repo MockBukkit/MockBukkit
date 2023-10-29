@@ -75,7 +75,29 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import io.papermc.paper.event.world.WorldGameRuleChangeEvent;
 import io.papermc.paper.world.MoonPhase;
-import org.bukkit.*;
+import org.bukkit.BlockChangeDelegate;
+import org.bukkit.Bukkit;
+import org.bukkit.Chunk;
+import org.bukkit.Difficulty;
+import org.bukkit.Effect;
+import org.bukkit.FeatureFlag;
+import org.bukkit.FluidCollisionMode;
+import org.bukkit.GameEvent;
+import org.bukkit.GameRule;
+import org.bukkit.HeightMap;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.Particle;
+import org.bukkit.Raid;
+import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
+import org.bukkit.StructureType;
+import org.bukkit.Tag;
+import org.bukkit.TreeType;
+import org.bukkit.World;
+import org.bukkit.WorldCreator;
+import org.bukkit.WorldType;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -189,7 +211,15 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Function;
@@ -1242,8 +1272,8 @@ public class WorldMock implements World
 		else if (clazz == Slime.class)
 		{
 			return new SlimeMock(server, UUID.randomUUID());
-        }
-        else if (clazz == Ocelot.class)
+		}
+		else if (clazz == Ocelot.class)
 		{
 			return new OcelotMock(server, UUID.randomUUID());
 		}
@@ -2579,20 +2609,12 @@ public class WorldMock implements World
 		{
 			case MOTION_BLOCKING ->
 			{
-				boolean isWaterLogged = false;
-				if (block.getBlockData() instanceof Waterlogged waterlogged)
-				{
-					isWaterLogged = waterlogged.isWaterlogged();
-				}
+				boolean isWaterLogged = block.getBlockData() instanceof Waterlogged waterlogged && waterlogged.isWaterlogged();
 				yield block.isSolid() || isWaterLogged || block.isLiquid();
 			}
 			case MOTION_BLOCKING_NO_LEAVES ->
 			{
-				boolean isWaterLogged = false;
-				if (block.getBlockData() instanceof Waterlogged waterlogged)
-				{
-					isWaterLogged = waterlogged.isWaterlogged();
-				}
+				boolean isWaterLogged =  block.getBlockData() instanceof Waterlogged waterlogged && waterlogged.isWaterlogged();
 				yield (block.isSolid() || isWaterLogged || block.isLiquid()) && !Tag.LEAVES.isTagged(block.getType());
 			}
 			case OCEAN_FLOOR -> block.isSolid();
