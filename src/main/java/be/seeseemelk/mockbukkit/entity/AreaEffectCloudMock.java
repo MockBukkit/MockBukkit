@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import org.bukkit.Color;
 import org.bukkit.Particle;
@@ -161,6 +162,20 @@ public class AreaEffectCloudMock extends EntityMock implements AreaEffectCloud
 	public @NotNull PotionData getBasePotionData()
 	{
 		return this.basePotionData;
+	}
+
+	@Override
+	public void setBasePotionType(@NotNull PotionType type)
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull PotionType getBasePotionType()
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

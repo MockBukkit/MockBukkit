@@ -772,6 +772,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		return Collections.unmodifiableList(this.passengers);
 	}
 
+	@Override
+	public @NotNull Set<Player> getTrackedBy()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 	/**
 	 * Gets a list of transitive passengers on this vehicle (passengers of passengers).
 	 *
