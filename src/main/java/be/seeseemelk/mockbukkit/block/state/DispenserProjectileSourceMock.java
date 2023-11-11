@@ -44,7 +44,7 @@ class DispenserProjectileSourceMock implements BlockProjectileSource
 	}
 
 	@Override
-	public <T extends Projectile> @NotNull T launchProjectile(@NotNull Class<? extends T> projectile, @Nullable Vector velocity, @Nullable Consumer<T> function)
+	public <T extends Projectile> @NotNull T launchProjectile(@NotNull Class<? extends T> projectile, @Nullable Vector velocity, java.util.function.@Nullable Consumer<T> function)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

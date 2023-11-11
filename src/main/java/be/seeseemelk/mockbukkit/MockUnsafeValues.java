@@ -31,6 +31,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.InvalidPluginException;
 import org.bukkit.plugin.PluginDescriptionFile;
+import org.bukkit.potion.PotionType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -56,35 +57,35 @@ public class MockUnsafeValues implements UnsafeValues
 	}
 
 	@Override
-	@Deprecated(forRemoval = true)
+	@Deprecated(forRemoval = true, since = "1.18")
 	public @NotNull PlainComponentSerializer plainComponentSerializer()
 	{
 		return PlainComponentSerializer.plain();
 	}
 
 	@Override
-	@Deprecated(forRemoval = true)
+	@Deprecated(forRemoval = true, since = "1.18")
 	public @NotNull PlainTextComponentSerializer plainTextSerializer()
 	{
 		return PlainTextComponentSerializer.plainText();
 	}
 
 	@Override
-	@Deprecated(forRemoval = true)
+	@Deprecated(forRemoval = true, since = "1.18")
 	public @NotNull GsonComponentSerializer gsonComponentSerializer()
 	{
 		return GsonComponentSerializer.gson();
 	}
 
 	@Override
-	@Deprecated(forRemoval = true)
+	@Deprecated(forRemoval = true, since = "1.18")
 	public @NotNull GsonComponentSerializer colorDownsamplingGsonComponentSerializer()
 	{
 		return GsonComponentSerializer.colorDownsamplingGson();
 	}
 
 	@Override
-	@Deprecated(forRemoval = true)
+	@Deprecated(forRemoval = true, since = "1.18")
 	public @NotNull LegacyComponentSerializer legacyComponentSerializer()
 	{
 		return LegacyComponentSerializer.legacySection();
@@ -249,6 +250,7 @@ public class MockUnsafeValues implements UnsafeValues
 	}
 
 	@Override
+	@Deprecated(forRemoval = true, since = "1.19")
 	public boolean isSupportedApiVersion(String apiVersion)
 	{
 		return COMPATIBLE_API_VERSIONS.contains(apiVersion);
@@ -318,6 +320,13 @@ public class MockUnsafeValues implements UnsafeValues
 
 	@Override
 	public @Nullable FeatureFlag getFeatureFlag(@NotNull NamespacedKey key)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public PotionType.InternalPotionData getInternalPotionData(NamespacedKey key)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
