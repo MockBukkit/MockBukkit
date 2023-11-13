@@ -426,7 +426,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	protected @NotNull BlockDamageEvent simulateBlockDamagePure(@NotNull Block block)
 	{
 		Preconditions.checkNotNull(block, "Block cannot be null");
-		BlockDamageEvent event = new BlockDamageEvent(this, block, getBlockFace(), getItemInHand(), false);
+		BlockDamageEvent event = new BlockDamageEvent(this, block, block.getFace(), getItemInHand(), false);
 		Bukkit.getPluginManager().callEvent(event);
 		return event;
 	}
