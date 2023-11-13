@@ -12,7 +12,6 @@ import be.seeseemelk.mockbukkit.potion.MockInternalPotionData;
 import be.seeseemelk.mockbukkit.sound.AudioExperience;
 import be.seeseemelk.mockbukkit.sound.SoundReceiver;
 import be.seeseemelk.mockbukkit.statistic.StatisticsMock;
-import be.seeseemelk.mockbukkit.block.BlockMock;
 import com.destroystokyo.paper.ClientOption;
 import com.destroystokyo.paper.Title;
 import com.destroystokyo.paper.profile.PlayerProfile;
@@ -427,7 +426,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	protected @NotNull BlockDamageEvent simulateBlockDamagePure(@NotNull Block block)
 	{
 		Preconditions.checkNotNull(block, "Block cannot be null");
-		getFace(@NotNull Block block)
 		BlockDamageEvent event = new BlockDamageEvent(this, block, getBlockFace(), getItemInHand(), false);
 		Bukkit.getPluginManager().callEvent(event);
 		return event;
