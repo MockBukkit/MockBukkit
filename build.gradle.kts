@@ -28,7 +28,7 @@ dependencies {
 
 	// General utilities for the project
 	implementation("net.kyori:adventure-platform-bungeecord:4.3.1")
-	implementation("org.jetbrains:annotations:24.0.1")
+	implementation("org.jetbrains:annotations:24.1.0")
 	implementation("net.bytebuddy:byte-buddy:1.14.9")
 
 	// LibraryLoader dependencies
