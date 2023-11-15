@@ -1798,4 +1798,19 @@ class WorldMockTest
 		assertFalse(world.getPVP());
 	}
 
+	@Test
+	void testGetKeepSpawnInMemoryDefault()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+        assertTrue(world.getKeepSpawnInMemory());
+	}
+
+	@Test
+	void testSetKeepSpawnInMemory()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setKeepSpawnInMemory(false);
+		assertFalse(world.getKeepSpawnInMemory());
+	}
+
 }
