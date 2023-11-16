@@ -929,12 +929,6 @@ public class WorldMock implements World
 		return this.spawn(location, clazz, null, CreatureSpawnEvent.SpawnReason.CUSTOM);
 	}
 
-/*	@Override
-	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz, Consumer<T> function) throws IllegalArgumentException
-	{
-		return this.spawn(location, clazz, function, CreatureSpawnEvent.SpawnReason.CUSTOM);
-	}*/
-
 	@Override
 	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz, boolean randomizeData, java.util.function.@Nullable Consumer<T> function) throws IllegalArgumentException
 	{
