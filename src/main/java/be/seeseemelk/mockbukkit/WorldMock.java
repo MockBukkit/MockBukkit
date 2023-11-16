@@ -1952,28 +1952,28 @@ public class WorldMock implements World
 	@Deprecated(since = "1.18")
 	public long getTicksPerAnimalSpawns()
 	{
-		return this.ticksPerSpawn.getLong(SpawnCategory.ANIMAL);
+		return this.getTicksPerSpawns(SpawnCategory.ANIMAL);
 	}
 
 	@Override
 	@Deprecated(since = "1.18")
 	public void setTicksPerAnimalSpawns(int ticksPerAnimalSpawns)
 	{
-		this.ticksPerSpawn.put(SpawnCategory.ANIMAL, ticksPerAnimalSpawns);
+		this.setTicksPerSpawns(SpawnCategory.ANIMAL, ticksPerAnimalSpawns);
 	}
 
 	@Override
 	@Deprecated(since = "1.18")
 	public long getTicksPerMonsterSpawns()
 	{
-		return this.ticksPerSpawn.getLong(SpawnCategory.MONSTER);
+		return this.getTicksPerSpawns(SpawnCategory.MONSTER);
 	}
 
 	@Override
 	@Deprecated(since = "1.18")
 	public void setTicksPerMonsterSpawns(int ticksPerMonsterSpawns)
 	{
-		this.ticksPerSpawn.put(SpawnCategory.MONSTER, ticksPerMonsterSpawns);
+		this.setTicksPerSpawns(SpawnCategory.MONSTER, ticksPerMonsterSpawns);
 	}
 
 	@Override
