@@ -320,9 +320,21 @@ public class WorldMock implements World
 		if (this.server != null)
 		{
 			this.pvp = this.server.getServerConfiguration().isPvpEnabled();
-		}else {
-			this.pvp = true;
+			this.ticksPerSpawn.putAll(this.server.getServerConfiguration().getTicksPerSpawn());
 		}
+		else
+		{
+			this.pvp = true;
+
+			// Set the default ticks per spawn values.
+			ticksPerSpawn.put(SpawnCategory.ANIMAL, 400);
+			ticksPerSpawn.put(SpawnCategory.MONSTER, 1);
+			ticksPerSpawn.put(SpawnCategory.WATER_AMBIENT, 1);
+			ticksPerSpawn.put(SpawnCategory.WATER_UNDERGROUND_CREATURE, 1);
+			ticksPerSpawn.put(SpawnCategory.WATER_ANIMAL, 1);
+			ticksPerSpawn.put(SpawnCategory.AMBIENT, 1);
+		}
+
 		// Set the default gamerule values.
 		gameRules.put(GameRule.ANNOUNCE_ADVANCEMENTS, true);
 		gameRules.put(GameRule.COMMAND_BLOCK_OUTPUT, true);
@@ -347,14 +359,6 @@ public class WorldMock implements World
 		gameRules.put(GameRule.SHOW_DEATH_MESSAGES, true);
 		gameRules.put(GameRule.SPAWN_RADIUS, 10);
 		gameRules.put(GameRule.SPECTATORS_GENERATE_CHUNKS, true);
-
-		// Set the default ticks per spawn values.
-		ticksPerSpawn.put(SpawnCategory.ANIMAL, 400);
-		ticksPerSpawn.put(SpawnCategory.MONSTER, 1);
-		ticksPerSpawn.put(SpawnCategory.WATER_AMBIENT, 1);
-		ticksPerSpawn.put(SpawnCategory.WATER_UNDERGROUND_CREATURE, 1);
-		ticksPerSpawn.put(SpawnCategory.WATER_ANIMAL, 1);
-		ticksPerSpawn.put(SpawnCategory.AMBIENT, 1);
 	}
 
 	/**
@@ -816,10 +820,12 @@ public class WorldMock implements World
 		AsyncCatcher.catchOp("chunk unload");
 		ChunkCoordinate chunkCoordinate = new ChunkCoordinate(x, z);
 		ChunkMock chunk = loadedChunks.remove(chunkCoordinate);
-		if (chunk == null) {
+		if (chunk == null)
+		{
 			return true;
 		}
-		if (save) {
+		if (save)
+		{
 			savedChunks.put(chunkCoordinate, chunk);
 		}
 		return true;
@@ -2525,6 +2531,7 @@ public class WorldMock implements World
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
+
 	@Override
 	public boolean isFixedTime()
 	{
@@ -2836,7 +2843,8 @@ public class WorldMock implements World
 	@Override
 	public boolean isNatural()
 	{
-		return switch (environment) {
+		return switch (environment)
+		{
 			case THE_END, NETHER -> false;
 			default -> true;
 		};
@@ -2845,7 +2853,8 @@ public class WorldMock implements World
 	@Override
 	public boolean isBedWorks()
 	{
-		return switch (environment) {
+		return switch (environment)
+		{
 			case THE_END, NETHER -> false;
 			default -> true;
 		};
@@ -2854,7 +2863,8 @@ public class WorldMock implements World
 	@Override
 	public boolean hasSkyLight()
 	{
-		return switch (environment) {
+		return switch (environment)
+		{
 			case THE_END, NETHER -> false;
 			default -> true;
 		};
