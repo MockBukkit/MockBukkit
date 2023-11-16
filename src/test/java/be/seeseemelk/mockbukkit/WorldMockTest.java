@@ -96,6 +96,7 @@ import org.bukkit.entity.Item;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Sheep;
+import org.bukkit.entity.SpawnCategory;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -1667,7 +1668,8 @@ class WorldMockTest
 		assertDoesNotThrow(() -> world.playSound(new Location(world, 0, 0, 0),
 				Sound.BLOCK_ANVIL_BREAK, 1, 1));
 
-		playerMock.assertSoundHeard(Sound.BLOCK_ANVIL_BREAK, (audio)-> {
+		playerMock.assertSoundHeard(Sound.BLOCK_ANVIL_BREAK, (audio) ->
+		{
 			return audio.getVolume() == 1 && audio.getPitch() == 1;
 		});
 
@@ -1682,7 +1684,8 @@ class WorldMockTest
 		assertDoesNotThrow(() -> world.playSound(new Location(world, 0, 0, 0),
 				"block.anvil.break", 1, 1));
 
-		playerMock.assertSoundHeard(Sound.BLOCK_ANVIL_BREAK, (audio)-> {
+		playerMock.assertSoundHeard(Sound.BLOCK_ANVIL_BREAK, (audio) ->
+		{
 			return audio.getVolume() == 1 && audio.getPitch() == 1;
 		});
 	}
@@ -1693,9 +1696,10 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		PlayerMock playerMock = server.addPlayer();
 		playerMock.teleport(world.getSpawnLocation());
-		assertDoesNotThrow(() -> world.playSound(playerMock,Sound.BLOCK_ANVIL_BREAK, 1, 1));
+		assertDoesNotThrow(() -> world.playSound(playerMock, Sound.BLOCK_ANVIL_BREAK, 1, 1));
 
-		playerMock.assertSoundHeard(Sound.BLOCK_ANVIL_BREAK, (audio)-> {
+		playerMock.assertSoundHeard(Sound.BLOCK_ANVIL_BREAK, (audio) ->
+		{
 			return audio.getVolume() == 1 && audio.getPitch() == 1;
 		});
 	}
@@ -1706,8 +1710,9 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		PlayerMock playerMock = server.addPlayer();
 		playerMock.teleport(world.getSpawnLocation());
-		assertDoesNotThrow(() -> world.playSound((Entity) null,Sound.BLOCK_ANVIL_BREAK, 1, 1));
-		assertThrows(AssertionFailedError.class, () -> playerMock.assertSoundHeard(Sound.BLOCK_ANVIL_BREAK, (audio)-> {
+		assertDoesNotThrow(() -> world.playSound((Entity) null, Sound.BLOCK_ANVIL_BREAK, 1, 1));
+		assertThrows(AssertionFailedError.class, () -> playerMock.assertSoundHeard(Sound.BLOCK_ANVIL_BREAK, (audio) ->
+		{
 			return audio.getVolume() == 1 && audio.getPitch() == 1;
 		}));
 	}
@@ -1719,8 +1724,9 @@ class WorldMockTest
 		WorldMock world2 = new WorldMock(Material.DIRT, 3);
 		PlayerMock playerMock = server.addPlayer();
 		playerMock.teleport(world.getSpawnLocation());
-		assertDoesNotThrow(() -> world2.playSound(playerMock,Sound.BLOCK_ANVIL_BREAK, 1, 1));
-		assertThrows(AssertionFailedError.class, () -> playerMock.assertSoundHeard(Sound.BLOCK_ANVIL_BREAK, (audio)-> {
+		assertDoesNotThrow(() -> world2.playSound(playerMock, Sound.BLOCK_ANVIL_BREAK, 1, 1));
+		assertThrows(AssertionFailedError.class, () -> playerMock.assertSoundHeard(Sound.BLOCK_ANVIL_BREAK, (audio) ->
+		{
 			return audio.getVolume() == 1 && audio.getPitch() == 1 && audio.getLocation().getWorld() == world2;
 		}));
 	}
@@ -1731,8 +1737,9 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		PlayerMock playerMock = server.addPlayer();
 		playerMock.teleport(world.getSpawnLocation());
-		assertDoesNotThrow(() -> world.playSound(playerMock,(Sound) null, 1, 1));
-		assertThrows(AssertionFailedError.class, () -> playerMock.assertSoundHeard(Sound.BLOCK_ANVIL_BREAK, (audio)-> {
+		assertDoesNotThrow(() -> world.playSound(playerMock, (Sound) null, 1, 1));
+		assertThrows(AssertionFailedError.class, () -> playerMock.assertSoundHeard(Sound.BLOCK_ANVIL_BREAK, (audio) ->
+		{
 			return audio.getVolume() == 1 && audio.getPitch() == 1;
 		}));
 	}
@@ -1743,8 +1750,9 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		PlayerMock playerMock = server.addPlayer();
 		playerMock.teleport(world.getSpawnLocation());
-		assertDoesNotThrow(() -> world.playSound(playerMock,Sound.ITEM_GOAT_HORN_SOUND_0,null, 1, 1));
-		assertThrows(AssertionFailedError.class, () -> playerMock.assertSoundHeard(Sound.BLOCK_ANVIL_BREAK, (audio)-> {
+		assertDoesNotThrow(() -> world.playSound(playerMock, Sound.ITEM_GOAT_HORN_SOUND_0, null, 1, 1));
+		assertThrows(AssertionFailedError.class, () -> playerMock.assertSoundHeard(Sound.BLOCK_ANVIL_BREAK, (audio) ->
+		{
 			return audio.getVolume() == 1 && audio.getPitch() == 1;
 		}));
 	}
@@ -1796,6 +1804,152 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		world.setPVP(false);
 		assertFalse(world.getPVP());
+	}
+
+	@ParameterizedTest
+	@MethodSource("getTicksPerSpawnCategory")
+	void testGetTicksPerSpawn(SpawnCategory category, int expectedTicksPerSpawn)
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertEquals(expectedTicksPerSpawn, world.getTicksPerSpawns(category));
+	}
+
+	public static Stream<Arguments> getTicksPerSpawnCategory()
+	{
+		return Stream.of(
+				Arguments.of(SpawnCategory.MONSTER, 1),
+				Arguments.of(SpawnCategory.ANIMAL, 400),
+				Arguments.of(SpawnCategory.WATER_AMBIENT, 1),
+				Arguments.of(SpawnCategory.WATER_ANIMAL, 1),
+				Arguments.of(SpawnCategory.AMBIENT, 1),
+				Arguments.of(SpawnCategory.WATER_UNDERGROUND_CREATURE, 1)
+		);
+	}
+
+	@Test
+	void testGetTicksPerSpawnNull()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertThrows(IllegalArgumentException.class, () -> world.getTicksPerSpawns(null));
+	}
+
+	@Test
+	void testGetTicksPerSpawnInvalidCategory()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertThrows(IllegalArgumentException.class, () -> world.getTicksPerSpawns(SpawnCategory.MISC));
+	}
+
+	@Test
+	void testSetTicksPerSpawn()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setTicksPerSpawns(SpawnCategory.MONSTER, 10);
+		assertEquals(10, world.getTicksPerSpawns(SpawnCategory.MONSTER));
+	}
+
+	@Test
+	void testSetTicksPerSpawnNull()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertThrows(IllegalArgumentException.class, () -> world.setTicksPerSpawns(null, 10));
+	}
+
+	@Test
+	void testSetTicksPerSpawnInvalidCategory()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertThrows(IllegalArgumentException.class, () -> world.setTicksPerSpawns(SpawnCategory.MISC, 10));
+	}
+
+	@Test
+	void testGetTicksPerWaterUndergroundCreatureSpawns()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertEquals(1, world.getTicksPerWaterUndergroundCreatureSpawns());
+	}
+
+	@Test
+	void testSetTicksPerWaterUndergroundCreatureSpawns()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setTicksPerWaterUndergroundCreatureSpawns(10);
+		assertEquals(10, world.getTicksPerWaterUndergroundCreatureSpawns());
+	}
+
+	@Test
+	void testGetTicksPerAmbientSpawns()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertEquals(1, world.getTicksPerAmbientSpawns());
+	}
+
+	@Test
+	void testSetTicksPerAmbientSpawns()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setTicksPerAmbientSpawns(10);
+		assertEquals(10, world.getTicksPerAmbientSpawns());
+	}
+
+	@Test
+	void testGetTicksPerWaterAmbientSpawns()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertEquals(1, world.getTicksPerWaterAmbientSpawns());
+	}
+
+	@Test
+	void testSetTicksPerWaterAmbientSpawns()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setTicksPerWaterAmbientSpawns(10);
+		assertEquals(10, world.getTicksPerWaterAmbientSpawns());
+	}
+
+	@Test
+	void testGetTicksPerWaterAnimalSpawns()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertEquals(1, world.getTicksPerWaterSpawns());
+	}
+
+	@Test
+	void testSetTicksPerWaterAnimalSpawns()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setTicksPerWaterSpawns(10);
+		assertEquals(10, world.getTicksPerWaterSpawns());
+	}
+
+	@Test
+	void testGetTicksPerAnimalSpawns()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertEquals(400, world.getTicksPerAnimalSpawns());
+	}
+
+	@Test
+	void testSetTicksPerAnimalSpawns()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setTicksPerAnimalSpawns(10);
+		assertEquals(10, world.getTicksPerAnimalSpawns());
+	}
+
+	@Test
+	void testGetTicksPerMonsterSpawns()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertEquals(1, world.getTicksPerMonsterSpawns());
+	}
+
+	@Test
+	void testSetTicksPerMonsterSpawns()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setTicksPerMonsterSpawns(10);
+		assertEquals(10, world.getTicksPerMonsterSpawns());
 	}
 
 }
