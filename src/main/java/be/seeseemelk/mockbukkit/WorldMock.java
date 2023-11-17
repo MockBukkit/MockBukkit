@@ -83,6 +83,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import io.papermc.paper.event.world.WorldGameRuleChangeEvent;
 import io.papermc.paper.world.MoonPhase;
+import it.unimi.dsi.fastutil.objects.Object2LongOpenHashMap;
 import org.bukkit.BlockChangeDelegate;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
@@ -283,6 +284,7 @@ public class WorldMock implements World
 	private boolean pvp;
 	private boolean hardcore;
 
+	private final Object2LongOpenHashMap<SpawnCategory> ticksPerSpawn = new Object2LongOpenHashMap<>();
 
 	/**
 	 * Creates a new mock world.
@@ -318,9 +320,21 @@ public class WorldMock implements World
 		if (this.server != null)
 		{
 			this.pvp = this.server.getServerConfiguration().isPvpEnabled();
-		}else {
-			this.pvp = true;
+			this.ticksPerSpawn.putAll(this.server.getServerConfiguration().getTicksPerSpawn());
 		}
+		else
+		{
+			this.pvp = true;
+
+			// Set the default ticks per spawn values.
+			ticksPerSpawn.put(SpawnCategory.ANIMAL, 400);
+			ticksPerSpawn.put(SpawnCategory.MONSTER, 1);
+			ticksPerSpawn.put(SpawnCategory.WATER_AMBIENT, 1);
+			ticksPerSpawn.put(SpawnCategory.WATER_UNDERGROUND_CREATURE, 1);
+			ticksPerSpawn.put(SpawnCategory.WATER_ANIMAL, 1);
+			ticksPerSpawn.put(SpawnCategory.AMBIENT, 1);
+		}
+
 		// Set the default gamerule values.
 		gameRules.put(GameRule.ANNOUNCE_ADVANCEMENTS, true);
 		gameRules.put(GameRule.COMMAND_BLOCK_OUTPUT, true);
@@ -806,10 +820,12 @@ public class WorldMock implements World
 		AsyncCatcher.catchOp("chunk unload");
 		ChunkCoordinate chunkCoordinate = new ChunkCoordinate(x, z);
 		ChunkMock chunk = loadedChunks.remove(chunkCoordinate);
-		if (chunk == null) {
+		if (chunk == null)
+		{
 			return true;
 		}
-		if (save) {
+		if (save)
+		{
 			savedChunks.put(chunkCoordinate, chunk);
 		}
 		return true;
@@ -1936,32 +1952,28 @@ public class WorldMock implements World
 	@Deprecated(since = "1.18")
 	public long getTicksPerAnimalSpawns()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getTicksPerSpawns(SpawnCategory.ANIMAL);
 	}
 
 	@Override
 	@Deprecated(since = "1.18")
 	public void setTicksPerAnimalSpawns(int ticksPerAnimalSpawns)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.setTicksPerSpawns(SpawnCategory.ANIMAL, ticksPerAnimalSpawns);
 	}
 
 	@Override
 	@Deprecated(since = "1.18")
 	public long getTicksPerMonsterSpawns()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getTicksPerSpawns(SpawnCategory.MONSTER);
 	}
 
 	@Override
 	@Deprecated(since = "1.18")
 	public void setTicksPerMonsterSpawns(int ticksPerMonsterSpawns)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.setTicksPerSpawns(SpawnCategory.MONSTER, ticksPerMonsterSpawns);
 	}
 
 	@Override
@@ -2519,6 +2531,7 @@ public class WorldMock implements World
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
+
 	@Override
 	public boolean isFixedTime()
 	{
@@ -2830,7 +2843,8 @@ public class WorldMock implements World
 	@Override
 	public boolean isNatural()
 	{
-		return switch (environment) {
+		return switch (environment)
+		{
 			case THE_END, NETHER -> false;
 			default -> true;
 		};
@@ -2839,7 +2853,8 @@ public class WorldMock implements World
 	@Override
 	public boolean isBedWorks()
 	{
-		return switch (environment) {
+		return switch (environment)
+		{
 			case THE_END, NETHER -> false;
 			default -> true;
 		};
@@ -2848,7 +2863,8 @@ public class WorldMock implements World
 	@Override
 	public boolean hasSkyLight()
 	{
-		return switch (environment) {
+		return switch (environment)
+		{
 			case THE_END, NETHER -> false;
 			default -> true;
 		};
@@ -2901,32 +2917,28 @@ public class WorldMock implements World
 	@Deprecated(since = "1.18")
 	public long getTicksPerWaterSpawns()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getTicksPerSpawns(SpawnCategory.WATER_ANIMAL);
 	}
 
 	@Override
 	@Deprecated(since = "1.18")
 	public void setTicksPerWaterSpawns(int ticksPerWaterSpawns)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.setTicksPerSpawns(SpawnCategory.WATER_ANIMAL, ticksPerWaterSpawns);
 	}
 
 	@Override
 	@Deprecated(since = "1.18")
 	public long getTicksPerAmbientSpawns()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getTicksPerSpawns(SpawnCategory.AMBIENT);
 	}
 
 	@Override
 	@Deprecated(since = "1.18")
 	public void setTicksPerAmbientSpawns(int ticksPerAmbientSpawns)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.setTicksPerSpawns(SpawnCategory.AMBIENT, ticksPerAmbientSpawns);
 	}
 
 	@Override
@@ -2953,34 +2965,28 @@ public class WorldMock implements World
 	@Deprecated(since = "1.18")
 	public long getTicksPerWaterAmbientSpawns()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getTicksPerSpawns(SpawnCategory.WATER_AMBIENT);
 	}
 
 	@Override
 	@Deprecated(since = "1.18")
 	public void setTicksPerWaterAmbientSpawns(int ticksPerAmbientSpawns)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.setTicksPerSpawns(SpawnCategory.WATER_AMBIENT, ticksPerAmbientSpawns);
 	}
 
 	@Override
 	@Deprecated(since = "1.18")
 	public long getTicksPerWaterUndergroundCreatureSpawns()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		return this.getTicksPerSpawns(SpawnCategory.WATER_UNDERGROUND_CREATURE);
 	}
 
 	@Override
 	@Deprecated(since = "1.18")
 	public void setTicksPerWaterUndergroundCreatureSpawns(int ticksPerWaterUndergroundCreatureSpawns)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		this.setTicksPerSpawns(SpawnCategory.WATER_UNDERGROUND_CREATURE, ticksPerWaterUndergroundCreatureSpawns);
 	}
 
 	@Override
@@ -3079,15 +3085,21 @@ public class WorldMock implements World
 	@Override
 	public long getTicksPerSpawns(@NotNull SpawnCategory spawnCategory)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(spawnCategory != null, "SpawnCategory cannot be null");
+		Preconditions.checkArgument(spawnCategory != null && spawnCategory != SpawnCategory.MISC,
+				"SpawnCategory.%s are not supported", spawnCategory);
+
+		return this.ticksPerSpawn.getLong(spawnCategory);
 	}
 
 	@Override
 	public void setTicksPerSpawns(@NotNull SpawnCategory spawnCategory, int ticksPerCategorySpawn)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(spawnCategory != null, "SpawnCategory cannot be null");
+		Preconditions.checkArgument(spawnCategory != null && spawnCategory != SpawnCategory.MISC,
+				"SpawnCategory.%s are not supported", spawnCategory);
+
+		this.ticksPerSpawn.put(spawnCategory, ticksPerCategorySpawn);
 	}
 
 	@Override
