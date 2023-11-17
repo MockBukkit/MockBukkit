@@ -23,6 +23,7 @@ public class ServerConfiguration
 	private boolean allowEnd = true;
 	private boolean allowNether = true;
 	private String updateFolder = "update";
+	private boolean sendChatPreviews = false;
 	private boolean enforceSecureProfiles = true;
 	private boolean onlineMode = true;
 	private boolean allowFlight = false;
@@ -32,6 +33,9 @@ public class ServerConfiguration
 	private int maxWorldSize = 29999984;
 	private int simulationDistance = 10;
 	private boolean hideOnlinePlayers = false;
+	private String serverIp = "";
+	private int serverPort = 25565;
+	private boolean pvpEnabled = true;
 
 	/**
 	 * @return The view distance.
@@ -138,6 +142,20 @@ public class ServerConfiguration
 	public void setUpdateFolder(String updateFolder)
 	{
 		this.updateFolder = updateFolder;
+	}
+
+	public boolean shouldSendChatPreviews()
+	{
+		return this.sendChatPreviews;
+	}
+
+	/**
+	 * @param shouldSendChatPreviews Send chat previews.
+	 * @see ServerMock#setShouldSendChatPreviews(boolean)
+	 */
+	public void setShouldSendChatPreviews(boolean shouldSendChatPreviews)
+	{
+		this.sendChatPreviews = shouldSendChatPreviews;
 	}
 
 	/**
@@ -303,8 +321,65 @@ public class ServerConfiguration
 	}
 
 	/**
+	 * @return The server listen IP
+	 * @see ServerMock#getIp
+	 */
+	public String getServerIp()
+	{
+		return serverIp;
+	}
+
+	/**
+	 * @param serverIp The server listen IP
+	 * @see ServerMock#setIp
+	 */
+	public void setServerIp(String serverIp)
+	{
+		this.serverIp = serverIp;
+	}
+
+	/**
+	 * @return The server listen port
+	 * @see ServerMock#getPort
+	 */
+	public int getServerPort()
+	{
+		return serverPort;
+	}
+
+	/**
+	 * @param serverPort The server listen port
+	 * @see ServerMock#setPort
+	 */
+	public void setServerPort(int serverPort)
+	{
+		this.serverPort = serverPort;
+	}
+
+	/**
+	 * @return PVP enabled
+	 */
+	public boolean isPvpEnabled()
+	{
+		return this.pvpEnabled;
+	}
+
+	/**
+	 * @param pvpEnabled PVP enabled
+	 */
+	public void setPvpEnabled(boolean pvpEnabled)
+	{
+		this.pvpEnabled = pvpEnabled;
+	}
+
+	/**
+	 * @return Send chat previews.
+	 * @see ServerMock#setShouldSendChatPreviews(boolean)
+	 */
+
+	/**
 	 * Enum representing all different world types.
-	 * <a href="https://minecraft.fandom.com/wiki/World_preset">Wiki</a>
+	 * <a href="https://minecraft.wiki/w/World_preset">Wiki</a>
 	 */
 	public enum LevelType
 	{

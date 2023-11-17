@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Validate gradle wrapper
         uses: gradle/wrapper-validation-action@v1
       - name: Set up JDK 17
@@ -34,7 +34,7 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Build with Gradle
-        run: ./gradlew build -x test
+        run: ./gradlew build -x test --refresh-dependencies
       - name: Run unit tests
         run: ./gradlew test
 

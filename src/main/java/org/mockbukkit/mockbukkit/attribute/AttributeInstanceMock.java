@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.attribute;
 
+import org.mockbukkit.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
@@ -65,6 +66,13 @@ public class AttributeInstanceMock implements AttributeInstance
 	{
 		Preconditions.checkNotNull(modifier, "Modifier cannot be null");
 		modifiers.add(modifier);
+	}
+
+	@Override
+	public void addTransientModifier(@NotNull AttributeModifier modifier)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

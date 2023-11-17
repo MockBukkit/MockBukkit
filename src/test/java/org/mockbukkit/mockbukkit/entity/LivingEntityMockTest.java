@@ -7,10 +7,14 @@ import net.kyori.adventure.util.TriState;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -140,6 +144,53 @@ class LivingEntityMockTest
 	{
 		livingEntity.setLeashHolder(null);
 		assertThrows(IllegalStateException.class, () -> livingEntity.getLeashHolder());
+	}
+
+	@Test
+	void testPotionEffects()
+	{
+		PotionEffect effect = new PotionEffect(PotionEffectType.CONFUSION, 3, 1);
+		assertTrue(livingEntity.addPotionEffect(effect));
+
+		assertTrue(livingEntity.hasPotionEffect(effect.getType()));
+		assertTrue(livingEntity.getActivePotionEffects().contains(effect));
+
+		assertEquals(effect, livingEntity.getPotionEffect(effect.getType()));
+
+		livingEntity.removePotionEffect(effect.getType());
+		assertFalse(livingEntity.hasPotionEffect(effect.getType()));
+		assertFalse(livingEntity.getActivePotionEffects().contains(effect));
+
+	}
+
+	@Test
+	void clearPotionEffects()
+	{
+		PotionEffect effect = new PotionEffect(PotionEffectType.CONFUSION, 5, 1);
+		livingEntity.addPotionEffect(effect);
+		assertTrue(livingEntity.clearActivePotionEffects());
+	}
+
+	@Test
+	void testInstantEffect()
+	{
+		PotionEffect instant = new PotionEffect(PotionEffectType.HEAL, 0, 1);
+		assertTrue(livingEntity.addPotionEffect(instant));
+		assertFalse(livingEntity.hasPotionEffect(instant.getType()));
+	}
+
+	@Test
+	void testMultiplePotionEffects()
+	{
+		Collection<PotionEffect> effects = Arrays.asList(new PotionEffect(PotionEffectType.BAD_OMEN, 3, 1),
+				new PotionEffect(PotionEffectType.LUCK, 5, 2));
+
+		assertTrue(livingEntity.addPotionEffects(effects));
+
+		for (PotionEffect effect : effects)
+		{
+			assertTrue(livingEntity.hasPotionEffect(effect.getType()));
+		}
 	}
 
 }

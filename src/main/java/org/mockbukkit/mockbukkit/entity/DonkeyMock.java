@@ -28,14 +28,14 @@ public class DonkeyMock extends ChestedHorseMock implements Donkey
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.17")
 	public Horse.@NotNull Variant getVariant()
 	{
 		return Horse.Variant.DONKEY;
 	}
 
 	@Override
-	public EntityType getType()
+	public @NotNull EntityType getType()
 	{
 		return EntityType.DONKEY;
 	}

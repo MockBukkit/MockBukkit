@@ -40,8 +40,8 @@ class MockBukkitTest
 	@Test
 	void paperApiFullVersion_IsReplaced()
 	{
-		assertNotNull(MockBukkit.PAPER_API_FULL_VERSION);
-		assertNotEquals("{paper.api.full-version}", MockBukkit.PAPER_API_FULL_VERSION);
+		assertNotNull(BuildParameters.PAPER_API_FULL_VERSION);
+		assertNotEquals("{{ paperApiFullVersion }}", BuildParameters.PAPER_API_FULL_VERSION);
 	}
 
 	@Test

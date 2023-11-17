@@ -1,0 +1,52 @@
+{
+	"values": [
+		{
+			"key": "minecraft:buried_treasure"
+		},
+		{
+			"key": "minecraft:desert_pyramid"
+		},
+		{
+			"key": "minecraft:end_city"
+		},
+		{
+			"key": "minecraft:fortress"
+		},
+		{
+			"key": "minecraft:igloo"
+		},
+		{
+			"key": "minecraft:jigsaw"
+		},
+		{
+			"key": "minecraft:jungle_temple"
+		},
+		{
+			"key": "minecraft:mineshaft"
+		},
+		{
+			"key": "minecraft:nether_fossil"
+		},
+		{
+			"key": "minecraft:ocean_monument"
+		},
+		{
+			"key": "minecraft:ocean_ruin"
+		},
+		{
+			"key": "minecraft:ruined_portal"
+		},
+		{
+			"key": "minecraft:shipwreck"
+		},
+		{
+			"key": "minecraft:stronghold"
+		},
+		{
+			"key": "minecraft:swamp_hut"
+		},
+		{
+			"key": "minecraft:woodland_mansion"
+		}
+	]
+}

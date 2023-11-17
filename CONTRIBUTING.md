@@ -84,7 +84,7 @@ being the name of your branch you created earlier.
 To create the pull request, head back to your fork on GitHub, and go to the `Pull Requests` tab, and click
 the `New Pull Request` button.
 On the left, make sure `Base repository` is set to `MockBukkit/MockBukkit` and the branch next to it is set to the
-latest version (e.g. `v1.19`).
+latest version (e.g. `v1.20`).
 On the right, make sure `Head repoitory` is set to `Usename/MockBukkit` with `Username` being your GitHub username and
 the branch being the new branch you created.
 Now you can click the `Create pull request` button to start creating the pull request.

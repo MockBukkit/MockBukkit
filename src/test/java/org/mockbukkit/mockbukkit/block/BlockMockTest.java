@@ -4,6 +4,7 @@ import org.mockbukkit.mockbukkit.ChunkCoordinate;
 import org.mockbukkit.mockbukkit.ChunkMock;
 import org.mockbukkit.mockbukkit.Coordinate;
 import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.WorldMock;
 import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
 import org.bukkit.Location;
@@ -67,6 +68,12 @@ class BlockMockTest
 		BlockMock slabBlock = new BlockMock(Material.ACACIA_SLAB, location);
 		BlockData blockData = slabBlock.getBlockData();
 		assertInstanceOf(Slab.class, blockData);
+	}
+
+	@Test
+	void constructor_MaterialNotABLock()
+	{
+		assertThrows(IllegalArgumentException.class, () -> new BlockMock(Material.IRON_AXE));
 	}
 
 	@Test
@@ -299,6 +306,20 @@ class BlockMockTest
 	{
 		Block b = block.getRelative(BlockFace.NORTH, 2);
 		assertNull(block.getFace(b));
+	}
+
+	@Test
+	void isSolid_Solid()
+	{
+		Block block = new BlockMock(Material.ANCIENT_DEBRIS);
+		assertTrue(block.isSolid());
+	}
+
+	@Test
+	void isSolid_NonSolid()
+	{
+		Block block = new BlockMock(Material.BLACK_BANNER);
+		assertFalse(block.isSolid());
 	}
 
 }

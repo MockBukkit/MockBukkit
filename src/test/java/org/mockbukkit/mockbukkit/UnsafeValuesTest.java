@@ -1,5 +1,7 @@
 package org.mockbukkit.mockbukkit;
 
+import org.bukkit.Material;
+import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.InvalidDescriptionException;
 import org.bukkit.plugin.InvalidPluginException;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -12,9 +14,12 @@ import java.io.StringReader;
 import java.util.regex.Pattern;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@SuppressWarnings("deprecation")
 class UnsafeValuesTest
 {
 
@@ -31,7 +36,7 @@ class UnsafeValuesTest
 	}
 
 	@AfterEach
-	void teardown()
+	void tearDown()
 	{
 		MockBukkit.unmock();
 	}
@@ -94,6 +99,63 @@ class UnsafeValuesTest
 			unsafeValuesMock.setMinimumApiVersion("1.15");
 			checkVersion("1.13");
 		});
+	}
+
+	@Test
+	void fromLegacy_Material_NotLegacy_ReturnsSame()
+	{
+		for (Material material : Material.values())
+		{
+			if (material.isLegacy())
+				continue;
+			assertEquals(material, unsafeValuesMock.fromLegacy(material));
+		}
+	}
+
+	@Test
+	void fromLegacy_Material_Legacy_Throws()
+	{
+		for (Material material : Material.values())
+		{
+			if (!material.isLegacy())
+				continue;
+			assertThrows(UnimplementedOperationException.class, () -> unsafeValuesMock.fromLegacy(material));
+		}
+	}
+
+	@Test
+	void fromLegacy_Material_Null_ReturnsNull()
+	{
+		assertNull(unsafeValuesMock.fromLegacy((Material) null));
+	}
+
+	@Test
+	void fromLegacy_MaterialData_NotLegacy_ReturnsSame()
+	{
+		for (Material material : Material.values())
+		{
+			if (material.isLegacy())
+				continue;
+			assertEquals(material, unsafeValuesMock.fromLegacy(new MaterialData(material)));
+		}
+	}
+
+	@Test
+	void fromLegacy_MaterialData_Legacy_Throws()
+	{
+		for (Material material : Material.values())
+		{
+			if (!material.isLegacy())
+				continue;
+			MaterialData materialData = new MaterialData(material);
+			assertThrows(UnimplementedOperationException.class, () -> unsafeValuesMock.fromLegacy(materialData));
+		}
+	}
+
+	@Test
+	void fromLegacy_MaterialData_Null_ReturnsNull()
+	{
+		assertThrows(NullPointerException.class, () -> unsafeValuesMock.fromLegacy((MaterialData) null));
 	}
 
 }

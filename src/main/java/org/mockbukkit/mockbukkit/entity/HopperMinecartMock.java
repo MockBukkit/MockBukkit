@@ -1,5 +1,7 @@
 package org.mockbukkit.mockbukkit.entity;
 
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.UnimplementedOperationException;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -7,7 +9,6 @@ import org.bukkit.entity.minecart.HopperMinecart;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.jetbrains.annotations.NotNull;
-import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
 
@@ -69,7 +70,8 @@ public class HopperMinecartMock extends LootableMinecart implements HopperMineca
 	@Override
 	public @NotNull Inventory getInventory()
 	{
-		if (this.inventory == null) {
+		if (this.inventory == null)
+		{
 			this.inventory = server.createInventory(null, InventoryType.HOPPER);
 		}
 		return this.inventory;
@@ -79,6 +81,13 @@ public class HopperMinecartMock extends LootableMinecart implements HopperMineca
 	public EntityType getType()
 	{
 		return EntityType.MINECART_HOPPER;
+	}
+
+	@Override
+	public boolean canPlayerLoot(@NotNull UUID player)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 }

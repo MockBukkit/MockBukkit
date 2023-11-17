@@ -3,14 +3,14 @@
     <a href="https://github.com/MockBukkit/MockBukkit/actions/">
         <img alt="Build Status" src="https://github.com/MockBukkit/MockBukkit/actions/workflows/publish.yml/badge.svg" />
     </a>
-    <a href="https://mockbukkit.readthedocs.io/en/v1.19/?badge=v1.19">
-        <img alt="Documentation Status" src="https://readthedocs.org/projects/mockbukkit/badge/?version=v1.19" />
+    <a href="https://mockbukkit.readthedocs.io/en/v1.20/?badge=v1.20">
+        <img alt="Documentation Status" src="https://readthedocs.org/projects/mockbukkit/badge/?version=v1.20" />
     </a>
     <a href="https://search.maven.org/search?q=MockBukkit">
-        <img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.github.seeseemelk/MockBukkit-v1.19?color=1bcc94&logo=apache-maven" />
+        <img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.github.seeseemelk/MockBukkit-v1.20?color=1bcc94&logo=apache-maven" />
     </a>
-    <a href="https://javadoc.io/doc/com.github.seeseemelk/MockBukkit-v1.19">
-        <img alt="Javadocs" src="https://javadoc.io/badge2/com.github.seeseemelk/MockBukkit-v1.19/javadoc.svg" />
+    <a href="https://javadoc.io/doc/com.github.seeseemelk/MockBukkit-v1.20">
+        <img alt="Javadocs" src="https://javadoc.io/badge2/com.github.seeseemelk/MockBukkit-v1.20/javadoc.svg" />
     </a>
     <a href="https://sonarcloud.io/project/issues?resolved=false&types=CODE_SMELL&id=MockBukkit_MockBukkit">
         <img alt="Code Smells" src="https://sonarcloud.io/api/project_badges/measure?project=MockBukkit_MockBukkit&metric=code_smells">
@@ -64,7 +64,7 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'com.github.seeseemelk:MockBukkit-v1.19:2.29.0'
+    testImplementation 'com.github.seeseemelk:MockBukkit-v1.20:3.9.0'
 }
 ```
 
@@ -78,7 +78,7 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'com.github.MockBukkit:MockBukkit:v1.19-SNAPSHOT'
+    testImplementation 'com.github.MockBukkit:MockBukkit:v1.20-SNAPSHOT'
 }
 ```
 
@@ -96,7 +96,7 @@ development of MockBukkit.
 <summary><h3>Adding MockBukkit via Maven</h3></summary>
 
 MockBukkit can easily be included in Maven using the default Maven Central and PaperMC repositories.
-Make sure to update the version as necessary.
+> Note: Make sure to update the version as necessary and put this dependency above your dependency that provides bukkit.
 
 ```xml
 <repositories>
@@ -109,8 +109,8 @@ Make sure to update the version as necessary.
 <dependencies>
   <dependency>
     <groupId>com.github.seeseemelk</groupId>
-    <artifactId>MockBukkit-v1.19</artifactId>
-    <version>2.29.0</version>
+    <artifactId>MockBukkit-v1.20</artifactId>
+    <version>3.9.0</version>
     <scope>test</scope>
   </dependency>
 </dependencies>
@@ -138,7 +138,7 @@ use [JitPack](https://jitpack.io/#MockBukkit/MockBukkit) as your maven repositor
   <dependency>
     <groupId>com.github.MockBukkit</groupId>
     <artifactId>MockBukkit</artifactId>
-    <version>v1.19-SNAPSHOT</version>
+    <version>v1.20-SNAPSHOT</version>
     <scope>test</scope>
   </dependency>
 </dependencies>
@@ -161,14 +161,14 @@ A plugin can be loaded in this initialiser block.
 private ServerMock server;
 private MyPlugin plugin;
 
-@Before
+@BeforeEach
 public void setUp()
 {
     server = MockBukkit.mock();
     plugin = MockBukkit.load(MyPlugin.class);
 }
 
-@After
+@AfterEach
 public void tearDown()
 {
     MockBukkit.unmock();

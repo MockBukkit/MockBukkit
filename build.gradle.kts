@@ -5,7 +5,7 @@ plugins {
 	id("jacoco")
 	id("maven-publish")
 	id("signing")
-	id("net.kyori.blossom") version "1.3.1"
+	id("net.kyori.blossom") version "2.1.0"
 	id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
 }
 
@@ -24,12 +24,12 @@ dependencies {
 	api("io.papermc.paper:paper-api:${property("paper.api.full-version")}")
 
 	// Dependencies for Unit Tests
-	implementation("org.junit.jupiter:junit-jupiter:5.9.3")
+	implementation("org.junit.jupiter:junit-jupiter:5.10.1")
 
 	// General utilities for the project
-	implementation("net.kyori:adventure-platform-bungeecord:4.3.0")
-	implementation("org.jetbrains:annotations:24.0.1")
-	implementation("net.bytebuddy:byte-buddy:1.14.4")
+	implementation("net.kyori:adventure-platform-bungeecord:4.3.1")
+	implementation("org.jetbrains:annotations:24.1.0")
+	implementation("net.bytebuddy:byte-buddy:1.14.9")
 
 	// LibraryLoader dependencies
 	implementation("org.apache.maven:maven-resolver-provider:3.8.5")
@@ -89,16 +89,18 @@ tasks {
 	}
 
 	jacoco {
-		toolVersion = "0.8.10"
+		toolVersion = "0.8.11"
 	}
 }
 
-blossom {
-	val metadata = "src/main/java/org/mockbukkit/mockbukkit/MockBukkit.java"
-	fun repl(token: String) {
-		replaceToken("\"{$token}\"", "\"${project.property(token)}\"", metadata)
+sourceSets {
+	main {
+		blossom {
+			javaSources {
+				property("paperApiFullVersion", project.property("paper.api.full-version").toString())
+			}
+		}
 	}
-	repl("paper.api.full-version")
 }
 
 java {
@@ -124,8 +126,10 @@ nexusPublishing {
 publishing {
 	publications {
 		create<MavenPublication>("maven") {
+			artifactId = "MockBukkit-v${property("paper.api.version")}"
+			from(components.getByName("java"))
 			pom {
-				name.set("MockBukkit")
+				name.set("MockBukkit-v${property("paper.api.version")}")
 				description.set("MockBukkit is a mocking framework for bukkit to allow the easy unit testing of Bukkit plugins.")
 				url.set("https://github.com/MockBukkit/MockBukkit")
 				scm {
@@ -144,6 +148,18 @@ publishing {
 						id.set("seeseemelk")
 						name.set("Sebastiaan de Schaetzen")
 						email.set("sebastiaan.de.schaetzen@gmail.com")
+					}
+					developer{
+						id.set("thebusybiscuit")
+						name.set("TheBusyBiscuit")
+					}
+					developer {
+						id.set("insprill")
+						name.set("Pierce Thompson")
+					}
+					developer {
+						id.set("thelooter")
+						name.set("Eve Kolb")
 					}
 				}
 			}

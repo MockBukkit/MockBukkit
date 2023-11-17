@@ -160,6 +160,34 @@ class MinecartMockTest
 		server.getPluginManager().assertEventNotFired(EntityDismountEvent.class);
 	}
 
+	@Test
+	void testSetDamage()
+	{
+		minecart.setDamage(0.5);
+		assertEquals(0.5, minecart.getDamage());
+	}
+
+	@Test
+	void testSetMaxSpeed()
+	{
+		minecart.setMaxSpeed(0.5);
+		assertEquals(0.5, minecart.getMaxSpeed());
+	}
+
+	@Test
+	void testSetSlowWhenEmpty()
+	{
+		minecart.setSlowWhenEmpty(false);
+		assertFalse(minecart.isSlowWhenEmpty());
+	}
+
+	@Test
+	void testSetDisplayBlockOffset()
+	{
+		minecart.setDisplayBlockOffset(1);
+		assertEquals(1, minecart.getDisplayBlockOffset());
+	}
+
 	private static class MockMinecart extends MinecartMock
 	{
 

@@ -1,10 +1,13 @@
 package org.mockbukkit.mockbukkit.block.state;
 
+import org.mockbukkit.mockbukkit.UnimplementedOperationException;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.SculkShrieker;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Mock implementation of a {@link SculkShrieker}.
@@ -67,6 +70,13 @@ public class SculkShriekerStateMock extends TileStateMock implements SculkShriek
 	public void setWarningLevel(int level)
 	{
 		this.warningLevel = level;
+	}
+
+	@Override
+	public void tryShriek(@Nullable Player player)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 }

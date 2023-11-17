@@ -65,17 +65,19 @@ public abstract class LootableMinecart extends MinecartMock implements LootableI
 	{
 		final boolean hasLooted = hasPlayerLooted(player);
 
-		if (this.lootedPlayers == null) {
+		if (this.lootedPlayers == null)
+		{
 			this.lootedPlayers = new HashMap<>();
 		}
 
 		if (hasLooted != looted)
 		{
-			if (looted) {
-				if (!this.lootedPlayers.containsKey(player)) {
-					this.lootedPlayers.put(player, System.currentTimeMillis());
-				}
-			} else {
+			if (looted)
+			{
+				this.lootedPlayers.computeIfAbsent(player, p -> System.currentTimeMillis());
+			}
+			else
+			{
 				this.lootedPlayers.remove(player);
 			}
 		}
@@ -106,11 +108,13 @@ public abstract class LootableMinecart extends MinecartMock implements LootableI
 		final long oldRefill = this.nextRefill;
 		this.nextRefill = refillAt;
 
-		new BukkitRunnable(){
+		new BukkitRunnable()
+		{
 			@Override
 			public void run()
 			{
-				if (nextRefill == server.getScheduler().getCurrentTick()) {
+				if (nextRefill == server.getScheduler().getCurrentTick())
+				{
 					nextRefill = -1;
 					lastFilled = server.getScheduler().getCurrentTick();
 				}

@@ -38,7 +38,7 @@ public class ScoreboardMock implements Scoreboard
 	private final @NotNull Map<String, Team> teams = new HashMap<>();
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.13")
 	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull String criteria) throws IllegalArgumentException
 	{
 		return registerNewObjective(name, criteria, name, RenderType.INTEGER);
@@ -77,7 +77,7 @@ public class ScoreboardMock implements Scoreboard
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.16")
 	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull String criteria, @NotNull String displayName)
 			throws IllegalArgumentException
 	{
@@ -85,7 +85,7 @@ public class ScoreboardMock implements Scoreboard
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.16")
 	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull String criteria, @NotNull String displayName, @NotNull RenderType renderType)
 			throws IllegalArgumentException
 	{
@@ -224,7 +224,7 @@ public class ScoreboardMock implements Scoreboard
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.7.10")
 	public @NotNull Set<OfflinePlayer> getPlayers()
 	{
 		Set<OfflinePlayer> players = new HashSet<>();

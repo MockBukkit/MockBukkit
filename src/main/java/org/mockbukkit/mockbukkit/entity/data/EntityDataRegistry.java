@@ -19,6 +19,11 @@ import org.mockbukkit.mockbukkit.MockBukkit;
 public class EntityDataRegistry
 {
 
+	private EntityDataRegistry()
+	{
+		throw new UnsupportedOperationException("Utility class");
+	}
+
 	static final Map<EntityType, String> entityJsonDataMap = new HashMap<>();
 
 	/**

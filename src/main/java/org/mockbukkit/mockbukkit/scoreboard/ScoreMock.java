@@ -41,7 +41,7 @@ public class ScoreMock implements Score
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.7.10")
 	public @NotNull OfflinePlayer getPlayer()
 	{
 		return player;

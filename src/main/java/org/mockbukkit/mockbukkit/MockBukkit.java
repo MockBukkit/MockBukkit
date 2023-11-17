@@ -23,8 +23,6 @@ import java.util.logging.Level;
 public class MockBukkit
 {
 
-	static final String PAPER_API_FULL_VERSION = "{paper.api.full-version}";
-
 	private static @Nullable ServerMock mock = null;
 
 	private MockBukkit()

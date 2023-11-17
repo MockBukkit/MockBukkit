@@ -84,11 +84,11 @@ public class ObjectiveMock implements Objective
 	@Override
 	public void displayName(@Nullable Component displayName) throws IllegalStateException, IllegalArgumentException
 	{
-		this.displayName = displayName;
+		this.displayName = displayName == null ? Component.empty() : displayName;
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.16")
 	public @NotNull String getDisplayName() throws IllegalStateException
 	{
 		validate();
@@ -96,7 +96,7 @@ public class ObjectiveMock implements Objective
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.16")
 	public void setDisplayName(@NotNull String displayName) throws IllegalStateException, IllegalArgumentException
 	{
 		Preconditions.checkNotNull(displayName, "The display name cannot be null");
@@ -176,7 +176,7 @@ public class ObjectiveMock implements Objective
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.7.10")
 	public @NotNull ScoreMock getScore(@NotNull OfflinePlayer player) throws IllegalArgumentException, IllegalStateException
 	{
 		Preconditions.checkNotNull(player, "The player cannot be null");

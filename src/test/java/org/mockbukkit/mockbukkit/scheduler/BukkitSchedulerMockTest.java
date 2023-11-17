@@ -9,10 +9,13 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.opentest4j.AssertionFailedError;
 
 import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
@@ -28,6 +31,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class BukkitSchedulerMockTest
 {
@@ -315,6 +319,64 @@ class BukkitSchedulerMockTest
 	}
 
 	@Test
+	void saveOverdueTasks_EmptyByDefault()
+	{
+		scheduler.saveOverdueTasks();
+		assertTrue(scheduler.getOverdueTasks().isEmpty());
+	}
+
+	@Test
+	void saveOverdueTasks_SavesOverdueTasks() throws InterruptedException
+	{
+		CountDownLatch tasksSaved = new CountDownLatch(1);
+		CountDownLatch taskStarted = new CountDownLatch(1);
+		scheduler.runTaskAsynchronously(null, () ->
+		{
+			try
+			{
+				taskStarted.countDown();
+				tasksSaved.await();
+			}
+			catch (InterruptedException e)
+			{
+			}
+		});
+		taskStarted.await();
+		scheduler.saveOverdueTasks();
+		tasksSaved.countDown();
+		assertFalse(scheduler.getOverdueTasks().isEmpty());
+	}
+
+	@Test
+	void assertNoOverdueTasks()
+	{
+		scheduler.saveOverdueTasks();
+		scheduler.assertNoOverdueTasks();
+	}
+
+	@Test
+	void assertNoOverdueTasks_FailedWhenOverdue() throws InterruptedException
+	{
+		CountDownLatch tasksSaved = new CountDownLatch(1);
+		CountDownLatch taskStarted = new CountDownLatch(1);
+		scheduler.runTaskAsynchronously(null, () ->
+		{
+			try
+			{
+				taskStarted.countDown();
+				tasksSaved.await();
+			}
+			catch (InterruptedException e)
+			{
+			}
+		});
+		taskStarted.await();
+		scheduler.saveOverdueTasks();
+		tasksSaved.countDown();
+		assertThrowsExactly(AssertionFailedError.class, () -> scheduler.assertNoOverdueTasks());
+	}
+
+	@Test
 	void waitAsyncEventsFinished()
 	{
 		MockBukkit.mock();
@@ -465,6 +527,267 @@ class BukkitSchedulerMockTest
 		scheduler.performTicks(2);
 		scheduler.setShutdownTimeout(1000L);
 		scheduler.shutdown();
+	}
+
+	@Test
+	void taskIsRunning()
+	{
+		BukkitTask bukkitTask = scheduler.runTaskTimer(null, () ->
+		{
+		}, 1L, 1L);
+		scheduler.performOneTick();
+		Assertions.assertTrue(scheduler.isCurrentlyRunning(bukkitTask.getTaskId()));
+	}
+
+	@Test
+	void taskNotRunning()
+	{
+		Assertions.assertFalse(scheduler.isCurrentlyRunning(Integer.MAX_VALUE));
+	}
+
+	@Test
+	void runTask_AsyncConsumer() throws Exception
+	{
+		CountDownLatch countDownLatch = new CountDownLatch(1);
+
+		scheduler.runTaskAsynchronously(null, bukkitTask -> countDownLatch.countDown());
+		assertTrue(countDownLatch.await(2, TimeUnit.SECONDS));
+	}
+
+	@Test
+	void registerOneTasksAsynchronously()
+	{
+		final Thread mainThread = Thread.currentThread();
+
+		AtomicBoolean executed = new AtomicBoolean();
+		AtomicBoolean completed = new AtomicBoolean();
+		AtomicBoolean notPrimaryThread = new AtomicBoolean();
+		Thread thread = new Thread(() ->
+		{
+			try
+			{
+				scheduler.runTaskLater(null, bukkitTask ->
+				{
+					if (mainThread != Thread.currentThread())
+					{
+						notPrimaryThread.set(true);
+					}
+					executed.set(true);
+				}, 1);
+			}
+			finally
+			{
+				completed.set(true);
+			}
+		});
+		thread.start();
+
+		long startTime = System.currentTimeMillis();
+
+		// Wait for thread to register the task
+		while (!completed.get())
+		{
+			checkTimeout(startTime, thread);
+			scheduler.performOneTick();
+			Thread.yield();
+		}
+
+		while (!executed.get())
+		{
+			checkTimeout(startTime);
+			scheduler.performOneTick();
+		}
+
+		assertTrue(executed.get());
+		assertFalse(notPrimaryThread.get());
+	}
+
+	@Test
+	void registerMultipleTasksAsynchronously()
+	{
+		final int toExecute = 100;
+		final Thread mainThread = Thread.currentThread();
+
+		AtomicInteger executed = new AtomicInteger();
+		AtomicBoolean completed = new AtomicBoolean();
+		AtomicBoolean notPrimaryThread = new AtomicBoolean();
+		Thread thread = new Thread(() ->
+		{
+			try
+			{
+				for (int i = 0; i < toExecute && !Thread.interrupted(); i++)
+				{
+					scheduler.runTaskLater(null, bukkitTask ->
+					{
+						if (mainThread != Thread.currentThread())
+						{
+							notPrimaryThread.set(true);
+						}
+						executed.incrementAndGet();
+					}, 1);
+				}
+			}
+			finally
+			{
+				completed.set(true);
+			}
+		});
+		thread.start();
+
+		long startTime = System.currentTimeMillis();
+
+		// Wait for thread to register the task
+		while (!completed.get())
+		{
+			checkTimeout(startTime, thread);
+			scheduler.performOneTick();
+			Thread.yield();
+		}
+
+		while (executed.get() < toExecute)
+		{
+			checkTimeout(startTime);
+			scheduler.performOneTick();
+		}
+
+		assertEquals(toExecute, executed.get());
+		assertFalse(notPrimaryThread.get());
+	}
+
+	@Test
+	void registerOneTimerTasksAsynchronously()
+	{
+		final int toExecute = 100;
+		final Thread mainThread = Thread.currentThread();
+
+		AtomicBoolean executed = new AtomicBoolean();
+		AtomicBoolean completed = new AtomicBoolean();
+		AtomicBoolean notPrimaryThread = new AtomicBoolean();
+		Thread thread = new Thread(() ->
+		{
+			try
+			{
+				scheduler.runTaskTimer(null, new Consumer<>()
+				{
+					int executions = 0;
+
+					@Override
+					public void accept(BukkitTask bukkitTask)
+					{
+						if (mainThread != Thread.currentThread())
+						{
+							notPrimaryThread.set(true);
+						}
+						executions++;
+						if (executions == toExecute)
+						{
+							executed.set(true);
+							bukkitTask.cancel();
+						}
+					}
+				}, 0, 1);
+			}
+			finally
+			{
+				completed.set(true);
+			}
+		});
+		thread.start();
+
+		long startTime = System.currentTimeMillis();
+
+		// Wait for thread to register the task
+		while (!completed.get())
+		{
+			checkTimeout(startTime, thread);
+			scheduler.performOneTick();
+			Thread.yield();
+		}
+
+		while (!executed.get())
+		{
+			checkTimeout(startTime);
+			scheduler.performOneTick();
+		}
+
+		assertTrue(executed.get());
+		assertFalse(notPrimaryThread.get());
+	}
+
+	@Test
+	void registerMultipleTimerTasksAsynchronously()
+	{
+		final int toExecute = 100;
+		final Thread mainThread = Thread.currentThread();
+
+		AtomicInteger executed = new AtomicInteger();
+		AtomicBoolean completed = new AtomicBoolean();
+		AtomicBoolean notPrimaryThread = new AtomicBoolean();
+		Thread thread = new Thread(() ->
+		{
+			try
+			{
+				for (int i = 0; i < toExecute && !Thread.interrupted(); i++)
+				{
+					scheduler.runTaskTimer(null, new Consumer<>()
+					{
+						int executions = 0;
+
+						@Override
+						public void accept(BukkitTask bukkitTask)
+						{
+							if (mainThread != Thread.currentThread())
+							{
+								notPrimaryThread.set(true);
+							}
+							executions++;
+							if (executions == toExecute)
+							{
+								executed.incrementAndGet();
+								bukkitTask.cancel();
+							}
+						}
+					}, 0, 1);
+				}
+			}
+			finally
+			{
+				completed.set(true);
+			}
+		});
+		thread.start();
+
+		long startTime = System.currentTimeMillis();
+
+		// Wait for thread to register the task
+		while (!completed.get())
+		{
+			checkTimeout(startTime, thread);
+			scheduler.performOneTick();
+			Thread.yield();
+		}
+
+		while (executed.get() < toExecute)
+		{
+			checkTimeout(startTime);
+			scheduler.performOneTick();
+		}
+
+		assertEquals(toExecute, executed.get());
+		assertFalse(notPrimaryThread.get());
+	}
+
+	private void checkTimeout(long startTime) {
+		if (System.currentTimeMillis() - startTime > 60000L) {
+			fail("Timeout");
+		}
+	}
+
+	private void checkTimeout(long startTime, Thread thread) {
+		if (System.currentTimeMillis() - startTime > 60000L) {
+			thread.interrupt();
+			fail("Timeout");
+		}
 	}
 
 }
