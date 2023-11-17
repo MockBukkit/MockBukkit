@@ -60,6 +60,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Frog;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.SpawnCategory;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.memory.MemoryKey;
 import org.bukkit.event.inventory.InventoryType;
@@ -81,7 +82,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.spigotmc.event.player.PlayerSpawnLocationEvent;
 
@@ -97,6 +100,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -1489,6 +1493,73 @@ class ServerMockTest
 	{
 		assertNotNull(server.getServerConfiguration());
 		assertInstanceOf(ServerConfiguration.class, server.getServerConfiguration());
+	}
+
+	@ParameterizedTest
+	@MethodSource("testGetTicksPerSpawnsArguments")
+	void testGetTicksPerSpawns()
+	{
+		assertEquals(400, server.getTicksPerAnimalSpawns());
+	}
+
+	public static Stream<Arguments> testGetTicksPerSpawnsArguments()
+	{
+		return Stream.of(
+				Arguments.of(SpawnCategory.MONSTER, 1),
+				Arguments.of(SpawnCategory.ANIMAL, 400),
+				Arguments.of(SpawnCategory.WATER_AMBIENT, 1),
+				Arguments.of(SpawnCategory.WATER_ANIMAL, 1),
+				Arguments.of(SpawnCategory.AMBIENT, 1),
+				Arguments.of(SpawnCategory.WATER_UNDERGROUND_CREATURE, 1)
+		);
+	}
+
+	@Test
+	void testGetTicksPerSpawns_NullCategory()
+	{
+		assertThrows(IllegalArgumentException.class, () -> server.getTicksPerSpawns(null));
+	}
+
+	@Test
+	void testGetTicksPerSpawns_InvalidCategory()
+	{
+		assertThrows(IllegalArgumentException.class, () -> server.getTicksPerSpawns(SpawnCategory.MISC));
+	}
+
+	@Test
+	void testGetTicksPerMonsterSpawns()
+	{
+		assertEquals(1, server.getTicksPerMonsterSpawns());
+	}
+
+	@Test
+	void testGetTicksPerWaterAmbientSpawns()
+	{
+		assertEquals(1, server.getTicksPerWaterAmbientSpawns());
+	}
+
+	@Test
+	void testGetTicksPerWaterSpawns()
+	{
+		assertEquals(1, server.getTicksPerWaterSpawns());
+	}
+
+	@Test
+	void testGetTicksPerAmbientSpawns()
+	{
+		assertEquals(1, server.getTicksPerAmbientSpawns());
+	}
+
+	@Test
+	void testGetTicksPerWaterUndergroundCreatureSpawns()
+	{
+		assertEquals(1, server.getTicksPerWaterUndergroundCreatureSpawns());
+	}
+
+	@Test
+	void testGetTicksPerAnimalSpawns()
+	{
+		assertEquals(400, server.getTicksPerAnimalSpawns());
 	}
 
 }

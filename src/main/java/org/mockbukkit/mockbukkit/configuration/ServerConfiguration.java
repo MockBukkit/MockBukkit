@@ -1,8 +1,10 @@
 package org.mockbukkit.mockbukkit.configuration;
 
 import org.mockbukkit.mockbukkit.ServerMock;
+import it.unimi.dsi.fastutil.objects.Object2LongOpenHashMap;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Server;
+import org.bukkit.entity.SpawnCategory;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
@@ -36,6 +38,18 @@ public class ServerConfiguration
 	private String serverIp = "";
 	private int serverPort = 25565;
 	private boolean pvpEnabled = true;
+	private Object2LongOpenHashMap<SpawnCategory> ticksPerSpawn = new Object2LongOpenHashMap<>();
+
+	public ServerConfiguration()
+	{
+		// Set the default ticks per spawn values.
+		ticksPerSpawn.put(SpawnCategory.ANIMAL, 400);
+		ticksPerSpawn.put(SpawnCategory.MONSTER, 1);
+		ticksPerSpawn.put(SpawnCategory.WATER_AMBIENT, 1);
+		ticksPerSpawn.put(SpawnCategory.WATER_UNDERGROUND_CREATURE, 1);
+		ticksPerSpawn.put(SpawnCategory.WATER_ANIMAL, 1);
+		ticksPerSpawn.put(SpawnCategory.AMBIENT, 1);
+	}
 
 	/**
 	 * @return The view distance.
@@ -144,6 +158,10 @@ public class ServerConfiguration
 		this.updateFolder = updateFolder;
 	}
 
+	/**
+	 * @return Send chat previews.
+	 * @see ServerMock#setShouldSendChatPreviews(boolean)
+	 */
 	public boolean shouldSendChatPreviews()
 	{
 		return this.sendChatPreviews;
@@ -373,9 +391,12 @@ public class ServerConfiguration
 	}
 
 	/**
-	 * @return Send chat previews.
-	 * @see ServerMock#setShouldSendChatPreviews(boolean)
+	 * @return The ticks per spawn for each spawn category.
 	 */
+	public Object2LongOpenHashMap<SpawnCategory> getTicksPerSpawn()
+	{
+		return ticksPerSpawn;
+	}
 
 	/**
 	 * Enum representing all different world types.
