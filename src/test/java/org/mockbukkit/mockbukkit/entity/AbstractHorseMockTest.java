@@ -39,7 +39,8 @@ class AbstractHorseMockTest
 	@Test
 	void testSetVariant()
 	{
-		assertThrows(UnsupportedOperationException.class, () -> horse.setVariant(Horse.Variant.HORSE));
+		assertThrows(UnsupportedOperationException.class, () -> horse.
+				setVariant(Horse.Variant.HORSE));
 	}
 
 	@Test
@@ -183,6 +184,25 @@ class AbstractHorseMockTest
 	{
 		horse.setRearing(true);
 		assertTrue(horse.isRearing());
+	}
+
+	@Test
+	void testGetJumpStrengthDefault()
+	{
+		assertEquals(0.7, horse.getJumpStrength());
+	}
+
+	@Test
+	void testSetJumpStrength()
+	{
+		horse.setJumpStrength(0.5);
+		assertEquals(0.5, horse.getJumpStrength());
+	}
+
+	@Test
+	void testSetJumpStrengthTooLow()
+	{
+		assertThrows(IllegalArgumentException.class, () -> horse.setJumpStrength(-0.1));
 	}
 
 }

@@ -1,7 +1,6 @@
 package org.mockbukkit.mockbukkit.entity;
 
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.LlamaInventoryMock;
 import com.google.common.base.Preconditions;
 import org.apache.commons.lang3.tuple.Pair;
@@ -23,16 +22,16 @@ import static org.junit.jupiter.api.Assertions.fail;
  *
  * @see ChestedHorseMock
  */
-public class LlamaMock extends ChestedHorseMock implements Llama
+public class LlamaMock extends ChestedHorseMock implements Llama, MockRangedEntity<LlamaMock>
 {
 
 	private @NotNull Color color = Color.BROWN;
 	private int strength = 1;
-
 	private final Map<LivingEntity, Pair<Float, Boolean>> attackedMobs = new HashMap<>();
 	private boolean isAgressive = false;
-
 	private final @NotNull LlamaInventoryMock inventory;
+	private LlamaMock caravanaHead;
+	private LlamaMock caravanaTail;
 
 	/**
 	 * Constructs a new {@link LlamaMock} on the provided {@link ServerMock} with a specified {@link UUID}.
@@ -119,7 +118,7 @@ public class LlamaMock extends ChestedHorseMock implements Llama
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.11")
 	public Horse.@NotNull Variant getVariant()
 	{
 		return Horse.Variant.LLAMA;
@@ -134,43 +133,43 @@ public class LlamaMock extends ChestedHorseMock implements Llama
 	@Override
 	public boolean inCaravan()
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.caravanaHead != null;
 	}
 
 	@Override
 	public void joinCaravan(@NotNull Llama llama)
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(llama, "Llama cannot be null");
+		this.caravanaHead = (LlamaMock) llama;
+		((LlamaMock) llama).caravanaTail = this;
 	}
 
 	@Override
 	public void leaveCaravan()
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (this.caravanaHead != null)
+		{
+			this.caravanaHead.caravanaTail = null;
+			this.caravanaHead = null;
+		}
 	}
 
 	@Override
 	public @Nullable Llama getCaravanHead()
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.caravanaHead;
 	}
 
 	@Override
 	public boolean hasCaravanTail()
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.caravanaTail != null;
 	}
 
 	@Override
 	public @Nullable Llama getCaravanTail()
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.caravanaTail;
 	}
 
 	@Override
@@ -180,7 +179,7 @@ public class LlamaMock extends ChestedHorseMock implements Llama
 	}
 
 	@Override
-	public EntityType getType()
+	public @NotNull EntityType getType()
 	{
 		return EntityType.LLAMA;
 	}

@@ -21,6 +21,7 @@ public class TadpoleMock extends FishMock implements Tadpole
 {
 
 	private int age = 0;
+	private boolean agelock;
 
 	/**
 	 * Constructs a new {@link TadpoleMock} on the provided {@link ServerMock} with a specified {@link UUID}.
@@ -61,19 +62,17 @@ public class TadpoleMock extends FishMock implements Tadpole
 	@Override
 	public void setAgeLock(boolean lock)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.agelock = lock;
 	}
 
 	@Override
 	public boolean getAgeLock()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.agelock;
 	}
 
 	@Override
-	public EntityType getType()
+	public @NotNull EntityType getType()
 	{
 		return EntityType.TADPOLE;
 	}

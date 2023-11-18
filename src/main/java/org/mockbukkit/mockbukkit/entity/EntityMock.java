@@ -13,7 +13,9 @@ import org.mockbukkit.mockbukkit.metadata.MetadataTable;
 import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerMock;
 import com.google.common.base.Preconditions;
 import io.papermc.paper.entity.TeleportFlag;
+import io.papermc.paper.threadedregions.scheduler.EntityScheduler;
 import net.kyori.adventure.audience.MessageType;
+import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
@@ -46,6 +48,7 @@ import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.BoundingBox;
+import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -294,6 +297,14 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	{
 		Preconditions.checkNotNull(metadataKey, "Metadata key cannot be null");
 		metadataTable.removeMetadata(metadataKey, owningPlugin);
+	}
+
+	/**
+	 * @see MetadataTable#clearMetadata(Plugin)
+	 */
+	public void clearMetadata(Plugin plugin)
+	{
+		metadataTable.clearMetadata(plugin);
 	}
 
 	@Override
@@ -741,14 +752,14 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.12")
 	public Entity getPassenger()
 	{
 		return isEmpty() ? null : this.passengers.get(0);
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.12")
 	public boolean setPassenger(@NotNull Entity passenger)
 	{
 		eject(); // Make sure there is only one passenger
@@ -962,10 +973,10 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 			return false;
 		}
 
-		if (this instanceof Vehicle vehicle && entity instanceof LivingEntity)
+		if (this instanceof Vehicle selfVehicle && entity instanceof LivingEntity)
 		{
 			// If the event is cancelled or the vehicle has since changed, abort
-			if (!new VehicleEnterEvent(vehicle, entity).callEvent() || entity.getVehicle() != this)
+			if (!new VehicleEnterEvent(selfVehicle, entity).callEvent() || entity.getVehicle() != this)
 			{
 				return false;
 			}
@@ -988,10 +999,10 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	 */
 	private boolean tryRemovingPassenger(@NotNull Entity entity)
 	{
-		if (this instanceof Vehicle vehicle && entity instanceof LivingEntity livingEntity)
+		if (this instanceof Vehicle selfVehicle && entity instanceof LivingEntity livingEntity)
 		{
 			// If the event is cancelled or the vehicle has since changed, abort
-			if (!new VehicleExitEvent(vehicle, livingEntity).callEvent() || entity.getVehicle() != this)
+			if (!new VehicleExitEvent(selfVehicle, livingEntity).callEvent() || entity.getVehicle() != this)
 			{
 				return false;
 			}
@@ -1307,6 +1318,12 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
+	public @NotNull EntityScheduler getScheduler()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public boolean isSneaking()
 	{
 		// TODO Auto-generated method stub
@@ -1332,6 +1349,57 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setPose(@NotNull Pose pose, boolean fixed)
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean hasFixedPose()
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public double getX()
+	{
+		return this.getLocation().getX();
+	}
+
+	@Override
+	public double getY()
+	{
+		return this.getLocation().getY();
+	}
+
+	@Override
+	public double getZ()
+	{
+		return this.getLocation().getZ();
+	}
+
+	@Override
+	public float getPitch()
+	{
+		return this.getLocation().getPitch();
+	}
+
+	@Override
+	public float getYaw()
+	{
+		return this.getLocation().getYaw();
+	}
+
+	@Override
+	public @NotNull String getScoreboardEntryName()
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
 	}
 
 }

@@ -10,6 +10,8 @@ import org.bukkit.Tag;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
+import org.bukkit.block.sign.Side;
+import org.bukkit.block.sign.SignSide;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -96,7 +98,7 @@ public class SignStateMock extends TileStateMock implements Sign
 
 	@Override
 	@NotNull
-	@Deprecated
+	@Deprecated(since = "1.16")
 	public String @NotNull [] getLines()
 	{
 		String[] text = new String[4];
@@ -110,18 +112,17 @@ public class SignStateMock extends TileStateMock implements Sign
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.16")
 	public @NotNull String getLine(int index) throws IndexOutOfBoundsException
 	{
 		return this.lines[index];
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.16")
 	public void setLine(int index, @NotNull String line) throws IndexOutOfBoundsException
 	{
-		Preconditions.checkNotNull(line, "Line cannot be null!");
-		this.lines[index] = line;
+		this.lines[index] = line != null ? line : "";
 	}
 
 	@Override
@@ -161,6 +162,34 @@ public class SignStateMock extends TileStateMock implements Sign
 	{
 		Preconditions.checkNotNull(color, "Color can not be null!");
 		this.color = color;
+	}
+
+	@Override
+	public boolean isWaxed()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setWaxed(boolean waxed)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull SignSide getSide(@NotNull Side side)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Side getInteractableSideFor(double x, double z)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

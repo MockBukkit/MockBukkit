@@ -479,12 +479,12 @@ public class InventoryMock implements Inventory
 		HashMap<Integer, ItemStack> slots = new HashMap<>();
 		if (item != null)
 		{
-			ItemStack[] items = this.getStorageContents();
-			for (int i = 0; i < items.length; i++)
+			ItemStack[] contents = this.getStorageContents();
+			for (int i = 0; i < contents.length; i++)
 			{
-				if (item.equals(items[i]))
+				if (item.equals(contents[i]))
 				{
-					slots.put(i, items[i]);
+					slots.put(i, contents[i]);
 				}
 			}
 		}
@@ -495,10 +495,10 @@ public class InventoryMock implements Inventory
 	public int first(@NotNull Material material) throws IllegalArgumentException
 	{
 		Preconditions.checkNotNull(material, "Material cannot be null");
-		ItemStack[] items = this.getStorageContents();
-		for (int i = 0; i < items.length; i++)
+		ItemStack[] contents = this.getStorageContents();
+		for (int i = 0; i < contents.length; i++)
 		{
-			if (items[i] != null && items[i].getType() == material)
+			if (contents[i] != null && contents[i].getType() == material)
 			{
 				return i;
 			}
@@ -513,10 +513,10 @@ public class InventoryMock implements Inventory
 		{
 			return -1;
 		}
-		ItemStack[] items = this.getStorageContents();
-		for (int i = 0; i < items.length; i++)
+		ItemStack[] contents = this.getStorageContents();
+		for (int i = 0; i < contents.length; i++)
 		{
-			if (items[i] != null && item.equals(items[i]))
+			if (contents[i] != null && item.equals(contents[i]))
 			{
 				return i;
 			}
@@ -562,10 +562,10 @@ public class InventoryMock implements Inventory
 	public void remove(@NotNull Material material) throws IllegalArgumentException
 	{
 		Preconditions.checkNotNull(material, "Material cannot be null");
-		ItemStack[] items = this.getStorageContents();
-		for (int i = 0; i < items.length; i++)
+		ItemStack[] contents = this.getStorageContents();
+		for (int i = 0; i < contents.length; i++)
 		{
-			if (items[i] != null && items[i].getType() == material)
+			if (contents[i] != null && contents[i].getType() == material)
 			{
 				this.clear(i);
 			}
@@ -575,10 +575,10 @@ public class InventoryMock implements Inventory
 	@Override
 	public void remove(@NotNull ItemStack item)
 	{
-		ItemStack[] items = this.getStorageContents();
-		for (int i = 0; i < items.length; i++)
+		ItemStack[] contents = this.getStorageContents();
+		for (int i = 0; i < contents.length; i++)
 		{
-			if (items[i] != null && items[i].equals(item))
+			if (contents[i] != null && contents[i].equals(item))
 			{
 				this.clear(i);
 			}

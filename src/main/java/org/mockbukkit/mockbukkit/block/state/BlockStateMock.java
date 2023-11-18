@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.block.state;
 
 import org.mockbukkit.mockbukkit.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.block.BlockMock;
+import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
 import org.mockbukkit.mockbukkit.metadata.MetadataTable;
 import com.destroystokyo.paper.MaterialTags;
 import com.google.common.base.Preconditions;
@@ -32,6 +33,7 @@ public class BlockStateMock implements BlockState
 {
 
 	private final @NotNull MetadataTable metadataTable;
+	private BlockData blockData;
 	private @Nullable Block block;
 	private Material material;
 
@@ -45,6 +47,7 @@ public class BlockStateMock implements BlockState
 		Preconditions.checkNotNull(material, "Material cannot be null");
 		this.metadataTable = new MetadataTable();
 		this.material = material;
+		this.blockData = BlockDataMock.mock(material);
 	}
 
 	/**
@@ -58,6 +61,7 @@ public class BlockStateMock implements BlockState
 		this.metadataTable = new MetadataTable();
 		this.block = block;
 		this.material = block.getType();
+		this.blockData = BlockDataMock.mock(material);
 	}
 
 	/**
@@ -71,6 +75,7 @@ public class BlockStateMock implements BlockState
 		this.metadataTable = new MetadataTable(state.metadataTable);
 		this.material = state.getType();
 		this.block = state.isPlaced() ? state.getBlock() : null;
+		this.blockData = state.blockData.clone();
 	}
 
 	// region Type Checking
@@ -158,7 +163,7 @@ public class BlockStateMock implements BlockState
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public org.bukkit.material.@NotNull MaterialData getData()
 	{
 		return new org.bukkit.material.MaterialData(material);
@@ -219,16 +224,18 @@ public class BlockStateMock implements BlockState
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setData(@NotNull org.bukkit.material.MaterialData data)
 	{
 		this.material = data.getItemType();
+		this.blockData = BlockDataMock.mock(this.material);
 	}
 
 	@Override
 	public void setType(Material type)
 	{
 		this.material = type;
+		this.blockData = BlockDataMock.mock(type);
 	}
 
 	@Override
@@ -258,7 +265,7 @@ public class BlockStateMock implements BlockState
 			return false;
 		}
 
-		b.setType(this.getType());
+		b.setBlockData(blockData);
 
 		if (b instanceof BlockMock bm)
 		{
@@ -269,7 +276,7 @@ public class BlockStateMock implements BlockState
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.6.2")
 	public byte getRawData()
 	{
 		// TODO Auto-generated method stub
@@ -277,7 +284,7 @@ public class BlockStateMock implements BlockState
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.6.2")
 	public void setRawData(byte data)
 	{
 		// TODO Auto-generated method stub
@@ -321,15 +328,14 @@ public class BlockStateMock implements BlockState
 	@Override
 	public @NotNull BlockData getBlockData()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.blockData.clone();
 	}
 
 	@Override
 	public void setBlockData(BlockData data)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.material = data.getMaterial();
+		this.blockData = data.clone();
 	}
 
 	/**
@@ -350,7 +356,7 @@ public class BlockStateMock implements BlockState
 		int hash = 1;
 		hash = prime * hash + (this.isPlaced() ? this.getWorld().hashCode() : 0);
 		hash = prime * hash + (this.isPlaced() ? this.getLocation().hashCode() : 0);
-//		hash = prime * hash + (this.getBlockData() != null ? this.getBlockData().hashCode() : 0); Not implemented
+		hash = prime * hash + (this.getBlockData() != null ? this.getBlockData().hashCode() : 0);
 		return hash;
 	}
 
@@ -361,14 +367,12 @@ public class BlockStateMock implements BlockState
 		{
 			return false;
 		}
-		if (this.isPlaced() && this.getWorld() != other.getWorld() && (this.getWorld() == null || !this.getWorld().equals(other.getWorld())))
+		if (this.getBlockData() != other.getBlockData() && (this.getBlockData() == null || !this.getBlockData().equals(other.getBlockData())))
 		{
 			return false;
 		}
 		return !this.isPlaced() || this.getLocation() == other.getLocation() || (this.getLocation() != null && this.getLocation().equals(other.getLocation()));
-//		if (this.getBlockData() != other.getBlockData() && (this.getBlockData() == null || !this.getBlockData().equals(other.getBlockData()))) {
-//			return false; Not implemented
-//		}
+
 	}
 
 	/**
@@ -438,12 +442,9 @@ public class BlockStateMock implements BlockState
 			return new CreatureSpawnerStateMock(block);
 		case DAYLIGHT_DETECTOR:
 			return new DaylightDetectorStateMock(block);
-		case COMMAND_BLOCK:
-		case CHAIN_COMMAND_BLOCK:
-		case REPEATING_COMMAND_BLOCK:
+		case COMMAND_BLOCK, CHAIN_COMMAND_BLOCK, REPEATING_COMMAND_BLOCK:
 			return new CommandBlockStateMock(block);
-		case CAMPFIRE:
-		case SOUL_CAMPFIRE:
+		case CAMPFIRE, SOUL_CAMPFIRE:
 			return new CampfireStateMock(block);
 		case BELL:
 			return new BellStateMock(block);
@@ -457,8 +458,7 @@ public class BlockStateMock implements BlockState
 			return new DispenserStateMock(block);
 		case DROPPER:
 			return new DropperStateMock(block);
-		case CHEST:
-		case TRAPPED_CHEST:
+		case CHEST, TRAPPED_CHEST:
 			return new ChestStateMock(block);
 		case ENDER_CHEST:
 			return new EnderChestStateMock(block);

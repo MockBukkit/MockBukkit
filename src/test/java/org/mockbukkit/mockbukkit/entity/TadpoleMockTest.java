@@ -11,7 +11,9 @@ import org.junit.jupiter.api.Test;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TadpoleMockTest
 {
@@ -67,6 +69,19 @@ class TadpoleMockTest
 	{
 		tadpole.setAge(15000);
 		assertThrows(IllegalArgumentException.class, () -> tadpole.setAge(426900));
+	}
+
+	@Test
+	void testGetAgeLockDefault()
+	{
+		assertFalse(tadpole.getAgeLock());
+	}
+
+	@Test
+	void testSetAgeLock()
+	{
+		tadpole.setAgeLock(true);
+		assertTrue(tadpole.getAgeLock());
 	}
 
 }

@@ -364,7 +364,7 @@ class EntityMockTest
 	@Test
 	void equals_Null_Different()
 	{
-		assertNotEquals(entity, null);
+		assertNotEquals(null, entity);
 	}
 
 	@Test

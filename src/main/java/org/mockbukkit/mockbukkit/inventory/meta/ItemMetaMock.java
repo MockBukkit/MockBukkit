@@ -141,13 +141,13 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public void displayName(@Nullable Component displayName)
 	{
-		this.displayName = GsonComponentSerializer.gson().serialize(displayName);
+		this.displayName = displayName == null ? null : GsonComponentSerializer.gson().serialize(displayName);
 	}
 
 	@Override
 	public @NotNull String getDisplayName()
 	{
-		return this.displayName == null ? null : LegacyComponentSerializer.legacySection().serialize(GsonComponentSerializer.gson().deserialize(this.displayName));
+		return this.displayName == null ? "" : LegacyComponentSerializer.legacySection().serialize(GsonComponentSerializer.gson().deserialize(this.displayName));
 	}
 
 	@Override
@@ -391,7 +391,9 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public @Nullable List<Component> lore()
 	{
-		return this.lore.stream().map(s -> GsonComponentSerializer.gson().deserialize(s)).collect(Collectors.toList());
+		return this.lore == null ? null : new ArrayList<>(this.lore.stream()
+				.map(s -> GsonComponentSerializer.gson().deserialize(s))
+				.toList()) ;
 	}
 
 	@Override
@@ -410,13 +412,21 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public @Nullable List<String> getLore()
 	{
-		return this.lore == null ? null : this.lore.stream().map(s -> LegacyComponentSerializer.legacySection().serialize(GsonComponentSerializer.gson().deserialize(s))).collect(Collectors.toList());
+		return this.lore == null ? null : new ArrayList<>(this.lore.stream()
+				.map(s -> LegacyComponentSerializer
+						.legacySection()
+						.serialize(GsonComponentSerializer.gson().deserialize(s)))
+				.toList());
 	}
 
 	@Override
 	public @Nullable List<BaseComponent[]> getLoreComponents()
 	{
-		return this.lore.stream().map(c -> BungeeComponentSerializer.get().serialize(GsonComponentSerializer.gson().deserialize(c))).collect(Collectors.toList());
+		return this.lore == null ? null :this.lore.stream()
+				.map(c -> BungeeComponentSerializer
+						.get()
+						.serialize(GsonComponentSerializer.gson().deserialize(c))
+				).toList();
 	}
 
 	@Override

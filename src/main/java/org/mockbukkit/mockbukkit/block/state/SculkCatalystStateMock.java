@@ -1,5 +1,7 @@
 package org.mockbukkit.mockbukkit.block.state;
 
+import org.mockbukkit.mockbukkit.UnimplementedOperationException;
+import io.papermc.paper.math.Position;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
@@ -52,6 +54,20 @@ public class SculkCatalystStateMock extends TileStateMock implements SculkCataly
 	public @NotNull BlockState getSnapshot()
 	{
 		return new SculkCatalystStateMock(this);
+	}
+
+	@Override
+	public void bloom(@NotNull Block block, int charges)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void bloom(@NotNull Position position, int charge)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 }

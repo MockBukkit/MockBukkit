@@ -1,0 +1,136 @@
+{
+	"values": [
+		{
+			"key": "minecraft:pillager_outpost",
+			"type": "minecraft:jigsaw"
+		},
+		{
+			"key": "minecraft:mineshaft",
+			"type": "minecraft:mineshaft"
+		},
+		{
+			"key": "minecraft:mineshaft_mesa",
+			"type": "minecraft:mineshaft"
+		},
+		{
+			"key": "minecraft:mansion",
+			"type": "minecraft:woodland_mansion"
+		},
+		{
+			"key": "minecraft:jungle_pyramid",
+			"type": "minecraft:jungle_temple"
+		},
+		{
+			"key": "minecraft:desert_pyramid",
+			"type": "minecraft:desert_pyramid"
+		},
+		{
+			"key": "minecraft:igloo",
+			"type": "minecraft:igloo"
+		},
+		{
+			"key": "minecraft:shipwreck",
+			"type": "minecraft:shipwreck"
+		},
+		{
+			"key": "minecraft:shipwreck_beached",
+			"type": "minecraft:shipwreck"
+		},
+		{
+			"key": "minecraft:swamp_hut",
+			"type": "minecraft:swamp_hut"
+		},
+		{
+			"key": "minecraft:stronghold",
+			"type": "minecraft:stronghold"
+		},
+		{
+			"key": "minecraft:monument",
+			"type": "minecraft:ocean_monument"
+		},
+		{
+			"key": "minecraft:ocean_ruin_cold",
+			"type": "minecraft:ocean_ruin"
+		},
+		{
+			"key": "minecraft:ocean_ruin_warm",
+			"type": "minecraft:ocean_ruin"
+		},
+		{
+			"key": "minecraft:fortress",
+			"type": "minecraft:fortress"
+		},
+		{
+			"key": "minecraft:nether_fossil",
+			"type": "minecraft:nether_fossil"
+		},
+		{
+			"key": "minecraft:end_city",
+			"type": "minecraft:end_city"
+		},
+		{
+			"key": "minecraft:buried_treasure",
+			"type": "minecraft:buried_treasure"
+		},
+		{
+			"key": "minecraft:bastion_remnant",
+			"type": "minecraft:jigsaw"
+		},
+		{
+			"key": "minecraft:village_plains",
+			"type": "minecraft:jigsaw"
+		},
+		{
+			"key": "minecraft:village_desert",
+			"type": "minecraft:jigsaw"
+		},
+		{
+			"key": "minecraft:village_savanna",
+			"type": "minecraft:jigsaw"
+		},
+		{
+			"key": "minecraft:village_snowy",
+			"type": "minecraft:jigsaw"
+		},
+		{
+			"key": "minecraft:village_taiga",
+			"type": "minecraft:jigsaw"
+		},
+		{
+			"key": "minecraft:ruined_portal",
+			"type": "minecraft:ruined_portal"
+		},
+		{
+			"key": "minecraft:ruined_portal_desert",
+			"type": "minecraft:ruined_portal"
+		},
+		{
+			"key": "minecraft:ruined_portal_jungle",
+			"type": "minecraft:ruined_portal"
+		},
+		{
+			"key": "minecraft:ruined_portal_swamp",
+			"type": "minecraft:ruined_portal"
+		},
+		{
+			"key": "minecraft:ruined_portal_mountain",
+			"type": "minecraft:ruined_portal"
+		},
+		{
+			"key": "minecraft:ruined_portal_ocean",
+			"type": "minecraft:ruined_portal"
+		},
+		{
+			"key": "minecraft:ruined_portal_nether",
+			"type": "minecraft:ruined_portal"
+		},
+		{
+			"key": "minecraft:ancient_city",
+			"type": "minecraft:jigsaw"
+		},
+		{
+			"key": "minecraft:trail_ruins",
+			"type": "minecraft:jigsaw"
+		}
+	]
+}

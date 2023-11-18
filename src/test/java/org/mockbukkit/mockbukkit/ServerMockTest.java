@@ -34,27 +34,47 @@ import com.destroystokyo.paper.event.player.PlayerConnectionCloseEvent;
 import com.destroystokyo.paper.event.server.WhitelistToggleEvent;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
+import io.papermc.paper.world.structure.ConfiguredStructure;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
+import org.bukkit.Art;
+import org.bukkit.Bukkit;
+import org.bukkit.Fluid;
 import org.bukkit.GameMode;
+import org.bukkit.Keyed;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.Registry;
+import org.bukkit.Sound;
+import org.bukkit.Statistic;
 import org.bukkit.Warning;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.WorldType;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.block.Biome;
 import org.bukkit.block.data.BlockData;
+import org.bukkit.boss.KeyedBossBar;
 import org.bukkit.command.Command;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Frog;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.SpawnCategory;
+import org.bukkit.entity.Villager;
+import org.bukkit.entity.memory.MemoryKey;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.server.MapInitializeEvent;
+import org.bukkit.event.server.ServerLoadEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
+import org.bukkit.loot.LootTables;
 import org.bukkit.map.MapView;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.jetbrains.annotations.NotNull;
@@ -62,8 +82,11 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.spigotmc.event.player.PlayerSpawnLocationEvent;
 
 import javax.imageio.ImageIO;
 import java.awt.Graphics2D;
@@ -77,6 +100,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -182,6 +206,13 @@ class ServerMockTest
 	{
 		PlayerMock player = server.addPlayer();
 		server.getPluginManager().assertEventFired(PlayerLoginEvent.class);
+	}
+
+	@Test
+	void addPlayer_Calls_PlayerSpawnLocationEvent()
+	{
+		PlayerMock player = server.addPlayer();
+		server.getPluginManager().assertEventFired(PlayerSpawnLocationEvent.class);
 	}
 
 	@Test
@@ -654,7 +685,7 @@ class ServerMockTest
 		out.writeUTF("Forward");
 		out.writeUTF("ALL");
 		out.writeUTF("MockBukkit");
-		server.sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
+		assertDoesNotThrow(() -> server.sendPluginMessage(plugin, "BungeeCord", out.toByteArray()));
 	}
 
 	@Test
@@ -692,6 +723,35 @@ class ServerMockTest
 
 		playerA.assertSaid(PlainTextComponentSerializer.plainText().serialize(component));
 		playerB.assertSaid(PlainTextComponentSerializer.plainText().serialize(component));
+	}
+
+	@Test
+	void reload()
+	{
+		assertDoesNotThrow(server::reload);
+	}
+
+	@Test
+	void reload_ServerLoadEvent_IsCalled()
+	{
+		server.reload();
+		server.getPluginManager().assertEventFired(ServerLoadEvent.class, (e) -> e.getType() == ServerLoadEvent.LoadType.RELOAD);
+	}
+
+	@Test
+	void reload_ReEnablesPlugins()
+	{
+		Plugin plugin1 = MockBukkit.createMockPlugin("plugin1");
+		Plugin plugin2 = MockBukkit.createMockPlugin("plugin2");
+
+		server.reload();
+
+		assertEquals(2, server.getPluginManager().getPlugins().length);
+		assertTrue(server.getPluginManager().getPlugin("plugin1").isEnabled());
+		assertTrue(server.getPluginManager().getPlugin("plugin2").isEnabled());
+		// A new instance of the plugin should be created.
+		assertFalse(server.getPluginManager().isPluginEnabled(plugin1));
+		assertFalse(server.getPluginManager().isPluginEnabled(plugin2));
 	}
 
 	@Test
@@ -739,6 +799,16 @@ class ServerMockTest
 
 		assertEquals("Test", profile.getName());
 		assertEquals(uuid, profile.getUniqueId());
+	}
+
+	@Test
+	void getCurrentTick_CorrectTick()
+	{
+		assertEquals(0, server.getCurrentTick());
+		server.getScheduler().performOneTick();
+		assertEquals(1, server.getCurrentTick());
+		server.getScheduler().performTicks(10);
+		assertEquals(11, server.getCurrentTick());
 	}
 
 	@Test
@@ -980,6 +1050,19 @@ class ServerMockTest
 	}
 
 	@Test
+	void testGetPortDefault()
+	{
+		assertEquals(25565, server.getPort());
+	}
+
+	@Test
+	void testSetPort()
+	{
+		server.setPort(2212);
+		assertEquals(2212, server.getPort());
+	}
+
+	@Test
 	void testGetViewDistanceDefault()
 	{
 		assertEquals(10, server.getViewDistance());
@@ -990,6 +1073,19 @@ class ServerMockTest
 	{
 		server.setViewDistance(2);
 		assertEquals(2, server.getViewDistance());
+	}
+
+	@Test
+	void testGetIpDefault()
+	{
+		assertEquals("", server.getIp());
+	}
+
+	@Test
+	void testSetIp()
+	{
+		server.setIp("::1");
+		assertEquals("::1", server.getIp());
 	}
 
 	@Test
@@ -1326,6 +1422,144 @@ class ServerMockTest
 	void testCreateBrewerInventory()
 	{
 		assertInstanceOf(BrewerInventoryMock.class, server.createInventory(null, InventoryType.BREWING, "", 9));
+	}
+
+	@Test
+	void testMotdDefault()
+	{
+		assertEquals(Component.text("A Minecraft Server"), server.motd());
+	}
+
+	@Test
+	void testMotd()
+	{
+		server.motd(Component.text("Test"));
+		assertEquals(Component.text("Test"), server.motd());
+	}
+
+	@Test
+	void testGetMotdDefault()
+	{
+		assertEquals("A Minecraft Server", server.getMotd());
+	}
+
+	@Test
+	void testSetMotd()
+	{
+		server.setMotd("Test");
+		assertEquals("Test", server.getMotd());
+	}
+
+	@ValueSource(classes = {
+			Art.class,
+			Attribute.class,
+			Biome.class,
+			Enchantment.class,
+			EntityType.class,
+			Fluid.class,
+			Frog.Variant.class,
+			KeyedBossBar.class,
+			LootTables.class,
+			Material.class,
+			MemoryKey.class,
+			PotionEffectType.class,
+			Sound.class,
+			Statistic.class,
+			Villager.Profession.class,
+			Villager.Type.class,
+	})
+	@ParameterizedTest
+	void getRegistry_ValidType_HasValues(Class<? extends Keyed> clazz)
+	{
+		Registry<?> registry = Bukkit.getRegistry(clazz);
+		assertNotNull(registry);
+		if (clazz != KeyedBossBar.class)
+			assertTrue(registry.iterator().hasNext());
+	}
+
+	@ValueSource(classes = {
+			ConfiguredStructure.class
+	})
+	@ParameterizedTest
+	void getRegistry_InvalidType_Throws(Class<? extends Keyed> clazz)
+	{
+		Registry<? extends Keyed> registry = Bukkit.getRegistry(clazz);
+		assertNotNull(registry);
+		assertThrows(UnimplementedOperationException.class, () -> registry.iterator());
+	}
+
+	@Test
+	void testGetServerConfiguration()
+	{
+		assertNotNull(server.getServerConfiguration());
+		assertInstanceOf(ServerConfiguration.class, server.getServerConfiguration());
+	}
+
+	@ParameterizedTest
+	@MethodSource("testGetTicksPerSpawnsArguments")
+	void testGetTicksPerSpawns()
+	{
+		assertEquals(400, server.getTicksPerAnimalSpawns());
+	}
+
+	public static Stream<Arguments> testGetTicksPerSpawnsArguments()
+	{
+		return Stream.of(
+				Arguments.of(SpawnCategory.MONSTER, 1),
+				Arguments.of(SpawnCategory.ANIMAL, 400),
+				Arguments.of(SpawnCategory.WATER_AMBIENT, 1),
+				Arguments.of(SpawnCategory.WATER_ANIMAL, 1),
+				Arguments.of(SpawnCategory.AMBIENT, 1),
+				Arguments.of(SpawnCategory.WATER_UNDERGROUND_CREATURE, 1)
+		);
+	}
+
+	@Test
+	void testGetTicksPerSpawns_NullCategory()
+	{
+		assertThrows(IllegalArgumentException.class, () -> server.getTicksPerSpawns(null));
+	}
+
+	@Test
+	void testGetTicksPerSpawns_InvalidCategory()
+	{
+		assertThrows(IllegalArgumentException.class, () -> server.getTicksPerSpawns(SpawnCategory.MISC));
+	}
+
+	@Test
+	void testGetTicksPerMonsterSpawns()
+	{
+		assertEquals(1, server.getTicksPerMonsterSpawns());
+	}
+
+	@Test
+	void testGetTicksPerWaterAmbientSpawns()
+	{
+		assertEquals(1, server.getTicksPerWaterAmbientSpawns());
+	}
+
+	@Test
+	void testGetTicksPerWaterSpawns()
+	{
+		assertEquals(1, server.getTicksPerWaterSpawns());
+	}
+
+	@Test
+	void testGetTicksPerAmbientSpawns()
+	{
+		assertEquals(1, server.getTicksPerAmbientSpawns());
+	}
+
+	@Test
+	void testGetTicksPerWaterUndergroundCreatureSpawns()
+	{
+		assertEquals(1, server.getTicksPerWaterUndergroundCreatureSpawns());
+	}
+
+	@Test
+	void testGetTicksPerAnimalSpawns()
+	{
+		assertEquals(400, server.getTicksPerAnimalSpawns());
 	}
 
 }

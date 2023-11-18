@@ -8,8 +8,8 @@ The most important thing to remember is that each version of MockBukkit is named
 after the version of Bukkit it implements, followed by the version number of
 MockBukkit itself.
 
-For instance: MockBukkit-v1.19 v3.0.0 is the 3.0.0 release of MockBukkit,
-targeting plugins build for Minecraft 1.19.
+For instance: MockBukkit-v1.20 v3.3.0 is the 3.3.0 release of MockBukkit,
+targeting plugins build for Minecraft 1.20.
 The latest stable version can always be found on `Maven Central <https://search.maven.org/search?q=MockBukkit>`_.
 
 Gradle
@@ -21,7 +21,7 @@ Dependencies
 ^^^^^^^^^^^^
 To enable unit testing, all you need to do is add the JUnit dependency and the
 correct MockBukkit dependency.
-Here is an example which adds support for JUnit 5.9.3 and MockBukkit-v1.19:3.0.0
+Here is an example which adds support for JUnit 5.9.3 and MockBukkit-v1.20:3.0.0
 
 Groovy DSL
 ^^^^^^^^^^
@@ -35,7 +35,7 @@ This is how you add the dependencies in Groovy DSL
 
     dependencies {
         testImplementation 'org.junit.jupiter:junit-jupiter:5.9.3'
-        testImplementation 'com.github.seeseemelk:MockBukkit-v1.19:3.0.0'
+        testImplementation 'com.github.seeseemelk:MockBukkit-v1.20:3.3.0'
     }
 
 Kotlin DSL
@@ -50,7 +50,7 @@ This is how you add the dependencies in Kotlin DSL
 
     dependencies {
         testImplementation('org.junit.jupiter:junit-jupiter:5.9.3')
-        testImplementation('com.github.seeseemelk:MockBukkit-v1.19:3.0.0')
+        testImplementation('com.github.seeseemelk:MockBukkit-v1.20:3.3.0')
     }
 
 Running
@@ -86,8 +86,8 @@ To do so, both JUnit and MockBukkit have to be added to your dependencies
         </dependency>
         <dependency>
             <groupId>com.github.seeseemelk</groupId>
-            <artifactId>MockBukkit-v1.19</artifactId>
-            <version>3.0.0</version>
+            <artifactId>MockBukkit-v1.20</artifactId>
+            <version>3.3.0</version>
             <scope>test</scope>
         </dependency>
         <!-- Add your other dependencies here -->

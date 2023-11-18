@@ -3,6 +3,7 @@ package org.mockbukkit.mockbukkit;
 import org.mockbukkit.mockbukkit.block.BlockMock;
 import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
 import org.mockbukkit.mockbukkit.entity.AllayMock;
+import org.mockbukkit.mockbukkit.entity.AreaEffectCloudMock;
 import org.mockbukkit.mockbukkit.entity.ArmorStandMock;
 import org.mockbukkit.mockbukkit.entity.AxolotlMock;
 import org.mockbukkit.mockbukkit.entity.BatMock;
@@ -16,11 +17,14 @@ import org.mockbukkit.mockbukkit.entity.CodMock;
 import org.mockbukkit.mockbukkit.entity.CommandMinecartMock;
 import org.mockbukkit.mockbukkit.entity.CowMock;
 import org.mockbukkit.mockbukkit.entity.CreeperMock;
+import org.mockbukkit.mockbukkit.entity.DolphinMock;
 import org.mockbukkit.mockbukkit.entity.DonkeyMock;
 import org.mockbukkit.mockbukkit.entity.DragonFireballMock;
 import org.mockbukkit.mockbukkit.entity.EggMock;
 import org.mockbukkit.mockbukkit.entity.ElderGuardianMock;
+import org.mockbukkit.mockbukkit.entity.EnderPearlMock;
 import org.mockbukkit.mockbukkit.entity.EndermanMock;
+import org.mockbukkit.mockbukkit.entity.EndermiteMock;
 import org.mockbukkit.mockbukkit.entity.EntityMock;
 import org.mockbukkit.mockbukkit.entity.ExperienceOrbMock;
 import org.mockbukkit.mockbukkit.entity.ExplosiveMinecartMock;
@@ -30,6 +34,7 @@ import org.mockbukkit.mockbukkit.entity.FoxMock;
 import org.mockbukkit.mockbukkit.entity.FrogMock;
 import org.mockbukkit.mockbukkit.entity.GhastMock;
 import org.mockbukkit.mockbukkit.entity.GiantMock;
+import org.mockbukkit.mockbukkit.entity.GlowSquidMock;
 import org.mockbukkit.mockbukkit.entity.GoatMock;
 import org.mockbukkit.mockbukkit.entity.GuardianMock;
 import org.mockbukkit.mockbukkit.entity.HopperMinecartMock;
@@ -37,21 +42,29 @@ import org.mockbukkit.mockbukkit.entity.HorseMock;
 import org.mockbukkit.mockbukkit.entity.ItemEntityMock;
 import org.mockbukkit.mockbukkit.entity.LargeFireballMock;
 import org.mockbukkit.mockbukkit.entity.LlamaMock;
+import org.mockbukkit.mockbukkit.entity.LlamaSpitMock;
+import org.mockbukkit.mockbukkit.entity.MagmaCubeMock;
 import org.mockbukkit.mockbukkit.entity.MobMock;
 import org.mockbukkit.mockbukkit.entity.MuleMock;
 import org.mockbukkit.mockbukkit.entity.MushroomCowMock;
+import org.mockbukkit.mockbukkit.entity.OcelotMock;
+import org.mockbukkit.mockbukkit.entity.PandaMock;
+import org.mockbukkit.mockbukkit.entity.ParrotMock;
 import org.mockbukkit.mockbukkit.entity.PigMock;
 import org.mockbukkit.mockbukkit.entity.PolarBearMock;
 import org.mockbukkit.mockbukkit.entity.PoweredMinecartMock;
 import org.mockbukkit.mockbukkit.entity.PufferFishMock;
+import org.mockbukkit.mockbukkit.entity.RabbitMock;
 import org.mockbukkit.mockbukkit.entity.RideableMinecartMock;
 import org.mockbukkit.mockbukkit.entity.SalmonMock;
 import org.mockbukkit.mockbukkit.entity.SheepMock;
 import org.mockbukkit.mockbukkit.entity.SkeletonHorseMock;
 import org.mockbukkit.mockbukkit.entity.SkeletonMock;
+import org.mockbukkit.mockbukkit.entity.SlimeMock;
 import org.mockbukkit.mockbukkit.entity.SmallFireballMock;
 import org.mockbukkit.mockbukkit.entity.SpawnerMinecartMock;
 import org.mockbukkit.mockbukkit.entity.SpiderMock;
+import org.mockbukkit.mockbukkit.entity.SquidMock;
 import org.mockbukkit.mockbukkit.entity.StorageMinecartMock;
 import org.mockbukkit.mockbukkit.entity.StrayMock;
 import org.mockbukkit.mockbukkit.entity.TadpoleMock;
@@ -68,12 +81,15 @@ import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerMock;
 import com.destroystokyo.paper.HeightmapType;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
+import io.papermc.paper.event.world.WorldGameRuleChangeEvent;
 import io.papermc.paper.world.MoonPhase;
+import it.unimi.dsi.fastutil.objects.Object2LongOpenHashMap;
 import org.bukkit.BlockChangeDelegate;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Difficulty;
 import org.bukkit.Effect;
+import org.bukkit.FeatureFlag;
 import org.bukkit.FluidCollisionMode;
 import org.bukkit.GameEvent;
 import org.bukkit.GameRule;
@@ -99,6 +115,7 @@ import org.bukkit.boss.DragonBattle;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Allay;
 import org.bukkit.entity.Animals;
+import org.bukkit.entity.AreaEffectCloud;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Axolotl;
@@ -112,11 +129,14 @@ import org.bukkit.entity.Chicken;
 import org.bukkit.entity.Cod;
 import org.bukkit.entity.Cow;
 import org.bukkit.entity.Creeper;
+import org.bukkit.entity.Dolphin;
 import org.bukkit.entity.Donkey;
 import org.bukkit.entity.DragonFireball;
 import org.bukkit.entity.Egg;
 import org.bukkit.entity.ElderGuardian;
+import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.Enderman;
+import org.bukkit.entity.Endermite;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ExperienceOrb;
@@ -127,6 +147,7 @@ import org.bukkit.entity.Fox;
 import org.bukkit.entity.Frog;
 import org.bukkit.entity.Ghast;
 import org.bukkit.entity.Giant;
+import org.bukkit.entity.GlowSquid;
 import org.bukkit.entity.Goat;
 import org.bukkit.entity.Golem;
 import org.bukkit.entity.Guardian;
@@ -139,14 +160,20 @@ import org.bukkit.entity.LeashHitch;
 import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Llama;
+import org.bukkit.entity.LlamaSpit;
+import org.bukkit.entity.MagmaCube;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Mule;
 import org.bukkit.entity.MushroomCow;
+import org.bukkit.entity.Ocelot;
+import org.bukkit.entity.Panda;
+import org.bukkit.entity.Parrot;
 import org.bukkit.entity.Pig;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.PolarBear;
 import org.bukkit.entity.Projectile;
 import org.bukkit.entity.PufferFish;
+import org.bukkit.entity.Rabbit;
 import org.bukkit.entity.Salmon;
 import org.bukkit.entity.Sheep;
 import org.bukkit.entity.Skeleton;
@@ -155,6 +182,7 @@ import org.bukkit.entity.Slime;
 import org.bukkit.entity.SmallFireball;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.entity.Spider;
+import org.bukkit.entity.Squid;
 import org.bukkit.entity.Stray;
 import org.bukkit.entity.Tadpole;
 import org.bukkit.entity.TropicalFish;
@@ -193,6 +221,7 @@ import org.bukkit.util.Consumer;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.StructureSearchResult;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -223,6 +252,7 @@ public class WorldMock implements World
 	private final Map<GameRule<?>, Object> gameRules = new HashMap<>();
 	private final MetadataTable metadataTable = new MetadataTable();
 	private final Map<ChunkCoordinate, ChunkMock> loadedChunks = new HashMap<>();
+	private final Map<ChunkCoordinate, ChunkMock> savedChunks = new HashMap<>();
 	private final PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
 	private final @Nullable ServerMock server;
 	private final Material defaultBlock;
@@ -251,7 +281,11 @@ public class WorldMock implements World
 
 	private boolean allowAnimals = true;
 	private boolean allowMonsters = true;
+	private boolean pvp;
+	private boolean hardcore;
+	private boolean getKeepSpawnInMemory = true;
 
+	private final Object2LongOpenHashMap<SpawnCategory> ticksPerSpawn = new Object2LongOpenHashMap<>();
 
 	/**
 	 * Creates a new mock world.
@@ -283,6 +317,24 @@ public class WorldMock implements World
 		this.maxHeight = maxHeight;
 		this.grassHeight = grassHeight;
 		this.server = MockBukkit.getMock();
+
+		if (this.server != null)
+		{
+			this.pvp = this.server.getServerConfiguration().isPvpEnabled();
+			this.ticksPerSpawn.putAll(this.server.getServerConfiguration().getTicksPerSpawn());
+		}
+		else
+		{
+			this.pvp = true;
+
+			// Set the default ticks per spawn values.
+			ticksPerSpawn.put(SpawnCategory.ANIMAL, 400);
+			ticksPerSpawn.put(SpawnCategory.MONSTER, 1);
+			ticksPerSpawn.put(SpawnCategory.WATER_AMBIENT, 1);
+			ticksPerSpawn.put(SpawnCategory.WATER_UNDERGROUND_CREATURE, 1);
+			ticksPerSpawn.put(SpawnCategory.WATER_ANIMAL, 1);
+			ticksPerSpawn.put(SpawnCategory.AMBIENT, 1);
+		}
 
 		// Set the default gamerule values.
 		gameRules.put(GameRule.ANNOUNCE_ADVANCEMENTS, true);
@@ -428,15 +480,13 @@ public class WorldMock implements World
 	@Override
 	public int getChunkCount()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return loadedChunks.size();
 	}
 
 	@Override
 	public int getPlayerCount()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getPlayers().size();
 	}
 
 	@Override
@@ -491,11 +541,10 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public @NotNull Block getBlockAtKey(long key)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getBlockAt(getLocationAtKey(key));
 	}
 
 	@Override
@@ -570,14 +619,13 @@ public class WorldMock implements World
 	@Override
 	public @NotNull ChunkMock getChunkAt(int x, int z)
 	{
-		return getChunkAt(new ChunkCoordinate(x, z));
+		return getChunkAt(x, z, false);
 	}
 
 	@Override
-	public @NotNull Chunk getChunkAt(int x, int z, boolean generate)
+	public @NotNull ChunkMock getChunkAt(int x, int z, boolean generate)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getChunkAt(new ChunkCoordinate(x, z));
 	}
 
 	/**
@@ -594,7 +642,11 @@ public class WorldMock implements World
 		ChunkMock chunk = loadedChunks.get(coordinate);
 		if (chunk == null)
 		{
-			chunk = new ChunkMock(this, coordinate.getX(), coordinate.getZ());
+			chunk = savedChunks.get(coordinate);
+			if (chunk == null)
+			{
+				chunk = new ChunkMock(this, coordinate.getX(), coordinate.getZ());
+			}
 			loadedChunks.put(coordinate, chunk);
 		}
 		return chunk;
@@ -648,6 +700,14 @@ public class WorldMock implements World
 		metadataTable.removeMetadata(metadataKey, owningPlugin);
 	}
 
+	/**
+	 * @see MetadataTable#clearMetadata(Plugin)
+	 */
+	public void clearMetadata(Plugin plugin)
+	{
+		metadataTable.clearMetadata(plugin);
+	}
+
 	@Override
 	public int getHighestBlockYAt(int x, int z)
 	{
@@ -677,7 +737,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.15")
 	public int getHighestBlockYAt(int x, int z, @NotNull HeightmapType heightmap) throws UnsupportedOperationException
 	{
 		// TODO Auto-generated method stub
@@ -699,8 +759,7 @@ public class WorldMock implements World
 	@Override
 	public boolean isChunkLoaded(Chunk chunk)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return isChunkLoaded(chunk.getX(), chunk.getZ());
 	}
 
 	@Override
@@ -723,7 +782,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.14")
 	public boolean isChunkInUse(int x, int z)
 	{
 		// TODO Auto-generated method stub
@@ -740,8 +799,8 @@ public class WorldMock implements World
 	public boolean loadChunk(int x, int z, boolean generate)
 	{
 		AsyncCatcher.catchOp("chunk load");
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		getChunkAt(x, z, generate);
+		return true;
 	}
 
 	@Override
@@ -760,8 +819,17 @@ public class WorldMock implements World
 	public boolean unloadChunk(int x, int z, boolean save)
 	{
 		AsyncCatcher.catchOp("chunk unload");
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		ChunkCoordinate chunkCoordinate = new ChunkCoordinate(x, z);
+		ChunkMock chunk = loadedChunks.remove(chunkCoordinate);
+		if (chunk == null)
+		{
+			return true;
+		}
+		if (save)
+		{
+			savedChunks.put(chunkCoordinate, chunk);
+		}
+		return true;
 	}
 
 	@Override
@@ -773,7 +841,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.13")
 	public boolean regenerateChunk(int x, int z)
 	{
 		AsyncCatcher.catchOp("chunk regenerate");
@@ -782,7 +850,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.8")
 	public boolean refreshChunk(int x, int z)
 	{
 		// TODO Auto-generated method stub
@@ -856,7 +924,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.17")
 	public boolean generateTree(Location loc, TreeType type, BlockChangeDelegate delegate)
 	{
 		// TODO Auto-generated method stub
@@ -1230,6 +1298,58 @@ public class WorldMock implements World
 		{
 			return new StorageMinecartMock(server, UUID.randomUUID());
 		}
+		else if (clazz == AreaEffectCloud.class)
+		{
+			return new AreaEffectCloudMock(server, UUID.randomUUID());
+		}
+		else if (clazz == EnderPearl.class)
+		{
+			return new EnderPearlMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Panda.class)
+		{
+			return new PandaMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Rabbit.class)
+		{
+			return new RabbitMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Slime.class)
+		{
+			return new SlimeMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Ocelot.class)
+		{
+			return new OcelotMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Parrot.class)
+		{
+			return new ParrotMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Squid.class)
+		{
+			return new SquidMock(server, UUID.randomUUID());
+		}
+		else if (clazz == GlowSquid.class)
+		{
+			return new GlowSquidMock(server, UUID.randomUUID());
+		}
+		else if (clazz == LlamaSpit.class)
+		{
+			return new LlamaSpitMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Dolphin.class)
+		{
+			return new DolphinMock(server, UUID.randomUUID());
+		}
+		else if (clazz == MagmaCube.class)
+		{
+			return new MagmaCubeMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Endermite.class)
+		{
+			return new EndermiteMock(server, UUID.randomUUID());
+		}
 		throw new UnimplementedOperationException();
 	}
 
@@ -1372,8 +1492,7 @@ public class WorldMock implements World
 	@Override
 	public @NotNull Collection<Entity> getNearbyEntities(Location location, double x, double y, double z)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getNearbyEntities(location, x, y, z, null);
 	}
 
 	@Override
@@ -1576,15 +1695,13 @@ public class WorldMock implements World
 	@Override
 	public boolean getPVP()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.pvp;
 	}
 
 	@Override
 	public void setPVP(boolean pvp)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.pvp = pvp;
 	}
 
 	@Override
@@ -1625,7 +1742,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.7.5")
 	public @NotNull FallingBlock spawnFallingBlock(Location location, Material material, byte data)
 			throws IllegalArgumentException
 	{
@@ -1714,14 +1831,14 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.15")
 	public @NotNull Biome getBiome(int x, int z)
 	{
 		return this.getBiome(x, 0, z);
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.15")
 	public void setBiome(int x, int z, @NotNull Biome bio)
 	{
 		for (int y = this.getMinHeight(); y < this.getMaxHeight(); y++)
@@ -1731,7 +1848,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.15")
 	public double getTemperature(int x, int z)
 	{
 		// TODO Auto-generated method stub
@@ -1739,7 +1856,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.15")
 	public double getHumidity(int x, int z)
 	{
 		// TODO Auto-generated method stub
@@ -1774,15 +1891,13 @@ public class WorldMock implements World
 	@Override
 	public boolean getKeepSpawnInMemory()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getKeepSpawnInMemory;
 	}
 
 	@Override
 	public void setKeepSpawnInMemory(boolean keepLoaded)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.getKeepSpawnInMemory = keepLoaded;
 	}
 
 	@Override
@@ -1819,7 +1934,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.16")
 	public WorldType getWorldType()
 	{
 		return this.worldType;
@@ -1833,39 +1948,35 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public long getTicksPerAnimalSpawns()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getTicksPerSpawns(SpawnCategory.ANIMAL);
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setTicksPerAnimalSpawns(int ticksPerAnimalSpawns)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.setTicksPerSpawns(SpawnCategory.ANIMAL, ticksPerAnimalSpawns);
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public long getTicksPerMonsterSpawns()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getTicksPerSpawns(SpawnCategory.MONSTER);
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setTicksPerMonsterSpawns(int ticksPerMonsterSpawns)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.setTicksPerSpawns(SpawnCategory.MONSTER, ticksPerMonsterSpawns);
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public int getMonsterSpawnLimit()
 	{
 		// TODO Auto-generated method stub
@@ -1873,7 +1984,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setMonsterSpawnLimit(int limit)
 	{
 		// TODO Auto-generated method stub
@@ -1881,7 +1992,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public int getAnimalSpawnLimit()
 	{
 		// TODO Auto-generated method stub
@@ -1889,7 +2000,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setAnimalSpawnLimit(int limit)
 	{
 		// TODO Auto-generated method stub
@@ -1897,7 +2008,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public int getWaterAnimalSpawnLimit()
 	{
 		// TODO Auto-generated method stub
@@ -1905,7 +2016,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setWaterAnimalSpawnLimit(int limit)
 	{
 		// TODO Auto-generated method stub
@@ -1913,7 +2024,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public int getWaterUndergroundCreatureSpawnLimit()
 	{
 		// TODO Auto-generated method stub
@@ -1922,7 +2033,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setWaterUndergroundCreatureSpawnLimit(int limit)
 	{
 		// TODO Auto-generated method stub
@@ -1931,7 +2042,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public int getAmbientSpawnLimit()
 	{
 		// TODO Auto-generated method stub
@@ -1939,7 +2050,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setAmbientSpawnLimit(int limit)
 	{
 		// TODO Auto-generated method stub
@@ -2014,11 +2125,11 @@ public class WorldMock implements World
 	@Override
 	public String @NotNull [] getGameRules()
 	{
-		return gameRules.values().stream().map(Object::toString).collect(Collectors.toList()).toArray(new String[0]);
+		return gameRules.values().stream().map(Object::toString).toList().toArray(new String[0]);
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.13")
 	public String getGameRuleValue(@Nullable String rule)
 	{
 		if (rule == null)
@@ -2035,7 +2146,7 @@ public class WorldMock implements World
 
 	@SuppressWarnings("unchecked")
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.13")
 	public boolean setGameRuleValue(@Nullable String rule, @NotNull String value)
 	{
 		if (rule == null)
@@ -2047,16 +2158,28 @@ public class WorldMock implements World
 		{
 			return false;
 		}
-		if (gameRule.getType().equals(Boolean.TYPE)
+		if (gameRule.getType().equals(Boolean.class)
 				&& (value.equalsIgnoreCase("true") || value.equalsIgnoreCase("false")))
 		{
+			WorldGameRuleChangeEvent event =
+					new WorldGameRuleChangeEvent(this, null, gameRule, value);
+			if (!event.callEvent())
+			{
+				return false;
+			}
 			return setGameRule((GameRule<Boolean>) gameRule, value.equalsIgnoreCase("true"));
 		}
-		else if (gameRule.getType().equals(Integer.TYPE))
+		else if (gameRule.getType().equals(Integer.class))
 		{
 			try
 			{
 				int intValue = Integer.parseInt(value);
+				WorldGameRuleChangeEvent event =
+						new WorldGameRuleChangeEvent(this, null, gameRule, value);
+				if (!event.callEvent())
+				{
+					return false;
+				}
 				return setGameRule((GameRule<Integer>) gameRule, intValue);
 			}
 			catch (NumberFormatException e)
@@ -2223,22 +2346,22 @@ public class WorldMock implements World
 	public @NotNull Collection<Entity> getNearbyEntities(Location location, double x, double y, double z,
 														 Predicate<Entity> filter)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getNearbyEntities(BoundingBox.of(location, x, y, z), filter);
 	}
 
 	@Override
 	public @NotNull Collection<Entity> getNearbyEntities(BoundingBox boundingBox)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getNearbyEntities(boundingBox, null);
 	}
 
 	@Override
 	public @NotNull Collection<Entity> getNearbyEntities(BoundingBox boundingBox, Predicate<Entity> filter)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getEntities().stream()
+				.filter(entity -> filter == null || filter.test(entity))
+				.filter(entity -> boundingBox.contains(entity.getLocation().toVector()))
+				.collect(Collectors.toSet());
 	}
 
 	@Override
@@ -2320,7 +2443,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.19")
 	public Location locateNearestStructure(Location origin, StructureType structureType, int radius,
 										   boolean findUnexplored)
 	{
@@ -2357,7 +2480,8 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(forRemoval = true)
+	@ApiStatus.ScheduledForRemoval(inVersion = "1.21")
 	public boolean isUltrawarm()
 	{
 		// TODO Auto-generated method stub
@@ -2372,7 +2496,8 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(forRemoval = true)
+	@ApiStatus.ScheduledForRemoval(inVersion = "1.21")
 	public boolean hasSkylight()
 	{
 		// TODO Auto-generated method stub
@@ -2380,7 +2505,8 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(forRemoval = true)
+	@ApiStatus.ScheduledForRemoval(inVersion = "1.21")
 	public boolean hasBedrockCeiling()
 	{
 		// TODO Auto-generated method stub
@@ -2388,7 +2514,8 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(forRemoval = true)
+	@ApiStatus.ScheduledForRemoval(inVersion = "1.21")
 	public boolean doesBedWork()
 	{
 		// TODO Auto-generated method stub
@@ -2396,7 +2523,8 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(forRemoval = true)
+	@ApiStatus.ScheduledForRemoval(inVersion = "1.21")
 	public boolean doesRespawnAnchorWork()
 	{
 		// TODO Auto-generated method stub
@@ -2714,36 +2842,43 @@ public class WorldMock implements World
 	@Override
 	public boolean isNatural()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return switch (environment)
+		{
+			case THE_END, NETHER -> false;
+			default -> true;
+		};
 	}
 
 	@Override
 	public boolean isBedWorks()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return switch (environment)
+		{
+			case THE_END, NETHER -> false;
+			default -> true;
+		};
 	}
 
 	@Override
 	public boolean hasSkyLight()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return switch (environment)
+		{
+			case THE_END, NETHER -> false;
+			default -> true;
+		};
 	}
 
 	@Override
 	public boolean hasCeiling()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return environment == Environment.NETHER;
 	}
 
 	@Override
 	public boolean isPiglinSafe()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return environment == Environment.NETHER;
 	}
 
 	@Override
@@ -2756,67 +2891,65 @@ public class WorldMock implements World
 	@Override
 	public boolean hasRaids()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return environment != Environment.NETHER;
 	}
 
 	@Override
 	public boolean isUltraWarm()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return environment == Environment.NETHER;
 	}
 
 	@Override
 	public boolean isHardcore()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return hardcore;
 	}
 
 	@Override
 	public void setHardcore(boolean hardcore)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.hardcore = hardcore;
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public long getTicksPerWaterSpawns()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getTicksPerSpawns(SpawnCategory.WATER_ANIMAL);
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setTicksPerWaterSpawns(int ticksPerWaterSpawns)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.setTicksPerSpawns(SpawnCategory.WATER_ANIMAL, ticksPerWaterSpawns);
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public long getTicksPerAmbientSpawns()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getTicksPerSpawns(SpawnCategory.AMBIENT);
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setTicksPerAmbientSpawns(int ticksPerAmbientSpawns)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.setTicksPerSpawns(SpawnCategory.AMBIENT, ticksPerAmbientSpawns);
 	}
 
 	@Override
 	public DragonBattle getEnderDragonBattle()
 	{
 		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Set<FeatureFlag> getFeatureFlags()
+	{
 		throw new UnimplementedOperationException();
 	}
 
@@ -2828,37 +2961,31 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public long getTicksPerWaterAmbientSpawns()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getTicksPerSpawns(SpawnCategory.WATER_AMBIENT);
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setTicksPerWaterAmbientSpawns(int ticksPerAmbientSpawns)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.setTicksPerSpawns(SpawnCategory.WATER_AMBIENT, ticksPerAmbientSpawns);
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public long getTicksPerWaterUndergroundCreatureSpawns()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		return this.getTicksPerSpawns(SpawnCategory.WATER_UNDERGROUND_CREATURE);
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setTicksPerWaterUndergroundCreatureSpawns(int ticksPerWaterUndergroundCreatureSpawns)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		this.setTicksPerSpawns(SpawnCategory.WATER_UNDERGROUND_CREATURE, ticksPerWaterUndergroundCreatureSpawns);
 	}
 
 	@Override
@@ -2898,7 +3025,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public int getNoTickViewDistance()
 	{
 		// TODO Auto-generated method stub
@@ -2906,7 +3033,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setNoTickViewDistance(int viewDistance)
 	{
 		// TODO Auto-generated method stub
@@ -2957,15 +3084,21 @@ public class WorldMock implements World
 	@Override
 	public long getTicksPerSpawns(@NotNull SpawnCategory spawnCategory)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(spawnCategory != null, "SpawnCategory cannot be null");
+		Preconditions.checkArgument(spawnCategory != null && spawnCategory != SpawnCategory.MISC,
+				"SpawnCategory.%s are not supported", spawnCategory);
+
+		return this.ticksPerSpawn.getLong(spawnCategory);
 	}
 
 	@Override
 	public void setTicksPerSpawns(@NotNull SpawnCategory spawnCategory, int ticksPerCategorySpawn)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(spawnCategory != null, "SpawnCategory cannot be null");
+		Preconditions.checkArgument(spawnCategory != null && spawnCategory != SpawnCategory.MISC,
+				"SpawnCategory.%s are not supported", spawnCategory);
+
+		this.ticksPerSpawn.put(spawnCategory, ticksPerCategorySpawn);
 	}
 
 	@Override

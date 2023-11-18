@@ -1,12 +1,13 @@
 package org.mockbukkit.mockbukkit.entity;
 
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.UnimplementedOperationException;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.minecart.StorageMinecart;
 import org.bukkit.inventory.Inventory;
 import org.jetbrains.annotations.NotNull;
-import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
 
@@ -49,6 +50,13 @@ public class StorageMinecartMock extends LootableMinecart implements StorageMine
 	public @NotNull EntityType getType()
 	{
 		return EntityType.MINECART_CHEST;
+	}
+
+	@Override
+	public boolean canPlayerLoot(@NotNull UUID player)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 }

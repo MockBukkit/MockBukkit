@@ -97,9 +97,10 @@ class SignStateMockTest
 	}
 
 	@Test
-	void testLineNotNull()
+	void testLineNull()
 	{
-		assertThrows(NullPointerException.class, () -> sign.setLine(0, null));
+		sign.setLine(0, null);
+		assertEquals("",sign.getLine(0));
 	}
 
 	@Test

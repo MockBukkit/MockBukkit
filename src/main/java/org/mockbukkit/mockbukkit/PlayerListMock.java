@@ -1,7 +1,10 @@
 package org.mockbukkit.mockbukkit;
 
+import org.mockbukkit.mockbukkit.ban.MockIpBanList;
+import org.mockbukkit.mockbukkit.ban.MockProfileBanList;
 import org.mockbukkit.mockbukkit.entity.OfflinePlayerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
+import com.destroystokyo.paper.profile.PlayerProfile;
 import com.google.common.base.Preconditions;
 import org.bukkit.BanList;
 import org.bukkit.OfflinePlayer;
@@ -10,6 +13,7 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.net.InetAddress;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -37,8 +41,8 @@ public class PlayerListMock
 	private final Map<UUID, Long> firstPlayed = Collections.synchronizedMap(new HashMap<>());
 	private final Map<UUID, Boolean> hasPlayedBefore = Collections.synchronizedMap(new HashMap<>());
 
-	private final @NotNull BanList ipBans = new BanListMock();
-	private final @NotNull BanList profileBans = new BanListMock();
+	private final @NotNull MockIpBanList ipBans = new MockIpBanList();
+	private final @NotNull MockProfileBanList profileBans = new MockProfileBanList();
 
 	private final Set<UUID> operators = Collections.synchronizedSet(new HashSet<>());
 
@@ -66,7 +70,7 @@ public class PlayerListMock
 	 * @return All IP bans.
 	 */
 	@NotNull
-	public BanList getIPBans()
+	public MockIpBanList getIPBans()
 	{
 		return this.ipBans;
 	}
@@ -75,7 +79,7 @@ public class PlayerListMock
 	 * @return All profile bans.
 	 */
 	@NotNull
-	public BanList getProfileBans()
+	public MockProfileBanList getProfileBans()
 	{
 		return this.profileBans;
 	}
@@ -256,7 +260,8 @@ public class PlayerListMock
 		String nameLower = name.toLowerCase(Locale.ENGLISH);
 		return this.onlinePlayers.stream()
 				.filter(player -> player.getName().toLowerCase(Locale.ENGLISH).startsWith(nameLower))
-				.collect(Collectors.toList());
+				.map(player -> (Player) player)
+				.toList();
 	}
 
 	/**

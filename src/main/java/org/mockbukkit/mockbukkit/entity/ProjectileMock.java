@@ -89,6 +89,13 @@ public abstract class ProjectileMock extends AbstractProjectileMock implements P
 	}
 
 	@Override
+	public @Nullable UUID getOwnerUniqueId()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public void setHasBeenShot(boolean beenShot)
 	{
 		//TODO: Auto-generated method stub

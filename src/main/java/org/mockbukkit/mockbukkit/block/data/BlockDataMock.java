@@ -10,6 +10,7 @@ import org.bukkit.SoundGroup;
 import org.bukkit.Tag;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.block.BlockState;
 import org.bukkit.block.BlockSupport;
 import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.block.data.BlockData;
@@ -233,6 +234,19 @@ public class BlockDataMock implements BlockData
 
 	@Override
 	public void mirror(@NotNull Mirror mirror)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull BlockState createBlockState()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public float getDestroySpeed(@NotNull ItemStack itemStack, boolean considerEnchants)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

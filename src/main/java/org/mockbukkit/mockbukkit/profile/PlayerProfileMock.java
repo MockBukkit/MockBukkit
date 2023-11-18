@@ -70,7 +70,7 @@ public class PlayerProfileMock implements PlayerProfile
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public @Nullable UUID getUniqueId()
 	{
 		return getId();
@@ -83,6 +83,7 @@ public class PlayerProfileMock implements PlayerProfile
 	}
 
 	@Override
+	@Deprecated(since = "1.18", forRemoval = true)
 	public @NotNull String setName(@Nullable String name)
 	{
 		String oldName = this.name;
@@ -97,6 +98,7 @@ public class PlayerProfileMock implements PlayerProfile
 	}
 
 	@Override
+	@Deprecated(since = "1.18", forRemoval = true)
 	public @Nullable UUID setId(@Nullable UUID uuid)
 	{
 		UUID oldUuid = this.uuid;

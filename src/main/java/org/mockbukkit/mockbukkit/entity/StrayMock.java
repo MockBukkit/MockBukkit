@@ -29,7 +29,7 @@ public class StrayMock extends AbstractSkeletonMock implements Stray
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.17")
 	public Skeleton.@NotNull SkeletonType getSkeletonType()
 	{
 		return Skeleton.SkeletonType.STRAY;

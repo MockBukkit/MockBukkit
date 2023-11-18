@@ -3,6 +3,7 @@ package org.mockbukkit.mockbukkit.scheduler;
 import com.google.common.base.Preconditions;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
+import org.bukkit.scheduler.BukkitWorker;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -15,7 +16,7 @@ import java.util.function.Consumer;
 /**
  * Mock implementation of a {@link BukkitTask}.
  */
-public class ScheduledTask implements BukkitTask
+public class ScheduledTask implements BukkitTask, BukkitWorker
 {
 
 	private final int id;
@@ -27,6 +28,8 @@ public class ScheduledTask implements BukkitTask
 	private final @Nullable Runnable runnable;
 	private final @Nullable Consumer<BukkitTask> consumer;
 	private final List<Runnable> cancelListeners = new LinkedList<>();
+	private Thread thread;
+	private boolean submitted = false;
 
 	/**
 	 * Constructs a new {@link ScheduledTask} with the provided parameters.
@@ -142,12 +145,23 @@ public class ScheduledTask implements BukkitTask
 	}
 
 	/**
+	 * Marks the task as being submitted to the async thread pool.
+	 * This is used to bypass the #isCancelled check if it gets updated before the task is run.
+	 */
+	@ApiStatus.Internal
+	protected void submitted() {
+		submitted = true;
+	}
+
+	/**
 	 * Runs the task if it has not been cancelled.
 	 */
 	public void run()
 	{
-		if (!isCancelled())
+		thread = Thread.currentThread();
+		if (!isSync && submitted || !isCancelled())
 		{
+			submitted = false;
 			if (this.runnable != null)
 				this.runnable.run();
 			if (this.consumer != null)
@@ -169,6 +183,12 @@ public class ScheduledTask implements BukkitTask
 	public @NotNull Plugin getOwner()
 	{
 		return this.plugin;
+	}
+
+	@Override
+	public @NotNull Thread getThread()
+	{
+		return thread;
 	}
 
 	@Override

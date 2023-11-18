@@ -73,6 +73,11 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	private int maxAirTicks = 300;
 	private int remainingAirTicks = 300;
 	/**
+	 * NoDamage ticks
+	 */
+	private int noDamageTicks = 0;
+	private int maxNoDamageTicks = 20;
+	/**
 	 * Whether the entity is alive.
 	 */
 	protected boolean alive = true;
@@ -407,15 +412,13 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public int getMaximumNoDamageTicks()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.maxNoDamageTicks;
 	}
 
 	@Override
 	public void setMaximumNoDamageTicks(int ticks)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.maxNoDamageTicks = ticks;
 	}
 
 	@Override
@@ -435,15 +438,29 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public int getNoDamageTicks()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.noDamageTicks;
 	}
 
 	@Override
 	public void setNoDamageTicks(int ticks)
 	{
+		this.noDamageTicks = ticks;
+	}
+
+	@Override
+	public int getNoActionTicks()
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+
+	}
+
+	@Override
+	public void setNoActionTicks(int ticks)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+
 	}
 
 	@Override
@@ -465,7 +482,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.15")
 	public boolean addPotionEffect(@NotNull PotionEffect effect, boolean force)
 	{
 		AsyncCatcher.catchOp("effect add");
@@ -543,6 +560,14 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		}
 
 		return effects;
+	}
+
+	@Override
+	public boolean clearActivePotionEffects()
+	{
+		final boolean res = !activeEffects.isEmpty();
+		activeEffects.clear();
+		return res;
 	}
 
 	@Override
@@ -736,6 +761,13 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	public void swingOffHand()
 	{
 		// Pretend packet gets sent.
+	}
+
+	@Override
+	public void playHurtAnimation(float yaw)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

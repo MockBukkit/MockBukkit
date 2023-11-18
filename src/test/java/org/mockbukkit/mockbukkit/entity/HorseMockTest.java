@@ -10,6 +10,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Field;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -87,4 +88,34 @@ class HorseMockTest
 		assertEquals(Horse.Variant.HORSE, horse.getVariant());
 	}
 
+	@Test
+	void testGetColorNull() throws NoSuchFieldException, IllegalAccessException
+	{
+		Field color = horse.getClass().getDeclaredField("color");
+		color.setAccessible(true);
+		color.set(horse, null);
+		IllegalStateException illegalStateException = assertThrowsExactly(IllegalStateException.class, horse::getColor);
+		assertEquals("No color has been set", illegalStateException.getMessage());
+	}
+
+	@Test
+	void testGetStyleNull() throws NoSuchFieldException, IllegalAccessException
+	{
+		Field style = horse.getClass().getDeclaredField("style");
+		style.setAccessible(true);
+		style.set(horse, null);
+		IllegalStateException illegalStateException = assertThrowsExactly(IllegalStateException.class, horse::getStyle);
+		assertEquals("No style has been set", illegalStateException.getMessage());
+	}
+
+	@Test
+	void testGetInventoryNull() throws NoSuchFieldException, IllegalAccessException
+	{
+		Field inventory = horse.getClass().getDeclaredField("inventory");
+		inventory.setAccessible(true);
+		inventory.set(horse, null);
+		IllegalStateException illegalStateException =
+				assertThrowsExactly(IllegalStateException.class, horse::getInventory);
+		assertEquals("No inventory has been set", illegalStateException.getMessage());
+	}
 }
