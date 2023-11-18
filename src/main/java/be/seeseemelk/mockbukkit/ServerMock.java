@@ -1424,16 +1424,14 @@ public class ServerMock extends Server.Spigot implements Server
 	@Deprecated
 	public int getTicksPerAnimalSpawns()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getTicksPerSpawns(SpawnCategory.ANIMAL);
 	}
 
 	@Override
 	@Deprecated
 	public int getTicksPerMonsterSpawns()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getTicksPerSpawns(SpawnCategory.MONSTER);
 	}
 
 	@Override
@@ -2271,16 +2269,14 @@ public class ServerMock extends Server.Spigot implements Server
 	@Deprecated
 	public int getTicksPerWaterSpawns()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getTicksPerSpawns(SpawnCategory.WATER_ANIMAL);
 	}
 
 	@Override
 	@Deprecated
 	public int getTicksPerAmbientSpawns()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getTicksPerSpawns(SpawnCategory.AMBIENT);
 	}
 
 	/**
@@ -2296,17 +2292,14 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public int getTicksPerWaterAmbientSpawns()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getTicksPerSpawns(SpawnCategory.WATER_AMBIENT);
 	}
 
 	@Override
 	@Deprecated
 	public int getTicksPerWaterUndergroundCreatureSpawns()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		return this.getTicksPerSpawns(SpawnCategory.WATER_UNDERGROUND_CREATURE);
 	}
 
 	@Override
@@ -2505,8 +2498,11 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public int getTicksPerSpawns(@NotNull SpawnCategory spawnCategory)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(spawnCategory != null, "SpawnCategory cannot be null");
+		Preconditions.checkArgument(spawnCategory != SpawnCategory.MISC,
+				"SpawnCategory.%s are not supported", spawnCategory);
+
+		return (int) this.serverConfiguration.getTicksPerSpawn().getLong(spawnCategory);
 	}
 
 	@Override
