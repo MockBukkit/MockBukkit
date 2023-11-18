@@ -1819,6 +1819,7 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		world.setKeepSpawnInMemory(false);
 		assertFalse(world.getKeepSpawnInMemory());
+	}
 
 	@ParameterizedTest
 	@MethodSource("getTicksPerSpawnCategory")
