@@ -37,7 +37,7 @@ public abstract class AbstractMatcherTest
 	{
 		Description description = new StringDescription();
 		description.appendDescriptionOf(matcher);
-		Assertions.assertEquals("Expected description", expected, description.toString().trim());
+		Assertions.assertEquals(expected, description.toString().trim(),"Expected description");
 	}
 
 	public static <T> void assertMismatchDescription(String expected, Matcher<? super T> matcher, Object arg)
