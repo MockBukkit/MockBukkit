@@ -283,6 +283,7 @@ public class WorldMock implements World
 	private boolean allowMonsters = true;
 	private boolean pvp;
 	private boolean hardcore;
+	private boolean getKeepSpawnInMemory = true;
 
 	private final Object2LongOpenHashMap<SpawnCategory> ticksPerSpawn = new Object2LongOpenHashMap<>();
 
@@ -1890,15 +1891,13 @@ public class WorldMock implements World
 	@Override
 	public boolean getKeepSpawnInMemory()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getKeepSpawnInMemory;
 	}
 
 	@Override
 	public void setKeepSpawnInMemory(boolean keepLoaded)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.getKeepSpawnInMemory = keepLoaded;
 	}
 
 	@Override
