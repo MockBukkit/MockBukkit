@@ -10,8 +10,7 @@ import java.lang.reflect.Field;
 public class AllayCurrentItemMatcher extends TypeSafeMatcher<AllayMock>
 {
 
-	private Material currentItem;
-	private AllayMock allay;
+	private final Material currentItem;
 
 	private AllayCurrentItemMatcher(Material currentItem)
 	{
@@ -21,7 +20,6 @@ public class AllayCurrentItemMatcher extends TypeSafeMatcher<AllayMock>
 	@Override
 	protected boolean matchesSafely(AllayMock allay)
 	{
-		this.allay = allay;
 		try
 		{
 			Field currentItemField;
