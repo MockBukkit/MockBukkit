@@ -7,6 +7,7 @@ plugins {
 	id("signing")
 	id("net.kyori.blossom") version "2.1.0"
 	id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
+	id("org.sonarqube") version "4.4.1.3373"
 }
 
 group = "com.github.seeseemelk"
@@ -90,6 +91,15 @@ tasks {
 
 	jacoco {
 		toolVersion = "0.8.11"
+	}
+}
+
+sonar {
+	properties {
+		property("sonar.projectKey", "MockBukkit_MockBukkit")
+		property("sonar.organization", "mockbukkit")
+		property("sonar.projectVersion", "v${property("paper.api.full-version")}")
+		property("sonar.host.url", "https://sonarcloud.io")
 	}
 }
 

@@ -12,6 +12,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+            fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
       - name: Validate gradle wrapper
         uses: gradle/wrapper-validation-action@v1
       - name: Set up JDK 17
@@ -20,7 +22,14 @@ jobs:
           java-version: 17
           distribution: 'temurin'
 
-      - name: Restore caches
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+
+      - name: Restore Gradle caches
         uses: actions/cache@v3
         with:
           path: |
@@ -37,6 +46,11 @@ jobs:
         run: ./gradlew build -x test --refresh-dependencies
       - name: Run unit tests
         run: ./gradlew test
+      - name: Run Analysis
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONARCLOUD }}
+        run: ./gradlew jacocoTestReport sonar --info
 
       - name: Store Private key
         uses: DamianReeves/write-file-action@v1.2
