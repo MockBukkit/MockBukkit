@@ -1,5 +1,5 @@
 name: MetaMiner
-main: org.mockbukkit.metaminer.MockBukkitMetaMiner
+main: org.mockbukkit.metaminer.MetaMiner
 version: @version@
 description: A plugin that generate files for MockBukkit
 author: Thorinwasher

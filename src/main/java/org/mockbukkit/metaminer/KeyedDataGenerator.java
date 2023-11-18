@@ -21,7 +21,7 @@ import java.io.Writer;
 import java.lang.reflect.Field;
 import java.util.List;
 
-public class KeyedDataGenerator
+public class KeyedDataGenerator implements DataGenerator
 {
 
 	private final File dataFolder;
@@ -31,6 +31,7 @@ public class KeyedDataGenerator
 		this.dataFolder = new File(dataFolder, "keyed");
 	}
 
+	@Override
 	public void generateData() throws IOException
 	{
 		if(!this.dataFolder.exists() && !this.dataFolder.mkdirs()){
