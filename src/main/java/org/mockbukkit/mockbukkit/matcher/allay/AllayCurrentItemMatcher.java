@@ -52,4 +52,5 @@ public class AllayCurrentItemMatcher extends TypeSafeMatcher<AllayMock>
 	{
 		return new AllayCurrentItemMatcher(currentItem);
 	}
+
 }
