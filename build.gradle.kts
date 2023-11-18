@@ -24,11 +24,11 @@ dependencies {
 	api("io.papermc.paper:paper-api:${property("paper.api.full-version")}")
 
 	// Dependencies for Unit Tests
-	implementation("org.junit.jupiter:junit-jupiter:5.10.0")
+	implementation("org.junit.jupiter:junit-jupiter:5.10.1")
 
 	// General utilities for the project
 	implementation("net.kyori:adventure-platform-bungeecord:4.3.1")
-	implementation("org.jetbrains:annotations:24.0.1")
+	implementation("org.jetbrains:annotations:24.1.0")
 	implementation("net.bytebuddy:byte-buddy:1.14.9")
 
 	// LibraryLoader dependencies

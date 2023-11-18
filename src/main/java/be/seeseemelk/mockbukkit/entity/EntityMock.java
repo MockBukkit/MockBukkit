@@ -752,14 +752,14 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.12")
 	public Entity getPassenger()
 	{
 		return isEmpty() ? null : this.passengers.get(0);
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.12")
 	public boolean setPassenger(@NotNull Entity passenger)
 	{
 		eject(); // Make sure there is only one passenger

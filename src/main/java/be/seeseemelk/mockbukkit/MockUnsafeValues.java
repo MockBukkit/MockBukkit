@@ -41,7 +41,7 @@ import java.util.List;
 /**
  * Mock implementation of an {@link UnsafeValues}.
  */
-@Deprecated
+@Deprecated(since = "1.7.2")
 public class MockUnsafeValues implements UnsafeValues
 {
 
