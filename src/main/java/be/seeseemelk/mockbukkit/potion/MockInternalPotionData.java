@@ -41,7 +41,6 @@ public class MockInternalPotionData implements PotionType.InternalPotionData
 		}
 		catch (IOException e)
 		{
-			e.printStackTrace();
 			tempPotionEffects = null;
 		}
 		this.potionEffects = tempPotionEffects;
