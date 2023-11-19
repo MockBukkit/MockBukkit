@@ -82,6 +82,7 @@ import com.destroystokyo.paper.HeightmapType;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import io.papermc.paper.event.world.WorldGameRuleChangeEvent;
+import io.papermc.paper.math.Position;
 import io.papermc.paper.world.MoonPhase;
 import it.unimi.dsi.fastutil.objects.Object2LongOpenHashMap;
 import org.bukkit.BlockChangeDelegate;
@@ -216,8 +217,8 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.messaging.StandardMessenger;
+import org.bukkit.util.BiomeSearchResult;
 import org.bukkit.util.BoundingBox;
-import org.bukkit.util.Consumer;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.StructureSearchResult;
 import org.bukkit.util.Vector;
@@ -237,6 +238,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -737,7 +739,8 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated(since = "1.15")
+	@Deprecated(forRemoval = true, since = "1.15")
+	@ApiStatus.ScheduledForRemoval(inVersion = "1.21")
 	public int getHighestBlockYAt(int x, int z, @NotNull HeightmapType heightmap) throws UnsupportedOperationException
 	{
 		// TODO Auto-generated method stub
@@ -858,14 +861,20 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public @NotNull ItemEntityMock dropItem(@NotNull Location loc, @NotNull ItemStack item, @Nullable Consumer<Item> function)
+	public @NotNull Item dropItem(@NotNull Location loc, @NotNull ItemStack item)
 	{
-		Preconditions.checkNotNull(loc, "The provided location must not be null.");
+		return dropItem(loc, item, null);
+	}
+
+	@Override
+	public @NotNull Item dropItem(@NotNull Location location, @NotNull ItemStack item, @Nullable Consumer<Item> function)
+	{
+		Preconditions.checkNotNull(location, "The provided location must not be null.");
 		Preconditions.checkNotNull(item, "Cannot drop items that are null.");
 		Preconditions.checkArgument(!item.getType().isAir(), "Cannot drop air.");
 
 		ItemEntityMock entity = new ItemEntityMock(server, UUID.randomUUID(), item);
-		entity.setLocation(loc);
+		entity.setLocation(location);
 
 		if (function != null)
 		{
@@ -879,13 +888,13 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public @NotNull ItemEntityMock dropItem(@NotNull Location loc, @NotNull ItemStack item)
+	public @NotNull Item dropItemNaturally(@NotNull Location loc, @NotNull ItemStack item)
 	{
-		return dropItem(loc, item, null);
+		return dropItemNaturally(loc, item, null);
 	}
 
 	@Override
-	public @NotNull ItemEntityMock dropItemNaturally(@NotNull Location location, @NotNull ItemStack item, @Nullable Consumer<Item> function)
+	public @NotNull Item dropItemNaturally(@NotNull Location location, @NotNull ItemStack item, @Nullable Consumer<Item> function)
 	{
 		Preconditions.checkNotNull(location, "The provided location must not be null.");
 
@@ -901,12 +910,6 @@ public class WorldMock implements World
 		loc.setZ(loc.getZ() + zs);
 
 		return dropItem(loc, item, function);
-	}
-
-	@Override
-	public @NotNull ItemEntityMock dropItemNaturally(@NotNull Location loc, @NotNull ItemStack item)
-	{
-		return dropItemNaturally(loc, item, null);
 	}
 
 	@Override
@@ -944,19 +947,13 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz, Consumer<T> function) throws IllegalArgumentException
-	{
-		return this.spawn(location, clazz, function, CreatureSpawnEvent.SpawnReason.CUSTOM);
-	}
-
-	@Override
-	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz, boolean randomizeData, Consumer<T> function) throws IllegalArgumentException
+	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz, boolean randomizeData, @Nullable Consumer<T> function) throws IllegalArgumentException
 	{
 		return this.spawn(location, clazz, function, CreatureSpawnEvent.SpawnReason.CUSTOM, randomizeData, true);
 	}
 
 	@Override
-	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz, Consumer<T> function, CreatureSpawnEvent.@NotNull SpawnReason reason) throws IllegalArgumentException
+	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz, @Nullable Consumer<T> function, CreatureSpawnEvent.@NotNull SpawnReason reason) throws IllegalArgumentException
 	{
 		return this.spawn(location, clazz, function, reason, true, true);
 	}
@@ -2389,6 +2386,41 @@ public class WorldMock implements World
 	@Override
 	public RayTraceResult rayTraceEntities(Location start, Vector direction, double maxDistance, double raySize,
 										   Predicate<Entity> filter)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable BiomeSearchResult locateNearestBiome(@NotNull Location origin, int radius, int horizontalInterval, int verticalInterval, @NotNull Biome... biomes)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable BiomeSearchResult locateNearestBiome(@NotNull Location origin, int radius, @NotNull Biome... biomes)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable RayTraceResult rayTrace(@NotNull Position start, @NotNull Vector direction, double maxDistance, @NotNull FluidCollisionMode fluidCollisionMode, boolean ignorePassableBlocks, double raySize, @Nullable Predicate<Entity> filter, @Nullable Predicate<Block> canCollide)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable RayTraceResult rayTraceBlocks(@NotNull Position start, @NotNull Vector direction, double maxDistance, @NotNull FluidCollisionMode fluidCollisionMode, boolean ignorePassableBlocks, @Nullable Predicate<Block> canCollide)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable RayTraceResult rayTraceEntities(@NotNull Position start, @NotNull Vector direction, double maxDistance, double raySize, @Nullable Predicate<Entity> filter)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

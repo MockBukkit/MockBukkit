@@ -4,10 +4,11 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Projectile;
 import org.bukkit.projectiles.BlockProjectileSource;
-import org.bukkit.util.Consumer;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.function.Consumer;
 
 /**
  * Mock implementation of a {@link BlockProjectileSource}, specifically for the {@link DispenserMock}.
