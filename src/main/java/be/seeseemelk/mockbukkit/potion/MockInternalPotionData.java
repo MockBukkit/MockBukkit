@@ -104,7 +104,7 @@ public class MockInternalPotionData implements PotionType.InternalPotionData
 	}
 
 	private List<PotionEffect> getPotionEffectFromData(JsonObject data){
-		List<PotionEffect> potionEffects = new ArrayList<>();
+		List<PotionEffect> potionEffectsList = new ArrayList<>();
 		for(JsonElement potionEffectData : data.get("effects").getAsJsonArray()){
 			JsonObject potionEffectDataObject = potionEffectData.getAsJsonObject();
 			NamespacedKey potionEffectTypeKey = Preconditions.checkNotNull(NamespacedKey.fromString(potionEffectDataObject.get("type").getAsString()));
@@ -115,9 +115,9 @@ public class MockInternalPotionData implements PotionType.InternalPotionData
 			boolean particles = potionEffectDataObject.get("particles").getAsBoolean();
 			boolean icon = potionEffectDataObject.get("icon").getAsBoolean();
 			PotionEffect potionEffect = new PotionEffect(potionEffectType,duration,amplifier,ambient,particles,icon);
-			potionEffects.add(potionEffect);
+			potionEffectsList.add(potionEffect);
 		}
-		return potionEffects;
+		return potionEffectsList;
 	}
 
 }
