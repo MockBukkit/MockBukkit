@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit;
 
+import be.seeseemelk.mockbukkit.potion.MockInternalPotionData;
 import com.destroystokyo.paper.util.VersionFetcher;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Multimap;
@@ -35,9 +36,13 @@ import org.bukkit.potion.PotionType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Mock implementation of an {@link UnsafeValues}.
@@ -328,8 +333,7 @@ public class MockUnsafeValues implements UnsafeValues
 	@Override
 	public PotionType.InternalPotionData getInternalPotionData(NamespacedKey key)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return new MockInternalPotionData(key);
 	}
 
 	@Override
