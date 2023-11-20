@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.matcher.allay;
 
 import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 import org.hamcrest.Matcher;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,40 +14,43 @@ import org.mockbukkit.testutils.matcher.AbstractMatcherTest;
 
 import java.util.UUID;
 
-import static org.mockbukkit.mockbukkit.matcher.allay.AllayCurrentItemMatcher.currentItem;
+import static org.mockbukkit.mockbukkit.matcher.allay.AllayInventoryContainsMatcher.inventoryContains;
 
 @ExtendWith(MockBukkitExtension.class)
-class AllayCurrentItemMatcherTest extends AbstractMatcherTest
+class AllayInventoryContainersMatcherTest extends AbstractMatcherTest
 {
 
 	@MockBukkitInject
 	private ServerMock server;
 	private AllayMock allay;
+	private ItemStack stack = new ItemStack(Material.STONE);
 
 	@BeforeEach
 	void setUp()
 	{
 		allay = new AllayMock(server, UUID.randomUUID());
 		allay.simulatePlayerInteract(Material.STONE);
+		allay.simulateItemPickup(stack);
 	}
 
 	@Override
 	protected Matcher<?> createMatcher()
 	{
-		return currentItem(Material.STONE);
+		return inventoryContains(stack);
 	}
 
 	@Test
 	void testMatches()
 	{
-		assertMatches(currentItem(Material.STONE), allay);
-		assertMismatchDescription("has current item \"DIRT\"", currentItem(Material.DIRT), allay);
+		assertMatches(inventoryContains(stack), allay);
+		assertMismatchDescription("doesn't have Itemstack \"ItemStack{DIRT x 1}\" in Inventory",
+				inventoryContains(new ItemStack(Material.DIRT)), allay);
 	}
 
 	@Test
 	void testDoesNotMatch()
 	{
-		assertDoesNotMatch(currentItem(Material.AIR),allay);
+		assertDoesNotMatch(inventoryContains(new ItemStack(Material.WATER)), allay);
 	}
 
 	@Test
@@ -58,7 +62,7 @@ class AllayCurrentItemMatcherTest extends AbstractMatcherTest
 	@Test
 	void testHasReadableDescription()
 	{
-		assertDescription("should have current item", currentItem(Material.STONE));
+		assertDescription("Should have Itemstack in inventory", inventoryContains(stack));
 	}
 
 	@Test
