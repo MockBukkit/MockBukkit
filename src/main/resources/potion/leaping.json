@@ -1,0 +1,12 @@
+{
+  "effects": [
+    {
+      "type": "minecraft:jump_boost",
+      "amplifier": 0,
+      "duration": 3600,
+      "ambient": false,
+      "particles": true,
+      "icon": true
+    }
+  ]
+}

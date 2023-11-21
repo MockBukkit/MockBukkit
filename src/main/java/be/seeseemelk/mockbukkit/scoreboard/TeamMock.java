@@ -1,8 +1,10 @@
 package be.seeseemelk.mockbukkit.scoreboard;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
 import com.google.common.base.Preconditions;
+import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
@@ -438,6 +440,13 @@ public class TeamMock implements Team
 		if (this.board != null)
 			return;
 		throw new IllegalStateException("Team not registered");
+	}
+
+	@Override
+	public @NotNull Iterable<? extends Audience> audiences()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 }

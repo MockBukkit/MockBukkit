@@ -1,0 +1,12 @@
+{
+  "effects": [
+    {
+      "type": "minecraft:slow_falling",
+      "amplifier": 0,
+      "duration": 1800,
+      "ambient": false,
+      "particles": true,
+      "icon": true
+    }
+  ]
+}

@@ -6,10 +6,12 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.attribute.AttributeModifier;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Mock implementation of {@link AttributeInstance}.
@@ -59,6 +61,20 @@ public class AttributeInstanceMock implements AttributeInstance
 	public @NotNull Collection<AttributeModifier> getModifiers()
 	{
 		return modifiers;
+	}
+
+	@Override
+	public @Nullable AttributeModifier getModifier(@NotNull UUID uuid)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void removeModifier(@NotNull UUID uuid)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

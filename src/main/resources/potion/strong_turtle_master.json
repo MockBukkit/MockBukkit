@@ -1,0 +1,20 @@
+{
+  "effects": [
+    {
+      "type": "minecraft:slowness",
+      "amplifier": 5,
+      "duration": 400,
+      "ambient": false,
+      "particles": true,
+      "icon": true
+    },
+    {
+      "type": "minecraft:resistance",
+      "amplifier": 3,
+      "duration": 400,
+      "ambient": false,
+      "particles": true,
+      "icon": true
+    }
+  ]
+}

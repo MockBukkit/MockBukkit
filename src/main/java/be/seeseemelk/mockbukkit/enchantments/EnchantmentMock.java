@@ -63,6 +63,20 @@ public class EnchantmentMock extends Enchantment
 	}
 
 	@Override
+	public int getMaxModifiedCost(int level)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getMinModifiedCost(int level)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull EnchantmentRarity getRarity()
 	{
 		// TODO Auto-generated method stub

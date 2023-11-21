@@ -21,6 +21,7 @@ import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.BufferedReader;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -329,6 +330,13 @@ public class BlockStateMock implements BlockState
 	public @NotNull BlockData getBlockData()
 	{
 		return this.blockData.clone();
+	}
+
+	@Override
+	public @NotNull BlockState copy()
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

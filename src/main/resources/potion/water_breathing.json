@@ -1,0 +1,12 @@
+{
+  "effects": [
+    {
+      "type": "minecraft:water_breathing",
+      "amplifier": 0,
+      "duration": 3600,
+      "ambient": false,
+      "particles": true,
+      "icon": true
+    }
+  ]
+}

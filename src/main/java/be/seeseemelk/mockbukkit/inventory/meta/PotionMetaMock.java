@@ -195,18 +195,35 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	}
 
 	@Override
+	@Deprecated(since = "1.20")
 	public void setBasePotionData(@NotNull PotionData data)
 	{
 		this.basePotionData = new PotionData(data.getType(), data.isExtended(), data.isUpgraded());
 	}
 
 	@Override
+	@Deprecated(since = "1.20")
 	public @NotNull PotionData getBasePotionData()
 	{
 		return new PotionData(basePotionData.getType(), basePotionData.isExtended(), basePotionData.isUpgraded());
 	}
 
 	@Override
+	public void setBasePotionType(@NotNull PotionType type)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull PotionType getBasePotionType()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@Deprecated(since = "1.9")
 	public boolean setMainEffect(@NotNull PotionEffectType type)
 	{
 		// TODO Auto-generated method stub

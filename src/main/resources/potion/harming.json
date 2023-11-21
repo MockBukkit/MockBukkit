@@ -1,0 +1,12 @@
+{
+  "effects": [
+    {
+      "type": "minecraft:instant_damage",
+      "amplifier": 0,
+      "duration": 1,
+      "ambient": false,
+      "particles": true,
+      "icon": true
+    }
+  ]
+}

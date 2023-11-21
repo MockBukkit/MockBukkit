@@ -1,0 +1,12 @@
+{
+  "effects": [
+    {
+      "type": "minecraft:regeneration",
+      "amplifier": 1,
+      "duration": 450,
+      "ambient": false,
+      "particles": true,
+      "icon": true
+    }
+  ]
+}

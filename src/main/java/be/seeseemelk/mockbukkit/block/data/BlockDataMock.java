@@ -16,6 +16,7 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.block.structure.Mirror;
 import org.bukkit.block.structure.StructureRotation;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -212,6 +213,13 @@ public class BlockDataMock implements BlockData
 
 	@Override
 	public boolean isFaceSturdy(@NotNull BlockFace face, @NotNull BlockSupport support)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull VoxelShape getCollisionShape(@NotNull Location location)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

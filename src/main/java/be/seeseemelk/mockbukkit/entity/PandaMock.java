@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Panda;
@@ -159,6 +160,13 @@ public class PandaMock extends AnimalsMock implements Panda
 	public boolean isSitting()
 	{
 		return this.isSitting;
+	}
+
+	@Override
+	public @NotNull Gene getCombinedGene()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

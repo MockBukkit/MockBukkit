@@ -29,6 +29,7 @@ import net.md_5.bungee.api.chat.hover.content.Content;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.Tag;
+import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemFactory;
@@ -253,6 +254,27 @@ public class ItemFactoryMock implements ItemFactory
 
 	@Override
 	public @Nullable Material getSpawnEgg(@Nullable EntityType type)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull ItemStack enchantItem(@NotNull Entity entity, @NotNull ItemStack item, int level, boolean allowTreasures)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull ItemStack enchantItem(@NotNull World world, @NotNull ItemStack item, int level, boolean allowTreasures)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull ItemStack enchantItem(@NotNull ItemStack item, int level, boolean allowTreasures)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
