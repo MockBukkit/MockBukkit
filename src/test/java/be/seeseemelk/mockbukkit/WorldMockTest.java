@@ -1967,4 +1967,159 @@ class WorldMockTest
 		assertEquals(10, world.getTicksPerMonsterSpawns());
 	}
 
+	@ParameterizedTest
+	@MethodSource("getSpawnLimits")
+	void testGetSpawnLimits(SpawnCategory category, int limit)
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertEquals(limit, world.getSpawnLimit(category));
+	}
+
+	public static Stream<Arguments> getSpawnLimits()
+	{
+		return Stream.of(
+				Arguments.of(SpawnCategory.MONSTER, 70),
+				Arguments.of(SpawnCategory.WATER_ANIMAL, 5),
+				Arguments.of(SpawnCategory.ANIMAL, 10),
+				Arguments.of(SpawnCategory.WATER_AMBIENT, 20),
+				Arguments.of(SpawnCategory.WATER_UNDERGROUND_CREATURE, 5),
+				Arguments.of(SpawnCategory.AMBIENT, 15));
+	}
+
+	@Test
+	void testGetSpawnLimitsNull()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertThrows(IllegalArgumentException.class, () -> world.getSpawnLimit(null));
+	}
+
+	@Test
+	void testGetSpawnLimitsInvalidCategory()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertThrows(IllegalArgumentException.class, () -> world.getSpawnLimit(SpawnCategory.MISC));
+	}
+
+	@Test
+	void testGetSpawnLimitNegativeValue()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setSpawnLimit(SpawnCategory.MONSTER, -2);
+
+		assertEquals(70, world.getSpawnLimit(SpawnCategory.MONSTER));
+	}
+
+	@Test
+	void testSetSpawnLimit()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setSpawnLimit(SpawnCategory.WATER_AMBIENT, 3);
+
+		assertEquals(3, world.getSpawnLimit(SpawnCategory.WATER_AMBIENT));
+	}
+
+	@Test
+	void testSetSpawnLimitNull()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertThrows(IllegalArgumentException.class, () -> world.setSpawnLimit(null, 3));
+	}
+
+	@Test
+	void testSetSpawnLimitInvalidCategory()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertThrows(IllegalArgumentException.class, () -> world.setSpawnLimit(SpawnCategory.MISC, 3));
+	}
+
+	@Test
+	void testGetMonsterSpawnLimit()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertEquals(70, world.getMonsterSpawnLimit());
+	}
+
+	@Test
+	void testSetMonsterSpawnLimit()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setMonsterSpawnLimit(5);
+		assertEquals(5, world.getSpawnLimit(SpawnCategory.MONSTER));
+	}
+
+	@Test
+	void testGetAnimalSpawnLimit()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertEquals(10, world.getAnimalSpawnLimit());
+	}
+
+	@Test
+	void testSetAnimalSpawnLimit()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setAnimalSpawnLimit(5);
+		assertEquals(5, world.getSpawnLimit(SpawnCategory.ANIMAL));
+	}
+
+	@Test
+	void testGetAmbientSpawnLimit()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertEquals(15, world.getAmbientSpawnLimit());
+	}
+
+	@Test
+	void testSetAmbientSpawnLimit()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setAmbientSpawnLimit(5);
+		assertEquals(5, world.getSpawnLimit(SpawnCategory.AMBIENT));
+	}
+
+	@Test
+	void testGetWaterAnimalSpawnLimit()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertEquals(5, world.getWaterAnimalSpawnLimit());
+	}
+
+	@Test
+	void testSetWaterAnimalSpawnLimit()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setWaterAnimalSpawnLimit(42);
+		assertEquals(42, world.getSpawnLimit(SpawnCategory.WATER_ANIMAL));
+	}
+
+	@Test
+	void testGetWaterAmbientSpawnLimit()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertEquals(20, world.getWaterAmbientSpawnLimit());
+	}
+
+	@Test
+	void testSetWaterAmbientSpawnLimit()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setWaterAmbientSpawnLimit(5);
+		assertEquals(5, world.getSpawnLimit(SpawnCategory.WATER_AMBIENT));
+	}
+
+	@Test
+	void testGetWaterUndergroundCreatureSpawnLimit()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertEquals(5, world.getWaterUndergroundCreatureSpawnLimit());
+	}
+
+	@Test
+	void testSetWaterUndergroundCreatureSpawnLimit()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setWaterUndergroundCreatureSpawnLimit(42);
+		assertEquals(42, world.getSpawnLimit(SpawnCategory.WATER_UNDERGROUND_CREATURE));
+	}
+
 }
