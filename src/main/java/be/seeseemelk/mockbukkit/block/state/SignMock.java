@@ -98,7 +98,7 @@ public class SignMock extends TileStateMock implements Sign
 
 	@Override
 	@NotNull
-	@Deprecated
+	@Deprecated(since = "1.16")
 	public String @NotNull [] getLines()
 	{
 		String[] text = new String[4];
@@ -112,14 +112,14 @@ public class SignMock extends TileStateMock implements Sign
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.16")
 	public @NotNull String getLine(int index) throws IndexOutOfBoundsException
 	{
 		return this.lines[index];
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.16")
 	public void setLine(int index, @NotNull String line) throws IndexOutOfBoundsException
 	{
 		this.lines[index] = line != null ? line : "";

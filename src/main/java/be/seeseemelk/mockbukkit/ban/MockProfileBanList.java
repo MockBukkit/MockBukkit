@@ -26,7 +26,7 @@ public class MockProfileBanList implements ProfileBanList
 	private static final String TARGET_CANNOT_BE_NULL = "Target cannot be null";
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.20")
 	public @Nullable BanEntry<PlayerProfile> getBanEntry(@NotNull String target)
 	{
 		Preconditions.checkNotNull(target, TARGET_CANNOT_BE_NULL);
@@ -41,7 +41,7 @@ public class MockProfileBanList implements ProfileBanList
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.20")
 	public @Nullable BanEntry<PlayerProfile> addBan(@NotNull String target, @Nullable String reason, @Nullable Date expires, @Nullable String source)
 	{
 		PlayerProfileMock profile = new PlayerProfileMock(target, Bukkit.getOfflinePlayer(target).getUniqueId());
@@ -49,7 +49,7 @@ public class MockProfileBanList implements ProfileBanList
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.20")
 	public <E extends BanEntry<? super PlayerProfile>> @Nullable E addBan(org.bukkit.profile.@NotNull PlayerProfile target, @Nullable String reason, @Nullable Date expires, @Nullable String source)
 	{
 		Preconditions.checkNotNull(target, TARGET_CANNOT_BE_NULL);
@@ -94,7 +94,7 @@ public class MockProfileBanList implements ProfileBanList
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.20")
 	public <E extends BanEntry<? super PlayerProfile>> @Nullable E getBanEntry(org.bukkit.profile.@NotNull PlayerProfile target)
 	{
 		Preconditions.checkNotNull(target, TARGET_CANNOT_BE_NULL);
@@ -103,7 +103,7 @@ public class MockProfileBanList implements ProfileBanList
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.20")
 	public boolean isBanned(org.bukkit.profile.@NotNull PlayerProfile target)
 	{
 		Preconditions.checkNotNull(target, TARGET_CANNOT_BE_NULL);
@@ -112,7 +112,7 @@ public class MockProfileBanList implements ProfileBanList
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.20")
 	public void pardon(org.bukkit.profile.@NotNull PlayerProfile target)
 	{
 		Preconditions.checkNotNull(target, TARGET_CANNOT_BE_NULL);
@@ -135,7 +135,7 @@ public class MockProfileBanList implements ProfileBanList
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.20")
 	public @NotNull Set<BanEntry> getBanEntries()
 	{
 		ImmutableSet.Builder<BanEntry> builder = ImmutableSet.builder();

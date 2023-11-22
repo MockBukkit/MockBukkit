@@ -103,14 +103,14 @@ public abstract class MinecartMock extends VehicleMock implements Minecart
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setDisplayBlock(@Nullable MaterialData material)
 	{
 		this.displayBlock = material == null ? new BlockDataMock(Material.AIR) : BlockDataMock.mock(material.getItemType());
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public @NotNull MaterialData getDisplayBlock()
 	{
 		return new MaterialData(this.displayBlock.getMaterial());

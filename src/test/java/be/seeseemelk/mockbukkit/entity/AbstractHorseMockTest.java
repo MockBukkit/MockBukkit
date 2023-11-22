@@ -39,7 +39,8 @@ class AbstractHorseMockTest
 	@Test
 	void testSetVariant()
 	{
-		assertThrows(UnsupportedOperationException.class, () -> horse.setVariant(Horse.Variant.HORSE));
+		assertThrows(UnsupportedOperationException.class, () -> horse.
+				setVariant(Horse.Variant.HORSE));
 	}
 
 	@Test

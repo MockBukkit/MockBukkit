@@ -41,7 +41,7 @@ public abstract class AbstractHorseMock extends AnimalsMock implements AbstractH
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.11")
 	public void setVariant(Horse.Variant variant)
 	{
 		throw new UnsupportedOperationException("Not supported.");
@@ -141,12 +141,14 @@ public abstract class AbstractHorseMock extends AnimalsMock implements AbstractH
 	}
 
 	@Override
+	@Deprecated(since = "1.18")
 	public boolean isEatingHaystack()
 	{
 		return this.isEating;
 	}
 
 	@Override
+	@Deprecated(since = "1.18")
 	public void setEatingHaystack(boolean eatingHaystack)
 	{
 		this.isEating = eatingHaystack;
@@ -160,14 +162,12 @@ public abstract class AbstractHorseMock extends AnimalsMock implements AbstractH
 	}
 
 	@Override
-	@Deprecated
 	public boolean isEatingGrass()
 	{
 		return this.isEatingHaystack();
 	}
 
 	@Override
-	@Deprecated
 	public void setEatingGrass(boolean eating)
 	{
 		this.setEatingHaystack(eating);

@@ -24,6 +24,7 @@ import be.seeseemelk.mockbukkit.entity.EggMock;
 import be.seeseemelk.mockbukkit.entity.ElderGuardianMock;
 import be.seeseemelk.mockbukkit.entity.EnderPearlMock;
 import be.seeseemelk.mockbukkit.entity.EndermanMock;
+import be.seeseemelk.mockbukkit.entity.EndermiteMock;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.ExperienceOrbMock;
 import be.seeseemelk.mockbukkit.entity.ExplosiveMinecartMock;
@@ -81,7 +82,9 @@ import com.destroystokyo.paper.HeightmapType;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import io.papermc.paper.event.world.WorldGameRuleChangeEvent;
+import io.papermc.paper.math.Position;
 import io.papermc.paper.world.MoonPhase;
+import it.unimi.dsi.fastutil.objects.Object2LongOpenHashMap;
 import org.bukkit.BlockChangeDelegate;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
@@ -136,6 +139,7 @@ import org.bukkit.entity.Egg;
 import org.bukkit.entity.ElderGuardian;
 import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.Enderman;
+import org.bukkit.entity.Endermite;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ExperienceOrb;
@@ -215,8 +219,8 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.messaging.StandardMessenger;
+import org.bukkit.util.BiomeSearchResult;
 import org.bukkit.util.BoundingBox;
-import org.bukkit.util.Consumer;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.StructureSearchResult;
 import org.bukkit.util.Vector;
@@ -237,6 +241,7 @@ import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Function;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -283,7 +288,9 @@ public class WorldMock implements World
 	private boolean allowMonsters = true;
 	private boolean pvp;
 	private boolean hardcore;
+	private boolean getKeepSpawnInMemory = true;
 
+	private final Object2LongOpenHashMap<SpawnCategory> ticksPerSpawn = new Object2LongOpenHashMap<>();
 
 	/**
 	 * Creates a new mock world.
@@ -319,11 +326,21 @@ public class WorldMock implements World
 		if (this.server != null)
 		{
 			this.pvp = this.server.getServerConfiguration().isPvpEnabled();
+			this.ticksPerSpawn.putAll(this.server.getServerConfiguration().getTicksPerSpawn());
 		}
 		else
 		{
 			this.pvp = true;
+
+			// Set the default ticks per spawn values.
+			ticksPerSpawn.put(SpawnCategory.ANIMAL, 400);
+			ticksPerSpawn.put(SpawnCategory.MONSTER, 1);
+			ticksPerSpawn.put(SpawnCategory.WATER_AMBIENT, 1);
+			ticksPerSpawn.put(SpawnCategory.WATER_UNDERGROUND_CREATURE, 1);
+			ticksPerSpawn.put(SpawnCategory.WATER_ANIMAL, 1);
+			ticksPerSpawn.put(SpawnCategory.AMBIENT, 1);
 		}
+
 		// Set the default gamerule values.
 		gameRules.put(GameRule.ANNOUNCE_ADVANCEMENTS, true);
 		gameRules.put(GameRule.COMMAND_BLOCK_OUTPUT, true);
@@ -529,7 +546,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public @NotNull Block getBlockAtKey(long key)
 	{
 		return getBlockAt(getLocationAtKey(key));
@@ -721,7 +738,8 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "1.15")
+	@ApiStatus.ScheduledForRemoval(inVersion = "1.21")
 	public int getHighestBlockYAt(int x, int z, @NotNull HeightmapType heightmap) throws UnsupportedOperationException
 	{
 		throw new UnimplementedOperationException();
@@ -765,7 +783,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.14")
 	public boolean isChunkInUse(int x, int z)
 	{
 		// TODO Auto-generated method stub
@@ -804,10 +822,12 @@ public class WorldMock implements World
 		AsyncCatcher.catchOp("chunk unload");
 		ChunkCoordinate chunkCoordinate = new ChunkCoordinate(x, z);
 		ChunkMock chunk = loadedChunks.remove(chunkCoordinate);
-		if (chunk == null) {
+		if (chunk == null)
+		{
 			return true;
 		}
-		if (save) {
+		if (save)
+		{
 			savedChunks.put(chunkCoordinate, chunk);
 		}
 		return true;
@@ -822,7 +842,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.13")
 	public boolean regenerateChunk(int x, int z)
 	{
 		AsyncCatcher.catchOp("chunk regenerate");
@@ -831,7 +851,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.8")
 	public boolean refreshChunk(int x, int z)
 	{
 		// TODO Auto-generated method stub
@@ -839,14 +859,20 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public @NotNull ItemEntityMock dropItem(@NotNull Location loc, @NotNull ItemStack item, @Nullable Consumer<Item> function)
+	public @NotNull Item dropItem(@NotNull Location loc, @NotNull ItemStack item)
 	{
-		Preconditions.checkNotNull(loc, "The provided location must not be null.");
+		return dropItem(loc, item, null);
+	}
+
+	@Override
+	public @NotNull Item dropItem(@NotNull Location location, @NotNull ItemStack item, @Nullable Consumer<Item> function)
+	{
+		Preconditions.checkNotNull(location, "The provided location must not be null.");
 		Preconditions.checkNotNull(item, "Cannot drop items that are null.");
 		Preconditions.checkArgument(!item.getType().isAir(), "Cannot drop air.");
 
 		ItemEntityMock entity = new ItemEntityMock(server, UUID.randomUUID(), item);
-		entity.setLocation(loc);
+		entity.setLocation(location);
 
 		if (function != null)
 		{
@@ -860,13 +886,13 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public @NotNull ItemEntityMock dropItem(@NotNull Location loc, @NotNull ItemStack item)
+	public @NotNull Item dropItemNaturally(@NotNull Location loc, @NotNull ItemStack item)
 	{
-		return dropItem(loc, item, null);
+		return dropItemNaturally(loc, item, null);
 	}
 
 	@Override
-	public @NotNull ItemEntityMock dropItemNaturally(@NotNull Location location, @NotNull ItemStack item, @Nullable Consumer<Item> function)
+	public @NotNull Item dropItemNaturally(@NotNull Location location, @NotNull ItemStack item, @Nullable Consumer<Item> function)
 	{
 		Preconditions.checkNotNull(location, "The provided location must not be null.");
 
@@ -885,12 +911,6 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public @NotNull ItemEntityMock dropItemNaturally(@NotNull Location loc, @NotNull ItemStack item)
-	{
-		return dropItemNaturally(loc, item, null);
-	}
-
-	@Override
 	public @NotNull Arrow spawnArrow(Location location, Vector direction, float speed, float spread)
 	{
 		// TODO Auto-generated method stub
@@ -905,7 +925,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.17")
 	public boolean generateTree(Location loc, TreeType type, BlockChangeDelegate delegate)
 	{
 		// TODO Auto-generated method stub
@@ -925,19 +945,13 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz, Consumer<T> function) throws IllegalArgumentException
-	{
-		return this.spawn(location, clazz, function, CreatureSpawnEvent.SpawnReason.CUSTOM);
-	}
-
-	@Override
-	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz, boolean randomizeData, Consumer<T> function) throws IllegalArgumentException
+	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz, boolean randomizeData, @Nullable Consumer<T> function) throws IllegalArgumentException
 	{
 		return this.spawn(location, clazz, function, CreatureSpawnEvent.SpawnReason.CUSTOM, randomizeData, true);
 	}
 
 	@Override
-	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz, Consumer<T> function, CreatureSpawnEvent.@NotNull SpawnReason reason) throws IllegalArgumentException
+	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz, @Nullable Consumer<T> function, CreatureSpawnEvent.@NotNull SpawnReason reason) throws IllegalArgumentException
 	{
 		return this.spawn(location, clazz, function, reason, true, true);
 	}
@@ -1326,6 +1340,10 @@ public class WorldMock implements World
 		else if (clazz == MagmaCube.class)
 		{
 			return new MagmaCubeMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Endermite.class)
+		{
+			return new EndermiteMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}
@@ -1719,7 +1737,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.7.5")
 	public @NotNull FallingBlock spawnFallingBlock(Location location, Material material, byte data)
 			throws IllegalArgumentException
 	{
@@ -1808,14 +1826,14 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.15")
 	public @NotNull Biome getBiome(int x, int z)
 	{
 		return this.getBiome(x, 0, z);
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.15")
 	public void setBiome(int x, int z, @NotNull Biome bio)
 	{
 		for (int y = this.getMinHeight(); y < this.getMaxHeight(); y++)
@@ -1825,7 +1843,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.15")
 	public double getTemperature(int x, int z)
 	{
 		// TODO Auto-generated method stub
@@ -1833,7 +1851,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.15")
 	public double getHumidity(int x, int z)
 	{
 		// TODO Auto-generated method stub
@@ -1868,15 +1886,13 @@ public class WorldMock implements World
 	@Override
 	public boolean getKeepSpawnInMemory()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getKeepSpawnInMemory;
 	}
 
 	@Override
 	public void setKeepSpawnInMemory(boolean keepLoaded)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.getKeepSpawnInMemory = keepLoaded;
 	}
 
 	@Override
@@ -1913,7 +1929,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.16")
 	public WorldType getWorldType()
 	{
 		return this.worldType;
@@ -1927,39 +1943,35 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public long getTicksPerAnimalSpawns()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getTicksPerSpawns(SpawnCategory.ANIMAL);
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setTicksPerAnimalSpawns(int ticksPerAnimalSpawns)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.setTicksPerSpawns(SpawnCategory.ANIMAL, ticksPerAnimalSpawns);
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public long getTicksPerMonsterSpawns()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getTicksPerSpawns(SpawnCategory.MONSTER);
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setTicksPerMonsterSpawns(int ticksPerMonsterSpawns)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.setTicksPerSpawns(SpawnCategory.MONSTER, ticksPerMonsterSpawns);
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public int getMonsterSpawnLimit()
 	{
 		// TODO Auto-generated method stub
@@ -1967,7 +1979,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setMonsterSpawnLimit(int limit)
 	{
 		// TODO Auto-generated method stub
@@ -1975,7 +1987,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public int getAnimalSpawnLimit()
 	{
 		// TODO Auto-generated method stub
@@ -1983,7 +1995,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setAnimalSpawnLimit(int limit)
 	{
 		// TODO Auto-generated method stub
@@ -1991,7 +2003,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public int getWaterAnimalSpawnLimit()
 	{
 		// TODO Auto-generated method stub
@@ -1999,7 +2011,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setWaterAnimalSpawnLimit(int limit)
 	{
 		// TODO Auto-generated method stub
@@ -2007,7 +2019,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public int getWaterUndergroundCreatureSpawnLimit()
 	{
 		// TODO Auto-generated method stub
@@ -2016,7 +2028,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setWaterUndergroundCreatureSpawnLimit(int limit)
 	{
 		// TODO Auto-generated method stub
@@ -2025,7 +2037,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public int getAmbientSpawnLimit()
 	{
 		// TODO Auto-generated method stub
@@ -2033,7 +2045,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setAmbientSpawnLimit(int limit)
 	{
 		// TODO Auto-generated method stub
@@ -2112,7 +2124,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.13")
 	public String getGameRuleValue(@Nullable String rule)
 	{
 		if (rule == null)
@@ -2129,7 +2141,7 @@ public class WorldMock implements World
 
 	@SuppressWarnings("unchecked")
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.13")
 	public boolean setGameRuleValue(@Nullable String rule, @NotNull String value)
 	{
 		if (rule == null)
@@ -2378,6 +2390,41 @@ public class WorldMock implements World
 	}
 
 	@Override
+	public @Nullable BiomeSearchResult locateNearestBiome(@NotNull Location origin, int radius, int horizontalInterval, int verticalInterval, @NotNull Biome... biomes)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable BiomeSearchResult locateNearestBiome(@NotNull Location origin, int radius, @NotNull Biome... biomes)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable RayTraceResult rayTrace(@NotNull Position start, @NotNull Vector direction, double maxDistance, @NotNull FluidCollisionMode fluidCollisionMode, boolean ignorePassableBlocks, double raySize, @Nullable Predicate<Entity> filter, @Nullable Predicate<Block> canCollide)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable RayTraceResult rayTraceBlocks(@NotNull Position start, @NotNull Vector direction, double maxDistance, @NotNull FluidCollisionMode fluidCollisionMode, boolean ignorePassableBlocks, @Nullable Predicate<Block> canCollide)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable RayTraceResult rayTraceEntities(@NotNull Position start, @NotNull Vector direction, double maxDistance, double raySize, @Nullable Predicate<Entity> filter)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public RayTraceResult rayTraceBlocks(Location start, Vector direction, double maxDistance)
 	{
 		// TODO Auto-generated method stub
@@ -2426,7 +2473,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.19")
 	public Location locateNearestStructure(Location origin, StructureType structureType, int radius,
 										   boolean findUnexplored)
 	{
@@ -2513,6 +2560,7 @@ public class WorldMock implements World
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
+
 	@Override
 	public boolean isFixedTime()
 	{
@@ -2856,7 +2904,8 @@ public class WorldMock implements World
 	@Override
 	public boolean isNatural()
 	{
-		return switch (environment) {
+		return switch (environment)
+		{
 			case THE_END, NETHER -> false;
 			default -> true;
 		};
@@ -2865,7 +2914,8 @@ public class WorldMock implements World
 	@Override
 	public boolean isBedWorks()
 	{
-		return switch (environment) {
+		return switch (environment)
+		{
 			case THE_END, NETHER -> false;
 			default -> true;
 		};
@@ -2874,7 +2924,8 @@ public class WorldMock implements World
 	@Override
 	public boolean hasSkyLight()
 	{
-		return switch (environment) {
+		return switch (environment)
+		{
 			case THE_END, NETHER -> false;
 			default -> true;
 		};
@@ -2924,35 +2975,31 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public long getTicksPerWaterSpawns()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getTicksPerSpawns(SpawnCategory.WATER_ANIMAL);
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setTicksPerWaterSpawns(int ticksPerWaterSpawns)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.setTicksPerSpawns(SpawnCategory.WATER_ANIMAL, ticksPerWaterSpawns);
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public long getTicksPerAmbientSpawns()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getTicksPerSpawns(SpawnCategory.AMBIENT);
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setTicksPerAmbientSpawns(int ticksPerAmbientSpawns)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.setTicksPerSpawns(SpawnCategory.AMBIENT, ticksPerAmbientSpawns);
 	}
 
 	@Override
@@ -2976,37 +3023,31 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public long getTicksPerWaterAmbientSpawns()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getTicksPerSpawns(SpawnCategory.WATER_AMBIENT);
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setTicksPerWaterAmbientSpawns(int ticksPerAmbientSpawns)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.setTicksPerSpawns(SpawnCategory.WATER_AMBIENT, ticksPerAmbientSpawns);
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public long getTicksPerWaterUndergroundCreatureSpawns()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		return this.getTicksPerSpawns(SpawnCategory.WATER_UNDERGROUND_CREATURE);
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setTicksPerWaterUndergroundCreatureSpawns(int ticksPerWaterUndergroundCreatureSpawns)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		this.setTicksPerSpawns(SpawnCategory.WATER_UNDERGROUND_CREATURE, ticksPerWaterUndergroundCreatureSpawns);
 	}
 
 	@Override
@@ -3046,7 +3087,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public int getNoTickViewDistance()
 	{
 		// TODO Auto-generated method stub
@@ -3054,7 +3095,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setNoTickViewDistance(int viewDistance)
 	{
 		// TODO Auto-generated method stub
@@ -3105,15 +3146,21 @@ public class WorldMock implements World
 	@Override
 	public long getTicksPerSpawns(@NotNull SpawnCategory spawnCategory)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(spawnCategory != null, "SpawnCategory cannot be null");
+		Preconditions.checkArgument(spawnCategory != null && spawnCategory != SpawnCategory.MISC,
+				"SpawnCategory.%s are not supported", spawnCategory);
+
+		return this.ticksPerSpawn.getLong(spawnCategory);
 	}
 
 	@Override
 	public void setTicksPerSpawns(@NotNull SpawnCategory spawnCategory, int ticksPerCategorySpawn)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(spawnCategory != null, "SpawnCategory cannot be null");
+		Preconditions.checkArgument(spawnCategory != null && spawnCategory != SpawnCategory.MISC,
+				"SpawnCategory.%s are not supported", spawnCategory);
+
+		this.ticksPerSpawn.put(spawnCategory, ticksPerCategorySpawn);
 	}
 
 	@Override
