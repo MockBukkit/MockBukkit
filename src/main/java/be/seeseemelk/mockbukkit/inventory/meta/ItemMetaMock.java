@@ -10,6 +10,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.SetMultimap;
+import com.google.common.collect.Sets;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.bungeecord.BungeeComponentSerializer;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
@@ -63,8 +64,8 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	private PersistentDataContainerMock persistentDataContainer = new PersistentDataContainerMock();
 	private boolean unbreakable = false;
 	private @Nullable Integer customModelData = null;
-	private @Nullable Set<Namespaced> destroyableKeys = null;
-	private @Nullable Set<Namespaced> placeableKeys = null;
+	private Set<Namespaced> destroyableKeys = Sets.newHashSet();
+	private Set<Namespaced> placeableKeys = Sets.newHashSet();
 
 	/**
 	 * Constructs a new {@link ItemMetaMock}.
@@ -95,11 +96,11 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		}
 		if (meta.hasDestroyableKeys())
 		{
-			destroyableKeys = new HashSet<>(meta.getDestroyableKeys());
+			destroyableKeys.addAll(meta.getDestroyableKeys());
 		}
 		if (meta.hasPlaceableKeys())
 		{
-			placeableKeys = new HashSet<>(meta.getPlaceableKeys());
+			placeableKeys.addAll(meta.getPlaceableKeys());
 		}
 		if (meta instanceof Damageable d)
 		{
@@ -331,25 +332,27 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public Set<Material> getCanDestroy()
 	{
-		throw new UnimplementedOperationException("Deprecated method");
+		return !hasDestroyableKeys() ? Collections.emptySet() : legacyGetMatsFromKeys(this.destroyableKeys);
 	}
 
 	@Override
 	public void setCanDestroy(Set<Material> canDestroy)
 	{
-		throw new UnimplementedOperationException("Deprecated method");
+		Preconditions.checkArgument(canDestroy != null, "Cannot replace with null set!");
+		legacyClearAndReplaceKeys(this.destroyableKeys, canDestroy);
 	}
 
 	@Override
 	public Set<Material> getCanPlaceOn()
 	{
-		throw new UnimplementedOperationException("Deprecated method");
+		return !hasPlaceableKeys() ? Collections.emptySet() : legacyGetMatsFromKeys(this.placeableKeys);
 	}
 
 	@Override
 	public void setCanPlaceOn(Set<Material> canPlaceOn)
 	{
-		throw new UnimplementedOperationException("Deprecated method");
+		Preconditions.checkArgument(canPlaceOn != null, "Cannot replace with null set!");
+		legacyClearAndReplaceKeys(this.placeableKeys, canPlaceOn);
 	}
 
 	@Override
@@ -905,6 +908,33 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	@Deprecated
+	private Set<Material> legacyGetMatsFromKeys(Collection<Namespaced> names) {
+		Set<Material> mats = Sets.newHashSet();
+		for (Namespaced key : names) {
+			if (!(key instanceof org.bukkit.NamespacedKey)) {
+				continue;
+			}
+
+			Material material = Material.matchMaterial(key.toString(), false);
+			if (material != null) {
+				mats.add(material);
+			}
+		}
+
+		return mats;
+	}
+
+	@Deprecated
+	private void legacyClearAndReplaceKeys(Collection<Namespaced> toUpdate, Collection<Material> beingSet) {
+		if (beingSet.stream().anyMatch(Material::isLegacy)) {
+			throw new IllegalArgumentException("Set must not contain any legacy materials!");
+		}
+
+		toUpdate.clear();
+		toUpdate.addAll(beingSet.stream().map(Material::getKey).collect(java.util.stream.Collectors.toSet()));
 	}
 
 }

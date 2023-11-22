@@ -18,6 +18,7 @@ import org.bukkit.inventory.meta.Repairable;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.util.io.BukkitObjectInputStream;
 import org.bukkit.util.io.BukkitObjectOutputStream;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -581,6 +582,175 @@ class ItemMetaMockTest
 		);
 		meta.setPlaceableKeys(expectedKeys);
 		assertEquals(expectedKeys, meta.getPlaceableKeys());
+	}
+
+	@Test
+	void testGetCanPlaceOn() {
+		Set<Namespaced> expectedKeys = Set.of(
+				Material.ACACIA_PRESSURE_PLATE.getKey(),
+				Material.BLACK_WOOL.getKey(),
+				Material.CRIMSON_NYLIUM.getKey()
+		);
+		meta.setPlaceableKeys(expectedKeys);
+
+		for (Material material : meta.getCanPlaceOn())
+		{
+			assertTrue(expectedKeys.contains(material.getKey()));
+		}
+	}
+
+	@Test
+	void testSetCanPlaceOn() {
+		Set<Material> expectedKeys = Set.of(
+				Material.ACACIA_PRESSURE_PLATE,
+				Material.BLACK_WOOL,
+				Material.CRIMSON_NYLIUM
+		);
+		meta.setCanPlaceOn(expectedKeys);
+
+		for (Material material : meta.getCanPlaceOn())
+		{
+			assertTrue(expectedKeys.contains(material));
+		}
+	}
+
+	@Test
+	void testSetCanPlaceOn_NullThrows()
+	{
+		assertThrows(IllegalArgumentException.class, () -> meta.setCanPlaceOn(null));
+	}
+
+	@Test
+	void testSetCanPlaceOn_LegacyKey_Throws()
+	{
+		Set<Material> input = Set.of(
+				Material.LEGACY_AIR
+		);
+
+		assertThrows(IllegalArgumentException.class, () -> meta.setCanPlaceOn(input));
+	}
+
+	@Test
+	void testGetCanPlaceON_NonBukkitKey_Skipped()
+	{
+		meta.setPlaceableKeys(List.of(
+				Material.ACACIA_PRESSURE_PLATE.getKey(),
+				Material.BLACK_WOOL.getKey(),
+				Material.CRIMSON_NYLIUM.getKey(),
+				Material.ACACIA_BOAT.getKey(),
+				new Namespaced()
+				{
+					@Override
+					public @NotNull String getNamespace()
+					{
+						return "minecraft";
+					}
+
+					@Override
+					public @NotNull String getKey()
+					{
+						return "test";
+					}
+				}
+		));
+
+		Set<Material> expectedKeys = Set.of(
+				Material.ACACIA_PRESSURE_PLATE,
+				Material.BLACK_WOOL,
+				Material.CRIMSON_NYLIUM,
+				Material.ACACIA_BOAT
+		);
+		for (Material material : meta.getCanPlaceOn())
+		{
+			assertTrue(expectedKeys.contains(material));
+		}
+
+		assertEquals(4, meta.getCanPlaceOn().size());
+	}
+
+
+	@Test
+	void testGetCanDestroy() {
+		Set<Namespaced> expectedKeys = Set.of(
+				Material.ACACIA_PRESSURE_PLATE.getKey(),
+				Material.BLACK_WOOL.getKey(),
+				Material.CRIMSON_NYLIUM.getKey()
+		);
+		meta.setDestroyableKeys(expectedKeys);
+
+		for (Material material : meta.getCanDestroy())
+		{
+			assertTrue(expectedKeys.contains(material.getKey()));
+		}
+	}
+
+	@Test
+	void testSetCanDestroy() {
+		Set<Material> expectedKeys = Set.of(
+				Material.ACACIA_PRESSURE_PLATE,
+				Material.BLACK_WOOL,
+				Material.CRIMSON_NYLIUM
+		);
+		meta.setCanDestroy(expectedKeys);
+
+		for (Material material : meta.getCanDestroy())
+		{
+			assertTrue(expectedKeys.contains(material));
+		}
+	}
+
+	@Test
+	void testSetCanDestroy_NullThrows()
+	{
+		assertThrows(IllegalArgumentException.class, () -> meta.setCanDestroy(null));
+	}
+
+	@Test
+	void testSetCanDestroy_LegacyKey_Throws()
+	{
+		Set<Material> input = Set.of(
+				Material.LEGACY_AIR
+		);
+
+		assertThrows(IllegalArgumentException.class, () -> meta.setCanDestroy(input));
+	}
+
+	@Test
+	void testGetCanDestroy_NonBukkitKey_Skipped()
+	{
+		meta.setDestroyableKeys(List.of(
+				Material.ACACIA_PRESSURE_PLATE.getKey(),
+				Material.BLACK_WOOL.getKey(),
+				Material.CRIMSON_NYLIUM.getKey(),
+				Material.ACACIA_BOAT.getKey(),
+				new Namespaced()
+				{
+					@Override
+					public @NotNull String getNamespace()
+					{
+						return "minecraft";
+					}
+
+					@Override
+					public @NotNull String getKey()
+					{
+						return "test";
+					}
+				}
+		));
+
+		Set<Material> expectedKeys = Set.of(
+				Material.ACACIA_PRESSURE_PLATE,
+				Material.BLACK_WOOL,
+				Material.CRIMSON_NYLIUM,
+				Material.ACACIA_BOAT
+		);
+		for (Material material : meta.getCanDestroy())
+		{
+			assertTrue(expectedKeys.contains(material));
+		}
+
+		assertEquals(4, meta.getCanDestroy().size());
 	}
 
 	@Test
