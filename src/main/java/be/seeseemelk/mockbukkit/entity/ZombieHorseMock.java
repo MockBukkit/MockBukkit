@@ -28,14 +28,14 @@ public class ZombieHorseMock extends AbstractHorseMock implements ZombieHorse
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.11")
 	public Horse.@NotNull Variant getVariant()
 	{
 		return Horse.Variant.UNDEAD_HORSE;
 	}
 
 	@Override
-	public EntityType getType()
+	public @NotNull EntityType getType()
 	{
 		return EntityType.ZOMBIE_HORSE;
 	}

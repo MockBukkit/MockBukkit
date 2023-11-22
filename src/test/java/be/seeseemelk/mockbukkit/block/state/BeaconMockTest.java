@@ -8,6 +8,8 @@ import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Beacon;
+import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
 import org.bukkit.potion.PotionEffectType;
 import org.junit.jupiter.api.AfterEach;
@@ -20,9 +22,11 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -333,6 +337,32 @@ class BeaconMockTest
 		BlockStateMock mock = BlockStateMock.mockState(block);
 
 		assertInstanceOf(BeaconMock.class, mock);
+	}
+
+	@Test
+	void testGetEntitiesInRangeNotPlaced()
+	{
+		Beacon beacon1 = new BeaconMock(Material.BEACON);
+		IllegalStateException illegalStateException = assertThrows(IllegalStateException.class, () ->
+		{
+			beacon1.getEntitiesInRange();
+		});
+
+		assertEquals("Cannot get entities in range of a beacon that is not placed",
+				illegalStateException.getMessage());
+	}
+
+	@Test
+	void testUpdateTierMinWorldHeight()
+	{
+		Block block = this.world.getBlockAt(0, 0, 0);
+		block.setType(Material.BEACON);
+		BeaconMock beacon1 = new BeaconMock(block);
+
+		createBase(4);
+
+		beacon1.updateTier();
+		assertNotEquals(4, beacon1.getTier());
 	}
 
 	/**

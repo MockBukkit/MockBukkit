@@ -16,6 +16,7 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.block.structure.Mirror;
 import org.bukkit.block.structure.StructureRotation;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -218,6 +219,13 @@ public class BlockDataMock implements BlockData
 	}
 
 	@Override
+	public @NotNull VoxelShape getCollisionShape(@NotNull Location location)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull Material getPlacementMaterial()
 	{
 		// TODO Auto-generated method stub
@@ -241,6 +249,13 @@ public class BlockDataMock implements BlockData
 	@Override
 	public @NotNull BlockState createBlockState()
 	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public float getDestroySpeed(@NotNull ItemStack itemStack, boolean considerEnchants)
+	{
+		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 

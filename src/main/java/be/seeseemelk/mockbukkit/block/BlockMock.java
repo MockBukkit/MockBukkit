@@ -4,6 +4,7 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import be.seeseemelk.mockbukkit.block.state.BlockStateMock;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
+import be.seeseemelk.mockbukkit.tags.internal.InternalTag;
 import com.destroystokyo.paper.block.BlockSoundGroup;
 import com.google.common.base.Preconditions;
 import org.bukkit.Chunk;
@@ -43,7 +44,7 @@ public class BlockMock implements Block
 
 	private final MetadataTable metadataTable = new MetadataTable();
 
-	private final @Nullable Location location;
+	private final Location location;
 	private BlockStateMock state;
 	private Material material;
 	private byte data;
@@ -87,6 +88,7 @@ public class BlockMock implements Block
 	public BlockMock(@NotNull Material material, @Nullable Location location)
 	{
 		Preconditions.checkNotNull(material, "Material cannot be null");
+		Preconditions.checkArgument(material.isBlock(), "Material has to be a block");
 		this.material = material;
 		this.location = location;
 		this.state = BlockStateMock.mockState(this);
@@ -118,7 +120,7 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.6.2")
 	public byte getData()
 	{
 		return data;
@@ -212,7 +214,7 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public long getBlockKey()
 	{
 		// TODO Auto-generated method stub
@@ -386,9 +388,15 @@ public class BlockMock implements Block
 	@Override
 	public boolean isSolid()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		if(InternalTag.SOLID_BLOCKS.isTagged(this.getType()))
+		{
+			return true;
+		}
+		else if (InternalTag.NON_SOLID_BLOCKS.isTagged(this.getType()))
+		{
+			return false;
+		}
+		throw new UnimplementedOperationException("Block type '" + this.getType() + "' has not been implemented yet");
 	}
 
 	@Override
@@ -439,6 +447,7 @@ public class BlockMock implements Block
 	}
 
 	@Override
+	@Deprecated(forRemoval = true)
 	public @NotNull String getTranslationKey()
 	{
 		// TODO Auto-generated method stub

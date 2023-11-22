@@ -1,0 +1,34 @@
+{
+	"values": [
+		{
+			"key": "minecraft:quartz"
+		},
+		{
+			"key": "minecraft:iron"
+		},
+		{
+			"key": "minecraft:netherite"
+		},
+		{
+			"key": "minecraft:redstone"
+		},
+		{
+			"key": "minecraft:copper"
+		},
+		{
+			"key": "minecraft:gold"
+		},
+		{
+			"key": "minecraft:emerald"
+		},
+		{
+			"key": "minecraft:diamond"
+		},
+		{
+			"key": "minecraft:lapis"
+		},
+		{
+			"key": "minecraft:amethyst"
+		}
+	]
+}

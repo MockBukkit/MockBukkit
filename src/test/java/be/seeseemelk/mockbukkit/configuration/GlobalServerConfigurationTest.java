@@ -226,4 +226,17 @@ class GlobalServerConfigurationTest
 		assertEquals("minecraft:normal", ServerConfiguration.LevelType.DEFAULT.getKey());
 	}
 
+	@Test
+	void testIsPVPEnabledDefault()
+	{
+		assertTrue(config.isPvpEnabled());
+	}
+
+	@Test
+	void testSetPVPEnabled()
+	{
+		config.setPvpEnabled(false);
+		assertFalse(config.isPvpEnabled());
+	}
+
 }

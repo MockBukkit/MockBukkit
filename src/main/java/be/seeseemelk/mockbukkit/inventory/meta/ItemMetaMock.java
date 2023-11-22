@@ -399,7 +399,9 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public @Nullable List<Component> lore()
 	{
-		return this.lore.stream().map(s -> GsonComponentSerializer.gson().deserialize(s)).collect(Collectors.toList());
+		return this.lore == null ? null : new ArrayList<>(this.lore.stream()
+				.map(s -> GsonComponentSerializer.gson().deserialize(s))
+				.toList()) ;
 	}
 
 	@Override
@@ -418,13 +420,21 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public @Nullable List<String> getLore()
 	{
-		return this.lore == null ? null : this.lore.stream().map(s -> LegacyComponentSerializer.legacySection().serialize(GsonComponentSerializer.gson().deserialize(s))).collect(Collectors.toList());
+		return this.lore == null ? null : new ArrayList<>(this.lore.stream()
+				.map(s -> LegacyComponentSerializer
+						.legacySection()
+						.serialize(GsonComponentSerializer.gson().deserialize(s)))
+				.toList());
 	}
 
 	@Override
 	public @Nullable List<BaseComponent[]> getLoreComponents()
 	{
-		return this.lore.stream().map(c -> BungeeComponentSerializer.get().serialize(GsonComponentSerializer.gson().deserialize(c))).collect(Collectors.toList());
+		return this.lore == null ? null :this.lore.stream()
+				.map(c -> BungeeComponentSerializer
+						.get()
+						.serialize(GsonComponentSerializer.gson().deserialize(c))
+				).toList();
 	}
 
 	@Override

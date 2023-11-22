@@ -14,6 +14,7 @@ import be.seeseemelk.mockbukkit.inventory.EnderChestInventoryMock;
 import be.seeseemelk.mockbukkit.inventory.InventoryMock;
 import be.seeseemelk.mockbukkit.map.MapViewMock;
 import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
+import com.destroystokyo.paper.profile.PlayerProfile;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import net.kyori.adventure.bossbar.BossBar;
@@ -111,7 +112,7 @@ import static org.junit.jupiter.api.Assumptions.assumeFalse;
 class PlayerMockTest
 {
 
-	// Taken from https://minecraft.gamepedia.com/Experience#Leveling_up
+	// Taken from https://minecraft.wiki/w/Experience#Leveling_up
 	private static final int[] expRequired =
 			{
 					7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 42, 47, 52, 57, 62, 67, 72, 77, 82, 87, 92, 97, 102,
@@ -1482,15 +1483,17 @@ class PlayerMockTest
 	@Test
 	void testPlayerSendBlockUpdateInvalid()
 	{
-		assertThrows(NullPointerException.class, () -> player.sendBlockUpdate(player.getLocation(), null));
-		assertThrows(NullPointerException.class, () -> player.sendBlockUpdate(null, new TileStateMock(Material.CHEST)
+		Location location = player.getLocation();
+		assertThrows(NullPointerException.class, () -> player.sendBlockUpdate(location, null));
+		TileStateMock tileStateMock = new TileStateMock(Material.CHEST)
 		{
 			@Override
 			public @NotNull BlockState getSnapshot()
 			{
 				return new BlockStateMock(Material.CHEST);
 			}
-		}));
+		};
+		assertThrows(NullPointerException.class, () -> player.sendBlockUpdate(null, tileStateMock));
 	}
 
 	@Test
@@ -1566,7 +1569,7 @@ class PlayerMockTest
 		out.writeUTF("Forward");
 		out.writeUTF("ALL");
 		out.writeUTF("MockBukkit");
-		player.sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
+		assertDoesNotThrow(() -> player.sendPluginMessage(plugin, "BungeeCord", out.toByteArray()));
 	}
 
 	@Test
@@ -2301,6 +2304,25 @@ class PlayerMockTest
 
 		bar.flags(Collections.singleton(BossBar.Flag.DARKEN_SCREEN));
 		assertEquals(Collections.singleton(BossBar.Flag.DARKEN_SCREEN), bossBar.flags());
+	}
+
+	@Test
+	void testPlayerProfile()
+	{
+		PlayerProfile profile = player.getPlayerProfile();
+
+		assertEquals(player.getUniqueId(), profile.getId());
+		assertEquals(player.getName(), profile.getName());
+	}
+
+	@Test
+	void testSetPlayerProfile()
+	{
+		UUID uuid = UUID.randomUUID();
+		PlayerProfile profile = Bukkit.createProfile(uuid, "Test");
+		player.setPlayerProfile(profile);
+
+		assertEquals(profile, player.getPlayerProfile());
 	}
 
 }

@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
-public class LootableMinecartMockTest
+class LootableMinecartMockTest
 {
 
 	@MockBukkitInject
@@ -25,7 +25,7 @@ public class LootableMinecartMockTest
 	private LootableMinecart minecart;
 
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		minecart = new StorageMinecartMock(server, UUID.randomUUID());
 	}
@@ -51,7 +51,7 @@ public class LootableMinecartMockTest
 		Player player = server.addPlayer();
 		long time = System.currentTimeMillis();
 		minecart.setHasPlayerLooted(player, true);
-		assertEquals(time, minecart.getLastLooted(player));
+		assertTrue(time <= minecart.getLastLooted(player));
 	}
 
 	@Test

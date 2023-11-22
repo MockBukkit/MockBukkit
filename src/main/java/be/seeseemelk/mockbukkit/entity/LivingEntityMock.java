@@ -42,7 +42,6 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.util.Consumer;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
@@ -57,6 +56,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import java.util.function.Consumer;
 
 /**
  * Mock implementation of a {@link LivingEntity}.
@@ -72,6 +72,11 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	protected double health;
 	private int maxAirTicks = 300;
 	private int remainingAirTicks = 300;
+	/**
+	 * NoDamage ticks
+	 */
+	private int noDamageTicks = 0;
+	private int maxNoDamageTicks = 20;
 	/**
 	 * Whether the entity is alive.
 	 */
@@ -407,15 +412,13 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public int getMaximumNoDamageTicks()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.maxNoDamageTicks;
 	}
 
 	@Override
 	public void setMaximumNoDamageTicks(int ticks)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.maxNoDamageTicks = ticks;
 	}
 
 	@Override
@@ -435,15 +438,13 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public int getNoDamageTicks()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.noDamageTicks;
 	}
 
 	@Override
 	public void setNoDamageTicks(int ticks)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.noDamageTicks = ticks;
 	}
 
 	@Override
@@ -481,7 +482,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.15")
 	public boolean addPotionEffect(@NotNull PotionEffect effect, boolean force)
 	{
 		AsyncCatcher.catchOp("effect add");
@@ -1124,5 +1125,27 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
+
+	@Override
+	public float getForwardsMovement()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public float getUpwardsMovement()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public float getSidewaysMovement()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 
 }

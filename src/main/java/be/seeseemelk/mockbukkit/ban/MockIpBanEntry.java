@@ -30,7 +30,7 @@ public class MockIpBanEntry implements BanEntry<InetAddress>
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.20")
 	public @NotNull String getTarget()
 	{
 		return this.target;

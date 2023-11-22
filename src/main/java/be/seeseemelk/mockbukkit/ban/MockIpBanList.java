@@ -22,6 +22,7 @@ public class MockIpBanList implements org.bukkit.ban.IpBanList
 	private static final String TARGET_CANNOT_BE_NULL = "Target cannot be null";
 
 	@Override
+	@Deprecated(since = "1.20")
 	public @Nullable BanEntry<InetAddress> getBanEntry(@NotNull String target)
 	{
 		Preconditions.checkNotNull(target, TARGET_CANNOT_BE_NULL);
@@ -72,7 +73,7 @@ public class MockIpBanList implements org.bukkit.ban.IpBanList
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.20")
 	@SuppressWarnings("rawtypes")
 	public @NotNull Set<BanEntry> getBanEntries()
 	{

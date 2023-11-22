@@ -85,6 +85,13 @@ public class OfflinePlayerMock implements OfflinePlayer
 	}
 
 	@Override
+	public boolean isConnected()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @Nullable String getName()
 	{
 		return this.name;
@@ -181,7 +188,7 @@ public class OfflinePlayerMock implements OfflinePlayer
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.13")
 	public long getLastPlayed()
 	{
 		return getLastSeen();

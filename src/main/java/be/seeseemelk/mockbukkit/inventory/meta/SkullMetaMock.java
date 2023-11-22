@@ -21,6 +21,7 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 {
 
 	private @Nullable String owner;
+	private @Nullable com.destroystokyo.paper.profile.PlayerProfile playerProfile;
 
 	/**
 	 * Constructs a new {@link SkullMetaMock}.
@@ -40,6 +41,7 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 		super(meta);
 
 		this.owner = meta.hasOwner() ? meta.getOwningPlayer().getName() : null;
+		this.playerProfile = meta.getPlayerProfile();
 	}
 
 	@Override
@@ -47,6 +49,7 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	{
 		SkullMetaMock mock = (SkullMetaMock) super.clone();
 		mock.setOwner(owner);
+		mock.setPlayerProfile(playerProfile);
 		return mock;
 	}
 
@@ -78,7 +81,7 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.13")
 	public String getOwner()
 	{
 		return owner;
@@ -91,7 +94,7 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.13")
 	public boolean setOwner(String owner)
 	{
 		this.owner = owner;
@@ -101,15 +104,13 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	@Override
 	public void setPlayerProfile(com.destroystokyo.paper.profile.@Nullable PlayerProfile profile)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.playerProfile = profile;
 	}
 
 	@Override
 	public com.destroystokyo.paper.profile.@Nullable PlayerProfile getPlayerProfile()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return playerProfile;
 	}
 
 	@Override
@@ -133,7 +134,7 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public PlayerProfile getOwnerProfile()
 	{
 		// TODO Auto-generated method stub
@@ -141,7 +142,7 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setOwnerProfile(@Nullable PlayerProfile profile)
 	{
 		// TODO Auto-generated method stub

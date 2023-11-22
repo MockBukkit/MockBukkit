@@ -7,9 +7,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 class ChestMockTest
@@ -64,4 +66,25 @@ class ChestMockTest
 		assertInstanceOf(ChestMock.class, BlockStateMock.mockState(block));
 	}
 
+	@Test
+	void testIsOpenDefault()
+	{
+		assertFalse(chest.isOpen());
+	}
+
+	@Test
+	void testOpen()
+	{
+		chest.open();
+		assertTrue(chest.isOpen());
+	}
+
+	@Test
+	void testClose()
+	{
+		chest.open();
+		assertTrue(chest.isOpen());
+		chest.close();
+		assertFalse(chest.isOpen());
+	}
 }

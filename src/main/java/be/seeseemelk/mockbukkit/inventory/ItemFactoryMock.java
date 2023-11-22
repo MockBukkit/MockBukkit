@@ -29,6 +29,7 @@ import net.md_5.bungee.api.chat.hover.content.Content;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.Tag;
+import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemFactory;
@@ -170,7 +171,7 @@ public class ItemFactoryMock implements ItemFactory
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.13")
 	public @NotNull Material updateMaterial(ItemMeta meta, @NotNull Material material)
 	{
 		return material;
@@ -197,7 +198,7 @@ public class ItemFactoryMock implements ItemFactory
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public @Nullable String getI18NDisplayName(@Nullable ItemStack item)
 	{
 		// TODO Auto-generated method stub
@@ -212,7 +213,7 @@ public class ItemFactoryMock implements ItemFactory
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.19")
 	public @NotNull Content hoverContentOf(@NotNull ItemStack itemStack)
 	{
 		// TODO Auto-generated method stub
@@ -220,7 +221,7 @@ public class ItemFactoryMock implements ItemFactory
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.16")
 	public @NotNull Content hoverContentOf(@NotNull Entity entity)
 	{
 		// TODO Auto-generated method stub
@@ -228,7 +229,7 @@ public class ItemFactoryMock implements ItemFactory
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.16")
 	public @NotNull Content hoverContentOf(@NotNull Entity entity, @Nullable String customName)
 	{
 		// TODO Auto-generated method stub
@@ -236,7 +237,7 @@ public class ItemFactoryMock implements ItemFactory
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.16")
 	public @NotNull Content hoverContentOf(@NotNull Entity entity, @Nullable BaseComponent customName)
 	{
 		// TODO Auto-generated method stub
@@ -244,7 +245,7 @@ public class ItemFactoryMock implements ItemFactory
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.16")
 	public @NotNull Content hoverContentOf(@NotNull Entity entity, @NotNull BaseComponent[] customName)
 	{
 		// TODO Auto-generated method stub
@@ -253,6 +254,27 @@ public class ItemFactoryMock implements ItemFactory
 
 	@Override
 	public @Nullable Material getSpawnEgg(@Nullable EntityType type)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull ItemStack enchantItem(@NotNull Entity entity, @NotNull ItemStack item, int level, boolean allowTreasures)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull ItemStack enchantItem(@NotNull World world, @NotNull ItemStack item, int level, boolean allowTreasures)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull ItemStack enchantItem(@NotNull ItemStack item, int level, boolean allowTreasures)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

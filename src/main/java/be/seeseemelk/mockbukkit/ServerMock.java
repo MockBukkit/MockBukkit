@@ -48,6 +48,7 @@ import be.seeseemelk.mockbukkit.services.ServicesManagerMock;
 import be.seeseemelk.mockbukkit.tags.TagRegistry;
 import be.seeseemelk.mockbukkit.tags.TagWrapperMock;
 import be.seeseemelk.mockbukkit.tags.TagsMock;
+import be.seeseemelk.mockbukkit.tags.internal.InternalTag;
 import com.destroystokyo.paper.entity.ai.MobGoals;
 import com.destroystokyo.paper.event.player.PlayerConnectionCloseEvent;
 import com.destroystokyo.paper.event.server.WhitelistToggleEvent;
@@ -107,12 +108,16 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.server.MapInitializeEvent;
 import org.bukkit.event.server.ServerLoadEvent;
+import org.bukkit.event.world.WorldUnloadEvent;
 import org.bukkit.generator.ChunkGenerator.ChunkData;
 import org.bukkit.inventory.InventoryHolder;
+import org.bukkit.inventory.ItemCraftResult;
+import org.bukkit.inventory.ItemFactory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.loot.LootTable;
+import org.bukkit.map.MapCursor;
 import org.bukkit.packs.DataPackManager;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -213,6 +218,7 @@ public class ServerMock extends Server.Spigot implements Server
 		// Register default Minecraft Potion Effect Types
 		createPotionEffectTypes();
 		TagsMock.loadDefaultTags(this, true);
+		InternalTag.loadInternalTags();
 		EnchantmentsMock.registerDefaultEnchantments();
 
 		try
@@ -450,6 +456,17 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	/**
+	 * Removes a mocked world from this server.
+	 *
+	 * @param world	The world to remove.
+	 * @return true if the world was removed, otherwise false.
+	 */
+	public boolean removeWorld(WorldMock world) {
+		AsyncCatcher.catchOp("world remove");
+		return worlds.remove(world);
+	}
+
+	/**
 	 * Executes a command as the console.
 	 *
 	 * @param command The command to execute.
@@ -552,7 +569,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull String getBukkitVersion()
 	{
-		return MockBukkit.PAPER_API_FULL_VERSION;
+		return BuildParameters.PAPER_API_FULL_VERSION;
 	}
 
 	@Override
@@ -765,7 +782,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public @NotNull ItemFactoryMock getItemFactory()
+	public @NotNull ItemFactory getItemFactory()
 	{
 		return factory;
 	}
@@ -1025,6 +1042,27 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	public @NotNull ItemCraftResult craftItemResult(@NotNull ItemStack[] craftingMatrix, @NotNull World world)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull ItemCraftResult craftItemResult(@NotNull ItemStack[] craftingMatrix, @NotNull World world, @NotNull Player player)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull ItemStack craftItem(@NotNull ItemStack[] craftingMatrix, @NotNull World world)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public boolean removeRecipe(@NotNull NamespacedKey key)
 	{
 		return removeRecipe(key, false);
@@ -1140,8 +1178,16 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public int getPort()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.serverConfiguration.getServerPort();
+	}
+
+	/**
+	 * Sets the server listen port.
+	 * @param port The server listen port.
+	 * @see ServerMock#getPort()
+	 */
+	public void setPort(int port) {
+		this.serverConfiguration.setServerPort(port);
 	}
 
 	@Override
@@ -1164,8 +1210,17 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull String getIp()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.serverConfiguration.getServerIp();
+	}
+
+	/**
+	 * Sets the server listen IP.
+	 * @param serverIp The server listen IP.
+	 * @see ServerMock#getIp()
+	 */
+	public void setIp(@NotNull String serverIp)
+	{
+		this.serverConfiguration.setServerIp(serverIp);
 	}
 
 	@Override
@@ -1369,16 +1424,14 @@ public class ServerMock extends Server.Spigot implements Server
 	@Deprecated
 	public int getTicksPerAnimalSpawns()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getTicksPerSpawns(SpawnCategory.ANIMAL);
 	}
 
 	@Override
 	@Deprecated
 	public int getTicksPerMonsterSpawns()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getTicksPerSpawns(SpawnCategory.MONSTER);
 	}
 
 	@Override
@@ -1398,15 +1451,26 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public boolean unloadWorld(String name, boolean save)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return unloadWorld(getWorld(name), save);
 	}
 
 	@Override
 	public boolean unloadWorld(World world, boolean save)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// TODO Handle save
+		if (!(world instanceof WorldMock worldMock))
+		{
+			return false;
+		}
+		if (!worldMock.getPlayers().isEmpty())
+		{
+			return false;
+		}
+		if (new WorldUnloadEvent(worldMock).callEvent())
+		{
+			return false;
+		}
+		return removeWorld(worldMock);
 	}
 
 	@Override
@@ -2120,6 +2184,18 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	public @Nullable ItemStack createExplorerMap(@NotNull World world,
+												 @NotNull Location location,
+												 @NotNull org.bukkit.generator.structure.StructureType structureType,
+												 @NotNull MapCursor.Type mapIcon,
+												 int radius,
+												 boolean findUnexplored)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull KeyedBossBar createBossBar(@NotNull NamespacedKey key, @NotNull String title, @NotNull BarColor color, @NotNull BarStyle style, BarFlag... flags)
 	{
 		Preconditions.checkNotNull(key, "A NamespacedKey must never be null");
@@ -2193,16 +2269,14 @@ public class ServerMock extends Server.Spigot implements Server
 	@Deprecated
 	public int getTicksPerWaterSpawns()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getTicksPerSpawns(SpawnCategory.WATER_ANIMAL);
 	}
 
 	@Override
 	@Deprecated
 	public int getTicksPerAmbientSpawns()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getTicksPerSpawns(SpawnCategory.AMBIENT);
 	}
 
 	/**
@@ -2218,17 +2292,14 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public int getTicksPerWaterAmbientSpawns()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getTicksPerSpawns(SpawnCategory.WATER_AMBIENT);
 	}
 
 	@Override
 	@Deprecated
 	public int getTicksPerWaterUndergroundCreatureSpawns()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		return this.getTicksPerSpawns(SpawnCategory.WATER_UNDERGROUND_CREATURE);
 	}
 
 	@Override
@@ -2366,8 +2437,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public int getCurrentTick()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return (int) getScheduler().getCurrentTick();
 	}
 
 	@Override
@@ -2428,8 +2498,11 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public int getTicksPerSpawns(@NotNull SpawnCategory spawnCategory)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(spawnCategory != null, "SpawnCategory cannot be null");
+		Preconditions.checkArgument(spawnCategory != SpawnCategory.MISC,
+				"SpawnCategory.%s are not supported", spawnCategory);
+
+		return (int) this.serverConfiguration.getTicksPerSpawn().getLong(spawnCategory);
 	}
 
 	@Override
@@ -2545,6 +2618,15 @@ public class ServerMock extends Server.Spigot implements Server
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	/**
+	 * Exposes the {@link ServerConfiguration} of this {@link ServerMock}.
+	 * @return The {@link ServerConfiguration} of this {@link ServerMock}.
+	 */
+	public @NotNull ServerConfiguration getServerConfiguration()
+	{
+		return this.serverConfiguration;
 	}
 
 }

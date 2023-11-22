@@ -66,6 +66,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
@@ -102,6 +103,7 @@ import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.util.Vector;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -131,6 +133,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.LinkedTransferQueue;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 import static org.junit.jupiter.api.Assertions.fail;
@@ -182,6 +185,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 	private final List<ItemStack> consumedItems = new LinkedList<>();
 	private Locale locale;
+	private @NotNull PlayerProfile playerProfile;
 
 	/**
 	 * Constructs a new {@link PlayerMock} for the provided server with the specified name.
@@ -229,6 +233,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		address = new InetSocketAddress("192.0.2." + random.nextInt(255), random.nextInt(32768, 65535));
 		scoreboard = server.getScoreboardManager().getMainScoreboard();
 		locale = Locale.ENGLISH;
+		playerProfile = Bukkit.createProfile(uuid, name);
 	}
 
 	/**
@@ -570,6 +575,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public boolean isOnline()
 	{
 		return getServer().getPlayer(getUniqueId()) != null;
+	}
+
+	@Override
+	public boolean isConnected()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -2001,6 +2013,27 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		throw new UnimplementedOperationException();
 	}
 
+	@Override
+	public boolean isListed(@NotNull Player other)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean unlistPlayer(@NotNull Player other)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean listPlayer(@NotNull Player other)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 
 	@Override
 	public boolean isFlying()
@@ -2585,15 +2618,14 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public @NotNull PlayerProfile getPlayerProfile()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.playerProfile;
 	}
 
 	@Override
 	public void setPlayerProfile(@NotNull PlayerProfile profile)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(profile, "Profile cannot be null");
+		this.playerProfile = profile;
 	}
 
 	@Override
@@ -2759,6 +2791,34 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 	@Override
 	public void broadcastSlotBreak(@NotNull EquipmentSlot slot)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Duration getIdleDuration()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void resetIdleDuration()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Set<Player> getTrackedBy()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public <T extends Projectile> @NotNull T launchProjectile(@NotNull Class<? extends T> projectile, @Nullable Vector velocity, @Nullable Consumer<T> function)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

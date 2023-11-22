@@ -118,7 +118,7 @@ public class LlamaMock extends ChestedHorseMock implements Llama, MockRangedEnti
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.11")
 	public Horse.@NotNull Variant getVariant()
 	{
 		return Horse.Variant.LLAMA;
@@ -179,7 +179,7 @@ public class LlamaMock extends ChestedHorseMock implements Llama, MockRangedEnti
 	}
 
 	@Override
-	public EntityType getType()
+	public @NotNull EntityType getType()
 	{
 		return EntityType.LLAMA;
 	}

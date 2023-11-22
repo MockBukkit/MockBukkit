@@ -1,0 +1,244 @@
+{
+	"values": [
+		{
+			"key": "minecraft:block_activate"
+		},
+		{
+			"key": "minecraft:block_attach"
+		},
+		{
+			"key": "minecraft:block_change"
+		},
+		{
+			"key": "minecraft:block_close"
+		},
+		{
+			"key": "minecraft:block_deactivate"
+		},
+		{
+			"key": "minecraft:block_destroy"
+		},
+		{
+			"key": "minecraft:block_detach"
+		},
+		{
+			"key": "minecraft:block_open"
+		},
+		{
+			"key": "minecraft:block_place"
+		},
+		{
+			"key": "minecraft:block_activate"
+		},
+		{
+			"key": "minecraft:block_activate"
+		},
+		{
+			"key": "minecraft:block_deactivate"
+		},
+		{
+			"key": "minecraft:block_deactivate"
+		},
+		{
+			"key": "minecraft:container_close"
+		},
+		{
+			"key": "minecraft:container_open"
+		},
+		{
+			"key": "minecraft:block_activate"
+		},
+		{
+			"key": "minecraft:drink"
+		},
+		{
+			"key": "minecraft:drink"
+		},
+		{
+			"key": "minecraft:eat"
+		},
+		{
+			"key": "minecraft:elytra_glide"
+		},
+		{
+			"key": "minecraft:elytra_glide"
+		},
+		{
+			"key": "minecraft:entity_damage"
+		},
+		{
+			"key": "minecraft:entity_damage"
+		},
+		{
+			"key": "minecraft:entity_die"
+		},
+		{
+			"key": "minecraft:entity_dismount"
+		},
+		{
+			"key": "minecraft:entity_die"
+		},
+		{
+			"key": "minecraft:entity_interact"
+		},
+		{
+			"key": "minecraft:entity_mount"
+		},
+		{
+			"key": "minecraft:entity_die"
+		},
+		{
+			"key": "minecraft:entity_place"
+		},
+		{
+			"key": "minecraft:entity_action"
+		},
+		{
+			"key": "minecraft:entity_roar"
+		},
+		{
+			"key": "minecraft:entity_shake"
+		},
+		{
+			"key": "minecraft:equip"
+		},
+		{
+			"key": "minecraft:explode"
+		},
+		{
+			"key": "minecraft:flap"
+		},
+		{
+			"key": "minecraft:fluid_pickup"
+		},
+		{
+			"key": "minecraft:fluid_place"
+		},
+		{
+			"key": "minecraft:hit_ground"
+		},
+		{
+			"key": "minecraft:instrument_play"
+		},
+		{
+			"key": "minecraft:item_interact_finish"
+		},
+		{
+			"key": "minecraft:item_interact_start"
+		},
+		{
+			"key": "minecraft:jukebox_play"
+		},
+		{
+			"key": "minecraft:jukebox_stop_play"
+		},
+		{
+			"key": "minecraft:lightning_strike"
+		},
+		{
+			"key": "minecraft:entity_interact"
+		},
+		{
+			"key": "minecraft:note_block_play"
+		},
+		{
+			"key": "minecraft:block_deactivate"
+		},
+		{
+			"key": "minecraft:block_activate"
+		},
+		{
+			"key": "minecraft:prime_fuse"
+		},
+		{
+			"key": "minecraft:projectile_land"
+		},
+		{
+			"key": "minecraft:projectile_shoot"
+		},
+		{
+			"key": "minecraft:entity_roar"
+		},
+		{
+			"key": "minecraft:block_change"
+		},
+		{
+			"key": "minecraft:sculk_sensor_tendrils_clicking"
+		},
+		{
+			"key": "minecraft:shear"
+		},
+		{
+			"key": "minecraft:shriek"
+		},
+		{
+			"key": "minecraft:container_close"
+		},
+		{
+			"key": "minecraft:container_open"
+		},
+		{
+			"key": "minecraft:splash"
+		},
+		{
+			"key": "minecraft:step"
+		},
+		{
+			"key": "minecraft:swim"
+		},
+		{
+			"key": "minecraft:teleport"
+		},
+		{
+			"key": "minecraft:unequip"
+		},
+		{
+			"key": "minecraft:entity_shake"
+		},
+		{
+			"key": "minecraft:resonate_1"
+		},
+		{
+			"key": "minecraft:resonate_2"
+		},
+		{
+			"key": "minecraft:resonate_3"
+		},
+		{
+			"key": "minecraft:resonate_4"
+		},
+		{
+			"key": "minecraft:resonate_5"
+		},
+		{
+			"key": "minecraft:resonate_6"
+		},
+		{
+			"key": "minecraft:resonate_7"
+		},
+		{
+			"key": "minecraft:resonate_8"
+		},
+		{
+			"key": "minecraft:resonate_9"
+		},
+		{
+			"key": "minecraft:resonate_10"
+		},
+		{
+			"key": "minecraft:resonate_11"
+		},
+		{
+			"key": "minecraft:resonate_12"
+		},
+		{
+			"key": "minecraft:resonate_13"
+		},
+		{
+			"key": "minecraft:resonate_14"
+		},
+		{
+			"key": "minecraft:resonate_15"
+		}
+	]
+}
