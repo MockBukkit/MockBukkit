@@ -330,12 +330,14 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
+	@Deprecated(since = "1.13")
 	public Set<Material> getCanDestroy()
 	{
 		return !hasDestroyableKeys() ? Collections.emptySet() : legacyGetMatsFromKeys(this.destroyableKeys);
 	}
 
 	@Override
+	@Deprecated(since = "1.13")
 	public void setCanDestroy(Set<Material> canDestroy)
 	{
 		Preconditions.checkArgument(canDestroy != null, "Cannot replace with null set!");
@@ -343,12 +345,14 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
+	@Deprecated(since = "1.13")
 	public Set<Material> getCanPlaceOn()
 	{
 		return !hasPlaceableKeys() ? Collections.emptySet() : legacyGetMatsFromKeys(this.placeableKeys);
 	}
 
 	@Override
+	@Deprecated(since = "1.13")
 	public void setCanPlaceOn(Set<Material> canPlaceOn)
 	{
 		Preconditions.checkArgument(canPlaceOn != null, "Cannot replace with null set!");
