@@ -914,7 +914,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		throw new UnimplementedOperationException();
 	}
 
-	@Deprecated
+	@Deprecated(since = "1.20")
 	private Set<Material> legacyGetMatsFromKeys(Collection<Namespaced> names) {
 		Set<Material> mats = Sets.newHashSet();
 		for (Namespaced key : names) {
@@ -931,7 +931,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		return mats;
 	}
 
-	@Deprecated
+	@Deprecated(since = "1.20")
 	private void legacyClearAndReplaceKeys(Collection<Namespaced> toUpdate, Collection<Material> beingSet) {
 		if (beingSet.stream().anyMatch(Material::isLegacy)) {
 			throw new IllegalArgumentException("Set must not contain any legacy materials!");
