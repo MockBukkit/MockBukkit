@@ -95,9 +95,11 @@ import org.bukkit.FluidCollisionMode;
 import org.bukkit.GameEvent;
 import org.bukkit.GameRule;
 import org.bukkit.HeightMap;
+import org.bukkit.Instrument;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Note;
 import org.bukkit.Particle;
 import org.bukkit.Raid;
 import org.bukkit.Sound;
@@ -865,7 +867,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public @NotNull Item dropItem(@NotNull Location location, @NotNull ItemStack item, @Nullable Consumer<Item> function)
+	public @NotNull Item dropItem(@NotNull Location location, @NotNull ItemStack item, @Nullable Consumer<? super Item> function)
 	{
 		Preconditions.checkNotNull(location, "The provided location must not be null.");
 		Preconditions.checkNotNull(item, "Cannot drop items that are null.");
@@ -892,7 +894,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public @NotNull Item dropItemNaturally(@NotNull Location location, @NotNull ItemStack item, @Nullable Consumer<Item> function)
+	public @NotNull Item dropItemNaturally(@NotNull Location location, @NotNull ItemStack item, @Nullable Consumer<? super Item> function)
 	{
 		Preconditions.checkNotNull(location, "The provided location must not be null.");
 
@@ -933,7 +935,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public boolean generateTree(Location location, Random random, TreeType type, Predicate<BlockState> statePredicate)
+	public boolean generateTree(Location location, Random random, TreeType type, Predicate<? super BlockState> statePredicate)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -945,13 +947,13 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz, boolean randomizeData, @Nullable Consumer<T> function) throws IllegalArgumentException
+	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz, boolean randomizeData, @Nullable Consumer<? super T> function) throws IllegalArgumentException
 	{
 		return this.spawn(location, clazz, function, CreatureSpawnEvent.SpawnReason.CUSTOM, randomizeData, true);
 	}
 
 	@Override
-	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz, @Nullable Consumer<T> function, CreatureSpawnEvent.@NotNull SpawnReason reason) throws IllegalArgumentException
+	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz, @Nullable Consumer<? super T> function, CreatureSpawnEvent.@NotNull SpawnReason reason) throws IllegalArgumentException
 	{
 		return this.spawn(location, clazz, function, reason, true, true);
 	}
@@ -969,7 +971,7 @@ public class WorldMock implements World
 	 * @return The spawned entity.
 	 */
 	@SuppressWarnings("unchecked")
-	public <T extends Entity> @NotNull T spawn(@Nullable Location location, @Nullable Class<T> clazz, @Nullable Consumer<T> function, CreatureSpawnEvent.@NotNull SpawnReason reason, boolean randomizeData, boolean callSpawnEvent)
+	public <T extends Entity> @NotNull T spawn(@Nullable Location location, @Nullable Class<T> clazz, @Nullable Consumer<? super T> function, CreatureSpawnEvent.@NotNull SpawnReason reason, boolean randomizeData, boolean callSpawnEvent)
 	{
 		Preconditions.checkNotNull(location, "Location cannot be null");
 		Preconditions.checkNotNull(clazz, "Class cannot be null");
@@ -2339,7 +2341,7 @@ public class WorldMock implements World
 
 	@Override
 	public @NotNull Collection<Entity> getNearbyEntities(Location location, double x, double y, double z,
-														 Predicate<Entity> filter)
+														 Predicate<? super Entity> filter)
 	{
 		return getNearbyEntities(BoundingBox.of(location, x, y, z), filter);
 	}
@@ -2351,7 +2353,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public @NotNull Collection<Entity> getNearbyEntities(BoundingBox boundingBox, Predicate<Entity> filter)
+	public @NotNull Collection<Entity> getNearbyEntities(BoundingBox boundingBox, Predicate<? super Entity> filter)
 	{
 		return getEntities().stream()
 				.filter(entity -> filter == null || filter.test(entity))
@@ -2375,7 +2377,7 @@ public class WorldMock implements World
 
 	@Override
 	public RayTraceResult rayTraceEntities(Location start, Vector direction, double maxDistance,
-										   Predicate<Entity> filter)
+										   Predicate<? super Entity> filter)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -2383,7 +2385,7 @@ public class WorldMock implements World
 
 	@Override
 	public RayTraceResult rayTraceEntities(Location start, Vector direction, double maxDistance, double raySize,
-										   Predicate<Entity> filter)
+										   Predicate<? super Entity> filter)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -2404,21 +2406,21 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public @Nullable RayTraceResult rayTrace(@NotNull Position start, @NotNull Vector direction, double maxDistance, @NotNull FluidCollisionMode fluidCollisionMode, boolean ignorePassableBlocks, double raySize, @Nullable Predicate<Entity> filter, @Nullable Predicate<Block> canCollide)
+	public @Nullable RayTraceResult rayTrace(@NotNull Position start, @NotNull Vector direction, double maxDistance, @NotNull FluidCollisionMode fluidCollisionMode, boolean ignorePassableBlocks, double raySize, @Nullable Predicate<? super Entity> filter, @Nullable Predicate<? super Block> canCollide)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public @Nullable RayTraceResult rayTraceBlocks(@NotNull Position start, @NotNull Vector direction, double maxDistance, @NotNull FluidCollisionMode fluidCollisionMode, boolean ignorePassableBlocks, @Nullable Predicate<Block> canCollide)
+	public @Nullable RayTraceResult rayTraceBlocks(@NotNull Position start, @NotNull Vector direction, double maxDistance, @NotNull FluidCollisionMode fluidCollisionMode, boolean ignorePassableBlocks, @Nullable Predicate<? super Block> canCollide)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public @Nullable RayTraceResult rayTraceEntities(@NotNull Position start, @NotNull Vector direction, double maxDistance, double raySize, @Nullable Predicate<Entity> filter)
+	public @Nullable RayTraceResult rayTraceEntities(@NotNull Position start, @NotNull Vector direction, double maxDistance, double raySize, @Nullable Predicate<? super Entity> filter)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -2450,7 +2452,7 @@ public class WorldMock implements World
 	@Override
 	public RayTraceResult rayTrace(Location start, Vector direction, double maxDistance,
 								   FluidCollisionMode fluidCollisionMode, boolean ignorePassableBlocks, double raySize,
-								   Predicate<Entity> filter)
+								   Predicate<? super Entity> filter)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -2874,7 +2876,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public boolean generateTree(@NotNull Location location, @NotNull Random random, @NotNull TreeType type, @Nullable Consumer<BlockState> stateConsumer)
+	public boolean generateTree(@NotNull Location location, @NotNull Random random, @NotNull TreeType type, @Nullable Consumer<? super BlockState> stateConsumer)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -3172,6 +3174,41 @@ public class WorldMock implements World
 
 	@Override
 	public void setSpawnLimit(@NotNull SpawnCategory spawnCategory, int limit)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void playNote(@NotNull Location loc, @NotNull Instrument instrument, @NotNull Note note)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void playSound(@NotNull Entity entity, @NotNull String sound, @NotNull SoundCategory category, float volume, float pitch, long seed)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void playSound(@NotNull Entity entity, @NotNull Sound sound, @NotNull SoundCategory category, float volume, float pitch, long seed)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void playSound(@NotNull Location location, @NotNull String sound, @NotNull SoundCategory category, float volume, float pitch, long seed)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void playSound(@NotNull Location location, @NotNull Sound sound, @NotNull SoundCategory category, float volume, float pitch, long seed)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
