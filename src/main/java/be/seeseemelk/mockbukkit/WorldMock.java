@@ -58,6 +58,7 @@ import be.seeseemelk.mockbukkit.entity.RabbitMock;
 import be.seeseemelk.mockbukkit.entity.RideableMinecartMock;
 import be.seeseemelk.mockbukkit.entity.SalmonMock;
 import be.seeseemelk.mockbukkit.entity.SheepMock;
+import be.seeseemelk.mockbukkit.entity.SilverfishMock;
 import be.seeseemelk.mockbukkit.entity.SkeletonHorseMock;
 import be.seeseemelk.mockbukkit.entity.SkeletonMock;
 import be.seeseemelk.mockbukkit.entity.SlimeMock;
@@ -181,6 +182,7 @@ import org.bukkit.entity.PufferFish;
 import org.bukkit.entity.Rabbit;
 import org.bukkit.entity.Salmon;
 import org.bukkit.entity.Sheep;
+import org.bukkit.entity.Silverfish;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.entity.SkeletonHorse;
 import org.bukkit.entity.Slime;
@@ -1346,6 +1348,10 @@ public class WorldMock implements World
 		else if (clazz == Endermite.class)
 		{
 			return new EndermiteMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Silverfish.class)
+		{
+			return new SilverfishMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}

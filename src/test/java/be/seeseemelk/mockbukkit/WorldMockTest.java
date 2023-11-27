@@ -59,6 +59,7 @@ import be.seeseemelk.mockbukkit.entity.RabbitMock;
 import be.seeseemelk.mockbukkit.entity.RideableMinecartMock;
 import be.seeseemelk.mockbukkit.entity.SalmonMock;
 import be.seeseemelk.mockbukkit.entity.SheepMock;
+import be.seeseemelk.mockbukkit.entity.SilverfishMock;
 import be.seeseemelk.mockbukkit.entity.SkeletonHorseMock;
 import be.seeseemelk.mockbukkit.entity.SkeletonMock;
 import be.seeseemelk.mockbukkit.entity.SlimeMock;
@@ -1303,7 +1304,8 @@ class WorldMockTest
 				Arguments.of(EntityType.LLAMA_SPIT, LlamaSpitMock.class),
 				Arguments.of(EntityType.DOLPHIN, DolphinMock.class),
 				Arguments.of(EntityType.MAGMA_CUBE, MagmaCubeMock.class),
-				Arguments.of(EntityType.ENDERMITE, EndermiteMock.class)
+				Arguments.of(EntityType.ENDERMITE, EndermiteMock.class),
+				Arguments.of(EntityType.SILVERFISH, SilverfishMock.class)
 		);
 	}
 
