@@ -13,7 +13,7 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ThrownExpBottleMockTest
+class ThrownExpBottleMockTest
 {
 
 	private ThrownExpBottleMock bottle;
@@ -40,9 +40,10 @@ public class ThrownExpBottleMockTest
 	@Test
 	void testSetItem()
 	{
-		bottle.setItem(new ItemStack(Material.DIAMOND));
+		bottle.setItem(new ItemStack(Material.DIAMOND, 32));
 
 		assertEquals(Material.DIAMOND, bottle.getItem().getType());
+		assertEquals(1, bottle.getItem().getAmount());
 	}
 
 	@Test
