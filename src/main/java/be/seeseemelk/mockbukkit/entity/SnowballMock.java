@@ -35,7 +35,6 @@ public class SnowballMock extends ThrowableProjectileMock implements Snowball
 	@Override
 	public void setItem(@NotNull ItemStack item)
 	{
-
 		Preconditions.checkArgument(item != null, "Item cannot be null");
 
 		ItemStack localCopy = new ItemStack(item);
