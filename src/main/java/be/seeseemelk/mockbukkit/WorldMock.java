@@ -69,6 +69,7 @@ import be.seeseemelk.mockbukkit.entity.SquidMock;
 import be.seeseemelk.mockbukkit.entity.StorageMinecartMock;
 import be.seeseemelk.mockbukkit.entity.StrayMock;
 import be.seeseemelk.mockbukkit.entity.TadpoleMock;
+import be.seeseemelk.mockbukkit.entity.ThrownExpBottleMock;
 import be.seeseemelk.mockbukkit.entity.TropicalFishMock;
 import be.seeseemelk.mockbukkit.entity.TurtleMock;
 import be.seeseemelk.mockbukkit.entity.WardenMock;
@@ -193,6 +194,7 @@ import org.bukkit.entity.Spider;
 import org.bukkit.entity.Squid;
 import org.bukkit.entity.Stray;
 import org.bukkit.entity.Tadpole;
+import org.bukkit.entity.ThrownExpBottle;
 import org.bukkit.entity.TropicalFish;
 import org.bukkit.entity.Turtle;
 import org.bukkit.entity.Warden;
@@ -1358,6 +1360,10 @@ public class WorldMock implements World
 		else if (clazz == Turtle.class)
 		{
 			return new TurtleMock(server, UUID.randomUUID());
+    }
+		else if (clazz == ThrownExpBottle.class)
+		{
+			return new ThrownExpBottleMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}

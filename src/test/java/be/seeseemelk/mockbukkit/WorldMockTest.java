@@ -70,6 +70,7 @@ import be.seeseemelk.mockbukkit.entity.SquidMock;
 import be.seeseemelk.mockbukkit.entity.StorageMinecartMock;
 import be.seeseemelk.mockbukkit.entity.StrayMock;
 import be.seeseemelk.mockbukkit.entity.TadpoleMock;
+import be.seeseemelk.mockbukkit.entity.ThrownExpBottleMock;
 import be.seeseemelk.mockbukkit.entity.TropicalFishMock;
 import be.seeseemelk.mockbukkit.entity.TurtleMock;
 import be.seeseemelk.mockbukkit.entity.WardenMock;
@@ -1307,7 +1308,8 @@ class WorldMockTest
 				Arguments.of(EntityType.MAGMA_CUBE, MagmaCubeMock.class),
 				Arguments.of(EntityType.ENDERMITE, EndermiteMock.class),
 				Arguments.of(EntityType.SILVERFISH, SilverfishMock.class),
-				Arguments.of(EntityType.TURTLE, TurtleMock.class)
+				Arguments.of(EntityType.TURTLE, TurtleMock.class),
+				Arguments.of(EntityType.THROWN_EXP_BOTTLE, ThrownExpBottleMock.class)
 		);
 	}
 
