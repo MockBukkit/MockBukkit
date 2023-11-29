@@ -35,7 +35,7 @@ public class ThrownExpBottleMock extends ThrowableProjectileMock implements Thro
 	@Override
 	public void setItem(@NotNull ItemStack item)
 	{
-		Preconditions.checkNotNull(item, "Item cannot be null");
+		Preconditions.checkArgument(item != null, "Item cannot be null");
 
 		ItemStack localCopy = new ItemStack(item);
 		localCopy.setAmount(1);
