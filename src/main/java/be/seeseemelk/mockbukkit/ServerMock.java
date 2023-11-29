@@ -2021,7 +2021,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public @NotNull BlockData createBlockData(@NotNull Material material, @Nullable Consumer<BlockData> consumer)
+	public @NotNull BlockData createBlockData(@NotNull Material material, @Nullable Consumer<? super BlockData> consumer)
 	{
 		BlockData blockData = createBlockData(material);
 
