@@ -63,6 +63,7 @@ import be.seeseemelk.mockbukkit.entity.SkeletonHorseMock;
 import be.seeseemelk.mockbukkit.entity.SkeletonMock;
 import be.seeseemelk.mockbukkit.entity.SlimeMock;
 import be.seeseemelk.mockbukkit.entity.SmallFireballMock;
+import be.seeseemelk.mockbukkit.entity.SnowballMock;
 import be.seeseemelk.mockbukkit.entity.SpawnerMinecartMock;
 import be.seeseemelk.mockbukkit.entity.SpiderMock;
 import be.seeseemelk.mockbukkit.entity.SquidMock;
@@ -188,6 +189,7 @@ import org.bukkit.entity.Skeleton;
 import org.bukkit.entity.SkeletonHorse;
 import org.bukkit.entity.Slime;
 import org.bukkit.entity.SmallFireball;
+import org.bukkit.entity.Snowball;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.entity.Spider;
 import org.bukkit.entity.Squid;
@@ -1358,6 +1360,10 @@ public class WorldMock implements World
 		else if (clazz == ThrownExpBottle.class)
 		{
 			return new ThrownExpBottleMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Snowball.class)
+		{
+			return new SnowballMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}
