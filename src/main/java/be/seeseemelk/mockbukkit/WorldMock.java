@@ -2577,8 +2577,7 @@ public class WorldMock implements World
 	@ApiStatus.ScheduledForRemoval(inVersion = "1.21")
 	public boolean doesRespawnAnchorWork()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return isRespawnAnchorWorks();
 	}
 
 	@Override
@@ -2966,8 +2965,7 @@ public class WorldMock implements World
 	@Override
 	public boolean isRespawnAnchorWorks()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return environment == Environment.NETHER;
 	}
 
 	@Override
