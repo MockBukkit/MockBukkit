@@ -57,5 +57,4 @@ class SnowballMockTest
 		assertThrows(IllegalArgumentException.class, () -> snowball.setItem(null));
 	}
 
-
 }
