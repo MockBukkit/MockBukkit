@@ -2923,8 +2923,12 @@ public class WorldMock implements World
 	@Override
 	public int getLogicalHeight()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return switch (environment)
+		{
+			case NETHER, THE_END -> 256;
+            case NORMAL -> 384;
+			case CUSTOM -> throw new UnimplementedOperationException("We don't have support for Datapacks");
+		};
 	}
 
 	@Override
