@@ -61,13 +61,6 @@ public class ChunkMock implements Chunk
 	}
 
 	@Override
-	public @NotNull Collection<BlockState> getTileEntities(@NotNull Predicate<Block> blockPredicate, boolean useSnapshot)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public boolean isGenerated()
 	{
 		return true;
@@ -77,6 +70,13 @@ public class ChunkMock implements Chunk
 	public @NotNull BlockState[] getTileEntities(boolean useSnapshot)
 	{
 		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Collection<BlockState> getTileEntities(@NotNull Predicate<? super Block> blockPredicate, boolean useSnapshot)
+	{
+		//TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
@@ -295,15 +295,13 @@ public class ChunkMock implements Chunk
 	@Override
 	public boolean contains(@NotNull BlockData block)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getBlocks().stream().anyMatch(b -> b.getBlockData().equals(block));
 	}
 
 	@Override
 	public boolean contains(@NotNull Biome biome)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getBlocks().stream().anyMatch(b -> b.getBiome() == biome);
 	}
 
 	@Override

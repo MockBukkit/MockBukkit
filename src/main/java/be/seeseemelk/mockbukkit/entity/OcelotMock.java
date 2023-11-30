@@ -36,14 +36,14 @@ public class OcelotMock extends AnimalsMock implements Ocelot
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.19")
 	public @NotNull Type getCatType()
 	{
 		return Type.WILD_OCELOT;
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.19")
 	public void setCatType(@NotNull Type type)
 	{
 		throw new UnsupportedOperationException("Cats are a different entity!");

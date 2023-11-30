@@ -1,0 +1,12 @@
+{
+  "effects": [
+    {
+      "type": "minecraft:luck",
+      "amplifier": 0,
+      "duration": 6000,
+      "ambient": false,
+      "particles": true,
+      "icon": true
+    }
+  ]
+}

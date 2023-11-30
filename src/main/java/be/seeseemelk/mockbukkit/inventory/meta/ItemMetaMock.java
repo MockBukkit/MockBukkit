@@ -6,9 +6,11 @@ import com.destroystokyo.paper.Namespaced;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.SetMultimap;
+import com.google.common.collect.Sets;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.bungeecord.BungeeComponentSerializer;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
@@ -34,6 +36,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -61,6 +64,8 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	private PersistentDataContainerMock persistentDataContainer = new PersistentDataContainerMock();
 	private boolean unbreakable = false;
 	private @Nullable Integer customModelData = null;
+	private Set<Namespaced> destroyableKeys = Sets.newHashSet();
+	private Set<Namespaced> placeableKeys = Sets.newHashSet();
 
 	/**
 	 * Constructs a new {@link ItemMetaMock}.
@@ -88,6 +93,14 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		if (meta.hasLore())
 		{
 			lore = meta.lore().stream().map(c -> GsonComponentSerializer.gson().serialize(c)).collect(Collectors.toList());
+		}
+		if (meta.hasDestroyableKeys())
+		{
+			destroyableKeys.addAll(meta.getDestroyableKeys());
+		}
+		if (meta.hasPlaceableKeys())
+		{
+			placeableKeys.addAll(meta.getPlaceableKeys());
 		}
 		if (meta instanceof Damageable d)
 		{
@@ -231,6 +244,8 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		result = prime * result + (hideFlags.isEmpty() ? 0 : hideFlags.hashCode());
 		result = prime * result + Boolean.hashCode(unbreakable);
 		result = prime * result + (hasDamage() ? this.damage : 0);
+		result = prime * result + (hasDestroyableKeys() ? this.destroyableKeys.hashCode() : 0);
+		result = prime * result + (hasPlaceableKeys() ? this.placeableKeys.hashCode() : 0);
 		return result;
 	}
 
@@ -304,6 +319,8 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 			meta.damage = damage;
 			meta.repairCost = repairCost;
 			meta.hideFlags = EnumSet.copyOf(hideFlags);
+			meta.destroyableKeys = destroyableKeys != null ? new HashSet<>(destroyableKeys) : null;
+			meta.placeableKeys = placeableKeys != null ? new HashSet<>(placeableKeys) : null;
 			return meta;
 		}
 		catch (CloneNotSupportedException e)
@@ -313,73 +330,71 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
+	@Deprecated(since = "1.13")
 	public Set<Material> getCanDestroy()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return !hasDestroyableKeys() ? Collections.emptySet() : legacyGetMatsFromKeys(this.destroyableKeys);
 	}
 
 	@Override
+	@Deprecated(since = "1.13")
 	public void setCanDestroy(Set<Material> canDestroy)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(canDestroy != null, "Cannot replace with null set!");
+		legacyClearAndReplaceKeys(this.destroyableKeys, canDestroy);
 	}
 
 	@Override
+	@Deprecated(since = "1.13")
 	public Set<Material> getCanPlaceOn()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return !hasPlaceableKeys() ? Collections.emptySet() : legacyGetMatsFromKeys(this.placeableKeys);
 	}
 
 	@Override
+	@Deprecated(since = "1.13")
 	public void setCanPlaceOn(Set<Material> canPlaceOn)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(canPlaceOn != null, "Cannot replace with null set!");
+		legacyClearAndReplaceKeys(this.placeableKeys, canPlaceOn);
 	}
 
 	@Override
 	public @NotNull Set<Namespaced> getDestroyableKeys()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Set<Namespaced> keys = this.destroyableKeys;
+		return keys == null ? Collections.emptySet() : ImmutableSet.copyOf(keys);
 	}
 
 	@Override
 	public void setDestroyableKeys(@NotNull Collection<Namespaced> canDestroy)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.destroyableKeys = new HashSet<>(canDestroy);
 	}
 
 	@Override
 	public @NotNull Set<Namespaced> getPlaceableKeys()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Set<Namespaced> keys = this.placeableKeys;
+		return keys == null ? Collections.emptySet() : ImmutableSet.copyOf(keys);
 	}
 
 	@Override
 	public void setPlaceableKeys(@NotNull Collection<Namespaced> canPlaceOn)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.placeableKeys = new HashSet<>(canPlaceOn);
 	}
 
 	@Override
 	public boolean hasPlaceableKeys()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.placeableKeys != null && !placeableKeys.isEmpty();
 	}
 
 	@Override
 	public boolean hasDestroyableKeys()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.destroyableKeys != null && !destroyableKeys.isEmpty();
 	}
 
 	@Override
@@ -391,7 +406,9 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public @Nullable List<Component> lore()
 	{
-		return this.lore.stream().map(s -> GsonComponentSerializer.gson().deserialize(s)).collect(Collectors.toList());
+		return this.lore == null ? null : new ArrayList<>(this.lore.stream()
+				.map(s -> GsonComponentSerializer.gson().deserialize(s))
+				.toList()) ;
 	}
 
 	@Override
@@ -410,13 +427,21 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public @Nullable List<String> getLore()
 	{
-		return this.lore == null ? null : this.lore.stream().map(s -> LegacyComponentSerializer.legacySection().serialize(GsonComponentSerializer.gson().deserialize(s))).collect(Collectors.toList());
+		return this.lore == null ? null : new ArrayList<>(this.lore.stream()
+				.map(s -> LegacyComponentSerializer
+						.legacySection()
+						.serialize(GsonComponentSerializer.gson().deserialize(s)))
+				.toList());
 	}
 
 	@Override
 	public @Nullable List<BaseComponent[]> getLoreComponents()
 	{
-		return this.lore.stream().map(c -> BungeeComponentSerializer.get().serialize(GsonComponentSerializer.gson().deserialize(c))).collect(Collectors.toList());
+		return this.lore == null ? null :this.lore.stream()
+				.map(c -> BungeeComponentSerializer
+						.get()
+						.serialize(GsonComponentSerializer.gson().deserialize(c))
+				).toList();
 	}
 
 	@Override
@@ -538,6 +563,14 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		map.put("Unbreakable", this.unbreakable);
 		map.put("Damage", this.damage);
 
+		if(hasPlaceableKeys()) {
+			map.put("placeable-keys", this.placeableKeys);
+		}
+
+		if(hasDestroyableKeys()) {
+			map.put("destroyable-keys", this.destroyableKeys);
+		}
+
 		/* Not implemented.
 		if (!this.customTagContainer.isEmpty())
 		{
@@ -575,6 +608,8 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		serialMock.persistentDataContainer = PersistentDataContainerMock.deserialize(map);
 		serialMock.damage = (int) args.get("Damage");
 		serialMock.repairCost = (int) args.get("repair-cost");
+		serialMock.destroyableKeys = (Set<Namespaced>) args.get("destroyable-keys");
+		serialMock.placeableKeys = (Set<Namespaced>) args.get("placeable-keys");
 		return serialMock;
 	}
 
@@ -877,6 +912,33 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	@Deprecated(since = "1.20")
+	private Set<Material> legacyGetMatsFromKeys(Collection<Namespaced> names) {
+		Set<Material> mats = Sets.newHashSet();
+		for (Namespaced key : names) {
+			if (!(key instanceof org.bukkit.NamespacedKey)) {
+				continue;
+			}
+
+			Material material = Material.matchMaterial(key.toString(), false);
+			if (material != null) {
+				mats.add(material);
+			}
+		}
+
+		return mats;
+	}
+
+	@Deprecated(since = "1.20")
+	private void legacyClearAndReplaceKeys(Collection<Namespaced> toUpdate, Collection<Material> beingSet) {
+		if (beingSet.stream().anyMatch(Material::isLegacy)) {
+			throw new IllegalArgumentException("Set must not contain any legacy materials!");
+		}
+
+		toUpdate.clear();
+		toUpdate.addAll(beingSet.stream().map(Material::getKey).collect(java.util.stream.Collectors.toSet()));
 	}
 
 }

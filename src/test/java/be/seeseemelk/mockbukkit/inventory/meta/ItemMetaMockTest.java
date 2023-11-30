@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.inventory.meta;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.MockPlugin;
+import com.destroystokyo.paper.Namespaced;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import org.bukkit.Material;
@@ -17,6 +18,7 @@ import org.bukkit.inventory.meta.Repairable;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.util.io.BukkitObjectInputStream;
 import org.bukkit.util.io.BukkitObjectOutputStream;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,10 +26,12 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -63,12 +67,22 @@ class ItemMetaMockTest
 		meta.setLore(List.of("lore"));
 		meta.setUnbreakable(true);
 		meta.addItemFlags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES);
+		meta.setPlaceableKeys(List.of(
+				Material.DIAMOND_SWORD.getKey(),
+				Material.DIAMOND_AXE.getKey()
+		));
+		meta.setDestroyableKeys(List.of(
+				Material.ACACIA_BOAT.getKey(),
+				Material.BLACK_WOOL.getKey()
+		));
 		ItemMetaMock meta2 = new ItemMetaMock(meta);
 		meta2.setLore(List.of("lore"));
 		assertEquals(meta2, meta);
 		assertEquals(meta, meta2);
 		assertEquals(meta.hashCode(), meta2.hashCode());
 		assertEquals(meta.getItemFlags(), meta2.getItemFlags());
+		assertEquals(meta.getPlaceableKeys(), meta2.getPlaceableKeys());
+		assertEquals(meta.getDestroyableKeys(), meta2.getDestroyableKeys());
 	}
 
 	@Test
@@ -163,7 +177,7 @@ class ItemMetaMockTest
 	@Test
 	void equals_Null_False()
 	{
-		assertNotEquals(meta, null);
+		assertNotEquals(null, meta);
 		assertNotEquals(null, meta);
 	}
 
@@ -363,6 +377,39 @@ class ItemMetaMockTest
 	}
 
 	@Test
+	void clone_WithPlaceableKeys_ClonedExactly()
+	{
+		meta.setPlaceableKeys(Set.of(
+				Material.STONE.getKey(),
+				Material.DIRT.getKey(),
+				Material.GRASS.getKey()
+		));
+		ItemMetaMock cloned = meta.clone();
+		assertEquals(meta, cloned);
+		assertEquals(meta.hashCode(), cloned.hashCode());
+
+		Set<Namespaced> clonedKeys = cloned.getPlaceableKeys();
+		assertEquals(3, clonedKeys.size());
+	}
+
+	@Test
+	void clone_WithDestroyableKeys_ClonedExactly()
+	{
+		meta.setDestroyableKeys(Set.of(
+				Material.STONE.getKey(),
+				Material.DIRT.getKey(),
+				Material.GRASS.getKey(),
+				Material.GRANITE.getKey()
+		));
+		ItemMetaMock cloned = meta.clone();
+		assertEquals(meta, cloned);
+		assertEquals(meta.hashCode(), cloned.hashCode());
+
+		Set<Namespaced> clonedKeys = cloned.getDestroyableKeys();
+		assertEquals(4, clonedKeys.size());
+	}
+
+	@Test
 	void hasLore_NoLore_False()
 	{
 		assertFalse(meta.hasLore());
@@ -516,6 +563,197 @@ class ItemMetaMockTest
 	}
 
 	@Test
+	void testDestroyableKeysSet() {
+		Set<Namespaced> expectedKeys = Set.of(
+				Material.CAKE.getKey(),
+				Material.CHEST.getKey(),
+				Material.ACACIA_SLAB.getKey()
+		);
+		meta.setDestroyableKeys(expectedKeys);
+		assertEquals(expectedKeys, meta.getDestroyableKeys());
+	}
+
+	@Test
+	void testPlaceableKeys() {
+		Set<Namespaced> expectedKeys = Set.of(
+				Material.ACACIA_PRESSURE_PLATE.getKey(),
+				Material.BLACK_WOOL.getKey(),
+				Material.CRIMSON_NYLIUM.getKey()
+		);
+		meta.setPlaceableKeys(expectedKeys);
+		assertEquals(expectedKeys, meta.getPlaceableKeys());
+	}
+
+	@Test
+	void testGetCanPlaceOn() {
+		Set<Namespaced> expectedKeys = Set.of(
+				Material.ACACIA_PRESSURE_PLATE.getKey(),
+				Material.BLACK_WOOL.getKey(),
+				Material.CRIMSON_NYLIUM.getKey()
+		);
+		meta.setPlaceableKeys(expectedKeys);
+
+		for (Material material : meta.getCanPlaceOn())
+		{
+			assertTrue(expectedKeys.contains(material.getKey()));
+		}
+	}
+
+	@Test
+	void testSetCanPlaceOn() {
+		Set<Material> expectedKeys = Set.of(
+				Material.ACACIA_PRESSURE_PLATE,
+				Material.BLACK_WOOL,
+				Material.CRIMSON_NYLIUM
+		);
+		meta.setCanPlaceOn(expectedKeys);
+
+		for (Material material : meta.getCanPlaceOn())
+		{
+			assertTrue(expectedKeys.contains(material));
+		}
+	}
+
+	@Test
+	void testSetCanPlaceOn_NullThrows()
+	{
+		assertThrows(IllegalArgumentException.class, () -> meta.setCanPlaceOn(null));
+	}
+
+	@Test
+	void testSetCanPlaceOn_LegacyKey_Throws()
+	{
+		Set<Material> input = Set.of(
+				Material.LEGACY_AIR
+		);
+
+		assertThrows(IllegalArgumentException.class, () -> meta.setCanPlaceOn(input));
+	}
+
+	@Test
+	void testGetCanPlaceON_NonBukkitKey_Skipped()
+	{
+		meta.setPlaceableKeys(List.of(
+				Material.ACACIA_PRESSURE_PLATE.getKey(),
+				Material.BLACK_WOOL.getKey(),
+				Material.CRIMSON_NYLIUM.getKey(),
+				Material.ACACIA_BOAT.getKey(),
+				new Namespaced()
+				{
+					@Override
+					public @NotNull String getNamespace()
+					{
+						return "minecraft";
+					}
+
+					@Override
+					public @NotNull String getKey()
+					{
+						return "test";
+					}
+				}
+		));
+
+		Set<Material> expectedKeys = Set.of(
+				Material.ACACIA_PRESSURE_PLATE,
+				Material.BLACK_WOOL,
+				Material.CRIMSON_NYLIUM,
+				Material.ACACIA_BOAT
+		);
+		for (Material material : meta.getCanPlaceOn())
+		{
+			assertTrue(expectedKeys.contains(material));
+		}
+
+		assertEquals(4, meta.getCanPlaceOn().size());
+	}
+
+
+	@Test
+	void testGetCanDestroy() {
+		Set<Namespaced> expectedKeys = Set.of(
+				Material.ACACIA_PRESSURE_PLATE.getKey(),
+				Material.BLACK_WOOL.getKey(),
+				Material.CRIMSON_NYLIUM.getKey()
+		);
+		meta.setDestroyableKeys(expectedKeys);
+
+		for (Material material : meta.getCanDestroy())
+		{
+			assertTrue(expectedKeys.contains(material.getKey()));
+		}
+	}
+
+	@Test
+	void testSetCanDestroy() {
+		Set<Material> expectedKeys = Set.of(
+				Material.ACACIA_PRESSURE_PLATE,
+				Material.BLACK_WOOL,
+				Material.CRIMSON_NYLIUM
+		);
+		meta.setCanDestroy(expectedKeys);
+
+		for (Material material : meta.getCanDestroy())
+		{
+			assertTrue(expectedKeys.contains(material));
+		}
+	}
+
+	@Test
+	void testSetCanDestroy_NullThrows()
+	{
+		assertThrows(IllegalArgumentException.class, () -> meta.setCanDestroy(null));
+	}
+
+	@Test
+	void testSetCanDestroy_LegacyKey_Throws()
+	{
+		Set<Material> input = Set.of(
+				Material.LEGACY_AIR
+		);
+
+		assertThrows(IllegalArgumentException.class, () -> meta.setCanDestroy(input));
+	}
+
+	@Test
+	void testGetCanDestroy_NonBukkitKey_Skipped()
+	{
+		meta.setDestroyableKeys(List.of(
+				Material.ACACIA_PRESSURE_PLATE.getKey(),
+				Material.BLACK_WOOL.getKey(),
+				Material.CRIMSON_NYLIUM.getKey(),
+				Material.ACACIA_BOAT.getKey(),
+				new Namespaced()
+				{
+					@Override
+					public @NotNull String getNamespace()
+					{
+						return "minecraft";
+					}
+
+					@Override
+					public @NotNull String getKey()
+					{
+						return "test";
+					}
+				}
+		));
+
+		Set<Material> expectedKeys = Set.of(
+				Material.ACACIA_PRESSURE_PLATE,
+				Material.BLACK_WOOL,
+				Material.CRIMSON_NYLIUM,
+				Material.ACACIA_BOAT
+		);
+		for (Material material : meta.getCanDestroy())
+		{
+			assertTrue(expectedKeys.contains(material));
+		}
+
+		assertEquals(4, meta.getCanDestroy().size());
+	}
+
+	@Test
 	void testDamageCorrectlySet()
 	{
 		int value = 500;
@@ -590,6 +828,17 @@ class ItemMetaMockTest
 		meta.setDamage(5);
 		meta.setRepairCost(3);
 
+		Set<Namespaced> expectedPlaceableKeys = Set.of(
+				Material.STONE.getKey(),
+				Material.ACACIA_BOAT.getKey()
+		);
+		meta.setPlaceableKeys(expectedPlaceableKeys);
+
+		Set<Namespaced> expectedDestroyableKeys = Set.of(
+				Material.BEEHIVE.getKey()
+		);
+		meta.setDestroyableKeys(expectedDestroyableKeys);
+
 		Map<String, Object> actual = meta.serialize();
 
 		// Perform tests
@@ -598,6 +847,8 @@ class ItemMetaMockTest
 		assertEquals(true, actual.get("Unbreakable"));
 		assertEquals(5, actual.get("Damage"));
 		assertEquals(3, actual.get("repair-cost"));
+		assertEquals(expectedPlaceableKeys, actual.get("placeable-keys"));
+		assertEquals(expectedDestroyableKeys, actual.get("destroyable-keys"));
 	}
 
 	@Test

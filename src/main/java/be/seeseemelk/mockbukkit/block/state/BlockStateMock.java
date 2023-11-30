@@ -21,6 +21,7 @@ import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.BufferedReader;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -163,7 +164,7 @@ public class BlockStateMock implements BlockState
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public org.bukkit.material.@NotNull MaterialData getData()
 	{
 		return new org.bukkit.material.MaterialData(material);
@@ -224,7 +225,7 @@ public class BlockStateMock implements BlockState
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setData(@NotNull org.bukkit.material.MaterialData data)
 	{
 		this.material = data.getItemType();
@@ -276,7 +277,7 @@ public class BlockStateMock implements BlockState
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.6.2")
 	public byte getRawData()
 	{
 		// TODO Auto-generated method stub
@@ -284,7 +285,7 @@ public class BlockStateMock implements BlockState
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.6.2")
 	public void setRawData(byte data)
 	{
 		// TODO Auto-generated method stub
@@ -329,6 +330,13 @@ public class BlockStateMock implements BlockState
 	public @NotNull BlockData getBlockData()
 	{
 		return this.blockData.clone();
+	}
+
+	@Override
+	public @NotNull BlockState copy()
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -442,12 +450,9 @@ public class BlockStateMock implements BlockState
 			return new CreatureSpawnerMock(block);
 		case DAYLIGHT_DETECTOR:
 			return new DaylightDetectorMock(block);
-		case COMMAND_BLOCK:
-		case CHAIN_COMMAND_BLOCK:
-		case REPEATING_COMMAND_BLOCK:
+		case COMMAND_BLOCK, CHAIN_COMMAND_BLOCK, REPEATING_COMMAND_BLOCK:
 			return new CommandBlockMock(block);
-		case CAMPFIRE:
-		case SOUL_CAMPFIRE:
+		case CAMPFIRE, SOUL_CAMPFIRE:
 			return new CampfireMock(block);
 		case BELL:
 			return new BellMock(block);
@@ -461,8 +466,7 @@ public class BlockStateMock implements BlockState
 			return new DispenserMock(block);
 		case DROPPER:
 			return new DropperMock(block);
-		case CHEST:
-		case TRAPPED_CHEST:
+		case CHEST, TRAPPED_CHEST:
 			return new ChestMock(block);
 		case ENDER_CHEST:
 			return new EnderChestMock(block);

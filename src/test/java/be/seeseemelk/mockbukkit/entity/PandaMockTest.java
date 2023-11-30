@@ -14,144 +14,144 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class PandaMockTest
+class PandaMockTest
 {
 
 	private PandaMock panda;
 
 	@BeforeEach
-	public void setUp() {
+	void setUp() {
 		ServerMock server = MockBukkit.mock();
 		panda = new PandaMock(server, UUID.randomUUID());
 	}
 
 	@AfterEach
-	public void tearDown() {
+	void tearDown() {
 		MockBukkit.unmock();
 	}
 
 	@Test
-	public void testGetMainGene() {
+	void testGetMainGene() {
 		assertEquals(Panda.Gene.NORMAL, panda.getMainGene());
 	}
 
 	@Test
-	public void testGetHiddenGene() {
+	void testGetHiddenGene() {
 		assertEquals(Panda.Gene.NORMAL, panda.getHiddenGene());
 	}
 
 	@Test
-	public void testSetMainGene() {
+	void testSetMainGene() {
 		panda.setMainGene(Panda.Gene.AGGRESSIVE);
 		assertEquals(Panda.Gene.AGGRESSIVE, panda.getMainGene());
 	}
 
 	@Test
-	public void testSetHiddenGene() {
+	void testSetHiddenGene() {
 		panda.setHiddenGene(Panda.Gene.AGGRESSIVE);
 		assertEquals(Panda.Gene.AGGRESSIVE, panda.getHiddenGene());
 	}
 
 	@Test
-	public void testEntityType() {
+	void testEntityType() {
 		assertEquals(EntityType.PANDA, panda.getType());
 	}
 
 	@Test
-	public void testSitting() {
+	void testSitting() {
 		assertFalse(panda.isSitting());
 	}
 
 	@Test
-	public void testSetSitting() {
+	void testSetSitting() {
 		panda.setSitting(true);
 		assertTrue(panda.isSitting());
 	}
 
 	@Test
-	public void testRolling() {
+	void testRolling() {
 		assertFalse(panda.isRolling());
 	}
 
 	@Test
-	public void testSetRolling() {
+	void testSetRolling() {
 		panda.setRolling(true);
 		assertTrue(panda.isRolling());
 	}
 
 	@Test
-	public void testSneezing() {
+	void testSneezing() {
 		assertFalse(panda.isSneezing());
 	}
 
 	@Test
-	public void testSetSneezing() {
+	void testSetSneezing() {
 		panda.setSneezing(true);
 		assertTrue(panda.isSneezing());
 	}
 
 	@Test
-	public void testEating() {
+	void testEating() {
 		assertFalse(panda.isEating());
 	}
 
 	@Test
-	public void testSetEating() {
+	void testSetEating() {
 		panda.setEating(true);
 		assertTrue(panda.isEating());
 	}
 
 	@Test
-	public void testOnBack() {
+	void testOnBack() {
 		assertFalse(panda.isOnBack());
 	}
 
 	@Test
-	public void testSetOnBack() {
+	void testSetOnBack() {
 		panda.setOnBack(true);
 		assertTrue(panda.isOnBack());
 	}
 
 	@Test
-	public void testDefaultScared() {
+	void testDefaultScared() {
 		assertFalse(panda.isScared());
 	}
 
 	@Test
-	public void testScared() {
+	void testScared() {
 		panda.setMainGene(Panda.Gene.WORRIED);
 		assertTrue(panda.isScared());
 	}
 
 	@Test
-	public void testGetUnHappyTicks() {
+	void testGetUnHappyTicks() {
 		assertEquals(0, panda.getUnhappyTicks());
 	}
 
 	@Test
-	public void testSetUnHappyTicks() {
+	void testSetUnHappyTicks() {
 		panda.setUnhappyTicks(100);
 		assertEquals(100, panda.getUnhappyTicks());
 	}
 
 	@Test
-	public void testGetSneezeTicks() {
+	void testGetSneezeTicks() {
 		assertEquals(0, panda.getSneezeTicks());
 	}
 
 	@Test
-	public void testSetSneezeTicks() {
+	void testSetSneezeTicks() {
 		panda.setSneezeTicks(100);
 		assertEquals(100, panda.getSneezeTicks());
 	}
 
 	@Test
-	public void testGetEatingTicks() {
+	void testGetEatingTicks() {
 		assertEquals(0, panda.getEatingTicks());
 	}
 
 	@Test
-	public void testSetEatingTicks() {
+	void testSetEatingTicks() {
 		panda.setEatingTicks(100);
 		assertEquals(100, panda.getEatingTicks());
 	}

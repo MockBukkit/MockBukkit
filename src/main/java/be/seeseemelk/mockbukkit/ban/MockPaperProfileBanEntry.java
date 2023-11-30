@@ -28,7 +28,7 @@ public class MockPaperProfileBanEntry implements BanEntry<PlayerProfile>
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.20")
 	public @NotNull String getTarget()
 	{
 		return this.target.getName() != null ? this.target.getName() : "";
