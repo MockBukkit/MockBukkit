@@ -7,25 +7,25 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class MaterialTagMockTest
+class MaterialTagMockTest
 {
 
 	private MaterialTagMock tag;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		tag = new MaterialTagMock(new NamespacedKey("minecraft", "test"), Material.DIRT, Material.GRASS_BLOCK);
 	}
 
 	@Test
-	public void getKey()
+	void getKey()
 	{
 		assertEquals(new NamespacedKey("minecraft", "test"), tag.getKey());
 	}
 
 	@Test
-	public void isTagged()
+	void isTagged()
 	{
 		assertTrue(tag.isTagged(Material.DIRT));
 		assertTrue(tag.isTagged(Material.GRASS_BLOCK));
@@ -33,7 +33,7 @@ public class MaterialTagMockTest
 	}
 
 	@Test
-	public void getValues()
+	void getValues()
 	{
 		assertEquals(2, tag.getValues().size());
 		assertTrue(tag.getValues().contains(Material.DIRT));

@@ -4,11 +4,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ThreadAccessExceptionTest
+class ThreadAccessExceptionTest
 {
 
 	@Test
-	public void testConstructor()
+	void testConstructor()
 	{
 		ThreadAccessException exception = new ThreadAccessException();
 
@@ -16,7 +16,7 @@ public class ThreadAccessExceptionTest
 	}
 
 	@Test
-	public void testConstructorWithMessage()
+	void testConstructorWithMessage()
 	{
 		ThreadAccessException exception = new ThreadAccessException("Hello, world!");
 
