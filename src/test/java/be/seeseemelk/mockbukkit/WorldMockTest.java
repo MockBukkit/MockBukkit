@@ -2091,4 +2091,29 @@ class WorldMockTest
 		world.setEnvironment(World.Environment.THE_END);
 		assertFalse(world.doesRespawnAnchorWork());
 	}
+
+	@Test
+	void testGetEntity()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ZOMBIE);
+		assertEquals(entity, world.getEntity(entity.getUniqueId()));
+	}
+
+	@Test
+	void testGetEntityNull()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertThrows(IllegalArgumentException.class, () -> world.getEntity(null));
+	}
+
+	@Test
+	void testGetEntityWrongWorld()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		WorldMock world2 = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ZOMBIE);
+		assertNull(world2.getEntity(entity.getUniqueId()));
+	}
+
 }
