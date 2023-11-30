@@ -2091,4 +2091,18 @@ class WorldMockTest
 		world.setEnvironment(World.Environment.THE_END);
 		assertFalse(world.doesRespawnAnchorWork());
 	}
+
+	@Test
+	void testIsUltrawarm()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setEnvironment(World.Environment.NETHER);
+		assertTrue(world.isUltrawarm());
+
+		world.setEnvironment(World.Environment.NORMAL);
+		assertFalse(world.isUltrawarm());
+		world.setEnvironment(World.Environment.THE_END);
+		assertFalse(world.isUltrawarm());
+	}
+
 }

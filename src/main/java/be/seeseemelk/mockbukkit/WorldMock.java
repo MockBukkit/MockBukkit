@@ -2540,8 +2540,7 @@ public class WorldMock implements World
 	@ApiStatus.ScheduledForRemoval(inVersion = "1.21")
 	public boolean isUltrawarm()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.isUltraWarm();
 	}
 
 	@Override
