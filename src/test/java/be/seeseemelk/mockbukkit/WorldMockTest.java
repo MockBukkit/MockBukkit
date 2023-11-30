@@ -1304,7 +1304,6 @@ class WorldMockTest
 				Arguments.of(EntityType.RABBIT, RabbitMock.class),
 				Arguments.of(EntityType.OCELOT, OcelotMock.class),
 				Arguments.of(EntityType.SLIME, SlimeMock.class),
-				Arguments.of(EntityType.OCELOT, OcelotMock.class),
 				Arguments.of(EntityType.PARROT, ParrotMock.class),
 				Arguments.of(EntityType.SQUID, SquidMock.class),
 				Arguments.of(EntityType.GLOW_SQUID, GlowSquidMock.class),

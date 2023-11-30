@@ -5,26 +5,19 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.inventory.ChestInventoryMock;
 import org.bukkit.entity.ChestBoat;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.loot.LootTable;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 public class ChestBoatMock extends BoatMock implements ChestBoat
 {
 
-	private boolean refillEnabled;
-	private long lastFilled = -1;
-	private Map<UUID, Long> lootedPlayers;
-	private long nextRefill = -1;
-
 	private final Inventory inventory;
-
 
 	/**
 	 * Constructs a new {@link ChestBoatMock} on the provided {@link ServerMock} with a specified {@link UUID}.
@@ -41,18 +34,21 @@ public class ChestBoatMock extends BoatMock implements ChestBoat
 	@Override
 	public boolean isRefillEnabled()
 	{
-		return this.refillEnabled;
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	public void setRefillEnabled(boolean refillEnabled)
 	{
-		this.refillEnabled = refillEnabled;
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public boolean hasBeenFilled()
 	{
-		return this.lastFilled != -1;
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -65,78 +61,50 @@ public class ChestBoatMock extends BoatMock implements ChestBoat
 	@Override
 	public boolean hasPlayerLooted(@NotNull UUID player)
 	{
-		return this.lootedPlayers != null && this.lootedPlayers.containsKey(player);
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public @Nullable Long getLastLooted(@NotNull UUID player)
 	{
-		return this.lootedPlayers != null ? this.lootedPlayers.get(player) : null;
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public boolean setHasPlayerLooted(@NotNull UUID player, boolean looted)
 	{
-		final boolean hasLooted = hasPlayerLooted(player);
-
-		if (this.lootedPlayers == null)
-		{
-			this.lootedPlayers = new HashMap<>();
-		}
-
-		if (hasLooted != looted)
-		{
-			if (looted)
-			{
-				this.lootedPlayers.computeIfAbsent(player, p -> System.currentTimeMillis());
-			}
-			else
-			{
-				this.lootedPlayers.remove(player);
-			}
-		}
-		return hasLooted;
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public boolean hasPendingRefill()
 	{
-		return this.nextRefill != -1  && nextRefill > lastFilled;
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public long getLastFilled()
 	{
-		return this.lastFilled;
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public long getNextRefill()
 	{
-		return this.nextRefill;
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public long setNextRefill(long refillAt)
 	{
-		final long oldRefill = this.nextRefill;
-		this.nextRefill = (refillAt < -1) ? -1 : refillAt;
-
-		new BukkitRunnable()
-		{
-			@Override
-			public void run()
-			{
-				if (nextRefill == server.getScheduler().getCurrentTick())
-				{
-					nextRefill = -1;
-					lastFilled = server.getScheduler().getCurrentTick();
-				}
-
-			}
-		}.runTaskTimer(null, 1, 1);
-
-		return oldRefill;
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -177,6 +145,12 @@ public class ChestBoatMock extends BoatMock implements ChestBoat
 	public @NotNull Entity getEntity()
 	{
 		return this;
+	}
+
+	@Override
+	public @NotNull EntityType getType()
+	{
+		return EntityType.CHEST_BOAT;
 	}
 
 }
