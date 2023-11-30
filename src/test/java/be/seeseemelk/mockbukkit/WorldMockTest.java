@@ -2105,4 +2105,16 @@ class WorldMockTest
 		assertFalse(world.isUltrawarm());
 	}
 
+	@Test
+	void testIsFixedTime()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertFalse(world.isFixedTime());
+
+		world.setEnvironment(World.Environment.NETHER);
+		assertTrue(world.isFixedTime());
+
+		world.setEnvironment(World.Environment.THE_END);
+		assertTrue(world.isFixedTime());
+	}
 }

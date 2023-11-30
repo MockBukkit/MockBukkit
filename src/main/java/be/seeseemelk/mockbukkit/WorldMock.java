@@ -2588,8 +2588,7 @@ public class WorldMock implements World
 	@Override
 	public boolean isFixedTime()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.environment == Environment.THE_END || this.environment == Environment.NETHER;
 	}
 
 	@Override
