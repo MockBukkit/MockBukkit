@@ -1519,8 +1519,11 @@ public class WorldMock implements World
 	@Override
 	public @Nullable Entity getEntity(@NotNull UUID uuid)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(uuid != null, "UUID cannot be null");
+		return getEntities().stream()
+				.filter(entity -> entity.getUniqueId().equals(uuid))
+				.findFirst()
+				.orElse(null);
 	}
 
 	@Override
