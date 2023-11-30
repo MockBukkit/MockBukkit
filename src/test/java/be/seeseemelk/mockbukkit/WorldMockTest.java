@@ -2058,4 +2058,37 @@ class WorldMockTest
 		assertEquals(10, world.getTicksPerMonsterSpawns());
 	}
 
+	@Test
+	void testIsRespawnAnchorWorks()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setEnvironment(World.Environment.NETHER);
+		assertTrue(world.isRespawnAnchorWorks());
+	}
+
+	@Test
+	void testIsRespawnAnchorWorksFalse()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertFalse(world.isRespawnAnchorWorks());
+		world.setEnvironment(World.Environment.THE_END);
+		assertFalse(world.isRespawnAnchorWorks());
+	}
+
+	@Test
+	void testDoesRespawnAnchorWork()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setEnvironment(World.Environment.NETHER);
+		assertTrue(world.doesRespawnAnchorWork());
+	}
+
+	@Test
+	void testDoesRespawnAnchorWorkFalse()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertFalse(world.doesRespawnAnchorWork());
+		world.setEnvironment(World.Environment.THE_END);
+		assertFalse(world.doesRespawnAnchorWork());
+	}
 }
