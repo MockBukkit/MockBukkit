@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ThrownExpBottleMockTest
 {
@@ -44,6 +45,12 @@ class ThrownExpBottleMockTest
 
 		assertEquals(Material.DIAMOND, bottle.getItem().getType());
 		assertEquals(1, bottle.getItem().getAmount());
+	}
+
+	@Test
+	void testSetItemNull()
+	{
+		assertThrows(IllegalArgumentException.class, () -> bottle.setItem(null));
 	}
 
 	@Test

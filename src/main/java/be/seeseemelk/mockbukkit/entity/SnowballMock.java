@@ -4,24 +4,24 @@ import be.seeseemelk.mockbukkit.ServerMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.ThrownExpBottle;
+import org.bukkit.entity.Snowball;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
-public class ThrownExpBottleMock extends ThrowableProjectileMock implements ThrownExpBottle
+public class SnowballMock extends ThrowableProjectileMock implements Snowball
 {
 
-	private @NotNull ItemStack item = new ItemStack(Material.EXPERIENCE_BOTTLE);
+	private ItemStack item = new ItemStack(Material.SNOWBALL);
 
 	/**
-	 * Constructs a new {@link ThrownExpBottleMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link SnowballMock} on the provided {@link ServerMock} with a specified {@link UUID}.
 	 *
 	 * @param server The server to create the entity on.
 	 * @param uuid   The UUID of the entity.
 	 */
-	public ThrownExpBottleMock(@NotNull ServerMock server, @NotNull UUID uuid)
+	public SnowballMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 	}
@@ -45,7 +45,7 @@ public class ThrownExpBottleMock extends ThrowableProjectileMock implements Thro
 	@Override
 	public @NotNull EntityType getType()
 	{
-		return EntityType.THROWN_EXP_BOTTLE;
+		return EntityType.SNOWBALL;
 	}
 
 }

@@ -64,6 +64,7 @@ import be.seeseemelk.mockbukkit.entity.SkeletonHorseMock;
 import be.seeseemelk.mockbukkit.entity.SkeletonMock;
 import be.seeseemelk.mockbukkit.entity.SlimeMock;
 import be.seeseemelk.mockbukkit.entity.SmallFireballMock;
+import be.seeseemelk.mockbukkit.entity.SnowballMock;
 import be.seeseemelk.mockbukkit.entity.SpawnerMinecartMock;
 import be.seeseemelk.mockbukkit.entity.SpiderMock;
 import be.seeseemelk.mockbukkit.entity.SquidMock;
@@ -1308,6 +1309,8 @@ class WorldMockTest
 				Arguments.of(EntityType.MAGMA_CUBE, MagmaCubeMock.class),
 				Arguments.of(EntityType.ENDERMITE, EndermiteMock.class),
 				Arguments.of(EntityType.SILVERFISH, SilverfishMock.class),
+				Arguments.of(EntityType.THROWN_EXP_BOTTLE, ThrownExpBottleMock.class),
+				Arguments.of(EntityType.SNOWBALL, SnowballMock.class),
 				Arguments.of(EntityType.TURTLE, TurtleMock.class),
 				Arguments.of(EntityType.THROWN_EXP_BOTTLE, ThrownExpBottleMock.class)
 		);
@@ -2088,4 +2091,55 @@ class WorldMockTest
 		world.setEnvironment(World.Environment.THE_END);
 		assertFalse(world.doesRespawnAnchorWork());
 	}
+
+	@Test
+	void testIsUltrawarm()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setEnvironment(World.Environment.NETHER);
+		assertTrue(world.isUltrawarm());
+
+		world.setEnvironment(World.Environment.NORMAL);
+		assertFalse(world.isUltrawarm());
+		world.setEnvironment(World.Environment.THE_END);
+		assertFalse(world.isUltrawarm());
+	}
+
+	@Test
+	void testIsFixedTime()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertFalse(world.isFixedTime());
+
+		world.setEnvironment(World.Environment.NETHER);
+		assertTrue(world.isFixedTime());
+
+		world.setEnvironment(World.Environment.THE_END);
+		assertTrue(world.isFixedTime());
+	}
+
+  @Test
+	void testGetEntity()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ZOMBIE);
+		assertEquals(entity, world.getEntity(entity.getUniqueId()));
+	}
+
+	@Test
+	void testGetEntityNull()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertThrows(IllegalArgumentException.class, () -> world.getEntity(null));
+	}
+
+	@Test
+	void testGetEntityWrongWorld()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		WorldMock world2 = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ZOMBIE);
+		assertNull(world2.getEntity(entity.getUniqueId()));
+	}
+
 }
