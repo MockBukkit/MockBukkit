@@ -505,6 +505,13 @@ public class WorldMock implements World
 	}
 
 	@Override
+	public boolean hasStructureAt(@NotNull Position position, @NotNull Structure structure)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull MoonPhase getMoonPhase()
 	{
 		// TODO Auto-generated method stub
