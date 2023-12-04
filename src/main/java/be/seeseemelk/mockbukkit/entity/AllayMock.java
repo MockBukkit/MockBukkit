@@ -1,7 +1,6 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -31,7 +30,7 @@ public class AllayMock extends CreatureMock implements Allay
 
 	private final @NotNull Inventory inventory;
 	private Material currentItem;
-	private boolean canDulicate = true;
+	private boolean canDuplicate = true;
 	private long duplicationCoolDown = 0;
 	private boolean isDancing = false;
 	private Location jukebox = null;
@@ -155,13 +154,13 @@ public class AllayMock extends CreatureMock implements Allay
 	@Override
 	public boolean canDuplicate()
 	{
-		return this.canDulicate;
+		return this.canDuplicate;
 	}
 
 	@Override
 	public void setCanDuplicate(boolean canDuplicate)
 	{
-		this.canDulicate = canDuplicate;
+		this.canDuplicate = canDuplicate;
 	}
 
 	@Override
@@ -180,7 +179,7 @@ public class AllayMock extends CreatureMock implements Allay
 	public void resetDuplicationCooldown()
 	{
 		this.duplicationCoolDown = 6000L;
-		this.canDulicate = false;
+		this.canDuplicate = false;
 	}
 
 	@Override
@@ -197,7 +196,7 @@ public class AllayMock extends CreatureMock implements Allay
 				"Location must be a Jukebox");
 
 		this.isDancing = true;
-		this.jukebox = location;
+		this.jukebox = location.clone();
 	}
 
 	@Override

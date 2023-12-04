@@ -173,6 +173,7 @@ class AllayMockTest
 		allayMock.startDancing(location);
 		assertTrue(allayMock.isDancing());
 		assertEquals(location, allayMock.getJukebox());
+		assertNotSame(location, allayMock.getJukebox());
 	}
 
 	@Test
