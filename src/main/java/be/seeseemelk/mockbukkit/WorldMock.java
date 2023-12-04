@@ -505,6 +505,13 @@ public class WorldMock implements World
 	}
 
 	@Override
+	public boolean hasStructureAt(@NotNull Position position, @NotNull Structure structure)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull MoonPhase getMoonPhase()
 	{
 		// TODO Auto-generated method stub
@@ -1520,8 +1527,11 @@ public class WorldMock implements World
 	@Override
 	public @Nullable Entity getEntity(@NotNull UUID uuid)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(uuid != null, "UUID cannot be null");
+		return getEntities().stream()
+				.filter(entity -> entity.getUniqueId().equals(uuid))
+				.findFirst()
+				.orElse(null);
 	}
 
 	@Override
@@ -2541,8 +2551,7 @@ public class WorldMock implements World
 	@ApiStatus.ScheduledForRemoval(inVersion = "1.21")
 	public boolean isUltrawarm()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.isUltraWarm();
 	}
 
 	@Override
@@ -2590,8 +2599,7 @@ public class WorldMock implements World
 	@Override
 	public boolean isFixedTime()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.environment == Environment.THE_END || this.environment == Environment.NETHER;
 	}
 
 	@Override
