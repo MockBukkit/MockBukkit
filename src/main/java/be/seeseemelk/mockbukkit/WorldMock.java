@@ -995,6 +995,7 @@ public class WorldMock implements World
 		EntityMock entity = this.mockEntity(location, clazz, randomizeData);
 
 		entity.setLocation(location);
+		entity.setSpawnReason(reason);
 
 		if (entity instanceof MobMock mob)
 		{
