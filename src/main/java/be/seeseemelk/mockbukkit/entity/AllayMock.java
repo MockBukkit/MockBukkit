@@ -226,7 +226,7 @@ public class AllayMock extends CreatureMock implements Allay
 	@Override
 	public @Nullable Location getJukebox()
 	{
-		return this.jukebox;
+		return this.jukebox.clone();
 	}
 
 	@Override
