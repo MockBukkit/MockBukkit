@@ -2926,7 +2926,7 @@ public class WorldMock implements World
 		return switch (environment)
 		{
 			case NETHER, THE_END -> 256;
-            case NORMAL -> 384;
+			case NORMAL -> 384;
 			case CUSTOM -> throw new UnimplementedOperationException("We don't have support for Datapacks");
 		};
 	}
