@@ -42,6 +42,7 @@ import be.seeseemelk.mockbukkit.entity.GuardianMock;
 import be.seeseemelk.mockbukkit.entity.HopperMinecartMock;
 import be.seeseemelk.mockbukkit.entity.HorseMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
+import be.seeseemelk.mockbukkit.entity.LeashHitchMock;
 import be.seeseemelk.mockbukkit.entity.LlamaMock;
 import be.seeseemelk.mockbukkit.entity.LlamaSpitMock;
 import be.seeseemelk.mockbukkit.entity.MagmaCubeMock;
@@ -1312,7 +1313,8 @@ class WorldMockTest
 				Arguments.of(EntityType.THROWN_EXP_BOTTLE, ThrownExpBottleMock.class),
 				Arguments.of(EntityType.SNOWBALL, SnowballMock.class),
 				Arguments.of(EntityType.TURTLE, TurtleMock.class),
-				Arguments.of(EntityType.THROWN_EXP_BOTTLE, ThrownExpBottleMock.class)
+				Arguments.of(EntityType.THROWN_EXP_BOTTLE, ThrownExpBottleMock.class),
+				Arguments.of(EntityType.LEASH_HITCH, LeashHitchMock.class)
 		);
 	}
 
