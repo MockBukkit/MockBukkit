@@ -50,6 +50,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.spigotmc.event.entity.EntityDismountEvent;
@@ -108,7 +109,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private boolean gravity = true;
 
 	private final EntityData entityData;
-
+	private CreatureSpawnEvent.SpawnReason spawnReason = CreatureSpawnEvent.SpawnReason.CUSTOM;
 	/**
 	 * Constructs a new EntityMock on the provided {@link ServerMock} with a specified {@link UUID}.
 	 *
@@ -752,14 +753,14 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.12")
 	public Entity getPassenger()
 	{
 		return isEmpty() ? null : this.passengers.get(0);
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.12")
 	public boolean setPassenger(@NotNull Entity passenger)
 	{
 		eject(); // Make sure there is only one passenger
@@ -770,6 +771,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	public @NotNull List<Entity> getPassengers()
 	{
 		return Collections.unmodifiableList(this.passengers);
+	}
+
+	@Override
+	public @NotNull Set<Player> getTrackedBy()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	/**
@@ -1222,8 +1230,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public CreatureSpawnEvent.@NotNull SpawnReason getEntitySpawnReason()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.spawnReason;
 	}
 
 	@Override
@@ -1402,4 +1409,9 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		throw new UnsupportedOperationException();
 	}
 
+	@ApiStatus.Internal
+	public void setSpawnReason(CreatureSpawnEvent.SpawnReason spawnReason)
+	{
+		this.spawnReason = spawnReason;
+	}
 }

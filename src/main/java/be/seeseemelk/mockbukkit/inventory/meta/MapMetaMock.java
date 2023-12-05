@@ -49,7 +49,15 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 		}
 		this.mapView = meta.getMapView();
 		this.color = meta.getColor();
-		this.scaling = meta instanceof MapMetaMock metaMock ? metaMock.scaling : meta.isScaling() ? SCALING_TRUE : SCALING_FALSE;
+		if (meta instanceof MapMetaMock metaMock)
+		{
+			this.scaling = metaMock.scaling;
+		}
+		else
+		{
+			if (meta.isScaling()) this.scaling = SCALING_TRUE;
+			else this.scaling = SCALING_FALSE;
+		}
 	}
 
 	@Override
@@ -160,11 +168,12 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 	{
 		if (!(obj instanceof MapMeta meta))
 			return false;
-		return super.equals(obj) &&
-				(!this.hasMapId() && !meta.hasMapId() || Objects.equals(this.mapId, meta.getMapId())) &&
-				Objects.equals(this.mapView, meta.getMapView()) &&
-				Objects.equals(this.color, meta.getColor()) &&
-				((meta instanceof MapMetaMock mapMeta) ? this.scaling == mapMeta.scaling : meta.isScaling() ? this.scaling == 1 : this.scaling == 2);
+		if (!super.equals(obj) ||
+				((this.hasMapId() || meta.hasMapId()) && !Objects.equals(this.mapId, meta.getMapId())) ||
+				!Objects.equals(this.mapView, meta.getMapView()) ||
+				!Objects.equals(this.color, meta.getColor())) return false;
+		if (meta instanceof MapMetaMock mapMeta) return this.scaling == mapMeta.scaling;
+		return meta.isScaling() ? this.scaling == 1 : this.scaling == 2;
 	}
 
 	@Override

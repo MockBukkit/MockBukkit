@@ -55,28 +55,28 @@ public class SkeletonHorseMock extends AbstractHorseMock implements SkeletonHors
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public boolean isTrap()
 	{
 		return this.isTrapped;
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setTrap(boolean trap)
 	{
 		this.isTrapped = trap;
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.11")
 	public Horse.@NotNull Variant getVariant()
 	{
 		return Horse.Variant.SKELETON_HORSE;
 	}
 
 	@Override
-	public EntityType getType()
+	public @NotNull EntityType getType()
 	{
 		return EntityType.SKELETON_HORSE;
 	}

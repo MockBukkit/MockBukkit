@@ -76,7 +76,7 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setBlock(int x, int y, int z, @NotNull MaterialData material)
 	{
 		Preconditions.checkNotNull(material, "MaterialData cannot be null");
@@ -98,7 +98,7 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public void setRegion(int xMin, int yMin, int zMin, int xMax, int yMax, int zMax, @NotNull MaterialData material)
 	{
 		Preconditions.checkNotNull(material, "MaterialData cannot be null");
@@ -133,7 +133,7 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 
 	@NotNull
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.18")
 	public MaterialData getTypeAndData(int x, int y, int z)
 	{
 		return new MaterialData(this.getType(x, y, z));
@@ -150,7 +150,7 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.8.8")
 	public byte getData(int x, int y, int z)
 	{
 		return this.getTypeAndData(x, y, z).getData();

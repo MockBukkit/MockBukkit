@@ -1,8 +1,10 @@
 package be.seeseemelk.mockbukkit.scoreboard;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
 import com.google.common.base.Preconditions;
+import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
@@ -220,7 +222,7 @@ public class TeamMock implements Team
 	 * @deprecated
 	 */
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.9")
 	public @NotNull NameTagVisibility getNameTagVisibility()
 	{
 		checkRegistered();
@@ -240,7 +242,7 @@ public class TeamMock implements Team
 	 * @deprecated
 	 */
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.9")
 	public void setNameTagVisibility(@NotNull NameTagVisibility nameTagVisibility)
 	{
 		MockBukkit.getMock().getLogger().log(Level.WARNING, "Consider USE setOption() DEPRECATED");
@@ -260,7 +262,7 @@ public class TeamMock implements Team
 	 * @deprecated
 	 */
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.8.7")
 	public @NotNull Set<OfflinePlayer> getPlayers() throws IllegalStateException
 	{
 		checkRegistered();
@@ -297,7 +299,7 @@ public class TeamMock implements Team
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.8.7")
 	public void addPlayer(@NotNull OfflinePlayer offlinePlayer)
 	{
 		Preconditions.checkNotNull(offlinePlayer, "OfflinePlayer cannot be null");
@@ -332,7 +334,7 @@ public class TeamMock implements Team
 	 * @deprecated
 	 */
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.8.7")
 	public boolean removePlayer(@NotNull OfflinePlayer offlinePlayer)
 	{
 		Preconditions.checkNotNull(offlinePlayer, "OfflinePlayer cannot be null");
@@ -375,7 +377,7 @@ public class TeamMock implements Team
 	 * @deprecated
 	 */
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.8.7")
 	public boolean hasPlayer(@NotNull OfflinePlayer offlinePlayer)
 	{
 		Preconditions.checkNotNull(offlinePlayer, "OfflinePlayer cannot be null");
@@ -438,6 +440,13 @@ public class TeamMock implements Team
 		if (this.board != null)
 			return;
 		throw new IllegalStateException("Team not registered");
+	}
+
+	@Override
+	public @NotNull Iterable<? extends Audience> audiences()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 }

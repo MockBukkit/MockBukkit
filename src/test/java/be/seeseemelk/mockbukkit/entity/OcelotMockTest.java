@@ -15,45 +15,45 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class OcelotMockTest
+class OcelotMockTest
 {
 
 	private OcelotMock ocelot;
 
 	@BeforeEach
-	public void setUp() {
+	void setUp() {
 		ServerMock server = MockBukkit.mock();
 		ocelot = new OcelotMock(server, UUID.randomUUID());
 	}
 
 	@AfterEach
-	public void tearDown() {
+	void tearDown() {
 		MockBukkit.unmock();
 	}
 
 	@Test
-	public void testIsTrusting() {
+	void testIsTrusting() {
 		assertFalse(ocelot.isTrusting());
 	}
 
 	@Test
-	public void setTrusting() {
+	void setTrusting() {
 		ocelot.setTrusting(true);
 		assertTrue(ocelot.isTrusting());
 	}
 
 	@Test
-	public void testGetOcelotType() {
+	void testGetOcelotType() {
 		assertEquals(Ocelot.Type.WILD_OCELOT, ocelot.getCatType());
 	}
 
 	@Test
-	public void testSetOcelotType() {
+	void testSetOcelotType() {
 		assertThrows(UnsupportedOperationException.class, () -> ocelot.setCatType(Ocelot.Type.BLACK_CAT));
 	}
 
 	@Test
-	public void testEntityType() {
+	void testEntityType() {
 		assertEquals(EntityType.OCELOT, ocelot.getType());
 	}
 

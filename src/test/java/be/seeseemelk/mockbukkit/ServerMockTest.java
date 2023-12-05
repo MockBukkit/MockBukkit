@@ -38,11 +38,9 @@ import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Art;
 import org.bukkit.Bukkit;
 import org.bukkit.Fluid;
-import org.bukkit.GameEvent;
 import org.bukkit.GameMode;
 import org.bukkit.Keyed;
 import org.bukkit.Material;
-import org.bukkit.MusicInstrument;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Registry;
 import org.bukkit.Sound;
@@ -51,7 +49,6 @@ import org.bukkit.Warning;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.WorldType;
-import org.bukkit.advancement.Advancement;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Biome;
 import org.bukkit.block.data.BlockData;
@@ -61,6 +58,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Frog;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.SpawnCategory;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.memory.MemoryKey;
 import org.bukkit.event.inventory.InventoryType;
@@ -70,12 +68,8 @@ import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.server.MapInitializeEvent;
 import org.bukkit.event.server.ServerLoadEvent;
-import org.bukkit.generator.structure.Structure;
-import org.bukkit.generator.structure.StructureType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
-import org.bukkit.inventory.meta.trim.TrimMaterial;
-import org.bukkit.inventory.meta.trim.TrimPattern;
 import org.bukkit.loot.LootTables;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
@@ -86,12 +80,14 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.spigotmc.event.player.PlayerSpawnLocationEvent;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -102,6 +98,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -803,6 +800,16 @@ class ServerMockTest
 	}
 
 	@Test
+	void getCurrentTick_CorrectTick()
+	{
+		assertEquals(0, server.getCurrentTick());
+		server.getScheduler().performOneTick();
+		assertEquals(1, server.getCurrentTick());
+		server.getScheduler().performTicks(10);
+		assertEquals(11, server.getCurrentTick());
+	}
+
+	@Test
 	void createMap_IdIncrements()
 	{
 		WorldMock world = new WorldMock();
@@ -1491,6 +1498,73 @@ class ServerMockTest
 	{
 		assertNotNull(server.getServerConfiguration());
 		assertInstanceOf(ServerConfiguration.class, server.getServerConfiguration());
+	}
+
+	@ParameterizedTest
+	@MethodSource("testGetTicksPerSpawnsArguments")
+	void testGetTicksPerSpawns()
+	{
+		assertEquals(400, server.getTicksPerAnimalSpawns());
+	}
+
+	public static Stream<Arguments> testGetTicksPerSpawnsArguments()
+	{
+		return Stream.of(
+				Arguments.of(SpawnCategory.MONSTER, 1),
+				Arguments.of(SpawnCategory.ANIMAL, 400),
+				Arguments.of(SpawnCategory.WATER_AMBIENT, 1),
+				Arguments.of(SpawnCategory.WATER_ANIMAL, 1),
+				Arguments.of(SpawnCategory.AMBIENT, 1),
+				Arguments.of(SpawnCategory.WATER_UNDERGROUND_CREATURE, 1)
+		);
+	}
+
+	@Test
+	void testGetTicksPerSpawns_NullCategory()
+	{
+		assertThrows(IllegalArgumentException.class, () -> server.getTicksPerSpawns(null));
+	}
+
+	@Test
+	void testGetTicksPerSpawns_InvalidCategory()
+	{
+		assertThrows(IllegalArgumentException.class, () -> server.getTicksPerSpawns(SpawnCategory.MISC));
+	}
+
+	@Test
+	void testGetTicksPerMonsterSpawns()
+	{
+		assertEquals(1, server.getTicksPerMonsterSpawns());
+	}
+
+	@Test
+	void testGetTicksPerWaterAmbientSpawns()
+	{
+		assertEquals(1, server.getTicksPerWaterAmbientSpawns());
+	}
+
+	@Test
+	void testGetTicksPerWaterSpawns()
+	{
+		assertEquals(1, server.getTicksPerWaterSpawns());
+	}
+
+	@Test
+	void testGetTicksPerAmbientSpawns()
+	{
+		assertEquals(1, server.getTicksPerAmbientSpawns());
+	}
+
+	@Test
+	void testGetTicksPerWaterUndergroundCreatureSpawns()
+	{
+		assertEquals(1, server.getTicksPerWaterUndergroundCreatureSpawns());
+	}
+
+	@Test
+	void testGetTicksPerAnimalSpawns()
+	{
+		assertEquals(400, server.getTicksPerAnimalSpawns());
 	}
 
 }

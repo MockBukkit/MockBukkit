@@ -17,7 +17,9 @@ import org.bukkit.util.BoundingBox;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.function.Predicate;
 
 /**
@@ -29,8 +31,8 @@ public class ChunkMock implements Chunk
 	private final World world;
 	private final int x;
 	private final int z;
-	private boolean loaded = true;
 	private final PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
+	private boolean isSlimeChunk;
 
 	/**
 	 * Constructs a new {@link ChunkMock} for the provided world, at the specified coordinates.
@@ -59,23 +61,22 @@ public class ChunkMock implements Chunk
 	}
 
 	@Override
-	public @NotNull Collection<BlockState> getTileEntities(@NotNull Predicate<Block> blockPredicate, boolean useSnapshot)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public boolean isGenerated()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return true;
 	}
 
 	@Override
 	public @NotNull BlockState[] getTileEntities(boolean useSnapshot)
 	{
 		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Collection<BlockState> getTileEntities(@NotNull Predicate<? super Block> blockPredicate, boolean useSnapshot)
+	{
+		//TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
@@ -105,6 +106,27 @@ public class ChunkMock implements Chunk
 		return getBlock(coordinate.x, coordinate.y, coordinate.z);
 	}
 
+	/**
+	 * Gets all blocks in this chunk.
+	 *
+	 * @return A list of all blocks in this chunk.
+	 */
+	public @NotNull List<Block> getBlocks()
+	{
+		List<Block> blocks = new ArrayList<>(getCubicSize());
+		for (int blockX = 0; blockX < 16; blockX++)
+		{
+			for (int blockY = world.getMinHeight(); blockY < world.getMaxHeight(); blockY++)
+			{
+				for (int blockZ = 0; blockZ < 16; blockZ++)
+				{
+					blocks.add(getBlock(blockX, blockY, blockZ));
+				}
+			}
+		}
+		return blocks;
+	}
+
 	@Override
 	public @NotNull ChunkSnapshot getChunkSnapshot()
 	{
@@ -112,26 +134,18 @@ public class ChunkMock implements Chunk
 	}
 
 	@Override
-	@SuppressWarnings("UnstableApiUsage")
+	@SuppressWarnings("UnstableApiUsage") // ImmutableMap#builderWithExpectedSize
 	public @NotNull ChunkSnapshot getChunkSnapshot(boolean includeMaxblocky, boolean includeBiome, boolean includeBiomeTempRain)
 	{
-		// Cubic size of the chunk (w * w * h).
-		int size = (16 * 16) * Math.abs((world.getMaxHeight() - world.getMinHeight()));
-		ImmutableMap.Builder<Coordinate, BlockData> blockData = ImmutableMap.builderWithExpectedSize(size);
-		ImmutableMap.Builder<Coordinate, Biome> biomes = ImmutableMap.builderWithExpectedSize(size);
-		for (int blockX = 0; blockX < 16; blockX++)
+		ImmutableMap.Builder<Coordinate, BlockData> blockData = ImmutableMap.builderWithExpectedSize(getCubicSize());
+		ImmutableMap.Builder<Coordinate, Biome> biomes = ImmutableMap.builderWithExpectedSize(getCubicSize());
+		for (Block block : getBlocks())
 		{
-			for (int blockY = world.getMinHeight(); blockY < world.getMaxHeight(); blockY++)
+			Coordinate chunkLocalCoordinate = new Coordinate(block.getX() % 16, block.getY(), block.getZ() % 16);
+			blockData.put(chunkLocalCoordinate, block.getBlockData());
+			if (includeBiome || includeBiomeTempRain)
 			{
-				for (int blockZ = 0; blockZ < 16; blockZ++)
-				{
-					Coordinate coord = new Coordinate(blockX, blockY, blockZ);
-					blockData.put(coord, getBlock(blockX, blockY, blockZ).getBlockData());
-					if (includeBiome || includeBiomeTempRain)
-					{
-						biomes.put(coord, world.getBiome(blockX << 4, blockY, blockZ << 4));
-					}
-				}
+				biomes.put(chunkLocalCoordinate, block.getBiome());
 			}
 		}
 		return new ChunkSnapshotMock(x, z, world.getMinHeight(), world.getMaxHeight(), world.getName(), world.getFullTime(), blockData.build(), (includeBiome || includeBiomeTempRain) ? biomes.build() : null);
@@ -141,9 +155,7 @@ public class ChunkMock implements Chunk
 	@Override
 	public boolean isEntitiesLoaded()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		return isLoaded();
 	}
 
 	@Override
@@ -168,7 +180,7 @@ public class ChunkMock implements Chunk
 	@Override
 	public boolean isLoaded()
 	{
-		return loaded;
+		return world.isChunkLoaded(this);
 	}
 
 	@Override
@@ -180,28 +192,36 @@ public class ChunkMock implements Chunk
 	@Override
 	public boolean load()
 	{
-		loaded = true;
+		world.loadChunk(this);
 		return true;
 	}
 
 	@Override
 	public boolean unload(boolean save)
 	{
-		return unload();
+		return world.unloadChunk(x, z, save);
 	}
 
 	@Override
 	public boolean unload()
 	{
-		loaded = false;
-		return true;
+		return world.unloadChunk(this);
+	}
+
+	/**
+	 * Sets the return value of {@link #isSlimeChunk()}.
+	 *
+	 * @param isSlimeChunk Whether this is a slime chunk.
+	 */
+	public void setSlimeChunk(boolean isSlimeChunk)
+	{
+		this.isSlimeChunk = isSlimeChunk;
 	}
 
 	@Override
 	public boolean isSlimeChunk()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.isSlimeChunk;
 	}
 
 	@Override
@@ -275,28 +295,30 @@ public class ChunkMock implements Chunk
 	@Override
 	public boolean contains(@NotNull BlockData block)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getBlocks().stream().anyMatch(b -> b.getBlockData().equals(block));
 	}
 
 	@Override
 	public boolean contains(@NotNull Biome biome)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getBlocks().stream().anyMatch(b -> b.getBiome() == biome);
 	}
 
 	@Override
 	public @NotNull LoadLevel getLoadLevel()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return isLoaded() ? LoadLevel.ENTITY_TICKING : LoadLevel.UNLOADED;
 	}
 
 	@Override
 	public @NotNull PersistentDataContainer getPersistentDataContainer()
 	{
 		return persistentDataContainer;
+	}
+
+	private int getCubicSize()
+	{
+		return (16 * 16) * Math.abs(world.getMaxHeight() - world.getMinHeight()); // (w * w * h)
 	}
 
 }

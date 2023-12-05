@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockBukkitExtension.class)
-public class HopperMinecartMockTest
+class HopperMinecartMockTest
 {
 
 	@MockBukkitInject
@@ -32,7 +32,7 @@ public class HopperMinecartMockTest
 	private HopperMinecart minecart;
 
 	@BeforeEach
-	public void setUp() throws Exception
+	void setUp() throws Exception
 	{
 		minecart = new HopperMinecartMock(server, UUID.randomUUID());
 	}

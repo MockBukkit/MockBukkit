@@ -21,6 +21,7 @@ import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityTeleportEvent;
 import org.bukkit.event.entity.EntityToggleSwimEvent;
@@ -364,7 +365,7 @@ class EntityMockTest
 	@Test
 	void equals_Null_Different()
 	{
-		assertNotEquals(entity, null);
+		assertNotEquals(null, entity);
 	}
 
 	@Test
@@ -1118,6 +1119,19 @@ class EntityMockTest
 	{
 		EntityMock entity = (EntityMock) world.spawnEntity(new Location(world, 0, 0, 0), EntityType.BAT);
 		assertDoesNotThrow(entity::getWidth);
+	}
+
+	@Test
+	void testGetEntitySpawnReasonDefault()
+	{
+		assertEquals(CreatureSpawnEvent.SpawnReason.CUSTOM, entity.getEntitySpawnReason());
+	}
+
+	@Test
+	void testSetEntitySpawnReason()
+	{
+		entity.setSpawnReason(CreatureSpawnEvent.SpawnReason.NATURAL);
+		assertEquals(CreatureSpawnEvent.SpawnReason.NATURAL, entity.getEntitySpawnReason());
 	}
 
 }

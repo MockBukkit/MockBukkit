@@ -38,7 +38,7 @@ public abstract class AbstractSkeletonMock extends MonsterMock implements Abstra
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(since = "1.17")
 	public void setSkeletonType(Skeleton.SkeletonType type)
 	{
 		throw new UnsupportedOperationException("Not supported.");
