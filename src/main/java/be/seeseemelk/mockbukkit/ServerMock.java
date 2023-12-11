@@ -1293,6 +1293,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	@Deprecated(since = "1.19")
 	public @NotNull DataPackManager getDataPackManager()
 	{
 		throw new UnimplementedOperationException();
