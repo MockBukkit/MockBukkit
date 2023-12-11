@@ -17,6 +17,7 @@ repositories {
 	maven("https://hub.spigotmc.org/nexus/content/repositories/public/")
 	maven("https://repo.md-5.net/content/groups/public/")
 	maven("https://repo.papermc.io/repository/maven-public/")
+	maven("https://libraries.minecraft.net")
 }
 
 dependencies {
@@ -35,6 +36,7 @@ dependencies {
 	implementation("org.apache.maven:maven-resolver-provider:3.8.5")
 	implementation("org.apache.maven.resolver:maven-resolver-connector-basic:1.7.3")
 	implementation("org.apache.maven.resolver:maven-resolver-transport-http:1.7.3")
+	implementation("com.mojang:authlib:1.5.25")
 }
 
 tasks {

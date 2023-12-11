@@ -20,6 +20,7 @@ import java.util.Objects;
 public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 {
 
+	private @Nullable GameProfile profile;
 	private @Nullable String owner;
 	private @Nullable com.destroystokyo.paper.profile.PlayerProfile playerProfile;
 
@@ -104,6 +105,7 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	@Override
 	public void setPlayerProfile(com.destroystokyo.paper.profile.@Nullable PlayerProfile profile)
 	{
+		this.profile = profile.getGameProfile();
 		this.playerProfile = profile;
 	}
 
