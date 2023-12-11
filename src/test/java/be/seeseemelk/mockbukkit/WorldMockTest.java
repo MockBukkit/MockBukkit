@@ -2142,4 +2142,17 @@ class WorldMockTest
 		assertNull(world2.getEntity(entity.getUniqueId()));
 	}
 
+	@Test
+	void testGetLogicalHeight()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertEquals(384, world.getLogicalHeight());
+
+		world.setEnvironment(World.Environment.NETHER);
+		assertEquals(256, world.getLogicalHeight());
+
+		world.setEnvironment(World.Environment.THE_END);
+		assertEquals(256, world.getLogicalHeight());
+	}
+
 }
