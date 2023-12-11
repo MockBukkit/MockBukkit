@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.inventory.meta;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
 import com.google.common.base.Strings;
+import com.mojang.authlib.GameProfile;
 import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.inventory.meta.SkullMeta;
