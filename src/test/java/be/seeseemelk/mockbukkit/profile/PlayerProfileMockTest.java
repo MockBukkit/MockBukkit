@@ -106,14 +106,14 @@ class PlayerProfileMockTest
 		UUID uuid = UUID.fromString("22815ad5-2a54-44c0-8f83-f65cfe5310f8");
 		PlayerProfileMock profile = new PlayerProfileMock("Test", uuid);
 		PlayerTexturesMock playerTextures = new PlayerTexturesMock(profile);
-		playerTextures.setSkin(new URL("http://textures.minecraft.net/texture/208bd79e7d56584e57bbeee5f4cb2172d9a56c49ea9df405002efcf213d3ce52"));
-		playerTextures.setCape(new URL("http://textures.minecraft.net/texture/afd553b39358a24edfe3b8a9a939fa5fa4faa4d9a9c3d6af8eafb377fa05c2bb"));
+		playerTextures.setSkin(new URL("https://github.com/skin/"));
+		playerTextures.setCape(new URL("https://google.com/cape/"));
 		profile.setTextures(playerTextures);
 
 		PlayerTextures textures = profile.getTextures();
 
-		assertEquals("http://textures.minecraft.net/texture/208bd79e7d56584e57bbeee5f4cb2172d9a56c49ea9df405002efcf213d3ce52", textures.getSkin().toString());
-		assertEquals("http://textures.minecraft.net/texture/afd553b39358a24edfe3b8a9a939fa5fa4faa4d9a9c3d6af8eafb377fa05c2bb", textures.getCape().toString());
+		assertEquals("https://github.com/skin/", textures.getSkin().toString());
+		assertEquals("https://google.com/cape/", textures.getCape().toString());
 	}
 
 	@Test
