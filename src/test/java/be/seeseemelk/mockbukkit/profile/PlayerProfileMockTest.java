@@ -4,12 +4,15 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import com.destroystokyo.paper.profile.ProfileProperty;
+import org.bukkit.profile.PlayerTextures;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -95,6 +98,22 @@ class PlayerProfileMockTest
 
 		assertEquals(uuid, oldUuid);
 		assertEquals(uuid2, profile.getUniqueId());
+	}
+
+	@Test
+	void setTextures() throws MalformedURLException
+	{
+		UUID uuid = UUID.fromString("22815ad5-2a54-44c0-8f83-f65cfe5310f8");
+		PlayerProfileMock profile = new PlayerProfileMock("Test", uuid);
+		PlayerTexturesMock playerTextures = new PlayerTexturesMock(profile);
+		playerTextures.setSkin(new URL("http://textures.minecraft.net/texture/208bd79e7d56584e57bbeee5f4cb2172d9a56c49ea9df405002efcf213d3ce52"));
+		playerTextures.setCape(new URL("http://textures.minecraft.net/texture/afd553b39358a24edfe3b8a9a939fa5fa4faa4d9a9c3d6af8eafb377fa05c2bb"));
+		profile.setTextures(playerTextures);
+
+		PlayerTextures textures = profile.getTextures();
+
+		assertEquals(textures.getSkin().toString(), "http://textures.minecraft.net/texture/208bd79e7d56584e57bbeee5f4cb2172d9a56c49ea9df405002efcf213d3ce52");
+		assertEquals(textures.getCape().toString(), "http://textures.minecraft.net/texture/afd553b39358a24edfe3b8a9a939fa5fa4faa4d9a9c3d6af8eafb377fa05c2bb");
 	}
 
 	@Test
