@@ -112,8 +112,8 @@ class PlayerProfileMockTest
 
 		PlayerTextures textures = profile.getTextures();
 
-		assertEquals(textures.getSkin().toString(), "http://textures.minecraft.net/texture/208bd79e7d56584e57bbeee5f4cb2172d9a56c49ea9df405002efcf213d3ce52");
-		assertEquals(textures.getCape().toString(), "http://textures.minecraft.net/texture/afd553b39358a24edfe3b8a9a939fa5fa4faa4d9a9c3d6af8eafb377fa05c2bb");
+		assertEquals("http://textures.minecraft.net/texture/208bd79e7d56584e57bbeee5f4cb2172d9a56c49ea9df405002efcf213d3ce52", textures.getSkin().toString());
+		assertEquals("http://textures.minecraft.net/texture/afd553b39358a24edfe3b8a9a939fa5fa4faa4d9a9c3d6af8eafb377fa05c2bb", textures.getCape().toString());
 	}
 
 	@Test
