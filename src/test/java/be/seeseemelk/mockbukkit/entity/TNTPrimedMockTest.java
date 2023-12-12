@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import org.bukkit.entity.EntityType;
+import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -88,4 +89,25 @@ class TNTPrimedMockTest
 		assertTrue(tntPrimed.isIncendiary());
 	}
 
+	@Test
+	void testExplosion() {
+		tntPrimed.tick(tntPrimed.getFuseTicks());
+		assertTrue(tntPrimed.isDead());
+		server.getPluginManager().assertEventFired(ExplosionPrimeEvent.class);
+	}
+
+	@Test
+	void testOneTickNoExplosion() {
+		tntPrimed.tick();
+		assertFalse(tntPrimed.isDead());
+		server.getPluginManager().assertEventNotFired(ExplosionPrimeEvent.class);
+	}
+
+	@Test
+	void testOneTickExplosion() {
+		tntPrimed.setFuseTicks(1);
+		tntPrimed.tick();
+		assertTrue(tntPrimed.isDead());
+		server.getPluginManager().assertEventFired(ExplosionPrimeEvent.class);
+	}
 }
