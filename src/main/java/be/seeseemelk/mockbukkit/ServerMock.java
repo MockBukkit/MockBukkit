@@ -8,7 +8,6 @@ import be.seeseemelk.mockbukkit.command.ConsoleCommandSenderMock;
 import be.seeseemelk.mockbukkit.command.MessageTarget;
 import be.seeseemelk.mockbukkit.command.MockCommandMap;
 import be.seeseemelk.mockbukkit.configuration.ServerConfiguration;
-import be.seeseemelk.mockbukkit.enchantments.EnchantmentsMock;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
@@ -219,7 +218,6 @@ public class ServerMock extends Server.Spigot implements Server
 		createPotionEffectTypes();
 		TagsMock.loadDefaultTags(this, true);
 		InternalTag.loadInternalTags();
-		EnchantmentsMock.registerDefaultEnchantments();
 
 		try
 		{
