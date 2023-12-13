@@ -432,7 +432,7 @@ public class WorldMock implements World
 	 */
 	public WorldMock()
 	{
-		this(Material.GRASS, 4);
+		this(Material.SHORT_GRASS, 4);
 	}
 
 	/**

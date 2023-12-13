@@ -382,7 +382,7 @@ class ItemMetaMockTest
 		meta.setPlaceableKeys(Set.of(
 				Material.STONE.getKey(),
 				Material.DIRT.getKey(),
-				Material.GRASS.getKey()
+				Material.SHORT_GRASS.getKey()
 		));
 		ItemMetaMock cloned = meta.clone();
 		assertEquals(meta, cloned);
@@ -398,7 +398,7 @@ class ItemMetaMockTest
 		meta.setDestroyableKeys(Set.of(
 				Material.STONE.getKey(),
 				Material.DIRT.getKey(),
-				Material.GRASS.getKey(),
+				Material.SHORT_GRASS.getKey(),
 				Material.GRANITE.getKey()
 		));
 		ItemMetaMock cloned = meta.clone();
