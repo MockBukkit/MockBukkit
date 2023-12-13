@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit;
 
+import be.seeseemelk.mockbukkit.enchantments.EnchantmentMock;
 import be.seeseemelk.mockbukkit.generator.structure.StructureMock;
 import be.seeseemelk.mockbukkit.generator.structure.StructureTypeMock;
 import be.seeseemelk.mockbukkit.inventory.meta.trim.TrimMaterialMock;
@@ -10,6 +11,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import io.papermc.paper.world.structure.ConfiguredStructure;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.GameEvent;
 import org.bukkit.Keyed;
 import org.bukkit.MusicInstrument;
@@ -102,7 +104,14 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		{
 			return GameEventMock::new;
 		}
-		else throw new UnimplementedOperationException();
+		else if (tClass == Enchantment.class)
+		{
+			return EnchantmentMock::new;
+		}
+		else
+		{
+			throw new UnimplementedOperationException();
+		}
 	}
 
 	public static <T extends Keyed> Registry<?> createRegistry(Class<T> tClass)
@@ -172,7 +181,7 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 	{
 		return List.of(Structure.class,
 				StructureType.class, TrimMaterial.class, TrimPattern.class,
-				MusicInstrument.class, GameEvent.class);
+				MusicInstrument.class, GameEvent.class, Enchantment.class);
 	}
 
 	@Override
