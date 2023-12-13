@@ -115,6 +115,6 @@ class EnchantmentMockTest
 	@Test
 	void conflictsWith_nullInput()
 	{
-		assertThrows(NullPointerException.class, () -> Enchantment.PROTECTION_FIRE.conflictsWith(null));
+		assertThrows(IllegalArgumentException.class, () -> Enchantment.PROTECTION_FIRE.conflictsWith(null));
 	}
 }
