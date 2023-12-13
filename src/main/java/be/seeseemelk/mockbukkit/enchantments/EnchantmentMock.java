@@ -258,7 +258,7 @@ public class EnchantmentMock extends Enchantment
 	@Override
 	public boolean conflictsWith(@NotNull Enchantment other)
 	{
-		Preconditions.checkNotNull(other);
+		Preconditions.checkArgument(other != null, "others can't be null") ;
 		return conflicts.contains(other.getKey());
 	}
 
