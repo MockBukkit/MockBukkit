@@ -71,8 +71,8 @@ public class KeyedDataGenerator implements DataGenerator
 						{
 							addPotionEffectTypeProperties(jsonObject, potionEffectType);
 						}
+						array.add(jsonObject);
 					}
-					array.add(jsonObject);
 				}
 				catch (NullPointerException | IllegalAccessException ignored)
 				{
