@@ -34,7 +34,8 @@ public class MockPotionEffectType extends PotionEffectType
 	private final Category category;
 
 
-	public MockPotionEffectType(@NotNull NamespacedKey key, int id, String name, boolean instant, Color color, Category category){
+	public MockPotionEffectType(@NotNull NamespacedKey key, int id, String name, boolean instant, Color color, Category category)
+	{
 		super();
 
 		this.key = Preconditions.checkNotNull(key);
@@ -57,7 +58,7 @@ public class MockPotionEffectType extends PotionEffectType
 	 */
 	public MockPotionEffectType(@NotNull NamespacedKey key, int id, String name, boolean instant, Color color)
 	{
-		this(key,id,name,instant,color,Category.NEUTRAL);
+		this(key, id, name, instant, color, Category.NEUTRAL);
 	}
 
 	public MockPotionEffectType(JsonObject data)
