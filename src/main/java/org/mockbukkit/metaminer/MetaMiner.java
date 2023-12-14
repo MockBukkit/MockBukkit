@@ -6,6 +6,7 @@ import org.mockbukkit.metaminer.internal.tags.InternalTagDataGenerator;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
 
 public class MetaMiner extends JavaPlugin
 {
@@ -13,6 +14,7 @@ public class MetaMiner extends JavaPlugin
 	@Override
 	public void onEnable()
 	{
+		this.getLogger().log(Level.INFO, "Generating data for MockBukkit");
 		for (DataGenerator dataGenerator : getDataGenerators())
 		{
 			try
@@ -22,8 +24,12 @@ public class MetaMiner extends JavaPlugin
 			catch (IOException e)
 			{
 				e.printStackTrace();
+				return;
 			}
 		}
+		this.getLogger().log(Level.INFO, "Successfully generated data!");
+		this.getLogger().log(Level.INFO, String.format("The files can be found at '%s'", this.getDataFolder().getPath()));
+		this.getLogger().log(Level.INFO, "Copy these files with their respective directories over to the MockBukkit resources folder.");
 
 	}
 

@@ -5,9 +5,13 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+import io.papermc.paper.text.PaperComponents;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import org.bukkit.GameEvent;
 import org.bukkit.Keyed;
 import org.bukkit.MusicInstrument;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.generator.structure.Structure;
 import org.bukkit.generator.structure.StructureType;
 import org.bukkit.inventory.meta.trim.TrimMaterial;
@@ -34,13 +38,14 @@ public class KeyedDataGenerator implements DataGenerator
 	@Override
 	public void generateData() throws IOException
 	{
-		if(!this.dataFolder.exists() && !this.dataFolder.mkdirs()){
+		if (!this.dataFolder.exists() && !this.dataFolder.mkdirs())
+		{
 			throw new IOException("Could not make directory: " + this.dataFolder);
 		}
 
 		List<Class<? extends Keyed>> keyedClasses = List.of(Structure.class,
 				StructureType.class, TrimMaterial.class, TrimPattern.class,
-				MusicInstrument.class, GameEvent.class);
+				MusicInstrument.class, GameEvent.class, Enchantment.class);
 		for (Class<? extends Keyed> tClass : keyedClasses)
 		{
 			JsonArray array = new JsonArray();
@@ -58,6 +63,10 @@ public class KeyedDataGenerator implements DataGenerator
 						{
 							jsonObject.add("type", new JsonPrimitive(structure.getStructureType().getKey().toString()));
 						}
+						if (keyedObject instanceof Enchantment enchantment)
+						{
+							addEnchantmentProperties(jsonObject, enchantment);
+						}
 					}
 					array.add(jsonObject);
 				}
@@ -68,15 +77,69 @@ public class KeyedDataGenerator implements DataGenerator
 			File destinationFile = new File(dataFolder, tClass.getSimpleName().toLowerCase() + ".json");
 			JsonObject rootObject = new JsonObject();
 			rootObject.add("values", array);
-			if(!destinationFile.exists() && !destinationFile.createNewFile()){
+			if (!destinationFile.exists() && !destinationFile.createNewFile())
+			{
 				throw new IOException("Could not create file: " + destinationFile);
 			}
-			try(Writer writer = new FileWriter(destinationFile))
+			try (Writer writer = new FileWriter(destinationFile))
 			{
 				Gson gson = new GsonBuilder().setPrettyPrinting().create();
 				gson.toJson(rootObject, writer);
 			}
 		}
+	}
+
+	/**
+	 * Currently not taking the following properties into consideration:
+	 * -
+	 * @param jsonObject <p>The JsonObject to modify</p>
+	 * @param enchantment <p>The enchantment to get the properties from</p>
+	 */
+	private void addEnchantmentProperties(JsonObject jsonObject, Enchantment enchantment)
+	{
+		jsonObject.add("itemTarget", new JsonPrimitive(enchantment.getItemTarget().toString()));
+		jsonObject.add("treasure", new JsonPrimitive(enchantment.isTreasure()));
+		jsonObject.add("cursed", new JsonPrimitive(enchantment.isCursed()));
+		jsonObject.add("maxLevel", new JsonPrimitive(enchantment.getMaxLevel()));
+		jsonObject.add("startLevel", new JsonPrimitive(enchantment.getStartLevel()));
+		jsonObject.add("name", new JsonPrimitive(enchantment.getName()));
+		JsonArray displayNames = new JsonArray();
+		JsonArray minModifiedCosts = new JsonArray();
+		JsonArray maxModifiedCosts = new JsonArray();
+		for (int i = 1; i <= enchantment.getMaxLevel(); i++)
+		{
+			GsonComponentSerializer serializer = GsonComponentSerializer.builder().build();
+			JsonObject displayName = new JsonObject();
+			displayName.add("level", new JsonPrimitive(i));
+			displayName.add("text", serializer.serializeToTree(enchantment.displayName(i)));
+			displayNames.add(displayName);
+
+			JsonObject minModifiedCost = new JsonObject();
+			minModifiedCost.add("level", new JsonPrimitive(i));
+			minModifiedCost.add("cost", new JsonPrimitive(enchantment.getMinModifiedCost(i)));
+			minModifiedCosts.add(minModifiedCost);
+
+			JsonObject maxModifiedCost = new JsonObject();
+			maxModifiedCost.add("level", new JsonPrimitive(i));
+			maxModifiedCost.add("cost", new JsonPrimitive(enchantment.getMaxModifiedCost(i)));
+			maxModifiedCosts.add(maxModifiedCost);
+		}
+		jsonObject.add("displayNames", displayNames);
+		jsonObject.add("minModifiedCosts", minModifiedCosts);
+		jsonObject.add("maxModifiedCosts", maxModifiedCosts);
+		jsonObject.add("tradeable", new JsonPrimitive(enchantment.isTradeable()));
+		jsonObject.add("discoverable", new JsonPrimitive(enchantment.isDiscoverable()));
+		jsonObject.add("rarity", new JsonPrimitive(enchantment.getRarity().toString()));
+
+		JsonArray conflicts = new JsonArray();
+		for (Enchantment otherEnchantment : Enchantment.values())
+		{
+			if (enchantment.conflictsWith(otherEnchantment))
+			{
+				conflicts.add(otherEnchantment.getKey().toString());
+			}
+		}
+		jsonObject.add("conflicts", conflicts);
 	}
 
 }
