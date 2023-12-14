@@ -5,8 +5,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
-import io.papermc.paper.text.PaperComponents;
-import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import org.bukkit.GameEvent;
 import org.bukkit.Keyed;
@@ -16,6 +14,7 @@ import org.bukkit.generator.structure.Structure;
 import org.bukkit.generator.structure.StructureType;
 import org.bukkit.inventory.meta.trim.TrimMaterial;
 import org.bukkit.inventory.meta.trim.TrimPattern;
+import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -45,7 +44,8 @@ public class KeyedDataGenerator implements DataGenerator
 
 		List<Class<? extends Keyed>> keyedClasses = List.of(Structure.class,
 				StructureType.class, TrimMaterial.class, TrimPattern.class,
-				MusicInstrument.class, GameEvent.class, Enchantment.class);
+				MusicInstrument.class, GameEvent.class, Enchantment.class,
+				PotionEffectType.class);
 		for (Class<? extends Keyed> tClass : keyedClasses)
 		{
 			JsonArray array = new JsonArray();
@@ -66,6 +66,10 @@ public class KeyedDataGenerator implements DataGenerator
 						if (keyedObject instanceof Enchantment enchantment)
 						{
 							addEnchantmentProperties(jsonObject, enchantment);
+						}
+						if (keyedObject instanceof PotionEffectType potionEffectType)
+						{
+							addPotionEffectTypeProperties(jsonObject, potionEffectType);
 						}
 					}
 					array.add(jsonObject);
@@ -89,10 +93,20 @@ public class KeyedDataGenerator implements DataGenerator
 		}
 	}
 
+	private void addPotionEffectTypeProperties(JsonObject jsonObject, PotionEffectType potionEffectType)
+	{
+		jsonObject.add("id", new JsonPrimitive(potionEffectType.getId()));
+		jsonObject.add("name", new JsonPrimitive(potionEffectType.getName()));
+		jsonObject.add("instant", new JsonPrimitive(potionEffectType.isInstant()));
+		jsonObject.add("rgb", new JsonPrimitive(potionEffectType.getColor().asRGB()));
+		jsonObject.add("category", new JsonPrimitive(potionEffectType.getEffectCategory().toString()));
+	}
+
 	/**
 	 * Currently not taking the following properties into consideration:
 	 * -
-	 * @param jsonObject <p>The JsonObject to modify</p>
+	 *
+	 * @param jsonObject  <p>The JsonObject to modify</p>
 	 * @param enchantment <p>The enchantment to get the properties from</p>
 	 */
 	private void addEnchantmentProperties(JsonObject jsonObject, Enchantment enchantment)
