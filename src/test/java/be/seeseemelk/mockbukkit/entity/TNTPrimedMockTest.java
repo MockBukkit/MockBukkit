@@ -1,12 +1,15 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.MockBukkitExtension;
+import be.seeseemelk.mockbukkit.MockBukkitInject;
 import be.seeseemelk.mockbukkit.ServerMock;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.util.UUID;
 
@@ -15,22 +18,18 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockBukkitExtension.class)
 class TNTPrimedMockTest
 {
-	private TNTPrimedMock tntPrimed;
+
+	@MockBukkitInject
 	private ServerMock server;
+	private TNTPrimedMock tntPrimed;
 
 	@BeforeEach
 	void setUp()
 	{
-		server = MockBukkit.mock();
 		tntPrimed = new TNTPrimedMock(server, UUID.randomUUID());
-	}
-
-	@AfterEach
-	void tearDown()
-	{
-		MockBukkit.unmock();
 	}
 
 	@Test
@@ -66,13 +65,21 @@ class TNTPrimedMockTest
 	}
 
 	@Test
+	void testSetSourceNotLivingEntity()
+	{
+		tntPrimed.setSource(new ExperienceOrbMock(server, UUID.randomUUID()));
+		assertNull(tntPrimed.getSource());
+	}
+
+	@Test
 	void testGetYieldDefault()
 	{
 		assertEquals(4, tntPrimed.getYield());
 	}
 
 	@Test
-	void testSetYield() {
+	void testSetYield()
+	{
 		tntPrimed.setYield(2);
 		assertEquals(2, tntPrimed.getYield());
 	}
@@ -84,27 +91,31 @@ class TNTPrimedMockTest
 	}
 
 	@Test
-	void testSetIsIncendiary() {
+	void testSetIsIncendiary()
+	{
 		tntPrimed.setIsIncendiary(true);
 		assertTrue(tntPrimed.isIncendiary());
 	}
 
 	@Test
-	void testExplosion() {
+	void testExplosion()
+	{
 		tntPrimed.tick(tntPrimed.getFuseTicks());
 		assertTrue(tntPrimed.isDead());
 		server.getPluginManager().assertEventFired(ExplosionPrimeEvent.class);
 	}
 
 	@Test
-	void testOneTickNoExplosion() {
+	void testOneTickNoExplosion()
+	{
 		tntPrimed.tick();
 		assertFalse(tntPrimed.isDead());
 		server.getPluginManager().assertEventNotFired(ExplosionPrimeEvent.class);
 	}
 
 	@Test
-	void testOneTickExplosion() {
+	void testOneTickExplosion()
+	{
 		tntPrimed.setFuseTicks(1);
 		tntPrimed.tick();
 		assertTrue(tntPrimed.isDead());

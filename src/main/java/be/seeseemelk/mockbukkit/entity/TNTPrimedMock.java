@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.ServerMock;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.jetbrains.annotations.NotNull;
@@ -55,7 +56,11 @@ public class TNTPrimedMock extends EntityMock implements TNTPrimed
 	@Override
 	public void setSource(@Nullable Entity source)
 	{
-		this.source = source;
+		if(source instanceof LivingEntity) {
+			this.source = source;
+		} else {
+			this.source = null;
+		}
 	}
 
 	@Override
@@ -92,7 +97,8 @@ public class TNTPrimedMock extends EntityMock implements TNTPrimed
 	 * Simulate server tick.
 	 * @param ticks The number of ticks to simulate.
 	 */
-	public void tick(int ticks) {
+	public void tick(int ticks)
+	{
 		setFuseTicks(getFuseTicks() - ticks);
 		if(getFuseTicks() <= 0) {
 			explode();
@@ -103,11 +109,13 @@ public class TNTPrimedMock extends EntityMock implements TNTPrimed
 	/**
 	 * Simulate one server tick.
 	 */
-	public void tick() {
+	public void tick()
+	{
 		tick(1);
 	}
 
-	private void explode() {
+	private void explode()
+	{
 		ExplosionPrimeEvent event = new ExplosionPrimeEvent(this);
 		server.getPluginManager().callEvent(event);
 	}
