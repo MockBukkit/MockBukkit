@@ -39,8 +39,8 @@ public class EnchantmentMock extends Enchantment
 	private int maxLevel;
 	private int startLevel;
 	private EnchantmentTarget itemTarget;
-	private final static String LEVEL = "level";
-	private final static String COST = "cost";
+	private static final String LEVEL = "level";
+	private static final String COST = "cost";
 
 	public EnchantmentMock(JsonObject data)
 	{
