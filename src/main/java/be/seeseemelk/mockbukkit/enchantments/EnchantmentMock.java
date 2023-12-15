@@ -39,6 +39,8 @@ public class EnchantmentMock extends Enchantment
 	private int maxLevel;
 	private int startLevel;
 	private EnchantmentTarget itemTarget;
+	private final static String LEVEL = "level";
+	private final static String COST = "cost";
 
 	public EnchantmentMock(JsonObject data)
 	{
@@ -75,7 +77,7 @@ public class EnchantmentMock extends Enchantment
 		for (JsonElement element : displayNamesData)
 		{
 			JsonObject displayNameData = element.getAsJsonObject();
-			int level = displayNameData.get("level").getAsInt();
+			int level = displayNameData.get(LEVEL).getAsInt();
 			GsonComponentSerializer gsonComponentSerializer = GsonComponentSerializer.builder().build();
 			output[level - 1] = gsonComponentSerializer.deserializeFromTree(displayNameData.get("text"));
 		}
@@ -88,8 +90,8 @@ public class EnchantmentMock extends Enchantment
 		for (JsonElement element : minModifiedCosts)
 		{
 			JsonObject minModifiedCost = element.getAsJsonObject();
-			int level = minModifiedCost.get("level").getAsInt();
-			output[level - 1] = minModifiedCost.get("cost").getAsInt();
+			int level = minModifiedCost.get(LEVEL).getAsInt();
+			output[level - 1] = minModifiedCost.get(COST).getAsInt();
 		}
 		return output;
 	}
@@ -100,8 +102,8 @@ public class EnchantmentMock extends Enchantment
 		for (JsonElement element : maxModifiedCosts)
 		{
 			JsonObject maxModifiedCost = element.getAsJsonObject();
-			int level = maxModifiedCost.get("level").getAsInt();
-			output[level - 1] = maxModifiedCost.get("cost").getAsInt();
+			int level = maxModifiedCost.get(LEVEL).getAsInt();
+			output[level - 1] = maxModifiedCost.get(COST).getAsInt();
 		}
 		return output;
 	}

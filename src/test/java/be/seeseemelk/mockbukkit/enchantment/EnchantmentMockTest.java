@@ -55,13 +55,13 @@ class EnchantmentMockTest
 	@Test
 	void getMaxModifiedCost()
 	{
-		assertEquals(Enchantment.PROTECTION_FALL.getMaxModifiedCost(1), 11);
+		assertEquals(11, Enchantment.PROTECTION_FALL.getMaxModifiedCost(1));
 	}
 
 	@Test
 	void getMinModifiedCost()
 	{
-		assertEquals(Enchantment.PROTECTION_FALL.getMinModifiedCost(1), 5);
+		assertEquals(5, Enchantment.PROTECTION_FALL.getMinModifiedCost(1));
 	}
 
 	@Test
@@ -79,13 +79,13 @@ class EnchantmentMockTest
 	@Test
 	void getMaxLevel()
 	{
-		assertEquals(Enchantment.MENDING.getMaxLevel(), 1);
+		assertEquals(1, Enchantment.MENDING.getMaxLevel());
 	}
 
 	@Test
 	void getStartLeve()
 	{
-		assertEquals(Enchantment.DURABILITY.getStartLevel(), 1);
+		assertEquals(1, Enchantment.DURABILITY.getStartLevel());
 	}
 
 	@Test
