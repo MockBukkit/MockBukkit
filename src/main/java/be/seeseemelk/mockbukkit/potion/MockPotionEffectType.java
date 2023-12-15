@@ -102,7 +102,6 @@ public class MockPotionEffectType extends PotionEffectType
 	@Override
 	public @NotNull PotionEffect createEffect(int duration, int amplifier)
 	{
-		System.out.println("Ping 1");
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
