@@ -14,7 +14,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.EnumMap;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * This {@link MockPotionEffectType} mocks an actual {@link PotionEffectType} by taking an id, a name, whether it is
@@ -63,7 +62,7 @@ public class MockPotionEffectType extends PotionEffectType
 
 	public MockPotionEffectType(JsonObject data)
 	{
-		this(Objects.requireNonNull(NamespacedKey.fromString(data.get("key").getAsString())),
+		this(NamespacedKey.fromString(data.get("key").getAsString()),
 				data.get("id").getAsInt(),
 				data.get("name").getAsString(),
 				data.get("instant").getAsBoolean(),

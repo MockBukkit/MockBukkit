@@ -25,6 +25,9 @@ import java.util.Set;
 public class EnchantmentMock extends Enchantment
 {
 
+	private static final String LEVEL = "level";
+	private static final String COST = "cost";
+
 	private final @NotNull String name;
 	private final NamespacedKey key;
 	private final boolean tradeable;
@@ -39,8 +42,6 @@ public class EnchantmentMock extends Enchantment
 	private int maxLevel;
 	private int startLevel;
 	private EnchantmentTarget itemTarget;
-	private static final String LEVEL = "level";
-	private static final String COST = "cost";
 
 	public EnchantmentMock(JsonObject data)
 	{
@@ -260,7 +261,7 @@ public class EnchantmentMock extends Enchantment
 	@Override
 	public boolean conflictsWith(@NotNull Enchantment other)
 	{
-		Preconditions.checkArgument(other != null, "others can't be null") ;
+		Preconditions.checkArgument(other != null, "others can't be null");
 		return conflicts.contains(other.getKey());
 	}
 

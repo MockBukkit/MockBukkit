@@ -29,7 +29,7 @@ class ChunkSnapshotMockTest
 	void setUp()
 	{
 		MockBukkit.mock();
-		world = new WorldMock(Material.SHORT_GRASS, 0, 319, 4);
+		world = new WorldMock(Material.GRASS_BLOCK, 0, 319, 4);
 		chunk = world.getChunkAt(1, 1);
 	}
 
@@ -60,14 +60,14 @@ class ChunkSnapshotMockTest
 	@Test
 	void getBlockType()
 	{
-		assertEquals(Material.SHORT_GRASS, chunk.getChunkSnapshot().getBlockType(0, 1, 0));
+		assertEquals(Material.GRASS_BLOCK, chunk.getChunkSnapshot().getBlockType(0, 1, 0));
 		assertEquals(Material.AIR, chunk.getChunkSnapshot().getBlockType(0, 10, 0));
 	}
 
 	@Test
 	void getBlockData()
 	{
-		assertEquals(Material.SHORT_GRASS, chunk.getChunkSnapshot().getBlockData(0, 1, 0).getMaterial());
+		assertEquals(Material.GRASS_BLOCK, chunk.getChunkSnapshot().getBlockData(0, 1, 0).getMaterial());
 		assertEquals(Material.AIR, chunk.getChunkSnapshot().getBlockData(0, 10, 0).getMaterial());
 	}
 
@@ -105,7 +105,7 @@ class ChunkSnapshotMockTest
 	@Test
 	void contains_BlockExists_True()
 	{
-		assertTrue(chunk.getChunkSnapshot().contains(Bukkit.createBlockData(Material.SHORT_GRASS)));
+		assertTrue(chunk.getChunkSnapshot().contains(Bukkit.createBlockData(Material.GRASS_BLOCK)));
 	}
 
 	@Test
