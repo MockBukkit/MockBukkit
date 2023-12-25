@@ -77,6 +77,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Registry;
 import org.bukkit.Server;
+import org.bukkit.ServerTickManager;
 import org.bukkit.StructureType;
 import org.bukkit.Tag;
 import org.bukkit.Warning.WarningState;
@@ -1292,6 +1293,13 @@ public class ServerMock extends Server.Spigot implements Server
 	@Deprecated(since = "1.19")
 	public @NotNull DataPackManager getDataPackManager()
 	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull ServerTickManager getServerTickManager()
+	{
+		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
