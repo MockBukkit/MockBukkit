@@ -107,6 +107,7 @@ import org.bukkit.util.Vector;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.Range;
 import org.jetbrains.annotations.UnmodifiableView;
 
 import java.net.InetAddress;
@@ -1914,6 +1915,24 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public void setTotalExperience(int exp)
 	{
 		this.expTotal = Math.max(0, exp);
+	}
+
+	@Override
+	public @Range(from = 0L, to = 2147483647L) int calculateTotalExperiencePoints()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setExperienceLevelAndProgress(@Range(from = 0L, to = 2147483647L) int totalExperience)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getExperiencePointsNeededForNextLevel()
+	{
+		throw new UnimplementedOperationException();
 	}
 
 
