@@ -1,12 +1,15 @@
 package be.seeseemelk.mockbukkit.profile;
 
 import com.destroystokyo.paper.profile.ProfileProperty;
+import com.google.gson.JsonObject;
 import org.bukkit.profile.PlayerTextures;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 /**
  * Mock implementation of a {@link PlayerTextures}.
@@ -30,7 +33,7 @@ public class PlayerTexturesMock implements PlayerTextures
 	// GameProfiles (even if these modifications are later reverted).
 	private boolean dirty = false;
 
-	PlayerTexturesMock(@Nonnull PlayerProfileMock profile) {
+	public PlayerTexturesMock(@Nonnull PlayerProfileMock profile) {
 		this.profile = profile;
 	}
 
@@ -68,6 +71,9 @@ public class PlayerTexturesMock implements PlayerTextures
 	{
 		this.skin = skinUrl;
 		this.skinModel = (skinUrl != null) ? skinModel : SkinModel.CLASSIC;
+		this.dirty = true;
+
+		setProperty();
 	}
 
 	@NotNull
@@ -87,6 +93,9 @@ public class PlayerTexturesMock implements PlayerTextures
 	public void setCape(@Nullable URL capeUrl)
 	{
 		this.cape = capeUrl;
+		this.dirty = true;
+
+		setProperty();
 	}
 
 	@Override
@@ -108,4 +117,57 @@ public class PlayerTexturesMock implements PlayerTextures
 		return profile.getProperty(PROPERTY_NAME);
 	}
 
+	@Override
+	public int hashCode() {
+		ProfileProperty property = getProperty();
+		return (property == null) ? 0 : property.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (!(obj instanceof PlayerTextures)) return false;
+
+		PlayerTexturesMock other = (PlayerTexturesMock) obj;
+		ProfileProperty property = getProperty();
+		ProfileProperty otherProperty = other.getProperty();
+
+		if (property == null && otherProperty == null)
+		{
+			return true;
+		}
+		else if (property == null || otherProperty == null)
+		{
+			return false;
+		}
+
+		return property.equals(otherProperty);
+	}
+
+	private void setProperty()
+	{
+		this.timestamp = System.currentTimeMillis();
+
+		JsonObject json = new JsonObject();
+		json.addProperty("timestamp", this.timestamp);
+		json.addProperty("profileId", profile.getUniqueId().toString().replace("-", ""));
+		json.addProperty("profileName", profile.getName());
+
+		JsonObject textures = new JsonObject();
+		if (skin != null)
+		{
+			textures.addProperty("SKIN", skin.toString());
+			textures.addProperty("SKIN_MODEL", skinModel.name());
+		}
+		if (cape != null)
+		{
+			textures.addProperty("CAPE", cape.toString());
+		}
+		json.add(PROPERTY_NAME, textures);
+
+		String base64Encoded = Base64.getEncoder().encodeToString(json.toString().getBytes(StandardCharsets.UTF_8));
+
+		ProfileProperty property = new ProfileProperty(PROPERTY_NAME, base64Encoded);
+		this.profile.setProperty(property);
+	}
 }
