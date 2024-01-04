@@ -33,6 +33,12 @@ public class PlayerTexturesMock implements PlayerTextures
 	// GameProfiles (even if these modifications are later reverted).
 	private boolean dirty = false;
 
+	private void markDirty()
+	{
+		dirty = true;
+		timestamp = 0L;
+	}
+
 	public PlayerTexturesMock(@Nonnull PlayerProfileMock profile) {
 		this.profile = profile;
 	}
@@ -73,6 +79,7 @@ public class PlayerTexturesMock implements PlayerTextures
 		this.skinModel = (skinUrl != null) ? skinModel : SkinModel.CLASSIC;
 		this.dirty = true;
 
+		markDirty();
 		setProperty();
 	}
 
@@ -95,6 +102,7 @@ public class PlayerTexturesMock implements PlayerTextures
 		this.cape = capeUrl;
 		this.dirty = true;
 
+		markDirty();
 		setProperty();
 	}
 
