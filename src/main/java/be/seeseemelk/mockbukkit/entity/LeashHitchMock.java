@@ -1,6 +1,8 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
+import com.google.common.base.Preconditions;
+import org.bukkit.block.BlockFace;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LeashHitch;
 import org.jetbrains.annotations.NotNull;
@@ -25,6 +27,20 @@ public class LeashHitchMock extends HangingMock implements LeashHitch
 	public @NotNull EntityType getType()
 	{
 		return EntityType.LEASH_HITCH;
+	}
+
+	@Override
+	public @NotNull BlockFace getFacing()
+	{
+		return BlockFace.SELF;
+	}
+
+	@Override
+	public boolean setFacingDirection(@NotNull BlockFace face, boolean force)
+	{
+		Preconditions.checkNotNull(face, "Face cannot be null");
+		Preconditions.checkArgument(face == BlockFace.SELF, "%s is not a valid facing direction");
+		return force;
 	}
 
 }
