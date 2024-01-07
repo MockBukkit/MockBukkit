@@ -318,8 +318,8 @@ class BlockMockTest
 	@Test
 	void isSolid_NonSolid()
 	{
-		Block block = new BlockMock(Material.BLACK_BANNER);
+		Block block = new BlockMock(Material.AIR);
 		assertFalse(block.isSolid());
 	}
-  
+
 }
