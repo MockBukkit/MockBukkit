@@ -107,6 +107,7 @@ import org.bukkit.util.Vector;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.Range;
 import org.jetbrains.annotations.UnmodifiableView;
 
 import java.net.InetAddress;
@@ -1916,6 +1917,24 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		this.expTotal = Math.max(0, exp);
 	}
 
+	@Override
+	public @Range(from = 0L, to = 2147483647L) int calculateTotalExperiencePoints()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setExperienceLevelAndProgress(@Range(from = 0L, to = 2147483647L) int totalExperience)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getExperiencePointsNeededForNextLevel()
+	{
+		throw new UnimplementedOperationException();
+	}
+
 
 	@Nullable
 	@Override
@@ -2173,6 +2192,28 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 	@Override
 	public void setResourcePack(@NotNull String url, byte @Nullable [] hash, @Nullable Component prompt, boolean force)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setResourcePack(@NotNull UUID uuid, @NotNull String url, @NotNull String hash, @Nullable Component resourcePackPrompt, boolean required)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setResourcePack(@NotNull UUID uuid, @NotNull String url, byte @Nullable [] hash, @Nullable Component prompt, boolean force)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@Deprecated(since = "1.20")
+	public void setResourcePack(@NotNull UUID uuid, @NotNull String s, @Nullable byte[] bytes, @Nullable String s1, boolean b)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -2638,6 +2679,20 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 	@Override
 	public boolean hasResourcePack()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void removeResourcePack(@NotNull UUID id)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void removeResourcePacks()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
