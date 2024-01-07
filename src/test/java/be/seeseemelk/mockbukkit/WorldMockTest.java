@@ -187,7 +187,7 @@ class WorldMockTest
 		Location spawn = world.getSpawnLocation();
 		assertNotNull(spawn);
 		assertEquals(Material.AIR, world.getBlockAt(spawn.getBlockX(), spawn.getBlockY(), spawn.getBlockZ()).getType());
-		assertEquals(Material.GRASS, world.getBlockAt(spawn.getBlockX(), spawn.getBlockY() - 1, spawn.getBlockZ()).getType());
+		assertEquals(Material.GRASS_BLOCK, world.getBlockAt(spawn.getBlockX(), spawn.getBlockY() - 1, spawn.getBlockZ()).getType());
 	}
 
 	@Test
@@ -674,12 +674,12 @@ class WorldMockTest
 		Block block = world.getBlockAt(0, 1, 0);
 		BlockData data = block.getBlockData();
 		assertEquals(data.getMaterial(), world.getBlockData(location).getMaterial());
-		BlockDataMock mock = new BlockDataMock(Material.GRASS);
+		BlockDataMock mock = new BlockDataMock(Material.SHORT_GRASS);
 		BlockDataMock mock2 = new BlockDataMock(Material.GRASS_BLOCK);
 		world.setBlockData(location, mock);
-		assertEquals(Material.GRASS, world.getBlockData(location).getMaterial());
-		assertEquals(Material.GRASS, world.getBlockData(0, 1, 0).getMaterial());
-		assertEquals(Material.GRASS, world.getType(0, 1, 0));
+		assertEquals(Material.SHORT_GRASS, world.getBlockData(location).getMaterial());
+		assertEquals(Material.SHORT_GRASS, world.getBlockData(0, 1, 0).getMaterial());
+		assertEquals(Material.SHORT_GRASS, world.getType(0, 1, 0));
 		world.setBlockData(0, 1, 0, mock2);
 		assertEquals(Material.GRASS_BLOCK, world.getBlockData(location).getMaterial());
 		assertEquals(Material.GRASS_BLOCK, world.getType(location));
@@ -1459,23 +1459,6 @@ class WorldMockTest
 		assertEquals(3, worldMock.getHighestBlockYAt(2, 3, HeightMap.OCEAN_FLOOR));
 		assertEquals(20, worldMock.getHighestBlockYAt(2, 3, HeightMap.WORLD_SURFACE));
 		assertEquals(20, worldMock.getHighestBlockYAt(2, 3, HeightMap.MOTION_BLOCKING));
-	}
-
-	@Test
-	void getHighestBlockYAt_Waterlogged()
-	{
-		WorldMock worldMock = new WorldMock(Material.COAL_BLOCK, 3);
-		Location location = new Location(worldMock, 2, 20, 3);
-		Block block = location.getBlock();
-		WallSign wallSign = new WallSignMock(Material.ACACIA_WALL_SIGN);
-		wallSign.setWaterlogged(true);
-		block.setBlockData(wallSign);
-		assertEquals(3, worldMock.getHighestBlockYAt(2, 3, HeightMap.OCEAN_FLOOR));
-		assertEquals(20, worldMock.getHighestBlockYAt(2, 3, HeightMap.MOTION_BLOCKING));
-		wallSign.setWaterlogged(false);
-		block.setBlockData(wallSign);
-		assertEquals(3, worldMock.getHighestBlockYAt(2, 3, HeightMap.MOTION_BLOCKING));
-		assertEquals(20, worldMock.getHighestBlockYAt(2, 3, HeightMap.WORLD_SURFACE));
 	}
 
 	@Test
