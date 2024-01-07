@@ -16,7 +16,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockBukkitExtension.class)
-public class LeashHitchMockTest
+class LeashHitchMockTest
 {
 
 	@MockBukkitInject
@@ -24,7 +24,7 @@ public class LeashHitchMockTest
 	private LeashHitch leashHitch;
 
 	@BeforeEach
-	public void setUp()
+	void setUp()
 	{
 		leashHitch = new LeashHitchMock(server, UUID.randomUUID());
 	}
