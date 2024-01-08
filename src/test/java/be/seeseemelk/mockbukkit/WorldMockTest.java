@@ -2196,6 +2196,8 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		world.setWaterUndergroundCreatureSpawnLimit(42);
 		assertEquals(42, world.getSpawnLimit(SpawnCategory.WATER_UNDERGROUND_CREATURE));
+	}
+
 	@Test
 	void testIsRespawnAnchorWorks()
 	{
