@@ -58,7 +58,7 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	{
 		final int prime = 31;
 		int result = super.hashCode();
-		return prime * result + owner.hashCode();
+		return prime * result + (owner == null ? 0 : owner.hashCode());
 	}
 
 	@Override

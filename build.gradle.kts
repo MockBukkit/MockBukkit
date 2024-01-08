@@ -27,9 +27,9 @@ dependencies {
 	implementation("org.junit.jupiter:junit-jupiter:5.10.1")
 
 	// General utilities for the project
-	implementation("net.kyori:adventure-platform-bungeecord:4.3.1")
+	implementation("net.kyori:adventure-platform-bungeecord:4.3.2")
 	implementation("org.jetbrains:annotations:24.1.0")
-	implementation("net.bytebuddy:byte-buddy:1.14.10")
+	implementation("net.bytebuddy:byte-buddy:1.14.11")
 
 	// LibraryLoader dependencies
 	implementation("org.apache.maven:maven-resolver-provider:3.8.5")

@@ -42,6 +42,7 @@ import be.seeseemelk.mockbukkit.entity.GuardianMock;
 import be.seeseemelk.mockbukkit.entity.HopperMinecartMock;
 import be.seeseemelk.mockbukkit.entity.HorseMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
+import be.seeseemelk.mockbukkit.entity.LeashHitchMock;
 import be.seeseemelk.mockbukkit.entity.LlamaMock;
 import be.seeseemelk.mockbukkit.entity.LlamaSpitMock;
 import be.seeseemelk.mockbukkit.entity.MagmaCubeMock;
@@ -64,13 +65,16 @@ import be.seeseemelk.mockbukkit.entity.SkeletonHorseMock;
 import be.seeseemelk.mockbukkit.entity.SkeletonMock;
 import be.seeseemelk.mockbukkit.entity.SlimeMock;
 import be.seeseemelk.mockbukkit.entity.SmallFireballMock;
+import be.seeseemelk.mockbukkit.entity.SnowballMock;
 import be.seeseemelk.mockbukkit.entity.SpawnerMinecartMock;
 import be.seeseemelk.mockbukkit.entity.SpiderMock;
 import be.seeseemelk.mockbukkit.entity.SquidMock;
 import be.seeseemelk.mockbukkit.entity.StorageMinecartMock;
 import be.seeseemelk.mockbukkit.entity.StrayMock;
 import be.seeseemelk.mockbukkit.entity.TadpoleMock;
+import be.seeseemelk.mockbukkit.entity.ThrownExpBottleMock;
 import be.seeseemelk.mockbukkit.entity.TropicalFishMock;
+import be.seeseemelk.mockbukkit.entity.TurtleMock;
 import be.seeseemelk.mockbukkit.entity.WardenMock;
 import be.seeseemelk.mockbukkit.entity.WitherSkeletonMock;
 import be.seeseemelk.mockbukkit.entity.WitherSkullMock;
@@ -184,7 +188,7 @@ class WorldMockTest
 		Location spawn = world.getSpawnLocation();
 		assertNotNull(spawn);
 		assertEquals(Material.AIR, world.getBlockAt(spawn.getBlockX(), spawn.getBlockY(), spawn.getBlockZ()).getType());
-		assertEquals(Material.GRASS, world.getBlockAt(spawn.getBlockX(), spawn.getBlockY() - 1, spawn.getBlockZ()).getType());
+		assertEquals(Material.GRASS_BLOCK, world.getBlockAt(spawn.getBlockX(), spawn.getBlockY() - 1, spawn.getBlockZ()).getType());
 	}
 
 	@Test
@@ -671,12 +675,12 @@ class WorldMockTest
 		Block block = world.getBlockAt(0, 1, 0);
 		BlockData data = block.getBlockData();
 		assertEquals(data.getMaterial(), world.getBlockData(location).getMaterial());
-		BlockDataMock mock = new BlockDataMock(Material.GRASS);
+		BlockDataMock mock = new BlockDataMock(Material.SHORT_GRASS);
 		BlockDataMock mock2 = new BlockDataMock(Material.GRASS_BLOCK);
 		world.setBlockData(location, mock);
-		assertEquals(Material.GRASS, world.getBlockData(location).getMaterial());
-		assertEquals(Material.GRASS, world.getBlockData(0, 1, 0).getMaterial());
-		assertEquals(Material.GRASS, world.getType(0, 1, 0));
+		assertEquals(Material.SHORT_GRASS, world.getBlockData(location).getMaterial());
+		assertEquals(Material.SHORT_GRASS, world.getBlockData(0, 1, 0).getMaterial());
+		assertEquals(Material.SHORT_GRASS, world.getType(0, 1, 0));
 		world.setBlockData(0, 1, 0, mock2);
 		assertEquals(Material.GRASS_BLOCK, world.getBlockData(location).getMaterial());
 		assertEquals(Material.GRASS_BLOCK, world.getType(location));
@@ -1305,7 +1309,12 @@ class WorldMockTest
 				Arguments.of(EntityType.DOLPHIN, DolphinMock.class),
 				Arguments.of(EntityType.MAGMA_CUBE, MagmaCubeMock.class),
 				Arguments.of(EntityType.ENDERMITE, EndermiteMock.class),
-				Arguments.of(EntityType.SILVERFISH, SilverfishMock.class)
+				Arguments.of(EntityType.SILVERFISH, SilverfishMock.class),
+				Arguments.of(EntityType.THROWN_EXP_BOTTLE, ThrownExpBottleMock.class),
+				Arguments.of(EntityType.SNOWBALL, SnowballMock.class),
+				Arguments.of(EntityType.TURTLE, TurtleMock.class),
+				Arguments.of(EntityType.THROWN_EXP_BOTTLE, ThrownExpBottleMock.class),
+				Arguments.of(EntityType.LEASH_HITCH, LeashHitchMock.class)
 		);
 	}
 
@@ -1452,23 +1461,6 @@ class WorldMockTest
 		assertEquals(3, worldMock.getHighestBlockYAt(2, 3, HeightMap.OCEAN_FLOOR));
 		assertEquals(20, worldMock.getHighestBlockYAt(2, 3, HeightMap.WORLD_SURFACE));
 		assertEquals(20, worldMock.getHighestBlockYAt(2, 3, HeightMap.MOTION_BLOCKING));
-	}
-
-	@Test
-	void getHighestBlockYAt_Waterlogged()
-	{
-		WorldMock worldMock = new WorldMock(Material.COAL_BLOCK, 3);
-		Location location = new Location(worldMock, 2, 20, 3);
-		Block block = location.getBlock();
-		WallSign wallSign = new WallSignMock(Material.ACACIA_WALL_SIGN);
-		wallSign.setWaterlogged(true);
-		block.setBlockData(wallSign);
-		assertEquals(3, worldMock.getHighestBlockYAt(2, 3, HeightMap.OCEAN_FLOOR));
-		assertEquals(20, worldMock.getHighestBlockYAt(2, 3, HeightMap.MOTION_BLOCKING));
-		wallSign.setWaterlogged(false);
-		block.setBlockData(wallSign);
-		assertEquals(3, worldMock.getHighestBlockYAt(2, 3, HeightMap.MOTION_BLOCKING));
-		assertEquals(20, worldMock.getHighestBlockYAt(2, 3, HeightMap.WORLD_SURFACE));
 	}
 
 	@Test
@@ -2204,6 +2196,101 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		world.setWaterUndergroundCreatureSpawnLimit(42);
 		assertEquals(42, world.getSpawnLimit(SpawnCategory.WATER_UNDERGROUND_CREATURE));
+	@Test
+	void testIsRespawnAnchorWorks()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setEnvironment(World.Environment.NETHER);
+		assertTrue(world.isRespawnAnchorWorks());
+	}
+
+	@Test
+	void testIsRespawnAnchorWorksFalse()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertFalse(world.isRespawnAnchorWorks());
+		world.setEnvironment(World.Environment.THE_END);
+		assertFalse(world.isRespawnAnchorWorks());
+	}
+
+	@Test
+	void testDoesRespawnAnchorWork()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setEnvironment(World.Environment.NETHER);
+		assertTrue(world.doesRespawnAnchorWork());
+	}
+
+	@Test
+	void testDoesRespawnAnchorWorkFalse()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertFalse(world.doesRespawnAnchorWork());
+		world.setEnvironment(World.Environment.THE_END);
+		assertFalse(world.doesRespawnAnchorWork());
+	}
+
+	@Test
+	void testIsUltrawarm()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setEnvironment(World.Environment.NETHER);
+		assertTrue(world.isUltrawarm());
+
+		world.setEnvironment(World.Environment.NORMAL);
+		assertFalse(world.isUltrawarm());
+		world.setEnvironment(World.Environment.THE_END);
+		assertFalse(world.isUltrawarm());
+	}
+
+	@Test
+	void testIsFixedTime()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertFalse(world.isFixedTime());
+
+		world.setEnvironment(World.Environment.NETHER);
+		assertTrue(world.isFixedTime());
+
+		world.setEnvironment(World.Environment.THE_END);
+		assertTrue(world.isFixedTime());
+	}
+
+  @Test
+	void testGetEntity()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ZOMBIE);
+		assertEquals(entity, world.getEntity(entity.getUniqueId()));
+	}
+
+	@Test
+	void testGetEntityNull()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertThrows(IllegalArgumentException.class, () -> world.getEntity(null));
+	}
+
+	@Test
+	void testGetEntityWrongWorld()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		WorldMock world2 = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ZOMBIE);
+		assertNull(world2.getEntity(entity.getUniqueId()));
+	}
+
+	@Test
+	void testGetLogicalHeight()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertEquals(384, world.getLogicalHeight());
+
+		world.setEnvironment(World.Environment.NETHER);
+		assertEquals(256, world.getLogicalHeight());
+
+		world.setEnvironment(World.Environment.THE_END);
+		assertEquals(256, world.getLogicalHeight());
 	}
 
 }

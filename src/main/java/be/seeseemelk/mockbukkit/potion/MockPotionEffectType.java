@@ -3,10 +3,12 @@ package be.seeseemelk.mockbukkit.potion;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.JsonObject;
 import org.bukkit.Color;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
+import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 
@@ -27,6 +29,22 @@ public class MockPotionEffectType extends PotionEffectType
 	private final boolean instant;
 	private final Color color;
 	private final @NotNull Map<Attribute, AttributeModifier> attributeModifiers;
+	private final NamespacedKey key;
+	private final Category category;
+
+
+	public MockPotionEffectType(@NotNull NamespacedKey key, int id, String name, boolean instant, Color color, Category category)
+	{
+		super();
+
+		this.key = Preconditions.checkNotNull(key);
+		this.id = id;
+		this.name = Preconditions.checkNotNull(name);
+		this.instant = instant;
+		this.color = Preconditions.checkNotNull(color);
+		this.attributeModifiers = new EnumMap<>(Attribute.class);
+		this.category = category;
+	}
 
 	/**
 	 * Constructs a new {@link MockPotionEffectType} with the provided parameters.
@@ -39,13 +57,18 @@ public class MockPotionEffectType extends PotionEffectType
 	 */
 	public MockPotionEffectType(@NotNull NamespacedKey key, int id, String name, boolean instant, Color color)
 	{
-		super(id, key);
+		this(key, id, name, instant, color, Category.NEUTRAL);
+	}
 
-		this.id = id;
-		this.name = name;
-		this.instant = instant;
-		this.color = color;
-		this.attributeModifiers = new EnumMap<>(Attribute.class);
+	public MockPotionEffectType(JsonObject data)
+	{
+		this(NamespacedKey.fromString(data.get("key").getAsString()),
+				data.get("id").getAsInt(),
+				data.get("name").getAsString(),
+				data.get("instant").getAsBoolean(),
+				Color.fromRGB(data.get("rgb").getAsInt()),
+				Category.valueOf(data.get("category").getAsString())
+		);
 	}
 
 	@Deprecated
@@ -60,6 +83,26 @@ public class MockPotionEffectType extends PotionEffectType
 	public @NotNull String getName()
 	{
 		return name;
+	}
+
+	@Override
+	@Deprecated(since = "1.20")
+	public int getId()
+	{
+		return this.id;
+	}
+
+	@Override
+	public @NotNull NamespacedKey getKey()
+	{
+		return key;
+	}
+
+	@Override
+	public @NotNull PotionEffect createEffect(int duration, int amplifier)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -133,8 +176,7 @@ public class MockPotionEffectType extends PotionEffectType
 	@Override
 	public @NotNull Category getEffectCategory()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.category;
 	}
 
 	@Override
