@@ -21,7 +21,7 @@ public class TNTPrimedMock extends EntityMock implements TNTPrimed
 
 	private int fuseTicks = 80;
 	private Entity source;
-	private float yield = 4;
+	private float explosionYield = 4;
 	private boolean incendiary = false;
 
 	/**
@@ -44,13 +44,13 @@ public class TNTPrimedMock extends EntityMock implements TNTPrimed
 	@Override
 	public int getFuseTicks()
 	{
-		return fuseTicks;
+		return this.fuseTicks;
 	}
 
 	@Override
 	public @Nullable Entity getSource()
 	{
-		return source;
+		return this.source;
 	}
 
 	@Override
@@ -64,15 +64,15 @@ public class TNTPrimedMock extends EntityMock implements TNTPrimed
 	}
 
 	@Override
-	public void setYield(float yield)
+	public void setYield(float explosionYield)
 	{
-		this.yield = yield;
+		this.explosionYield = explosionYield;
 	}
 
 	@Override
 	public float getYield()
 	{
-		return yield;
+		return this.explosionYield;
 	}
 
 	@Override
@@ -84,7 +84,7 @@ public class TNTPrimedMock extends EntityMock implements TNTPrimed
 	@Override
 	public boolean isIncendiary()
 	{
-		return incendiary;
+		return this.incendiary;
 	}
 
 	@Override
