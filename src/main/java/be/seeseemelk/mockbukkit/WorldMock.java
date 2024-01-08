@@ -255,8 +255,8 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.function.Function;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -1327,7 +1327,7 @@ public class WorldMock implements World
 		else if (clazz == ChestBoat.class)
 		{
 			return new ChestBoatMock(server, UUID.randomUUID());
-    }
+		}
 		else if (clazz == EnderPearl.class)
 		{
 			return new EnderPearlMock(server, UUID.randomUUID());
@@ -1383,7 +1383,7 @@ public class WorldMock implements World
 		else if (clazz == Turtle.class)
 		{
 			return new TurtleMock(server, UUID.randomUUID());
-    }
+		}
 		else if (clazz == ThrownExpBottle.class)
 		{
 			return new ThrownExpBottleMock(server, UUID.randomUUID());
@@ -2776,12 +2776,14 @@ public class WorldMock implements World
 			}
 			case MOTION_BLOCKING_NO_LEAVES ->
 			{
-				boolean isWaterLogged =  block.getBlockData() instanceof Waterlogged waterlogged && waterlogged.isWaterlogged();
+				boolean isWaterLogged = block.getBlockData() instanceof Waterlogged waterlogged && waterlogged.isWaterlogged();
 				yield (block.isSolid() || isWaterLogged || block.isLiquid()) && !Tag.LEAVES.isTagged(block.getType());
 			}
 			case OCEAN_FLOOR -> block.isSolid();
-			case OCEAN_FLOOR_WG -> (block.getY() <= this.grassHeight && this.defaultBlock.isSolid()) || block.getY() == 0;
-			case WORLD_SURFACE_WG -> (block.getY() <= this.grassHeight && !this.defaultBlock.isAir()) || block.getY() == 0;
+			case OCEAN_FLOOR_WG ->
+					(block.getY() <= this.grassHeight && this.defaultBlock.isSolid()) || block.getY() == 0;
+			case WORLD_SURFACE_WG ->
+					(block.getY() <= this.grassHeight && !this.defaultBlock.isAir()) || block.getY() == 0;
 			case WORLD_SURFACE -> !block.getType().isAir();
 		};
 	}
