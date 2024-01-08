@@ -43,6 +43,7 @@ import be.seeseemelk.mockbukkit.entity.HopperMinecartMock;
 import be.seeseemelk.mockbukkit.entity.HorseMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
 import be.seeseemelk.mockbukkit.entity.LargeFireballMock;
+import be.seeseemelk.mockbukkit.entity.LeashHitchMock;
 import be.seeseemelk.mockbukkit.entity.LlamaMock;
 import be.seeseemelk.mockbukkit.entity.LlamaSpitMock;
 import be.seeseemelk.mockbukkit.entity.MagmaCubeMock;
@@ -436,7 +437,7 @@ public class WorldMock implements World
 	 */
 	public WorldMock()
 	{
-		this(Material.GRASS, 4);
+		this(Material.GRASS_BLOCK, 4);
 	}
 
 	/**
@@ -506,6 +507,13 @@ public class WorldMock implements World
 	public int getPlayerCount()
 	{
 		return getPlayers().size();
+	}
+
+	@Override
+	public boolean hasStructureAt(@NotNull Position position, @NotNull Structure structure)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -992,6 +1000,7 @@ public class WorldMock implements World
 		EntityMock entity = this.mockEntity(location, clazz, randomizeData);
 
 		entity.setLocation(location);
+		entity.setSpawnReason(reason);
 
 		if (entity instanceof MobMock mob)
 		{
@@ -1383,6 +1392,10 @@ public class WorldMock implements World
 		{
 			return new SnowballMock(server, UUID.randomUUID());
 		}
+		else if (clazz == LeashHitch.class)
+		{
+			return new LeashHitchMock(server, UUID.randomUUID());
+		}
 		throw new UnimplementedOperationException();
 	}
 
@@ -1510,6 +1523,13 @@ public class WorldMock implements World
 	}
 
 	@Override
+	public <T extends Entity> @NotNull T createEntity(@NotNull Location location, @NotNull Class<T> aClass)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull CompletableFuture<Chunk> getChunkAtAsync(int x, int z, boolean gen, boolean urgent)
 	{
 		// TODO Auto-generated method stub
@@ -1531,8 +1551,11 @@ public class WorldMock implements World
 	@Override
 	public @Nullable Entity getEntity(@NotNull UUID uuid)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(uuid != null, "UUID cannot be null");
+		return getEntities().stream()
+				.filter(entity -> entity.getUniqueId().equals(uuid))
+				.findFirst()
+				.orElse(null);
 	}
 
 	@Override
@@ -2548,12 +2571,18 @@ public class WorldMock implements World
 	}
 
 	@Override
+	public <T extends Entity> @NotNull T addEntity(@NotNull T t)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	@Deprecated(forRemoval = true)
 	@ApiStatus.ScheduledForRemoval(inVersion = "1.21")
 	public boolean isUltrawarm()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.isUltraWarm();
 	}
 
 	@Override
@@ -2601,8 +2630,7 @@ public class WorldMock implements World
 	@Override
 	public boolean isFixedTime()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.environment == Environment.THE_END || this.environment == Environment.NETHER;
 	}
 
 	@Override
@@ -2934,8 +2962,12 @@ public class WorldMock implements World
 	@Override
 	public int getLogicalHeight()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return switch (environment)
+		{
+			case NETHER, THE_END -> 256;
+			case NORMAL -> 384;
+			case CUSTOM -> throw new UnimplementedOperationException("We don't have support for Datapacks");
+		};
 	}
 
 	@Override

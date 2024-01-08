@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.scoreboard;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.entity.EntityMock;
 import com.google.common.base.Preconditions;
 import net.kyori.adventure.text.Component;
@@ -211,6 +212,20 @@ public class ObjectiveMock implements Objective
 	{
 		Preconditions.checkNotNull(entity, "Entity cannot be null");
 		return getScore(((EntityMock) entity).getScoreboardEntry());
+	}
+
+	@Override
+	public boolean willAutoUpdateDisplay()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setAutoUpdateDisplay(boolean autoUpdateDisplay)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
