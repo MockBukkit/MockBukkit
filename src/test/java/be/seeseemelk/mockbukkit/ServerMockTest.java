@@ -32,10 +32,12 @@ import com.destroystokyo.paper.event.player.PlayerConnectionCloseEvent;
 import com.destroystokyo.paper.event.server.WhitelistToggleEvent;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
+import com.google.common.net.InetAddresses;
 import io.papermc.paper.world.structure.ConfiguredStructure;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Art;
+import org.bukkit.BanList;
 import org.bukkit.Bukkit;
 import org.bukkit.Fluid;
 import org.bukkit.GameMode;
@@ -78,6 +80,7 @@ import org.bukkit.scoreboard.ScoreboardManager;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -92,12 +95,14 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -1634,6 +1639,81 @@ class ServerMockTest
 		assertEquals(10, server.getAnimalSpawnLimit());
 	}
 
+
+	@Test
+	void testBanIP()
+	{
+		InetAddress address = InetAddresses.fromInteger(ThreadLocalRandom.current().nextInt());
+		assertFalse(server.getBanList(BanList.Type.IP).isBanned(address));
+		server.banIP(address);
+		assertTrue(server.getBanList(BanList.Type.IP).isBanned(address));
+	}
+
+	@Test
+	void testBanIPNullThrows()
+	{
+		assertThrows(NullPointerException.class, () -> server.banIP((InetAddress) null));
+	}
+
+	@Test
+	void testUnbanIP()
+	{
+		InetAddress address = InetAddresses.fromInteger(ThreadLocalRandom.current().nextInt());
+		server.banIP(address);
+		assertTrue(server.getBanList(BanList.Type.IP).isBanned(address));
+
+		server.unbanIP(address);
+		assertFalse(server.getBanList(BanList.Type.IP).isBanned(address));
+	}
+
+	@Test
+	void testUnbanIPNullThrows()
+	{
+		assertThrows(NullPointerException.class, () -> server.unbanIP((InetAddress) null));
+	}
+
+	@Test
+	void testBanIPString()
+	{
+		InetAddress address = InetAddresses.fromInteger(ThreadLocalRandom.current().nextInt());
+		String addressString = address.getHostAddress();
+		assertFalse(server.getBanList(BanList.Type.IP).isBanned(addressString));
+		server.banIP(addressString);
+		assertTrue(server.getBanList(BanList.Type.IP).isBanned(addressString));
+	}
+
+	@Test
+	void testBanIPStringNullThrows()
+	{
+		assertThrows(NullPointerException.class, () -> server.banIP((String) null));
+	}
+
+	@Test
+	void testUnbanIPString()
+	{
+		InetAddress address = InetAddresses.fromInteger(ThreadLocalRandom.current().nextInt());
+		String addressString = address.getHostAddress();
+		server.banIP(addressString);
+		assertTrue(server.getBanList(BanList.Type.IP).isBanned(addressString));
+		server.unbanIP(addressString);
+		assertFalse(server.getBanList(BanList.Type.IP).isBanned(addressString));
+	}
+
+	@Test
+	void testUnbanIPStringNullThrows()
+	{
+		assertThrows(NullPointerException.class, () -> server.unbanIP((String) null));
+	}
+
+	@Test
+	void testGetIPBans()
+	{
+		InetAddress address = InetAddresses.fromInteger(ThreadLocalRandom.current().nextInt());
+		server.banIP(address);
+		assertEquals(1, server.getIPBans().size());
+		assertTrue(server.getIPBans().contains(address.getHostAddress()));
+
+	}
 
 }
 
