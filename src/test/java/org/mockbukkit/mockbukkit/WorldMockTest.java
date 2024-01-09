@@ -41,6 +41,7 @@ import org.mockbukkit.mockbukkit.entity.GuardianMock;
 import org.mockbukkit.mockbukkit.entity.HopperMinecartMock;
 import org.mockbukkit.mockbukkit.entity.HorseMock;
 import org.mockbukkit.mockbukkit.entity.ItemEntityMock;
+import org.mockbukkit.mockbukkit.entity.LeashHitchMock;
 import org.mockbukkit.mockbukkit.entity.LlamaMock;
 import org.mockbukkit.mockbukkit.entity.LlamaSpitMock;
 import org.mockbukkit.mockbukkit.entity.MagmaCubeMock;
@@ -58,17 +59,21 @@ import org.mockbukkit.mockbukkit.entity.RabbitMock;
 import org.mockbukkit.mockbukkit.entity.RideableMinecartMock;
 import org.mockbukkit.mockbukkit.entity.SalmonMock;
 import org.mockbukkit.mockbukkit.entity.SheepMock;
+import org.mockbukkit.mockbukkit.entity.SilverfishMock;
 import org.mockbukkit.mockbukkit.entity.SkeletonHorseMock;
 import org.mockbukkit.mockbukkit.entity.SkeletonMock;
 import org.mockbukkit.mockbukkit.entity.SlimeMock;
 import org.mockbukkit.mockbukkit.entity.SmallFireballMock;
+import org.mockbukkit.mockbukkit.entity.SnowballMock;
 import org.mockbukkit.mockbukkit.entity.SpawnerMinecartMock;
 import org.mockbukkit.mockbukkit.entity.SpiderMock;
 import org.mockbukkit.mockbukkit.entity.SquidMock;
 import org.mockbukkit.mockbukkit.entity.StorageMinecartMock;
 import org.mockbukkit.mockbukkit.entity.StrayMock;
 import org.mockbukkit.mockbukkit.entity.TadpoleMock;
+import org.mockbukkit.mockbukkit.entity.ThrownExpBottleMock;
 import org.mockbukkit.mockbukkit.entity.TropicalFishMock;
+import org.mockbukkit.mockbukkit.entity.TurtleMock;
 import org.mockbukkit.mockbukkit.entity.WardenMock;
 import org.mockbukkit.mockbukkit.entity.WitherSkeletonMock;
 import org.mockbukkit.mockbukkit.entity.WitherSkullMock;
@@ -83,6 +88,7 @@ import org.bukkit.ChunkSnapshot;
 import org.bukkit.Difficulty;
 import org.bukkit.Effect;
 import org.bukkit.GameRule;
+import org.bukkit.HeightMap;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -90,6 +96,7 @@ import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
+import org.bukkit.block.data.type.WallSign;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
@@ -180,7 +187,7 @@ class WorldMockTest
 		Location spawn = world.getSpawnLocation();
 		assertNotNull(spawn);
 		assertEquals(Material.AIR, world.getBlockAt(spawn.getBlockX(), spawn.getBlockY(), spawn.getBlockZ()).getType());
-		assertEquals(Material.GRASS, world.getBlockAt(spawn.getBlockX(), spawn.getBlockY() - 1, spawn.getBlockZ()).getType());
+		assertEquals(Material.GRASS_BLOCK, world.getBlockAt(spawn.getBlockX(), spawn.getBlockY() - 1, spawn.getBlockZ()).getType());
 	}
 
 	@Test
@@ -667,12 +674,12 @@ class WorldMockTest
 		Block block = world.getBlockAt(0, 1, 0);
 		BlockData data = block.getBlockData();
 		assertEquals(data.getMaterial(), world.getBlockData(location).getMaterial());
-		BlockDataMock mock = new BlockDataMock(Material.GRASS);
+		BlockDataMock mock = new BlockDataMock(Material.SHORT_GRASS);
 		BlockDataMock mock2 = new BlockDataMock(Material.GRASS_BLOCK);
 		world.setBlockData(location, mock);
-		assertEquals(Material.GRASS, world.getBlockData(location).getMaterial());
-		assertEquals(Material.GRASS, world.getBlockData(0, 1, 0).getMaterial());
-		assertEquals(Material.GRASS, world.getType(0, 1, 0));
+		assertEquals(Material.SHORT_GRASS, world.getBlockData(location).getMaterial());
+		assertEquals(Material.SHORT_GRASS, world.getBlockData(0, 1, 0).getMaterial());
+		assertEquals(Material.SHORT_GRASS, world.getType(0, 1, 0));
 		world.setBlockData(0, 1, 0, mock2);
 		assertEquals(Material.GRASS_BLOCK, world.getBlockData(location).getMaterial());
 		assertEquals(Material.GRASS_BLOCK, world.getType(location));
@@ -1300,7 +1307,13 @@ class WorldMockTest
 				Arguments.of(EntityType.LLAMA_SPIT, LlamaSpitMock.class),
 				Arguments.of(EntityType.DOLPHIN, DolphinMock.class),
 				Arguments.of(EntityType.MAGMA_CUBE, MagmaCubeMock.class),
-				Arguments.of(EntityType.ENDERMITE, EndermiteMock.class)
+				Arguments.of(EntityType.ENDERMITE, EndermiteMock.class),
+				Arguments.of(EntityType.SILVERFISH, SilverfishMock.class),
+				Arguments.of(EntityType.THROWN_EXP_BOTTLE, ThrownExpBottleMock.class),
+				Arguments.of(EntityType.SNOWBALL, SnowballMock.class),
+				Arguments.of(EntityType.TURTLE, TurtleMock.class),
+				Arguments.of(EntityType.THROWN_EXP_BOTTLE, ThrownExpBottleMock.class),
+				Arguments.of(EntityType.LEASH_HITCH, LeashHitchMock.class)
 		);
 	}
 
@@ -1413,6 +1426,68 @@ class WorldMockTest
 		String randomTickSpeed = world.getGameRuleValue("randomTickSpeed");
 		world.setGameRuleValue("randomTickSpeed", "test");
 		assertEquals(randomTickSpeed, world.getGameRuleValue("randomTickSpeed"));
+	}
+
+	@Test
+	void getHighestBlockYAt_FlatWorld()
+	{
+		WorldMock world = new WorldMock(Material.COAL_BLOCK, 3);
+		assertEquals(3, world.getHighestBlockYAt(0, 0, HeightMap.WORLD_SURFACE));
+	}
+
+	@Test
+	void getHighestBlockAt_FlatWorld()
+	{
+		WorldMock world = new WorldMock(Material.COAL_BLOCK, 3);
+		assertEquals(3, world.getHighestBlockAt(0, 0, HeightMap.WORLD_SURFACE).getY());
+	}
+
+	@Test
+	void getHighestBlockYAt_AddedMaterial()
+	{
+		WorldMock worldMock = new WorldMock(Material.COAL_BLOCK, 3);
+		Location location = new Location(worldMock, 2, 20, 3);
+		location.getBlock().setType(Material.GRASS_BLOCK);
+		assertEquals(20, worldMock.getHighestBlockYAt(2, 3, HeightMap.WORLD_SURFACE));
+	}
+
+	@Test
+	void getHighestBlockYAt_Water()
+	{
+		WorldMock worldMock = new WorldMock(Material.COAL_BLOCK, 3);
+		Location location = new Location(worldMock, 2, 20, 3);
+		location.getBlock().setType(Material.WATER);
+		assertEquals(3, worldMock.getHighestBlockYAt(2, 3, HeightMap.OCEAN_FLOOR));
+		assertEquals(20, worldMock.getHighestBlockYAt(2, 3, HeightMap.WORLD_SURFACE));
+		assertEquals(20, worldMock.getHighestBlockYAt(2, 3, HeightMap.MOTION_BLOCKING));
+	}
+
+	@Test
+	void getHighestBlockYAt_Leaves()
+	{
+		WorldMock worldMock = new WorldMock(Material.COAL_BLOCK, 3);
+		Location location = new Location(worldMock, 2, 20, 3);
+		location.getBlock().setType(Material.ACACIA_LEAVES);
+		assertEquals(3, worldMock.getHighestBlockYAt(2, 3, HeightMap.MOTION_BLOCKING_NO_LEAVES));
+		assertEquals(20, worldMock.getHighestBlockYAt(2, 3, HeightMap.MOTION_BLOCKING));
+	}
+
+	@Test
+	void getHighestBlockYAt_NoBlockInCoordinate()
+	{
+		WorldMock worldMock = new WorldMock(Material.COAL_BLOCK, 0);
+		Location location = new Location(worldMock, 2, 0, 3);
+		location.getBlock().setType(Material.AIR);
+		assertEquals(-1, worldMock.getHighestBlockYAt(2, 3, HeightMap.WORLD_SURFACE));
+	}
+
+	@Test
+	void getHighestBlockYAt_Worldgen()
+	{
+		WorldMock worldMock = new WorldMock(Material.COAL_BLOCK, 2);
+		Location location = new Location(worldMock, 2, 3, 3);
+		location.getBlock().setType(Material.COAL_BLOCK);
+		assertEquals(2, worldMock.getHighestBlockYAt(2, 3, HeightMap.WORLD_SURFACE_WG));
 	}
 
 	@Test
@@ -1965,6 +2040,103 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		world.setTicksPerMonsterSpawns(10);
 		assertEquals(10, world.getTicksPerMonsterSpawns());
+	}
+
+	@Test
+	void testIsRespawnAnchorWorks()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setEnvironment(World.Environment.NETHER);
+		assertTrue(world.isRespawnAnchorWorks());
+	}
+
+	@Test
+	void testIsRespawnAnchorWorksFalse()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertFalse(world.isRespawnAnchorWorks());
+		world.setEnvironment(World.Environment.THE_END);
+		assertFalse(world.isRespawnAnchorWorks());
+	}
+
+	@Test
+	void testDoesRespawnAnchorWork()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setEnvironment(World.Environment.NETHER);
+		assertTrue(world.doesRespawnAnchorWork());
+	}
+
+	@Test
+	void testDoesRespawnAnchorWorkFalse()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertFalse(world.doesRespawnAnchorWork());
+		world.setEnvironment(World.Environment.THE_END);
+		assertFalse(world.doesRespawnAnchorWork());
+	}
+
+	@Test
+	void testIsUltrawarm()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setEnvironment(World.Environment.NETHER);
+		assertTrue(world.isUltrawarm());
+
+		world.setEnvironment(World.Environment.NORMAL);
+		assertFalse(world.isUltrawarm());
+		world.setEnvironment(World.Environment.THE_END);
+		assertFalse(world.isUltrawarm());
+	}
+
+	@Test
+	void testIsFixedTime()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertFalse(world.isFixedTime());
+
+		world.setEnvironment(World.Environment.NETHER);
+		assertTrue(world.isFixedTime());
+
+		world.setEnvironment(World.Environment.THE_END);
+		assertTrue(world.isFixedTime());
+	}
+
+  @Test
+	void testGetEntity()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ZOMBIE);
+		assertEquals(entity, world.getEntity(entity.getUniqueId()));
+	}
+
+	@Test
+	void testGetEntityNull()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertThrows(IllegalArgumentException.class, () -> world.getEntity(null));
+	}
+
+	@Test
+	void testGetEntityWrongWorld()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		WorldMock world2 = new WorldMock(Material.DIRT, 3);
+		Entity entity = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ZOMBIE);
+		assertNull(world2.getEntity(entity.getUniqueId()));
+	}
+
+	@Test
+	void testGetLogicalHeight()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertEquals(384, world.getLogicalHeight());
+
+		world.setEnvironment(World.Environment.NETHER);
+		assertEquals(256, world.getLogicalHeight());
+
+		world.setEnvironment(World.Environment.THE_END);
+		assertEquals(256, world.getLogicalHeight());
 	}
 
 }

@@ -164,7 +164,7 @@ public class ServerConfiguration
 	 */
 	public boolean shouldSendChatPreviews()
 	{
-		return this.sendChatPreviews;
+		throw new UnsupportedOperationException("Chat previews were removed in v.1.19.3");
 	}
 
 	/**

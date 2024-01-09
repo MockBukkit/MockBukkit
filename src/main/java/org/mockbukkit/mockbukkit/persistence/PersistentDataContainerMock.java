@@ -131,6 +131,13 @@ public class PersistentDataContainerMock implements PersistentDataContainer
 	}
 
 	@Override
+	public void copyTo(@NotNull PersistentDataContainer other, boolean replace)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public void remove(@NotNull NamespacedKey key)
 	{
 		map.remove(key);

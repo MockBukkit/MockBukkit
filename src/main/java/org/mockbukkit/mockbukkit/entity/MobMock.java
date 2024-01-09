@@ -200,4 +200,18 @@ public abstract class MobMock extends LivingEntityMock implements Mob
 		throw new UnimplementedOperationException();
 	}
 
+	@Override
+	public boolean isAggressive()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setAggressive(boolean aggressive)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 }

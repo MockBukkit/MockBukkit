@@ -31,13 +31,19 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.InvalidPluginException;
 import org.bukkit.plugin.PluginDescriptionFile;
+import org.bukkit.potion.PotionType;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.UnimplementedOperationException;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.potion.MockInternalPotionData;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Mock implementation of an {@link UnsafeValues}.
@@ -57,35 +63,35 @@ public class UnsafeValuesMock implements UnsafeValues
 	}
 
 	@Override
-	@Deprecated(forRemoval = true)
+	@Deprecated(forRemoval = true, since = "1.18")
 	public @NotNull PlainComponentSerializer plainComponentSerializer()
 	{
 		return PlainComponentSerializer.plain();
 	}
 
 	@Override
-	@Deprecated(forRemoval = true)
+	@Deprecated(forRemoval = true, since = "1.18")
 	public @NotNull PlainTextComponentSerializer plainTextSerializer()
 	{
 		return PlainTextComponentSerializer.plainText();
 	}
 
 	@Override
-	@Deprecated(forRemoval = true)
+	@Deprecated(forRemoval = true, since = "1.18")
 	public @NotNull GsonComponentSerializer gsonComponentSerializer()
 	{
 		return GsonComponentSerializer.gson();
 	}
 
 	@Override
-	@Deprecated(forRemoval = true)
+	@Deprecated(forRemoval = true, since = "1.18")
 	public @NotNull GsonComponentSerializer colorDownsamplingGsonComponentSerializer()
 	{
 		return GsonComponentSerializer.colorDownsamplingGson();
 	}
 
 	@Override
-	@Deprecated(forRemoval = true)
+	@Deprecated(forRemoval = true, since = "1.18")
 	public @NotNull LegacyComponentSerializer legacyComponentSerializer()
 	{
 		return LegacyComponentSerializer.legacySection();
@@ -249,6 +255,7 @@ public class UnsafeValuesMock implements UnsafeValues
 	}
 
 	@Override
+	@Deprecated(forRemoval = true, since = "1.19")
 	public boolean isSupportedApiVersion(String apiVersion)
 	{
 		return COMPATIBLE_API_VERSIONS.contains(apiVersion);
@@ -321,6 +328,12 @@ public class UnsafeValuesMock implements UnsafeValues
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public PotionType.InternalPotionData getInternalPotionData(NamespacedKey key)
+	{
+		return new MockInternalPotionData(key);
 	}
 
 	@Override

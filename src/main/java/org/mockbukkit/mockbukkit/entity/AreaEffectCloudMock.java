@@ -13,6 +13,7 @@ import org.bukkit.potion.PotionType;
 import org.bukkit.projectiles.ProjectileSource;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.UnimplementedOperationException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -161,6 +162,20 @@ public class AreaEffectCloudMock extends EntityMock implements AreaEffectCloud
 	public @NotNull PotionData getBasePotionData()
 	{
 		return this.basePotionData;
+	}
+
+	@Override
+	public void setBasePotionType(@NotNull PotionType type)
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull PotionType getBasePotionType()
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
