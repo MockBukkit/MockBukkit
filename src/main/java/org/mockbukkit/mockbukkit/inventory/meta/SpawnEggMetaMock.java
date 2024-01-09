@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import org.mockbukkit.mockbukkit.UnimplementedOperationException;
+import org.bukkit.entity.EntitySnapshot;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.meta.SpawnEggMeta;
 import org.jetbrains.annotations.NotNull;
@@ -42,6 +43,20 @@ public class SpawnEggMetaMock extends ItemMetaMock implements SpawnEggMeta
 	public void setSpawnedType(EntityType type)
 	{
 		throw new UnsupportedOperationException("Must change item type to set spawned type");
+	}
+
+	@Override
+	public void setSpawnedEntity(@NotNull EntitySnapshot snapshot)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable EntitySnapshot getSpawnedEntity()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

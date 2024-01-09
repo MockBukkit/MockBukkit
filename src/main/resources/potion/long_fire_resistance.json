@@ -1,0 +1,12 @@
+{
+  "effects": [
+    {
+      "type": "minecraft:fire_resistance",
+      "amplifier": 0,
+      "duration": 9600,
+      "ambient": false,
+      "particles": true,
+      "icon": true
+    }
+  ]
+}

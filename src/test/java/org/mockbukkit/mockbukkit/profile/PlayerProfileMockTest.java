@@ -4,12 +4,15 @@ import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import com.destroystokyo.paper.profile.ProfileProperty;
+import org.bukkit.profile.PlayerTextures;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -95,6 +98,22 @@ class PlayerProfileMockTest
 
 		assertEquals(uuid, oldUuid);
 		assertEquals(uuid2, profile.getUniqueId());
+	}
+
+	@Test
+	void setTextures() throws MalformedURLException
+	{
+		UUID uuid = UUID.fromString("22815ad5-2a54-44c0-8f83-f65cfe5310f8");
+		PlayerProfileMock profile = new PlayerProfileMock("Test", uuid);
+		PlayerTexturesMock playerTextures = new PlayerTexturesMock(profile);
+		playerTextures.setSkin(new URL("https://github.com/skin/"));
+		playerTextures.setCape(new URL("https://google.com/cape/"));
+		profile.setTextures(playerTextures);
+
+		PlayerTextures textures = profile.getTextures();
+
+		assertEquals("https://github.com/skin/", textures.getSkin().toString());
+		assertEquals("https://google.com/cape/", textures.getCape().toString());
 	}
 
 	@Test

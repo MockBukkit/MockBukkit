@@ -261,7 +261,7 @@ public class BlockMock implements Block
 	@Override
 	public void setType(@NotNull Material type, boolean applyPhysics)
 	{
-		setType(material);
+		setType(type);
 	}
 
 	@Override

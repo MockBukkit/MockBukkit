@@ -1,5 +1,7 @@
 package org.mockbukkit.mockbukkit;
 
+import org.bukkit.ServerTickManager;
+import org.bukkit.inventory.ItemCraftResult;
 import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
 import org.mockbukkit.mockbukkit.boss.BossBarMock;
 import org.mockbukkit.mockbukkit.boss.KeyedBossBarMock;
@@ -8,7 +10,6 @@ import org.mockbukkit.mockbukkit.command.ConsoleCommandSenderMock;
 import org.mockbukkit.mockbukkit.command.MessageTarget;
 import org.mockbukkit.mockbukkit.command.CommandMapMock;
 import org.mockbukkit.mockbukkit.configuration.ServerConfiguration;
-import org.mockbukkit.mockbukkit.enchantments.EnchantmentsMock;
 import org.mockbukkit.mockbukkit.entity.EntityMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMockFactory;
@@ -38,7 +39,6 @@ import org.mockbukkit.mockbukkit.inventory.WorkbenchInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
 import org.mockbukkit.mockbukkit.map.MapViewMock;
 import org.mockbukkit.mockbukkit.plugin.PluginManagerMock;
-import org.mockbukkit.mockbukkit.potion.PotionEffectTypeMock;
 import org.mockbukkit.mockbukkit.profile.PlayerProfileMock;
 import org.mockbukkit.mockbukkit.scheduler.BukkitSchedulerMock;
 import org.mockbukkit.mockbukkit.scheduler.paper.FoliaAsyncScheduler;
@@ -71,7 +71,6 @@ import org.bukkit.BanEntry;
 import org.bukkit.BanList;
 import org.bukkit.BanList.Type;
 import org.bukkit.Bukkit;
-import org.bukkit.Color;
 import org.bukkit.GameMode;
 import org.bukkit.Keyed;
 import org.bukkit.Location;
@@ -123,7 +122,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.potion.PotionBrewer;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.Criteria;
 import org.bukkit.structure.StructureManager;
 import org.jetbrains.annotations.NotNull;
@@ -144,13 +142,13 @@ import java.util.Base64;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -214,11 +212,8 @@ public class ServerMock extends Server.Spigot implements Server
 	{
 		ServerMock.registerSerializables();
 
-		// Register default Minecraft Potion Effect Types
-		createPotionEffectTypes();
 		TagsMock.loadDefaultTags(this, true);
 		InternalTag.loadInternalTags();
-		EnchantmentsMock.registerDefaultEnchantments();
 
 		try
 		{
@@ -457,10 +452,11 @@ public class ServerMock extends Server.Spigot implements Server
 	/**
 	 * Removes a mocked world from this server.
 	 *
-	 * @param world	The world to remove.
+	 * @param world The world to remove.
 	 * @return true if the world was removed, otherwise false.
 	 */
-	public boolean removeWorld(WorldMock world) {
+	public boolean removeWorld(WorldMock world)
+	{
 		AsyncCatcher.catchOp("world remove");
 		return worlds.remove(world);
 	}
@@ -568,7 +564,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @NotNull String getBukkitVersion()
 	{
-		return BuildParameters.PAPER_API_FULL_VERSION;
+		return org.mockbukkit.mockbukkit.BuildParameters.PAPER_API_FULL_VERSION;
 	}
 
 	@Override
@@ -868,15 +864,15 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public void banIP(@NotNull InetAddress address)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(address, "Address cannot be null");
+		this.playerList.getIPBans().addBan(address, null, (Date) null, null);
 	}
 
 	@Override
 	public void unbanIP(@NotNull InetAddress address)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(address, "Address cannot be null");
+		this.playerList.getIPBans().pardon(address);
 	}
 
 	@Override
@@ -1041,6 +1037,27 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	public @NotNull ItemCraftResult craftItemResult(@NotNull ItemStack[] craftingMatrix, @NotNull World world)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull ItemCraftResult craftItemResult(@NotNull ItemStack[] craftingMatrix, @NotNull World world, @NotNull Player player)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull ItemStack craftItem(@NotNull ItemStack[] craftingMatrix, @NotNull World world)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public boolean removeRecipe(@NotNull NamespacedKey key)
 	{
 		return removeRecipe(key, false);
@@ -1161,10 +1178,12 @@ public class ServerMock extends Server.Spigot implements Server
 
 	/**
 	 * Sets the server listen port.
+	 *
 	 * @param port The server listen port.
 	 * @see ServerMock#getPort()
 	 */
-	public void setPort(int port) {
+	public void setPort(int port)
+	{
 		this.serverConfiguration.setServerPort(port);
 	}
 
@@ -1193,6 +1212,7 @@ public class ServerMock extends Server.Spigot implements Server
 
 	/**
 	 * Sets the server listen IP.
+	 *
 	 * @param serverIp The server listen IP.
 	 * @see ServerMock#getIp()
 	 */
@@ -1271,8 +1291,16 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	@Deprecated(since = "1.19")
 	public @NotNull DataPackManager getDataPackManager()
 	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull ServerTickManager getServerTickManager()
+	{
+		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
@@ -1574,7 +1602,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Deprecated(forRemoval = true)
 	public boolean shouldSendChatPreviews()
 	{
-		throw new UnsupportedOperationException("Chat previews were removed in v.1.19.3");
+		return this.serverConfiguration.shouldSendChatPreviews();
 	}
 
 	/**
@@ -1999,7 +2027,7 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
-	public @NotNull BlockData createBlockData(@NotNull Material material, @Nullable Consumer<BlockData> consumer)
+	public @NotNull BlockData createBlockData(@NotNull Material material, @Nullable Consumer<? super BlockData> consumer)
 	{
 		BlockData blockData = createBlockData(material);
 
@@ -2077,66 +2105,6 @@ public class ServerMock extends Server.Spigot implements Server
 
 		// Per definition this method should return null if the given tag does not exist.
 		return null;
-	}
-
-	/**
-	 * This registers Minecrafts default {@link PotionEffectType PotionEffectTypes}. It also prevents any new effects to
-	 * be created afterwards.
-	 */
-	private void createPotionEffectTypes()
-	{
-		for (PotionEffectType type : PotionEffectType.values())
-		{
-			// We probably already registered all Potion Effects
-			// otherwise this would be null
-			if (type != null)
-			{
-				// This is not perfect, but it works.
-				return;
-			}
-		}
-
-		registerPotionEffectType(1, "SPEED", false, 8171462);
-		registerPotionEffectType(2, "SLOWNESS", false, 5926017);
-		registerPotionEffectType(3, "HASTE", false, 14270531);
-		registerPotionEffectType(4, "MINING_FATIGUE", false, 4866583);
-		registerPotionEffectType(5, "STRENGTH", false, 9643043);
-		registerPotionEffectType(6, "INSTANT_HEALTH", true, 16262179);
-		registerPotionEffectType(7, "INSTANT_DAMAGE", true, 4393481);
-		registerPotionEffectType(8, "JUMP_BOOST", false, 2293580);
-		registerPotionEffectType(9, "NAUSEA", false, 5578058);
-		registerPotionEffectType(10, "REGENERATION", false, 13458603);
-		registerPotionEffectType(11, "RESISTANCE", false, 10044730);
-		registerPotionEffectType(12, "FIRE_RESISTANCE", false, 14981690);
-		registerPotionEffectType(13, "WATER_BREATHING", false, 3035801);
-		registerPotionEffectType(14, "INVISIBILITY", false, 8356754);
-		registerPotionEffectType(15, "BLINDNESS", false, 2039587);
-		registerPotionEffectType(16, "NIGHT_VISION", false, 2039713);
-		registerPotionEffectType(17, "HUNGER", false, 5797459);
-		registerPotionEffectType(18, "WEAKNESS", false, 4738376);
-		registerPotionEffectType(19, "POISON", false, 5149489);
-		registerPotionEffectType(20, "WITHER", false, 3484199);
-		registerPotionEffectType(21, "HEALTH_BOOST", false, 16284963);
-		registerPotionEffectType(22, "ABSORPTION", false, 2445989);
-		registerPotionEffectType(23, "SATURATION", true, 16262179);
-		registerPotionEffectType(24, "GLOWING", false, 9740385);
-		registerPotionEffectType(25, "LEVITATION", false, 13565951);
-		registerPotionEffectType(26, "LUCK", false, 3381504);
-		registerPotionEffectType(27, "UNLUCK", false, 12624973);
-		registerPotionEffectType(28, "SLOW_FALLING", false, 16773073);
-		registerPotionEffectType(29, "CONDUIT_POWER", false, 1950417);
-		registerPotionEffectType(30, "DOLPHINS_GRACE", false, 8954814);
-		registerPotionEffectType(31, "BAD_OMEN", false, 745784);
-		registerPotionEffectType(32, "HERO_OF_THE_VILLAGE", false, 4521796);
-		registerPotionEffectType(33, "DARKNESS", false, 2696993);
-		PotionEffectType.stopAcceptingRegistrations();
-	}
-
-	private void registerPotionEffectType(int id, @NotNull String name, boolean instant, int rgb)
-	{
-		NamespacedKey key = NamespacedKey.minecraft(name.toLowerCase(Locale.ROOT));
-		PotionEffectType type = new PotionEffectTypeMock(key, id, name, instant, Color.fromRGB(rgb));
-		PotionEffectType.registerPotionEffectType(type);
 	}
 
 	@Override
@@ -2600,6 +2568,7 @@ public class ServerMock extends Server.Spigot implements Server
 
 	/**
 	 * Exposes the {@link ServerConfiguration} of this {@link ServerMock}.
+	 *
 	 * @return The {@link ServerConfiguration} of this {@link ServerMock}.
 	 */
 	public @NotNull ServerConfiguration getServerConfiguration()
