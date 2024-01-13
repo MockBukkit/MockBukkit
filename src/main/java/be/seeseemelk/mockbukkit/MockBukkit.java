@@ -80,6 +80,8 @@ public class MockBukkit
 		Bukkit.setServer(mock);
 		mock.getLogger().setLevel(defaultLevel);
 
+		System.setProperty("mockbukkit.unit.test", "true");
+
 		return serverMockImplementation;
 	}
 
