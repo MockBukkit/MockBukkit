@@ -356,21 +356,10 @@ public class MockPlayerList
 	@NotNull
 	public OfflinePlayer getOfflinePlayer(@NotNull String name)
 	{
-		Player player = getPlayer(name);
-
-		if (player != null)
-		{
-			return player;
+		OfflinePlayer offlinePlayer = getOfflinePlayerIfCached(name);
+		if(offlinePlayer != null){
+			return offlinePlayer;
 		}
-
-		for (OfflinePlayer offlinePlayer : this.offlinePlayers)
-		{
-			if (name.equals(offlinePlayer.getName()))
-			{
-				return offlinePlayer;
-			}
-		}
-
 		return new OfflinePlayerMock(name);
 	}
 
@@ -436,6 +425,25 @@ public class MockPlayerList
 	public void removeOperator(UUID operator)
 	{
 		this.operators.remove(operator);
+	}
+
+	public @Nullable OfflinePlayer getOfflinePlayerIfCached(String name)
+	{
+		Player player = getPlayer(name);
+
+		if (player != null)
+		{
+			return player;
+		}
+
+		for (OfflinePlayer offlinePlayer : this.offlinePlayers)
+		{
+			if (name.equals(offlinePlayer.getName()))
+			{
+				return offlinePlayer;
+			}
+		}
+		return null;
 	}
 
 }
