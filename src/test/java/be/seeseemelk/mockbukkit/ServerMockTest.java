@@ -80,9 +80,7 @@ import org.bukkit.scoreboard.ScoreboardManager;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -1649,14 +1647,16 @@ class ServerMockTest
 	}
 
 	@Test
-	void testGetOfflinePlayerIfCached_notRegistered(){
+	void testGetOfflinePlayerIfCached_notRegistered()
+	{
 		String name = "headstalls";
 		OfflinePlayer offlinePlayer = server.getOfflinePlayerIfCached(name);
 		assertNull(offlinePlayer);
 	}
 
 	@Test
-	void testGetOfflinePlayerIfCached_offlinePlayerRegistered(){
+	void testGetOfflinePlayerIfCached_offlinePlayerRegistered()
+	{
 		PlayerMock playerMock = server.addPlayer("CapitalizedName");
 		playerMock.disconnect();
 		OfflinePlayer offlinePlayer = server.getOfflinePlayerIfCached(playerMock.getName());
@@ -1664,7 +1664,8 @@ class ServerMockTest
 	}
 
 	@Test
-	void testGetOfflinePlayerIfCached_playerRegistered(){
+	void testGetOfflinePlayerIfCached_playerRegistered()
+	{
 		PlayerMock playerMock = server.addPlayer("CapitalizedName");
 		OfflinePlayer offlinePlayer = server.getOfflinePlayerIfCached(playerMock.getName());
 		assertEquals(playerMock, offlinePlayer);
