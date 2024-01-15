@@ -80,6 +80,12 @@ class MockBukkitTest
 	}
 
 	@Test
+	void mock_MockPropertySet() {
+		MockBukkit.mock();
+		assertEquals("true", System.getProperty("mockbukkit.unit.test"));
+	}
+
+	@Test
 	void isMocked_ServerNotMocked_False()
 	{
 		assertFalse(MockBukkit.isMocked());
