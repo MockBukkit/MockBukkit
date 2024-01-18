@@ -142,6 +142,7 @@ import java.util.Base64;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -863,15 +864,15 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public void banIP(@NotNull InetAddress address)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(address, "Address cannot be null");
+		this.playerList.getIPBans().addBan(address, null, (Date) null, null);
 	}
 
 	@Override
 	public void unbanIP(@NotNull InetAddress address)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(address, "Address cannot be null");
+		this.playerList.getIPBans().pardon(address);
 	}
 
 	@Override
