@@ -41,6 +41,7 @@ import be.seeseemelk.mockbukkit.entity.HopperMinecartMock;
 import be.seeseemelk.mockbukkit.entity.HorseMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
 import be.seeseemelk.mockbukkit.entity.LargeFireballMock;
+import be.seeseemelk.mockbukkit.entity.LeashHitchMock;
 import be.seeseemelk.mockbukkit.entity.LlamaMock;
 import be.seeseemelk.mockbukkit.entity.LlamaSpitMock;
 import be.seeseemelk.mockbukkit.entity.MagmaCubeMock;
@@ -432,7 +433,7 @@ public class WorldMock implements World
 	 */
 	public WorldMock()
 	{
-		this(Material.GRASS, 4);
+		this(Material.GRASS_BLOCK, 4);
 	}
 
 	/**
@@ -1379,6 +1380,10 @@ public class WorldMock implements World
 		{
 			return new SnowballMock(server, UUID.randomUUID());
 		}
+		else if (clazz == LeashHitch.class)
+		{
+			return new LeashHitchMock(server, UUID.randomUUID());
+		}
 		throw new UnimplementedOperationException();
 	}
 
@@ -1503,6 +1508,13 @@ public class WorldMock implements World
 					.toList());
 		}
 		return entities;
+	}
+
+	@Override
+	public <T extends Entity> @NotNull T createEntity(@NotNull Location location, @NotNull Class<T> aClass)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -2541,6 +2553,13 @@ public class WorldMock implements World
 
 	@Override
 	public @Nullable Location locateNearestBiome(@NotNull Location origin, @NotNull Biome biome, int radius, int step)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public <T extends Entity> @NotNull T addEntity(@NotNull T t)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

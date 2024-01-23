@@ -54,20 +54,24 @@ class MockPlayerListTest
 	void addPlayer_SetsFirstPlayed()
 	{
 		PlayerMock player = server.addPlayer();
+		assertFalse(playerList.hasPlayedBefore(player.getUniqueId()));
 
 		playerList.addPlayer(player);
 
 		assertNotEquals(0, playerList.getFirstPlayed(player.getUniqueId()));
+		assertTrue(playerList.hasPlayedBefore(player.getUniqueId()));
 	}
 
 	@Test
 	void addPlayer_SetsLastLogin()
 	{
 		PlayerMock player = server.addPlayer();
+		assertFalse(playerList.hasPlayedBefore(player.getUniqueId()));
 
 		playerList.addPlayer(player);
 
 		assertNotEquals(0, playerList.getLastLogin(player.getUniqueId()));
+		assertTrue(playerList.hasPlayedBefore(player.getUniqueId()));
 	}
 
 	@Test
@@ -94,10 +98,12 @@ class MockPlayerListTest
 	void disconnect_SetsLastSeen()
 	{
 		PlayerMock player = server.addPlayer();
+		assertFalse(playerList.hasPlayedBefore(player.getUniqueId()));
 
 		playerList.disconnectPlayer(player);
 
 		assertNotEquals(0, playerList.getLastSeen(player.getUniqueId()));
+		assertTrue(playerList.hasPlayedBefore(player.getUniqueId()));
 	}
 
 	@Test
@@ -203,10 +209,12 @@ class MockPlayerListTest
 	void setFirstPlayed()
 	{
 		UUID uuid = UUID.randomUUID();
+		assertFalse(playerList.hasPlayedBefore(uuid));
 
 		playerList.setFirstPlayed(uuid, 10L);
 
 		assertEquals(10, playerList.getFirstPlayed(uuid));
+		assertTrue(playerList.hasPlayedBefore(uuid));
 	}
 
 	@Test
@@ -221,10 +229,12 @@ class MockPlayerListTest
 	void setLastSeen()
 	{
 		UUID uuid = UUID.randomUUID();
+		assertFalse(playerList.hasPlayedBefore(uuid));
 
 		playerList.setLastSeen(uuid, 10L);
 
 		assertEquals(10, playerList.getLastSeen(uuid));
+		assertTrue(playerList.hasPlayedBefore(uuid));
 	}
 
 	@Test
@@ -250,10 +260,12 @@ class MockPlayerListTest
 	void setLastLogin()
 	{
 		UUID uuid = UUID.randomUUID();
+		assertFalse(playerList.hasPlayedBefore(uuid));
 
 		playerList.setLastLogin(uuid, 10L);
 
 		assertEquals(10, playerList.getLastLogin(uuid));
+		assertTrue(playerList.hasPlayedBefore(uuid));
 	}
 
 	@Test

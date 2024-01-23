@@ -382,7 +382,7 @@ class ItemMetaMockTest
 		meta.setPlaceableKeys(Set.of(
 				Material.STONE.getKey(),
 				Material.DIRT.getKey(),
-				Material.GRASS.getKey()
+				Material.SHORT_GRASS.getKey()
 		));
 		ItemMetaMock cloned = meta.clone();
 		assertEquals(meta, cloned);
@@ -398,7 +398,7 @@ class ItemMetaMockTest
 		meta.setDestroyableKeys(Set.of(
 				Material.STONE.getKey(),
 				Material.DIRT.getKey(),
-				Material.GRASS.getKey(),
+				Material.SHORT_GRASS.getKey(),
 				Material.GRANITE.getKey()
 		));
 		ItemMetaMock cloned = meta.clone();
@@ -842,8 +842,8 @@ class ItemMetaMockTest
 		Map<String, Object> actual = meta.serialize();
 
 		// Perform tests
-		assertEquals("{\"text\":\"Test name\"}", actual.get("display-name"));
-		assertEquals(List.of("{\"text\":\"Test lore\"}"), actual.get("lore"));
+		assertEquals("\"Test name\"", actual.get("display-name"));
+		assertEquals(List.of("\"Test lore\""), actual.get("lore"));
 		assertEquals(true, actual.get("Unbreakable"));
 		assertEquals(5, actual.get("Damage"));
 		assertEquals(3, actual.get("repair-cost"));

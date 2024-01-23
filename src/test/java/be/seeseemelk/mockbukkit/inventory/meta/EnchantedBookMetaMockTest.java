@@ -24,8 +24,8 @@ class EnchantedBookMetaMockTest
 	void setUp()
 	{
 		MockBukkit.mock();
-		testEnchantment = new EnchantmentMock("Test Enchantment");
-		testEnchantment2 = new EnchantmentMock("Second Test Enchantment");
+		testEnchantment = Enchantment.PROTECTION_ENVIRONMENTAL;
+		testEnchantment2 = Enchantment.ARROW_DAMAGE;
 	}
 
 	@AfterEach

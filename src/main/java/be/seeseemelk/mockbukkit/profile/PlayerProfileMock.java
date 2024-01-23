@@ -29,6 +29,7 @@ public class PlayerProfileMock implements PlayerProfile
 
 	private @Nullable String name;
 	private @Nullable UUID uuid;
+	private @Nullable PlayerTextures textures = new PlayerTexturesMock(this);
 	private final @NotNull Set<ProfileProperty> properties;
 
 	/**
@@ -62,7 +63,7 @@ public class PlayerProfileMock implements PlayerProfile
 	 * @param profile The profile to clone.
 	 */
 	@ApiStatus.Internal
-	public PlayerProfileMock(@NotNull PlayerProfileMock profile)
+	public PlayerProfileMock(@NotNull PlayerProfile profile)
 	{
 		this.name = profile.getName();
 		this.uuid = profile.getId();
@@ -109,15 +110,13 @@ public class PlayerProfileMock implements PlayerProfile
 	@Override
 	public @NotNull PlayerTextures getTextures()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.textures;
 	}
 
 	@Override
 	public void setTextures(@Nullable PlayerTextures textures)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.textures = textures;
 	}
 
 	@Override
@@ -130,6 +129,12 @@ public class PlayerProfileMock implements PlayerProfile
 	public boolean hasProperty(@Nullable String property)
 	{
 		return this.properties.stream().anyMatch(p -> p.getName().equals(property));
+	}
+
+	@Nullable
+	public ProfileProperty getProperty(@Nullable String property)
+	{
+		return this.properties.stream().filter(p -> p.getName().equals(property)).findFirst().orElse(null);
 	}
 
 	@Override
