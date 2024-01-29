@@ -588,8 +588,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public @Nullable OfflinePlayer getOfflinePlayerIfCached(@NotNull String name)
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return playerList.getOfflinePlayerIfCached(name);
 	}
 
 	@Override
