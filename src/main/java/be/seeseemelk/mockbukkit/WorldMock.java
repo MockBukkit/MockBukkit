@@ -9,9 +9,11 @@ import be.seeseemelk.mockbukkit.entity.AxolotlMock;
 import be.seeseemelk.mockbukkit.entity.BatMock;
 import be.seeseemelk.mockbukkit.entity.BeeMock;
 import be.seeseemelk.mockbukkit.entity.BlazeMock;
+import be.seeseemelk.mockbukkit.entity.BoatMock;
 import be.seeseemelk.mockbukkit.entity.CamelMock;
 import be.seeseemelk.mockbukkit.entity.CatMock;
 import be.seeseemelk.mockbukkit.entity.CaveSpiderMock;
+import be.seeseemelk.mockbukkit.entity.ChestBoatMock;
 import be.seeseemelk.mockbukkit.entity.ChickenMock;
 import be.seeseemelk.mockbukkit.entity.CodMock;
 import be.seeseemelk.mockbukkit.entity.CommandMinecartMock;
@@ -132,9 +134,11 @@ import org.bukkit.entity.Axolotl;
 import org.bukkit.entity.Bat;
 import org.bukkit.entity.Bee;
 import org.bukkit.entity.Blaze;
+import org.bukkit.entity.Boat;
 import org.bukkit.entity.Camel;
 import org.bukkit.entity.Cat;
 import org.bukkit.entity.CaveSpider;
+import org.bukkit.entity.ChestBoat;
 import org.bukkit.entity.Chicken;
 import org.bukkit.entity.Cod;
 import org.bukkit.entity.Cow;
@@ -251,8 +255,8 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.function.Function;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -1316,6 +1320,14 @@ public class WorldMock implements World
 		{
 			return new AreaEffectCloudMock(server, UUID.randomUUID());
 		}
+		else if (clazz == Boat.class)
+		{
+			return new BoatMock(server, UUID.randomUUID());
+		}
+		else if (clazz == ChestBoat.class)
+		{
+			return new ChestBoatMock(server, UUID.randomUUID());
+		}
 		else if (clazz == EnderPearl.class)
 		{
 			return new EnderPearlMock(server, UUID.randomUUID());
@@ -1371,7 +1383,7 @@ public class WorldMock implements World
 		else if (clazz == Turtle.class)
 		{
 			return new TurtleMock(server, UUID.randomUUID());
-    }
+		}
 		else if (clazz == ThrownExpBottle.class)
 		{
 			return new ThrownExpBottleMock(server, UUID.randomUUID());
@@ -2764,12 +2776,14 @@ public class WorldMock implements World
 			}
 			case MOTION_BLOCKING_NO_LEAVES ->
 			{
-				boolean isWaterLogged =  block.getBlockData() instanceof Waterlogged waterlogged && waterlogged.isWaterlogged();
+				boolean isWaterLogged = block.getBlockData() instanceof Waterlogged waterlogged && waterlogged.isWaterlogged();
 				yield (block.isSolid() || isWaterLogged || block.isLiquid()) && !Tag.LEAVES.isTagged(block.getType());
 			}
 			case OCEAN_FLOOR -> block.isSolid();
-			case OCEAN_FLOOR_WG -> (block.getY() <= this.grassHeight && this.defaultBlock.isSolid()) || block.getY() == 0;
-			case WORLD_SURFACE_WG -> (block.getY() <= this.grassHeight && !this.defaultBlock.isAir()) || block.getY() == 0;
+			case OCEAN_FLOOR_WG ->
+					(block.getY() <= this.grassHeight && this.defaultBlock.isSolid()) || block.getY() == 0;
+			case WORLD_SURFACE_WG ->
+					(block.getY() <= this.grassHeight && !this.defaultBlock.isAir()) || block.getY() == 0;
 			case WORLD_SURFACE -> !block.getType().isAir();
 		};
 	}
