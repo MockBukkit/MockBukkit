@@ -63,7 +63,7 @@ public class PlayerProfileMock implements PlayerProfile
 	 * @param profile The profile to clone.
 	 */
 	@ApiStatus.Internal
-	public PlayerProfileMock(@NotNull PlayerProfileMock profile)
+	public PlayerProfileMock(@NotNull PlayerProfile profile)
 	{
 		this.name = profile.getName();
 		this.uuid = profile.getId();
