@@ -255,6 +255,13 @@ public class BlockDataMock implements BlockData
 	}
 
 	@Override
+	public void copyTo(@NotNull BlockData blockData)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull BlockState createBlockState()
 	{
 		throw new UnimplementedOperationException();
