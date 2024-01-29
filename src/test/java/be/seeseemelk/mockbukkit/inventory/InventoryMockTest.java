@@ -297,7 +297,7 @@ class InventoryMockTest
 	@Test
 	void assertContainsAny_DoesNotContainThem_Asserts()
 	{
-		inventory.addItem(new ItemStack(Material.GRASS, 16));
+		inventory.addItem(new ItemStack(Material.SHORT_GRASS, 16));
 		ItemStack item = new ItemStack(Material.DIRT);
 		assertThrows(AssertionError.class, () -> inventory.assertContainsAny(item));
 	}
@@ -319,7 +319,7 @@ class InventoryMockTest
 	@Test
 	void assertContainsAtLeast_DoesNotContainEnough_Asserts()
 	{
-		inventory.addItem(new ItemStack(Material.GRASS, 3));
+		inventory.addItem(new ItemStack(Material.SHORT_GRASS, 3));
 		ItemStack item = new ItemStack(Material.DIRT);
 		assertThrows(AssertionError.class, () -> inventory.assertContainsAtLeast(item, 4));
 	}
@@ -347,7 +347,7 @@ class InventoryMockTest
 	@Test
 	void testContainsItemStackFalse()
 	{
-		inventory.addItem(new ItemStack(Material.GRASS));
+		inventory.addItem(new ItemStack(Material.SHORT_GRASS));
 		assertFalse(inventory.contains(new ItemStack(Material.STONE)));
 	}
 
@@ -368,7 +368,7 @@ class InventoryMockTest
 	@Test
 	void testContainsMaterialFalse()
 	{
-		inventory.addItem(new ItemStack(Material.GRASS));
+		inventory.addItem(new ItemStack(Material.SHORT_GRASS));
 		assertFalse(inventory.contains(Material.STONE));
 	}
 

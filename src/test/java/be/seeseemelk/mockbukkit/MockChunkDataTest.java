@@ -90,7 +90,7 @@ class MockChunkDataTest
 	@Test
 	void test_neg_min_height()
 	{
-		world = new WorldMock(Material.GRASS, -60, 256, 70);
+		world = new WorldMock(Material.GRASS_BLOCK, -60, 256, 70);
 		chunkData = server.createChunkData(world);
 
 		chunkData.setBlock(0, -40, 0, Material.OBSIDIAN);
@@ -100,7 +100,7 @@ class MockChunkDataTest
 	@Test
 	void test_pos_min_height()
 	{
-		world = new WorldMock(Material.GRASS, 60, 256, 70);
+		world = new WorldMock(Material.GRASS_BLOCK, 60, 256, 70);
 		chunkData = server.createChunkData(world);
 
 		chunkData.setBlock(0, 80, 0, Material.OBSIDIAN);
@@ -110,7 +110,7 @@ class MockChunkDataTest
 	@Test
 	void getBiome()
 	{
-		world = new WorldMock(Material.GRASS, 60, 256, 70);
+		world = new WorldMock(Material.GRASS_BLOCK, 60, 256, 70);
 		chunkData = server.createChunkData(world);
 
 		Biome worldBiome = world.getBiome(0, 0, 0);

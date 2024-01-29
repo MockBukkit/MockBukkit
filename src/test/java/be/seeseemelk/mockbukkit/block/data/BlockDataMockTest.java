@@ -7,12 +7,18 @@ import be.seeseemelk.mockbukkit.block.BlockMock;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
+import org.bukkit.block.data.type.WallSign;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -75,7 +81,8 @@ class BlockDataMockTest
 		BlockDataMock blockData2 = new BlockDataMock(Material.STONE);
 		blockData2.set("key", "value");
 
-		assertTrue(blockData.matches(blockData2));
+		assertTrue(blockData2.matches(blockData));
+		assertFalse(blockData.matches(blockData2));
 	}
 
 	@Test
@@ -108,5 +115,25 @@ class BlockDataMockTest
 		blockData.checkType(block, Tag.PLANKS);
 	}
 
+	@Test
+	void clone_isClone()
+	{
+		WallSign wallSign = (WallSign) BlockDataMock.mock(Material.ACACIA_WALL_SIGN);
+		wallSign.setFacing(BlockFace.NORTH);
+		WallSign clone = (WallSign) wallSign.clone();
+		assertNotSame(wallSign,clone);
+		assertEquals(wallSign,clone);
+		assertEquals(wallSign.getFacing(), clone.getFacing());
+	}
+
+	@Test
+	void clone_isCloneChangeInValue()
+	{
+		WallSign wallSign = (WallSign) BlockDataMock.mock(Material.ACACIA_WALL_SIGN);
+		wallSign.setFacing(BlockFace.EAST);
+		WallSign clone = (WallSign) wallSign.clone();
+		clone.setFacing(BlockFace.WEST);
+		assertNotEquals(wallSign.getFacing(), clone.getFacing());
+	}
 
 }

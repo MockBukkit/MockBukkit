@@ -4,12 +4,16 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
+import org.bukkit.profile.PlayerProfile;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.UUID;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -100,6 +104,19 @@ class SkullMetaMockTest
 		SkullMetaMock clone = meta.clone();
 		assertEquals(meta, clone);
 		assertEquals("TheBusyBiscuit", clone.getOwner());
+	}
+
+	@Test
+	void testSetOwnerProfile()
+	{
+		SkullMetaMock meta = new SkullMetaMock();
+		PlayerMock playerMock = server.addPlayer();
+		PlayerProfile profile = server.createPlayerProfile(UUID.randomUUID(), "Test");
+
+		meta.setOwnerProfile(profile);
+
+		assertNotNull(meta.getOwnerProfile());
+		assertEquals(profile, meta.getOwnerProfile());
 	}
 
 }

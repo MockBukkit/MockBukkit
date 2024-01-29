@@ -533,20 +533,20 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	}
 
 	@Override
-	public synchronized void runTask(@NotNull Plugin plugin, @NotNull Consumer<BukkitTask> task)
+	public synchronized void runTask(@NotNull Plugin plugin, @NotNull Consumer<? super BukkitTask> task)
 	{
 		runTaskLater(plugin, task, 0L);
 	}
 
 	@Override
-	public synchronized void runTaskAsynchronously(@NotNull Plugin plugin, @NotNull Consumer<BukkitTask> task)
+	public synchronized void runTaskAsynchronously(@NotNull Plugin plugin, @NotNull Consumer<? super BukkitTask> task)
 	{
 		ScheduledTask scheduledTask = new ScheduledTask(this.id.getAndIncrement(), plugin, false, this.currentTick, task);
 		pool.execute(wrapTask(scheduledTask));
 	}
 
 	@Override
-	public synchronized void runTaskLater(@NotNull Plugin plugin, @NotNull Consumer<BukkitTask> task, long delay)
+	public synchronized void runTaskLater(@NotNull Plugin plugin, @NotNull Consumer<? super BukkitTask> task, long delay)
 	{
 		delay = Math.max(delay, 1);
 		ScheduledTask scheduledTask = new ScheduledTask(id.getAndIncrement(), plugin, true, currentTick + delay, task);
@@ -554,14 +554,14 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	}
 
 	@Override
-	public synchronized void runTaskLaterAsynchronously(@NotNull Plugin plugin, @NotNull Consumer<BukkitTask> task, long delay)
+	public synchronized void runTaskLaterAsynchronously(@NotNull Plugin plugin, @NotNull Consumer<? super BukkitTask> task, long delay)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public synchronized void runTaskTimer(@NotNull Plugin plugin, @NotNull Consumer<BukkitTask> task, long delay, long period)
+	public synchronized void runTaskTimer(@NotNull Plugin plugin, @NotNull Consumer<? super BukkitTask> task, long delay, long period)
 	{
 		delay = Math.max(delay, 1);
 		RepeatingTask repeatingTask = new RepeatingTask(id.getAndIncrement(), plugin, true, currentTick + delay, period, task);
@@ -569,7 +569,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	}
 
 	@Override
-	public synchronized void runTaskTimerAsynchronously(@NotNull Plugin plugin, @NotNull Consumer<BukkitTask> task, long delay, long period)
+	public synchronized void runTaskTimerAsynchronously(@NotNull Plugin plugin, @NotNull Consumer<? super BukkitTask> task, long delay, long period)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

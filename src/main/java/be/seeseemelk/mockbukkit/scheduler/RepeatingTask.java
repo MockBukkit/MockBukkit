@@ -40,7 +40,7 @@ public class RepeatingTask extends ScheduledTask
 	 * @param period        How often the task should run.
 	 * @param consumer      The consumer to run.
 	 */
-	public RepeatingTask(int id, Plugin plugin, boolean isSync, long scheduledTick, long period, @NotNull Consumer<BukkitTask> consumer)
+	public RepeatingTask(int id, Plugin plugin, boolean isSync, long scheduledTick, long period, @NotNull Consumer<? super BukkitTask> consumer)
 	{
 		super(id, plugin, isSync, scheduledTick, consumer);
 		this.period = period;

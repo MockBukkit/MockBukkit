@@ -26,7 +26,7 @@ public class ScheduledTask implements BukkitTask, BukkitWorker
 	private long scheduledTick;
 	private boolean running;
 	private final @Nullable Runnable runnable;
-	private final @Nullable Consumer<BukkitTask> consumer;
+	private final @Nullable Consumer<? super BukkitTask> consumer;
 	private final List<Runnable> cancelListeners = new LinkedList<>();
 	private Thread thread;
 	private boolean submitted = false;
@@ -55,7 +55,7 @@ public class ScheduledTask implements BukkitTask, BukkitWorker
 	 * @param scheduledTick The tick the task is scheduled to run at.
 	 * @param consumer      The consumer to run.
 	 */
-	public ScheduledTask(int id, Plugin plugin, boolean isSync, long scheduledTick, @NotNull Consumer<BukkitTask> consumer)
+	public ScheduledTask(int id, Plugin plugin, boolean isSync, long scheduledTick, @NotNull Consumer<? super BukkitTask> consumer)
 	{
 		this(id, plugin, isSync, scheduledTick, null, consumer);
 		Preconditions.checkNotNull(consumer, "Consumer cannot be null");
@@ -71,7 +71,7 @@ public class ScheduledTask implements BukkitTask, BukkitWorker
 	 * @param runnable      The runnable to run.
 	 * @param consumer      The consumer to run.
 	 */
-	private ScheduledTask(int id, Plugin plugin, boolean isSync, long scheduledTick, @Nullable Runnable runnable, @Nullable Consumer<BukkitTask> consumer)
+	private ScheduledTask(int id, Plugin plugin, boolean isSync, long scheduledTick, @Nullable Runnable runnable, @Nullable Consumer<? super BukkitTask> consumer)
 	{
 		this.id = id;
 		this.plugin = plugin;
@@ -139,7 +139,7 @@ public class ScheduledTask implements BukkitTask, BukkitWorker
 	 *
 	 * @return The consumer that will be run.
 	 */
-	public @Nullable Consumer<BukkitTask> getConsumer()
+	public @Nullable Consumer<? super BukkitTask> getConsumer()
 	{
 		return this.consumer;
 	}

@@ -5,6 +5,7 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.util.AdventureConverters;
 import com.google.common.base.Preconditions;
+import io.papermc.paper.potion.SuspiciousEffectEntry;
 import net.kyori.adventure.sound.Sound;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -19,6 +20,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.Unmodifiable;
 
 import java.util.List;
 import java.util.UUID;
@@ -80,6 +82,20 @@ public class MushroomCowMock extends CowMock implements MushroomCow
 
 	@Override
 	public void setStewEffect(@Nullable PotionEffectType type)
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull @Unmodifiable List<SuspiciousEffectEntry> getStewEffects()
+	{
+		//TODO: Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setStewEffects(@NotNull List<SuspiciousEffectEntry> effects)
 	{
 		//TODO: Auto-generated method stub
 		throw new UnimplementedOperationException();

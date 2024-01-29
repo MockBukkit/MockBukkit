@@ -1,14 +1,21 @@
 package be.seeseemelk.mockbukkit.block.state;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.CreatureSpawner;
+import org.bukkit.block.spawner.SpawnRule;
+import org.bukkit.block.spawner.SpawnerEntry;
+import org.bukkit.entity.EntitySnapshot;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -191,6 +198,48 @@ public class CreatureSpawnerMock extends TileStateMock implements CreatureSpawne
 	public void setSpawnRange(int spawnRange)
 	{
 		this.spawnRange = spawnRange;
+	}
+
+	@Override
+	public @NotNull List<SpawnerEntry> getPotentialSpawns()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setPotentialSpawns(@NotNull Collection<SpawnerEntry> entries)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void addPotentialSpawn(@NotNull SpawnerEntry spawnerEntry)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void addPotentialSpawn(@NotNull EntitySnapshot snapshot, int weight, @Nullable SpawnRule spawnRule)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setSpawnedEntity(@NotNull EntitySnapshot snapshot)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable EntitySnapshot getSpawnedEntity()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

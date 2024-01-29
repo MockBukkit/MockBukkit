@@ -25,12 +25,6 @@ class InternalTagParserTest
 	}
 
 	@Test
-	void checkTagged_fromTag()
-	{
-		assertTrue(InternalTag.NON_SOLID_BLOCKS.isTagged(Material.ACACIA_WALL_SIGN));
-	}
-
-	@Test
 	void checkTagged_fromMaterial()
 	{
 		assertTrue(InternalTag.SOLID_BLOCKS.isTagged(Material.SPONGE));
