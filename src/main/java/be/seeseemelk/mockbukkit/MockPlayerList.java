@@ -357,7 +357,8 @@ public class MockPlayerList
 	public OfflinePlayer getOfflinePlayer(@NotNull String name)
 	{
 		OfflinePlayer offlinePlayer = getOfflinePlayerIfCached(name);
-		if(offlinePlayer != null){
+		if (offlinePlayer != null)
+		{
 			return offlinePlayer;
 		}
 		return new OfflinePlayerMock(name);
