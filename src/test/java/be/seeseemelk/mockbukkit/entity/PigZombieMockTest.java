@@ -39,6 +39,7 @@ class PigZombieMockTest
 	{
 		pigZombie.setAnger(100);
 		assertEquals(100, pigZombie.getAnger());
+		assertTrue(pigZombie.isAngry());
 	}
 
 	@Test
