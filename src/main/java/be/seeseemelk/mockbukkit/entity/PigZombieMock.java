@@ -31,21 +31,21 @@ public class PigZombieMock extends ZombieMock implements PigZombie
 	}
 
 	@Override
-	public void setAnger(int i)
+	public void setAnger(int level)
 	{
-		this.anger = i;
+		this.anger = level;
 	}
 
 	@Override
-	public void setAngry(boolean b)
+	public void setAngry(boolean angry)
 	{
-		this.angry = b;
+		this.setAnger(angry ? 400 : 0);
 	}
 
 	@Override
 	public boolean isAngry()
 	{
-		return this.angry;
+		return this.getAnger() > 0;
 	}
 
 	@Override
