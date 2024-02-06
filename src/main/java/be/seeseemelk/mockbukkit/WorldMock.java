@@ -54,6 +54,7 @@ import be.seeseemelk.mockbukkit.entity.OcelotMock;
 import be.seeseemelk.mockbukkit.entity.PandaMock;
 import be.seeseemelk.mockbukkit.entity.ParrotMock;
 import be.seeseemelk.mockbukkit.entity.PigMock;
+import be.seeseemelk.mockbukkit.entity.PigZombieMock;
 import be.seeseemelk.mockbukkit.entity.PolarBearMock;
 import be.seeseemelk.mockbukkit.entity.PoweredMinecartMock;
 import be.seeseemelk.mockbukkit.entity.PufferFishMock;
@@ -183,6 +184,7 @@ import org.bukkit.entity.Ocelot;
 import org.bukkit.entity.Panda;
 import org.bukkit.entity.Parrot;
 import org.bukkit.entity.Pig;
+import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.PolarBear;
 import org.bukkit.entity.Projectile;
@@ -1395,6 +1397,10 @@ public class WorldMock implements World
 		else if (clazz == LeashHitch.class)
 		{
 			return new LeashHitchMock(server, UUID.randomUUID());
+		}
+		else if (clazz == PigZombie.class)
+		{
+			return new PigZombieMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}
