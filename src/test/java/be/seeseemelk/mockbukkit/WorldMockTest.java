@@ -54,6 +54,7 @@ import be.seeseemelk.mockbukkit.entity.OcelotMock;
 import be.seeseemelk.mockbukkit.entity.PandaMock;
 import be.seeseemelk.mockbukkit.entity.ParrotMock;
 import be.seeseemelk.mockbukkit.entity.PigMock;
+import be.seeseemelk.mockbukkit.entity.PigZombieMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import be.seeseemelk.mockbukkit.entity.PolarBearMock;
 import be.seeseemelk.mockbukkit.entity.PoweredMinecartMock;
@@ -1317,7 +1318,8 @@ class WorldMockTest
 				Arguments.of(EntityType.SNOWBALL, SnowballMock.class),
 				Arguments.of(EntityType.TURTLE, TurtleMock.class),
 				Arguments.of(EntityType.THROWN_EXP_BOTTLE, ThrownExpBottleMock.class),
-				Arguments.of(EntityType.LEASH_HITCH, LeashHitchMock.class)
+				Arguments.of(EntityType.LEASH_HITCH, LeashHitchMock.class),
+				Arguments.of(EntityType.ZOMBIFIED_PIGLIN, PigZombieMock.class)
 		);
 	}
 
