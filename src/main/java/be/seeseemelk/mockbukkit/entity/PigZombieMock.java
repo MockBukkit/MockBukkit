@@ -11,7 +11,6 @@ public class PigZombieMock extends ZombieMock implements PigZombie
 {
 
 	private int anger = 0;
-	private boolean angry = false;
 
 	/**
 	 * Constructs a new {@link PigZombieMock} on the provided {@link ServerMock} with a specified {@link UUID}.
