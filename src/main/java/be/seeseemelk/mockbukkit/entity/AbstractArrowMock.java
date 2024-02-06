@@ -23,7 +23,6 @@ public class AbstractArrowMock extends AbstractProjectileMock implements Abstrac
 	private boolean shotFromCrossbow = false;
 	private int lifetime = 0;
 	private Sound hitSound = Sound.ENTITY_ARROW_HIT;
-	;
 	private boolean noPhysics = false;
 
 	/**
@@ -53,7 +52,8 @@ public class AbstractArrowMock extends AbstractProjectileMock implements Abstrac
 	@Override
 	public double getDamage()
 	{
-		if(damage < 0){
+		if (damage < 0)
+		{
 			return super.getEntityProperty("baseDamage").getAsDouble();
 		}
 		return this.damage;

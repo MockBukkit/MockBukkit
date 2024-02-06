@@ -24,7 +24,7 @@ public class TridentMock extends AbstractArrowMock implements Trident
 	 * @param server The server to create the entity on.
 	 * @param uuid   The UUID of the entity.
 	 */
-	protected TridentMock(@NotNull ServerMock server, @NotNull UUID uuid)
+	public TridentMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 		super.setHitSound(Sound.ITEM_TRIDENT_HIT);

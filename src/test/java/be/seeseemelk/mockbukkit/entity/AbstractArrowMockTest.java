@@ -140,7 +140,7 @@ class AbstractArrowMockTest
 	void setLifetimeTicks()
 	{
 		abstractArrow.setLifetimeTicks(200);
-		assertEquals(200,abstractArrow.getLifetimeTicks());
+		assertEquals(200, abstractArrow.getLifetimeTicks());
 	}
 
 	@Test

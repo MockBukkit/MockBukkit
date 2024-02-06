@@ -9,6 +9,7 @@ import java.util.UUID;
 
 public class SpectralArrowMock extends AbstractArrowMock implements SpectralArrow
 {
+
 	private int glowingTicks = 200;
 
 	/**
@@ -17,7 +18,7 @@ public class SpectralArrowMock extends AbstractArrowMock implements SpectralArro
 	 * @param server The server to create the entity on.
 	 * @param uuid   The UUID of the entity.
 	 */
-	protected SpectralArrowMock(@NotNull ServerMock server, @NotNull UUID uuid)
+	public SpectralArrowMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 	}

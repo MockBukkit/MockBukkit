@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ArrowMockTest
 {
@@ -36,7 +36,8 @@ class ArrowMockTest
 	}
 
 	@Test
-	void getDamage_default(){
+	void getDamage_default()
+	{
 		assertEquals(6.0, arrow.getDamage());
 	}
 

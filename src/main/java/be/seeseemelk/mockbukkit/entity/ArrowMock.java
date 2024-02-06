@@ -24,7 +24,7 @@ public class ArrowMock extends AbstractArrowMock implements Arrow
 	 * @param server The server to create the entity on.
 	 * @param uuid   The UUID of the entity.
 	 */
-	protected ArrowMock(@NotNull ServerMock server, @NotNull UUID uuid)
+	public ArrowMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 	}
