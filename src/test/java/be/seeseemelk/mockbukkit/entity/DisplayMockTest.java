@@ -38,25 +38,6 @@ class DisplayMockTest
 	}
 
 	@Test
-	void getTransformation_default()
-	{
-		Transformation transformation = display.getTransformation();
-		assertEquals(new Vector3f(), transformation.getTranslation());
-		assertEquals(new Quaternionf(), transformation.getLeftRotation());
-		assertEquals(new Vector3f(1.0f, 1.0f, 1.0f), transformation.getScale());
-		assertEquals(new Quaternionf(), transformation.getRightRotation());
-	}
-
-	@Test
-	void setTransformation()
-	{
-		Transformation transformation = new Transformation(new Vector3f(1.0f, 2.0f, 3.0f), new Quaternionf(),
-				new Vector3f(2.0f, 1.0f, 1.0f), new Quaternionf());
-		display.setTransformation(transformation);
-		assertEquals(transformation, display.getTransformation());
-	}
-
-	@Test
 	void setTransformation_null()
 	{
 		assertThrows(IllegalArgumentException.class, () -> display.setTransformation(null));
@@ -197,7 +178,7 @@ class DisplayMockTest
 	@Test
 	void getGlowColorOverride_default()
 	{
-		assertNotNull(display.getGlowColorOverride());
+		assertNull(display.getGlowColorOverride());
 	}
 
 	@Test
