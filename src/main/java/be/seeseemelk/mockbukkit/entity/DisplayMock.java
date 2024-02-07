@@ -31,7 +31,7 @@ public class DisplayMock extends EntityMock implements Display
 
 
 	/**
-	 * Constructs a new EntityMock on the provided {@link DisplayMock} with a specified {@link UUID}.
+	 * Constructs a new EntityMock on the provided {@link ServerMock} with a specified {@link UUID}.
 	 *
 	 * @param server The server to create the entity on.
 	 * @param uuid   The UUID of the entity.
