@@ -11,6 +11,7 @@ import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.kyori.adventure.text.serializer.plain.PlainComponentSerializer;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
+import org.bukkit.Color;
 import org.bukkit.FeatureFlag;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -421,6 +422,13 @@ public class MockUnsafeValues implements UnsafeValues
 
 	@Override
 	public String getStatisticCriteriaKey(@NotNull Statistic statistic)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Color getSpawnEggLayerColor(EntityType entityType, int i)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

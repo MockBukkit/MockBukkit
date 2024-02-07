@@ -223,6 +223,13 @@ public class OfflinePlayerMock implements OfflinePlayer
 	}
 
 	@Override
+	public @Nullable Location getRespawnLocation()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public void incrementStatistic(@NotNull Statistic statistic)
 	{
 		// TODO Auto-generated method stub
@@ -350,6 +357,13 @@ public class OfflinePlayerMock implements OfflinePlayer
 
 	@Override
 	public @Nullable Location getLastDeathLocation()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Location getLocation()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

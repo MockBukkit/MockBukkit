@@ -11,9 +11,11 @@ import be.seeseemelk.mockbukkit.entity.AxolotlMock;
 import be.seeseemelk.mockbukkit.entity.BatMock;
 import be.seeseemelk.mockbukkit.entity.BeeMock;
 import be.seeseemelk.mockbukkit.entity.BlazeMock;
+import be.seeseemelk.mockbukkit.entity.BoatMock;
 import be.seeseemelk.mockbukkit.entity.CamelMock;
 import be.seeseemelk.mockbukkit.entity.CatMock;
 import be.seeseemelk.mockbukkit.entity.CaveSpiderMock;
+import be.seeseemelk.mockbukkit.entity.ChestBoatMock;
 import be.seeseemelk.mockbukkit.entity.ChickenMock;
 import be.seeseemelk.mockbukkit.entity.CodMock;
 import be.seeseemelk.mockbukkit.entity.CommandMinecartMock;
@@ -52,6 +54,7 @@ import be.seeseemelk.mockbukkit.entity.OcelotMock;
 import be.seeseemelk.mockbukkit.entity.PandaMock;
 import be.seeseemelk.mockbukkit.entity.ParrotMock;
 import be.seeseemelk.mockbukkit.entity.PigMock;
+import be.seeseemelk.mockbukkit.entity.PigZombieMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import be.seeseemelk.mockbukkit.entity.PolarBearMock;
 import be.seeseemelk.mockbukkit.entity.PoweredMinecartMock;
@@ -1295,13 +1298,14 @@ class WorldMockTest
 				Arguments.of(EntityType.MINECART, RideableMinecartMock.class),
 				Arguments.of(EntityType.MINECART_CHEST, StorageMinecartMock.class),
 				Arguments.of(EntityType.AREA_EFFECT_CLOUD, AreaEffectCloudMock.class),
+				Arguments.of(EntityType.BOAT, BoatMock.class),
+				Arguments.of(EntityType.CHEST_BOAT, ChestBoatMock.class),
 				Arguments.of(EntityType.ENDER_PEARL, EnderPearlMock.class),
 				Arguments.of(EntityType.FISHING_HOOK, FishHookMock.class),
 				Arguments.of(EntityType.PANDA, PandaMock.class),
 				Arguments.of(EntityType.RABBIT, RabbitMock.class),
 				Arguments.of(EntityType.OCELOT, OcelotMock.class),
 				Arguments.of(EntityType.SLIME, SlimeMock.class),
-				Arguments.of(EntityType.OCELOT, OcelotMock.class),
 				Arguments.of(EntityType.PARROT, ParrotMock.class),
 				Arguments.of(EntityType.SQUID, SquidMock.class),
 				Arguments.of(EntityType.GLOW_SQUID, GlowSquidMock.class),
@@ -1314,7 +1318,8 @@ class WorldMockTest
 				Arguments.of(EntityType.SNOWBALL, SnowballMock.class),
 				Arguments.of(EntityType.TURTLE, TurtleMock.class),
 				Arguments.of(EntityType.THROWN_EXP_BOTTLE, ThrownExpBottleMock.class),
-				Arguments.of(EntityType.LEASH_HITCH, LeashHitchMock.class)
+				Arguments.of(EntityType.LEASH_HITCH, LeashHitchMock.class),
+				Arguments.of(EntityType.ZOMBIFIED_PIGLIN, PigZombieMock.class)
 		);
 	}
 
