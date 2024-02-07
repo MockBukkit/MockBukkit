@@ -1506,9 +1506,9 @@ class ServerMockTest
 
 	@ParameterizedTest
 	@MethodSource("testGetTicksPerSpawnsArguments")
-	void testGetTicksPerSpawns()
+	void testGetTicksPerSpawns(SpawnCategory category, int expected)
 	{
-		assertEquals(400, server.getTicksPerAnimalSpawns());
+		assertEquals(expected, server.getTicksPerSpawns(category));
 	}
 
 	public static Stream<Arguments> testGetTicksPerSpawnsArguments()
@@ -1570,6 +1570,74 @@ class ServerMockTest
 	{
 		assertEquals(400, server.getTicksPerAnimalSpawns());
 	}
+
+	@ParameterizedTest
+	@MethodSource("getSpawnLimitArguments")
+	void testGetSpawnLimit(SpawnCategory category, int expected)
+	{
+		assertEquals(expected, server.getSpawnLimit(category));
+	}
+
+	public static Stream<Arguments> getSpawnLimitArguments()
+	{
+		return Stream.of(
+				Arguments.of(SpawnCategory.MONSTER, 70),
+				Arguments.of(SpawnCategory.ANIMAL, 10),
+				Arguments.of(SpawnCategory.WATER_AMBIENT, 20),
+				Arguments.of(SpawnCategory.WATER_ANIMAL, 5),
+				Arguments.of(SpawnCategory.AMBIENT, 15),
+				Arguments.of(SpawnCategory.WATER_UNDERGROUND_CREATURE,5)
+		);
+	}
+
+	@Test
+	void testGetSpawnLimit_NullCategory()
+	{
+		assertThrows(IllegalArgumentException.class, () -> server.getSpawnLimit(null));
+	}
+
+	@Test
+	void testGetSpawnLimit_InvalidCategory()
+	{
+		assertThrows(IllegalArgumentException.class, () -> server.getSpawnLimit(SpawnCategory.MISC));
+	}
+
+	@Test
+	void testGetMonsterSpawnLimit()
+	{
+		assertEquals(70, server.getMonsterSpawnLimit());
+	}
+
+	@Test
+	void testGetWaterAmbientSpawnLimit()
+	{
+		assertEquals(20, server.getWaterAmbientSpawnLimit());
+	}
+
+	@Test
+	void testGetWaterAnimalSpawnLimit()
+	{
+		assertEquals(5, server.getWaterAnimalSpawnLimit());
+	}
+
+	@Test
+	void testGetAmbientSpawnLimit()
+	{
+		assertEquals(15, server.getAmbientSpawnLimit());
+	}
+
+	@Test
+	void testGetWaterUndergroundCreatureSpawnLimit()
+	{
+		assertEquals(5, server.getWaterUndergroundCreatureSpawnLimit());
+	}
+
+	@Test
+	void testGetAnimalSpawnLimit()
+	{
+		assertEquals(10, server.getAnimalSpawnLimit());
+	}
+
 
 	@Test
 	void testBanIP()
