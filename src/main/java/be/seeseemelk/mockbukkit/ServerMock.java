@@ -1772,32 +1772,28 @@ public class ServerMock extends Server.Spigot implements Server
 	@Deprecated
 	public int getMonsterSpawnLimit()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getSpawnLimit(SpawnCategory.MONSTER);
 	}
 
 	@Override
 	@Deprecated
 	public int getAnimalSpawnLimit()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getSpawnLimit(SpawnCategory.ANIMAL);
 	}
 
 	@Override
 	@Deprecated
 	public int getWaterAnimalSpawnLimit()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getSpawnLimit(SpawnCategory.WATER_ANIMAL);
 	}
 
 	@Override
 	@Deprecated
 	public int getAmbientSpawnLimit()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getSpawnLimit(SpawnCategory.AMBIENT);
 	}
 
 	@Override
@@ -2251,17 +2247,14 @@ public class ServerMock extends Server.Spigot implements Server
 	@Deprecated
 	public int getWaterAmbientSpawnLimit()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getSpawnLimit(SpawnCategory.WATER_AMBIENT);
 	}
 
 	@Override
 	@Deprecated
 	public int getWaterUndergroundCreatureSpawnLimit()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		return this.getSpawnLimit(SpawnCategory.WATER_UNDERGROUND_CREATURE);
 	}
 
 	@Override
@@ -2474,8 +2467,11 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public int getSpawnLimit(@NotNull SpawnCategory spawnCategory)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(spawnCategory != null, "SpawnCategory cannot be null");
+		Preconditions.checkArgument(spawnCategory != SpawnCategory.MISC,
+				"SpawnCategory.%s are not supported", spawnCategory);
+
+		return this.serverConfiguration.getSpawnLimits().getOrDefault(spawnCategory, -1);
 	}
 
 	@Override
