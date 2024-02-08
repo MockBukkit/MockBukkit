@@ -157,4 +157,28 @@ class UnsafeValuesTest
 		assertThrows(NullPointerException.class, () -> mockUnsafeValues.fromLegacy((MaterialData) null));
 	}
 
+	@Test
+	void testBlockTranslationKey()
+	{
+
+	}
+
+	@Test
+	void testItemTranslationKey()
+	{
+
+	}
+
+	@Test
+	void testEntityTranslationKey()
+	{
+
+	}
+
+	@Test
+	void testItemStackTranslationKey()
+	{
+
+	}
+
 }
