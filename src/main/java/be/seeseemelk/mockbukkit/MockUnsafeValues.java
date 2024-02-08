@@ -5,12 +5,14 @@ import com.destroystokyo.paper.util.VersionFetcher;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Multimap;
 import io.papermc.paper.inventory.ItemRarity;
+import net.kyori.adventure.key.Keyed;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.flattener.ComponentFlattener;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.kyori.adventure.text.serializer.plain.PlainComponentSerializer;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
+import net.kyori.adventure.translation.Translatable;
 import org.bukkit.Color;
 import org.bukkit.FeatureFlag;
 import org.bukkit.Material;
@@ -43,6 +45,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -296,32 +299,67 @@ public class MockUnsafeValues implements UnsafeValues
 		throw new UnimplementedOperationException();
 	}
 
+	/**
+	 * Gets the translation key for a {@link Material} that {@link Material#isBlock() is a block}.
+	 * @param material the material to translate
+	 * @return a string of the structure "block.{@literal <namespace>}.{@literal <material>}" (e.g. "block.minecraft.stone"), or null if not a block.
+	 */
 	@Override
 	public String getBlockTranslationKey(Material material)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if(!material.isBlock()) {
+			return null;
+		}
+		return String.format("block.%s.%s", material.key().namespace(), material.key().value());
 	}
 
+	/**
+	 * Gets the translation key for a {@link Material} that {@link Material#isItem() is an item}.
+	 * @param material the material to translate
+	 * @return a string of the structure "item.{@literal <namespace>}.{@literal <material>}" (e.g. "item.minecraft.carrot"), or null if not an item.
+	 */
 	@Override
 	public String getItemTranslationKey(Material material)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if(!material.isItem()) {
+			return null;
+		}
+		return formatTranslatable("item", material);
 	}
 
+	/**
+	 * Gets the translation key for an {@link EntityType}. Throws an error for custom entities.
+	 * @param type the entity to translate
+	 * @return a string of the structure "item.{@literal <namespace>}.{@literal <entity_type>}" (e.g. "entity.minecraft.pig").
+	 */
 	@Override
 	public String getTranslationKey(EntityType type)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(type.getName() != null, "Invalid name of EntityType %s for translation key", type);
+		Arrays.stream(EntityType.values())
+				.filter(entityType ->type.getName().equals(entityType.getName()))
+				.findFirst()
+				.orElseThrow();
+		return formatTranslatable("entity", type);
 	}
 
+	/**
+	 * Gets the translation key for a {@link ItemStack} that {@link Material#isItem() is an item}.
+	 * @param itemStack the itemstack to translate
+	 * @return a string of the structure "item.{@literal <namespace>}.{@literal <material>}" (e.g. "item.minecraft.carrot"), or null if not an item.
+	 */
 	@Override
 	public String getTranslationKey(ItemStack itemStack)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if(!itemStack.getType().isItem()) {
+			return null;
+		}
+		return formatTranslatable("item", itemStack.getType());
+	}
+
+	private <T extends Keyed & Translatable> String formatTranslatable(String prefix, T translatable) {
+		// enforcing Translatable is not necessary, but translating only makes sense when the object is really translatable by design.
+		return String.format("%s.%s.%s", prefix, translatable.key().namespace(), translatable.key().value());
 	}
 
 	@Override
