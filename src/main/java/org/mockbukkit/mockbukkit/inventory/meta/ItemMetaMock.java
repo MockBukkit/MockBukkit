@@ -682,6 +682,13 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
+	public void removeEnchantments()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public boolean hasConflictingEnchant(Enchantment ench)
 	{
 		boolean b = this.hasEnchants() && enchants.remove(ench) != null;

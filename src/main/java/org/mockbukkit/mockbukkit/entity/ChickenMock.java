@@ -11,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Mock implementation of a {@link Chicken}.
@@ -19,6 +20,9 @@ import java.util.UUID;
  */
 public class ChickenMock extends AnimalsMock implements Chicken
 {
+
+	private boolean isChickenJockey = false;
+	private int eggTime;
 
 	/**
 	 * Constructs a new {@link ChickenMock} on the provided {@link ServerMock} with a specified {@link UUID}.
@@ -29,6 +33,7 @@ public class ChickenMock extends AnimalsMock implements Chicken
 	public ChickenMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
+		this.eggTime = ThreadLocalRandom.current().nextInt(6000) + 6000;
 	}
 
 	@Override
@@ -47,30 +52,25 @@ public class ChickenMock extends AnimalsMock implements Chicken
 	@Override
 	public boolean isChickenJockey()
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.isChickenJockey;
 	}
 
 	@Override
 	public void setIsChickenJockey(boolean isChickenJockey)
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		this.isChickenJockey = isChickenJockey;
 	}
 
 	@Override
 	public int getEggLayTime()
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.eggTime;
 	}
 
 	@Override
 	public void setEggLayTime(int eggLayTime)
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.eggTime = eggLayTime;
 	}
 
 }

@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.configuration;
 
-import org.mockbukkit.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.ServerMock;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2LongOpenHashMap;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Server;
@@ -39,6 +40,7 @@ public class ServerConfiguration
 	private int serverPort = 25565;
 	private boolean pvpEnabled = true;
 	private Object2LongOpenHashMap<SpawnCategory> ticksPerSpawn = new Object2LongOpenHashMap<>();
+	private Object2IntOpenHashMap<SpawnCategory> spawnLimits = new Object2IntOpenHashMap<>();
 
 	public ServerConfiguration()
 	{
@@ -49,6 +51,13 @@ public class ServerConfiguration
 		ticksPerSpawn.put(SpawnCategory.WATER_UNDERGROUND_CREATURE, 1);
 		ticksPerSpawn.put(SpawnCategory.WATER_ANIMAL, 1);
 		ticksPerSpawn.put(SpawnCategory.AMBIENT, 1);
+
+		spawnLimits.put(SpawnCategory.MONSTER, 70);
+		spawnLimits.put(SpawnCategory.ANIMAL, 10);
+		spawnLimits.put(SpawnCategory.WATER_ANIMAL, 5);
+		spawnLimits.put(SpawnCategory.WATER_AMBIENT, 20);
+		spawnLimits.put(SpawnCategory.WATER_UNDERGROUND_CREATURE, 5);
+		spawnLimits.put(SpawnCategory.AMBIENT, 15);
 	}
 
 	/**
@@ -396,6 +405,14 @@ public class ServerConfiguration
 	public Object2LongOpenHashMap<SpawnCategory> getTicksPerSpawn()
 	{
 		return ticksPerSpawn;
+	}
+
+	/**
+	 * @return The spawn limits for each spawn category.
+	 */
+	public Object2IntOpenHashMap<SpawnCategory> getSpawnLimits()
+	{
+		return spawnLimits;
 	}
 
 	/**

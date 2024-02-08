@@ -6,14 +6,12 @@ import org.mockbukkit.mockbukkit.entity.OfflinePlayerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.google.common.base.Preconditions;
-import org.bukkit.BanList;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.net.InetAddress;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -109,6 +107,7 @@ public class PlayerListMock
 	{
 		this.lastSeen.put(player.getUniqueId(), System.currentTimeMillis());
 		this.onlinePlayers.remove(player);
+		this.hasPlayedBefore.put(player.getUniqueId(), true);
 	}
 
 	/**
@@ -157,6 +156,7 @@ public class PlayerListMock
 	{
 		Preconditions.checkArgument(firstPlayed > 0, "First played time must be non-negative");
 		this.firstPlayed.put(uuid, firstPlayed);
+		this.hasPlayedBefore.put(uuid, true);
 	}
 
 	/**
@@ -187,6 +187,7 @@ public class PlayerListMock
 	{
 		Preconditions.checkArgument(lastSeen > 0, "Last seen time must be non-negative");
 		this.lastSeen.put(uuid, lastSeen);
+		this.hasPlayedBefore.put(uuid, true);
 	}
 
 	/**
@@ -211,6 +212,7 @@ public class PlayerListMock
 	{
 		Preconditions.checkArgument(lastLogin > 0, "Last login time must be non-negative");
 		this.lastLogins.put(uuid, lastLogin);
+		this.hasPlayedBefore.put(uuid, true);
 	}
 
 	/**
@@ -355,21 +357,11 @@ public class PlayerListMock
 	@NotNull
 	public OfflinePlayer getOfflinePlayer(@NotNull String name)
 	{
-		Player player = getPlayer(name);
-
-		if (player != null)
+		OfflinePlayer offlinePlayer = getOfflinePlayerIfCached(name);
+		if (offlinePlayer != null)
 		{
-			return player;
+			return offlinePlayer;
 		}
-
-		for (OfflinePlayer offlinePlayer : this.offlinePlayers)
-		{
-			if (name.equals(offlinePlayer.getName()))
-			{
-				return offlinePlayer;
-			}
-		}
-
 		return new OfflinePlayerMock(name);
 	}
 
@@ -435,6 +427,25 @@ public class PlayerListMock
 	public void removeOperator(UUID operator)
 	{
 		this.operators.remove(operator);
+	}
+
+	public @Nullable OfflinePlayer getOfflinePlayerIfCached(String name)
+	{
+		Player player = getPlayer(name);
+
+		if (player != null)
+		{
+			return player;
+		}
+
+		for (OfflinePlayer offlinePlayer : this.offlinePlayers)
+		{
+			if (name.equals(offlinePlayer.getName()))
+			{
+				return offlinePlayer;
+			}
+		}
+		return null;
 	}
 
 }

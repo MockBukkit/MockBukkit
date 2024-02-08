@@ -1,6 +1,8 @@
 package org.mockbukkit.mockbukkit.entity;
 
 import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.UnimplementedOperationException;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -61,6 +63,21 @@ public class TNTPrimedMock extends EntityMock implements TNTPrimed
 		} else {
 			this.source = null;
 		}
+	}
+
+	@Override
+	public void setBlockData(@NotNull BlockData blockData)
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+
+	}
+
+	@Override
+	public @NotNull BlockData getBlockData()
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
