@@ -19,6 +19,7 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.RegionAccessor;
 import org.bukkit.Statistic;
+import org.bukkit.Tag;
 import org.bukkit.UnsafeValues;
 import org.bukkit.World;
 import org.bukkit.advancement.Advancement;
@@ -46,6 +47,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -310,7 +312,11 @@ public class MockUnsafeValues implements UnsafeValues
 		if(!material.isBlock()) {
 			return null;
 		}
-		return String.format("block.%s.%s", material.key().namespace(), material.key().value());
+		// edge cases: WHEAT and NETHER_WART are blocks, but still use the "item" prefix
+		if(material == Material.WHEAT || material == Material.NETHER_WART) {
+			return formatTranslatable("item", material);
+		}
+		return formatTranslatable("block", material);
 	}
 
 	/**
@@ -323,6 +329,15 @@ public class MockUnsafeValues implements UnsafeValues
 	{
 		if(!material.isItem()) {
 			return null;
+		}
+		// edge cases: WHEAT and NETHER_WART are blocks, but still use the "item" prefix (therefore this check has to be done BEFORE the isBlock check below)
+		if(material == Material.WHEAT || material == Material.NETHER_WART) {
+			return formatTranslatable("item", material);
+		}
+		// edge case: If a translation key from an item is requested from anything that is also a block, the block translation key is always returned
+		// e.g: Material#STONE is a block (but also an obtainable item in the inventory). However, the translation key is always "block.minecraft.stone".
+		if(material.isBlock()) {
+			return formatTranslatable("block", material);
 		}
 		return formatTranslatable("item", material);
 	}
@@ -351,16 +366,49 @@ public class MockUnsafeValues implements UnsafeValues
 	@Override
 	public String getTranslationKey(ItemStack itemStack)
 	{
-		if(!itemStack.getType().isItem()) {
+		if(itemStack.getType().isItem()) {
+			Material material = itemStack.getType();
+			if(!material.isItem()) {
+				return null;
+			}
+			// edge cases: WHEAT and NETHER_WART are blocks, but still use the "item" prefix (therefore this check has to be done BEFORE the isBlock check below)
+			if(material == Material.WHEAT || material == Material.NETHER_WART) {
+				return formatTranslatable("item", material);
+			}
+			// edge case: If a translation key from an item is requested from anything that is also a block, the block translation key is always returned
+			// e.g: Material#STONE is a block (but also an obtainable item in the inventory). However, the translation key is always "block.minecraft.stone".
+			if(material.isBlock()) {
+				return formatTranslatable("block", material);
+			}
+			return formatTranslatable("item", material, true);
+		}
+		else if(itemStack.getType().isBlock()) {
+			return getBlockTranslationKey(itemStack.getType());
+		}
+		else {
 			return null;
 		}
-		return formatTranslatable("item", itemStack.getType());
+	}
+
+	private <T extends Keyed & Translatable> String formatTranslatable(String prefix, T translatable, boolean fromItemStack)
+	{
+		// enforcing Translatable is not necessary, but translating only makes sense when the object is really translatable by design.
+		String value = translatable.key().value();
+		if(translatable instanceof Material material) {
+			if(Tag.WALL_HANGING_SIGNS.isTagged(material) || Tag.WALL_SIGNS.isTagged(material) || value.endsWith("wall_banner") || value.endsWith("wall_torch") || value.endsWith("wall_skull") || value.endsWith("wall_head")) {
+				value = value.replace("wall_", "");
+			}
+			final Set<Material> EMPTY_EFFECTS = Set.of(Material.POTION, Material.SPLASH_POTION, Material.TIPPED_ARROW, Material.LINGERING_POTION);
+			if(fromItemStack && EMPTY_EFFECTS.contains(material)) {
+				value += ".effect.empty";
+			}
+		}
+		return String.format("%s.%s.%s", prefix, translatable.key().namespace(), value);
 	}
 
 	private <T extends Keyed & Translatable> String formatTranslatable(String prefix, T translatable)
 	{
-		// enforcing Translatable is not necessary, but translating only makes sense when the object is really translatable by design.
-		return String.format("%s.%s.%s", prefix, translatable.key().namespace(), translatable.key().value());
+		return formatTranslatable(prefix, translatable, false);
 	}
 
 	@Override
