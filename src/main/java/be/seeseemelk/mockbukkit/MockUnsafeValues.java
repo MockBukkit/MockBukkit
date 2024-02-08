@@ -357,7 +357,8 @@ public class MockUnsafeValues implements UnsafeValues
 		return formatTranslatable("item", itemStack.getType());
 	}
 
-	private <T extends Keyed & Translatable> String formatTranslatable(String prefix, T translatable) {
+	private <T extends Keyed & Translatable> String formatTranslatable(String prefix, T translatable)
+	{
 		// enforcing Translatable is not necessary, but translating only makes sense when the object is really translatable by design.
 		return String.format("%s.%s.%s", prefix, translatable.key().namespace(), translatable.key().value());
 	}
