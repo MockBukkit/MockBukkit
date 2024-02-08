@@ -1,18 +1,22 @@
-package be.seeseemelk.mockbukkit.entity;
+package org.mockbukkit.mockbukkit.entity;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.ServerMock;
 import org.bukkit.entity.EntityType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class PigZombieMockTest
 {
+
 	private PigZombieMock pigZombie;
 
 	@BeforeEach
@@ -45,14 +49,14 @@ class PigZombieMockTest
 	@Test
 	void testAngryDefault()
 	{
-        assertFalse(pigZombie.isAngry());
+		assertFalse(pigZombie.isAngry());
 	}
 
 	@Test
 	void testSetAngry()
 	{
 		pigZombie.setAngry(true);
-        assertTrue(pigZombie.isAngry());
+		assertTrue(pigZombie.isAngry());
 	}
 
 	@Test

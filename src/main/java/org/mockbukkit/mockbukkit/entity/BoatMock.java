@@ -1,7 +1,7 @@
-package be.seeseemelk.mockbukkit.entity;
+package org.mockbukkit.mockbukkit.entity;
 
-import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.TreeSpecies;

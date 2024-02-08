@@ -1,16 +1,10 @@
-package be.seeseemelk.mockbukkit.entity;
+package org.mockbukkit.mockbukkit.entity;
 
-import be.seeseemelk.mockbukkit.MockBukkitExtension;
-import be.seeseemelk.mockbukkit.MockBukkitInject;
-import be.seeseemelk.mockbukkit.ServerMock;
 import org.bukkit.Material;
-import org.bukkit.Server;
 import org.bukkit.TreeSpecies;
 import org.bukkit.entity.Boat;
 import org.bukkit.entity.EntityType;
-import org.codehaus.plexus.util.cli.Arg;
 import org.jetbrains.annotations.NotNull;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,6 +12,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.UUID;
 import java.util.stream.Stream;
@@ -170,4 +167,5 @@ class BoatMockTest
 				Arguments.of(Boat.Type.MANGROVE, Material.MANGROVE_BOAT)
 		);
 	}
+
 }

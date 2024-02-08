@@ -1,19 +1,16 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
-import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
-import be.seeseemelk.mockbukkit.entity.OfflinePlayerMock;
-import be.seeseemelk.mockbukkit.profile.PlayerProfileMock;
-import com.google.common.base.Strings;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.Server;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.profile.PlayerProfile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.entity.OfflinePlayerMock;
+import org.mockbukkit.mockbukkit.profile.PlayerProfileMock;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -54,7 +51,8 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	public @NotNull SkullMetaMock clone()
 	{
 		SkullMetaMock mock = (SkullMetaMock) super.clone();
-		if (playerProfile != null) {
+		if (playerProfile != null)
+		{
 			mock.setOwner(playerProfile.getName());
 			mock.setPlayerProfile(playerProfile);
 		}

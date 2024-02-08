@@ -1,6 +1,6 @@
 package org.mockbukkit.mockbukkit.configuration;
 
-import be.seeseemelk.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.ServerMock;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2LongOpenHashMap;
 import net.kyori.adventure.text.Component;

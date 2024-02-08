@@ -2,7 +2,6 @@ package org.mockbukkit.mockbukkit;
 
 import org.mockbukkit.mockbukkit.block.BlockMock;
 import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
-import org.mockbukkit.mockbukkit.block.data.WallSignMock;
 import org.mockbukkit.mockbukkit.block.state.BlockStateMock;
 import org.mockbukkit.mockbukkit.entity.AllayMock;
 import org.mockbukkit.mockbukkit.entity.AreaEffectCloudMock;
