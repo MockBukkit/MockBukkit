@@ -1,7 +1,6 @@
 package org.mockbukkit.mockbukkit.scoreboard;
 
-import org.mockbukkit.mockbukkit.UnimplementedOperationException;
-import org.mockbukkit.mockbukkit.entity.EntityMock;
+import org.mockbukkit.mockbukkit.excpetion.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.entity.EntityMock;
 import com.google.common.base.Preconditions;
 import net.kyori.adventure.text.Component;

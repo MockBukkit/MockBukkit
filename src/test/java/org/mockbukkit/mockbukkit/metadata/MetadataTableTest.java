@@ -1,7 +1,7 @@
 package org.mockbukkit.mockbukkit.metadata;
 
 import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.MockPlugin;
+import org.mockbukkit.mockbukkit.plugin.MockPlugin;
 import org.mockbukkit.mockbukkit.TestPlugin;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;

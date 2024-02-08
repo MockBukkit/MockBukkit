@@ -1,4 +1,4 @@
-package org.mockbukkit.mockbukkit;
+package org.mockbukkit.mockbukkit.util;
 
 import org.bukkit.util.CachedServerIcon;
 import org.jetbrains.annotations.Nullable;

@@ -1,19 +1,16 @@
 package org.mockbukkit.mockbukkit;
 
-import org.mockbukkit.mockbukkit.ban.MockIpBanList;
-import org.mockbukkit.mockbukkit.ban.MockProfileBanList;
-import org.mockbukkit.mockbukkit.entity.OfflinePlayerMock;
-import org.mockbukkit.mockbukkit.entity.PlayerMock;
-import com.destroystokyo.paper.profile.PlayerProfile;
 import com.google.common.base.Preconditions;
-import org.bukkit.BanList;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.ban.MockIpBanList;
+import org.mockbukkit.mockbukkit.ban.MockProfileBanList;
+import org.mockbukkit.mockbukkit.entity.OfflinePlayerMock;
+import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
-import java.net.InetAddress;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;

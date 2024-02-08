@@ -1,5 +1,6 @@
-package org.mockbukkit.mockbukkit;
+package org.mockbukkit.mockbukkit.world;
 
+import org.mockbukkit.mockbukkit.excpetion.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerMock;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;

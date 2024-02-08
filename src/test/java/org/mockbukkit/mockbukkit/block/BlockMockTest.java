@@ -1,11 +1,10 @@
 package org.mockbukkit.mockbukkit.block;
 
-import org.mockbukkit.mockbukkit.ChunkCoordinate;
-import org.mockbukkit.mockbukkit.ChunkMock;
-import org.mockbukkit.mockbukkit.Coordinate;
+import org.mockbukkit.mockbukkit.world.ChunkCoordinate;
+import org.mockbukkit.mockbukkit.world.ChunkMock;
+import org.mockbukkit.mockbukkit.world.Coordinate;
 import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.UnimplementedOperationException;
-import org.mockbukkit.mockbukkit.WorldMock;
+import org.mockbukkit.mockbukkit.world.WorldMock;
 import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
 import org.bukkit.Location;
 import org.bukkit.Material;

@@ -1,21 +1,14 @@
 package org.mockbukkit.mockbukkit.entity.data;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.bukkit.entity.EntityType;
-import org.bukkit.inventory.ItemStack;
-import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
-import org.mockbukkit.mockbukkit.entity.data.EntityData;
-import org.mockbukkit.mockbukkit.entity.data.EntityDataRegistry;
-import org.opentest4j.AssertionFailedError;
 
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.WorldMock;
+import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 

@@ -1,10 +1,11 @@
-package org.mockbukkit.mockbukkit;
+package org.mockbukkit.mockbukkit.plugin;
 
 import io.papermc.paper.plugin.PermissionManager;
 import org.bukkit.permissions.Permissible;
 import org.bukkit.permissions.Permission;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.excpetion.UnimplementedOperationException;
 
 import java.util.List;
 import java.util.Set;

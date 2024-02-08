@@ -1,8 +1,8 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.AsyncCatcher;
+import org.mockbukkit.mockbukkit.util.AsyncCatcher;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.excpetion.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.attribute.AttributeInstanceMock;
 import org.mockbukkit.mockbukkit.attribute.AttributesMock;
 import org.mockbukkit.mockbukkit.inventory.EntityEquipmentMock;

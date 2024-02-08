@@ -1,4 +1,4 @@
-package org.mockbukkit.mockbukkit;
+package org.mockbukkit.mockbukkit.world;
 
 import com.google.common.base.Preconditions;
 import io.papermc.paper.event.world.border.WorldBorderBoundsChangeEvent;
@@ -11,6 +11,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.BoundingBox;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.excpetion.UnimplementedOperationException;
 
 import java.util.concurrent.TimeUnit;
 

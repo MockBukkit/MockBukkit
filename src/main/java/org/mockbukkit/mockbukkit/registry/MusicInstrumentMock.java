@@ -1,19 +1,20 @@
-package org.mockbukkit.mockbukkit;
+package org.mockbukkit.mockbukkit.registry;
 
 import com.google.gson.JsonObject;
-import org.bukkit.GameEvent;
+import org.bukkit.MusicInstrument;
 import org.bukkit.NamespacedKey;
 import org.jetbrains.annotations.NotNull;
 
-public class GameEventMock extends GameEvent
+public class MusicInstrumentMock extends MusicInstrument
 {
 
 	private final NamespacedKey key;
 
-	public GameEventMock(JsonObject data)
+	MusicInstrumentMock(JsonObject data)
 	{
 		this.key = NamespacedKey.fromString(data.get("key").getAsString());
 	}
+
 	@Override
 	public @NotNull NamespacedKey getKey()
 	{
