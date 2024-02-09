@@ -302,7 +302,8 @@ public class MockUnsafeValues implements UnsafeValues
 	}
 
 	@Override
-	public String getBlockTranslationKey(Material material)
+	@Nullable
+	public String getBlockTranslationKey(@NotNull Material material)
 	{
 		if (!material.isBlock())
 		{
@@ -317,7 +318,8 @@ public class MockUnsafeValues implements UnsafeValues
 	}
 
 	@Override
-	public String getItemTranslationKey(Material material)
+	@Nullable
+	public String getItemTranslationKey(@NotNull Material material)
 	{
 		if (!material.isItem())
 		{
@@ -332,14 +334,16 @@ public class MockUnsafeValues implements UnsafeValues
 	}
 
 	@Override
-	public String getTranslationKey(EntityType type)
+	@Nullable
+	public String getTranslationKey(@NotNull EntityType type)
 	{
 		Preconditions.checkArgument(type.getName() != null, "Invalid name of EntityType %s for translation key", type);
 		return formatTranslatable("entity", type);
 	}
 
 	@Override
-	public String getTranslationKey(ItemStack itemStack)
+	@Nullable
+	public String getTranslationKey(@NotNull ItemStack itemStack)
 	{
 		if (itemStack.getType().isItem())
 		{
