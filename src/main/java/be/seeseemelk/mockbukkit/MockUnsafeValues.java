@@ -301,82 +301,62 @@ public class MockUnsafeValues implements UnsafeValues
 		throw new UnimplementedOperationException();
 	}
 
-	/**
-	 * Gets the translation key for a {@link Material} that {@link Material#isBlock() is a block}.
-	 * @param material the material to translate
-	 * @return a string of the structure "block.{@literal <namespace>}.{@literal <material>}" (e.g. "block.minecraft.stone"), or null if not a block.
-	 */
 	@Override
 	public String getBlockTranslationKey(Material material)
 	{
-		if(!material.isBlock()) {
+		if (!material.isBlock())
+		{
 			return null;
 		}
 		// edge cases: WHEAT and NETHER_WART are blocks, but still use the "item" prefix
-		if(material == Material.WHEAT || material == Material.NETHER_WART) {
+		if (material == Material.WHEAT || material == Material.NETHER_WART)
+		{
 			return formatTranslatable("item", material);
 		}
 		return formatTranslatable("block", material);
 	}
 
-	/**
-	 * Gets the translation key for a {@link Material} that {@link Material#isItem() is an item}.
-	 * @param material the material to translate
-	 * @return a string of the structure "item.{@literal <namespace>}.{@literal <material>}" (e.g. "item.minecraft.carrot"), or null if not an item.
-	 */
 	@Override
 	public String getItemTranslationKey(Material material)
 	{
-		if(!material.isItem()) {
+		if (!material.isItem())
+		{
 			return null;
 		}
 		String edgeCaseHandledTranslationKey = handleTranslateItemEdgeCases(material);
-		if(edgeCaseHandledTranslationKey != null) {
+		if (edgeCaseHandledTranslationKey != null)
+		{
 			return edgeCaseHandledTranslationKey;
 		}
 		return formatTranslatable("item", material);
 	}
 
-	/**
-	 * Gets the translation key for an {@link EntityType}. Throws an error for custom entities.
-	 * @param type the entity to translate
-	 * @return a string of the structure "item.{@literal <namespace>}.{@literal <entity_type>}" (e.g. "entity.minecraft.pig").
-	 */
 	@Override
 	public String getTranslationKey(EntityType type)
 	{
 		Preconditions.checkArgument(type.getName() != null, "Invalid name of EntityType %s for translation key", type);
-		// prevent translation from any custom entity type
-		Arrays.stream(EntityType.values())
-				.filter(entityType ->type.getName().equals(entityType.getName()))
-				.findFirst()
-				.orElseThrow();
 		return formatTranslatable("entity", type);
 	}
 
-	/**
-	 * Gets the translation key for a {@link ItemStack} that {@link Material#isItem() is an item}.
-	 * @param itemStack the itemstack to translate
-	 * @return a string of the structure "item.{@literal <namespace>}.{@literal <material>}" (e.g. "item.minecraft.carrot"), or null if not an item.
-	 */
 	@Override
 	public String getTranslationKey(ItemStack itemStack)
 	{
-		if(itemStack.getType().isItem()) {
+		if (itemStack.getType().isItem())
+		{
 			Material material = itemStack.getType();
-			if(!material.isItem()) {
-				return null;
-			}
 			String edgeCaseHandledTranslationKey = handleTranslateItemEdgeCases(material);
-			if(edgeCaseHandledTranslationKey != null) {
+			if (edgeCaseHandledTranslationKey != null)
+			{
 				return edgeCaseHandledTranslationKey;
 			}
 			return formatTranslatable("item", material, true);
 		}
-		else if(itemStack.getType().isBlock()) {
+		else if (itemStack.getType().isBlock())
+		{
 			return getBlockTranslationKey(itemStack.getType());
 		}
-		else {
+		else
+		{
 			return null;
 		}
 	}
@@ -384,12 +364,14 @@ public class MockUnsafeValues implements UnsafeValues
 	private String handleTranslateItemEdgeCases(Material material)
 	{
 		// edge cases: WHEAT and NETHER_WART are blocks, but still use the "item" prefix (therefore this check has to be done BEFORE the isBlock check below)
-		if(material == Material.WHEAT || material == Material.NETHER_WART) {
+		if (material == Material.WHEAT || material == Material.NETHER_WART)
+		{
 			return formatTranslatable("item", material);
 		}
 		// edge case: If a translation key from an item is requested from anything that is also a block, the block translation key is always returned
 		// e.g: Material#STONE is a block (but also an obtainable item in the inventory). However, the translation key is always "block.minecraft.stone".
-		if(material.isBlock()) {
+		if (material.isBlock())
+		{
 			return formatTranslatable("block", material);
 		}
 		// not an edge case
@@ -400,13 +382,16 @@ public class MockUnsafeValues implements UnsafeValues
 	{
 		// enforcing Translatable is not necessary, but translating only makes sense when the object is really translatable by design.
 		String value = translatable.key().value();
-		if(translatable instanceof Material material) {
+		if (translatable instanceof Material material)
+		{
 			// replace wall_hanging string check with Tag check (when implemented)
-			if(value.contains("wall_hanging") || Tag.WALL_SIGNS.isTagged(material) || value.endsWith("wall_banner") || value.endsWith("wall_torch") || value.endsWith("wall_skull") || value.endsWith("wall_head")) {
+			if (value.contains("wall_hanging") || Tag.WALL_SIGNS.isTagged(material) || value.endsWith("wall_banner") || value.endsWith("wall_torch") || value.endsWith("wall_skull") || value.endsWith("wall_head"))
+			{
 				value = value.replace("wall_", "");
 			}
 			final Set<Material> emptyEffects = Set.of(Material.POTION, Material.SPLASH_POTION, Material.TIPPED_ARROW, Material.LINGERING_POTION);
-			if(fromItemStack && emptyEffects.contains(material)) {
+			if (fromItemStack && emptyEffects.contains(material))
+			{
 				value += ".effect.empty";
 			}
 		}
