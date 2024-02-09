@@ -346,6 +346,7 @@ public class MockUnsafeValues implements UnsafeValues
 	public String getTranslationKey(EntityType type)
 	{
 		Preconditions.checkArgument(type.getName() != null, "Invalid name of EntityType %s for translation key", type);
+		// prevent translation from any custom entity type
 		Arrays.stream(EntityType.values())
 				.filter(entityType ->type.getName().equals(entityType.getName()))
 				.findFirst()
@@ -400,7 +401,8 @@ public class MockUnsafeValues implements UnsafeValues
 		// enforcing Translatable is not necessary, but translating only makes sense when the object is really translatable by design.
 		String value = translatable.key().value();
 		if(translatable instanceof Material material) {
-			if(Tag.WALL_HANGING_SIGNS.isTagged(material) || Tag.WALL_SIGNS.isTagged(material) || value.endsWith("wall_banner") || value.endsWith("wall_torch") || value.endsWith("wall_skull") || value.endsWith("wall_head")) {
+			// replace wall_hanging string check with Tag check (when implemented)
+			if(value.contains("wall_hanging") || Tag.WALL_SIGNS.isTagged(material) || value.endsWith("wall_banner") || value.endsWith("wall_torch") || value.endsWith("wall_skull") || value.endsWith("wall_head")) {
 				value = value.replace("wall_", "");
 			}
 			final Set<Material> emptyEffects = Set.of(Material.POTION, Material.SPLASH_POTION, Material.TIPPED_ARROW, Material.LINGERING_POTION);
