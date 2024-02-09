@@ -330,14 +330,9 @@ public class MockUnsafeValues implements UnsafeValues
 		if(!material.isItem()) {
 			return null;
 		}
-		// edge cases: WHEAT and NETHER_WART are blocks, but still use the "item" prefix (therefore this check has to be done BEFORE the isBlock check below)
-		if(material == Material.WHEAT || material == Material.NETHER_WART) {
-			return formatTranslatable("item", material);
-		}
-		// edge case: If a translation key from an item is requested from anything that is also a block, the block translation key is always returned
-		// e.g: Material#STONE is a block (but also an obtainable item in the inventory). However, the translation key is always "block.minecraft.stone".
-		if(material.isBlock()) {
-			return formatTranslatable("block", material);
+		String edgeCaseHandledTranslationKey = handleTranslateItemEdgeCases(material);
+		if(edgeCaseHandledTranslationKey != null) {
+			return edgeCaseHandledTranslationKey;
 		}
 		return formatTranslatable("item", material);
 	}
@@ -371,14 +366,9 @@ public class MockUnsafeValues implements UnsafeValues
 			if(!material.isItem()) {
 				return null;
 			}
-			// edge cases: WHEAT and NETHER_WART are blocks, but still use the "item" prefix (therefore this check has to be done BEFORE the isBlock check below)
-			if(material == Material.WHEAT || material == Material.NETHER_WART) {
-				return formatTranslatable("item", material);
-			}
-			// edge case: If a translation key from an item is requested from anything that is also a block, the block translation key is always returned
-			// e.g: Material#STONE is a block (but also an obtainable item in the inventory). However, the translation key is always "block.minecraft.stone".
-			if(material.isBlock()) {
-				return formatTranslatable("block", material);
+			String edgeCaseHandledTranslationKey = handleTranslateItemEdgeCases(material);
+			if(edgeCaseHandledTranslationKey != null) {
+				return edgeCaseHandledTranslationKey;
 			}
 			return formatTranslatable("item", material, true);
 		}
@@ -390,6 +380,21 @@ public class MockUnsafeValues implements UnsafeValues
 		}
 	}
 
+	private String handleTranslateItemEdgeCases(Material material)
+	{
+		// edge cases: WHEAT and NETHER_WART are blocks, but still use the "item" prefix (therefore this check has to be done BEFORE the isBlock check below)
+		if(material == Material.WHEAT || material == Material.NETHER_WART) {
+			return formatTranslatable("item", material);
+		}
+		// edge case: If a translation key from an item is requested from anything that is also a block, the block translation key is always returned
+		// e.g: Material#STONE is a block (but also an obtainable item in the inventory). However, the translation key is always "block.minecraft.stone".
+		if(material.isBlock()) {
+			return formatTranslatable("block", material);
+		}
+		// not an edge case
+		return null;
+	}
+
 	private <T extends Keyed & Translatable> String formatTranslatable(String prefix, T translatable, boolean fromItemStack)
 	{
 		// enforcing Translatable is not necessary, but translating only makes sense when the object is really translatable by design.
@@ -398,8 +403,8 @@ public class MockUnsafeValues implements UnsafeValues
 			if(Tag.WALL_HANGING_SIGNS.isTagged(material) || Tag.WALL_SIGNS.isTagged(material) || value.endsWith("wall_banner") || value.endsWith("wall_torch") || value.endsWith("wall_skull") || value.endsWith("wall_head")) {
 				value = value.replace("wall_", "");
 			}
-			final Set<Material> EMPTY_EFFECTS = Set.of(Material.POTION, Material.SPLASH_POTION, Material.TIPPED_ARROW, Material.LINGERING_POTION);
-			if(fromItemStack && EMPTY_EFFECTS.contains(material)) {
+			final Set<Material> emptyEffects = Set.of(Material.POTION, Material.SPLASH_POTION, Material.TIPPED_ARROW, Material.LINGERING_POTION);
+			if(fromItemStack && emptyEffects.contains(material)) {
 				value += ".effect.empty";
 			}
 		}
