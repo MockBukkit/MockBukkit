@@ -1,6 +1,8 @@
 package be.seeseemelk.mockbukkit;
 
 import org.bukkit.Material;
+import org.bukkit.entity.EntityType;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.InvalidDescriptionException;
 import org.bukkit.plugin.InvalidPluginException;
@@ -158,27 +160,92 @@ class UnsafeValuesTest
 	}
 
 	@Test
-	void testBlockTranslationKey()
+	void testMaterialThatIsOnlyItemTranslationKey()
 	{
+		assertEquals("item.minecraft.saddle", Material.SADDLE.translationKey());
+		assertNull(Material.SADDLE.getBlockTranslationKey());
+
+		assertEquals("item.minecraft.flint_and_steel", Material.FLINT_AND_STEEL.translationKey());
+		assertNull(Material.FLINT_AND_STEEL.getBlockTranslationKey());
+
 
 	}
 
 	@Test
-	void testItemTranslationKey()
+	void testMaterialThatIsItemAndBlockTranslationKey()
 	{
+		assertEquals("block.minecraft.stone", mockUnsafeValues.getBlockTranslationKey(Material.STONE));
+		assertEquals("block.minecraft.stone", mockUnsafeValues.getItemTranslationKey(Material.STONE));
 
+		assertEquals("block.minecraft.dirt", mockUnsafeValues.getBlockTranslationKey(Material.DIRT));
+		assertEquals("block.minecraft.dirt", mockUnsafeValues.getItemTranslationKey(Material.DIRT));
+
+		// wheat and nether_wart are the two exceptions, they are items and blocks, but start with item
+		assertEquals("item.minecraft.wheat", mockUnsafeValues.getBlockTranslationKey(Material.WHEAT));
+		assertEquals("item.minecraft.wheat", mockUnsafeValues.getItemTranslationKey(Material.WHEAT));
+
+		assertEquals("item.minecraft.nether_wart", mockUnsafeValues.getBlockTranslationKey(Material.NETHER_WART));
+		assertEquals("item.minecraft.nether_wart", mockUnsafeValues.getItemTranslationKey(Material.NETHER_WART));
+	}
+
+	@Test
+	void testWallMaterialTranslationKey()
+	{
+		assertEquals("block.minecraft.acacia_sign", mockUnsafeValues.getBlockTranslationKey(Material.ACACIA_SIGN));
+		assertEquals("block.minecraft.acacia_sign", mockUnsafeValues.getBlockTranslationKey(Material.ACACIA_WALL_SIGN));
+
+		assertEquals("block.minecraft.acacia_hanging_sign", mockUnsafeValues.getBlockTranslationKey(Material.ACACIA_HANGING_SIGN));
+		assertEquals("block.minecraft.acacia_hanging_sign", mockUnsafeValues.getBlockTranslationKey(Material.ACACIA_WALL_HANGING_SIGN));
+
+		assertEquals("block.minecraft.white_banner", mockUnsafeValues.getBlockTranslationKey(Material.WHITE_BANNER));
+		assertEquals("block.minecraft.white_banner", mockUnsafeValues.getBlockTranslationKey(Material.WHITE_WALL_BANNER));
+
+		assertEquals("block.minecraft.torch", mockUnsafeValues.getBlockTranslationKey(Material.TORCH));
+		assertEquals("block.minecraft.torch", mockUnsafeValues.getBlockTranslationKey(Material.WALL_TORCH));
+
+		assertEquals("block.minecraft.skeleton_skull", mockUnsafeValues.getBlockTranslationKey(Material.SKELETON_SKULL));
+		assertEquals("block.minecraft.skeleton_skull", mockUnsafeValues.getBlockTranslationKey(Material.SKELETON_WALL_SKULL));
+
+		assertEquals("block.minecraft.creeper_head", mockUnsafeValues.getBlockTranslationKey(Material.CREEPER_HEAD));
+		assertEquals("block.minecraft.creeper_head", mockUnsafeValues.getBlockTranslationKey(Material.CREEPER_WALL_HEAD));
 	}
 
 	@Test
 	void testEntityTranslationKey()
 	{
-
+		assertEquals("entity.minecraft.pig",mockUnsafeValues.getTranslationKey(EntityType.PIG));
+		assertEquals("entity.minecraft.ender_dragon", mockUnsafeValues.getTranslationKey(EntityType.ENDER_DRAGON));
+		assertThrows(IllegalArgumentException.class, () -> mockUnsafeValues.getTranslationKey(EntityType.UNKNOWN));
 	}
 
 	@Test
 	void testItemStackTranslationKey()
 	{
+		assertEquals("item.minecraft.saddle", mockUnsafeValues.getTranslationKey(new ItemStack(Material.SADDLE)));
+		assertEquals("item.minecraft.flint_and_steel", mockUnsafeValues.getTranslationKey(new ItemStack(Material.FLINT_AND_STEEL)));
 
+		assertEquals("block.minecraft.stone", mockUnsafeValues.getTranslationKey(new ItemStack(Material.STONE)));
+		assertEquals("block.minecraft.dirt", mockUnsafeValues.getTranslationKey(new ItemStack(Material.DIRT)));
+
+		// wheat and nether_wart are the two exceptions, they are items and blocks, but start with item
+		assertEquals("item.minecraft.wheat", mockUnsafeValues.getTranslationKey(new ItemStack(Material.WHEAT)));
+		assertEquals("item.minecraft.nether_wart", mockUnsafeValues.getTranslationKey(new ItemStack(Material.NETHER_WART)));
+	}
+
+	@Test
+	void testItemStackEmptyEffectTranslationKey()
+	{
+		assertEquals("item.minecraft.potion", Material.POTION.translationKey());
+		assertEquals("item.minecraft.potion.effect.empty", new ItemStack(Material.POTION).translationKey());
+
+		assertEquals("item.minecraft.splash_potion", Material.SPLASH_POTION.translationKey());
+		assertEquals("item.minecraft.splash_potion.effect.empty", new ItemStack(Material.SPLASH_POTION).translationKey());
+
+		assertEquals("item.minecraft.tipped_arrow", Material.TIPPED_ARROW.translationKey());
+		assertEquals("item.minecraft.tipped_arrow.effect.empty", new ItemStack(Material.TIPPED_ARROW).translationKey());
+
+		assertEquals("item.minecraft.lingering_potion", Material.LINGERING_POTION.translationKey());
+		assertEquals("item.minecraft.lingering_potion.effect.empty", new ItemStack(Material.LINGERING_POTION).translationKey());
 	}
 
 }
