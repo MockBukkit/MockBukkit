@@ -444,7 +444,8 @@ public class MockUnsafeValues implements UnsafeValues
 	public LifecycleEventManager<Plugin> createPluginLifecycleEventManager(JavaPlugin javaPlugin,
 																		   BooleanSupplier booleanSupplier)
 	{
-		return null;
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -452,7 +453,8 @@ public class MockUnsafeValues implements UnsafeValues
 														@NotNull TooltipContext tooltipContext,
 														@Nullable Player player)
 	{
-		return null;
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
