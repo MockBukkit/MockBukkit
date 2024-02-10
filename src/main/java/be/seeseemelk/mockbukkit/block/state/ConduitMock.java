@@ -1,9 +1,12 @@
 package be.seeseemelk.mockbukkit.block.state;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Conduit;
+import org.bukkit.entity.LivingEntity;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Mock implementation of a {@link Conduit}.
@@ -51,6 +54,27 @@ public class ConduitMock extends TileStateMock implements Conduit
 	public @NotNull ConduitMock getSnapshot()
 	{
 		return new ConduitMock(this);
+	}
+
+	@Override
+	public boolean isActive()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getRange()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable LivingEntity getTarget()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 }
