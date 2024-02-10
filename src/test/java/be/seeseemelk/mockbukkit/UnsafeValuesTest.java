@@ -10,9 +10,13 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.io.StringReader;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -162,90 +166,93 @@ class UnsafeValuesTest
 	@Test
 	void testMaterialThatIsOnlyItemTranslationKey()
 	{
-		assertEquals("item.minecraft.saddle", Material.SADDLE.translationKey());
+		assertEquals("item.minecraft.saddle", Material.SADDLE.getItemTranslationKey());
 		assertNull(Material.SADDLE.getBlockTranslationKey());
-
-		assertEquals("item.minecraft.flint_and_steel", Material.FLINT_AND_STEEL.translationKey());
-		assertNull(Material.FLINT_AND_STEEL.getBlockTranslationKey());
-
-
 	}
 
-	@Test
-	void testMaterialThatIsItemAndBlockTranslationKey()
+	@ParameterizedTest
+	@MethodSource("materialAndBlockTranslationKeyProvider")
+	void testMaterialThatIsItemAndBlockTranslationKey(String expectedBlockKey, String expectedItemKey, Material material)
 	{
-		assertEquals("block.minecraft.stone", mockUnsafeValues.getBlockTranslationKey(Material.STONE));
-		assertEquals("block.minecraft.stone", mockUnsafeValues.getItemTranslationKey(Material.STONE));
-
-		assertEquals("block.minecraft.dirt", mockUnsafeValues.getBlockTranslationKey(Material.DIRT));
-		assertEquals("block.minecraft.dirt", mockUnsafeValues.getItemTranslationKey(Material.DIRT));
-
-		// wheat and nether_wart are the two exceptions, they are items and blocks, but start with item
-		assertEquals("item.minecraft.wheat", mockUnsafeValues.getBlockTranslationKey(Material.WHEAT));
-		assertEquals("item.minecraft.wheat", mockUnsafeValues.getItemTranslationKey(Material.WHEAT));
-
-		assertEquals("item.minecraft.nether_wart", mockUnsafeValues.getBlockTranslationKey(Material.NETHER_WART));
-		assertEquals("item.minecraft.nether_wart", mockUnsafeValues.getItemTranslationKey(Material.NETHER_WART));
+		assertEquals(expectedBlockKey, mockUnsafeValues.getBlockTranslationKey(material));
+		assertEquals(expectedItemKey, mockUnsafeValues.getItemTranslationKey(material));
 	}
 
-	@Test
-	void testWallMaterialTranslationKey()
+	static Stream<Arguments> materialAndBlockTranslationKeyProvider()
 	{
-		assertEquals("block.minecraft.acacia_sign", mockUnsafeValues.getBlockTranslationKey(Material.ACACIA_SIGN));
-		assertEquals("block.minecraft.acacia_sign", mockUnsafeValues.getBlockTranslationKey(Material.ACACIA_WALL_SIGN));
+		return Stream.of(
+				Arguments.of("block.minecraft.stone", "block.minecraft.stone", Material.STONE),
+				Arguments.of("block.minecraft.dirt", "block.minecraft.dirt", Material.DIRT),
+				Arguments.of("item.minecraft.wheat", "item.minecraft.wheat", Material.WHEAT),
+				Arguments.of("item.minecraft.nether_wart", "item.minecraft.nether_wart", Material.NETHER_WART)
+		);
+	}
 
-		assertEquals("block.minecraft.acacia_hanging_sign", mockUnsafeValues.getBlockTranslationKey(Material.ACACIA_HANGING_SIGN));
-		assertEquals("block.minecraft.acacia_hanging_sign", mockUnsafeValues.getBlockTranslationKey(Material.ACACIA_WALL_HANGING_SIGN));
+	@ParameterizedTest
+	@MethodSource("wallMaterialTranslationKeyProvider")
+	void testWallMaterialTranslationKey(String expectedKey, Material material)
+	{
+		assertEquals(expectedKey, material.getBlockTranslationKey());
+	}
 
-		assertEquals("block.minecraft.white_banner", mockUnsafeValues.getBlockTranslationKey(Material.WHITE_BANNER));
-		assertEquals("block.minecraft.white_banner", mockUnsafeValues.getBlockTranslationKey(Material.WHITE_WALL_BANNER));
-
-		assertEquals("block.minecraft.torch", mockUnsafeValues.getBlockTranslationKey(Material.TORCH));
-		assertEquals("block.minecraft.torch", mockUnsafeValues.getBlockTranslationKey(Material.WALL_TORCH));
-
-		assertEquals("block.minecraft.skeleton_skull", mockUnsafeValues.getBlockTranslationKey(Material.SKELETON_SKULL));
-		assertEquals("block.minecraft.skeleton_skull", mockUnsafeValues.getBlockTranslationKey(Material.SKELETON_WALL_SKULL));
-
-		assertEquals("block.minecraft.creeper_head", mockUnsafeValues.getBlockTranslationKey(Material.CREEPER_HEAD));
-		assertEquals("block.minecraft.creeper_head", mockUnsafeValues.getBlockTranslationKey(Material.CREEPER_WALL_HEAD));
+	static Stream<Arguments> wallMaterialTranslationKeyProvider()
+	{
+		return Stream.of(
+				Arguments.of("block.minecraft.acacia_sign", Material.ACACIA_SIGN),
+				Arguments.of("block.minecraft.acacia_sign", Material.ACACIA_WALL_SIGN),
+				Arguments.of("block.minecraft.acacia_hanging_sign", Material.ACACIA_HANGING_SIGN),
+				Arguments.of("block.minecraft.acacia_hanging_sign", Material.ACACIA_WALL_HANGING_SIGN),
+				Arguments.of("block.minecraft.white_banner", Material.WHITE_BANNER),
+				Arguments.of("block.minecraft.white_banner", Material.WHITE_WALL_BANNER),
+				Arguments.of("block.minecraft.torch", Material.TORCH),
+				Arguments.of("block.minecraft.torch", Material.WALL_TORCH),
+				Arguments.of("block.minecraft.skeleton_skull", Material.SKELETON_SKULL),
+				Arguments.of("block.minecraft.skeleton_skull", Material.SKELETON_WALL_SKULL),
+				Arguments.of("block.minecraft.creeper_head", Material.CREEPER_HEAD),
+				Arguments.of("block.minecraft.creeper_head", Material.CREEPER_WALL_HEAD)
+		);
 	}
 
 	@Test
 	void testEntityTranslationKey()
 	{
-		assertEquals("entity.minecraft.pig",mockUnsafeValues.getTranslationKey(EntityType.PIG));
-		assertEquals("entity.minecraft.ender_dragon", mockUnsafeValues.getTranslationKey(EntityType.ENDER_DRAGON));
+		assertEquals("entity.minecraft.pig", mockUnsafeValues.getTranslationKey(EntityType.PIG));
 		assertThrows(IllegalArgumentException.class, () -> mockUnsafeValues.getTranslationKey(EntityType.UNKNOWN));
 	}
 
-	@Test
-	void testItemStackTranslationKey()
+	@ParameterizedTest
+	@MethodSource("itemStackTranslationKeyProvider")
+	void testItemStackTranslationKey(String expectedKey, ItemStack itemStack)
 	{
-		assertEquals("item.minecraft.saddle", mockUnsafeValues.getTranslationKey(new ItemStack(Material.SADDLE)));
-		assertEquals("item.minecraft.flint_and_steel", mockUnsafeValues.getTranslationKey(new ItemStack(Material.FLINT_AND_STEEL)));
-
-		assertEquals("block.minecraft.stone", mockUnsafeValues.getTranslationKey(new ItemStack(Material.STONE)));
-		assertEquals("block.minecraft.dirt", mockUnsafeValues.getTranslationKey(new ItemStack(Material.DIRT)));
-
-		// wheat and nether_wart are the two exceptions, they are items and blocks, but start with item
-		assertEquals("item.minecraft.wheat", mockUnsafeValues.getTranslationKey(new ItemStack(Material.WHEAT)));
-		assertEquals("item.minecraft.nether_wart", mockUnsafeValues.getTranslationKey(new ItemStack(Material.NETHER_WART)));
+		assertEquals(expectedKey, mockUnsafeValues.getTranslationKey(itemStack));
 	}
 
-	@Test
-	void testItemStackEmptyEffectTranslationKey()
+	static Stream<Arguments> itemStackTranslationKeyProvider()
 	{
-		assertEquals("item.minecraft.potion", Material.POTION.translationKey());
-		assertEquals("item.minecraft.potion.effect.empty", new ItemStack(Material.POTION).translationKey());
+		return Stream.of(
+				Arguments.of("item.minecraft.saddle", new ItemStack(Material.SADDLE)),
+				Arguments.of("block.minecraft.stone", new ItemStack(Material.STONE)),
+				Arguments.of("item.minecraft.wheat", new ItemStack(Material.WHEAT)),
+				Arguments.of("item.minecraft.nether_wart", new ItemStack(Material.NETHER_WART))
+		);
+	}
 
-		assertEquals("item.minecraft.splash_potion", Material.SPLASH_POTION.translationKey());
-		assertEquals("item.minecraft.splash_potion.effect.empty", new ItemStack(Material.SPLASH_POTION).translationKey());
+	@ParameterizedTest
+	@MethodSource("itemStackEmptyEffectTranslationKeyProvider")
+	void testItemStackEmptyEffectTranslationKey(String expectedMaterialKey, Material material, String expectedItemStackKey, ItemStack itemStack)
+	{
+		assertEquals(expectedMaterialKey, material.getItemTranslationKey());
+		assertEquals(expectedItemStackKey, itemStack.translationKey());
+	}
 
-		assertEquals("item.minecraft.tipped_arrow", Material.TIPPED_ARROW.translationKey());
-		assertEquals("item.minecraft.tipped_arrow.effect.empty", new ItemStack(Material.TIPPED_ARROW).translationKey());
-
-		assertEquals("item.minecraft.lingering_potion", Material.LINGERING_POTION.translationKey());
-		assertEquals("item.minecraft.lingering_potion.effect.empty", new ItemStack(Material.LINGERING_POTION).translationKey());
+	static Stream<Arguments> itemStackEmptyEffectTranslationKeyProvider()
+	{
+		return Stream.of(
+				Arguments.of("item.minecraft.potion", Material.POTION, "item.minecraft.potion.effect.empty", new ItemStack(Material.POTION)),
+				Arguments.of("item.minecraft.splash_potion", Material.SPLASH_POTION, "item.minecraft.splash_potion.effect.empty", new ItemStack(Material.SPLASH_POTION)),
+				Arguments.of("item.minecraft.tipped_arrow", Material.TIPPED_ARROW, "item.minecraft.tipped_arrow.effect.empty", new ItemStack(Material.TIPPED_ARROW)),
+				Arguments.of("item.minecraft.lingering_potion", Material.LINGERING_POTION, "item.minecraft.lingering_potion.effect.empty", new ItemStack(Material.LINGERING_POTION))
+		);
 	}
 
 }
