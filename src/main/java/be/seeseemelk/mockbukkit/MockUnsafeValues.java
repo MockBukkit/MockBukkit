@@ -1,11 +1,14 @@
 package be.seeseemelk.mockbukkit;
 
+import be.seeseemelk.mockbukkit.plugin.lifecycle.event.MockLifecycleEventManager;
 import be.seeseemelk.mockbukkit.potion.MockInternalPotionData;
 import com.destroystokyo.paper.util.VersionFetcher;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Multimap;
 import io.papermc.paper.inventory.ItemRarity;
 import net.kyori.adventure.key.Keyed;
+import io.papermc.paper.inventory.tooltip.TooltipContext;
+import io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.flattener.ComponentFlattener;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
@@ -30,25 +33,24 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.CreativeCategory;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.InvalidPluginException;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.function.BooleanSupplier;
 
 /**
  * Mock implementation of an {@link UnsafeValues}.
@@ -512,6 +514,22 @@ public class MockUnsafeValues implements UnsafeValues
 
 	@Override
 	public @Nullable Color getSpawnEggLayerColor(EntityType entityType, int i)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public LifecycleEventManager<Plugin> createPluginLifecycleEventManager(JavaPlugin javaPlugin,
+																		   BooleanSupplier booleanSupplier)
+	{
+		return new MockLifecycleEventManager();
+	}
+
+	@Override
+	public @NotNull List<Component> computeTooltipLines(@NotNull ItemStack itemStack,
+														@NotNull TooltipContext tooltipContext,
+														@Nullable Player player)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
