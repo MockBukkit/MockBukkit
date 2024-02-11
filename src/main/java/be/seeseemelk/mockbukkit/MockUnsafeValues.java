@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit;
 
+import be.seeseemelk.mockbukkit.plugin.lifecycle.event.MockLifecycleEventManager;
 import be.seeseemelk.mockbukkit.potion.MockInternalPotionData;
 import com.destroystokyo.paper.util.VersionFetcher;
 import com.google.common.base.Preconditions;
@@ -444,8 +445,7 @@ public class MockUnsafeValues implements UnsafeValues
 	public LifecycleEventManager<Plugin> createPluginLifecycleEventManager(JavaPlugin javaPlugin,
 																		   BooleanSupplier booleanSupplier)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return new MockLifecycleEventManager();
 	}
 
 	@Override
