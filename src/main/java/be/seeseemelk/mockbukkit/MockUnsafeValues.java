@@ -6,6 +6,7 @@ import com.destroystokyo.paper.util.VersionFetcher;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Multimap;
 import io.papermc.paper.inventory.ItemRarity;
+import net.kyori.adventure.key.Keyed;
 import io.papermc.paper.inventory.tooltip.TooltipContext;
 import io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager;
 import net.kyori.adventure.text.Component;
@@ -14,12 +15,14 @@ import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.kyori.adventure.text.serializer.plain.PlainComponentSerializer;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
+import net.kyori.adventure.translation.Translatable;
 import org.bukkit.Color;
 import org.bukkit.FeatureFlag;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.RegionAccessor;
 import org.bukkit.Statistic;
+import org.bukkit.Tag;
 import org.bukkit.UnsafeValues;
 import org.bukkit.World;
 import org.bukkit.advancement.Advancement;
@@ -43,14 +46,11 @@ import org.bukkit.potion.PotionType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.function.BooleanSupplier;
-import java.util.stream.Collectors;
 
 /**
  * Mock implementation of an {@link UnsafeValues}.
@@ -304,31 +304,109 @@ public class MockUnsafeValues implements UnsafeValues
 	}
 
 	@Override
-	public String getBlockTranslationKey(Material material)
+	@Nullable
+	public String getBlockTranslationKey(@NotNull Material material)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (!material.isBlock())
+		{
+			return null;
+		}
+		// edge cases: WHEAT and NETHER_WART are blocks, but still use the "item" prefix
+		if (material == Material.WHEAT || material == Material.NETHER_WART)
+		{
+			return formatTranslatable("item", material);
+		}
+		return formatTranslatable("block", material);
 	}
 
 	@Override
-	public String getItemTranslationKey(Material material)
+	@Nullable
+	public String getItemTranslationKey(@NotNull Material material)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (!material.isItem())
+		{
+			return null;
+		}
+		String edgeCaseHandledTranslationKey = handleTranslateItemEdgeCases(material);
+		if (edgeCaseHandledTranslationKey != null)
+		{
+			return edgeCaseHandledTranslationKey;
+		}
+		return formatTranslatable("item", material);
 	}
 
 	@Override
-	public String getTranslationKey(EntityType type)
+	@Nullable
+	public String getTranslationKey(@NotNull EntityType type)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(type.getName() != null, "Invalid name of EntityType %s for translation key", type);
+		return formatTranslatable("entity", type);
 	}
 
 	@Override
-	public String getTranslationKey(ItemStack itemStack)
+	@Nullable
+	public String getTranslationKey(@NotNull ItemStack itemStack)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (itemStack.getType().isItem())
+		{
+			Material material = itemStack.getType();
+			String edgeCaseHandledTranslationKey = handleTranslateItemEdgeCases(material);
+			if (edgeCaseHandledTranslationKey != null)
+			{
+				return edgeCaseHandledTranslationKey;
+			}
+			return formatTranslatable("item", material, true);
+		}
+		else if (itemStack.getType().isBlock())
+		{
+			return getBlockTranslationKey(itemStack.getType());
+		}
+		else
+		{
+			return null;
+		}
+	}
+
+	private String handleTranslateItemEdgeCases(Material material)
+	{
+		// edge cases: WHEAT and NETHER_WART are blocks, but still use the "item" prefix (therefore this check has to be done BEFORE the isBlock check below)
+		if (material == Material.WHEAT || material == Material.NETHER_WART)
+		{
+			return formatTranslatable("item", material);
+		}
+		// edge case: If a translation key from an item is requested from anything that is also a block, the block translation key is always returned
+		// e.g: Material#STONE is a block (but also an obtainable item in the inventory). However, the translation key is always "block.minecraft.stone".
+		if (material.isBlock())
+		{
+			return formatTranslatable("block", material);
+		}
+		// not an edge case
+		return null;
+	}
+
+	private <T extends Keyed & Translatable> String formatTranslatable(String prefix, T translatable, boolean fromItemStack)
+	{
+		// enforcing Translatable is not necessary, but translating only makes sense when the object is really translatable by design.
+		String value = translatable.key().value();
+		if (translatable instanceof Material material)
+		{
+			// replace wall_hanging string check with Tag check (when implemented)
+			if (value.contains("wall_hanging") || Tag.WALL_SIGNS.isTagged(material) || value.endsWith("wall_banner") || value.endsWith("wall_torch") || value.endsWith("wall_skull") || value.endsWith("wall_head"))
+			{
+				value = value.replace("wall_", "");
+			}
+			final Set<Material> emptyEffects = Set.of(Material.POTION, Material.SPLASH_POTION, Material.TIPPED_ARROW, Material.LINGERING_POTION);
+			if (fromItemStack && emptyEffects.contains(material))
+			{
+				value += ".effect.empty";
+			}
+		}
+		return String.format("%s.%s.%s", prefix, translatable.key().namespace(), value);
+	}
+
+	private <T extends Keyed & Translatable> String formatTranslatable(String prefix, T translatable)
+	{
+		return formatTranslatable(prefix, translatable, false);
 	}
 
 	@Override
