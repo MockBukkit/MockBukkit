@@ -443,18 +443,14 @@ public class WorldMock implements World
 	 */
 	public @NotNull BlockMock createBlock(@NotNull Coordinate c)
 	{
-		if (c.y >= maxHeight)
-		{
-			throw new ArrayIndexOutOfBoundsException("Y larger than max height");
-		}
-		else if (c.y < minHeight)
-		{
-			throw new ArrayIndexOutOfBoundsException("Y smaller than min height");
-		}
-
 		Location location = new Location(this, c.x, c.y, c.z);
 		BlockMock block;
-		if (c.y == minHeight)
+
+		if (c.y < minHeight || c.y >= maxHeight)
+		{
+			block = new BlockMock(Material.VOID_AIR, location);
+		}
+		else if (c.y == minHeight)
 		{
 			block = new BlockMock(Material.BEDROCK, location);
 		}
