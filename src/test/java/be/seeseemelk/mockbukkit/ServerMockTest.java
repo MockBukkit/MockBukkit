@@ -32,10 +32,12 @@ import com.destroystokyo.paper.event.player.PlayerConnectionCloseEvent;
 import com.destroystokyo.paper.event.server.WhitelistToggleEvent;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
+import com.google.common.net.InetAddresses;
 import io.papermc.paper.world.structure.ConfiguredStructure;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Art;
+import org.bukkit.BanList;
 import org.bukkit.Bukkit;
 import org.bukkit.Fluid;
 import org.bukkit.GameMode;
@@ -92,12 +94,14 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -1502,9 +1506,9 @@ class ServerMockTest
 
 	@ParameterizedTest
 	@MethodSource("testGetTicksPerSpawnsArguments")
-	void testGetTicksPerSpawns()
+	void testGetTicksPerSpawns(SpawnCategory category, int expected)
 	{
-		assertEquals(400, server.getTicksPerAnimalSpawns());
+		assertEquals(expected, server.getTicksPerSpawns(category));
 	}
 
 	public static Stream<Arguments> testGetTicksPerSpawnsArguments()
@@ -1565,6 +1569,174 @@ class ServerMockTest
 	void testGetTicksPerAnimalSpawns()
 	{
 		assertEquals(400, server.getTicksPerAnimalSpawns());
+	}
+
+	@ParameterizedTest
+	@MethodSource("getSpawnLimitArguments")
+	void testGetSpawnLimit(SpawnCategory category, int expected)
+	{
+		assertEquals(expected, server.getSpawnLimit(category));
+	}
+
+	public static Stream<Arguments> getSpawnLimitArguments()
+	{
+		return Stream.of(
+				Arguments.of(SpawnCategory.MONSTER, 70),
+				Arguments.of(SpawnCategory.ANIMAL, 10),
+				Arguments.of(SpawnCategory.WATER_AMBIENT, 20),
+				Arguments.of(SpawnCategory.WATER_ANIMAL, 5),
+				Arguments.of(SpawnCategory.AMBIENT, 15),
+				Arguments.of(SpawnCategory.WATER_UNDERGROUND_CREATURE,5)
+		);
+	}
+
+	@Test
+	void testGetSpawnLimit_NullCategory()
+	{
+		assertThrows(IllegalArgumentException.class, () -> server.getSpawnLimit(null));
+	}
+
+	@Test
+	void testGetSpawnLimit_InvalidCategory()
+	{
+		assertThrows(IllegalArgumentException.class, () -> server.getSpawnLimit(SpawnCategory.MISC));
+	}
+
+	@Test
+	void testGetMonsterSpawnLimit()
+	{
+		assertEquals(70, server.getMonsterSpawnLimit());
+	}
+
+	@Test
+	void testGetWaterAmbientSpawnLimit()
+	{
+		assertEquals(20, server.getWaterAmbientSpawnLimit());
+	}
+
+	@Test
+	void testGetWaterAnimalSpawnLimit()
+	{
+		assertEquals(5, server.getWaterAnimalSpawnLimit());
+	}
+
+	@Test
+	void testGetAmbientSpawnLimit()
+	{
+		assertEquals(15, server.getAmbientSpawnLimit());
+	}
+
+	@Test
+	void testGetWaterUndergroundCreatureSpawnLimit()
+	{
+		assertEquals(5, server.getWaterUndergroundCreatureSpawnLimit());
+	}
+
+	@Test
+	void testGetAnimalSpawnLimit()
+	{
+		assertEquals(10, server.getAnimalSpawnLimit());
+	}
+
+
+	@Test
+	void testBanIP()
+	{
+		InetAddress address = InetAddresses.fromInteger(ThreadLocalRandom.current().nextInt());
+		assertFalse(server.getBanList(BanList.Type.IP).isBanned(address));
+		server.banIP(address);
+		assertTrue(server.getBanList(BanList.Type.IP).isBanned(address));
+	}
+
+	@Test
+	void testBanIPNullThrows()
+	{
+		assertThrows(NullPointerException.class, () -> server.banIP((InetAddress) null));
+	}
+
+	@Test
+	void testUnbanIP()
+	{
+		InetAddress address = InetAddresses.fromInteger(ThreadLocalRandom.current().nextInt());
+		server.banIP(address);
+		assertTrue(server.getBanList(BanList.Type.IP).isBanned(address));
+
+		server.unbanIP(address);
+		assertFalse(server.getBanList(BanList.Type.IP).isBanned(address));
+	}
+
+	@Test
+	void testUnbanIPNullThrows()
+	{
+		assertThrows(NullPointerException.class, () -> server.unbanIP((InetAddress) null));
+	}
+
+	@Test
+	void testBanIPString()
+	{
+		InetAddress address = InetAddresses.fromInteger(ThreadLocalRandom.current().nextInt());
+		String addressString = address.getHostAddress();
+		assertFalse(server.getBanList(BanList.Type.IP).isBanned(addressString));
+		server.banIP(addressString);
+		assertTrue(server.getBanList(BanList.Type.IP).isBanned(addressString));
+	}
+
+	@Test
+	void testBanIPStringNullThrows()
+	{
+		assertThrows(NullPointerException.class, () -> server.banIP((String) null));
+	}
+
+	@Test
+	void testUnbanIPString()
+	{
+		InetAddress address = InetAddresses.fromInteger(ThreadLocalRandom.current().nextInt());
+		String addressString = address.getHostAddress();
+		server.banIP(addressString);
+		assertTrue(server.getBanList(BanList.Type.IP).isBanned(addressString));
+		server.unbanIP(addressString);
+		assertFalse(server.getBanList(BanList.Type.IP).isBanned(addressString));
+	}
+
+	@Test
+	void testUnbanIPStringNullThrows()
+	{
+		assertThrows(NullPointerException.class, () -> server.unbanIP((String) null));
+	}
+
+	@Test
+	void testGetIPBans()
+	{
+		InetAddress address = InetAddresses.fromInteger(ThreadLocalRandom.current().nextInt());
+		server.banIP(address);
+		assertEquals(1, server.getIPBans().size());
+		assertTrue(server.getIPBans().contains(address.getHostAddress()));
+
+	}
+
+	@Test
+	void testGetOfflinePlayerIfCached_notRegistered()
+	{
+		String name = "headstalls";
+		OfflinePlayer offlinePlayer = server.getOfflinePlayerIfCached(name);
+		assertNull(offlinePlayer);
+	}
+
+	@Test
+	void testGetOfflinePlayerIfCached_offlinePlayerRegistered()
+	{
+		PlayerMock playerMock = server.addPlayer("CapitalizedName");
+		playerMock.disconnect();
+		OfflinePlayer offlinePlayer = server.getOfflinePlayerIfCached(playerMock.getName());
+		assertEquals(playerMock, offlinePlayer);
+	}
+
+	@Test
+	void testGetOfflinePlayerIfCached_playerRegistered()
+	{
+		PlayerMock playerMock = server.addPlayer("CapitalizedName");
+		OfflinePlayer offlinePlayer = server.getOfflinePlayerIfCached(playerMock.getName());
+		assertEquals(playerMock, offlinePlayer);
 	}
 
 }

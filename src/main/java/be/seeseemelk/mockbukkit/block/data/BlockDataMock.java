@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.block.data;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.destroystokyo.paper.MaterialTags;
 import com.google.common.base.Preconditions;
+import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.SoundGroup;
@@ -226,6 +227,13 @@ public class BlockDataMock implements BlockData
 	}
 
 	@Override
+	public @NotNull Color getMapColor()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull Material getPlacementMaterial()
 	{
 		// TODO Auto-generated method stub
@@ -241,6 +249,13 @@ public class BlockDataMock implements BlockData
 
 	@Override
 	public void mirror(@NotNull Mirror mirror)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void copyTo(@NotNull BlockData blockData)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
