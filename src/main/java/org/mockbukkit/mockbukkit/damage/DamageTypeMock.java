@@ -11,6 +11,7 @@ import org.bukkit.damage.DamageType;
 import org.bukkit.damage.DeathMessageType;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.UnimplementedOperationException;
 
 public class DamageTypeMock implements DamageType
 {
