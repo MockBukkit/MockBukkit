@@ -82,7 +82,6 @@ import org.bukkit.scoreboard.ScoreboardManager;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -1502,9 +1501,9 @@ class ServerMockTest
 
 	@ParameterizedTest
 	@MethodSource("testGetTicksPerSpawnsArguments")
-	void testGetTicksPerSpawns()
+	void testGetTicksPerSpawns(SpawnCategory category, int expected)
 	{
-		assertEquals(400, server.getTicksPerAnimalSpawns());
+		assertEquals(expected, server.getTicksPerSpawns(category));
 	}
 
 	public static Stream<Arguments> testGetTicksPerSpawnsArguments()
@@ -1566,6 +1565,74 @@ class ServerMockTest
 	{
 		assertEquals(400, server.getTicksPerAnimalSpawns());
 	}
+
+	@ParameterizedTest
+	@MethodSource("getSpawnLimitArguments")
+	void testGetSpawnLimit(SpawnCategory category, int expected)
+	{
+		assertEquals(expected, server.getSpawnLimit(category));
+	}
+
+	public static Stream<Arguments> getSpawnLimitArguments()
+	{
+		return Stream.of(
+				Arguments.of(SpawnCategory.MONSTER, 70),
+				Arguments.of(SpawnCategory.ANIMAL, 10),
+				Arguments.of(SpawnCategory.WATER_AMBIENT, 20),
+				Arguments.of(SpawnCategory.WATER_ANIMAL, 5),
+				Arguments.of(SpawnCategory.AMBIENT, 15),
+				Arguments.of(SpawnCategory.WATER_UNDERGROUND_CREATURE,5)
+		);
+	}
+
+	@Test
+	void testGetSpawnLimit_NullCategory()
+	{
+		assertThrows(IllegalArgumentException.class, () -> server.getSpawnLimit(null));
+	}
+
+	@Test
+	void testGetSpawnLimit_InvalidCategory()
+	{
+		assertThrows(IllegalArgumentException.class, () -> server.getSpawnLimit(SpawnCategory.MISC));
+	}
+
+	@Test
+	void testGetMonsterSpawnLimit()
+	{
+		assertEquals(70, server.getMonsterSpawnLimit());
+	}
+
+	@Test
+	void testGetWaterAmbientSpawnLimit()
+	{
+		assertEquals(20, server.getWaterAmbientSpawnLimit());
+	}
+
+	@Test
+	void testGetWaterAnimalSpawnLimit()
+	{
+		assertEquals(5, server.getWaterAnimalSpawnLimit());
+	}
+
+	@Test
+	void testGetAmbientSpawnLimit()
+	{
+		assertEquals(15, server.getAmbientSpawnLimit());
+	}
+
+	@Test
+	void testGetWaterUndergroundCreatureSpawnLimit()
+	{
+		assertEquals(5, server.getWaterUndergroundCreatureSpawnLimit());
+	}
+
+	@Test
+	void testGetAnimalSpawnLimit()
+	{
+		assertEquals(10, server.getAnimalSpawnLimit());
+	}
+
 
 	@Test
 	void testBanIP()
@@ -1640,6 +1707,31 @@ class ServerMockTest
 		assertEquals(1, server.getIPBans().size());
 		assertTrue(server.getIPBans().contains(address.getHostAddress()));
 
+	}
+
+	@Test
+	void testGetOfflinePlayerIfCached_notRegistered()
+	{
+		String name = "headstalls";
+		OfflinePlayer offlinePlayer = server.getOfflinePlayerIfCached(name);
+		assertNull(offlinePlayer);
+	}
+
+	@Test
+	void testGetOfflinePlayerIfCached_offlinePlayerRegistered()
+	{
+		PlayerMock playerMock = server.addPlayer("CapitalizedName");
+		playerMock.disconnect();
+		OfflinePlayer offlinePlayer = server.getOfflinePlayerIfCached(playerMock.getName());
+		assertEquals(playerMock, offlinePlayer);
+	}
+
+	@Test
+	void testGetOfflinePlayerIfCached_playerRegistered()
+	{
+		PlayerMock playerMock = server.addPlayer("CapitalizedName");
+		OfflinePlayer offlinePlayer = server.getOfflinePlayerIfCached(playerMock.getName());
+		assertEquals(playerMock, offlinePlayer);
 	}
 
 }
