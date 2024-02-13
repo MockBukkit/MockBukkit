@@ -31,6 +31,9 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.command.CommandSender;
+import org.bukkit.damage.DamageEffect;
+import org.bukkit.damage.DamageSource;
+import org.bukkit.damage.DamageType;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -420,6 +423,18 @@ public class MockUnsafeValues implements UnsafeValues
 	public PotionType.InternalPotionData getInternalPotionData(NamespacedKey key)
 	{
 		return new MockInternalPotionData(key);
+	}
+
+	@Override
+	public @Nullable DamageEffect getDamageEffect(@NotNull String key)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public DamageSource.@NotNull Builder createDamageSourceBuilder(@NotNull DamageType damageType)
+	{
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

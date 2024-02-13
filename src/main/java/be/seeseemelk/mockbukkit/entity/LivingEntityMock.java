@@ -22,6 +22,8 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.damage.DamageSource;
+import org.bukkit.damage.DamageType;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityCategory;
 import org.bukkit.entity.HumanEntity;
@@ -204,10 +206,9 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	@Override
 	public void damage(double amount)
 	{
-		damage(amount, null);
+		damage(amount, (Entity) null);
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void damage(double amount, @Nullable Entity source)
 	{
@@ -225,26 +226,54 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 				return;
 			}
 		}
+		setHealth(health - amount);
+	}
+
+	@Override
+	public void damage(double amount, @NotNull DamageSource source){
+		throw new UnimplementedOperationException();
+	}
+
+	public EntityDamageEvent simulateDamage(double amount, @NotNull DamageSource source)
+	{
 		Map<EntityDamageEvent.DamageModifier, Double> modifiers = new EnumMap<>(EntityDamageEvent.DamageModifier.class);
 		modifiers.put(EntityDamageEvent.DamageModifier.BASE, 1.0);
 		Map<EntityDamageEvent.DamageModifier, Function<Double, Double>> modifierFunctions = new EnumMap<>(
 				EntityDamageEvent.DamageModifier.class);
 		modifierFunctions.put(EntityDamageEvent.DamageModifier.BASE, damage -> damage);
 
-		EntityDamageEvent event = source != null ?
-				new EntityDamageByEntityEvent(source, this,
-						EntityDamageEvent.DamageCause.ENTITY_ATTACK, modifiers, modifierFunctions)
-				:
-				new EntityDamageEvent(this, EntityDamageEvent.DamageCause.CUSTOM, modifiers,
-						modifierFunctions);
-		event.setDamage(amount);
-		Bukkit.getPluginManager().callEvent(event);
-		if (!event.isCancelled())
+		EntityDamageEvent event;
+		if (source.getCausingEntity() != null)
+		{
+			event = new EntityDamageByEntityEvent(source.getCausingEntity(), this, EntityDamageEvent.DamageCause.ENTITY_ATTACK, source, amount);
+		}
+		else
+		{
+			event = new EntityDamageEvent(this, EntityDamageEvent.DamageCause.CUSTOM, source, amount);
+		}
+		if (event.callEvent())
 		{
 			setLastDamageCause(event);
 			amount = event.getDamage();
-			setHealth(health - amount);
+			this.damage(amount);
 		}
+		return event;
+	}
+
+	public EntityDamageEvent simulateDamage(double amount, @Nullable Entity source)
+	{
+		DamageType damageType;
+		if (source != null)
+		{
+			damageType = source instanceof HumanEntity ? DamageType.PLAYER_ATTACK : DamageType.MOB_ATTACK;
+		}
+		else
+		{
+			damageType = DamageType.GENERIC;
+		}
+		DamageSource.Builder damageSourceBuilder = DamageSource.builder(damageType);
+		DamageSource damageSource = damageSourceBuilder.withDirectEntity(source).withDamageLocation(source.getLocation()).build();
+		return simulateDamage(amount, damageSource);
 	}
 
 	@Override
