@@ -117,6 +117,7 @@ import org.bukkit.inventory.Recipe;
 import org.bukkit.loot.LootTable;
 import org.bukkit.map.MapCursor;
 import org.bukkit.packs.DataPackManager;
+import org.bukkit.packs.ResourcePack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.messaging.Messenger;
@@ -1278,6 +1279,12 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	public boolean isLoggingIPs()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull List<String> getInitialEnabledPacks()
 	{
 		throw new UnimplementedOperationException();
@@ -1300,6 +1307,12 @@ public class ServerMock extends Server.Spigot implements Server
 	public @NotNull ServerTickManager getServerTickManager()
 	{
 		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable ResourcePack getServerResourcePack()
+	{
 		throw new UnimplementedOperationException();
 	}
 
