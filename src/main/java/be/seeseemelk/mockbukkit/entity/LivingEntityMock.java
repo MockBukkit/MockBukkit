@@ -235,6 +235,12 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		throw new UnimplementedOperationException();
 	}
 
+	/**
+	 * Simulate damage to this entity and throw an event.
+	 * @param amount <p>The amount of damage to be done</p>
+	 * @param source <p>The damager</p>
+	 * @return <p>The EntityDamageEvent that got thrown</p>
+	 */
 	public EntityDamageEvent simulateDamage(double amount, @NotNull DamageSource source)
 	{
 		Map<EntityDamageEvent.DamageModifier, Double> modifiers = new EnumMap<>(EntityDamageEvent.DamageModifier.class);
@@ -261,6 +267,12 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		return event;
 	}
 
+	/**
+	 * Simulate damage to this entity and throw an event
+	 * @param amount <p>The amount of damage to be done</p>
+	 * @param source <p>The damager</p>
+	 * @return <p>The event that got thrown</p>
+	 */
 	public EntityDamageEvent simulateDamage(double amount, @Nullable Entity source)
 	{
 		DamageType damageType;
