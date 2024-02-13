@@ -1,6 +1,5 @@
-package be.seeseemelk.mockbukkit.damage;
+package org.mockbukkit.mockbukkit.damage;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.gson.JsonObject;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
@@ -10,6 +9,7 @@ import org.bukkit.damage.DamageScaling;
 import org.bukkit.damage.DamageType;
 import org.bukkit.damage.DeathMessageType;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.UnimplementedOperationException;
 
 public class DamageTypeMock implements DamageType
 {

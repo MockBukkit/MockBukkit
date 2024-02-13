@@ -1,4 +1,4 @@
-package be.seeseemelk.mockbukkit.damage;
+package org.mockbukkit.mockbukkit.damage;
 
 import com.google.common.base.Preconditions;
 import org.bukkit.Location;

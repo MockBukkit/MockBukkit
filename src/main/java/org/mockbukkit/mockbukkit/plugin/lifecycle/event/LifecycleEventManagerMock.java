@@ -1,10 +1,10 @@
-package be.seeseemelk.mockbukkit.plugin.lifecycle.event;
+package org.mockbukkit.mockbukkit.plugin.lifecycle.event;
 
 import io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager;
 import io.papermc.paper.plugin.lifecycle.event.handler.configuration.LifecycleEventHandlerConfiguration;
 import org.jetbrains.annotations.NotNull;
 
-public class MockLifecycleEventManager implements LifecycleEventManager
+public class LifecycleEventManagerMock implements LifecycleEventManager
 {
 
 	@Override

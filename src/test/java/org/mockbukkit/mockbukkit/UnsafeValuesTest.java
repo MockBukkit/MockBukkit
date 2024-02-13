@@ -175,8 +175,8 @@ class UnsafeValuesTest
 	@MethodSource("materialAndBlockTranslationKeyProvider")
 	void testMaterialThatIsItemAndBlockTranslationKey(String expectedBlockKey, String expectedItemKey, Material material)
 	{
-		assertEquals(expectedBlockKey, mockUnsafeValues.getBlockTranslationKey(material));
-		assertEquals(expectedItemKey, mockUnsafeValues.getItemTranslationKey(material));
+		assertEquals(expectedBlockKey, unsafeValuesMock.getBlockTranslationKey(material));
+		assertEquals(expectedItemKey, unsafeValuesMock.getItemTranslationKey(material));
 	}
 
 	static Stream<Arguments> materialAndBlockTranslationKeyProvider()
@@ -217,15 +217,15 @@ class UnsafeValuesTest
 	@Test
 	void testEntityTranslationKey()
 	{
-		assertEquals("entity.minecraft.pig", mockUnsafeValues.getTranslationKey(EntityType.PIG));
-		assertThrows(IllegalArgumentException.class, () -> mockUnsafeValues.getTranslationKey(EntityType.UNKNOWN));
+		assertEquals("entity.minecraft.pig", unsafeValuesMock.getTranslationKey(EntityType.PIG));
+		assertThrows(IllegalArgumentException.class, () -> unsafeValuesMock.getTranslationKey(EntityType.UNKNOWN));
 	}
 
 	@ParameterizedTest
 	@MethodSource("itemStackTranslationKeyProvider")
 	void testItemStackTranslationKey(String expectedKey, ItemStack itemStack)
 	{
-		assertEquals(expectedKey, mockUnsafeValues.getTranslationKey(itemStack));
+		assertEquals(expectedKey, unsafeValuesMock.getTranslationKey(itemStack));
 	}
 
 	static Stream<Arguments> itemStackTranslationKeyProvider()

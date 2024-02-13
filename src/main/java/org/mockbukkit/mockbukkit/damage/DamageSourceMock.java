@@ -1,4 +1,4 @@
-package be.seeseemelk.mockbukkit.damage;
+package org.mockbukkit.mockbukkit.damage;
 
 import org.bukkit.Location;
 import org.bukkit.damage.DamageSource;
