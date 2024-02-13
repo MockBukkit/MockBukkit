@@ -230,7 +230,8 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
-	public void damage(double amount, @NotNull DamageSource source){
+	public void damage(double amount, @NotNull DamageSource source)
+	{
 		throw new UnimplementedOperationException();
 	}
 
