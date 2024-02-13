@@ -51,7 +51,8 @@ public class WorkbenchInventoryMock extends InventoryMock implements CraftingInv
 	@Override
 	public void setMatrix(@Nullable ItemStack @NotNull [] contents)
 	{
-		Preconditions.checkArgument(super.getSize() <= contents.length, "Invalid inventory size. Expected " + super.getSize() + " or less, got " + contents.length);
+		Preconditions.checkNotNull(contents);
+		Preconditions.checkArgument(contents.length <= super.getSize(), "Invalid inventory size. Expected " + super.getSize() + " or less, got " + contents.length);
 		super.setContents(contents);
 	}
 

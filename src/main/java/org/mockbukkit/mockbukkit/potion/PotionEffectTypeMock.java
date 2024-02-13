@@ -101,8 +101,7 @@ public class PotionEffectTypeMock extends PotionEffectType
 	@Override
 	public @NotNull PotionEffect createEffect(int duration, int amplifier)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return new PotionEffect(this, isInstant() ? 1 : (int) (duration * getDurationModifier()), amplifier);
 	}
 
 	@Override

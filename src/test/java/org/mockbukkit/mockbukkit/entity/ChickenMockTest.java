@@ -78,4 +78,30 @@ class ChickenMockTest
 		assertThrows(NullPointerException.class, () -> chicken.isBreedItem((Material) null));
 	}
 
+	@Test
+	void testIsChickenJockeyDefault()
+	{
+		assertFalse(chicken.isChickenJockey());
+	}
+
+	@Test
+	void testSetIsChickenJockey()
+	{
+		chicken.setIsChickenJockey(true);
+		assertTrue(chicken.isChickenJockey());
+	}
+
+	@Test
+	void testGetEggLayTimeDefault()
+	{
+		assertTrue(chicken.getEggLayTime() >= 6000);
+	}
+
+	@Test
+	void testSetEggLayTime()
+	{
+		chicken.setEggLayTime(100);
+		assertEquals(100, chicken.getEggLayTime());
+	}
+	
 }

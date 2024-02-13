@@ -1945,6 +1945,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public @Nullable Location getRespawnLocation()
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public long getLastLogin()
 	{
 		return this.server.getPlayerList().getLastLogin(getUniqueId());
@@ -1963,12 +1970,26 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public void setRespawnLocation(@Nullable Location location)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public void setBedSpawnLocation(@Nullable Location loc, boolean force)
 	{
 		if (force || loc == null || Tag.BEDS.isTagged(loc.getBlock().getType()))
 		{
 			this.bedSpawnLocation = loc;
 		}
+	}
+
+	@Override
+	public void setRespawnLocation(@Nullable Location location, boolean b)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
