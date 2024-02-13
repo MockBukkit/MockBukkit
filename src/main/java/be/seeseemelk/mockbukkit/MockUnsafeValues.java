@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit;
 
+import be.seeseemelk.mockbukkit.damage.DamageSourceBuilderMock;
 import be.seeseemelk.mockbukkit.plugin.lifecycle.event.MockLifecycleEventManager;
 import be.seeseemelk.mockbukkit.potion.MockInternalPotionData;
 import com.destroystokyo.paper.util.VersionFetcher;
@@ -434,7 +435,7 @@ public class MockUnsafeValues implements UnsafeValues
 	@Override
 	public DamageSource.@NotNull Builder createDamageSourceBuilder(@NotNull DamageType damageType)
 	{
-		throw new UnimplementedOperationException();
+		return new DamageSourceBuilderMock(damageType);
 	}
 
 	@Override

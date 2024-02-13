@@ -244,9 +244,9 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		modifierFunctions.put(EntityDamageEvent.DamageModifier.BASE, damage -> damage);
 
 		EntityDamageEvent event;
-		if (source.getCausingEntity() != null)
+		if (source.getDirectEntity() != null)
 		{
-			event = new EntityDamageByEntityEvent(source.getCausingEntity(), this, EntityDamageEvent.DamageCause.ENTITY_ATTACK, source, amount);
+			event = new EntityDamageByEntityEvent(source.getDirectEntity(), this, EntityDamageEvent.DamageCause.ENTITY_ATTACK, source, amount);
 		}
 		else
 		{
@@ -273,7 +273,10 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 			damageType = DamageType.GENERIC;
 		}
 		DamageSource.Builder damageSourceBuilder = DamageSource.builder(damageType);
-		DamageSource damageSource = damageSourceBuilder.withDirectEntity(source).withDamageLocation(source.getLocation()).build();
+		if(source != null){
+			damageSourceBuilder.withDamageLocation(source.getLocation()).withDirectEntity(source);
+		}
+		DamageSource damageSource = damageSourceBuilder.build();
 		return simulateDamage(amount, damageSource);
 	}
 
