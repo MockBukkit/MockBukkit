@@ -362,6 +362,7 @@ public class PlayerListMock
 		{
 			return offlinePlayer;
 		}
+
 		return new OfflinePlayerMock(name);
 	}
 

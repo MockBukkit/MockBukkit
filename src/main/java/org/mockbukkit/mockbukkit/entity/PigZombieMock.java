@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.entity;
 
 import org.mockbukkit.mockbukkit.ServerMock;
+
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.PigZombie;
 import org.jetbrains.annotations.NotNull;
