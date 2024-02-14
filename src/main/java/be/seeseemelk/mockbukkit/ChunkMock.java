@@ -33,6 +33,7 @@ public class ChunkMock implements Chunk
 	private final int z;
 	private final PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
 	private boolean isSlimeChunk;
+	private boolean isForceLoaded = false;
 
 	/**
 	 * Constructs a new {@link ChunkMock} for the provided world, at the specified coordinates.
@@ -252,15 +253,13 @@ public class ChunkMock implements Chunk
 	@Override
 	public boolean isForceLoaded()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return isForceLoaded;
 	}
 
 	@Override
 	public void setForceLoaded(boolean forced)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.isForceLoaded = forced;
 	}
 
 	@Override
