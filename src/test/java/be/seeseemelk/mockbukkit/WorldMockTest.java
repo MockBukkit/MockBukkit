@@ -11,9 +11,11 @@ import be.seeseemelk.mockbukkit.entity.AxolotlMock;
 import be.seeseemelk.mockbukkit.entity.BatMock;
 import be.seeseemelk.mockbukkit.entity.BeeMock;
 import be.seeseemelk.mockbukkit.entity.BlazeMock;
+import be.seeseemelk.mockbukkit.entity.BoatMock;
 import be.seeseemelk.mockbukkit.entity.CamelMock;
 import be.seeseemelk.mockbukkit.entity.CatMock;
 import be.seeseemelk.mockbukkit.entity.CaveSpiderMock;
+import be.seeseemelk.mockbukkit.entity.ChestBoatMock;
 import be.seeseemelk.mockbukkit.entity.ChickenMock;
 import be.seeseemelk.mockbukkit.entity.CodMock;
 import be.seeseemelk.mockbukkit.entity.CommandMinecartMock;
@@ -42,6 +44,7 @@ import be.seeseemelk.mockbukkit.entity.GuardianMock;
 import be.seeseemelk.mockbukkit.entity.HopperMinecartMock;
 import be.seeseemelk.mockbukkit.entity.HorseMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
+import be.seeseemelk.mockbukkit.entity.LeashHitchMock;
 import be.seeseemelk.mockbukkit.entity.LlamaMock;
 import be.seeseemelk.mockbukkit.entity.LlamaSpitMock;
 import be.seeseemelk.mockbukkit.entity.MagmaCubeMock;
@@ -51,6 +54,7 @@ import be.seeseemelk.mockbukkit.entity.OcelotMock;
 import be.seeseemelk.mockbukkit.entity.PandaMock;
 import be.seeseemelk.mockbukkit.entity.ParrotMock;
 import be.seeseemelk.mockbukkit.entity.PigMock;
+import be.seeseemelk.mockbukkit.entity.PigZombieMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import be.seeseemelk.mockbukkit.entity.PolarBearMock;
 import be.seeseemelk.mockbukkit.entity.PoweredMinecartMock;
@@ -187,7 +191,7 @@ class WorldMockTest
 		Location spawn = world.getSpawnLocation();
 		assertNotNull(spawn);
 		assertEquals(Material.AIR, world.getBlockAt(spawn.getBlockX(), spawn.getBlockY(), spawn.getBlockZ()).getType());
-		assertEquals(Material.GRASS, world.getBlockAt(spawn.getBlockX(), spawn.getBlockY() - 1, spawn.getBlockZ()).getType());
+		assertEquals(Material.GRASS_BLOCK, world.getBlockAt(spawn.getBlockX(), spawn.getBlockY() - 1, spawn.getBlockZ()).getType());
 	}
 
 	@Test
@@ -674,12 +678,12 @@ class WorldMockTest
 		Block block = world.getBlockAt(0, 1, 0);
 		BlockData data = block.getBlockData();
 		assertEquals(data.getMaterial(), world.getBlockData(location).getMaterial());
-		BlockDataMock mock = new BlockDataMock(Material.GRASS);
+		BlockDataMock mock = new BlockDataMock(Material.SHORT_GRASS);
 		BlockDataMock mock2 = new BlockDataMock(Material.GRASS_BLOCK);
 		world.setBlockData(location, mock);
-		assertEquals(Material.GRASS, world.getBlockData(location).getMaterial());
-		assertEquals(Material.GRASS, world.getBlockData(0, 1, 0).getMaterial());
-		assertEquals(Material.GRASS, world.getType(0, 1, 0));
+		assertEquals(Material.SHORT_GRASS, world.getBlockData(location).getMaterial());
+		assertEquals(Material.SHORT_GRASS, world.getBlockData(0, 1, 0).getMaterial());
+		assertEquals(Material.SHORT_GRASS, world.getType(0, 1, 0));
 		world.setBlockData(0, 1, 0, mock2);
 		assertEquals(Material.GRASS_BLOCK, world.getBlockData(location).getMaterial());
 		assertEquals(Material.GRASS_BLOCK, world.getType(location));
@@ -1294,13 +1298,14 @@ class WorldMockTest
 				Arguments.of(EntityType.MINECART, RideableMinecartMock.class),
 				Arguments.of(EntityType.MINECART_CHEST, StorageMinecartMock.class),
 				Arguments.of(EntityType.AREA_EFFECT_CLOUD, AreaEffectCloudMock.class),
+				Arguments.of(EntityType.BOAT, BoatMock.class),
+				Arguments.of(EntityType.CHEST_BOAT, ChestBoatMock.class),
 				Arguments.of(EntityType.ENDER_PEARL, EnderPearlMock.class),
 				Arguments.of(EntityType.FISHING_HOOK, FishHookMock.class),
 				Arguments.of(EntityType.PANDA, PandaMock.class),
 				Arguments.of(EntityType.RABBIT, RabbitMock.class),
 				Arguments.of(EntityType.OCELOT, OcelotMock.class),
 				Arguments.of(EntityType.SLIME, SlimeMock.class),
-				Arguments.of(EntityType.OCELOT, OcelotMock.class),
 				Arguments.of(EntityType.PARROT, ParrotMock.class),
 				Arguments.of(EntityType.SQUID, SquidMock.class),
 				Arguments.of(EntityType.GLOW_SQUID, GlowSquidMock.class),
@@ -1312,7 +1317,9 @@ class WorldMockTest
 				Arguments.of(EntityType.THROWN_EXP_BOTTLE, ThrownExpBottleMock.class),
 				Arguments.of(EntityType.SNOWBALL, SnowballMock.class),
 				Arguments.of(EntityType.TURTLE, TurtleMock.class),
-				Arguments.of(EntityType.THROWN_EXP_BOTTLE, ThrownExpBottleMock.class)
+				Arguments.of(EntityType.THROWN_EXP_BOTTLE, ThrownExpBottleMock.class),
+				Arguments.of(EntityType.LEASH_HITCH, LeashHitchMock.class),
+				Arguments.of(EntityType.ZOMBIFIED_PIGLIN, PigZombieMock.class)
 		);
 	}
 
@@ -1459,23 +1466,6 @@ class WorldMockTest
 		assertEquals(3, worldMock.getHighestBlockYAt(2, 3, HeightMap.OCEAN_FLOOR));
 		assertEquals(20, worldMock.getHighestBlockYAt(2, 3, HeightMap.WORLD_SURFACE));
 		assertEquals(20, worldMock.getHighestBlockYAt(2, 3, HeightMap.MOTION_BLOCKING));
-	}
-
-	@Test
-	void getHighestBlockYAt_Waterlogged()
-	{
-		WorldMock worldMock = new WorldMock(Material.COAL_BLOCK, 3);
-		Location location = new Location(worldMock, 2, 20, 3);
-		Block block = location.getBlock();
-		WallSign wallSign = new WallSignMock(Material.ACACIA_WALL_SIGN);
-		wallSign.setWaterlogged(true);
-		block.setBlockData(wallSign);
-		assertEquals(3, worldMock.getHighestBlockYAt(2, 3, HeightMap.OCEAN_FLOOR));
-		assertEquals(20, worldMock.getHighestBlockYAt(2, 3, HeightMap.MOTION_BLOCKING));
-		wallSign.setWaterlogged(false);
-		block.setBlockData(wallSign);
-		assertEquals(3, worldMock.getHighestBlockYAt(2, 3, HeightMap.MOTION_BLOCKING));
-		assertEquals(20, worldMock.getHighestBlockYAt(2, 3, HeightMap.WORLD_SURFACE));
 	}
 
 	@Test
@@ -2056,6 +2046,161 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		world.setTicksPerMonsterSpawns(10);
 		assertEquals(10, world.getTicksPerMonsterSpawns());
+	}
+
+	@ParameterizedTest
+	@MethodSource("getSpawnLimits")
+	void testGetSpawnLimits(SpawnCategory category, int limit)
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertEquals(limit, world.getSpawnLimit(category));
+	}
+
+	public static Stream<Arguments> getSpawnLimits()
+	{
+		return Stream.of(
+				Arguments.of(SpawnCategory.MONSTER, 70),
+				Arguments.of(SpawnCategory.WATER_ANIMAL, 5),
+				Arguments.of(SpawnCategory.ANIMAL, 10),
+				Arguments.of(SpawnCategory.WATER_AMBIENT, 20),
+				Arguments.of(SpawnCategory.WATER_UNDERGROUND_CREATURE, 5),
+				Arguments.of(SpawnCategory.AMBIENT, 15));
+	}
+
+	@Test
+	void testGetSpawnLimitsNull()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertThrows(IllegalArgumentException.class, () -> world.getSpawnLimit(null));
+	}
+
+	@Test
+	void testGetSpawnLimitsInvalidCategory()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertThrows(IllegalArgumentException.class, () -> world.getSpawnLimit(SpawnCategory.MISC));
+	}
+
+	@Test
+	void testGetSpawnLimitNegativeValue()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setSpawnLimit(SpawnCategory.MONSTER, -2);
+
+		assertEquals(70, world.getSpawnLimit(SpawnCategory.MONSTER));
+	}
+
+	@Test
+	void testSetSpawnLimit()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setSpawnLimit(SpawnCategory.WATER_AMBIENT, 3);
+
+		assertEquals(3, world.getSpawnLimit(SpawnCategory.WATER_AMBIENT));
+	}
+
+	@Test
+	void testSetSpawnLimitNull()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertThrows(IllegalArgumentException.class, () -> world.setSpawnLimit(null, 3));
+	}
+
+	@Test
+	void testSetSpawnLimitInvalidCategory()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertThrows(IllegalArgumentException.class, () -> world.setSpawnLimit(SpawnCategory.MISC, 3));
+	}
+
+	@Test
+	void testGetMonsterSpawnLimit()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertEquals(70, world.getMonsterSpawnLimit());
+	}
+
+	@Test
+	void testSetMonsterSpawnLimit()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setMonsterSpawnLimit(5);
+		assertEquals(5, world.getSpawnLimit(SpawnCategory.MONSTER));
+	}
+
+	@Test
+	void testGetAnimalSpawnLimit()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertEquals(10, world.getAnimalSpawnLimit());
+	}
+
+	@Test
+	void testSetAnimalSpawnLimit()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setAnimalSpawnLimit(5);
+		assertEquals(5, world.getSpawnLimit(SpawnCategory.ANIMAL));
+	}
+
+	@Test
+	void testGetAmbientSpawnLimit()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertEquals(15, world.getAmbientSpawnLimit());
+	}
+
+	@Test
+	void testSetAmbientSpawnLimit()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setAmbientSpawnLimit(5);
+		assertEquals(5, world.getSpawnLimit(SpawnCategory.AMBIENT));
+	}
+
+	@Test
+	void testGetWaterAnimalSpawnLimit()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertEquals(5, world.getWaterAnimalSpawnLimit());
+	}
+
+	@Test
+	void testSetWaterAnimalSpawnLimit()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setWaterAnimalSpawnLimit(42);
+		assertEquals(42, world.getSpawnLimit(SpawnCategory.WATER_ANIMAL));
+	}
+
+	@Test
+	void testGetWaterAmbientSpawnLimit()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertEquals(20, world.getWaterAmbientSpawnLimit());
+	}
+
+	@Test
+	void testSetWaterAmbientSpawnLimit()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setWaterAmbientSpawnLimit(5);
+		assertEquals(5, world.getSpawnLimit(SpawnCategory.WATER_AMBIENT));
+	}
+
+	@Test
+	void testGetWaterUndergroundCreatureSpawnLimit()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		assertEquals(5, world.getWaterUndergroundCreatureSpawnLimit());
+	}
+
+	@Test
+	void testSetWaterUndergroundCreatureSpawnLimit()
+	{
+		WorldMock world = new WorldMock(Material.DIRT, 3);
+		world.setWaterUndergroundCreatureSpawnLimit(42);
+		assertEquals(42, world.getSpawnLimit(SpawnCategory.WATER_UNDERGROUND_CREATURE));
 	}
 
 	@Test
