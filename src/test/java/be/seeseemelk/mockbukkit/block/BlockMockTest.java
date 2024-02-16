@@ -18,7 +18,10 @@ import org.bukkit.block.data.type.TrapDoor;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
@@ -103,8 +106,11 @@ class BlockMockTest
 
 	@Test
 	void getLightLevel() {
-		assertEquals(0, block.getLightLevel());
-		block.setLightLevel((byte) 15);
+		block.setLightFromSky((byte) 15);
+		assertEquals(15, block.getLightLevel());
+		block.setLightFromSky((byte) 5);
+		assertEquals(5, block.getLightLevel());
+		block.setLightFromBlocks((byte) 15);
 		assertEquals(15, block.getLightLevel());
 	}
 
@@ -115,11 +121,39 @@ class BlockMockTest
 		assertEquals(0, block.getLightFromSky());
 	}
 
+	@ParameterizedTest
+	@ValueSource(bytes = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 })
+	void setLightFromSky_GivenValidValues(byte lightLevel) {
+		assertDoesNotThrow(() -> block.setLightFromSky(lightLevel));
+	}
+
+	@ParameterizedTest
+	@ValueSource(bytes = { -1, 16 })
+	void setLightFromSky_GivenInvalidValues(byte invalidLightLevel) {
+		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> block.setLightFromSky(invalidLightLevel));
+
+		assertEquals("Light level should be between 0 and 15.", e.getMessage());
+	}
+
 	@Test
 	void getLightFromBlocks() {
 		assertEquals(0, block.getLightFromBlocks());
 		block.setLightFromBlocks((byte) 15);
 		assertEquals(15, block.getLightFromBlocks());
+	}
+
+	@ParameterizedTest
+	@ValueSource(bytes = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 })
+	void setLightFromBlocks_GivenValidValues(byte lightLevel) {
+		assertDoesNotThrow(() -> block.setLightFromBlocks(lightLevel));
+	}
+
+	@ParameterizedTest
+	@ValueSource(bytes = { -1, 16 })
+	void setLightFromBlocks_GivenInvalidValues(byte invalidLightLevel) {
+		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> block.setLightFromBlocks(invalidLightLevel));
+
+		assertEquals("Light level should be between 0 and 15.", e.getMessage());
 	}
 
 	@Test

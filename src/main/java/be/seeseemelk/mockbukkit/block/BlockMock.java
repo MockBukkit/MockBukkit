@@ -30,7 +30,6 @@ import org.bukkit.util.Vector;
 import org.bukkit.util.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.annotations.Range;
 
 import java.util.Collection;
 import java.util.List;
@@ -51,7 +50,6 @@ public class BlockMock implements Block
 	private byte data;
 	private BlockData blockData;
 
-	private byte lightLevel = 0;
 	private byte lightFromSky = 15;
 	private byte lightFromBlocks = 0;
 
@@ -176,17 +174,7 @@ public class BlockMock implements Block
 	@Override
 	public byte getLightLevel()
 	{
-		return lightLevel;
-	}
-
-	/**
-	 * Sets the light level for this block.
-	 *
-	 * @param lightLevel Value between 0 and 15.
-	 */
-	public void setLightLevel(@Range(from=0, to=15) byte lightLevel)
-	{
-		this.lightLevel = lightLevel;
+		return (byte) Math.max(getLightFromSky(), getLightFromBlocks());
 	}
 
 	@Override
@@ -200,8 +188,12 @@ public class BlockMock implements Block
 	 *
 	 * @param lightFromSky Value between 0 and 15.
 	 */
-	public void setLightFromSky(@Range(from=0, to=15) byte lightFromSky)
+	public void setLightFromSky(byte lightFromSky)
 	{
+		if (lightFromSky < 0 || lightFromSky > 15) {
+			throw new IllegalArgumentException("Light level should be between 0 and 15.");
+		}
+
 		this.lightFromSky = lightFromSky;
 	}
 
@@ -216,8 +208,12 @@ public class BlockMock implements Block
 	 *
 	 * @param lightFromBlocks Value between 0 and 15.
 	 */
-	public void setLightFromBlocks(@Range(from=0, to=15) byte lightFromBlocks)
+	public void setLightFromBlocks(byte lightFromBlocks)
 	{
+		if (lightFromBlocks < 0 || lightFromBlocks > 15) {
+			throw new IllegalArgumentException("Light level should be between 0 and 15.");
+		}
+
 		this.lightFromBlocks = lightFromBlocks;
 	}
 
