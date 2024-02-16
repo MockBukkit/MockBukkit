@@ -117,6 +117,7 @@ import org.bukkit.inventory.Recipe;
 import org.bukkit.loot.LootTable;
 import org.bukkit.map.MapCursor;
 import org.bukkit.packs.DataPackManager;
+import org.bukkit.packs.ResourcePack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.messaging.Messenger;
@@ -1278,6 +1279,12 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	public boolean isLoggingIPs()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull List<String> getInitialEnabledPacks()
 	{
 		throw new UnimplementedOperationException();
@@ -1300,6 +1307,12 @@ public class ServerMock extends Server.Spigot implements Server
 	public @NotNull ServerTickManager getServerTickManager()
 	{
 		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable ResourcePack getServerResourcePack()
+	{
 		throw new UnimplementedOperationException();
 	}
 
@@ -1772,32 +1785,28 @@ public class ServerMock extends Server.Spigot implements Server
 	@Deprecated
 	public int getMonsterSpawnLimit()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getSpawnLimit(SpawnCategory.MONSTER);
 	}
 
 	@Override
 	@Deprecated
 	public int getAnimalSpawnLimit()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getSpawnLimit(SpawnCategory.ANIMAL);
 	}
 
 	@Override
 	@Deprecated
 	public int getWaterAnimalSpawnLimit()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getSpawnLimit(SpawnCategory.WATER_ANIMAL);
 	}
 
 	@Override
 	@Deprecated
 	public int getAmbientSpawnLimit()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getSpawnLimit(SpawnCategory.AMBIENT);
 	}
 
 	@Override
@@ -2251,17 +2260,14 @@ public class ServerMock extends Server.Spigot implements Server
 	@Deprecated
 	public int getWaterAmbientSpawnLimit()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getSpawnLimit(SpawnCategory.WATER_AMBIENT);
 	}
 
 	@Override
 	@Deprecated
 	public int getWaterUndergroundCreatureSpawnLimit()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		return this.getSpawnLimit(SpawnCategory.WATER_UNDERGROUND_CREATURE);
 	}
 
 	@Override
@@ -2474,8 +2480,11 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public int getSpawnLimit(@NotNull SpawnCategory spawnCategory)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(spawnCategory != null, "SpawnCategory cannot be null");
+		Preconditions.checkArgument(spawnCategory != SpawnCategory.MISC,
+				"SpawnCategory.%s are not supported", spawnCategory);
+
+		return this.serverConfiguration.getSpawnLimits().getOrDefault(spawnCategory, -1);
 	}
 
 	@Override

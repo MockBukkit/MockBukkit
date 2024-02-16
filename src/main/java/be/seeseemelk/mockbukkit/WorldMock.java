@@ -92,6 +92,7 @@ import com.google.common.collect.ImmutableMap;
 import io.papermc.paper.event.world.WorldGameRuleChangeEvent;
 import io.papermc.paper.math.Position;
 import io.papermc.paper.world.MoonPhase;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2LongOpenHashMap;
 import org.bukkit.BlockChangeDelegate;
 import org.bukkit.Bukkit;
@@ -230,6 +231,7 @@ import org.bukkit.event.world.TimeSkipEvent;
 import org.bukkit.generator.BiomeProvider;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator;
+import org.bukkit.generator.structure.GeneratedStructure;
 import org.bukkit.generator.structure.Structure;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
@@ -308,6 +310,7 @@ public class WorldMock implements World
 	private boolean getKeepSpawnInMemory = true;
 
 	private final Object2LongOpenHashMap<SpawnCategory> ticksPerSpawn = new Object2LongOpenHashMap<>();
+	private final Object2IntOpenHashMap<SpawnCategory> spawnLimits = new Object2IntOpenHashMap<>();
 
 	/**
 	 * Creates a new mock world.
@@ -344,6 +347,7 @@ public class WorldMock implements World
 		{
 			this.pvp = this.server.getServerConfiguration().isPvpEnabled();
 			this.ticksPerSpawn.putAll(this.server.getServerConfiguration().getTicksPerSpawn());
+			this.spawnLimits.putAll(this.server.getServerConfiguration().getSpawnLimits());
 		}
 		else
 		{
@@ -356,6 +360,13 @@ public class WorldMock implements World
 			ticksPerSpawn.put(SpawnCategory.WATER_UNDERGROUND_CREATURE, 1);
 			ticksPerSpawn.put(SpawnCategory.WATER_ANIMAL, 1);
 			ticksPerSpawn.put(SpawnCategory.AMBIENT, 1);
+
+			spawnLimits.put(SpawnCategory.MONSTER, 70);
+			spawnLimits.put(SpawnCategory.ANIMAL, 10);
+			spawnLimits.put(SpawnCategory.WATER_ANIMAL, 5);
+			spawnLimits.put(SpawnCategory.WATER_AMBIENT, 20);
+			spawnLimits.put(SpawnCategory.WATER_UNDERGROUND_CREATURE, 5);
+			spawnLimits.put(SpawnCategory.AMBIENT, 15);
 		}
 
 		// Set the default gamerule values.
@@ -1795,6 +1806,12 @@ public class WorldMock implements World
 		throw new UnimplementedOperationException();
 	}
 
+	@Override
+	public <T extends LivingEntity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz, CreatureSpawnEvent.@NotNull SpawnReason spawnReason, boolean randomizeData, @Nullable Consumer<? super T> function) throws IllegalArgumentException
+	{
+		throw new UnimplementedOperationException();
+	}
+
 	@SuppressWarnings("deprecation")
 	@Override
 	public @NotNull FallingBlock spawnFallingBlock(Location location, org.bukkit.material.MaterialData data) throws IllegalArgumentException
@@ -2041,82 +2058,70 @@ public class WorldMock implements World
 	@Deprecated(since = "1.18")
 	public int getMonsterSpawnLimit()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getSpawnLimit(SpawnCategory.MONSTER);
 	}
 
 	@Override
 	@Deprecated(since = "1.18")
 	public void setMonsterSpawnLimit(int limit)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.setSpawnLimit(SpawnCategory.MONSTER,limit);
 	}
 
 	@Override
 	@Deprecated(since = "1.18")
 	public int getAnimalSpawnLimit()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getSpawnLimit(SpawnCategory.ANIMAL);
 	}
 
 	@Override
 	@Deprecated(since = "1.18")
 	public void setAnimalSpawnLimit(int limit)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.setSpawnLimit(SpawnCategory.ANIMAL, limit);
 	}
 
 	@Override
 	@Deprecated(since = "1.18")
 	public int getWaterAnimalSpawnLimit()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getSpawnLimit(SpawnCategory.WATER_ANIMAL);
 	}
 
 	@Override
 	@Deprecated(since = "1.18")
 	public void setWaterAnimalSpawnLimit(int limit)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.setSpawnLimit(SpawnCategory.WATER_ANIMAL, limit);
 	}
 
 	@Override
 	@Deprecated(since = "1.18")
 	public int getWaterUndergroundCreatureSpawnLimit()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		return this.getSpawnLimit(SpawnCategory.WATER_UNDERGROUND_CREATURE);
 	}
 
 	@Override
 	@Deprecated(since = "1.18")
 	public void setWaterUndergroundCreatureSpawnLimit(int limit)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		this.setSpawnLimit(SpawnCategory.WATER_UNDERGROUND_CREATURE, limit);
 	}
 
 	@Override
 	@Deprecated(since = "1.18")
 	public int getAmbientSpawnLimit()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getSpawnLimit(SpawnCategory.AMBIENT);
 	}
 
 	@Override
 	@Deprecated(since = "1.18")
 	public void setAmbientSpawnLimit(int limit)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.setSpawnLimit(SpawnCategory.AMBIENT, limit);
 	}
 
 	@Override
@@ -3127,17 +3132,17 @@ public class WorldMock implements World
 	}
 
 	@Override
+	@Deprecated(since = "1.18")
 	public int getWaterAmbientSpawnLimit()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getSpawnLimit(SpawnCategory.WATER_AMBIENT);
 	}
 
 	@Override
+	@Deprecated(since = "1.18")
 	public void setWaterAmbientSpawnLimit(int limit)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.setSpawnLimit(SpawnCategory.WATER_AMBIENT, limit);
 	}
 
 	@Override
@@ -3193,6 +3198,18 @@ public class WorldMock implements World
 	}
 
 	@Override
+	public @NotNull Collection<GeneratedStructure> getStructures(int x, int z)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Collection<GeneratedStructure> getStructures(int x, int z, @NotNull Structure structure)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull Spigot spigot()
 	{
 		// TODO Auto-generated method stub
@@ -3242,15 +3259,29 @@ public class WorldMock implements World
 	@Override
 	public int getSpawnLimit(@NotNull SpawnCategory spawnCategory)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(spawnCategory != null, "SpawnCategory cannot be null");
+		Preconditions.checkArgument(spawnCategory != SpawnCategory.MISC,
+				"SpawnCategory.%s are not supported", spawnCategory);
+
+		return this.getSpawnLimitUnsafe(spawnCategory);
+	}
+
+	public final int getSpawnLimitUnsafe(final SpawnCategory spawnCategory) {
+		int limit = this.spawnLimits.getOrDefault(spawnCategory, -1);
+		if (limit < 0) {
+			limit = this.server.getSpawnLimit(spawnCategory);
+		}
+		return limit;
 	}
 
 	@Override
 	public void setSpawnLimit(@NotNull SpawnCategory spawnCategory, int limit)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(spawnCategory != null, "SpawnCategory cannot be null");
+		Preconditions.checkArgument(spawnCategory != SpawnCategory.MISC,
+				"SpawnCategory.%s are not supported", spawnCategory);
+
+		this.spawnLimits.put(spawnCategory, limit);
 	}
 
 	@Override
