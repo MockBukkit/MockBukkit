@@ -30,6 +30,7 @@ import org.bukkit.util.Vector;
 import org.bukkit.util.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.Range;
 
 import java.util.Collection;
 import java.util.List;
@@ -49,6 +50,10 @@ public class BlockMock implements Block
 	private Material material;
 	private byte data;
 	private BlockData blockData;
+
+	private byte lightLevel = 0;
+	private byte lightFromSky = 15;
+	private byte lightFromBlocks = 0;
 
 	/**
 	 * Creates a basic block made of air.
@@ -171,22 +176,49 @@ public class BlockMock implements Block
 	@Override
 	public byte getLightLevel()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return lightLevel;
+	}
+
+	/**
+	 * Sets the light level for this block.
+	 *
+	 * @param lightLevel Value between 0 and 15.
+	 */
+	public void setLightLevel(@Range(from=0, to=15) byte lightLevel)
+	{
+		this.lightLevel = lightLevel;
 	}
 
 	@Override
 	public byte getLightFromSky()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return lightFromSky;
+	}
+
+	/**
+	 * Sets the light level received from sky.
+	 *
+	 * @param lightFromSky Value between 0 and 15.
+	 */
+	public void setLightFromSky(@Range(from=0, to=15) byte lightFromSky)
+	{
+		this.lightFromSky = lightFromSky;
 	}
 
 	@Override
 	public byte getLightFromBlocks()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return lightFromBlocks;
+	}
+
+	/**
+	 * Sets the light level received from other blocks.
+	 *
+	 * @param lightFromBlocks Value between 0 and 15.
+	 */
+	public void setLightFromBlocks(@Range(from=0, to=15) byte lightFromBlocks)
+	{
+		this.lightFromBlocks = lightFromBlocks;
 	}
 
 	@Override

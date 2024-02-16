@@ -4,7 +4,6 @@ import be.seeseemelk.mockbukkit.ChunkCoordinate;
 import be.seeseemelk.mockbukkit.ChunkMock;
 import be.seeseemelk.mockbukkit.Coordinate;
 import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import org.bukkit.Location;
@@ -100,6 +99,27 @@ class BlockMockTest
 	{
 		block.setType(Material.JUNGLE_TRAPDOOR);
 		assertInstanceOf(TrapDoor.class, block.getBlockData());
+	}
+
+	@Test
+	void getLightLevel() {
+		assertEquals(0, block.getLightLevel());
+		block.setLightLevel((byte) 15);
+		assertEquals(15, block.getLightLevel());
+	}
+
+	@Test
+	void getLightFromSky() {
+		assertEquals(15, block.getLightFromSky());
+		block.setLightFromSky((byte) 0);
+		assertEquals(0, block.getLightFromSky());
+	}
+
+	@Test
+	void getLightFromBlocks() {
+		assertEquals(0, block.getLightFromBlocks());
+		block.setLightFromBlocks((byte) 15);
+		assertEquals(15, block.getLightFromBlocks());
 	}
 
 	@Test
