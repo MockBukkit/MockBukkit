@@ -541,9 +541,9 @@ class EntityMockTest
 	void entityDamage_Event_Triggered()
 	{
 		World world = new WorldMock(Material.GRASS_BLOCK, 10);
-		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+		LivingEntityMock zombie = (LivingEntityMock) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
 		PlayerMock player1 = server.addPlayer();
-		zombie.damage(4, player1);
+		zombie.simulateDamage(4, player1);
 		server.getPluginManager().assertEventFired(EntityDamageByEntityEvent.class);
 	}
 
@@ -713,9 +713,9 @@ class EntityMockTest
 	void lastDamageCause()
 	{
 		World world = new WorldMock(Material.GRASS_BLOCK, 10);
-		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+		LivingEntityMock zombie = (LivingEntityMock) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
 		assertNull(zombie.getLastDamageCause());
-		zombie.damage(1);
+		zombie.simulateDamage(1, (Entity) null);
 		assertNotNull(zombie.getLastDamageCause());
 	}
 

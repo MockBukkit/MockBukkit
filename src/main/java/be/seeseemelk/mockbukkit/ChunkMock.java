@@ -11,6 +11,8 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Entity;
+import org.bukkit.generator.structure.GeneratedStructure;
+import org.bukkit.generator.structure.Structure;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.BoundingBox;
@@ -313,6 +315,18 @@ public class ChunkMock implements Chunk
 	public @NotNull LoadLevel getLoadLevel()
 	{
 		return isLoaded() ? LoadLevel.ENTITY_TICKING : LoadLevel.UNLOADED;
+	}
+
+	@Override
+	public @NotNull Collection<GeneratedStructure> getStructures()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Collection<GeneratedStructure> getStructures(@NotNull Structure structure)
+	{
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
