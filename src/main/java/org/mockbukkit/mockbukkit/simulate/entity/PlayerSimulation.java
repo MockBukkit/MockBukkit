@@ -222,7 +222,7 @@ public class PlayerSimulation
 
 	/**
 	 * This method simulates the {@link Player} respawning and also calls a {@link PlayerRespawnEvent}. Should the
-	 * {@link Player} not be dead (when {@link #isDead()} returns false) then this will throw an
+	 * {@link Player} not be dead (when {@link Player#isDead()} returns false) then this will throw an
 	 * {@link UnsupportedOperationException}. Otherwise, the {@link Location} will be set to
 	 * {@link Player#getBedSpawnLocation()} or {@link World#getSpawnLocation()}. Lastly the health of this
 	 * {@link Player} will be restored and set to the max health.
