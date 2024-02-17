@@ -4,7 +4,7 @@ import io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager;
 import io.papermc.paper.plugin.lifecycle.event.handler.configuration.LifecycleEventHandlerConfiguration;
 import org.jetbrains.annotations.NotNull;
 
-public class MockLifecycleEventManager implements LifecycleEventManager
+public class LifecycleEventManagerMock implements LifecycleEventManager
 {
 
 	@Override

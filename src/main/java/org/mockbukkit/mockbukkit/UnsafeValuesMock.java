@@ -45,10 +45,9 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionType;
 import org.jetbrains.annotations.NotNull;
-import org.mockbukkit.mockbukkit.UnimplementedOperationException;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.damage.DamageSourceBuilderMock;
-import org.mockbukkit.mockbukkit.plugin.lifecycle.event.MockLifecycleEventManager;
+import org.mockbukkit.mockbukkit.plugin.lifecycle.event.LifecycleEventManagerMock;
 import org.mockbukkit.mockbukkit.potion.MockInternalPotionData;
 
 import java.io.IOException;
@@ -539,7 +538,7 @@ public class UnsafeValuesMock implements UnsafeValues
 	public LifecycleEventManager<Plugin> createPluginLifecycleEventManager(JavaPlugin javaPlugin,
 																		   BooleanSupplier booleanSupplier)
 	{
-		return new MockLifecycleEventManager();
+		return new LifecycleEventManagerMock();
 	}
 
 	@Override

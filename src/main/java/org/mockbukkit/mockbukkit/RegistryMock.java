@@ -1,11 +1,12 @@
 package org.mockbukkit.mockbukkit;
 
+import org.mockbukkit.mockbukkit.damage.DamageTypeMock;
 import org.mockbukkit.mockbukkit.enchantments.EnchantmentMock;
 import org.mockbukkit.mockbukkit.generator.structure.StructureMock;
 import org.mockbukkit.mockbukkit.generator.structure.StructureTypeMock;
 import org.mockbukkit.mockbukkit.inventory.meta.trim.TrimMaterialMock;
 import org.mockbukkit.mockbukkit.inventory.meta.trim.TrimPatternMock;
-import org.mockbukkit.mockbukkit.damage.DamageTypeMock;
+import org.mockbukkit.mockbukkit.potion.PotionEffectTypeMock;
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -26,8 +27,6 @@ import org.bukkit.inventory.meta.trim.TrimPattern;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mockbukkit.mockbukkit.potion.PotionEffectTypeMock;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;

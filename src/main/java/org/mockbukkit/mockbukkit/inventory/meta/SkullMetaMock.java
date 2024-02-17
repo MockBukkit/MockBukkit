@@ -3,6 +3,7 @@ package org.mockbukkit.mockbukkit.inventory.meta;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.Server;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.profile.PlayerProfile;
@@ -11,6 +12,7 @@ import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.entity.OfflinePlayerMock;
 import org.mockbukkit.mockbukkit.profile.PlayerProfileMock;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.Objects;
 import java.util.UUID;
