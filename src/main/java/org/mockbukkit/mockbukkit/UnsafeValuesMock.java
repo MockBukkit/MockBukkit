@@ -47,6 +47,8 @@ import org.bukkit.potion.PotionType;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.UnimplementedOperationException;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.damage.DamageSourceBuilderMock;
+import org.mockbukkit.mockbukkit.plugin.lifecycle.event.MockLifecycleEventManager;
 import org.mockbukkit.mockbukkit.potion.MockInternalPotionData;
 
 import java.io.IOException;
