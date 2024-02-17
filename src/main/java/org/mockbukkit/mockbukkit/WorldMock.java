@@ -231,6 +231,7 @@ import org.bukkit.event.world.TimeSkipEvent;
 import org.bukkit.generator.BiomeProvider;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator;
+import org.bukkit.generator.structure.GeneratedStructure;
 import org.bukkit.generator.structure.Structure;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
@@ -1805,6 +1806,12 @@ public class WorldMock implements World
 		throw new UnimplementedOperationException();
 	}
 
+	@Override
+	public <T extends LivingEntity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz, CreatureSpawnEvent.@NotNull SpawnReason spawnReason, boolean randomizeData, @Nullable Consumer<? super T> function) throws IllegalArgumentException
+	{
+		throw new UnimplementedOperationException();
+	}
+
 	@SuppressWarnings("deprecation")
 	@Override
 	public @NotNull FallingBlock spawnFallingBlock(Location location, org.bukkit.material.MaterialData data) throws IllegalArgumentException
@@ -3187,6 +3194,18 @@ public class WorldMock implements World
 	public void setSendViewDistance(int viewDistance)
 	{
 		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Collection<GeneratedStructure> getStructures(int x, int z)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Collection<GeneratedStructure> getStructures(int x, int z, @NotNull Structure structure)
+	{
 		throw new UnimplementedOperationException();
 	}
 

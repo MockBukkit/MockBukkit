@@ -16,6 +16,7 @@ import org.bukkit.Keyed;
 import org.bukkit.MusicInstrument;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
+import org.bukkit.damage.DamageType;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.generator.structure.Structure;
 import org.bukkit.generator.structure.StructureType;
@@ -114,6 +115,10 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		{
 			return PotionEffectTypeMock::new;
 		}
+		else if (tClass == DamageType.class)
+		{
+			return DamageTypeMock::new;
+		}
 		else
 		{
 			throw new UnimplementedOperationException();
@@ -187,7 +192,7 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 	{
 		return List.of(Structure.class, PotionEffectType.class,
 				StructureType.class, TrimMaterial.class, TrimPattern.class,
-				MusicInstrument.class, GameEvent.class, Enchantment.class);
+				MusicInstrument.class, GameEvent.class, Enchantment.class, DamageType.class);
 	}
 
 	@Override
