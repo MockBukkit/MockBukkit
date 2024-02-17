@@ -134,6 +134,21 @@ class ChunkTest
 	}
 
 	@Test
+	void isForceLoaded_JustCreated_False()
+	{
+		ChunkMock chunk = world.getChunkAt(0, 0);
+		assertFalse(chunk.isForceLoaded());
+	}
+
+	@Test
+	void isForceLoaded_AfterSet_True()
+	{
+		ChunkMock chunk = world.getChunkAt(0, 0);
+		chunk.setForceLoaded(true);
+		assertTrue(chunk.isForceLoaded());
+	}
+
+	@Test
 	void equals_DifferentChunk_False()
 	{
 		ChunkMock chunk1 = world.getChunkAt(0, 0);
