@@ -190,9 +190,7 @@ public class BlockMock implements Block
 	 */
 	public void setLightFromSky(byte lightFromSky)
 	{
-		if (lightFromSky < 0 || lightFromSky > 15) {
-			throw new IllegalArgumentException("Light level should be between 0 and 15.");
-		}
+		Preconditions.checkArgument(lightFromSky >= 0 && lightFromSky <= 15, "Light level should be between 0 and 15.");
 
 		this.lightFromSky = lightFromSky;
 	}
@@ -210,9 +208,7 @@ public class BlockMock implements Block
 	 */
 	public void setLightFromBlocks(byte lightFromBlocks)
 	{
-		if (lightFromBlocks < 0 || lightFromBlocks > 15) {
-			throw new IllegalArgumentException("Light level should be between 0 and 15.");
-		}
+		Preconditions.checkArgument(lightFromBlocks >= 0 && lightFromBlocks <= 15, "Light level should be between 0 and 15.");
 
 		this.lightFromBlocks = lightFromBlocks;
 	}
