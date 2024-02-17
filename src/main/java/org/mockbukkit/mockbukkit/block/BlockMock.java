@@ -149,7 +149,7 @@ public class BlockMock implements Block
 	}
 
 	/**
-	 * Assets that the material type of the block is equal to a given type.
+	 * Asserts that the material type of the block is equal to a given type.
 	 *
 	 * @param material The material type that the block should have.
 	 * @throws AssertionError Thrown if the material type of the block does not equal the given material type.
