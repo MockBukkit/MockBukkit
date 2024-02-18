@@ -9,6 +9,7 @@ import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import org.bukkit.GameEvent;
 import org.bukkit.Keyed;
 import org.bukkit.MusicInstrument;
+import org.bukkit.damage.DamageType;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.generator.structure.Structure;
 import org.bukkit.generator.structure.StructureType;
@@ -45,7 +46,7 @@ public class KeyedDataGenerator implements DataGenerator
 		List<Class<? extends Keyed>> keyedClasses = List.of(Structure.class,
 				StructureType.class, TrimMaterial.class, TrimPattern.class,
 				MusicInstrument.class, GameEvent.class, Enchantment.class,
-				PotionEffectType.class);
+				PotionEffectType.class, DamageType.class);
 		for (Class<? extends Keyed> tClass : keyedClasses)
 		{
 			JsonArray array = new JsonArray();
@@ -71,6 +72,10 @@ public class KeyedDataGenerator implements DataGenerator
 						{
 							addPotionEffectTypeProperties(jsonObject, potionEffectType);
 						}
+						if (keyedObject instanceof DamageType damageType)
+						{
+							addDamageTypeProperties(jsonObject, damageType);
+						}
 						array.add(jsonObject);
 					}
 				}
@@ -91,6 +96,14 @@ public class KeyedDataGenerator implements DataGenerator
 				gson.toJson(rootObject, writer);
 			}
 		}
+	}
+
+	private void addDamageTypeProperties(JsonObject jsonObject, DamageType damageType)
+	{
+		jsonObject.add("damageScaling", new JsonPrimitive(damageType.getDamageScaling().toString()));
+		jsonObject.add("sound", new JsonPrimitive(damageType.getDamageEffect().getSound().getKey().toString()));
+		jsonObject.add("deathMessageType", new JsonPrimitive(damageType.getDeathMessageType().toString()));
+		jsonObject.add("exhaustion", new JsonPrimitive(damageType.getExhaustion()));
 	}
 
 	private void addPotionEffectTypeProperties(JsonObject jsonObject, PotionEffectType potionEffectType)
