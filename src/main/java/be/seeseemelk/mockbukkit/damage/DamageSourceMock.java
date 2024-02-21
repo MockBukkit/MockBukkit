@@ -56,7 +56,7 @@ public class DamageSourceMock implements DamageSource
 	{
 		if (this.damageLocation != null)
 		{
-			return this.damageLocation;
+			return getDamageLocation();
 		}
 		return this.directEntity != null ? this.directEntity.getLocation() : null;
 	}
