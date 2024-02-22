@@ -11,6 +11,7 @@ import be.seeseemelk.mockbukkit.entity.AxolotlMock;
 import be.seeseemelk.mockbukkit.entity.BatMock;
 import be.seeseemelk.mockbukkit.entity.BeeMock;
 import be.seeseemelk.mockbukkit.entity.BlazeMock;
+import be.seeseemelk.mockbukkit.entity.BlockDisplayMock;
 import be.seeseemelk.mockbukkit.entity.BoatMock;
 import be.seeseemelk.mockbukkit.entity.CamelMock;
 import be.seeseemelk.mockbukkit.entity.CatMock;
@@ -43,6 +44,7 @@ import be.seeseemelk.mockbukkit.entity.GoatMock;
 import be.seeseemelk.mockbukkit.entity.GuardianMock;
 import be.seeseemelk.mockbukkit.entity.HopperMinecartMock;
 import be.seeseemelk.mockbukkit.entity.HorseMock;
+import be.seeseemelk.mockbukkit.entity.ItemDisplayMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
 import be.seeseemelk.mockbukkit.entity.LeashHitchMock;
 import be.seeseemelk.mockbukkit.entity.LlamaMock;
@@ -101,6 +103,7 @@ import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.type.WallSign;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
@@ -108,6 +111,8 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Sheep;
 import org.bukkit.entity.SpawnCategory;
+import org.bukkit.entity.SpectralArrow;
+import org.bukkit.entity.Trident;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -1319,7 +1324,13 @@ class WorldMockTest
 				Arguments.of(EntityType.TURTLE, TurtleMock.class),
 				Arguments.of(EntityType.THROWN_EXP_BOTTLE, ThrownExpBottleMock.class),
 				Arguments.of(EntityType.LEASH_HITCH, LeashHitchMock.class),
-				Arguments.of(EntityType.ZOMBIFIED_PIGLIN, PigZombieMock.class)
+				Arguments.of(EntityType.ZOMBIFIED_PIGLIN, PigZombieMock.class),
+				Arguments.of(EntityType.BLOCK_DISPLAY, BlockDisplayMock.class),
+				Arguments.of(EntityType.ITEM_DISPLAY, ItemDisplayMock.class),
+				Arguments.of(EntityType.ZOMBIFIED_PIGLIN, PigZombieMock.class),
+				Arguments.of(EntityType.TRIDENT, Trident.class),
+				Arguments.of(EntityType.SPECTRAL_ARROW, SpectralArrow.class),
+				Arguments.of(EntityType.ARROW, Arrow.class)
 		);
 	}
 
