@@ -22,7 +22,7 @@ public class DamageTypeMock implements DamageType
 
 	/**
 	 * Create a {@link DamageTypeMock} from a {@link JsonObject}.
-	 * <p />
+	 * <p>
 	 * Example:
 	 * <pre>
 	 * {
