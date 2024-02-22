@@ -48,18 +48,18 @@ public class DamageTypeMock implements DamageType
 		Preconditions.checkArgument(data.has(EXHAUSTION), "JsonObject does not have a field named 'exhaustion'");
 
 		// Retrieve values from JSON
-		var keyValue = data.get(KEY).getAsString();
-		var damageScalingValue = data.get(DAMAGE_SCALING).getAsString();
-		var soundValue = data.get(SOUND).getAsString();
-		var deathMessageTypeValue = data.get(DEATH_MESSAGE_TYPE).getAsString();
-		var exhaustion = data.get(EXHAUSTION).getAsFloat();
+		String keyValue = data.get(KEY).getAsString();
+		String damageScalingValue = data.get(DAMAGE_SCALING).getAsString();
+		String soundValue = data.get(SOUND).getAsString();
+		String deathMessageTypeValue = data.get(DEATH_MESSAGE_TYPE).getAsString();
+		float exhaustion = data.get(EXHAUSTION).getAsFloat();
 
 		// Parse values
-		var key = NamespacedKey.fromString(keyValue);
-		var damageScaling = DamageScaling.valueOf(damageScalingValue);
+		NamespacedKey key = NamespacedKey.fromString(keyValue);
+		DamageScaling damageScaling = DamageScaling.valueOf(damageScalingValue);
 		Sound sound = Registry.SOUNDS.get(NamespacedKey.fromString(soundValue));
-		var damageEffect = new DamageEffectMock(sound);
-		var deathMessageType = DeathMessageType.valueOf(deathMessageTypeValue);
+		DamageEffectMock damageEffect = new DamageEffectMock(sound);
+		DeathMessageType deathMessageType = DeathMessageType.valueOf(deathMessageTypeValue);
 
 		// Create object
 		return new DamageTypeMock(damageScaling, damageEffect, key, deathMessageType, exhaustion);
