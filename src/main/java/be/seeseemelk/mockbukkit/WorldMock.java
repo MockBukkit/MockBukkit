@@ -89,6 +89,7 @@ import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
 import com.destroystokyo.paper.HeightmapType;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
+import io.papermc.paper.block.fluid.FluidData;
 import io.papermc.paper.event.world.WorldGameRuleChangeEvent;
 import io.papermc.paper.math.Position;
 import io.papermc.paper.world.MoonPhase;
@@ -2882,6 +2883,13 @@ public class WorldMock implements World
 	{
 		Block block = this.getBlockAt(x, y, z);
 		return block.getState();
+	}
+
+	@Override
+	public @NotNull FluidData getFluidData(int i, int i1, int i2)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@NotNull
