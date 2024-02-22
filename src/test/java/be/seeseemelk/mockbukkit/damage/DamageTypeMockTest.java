@@ -2,78 +2,96 @@ package be.seeseemelk.mockbukkit.damage;
 
 import be.seeseemelk.mockbukkit.MockBukkitExtension;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockBukkitExtension.class)
 class DamageTypeMockTest
 {
 	@ParameterizedTest
-	@ValueSource(strings = {
-			"{ 'key': 'minecraft:in_fire', 'damageScaling': 'WHEN_CAUSED_BY_LIVING_NON_PLAYER', 'sound': 'minecraft:entity.player.hurt_on_fire', 'deathMessageType': 'DEFAULT', 'exhaustion': 0.1 }",
-			"{ 'key': 'minecraft:lightning_bolt', 'damageScaling': 'WHEN_CAUSED_BY_LIVING_NON_PLAYER', 'sound': 'minecraft:entity.player.hurt', 'deathMessageType': 'DEFAULT', 'exhaustion': 0.1 }",
-			"{ 'key': 'minecraft:on_fire', 'damageScaling': 'WHEN_CAUSED_BY_LIVING_NON_PLAYER', 'sound': 'minecraft:entity.player.hurt_on_fire', 'deathMessageType': 'DEFAULT', 'exhaustion': 0.0 }",
-			"{ 'key': 'minecraft:lava', 'damageScaling': 'WHEN_CAUSED_BY_LIVING_NON_PLAYER', 'sound': 'minecraft:entity.player.hurt_on_fire', 'deathMessageType': 'DEFAULT', 'exhaustion': 0.1 }",
-			"{ 'key': 'minecraft:hot_floor', 'damageScaling': 'WHEN_CAUSED_BY_LIVING_NON_PLAYER', 'sound': 'minecraft:entity.player.hurt_on_fire', 'deathMessageType': 'DEFAULT', 'exhaustion': 0.1 }",
-			"{ 'key': 'minecraft:in_wall', 'damageScaling': 'WHEN_CAUSED_BY_LIVING_NON_PLAYER', 'sound': 'minecraft:entity.player.hurt', 'deathMessageType': 'DEFAULT', 'exhaustion': 0.0 }",
-			"{ 'key': 'minecraft:cramming', 'damageScaling': 'WHEN_CAUSED_BY_LIVING_NON_PLAYER', 'sound': 'minecraft:entity.player.hurt', 'deathMessageType': 'DEFAULT', 'exhaustion': 0.0 }",
-			"{ 'key': 'minecraft:drown', 'damageScaling': 'WHEN_CAUSED_BY_LIVING_NON_PLAYER', 'sound': 'minecraft:entity.player.hurt_drown', 'deathMessageType': 'DEFAULT', 'exhaustion': 0.0 }",
-			"{ 'key': 'minecraft:starve', 'damageScaling': 'WHEN_CAUSED_BY_LIVING_NON_PLAYER', 'sound': 'minecraft:entity.player.hurt', 'deathMessageType': 'DEFAULT', 'exhaustion': 0.0 }",
-			"{ 'key': 'minecraft:cactus', 'damageScaling': 'WHEN_CAUSED_BY_LIVING_NON_PLAYER', 'sound': 'minecraft:entity.player.hurt', 'deathMessageType': 'DEFAULT', 'exhaustion': 0.1 }",
-			"{ 'key': 'minecraft:fall', 'damageScaling': 'WHEN_CAUSED_BY_LIVING_NON_PLAYER', 'sound': 'minecraft:entity.player.hurt', 'deathMessageType': 'FALL_VARIANTS', 'exhaustion': 0.0 }",
-			"{ 'key': 'minecraft:fly_into_wall', 'damageScaling': 'WHEN_CAUSED_BY_LIVING_NON_PLAYER', 'sound': 'minecraft:entity.player.hurt', 'deathMessageType': 'DEFAULT', 'exhaustion': 0.0 }",
-			"{ 'key': 'minecraft:out_of_world', 'damageScaling': 'WHEN_CAUSED_BY_LIVING_NON_PLAYER', 'sound': 'minecraft:entity.player.hurt', 'deathMessageType': 'DEFAULT', 'exhaustion': 0.0 }",
-			"{ 'key': 'minecraft:generic', 'damageScaling': 'WHEN_CAUSED_BY_LIVING_NON_PLAYER', 'sound': 'minecraft:entity.player.hurt', 'deathMessageType': 'DEFAULT', 'exhaustion': 0.0 }",
-			"{ 'key': 'minecraft:magic', 'damageScaling': 'WHEN_CAUSED_BY_LIVING_NON_PLAYER', 'sound': 'minecraft:entity.player.hurt', 'deathMessageType': 'DEFAULT', 'exhaustion': 0.0 }",
-			"{ 'key': 'minecraft:wither', 'damageScaling': 'WHEN_CAUSED_BY_LIVING_NON_PLAYER', 'sound': 'minecraft:entity.player.hurt', 'deathMessageType': 'DEFAULT', 'exhaustion': 0.0 }",
-			"{ 'key': 'minecraft:dragon_breath', 'damageScaling': 'WHEN_CAUSED_BY_LIVING_NON_PLAYER', 'sound': 'minecraft:entity.player.hurt', 'deathMessageType': 'DEFAULT', 'exhaustion': 0.0 }",
-			"{ 'key': 'minecraft:dry_out', 'damageScaling': 'WHEN_CAUSED_BY_LIVING_NON_PLAYER', 'sound': 'minecraft:entity.player.hurt', 'deathMessageType': 'DEFAULT', 'exhaustion': 0.1 }",
-			"{ 'key': 'minecraft:sweet_berry_bush', 'damageScaling': 'WHEN_CAUSED_BY_LIVING_NON_PLAYER', 'sound': 'minecraft:entity.player.hurt_sweet_berry_bush', 'deathMessageType': 'DEFAULT', 'exhaustion': 0.1 }",
-			"{ 'key': 'minecraft:freeze', 'damageScaling': 'WHEN_CAUSED_BY_LIVING_NON_PLAYER', 'sound': 'minecraft:entity.player.hurt_freeze', 'deathMessageType': 'DEFAULT', 'exhaustion': 0.0 }",
-			"{ 'key': 'minecraft:stalagmite', 'damageScaling': 'WHEN_CAUSED_BY_LIVING_NON_PLAYER', 'sound': 'minecraft:entity.player.hurt', 'deathMessageType': 'DEFAULT', 'exhaustion': 0.0 }",
-			"{ 'key': 'minecraft:falling_block', 'damageScaling': 'WHEN_CAUSED_BY_LIVING_NON_PLAYER', 'sound': 'minecraft:entity.player.hurt', 'deathMessageType': 'DEFAULT', 'exhaustion': 0.1 }",
-			"{ 'key': 'minecraft:falling_anvil', 'damageScaling': 'WHEN_CAUSED_BY_LIVING_NON_PLAYER', 'sound': 'minecraft:entity.player.hurt', 'deathMessageType': 'DEFAULT', 'exhaustion': 0.1 }",
-			"{ 'key': 'minecraft:falling_stalactite', 'damageScaling': 'WHEN_CAUSED_BY_LIVING_NON_PLAYER', 'sound': 'minecraft:entity.player.hurt', 'deathMessageType': 'DEFAULT', 'exhaustion': 0.1 }",
-			"{ 'key': 'minecraft:sting', 'damageScaling': 'WHEN_CAUSED_BY_LIVING_NON_PLAYER', 'sound': 'minecraft:entity.player.hurt', 'deathMessageType': 'DEFAULT', 'exhaustion': 0.1 }",
-			"{ 'key': 'minecraft:mob_attack', 'damageScaling': 'WHEN_CAUSED_BY_LIVING_NON_PLAYER', 'sound': 'minecraft:entity.player.hurt', 'deathMessageType': 'DEFAULT', 'exhaustion': 0.1 }",
-			"{ 'key': 'minecraft:mob_attack_no_aggro', 'damageScaling': 'WHEN_CAUSED_BY_LIVING_NON_PLAYER', 'sound': 'minecraft:entity.player.hurt', 'deathMessageType': 'DEFAULT', 'exhaustion': 0.1 }",
-			"{ 'key': 'minecraft:player_attack', 'damageScaling': 'WHEN_CAUSED_BY_LIVING_NON_PLAYER', 'sound': 'minecraft:entity.player.hurt', 'deathMessageType': 'DEFAULT', 'exhaustion': 0.1 }",
-			"{ 'key': 'minecraft:arrow', 'damageScaling': 'WHEN_CAUSED_BY_LIVING_NON_PLAYER', 'sound': 'minecraft:entity.player.hurt', 'deathMessageType': 'DEFAULT', 'exhaustion': 0.1 }",
-			"{ 'key': 'minecraft:trident', 'damageScaling': 'WHEN_CAUSED_BY_LIVING_NON_PLAYER', 'sound': 'minecraft:entity.player.hurt', 'deathMessageType': 'DEFAULT', 'exhaustion': 0.1 }",
-			"{ 'key': 'minecraft:mob_projectile', 'damageScaling': 'WHEN_CAUSED_BY_LIVING_NON_PLAYER', 'sound': 'minecraft:entity.player.hurt', 'deathMessageType': 'DEFAULT', 'exhaustion': 0.1 }",
-			"{ 'key': 'minecraft:fireworks', 'damageScaling': 'WHEN_CAUSED_BY_LIVING_NON_PLAYER', 'sound': 'minecraft:entity.player.hurt', 'deathMessageType': 'DEFAULT', 'exhaustion': 0.1 }",
-			"{ 'key': 'minecraft:fireball', 'damageScaling': 'WHEN_CAUSED_BY_LIVING_NON_PLAYER', 'sound': 'minecraft:entity.player.hurt_on_fire', 'deathMessageType': 'DEFAULT', 'exhaustion': 0.1 }",
-			"{ 'key': 'minecraft:unattributed_fireball', 'damageScaling': 'WHEN_CAUSED_BY_LIVING_NON_PLAYER', 'sound': 'minecraft:entity.player.hurt_on_fire', 'deathMessageType': 'DEFAULT', 'exhaustion': 0.1 }",
-			"{ 'key': 'minecraft:wither_skull', 'damageScaling': 'WHEN_CAUSED_BY_LIVING_NON_PLAYER', 'sound': 'minecraft:entity.player.hurt', 'deathMessageType': 'DEFAULT', 'exhaustion': 0.1 }",
-			"{ 'key': 'minecraft:thrown', 'damageScaling': 'WHEN_CAUSED_BY_LIVING_NON_PLAYER', 'sound': 'minecraft:entity.player.hurt', 'deathMessageType': 'DEFAULT', 'exhaustion': 0.1 }",
-			"{ 'key': 'minecraft:indirect_magic', 'damageScaling': 'WHEN_CAUSED_BY_LIVING_NON_PLAYER', 'sound': 'minecraft:entity.player.hurt', 'deathMessageType': 'DEFAULT', 'exhaustion': 0.0 }",
-			"{ 'key': 'minecraft:thorns', 'damageScaling': 'WHEN_CAUSED_BY_LIVING_NON_PLAYER', 'sound': 'minecraft:enchant.thorns.hit', 'deathMessageType': 'DEFAULT', 'exhaustion': 0.1 }",
-			"{ 'key': 'minecraft:explosion', 'damageScaling': 'ALWAYS', 'sound': 'minecraft:entity.player.hurt', 'deathMessageType': 'DEFAULT', 'exhaustion': 0.1 }",
-			"{ 'key': 'minecraft:player_explosion', 'damageScaling': 'ALWAYS', 'sound': 'minecraft:entity.player.hurt', 'deathMessageType': 'DEFAULT', 'exhaustion': 0.1 }",
-			"{ 'key': 'minecraft:sonic_boom', 'damageScaling': 'ALWAYS', 'sound': 'minecraft:entity.player.hurt', 'deathMessageType': 'DEFAULT', 'exhaustion': 0.0 }",
-			"{ 'key': 'minecraft:bad_respawn_point', 'damageScaling': 'ALWAYS', 'sound': 'minecraft:entity.player.hurt', 'deathMessageType': 'INTENTIONAL_GAME_DESIGN', 'exhaustion': 0.1 }",
-			"{ 'key': 'minecraft:outside_border', 'damageScaling': 'WHEN_CAUSED_BY_LIVING_NON_PLAYER', 'sound': 'minecraft:entity.player.hurt', 'deathMessageType': 'DEFAULT', 'exhaustion': 0.0 }",
-			"{ 'key': 'minecraft:generic_kill', 'damageScaling': 'WHEN_CAUSED_BY_LIVING_NON_PLAYER', 'sound': 'minecraft:entity.player.hurt', 'deathMessageType': 'DEFAULT', 'exhaustion': 0.0 }"
-	})
-	void from_GivenMinecraftExamples(String jsonString) {
-		JsonObject jsonObject = JsonParser.parseString(jsonString).getAsJsonObject();
+	@MethodSource("getMinecraftDamageTypes")
+	void from_GivenMinecraftExamples(ExpectedDamageType expectedDamageType)
+	{
 
-		var expectedExhaustion = jsonObject.get(DamageTypeMock.EXHAUSTION).getAsFloat();
-		var expectedDeathMessage = jsonObject.get(DamageTypeMock.DEATH_MESSAGE_TYPE).getAsString();
-		var expectedDamageScaling = jsonObject.get(DamageTypeMock.DAMAGE_SCALING).getAsString();
-		var expectedKey = jsonObject.get(DamageTypeMock.KEY).getAsString();
-		var expectedSound = jsonObject.get(DamageTypeMock.SOUND).getAsString();
+		JsonObject json = new JsonObject();
+		json.addProperty(DamageTypeMock.EXHAUSTION, expectedDamageType.exhaustion());
+		json.addProperty(DamageTypeMock.DEATH_MESSAGE_TYPE, expectedDamageType.deathMessageType());
+		json.addProperty(DamageTypeMock.DAMAGE_SCALING, expectedDamageType.damageScaling());
+		json.addProperty(DamageTypeMock.KEY, expectedDamageType.key());
+		json.addProperty(DamageTypeMock.SOUND, expectedDamageType.sound());
 
-		DamageTypeMock actual = DamageTypeMock.from(jsonObject);
+		DamageTypeMock actual = DamageTypeMock.from(json);
 
-		assertEquals(expectedExhaustion, actual.getExhaustion());
-		assertEquals(expectedDeathMessage, actual.getDeathMessageType().toString());
-		assertEquals(expectedDamageScaling, actual.getDamageScaling().toString());
-		assertEquals(expectedKey, actual.getKey().toString());
-		assertEquals(expectedSound, actual.getDamageEffect().getSound().getKey().toString());
+		assertEquals(expectedDamageType.exhaustion(), actual.getExhaustion());
+		assertEquals(expectedDamageType.deathMessageType(), actual.getDeathMessageType().toString());
+		assertEquals(expectedDamageType.damageScaling(), actual.getDamageScaling().toString());
+		assertEquals(expectedDamageType.key(), actual.getKey().toString());
+		assertEquals(expectedDamageType.sound(), actual.getDamageEffect().getSound().getKey().toString());
 	}
+
+	record ExpectedDamageType(String key, String damageScaling, String sound, String deathMessageType, float exhaustion)
+	{
+	}
+
+	/**
+	 * The expected list of {@link org.bukkit.damage.DamageType} provided by minecraft namespace.
+	 *
+	 * @return The list of arguments provided by minecraft.
+	 */
+	public static Stream<Arguments> getMinecraftDamageTypes()
+	{
+		return Stream.of(
+			Arguments.of(new ExpectedDamageType("minecraft:in_fire","WHEN_CAUSED_BY_LIVING_NON_PLAYER","minecraft:entity.player.hurt_on_fire", "DEFAULT", 0.1F)),
+			Arguments.of(new ExpectedDamageType("minecraft:lightning_bolt","WHEN_CAUSED_BY_LIVING_NON_PLAYER","minecraft:entity.player.hurt", "DEFAULT", 0.1F)),
+			Arguments.of(new ExpectedDamageType("minecraft:on_fire","WHEN_CAUSED_BY_LIVING_NON_PLAYER","minecraft:entity.player.hurt_on_fire", "DEFAULT", 0.0F)),
+			Arguments.of(new ExpectedDamageType("minecraft:lava","WHEN_CAUSED_BY_LIVING_NON_PLAYER","minecraft:entity.player.hurt_on_fire", "DEFAULT", 0.1F)),
+			Arguments.of(new ExpectedDamageType("minecraft:hot_floor","WHEN_CAUSED_BY_LIVING_NON_PLAYER","minecraft:entity.player.hurt_on_fire", "DEFAULT", 0.1F)),
+			Arguments.of(new ExpectedDamageType("minecraft:in_wall","WHEN_CAUSED_BY_LIVING_NON_PLAYER","minecraft:entity.player.hurt", "DEFAULT", 0.0F)),
+			Arguments.of(new ExpectedDamageType("minecraft:cramming","WHEN_CAUSED_BY_LIVING_NON_PLAYER","minecraft:entity.player.hurt", "DEFAULT", 0.0F)),
+			Arguments.of(new ExpectedDamageType("minecraft:drown","WHEN_CAUSED_BY_LIVING_NON_PLAYER","minecraft:entity.player.hurt_drown", "DEFAULT", 0.0F)),
+			Arguments.of(new ExpectedDamageType("minecraft:starve","WHEN_CAUSED_BY_LIVING_NON_PLAYER","minecraft:entity.player.hurt", "DEFAULT", 0.0F)),
+			Arguments.of(new ExpectedDamageType("minecraft:cactus","WHEN_CAUSED_BY_LIVING_NON_PLAYER","minecraft:entity.player.hurt", "DEFAULT", 0.1F)),
+			Arguments.of(new ExpectedDamageType("minecraft:fall","WHEN_CAUSED_BY_LIVING_NON_PLAYER","minecraft:entity.player.hurt", "FALL_VARIANTS", 0.0F)),
+			Arguments.of(new ExpectedDamageType("minecraft:fly_into_wall","WHEN_CAUSED_BY_LIVING_NON_PLAYER","minecraft:entity.player.hurt", "DEFAULT", 0.0F)),
+			Arguments.of(new ExpectedDamageType("minecraft:out_of_world","WHEN_CAUSED_BY_LIVING_NON_PLAYER","minecraft:entity.player.hurt", "DEFAULT", 0.0F)),
+			Arguments.of(new ExpectedDamageType("minecraft:generic","WHEN_CAUSED_BY_LIVING_NON_PLAYER","minecraft:entity.player.hurt", "DEFAULT", 0.0F)),
+			Arguments.of(new ExpectedDamageType("minecraft:magic","WHEN_CAUSED_BY_LIVING_NON_PLAYER","minecraft:entity.player.hurt", "DEFAULT", 0.0F)),
+			Arguments.of(new ExpectedDamageType("minecraft:wither","WHEN_CAUSED_BY_LIVING_NON_PLAYER","minecraft:entity.player.hurt", "DEFAULT", 0.0F)),
+			Arguments.of(new ExpectedDamageType("minecraft:dragon_breath","WHEN_CAUSED_BY_LIVING_NON_PLAYER","minecraft:entity.player.hurt", "DEFAULT", 0.0F)),
+			Arguments.of(new ExpectedDamageType("minecraft:dry_out","WHEN_CAUSED_BY_LIVING_NON_PLAYER","minecraft:entity.player.hurt", "DEFAULT", 0.1F)),
+			Arguments.of(new ExpectedDamageType("minecraft:sweet_berry_bush","WHEN_CAUSED_BY_LIVING_NON_PLAYER","minecraft:entity.player.hurt_sweet_berry_bush", "DEFAULT", 0.1F)),
+			Arguments.of(new ExpectedDamageType("minecraft:freeze","WHEN_CAUSED_BY_LIVING_NON_PLAYER","minecraft:entity.player.hurt_freeze", "DEFAULT", 0.0F)),
+			Arguments.of(new ExpectedDamageType("minecraft:stalagmite","WHEN_CAUSED_BY_LIVING_NON_PLAYER","minecraft:entity.player.hurt", "DEFAULT", 0.0F)),
+			Arguments.of(new ExpectedDamageType("minecraft:falling_block","WHEN_CAUSED_BY_LIVING_NON_PLAYER","minecraft:entity.player.hurt", "DEFAULT", 0.1F)),
+			Arguments.of(new ExpectedDamageType("minecraft:falling_anvil","WHEN_CAUSED_BY_LIVING_NON_PLAYER","minecraft:entity.player.hurt", "DEFAULT", 0.1F)),
+			Arguments.of(new ExpectedDamageType("minecraft:falling_stalactite","WHEN_CAUSED_BY_LIVING_NON_PLAYER","minecraft:entity.player.hurt", "DEFAULT", 0.1F)),
+			Arguments.of(new ExpectedDamageType("minecraft:sting","WHEN_CAUSED_BY_LIVING_NON_PLAYER","minecraft:entity.player.hurt", "DEFAULT", 0.1F)),
+			Arguments.of(new ExpectedDamageType("minecraft:mob_attack","WHEN_CAUSED_BY_LIVING_NON_PLAYER","minecraft:entity.player.hurt", "DEFAULT", 0.1F)),
+			Arguments.of(new ExpectedDamageType("minecraft:mob_attack_no_aggro","WHEN_CAUSED_BY_LIVING_NON_PLAYER","minecraft:entity.player.hurt", "DEFAULT", 0.1F)),
+			Arguments.of(new ExpectedDamageType("minecraft:player_attack","WHEN_CAUSED_BY_LIVING_NON_PLAYER","minecraft:entity.player.hurt", "DEFAULT", 0.1F)),
+			Arguments.of(new ExpectedDamageType("minecraft:arrow","WHEN_CAUSED_BY_LIVING_NON_PLAYER","minecraft:entity.player.hurt", "DEFAULT", 0.1F)),
+			Arguments.of(new ExpectedDamageType("minecraft:trident","WHEN_CAUSED_BY_LIVING_NON_PLAYER","minecraft:entity.player.hurt", "DEFAULT", 0.1F)),
+			Arguments.of(new ExpectedDamageType("minecraft:mob_projectile","WHEN_CAUSED_BY_LIVING_NON_PLAYER","minecraft:entity.player.hurt", "DEFAULT", 0.1F)),
+			Arguments.of(new ExpectedDamageType("minecraft:fireworks","WHEN_CAUSED_BY_LIVING_NON_PLAYER","minecraft:entity.player.hurt", "DEFAULT", 0.1F)),
+			Arguments.of(new ExpectedDamageType("minecraft:fireball","WHEN_CAUSED_BY_LIVING_NON_PLAYER","minecraft:entity.player.hurt_on_fire", "DEFAULT", 0.1F)),
+			Arguments.of(new ExpectedDamageType("minecraft:unattributed_fireball","WHEN_CAUSED_BY_LIVING_NON_PLAYER","minecraft:entity.player.hurt_on_fire", "DEFAULT", 0.1F)),
+			Arguments.of(new ExpectedDamageType("minecraft:wither_skull","WHEN_CAUSED_BY_LIVING_NON_PLAYER","minecraft:entity.player.hurt", "DEFAULT", 0.1F)),
+			Arguments.of(new ExpectedDamageType("minecraft:thrown","WHEN_CAUSED_BY_LIVING_NON_PLAYER","minecraft:entity.player.hurt", "DEFAULT", 0.1F)),
+			Arguments.of(new ExpectedDamageType("minecraft:indirect_magic","WHEN_CAUSED_BY_LIVING_NON_PLAYER","minecraft:entity.player.hurt", "DEFAULT", 0.0F)),
+			Arguments.of(new ExpectedDamageType("minecraft:thorns","WHEN_CAUSED_BY_LIVING_NON_PLAYER","minecraft:enchant.thorns.hit", "DEFAULT", 0.1F)),
+			Arguments.of(new ExpectedDamageType("minecraft:explosion","ALWAYS","minecraft:entity.player.hurt", "DEFAULT", 0.1F)),
+			Arguments.of(new ExpectedDamageType("minecraft:player_explosion","ALWAYS","minecraft:entity.player.hurt", "DEFAULT", 0.1F)),
+			Arguments.of(new ExpectedDamageType("minecraft:sonic_boom","ALWAYS","minecraft:entity.player.hurt", "DEFAULT", 0.0F)),
+			Arguments.of(new ExpectedDamageType("minecraft:bad_respawn_point","ALWAYS","minecraft:entity.player.hurt", "INTENTIONAL_GAME_DESIGN", 0.1F)),
+			Arguments.of(new ExpectedDamageType("minecraft:outside_border","WHEN_CAUSED_BY_LIVING_NON_PLAYER","minecraft:entity.player.hurt", "DEFAULT", 0.0F)),
+			Arguments.of(new ExpectedDamageType("minecraft:generic_kill","WHEN_CAUSED_BY_LIVING_NON_PLAYER","minecraft:entity.player.hurt", "DEFAULT", 0.0F))
+		);
+	}
+
 }
