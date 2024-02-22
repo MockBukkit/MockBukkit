@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.scoreboard;
 
 import org.mockbukkit.mockbukkit.UnimplementedOperationException;
+import io.papermc.paper.scoreboard.numbers.NumberFormat;
 import net.kyori.adventure.text.Component;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.scoreboard.Score;
@@ -119,6 +120,20 @@ public class ScoreMock implements Score
 
 	@Override
 	public void customName(@Nullable Component customName)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable NumberFormat numberFormat()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void numberFormat(@Nullable NumberFormat numberFormat)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
