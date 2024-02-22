@@ -276,6 +276,13 @@ public class EnchantmentMock extends Enchantment
 		return this.key;
 	}
 
+	@Override
+	public @NotNull String getTranslationKey()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 	@ApiStatus.Internal
 	public static EnchantmentMock from(JsonObject data)
 	{
@@ -350,13 +357,6 @@ public class EnchantmentMock extends Enchantment
 			output[level - 1] = maxModifiedCost.get(COST).getAsInt();
 		}
 		return output;
-	}
-
-	@Override
-	public @NotNull String getTranslationKey()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 }
