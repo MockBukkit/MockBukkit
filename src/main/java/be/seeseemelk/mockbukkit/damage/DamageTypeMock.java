@@ -14,7 +14,6 @@ import org.jetbrains.annotations.NotNull;
 
 public class DamageTypeMock implements DamageType
 {
-
 	static final String EXHAUSTION = "exhaustion";
 	static final String DEATH_MESSAGE_TYPE = "deathMessageType";
 	static final String SOUND = "sound";
