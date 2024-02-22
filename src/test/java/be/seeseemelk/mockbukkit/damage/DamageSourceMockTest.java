@@ -12,7 +12,6 @@ import org.bukkit.Location;
 import org.bukkit.damage.DamageType;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.Nullable;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -75,7 +74,7 @@ class DamageSourceMockTest
 	@Test
 	void getDamageLocation_WhenDamageLocationIsValid() {
 
-		@Nullable Location actual = damageSourceMock.getDamageLocation();
+		Location actual = damageSourceMock.getDamageLocation();
 
 		assertNotSame(damageLocation, actual);
 		assertEquals(damageLocation, actual);
@@ -86,14 +85,14 @@ class DamageSourceMockTest
 
 		DamageSourceMock noLocationMock = new DamageSourceMock(damageType, causingEntity, directEntity, null);
 
-		@Nullable Location actual = noLocationMock.getDamageLocation();
+		Location actual = noLocationMock.getDamageLocation();
 
 		assertNull(actual);
 	}
 
 	@Test
 	void getSourceLocation_WhenDamageLocationIsNotNull() {
-		@Nullable Location actual = damageSourceMock.getSourceLocation();
+		Location actual = damageSourceMock.getSourceLocation();
 
 		assertNotNull(actual);
 		assertNotSame(damageLocation, actual);
@@ -104,7 +103,7 @@ class DamageSourceMockTest
 	void getSourceLocation_WhenDamageLocationIsNullAndDirectEntityLocationIsNotNull() {
 		DamageSourceMock damageSource = new DamageSourceMock(damageType, causingEntity, directEntity, null);
 
-		@Nullable Location actual = damageSource.getSourceLocation();
+		Location actual = damageSource.getSourceLocation();
 
 		assertNotNull(actual);
 		assertNotSame(causingEntity.getLocation(), actual);
@@ -115,7 +114,7 @@ class DamageSourceMockTest
 	void getSourceLocation_WhenDamageLocationIsNullAndDirectEntityIsNull() {
 		DamageSourceMock damageSource = new DamageSourceMock(damageType, causingEntity, null, null);
 
-		@Nullable Location actual = damageSource.getSourceLocation();
+		Location actual = damageSource.getSourceLocation();
 
 		assertNull(actual);
 	}
