@@ -1,6 +1,7 @@
 {
 	"default":{
 		"height":0.5,
-		"width":0.5
+		"width":0.5,
+		"baseDamage" : 6.0
 	}
 }
