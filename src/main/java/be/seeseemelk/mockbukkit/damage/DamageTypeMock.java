@@ -15,11 +15,11 @@ import org.jetbrains.annotations.NotNull;
 public class DamageTypeMock implements DamageType
 {
 
-	private static final String EXHAUSTION = "exhaustion";
-	private static final String DEATH_MESSAGE_TYPE = "deathMessageType";
-	private static final String SOUND = "sound";
-	private static final String DAMAGE_SCALING = "damageScaling";
-	private static final String KEY = "key";
+	static final String EXHAUSTION = "exhaustion";
+	static final String DEATH_MESSAGE_TYPE = "deathMessageType";
+	static final String SOUND = "sound";
+	static final String DAMAGE_SCALING = "damageScaling";
+	static final String KEY = "key";
 
 	/**
 	 * Create a {@link DamageTypeMock} from a {@link JsonObject}.
