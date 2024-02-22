@@ -1326,7 +1326,7 @@ class WorldMockTest
 				Arguments.of(EntityType.LEASH_HITCH, LeashHitchMock.class),
 				Arguments.of(EntityType.ZOMBIFIED_PIGLIN, PigZombieMock.class),
 				Arguments.of(EntityType.BLOCK_DISPLAY, BlockDisplayMock.class),
-				Arguments.of(EntityType.ITEM_DISPLAY, ItemDisplayMock.class)
+				Arguments.of(EntityType.ITEM_DISPLAY, ItemDisplayMock.class),
 				Arguments.of(EntityType.ZOMBIFIED_PIGLIN, PigZombieMock.class),
 				Arguments.of(EntityType.TRIDENT, Trident.class),
 				Arguments.of(EntityType.SPECTRAL_ARROW, SpectralArrow.class),
