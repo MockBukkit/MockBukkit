@@ -36,6 +36,7 @@ import org.bukkit.World;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -285,7 +286,7 @@ class PlayerMockTest
 	void damage_LessThanHealth_DamageTaken()
 	{
 		double health = player.getHealth();
-		player.damage(5.0);
+		player.simulateDamage(5.0, (Entity) null);
 		assertEquals(health - 5.0, player.getHealth(), 0);
 		server.getPluginManager().assertEventFired(EntityDamageEvent.class);
 	}
@@ -293,7 +294,7 @@ class PlayerMockTest
 	@Test
 	void damage_MoreThanHealth_ClampedAtZeroAndDeathEvent()
 	{
-		player.damage(50.0, player);
+		player.simulateDamage(50.0, player);
 		assertEquals(0, player.getHealth(), 0);
 		assertTrue(player.isDead());
 		server.getPluginManager().assertEventFired(EntityDamageEvent.class);
@@ -303,7 +304,7 @@ class PlayerMockTest
 	@Test
 	void damage_ExactlyHealth_ZeroAndDeathEvent()
 	{
-		player.damage(player.getHealth());
+		player.simulateDamage(player.getHealth(),(Entity) null);
 		assertEquals(0, player.getHealth(), 0);
 		assertTrue(player.isDead());
 		server.getPluginManager().assertEventFired(EntityDamageEvent.class);

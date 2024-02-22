@@ -17,6 +17,7 @@ import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDropItemEvent;
 import org.bukkit.event.entity.EntityTransformEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -44,6 +45,42 @@ public class MushroomCowMock extends CowMock implements MushroomCow
 	public MushroomCowMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
+	}
+
+	@Override
+	public boolean hasEffectsForNextStew()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull List<PotionEffect> getEffectsForNextStew()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean addEffectToNextStew(@NotNull PotionEffect effect, boolean overwrite)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean removeEffectFromNextStew(@NotNull PotionEffectType type)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean hasEffectForNextStew(@NotNull PotionEffectType type)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void clearEffectsForNextStew()
+	{
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
