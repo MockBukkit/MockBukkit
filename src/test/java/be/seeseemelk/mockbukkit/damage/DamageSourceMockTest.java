@@ -6,10 +6,12 @@ import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import be.seeseemelk.mockbukkit.entity.SkeletonMock;
 import be.seeseemelk.mockbukkit.entity.ZombieMock;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import org.bukkit.Location;
+import org.bukkit.NamespacedKey;
+import org.bukkit.Sound;
+import org.bukkit.damage.DamageScaling;
 import org.bukkit.damage.DamageType;
+import org.bukkit.damage.DeathMessageType;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.junit.jupiter.api.AfterEach;
@@ -146,8 +148,8 @@ class DamageSourceMockTest
 	@Test
 	void scalesWithDifficulty_WhenDamageScalingIsNever() {
 
-		JsonObject json = JsonParser.parseString("{\"key\":\"minecraft:in_fire\",\"damageScaling\":\"NEVER\",\"sound\":\"minecraft:entity.player.hurt_on_fire\",\"deathMessageType\":\"DEFAULT\",\"exhaustion\":0.1}").getAsJsonObject();
-		DamageType neverDamage = new DamageTypeMock(json);
+		DamageEffectMock damageEffect = new DamageEffectMock(Sound.ENTITY_ZOMBIE_HURT);
+		DamageTypeMock neverDamage = new DamageTypeMock(DamageScaling.NEVER, damageEffect, NamespacedKey.fromString(NamespacedKey.MINECRAFT), DeathMessageType.DEFAULT, 0.1F);
 		DamageSourceMock damageSource = new DamageSourceMock(neverDamage, causingEntity, causingEntity, damageLocation);
 
 		boolean actual = damageSource.scalesWithDifficulty();
