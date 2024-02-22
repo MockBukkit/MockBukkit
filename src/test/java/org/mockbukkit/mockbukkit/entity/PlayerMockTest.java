@@ -1208,6 +1208,7 @@ class PlayerMockTest
 	@Test
 	void testFlightEventFired()
 	{
+		player.setAllowFlight(true);
 		PlayerToggleFlightEvent event = player.simulateToggleFlight(true);
 		assertNotNull(event);
 		assertTrue(player.isFlying());
