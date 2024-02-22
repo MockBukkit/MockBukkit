@@ -12,6 +12,7 @@ import org.mockbukkit.mockbukkit.entity.data.EntitySubType;
 import org.mockbukkit.mockbukkit.metadata.MetadataTable;
 import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerMock;
 import com.google.common.base.Preconditions;
+import com.google.gson.JsonElement;
 import io.papermc.paper.entity.TeleportFlag;
 import io.papermc.paper.threadedregions.scheduler.EntityScheduler;
 import net.kyori.adventure.audience.MessageType;
@@ -601,6 +602,10 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	public double getWidth()
 	{
 		return entityData.getWidth(this.getSubType(), this.getEntityState());
+	}
+
+	protected JsonElement getEntityProperty(String field){
+		return this.entityData.getValueFromKey(field, this.getSubType(), this.getEntityState());
 	}
 
 	/**

@@ -89,6 +89,7 @@ import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerMock;
 import com.destroystokyo.paper.HeightmapType;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
+import io.papermc.paper.block.fluid.FluidData;
 import io.papermc.paper.event.world.WorldGameRuleChangeEvent;
 import io.papermc.paper.math.Position;
 import io.papermc.paper.world.MoonPhase;
@@ -200,11 +201,13 @@ import org.bukkit.entity.Slime;
 import org.bukkit.entity.SmallFireball;
 import org.bukkit.entity.Snowball;
 import org.bukkit.entity.SpawnCategory;
+import org.bukkit.entity.SpectralArrow;
 import org.bukkit.entity.Spider;
 import org.bukkit.entity.Squid;
 import org.bukkit.entity.Stray;
 import org.bukkit.entity.Tadpole;
 import org.bukkit.entity.ThrownExpBottle;
+import org.bukkit.entity.Trident;
 import org.bukkit.entity.TropicalFish;
 import org.bukkit.entity.Turtle;
 import org.bukkit.entity.Warden;
@@ -1413,6 +1416,18 @@ public class WorldMock implements World
 		{
 			return new PigZombieMock(server, UUID.randomUUID());
 		}
+		else if (clazz == Arrow.class)
+		{
+			return new ArrowMock(server, UUID.randomUUID());
+		}
+		else if (clazz == SpectralArrow.class)
+		{
+			return new SpectralArrowMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Trident.class)
+		{
+			return new TridentMock(server, UUID.randomUUID());
+		}
 		throw new UnimplementedOperationException();
 	}
 
@@ -2065,7 +2080,7 @@ public class WorldMock implements World
 	@Deprecated(since = "1.18")
 	public void setMonsterSpawnLimit(int limit)
 	{
-		this.setSpawnLimit(SpawnCategory.MONSTER,limit);
+		this.setSpawnLimit(SpawnCategory.MONSTER, limit);
 	}
 
 	@Override
@@ -2884,6 +2899,13 @@ public class WorldMock implements World
 		return block.getState();
 	}
 
+	@Override
+	public @NotNull FluidData getFluidData(int i, int i1, int i2)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 	@NotNull
 	@Override
 	public BlockData getBlockData(@NotNull Location location)
@@ -3266,9 +3288,11 @@ public class WorldMock implements World
 		return this.getSpawnLimitUnsafe(spawnCategory);
 	}
 
-	public final int getSpawnLimitUnsafe(final SpawnCategory spawnCategory) {
+	public final int getSpawnLimitUnsafe(final SpawnCategory spawnCategory)
+	{
 		int limit = this.spawnLimits.getOrDefault(spawnCategory, -1);
-		if (limit < 0) {
+		if (limit < 0)
+		{
 			limit = this.server.getSpawnLimit(spawnCategory);
 		}
 		return limit;
