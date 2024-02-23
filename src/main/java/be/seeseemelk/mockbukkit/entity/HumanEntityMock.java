@@ -311,10 +311,6 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	@Override
 	public void setItemInHand(@Nullable ItemStack item)
 	{
-		if (getInventory().getItemInMainHand().getType() == Material.SHIELD)
-		{
-			this.blocking = false;
-		}
 		getInventory().setItemInMainHand(item);
 	}
 
@@ -420,7 +416,7 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 		if (blocking)
 		{
 			ItemStack offHand = getInventory().getItemInOffHand();
-			ItemStack mainHand = getInventory().getItemInOffHand();
+			ItemStack mainHand = getInventory().getItemInMainHand();
 			if (offHand.getType() != Material.SHIELD && mainHand.getType() != Material.SHIELD)
 			{
 				this.blocking = false;
