@@ -25,7 +25,8 @@ public class InternalTagParser
 	public void insertInternalTagValues(InternalTagRegistry internalTagRegistry) throws IOException, InternalTagMisconfigurationException
 	{
 		String path = "/internal_tags/" + internalTagRegistry.name().toLowerCase() + "/";
-		for(InternalTag<?> internalTag : internalTagRegistry.getRelatedTags()){
+		for(InternalTag<?> internalTag : internalTagRegistry.getRelatedTags())
+		{
 			String filePath = path + internalTag.getName().toLowerCase() + ".json";
 			try(InputStream inputStream = MockBukkit.class.getResourceAsStream(filePath))
 			{
@@ -82,7 +83,8 @@ public class InternalTagParser
 	{
 		NamespacedKey namespacedKey = NamespacedKey.minecraft(tagString.split(":")[1]);
 		Tag<Material> tag = tagRegistry.getTags().get(namespacedKey);
-		if(tag == null){
+		if(tag == null)
+		{
 			throw new InternalTagMisconfigurationException("Invalid tag " + namespacedKey);
 		}
 		return tag.getValues();
