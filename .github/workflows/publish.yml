@@ -34,7 +34,7 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Build with Gradle
-        run: ./gradlew build -x test --refresh-dependencies
+        run: ./gradlew build -x test -x check --refresh-dependencies
       - name: Run unit tests
         run: ./gradlew test
       - name: Validate checkstyle
