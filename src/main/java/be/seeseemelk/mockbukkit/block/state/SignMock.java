@@ -12,7 +12,9 @@ import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
 import org.bukkit.block.sign.Side;
 import org.bukkit.block.sign.SignSide;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -180,6 +182,20 @@ public class SignMock extends TileStateMock implements Sign
 
 	@Override
 	public @NotNull SignSide getSide(@NotNull Side side)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull SignSide getTargetSide(@NotNull Player player)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Player getAllowedEditor()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
