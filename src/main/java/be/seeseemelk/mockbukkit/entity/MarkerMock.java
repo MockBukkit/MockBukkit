@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Marker;
 import org.jetbrains.annotations.NotNull;
@@ -29,4 +30,11 @@ public class MarkerMock extends EntityMock implements Marker
 	{
 		return EntityType.MARKER;
 	}
+
+	@Override
+	public boolean addPassenger(@NotNull Entity passenger)
+	{
+		return false;
+	}
+
 }
