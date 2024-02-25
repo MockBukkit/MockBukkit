@@ -263,4 +263,45 @@ class HumanEntityMockTest
 				e -> e.getPlayer() == human && e.getInventory() == inv);
 	}
 
+	@Test
+	void setBlocking_noShield_notSuccessful()
+	{
+		human.setBlocking(true);
+		assertFalse(human.isBlocking());
+	}
+
+	@Test
+	void setBlocking_withShieldMainHand_successful()
+	{
+		human.getInventory().setItemInMainHand(new ItemStack(Material.SHIELD));
+		human.setBlocking(true);
+		assertTrue(human.isBlocking());
+	}
+
+	@Test
+	void isBlocking_shieldRemovedMainHand_notBlocking()
+	{
+		human.getInventory().setItemInMainHand(new ItemStack(Material.SHIELD));
+		human.setBlocking(true);
+		human.getInventory().setItemInMainHand(new ItemStack(Material.AIR));
+		assertFalse(human.isBlocking());
+	}
+
+	@Test
+	void setBlocking_withShieldOffHand_successful()
+	{
+		human.getInventory().setItemInOffHand(new ItemStack(Material.SHIELD));
+		human.setBlocking(true);
+		assertTrue(human.isBlocking());
+	}
+
+	@Test
+	void isBlocking_shieldRemovedOffHand_notBlocking()
+	{
+		human.getInventory().setItemInOffHand(new ItemStack(Material.SHIELD));
+		human.setBlocking(true);
+		human.getInventory().setItemInOffHand(new ItemStack(Material.AIR));
+		assertFalse(human.isBlocking());
+	}
+
 }
