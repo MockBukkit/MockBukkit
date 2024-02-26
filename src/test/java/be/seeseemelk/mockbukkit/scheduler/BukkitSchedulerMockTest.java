@@ -777,14 +777,18 @@ class BukkitSchedulerMockTest
 		assertFalse(notPrimaryThread.get());
 	}
 
-	private void checkTimeout(long startTime) {
-		if (System.currentTimeMillis() - startTime > 60000L) {
+	private void checkTimeout(long startTime)
+	{
+		if (System.currentTimeMillis() - startTime > 60000L)
+		{
 			fail("Timeout");
 		}
 	}
 
-	private void checkTimeout(long startTime, Thread thread) {
-		if (System.currentTimeMillis() - startTime > 60000L) {
+	private void checkTimeout(long startTime, Thread thread)
+	{
+		if (System.currentTimeMillis() - startTime > 60000L)
+		{
 			thread.interrupt();
 			fail("Timeout");
 		}

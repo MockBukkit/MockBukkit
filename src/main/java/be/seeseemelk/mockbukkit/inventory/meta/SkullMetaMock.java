@@ -54,7 +54,8 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	public @NotNull SkullMetaMock clone()
 	{
 		SkullMetaMock mock = (SkullMetaMock) super.clone();
-		if (playerProfile != null) {
+		if (playerProfile != null)
+		{
 			mock.setOwner(playerProfile.getName());
 			mock.setPlayerProfile(playerProfile);
 		}

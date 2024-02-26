@@ -563,11 +563,13 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		map.put("Unbreakable", this.unbreakable);
 		map.put("Damage", this.damage);
 
-		if(hasPlaceableKeys()) {
+		if(hasPlaceableKeys())
+		{
 			map.put("placeable-keys", this.placeableKeys);
 		}
 
-		if(hasDestroyableKeys()) {
+		if(hasDestroyableKeys())
+		{
 			map.put("destroyable-keys", this.destroyableKeys);
 		}
 
@@ -922,15 +924,19 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Deprecated(since = "1.20")
-	private Set<Material> legacyGetMatsFromKeys(Collection<Namespaced> names) {
+	private Set<Material> legacyGetMatsFromKeys(Collection<Namespaced> names)
+	{
 		Set<Material> mats = Sets.newHashSet();
-		for (Namespaced key : names) {
-			if (!(key instanceof org.bukkit.NamespacedKey)) {
+		for (Namespaced key : names)
+		{
+			if (!(key instanceof org.bukkit.NamespacedKey))
+			{
 				continue;
 			}
 
 			Material material = Material.matchMaterial(key.toString(), false);
-			if (material != null) {
+			if (material != null)
+			{
 				mats.add(material);
 			}
 		}
@@ -939,8 +945,10 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Deprecated(since = "1.20")
-	private void legacyClearAndReplaceKeys(Collection<Namespaced> toUpdate, Collection<Material> beingSet) {
-		if (beingSet.stream().anyMatch(Material::isLegacy)) {
+	private void legacyClearAndReplaceKeys(Collection<Namespaced> toUpdate, Collection<Material> beingSet)
+	{
+		if (beingSet.stream().anyMatch(Material::isLegacy))
+		{
 			throw new IllegalArgumentException("Set must not contain any legacy materials!");
 		}
 

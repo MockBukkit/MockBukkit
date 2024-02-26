@@ -57,7 +57,8 @@ public class MockInternalPotionData implements PotionType.InternalPotionData
 		}
 
 		try(BufferedReader reader = new BufferedReader(
-				new InputStreamReader(MockBukkit.class.getResourceAsStream(path), StandardCharsets.UTF_8))){
+				new InputStreamReader(MockBukkit.class.getResourceAsStream(path), StandardCharsets.UTF_8)))
+		{
 			JsonElement jsonElement = JsonParser.parseReader(reader);
 			return jsonElement.getAsJsonObject();
 		}
@@ -72,7 +73,8 @@ public class MockInternalPotionData implements PotionType.InternalPotionData
 	@Override
 	public List<PotionEffect> getPotionEffects()
 	{
-		if(potionEffects == null){
+		if(potionEffects == null)
+		{
 			throw new UnimplementedOperationException("Unimplemented potion: " + namespacedKey);
 		}
 		return potionEffects;
@@ -102,9 +104,11 @@ public class MockInternalPotionData implements PotionType.InternalPotionData
 		return maxLevel;
 	}
 
-	private List<PotionEffect> getPotionEffectFromData(JsonObject data){
+	private List<PotionEffect> getPotionEffectFromData(JsonObject data)
+	{
 		List<PotionEffect> potionEffectsList = new ArrayList<>();
-		for(JsonElement potionEffectData : data.get("effects").getAsJsonArray()){
+		for(JsonElement potionEffectData : data.get("effects").getAsJsonArray())
+		{
 			JsonObject potionEffectDataObject = potionEffectData.getAsJsonObject();
 			NamespacedKey potionEffectTypeKey = Preconditions.checkNotNull(NamespacedKey.fromString(potionEffectDataObject.get("type").getAsString()));
 			PotionEffectType potionEffectType = Registry.POTION_EFFECT_TYPE.get(potionEffectTypeKey);

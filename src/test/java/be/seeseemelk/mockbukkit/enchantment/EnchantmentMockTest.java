@@ -101,7 +101,8 @@ class EnchantmentMockTest
 	}
 
 	@Test
-	void isCursed(){
+	void isCursed()
+	{
 		assertFalse(Enchantment.ARROW_FIRE.isCursed());
 	}
 
