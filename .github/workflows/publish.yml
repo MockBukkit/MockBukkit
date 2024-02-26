@@ -9,7 +9,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: read # Read repo contents
+      checks: write # Write result from pipeline execution
     steps:
       - uses: actions/checkout@v4
       - name: Validate gradle wrapper
