@@ -2310,6 +2310,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		setExp(0);
 		setFoodLevel(0);
 
+		setBlocking(false);
 		alive = false;
 	}
 
