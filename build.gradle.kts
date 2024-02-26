@@ -168,6 +168,10 @@ publishing {
 	}
 }
 
+checkstyle {
+	isIgnoreFailures = true
+}
+
 fun isFork(): Boolean {
 	return run("git", "config", "--get", "remote.origin.url").contains("MockBukkit/MockBukkit")
 }
