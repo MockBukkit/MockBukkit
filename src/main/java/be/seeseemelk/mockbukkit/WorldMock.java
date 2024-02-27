@@ -50,6 +50,7 @@ import be.seeseemelk.mockbukkit.entity.LeashHitchMock;
 import be.seeseemelk.mockbukkit.entity.LlamaMock;
 import be.seeseemelk.mockbukkit.entity.LlamaSpitMock;
 import be.seeseemelk.mockbukkit.entity.MagmaCubeMock;
+import be.seeseemelk.mockbukkit.entity.MarkerMock;
 import be.seeseemelk.mockbukkit.entity.MobMock;
 import be.seeseemelk.mockbukkit.entity.MuleMock;
 import be.seeseemelk.mockbukkit.entity.MushroomCowMock;
@@ -186,6 +187,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Llama;
 import org.bukkit.entity.LlamaSpit;
 import org.bukkit.entity.MagmaCube;
+import org.bukkit.entity.Marker;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Mule;
 import org.bukkit.entity.MushroomCow;
@@ -1442,6 +1444,10 @@ public class WorldMock implements World
 		else if (clazz == Trident.class)
 		{
 			return new TridentMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Marker.class)
+		{
+			return new MarkerMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}
