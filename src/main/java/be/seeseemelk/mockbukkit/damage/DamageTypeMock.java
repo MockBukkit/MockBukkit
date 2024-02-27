@@ -14,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class DamageTypeMock implements DamageType
 {
+
 	static final String EXHAUSTION = "exhaustion";
 	static final String DEATH_MESSAGE_TYPE = "deathMessageType";
 	static final String SOUND = "sound";
@@ -35,7 +36,6 @@ public class DamageTypeMock implements DamageType
 	 * </pre>
 	 *
 	 * @param data The json data.
-	 *
 	 * @return The damage type created from the JSON
 	 */
 	public static DamageTypeMock from(JsonObject data)

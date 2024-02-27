@@ -59,22 +59,26 @@ class DamageSourceMockTest
 	}
 
 	@Test
-	void getDamageType() {
+	void getDamageType()
+	{
 		assertSame(damageType, damageSourceMock.getDamageType());
 	}
 
 	@Test
-	void getCausingEntity() {
+	void getCausingEntity()
+	{
 		assertSame(causingEntity, damageSourceMock.getCausingEntity());
 	}
 
 	@Test
-	void getDirectEntity() {
+	void getDirectEntity()
+	{
 		assertSame(directEntity, damageSourceMock.getDirectEntity());
 	}
 
 	@Test
-	void getDamageLocation_WhenDamageLocationIsValid() {
+	void getDamageLocation_WhenDamageLocationIsValid()
+	{
 
 		Location actual = damageSourceMock.getDamageLocation();
 
@@ -83,7 +87,8 @@ class DamageSourceMockTest
 	}
 
 	@Test
-	void getDamageLocation_WhenDamageLocationIsNull() {
+	void getDamageLocation_WhenDamageLocationIsNull()
+	{
 
 		DamageSourceMock noLocationMock = new DamageSourceMock(damageType, causingEntity, directEntity, null);
 
@@ -93,7 +98,8 @@ class DamageSourceMockTest
 	}
 
 	@Test
-	void getSourceLocation_WhenDamageLocationIsNotNull() {
+	void getSourceLocation_WhenDamageLocationIsNotNull()
+	{
 		Location actual = damageSourceMock.getSourceLocation();
 
 		assertNotNull(actual);
@@ -102,7 +108,8 @@ class DamageSourceMockTest
 	}
 
 	@Test
-	void getSourceLocation_WhenDamageLocationIsNullAndDirectEntityLocationIsNotNull() {
+	void getSourceLocation_WhenDamageLocationIsNullAndDirectEntityLocationIsNotNull()
+	{
 		DamageSourceMock damageSource = new DamageSourceMock(damageType, causingEntity, directEntity, null);
 
 		Location actual = damageSource.getSourceLocation();
@@ -113,7 +120,8 @@ class DamageSourceMockTest
 	}
 
 	@Test
-	void getSourceLocation_WhenDamageLocationIsNullAndDirectEntityIsNull() {
+	void getSourceLocation_WhenDamageLocationIsNullAndDirectEntityIsNull()
+	{
 		DamageSourceMock damageSource = new DamageSourceMock(damageType, causingEntity, null, null);
 
 		Location actual = damageSource.getSourceLocation();
@@ -122,7 +130,8 @@ class DamageSourceMockTest
 	}
 
 	@Test
-	void isIndirect_WhenCausingEntityIsEqualToDirectEntity() {
+	void isIndirect_WhenCausingEntityIsEqualToDirectEntity()
+	{
 
 		DamageSourceMock sameEntity = new DamageSourceMock(damageType, causingEntity, causingEntity, damageLocation);
 
@@ -132,21 +141,24 @@ class DamageSourceMockTest
 	}
 
 	@Test
-	void isIndirect_WhenCausingEntityIsDifferentFromDirectEntity() {
+	void isIndirect_WhenCausingEntityIsDifferentFromDirectEntity()
+	{
 		boolean actual = damageSourceMock.isIndirect();
 
 		assertTrue(actual);
 	}
 
 	@Test
-	void getFoodExhaustion() {
+	void getFoodExhaustion()
+	{
 		float actual = damageSourceMock.getFoodExhaustion();
 
 		assertEquals(damageType.getExhaustion(), actual);
 	}
 
 	@Test
-	void scalesWithDifficulty_WhenDamageScalingIsNever() {
+	void scalesWithDifficulty_WhenDamageScalingIsNever()
+	{
 
 		DamageEffectMock damageEffect = new DamageEffectMock(Sound.ENTITY_ZOMBIE_HURT);
 		DamageTypeMock neverDamage = new DamageTypeMock(DamageScaling.NEVER, damageEffect, NamespacedKey.fromString(NamespacedKey.MINECRAFT), DeathMessageType.DEFAULT, 0.1F);
@@ -157,7 +169,8 @@ class DamageSourceMockTest
 	}
 
 	@Test
-	void scalesWithDifficulty_WhenDamageScalingIsDoneByPlayer() {
+	void scalesWithDifficulty_WhenDamageScalingIsDoneByPlayer()
+	{
 
 		Player player = new PlayerMock(serverMock, "MockBukkit");
 		DamageSourceMock damageSource = new DamageSourceMock(DamageType.GENERIC, player, directEntity, damageLocation);
@@ -167,7 +180,8 @@ class DamageSourceMockTest
 	}
 
 	@Test
-	void scalesWithDifficulty_WhenDamageScalingIsDoneByLivingEntity() {
+	void scalesWithDifficulty_WhenDamageScalingIsDoneByLivingEntity()
+	{
 		DamageSourceMock damageSource = new DamageSourceMock(DamageType.MOB_ATTACK, causingEntity, causingEntity, damageLocation);
 
 		boolean actual = damageSource.scalesWithDifficulty();
@@ -175,7 +189,8 @@ class DamageSourceMockTest
 	}
 
 	@Test
-	void scalesWithDifficulty_WhenDamageScalingIsAlways() {
+	void scalesWithDifficulty_WhenDamageScalingIsAlways()
+	{
 		DamageSourceMock damageSource = new DamageSourceMock(DamageType.PLAYER_EXPLOSION, causingEntity, causingEntity, damageLocation);
 
 		boolean actual = damageSource.scalesWithDifficulty();
@@ -183,13 +198,15 @@ class DamageSourceMockTest
 	}
 
 	@Test
-	void equals_and_hashCode_WhenSameInstance() {
+	void equals_and_hashCode_WhenSameInstance()
+	{
 		assertEquals(damageSourceMock, damageSourceMock);
 		assertEquals(damageSourceMock.hashCode(), damageSourceMock.hashCode());
 	}
 
 	@Test
-	void equals_and_hashCode_WhenIdentical() {
+	void equals_and_hashCode_WhenIdentical()
+	{
 		DamageSourceMock copy = new DamageSourceMock(damageType, causingEntity, directEntity, damageLocation);
 		assertEquals(damageSourceMock, copy);
 		assertEquals(damageSourceMock.hashCode(), copy.hashCode());
@@ -198,7 +215,8 @@ class DamageSourceMockTest
 	}
 
 	@Test
-	void equals_and_hashCode_WhenNotHavingSameType() {
+	void equals_and_hashCode_WhenNotHavingSameType()
+	{
 		assertNotEquals(damageSourceMock, new Object());
 	}
 

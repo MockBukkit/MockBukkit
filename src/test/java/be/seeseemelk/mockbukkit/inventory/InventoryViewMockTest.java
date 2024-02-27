@@ -91,14 +91,16 @@ class InventoryViewMockTest
 	}
 
     @Test
-    void getOriginalTitle() {
+    void getOriginalTitle()
+	{
 		view.setTitle("Test");
 		view.setTitle("Foobar");
 		assertEquals("Inventory", view.getOriginalTitle());
     }
 
     @Test
-    void setTitle() {
+    void setTitle()
+	{
 		view.setTitle("Test");
 		assertEquals("Test", view.getTitle());
     }

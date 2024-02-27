@@ -35,9 +35,11 @@ public class ItemDisplayMock extends DisplayMock implements ItemDisplay
 	@Override
 	public void setItemStack(@Nullable ItemStack item)
 	{
-		if(item == null){
+		if (item == null)
+		{
 			this.itemStack = ItemStack.empty();
-		} else
+		}
+		else
 		{
 			this.itemStack = item.clone();
 		}
@@ -56,7 +58,9 @@ public class ItemDisplayMock extends DisplayMock implements ItemDisplay
 	}
 
 	@Override
-	public EntityType getType(){
+	public EntityType getType()
+	{
 		return EntityType.ITEM_DISPLAY;
 	}
+
 }
