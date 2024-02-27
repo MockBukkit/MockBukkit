@@ -50,6 +50,7 @@ import be.seeseemelk.mockbukkit.entity.LeashHitchMock;
 import be.seeseemelk.mockbukkit.entity.LlamaMock;
 import be.seeseemelk.mockbukkit.entity.LlamaSpitMock;
 import be.seeseemelk.mockbukkit.entity.MagmaCubeMock;
+import be.seeseemelk.mockbukkit.entity.MarkerMock;
 import be.seeseemelk.mockbukkit.entity.MuleMock;
 import be.seeseemelk.mockbukkit.entity.MushroomCowMock;
 import be.seeseemelk.mockbukkit.entity.OcelotMock;
@@ -1330,7 +1331,8 @@ class WorldMockTest
 				Arguments.of(EntityType.ZOMBIFIED_PIGLIN, PigZombieMock.class),
 				Arguments.of(EntityType.TRIDENT, Trident.class),
 				Arguments.of(EntityType.SPECTRAL_ARROW, SpectralArrow.class),
-				Arguments.of(EntityType.ARROW, Arrow.class)
+				Arguments.of(EntityType.ARROW, Arrow.class),
+				Arguments.of(EntityType.MARKER, MarkerMock.class)
 		);
 	}
 
