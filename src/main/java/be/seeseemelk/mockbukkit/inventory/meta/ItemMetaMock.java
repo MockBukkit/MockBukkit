@@ -408,7 +408,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	{
 		return this.lore == null ? null : new ArrayList<>(this.lore.stream()
 				.map(s -> GsonComponentSerializer.gson().deserialize(s))
-				.toList()) ;
+				.toList());
 	}
 
 	@Override
@@ -437,7 +437,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public @Nullable List<BaseComponent[]> getLoreComponents()
 	{
-		return this.lore == null ? null :this.lore.stream()
+		return this.lore == null ? null : this.lore.stream()
 				.map(c -> BungeeComponentSerializer
 						.get()
 						.serialize(GsonComponentSerializer.gson().deserialize(c))
@@ -563,12 +563,12 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		map.put("Unbreakable", this.unbreakable);
 		map.put("Damage", this.damage);
 
-		if(hasPlaceableKeys())
+		if (hasPlaceableKeys())
 		{
 			map.put("placeable-keys", this.placeableKeys);
 		}
 
-		if(hasDestroyableKeys())
+		if (hasDestroyableKeys())
 		{
 			map.put("destroyable-keys", this.destroyableKeys);
 		}

@@ -19,16 +19,17 @@ import java.util.regex.Pattern;
 
 public class InternalTagParser
 {
+
 	private static final Pattern MINECRAFT_MATERIAL = Pattern.compile("minecraft:[a-z0-9_]+");
 	private static final Pattern MINECRAFT_TAG = Pattern.compile("#minecraft:[a-z_]+");
 
 	public void insertInternalTagValues(InternalTagRegistry internalTagRegistry) throws IOException, InternalTagMisconfigurationException
 	{
 		String path = "/internal_tags/" + internalTagRegistry.name().toLowerCase() + "/";
-		for(InternalTag<?> internalTag : internalTagRegistry.getRelatedTags())
+		for (InternalTag<?> internalTag : internalTagRegistry.getRelatedTags())
 		{
 			String filePath = path + internalTag.getName().toLowerCase() + ".json";
-			try(InputStream inputStream = MockBukkit.class.getResourceAsStream(filePath))
+			try (InputStream inputStream = MockBukkit.class.getResourceAsStream(filePath))
 			{
 				JsonObject object = (JsonObject) JsonParser.parseReader(new InputStreamReader(inputStream));
 				this.parse(object, internalTagRegistry.getTagRegistryEquivalent(), internalTag);
@@ -45,7 +46,7 @@ public class InternalTagParser
 
 	private <T> Set<T> parseJsonArray(JsonArray array, TagRegistry tagRegistry, Class<T> targetClass) throws InternalTagMisconfigurationException
 	{
-		if(targetClass == Material.class)
+		if (targetClass == Material.class)
 		{
 			Set<Material> output = EnumSet.noneOf(Material.class);
 			for (JsonElement element : array.asList())
@@ -72,7 +73,7 @@ public class InternalTagParser
 	private Material parseMaterial(String materialString) throws InternalTagMisconfigurationException
 	{
 		Material material = Material.matchMaterial(materialString);
-		if(material == null)
+		if (material == null)
 		{
 			throw new InternalTagMisconfigurationException("Invalid namespace key " + materialString);
 		}
@@ -83,10 +84,11 @@ public class InternalTagParser
 	{
 		NamespacedKey namespacedKey = NamespacedKey.minecraft(tagString.split(":")[1]);
 		Tag<Material> tag = tagRegistry.getTags().get(namespacedKey);
-		if(tag == null)
+		if (tag == null)
 		{
 			throw new InternalTagMisconfigurationException("Invalid tag " + namespacedKey);
 		}
 		return tag.getValues();
 	}
+
 }

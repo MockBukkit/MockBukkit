@@ -16,6 +16,7 @@ import java.util.Base64;
  */
 public class PlayerTexturesMock implements PlayerTextures
 {
+
 	private static final String PROPERTY_NAME = "textures";
 	private final PlayerProfileMock profile;
 
@@ -182,4 +183,5 @@ public class PlayerTexturesMock implements PlayerTextures
 		ProfileProperty property = new ProfileProperty(PROPERTY_NAME, base64Encoded);
 		this.profile.setProperty(property);
 	}
+
 }

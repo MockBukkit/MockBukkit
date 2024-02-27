@@ -105,4 +105,5 @@ public abstract class AbstractProjectileMock extends EntityMock implements Proje
 	{
 		throw new UnimplementedOperationException();
 	}
+
 }
