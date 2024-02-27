@@ -16,7 +16,6 @@ import com.google.gson.JsonElement;
 import io.papermc.paper.entity.TeleportFlag;
 import io.papermc.paper.threadedregions.scheduler.EntityScheduler;
 import net.kyori.adventure.audience.MessageType;
-import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
@@ -50,7 +49,6 @@ import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.BoundingBox;
-import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
@@ -112,6 +110,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 
 	private final EntityData entityData;
 	private CreatureSpawnEvent.SpawnReason spawnReason = CreatureSpawnEvent.SpawnReason.CUSTOM;
+
 	/**
 	 * Constructs a new EntityMock on the provided {@link ServerMock} with a specified {@link UUID}.
 	 *
@@ -604,7 +603,8 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		return entityData.getWidth(this.getSubType(), this.getEntityState());
 	}
 
-	protected JsonElement getEntityProperty(String field){
+	protected JsonElement getEntityProperty(String field)
+	{
 		return this.entityData.getValueFromKey(field, this.getSubType(), this.getEntityState());
 	}
 
@@ -1448,4 +1448,5 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	{
 		this.spawnReason = spawnReason;
 	}
+
 }

@@ -412,7 +412,7 @@ public class BlockMock implements Block
 	@Override
 	public boolean isSolid()
 	{
-		if(InternalTag.SOLID_BLOCKS.isTagged(this.getType()))
+		if (InternalTag.SOLID_BLOCKS.isTagged(this.getType()))
 		{
 			return true;
 		}

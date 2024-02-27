@@ -237,6 +237,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 
 	/**
 	 * Simulate damage to this entity and throw an event.
+	 *
 	 * @param amount <p>The amount of damage to be done</p>
 	 * @param source <p>The damager</p>
 	 * @return <p>The EntityDamageEvent that got thrown</p>
@@ -269,6 +270,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 
 	/**
 	 * Simulate damage to this entity and throw an event
+	 *
 	 * @param amount <p>The amount of damage to be done</p>
 	 * @param source <p>The damager</p>
 	 * @return <p>The event that got thrown</p>
@@ -285,7 +287,8 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 			damageType = DamageType.GENERIC;
 		}
 		DamageSource.Builder damageSourceBuilder = DamageSource.builder(damageType);
-		if(source != null){
+		if (source != null)
+		{
 			damageSourceBuilder.withDamageLocation(source.getLocation()).withDirectEntity(source);
 		}
 		DamageSource damageSource = damageSourceBuilder.build();

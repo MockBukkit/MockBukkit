@@ -56,8 +56,9 @@ public class MockInternalPotionData implements PotionType.InternalPotionData
 			throw new FileNotFoundException(path);
 		}
 
-		try(BufferedReader reader = new BufferedReader(
-				new InputStreamReader(MockBukkit.class.getResourceAsStream(path), StandardCharsets.UTF_8))){
+		try (BufferedReader reader = new BufferedReader(
+				new InputStreamReader(MockBukkit.class.getResourceAsStream(path), StandardCharsets.UTF_8)))
+		{
 			JsonElement jsonElement = JsonParser.parseReader(reader);
 			return jsonElement.getAsJsonObject();
 		}
@@ -72,7 +73,8 @@ public class MockInternalPotionData implements PotionType.InternalPotionData
 	@Override
 	public List<PotionEffect> getPotionEffects()
 	{
-		if(potionEffects == null){
+		if (potionEffects == null)
+		{
 			throw new UnimplementedOperationException("Unimplemented potion: " + namespacedKey);
 		}
 		return potionEffects;
@@ -102,9 +104,11 @@ public class MockInternalPotionData implements PotionType.InternalPotionData
 		return maxLevel;
 	}
 
-	private List<PotionEffect> getPotionEffectFromData(JsonObject data){
+	private List<PotionEffect> getPotionEffectFromData(JsonObject data)
+	{
 		List<PotionEffect> potionEffectsList = new ArrayList<>();
-		for(JsonElement potionEffectData : data.get("effects").getAsJsonArray()){
+		for (JsonElement potionEffectData : data.get("effects").getAsJsonArray())
+		{
 			JsonObject potionEffectDataObject = potionEffectData.getAsJsonObject();
 			NamespacedKey potionEffectTypeKey = Preconditions.checkNotNull(NamespacedKey.fromString(potionEffectDataObject.get("type").getAsString()));
 			PotionEffectType potionEffectType = Registry.POTION_EFFECT_TYPE.get(potionEffectTypeKey);
@@ -113,7 +117,7 @@ public class MockInternalPotionData implements PotionType.InternalPotionData
 			boolean ambient = potionEffectDataObject.get("ambient").getAsBoolean();
 			boolean particles = potionEffectDataObject.get("particles").getAsBoolean();
 			boolean icon = potionEffectDataObject.get("icon").getAsBoolean();
-			PotionEffect potionEffect = new PotionEffect(potionEffectType,duration,amplifier,ambient,particles,icon);
+			PotionEffect potionEffect = new PotionEffect(potionEffectType, duration, amplifier, ambient, particles, icon);
 			potionEffectsList.add(potionEffect);
 		}
 		return potionEffectsList;

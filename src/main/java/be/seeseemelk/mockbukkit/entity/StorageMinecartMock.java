@@ -14,7 +14,7 @@ import java.util.UUID;
 public class StorageMinecartMock extends LootableMinecart implements StorageMinecart
 {
 
-	private Inventory inventory;
+	private final Inventory inventory;
 
 	/**
 	 * Constructs a new {@link LootableMinecart} on the provided {@link ServerMock} with a specified {@link UUID}.
@@ -25,7 +25,7 @@ public class StorageMinecartMock extends LootableMinecart implements StorageMine
 	public StorageMinecartMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
-		inventory = server.createInventory(this, 3*9);
+		inventory = server.createInventory(this, 3 * 9);
 	}
 
 	@Override

@@ -215,7 +215,7 @@ public class AllayMock extends CreatureMock implements Allay
 	@Override
 	public @Nullable Allay duplicateAllay()
 	{
-		Allay allay = (Allay) this.getWorld().spawn(this.getLocation(), Allay.class,null,
+		Allay allay = this.getWorld().spawn(this.getLocation(), Allay.class, null,
 				CreatureSpawnEvent.SpawnReason.DUPLICATION);
 		allay.resetDuplicationCooldown();
 		this.resetDuplicationCooldown();
