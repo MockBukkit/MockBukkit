@@ -43,7 +43,9 @@ public class GlowSquidMockTest
 	@Test
 	void testSetDarkTicksRemaining_Negative_ThrowsException()
 	{
-		Assertions.assertThrows(IllegalArgumentException.class, () -> glowSquid.setDarkTicksRemaining(-1));
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			glowSquid.setDarkTicksRemaining(-1);
+		});
 	}
 
 	@Test

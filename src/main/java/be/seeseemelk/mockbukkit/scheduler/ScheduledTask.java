@@ -149,8 +149,7 @@ public class ScheduledTask implements BukkitTask, BukkitWorker
 	 * This is used to bypass the #isCancelled check if it gets updated before the task is run.
 	 */
 	@ApiStatus.Internal
-	protected void submitted()
-	{
+	protected void submitted() {
 		submitted = true;
 	}
 

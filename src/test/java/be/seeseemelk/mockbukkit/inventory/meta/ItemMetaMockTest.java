@@ -563,8 +563,7 @@ class ItemMetaMockTest
 	}
 
 	@Test
-	void testDestroyableKeysSet()
-	{
+	void testDestroyableKeysSet() {
 		Set<Namespaced> expectedKeys = Set.of(
 				Material.CAKE.getKey(),
 				Material.CHEST.getKey(),
@@ -575,8 +574,7 @@ class ItemMetaMockTest
 	}
 
 	@Test
-	void testPlaceableKeys()
-	{
+	void testPlaceableKeys() {
 		Set<Namespaced> expectedKeys = Set.of(
 				Material.ACACIA_PRESSURE_PLATE.getKey(),
 				Material.BLACK_WOOL.getKey(),
@@ -587,8 +585,7 @@ class ItemMetaMockTest
 	}
 
 	@Test
-	void testGetCanPlaceOn()
-	{
+	void testGetCanPlaceOn() {
 		Set<Namespaced> expectedKeys = Set.of(
 				Material.ACACIA_PRESSURE_PLATE.getKey(),
 				Material.BLACK_WOOL.getKey(),
@@ -603,8 +600,7 @@ class ItemMetaMockTest
 	}
 
 	@Test
-	void testSetCanPlaceOn()
-	{
+	void testSetCanPlaceOn() {
 		Set<Material> expectedKeys = Set.of(
 				Material.ACACIA_PRESSURE_PLATE,
 				Material.BLACK_WOOL,
@@ -674,8 +670,7 @@ class ItemMetaMockTest
 
 
 	@Test
-	void testGetCanDestroy()
-	{
+	void testGetCanDestroy() {
 		Set<Namespaced> expectedKeys = Set.of(
 				Material.ACACIA_PRESSURE_PLATE.getKey(),
 				Material.BLACK_WOOL.getKey(),
@@ -690,8 +685,7 @@ class ItemMetaMockTest
 	}
 
 	@Test
-	void testSetCanDestroy()
-	{
+	void testSetCanDestroy() {
 		Set<Material> expectedKeys = Set.of(
 				Material.ACACIA_PRESSURE_PLATE,
 				Material.BLACK_WOOL,

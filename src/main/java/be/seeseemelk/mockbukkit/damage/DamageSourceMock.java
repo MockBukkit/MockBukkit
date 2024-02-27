@@ -76,8 +76,7 @@ public class DamageSourceMock implements DamageSource
 	@Override
 	public boolean scalesWithDifficulty()
 	{
-		return switch(this.damageType.getDamageScaling())
-		{
+		return switch(this.damageType.getDamageScaling()){
 			case NEVER -> false;
 			case WHEN_CAUSED_BY_LIVING_NON_PLAYER ->
 					this.causingEntity instanceof LivingEntity && !(this.causingEntity instanceof Player);

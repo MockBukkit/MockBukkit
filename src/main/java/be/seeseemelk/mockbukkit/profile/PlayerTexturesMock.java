@@ -39,8 +39,7 @@ public class PlayerTexturesMock implements PlayerTextures
 		timestamp = 0L;
 	}
 
-	public PlayerTexturesMock(@Nonnull PlayerProfileMock profile)
-	{
+	public PlayerTexturesMock(@Nonnull PlayerProfileMock profile) {
 		this.profile = profile;
 	}
 
@@ -122,21 +121,18 @@ public class PlayerTexturesMock implements PlayerTextures
 	}
 
 	@Nullable
-	ProfileProperty getProperty()
-	{
+	ProfileProperty getProperty() {
 		return profile.getProperty(PROPERTY_NAME);
 	}
 
 	@Override
-	public int hashCode()
-	{
+	public int hashCode() {
 		ProfileProperty property = getProperty();
 		return (property == null) ? 0 : property.hashCode();
 	}
 
 	@Override
-	public boolean equals(Object obj)
-	{
+	public boolean equals(Object obj) {
 		if (this == obj) return true;
 		if (!(obj instanceof PlayerTextures)) return false;
 

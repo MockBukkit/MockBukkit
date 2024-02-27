@@ -285,8 +285,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 			damageType = DamageType.GENERIC;
 		}
 		DamageSource.Builder damageSourceBuilder = DamageSource.builder(damageType);
-		if(source != null)
-		{
+		if(source != null){
 			damageSourceBuilder.withDamageLocation(source.getLocation()).withDirectEntity(source);
 		}
 		DamageSource damageSource = damageSourceBuilder.build();

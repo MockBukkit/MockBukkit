@@ -193,83 +193,71 @@ class FishHookMockTest
 	}
 
 	@Test
-	void testDefaultMinLureTime()
-	{
+	void testDefaultMinLureTime() {
 		assertEquals(20, hook.getMinLureTime());
 	}
 
 	@Test
-	void testDefaultMaxLureTime()
-	{
+	void testDefaultMaxLureTime() {
 		assertEquals(80, hook.getMaxLureTime());
 	}
 
     @Test
-    void setMinLureTime()
-	{
+    void setMinLureTime() {
 		hook.setMinLureTime(50);
 		assertEquals(50, hook.getMinLureTime());
     }
 
     @Test
-    void setMaxLureTime()
-	{
+    void setMaxLureTime() {
 		hook.setMaxLureTime(50);
 		assertEquals(50, hook.getMaxLureTime());
     }
 
     @Test
-    void setLureTime()
-	{
+    void setLureTime() {
 		hook.setLureTime(50, 100);
 		assertEquals(50, hook.getMinLureTime());
 		assertEquals(100, hook.getMaxLureTime());
     }
 
 	@Test
-	void testDefaultMinLureAngle()
-	{
+	void testDefaultMinLureAngle() {
 		assertEquals(0, hook.getMinLureAngle());
 	}
 
 	@Test
-	void testDefaultMaxLureAngle()
-	{
+	void testDefaultMaxLureAngle() {
 		assertEquals(360, hook.getMaxLureAngle());
 	}
 
     @Test
-    void setMinLureAngle()
-	{
+    void setMinLureAngle() {
 		hook.setMinLureAngle(50);
 		assertEquals(50, hook.getMinLureAngle());
     }
 
     @Test
-    void setMaxLureAngle()
-	{
+    void setMaxLureAngle() {
 		hook.setMaxLureAngle(50);
 		assertEquals(50, hook.getMaxLureAngle());
     }
 
     @Test
-    void setLureAngle()
-	{
+    void setLureAngle() {
 		hook.setLureAngle(50, 100);
 		assertEquals(50, hook.getMinLureAngle());
 		assertEquals(100, hook.getMaxLureAngle());
     }
 
     @Test
-    void setSkyInfluenced()
-	{
+    void setSkyInfluenced() {
 		hook.setSkyInfluenced(false);
 		assertFalse(hook.isSkyInfluenced());
     }
 
     @Test
-    void setRainInfluenced()
-	{
+    void setRainInfluenced() {
 		hook.setRainInfluenced(false);
 		assertFalse(hook.isRainInfluenced());
     }

@@ -14,22 +14,19 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockBukkitExtension.class)
-class MagmaCubeMockTest
-{
+class MagmaCubeMockTest{
 
 	@MockBukkitInject
 	private ServerMock serverMock;
 	private MagmaCube magmaCubeMock;
 
 	@BeforeEach
-	void setUp()
-	{
+	void setUp() {
 		magmaCubeMock = new MagmaCubeMock(serverMock, UUID.randomUUID());
 	}
 
 	@Test
-	void testGetType()
-	{
+	void testGetType() {
 		assertEquals(EntityType.MAGMA_CUBE, magmaCubeMock.getType());
 	}
 

@@ -58,11 +58,9 @@ public class TNTPrimedMock extends EntityMock implements TNTPrimed
 	@Override
 	public void setSource(@Nullable Entity source)
 	{
-		if(source instanceof LivingEntity)
-		{
+		if(source instanceof LivingEntity) {
 			this.source = source;
-		} else
-		{
+		} else {
 			this.source = null;
 		}
 	}
@@ -119,8 +117,7 @@ public class TNTPrimedMock extends EntityMock implements TNTPrimed
 	public void tick(int ticks)
 	{
 		setFuseTicks(getFuseTicks() - ticks);
-		if(getFuseTicks() <= 0)
-		{
+		if(getFuseTicks() <= 0) {
 			explode();
 			this.remove();
 		}

@@ -604,8 +604,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		return entityData.getWidth(this.getSubType(), this.getEntityState());
 	}
 
-	protected JsonElement getEntityProperty(String field)
-	{
+	protected JsonElement getEntityProperty(String field){
 		return this.entityData.getValueFromKey(field, this.getSubType(), this.getEntityState());
 	}
 
