@@ -18,7 +18,7 @@ import java.util.UUID;
  *
  * @see ContainerMock
  */
-public class DropperMock extends ContainerMock implements Dropper
+public class DropperMock extends LootableContainerMock implements Dropper
 {
 
 	/**
@@ -56,34 +56,6 @@ public class DropperMock extends ContainerMock implements Dropper
 	}
 
 	@Override
-	public void setLootTable(LootTable table)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public LootTable getLootTable()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setSeed(long seed)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public long getSeed()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	protected @NotNull InventoryMock createInventory()
 	{
 		return new DropperInventoryMock(this);
@@ -97,76 +69,6 @@ public class DropperMock extends ContainerMock implements Dropper
 
 	@Override
 	public void drop()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean isRefillEnabled()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean hasBeenFilled()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean canPlayerLoot(@NotNull UUID player)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean hasPlayerLooted(@NotNull UUID player)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable Long getLastLooted(@NotNull UUID player)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean setHasPlayerLooted(@NotNull UUID player, boolean looted)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean hasPendingRefill()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public long getLastFilled()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public long getNextRefill()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public long setNextRefill(long refillAt)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
