@@ -1,6 +1,8 @@
 package be.seeseemelk.mockbukkit;
 
+import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 import org.bukkit.Bukkit;
+import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.InvalidDescriptionException;
 import org.bukkit.plugin.InvalidPluginException;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -13,6 +15,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 
 /**
@@ -174,8 +178,15 @@ public class MockBukkit
 	public static <T extends JavaPlugin> @NotNull T load(@NotNull Class<T> plugin, Object @NotNull ... parameters)
 	{
 		ensureMocking();
-		JavaPlugin instance = mock.getPluginManager().loadPlugin(plugin, parameters);
-		mock.getPluginManager().enablePlugin(instance);
+		PluginManagerMock pluginManager = mock.getPluginManager();
+		JavaPlugin instance = pluginManager.loadPlugin(plugin, parameters);
+		List<Permission> permissionList = instance.getDescription().getPermissions();
+		List<Permission> permissionsToLoad = new ArrayList<>();
+		permissionList.stream().filter(permission -> pluginManager.getPermission(permission.getName()) == null)
+				.forEach(permissionsToLoad::add);
+
+		pluginManager.addPermissions(permissionsToLoad);
+		pluginManager.enablePlugin(instance);
 		return plugin.cast(instance);
 	}
 
