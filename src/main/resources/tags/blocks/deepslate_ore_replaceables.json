@@ -1,7 +1,7 @@
 {
     "replace": false,
     "values": [
-        "minecraft:deepslate",
-        "minecraft:tuff"
+        "minecraft:tuff",
+        "minecraft:deepslate"
     ]
 }

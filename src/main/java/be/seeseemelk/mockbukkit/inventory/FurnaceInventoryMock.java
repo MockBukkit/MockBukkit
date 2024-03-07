@@ -12,6 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -97,7 +98,7 @@ public class FurnaceInventoryMock extends InventoryMock implements FurnaceInvent
 
 		static @NotNull Set<Material> getFuels()
 		{
-			Set<Material> fuels = Tag.LOGS.getValues();
+			Set<Material> fuels = new HashSet<>(Tag.LOGS.getValues());
 			fuels.addAll(Tag.PLANKS.getValues());
 			fuels.addAll(Tag.WOODEN_TRAPDOORS.getValues());
 			fuels.addAll(Tag.WOODEN_DOORS.getValues());

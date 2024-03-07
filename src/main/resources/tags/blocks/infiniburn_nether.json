@@ -1,6 +1,7 @@
 {
     "replace": false,
     "values": [
-        "#minecraft:infiniburn_overworld"
+        "minecraft:netherrack",
+        "minecraft:magma_block"
     ]
 }

@@ -1,0 +1,9 @@
+{
+    "replace": false,
+    "values": [
+        "minecraft:stripped_cherry_wood",
+        "minecraft:cherry_wood",
+        "minecraft:stripped_cherry_log",
+        "minecraft:cherry_log"
+    ]
+}

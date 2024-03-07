@@ -1,7 +1,7 @@
 {
     "replace": false,
     "values": [
-        "minecraft:campfire",
-        "minecraft:soul_campfire"
+        "minecraft:soul_campfire",
+        "minecraft:campfire"
     ]
 }

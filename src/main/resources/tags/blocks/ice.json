@@ -1,9 +1,9 @@
 {
     "replace": false,
     "values": [
-        "minecraft:ice",
+        "minecraft:frosted_ice",
         "minecraft:packed_ice",
         "minecraft:blue_ice",
-        "minecraft:frosted_ice"
+        "minecraft:ice"
     ]
 }

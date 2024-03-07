@@ -1,0 +1,8 @@
+{
+    "replace": false,
+    "values": [
+        "minecraft:magma_cube",
+        "minecraft:strider",
+        "minecraft:blaze"
+    ]
+}

@@ -1,9 +1,10 @@
 {
     "replace": false,
     "values": [
-        "minecraft:bedrock",
         "minecraft:spawner",
+        "minecraft:reinforced_deepslate",
         "minecraft:chest",
-        "minecraft:end_portal_frame"
+        "minecraft:end_portal_frame",
+        "minecraft:bedrock"
     ]
 }
