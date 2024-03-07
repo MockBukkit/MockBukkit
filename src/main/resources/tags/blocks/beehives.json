@@ -1,7 +1,7 @@
 {
     "replace": false,
     "values": [
-        "minecraft:bee_nest",
-        "minecraft:beehive"
+        "minecraft:beehive",
+        "minecraft:bee_nest"
     ]
 }

@@ -1,0 +1,19 @@
+{
+    "replace": false,
+    "values": [
+        "minecraft:mangrove_log",
+        "minecraft:spruce_log",
+        "minecraft:stone",
+        "minecraft:iron_ore",
+        "minecraft:dark_oak_log",
+        "minecraft:cherry_log",
+        "minecraft:copper_ore",
+        "minecraft:packed_ice",
+        "minecraft:birch_log",
+        "minecraft:coal_ore",
+        "minecraft:acacia_log",
+        "minecraft:jungle_log",
+        "minecraft:oak_log",
+        "minecraft:emerald_ore"
+    ]
+}
