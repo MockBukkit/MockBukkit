@@ -955,11 +955,9 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		{
 			return false;
 		}
-		EntityMock previousVehicle = this.vehicle;
-		this.vehicle = null;
-		if (!previousVehicle.tryRemovingPassenger(this))
+		if (this.vehicle.tryRemovingPassenger(this))
 		{
-			this.vehicle = previousVehicle;
+			this.vehicle = null;
 		}
 		return true;
 	}
