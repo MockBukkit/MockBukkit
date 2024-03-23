@@ -66,6 +66,12 @@ public class MushroomCowMock extends CowMock implements MushroomCow
 	}
 
 	@Override
+	public boolean addEffectToNextStew(@NotNull SuspiciousEffectEntry suspiciousEffectEntry, boolean overwrite)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public boolean removeEffectFromNextStew(@NotNull PotionEffectType type)
 	{
 		throw new UnimplementedOperationException();
