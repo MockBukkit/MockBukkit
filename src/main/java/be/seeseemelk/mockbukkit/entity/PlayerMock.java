@@ -365,13 +365,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	protected @NotNull BlockDamageEvent simulateBlockDamagePure(@NotNull Block block)
 	{
 		Preconditions.checkNotNull(block, "Block cannot be null");
-		BlockDamageEvent event = new BlockDamageEvent(this, block, getItemInHand(), false);
+		BlockDamageEvent event = new BlockDamageEvent(this, block, block.getFace(), getItemInHand(), false);
 		Bukkit.getPluginManager().callEvent(event);
 		return event;
 	}
 
 	/**
-	 * Simulates the player damaging a block. Note that this method does not anything unless the player is in survival
+	 * Simulates the player damaging a block. Note that this method does not do anything unless the player is in survival
 	 * mode. If {@code InstaBreak} is set to true by an event handler, a {@link BlockBreakEvent} is immediately fired.
 	 * The result will then still be whether or not the {@link BlockDamageEvent} was cancelled or not, not the later
 	 * {@link BlockBreakEvent}.
