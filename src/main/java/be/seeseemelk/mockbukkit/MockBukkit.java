@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.InvalidDescriptionException;
 import org.bukkit.plugin.InvalidPluginException;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
@@ -144,11 +145,12 @@ public class MockBukkit
 	 *
 	 * @param jarFile Path to the jar.
 	 * @throws InvalidPluginException If an exception occurred while loading a plugin.
+	 * @return An instance of the plugin's main class.
 	 */
 	@SuppressWarnings("deprecation")
-	public static void loadJar(@NotNull File jarFile) throws InvalidPluginException
+	public static Plugin loadJar(@NotNull File jarFile) throws InvalidPluginException
 	{
-		mock.getPluginManager().loadPlugin(jarFile);
+		return mock.getPluginManager().loadPlugin(jarFile);
 	}
 
 	/**
