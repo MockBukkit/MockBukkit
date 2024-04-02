@@ -14,6 +14,7 @@ public class GameEventMock extends GameEvent
 	{
 		this.key = NamespacedKey.fromString(data.get("key").getAsString());
 	}
+
 	@Override
 	public @NotNull NamespacedKey getKey()
 	{

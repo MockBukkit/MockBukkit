@@ -77,6 +77,7 @@ public class BedMock extends TileStateMock implements Bed
 	}
 
 	@Override
+	@Deprecated(forRemoval = true, since = "1.19")
 	public void setColor(DyeColor color)
 	{
 		throw new UnsupportedOperationException("Must set block type to appropriate bed colour");

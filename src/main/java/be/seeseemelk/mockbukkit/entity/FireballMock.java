@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import org.bukkit.entity.Fireball;
 import org.bukkit.util.Vector;
@@ -42,6 +43,20 @@ public class FireballMock extends ProjectileMock implements Fireball
 	public @NotNull Vector getDirection()
 	{
 		return this.direction;
+	}
+
+	@Override
+	public void setPower(@NotNull Vector power)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Vector getPower()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

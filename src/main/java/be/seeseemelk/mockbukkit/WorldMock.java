@@ -5,13 +5,17 @@ import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import be.seeseemelk.mockbukkit.entity.AllayMock;
 import be.seeseemelk.mockbukkit.entity.AreaEffectCloudMock;
 import be.seeseemelk.mockbukkit.entity.ArmorStandMock;
+import be.seeseemelk.mockbukkit.entity.ArrowMock;
 import be.seeseemelk.mockbukkit.entity.AxolotlMock;
 import be.seeseemelk.mockbukkit.entity.BatMock;
 import be.seeseemelk.mockbukkit.entity.BeeMock;
 import be.seeseemelk.mockbukkit.entity.BlazeMock;
+import be.seeseemelk.mockbukkit.entity.BlockDisplayMock;
+import be.seeseemelk.mockbukkit.entity.BoatMock;
 import be.seeseemelk.mockbukkit.entity.CamelMock;
 import be.seeseemelk.mockbukkit.entity.CatMock;
 import be.seeseemelk.mockbukkit.entity.CaveSpiderMock;
+import be.seeseemelk.mockbukkit.entity.ChestBoatMock;
 import be.seeseemelk.mockbukkit.entity.ChickenMock;
 import be.seeseemelk.mockbukkit.entity.CodMock;
 import be.seeseemelk.mockbukkit.entity.CommandMinecartMock;
@@ -39,11 +43,14 @@ import be.seeseemelk.mockbukkit.entity.GoatMock;
 import be.seeseemelk.mockbukkit.entity.GuardianMock;
 import be.seeseemelk.mockbukkit.entity.HopperMinecartMock;
 import be.seeseemelk.mockbukkit.entity.HorseMock;
+import be.seeseemelk.mockbukkit.entity.ItemDisplayMock;
 import be.seeseemelk.mockbukkit.entity.ItemEntityMock;
 import be.seeseemelk.mockbukkit.entity.LargeFireballMock;
+import be.seeseemelk.mockbukkit.entity.LeashHitchMock;
 import be.seeseemelk.mockbukkit.entity.LlamaMock;
 import be.seeseemelk.mockbukkit.entity.LlamaSpitMock;
 import be.seeseemelk.mockbukkit.entity.MagmaCubeMock;
+import be.seeseemelk.mockbukkit.entity.MarkerMock;
 import be.seeseemelk.mockbukkit.entity.MobMock;
 import be.seeseemelk.mockbukkit.entity.MuleMock;
 import be.seeseemelk.mockbukkit.entity.MushroomCowMock;
@@ -51,6 +58,7 @@ import be.seeseemelk.mockbukkit.entity.OcelotMock;
 import be.seeseemelk.mockbukkit.entity.PandaMock;
 import be.seeseemelk.mockbukkit.entity.ParrotMock;
 import be.seeseemelk.mockbukkit.entity.PigMock;
+import be.seeseemelk.mockbukkit.entity.PigZombieMock;
 import be.seeseemelk.mockbukkit.entity.PolarBearMock;
 import be.seeseemelk.mockbukkit.entity.PoweredMinecartMock;
 import be.seeseemelk.mockbukkit.entity.PufferFishMock;
@@ -58,17 +66,23 @@ import be.seeseemelk.mockbukkit.entity.RabbitMock;
 import be.seeseemelk.mockbukkit.entity.RideableMinecartMock;
 import be.seeseemelk.mockbukkit.entity.SalmonMock;
 import be.seeseemelk.mockbukkit.entity.SheepMock;
+import be.seeseemelk.mockbukkit.entity.SilverfishMock;
 import be.seeseemelk.mockbukkit.entity.SkeletonHorseMock;
 import be.seeseemelk.mockbukkit.entity.SkeletonMock;
 import be.seeseemelk.mockbukkit.entity.SlimeMock;
 import be.seeseemelk.mockbukkit.entity.SmallFireballMock;
+import be.seeseemelk.mockbukkit.entity.SnowballMock;
 import be.seeseemelk.mockbukkit.entity.SpawnerMinecartMock;
+import be.seeseemelk.mockbukkit.entity.SpectralArrowMock;
 import be.seeseemelk.mockbukkit.entity.SpiderMock;
 import be.seeseemelk.mockbukkit.entity.SquidMock;
 import be.seeseemelk.mockbukkit.entity.StorageMinecartMock;
 import be.seeseemelk.mockbukkit.entity.StrayMock;
 import be.seeseemelk.mockbukkit.entity.TadpoleMock;
+import be.seeseemelk.mockbukkit.entity.ThrownExpBottleMock;
+import be.seeseemelk.mockbukkit.entity.TridentMock;
 import be.seeseemelk.mockbukkit.entity.TropicalFishMock;
+import be.seeseemelk.mockbukkit.entity.TurtleMock;
 import be.seeseemelk.mockbukkit.entity.WardenMock;
 import be.seeseemelk.mockbukkit.entity.WitherSkeletonMock;
 import be.seeseemelk.mockbukkit.entity.WitherSkullMock;
@@ -81,8 +95,11 @@ import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
 import com.destroystokyo.paper.HeightmapType;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
+import io.papermc.paper.block.fluid.FluidData;
 import io.papermc.paper.event.world.WorldGameRuleChangeEvent;
+import io.papermc.paper.math.Position;
 import io.papermc.paper.world.MoonPhase;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2LongOpenHashMap;
 import org.bukkit.BlockChangeDelegate;
 import org.bukkit.Bukkit;
@@ -94,14 +111,17 @@ import org.bukkit.FluidCollisionMode;
 import org.bukkit.GameEvent;
 import org.bukkit.GameRule;
 import org.bukkit.HeightMap;
+import org.bukkit.Instrument;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Note;
 import org.bukkit.Particle;
 import org.bukkit.Raid;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.StructureType;
+import org.bukkit.Tag;
 import org.bukkit.TreeType;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
@@ -111,6 +131,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.data.BlockData;
+import org.bukkit.block.data.Waterlogged;
 import org.bukkit.boss.DragonBattle;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Allay;
@@ -122,9 +143,12 @@ import org.bukkit.entity.Axolotl;
 import org.bukkit.entity.Bat;
 import org.bukkit.entity.Bee;
 import org.bukkit.entity.Blaze;
+import org.bukkit.entity.BlockDisplay;
+import org.bukkit.entity.Boat;
 import org.bukkit.entity.Camel;
 import org.bukkit.entity.Cat;
 import org.bukkit.entity.CaveSpider;
+import org.bukkit.entity.ChestBoat;
 import org.bukkit.entity.Chicken;
 import org.bukkit.entity.Cod;
 import org.bukkit.entity.Cow;
@@ -154,6 +178,7 @@ import org.bukkit.entity.Guardian;
 import org.bukkit.entity.Hanging;
 import org.bukkit.entity.Horse;
 import org.bukkit.entity.Item;
+import org.bukkit.entity.ItemDisplay;
 import org.bukkit.entity.ItemFrame;
 import org.bukkit.entity.LargeFireball;
 import org.bukkit.entity.LeashHitch;
@@ -162,6 +187,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Llama;
 import org.bukkit.entity.LlamaSpit;
 import org.bukkit.entity.MagmaCube;
+import org.bukkit.entity.Marker;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Mule;
 import org.bukkit.entity.MushroomCow;
@@ -169,6 +195,7 @@ import org.bukkit.entity.Ocelot;
 import org.bukkit.entity.Panda;
 import org.bukkit.entity.Parrot;
 import org.bukkit.entity.Pig;
+import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.PolarBear;
 import org.bukkit.entity.Projectile;
@@ -176,16 +203,22 @@ import org.bukkit.entity.PufferFish;
 import org.bukkit.entity.Rabbit;
 import org.bukkit.entity.Salmon;
 import org.bukkit.entity.Sheep;
+import org.bukkit.entity.Silverfish;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.entity.SkeletonHorse;
 import org.bukkit.entity.Slime;
 import org.bukkit.entity.SmallFireball;
+import org.bukkit.entity.Snowball;
 import org.bukkit.entity.SpawnCategory;
+import org.bukkit.entity.SpectralArrow;
 import org.bukkit.entity.Spider;
 import org.bukkit.entity.Squid;
 import org.bukkit.entity.Stray;
 import org.bukkit.entity.Tadpole;
+import org.bukkit.entity.ThrownExpBottle;
+import org.bukkit.entity.Trident;
 import org.bukkit.entity.TropicalFish;
+import org.bukkit.entity.Turtle;
 import org.bukkit.entity.Warden;
 import org.bukkit.entity.WaterMob;
 import org.bukkit.entity.WitherSkeleton;
@@ -210,14 +243,15 @@ import org.bukkit.event.world.TimeSkipEvent;
 import org.bukkit.generator.BiomeProvider;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator;
+import org.bukkit.generator.structure.GeneratedStructure;
 import org.bukkit.generator.structure.Structure;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.messaging.StandardMessenger;
+import org.bukkit.util.BiomeSearchResult;
 import org.bukkit.util.BoundingBox;
-import org.bukkit.util.Consumer;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.StructureSearchResult;
 import org.bukkit.util.Vector;
@@ -237,6 +271,8 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -286,6 +322,7 @@ public class WorldMock implements World
 	private boolean getKeepSpawnInMemory = true;
 
 	private final Object2LongOpenHashMap<SpawnCategory> ticksPerSpawn = new Object2LongOpenHashMap<>();
+	private final Object2IntOpenHashMap<SpawnCategory> spawnLimits = new Object2IntOpenHashMap<>();
 
 	/**
 	 * Creates a new mock world.
@@ -322,6 +359,7 @@ public class WorldMock implements World
 		{
 			this.pvp = this.server.getServerConfiguration().isPvpEnabled();
 			this.ticksPerSpawn.putAll(this.server.getServerConfiguration().getTicksPerSpawn());
+			this.spawnLimits.putAll(this.server.getServerConfiguration().getSpawnLimits());
 		}
 		else
 		{
@@ -334,6 +372,13 @@ public class WorldMock implements World
 			ticksPerSpawn.put(SpawnCategory.WATER_UNDERGROUND_CREATURE, 1);
 			ticksPerSpawn.put(SpawnCategory.WATER_ANIMAL, 1);
 			ticksPerSpawn.put(SpawnCategory.AMBIENT, 1);
+
+			spawnLimits.put(SpawnCategory.MONSTER, 70);
+			spawnLimits.put(SpawnCategory.ANIMAL, 10);
+			spawnLimits.put(SpawnCategory.WATER_ANIMAL, 5);
+			spawnLimits.put(SpawnCategory.WATER_AMBIENT, 20);
+			spawnLimits.put(SpawnCategory.WATER_UNDERGROUND_CREATURE, 5);
+			spawnLimits.put(SpawnCategory.AMBIENT, 15);
 		}
 
 		// Set the default gamerule values.
@@ -417,7 +462,7 @@ public class WorldMock implements World
 	 */
 	public WorldMock()
 	{
-		this(Material.GRASS, 4);
+		this(Material.GRASS_BLOCK, 4);
 	}
 
 	/**
@@ -487,6 +532,13 @@ public class WorldMock implements World
 	public int getPlayerCount()
 	{
 		return getPlayers().size();
+	}
+
+	@Override
+	public boolean hasStructureAt(@NotNull Position position, @NotNull Structure structure)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -711,36 +763,32 @@ public class WorldMock implements World
 	@Override
 	public int getHighestBlockYAt(int x, int z)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getHighestBlockYAt(x, z, HeightMap.MOTION_BLOCKING);
 	}
 
 	@Override
 	public int getHighestBlockYAt(@NotNull Location location)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getHighestBlockYAt(location.getBlockX(), location.getBlockZ());
 	}
 
 	@Override
 	public @NotNull Block getHighestBlockAt(int x, int z)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getHighestBlockAt(x, z, HeightMap.MOTION_BLOCKING);
 	}
 
 	@Override
 	public @NotNull Block getHighestBlockAt(Location location)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getHighestBlockAt(location, HeightMap.MOTION_BLOCKING);
 	}
 
 	@Override
-	@Deprecated(since = "1.15")
+	@Deprecated(forRemoval = true, since = "1.15")
+	@ApiStatus.ScheduledForRemoval(inVersion = "1.21")
 	public int getHighestBlockYAt(int x, int z, @NotNull HeightmapType heightmap) throws UnsupportedOperationException
 	{
-		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
@@ -858,14 +906,20 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public @NotNull ItemEntityMock dropItem(@NotNull Location loc, @NotNull ItemStack item, @Nullable Consumer<Item> function)
+	public @NotNull Item dropItem(@NotNull Location loc, @NotNull ItemStack item)
 	{
-		Preconditions.checkNotNull(loc, "The provided location must not be null.");
+		return dropItem(loc, item, null);
+	}
+
+	@Override
+	public @NotNull Item dropItem(@NotNull Location location, @NotNull ItemStack item, @Nullable Consumer<? super Item> function)
+	{
+		Preconditions.checkNotNull(location, "The provided location must not be null.");
 		Preconditions.checkNotNull(item, "Cannot drop items that are null.");
 		Preconditions.checkArgument(!item.getType().isAir(), "Cannot drop air.");
 
 		ItemEntityMock entity = new ItemEntityMock(server, UUID.randomUUID(), item);
-		entity.setLocation(loc);
+		entity.setLocation(location);
 
 		if (function != null)
 		{
@@ -879,13 +933,13 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public @NotNull ItemEntityMock dropItem(@NotNull Location loc, @NotNull ItemStack item)
+	public @NotNull Item dropItemNaturally(@NotNull Location loc, @NotNull ItemStack item)
 	{
-		return dropItem(loc, item, null);
+		return dropItemNaturally(loc, item, null);
 	}
 
 	@Override
-	public @NotNull ItemEntityMock dropItemNaturally(@NotNull Location location, @NotNull ItemStack item, @Nullable Consumer<Item> function)
+	public @NotNull Item dropItemNaturally(@NotNull Location location, @NotNull ItemStack item, @Nullable Consumer<? super Item> function)
 	{
 		Preconditions.checkNotNull(location, "The provided location must not be null.");
 
@@ -901,12 +955,6 @@ public class WorldMock implements World
 		loc.setZ(loc.getZ() + zs);
 
 		return dropItem(loc, item, function);
-	}
-
-	@Override
-	public @NotNull ItemEntityMock dropItemNaturally(@NotNull Location loc, @NotNull ItemStack item)
-	{
-		return dropItemNaturally(loc, item, null);
 	}
 
 	@Override
@@ -932,7 +980,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public boolean generateTree(Location location, Random random, TreeType type, Predicate<BlockState> statePredicate)
+	public boolean generateTree(Location location, Random random, TreeType type, Predicate<? super BlockState> statePredicate)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -944,19 +992,13 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz, Consumer<T> function) throws IllegalArgumentException
-	{
-		return this.spawn(location, clazz, function, CreatureSpawnEvent.SpawnReason.CUSTOM);
-	}
-
-	@Override
-	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz, boolean randomizeData, Consumer<T> function) throws IllegalArgumentException
+	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz, boolean randomizeData, @Nullable Consumer<? super T> function) throws IllegalArgumentException
 	{
 		return this.spawn(location, clazz, function, CreatureSpawnEvent.SpawnReason.CUSTOM, randomizeData, true);
 	}
 
 	@Override
-	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz, Consumer<T> function, CreatureSpawnEvent.@NotNull SpawnReason reason) throws IllegalArgumentException
+	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz, @Nullable Consumer<? super T> function, CreatureSpawnEvent.@NotNull SpawnReason reason) throws IllegalArgumentException
 	{
 		return this.spawn(location, clazz, function, reason, true, true);
 	}
@@ -974,7 +1016,7 @@ public class WorldMock implements World
 	 * @return The spawned entity.
 	 */
 	@SuppressWarnings("unchecked")
-	public <T extends Entity> @NotNull T spawn(@Nullable Location location, @Nullable Class<T> clazz, @Nullable Consumer<T> function, CreatureSpawnEvent.@NotNull SpawnReason reason, boolean randomizeData, boolean callSpawnEvent)
+	public <T extends Entity> @NotNull T spawn(@Nullable Location location, @Nullable Class<T> clazz, @Nullable Consumer<? super T> function, CreatureSpawnEvent.@NotNull SpawnReason reason, boolean randomizeData, boolean callSpawnEvent)
 	{
 		Preconditions.checkNotNull(location, "Location cannot be null");
 		Preconditions.checkNotNull(clazz, "Class cannot be null");
@@ -983,6 +1025,7 @@ public class WorldMock implements World
 		EntityMock entity = this.mockEntity(location, clazz, randomizeData);
 
 		entity.setLocation(location);
+		entity.setSpawnReason(reason);
 
 		if (entity instanceof MobMock mob)
 		{
@@ -1302,6 +1345,14 @@ public class WorldMock implements World
 		{
 			return new AreaEffectCloudMock(server, UUID.randomUUID());
 		}
+		else if (clazz == Boat.class)
+		{
+			return new BoatMock(server, UUID.randomUUID());
+		}
+		else if (clazz == ChestBoat.class)
+		{
+			return new ChestBoatMock(server, UUID.randomUUID());
+		}
 		else if (clazz == EnderPearl.class)
 		{
 			return new EnderPearlMock(server, UUID.randomUUID());
@@ -1349,6 +1400,54 @@ public class WorldMock implements World
 		else if (clazz == Endermite.class)
 		{
 			return new EndermiteMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Silverfish.class)
+		{
+			return new SilverfishMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Turtle.class)
+		{
+			return new TurtleMock(server, UUID.randomUUID());
+		}
+		else if (clazz == ThrownExpBottle.class)
+		{
+			return new ThrownExpBottleMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Snowball.class)
+		{
+			return new SnowballMock(server, UUID.randomUUID());
+		}
+		else if (clazz == LeashHitch.class)
+		{
+			return new LeashHitchMock(server, UUID.randomUUID());
+		}
+		else if (clazz == PigZombie.class)
+		{
+			return new PigZombieMock(server, UUID.randomUUID());
+		}
+		else if (clazz == BlockDisplay.class)
+		{
+			return new BlockDisplayMock(server, UUID.randomUUID());
+		}
+		else if (clazz == ItemDisplay.class)
+		{
+			return new ItemDisplayMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Arrow.class)
+		{
+			return new ArrowMock(server, UUID.randomUUID());
+		}
+		else if (clazz == SpectralArrow.class)
+		{
+			return new SpectralArrowMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Trident.class)
+		{
+			return new TridentMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Marker.class)
+		{
+			return new MarkerMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}
@@ -1477,6 +1576,13 @@ public class WorldMock implements World
 	}
 
 	@Override
+	public <T extends Entity> @NotNull T createEntity(@NotNull Location location, @NotNull Class<T> aClass)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull CompletableFuture<Chunk> getChunkAtAsync(int x, int z, boolean gen, boolean urgent)
 	{
 		// TODO Auto-generated method stub
@@ -1498,8 +1604,11 @@ public class WorldMock implements World
 	@Override
 	public @Nullable Entity getEntity(@NotNull UUID uuid)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(uuid != null, "UUID cannot be null");
+		return getEntities().stream()
+				.filter(entity -> entity.getUniqueId().equals(uuid))
+				.findFirst()
+				.orElse(null);
 	}
 
 	@Override
@@ -1730,6 +1839,12 @@ public class WorldMock implements World
 	public @NotNull List<BlockPopulator> getPopulators()
 	{
 		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public <T extends LivingEntity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz, CreatureSpawnEvent.@NotNull SpawnReason spawnReason, boolean randomizeData, @Nullable Consumer<? super T> function) throws IllegalArgumentException
+	{
 		throw new UnimplementedOperationException();
 	}
 
@@ -1979,82 +2094,70 @@ public class WorldMock implements World
 	@Deprecated(since = "1.18")
 	public int getMonsterSpawnLimit()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getSpawnLimit(SpawnCategory.MONSTER);
 	}
 
 	@Override
 	@Deprecated(since = "1.18")
 	public void setMonsterSpawnLimit(int limit)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.setSpawnLimit(SpawnCategory.MONSTER, limit);
 	}
 
 	@Override
 	@Deprecated(since = "1.18")
 	public int getAnimalSpawnLimit()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getSpawnLimit(SpawnCategory.ANIMAL);
 	}
 
 	@Override
 	@Deprecated(since = "1.18")
 	public void setAnimalSpawnLimit(int limit)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.setSpawnLimit(SpawnCategory.ANIMAL, limit);
 	}
 
 	@Override
 	@Deprecated(since = "1.18")
 	public int getWaterAnimalSpawnLimit()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getSpawnLimit(SpawnCategory.WATER_ANIMAL);
 	}
 
 	@Override
 	@Deprecated(since = "1.18")
 	public void setWaterAnimalSpawnLimit(int limit)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.setSpawnLimit(SpawnCategory.WATER_ANIMAL, limit);
 	}
 
 	@Override
 	@Deprecated(since = "1.18")
 	public int getWaterUndergroundCreatureSpawnLimit()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		return this.getSpawnLimit(SpawnCategory.WATER_UNDERGROUND_CREATURE);
 	}
 
 	@Override
 	@Deprecated(since = "1.18")
 	public void setWaterUndergroundCreatureSpawnLimit(int limit)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		this.setSpawnLimit(SpawnCategory.WATER_UNDERGROUND_CREATURE, limit);
 	}
 
 	@Override
 	@Deprecated(since = "1.18")
 	public int getAmbientSpawnLimit()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getSpawnLimit(SpawnCategory.AMBIENT);
 	}
 
 	@Override
 	@Deprecated(since = "1.18")
 	public void setAmbientSpawnLimit(int limit)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.setSpawnLimit(SpawnCategory.AMBIENT, limit);
 	}
 
 	@Override
@@ -2344,7 +2447,7 @@ public class WorldMock implements World
 
 	@Override
 	public @NotNull Collection<Entity> getNearbyEntities(Location location, double x, double y, double z,
-														 Predicate<Entity> filter)
+														 Predicate<? super Entity> filter)
 	{
 		return getNearbyEntities(BoundingBox.of(location, x, y, z), filter);
 	}
@@ -2356,7 +2459,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public @NotNull Collection<Entity> getNearbyEntities(BoundingBox boundingBox, Predicate<Entity> filter)
+	public @NotNull Collection<Entity> getNearbyEntities(BoundingBox boundingBox, Predicate<? super Entity> filter)
 	{
 		return getEntities().stream()
 				.filter(entity -> filter == null || filter.test(entity))
@@ -2380,7 +2483,7 @@ public class WorldMock implements World
 
 	@Override
 	public RayTraceResult rayTraceEntities(Location start, Vector direction, double maxDistance,
-										   Predicate<Entity> filter)
+										   Predicate<? super Entity> filter)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -2388,7 +2491,42 @@ public class WorldMock implements World
 
 	@Override
 	public RayTraceResult rayTraceEntities(Location start, Vector direction, double maxDistance, double raySize,
-										   Predicate<Entity> filter)
+										   Predicate<? super Entity> filter)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable BiomeSearchResult locateNearestBiome(@NotNull Location origin, int radius, int horizontalInterval, int verticalInterval, @NotNull Biome... biomes)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable BiomeSearchResult locateNearestBiome(@NotNull Location origin, int radius, @NotNull Biome... biomes)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable RayTraceResult rayTrace(@NotNull Position start, @NotNull Vector direction, double maxDistance, @NotNull FluidCollisionMode fluidCollisionMode, boolean ignorePassableBlocks, double raySize, @Nullable Predicate<? super Entity> filter, @Nullable Predicate<? super Block> canCollide)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable RayTraceResult rayTraceBlocks(@NotNull Position start, @NotNull Vector direction, double maxDistance, @NotNull FluidCollisionMode fluidCollisionMode, boolean ignorePassableBlocks, @Nullable Predicate<? super Block> canCollide)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable RayTraceResult rayTraceEntities(@NotNull Position start, @NotNull Vector direction, double maxDistance, double raySize, @Nullable Predicate<? super Entity> filter)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -2420,7 +2558,7 @@ public class WorldMock implements World
 	@Override
 	public RayTraceResult rayTrace(Location start, Vector direction, double maxDistance,
 								   FluidCollisionMode fluidCollisionMode, boolean ignorePassableBlocks, double raySize,
-								   Predicate<Entity> filter)
+								   Predicate<? super Entity> filter)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -2480,12 +2618,18 @@ public class WorldMock implements World
 	}
 
 	@Override
+	public <T extends Entity> @NotNull T addEntity(@NotNull T t)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	@Deprecated(forRemoval = true)
 	@ApiStatus.ScheduledForRemoval(inVersion = "1.21")
 	public boolean isUltrawarm()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.isUltraWarm();
 	}
 
 	@Override
@@ -2527,15 +2671,13 @@ public class WorldMock implements World
 	@ApiStatus.ScheduledForRemoval(inVersion = "1.21")
 	public boolean doesRespawnAnchorWork()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return isRespawnAnchorWorks();
 	}
 
 	@Override
 	public boolean isFixedTime()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.environment == Environment.THE_END || this.environment == Environment.NETHER;
 	}
 
 	@Override
@@ -2649,32 +2791,66 @@ public class WorldMock implements World
 		throw new UnimplementedOperationException();
 	}
 
+
 	@Override
-	public int getHighestBlockYAt(int x, int z, HeightMap heightMap)
+	public int getHighestBlockYAt(int x, int z, @NotNull HeightMap heightMap)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(heightMap);
+		return getHighestBlockYAt(x, z, (block) -> isOfHeightMap(block, heightMap));
+	}
+
+	private int getHighestBlockYAt(int x, int z, Function<Block, Boolean> filter)
+	{
+		for (int y = this.getMaxHeight() - 1; y >= this.getMinHeight(); y--)
+		{
+			Block block = this.getBlockAt(x, y, z);
+			if (filter.apply(block))
+			{
+				return block.getY();
+			}
+		}
+		return this.getMinHeight() - 1;
+	}
+
+	private boolean isOfHeightMap(Block block, HeightMap heightMap)
+	{
+		return switch (heightMap)
+		{
+			case MOTION_BLOCKING ->
+			{
+				boolean isWaterLogged = block.getBlockData() instanceof Waterlogged waterlogged && waterlogged.isWaterlogged();
+				yield block.isSolid() || isWaterLogged || block.isLiquid();
+			}
+			case MOTION_BLOCKING_NO_LEAVES ->
+			{
+				boolean isWaterLogged = block.getBlockData() instanceof Waterlogged waterlogged && waterlogged.isWaterlogged();
+				yield (block.isSolid() || isWaterLogged || block.isLiquid()) && !Tag.LEAVES.isTagged(block.getType());
+			}
+			case OCEAN_FLOOR -> block.isSolid();
+			case OCEAN_FLOOR_WG ->
+					(block.getY() <= this.grassHeight && this.defaultBlock.isSolid()) || block.getY() == 0;
+			case WORLD_SURFACE_WG ->
+					(block.getY() <= this.grassHeight && !this.defaultBlock.isAir()) || block.getY() == 0;
+			case WORLD_SURFACE -> !block.getType().isAir();
+		};
 	}
 
 	@Override
-	public int getHighestBlockYAt(Location location, HeightMap heightMap)
+	public int getHighestBlockYAt(Location location, @NotNull HeightMap heightMap)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getHighestBlockYAt(location.getBlockX(), location.getBlockZ(), heightMap);
 	}
 
 	@Override
-	public @NotNull Block getHighestBlockAt(int x, int z, HeightMap heightMap)
+	public @NotNull Block getHighestBlockAt(int x, int z, @NotNull HeightMap heightMap)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getBlockAt(x, getHighestBlockYAt(x, z), z);
 	}
 
 	@Override
-	public @NotNull Block getHighestBlockAt(Location location, HeightMap heightMap)
+	public @NotNull Block getHighestBlockAt(Location location, @NotNull HeightMap heightMap)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return getBlockAt(location.getBlockX(), getHighestBlockYAt(location), location.getBlockZ());
 	}
 
 	@NotNull
@@ -2742,6 +2918,13 @@ public class WorldMock implements World
 	{
 		Block block = this.getBlockAt(x, y, z);
 		return block.getState();
+	}
+
+	@Override
+	public @NotNull FluidData getFluidData(int i, int i1, int i2)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@NotNull
@@ -2812,7 +2995,7 @@ public class WorldMock implements World
 	}
 
 	@Override
-	public boolean generateTree(@NotNull Location location, @NotNull Random random, @NotNull TreeType type, @Nullable Consumer<BlockState> stateConsumer)
+	public boolean generateTree(@NotNull Location location, @NotNull Random random, @NotNull TreeType type, @Nullable Consumer<? super BlockState> stateConsumer)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -2835,8 +3018,12 @@ public class WorldMock implements World
 	@Override
 	public int getLogicalHeight()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return switch (environment)
+		{
+			case NETHER, THE_END -> 256;
+			case NORMAL -> 384;
+			case CUSTOM -> throw new UnimplementedOperationException("We don't have support for Datapacks");
+		};
 	}
 
 	@Override
@@ -2884,8 +3071,7 @@ public class WorldMock implements World
 	@Override
 	public boolean isRespawnAnchorWorks()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return environment == Environment.NETHER;
 	}
 
 	@Override
@@ -2989,17 +3175,17 @@ public class WorldMock implements World
 	}
 
 	@Override
+	@Deprecated(since = "1.18")
 	public int getWaterAmbientSpawnLimit()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getSpawnLimit(SpawnCategory.WATER_AMBIENT);
 	}
 
 	@Override
+	@Deprecated(since = "1.18")
 	public void setWaterAmbientSpawnLimit(int limit)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.setSpawnLimit(SpawnCategory.WATER_AMBIENT, limit);
 	}
 
 	@Override
@@ -3055,6 +3241,18 @@ public class WorldMock implements World
 	}
 
 	@Override
+	public @NotNull Collection<GeneratedStructure> getStructures(int x, int z)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Collection<GeneratedStructure> getStructures(int x, int z, @NotNull Structure structure)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull Spigot spigot()
 	{
 		// TODO Auto-generated method stub
@@ -3104,12 +3302,63 @@ public class WorldMock implements World
 	@Override
 	public int getSpawnLimit(@NotNull SpawnCategory spawnCategory)
 	{
+		Preconditions.checkArgument(spawnCategory != null, "SpawnCategory cannot be null");
+		Preconditions.checkArgument(spawnCategory != SpawnCategory.MISC,
+				"SpawnCategory.%s are not supported", spawnCategory);
+
+		return this.getSpawnLimitUnsafe(spawnCategory);
+	}
+
+	public final int getSpawnLimitUnsafe(final SpawnCategory spawnCategory)
+	{
+		int limit = this.spawnLimits.getOrDefault(spawnCategory, -1);
+		if (limit < 0)
+		{
+			limit = this.server.getSpawnLimit(spawnCategory);
+		}
+		return limit;
+	}
+
+	@Override
+	public void setSpawnLimit(@NotNull SpawnCategory spawnCategory, int limit)
+	{
+		Preconditions.checkArgument(spawnCategory != null, "SpawnCategory cannot be null");
+		Preconditions.checkArgument(spawnCategory != SpawnCategory.MISC,
+				"SpawnCategory.%s are not supported", spawnCategory);
+
+		this.spawnLimits.put(spawnCategory, limit);
+	}
+
+	@Override
+	public void playNote(@NotNull Location loc, @NotNull Instrument instrument, @NotNull Note note)
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public void setSpawnLimit(@NotNull SpawnCategory spawnCategory, int limit)
+	public void playSound(@NotNull Entity entity, @NotNull String sound, @NotNull SoundCategory category, float volume, float pitch, long seed)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void playSound(@NotNull Entity entity, @NotNull Sound sound, @NotNull SoundCategory category, float volume, float pitch, long seed)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void playSound(@NotNull Location location, @NotNull String sound, @NotNull SoundCategory category, float volume, float pitch, long seed)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void playSound(@NotNull Location location, @NotNull Sound sound, @NotNull SoundCategory category, float volume, float pitch, long seed)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

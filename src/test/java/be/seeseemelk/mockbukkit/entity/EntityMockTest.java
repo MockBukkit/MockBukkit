@@ -21,6 +21,7 @@ import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityTeleportEvent;
 import org.bukkit.event.entity.EntityToggleSwimEvent;
@@ -537,12 +538,49 @@ class EntityMockTest
 	}
 
 	@Test
-	void entityDamage_Event_Triggered()
+	void testIsInvisibleDefault()
 	{
 		World world = new WorldMock(Material.GRASS_BLOCK, 10);
 		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+
+		assertFalse(zombie.isInvisible());
+	}
+
+	@Test
+	void testSetInvisible()
+	{
+		World world = new WorldMock(Material.GRASS_BLOCK, 10);
+		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+
+		zombie.setInvisible(true);
+		assertTrue(zombie.isInvisible());
+	}
+
+	@Test
+	void hasNoPhysics_Default_False() {
+		World world = new WorldMock(Material.GRASS_BLOCK, 10);
+		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+
+		assertFalse(zombie.hasNoPhysics());
+	}
+
+	@Test
+	void setNoPhysics()
+	{
+		World world = new WorldMock(Material.GRASS_BLOCK, 10);
+		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+
+		zombie.setNoPhysics(true);
+		assertTrue(zombie.hasNoPhysics());
+	}
+
+	@Test
+	void entityDamage_Event_Triggered()
+	{
+		World world = new WorldMock(Material.GRASS_BLOCK, 10);
+		LivingEntityMock zombie = (LivingEntityMock) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
 		PlayerMock player1 = server.addPlayer();
-		zombie.damage(4, player1);
+		zombie.simulateDamage(4, player1);
 		server.getPluginManager().assertEventFired(EntityDamageByEntityEvent.class);
 	}
 
@@ -712,9 +750,9 @@ class EntityMockTest
 	void lastDamageCause()
 	{
 		World world = new WorldMock(Material.GRASS_BLOCK, 10);
-		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+		LivingEntityMock zombie = (LivingEntityMock) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
 		assertNull(zombie.getLastDamageCause());
-		zombie.damage(1);
+		zombie.simulateDamage(1, (Entity) null);
 		assertNotNull(zombie.getLastDamageCause());
 	}
 
@@ -1118,6 +1156,19 @@ class EntityMockTest
 	{
 		EntityMock entity = (EntityMock) world.spawnEntity(new Location(world, 0, 0, 0), EntityType.BAT);
 		assertDoesNotThrow(entity::getWidth);
+	}
+
+	@Test
+	void testGetEntitySpawnReasonDefault()
+	{
+		assertEquals(CreatureSpawnEvent.SpawnReason.CUSTOM, entity.getEntitySpawnReason());
+	}
+
+	@Test
+	void testSetEntitySpawnReason()
+	{
+		entity.setSpawnReason(CreatureSpawnEvent.SpawnReason.NATURAL);
+		assertEquals(CreatureSpawnEvent.SpawnReason.NATURAL, entity.getEntitySpawnReason());
 	}
 
 }

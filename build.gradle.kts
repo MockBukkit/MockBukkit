@@ -25,12 +25,12 @@ dependencies {
 	api("io.papermc.paper:paper-api:${property("paper.api.full-version")}")
 
 	// Dependencies for Unit Tests
-	implementation("org.junit.jupiter:junit-jupiter:5.10.1")
+	implementation("org.junit.jupiter:junit-jupiter:5.10.2")
 
 	// General utilities for the project
-	implementation("net.kyori:adventure-platform-bungeecord:4.3.1")
+	implementation("net.kyori:adventure-platform-bungeecord:4.3.2")
 	implementation("org.jetbrains:annotations:24.1.0")
-	implementation("net.bytebuddy:byte-buddy:1.14.9")
+	implementation("net.bytebuddy:byte-buddy:1.14.13")
 
 	// LibraryLoader dependencies
 	implementation("org.apache.maven:maven-resolver-provider:3.8.5")
@@ -77,7 +77,7 @@ tasks {
 	}
 
 	check {
-		 dependsOn(jacocoTestReport)
+		dependsOn(jacocoTestReport)
 	}
 
 	jacocoTestReport {
@@ -115,7 +115,7 @@ sourceSets {
 
 java {
 	toolchain {
-		languageVersion.set(JavaLanguageVersion.of(17))
+		languageVersion.set(JavaLanguageVersion.of(property("java.version").toString().toInt()))
 	}
 }
 
@@ -159,7 +159,7 @@ publishing {
 						name.set("Sebastiaan de Schaetzen")
 						email.set("sebastiaan.de.schaetzen@gmail.com")
 					}
-					developer{
+					developer {
 						id.set("thebusybiscuit")
 						name.set("TheBusyBiscuit")
 					}

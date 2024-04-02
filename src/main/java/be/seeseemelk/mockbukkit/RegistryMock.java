@@ -1,9 +1,12 @@
 package be.seeseemelk.mockbukkit;
 
+import be.seeseemelk.mockbukkit.damage.DamageTypeMock;
+import be.seeseemelk.mockbukkit.enchantments.EnchantmentMock;
 import be.seeseemelk.mockbukkit.generator.structure.StructureMock;
 import be.seeseemelk.mockbukkit.generator.structure.StructureTypeMock;
 import be.seeseemelk.mockbukkit.inventory.meta.trim.TrimMaterialMock;
 import be.seeseemelk.mockbukkit.inventory.meta.trim.TrimPatternMock;
+import be.seeseemelk.mockbukkit.potion.MockPotionEffectType;
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -15,10 +18,13 @@ import org.bukkit.Keyed;
 import org.bukkit.MusicInstrument;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
+import org.bukkit.damage.DamageType;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.generator.structure.Structure;
 import org.bukkit.generator.structure.StructureType;
 import org.bukkit.inventory.meta.trim.TrimMaterial;
 import org.bukkit.inventory.meta.trim.TrimPattern;
+import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -102,7 +108,22 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		{
 			return GameEventMock::new;
 		}
-		else throw new UnimplementedOperationException();
+		else if (tClass == Enchantment.class)
+		{
+			return EnchantmentMock::new;
+		}
+		else if (tClass == PotionEffectType.class)
+		{
+			return MockPotionEffectType::new;
+		}
+		else if (tClass == DamageType.class)
+		{
+			return DamageTypeMock::from;
+		}
+		else
+		{
+			throw new UnimplementedOperationException();
+		}
 	}
 
 	public static <T extends Keyed> Registry<?> createRegistry(Class<T> tClass)
@@ -170,9 +191,9 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 
 	private static List<Class<? extends Keyed>> getOutlierKeyedClasses()
 	{
-		return List.of(Structure.class,
+		return List.of(Structure.class, PotionEffectType.class,
 				StructureType.class, TrimMaterial.class, TrimPattern.class,
-				MusicInstrument.class, GameEvent.class);
+				MusicInstrument.class, GameEvent.class, Enchantment.class, DamageType.class);
 	}
 
 	@Override

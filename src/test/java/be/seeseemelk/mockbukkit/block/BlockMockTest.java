@@ -4,7 +4,6 @@ import be.seeseemelk.mockbukkit.ChunkCoordinate;
 import be.seeseemelk.mockbukkit.ChunkMock;
 import be.seeseemelk.mockbukkit.Coordinate;
 import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
 import org.bukkit.Location;
@@ -19,7 +18,10 @@ import org.bukkit.block.data.type.TrapDoor;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
@@ -100,6 +102,65 @@ class BlockMockTest
 	{
 		block.setType(Material.JUNGLE_TRAPDOOR);
 		assertInstanceOf(TrapDoor.class, block.getBlockData());
+	}
+
+	@Test
+	void getLightLevel()
+	{
+		block.setLightFromSky((byte) 15);
+		assertEquals(15, block.getLightLevel());
+		block.setLightFromSky((byte) 5);
+		assertEquals(5, block.getLightLevel());
+		block.setLightFromBlocks((byte) 15);
+		assertEquals(15, block.getLightLevel());
+	}
+
+	@Test
+	void getLightFromSky()
+	{
+		assertEquals(15, block.getLightFromSky());
+		block.setLightFromSky((byte) 0);
+		assertEquals(0, block.getLightFromSky());
+	}
+
+	@ParameterizedTest
+	@ValueSource(bytes = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 })
+	void setLightFromSky_GivenValidValues(byte lightLevel)
+	{
+		assertDoesNotThrow(() -> block.setLightFromSky(lightLevel));
+	}
+
+	@ParameterizedTest
+	@ValueSource(bytes = { -1, 16 })
+	void setLightFromSky_GivenInvalidValues(byte invalidLightLevel)
+	{
+		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> block.setLightFromSky(invalidLightLevel));
+
+		assertEquals("Light level should be between 0 and 15.", e.getMessage());
+	}
+
+	@Test
+	void getLightFromBlocks()
+	{
+		assertEquals(0, block.getLightFromBlocks());
+		block.setLightFromBlocks((byte) 15);
+		assertEquals(15, block.getLightFromBlocks());
+	}
+
+	@ParameterizedTest
+	@ValueSource(bytes = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 })
+	void setLightFromBlocks_GivenValidValues(byte lightLevel)
+	{
+		assertDoesNotThrow(() -> block.setLightFromBlocks(lightLevel));
+	}
+
+	@ParameterizedTest
+	@ValueSource(bytes = { -1, 16 })
+	void setLightFromBlocks_GivenInvalidValues(byte invalidLightLevel)
+	{
+		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> block.setLightFromBlocks(invalidLightLevel));
+
+		assertEquals("Light level should be between 0 and 15.", e.getMessage());
 	}
 
 	@Test
@@ -318,8 +379,8 @@ class BlockMockTest
 	@Test
 	void isSolid_NonSolid()
 	{
-		Block block = new BlockMock(Material.BLACK_BANNER);
+		Block block = new BlockMock(Material.AIR);
 		assertFalse(block.isSolid());
 	}
-  
+
 }

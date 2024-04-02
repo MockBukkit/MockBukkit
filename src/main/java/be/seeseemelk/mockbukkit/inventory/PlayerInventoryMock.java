@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.inventory;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import be.seeseemelk.mockbukkit.entity.HumanEntityMock;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryType;
@@ -292,6 +293,10 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	@Override
 	public void setItemInMainHand(@Nullable ItemStack item, boolean silent)
 	{
+		if (getItemInMainHand().getType() == Material.SHIELD)
+		{
+			((HumanEntityMock) this.getHolder()).setBlocking(false);
+		}
 		setItem(HOTBAR + mainHandSlot, item);
 		// Sounds are not implemented here
 	}
@@ -312,6 +317,10 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	@Override
 	public void setItemInOffHand(@Nullable ItemStack item, boolean silent)
 	{
+		if (getItemInOffHand().getType() == Material.SHIELD)
+		{
+			((HumanEntityMock) this.getHolder()).setBlocking(false);
+		}
 		setItem(OFF_HAND, item);
 	}
 

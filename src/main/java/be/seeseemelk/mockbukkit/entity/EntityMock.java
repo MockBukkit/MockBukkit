@@ -12,10 +12,10 @@ import be.seeseemelk.mockbukkit.entity.data.EntitySubType;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
 import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
 import com.google.common.base.Preconditions;
+import com.google.gson.JsonElement;
 import io.papermc.paper.entity.TeleportFlag;
 import io.papermc.paper.threadedregions.scheduler.EntityScheduler;
 import net.kyori.adventure.audience.MessageType;
-import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
@@ -28,6 +28,7 @@ import org.bukkit.Sound;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntitySnapshot;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -48,8 +49,8 @@ import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.BoundingBox;
-import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.spigotmc.event.entity.EntityDismountEvent;
@@ -93,6 +94,8 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private @Nullable Component customName = null;
 	private boolean customNameVisible = false;
 	private boolean invulnerable;
+	private boolean invisible;
+	private boolean noPhysics;
 	private boolean persistent = true;
 	private boolean glowingFlag = false;
 	private final Queue<Component> messages = new LinkedTransferQueue<>();
@@ -108,6 +111,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private boolean gravity = true;
 
 	private final EntityData entityData;
+	private CreatureSpawnEvent.SpawnReason spawnReason = CreatureSpawnEvent.SpawnReason.CUSTOM;
 
 	/**
 	 * Constructs a new EntityMock on the provided {@link ServerMock} with a specified {@link UUID}.
@@ -601,6 +605,11 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		return entityData.getWidth(this.getSubType(), this.getEntityState());
 	}
 
+	protected JsonElement getEntityProperty(String field)
+	{
+		return this.entityData.getValueFromKey(field, this.getSubType(), this.getEntityState());
+	}
+
 	/**
 	 * Get the current state of this entity
 	 *
@@ -770,6 +779,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	public @NotNull List<Entity> getPassengers()
 	{
 		return Collections.unmodifiableList(this.passengers);
+	}
+
+	@Override
+	public @NotNull Set<Player> getTrackedBy()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	/**
@@ -1052,6 +1068,30 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
+	public void setInvisible(boolean invisible)
+	{
+		this.invisible = invisible;
+	}
+
+	@Override
+	public boolean isInvisible()
+	{
+		return this.invisible;
+	}
+
+	@Override
+	public void setNoPhysics(boolean noPhysics)
+	{
+		this.noPhysics = noPhysics;
+	}
+
+	@Override
+	public boolean hasNoPhysics()
+	{
+		return noPhysics;
+	}
+
+	@Override
 	public boolean isSilent()
 	{
 		return this.silent;
@@ -1172,6 +1212,34 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
+	public @NotNull Entity copy(@NotNull Location to)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Entity copy()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable EntitySnapshot createSnapshot()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isInWorld()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public Entity.@NotNull Spigot spigot()
 	{
 		return this;
@@ -1222,8 +1290,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public CreatureSpawnEvent.@NotNull SpawnReason getEntitySpawnReason()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.spawnReason;
 	}
 
 	@Override
@@ -1400,6 +1467,12 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	{
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
+	}
+
+	@ApiStatus.Internal
+	public void setSpawnReason(CreatureSpawnEvent.SpawnReason spawnReason)
+	{
+		this.spawnReason = spawnReason;
 	}
 
 }

@@ -332,6 +332,13 @@ public class BlockStateMock implements BlockState
 	}
 
 	@Override
+	public @NotNull BlockState copy()
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public void setBlockData(BlockData data)
 	{
 		this.material = data.getMaterial();
