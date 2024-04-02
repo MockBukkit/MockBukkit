@@ -76,7 +76,7 @@ tasks {
 	}
 
 	check {
-		 dependsOn(jacocoTestReport)
+		dependsOn(jacocoTestReport)
 	}
 
 	jacocoTestReport {
@@ -105,7 +105,7 @@ sourceSets {
 
 java {
 	toolchain {
-		languageVersion.set(JavaLanguageVersion.of(17))
+		languageVersion.set(JavaLanguageVersion.of(property("java.version").toString().toInt()))
 	}
 }
 
@@ -149,7 +149,7 @@ publishing {
 						name.set("Sebastiaan de Schaetzen")
 						email.set("sebastiaan.de.schaetzen@gmail.com")
 					}
-					developer{
+					developer {
 						id.set("thebusybiscuit")
 						name.set("TheBusyBiscuit")
 					}
