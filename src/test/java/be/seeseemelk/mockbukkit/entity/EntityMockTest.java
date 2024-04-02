@@ -538,6 +538,43 @@ class EntityMockTest
 	}
 
 	@Test
+	void testIsInvisibleDefault()
+	{
+		World world = new WorldMock(Material.GRASS_BLOCK, 10);
+		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+
+		assertFalse(zombie.isInvisible());
+	}
+
+	@Test
+	void testSetInvisible()
+	{
+		World world = new WorldMock(Material.GRASS_BLOCK, 10);
+		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+
+		zombie.setInvisible(true);
+		assertTrue(zombie.isInvisible());
+	}
+
+	@Test
+	void hasNoPhysics_Default_False() {
+		World world = new WorldMock(Material.GRASS_BLOCK, 10);
+		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+
+		assertFalse(zombie.hasNoPhysics());
+	}
+
+	@Test
+	void setNoPhysics()
+	{
+		World world = new WorldMock(Material.GRASS_BLOCK, 10);
+		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+
+		zombie.setNoPhysics(true);
+		assertTrue(zombie.hasNoPhysics());
+	}
+
+	@Test
 	void entityDamage_Event_Triggered()
 	{
 		World world = new WorldMock(Material.GRASS_BLOCK, 10);
