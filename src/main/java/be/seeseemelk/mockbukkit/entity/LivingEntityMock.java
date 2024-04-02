@@ -102,7 +102,6 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	private @Nullable Player killer;
 
 	private final Set<ActivePotionEffect> activeEffects = new HashSet<>();
-	private boolean invisible = false;
 	private TriState frictionState = TriState.NOT_SET;
 	private Entity leashHolder;
 
@@ -996,18 +995,6 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	public int getArrowCooldown()
 	{
 		return arrowCooldown;
-	}
-
-	@Override
-	public void setInvisible(boolean invisible)
-	{
-		this.invisible = invisible;
-	}
-
-	@Override
-	public boolean isInvisible()
-	{
-		return this.invisible;
 	}
 
 	@Override
