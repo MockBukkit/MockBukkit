@@ -94,6 +94,8 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	private @Nullable Component customName = null;
 	private boolean customNameVisible = false;
 	private boolean invulnerable;
+	private boolean invisible;
+	private boolean noPhysics;
 	private boolean persistent = true;
 	private boolean glowingFlag = false;
 	private final Queue<Component> messages = new LinkedTransferQueue<>();
@@ -1063,6 +1065,30 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	public boolean isInvulnerable()
 	{
 		return invulnerable;
+	}
+
+	@Override
+	public void setInvisible(boolean invisible)
+	{
+		this.invisible = invisible;
+	}
+
+	@Override
+	public boolean isInvisible()
+	{
+		return this.invisible;
+	}
+
+	@Override
+	public void setNoPhysics(boolean noPhysics)
+	{
+		this.noPhysics = noPhysics;
+	}
+
+	@Override
+	public boolean hasNoPhysics()
+	{
+		return noPhysics;
 	}
 
 	@Override
