@@ -52,6 +52,7 @@ import com.destroystokyo.paper.event.player.PlayerConnectionCloseEvent;
 import com.destroystokyo.paper.event.server.WhitelistToggleEvent;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.google.common.base.Preconditions;
+import io.papermc.paper.ban.BanListType;
 import io.papermc.paper.datapack.DatapackManager;
 import io.papermc.paper.math.Position;
 import io.papermc.paper.threadedregions.scheduler.AsyncScheduler;
@@ -117,6 +118,7 @@ import org.bukkit.inventory.Recipe;
 import org.bukkit.loot.LootTable;
 import org.bukkit.map.MapCursor;
 import org.bukkit.packs.DataPackManager;
+import org.bukkit.packs.ResourcePack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.messaging.Messenger;
@@ -1278,6 +1280,12 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	public boolean isLoggingIPs()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull List<String> getInitialEnabledPacks()
 	{
 		throw new UnimplementedOperationException();
@@ -1300,6 +1308,12 @@ public class ServerMock extends Server.Spigot implements Server
 	public @NotNull ServerTickManager getServerTickManager()
 	{
 		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable ResourcePack getServerResourcePack()
+	{
 		throw new UnimplementedOperationException();
 	}
 
@@ -1727,6 +1741,12 @@ public class ServerMock extends Server.Spigot implements Server
 				})
 				.map(uuid -> this.getOfflinePlayer((UUID) uuid))
 				.collect(Collectors.toSet());
+	}
+
+	@Override
+	public <B extends BanList<E>, E> @NotNull B getBanList(@NotNull BanListType<B> type)
+	{
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

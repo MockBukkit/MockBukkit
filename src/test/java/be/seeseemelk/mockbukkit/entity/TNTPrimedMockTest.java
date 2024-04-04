@@ -58,7 +58,8 @@ class TNTPrimedMockTest
 	}
 
 	@Test
-	void testSetSource() {
+	void testSetSource()
+	{
 		PlayerMock playerMock = server.addPlayer();
 		tntPrimed.setSource(playerMock);
 		assertEquals(playerMock, tntPrimed.getSource());

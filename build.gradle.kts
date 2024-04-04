@@ -29,7 +29,7 @@ dependencies {
 	// General utilities for the project
 	implementation("net.kyori:adventure-platform-bungeecord:4.3.2")
 	implementation("org.jetbrains:annotations:24.1.0")
-	implementation("net.bytebuddy:byte-buddy:1.14.11")
+	implementation("net.bytebuddy:byte-buddy:1.14.13")
 
 	// LibraryLoader dependencies
 	implementation("org.apache.maven:maven-resolver-provider:3.8.5")
@@ -76,7 +76,7 @@ tasks {
 	}
 
 	check {
-		 dependsOn(jacocoTestReport)
+		dependsOn(jacocoTestReport)
 	}
 
 	jacocoTestReport {
@@ -89,7 +89,7 @@ tasks {
 	}
 
 	jacoco {
-		toolVersion = "0.8.11"
+		toolVersion = "0.8.12"
 	}
 }
 
@@ -105,7 +105,7 @@ sourceSets {
 
 java {
 	toolchain {
-		languageVersion.set(JavaLanguageVersion.of(17))
+		languageVersion.set(JavaLanguageVersion.of(property("java.version").toString().toInt()))
 	}
 }
 
@@ -149,7 +149,7 @@ publishing {
 						name.set("Sebastiaan de Schaetzen")
 						email.set("sebastiaan.de.schaetzen@gmail.com")
 					}
-					developer{
+					developer {
 						id.set("thebusybiscuit")
 						name.set("TheBusyBiscuit")
 					}

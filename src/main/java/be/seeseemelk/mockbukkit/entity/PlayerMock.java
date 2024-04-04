@@ -102,6 +102,8 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.messaging.StandardMessenger;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.ApiStatus;
@@ -1501,6 +1503,18 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public void sendPotionEffectChange(@NotNull LivingEntity entity, @NotNull PotionEffect effect)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void sendPotionEffectChangeRemove(@NotNull LivingEntity entity, @NotNull PotionEffectType type)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public void sendMap(@NotNull MapView map)
 	{
 		Preconditions.checkNotNull(map, "Map cannot be null");
@@ -2296,6 +2310,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		setExp(0);
 		setFoodLevel(0);
 
+		setBlocking(false);
 		alive = false;
 	}
 
@@ -2703,6 +2718,12 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void addResourcePack(@NotNull UUID id, @NotNull String url, @Nullable byte[] hash, @Nullable String prompt, boolean force)
+	{
+
 	}
 
 	@Override

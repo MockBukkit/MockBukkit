@@ -61,6 +61,7 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	private float saturation = 5.0F;
 	private int foodLevel = 20;
 	private boolean sleeping;
+	protected boolean blocking;
 
 	/**
 	 * Constructs a new {@link HumanEntityMock} on the provided {@link ServerMock} with a specified {@link UUID}.
@@ -402,8 +403,27 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 	@Override
 	public boolean isBlocking()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return blocking;
+	}
+
+	/**
+	 * Set whether this entity is blocking. If the entity is not holding a shield, this will be ignored.
+	 *
+	 * @param blocking If this entity is blocking
+	 */
+	public void setBlocking(boolean blocking)
+	{
+		if (blocking)
+		{
+			ItemStack offHand = getInventory().getItemInOffHand();
+			ItemStack mainHand = getInventory().getItemInMainHand();
+			if (offHand.getType() != Material.SHIELD && mainHand.getType() != Material.SHIELD)
+			{
+				this.blocking = false;
+				return;
+			}
+		}
+		this.blocking = blocking;
 	}
 
 	@Override
