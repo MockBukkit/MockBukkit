@@ -1,8 +1,11 @@
 package be.seeseemelk.mockbukkit;
 
 import be.seeseemelk.mockbukkit.entity.BatMock;
+import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -127,7 +130,7 @@ class PermissionManagerMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(booleans = {true, false})
+	@ValueSource(booleans = { true, false })
 	void subscribeToDefaultPerms(boolean op)
 	{
 		BatMock bat = new BatMock(serverMock, UUID.randomUUID());
@@ -156,5 +159,65 @@ class PermissionManagerMockTest
 		permissionManager.clearPermissions();
 		assertNull(permissionManager.getPermission(PERMISSION_NODE_1));
 	}
+
+	@ParameterizedTest
+	@ValueSource(strings = {"permission.op", "permission.op.inherited", "permission.false", "permission.false.inherited",
+				"permission.false.inside"})
+	void testPermissionsLoadedFromPlugin_defaultFalse(String node)
+	{
+		JavaPlugin plugin = getTestPlugin();
+		Player player = serverMock.addPlayer();
+		assertFalse(player.hasPermission(node));
+		player.addAttachment(plugin, node, true);
+		assertTrue(player.hasPermission(node));
+	}
+
+	@ParameterizedTest
+	@ValueSource(strings = {"permission.true", "permission.true.inherited"})
+	void testPermissionsLoadedFromPlugin_defaultTrue(String node)
+	{
+		JavaPlugin plugin = getTestPlugin();
+		Player player = serverMock.addPlayer();
+		assertTrue(player.hasPermission(node));
+		player.addAttachment(plugin, node, false);
+		assertFalse(player.hasPermission(node));
+	}
+
+	@ParameterizedTest
+	@ValueSource(strings = {"permission.op", "permission.op.inherited"})
+	void testPermissionsLoadedFromPlugin_defaultOp(String node){
+		JavaPlugin plugin = getTestPlugin();
+		Player player = serverMock.addPlayer();
+		player.setOp(true);
+		assertTrue(player.hasPermission(node));
+		player.setOp(false);
+		assertFalse(player.hasPermission(node));
+	}
+
+	@ParameterizedTest
+	@ValueSource(strings = {"permission.notop", "permission.notop.inside"})
+	void testPermissionsLoadedFromPlugin_defaultNotOp(String node){
+		getTestPlugin();
+		Player player = serverMock.addPlayer();
+		player.setOp(true);
+		assertFalse(player.hasPermission(node));
+		player.setOp(false);
+		assertTrue(player.hasPermission(node));
+	}
+
+	@Test
+	void testPermissionsLoadedFromPlugin_inheritance(){
+		JavaPlugin plugin = getTestPlugin();
+		Player player = serverMock.addPlayer();
+		player.addAttachment(plugin,"permission.false",true);
+		assertTrue(player.hasPermission("permission.false.inherited"));
+	}
+
+	JavaPlugin getTestPlugin()
+	{
+		return MockBukkit.load(be.seeseemelk.testplugin.TestPlugin.class);
+	}
+
+
 
 }
