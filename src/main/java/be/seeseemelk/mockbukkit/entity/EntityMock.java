@@ -1021,7 +1021,8 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		if (this instanceof Vehicle selfVehicle && entity instanceof LivingEntity livingEntity)
 		{
 			// If the event is cancelled or the vehicle has since changed, abort
-			if (!new VehicleExitEvent(selfVehicle, livingEntity).callEvent() || entity.getVehicle() != this)
+			Entity previousVehicle = entity.getVehicle();
+			if (!new VehicleExitEvent(selfVehicle, livingEntity).callEvent() || entity.getVehicle() != previousVehicle)
 			{
 				return false;
 			}
