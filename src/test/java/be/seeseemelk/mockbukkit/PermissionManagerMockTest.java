@@ -215,7 +215,7 @@ class PermissionManagerMockTest
 
 	JavaPlugin getTestPlugin()
 	{
-		return MockBukkit.load(be.seeseemelk.testplugin.TestPlugin.class);
+		return MockBukkit.load(TestPlugin.class);
 	}
 
 

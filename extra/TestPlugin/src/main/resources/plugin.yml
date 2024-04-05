@@ -2,37 +2,4 @@ name: TestPlugin
 main: be.seeseemelk.testplugin.TestPlugin
 version: 0.1.0
 api-version: 1.15
-permissions:
-  permission.op:
-    description: OP
-    default: op
-    children:
-      permission.op.inherited: true
-  permission.true:
-    description: TRUE
-    default: true
-    children:
-      permission.true.inherited: true
-      permission.true.notinherited: false
-  permission.false:
-    description: FALSE
-    default: false
-    children:
-      permission.false.inherited: true
-      permission.false.inside:
-        description: FALSE.inside
-  permission.notop:
-    description: NOTOP
-    default: not op
-    children:
-      permission.notop.inside:
-        description: NOTOP.inside
-  permission.op.inherited:
-    description: OP.inherited
-  permission.true.inherited:
-    description: TRUE.inherited
-  permission.true.notinherited:
-    description: TRUE.notinherited
-  permission.false.inherited:
-    description: FALSE.inherited
 
