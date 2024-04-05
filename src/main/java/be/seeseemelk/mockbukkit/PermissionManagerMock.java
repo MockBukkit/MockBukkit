@@ -34,6 +34,7 @@ public class PermissionManagerMock implements PermissionManager
 	@Override
 	public @Nullable Permission getPermission(@NotNull String name)
 	{
+		Preconditions.checkNotNull(name, "Name cannot be null");
 		return this.permissions.get(name.toLowerCase(Locale.ENGLISH));
 	}
 
@@ -45,11 +46,9 @@ public class PermissionManagerMock implements PermissionManager
 
 	private void addPermission(@NotNull Permission perm, boolean dirtyPermissibles)
 	{
+		Preconditions.checkNotNull(perm, "Permission cannot be null");
 		String name = perm.getName().toLowerCase(Locale.ENGLISH);
-		if (this.permissions.containsKey(name))
-		{
-			throw new IllegalArgumentException("The permission " + name + " is already defined!");
-		}
+		Preconditions.checkArgument(!this.permissions.containsKey(name),"The permission " + name + " is already defined!");
 		this.permissions.put(name, perm);
 		this.calculatePermissionDefault(perm);
 		if (dirtyPermissibles)
@@ -61,12 +60,14 @@ public class PermissionManagerMock implements PermissionManager
 	@Override
 	public void removePermission(@NotNull Permission perm)
 	{
+		Preconditions.checkNotNull(perm, "Permission cannot be null");
 		this.removePermission(perm.getName());
 	}
 
 	@Override
 	public void removePermission(@NotNull String name)
 	{
+		Preconditions.checkNotNull(name, "Name cannot be null");
 		this.permissions.remove(name.toLowerCase(Locale.ENGLISH));
 	}
 
@@ -91,6 +92,8 @@ public class PermissionManagerMock implements PermissionManager
 	@Override
 	public void subscribeToPermission(@NotNull String permission, @NotNull Permissible permissible)
 	{
+		Preconditions.checkNotNull(permission, "Permission cannot be null");
+		Preconditions.checkNotNull(permissible, "Permissible cannot be null");
 		String name = permission.toLowerCase(Locale.ENGLISH);
 		Map<Permissible, Boolean> map = this.permissionSubscriptions.computeIfAbsent(name, key -> new WeakHashMap<>());
 		map.put(permissible, true);
@@ -99,6 +102,8 @@ public class PermissionManagerMock implements PermissionManager
 	@Override
 	public void unsubscribeFromPermission(@NotNull String permission, @NotNull Permissible permissible)
 	{
+		Preconditions.checkNotNull(permission, "Permission cannot be null");
+		Preconditions.checkNotNull(permissible, "Permissible cannot be null");
 		String name = permission.toLowerCase(java.util.Locale.ENGLISH);
 		Map<Permissible, Boolean> map = this.permissionSubscriptions.get(name);
 
@@ -116,6 +121,7 @@ public class PermissionManagerMock implements PermissionManager
 	@Override
 	public @NotNull Set<Permissible> getPermissionSubscriptions(@NotNull String permission)
 	{
+		Preconditions.checkNotNull(permission, "Permission cannot be null");
 		String name = permission.toLowerCase(java.util.Locale.ENGLISH);
 		Map<Permissible, Boolean> map = this.permissionSubscriptions.get(name);
 
@@ -132,6 +138,7 @@ public class PermissionManagerMock implements PermissionManager
 	@Override
 	public void subscribeToDefaultPerms(boolean op, @NotNull Permissible permissible)
 	{
+		Preconditions.checkNotNull(permissible, "Permissible cannot be null");
 		Map<Permissible, Boolean> map = this.defaultSubscriptions.computeIfAbsent(op, k -> new WeakHashMap<>());
 		map.put(permissible, true);
 	}
@@ -139,6 +146,7 @@ public class PermissionManagerMock implements PermissionManager
 	@Override
 	public void unsubscribeFromDefaultPerms(boolean op, @NotNull Permissible permissible)
 	{
+		Preconditions.checkNotNull(permissible, "Permissible cannot be null");
 		Map<Permissible, Boolean> map = this.defaultSubscriptions.get(op);
 		if (map != null)
 		{
@@ -168,7 +176,7 @@ public class PermissionManagerMock implements PermissionManager
 	@Override
 	public @NotNull Set<Permission> getPermissions()
 	{
-		return new HashSet<>(this.permissions.values());
+		return Set.copyOf(this.permissions.values());
 	}
 
 	@Override
