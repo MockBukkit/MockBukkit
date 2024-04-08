@@ -13,6 +13,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -32,7 +33,7 @@ class SwitchMockTest
 	@BeforeEach
 	void setUp()
 	{
-		MockBukkit.mock();
+		MockBukkit.getOrCreateMock();
 		switchMock = new SwitchMock(Material.ACACIA_BUTTON);
 	}
 
@@ -154,7 +155,9 @@ class SwitchMockTest
 
 	private static Stream<Material> getPossibleMaterials()
 	{
-		Set<Material> possibleMaterials = Tag.BUTTONS.getValues();
+		// Tags requires MockBukkit to have been mocked once before
+		MockBukkit.mock();
+		Set<Material> possibleMaterials = new HashSet<>(Tag.BUTTONS.getValues());
 		possibleMaterials.add(Material.LEVER);
 		return Stream.of(possibleMaterials.toArray(new Material[possibleMaterials.size()]));
 	}

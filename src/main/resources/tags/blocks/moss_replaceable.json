@@ -1,8 +1,22 @@
 {
     "replace": false,
     "values": [
-        "#minecraft:base_stone_overworld",
-        "#minecraft:cave_vines",
-        "#minecraft:dirt"
+        "minecraft:diorite",
+        "minecraft:stone",
+        "minecraft:granite",
+        "minecraft:deepslate",
+        "minecraft:rooted_dirt",
+        "minecraft:muddy_mangrove_roots",
+        "minecraft:grass_block",
+        "minecraft:mud",
+        "minecraft:moss_block",
+        "minecraft:podzol",
+        "minecraft:andesite",
+        "minecraft:cave_vines_plant",
+        "minecraft:tuff",
+        "minecraft:mycelium",
+        "minecraft:cave_vines",
+        "minecraft:dirt",
+        "minecraft:coarse_dirt"
     ]
 }
