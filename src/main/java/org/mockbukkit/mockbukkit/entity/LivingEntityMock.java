@@ -48,6 +48,7 @@ import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
+import org.mockbukkit.mockbukkit.simulate.entity.LivingEntitySimulation;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -242,28 +243,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	 */
 	public EntityDamageEvent simulateDamage(double amount, @NotNull DamageSource source)
 	{
-		Map<EntityDamageEvent.DamageModifier, Double> modifiers = new EnumMap<>(EntityDamageEvent.DamageModifier.class);
-		modifiers.put(EntityDamageEvent.DamageModifier.BASE, 1.0);
-		Map<EntityDamageEvent.DamageModifier, Function<Double, Double>> modifierFunctions = new EnumMap<>(
-				EntityDamageEvent.DamageModifier.class);
-		modifierFunctions.put(EntityDamageEvent.DamageModifier.BASE, damage -> damage);
-
-		EntityDamageEvent event;
-		if (source.getDirectEntity() != null)
-		{
-			event = new EntityDamageByEntityEvent(source.getDirectEntity(), this, EntityDamageEvent.DamageCause.ENTITY_ATTACK, source, amount);
-		}
-		else
-		{
-			event = new EntityDamageEvent(this, EntityDamageEvent.DamageCause.CUSTOM, source, amount);
-		}
-		if (event.callEvent())
-		{
-			setLastDamageCause(event);
-			amount = event.getDamage();
-			this.damage(amount);
-		}
-		return event;
+		return new LivingEntitySimulation(this).simulateDamage(amount,source);
 	}
 
 	/**
@@ -274,21 +254,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	 */
 	public EntityDamageEvent simulateDamage(double amount, @Nullable Entity source)
 	{
-		DamageType damageType;
-		if (source != null)
-		{
-			damageType = source instanceof HumanEntity ? DamageType.PLAYER_ATTACK : DamageType.MOB_ATTACK;
-		}
-		else
-		{
-			damageType = DamageType.GENERIC;
-		}
-		DamageSource.Builder damageSourceBuilder = DamageSource.builder(damageType);
-		if(source != null){
-			damageSourceBuilder.withDamageLocation(source.getLocation()).withDirectEntity(source);
-		}
-		DamageSource damageSource = damageSourceBuilder.build();
-		return simulateDamage(amount, damageSource);
+		return new LivingEntitySimulation(this).simulateDamage(amount, source);
 	}
 
 	@Override
