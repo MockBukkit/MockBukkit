@@ -28,6 +28,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	private @Nullable String title;
 	private @NotNull List<String> pages = new ArrayList<>();
 	private @Nullable String author;
+	private @Nullable Generation generation = null;
 
 	/**
 	 * Constructs a new {@link BookMetaMock}.
@@ -299,22 +300,19 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	@Override
 	public boolean hasGeneration()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return generation != null;
 	}
 
 	@Override
 	public Generation getGeneration()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return generation;
 	}
 
 	@Override
 	public void setGeneration(Generation generation)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.generation = generation;
 	}
 
 	@Override
