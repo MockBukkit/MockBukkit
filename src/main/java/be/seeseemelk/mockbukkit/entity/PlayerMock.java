@@ -172,6 +172,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private double healthScale = 20;
 	private Location compassTarget;
 	private @Nullable Location bedSpawnLocation;
+	private @Nullable Location respawnLocation;
 	private @Nullable InetSocketAddress address;
 
 	private final PlayerSpigotMock playerSpigotMock = new PlayerSpigotMock();
@@ -1975,8 +1976,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public @Nullable Location getRespawnLocation()
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.respawnLocation;
 	}
 
 	@Override
@@ -1998,10 +1998,9 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public void setRespawnLocation(@Nullable Location location)
+	public void setRespawnLocation(@Nullable Location loc)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		setRespawnLocation(location, false);
 	}
 
 	@Override
@@ -2014,10 +2013,12 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public void setRespawnLocation(@Nullable Location location, boolean b)
+	public void setRespawnLocation(@Nullable Location loc, boolean b)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		if (force || loc != null )
+		{
+			this.respawnLocation = loc;
+		}
 	}
 
 	@Override
