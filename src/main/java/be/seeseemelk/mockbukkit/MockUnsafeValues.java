@@ -371,6 +371,13 @@ public class MockUnsafeValues implements UnsafeValues
 		}
 	}
 
+	@Override
+	public String getTranslationKey(Attribute attribute)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 	private String handleTranslateItemEdgeCases(Material material)
 	{
 		// edge cases: WHEAT and NETHER_WART are blocks, but still use the "item" prefix (therefore this check has to be done BEFORE the isBlock check below)

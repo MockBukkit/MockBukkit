@@ -185,4 +185,11 @@ public class MockPotionEffectType extends PotionEffectType
 		throw new UnimplementedOperationException();
 	}
 
+	@Override
+	public @NotNull String getTranslationKey()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 }

@@ -2751,6 +2751,13 @@ public class WorldMock implements World
 	}
 
 	@Override
+	public @NotNull Collection<Chunk> getIntersectingChunks(@NotNull BoundingBox box)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public <T extends AbstractArrow> @NotNull T spawnArrow(Location location, Vector direction, float speed, float spread,
 														   Class<T> clazz)
 	{
@@ -2760,6 +2767,13 @@ public class WorldMock implements World
 
 	@Override
 	public Raid locateNearestRaid(Location location, int radius)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Raid getRaid(int id)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
