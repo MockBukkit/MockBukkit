@@ -261,8 +261,6 @@ If you want to see some projects that are using MockBukkit right now, feel free 
   (75+ Unit Tests)
 - [axelrindle/PocketKnife](https://github.com/axelrindle/PocketKnife/tree/main/api/src/test/kotlin)
   (50+ Unit Tests)
-- [JacksonChen666/treecapitator](https://gitlab.com/JacksonChen666/treecapitator/-/tree/master/src/test/java/com/jacksonchen666/treecapitator)
-  (30+ Unit Tests)
 - *and more! (If you want to see your plugin here, open up an issue and we'll consider adding it)*
 
 You can also have a look at our documentation where we outline various examples and tricks on how to use MockBukkit
