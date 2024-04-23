@@ -219,16 +219,4 @@ public class MockPotionEffectType extends PotionEffectType
 		throw new UnimplementedOperationException();
 	}
 
-	@ApiStatus.Internal
-	public static Keyed from(JsonObject data)
-	{
-		NamespacedKey key = NamespacedKey.fromString(data.get("key").getAsString());
-		int id = data.get("id").getAsInt();
-		String name = data.get("name").getAsString();
-		boolean instant = data.get("instant").getAsBoolean();
-		Color color = Color.fromRGB(data.get("rgb").getAsInt());
-		Category category = Category.valueOf(data.get("category").getAsString());
-		return new MockPotionEffectType(key, id, name, instant, color, category);
-	}
-
 }
