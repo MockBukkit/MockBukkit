@@ -33,6 +33,7 @@ import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.BanEntry;
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
+import org.bukkit.Chunk;
 import org.bukkit.DyeColor;
 import org.bukkit.Effect;
 import org.bukkit.GameEvent;
@@ -110,6 +111,7 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
+import org.jetbrains.annotations.Unmodifiable;
 import org.jetbrains.annotations.UnmodifiableView;
 
 import java.net.InetAddress;
@@ -134,6 +136,7 @@ import java.util.Queue;
 import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.LinkedTransferQueue;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Consumer;
@@ -709,6 +712,18 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		if (isSneaking() && !ignorePose)
 			return 1.54D;
 		return 1.62D;
+	}
+
+	@Override
+	public int getItemInUseTicks()
+	{
+		return 0;
+	}
+
+	@Override
+	public void setItemInUseTicks(int ticks)
+	{
+
 	}
 
 	@Override
@@ -2915,6 +2930,48 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public void startUsingItem(@NotNull EquipmentSlot hand)
+	{
+
+	}
+
+	@Override
+	public void completeUsingActiveItem()
+	{
+
+	}
+
+	@Override
+	public int getActiveItemRemainingTime()
+	{
+		return 0;
+	}
+
+	@Override
+	public void setActiveItemRemainingTime(@Range(from = 0L, to = 2147483647L) int ticks)
+	{
+
+	}
+
+	@Override
+	public boolean hasActiveItem()
+	{
+		return false;
+	}
+
+	@Override
+	public int getActiveItemUsedTime()
+	{
+		return 0;
+	}
+
+	@Override
+	public @NotNull EquipmentSlot getActiveItemHand()
+	{
+		return null;
+	}
+
+	@Override
 	public void broadcastSlotBreak(@NotNull EquipmentSlot slot)
 	{
 		// TODO Auto-generated method stub
@@ -2930,6 +2987,27 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 
 	@Override
 	public void resetIdleDuration()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull @Unmodifiable Set<Long> getSentChunkKeys()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull @Unmodifiable Set<Chunk> getSentChunks()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isChunkSent(long chunkKey)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -3106,6 +3184,12 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 			new PlayerChangedWorldEvent(this, previousWorld).callEvent();
 		}
 		return true;
+	}
+
+	@Override
+	public @NotNull CompletableFuture<Boolean> teleportAsync(@NotNull Location loc, PlayerTeleportEvent.@NotNull TeleportCause cause, @NotNull TeleportFlag @NotNull ... teleportFlags)
+	{
+		return null;
 	}
 
 	@Override

@@ -278,4 +278,11 @@ public class EnchantmentMock extends Enchantment
 		return this.key;
 	}
 
+	@Override
+	public @NotNull String getTranslationKey()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 }

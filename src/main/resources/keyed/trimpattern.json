@@ -1,52 +1,100 @@
 {
   "values": [
     {
-      "key": "minecraft:sentry"
+      "key": "minecraft:sentry",
+      "description": {
+        "translate": "trim_pattern.minecraft.sentry"
+      }
     },
     {
-      "key": "minecraft:dune"
+      "key": "minecraft:dune",
+      "description": {
+        "translate": "trim_pattern.minecraft.dune"
+      }
     },
     {
-      "key": "minecraft:coast"
+      "key": "minecraft:coast",
+      "description": {
+        "translate": "trim_pattern.minecraft.coast"
+      }
     },
     {
-      "key": "minecraft:wild"
+      "key": "minecraft:wild",
+      "description": {
+        "translate": "trim_pattern.minecraft.wild"
+      }
     },
     {
-      "key": "minecraft:ward"
+      "key": "minecraft:ward",
+      "description": {
+        "translate": "trim_pattern.minecraft.ward"
+      }
     },
     {
-      "key": "minecraft:eye"
+      "key": "minecraft:eye",
+      "description": {
+        "translate": "trim_pattern.minecraft.eye"
+      }
     },
     {
-      "key": "minecraft:vex"
+      "key": "minecraft:vex",
+      "description": {
+        "translate": "trim_pattern.minecraft.vex"
+      }
     },
     {
-      "key": "minecraft:tide"
+      "key": "minecraft:tide",
+      "description": {
+        "translate": "trim_pattern.minecraft.tide"
+      }
     },
     {
-      "key": "minecraft:snout"
+      "key": "minecraft:snout",
+      "description": {
+        "translate": "trim_pattern.minecraft.snout"
+      }
     },
     {
-      "key": "minecraft:rib"
+      "key": "minecraft:rib",
+      "description": {
+        "translate": "trim_pattern.minecraft.rib"
+      }
     },
     {
-      "key": "minecraft:spire"
+      "key": "minecraft:spire",
+      "description": {
+        "translate": "trim_pattern.minecraft.spire"
+      }
     },
     {
-      "key": "minecraft:wayfinder"
+      "key": "minecraft:wayfinder",
+      "description": {
+        "translate": "trim_pattern.minecraft.wayfinder"
+      }
     },
     {
-      "key": "minecraft:shaper"
+      "key": "minecraft:shaper",
+      "description": {
+        "translate": "trim_pattern.minecraft.shaper"
+      }
     },
     {
-      "key": "minecraft:silence"
+      "key": "minecraft:silence",
+      "description": {
+        "translate": "trim_pattern.minecraft.silence"
+      }
     },
     {
-      "key": "minecraft:raiser"
+      "key": "minecraft:raiser",
+      "description": {
+        "translate": "trim_pattern.minecraft.raiser"
+      }
     },
     {
-      "key": "minecraft:host"
+      "key": "minecraft:host",
+      "description": {
+        "translate": "trim_pattern.minecraft.host"
+      }
     }
   ]
 }
