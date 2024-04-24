@@ -1,4 +1,4 @@
-package org.mockbukkit.mockbukkit.matcher.inventory.holder;
+package org.mockbukkit.mockbukkit.matcher.entity.allay;
 
 import org.bukkit.Material;
 import org.hamcrest.Description;

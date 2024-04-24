@@ -1,4 +1,4 @@
-package org.mockbukkit.mockbukkit.matcher.entity.allay;
+package org.mockbukkit.mockbukkit.matcher.inventory.holder;
 
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;

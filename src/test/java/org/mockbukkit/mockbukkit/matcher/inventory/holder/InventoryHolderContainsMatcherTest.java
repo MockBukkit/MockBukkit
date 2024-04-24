@@ -14,7 +14,7 @@ import org.mockbukkit.testutils.matcher.AbstractMatcherTest;
 
 import java.util.UUID;
 
-import static org.mockbukkit.mockbukkit.matcher.entity.allay.InventoryHolderContainsMatcher.inventoryContains;
+import static org.mockbukkit.mockbukkit.matcher.inventory.holder.InventoryHolderContainsMatcher.inventoryContains;
 
 @ExtendWith(MockBukkitExtension.class)
 class InventoryHolderContainsMatcherTest extends AbstractMatcherTest
