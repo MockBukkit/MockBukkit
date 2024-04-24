@@ -100,6 +100,7 @@ public class CommandResult
 	 *
 	 * @see MessageTarget#nextMessage()
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertNoResponse()
 	{
 		if (sender.nextMessage() != null)
