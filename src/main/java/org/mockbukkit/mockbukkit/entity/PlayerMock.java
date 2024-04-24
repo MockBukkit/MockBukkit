@@ -52,7 +52,6 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Note;
 import org.bukkit.Particle;
-import org.bukkit.Registry;
 import org.bukkit.ServerLinks;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
@@ -65,7 +64,6 @@ import org.bukkit.advancement.Advancement;
 import org.bukkit.advancement.AdvancementProgress;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
 import org.bukkit.block.TileState;
@@ -84,7 +82,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -95,7 +92,6 @@ import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerExpCooldownChangeEvent;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
-import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -106,20 +102,17 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.event.player.PlayerToggleSprintEvent;
-import org.bukkit.event.world.GenericGameEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.potion.PotionType;
 import org.bukkit.scoreboard.Scoreboard;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
@@ -326,29 +319,12 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * probability.
 	 *
 	 * @param consumable                The Item to consume
-	 * @param alwaysInflictPotionEffect Whether to always inflict a potion effect from food, regardless of probability.
-	 *                                  If this is `false` and the food item has a probability to inflict the effect
-	 *                                  lesser than 0, it will not do so. This does not prevent effects from
-	 *                                  being inflicted that have a probability of 1. The value is ignored if the edible
-	 *                                  does not inflict any potion effects.
 	 * @see PlayerMock#simulateConsumeItem(ItemStack)
 	 */
 	@Deprecated
 	public void simulateConsumeItem(@NotNull ItemStack consumable)
 	{
 		consumedItems.add(new PlayerSimulation(this).simulateConsumeItem(consumable));
-	}
-
-	/**
-	 * Simulates a Player consuming an Edible Item. If the edible inflicts status effects, these will be applied
-	 * regardless of their probability.
-	 *
-	 * @param consumable The Item to consume
-	 * @see PlayerMock#simulateConsumeItem(ItemStack, boolean)
-	 */
-	public void simulateConsumeItem(@NotNull ItemStack consumable)
-	{
-		simulateConsumeItem(consumable, true);
 	}
 
 	/**
@@ -747,19 +723,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public boolean hasPlayedBefore()
 	{
 		return server.getPlayerList().hasPlayedBefore(getUniqueId());
-	}
-
-	/**
-	 * No longer used.
-	 *
-	 * @param time N/A.
-	 * @see PlayerListMock#setLastSeen(UUID, long)
-	 * @deprecated Moved to {@link PlayerListMock}.
-	 */
-	@Deprecated(forRemoval = true)
-	public void setLastPlayed(long time)
-	{
-		throw new UnsupportedOperationException("Deprecated; Does not do anything");
 	}
 
 	@Override
