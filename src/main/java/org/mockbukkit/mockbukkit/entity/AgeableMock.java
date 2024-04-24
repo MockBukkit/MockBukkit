@@ -2,9 +2,11 @@ package org.mockbukkit.mockbukkit.entity;
 
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.data.EntitySubType;
-
+import org.mockbukkit.mockbukkit.entity.data.EntitySubType;
 import org.bukkit.entity.Ageable;
+import org.bukkit.inventory.EquipmentSlot;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Range;
 
 import java.util.UUID;
 

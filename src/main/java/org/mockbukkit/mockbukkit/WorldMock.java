@@ -140,6 +140,7 @@ import org.bukkit.entity.Axolotl;
 import org.bukkit.entity.Bat;
 import org.bukkit.entity.Bee;
 import org.bukkit.entity.Blaze;
+import org.bukkit.entity.BlockDisplay;
 import org.bukkit.entity.Boat;
 import org.bukkit.entity.Camel;
 import org.bukkit.entity.Cat;
@@ -174,6 +175,7 @@ import org.bukkit.entity.Guardian;
 import org.bukkit.entity.Hanging;
 import org.bukkit.entity.Horse;
 import org.bukkit.entity.Item;
+import org.bukkit.entity.ItemDisplay;
 import org.bukkit.entity.ItemFrame;
 import org.bukkit.entity.LargeFireball;
 import org.bukkit.entity.LeashHitch;
@@ -182,6 +184,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Llama;
 import org.bukkit.entity.LlamaSpit;
 import org.bukkit.entity.MagmaCube;
+import org.bukkit.entity.Marker;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Mule;
 import org.bukkit.entity.MushroomCow;
@@ -1419,6 +1422,14 @@ public class WorldMock implements World
 		{
 			return new PigZombieMock(server, UUID.randomUUID());
 		}
+		else if (clazz == BlockDisplay.class)
+		{
+			return new BlockDisplayMock(server, UUID.randomUUID());
+		}
+		else if (clazz == ItemDisplay.class)
+		{
+			return new ItemDisplayMock(server, UUID.randomUUID());
+		}
 		else if (clazz == Arrow.class)
 		{
 			return new ArrowMock(server, UUID.randomUUID());
@@ -1430,6 +1441,10 @@ public class WorldMock implements World
 		else if (clazz == Trident.class)
 		{
 			return new TridentMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Marker.class)
+		{
+			return new MarkerMock(server, UUID.randomUUID());
 		}
 		throw new UnimplementedOperationException();
 	}
@@ -2733,6 +2748,13 @@ public class WorldMock implements World
 	}
 
 	@Override
+	public @NotNull Collection<Chunk> getIntersectingChunks(@NotNull BoundingBox box)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public <T extends AbstractArrow> @NotNull T spawnArrow(Location location, Vector direction, float speed, float spread,
 														   Class<T> clazz)
 	{
@@ -2742,6 +2764,13 @@ public class WorldMock implements World
 
 	@Override
 	public Raid locateNearestRaid(Location location, int radius)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Raid getRaid(int id)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

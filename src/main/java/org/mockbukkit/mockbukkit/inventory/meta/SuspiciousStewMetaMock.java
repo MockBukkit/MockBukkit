@@ -1,6 +1,8 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.collect.ImmutableList;
+import io.papermc.paper.potion.SuspiciousEffectEntry;
 import org.bukkit.inventory.meta.SuspiciousStewMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -88,6 +90,12 @@ public class SuspiciousStewMetaMock extends ItemMetaMock implements SuspiciousSt
 
 		effects.set(index, effect);
 		return true;
+	}
+
+	@Override
+	public boolean addCustomEffect(@NotNull SuspiciousEffectEntry suspiciousEffectEntry, boolean overwrite)
+	{
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

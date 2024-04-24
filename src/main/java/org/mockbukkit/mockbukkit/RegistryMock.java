@@ -117,7 +117,7 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		}
 		else if (tClass == DamageType.class)
 		{
-			return DamageTypeMock::new;
+			return DamageTypeMock::from;
 		}
 		else
 		{

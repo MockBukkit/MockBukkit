@@ -412,7 +412,7 @@ public class BlockMock implements Block
 	@Override
 	public boolean isSolid()
 	{
-		if(InternalTag.SOLID_BLOCKS.isTagged(this.getType()))
+		if (InternalTag.SOLID_BLOCKS.isTagged(this.getType()))
 		{
 			return true;
 		}
@@ -495,6 +495,13 @@ public class BlockMock implements Block
 
 	@Override
 	public void tick()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void fluidTick()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

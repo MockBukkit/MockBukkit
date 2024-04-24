@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit;
 
-class BuildParameters {
+class BuildParameters
+{
 	static final String PAPER_API_FULL_VERSION = "{{ paperApiFullVersion }}";
 }

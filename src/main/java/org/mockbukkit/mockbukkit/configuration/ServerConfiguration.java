@@ -39,8 +39,8 @@ public class ServerConfiguration
 	private String serverIp = "";
 	private int serverPort = 25565;
 	private boolean pvpEnabled = true;
-	private Object2LongOpenHashMap<SpawnCategory> ticksPerSpawn = new Object2LongOpenHashMap<>();
-	private Object2IntOpenHashMap<SpawnCategory> spawnLimits = new Object2IntOpenHashMap<>();
+	private final Object2LongOpenHashMap<SpawnCategory> ticksPerSpawn = new Object2LongOpenHashMap<>();
+	private final Object2IntOpenHashMap<SpawnCategory> spawnLimits = new Object2IntOpenHashMap<>();
 
 	public ServerConfiguration()
 	{
