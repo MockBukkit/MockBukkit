@@ -41,6 +41,7 @@ import org.spigotmc.event.entity.EntityMountEvent;
 import java.util.List;
 import java.util.UUID;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -52,6 +53,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockbukkit.mockbukkit.matcher.command.MessageTargetReceivedMessageMatcher.hasReceived;
 
 class EntityMockTest
 {
@@ -339,7 +341,7 @@ class EntityMockTest
 	{
 		TextComponent comp = Component.text().content("hi").clickEvent(ClickEvent.openUrl("https://www.youtube.com/watch?v=dQw4w9WgXcQ")).build();
 		entity.sendMessage(comp);
-		entity.assertSaid(comp);
+		assertThat(entity, hasReceived(comp));
 	}
 
 	@Test
