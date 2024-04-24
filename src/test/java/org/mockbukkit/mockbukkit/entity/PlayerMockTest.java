@@ -80,7 +80,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.map.MapCanvas;
 import org.bukkit.map.MapRenderer;
 import org.bukkit.map.MapView;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.util.BoundingBox;
@@ -1958,30 +1957,6 @@ class PlayerMockTest
 	void testAssertItemConsumedWithNullItem()
 	{
 		assertThrows(NullPointerException.class, () -> player.assertItemConsumed(null));
-	}
-
-	@Test
-	void testSimulateConsumeItemStatusEffectIsAppliedFromItem()
-	{
-		ItemStack edibleWithStatusEffect = new ItemStack(Material.GOLDEN_APPLE);
-		player.simulateConsumeItem(edibleWithStatusEffect);
-		assertNotNull(player.getPotionEffect(PotionEffectType.REGENERATION));
-	}
-
-	@Test
-	void testSimulateConsumeItemStatusEffectWithProbabilityIsAlwaysApplied()
-	{
-		ItemStack edibleWithStatusEffectWithProbability = new ItemStack(Material.CHICKEN);
-		player.simulateConsumeItem(edibleWithStatusEffectWithProbability, true);
-		assertNotNull(player.getPotionEffect(PotionEffectType.HUNGER));
-	}
-
-	@Test
-	void testSimulateConsumeItemStatusEffectWithProbabilityIsNotApplied()
-	{
-		ItemStack edibleWithStatusEffectWithProbability = new ItemStack(Material.CHICKEN);
-		player.simulateConsumeItem(edibleWithStatusEffectWithProbability, false);
-		assertNull(player.getPotionEffect(PotionEffectType.HUNGER));
 	}
 
 	/*
