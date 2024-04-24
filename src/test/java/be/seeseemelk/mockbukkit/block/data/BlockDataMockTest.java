@@ -139,7 +139,7 @@ class BlockDataMockTest
 	@Test
 	void test_getAsString()
 	{
-		// https://hub.spigotmc.org/javadocs/spigot/org/bukkit/block/data/BlockData.html#getAsString()
+		// https://jd.papermc.io/paper/1.16/org/bukkit/block/data/BlockData.html#getAsString(boolean)
 		// ```java
 		//		String dataString = "minecraft:chest[waterlogged=true]"
 		//		BlockData data = Bukkit.createBlockData(dataString);
