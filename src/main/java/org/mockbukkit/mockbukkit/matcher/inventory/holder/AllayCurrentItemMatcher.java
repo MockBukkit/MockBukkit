@@ -1,4 +1,4 @@
-package org.mockbukkit.mockbukkit.matcher.allay;
+package org.mockbukkit.mockbukkit.matcher.inventory.holder;
 
 import org.bukkit.Material;
 import org.hamcrest.Description;
@@ -37,7 +37,7 @@ public class AllayCurrentItemMatcher extends TypeSafeMatcher<AllayMock>
 	@Override
 	public void describeTo(Description description)
 	{
-		description.appendText("should have current item ");
+		description.appendText("to have current item ");
 	}
 
 	@Override

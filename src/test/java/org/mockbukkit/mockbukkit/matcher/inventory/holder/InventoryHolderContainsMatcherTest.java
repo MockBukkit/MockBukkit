@@ -3,7 +3,6 @@ package org.mockbukkit.mockbukkit.matcher.inventory.holder;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.hamcrest.Matcher;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,7 +14,7 @@ import org.mockbukkit.testutils.matcher.AbstractMatcherTest;
 
 import java.util.UUID;
 
-import static org.mockbukkit.mockbukkit.matcher.inventory.holder.InventoryHolderContainsMatcher.inventoryContains;
+import static org.mockbukkit.mockbukkit.matcher.entity.allay.InventoryHolderContainsMatcher.inventoryContains;
 
 @ExtendWith(MockBukkitExtension.class)
 class InventoryHolderContainsMatcherTest extends AbstractMatcherTest
@@ -56,7 +55,7 @@ class InventoryHolderContainsMatcherTest extends AbstractMatcherTest
 	@Test
 	void testHasReadableDescription()
 	{
-		assertDescription("Should have Itemstack in inventory", inventoryContains(stack));
+		assertDescription("to have Itemstack in inventory", inventoryContains(stack));
 	}
 
 	@Override

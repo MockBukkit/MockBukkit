@@ -1,4 +1,4 @@
-package org.mockbukkit.mockbukkit.matcher.inventory.holder;
+package org.mockbukkit.mockbukkit.matcher.entity.allay;
 
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
@@ -26,7 +26,7 @@ public class InventoryHolderContainsMatcher extends TypeSafeMatcher<InventoryHol
 	@Override
 	public void describeTo(Description description)
 	{
-		description.appendText("Should have Itemstack in inventory");
+		description.appendText("to have Itemstack in inventory");
 	}
 
 	@Override

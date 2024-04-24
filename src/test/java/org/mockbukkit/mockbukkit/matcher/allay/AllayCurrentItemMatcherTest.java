@@ -13,7 +13,7 @@ import org.mockbukkit.testutils.matcher.AbstractMatcherTest;
 
 import java.util.UUID;
 
-import static org.mockbukkit.mockbukkit.matcher.allay.AllayCurrentItemMatcher.currentItem;
+import static org.mockbukkit.mockbukkit.matcher.inventory.holder.AllayCurrentItemMatcher.currentItem;
 
 @ExtendWith(MockBukkitExtension.class)
 class AllayCurrentItemMatcherTest extends AbstractMatcherTest
