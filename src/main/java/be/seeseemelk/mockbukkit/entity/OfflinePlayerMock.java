@@ -203,7 +203,8 @@ public class OfflinePlayerMock implements OfflinePlayer
 	}
 
 	@Override
-	public @Nullable Location getRespawnLocation() {
+	public @Nullable Location getRespawnLocation()
+	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
