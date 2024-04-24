@@ -1,6 +1,6 @@
 package org.mockbukkit.mockbukkit.inventory.meta.trim;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.UnimplementedOperationException;
 import com.google.gson.JsonObject;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;

@@ -1,6 +1,6 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.UnimplementedOperationException;
 import com.google.common.collect.ImmutableList;
 import io.papermc.paper.potion.SuspiciousEffectEntry;
 import org.bukkit.inventory.meta.SuspiciousStewMeta;
