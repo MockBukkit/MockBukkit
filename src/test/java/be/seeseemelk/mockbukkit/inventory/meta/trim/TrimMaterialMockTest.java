@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.inventory.meta.trim;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
+import com.google.gson.JsonObject;
 import org.bukkit.inventory.meta.trim.TrimMaterial;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,6 +34,13 @@ class TrimMaterialMockTest
 	void getKey()
 	{
 		assertNotNull(TrimMaterial.QUARTZ.getKey());
+	}
+
+	@Test
+	void from_invalid()
+	{
+		JsonObject invalid = new JsonObject();
+		assertThrows(IllegalArgumentException.class, () -> TrimMaterialMock.from(invalid));
 	}
 
 }

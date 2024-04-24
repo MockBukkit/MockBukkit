@@ -14,9 +14,11 @@ import org.bukkit.enchantments.EnchantmentTarget;
 import org.bukkit.entity.EntityCategory;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -43,6 +45,49 @@ public class EnchantmentMock extends Enchantment
 	private int startLevel;
 	private EnchantmentTarget itemTarget;
 
+	/**
+	 * @param key             The key representing this enchantment
+	 * @param target          the item targets of this enchantment
+	 * @param treasure        Whether this enchantment can be found in a treasure
+	 * @param cursed          Whether this enchantment is a curse
+	 * @param maxLevel        The max level of this enchantment
+	 * @param startLevel      The min level of this enchantment
+	 * @param name            The name of the enchantment
+	 * @param displayNames    The display name of the enchantment dependent on level
+	 * @param minModifiedCost The minimal modified cost for this enchantment dependent on level
+	 * @param maxModifiedCost The maximal modified cost for this enchantment dependent on level
+	 * @param tradeable       Whether this enchantment can be obtained from trades
+	 * @param discoverable    Whether this enchantment is in a loot table
+	 * @param rarity          The rarity of this enchantment
+	 * @param conflicts       Namespaced-keys of enchantments that are conflicting with this enchantment
+	 */
+	public EnchantmentMock(NamespacedKey key, EnchantmentTarget target, boolean treasure, boolean cursed, int maxLevel,
+						   int startLevel, String name, Component[] displayNames, int[] minModifiedCost,
+						   int[] maxModifiedCost, boolean tradeable, boolean discoverable, EnchantmentRarity rarity,
+						   Set<NamespacedKey> conflicts)
+	{
+		this.key = key;
+		this.itemTarget = target;
+		this.treasure = treasure;
+		this.cursed = cursed;
+		this.maxLevel = maxLevel;
+		this.startLevel = startLevel;
+		this.name = name;
+		this.displayNames = displayNames;
+		this.minModifiedCosts = minModifiedCost;
+		this.maxModifiedCosts = maxModifiedCost;
+		this.tradeable = tradeable;
+		this.discoverable = discoverable;
+		this.rarity = rarity;
+		this.conflicts = conflicts;
+	}
+
+	/**
+	 * @param data Json data
+	 * @deprecated Use {@link #EnchantmentMock(NamespacedKey, EnchantmentTarget, boolean, boolean, int, int, String, Component[], int[], int[], boolean, boolean, EnchantmentRarity, Set)}
+	 * instead.
+	 */
+	@Deprecated(forRemoval = true)
 	public EnchantmentMock(JsonObject data)
 	{
 		this.key = NamespacedKey.fromString(data.get("key").getAsString());
@@ -60,53 +105,6 @@ public class EnchantmentMock extends Enchantment
 		String rarityString = data.get("rarity").getAsString();
 		this.rarity = EnchantmentRarity.valueOf(rarityString);
 		this.conflicts = getConflicts(data.get("conflicts").getAsJsonArray());
-	}
-
-	private Set<NamespacedKey> getConflicts(JsonArray conflicts)
-	{
-		Set<NamespacedKey> output = new HashSet<>();
-		for (JsonElement conflict : conflicts)
-		{
-			output.add(NamespacedKey.fromString(conflict.getAsString()));
-		}
-		return output;
-	}
-
-	private Component[] getDisplayNames(JsonArray displayNamesData, int maxLevel)
-	{
-		Component[] output = new Component[maxLevel];
-		for (JsonElement element : displayNamesData)
-		{
-			JsonObject displayNameData = element.getAsJsonObject();
-			int level = displayNameData.get(LEVEL).getAsInt();
-			GsonComponentSerializer gsonComponentSerializer = GsonComponentSerializer.builder().build();
-			output[level - 1] = gsonComponentSerializer.deserializeFromTree(displayNameData.get("text"));
-		}
-		return output;
-	}
-
-	private int[] getMinModifiedCosts(JsonArray minModifiedCosts, int maxLevel)
-	{
-		int[] output = new int[maxLevel];
-		for (JsonElement element : minModifiedCosts)
-		{
-			JsonObject minModifiedCost = element.getAsJsonObject();
-			int level = minModifiedCost.get(LEVEL).getAsInt();
-			output[level - 1] = minModifiedCost.get(COST).getAsInt();
-		}
-		return output;
-	}
-
-	private int[] getMaxModifiedCosts(JsonArray maxModifiedCosts, int maxLevel)
-	{
-		int[] output = new int[maxLevel];
-		for (JsonElement element : maxModifiedCosts)
-		{
-			JsonObject maxModifiedCost = element.getAsJsonObject();
-			int level = maxModifiedCost.get(LEVEL).getAsInt();
-			output[level - 1] = maxModifiedCost.get(COST).getAsInt();
-		}
-		return output;
 	}
 
 	@Override
@@ -283,6 +281,82 @@ public class EnchantmentMock extends Enchantment
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	@ApiStatus.Internal
+	public static EnchantmentMock from(JsonObject data)
+	{
+		Preconditions.checkNotNull(data);
+		List<String> expectedArguments = List.of("key", "itemTarget", "treasure", "cursed", "maxLevel", "startLevel",
+				"name", "displayNames", "minModifiedCosts", "maxModifiedCosts", "tradeable", "discoverable", "rarity",
+				"conflicts");
+		expectedArguments.forEach(expectedKey ->
+				Preconditions.checkArgument(data.has(expectedKey), "Missing json key: " + expectedKey));
+
+		NamespacedKey key = NamespacedKey.fromString(data.get("key").getAsString());
+		EnchantmentTarget itemTarget = EnchantmentTarget.valueOf(data.get("itemTarget").getAsString());
+		boolean treasure = data.get("treasure").getAsBoolean();
+		boolean cursed = data.get("cursed").getAsBoolean();
+		int maxLevel = data.get("maxLevel").getAsInt();
+		int startLevel = data.get("startLevel").getAsInt();
+		String name = data.get("name").getAsString();
+		Component[] displayNames = getDisplayNames(data.get("displayNames").getAsJsonArray(), maxLevel);
+		int[] minModifiedCosts = getMinModifiedCosts(data.get("minModifiedCosts").getAsJsonArray(), maxLevel);
+		int[] maxModifiedCosts = getMaxModifiedCosts(data.get("maxModifiedCosts").getAsJsonArray(), maxLevel);
+		boolean tradeable = data.get("tradeable").getAsBoolean();
+		boolean discoverable = data.get("discoverable").getAsBoolean();
+		String rarityString = data.get("rarity").getAsString();
+		EnchantmentRarity rarity = EnchantmentRarity.valueOf(rarityString);
+		Set<NamespacedKey> conflicts = getConflicts(data.get("conflicts").getAsJsonArray());
+		return new EnchantmentMock(key, itemTarget, treasure, cursed, maxLevel, startLevel, name, displayNames, minModifiedCosts,
+				maxModifiedCosts, tradeable, discoverable, rarity, conflicts);
+	}
+
+	private static Set<NamespacedKey> getConflicts(JsonArray conflicts)
+	{
+		Set<NamespacedKey> output = new HashSet<>();
+		for (JsonElement conflict : conflicts)
+		{
+			output.add(NamespacedKey.fromString(conflict.getAsString()));
+		}
+		return output;
+	}
+
+	private static Component[] getDisplayNames(JsonArray displayNamesData, int maxLevel)
+	{
+		Component[] output = new Component[maxLevel];
+		for (JsonElement element : displayNamesData)
+		{
+			JsonObject displayNameData = element.getAsJsonObject();
+			int level = displayNameData.get(LEVEL).getAsInt();
+			GsonComponentSerializer gsonComponentSerializer = GsonComponentSerializer.builder().build();
+			output[level - 1] = gsonComponentSerializer.deserializeFromTree(displayNameData.get("text"));
+		}
+		return output;
+	}
+
+	private static int[] getMinModifiedCosts(JsonArray minModifiedCosts, int maxLevel)
+	{
+		int[] output = new int[maxLevel];
+		for (JsonElement element : minModifiedCosts)
+		{
+			JsonObject minModifiedCost = element.getAsJsonObject();
+			int level = minModifiedCost.get(LEVEL).getAsInt();
+			output[level - 1] = minModifiedCost.get(COST).getAsInt();
+		}
+		return output;
+	}
+
+	private static int[] getMaxModifiedCosts(JsonArray maxModifiedCosts, int maxLevel)
+	{
+		int[] output = new int[maxLevel];
+		for (JsonElement element : maxModifiedCosts)
+		{
+			JsonObject maxModifiedCost = element.getAsJsonObject();
+			int level = maxModifiedCost.get(LEVEL).getAsInt();
+			output[level - 1] = maxModifiedCost.get(COST).getAsInt();
+		}
+		return output;
 	}
 
 }
