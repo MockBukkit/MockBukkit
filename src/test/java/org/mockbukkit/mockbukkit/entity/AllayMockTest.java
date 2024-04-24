@@ -29,8 +29,8 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockbukkit.mockbukkit.matcher.inventory.holder.AllayCurrentItemMatcher.currentItem;
-import static org.mockbukkit.mockbukkit.matcher.entity.allay.InventoryHolderContainsMatcher.inventoryContains;
+import static org.mockbukkit.mockbukkit.matcher.entity.allay.AllayCurrentItemMatcher.currentItem;
+import static org.mockbukkit.mockbukkit.matcher.inventory.holder.InventoryHolderContainsMatcher.inventoryContains;
 
 class AllayMockTest
 {
