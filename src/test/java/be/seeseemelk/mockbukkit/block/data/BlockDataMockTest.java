@@ -139,15 +139,25 @@ class BlockDataMockTest
 	@Test
 	void test_getAsString()
 	{
-		BlockDataMock blockData = new BlockDataMock(Material.STONE);
-		blockData.set("key", "value");
+		// https://hub.spigotmc.org/javadocs/spigot/org/bukkit/block/data/BlockData.html#getAsString()
+		// ```java
+		//		String dataString = "minecraft:chest[waterlogged=true]"
+		//		BlockData data = Bukkit.createBlockData(dataString);
+		//		dataString.equals(data.getAsString(true)); // This would return true
+		//		dataString.equals(data.getAsString(false)); // This would return false as all states are present
+		//		dataString.equals(data.getAsString()); // This is equivalent to the above, "getAsString(false)"
+		// ```
 
-		assertEquals("minecraft:stone", blockData.getAsString());
-		assertEquals("minecraft:stone[key=value]", blockData.getAsString(true));
+		BlockDataMock data = new BlockDataMock(Material.CHEST);
+		data.set("waterlogged", "true");
 
-		blockData.set("multi", "value2");
+		assertEquals("minecraft:chest[waterlogged=true]", data.getAsString(true));
+		assertEquals("minecraft:chest", data.getAsString(false));
+		assertEquals("minecraft:chest", data.getAsString());
 
-		assertEquals("minecraft:stone[key=value,multi=value2]", blockData.getAsString(true));
+		data.set("multi", "value2");
+
+		assertEquals("minecraft:chest[waterlogged=true,multi=value2]", data.getAsString(true));
 	}
 
 }

@@ -147,7 +147,7 @@ public class BlockDataMock implements BlockData
 	{
 		StringBuilder stateString = new StringBuilder("minecraft:" + getMaterial().name().toLowerCase());
 
-		if (!hideUnspecified && !this.data.isEmpty())
+		if (hideUnspecified && !this.data.isEmpty())
 		{
 			stateString.append('[');
 			stateString.append(this.data.entrySet().stream().map(entry -> entry.getKey() + "=" + entry.getValue().toString().toLowerCase()).collect(Collectors.joining(",")));
