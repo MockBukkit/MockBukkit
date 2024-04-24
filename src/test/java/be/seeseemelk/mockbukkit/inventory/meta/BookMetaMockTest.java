@@ -13,6 +13,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -295,9 +296,11 @@ public class BookMetaMockTest
 		pages.add("Page2");
 
 		meta.setPages(pages);
+		assertNotSame(pages, meta.getPages());
 		assertEquals(pages, meta.getPages());
 
 		pages.set(0, "Dummy");
+		assertNotSame(pages, meta.getPages()); // testing that the `pages`' array modifications is not reflected in the book.
 		assertNotEquals(pages, meta.getPages()); // testing that the `pages`' array modifications is not reflected in the book.
 	}
 }
