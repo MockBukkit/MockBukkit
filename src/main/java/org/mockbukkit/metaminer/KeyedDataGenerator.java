@@ -76,6 +76,14 @@ public class KeyedDataGenerator implements DataGenerator
 						{
 							addDamageTypeProperties(jsonObject, damageType);
 						}
+						if (keyedObject instanceof TrimPattern trimPattern)
+						{
+							addTrimPatternProperties(jsonObject, trimPattern);
+						}
+						if (keyedObject instanceof TrimMaterial trimMaterial)
+						{
+							addTrimMaterialProperties(jsonObject, trimMaterial);
+						}
 						array.add(jsonObject);
 					}
 				}
@@ -96,6 +104,16 @@ public class KeyedDataGenerator implements DataGenerator
 				gson.toJson(rootObject, writer);
 			}
 		}
+	}
+
+	private void addTrimMaterialProperties(JsonObject jsonObject, TrimMaterial trimMaterial)
+	{
+		jsonObject.add("description", GsonComponentSerializer.gson().serializeToTree(trimMaterial.description()));
+	}
+
+	private void addTrimPatternProperties(JsonObject jsonObject, TrimPattern trimPattern)
+	{
+		jsonObject.add("description", GsonComponentSerializer.gson().serializeToTree(trimPattern.description()));
 	}
 
 	private void addDamageTypeProperties(JsonObject jsonObject, DamageType damageType)
