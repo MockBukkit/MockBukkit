@@ -58,9 +58,12 @@ public class TNTPrimedMock extends EntityMock implements TNTPrimed
 	@Override
 	public void setSource(@Nullable Entity source)
 	{
-		if(source instanceof LivingEntity) {
+		if (source instanceof LivingEntity)
+		{
 			this.source = source;
-		} else {
+		}
+		else
+		{
 			this.source = null;
 		}
 	}
@@ -112,12 +115,14 @@ public class TNTPrimedMock extends EntityMock implements TNTPrimed
 
 	/**
 	 * Simulate server tick.
+	 *
 	 * @param ticks The number of ticks to simulate.
 	 */
 	public void tick(int ticks)
 	{
 		setFuseTicks(getFuseTicks() - ticks);
-		if(getFuseTicks() <= 0) {
+		if (getFuseTicks() <= 0)
+		{
 			explode();
 			this.remove();
 		}
@@ -136,4 +141,5 @@ public class TNTPrimedMock extends EntityMock implements TNTPrimed
 		ExplosionPrimeEvent event = new ExplosionPrimeEvent(this);
 		server.getPluginManager().callEvent(event);
 	}
+
 }

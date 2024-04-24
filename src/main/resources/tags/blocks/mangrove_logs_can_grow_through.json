@@ -1,0 +1,13 @@
+{
+    "replace": false,
+    "values": [
+        "minecraft:mangrove_roots",
+        "minecraft:mud",
+        "minecraft:mangrove_leaves",
+        "minecraft:mangrove_propagule",
+        "minecraft:mangrove_log",
+        "minecraft:muddy_mangrove_roots",
+        "minecraft:moss_carpet",
+        "minecraft:vine"
+    ]
+}

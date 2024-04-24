@@ -21,39 +21,46 @@ class OcelotMockTest
 	private OcelotMock ocelot;
 
 	@BeforeEach
-	void setUp() {
+	void setUp()
+	{
 		ServerMock server = MockBukkit.mock();
 		ocelot = new OcelotMock(server, UUID.randomUUID());
 	}
 
 	@AfterEach
-	void tearDown() {
+	void tearDown()
+	{
 		MockBukkit.unmock();
 	}
 
 	@Test
-	void testIsTrusting() {
+	void testIsTrusting()
+	{
 		assertFalse(ocelot.isTrusting());
 	}
 
 	@Test
-	void setTrusting() {
+	void setTrusting()
+	{
 		ocelot.setTrusting(true);
 		assertTrue(ocelot.isTrusting());
 	}
 
 	@Test
-	void testGetOcelotType() {
+	void testGetOcelotType()
+	{
 		assertEquals(Ocelot.Type.WILD_OCELOT, ocelot.getCatType());
 	}
 
 	@Test
-	void testSetOcelotType() {
+	void testSetOcelotType()
+	{
 		assertThrows(UnsupportedOperationException.class, () -> ocelot.setCatType(Ocelot.Type.BLACK_CAT));
 	}
 
 	@Test
-	void testEntityType() {
+	void testEntityType()
+	{
 		assertEquals(EntityType.OCELOT, ocelot.getType());
 	}
 

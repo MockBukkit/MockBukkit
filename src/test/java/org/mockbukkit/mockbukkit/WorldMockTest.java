@@ -10,6 +10,7 @@ import org.mockbukkit.mockbukkit.entity.AxolotlMock;
 import org.mockbukkit.mockbukkit.entity.BatMock;
 import org.mockbukkit.mockbukkit.entity.BeeMock;
 import org.mockbukkit.mockbukkit.entity.BlazeMock;
+import org.mockbukkit.mockbukkit.entity.BlockDisplayMock;
 import org.mockbukkit.mockbukkit.entity.BoatMock;
 import org.mockbukkit.mockbukkit.entity.CamelMock;
 import org.mockbukkit.mockbukkit.entity.CatMock;
@@ -42,11 +43,13 @@ import org.mockbukkit.mockbukkit.entity.GoatMock;
 import org.mockbukkit.mockbukkit.entity.GuardianMock;
 import org.mockbukkit.mockbukkit.entity.HopperMinecartMock;
 import org.mockbukkit.mockbukkit.entity.HorseMock;
+import org.mockbukkit.mockbukkit.entity.ItemDisplayMock;
 import org.mockbukkit.mockbukkit.entity.ItemEntityMock;
 import org.mockbukkit.mockbukkit.entity.LeashHitchMock;
 import org.mockbukkit.mockbukkit.entity.LlamaMock;
 import org.mockbukkit.mockbukkit.entity.LlamaSpitMock;
 import org.mockbukkit.mockbukkit.entity.MagmaCubeMock;
+import org.mockbukkit.mockbukkit.entity.MarkerMock;
 import org.mockbukkit.mockbukkit.entity.MuleMock;
 import org.mockbukkit.mockbukkit.entity.MushroomCowMock;
 import org.mockbukkit.mockbukkit.entity.OcelotMock;
@@ -100,6 +103,7 @@ import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.type.WallSign;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
@@ -107,6 +111,8 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Sheep;
 import org.bukkit.entity.SpawnCategory;
+import org.bukkit.entity.SpectralArrow;
+import org.bukkit.entity.Trident;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -1318,7 +1324,14 @@ class WorldMockTest
 				Arguments.of(EntityType.TURTLE, TurtleMock.class),
 				Arguments.of(EntityType.THROWN_EXP_BOTTLE, ThrownExpBottleMock.class),
 				Arguments.of(EntityType.LEASH_HITCH, LeashHitchMock.class),
-				Arguments.of(EntityType.ZOMBIFIED_PIGLIN, PigZombieMock.class)
+				Arguments.of(EntityType.ZOMBIFIED_PIGLIN, PigZombieMock.class),
+				Arguments.of(EntityType.BLOCK_DISPLAY, BlockDisplayMock.class),
+				Arguments.of(EntityType.ITEM_DISPLAY, ItemDisplayMock.class),
+				Arguments.of(EntityType.ZOMBIFIED_PIGLIN, PigZombieMock.class),
+				Arguments.of(EntityType.TRIDENT, Trident.class),
+				Arguments.of(EntityType.SPECTRAL_ARROW, SpectralArrow.class),
+				Arguments.of(EntityType.ARROW, Arrow.class),
+				Arguments.of(EntityType.MARKER, MarkerMock.class)
 		);
 	}
 

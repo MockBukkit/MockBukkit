@@ -14,6 +14,7 @@ public class StructureTypeMock extends StructureType
 	{
 		this.key = NamespacedKey.fromString(data.get("key").getAsString());
 	}
+
 	@Override
 	public @NotNull NamespacedKey getKey()
 	{

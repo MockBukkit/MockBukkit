@@ -33,7 +33,8 @@ import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.entity.Wither;
-import org.bukkit.entity.memory.MemoryKey; import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.entity.memory.MemoryKey;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityToggleSwimEvent;
@@ -48,6 +49,7 @@ import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
+import org.mockbukkit.mockbukkit.simulate.entity.LivingEntitySimulation;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -101,7 +103,6 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	private @Nullable Player killer;
 
 	private final Set<ActivePotionEffect> activeEffects = new HashSet<>();
-	private boolean invisible = false;
 	private TriState frictionState = TriState.NOT_SET;
 	private Entity leashHolder;
 
@@ -236,59 +237,26 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 
 	/**
 	 * Simulate damage to this entity and throw an event.
+	 *
 	 * @param amount <p>The amount of damage to be done</p>
 	 * @param source <p>The damager</p>
 	 * @return <p>The EntityDamageEvent that got thrown</p>
 	 */
 	public EntityDamageEvent simulateDamage(double amount, @NotNull DamageSource source)
 	{
-		Map<EntityDamageEvent.DamageModifier, Double> modifiers = new EnumMap<>(EntityDamageEvent.DamageModifier.class);
-		modifiers.put(EntityDamageEvent.DamageModifier.BASE, 1.0);
-		Map<EntityDamageEvent.DamageModifier, Function<Double, Double>> modifierFunctions = new EnumMap<>(
-				EntityDamageEvent.DamageModifier.class);
-		modifierFunctions.put(EntityDamageEvent.DamageModifier.BASE, damage -> damage);
-
-		EntityDamageEvent event;
-		if (source.getDirectEntity() != null)
-		{
-			event = new EntityDamageByEntityEvent(source.getDirectEntity(), this, EntityDamageEvent.DamageCause.ENTITY_ATTACK, source, amount);
-		}
-		else
-		{
-			event = new EntityDamageEvent(this, EntityDamageEvent.DamageCause.CUSTOM, source, amount);
-		}
-		if (event.callEvent())
-		{
-			setLastDamageCause(event);
-			amount = event.getDamage();
-			this.damage(amount);
-		}
-		return event;
+		return new LivingEntitySimulation(this).simulateDamage(amount,source);
 	}
 
 	/**
 	 * Simulate damage to this entity and throw an event
+	 *
 	 * @param amount <p>The amount of damage to be done</p>
 	 * @param source <p>The damager</p>
 	 * @return <p>The event that got thrown</p>
 	 */
 	public EntityDamageEvent simulateDamage(double amount, @Nullable Entity source)
 	{
-		DamageType damageType;
-		if (source != null)
-		{
-			damageType = source instanceof HumanEntity ? DamageType.PLAYER_ATTACK : DamageType.MOB_ATTACK;
-		}
-		else
-		{
-			damageType = DamageType.GENERIC;
-		}
-		DamageSource.Builder damageSourceBuilder = DamageSource.builder(damageType);
-		if(source != null){
-			damageSourceBuilder.withDamageLocation(source.getLocation()).withDirectEntity(source);
-		}
-		DamageSource damageSource = damageSourceBuilder.build();
-		return simulateDamage(amount, damageSource);
+		return new LivingEntitySimulation(this).simulateDamage(amount, source);
 	}
 
 	@Override
@@ -334,7 +302,78 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
+	public void startUsingItem(@NotNull EquipmentSlot hand)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable ItemStack getItemInUse()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getItemInUseTicks()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setItemInUseTicks(int ticks)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void completeUsingActiveItem()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getActiveItemRemainingTime()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public double getEyeHeight(boolean ignorePose)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+
+	@Override
+	public void setActiveItemRemainingTime(@Range(from = 0L, to = 2147483647L) int ticks)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean hasActiveItem()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getActiveItemUsedTime()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull EquipmentSlot getActiveItemHand()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -992,18 +1031,6 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	public int getArrowCooldown()
 	{
 		return arrowCooldown;
-	}
-
-	@Override
-	public void setInvisible(boolean invisible)
-	{
-		this.invisible = invisible;
-	}
-
-	@Override
-	public boolean isInvisible()
-	{
-		return this.invisible;
 	}
 
 	@Override

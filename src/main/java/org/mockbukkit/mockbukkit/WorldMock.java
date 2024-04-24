@@ -5,10 +5,12 @@ import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
 import org.mockbukkit.mockbukkit.entity.AllayMock;
 import org.mockbukkit.mockbukkit.entity.AreaEffectCloudMock;
 import org.mockbukkit.mockbukkit.entity.ArmorStandMock;
+import org.mockbukkit.mockbukkit.entity.ArrowMock;
 import org.mockbukkit.mockbukkit.entity.AxolotlMock;
 import org.mockbukkit.mockbukkit.entity.BatMock;
 import org.mockbukkit.mockbukkit.entity.BeeMock;
 import org.mockbukkit.mockbukkit.entity.BlazeMock;
+import org.mockbukkit.mockbukkit.entity.BlockDisplayMock;
 import org.mockbukkit.mockbukkit.entity.BoatMock;
 import org.mockbukkit.mockbukkit.entity.CamelMock;
 import org.mockbukkit.mockbukkit.entity.CatMock;
@@ -41,12 +43,14 @@ import org.mockbukkit.mockbukkit.entity.GoatMock;
 import org.mockbukkit.mockbukkit.entity.GuardianMock;
 import org.mockbukkit.mockbukkit.entity.HopperMinecartMock;
 import org.mockbukkit.mockbukkit.entity.HorseMock;
+import org.mockbukkit.mockbukkit.entity.ItemDisplayMock;
 import org.mockbukkit.mockbukkit.entity.ItemEntityMock;
 import org.mockbukkit.mockbukkit.entity.LargeFireballMock;
 import org.mockbukkit.mockbukkit.entity.LeashHitchMock;
 import org.mockbukkit.mockbukkit.entity.LlamaMock;
 import org.mockbukkit.mockbukkit.entity.LlamaSpitMock;
 import org.mockbukkit.mockbukkit.entity.MagmaCubeMock;
+import org.mockbukkit.mockbukkit.entity.MarkerMock;
 import org.mockbukkit.mockbukkit.entity.MobMock;
 import org.mockbukkit.mockbukkit.entity.MuleMock;
 import org.mockbukkit.mockbukkit.entity.MushroomCowMock;
@@ -69,12 +73,14 @@ import org.mockbukkit.mockbukkit.entity.SlimeMock;
 import org.mockbukkit.mockbukkit.entity.SmallFireballMock;
 import org.mockbukkit.mockbukkit.entity.SnowballMock;
 import org.mockbukkit.mockbukkit.entity.SpawnerMinecartMock;
+import org.mockbukkit.mockbukkit.entity.SpectralArrowMock;
 import org.mockbukkit.mockbukkit.entity.SpiderMock;
 import org.mockbukkit.mockbukkit.entity.SquidMock;
 import org.mockbukkit.mockbukkit.entity.StorageMinecartMock;
 import org.mockbukkit.mockbukkit.entity.StrayMock;
 import org.mockbukkit.mockbukkit.entity.TadpoleMock;
 import org.mockbukkit.mockbukkit.entity.ThrownExpBottleMock;
+import org.mockbukkit.mockbukkit.entity.TridentMock;
 import org.mockbukkit.mockbukkit.entity.TropicalFishMock;
 import org.mockbukkit.mockbukkit.entity.TurtleMock;
 import org.mockbukkit.mockbukkit.entity.WardenMock;
@@ -89,6 +95,7 @@ import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerMock;
 import com.destroystokyo.paper.HeightmapType;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
+import io.papermc.paper.block.fluid.FluidData;
 import io.papermc.paper.event.world.WorldGameRuleChangeEvent;
 import io.papermc.paper.math.Position;
 import io.papermc.paper.world.MoonPhase;
@@ -136,6 +143,7 @@ import org.bukkit.entity.Axolotl;
 import org.bukkit.entity.Bat;
 import org.bukkit.entity.Bee;
 import org.bukkit.entity.Blaze;
+import org.bukkit.entity.BlockDisplay;
 import org.bukkit.entity.Boat;
 import org.bukkit.entity.Camel;
 import org.bukkit.entity.Cat;
@@ -170,6 +178,7 @@ import org.bukkit.entity.Guardian;
 import org.bukkit.entity.Hanging;
 import org.bukkit.entity.Horse;
 import org.bukkit.entity.Item;
+import org.bukkit.entity.ItemDisplay;
 import org.bukkit.entity.ItemFrame;
 import org.bukkit.entity.LargeFireball;
 import org.bukkit.entity.LeashHitch;
@@ -178,6 +187,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Llama;
 import org.bukkit.entity.LlamaSpit;
 import org.bukkit.entity.MagmaCube;
+import org.bukkit.entity.Marker;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Mule;
 import org.bukkit.entity.MushroomCow;
@@ -200,11 +210,13 @@ import org.bukkit.entity.Slime;
 import org.bukkit.entity.SmallFireball;
 import org.bukkit.entity.Snowball;
 import org.bukkit.entity.SpawnCategory;
+import org.bukkit.entity.SpectralArrow;
 import org.bukkit.entity.Spider;
 import org.bukkit.entity.Squid;
 import org.bukkit.entity.Stray;
 import org.bukkit.entity.Tadpole;
 import org.bukkit.entity.ThrownExpBottle;
+import org.bukkit.entity.Trident;
 import org.bukkit.entity.TropicalFish;
 import org.bukkit.entity.Turtle;
 import org.bukkit.entity.Warden;
@@ -1413,6 +1425,30 @@ public class WorldMock implements World
 		{
 			return new PigZombieMock(server, UUID.randomUUID());
 		}
+		else if (clazz == BlockDisplay.class)
+		{
+			return new BlockDisplayMock(server, UUID.randomUUID());
+		}
+		else if (clazz == ItemDisplay.class)
+		{
+			return new ItemDisplayMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Arrow.class)
+		{
+			return new ArrowMock(server, UUID.randomUUID());
+		}
+		else if (clazz == SpectralArrow.class)
+		{
+			return new SpectralArrowMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Trident.class)
+		{
+			return new TridentMock(server, UUID.randomUUID());
+		}
+		else if (clazz == Marker.class)
+		{
+			return new MarkerMock(server, UUID.randomUUID());
+		}
 		throw new UnimplementedOperationException();
 	}
 
@@ -2065,7 +2101,7 @@ public class WorldMock implements World
 	@Deprecated(since = "1.18")
 	public void setMonsterSpawnLimit(int limit)
 	{
-		this.setSpawnLimit(SpawnCategory.MONSTER,limit);
+		this.setSpawnLimit(SpawnCategory.MONSTER, limit);
 	}
 
 	@Override
@@ -2715,6 +2751,13 @@ public class WorldMock implements World
 	}
 
 	@Override
+	public @NotNull Collection<Chunk> getIntersectingChunks(@NotNull BoundingBox box)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public <T extends AbstractArrow> @NotNull T spawnArrow(Location location, Vector direction, float speed, float spread,
 														   Class<T> clazz)
 	{
@@ -2724,6 +2767,13 @@ public class WorldMock implements World
 
 	@Override
 	public Raid locateNearestRaid(Location location, int radius)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Raid getRaid(int id)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -2882,6 +2932,13 @@ public class WorldMock implements World
 	{
 		Block block = this.getBlockAt(x, y, z);
 		return block.getState();
+	}
+
+	@Override
+	public @NotNull FluidData getFluidData(int i, int i1, int i2)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@NotNull
@@ -3266,9 +3323,11 @@ public class WorldMock implements World
 		return this.getSpawnLimitUnsafe(spawnCategory);
 	}
 
-	public final int getSpawnLimitUnsafe(final SpawnCategory spawnCategory) {
+	public final int getSpawnLimitUnsafe(final SpawnCategory spawnCategory)
+	{
 		int limit = this.spawnLimits.getOrDefault(spawnCategory, -1);
-		if (limit < 0) {
+		if (limit < 0)
+		{
 			limit = this.server.getSpawnLimit(spawnCategory);
 		}
 		return limit;

@@ -50,6 +50,9 @@ public class BlockMock implements Block
 	private byte data;
 	private BlockData blockData;
 
+	private byte lightFromSky = 15;
+	private byte lightFromBlocks = 0;
+
 	/**
 	 * Creates a basic block made of air.
 	 */
@@ -149,7 +152,7 @@ public class BlockMock implements Block
 	}
 
 	/**
-	 * Assets that the material type of the block is equal to a given type.
+	 * Asserts that the material type of the block is equal to a given type.
 	 *
 	 * @param material The material type that the block should have.
 	 * @throws AssertionError Thrown if the material type of the block does not equal the given material type.
@@ -171,22 +174,43 @@ public class BlockMock implements Block
 	@Override
 	public byte getLightLevel()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return (byte) Math.max(getLightFromSky(), getLightFromBlocks());
 	}
 
 	@Override
 	public byte getLightFromSky()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return lightFromSky;
+	}
+
+	/**
+	 * Sets the light level received from sky.
+	 *
+	 * @param lightFromSky Value between 0 and 15.
+	 */
+	public void setLightFromSky(byte lightFromSky)
+	{
+		Preconditions.checkArgument(lightFromSky >= 0 && lightFromSky <= 15, "Light level should be between 0 and 15.");
+
+		this.lightFromSky = lightFromSky;
 	}
 
 	@Override
 	public byte getLightFromBlocks()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return lightFromBlocks;
+	}
+
+	/**
+	 * Sets the light level received from other blocks.
+	 *
+	 * @param lightFromBlocks Value between 0 and 15.
+	 */
+	public void setLightFromBlocks(byte lightFromBlocks)
+	{
+		Preconditions.checkArgument(lightFromBlocks >= 0 && lightFromBlocks <= 15, "Light level should be between 0 and 15.");
+
+		this.lightFromBlocks = lightFromBlocks;
 	}
 
 	@Override
@@ -388,7 +412,7 @@ public class BlockMock implements Block
 	@Override
 	public boolean isSolid()
 	{
-		if(InternalTag.SOLID_BLOCKS.isTagged(this.getType()))
+		if (InternalTag.SOLID_BLOCKS.isTagged(this.getType()))
 		{
 			return true;
 		}
@@ -471,6 +495,13 @@ public class BlockMock implements Block
 
 	@Override
 	public void tick()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void fluidTick()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

@@ -4,6 +4,7 @@ import org.mockbukkit.mockbukkit.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.entity.EntityMock;
 import org.mockbukkit.mockbukkit.entity.EntityMock;
 import com.google.common.base.Preconditions;
+import io.papermc.paper.scoreboard.numbers.NumberFormat;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.OfflinePlayer;
@@ -224,6 +225,20 @@ public class ObjectiveMock implements Objective
 
 	@Override
 	public void setAutoUpdateDisplay(boolean autoUpdateDisplay)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable NumberFormat numberFormat()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void numberFormat(@Nullable NumberFormat numberFormat)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

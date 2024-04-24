@@ -56,7 +56,7 @@ public class DamageSourceMock implements DamageSource
 	{
 		if (this.damageLocation != null)
 		{
-			return this.damageLocation;
+			return getDamageLocation();
 		}
 		return this.directEntity != null ? this.directEntity.getLocation() : null;
 	}
@@ -76,7 +76,8 @@ public class DamageSourceMock implements DamageSource
 	@Override
 	public boolean scalesWithDifficulty()
 	{
-		return switch(this.damageType.getDamageScaling()){
+		return switch (this.damageType.getDamageScaling())
+		{
 			case NEVER -> false;
 			case WHEN_CAUSED_BY_LIVING_NON_PLAYER ->
 					this.causingEntity instanceof LivingEntity && !(this.causingEntity instanceof Player);
@@ -92,13 +93,12 @@ public class DamageSourceMock implements DamageSource
 			return true;
 		}
 
-		if (!(obj instanceof DamageSource))
+		if (!(obj instanceof DamageSource other))
 		{
 			return false;
 		}
 
-		DamageSource other = (DamageSource) obj;
-		return Objects.equals(this.getDamageType(), other.getDamageType()) && Objects.equals(this.getCausingEntity(), other.getCausingEntity())
+        return Objects.equals(this.getDamageType(), other.getDamageType()) && Objects.equals(this.getCausingEntity(), other.getCausingEntity())
 				&& Objects.equals(this.getDirectEntity(), other.getDirectEntity()) && Objects.equals(this.getDamageLocation(), other.getDamageLocation());
 	}
 

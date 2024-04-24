@@ -79,19 +79,6 @@ class LivingEntityMockTest
 	}
 
 	@Test
-	void testIsInvisibleDefault()
-	{
-		assertFalse(livingEntity.isInvisible());
-	}
-
-	@Test
-	void testSetInvisible()
-	{
-		livingEntity.setInvisible(true);
-		assertTrue(livingEntity.isInvisible());
-	}
-
-	@Test
 	void testSwingMainHand()
 	{
 		assertDoesNotThrow(() -> livingEntity.swingMainHand());

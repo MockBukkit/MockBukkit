@@ -32,10 +32,10 @@ import java.util.Optional;
  *
  * 	&#064;Test
  * 	void aUnitTest()
- *	{
- *		assert serverMock != null;
- *		// ...
- *	}
+ *    {
+ * 		assert serverMock != null;
+ * 		// ...
+ *    }
  *
  * }
  * </code></pre>
@@ -50,16 +50,16 @@ import java.util.Optional;
  * 	private ServerMock serverMock;
  *
  * 	public ConstructorExampleTest(<b>&#064;MockBukkitSever</b> ServerMock serverMock)
- *	{
+ *    {
  * 		this.serverMock = serverMock;
- *	}
+ *    }
  *
  * 	&#064;Test
  * 	void aUnitTest()
- *	{
+ *    {
  * 		assert serverMock != null;
  * 		// ...
- *	}
+ *    }
  *
  * }
  * </code></pre>
@@ -73,10 +73,10 @@ import java.util.Optional;
  *
  * 	&#064;Test
  * 	void aUnitTest(<b>&#064;MockBukkitInject</b> ServerMock serverMock)
- *	{
+ *    {
  * 		assert serverMock != null;
  * 		// ...
- *	}
+ *    }
  *
  * }
  * </code></pre>

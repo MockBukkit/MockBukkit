@@ -117,7 +117,8 @@ public abstract class InventoryViewMock extends InventoryView
 	@Override
 	public void setTitle(@NotNull String title)
 	{
-		if (!this.titleChanged) {
+		if (!this.titleChanged)
+		{
 			this.originalTitle = this.name;
 			this.titleChanged = true;
 		}

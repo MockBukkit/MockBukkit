@@ -54,6 +54,7 @@ import com.destroystokyo.paper.event.player.PlayerConnectionCloseEvent;
 import com.destroystokyo.paper.event.server.WhitelistToggleEvent;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.google.common.base.Preconditions;
+import io.papermc.paper.ban.BanListType;
 import io.papermc.paper.datapack.DatapackManager;
 import io.papermc.paper.math.Position;
 import io.papermc.paper.threadedregions.scheduler.AsyncScheduler;
@@ -1740,6 +1741,12 @@ public class ServerMock extends Server.Spigot implements Server
 				})
 				.map(uuid -> this.getOfflinePlayer((UUID) uuid))
 				.collect(Collectors.toSet());
+	}
+
+	@Override
+	public <B extends BanList<E>, E> @NotNull B getBanList(@NotNull BanListType<B> type)
+	{
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

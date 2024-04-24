@@ -10,6 +10,7 @@ import org.bukkit.block.Hopper;
 import org.bukkit.loot.LootTable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.Range;
 
 import java.util.UUID;
 
@@ -160,6 +161,20 @@ public class HopperStateMock extends ContainerStateMock implements Hopper
 
 	@Override
 	public long setNextRefill(long refillAt)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setTransferCooldown(@Range(from = 0L, to = 2147483647L) int cooldown)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getTransferCooldown()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

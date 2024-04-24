@@ -4,9 +4,9 @@ import com.destroystokyo.paper.util.VersionFetcher;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Multimap;
 import io.papermc.paper.inventory.ItemRarity;
-import net.kyori.adventure.key.Keyed;
 import io.papermc.paper.inventory.tooltip.TooltipContext;
 import io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager;
+import net.kyori.adventure.key.Keyed;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.flattener.ComponentFlattener;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
@@ -368,6 +368,13 @@ public class UnsafeValuesMock implements UnsafeValues
 		{
 			return null;
 		}
+	}
+
+	@Override
+	public String getTranslationKey(Attribute attribute)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	private String handleTranslateItemEdgeCases(Material material)
