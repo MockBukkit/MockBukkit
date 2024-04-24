@@ -83,6 +83,7 @@ public abstract class AbstractSkeletonMock extends MonsterMock implements Abstra
 	 * @param entity The {@link LivingEntity} to check.
 	 * @param charge The charge of the attack.
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertAttacked(LivingEntity entity, float charge)
 	{
 		Preconditions.checkNotNull(entity, "Entity cannot be null");

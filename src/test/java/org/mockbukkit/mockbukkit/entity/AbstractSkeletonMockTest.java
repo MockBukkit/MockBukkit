@@ -11,9 +11,12 @@ import org.opentest4j.AssertionFailedError;
 
 import java.util.UUID;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.not;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockbukkit.mockbukkit.matcher.entity.skeleton.SkeletonRangedAttackMatcher.hasAttacked;
 
 class AbstractSkeletonMockTest
 {
@@ -72,7 +75,7 @@ class AbstractSkeletonMockTest
 		Player player = server.addPlayer();
 
 		skeleton.rangedAttack(player, 0.5f);
-		skeleton.assertAttacked(player, 0.5f);
+		assertThat(skeleton, hasAttacked(player, 0.5f));
 	}
 
 	@Test
@@ -94,7 +97,7 @@ class AbstractSkeletonMockTest
 	void testAssertAttackedThrowsWithNoAttack()
 	{
 		Player player = server.addPlayer();
-		assertThrows(AssertionFailedError.class, () -> skeleton.assertAttacked(player, 0.5f));
+		assertThat(skeleton, not(hasAttacked(player, 0.5f)));
 	}
 
 	@Test
@@ -103,8 +106,8 @@ class AbstractSkeletonMockTest
 		Player player = server.addPlayer();
 		skeleton.rangedAttack(player, 0.5f);
 
-		assertThrows(IllegalArgumentException.class, () -> skeleton.assertAttacked(player, -0.5f));
-		assertThrows(IllegalArgumentException.class, () -> skeleton.assertAttacked(player, 1.5f));
+		assertThat(skeleton, hasAttacked(player, -0.5f));
+		assertThat(skeleton, hasAttacked(player, 1.5f));
 	}
 
 
@@ -114,7 +117,7 @@ class AbstractSkeletonMockTest
 		Player player = server.addPlayer();
 		skeleton.rangedAttack(player, 0.5f);
 
-		assertThrows(AssertionFailedError.class, () -> skeleton.assertAttacked(player, 0.6f));
+		assertThat(skeleton, not(hasAttacked(player, 0.6f)));
 	}
 
 	@Test
@@ -123,7 +126,7 @@ class AbstractSkeletonMockTest
 		Player player = server.addPlayer();
 		skeleton.setChargingAttack(true);
 		skeleton.rangedAttack(player, 0.5f);
-		skeleton.assertAggressiveAttack(player, 0.5f);
+		assertThat(skeleton, hasAttacked(player, 0.5f, true));
 	}
 
 	@Test
@@ -131,7 +134,7 @@ class AbstractSkeletonMockTest
 	{
 		Player player = server.addPlayer();
 		skeleton.rangedAttack(player, 0.5f);
-		assertThrows(AssertionFailedError.class, () -> skeleton.assertAggressiveAttack(player, 0.5f));
+		assertThat(skeleton, not(hasAttacked(player, 0.5f, true)));
 	}
 
 
