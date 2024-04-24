@@ -252,10 +252,10 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	{
 		this.pages.clear();
 
-        for (String page : pages)
+		for (String page : pages)
 		{
-            this.addPage(page);
-        }
+			this.addPage(page);
+		}
 	}
 
 	@Override

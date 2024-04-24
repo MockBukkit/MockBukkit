@@ -20,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BookMetaMockTest
 {
+
 	private BookMetaMock meta;
 
 	@BeforeEach
@@ -53,7 +54,7 @@ public class BookMetaMockTest
 	void constructor_Clone_CopiesValues()
 	{
 		final String AUTHOR = "Bumba";
-		final String TITLE  = "De Lu";
+		final String TITLE = "De Lu";
 		final BookMetaMock.Generation GENERATION = BookMetaMock.Generation.ORIGINAL;
 
 		meta.setAuthor(AUTHOR);
@@ -67,7 +68,7 @@ public class BookMetaMockTest
 		assertEquals(TITLE, cloned.getTitle());
 		assertEquals(GENERATION, cloned.getGeneration());
 		assertEquals(1, cloned.getPageCount());
-		for(int i = 1; i <= cloned.getPageCount(); i++)
+		for (int i = 1; i <= cloned.getPageCount(); i++)
 		{
 			assertEquals(meta.getPage(i), cloned.getPage(i));
 		}
@@ -100,7 +101,7 @@ public class BookMetaMockTest
 	void clone_CopiesValues()
 	{
 		final String AUTHOR = "Bumba";
-		final String TITLE  = "De Lu";
+		final String TITLE = "De Lu";
 		final BookMetaMock.Generation GENERATION = BookMetaMock.Generation.ORIGINAL;
 
 		meta.setAuthor(AUTHOR);
@@ -114,7 +115,7 @@ public class BookMetaMockTest
 		assertEquals(TITLE, cloned.getTitle());
 		assertEquals(GENERATION, cloned.getGeneration());
 		assertEquals(1, cloned.getPageCount());
-		for(int i = 1; i <= cloned.getPageCount(); i++)
+		for (int i = 1; i <= cloned.getPageCount(); i++)
 		{
 			assertEquals(meta.getPage(i), cloned.getPage(i));
 		}
@@ -197,13 +198,13 @@ public class BookMetaMockTest
 	@Test
 	void test_equals_SameObject()
 	{
-        assertEquals(meta, meta);
+		assertEquals(meta, meta);
 	}
 
 	@Test
 	void test_equals_DifferentObject()
 	{
-        assertNotEquals(meta, Material.DIAMOND);
+		assertNotEquals(meta, Material.DIAMOND);
 
 		BookMetaMock meta2 = meta.clone();
 		meta2.setUnbreakable(!meta.isUnbreakable()); // This is not from BookMeta, but from ItemMeta
@@ -223,7 +224,7 @@ public class BookMetaMockTest
 		meta2.setAuthor("De Lu");
 		meta2.addPage("Page1");
 
-        assertEquals(meta1, meta2);
+		assertEquals(meta1, meta2);
 	}
 
 	@Test
@@ -234,7 +235,7 @@ public class BookMetaMockTest
 		meta.setTitle("Bumba1");
 		cloned.setTitle("Bumba2");
 
-        assertNotEquals(meta, cloned);
+		assertNotEquals(meta, cloned);
 	}
 
 	@Test
@@ -303,4 +304,5 @@ public class BookMetaMockTest
 		assertNotSame(pages, meta.getPages()); // testing that the `pages`' array modifications is not reflected in the book.
 		assertNotEquals(pages, meta.getPages()); // testing that the `pages`' array modifications is not reflected in the book.
 	}
+
 }
