@@ -139,9 +139,15 @@ public class BlockDataMock implements BlockData
 	@Override
 	public @NotNull String getAsString()
 	{
+		return getAsString(false);
+	}
+
+	@Override
+	public @NotNull String getAsString(boolean hideUnspecified)
+	{
 		StringBuilder stateString = new StringBuilder("minecraft:" + getMaterial().name().toLowerCase());
 
-		if (!this.data.isEmpty())
+		if (!hideUnspecified && !this.data.isEmpty())
 		{
 			stateString.append('[');
 			stateString.append(this.data.entrySet().stream().map(entry -> entry.getKey() + "=" + entry.getValue().toString().toLowerCase()).collect(Collectors.joining(",")));
@@ -149,13 +155,6 @@ public class BlockDataMock implements BlockData
 		}
 
 		return stateString.toString();
-	}
-
-	@Override
-	public @NotNull String getAsString(boolean hideUnspecified)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
