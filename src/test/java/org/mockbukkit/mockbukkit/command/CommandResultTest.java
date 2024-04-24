@@ -10,6 +10,7 @@ import static org.hamcrest.Matchers.not;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockbukkit.mockbukkit.matcher.command.CommandResultAnyResponseMatcher.hasAnyResponse;
 import static org.mockbukkit.mockbukkit.matcher.command.CommandResultResponseMatcher.hasResponse;
 import static org.mockbukkit.mockbukkit.matcher.command.CommandResultSucceedMatcher.hasSucceeded;
 
@@ -112,7 +113,7 @@ class CommandResultTest
 	{
 		ConsoleCommandSenderMock sender = new ConsoleCommandSenderMock();
 		CommandResult result = new CommandResult(true, sender);
-		result.assertNoResponse();
+		assertThat(result, not(hasAnyResponse()));
 	}
 
 	@Test
@@ -121,7 +122,7 @@ class CommandResultTest
 		ConsoleCommandSenderMock sender = new ConsoleCommandSenderMock();
 		sender.sendMessage("More hello world");
 		CommandResult result = new CommandResult(true, sender);
-		assertThrows(AssertionError.class, result::assertNoResponse);
+		assertThat(result, hasAnyResponse());
 	}
 
 }
