@@ -67,6 +67,7 @@ public class CommandResult
 	 * @param message The message to check for.
 	 * @see MessageTarget#nextMessage()
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertResponse(String message)
 	{
 		String received = sender.nextMessage();
@@ -88,6 +89,7 @@ public class CommandResult
 	 * @see #assertResponse(String)
 	 * @see MessageTarget#nextMessage()
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertResponse(@NotNull String format, Object... objects)
 	{
 		assertResponse(String.format(format, objects));
