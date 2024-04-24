@@ -103,7 +103,6 @@ public abstract class HumanEntityMock extends LivingEntityMock implements HumanE
 		throw new UnimplementedOperationException();
 	}
 
-
 	@Override
 	public void closeInventory()
 	{

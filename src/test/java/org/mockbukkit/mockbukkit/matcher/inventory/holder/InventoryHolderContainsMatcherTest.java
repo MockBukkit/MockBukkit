@@ -1,8 +1,9 @@
-package org.mockbukkit.mockbukkit.matcher.allay;
+package org.mockbukkit.mockbukkit.matcher.inventory.holder;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.hamcrest.Matcher;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,12 +15,11 @@ import org.mockbukkit.testutils.matcher.AbstractMatcherTest;
 
 import java.util.UUID;
 
-import static org.mockbukkit.mockbukkit.matcher.allay.AllayInventoryContainsMatcher.inventoryContains;
+import static org.mockbukkit.mockbukkit.matcher.inventory.holder.InventoryHolderContainsMatcher.inventoryContains;
 
 @ExtendWith(MockBukkitExtension.class)
-class AllayInventoryContainersMatcherTest extends AbstractMatcherTest
+class InventoryHolderContainsMatcherTest extends AbstractMatcherTest
 {
-
 	@MockBukkitInject
 	private ServerMock server;
 	private AllayMock allay;
@@ -28,15 +28,9 @@ class AllayInventoryContainersMatcherTest extends AbstractMatcherTest
 	@BeforeEach
 	void setUp()
 	{
-		allay = new AllayMock(server, UUID.randomUUID());
+		this.allay = new AllayMock(server, UUID.randomUUID());
 		allay.simulatePlayerInteract(Material.STONE);
 		allay.simulateItemPickup(stack);
-	}
-
-	@Override
-	protected Matcher<?> createMatcher()
-	{
-		return inventoryContains(stack);
 	}
 
 	@Test
@@ -65,10 +59,10 @@ class AllayInventoryContainersMatcherTest extends AbstractMatcherTest
 		assertDescription("Should have Itemstack in inventory", inventoryContains(stack));
 	}
 
-	@Test
-	void testDoesntMatchUnknownType()
+	@Override
+	protected Matcher<?> createMatcher()
 	{
-		assertUnknownTypeSafe(createMatcher());
+		return inventoryContains(stack);
 	}
 
 }
