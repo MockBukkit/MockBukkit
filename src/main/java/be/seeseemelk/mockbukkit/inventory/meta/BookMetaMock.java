@@ -50,6 +50,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 		this.title = meta.getTitle();
 		this.author = meta.getAuthor();
 		this.pages = new ArrayList<>(meta.getPages());
+		this.generation = meta.getGeneration();
 	}
 
 	@Override
@@ -157,7 +158,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	}
 
 	@Override
-	public String getTitle()
+	public @Nullable String getTitle()
 	{
 		return this.title;
 	}
@@ -188,13 +189,13 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	}
 
 	@Override
-	public String getAuthor()
+	public @Nullable String getAuthor()
 	{
 		return author;
 	}
 
 	@Override
-	public void setAuthor(String author)
+	public void setAuthor(@Nullable String author)
 	{
 		this.author = author;
 	}
@@ -251,14 +252,10 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	public void setPages(@NotNull List<String> pages)
 	{
 		this.pages.clear();
-		Iterator<String> var2 = pages.iterator();
 
-		while (var2.hasNext())
-		{
-			String page = var2.next();
-			this.addPage(page);
-		}
-
+        for (String page : pages) {
+            this.addPage(page);
+        }
 	}
 
 	@Override
@@ -292,9 +289,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	@Override
 	public @NotNull BookMetaMock clone()
 	{
-		BookMetaMock mock = (BookMetaMock) super.clone();
-		mock.pages = new ArrayList<>(pages);
-		return mock;
+		return new BookMetaMock(this);
 	}
 
 	@Override
@@ -304,13 +299,13 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	}
 
 	@Override
-	public Generation getGeneration()
+	public @Nullable Generation getGeneration()
 	{
 		return generation;
 	}
 
 	@Override
-	public void setGeneration(Generation generation)
+	public void setGeneration(@Nullable Generation generation)
 	{
 		this.generation = generation;
 	}
