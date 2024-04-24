@@ -1,0 +1,59 @@
+package org.mockbukkit.mockbukkit.matcher.command;
+
+import org.hamcrest.Matcher;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.command.CommandResult;
+import org.mockbukkit.testutils.matcher.AbstractMatcherTest;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.not;
+import static org.mockbukkit.mockbukkit.matcher.command.CommandResultSucceedMatcher.hasSucceeded;
+
+@ExtendWith(MockBukkitExtension.class)
+class CommandResultSucceedMatcherTest extends AbstractMatcherTest
+{
+
+	@MockBukkitInject
+	ServerMock serverMock;
+	private CommandResult commandResult;
+
+	@BeforeEach
+	void setUp()
+	{
+		this.commandResult = new CommandResult(true, serverMock.addPlayer());
+	}
+
+	@Test
+	void succeeded()
+	{
+		assertThat(commandResult, hasSucceeded());
+	}
+
+	@Test
+	void notSucceeded()
+	{
+		assertThat(commandResult, not(hasSucceeded()));
+	}
+
+	@Test
+	void description(){
+		assertDescription("to have a success code", hasSucceeded());
+	}
+
+	@Test
+	void nullSafe(){
+		assertNullSafe(hasSucceeded());
+	}
+
+	@Override
+	protected Matcher<?> createMatcher()
+	{
+		return hasSucceeded();
+	}
+
+}

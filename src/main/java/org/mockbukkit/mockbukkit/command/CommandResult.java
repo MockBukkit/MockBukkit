@@ -46,6 +46,7 @@ public class CommandResult
 	/**
 	 * Asserts if the returned code of the executed command is not {@code true}.
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertSucceeded()
 	{
 		assertTrue(success);
@@ -54,6 +55,7 @@ public class CommandResult
 	/**
 	 * Asserts if the returned code of the executed command is not {@code false}.
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertFailed()
 	{
 		assertFalse(success);

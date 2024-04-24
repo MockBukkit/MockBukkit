@@ -107,6 +107,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -118,6 +119,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assumptions.assumeFalse;
+import static org.mockbukkit.mockbukkit.matcher.block.BlockMaterialTypeMatcher.hasMaterial;
 
 class PlayerMockTest
 {
@@ -347,7 +349,7 @@ class PlayerMockTest
 		boolean broken = player.breakBlock(block);
 		assertTrue(broken);
 		server.getPluginManager().assertEventFired(BlockBreakEvent.class);
-		block.assertType(Material.AIR);
+		assertThat(block, hasMaterial(Material.AIR));
 	}
 
 	@Test
@@ -361,7 +363,7 @@ class PlayerMockTest
 		boolean broken = player.breakBlock(block);
 		assertFalse(broken);
 		server.getPluginManager().assertEventFired(BlockBreakEvent.class);
-		block.assertType(Material.STONE);
+		assertThat(block, hasMaterial(Material.STONE));
 	}
 
 	@Test
@@ -376,7 +378,7 @@ class PlayerMockTest
 		assertFalse(event.isCancelled());
 		server.getPluginManager().assertEventFired(BlockDamageEvent.class);
 		server.getPluginManager().assertEventFired(BlockBreakEvent.class);
-		block.assertType(Material.AIR);
+		assertThat(block, hasMaterial(Material.AIR));
 	}
 
 	@Test
@@ -390,7 +392,7 @@ class PlayerMockTest
 		assertNotNull(event);
 		assertFalse(event.isCancelled());
 		server.getPluginManager().assertEventFired(BlockBreakEvent.class);
-		block.assertType(Material.AIR);
+		assertThat(block, hasMaterial(Material.AIR));
 	}
 
 	@Test
@@ -401,7 +403,7 @@ class PlayerMockTest
 		BlockMock block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
 		block.setType(Material.STONE);
 		assertNull(player.simulateBlockBreak(block));
-		block.assertType(Material.STONE);
+		assertThat(block, hasMaterial(Material.STONE));
 	}
 
 	@Test
@@ -412,7 +414,7 @@ class PlayerMockTest
 		BlockMock block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
 		block.setType(Material.STONE);
 		assertNull(player.simulateBlockBreak(block));
-		block.assertType(Material.STONE);
+		assertThat(block, hasMaterial(Material.STONE));
 	}
 
 	@Test
@@ -432,7 +434,7 @@ class PlayerMockTest
 		BlockBreakEvent event = player.simulateBlockBreak(block);
 		assertNotNull(event);
 		assertTrue(event.isCancelled());
-		block.assertType(Material.STONE);
+		assertThat(block, hasMaterial(Material.STONE));
 	}
 
 	@Test
@@ -450,7 +452,7 @@ class PlayerMockTest
 		BlockMock block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
 		block.setType(Material.STONE);
 		assertNull(player.simulateBlockBreak(block));
-		block.assertType(Material.STONE);
+		assertThat(block, hasMaterial(Material.STONE));
 	}
 
 	@Test
@@ -471,7 +473,7 @@ class PlayerMockTest
 		BlockBreakEvent event = player.simulateBlockBreak(block);
 		assertNotNull(event);
 		assertTrue(event.isCancelled());
-		block.assertType(Material.STONE);
+		assertThat(block, hasMaterial(Material.STONE));
 	}
 
 	@Test
@@ -492,7 +494,7 @@ class PlayerMockTest
 		BlockBreakEvent event = player.simulateBlockBreak(block);
 		assertNotNull(event);
 		assertFalse(event.isCancelled());
-		block.assertType(Material.AIR);
+		assertThat(block, hasMaterial(Material.AIR));
 	}
 
 	@Test
@@ -543,7 +545,7 @@ class PlayerMockTest
 		assumeFalse(event.isCancelled());
 
 		assertFalse(wasBroken.get(), "BlockBreakEvent was fired");
-		block.assertType(Material.STONE);
+		assertThat(block, hasMaterial(Material.STONE));
 	}
 
 	@Test
@@ -574,7 +576,7 @@ class PlayerMockTest
 		assumeFalse(event.isCancelled());
 
 		assertEquals(1, brokenCount.get(), "BlockBreakEvent was not fired only once");
-		block.assertType(Material.AIR);
+		assertThat(block, hasMaterial(Material.AIR));
 	}
 
 	@Test
@@ -604,7 +606,7 @@ class PlayerMockTest
 		assertNotNull(event);
 		assumeFalse(event.isCancelled());
 		assertEquals(1, brokenCount.get(), "BlockBreakEvent was not fired only once");
-		block.assertType(Material.AIR);
+		assertThat(block, hasMaterial(Material.AIR));
 	}
 
 	@Test
