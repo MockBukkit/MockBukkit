@@ -47,6 +47,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -58,6 +59,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockbukkit.mockbukkit.matcher.command.MessageTargetReceivedMessageMatcher.hasReceived;
 
 class EntityMockTest
 {
@@ -335,8 +337,9 @@ class EntityMockTest
 	{
 		entity.sendMessage("hello");
 		entity.sendMessage("my", "world");
-
-		entity.assertNoMoreSaid();
+		assertEquals("hello", entity.nextMessage());
+		assertEquals("my", entity.nextMessage());
+		assertEquals("world", entity.nextMessage());
 	}
 
 	@Test
@@ -347,8 +350,7 @@ class EntityMockTest
 				.clickEvent(ClickEvent.openUrl("https://www.youtube.com/watch?v=dQw4w9WgXcQ"))
 				.build();
 		entity.sendMessage(comp);
-
-		entity.assertNoMoreSaid();
+		assertThat(entity, hasReceived(comp));
 	}
 
 	@Test
