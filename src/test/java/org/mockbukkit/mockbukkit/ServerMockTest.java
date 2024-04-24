@@ -107,6 +107,7 @@ import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Stream;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -118,6 +119,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
+import static org.mockbukkit.mockbukkit.matcher.command.CommandResultSucceedMatcher.hasSucceeded;
 
 @ExtendWith(MockBukkitExtension.class)
 class ServerMockTest
@@ -332,7 +334,7 @@ class ServerMockTest
 
 		Command command = server.getPluginCommand("testcommand");
 		CommandResult result = server.executePlayer(command, "a", "b");
-		result.assertSucceeded();
+		assertThat(result, hasSucceeded());
 		assertEquals(server.getPlayer(0), plugin.commandSender);
 		assertEquals(command, plugin.command);
 
@@ -365,7 +367,7 @@ class ServerMockTest
 		plugin.commandReturns = true;
 
 		CommandResult result = server.executeConsole("testcommand");
-		result.assertSucceeded();
+		assertThat(result, hasSucceeded());
 	}
 
 	@Test
