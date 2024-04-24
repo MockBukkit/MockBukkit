@@ -5,9 +5,12 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.not;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockbukkit.mockbukkit.matcher.command.CommandResultSucceedMatcher.hasSucceeded;
 
 class CommandResultTest
 {
@@ -44,14 +47,14 @@ class CommandResultTest
 	void assertSucceed_Succeeded_DoesNotAssert()
 	{
 		CommandResult result = new CommandResult(true, target);
-		result.assertSucceeded();
+		assertThat(result, hasSucceeded());
 	}
 
 	@Test
 	void assertSucceed_Failed_Asserts()
 	{
 		CommandResult result = new CommandResult(false, target);
-		assertThrows(AssertionError.class, result::assertSucceeded);
+		assertThat(result, not(hasSucceeded()));
 	}
 
 	@Test
