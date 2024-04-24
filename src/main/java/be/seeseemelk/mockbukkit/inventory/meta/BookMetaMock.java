@@ -13,7 +13,6 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
@@ -236,7 +235,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	@Deprecated(since = "1.16")
 	public @NotNull List<String> getPages()
 	{
-		return pages;
+		return this.pages;
 	}
 
 	@Override
@@ -253,7 +252,8 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	{
 		this.pages.clear();
 
-        for (String page : pages) {
+        for (String page : pages)
+		{
             this.addPage(page);
         }
 	}
