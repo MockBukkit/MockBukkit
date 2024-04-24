@@ -136,4 +136,18 @@ class BlockDataMockTest
 		assertNotEquals(wallSign.getFacing(), clone.getFacing());
 	}
 
+	@Test
+	void test_getAsString()
+	{
+		BlockDataMock blockData = new BlockDataMock(Material.STONE);
+		blockData.set("key", "value");
+
+		assertEquals("minecraft:stone", blockData.getAsString());
+		assertEquals("minecraft:stone[key=value]", blockData.getAsString(true));
+
+		blockData.set("multi", "value2");
+
+		assertEquals("minecraft:stone[key=value,multi=value2]", blockData.getAsString(true));
+	}
+
 }
