@@ -372,7 +372,6 @@ public class BlockDataMock implements BlockData
 	public static @NotNull BlockDataMock mock(@NotNull Material material)
 	{
 		Preconditions.checkNotNull(material, NULL_MATERIAL_EXCEPTION_MESSAGE);
-		// checkMaterial(material);
 
 		BlockDataMock mock = attemptMockByPaperMaterialTags(material);
 		if (mock != null)
