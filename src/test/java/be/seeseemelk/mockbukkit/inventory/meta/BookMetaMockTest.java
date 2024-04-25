@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
-public class BookMetaMockTest
+class BookMetaMockTest
 {
 
 	private BookMetaMock meta;
@@ -42,7 +42,7 @@ public class BookMetaMockTest
 		assertNull(meta.getTitle());
 		assertNull(meta.getAuthor());
 		assertNull(meta.getGeneration());
-		assertEquals(meta.getPageCount(), 0);
+		assertEquals(0, meta.getPageCount());
 
 		assertFalse(meta.hasAuthor());
 		assertFalse(meta.hasTitle());
