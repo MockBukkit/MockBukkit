@@ -37,7 +37,8 @@ class CommandResultSucceedMatcherTest extends AbstractMatcherTest
 	@Test
 	void notSucceeded()
 	{
-		assertThat(commandResult, not(hasSucceeded()));
+		CommandResult commandResultFail = new CommandResult(false, serverMock.addPlayer());
+		assertThat(commandResultFail, not(hasSucceeded()));
 	}
 
 	@Test

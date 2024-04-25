@@ -19,7 +19,15 @@ public class CommandResultSucceedMatcher extends TypeSafeMatcher<CommandResult>
 		description.appendText("to have a success code");
 	}
 
-	public static CommandResultSucceedMatcher hasSucceeded(){
+	@Override
+	public void describeMismatchSafely(CommandResult commandResult, Description description)
+	{
+		description.appendValue("had success code ").appendValue(commandResult.hasSucceeded());
+	}
+
+	public static CommandResultSucceedMatcher hasSucceeded()
+	{
 		return new CommandResultSucceedMatcher();
 	}
+
 }

@@ -1,14 +1,10 @@
 package org.mockbukkit.mockbukkit.matcher.entity.skeleton;
 
 import com.google.common.base.Preconditions;
-import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.entity.LivingEntity;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
 import org.mockbukkit.mockbukkit.entity.AbstractSkeletonMock;
-
-import java.lang.reflect.Field;
-import java.util.Map;
 
 public class SkeletonRangedAttackMatcher extends TypeSafeMatcher<AbstractSkeletonMock>
 {
@@ -29,22 +25,11 @@ public class SkeletonRangedAttackMatcher extends TypeSafeMatcher<AbstractSkeleto
 	@Override
 	protected boolean matchesSafely(AbstractSkeletonMock item)
 	{
-		try
+		if (!item.hasAttackedWithCharge(target, charge))
 		{
-			Field attackedMobsField = item.getClass().getDeclaredField("attackedMobs");
-			attackedMobsField.setAccessible(true);
-			Map<LivingEntity, Pair<Float, Boolean>> attackedMobs = (Map<LivingEntity, Pair<Float, Boolean>>) attackedMobsField.get(item);
-			if (!attackedMobs.containsKey(target) || attackedMobs.get(target).getLeft() != charge)
-			{
-				return false;
-			}
-			return !aggressive || attackedMobs.get(target).getRight();
-		}
-		catch (NoSuchFieldException | IllegalAccessException e)
-		{
-			e.printStackTrace();
 			return false;
 		}
+		return !aggressive || item.hasAttackedWhileAggressive(target);
 	}
 
 	@Override

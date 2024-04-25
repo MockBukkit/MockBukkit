@@ -106,8 +106,8 @@ class AbstractSkeletonMockTest
 		Player player = server.addPlayer();
 		skeleton.rangedAttack(player, 0.5f);
 
-		assertThat(skeleton, hasAttacked(player, -0.5f));
-		assertThat(skeleton, hasAttacked(player, 1.5f));
+		assertThrows(IllegalArgumentException.class, () -> skeleton.hasAttackedWithCharge(player, -0.5f));
+		assertThrows(IllegalArgumentException.class, () -> skeleton.hasAttackedWithCharge(player, 1.5f));
 	}
 
 

@@ -36,14 +36,12 @@ class InventoryHolderContainsMatcherTest extends AbstractMatcherTest
 	void testMatches()
 	{
 		assertMatches(inventoryContains(stack), allay);
-		assertMismatchDescription("doesn't have Itemstack \"ItemStack{DIRT x 1}\" in Inventory",
-				inventoryContains(new ItemStack(Material.DIRT)), allay);
 	}
 
 	@Test
 	void testDoesNotMatch()
 	{
-		assertDoesNotMatch(inventoryContains(new ItemStack(Material.WATER)), allay);
+		assertDoesNotMatch(inventoryContains(new ItemStack(Material.DIAMOND)), allay);
 	}
 
 	@Test

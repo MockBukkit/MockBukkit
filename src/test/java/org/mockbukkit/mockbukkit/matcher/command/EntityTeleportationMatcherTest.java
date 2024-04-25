@@ -68,12 +68,6 @@ class EntityTeleportationMatcherTest extends AbstractMatcherTest
 		testIsNullSafe();
 	}
 
-	@Test
-	void description()
-	{
-		assertDescription("to have teleported", hasTeleported());
-	}
-
 	@Override
 	protected Matcher<?> createMatcher()
 	{

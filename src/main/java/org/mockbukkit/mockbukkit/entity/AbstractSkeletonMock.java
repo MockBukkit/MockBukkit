@@ -1,12 +1,12 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.ServerMock;
 import com.google.common.base.Preconditions;
 import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.entity.AbstractSkeleton;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Skeleton;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -93,6 +93,19 @@ public abstract class AbstractSkeletonMock extends MonsterMock implements Abstra
 		{
 			fail();
 		}
+	}
+
+	public boolean hasAttackedWithCharge(LivingEntity entity, float charge)
+	{
+		Preconditions.checkNotNull(entity, "Entity cannot be null");
+		Preconditions.checkArgument(charge >= 0F && charge <= 1F, "Charge must be between 0 and 1");
+		return attackedMobs.containsKey(entity) && attackedMobs.get(entity).getLeft() == charge;
+	}
+
+	public boolean hasAttackedWhileAggressive(LivingEntity entity)
+	{
+		Preconditions.checkNotNull(entity, "Entity cannot be null");
+		return attackedMobs.containsKey(entity) && attackedMobs.get(entity).getRight();
 	}
 
 	/**

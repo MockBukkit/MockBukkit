@@ -20,21 +20,30 @@ public class EntityTeleportationMatcher extends TypeSafeMatcher<EntityMock>
 	@Override
 	protected boolean matchesSafely(EntityMock item)
 	{
-		if(location != null)
+		if (location != null)
 		{
 			Location itemLocation = item.getLocation();
 			double distance = itemLocation.distance(location);
-			if (itemLocation.getWorld() != location.getWorld() || distance > maximumDistance){
+			if (itemLocation.getWorld() != location.getWorld() || distance > maximumDistance)
+			{
 				return false;
 			}
 		}
-		return item.hasTeleported();
+		boolean returnValue = item.hasTeleported();
+		item.clearTeleported();
+		return returnValue;
 	}
 
 	@Override
 	public void describeTo(Description description)
 	{
-		description.appendText("to have teleported");
+		description.appendText("to have teleported to specified location");
+	}
+
+	@Override
+	public void describeMismatchSafely(EntityMock entityMock, Description description)
+	{
+		description.appendText("was at location").appendValue(entityMock.getLocation());
 	}
 
 	public static EntityTeleportationMatcher hasTeleported()
