@@ -1,7 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.inventory.LlamaInventoryMock;
 import com.google.common.base.Preconditions;
 import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.entity.EntityType;
@@ -10,6 +8,8 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Llama;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.inventory.LlamaInventoryMock;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -91,6 +91,7 @@ public class LlamaMock extends ChestedHorseMock implements Llama, MockRangedEnti
 	 * @param entity The {@link LivingEntity} to check.
 	 * @param charge The charge of the attack.
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertAttacked(LivingEntity entity, float charge)
 	{
 		Preconditions.checkNotNull(entity, "Entity cannot be null");
@@ -108,6 +109,7 @@ public class LlamaMock extends ChestedHorseMock implements Llama, MockRangedEnti
 	 * @param entity The {@link LivingEntity} to check.
 	 * @param charge The charge of the attack.
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertAgressiveAttack(LivingEntity entity, float charge)
 	{
 		assertAttacked(entity, charge);
@@ -115,6 +117,23 @@ public class LlamaMock extends ChestedHorseMock implements Llama, MockRangedEnti
 		{
 			fail();
 		}
+	}
+
+	@Override
+	public boolean hasAttackedWithCharge(LivingEntity target, float charge)
+	{
+		Preconditions.checkNotNull(target, "Entity cannot be null");
+		Preconditions.checkArgument(charge >= 0 && charge <= 1, "Charge must be between 0 and 1");
+
+		return attackedMobs.containsKey(target) && attackedMobs.get(target).getLeft() == charge;
+	}
+
+	@Override
+	public boolean hasAttackedWhileAggressive(LivingEntity target)
+	{
+		Preconditions.checkNotNull(target, "Entity cannot be null");
+
+		return attackedMobs.containsKey(target) && attackedMobs.get(target).getRight();
 	}
 
 	@Override

@@ -87,7 +87,7 @@ class GoatMockTest
 	{
 		LivingEntity entity = server.addPlayer();
 		goat.ram(entity);
-		assertThat(goat, not(hasRammed(entity)));
+		assertThat(goat, hasRammed(entity));
 	}
 
 	@Test
