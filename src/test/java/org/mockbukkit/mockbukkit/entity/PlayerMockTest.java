@@ -116,6 +116,7 @@ import static org.mockbukkit.mockbukkit.matcher.entity.EntityTeleportationMatche
 import static org.mockbukkit.mockbukkit.matcher.entity.EntityLocationMatcher.isInLocation;
 import static org.mockbukkit.mockbukkit.matcher.entity.human.HumanEntityInventoryViewItemMatcher.hasItemInInventoryView;
 import static org.mockbukkit.mockbukkit.matcher.entity.human.HumanEntityInventoryViewTypeMatcher.hasInventoryViewType;
+import static org.mockbukkit.mockbukkit.matcher.entity.player.PlayerConsumeItemMatcher.hasConsumed;
 
 class PlayerMockTest
 {
@@ -1810,7 +1811,7 @@ class PlayerMockTest
 
 		player.simulateConsumeItem(consumable);
 
-		player.assertItemConsumed(consumable);
+		assertThat(player, hasConsumed(consumable));
 		server.getPluginManager().assertEventFired(GenericGameEvent.class);
 		server.getPluginManager().assertEventFired(PlayerItemConsumeEvent.class);
 	}
@@ -1832,13 +1833,13 @@ class PlayerMockTest
 	void testAssertItemConsumedWithNotConsumedItem()
 	{
 		ItemStack notConsumed = new ItemStack(Material.APPLE);
-		assertThrows(AssertionFailedError.class, () -> player.assertItemConsumed(notConsumed));
+		assertThat(player, not(hasConsumed(notConsumed)));
 	}
 
 	@Test
-	void testAssertItemConsumedWithNullItem()
+	void testHasItemConsumedWithNullItem()
 	{
-		assertThrows(NullPointerException.class, () -> player.assertItemConsumed(null));
+		assertThrows(NullPointerException.class, () -> player.hasConsumed(null));
 	}
 
 	@Test
