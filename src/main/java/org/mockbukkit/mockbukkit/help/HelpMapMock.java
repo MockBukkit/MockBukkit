@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit.help;
 
-import org.mockbukkit.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -9,6 +8,7 @@ import org.bukkit.help.HelpTopic;
 import org.bukkit.help.HelpTopicComparator;
 import org.bukkit.help.HelpTopicFactory;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.UnimplementedOperationException;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -86,10 +86,17 @@ public class HelpMapMock implements HelpMap
 	 *
 	 * @param factory The factory to check.
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertRegistered(@NotNull HelpTopicFactory<?> factory)
 	{
 		Preconditions.checkNotNull(factory, "Factory cannot be null");
 		assertTrue(factories.containsValue(factory));
+	}
+
+	public boolean hasRegistered(@NotNull HelpTopicFactory<?> factory)
+	{
+		Preconditions.checkNotNull(factory, "Factory cannot be null");
+		return factories.containsKey(factory);
 	}
 
 }
