@@ -13,7 +13,6 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
@@ -28,6 +27,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	private @Nullable String title;
 	private @NotNull List<String> pages = new ArrayList<>();
 	private @Nullable String author;
+	private @Nullable Generation generation = null;
 
 	/**
 	 * Constructs a new {@link BookMetaMock}.
@@ -49,6 +49,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 		this.title = meta.getTitle();
 		this.author = meta.getAuthor();
 		this.pages = new ArrayList<>(meta.getPages());
+		this.generation = meta.getGeneration();
 	}
 
 	@Override
@@ -56,7 +57,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	{
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + Objects.hash(author, pages, title);
+		result = prime * result + Objects.hash(author, pages, title, generation);
 		return result;
 	}
 
@@ -70,7 +71,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 		if (!(obj instanceof BookMetaMock other))
 			return false;
 		return Objects.equals(author, other.author) && Objects.equals(pages, other.pages)
-				&& Objects.equals(title, other.title);
+				&& Objects.equals(title, other.title) && Objects.equals(generation, other.generation);
 	}
 
 	@Override
@@ -156,7 +157,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	}
 
 	@Override
-	public String getTitle()
+	public @Nullable String getTitle()
 	{
 		return this.title;
 	}
@@ -187,13 +188,13 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	}
 
 	@Override
-	public String getAuthor()
+	public @Nullable String getAuthor()
 	{
 		return author;
 	}
 
 	@Override
-	public void setAuthor(String author)
+	public void setAuthor(@Nullable String author)
 	{
 		this.author = author;
 	}
@@ -234,7 +235,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	@Deprecated(since = "1.16")
 	public @NotNull List<String> getPages()
 	{
-		return pages;
+		return this.pages;
 	}
 
 	@Override
@@ -250,14 +251,11 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	public void setPages(@NotNull List<String> pages)
 	{
 		this.pages.clear();
-		Iterator<String> var2 = pages.iterator();
 
-		while (var2.hasNext())
+		for (String page : pages)
 		{
-			String page = var2.next();
 			this.addPage(page);
 		}
-
 	}
 
 	@Override
@@ -291,30 +289,25 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	@Override
 	public @NotNull BookMetaMock clone()
 	{
-		BookMetaMock mock = (BookMetaMock) super.clone();
-		mock.pages = new ArrayList<>(pages);
-		return mock;
+		return new BookMetaMock(this);
 	}
 
 	@Override
 	public boolean hasGeneration()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return generation != null;
 	}
 
 	@Override
-	public Generation getGeneration()
+	public @Nullable Generation getGeneration()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return generation;
 	}
 
 	@Override
-	public void setGeneration(Generation generation)
+	public void setGeneration(@Nullable Generation generation)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.generation = generation;
 	}
 
 	@Override

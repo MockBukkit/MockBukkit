@@ -86,35 +86,35 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 	{
 		if (tClass == Structure.class)
 		{
-			return StructureMock::new;
+			return StructureMock::from;
 		}
 		else if (tClass == StructureType.class)
 		{
-			return StructureTypeMock::new;
+			return StructureTypeMock::from;
 		}
 		else if (tClass == TrimMaterial.class)
 		{
-			return TrimMaterialMock::new;
+			return TrimMaterialMock::from;
 		}
 		else if (tClass == TrimPattern.class)
 		{
-			return TrimPatternMock::new;
+			return TrimPatternMock::from;
 		}
 		else if (tClass == MusicInstrument.class)
 		{
-			return MusicInstrumentMock::new;
+			return MusicInstrumentMock::from;
 		}
 		else if (tClass == GameEvent.class)
 		{
-			return GameEventMock::new;
+			return GameEventMock::from;
 		}
 		else if (tClass == Enchantment.class)
 		{
-			return EnchantmentMock::new;
+			return EnchantmentMock::from;
 		}
 		else if (tClass == PotionEffectType.class)
 		{
-			return MockPotionEffectType::new;
+			return MockPotionEffectType::from;
 		}
 		else if (tClass == DamageType.class)
 		{
