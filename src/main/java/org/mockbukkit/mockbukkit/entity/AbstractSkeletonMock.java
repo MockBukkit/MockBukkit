@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.fail;
  *
  * @see MonsterMock
  */
-public abstract class AbstractSkeletonMock extends MonsterMock implements AbstractSkeleton
+public abstract class AbstractSkeletonMock extends MonsterMock implements AbstractSkeleton, MockRangedEntity<AbstractSkeletonMock>
 {
 
 	private boolean shouldBurnInDay = true;
@@ -95,6 +95,7 @@ public abstract class AbstractSkeletonMock extends MonsterMock implements Abstra
 		}
 	}
 
+	@Override
 	public boolean hasAttackedWithCharge(LivingEntity entity, float charge)
 	{
 		Preconditions.checkNotNull(entity, "Entity cannot be null");
@@ -102,6 +103,7 @@ public abstract class AbstractSkeletonMock extends MonsterMock implements Abstra
 		return attackedMobs.containsKey(entity) && attackedMobs.get(entity).getLeft() == charge;
 	}
 
+	@Override
 	public boolean hasAttackedWhileAggressive(LivingEntity entity)
 	{
 		Preconditions.checkNotNull(entity, "Entity cannot be null");
