@@ -539,6 +539,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @param type      The {@link InventoryType} you are expecting
 	 * @param predicate A custom {@link Predicate} to check the opened {@link Inventory}.
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertInventoryView(String message, InventoryType type, @NotNull Predicate<Inventory> predicate)
 	{
 		InventoryView view = getOpenInventory();
@@ -559,6 +560,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @param type      The {@link InventoryType} you are expecting
 	 * @param predicate A custom {@link Predicate} to check the opened {@link Inventory}.
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertInventoryView(InventoryType type, @NotNull Predicate<Inventory> predicate)
 	{
 		assertInventoryView("The InventoryView Assertion has failed", type, predicate);
@@ -569,6 +571,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 *
 	 * @param type The {@link InventoryType} you are expecting
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertInventoryView(InventoryType type)
 	{
 		assertInventoryView("The InventoryView Assertion has failed", type, inv -> true);
@@ -580,6 +583,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 * @param message The message to display upon failure
 	 * @param type    The {@link InventoryType} you are expecting
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertInventoryView(String message, InventoryType type)
 	{
 		assertInventoryView(message, type, inv -> true);

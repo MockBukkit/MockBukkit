@@ -1,11 +1,11 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.ServerMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Goat;
 import org.bukkit.entity.LivingEntity;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -95,7 +95,8 @@ public class GoatMock extends AnimalsMock implements Goat
 		}
 	}
 
-	public boolean hasRammedEntity(@NotNull LivingEntity entity){
+	public boolean hasRammedEntity(@NotNull LivingEntity entity)
+	{
 		Preconditions.checkNotNull(entity, "Entity cannot be null");
 		return this.attackedMobs.contains(entity);
 	}
