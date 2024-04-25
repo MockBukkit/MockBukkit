@@ -4,6 +4,7 @@ import org.bukkit.Material;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
 import org.mockbukkit.mockbukkit.block.BlockMock;
+import org.mockbukkit.mockbukkit.command.CommandResult;
 
 public class BlockMaterialTypeMatcher extends TypeSafeMatcher<BlockMock>
 {
@@ -25,6 +26,12 @@ public class BlockMaterialTypeMatcher extends TypeSafeMatcher<BlockMock>
 	public void describeTo(Description description)
 	{
 		description.appendText(String.format("to be block of material '%s'", material));
+	}
+
+	@Override
+	protected void describeMismatchSafely(BlockMock item, Description mismatchDescription)
+	{
+		mismatchDescription.appendValue("was of material type").appendValue(item.getType());
 	}
 
 	public static BlockMaterialTypeMatcher hasMaterial(Material material)

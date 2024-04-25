@@ -27,6 +27,12 @@ public class HumanEntityGameModeMatcher extends TypeSafeMatcher<HumanEntityMock>
 		description.appendText("to have the specified game mode");
 	}
 
+	@Override
+	public void describeMismatchSafely(HumanEntityMock item, Description mismatchDescription)
+	{
+		mismatchDescription.appendText("was in game mode ").appendValue(item.getGameMode());
+	}
+
 	public static HumanEntityGameModeMatcher hasGameMode(GameMode gameMode)
 	{
 		return new HumanEntityGameModeMatcher(gameMode);

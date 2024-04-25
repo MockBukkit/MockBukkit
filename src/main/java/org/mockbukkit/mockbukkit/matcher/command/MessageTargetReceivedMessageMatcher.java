@@ -11,6 +11,7 @@ public class MessageTargetReceivedMessageMatcher extends TypeSafeMatcher<Message
 {
 
 	private final Component expected;
+	private Component nextMessage;
 
 	public MessageTargetReceivedMessageMatcher(Component expected)
 	{
@@ -20,13 +21,20 @@ public class MessageTargetReceivedMessageMatcher extends TypeSafeMatcher<Message
 	@Override
 	protected boolean matchesSafely(MessageTarget item)
 	{
-		return expected.equals(item.nextComponentMessage());
+		this.nextMessage = item.nextComponentMessage();
+		return expected.equals(nextMessage);
 	}
 
 	@Override
 	public void describeTo(Description description)
 	{
 		description.appendText("to receive specific message");
+	}
+
+	@Override
+	protected void describeMismatchSafely(MessageTarget item, Description description)
+	{
+		description.appendText("was ").appendValue(nextMessage);
 	}
 
 	public static MessageTargetReceivedMessageMatcher hasReceived(Component expected)
