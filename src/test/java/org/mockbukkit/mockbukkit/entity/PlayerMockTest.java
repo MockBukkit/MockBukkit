@@ -123,6 +123,8 @@ import static org.junit.jupiter.api.Assumptions.assumeFalse;
 import static org.mockbukkit.mockbukkit.matcher.block.BlockMaterialTypeMatcher.hasMaterial;
 import static org.mockbukkit.mockbukkit.matcher.entity.EntityTeleportationMatcher.hasTeleported;
 import static org.mockbukkit.mockbukkit.matcher.entity.EntityLocationMatcher.isInLocation;
+import static org.mockbukkit.mockbukkit.matcher.entity.human.HumanEntityInventoryViewItemMatcher.hasItemInInventoryView;
+import static org.mockbukkit.mockbukkit.matcher.entity.human.HumanEntityInventoryViewTypeMatcher.hasInventoryViewType;
 
 class PlayerMockTest
 {
@@ -2032,13 +2034,13 @@ class PlayerMockTest
 	@Test
 	void testAssertInventoryViewDefault()
 	{
-		player.assertInventoryView(InventoryType.CRAFTING);
+		assertThat(player, hasInventoryViewType(InventoryType.CRAFTING));
 	}
 
 	@Test
 	void testAssertInventoryViewFailsWithWrongType()
 	{
-		assertThrows(AssertionError.class, () -> player.assertInventoryView(InventoryType.ANVIL));
+		assertThat(player, not(hasInventoryViewType(InventoryType.ANVIL)));
 	}
 
 	@Test
@@ -2048,7 +2050,8 @@ class PlayerMockTest
 		ItemStack item = new ItemStackMock(Material.POTATO);
 		inventory.addItem(item);
 		player.openInventory(inventory);
-		player.assertInventoryView(InventoryType.LOOM, view -> view.contains(item));
+		assertThat(player, hasInventoryViewType(InventoryType.LOOM));
+		assertThat(player, hasItemInInventoryView(item));
 	}
 
 	@Test
@@ -2058,10 +2061,7 @@ class PlayerMockTest
 		ItemStack item = new ItemStackMock(Material.POTATO);
 		inventory.addItem(item);
 		player.openInventory(inventory);
-		assertThrows(AssertionError.class, () ->
-		{
-			player.assertInventoryView(InventoryType.LOOM, view -> view.contains(Material.APPLE));
-		});
+		assertThat(player, not(hasItemInInventoryView(Material.APPLE)));
 	}
 
 	@Test
@@ -2069,7 +2069,7 @@ class PlayerMockTest
 	{
 		InventoryMock inventory = server.createInventory(player, InventoryType.LOOM);
 		player.openInventory(inventory);
-		player.assertInventoryView("Loom", InventoryType.LOOM);
+		assertThat(player, hasInventoryViewType(InventoryType.LOOM));
 	}
 
 	@Test

@@ -26,12 +26,15 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.not;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockbukkit.mockbukkit.matcher.entity.human.HumanEntityGameModeMatcher.hasGameMode;
 
 class HumanEntityMockTest
 {
@@ -61,13 +64,13 @@ class HumanEntityMockTest
 	@Test
 	void assertGameMode_CorrectGameMode_DoesNotAssert()
 	{
-		human.assertGameMode(GameMode.SURVIVAL);
+		assertThat(human, hasGameMode(GameMode.SURVIVAL));
 	}
 
 	@Test
 	void assertGameMode_WrongGameMode_Asserts()
 	{
-		assertThrows(AssertionError.class, () -> human.assertGameMode(GameMode.CREATIVE));
+		assertThat(human, not(hasGameMode(GameMode.CREATIVE)));
 	}
 
 	@Test
