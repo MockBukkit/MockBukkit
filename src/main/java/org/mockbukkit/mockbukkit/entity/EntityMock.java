@@ -173,6 +173,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	 * @param expectedLocation The location the player should be at.
 	 * @param maximumDistance  The distance the player may maximumly be separated from the expected location.
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertLocation(@NotNull Location expectedLocation, double maximumDistance)
 	{
 		double distance = location.distance(expectedLocation);
@@ -188,6 +189,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	 * @param expectedLocation The location the player should be at.
 	 * @param maximumDistance  The distance the player may maximumly be separated from the expected location.
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertTeleported(@NotNull Location expectedLocation, double maximumDistance)
 	{
 		assertTrue(teleported, "Player did not teleport");
@@ -198,6 +200,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	/**
 	 * Assert that the player hasn't teleported. Also clears the teleported flag.
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertNotTeleported()
 	{
 		assertFalse(teleported, "Player was teleported");

@@ -1,5 +1,8 @@
 package org.mockbukkit.mockbukkit.entity;
 
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.MockPlugin;
 import org.mockbukkit.mockbukkit.ServerMock;
@@ -39,15 +42,13 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EnumSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.not;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -59,7 +60,9 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockbukkit.mockbukkit.matcher.entity.EntityTeleportationMatcher.hasTeleported;
 import static org.mockbukkit.mockbukkit.matcher.command.MessageTargetReceivedMessageMatcher.hasReceived;
+import static org.mockbukkit.mockbukkit.matcher.entity.EntityLocationMatcher.isInLocation;
 
 class EntityMockTest
 {
@@ -107,7 +110,7 @@ class EntityMockTest
 		Location location = entity.getLocation();
 		location.add(0, 10.0, 0);
 		entity.teleport(location);
-		entity.assertLocation(location, 5.0);
+		assertThat(entity, isInLocation(location, 5.5));
 	}
 
 	@Test
@@ -115,7 +118,7 @@ class EntityMockTest
 	{
 		Location location = entity.getLocation();
 		location.add(0, 10.0, 0);
-		assertThrows(AssertionError.class, () -> entity.assertLocation(location, 5.0));
+		assertThat(entity, not(isInLocation(location, 5.0)));
 	}
 
 	@Test
@@ -123,7 +126,7 @@ class EntityMockTest
 	{
 		Location location = entity.getLocation();
 		entity.teleport(location);
-		entity.assertTeleported(location, 5.0);
+		assertThat(entity, hasTeleported(location, 5.0));
 		assertEquals(TeleportCause.PLUGIN, entity.getTeleportCause());
 	}
 
@@ -131,28 +134,28 @@ class EntityMockTest
 	void assertTeleported_NotTeleported_Asserts()
 	{
 		Location location = entity.getLocation();
-		assertThrows(AssertionError.class, () -> entity.assertTeleported(location, 5.0));
+		assertThat(entity, not(hasTeleported(location, 5.0)));
 	}
 
 	@Test
 	void assertNotTeleported_NotTeleported_DoesNotAssert()
 	{
-		entity.assertNotTeleported();
+		assertThat(entity, not(hasTeleported()));
 	}
 
 	@Test
 	void assertNotTeleported_Teleported_Asserts()
 	{
 		entity.teleport(entity.getLocation());
-		assertThrows(AssertionError.class, () -> entity.assertNotTeleported());
+		assertThat(entity, hasTeleported());
 	}
 
 	@Test
 	void assertNotTeleported_AfterAssertTeleported_DoesNotAssert()
 	{
 		entity.teleport(entity.getLocation());
-		entity.assertTeleported(entity.getLocation(), 0);
-		entity.assertNotTeleported();
+		assertThat(entity, hasTeleported(entity.getLocation(), 0));
+		assertThat(entity, not(hasTeleported()));
 	}
 
 	@Test
@@ -161,7 +164,7 @@ class EntityMockTest
 		Location location = entity.getLocation();
 		location.add(0, 10.0, 0);
 		entity.teleport(location, TeleportCause.CHORUS_FRUIT);
-		entity.assertTeleported(location, 0);
+		assertThat(entity, hasTeleported(location, 0));
 		assertEquals(TeleportCause.CHORUS_FRUIT, entity.getTeleportCause());
 	}
 
@@ -173,7 +176,7 @@ class EntityMockTest
 		location.add(0, 5, 0);
 		entity2.teleport(location);
 		entity.teleport(entity2);
-		entity.assertTeleported(location, 0);
+		assertThat(entity, hasTeleported(location, 0));
 	}
 
 	@Test
@@ -333,7 +336,7 @@ class EntityMockTest
 	}
 
 	@Test
-	void sendMessage_GivenEntitySendingTextMessage_NoMessageShouldBeSent()
+	void sendMessage_Default_nextMessageReturnsMessages()
 	{
 		entity.sendMessage("hello");
 		entity.sendMessage("my", "world");
@@ -343,7 +346,7 @@ class EntityMockTest
 	}
 
 	@Test
-	void sendMessage_GivenEntitySendingComponentMessage_NoMessageShouldBeSent()
+	void sendMessage_StoredAsComponent()
 	{
 		TextComponent comp = Component.text()
 				.content("hi")

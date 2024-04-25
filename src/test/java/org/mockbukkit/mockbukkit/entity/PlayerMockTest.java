@@ -1,20 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.MockPlugin;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.TestPlugin;
-import org.mockbukkit.mockbukkit.WorldMock;
-import org.mockbukkit.mockbukkit.block.BlockMock;
-import org.mockbukkit.mockbukkit.entity.data.EntityState;
-import org.mockbukkit.mockbukkit.inventory.EnderChestInventoryMock;
-import org.mockbukkit.mockbukkit.inventory.InventoryMock;
-import org.mockbukkit.mockbukkit.map.MapViewMock;
-import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
-import org.mockbukkit.mockbukkit.block.state.BlockStateMock;
-import org.mockbukkit.mockbukkit.block.state.TileStateMock;
-import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
-import org.mockbukkit.mockbukkit.plugin.PluginManagerMock;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
@@ -92,6 +77,21 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockPlugin;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.TestPlugin;
+import org.mockbukkit.mockbukkit.WorldMock;
+import org.mockbukkit.mockbukkit.block.BlockMock;
+import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
+import org.mockbukkit.mockbukkit.block.state.BlockStateMock;
+import org.mockbukkit.mockbukkit.block.state.TileStateMock;
+import org.mockbukkit.mockbukkit.entity.data.EntityState;
+import org.mockbukkit.mockbukkit.inventory.EnderChestInventoryMock;
+import org.mockbukkit.mockbukkit.inventory.InventoryMock;
+import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
+import org.mockbukkit.mockbukkit.map.MapViewMock;
+import org.mockbukkit.mockbukkit.plugin.PluginManagerMock;
 import org.opentest4j.AssertionFailedError;
 
 import java.net.InetSocketAddress;
@@ -108,6 +108,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.not;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -120,6 +121,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assumptions.assumeFalse;
 import static org.mockbukkit.mockbukkit.matcher.block.BlockMaterialTypeMatcher.hasMaterial;
+import static org.mockbukkit.mockbukkit.matcher.entity.EntityTeleportationMatcher.hasTeleported;
+import static org.mockbukkit.mockbukkit.matcher.entity.EntityLocationMatcher.isInLocation;
 
 class PlayerMockTest
 {
@@ -1232,7 +1235,7 @@ class PlayerMockTest
 		}, plugin);
 
 		player.simulatePlayerMove(player.getLocation().add(-10, -10, -10));
-		player.assertTeleported(teleportLocation, 0);
+		assertThat(player, hasTeleported(teleportLocation, 0));
 	}
 
 	@Test
@@ -1468,7 +1471,7 @@ class PlayerMockTest
 		Location teleportLocation = player.getLocation().add(10, 10, 10);
 		player.teleport(teleportLocation);
 
-		player.assertTeleported(teleportLocation, 0);
+		assertThat(player, hasTeleported(teleportLocation, 0));
 	}
 
 	@Test
@@ -1488,9 +1491,9 @@ class PlayerMockTest
 
 		player.teleport(player.getLocation().add(10, 10, 10));
 
-		player.assertNotTeleported();
+		assertThat(player, not(hasTeleported()));
 		player.assertLocation(originalLocation, 0);
-
+		assertThat(player, isInLocation(originalLocation, 0));
 	}
 
 	@Test
