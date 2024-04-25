@@ -10,10 +10,13 @@ import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.not;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockbukkit.mockbukkit.matcher.entity.goat.GoatEntityRammedMatcher.hasRammed;
 
 class GoatMockTest
 {
@@ -84,7 +87,7 @@ class GoatMockTest
 	{
 		LivingEntity entity = server.addPlayer();
 		goat.ram(entity);
-		goat.assertEntityRammed(entity);
+		assertThat(goat, hasRammed(entity));
 	}
 
 	@Test
@@ -97,8 +100,7 @@ class GoatMockTest
 	void testAssertEntityRammedWithNotRammedEntity()
 	{
 		LivingEntity entity = server.addPlayer();
-		AssertionError assertionError = assertThrows(AssertionError.class, () -> goat.assertEntityRammed(entity));
-		assertEquals("Expected Goat to have rammed Player0 but it did not!", assertionError.getMessage());
+		assertThat(goat, not(hasRammed(entity)));
 	}
 
 	@Test
