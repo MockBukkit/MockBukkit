@@ -31,6 +31,20 @@ public class HumanEntityInventoryViewItemMatcher extends TypeSafeMatcher<HumanEn
 		description.appendText("to contain any of the specified item material");
 	}
 
+	@Override
+	protected void describeMismatchSafely(HumanEntityMock item, Description mismatchDescription)
+	{
+		if(item.getOpenInventory().getTopInventory() != null)
+		{
+			mismatchDescription.appendText("had items ");
+			mismatchDescription.appendValueList("[", ",", "]", item.getOpenInventory().getTopInventory().getContents());
+		}
+		else
+		{
+			mismatchDescription.appendText("did not have an open top inventory");
+		}
+	}
+
 	public static HumanEntityInventoryViewItemMatcher hasItemInInventoryView(Material material)
 	{
 		return new HumanEntityInventoryViewItemMatcher(material);

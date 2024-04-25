@@ -38,6 +38,19 @@ public class SkeletonRangedAttackMatcher extends TypeSafeMatcher<AbstractSkeleto
 		description.appendText("to have attacked specified target");
 	}
 
+	@Override
+	protected void describeMismatchSafely(AbstractSkeletonMock item, Description description)
+	{
+		if (item.hasAttackedWithCharge(target, charge) && (!aggressive || item.hasAttackedWhileAggressive(target)))
+		{
+			description.appendText("has attacked the target");
+		}
+		else
+		{
+			description.appendText("has not attacked the target");
+		}
+	}
+
 	public static SkeletonRangedAttackMatcher hasAttacked(LivingEntity target, float charge)
 	{
 		return hasAttacked(target, charge, false);

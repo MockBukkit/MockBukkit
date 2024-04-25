@@ -11,6 +11,7 @@ public class CommandResultResponseMatcher extends TypeSafeMatcher<CommandResult>
 {
 
 	private final String response;
+	private String senderMessage = null;
 
 	public CommandResultResponseMatcher(String response)
 	{
@@ -25,7 +26,8 @@ public class CommandResultResponseMatcher extends TypeSafeMatcher<CommandResult>
 			Field currentItemField = item.getClass().getDeclaredField("sender");
 			currentItemField.setAccessible(true);
 			MessageTarget sender = (MessageTarget) currentItemField.get(item);
-			return response.equals(sender.nextMessage());
+			this.senderMessage = sender.nextMessage();
+			return response.equals(senderMessage);
 		}
 		catch (NoSuchFieldException | IllegalAccessException e)
 		{
@@ -38,6 +40,12 @@ public class CommandResultResponseMatcher extends TypeSafeMatcher<CommandResult>
 	public void describeTo(Description description)
 	{
 		description.appendText("to have the given message be the last message sent to sender");
+	}
+
+	@Override
+	protected void describeMismatchSafely(CommandResult item, Description mismatchDescription)
+	{
+		mismatchDescription.appendText("was ").appendValue(senderMessage);
 	}
 
 	public static CommandResultResponseMatcher hasResponse(String response)
