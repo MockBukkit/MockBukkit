@@ -27,6 +27,12 @@ public class GoatEntityRammedMatcher extends TypeSafeMatcher<GoatMock>
 		description.appendText("to have rammed the specified entity");
 	}
 
+	@Override
+	protected void describeMismatchSafely(GoatMock item, Description mismatchDescription)
+	{
+		mismatchDescription.appendText("was value ").appendValue(item.hasRammedEntity(target));
+	}
+
 	public static GoatEntityRammedMatcher hasRammed(LivingEntity target)
 	{
 		return new GoatEntityRammedMatcher(target);

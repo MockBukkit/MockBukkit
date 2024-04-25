@@ -10,6 +10,8 @@ import java.lang.reflect.Field;
 public class CommandResultAnyResponseMatcher extends TypeSafeMatcher<CommandResult>
 {
 
+	private String senderMessage = null;
+
 	@Override
 	protected boolean matchesSafely(CommandResult item)
 	{
@@ -18,7 +20,8 @@ public class CommandResultAnyResponseMatcher extends TypeSafeMatcher<CommandResu
 			Field currentItemField = item.getClass().getDeclaredField("sender");
 			currentItemField.setAccessible(true);
 			MessageTarget sender = (MessageTarget) currentItemField.get(item);
-			return sender.nextMessage() != null;
+			senderMessage = sender.nextMessage();
+			return senderMessage != null;
 		}
 		catch (NoSuchFieldException | IllegalAccessException e)
 		{
@@ -33,8 +36,15 @@ public class CommandResultAnyResponseMatcher extends TypeSafeMatcher<CommandResu
 		description.appendText("to have any messages sent to command sender");
 	}
 
+	@Override
+	protected void describeMismatchSafely(CommandResult item, Description mismatchDescription)
+	{
+		mismatchDescription.appendText("was value ").appendValue(senderMessage);
+	}
+
 	public static CommandResultAnyResponseMatcher hasAnyResponse()
 	{
 		return new CommandResultAnyResponseMatcher();
 	}
+
 }

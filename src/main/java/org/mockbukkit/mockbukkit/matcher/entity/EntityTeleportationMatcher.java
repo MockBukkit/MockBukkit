@@ -10,6 +10,7 @@ public class EntityTeleportationMatcher extends TypeSafeMatcher<EntityMock>
 
 	private final double maximumDistance;
 	private final Location location;
+	private boolean hasTeleported;
 
 	public EntityTeleportationMatcher(Location location, double maximumDistance)
 	{
@@ -29,9 +30,9 @@ public class EntityTeleportationMatcher extends TypeSafeMatcher<EntityMock>
 				return false;
 			}
 		}
-		boolean returnValue = item.hasTeleported();
+		this.hasTeleported = item.hasTeleported();
 		item.clearTeleported();
-		return returnValue;
+		return hasTeleported;
 	}
 
 	@Override
@@ -43,7 +44,15 @@ public class EntityTeleportationMatcher extends TypeSafeMatcher<EntityMock>
 	@Override
 	public void describeMismatchSafely(EntityMock entityMock, Description description)
 	{
-		description.appendText("was at location").appendValue(entityMock.getLocation());
+		description.appendText("was at location ").appendValue(entityMock.getLocation());
+		if (hasTeleported)
+		{
+			description.appendText(" and has teleported");
+		}
+		else
+		{
+			description.appendText(" and has not teleported");
+		}
 	}
 
 	public static EntityTeleportationMatcher hasTeleported()

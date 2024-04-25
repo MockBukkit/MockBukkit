@@ -27,6 +27,12 @@ public class HumanEntityInventoryViewTypeMatcher extends TypeSafeMatcher<HumanEn
 		description.appendText("to have the specified inventory view type");
 	}
 
+	@Override
+	protected void describeMismatchSafely(HumanEntityMock item, Description mismatchDescription)
+	{
+		mismatchDescription.appendText("was of type ").appendValue(item.getOpenInventory().getType());
+	}
+
 	public static HumanEntityInventoryViewTypeMatcher hasInventoryViewType(InventoryType inventoryType)
 	{
 		return new HumanEntityInventoryViewTypeMatcher(inventoryType);

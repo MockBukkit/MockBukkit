@@ -31,6 +31,12 @@ public class EntityLocationMatcher extends TypeSafeMatcher<EntityMock>
 		description.appendText("to be within the specified location");
 	}
 
+	@Override
+	protected void describeMismatchSafely(EntityMock item, Description description)
+	{
+		description.appendText("was at location ").appendValue(item.getLocation());
+	}
+
 	public static EntityLocationMatcher isInLocation(Location location, double maximumDistance)
 	{
 		return new EntityLocationMatcher(location, maximumDistance);
