@@ -38,7 +38,7 @@ class HumanEntityGameModeMatcherTest extends AbstractMatcherTest
 	void incorrectGameMode()
 	{
 		humanEntity.setGameMode(GameMode.CREATIVE);
-		assertMatches(hasGameMode(GameMode.SPECTATOR), humanEntity);
+		assertDoesNotMatch(hasGameMode(GameMode.SPECTATOR), humanEntity);
 	}
 
 	@Test
