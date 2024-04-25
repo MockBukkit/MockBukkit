@@ -1965,10 +1965,16 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public @Nullable Location getRespawnLocation() { return this.respawnLocation; }
+	public @Nullable Location getRespawnLocation()
+	{
+		return this.respawnLocation;
+	}
 
 	@Override
-	public @Nullable Location getBedSpawnLocation() { return getRespawnLocation(); }
+	public @Nullable Location getBedSpawnLocation()
+	{
+		return getRespawnLocation();
+	}
 
 	@Override
 	public long getLastLogin()
@@ -1989,7 +1995,10 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public void setBedSpawnLocation(@Nullable Location loc) { setBedSpawnLocation(loc, false); }
+	public void setBedSpawnLocation(@Nullable Location loc)
+	{
+		setBedSpawnLocation(loc, false);
+	}
 
 	@Override
 	public void setBedSpawnLocation(@Nullable Location loc, boolean override)
@@ -2000,7 +2009,8 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void setRespawnLocation(@Nullable Location loc, boolean override)
 	{
-		if (override || loc == null || Tag.BEDS.isTagged(loc.getBlock().getType())) {
+		if (override || loc == null || Tag.BEDS.isTagged(loc.getBlock().getType()))
+		{
 			this.respawnLocation = loc;
 		}
 	}

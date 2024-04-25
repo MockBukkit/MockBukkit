@@ -210,7 +210,10 @@ public class OfflinePlayerMock implements OfflinePlayer
 	}
 
 	@Override
-	public @Nullable Location getBedSpawnLocation() { return getRespawnLocation(); }
+	public @Nullable Location getBedSpawnLocation()
+	{
+		return getRespawnLocation();
+	}
 
 	@Override
 	public long getLastLogin()
