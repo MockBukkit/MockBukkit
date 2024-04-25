@@ -86,13 +86,18 @@ public class GoatMock extends AnimalsMock implements Goat
 	 *
 	 * @param entity The entity to assert.
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertEntityRammed(@NotNull LivingEntity entity)
 	{
-		Preconditions.checkNotNull(entity, "Entity cannot be null");
-		if (!this.attackedMobs.contains(entity))
+		if (!hasRammedEntity(entity))
 		{
 			fail("Expected Goat to have rammed " + entity.getName() + " but it did not!");
 		}
+	}
+
+	public boolean hasRammedEntity(@NotNull LivingEntity entity){
+		Preconditions.checkNotNull(entity, "Entity cannot be null");
+		return this.attackedMobs.contains(entity);
 	}
 
 	@Override
