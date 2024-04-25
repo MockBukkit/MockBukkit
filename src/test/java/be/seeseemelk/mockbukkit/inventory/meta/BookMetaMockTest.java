@@ -172,7 +172,7 @@ class BookMetaMockTest
 	}
 
 	@Test
-	void test_hashCode_DifferentObject_SameTitle()
+	void test_hashCode_DifferentObject_Title()
 	{
 		BookMetaMock meta1 = new BookMetaMock();
 		BookMetaMock meta2 = new BookMetaMock();
@@ -181,17 +181,57 @@ class BookMetaMockTest
 		meta1.setTitle("Bumba");
 		meta2.setTitle("Bumba");
 		assertEquals(meta1.hashCode(), meta2.hashCode());
+
+		meta1.setTitle("Bumba1");
+		meta2.setTitle("Bumba2");
+		assertNotEquals(meta1.hashCode(), meta2.hashCode());
 	}
 
 	@Test
-	void test_hashCode_DifferentObject_DifferentTitle()
+	void test_hashCode_DifferentObject_Author()
 	{
 		BookMetaMock meta1 = new BookMetaMock();
-		meta1.setTitle("Bumba1");
-
 		BookMetaMock meta2 = new BookMetaMock();
-		meta2.setTitle("Bumba2");
+		assertEquals(meta1.hashCode(), meta2.hashCode());
 
+		meta1.setAuthor("Bumba");
+		meta2.setAuthor("Bumba");
+		assertEquals(meta1.hashCode(), meta2.hashCode());
+
+		meta1.setAuthor("Bumba1");
+		meta2.setAuthor("Bumba2");
+		assertNotEquals(meta1.hashCode(), meta2.hashCode());
+	}
+
+	@Test
+	void test_hashCode_DifferentObject_Pages()
+	{
+		BookMetaMock meta1 = new BookMetaMock();
+		BookMetaMock meta2 = new BookMetaMock();
+		assertEquals(meta1.hashCode(), meta2.hashCode());
+
+		meta1.addPage("Bumba");
+		meta2.addPage("Bumba");
+		assertEquals(meta1.hashCode(), meta2.hashCode());
+
+		meta1.addPage("Bumba1");
+		meta2.addPage("Bumba2");
+		assertNotEquals(meta1.hashCode(), meta2.hashCode());
+	}
+
+	@Test
+	void test_hashCode_DifferentObject_Generation()
+	{
+		BookMetaMock meta1 = new BookMetaMock();
+		BookMetaMock meta2 = new BookMetaMock();
+		assertEquals(meta1.hashCode(), meta2.hashCode());
+
+		meta1.setGeneration(BookMeta.Generation.COPY_OF_COPY);
+		meta2.setGeneration(BookMeta.Generation.COPY_OF_COPY);
+		assertEquals(meta1.hashCode(), meta2.hashCode());
+
+		meta1.setGeneration(BookMeta.Generation.COPY_OF_COPY);
+		meta2.setGeneration(BookMeta.Generation.ORIGINAL);
 		assertNotEquals(meta1.hashCode(), meta2.hashCode());
 	}
 
@@ -220,54 +260,68 @@ class BookMetaMockTest
 		meta1.setTitle("Bumba");
 		meta1.setAuthor("De Lu");
 		meta1.addPage("Page1");
+		meta1.setGeneration(BookMeta.Generation.COPY_OF_COPY);
 		meta2.setTitle("Bumba");
 		meta2.setAuthor("De Lu");
 		meta2.addPage("Page1");
+		meta2.setGeneration(BookMeta.Generation.COPY_OF_COPY);
 
 		assertEquals(meta1, meta2);
 	}
 
 	@Test
-	void test_equals_DifferentTitle()
+	void test_equals_Difference_Title()
 	{
 		BookMetaMock cloned = meta.clone();
+
+		meta.setTitle("Bumba");
+		cloned.setTitle("Bumba");
+		assertEquals(meta, cloned);
 
 		meta.setTitle("Bumba1");
 		cloned.setTitle("Bumba2");
-
 		assertNotEquals(meta, cloned);
 	}
 
 	@Test
-	void test_equals_DifferentAuthor()
+	void test_equals_Difference_Author()
 	{
 		BookMetaMock cloned = meta.clone();
+
+		meta.setAuthor("Bumba");
+		cloned.setAuthor("Bumba");
+		assertEquals(meta, cloned);
 
 		meta.setAuthor("Bumba1");
 		cloned.setAuthor("Bumba2");
-
 		assertNotEquals(meta, cloned);
 	}
 
 	@Test
-	void test_equals_DifferentPage()
+	void test_equals_Difference_Pages()
 	{
 		BookMetaMock cloned = meta.clone();
+
+		meta.addPage("Bumba");
+		cloned.addPage("Bumba");
+		assertEquals(meta, cloned);
 
 		meta.addPage("Bumba1");
 		cloned.addPage("Bumba2");
-
 		assertNotEquals(meta, cloned);
 	}
 
 	@Test
-	void test_equals_DifferentPages()
+	void test_equals_Difference_Generation()
 	{
 		BookMetaMock cloned = meta.clone();
 
-		meta.addPage("Bumba1", "Bumba3");
-		cloned.addPage("Bumba1");
+		meta.setGeneration(BookMeta.Generation.COPY_OF_COPY);
+		cloned.setGeneration(BookMeta.Generation.COPY_OF_COPY);
+		assertEquals(meta, cloned);
 
+		meta.setGeneration(BookMeta.Generation.COPY_OF_COPY);
+		cloned.setGeneration(BookMeta.Generation.ORIGINAL);
 		assertNotEquals(meta, cloned);
 	}
 

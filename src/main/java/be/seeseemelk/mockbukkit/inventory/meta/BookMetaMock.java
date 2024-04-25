@@ -57,7 +57,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	{
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + Objects.hash(author, pages, title);
+		result = prime * result + Objects.hash(author, pages, title, generation);
 		return result;
 	}
 
@@ -71,7 +71,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 		if (!(obj instanceof BookMetaMock other))
 			return false;
 		return Objects.equals(author, other.author) && Objects.equals(pages, other.pages)
-				&& Objects.equals(title, other.title);
+				&& Objects.equals(title, other.title) && Objects.equals(generation, other.generation);
 	}
 
 	@Override
