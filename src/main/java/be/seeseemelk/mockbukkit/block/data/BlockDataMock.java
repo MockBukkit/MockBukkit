@@ -43,14 +43,13 @@ public class BlockDataMock implements BlockData
 	/**
 	 * Constructs a new {@link BlockDataMock} for the provided {@link Material}.
 	 *
-	 * @param type The material this data is for.
+	 * @param material The material this data is for.
 	 */
-	public BlockDataMock(@NotNull Material type)
+	public BlockDataMock(@NotNull Material material)
 	{
-		Preconditions.checkNotNull(type, "Type cannot be null");
-		checkType(type);
+		checkMaterial(material);
 
-		this.type = type;
+		this.type = material;
 		this.data = new LinkedHashMap<>();
 	}
 
@@ -64,19 +63,7 @@ public class BlockDataMock implements BlockData
 	 */
 	protected void checkType(@NotNull Material material, @NotNull Material... expected)
 	{
-		checkType(material);
 		Preconditions.checkArgument(Arrays.stream(expected).anyMatch(m -> material == m), "Cannot create a " + getClass().getSimpleName() + " from " + material);
-	}
-
-	/**
-	 * Ensures the provided block type is one of the expected materials provided.
-	 *
-	 * @param block    The block to test.
-	 * @param expected The expected materials.
-	 */
-	protected void checkType(@NotNull Block block, @NotNull Material... expected)
-	{
-		checkType(block.getType(), expected);
 	}
 
 	/**
@@ -87,19 +74,7 @@ public class BlockDataMock implements BlockData
 	 */
 	protected void checkType(@NotNull Material material, @NotNull Tag<Material> expected)
 	{
-		checkType(material);
 		Preconditions.checkArgument(expected.isTagged(material), "Cannot create a " + getClass().getSimpleName() + " from " + material);
-	}
-
-	/**
-	 * Ensures the provided block type is contained in the {@link Tag}.
-	 *
-	 * @param block    The material to test.
-	 * @param expected The expected tag.
-	 */
-	protected void checkType(@NotNull Block block, @NotNull Tag<Material> expected)
-	{
-		checkType(block.getType(), expected);
 	}
 
 	/**
@@ -107,21 +82,20 @@ public class BlockDataMock implements BlockData
 	 *
 	 * @param material The material to test.
 	 */
-	protected static void checkType(@NotNull Material material)
+	protected static void checkMaterial(@NotNull Material material)
 	{
-		Preconditions.checkState(material.isBlock(), "Can't create a block from this material: " + material.getKey());
+		Preconditions.checkNotNull(material, NULL_MATERIAL_EXCEPTION_MESSAGE);
+		Preconditions.checkState(material.isBlock(), "Can't create a block from " + material.getKey());
 	}
 
 	/**
 	 * Ensures the provided material/state combination is valid for minecraft.
 	 *
-	 * @param material The material to test.
-	 * @param state    The state to test.
+	 * @param property    The state to test.
 	 */
-	protected void checkState(@NotNull Material material, String state)
+	protected void checkProperty(String property)
 	{
-		checkType(material);
-		Preconditions.checkState(BlockDataMockRegistry.getInstance().isValidStateForBlockWithMaterial(material, state), "Invalid state for this material");
+		Preconditions.checkState(BlockDataMockRegistry.getInstance().isValidStateForBlockWithMaterial(getMaterial(), property), property + " is not a valid property for " + getMaterial().getKey());
 	}
 	// endregion
 
@@ -137,7 +111,8 @@ public class BlockDataMock implements BlockData
 	{
 		Preconditions.checkNotNull(key, "Key cannot be null");
 		Preconditions.checkNotNull(value, "Value cannot be null");
-		checkState(getMaterial(), key);
+
+		checkProperty(key);
 
 		this.data.put(key, value);
 	}
@@ -155,7 +130,7 @@ public class BlockDataMock implements BlockData
 	protected <T> @NotNull T get(@NotNull String key)
 	{
 		Preconditions.checkNotNull(key, "Key cannot be null");
-		checkState(getMaterial(), key);
+		checkProperty(key);
 		T value = (T) this.data.get(key);
 		if (value == null)
 		{
@@ -397,7 +372,7 @@ public class BlockDataMock implements BlockData
 	public static @NotNull BlockDataMock mock(@NotNull Material material)
 	{
 		Preconditions.checkNotNull(material, NULL_MATERIAL_EXCEPTION_MESSAGE);
-		checkType(material);
+		// checkMaterial(material);
 
 		BlockDataMock mock = attemptMockByPaperMaterialTags(material);
 		if (mock != null)

@@ -8,6 +8,7 @@ import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.type.WallSign;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -108,7 +109,7 @@ class BlockDataMockTest
 	{
 		BlockDataMock blockData = new BlockDataMock(Material.STONE);
 		Block block = new BlockMock(Material.STONE);
-		blockData.checkType(block, Material.STONE);
+		blockData.checkType(block.getType(), Material.STONE);
 	}
 
 	@Test
@@ -116,7 +117,7 @@ class BlockDataMockTest
 	{
 		BlockDataMock blockData = new BlockDataMock(Material.STONE);
 		Block block = new BlockMock(Material.DIRT);
-		assertThrowsExactly(IllegalArgumentException.class, () -> blockData.checkType(block, Material.STONE));
+		assertThrowsExactly(IllegalArgumentException.class, () -> blockData.checkType(block.getType(), Material.STONE));
 	}
 
 	@Test
@@ -124,7 +125,7 @@ class BlockDataMockTest
 	{
 		BlockDataMock blockData = new BlockDataMock(Material.ACACIA_PLANKS);
 		Block block = new BlockMock(Material.ACACIA_PLANKS);
-		blockData.checkType(block, Tag.PLANKS);
+		blockData.checkType(block.getType(), Tag.PLANKS);
 	}
 
 	@Test
@@ -162,6 +163,10 @@ class BlockDataMockTest
 		// getAsString(true) : minecraft:chest[waterlogged=true]
 		// getAsString(false): minecraft:chest[facing=north,type=single,waterlogged=true]
 		// getAsString()     : minecraft:chest[facing=north,type=single,waterlogged=true]
+
+		BlockData tmp = Material.CHEST.createBlockData();
+		String a = tmp.getAsString(false);
+		String b = tmp.getAsString(true);
 
 		BlockDataMock data = new BlockDataMock(Material.CHEST);
 		data.set("waterlogged", "true");
