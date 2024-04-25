@@ -1,19 +1,20 @@
-package org.mockbukkit.mockbukkit.matcher.entity.skeleton;
+package org.mockbukkit.mockbukkit.matcher.entity.ranged;
 
 import com.google.common.base.Preconditions;
 import org.bukkit.entity.LivingEntity;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
-import org.mockbukkit.mockbukkit.entity.AbstractSkeletonMock;
+import org.mockbukkit.mockbukkit.entity.MobMock;
+import org.mockbukkit.mockbukkit.entity.MockRangedEntity;
 
-public class SkeletonRangedAttackMatcher extends TypeSafeMatcher<AbstractSkeletonMock>
+public class RangedEntityAttackMatcher extends TypeSafeMatcher<MockRangedEntity<? extends MobMock>>
 {
 
 	private final LivingEntity target;
 	private final float charge;
 	private final boolean aggressive;
 
-	public SkeletonRangedAttackMatcher(LivingEntity target, float charge, boolean aggressive)
+	public RangedEntityAttackMatcher(LivingEntity target, float charge, boolean aggressive)
 	{
 		Preconditions.checkNotNull(target, "target cannot be null");
 		Preconditions.checkArgument(charge >= 0F && charge <= 1F, "Charge must be between 0 and 1");
@@ -23,7 +24,7 @@ public class SkeletonRangedAttackMatcher extends TypeSafeMatcher<AbstractSkeleto
 	}
 
 	@Override
-	protected boolean matchesSafely(AbstractSkeletonMock item)
+	protected boolean matchesSafely(MockRangedEntity<? extends MobMock> item)
 	{
 		if (!item.hasAttackedWithCharge(target, charge))
 		{
@@ -39,7 +40,7 @@ public class SkeletonRangedAttackMatcher extends TypeSafeMatcher<AbstractSkeleto
 	}
 
 	@Override
-	protected void describeMismatchSafely(AbstractSkeletonMock item, Description description)
+	protected void describeMismatchSafely(MockRangedEntity<? extends MobMock> item, Description description)
 	{
 		if (item.hasAttackedWithCharge(target, charge) && (!aggressive || item.hasAttackedWhileAggressive(target)))
 		{
@@ -51,14 +52,14 @@ public class SkeletonRangedAttackMatcher extends TypeSafeMatcher<AbstractSkeleto
 		}
 	}
 
-	public static SkeletonRangedAttackMatcher hasAttacked(LivingEntity target, float charge)
+	public static RangedEntityAttackMatcher hasAttacked(LivingEntity target, float charge)
 	{
 		return hasAttacked(target, charge, false);
 	}
 
-	public static SkeletonRangedAttackMatcher hasAttacked(LivingEntity target, float charge, boolean aggressive)
+	public static RangedEntityAttackMatcher hasAttacked(LivingEntity target, float charge, boolean aggressive)
 	{
-		return new SkeletonRangedAttackMatcher(target, charge, aggressive);
+		return new RangedEntityAttackMatcher(target, charge, aggressive);
 	}
 
 }

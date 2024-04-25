@@ -13,10 +13,10 @@ import org.mockbukkit.testutils.matcher.AbstractMatcherTest;
 
 import java.util.UUID;
 
-import static org.mockbukkit.mockbukkit.matcher.entity.skeleton.SkeletonRangedAttackMatcher.hasAttacked;
+import static org.mockbukkit.mockbukkit.matcher.entity.ranged.RangedEntityAttackMatcher.hasAttacked;
 
 @ExtendWith(MockBukkitExtension.class)
-class SkeletonRangedAttackMatcherTest extends AbstractMatcherTest
+class RangedEntityAttackMatcherTest extends AbstractMatcherTest
 {
 
 	@MockBukkitInject
