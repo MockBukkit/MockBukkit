@@ -34,6 +34,7 @@ import java.util.Map;
  */
 public class BlockDataMock implements BlockData
 {
+
 	private static final String NULL_MATERIAL_EXCEPTION_MESSAGE = "Material cannot be null";
 
 	private final @NotNull Material type;
@@ -104,23 +105,23 @@ public class BlockDataMock implements BlockData
 	/**
 	 * Ensures the provided material is valid for minecraft.
 	 *
-	 * @param material    The material to test.
+	 * @param material The material to test.
 	 */
 	protected static void checkType(@NotNull Material material)
 	{
-		Preconditions.checkState(BlockDataMockRegistry.getInstance().isValidMaterial(material), "Invalid material");
+		Preconditions.checkState(material.isBlock(), "Can't create a block from this material: " + material.getKey());
 	}
 
 	/**
 	 * Ensures the provided material/state combination is valid for minecraft.
 	 *
-	 * @param material    The material to test.
+	 * @param material The material to test.
 	 * @param state    The state to test.
 	 */
 	protected void checkState(@NotNull Material material, String state)
 	{
 		checkType(material);
-		Preconditions.checkState(BlockDataMockRegistry.getInstance().isValidStateForMaterial(material, state), "Invalid state for this material");
+		Preconditions.checkState(BlockDataMockRegistry.getInstance().isValidStateForBlockWithMaterial(material, state), "Invalid state for this material");
 	}
 	// endregion
 
@@ -156,7 +157,8 @@ public class BlockDataMock implements BlockData
 		Preconditions.checkNotNull(key, "Key cannot be null");
 		checkState(getMaterial(), key);
 		T value = (T) this.data.get(key);
-		if ( value == null ) {
+		if (value == null)
+		{
 			value = (T) BlockDataMockRegistry.getInstance().getDefault(getMaterial(), key);
 		}
 		Preconditions.checkArgument(value != null, "Cannot get property " + key + " as it does not exist");
@@ -184,7 +186,8 @@ public class BlockDataMock implements BlockData
 		Collections.sort(keysToShow);
 
 		boolean isFirst = true;
-		for (String key: keysToShow) {
+		for (String key : keysToShow)
+		{
 			if (!isFirst) stateString.append(',');
 
 			Object value = data.get(key);
