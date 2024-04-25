@@ -37,6 +37,7 @@ public class OfflinePlayerMock implements OfflinePlayer
 
 	private final @NotNull UUID uuid;
 	private final @Nullable String name;
+	private @Nullable Location respawnLocation = null;
 
 	/**
 	 * Constructs a new {@link OfflinePlayerMock} on the provided {@link ServerMock} with a specified {@link UUID} and name.
@@ -202,10 +203,16 @@ public class OfflinePlayerMock implements OfflinePlayer
 	}
 
 	@Override
-	public @Nullable Location getBedSpawnLocation()
+	public @Nullable Location getRespawnLocation()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable Location getBedSpawnLocation()
+	{
+		return getRespawnLocation();
 	}
 
 	@Override
@@ -220,13 +227,6 @@ public class OfflinePlayerMock implements OfflinePlayer
 	{
 		MockBukkit.ensureMocking();
 		return MockBukkit.getMock().getPlayerList().getLastSeen(getUniqueId());
-	}
-
-	@Override
-	public @Nullable Location getRespawnLocation()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override

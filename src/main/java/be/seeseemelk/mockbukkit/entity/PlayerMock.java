@@ -171,7 +171,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	private boolean scaledHealth = false;
 	private double healthScale = 20;
 	private Location compassTarget;
-	private @Nullable Location bedSpawnLocation;
+	private @Nullable Location respawnLocation;
 	private @Nullable InetSocketAddress address;
 
 	private final PlayerSpigotMock playerSpigotMock = new PlayerSpigotMock();
@@ -500,7 +500,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	 */
 	public void respawn()
 	{
-		Location respawnLocation = getBedSpawnLocation();
+		Location respawnLocation = getRespawnLocation();
 		boolean isBedSpawn = respawnLocation != null;
 
 		// TODO: Respawn Anchors are not yet supported.
@@ -1964,19 +1964,16 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		throw new UnimplementedOperationException();
 	}
 
-
-	@Nullable
-	@Override
-	public Location getBedSpawnLocation()
-	{
-		return bedSpawnLocation;
-	}
-
 	@Override
 	public @Nullable Location getRespawnLocation()
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.respawnLocation;
+	}
+
+	@Override
+	public @Nullable Location getBedSpawnLocation()
+	{
+		return getRespawnLocation();
 	}
 
 	@Override
@@ -1992,32 +1989,30 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
+	public void setRespawnLocation(@Nullable Location loc)
+	{
+		setRespawnLocation(loc, false);
+	}
+
+	@Override
 	public void setBedSpawnLocation(@Nullable Location loc)
 	{
 		setBedSpawnLocation(loc, false);
 	}
 
 	@Override
-	public void setRespawnLocation(@Nullable Location location)
+	public void setBedSpawnLocation(@Nullable Location loc, boolean override)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		setRespawnLocation(loc, override);
 	}
 
 	@Override
-	public void setBedSpawnLocation(@Nullable Location loc, boolean force)
+	public void setRespawnLocation(@Nullable Location loc, boolean override)
 	{
-		if (force || loc == null || Tag.BEDS.isTagged(loc.getBlock().getType()))
+		if (override || loc == null || Tag.BEDS.isTagged(loc.getBlock().getType()))
 		{
-			this.bedSpawnLocation = loc;
+			this.respawnLocation = loc;
 		}
-	}
-
-	@Override
-	public void setRespawnLocation(@Nullable Location location, boolean b)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
