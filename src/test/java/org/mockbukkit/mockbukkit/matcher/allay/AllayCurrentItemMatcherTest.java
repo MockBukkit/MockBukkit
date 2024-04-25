@@ -58,7 +58,7 @@ class AllayCurrentItemMatcherTest extends AbstractMatcherTest
 	@Test
 	void testHasReadableDescription()
 	{
-		assertDescription("should have current item", currentItem(Material.STONE));
+		assertDescription("to have current item", currentItem(Material.STONE));
 	}
 
 	@Test

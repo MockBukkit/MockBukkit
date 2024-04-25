@@ -10,7 +10,7 @@ public class MessageTargetReceivedAnyMessage extends TypeSafeMatcher<MessageTarg
 	@Override
 	protected boolean matchesSafely(MessageTarget item)
 	{
-		return item.nextMessage() == null;
+		return item.nextMessage() != null;
 	}
 
 	@Override
