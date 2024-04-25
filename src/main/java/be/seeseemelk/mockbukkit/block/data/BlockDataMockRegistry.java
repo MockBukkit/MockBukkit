@@ -33,25 +33,34 @@ public class BlockDataMockRegistry {
 		}
 	}
 
-	private static BlockDataMockRegistry INSTANCE = null;
+	private static BlockDataMockRegistry instance = null;
 	private Map<Material, Map<String, Object>> blockData = null;
 
 	private BlockDataMockRegistry() {
-		loadBlockData();
+		try
+		{
+			loadBlockData();
+		}
+		catch (IOException ex)
+		{
+			ex.printStackTrace();
+		}
 	}
 
 	public static BlockDataMockRegistry getInstance() {
-		if ( INSTANCE == null ) {
-			INSTANCE = new BlockDataMockRegistry();
+		if (instance == null)
+		{
+			instance = new BlockDataMockRegistry();
 		}
-		return INSTANCE;
+		return instance;
 	}
 
 
-	private void loadBlockData() {
+	private void loadBlockData() throws IOException
+	{
 		InputStream stream = MockBukkit.class.getResourceAsStream("/materials/material_data.json");
 		if (stream == null) {
-			throw new RuntimeException("Failed to load materials data, file not found");
+			throw new IOException("Failed to load materials data, file not found");
 		}
 
 		try (InputStreamReader reader = new InputStreamReader(stream)) {
@@ -61,8 +70,6 @@ public class BlockDataMockRegistry {
 
 			Type type = new TypeToken<Map<Material, Map<String, Object>>>() {}.getType();
 			blockData = gson.fromJson(reader, type);
-		} catch (IOException e) {
-			throw new RuntimeException("Failed to parse materials data", e);
 		}
     }
 

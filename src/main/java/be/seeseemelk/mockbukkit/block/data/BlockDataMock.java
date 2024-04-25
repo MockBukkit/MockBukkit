@@ -183,9 +183,9 @@ public class BlockDataMock implements BlockData
 		List<String> keysToShow = new ArrayList<>(hideUnspecified ? data.keySet() : BlockDataMockRegistry.getInstance().getBlockData(type).keySet());
 		Collections.sort(keysToShow);
 
-		boolean is_first = true;
+		boolean isFirst = true;
 		for (String key: keysToShow) {
-			if ( !is_first ) stateString.append(',');
+			if (!isFirst) stateString.append(',');
 
 			Object value = data.get(key);
 			Object defaultValue = BlockDataMockRegistry.getInstance().getDefault(type, key);
@@ -194,7 +194,7 @@ public class BlockDataMock implements BlockData
 
 			stateString.append(key).append("=").append((value == null ? defaultValue : value).toString().toLowerCase());
 
-			is_first = false;
+			isFirst = false;
 		}
 		stateString.append(']');
 
