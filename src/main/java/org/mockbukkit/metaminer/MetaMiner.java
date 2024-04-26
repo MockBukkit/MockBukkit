@@ -33,6 +33,7 @@ public class MetaMiner extends JavaPlugin
 		this.getLogger().log(Level.INFO, String.format("The files can be found at '%s'", this.getDataFolder().getPath()));
 		this.getLogger().log(Level.INFO, "Copy these files with their respective directories over to the MockBukkit resources folder.");
 
+		getServer().shutdown(); // We're done. So just call it quits.
 	}
 
 	private List<DataGenerator> getDataGenerators()
