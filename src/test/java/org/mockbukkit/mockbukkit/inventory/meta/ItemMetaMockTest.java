@@ -44,6 +44,10 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Stream;
 
+import static org.hamcrest.CoreMatchers.both;
+import static org.hamcrest.CoreMatchers.hasItems;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.not;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -52,6 +56,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockbukkit.mockbukkit.matcher.inventory.meta.ItemMetaAnyLoreMatcher.hasAnyLore;
+import static org.mockbukkit.mockbukkit.matcher.inventory.meta.ItemMetaLoreMatcher.hasLore;
 
 @ExtendWith(MockBukkitExtension.class)
 class ItemMetaMockTest
@@ -502,28 +508,28 @@ class ItemMetaMockTest
 	@Test
 	void testHasNoLore_HasNoLore_Returns()
 	{
-		meta.assertHasNoLore();
+		assertThat(meta, not(hasAnyLore()));
 	}
 
 	@Test
 	void testHasNoLore_HasNoLore_Asserts()
 	{
 		meta.setLore(Arrays.asList("Hello", "world"));
-		assertThrows(AssertionError.class, meta::assertHasNoLore);
+		assertThat(meta, hasAnyLore());
 	}
 
 	@Test
 	void testLore_CorrectLore_Returns()
 	{
 		meta.setLore(Arrays.asList("Hello", "world"));
-		meta.assertLore("Hello", "world");
+		assertThat(meta, hasLore("Hello", "world"));
 	}
 
 	@Test
 	void testLore_InorrectLore_Asserts()
 	{
 		meta.setLore(Arrays.asList("Hello", "world"));
-		assertThrows(AssertionError.class, () -> meta.assertLore("Something", "else"));
+		assertThat(meta, not(hasLore("Something", "else")));
 	}
 
 	@Test
