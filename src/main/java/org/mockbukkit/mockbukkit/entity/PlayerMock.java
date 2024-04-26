@@ -315,6 +315,13 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		consumedItems.add(new PlayerSimulation(this).simulateConsumeItem(consumable));
 	}
 
+	public boolean hasConsumed(@NotNull ItemStack consumable)
+	{
+		Preconditions.checkNotNull(consumable, "Consumed Item can't be null");
+		return consumedItems.contains(consumable);
+	}
+
+
 	/**
 	 * Asserts a Player has consumed the given Item
 	 *
@@ -328,12 +335,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		{
 			fail();
 		}
-	}
-
-	public boolean hasConsumed(@NotNull ItemStack consumable)
-	{
-		Preconditions.checkNotNull(consumable, "Consumed Item can't be null");
-		return consumedItems.contains(consumable);
 	}
 
 	@Override
