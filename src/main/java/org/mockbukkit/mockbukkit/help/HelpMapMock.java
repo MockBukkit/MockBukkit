@@ -96,7 +96,7 @@ public class HelpMapMock implements HelpMap
 	public boolean hasRegistered(@NotNull HelpTopicFactory<?> factory)
 	{
 		Preconditions.checkNotNull(factory, "Factory cannot be null");
-		return factories.containsKey(factory);
+		return factories.containsValue(factory);
 	}
 
 }

@@ -65,7 +65,7 @@ class HelpMapFactoryRegisteredMatcherTest extends AbstractMatcherTest
 	@Override
 	protected Matcher<?> createMatcher()
 	{
-		return null;
+		return hasFactoryRegistered(helpTopicFactory);
 	}
 
 }

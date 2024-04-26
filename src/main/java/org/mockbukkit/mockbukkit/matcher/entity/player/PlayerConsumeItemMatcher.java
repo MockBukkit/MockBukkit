@@ -27,6 +27,19 @@ public class PlayerConsumeItemMatcher extends TypeSafeMatcher<PlayerMock>
 		description.appendText("to have consumed the specified item");
 	}
 
+	@Override
+	protected void describeMismatchSafely(PlayerMock playerMock, Description description)
+	{
+		if (playerMock.hasConsumed(itemStack))
+		{
+			description.appendText("had consumed the item");
+		}
+		else
+		{
+			description.appendText("had not consumed the item");
+		}
+	}
+
 	public static PlayerConsumeItemMatcher hasConsumed(ItemStack itemStack)
 	{
 		return new PlayerConsumeItemMatcher(itemStack);
