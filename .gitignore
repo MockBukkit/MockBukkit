@@ -17,3 +17,7 @@ buildNumber.properties
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
 metaminer.iml
+
+# Gradle
+.gradle
+build
