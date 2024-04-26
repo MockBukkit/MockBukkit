@@ -104,12 +104,12 @@ public class PlayerSimulation
 	/**
 	 * Simulates the player damaging a block. Note that this method does not anything unless the player is in survival
 	 * mode. If {@code InstaBreak} is set to true by an event handler, a {@link BlockBreakEvent} is immediately fired.
-	 * The result will then still be whether or not the {@link BlockDamageEvent} was cancelled or not, not the later
+	 * The result will then still be whether the {@link BlockDamageEvent} was cancelled or not, not the later
 	 * {@link BlockBreakEvent}.
 	 *
 	 * @param block The block to damage.
 	 * @return the event that was fired, {@code null} if the player was not in
-	 * survival gamemode.
+	 * survival game mode.
 	 */
 	public @Nullable BlockDamageEvent simulateBlockDamage(@NotNull Block block)
 	{
@@ -303,5 +303,6 @@ public class PlayerSimulation
 		}
 		return event;
 	}
+
 
 }

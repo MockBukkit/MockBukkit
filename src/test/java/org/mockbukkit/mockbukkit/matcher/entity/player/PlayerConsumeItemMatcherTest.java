@@ -34,14 +34,14 @@ class PlayerConsumeItemMatcherTest extends AbstractMatcherTest
 	@Test
 	void consumed_matches()
 	{
-		new PlayerSimulation(player).simulateConsumeItem(item);
+		player.simulateConsumeItem(item);
 		assertMatches(hasConsumed(item), player);
 	}
 
 	@Test
 	void consumed_differentItem()
 	{
-		new PlayerSimulation(player).simulateConsumeItem(new ItemStack(Material.APPLE));
+		player.simulateConsumeItem(new ItemStack(Material.APPLE));
 		assertDoesNotMatch(hasConsumed(item), player);
 	}
 
