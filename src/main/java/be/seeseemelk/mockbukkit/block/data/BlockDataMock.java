@@ -21,10 +21,12 @@ import org.bukkit.util.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * Mock implementation of {@link BlockData}.
@@ -41,12 +43,13 @@ public class BlockDataMock implements BlockData
 	/**
 	 * Constructs a new {@link BlockDataMock} for the provided {@link Material}.
 	 *
-	 * @param type The material this data is for.
+	 * @param material The material this data is for.
 	 */
-	public BlockDataMock(@NotNull Material type)
+	public BlockDataMock(@NotNull Material material)
 	{
-		Preconditions.checkNotNull(type, "Type cannot be null");
-		this.type = type;
+		checkMaterial(material);
+
+		this.type = material;
 		this.data = new LinkedHashMap<>();
 	}
 
@@ -64,17 +67,6 @@ public class BlockDataMock implements BlockData
 	}
 
 	/**
-	 * Ensures the provided block type is one of the expected materials provided.
-	 *
-	 * @param block    The block to test.
-	 * @param expected The expected materials.
-	 */
-	protected void checkType(@NotNull Block block, @NotNull Material... expected)
-	{
-		checkType(block.getType(), expected);
-	}
-
-	/**
 	 * Ensures the provided material is contained in the {@link Tag}.
 	 *
 	 * @param material The material to test.
@@ -86,14 +78,24 @@ public class BlockDataMock implements BlockData
 	}
 
 	/**
-	 * Ensures the provided block type is contained in the {@link Tag}.
+	 * Ensures the provided material is valid for minecraft.
 	 *
-	 * @param block    The material to test.
-	 * @param expected The expected tag.
+	 * @param material The material to test.
 	 */
-	protected void checkType(@NotNull Block block, @NotNull Tag<Material> expected)
+	protected static void checkMaterial(@NotNull Material material)
 	{
-		checkType(block.getType(), expected);
+		Preconditions.checkNotNull(material, NULL_MATERIAL_EXCEPTION_MESSAGE);
+		Preconditions.checkState(material.isBlock(), "Can't create a block from " + material.getKey());
+	}
+
+	/**
+	 * Ensures the provided material/state combination is valid for minecraft.
+	 *
+	 * @param property    The state to test.
+	 */
+	protected void checkProperty(String property)
+	{
+		Preconditions.checkState(BlockDataMockRegistry.getInstance().isValidStateForBlockWithMaterial(getMaterial(), property), property + " is not a valid property for " + getMaterial().getKey());
 	}
 	// endregion
 
@@ -109,6 +111,9 @@ public class BlockDataMock implements BlockData
 	{
 		Preconditions.checkNotNull(key, "Key cannot be null");
 		Preconditions.checkNotNull(value, "Value cannot be null");
+
+		checkProperty(key);
+
 		this.data.put(key, value);
 	}
 
@@ -125,7 +130,12 @@ public class BlockDataMock implements BlockData
 	protected <T> @NotNull T get(@NotNull String key)
 	{
 		Preconditions.checkNotNull(key, "Key cannot be null");
+		checkProperty(key);
 		T value = (T) this.data.get(key);
+		if (value == null)
+		{
+			value = (T) BlockDataMockRegistry.getInstance().getDefault(getMaterial(), key);
+		}
 		Preconditions.checkArgument(value != null, "Cannot get property " + key + " as it does not exist");
 		return value;
 	}
@@ -139,31 +149,43 @@ public class BlockDataMock implements BlockData
 	@Override
 	public @NotNull String getAsString()
 	{
-		StringBuilder stateString = new StringBuilder("minecraft:" + getMaterial().name().toLowerCase());
-
-		if (!this.data.isEmpty())
-		{
-			stateString.append('[');
-			stateString.append(this.data.entrySet().stream().map(entry -> entry.getKey() + "=" + entry.getValue().toString().toLowerCase()).collect(Collectors.joining(",")));
-			stateString.append(']');
-		}
-
-		return stateString.toString();
+		return getAsString(false);
 	}
 
 	@Override
 	public @NotNull String getAsString(boolean hideUnspecified)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		StringBuilder stateString = new StringBuilder(getMaterial().getKey() + "[");
+
+		List<String> keysToShow = new ArrayList<>(hideUnspecified ? data.keySet() : BlockDataMockRegistry.getInstance().getBlockData(type).keySet());
+		Collections.sort(keysToShow);
+
+		boolean isFirst = true;
+		for (String key : keysToShow)
+		{
+			if (!isFirst) stateString.append(',');
+
+			Object value = data.get(key);
+			Object defaultValue = BlockDataMockRegistry.getInstance().getDefault(type, key);
+
+			if (hideUnspecified && value == defaultValue) continue;
+
+			stateString.append(key).append("=").append((value == null ? defaultValue : value).toString().toLowerCase());
+
+			isFirst = false;
+		}
+		stateString.append(']');
+
+		return stateString.toString().replace("[]", "");
 	}
 
 	@Override
 	public @NotNull BlockData merge(@NotNull BlockData data)
 	{
 		Preconditions.checkNotNull(data, "Data cannot be null");
-//		Preconditions.checkArgument(?, "States have different types (got %s, expected %s)", data, this); TODO: implement this check
-		BlockDataMock mock = (BlockDataMock) this.clone();
+		Preconditions.checkState(this.getMaterial() == data.getMaterial(), "Materials should match exactly");
+
+		BlockDataMock mock = this.clone();
 		mock.data.putAll(((BlockDataMock) data).data);
 		return mock;
 	}
@@ -298,7 +320,7 @@ public class BlockDataMock implements BlockData
 	@Override
 	public boolean matches(@Nullable BlockData data)
 	{
-		if (data == null || data.getMaterial() != this.type)
+		if (data == null || data.getMaterial() != this.getMaterial())
 		{
 			return false;
 		}
@@ -326,7 +348,7 @@ public class BlockDataMock implements BlockData
 	}
 
 	@Override
-	public @NotNull BlockData clone()
+	public @NotNull BlockDataMock clone()
 	{
 		try
 		{
@@ -350,6 +372,7 @@ public class BlockDataMock implements BlockData
 	public static @NotNull BlockDataMock mock(@NotNull Material material)
 	{
 		Preconditions.checkNotNull(material, NULL_MATERIAL_EXCEPTION_MESSAGE);
+
 		BlockDataMock mock = attemptMockByPaperMaterialTags(material);
 		if (mock != null)
 		{
@@ -373,6 +396,8 @@ public class BlockDataMock implements BlockData
 
 	private static @NotNull BlockDataMock mock(@NotNull Material material, @NotNull Map<String, Object> previousData)
 	{
+		Preconditions.checkNotNull(previousData, "previousData should not be null");
+
 		BlockDataMock blockDataMock = BlockDataMock.mock(material);
 		blockDataMock.data.putAll(previousData);
 		return blockDataMock;
