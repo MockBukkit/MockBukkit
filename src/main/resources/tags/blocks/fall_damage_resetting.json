@@ -1,0 +1,16 @@
+{
+    "replace": false,
+    "values": [
+        "minecraft:cave_vines",
+        "minecraft:vine",
+        "minecraft:weeping_vines_plant",
+        "minecraft:ladder",
+        "minecraft:twisting_vines",
+        "minecraft:cave_vines_plant",
+        "minecraft:scaffolding",
+        "minecraft:cobweb",
+        "minecraft:twisting_vines_plant",
+        "minecraft:sweet_berry_bush",
+        "minecraft:weeping_vines"
+    ]
+}

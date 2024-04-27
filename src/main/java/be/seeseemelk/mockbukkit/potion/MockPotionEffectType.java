@@ -5,11 +5,13 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.JsonObject;
 import org.bukkit.Color;
+import org.bukkit.Keyed;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.EnumMap;
@@ -33,7 +35,15 @@ public class MockPotionEffectType extends PotionEffectType
 	private final Category category;
 
 
-	public MockPotionEffectType(@NotNull NamespacedKey key, int id, String name, boolean instant, Color color, Category category)
+	/**
+	 * @param key      The namespaced key representing this effect
+	 * @param id       The magic number representing this effect
+	 * @param name     The name of this effect
+	 * @param instant  Whether the effect is instant or not
+	 * @param color    The color of the effect
+	 * @param category The category of the effect
+	 */
+	public MockPotionEffectType(@NotNull NamespacedKey key, int id, @NotNull String name, boolean instant, @NotNull Color color, @NotNull Category category)
 	{
 		super();
 
@@ -43,7 +53,7 @@ public class MockPotionEffectType extends PotionEffectType
 		this.instant = instant;
 		this.color = Preconditions.checkNotNull(color);
 		this.attributeModifiers = new EnumMap<>(Attribute.class);
-		this.category = category;
+		this.category = Preconditions.checkNotNull(category);
 	}
 
 	/**
@@ -60,6 +70,11 @@ public class MockPotionEffectType extends PotionEffectType
 		this(key, id, name, instant, color, Category.NEUTRAL);
 	}
 
+	/**
+	 * @param data Json data
+	 * @deprecated Use {@link #MockPotionEffectType(NamespacedKey, int, String, boolean, Color, Category)} instead.
+	 */
+	@Deprecated(forRemoval = true)
 	public MockPotionEffectType(JsonObject data)
 	{
 		this(NamespacedKey.fromString(data.get("key").getAsString()),
@@ -180,6 +195,25 @@ public class MockPotionEffectType extends PotionEffectType
 
 	@Override
 	public @NotNull String translationKey()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@ApiStatus.Internal
+	public static Keyed from(JsonObject data)
+	{
+		NamespacedKey key = NamespacedKey.fromString(data.get("key").getAsString());
+		int id = data.get("id").getAsInt();
+		String name = data.get("name").getAsString();
+		boolean instant = data.get("instant").getAsBoolean();
+		Color color = Color.fromRGB(data.get("rgb").getAsInt());
+		Category category = Category.valueOf(data.get("category").getAsString());
+		return new MockPotionEffectType(key, id, name, instant, color, category);
+	}
+
+	@Override
+	public @NotNull String getTranslationKey()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

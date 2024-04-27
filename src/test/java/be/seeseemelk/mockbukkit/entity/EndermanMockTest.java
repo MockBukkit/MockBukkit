@@ -49,7 +49,7 @@ class EndermanMockTest
 	@Test
 	void testMaterialDataSet()
 	{
-		MaterialData materialData = new MaterialData(Material.DIAMOND);
+		MaterialData materialData = new MaterialData(Material.DIAMOND_BLOCK);
 		endermanMock.setCarriedMaterial(materialData);
 
 		assertEquals(materialData, endermanMock.getCarriedMaterial());

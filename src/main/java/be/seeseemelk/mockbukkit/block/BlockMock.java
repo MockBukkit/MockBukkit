@@ -501,6 +501,13 @@ public class BlockMock implements Block
 	}
 
 	@Override
+	public void fluidTick()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public void randomTick()
 	{
 		// TODO Auto-generated method stub

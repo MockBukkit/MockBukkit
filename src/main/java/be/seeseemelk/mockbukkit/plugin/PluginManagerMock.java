@@ -620,7 +620,7 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 			command.setUsage((String) value);
 			break;
 		default:
-			throw new UnsupportedOperationException("Unknown section " + value);
+			throw new UnsupportedOperationException("Unknown section " + name + " with value '" + value + "'. Are you sure this is allowed here? (Reference guide: https://docs.papermc.io/paper/dev/plugin-yml#commands)");
 		}
 	}
 
