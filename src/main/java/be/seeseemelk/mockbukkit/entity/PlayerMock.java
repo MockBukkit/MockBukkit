@@ -3212,7 +3212,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void setOp(boolean isOperator)
 	{
-
 		if (isOperator)
 		{
 			server.getPlayerList().addOperator(this.getUniqueId());
@@ -3221,7 +3220,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		{
 			server.getPlayerList().removeOperator(this.getUniqueId());
 		}
-
+		recalculatePermissions();
 	}
 
 	@Override
