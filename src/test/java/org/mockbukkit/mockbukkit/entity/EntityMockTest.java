@@ -32,6 +32,7 @@ import org.bukkit.event.entity.EntityDismountEvent;
 import org.bukkit.event.entity.EntityMountEvent;
 import org.bukkit.event.entity.EntityTeleportEvent;
 import org.bukkit.event.entity.EntityToggleSwimEvent;
+import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.permissions.Permission;
@@ -63,6 +64,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockbukkit.mockbukkit.matcher.entity.EntityTeleportationMatcher.hasTeleported;
 import static org.mockbukkit.mockbukkit.matcher.command.MessageTargetReceivedMessageMatcher.hasReceived;
 import static org.mockbukkit.mockbukkit.matcher.entity.EntityLocationMatcher.isInLocation;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasFiredEventClass;
 
 class EntityMockTest
 {
@@ -183,7 +185,7 @@ class EntityMockTest
 	void teleport_RaiseEvent()
 	{
 		entity.teleport(entity.getLocation().add(10, 0, 5));
-		server.getPluginManager().assertEventFired(EntityTeleportEvent.class);
+		assertThat(server.getPluginManager(), hasFiredEventClass(EntityTeleportEvent.class));
 	}
 
 	@Test
@@ -596,7 +598,7 @@ class EntityMockTest
 		LivingEntityMock zombie = (LivingEntityMock) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
 		PlayerMock player1 = server.addPlayer();
 		zombie.simulateDamage(4, player1);
-		server.getPluginManager().assertEventFired(EntityDamageByEntityEvent.class);
+		assertThat(server.getPluginManager(), hasFiredEventClass(EntityDamageByEntityEvent.class));
 	}
 
 	@Test

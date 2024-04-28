@@ -1,10 +1,5 @@
 package org.mockbukkit.mockbukkit.plugin;
 
-import org.mockbukkit.mockbukkit.PermissionManagerMock;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.UnimplementedOperationException;
-import org.mockbukkit.mockbukkit.exception.EventHandlerException;
-import org.mockbukkit.mockbukkit.scheduler.BukkitSchedulerMock;
 import com.destroystokyo.paper.event.server.ServerExceptionEvent;
 import com.destroystokyo.paper.exception.ServerEventException;
 import com.google.common.base.Preconditions;
@@ -34,6 +29,11 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.UnknownNullability;
+import org.mockbukkit.mockbukkit.PermissionManagerMock;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.exception.EventHandlerException;
+import org.mockbukkit.mockbukkit.scheduler.BukkitSchedulerMock;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -112,6 +112,11 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 		{
 			server.getLogger().log(Level.SEVERE, "Could not delete temporary directory", e);
 		}
+	}
+
+	public Stream<Event> getFiredEvents()
+	{
+		return events.stream();
 	}
 
 	/**
