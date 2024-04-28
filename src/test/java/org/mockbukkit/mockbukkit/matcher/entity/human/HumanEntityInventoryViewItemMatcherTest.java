@@ -60,6 +60,12 @@ class HumanEntityInventoryViewItemMatcherTest extends AbstractMatcherTest
 		testIsNullSafe();
 	}
 
+	@Test
+	void unknownTypeSafe()
+	{
+		testCopesWithUnknownTypes();
+	}
+
 	@Override
 	protected Matcher<?> createMatcher()
 	{
