@@ -240,4 +240,11 @@ public class AllayMock extends CreatureMock implements Allay
 		return EntityType.ALLAY;
 	}
 
+	/**
+	 *
+	 * @return The material of the current item held by the allay
+	 */
+	public @Nullable Material getCurrentItem(){
+		return currentItem;
+	}
 }

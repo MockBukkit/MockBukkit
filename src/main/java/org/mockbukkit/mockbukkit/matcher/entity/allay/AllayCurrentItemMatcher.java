@@ -5,8 +5,6 @@ import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
 import org.mockbukkit.mockbukkit.entity.AllayMock;
 
-import java.lang.reflect.Field;
-
 public class AllayCurrentItemMatcher extends TypeSafeMatcher<AllayMock>
 {
 
@@ -20,18 +18,7 @@ public class AllayCurrentItemMatcher extends TypeSafeMatcher<AllayMock>
 	@Override
 	protected boolean matchesSafely(AllayMock allay)
 	{
-		try
-		{
-			Field currentItemField;
-			currentItemField = allay.getClass().getDeclaredField("currentItem");
-			currentItemField.setAccessible(true);
-			return currentItemField.get(allay).equals(currentItem);
-		}
-		catch (NoSuchFieldException | IllegalAccessException e)
-		{
-			e.printStackTrace();
-			return false;
-		}
+		return currentItem.equals(allay.getCurrentItem());
 	}
 
 	@Override
@@ -41,9 +28,9 @@ public class AllayCurrentItemMatcher extends TypeSafeMatcher<AllayMock>
 	}
 
 	@Override
-	protected void describeMismatchSafely(AllayMock item, Description mismatchDescription)
+	protected void describeMismatchSafely(AllayMock allay, Description mismatchDescription)
 	{
-		mismatchDescription.appendText(" has current item \"" + currentItem.toString() + "\"");
+		mismatchDescription.appendText("has current item ").appendValue(allay.getCurrentItem());
 	}
 
 	public static AllayCurrentItemMatcher currentItem(Material currentItem)
