@@ -35,6 +35,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockbukkit.mockbukkit.matcher.entity.human.HumanEntityGameModeMatcher.hasGameMode;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 
 class HumanEntityMockTest
 {
@@ -90,7 +91,7 @@ class HumanEntityMockTest
 	void setGameMode_GameModeChanged_CallsEvent()
 	{
 		human.setGameMode(GameMode.CREATIVE);
-		server.getPluginManager().assertEventFired(PlayerGameModeChangeEvent.class, (e) -> e.getNewGameMode() == GameMode.CREATIVE);
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(PlayerGameModeChangeEvent.class, (e) -> e.getNewGameMode() == GameMode.CREATIVE));
 	}
 
 	@Test
@@ -201,8 +202,8 @@ class HumanEntityMockTest
 	{
 		Inventory inv = server.createInventory(null, 36);
 		human.openInventory(inv);
-		server.getPluginManager().assertEventFired(InventoryOpenEvent.class,
-				e -> e.getPlayer() == human && e.getInventory() == inv);
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(InventoryOpenEvent.class,
+				e -> e.getPlayer() == human && e.getInventory() == inv));
 	}
 
 	@Test
@@ -220,8 +221,8 @@ class HumanEntityMockTest
 
 		human.openInventory(inv);
 
-		server.getPluginManager().assertEventFired(InventoryOpenEvent.class,
-				e -> e.getPlayer() == human && e.getInventory() == inv && e.isCancelled());
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(InventoryOpenEvent.class,
+				e -> e.getPlayer() == human && e.getInventory() == inv && e.isCancelled()));
 		assertEquals(InventoryType.CRAFTING, human.getOpenInventory().getType());
 	}
 
@@ -237,10 +238,8 @@ class HumanEntityMockTest
 		human.openInventory(inv2);
 
 		assertTrue(human.getItemOnCursor().getType().isAir());
-		server.getPluginManager().assertEventFired(InventoryCloseEvent.class,
-				e -> e.getPlayer() == human && e.getInventory() == inv1);
-		server.getPluginManager().assertEventFired(InventoryOpenEvent.class,
-				e -> e.getPlayer() == human && e.getInventory() == inv2);
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(InventoryOpenEvent.class, e -> e.getPlayer() == human && e.getInventory() == inv1));
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(InventoryOpenEvent.class, e -> e.getPlayer() == human && e.getInventory() == inv2));
 	}
 
 	@Test
@@ -264,8 +263,7 @@ class HumanEntityMockTest
 
 		human.closeInventory();
 
-		server.getPluginManager().assertEventFired(InventoryCloseEvent.class,
-				e -> e.getPlayer() == human && e.getInventory() == inv);
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(InventoryCloseEvent.class, e -> e.getPlayer() == human && e.getInventory() == inv));
 	}
 
 	@Test

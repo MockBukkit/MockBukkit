@@ -125,6 +125,7 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 * @param message   The message to display when no event conforms.
 	 * @param predicate The predicate to test against.
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertEventFired(@Nullable String message, @NotNull Predicate<Event> predicate)
 	{
 		Preconditions.checkNotNull(predicate, "Predicate cannot be null");
@@ -145,6 +146,7 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 *
 	 * @param predicate The predicate to test against.
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertEventFired(@NotNull Predicate<Event> predicate)
 	{
 		Preconditions.checkNotNull(predicate, "Predicate cannot be null");
@@ -159,6 +161,7 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 * @param eventClass The class type that the event should be an instance of.
 	 * @param predicate  The predicate to test the event against.
 	 */
+	@Deprecated(forRemoval = true)
 	public <T extends Event> void assertEventFired(@Nullable String message, @NotNull Class<T> eventClass, @NotNull Predicate<T> predicate)
 	{
 		Preconditions.checkNotNull(eventClass, "Class cannot be null");
@@ -181,6 +184,7 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 * @param eventClass The class type that the event should be an instance of.
 	 * @param predicate  The predicate to test the event against.
 	 */
+	@Deprecated(forRemoval = true)
 	public <T extends Event> void assertEventFired(@NotNull Class<T> eventClass, @NotNull Predicate<T> predicate)
 	{
 		Preconditions.checkNotNull(eventClass, "Class cannot be null");
@@ -192,6 +196,7 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 *
 	 * @param eventClass The class of the event to check for.
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertEventFired(@NotNull Class<? extends Event> eventClass)
 	{
 		Preconditions.checkNotNull(eventClass, "Class cannot be null");
@@ -203,6 +208,7 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 *
 	 * @param eventClass The class of the event to check for.
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertEventNotFired(@NotNull Class<? extends Event> eventClass)
 	{
 		Preconditions.checkNotNull(eventClass, "Class cannot be null");
@@ -215,6 +221,7 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 * @param eventClass The class of the event to check for.
 	 * @param message    The message to print when failed.
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertEventNotFired(@NotNull Class<? extends Event> eventClass, @Nullable String message)
 	{
 		Preconditions.checkNotNull(eventClass, "Class cannot be null");

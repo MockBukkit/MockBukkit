@@ -32,7 +32,6 @@ import org.bukkit.event.entity.EntityDismountEvent;
 import org.bukkit.event.entity.EntityMountEvent;
 import org.bukkit.event.entity.EntityTeleportEvent;
 import org.bukkit.event.entity.EntityToggleSwimEvent;
-import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.permissions.Permission;
@@ -64,7 +63,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockbukkit.mockbukkit.matcher.entity.EntityTeleportationMatcher.hasTeleported;
 import static org.mockbukkit.mockbukkit.matcher.command.MessageTargetReceivedMessageMatcher.hasReceived;
 import static org.mockbukkit.mockbukkit.matcher.entity.EntityLocationMatcher.isInLocation;
-import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasFiredEventClass;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasFiredEventInstance;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 
 class EntityMockTest
 {
@@ -185,7 +185,7 @@ class EntityMockTest
 	void teleport_RaiseEvent()
 	{
 		entity.teleport(entity.getLocation().add(10, 0, 5));
-		assertThat(server.getPluginManager(), hasFiredEventClass(EntityTeleportEvent.class));
+		assertThat(server.getPluginManager(), hasFiredEventInstance(EntityTeleportEvent.class));
 	}
 
 	@Test
@@ -598,7 +598,7 @@ class EntityMockTest
 		LivingEntityMock zombie = (LivingEntityMock) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
 		PlayerMock player1 = server.addPlayer();
 		zombie.simulateDamage(4, player1);
-		assertThat(server.getPluginManager(), hasFiredEventClass(EntityDamageByEntityEvent.class));
+		assertThat(server.getPluginManager(), hasFiredEventInstance(EntityDamageByEntityEvent.class));
 	}
 
 	@Test
@@ -709,7 +709,7 @@ class EntityMockTest
 		assertFalse(zombie.isSwimming());
 		zombie.setSwimming(true);
 		assertTrue(zombie.isSwimming());
-		server.getPluginManager().assertEventFired(event -> event instanceof EntityToggleSwimEvent);
+		assertThat(server.getPluginManager(), hasFiredEventInstance(EntityToggleSwimEvent.class));
 	}
 
 	@Test
@@ -797,7 +797,7 @@ class EntityMockTest
 	{
 		SimpleEntityMock mock = new SimpleEntityMock(server);
 		assertTrue(entity.addPassenger(mock));
-		server.getPluginManager().assertEventFired(EntityMountEvent.class, event -> event.getMount() == entity && event.getEntity() == mock);
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(EntityMountEvent.class, event -> event.getMount() == entity && event.getEntity() == mock));
 
 		assertFalse(entity.addPassenger(mock), "The passenger should not be added a second time");
 		assertEquals(List.of(mock), entity.getPassengers(), "There should be only one passenger");
@@ -896,7 +896,7 @@ class EntityMockTest
 		SimpleEntityMock mock = new SimpleEntityMock(server);
 		entity.addPassenger(mock);
 		assertTrue(entity.removePassenger(mock));
-		server.getPluginManager().assertEventFired(EntityDismountEvent.class, event -> event.getDismounted() == entity && event.getEntity() == mock);
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(EntityDismountEvent.class, event -> event.getDismounted() == entity && event.getEntity() == mock));
 
 		assertTrue(entity.removePassenger(mock), "The method should always return true, even if it was not a passenger");
 		assertEquals(List.of(), entity.getPassengers());
@@ -911,7 +911,7 @@ class EntityMockTest
 		SimpleEntityMock b = new SimpleEntityMock(server);
 		a.addPassenger(b);
 		entity.removePassenger(b);
-		server.getPluginManager().assertEventFired(EntityDismountEvent.class, event -> event.getDismounted() == a && event.getEntity() == b);
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(EntityDismountEvent.class, event -> event.getDismounted() == a && event.getEntity() == b));
 		assertNull(b.getVehicle(), "b should not longer have a vehicle");
 		assertTrue(a.isEmpty(), "a should not longer have a passenger");
 	}

@@ -12,10 +12,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 
 @ExtendWith(MockBukkitExtension.class)
 class WorldBorderMockTest
@@ -112,8 +114,7 @@ class WorldBorderMockTest
 	void setSize_Instant_CallsEvent()
 	{
 		worldBorderMock.setSize(100);
-
-		server.getPluginManager().assertEventFired(WorldBorderBoundsChangeEvent.class, (e) -> e.getType() == WorldBorderBoundsChangeEvent.Type.INSTANT_MOVE && e.getNewSize() == 100);
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(WorldBorderBoundsChangeEvent.class, event -> event.getType() == WorldBorderBoundsChangeEvent.Type.INSTANT_MOVE && event.getNewSize() == 100));
 	}
 
 	@Test
@@ -121,7 +122,7 @@ class WorldBorderMockTest
 	{
 		worldBorderMock.setSize(100, 5);
 
-		server.getPluginManager().assertEventFired(WorldBorderBoundsChangeEvent.class, (e) -> e.getType() == WorldBorderBoundsChangeEvent.Type.STARTED_MOVE && e.getNewSize() == 100 && e.getDuration() == 5000);
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(WorldBorderBoundsChangeEvent.class, (e) -> e.getType() == WorldBorderBoundsChangeEvent.Type.STARTED_MOVE && e.getNewSize() == 100 && e.getDuration() == 5000));
 	}
 
 	@Test
@@ -198,8 +199,9 @@ class WorldBorderMockTest
 	{
 		worldBorderMock.setCenter(10, 12);
 
-		server.getPluginManager().assertEventFired(WorldBorderCenterChangeEvent.class, (e) -> e.getNewCenter().getX() == 10 && e.getNewCenter().getZ() == 12);
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(WorldBorderCenterChangeEvent.class, event -> event.getNewCenter().getX() == 10 && event.getNewCenter().getZ() == 12));
 	}
+
 
 	@Test
 	void setCenter_CanceledEvent_DoesntApply()
