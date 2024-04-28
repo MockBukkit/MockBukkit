@@ -38,7 +38,7 @@ public class EntityTeleportationMatcher extends TypeSafeMatcher<EntityMock>
 	@Override
 	public void describeTo(Description description)
 	{
-		description.appendText("to have teleported to specified location");
+		description.appendText("to have teleported to following location ").appendValue(location);
 	}
 
 	@Override

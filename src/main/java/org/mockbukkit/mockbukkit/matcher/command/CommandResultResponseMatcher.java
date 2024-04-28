@@ -39,7 +39,7 @@ public class CommandResultResponseMatcher extends TypeSafeMatcher<CommandResult>
 	@Override
 	public void describeTo(Description description)
 	{
-		description.appendText("to have the given message be the last message sent to sender");
+		description.appendText("to have the following message be the last message sent to receiver ").appendValue(response);
 	}
 
 	@Override

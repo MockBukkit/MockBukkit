@@ -36,7 +36,7 @@ public class RangedEntityAttackMatcher extends TypeSafeMatcher<MockRangedEntity<
 	@Override
 	public void describeTo(Description description)
 	{
-		description.appendText("to have attacked specified target");
+		description.appendText("to have attacked following target").appendValue(target);
 	}
 
 	@Override

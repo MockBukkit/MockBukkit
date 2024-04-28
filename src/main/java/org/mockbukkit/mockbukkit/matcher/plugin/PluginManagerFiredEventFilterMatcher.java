@@ -28,7 +28,7 @@ public class PluginManagerFiredEventFilterMatcher<T extends Event> extends TypeS
 	@Override
 	public void describeTo(Description description)
 	{
-		description.appendText("to match any event with specified filter and event class");
+		description.appendText("to match any event with specified filter and the following event class").appendValue(eventClass);
 	}
 
 	@Override

@@ -37,7 +37,7 @@ public class AllayCurrentItemMatcher extends TypeSafeMatcher<AllayMock>
 	@Override
 	public void describeTo(Description description)
 	{
-		description.appendText("to have current item ");
+		description.appendText("to have current item of material ").appendValue(currentItem);
 	}
 
 	@Override

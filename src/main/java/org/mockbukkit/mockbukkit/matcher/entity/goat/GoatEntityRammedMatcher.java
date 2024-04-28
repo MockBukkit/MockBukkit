@@ -24,7 +24,7 @@ public class GoatEntityRammedMatcher extends TypeSafeMatcher<GoatMock>
 	@Override
 	public void describeTo(Description description)
 	{
-		description.appendText("to have rammed the specified entity");
+		description.appendText("to have rammed the following entity ").appendValue(target);
 	}
 
 	@Override

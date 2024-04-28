@@ -24,7 +24,7 @@ public class HumanEntityGameModeMatcher extends TypeSafeMatcher<HumanEntityMock>
 	@Override
 	public void describeTo(Description description)
 	{
-		description.appendText("to have the specified game mode");
+		description.appendText("to have the following game mode").appendValue(gameMode);
 	}
 
 	@Override

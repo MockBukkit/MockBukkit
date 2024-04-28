@@ -28,7 +28,7 @@ public class HumanEntityInventoryViewItemMatcher extends TypeSafeMatcher<HumanEn
 	@Override
 	public void describeTo(Description description)
 	{
-		description.appendText("to contain any of the specified item material");
+		description.appendText("to contain any of the following item material ").appendValue(material);
 	}
 
 	@Override

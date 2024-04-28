@@ -24,7 +24,7 @@ public class PlayerConsumeItemMatcher extends TypeSafeMatcher<PlayerMock>
 	@Override
 	public void describeTo(Description description)
 	{
-		description.appendText("to have consumed the specified item");
+		description.appendText("to have consumed the following item ").appendValue(itemStack);
 	}
 
 	@Override
