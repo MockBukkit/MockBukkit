@@ -4,6 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
+import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.entity.HumanEntityMock;
 
 public class HumanEntityInventoryViewItemMatcher extends TypeSafeMatcher<HumanEntityMock>
@@ -50,7 +51,7 @@ public class HumanEntityInventoryViewItemMatcher extends TypeSafeMatcher<HumanEn
 	 * @param material The material of the item required for a match
 	 * @return A matcher which matches with any human entity with the specified item in inventory
 	 */
-	public static HumanEntityInventoryViewItemMatcher hasItemInInventoryView(Material material)
+	public static @NotNull HumanEntityInventoryViewItemMatcher hasItemInInventoryView(Material material)
 	{
 		return new HumanEntityInventoryViewItemMatcher(material);
 	}
@@ -60,7 +61,7 @@ public class HumanEntityInventoryViewItemMatcher extends TypeSafeMatcher<HumanEn
 	 * @param item The item required for a match
 	 * @return A matcher which matches with any human entity with the specified item in inventory
 	 */
-	public static HumanEntityInventoryViewItemMatcher hasItemInInventoryView(ItemStack item)
+	public static @NotNull HumanEntityInventoryViewItemMatcher hasItemInInventoryView(ItemStack item)
 	{
 		return new HumanEntityInventoryViewItemMatcher(item.getType());
 	}

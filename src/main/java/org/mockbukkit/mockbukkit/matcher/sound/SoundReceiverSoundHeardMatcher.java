@@ -4,6 +4,7 @@ import net.kyori.adventure.sound.Sound;
 import net.kyori.adventure.util.ShadyPines;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
+import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.sound.AudioExperience;
 import org.mockbukkit.mockbukkit.sound.SoundReceiver;
 
@@ -45,7 +46,7 @@ public class SoundReceiverSoundHeardMatcher extends TypeSafeMatcher<SoundReceive
 	 * @param filter A custom filter
 	 * @return A matcher which matches with any sound receiver which has heard the specified sound with filter
 	 */
-	public static SoundReceiverSoundHeardMatcher hasHeard(Sound sound, Predicate<AudioExperience> filter)
+	public static @NotNull SoundReceiverSoundHeardMatcher hasHeard(Sound sound, Predicate<AudioExperience> filter)
 	{
 		// Extra fields in the Sound instance needs to be checked, this is added to the filter
 		Predicate<AudioExperience> soundFilter = e -> e.getSource() == sound.source()
@@ -60,7 +61,7 @@ public class SoundReceiverSoundHeardMatcher extends TypeSafeMatcher<SoundReceive
 	 * @param filter A custom filter
 	 * @return A matcher which matches with any sound receiver which has heard the specified sound with filter
 	 */
-	public static SoundReceiverSoundHeardMatcher hasHeard(org.bukkit.Sound sound, Predicate<AudioExperience> filter)
+	public static @NotNull SoundReceiverSoundHeardMatcher hasHeard(org.bukkit.Sound sound, Predicate<AudioExperience> filter)
 	{
 		return hasHeard(sound.getKey().getKey(), filter);
 	}
@@ -71,7 +72,7 @@ public class SoundReceiverSoundHeardMatcher extends TypeSafeMatcher<SoundReceive
 	 * @param filter A custom filter
 	 * @return A matcher which matches with any sound receiver which has heard the specified sound with filter
 	 */
-	public static SoundReceiverSoundHeardMatcher hasHeard(String soundKey, Predicate<AudioExperience> filter)
+	public static @NotNull SoundReceiverSoundHeardMatcher hasHeard(String soundKey, Predicate<AudioExperience> filter)
 	{
 		return new SoundReceiverSoundHeardMatcher(soundKey, filter);
 	}
@@ -81,7 +82,7 @@ public class SoundReceiverSoundHeardMatcher extends TypeSafeMatcher<SoundReceive
 	 * @param sound The required sound for a match
 	 * @return A matcher which matches with any sound receiver which has heard the specified sound
 	 */
-	public static SoundReceiverSoundHeardMatcher hasHeard(String sound)
+	public static @NotNull SoundReceiverSoundHeardMatcher hasHeard(String sound)
 	{
 		return hasHeard(sound, ignored -> true);
 	}
@@ -91,7 +92,7 @@ public class SoundReceiverSoundHeardMatcher extends TypeSafeMatcher<SoundReceive
 	 * @param sound The required sound for a match
 	 * @return A matcher which matches with any sound receiver which has heard the specified sound
 	 */
-	public static SoundReceiverSoundHeardMatcher hasHeard(Sound sound)
+	public static @NotNull SoundReceiverSoundHeardMatcher hasHeard(Sound sound)
 	{
 		return hasHeard(sound, ignored -> true);
 	}
@@ -101,7 +102,7 @@ public class SoundReceiverSoundHeardMatcher extends TypeSafeMatcher<SoundReceive
 	 * @param sound The required sound for a match
 	 * @return A matcher which matches with any sound receiver which has heard the specified sound
 	 */
-	public static SoundReceiverSoundHeardMatcher hasHeard(org.bukkit.Sound sound)
+	public static @NotNull SoundReceiverSoundHeardMatcher hasHeard(org.bukkit.Sound sound)
 	{
 		return hasHeard(sound, ignored -> true);
 	}

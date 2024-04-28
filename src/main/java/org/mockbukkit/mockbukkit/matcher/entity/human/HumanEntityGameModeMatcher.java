@@ -3,6 +3,7 @@ package org.mockbukkit.mockbukkit.matcher.entity.human;
 import org.bukkit.GameMode;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
+import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.entity.HumanEntityMock;
 
 public class HumanEntityGameModeMatcher extends TypeSafeMatcher<HumanEntityMock>
@@ -38,7 +39,7 @@ public class HumanEntityGameModeMatcher extends TypeSafeMatcher<HumanEntityMock>
 	 * @param gameMode The game mode required for there to be a match
 	 * @return A matcher which matches with any human entity with the specified game mode
 	 */
-	public static HumanEntityGameModeMatcher hasGameMode(GameMode gameMode)
+	public static @NotNull HumanEntityGameModeMatcher hasGameMode(GameMode gameMode)
 	{
 		return new HumanEntityGameModeMatcher(gameMode);
 	}

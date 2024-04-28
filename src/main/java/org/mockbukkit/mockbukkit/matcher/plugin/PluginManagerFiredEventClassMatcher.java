@@ -3,6 +3,7 @@ package org.mockbukkit.mockbukkit.matcher.plugin;
 import org.bukkit.event.Event;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
+import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.plugin.PluginManagerMock;
 
 public class PluginManagerFiredEventClassMatcher extends TypeSafeMatcher<PluginManagerMock>
@@ -38,7 +39,7 @@ public class PluginManagerFiredEventClassMatcher extends TypeSafeMatcher<PluginM
 	 * @param targetEvent The required event class to have been fired
 	 * @return A matcher which matches with any plugin manager that has fired the specified event
 	 */
-	public static PluginManagerFiredEventClassMatcher hasFiredEventInstance(Class<? extends Event> targetEvent)
+	public static @NotNull PluginManagerFiredEventClassMatcher hasFiredEventInstance(Class<? extends Event> targetEvent)
 	{
 		return new PluginManagerFiredEventClassMatcher(targetEvent);
 	}

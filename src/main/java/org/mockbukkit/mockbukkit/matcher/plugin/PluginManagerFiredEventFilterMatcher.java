@@ -3,6 +3,7 @@ package org.mockbukkit.mockbukkit.matcher.plugin;
 import org.bukkit.event.Event;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
+import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.plugin.PluginManagerMock;
 
 import java.util.function.Predicate;
@@ -44,7 +45,7 @@ public class PluginManagerFiredEventFilterMatcher<T extends Event> extends TypeS
 	 * @return A matcher which matches with any plugin manager that has fired the specified event type with filter
 	 * @param <G> The event type to check for
 	 */
-	public static <G extends Event> PluginManagerFiredEventFilterMatcher<G> hasFiredFilteredEvent(Class<G> eventClass, Predicate<G> filter)
+	public static <G extends Event> @NotNull PluginManagerFiredEventFilterMatcher<G> hasFiredFilteredEvent(Class<G> eventClass, Predicate<G> filter)
 	{
 		return new PluginManagerFiredEventFilterMatcher<>(eventClass, filter);
 	}

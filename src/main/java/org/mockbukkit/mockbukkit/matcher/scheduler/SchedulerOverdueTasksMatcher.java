@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.matcher.scheduler;
 
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
+import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.scheduler.BukkitSchedulerMock;
 
 public class SchedulerOverdueTasksMatcher extends TypeSafeMatcher<BukkitSchedulerMock>
@@ -29,7 +30,7 @@ public class SchedulerOverdueTasksMatcher extends TypeSafeMatcher<BukkitSchedule
 	 *
 	 * @return A matcher which matches with any scheduler which has no overdue tasks
 	 */
-	public static SchedulerOverdueTasksMatcher hasNoOverdueTasks()
+	public static @NotNull SchedulerOverdueTasksMatcher hasNoOverdueTasks()
 	{
 		return new SchedulerOverdueTasksMatcher();
 	}

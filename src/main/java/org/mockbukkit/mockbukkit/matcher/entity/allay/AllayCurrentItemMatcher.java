@@ -3,6 +3,7 @@ package org.mockbukkit.mockbukkit.matcher.entity.allay;
 import org.bukkit.Material;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
+import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.entity.AllayMock;
 
 public class AllayCurrentItemMatcher extends TypeSafeMatcher<AllayMock>
@@ -38,7 +39,7 @@ public class AllayCurrentItemMatcher extends TypeSafeMatcher<AllayMock>
 	 * @param currentItem The material of the item to be held for there to be a match
 	 * @return A matcher which matches with any allay holding the specified item
 	 */
-	public static AllayCurrentItemMatcher currentItem(Material currentItem)
+	public static @NotNull AllayCurrentItemMatcher currentItem(Material currentItem)
 	{
 		return new AllayCurrentItemMatcher(currentItem);
 	}

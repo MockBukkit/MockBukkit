@@ -4,6 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
+import org.jetbrains.annotations.NotNull;
 
 public class ItemSimilarityMatcher extends TypeSafeMatcher<ItemStack>
 {
@@ -37,7 +38,7 @@ public class ItemSimilarityMatcher extends TypeSafeMatcher<ItemStack>
 	 * @param itemStack The required item stack to be similar to for a match
 	 * @return A matcher which matches when an item stack is similar to the specified item stack
 	 */
-	public static ItemSimilarityMatcher similarTo(ItemStack itemStack)
+	public static @NotNull ItemSimilarityMatcher similarTo(ItemStack itemStack)
 	{
 		return new ItemSimilarityMatcher(itemStack);
 	}
@@ -47,7 +48,7 @@ public class ItemSimilarityMatcher extends TypeSafeMatcher<ItemStack>
 	 * @param itemMaterial The required material of the item stack to be similar to for a match
 	 * @return A matcher which matches when an item stack is similar to the specified item stack
 	 */
-	public static ItemSimilarityMatcher similarTo(Material itemMaterial)
+	public static @NotNull ItemSimilarityMatcher similarTo(Material itemMaterial)
 	{
 		return new ItemSimilarityMatcher(new ItemStack(itemMaterial));
 	}

@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.matcher.command;
 
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
+import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.command.CommandResult;
 
 public class CommandResultResponseMatcher extends TypeSafeMatcher<CommandResult>
@@ -39,7 +40,7 @@ public class CommandResultResponseMatcher extends TypeSafeMatcher<CommandResult>
 	 * @param response The response the command result should have
 	 * @return A matcher which matches with any command result with specified response
 	 */
-	public static CommandResultResponseMatcher hasResponse(String response)
+	public static @NotNull CommandResultResponseMatcher hasResponse(String response)
 	{
 		return new CommandResultResponseMatcher(response);
 	}

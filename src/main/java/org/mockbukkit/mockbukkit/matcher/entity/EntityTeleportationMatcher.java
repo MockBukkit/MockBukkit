@@ -3,6 +3,7 @@ package org.mockbukkit.mockbukkit.matcher.entity;
 import org.bukkit.Location;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
+import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.entity.EntityMock;
 
 public class EntityTeleportationMatcher extends TypeSafeMatcher<EntityMock>
@@ -69,7 +70,7 @@ public class EntityTeleportationMatcher extends TypeSafeMatcher<EntityMock>
 	 * @param location The location required for there to be a match
 	 * @return A matcher which matches if the entity has teleported to the specified location
 	 */
-	public static EntityTeleportationMatcher hasTeleported(Location location)
+	public static @NotNull EntityTeleportationMatcher hasTeleported(Location location)
 	{
 		return hasTeleported(location, 0.0);
 	}
@@ -80,7 +81,7 @@ public class EntityTeleportationMatcher extends TypeSafeMatcher<EntityMock>
 	 * @param maximumDistance The distance around the location considered a valid match
 	 * @return A matcher which matches if the entity has teleported to the specified location within a radius
 	 */
-	public static EntityTeleportationMatcher hasTeleported(Location location, double maximumDistance)
+	public static @NotNull EntityTeleportationMatcher hasTeleported(Location location, double maximumDistance)
 	{
 		return new EntityTeleportationMatcher(location, maximumDistance);
 	}
