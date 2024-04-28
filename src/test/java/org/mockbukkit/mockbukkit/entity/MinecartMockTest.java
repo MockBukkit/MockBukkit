@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.entity;
 
+import org.bukkit.event.weather.ThunderChangeEvent;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.TestPlugin;
@@ -20,12 +21,15 @@ import org.spigotmc.event.entity.EntityMountEvent;
 
 import java.util.UUID;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.not;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasFiredEventClass;
 
 class MinecartMockTest
 {
@@ -138,7 +142,7 @@ class MinecartMockTest
 		}, plugin);
 		assertFalse(minecart.addPassenger(mock));
 		assertTrue(minecart.isEmpty());
-		server.getPluginManager().assertEventNotFired(EntityMountEvent.class);
+		assertThat(server.getPluginManager(), not(hasFiredEventClass(EntityMountEvent.class)));
 	}
 
 	@Test
@@ -157,7 +161,7 @@ class MinecartMockTest
 		}, plugin);
 		assertTrue(minecart.removePassenger(mock));
 		assertFalse(minecart.isEmpty());
-		server.getPluginManager().assertEventNotFired(EntityDismountEvent.class);
+		assertThat(server.getPluginManager(), not(hasFiredEventClass(EntityDismountEvent.class)));
 	}
 
 	@Test
