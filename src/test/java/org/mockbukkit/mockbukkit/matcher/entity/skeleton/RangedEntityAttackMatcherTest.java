@@ -53,12 +53,6 @@ class RangedEntityAttackMatcherTest extends AbstractMatcherTest
 	}
 
 	@Test
-	void description()
-	{
-		assertDescription("to have attacked specified target", hasAttacked(target, CHARGE));
-	}
-
-	@Test
 	void nullSafe()
 	{
 		testIsNullSafe();

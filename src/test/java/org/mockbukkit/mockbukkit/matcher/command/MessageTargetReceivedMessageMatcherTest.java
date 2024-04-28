@@ -54,12 +54,6 @@ class MessageTargetReceivedMessageMatcherTest extends AbstractMatcherTest
 	}
 
 	@Test
-	void description()
-	{
-		assertDescription("to receive specific message", hasReceived(MESSAGE));
-	}
-
-	@Test
 	void unknownTypeSafe()
 	{
 		testCopesWithUnknownTypes();

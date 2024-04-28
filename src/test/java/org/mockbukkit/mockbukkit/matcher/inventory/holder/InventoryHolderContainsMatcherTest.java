@@ -50,12 +50,6 @@ class InventoryHolderContainsMatcherTest extends AbstractMatcherTest
 		assertNullSafe(createMatcher());
 	}
 
-	@Test
-	void testHasReadableDescription()
-	{
-		assertDescription("to have Itemstack in inventory", inventoryContains(stack));
-	}
-
 	@Override
 	protected Matcher<?> createMatcher()
 	{

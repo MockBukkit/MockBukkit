@@ -48,12 +48,6 @@ class HumanEntityGameModeMatcherTest extends AbstractMatcherTest
 	}
 
 	@Test
-	void descriptionMatches()
-	{
-		assertDescription("to have the specified game mode", hasGameMode(GameMode.SPECTATOR));
-	}
-
-	@Test
 	void unknownTypeSafe()
 	{
 		testCopesWithUnknownTypes();

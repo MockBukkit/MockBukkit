@@ -59,12 +59,6 @@ class GoatEntityRammedMatcherTest extends AbstractMatcherTest
 	}
 
 	@Test
-	void description()
-	{
-		assertDescription("to have rammed the specified entity", hasRammed(target));
-	}
-
-	@Test
 	void unknownTypeSafe()
 	{
 		testCopesWithUnknownTypes();

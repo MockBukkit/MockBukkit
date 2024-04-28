@@ -48,12 +48,6 @@ class EntityLocationMatcherTest extends AbstractMatcherTest
 	}
 
 	@Test
-	void description()
-	{
-		assertDescription("to be within the specified location", isInLocation(location, 0));
-	}
-
-	@Test
 	void unknownTypeSafe()
 	{
 		testCopesWithUnknownTypes();

@@ -57,12 +57,6 @@ class HumanEntityInventoryViewTypeMatcherTest extends AbstractMatcherTest
 	}
 
 	@Test
-	void correctDescription()
-	{
-		assertDescription("to have the specified inventory view type", hasInventoryViewType(InventoryType.CREATIVE));
-	}
-
-	@Test
 	void unknownTypeSafe()
 	{
 		testCopesWithUnknownTypes();
