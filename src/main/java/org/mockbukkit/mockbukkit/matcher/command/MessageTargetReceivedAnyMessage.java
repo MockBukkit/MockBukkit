@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.matcher.command;
 
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
+import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.command.MessageTarget;
 
 public class MessageTargetReceivedAnyMessage extends TypeSafeMatcher<MessageTarget>
@@ -32,7 +33,7 @@ public class MessageTargetReceivedAnyMessage extends TypeSafeMatcher<MessageTarg
 	 *
 	 * @return A matcher which matches with any target that has received a message
 	 */
-	public static MessageTargetReceivedAnyMessage hasReceivedAny()
+	public static @NotNull MessageTargetReceivedAnyMessage hasReceivedAny()
 	{
 		return new MessageTargetReceivedAnyMessage();
 	}

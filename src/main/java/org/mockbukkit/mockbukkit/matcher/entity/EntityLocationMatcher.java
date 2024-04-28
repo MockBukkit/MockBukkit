@@ -3,6 +3,7 @@ package org.mockbukkit.mockbukkit.matcher.entity;
 import org.bukkit.Location;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
+import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.entity.EntityMock;
 
 public class EntityLocationMatcher extends TypeSafeMatcher<EntityMock>
@@ -43,7 +44,7 @@ public class EntityLocationMatcher extends TypeSafeMatcher<EntityMock>
 	 * @param maxDistance The radius away from the location which gives a match
 	 * @return A matcher which matches with any entity within a radius of specified location
 	 */
-	public static EntityLocationMatcher isInLocation(Location location, double maxDistance)
+	public static @NotNull EntityLocationMatcher isInLocation(Location location, double maxDistance)
 	{
 		return new EntityLocationMatcher(location, maxDistance);
 	}

@@ -47,7 +47,7 @@ public class HelpMapFactoryRegisteredMatcher extends TypeSafeMatcher<HelpMapMock
 	 * @param factory The help topic factory required for there to be a match
 	 * @return A matcher which matches with any help map that has registered the specified help topic factory
 	 */
-	public static HelpMapFactoryRegisteredMatcher hasFactoryRegistered(@NotNull HelpTopicFactory<?> factory)
+	public static @NotNull HelpMapFactoryRegisteredMatcher hasFactoryRegistered(@NotNull HelpTopicFactory<?> factory)
 	{
 		Preconditions.checkNotNull(factory, "Factory cannot be null");
 		return new HelpMapFactoryRegisteredMatcher(factory);

@@ -4,6 +4,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
+import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
 
 import java.util.Arrays;
@@ -75,7 +76,7 @@ public class ItemMetaLoreMatcher extends TypeSafeMatcher<ItemMetaMock>
 	 * @param lore The lore required for there to be a match
 	 * @return A matcher which matches with any item meta with the specified lore
 	 */
-	public static ItemMetaLoreMatcher hasLore(List<Component> lore)
+	public static @NotNull ItemMetaLoreMatcher hasLore(List<Component> lore)
 	{
 		return new ItemMetaLoreMatcher(lore);
 	}

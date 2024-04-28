@@ -301,6 +301,11 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		consumedItems.add(new PlayerSimulation(this).simulateConsumeItem(consumable));
 	}
 
+	/**
+	 * Whether the player has consumed the specified item
+	 * @param consumable The item that the player should have consumed
+	 * @return True if the specified item has been consumed
+	 */
 	public boolean hasConsumed(@NotNull ItemStack consumable)
 	{
 		Preconditions.checkNotNull(consumable, "Consumed Item can't be null");

@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.matcher.command;
 
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
+import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.command.CommandResult;
 
 public class CommandResultSucceedMatcher extends TypeSafeMatcher<CommandResult>
@@ -28,7 +29,7 @@ public class CommandResultSucceedMatcher extends TypeSafeMatcher<CommandResult>
 	/**
 	 * @return A matcher which matches with any command result with a success code
 	 */
-	public static CommandResultSucceedMatcher hasSucceeded()
+	public static @NotNull CommandResultSucceedMatcher hasSucceeded()
 	{
 		return new CommandResultSucceedMatcher();
 	}
