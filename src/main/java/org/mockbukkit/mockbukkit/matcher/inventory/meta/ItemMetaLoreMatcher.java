@@ -40,7 +40,7 @@ public class ItemMetaLoreMatcher extends TypeSafeMatcher<ItemMetaMock>
 	@Override
 	public void describeTo(Description description)
 	{
-		description.appendText("to have the specified lore");
+		description.appendText("to have the following lore ").appendValueList("[", ",", "]", this.targetLore);
 	}
 
 	@Override

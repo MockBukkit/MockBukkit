@@ -26,7 +26,7 @@ public class HelpMapFactoryRegisteredMatcher extends TypeSafeMatcher<HelpMapMock
 	@Override
 	public void describeTo(Description description)
 	{
-		description.appendText("to have registered specified factory");
+		description.appendText("to have registered following factory ").appendValue(factory);
 	}
 
 	@Override

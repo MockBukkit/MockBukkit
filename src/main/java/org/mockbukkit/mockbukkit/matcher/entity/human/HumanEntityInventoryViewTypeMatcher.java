@@ -24,7 +24,7 @@ public class HumanEntityInventoryViewTypeMatcher extends TypeSafeMatcher<HumanEn
 	@Override
 	public void describeTo(Description description)
 	{
-		description.appendText("to have the specified inventory view type");
+		description.appendText("to have the following inventory view type ").appendValue(inventoryType);
 	}
 
 	@Override
