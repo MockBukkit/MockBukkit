@@ -24,13 +24,13 @@ public class RangedEntityAttackMatcher extends TypeSafeMatcher<MockRangedEntity<
 	}
 
 	@Override
-	protected boolean matchesSafely(MockRangedEntity<? extends MobMock> item)
+	protected boolean matchesSafely(MockRangedEntity<? extends MobMock> mockRangedEntity)
 	{
-		if (!item.hasAttackedWithCharge(target, charge))
+		if (!mockRangedEntity.hasAttackedWithCharge(target, charge))
 		{
 			return false;
 		}
-		return !aggressive || item.hasAttackedWhileAggressive(target);
+		return !aggressive || mockRangedEntity.hasAttackedWhileAggressive(target);
 	}
 
 	@Override
@@ -40,9 +40,9 @@ public class RangedEntityAttackMatcher extends TypeSafeMatcher<MockRangedEntity<
 	}
 
 	@Override
-	protected void describeMismatchSafely(MockRangedEntity<? extends MobMock> item, Description description)
+	protected void describeMismatchSafely(MockRangedEntity<? extends MobMock> mockRangedEntity, Description description)
 	{
-		if (item.hasAttackedWithCharge(target, charge) && (!aggressive || item.hasAttackedWhileAggressive(target)))
+		if (mockRangedEntity.hasAttackedWithCharge(target, charge) && (!aggressive || mockRangedEntity.hasAttackedWhileAggressive(target)))
 		{
 			description.appendText("has attacked the target");
 		}
@@ -52,11 +52,25 @@ public class RangedEntityAttackMatcher extends TypeSafeMatcher<MockRangedEntity<
 		}
 	}
 
+	/**
+	 *
+	 * @param target The required target
+	 * @param charge The required charge
+	 * @return A matcher which matches with any ranged entity that has attacked the specified target with the specified charge
+	 */
 	public static RangedEntityAttackMatcher hasAttacked(LivingEntity target, float charge)
 	{
 		return hasAttacked(target, charge, false);
 	}
 
+	/**
+	 *
+	 * @param target The required target
+	 * @param charge The required charge
+	 * @param aggressive Whether a check for aggressiveness should be done
+	 * @return A matcher which matches with any ranged entity that has attacked the specified target with the
+	 * specified charge while being aggressive
+	 */
 	public static RangedEntityAttackMatcher hasAttacked(LivingEntity target, float charge, boolean aggressive)
 	{
 		return new RangedEntityAttackMatcher(target, charge, aggressive);

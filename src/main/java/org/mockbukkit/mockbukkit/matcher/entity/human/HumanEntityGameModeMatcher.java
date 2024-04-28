@@ -16,9 +16,9 @@ public class HumanEntityGameModeMatcher extends TypeSafeMatcher<HumanEntityMock>
 	}
 
 	@Override
-	protected boolean matchesSafely(HumanEntityMock item)
+	protected boolean matchesSafely(HumanEntityMock humanEntityMock)
 	{
-		return item.getGameMode() == gameMode;
+		return humanEntityMock.getGameMode() == gameMode;
 	}
 
 	@Override
@@ -28,11 +28,16 @@ public class HumanEntityGameModeMatcher extends TypeSafeMatcher<HumanEntityMock>
 	}
 
 	@Override
-	public void describeMismatchSafely(HumanEntityMock item, Description mismatchDescription)
+	public void describeMismatchSafely(HumanEntityMock humanEntityMock, Description mismatchDescription)
 	{
-		mismatchDescription.appendText("was in game mode ").appendValue(item.getGameMode());
+		mismatchDescription.appendText("was in game mode ").appendValue(humanEntityMock.getGameMode());
 	}
 
+	/**
+	 *
+	 * @param gameMode The game mode required for there to be a match
+	 * @return A matcher which matches with any human entity with the specified game mode
+	 */
 	public static HumanEntityGameModeMatcher hasGameMode(GameMode gameMode)
 	{
 		return new HumanEntityGameModeMatcher(gameMode);

@@ -13,9 +13,9 @@ public class CommandResultAnyResponseMatcher extends TypeSafeMatcher<CommandResu
 	private String senderMessage = null;
 
 	@Override
-	protected boolean matchesSafely(CommandResult item)
+	protected boolean matchesSafely(CommandResult commandResult)
 	{
-		this.senderMessage = item.getSender().nextMessage();
+		this.senderMessage = commandResult.getSender().nextMessage();
 		return senderMessage != null;
 	}
 
@@ -26,11 +26,14 @@ public class CommandResultAnyResponseMatcher extends TypeSafeMatcher<CommandResu
 	}
 
 	@Override
-	protected void describeMismatchSafely(CommandResult item, Description mismatchDescription)
+	protected void describeMismatchSafely(CommandResult commandResult, Description mismatchDescription)
 	{
 		mismatchDescription.appendText("was value ").appendValue(senderMessage);
 	}
 
+	/**
+	 * @return A matcher which matches with any command result with any response
+	 */
 	public static CommandResultAnyResponseMatcher hasAnyResponse()
 	{
 		return new CommandResultAnyResponseMatcher();

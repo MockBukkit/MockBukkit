@@ -16,9 +16,9 @@ public class PluginManagerFiredEventClassMatcher extends TypeSafeMatcher<PluginM
 	}
 
 	@Override
-	protected boolean matchesSafely(PluginManagerMock item)
+	protected boolean matchesSafely(PluginManagerMock pluginManagerMock)
 	{
-		return item.getFiredEvents().anyMatch(targetEvent::isInstance);
+		return pluginManagerMock.getFiredEvents().anyMatch(targetEvent::isInstance);
 	}
 
 	@Override
@@ -33,6 +33,11 @@ public class PluginManagerFiredEventClassMatcher extends TypeSafeMatcher<PluginM
 		description.appendText("has fired events ").appendValueList("[", ",", "]", pluginManagerMock.getFiredEvents().toList());
 	}
 
+	/**
+	 *
+	 * @param targetEvent The required event class to have been fired
+	 * @return A matcher which matches with any plugin manager that has fired the specified event
+	 */
 	public static PluginManagerFiredEventClassMatcher hasFiredEventInstance(Class<? extends Event> targetEvent)
 	{
 		return new PluginManagerFiredEventClassMatcher(targetEvent);

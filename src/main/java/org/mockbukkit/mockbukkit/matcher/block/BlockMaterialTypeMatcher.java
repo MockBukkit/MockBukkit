@@ -17,9 +17,9 @@ public class BlockMaterialTypeMatcher extends TypeSafeMatcher<BlockMock>
 	}
 
 	@Override
-	protected boolean matchesSafely(BlockMock item)
+	protected boolean matchesSafely(BlockMock blockMock)
 	{
-		return item.getType().equals(material);
+		return blockMock.getType().equals(material);
 	}
 
 	@Override
@@ -34,6 +34,10 @@ public class BlockMaterialTypeMatcher extends TypeSafeMatcher<BlockMock>
 		mismatchDescription.appendValue("was of material type").appendValue(item.getType());
 	}
 
+	/**
+	 * @param material The material that the block should have
+	 * @return A matcher which matches blocks with the specified material
+	 */
 	public static BlockMaterialTypeMatcher hasMaterial(Material material)
 	{
 		return new BlockMaterialTypeMatcher(material);

@@ -20,9 +20,9 @@ public class PluginManagerFiredEventFilterMatcher<T extends Event> extends TypeS
 	}
 
 	@Override
-	protected boolean matchesSafely(PluginManagerMock item)
+	protected boolean matchesSafely(PluginManagerMock pluginManagerMock)
 	{
-		return item.getFiredEvents().filter(eventClass::isInstance).map(event -> (T) event).anyMatch(filter);
+		return pluginManagerMock.getFiredEvents().filter(eventClass::isInstance).map(event -> (T) event).anyMatch(filter);
 	}
 
 	@Override
@@ -37,6 +37,13 @@ public class PluginManagerFiredEventFilterMatcher<T extends Event> extends TypeS
 		description.appendText("has fired events ").appendValueList("[", ",", "]", pluginManagerMock.getFiredEvents().toList());
 	}
 
+	/**
+	 *
+	 * @param eventClass The required type of the event for a match
+	 * @param filter A custom filter
+	 * @return A matcher which matches with any plugin manager that has fired the specified event type with filter
+	 * @param <G> The event type to check for
+	 */
 	public static <G extends Event> PluginManagerFiredEventFilterMatcher<G> hasFiredFilteredEvent(Class<G> eventClass, Predicate<G> filter)
 	{
 		return new PluginManagerFiredEventFilterMatcher<>(eventClass, filter);

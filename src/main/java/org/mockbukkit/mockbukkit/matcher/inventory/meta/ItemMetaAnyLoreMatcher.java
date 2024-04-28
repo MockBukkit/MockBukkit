@@ -8,9 +8,9 @@ public class ItemMetaAnyLoreMatcher extends TypeSafeMatcher<ItemMetaMock>
 {
 
 	@Override
-	protected boolean matchesSafely(ItemMetaMock item)
+	protected boolean matchesSafely(ItemMetaMock itemMetaMock)
 	{
-		return item.hasLore();
+		return itemMetaMock.hasLore();
 	}
 
 	@Override
@@ -25,6 +25,10 @@ public class ItemMetaAnyLoreMatcher extends TypeSafeMatcher<ItemMetaMock>
 		description.appendText("had lore ").appendValueList("[", ",", "]", itemMeta.getLore());
 	}
 
+	/**
+	 *
+	 * @return A matcher which matches with any meta with any lore
+	 */
 	public static ItemMetaAnyLoreMatcher hasAnyLore()
 	{
 		return new ItemMetaAnyLoreMatcher();

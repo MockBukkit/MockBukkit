@@ -16,9 +16,9 @@ public class GoatEntityRammedMatcher extends TypeSafeMatcher<GoatMock>
 	}
 
 	@Override
-	protected boolean matchesSafely(GoatMock item)
+	protected boolean matchesSafely(GoatMock goatMock)
 	{
-		return item.hasRammedEntity(target);
+		return goatMock.hasRammedEntity(target);
 	}
 
 	@Override
@@ -28,11 +28,16 @@ public class GoatEntityRammedMatcher extends TypeSafeMatcher<GoatMock>
 	}
 
 	@Override
-	protected void describeMismatchSafely(GoatMock item, Description mismatchDescription)
+	protected void describeMismatchSafely(GoatMock goatMock, Description mismatchDescription)
 	{
-		mismatchDescription.appendText("was value ").appendValue(item.hasRammedEntity(target));
+		mismatchDescription.appendText("was value ").appendValue(goatMock.hasRammedEntity(target));
 	}
 
+	/**
+	 *
+	 * @param target The target required to have been hit for there to be a match
+	 * @return A matcher which matches with any goat that has targeted the specified target
+	 */
 	public static GoatEntityRammedMatcher hasRammed(LivingEntity target)
 	{
 		return new GoatEntityRammedMatcher(target);
