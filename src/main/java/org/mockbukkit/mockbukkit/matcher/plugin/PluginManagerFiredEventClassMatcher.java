@@ -30,7 +30,7 @@ public class PluginManagerFiredEventClassMatcher extends TypeSafeMatcher<PluginM
 	@Override
 	public void describeMismatchSafely(PluginManagerMock pluginManagerMock, Description description)
 	{
-		description.appendText("has fired ").appendValueList("[", ",", "]", pluginManagerMock.getFiredEvents().toList());
+		description.appendText("has fired events ").appendValueList("[", ",", "]", pluginManagerMock.getFiredEvents().toList());
 	}
 
 	public static PluginManagerFiredEventClassMatcher hasFiredEventInstance(Class<? extends Event> targetEvent)
