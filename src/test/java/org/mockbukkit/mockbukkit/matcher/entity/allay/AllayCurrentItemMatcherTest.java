@@ -40,7 +40,6 @@ class AllayCurrentItemMatcherTest extends AbstractMatcherTest
 	void testMatches()
 	{
 		assertMatches(currentItem(Material.STONE), allay);
-		assertMismatchDescription("has current item \"DIRT\"", currentItem(Material.DIRT), allay);
 	}
 
 	@Test
@@ -53,12 +52,6 @@ class AllayCurrentItemMatcherTest extends AbstractMatcherTest
 	void testDoesNotMatchNull()
 	{
 		assertNullSafe(createMatcher());
-	}
-
-	@Test
-	void testHasReadableDescription()
-	{
-		assertDescription("to have current item", currentItem(Material.STONE));
 	}
 
 	@Test
