@@ -33,7 +33,7 @@ public class PluginManagerFiredEventClassMatcher extends TypeSafeMatcher<PluginM
 		description.appendText("has fired ").appendValueList("[", ",", "]", pluginManagerMock.getFiredEvents().toList());
 	}
 
-	public static PluginManagerFiredEventClassMatcher hasFiredEventClass(Class<? extends Event> targetEvent)
+	public static PluginManagerFiredEventClassMatcher hasFiredEventInstance(Class<? extends Event> targetEvent)
 	{
 		return new PluginManagerFiredEventClassMatcher(targetEvent);
 	}
