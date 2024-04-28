@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.matcher.entity;
 
+import com.google.common.base.Preconditions;
 import org.bukkit.Location;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
@@ -81,8 +82,9 @@ public class EntityTeleportationMatcher extends TypeSafeMatcher<EntityMock>
 	 * @param maximumDistance The distance around the location considered a valid match
 	 * @return A matcher which matches if the entity has teleported to the specified location within a radius
 	 */
-	public static @NotNull EntityTeleportationMatcher hasTeleported(Location location, double maximumDistance)
+	public static @NotNull EntityTeleportationMatcher hasTeleported(@NotNull Location location, double maximumDistance)
 	{
+		Preconditions.checkNotNull(location);
 		return new EntityTeleportationMatcher(location, maximumDistance);
 	}
 

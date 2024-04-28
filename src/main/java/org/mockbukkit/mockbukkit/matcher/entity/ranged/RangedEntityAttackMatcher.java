@@ -59,8 +59,9 @@ public class RangedEntityAttackMatcher extends TypeSafeMatcher<MockRangedEntity<
 	 * @param charge The required charge
 	 * @return A matcher which matches with any ranged entity that has attacked the specified target with the specified charge
 	 */
-	public static @NotNull RangedEntityAttackMatcher hasAttacked(LivingEntity target, float charge)
+	public static @NotNull RangedEntityAttackMatcher hasAttacked(@NotNull LivingEntity target, float charge)
 	{
+		Preconditions.checkNotNull(target);
 		return hasAttacked(target, charge, false);
 	}
 
@@ -72,8 +73,9 @@ public class RangedEntityAttackMatcher extends TypeSafeMatcher<MockRangedEntity<
 	 * @return A matcher which matches with any ranged entity that has attacked the specified target with the
 	 * specified charge while being aggressive
 	 */
-	public static @NotNull RangedEntityAttackMatcher hasAttacked(LivingEntity target, float charge, boolean aggressive)
+	public static @NotNull RangedEntityAttackMatcher hasAttacked(@NotNull LivingEntity target, float charge, boolean aggressive)
 	{
+		Preconditions.checkNotNull(target);
 		return new RangedEntityAttackMatcher(target, charge, aggressive);
 	}
 
