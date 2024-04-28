@@ -8,9 +8,9 @@ public class SchedulerOverdueTasksMatcher extends TypeSafeMatcher<BukkitSchedule
 {
 
 	@Override
-	protected boolean matchesSafely(BukkitSchedulerMock item)
+	protected boolean matchesSafely(BukkitSchedulerMock schedulerMock)
 	{
-		return item.getOverdueTasks().isEmpty();
+		return schedulerMock.getOverdueTasks().isEmpty();
 	}
 
 	@Override
@@ -25,6 +25,10 @@ public class SchedulerOverdueTasksMatcher extends TypeSafeMatcher<BukkitSchedule
 		description.appendText("was with the following overdue tasks ").appendValueList("[", ",", "]", schedulerMock.getOverdueTasks());
 	}
 
+	/**
+	 *
+	 * @return A matcher which matches with any scheduler which has no overdue tasks
+	 */
 	public static SchedulerOverdueTasksMatcher hasNoOverdueTasks()
 	{
 		return new SchedulerOverdueTasksMatcher();

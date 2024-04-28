@@ -16,9 +16,9 @@ public class HumanEntityInventoryViewTypeMatcher extends TypeSafeMatcher<HumanEn
 	}
 
 	@Override
-	protected boolean matchesSafely(HumanEntityMock item)
+	protected boolean matchesSafely(HumanEntityMock humanEntityMock)
 	{
-		return item.getOpenInventory().getType() == inventoryType;
+		return humanEntityMock.getOpenInventory().getType() == inventoryType;
 	}
 
 	@Override
@@ -28,11 +28,16 @@ public class HumanEntityInventoryViewTypeMatcher extends TypeSafeMatcher<HumanEn
 	}
 
 	@Override
-	protected void describeMismatchSafely(HumanEntityMock item, Description mismatchDescription)
+	protected void describeMismatchSafely(HumanEntityMock humanEntityMock, Description mismatchDescription)
 	{
-		mismatchDescription.appendText("was of type ").appendValue(item.getOpenInventory().getType());
+		mismatchDescription.appendText("was of type ").appendValue(humanEntityMock.getOpenInventory().getType());
 	}
 
+	/**
+	 *
+	 * @param inventoryType The required inventory
+	 * @return A matcher which matches with any human entity with the specified inventory
+	 */
 	public static HumanEntityInventoryViewTypeMatcher hasInventoryViewType(InventoryType inventoryType)
 	{
 		return new HumanEntityInventoryViewTypeMatcher(inventoryType);

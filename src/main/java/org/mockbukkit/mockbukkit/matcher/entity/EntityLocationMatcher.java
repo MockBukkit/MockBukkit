@@ -9,20 +9,20 @@ public class EntityLocationMatcher extends TypeSafeMatcher<EntityMock>
 {
 
 	private final Location location;
-	private final double maximumDistance;
+	private final double radius;
 
-	public EntityLocationMatcher(Location location, double maximumDistance)
+	public EntityLocationMatcher(Location location, double radius)
 	{
 		this.location = location;
-		this.maximumDistance = maximumDistance;
+		this.radius = radius;
 	}
 
 	@Override
-	protected boolean matchesSafely(EntityMock item)
+	protected boolean matchesSafely(EntityMock entityMock)
 	{
-		Location itemLocation = item.getLocation();
+		Location itemLocation = entityMock.getLocation();
 		double distance = itemLocation.distance(location);
-		return itemLocation.getWorld() == location.getWorld() && distance <= maximumDistance;
+		return itemLocation.getWorld() == location.getWorld() && distance <= radius;
 	}
 
 	@Override
@@ -32,14 +32,20 @@ public class EntityLocationMatcher extends TypeSafeMatcher<EntityMock>
 	}
 
 	@Override
-	protected void describeMismatchSafely(EntityMock item, Description description)
+	protected void describeMismatchSafely(EntityMock entityMock, Description description)
 	{
-		description.appendText("was at location ").appendValue(item.getLocation());
+		description.appendText("was at location ").appendValue(entityMock.getLocation());
 	}
 
-	public static EntityLocationMatcher isInLocation(Location location, double maximumDistance)
+	/**
+	 *
+	 * @param location The location required for a match
+	 * @param maxDistance The radius away from the location which gives a match
+	 * @return A matcher which matches with any entity within a radius of specified location
+	 */
+	public static EntityLocationMatcher isInLocation(Location location, double maxDistance)
 	{
-		return new EntityLocationMatcher(location, maximumDistance);
+		return new EntityLocationMatcher(location, maxDistance);
 	}
 
 }

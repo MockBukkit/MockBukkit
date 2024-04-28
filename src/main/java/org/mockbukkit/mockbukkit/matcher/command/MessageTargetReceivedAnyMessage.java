@@ -10,9 +10,9 @@ public class MessageTargetReceivedAnyMessage extends TypeSafeMatcher<MessageTarg
 	private String nextMessage = null;
 
 	@Override
-	protected boolean matchesSafely(MessageTarget item)
+	protected boolean matchesSafely(MessageTarget messageTarget)
 	{
-		this.nextMessage = item.nextMessage();
+		this.nextMessage = messageTarget.nextMessage();
 		return nextMessage != null;
 	}
 
@@ -23,11 +23,15 @@ public class MessageTargetReceivedAnyMessage extends TypeSafeMatcher<MessageTarg
 	}
 
 	@Override
-	protected void describeMismatchSafely(MessageTarget item, Description description)
+	protected void describeMismatchSafely(MessageTarget messageTarget, Description description)
 	{
 		description.appendText("was ").appendValue(nextMessage);
 	}
 
+	/**
+	 *
+	 * @return A matcher which matches with any target that has received a message
+	 */
 	public static MessageTargetReceivedAnyMessage hasReceivedAny()
 	{
 		return new MessageTargetReceivedAnyMessage();

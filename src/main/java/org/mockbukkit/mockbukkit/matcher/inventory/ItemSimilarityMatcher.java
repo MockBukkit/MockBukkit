@@ -16,9 +16,9 @@ public class ItemSimilarityMatcher extends TypeSafeMatcher<ItemStack>
 	}
 
 	@Override
-	protected boolean matchesSafely(ItemStack item)
+	protected boolean matchesSafely(ItemStack itemStack)
 	{
-		return this.itemStack.isSimilar(item);
+		return this.itemStack.isSimilar(itemStack);
 	}
 
 	@Override
@@ -32,11 +32,21 @@ public class ItemSimilarityMatcher extends TypeSafeMatcher<ItemStack>
 		description.appendText("was of type ").appendValue(itemStack.getType());
 	}
 
+	/**
+	 * Matches when two item stacks are similar to each other using the {@link ItemStack#isSimilar(ItemStack)} method
+	 * @param itemStack The required item stack to be similar to for a match
+	 * @return A matcher which matches when an item stack is similar to the specified item stack
+	 */
 	public static ItemSimilarityMatcher similarTo(ItemStack itemStack)
 	{
 		return new ItemSimilarityMatcher(itemStack);
 	}
 
+	/**
+	 * Matches when two item stacks are similar to each other using the {@link ItemStack#isSimilar(ItemStack)} method
+	 * @param itemMaterial The required material of the item stack to be similar to for a match
+	 * @return A matcher which matches when an item stack is similar to the specified item stack
+	 */
 	public static ItemSimilarityMatcher similarTo(Material itemMaterial)
 	{
 		return new ItemSimilarityMatcher(new ItemStack(itemMaterial));

@@ -44,11 +44,23 @@ public class InventoryItemAmountMatcher extends TypeSafeMatcher<InventoryMock>
 		description.appendText("contained the items ").appendValueList("[", ",", "]", inventoryMock);
 	}
 
+	/**
+	 *
+	 * @param material The material of the items
+	 * @param amount The amount of the items required for a match
+	 * @return A matcher which matches with any inventory with more than the required amount of items
+	 */
 	public static InventoryItemAmountMatcher containsAtLeast(Material material, int amount)
 	{
 		return new InventoryItemAmountMatcher(new ItemStack(material), amount);
 	}
 
+	/**
+	 *
+	 * @param targetItem The target item
+	 * @param amount The amount of the items required for a match
+	 * @return A matcher which matches with any inventory with more than the required amount of items
+	 */
 	public static InventoryItemAmountMatcher containsAtLeast(ItemStack targetItem, int amount)
 	{
 		return new InventoryItemAmountMatcher(targetItem, amount);

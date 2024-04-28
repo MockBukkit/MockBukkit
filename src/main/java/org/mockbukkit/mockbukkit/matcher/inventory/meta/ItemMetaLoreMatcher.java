@@ -20,9 +20,9 @@ public class ItemMetaLoreMatcher extends TypeSafeMatcher<ItemMetaMock>
 	}
 
 	@Override
-	protected boolean matchesSafely(ItemMetaMock item)
+	protected boolean matchesSafely(ItemMetaMock itemMetaMock)
 	{
-		List<Component> lore = item.lore();
+		List<Component> lore = itemMetaMock.lore();
 		if (lore == null || lore.size() != targetLore.size())
 		{
 			return false;
@@ -49,17 +49,32 @@ public class ItemMetaLoreMatcher extends TypeSafeMatcher<ItemMetaMock>
 		description.appendText("had lore ").appendValueList("[", ",", "]", itemMeta.getLore());
 	}
 
+	/**
+	 *
+	 * @param legacyLoreItems The lore required for there to be a match
+	 * @return A matcher which matches with any item meta with the specified lore
+	 */
 	public static ItemMetaLoreMatcher hasLore(String... legacyLoreItems)
 	{
 		LegacyComponentSerializer legacy = LegacyComponentSerializer.legacySection();
 		return new ItemMetaLoreMatcher(Arrays.stream(legacyLoreItems).map(legacy::deserialize).toList());
 	}
 
+	/**
+	 *
+	 * @param loreItems The lore required for there to be a match
+	 * @return A matcher which matches with any item meta with the specified lore
+	 */
 	public static ItemMetaLoreMatcher hasLore(Component... loreItems)
 	{
 		return new ItemMetaLoreMatcher(Arrays.asList(loreItems));
 	}
 
+	/**
+	 *
+	 * @param lore The lore required for there to be a match
+	 * @return A matcher which matches with any item meta with the specified lore
+	 */
 	public static ItemMetaLoreMatcher hasLore(List<Component> lore)
 	{
 		return new ItemMetaLoreMatcher(lore);

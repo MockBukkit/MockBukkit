@@ -4,7 +4,6 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 public class InventoryHolderContainsMatcher extends TypeSafeMatcher<InventoryHolder>
@@ -30,12 +29,15 @@ public class InventoryHolderContainsMatcher extends TypeSafeMatcher<InventoryHol
 	}
 
 	@Override
-	protected void describeMismatchSafely(InventoryHolder item, @NotNull Description mismatchDescription)
+	protected void describeMismatchSafely(InventoryHolder inventoryHolder, @NotNull Description mismatchDescription)
 	{
-		mismatchDescription.appendText("doesn't have Itemstack \"" + itemStack.toString() + "\" in Inventory");
+		mismatchDescription.appendText("had the items ").appendValueList("[", ",", "]", inventoryHolder.getInventory());
 	}
 
-	@Contract("_ -> new")
+	/**
+	 * @param itemStack The item stack required for there to be a match
+	 * @return A matcher which matches with any inventory of specified item stack
+	 */
 	public static @NotNull InventoryHolderContainsMatcher inventoryContains(ItemStack itemStack)
 	{
 		return new InventoryHolderContainsMatcher(itemStack);

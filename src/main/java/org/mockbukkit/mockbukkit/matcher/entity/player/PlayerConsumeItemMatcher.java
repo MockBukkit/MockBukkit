@@ -16,9 +16,9 @@ public class PlayerConsumeItemMatcher extends TypeSafeMatcher<PlayerMock>
 	}
 
 	@Override
-	protected boolean matchesSafely(PlayerMock item)
+	protected boolean matchesSafely(PlayerMock playerMock)
 	{
-		return item.hasConsumed(this.itemStack);
+		return playerMock.hasConsumed(this.itemStack);
 	}
 
 	@Override
@@ -40,6 +40,11 @@ public class PlayerConsumeItemMatcher extends TypeSafeMatcher<PlayerMock>
 		}
 	}
 
+	/**
+	 *
+	 * @param itemStack The required item to have been consumed
+	 * @return A matcher which matches with any player that has consumed the specified item
+	 */
 	public static PlayerConsumeItemMatcher hasConsumed(ItemStack itemStack)
 	{
 		return new PlayerConsumeItemMatcher(itemStack);

@@ -29,11 +29,16 @@ public class CommandResultResponseMatcher extends TypeSafeMatcher<CommandResult>
 	}
 
 	@Override
-	protected void describeMismatchSafely(CommandResult item, Description mismatchDescription)
+	protected void describeMismatchSafely(CommandResult commandResult, Description mismatchDescription)
 	{
 		mismatchDescription.appendText("was ").appendValue(senderMessage);
 	}
 
+	/**
+	 *
+	 * @param response The response the command result should have
+	 * @return A matcher which matches with any command result with specified response
+	 */
 	public static CommandResultResponseMatcher hasResponse(String response)
 	{
 		return new CommandResultResponseMatcher(response);

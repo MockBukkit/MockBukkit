@@ -8,9 +8,9 @@ public class CommandResultSucceedMatcher extends TypeSafeMatcher<CommandResult>
 {
 
 	@Override
-	protected boolean matchesSafely(CommandResult item)
+	protected boolean matchesSafely(CommandResult commandResult)
 	{
-		return item.hasSucceeded();
+		return commandResult.hasSucceeded();
 	}
 
 	@Override
@@ -25,6 +25,9 @@ public class CommandResultSucceedMatcher extends TypeSafeMatcher<CommandResult>
 		description.appendValue("had success code ").appendValue(commandResult.hasSucceeded());
 	}
 
+	/**
+	 * @return A matcher which matches with any command result with a success code
+	 */
 	public static CommandResultSucceedMatcher hasSucceeded()
 	{
 		return new CommandResultSucceedMatcher();
