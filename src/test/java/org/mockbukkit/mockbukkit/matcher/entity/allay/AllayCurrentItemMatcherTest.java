@@ -62,9 +62,9 @@ class AllayCurrentItemMatcherTest extends AbstractMatcherTest
 	}
 
 	@Test
-	void testDoesntMatchUnknownType()
+	void unknownTypeSafe()
 	{
-		assertUnknownTypeSafe(createMatcher());
+		testCopesWithUnknownTypes();
 	}
 
 }

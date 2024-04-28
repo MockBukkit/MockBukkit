@@ -51,6 +51,12 @@ class CommandResultSucceedMatcherTest extends AbstractMatcherTest
 		assertNullSafe(hasSucceeded());
 	}
 
+	@Test
+	void unknownTypeSafe()
+	{
+		testCopesWithUnknownTypes();
+	}
+
 	@Override
 	protected Matcher<?> createMatcher()
 	{

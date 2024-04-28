@@ -38,19 +38,28 @@ class CommandResultResponseMatcherTest extends AbstractMatcherTest
 	}
 
 	@Test
-	void doesNotMatch_null(){
+	void doesNotMatch_null()
+	{
 		assertDoesNotMatch(hasResponse(MESSAGE), commandResult);
 	}
 
 	@Test
-	void doesNotMatch_differentMessage(){
+	void doesNotMatch_differentMessage()
+	{
 		sender.sendMessage("Hewwo wowd!");
 		assertDoesNotMatch(hasResponse(MESSAGE), commandResult);
 	}
 
 	@Test
-	void nullSafe(){
+	void nullSafe()
+	{
 		assertNullSafe(hasResponse(MESSAGE));
+	}
+
+	@Test
+	void unknownTypeSafe()
+	{
+		testCopesWithUnknownTypes();
 	}
 
 	@Override

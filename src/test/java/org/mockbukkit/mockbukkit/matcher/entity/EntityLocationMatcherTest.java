@@ -53,6 +53,12 @@ class EntityLocationMatcherTest extends AbstractMatcherTest
 		assertDescription("to be within the specified location", isInLocation(location, 0));
 	}
 
+	@Test
+	void unknownTypeSafe()
+	{
+		testCopesWithUnknownTypes();
+	}
+
 	@Override
 	protected Matcher<?> createMatcher()
 	{
