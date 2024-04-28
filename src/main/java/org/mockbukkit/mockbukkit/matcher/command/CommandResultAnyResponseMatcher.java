@@ -15,19 +15,8 @@ public class CommandResultAnyResponseMatcher extends TypeSafeMatcher<CommandResu
 	@Override
 	protected boolean matchesSafely(CommandResult item)
 	{
-		try
-		{
-			Field currentItemField = item.getClass().getDeclaredField("sender");
-			currentItemField.setAccessible(true);
-			MessageTarget sender = (MessageTarget) currentItemField.get(item);
-			senderMessage = sender.nextMessage();
-			return senderMessage != null;
-		}
-		catch (NoSuchFieldException | IllegalAccessException e)
-		{
-			e.printStackTrace();
-			return false;
-		}
+		this.senderMessage = item.getSender().nextMessage();
+		return senderMessage != null;
 	}
 
 	@Override
