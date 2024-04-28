@@ -30,7 +30,7 @@ public class SoundReceiverSoundHeardMatcher extends TypeSafeMatcher<SoundReceive
 	@Override
 	public void describeTo(Description description)
 	{
-		description.appendText("to have match with the specified filter and be of sound ").appendValue(soundKey);
+		description.appendText("to have matched with the specified filter and be of sound ").appendValue(soundKey);
 	}
 
 	@Override

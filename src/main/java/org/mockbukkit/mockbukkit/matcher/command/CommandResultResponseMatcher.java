@@ -3,9 +3,6 @@ package org.mockbukkit.mockbukkit.matcher.command;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
 import org.mockbukkit.mockbukkit.command.CommandResult;
-import org.mockbukkit.mockbukkit.command.MessageTarget;
-
-import java.lang.reflect.Field;
 
 public class CommandResultResponseMatcher extends TypeSafeMatcher<CommandResult>
 {
@@ -19,21 +16,10 @@ public class CommandResultResponseMatcher extends TypeSafeMatcher<CommandResult>
 	}
 
 	@Override
-	protected boolean matchesSafely(CommandResult item)
+	protected boolean matchesSafely(CommandResult commandResult)
 	{
-		try
-		{
-			Field currentItemField = item.getClass().getDeclaredField("sender");
-			currentItemField.setAccessible(true);
-			MessageTarget sender = (MessageTarget) currentItemField.get(item);
-			this.senderMessage = sender.nextMessage();
-			return response.equals(senderMessage);
-		}
-		catch (NoSuchFieldException | IllegalAccessException e)
-		{
-			e.printStackTrace();
-			return false;
-		}
+		this.senderMessage = commandResult.getSender().nextMessage();
+		return response.equals(senderMessage);
 	}
 
 	@Override
