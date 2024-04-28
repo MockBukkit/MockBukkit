@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.bukkit.event.player.PlayerExpCooldownChangeEvent;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.ServerMock;
@@ -18,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasFiredEventClass;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasFiredEventInstance;
 
 @ExtendWith(MockBukkitExtension.class)
 class TNTPrimedMockTest
@@ -105,7 +104,7 @@ class TNTPrimedMockTest
 	{
 		tntPrimed.tick(tntPrimed.getFuseTicks());
 		assertTrue(tntPrimed.isDead());
-		assertThat(server.getPluginManager(), hasFiredEventClass(ExplosionPrimeEvent.class));
+		assertThat(server.getPluginManager(), hasFiredEventInstance(ExplosionPrimeEvent.class));
 	}
 
 	@Test
@@ -113,7 +112,7 @@ class TNTPrimedMockTest
 	{
 		tntPrimed.tick();
 		assertFalse(tntPrimed.isDead());
-		assertThat(server.getPluginManager(), not(hasFiredEventClass(ExplosionPrimeEvent.class)));
+		assertThat(server.getPluginManager(), not(hasFiredEventInstance(ExplosionPrimeEvent.class)));
 	}
 
 	@Test
@@ -122,6 +121,6 @@ class TNTPrimedMockTest
 		tntPrimed.setFuseTicks(1);
 		tntPrimed.tick();
 		assertTrue(tntPrimed.isDead());
-		assertThat(server.getPluginManager(), hasFiredEventClass(ExplosionPrimeEvent.class));
+		assertThat(server.getPluginManager(), hasFiredEventInstance(ExplosionPrimeEvent.class));
 	}
 }

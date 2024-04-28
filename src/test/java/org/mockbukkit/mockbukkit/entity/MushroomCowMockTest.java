@@ -27,10 +27,12 @@ import java.util.List;
 import java.util.UUID;
 
 import static org.bukkit.entity.MushroomCow.Variant;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 
 class MushroomCowMockTest
 {
@@ -187,10 +189,10 @@ class MushroomCowMockTest
 		mushroom.shear();
 
 		Cow cow = List.copyOf(mushroom.getWorld().getEntitiesByClass(Cow.class)).get(0);
-		server.getPluginManager().assertEventFired(EntityTransformEvent.class, (e) -> e.getEntity().equals(mushroom)
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(EntityTransformEvent.class, (e) -> e.getEntity().equals(mushroom)
 				&& e.getTransformedEntities().size() == 1
 				&& e.getTransformedEntity().equals(cow)
-				&& e.getTransformReason() == EntityTransformEvent.TransformReason.SHEARED);
+				&& e.getTransformReason() == EntityTransformEvent.TransformReason.SHEARED));
 	}
 
 	@Test

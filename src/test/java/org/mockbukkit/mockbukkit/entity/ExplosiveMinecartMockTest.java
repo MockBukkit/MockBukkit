@@ -3,7 +3,6 @@ package org.mockbukkit.mockbukkit.entity;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.minecart.ExplosiveMinecart;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasFiredEventClass;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasFiredEventInstance;
 
 @ExtendWith(MockBukkitExtension.class)
 class ExplosiveMinecartMockTest
@@ -81,7 +80,7 @@ class ExplosiveMinecartMockTest
 	{
 		minecart.explode();
 		assertTrue(minecart.isDead());
-		assertThat(server.getPluginManager(), hasFiredEventClass(ExplosionPrimeEvent.class));
+		assertThat(server.getPluginManager(), hasFiredEventInstance(ExplosionPrimeEvent.class));
 	}
 
 	@Test
@@ -89,7 +88,7 @@ class ExplosiveMinecartMockTest
 	{
 		minecart.explode(2.5f);
 		assertTrue(minecart.isDead());
-		assertThat(server.getPluginManager(), hasFiredEventClass(ExplosionPrimeEvent.class));
+		assertThat(server.getPluginManager(), hasFiredEventInstance(ExplosionPrimeEvent.class));
 	}
 
 	@Test

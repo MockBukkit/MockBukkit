@@ -39,7 +39,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasFiredEventClass;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasFiredEventInstance;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 
 class PluginManagerMockTest
 {
@@ -140,9 +141,7 @@ class PluginManagerMockTest
 		Player player = server.addPlayer();
 		BlockBreakEvent eventToFire = new BlockBreakEvent(null, player);
 		pluginManager.callEvent(eventToFire);
-		pluginManager.assertEventFired(event ->
-				event instanceof BlockBreakEvent && ((BlockBreakEvent) event).getPlayer().equals(player)
-		);
+		assertThat(pluginManager, hasFiredFilteredEvent(BlockBreakEvent.class, event -> event.getPlayer().equals(player)));
 	}
 
 	@Test
@@ -172,13 +171,13 @@ class PluginManagerMockTest
 	{
 		BlockBreakEvent event = new BlockBreakEvent(null, null);
 		pluginManager.callEvent(event);
-		assertThat(server.getPluginManager(), hasFiredEventClass(BlockBreakEvent.class));
+		assertThat(server.getPluginManager(), hasFiredEventInstance(BlockBreakEvent.class));
 	}
 
 	@Test
 	void assertEventFired_EventWasNotFired_Asserts()
 	{
-		assertThat(server.getPluginManager(), not(hasFiredEventClass(BlockBreakEvent.class)));
+		assertThat(server.getPluginManager(), not(hasFiredEventInstance(BlockBreakEvent.class)));
 	}
 
 	@Test
@@ -258,7 +257,7 @@ class PluginManagerMockTest
 
 		pluginManager.disablePlugin(plugin);
 
-		pluginManager.assertEventFired(PluginDisableEvent.class, event -> event.getPlugin().equals(plugin));
+		assertThat(pluginManager, hasFiredFilteredEvent(PluginDisableEvent.class, event -> event.getPlugin().equals(plugin)));
 	}
 
 	@Test
@@ -268,7 +267,7 @@ class PluginManagerMockTest
 		JavaPluginUtils.setEnabled(plugin, false);
 
 		pluginManager.disablePlugin(plugin);
-		assertThat(pluginManager, not(hasFiredEventClass(PluginDisableEvent.class)));
+		assertThat(pluginManager, not(hasFiredEventInstance(PluginDisableEvent.class)));
 	}
 
 	@Test

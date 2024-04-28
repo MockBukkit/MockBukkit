@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockbukkit.mockbukkit.MockBukkit;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -18,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assumptions.assumeFalse;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 
 class MockBukkitTest
 {
@@ -106,7 +108,7 @@ class MockBukkitTest
 	{
 		ServerMock server = MockBukkit.mock();
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
-		server.getPluginManager().assertEventFired(PluginEnableEvent.class, event -> event.getPlugin().equals(plugin));
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(PluginEnableEvent.class, event -> event.getPlugin().equals(plugin)));
 		assertTrue(plugin.isEnabled(), "Plugin not enabled");
 		assertTrue(plugin.onEnableExecuted, "Plugin's onEnable method not executed");
 	}

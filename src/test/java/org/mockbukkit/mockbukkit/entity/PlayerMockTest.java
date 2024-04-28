@@ -32,7 +32,6 @@ import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityTeleportEvent;
-import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -118,7 +117,8 @@ import static org.mockbukkit.mockbukkit.matcher.entity.EntityLocationMatcher.isI
 import static org.mockbukkit.mockbukkit.matcher.entity.human.HumanEntityInventoryViewItemMatcher.hasItemInInventoryView;
 import static org.mockbukkit.mockbukkit.matcher.entity.human.HumanEntityInventoryViewTypeMatcher.hasInventoryViewType;
 import static org.mockbukkit.mockbukkit.matcher.entity.player.PlayerConsumeItemMatcher.hasConsumed;
-import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasFiredEventClass;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasFiredEventInstance;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 
 class PlayerMockTest
 {
@@ -298,7 +298,7 @@ class PlayerMockTest
 		double health = player.getHealth();
 		player.simulateDamage(5.0, (Entity) null);
 		assertEquals(health - 5.0, player.getHealth(), 0);
-		assertThat(server.getPluginManager(), hasFiredEventClass(EntityDamageEvent.class));
+		assertThat(server.getPluginManager(), hasFiredEventInstance(EntityDamageEvent.class));
 	}
 
 	@Test
@@ -307,8 +307,8 @@ class PlayerMockTest
 		player.simulateDamage(50.0, player);
 		assertEquals(0, player.getHealth(), 0);
 		assertTrue(player.isDead());
-		assertThat(server.getPluginManager(), hasFiredEventClass(EntityDamageEvent.class));
-		assertThat(server.getPluginManager(), hasFiredEventClass(PlayerDeathEvent.class));
+		assertThat(server.getPluginManager(), hasFiredEventInstance(EntityDamageEvent.class));
+		assertThat(server.getPluginManager(), hasFiredEventInstance(PlayerDeathEvent.class));
 	}
 
 	@Test
@@ -317,8 +317,8 @@ class PlayerMockTest
 		player.simulateDamage(player.getHealth(), (Entity) null);
 		assertEquals(0, player.getHealth(), 0);
 		assertTrue(player.isDead());
-		assertThat(server.getPluginManager(), hasFiredEventClass(EntityDamageEvent.class));
-		assertThat(server.getPluginManager(), hasFiredEventClass(PlayerDeathEvent.class));
+		assertThat(server.getPluginManager(), hasFiredEventInstance(EntityDamageEvent.class));
+		assertThat(server.getPluginManager(), hasFiredEventInstance(PlayerDeathEvent.class));
 	}
 
 	@Test
@@ -347,7 +347,7 @@ class PlayerMockTest
 		block.setType(Material.STONE);
 		boolean broken = player.breakBlock(block);
 		assertTrue(broken);
-		assertThat(server.getPluginManager(), hasFiredEventClass(BlockBreakEvent.class));
+		assertThat(server.getPluginManager(), hasFiredEventInstance(BlockBreakEvent.class));
 		assertThat(block, hasMaterial(Material.AIR));
 	}
 
@@ -361,7 +361,7 @@ class PlayerMockTest
 		block.setType(Material.STONE);
 		boolean broken = player.breakBlock(block);
 		assertFalse(broken);
-		assertThat(server.getPluginManager(), hasFiredEventClass(BlockBreakEvent.class));
+		assertThat(server.getPluginManager(), hasFiredEventInstance(BlockBreakEvent.class));
 		assertThat(block, hasMaterial(Material.STONE));
 	}
 
@@ -375,8 +375,8 @@ class PlayerMockTest
 		BlockBreakEvent event = player.simulateBlockBreak(block);
 		assertNotNull(event);
 		assertFalse(event.isCancelled());
-		assertThat(server.getPluginManager(), hasFiredEventClass(BlockDamageEvent.class));
-		assertThat(server.getPluginManager(), hasFiredEventClass(BlockBreakEvent.class));
+		assertThat(server.getPluginManager(), hasFiredEventInstance(BlockDamageEvent.class));
+		assertThat(server.getPluginManager(), hasFiredEventInstance(BlockBreakEvent.class));
 		assertThat(block, hasMaterial(Material.AIR));
 	}
 
@@ -390,7 +390,7 @@ class PlayerMockTest
 		BlockBreakEvent event = player.simulateBlockBreak(block);
 		assertNotNull(event);
 		assertFalse(event.isCancelled());
-		assertThat(server.getPluginManager(), hasFiredEventClass(BlockBreakEvent.class));
+		assertThat(server.getPluginManager(), hasFiredEventInstance(BlockBreakEvent.class));
 		assertThat(block, hasMaterial(Material.AIR));
 	}
 
@@ -848,7 +848,7 @@ class PlayerMockTest
 	{
 		server.addPlayer();
 		PluginManagerMock pluginManager = server.getPluginManager();
-		pluginManager.assertEventFired(event -> event instanceof PlayerJoinEvent);
+		assertThat(pluginManager, hasFiredEventInstance(PlayerJoinEvent.class));
 	}
 
 	@Test
@@ -950,7 +950,7 @@ class PlayerMockTest
 		player.respawn();
 
 		PluginManagerMock pluginManager = server.getPluginManager();
-		pluginManager.assertEventFired(event -> event instanceof PlayerRespawnEvent);
+		assertThat(pluginManager, hasFiredEventInstance(PlayerRespawnEvent.class));
 
 		assertFalse(player.isDead());
 	}
@@ -1121,7 +1121,7 @@ class PlayerMockTest
 		player.setLocation(new Location(world, 0, 0, 0));
 		PlayerMoveEvent event = player.simulatePlayerMove(new Location(world, 10, 0, 0));
 		assertFalse(event.isCancelled());
-		assertThat(server.getPluginManager(), hasFiredEventClass(PlayerMoveEvent.class));
+		assertThat(server.getPluginManager(), hasFiredEventInstance(PlayerMoveEvent.class));
 		assertEquals(10.0, player.getLocation().getX());
 	}
 
@@ -1143,7 +1143,7 @@ class PlayerMockTest
 		player.setLocation(new Location(world, 0, 0, 0));
 		PlayerMoveEvent event = player.simulatePlayerMove(new Location(world, 10, 0, 0));
 		assertTrue(event.isCancelled());
-		assertThat(server.getPluginManager(), hasFiredEventClass(PlayerMoveEvent.class));
+		assertThat(server.getPluginManager(), hasFiredEventInstance(PlayerMoveEvent.class));
 		assertEquals(0.0, player.getLocation().getX());
 	}
 
@@ -1203,7 +1203,7 @@ class PlayerMockTest
 		PlayerToggleSneakEvent event = player.simulateSneak(true);
 		assertNotNull(event);
 		assertTrue(player.isSneaking());
-		assertThat(server.getPluginManager(), hasFiredEventClass(PlayerToggleSneakEvent.class));
+		assertThat(server.getPluginManager(), hasFiredEventInstance(PlayerToggleSneakEvent.class));
 	}
 
 	@Test
@@ -1212,7 +1212,7 @@ class PlayerMockTest
 		PlayerToggleSprintEvent event = player.simulateSprint(true);
 		assertNotNull(event);
 		assertTrue(player.isSprinting());
-		assertThat(server.getPluginManager(), hasFiredEventClass(PlayerToggleSprintEvent.class));
+		assertThat(server.getPluginManager(), hasFiredEventInstance(PlayerToggleSprintEvent.class));
 	}
 
 	@Test
@@ -1222,7 +1222,7 @@ class PlayerMockTest
 		PlayerToggleFlightEvent event = player.simulateToggleFlight(true);
 		assertNotNull(event);
 		assertTrue(player.isFlying());
-		assertThat(server.getPluginManager(), hasFiredEventClass(PlayerToggleFlightEvent.class));
+		assertThat(server.getPluginManager(), hasFiredEventInstance(PlayerToggleFlightEvent.class));
 	}
 
 	@Test
@@ -1320,8 +1320,8 @@ class PlayerMockTest
 		Location to = player.getLocation().add(10, 10, 10);
 		player.teleport(to, PlayerTeleportEvent.TeleportCause.CHORUS_FRUIT);
 
-		server.getPluginManager().assertEventFired(PlayerTeleportEvent.class, event -> from.equals(event.getFrom()) && to.equals(event.getTo()));
-		assertThat(server.getPluginManager(), not(hasFiredEventClass(EntityTeleportEvent.class)));
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(PlayerTeleportEvent.class, event -> from.equals(event.getFrom()) && to.equals(event.getTo())));
+		assertThat(server.getPluginManager(), not(hasFiredEventInstance(EntityTeleportEvent.class)));
 	}
 
 	@Test
@@ -1329,8 +1329,8 @@ class PlayerMockTest
 	{
 		player.teleport(player.getLocation().add(10, 10, 10));
 
-		assertThat(server.getPluginManager(), hasFiredEventClass(PlayerTeleportEvent.class));
-		assertThat(server.getPluginManager(), not(hasFiredEventClass(EntityTeleportEvent.class)));
+		assertThat(server.getPluginManager(), hasFiredEventInstance(PlayerTeleportEvent.class));
+		assertThat(server.getPluginManager(), not(hasFiredEventInstance(EntityTeleportEvent.class)));
 	}
 
 	@Test
@@ -1348,8 +1348,8 @@ class PlayerMockTest
 			}
 		}, plugin);
 		player.teleport(to);
-		server.getPluginManager().assertEventFired(PlayerChangedWorldEvent.class, event -> event.getFrom() == from);
-		assertThat(server.getPluginManager(), hasFiredEventClass(PlayerTeleportEvent.class));
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(PlayerChangedWorldEvent.class, event -> event.getFrom() == from));
+		assertThat(server.getPluginManager(), hasFiredEventInstance(PlayerTeleportEvent.class));
 	}
 
 	@Test
@@ -1407,7 +1407,7 @@ class PlayerMockTest
 		player.openInventory(inventory);
 		assertTrue(player.teleport(player.getLocation().add(8, 9, 10)));
 		assertEquals(InventoryType.CRAFTING, player.getOpenInventory().getType());
-		server.getPluginManager().assertEventFired(InventoryCloseEvent.class, e -> e.getReason() == InventoryCloseEvent.Reason.TELEPORT);
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(InventoryCloseEvent.class, e -> e.getReason() == InventoryCloseEvent.Reason.TELEPORT));
 	}
 
 	@Test
@@ -1417,7 +1417,7 @@ class PlayerMockTest
 		player.getOpenInventory().setCursor(itemStack);
 		assertTrue(player.teleport(player.getLocation().add(0, 10, 0)));
 		assertEquals(itemStack, player.getOpenInventory().getCursor());
-		assertThat(server.getPluginManager(), not(hasFiredEventClass(InventoryCloseEvent.class)));
+		assertThat(server.getPluginManager(), not(hasFiredEventInstance(InventoryCloseEvent.class)));
 	}
 
 	@Test
@@ -1649,13 +1649,8 @@ class PlayerMockTest
 		Inventory inventory = Bukkit.createInventory(null, 9);
 		player.openInventory(inventory);
 		player.simulateInventoryClick(0);
-		server.getPluginManager().assertEventFired(event ->
-		{
-			if (!(event instanceof InventoryClickEvent inventoryClickEvent)) return false;
-			if (inventoryClickEvent.getSlot() != 0) return false;
-			if (inventoryClickEvent.getClickedInventory() != inventory) return false;
-			return inventoryClickEvent.getClick() == ClickType.LEFT;
-		});
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(InventoryClickEvent.class, event ->
+				event.getSlot() == 0 && event.getClickedInventory() == inventory && event.getClick() == ClickType.LEFT));
 	}
 
 	@Test
@@ -1665,7 +1660,7 @@ class PlayerMockTest
 		assertTrue(player.disconnect());
 		assertFalse(player.isOnline());
 		assertFalse(server.getOnlinePlayers().contains(player));
-		assertThat(server.getPluginManager(), hasFiredEventClass(PlayerQuitEvent.class));
+		assertThat(server.getPluginManager(), hasFiredEventInstance(PlayerQuitEvent.class));
 	}
 
 	@Test
@@ -1681,7 +1676,7 @@ class PlayerMockTest
 		assertTrue(player.isOnline());
 		assertTrue(server.getOnlinePlayers().contains(player));
 		assertTrue(player.hasPlayedBefore());
-		assertThat(server.getPluginManager(), hasFiredEventClass(PlayerJoinEvent.class));
+		assertThat(server.getPluginManager(), hasFiredEventInstance(PlayerJoinEvent.class));
 	}
 
 	@Test
@@ -1796,14 +1791,14 @@ class PlayerMockTest
 	{
 		PlayerMock player = new PlayerMock(server, "testPlayer", UUID.randomUUID());
 		player.kick(Component.text("test"), PlayerKickEvent.Cause.KICK_COMMAND);
-		assertThat(server.getPluginManager(), not(hasFiredEventClass(PlayerKickEvent.class)));
+		assertThat(server.getPluginManager(), not(hasFiredEventInstance(PlayerKickEvent.class)));
 	}
 
 	@Test
 	void testKickWithNullMessage()
 	{
 		player.kick(null, PlayerKickEvent.Cause.KICK_COMMAND);
-		server.getPluginManager().assertEventFired(PlayerKickEvent.class, event -> event.leaveMessage() == Component.empty());
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(PlayerKickEvent.class, event -> event.leaveMessage() == Component.empty()));
 	}
 
 	@Test
@@ -1814,8 +1809,8 @@ class PlayerMockTest
 		player.simulateConsumeItem(consumable);
 
 		assertThat(player, hasConsumed(consumable));
-		assertThat(server.getPluginManager(), hasFiredEventClass(GenericGameEvent.class));
-		assertThat(server.getPluginManager(), hasFiredEventClass(PlayerItemConsumeEvent.class));
+		assertThat(server.getPluginManager(), hasFiredEventInstance(GenericGameEvent.class));
+		assertThat(server.getPluginManager(), hasFiredEventInstance(PlayerItemConsumeEvent.class));
 	}
 
 	@Test
@@ -2166,7 +2161,7 @@ class PlayerMockTest
 	{
 		PlayerMock player = server.addPlayer("Player");
 		player.disconnect();
-		assertThat(server.getPluginManager(), hasFiredEventClass(PlayerQuitEvent.class));
+		assertThat(server.getPluginManager(), hasFiredEventInstance(PlayerQuitEvent.class));
 	}
 
 	public static Stream<Arguments> provideInstrument()
@@ -2224,7 +2219,7 @@ class PlayerMockTest
 		}, plugin);
 
 		player.setExpCooldown(10);
-		assertThat(server.getPluginManager(), hasFiredEventClass(PlayerExpCooldownChangeEvent.class));
+		assertThat(server.getPluginManager(), hasFiredEventInstance(PlayerExpCooldownChangeEvent.class));
 		assertEquals(10, player.getExpCooldown());
 	}
 

@@ -11,10 +11,10 @@ import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.plugin.PluginManagerMock;
 import org.mockbukkit.testutils.matcher.AbstractMatcherTest;
 
-import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasFiredEventInstance;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 
 @ExtendWith(MockBukkitExtension.class)
-class PluginManagerFiredEventClassMatcherTest extends AbstractMatcherTest
+class PluginManagerFiredEventFilterMatcherTest extends AbstractMatcherTest
 {
 
 	@MockBukkitInject
@@ -30,21 +30,28 @@ class PluginManagerFiredEventClassMatcherTest extends AbstractMatcherTest
 	@Test
 	void hasFiredEvent_matches()
 	{
-		this.pluginManager.callEvent(new AnEvent());
-		assertMatches(hasFiredEventInstance(AnEvent.class), pluginManager);
+		pluginManager.callEvent(new AnEvent());
+		assertMatches(hasFiredFilteredEvent(AnEvent.class, ignored -> true), pluginManager);
 	}
 
 	@Test
 	void hasFiredEvent_noEventFired()
 	{
-		assertDoesNotMatch(hasFiredEventInstance(AnEvent.class), pluginManager);
+		assertDoesNotMatch(hasFiredFilteredEvent(AnEvent.class, ignored -> true), pluginManager);
+	}
+
+	@Test
+	void hasFiredEvent_filteredOut()
+	{
+		pluginManager.callEvent(new AnEvent());
+		assertDoesNotMatch(hasFiredFilteredEvent(AnEvent.class, ignored -> false), pluginManager);
 	}
 
 	@Test
 	void hasFiredEvent_differentClass()
 	{
 		pluginManager.callEvent(new AnEvent());
-		assertDoesNotMatch(hasFiredEventInstance(AsyncPlayerPreLoginEvent.class), pluginManager);
+		assertDoesNotMatch(hasFiredFilteredEvent(AsyncPlayerPreLoginEvent.class, ignored -> true), pluginManager);
 	}
 
 	@Test
@@ -56,7 +63,7 @@ class PluginManagerFiredEventClassMatcherTest extends AbstractMatcherTest
 	@Override
 	protected Matcher<?> createMatcher()
 	{
-		return hasFiredEventInstance(AsyncPlayerPreLoginEvent.class);
+		return hasFiredFilteredEvent(AsyncPlayerPreLoginEvent.class, ignored -> true);
 	}
 
 }
