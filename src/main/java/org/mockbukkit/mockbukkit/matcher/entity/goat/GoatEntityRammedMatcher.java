@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.matcher.entity.goat;
 
+import com.google.common.base.Preconditions;
 import org.bukkit.entity.LivingEntity;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
@@ -39,8 +40,9 @@ public class GoatEntityRammedMatcher extends TypeSafeMatcher<GoatMock>
 	 * @param target The target required to have been hit for there to be a match
 	 * @return A matcher which matches with any goat that has targeted the specified target
 	 */
-	public static @NotNull GoatEntityRammedMatcher hasRammed(LivingEntity target)
+	public static @NotNull GoatEntityRammedMatcher hasRammed(@NotNull LivingEntity target)
 	{
+		Preconditions.checkNotNull(target);
 		return new GoatEntityRammedMatcher(target);
 	}
 

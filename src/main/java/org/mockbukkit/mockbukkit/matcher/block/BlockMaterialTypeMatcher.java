@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.matcher.block;
 
+import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
@@ -39,8 +40,9 @@ public class BlockMaterialTypeMatcher extends TypeSafeMatcher<BlockMock>
 	 * @param material The material that the block should have
 	 * @return A matcher which matches blocks with the specified material
 	 */
-	public static @NotNull BlockMaterialTypeMatcher hasMaterial(Material material)
+	public static @NotNull BlockMaterialTypeMatcher hasMaterial(@NotNull Material material)
 	{
+		Preconditions.checkNotNull(material);
 		return new BlockMaterialTypeMatcher(material);
 	}
 

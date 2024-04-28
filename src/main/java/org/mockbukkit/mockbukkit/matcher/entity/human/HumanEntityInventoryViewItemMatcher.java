@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.matcher.entity.human;
 
+import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.hamcrest.Description;
@@ -61,8 +62,9 @@ public class HumanEntityInventoryViewItemMatcher extends TypeSafeMatcher<HumanEn
 	 * @param item The item required for a match
 	 * @return A matcher which matches with any human entity with the specified item in inventory
 	 */
-	public static @NotNull HumanEntityInventoryViewItemMatcher hasItemInInventoryView(ItemStack item)
+	public static @NotNull HumanEntityInventoryViewItemMatcher hasItemInInventoryView(@NotNull ItemStack item)
 	{
+		Preconditions.checkNotNull(item);
 		return new HumanEntityInventoryViewItemMatcher(item.getType());
 	}
 

@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.matcher.entity.allay;
 
+import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
@@ -39,8 +40,9 @@ public class AllayCurrentItemMatcher extends TypeSafeMatcher<AllayMock>
 	 * @param currentItem The material of the item to be held for there to be a match
 	 * @return A matcher which matches with any allay holding the specified item
 	 */
-	public static @NotNull AllayCurrentItemMatcher currentItem(Material currentItem)
+	public static @NotNull AllayCurrentItemMatcher currentItem(@NotNull Material currentItem)
 	{
+		Preconditions.checkNotNull(currentItem);
 		return new AllayCurrentItemMatcher(currentItem);
 	}
 }

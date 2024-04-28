@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.matcher.entity.player;
 
+import com.google.common.base.Preconditions;
 import org.bukkit.inventory.ItemStack;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
@@ -46,8 +47,9 @@ public class PlayerConsumeItemMatcher extends TypeSafeMatcher<PlayerMock>
 	 * @param itemStack The required item to have been consumed
 	 * @return A matcher which matches with any player that has consumed the specified item
 	 */
-	public static @NotNull PlayerConsumeItemMatcher hasConsumed(ItemStack itemStack)
+	public static @NotNull PlayerConsumeItemMatcher hasConsumed(@NotNull ItemStack itemStack)
 	{
+		Preconditions.checkNotNull(itemStack);
 		return new PlayerConsumeItemMatcher(itemStack);
 	}
 
