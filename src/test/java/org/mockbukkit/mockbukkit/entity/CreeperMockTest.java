@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.entity;
 
+import com.destroystokyo.paper.event.player.PlayerConnectionCloseEvent;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
 import com.destroystokyo.paper.event.entity.CreeperIgniteEvent;
@@ -14,11 +15,13 @@ import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasFiredEventClass;
 
 class CreeperMockTest
 {
@@ -56,7 +59,7 @@ class CreeperMockTest
 	{
 		creeper.setPowered(true);
 		assertTrue(creeper.isPowered());
-		server.getPluginManager().assertEventFired(CreeperPowerEvent.class);
+		assertThat(server.getPluginManager(), hasFiredEventClass(CreeperPowerEvent.class));
 	}
 
 	@Test
@@ -124,7 +127,7 @@ class CreeperMockTest
 	void testIgnite()
 	{
 		creeper.ignite();
-		server.getPluginManager().assertEventFired(CreeperIgniteEvent.class);
+		assertThat(server.getPluginManager(), hasFiredEventClass(CreeperIgniteEvent.class));
 		assertTrue(creeper.isIgnited());
 	}
 
@@ -187,7 +190,7 @@ class CreeperMockTest
 	void testExplode()
 	{
 		creeper.explode();
-		server.getPluginManager().assertEventFired(ExplosionPrimeEvent.class);
+		assertThat(server.getPluginManager(), hasFiredEventClass(ExplosionPrimeEvent.class));
 		assertTrue(creeper.isDead());
 	}
 
