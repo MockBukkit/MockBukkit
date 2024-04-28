@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.matcher.plugin;
 
+import com.google.common.base.Preconditions;
 import org.bukkit.event.Event;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
@@ -45,8 +46,10 @@ public class PluginManagerFiredEventFilterMatcher<T extends Event> extends TypeS
 	 * @return A matcher which matches with any plugin manager that has fired the specified event type with filter
 	 * @param <G> The event type to check for
 	 */
-	public static <G extends Event> @NotNull PluginManagerFiredEventFilterMatcher<G> hasFiredFilteredEvent(Class<G> eventClass, Predicate<G> filter)
+	public static <G extends Event> @NotNull PluginManagerFiredEventFilterMatcher<G> hasFiredFilteredEvent(@NotNull Class<G> eventClass, @NotNull Predicate<G> filter)
 	{
+		Preconditions.checkNotNull(eventClass);
+		Preconditions.checkNotNull(filter);
 		return new PluginManagerFiredEventFilterMatcher<>(eventClass, filter);
 	}
 

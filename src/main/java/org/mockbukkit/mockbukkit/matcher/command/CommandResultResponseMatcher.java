@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.matcher.command;
 
+import com.google.common.base.Preconditions;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
 import org.jetbrains.annotations.NotNull;
@@ -40,8 +41,9 @@ public class CommandResultResponseMatcher extends TypeSafeMatcher<CommandResult>
 	 * @param response The response the command result should have
 	 * @return A matcher which matches with any command result with specified response
 	 */
-	public static @NotNull CommandResultResponseMatcher hasResponse(String response)
+	public static @NotNull CommandResultResponseMatcher hasResponse(@NotNull String response)
 	{
+		Preconditions.checkNotNull(response);
 		return new CommandResultResponseMatcher(response);
 	}
 

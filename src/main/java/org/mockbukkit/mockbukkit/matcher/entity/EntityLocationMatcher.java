@@ -1,5 +1,6 @@
 package org.mockbukkit.mockbukkit.matcher.entity;
 
+import com.google.common.base.Preconditions;
 import org.bukkit.Location;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
@@ -44,8 +45,9 @@ public class EntityLocationMatcher extends TypeSafeMatcher<EntityMock>
 	 * @param maxDistance The radius away from the location which gives a match
 	 * @return A matcher which matches with any entity within a radius of specified location
 	 */
-	public static @NotNull EntityLocationMatcher isInLocation(Location location, double maxDistance)
+	public static @NotNull EntityLocationMatcher isInLocation(@NotNull Location location, double maxDistance)
 	{
+		Preconditions.checkNotNull(location);
 		return new EntityLocationMatcher(location, maxDistance);
 	}
 
