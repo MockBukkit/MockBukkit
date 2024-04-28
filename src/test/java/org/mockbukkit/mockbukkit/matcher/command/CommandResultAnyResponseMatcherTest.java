@@ -57,6 +57,12 @@ class CommandResultAnyResponseMatcherTest extends AbstractMatcherTest
 		assertNullSafe(hasAnyResponse());
 	}
 
+	@Test
+	void unknownTypeSafe()
+	{
+		testCopesWithUnknownTypes();
+	}
+
 	@Override
 	protected Matcher<?> createMatcher()
 	{
