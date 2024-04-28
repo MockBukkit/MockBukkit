@@ -93,6 +93,11 @@ public class HelpMapMock implements HelpMap
 		assertTrue(factories.containsValue(factory));
 	}
 
+	/**
+	 * Whether the specified factory has been registered to this instance
+	 * @param factory The factory that should have been registered
+	 * @return True if the specified factory has been registered to this instance
+	 */
 	public boolean hasRegistered(@NotNull HelpTopicFactory<?> factory)
 	{
 		Preconditions.checkNotNull(factory, "Factory cannot be null");

@@ -3,6 +3,7 @@ package org.mockbukkit.mockbukkit.matcher.entity.human;
 import org.bukkit.event.inventory.InventoryType;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
+import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.entity.HumanEntityMock;
 
 public class HumanEntityInventoryViewTypeMatcher extends TypeSafeMatcher<HumanEntityMock>
@@ -38,7 +39,7 @@ public class HumanEntityInventoryViewTypeMatcher extends TypeSafeMatcher<HumanEn
 	 * @param inventoryType The required inventory
 	 * @return A matcher which matches with any human entity with the specified inventory
 	 */
-	public static HumanEntityInventoryViewTypeMatcher hasInventoryViewType(InventoryType inventoryType)
+	public static @NotNull HumanEntityInventoryViewTypeMatcher hasInventoryViewType(InventoryType inventoryType)
 	{
 		return new HumanEntityInventoryViewTypeMatcher(inventoryType);
 	}

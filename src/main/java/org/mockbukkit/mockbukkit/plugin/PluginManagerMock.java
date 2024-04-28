@@ -114,6 +114,10 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 		}
 	}
 
+	/**
+	 * Get all events fired by this plugin manager
+	 * @return All events fired by this plugin manager
+	 */
 	public Stream<Event> getFiredEvents()
 	{
 		return events.stream();

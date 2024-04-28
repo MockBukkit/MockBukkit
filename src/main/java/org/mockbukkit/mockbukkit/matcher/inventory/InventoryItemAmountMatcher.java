@@ -4,6 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
+import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.inventory.InventoryMock;
 
 public class InventoryItemAmountMatcher extends TypeSafeMatcher<InventoryMock>
@@ -50,7 +51,7 @@ public class InventoryItemAmountMatcher extends TypeSafeMatcher<InventoryMock>
 	 * @param amount The amount of the items required for a match
 	 * @return A matcher which matches with any inventory with more than the required amount of items
 	 */
-	public static InventoryItemAmountMatcher containsAtLeast(Material material, int amount)
+	public static @NotNull InventoryItemAmountMatcher containsAtLeast(Material material, int amount)
 	{
 		return new InventoryItemAmountMatcher(new ItemStack(material), amount);
 	}
@@ -61,7 +62,7 @@ public class InventoryItemAmountMatcher extends TypeSafeMatcher<InventoryMock>
 	 * @param amount The amount of the items required for a match
 	 * @return A matcher which matches with any inventory with more than the required amount of items
 	 */
-	public static InventoryItemAmountMatcher containsAtLeast(ItemStack targetItem, int amount)
+	public static @NotNull InventoryItemAmountMatcher containsAtLeast(ItemStack targetItem, int amount)
 	{
 		return new InventoryItemAmountMatcher(targetItem, amount);
 	}

@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import org.bukkit.entity.LivingEntity;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
+import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.entity.MobMock;
 import org.mockbukkit.mockbukkit.entity.MockRangedEntity;
 
@@ -58,7 +59,7 @@ public class RangedEntityAttackMatcher extends TypeSafeMatcher<MockRangedEntity<
 	 * @param charge The required charge
 	 * @return A matcher which matches with any ranged entity that has attacked the specified target with the specified charge
 	 */
-	public static RangedEntityAttackMatcher hasAttacked(LivingEntity target, float charge)
+	public static @NotNull RangedEntityAttackMatcher hasAttacked(LivingEntity target, float charge)
 	{
 		return hasAttacked(target, charge, false);
 	}
@@ -71,7 +72,7 @@ public class RangedEntityAttackMatcher extends TypeSafeMatcher<MockRangedEntity<
 	 * @return A matcher which matches with any ranged entity that has attacked the specified target with the
 	 * specified charge while being aggressive
 	 */
-	public static RangedEntityAttackMatcher hasAttacked(LivingEntity target, float charge, boolean aggressive)
+	public static @NotNull RangedEntityAttackMatcher hasAttacked(LivingEntity target, float charge, boolean aggressive)
 	{
 		return new RangedEntityAttackMatcher(target, charge, aggressive);
 	}

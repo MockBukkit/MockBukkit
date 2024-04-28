@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.matcher.command;
 
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
+import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.command.CommandResult;
 import org.mockbukkit.mockbukkit.command.MessageTarget;
 
@@ -34,7 +35,7 @@ public class CommandResultAnyResponseMatcher extends TypeSafeMatcher<CommandResu
 	/**
 	 * @return A matcher which matches with any command result with any response
 	 */
-	public static CommandResultAnyResponseMatcher hasAnyResponse()
+	public static @NotNull CommandResultAnyResponseMatcher hasAnyResponse()
 	{
 		return new CommandResultAnyResponseMatcher();
 	}

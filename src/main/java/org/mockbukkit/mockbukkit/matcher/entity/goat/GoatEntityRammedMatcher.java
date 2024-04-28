@@ -3,6 +3,7 @@ package org.mockbukkit.mockbukkit.matcher.entity.goat;
 import org.bukkit.entity.LivingEntity;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
+import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.entity.GoatMock;
 
 public class GoatEntityRammedMatcher extends TypeSafeMatcher<GoatMock>
@@ -38,7 +39,7 @@ public class GoatEntityRammedMatcher extends TypeSafeMatcher<GoatMock>
 	 * @param target The target required to have been hit for there to be a match
 	 * @return A matcher which matches with any goat that has targeted the specified target
 	 */
-	public static GoatEntityRammedMatcher hasRammed(LivingEntity target)
+	public static @NotNull GoatEntityRammedMatcher hasRammed(LivingEntity target)
 	{
 		return new GoatEntityRammedMatcher(target);
 	}

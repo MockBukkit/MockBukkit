@@ -4,6 +4,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
+import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.command.MessageTarget;
 
 
@@ -42,7 +43,7 @@ public class MessageTargetReceivedMessageMatcher extends TypeSafeMatcher<Message
 	 * @param expected The message required for a match
 	 * @return A matcher which matches with any message target that has received the specified message
 	 */
-	public static MessageTargetReceivedMessageMatcher hasReceived(Component expected)
+	public static @NotNull MessageTargetReceivedMessageMatcher hasReceived(Component expected)
 	{
 		return new MessageTargetReceivedMessageMatcher(expected);
 	}
@@ -52,7 +53,7 @@ public class MessageTargetReceivedMessageMatcher extends TypeSafeMatcher<Message
 	 * @param expected The message required for a match
 	 * @return A matcher which matches with any message target that has received the specified message
 	 */
-	public static MessageTargetReceivedMessageMatcher hasReceived(String expected)
+	public static @NotNull MessageTargetReceivedMessageMatcher hasReceived(String expected)
 	{
 		return new MessageTargetReceivedMessageMatcher(LegacyComponentSerializer.legacySection().deserialize(expected));
 	}

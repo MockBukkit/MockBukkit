@@ -3,6 +3,7 @@ package org.mockbukkit.mockbukkit.matcher.block;
 import org.bukkit.Material;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
+import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.block.BlockMock;
 import org.mockbukkit.mockbukkit.command.CommandResult;
 
@@ -38,7 +39,7 @@ public class BlockMaterialTypeMatcher extends TypeSafeMatcher<BlockMock>
 	 * @param material The material that the block should have
 	 * @return A matcher which matches blocks with the specified material
 	 */
-	public static BlockMaterialTypeMatcher hasMaterial(Material material)
+	public static @NotNull BlockMaterialTypeMatcher hasMaterial(Material material)
 	{
 		return new BlockMaterialTypeMatcher(material);
 	}
