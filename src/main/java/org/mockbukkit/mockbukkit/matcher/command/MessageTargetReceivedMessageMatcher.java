@@ -28,7 +28,7 @@ public class MessageTargetReceivedMessageMatcher extends TypeSafeMatcher<Message
 	@Override
 	public void describeTo(Description description)
 	{
-		description.appendText("to receive specific message");
+		description.appendText("to receive the following message ").appendValue(expected);
 	}
 
 	@Override

@@ -24,7 +24,7 @@ public class ItemSimilarityMatcher extends TypeSafeMatcher<ItemStack>
 	@Override
 	public void describeTo(Description description)
 	{
-		description.appendText("to be similar to the specified item");
+		description.appendText("to be similar to the following item ").appendValue(itemStack);
 	}
 
 	@Override

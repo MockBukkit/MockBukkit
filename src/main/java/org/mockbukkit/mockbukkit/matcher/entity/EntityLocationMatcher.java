@@ -28,7 +28,7 @@ public class EntityLocationMatcher extends TypeSafeMatcher<EntityMock>
 	@Override
 	public void describeTo(Description description)
 	{
-		description.appendText("to be within the specified location");
+		description.appendText("to be within the following location ").appendValue(location);
 	}
 
 	@Override

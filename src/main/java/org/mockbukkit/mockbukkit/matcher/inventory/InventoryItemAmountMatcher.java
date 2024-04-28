@@ -35,7 +35,7 @@ public class InventoryItemAmountMatcher extends TypeSafeMatcher<InventoryMock>
 	@Override
 	public void describeTo(Description description)
 	{
-		description.appendText("to have more than the target amount of the specified item");
+		description.appendText("to have more than the target amount ").appendValue(targetAmount).appendText(" of item ").appendValue(targetItem);
 	}
 
 	@Override
