@@ -616,6 +616,7 @@ public class BukkitSchedulerMock implements BukkitScheduler
 	/**
 	 * Asserts that there were no overdue tasks from {@link #saveOverdueTasks()}.
 	 */
+	@Deprecated(forRemoval = true)
 	public void assertNoOverdueTasks()
 	{
 		if (!overdueTasks.isEmpty())
