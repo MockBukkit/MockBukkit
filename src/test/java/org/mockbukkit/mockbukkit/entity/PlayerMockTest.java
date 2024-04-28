@@ -91,8 +91,8 @@ import org.mockbukkit.mockbukkit.inventory.EnderChestInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.InventoryMock;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import org.mockbukkit.mockbukkit.map.MapViewMock;
+import org.mockbukkit.mockbukkit.matcher.sound.SoundReceiverSoundHeardMatcher;
 import org.mockbukkit.mockbukkit.plugin.PluginManagerMock;
-import org.opentest4j.AssertionFailedError;
 
 import java.net.InetSocketAddress;
 import java.util.Collections;
@@ -121,13 +121,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assumptions.assumeFalse;
 import static org.mockbukkit.mockbukkit.matcher.block.BlockMaterialTypeMatcher.hasMaterial;
-import static org.mockbukkit.mockbukkit.matcher.entity.EntityTeleportationMatcher.hasTeleported;
 import static org.mockbukkit.mockbukkit.matcher.entity.EntityLocationMatcher.isInLocation;
+import static org.mockbukkit.mockbukkit.matcher.entity.EntityTeleportationMatcher.hasTeleported;
 import static org.mockbukkit.mockbukkit.matcher.entity.human.HumanEntityInventoryViewItemMatcher.hasItemInInventoryView;
 import static org.mockbukkit.mockbukkit.matcher.entity.human.HumanEntityInventoryViewTypeMatcher.hasInventoryViewType;
 import static org.mockbukkit.mockbukkit.matcher.entity.player.PlayerConsumeItemMatcher.hasConsumed;
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasFiredEventInstance;
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
+import static org.mockbukkit.mockbukkit.matcher.sound.SoundReceiverSoundHeardMatcher.hasHeard;
+import static org.mockbukkit.mockbukkit.matcher.sound.SoundReceiverSoundHeardMatcher.hasHeard;
 
 class PlayerMockTest
 {
@@ -1054,12 +1056,10 @@ class PlayerMockTest
 		float volume = 0.25F;
 		float pitch = 0.75F;
 		player.playSound(player.getEyeLocation(), sound, SoundCategory.RECORDS, volume, pitch);
-
-		player.assertSoundHeard(sound, audio ->
-		{
-			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
-					&& audio.getVolume() == volume && audio.getPitch() == pitch;
-		});
+		assertThat(player, SoundReceiverSoundHeardMatcher.hasHeard(sound, audio ->
+				player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
+						&& audio.getVolume() == volume && audio.getPitch() == pitch)
+		);
 	}
 
 	@Test
@@ -1072,7 +1072,7 @@ class PlayerMockTest
 				0.8f
 		);
 		player.playSound(sound);
-		player.assertSoundHeard(sound, audio -> player.getLocation().equals(audio.getLocation()));
+		assertThat(player, SoundReceiverSoundHeardMatcher.hasHeard(sound, audio -> player.getLocation().equals(audio.getLocation())));
 	}
 
 	@Test
@@ -1085,7 +1085,7 @@ class PlayerMockTest
 				0.8f
 		);
 		player.playSound(sound, net.kyori.adventure.sound.Sound.Emitter.self());
-		player.assertSoundHeard(sound, audio -> player.getLocation().equals(audio.getLocation()));
+		assertThat(player, SoundReceiverSoundHeardMatcher.hasHeard(sound, audio -> player.getLocation().equals(audio.getLocation())));
 	}
 
 	@Test
@@ -1099,7 +1099,7 @@ class PlayerMockTest
 		);
 		Location loc = new Location(player.getWorld(), 80D, 30D, 50D);
 		player.playSound(sound, loc.getX(), loc.getY(), loc.getZ());
-		player.assertSoundHeard(sound, audio -> loc.equals(audio.getLocation()));
+		assertThat(player, SoundReceiverSoundHeardMatcher.hasHeard(sound, audio -> loc.equals(audio.getLocation())));
 	}
 
 	@Test
@@ -1118,8 +1118,8 @@ class PlayerMockTest
 				soundA.pitch()
 		);
 		player.playSound(soundA);
-		player.assertSoundHeard(soundA);
-		assertThrows(AssertionFailedError.class, () -> player.assertSoundHeard(soundB));
+		assertThat(player, hasHeard(soundA));
+		assertThat(player, not(hasHeard(soundB)));
 	}
 
 	@Test
@@ -1127,11 +1127,10 @@ class PlayerMockTest
 	{
 		int note = 10;
 		player.playNote(player.getEyeLocation(), (byte) 0, (byte) note);
-		player.assertSoundHeard(Sound.BLOCK_NOTE_BLOCK_HARP, audio ->
-		{
-			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
-					&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
-		});
+		assertThat(player, SoundReceiverSoundHeardMatcher.hasHeard(Sound.BLOCK_NOTE_BLOCK_HARP, audio ->
+				player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
+						&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01
+		));
 	}
 
 	@Test
@@ -2138,12 +2137,9 @@ class PlayerMockTest
 		float volume = 0.25F;
 		float pitch = 0.75F;
 		player.playSound(player.getEyeLocation(), sound, volume, pitch);
-
-		player.assertSoundHeard(sound, audio ->
-		{
-			return player.getEyeLocation().equals(audio.getLocation()) && audio.getVolume() == volume
-					&& audio.getPitch() == pitch;
-		});
+		assertThat(player, SoundReceiverSoundHeardMatcher.hasHeard(sound, audio ->
+				player.getEyeLocation().equals(audio.getLocation()) && audio.getVolume() == volume && audio.getPitch() == pitch
+		));
 	}
 
 	@Test
