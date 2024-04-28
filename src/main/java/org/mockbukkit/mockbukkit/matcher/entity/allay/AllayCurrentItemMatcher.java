@@ -33,6 +33,11 @@ public class AllayCurrentItemMatcher extends TypeSafeMatcher<AllayMock>
 		mismatchDescription.appendText("has current item ").appendValue(allay.getCurrentItem());
 	}
 
+	/**
+	 *
+	 * @param currentItem The material of the item to be held for there to be a match
+	 * @return A matcher which matches with any allay holding the specified item
+	 */
 	public static AllayCurrentItemMatcher currentItem(Material currentItem)
 	{
 		return new AllayCurrentItemMatcher(currentItem);

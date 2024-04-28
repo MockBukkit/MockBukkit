@@ -17,12 +17,12 @@ public class HumanEntityInventoryViewItemMatcher extends TypeSafeMatcher<HumanEn
 	}
 
 	@Override
-	protected boolean matchesSafely(HumanEntityMock item)
+	protected boolean matchesSafely(HumanEntityMock humanEntityMock)
 	{
-		if(item.getOpenInventory().getTopInventory() == null){
+		if(humanEntityMock.getOpenInventory().getTopInventory() == null){
 			return false;
 		}
-		return item.getOpenInventory().getTopInventory().contains(material);
+		return humanEntityMock.getOpenInventory().getTopInventory().contains(material);
 	}
 
 	@Override
@@ -32,12 +32,12 @@ public class HumanEntityInventoryViewItemMatcher extends TypeSafeMatcher<HumanEn
 	}
 
 	@Override
-	protected void describeMismatchSafely(HumanEntityMock item, Description mismatchDescription)
+	protected void describeMismatchSafely(HumanEntityMock humanEntityMock, Description mismatchDescription)
 	{
-		if(item.getOpenInventory().getTopInventory() != null)
+		if(humanEntityMock.getOpenInventory().getTopInventory() != null)
 		{
 			mismatchDescription.appendText("had items ");
-			mismatchDescription.appendValueList("[", ",", "]", item.getOpenInventory().getTopInventory().getContents());
+			mismatchDescription.appendValueList("[", ",", "]", humanEntityMock.getOpenInventory().getTopInventory().getContents());
 		}
 		else
 		{
@@ -45,11 +45,21 @@ public class HumanEntityInventoryViewItemMatcher extends TypeSafeMatcher<HumanEn
 		}
 	}
 
+	/**
+	 *
+	 * @param material The material of the item required for a match
+	 * @return A matcher which matches with any human entity with the specified item in inventory
+	 */
 	public static HumanEntityInventoryViewItemMatcher hasItemInInventoryView(Material material)
 	{
 		return new HumanEntityInventoryViewItemMatcher(material);
 	}
 
+	/**
+	 *
+	 * @param item The item required for a match
+	 * @return A matcher which matches with any human entity with the specified item in inventory
+	 */
 	public static HumanEntityInventoryViewItemMatcher hasItemInInventoryView(ItemStack item)
 	{
 		return new HumanEntityInventoryViewItemMatcher(item.getType());

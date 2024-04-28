@@ -19,9 +19,9 @@ public class MessageTargetReceivedMessageMatcher extends TypeSafeMatcher<Message
 	}
 
 	@Override
-	protected boolean matchesSafely(MessageTarget item)
+	protected boolean matchesSafely(MessageTarget messageTarget)
 	{
-		this.nextMessage = item.nextComponentMessage();
+		this.nextMessage = messageTarget.nextComponentMessage();
 		return expected.equals(nextMessage);
 	}
 
@@ -32,16 +32,26 @@ public class MessageTargetReceivedMessageMatcher extends TypeSafeMatcher<Message
 	}
 
 	@Override
-	protected void describeMismatchSafely(MessageTarget item, Description description)
+	protected void describeMismatchSafely(MessageTarget messageTarget, Description description)
 	{
 		description.appendText("was ").appendValue(nextMessage);
 	}
 
+	/**
+	 *
+	 * @param expected The message required for a match
+	 * @return A matcher which matches with any message target that has received the specified message
+	 */
 	public static MessageTargetReceivedMessageMatcher hasReceived(Component expected)
 	{
 		return new MessageTargetReceivedMessageMatcher(expected);
 	}
 
+	/**
+	 *
+	 * @param expected The message required for a match
+	 * @return A matcher which matches with any message target that has received the specified message
+	 */
 	public static MessageTargetReceivedMessageMatcher hasReceived(String expected)
 	{
 		return new MessageTargetReceivedMessageMatcher(LegacyComponentSerializer.legacySection().deserialize(expected));

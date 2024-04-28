@@ -39,6 +39,12 @@ public class SoundReceiverSoundHeardMatcher extends TypeSafeMatcher<SoundReceive
 		description.appendText("has received the following sounds ").appendValueList("[", ",", "]", soundReceiver.getHeardSounds());
 	}
 
+	/**
+	 *
+	 * @param sound The required sound for a match
+	 * @param filter A custom filter
+	 * @return A matcher which matches with any sound receiver which has heard the specified sound with filter
+	 */
 	public static SoundReceiverSoundHeardMatcher hasHeard(Sound sound, Predicate<AudioExperience> filter)
 	{
 		// Extra fields in the Sound instance needs to be checked, this is added to the filter
@@ -48,26 +54,53 @@ public class SoundReceiverSoundHeardMatcher extends TypeSafeMatcher<SoundReceive
 		return hasHeard(sound.name().asString(), soundFilter.and(filter));
 	}
 
+	/**
+	 *
+	 * @param sound The required sound for a match
+	 * @param filter A custom filter
+	 * @return A matcher which matches with any sound receiver which has heard the specified sound with filter
+	 */
 	public static SoundReceiverSoundHeardMatcher hasHeard(org.bukkit.Sound sound, Predicate<AudioExperience> filter)
 	{
 		return hasHeard(sound.getKey().getKey(), filter);
 	}
 
+	/**
+	 *
+	 * @param soundKey The required sound for a match
+	 * @param filter A custom filter
+	 * @return A matcher which matches with any sound receiver which has heard the specified sound with filter
+	 */
 	public static SoundReceiverSoundHeardMatcher hasHeard(String soundKey, Predicate<AudioExperience> filter)
 	{
 		return new SoundReceiverSoundHeardMatcher(soundKey, filter);
 	}
 
+	/**
+	 *
+	 * @param sound The required sound for a match
+	 * @return A matcher which matches with any sound receiver which has heard the specified sound
+	 */
 	public static SoundReceiverSoundHeardMatcher hasHeard(String sound)
 	{
 		return hasHeard(sound, ignored -> true);
 	}
 
+	/**
+	 *
+	 * @param sound The required sound for a match
+	 * @return A matcher which matches with any sound receiver which has heard the specified sound
+	 */
 	public static SoundReceiverSoundHeardMatcher hasHeard(Sound sound)
 	{
 		return hasHeard(sound, ignored -> true);
 	}
 
+	/**
+	 *
+	 * @param sound The required sound for a match
+	 * @return A matcher which matches with any sound receiver which has heard the specified sound
+	 */
 	public static SoundReceiverSoundHeardMatcher hasHeard(org.bukkit.Sound sound)
 	{
 		return hasHeard(sound, ignored -> true);
