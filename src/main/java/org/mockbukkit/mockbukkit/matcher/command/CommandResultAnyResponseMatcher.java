@@ -4,9 +4,6 @@ import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.command.CommandResult;
-import org.mockbukkit.mockbukkit.command.MessageTarget;
-
-import java.lang.reflect.Field;
 
 public class CommandResultAnyResponseMatcher extends TypeSafeMatcher<CommandResult>
 {
