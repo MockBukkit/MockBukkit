@@ -25,6 +25,7 @@ dependencies {
 
 	// Dependencies for Unit Tests
 	implementation("org.junit.jupiter:junit-jupiter:5.10.2")
+	implementation("org.junit.platform:junit-platform-launcher:1.10.2")
 
 	// General utilities for the project
 	implementation("net.kyori:adventure-platform-bungeecord:4.3.2")
@@ -73,6 +74,9 @@ tasks {
 	test {
 		dependsOn(project(":extra:TestPlugin").tasks.jar)
 		useJUnitPlatform()
+		options {
+			systemProperty("junit.platform.launcher.interceptors.enabled", "true")
+		}
 	}
 
 	check {

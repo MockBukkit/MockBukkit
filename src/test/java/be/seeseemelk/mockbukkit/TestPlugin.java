@@ -22,6 +22,9 @@ import java.util.concurrent.CyclicBarrier;
 
 public class TestPlugin extends JavaPlugin implements Listener
 {
+	static {
+		System.out.println("Test plugin loaded");
+	}
 
 	public boolean onEnableExecuted = false;
 	public boolean onDisableExecuted = false;
