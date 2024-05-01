@@ -5,19 +5,16 @@ import be.seeseemelk.mockbukkit.TestPlugin;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockBukkitExtension.class)
 class MockBukkitClassLoaderTest
 {
 
 	@Test
-	void pluginHasRightClassLoader() throws ClassNotFoundException
+	void pluginHasRightClassLoader()
 	{
-		System.out.println("After class loading");
-		System.out.println(Class.forName("be.seeseemelk.mockbukkit.TestPlugin").getClassLoader());
-		TestPlugin testPlugin = new TestPlugin();
-		assertInstanceOf(MockBukkitPluginClassLoader.class, testPlugin.getClass().getClassLoader());
+		assertEquals(MockBukkitPluginClassLoader.class, TestPlugin.class.getClassLoader().getClass());
 	}
 
 }

@@ -21,21 +21,48 @@ public class MockBukkitLauncherInterceptor implements LauncherInterceptor
 	{
 		Thread currentThread = Thread.currentThread();
 		ClassLoader originalClassLoader = currentThread.getContextClassLoader();
-		currentThread.setContextClassLoader(customClassLoader);
+		InterceptionThread<T> newThread = new InterceptionThread<>(invocation);
+		newThread.setContextClassLoader(customClassLoader);
+		newThread.start();
 		try
 		{
-			return invocation.proceed();
+			newThread.join();
 		}
-		finally
+		catch (InterruptedException e)
 		{
-			currentThread.setContextClassLoader(originalClassLoader);
+			throw new RuntimeException(e);
 		}
+		return newThread.getOutputValue();
 	}
 
 	@Override
 	public void close()
 	{
 		// Nothing needs to be closed
+	}
+
+	private static class InterceptionThread<T> extends Thread
+	{
+
+		private final Invocation<T> invocation;
+		private T outputValue = null;
+
+		private InterceptionThread(LauncherInterceptor.Invocation<T> invocation)
+		{
+			this.invocation = invocation;
+		}
+
+		@Override
+		public void run()
+		{
+			outputValue = invocation.proceed();
+		}
+
+		private T getOutputValue()
+		{
+			return outputValue;
+		}
+
 	}
 
 }

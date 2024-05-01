@@ -13,13 +13,13 @@ public class MockBukkitClassLoader extends ClassLoader
 {
 
 	private final Map<String, MockBukkitPluginClassLoader> classLoaders;
-	private final ClassLoader sysClassLoader;
+	private final ClassLoader bootstrapClassLoader;
 
 	public MockBukkitClassLoader(ClassLoader parent)
 	{
 		super(parent);
 		classLoaders = new HashMap<>();
-		this.sysClassLoader = getSystemClassLoader();
+		this.bootstrapClassLoader = getSystemClassLoader().getParent();
 	}
 
 	@Override
@@ -52,22 +52,13 @@ public class MockBukkitClassLoader extends ClassLoader
 	{
 		try
 		{
-			if (sysClassLoader != null)
-			{
-				return sysClassLoader.loadClass(name);
-			}
+			return bootstrapClassLoader.loadClass(name);
 		}
 		catch (ClassNotFoundException ignored)
 		{
+
 		}
-		try
-		{
-			return findClass(name);
-		}
-		catch (Exception e)
-		{
-			return super.loadClass(name);
-		}
+		return findClass(name);
 	}
 
 	@Override
