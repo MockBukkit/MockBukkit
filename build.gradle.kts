@@ -172,14 +172,14 @@ fun isFork(): Boolean {
 }
 
 fun isAction(): Boolean {
-	return System.getenv("CI") != null
+	return System.getenv("GITHUB_ACTIONS") == "true" && System.getenv("GITHUB_REPOSITORY") == "MockBukkit/MockBukkit"
 }
 
 fun getFullVersion(): String {
-	return if (!isAction()) {
-		"dev-${run("git", "rev-parse", "--verify", "--short", "HEAD")}"
-	} else {
+	return if (isAction()) {
 		property("mockbukkit.version") as String
+	} else {
+		"dev-${run("git", "rev-parse", "--verify", "--short", "HEAD")}"
 	}
 }
 
