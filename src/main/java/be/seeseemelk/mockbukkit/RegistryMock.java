@@ -38,6 +38,7 @@ import java.lang.reflect.ParameterizedType;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
@@ -68,7 +69,7 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 
 	private void loadKeyedToRegistry(Class<T> tClass) throws IOException
 	{
-		String classNameLowerCase = tClass.getSimpleName().toLowerCase();
+		String classNameLowerCase = tClass.getSimpleName().toLowerCase(Locale.ROOT);
 		String fileName = "/keyed/" + classNameLowerCase + ".json";
 		this.constructor = (Function<JsonObject, T>) getConstructor(tClass);
 		try (InputStream stream = MockBukkit.class.getResourceAsStream(fileName))
