@@ -69,7 +69,7 @@ public class EntityDataRegistry
 	}
 
 	/**
-	 * Construcy entity data based on entity type
+	 * Construct entity data based on entity type
 	 *
 	 * @param type The type of the entity
 	 * @return A new instance of entitydata

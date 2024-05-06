@@ -64,7 +64,7 @@ public class InternalTag<T>
 			}
 			catch (IOException | InternalTagMisconfigurationException e)
 			{
-				e.printStackTrace();
+				throw new RuntimeException(e);
 			}
 		}
 	}
