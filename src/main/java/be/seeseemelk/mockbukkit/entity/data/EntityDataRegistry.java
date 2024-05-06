@@ -6,9 +6,11 @@ import org.bukkit.entity.EntityType;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -52,17 +54,17 @@ public class EntityDataRegistry
 	 */
 	private static String load(String repository, EntityType type) throws IOException
 	{
-		String path = repository + type.toString().toLowerCase() + ".json";
-
-		if (MockBukkit.class.getResource(path) == null)
+		String path = repository + type.toString().toLowerCase(Locale.ROOT) + ".json";
+		try (InputStream inputStream = MockBukkit.class.getResourceAsStream(path))
 		{
-			throw new FileNotFoundException(path);
-		}
-
-		try (BufferedReader reader = new BufferedReader(
-				new InputStreamReader(MockBukkit.class.getResourceAsStream(path), StandardCharsets.UTF_8)))
-		{
-			return reader.lines().collect(Collectors.joining(""));
+			if (inputStream == null)
+			{
+				throw new FileNotFoundException(path);
+			}
+			try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8)))
+			{
+				return reader.lines().collect(Collectors.joining(""));
+			}
 		}
 	}
 
