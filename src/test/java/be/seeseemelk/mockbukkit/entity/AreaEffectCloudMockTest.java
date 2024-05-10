@@ -211,7 +211,6 @@ class AreaEffectCloudMockTest
 		assertTrue(areaEffectCloud.getCustomEffects().isEmpty());
 		assertFalse(areaEffectCloud.hasCustomEffects());
 	}
-/*
 	@Test
 	void testHasCustomEffectWithBasePotionDataWithEffect()
 	{
@@ -248,7 +247,7 @@ class AreaEffectCloudMockTest
 		PotionEffect effect2 = new PotionEffect(PotionEffectType.HEAL, 1, 1);
 		assertFalse(areaEffectCloud.addCustomEffect(effect2, false));
 		assertSame(effect, areaEffectCloud.getCustomEffects().get(0));
-	}*/
+	}
 
 	@Test
 	void testRemoveCustomEffect()

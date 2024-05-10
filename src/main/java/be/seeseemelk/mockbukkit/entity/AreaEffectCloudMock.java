@@ -166,7 +166,7 @@ public class AreaEffectCloudMock extends EntityMock implements AreaEffectCloud
 	@Override
 	public boolean hasCustomEffects()
 	{
-/*		PotionEffectType effectType = this.basePotionData.getType().getEffectType();
+		PotionEffectType effectType = this.basePotionData.getType().getEffectType();
 		if (effectType != null)
 		{
 			return customEffects.stream().anyMatch(effect -> !effect.getType().equals(effectType));
@@ -174,8 +174,7 @@ public class AreaEffectCloudMock extends EntityMock implements AreaEffectCloud
 		else
 		{
 			return !this.customEffects.isEmpty();
-		}*/
-		return false;
+		}
 	}
 
 	@Override
