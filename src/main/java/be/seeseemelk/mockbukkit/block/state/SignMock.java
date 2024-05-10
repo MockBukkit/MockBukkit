@@ -26,8 +26,8 @@ import java.util.List;
  */
 public class SignMock extends TileStateMock implements Sign
 {
-	private final SignSideImpl front;
-	private final SignSideImpl back;
+	private final SignSideMock front;
+	private final SignSideMock back;
 
 	/**
 	 * Constructs a new {@link SignMock} for the provided {@link Material}.
@@ -39,8 +39,8 @@ public class SignMock extends TileStateMock implements Sign
 	{
 		super(material);
 		checkType(material, Tag.SIGNS);
-		this.front = new SignSideImpl();
-		this.back = new SignSideImpl();
+		this.front = new SignSideMock();
+		this.back = new SignSideMock();
 	}
 
 	/**
@@ -53,8 +53,8 @@ public class SignMock extends TileStateMock implements Sign
 	{
 		super(block);
 		checkType(block, Tag.SIGNS);
-		this.front = new SignSideImpl();
-		this.back = new SignSideImpl();
+		this.front = new SignSideMock();
+		this.back = new SignSideMock();
 	}
 
 	/**
@@ -65,8 +65,8 @@ public class SignMock extends TileStateMock implements Sign
 	protected SignMock(@NotNull SignMock state)
 	{
 		super(state);
-		this.front = new SignSideImpl(state.front);
-		this.back = new SignSideImpl(state.back);
+		this.front = new SignSideMock(state.front);
+		this.back = new SignSideMock(state.back);
 	}
 
 	@Override
@@ -198,18 +198,18 @@ public class SignMock extends TileStateMock implements Sign
 		return new SignMock(this);
 	}
 
-	private static class SignSideImpl implements SignSide {
+	private static class SignSideMock implements SignSide {
 
 		private final Component[] lines;
 		private boolean glowing = false;
 		private DyeColor color = DyeColor.BLACK;
 
-		private SignSideImpl() {
+		private SignSideMock() {
 			this.lines = new Component[4];
 			Arrays.fill(lines, Component.empty());
 		}
 
-		private SignSideImpl(SignSide signSide) {
+		private SignSideMock(SignSide signSide) {
 			this.lines = signSide.lines().toArray(new Component[0]);
 			this.glowing = signSide.isGlowingText();
 			this.color = signSide.getColor();
