@@ -2,7 +2,6 @@ package be.seeseemelk.mockbukkit.inventory.meta;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
-import com.destroystokyo.paper.Namespaced;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMultimap;
@@ -11,6 +10,7 @@ import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.SetMultimap;
 import com.google.common.collect.Sets;
+import net.kyori.adventure.key.Namespaced;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.bungeecord.BungeeComponentSerializer;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
@@ -22,9 +22,11 @@ import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
+import org.bukkit.inventory.ItemRarity;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.Repairable;
+import org.bukkit.inventory.meta.components.FoodComponent;
 import org.bukkit.inventory.meta.tags.CustomItemTagContainer;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.jetbrains.annotations.NotNull;
@@ -66,6 +68,10 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	private @Nullable Integer customModelData = null;
 	private Set<Namespaced> destroyableKeys = Sets.newHashSet();
 	private Set<Namespaced> placeableKeys = Sets.newHashSet();
+	private Integer maxDamage;
+	private boolean hideTooltip;
+	private boolean fireResistant;
+
 
 	/**
 	 * Constructs a new {@link ItemMetaMock}.
@@ -93,14 +99,6 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		if (meta.hasLore())
 		{
 			lore = meta.lore().stream().map(c -> GsonComponentSerializer.gson().serialize(c)).collect(Collectors.toList());
-		}
-		if (meta.hasDestroyableKeys())
-		{
-			destroyableKeys.addAll(meta.getDestroyableKeys());
-		}
-		if (meta.hasPlaceableKeys())
-		{
-			placeableKeys.addAll(meta.getPlaceableKeys());
 		}
 		if (meta instanceof Damageable d)
 		{
@@ -244,8 +242,6 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		result = prime * result + (hideFlags.isEmpty() ? 0 : hideFlags.hashCode());
 		result = prime * result + Boolean.hashCode(unbreakable);
 		result = prime * result + (hasDamage() ? this.damage : 0);
-		result = prime * result + (hasDestroyableKeys() ? this.destroyableKeys.hashCode() : 0);
-		result = prime * result + (hasPlaceableKeys() ? this.placeableKeys.hashCode() : 0);
 		return result;
 	}
 
@@ -327,74 +323,6 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		{
 			throw new RuntimeException(e);
 		}
-	}
-
-	@Override
-	@Deprecated(since = "1.13")
-	public Set<Material> getCanDestroy()
-	{
-		return !hasDestroyableKeys() ? Collections.emptySet() : legacyGetMatsFromKeys(this.destroyableKeys);
-	}
-
-	@Override
-	@Deprecated(since = "1.13")
-	public void setCanDestroy(Set<Material> canDestroy)
-	{
-		Preconditions.checkArgument(canDestroy != null, "Cannot replace with null set!");
-		legacyClearAndReplaceKeys(this.destroyableKeys, canDestroy);
-	}
-
-	@Override
-	@Deprecated(since = "1.13")
-	public Set<Material> getCanPlaceOn()
-	{
-		return !hasPlaceableKeys() ? Collections.emptySet() : legacyGetMatsFromKeys(this.placeableKeys);
-	}
-
-	@Override
-	@Deprecated(since = "1.13")
-	public void setCanPlaceOn(Set<Material> canPlaceOn)
-	{
-		Preconditions.checkArgument(canPlaceOn != null, "Cannot replace with null set!");
-		legacyClearAndReplaceKeys(this.placeableKeys, canPlaceOn);
-	}
-
-	@Override
-	public @NotNull Set<Namespaced> getDestroyableKeys()
-	{
-		Set<Namespaced> keys = this.destroyableKeys;
-		return keys == null ? Collections.emptySet() : ImmutableSet.copyOf(keys);
-	}
-
-	@Override
-	public void setDestroyableKeys(@NotNull Collection<Namespaced> canDestroy)
-	{
-		this.destroyableKeys = new HashSet<>(canDestroy);
-	}
-
-	@Override
-	public @NotNull Set<Namespaced> getPlaceableKeys()
-	{
-		Set<Namespaced> keys = this.placeableKeys;
-		return keys == null ? Collections.emptySet() : ImmutableSet.copyOf(keys);
-	}
-
-	@Override
-	public void setPlaceableKeys(@NotNull Collection<Namespaced> canPlaceOn)
-	{
-		this.placeableKeys = new HashSet<>(canPlaceOn);
-	}
-
-	@Override
-	public boolean hasPlaceableKeys()
-	{
-		return this.placeableKeys != null && !placeableKeys.isEmpty();
-	}
-
-	@Override
-	public boolean hasDestroyableKeys()
-	{
-		return this.destroyableKeys != null && !destroyableKeys.isEmpty();
 	}
 
 	@Override
@@ -563,16 +491,6 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		map.put("Unbreakable", this.unbreakable);
 		map.put("Damage", this.damage);
 
-		if (hasPlaceableKeys())
-		{
-			map.put("placeable-keys", this.placeableKeys);
-		}
-
-		if (hasDestroyableKeys())
-		{
-			map.put("destroyable-keys", this.destroyableKeys);
-		}
-
 		/* Not implemented.
 		if (!this.customTagContainer.isEmpty())
 		{
@@ -616,18 +534,21 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
+	@Deprecated(forRemoval = true,since = "1.20.6")
 	public boolean hasLocalizedName()
 	{
 		return localizedName != null;
 	}
 
 	@Override
+	@Deprecated(forRemoval = true,since = "1.20.6")
 	public @NotNull String getLocalizedName()
 	{
 		return localizedName;
 	}
 
 	@Override
+	@Deprecated(forRemoval = true,since = "1.20.6")
 	public void setLocalizedName(@Nullable String name)
 	{
 		localizedName = name;
@@ -956,4 +877,176 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		toUpdate.addAll(beingSet.stream().map(Material::getKey).collect(java.util.stream.Collectors.toSet()));
 	}
 
+	@Override
+	public boolean hasMaxDamage()
+	{
+		return this.maxDamage != null;
+	}
+
+	@Override
+	public int getMaxDamage()
+	{
+		Preconditions.checkState(this.hasMaxDamage(), "We don't have max_damage! Check hasMaxDamage first!");
+		return this.maxDamage;
+	}
+
+	@Override
+	public void setMaxDamage(@Nullable Integer maxDamage)
+	{
+		this.maxDamage = maxDamage;
+	}
+
+	@Override
+	public boolean hasItemName()
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Component itemName()
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void itemName(@Nullable Component name)
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@Deprecated
+	public @NotNull String getItemName()
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@Deprecated
+	public void setItemName(@Nullable String name)
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isHideTooltip()
+	{
+		return this.hideTooltip;
+	}
+
+	@Override
+	public void setHideTooltip(boolean hideTooltip)
+	{
+		this.hideTooltip = hideTooltip;
+	}
+
+	@Override
+	public boolean hasEnchantmentGlintOverride()
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Boolean getEnchantmentGlintOverride()
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setEnchantmentGlintOverride(@Nullable Boolean override)
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isFireResistant()
+	{
+		return this.fireResistant;
+	}
+
+	@Override
+	public void setFireResistant(boolean fireResistant)
+	{
+		this.fireResistant = fireResistant;
+	}
+
+	@Override
+	public boolean hasMaxStackSize()
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getMaxStackSize()
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+
+	}
+
+	@Override
+	public void setMaxStackSize(@Nullable Integer max)
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+
+	}
+
+	@Override
+	public boolean hasRarity()
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+
+	}
+
+	@Override
+	public @NotNull ItemRarity getRarity()
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+
+	}
+
+	@Override
+	public void setRarity(@Nullable ItemRarity rarity)
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean hasFood()
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+
+	}
+
+	@Override
+	public @NotNull FoodComponent getFood()
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+
+	}
+
+	@Override
+	public void setFood(@Nullable FoodComponent food)
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+
+	}
+
 }
+

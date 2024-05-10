@@ -42,6 +42,7 @@ import org.bukkit.GameRule;
 import org.bukkit.Instrument;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.Note;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -715,18 +716,6 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	public int getItemInUseTicks()
-	{
-		return 0;
-	}
-
-	@Override
-	public void setItemInUseTicks(int ticks)
-	{
-
-	}
-
-	@Override
 	public int getNoDamageTicks()
 	{
 		// TODO Auto-generated method stub
@@ -933,6 +922,44 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	public @Nullable InetSocketAddress getAddress()
 	{
 		return (isOnline()) ? address : null;
+	}
+
+	@Override
+	public @Nullable InetSocketAddress getHAProxyAddress()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean isTransferred()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@ApiStatus.Experimental
+	public void transfer(@NotNull String host, int port)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@ApiStatus.Experimental
+	public @NotNull CompletableFuture<byte[]> retrieveCookie(@NotNull NamespacedKey key)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	@ApiStatus.Experimental
+	public void storeCookie(@NotNull NamespacedKey key, @NotNull byte[] value)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -2716,7 +2743,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	@Override
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public @Nullable String getResourcePackHash()
 	{
 		// TODO Auto-generated method stub
@@ -2733,7 +2760,8 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	@Override
 	public void addResourcePack(@NotNull UUID id, @NotNull String url, @Nullable byte[] hash, @Nullable String prompt, boolean force)
 	{
-
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.inventory;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.entity.LivingEntityMock;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
@@ -81,6 +82,7 @@ public class EntityEquipmentMock implements EntityEquipment
 			case HEAD -> getHelmet();
 			case LEGS -> getLeggings();
 			case OFF_HAND -> getItemInOffHand();
+			case BODY -> throw new UnimplementedOperationException();
 		};
 	}
 

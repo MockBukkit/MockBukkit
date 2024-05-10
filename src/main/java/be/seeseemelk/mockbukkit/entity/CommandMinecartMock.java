@@ -84,7 +84,7 @@ public class CommandMinecartMock extends MinecartMock implements CommandMinecart
 	@Override
 	public @NotNull EntityType getType()
 	{
-		return EntityType.MINECART_COMMAND;
+		return EntityType.COMMAND_BLOCK_MINECART;
 	}
 
 }

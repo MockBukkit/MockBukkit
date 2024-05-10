@@ -37,6 +37,8 @@ import org.bukkit.entity.SpawnCategory;
 import org.bukkit.entity.Vehicle;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDismountEvent;
+import org.bukkit.event.entity.EntityMountEvent;
 import org.bukkit.event.entity.EntityTeleportEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
@@ -54,8 +56,6 @@ import org.bukkit.util.Vector;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.spigotmc.event.entity.EntityDismountEvent;
-import org.spigotmc.event.entity.EntityMountEvent;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -887,6 +887,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
+	@Deprecated(forRemoval = true,since = "1.20.6")
 	public void setLastDamageCause(@Nullable EntityDamageEvent event)
 	{
 		this.lastDamageEvent = event;
@@ -1482,6 +1483,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	public void setSpawnReason(CreatureSpawnEvent.SpawnReason spawnReason)
 	{
 		this.spawnReason = spawnReason;
+	}
+
+	@Override
+	public @Nullable String getAsString()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 }

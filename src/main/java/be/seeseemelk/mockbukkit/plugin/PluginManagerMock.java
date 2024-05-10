@@ -715,6 +715,13 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	}
 
 	@Override
+	public @NotNull Plugin[] loadPlugins(@NotNull File[] files)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public void disablePlugins()
 	{
 		for (Plugin plugin : plugins)

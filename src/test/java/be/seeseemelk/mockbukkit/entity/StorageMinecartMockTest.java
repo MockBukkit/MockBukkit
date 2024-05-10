@@ -51,7 +51,7 @@ class StorageMinecartMockTest
 	@Test
 	void testGetType()
 	{
-		assertEquals(minecart.getType(), MINECART_CHEST);
+		assertEquals(minecart.getType(), CHEST_MINECART);
 	}
 
 }

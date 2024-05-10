@@ -37,29 +37,19 @@ class BannerMetaMockTest
 	@Test
 	void constructor_DefaultValues()
 	{
-		assertNull(meta.getBaseColor());
 		assertTrue(meta.getPatterns().isEmpty());
 	}
 
 	@Test
 	void constructor_Clone_CopiesValues()
 	{
-		meta.setBaseColor(DyeColor.CYAN);
 		meta.setPatterns(List.of(new Pattern(DyeColor.BLUE, PatternType.STRIPE_BOTTOM)));
 
 		BannerMetaMock cloned = new BannerMetaMock(meta);
 
-		assertEquals(DyeColor.CYAN, cloned.getBaseColor());
 		assertEquals(1, cloned.getPatterns().size());
 		assertEquals(DyeColor.BLUE, cloned.getPatterns().get(0).getColor());
 		assertEquals(PatternType.STRIPE_BOTTOM, cloned.getPatterns().get(0).getPattern());
-	}
-
-	@Test
-	void setBaseColor_Sets()
-	{
-		meta.setBaseColor(DyeColor.CYAN);
-		assertEquals(DyeColor.CYAN, meta.getBaseColor());
 	}
 
 	@Test
@@ -89,7 +79,7 @@ class BannerMetaMockTest
 	{
 		meta.addPattern(new Pattern(DyeColor.BLUE, PatternType.STRIPE_BOTTOM));
 		assertEquals(1, meta.numberOfPatterns());
-		meta.addPattern(new Pattern(DyeColor.CYAN, PatternType.CIRCLE_MIDDLE));
+		meta.addPattern(new Pattern(DyeColor.CYAN, PatternType.CIRCLE));
 		assertEquals(2, meta.numberOfPatterns());
 
 		assertEquals(DyeColor.BLUE, meta.getPattern(0).getColor());
@@ -100,7 +90,7 @@ class BannerMetaMockTest
 	void getPattern_ReturnsCorrectPattern()
 	{
 		meta.addPattern(new Pattern(DyeColor.BLUE, PatternType.STRIPE_BOTTOM));
-		meta.addPattern(new Pattern(DyeColor.CYAN, PatternType.CIRCLE_MIDDLE));
+		meta.addPattern(new Pattern(DyeColor.CYAN, PatternType.CIRCLE));
 
 		assertEquals(DyeColor.BLUE, meta.getPattern(0).getColor());
 		assertEquals(DyeColor.CYAN, meta.getPattern(1).getColor());
@@ -110,7 +100,7 @@ class BannerMetaMockTest
 	void removePattern_RemovesCorrectPattern()
 	{
 		meta.addPattern(new Pattern(DyeColor.BLUE, PatternType.STRIPE_BOTTOM));
-		meta.addPattern(new Pattern(DyeColor.CYAN, PatternType.CIRCLE_MIDDLE));
+		meta.addPattern(new Pattern(DyeColor.CYAN, PatternType.CIRCLE));
 
 		meta.removePattern(0);
 
@@ -121,7 +111,7 @@ class BannerMetaMockTest
 	void setPattern_SetsCorrectPattern()
 	{
 		meta.addPattern(new Pattern(DyeColor.BLUE, PatternType.STRIPE_BOTTOM));
-		meta.addPattern(new Pattern(DyeColor.CYAN, PatternType.CIRCLE_MIDDLE));
+		meta.addPattern(new Pattern(DyeColor.CYAN, PatternType.CIRCLE));
 
 		meta.setPattern(0, new Pattern(DyeColor.RED, PatternType.STRIPE_TOP));
 
@@ -133,7 +123,7 @@ class BannerMetaMockTest
 	void numberOfPatterns_CorrectNumber()
 	{
 		meta.addPattern(new Pattern(DyeColor.BLUE, PatternType.STRIPE_BOTTOM));
-		meta.addPattern(new Pattern(DyeColor.CYAN, PatternType.CIRCLE_MIDDLE));
+		meta.addPattern(new Pattern(DyeColor.CYAN, PatternType.CIRCLE));
 
 		assertEquals(2, meta.numberOfPatterns());
 	}
@@ -162,12 +152,10 @@ class BannerMetaMockTest
 	@Test
 	void clone_CopiesValues()
 	{
-		meta.setBaseColor(DyeColor.CYAN);
 		meta.setPatterns(List.of(new Pattern(DyeColor.BLUE, PatternType.STRIPE_BOTTOM)));
 
 		BannerMetaMock cloned = meta.clone();
 
-		assertEquals(DyeColor.CYAN, cloned.getBaseColor());
 		assertEquals(1, cloned.getPatterns().size());
 		assertEquals(DyeColor.BLUE, cloned.getPatterns().get(0).getColor());
 		assertEquals(PatternType.STRIPE_BOTTOM, cloned.getPatterns().get(0).getPattern());

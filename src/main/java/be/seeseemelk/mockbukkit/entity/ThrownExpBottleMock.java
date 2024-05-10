@@ -45,7 +45,7 @@ public class ThrownExpBottleMock extends ThrowableProjectileMock implements Thro
 	@Override
 	public @NotNull EntityType getType()
 	{
-		return EntityType.THROWN_EXP_BOTTLE;
+		return EntityType.EXPERIENCE_BOTTLE;
 	}
 
 }

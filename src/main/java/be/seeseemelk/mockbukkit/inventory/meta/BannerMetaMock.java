@@ -17,7 +17,6 @@ import java.util.List;
 public class BannerMetaMock extends ItemMetaMock implements BannerMeta
 {
 
-	private @Nullable DyeColor baseColor;
 	private List<Pattern> patterns;
 
 	/**
@@ -39,20 +38,7 @@ public class BannerMetaMock extends ItemMetaMock implements BannerMeta
 	{
 		super(meta);
 
-		this.baseColor = meta.getBaseColor();
 		this.patterns = new ArrayList<>(meta.getPatterns());
-	}
-
-	@Override
-	public @Nullable DyeColor getBaseColor()
-	{
-		return this.baseColor;
-	}
-
-	@Override
-	public void setBaseColor(@Nullable DyeColor color)
-	{
-		this.baseColor = color;
 	}
 
 	@Override
@@ -102,7 +88,6 @@ public class BannerMetaMock extends ItemMetaMock implements BannerMeta
 	{
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((baseColor == null) ? 0 : baseColor.hashCode());
 		result = prime * result + (this.patterns.hashCode());
 		return result;
 	}
@@ -112,7 +97,7 @@ public class BannerMetaMock extends ItemMetaMock implements BannerMeta
 	{
 		if (!(obj instanceof BannerMeta meta))
 			return false;
-		return super.equals(obj) && this.baseColor == meta.getBaseColor() && this.patterns.equals(meta.getPatterns());
+		return super.equals(obj) && this.patterns.equals(meta.getPatterns());
 	}
 
 	@Override
@@ -120,7 +105,6 @@ public class BannerMetaMock extends ItemMetaMock implements BannerMeta
 	{
 		BannerMetaMock clone = (BannerMetaMock) super.clone();
 
-		clone.baseColor = this.baseColor;
 		clone.patterns = new ArrayList<>(this.patterns);
 
 		return clone;

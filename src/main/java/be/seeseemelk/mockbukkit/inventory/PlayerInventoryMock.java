@@ -349,6 +349,7 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 			case HEAD -> notNull(getHelmet());
 			case LEGS -> notNull(getLeggings());
 			case OFF_HAND -> getItemInOffHand();
+			case BODY -> throw new UnimplementedOperationException();
 		};
 	}
 

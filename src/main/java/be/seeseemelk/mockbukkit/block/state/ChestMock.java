@@ -112,6 +112,13 @@ public class ChestMock extends ContainerMock implements Chest
 	}
 
 	@Override
+	public boolean isBlocked()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	protected @NotNull InventoryMock createInventory()
 	{
 		return new ChestInventoryMock(this, 27);

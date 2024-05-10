@@ -12,6 +12,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
 import org.bukkit.entity.EntityCategory;
+import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.ApiStatus;
@@ -145,6 +146,13 @@ public class EnchantmentMock extends Enchantment
 
 	@Override
 	public float getDamageIncrease(int level, @NotNull EntityCategory entityCategory)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public float getDamageIncrease(int level, @NotNull EntityType entityType)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

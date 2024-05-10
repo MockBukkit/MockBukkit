@@ -37,43 +37,43 @@ class EnchantmentMockTest
 	@Test
 	void displayName_notNull()
 	{
-		assertNotNull(Enchantment.PROTECTION_ENVIRONMENTAL.displayName(1));
+		assertNotNull(Enchantment.PROTECTION.displayName(1));
 	}
 
 	@Test
 	void isTradeable()
 	{
-		assertTrue(Enchantment.PROTECTION_FALL.isTradeable());
+		assertTrue(Enchantment.FEATHER_FALLING.isTradeable());
 	}
 
 	@Test
 	void isDiscoverable()
 	{
-		assertTrue(Enchantment.PROTECTION_FALL.isDiscoverable());
+		assertTrue(Enchantment.FEATHER_FALLING.isDiscoverable());
 	}
 
 	@Test
 	void getMaxModifiedCost()
 	{
-		assertEquals(11, Enchantment.PROTECTION_FALL.getMaxModifiedCost(1));
+		assertEquals(11, Enchantment.FEATHER_FALLING.getMaxModifiedCost(1));
 	}
 
 	@Test
 	void getMinModifiedCost()
 	{
-		assertEquals(5, Enchantment.PROTECTION_FALL.getMinModifiedCost(1));
+		assertEquals(5, Enchantment.FEATHER_FALLING.getMinModifiedCost(1));
 	}
 
 	@Test
 	void getRarity()
 	{
-		assertNotNull(Enchantment.ARROW_DAMAGE.getRarity());
+		assertNotNull(Enchantment.POWER.getRarity());
 	}
 
 	@Test
 	void getName()
 	{
-		assertNotNull(Enchantment.PROTECTION_ENVIRONMENTAL.getName());
+		assertNotNull(Enchantment.PROTECTION.getName());
 	}
 
 	@Test
@@ -85,7 +85,7 @@ class EnchantmentMockTest
 	@Test
 	void getStartLeve()
 	{
-		assertEquals(1, Enchantment.DURABILITY.getStartLevel());
+		assertEquals(1, Enchantment.UNBREAKING.getStartLevel());
 	}
 
 	@Test
@@ -97,25 +97,25 @@ class EnchantmentMockTest
 	@Test
 	void isTreasure()
 	{
-		assertFalse(Enchantment.ARROW_FIRE.isTreasure());
+		assertFalse(Enchantment.FLAME.isTreasure());
 	}
 
 	@Test
 	void isCursed()
 	{
-		assertFalse(Enchantment.ARROW_FIRE.isCursed());
+		assertFalse(Enchantment.FLAME.isCursed());
 	}
 
 	@Test
 	void conflictsWith()
 	{
-		assertTrue(Enchantment.PROTECTION_FIRE.conflictsWith(Enchantment.PROTECTION_ENVIRONMENTAL));
+		assertTrue(Enchantment.FIRE_PROTECTION.conflictsWith(Enchantment.PROTECTION));
 	}
 
 
 	@Test
 	void conflictsWith_nullInput()
 	{
-		assertThrows(IllegalArgumentException.class, () -> Enchantment.PROTECTION_FIRE.conflictsWith(null));
+		assertThrows(IllegalArgumentException.class, () -> Enchantment.FIRE_PROTECTION.conflictsWith(null));
 	}
 }

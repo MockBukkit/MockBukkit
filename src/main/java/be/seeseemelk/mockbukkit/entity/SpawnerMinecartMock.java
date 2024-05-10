@@ -31,7 +31,7 @@ public class SpawnerMinecartMock extends MinecartMock implements SpawnerMinecart
 	@Override
 	public @NotNull EntityType getType()
 	{
-		return EntityType.MINECART_MOB_SPAWNER;
+		return EntityType.SPAWNER_MINECART;
 	}
 
 }

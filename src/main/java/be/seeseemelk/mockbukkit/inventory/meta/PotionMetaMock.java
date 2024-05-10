@@ -4,7 +4,6 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.collect.ImmutableList;
 import org.bukkit.Color;
 import org.bukkit.inventory.meta.PotionMeta;
-import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
@@ -25,7 +24,6 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 {
 
 	private @NotNull List<PotionEffect> effects = new ArrayList<>();
-	private @NotNull PotionData basePotionData = new PotionData(PotionType.UNCRAFTABLE);
 	private @Nullable Color color;
 
 	/**
@@ -46,7 +44,6 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 		super(meta);
 
 		this.effects = new ArrayList<>(meta.getCustomEffects());
-		this.basePotionData = meta.getBasePotionData();
 		this.color = meta.getColor();
 	}
 
@@ -56,7 +53,6 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + effects.hashCode();
-		result = prime * result + basePotionData.hashCode();
 		result = prime * result + (color == null ? 0 : color.hashCode());
 		return result;
 	}
@@ -77,8 +73,7 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 			return false;
 		}
 
-		return effects.equals(other.effects) && Objects.equals(color, other.color)
-				&& basePotionData.equals(other.basePotionData);
+		return effects.equals(other.effects) && Objects.equals(color, other.color);
 	}
 
 	@Override
@@ -195,20 +190,6 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	}
 
 	@Override
-	@Deprecated(since = "1.20")
-	public void setBasePotionData(@NotNull PotionData data)
-	{
-		this.basePotionData = new PotionData(data.getType(), data.isExtended(), data.isUpgraded());
-	}
-
-	@Override
-	@Deprecated(since = "1.20")
-	public @NotNull PotionData getBasePotionData()
-	{
-		return new PotionData(basePotionData.getType(), basePotionData.isExtended(), basePotionData.isUpgraded());
-	}
-
-	@Override
 	public void setBasePotionType(@NotNull PotionType type)
 	{
 		// TODO Auto-generated method stub
@@ -217,6 +198,13 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 
 	@Override
 	public @NotNull PotionType getBasePotionType()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean hasBasePotionType()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

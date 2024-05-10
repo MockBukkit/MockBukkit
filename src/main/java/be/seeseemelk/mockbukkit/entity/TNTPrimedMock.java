@@ -110,7 +110,7 @@ public class TNTPrimedMock extends EntityMock implements TNTPrimed
 	@Override
 	public @NotNull EntityType getType()
 	{
-		return EntityType.PRIMED_TNT;
+		return EntityType.TNT;
 	}
 
 	/**

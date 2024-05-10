@@ -7,7 +7,6 @@ import org.bukkit.Color;
 import org.bukkit.Particle;
 import org.bukkit.entity.AreaEffectCloud;
 import org.bukkit.entity.EntityType;
-import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
@@ -139,14 +138,14 @@ class AreaEffectCloudMockTest
 	@Test
 	void testGetParticle()
 	{
-		assertEquals(Particle.SPELL_MOB, areaEffectCloud.getParticle());
+		assertEquals(Particle.ENTITY_EFFECT, areaEffectCloud.getParticle());
 	}
 
 	@Test
 	void testSetParticle()
 	{
-		areaEffectCloud.setParticle(Particle.SPELL_WITCH);
-		assertEquals(Particle.SPELL_WITCH, areaEffectCloud.getParticle());
+		areaEffectCloud.setParticle(Particle.WITCH);
+		assertEquals(Particle.WITCH, areaEffectCloud.getParticle());
 	}
 
 	@Test
@@ -166,19 +165,6 @@ class AreaEffectCloudMockTest
 		areaEffectCloud.setParticle(Particle.CLOUD, null);
 		assertEquals(Particle.CLOUD, areaEffectCloud.getParticle());
 
-	}
-
-	@Test
-	void testGetBasePotionData()
-	{
-		assertEquals(new PotionData(PotionType.UNCRAFTABLE), areaEffectCloud.getBasePotionData());
-	}
-
-	@Test
-	void testSetBasePotionData()
-	{
-		areaEffectCloud.setBasePotionData(new PotionData(PotionType.INSTANT_HEAL));
-		assertEquals(new PotionData(PotionType.INSTANT_HEAL), areaEffectCloud.getBasePotionData());
 	}
 
 	@Test
@@ -225,7 +211,7 @@ class AreaEffectCloudMockTest
 		assertTrue(areaEffectCloud.getCustomEffects().isEmpty());
 		assertFalse(areaEffectCloud.hasCustomEffects());
 	}
-
+/*
 	@Test
 	void testHasCustomEffectWithBasePotionDataWithEffect()
 	{
@@ -262,7 +248,7 @@ class AreaEffectCloudMockTest
 		PotionEffect effect2 = new PotionEffect(PotionEffectType.HEAL, 1, 1);
 		assertFalse(areaEffectCloud.addCustomEffect(effect2, false));
 		assertSame(effect, areaEffectCloud.getCustomEffects().get(0));
-	}
+	}*/
 
 	@Test
 	void testRemoveCustomEffect()

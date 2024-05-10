@@ -7,7 +7,6 @@ import org.bukkit.Color;
 import org.bukkit.Particle;
 import org.bukkit.entity.AreaEffectCloud;
 import org.bukkit.entity.EntityType;
-import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
@@ -29,8 +28,7 @@ public class AreaEffectCloudMock extends EntityMock implements AreaEffectCloud
 	private float radius = 3.0f;
 	private float radiusOnUse = 0.0f;
 	private float radiusPerTick = 0.0f;
-	private Particle particle = Particle.SPELL_MOB;
-	private PotionData basePotionData = new PotionData(PotionType.UNCRAFTABLE);
+	private Particle particle = Particle.ENTITY_EFFECT;
 	private final List<PotionEffect> customEffects = new ArrayList<>();
 	private int color = 0;
 	private ProjectileSource source = null;
@@ -152,19 +150,6 @@ public class AreaEffectCloudMock extends EntityMock implements AreaEffectCloud
 	}
 
 	@Override
-	public void setBasePotionData(@NotNull PotionData data)
-	{
-		Preconditions.checkNotNull(data, "PotionData cannot be null");
-		this.basePotionData = data;
-	}
-
-	@Override
-	public @NotNull PotionData getBasePotionData()
-	{
-		return this.basePotionData;
-	}
-
-	@Override
 	public void setBasePotionType(@NotNull PotionType type)
 	{
 		//TODO Auto-generated method stub
@@ -181,7 +166,7 @@ public class AreaEffectCloudMock extends EntityMock implements AreaEffectCloud
 	@Override
 	public boolean hasCustomEffects()
 	{
-		PotionEffectType effectType = this.basePotionData.getType().getEffectType();
+/*		PotionEffectType effectType = this.basePotionData.getType().getEffectType();
 		if (effectType != null)
 		{
 			return customEffects.stream().anyMatch(effect -> !effect.getType().equals(effectType));
@@ -189,7 +174,8 @@ public class AreaEffectCloudMock extends EntityMock implements AreaEffectCloud
 		else
 		{
 			return !this.customEffects.isEmpty();
-		}
+		}*/
+		return false;
 	}
 
 	@Override
