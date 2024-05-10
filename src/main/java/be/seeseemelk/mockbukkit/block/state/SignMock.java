@@ -287,7 +287,7 @@ public class SignMock extends TileStateMock implements Sign
 		}
 
 		@Override
-		public void setColor(DyeColor color)
+		public void setColor(@NotNull DyeColor color)
 		{
 			Preconditions.checkNotNull(color, "Color cannot be null!");
 			this.color = color;
