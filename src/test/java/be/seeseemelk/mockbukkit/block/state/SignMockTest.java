@@ -10,6 +10,7 @@ import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.sign.Side;
+import org.bukkit.block.sign.SignSide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -212,10 +213,9 @@ class SignMockTest
 	@ParameterizedTest
 	@EnumSource(Side.class)
 	void testSetInvalidLineNumber(Side side) {
-		assertThrows(IndexOutOfBoundsException.class, () ->
-				sign.getSide(side).line(-1, Component.text("Hello")));
-		assertThrows(IndexOutOfBoundsException.class, () ->
-				sign.getSide(side).line(4, Component.text("Hello")));
+		SignSide signSide = sign.getSide(side);
+		assertThrows(IndexOutOfBoundsException.class, () -> signSide.line(-1, Component.text("Hello")));
+		assertThrows(IndexOutOfBoundsException.class, () -> signSide.line(4, Component.text("Hello")));
 	}
 
 	@ParameterizedTest
