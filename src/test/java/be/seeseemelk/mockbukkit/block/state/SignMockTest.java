@@ -214,8 +214,9 @@ class SignMockTest
 	@EnumSource(Side.class)
 	void testSetInvalidLineNumber(Side side) {
 		SignSide signSide = sign.getSide(side);
-		assertThrows(IndexOutOfBoundsException.class, () -> signSide.line(-1, Component.text("Hello")));
-		assertThrows(IndexOutOfBoundsException.class, () -> signSide.line(4, Component.text("Hello")));
+		Component text = Component.text("Hello");
+		assertThrows(IndexOutOfBoundsException.class, () -> signSide.line(-1, text));
+		assertThrows(IndexOutOfBoundsException.class, () -> signSide.line(4, text));
 	}
 
 	@ParameterizedTest
