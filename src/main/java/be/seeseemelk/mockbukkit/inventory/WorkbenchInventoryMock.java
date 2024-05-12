@@ -10,6 +10,8 @@ import org.bukkit.inventory.Recipe;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
+
 /**
  * Mock implementation of a {@link CraftingInventory}.
  *
@@ -54,6 +56,63 @@ public class WorkbenchInventoryMock extends InventoryMock implements CraftingInv
 		Preconditions.checkNotNull(contents);
 		Preconditions.checkArgument(contents.length <= super.getSize(), "Invalid inventory size. Expected " + super.getSize() + " or less, got " + contents.length);
 		super.setContents(contents);
+	}
+
+	@Override
+	public ItemStack @NotNull [] getContents()
+	{
+		ItemStack[] contents = new ItemStack[this.getSize()];
+		contents[0] = result;
+		for (int i = 1; i < getMatrix().length + 1; i++)
+		{
+			contents[i] = getMatrix()[i];
+		}
+		return contents;
+	}
+
+	@Override
+	public void setContents(ItemStack @NotNull [] items)
+	{
+		Preconditions.checkArgument(items.length <= this.getSize(), "Invalid inventory size (%s); expected %s or less", items.length, this.getSize());
+
+		this.setResult(items.length != 0 ? items[0] : null);
+		this.setMatrix(Arrays.copyOfRange(items, 1, items.length));
+	}
+
+	@Override
+	public ItemStack getItem(int index)
+	{
+		Preconditions.checkArgument(index >= 0 && index < getContents().length, "Index should be in range (inclusive) [%s,%s] but was %s.".formatted(0, getContents().length, index));
+		// crafting result clicked
+		if (index == 0)
+		{
+			return getResult();
+		}
+		// matrix clicked
+		else
+		{
+			return getContents()[index - 1];
+		}
+	}
+
+	@Override
+	public void setItem(int index, @Nullable ItemStack item)
+	{
+		if (index == 0)
+		{
+			setResult(item);
+		}
+		else
+		{
+			getMatrix()[index - 1] = item;
+		}
+	}
+
+	@Override
+	public int getSize()
+	{
+		// matrix size + result slot
+		return super.getSize() + 1;
 	}
 
 	@Override
