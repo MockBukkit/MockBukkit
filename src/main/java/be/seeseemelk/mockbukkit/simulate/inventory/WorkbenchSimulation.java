@@ -6,7 +6,7 @@ import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.jetbrains.annotations.NotNull;
 
-public class WorkbenchSimulation extends InventorySimulation implements Matrixable, Resultable
+public class WorkbenchSimulation extends InventorySimulation implements InventoryMatrixSimulation, InventoryResultSimulation
 {
 
 	private final @NotNull WorkbenchInventoryMock workbenchInventoryMock;

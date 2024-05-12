@@ -4,7 +4,7 @@ import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.jetbrains.annotations.NotNull;
 
-public interface Resultable
+public interface InventoryResultSimulation
 {
 
 	default InventoryClickEvent simulateResultSlotClick()

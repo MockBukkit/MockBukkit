@@ -4,7 +4,7 @@ import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.jetbrains.annotations.NotNull;
 
-public interface Matrixable
+public interface InventoryMatrixSimulation
 {
 
 	default InventoryClickEvent simulateMatrixSlotClick(int slot)
