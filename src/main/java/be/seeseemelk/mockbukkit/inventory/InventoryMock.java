@@ -558,9 +558,7 @@ public class InventoryMock implements Inventory
 	@Override
 	public int firstEmpty()
 	{
-		// Explicitly use items.length and not getSize() because the latter will vary if a subclass has additional slots.
-		// This means firstEmpty only checks storage slots (not result slots).
-		for (int i = 0; i < this.items.length; i++)
+		for (int i = 0; i < getSize(); i++)
 		{
 			if (items[i] == null || items[i].getType() == Material.AIR)
 			{
@@ -641,9 +639,7 @@ public class InventoryMock implements Inventory
 	@Override
 	public boolean isEmpty()
 	{
-		// Explicitly use items.length and not getSize() because the latter will vary if a subclass has additional slots.
-		// This means isEmpty only checks storage slots (not result slots).
-		for (int i = 0; i < this.items.length; i++)
+		for (int i = 0; i < getSize(); i++)
 		{
 			if (items[i] != null && items[i].getType() != Material.AIR)
 			{
