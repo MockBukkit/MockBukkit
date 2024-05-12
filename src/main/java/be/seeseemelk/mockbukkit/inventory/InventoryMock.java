@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.inventory;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
@@ -33,7 +34,7 @@ public class InventoryMock implements Inventory
 
 	private static final int MAX_STACK_SIZE = 64;
 
-	private final ItemStack @NotNull [] items;
+	protected final ItemStack @NotNull [] items;
 	private final @Nullable InventoryHolder holder;
 	private final @NotNull InventoryType type;
 
@@ -73,7 +74,17 @@ public class InventoryMock implements Inventory
 		this.holder = holder;
 		this.type = type;
 
-		items = new ItemStack[type.getDefaultSize()];
+		items = new ItemStack[inventoryType2StorageContentsSize(type)];
+	}
+
+	private static int inventoryType2StorageContentsSize(InventoryType type)
+	{
+		return switch (type)
+		{
+			// workbench has 1 result slot
+			case WORKBENCH -> type.getDefaultSize() - 1;
+			default -> type.getDefaultSize();
+		};
 	}
 
 	/**
@@ -234,14 +245,14 @@ public class InventoryMock implements Inventory
 	{
 		final int itemMaxStackSize = Math.min(item.getMaxStackSize(), this.maxStackSize);
 		item = item.clone();
-		for (int i = 0; i < items.length; i++)
+		for (int i = 0; i < this.getSize(); i++)
 		{
 			ItemStack oItem = items[i];
 			if (oItem == null)
 			{
 				int toAdd = Math.min(item.getAmount(), itemMaxStackSize);
-				items[i] = item.clone();
-				items[i].setAmount(toAdd);
+				this.setItem(i, item);
+				this.getItem(i).setAmount(toAdd);
 				item.setAmount(item.getAmount() - toAdd);
 			}
 			else
@@ -289,15 +300,15 @@ public class InventoryMock implements Inventory
 	@Override
 	public void setContents(ItemStack @NotNull [] items)
 	{
-		for (int i = 0; i < getSize(); i++)
+		for (int i = 0; i < this.getSize(); i++)
 		{
 			if (i < items.length && items[i] != null)
 			{
-				this.items[i] = items[i].clone();
+				this.setItem(i, items[i]);
 			}
 			else
 			{
-				this.items[i] = null;
+				this.setItem(i, null);
 			}
 		}
 	}
@@ -547,7 +558,9 @@ public class InventoryMock implements Inventory
 	@Override
 	public int firstEmpty()
 	{
-		for (int i = 0; i < getSize(); i++)
+		// Explicitly use items.length and not getSize() because the latter will vary if a subclass has additional slots.
+		// This means firstEmpty only checks storage slots (not result slots).
+		for (int i = 0; i < this.items.length; i++)
 		{
 			if (items[i] == null || items[i].getType() == Material.AIR)
 			{
@@ -628,7 +641,9 @@ public class InventoryMock implements Inventory
 	@Override
 	public boolean isEmpty()
 	{
-		for (int i = 0; i < getSize(); i++)
+		// Explicitly use items.length and not getSize() because the latter will vary if a subclass has additional slots.
+		// This means isEmpty only checks storage slots (not result slots).
+		for (int i = 0; i < this.items.length; i++)
 		{
 			if (items[i] != null && items[i].getType() != Material.AIR)
 			{

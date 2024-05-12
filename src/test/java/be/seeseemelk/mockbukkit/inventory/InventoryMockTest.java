@@ -75,7 +75,7 @@ class InventoryMockTest
 	@Test
 	void constructor_SetsSizeTwoParamConstructor()
 	{
-		assertEquals(10, new SimpleInventoryMock(null, InventoryType.WORKBENCH).getSize());
+		assertEquals(10, new WorkbenchInventoryMock(null).getSize());
 	}
 
 	@Test

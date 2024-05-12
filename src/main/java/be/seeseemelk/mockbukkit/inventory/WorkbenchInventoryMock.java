@@ -41,7 +41,7 @@ public class WorkbenchInventoryMock extends InventoryMock implements CraftingInv
 	@Override
 	public @Nullable ItemStack @NotNull [] getMatrix()
 	{
-		return this.getContents();
+		return items;
 	}
 
 	@Override
@@ -55,7 +55,18 @@ public class WorkbenchInventoryMock extends InventoryMock implements CraftingInv
 	{
 		Preconditions.checkNotNull(contents);
 		Preconditions.checkArgument(contents.length <= super.getSize(), "Invalid inventory size. Expected " + super.getSize() + " or less, got " + contents.length);
-		super.setContents(contents);
+		for (int i = 0; i < super.items.length; i++)
+		{
+			if (i < contents.length && contents[i] != null)
+			{
+
+				super.items[i] = contents[i].clone();
+			}
+			else
+			{
+				super.items[i] = null;
+			}
+		}
 	}
 
 	@Override
@@ -63,9 +74,9 @@ public class WorkbenchInventoryMock extends InventoryMock implements CraftingInv
 	{
 		ItemStack[] contents = new ItemStack[this.getSize()];
 		contents[0] = result;
-		for (int i = 1; i < getMatrix().length + 1; i++)
+		for (int i = 0; i < getMatrix().length; i++)
 		{
-			contents[i] = getMatrix()[i];
+			contents[i + 1] = getMatrix()[i];
 		}
 		return contents;
 	}
@@ -91,7 +102,7 @@ public class WorkbenchInventoryMock extends InventoryMock implements CraftingInv
 		// matrix clicked
 		else
 		{
-			return getContents()[index - 1];
+			return getMatrix()[index - 1];
 		}
 	}
 
