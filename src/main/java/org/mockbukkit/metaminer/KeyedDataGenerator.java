@@ -142,7 +142,6 @@ public class KeyedDataGenerator implements DataGenerator
 	 */
 	private void addEnchantmentProperties(JsonObject jsonObject, Enchantment enchantment)
 	{
-		jsonObject.add("itemTarget", new JsonPrimitive(enchantment.getItemTarget().toString()));
 		jsonObject.add("treasure", new JsonPrimitive(enchantment.isTreasure()));
 		jsonObject.add("cursed", new JsonPrimitive(enchantment.isCursed()));
 		jsonObject.add("maxLevel", new JsonPrimitive(enchantment.getMaxLevel()));
@@ -174,7 +173,6 @@ public class KeyedDataGenerator implements DataGenerator
 		jsonObject.add("maxModifiedCosts", maxModifiedCosts);
 		jsonObject.add("tradeable", new JsonPrimitive(enchantment.isTradeable()));
 		jsonObject.add("discoverable", new JsonPrimitive(enchantment.isDiscoverable()));
-		jsonObject.add("rarity", new JsonPrimitive(enchantment.getRarity().toString()));
 
 		JsonArray conflicts = new JsonArray();
 		for (Enchantment otherEnchantment : Enchantment.values())

@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "org.mockbukkit"
-version = "1.1-SNAPSHOT"
+version = "1.2-SNAPSHOT"
 
 repositories {
 	mavenCentral();
@@ -11,12 +11,16 @@ repositories {
 }
 
 dependencies {
-	implementation("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT")
+	implementation("io.papermc.paper:paper-api:1.20.6-R0.1-SNAPSHOT")
 }
 
 tasks {
 	compileJava {
 		options.encoding = Charsets.UTF_8.name()
-		options.release.set(17)
+		options.release.set(21)
+	}
+
+	processResources {
+		filesMatching("**/plugin.yml") { expand(project.properties) }
 	}
 }
