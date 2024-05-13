@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.inventory;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
+import org.apache.commons.lang3.SerializationUtils;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.InventoryHolder;
@@ -35,19 +36,19 @@ public class WorkbenchInventoryMock extends InventoryMock implements CraftingInv
 	@Override
 	public @Nullable ItemStack getResult()
 	{
-		return this.result;
+		return this.result != null ? this.result.clone() : null;
 	}
 
 	@Override
 	public @Nullable ItemStack @NotNull [] getMatrix()
 	{
-		return items;
+		return cloneArray(items);
 	}
 
 	@Override
 	public void setResult(@Nullable ItemStack newResult)
 	{
-		this.result = newResult;
+		this.result = newResult != null ? newResult.clone() : null;
 	}
 
 	@Override
@@ -76,7 +77,7 @@ public class WorkbenchInventoryMock extends InventoryMock implements CraftingInv
 		contents[0] = result;
 		for (int i = 0; i < getMatrix().length; i++)
 		{
-			contents[i + 1] = getMatrix()[i];
+			contents[i + 1] = getMatrix()[i] != null ? getMatrix()[i].clone() : null;
 		}
 		return contents;
 	}
@@ -115,7 +116,7 @@ public class WorkbenchInventoryMock extends InventoryMock implements CraftingInv
 		}
 		else
 		{
-			getMatrix()[index - 1] = item;
+			items[index - 1] = item;
 		}
 	}
 

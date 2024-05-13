@@ -60,6 +60,11 @@ public class InventoryMock implements Inventory
 		items = new ItemStack[size];
 	}
 
+	protected ItemStack[] cloneArray(ItemStack[] toClone)
+	{
+		return Arrays.stream(toClone).map(itemStack -> itemStack != null ? itemStack.clone() : null).toArray(ItemStack[]::new);
+	}
+
 	/**
 	 * Constructs a new {@link InventoryMock} for the given holder with a specific {@link InventoryType}.
 	 * The size will be {@link InventoryType#getDefaultSize()}.
@@ -225,13 +230,13 @@ public class InventoryMock implements Inventory
 	@Override
 	public ItemStack getItem(int index)
 	{
-		return items[index];
+		return items[index] != null ? items[index].clone() : null;
 	}
 
 	@Override
 	public void setItem(int index, @Nullable ItemStack item)
 	{
-		items[index] = item == null ? null : item.clone();
+		items[index] = item != null ? item.clone() : null;
 	}
 
 	/**
@@ -251,8 +256,9 @@ public class InventoryMock implements Inventory
 			if (oItem == null)
 			{
 				int toAdd = Math.min(item.getAmount(), itemMaxStackSize);
-				this.setItem(i, item);
-				this.getItem(i).setAmount(toAdd);
+				ItemStack itemToAdd = item.clone();
+				itemToAdd.setAmount(toAdd);
+				this.setItem(i, itemToAdd);
 				item.setAmount(item.getAmount() - toAdd);
 			}
 			else
@@ -294,7 +300,7 @@ public class InventoryMock implements Inventory
 	@Override
 	public ItemStack @NotNull [] getContents()
 	{
-		return items;
+		return cloneArray(items);
 	}
 
 	@Override
