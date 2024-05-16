@@ -52,6 +52,7 @@ import com.destroystokyo.paper.event.player.PlayerConnectionCloseEvent;
 import com.destroystokyo.paper.event.server.WhitelistToggleEvent;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Maps;
 import io.papermc.paper.ban.BanListType;
 import io.papermc.paper.datapack.DatapackManager;
 import io.papermc.paper.math.Position;
@@ -188,7 +189,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private final FoliaAsyncScheduler foliaAsyncScheduler = new FoliaAsyncScheduler(scheduler);
 	private final ServicesManagerMock servicesManager = new ServicesManagerMock();
 	private final MockPlayerList playerList = new MockPlayerList();
-	private final MockCommandMap commandMap = new MockCommandMap(this);
+	private final MockCommandMap commandMap = new MockCommandMap(this, new HashMap<>());
 	private final HelpMapMock helpMap = new HelpMapMock();
 	private final StandardMessenger messenger = new StandardMessenger();
 	private final Map<Integer, MapViewMock> mapViews = new HashMap<>();

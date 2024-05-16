@@ -7,6 +7,7 @@ import org.bukkit.Color;
 import org.bukkit.Particle;
 import org.bukkit.entity.AreaEffectCloud;
 import org.bukkit.entity.EntityType;
+import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
@@ -28,6 +29,7 @@ public class AreaEffectCloudMock extends EntityMock implements AreaEffectCloud
 	private float radius = 3.0f;
 	private float radiusOnUse = 0.0f;
 	private float radiusPerTick = 0.0f;
+	private PotionData basePotionData = new PotionData(PotionType.AWKWARD);
 	private Particle particle = Particle.ENTITY_EFFECT;
 	private final List<PotionEffect> customEffects = new ArrayList<>();
 	private int color = 0;
@@ -147,6 +149,18 @@ public class AreaEffectCloudMock extends EntityMock implements AreaEffectCloud
 		Preconditions.checkNotNull(particle, "Particle cannot be null");
 		//We ignore the data for now since we don't have a way to process it
 		this.particle = particle;
+	}
+
+	@Override
+	public void setBasePotionData(@Nullable PotionData data)
+	{
+		this.basePotionData = data;
+	}
+
+	@Override
+	public @Nullable PotionData getBasePotionData()
+	{
+		return this.basePotionData;
 	}
 
 	@Override

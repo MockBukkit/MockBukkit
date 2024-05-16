@@ -63,6 +63,8 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.block.sign.Side;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationAbandonedEvent;
+import org.bukkit.damage.DamageSource;
+import org.bukkit.damage.DamageType;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
@@ -2330,7 +2332,7 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 		this.health = 0;
 
 		List<ItemStack> drops = new ArrayList<>(Arrays.asList(getInventory().getContents()));
-		PlayerDeathEvent event = new PlayerDeathEvent(this, drops, 0, getName() + " got killed");
+		PlayerDeathEvent event = new PlayerDeathEvent(this, DamageSource.builder(DamageType.GENERIC).build(), drops, 0, getName() + " got killed");
 		Bukkit.getPluginManager().callEvent(event);
 
 		// Terminate any InventoryView and the cursor item

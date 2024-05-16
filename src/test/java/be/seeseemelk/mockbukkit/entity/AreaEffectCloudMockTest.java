@@ -7,6 +7,7 @@ import org.bukkit.Color;
 import org.bukkit.Particle;
 import org.bukkit.entity.AreaEffectCloud;
 import org.bukkit.entity.EntityType;
+import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
@@ -214,7 +215,7 @@ class AreaEffectCloudMockTest
 	@Test
 	void testHasCustomEffectWithBasePotionDataWithEffect()
 	{
-		areaEffectCloud.setBasePotionData(new PotionData(PotionType.INSTANT_HEAL));
+		areaEffectCloud.setBasePotionData(new PotionData(PotionType.HEALING));
 		PotionEffect effect = new PotionEffect(PotionEffectType.ABSORPTION, 1, 1);
 		assertTrue(areaEffectCloud.addCustomEffect(effect, true));
 	}
@@ -222,18 +223,18 @@ class AreaEffectCloudMockTest
 	@Test
 	void testHasCustomEffectWithBasePotionDataWithoutEffectAndMatchingInCustom()
 	{
-		areaEffectCloud.setBasePotionData(new PotionData(PotionType.INSTANT_HEAL));
-		PotionEffect effect = new PotionEffect(PotionEffectType.HEAL, 1, 1);
+		areaEffectCloud.setBasePotionData(new PotionData(PotionType.HEALING));
+		PotionEffect effect = new PotionEffect(PotionEffectType.INSTANT_HEALTH, 1, 1);
 		assertFalse(areaEffectCloud.hasCustomEffects());
 	}
 
 	@Test
 	void testAddCustomEffectWithBasePotionDataWithEffect()
 	{
-		areaEffectCloud.setBasePotionData(new PotionData(PotionType.INSTANT_HEAL));
-		PotionEffect effect = new PotionEffect(PotionEffectType.HEAL, 1, 1);
+		areaEffectCloud.setBasePotionData(new PotionData(PotionType.HEALING));
+		PotionEffect effect = new PotionEffect(PotionEffectType.INSTANT_HEALTH, 1, 1);
 		assertTrue(areaEffectCloud.addCustomEffect(effect, true));
-		PotionEffect effect2 = new PotionEffect(PotionEffectType.HEAL, 1, 1);
+		PotionEffect effect2 = new PotionEffect(PotionEffectType.INSTANT_HEALTH, 1, 1);
 		assertTrue(areaEffectCloud.addCustomEffect(effect2, true));
 		assertNotSame(effect, areaEffectCloud.getCustomEffects().get(0));
 	}
@@ -241,10 +242,10 @@ class AreaEffectCloudMockTest
 	@Test
 	void testAddCustomEffectWithBasePotionDataWithEffectOverrideFalse()
 	{
-		areaEffectCloud.setBasePotionData(new PotionData(PotionType.INSTANT_HEAL));
-		PotionEffect effect = new PotionEffect(PotionEffectType.HEAL, 1, 1);
+		areaEffectCloud.setBasePotionData(new PotionData(PotionType.HEALING));
+		PotionEffect effect = new PotionEffect(PotionEffectType.INSTANT_HEALTH, 1, 1);
 		assertTrue(areaEffectCloud.addCustomEffect(effect, true));
-		PotionEffect effect2 = new PotionEffect(PotionEffectType.HEAL, 1, 1);
+		PotionEffect effect2 = new PotionEffect(PotionEffectType.INSTANT_HEALTH, 1, 1);
 		assertFalse(areaEffectCloud.addCustomEffect(effect2, false));
 		assertSame(effect, areaEffectCloud.getCustomEffects().get(0));
 	}

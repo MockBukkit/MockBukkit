@@ -161,7 +161,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 
 		this.health = 0;
 
-		EntityDeathEvent event = new EntityDeathEvent(this, new ArrayList<>(), 0);
+		EntityDeathEvent event = new EntityDeathEvent(this, DamageSource.builder(DamageType.GENERIC).build() , new ArrayList<>());
 		Bukkit.getPluginManager().callEvent(event);
 
 		this.alive = false;

@@ -806,6 +806,13 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
+	public @NotNull String getAsComponentString()
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	@SuppressWarnings("deprecation")
 	public @NotNull CustomItemTagContainer getCustomTagContainer()
 	{

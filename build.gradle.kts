@@ -17,9 +17,6 @@ repositories {
 	maven("https://hub.spigotmc.org/nexus/content/repositories/public/")
 	maven("https://repo.md-5.net/content/groups/public/")
 	maven("https://repo.papermc.io/repository/maven-public/")
-	maven(url = "https://s01.oss.sonatype.org/content/repositories/snapshots/") {
-		name = "sonatype-oss-snapshots"
-	}
 }
 
 dependencies {

@@ -5,6 +5,7 @@ import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.Color;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.EntityType;
+import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
@@ -26,6 +27,20 @@ public class ArrowMock extends AbstractArrowMock implements Arrow
 	public ArrowMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
+	}
+
+	@Override
+	public void setBasePotionData(@Nullable PotionData data)
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Nullable PotionData getBasePotionData()
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

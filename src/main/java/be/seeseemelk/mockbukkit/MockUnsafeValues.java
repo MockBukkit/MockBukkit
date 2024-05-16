@@ -21,6 +21,7 @@ import org.bukkit.FeatureFlag;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.RegionAccessor;
+import org.bukkit.Registry;
 import org.bukkit.Statistic;
 import org.bukkit.Tag;
 import org.bukkit.UnsafeValues;
@@ -46,6 +47,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionType;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -442,6 +444,21 @@ public class MockUnsafeValues implements UnsafeValues
 	public DamageSource.@NotNull Builder createDamageSourceBuilder(@NotNull DamageType damageType)
 	{
 		return new DamageSourceBuilderMock(damageType);
+	}
+
+	@Override
+	@ApiStatus.Internal
+	public String get(Class<?> aClass, String s)
+	{
+			// TODO Auto-generated method stub
+			throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public <B extends org.bukkit.Keyed> B get(Registry<B> registry, NamespacedKey namespacedKey)
+	{
+			// TODO Auto-generated method stub
+			throw new UnimplementedOperationException();
 	}
 
 	@Override
