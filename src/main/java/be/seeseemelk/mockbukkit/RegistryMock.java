@@ -12,7 +12,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import io.papermc.paper.world.structure.ConfiguredStructure;
 import org.bukkit.GameEvent;
 import org.bukkit.Keyed;
 import org.bukkit.MusicInstrument;
@@ -32,15 +31,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-import java.lang.reflect.ParameterizedType;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
@@ -55,7 +49,7 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 	private JsonArray keyedData;
 	private Function<JsonObject, T> constructor;
 
-	RegistryMock(Class<T> tClass)
+	public RegistryMock(Class<T> tClass)
 	{
 		try
 		{
@@ -125,76 +119,6 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		{
 			throw new UnimplementedOperationException();
 		}
-	}
-
-	public static <T extends Keyed> Registry<?> createRegistry(Class<T> tClass)
-	{
-		if (tClass == ConfiguredStructure.class)
-		{
-			return new Registry<T>()
-			{
-				@Override
-				public @Nullable T get(@NotNull NamespacedKey key)
-				{
-					throw new UnimplementedOperationException("Registry for type " + tClass + " not implemented");
-				}
-
-				@Override
-				public @NotNull Stream<T> stream()
-				{
-					throw new UnimplementedOperationException("Registry for type " + tClass + " not implemented");
-				}
-
-				@NotNull
-				@Override
-				public Iterator<T> iterator()
-				{
-					throw new UnimplementedOperationException("Registry for type " + tClass + " not implemented");
-				}
-			};
-		}
-		if (getOutlierKeyedClasses().contains(tClass))
-		{
-			return new RegistryMock<>(tClass);
-		}
-
-		return Stream.of(Registry.class.getDeclaredFields())
-				.filter(a -> Registry.class.isAssignableFrom(a.getType()))
-				.filter(a -> Modifier.isPublic(a.getModifiers()))
-				.filter(a -> Modifier.isStatic(a.getModifiers()))
-				.filter(a -> genericTypeMatches(a, tClass))
-				.map(RegistryMock::getValue)
-				.filter(Objects::nonNull)
-				.findAny()
-				.orElseThrow(() -> new UnimplementedOperationException("Could not find registry for " + tClass.getSimpleName()));
-	}
-
-	private static boolean genericTypeMatches(Field a, Class<?> clazz)
-	{
-		if (a.getGenericType() instanceof ParameterizedType type)
-		{
-			return type.getActualTypeArguments()[0] == clazz;
-		}
-		return false;
-	}
-
-	private static Registry<?> getValue(Field a)
-	{
-		try
-		{
-			return (Registry<?>) a.get(null);
-		}
-		catch (IllegalAccessException e)
-		{
-			throw new ReflectionAccessException("Could not access field " + a.getDeclaringClass().getSimpleName() + "." + a.getName());
-		}
-	}
-
-	private static List<Class<? extends Keyed>> getOutlierKeyedClasses()
-	{
-		return List.of(Structure.class, PotionEffectType.class,
-				StructureType.class, TrimMaterial.class, TrimPattern.class,
-				MusicInstrument.class, GameEvent.class, Enchantment.class, DamageType.class);
 	}
 
 	@Override
