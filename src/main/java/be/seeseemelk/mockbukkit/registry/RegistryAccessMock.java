@@ -4,6 +4,8 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ReflectionAccessException;
 import be.seeseemelk.mockbukkit.RegistryMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import io.papermc.paper.registry.RegistryAccess;
@@ -42,7 +44,7 @@ public class RegistryAccessMock implements RegistryAccess
 {
 
 	private final Map<RegistryKey<?>, Registry<?>> registries = new HashMap();
-	private static final Map<Class<?>, RegistryKey<?>> CLASS_TO_KEY_MAP = createClassToKeyConversions();
+	private static BiMap<RegistryKey<?>, Class<?>> CLASS_TO_KEY_MAP;
 
 
 	@Override
@@ -58,26 +60,36 @@ public class RegistryAccessMock implements RegistryAccess
 
 	private <T extends Keyed> RegistryKey<T> determineRegistryKeyFromClass(@NotNull Class<T> type)
 	{
+		if (CLASS_TO_KEY_MAP == null)
+		{
+			CLASS_TO_KEY_MAP = createClassToKeyConversions();
+		}
+
 		if (type == ConfiguredStructure.class)
 		{
 			// Too much of a hassle to fix this, would require changing the access on a class as RegistryKey is a sealed class
 			// Not possible to Mock it
 			throw new UnimplementedOperationException();
 		}
-		return (RegistryKey<T>) CLASS_TO_KEY_MAP.get(type);
+		return (RegistryKey<T>) CLASS_TO_KEY_MAP.inverse().get(type);
 	}
 
 	@Override
 	public @NotNull <T extends Keyed> Registry<T> getRegistry(@NotNull RegistryKey<T> registryKey)
 	{
+		if (CLASS_TO_KEY_MAP == null)
+		{
+			CLASS_TO_KEY_MAP = createClassToKeyConversions();
+		}
+
 		if (registries.containsKey(registryKey))
 		{
 			return (Registry<T>) registries.get(registryKey);
 		}
-		return (Registry<T>) createRegistry(registryKey);
+		return (Registry<T>) createRegistry((Class<T>) CLASS_TO_KEY_MAP.get(registryKey));
 	}
 
-	public static <T extends Keyed> Registry<?> createRegistry(Class<T> tClass)
+	private static <T extends Keyed> Registry<?> createRegistry(Class<T> tClass)
 	{
 		if (tClass == ConfiguredStructure.class)
 		{
@@ -151,10 +163,10 @@ public class RegistryAccessMock implements RegistryAccess
 	}
 
 
-	private static Map<Class<?>, RegistryKey<?>> createClassToKeyConversions()
+	private static BiMap<RegistryKey<?>, Class<?>> createClassToKeyConversions()
 	{
 		String fileName = "/registries/registry_key_class_relation.json";
-		Map<Class<?>, RegistryKey<?>> output = new HashMap<>();
+		BiMap<RegistryKey<?>, Class<?>> output = HashBiMap.create();
 		try (InputStream inputStream = MockBukkit.class.getResourceAsStream(fileName))
 		{
 			if (inputStream == null)
@@ -165,8 +177,8 @@ public class RegistryAccessMock implements RegistryAccess
 			for (RegistryKey<?> registryKey : getAllKeys())
 			{
 				String className = object.get(registryKey.key().asString()).getAsString();
-				Class<?> type = Class.forName(className);
-				output.put(type, registryKey);
+				Class<?> type = RegistryAccessMock.class.getClassLoader().loadClass(className);
+				output.put(registryKey, type);
 			}
 		}
 		catch (IOException | ClassNotFoundException e)

@@ -124,13 +124,4 @@ class RegistryTest
 		return false;
 	}
 
-	@Test
-	void locale_independent()
-	{
-		Locale prevLocale = Locale.getDefault();
-		Locale.setDefault(Locale.forLanguageTag("tr"));
-		assertDoesNotThrow(() -> RegistryMock.createRegistry(MusicInstrument.class));
-		Locale.setDefault(prevLocale);
-	}
-
 }

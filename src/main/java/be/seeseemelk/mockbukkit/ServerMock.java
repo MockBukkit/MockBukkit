@@ -52,10 +52,10 @@ import com.destroystokyo.paper.event.player.PlayerConnectionCloseEvent;
 import com.destroystokyo.paper.event.server.WhitelistToggleEvent;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.google.common.base.Preconditions;
-import com.google.common.collect.Maps;
 import io.papermc.paper.ban.BanListType;
 import io.papermc.paper.datapack.DatapackManager;
 import io.papermc.paper.math.Position;
+import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.threadedregions.scheduler.AsyncScheduler;
 import io.papermc.paper.threadedregions.scheduler.GlobalRegionScheduler;
 import io.papermc.paper.threadedregions.scheduler.RegionScheduler;
@@ -206,7 +206,6 @@ public class ServerMock extends Server.Spigot implements Server
 	private final @NotNull Set<OfflinePlayer> whitelistedPlayers = new LinkedHashSet<>();
 
 	private final @NotNull ServerConfiguration serverConfiguration = new ServerConfiguration();
-	private final Map<Class<?>, Registry<?>> registry = new HashMap<>();
 
 	/**
 	 * Constructs a new ServerMock and sets it up.
@@ -2207,11 +2206,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@SuppressWarnings("unchecked")
 	public @Nullable <T extends Keyed> Registry<T> getRegistry(@NotNull Class<T> tClass)
 	{
-		if (!registry.containsKey(tClass))
-		{
-			registry.put(tClass, RegistryMock.createRegistry(tClass));
-		}
-		return (Registry<T>) registry.get(tClass);
+		return RegistryAccess.registryAccess().getRegistry(tClass);
 	}
 
 	@Override
