@@ -1,0 +1,17 @@
+{
+    "replace": false,
+    "values": [
+        "minecraft:tadpole",
+        "minecraft:axolotl",
+        "minecraft:turtle",
+        "minecraft:elder_guardian",
+        "minecraft:cod",
+        "minecraft:glow_squid",
+        "minecraft:guardian",
+        "minecraft:salmon",
+        "minecraft:dolphin",
+        "minecraft:squid",
+        "minecraft:tropical_fish",
+        "minecraft:pufferfish"
+    ]
+}

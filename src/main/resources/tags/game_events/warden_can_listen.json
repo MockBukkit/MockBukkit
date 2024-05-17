@@ -1,9 +1,6 @@
 {
     "replace": false,
     "values": [
-        "minecraft:block_open",
-        "minecraft:eat",
-        "minecraft:block_close",
         "minecraft:sculk_sensor_tendrils_clicking",
         "minecraft:container_open",
         "minecraft:block_deactivate",
@@ -56,6 +53,9 @@
         "minecraft:fluid_pickup",
         "minecraft:fluid_place",
         "minecraft:prime_fuse",
-        "minecraft:item_interact_finish"
+        "minecraft:item_interact_finish",
+        "minecraft:block_open",
+        "minecraft:eat",
+        "minecraft:block_close"
     ]
 }

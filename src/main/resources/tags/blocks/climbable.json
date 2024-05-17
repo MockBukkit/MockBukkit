@@ -2,13 +2,13 @@
     "replace": false,
     "values": [
         "minecraft:scaffolding",
-        "minecraft:cave_vines_plant",
-        "minecraft:cave_vines",
-        "minecraft:vine",
-        "minecraft:weeping_vines",
         "minecraft:weeping_vines_plant",
         "minecraft:ladder",
+        "minecraft:weeping_vines",
         "minecraft:twisting_vines_plant",
-        "minecraft:twisting_vines"
+        "minecraft:cave_vines_plant",
+        "minecraft:vine",
+        "minecraft:twisting_vines",
+        "minecraft:cave_vines"
     ]
 }

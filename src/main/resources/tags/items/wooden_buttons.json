@@ -1,16 +1,16 @@
 {
     "replace": false,
     "values": [
-        "minecraft:bamboo_button",
+        "minecraft:crimson_button",
+        "minecraft:mangrove_button",
+        "minecraft:oak_button",
         "minecraft:acacia_button",
         "minecraft:cherry_button",
-        "minecraft:jungle_button",
-        "minecraft:oak_button",
+        "minecraft:spruce_button",
         "minecraft:warped_button",
         "minecraft:birch_button",
-        "minecraft:spruce_button",
+        "minecraft:jungle_button",
         "minecraft:dark_oak_button",
-        "minecraft:mangrove_button",
-        "minecraft:crimson_button"
+        "minecraft:bamboo_button"
     ]
 }

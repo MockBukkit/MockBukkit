@@ -2,10 +2,10 @@
     "replace": false,
     "values": [
         "minecraft:lava",
-        "minecraft:blue_ice",
         "minecraft:bedrock",
         "minecraft:packed_ice",
+        "minecraft:ice",
         "minecraft:water",
-        "minecraft:ice"
+        "minecraft:blue_ice"
     ]
 }

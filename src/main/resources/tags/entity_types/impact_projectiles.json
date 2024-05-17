@@ -1,15 +1,15 @@
 {
     "replace": false,
     "values": [
-        "minecraft:fireball",
         "minecraft:spectral_arrow",
-        "minecraft:snowball",
         "minecraft:small_fireball",
-        "minecraft:arrow",
         "minecraft:egg",
-        "minecraft:wither_skull",
-        "minecraft:dragon_fireball",
+        "minecraft:fireball",
+        "minecraft:snowball",
         "minecraft:trident",
+        "minecraft:wither_skull",
+        "minecraft:arrow",
+        "minecraft:dragon_fireball",
         "minecraft:firework_rocket"
     ]
 }

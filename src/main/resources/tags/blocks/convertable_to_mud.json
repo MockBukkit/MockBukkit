@@ -1,8 +1,8 @@
 {
     "replace": false,
     "values": [
-        "minecraft:rooted_dirt",
         "minecraft:dirt",
+        "minecraft:rooted_dirt",
         "minecraft:coarse_dirt"
     ]
 }

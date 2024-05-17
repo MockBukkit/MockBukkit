@@ -2,9 +2,9 @@
     "replace": false,
     "values": [
         "minecraft:iron_ingot",
+        "minecraft:gold_ingot",
         "minecraft:netherite_ingot",
-        "minecraft:diamond",
         "minecraft:emerald",
-        "minecraft:gold_ingot"
+        "minecraft:diamond"
     ]
 }

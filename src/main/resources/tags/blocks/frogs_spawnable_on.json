@@ -2,8 +2,8 @@
     "replace": false,
     "values": [
         "minecraft:muddy_mangrove_roots",
-        "minecraft:grass_block",
+        "minecraft:mud",
         "minecraft:mangrove_roots",
-        "minecraft:mud"
+        "minecraft:grass_block"
     ]
 }

@@ -263,6 +263,54 @@
       "instant": false,
       "rgb": 2696993,
       "category": "HARMFUL"
+    },
+    {
+      "key": "minecraft:trial_omen",
+      "id": 34,
+      "name": "minecraft:trial_omen",
+      "instant": false,
+      "rgb": 1484454,
+      "category": "NEUTRAL"
+    },
+    {
+      "key": "minecraft:raid_omen",
+      "id": 35,
+      "name": "minecraft:raid_omen",
+      "instant": false,
+      "rgb": 14565464,
+      "category": "NEUTRAL"
+    },
+    {
+      "key": "minecraft:wind_charged",
+      "id": 36,
+      "name": "minecraft:wind_charged",
+      "instant": false,
+      "rgb": 12438015,
+      "category": "HARMFUL"
+    },
+    {
+      "key": "minecraft:weaving",
+      "id": 37,
+      "name": "minecraft:weaving",
+      "instant": false,
+      "rgb": 7891290,
+      "category": "HARMFUL"
+    },
+    {
+      "key": "minecraft:oozing",
+      "id": 38,
+      "name": "minecraft:oozing",
+      "instant": false,
+      "rgb": 10092451,
+      "category": "HARMFUL"
+    },
+    {
+      "key": "minecraft:infested",
+      "id": 39,
+      "name": "minecraft:infested",
+      "instant": false,
+      "rgb": 9214860,
+      "category": "HARMFUL"
     }
   ]
 }

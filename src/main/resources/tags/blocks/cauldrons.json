@@ -3,7 +3,7 @@
     "values": [
         "minecraft:lava_cauldron",
         "minecraft:water_cauldron",
-        "minecraft:cauldron",
-        "minecraft:powder_snow_cauldron"
+        "minecraft:powder_snow_cauldron",
+        "minecraft:cauldron"
     ]
 }
