@@ -164,14 +164,14 @@ public class AreaEffectCloudMock extends EntityMock implements AreaEffectCloud
 	}
 
 	@Override
-	public void setBasePotionType(@NotNull PotionType type)
+	public void setBasePotionType(@Nullable PotionType type)
 	{
 		//TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public @NotNull PotionType getBasePotionType()
+	public @Nullable PotionType getBasePotionType()
 	{
 		//TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

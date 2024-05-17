@@ -91,6 +91,13 @@ tasks {
 	jacoco {
 		toolVersion = "0.8.12"
 	}
+
+	processResources {
+		filesMatching("**/version_info.properties") { expand(mapOf(
+			"minecraft_version" to project.properties["paper.api.full-version"].toString().split("-")[0],
+			"paper_api_version" to project.properties["paper.api.full-version"]
+		))}
+	}
 }
 
 sourceSets {
