@@ -1,9 +1,12 @@
 package be.seeseemelk.mockbukkit;
 
+import be.seeseemelk.mockbukkit.block.BlockTypeMock;
 import be.seeseemelk.mockbukkit.damage.DamageTypeMock;
 import be.seeseemelk.mockbukkit.enchantments.EnchantmentMock;
+import be.seeseemelk.mockbukkit.entity.varint.WolfVariantMock;
 import be.seeseemelk.mockbukkit.generator.structure.StructureMock;
 import be.seeseemelk.mockbukkit.generator.structure.StructureTypeMock;
+import be.seeseemelk.mockbukkit.inventory.ItemTypeMock;
 import be.seeseemelk.mockbukkit.inventory.meta.trim.TrimMaterialMock;
 import be.seeseemelk.mockbukkit.inventory.meta.trim.TrimPatternMock;
 import be.seeseemelk.mockbukkit.potion.MockPotionEffectType;
@@ -17,10 +20,13 @@ import org.bukkit.Keyed;
 import org.bukkit.MusicInstrument;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
+import org.bukkit.block.BlockType;
 import org.bukkit.damage.DamageType;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Wolf;
 import org.bukkit.generator.structure.Structure;
 import org.bukkit.generator.structure.StructureType;
+import org.bukkit.inventory.ItemType;
 import org.bukkit.inventory.meta.trim.TrimMaterial;
 import org.bukkit.inventory.meta.trim.TrimPattern;
 import org.bukkit.potion.PotionEffectType;
@@ -114,6 +120,18 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		else if (tClass == DamageType.class)
 		{
 			return DamageTypeMock::from;
+		}
+		else if (tClass == ItemType.class)
+		{
+			return ItemTypeMock::from;
+		}
+		else if (tClass == BlockType.class)
+		{
+			return BlockTypeMock::from;
+		}
+		else if (tClass == Wolf.Variant.class)
+		{
+			return WolfVariantMock::from;
 		}
 		else
 		{

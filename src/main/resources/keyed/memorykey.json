@@ -1,0 +1,76 @@
+{
+  "values": [
+    {
+      "key": "minecraft:home"
+    },
+    {
+      "key": "minecraft:potential_job_site"
+    },
+    {
+      "key": "minecraft:job_site"
+    },
+    {
+      "key": "minecraft:meeting_point"
+    },
+    {
+      "key": "minecraft:golem_detected_recently"
+    },
+    {
+      "key": "minecraft:last_slept"
+    },
+    {
+      "key": "minecraft:last_woken"
+    },
+    {
+      "key": "minecraft:last_worked_at_poi"
+    },
+    {
+      "key": "minecraft:universal_anger"
+    },
+    {
+      "key": "minecraft:angry_at"
+    },
+    {
+      "key": "minecraft:admiring_item"
+    },
+    {
+      "key": "minecraft:admiring_disabled"
+    },
+    {
+      "key": "minecraft:hunted_recently"
+    },
+    {
+      "key": "minecraft:play_dead_ticks"
+    },
+    {
+      "key": "minecraft:temptation_cooldown_ticks"
+    },
+    {
+      "key": "minecraft:is_tempted"
+    },
+    {
+      "key": "minecraft:long_jump_cooling_down"
+    },
+    {
+      "key": "minecraft:has_hunting_cooldown"
+    },
+    {
+      "key": "minecraft:ram_cooldown_ticks"
+    },
+    {
+      "key": "minecraft:liked_player"
+    },
+    {
+      "key": "minecraft:liked_noteblock"
+    },
+    {
+      "key": "minecraft:liked_noteblock_cooldown_ticks"
+    },
+    {
+      "key": "minecraft:item_pickup_cooldown_ticks"
+    },
+    {
+      "key": "minecraft:sniffer_explored_positions"
+    }
+  ]
+}

@@ -16,10 +16,13 @@ import org.bukkit.Keyed;
 import org.bukkit.MusicInstrument;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
+import org.bukkit.block.BlockType;
 import org.bukkit.damage.DamageType;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Wolf;
 import org.bukkit.generator.structure.Structure;
 import org.bukkit.generator.structure.StructureType;
+import org.bukkit.inventory.ItemType;
 import org.bukkit.inventory.meta.trim.TrimMaterial;
 import org.bukkit.inventory.meta.trim.TrimPattern;
 import org.bukkit.potion.PotionEffectType;
@@ -50,12 +53,18 @@ public class RegistryAccessMock implements RegistryAccess
 	@Override
 	public @Nullable <T extends Keyed> Registry<T> getRegistry(@NotNull Class<T> type)
 	{
+		if (type.getName() == "io.papermc.paper.world.structure.ConfiguredStructure")
+		{
+			return createUnimplementedRegistry(type);
+		}
 		RegistryKey<T> registryKey = determineRegistryKeyFromClass(type);
 		if (registries.containsKey(type))
 		{
 			return (Registry<T>) registries.get(type);
 		}
-		return (Registry<T>) createRegistry(type);
+		Registry<T> registry = (Registry<T>) createRegistry(type);
+		registries.put(registryKey, registry);
+		return registry;
 	}
 
 	private <T extends Keyed> RegistryKey<T> determineRegistryKeyFromClass(@NotNull Class<T> type)
@@ -86,34 +95,16 @@ public class RegistryAccessMock implements RegistryAccess
 		{
 			return (Registry<T>) registries.get(registryKey);
 		}
-		return (Registry<T>) createRegistry((Class<T>) CLASS_TO_KEY_MAP.get(registryKey));
+		Registry<T> registry = (Registry<T>) createRegistry((Class<T>) CLASS_TO_KEY_MAP.get(registryKey));
+		registries.put(registryKey, registry);
+		return registry;
 	}
 
 	private static <T extends Keyed> Registry<?> createRegistry(Class<T> tClass)
 	{
 		if (tClass == ConfiguredStructure.class)
 		{
-			return new Registry<T>()
-			{
-				@Override
-				public @Nullable T get(@NotNull NamespacedKey key)
-				{
-					throw new UnimplementedOperationException("Registry for type " + tClass + " not implemented");
-				}
-
-				@Override
-				public @NotNull Stream<T> stream()
-				{
-					throw new UnimplementedOperationException("Registry for type " + tClass + " not implemented");
-				}
-
-				@NotNull
-				@Override
-				public Iterator<T> iterator()
-				{
-					throw new UnimplementedOperationException("Registry for type " + tClass + " not implemented");
-				}
-			};
+			return createUnimplementedRegistry(tClass);
 		}
 		if (getOutlierKeyedClasses().contains(tClass))
 		{
@@ -146,7 +137,8 @@ public class RegistryAccessMock implements RegistryAccess
 	{
 		return List.of(Structure.class, PotionEffectType.class,
 				StructureType.class, TrimMaterial.class, TrimPattern.class,
-				MusicInstrument.class, GameEvent.class, Enchantment.class, DamageType.class);
+				MusicInstrument.class, GameEvent.class, Enchantment.class, DamageType.class,
+				BlockType.class, ItemType.class, Wolf.Variant.class);
 	}
 
 
@@ -206,6 +198,31 @@ public class RegistryAccessMock implements RegistryAccess
 			}
 		}
 		return output;
+	}
+
+	private static <T extends Keyed> Registry<T> createUnimplementedRegistry(Class<T> tClass)
+	{
+		return new Registry<T>()
+		{
+			@Override
+			public @Nullable T get(@NotNull NamespacedKey key)
+			{
+				throw new UnimplementedOperationException("Registry for type " + tClass + " not implemented");
+			}
+
+			@Override
+			public @NotNull Stream<T> stream()
+			{
+				throw new UnimplementedOperationException("Registry for type " + tClass + " not implemented");
+			}
+
+			@NotNull
+			@Override
+			public Iterator<T> iterator()
+			{
+				throw new UnimplementedOperationException("Registry for type " + tClass + " not implemented");
+			}
+		};
 	}
 
 }

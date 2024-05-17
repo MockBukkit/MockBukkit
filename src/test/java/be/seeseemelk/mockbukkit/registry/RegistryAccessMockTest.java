@@ -35,10 +35,16 @@ class RegistryAccessMockTest
 	@Test
 	void getRegistry_Class_createOnlyOnce()
 	{
-
-		Registry<?> registry = this.registryAccess.getRegistry(StructureType.class);
-		Registry<?> duplicateRegistry = this.registryAccess.getRegistry(StructureType.class);
-		assertSame(registry, duplicateRegistry);
+		try
+		{
+			Registry<?> registry = this.registryAccess.getRegistry(StructureType.class);
+			Registry<?> duplicateRegistry = this.registryAccess.getRegistry(StructureType.class);
+			assertSame(registry, duplicateRegistry);
+		}
+		catch (Exception e)
+		{
+			throw new RuntimeException(e);
+		}
 	}
 
 

@@ -1,0 +1,331 @@
+{
+  "values": [
+    {
+      "key": "minecraft:poof"
+    },
+    {
+      "key": "minecraft:explosion"
+    },
+    {
+      "key": "minecraft:explosion_emitter"
+    },
+    {
+      "key": "minecraft:firework"
+    },
+    {
+      "key": "minecraft:bubble"
+    },
+    {
+      "key": "minecraft:splash"
+    },
+    {
+      "key": "minecraft:fishing"
+    },
+    {
+      "key": "minecraft:underwater"
+    },
+    {
+      "key": "minecraft:crit"
+    },
+    {
+      "key": "minecraft:enchanted_hit"
+    },
+    {
+      "key": "minecraft:smoke"
+    },
+    {
+      "key": "minecraft:large_smoke"
+    },
+    {
+      "key": "minecraft:effect"
+    },
+    {
+      "key": "minecraft:instant_effect"
+    },
+    {
+      "key": "minecraft:entity_effect"
+    },
+    {
+      "key": "minecraft:witch"
+    },
+    {
+      "key": "minecraft:dripping_water"
+    },
+    {
+      "key": "minecraft:dripping_lava"
+    },
+    {
+      "key": "minecraft:angry_villager"
+    },
+    {
+      "key": "minecraft:happy_villager"
+    },
+    {
+      "key": "minecraft:mycelium"
+    },
+    {
+      "key": "minecraft:note"
+    },
+    {
+      "key": "minecraft:portal"
+    },
+    {
+      "key": "minecraft:enchant"
+    },
+    {
+      "key": "minecraft:flame"
+    },
+    {
+      "key": "minecraft:lava"
+    },
+    {
+      "key": "minecraft:cloud"
+    },
+    {
+      "key": "minecraft:dust"
+    },
+    {
+      "key": "minecraft:item_snowball"
+    },
+    {
+      "key": "minecraft:item_slime"
+    },
+    {
+      "key": "minecraft:heart"
+    },
+    {
+      "key": "minecraft:item"
+    },
+    {
+      "key": "minecraft:block"
+    },
+    {
+      "key": "minecraft:rain"
+    },
+    {
+      "key": "minecraft:elder_guardian"
+    },
+    {
+      "key": "minecraft:dragon_breath"
+    },
+    {
+      "key": "minecraft:end_rod"
+    },
+    {
+      "key": "minecraft:damage_indicator"
+    },
+    {
+      "key": "minecraft:sweep_attack"
+    },
+    {
+      "key": "minecraft:falling_dust"
+    },
+    {
+      "key": "minecraft:totem_of_undying"
+    },
+    {
+      "key": "minecraft:spit"
+    },
+    {
+      "key": "minecraft:squid_ink"
+    },
+    {
+      "key": "minecraft:bubble_pop"
+    },
+    {
+      "key": "minecraft:current_down"
+    },
+    {
+      "key": "minecraft:bubble_column_up"
+    },
+    {
+      "key": "minecraft:nautilus"
+    },
+    {
+      "key": "minecraft:dolphin"
+    },
+    {
+      "key": "minecraft:sneeze"
+    },
+    {
+      "key": "minecraft:campfire_cosy_smoke"
+    },
+    {
+      "key": "minecraft:campfire_signal_smoke"
+    },
+    {
+      "key": "minecraft:composter"
+    },
+    {
+      "key": "minecraft:flash"
+    },
+    {
+      "key": "minecraft:falling_lava"
+    },
+    {
+      "key": "minecraft:landing_lava"
+    },
+    {
+      "key": "minecraft:falling_water"
+    },
+    {
+      "key": "minecraft:dripping_honey"
+    },
+    {
+      "key": "minecraft:falling_honey"
+    },
+    {
+      "key": "minecraft:landing_honey"
+    },
+    {
+      "key": "minecraft:falling_nectar"
+    },
+    {
+      "key": "minecraft:soul_fire_flame"
+    },
+    {
+      "key": "minecraft:ash"
+    },
+    {
+      "key": "minecraft:crimson_spore"
+    },
+    {
+      "key": "minecraft:warped_spore"
+    },
+    {
+      "key": "minecraft:soul"
+    },
+    {
+      "key": "minecraft:dripping_obsidian_tear"
+    },
+    {
+      "key": "minecraft:falling_obsidian_tear"
+    },
+    {
+      "key": "minecraft:landing_obsidian_tear"
+    },
+    {
+      "key": "minecraft:reverse_portal"
+    },
+    {
+      "key": "minecraft:white_ash"
+    },
+    {
+      "key": "minecraft:dust_color_transition"
+    },
+    {
+      "key": "minecraft:vibration"
+    },
+    {
+      "key": "minecraft:falling_spore_blossom"
+    },
+    {
+      "key": "minecraft:spore_blossom_air"
+    },
+    {
+      "key": "minecraft:small_flame"
+    },
+    {
+      "key": "minecraft:snowflake"
+    },
+    {
+      "key": "minecraft:dripping_dripstone_lava"
+    },
+    {
+      "key": "minecraft:falling_dripstone_lava"
+    },
+    {
+      "key": "minecraft:dripping_dripstone_water"
+    },
+    {
+      "key": "minecraft:falling_dripstone_water"
+    },
+    {
+      "key": "minecraft:glow_squid_ink"
+    },
+    {
+      "key": "minecraft:glow"
+    },
+    {
+      "key": "minecraft:wax_on"
+    },
+    {
+      "key": "minecraft:wax_off"
+    },
+    {
+      "key": "minecraft:electric_spark"
+    },
+    {
+      "key": "minecraft:scrape"
+    },
+    {
+      "key": "minecraft:sonic_boom"
+    },
+    {
+      "key": "minecraft:sculk_soul"
+    },
+    {
+      "key": "minecraft:sculk_charge"
+    },
+    {
+      "key": "minecraft:sculk_charge_pop"
+    },
+    {
+      "key": "minecraft:shriek"
+    },
+    {
+      "key": "minecraft:cherry_leaves"
+    },
+    {
+      "key": "minecraft:egg_crack"
+    },
+    {
+      "key": "minecraft:dust_plume"
+    },
+    {
+      "key": "minecraft:white_smoke"
+    },
+    {
+      "key": "minecraft:gust"
+    },
+    {
+      "key": "minecraft:small_gust"
+    },
+    {
+      "key": "minecraft:gust_emitter_large"
+    },
+    {
+      "key": "minecraft:gust_emitter_small"
+    },
+    {
+      "key": "minecraft:trial_spawner_detection"
+    },
+    {
+      "key": "minecraft:trial_spawner_detection_ominous"
+    },
+    {
+      "key": "minecraft:vault_connection"
+    },
+    {
+      "key": "minecraft:infested"
+    },
+    {
+      "key": "minecraft:item_cobweb"
+    },
+    {
+      "key": "minecraft:dust_pillar"
+    },
+    {
+      "key": "minecraft:ominous_spawning"
+    },
+    {
+      "key": "minecraft:raid_omen"
+    },
+    {
+      "key": "minecraft:trial_omen"
+    },
+    {
+      "key": "minecraft:block_marker"
+    }
+  ]
+}
