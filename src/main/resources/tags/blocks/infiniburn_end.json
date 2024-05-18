@@ -2,7 +2,7 @@
     "replace": false,
     "values": [
         "minecraft:netherrack",
-        "minecraft:bedrock",
-        "minecraft:magma_block"
+        "minecraft:magma_block",
+        "minecraft:bedrock"
     ]
 }

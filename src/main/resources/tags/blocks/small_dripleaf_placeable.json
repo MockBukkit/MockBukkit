@@ -1,7 +1,7 @@
 {
     "replace": false,
     "values": [
-        "minecraft:moss_block",
-        "minecraft:clay"
+        "minecraft:clay",
+        "minecraft:moss_block"
     ]
 }

@@ -1,13 +1,13 @@
 {
     "replace": false,
     "values": [
-        "minecraft:melon_stem",
         "minecraft:pumpkin_stem",
+        "minecraft:pitcher_crop",
+        "minecraft:torchflower_crop",
+        "minecraft:melon_stem",
         "minecraft:wheat",
         "minecraft:carrots",
-        "minecraft:pitcher_crop",
         "minecraft:potatoes",
-        "minecraft:beetroots",
-        "minecraft:torchflower_crop"
+        "minecraft:beetroots"
     ]
 }

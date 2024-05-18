@@ -1,16 +1,16 @@
 {
     "replace": false,
     "values": [
-        "minecraft:ladder",
-        "minecraft:weeping_vines_plant",
-        "minecraft:weeping_vines",
-        "minecraft:cave_vines_plant",
-        "minecraft:sweet_berry_bush",
         "minecraft:twisting_vines_plant",
-        "minecraft:scaffolding",
-        "minecraft:vine",
-        "minecraft:cobweb",
         "minecraft:twisting_vines",
-        "minecraft:cave_vines"
+        "minecraft:sweet_berry_bush",
+        "minecraft:cave_vines",
+        "minecraft:scaffolding",
+        "minecraft:weeping_vines_plant",
+        "minecraft:ladder",
+        "minecraft:cobweb",
+        "minecraft:cave_vines_plant",
+        "minecraft:vine",
+        "minecraft:weeping_vines"
     ]
 }

@@ -10,22 +10,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;
-import io.papermc.paper.world.structure.ConfiguredStructure;
-import org.bukkit.GameEvent;
 import org.bukkit.Keyed;
-import org.bukkit.MusicInstrument;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
-import org.bukkit.block.BlockType;
-import org.bukkit.damage.DamageType;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Wolf;
-import org.bukkit.generator.structure.Structure;
-import org.bukkit.generator.structure.StructureType;
-import org.bukkit.inventory.ItemType;
-import org.bukkit.inventory.meta.trim.TrimMaterial;
-import org.bukkit.inventory.meta.trim.TrimPattern;
-import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -47,98 +34,79 @@ public class RegistryAccessMock implements RegistryAccess
 {
 
 	private final Map<RegistryKey<?>, Registry<?>> registries = new HashMap();
-	private static BiMap<RegistryKey<?>, Class<?>> CLASS_TO_KEY_MAP;
+	private static BiMap<RegistryKey<?>, String> CLASS_NAME_TO_KEY_MAP;
 
 
 	@Override
 	public @Nullable <T extends Keyed> Registry<T> getRegistry(@NotNull Class<T> type)
 	{
-		if (type.getName() == "io.papermc.paper.world.structure.ConfiguredStructure")
+		if (type.getName().equals("io.papermc.paper.world.structure.ConfiguredStructure"))
 		{
-			return createUnimplementedRegistry(type);
+			return createConfiguredStructureRegistry();
 		}
 		RegistryKey<T> registryKey = determineRegistryKeyFromClass(type);
-		if (registries.containsKey(type))
-		{
-			return (Registry<T>) registries.get(type);
-		}
-		Registry<T> registry = (Registry<T>) createRegistry(type);
-		registries.put(registryKey, registry);
-		return registry;
+		return getRegistry(registryKey);
 	}
 
 	private <T extends Keyed> RegistryKey<T> determineRegistryKeyFromClass(@NotNull Class<T> type)
 	{
-		if (CLASS_TO_KEY_MAP == null)
+		if (CLASS_NAME_TO_KEY_MAP == null)
 		{
-			CLASS_TO_KEY_MAP = createClassToKeyConversions();
+			CLASS_NAME_TO_KEY_MAP = createClassToKeyConversions();
 		}
-
-		if (type == ConfiguredStructure.class)
-		{
-			// Too much of a hassle to fix this, would require changing the access on a class as RegistryKey is a sealed class
-			// Not possible to Mock it
-			throw new UnimplementedOperationException();
-		}
-		return (RegistryKey<T>) CLASS_TO_KEY_MAP.inverse().get(type);
+		return (RegistryKey<T>) CLASS_NAME_TO_KEY_MAP.inverse().get(type.getName());
 	}
 
 	@Override
 	public @NotNull <T extends Keyed> Registry<T> getRegistry(@NotNull RegistryKey<T> registryKey)
 	{
-		if (CLASS_TO_KEY_MAP == null)
-		{
-			CLASS_TO_KEY_MAP = createClassToKeyConversions();
-		}
-
 		if (registries.containsKey(registryKey))
 		{
 			return (Registry<T>) registries.get(registryKey);
 		}
-		Registry<T> registry = (Registry<T>) createRegistry((Class<T>) CLASS_TO_KEY_MAP.get(registryKey));
+		Registry<T> registry = (Registry<T>) createRegistry(registryKey);
 		registries.put(registryKey, registry);
 		return registry;
 	}
 
-	private static <T extends Keyed> Registry<?> createRegistry(Class<T> tClass)
+	private static <T extends Keyed> Registry<?> createRegistry(RegistryKey<T> key)
 	{
-		if (tClass == ConfiguredStructure.class)
+		if (key.key().asString().equals("minecraft:worldgen/structure"))
 		{
-			return createUnimplementedRegistry(tClass);
+			return createConfiguredStructureRegistry();
 		}
-		if (getOutlierKeyedClasses().contains(tClass))
+		if (getOutlierKeyedRegistryKeys().contains(key))
 		{
-			return new RegistryMock<>(tClass);
+			return new RegistryMock<>(key);
 		}
 
 		return Stream.of(Registry.class.getDeclaredFields())
 				.filter(a -> Registry.class.isAssignableFrom(a.getType()))
 				.filter(a -> Modifier.isPublic(a.getModifiers()))
 				.filter(a -> Modifier.isStatic(a.getModifiers()))
-				.filter(a -> genericTypeMatches(a, tClass))
+				.filter(a -> genericTypeMatches(a, CLASS_NAME_TO_KEY_MAP.get(key)))
 				.map(RegistryAccessMock::getValue)
 				.filter(Objects::nonNull)
 				.findAny()
-				.orElseThrow(() -> new UnimplementedOperationException("Could not find registry for " + tClass.getSimpleName()));
+				.orElseThrow(() -> new UnimplementedOperationException("Could not find registry for " + key));
 	}
 
 
-	private static boolean genericTypeMatches(Field a, Class<?> clazz)
+	private static boolean genericTypeMatches(Field a, String className)
 	{
 		if (a.getGenericType() instanceof ParameterizedType type)
 		{
-			return type.getActualTypeArguments()[0] == clazz;
+			return type.getActualTypeArguments()[0].getTypeName().equals(className);
 		}
 		return false;
 	}
 
 
-	private static List<Class<? extends Keyed>> getOutlierKeyedClasses()
+	private static List<RegistryKey<? extends Keyed>> getOutlierKeyedRegistryKeys()
 	{
-		return List.of(Structure.class, PotionEffectType.class,
-				StructureType.class, TrimMaterial.class, TrimPattern.class,
-				MusicInstrument.class, GameEvent.class, Enchantment.class, DamageType.class,
-				BlockType.class, ItemType.class, Wolf.Variant.class);
+		return List.of(RegistryKey.STRUCTURE, RegistryKey.STRUCTURE_TYPE, RegistryKey.TRIM_MATERIAL,
+				RegistryKey.TRIM_PATTERN, RegistryKey.INSTRUMENT, RegistryKey.GAME_EVENT, RegistryKey.ENCHANTMENT,
+				RegistryKey.MOB_EFFECT, RegistryKey.DAMAGE_TYPE, RegistryKey.ITEM, RegistryKey.BLOCK, RegistryKey.WOLF_VARIANT);
 	}
 
 
@@ -155,10 +123,10 @@ public class RegistryAccessMock implements RegistryAccess
 	}
 
 
-	private static BiMap<RegistryKey<?>, Class<?>> createClassToKeyConversions()
+	private static BiMap<RegistryKey<?>, String> createClassToKeyConversions()
 	{
 		String fileName = "/registries/registry_key_class_relation.json";
-		BiMap<RegistryKey<?>, Class<?>> output = HashBiMap.create();
+		BiMap<RegistryKey<?>,String> output = HashBiMap.create();
 		try (InputStream inputStream = MockBukkit.class.getResourceAsStream(fileName))
 		{
 			if (inputStream == null)
@@ -169,11 +137,10 @@ public class RegistryAccessMock implements RegistryAccess
 			for (RegistryKey<?> registryKey : getAllKeys())
 			{
 				String className = object.get(registryKey.key().asString()).getAsString();
-				Class<?> type = RegistryAccessMock.class.getClassLoader().loadClass(className);
-				output.put(registryKey, type);
+				output.put(registryKey, className);
 			}
 		}
-		catch (IOException | ClassNotFoundException e)
+		catch (IOException e)
 		{
 			throw new RuntimeException(e);
 		}
@@ -200,27 +167,27 @@ public class RegistryAccessMock implements RegistryAccess
 		return output;
 	}
 
-	private static <T extends Keyed> Registry<T> createUnimplementedRegistry(Class<T> tClass)
+	private static <T extends Keyed> Registry<T> createConfiguredStructureRegistry()
 	{
-		return new Registry<T>()
+		return new Registry<>()
 		{
 			@Override
 			public @Nullable T get(@NotNull NamespacedKey key)
 			{
-				throw new UnimplementedOperationException("Registry for type " + tClass + " not implemented");
+				throw new UnimplementedOperationException("Registry for type ConfiguredStructure not implemented");
 			}
 
 			@Override
 			public @NotNull Stream<T> stream()
 			{
-				throw new UnimplementedOperationException("Registry for type " + tClass + " not implemented");
+				throw new UnimplementedOperationException("Registry for type ConfiguredStructure not implemented");
 			}
 
 			@NotNull
 			@Override
 			public Iterator<T> iterator()
 			{
-				throw new UnimplementedOperationException("Registry for type " + tClass + " not implemented");
+				throw new UnimplementedOperationException("Registry for type ConfiguredStructure not implemented");
 			}
 		};
 	}

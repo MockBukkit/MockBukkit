@@ -1,8 +1,8 @@
 {
     "replace": false,
     "values": [
-        "minecraft:end_gateway",
         "minecraft:nether_portal",
+        "minecraft:end_gateway",
         "minecraft:end_portal"
     ]
 }

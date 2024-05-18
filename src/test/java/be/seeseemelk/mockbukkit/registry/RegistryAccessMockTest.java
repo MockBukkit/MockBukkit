@@ -4,7 +4,7 @@ import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;
 import org.bukkit.MusicInstrument;
 import org.bukkit.Registry;
-import org.bukkit.StructureType;
+import org.bukkit.generator.structure.StructureType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

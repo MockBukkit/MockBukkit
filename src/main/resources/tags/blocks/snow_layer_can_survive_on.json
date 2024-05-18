@@ -1,8 +1,8 @@
 {
     "replace": false,
     "values": [
+        "minecraft:soul_sand",
         "minecraft:honey_block",
-        "minecraft:mud",
-        "minecraft:soul_sand"
+        "minecraft:mud"
     ]
 }

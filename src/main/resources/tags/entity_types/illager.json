@@ -2,8 +2,8 @@
     "replace": false,
     "values": [
         "minecraft:evoker",
+        "minecraft:pillager",
         "minecraft:illusioner",
-        "minecraft:vindicator",
-        "minecraft:pillager"
+        "minecraft:vindicator"
     ]
 }

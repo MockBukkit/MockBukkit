@@ -2,8 +2,8 @@
     "replace": false,
     "values": [
         "minecraft:obsidian",
-        "minecraft:crying_obsidian",
         "minecraft:respawn_anchor",
+        "minecraft:crying_obsidian",
         "minecraft:netherite_block",
         "minecraft:ancient_debris"
     ]

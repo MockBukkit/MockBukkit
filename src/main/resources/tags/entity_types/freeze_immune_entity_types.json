@@ -1,9 +1,9 @@
 {
     "replace": false,
     "values": [
-        "minecraft:snow_golem",
+        "minecraft:polar_bear",
         "minecraft:wither",
-        "minecraft:stray",
-        "minecraft:polar_bear"
+        "minecraft:snow_golem",
+        "minecraft:stray"
     ]
 }

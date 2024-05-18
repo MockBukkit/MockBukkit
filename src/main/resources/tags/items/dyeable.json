@@ -1,11 +1,11 @@
 {
     "replace": false,
     "values": [
-        "minecraft:leather_boots",
         "minecraft:leather_helmet",
-        "minecraft:leather_leggings",
-        "minecraft:wolf_armor",
         "minecraft:leather_horse_armor",
-        "minecraft:leather_chestplate"
+        "minecraft:wolf_armor",
+        "minecraft:leather_leggings",
+        "minecraft:leather_chestplate",
+        "minecraft:leather_boots"
     ]
 }

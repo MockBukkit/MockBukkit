@@ -1,12 +1,12 @@
 {
     "replace": false,
     "values": [
-        "minecraft:zombie",
-        "minecraft:drowned",
         "minecraft:zoglin",
-        "minecraft:husk",
-        "minecraft:zombie_horse",
         "minecraft:zombified_piglin",
+        "minecraft:zombie",
+        "minecraft:zombie_horse",
+        "minecraft:drowned",
+        "minecraft:husk",
         "minecraft:zombie_villager"
     ]
 }

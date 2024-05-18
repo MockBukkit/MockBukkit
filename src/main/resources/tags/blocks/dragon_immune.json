@@ -1,22 +1,22 @@
 {
     "replace": false,
     "values": [
-        "minecraft:structure_block",
-        "minecraft:bedrock",
-        "minecraft:moving_piston",
-        "minecraft:chain_command_block",
-        "minecraft:reinforced_deepslate",
-        "minecraft:end_gateway",
-        "minecraft:repeating_command_block",
-        "minecraft:respawn_anchor",
+        "minecraft:barrier",
         "minecraft:end_portal_frame",
-        "minecraft:obsidian",
-        "minecraft:iron_bars",
-        "minecraft:end_portal",
+        "minecraft:chain_command_block",
         "minecraft:end_stone",
         "minecraft:crying_obsidian",
-        "minecraft:command_block",
+        "minecraft:reinforced_deepslate",
         "minecraft:jigsaw",
-        "minecraft:barrier"
+        "minecraft:repeating_command_block",
+        "minecraft:obsidian",
+        "minecraft:moving_piston",
+        "minecraft:respawn_anchor",
+        "minecraft:iron_bars",
+        "minecraft:end_gateway",
+        "minecraft:structure_block",
+        "minecraft:command_block",
+        "minecraft:bedrock",
+        "minecraft:end_portal"
     ]
 }

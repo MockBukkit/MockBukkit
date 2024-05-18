@@ -1,15 +1,15 @@
 {
     "replace": false,
     "values": [
-        "minecraft:dark_oak_sapling",
-        "minecraft:spruce_sapling",
-        "minecraft:birch_sapling",
         "minecraft:azalea",
+        "minecraft:spruce_sapling",
+        "minecraft:cherry_sapling",
+        "minecraft:birch_sapling",
+        "minecraft:mangrove_propagule",
         "minecraft:flowering_azalea",
         "minecraft:jungle_sapling",
-        "minecraft:acacia_sapling",
-        "minecraft:mangrove_propagule",
-        "minecraft:cherry_sapling",
-        "minecraft:oak_sapling"
+        "minecraft:oak_sapling",
+        "minecraft:dark_oak_sapling",
+        "minecraft:acacia_sapling"
     ]
 }
