@@ -35,7 +35,6 @@ public class EnchantmentMock extends Enchantment
 	private final NamespacedKey key;
 	private final boolean tradeable;
 	private final boolean discoverable;
-	private final EnchantmentRarity rarity;
 	private final Set<NamespacedKey> conflicts;
 	private boolean treasure;
 	private final Component[] displayNames;
@@ -44,11 +43,9 @@ public class EnchantmentMock extends Enchantment
 	private final int[] minModifiedCosts;
 	private int maxLevel;
 	private int startLevel;
-	private EnchantmentTarget itemTarget;
 
 	/**
 	 * @param key             The key representing this enchantment
-	 * @param target          the item targets of this enchantment
 	 * @param treasure        Whether this enchantment can be found in a treasure
 	 * @param cursed          Whether this enchantment is a curse
 	 * @param maxLevel        The max level of this enchantment
@@ -59,16 +56,14 @@ public class EnchantmentMock extends Enchantment
 	 * @param maxModifiedCost The maximal modified cost for this enchantment dependent on level
 	 * @param tradeable       Whether this enchantment can be obtained from trades
 	 * @param discoverable    Whether this enchantment is in a loot table
-	 * @param rarity          The rarity of this enchantment
 	 * @param conflicts       Namespaced-keys of enchantments that are conflicting with this enchantment
 	 */
-	public EnchantmentMock(NamespacedKey key, EnchantmentTarget target, boolean treasure, boolean cursed, int maxLevel,
+	public EnchantmentMock(NamespacedKey key, boolean treasure, boolean cursed, int maxLevel,
 						   int startLevel, String name, Component[] displayNames, int[] minModifiedCost,
-						   int[] maxModifiedCost, boolean tradeable, boolean discoverable, EnchantmentRarity rarity,
+						   int[] maxModifiedCost, boolean tradeable, boolean discoverable,
 						   Set<NamespacedKey> conflicts)
 	{
 		this.key = key;
-		this.itemTarget = target;
 		this.treasure = treasure;
 		this.cursed = cursed;
 		this.maxLevel = maxLevel;
@@ -79,7 +74,6 @@ public class EnchantmentMock extends Enchantment
 		this.maxModifiedCosts = maxModifiedCost;
 		this.tradeable = tradeable;
 		this.discoverable = discoverable;
-		this.rarity = rarity;
 		this.conflicts = conflicts;
 	}
 
@@ -91,9 +85,7 @@ public class EnchantmentMock extends Enchantment
 	@Deprecated(forRemoval = true)
 	public EnchantmentMock(JsonObject data)
 	{
-		this.key = NamespacedKey.fromString(data.get("key").getAsString());
-		this.itemTarget = EnchantmentTarget.valueOf(data.get("itemTarget").getAsString());
-		this.treasure = data.get("treasure").getAsBoolean();
+		this.key = NamespacedKey.fromString(data.get("key").getAsString());this.treasure = data.get("treasure").getAsBoolean();
 		this.cursed = data.get("cursed").getAsBoolean();
 		this.maxLevel = data.get("maxLevel").getAsInt();
 		this.startLevel = data.get("startLevel").getAsInt();
@@ -103,8 +95,6 @@ public class EnchantmentMock extends Enchantment
 		this.maxModifiedCosts = getMaxModifiedCosts(data.get("maxModifiedCosts").getAsJsonArray(), this.maxLevel);
 		this.tradeable = data.get("tradeable").getAsBoolean();
 		this.discoverable = data.get("discoverable").getAsBoolean();
-		String rarityString = data.get("rarity").getAsString();
-		this.rarity = EnchantmentRarity.valueOf(rarityString);
 		this.conflicts = getConflicts(data.get("conflicts").getAsJsonArray());
 	}
 
@@ -141,7 +131,7 @@ public class EnchantmentMock extends Enchantment
 	@Override
 	public @NotNull EnchantmentRarity getRarity()
 	{
-		return this.rarity;
+		throw new UnsupportedOperationException("Enchantments don't have a rarity anymore in 1.20.5+.");
 	}
 
 	@Override
@@ -213,9 +203,10 @@ public class EnchantmentMock extends Enchantment
 	}
 
 	@Override
+	@Deprecated(forRemoval = true)
 	public @NotNull EnchantmentTarget getItemTarget()
 	{
-		return this.itemTarget;
+		throw new UnsupportedOperationException("Method no longer applicable. Use Tags instead.");
 	}
 
 	/**
@@ -224,10 +215,10 @@ public class EnchantmentMock extends Enchantment
 	 * @param itemTarget The item target.
 	 * @see #getItemTarget()
 	 */
+	@Deprecated(forRemoval = true)
 	public void setItemTarget(@NotNull EnchantmentTarget itemTarget)
 	{
-		Preconditions.checkNotNull(itemTarget, "EnchantmentTarget cannot be null");
-		this.itemTarget = itemTarget;
+		throw new UnsupportedOperationException("Method no longer applicable. Use Tags instead.");
 	}
 
 	@Override
@@ -295,14 +286,13 @@ public class EnchantmentMock extends Enchantment
 	public static EnchantmentMock from(JsonObject data)
 	{
 		Preconditions.checkNotNull(data);
-		List<String> expectedArguments = List.of("key", "itemTarget", "treasure", "cursed", "maxLevel", "startLevel",
-				"name", "displayNames", "minModifiedCosts", "maxModifiedCosts", "tradeable", "discoverable", "rarity",
+		List<String> expectedArguments = List.of("key", "treasure", "cursed", "maxLevel", "startLevel",
+				"name", "displayNames", "minModifiedCosts", "maxModifiedCosts", "tradeable", "discoverable",
 				"conflicts");
 		expectedArguments.forEach(expectedKey ->
 				Preconditions.checkArgument(data.has(expectedKey), "Missing json key: " + expectedKey));
 
 		NamespacedKey key = NamespacedKey.fromString(data.get("key").getAsString());
-		EnchantmentTarget itemTarget = EnchantmentTarget.valueOf(data.get("itemTarget").getAsString());
 		boolean treasure = data.get("treasure").getAsBoolean();
 		boolean cursed = data.get("cursed").getAsBoolean();
 		int maxLevel = data.get("maxLevel").getAsInt();
@@ -313,11 +303,9 @@ public class EnchantmentMock extends Enchantment
 		int[] maxModifiedCosts = getMaxModifiedCosts(data.get("maxModifiedCosts").getAsJsonArray(), maxLevel);
 		boolean tradeable = data.get("tradeable").getAsBoolean();
 		boolean discoverable = data.get("discoverable").getAsBoolean();
-		String rarityString = data.get("rarity").getAsString();
-		EnchantmentRarity rarity = EnchantmentRarity.valueOf(rarityString);
 		Set<NamespacedKey> conflicts = getConflicts(data.get("conflicts").getAsJsonArray());
-		return new EnchantmentMock(key, itemTarget, treasure, cursed, maxLevel, startLevel, name, displayNames, minModifiedCosts,
-				maxModifiedCosts, tradeable, discoverable, rarity, conflicts);
+		return new EnchantmentMock(key, treasure, cursed, maxLevel, startLevel, name, displayNames, minModifiedCosts,
+				maxModifiedCosts, tradeable, discoverable, conflicts);
 	}
 
 	private static Set<NamespacedKey> getConflicts(JsonArray conflicts)

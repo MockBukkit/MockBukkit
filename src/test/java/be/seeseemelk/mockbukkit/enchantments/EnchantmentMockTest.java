@@ -45,16 +45,14 @@ class EnchantmentMockTest
 	void setUp()
 	{
 		this.key = new NamespacedKey(NAMESPACE, "custom_enchantment");
-		this.target = EnchantmentTarget.ARMOR_FEET;
 		this.maxLevel = 2;
 		this.minLevel = 1;
 		this.name = "Custom enchantment";
 		this.displayNames = new Component[]{ Component.text("Level 1"), Component.text("Level 2") };
 		this.minModifiedCost = new int[]{ 1, 2 };
 		this.maxModifiedCost = new int[]{ 20, 25 };
-		this.rarity = EnchantmentRarity.RARE;
-		this.enchantment = new EnchantmentMock(key, target, true, true, maxLevel, minLevel, name, displayNames, minModifiedCost,
-				maxModifiedCost, true, true, rarity, Set.of(key));
+		this.enchantment = new EnchantmentMock(key, true, true, maxLevel, minLevel, name, displayNames, minModifiedCost,
+				maxModifiedCost, true, true, Set.of(key));
 	}
 
 	@ParameterizedTest

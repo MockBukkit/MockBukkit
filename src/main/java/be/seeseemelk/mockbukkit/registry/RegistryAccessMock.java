@@ -71,10 +71,6 @@ public class RegistryAccessMock implements RegistryAccess
 
 	private static <T extends Keyed> Registry<?> createRegistry(RegistryKey<T> key)
 	{
-		if (key.key().asString().equals("minecraft:worldgen/structure"))
-		{
-			return createConfiguredStructureRegistry();
-		}
 		if (getOutlierKeyedRegistryKeys().contains(key))
 		{
 			return new RegistryMock<>(key);
