@@ -28,9 +28,10 @@ public class ItemTypeMock implements ItemType
 	private final boolean edible;
 	private final boolean record;
 	private final boolean fuel;
+	private final String translationKey;
 
 	private ItemTypeMock(NamespacedKey namespacedKey, int maxStackSize, short maxDurability,
-						 boolean edible, boolean record, boolean fuel, boolean blockType)
+						 boolean edible, boolean record, boolean fuel, boolean blockType, String translationKey)
 	{
 		this.namespacedKey = namespacedKey;
 		this.maxStackSize = maxStackSize;
@@ -39,6 +40,7 @@ public class ItemTypeMock implements ItemType
 		this.record = record;
 		this.fuel = fuel;
 		this.blockType = blockType;
+		this.translationKey = translationKey;
 	}
 
 	@ApiStatus.Internal
@@ -51,8 +53,9 @@ public class ItemTypeMock implements ItemType
 		boolean record = jsonObject.get("record").getAsBoolean();
 		boolean fuel = jsonObject.get("fuel").getAsBoolean();
 		boolean blockType = jsonObject.get("blockType").getAsBoolean();
+		String translationKey = jsonObject.get("translationKey").getAsString();
 
-		return new ItemTypeMock(key, maxStackSize, maxDurability, edible, record, fuel,blockType);
+		return new ItemTypeMock(key, maxStackSize, maxDurability, edible, record, fuel, blockType, translationKey);
 	}
 
 	@NotNull
@@ -168,7 +171,7 @@ public class ItemTypeMock implements ItemType
 	@Override
 	public @NotNull String getTranslationKey()
 	{
-		throw new UnimplementedOperationException();
+		return translationKey;
 	}
 
 }

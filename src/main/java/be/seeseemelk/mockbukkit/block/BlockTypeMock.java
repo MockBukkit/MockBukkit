@@ -29,10 +29,11 @@ public class BlockTypeMock implements BlockType
 	private final float slipperiness;
 	private final boolean air;
 	private final boolean interactable;
+	private final String translationKey;
 
 	public BlockTypeMock(NamespacedKey key, boolean itemType, boolean solid, boolean flammable, boolean burnable,
 						 boolean occluding, boolean gravity, float hardness, float blastResistance, float slipperiness,
-						 boolean air, boolean interactable)
+						 boolean air, boolean interactable, String translationKey)
 	{
 		this.key = key;
 		this.itemType = itemType;
@@ -46,6 +47,7 @@ public class BlockTypeMock implements BlockType
 		this.slipperiness = slipperiness;
 		this.air = air;
 		this.interactable = interactable;
+		this.translationKey = translationKey;
 	}
 
 	@ApiStatus.Internal
@@ -63,7 +65,8 @@ public class BlockTypeMock implements BlockType
 		float slipperiness = jsonObject.get("slipperiness").getAsFloat();
 		boolean air = jsonObject.get("air").getAsBoolean();
 		boolean interactable = jsonObject.get("interactable").getAsBoolean();
-		return new BlockTypeMock(key, itemType, solid, flammable, burnable, occluding, gravity, hardness, blastResistance, slipperiness, air, interactable);
+		String translationKey = jsonObject.get("translationKey").getAsString();
+		return new BlockTypeMock(key, itemType, solid, flammable, burnable, occluding, gravity, hardness, blastResistance, slipperiness, air, interactable, translationKey);
  	}
 
 	@NotNull
@@ -191,7 +194,7 @@ public class BlockTypeMock implements BlockType
 	@Override
 	public @NotNull String getTranslationKey()
 	{
-		throw new UnimplementedOperationException();
+		return translationKey;
 	}
 
 }
