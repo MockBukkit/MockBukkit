@@ -89,12 +89,6 @@ class EnchantmentMockTest
 	}
 
 	@Test
-	void getRarity()
-	{
-		assertEquals(rarity, enchantment.getRarity());
-	}
-
-	@Test
 	void getName()
 	{
 		assertEquals(name, enchantment.getName());
@@ -124,19 +118,6 @@ class EnchantmentMockTest
 	{
 		enchantment.setStartLevel(20);
 		assertEquals(20, enchantment.getStartLevel());
-	}
-
-	@Test
-	void getItemTarget()
-	{
-		assertEquals(target, enchantment.getItemTarget());
-	}
-
-	@Test
-	void setItemTarget()
-	{
-		enchantment.setItemTarget(EnchantmentTarget.CROSSBOW);
-		assertEquals(EnchantmentTarget.CROSSBOW, enchantment.getItemTarget());
 	}
 
 	@Test

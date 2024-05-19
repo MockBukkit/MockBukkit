@@ -45,6 +45,10 @@ public class RegistryAccessMock implements RegistryAccess
 			return createConfiguredStructureRegistry();
 		}
 		RegistryKey<T> registryKey = determineRegistryKeyFromClass(type);
+		if (registryKey == null)
+		{
+			return findSimpleRegistry(type.getName());
+		}
 		return getRegistry(registryKey);
 	}
 
@@ -75,16 +79,7 @@ public class RegistryAccessMock implements RegistryAccess
 		{
 			return new RegistryMock<>(key);
 		}
-
-		return Stream.of(Registry.class.getDeclaredFields())
-				.filter(a -> Registry.class.isAssignableFrom(a.getType()))
-				.filter(a -> Modifier.isPublic(a.getModifiers()))
-				.filter(a -> Modifier.isStatic(a.getModifiers()))
-				.filter(a -> genericTypeMatches(a, CLASS_NAME_TO_KEY_MAP.get(key)))
-				.map(RegistryAccessMock::getValue)
-				.filter(Objects::nonNull)
-				.findAny()
-				.orElseThrow(() -> new UnimplementedOperationException("Could not find registry for " + key));
+		return findSimpleRegistry(CLASS_NAME_TO_KEY_MAP.get(key));
 	}
 
 
@@ -122,7 +117,7 @@ public class RegistryAccessMock implements RegistryAccess
 	private static BiMap<RegistryKey<?>, String> createClassToKeyConversions()
 	{
 		String fileName = "/registries/registry_key_class_relation.json";
-		BiMap<RegistryKey<?>,String> output = HashBiMap.create();
+		BiMap<RegistryKey<?>, String> output = HashBiMap.create();
 		try (InputStream inputStream = MockBukkit.class.getResourceAsStream(fileName))
 		{
 			if (inputStream == null)
@@ -186,6 +181,19 @@ public class RegistryAccessMock implements RegistryAccess
 				throw new UnimplementedOperationException("Registry for type ConfiguredStructure not implemented");
 			}
 		};
+	}
+
+	private static <T extends Keyed> Registry<T> findSimpleRegistry(String className)
+	{
+		return (Registry<T>) Stream.of(Registry.class.getDeclaredFields())
+				.filter(a -> Registry.class.isAssignableFrom(a.getType()))
+				.filter(a -> Modifier.isPublic(a.getModifiers()))
+				.filter(a -> Modifier.isStatic(a.getModifiers()))
+				.filter(a -> genericTypeMatches(a, className))
+				.map(RegistryAccessMock::getValue)
+				.filter(Objects::nonNull)
+				.findAny()
+				.orElseThrow(() -> new UnimplementedOperationException("Could not find registry for " + className));
 	}
 
 }

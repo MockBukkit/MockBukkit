@@ -1,23 +1,19 @@
 package be.seeseemelk.mockbukkit.tags;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.RegistryMock;
 import org.bukkit.Material;
-import org.bukkit.MusicInstrument;
 import org.bukkit.Tag;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
 import java.io.FileNotFoundException;
 import java.util.HashSet;
-import java.util.Locale;
 import java.util.Set;
+import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -45,8 +41,16 @@ class RegistryTest
 
 		for (TagWrapperMock tag : registry.getTags().values())
 		{
-			assertFalse(tag.getValues().isEmpty(), "Expected Tag \"" + tag + "\" not to be empty");
+			if(getEmptyTags().noneMatch(tag::equals))
+			{
+				assertFalse(tag.getValues().isEmpty(), "Expected Tag \"" + tag + "\" not to be empty");
+			}
 		}
+	}
+
+	static Stream<Tag<?>> getEmptyTags()
+	{
+		return Stream.of(Tag.INCORRECT_FOR_NETHERITE_TOOL, Tag.INCORRECT_FOR_DIAMOND_TOOL);
 	}
 
 	@ParameterizedTest
@@ -71,8 +75,10 @@ class RegistryTest
 		for (TagWrapperMock tag : registry.getTags().values())
 		{
 			Set<Material> values = tag.getValues();
-			assertFalse(values.isEmpty());
-
+			if (getEmptyTags().noneMatch(tag::equals)) // Currently these tags are empty
+			{
+				assertFalse(values.isEmpty(), "Expected values in tag: " + tag.getKey());
+			}
 			for (Material value : tag.getValues())
 			{
 				// All values of our tag must be tagged

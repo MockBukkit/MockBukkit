@@ -65,12 +65,6 @@ class EnchantmentMockTest
 	}
 
 	@Test
-	void getRarity()
-	{
-		assertNotNull(Enchantment.POWER.getRarity());
-	}
-
-	@Test
 	void getName()
 	{
 		assertNotNull(Enchantment.PROTECTION.getName());
@@ -86,12 +80,6 @@ class EnchantmentMockTest
 	void getStartLeve()
 	{
 		assertEquals(1, Enchantment.UNBREAKING.getStartLevel());
-	}
-
-	@Test
-	void getItemTarget()
-	{
-		assertNotNull(Enchantment.CHANNELING.getItemTarget());
 	}
 
 	@Test
