@@ -34,7 +34,7 @@ import java.util.stream.Stream;
 public class RegistryAccessMock implements RegistryAccess
 {
 
-	private final Map<RegistryKey<?>, Registry<?>> registries = new HashMap();
+	private final Map<RegistryKey<?>, Registry<?>> registries = new HashMap<>();
 	private static final BiMap<RegistryKey<?>, String> CLASS_NAME_TO_KEY_MAP = createClassToKeyConversions();
 
 
