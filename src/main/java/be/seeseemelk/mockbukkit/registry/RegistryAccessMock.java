@@ -10,6 +10,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;
+import io.papermc.paper.world.structure.ConfiguredStructure;
 import org.bukkit.Keyed;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
@@ -34,13 +35,13 @@ public class RegistryAccessMock implements RegistryAccess
 {
 
 	private final Map<RegistryKey<?>, Registry<?>> registries = new HashMap();
-	private static BiMap<RegistryKey<?>, String> CLASS_NAME_TO_KEY_MAP;
+	private static final BiMap<RegistryKey<?>, String> CLASS_NAME_TO_KEY_MAP = createClassToKeyConversions();
 
 
 	@Override
 	public @Nullable <T extends Keyed> Registry<T> getRegistry(@NotNull Class<T> type)
 	{
-		if (type.getName().equals("io.papermc.paper.world.structure.ConfiguredStructure"))
+		if (type == ConfiguredStructure.class)
 		{
 			return createConfiguredStructureRegistry();
 		}
@@ -54,10 +55,6 @@ public class RegistryAccessMock implements RegistryAccess
 
 	private <T extends Keyed> RegistryKey<T> determineRegistryKeyFromClass(@NotNull Class<T> type)
 	{
-		if (CLASS_NAME_TO_KEY_MAP == null)
-		{
-			CLASS_NAME_TO_KEY_MAP = createClassToKeyConversions();
-		}
 		return (RegistryKey<T>) CLASS_NAME_TO_KEY_MAP.inverse().get(type.getName());
 	}
 

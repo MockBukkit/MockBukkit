@@ -224,7 +224,6 @@ class AreaEffectCloudMockTest
 	void testHasCustomEffectWithBasePotionDataWithoutEffectAndMatchingInCustom()
 	{
 		areaEffectCloud.setBasePotionData(new PotionData(PotionType.HEALING));
-		PotionEffect effect = new PotionEffect(PotionEffectType.INSTANT_HEALTH, 1, 1);
 		assertFalse(areaEffectCloud.hasCustomEffects());
 	}
 

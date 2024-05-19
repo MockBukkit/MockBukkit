@@ -26,18 +26,18 @@ public class ItemTypeMock implements ItemType
 	private final int maxStackSize;
 	private final short maxDurability;
 	private final boolean edible;
-	private final boolean record;
+	private final boolean hasRecord;
 	private final boolean fuel;
 	private final String translationKey;
 
 	private ItemTypeMock(NamespacedKey namespacedKey, int maxStackSize, short maxDurability,
-						 boolean edible, boolean record, boolean fuel, boolean blockType, String translationKey)
+						 boolean edible, boolean hasRecord, boolean fuel, boolean blockType, String translationKey)
 	{
 		this.namespacedKey = namespacedKey;
 		this.maxStackSize = maxStackSize;
 		this.maxDurability = maxDurability;
 		this.edible = edible;
-		this.record = record;
+		this.hasRecord = hasRecord;
 		this.fuel = fuel;
 		this.blockType = blockType;
 		this.translationKey = translationKey;
@@ -50,12 +50,12 @@ public class ItemTypeMock implements ItemType
 		int maxStackSize = jsonObject.get("maxStackSize").getAsInt();
 		short maxDurability = jsonObject.get("maxDurability").getAsShort();
 		boolean edible = jsonObject.get("edible").getAsBoolean();
-		boolean record = jsonObject.get("record").getAsBoolean();
+		boolean hasRecord = jsonObject.get("record").getAsBoolean();
 		boolean fuel = jsonObject.get("fuel").getAsBoolean();
 		boolean blockType = jsonObject.get("blockType").getAsBoolean();
 		String translationKey = jsonObject.get("translationKey").getAsString();
 
-		return new ItemTypeMock(key, maxStackSize, maxDurability, edible, record, fuel, blockType, translationKey);
+		return new ItemTypeMock(key, maxStackSize, maxDurability, edible, hasRecord, fuel, blockType, translationKey);
 	}
 
 	@NotNull
@@ -123,7 +123,7 @@ public class ItemTypeMock implements ItemType
 	@Override
 	public boolean isRecord()
 	{
-		return this.record;
+		return this.hasRecord;
 	}
 
 	@Override

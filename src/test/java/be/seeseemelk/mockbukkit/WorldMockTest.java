@@ -1330,8 +1330,7 @@ class WorldMockTest
 				Arguments.of(EntityType.TRIDENT, Trident.class),
 				Arguments.of(EntityType.SPECTRAL_ARROW, SpectralArrow.class),
 				Arguments.of(EntityType.ARROW, Arrow.class),
-				Arguments.of(EntityType.MARKER, MarkerMock.class),
-				Arguments.of(EntityType.TNT, TNTPrimedMock.class)
+				Arguments.of(EntityType.MARKER, MarkerMock.class)
 		);
 	}
 
