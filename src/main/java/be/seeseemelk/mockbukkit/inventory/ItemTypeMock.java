@@ -22,16 +22,37 @@ public class ItemTypeMock implements ItemType
 {
 
 	private final NamespacedKey namespacedKey;
+	private final boolean blockType;
+	private final int maxStackSize;
+	private final short maxDurability;
+	private final boolean edible;
+	private final boolean record;
+	private final boolean fuel;
 
-	private ItemTypeMock(NamespacedKey namespacedKey)
+	private ItemTypeMock(NamespacedKey namespacedKey, int maxStackSize, short maxDurability,
+						 boolean edible, boolean record, boolean fuel, boolean blockType)
 	{
 		this.namespacedKey = namespacedKey;
+		this.maxStackSize = maxStackSize;
+		this.maxDurability = maxDurability;
+		this.edible = edible;
+		this.record = record;
+		this.fuel = fuel;
+		this.blockType = blockType;
 	}
 
 	@ApiStatus.Internal
 	public static ItemType from(JsonObject jsonObject)
 	{
-		return new ItemTypeMock(NamespacedKey.fromString(jsonObject.get("key").getAsString()));
+		NamespacedKey key = NamespacedKey.fromString(jsonObject.get("key").getAsString());
+		int maxStackSize = jsonObject.get("maxStackSize").getAsInt();
+		short maxDurability = jsonObject.get("maxDurability").getAsShort();
+		boolean edible = jsonObject.get("edible").getAsBoolean();
+		boolean record = jsonObject.get("record").getAsBoolean();
+		boolean fuel = jsonObject.get("fuel").getAsBoolean();
+		boolean blockType = jsonObject.get("blockType").getAsBoolean();
+
+		return new ItemTypeMock(key, maxStackSize, maxDurability, edible, record, fuel,blockType);
 	}
 
 	@NotNull
@@ -63,7 +84,7 @@ public class ItemTypeMock implements ItemType
 	@Override
 	public boolean hasBlockType()
 	{
-		throw new UnimplementedOperationException();
+		return this.blockType;
 	}
 
 	@Override
@@ -81,31 +102,31 @@ public class ItemTypeMock implements ItemType
 	@Override
 	public int getMaxStackSize()
 	{
-		throw new UnimplementedOperationException();
+		return this.maxStackSize;
 	}
 
 	@Override
 	public short getMaxDurability()
 	{
-		throw new UnimplementedOperationException();
+		return this.maxDurability;
 	}
 
 	@Override
 	public boolean isEdible()
 	{
-		throw new UnimplementedOperationException();
+		return this.edible;
 	}
 
 	@Override
 	public boolean isRecord()
 	{
-		throw new UnimplementedOperationException();
+		return this.record;
 	}
 
 	@Override
 	public boolean isFuel()
 	{
-		throw new UnimplementedOperationException();
+		return this.fuel;
 	}
 
 	@Override

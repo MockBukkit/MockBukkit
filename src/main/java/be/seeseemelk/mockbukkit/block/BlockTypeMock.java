@@ -12,21 +12,59 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.naming.Name;
+
 public class BlockTypeMock implements BlockType
 {
 
 	private final NamespacedKey key;
+	private final boolean itemType;
+	private final boolean solid;
+	private final boolean flammable;
+	private final boolean burnable;
+	private final boolean occluding;
+	private final boolean gravity;
+	private final float hardness;
+	private final float blastResistance;
+	private final float slipperiness;
+	private final boolean air;
+	private final boolean interactable;
 
-	private BlockTypeMock(NamespacedKey key)
+	public BlockTypeMock(NamespacedKey key, boolean itemType, boolean solid, boolean flammable, boolean burnable,
+						 boolean occluding, boolean gravity, float hardness, float blastResistance, float slipperiness,
+						 boolean air, boolean interactable)
 	{
 		this.key = key;
+		this.itemType = itemType;
+		this.solid = solid;
+		this.flammable = flammable;
+		this.burnable = burnable;
+		this.occluding = occluding;
+		this.gravity = gravity;
+		this.hardness = hardness;
+		this.blastResistance = blastResistance;
+		this.slipperiness = slipperiness;
+		this.air = air;
+		this.interactable = interactable;
 	}
 
 	@ApiStatus.Internal
 	public static BlockTypeMock from(JsonObject jsonObject)
 	{
-		return new BlockTypeMock(NamespacedKey.fromString(jsonObject.get("key").getAsString()));
-	}
+		NamespacedKey key = NamespacedKey.fromString(jsonObject.get("key").getAsString());
+		boolean itemType = jsonObject.get("itemType").getAsBoolean();
+		boolean solid = jsonObject.get("solid").getAsBoolean();
+		boolean flammable = jsonObject.get("flammable").getAsBoolean();
+		boolean burnable = jsonObject.get("burnable").getAsBoolean();
+		boolean occluding = jsonObject.get("occluding").getAsBoolean();
+		boolean gravity = jsonObject.get("gravity").getAsBoolean();
+		float hardness = jsonObject.get("hardness").getAsFloat();
+		float blastResistance = jsonObject.get("blastResistance").getAsFloat();
+		float slipperiness = jsonObject.get("slipperiness").getAsFloat();
+		boolean air = jsonObject.get("air").getAsBoolean();
+		boolean interactable = jsonObject.get("interactable").getAsBoolean();
+		return new BlockTypeMock(key, itemType, solid, flammable, burnable, occluding, gravity, hardness, blastResistance, slipperiness, air, interactable);
+ 	}
 
 	@NotNull
 	@Override
@@ -45,7 +83,7 @@ public class BlockTypeMock implements BlockType
 	@Override
 	public boolean hasItemType()
 	{
-		throw new UnimplementedOperationException();
+		return itemType;
 	}
 
 	@Override
@@ -75,61 +113,61 @@ public class BlockTypeMock implements BlockType
 	@Override
 	public boolean isSolid()
 	{
-		throw new UnimplementedOperationException();
+		return solid;
 	}
 
 	@Override
 	public boolean isFlammable()
 	{
-		throw new UnimplementedOperationException();
+		return flammable;
 	}
 
 	@Override
 	public boolean isBurnable()
 	{
-		throw new UnimplementedOperationException();
+		return burnable;
 	}
 
 	@Override
 	public boolean isOccluding()
 	{
-		throw new UnimplementedOperationException();
+		return occluding;
 	}
 
 	@Override
 	public boolean hasGravity()
 	{
-		throw new UnimplementedOperationException();
+		return gravity;
 	}
 
 	@Override
 	public boolean isInteractable()
 	{
-		throw new UnimplementedOperationException();
+		return interactable;
 	}
 
 	@Override
 	public float getHardness()
 	{
-		throw new UnimplementedOperationException();
+		return hardness;
 	}
 
 	@Override
 	public float getBlastResistance()
 	{
-		throw new UnimplementedOperationException();
+		return blastResistance;
 	}
 
 	@Override
 	public float getSlipperiness()
 	{
-		throw new UnimplementedOperationException();
+		return slipperiness;
 	}
 
 	@Override
 	public boolean isAir()
 	{
-		throw new UnimplementedOperationException();
+		return air;
 	}
 
 	@Override
