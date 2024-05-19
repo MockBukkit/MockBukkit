@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.inventory;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.entity.HumanEntityMock;
+import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryType;
@@ -349,7 +350,7 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 			case HEAD -> notNull(getHelmet());
 			case LEGS -> notNull(getLeggings());
 			case OFF_HAND -> getItemInOffHand();
-			case BODY -> throw new UnimplementedOperationException();
+			case BODY -> throw new IllegalArgumentException("Not implemented. This is a bug in paper which has been copied over to MockBukkit");
 		};
 	}
 

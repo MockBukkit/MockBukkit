@@ -2,7 +2,6 @@ package be.seeseemelk.mockbukkit;
 
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
-import be.seeseemelk.mockbukkit.block.data.WallSignMock;
 import be.seeseemelk.mockbukkit.block.state.BlockStateMock;
 import be.seeseemelk.mockbukkit.entity.AllayMock;
 import be.seeseemelk.mockbukkit.entity.AreaEffectCloudMock;
@@ -103,7 +102,6 @@ import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
-import org.bukkit.block.data.type.WallSign;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -1298,7 +1296,7 @@ class WorldMockTest
 				Arguments.of(EntityType.FURNACE_MINECART, PoweredMinecartMock.class),
 				Arguments.of(EntityType.CAMEL, CamelMock.class),
 				Arguments.of(EntityType.COMMAND_BLOCK_MINECART, CommandMinecartMock.class),
-				Arguments.of(EntityType.TNT, ExplosiveMinecartMock.class),
+				Arguments.of(EntityType.TNT_MINECART, ExplosiveMinecartMock.class),
 				Arguments.of(EntityType.HOPPER_MINECART, HopperMinecartMock.class),
 				Arguments.of(EntityType.SPAWNER_MINECART, SpawnerMinecartMock.class),
 				Arguments.of(EntityType.MINECART, RideableMinecartMock.class),
@@ -1903,7 +1901,7 @@ class WorldMockTest
 	void testGetKeepSpawnInMemoryDefault()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
-        assertTrue(world.getKeepSpawnInMemory());
+		assertTrue(world.getKeepSpawnInMemory());
 	}
 
 	@Test
@@ -2275,7 +2273,7 @@ class WorldMockTest
 		assertTrue(world.isFixedTime());
 	}
 
-  @Test
+	@Test
 	void testGetEntity()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);

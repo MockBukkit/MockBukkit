@@ -5,7 +5,6 @@ import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMultimap;
-import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.SetMultimap;
@@ -71,6 +70,8 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	private Integer maxDamage;
 	private boolean hideTooltip;
 	private boolean fireResistant;
+	private Integer maxStackSize = null;
+	private static final int ABSOLUTE_MAX_STACK_SIZE = 99;
 
 
 	/**
@@ -91,7 +92,10 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		enchants = new HashMap<>(meta.getEnchants());
 		customModelData = meta.hasCustomModelData() ? meta.getCustomModelData() : null;
 		hideFlags.addAll(meta.getItemFlags());
-
+		if (meta.hasMaxStackSize())
+		{
+			maxStackSize = meta.getMaxStackSize();
+		}
 		if (meta.hasDisplayName())
 		{
 			displayName = GsonComponentSerializer.gson().serialize(meta.displayName());
@@ -534,21 +538,21 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
-	@Deprecated(forRemoval = true,since = "1.20.6")
+	@Deprecated(forRemoval = true, since = "1.20.6")
 	public boolean hasLocalizedName()
 	{
 		return localizedName != null;
 	}
 
 	@Override
-	@Deprecated(forRemoval = true,since = "1.20.6")
+	@Deprecated(forRemoval = true, since = "1.20.6")
 	public @NotNull String getLocalizedName()
 	{
 		return localizedName;
 	}
 
 	@Override
-	@Deprecated(forRemoval = true,since = "1.20.6")
+	@Deprecated(forRemoval = true, since = "1.20.6")
 	public void setLocalizedName(@Nullable String name)
 	{
 		localizedName = name;
@@ -988,24 +992,22 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public boolean hasMaxStackSize()
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.maxStackSize != null;
 	}
 
 	@Override
 	public int getMaxStackSize()
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		Preconditions.checkState(hasMaxStackSize(), "We don't have max_stack_size! Check hasMaxStackSize first!");
+		return this.maxStackSize;
 	}
 
 	@Override
 	public void setMaxStackSize(@Nullable Integer max)
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		Preconditions.checkArgument(max == null || max > 0, "max_stack_size must be > 0");
+		Preconditions.checkArgument(max == null || max <= ABSOLUTE_MAX_STACK_SIZE, "max_stack_size must be <= 99");
+		this.maxStackSize = max;
 	}
 
 	@Override

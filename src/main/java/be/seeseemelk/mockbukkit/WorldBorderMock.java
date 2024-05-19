@@ -27,9 +27,9 @@ public class WorldBorderMock implements WorldBorder
 	private static final int DEFAULT_WARNING_TIME = 15;
 	private static final double DEFAULT_CENTER_X = 0;
 	private static final double DEFAULT_CENTER_Z = 0;
-	private static final double MAX_CENTER_VALUE = 3.0E7D;
+	private static final double MAX_CENTER_VALUE = 2.9999984E7D;
 	private static final long MAX_MOVEMENT_TIME = 9223372036854775L;
-	private static final double MAX_BORDER_SIZE = 6.0E7D;
+	private static final double MAX_BORDER_SIZE = 5.9999968E7D;
 	private static final double MIN_BORDER_SIZE = 1.0D;
 
 	private final @NotNull World world;
@@ -229,15 +229,13 @@ public class WorldBorderMock implements WorldBorder
 	@Override
 	public double getMaxSize()
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return MAX_BORDER_SIZE;
 	}
 
 	@Override
 	public double getMaxCenterCoordinate()
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return MAX_CENTER_VALUE;
 	}
 
 }

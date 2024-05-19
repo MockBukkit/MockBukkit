@@ -266,6 +266,10 @@ class PlayerInventoryMockTest
 	@EnumSource(EquipmentSlot.class)
 	void getItem_Mirror(EquipmentSlot slot)
 	{
+		// Ignore BODY, as this will throw an exception otherwise
+		if(slot == EquipmentSlot.BODY){
+			return;
+		}
 		ItemStack apiItemStack = new ItemStack(Material.SCULK);
 		inventory.setItem(slot, apiItemStack);
 		ItemStack mirrorItemStack = inventory.getItem(slot);
