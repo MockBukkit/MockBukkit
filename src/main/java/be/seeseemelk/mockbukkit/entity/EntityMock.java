@@ -887,7 +887,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	@Deprecated(forRemoval = true,since = "1.20.6")
+	@Deprecated(forRemoval = true, since = "1.20.6")
 	public void setLastDamageCause(@Nullable EntityDamageEvent event)
 	{
 		this.lastDamageEvent = event;

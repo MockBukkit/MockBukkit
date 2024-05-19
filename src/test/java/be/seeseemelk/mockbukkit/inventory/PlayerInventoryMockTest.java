@@ -266,7 +266,7 @@ class PlayerInventoryMockTest
 	@EnumSource(EquipmentSlot.class)
 	void getItem_Mirror(EquipmentSlot slot)
 	{
-		// Ignore BODY, as this will throw an exception otherwise
+		// This will throw an exception otherwise as per paper behavior
 		if(slot == EquipmentSlot.BODY){
 			return;
 		}
