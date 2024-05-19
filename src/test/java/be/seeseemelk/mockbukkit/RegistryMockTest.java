@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit;
 
+import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;
 import org.bukkit.Keyed;
 import org.bukkit.NamespacedKey;
@@ -54,14 +55,14 @@ class RegistryMockTest
 	@MethodSource("getValues")
 	void stream(RegistryKey<? extends Keyed> key)
 	{
-		assertNotEquals(0, new RegistryMock<>(key).stream().count());
+		assertNotEquals(0, RegistryAccess.registryAccess().getRegistry(key).stream().count());
 	}
 
 	@ParameterizedTest
 	@MethodSource("getValues")
 	void iterator(RegistryKey<? extends Keyed> key)
 	{
-		assertTrue(new RegistryMock<>(key).iterator().hasNext());
+		assertTrue(RegistryAccess.registryAccess().getRegistry(key).iterator().hasNext());
 	}
 
 	@Test

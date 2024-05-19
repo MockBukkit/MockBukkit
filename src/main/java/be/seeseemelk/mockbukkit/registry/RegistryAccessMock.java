@@ -68,12 +68,12 @@ public class RegistryAccessMock implements RegistryAccess
 		{
 			return (Registry<T>) registries.get(registryKey);
 		}
-		Registry<T> registry = (Registry<T>) createRegistry(registryKey);
+		Registry<T> registry = createRegistry(registryKey);
 		registries.put(registryKey, registry);
 		return registry;
 	}
 
-	private static <T extends Keyed> Registry<?> createRegistry(RegistryKey<T> key)
+	private static <T extends Keyed> Registry<T> createRegistry(RegistryKey<T> key)
 	{
 		if (getOutlierKeyedRegistryKeys().contains(key))
 		{
