@@ -94,26 +94,34 @@ public class ServerBuildInfoMock implements ServerBuildInfo
 		final StringBuilder sb = new StringBuilder();
 		sb.append(this.minecraftVersionId());
 		sb.append('-');
-		if (this.buildNumber().isPresent()) {
+		if (this.buildNumber().isPresent())
+		{
 			sb.append(this.buildNumber().getAsInt());
-		} else {
+		}
+		else
+		{
 			sb.append(BUILD_DEV);
 		}
 		final boolean hasGitBranch = this.gitBranch().isPresent();
 		final boolean hasGitCommit = this.gitCommit().isPresent();
-		if (hasGitBranch || hasGitCommit) {
+		if (hasGitBranch || hasGitCommit)
+		{
 			sb.append('-');
 		}
-		if (hasGitBranch && stringRepresentation == StringRepresentation.VERSION_FULL) {
+		if (hasGitBranch && stringRepresentation == StringRepresentation.VERSION_FULL)
+		{
 			sb.append(this.gitBranch().get());
-			if (hasGitCommit) {
+			if (hasGitCommit)
+			{
 				sb.append('@');
 			}
 		}
-		if (hasGitCommit) {
+		if (hasGitCommit)
+		{
 			sb.append(this.gitCommit().get());
 		}
-		if (stringRepresentation == StringRepresentation.VERSION_FULL) {
+		if (stringRepresentation == StringRepresentation.VERSION_FULL)
+		{
 			sb.append(' ');
 			sb.append('(');
 			sb.append(this.buildTime().truncatedTo(ChronoUnit.SECONDS));

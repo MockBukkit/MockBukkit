@@ -76,6 +76,7 @@ import be.seeseemelk.mockbukkit.entity.SpiderMock;
 import be.seeseemelk.mockbukkit.entity.SquidMock;
 import be.seeseemelk.mockbukkit.entity.StorageMinecartMock;
 import be.seeseemelk.mockbukkit.entity.StrayMock;
+import be.seeseemelk.mockbukkit.entity.TNTPrimedMock;
 import be.seeseemelk.mockbukkit.entity.TadpoleMock;
 import be.seeseemelk.mockbukkit.entity.ThrownExpBottleMock;
 import be.seeseemelk.mockbukkit.entity.TropicalFishMock;
@@ -1329,7 +1330,8 @@ class WorldMockTest
 				Arguments.of(EntityType.TRIDENT, Trident.class),
 				Arguments.of(EntityType.SPECTRAL_ARROW, SpectralArrow.class),
 				Arguments.of(EntityType.ARROW, Arrow.class),
-				Arguments.of(EntityType.MARKER, MarkerMock.class)
+				Arguments.of(EntityType.MARKER, MarkerMock.class),
+				Arguments.of(EntityType.TNT, TNTPrimedMock.class)
 		);
 	}
 
