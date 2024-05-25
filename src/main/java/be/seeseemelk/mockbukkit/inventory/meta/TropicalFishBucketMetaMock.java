@@ -6,6 +6,8 @@ import org.bukkit.entity.TropicalFish;
 import org.bukkit.inventory.meta.TropicalFishBucketMeta;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Map;
+
 /**
  * Mock implementation of an {@link TropicalFishBucketMeta}.
  *
@@ -34,6 +36,11 @@ public class TropicalFishBucketMetaMock extends ItemMetaMock implements Tropical
 	public TropicalFishBucketMetaMock(@NotNull TropicalFishBucketMeta meta)
 	{
 		super(meta);
+
+		if (meta instanceof TropicalFishBucketMetaMock mock)
+		{
+			mock.checkVars();
+		}
 
 		this.patternColor = meta.getPatternColor();
 		this.bodyColor = meta.getBodyColor();
@@ -134,6 +141,39 @@ public class TropicalFishBucketMetaMock extends ItemMetaMock implements Tropical
 		clone.bodyColor = this.bodyColor;
 		clone.pattern = this.pattern;
 		return clone;
+	}
+
+	/**
+	 * Required method for Bukkit deserialization.
+	 *
+	 * @param args A serialized TropicalFishBucketMetaMock object in a Map&lt;String, Object&gt; format.
+	 * @return A new instance of the TropicalFishBucketMetaMock class.
+	 */
+	public static @NotNull TropicalFishBucketMetaMock deserialize(@NotNull Map<String, Object> args)
+	{
+		TropicalFishBucketMetaMock serialMock = new TropicalFishBucketMetaMock();
+		serialMock.deserializeInternal(args);
+		serialMock.bodyColor = (DyeColor) args.get("body-color");
+		serialMock.patternColor = (DyeColor) args.get("pattern-color");
+		serialMock.pattern = (TropicalFish.Pattern) args.get("pattern");
+		return serialMock;
+	}
+
+	/**
+	 * Serializes the properties of an TropicalFishBucketMetaMock to a HashMap.
+	 * Unimplemented properties are not present in the map.
+	 *
+	 * @return A HashMap of String, Object pairs representing the TropicalFishBucketMetaMock.
+	 */
+	@Override
+	public @NotNull Map<String, Object> serialize()
+	{
+		final Map<String, Object> serialized = super.serialize();
+		checkVars();
+		serialized.put("body-color", bodyColor);
+		serialized.put("pattern-color", patternColor);
+		serialized.put("pattern", pattern);
+		return serialized;
 	}
 
 }

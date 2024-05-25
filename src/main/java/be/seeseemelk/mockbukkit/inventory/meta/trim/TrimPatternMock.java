@@ -1,7 +1,7 @@
 package be.seeseemelk.mockbukkit.inventory.meta.trim;
 
-import com.google.common.base.Preconditions;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import com.google.common.base.Preconditions;
 import com.google.gson.JsonObject;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;

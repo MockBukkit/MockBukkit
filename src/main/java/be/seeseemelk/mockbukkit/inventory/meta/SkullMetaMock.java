@@ -12,6 +12,7 @@ import org.bukkit.profile.PlayerProfile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -83,7 +84,7 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 			return false;
 		}
 
-		return Objects.equals(playerProfile.getName(), other.getOwningPlayer().getName());
+		return playerProfile == other.getOwningPlayer() || Objects.equals(playerProfile.getName(), other.getOwningPlayer().getName());
 	}
 
 	@Override
@@ -203,6 +204,36 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+
+	/**
+	 * Required method for Bukkit deserialization.
+	 *
+	 * @param args A serialized SkullMetaMock object in a Map&lt;String, Object&gt; format.
+	 * @return A new instance of the SkullMetaMock class.
+	 */
+	public static @NotNull SkullMetaMock deserialize(@NotNull Map<String, Object> args)
+	{
+		SkullMetaMock serialMock = new SkullMetaMock();
+		serialMock.deserializeInternal(args);
+		serialMock.playerProfile = (com.destroystokyo.paper.profile.PlayerProfile) args.get("player-profile");
+		return serialMock;
+	}
+
+	/**
+	 * Serializes the properties of an SkullMetaMock to a HashMap.
+	 * Unimplemented properties are not present in the map.
+	 *
+	 * @return A HashMap of String, Object pairs representing the SkullMetaMock.
+	 */
+	@Override
+	public @NotNull Map<String, Object> serialize()
+	{
+		final Map<String, Object> serialized = super.serialize();
+		if (playerProfile != null)
+			serialized.put("player-profile", playerProfile);
+		return serialized;
 	}
 
 }

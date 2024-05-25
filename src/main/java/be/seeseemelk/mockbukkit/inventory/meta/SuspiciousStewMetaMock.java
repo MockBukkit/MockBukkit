@@ -11,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Mock implementation of a {@link SuspiciousStewMeta}.
@@ -155,6 +156,36 @@ public class SuspiciousStewMetaMock extends ItemMetaMock implements SuspiciousSt
 		}
 
 		return -1;
+	}
+
+	/**
+	 * Required method for Bukkit deserialization.
+	 *
+	 * @param args A serialized SuspiciousStewMetaMock object in a Map&lt;String, Object&gt; format.
+	 * @return A new instance of the SuspiciousStewMetaMock class.
+	 */
+	@SuppressWarnings("unchecked")
+	public static @NotNull SuspiciousStewMetaMock deserialize(@NotNull Map<String, Object> args)
+	{
+		SuspiciousStewMetaMock serialMock = new SuspiciousStewMetaMock();
+		serialMock.deserializeInternal(args);
+		serialMock.effects = ((List<Map<String, Object>>) args.get("effects")).stream()
+				.map(PotionEffect::new).toList();
+		return serialMock;
+	}
+
+	/**
+	 * Serializes the properties of an SuspiciousStewMetaMock to a HashMap.
+	 * Unimplemented properties are not present in the map.
+	 *
+	 * @return A HashMap of String, Object pairs representing the SuspiciousStewMetaMock.
+	 */
+	@Override
+	public @NotNull Map<String, Object> serialize()
+	{
+		final Map<String, Object> serialized = super.serialize();
+		serialized.put("effects", this.effects.stream().map(PotionEffect::serialize).toList());
+		return serialized;
 	}
 
 }

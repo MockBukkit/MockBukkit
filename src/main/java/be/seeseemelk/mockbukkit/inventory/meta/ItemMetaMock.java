@@ -27,6 +27,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.Repairable;
 import org.bukkit.inventory.meta.tags.CustomItemTagContainer;
 import org.bukkit.persistence.PersistentDataContainer;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -592,27 +593,32 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	 * @param args A serialized ItemMetaMock object in a Map&lt;String, Object&gt; format.
 	 * @return A new instance of the ItemMetaMock class.
 	 */
-	@SuppressWarnings("unchecked")
 	public static @NotNull ItemMetaMock deserialize(@NotNull Map<String, Object> args)
 	{
 		ItemMetaMock serialMock = new ItemMetaMock();
 
-		serialMock.displayName = (String) args.get("display-name");
-		serialMock.lore = (List<String>) args.get("lore");
-		serialMock.localizedName = (String) args.get("loc-name");
-		serialMock.enchants = (Map<Enchantment, Integer>) args.get("enchants");
-		serialMock.hideFlags = (Set<ItemFlag>) args.get("ItemFlags");
-		serialMock.unbreakable = (boolean) args.get("Unbreakable");
-		serialMock.setAttributeModifiers((Multimap<Attribute, AttributeModifier>) args.get("AttributeModifiers"));
-		// customTagContainer is also unimplemented in mock.
-		serialMock.customModelData = (Integer) args.get("custom-model-data");
-		Map<String, Object> map = (Map<String, Object>) args.get("PublicBukkitValues");
-		serialMock.persistentDataContainer = PersistentDataContainerMock.deserialize(map);
-		serialMock.damage = (int) args.get("Damage");
-		serialMock.repairCost = (int) args.get("repair-cost");
-		serialMock.destroyableKeys = (Set<Namespaced>) args.get("destroyable-keys");
-		serialMock.placeableKeys = (Set<Namespaced>) args.get("placeable-keys");
+		serialMock.deserializeInternal(args);
 		return serialMock;
+	}
+
+	@SuppressWarnings("unchecked")
+	@ApiStatus.Internal
+	protected void deserializeInternal(@NotNull Map<String, Object> args) {
+		displayName = (String) args.get("display-name");
+		lore = (List<String>) args.get("lore");
+		localizedName = (String) args.get("loc-name");
+		enchants = (Map<Enchantment, Integer>) args.get("enchants");
+		hideFlags = (Set<ItemFlag>) args.get("ItemFlags");
+		unbreakable = (boolean) args.get("Unbreakable");
+		setAttributeModifiers((Multimap<Attribute, AttributeModifier>) args.get("AttributeModifiers"));
+		// customTagContainer is also unimplemented in mock.
+		customModelData = (Integer) args.get("custom-model-data");
+		Map<String, Object> map = (Map<String, Object>) args.get("PublicBukkitValues");
+		persistentDataContainer = PersistentDataContainerMock.deserialize(map);
+		damage = (int) args.get("Damage");
+		repairCost = (int) args.get("repair-cost");
+		destroyableKeys = (Set<Namespaced>) args.get("destroyable-keys");
+		placeableKeys = (Set<Namespaced>) args.get("placeable-keys");
 	}
 
 	@Override

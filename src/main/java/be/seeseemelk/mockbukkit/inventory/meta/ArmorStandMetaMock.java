@@ -3,6 +3,8 @@ package be.seeseemelk.mockbukkit.inventory.meta;
 import com.destroystokyo.paper.inventory.meta.ArmorStandMeta;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Map;
+
 /**
  * Mock implementation of an {@link ArmorStandMeta}.
  *
@@ -141,4 +143,39 @@ public class ArmorStandMetaMock extends ItemMetaMock implements ArmorStandMeta
 		return clone;
 	}
 
+	/**
+	 * Required method for Bukkit deserialization.
+	 *
+	 * @param args A serialized ArmorStandMetaMock object in a Map&lt;String, Object&gt; format.
+	 * @return A new instance of the ArmorStandMetaMock class.
+	 */
+	public static @NotNull ArmorStandMetaMock deserialize(@NotNull Map<String, Object> args)
+	{
+		ArmorStandMetaMock serialMock = new ArmorStandMetaMock();
+		serialMock.deserializeInternal(args);
+		serialMock.invisible = (boolean) args.get("invisible");
+		serialMock.marker = (boolean) args.get("marker");
+		serialMock.noBasePlate = (boolean) args.get("noBasePlate");
+		serialMock.showArms = (boolean) args.get("showArms");
+		serialMock.small = (boolean) args.get("small");
+		return serialMock;
+	}
+
+	/**
+	 * Serializes the properties of an ArmorStandMetaMock to a HashMap.
+	 * Unimplemented properties are not present in the map.
+	 *
+	 * @return A HashMap of String, Object pairs representing the ArmorStandMetaMock.
+	 */
+	@Override
+	public @NotNull Map<String, Object> serialize()
+	{
+		final Map<String, Object> serialized = super.serialize();
+		serialized.put("invisible", this.invisible);
+		serialized.put("marker", this.marker);
+		serialized.put("noBasePlate", this.noBasePlate);
+		serialized.put("showArms", this.showArms);
+		serialized.put("small", this.small);
+		return serialized;
+	}
 }

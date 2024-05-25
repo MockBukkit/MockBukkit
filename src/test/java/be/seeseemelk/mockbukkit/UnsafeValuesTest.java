@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.BundleMeta;
 import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.InvalidDescriptionException;
 import org.bukkit.plugin.InvalidPluginException;
@@ -15,6 +16,8 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.io.StringReader;
+import java.util.List;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
@@ -72,6 +75,30 @@ class UnsafeValuesTest
 		}
 
 		assertTrue(mockUnsafeValues.isSupportedApiVersion(currentVersion));
+	}
+
+	@Test
+	void serializeItemTest() {
+		for (Material material : Material.values()) {
+			if (material.isLegacy())
+				continue;
+			ItemStack item = new ItemStack(material);
+			item.editMeta(meta -> {
+				meta.setDisplayName("Test");
+				meta.setLore(List.of("Test1", "Test2"));
+				meta.setUnbreakable(true);
+			});
+
+			item.editMeta(meta -> {
+				if (meta instanceof BundleMeta bundleMeta)
+				{
+					bundleMeta.addItem(item.clone());
+				}
+			});
+			byte[] serialized = mockUnsafeValues.serializeItem(item);
+			ItemStack deserialized = mockUnsafeValues.deserializeItem(serialized);
+			assertEquals(item, deserialized);
+		}
 	}
 
 	@Test

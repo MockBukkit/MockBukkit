@@ -10,6 +10,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -41,10 +42,9 @@ public class CrossbowMetaMock extends ItemMetaMock implements CrossbowMeta
 	{
 		super(meta);
 
-		if (meta.hasChargedProjectiles())
-		{
-			this.projectiles = new ArrayList<>(meta.getChargedProjectiles());
-		}
+		this.projectiles = meta.hasChargedProjectiles() ?
+				new ArrayList<>(meta.getChargedProjectiles()) :
+				new ArrayList<>();
 	}
 
 	@Override
@@ -111,4 +111,32 @@ public class CrossbowMetaMock extends ItemMetaMock implements CrossbowMeta
 		return clone;
 	}
 
+	/**
+	 * Required method for Bukkit deserialization.
+	 *
+	 * @param args A serialized CrossbowMetaMock object in a Map&lt;String, Object&gt; format.
+	 * @return A new instance of the CrossbowMetaMock class.
+	 */
+	@SuppressWarnings("unchecked")
+	public static @NotNull CrossbowMetaMock deserialize(@NotNull Map<String, Object> args)
+	{
+		CrossbowMetaMock serialMock = new CrossbowMetaMock();
+		serialMock.deserializeInternal(args);
+		serialMock.setChargedProjectiles((List<ItemStack>) args.get("projectiles"));
+		return serialMock;
+	}
+
+	/**
+	 * Serializes the properties of an CrossbowMetaMock to a HashMap.
+	 * Unimplemented properties are not present in the map.
+	 *
+	 * @return A HashMap of String, Object pairs representing the CrossbowMetaMock.
+	 */
+	@Override
+	public @NotNull Map<String, Object> serialize()
+	{
+		final Map<String, Object> serialized = super.serialize();
+		serialized.put("projectiles", this.projectiles);
+		return serialized;
+	}
 }
