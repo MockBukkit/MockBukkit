@@ -590,6 +590,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		*/
 
 		map.put("PublicBukkitValues", this.persistentDataContainer.serialize());
+		map.put("meta-type", getTypeName());
 
 		// Return map
 		return map;
@@ -980,4 +981,9 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		toUpdate.addAll(beingSet.stream().map(Material::getKey).collect(java.util.stream.Collectors.toSet()));
 	}
 
+	@ApiStatus.Internal
+	protected String getTypeName()
+	{
+		return "UNSPECIFIC";
+	}
 }

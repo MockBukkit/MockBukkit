@@ -105,4 +105,11 @@ public class SpawnEggMetaMock extends ItemMetaMock implements SpawnEggMeta
 		serialMock.deserializeInternal(args);
 		return serialMock;
 	}
+
+	@Override
+	protected String getTypeName()
+	{
+		return "SPAWN_EGG";
+	}
+
 }

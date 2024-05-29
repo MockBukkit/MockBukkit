@@ -176,4 +176,10 @@ public class TropicalFishBucketMetaMock extends ItemMetaMock implements Tropical
 		return serialized;
 	}
 
+	@Override
+	protected String getTypeName()
+	{
+		return "TROPICAL_FISH_BUCKET";
+	}
+
 }

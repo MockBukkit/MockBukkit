@@ -122,7 +122,7 @@ public class CrossbowMetaMock extends ItemMetaMock implements CrossbowMeta
 	{
 		CrossbowMetaMock serialMock = new CrossbowMetaMock();
 		serialMock.deserializeInternal(args);
-		serialMock.setChargedProjectiles((List<ItemStack>) args.get("projectiles"));
+		serialMock.projectiles = (List<ItemStack>) args.get("projectiles");
 		return serialMock;
 	}
 
@@ -138,5 +138,11 @@ public class CrossbowMetaMock extends ItemMetaMock implements CrossbowMeta
 		final Map<String, Object> serialized = super.serialize();
 		serialized.put("projectiles", this.projectiles);
 		return serialized;
+	}
+
+	@Override
+	protected String getTypeName()
+	{
+		return "CROSSBOW";
 	}
 }

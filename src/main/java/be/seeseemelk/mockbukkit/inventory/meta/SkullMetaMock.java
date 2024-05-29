@@ -236,4 +236,10 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 		return serialized;
 	}
 
+	@Override
+	protected String getTypeName()
+	{
+		return "SKULL";
+	}
+
 }

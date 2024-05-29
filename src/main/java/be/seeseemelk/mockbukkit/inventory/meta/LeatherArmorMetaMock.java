@@ -114,4 +114,10 @@ public class LeatherArmorMetaMock extends ItemMetaMock implements LeatherArmorMe
 		return serialized;
 	}
 
+	@Override
+	protected String getTypeName()
+	{
+		return "LEATHER_ARMOR";
+	}
+
 }

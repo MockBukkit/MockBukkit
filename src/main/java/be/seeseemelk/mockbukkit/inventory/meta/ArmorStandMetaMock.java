@@ -178,4 +178,10 @@ public class ArmorStandMetaMock extends ItemMetaMock implements ArmorStandMeta
 		serialized.put("small", this.small);
 		return serialized;
 	}
+
+	@Override
+	protected String getTypeName()
+	{
+		return "ARMOR_STAND";
+	}
 }

@@ -113,4 +113,10 @@ public class AxolotlBucketMetaMock extends ItemMetaMock implements AxolotlBucket
 		return serialized;
 	}
 
+	@Override
+	protected String getTypeName()
+	{
+		return "AXOLOTL_BUCKET";
+	}
+
 }

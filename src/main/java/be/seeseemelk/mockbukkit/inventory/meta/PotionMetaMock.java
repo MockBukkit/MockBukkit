@@ -261,4 +261,10 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 		return serialized;
 	}
 
+	@Override
+	protected String getTypeName()
+	{
+		return "POTION";
+	}
+
 }

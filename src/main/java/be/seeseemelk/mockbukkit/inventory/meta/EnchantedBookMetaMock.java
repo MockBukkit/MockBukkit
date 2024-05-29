@@ -179,4 +179,11 @@ public class EnchantedBookMetaMock extends ItemMetaMock implements EnchantmentSt
 		NamespacedKey namespacedKey = NamespacedKey.minecraft(key);
 		return Registry.ENCHANTMENT.get(namespacedKey);
 	}
+
+	@Override
+	protected String getTypeName()
+	{
+		return "ENCHANTED";
+	}
+
 }

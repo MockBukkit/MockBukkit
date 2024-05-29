@@ -145,4 +145,11 @@ public class KnowledgeBookMetaMock extends ItemMetaMock implements KnowledgeBook
 		serialized.put("recipes", recipes.stream().map(NamespacedKey::toString).toList());
 		return serialized;
 	}
+
+	@Override
+	protected String getTypeName()
+	{
+		return "KNOWLEDGE_BOOK";
+	}
+
 }

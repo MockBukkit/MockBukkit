@@ -13,6 +13,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BannerMeta;
 import org.bukkit.inventory.meta.BundleMeta;
 import org.bukkit.inventory.meta.CompassMeta;
+import org.bukkit.inventory.meta.CrossbowMeta;
 import org.bukkit.material.MaterialData;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
@@ -112,7 +113,7 @@ class UnsafeValuesTest
 		populateItemMeta(expected);
 		byte[] serialized = mockUnsafeValues.serializeItem(expected);
 		ItemStack actual = mockUnsafeValues.deserializeItem(serialized);
-		assertEquals(expected, actual, "ItemStacks are not equal, metas: \n" + expected.getItemMeta().getEnchants() + "\n" + actual.getItemMeta().getEnchants());
+		assertEquals(expected, actual, "ItemStacks are not equal, metas: \n" + expected.getItemMeta() + "\n" + actual.getItemMeta());
 	}
 
 	private void populateItemMeta(ItemStack item) {
@@ -139,6 +140,12 @@ class UnsafeValuesTest
 			{
 				compassMeta.setLodestone(new Location(Bukkit.getWorlds().get(0), 1, 2, 3));
 				compassMeta.setLodestoneTracked(true);
+			}
+			if (meta instanceof CrossbowMeta crossbowMeta)
+			{
+				ItemStack arrow = new ItemStack(Material.ARROW);
+				arrow.editMeta(itemMeta -> {});
+				crossbowMeta.addChargedProjectile(arrow);
 			}
 		});
 	}

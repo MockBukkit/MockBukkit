@@ -233,4 +233,10 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 
 		return serialized;
 	}
+
+	@Override
+	protected String getTypeName()
+	{
+		return "MAP";
+	}
 }

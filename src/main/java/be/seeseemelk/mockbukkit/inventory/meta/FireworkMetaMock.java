@@ -183,4 +183,10 @@ public class FireworkMetaMock extends ItemMetaMock implements FireworkMeta
 		return serialized;
 	}
 
+	@Override
+	protected String getTypeName()
+	{
+		return "FIREWORK";
+	}
+
 }

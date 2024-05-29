@@ -131,4 +131,11 @@ public class CompassMetaMock extends ItemMetaMock implements CompassMeta
 		serialized.put("tracked", this.tracked);
 		return serialized;
 	}
+
+	@Override
+	protected String getTypeName()
+	{
+		return "COMPASS";
+	}
+
 }

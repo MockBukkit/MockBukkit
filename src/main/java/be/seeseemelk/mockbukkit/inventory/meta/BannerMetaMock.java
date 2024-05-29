@@ -158,4 +158,10 @@ public class BannerMetaMock extends ItemMetaMock implements BannerMeta
 		return serialized;
 	}
 
+	@Override
+	protected String getTypeName()
+	{
+		return "BANNER";
+	}
+
 }

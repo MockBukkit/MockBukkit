@@ -357,4 +357,10 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 		return serialized;
 	}
 
+	@Override
+	protected String getTypeName()
+	{
+		return "BOOK";
+	}
+
 }

@@ -132,4 +132,11 @@ public class BundleMetaMock extends ItemMetaMock implements BundleMeta
 		serialized.put("items", this.items);
 		return serialized;
 	}
+
+	@Override
+	protected String getTypeName()
+	{
+		return "BUNDLE";
+	}
+
 }

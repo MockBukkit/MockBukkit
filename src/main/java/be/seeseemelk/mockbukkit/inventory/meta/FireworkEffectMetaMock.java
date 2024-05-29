@@ -43,7 +43,7 @@ public class FireworkEffectMetaMock extends ItemMetaMock implements FireworkEffe
 	{
 		final int prime = 31;
 		int result = super.hashCode();
-		return prime * result + effect.hashCode();
+		return prime * result + (effect != null ? effect.hashCode() : 0);
 	}
 
 	@Override
@@ -120,6 +120,12 @@ public class FireworkEffectMetaMock extends ItemMetaMock implements FireworkEffe
 		if (effect != null)
 			serialized.put("effect", effect.serialize());
 		return serialized;
+	}
+
+	@Override
+	protected String getTypeName()
+	{
+		return "FIREWORK_EFFECT";
 	}
 
 }

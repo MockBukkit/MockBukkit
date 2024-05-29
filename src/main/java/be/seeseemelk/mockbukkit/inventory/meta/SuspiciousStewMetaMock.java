@@ -188,4 +188,10 @@ public class SuspiciousStewMetaMock extends ItemMetaMock implements SuspiciousSt
 		return serialized;
 	}
 
+	@Override
+	protected String getTypeName()
+	{
+		return "SUSPICIOUS_STEW";
+	}
+
 }
