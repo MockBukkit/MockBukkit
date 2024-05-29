@@ -33,7 +33,7 @@ public class BlockTypeMock implements BlockType
 
 	public BlockTypeMock(NamespacedKey key, boolean itemType, boolean solid, boolean flammable, boolean burnable,
 						 boolean occluding, boolean gravity, float hardness, float blastResistance, float slipperiness,
-						 boolean air, boolean interactable, String translationKey)
+						 boolean air, boolean interactable , String translationKey)
 	{
 		this.key = key;
 		this.itemType = itemType;
@@ -150,6 +150,11 @@ public class BlockTypeMock implements BlockType
 	}
 
 	@Override
+	public boolean hasCollision() {
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public float getHardness()
 	{
 		return hardness;
@@ -191,8 +196,14 @@ public class BlockTypeMock implements BlockType
 		return this.key;
 	}
 
+
 	@Override
 	public @NotNull String getTranslationKey()
+	{
+		return translationKey;
+	}
+	@Override
+	public @NotNull String translationKey()
 	{
 		return translationKey;
 	}

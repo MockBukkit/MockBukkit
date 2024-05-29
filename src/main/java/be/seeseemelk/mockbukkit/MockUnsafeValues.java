@@ -503,13 +503,6 @@ public class MockUnsafeValues implements UnsafeValues
 	}
 
 	@Override
-	public boolean isCollidable(@NotNull Material material)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public @NotNull NamespacedKey getBiomeKey(RegionAccessor accessor, int x, int y, int z)
 	{
 		// TODO Auto-generated method stub

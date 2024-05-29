@@ -17,6 +17,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.Unmodifiable;
 
 public class ItemTypeMock implements ItemType
 {
@@ -139,6 +140,13 @@ public class ItemTypeMock implements ItemType
 	}
 
 	@Override
+	public @NotNull @Unmodifiable Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(@NotNull EquipmentSlot slot)
 	{
 		throw new UnimplementedOperationException();
@@ -170,6 +178,12 @@ public class ItemTypeMock implements ItemType
 
 	@Override
 	public @NotNull String getTranslationKey()
+	{
+		return translationKey;
+	}
+
+	@Override
+	public @NotNull String translationKey()
 	{
 		return translationKey;
 	}

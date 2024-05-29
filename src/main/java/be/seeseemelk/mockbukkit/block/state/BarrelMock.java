@@ -73,6 +73,13 @@ public class BarrelMock extends ContainerMock implements Barrel
 	}
 
 	@Override
+	public void setLootTable(@Nullable LootTable lootTable, long l)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public void setSeed(long seed)
 	{
 		// TODO Auto-generated method stub

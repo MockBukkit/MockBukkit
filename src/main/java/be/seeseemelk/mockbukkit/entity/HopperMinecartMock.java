@@ -8,7 +8,9 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.minecart.HopperMinecart;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.loot.LootTable;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
@@ -85,6 +87,13 @@ public class HopperMinecartMock extends LootableMinecart implements HopperMineca
 
 	@Override
 	public boolean canPlayerLoot(@NotNull UUID player)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setLootTable(@Nullable LootTable lootTable, long l)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
