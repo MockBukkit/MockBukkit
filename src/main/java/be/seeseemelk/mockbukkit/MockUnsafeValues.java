@@ -298,6 +298,8 @@ public class MockUnsafeValues implements UnsafeValues
 	@Override
 	public ItemStack deserializeItem(byte[] data)
 	{
+		Preconditions.checkNotNull(data, "null cannot be deserialized");
+		Preconditions.checkArgument(data.length > 0, "cannot deserialize nothing");
 		final ByteArrayInputStream bai = new ByteArrayInputStream(data);
 		try
 		{
