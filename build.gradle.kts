@@ -7,6 +7,7 @@ plugins {
 	id("signing")
 	id("net.kyori.blossom") version "2.1.0"
 	id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
+	id("com.diffplug.spotless") version "6.25.0"
 }
 
 group = "com.github.seeseemelk"
@@ -90,6 +91,16 @@ tasks {
 
 	jacoco {
 		toolVersion = "0.8.12"
+	}
+}
+
+spotless {
+
+	java {
+		eclipse().configFile("MockBukkit.eclipseformat.xml")
+		removeUnusedImports()
+		trimTrailingWhitespace()
+		indentWithTabs()
 	}
 }
 
