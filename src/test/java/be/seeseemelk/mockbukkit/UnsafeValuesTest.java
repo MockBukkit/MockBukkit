@@ -14,6 +14,7 @@ import org.bukkit.inventory.meta.BannerMeta;
 import org.bukkit.inventory.meta.BundleMeta;
 import org.bukkit.inventory.meta.CompassMeta;
 import org.bukkit.inventory.meta.CrossbowMeta;
+import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.material.MaterialData;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
@@ -146,6 +147,9 @@ class UnsafeValuesTest
 				ItemStack arrow = new ItemStack(Material.ARROW);
 				arrow.editMeta(itemMeta -> {});
 				crossbowMeta.addChargedProjectile(arrow);
+			}
+			if (meta instanceof EnchantmentStorageMeta storageMeta) {
+				storageMeta.addStoredEnchant(Enchantment.DAMAGE_ALL, 1, true);
 			}
 		});
 	}
