@@ -97,7 +97,9 @@ public class CrossbowMetaMock extends ItemMetaMock implements CrossbowMeta
 	public boolean equals(Object obj)
 	{
 		if (!(obj instanceof CrossbowMeta meta))
+		{
 			return false;
+		}
 		return super.equals(obj) && Objects.equals(this.getChargedProjectiles(), meta.getChargedProjectiles());
 	}
 

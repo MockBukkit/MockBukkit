@@ -71,7 +71,9 @@ public class AxolotlBucketMetaMock extends ItemMetaMock implements AxolotlBucket
 	public boolean equals(Object obj)
 	{
 		if (!(obj instanceof AxolotlBucketMeta meta))
+		{
 			return false;
+		}
 		return super.equals(obj) && this.variant == meta.getVariant();
 	}
 

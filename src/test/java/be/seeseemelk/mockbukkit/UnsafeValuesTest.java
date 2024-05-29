@@ -100,7 +100,9 @@ class UnsafeValuesTest
 		for (Material material : Material.values())
 		{
 			if (material.isLegacy() || material.isAir())
+			{
 				continue;
+			}
 			ItemStack item = new ItemStack(material);
 			items.add(item);
 		}

@@ -126,7 +126,9 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	static boolean checkConflictingEnchants(@Nullable Map<Enchantment, Integer> enchantments, @NotNull Enchantment ench)
 	{
 		if (enchantments == null || enchantments.isEmpty())
+		{
 			return false;
+		}
 
 		Iterator<Enchantment> var2 = enchantments.keySet().iterator();
 
@@ -134,7 +136,9 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		do
 		{
 			if (!var2.hasNext())
+			{
 				return false;
+			}
 			enchant = var2.next();
 		}
 		while (!enchant.conflictsWith(ench));
@@ -193,9 +197,13 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	private boolean isLoreEquals(@NotNull ItemMeta meta)
 	{
 		if (lore == null)
+		{
 			return !meta.hasLore();
+		}
 		else if (!meta.hasLore())
+		{
 			return false;
+		}
 
 		List<Component> otherLore = meta.lore();
 		if (lore.size() == otherLore.size())
@@ -203,7 +211,9 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 			for (int i = 0; i < lore.size(); i++)
 			{
 				if (!GsonComponentSerializer.gson().deserialize(lore.get(i)).equals(otherLore.get(i)))
+				{
 					return false;
+				}
 			}
 			return true;
 		}
@@ -223,9 +233,13 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		if (displayName != null)
 		{
 			if (meta.hasDisplayName())
+			{
 				return GsonComponentSerializer.gson().deserialize(displayName).equals(meta.displayName());
+			}
 			else
+			{
 				return false;
+			}
 		}
 		else
 		{
@@ -494,7 +508,9 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		for (int i = 0; i < this.lore.size(); i++)
 		{
 			if (GsonComponentSerializer.gson().deserialize(this.lore.get(i)).equals(lines.get(i)))
+			{
 				continue;
+			}
 			throw new AssertionError(String.format("Line %d should be '%s' but was '%s'", i, lines.get(i), this.lore.get(i)));
 		}
 	}

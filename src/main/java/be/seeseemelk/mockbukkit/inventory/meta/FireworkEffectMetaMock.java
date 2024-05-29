@@ -103,7 +103,9 @@ public class FireworkEffectMetaMock extends ItemMetaMock implements FireworkEffe
 		FireworkEffectMetaMock serialMock = new FireworkEffectMetaMock();
 		serialMock.deserializeInternal(args);
 		if (args.containsKey("effect"))
+		{
 			serialMock.effect = (FireworkEffect) FireworkEffect.deserialize((Map<String, Object>) args.get("effect"));
+		}
 		return serialMock;
 	}
 
@@ -118,7 +120,9 @@ public class FireworkEffectMetaMock extends ItemMetaMock implements FireworkEffe
 	{
 		final Map<String, Object> serialized = super.serialize();
 		if (effect != null)
+		{
 			serialized.put("effect", effect.serialize());
+		}
 		return serialized;
 	}
 

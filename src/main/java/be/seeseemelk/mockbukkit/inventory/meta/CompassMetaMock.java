@@ -86,7 +86,9 @@ public class CompassMetaMock extends ItemMetaMock implements CompassMeta
 	public boolean equals(Object obj)
 	{
 		if (!(obj instanceof CompassMeta meta))
+		{
 			return false;
+		}
 		return super.equals(obj) && Objects.equals(this.lodestone, meta.getLodestone()) && this.tracked == meta.isLodestoneTracked();
 	}
 

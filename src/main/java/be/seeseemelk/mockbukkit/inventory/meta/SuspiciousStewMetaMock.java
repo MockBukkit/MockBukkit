@@ -55,7 +55,9 @@ public class SuspiciousStewMetaMock extends ItemMetaMock implements SuspiciousSt
 	public boolean equals(Object obj)
 	{
 		if (!(obj instanceof SuspiciousStewMetaMock meta))
+		{
 			return false;
+		}
 		return this.effects.equals(meta.effects);
 	}
 

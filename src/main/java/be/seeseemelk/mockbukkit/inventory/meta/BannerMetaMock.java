@@ -112,7 +112,9 @@ public class BannerMetaMock extends ItemMetaMock implements BannerMeta
 	public boolean equals(Object obj)
 	{
 		if (!(obj instanceof BannerMeta meta))
+		{
 			return false;
+		}
 		return super.equals(obj) && this.baseColor == meta.getBaseColor() && this.patterns.equals(meta.getPatterns());
 	}
 

@@ -168,7 +168,9 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 	public boolean equals(Object obj)
 	{
 		if (!(obj instanceof MapMeta meta))
+		{
 			return false;
+		}
 		if (!super.equals(obj) ||
 				((this.hasMapId() || meta.hasMapId()) && !Objects.equals(this.mapId, meta.getMapId())) ||
 				!Objects.equals(this.mapView, meta.getMapView()) ||

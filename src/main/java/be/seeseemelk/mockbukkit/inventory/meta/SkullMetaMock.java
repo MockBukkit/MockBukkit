@@ -232,7 +232,9 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	{
 		final Map<String, Object> serialized = super.serialize();
 		if (playerProfile != null)
+		{
 			serialized.put("player-profile", playerProfile);
+		}
 		return serialized;
 	}
 

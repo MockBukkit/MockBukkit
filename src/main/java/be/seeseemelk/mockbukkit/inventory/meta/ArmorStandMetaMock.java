@@ -120,7 +120,9 @@ public class ArmorStandMetaMock extends ItemMetaMock implements ArmorStandMeta
 	public boolean equals(Object obj)
 	{
 		if (!(obj instanceof ArmorStandMeta meta))
+		{
 			return false;
+		}
 		return super.equals(obj) &&
 				this.isInvisible() == meta.isInvisible() &&
 				this.hasNoBasePlate() == meta.hasNoBasePlate() &&

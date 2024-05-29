@@ -92,7 +92,9 @@ public class BundleMetaMock extends ItemMetaMock implements BundleMeta
 	public boolean equals(Object obj)
 	{
 		if (!(obj instanceof BundleMeta meta))
+		{
 			return false;
+		}
 		return super.equals(obj) && this.getItems().equals(meta.getItems());
 	}
 
