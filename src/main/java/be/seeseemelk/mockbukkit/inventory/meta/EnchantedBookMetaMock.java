@@ -147,10 +147,10 @@ public class EnchantedBookMetaMock extends ItemMetaMock implements EnchantmentSt
 	{
 		EnchantedBookMetaMock serialMock = new EnchantedBookMetaMock();
 		serialMock.deserializeInternal(args);
-		if (args.containsKey("storedEnchantments"))
+		if (args.containsKey("stored-enchantments"))
 		{
 			//noinspection unchecked
-			serialMock.storedEnchantments = ((Map<String, Integer>) args.get("storedEnchantments")).entrySet().stream()
+			serialMock.storedEnchantments = ((Map<String, Integer>) args.get("stored-enchantments")).entrySet().stream()
 					.collect(ImmutableMap.toImmutableMap(entry -> getEnchantment(entry.getKey()), Map.Entry::getValue));
 		}
 		return serialMock;
@@ -166,7 +166,7 @@ public class EnchantedBookMetaMock extends ItemMetaMock implements EnchantmentSt
 	public @NotNull Map<String, Object> serialize()
 	{
 		final Map<String, Object> serialized = super.serialize();
-		serialized.put("storedEnchantments", this.storedEnchantments.entrySet().stream()
+		serialized.put("stored-enchantments", this.storedEnchantments.entrySet().stream()
 				.collect(ImmutableMap.toImmutableMap(entry -> getEnchantmentKey(entry.getKey()), Map.Entry::getValue)));
 		return serialized;
 	}

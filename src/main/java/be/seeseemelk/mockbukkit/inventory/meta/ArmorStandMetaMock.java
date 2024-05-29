@@ -155,8 +155,8 @@ public class ArmorStandMetaMock extends ItemMetaMock implements ArmorStandMeta
 		serialMock.deserializeInternal(args);
 		serialMock.invisible = (boolean) args.get("invisible");
 		serialMock.marker = (boolean) args.get("marker");
-		serialMock.noBasePlate = (boolean) args.get("noBasePlate");
-		serialMock.showArms = (boolean) args.get("showArms");
+		serialMock.noBasePlate = (boolean) args.get("no-base-plate");
+		serialMock.showArms = (boolean) args.get("show-arms");
 		serialMock.small = (boolean) args.get("small");
 		return serialMock;
 	}
