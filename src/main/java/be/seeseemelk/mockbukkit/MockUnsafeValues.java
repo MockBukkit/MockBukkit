@@ -282,6 +282,8 @@ public class MockUnsafeValues implements UnsafeValues
 	@Override
 	public byte[] serializeItem(ItemStack item)
 	{
+		Preconditions.checkNotNull(item, "null cannot be serialized");
+		Preconditions.checkArgument(item.getType() != Material.AIR, "air cannot be serialized");
 		final ByteArrayOutputStream bao = new ByteArrayOutputStream();
 		try
 		{
