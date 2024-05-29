@@ -123,6 +123,13 @@ public class EnchantmentMock extends Enchantment
 	}
 
 	@Override
+	public int getAnvilCost()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public int getMinModifiedCost(int level)
 	{
 		return minModifiedCosts[level - 1];
