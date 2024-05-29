@@ -1,16 +1,14 @@
 package be.seeseemelk.mockbukkit.util.io;
 
-import be.seeseemelk.mockbukkit.inventory.meta.ItemMetaMock;
-import be.seeseemelk.mockbukkit.inventory.meta.LeatherArmorMetaMock;
+import org.bukkit.Location;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.jetbrains.annotations.ApiStatus;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.lang.reflect.Method;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,22 +26,24 @@ public class BukkitObjectInputStreamMock extends ObjectInputStream {
 	@SuppressWarnings("unchecked")
 	protected Object resolveObject(Object obj) throws IOException
 	{
-		if (obj instanceof LinkedHashMap<?, ?> map)
+		if (obj instanceof Map<?, ?> map)
 		{
-
 			if (map.containsKey("v") && map.containsKey("type"))
 			{
 				return deserializeItemStack((Map<String, Object>) map);
+			}
+			if (map.containsKey("x") && map.containsKey("y") && map.containsKey("z") && map.containsKey("pitch") && map.containsKey("yaw"))
+			{
+				System.out.println("Deserializing location");
+				return Location.deserialize((Map<String, Object>) map);
 			}
 		}
 
 		return super.resolveObject(obj);
 	}
 
-
-	@ApiStatus.Internal
 	@SuppressWarnings("unchecked")
-	private static ItemStack deserializeItemStack(Map<String, Object> map)
+	private ItemStack deserializeItemStack(Map<String, Object> map) throws IOException
 	{
 		ItemStack itemStack = ItemStack.deserialize(map);
 		if (map.containsKey("meta"))
@@ -53,6 +53,8 @@ public class BukkitObjectInputStreamMock extends ObjectInputStream {
 			{
 				final Method method = aClass.getDeclaredMethod("deserialize", Map.class);
 				final Map<String, Object> serializedMeta = (Map<String, Object>) map.get("meta");
+				for (Map.Entry<String, Object> entry : new HashMap<>(serializedMeta).entrySet())
+					serializedMeta.put(entry.getKey(), resolveObject(entry.getValue()));
 				ItemMeta meta = (ItemMeta) method.invoke(null, serializedMeta);
 				itemStack.setItemMeta(meta);
 			} catch (ReflectiveOperationException e) {

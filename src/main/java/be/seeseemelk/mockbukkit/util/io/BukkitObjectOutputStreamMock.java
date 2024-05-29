@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.util.io;
 
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
+import org.bukkit.Location;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -26,7 +27,7 @@ public class BukkitObjectOutputStreamMock extends ObjectOutputStream
 
 		if (obj instanceof ConfigurationSerializable configurationSerializable)
 		{
-			if (!(obj instanceof ItemStack || obj instanceof ItemMeta))
+			if (!(obj instanceof ItemStack || obj instanceof ItemMeta || obj instanceof Location))
 			{
 				throw new UnimplementedOperationException("Serializing ConfigurationSerializable is not yet implemented for " + obj.getClass().getName());
 			}

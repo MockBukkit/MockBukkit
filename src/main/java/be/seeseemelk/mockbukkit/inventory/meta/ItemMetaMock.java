@@ -17,6 +17,8 @@ import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.enchantments.Enchantment;
@@ -552,7 +554,13 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 			map.put("custom-model-data", this.customModelData);
 		}
 
-		map.put("enchants", this.enchants);
+		if (this.enchants != null)
+		{
+			map.put("enchants", this.enchants.entrySet().stream()
+					.collect(Collectors.toMap(entry -> entry.getKey().getKey().value(), Map.Entry::getValue)));
+		} else {
+			map.put("enchants", new HashMap<String, Integer>());
+		}
 
 		if (hasAttributeModifiers())
 		{
@@ -607,7 +615,17 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		displayName = (String) args.get("display-name");
 		lore = (List<String>) args.get("lore");
 		localizedName = (String) args.get("loc-name");
-		enchants = (Map<Enchantment, Integer>) args.get("enchants");
+
+		enchants = new HashMap<>();
+		for (Map.Entry<String, Integer> entry : ((Map<String, Integer>) args.get("enchants")).entrySet())
+		{
+			Enchantment enchantment = Registry.ENCHANTMENT.get(NamespacedKey.minecraft(entry.getKey()));
+			if (enchantment != null)
+			{
+				enchants.put(enchantment, entry.getValue());
+			}
+		}
+
 		hideFlags = (Set<ItemFlag>) args.get("ItemFlags");
 		unbreakable = (boolean) args.get("Unbreakable");
 		setAttributeModifiers((Multimap<Attribute, AttributeModifier>) args.get("AttributeModifiers"));
