@@ -173,8 +173,8 @@ public class ArmorStandMetaMock extends ItemMetaMock implements ArmorStandMeta
 		final Map<String, Object> serialized = super.serialize();
 		serialized.put("invisible", this.invisible);
 		serialized.put("marker", this.marker);
-		serialized.put("noBasePlate", this.noBasePlate);
-		serialized.put("showArms", this.showArms);
+		serialized.put("no-base-plate", this.noBasePlate);
+		serialized.put("show-arms", this.showArms);
 		serialized.put("small", this.small);
 		return serialized;
 	}
