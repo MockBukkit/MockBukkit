@@ -17,17 +17,18 @@ public class TrimMaterialMock implements TrimMaterial
 	private final Component description;
 
 	/**
-	 * @param key The namespaced key representing this trim material
+	 * @param key         The namespaced key representing this trim material
 	 * @param description The description of this trim material
 	 */
-	public TrimMaterialMock(NamespacedKey key, Component description){
+	public TrimMaterialMock(NamespacedKey key, Component description)
+	{
 		this.key = key;
 		this.description = description;
 	}
 
 	/**
 	 * @param data Json data
-	 * @deprecated Use {@link #TrimMaterialMock(NamespacedKey,Component)} instead
+	 * @deprecated Use {@link #TrimMaterialMock(NamespacedKey, Component)} instead
 	 */
 	@Deprecated(forRemoval = true)
 	public TrimMaterialMock(JsonObject data)
@@ -61,7 +62,7 @@ public class TrimMaterialMock implements TrimMaterial
 		Preconditions.checkArgument(data.has("key"), "Missing json key");
 		NamespacedKey key = NamespacedKey.fromString(data.get("key").getAsString());
 		Component description = GsonComponentSerializer.gson().deserializeFromTree(data.get("description"));
-		return new TrimMaterialMock(key,description);
+		return new TrimMaterialMock(key, description);
 	}
 
 }

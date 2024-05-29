@@ -558,7 +558,9 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		{
 			map.put("enchants", this.enchants.entrySet().stream()
 					.collect(Collectors.toMap(entry -> entry.getKey().getKey().value(), Map.Entry::getValue)));
-		} else {
+		}
+		else
+		{
 			map.put("enchants", new HashMap<String, Integer>());
 		}
 
@@ -612,7 +614,8 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 
 	@SuppressWarnings("unchecked")
 	@ApiStatus.Internal
-	protected void deserializeInternal(@NotNull Map<String, Object> args) {
+	protected void deserializeInternal(@NotNull Map<String, Object> args)
+	{
 		displayName = (String) args.get("display-name");
 		lore = (List<String>) args.get("lore");
 		localizedName = (String) args.get("loc-name");
@@ -986,4 +989,5 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	{
 		return "UNSPECIFIC";
 	}
+
 }

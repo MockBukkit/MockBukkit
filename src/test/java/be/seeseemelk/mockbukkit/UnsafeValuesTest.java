@@ -117,7 +117,8 @@ class UnsafeValuesTest
 		assertEquals(expected, actual, "ItemStacks are not equal, metas: \n" + expected.getItemMeta() + "\n" + actual.getItemMeta());
 	}
 
-	private void populateItemMeta(ItemStack item) {
+	private void populateItemMeta(ItemStack item)
+	{
 		item.editMeta(meta ->
 		{
 			meta.setDisplayName("Test");
@@ -148,7 +149,8 @@ class UnsafeValuesTest
 				arrow.editMeta(itemMeta -> {});
 				crossbowMeta.addChargedProjectile(arrow);
 			}
-			if (meta instanceof EnchantmentStorageMeta storageMeta) {
+			if (meta instanceof EnchantmentStorageMeta storageMeta)
+			{
 				storageMeta.addStoredEnchant(Enchantment.DAMAGE_ALL, 1, true);
 			}
 		});

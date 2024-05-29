@@ -171,11 +171,13 @@ public class EnchantedBookMetaMock extends ItemMetaMock implements EnchantmentSt
 		return serialized;
 	}
 
-	private static String getEnchantmentKey(Enchantment enchantment) {
+	private static String getEnchantmentKey(Enchantment enchantment)
+	{
 		return enchantment.getKey().getKey();
 	}
 
-	private static Enchantment getEnchantment(String key) {
+	private static Enchantment getEnchantment(String key)
+	{
 		NamespacedKey namespacedKey = NamespacedKey.minecraft(key);
 		return Registry.ENCHANTMENT.get(namespacedKey);
 	}

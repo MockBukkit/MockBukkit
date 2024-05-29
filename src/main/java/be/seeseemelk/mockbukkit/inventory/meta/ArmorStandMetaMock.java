@@ -184,4 +184,5 @@ public class ArmorStandMetaMock extends ItemMetaMock implements ArmorStandMeta
 	{
 		return "ARMOR_STAND";
 	}
+
 }

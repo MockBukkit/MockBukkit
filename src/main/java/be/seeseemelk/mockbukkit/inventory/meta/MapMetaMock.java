@@ -200,7 +200,8 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 		serialMock.deserializeInternal(args);
 		serialMock.mapId = (Integer) args.get("map-id");
 		serialMock.mapView = (MapView) args.get("map-view");
-		if (args.containsKey("color")) {
+		if (args.containsKey("color"))
+		{
 			serialMock.color = Color.fromARGB((int) args.get("color"));
 		}
 		serialMock.scaling = (byte) args.get("scaling");
@@ -239,4 +240,5 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 	{
 		return "MAP";
 	}
+
 }

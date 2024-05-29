@@ -145,4 +145,5 @@ public class CrossbowMetaMock extends ItemMetaMock implements CrossbowMeta
 	{
 		return "CROSSBOW";
 	}
+
 }
