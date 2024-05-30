@@ -21,6 +21,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -201,7 +202,7 @@ class SignMockTest
 				Component.text("Hello"), Component.text("World", NamedTextColor.GREEN));
 		sign.getSide(side).line(line, component);
 		assertEquals(component, sign.getSide(side).line(line));
-		assertEquals("Hello §aWorld", sign.getSide(side).getLine(line));
+		assertEquals("Hello \u00A7aWorld", sign.getSide(side).getLine(line));
 		for (int i = 0; i < 4; i++) {
 			if (i != line) {
 				assertEquals(Component.empty(), sign.getSide(side).line(i));
