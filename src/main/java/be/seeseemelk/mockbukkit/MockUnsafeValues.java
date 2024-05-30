@@ -484,8 +484,7 @@ public class MockUnsafeValues implements UnsafeValues
 	@Override
 	public <B extends org.bukkit.Keyed> B get(Registry<B> registry, NamespacedKey namespacedKey)
 	{
-			// TODO Auto-generated method stub
-			throw new UnimplementedOperationException();
+			return registry.get(namespacedKey);
 	}
 
 	@Override

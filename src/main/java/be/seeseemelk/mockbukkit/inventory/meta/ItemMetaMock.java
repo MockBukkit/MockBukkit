@@ -1092,6 +1092,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		throw new UnimplementedOperationException();
 
 	}
+
 	@ApiStatus.Internal
 	protected String getTypeName()
 	{
@@ -1104,6 +1105,23 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		//TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 
+	}
+
+	@Override
+	public String toString()
+	{
+		StringBuilder stringBuilder = new StringBuilder(getTypeName() + "(");
+		Map<String, Object> data = this.serialize();
+		for (Map.Entry<String, Object> entry : data.entrySet())
+		{
+			stringBuilder.append(entry.getKey());
+			stringBuilder.append("=");
+			stringBuilder.append(entry.getValue());
+			stringBuilder.append(", ");
+		}
+		stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+		stringBuilder.append(")");
+		return stringBuilder.toString();
 	}
 
 }
