@@ -6,6 +6,7 @@ import org.bukkit.inventory.meta.CompassMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -85,7 +86,9 @@ public class CompassMetaMock extends ItemMetaMock implements CompassMeta
 	public boolean equals(Object obj)
 	{
 		if (!(obj instanceof CompassMeta meta))
+		{
 			return false;
+		}
 		return super.equals(obj) && Objects.equals(this.lodestone, meta.getLodestone()) && this.tracked == meta.isLodestoneTracked();
 	}
 
@@ -96,6 +99,45 @@ public class CompassMetaMock extends ItemMetaMock implements CompassMeta
 		clone.lodestone = this.lodestone == null ? null : this.lodestone.clone();
 		clone.tracked = this.tracked;
 		return clone;
+	}
+
+	/**
+	 * Required method for Bukkit deserialization.
+	 *
+	 * @param args A serialized CompassMetaMock object in a Map&lt;String, Object&gt; format.
+	 * @return A new instance of the CompassMetaMock class.
+	 */
+	public static @NotNull CompassMetaMock deserialize(@NotNull Map<String, Object> args)
+	{
+		CompassMetaMock serialMock = new CompassMetaMock();
+		serialMock.deserializeInternal(args);
+		serialMock.lodestone = (Location) args.get("lodestone");
+		serialMock.tracked = (boolean) args.get("tracked");
+		return serialMock;
+	}
+
+	/**
+	 * Serializes the properties of an CompassMetaMock to a HashMap.
+	 * Unimplemented properties are not present in the map.
+	 *
+	 * @return A HashMap of String, Object pairs representing the CompassMetaMock.
+	 */
+	@Override
+	public @NotNull Map<String, Object> serialize()
+	{
+		final Map<String, Object> serialized = super.serialize();
+		if (this.lodestone != null)
+		{
+			serialized.put("lodestone", this.lodestone);
+		}
+		serialized.put("tracked", this.tracked);
+		return serialized;
+	}
+
+	@Override
+	protected String getTypeName()
+	{
+		return "COMPASS";
 	}
 
 }

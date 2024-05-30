@@ -8,6 +8,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Mock implementation of an {@link BannerMeta}.
@@ -111,7 +112,9 @@ public class BannerMetaMock extends ItemMetaMock implements BannerMeta
 	public boolean equals(Object obj)
 	{
 		if (!(obj instanceof BannerMeta meta))
+		{
 			return false;
+		}
 		return super.equals(obj) && this.baseColor == meta.getBaseColor() && this.patterns.equals(meta.getPatterns());
 	}
 
@@ -124,6 +127,43 @@ public class BannerMetaMock extends ItemMetaMock implements BannerMeta
 		clone.patterns = new ArrayList<>(this.patterns);
 
 		return clone;
+	}
+
+	/**
+	 * Required method for Bukkit deserialization.
+	 *
+	 * @param args A serialized BannerMetaMock object in a Map&lt;String, Object&gt; format.
+	 * @return A new instance of the BannerMetaMock class.
+	 */
+	@SuppressWarnings("unchecked")
+	public static @NotNull BannerMetaMock deserialize(@NotNull Map<String, Object> args)
+	{
+		BannerMetaMock serialMock = new BannerMetaMock();
+		serialMock.deserializeInternal(args);
+		serialMock.setBaseColor((DyeColor) args.get("base-color"));
+		serialMock.setPatterns(((List<Map<String, Object>>) args.get("patterns")).stream().map(Pattern::new).toList());
+		return serialMock;
+	}
+
+	/**
+	 * Serializes the properties of an BannerMetaMock to a HashMap.
+	 * Unimplemented properties are not present in the map.
+	 *
+	 * @return A HashMap of String, Object pairs representing the BannerMetaMock.
+	 */
+	@Override
+	public @NotNull Map<String, Object> serialize()
+	{
+		final Map<String, Object> serialized = super.serialize();
+		serialized.put("base-color", this.baseColor);
+		serialized.put("patterns", this.patterns.stream().map(Pattern::serialize).toList());
+		return serialized;
+	}
+
+	@Override
+	protected String getTypeName()
+	{
+		return "BANNER";
 	}
 
 }

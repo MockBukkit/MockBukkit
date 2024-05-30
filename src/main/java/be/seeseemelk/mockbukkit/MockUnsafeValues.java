@@ -3,6 +3,8 @@ package be.seeseemelk.mockbukkit;
 import be.seeseemelk.mockbukkit.damage.DamageSourceBuilderMock;
 import be.seeseemelk.mockbukkit.plugin.lifecycle.event.MockLifecycleEventManager;
 import be.seeseemelk.mockbukkit.potion.MockInternalPotionData;
+import be.seeseemelk.mockbukkit.util.io.BukkitObjectInputStreamMock;
+import be.seeseemelk.mockbukkit.util.io.BukkitObjectOutputStreamMock;
 import com.destroystokyo.paper.util.VersionFetcher;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Multimap;
@@ -50,7 +52,11 @@ import org.bukkit.potion.PotionType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -276,15 +282,36 @@ public class MockUnsafeValues implements UnsafeValues
 	@Override
 	public byte[] serializeItem(ItemStack item)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(item, "null cannot be serialized");
+		Preconditions.checkArgument(item.getType() != Material.AIR, "air cannot be serialized");
+		final ByteArrayOutputStream bao = new ByteArrayOutputStream();
+		try
+		{
+			final ObjectOutputStream oos = new BukkitObjectOutputStreamMock(bao);
+			oos.writeObject(item);
+			return bao.toByteArray();
+		}
+		catch (IOException e)
+		{
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Override
 	public ItemStack deserializeItem(byte[] data)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkNotNull(data, "null cannot be deserialized");
+		Preconditions.checkArgument(data.length > 0, "cannot deserialize nothing");
+		final ByteArrayInputStream bai = new ByteArrayInputStream(data);
+		try
+		{
+			final ObjectInputStream ois = new BukkitObjectInputStreamMock(bai);
+			return (ItemStack) ois.readObject();
+		}
+		catch (IOException | ClassNotFoundException e)
+		{
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Override
@@ -561,8 +588,7 @@ public class MockUnsafeValues implements UnsafeValues
 	@Override
 	public Material getMaterial(String material, int version)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return Material.getMaterial(material);
 	}
 
 

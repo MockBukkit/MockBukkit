@@ -14,6 +14,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -228,6 +229,42 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	/**
+	 * Required method for Bukkit deserialization.
+	 *
+	 * @param args A serialized PotionMetaMock object in a Map&lt;String, Object&gt; format.
+	 * @return A new instance of the PotionMetaMock class.
+	 */
+	@SuppressWarnings("unchecked")
+	public static @NotNull PotionMetaMock deserialize(@NotNull Map<String, Object> args)
+	{
+		PotionMetaMock serialMock = new PotionMetaMock();
+		serialMock.deserializeInternal(args);
+		serialMock.effects = ((List<Map<String, Object>>) args.get("effects")).stream()
+				.map(PotionEffect::new).toList();
+		return serialMock;
+	}
+
+	/**
+	 * Serializes the properties of an PotionMetaMock to a HashMap.
+	 * Unimplemented properties are not present in the map.
+	 *
+	 * @return A HashMap of String, Object pairs representing the PotionMetaMock.
+	 */
+	@Override
+	public @NotNull Map<String, Object> serialize()
+	{
+		final Map<String, Object> serialized = super.serialize();
+		serialized.put("effects", this.effects.stream().map(PotionEffect::serialize).toList());
+		return serialized;
+	}
+
+	@Override
+	protected String getTypeName()
+	{
+		return "POTION";
 	}
 
 }
