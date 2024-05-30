@@ -99,6 +99,7 @@ public class BannerMetaMock extends ItemMetaMock implements BannerMeta
 		if (!(obj instanceof BannerMeta meta))
 		{
 			return false;
+		}
 		return super.equals(obj) && this.patterns.equals(meta.getPatterns());
 	}
 
@@ -123,7 +124,6 @@ public class BannerMetaMock extends ItemMetaMock implements BannerMeta
 	{
 		BannerMetaMock serialMock = new BannerMetaMock();
 		serialMock.deserializeInternal(args);
-		serialMock.setBaseColor((DyeColor) args.get("base-color"));
 		serialMock.setPatterns(((List<Map<String, Object>>) args.get("patterns")).stream().map(Pattern::new).toList());
 		return serialMock;
 	}
@@ -138,7 +138,6 @@ public class BannerMetaMock extends ItemMetaMock implements BannerMeta
 	public @NotNull Map<String, Object> serialize()
 	{
 		final Map<String, Object> serialized = super.serialize();
-		serialized.put("base-color", this.baseColor);
 		serialized.put("patterns", this.patterns.stream().map(Pattern::serialize).toList());
 		return serialized;
 	}

@@ -11,6 +11,7 @@ import org.bukkit.entity.SpawnCategory;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.Range;
 
 import java.util.UUID;
 
@@ -283,6 +284,24 @@ public class FishHookMock extends ProjectileMock implements FishHook
 	public void setWaitTime(int ticks)
 	{
 		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @Range(from = 0L, to = 2147483647L) int getTimeUntilBite()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setTimeUntilBite(@Range(from = 1L, to = 2147483647L) int i) throws IllegalArgumentException
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void resetFishingState()
+	{
 		throw new UnimplementedOperationException();
 	}
 
