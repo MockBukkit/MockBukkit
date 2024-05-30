@@ -85,7 +85,7 @@ public class BlockDataMock implements BlockData
 	protected static void checkMaterial(@NotNull Material material)
 	{
 		Preconditions.checkNotNull(material, NULL_MATERIAL_EXCEPTION_MESSAGE);
-		Preconditions.checkState(material.isBlock(), "Can't create a block from " + material.getKey());
+		Preconditions.checkState(material.isBlock(), "Can't create a block from " + material);
 	}
 
 	/**
@@ -95,7 +95,7 @@ public class BlockDataMock implements BlockData
 	 */
 	protected void checkProperty(String property)
 	{
-		Preconditions.checkState(BlockDataMockRegistry.getInstance().isValidStateForBlockWithMaterial(getMaterial(), property), property + " is not a valid property for " + getMaterial().getKey());
+		Preconditions.checkState(BlockDataMockRegistry.getInstance().isValidStateForBlockWithMaterial(getMaterial(), property), property + " is not a valid property for " + getMaterial());
 	}
 	// endregion
 
