@@ -261,17 +261,18 @@ public class PlayerProfileMock implements PlayerProfile
 	@Override
 	public boolean equals(Object obj)
 	{
-		if (this == obj) return true;
-		if (!(obj instanceof PlayerProfileMock otherProfile)) return false;
-		return Objects.equals(this.name, otherProfile.name) && this.uuid.equals(otherProfile.uuid) && this.properties.equals(otherProfile.properties);
+		if (this == obj)
+			return true;
+		if (!(obj instanceof PlayerProfileMock otherProfile))
+			return false;
+		return Objects.equals(this.name, otherProfile.name) && this.uuid.equals(otherProfile.uuid)
+				&& this.properties.equals(otherProfile.properties);
 	}
 
 	@Override
 	public @NotNull String toString()
 	{
-		return "CraftPlayerProfile [uniqueId=" + getId() +
-				", name=" + getName() +
-				"]";
+		return "CraftPlayerProfile [uniqueId=" + getId() + ", name=" + getName() + "]";
 	}
 
 	@Override
@@ -289,8 +290,10 @@ public class PlayerProfileMock implements PlayerProfile
 	public static void validateSkullProfile(@NotNull PlayerProfileMock profile)
 	{
 		// The profile must contain either a uuid and textures, or a name.
-		// The profile always has a name or uuid, so just checking if it has a name and textures is sufficient.
-		boolean isValidSkullProfile = (profile.getName() != null) /*|| check for textures*/; // Textures aren't implemented yet.
+		// The profile always has a name or uuid, so just checking if it has a name and
+		// textures is sufficient.
+		boolean isValidSkullProfile = (profile.getName() != null) /* || check for textures */; // Textures aren't
+																								// implemented yet.
 		Preconditions.checkArgument(isValidSkullProfile, "The skull profile is missing a name or textures!");
 	}
 

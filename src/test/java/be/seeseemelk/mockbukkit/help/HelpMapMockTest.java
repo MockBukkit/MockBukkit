@@ -106,5 +106,4 @@ class HelpMapMockTest
 		helpMap.assertRegistered(helpTopicFactory);
 	}
 
-
 }

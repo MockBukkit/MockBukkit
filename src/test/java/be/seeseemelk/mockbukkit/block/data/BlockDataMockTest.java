@@ -20,7 +20,8 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@ExtendWith({ MockBukkitExtension.class})
+@ExtendWith(
+{ MockBukkitExtension.class })
 class BlockDataMockTest
 {
 
@@ -134,8 +135,8 @@ class BlockDataMockTest
 		WallSign wallSign = (WallSign) BlockDataMock.mock(Material.ACACIA_WALL_SIGN);
 		wallSign.setFacing(BlockFace.NORTH);
 		WallSign clone = (WallSign) wallSign.clone();
-		assertNotSame(wallSign,clone);
-		assertEquals(wallSign,clone);
+		assertNotSame(wallSign, clone);
+		assertEquals(wallSign, clone);
 		assertEquals(wallSign.getFacing(), clone.getFacing());
 	}
 
@@ -154,15 +155,16 @@ class BlockDataMockTest
 	{
 		// https://jd.papermc.io/paper/1.16/org/bukkit/block/data/BlockData.html#getAsString(boolean)
 		// defaults:
-		//    "minecraft:chest": {
-		//        "facing": "north",
-		//        "type": "single",
-		//        "waterlogged": false
-		//    },
+		// "minecraft:chest": {
+		// "facing": "north",
+		// "type": "single",
+		// "waterlogged": false
+		// },
 		//
 		// getAsString(true) : minecraft:chest[waterlogged=true]
-		// getAsString(false): minecraft:chest[facing=north,type=single,waterlogged=true]
-		// getAsString()     : minecraft:chest[facing=north,type=single,waterlogged=true]
+		// getAsString(false):
+		// minecraft:chest[facing=north,type=single,waterlogged=true]
+		// getAsString() : minecraft:chest[facing=north,type=single,waterlogged=true]
 
 		BlockData tmp = Material.CHEST.createBlockData();
 		String a = tmp.getAsString(false);

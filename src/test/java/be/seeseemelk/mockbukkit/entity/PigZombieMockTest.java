@@ -45,14 +45,14 @@ class PigZombieMockTest
 	@Test
 	void testAngryDefault()
 	{
-        assertFalse(pigZombie.isAngry());
+		assertFalse(pigZombie.isAngry());
 	}
 
 	@Test
 	void testSetAngry()
 	{
 		pigZombie.setAngry(true);
-        assertTrue(pigZombie.isAngry());
+		assertTrue(pigZombie.isAngry());
 	}
 
 	@Test

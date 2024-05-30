@@ -69,7 +69,8 @@ public class SculkSensorMock extends TileStateMock implements SculkSensor
 	@Override
 	public void setLastVibrationFrequency(int lastVibrationFrequency)
 	{
-		Preconditions.checkArgument(0 <= lastVibrationFrequency && lastVibrationFrequency <= 15, "Vibration frequency must be between 0-15");
+		Preconditions.checkArgument(0 <= lastVibrationFrequency && lastVibrationFrequency <= 15,
+				"Vibration frequency must be between 0-15");
 		this.lastVibrationFrequency = lastVibrationFrequency;
 	}
 

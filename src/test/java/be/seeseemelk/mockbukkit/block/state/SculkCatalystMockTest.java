@@ -48,7 +48,8 @@ class SculkCatalystMockTest
 	@Test
 	void constructor_Block_WrongType_ThrowsException()
 	{
-		assertThrowsExactly(IllegalArgumentException.class, () -> new SculkCatalystMock(new BlockMock(Material.BEDROCK)));
+		assertThrowsExactly(IllegalArgumentException.class,
+				() -> new SculkCatalystMock(new BlockMock(Material.BEDROCK)));
 	}
 
 	@Test

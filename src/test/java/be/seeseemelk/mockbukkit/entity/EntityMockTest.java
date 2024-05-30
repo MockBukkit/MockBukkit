@@ -337,7 +337,8 @@ class EntityMockTest
 	@Test
 	void sendMessage_StoredAsComponent()
 	{
-		TextComponent comp = Component.text().content("hi").clickEvent(ClickEvent.openUrl("https://www.youtube.com/watch?v=dQw4w9WgXcQ")).build();
+		TextComponent comp = Component.text().content("hi")
+				.clickEvent(ClickEvent.openUrl("https://www.youtube.com/watch?v=dQw4w9WgXcQ")).build();
 		entity.sendMessage(comp);
 		entity.assertSaid(comp);
 	}
@@ -557,7 +558,8 @@ class EntityMockTest
 	}
 
 	@Test
-	void hasNoPhysics_Default_False() {
+	void hasNoPhysics_Default_False()
+	{
 		World world = new WorldMock(Material.GRASS_BLOCK, 10);
 		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
 
@@ -578,7 +580,8 @@ class EntityMockTest
 	void entityDamage_Event_Triggered()
 	{
 		World world = new WorldMock(Material.GRASS_BLOCK, 10);
-		LivingEntityMock zombie = (LivingEntityMock) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+		LivingEntityMock zombie = (LivingEntityMock) world.spawnEntity(new Location(world, 10, 10, 10),
+				EntityType.ZOMBIE);
 		PlayerMock player1 = server.addPlayer();
 		zombie.simulateDamage(4, player1);
 		server.getPluginManager().assertEventFired(EntityDamageByEntityEvent.class);
@@ -679,8 +682,7 @@ class EntityMockTest
 	void arrowsInBody_NegativeValue_Fails()
 	{
 		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
-		assertThrows(IllegalArgumentException.class, () ->
-		{
+		assertThrows(IllegalArgumentException.class, () -> {
 			zombie.setArrowsInBody(-1);
 		});
 	}
@@ -750,7 +752,8 @@ class EntityMockTest
 	void lastDamageCause()
 	{
 		World world = new WorldMock(Material.GRASS_BLOCK, 10);
-		LivingEntityMock zombie = (LivingEntityMock) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+		LivingEntityMock zombie = (LivingEntityMock) world.spawnEntity(new Location(world, 10, 10, 10),
+				EntityType.ZOMBIE);
 		assertNull(zombie.getLastDamageCause());
 		zombie.simulateDamage(1, (Entity) null);
 		assertNotNull(zombie.getLastDamageCause());
@@ -780,7 +783,8 @@ class EntityMockTest
 	{
 		SimpleEntityMock mock = new SimpleEntityMock(server);
 		assertTrue(entity.addPassenger(mock));
-		server.getPluginManager().assertEventFired(EntityMountEvent.class, event -> event.getMount() == entity && event.getEntity() == mock);
+		server.getPluginManager().assertEventFired(EntityMountEvent.class,
+				event -> event.getMount() == entity && event.getEntity() == mock);
 
 		assertFalse(entity.addPassenger(mock), "The passenger should not be added a second time");
 		assertEquals(List.of(mock), entity.getPassengers(), "There should be only one passenger");
@@ -803,7 +807,8 @@ class EntityMockTest
 	@Test
 	void addPassenger_Self()
 	{
-		assertThrows(IllegalArgumentException.class, () -> entity.addPassenger(entity), "The entity should not be able to ride itself");
+		assertThrows(IllegalArgumentException.class, () -> entity.addPassenger(entity),
+				"The entity should not be able to ride itself");
 	}
 
 	@Test
@@ -879,9 +884,11 @@ class EntityMockTest
 		SimpleEntityMock mock = new SimpleEntityMock(server);
 		entity.addPassenger(mock);
 		assertTrue(entity.removePassenger(mock));
-		server.getPluginManager().assertEventFired(EntityDismountEvent.class, event -> event.getDismounted() == entity && event.getEntity() == mock);
+		server.getPluginManager().assertEventFired(EntityDismountEvent.class,
+				event -> event.getDismounted() == entity && event.getEntity() == mock);
 
-		assertTrue(entity.removePassenger(mock), "The method should always return true, even if it was not a passenger");
+		assertTrue(entity.removePassenger(mock),
+				"The method should always return true, even if it was not a passenger");
 		assertEquals(List.of(), entity.getPassengers());
 		assertNull(mock.getVehicle(), "The vehicle should no longer be referenced");
 		assertTrue(entity.isEmpty());
@@ -894,7 +901,8 @@ class EntityMockTest
 		SimpleEntityMock b = new SimpleEntityMock(server);
 		a.addPassenger(b);
 		entity.removePassenger(b);
-		server.getPluginManager().assertEventFired(EntityDismountEvent.class, event -> event.getDismounted() == a && event.getEntity() == b);
+		server.getPluginManager().assertEventFired(EntityDismountEvent.class,
+				event -> event.getDismounted() == a && event.getEntity() == b);
 		assertNull(b.getVehicle(), "b should not longer have a vehicle");
 		assertTrue(a.isEmpty(), "a should not longer have a passenger");
 	}

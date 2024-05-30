@@ -50,7 +50,8 @@ class CommandBlockMockTest
 	@Test
 	void constructor_Block_WrongType_ThrowsException()
 	{
-		assertThrowsExactly(IllegalArgumentException.class, () -> new CommandBlockMock(new BlockMock(Material.BEDROCK)));
+		assertThrowsExactly(IllegalArgumentException.class,
+				() -> new CommandBlockMock(new BlockMock(Material.BEDROCK)));
 	}
 
 	@Test

@@ -44,7 +44,8 @@ public class DamageTypeMock implements DamageType
 		Preconditions.checkArgument(data.has(KEY), "JsonObject does not have a field named 'key'");
 		Preconditions.checkArgument(data.has(DAMAGE_SCALING), "JsonObject does not have a field named 'damageScaling'");
 		Preconditions.checkArgument(data.has(SOUND), "JsonObject does not have a field named 'sound'");
-		Preconditions.checkArgument(data.has(DEATH_MESSAGE_TYPE), "JsonObject does not have a field named 'deathMessageType'");
+		Preconditions.checkArgument(data.has(DEATH_MESSAGE_TYPE),
+				"JsonObject does not have a field named 'deathMessageType'");
 		Preconditions.checkArgument(data.has(EXHAUSTION), "JsonObject does not have a field named 'exhaustion'");
 
 		// Retrieve values from JSON
@@ -71,7 +72,8 @@ public class DamageTypeMock implements DamageType
 	private final DeathMessageType deathMessageType;
 	private final float exhaustion;
 
-	public DamageTypeMock(@NotNull DamageScaling damageScaling, @NotNull DamageEffectMock damageEffect, @NotNull NamespacedKey key, @NotNull DeathMessageType deathMessageType, float exhaustion)
+	public DamageTypeMock(@NotNull DamageScaling damageScaling, @NotNull DamageEffectMock damageEffect,
+			@NotNull NamespacedKey key, @NotNull DeathMessageType deathMessageType, float exhaustion)
 	{
 		Preconditions.checkArgument(damageScaling != null, "DamageScaling cannot be null");
 		Preconditions.checkArgument(damageEffect != null, "DamageEffectMock cannot be null");

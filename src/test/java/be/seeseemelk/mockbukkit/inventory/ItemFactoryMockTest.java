@@ -51,9 +51,7 @@ class ItemFactoryMockTest
 		MockBukkit.unmock();
 	}
 
-	/*
-	 * These tests are still very incomplete.
-	 */
+	/* These tests are still very incomplete. */
 
 	@Test
 	void testGetItemMetaCorrectClass()

@@ -17,8 +17,7 @@ class ScheduledTaskTest
 	@Test
 	void getScheduledTick_GetsScheduledTick()
 	{
-		ScheduledTask task = new ScheduledTask(0, null, true, 5, () ->
-		{
+		ScheduledTask task = new ScheduledTask(0, null, true, 5, () -> {
 		});
 		assertEquals(5, task.getScheduledTick());
 	}
@@ -26,8 +25,7 @@ class ScheduledTaskTest
 	@Test
 	void getRunnable_GetsRunnable()
 	{
-		Runnable runnable = () ->
-		{
+		Runnable runnable = () -> {
 		};
 		ScheduledTask task = new ScheduledTask(0, null, true, 0, runnable);
 		assertSame(runnable, task.getRunnable());
@@ -36,8 +34,7 @@ class ScheduledTaskTest
 	@Test
 	void getTaskId_GetsTaskId()
 	{
-		ScheduledTask task = new ScheduledTask(5, null, true, 0, () ->
-		{
+		ScheduledTask task = new ScheduledTask(5, null, true, 0, () -> {
 		});
 		assertEquals(5, task.getTaskId());
 	}
@@ -45,12 +42,10 @@ class ScheduledTaskTest
 	@Test
 	void isSync()
 	{
-		ScheduledTask task = new ScheduledTask(0, null, true, 0, () ->
-		{
+		ScheduledTask task = new ScheduledTask(0, null, true, 0, () -> {
 		});
 		assertTrue(task.isSync());
-		task = new ScheduledTask(0, null, false, 0, () ->
-		{
+		task = new ScheduledTask(0, null, false, 0, () -> {
 		});
 		assertFalse(task.isSync());
 	}
@@ -58,8 +53,7 @@ class ScheduledTaskTest
 	@Test
 	void setScheduledTick_OtherTick_TickSetExactly()
 	{
-		ScheduledTask task = new ScheduledTask(0, null, true, 5, () ->
-		{
+		ScheduledTask task = new ScheduledTask(0, null, true, 5, () -> {
 		});
 		assertEquals(5, task.getScheduledTick());
 		task.setScheduledTick(20);
@@ -69,8 +63,7 @@ class ScheduledTaskTest
 	@Test
 	void cancel()
 	{
-		ScheduledTask task = new ScheduledTask(0, null, true, 0, () ->
-		{
+		ScheduledTask task = new ScheduledTask(0, null, true, 0, () -> {
 		});
 		assertFalse(task.isCancelled());
 		task.cancel();
@@ -81,8 +74,7 @@ class ScheduledTaskTest
 	void run_NotCancelled_Executed()
 	{
 		AtomicBoolean executed = new AtomicBoolean(false);
-		ScheduledTask task = new ScheduledTask(0, null, true, 0, () ->
-		{
+		ScheduledTask task = new ScheduledTask(0, null, true, 0, () -> {
 			executed.set(true);
 		});
 		task.run();
@@ -93,8 +85,7 @@ class ScheduledTaskTest
 	void run_Cancelled_ThrowsException()
 	{
 		AtomicBoolean executed = new AtomicBoolean(false);
-		ScheduledTask task = new ScheduledTask(0, null, true, 0, () ->
-		{
+		ScheduledTask task = new ScheduledTask(0, null, true, 0, () -> {
 			executed.set(true);
 		});
 		task.cancel();
@@ -103,17 +94,3 @@ class ScheduledTaskTest
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

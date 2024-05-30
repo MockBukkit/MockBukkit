@@ -37,7 +37,8 @@ public class BossBarMock implements BossBar
 	 * @param style The style of the bossbar.
 	 * @param flags The flags to set on the bossbar.
 	 */
-	public BossBarMock(@NotNull String title, @NotNull BarColor color, @NotNull BarStyle style, BarFlag @NotNull ... flags)
+	public BossBarMock(@NotNull String title, @NotNull BarColor color, @NotNull BarStyle style,
+			BarFlag @NotNull... flags)
 	{
 		this.title = title;
 		this.color = color;

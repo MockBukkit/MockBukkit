@@ -52,7 +52,8 @@ import static java.util.Objects.nonNull;
 public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 {
 
-	// We store the raw JSON representation of all text data. See SPIGOT-5063, SPIGOT-5656, SPIGOT-5304
+	// We store the raw JSON representation of all text data. See SPIGOT-5063,
+	// SPIGOT-5656, SPIGOT-5304
 	private @Nullable String displayName = null;
 	private @Nullable String localizedName = null;
 	private @Nullable List<String> lore = null;
@@ -71,8 +72,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	 * Constructs a new {@link ItemMetaMock}.
 	 */
 	public ItemMetaMock()
-	{
-	}
+	{}
 
 	/**
 	 * Constructs a new {@link ItemMetaMock}, cloning the data from another.
@@ -92,7 +92,8 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		}
 		if (meta.hasLore())
 		{
-			lore = meta.lore().stream().map(c -> GsonComponentSerializer.gson().serialize(c)).collect(Collectors.toList());
+			lore = meta.lore().stream().map(c -> GsonComponentSerializer.gson().serialize(c))
+					.collect(Collectors.toList());
 		}
 		if (meta.hasDestroyableKeys())
 		{
@@ -160,7 +161,9 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public @NotNull String getDisplayName()
 	{
-		return this.displayName == null ? "" : LegacyComponentSerializer.legacySection().serialize(GsonComponentSerializer.gson().deserialize(this.displayName));
+		return this.displayName == null ? ""
+				: LegacyComponentSerializer.legacySection()
+						.serialize(GsonComponentSerializer.gson().deserialize(this.displayName));
 	}
 
 	@Override
@@ -172,13 +175,15 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public void setDisplayName(@Nullable String name)
 	{
-		this.displayName = name == null ? null : GsonComponentSerializer.gson().serialize(LegacyComponentSerializer.legacySection().deserialize(name));
+		this.displayName = name == null ? null
+				: GsonComponentSerializer.gson().serialize(LegacyComponentSerializer.legacySection().deserialize(name));
 	}
 
 	@Override
 	public void setDisplayNameComponent(BaseComponent @NotNull [] components)
 	{
-		this.displayName = GsonComponentSerializer.gson().serialize(BungeeComponentSerializer.get().deserialize(Arrays.stream(components).filter(Objects::nonNull).toArray(BaseComponent[]::new)));
+		this.displayName = GsonComponentSerializer.gson().serialize(BungeeComponentSerializer.get()
+				.deserialize(Arrays.stream(components).filter(Objects::nonNull).toArray(BaseComponent[]::new)));
 	}
 
 	/**
@@ -276,7 +281,8 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		{
 			return false;
 		}
-		// Comparing using equals is fine - AbstractMap#equals only cares about content, not Map implementation.
+		// Comparing using equals is fine - AbstractMap#equals only cares about content,
+		// not Map implementation.
 		if (!enchants.equals(meta.getEnchants()))
 		{
 			return false;
@@ -286,7 +292,8 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		{
 			return false;
 		}
-		// MockPDC does care about PDC impl, but this is in line with CB's equality comparison.
+		// MockPDC does care about PDC impl, but this is in line with CB's equality
+		// comparison.
 		if (!persistentDataContainer.equals(meta.getPersistentDataContainer()))
 		{
 			return false;
@@ -406,9 +413,8 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public @Nullable List<Component> lore()
 	{
-		return this.lore == null ? null : new ArrayList<>(this.lore.stream()
-				.map(s -> GsonComponentSerializer.gson().deserialize(s))
-				.toList());
+		return this.lore == null ? null
+				: new ArrayList<>(this.lore.stream().map(s -> GsonComponentSerializer.gson().deserialize(s)).toList());
 	}
 
 	@Override
@@ -427,21 +433,18 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public @Nullable List<String> getLore()
 	{
-		return this.lore == null ? null : new ArrayList<>(this.lore.stream()
-				.map(s -> LegacyComponentSerializer
-						.legacySection()
-						.serialize(GsonComponentSerializer.gson().deserialize(s)))
-				.toList());
+		return this.lore == null ? null
+				: new ArrayList<>(this.lore.stream().map(s -> LegacyComponentSerializer.legacySection()
+						.serialize(GsonComponentSerializer.gson().deserialize(s))).toList());
 	}
 
 	@Override
 	public @Nullable List<BaseComponent[]> getLoreComponents()
 	{
-		return this.lore == null ? null : this.lore.stream()
-				.map(c -> BungeeComponentSerializer
-						.get()
-						.serialize(GsonComponentSerializer.gson().deserialize(c))
-				).toList();
+		return this.lore == null ? null
+				: this.lore.stream().map(
+						c -> BungeeComponentSerializer.get().serialize(GsonComponentSerializer.gson().deserialize(c)))
+						.toList();
 	}
 
 	@Override
@@ -449,7 +452,10 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	{
 		if (lore != null && !lore.isEmpty())
 		{
-			this.lore = lore.stream().map(s -> GsonComponentSerializer.gson().serialize(LegacyComponentSerializer.legacySection().deserialize(s).asComponent())).collect(Collectors.toList());
+			this.lore = lore.stream()
+					.map(s -> GsonComponentSerializer.gson()
+							.serialize(LegacyComponentSerializer.legacySection().deserialize(s).asComponent()))
+					.collect(Collectors.toList());
 		}
 		else
 		{
@@ -470,7 +476,8 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	 */
 	public void assertLore(@NotNull List<String> lines)
 	{
-		assertComponentLore(lines.stream().map(s -> LegacyComponentSerializer.legacySection().deserialize(s).asComponent()).toList());
+		assertComponentLore(lines.stream()
+				.map(s -> LegacyComponentSerializer.legacySection().deserialize(s).asComponent()).toList());
 	}
 
 	/**
@@ -492,7 +499,8 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		{
 			if (GsonComponentSerializer.gson().deserialize(this.lore.get(i)).equals(lines.get(i)))
 				continue;
-			throw new AssertionError(String.format("Line %d should be '%s' but was '%s'", i, lines.get(i), this.lore.get(i)));
+			throw new AssertionError(
+					String.format("Line %d should be '%s' but was '%s'", i, lines.get(i), this.lore.get(i)));
 		}
 	}
 
@@ -573,12 +581,8 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 			map.put("destroyable-keys", this.destroyableKeys);
 		}
 
-		/* Not implemented.
-		if (!this.customTagContainer.isEmpty())
-		{
-			map.put("customTagContainer", this.customTagContainer);
-		}
-		*/
+		/* Not implemented. if (!this.customTagContainer.isEmpty()) {
+		 * map.put("customTagContainer", this.customTagContainer); } */
 
 		map.put("PublicBukkitValues", this.persistentDataContainer.serialize());
 
@@ -791,9 +795,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	@Override
 	public Multimap<Attribute, AttributeModifier> getAttributeModifiers()
 	{
-		return this.hasAttributeModifiers()
-				? ImmutableMultimap.copyOf(attributeModifiers)
-				: null;
+		return this.hasAttributeModifiers() ? ImmutableMultimap.copyOf(attributeModifiers) : null;
 	}
 
 	@Override
@@ -808,8 +810,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		this.checkAttributeMap();
 		this.attributeModifiers.clear();
 
-		attributeModifiers.entries().stream()
-				.filter(entry -> entry.getKey() != null && entry.getValue() != null)
+		attributeModifiers.entries().stream().filter(entry -> entry.getKey() != null && entry.getValue() != null)
 				.forEach(entry -> this.attributeModifiers.put(entry.getKey(), entry.getValue()));
 	}
 
@@ -843,7 +844,8 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		this.checkAttributeMap();
 		for (Map.Entry<Attribute, AttributeModifier> entry : this.attributeModifiers.entries())
 		{
-			Preconditions.checkArgument(!entry.getValue().getUniqueId().equals(modifier.getUniqueId()), "Cannot register AttributeModifier. Modifier is already applied! %s", modifier);
+			Preconditions.checkArgument(!entry.getValue().getUniqueId().equals(modifier.getUniqueId()),
+					"Cannot register AttributeModifier. Modifier is already applied! %s", modifier);
 		}
 		return this.attributeModifiers.put(attribute, modifier);
 	}
@@ -860,8 +862,10 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	public boolean removeAttributeModifier(@NotNull EquipmentSlot slot)
 	{
 		this.checkAttributeMap();
-		// Match against null because as of 1.13, AttributeModifiers without a set slot are active in any slot.
-		return this.attributeModifiers.entries().removeIf(entry -> entry.getValue().getSlot() == null || entry.getValue().getSlot() == slot);
+		// Match against null because as of 1.13, AttributeModifiers without a set slot
+		// are active in any slot.
+		return this.attributeModifiers.entries()
+				.removeIf(entry -> entry.getValue().getSlot() == null || entry.getValue().getSlot() == slot);
 	}
 
 	@Override
@@ -871,9 +875,8 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		Preconditions.checkNotNull(modifier, "AttributeModifier cannot be null");
 		this.checkAttributeMap();
 
-		return this.attributeModifiers.entries().removeIf(entry ->
-				(entry.getKey() == null || entry.getValue() == null) || (entry.getKey() == attribute && entry.getValue().getUniqueId().equals(modifier.getUniqueId()))
-		);
+		return this.attributeModifiers.entries().removeIf(entry -> (entry.getKey() == null || entry.getValue() == null)
+				|| (entry.getKey() == attribute && entry.getValue().getUniqueId().equals(modifier.getUniqueId())));
 	}
 
 	@NotNull

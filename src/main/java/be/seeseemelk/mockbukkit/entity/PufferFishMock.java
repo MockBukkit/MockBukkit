@@ -63,9 +63,9 @@ public class PufferFishMock extends FishMock implements PufferFish
 	{
 		return switch (getPuffState())
 		{
-			case 1 -> EntityState.SEMI_PUFFED;
-			case 2 -> EntityState.PUFFED;
-			default -> super.getEntityState();
+		case 1 -> EntityState.SEMI_PUFFED;
+		case 2 -> EntityState.PUFFED;
+		default -> super.getEntityState();
 		};
 	}
 

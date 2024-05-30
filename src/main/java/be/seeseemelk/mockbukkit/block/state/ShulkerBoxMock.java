@@ -71,24 +71,24 @@ public class ShulkerBoxMock extends ContainerMock implements ShulkerBox
 		Preconditions.checkNotNull(type, "Type cannot be null");
 		return switch (type)
 		{
-			case SHULKER_BOX -> null;
-			case WHITE_SHULKER_BOX -> DyeColor.WHITE;
-			case ORANGE_SHULKER_BOX -> DyeColor.ORANGE;
-			case MAGENTA_SHULKER_BOX -> DyeColor.MAGENTA;
-			case LIGHT_BLUE_SHULKER_BOX -> DyeColor.LIGHT_BLUE;
-			case YELLOW_SHULKER_BOX -> DyeColor.YELLOW;
-			case LIME_SHULKER_BOX -> DyeColor.LIME;
-			case PINK_SHULKER_BOX -> DyeColor.PINK;
-			case GRAY_SHULKER_BOX -> DyeColor.GRAY;
-			case LIGHT_GRAY_SHULKER_BOX -> DyeColor.LIGHT_GRAY;
-			case CYAN_SHULKER_BOX -> DyeColor.CYAN;
-			case PURPLE_SHULKER_BOX -> DyeColor.PURPLE;
-			case BLUE_SHULKER_BOX -> DyeColor.BLUE;
-			case BROWN_SHULKER_BOX -> DyeColor.BROWN;
-			case GREEN_SHULKER_BOX -> DyeColor.GREEN;
-			case RED_SHULKER_BOX -> DyeColor.RED;
-			case BLACK_SHULKER_BOX -> DyeColor.BLACK;
-			default -> throw new IllegalArgumentException(type.name() + " is not a Shulker Box!");
+		case SHULKER_BOX -> null;
+		case WHITE_SHULKER_BOX -> DyeColor.WHITE;
+		case ORANGE_SHULKER_BOX -> DyeColor.ORANGE;
+		case MAGENTA_SHULKER_BOX -> DyeColor.MAGENTA;
+		case LIGHT_BLUE_SHULKER_BOX -> DyeColor.LIGHT_BLUE;
+		case YELLOW_SHULKER_BOX -> DyeColor.YELLOW;
+		case LIME_SHULKER_BOX -> DyeColor.LIME;
+		case PINK_SHULKER_BOX -> DyeColor.PINK;
+		case GRAY_SHULKER_BOX -> DyeColor.GRAY;
+		case LIGHT_GRAY_SHULKER_BOX -> DyeColor.LIGHT_GRAY;
+		case CYAN_SHULKER_BOX -> DyeColor.CYAN;
+		case PURPLE_SHULKER_BOX -> DyeColor.PURPLE;
+		case BLUE_SHULKER_BOX -> DyeColor.BLUE;
+		case BROWN_SHULKER_BOX -> DyeColor.BROWN;
+		case GREEN_SHULKER_BOX -> DyeColor.GREEN;
+		case RED_SHULKER_BOX -> DyeColor.RED;
+		case BLACK_SHULKER_BOX -> DyeColor.BLACK;
+		default -> throw new IllegalArgumentException(type.name() + " is not a Shulker Box!");
 		};
 	}
 

@@ -6,7 +6,6 @@ import be.seeseemelk.mockbukkit.ServerMock;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LeashHitch;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,7 +31,7 @@ class LeashHitchMockTest
 	@Test
 	void testGetType()
 	{
-		assertEquals(EntityType.LEASH_HITCH,leashHitch.getType());
+		assertEquals(EntityType.LEASH_HITCH, leashHitch.getType());
 	}
 
 	@Test
@@ -44,13 +43,13 @@ class LeashHitchMockTest
 	@Test
 	void testSetFacingDirection()
 	{
-		assertTrue(leashHitch.setFacingDirection(BlockFace.SELF,true));
+		assertTrue(leashHitch.setFacingDirection(BlockFace.SELF, true));
 	}
 
 	@Test
 	void testSetFacingDirectionFalse()
 	{
-		assertFalse(leashHitch.setFacingDirection(BlockFace.SELF,false));
+		assertFalse(leashHitch.setFacingDirection(BlockFace.SELF, false));
 	}
 
 	@Test
@@ -64,6 +63,5 @@ class LeashHitchMockTest
 	{
 		assertThrows(IllegalArgumentException.class, () -> leashHitch.setFacingDirection(BlockFace.DOWN, true));
 	}
-
 
 }

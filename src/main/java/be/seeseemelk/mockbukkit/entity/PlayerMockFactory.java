@@ -7,7 +7,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Random;
 import java.util.UUID;
 
-
 /**
  * Used to construct random {@link PlayerMock}s and {@link OfflinePlayerMock}s.
  */

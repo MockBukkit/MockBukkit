@@ -92,7 +92,8 @@ public class SkullMock extends TileStateMock implements Skull
 		{
 			return false;
 		}
-		Preconditions.checkArgument(name.length() <= MAX_OWNER_LENGTH, "Name cannot be longer than " + MAX_OWNER_LENGTH + " characters.");
+		Preconditions.checkArgument(name.length() <= MAX_OWNER_LENGTH,
+				"Name cannot be longer than " + MAX_OWNER_LENGTH + " characters.");
 		this.profile = new PlayerProfileMock(name, null);
 		return true;
 	}
@@ -124,17 +125,19 @@ public class SkullMock extends TileStateMock implements Skull
 		Preconditions.checkNotNull(player, "Player cannot be null");
 
 		// PlayerMock#getPlayerProfile isn't implemented yet
-//		if (player instanceof PlayerMock playerMock) {
-//			this.profile = (PlayerProfileMock) playerMock.getPlayerProfile();
-//		} else {
+		// if (player instanceof PlayerMock playerMock) {
+		// this.profile = (PlayerProfileMock) playerMock.getPlayerProfile();
+		// } else {
 		this.profile = new PlayerProfileMock(player);
-//		}
+		// }
 	}
 
 	@Override
 	public void setPlayerProfile(@NotNull PlayerProfile profile)
 	{
-		Preconditions.checkArgument(profile instanceof PlayerProfileMock, "Profile must be a PlayerProfileMock!"); // Implicit null check
+		Preconditions.checkArgument(profile instanceof PlayerProfileMock, "Profile must be a PlayerProfileMock!"); // Implicit
+																													// null
+																													// check
 		this.profile = (PlayerProfileMock) profile;
 	}
 
@@ -183,7 +186,8 @@ public class SkullMock extends TileStateMock implements Skull
 	public @NotNull BlockFace getRotation()
 	{
 		BlockData blockData = getBlockData();
-		return (blockData instanceof Rotatable) ? ((Rotatable) blockData).getRotation() : ((Directional) blockData).getFacing();
+		return (blockData instanceof Rotatable) ? ((Rotatable) blockData).getRotation()
+				: ((Directional) blockData).getFacing();
 	}
 
 	@Override
@@ -207,13 +211,13 @@ public class SkullMock extends TileStateMock implements Skull
 	{
 		return switch (getType())
 		{
-			case SKELETON_SKULL, SKELETON_WALL_SKULL -> SkullType.SKELETON;
-			case WITHER_SKELETON_SKULL, WITHER_SKELETON_WALL_SKULL -> SkullType.WITHER;
-			case ZOMBIE_HEAD, ZOMBIE_WALL_HEAD -> SkullType.ZOMBIE;
-			case PLAYER_HEAD, PLAYER_WALL_HEAD -> SkullType.PLAYER;
-			case CREEPER_HEAD, CREEPER_WALL_HEAD -> SkullType.CREEPER;
-			case DRAGON_HEAD, DRAGON_WALL_HEAD -> SkullType.DRAGON;
-			default -> throw new IllegalArgumentException("Unknown SkullType for " + getType());
+		case SKELETON_SKULL, SKELETON_WALL_SKULL -> SkullType.SKELETON;
+		case WITHER_SKELETON_SKULL, WITHER_SKELETON_WALL_SKULL -> SkullType.WITHER;
+		case ZOMBIE_HEAD, ZOMBIE_WALL_HEAD -> SkullType.ZOMBIE;
+		case PLAYER_HEAD, PLAYER_WALL_HEAD -> SkullType.PLAYER;
+		case CREEPER_HEAD, CREEPER_WALL_HEAD -> SkullType.CREEPER;
+		case DRAGON_HEAD, DRAGON_WALL_HEAD -> SkullType.DRAGON;
+		default -> throw new IllegalArgumentException("Unknown SkullType for " + getType());
 		};
 	}
 

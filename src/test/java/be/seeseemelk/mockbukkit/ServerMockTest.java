@@ -142,9 +142,7 @@ class ServerMockTest
 	@Test
 	void createWorld_WorldCreator()
 	{
-		WorldCreator worldCreator = new WorldCreator("test")
-				.seed(12345)
-				.type(WorldType.FLAT)
+		WorldCreator worldCreator = new WorldCreator("test").seed(12345).type(WorldType.FLAT)
 				.environment(World.Environment.NORMAL);
 		World world = server.createWorld(worldCreator);
 
@@ -313,7 +311,8 @@ class ServerMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = { "testcommand", "tc", "othercommand" })
+	@ValueSource(strings =
+	{ "testcommand", "tc", "othercommand" })
 	void testPluginCommand(@NotNull String cmd)
 	{
 		MockBukkit.load(TestPlugin.class);
@@ -519,11 +518,8 @@ class ServerMockTest
 	}
 
 	@ParameterizedTest
-	@CsvSource({
-			"player, player",
-			"player, PLAYER",
-			"player_other, player",
-	})
+	@CsvSource(
+	{ "player, player", "player, PLAYER", "player_other, player", })
 	void getPlayer_NameAndPlayerExists_PlayerFound(@NotNull String actual, @NotNull String expected)
 	{
 		PlayerMock player = new PlayerMock(server, actual);
@@ -627,7 +623,8 @@ class ServerMockTest
 		assertTrue(offlinePlayer.isOnline());
 		assertTrue(onlinePlayer.isOnline());
 
-		// Assert that this is still the same Player (as far as name and uuid are concerned)
+		// Assert that this is still the same Player (as far as name and uuid are
+		// concerned)
 		assertEquals(offlinePlayer.getName(), onlinePlayer.getName());
 		assertEquals(offlinePlayer.getUniqueId(), onlinePlayer.getUniqueId());
 
@@ -737,7 +734,8 @@ class ServerMockTest
 	void reload_ServerLoadEvent_IsCalled()
 	{
 		server.reload();
-		server.getPluginManager().assertEventFired(ServerLoadEvent.class, (e) -> e.getType() == ServerLoadEvent.LoadType.RELOAD);
+		server.getPluginManager().assertEventFired(ServerLoadEvent.class,
+				(e) -> e.getType() == ServerLoadEvent.LoadType.RELOAD);
 	}
 
 	@Test
@@ -890,7 +888,6 @@ class ServerMockTest
 		server.setWhitelist(true);
 		server.setWhitelistEnforced(true);
 
-
 		server.reloadWhitelist();
 
 		assertFalse(server.getOnlinePlayers().contains(playerMock));
@@ -957,7 +954,6 @@ class ServerMockTest
 	void testAddPlayerWithWhitelistEnabledAndNotWhitelisted()
 	{
 		server.setWhitelist(true);
-
 
 		PlayerMock player = server.addPlayer();
 
@@ -1039,7 +1035,8 @@ class ServerMockTest
 		g.dispose();
 
 		CachedServerIconMock icon = server.loadServerIcon(image);
-		byte[] decodedBase64 = Base64.getDecoder().decode(icon.getData().replace(CachedServerIconMock.PNG_BASE64_PREFIX, ""));
+		byte[] decodedBase64 = Base64.getDecoder()
+				.decode(icon.getData().replace(CachedServerIconMock.PNG_BASE64_PREFIX, ""));
 		BufferedImage decodedImage = ImageIO.read(new ByteArrayInputStream(decodedBase64));
 
 		for (int x = 0; x < 64; x++)
@@ -1374,13 +1371,15 @@ class ServerMockTest
 	@Test
 	void testCreateStonecutterInventory()
 	{
-		assertInstanceOf(StonecutterInventoryMock.class, server.createInventory(null, InventoryType.STONECUTTER, "", 9));
+		assertInstanceOf(StonecutterInventoryMock.class,
+				server.createInventory(null, InventoryType.STONECUTTER, "", 9));
 	}
 
 	@Test
 	void testCreateCartographyInventory()
 	{
-		assertInstanceOf(CartographyInventoryMock.class, server.createInventory(null, InventoryType.CARTOGRAPHY, "", 9));
+		assertInstanceOf(CartographyInventoryMock.class,
+				server.createInventory(null, InventoryType.CARTOGRAPHY, "", 9));
 	}
 
 	@Test
@@ -1459,24 +1458,10 @@ class ServerMockTest
 		assertEquals("Test", server.getMotd());
 	}
 
-	@ValueSource(classes = {
-			Art.class,
-			Attribute.class,
-			Biome.class,
-			Enchantment.class,
-			EntityType.class,
-			Fluid.class,
-			Frog.Variant.class,
-			KeyedBossBar.class,
-			LootTables.class,
-			Material.class,
-			MemoryKey.class,
-			PotionEffectType.class,
-			Sound.class,
-			Statistic.class,
-			Villager.Profession.class,
-			Villager.Type.class,
-	})
+	@ValueSource(classes =
+	{ Art.class, Attribute.class, Biome.class, Enchantment.class, EntityType.class, Fluid.class, Frog.Variant.class,
+			KeyedBossBar.class, LootTables.class, Material.class, MemoryKey.class, PotionEffectType.class, Sound.class,
+			Statistic.class, Villager.Profession.class, Villager.Type.class, })
 	@ParameterizedTest
 	void getRegistry_ValidType_HasValues(Class<? extends Keyed> clazz)
 	{
@@ -1486,9 +1471,8 @@ class ServerMockTest
 			assertTrue(registry.iterator().hasNext());
 	}
 
-	@ValueSource(classes = {
-			ConfiguredStructure.class
-	})
+	@ValueSource(classes =
+	{ ConfiguredStructure.class })
 	@ParameterizedTest
 	void getRegistry_InvalidType_Throws(Class<? extends Keyed> clazz)
 	{
@@ -1513,14 +1497,9 @@ class ServerMockTest
 
 	public static Stream<Arguments> testGetTicksPerSpawnsArguments()
 	{
-		return Stream.of(
-				Arguments.of(SpawnCategory.MONSTER, 1),
-				Arguments.of(SpawnCategory.ANIMAL, 400),
-				Arguments.of(SpawnCategory.WATER_AMBIENT, 1),
-				Arguments.of(SpawnCategory.WATER_ANIMAL, 1),
-				Arguments.of(SpawnCategory.AMBIENT, 1),
-				Arguments.of(SpawnCategory.WATER_UNDERGROUND_CREATURE, 1)
-		);
+		return Stream.of(Arguments.of(SpawnCategory.MONSTER, 1), Arguments.of(SpawnCategory.ANIMAL, 400),
+				Arguments.of(SpawnCategory.WATER_AMBIENT, 1), Arguments.of(SpawnCategory.WATER_ANIMAL, 1),
+				Arguments.of(SpawnCategory.AMBIENT, 1), Arguments.of(SpawnCategory.WATER_UNDERGROUND_CREATURE, 1));
 	}
 
 	@Test
@@ -1580,14 +1559,9 @@ class ServerMockTest
 
 	public static Stream<Arguments> getSpawnLimitArguments()
 	{
-		return Stream.of(
-				Arguments.of(SpawnCategory.MONSTER, 70),
-				Arguments.of(SpawnCategory.ANIMAL, 10),
-				Arguments.of(SpawnCategory.WATER_AMBIENT, 20),
-				Arguments.of(SpawnCategory.WATER_ANIMAL, 5),
-				Arguments.of(SpawnCategory.AMBIENT, 15),
-				Arguments.of(SpawnCategory.WATER_UNDERGROUND_CREATURE,5)
-		);
+		return Stream.of(Arguments.of(SpawnCategory.MONSTER, 70), Arguments.of(SpawnCategory.ANIMAL, 10),
+				Arguments.of(SpawnCategory.WATER_AMBIENT, 20), Arguments.of(SpawnCategory.WATER_ANIMAL, 5),
+				Arguments.of(SpawnCategory.AMBIENT, 15), Arguments.of(SpawnCategory.WATER_UNDERGROUND_CREATURE, 5));
 	}
 
 	@Test
@@ -1637,7 +1611,6 @@ class ServerMockTest
 	{
 		assertEquals(10, server.getAnimalSpawnLimit());
 	}
-
 
 	@Test
 	void testBanIP()

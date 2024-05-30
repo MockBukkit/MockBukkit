@@ -115,10 +115,8 @@ class PlayerMockTest
 
 	// Taken from https://minecraft.wiki/w/Experience#Leveling_up
 	private static final int[] expRequired =
-			{
-					7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 42, 47, 52, 57, 62, 67, 72, 77, 82, 87, 92, 97, 102,
-					107, 112, 121, 130, 139, 148, 157, 166, 175, 184, 193
-			};
+	{ 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 42, 47, 52, 57, 62, 67, 72, 77, 82, 87, 92, 97, 102,
+			107, 112, 121, 130, 139, 148, 157, 166, 175, 184, 193 };
 	private ServerMock server;
 	private UUID uuid;
 	private PlayerMock player;
@@ -134,11 +132,8 @@ class PlayerMockTest
 			@Override
 			protected long getCurrentServerTime()
 			{
-				/*
-				 *  This will force the current server time to always be different to
-				 *  any prior invocations, this is much more elegant than simply doing
-				 *  Thread.sleep!
-				 */
+				/* This will force the current server time to always be different to any prior
+				 * invocations, this is much more elegant than simply doing Thread.sleep! */
 				ticks++;
 				return super.getCurrentServerTime() + ticks;
 			}
@@ -304,7 +299,7 @@ class PlayerMockTest
 	@Test
 	void damage_ExactlyHealth_ZeroAndDeathEvent()
 	{
-		player.simulateDamage(player.getHealth(),(Entity) null);
+		player.simulateDamage(player.getHealth(), (Entity) null);
 		assertEquals(0, player.getHealth(), 0);
 		assertTrue(player.isDead());
 		server.getPluginManager().assertEventFired(EntityDamageEvent.class);
@@ -497,12 +492,14 @@ class PlayerMockTest
 	}
 
 	@ParameterizedTest
-	@EnumSource(value = GameMode.class, mode = EnumSource.Mode.EXCLUDE, names = { "SURVIVAL" })
+	@EnumSource(value = GameMode.class, mode = EnumSource.Mode.EXCLUDE, names =
+	{ "SURVIVAL" })
 	void simulateBlockDamage_NotSurvival_BlockNotDamaged(@NotNull GameMode nonSurvivalGameMode)
 	{
 		player.setGameMode(nonSurvivalGameMode);
 		Block block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
-		assertNull(player.simulateBlockDamage(block), "Block was damaged while in gamemode " + nonSurvivalGameMode.name());
+		assertNull(player.simulateBlockDamage(block),
+				"Block was damaged while in gamemode " + nonSurvivalGameMode.name());
 	}
 
 	@Test
@@ -638,8 +635,7 @@ class PlayerMockTest
 			plugin.barrier.await(3, TimeUnit.SECONDS);
 		}
 		catch (InterruptedException | BrokenBarrierException e)
-		{
-		}
+		{}
 		catch (TimeoutException e)
 		{
 			fail("Async event was not fired");
@@ -967,8 +963,7 @@ class PlayerMockTest
 		float pitch = 1;
 		player.playSound(player.getLocation(), sound, SoundCategory.AMBIENT, volume, pitch);
 
-		player.assertSoundHeard(sound, audio ->
-		{
+		player.assertSoundHeard(sound, audio -> {
 			return player.getLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.AMBIENT
 					&& audio.getVolume() == volume && audio.getPitch() == pitch;
 		});
@@ -982,8 +977,7 @@ class PlayerMockTest
 		float pitch = 0.75F;
 		player.playSound(player.getEyeLocation(), sound, SoundCategory.RECORDS, volume, pitch);
 
-		player.assertSoundHeard(sound, audio ->
-		{
+		player.assertSoundHeard(sound, audio -> {
 			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
 					&& audio.getVolume() == volume && audio.getPitch() == pitch;
 		});
@@ -992,12 +986,8 @@ class PlayerMockTest
 	@Test
 	void testPlaySound_Adventure()
 	{
-		net.kyori.adventure.sound.Sound sound = net.kyori.adventure.sound.Sound.sound(
-				Sound.BLOCK_ANVIL_FALL,
-				net.kyori.adventure.sound.Sound.Source.BLOCK,
-				0.9f,
-				0.8f
-		);
+		net.kyori.adventure.sound.Sound sound = net.kyori.adventure.sound.Sound.sound(Sound.BLOCK_ANVIL_FALL,
+				net.kyori.adventure.sound.Sound.Source.BLOCK, 0.9f, 0.8f);
 		player.playSound(sound);
 		player.assertSoundHeard(sound, audio -> player.getLocation().equals(audio.getLocation()));
 	}
@@ -1005,12 +995,8 @@ class PlayerMockTest
 	@Test
 	void testPlaySoundSelfEmitter_Adventure()
 	{
-		net.kyori.adventure.sound.Sound sound = net.kyori.adventure.sound.Sound.sound(
-				Sound.ENTITY_CREEPER_PRIMED,
-				net.kyori.adventure.sound.Sound.Source.HOSTILE,
-				0.9f,
-				0.8f
-		);
+		net.kyori.adventure.sound.Sound sound = net.kyori.adventure.sound.Sound.sound(Sound.ENTITY_CREEPER_PRIMED,
+				net.kyori.adventure.sound.Sound.Source.HOSTILE, 0.9f, 0.8f);
 		player.playSound(sound, net.kyori.adventure.sound.Sound.Emitter.self());
 		player.assertSoundHeard(sound, audio -> player.getLocation().equals(audio.getLocation()));
 	}
@@ -1018,12 +1004,8 @@ class PlayerMockTest
 	@Test
 	void testPlaySoundLocation_Adventure()
 	{
-		net.kyori.adventure.sound.Sound sound = net.kyori.adventure.sound.Sound.sound(
-				Sound.AMBIENT_CAVE,
-				net.kyori.adventure.sound.Sound.Source.AMBIENT,
-				0.5f,
-				1f
-		);
+		net.kyori.adventure.sound.Sound sound = net.kyori.adventure.sound.Sound.sound(Sound.AMBIENT_CAVE,
+				net.kyori.adventure.sound.Sound.Source.AMBIENT, 0.5f, 1f);
 		Location loc = new Location(player.getWorld(), 80D, 30D, 50D);
 		player.playSound(sound, loc.getX(), loc.getY(), loc.getZ());
 		player.assertSoundHeard(sound, audio -> loc.equals(audio.getLocation()));
@@ -1032,18 +1014,10 @@ class PlayerMockTest
 	@Test
 	void testAssertSoundHeard_Adventure()
 	{
-		net.kyori.adventure.sound.Sound soundA = net.kyori.adventure.sound.Sound.sound(
-				Sound.BLOCK_DEEPSLATE_FALL,
-				net.kyori.adventure.sound.Sound.Source.BLOCK,
-				1f,
-				1f
-		);
-		net.kyori.adventure.sound.Sound soundB = net.kyori.adventure.sound.Sound.sound(
-				soundA.name(),
-				net.kyori.adventure.sound.Sound.Source.MASTER,
-				soundA.volume(),
-				soundA.pitch()
-		);
+		net.kyori.adventure.sound.Sound soundA = net.kyori.adventure.sound.Sound.sound(Sound.BLOCK_DEEPSLATE_FALL,
+				net.kyori.adventure.sound.Sound.Source.BLOCK, 1f, 1f);
+		net.kyori.adventure.sound.Sound soundB = net.kyori.adventure.sound.Sound.sound(soundA.name(),
+				net.kyori.adventure.sound.Sound.Source.MASTER, soundA.volume(), soundA.pitch());
 		player.playSound(soundA);
 		player.assertSoundHeard(soundA);
 		assertThrows(AssertionFailedError.class, () -> player.assertSoundHeard(soundB));
@@ -1054,10 +1028,10 @@ class PlayerMockTest
 	{
 		int note = 10;
 		player.playNote(player.getEyeLocation(), (byte) 0, (byte) note);
-		player.assertSoundHeard(Sound.BLOCK_NOTE_BLOCK_HARP, audio ->
-		{
+		player.assertSoundHeard(Sound.BLOCK_NOTE_BLOCK_HARP, audio -> {
 			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
-					&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
+					&& audio.getVolume() == 3.0f
+					&& Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
 		});
 	}
 
@@ -1323,7 +1297,8 @@ class PlayerMockTest
 		Location to = player.getLocation().add(10, 10, 10);
 		player.teleport(to, PlayerTeleportEvent.TeleportCause.CHORUS_FRUIT);
 
-		server.getPluginManager().assertEventFired(PlayerTeleportEvent.class, event -> from.equals(event.getFrom()) && to.equals(event.getTo()));
+		server.getPluginManager().assertEventFired(PlayerTeleportEvent.class,
+				event -> from.equals(event.getFrom()) && to.equals(event.getTo()));
 		server.getPluginManager().assertEventNotFired(EntityTeleportEvent.class);
 	}
 
@@ -1347,7 +1322,8 @@ class PlayerMockTest
 			@EventHandler
 			public void onChangedWorld(@NotNull PlayerChangedWorldEvent event)
 			{
-				assertEquals(to, event.getPlayer().getLocation(), "The location should already have changed when the PlayerChangedWorldEvent is fired");
+				assertEquals(to, event.getPlayer().getLocation(),
+						"The location should already have changed when the PlayerChangedWorldEvent is fired");
 			}
 		}, plugin);
 		player.teleport(to);
@@ -1410,7 +1386,8 @@ class PlayerMockTest
 		player.openInventory(inventory);
 		assertTrue(player.teleport(player.getLocation().add(8, 9, 10)));
 		assertEquals(InventoryType.CRAFTING, player.getOpenInventory().getType());
-		server.getPluginManager().assertEventFired(InventoryCloseEvent.class, e -> e.getReason() == InventoryCloseEvent.Reason.TELEPORT);
+		server.getPluginManager().assertEventFired(InventoryCloseEvent.class,
+				e -> e.getReason() == InventoryCloseEvent.Reason.TELEPORT);
 	}
 
 	@Test
@@ -1426,8 +1403,7 @@ class PlayerMockTest
 	@Test
 	void testPlayerSendSignChange_Valid()
 	{
-		assertDoesNotThrow(() ->
-		{
+		assertDoesNotThrow(() -> {
 			player.sendSignChange(player.getLocation(), new String[4], DyeColor.CYAN, true);
 		});
 	}
@@ -1436,8 +1412,7 @@ class PlayerMockTest
 	void testPlayerSendSignChange_Invalid()
 	{
 		Location loc = player.getLocation();
-		assertThrows(IllegalArgumentException.class, () ->
-		{
+		assertThrows(IllegalArgumentException.class, () -> {
 			player.sendSignChange(loc, new String[2]);
 		});
 	}
@@ -1454,8 +1429,7 @@ class PlayerMockTest
 	void testPlayerPlayEffect_NullData()
 	{
 		Location loc = player.getLocation();
-		assertThrows(IllegalArgumentException.class, () ->
-		{
+		assertThrows(IllegalArgumentException.class, () -> {
 			player.playEffect(loc, Effect.STEP_SOUND, null);
 		});
 	}
@@ -1463,8 +1437,7 @@ class PlayerMockTest
 	@Test
 	void testPlayerSendExperienceChange()
 	{
-		assertDoesNotThrow(() ->
-		{
+		assertDoesNotThrow(() -> {
 			player.sendExperienceChange(0.5f);
 		});
 	}
@@ -1473,8 +1446,7 @@ class PlayerMockTest
 	void testPlayerSendBlockDamage()
 	{
 		Location loc = player.getLocation();
-		assertDoesNotThrow(() ->
-		{
+		assertDoesNotThrow(() -> {
 			player.sendBlockDamage(loc, 0.5f);
 		});
 	}
@@ -1482,8 +1454,7 @@ class PlayerMockTest
 	@Test
 	void testPlayerSendBlockChange()
 	{
-		assertDoesNotThrow(() ->
-		{
+		assertDoesNotThrow(() -> {
 			player.sendBlockUpdate(player.getLocation(), new TileStateMock(Material.CHEST)
 			{
 				@Override
@@ -1514,13 +1485,15 @@ class PlayerMockTest
 	@Test
 	void testPlayerSendEquipmentChange()
 	{
-		assertDoesNotThrow(() -> player.sendEquipmentChange(player, EquipmentSlot.CHEST, new ItemStack(Material.DIAMOND_CHESTPLATE)));
+		assertDoesNotThrow(() -> player.sendEquipmentChange(player, EquipmentSlot.CHEST,
+				new ItemStack(Material.DIAMOND_CHESTPLATE)));
 	}
 
 	@Test
 	void testPlayerSendEquipmentChange_Map()
 	{
-		assertDoesNotThrow(() -> player.sendEquipmentChange(player, Map.of(EquipmentSlot.CHEST, new ItemStack(Material.DIAMOND_CHESTPLATE))));
+		assertDoesNotThrow(() -> player.sendEquipmentChange(player,
+				Map.of(EquipmentSlot.CHEST, new ItemStack(Material.DIAMOND_CHESTPLATE))));
 	}
 
 	@Test
@@ -1532,8 +1505,7 @@ class PlayerMockTest
 	@Test
 	void testPlayerSendActionBar()
 	{
-		assertDoesNotThrow(() ->
-		{
+		assertDoesNotThrow(() -> {
 			player.sendActionBar("Action!");
 		});
 	}
@@ -1541,8 +1513,7 @@ class PlayerMockTest
 	@Test
 	void testPlayerSendHealthUpdate()
 	{
-		assertDoesNotThrow(() ->
-		{
+		assertDoesNotThrow(() -> {
 			player.sendHealthUpdate();
 		});
 	}
@@ -1550,8 +1521,7 @@ class PlayerMockTest
 	@Test
 	void testPlayerSendHealthUpdate_Params()
 	{
-		assertDoesNotThrow(() ->
-		{
+		assertDoesNotThrow(() -> {
 			player.sendHealthUpdate(20, 10, 0.0f);
 		});
 	}
@@ -1559,8 +1529,7 @@ class PlayerMockTest
 	@Test
 	void testPlayerSendMultiBlockChange()
 	{
-		assertDoesNotThrow(() ->
-		{
+		assertDoesNotThrow(() -> {
 			player.sendMultiBlockChange(new HashMap<>(0));
 		});
 	}
@@ -1569,8 +1538,7 @@ class PlayerMockTest
 	void testPlayerPlayEffect_IncorrectData()
 	{
 		Location loc = player.getLocation();
-		assertThrows(IllegalArgumentException.class, () ->
-		{
+		assertThrows(IllegalArgumentException.class, () -> {
 			player.playEffect(loc, Effect.STEP_SOUND, 1.0f);
 		});
 	}
@@ -1605,8 +1573,7 @@ class PlayerMockTest
 	{
 		Location loc = player.getLocation();
 		Object wrongObj = new Object();
-		assertThrows(IllegalArgumentException.class, () ->
-		{
+		assertThrows(IllegalArgumentException.class, () -> {
 			player.spawnParticle(Particle.ITEM_CRACK, loc, 1, wrongObj);
 		});
 	}
@@ -1652,11 +1619,13 @@ class PlayerMockTest
 		Inventory inventory = Bukkit.createInventory(null, 9);
 		player.openInventory(inventory);
 		player.simulateInventoryClick(0);
-		server.getPluginManager().assertEventFired(event ->
-		{
-			if (!(event instanceof InventoryClickEvent inventoryClickEvent)) return false;
-			if (inventoryClickEvent.getSlot() != 0) return false;
-			if (inventoryClickEvent.getClickedInventory() != inventory) return false;
+		server.getPluginManager().assertEventFired(event -> {
+			if (!(event instanceof InventoryClickEvent inventoryClickEvent))
+				return false;
+			if (inventoryClickEvent.getSlot() != 0)
+				return false;
+			if (inventoryClickEvent.getClickedInventory() != inventory)
+				return false;
 			return inventoryClickEvent.getClick() == ClickType.LEFT;
 		});
 	}
@@ -1735,8 +1704,7 @@ class PlayerMockTest
 	@Test
 	void testPlayerLastDeathLocation_Set()
 	{
-		assertTrue(player.getLastDeathLocation().getX() == 0.0
-				&& player.getLastDeathLocation().getY() == 0.0
+		assertTrue(player.getLastDeathLocation().getX() == 0.0 && player.getLastDeathLocation().getY() == 0.0
 				&& player.getLastDeathLocation().getZ() == 0.0);
 
 		Location loc = new Location(new WorldMock(), 69, 69, 69);
@@ -1806,7 +1774,8 @@ class PlayerMockTest
 	void testKickWithNullMessage()
 	{
 		player.kick(null, PlayerKickEvent.Cause.KICK_COMMAND);
-		server.getPluginManager().assertEventFired(PlayerKickEvent.class, event -> event.leaveMessage() == Component.empty());
+		server.getPluginManager().assertEventFired(PlayerKickEvent.class,
+				event -> event.leaveMessage() == Component.empty());
 	}
 
 	@Test
@@ -1896,8 +1865,7 @@ class PlayerMockTest
 		ItemStack item = new ItemStack(Material.POTATO);
 		inventory.addItem(item);
 		player.openInventory(inventory);
-		assertThrows(AssertionError.class, () ->
-		{
+		assertThrows(AssertionError.class, () -> {
 			player.assertInventoryView(InventoryType.LOOM, view -> view.contains(Material.APPLE));
 		});
 	}
@@ -1964,8 +1932,7 @@ class PlayerMockTest
 		float pitch = 1;
 		player.playSound(player.getLocation(), sound, volume, pitch);
 
-		player.assertSoundHeard(sound, audio ->
-		{
+		player.assertSoundHeard(sound, audio -> {
 			return player.getLocation().equals(audio.getLocation()) && audio.getVolume() == volume
 					&& audio.getPitch() == pitch;
 		});
@@ -1979,8 +1946,7 @@ class PlayerMockTest
 		float pitch = 0.75F;
 		player.playSound(player.getEyeLocation(), sound, volume, pitch);
 
-		player.assertSoundHeard(sound, audio ->
-		{
+		player.assertSoundHeard(sound, audio -> {
 			return player.getEyeLocation().equals(audio.getLocation()) && audio.getVolume() == volume
 					&& audio.getPitch() == pitch;
 		});
@@ -1994,8 +1960,7 @@ class PlayerMockTest
 		float pitch = 1;
 		player.playSound(player, sound, SoundCategory.AMBIENT, volume, pitch);
 
-		player.assertSoundHeard(sound, audio ->
-		{
+		player.assertSoundHeard(sound, audio -> {
 			return player.getLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.AMBIENT
 					&& audio.getVolume() == volume && audio.getPitch() == pitch;
 		});
@@ -2010,8 +1975,7 @@ class PlayerMockTest
 		float pitch = 1;
 		player.playSound(player, sound, volume, pitch);
 
-		player.assertSoundHeard(sound, audio ->
-		{
+		player.assertSoundHeard(sound, audio -> {
 			return player.getLocation().equals(audio.getLocation()) && audio.getVolume() == volume
 					&& audio.getPitch() == pitch;
 		});
@@ -2159,10 +2123,10 @@ class PlayerMockTest
 	{
 		int note = 10;
 		player.playNote(player.getEyeLocation(), instrument, new Note(note));
-		player.assertSoundHeard(sound, audio ->
-		{
+		player.assertSoundHeard(sound, audio -> {
 			return player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
-					&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
+					&& audio.getVolume() == 3.0f
+					&& Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01;
 		});
 	}
 
@@ -2176,8 +2140,7 @@ class PlayerMockTest
 
 	public static Stream<Arguments> provideInstrument()
 	{
-		return Stream.of(
-				Arguments.of(Instrument.CUSTOM_HEAD, Sound.UI_BUTTON_CLICK),
+		return Stream.of(Arguments.of(Instrument.CUSTOM_HEAD, Sound.UI_BUTTON_CLICK),
 				Arguments.of(Instrument.PIGLIN, Sound.BLOCK_NOTE_BLOCK_IMITATE_PIGLIN),
 				Arguments.of(Instrument.WITHER_SKELETON, Sound.BLOCK_NOTE_BLOCK_IMITATE_WITHER_SKELETON),
 				Arguments.of(Instrument.DRAGON, Sound.BLOCK_NOTE_BLOCK_IMITATE_ENDER_DRAGON),
@@ -2198,8 +2161,7 @@ class PlayerMockTest
 				Arguments.of(Instrument.IRON_XYLOPHONE, Sound.BLOCK_NOTE_BLOCK_IRON_XYLOPHONE),
 				Arguments.of(Instrument.PLING, Sound.BLOCK_NOTE_BLOCK_PLING),
 				Arguments.of(Instrument.SNARE_DRUM, Sound.BLOCK_NOTE_BLOCK_SNARE),
-				Arguments.of(Instrument.STICKS, Sound.BLOCK_NOTE_BLOCK_HAT)
-		);
+				Arguments.of(Instrument.STICKS, Sound.BLOCK_NOTE_BLOCK_HAT));
 	}
 
 	@Test
@@ -2224,8 +2186,7 @@ class PlayerMockTest
 		{
 			@EventHandler
 			public void expCooldownChange(@NotNull PlayerExpCooldownChangeEvent event)
-			{
-			}
+			{}
 		}, plugin);
 
 		player.setExpCooldown(10);
@@ -2288,7 +2249,8 @@ class PlayerMockTest
 	@Test
 	void updateViewedBossBar()
 	{
-		BossBar bar = BossBar.bossBar(Component.text("Test"), 1, BossBar.Color.BLUE, BossBar.Overlay.PROGRESS, Collections.singleton(BossBar.Flag.PLAY_BOSS_MUSIC));
+		BossBar bar = BossBar.bossBar(Component.text("Test"), 1, BossBar.Color.BLUE, BossBar.Overlay.PROGRESS,
+				Collections.singleton(BossBar.Flag.PLAY_BOSS_MUSIC));
 		player.showBossBar(bar);
 
 		assertEquals(1, player.getBossBars().size());

@@ -78,10 +78,10 @@ public class DamageSourceMock implements DamageSource
 	{
 		return switch (this.damageType.getDamageScaling())
 		{
-			case NEVER -> false;
-			case WHEN_CAUSED_BY_LIVING_NON_PLAYER ->
-					this.causingEntity instanceof LivingEntity && !(this.causingEntity instanceof Player);
-			case ALWAYS -> true;
+		case NEVER -> false;
+		case WHEN_CAUSED_BY_LIVING_NON_PLAYER ->
+			this.causingEntity instanceof LivingEntity && !(this.causingEntity instanceof Player);
+		case ALWAYS -> true;
 		};
 	}
 
@@ -98,8 +98,10 @@ public class DamageSourceMock implements DamageSource
 			return false;
 		}
 
-        return Objects.equals(this.getDamageType(), other.getDamageType()) && Objects.equals(this.getCausingEntity(), other.getCausingEntity())
-				&& Objects.equals(this.getDirectEntity(), other.getDirectEntity()) && Objects.equals(this.getDamageLocation(), other.getDamageLocation());
+		return Objects.equals(this.getDamageType(), other.getDamageType())
+				&& Objects.equals(this.getCausingEntity(), other.getCausingEntity())
+				&& Objects.equals(this.getDirectEntity(), other.getDirectEntity())
+				&& Objects.equals(this.getDamageLocation(), other.getDamageLocation());
 	}
 
 	@Override

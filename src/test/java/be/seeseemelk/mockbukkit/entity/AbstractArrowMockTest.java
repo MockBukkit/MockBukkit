@@ -65,7 +65,6 @@ class AbstractArrowMockTest
 		assertEquals(24, abstractArrow.getDamage());
 	}
 
-
 	@Test
 	void getPierceLevel_default()
 	{

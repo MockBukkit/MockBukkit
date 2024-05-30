@@ -26,7 +26,6 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -67,14 +66,8 @@ class ItemMetaMockTest
 		meta.setLore(List.of("lore"));
 		meta.setUnbreakable(true);
 		meta.addItemFlags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES);
-		meta.setPlaceableKeys(List.of(
-				Material.DIAMOND_SWORD.getKey(),
-				Material.DIAMOND_AXE.getKey()
-		));
-		meta.setDestroyableKeys(List.of(
-				Material.ACACIA_BOAT.getKey(),
-				Material.BLACK_WOOL.getKey()
-		));
+		meta.setPlaceableKeys(List.of(Material.DIAMOND_SWORD.getKey(), Material.DIAMOND_AXE.getKey()));
+		meta.setDestroyableKeys(List.of(Material.ACACIA_BOAT.getKey(), Material.BLACK_WOOL.getKey()));
 		ItemMetaMock meta2 = new ItemMetaMock(meta);
 		meta2.setLore(List.of("lore"));
 		assertEquals(meta2, meta);
@@ -379,11 +372,7 @@ class ItemMetaMockTest
 	@Test
 	void clone_WithPlaceableKeys_ClonedExactly()
 	{
-		meta.setPlaceableKeys(Set.of(
-				Material.STONE.getKey(),
-				Material.DIRT.getKey(),
-				Material.SHORT_GRASS.getKey()
-		));
+		meta.setPlaceableKeys(Set.of(Material.STONE.getKey(), Material.DIRT.getKey(), Material.SHORT_GRASS.getKey()));
 		ItemMetaMock cloned = meta.clone();
 		assertEquals(meta, cloned);
 		assertEquals(meta.hashCode(), cloned.hashCode());
@@ -395,12 +384,8 @@ class ItemMetaMockTest
 	@Test
 	void clone_WithDestroyableKeys_ClonedExactly()
 	{
-		meta.setDestroyableKeys(Set.of(
-				Material.STONE.getKey(),
-				Material.DIRT.getKey(),
-				Material.SHORT_GRASS.getKey(),
-				Material.GRANITE.getKey()
-		));
+		meta.setDestroyableKeys(Set.of(Material.STONE.getKey(), Material.DIRT.getKey(), Material.SHORT_GRASS.getKey(),
+				Material.GRANITE.getKey()));
 		ItemMetaMock cloned = meta.clone();
 		assertEquals(meta, cloned);
 		assertEquals(meta.hashCode(), cloned.hashCode());
@@ -565,11 +550,8 @@ class ItemMetaMockTest
 	@Test
 	void testDestroyableKeysSet()
 	{
-		Set<Namespaced> expectedKeys = Set.of(
-				Material.CAKE.getKey(),
-				Material.CHEST.getKey(),
-				Material.ACACIA_SLAB.getKey()
-		);
+		Set<Namespaced> expectedKeys = Set.of(Material.CAKE.getKey(), Material.CHEST.getKey(),
+				Material.ACACIA_SLAB.getKey());
 		meta.setDestroyableKeys(expectedKeys);
 		assertEquals(expectedKeys, meta.getDestroyableKeys());
 	}
@@ -577,11 +559,8 @@ class ItemMetaMockTest
 	@Test
 	void testPlaceableKeys()
 	{
-		Set<Namespaced> expectedKeys = Set.of(
-				Material.ACACIA_PRESSURE_PLATE.getKey(),
-				Material.BLACK_WOOL.getKey(),
-				Material.CRIMSON_NYLIUM.getKey()
-		);
+		Set<Namespaced> expectedKeys = Set.of(Material.ACACIA_PRESSURE_PLATE.getKey(), Material.BLACK_WOOL.getKey(),
+				Material.CRIMSON_NYLIUM.getKey());
 		meta.setPlaceableKeys(expectedKeys);
 		assertEquals(expectedKeys, meta.getPlaceableKeys());
 	}
@@ -589,11 +568,8 @@ class ItemMetaMockTest
 	@Test
 	void testGetCanPlaceOn()
 	{
-		Set<Namespaced> expectedKeys = Set.of(
-				Material.ACACIA_PRESSURE_PLATE.getKey(),
-				Material.BLACK_WOOL.getKey(),
-				Material.CRIMSON_NYLIUM.getKey()
-		);
+		Set<Namespaced> expectedKeys = Set.of(Material.ACACIA_PRESSURE_PLATE.getKey(), Material.BLACK_WOOL.getKey(),
+				Material.CRIMSON_NYLIUM.getKey());
 		meta.setPlaceableKeys(expectedKeys);
 
 		for (Material material : meta.getCanPlaceOn())
@@ -605,11 +581,8 @@ class ItemMetaMockTest
 	@Test
 	void testSetCanPlaceOn()
 	{
-		Set<Material> expectedKeys = Set.of(
-				Material.ACACIA_PRESSURE_PLATE,
-				Material.BLACK_WOOL,
-				Material.CRIMSON_NYLIUM
-		);
+		Set<Material> expectedKeys = Set.of(Material.ACACIA_PRESSURE_PLATE, Material.BLACK_WOOL,
+				Material.CRIMSON_NYLIUM);
 		meta.setCanPlaceOn(expectedKeys);
 
 		for (Material material : meta.getCanPlaceOn())
@@ -627,9 +600,7 @@ class ItemMetaMockTest
 	@Test
 	void testSetCanPlaceOn_LegacyKey_Throws()
 	{
-		Set<Material> input = Set.of(
-				Material.LEGACY_AIR
-		);
+		Set<Material> input = Set.of(Material.LEGACY_AIR);
 
 		assertThrows(IllegalArgumentException.class, () -> meta.setCanPlaceOn(input));
 	}
@@ -637,12 +608,8 @@ class ItemMetaMockTest
 	@Test
 	void testGetCanPlaceON_NonBukkitKey_Skipped()
 	{
-		meta.setPlaceableKeys(List.of(
-				Material.ACACIA_PRESSURE_PLATE.getKey(),
-				Material.BLACK_WOOL.getKey(),
-				Material.CRIMSON_NYLIUM.getKey(),
-				Material.ACACIA_BOAT.getKey(),
-				new Namespaced()
+		meta.setPlaceableKeys(List.of(Material.ACACIA_PRESSURE_PLATE.getKey(), Material.BLACK_WOOL.getKey(),
+				Material.CRIMSON_NYLIUM.getKey(), Material.ACACIA_BOAT.getKey(), new Namespaced()
 				{
 					@Override
 					public @NotNull String getNamespace()
@@ -655,15 +622,10 @@ class ItemMetaMockTest
 					{
 						return "test";
 					}
-				}
-		));
+				}));
 
-		Set<Material> expectedKeys = Set.of(
-				Material.ACACIA_PRESSURE_PLATE,
-				Material.BLACK_WOOL,
-				Material.CRIMSON_NYLIUM,
-				Material.ACACIA_BOAT
-		);
+		Set<Material> expectedKeys = Set.of(Material.ACACIA_PRESSURE_PLATE, Material.BLACK_WOOL,
+				Material.CRIMSON_NYLIUM, Material.ACACIA_BOAT);
 		for (Material material : meta.getCanPlaceOn())
 		{
 			assertTrue(expectedKeys.contains(material));
@@ -672,15 +634,11 @@ class ItemMetaMockTest
 		assertEquals(4, meta.getCanPlaceOn().size());
 	}
 
-
 	@Test
 	void testGetCanDestroy()
 	{
-		Set<Namespaced> expectedKeys = Set.of(
-				Material.ACACIA_PRESSURE_PLATE.getKey(),
-				Material.BLACK_WOOL.getKey(),
-				Material.CRIMSON_NYLIUM.getKey()
-		);
+		Set<Namespaced> expectedKeys = Set.of(Material.ACACIA_PRESSURE_PLATE.getKey(), Material.BLACK_WOOL.getKey(),
+				Material.CRIMSON_NYLIUM.getKey());
 		meta.setDestroyableKeys(expectedKeys);
 
 		for (Material material : meta.getCanDestroy())
@@ -692,11 +650,8 @@ class ItemMetaMockTest
 	@Test
 	void testSetCanDestroy()
 	{
-		Set<Material> expectedKeys = Set.of(
-				Material.ACACIA_PRESSURE_PLATE,
-				Material.BLACK_WOOL,
-				Material.CRIMSON_NYLIUM
-		);
+		Set<Material> expectedKeys = Set.of(Material.ACACIA_PRESSURE_PLATE, Material.BLACK_WOOL,
+				Material.CRIMSON_NYLIUM);
 		meta.setCanDestroy(expectedKeys);
 
 		for (Material material : meta.getCanDestroy())
@@ -714,9 +669,7 @@ class ItemMetaMockTest
 	@Test
 	void testSetCanDestroy_LegacyKey_Throws()
 	{
-		Set<Material> input = Set.of(
-				Material.LEGACY_AIR
-		);
+		Set<Material> input = Set.of(Material.LEGACY_AIR);
 
 		assertThrows(IllegalArgumentException.class, () -> meta.setCanDestroy(input));
 	}
@@ -724,12 +677,8 @@ class ItemMetaMockTest
 	@Test
 	void testGetCanDestroy_NonBukkitKey_Skipped()
 	{
-		meta.setDestroyableKeys(List.of(
-				Material.ACACIA_PRESSURE_PLATE.getKey(),
-				Material.BLACK_WOOL.getKey(),
-				Material.CRIMSON_NYLIUM.getKey(),
-				Material.ACACIA_BOAT.getKey(),
-				new Namespaced()
+		meta.setDestroyableKeys(List.of(Material.ACACIA_PRESSURE_PLATE.getKey(), Material.BLACK_WOOL.getKey(),
+				Material.CRIMSON_NYLIUM.getKey(), Material.ACACIA_BOAT.getKey(), new Namespaced()
 				{
 					@Override
 					public @NotNull String getNamespace()
@@ -742,15 +691,10 @@ class ItemMetaMockTest
 					{
 						return "test";
 					}
-				}
-		));
+				}));
 
-		Set<Material> expectedKeys = Set.of(
-				Material.ACACIA_PRESSURE_PLATE,
-				Material.BLACK_WOOL,
-				Material.CRIMSON_NYLIUM,
-				Material.ACACIA_BOAT
-		);
+		Set<Material> expectedKeys = Set.of(Material.ACACIA_PRESSURE_PLATE, Material.BLACK_WOOL,
+				Material.CRIMSON_NYLIUM, Material.ACACIA_BOAT);
 		for (Material material : meta.getCanDestroy())
 		{
 			assertTrue(expectedKeys.contains(material));
@@ -834,15 +778,10 @@ class ItemMetaMockTest
 		meta.setDamage(5);
 		meta.setRepairCost(3);
 
-		Set<Namespaced> expectedPlaceableKeys = Set.of(
-				Material.STONE.getKey(),
-				Material.ACACIA_BOAT.getKey()
-		);
+		Set<Namespaced> expectedPlaceableKeys = Set.of(Material.STONE.getKey(), Material.ACACIA_BOAT.getKey());
 		meta.setPlaceableKeys(expectedPlaceableKeys);
 
-		Set<Namespaced> expectedDestroyableKeys = Set.of(
-				Material.BEEHIVE.getKey()
-		);
+		Set<Namespaced> expectedDestroyableKeys = Set.of(Material.BEEHIVE.getKey());
 		meta.setDestroyableKeys(expectedDestroyableKeys);
 
 		Map<String, Object> actual = meta.serialize();
@@ -932,7 +871,8 @@ class ItemMetaMockTest
 
 		assertEquals(1, meta.getAttributeModifiers().size());
 		assertEquals(1, meta.getAttributeModifiers().get(Attribute.GENERIC_ARMOR).size());
-		assertEquals(modifier, meta.getAttributeModifiers().get(Attribute.GENERIC_ARMOR).stream().findFirst().orElse(null));
+		assertEquals(modifier,
+				meta.getAttributeModifiers().get(Attribute.GENERIC_ARMOR).stream().findFirst().orElse(null));
 	}
 
 	@Test
@@ -940,7 +880,8 @@ class ItemMetaMockTest
 	{
 		ItemMetaMock meta = new ItemMetaMock();
 		Multimap<Attribute, AttributeModifier> oldModifiers = LinkedHashMultimap.create();
-		oldModifiers.put(Attribute.GENERIC_ARMOR, new AttributeModifier("test_1", 1, AttributeModifier.Operation.ADD_NUMBER));
+		oldModifiers.put(Attribute.GENERIC_ARMOR,
+				new AttributeModifier("test_1", 1, AttributeModifier.Operation.ADD_NUMBER));
 		meta.setAttributeModifiers(oldModifiers);
 		Multimap<Attribute, AttributeModifier> modifiers = LinkedHashMultimap.create();
 		AttributeModifier modifier = new AttributeModifier("test_2", 1, AttributeModifier.Operation.ADD_NUMBER);
@@ -950,7 +891,8 @@ class ItemMetaMockTest
 
 		assertEquals(1, meta.getAttributeModifiers().size());
 		assertEquals(1, meta.getAttributeModifiers().get(Attribute.GENERIC_ARMOR_TOUGHNESS).size());
-		assertEquals(modifier, meta.getAttributeModifiers().get(Attribute.GENERIC_ARMOR_TOUGHNESS).stream().findFirst().orElse(null));
+		assertEquals(modifier,
+				meta.getAttributeModifiers().get(Attribute.GENERIC_ARMOR_TOUGHNESS).stream().findFirst().orElse(null));
 	}
 
 	@Test
@@ -958,8 +900,10 @@ class ItemMetaMockTest
 	{
 		ItemMetaMock meta = new ItemMetaMock();
 		Multimap<Attribute, AttributeModifier> modifiers = LinkedHashMultimap.create();
-		AttributeModifier modifier1 = new AttributeModifier(UUID.randomUUID(), "test_1", 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HEAD);
-		AttributeModifier modifier2 = new AttributeModifier(UUID.randomUUID(), "test_2", 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.CHEST);
+		AttributeModifier modifier1 = new AttributeModifier(UUID.randomUUID(), "test_1", 1,
+				AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HEAD);
+		AttributeModifier modifier2 = new AttributeModifier(UUID.randomUUID(), "test_2", 1,
+				AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.CHEST);
 		modifiers.put(Attribute.GENERIC_ARMOR, modifier1);
 		modifiers.put(Attribute.GENERIC_ARMOR, modifier2);
 
@@ -967,7 +911,8 @@ class ItemMetaMockTest
 
 		assertEquals(1, meta.getAttributeModifiers(EquipmentSlot.HEAD).size());
 		assertEquals(1, meta.getAttributeModifiers(EquipmentSlot.HEAD).get(Attribute.GENERIC_ARMOR).size());
-		assertEquals(modifier1, meta.getAttributeModifiers(EquipmentSlot.HEAD).get(Attribute.GENERIC_ARMOR).stream().findFirst().orElse(null));
+		assertEquals(modifier1, meta.getAttributeModifiers(EquipmentSlot.HEAD).get(Attribute.GENERIC_ARMOR).stream()
+				.findFirst().orElse(null));
 	}
 
 	@Test
@@ -988,7 +933,8 @@ class ItemMetaMockTest
 
 		assertEquals(1, meta.getAttributeModifiers().size());
 		assertEquals(1, meta.getAttributeModifiers().get(Attribute.GENERIC_ARMOR).size());
-		assertEquals(modifier, meta.getAttributeModifiers().get(Attribute.GENERIC_ARMOR).stream().findFirst().orElse(null));
+		assertEquals(modifier,
+				meta.getAttributeModifiers().get(Attribute.GENERIC_ARMOR).stream().findFirst().orElse(null));
 	}
 
 	@Test
@@ -999,7 +945,8 @@ class ItemMetaMockTest
 
 		meta.addAttributeModifier(Attribute.GENERIC_ARMOR, modifier);
 
-		assertThrowsExactly(IllegalArgumentException.class, () -> meta.addAttributeModifier(Attribute.GENERIC_ARMOR, modifier));
+		assertThrowsExactly(IllegalArgumentException.class,
+				() -> meta.addAttributeModifier(Attribute.GENERIC_ARMOR, modifier));
 	}
 
 	@Test
@@ -1045,20 +992,23 @@ class ItemMetaMockTest
 	void removeAttribute_Slot_RemovesCorrectSlot()
 	{
 		ItemMetaMock meta = new ItemMetaMock();
-		AttributeModifier modifier1 = new AttributeModifier(UUID.randomUUID(), "test_1", 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HEAD);
-		AttributeModifier modifier2 = new AttributeModifier(UUID.randomUUID(), "test_2", 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.CHEST);
+		AttributeModifier modifier1 = new AttributeModifier(UUID.randomUUID(), "test_1", 1,
+				AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HEAD);
+		AttributeModifier modifier2 = new AttributeModifier(UUID.randomUUID(), "test_2", 1,
+				AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.CHEST);
 		meta.addAttributeModifier(Attribute.GENERIC_ARMOR, modifier1);
 		meta.addAttributeModifier(Attribute.GENERIC_ARMOR, modifier2);
 
 		assertEquals(2, meta.getAttributeModifiers().size());
 		meta.removeAttributeModifier(EquipmentSlot.HEAD);
 		assertEquals(1, meta.getAttributeModifiers().size());
-		assertEquals(modifier2, meta.getAttributeModifiers().get(Attribute.GENERIC_ARMOR).stream().findFirst().orElse(null));
+		assertEquals(modifier2,
+				meta.getAttributeModifiers().get(Attribute.GENERIC_ARMOR).stream().findFirst().orElse(null));
 	}
 
 	@Test
-		// May seem a little weird, but this is what Spigot does
-		// (https://hub.spigotmc.org/stash/projects/SPIGOT/repos/craftbukkit/browse/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaItem.java#1019)
+	// May seem a little weird, but this is what Spigot does
+	// (https://hub.spigotmc.org/stash/projects/SPIGOT/repos/craftbukkit/browse/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaItem.java#1019)
 	void removeAttribute_Slot_RemovesAllNoSlots()
 	{
 		ItemMetaMock meta = new ItemMetaMock();
@@ -1076,15 +1026,18 @@ class ItemMetaMockTest
 	void removeAttribute_SpecificModifier_Removes()
 	{
 		ItemMetaMock meta = new ItemMetaMock();
-		AttributeModifier modifier1 = new AttributeModifier(UUID.randomUUID(), "test_1", 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HEAD);
-		AttributeModifier modifier2 = new AttributeModifier(UUID.randomUUID(), "test_2", 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.CHEST);
+		AttributeModifier modifier1 = new AttributeModifier(UUID.randomUUID(), "test_1", 1,
+				AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HEAD);
+		AttributeModifier modifier2 = new AttributeModifier(UUID.randomUUID(), "test_2", 1,
+				AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.CHEST);
 		meta.addAttributeModifier(Attribute.GENERIC_ARMOR, modifier1);
 		meta.addAttributeModifier(Attribute.GENERIC_ARMOR, modifier2);
 
 		meta.removeAttributeModifier(Attribute.GENERIC_ARMOR, modifier1);
 
 		assertEquals(1, meta.getAttributeModifiers().size());
-		assertEquals(modifier2, meta.getAttributeModifiers().get(Attribute.GENERIC_ARMOR).stream().findFirst().orElse(null));
+		assertEquals(modifier2,
+				meta.getAttributeModifiers().get(Attribute.GENERIC_ARMOR).stream().findFirst().orElse(null));
 	}
 
 	@Test
@@ -1102,7 +1055,8 @@ class ItemMetaMockTest
 	{
 		ItemMetaMock meta = new ItemMetaMock();
 
-		assertThrowsExactly(NullPointerException.class, () -> meta.removeAttributeModifier(Attribute.GENERIC_ARMOR, null));
+		assertThrowsExactly(NullPointerException.class,
+				() -> meta.removeAttributeModifier(Attribute.GENERIC_ARMOR, null));
 	}
 
 }

@@ -31,12 +31,8 @@ public class MockBukkitConfiguredPluginClassLoader extends ClassLoader implement
 	private JarFile jarFile = null;
 	private final PluginClassLoaderGroup classLoaderGroup = new MockBukkitPluginClassLoaderGroup();
 
-	public MockBukkitConfiguredPluginClassLoader(
-			ServerMock server,
-			PluginDescriptionFile description,
-			File dataFolder,
-			File pluginFile
-	)
+	public MockBukkitConfiguredPluginClassLoader(ServerMock server, PluginDescriptionFile description, File dataFolder,
+			File pluginFile)
 	{
 		this.server = server;
 		this.description = description;
@@ -70,7 +66,8 @@ public class MockBukkitConfiguredPluginClassLoader extends ClassLoader implement
 	}
 
 	@Override
-	public Class<?> loadClass(@NotNull String name, boolean resolve, boolean checkGlobal, boolean checkLibraries) throws ClassNotFoundException
+	public Class<?> loadClass(@NotNull String name, boolean resolve, boolean checkGlobal, boolean checkLibraries)
+			throws ClassNotFoundException
 	{
 		return loadClass(name, resolve);
 	}
@@ -97,17 +94,15 @@ public class MockBukkitConfiguredPluginClassLoader extends ClassLoader implement
 	{
 		DynamicType.Unloaded<? extends JavaPlugin> dynamicType = new ByteBuddy()
 				.subclass(target, ConstructorStrategy.Default.IMITATE_SUPER_CLASS)
-				.name(target.getSimpleName() + "Proxy")
-				.make();
-		return dynamicType
-				.load(this, ClassLoadingStrategy.Default.INJECTION)
-				.getLoaded();
+				.name(target.getSimpleName() + "Proxy").make();
+		return dynamicType.load(this, ClassLoadingStrategy.Default.INJECTION).getLoaded();
 	}
 
 	@Override
 	public void init(JavaPlugin plugin)
 	{
-		plugin.init(server, description, dataFolder, pluginFile, this, getConfiguration(), PaperPluginLogger.getLogger(getConfiguration()));
+		plugin.init(server, description, dataFolder, pluginFile, this, getConfiguration(),
+				PaperPluginLogger.getLogger(getConfiguration()));
 	}
 
 	@Override

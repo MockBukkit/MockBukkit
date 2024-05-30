@@ -62,7 +62,8 @@ public class ZombieMock extends MonsterMock implements Zombie
 	@Override
 	public Villager.Profession getVillagerProfession()
 	{
-		// The CraftBukkit implementation returns null here, but throwing an exception is more fitting.
+		// The CraftBukkit implementation returns null here, but throwing an exception
+		// is more fitting.
 		throw new UnsupportedOperationException(VILLAGER_OPERATION_NOT_SUPPORTED);
 	}
 

@@ -52,14 +52,15 @@ public class WorkbenchInventoryMock extends InventoryMock implements CraftingInv
 	public void setMatrix(@Nullable ItemStack @NotNull [] contents)
 	{
 		Preconditions.checkNotNull(contents);
-		Preconditions.checkArgument(contents.length <= super.getSize(), "Invalid inventory size. Expected " + super.getSize() + " or less, got " + contents.length);
+		Preconditions.checkArgument(contents.length <= super.getSize(),
+				"Invalid inventory size. Expected " + super.getSize() + " or less, got " + contents.length);
 		super.setContents(contents);
 	}
 
 	@Override
 	public @Nullable Recipe getRecipe()
 	{
-		//TODO: Auto-generated method stub
+		// TODO: Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 

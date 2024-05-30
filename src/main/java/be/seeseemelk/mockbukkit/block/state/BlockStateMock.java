@@ -86,9 +86,10 @@ public class BlockStateMock implements BlockState
 	 * @param material The material to test.
 	 * @param expected The expected materials.
 	 */
-	protected void checkType(@NotNull Material material, @NotNull Material @NotNull ... expected)
+	protected void checkType(@NotNull Material material, @NotNull Material @NotNull... expected)
 	{
-		Preconditions.checkArgument(Arrays.stream(expected).anyMatch(m -> material == m), "Cannot create a " + getClass().getSimpleName() + " from " + material);
+		Preconditions.checkArgument(Arrays.stream(expected).anyMatch(m -> material == m),
+				"Cannot create a " + getClass().getSimpleName() + " from " + material);
 	}
 
 	/**
@@ -110,7 +111,8 @@ public class BlockStateMock implements BlockState
 	 */
 	protected void checkType(@NotNull Material material, @NotNull Tag<Material> expected)
 	{
-		Preconditions.checkArgument(expected.isTagged(material), "Cannot create a " + getClass().getSimpleName() + " from " + material);
+		Preconditions.checkArgument(expected.isTagged(material),
+				"Cannot create a " + getClass().getSimpleName() + " from " + material);
 	}
 
 	/**
@@ -334,7 +336,7 @@ public class BlockStateMock implements BlockState
 	@Override
 	public @NotNull BlockState copy()
 	{
-		//TODO Auto-generated method stub
+		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
@@ -374,11 +376,13 @@ public class BlockStateMock implements BlockState
 		{
 			return false;
 		}
-		if (this.getBlockData() != other.getBlockData() && (this.getBlockData() == null || !this.getBlockData().equals(other.getBlockData())))
+		if (this.getBlockData() != other.getBlockData()
+				&& (this.getBlockData() == null || !this.getBlockData().equals(other.getBlockData())))
 		{
 			return false;
 		}
-		return !this.isPlaced() || this.getLocation() == other.getLocation() || (this.getLocation() != null && this.getLocation().equals(other.getLocation()));
+		return !this.isPlaced() || this.getLocation() == other.getLocation()
+				|| (this.getLocation() != null && this.getLocation().equals(other.getLocation()));
 
 	}
 

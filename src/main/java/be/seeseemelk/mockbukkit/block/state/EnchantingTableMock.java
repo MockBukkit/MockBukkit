@@ -81,7 +81,8 @@ public class EnchantingTableMock extends TileStateMock implements EnchantingTabl
 	@Override
 	public void setCustomName(@Nullable String name)
 	{
-		this.customName = name == null ? Component.text("") : LegacyComponentSerializer.legacySection().deserialize(name);
+		this.customName = name == null ? Component.text("")
+				: LegacyComponentSerializer.legacySection().deserialize(name);
 	}
 
 }

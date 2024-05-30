@@ -134,7 +134,8 @@ public class CreatureSpawnerMock extends TileStateMock implements CreatureSpawne
 	@Override
 	public void setMinSpawnDelay(int delay)
 	{
-		Preconditions.checkArgument(delay <= this.getMaxSpawnDelay(), "Minimum Spawn Delay must be less than or equal to Maximum Spawn Delay");
+		Preconditions.checkArgument(delay <= this.getMaxSpawnDelay(),
+				"Minimum Spawn Delay must be less than or equal to Maximum Spawn Delay");
 		this.minSpawnDelay = delay;
 	}
 
@@ -148,7 +149,8 @@ public class CreatureSpawnerMock extends TileStateMock implements CreatureSpawne
 	public void setMaxSpawnDelay(int delay)
 	{
 		Preconditions.checkArgument(delay > 0, "Maximum Spawn Delay must be greater than 0.");
-		Preconditions.checkArgument(delay >= this.getMinSpawnDelay(), "Maximum Spawn Delay must be greater than or equal to Minimum Spawn Delay");
+		Preconditions.checkArgument(delay >= this.getMinSpawnDelay(),
+				"Maximum Spawn Delay must be greater than or equal to Minimum Spawn Delay");
 		this.maxSpawnDelay = delay;
 	}
 
@@ -248,7 +250,8 @@ public class CreatureSpawnerMock extends TileStateMock implements CreatureSpawne
 		if (!isPlaced())
 			throw new IllegalStateException("Cannot reset the timer of a Spawner that isn't placed");
 
-		return Bukkit.getOnlinePlayers().stream().anyMatch(p -> p.getLocation().distance(getLocation()) <= getRequiredPlayerRange());
+		return Bukkit.getOnlinePlayers().stream()
+				.anyMatch(p -> p.getLocation().distance(getLocation()) <= getRequiredPlayerRange());
 	}
 
 	@Override
@@ -263,7 +266,8 @@ public class CreatureSpawnerMock extends TileStateMock implements CreatureSpawne
 		}
 		else
 		{
-			this.delay = this.minSpawnDelay + ThreadLocalRandom.current().nextInt(this.maxSpawnDelay - this.minSpawnDelay);
+			this.delay = this.minSpawnDelay
+					+ ThreadLocalRandom.current().nextInt(this.maxSpawnDelay - this.minSpawnDelay);
 		}
 	}
 
@@ -272,7 +276,8 @@ public class CreatureSpawnerMock extends TileStateMock implements CreatureSpawne
 	{
 		Preconditions.checkNotNull(itemStack, "ItemStack cannot be null");
 		setSpawnedType(EntityType.DROPPED_ITEM);
-		// CraftBukkit then sets the spawned entity to an Item with this ItemStack, but we don't need to
+		// CraftBukkit then sets the spawned entity to an Item with this ItemStack, but
+		// we don't need to
 		// override any methods that ever return that so setting the type is enough.
 	}
 

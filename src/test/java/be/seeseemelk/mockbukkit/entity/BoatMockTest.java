@@ -4,13 +4,10 @@ import be.seeseemelk.mockbukkit.MockBukkitExtension;
 import be.seeseemelk.mockbukkit.MockBukkitInject;
 import be.seeseemelk.mockbukkit.ServerMock;
 import org.bukkit.Material;
-import org.bukkit.Server;
 import org.bukkit.TreeSpecies;
 import org.bukkit.entity.Boat;
 import org.bukkit.entity.EntityType;
-import org.codehaus.plexus.util.cli.Arg;
 import org.jetbrains.annotations.NotNull;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -90,8 +87,7 @@ class BoatMockTest
 	@Test
 	void testSetMaxSpeedToLow()
 	{
-		IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () ->
-		{
+		IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> {
 			boat.setMaxSpeed(-1D);
 		});
 
@@ -114,8 +110,7 @@ class BoatMockTest
 	@Test
 	void testSetOccupiedDecelerationToLow()
 	{
-		IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () ->
-		{
+		IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> {
 			boat.setOccupiedDeceleration(-1D);
 		});
 
@@ -158,8 +153,7 @@ class BoatMockTest
 
 	public static @NotNull Stream<Arguments> testGetBoatMaterial()
 	{
-		return Stream.of(
-				Arguments.of(Boat.Type.OAK, Material.OAK_BOAT),
+		return Stream.of(Arguments.of(Boat.Type.OAK, Material.OAK_BOAT),
 				Arguments.of(Boat.Type.BIRCH, Material.BIRCH_BOAT),
 				Arguments.of(Boat.Type.ACACIA, Material.ACACIA_BOAT),
 				Arguments.of(Boat.Type.SPRUCE, Material.SPRUCE_BOAT),
@@ -167,7 +161,6 @@ class BoatMockTest
 				Arguments.of(Boat.Type.BAMBOO, Material.BAMBOO_RAFT),
 				Arguments.of(Boat.Type.CHERRY, Material.CHERRY_BOAT),
 				Arguments.of(Boat.Type.DARK_OAK, Material.DARK_OAK_BOAT),
-				Arguments.of(Boat.Type.MANGROVE, Material.MANGROVE_BOAT)
-		);
+				Arguments.of(Boat.Type.MANGROVE, Material.MANGROVE_BOAT));
 	}
 }

@@ -34,14 +34,10 @@ class MockIpBanListTest
 	@Test
 	void testAddBan() throws UnknownHostException
 	{
-		banList.addBan(
-				InetAddress.getByName("127.0.0.1"),
-				"reason",
-				(Date) null,
-				"source"
-		);
+		banList.addBan(InetAddress.getByName("127.0.0.1"), "reason", (Date) null, "source");
 
-		assertTrue(banList.getEntries().stream().anyMatch(banEntry -> banEntry.getBanTarget().getHostAddress().equals("127.0.0.1")));
+		assertTrue(banList.getEntries().stream()
+				.anyMatch(banEntry -> banEntry.getBanTarget().getHostAddress().equals("127.0.0.1")));
 	}
 
 	@Test
@@ -49,7 +45,8 @@ class MockIpBanListTest
 	{
 		banList.addBan("127.0.0.1", "reason", null, "source");
 
-		assertTrue(banList.getEntries().stream().anyMatch(banEntry -> banEntry.getBanTarget().getHostAddress().equals("127.0.0.1")));
+		assertTrue(banList.getEntries().stream()
+				.anyMatch(banEntry -> banEntry.getBanTarget().getHostAddress().equals("127.0.0.1")));
 	}
 
 	@Test
@@ -58,7 +55,8 @@ class MockIpBanListTest
 		assertTrue(banList.getEntries().isEmpty());
 		banList.addBan("127.0.0.1", "reason", null, "source");
 		assertEquals(1, banList.getEntries().size());
-		assertTrue(banList.getEntries().stream().anyMatch(banEntry -> banEntry.getBanTarget().getHostAddress().equals("127.0.0.1")));
+		assertTrue(banList.getEntries().stream()
+				.anyMatch(banEntry -> banEntry.getBanTarget().getHostAddress().equals("127.0.0.1")));
 	}
 
 	@Test
@@ -68,7 +66,8 @@ class MockIpBanListTest
 		assertTrue(banList.getBanEntries().isEmpty());
 		banList.addBan("127.0.0.1", "reason", null, "source");
 		assertEquals(1, banList.getBanEntries().size());
-		assertTrue(banList.getBanEntries().stream().anyMatch(banEntry -> ((InetAddress) banEntry.getBanTarget()).getHostAddress().equals("127.0.0.1")));
+		assertTrue(banList.getBanEntries().stream()
+				.anyMatch(banEntry -> ((InetAddress) banEntry.getBanTarget()).getHostAddress().equals("127.0.0.1")));
 	}
 
 	@Test
@@ -88,8 +87,7 @@ class MockIpBanListTest
 	@Test
 	void testGetBanEntryStringNullThrows()
 	{
-		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
-		{
+		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () -> {
 			banList.getBanEntry((String) null);
 		});
 
@@ -99,8 +97,7 @@ class MockIpBanListTest
 	@Test
 	void testGetBanEntryInetAddressNullThrows()
 	{
-		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
-		{
+		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () -> {
 			banList.getBanEntry((InetAddress) null);
 		});
 
@@ -140,8 +137,7 @@ class MockIpBanListTest
 	@Test
 	void testPardonStringNull()
 	{
-		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
-		{
+		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () -> {
 			banList.pardon((String) null);
 		});
 
@@ -152,8 +148,7 @@ class MockIpBanListTest
 	@Test
 	void testPardonInetAddressNull()
 	{
-		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
-		{
+		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () -> {
 			banList.pardon((InetAddress) null);
 		});
 

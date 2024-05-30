@@ -114,8 +114,8 @@ class HorseMockTest
 		Field inventory = horse.getClass().getDeclaredField("inventory");
 		inventory.setAccessible(true);
 		inventory.set(horse, null);
-		IllegalStateException illegalStateException =
-				assertThrowsExactly(IllegalStateException.class, horse::getInventory);
+		IllegalStateException illegalStateException = assertThrowsExactly(IllegalStateException.class,
+				horse::getInventory);
 		assertEquals("No inventory has been set", illegalStateException.getMessage());
 	}
 }

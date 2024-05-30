@@ -76,7 +76,6 @@ class StatisticsTest
 		assertEquals(631, player.getStatistic(Statistic.KILL_ENTITY, EntityType.SQUID));
 	}
 
-
 	@Test
 	void testDecrement()
 	{
@@ -101,7 +100,6 @@ class StatisticsTest
 		assertEquals(600, player.getStatistic(Statistic.KILL_ENTITY, EntityType.SQUID));
 	}
 
-
 	@Test
 	void testTyped()
 	{
@@ -120,11 +118,9 @@ class StatisticsTest
 	{
 		player.setStatistic(Statistic.DEATHS, 7);
 
-		assertThrows(IllegalArgumentException.class, () ->
-				player.incrementStatistic(Statistic.DEATHS, -1));
+		assertThrows(IllegalArgumentException.class, () -> player.incrementStatistic(Statistic.DEATHS, -1));
 
-		assertThrows(IllegalArgumentException.class, () ->
-				player.incrementStatistic(Statistic.DEATHS, 0));
+		assertThrows(IllegalArgumentException.class, () -> player.incrementStatistic(Statistic.DEATHS, 0));
 	}
 
 	@Test
@@ -132,11 +128,9 @@ class StatisticsTest
 	{
 		player.setStatistic(Statistic.DEATHS, 7);
 
-		assertThrows(IllegalArgumentException.class, () ->
-				player.decrementStatistic(Statistic.DEATHS, -1));
+		assertThrows(IllegalArgumentException.class, () -> player.decrementStatistic(Statistic.DEATHS, -1));
 
-		assertThrows(IllegalArgumentException.class, () ->
-				player.decrementStatistic(Statistic.DEATHS, 0));
+		assertThrows(IllegalArgumentException.class, () -> player.decrementStatistic(Statistic.DEATHS, 0));
 	}
 
 	@Test
@@ -144,8 +138,7 @@ class StatisticsTest
 	{
 		player.setStatistic(Statistic.DEATHS, 5);
 
-		assertThrows(IllegalArgumentException.class, () ->
-				player.setStatistic(Statistic.DEATHS, -1));
+		assertThrows(IllegalArgumentException.class, () -> player.setStatistic(Statistic.DEATHS, -1));
 
 		player.setStatistic(Statistic.DEATHS, 0);
 	}
@@ -153,17 +146,15 @@ class StatisticsTest
 	@Test
 	void testType()
 	{
-		assertThrows(IllegalArgumentException.class, () ->
-				player.setStatistic(Statistic.DEATHS, Material.ACACIA_LOG, 5));
+		assertThrows(IllegalArgumentException.class,
+				() -> player.setStatistic(Statistic.DEATHS, Material.ACACIA_LOG, 5));
 
-		assertThrows(IllegalArgumentException.class, () ->
-				player.setStatistic(Statistic.DEATHS, EntityType.SQUID, 4));
+		assertThrows(IllegalArgumentException.class, () -> player.setStatistic(Statistic.DEATHS, EntityType.SQUID, 4));
 
-		assertThrows(IllegalArgumentException.class, () ->
-				player.setStatistic(Statistic.MINE_BLOCK, 10));
+		assertThrows(IllegalArgumentException.class, () -> player.setStatistic(Statistic.MINE_BLOCK, 10));
 
-		assertThrows(IllegalArgumentException.class, () ->
-				player.setStatistic(Statistic.MINE_BLOCK, EntityType.BAT, 10));
+		assertThrows(IllegalArgumentException.class,
+				() -> player.setStatistic(Statistic.MINE_BLOCK, EntityType.BAT, 10));
 	}
 
 }

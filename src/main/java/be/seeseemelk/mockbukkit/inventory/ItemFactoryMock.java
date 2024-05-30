@@ -66,23 +66,23 @@ public class ItemFactoryMock implements ItemFactory
 		}
 		return switch (material)
 		{
-			case ARMOR_STAND -> ArmorStandMetaMock.class;
-			case WRITABLE_BOOK, WRITTEN_BOOK -> BookMetaMock.class;
-			case ENCHANTED_BOOK -> EnchantedBookMetaMock.class;
-			case KNOWLEDGE_BOOK -> KnowledgeBookMetaMock.class;
-			case LEATHER_BOOTS, LEATHER_CHESTPLATE, LEATHER_HELMET, LEATHER_LEGGINGS -> LeatherArmorMetaMock.class;
-			case FILLED_MAP -> MapMetaMock.class;
-			case FIREWORK_STAR -> FireworkEffectMetaMock.class;
-			case FIREWORK_ROCKET -> FireworkMetaMock.class;
-			case POTION, LINGERING_POTION, SPLASH_POTION -> PotionMetaMock.class;
-			case PLAYER_HEAD -> SkullMetaMock.class;
-			case SUSPICIOUS_STEW -> SuspiciousStewMetaMock.class;
-			case AXOLOTL_BUCKET -> AxolotlBucketMetaMock.class;
-			case BUNDLE -> BundleMetaMock.class;
-			case COMPASS -> CompassMetaMock.class;
-			case CROSSBOW -> CrossbowMetaMock.class;
-			case TROPICAL_FISH_BUCKET -> TropicalFishBucketMetaMock.class;
-			default -> ItemMetaMock.class;
+		case ARMOR_STAND -> ArmorStandMetaMock.class;
+		case WRITABLE_BOOK, WRITTEN_BOOK -> BookMetaMock.class;
+		case ENCHANTED_BOOK -> EnchantedBookMetaMock.class;
+		case KNOWLEDGE_BOOK -> KnowledgeBookMetaMock.class;
+		case LEATHER_BOOTS, LEATHER_CHESTPLATE, LEATHER_HELMET, LEATHER_LEGGINGS -> LeatherArmorMetaMock.class;
+		case FILLED_MAP -> MapMetaMock.class;
+		case FIREWORK_STAR -> FireworkEffectMetaMock.class;
+		case FIREWORK_ROCKET -> FireworkMetaMock.class;
+		case POTION, LINGERING_POTION, SPLASH_POTION -> PotionMetaMock.class;
+		case PLAYER_HEAD -> SkullMetaMock.class;
+		case SUSPICIOUS_STEW -> SuspiciousStewMetaMock.class;
+		case AXOLOTL_BUCKET -> AxolotlBucketMetaMock.class;
+		case BUNDLE -> BundleMetaMock.class;
+		case COMPASS -> CompassMetaMock.class;
+		case CROSSBOW -> CrossbowMetaMock.class;
+		case TROPICAL_FISH_BUCKET -> TropicalFishBucketMetaMock.class;
+		default -> ItemMetaMock.class;
 		};
 	}
 
@@ -150,7 +150,7 @@ public class ItemFactoryMock implements ItemFactory
 					"Cannot find an ItemMeta constructor for the class \"" + meta.getClass().getName() + "\"");
 		}
 		catch (SecurityException | InstantiationException | IllegalAccessException | InvocationTargetException
-			   | NoSuchMethodException e)
+				| NoSuchMethodException e)
 		{
 			throw new RuntimeException(e);
 		}
@@ -178,14 +178,16 @@ public class ItemFactoryMock implements ItemFactory
 	}
 
 	@Override
-	public @NotNull ItemStack enchantWithLevels(@NotNull ItemStack itemStack, @Range(from = 1L, to = 30L) int levels, boolean allowTreasure, @NotNull Random random)
+	public @NotNull ItemStack enchantWithLevels(@NotNull ItemStack itemStack, @Range(from = 1L, to = 30L) int levels,
+			boolean allowTreasure, @NotNull Random random)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public @NotNull HoverEvent<HoverEvent.ShowItem> asHoverEvent(@NotNull ItemStack item, @NotNull UnaryOperator<HoverEvent.ShowItem> op)
+	public @NotNull HoverEvent<HoverEvent.ShowItem> asHoverEvent(@NotNull ItemStack item,
+			@NotNull UnaryOperator<HoverEvent.ShowItem> op)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -260,14 +262,16 @@ public class ItemFactoryMock implements ItemFactory
 	}
 
 	@Override
-	public @NotNull ItemStack enchantItem(@NotNull Entity entity, @NotNull ItemStack item, int level, boolean allowTreasures)
+	public @NotNull ItemStack enchantItem(@NotNull Entity entity, @NotNull ItemStack item, int level,
+			boolean allowTreasures)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public @NotNull ItemStack enchantItem(@NotNull World world, @NotNull ItemStack item, int level, boolean allowTreasures)
+	public @NotNull ItemStack enchantItem(@NotNull World world, @NotNull ItemStack item, int level,
+			boolean allowTreasures)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

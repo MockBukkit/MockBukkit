@@ -45,7 +45,8 @@ public class CreeperMock extends MonsterMock implements Creeper
 	@Override
 	public void setPowered(boolean value)
 	{
-		CreeperPowerEvent.PowerCause cause = powered ? CreeperPowerEvent.PowerCause.SET_ON : CreeperPowerEvent.PowerCause.SET_OFF;
+		CreeperPowerEvent.PowerCause cause = powered ? CreeperPowerEvent.PowerCause.SET_ON
+				: CreeperPowerEvent.PowerCause.SET_OFF;
 
 		if (new CreeperPowerEvent(this, cause).callEvent())
 		{

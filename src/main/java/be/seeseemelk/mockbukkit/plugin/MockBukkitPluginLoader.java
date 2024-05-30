@@ -46,9 +46,7 @@ public class MockBukkitPluginLoader implements PluginLoader
 
 	@Override
 	public @NotNull Map<Class<? extends Event>, Set<RegisteredListener>> createRegisteredListeners(
-			@NotNull Listener listener,
-			@NotNull Plugin plugin
-	)
+			@NotNull Listener listener, @NotNull Plugin plugin)
 	{
 		return new JavaPluginLoader(plugin.getServer()).createRegisteredListeners(listener, plugin);
 	}

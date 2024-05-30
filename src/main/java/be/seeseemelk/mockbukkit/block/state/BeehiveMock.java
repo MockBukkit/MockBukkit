@@ -82,7 +82,8 @@ public class BeehiveMock extends TileStateMock implements Beehive
 	@Override
 	public void setFlower(@Nullable Location location)
 	{
-		Preconditions.checkArgument(location == null || this.getWorld().equals(location.getWorld()), "Flower must be in the same world");
+		Preconditions.checkArgument(location == null || this.getWorld().equals(location.getWorld()),
+				"Flower must be in the same world");
 		this.flowerLocation = location;
 	}
 
@@ -159,7 +160,8 @@ public class BeehiveMock extends TileStateMock implements Beehive
 	public void addEntity(@NotNull Bee entity)
 	{
 		Preconditions.checkNotNull(entity, "Bee cannot be null");
-		// TODO: We currently don't have a way to serialize entities so until that's done this can't be implemented.
+		// TODO: We currently don't have a way to serialize entities so until that's
+		// done this can't be implemented.
 		throw new UnimplementedOperationException();
 	}
 

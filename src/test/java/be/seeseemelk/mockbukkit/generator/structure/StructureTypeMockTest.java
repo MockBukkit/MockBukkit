@@ -13,7 +13,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class StructureTypeMockTest
 {
 
-
 	private NamespacedKey key;
 	private StructureTypeMock structureType;
 

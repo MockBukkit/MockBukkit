@@ -175,7 +175,7 @@ public class MockBukkit
 	 * @param parameters Extra parameters to pass on to the plugin constructor.
 	 * @return An instance of the plugin's main class.
 	 */
-	public static <T extends JavaPlugin> @NotNull T load(@NotNull Class<T> plugin, Object @NotNull ... parameters)
+	public static <T extends JavaPlugin> @NotNull T load(@NotNull Class<T> plugin, Object @NotNull... parameters)
 	{
 		ensureMocking();
 		PluginManagerMock pluginManager = mock.getPluginManager();
@@ -200,7 +200,8 @@ public class MockBukkit
 	 * @param parameters      Extra parameters to pass on to the plugin constructor.
 	 * @return An instance of the plugin's main class.
 	 */
-	public static <T extends JavaPlugin> @NotNull T loadWith(@NotNull Class<T> plugin, @NotNull PluginDescriptionFile descriptionFile, Object @NotNull ... parameters)
+	public static <T extends JavaPlugin> @NotNull T loadWith(@NotNull Class<T> plugin,
+			@NotNull PluginDescriptionFile descriptionFile, Object @NotNull... parameters)
 	{
 		ensureMocking();
 		JavaPlugin instance = mock.getPluginManager().loadPlugin(plugin, descriptionFile, parameters);
@@ -218,7 +219,8 @@ public class MockBukkit
 	 * @param parameters       Extra parameters to pass on to the plugin constructor.
 	 * @return An instance of the plugin's main class.
 	 */
-	public static <T extends JavaPlugin> @NotNull T loadWith(@NotNull Class<T> plugin, @NotNull InputStream descriptionInput, Object... parameters)
+	public static <T extends JavaPlugin> @NotNull T loadWith(@NotNull Class<T> plugin,
+			@NotNull InputStream descriptionInput, Object... parameters)
 	{
 		try
 		{
@@ -240,7 +242,8 @@ public class MockBukkit
 	 * @param parameters      Extra parameters to pass on to the plugin constructor.
 	 * @return An instance of the plugin's main class.
 	 */
-	public static <T extends JavaPlugin> @NotNull T loadWith(@NotNull Class<T> plugin, @NotNull File descriptionFile, Object... parameters)
+	public static <T extends JavaPlugin> @NotNull T loadWith(@NotNull Class<T> plugin, @NotNull File descriptionFile,
+			Object... parameters)
 	{
 		try
 		{
@@ -262,29 +265,22 @@ public class MockBukkit
 	 * @param parameters          Extra parameters to pass on to the plugin constructor.
 	 * @return An instance of the plugin's main class.
 	 */
-	public static <T extends JavaPlugin> @NotNull T loadWith(@NotNull Class<T> plugin, String descriptionFileName, Object... parameters)
+	public static <T extends JavaPlugin> @NotNull T loadWith(@NotNull Class<T> plugin, String descriptionFileName,
+			Object... parameters)
 	{
 		return loadWith(plugin, ClassLoader.getSystemResourceAsStream(descriptionFileName), parameters);
 	}
 
-	/*public static <T extends JavaPlugin> T loadWith(Class<T> plugin, File configFile, Object... parameters)
-	{
-		ensureMocking();
-		JavaPlugin instance = mock.getPluginManager().loadPlugin(plugin, parameters);
-		YamlConfiguration yamlConfig = new YamlConfiguration();
-
-		try
-		{
-			yamlConfig.load(configFile);
-		}
-		catch (IOException | InvalidConfigurationException e)
-		{
-			throw new RuntimeException(e);
-		}
-		instance.getConfig().setDefaults(yamlConfig);
-		mock.getPluginManager().enablePlugin(instance);
-		return plugin.cast(instance);
-	}*/
+	/* public static <T extends JavaPlugin> T loadWith(Class<T> plugin, File
+	 * configFile, Object... parameters) { ensureMocking(); JavaPlugin instance =
+	 * mock.getPluginManager().loadPlugin(plugin, parameters); YamlConfiguration
+	 * yamlConfig = new YamlConfiguration();
+	 *
+	 * try { yamlConfig.load(configFile); } catch (IOException |
+	 * InvalidConfigurationException e) { throw new RuntimeException(e); }
+	 * instance.getConfig().setDefaults(yamlConfig);
+	 * mock.getPluginManager().enablePlugin(instance); return plugin.cast(instance);
+	 * } */
 
 	/**
 	 * Loads and enables a plugin for mocking. It will not load the {@code plugin.yml} file, but rather it will use a
@@ -296,7 +292,7 @@ public class MockBukkit
 	 * @param parameters Extra parameters to pass on to the plugin constructor.
 	 * @return An instance of the plugin's main class.
 	 */
-	public static <T extends JavaPlugin> @NotNull T loadSimple(@NotNull Class<T> plugin, Object @NotNull ... parameters)
+	public static <T extends JavaPlugin> @NotNull T loadSimple(@NotNull Class<T> plugin, Object @NotNull... parameters)
 	{
 		ensureMocking();
 		PluginDescriptionFile description = new PluginDescriptionFile(plugin.getSimpleName(), "1.0.0",
@@ -367,7 +363,8 @@ public class MockBukkit
 	public static @NotNull MockPlugin createMockPlugin(@NotNull String pluginName, @NotNull String pluginVersion)
 	{
 		ensureMocking();
-		PluginDescriptionFile description = new PluginDescriptionFile(pluginName, pluginVersion, MockPlugin.class.getName());
+		PluginDescriptionFile description = new PluginDescriptionFile(pluginName, pluginVersion,
+				MockPlugin.class.getName());
 		JavaPlugin instance = mock.getPluginManager().loadPlugin(MockPlugin.class, description, new Object[0]);
 		mock.getPluginManager().enablePlugin(instance);
 		return (MockPlugin) instance;

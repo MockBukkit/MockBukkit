@@ -85,7 +85,8 @@ class CampfireMockTest
 	@Test
 	void getAsString()
 	{
-		assertEquals("minecraft:campfire[facing=north,lit=true,signal_fire=false,waterlogged=false]", campfire.getAsString());
+		assertEquals("minecraft:campfire[facing=north,lit=true,signal_fire=false,waterlogged=false]",
+				campfire.getAsString());
 	}
 
 	@Test

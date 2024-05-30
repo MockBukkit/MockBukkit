@@ -48,7 +48,8 @@ public class BeeMock extends AnimalsMock implements Bee
 	@Override
 	public void setHive(@Nullable Location location)
 	{
-		Preconditions.checkArgument(location == null || this.getWorld().equals(location.getWorld()), "Hive must be in same world");
+		Preconditions.checkArgument(location == null || this.getWorld().equals(location.getWorld()),
+				"Hive must be in same world");
 		this.hive = location;
 	}
 
@@ -61,7 +62,8 @@ public class BeeMock extends AnimalsMock implements Bee
 	@Override
 	public void setFlower(@Nullable Location location)
 	{
-		Preconditions.checkArgument(location == null || this.getWorld().equals(location.getWorld()), "Flower must be in same world");
+		Preconditions.checkArgument(location == null || this.getWorld().equals(location.getWorld()),
+				"Flower must be in same world");
 		this.flower = location;
 	}
 
@@ -135,28 +137,28 @@ public class BeeMock extends AnimalsMock implements Bee
 	@Override
 	public void setCropsGrownSincePollination(int crops)
 	{
-		//TODO: Auto-generated method stub
+		// TODO: Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public int getCropsGrownSincePollination()
 	{
-		//TODO: Auto-generated method stub
+		// TODO: Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public void setTicksSincePollination(int ticks)
 	{
-		//TODO: Auto-generated method stub
+		// TODO: Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public int getTicksSincePollination()
 	{
-		//TODO: Auto-generated method stub
+		// TODO: Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 

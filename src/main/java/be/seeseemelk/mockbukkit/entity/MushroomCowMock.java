@@ -105,42 +105,42 @@ public class MushroomCowMock extends CowMock implements MushroomCow
 	@Override
 	public int getStewEffectDuration()
 	{
-		//TODO: Auto-generated method stub
+		// TODO: Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public void setStewEffectDuration(int duration)
 	{
-		//TODO: Auto-generated method stub
+		// TODO: Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public @Nullable PotionEffectType getStewEffectType()
 	{
-		//TODO: Auto-generated method stub
+		// TODO: Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public void setStewEffect(@Nullable PotionEffectType type)
 	{
-		//TODO: Auto-generated method stub
+		// TODO: Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public @NotNull @Unmodifiable List<SuspiciousEffectEntry> getStewEffects()
 	{
-		//TODO: Auto-generated method stub
+		// TODO: Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public void setStewEffects(@NotNull List<SuspiciousEffectEntry> effects)
 	{
-		//TODO: Auto-generated method stub
+		// TODO: Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
@@ -155,9 +155,11 @@ public class MushroomCowMock extends CowMock implements MushroomCow
 	{
 		WorldMock world = this.getWorld();
 		Location location = this.getLocation();
-		world.playSound(this, org.bukkit.Sound.ENTITY_MOOSHROOM_SHEAR, AdventureConverters.soundSourceToCategory(source), 1.0F, 1.0F);
+		world.playSound(this, org.bukkit.Sound.ENTITY_MOOSHROOM_SHEAR,
+				AdventureConverters.soundSourceToCategory(source), 1.0F, 1.0F);
 		Cow cow = world.spawn(this.getLocation(), Cow.class, null, CreatureSpawnEvent.SpawnReason.CUSTOM, true, false);
-//		world.spawnParticle(Particle.EXPLOSION_NORMAL, location.getX(), location.getY() + 0.5, location.getZ(), 1); // Not implemented
+		// world.spawnParticle(Particle.EXPLOSION_NORMAL, location.getX(),
+		// location.getY() + 0.5, location.getZ(), 1); // Not implemented
 
 		cow.teleport(this);
 		cow.setHealth(this.getHealth());
@@ -179,7 +181,8 @@ public class MushroomCowMock extends CowMock implements MushroomCow
 
 		for (int i = 0; i < 5; ++i)
 		{
-			Item item = world.dropItem(location, new ItemStack(Material.valueOf(this.getVariant().name() + "_MUSHROOM")));
+			Item item = world.dropItem(location,
+					new ItemStack(Material.valueOf(this.getVariant().name() + "_MUSHROOM")));
 			if (!new EntityDropItemEvent(this, item).callEvent())
 				item.remove();
 		}

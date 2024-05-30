@@ -63,8 +63,7 @@ public class TagWrapperMock implements Tag<Material>
 		this.materials.clear();
 		this.additionalTags.clear();
 
-		new TagParser(this).parse((mats, tags) ->
-		{
+		new TagParser(this).parse((mats, tags) -> {
 			this.materials.addAll(mats);
 			this.additionalTags.addAll(tags);
 		});

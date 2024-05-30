@@ -24,7 +24,8 @@ public class KeyedBossBarMock extends BossBarMock implements KeyedBossBar
 	 * @param style The style of the bossbar.
 	 * @param flags The flags to set on the bossbar.
 	 */
-	public KeyedBossBarMock(@NotNull NamespacedKey key, @NotNull String title, @NotNull BarColor color, @NotNull BarStyle style, BarFlag... flags)
+	public KeyedBossBarMock(@NotNull NamespacedKey key, @NotNull String title, @NotNull BarColor color,
+			@NotNull BarStyle style, BarFlag... flags)
 	{
 		super(title, color, style, flags);
 		this.key = key;

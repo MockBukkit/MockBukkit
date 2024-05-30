@@ -77,9 +77,10 @@ public class ChunkMock implements Chunk
 	}
 
 	@Override
-	public @NotNull Collection<BlockState> getTileEntities(@NotNull Predicate<? super Block> blockPredicate, boolean useSnapshot)
+	public @NotNull Collection<BlockState> getTileEntities(@NotNull Predicate<? super Block> blockPredicate,
+			boolean useSnapshot)
 	{
-		//TODO Auto-generated method stub
+		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
@@ -93,7 +94,8 @@ public class ChunkMock implements Chunk
 	public @NotNull Block getBlock(int x, int y, int z)
 	{
 		Preconditions.checkArgument(0 <= x && x <= 15, "x out of range (expected 0-15, got %s)", x);
-		Preconditions.checkArgument(world.getMinHeight() <= y && y <= world.getMaxHeight(), "y out of range (expected %s-%s, got %s)", world.getMinHeight(), world.getMaxHeight(), y);
+		Preconditions.checkArgument(world.getMinHeight() <= y && y <= world.getMaxHeight(),
+				"y out of range (expected %s-%s, got %s)", world.getMinHeight(), world.getMaxHeight(), y);
 		Preconditions.checkArgument(0 <= z && z <= 15, "z out of range (expected 0-15, got %s)", z);
 		return world.getBlockAt((this.x << 4) + x, y, (this.z << 4) + z);
 	}
@@ -138,7 +140,8 @@ public class ChunkMock implements Chunk
 
 	@Override
 	@SuppressWarnings("UnstableApiUsage") // ImmutableMap#builderWithExpectedSize
-	public @NotNull ChunkSnapshot getChunkSnapshot(boolean includeMaxblocky, boolean includeBiome, boolean includeBiomeTempRain)
+	public @NotNull ChunkSnapshot getChunkSnapshot(boolean includeMaxblocky, boolean includeBiome,
+			boolean includeBiomeTempRain)
 	{
 		ImmutableMap.Builder<Coordinate, BlockData> blockData = ImmutableMap.builderWithExpectedSize(getCubicSize());
 		ImmutableMap.Builder<Coordinate, Biome> biomes = ImmutableMap.builderWithExpectedSize(getCubicSize());
@@ -151,7 +154,8 @@ public class ChunkMock implements Chunk
 				biomes.put(chunkLocalCoordinate, block.getBiome());
 			}
 		}
-		return new ChunkSnapshotMock(x, z, world.getMinHeight(), world.getMaxHeight(), world.getName(), world.getFullTime(), blockData.build(), (includeBiome || includeBiomeTempRain) ? biomes.build() : null);
+		return new ChunkSnapshotMock(x, z, world.getMinHeight(), world.getMaxHeight(), world.getName(),
+				world.getFullTime(), blockData.build(), (includeBiome || includeBiomeTempRain) ? biomes.build() : null);
 	}
 
 	@Override
@@ -170,12 +174,8 @@ public class ChunkMock implements Chunk
 	@Override
 	public Entity[] getEntities()
 	{
-		BoundingBox boundingBox = new BoundingBox(x << 4,
-				world.getMinHeight(),
-				z << 4,
-				(x << 4) + 16,
-				world.getMaxHeight(),
-				(z << 4) + 16);
+		BoundingBox boundingBox = new BoundingBox(x << 4, world.getMinHeight(), z << 4, (x << 4) + 16,
+				world.getMaxHeight(), (z << 4) + 16);
 		return world.getNearbyEntities(boundingBox).toArray(new Entity[0]);
 	}
 

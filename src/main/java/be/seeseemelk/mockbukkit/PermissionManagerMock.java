@@ -9,7 +9,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
@@ -48,7 +47,8 @@ public class PermissionManagerMock implements PermissionManager
 	{
 		Preconditions.checkNotNull(perm, "Permission cannot be null");
 		String name = perm.getName().toLowerCase(Locale.ENGLISH);
-		Preconditions.checkArgument(!this.permissions.containsKey(name),"The permission " + name + " is already defined!");
+		Preconditions.checkArgument(!this.permissions.containsKey(name),
+				"The permission " + name + " is already defined!");
 		this.permissions.put(name, perm);
 		this.calculatePermissionDefault(perm);
 		if (dirtyPermissibles)

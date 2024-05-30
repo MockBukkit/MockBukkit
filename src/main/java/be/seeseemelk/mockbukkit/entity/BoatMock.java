@@ -37,12 +37,12 @@ public class BoatMock extends VehicleMock implements Boat
 	{
 		return switch (boatType)
 		{
-			case SPRUCE -> TreeSpecies.REDWOOD;
-			case BIRCH -> TreeSpecies.BIRCH;
-			case JUNGLE -> TreeSpecies.JUNGLE;
-			case ACACIA -> TreeSpecies.ACACIA;
-			case DARK_OAK -> TreeSpecies.DARK_OAK;
-			default -> TreeSpecies.GENERIC;
+		case SPRUCE -> TreeSpecies.REDWOOD;
+		case BIRCH -> TreeSpecies.BIRCH;
+		case JUNGLE -> TreeSpecies.JUNGLE;
+		case ACACIA -> TreeSpecies.ACACIA;
+		case DARK_OAK -> TreeSpecies.DARK_OAK;
+		default -> TreeSpecies.GENERIC;
 		};
 	}
 
@@ -55,12 +55,12 @@ public class BoatMock extends VehicleMock implements Boat
 
 		type = switch (species)
 		{
-			case GENERIC -> Type.OAK;
-			case BIRCH -> Type.BIRCH;
-			case ACACIA -> Type.ACACIA;
-			case JUNGLE -> Type.JUNGLE;
-			case DARK_OAK -> Type.DARK_OAK;
-			case REDWOOD -> Type.SPRUCE;
+		case GENERIC -> Type.OAK;
+		case BIRCH -> Type.BIRCH;
+		case ACACIA -> Type.ACACIA;
+		case JUNGLE -> Type.JUNGLE;
+		case DARK_OAK -> Type.DARK_OAK;
+		case REDWOOD -> Type.SPRUCE;
 		};
 
 		this.boatType = type;
@@ -150,15 +150,15 @@ public class BoatMock extends VehicleMock implements Boat
 	{
 		return switch (boatType)
 		{
-			case OAK -> Material.OAK_BOAT;
-			case SPRUCE -> Material.SPRUCE_BOAT;
-			case BIRCH -> Material.BIRCH_BOAT;
-			case JUNGLE -> Material.JUNGLE_BOAT;
-			case ACACIA -> Material.ACACIA_BOAT;
-			case CHERRY -> Material.CHERRY_BOAT;
-			case DARK_OAK -> Material.DARK_OAK_BOAT;
-			case MANGROVE -> Material.MANGROVE_BOAT;
-			case BAMBOO -> Material.BAMBOO_RAFT;
+		case OAK -> Material.OAK_BOAT;
+		case SPRUCE -> Material.SPRUCE_BOAT;
+		case BIRCH -> Material.BIRCH_BOAT;
+		case JUNGLE -> Material.JUNGLE_BOAT;
+		case ACACIA -> Material.ACACIA_BOAT;
+		case CHERRY -> Material.CHERRY_BOAT;
+		case DARK_OAK -> Material.DARK_OAK_BOAT;
+		case MANGROVE -> Material.MANGROVE_BOAT;
+		case BAMBOO -> Material.BAMBOO_RAFT;
 		};
 	}
 

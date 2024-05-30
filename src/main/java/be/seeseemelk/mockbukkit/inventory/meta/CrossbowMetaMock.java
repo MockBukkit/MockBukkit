@@ -79,7 +79,9 @@ public class CrossbowMetaMock extends ItemMetaMock implements CrossbowMeta
 	public void addChargedProjectile(@NotNull ItemStack item)
 	{
 		Preconditions.checkArgument(item != null, "item");
-		Preconditions.checkArgument(item.getType() == Material.FIREWORK_ROCKET || item.getType().name().contains("ARROW"), "Item %s is not an arrow or firework rocket", item);
+		Preconditions.checkArgument(
+				item.getType() == Material.FIREWORK_ROCKET || item.getType().name().contains("ARROW"),
+				"Item %s is not an arrow or firework rocket", item);
 
 		this.projectiles.add(item);
 	}

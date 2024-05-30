@@ -43,7 +43,7 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	}
 
 	@Override
-	public void sendMessage(String @NotNull ... messages)
+	public void sendMessage(String @NotNull... messages)
 	{
 		for (String message : messages)
 		{
@@ -58,7 +58,7 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	}
 
 	@Override
-	public void sendMessage(UUID sender, String @NotNull ... messages)
+	public void sendMessage(UUID sender, String @NotNull... messages)
 	{
 		sendMessage(messages);
 	}
@@ -241,7 +241,8 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 		public void sendMessage(@Nullable UUID sender, @NotNull BaseComponent component)
 		{
 			Preconditions.checkNotNull(component, "Component must not be null");
-			sendMessage(sender, new BaseComponent[]{ component });
+			sendMessage(sender, new BaseComponent[]
+			{ component });
 		}
 
 		@Override
@@ -249,7 +250,8 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 		{
 			Preconditions.checkNotNull(components, "Components must not be null");
 			Component comp = BungeeComponentSerializer.get().deserialize(components);
-			ConsoleCommandSenderMock.this.sendMessage(sender == null ? Identity.nil() : Identity.identity(sender), comp);
+			ConsoleCommandSenderMock.this.sendMessage(sender == null ? Identity.nil() : Identity.identity(sender),
+					comp);
 		}
 
 	}

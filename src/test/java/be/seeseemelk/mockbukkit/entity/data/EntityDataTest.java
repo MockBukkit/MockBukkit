@@ -84,7 +84,8 @@ class EntityDataTest
 	@Test
 	void invalidStateTest()
 	{
-		assertThrows(UnimplementedOperationException.class, () -> entityData.getWidth(EntitySubType.DEFAULT, EntityState.SNEAKING));
+		assertThrows(UnimplementedOperationException.class,
+				() -> entityData.getWidth(EntitySubType.DEFAULT, EntityState.SNEAKING));
 	}
 
 }

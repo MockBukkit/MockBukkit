@@ -1,12 +1,9 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import be.seeseemelk.mockbukkit.entity.data.EntitySubType;
 import org.bukkit.entity.Ageable;
-import org.bukkit.inventory.EquipmentSlot;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Range;
 
 import java.util.UUID;
 
@@ -79,7 +76,6 @@ public class AgeableMock extends CreatureMock implements Ageable
 	{
 		return this.getAge() >= 0;
 	}
-
 
 	@Override
 	public boolean canBreed()

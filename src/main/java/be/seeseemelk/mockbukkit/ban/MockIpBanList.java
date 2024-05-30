@@ -38,35 +38,35 @@ public class MockIpBanList implements org.bukkit.ban.IpBanList
 
 	@Override
 
-	public @Nullable BanEntry<InetAddress> addBan(@NotNull String target, @Nullable String reason, @Nullable Date expires, @Nullable String source)
+	public @Nullable BanEntry<InetAddress> addBan(@NotNull String target, @Nullable String reason,
+			@Nullable Date expires, @Nullable String source)
 	{
 		Preconditions.checkNotNull(target, TARGET_CANNOT_BE_NULL);
-		BanEntry<InetAddress> entry = new MockIpBanEntry(
-				target,
-				(reason == null || reason.isBlank()) ? null : reason,
-				expires,
-				(source == null || source.isBlank()) ? null : source
-		);
+		BanEntry<InetAddress> entry = new MockIpBanEntry(target, (reason == null || reason.isBlank()) ? null : reason,
+				expires, (source == null || source.isBlank()) ? null : source);
 
 		bans.put(target, entry);
 		return entry;
 	}
 
 	@Override
-	public @Nullable BanEntry<InetAddress> addBan(@NotNull InetAddress target, @Nullable String reason, @Nullable Date expires, @Nullable String source)
+	public @Nullable BanEntry<InetAddress> addBan(@NotNull InetAddress target, @Nullable String reason,
+			@Nullable Date expires, @Nullable String source)
 	{
 		return addBan(InetAddresses.toAddrString(target), reason, expires, source);
 	}
 
 	@Override
-	public @Nullable BanEntry<InetAddress> addBan(@NotNull InetAddress target, @Nullable String reason, @Nullable Instant expires, @Nullable String source)
+	public @Nullable BanEntry<InetAddress> addBan(@NotNull InetAddress target, @Nullable String reason,
+			@Nullable Instant expires, @Nullable String source)
 	{
 		Date date = expires != null ? Date.from(expires) : null;
 		return this.addBan(target, reason, date, source);
 	}
 
 	@Override
-	public @Nullable BanEntry<InetAddress> addBan(@NotNull InetAddress target, @Nullable String reason, @Nullable Duration duration, @Nullable String source)
+	public @Nullable BanEntry<InetAddress> addBan(@NotNull InetAddress target, @Nullable String reason,
+			@Nullable Duration duration, @Nullable String source)
 	{
 		Instant instant = duration != null ? Instant.now().plus(duration) : null;
 		return this.addBan(target, reason, instant, source);
@@ -113,7 +113,8 @@ public class MockIpBanList implements org.bukkit.ban.IpBanList
 	@Override
 	public boolean isBanned(@NotNull String target)
 	{
-		return this.bans.values().stream().anyMatch(banEntry -> InetAddresses.toAddrString(banEntry.getBanTarget()).equals(target));
+		return this.bans.values().stream()
+				.anyMatch(banEntry -> InetAddresses.toAddrString(banEntry.getBanTarget()).equals(target));
 	}
 
 	@Override

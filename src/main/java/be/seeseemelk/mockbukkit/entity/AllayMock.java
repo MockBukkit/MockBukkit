@@ -89,9 +89,7 @@ public class AllayMock extends CreatureMock implements Allay
 
 		inventory.addItem(item);
 
-		if (Arrays.stream(inventory.getContents())
-				.filter(Objects::nonNull)
-				.count() > 1)
+		if (Arrays.stream(inventory.getContents()).filter(Objects::nonNull).count() > 1)
 		{
 			throw new IllegalStateException("Allay cannot hold more than 1 ItemStack");
 		}
@@ -192,8 +190,7 @@ public class AllayMock extends CreatureMock implements Allay
 	public void startDancing(@NotNull Location location)
 	{
 		Preconditions.checkArgument(location != null, "Location cannot be null");
-		Preconditions.checkArgument(location.getBlock().getType() == Material.JUKEBOX,
-				"Location must be a Jukebox");
+		Preconditions.checkArgument(location.getBlock().getType() == Material.JUKEBOX, "Location must be a Jukebox");
 
 		this.isDancing = true;
 		this.jukebox = location.clone();

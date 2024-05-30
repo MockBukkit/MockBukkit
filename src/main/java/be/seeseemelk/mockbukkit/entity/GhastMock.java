@@ -51,7 +51,8 @@ public class GhastMock extends FlyingMock implements Ghast
 	@Override
 	public void setExplosionPower(int explosionPower)
 	{
-		Preconditions.checkArgument(explosionPower >= 0 && explosionPower <= 127, "The explosion power has to be between 0 and 127");
+		Preconditions.checkArgument(explosionPower >= 0 && explosionPower <= 127,
+				"The explosion power has to be between 0 and 127");
 		this.explosionPower = explosionPower;
 	}
 

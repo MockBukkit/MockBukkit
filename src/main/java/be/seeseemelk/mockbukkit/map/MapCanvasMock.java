@@ -152,8 +152,7 @@ public class MapCanvasMock implements MapCanvas
 					continue;
 				}
 				catch (NumberFormatException ignored)
-				{
-				}
+				{}
 			}
 
 			MapFont.CharacterSprite sprite = font.getChar(text.charAt(i));

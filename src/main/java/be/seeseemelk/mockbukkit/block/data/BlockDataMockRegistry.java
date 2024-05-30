@@ -61,7 +61,6 @@ public class BlockDataMockRegistry
 		return instance;
 	}
 
-
 	private void loadBlockData() throws IOException
 	{
 		InputStream stream = MockBukkit.class.getResourceAsStream("/materials/material_data.json");
@@ -96,7 +95,8 @@ public class BlockDataMockRegistry
 	public boolean isValidStateForBlockWithMaterial(@NotNull Material material, @NotNull String state)
 	{
 		Map<String, Object> tmp = blockData.get(material);
-		if (tmp == null) return false;
+		if (tmp == null)
+			return false;
 
 		return tmp.get(state) != null;
 	}
@@ -104,7 +104,8 @@ public class BlockDataMockRegistry
 	public @Nullable Object getDefault(@NotNull Material material, @NotNull String state)
 	{
 		Map<String, Object> bd = getBlockData(material);
-		if (bd == null) return null;
+		if (bd == null)
+			return null;
 		return bd.get(state);
 	}
 

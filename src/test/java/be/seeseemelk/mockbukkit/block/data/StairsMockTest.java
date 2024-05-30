@@ -25,12 +25,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class StairsMockTest
 {
 
-	private static final Set<BlockFace> VALID_FACES = Set.of(
-			BlockFace.NORTH,
-			BlockFace.SOUTH,
-			BlockFace.EAST,
-			BlockFace.WEST
-	);
+	private static final Set<BlockFace> VALID_FACES = Set.of(BlockFace.NORTH, BlockFace.SOUTH, BlockFace.EAST,
+			BlockFace.WEST);
 
 	private StairsMock stairs;
 
@@ -101,8 +97,7 @@ class StairsMockTest
 	void setFacing_Invalid_ThrowsException()
 	{
 		final Set<BlockFace> invalidFaces = Arrays.stream(BlockFace.values())
-				.filter(face -> !VALID_FACES.contains(face))
-				.collect(Collectors.toSet());
+				.filter(face -> !VALID_FACES.contains(face)).collect(Collectors.toSet());
 		for (BlockFace face : invalidFaces)
 		{
 			assertThrowsExactly(IllegalArgumentException.class, () -> stairs.setFacing(face));

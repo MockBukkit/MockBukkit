@@ -1,6 +1,5 @@
 package be.seeseemelk.mockbukkit.ban;
 
-
 import com.google.common.net.InetAddresses;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -53,8 +52,7 @@ class MockIpBanEntryTest
 	@Test
 	void testSetCreated_Null()
 	{
-		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
-		{
+		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () -> {
 			entry.setCreated(null);
 		});
 

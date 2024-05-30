@@ -48,21 +48,21 @@ public abstract class ProjectileMock extends AbstractProjectileMock implements P
 	@Override
 	public boolean hasLeftShooter()
 	{
-		//TODO: Auto-generated method stub
+		// TODO: Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public void setHasLeftShooter(boolean leftShooter)
 	{
-		//TODO: Auto-generated method stub
+		// TODO: Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public boolean hasBeenShot()
 	{
-		//TODO: Auto-generated method stub
+		// TODO: Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
@@ -97,7 +97,7 @@ public abstract class ProjectileMock extends AbstractProjectileMock implements P
 	@Override
 	public void setHasBeenShot(boolean beenShot)
 	{
-		//TODO: Auto-generated method stub
+		// TODO: Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 

@@ -187,9 +187,11 @@ public abstract class MobMock extends LivingEntityMock implements Mob
 	public void finalizeSpawn()
 	{
 		/* TODO: Unimplemented (#354)
-		this.registerAttribute(Attribute.GENERIC_FOLLOW_RANGE);
-		this.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).addModifier(new AttributeModifier("Random spawn bonus", ThreadLocalRandom.current().nextGaussian() * 0.05D, AttributeModifier.Operation.MULTIPLY_SCALAR_1));
-		 */
+		 * this.registerAttribute(Attribute.GENERIC_FOLLOW_RANGE);
+		 * this.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).addModifier(new
+		 * AttributeModifier("Random spawn bonus",
+		 * ThreadLocalRandom.current().nextGaussian() * 0.05D,
+		 * AttributeModifier.Operation.MULTIPLY_SCALAR_1)); */
 		this.setLeftHanded(ThreadLocalRandom.current().nextFloat() < 0.05F);
 	}
 

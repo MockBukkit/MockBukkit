@@ -2,7 +2,6 @@ package be.seeseemelk.mockbukkit;
 
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
-import be.seeseemelk.mockbukkit.block.data.WallSignMock;
 import be.seeseemelk.mockbukkit.block.state.BlockStateMock;
 import be.seeseemelk.mockbukkit.entity.AllayMock;
 import be.seeseemelk.mockbukkit.entity.AreaEffectCloudMock;
@@ -103,7 +102,6 @@ import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
-import org.bukkit.block.data.type.WallSign;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -197,7 +195,8 @@ class WorldMockTest
 		Location spawn = world.getSpawnLocation();
 		assertNotNull(spawn);
 		assertEquals(Material.AIR, world.getBlockAt(spawn.getBlockX(), spawn.getBlockY(), spawn.getBlockZ()).getType());
-		assertEquals(Material.GRASS_BLOCK, world.getBlockAt(spawn.getBlockX(), spawn.getBlockY() - 1, spawn.getBlockZ()).getType());
+		assertEquals(Material.GRASS_BLOCK,
+				world.getBlockAt(spawn.getBlockX(), spawn.getBlockY() - 1, spawn.getBlockZ()).getType());
 	}
 
 	@Test
@@ -349,9 +348,12 @@ class WorldMockTest
 		WorldMock world = new WorldMock();
 		world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ZOMBIE);
 		world.dropItem(new Location(world, 0, 0, 0), new ItemStack(Material.STONE));
-		assertEquals(1, world.getEntitiesByClass(new Class[]{ ZombieMock.class }).size());
-		assertEquals(1, world.getEntitiesByClass(new Class[]{ ItemEntityMock.class }).size());
-		assertEquals(2, world.getEntitiesByClass(new Class[]{ ZombieMock.class, ItemEntityMock.class }).size());
+		assertEquals(1, world.getEntitiesByClass(new Class[]
+		{ ZombieMock.class }).size());
+		assertEquals(1, world.getEntitiesByClass(new Class[]
+		{ ItemEntityMock.class }).size());
+		assertEquals(2, world.getEntitiesByClass(new Class[]
+		{ ZombieMock.class, ItemEntityMock.class }).size());
 	}
 
 	@Test
@@ -361,8 +363,7 @@ class WorldMockTest
 		Location centerLoc = new Location(world, 0, 0, 0);
 		world.spawnEntity(centerLoc, EntityType.ZOMBIE);
 		world.spawnEntity(centerLoc.add(64, 0, 64), EntityType.ZOMBIE);
-		assertEquals(1, world.getNearbyEntities(
-				centerLoc, 16, 1, 16).size());
+		assertEquals(1, world.getNearbyEntities(centerLoc, 16, 1, 16).size());
 	}
 
 	@Test
@@ -372,8 +373,7 @@ class WorldMockTest
 		Location centerLoc = new Location(world, 0, 0, 0);
 		world.spawnEntity(centerLoc, EntityType.ZOMBIE);
 		world.spawnEntity(centerLoc, EntityType.ARMOR_STAND);
-		assertEquals(1, world.getNearbyEntities(
-				centerLoc, 1, 1, 1, (e) -> e instanceof ZombieMock).size());
+		assertEquals(1, world.getNearbyEntities(centerLoc, 1, 1, 1, (e) -> e instanceof ZombieMock).size());
 	}
 
 	@Test
@@ -555,8 +555,8 @@ class WorldMockTest
 		WorldMock world = new WorldMock();
 		world.setTime(6000L);
 		world.setTime(10000L);
-		server.getPluginManager().assertEventFired(TimeSkipEvent.class, event ->
-				event.getSkipAmount() == 4000L && event.getSkipReason() == TimeSkipEvent.SkipReason.CUSTOM);
+		server.getPluginManager().assertEventFired(TimeSkipEvent.class,
+				event -> event.getSkipAmount() == 4000L && event.getSkipReason() == TimeSkipEvent.SkipReason.CUSTOM);
 	}
 
 	@Test
@@ -732,8 +732,7 @@ class WorldMockTest
 	void setBiome_CustomFails()
 	{
 		WorldMock world = new WorldMock(Material.GRASS_BLOCK, Biome.JUNGLE, 0, 256);
-		assertThrows(IllegalArgumentException.class, () ->
-		{
+		assertThrows(IllegalArgumentException.class, () -> {
 			world.setBiome(0, 0, 0, Biome.CUSTOM);
 		});
 	}
@@ -791,8 +790,7 @@ class WorldMockTest
 		ItemStack item = new ItemStack(Material.BEACON);
 		Location location = new Location(world, 200, 50, 500);
 
-		Item entity = world.dropItem(location, item, n ->
-		{
+		Item entity = world.dropItem(location, item, n -> {
 			// This consumer should be invoked BEFORE the actually spawned.
 			assertFalse(world.getEntities().contains(n));
 		});
@@ -827,7 +825,8 @@ class WorldMockTest
 	void spawn_NullReason_ThrowsException()
 	{
 		WorldMock world = new WorldMock();
-		assertThrowsExactly(NullPointerException.class, () -> world.spawn(new Location(world, 0, 5, 0), Zombie.class, (CreatureSpawnEvent.SpawnReason) null));
+		assertThrowsExactly(NullPointerException.class,
+				() -> world.spawn(new Location(world, 0, 5, 0), Zombie.class, (CreatureSpawnEvent.SpawnReason) null));
 	}
 
 	@Test
@@ -835,8 +834,7 @@ class WorldMockTest
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		Location loc = new Location(world, 0, 0, 0);
-		assertThrows(IllegalArgumentException.class, () ->
-		{
+		assertThrows(IllegalArgumentException.class, () -> {
 			world.playEffect(loc, Effect.STEP_SOUND, null);
 		});
 	}
@@ -846,8 +844,7 @@ class WorldMockTest
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		Location loc = new Location(world, 0, 0, 0);
-		assertThrows(IllegalArgumentException.class, () ->
-		{
+		assertThrows(IllegalArgumentException.class, () -> {
 			world.playEffect(loc, Effect.STEP_SOUND, 1.0f);
 		});
 	}
@@ -889,11 +886,11 @@ class WorldMockTest
 	{
 		WorldMock world = new WorldMock();
 		world.setStorm(true);
-		server.getPluginManager().assertEventFired(WeatherChangeEvent.class, event ->
-				event.getWorld().equals(world) && event.toWeatherState());
+		server.getPluginManager().assertEventFired(WeatherChangeEvent.class,
+				event -> event.getWorld().equals(world) && event.toWeatherState());
 		world.setStorm(false);
-		server.getPluginManager().assertEventFired(WeatherChangeEvent.class, event ->
-				event.getWorld().equals(world) && !event.toWeatherState());
+		server.getPluginManager().assertEventFired(WeatherChangeEvent.class,
+				event -> event.getWorld().equals(world) && !event.toWeatherState());
 	}
 
 	@Test
@@ -941,11 +938,11 @@ class WorldMockTest
 	{
 		WorldMock world = new WorldMock();
 		world.setThundering(true);
-		server.getPluginManager().assertEventFired(ThunderChangeEvent.class, event ->
-				event.getWorld().equals(world) && event.toThunderState());
+		server.getPluginManager().assertEventFired(ThunderChangeEvent.class,
+				event -> event.getWorld().equals(world) && event.toThunderState());
 		world.setThundering(false);
-		server.getPluginManager().assertEventFired(ThunderChangeEvent.class, event ->
-				event.getWorld().equals(world) && !event.toThunderState());
+		server.getPluginManager().assertEventFired(ThunderChangeEvent.class,
+				event -> event.getWorld().equals(world) && !event.toThunderState());
 	}
 
 	@Test
@@ -1036,7 +1033,8 @@ class WorldMockTest
 	{
 		WorldMock world = new WorldMock();
 		world.spawnEntity(new Location(world, 0, 5, 0), EntityType.ARMOR_STAND);
-		server.getPluginManager().assertEventFired(CreatureSpawnEvent.class, (e) -> e.getSpawnReason() == CreatureSpawnEvent.SpawnReason.CUSTOM);
+		server.getPluginManager().assertEventFired(CreatureSpawnEvent.class,
+				(e) -> e.getSpawnReason() == CreatureSpawnEvent.SpawnReason.CUSTOM);
 		server.getPluginManager().assertEventFired(CreatureSpawnEvent.class, (e) -> !e.isCancelled());
 	}
 
@@ -1052,14 +1050,16 @@ class WorldMockTest
 	void spawn_Item_ThrowsException()
 	{
 		WorldMock world = new WorldMock();
-		assertThrowsExactly(IllegalArgumentException.class, () -> world.spawnEntity(new Location(world, 0, 5, 0), EntityType.DROPPED_ITEM));
+		assertThrowsExactly(IllegalArgumentException.class,
+				() -> world.spawnEntity(new Location(world, 0, 5, 0), EntityType.DROPPED_ITEM));
 	}
 
 	@Test
 	void spawn_Player_ThrowsException()
 	{
 		WorldMock world = new WorldMock();
-		assertThrowsExactly(IllegalArgumentException.class, () -> world.spawnEntity(new Location(world, 0, 5, 0), EntityType.PLAYER));
+		assertThrowsExactly(IllegalArgumentException.class,
+				() -> world.spawnEntity(new Location(world, 0, 5, 0), EntityType.PLAYER));
 	}
 
 	@Test
@@ -1067,7 +1067,8 @@ class WorldMockTest
 	{
 		WorldMock world = new WorldMock();
 		world.spawnEntity(new Location(world, 0, 5, 0), EntityType.ZOMBIE);
-		server.getPluginManager().assertEventFired(CreatureSpawnEvent.class, (e) -> e.getSpawnReason() == CreatureSpawnEvent.SpawnReason.CUSTOM);
+		server.getPluginManager().assertEventFired(CreatureSpawnEvent.class,
+				(e) -> e.getSpawnReason() == CreatureSpawnEvent.SpawnReason.CUSTOM);
 		server.getPluginManager().assertEventFired(CreatureSpawnEvent.class, (e) -> !e.isCancelled());
 	}
 
@@ -1246,51 +1247,35 @@ class WorldMockTest
 
 	public static Stream<Arguments> getSpawnableEntities()
 	{
-		return Stream.of(
-				Arguments.of(EntityType.WITHER_SKULL, WitherSkullMock.class),
+		return Stream.of(Arguments.of(EntityType.WITHER_SKULL, WitherSkullMock.class),
 				Arguments.of(EntityType.DRAGON_FIREBALL, DragonFireballMock.class),
 				Arguments.of(EntityType.FIREBALL, FireballMock.class),
 				Arguments.of(EntityType.SMALL_FIREBALL, SmallFireballMock.class),
 				Arguments.of(EntityType.ELDER_GUARDIAN, ElderGuardianMock.class),
 				Arguments.of(EntityType.GUARDIAN, GuardianMock.class),
-				Arguments.of(EntityType.POLAR_BEAR, PolarBearMock.class),
-				Arguments.of(EntityType.PIG, PigMock.class),
-				Arguments.of(EntityType.EGG, EggMock.class),
-				Arguments.of(EntityType.WOLF, WolfMock.class),
-				Arguments.of(EntityType.CREEPER, CreeperMock.class),
-				Arguments.of(EntityType.GOAT, GoatMock.class),
-				Arguments.of(EntityType.BEE, BeeMock.class),
-				Arguments.of(EntityType.PUFFERFISH, PufferFishMock.class),
+				Arguments.of(EntityType.POLAR_BEAR, PolarBearMock.class), Arguments.of(EntityType.PIG, PigMock.class),
+				Arguments.of(EntityType.EGG, EggMock.class), Arguments.of(EntityType.WOLF, WolfMock.class),
+				Arguments.of(EntityType.CREEPER, CreeperMock.class), Arguments.of(EntityType.GOAT, GoatMock.class),
+				Arguments.of(EntityType.BEE, BeeMock.class), Arguments.of(EntityType.PUFFERFISH, PufferFishMock.class),
 				Arguments.of(EntityType.TROPICAL_FISH, TropicalFishMock.class),
-				Arguments.of(EntityType.SALMON, SalmonMock.class),
-				Arguments.of(EntityType.COD, CodMock.class),
+				Arguments.of(EntityType.SALMON, SalmonMock.class), Arguments.of(EntityType.COD, CodMock.class),
 				Arguments.of(EntityType.TADPOLE, TadpoleMock.class),
 				Arguments.of(EntityType.MUSHROOM_COW, MushroomCowMock.class),
-				Arguments.of(EntityType.GHAST, GhastMock.class),
-				Arguments.of(EntityType.FOX, FoxMock.class),
-				Arguments.of(EntityType.FROG, FrogMock.class),
-				Arguments.of(EntityType.CAT, CatMock.class),
-				Arguments.of(EntityType.BAT, BatMock.class),
-				Arguments.of(EntityType.AXOLOTL, AxolotlMock.class),
+				Arguments.of(EntityType.GHAST, GhastMock.class), Arguments.of(EntityType.FOX, FoxMock.class),
+				Arguments.of(EntityType.FROG, FrogMock.class), Arguments.of(EntityType.CAT, CatMock.class),
+				Arguments.of(EntityType.BAT, BatMock.class), Arguments.of(EntityType.AXOLOTL, AxolotlMock.class),
 				Arguments.of(EntityType.GIANT, GiantMock.class),
 				Arguments.of(EntityType.CAVE_SPIDER, CaveSpiderMock.class),
 				Arguments.of(EntityType.WITHER_SKELETON, WitherSkeletonMock.class),
-				Arguments.of(EntityType.SPIDER, SpiderMock.class),
-				Arguments.of(EntityType.STRAY, StrayMock.class),
-				Arguments.of(EntityType.BLAZE, BlazeMock.class),
-				Arguments.of(EntityType.CHICKEN, ChickenMock.class),
-				Arguments.of(EntityType.SKELETON, SkeletonMock.class),
-				Arguments.of(EntityType.COW, CowMock.class),
+				Arguments.of(EntityType.SPIDER, SpiderMock.class), Arguments.of(EntityType.STRAY, StrayMock.class),
+				Arguments.of(EntityType.BLAZE, BlazeMock.class), Arguments.of(EntityType.CHICKEN, ChickenMock.class),
+				Arguments.of(EntityType.SKELETON, SkeletonMock.class), Arguments.of(EntityType.COW, CowMock.class),
 				Arguments.of(EntityType.ZOMBIE_HORSE, ZombieHorseMock.class),
 				Arguments.of(EntityType.SKELETON_HORSE, SkeletonHorseMock.class),
-				Arguments.of(EntityType.MULE, MuleMock.class),
-				Arguments.of(EntityType.DONKEY, DonkeyMock.class),
-				Arguments.of(EntityType.LLAMA, LlamaMock.class),
-				Arguments.of(EntityType.WARDEN, WardenMock.class),
-				Arguments.of(EntityType.ENDERMAN, EndermanMock.class),
-				Arguments.of(EntityType.ALLAY, AllayMock.class),
-				Arguments.of(EntityType.SHEEP, SheepMock.class),
-				Arguments.of(EntityType.HORSE, HorseMock.class),
+				Arguments.of(EntityType.MULE, MuleMock.class), Arguments.of(EntityType.DONKEY, DonkeyMock.class),
+				Arguments.of(EntityType.LLAMA, LlamaMock.class), Arguments.of(EntityType.WARDEN, WardenMock.class),
+				Arguments.of(EntityType.ENDERMAN, EndermanMock.class), Arguments.of(EntityType.ALLAY, AllayMock.class),
+				Arguments.of(EntityType.SHEEP, SheepMock.class), Arguments.of(EntityType.HORSE, HorseMock.class),
 				Arguments.of(EntityType.ARMOR_STAND, ArmorStandMock.class),
 				Arguments.of(EntityType.ZOMBIE, ZombieMock.class),
 				Arguments.of(EntityType.FIREWORK, FireworkMock.class),
@@ -1304,16 +1289,12 @@ class WorldMockTest
 				Arguments.of(EntityType.MINECART, RideableMinecartMock.class),
 				Arguments.of(EntityType.MINECART_CHEST, StorageMinecartMock.class),
 				Arguments.of(EntityType.AREA_EFFECT_CLOUD, AreaEffectCloudMock.class),
-				Arguments.of(EntityType.BOAT, BoatMock.class),
-				Arguments.of(EntityType.CHEST_BOAT, ChestBoatMock.class),
+				Arguments.of(EntityType.BOAT, BoatMock.class), Arguments.of(EntityType.CHEST_BOAT, ChestBoatMock.class),
 				Arguments.of(EntityType.ENDER_PEARL, EnderPearlMock.class),
 				Arguments.of(EntityType.FISHING_HOOK, FishHookMock.class),
-				Arguments.of(EntityType.PANDA, PandaMock.class),
-				Arguments.of(EntityType.RABBIT, RabbitMock.class),
-				Arguments.of(EntityType.OCELOT, OcelotMock.class),
-				Arguments.of(EntityType.SLIME, SlimeMock.class),
-				Arguments.of(EntityType.PARROT, ParrotMock.class),
-				Arguments.of(EntityType.SQUID, SquidMock.class),
+				Arguments.of(EntityType.PANDA, PandaMock.class), Arguments.of(EntityType.RABBIT, RabbitMock.class),
+				Arguments.of(EntityType.OCELOT, OcelotMock.class), Arguments.of(EntityType.SLIME, SlimeMock.class),
+				Arguments.of(EntityType.PARROT, ParrotMock.class), Arguments.of(EntityType.SQUID, SquidMock.class),
 				Arguments.of(EntityType.GLOW_SQUID, GlowSquidMock.class),
 				Arguments.of(EntityType.LLAMA_SPIT, LlamaSpitMock.class),
 				Arguments.of(EntityType.DOLPHIN, DolphinMock.class),
@@ -1331,9 +1312,7 @@ class WorldMockTest
 				Arguments.of(EntityType.ZOMBIFIED_PIGLIN, PigZombieMock.class),
 				Arguments.of(EntityType.TRIDENT, Trident.class),
 				Arguments.of(EntityType.SPECTRAL_ARROW, SpectralArrow.class),
-				Arguments.of(EntityType.ARROW, Arrow.class),
-				Arguments.of(EntityType.MARKER, MarkerMock.class)
-		);
+				Arguments.of(EntityType.ARROW, Arrow.class), Arguments.of(EntityType.MARKER, MarkerMock.class));
 	}
 
 	@Test
@@ -1395,15 +1374,13 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		world.setGameRuleValue("announceAdvancements", "false");
 		assertEquals("false", world.getGameRuleValue("announceAdvancements"));
-		server.getPluginManager().assertEventFired(WorldGameRuleChangeEvent.class, worldGameRuleChangeEvent ->
-		{
+		server.getPluginManager().assertEventFired(WorldGameRuleChangeEvent.class, worldGameRuleChangeEvent -> {
 			return worldGameRuleChangeEvent.getGameRule().equals(GameRule.ANNOUNCE_ADVANCEMENTS)
 					&& worldGameRuleChangeEvent.getValue().equals("false");
 		});
 		world.setGameRuleValue("announceAdvancements", "true");
 		assertEquals("true", world.getGameRuleValue("announceAdvancements"));
-		server.getPluginManager().assertEventFired(WorldGameRuleChangeEvent.class, worldGameRuleChangeEvent ->
-		{
+		server.getPluginManager().assertEventFired(WorldGameRuleChangeEvent.class, worldGameRuleChangeEvent -> {
 			return worldGameRuleChangeEvent.getGameRule().equals(GameRule.ANNOUNCE_ADVANCEMENTS)
 					&& worldGameRuleChangeEvent.getValue().equals("true");
 		});
@@ -1431,8 +1408,7 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		world.setGameRuleValue("randomTickSpeed", "10");
 		assertEquals("10", world.getGameRuleValue("randomTickSpeed"));
-		server.getPluginManager().assertEventFired(WorldGameRuleChangeEvent.class, worldGameRuleChangeEvent ->
-		{
+		server.getPluginManager().assertEventFired(WorldGameRuleChangeEvent.class, worldGameRuleChangeEvent -> {
 			return worldGameRuleChangeEvent.getGameRule().equals(GameRule.RANDOM_TICK_SPEED)
 					&& worldGameRuleChangeEvent.getValue().equals("10");
 		});
@@ -1648,8 +1624,7 @@ class WorldMockTest
 	void testSpawnWithConsumer()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
-		Consumer<Zombie> consumer = entity ->
-		{
+		Consumer<Zombie> consumer = entity -> {
 			entity.setCustomName("test");
 		};
 		Entity entity = world.spawn(new Location(world, 0, 0, 0), Zombie.class, consumer);
@@ -1660,8 +1635,7 @@ class WorldMockTest
 	void testSpawnWithConsumerAndRandomizeData()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
-		Consumer<Zombie> consumer = entity ->
-		{
+		Consumer<Zombie> consumer = entity -> {
 			entity.setCustomName("test");
 		};
 		Entity entity = world.spawn(new Location(world, 0, 0, 0), Zombie.class, true, consumer);
@@ -1702,8 +1676,7 @@ class WorldMockTest
 	void testPlayEffectNullLocation()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
-		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
-		{
+		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () -> {
 			world.playEffect(null, Effect.STEP_SOUND, 1);
 		});
 
@@ -1716,8 +1689,7 @@ class WorldMockTest
 
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		Location location = new Location(world, 0, 0, 0);
-		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
-		{
+		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () -> {
 			world.playEffect(location, null, 1);
 		});
 
@@ -1729,8 +1701,7 @@ class WorldMockTest
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		Location location = new Location(null, 0, 0, 0);
-		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
-		{
+		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () -> {
 
 			world.playEffect(location, Effect.STEP_SOUND, 1);
 		});
@@ -1759,11 +1730,9 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		PlayerMock playerMock = server.addPlayer();
 		playerMock.teleport(world.getSpawnLocation());
-		assertDoesNotThrow(() -> world.playSound(new Location(world, 0, 0, 0),
-				Sound.BLOCK_ANVIL_BREAK, 1, 1));
+		assertDoesNotThrow(() -> world.playSound(new Location(world, 0, 0, 0), Sound.BLOCK_ANVIL_BREAK, 1, 1));
 
-		playerMock.assertSoundHeard(Sound.BLOCK_ANVIL_BREAK, (audio) ->
-		{
+		playerMock.assertSoundHeard(Sound.BLOCK_ANVIL_BREAK, (audio) -> {
 			return audio.getVolume() == 1 && audio.getPitch() == 1;
 		});
 
@@ -1775,11 +1744,9 @@ class WorldMockTest
 		WorldMock world = new WorldMock(Material.DIRT, 3);
 		PlayerMock playerMock = server.addPlayer();
 		playerMock.teleport(world.getSpawnLocation());
-		assertDoesNotThrow(() -> world.playSound(new Location(world, 0, 0, 0),
-				"block.anvil.break", 1, 1));
+		assertDoesNotThrow(() -> world.playSound(new Location(world, 0, 0, 0), "block.anvil.break", 1, 1));
 
-		playerMock.assertSoundHeard(Sound.BLOCK_ANVIL_BREAK, (audio) ->
-		{
+		playerMock.assertSoundHeard(Sound.BLOCK_ANVIL_BREAK, (audio) -> {
 			return audio.getVolume() == 1 && audio.getPitch() == 1;
 		});
 	}
@@ -1792,8 +1759,7 @@ class WorldMockTest
 		playerMock.teleport(world.getSpawnLocation());
 		assertDoesNotThrow(() -> world.playSound(playerMock, Sound.BLOCK_ANVIL_BREAK, 1, 1));
 
-		playerMock.assertSoundHeard(Sound.BLOCK_ANVIL_BREAK, (audio) ->
-		{
+		playerMock.assertSoundHeard(Sound.BLOCK_ANVIL_BREAK, (audio) -> {
 			return audio.getVolume() == 1 && audio.getPitch() == 1;
 		});
 	}
@@ -1805,8 +1771,7 @@ class WorldMockTest
 		PlayerMock playerMock = server.addPlayer();
 		playerMock.teleport(world.getSpawnLocation());
 		assertDoesNotThrow(() -> world.playSound((Entity) null, Sound.BLOCK_ANVIL_BREAK, 1, 1));
-		assertThrows(AssertionFailedError.class, () -> playerMock.assertSoundHeard(Sound.BLOCK_ANVIL_BREAK, (audio) ->
-		{
+		assertThrows(AssertionFailedError.class, () -> playerMock.assertSoundHeard(Sound.BLOCK_ANVIL_BREAK, (audio) -> {
 			return audio.getVolume() == 1 && audio.getPitch() == 1;
 		}));
 	}
@@ -1819,8 +1784,7 @@ class WorldMockTest
 		PlayerMock playerMock = server.addPlayer();
 		playerMock.teleport(world.getSpawnLocation());
 		assertDoesNotThrow(() -> world2.playSound(playerMock, Sound.BLOCK_ANVIL_BREAK, 1, 1));
-		assertThrows(AssertionFailedError.class, () -> playerMock.assertSoundHeard(Sound.BLOCK_ANVIL_BREAK, (audio) ->
-		{
+		assertThrows(AssertionFailedError.class, () -> playerMock.assertSoundHeard(Sound.BLOCK_ANVIL_BREAK, (audio) -> {
 			return audio.getVolume() == 1 && audio.getPitch() == 1 && audio.getLocation().getWorld() == world2;
 		}));
 	}
@@ -1832,8 +1796,7 @@ class WorldMockTest
 		PlayerMock playerMock = server.addPlayer();
 		playerMock.teleport(world.getSpawnLocation());
 		assertDoesNotThrow(() -> world.playSound(playerMock, (Sound) null, 1, 1));
-		assertThrows(AssertionFailedError.class, () -> playerMock.assertSoundHeard(Sound.BLOCK_ANVIL_BREAK, (audio) ->
-		{
+		assertThrows(AssertionFailedError.class, () -> playerMock.assertSoundHeard(Sound.BLOCK_ANVIL_BREAK, (audio) -> {
 			return audio.getVolume() == 1 && audio.getPitch() == 1;
 		}));
 	}
@@ -1845,8 +1808,7 @@ class WorldMockTest
 		PlayerMock playerMock = server.addPlayer();
 		playerMock.teleport(world.getSpawnLocation());
 		assertDoesNotThrow(() -> world.playSound(playerMock, Sound.ITEM_GOAT_HORN_SOUND_0, null, 1, 1));
-		assertThrows(AssertionFailedError.class, () -> playerMock.assertSoundHeard(Sound.BLOCK_ANVIL_BREAK, (audio) ->
-		{
+		assertThrows(AssertionFailedError.class, () -> playerMock.assertSoundHeard(Sound.BLOCK_ANVIL_BREAK, (audio) -> {
 			return audio.getVolume() == 1 && audio.getPitch() == 1;
 		}));
 	}
@@ -1904,7 +1866,7 @@ class WorldMockTest
 	void testGetKeepSpawnInMemoryDefault()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
-        assertTrue(world.getKeepSpawnInMemory());
+		assertTrue(world.getKeepSpawnInMemory());
 	}
 
 	@Test
@@ -1925,14 +1887,9 @@ class WorldMockTest
 
 	public static Stream<Arguments> getTicksPerSpawnCategory()
 	{
-		return Stream.of(
-				Arguments.of(SpawnCategory.MONSTER, 1),
-				Arguments.of(SpawnCategory.ANIMAL, 400),
-				Arguments.of(SpawnCategory.WATER_AMBIENT, 1),
-				Arguments.of(SpawnCategory.WATER_ANIMAL, 1),
-				Arguments.of(SpawnCategory.AMBIENT, 1),
-				Arguments.of(SpawnCategory.WATER_UNDERGROUND_CREATURE, 1)
-		);
+		return Stream.of(Arguments.of(SpawnCategory.MONSTER, 1), Arguments.of(SpawnCategory.ANIMAL, 400),
+				Arguments.of(SpawnCategory.WATER_AMBIENT, 1), Arguments.of(SpawnCategory.WATER_ANIMAL, 1),
+				Arguments.of(SpawnCategory.AMBIENT, 1), Arguments.of(SpawnCategory.WATER_UNDERGROUND_CREATURE, 1));
 	}
 
 	@Test
@@ -2071,13 +2028,9 @@ class WorldMockTest
 
 	public static Stream<Arguments> getSpawnLimits()
 	{
-		return Stream.of(
-				Arguments.of(SpawnCategory.MONSTER, 70),
-				Arguments.of(SpawnCategory.WATER_ANIMAL, 5),
-				Arguments.of(SpawnCategory.ANIMAL, 10),
-				Arguments.of(SpawnCategory.WATER_AMBIENT, 20),
-				Arguments.of(SpawnCategory.WATER_UNDERGROUND_CREATURE, 5),
-				Arguments.of(SpawnCategory.AMBIENT, 15));
+		return Stream.of(Arguments.of(SpawnCategory.MONSTER, 70), Arguments.of(SpawnCategory.WATER_ANIMAL, 5),
+				Arguments.of(SpawnCategory.ANIMAL, 10), Arguments.of(SpawnCategory.WATER_AMBIENT, 20),
+				Arguments.of(SpawnCategory.WATER_UNDERGROUND_CREATURE, 5), Arguments.of(SpawnCategory.AMBIENT, 15));
 	}
 
 	@Test
@@ -2276,7 +2229,7 @@ class WorldMockTest
 		assertTrue(world.isFixedTime());
 	}
 
-  @Test
+	@Test
 	void testGetEntity()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);

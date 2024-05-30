@@ -69,7 +69,8 @@ class AmethystClusterMockTest
 	@Test
 	void getFaces()
 	{
-		Set<BlockFace> validFaces = Set.of(BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST, BlockFace.UP, BlockFace.DOWN);
+		Set<BlockFace> validFaces = Set.of(BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST,
+				BlockFace.UP, BlockFace.DOWN);
 		assertEquals(validFaces, cluster.getFaces());
 	}
 

@@ -117,9 +117,11 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 
 		attributes = new EnumMap<>(Attribute.class);
 		double maxHealth = AttributesMock.getDefaultValue(Attribute.GENERIC_MAX_HEALTH);
-		attributes.put(Attribute.GENERIC_MAX_HEALTH, new AttributeInstanceMock(Attribute.GENERIC_MAX_HEALTH, maxHealth));
+		attributes.put(Attribute.GENERIC_MAX_HEALTH,
+				new AttributeInstanceMock(Attribute.GENERIC_MAX_HEALTH, maxHealth));
 		double movementSpeed = AttributesMock.getDefaultValue(Attribute.GENERIC_MOVEMENT_SPEED);
-		attributes.put(Attribute.GENERIC_MOVEMENT_SPEED, new AttributeInstanceMock(Attribute.GENERIC_MOVEMENT_SPEED, movementSpeed));
+		attributes.put(Attribute.GENERIC_MOVEMENT_SPEED,
+				new AttributeInstanceMock(Attribute.GENERIC_MOVEMENT_SPEED, movementSpeed));
 		resetMaxHealth();
 		setHealth(maxHealth);
 	}
@@ -252,7 +254,8 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		EntityDamageEvent event;
 		if (source.getDirectEntity() != null)
 		{
-			event = new EntityDamageByEntityEvent(source.getDirectEntity(), this, EntityDamageEvent.DamageCause.ENTITY_ATTACK, source, amount);
+			event = new EntityDamageByEntityEvent(source.getDirectEntity(), this,
+					EntityDamageEvent.DamageCause.ENTITY_ATTACK, source, amount);
 		}
 		else
 		{
@@ -318,7 +321,8 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
-	public <T extends Projectile> @NotNull T launchProjectile(@NotNull Class<? extends T> projectile, @Nullable Vector velocity)
+	public <T extends Projectile> @NotNull T launchProjectile(@NotNull Class<? extends T> projectile,
+			@Nullable Vector velocity)
 	{
 		Preconditions.checkNotNull(projectile, "Projectile cannot be null");
 		T entity = launchProjectile(projectile);
@@ -384,7 +388,6 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
 
 	@Override
 	public void setActiveItemRemainingTime(@Range(from = 0L, to = 2147483647L) int ticks)
@@ -767,7 +770,6 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		}
 		return this.leashHolder;
 	}
-
 
 	@Override
 	public boolean setLeashHolder(Entity holder)
@@ -1172,7 +1174,8 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	}
 
 	@Override
-	public <T extends Projectile> @NotNull T launchProjectile(@NotNull Class<? extends T> projectile, @Nullable Vector velocity, @Nullable Consumer<? super T> function)
+	public <T extends Projectile> @NotNull T launchProjectile(@NotNull Class<? extends T> projectile,
+			@Nullable Vector velocity, @Nullable Consumer<? super T> function)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -1281,6 +1284,5 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
 
 }

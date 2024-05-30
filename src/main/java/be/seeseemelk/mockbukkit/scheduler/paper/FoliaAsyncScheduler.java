@@ -36,7 +36,8 @@ public class FoliaAsyncScheduler implements AsyncScheduler
 	}
 
 	@Override
-	public @NotNull ScheduledTask runDelayed(@NotNull Plugin plugin, @NotNull Consumer<ScheduledTask> task, long delay, @NotNull TimeUnit unit)
+	public @NotNull ScheduledTask runDelayed(@NotNull Plugin plugin, @NotNull Consumer<ScheduledTask> task, long delay,
+			@NotNull TimeUnit unit)
 	{
 		Preconditions.checkNotNull(plugin, PLUGIN_CANNOT_BE_NULL);
 		Preconditions.checkNotNull(task, TASK_CANNOT_BE_NULL);
@@ -47,13 +48,15 @@ public class FoliaAsyncScheduler implements AsyncScheduler
 	}
 
 	@Override
-	public @NotNull ScheduledTask runAtFixedRate(@NotNull Plugin plugin, @NotNull Consumer<ScheduledTask> task, long initialDelay, long period, @NotNull TimeUnit unit)
+	public @NotNull ScheduledTask runAtFixedRate(@NotNull Plugin plugin, @NotNull Consumer<ScheduledTask> task,
+			long initialDelay, long period, @NotNull TimeUnit unit)
 	{
 		Preconditions.checkNotNull(plugin, PLUGIN_CANNOT_BE_NULL);
 		Preconditions.checkNotNull(task, TASK_CANNOT_BE_NULL);
 		Preconditions.checkNotNull(unit, UNIT_CANNOT_BE_NULL);
 		PaperScheduledTask scheduledTask = new PaperScheduledTask(plugin, task);
-		scheduler.runTaskTimerAsynchronously(plugin, scheduledTask::run, toTicks(initialDelay, unit), toTicks(period, unit));
+		scheduler.runTaskTimerAsynchronously(plugin, scheduledTask::run, toTicks(initialDelay, unit),
+				toTicks(period, unit));
 		return scheduledTask;
 	}
 

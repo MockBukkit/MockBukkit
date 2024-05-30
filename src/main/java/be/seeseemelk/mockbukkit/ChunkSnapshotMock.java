@@ -36,7 +36,8 @@ public class ChunkSnapshotMock implements ChunkSnapshot
 	 * @param blockData A map of all {@link BlockData} in this chunk.
 	 * @param biomes    A map of all {@link Biome}s in this chunk.
 	 */
-	ChunkSnapshotMock(int x, int z, int minY, int maxY, String worldName, long worldTime, Map<Coordinate, BlockData> blockData, Map<Coordinate, Biome> biomes)
+	ChunkSnapshotMock(int x, int z, int minY, int maxY, String worldName, long worldTime,
+			Map<Coordinate, BlockData> blockData, Map<Coordinate, Biome> biomes)
 	{
 		this.x = x;
 		this.z = z;
@@ -124,7 +125,8 @@ public class ChunkSnapshotMock implements ChunkSnapshot
 	@Override
 	public Biome getBiome(int x, int y, int z)
 	{
-		Preconditions.checkState(this.biomes != null && !this.biomes.isEmpty(), "ChunkSnapshot created without biome. Please call getSnapshot with includeBiome=true");
+		Preconditions.checkState(this.biomes != null && !this.biomes.isEmpty(),
+				"ChunkSnapshot created without biome. Please call getSnapshot with includeBiome=true");
 		validateChunkCoordinates(x, y, z);
 		return this.biomes.get(new Coordinate(z, y, z));
 	}
@@ -153,8 +155,10 @@ public class ChunkSnapshotMock implements ChunkSnapshot
 	{
 		int totalSections = (int) Math.ceil(Math.abs((minY - maxY)) / 16.0);
 		if (sy < 0 || sy >= totalSections)
-		{   // Bukkit just gets the value from an array, so if it's invalid it'll throw this.
-			throw new ArrayIndexOutOfBoundsException("Index %d out of bounds for length %d".formatted(sy, totalSections));
+		{ // Bukkit just gets the value from an array, so if it's invalid it'll throw
+			// this.
+			throw new ArrayIndexOutOfBoundsException(
+					"Index %d out of bounds for length %d".formatted(sy, totalSections));
 		}
 
 		for (int blockY = minY + (sy << 4); blockY < (minY + (sy << 4)) + 16; blockY++)

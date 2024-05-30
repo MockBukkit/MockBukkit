@@ -133,11 +133,8 @@ class ScoreboardMockTest
 	@Test
 	void getTeams()
 	{
-		Set<Team> excepted = Set.of(
-				this.scoreboard.registerNewTeam("red"),
-				this.scoreboard.registerNewTeam("green"),
-				this.scoreboard.registerNewTeam("yellow")
-		);
+		Set<Team> excepted = Set.of(this.scoreboard.registerNewTeam("red"), this.scoreboard.registerNewTeam("green"),
+				this.scoreboard.registerNewTeam("yellow"));
 		assertEquals(excepted, this.scoreboard.getTeams());
 	}
 

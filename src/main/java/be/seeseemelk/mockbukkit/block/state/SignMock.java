@@ -166,9 +166,9 @@ public class SignMock extends TileStateMock implements Sign
 	{
 		return switch (side)
 		{
-			case FRONT -> front;
-			case BACK -> back;
-        };
+		case FRONT -> front;
+		case BACK -> back;
+		};
 	}
 
 	@Override
@@ -198,18 +198,21 @@ public class SignMock extends TileStateMock implements Sign
 		return new SignMock(this);
 	}
 
-	private static class SignSideMock implements SignSide {
+	private static class SignSideMock implements SignSide
+	{
 
 		private final Component[] lines;
 		private boolean glowing = false;
 		private DyeColor color = DyeColor.BLACK;
 
-		private SignSideMock() {
+		private SignSideMock()
+		{
 			this.lines = new Component[4];
 			Arrays.fill(lines, Component.empty());
 		}
 
-		private SignSideMock(SignSide signSide) {
+		private SignSideMock(SignSide signSide)
+		{
 			this.lines = signSide.lines().toArray(new Component[0]);
 			this.glowing = signSide.isGlowingText();
 			this.color = signSide.getColor();
@@ -241,8 +244,7 @@ public class SignMock extends TileStateMock implements Sign
 		@Override
 		public @NotNull String[] getLines()
 		{
-			return Arrays.stream(lines)
-					.map(LegacyComponentSerializer.legacySection()::serialize)
+			return Arrays.stream(lines).map(LegacyComponentSerializer.legacySection()::serialize)
 					.toArray(String[]::new);
 		}
 
@@ -254,16 +256,21 @@ public class SignMock extends TileStateMock implements Sign
 			return LegacyComponentSerializer.legacySection().serialize(lines[index]);
 		}
 
-		// Please note: NullableProblems is suppressed because the method signature requires a non-null String but
+		// Please note: NullableProblems is suppressed because the method signature
+		// requires a non-null String but
 		// the implementation allows null values to be set.
 		@Override
-		public void setLine(int index, @SuppressWarnings("NullableProblems") String line) throws IndexOutOfBoundsException
+		public void setLine(int index, @SuppressWarnings("NullableProblems") String line)
+				throws IndexOutOfBoundsException
 		{
 			if (index < 0 || index >= lines.length)
 				throw new IndexOutOfBoundsException("Index out of bounds: " + index);
-			if (line == null) {
+			if (line == null)
+			{
 				lines[index] = Component.empty();
-			} else {
+			}
+			else
+			{
 				lines[index] = LegacyComponentSerializer.legacySection().deserialize(line);
 			}
 		}

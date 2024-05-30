@@ -53,7 +53,7 @@ public class WardenMock extends MonsterMock implements Warden
 	@Override
 	public int getHighestAnger()
 	{
-		//TODO: Auto-generated method stub
+		// TODO: Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 

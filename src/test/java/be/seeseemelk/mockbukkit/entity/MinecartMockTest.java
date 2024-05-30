@@ -52,7 +52,8 @@ class MinecartMockTest
 		assertEquals(0, minecart.getDamage());
 		assertEquals(0.4, minecart.getMaxSpeed());
 		assertTrue(minecart.isSlowWhenEmpty());
-		assertEquals(new Vector(0.949999988079071, 0.949999988079071, 0.949999988079071), minecart.getFlyingVelocityMod());
+		assertEquals(new Vector(0.949999988079071, 0.949999988079071, 0.949999988079071),
+				minecart.getFlyingVelocityMod());
 		assertEquals(new Vector(0.5, 0.5, 0.5), minecart.getDerailedVelocityMod());
 		assertNull(minecart.getDisplayBlockData());
 		assertEquals(0, minecart.getDisplayBlockOffset());
@@ -119,8 +120,10 @@ class MinecartMockTest
 	{
 		MobMock mock = new SimpleMobMock(server); // A LivingEntity is needed here
 		assertTrue(minecart.addPassenger(mock));
-		server.getPluginManager().assertEventFired(VehicleEnterEvent.class, event -> event.getVehicle() == minecart && event.getEntered() == mock);
-		server.getPluginManager().assertEventFired(EntityMountEvent.class, event -> event.getMount() == minecart && event.getEntity() == mock);
+		server.getPluginManager().assertEventFired(VehicleEnterEvent.class,
+				event -> event.getVehicle() == minecart && event.getEntered() == mock);
+		server.getPluginManager().assertEventFired(EntityMountEvent.class,
+				event -> event.getMount() == minecart && event.getEntity() == mock);
 	}
 
 	@Test

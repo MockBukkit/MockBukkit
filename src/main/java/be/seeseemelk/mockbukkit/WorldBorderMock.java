@@ -90,8 +90,10 @@ public class WorldBorderMock implements WorldBorder
 		newSize = Math.min(MAX_BORDER_SIZE, Math.max(MIN_BORDER_SIZE, newSize));
 		seconds = Math.min(MAX_MOVEMENT_TIME, Math.max(0L, seconds));
 
-		WorldBorderBoundsChangeEvent.Type moveType = seconds <= 0 ? WorldBorderBoundsChangeEvent.Type.INSTANT_MOVE : WorldBorderBoundsChangeEvent.Type.STARTED_MOVE;
-		WorldBorderBoundsChangeEvent event = new WorldBorderBoundsChangeEvent(this.world, this, moveType, this.size, newSize, seconds * 1000L);
+		WorldBorderBoundsChangeEvent.Type moveType = seconds <= 0 ? WorldBorderBoundsChangeEvent.Type.INSTANT_MOVE
+				: WorldBorderBoundsChangeEvent.Type.STARTED_MOVE;
+		WorldBorderBoundsChangeEvent event = new WorldBorderBoundsChangeEvent(this.world, this, moveType, this.size,
+				newSize, seconds * 1000L);
 		if (!event.callEvent())
 			return;
 
@@ -111,7 +113,7 @@ public class WorldBorderMock implements WorldBorder
 	@Override
 	public void setSize(double newSize, @NotNull TimeUnit unit, long time)
 	{
-		//TODO: Auto-generated method stub
+		// TODO: Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
@@ -119,7 +121,8 @@ public class WorldBorderMock implements WorldBorder
 	{
 		double distancePerTick = distance / ((millis / 1000) * 20);
 		final double oldSize = this.size;
-		WorldBorderMock thisBorder = this; // We can't use 'this' in the anonymous class below, so we need to store it in a variable.
+		WorldBorderMock thisBorder = this; // We can't use 'this' in the anonymous class below, so we need to store it
+											// in a variable.
 		new BukkitRunnable()
 		{
 			@Override
@@ -159,7 +162,8 @@ public class WorldBorderMock implements WorldBorder
 		x = Math.min(MAX_CENTER_VALUE, Math.max(-MAX_CENTER_VALUE, x));
 		z = Math.min(MAX_CENTER_VALUE, Math.max(-MAX_CENTER_VALUE, z));
 
-		WorldBorderCenterChangeEvent event = new WorldBorderCenterChangeEvent(this.world, this, new Location(this.world, this.centerX, 0, this.centerZ), new Location(this.world, x, 0, z));
+		WorldBorderCenterChangeEvent event = new WorldBorderCenterChangeEvent(this.world, this,
+				new Location(this.world, this.centerX, 0, this.centerZ), new Location(this.world, x, 0, z));
 		if (!event.callEvent())
 			return;
 
@@ -220,8 +224,8 @@ public class WorldBorderMock implements WorldBorder
 	{
 		Preconditions.checkNotNull(location, "Location cannot be null");
 
-		BoundingBox worldBorderBoundingBox = new BoundingBox(this.centerX - this.size, Double.MAX_VALUE, this.centerZ - this.size,
-				this.centerX + this.size, Double.MAX_VALUE * -1, this.centerZ + size);
+		BoundingBox worldBorderBoundingBox = new BoundingBox(this.centerX - this.size, Double.MAX_VALUE,
+				this.centerZ - this.size, this.centerX + this.size, Double.MAX_VALUE * -1, this.centerZ + size);
 
 		return worldBorderBoundingBox.contains(location.toVector()) && location.getWorld() == this.world;
 	}
@@ -229,14 +233,14 @@ public class WorldBorderMock implements WorldBorder
 	@Override
 	public double getMaxSize()
 	{
-		//TODO: Auto-generated method stub
+		// TODO: Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public double getMaxCenterCoordinate()
 	{
-		//TODO: Auto-generated method stub
+		// TODO: Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 

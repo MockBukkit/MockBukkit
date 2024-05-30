@@ -90,18 +90,18 @@ class InventoryViewMockTest
 		assertEquals(InventoryType.CREATIVE, view.getType());
 	}
 
-    @Test
-    void getOriginalTitle()
+	@Test
+	void getOriginalTitle()
 	{
 		view.setTitle("Test");
 		view.setTitle("Foobar");
 		assertEquals("Inventory", view.getOriginalTitle());
-    }
+	}
 
-    @Test
-    void setTitle()
+	@Test
+	void setTitle()
 	{
 		view.setTitle("Test");
 		assertEquals("Test", view.getTitle());
-    }
+	}
 }

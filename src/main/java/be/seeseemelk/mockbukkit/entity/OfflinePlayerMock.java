@@ -138,26 +138,32 @@ public class OfflinePlayerMock implements OfflinePlayer
 
 	@Override
 	@SuppressWarnings("unchecked") // Paper does it too ¯\_(ツ)_/¯
-	public @Nullable BanEntry<PlayerProfile> ban(@Nullable String reason, @Nullable Date expires, @Nullable String source)
+	public @Nullable BanEntry<PlayerProfile> ban(@Nullable String reason, @Nullable Date expires,
+			@Nullable String source)
 	{
 		MockBukkit.ensureMocking();
-		return ((ProfileBanList) Bukkit.getBanList(BanList.Type.PROFILE)).addBan(this.getPlayerProfile(), reason, expires, source);
+		return ((ProfileBanList) Bukkit.getBanList(BanList.Type.PROFILE)).addBan(this.getPlayerProfile(), reason,
+				expires, source);
 	}
 
 	@Override
 	@SuppressWarnings("unchecked") // Paper does it too ¯\_(ツ)_/¯
-	public @Nullable BanEntry<PlayerProfile> ban(@Nullable String reason, @Nullable Instant expires, @Nullable String source)
+	public @Nullable BanEntry<PlayerProfile> ban(@Nullable String reason, @Nullable Instant expires,
+			@Nullable String source)
 	{
 		MockBukkit.ensureMocking();
-		return ((ProfileBanList) Bukkit.getBanList(BanList.Type.PROFILE)).addBan(this.getPlayerProfile(), reason, expires, source);
+		return ((ProfileBanList) Bukkit.getBanList(BanList.Type.PROFILE)).addBan(this.getPlayerProfile(), reason,
+				expires, source);
 	}
 
 	@Override
 	@SuppressWarnings("unchecked") // Paper does it too ¯\_(ツ)_/¯
-	public @Nullable BanEntry<PlayerProfile> ban(@Nullable String reason, @Nullable Duration duration, @Nullable String source)
+	public @Nullable BanEntry<PlayerProfile> ban(@Nullable String reason, @Nullable Duration duration,
+			@Nullable String source)
 	{
 		MockBukkit.ensureMocking();
-		return ((ProfileBanList) Bukkit.getBanList(BanList.Type.PROFILE)).addBan(this.getPlayerProfile(), reason, duration, source);
+		return ((ProfileBanList) Bukkit.getBanList(BanList.Type.PROFILE)).addBan(this.getPlayerProfile(), reason,
+				duration, source);
 	}
 
 	@Override

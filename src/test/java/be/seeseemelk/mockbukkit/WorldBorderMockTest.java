@@ -119,7 +119,8 @@ class WorldBorderMockTest
 	{
 		worldBorderMock.setSize(100);
 
-		server.getPluginManager().assertEventFired(WorldBorderBoundsChangeEvent.class, (e) -> e.getType() == WorldBorderBoundsChangeEvent.Type.INSTANT_MOVE && e.getNewSize() == 100);
+		server.getPluginManager().assertEventFired(WorldBorderBoundsChangeEvent.class,
+				(e) -> e.getType() == WorldBorderBoundsChangeEvent.Type.INSTANT_MOVE && e.getNewSize() == 100);
 	}
 
 	@Test
@@ -127,7 +128,9 @@ class WorldBorderMockTest
 	{
 		worldBorderMock.setSize(100, 5);
 
-		server.getPluginManager().assertEventFired(WorldBorderBoundsChangeEvent.class, (e) -> e.getType() == WorldBorderBoundsChangeEvent.Type.STARTED_MOVE && e.getNewSize() == 100 && e.getDuration() == 5000);
+		server.getPluginManager().assertEventFired(WorldBorderBoundsChangeEvent.class,
+				(e) -> e.getType() == WorldBorderBoundsChangeEvent.Type.STARTED_MOVE && e.getNewSize() == 100
+						&& e.getDuration() == 5000);
 	}
 
 	@Test
@@ -204,7 +207,8 @@ class WorldBorderMockTest
 	{
 		worldBorderMock.setCenter(10, 12);
 
-		server.getPluginManager().assertEventFired(WorldBorderCenterChangeEvent.class, (e) -> e.getNewCenter().getX() == 10 && e.getNewCenter().getZ() == 12);
+		server.getPluginManager().assertEventFired(WorldBorderCenterChangeEvent.class,
+				(e) -> e.getNewCenter().getX() == 10 && e.getNewCenter().getZ() == 12);
 	}
 
 	@Test
@@ -260,8 +264,7 @@ class WorldBorderMockTest
 	@Test
 	void isInside_Null_ExceptionThrown()
 	{
-		assertThrows(NullPointerException.class, () ->
-		{
+		assertThrows(NullPointerException.class, () -> {
 			worldBorderMock.isInside(null);
 		});
 	}

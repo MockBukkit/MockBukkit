@@ -13,7 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-
 class ScoreMockTest
 {
 
@@ -59,8 +58,7 @@ class ScoreMockTest
 	void getScore_ObjectiveUnregistered_ThrowsError()
 	{
 		objective.unregister();
-		assertThrows(IllegalStateException.class, () ->
-		{
+		assertThrows(IllegalStateException.class, () -> {
 			score.getScore();
 		});
 	}

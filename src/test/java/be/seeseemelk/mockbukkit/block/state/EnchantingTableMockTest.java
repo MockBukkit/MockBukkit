@@ -48,7 +48,8 @@ class EnchantingTableMockTest
 	@Test
 	void constructor_Block_WrongType_ThrowsException()
 	{
-		assertThrowsExactly(IllegalArgumentException.class, () -> new EnchantingTableMock(new BlockMock(Material.BEDROCK)));
+		assertThrowsExactly(IllegalArgumentException.class,
+				() -> new EnchantingTableMock(new BlockMock(Material.BEDROCK)));
 	}
 
 	@Test

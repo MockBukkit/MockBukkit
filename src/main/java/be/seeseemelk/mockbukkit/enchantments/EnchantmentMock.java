@@ -62,9 +62,8 @@ public class EnchantmentMock extends Enchantment
 	 * @param conflicts       Namespaced-keys of enchantments that are conflicting with this enchantment
 	 */
 	public EnchantmentMock(NamespacedKey key, EnchantmentTarget target, boolean treasure, boolean cursed, int maxLevel,
-						   int startLevel, String name, Component[] displayNames, int[] minModifiedCost,
-						   int[] maxModifiedCost, boolean tradeable, boolean discoverable, EnchantmentRarity rarity,
-						   Set<NamespacedKey> conflicts)
+			int startLevel, String name, Component[] displayNames, int[] minModifiedCost, int[] maxModifiedCost,
+			boolean tradeable, boolean discoverable, EnchantmentRarity rarity, Set<NamespacedKey> conflicts)
 	{
 		this.key = key;
 		this.itemTarget = target;
@@ -290,8 +289,8 @@ public class EnchantmentMock extends Enchantment
 		List<String> expectedArguments = List.of("key", "itemTarget", "treasure", "cursed", "maxLevel", "startLevel",
 				"name", "displayNames", "minModifiedCosts", "maxModifiedCosts", "tradeable", "discoverable", "rarity",
 				"conflicts");
-		expectedArguments.forEach(expectedKey ->
-				Preconditions.checkArgument(data.has(expectedKey), "Missing json key: " + expectedKey));
+		expectedArguments.forEach(
+				expectedKey -> Preconditions.checkArgument(data.has(expectedKey), "Missing json key: " + expectedKey));
 
 		NamespacedKey key = NamespacedKey.fromString(data.get("key").getAsString());
 		EnchantmentTarget itemTarget = EnchantmentTarget.valueOf(data.get("itemTarget").getAsString());
@@ -308,8 +307,8 @@ public class EnchantmentMock extends Enchantment
 		String rarityString = data.get("rarity").getAsString();
 		EnchantmentRarity rarity = EnchantmentRarity.valueOf(rarityString);
 		Set<NamespacedKey> conflicts = getConflicts(data.get("conflicts").getAsJsonArray());
-		return new EnchantmentMock(key, itemTarget, treasure, cursed, maxLevel, startLevel, name, displayNames, minModifiedCosts,
-				maxModifiedCosts, tradeable, discoverable, rarity, conflicts);
+		return new EnchantmentMock(key, itemTarget, treasure, cursed, maxLevel, startLevel, name, displayNames,
+				minModifiedCosts, maxModifiedCosts, tradeable, discoverable, rarity, conflicts);
 	}
 
 	private static Set<NamespacedKey> getConflicts(JsonArray conflicts)

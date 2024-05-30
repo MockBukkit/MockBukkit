@@ -152,8 +152,7 @@ class AreaEffectCloudMockTest
 	@Test
 	void testSetParticleNull()
 	{
-		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
-		{
+		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () -> {
 			areaEffectCloud.setParticle(null);
 		});
 
@@ -190,9 +189,7 @@ class AreaEffectCloudMockTest
 	@Test
 	void testAddCustomEffect()
 	{
-		assertTrue(areaEffectCloud.addCustomEffect(
-				new PotionEffect(PotionEffectType.ABSORPTION, 1, 1),
-				true));
+		assertTrue(areaEffectCloud.addCustomEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1, 1), true));
 		assertEquals(1, areaEffectCloud.getCustomEffects().size());
 	}
 
@@ -304,8 +301,7 @@ class AreaEffectCloudMockTest
 	@Test
 	void testSetColorNullThrows()
 	{
-		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
-		{
+		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () -> {
 			areaEffectCloud.setColor(null);
 		});
 

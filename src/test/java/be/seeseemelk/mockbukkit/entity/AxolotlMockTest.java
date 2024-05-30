@@ -129,5 +129,4 @@ class AxolotlMockTest
 		assertThrows(NullPointerException.class, () -> axolotl.isBreedItem((Material) null));
 	}
 
-
 }

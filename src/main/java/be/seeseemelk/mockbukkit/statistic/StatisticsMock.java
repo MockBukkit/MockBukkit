@@ -46,7 +46,8 @@ public class StatisticsMock
 	public void setStatistic(@NotNull Statistic statistic, @NotNull Material material, int value)
 	{
 		checkGreaterThanEqualTo0(value);
-		Preconditions.checkArgument(statistic.getType() == Type.ITEM || statistic.getType() == Type.BLOCK, "statistic must take a material parameter");
+		Preconditions.checkArgument(statistic.getType() == Type.ITEM || statistic.getType() == Type.BLOCK,
+				"statistic must take a material parameter");
 		materialStatistics.computeIfAbsent(statistic, k -> new EnumMap<>(Material.class)).put(material, value);
 	}
 
@@ -171,7 +172,8 @@ public class StatisticsMock
 	 */
 	public int getStatistic(@NotNull Statistic statistic, @NotNull Material material)
 	{
-		Preconditions.checkArgument(statistic.getType() == Type.ITEM || statistic.getType() == Type.BLOCK, "statistic must take a material parameter");
+		Preconditions.checkArgument(statistic.getType() == Type.ITEM || statistic.getType() == Type.BLOCK,
+				"statistic must take a material parameter");
 		Map<Material, Integer> map = materialStatistics.get(statistic);
 		if (map == null)
 		{

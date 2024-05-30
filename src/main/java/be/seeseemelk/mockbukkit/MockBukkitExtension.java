@@ -90,17 +90,16 @@ public class MockBukkitExtension implements BeforeEachCallback, AfterEachCallbac
 		injectServerMockIntoFields(context, serverMock);
 	}
 
-	private void injectServerMockIntoFields(ExtensionContext context, ServerMock serverMock) throws IllegalAccessException
+	private void injectServerMockIntoFields(ExtensionContext context, ServerMock serverMock)
+			throws IllegalAccessException
 	{
 		final Optional<Class<?>> classOptional = context.getTestClass();
 		if (classOptional.isEmpty())
 			return;
 
-		final List<Field> serverMockFields = FieldUtils.getAllFieldsList(classOptional.get())
-				.stream()
+		final List<Field> serverMockFields = FieldUtils.getAllFieldsList(classOptional.get()).stream()
 				.filter(field -> field.getType() == ServerMock.class)
-				.filter(field -> field.getAnnotation(MockBukkitInject.class) != null)
-				.toList();
+				.filter(field -> field.getAnnotation(MockBukkitInject.class) != null).toList();
 
 		final Optional<Object> optionalTestInstance = context.getTestInstance();
 		if (optionalTestInstance.isEmpty())
@@ -121,7 +120,8 @@ public class MockBukkitExtension implements BeforeEachCallback, AfterEachCallbac
 	}
 
 	@Override
-	public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException
+	public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext)
+			throws ParameterResolutionException
 	{
 		final boolean paramIsCorrectType = parameterContext.getParameter().getType() == ServerMock.class;
 		final boolean paramHasCorrectAnnotation = parameterContext.isAnnotated(MockBukkitInject.class);
@@ -129,7 +129,8 @@ public class MockBukkitExtension implements BeforeEachCallback, AfterEachCallbac
 	}
 
 	@Override
-	public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException
+	public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext)
+			throws ParameterResolutionException
 	{
 		if (!supportsParameter(parameterContext, extensionContext))
 			return null;

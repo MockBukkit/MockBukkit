@@ -84,7 +84,8 @@ class BedMockTest
 	@Test
 	void setColor_ThrowsException()
 	{
-		assertThrowsExactly(UnsupportedOperationException.class, () -> new BedMock(Material.RED_BED).setColor(DyeColor.BLACK));
+		assertThrowsExactly(UnsupportedOperationException.class,
+				() -> new BedMock(Material.RED_BED).setColor(DyeColor.BLACK));
 	}
 
 	@Test

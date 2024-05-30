@@ -166,8 +166,7 @@ public class MapViewMock implements MapView
 				renderer.render(this, canvas, player);
 			}
 			catch (Throwable ignored)
-			{
-			}
+			{}
 		}
 	}
 

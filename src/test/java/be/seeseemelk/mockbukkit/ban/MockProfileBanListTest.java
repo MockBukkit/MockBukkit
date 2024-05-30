@@ -37,27 +37,18 @@ class MockProfileBanListTest
 	void testGetBanEntries()
 	{
 		assertEquals(0, banList.getBanEntries().size());
-		PlayerProfileMock profileMock = new PlayerProfileMock(
-				"TestPlayer", UUID.randomUUID());
-		banList.addBan(profileMock,
-				"TestReason",
-				(Date) null,
-				null);
+		PlayerProfileMock profileMock = new PlayerProfileMock("TestPlayer", UUID.randomUUID());
+		banList.addBan(profileMock, "TestReason", (Date) null, null);
 
 		assertEquals(1, banList.getBanEntries().size());
-		assertTrue(banList.getBanEntries().stream().anyMatch(
-				banEntry -> banEntry.getBanTarget().equals(profileMock)));
+		assertTrue(banList.getBanEntries().stream().anyMatch(banEntry -> banEntry.getBanTarget().equals(profileMock)));
 	}
 
 	@Test
 	void testGetBanEntry()
 	{
-		PlayerProfileMock profileMock = new PlayerProfileMock(
-				"TestPlayer", UUID.randomUUID());
-		banList.addBan(profileMock,
-				"TestReason",
-				(Date) null,
-				null);
+		PlayerProfileMock profileMock = new PlayerProfileMock("TestPlayer", UUID.randomUUID());
+		banList.addBan(profileMock, "TestReason", (Date) null, null);
 
 		assertEquals("TestReason", banList.getBanEntry(profileMock).getReason());
 	}
@@ -65,12 +56,8 @@ class MockProfileBanListTest
 	@Test
 	void testGetBanEntryString()
 	{
-		PlayerProfileMock profileMock = new PlayerProfileMock(
-				"TestPlayer", UUID.randomUUID());
-		banList.addBan(profileMock,
-				"TestReason",
-				(Date) null,
-				null);
+		PlayerProfileMock profileMock = new PlayerProfileMock("TestPlayer", UUID.randomUUID());
+		banList.addBan(profileMock, "TestReason", (Date) null, null);
 
 		assertEquals("TestReason", banList.getBanEntry("TestPlayer").getReason());
 	}
@@ -78,8 +65,7 @@ class MockProfileBanListTest
 	@Test
 	void testGetBanEntryNullThrows()
 	{
-		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
-		{
+		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () -> {
 			banList.getBanEntry((String) null);
 		});
 
@@ -89,8 +75,7 @@ class MockProfileBanListTest
 	@Test
 	void testGetBanEntryNullThrowsPlayerProfile()
 	{
-		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
-		{
+		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () -> {
 			banList.getBanEntry((PlayerProfileMock) null);
 		});
 
@@ -100,12 +85,8 @@ class MockProfileBanListTest
 	@Test
 	void testIsBanned()
 	{
-		PlayerProfileMock profileMock = new PlayerProfileMock(
-				"TestPlayer", UUID.randomUUID());
-		banList.addBan(profileMock,
-				"TestReason",
-				(Date) null,
-				null);
+		PlayerProfileMock profileMock = new PlayerProfileMock("TestPlayer", UUID.randomUUID());
+		banList.addBan(profileMock, "TestReason", (Date) null, null);
 
 		assertTrue(banList.isBanned(profileMock));
 	}
@@ -113,12 +94,8 @@ class MockProfileBanListTest
 	@Test
 	void testIsBannedString()
 	{
-		PlayerProfileMock profileMock = new PlayerProfileMock(
-				"TestPlayer", UUID.randomUUID());
-		banList.addBan(profileMock,
-				"TestReason",
-				(Date) null,
-				null);
+		PlayerProfileMock profileMock = new PlayerProfileMock("TestPlayer", UUID.randomUUID());
+		banList.addBan(profileMock, "TestReason", (Date) null, null);
 
 		assertTrue(banList.isBanned("TestPlayer"));
 	}
@@ -126,12 +103,8 @@ class MockProfileBanListTest
 	@Test
 	void testPardon()
 	{
-		PlayerProfileMock profileMock = new PlayerProfileMock(
-				"TestPlayer", UUID.randomUUID());
-		banList.addBan(profileMock,
-				"TestReason",
-				(Date)null,
-				null);
+		PlayerProfileMock profileMock = new PlayerProfileMock("TestPlayer", UUID.randomUUID());
+		banList.addBan(profileMock, "TestReason", (Date) null, null);
 
 		assertTrue(banList.isBanned(profileMock));
 		banList.pardon(profileMock);
@@ -141,12 +114,8 @@ class MockProfileBanListTest
 	@Test
 	void testPardonString()
 	{
-		PlayerProfileMock profileMock = new PlayerProfileMock(
-				"TestPlayer", UUID.randomUUID());
-		banList.addBan(profileMock,
-				"TestReason",
-				(Date) null,
-				null);
+		PlayerProfileMock profileMock = new PlayerProfileMock("TestPlayer", UUID.randomUUID());
+		banList.addBan(profileMock, "TestReason", (Date) null, null);
 
 		assertTrue(banList.isBanned(profileMock));
 		banList.pardon("TestPlayer");
@@ -156,8 +125,7 @@ class MockProfileBanListTest
 	@Test
 	void testPardonStringNull()
 	{
-		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
-		{
+		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () -> {
 			banList.pardon((String) null);
 		});
 
@@ -168,8 +136,7 @@ class MockProfileBanListTest
 	@Test
 	void testPardonProfileNull()
 	{
-		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
-		{
+		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () -> {
 			banList.pardon((PlayerProfileMock) null);
 		});
 
@@ -181,10 +148,7 @@ class MockProfileBanListTest
 	void testAddBanBukkitProfile()
 	{
 		PlayerProfile testPlayer = Bukkit.createPlayerProfile(UUID.randomUUID(), "TestPlayer");
-		banList.addBan(testPlayer,
-				"TestReason",
-				(Date) null,
-				null);
+		banList.addBan(testPlayer, "TestReason", (Date) null, null);
 
 		assertTrue(banList.isBanned(testPlayer));
 	}
@@ -194,9 +158,7 @@ class MockProfileBanListTest
 	{
 		PlayerProfile testPlayer = Bukkit.createPlayerProfile(UUID.randomUUID(), "TestPlayer");
 		BanEntry<? super com.destroystokyo.paper.profile.PlayerProfile> banEntry = banList.addBan(testPlayer,
-				"TestReason",
-				(Date) null,
-				null);
+				"TestReason", (Date) null, null);
 
 		assertEquals("TestReason", banList.getBanEntry(testPlayer).getReason());
 	}
@@ -205,10 +167,7 @@ class MockProfileBanListTest
 	void testPardonBukkit()
 	{
 		PlayerProfile testPlayer = Bukkit.createPlayerProfile(UUID.randomUUID(), "TestPlayer");
-		banList.addBan(testPlayer,
-				"TestReason",
-				(Date) null,
-				null);
+		banList.addBan(testPlayer, "TestReason", (Date) null, null);
 
 		assertTrue(banList.isBanned(testPlayer));
 		banList.pardon(testPlayer);

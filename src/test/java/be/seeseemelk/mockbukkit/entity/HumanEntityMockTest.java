@@ -35,10 +35,8 @@ class HumanEntityMockTest
 {
 
 	private static final int[] REQUIRED_EXP =
-			{
-					7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 42, 47, 52, 57, 62, 67, 72, 77, 82, 87, 92, 97, 102,
-					107, 112, 121, 130, 139, 148, 157, 166, 175, 184, 193
-			};
+	{ 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 42, 47, 52, 57, 62, 67, 72, 77, 82, 87, 92, 97, 102,
+			107, 112, 121, 130, 139, 148, 157, 166, 175, 184, 193 };
 
 	private ServerMock server;
 	private HumanEntityMock human;
@@ -85,13 +83,14 @@ class HumanEntityMockTest
 	void setGameMode_GameModeChanged_CallsEvent()
 	{
 		human.setGameMode(GameMode.CREATIVE);
-		server.getPluginManager().assertEventFired(PlayerGameModeChangeEvent.class, (e) -> e.getNewGameMode() == GameMode.CREATIVE);
+		server.getPluginManager().assertEventFired(PlayerGameModeChangeEvent.class,
+				(e) -> e.getNewGameMode() == GameMode.CREATIVE);
 	}
 
 	@Test
 	void setGameMode_GameModeNotChanged_DoesntCallsEvent()
 	{
-		//todo: replace with PluginManagerMock#assertEventNotFired once implemented
+		// todo: replace with PluginManagerMock#assertEventNotFired once implemented
 		AtomicBoolean bool = new AtomicBoolean(false);
 		server.getPluginManager().registerEvents(new Listener()
 		{

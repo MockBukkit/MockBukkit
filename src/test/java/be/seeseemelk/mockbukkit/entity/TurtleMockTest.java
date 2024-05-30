@@ -38,7 +38,7 @@ class TurtleMockTest
 	@Test
 	void testHasEgg()
 	{
-        assertFalse(turtle.hasEgg());
+		assertFalse(turtle.hasEgg());
 	}
 
 	@Test

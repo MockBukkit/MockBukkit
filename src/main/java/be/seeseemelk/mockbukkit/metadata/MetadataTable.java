@@ -77,7 +77,7 @@ public class MetadataTable implements Metadatable
 	public void clearMetadata(@NotNull Plugin plugin)
 	{
 		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
-		for (Iterator<Map<Plugin, MetadataValue>> iterator = metadata.values().iterator(); iterator.hasNext(); )
+		for (Iterator<Map<Plugin, MetadataValue>> iterator = metadata.values().iterator(); iterator.hasNext();)
 		{
 			Map<Plugin, MetadataValue> values = iterator.next();
 			values.remove(plugin);

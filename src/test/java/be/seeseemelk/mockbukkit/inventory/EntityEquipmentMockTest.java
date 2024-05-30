@@ -177,8 +177,7 @@ class EntityEquipmentMockTest
 	{
 		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
 		EntityEquipment equipment = armorStand.getEquipment();
-		assertThrows(IllegalArgumentException.class, () ->
-		{
+		assertThrows(IllegalArgumentException.class, () -> {
 			equipment.setHelmetDropChance(0.5f);
 		});
 	}
@@ -188,8 +187,7 @@ class EntityEquipmentMockTest
 	{
 
 		assertEquals(4, equipment.getArmorContents().length);
-		Arrays.stream(equipment.getArmorContents()).forEach(entry ->
-		{
+		Arrays.stream(equipment.getArmorContents()).forEach(entry -> {
 			assertEquals(Material.AIR, entry.getType());
 		});
 	}

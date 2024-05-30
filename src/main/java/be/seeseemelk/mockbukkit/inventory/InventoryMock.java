@@ -265,7 +265,7 @@ public class InventoryMock implements Inventory
 	}
 
 	@Override
-	public @NotNull HashMap<Integer, ItemStack> addItem(ItemStack @NotNull ... items) throws IllegalArgumentException
+	public @NotNull HashMap<Integer, ItemStack> addItem(ItemStack @NotNull... items) throws IllegalArgumentException
 	{
 		HashMap<Integer, ItemStack> notSaved = new HashMap<>();
 		for (int i = 0; i < items.length; i++)
@@ -311,7 +311,7 @@ public class InventoryMock implements Inventory
 	@Override
 	public @Nullable InventoryHolder getHolder(boolean useSnapshot)
 	{
-		//TODO Auto-generated method stub
+		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
@@ -393,9 +393,10 @@ public class InventoryMock implements Inventory
 	}
 
 	@Override
-	public @NotNull HashMap<Integer, ItemStack> removeItemAnySlot(@NotNull ItemStack... items) throws IllegalArgumentException
+	public @NotNull HashMap<Integer, ItemStack> removeItemAnySlot(@NotNull ItemStack... items)
+			throws IllegalArgumentException
 	{
-		//TODO Auto-generated method stub
+		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
@@ -457,7 +458,8 @@ public class InventoryMock implements Inventory
 	}
 
 	@Override
-	public @NotNull HashMap<Integer, ? extends ItemStack> all(@NotNull Material material) throws IllegalArgumentException
+	public @NotNull HashMap<Integer, ? extends ItemStack> all(@NotNull Material material)
+			throws IllegalArgumentException
 	{
 		Preconditions.checkNotNull(material, "Material cannot be null");
 		HashMap<Integer, ItemStack> slots = new HashMap<>();

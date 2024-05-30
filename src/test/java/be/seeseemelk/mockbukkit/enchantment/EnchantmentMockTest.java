@@ -112,7 +112,6 @@ class EnchantmentMockTest
 		assertTrue(Enchantment.PROTECTION_FIRE.conflictsWith(Enchantment.PROTECTION_ENVIRONMENTAL));
 	}
 
-
 	@Test
 	void conflictsWith_nullInput()
 	{

@@ -36,7 +36,8 @@ public abstract class ChestedHorseMock extends AbstractHorseMock implements Ches
 	@Override
 	public void setCarryingChest(boolean chest)
 	{
-		if (chest == this.isCarryingChest()) return;
+		if (chest == this.isCarryingChest())
+			return;
 		this.hasChest = chest;
 	}
 

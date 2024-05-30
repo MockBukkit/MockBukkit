@@ -54,7 +54,6 @@ class BeaconMockTest
 		MockBukkit.unmock();
 	}
 
-
 	@Test
 	void constructor_Material()
 	{
@@ -132,13 +131,8 @@ class BeaconMockTest
 	}
 
 	@ParameterizedTest
-	@CsvSource({
-			"1, 1",
-			"2, 2",
-			"3, 3",
-			"4, 4",
-			"5, 4",
-	})
+	@CsvSource(
+	{ "1, 1", "2, 2", "3, 3", "4, 4", "5, 4", })
 	void updateTier(int level, int expected)
 	{
 		createBase(level);
@@ -343,13 +337,11 @@ class BeaconMockTest
 	void testGetEntitiesInRangeNotPlaced()
 	{
 		Beacon beacon1 = new BeaconMock(Material.BEACON);
-		IllegalStateException illegalStateException = assertThrows(IllegalStateException.class, () ->
-		{
+		IllegalStateException illegalStateException = assertThrows(IllegalStateException.class, () -> {
 			beacon1.getEntitiesInRange();
 		});
 
-		assertEquals("Cannot get entities in range of a beacon that is not placed",
-				illegalStateException.getMessage());
+		assertEquals("Cannot get entities in range of a beacon that is not placed", illegalStateException.getMessage());
 	}
 
 	@Test

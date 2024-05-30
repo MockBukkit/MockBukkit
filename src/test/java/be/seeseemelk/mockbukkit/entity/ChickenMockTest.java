@@ -102,5 +102,5 @@ class ChickenMockTest
 		chicken.setEggLayTime(100);
 		assertEquals(100, chicken.getEggLayTime());
 	}
-	
+
 }

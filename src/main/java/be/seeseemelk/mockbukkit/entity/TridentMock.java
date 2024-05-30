@@ -51,7 +51,8 @@ public class TridentMock extends AbstractArrowMock implements Trident
 	@Override
 	public void setLoyaltyLevel(int loyaltyLevel)
 	{
-		Preconditions.checkArgument(loyaltyLevel >= 0 && loyaltyLevel <= 127, "The loyalty level has to be between 0 and 127");
+		Preconditions.checkArgument(loyaltyLevel >= 0 && loyaltyLevel <= 127,
+				"The loyalty level has to be between 0 and 127");
 		this.loyaltyLevel = loyaltyLevel;
 	}
 

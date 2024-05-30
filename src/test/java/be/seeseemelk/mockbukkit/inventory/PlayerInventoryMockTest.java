@@ -211,7 +211,8 @@ class PlayerInventoryMockTest
 		ItemStack leggings = new ItemStack(Material.DIAMOND_LEGGINGS);
 		ItemStack chestplate = new ItemStack(Material.DIAMOND_CHESTPLATE);
 		ItemStack helmet = new ItemStack(Material.DIAMOND_HELMET);
-		ItemStack[] contents = { boots, leggings, chestplate, helmet };
+		ItemStack[] contents =
+		{ boots, leggings, chestplate, helmet };
 		inventory.setArmorContents(contents);
 		assertEquals(boots, inventory.getBoots());
 		assertEquals(leggings, inventory.getLeggings());
@@ -232,7 +233,8 @@ class PlayerInventoryMockTest
 	void setExtraContents_NewItem_OffHandSet()
 	{
 		ItemStack item = new ItemStack(Material.STONE);
-		inventory.setExtraContents(new ItemStack[]{ item });
+		inventory.setExtraContents(new ItemStack[]
+		{ item });
 		ItemStack[] contents = inventory.getExtraContents();
 		assertEquals(item, contents[0]);
 		assertEquals(item, inventory.getItemInOffHand());

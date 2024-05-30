@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-
 /**
  * Mock implementation of an {@link KnowledgeBookMeta}.
  *
@@ -77,7 +76,7 @@ public class KnowledgeBookMetaMock extends ItemMetaMock implements KnowledgeBook
 	}
 
 	@Override
-	public void addRecipe(@NotNull NamespacedKey @NotNull ... recipes)
+	public void addRecipe(@NotNull NamespacedKey @NotNull... recipes)
 	{
 		for (NamespacedKey recipe : recipes)
 		{

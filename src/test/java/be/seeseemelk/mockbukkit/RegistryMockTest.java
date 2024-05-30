@@ -81,8 +81,7 @@ class RegistryMockTest
 
 	static Stream<Class<? extends Keyed>> getValues()
 	{
-		return Stream.of(Structure.class,
-				StructureType.class, TrimMaterial.class, TrimPattern.class,
+		return Stream.of(Structure.class, StructureType.class, TrimMaterial.class, TrimPattern.class,
 				MusicInstrument.class, GameEvent.class);
 	}
 

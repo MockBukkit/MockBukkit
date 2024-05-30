@@ -11,8 +11,10 @@ import java.util.Set;
 public class InternalTag<T>
 {
 
-	public static final InternalTag<Material> SOLID_BLOCKS = new InternalTag<>(InternalTagRegistry.BLOCKS, "SOLID_BLOCKS", Material.class);
-	public static final InternalTag<Material> NON_SOLID_BLOCKS = new InternalTag<>(InternalTagRegistry.BLOCKS, "NON_SOLID_BLOCKS", Material.class);
+	public static final InternalTag<Material> SOLID_BLOCKS = new InternalTag<>(InternalTagRegistry.BLOCKS,
+			"SOLID_BLOCKS", Material.class);
+	public static final InternalTag<Material> NON_SOLID_BLOCKS = new InternalTag<>(InternalTagRegistry.BLOCKS,
+			"NON_SOLID_BLOCKS", Material.class);
 
 	private final String name;
 	private final Set<T> values;
@@ -51,7 +53,6 @@ public class InternalTag<T>
 		Preconditions.checkState(!values.isEmpty(), "Requires MockBukkit to be mocking");
 		return values.contains(value);
 	}
-
 
 	public static void loadInternalTags()
 	{

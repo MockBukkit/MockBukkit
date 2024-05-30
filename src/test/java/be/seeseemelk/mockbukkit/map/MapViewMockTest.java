@@ -77,8 +77,7 @@ class MapViewMockTest
 		{
 			@Override
 			public void render(@NotNull MapView map, @NotNull MapCanvas canvas, @NotNull Player player)
-			{
-			}
+			{}
 		});
 		assertTrue(mapView.isVirtual());
 	}

@@ -24,7 +24,8 @@ public class InternalTagParser
 	private static final Pattern MINECRAFT_MATERIAL = Pattern.compile("minecraft:[a-z0-9_]+");
 	private static final Pattern MINECRAFT_TAG = Pattern.compile("#minecraft:[a-z_]+");
 
-	public void insertInternalTagValues(InternalTagRegistry internalTagRegistry) throws IOException, InternalTagMisconfigurationException
+	public void insertInternalTagValues(InternalTagRegistry internalTagRegistry)
+			throws IOException, InternalTagMisconfigurationException
 	{
 		String path = "/internal_tags/" + internalTagRegistry.name().toLowerCase(Locale.ROOT) + "/";
 		for (InternalTag<?> internalTag : internalTagRegistry.getRelatedTags())
@@ -42,14 +43,16 @@ public class InternalTagParser
 		}
 	}
 
-	private <T> void parse(JsonObject json, TagRegistry tagRegistry, InternalTag<T> internalTag) throws InternalTagMisconfigurationException
+	private <T> void parse(JsonObject json, TagRegistry tagRegistry, InternalTag<T> internalTag)
+			throws InternalTagMisconfigurationException
 	{
 		JsonArray taggedElements = (JsonArray) json.get("values");
 		Set<T> included = parseJsonArray(taggedElements, tagRegistry, internalTag.getRelatedClass());
 		internalTag.addValues(included);
 	}
 
-	private <T> Set<T> parseJsonArray(JsonArray array, TagRegistry tagRegistry, Class<T> targetClass) throws InternalTagMisconfigurationException
+	private <T> Set<T> parseJsonArray(JsonArray array, TagRegistry tagRegistry, Class<T> targetClass)
+			throws InternalTagMisconfigurationException
 	{
 		if (targetClass == Material.class)
 		{
@@ -72,7 +75,8 @@ public class InternalTagParser
 			}
 			return (Set<T>) output;
 		}
-		throw new InternalTagMisconfigurationException("Unimplemented materialtype parsing of type name: " + targetClass.getName());
+		throw new InternalTagMisconfigurationException(
+				"Unimplemented materialtype parsing of type name: " + targetClass.getName());
 	}
 
 	private Material parseMaterial(String materialString) throws InternalTagMisconfigurationException
@@ -85,7 +89,8 @@ public class InternalTagParser
 		return material;
 	}
 
-	private Set<Material> parseTag(String tagString, TagRegistry tagRegistry) throws InternalTagMisconfigurationException
+	private Set<Material> parseTag(String tagString, TagRegistry tagRegistry)
+			throws InternalTagMisconfigurationException
 	{
 		NamespacedKey namespacedKey = NamespacedKey.minecraft(tagString.split(":")[1]);
 		Tag<Material> tag = tagRegistry.getTags().get(namespacedKey);

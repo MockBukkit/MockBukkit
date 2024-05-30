@@ -40,8 +40,7 @@ class AdventureConvertsTest
 
 	public static Stream<Arguments> getSoundSourceToCategoryTestCases()
 	{
-		return Stream.of(
-				Arguments.of(Sound.Source.MASTER, SoundCategory.MASTER),
+		return Stream.of(Arguments.of(Sound.Source.MASTER, SoundCategory.MASTER),
 				Arguments.of(Sound.Source.MUSIC, SoundCategory.MUSIC),
 				Arguments.of(Sound.Source.RECORD, SoundCategory.RECORDS),
 				Arguments.of(Sound.Source.WEATHER, SoundCategory.WEATHER),
@@ -50,9 +49,7 @@ class AdventureConvertsTest
 				Arguments.of(Sound.Source.NEUTRAL, SoundCategory.NEUTRAL),
 				Arguments.of(Sound.Source.PLAYER, SoundCategory.PLAYERS),
 				Arguments.of(Sound.Source.AMBIENT, SoundCategory.AMBIENT),
-				Arguments.of(Sound.Source.VOICE, SoundCategory.VOICE)
-		);
+				Arguments.of(Sound.Source.VOICE, SoundCategory.VOICE));
 	}
-
 
 }

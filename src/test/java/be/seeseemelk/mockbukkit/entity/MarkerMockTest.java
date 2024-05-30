@@ -40,7 +40,7 @@ public class MarkerMockTest
 	@Test
 	void testCannotAddPassenger()
 	{
-        assertFalse(marker.addPassenger(new SimpleEntityMock(server)));
+		assertFalse(marker.addPassenger(new SimpleEntityMock(server)));
 		assertEquals(0, marker.getPassengers().size());
 	}
 }

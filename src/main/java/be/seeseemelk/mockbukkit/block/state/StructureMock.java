@@ -132,9 +132,15 @@ public class StructureMock extends TileStateMock implements Structure
 	public void setRelativePosition(@NotNull BlockVector vector)
 	{
 		Preconditions.checkNotNull(vector, "Vector cannot be null");
-		Preconditions.checkArgument(StructureMock.isBetween(vector.getBlockX(), -StructureMock.MAX_SIZE, StructureMock.MAX_SIZE), "Structure Size (X) must be between -" + StructureMock.MAX_SIZE + " and " + StructureMock.MAX_SIZE);
-		Preconditions.checkArgument(StructureMock.isBetween(vector.getBlockY(), -StructureMock.MAX_SIZE, StructureMock.MAX_SIZE), "Structure Size (Y) must be between -" + StructureMock.MAX_SIZE + " and " + StructureMock.MAX_SIZE);
-		Preconditions.checkArgument(StructureMock.isBetween(vector.getBlockZ(), -StructureMock.MAX_SIZE, StructureMock.MAX_SIZE), "Structure Size (Z) must be between -" + StructureMock.MAX_SIZE + " and " + StructureMock.MAX_SIZE);
+		Preconditions.checkArgument(
+				StructureMock.isBetween(vector.getBlockX(), -StructureMock.MAX_SIZE, StructureMock.MAX_SIZE),
+				"Structure Size (X) must be between -" + StructureMock.MAX_SIZE + " and " + StructureMock.MAX_SIZE);
+		Preconditions.checkArgument(
+				StructureMock.isBetween(vector.getBlockY(), -StructureMock.MAX_SIZE, StructureMock.MAX_SIZE),
+				"Structure Size (Y) must be between -" + StructureMock.MAX_SIZE + " and " + StructureMock.MAX_SIZE);
+		Preconditions.checkArgument(
+				StructureMock.isBetween(vector.getBlockZ(), -StructureMock.MAX_SIZE, StructureMock.MAX_SIZE),
+				"Structure Size (Z) must be between -" + StructureMock.MAX_SIZE + " and " + StructureMock.MAX_SIZE);
 		this.relativePosition = new BlockVector(vector.getBlockX(), vector.getBlockY(), vector.getBlockZ());
 	}
 
@@ -148,9 +154,12 @@ public class StructureMock extends TileStateMock implements Structure
 	public void setStructureSize(@NotNull BlockVector vector)
 	{
 		Preconditions.checkNotNull(vector, "Vector cannot be null");
-		Preconditions.checkArgument(StructureMock.isBetween(vector.getBlockX(), 0, StructureMock.MAX_SIZE), "Structure Size (X) must be between 0 and " + StructureMock.MAX_SIZE);
-		Preconditions.checkArgument(StructureMock.isBetween(vector.getBlockY(), 0, StructureMock.MAX_SIZE), "Structure Size (Y) must be between 0 and " + StructureMock.MAX_SIZE);
-		Preconditions.checkArgument(StructureMock.isBetween(vector.getBlockZ(), 0, StructureMock.MAX_SIZE), "Structure Size (Z) must be between 0 and " + StructureMock.MAX_SIZE);
+		Preconditions.checkArgument(StructureMock.isBetween(vector.getBlockX(), 0, StructureMock.MAX_SIZE),
+				"Structure Size (X) must be between 0 and " + StructureMock.MAX_SIZE);
+		Preconditions.checkArgument(StructureMock.isBetween(vector.getBlockY(), 0, StructureMock.MAX_SIZE),
+				"Structure Size (Y) must be between 0 and " + StructureMock.MAX_SIZE);
+		Preconditions.checkArgument(StructureMock.isBetween(vector.getBlockZ(), 0, StructureMock.MAX_SIZE),
+				"Structure Size (Z) must be between 0 and " + StructureMock.MAX_SIZE);
 		this.structureSize = new BlockVector(vector.getBlockX(), vector.getBlockY(), vector.getBlockZ());
 	}
 
@@ -232,7 +241,8 @@ public class StructureMock extends TileStateMock implements Structure
 	@Override
 	public void setIntegrity(float integrity)
 	{
-		Preconditions.checkArgument(StructureMock.isBetween(integrity, 0.0f, 1.0f), "Integrity must be between 0 and 1");
+		Preconditions.checkArgument(StructureMock.isBetween(integrity, 0.0f, 1.0f),
+				"Integrity must be between 0 and 1");
 		this.integrity = integrity;
 	}
 
@@ -270,7 +280,7 @@ public class StructureMock extends TileStateMock implements Structure
 		return this.metadata;
 	}
 
-	//todo: create a math util class
+	// todo: create a math util class
 	private static boolean isBetween(float num, float min, float max)
 	{
 		return num >= min && num <= max;

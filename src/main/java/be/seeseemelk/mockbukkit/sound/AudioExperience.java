@@ -33,7 +33,7 @@ public final class AudioExperience
 	 */
 	@ApiStatus.Internal
 	public AudioExperience(@NotNull String sound, @NotNull SoundCategory category, @NotNull Location loc, float volume,
-						   float pitch)
+			float pitch)
 	{
 		Preconditions.checkNotNull(sound, "The played sound cannot be null!");
 		Preconditions.checkNotNull(category, "The category cannot be null!");
@@ -57,7 +57,7 @@ public final class AudioExperience
 	 */
 	@ApiStatus.Internal
 	public AudioExperience(@NotNull Sound sound, @NotNull SoundCategory category, @NotNull Location loc, float volume,
-						   float pitch)
+			float pitch)
 	{
 		this(sound.getKey().getKey(), category, loc, volume, pitch);
 	}
@@ -73,16 +73,16 @@ public final class AudioExperience
 	{
 		this(sound.name().asString(), switch (sound.source())
 		{
-			case MASTER -> SoundCategory.MASTER;
-			case MUSIC -> SoundCategory.MUSIC;
-			case RECORD -> SoundCategory.RECORDS;
-			case WEATHER -> SoundCategory.WEATHER;
-			case BLOCK -> SoundCategory.BLOCKS;
-			case HOSTILE -> SoundCategory.HOSTILE;
-			case NEUTRAL -> SoundCategory.NEUTRAL;
-			case PLAYER -> SoundCategory.PLAYERS;
-			case AMBIENT -> SoundCategory.AMBIENT;
-			case VOICE -> SoundCategory.VOICE;
+		case MASTER -> SoundCategory.MASTER;
+		case MUSIC -> SoundCategory.MUSIC;
+		case RECORD -> SoundCategory.RECORDS;
+		case WEATHER -> SoundCategory.WEATHER;
+		case BLOCK -> SoundCategory.BLOCKS;
+		case HOSTILE -> SoundCategory.HOSTILE;
+		case NEUTRAL -> SoundCategory.NEUTRAL;
+		case PLAYER -> SoundCategory.PLAYERS;
+		case AMBIENT -> SoundCategory.AMBIENT;
+		case VOICE -> SoundCategory.VOICE;
 		}, loc, sound.volume(), sound.pitch());
 	}
 

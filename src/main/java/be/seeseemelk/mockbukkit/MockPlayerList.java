@@ -261,8 +261,7 @@ public class MockPlayerList
 		String nameLower = name.toLowerCase(Locale.ENGLISH);
 		return this.onlinePlayers.stream()
 				.filter(player -> player.getName().toLowerCase(Locale.ENGLISH).startsWith(nameLower))
-				.map(player -> (Player) player)
-				.toList();
+				.map(player -> (Player) player).toList();
 	}
 
 	/**
@@ -276,8 +275,8 @@ public class MockPlayerList
 	{
 		String nameLower = name.toLowerCase(Locale.ENGLISH);
 		return this.onlinePlayers.stream()
-				.filter(player -> player.getName().toLowerCase(Locale.ENGLISH).equals(nameLower))
-				.findFirst().orElse(null);
+				.filter(player -> player.getName().toLowerCase(Locale.ENGLISH).equals(nameLower)).findFirst()
+				.orElse(null);
 	}
 
 	/**

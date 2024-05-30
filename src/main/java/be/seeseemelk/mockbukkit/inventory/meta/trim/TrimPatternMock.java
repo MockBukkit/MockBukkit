@@ -61,7 +61,7 @@ public class TrimPatternMock implements TrimPattern
 		Preconditions.checkArgument(data.has("key"), "Missing json key");
 		NamespacedKey key = NamespacedKey.fromString(data.get("key").getAsString());
 		Component description = GsonComponentSerializer.gson().deserializeFromTree(data.get("description"));
-		return new TrimPatternMock(key,description);
+		return new TrimPatternMock(key, description);
 	}
 
 }

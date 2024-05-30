@@ -23,8 +23,7 @@ public class MockBukkitPluginClassLoaderGroup implements PluginClassLoaderGroup
 				return cl.loadClass(name, resolve, true, true);
 			}
 			catch (ClassNotFoundException ignored)
-			{
-			}
+			{}
 		}
 		return null;
 	}

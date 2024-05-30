@@ -6,7 +6,6 @@ import be.seeseemelk.mockbukkit.ServerMock;
 import org.bukkit.Location;
 import org.bukkit.entity.Dolphin;
 import org.bukkit.entity.EntityType;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -78,8 +77,7 @@ class DolphinMockTest
 	@Test
 	void testSetTreasureLocation_Null_ThrowsException()
 	{
-		IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () ->
-		{
+		IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> {
 			dolphin.setTreasureLocation(null);
 		});
 

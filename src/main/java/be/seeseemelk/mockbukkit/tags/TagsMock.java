@@ -93,13 +93,11 @@ public final class TagsMock
 			// .json files for the tags
 			// We also want to filter out "_all" files or similar, as those are not
 			// tag files but rather serve different purposes
-			stream.skip(1).filter(path ->
-			{
+			stream.skip(1).filter(path -> {
 				boolean isDirectory = Files.isDirectory(path);
 				boolean isTagFormat = !path.getFileName().toString().startsWith("_");
 				return !isDirectory && isTagFormat;
-			}).forEach(path ->
-			{
+			}).forEach(path -> {
 				// Splitting will strip away the .json
 				String name = filePattern.split(path.getFileName().toString())[0];
 				NamespacedKey key = NamespacedKey.minecraft(name);

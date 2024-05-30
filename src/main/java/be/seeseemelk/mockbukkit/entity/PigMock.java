@@ -72,7 +72,8 @@ public class PigMock extends AnimalsMock implements Pig
 		{
 			return;
 		}
-		Preconditions.checkArgument(ticks >= 0 && ticks <= this.boostTicks, "Current Boost Ticks must be less than Boost Ticks (#getBoostTicks)");
+		Preconditions.checkArgument(ticks >= 0 && ticks <= this.boostTicks,
+				"Current Boost Ticks must be less than Boost Ticks (#getBoostTicks)");
 		this.currentBoostTicks = ticks;
 	}
 

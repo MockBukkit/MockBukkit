@@ -99,7 +99,8 @@ public interface SoundReceiver
 	 * @param sound     The sound that should've been heard.
 	 * @param predicate A predicate to test the {@link AudioExperience} against.
 	 */
-	default void assertSoundHeard(net.kyori.adventure.sound.@NotNull Sound sound, @NotNull Predicate<AudioExperience> predicate)
+	default void assertSoundHeard(net.kyori.adventure.sound.@NotNull Sound sound,
+			@NotNull Predicate<AudioExperience> predicate)
 	{
 		assertSoundHeard("Sound Heard Assertion failed", sound, predicate);
 	}
@@ -156,7 +157,7 @@ public interface SoundReceiver
 	 * @param predicate A predicate to test the {@link AudioExperience} against.
 	 */
 	default void assertSoundHeard(@NotNull String message, @NotNull Sound sound,
-								  @NotNull Predicate<AudioExperience> predicate)
+			@NotNull Predicate<AudioExperience> predicate)
 	{
 		assertSoundHeard(message, sound.getKey().getKey(), predicate);
 	}
@@ -169,11 +170,10 @@ public interface SoundReceiver
 	 * @param predicate A predicate to test the {@link AudioExperience} against.
 	 */
 	default void assertSoundHeard(@NotNull String message, net.kyori.adventure.sound.@NotNull Sound sound,
-								  @NotNull Predicate<AudioExperience> predicate)
+			@NotNull Predicate<AudioExperience> predicate)
 	{
 		Predicate<AudioExperience> test = e -> e.getSource() == sound.source()
-				&& ShadyPines.equals(sound.volume(), e.getVolume())
-				&& ShadyPines.equals(sound.pitch(), e.getPitch());
+				&& ShadyPines.equals(sound.volume(), e.getVolume()) && ShadyPines.equals(sound.pitch(), e.getPitch());
 		assertSoundHeard(message, sound.name().asString(), test.and(predicate));
 	}
 
@@ -185,7 +185,7 @@ public interface SoundReceiver
 	 * @param predicate A predicate to test the {@link AudioExperience} against.
 	 */
 	default void assertSoundHeard(@NotNull String message, @NotNull String sound,
-								  @NotNull Predicate<AudioExperience> predicate)
+			@NotNull Predicate<AudioExperience> predicate)
 	{
 		for (AudioExperience audio : getHeardSounds())
 		{

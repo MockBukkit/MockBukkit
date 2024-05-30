@@ -64,7 +64,6 @@ class TropicalFishBucketMetaMockTest
 		meta.setBodyColor(DyeColor.CYAN);
 		assertTrue(meta.hasVariant());
 
-
 		meta = new TropicalFishBucketMetaMock();
 		assertFalse(meta.hasVariant());
 		meta.setPattern(TropicalFish.Pattern.BETTY);

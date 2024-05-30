@@ -55,8 +55,10 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 		}
 		else
 		{
-			if (meta.isScaling()) this.scaling = SCALING_TRUE;
-			else this.scaling = SCALING_FALSE;
+			if (meta.isScaling())
+				this.scaling = SCALING_TRUE;
+			else
+				this.scaling = SCALING_FALSE;
 		}
 	}
 
@@ -168,11 +170,11 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 	{
 		if (!(obj instanceof MapMeta meta))
 			return false;
-		if (!super.equals(obj) ||
-				((this.hasMapId() || meta.hasMapId()) && !Objects.equals(this.mapId, meta.getMapId())) ||
-				!Objects.equals(this.mapView, meta.getMapView()) ||
-				!Objects.equals(this.color, meta.getColor())) return false;
-		if (meta instanceof MapMetaMock mapMeta) return this.scaling == mapMeta.scaling;
+		if (!super.equals(obj) || ((this.hasMapId() || meta.hasMapId()) && !Objects.equals(this.mapId, meta.getMapId()))
+				|| !Objects.equals(this.mapView, meta.getMapView()) || !Objects.equals(this.color, meta.getColor()))
+			return false;
+		if (meta instanceof MapMetaMock mapMeta)
+			return this.scaling == mapMeta.scaling;
 		return meta.isScaling() ? this.scaling == 1 : this.scaling == 2;
 	}
 

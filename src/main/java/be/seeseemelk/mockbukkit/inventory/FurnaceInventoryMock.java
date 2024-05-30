@@ -82,7 +82,7 @@ public class FurnaceInventoryMock extends InventoryMock implements FurnaceInvent
 	@Override
 	public boolean canSmelt(@Nullable ItemStack item)
 	{
-		//TODO Auto-generated method stub
+		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
@@ -91,7 +91,6 @@ public class FurnaceInventoryMock extends InventoryMock implements FurnaceInvent
 	{
 		return (Furnace) super.getHolder();
 	}
-
 
 	private static class FurnaceFuelProvider
 	{

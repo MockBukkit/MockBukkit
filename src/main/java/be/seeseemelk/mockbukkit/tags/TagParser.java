@@ -63,7 +63,8 @@ public class TagParser implements Keyed
 		this.key = tag.getKey();
 	}
 
-	void parse(@NotNull BiConsumer<Set<Material>, Set<TagWrapperMock>> callback) throws TagMisconfigurationException, FileNotFoundException
+	void parse(@NotNull BiConsumer<Set<Material>, Set<TagWrapperMock>> callback)
+			throws TagMisconfigurationException, FileNotFoundException
 	{
 		String path = "/tags/" + registry.getRegistry() + '/' + getKey().getKey() + ".json";
 
@@ -124,8 +125,8 @@ public class TagParser implements Keyed
 					}
 					else
 					{
-						throw new TagMisconfigurationException(key, "Unexpected value format: "
-								+ element.getClass().getSimpleName() + " - " + element);
+						throw new TagMisconfigurationException(key,
+								"Unexpected value format: " + element.getClass().getSimpleName() + " - " + element);
 					}
 				}
 
@@ -145,7 +146,7 @@ public class TagParser implements Keyed
 	}
 
 	private void parsePrimitiveValue(@NotNull String value, @NotNull Set<Material> materials,
-									 @NotNull Set<TagWrapperMock> tags) throws TagMisconfigurationException
+			@NotNull Set<TagWrapperMock> tags) throws TagMisconfigurationException
 	{
 		if (MINECRAFT_MATERIAL.matcher(value).matches())
 		{
@@ -185,7 +186,7 @@ public class TagParser implements Keyed
 	}
 
 	private void parseComplexValue(@NotNull JsonObject entry, @NotNull Set<Material> materials,
-								   @NotNull Set<TagWrapperMock> tags) throws TagMisconfigurationException
+			@NotNull Set<TagWrapperMock> tags) throws TagMisconfigurationException
 	{
 		JsonElement id = entry.get("id");
 		JsonElement required = entry.get("required");

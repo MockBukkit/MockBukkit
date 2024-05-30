@@ -43,8 +43,10 @@ public class MockInternalPotionData implements PotionType.InternalPotionData
 			tempPotionEffects = null;
 		}
 		this.potionEffects = tempPotionEffects;
-		this.upgradeable = Registry.POTION.get(new NamespacedKey(namespacedKey.getNamespace(), "strong_" + namespacedKey.getKey())) != null;
-		this.extendable = Registry.POTION.get(new NamespacedKey(namespacedKey.getNamespace(), "long_" + namespacedKey.getKey())) != null;
+		this.upgradeable = Registry.POTION
+				.get(new NamespacedKey(namespacedKey.getNamespace(), "strong_" + namespacedKey.getKey())) != null;
+		this.extendable = Registry.POTION
+				.get(new NamespacedKey(namespacedKey.getNamespace(), "long_" + namespacedKey.getKey())) != null;
 		this.maxLevel = this.isUpgradeable() ? 2 : 1;
 	}
 
@@ -110,14 +112,16 @@ public class MockInternalPotionData implements PotionType.InternalPotionData
 		for (JsonElement potionEffectData : data.get("effects").getAsJsonArray())
 		{
 			JsonObject potionEffectDataObject = potionEffectData.getAsJsonObject();
-			NamespacedKey potionEffectTypeKey = Preconditions.checkNotNull(NamespacedKey.fromString(potionEffectDataObject.get("type").getAsString()));
+			NamespacedKey potionEffectTypeKey = Preconditions
+					.checkNotNull(NamespacedKey.fromString(potionEffectDataObject.get("type").getAsString()));
 			PotionEffectType potionEffectType = Registry.POTION_EFFECT_TYPE.get(potionEffectTypeKey);
 			int duration = potionEffectDataObject.get("duration").getAsInt();
 			int amplifier = potionEffectDataObject.get("amplifier").getAsInt();
 			boolean ambient = potionEffectDataObject.get("ambient").getAsBoolean();
 			boolean particles = potionEffectDataObject.get("particles").getAsBoolean();
 			boolean icon = potionEffectDataObject.get("icon").getAsBoolean();
-			PotionEffect potionEffect = new PotionEffect(potionEffectType, duration, amplifier, ambient, particles, icon);
+			PotionEffect potionEffect = new PotionEffect(potionEffectType, duration, amplifier, ambient, particles,
+					icon);
 			potionEffectsList.add(potionEffect);
 		}
 		return potionEffectsList;

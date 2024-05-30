@@ -110,8 +110,7 @@ class BukkitSchedulerMockTest
 	void runTaskTimer_SelfCancelling()
 	{
 		AtomicInteger count = new AtomicInteger(0);
-		testTask = scheduler.runTaskTimer(null, () ->
-		{
+		testTask = scheduler.runTaskTimer(null, () -> {
 			if (count.incrementAndGet() == 2)
 				testTask.cancel();
 		}, 1, 1);
@@ -136,13 +135,13 @@ class BukkitSchedulerMockTest
 	}
 
 	@Test
-	void runTaskAsynchronously_TaskExecutedOnSeperateThread() throws InterruptedException, BrokenBarrierException, TimeoutException
+	void runTaskAsynchronously_TaskExecutedOnSeperateThread()
+			throws InterruptedException, BrokenBarrierException, TimeoutException
 	{
 		final Thread mainThread = Thread.currentThread();
 
 		CyclicBarrier barrier = new CyclicBarrier(2);
-		scheduler.runTaskAsynchronously(null, () ->
-		{
+		scheduler.runTaskAsynchronously(null, () -> {
 			assertNotEquals(mainThread, Thread.currentThread());
 			try
 			{
@@ -157,15 +156,15 @@ class BukkitSchedulerMockTest
 	}
 
 	@Test
-	void runTaskTimerAsynchronously_TaskExecutedOnSeperateThread() throws InterruptedException, BrokenBarrierException, TimeoutException
+	void runTaskTimerAsynchronously_TaskExecutedOnSeperateThread()
+			throws InterruptedException, BrokenBarrierException, TimeoutException
 	{
 		final Thread mainThread = Thread.currentThread();
 
 		CyclicBarrier barrier = new CyclicBarrier(2);
 		AtomicInteger count = new AtomicInteger();
 
-		testTask = scheduler.runTaskTimerAsynchronously(null, () ->
-		{
+		testTask = scheduler.runTaskTimerAsynchronously(null, () -> {
 			assertNotEquals(mainThread, Thread.currentThread());
 			try
 			{
@@ -206,8 +205,7 @@ class BukkitSchedulerMockTest
 	void cancellingAsyncTaskDecreasesNumberOfQueuedAsyncTasks()
 	{
 		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
-		BukkitTask task = scheduler.runTaskLaterAsynchronously(null, () ->
-		{
+		BukkitTask task = scheduler.runTaskLaterAsynchronously(null, () -> {
 		}, 1);
 		assertEquals(1, scheduler.getNumberOfQueuedAsyncTasks());
 		task.cancel();
@@ -222,14 +220,11 @@ class BukkitSchedulerMockTest
 		Plugin plugin = server.getPluginManager().getPlugin("MockBukkitTestPlugin");
 		BukkitSchedulerMock scheduler1 = server.getScheduler();
 		assertEquals(0, scheduler1.getNumberOfQueuedAsyncTasks());
-		scheduler1.runTaskLaterAsynchronously(plugin, () ->
-		{
+		scheduler1.runTaskLaterAsynchronously(plugin, () -> {
 		}, 5);
-		scheduler1.runTaskLaterAsynchronously(plugin, () ->
-		{
+		scheduler1.runTaskLaterAsynchronously(plugin, () -> {
 		}, 10);
-		BukkitTask task = scheduler1.runTaskLaterAsynchronously(null, () ->
-		{
+		BukkitTask task = scheduler1.runTaskLaterAsynchronously(null, () -> {
 		}, 5);
 		assertEquals(3, scheduler1.getNumberOfQueuedAsyncTasks());
 		scheduler1.cancelTasks(plugin);
@@ -239,13 +234,11 @@ class BukkitSchedulerMockTest
 		MockBukkit.unmock();
 	}
 
-
 	@Test
 	void longScheduledRunningTask_Throws_RunTimeException()
 	{
 		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
-		scheduler.runTaskAsynchronously(null, () ->
-		{
+		scheduler.runTaskAsynchronously(null, () -> {
 			while (true)
 			{
 				try
@@ -258,8 +251,7 @@ class BukkitSchedulerMockTest
 				}
 			}
 		});
-		scheduler.runTaskLaterAsynchronously(null, () ->
-		{
+		scheduler.runTaskLaterAsynchronously(null, () -> {
 			while (true)
 			{
 				try
@@ -280,8 +272,7 @@ class BukkitSchedulerMockTest
 		scheduler.performOneTick();
 		assertEquals(2, scheduler.getActiveRunningCount());
 		scheduler.setShutdownTimeout(300);
-		assertThrows(RuntimeException.class, () ->
-		{
+		assertThrows(RuntimeException.class, () -> {
 			scheduler.shutdown();
 		});
 	}
@@ -291,8 +282,7 @@ class BukkitSchedulerMockTest
 	{
 		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
 		final AtomicBoolean alive = new AtomicBoolean(true);
-		testTask = scheduler.runTaskAsynchronously(null, () ->
-		{
+		testTask = scheduler.runTaskAsynchronously(null, () -> {
 			while (alive.get())
 			{
 				if (testTask.isCancelled())
@@ -330,16 +320,14 @@ class BukkitSchedulerMockTest
 	{
 		CountDownLatch tasksSaved = new CountDownLatch(1);
 		CountDownLatch taskStarted = new CountDownLatch(1);
-		scheduler.runTaskAsynchronously(null, () ->
-		{
+		scheduler.runTaskAsynchronously(null, () -> {
 			try
 			{
 				taskStarted.countDown();
 				tasksSaved.await();
 			}
 			catch (InterruptedException e)
-			{
-			}
+			{}
 		});
 		taskStarted.await();
 		scheduler.saveOverdueTasks();
@@ -359,16 +347,14 @@ class BukkitSchedulerMockTest
 	{
 		CountDownLatch tasksSaved = new CountDownLatch(1);
 		CountDownLatch taskStarted = new CountDownLatch(1);
-		scheduler.runTaskAsynchronously(null, () ->
-		{
+		scheduler.runTaskAsynchronously(null, () -> {
 			try
 			{
 				taskStarted.countDown();
 				tasksSaved.await();
 			}
 			catch (InterruptedException e)
-			{
-			}
+			{}
 		});
 		taskStarted.await();
 		scheduler.saveOverdueTasks();
@@ -511,8 +497,7 @@ class BukkitSchedulerMockTest
 	@Test
 	void repeatingTask_DoesntHang()
 	{
-		scheduler.runTaskTimer(null, () ->
-		{
+		scheduler.runTaskTimer(null, () -> {
 		}, 1L, 1L);
 		scheduler.setShutdownTimeout(1000L);
 		scheduler.shutdown();
@@ -521,8 +506,7 @@ class BukkitSchedulerMockTest
 	@Test
 	void runTaskLater_DoesntHang()
 	{
-		scheduler.runTaskLater(null, () ->
-		{
+		scheduler.runTaskLater(null, () -> {
 		}, 1L);
 		scheduler.performTicks(2);
 		scheduler.setShutdownTimeout(1000L);
@@ -532,8 +516,7 @@ class BukkitSchedulerMockTest
 	@Test
 	void taskIsRunning()
 	{
-		BukkitTask bukkitTask = scheduler.runTaskTimer(null, () ->
-		{
+		BukkitTask bukkitTask = scheduler.runTaskTimer(null, () -> {
 		}, 1L, 1L);
 		scheduler.performOneTick();
 		Assertions.assertTrue(scheduler.isCurrentlyRunning(bukkitTask.getTaskId()));
@@ -562,12 +545,10 @@ class BukkitSchedulerMockTest
 		AtomicBoolean executed = new AtomicBoolean();
 		AtomicBoolean completed = new AtomicBoolean();
 		AtomicBoolean notPrimaryThread = new AtomicBoolean();
-		Thread thread = new Thread(() ->
-		{
+		Thread thread = new Thread(() -> {
 			try
 			{
-				scheduler.runTaskLater(null, bukkitTask ->
-				{
+				scheduler.runTaskLater(null, bukkitTask -> {
 					if (mainThread != Thread.currentThread())
 					{
 						notPrimaryThread.set(true);
@@ -611,14 +592,12 @@ class BukkitSchedulerMockTest
 		AtomicInteger executed = new AtomicInteger();
 		AtomicBoolean completed = new AtomicBoolean();
 		AtomicBoolean notPrimaryThread = new AtomicBoolean();
-		Thread thread = new Thread(() ->
-		{
+		Thread thread = new Thread(() -> {
 			try
 			{
 				for (int i = 0; i < toExecute && !Thread.interrupted(); i++)
 				{
-					scheduler.runTaskLater(null, bukkitTask ->
-					{
+					scheduler.runTaskLater(null, bukkitTask -> {
 						if (mainThread != Thread.currentThread())
 						{
 							notPrimaryThread.set(true);
@@ -663,8 +642,7 @@ class BukkitSchedulerMockTest
 		AtomicBoolean executed = new AtomicBoolean();
 		AtomicBoolean completed = new AtomicBoolean();
 		AtomicBoolean notPrimaryThread = new AtomicBoolean();
-		Thread thread = new Thread(() ->
-		{
+		Thread thread = new Thread(() -> {
 			try
 			{
 				scheduler.runTaskTimer(null, new Consumer<>()
@@ -723,8 +701,7 @@ class BukkitSchedulerMockTest
 		AtomicInteger executed = new AtomicInteger();
 		AtomicBoolean completed = new AtomicBoolean();
 		AtomicBoolean notPrimaryThread = new AtomicBoolean();
-		Thread thread = new Thread(() ->
-		{
+		Thread thread = new Thread(() -> {
 			try
 			{
 				for (int i = 0; i < toExecute && !Thread.interrupted(); i++)

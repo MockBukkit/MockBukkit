@@ -8,7 +8,6 @@ import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
 import com.destroystokyo.paper.event.server.ServerExceptionEvent;
 import com.destroystokyo.paper.exception.ServerEventException;
 import com.google.common.base.Preconditions;
-import com.google.common.collect.ImmutableSet;
 import io.papermc.paper.plugin.PermissionManager;
 import io.papermc.paper.plugin.configuration.PluginMeta;
 import org.bukkit.command.PluginCommand;
@@ -20,9 +19,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.server.PluginEnableEvent;
-import org.bukkit.permissions.Permissible;
-import org.bukkit.permissions.Permission;
-import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.EventExecutor;
 import org.bukkit.plugin.IllegalPluginAccessException;
 import org.bukkit.plugin.InvalidDescriptionException;
@@ -54,21 +50,17 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
-import java.util.WeakHashMap;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.jar.JarFile;
 import java.util.logging.Level;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.fail;
@@ -112,9 +104,7 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 		// Delete the temporary directory, from the deepest file to the root.
 		try (Stream<Path> walk = Files.walk(parentTemporaryDirectory.toPath()))
 		{
-			walk.sorted(Comparator.reverseOrder())
-					.map(Path::toFile)
-					.forEach(File::delete);
+			walk.sorted(Comparator.reverseOrder()).map(Path::toFile).forEach(File::delete);
 		}
 		catch (IOException e)
 		{
@@ -162,7 +152,8 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 * @param eventClass The class type that the event should be an instance of.
 	 * @param predicate  The predicate to test the event against.
 	 */
-	public <T extends Event> void assertEventFired(@Nullable String message, @NotNull Class<T> eventClass, @NotNull Predicate<T> predicate)
+	public <T extends Event> void assertEventFired(@Nullable String message, @NotNull Class<T> eventClass,
+			@NotNull Predicate<T> predicate)
 	{
 		Preconditions.checkNotNull(eventClass, "Class cannot be null");
 
@@ -209,7 +200,8 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	public void assertEventNotFired(@NotNull Class<? extends Event> eventClass)
 	{
 		Preconditions.checkNotNull(eventClass, "Class cannot be null");
-		assertEventNotFired(eventClass, "An event of type " + eventClass.getSimpleName() + " has been fired when it shouldn't have been");
+		assertEventNotFired(eventClass,
+				"An event of type " + eventClass.getSimpleName() + " has been fired when it shouldn't have been");
 	}
 
 	/**
@@ -297,8 +289,9 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 * @throws NoSuchMethodException if no compatible constructor could be found.
 	 */
 	@SuppressWarnings("unchecked")
-	private @NotNull Constructor<? extends JavaPlugin> getCompatibleConstructor(@NotNull Class<? extends JavaPlugin> class1,
-																				@NotNull Class<?> @NotNull [] types) throws NoSuchMethodException
+	private @NotNull Constructor<? extends JavaPlugin> getCompatibleConstructor(
+			@NotNull Class<? extends JavaPlugin> class1, @NotNull Class<?> @NotNull [] types)
+			throws NoSuchMethodException
 	{
 		Preconditions.checkNotNull(class1, "Class cannot be null");
 		Preconditions.checkNotNull(types, "Types cannot be null");
@@ -330,7 +323,8 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 		if (parentTemporaryDirectory == null)
 		{
 			Random random = ThreadLocalRandom.current();
-			parentTemporaryDirectory = Files.createTempDirectory("MockBukkit-" + random.nextInt(0, Integer.MAX_VALUE)).toFile();
+			parentTemporaryDirectory = Files.createTempDirectory("MockBukkit-" + random.nextInt(0, Integer.MAX_VALUE))
+					.toFile();
 		}
 		return parentTemporaryDirectory;
 	}
@@ -389,8 +383,8 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	 * @param parameters  Extra parameters to pass on to the plugin constructor. Must not be {@code null}.
 	 * @return The loaded plugin.
 	 */
-	public @NotNull JavaPlugin loadPlugin(@NotNull Class<? extends JavaPlugin> class1, @NotNull PluginDescriptionFile description,
-										  @NotNull Object @NotNull [] parameters)
+	public @NotNull JavaPlugin loadPlugin(@NotNull Class<? extends JavaPlugin> class1,
+			@NotNull PluginDescriptionFile description, @NotNull Object @NotNull [] parameters)
 	{
 		Preconditions.checkNotNull(class1, "Class cannot be null");
 		Preconditions.checkNotNull(description, "Description cannot be null");
@@ -406,7 +400,8 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 				types.add(parameter.getClass());
 			}
 
-			Constructor<? extends JavaPlugin> constructor = getCompatibleConstructor(class1, types.toArray(new Class<?>[0]));
+			Constructor<? extends JavaPlugin> constructor = getCompatibleConstructor(class1,
+					types.toArray(new Class<?>[0]));
 			constructor.setAccessible(true);
 
 			JavaPlugin plugin = constructor.newInstance(parameters);
@@ -419,7 +414,8 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 		}
 	}
 
-	private MockBukkitConfiguredPluginClassLoader createClassLoader(PluginDescriptionFile description) throws IOException
+	private MockBukkitConfiguredPluginClassLoader createClassLoader(PluginDescriptionFile description)
+			throws IOException
 	{
 		String name = description.getName();
 		if (name.equalsIgnoreCase("bukkit") || name.equalsIgnoreCase("minecraft") || name.equalsIgnoreCase("mojang"))
@@ -477,8 +473,7 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 			if (class1.getName().equals(mainClass))
 				return description;
 		}
-		throw new FileNotFoundException(
-				"Could not find file plugin.yml. Maybe forgot to add the 'main' property?");
+		throw new FileNotFoundException("Could not find file plugin.yml. Maybe forgot to add the 'main' property?");
 	}
 
 	@Override
@@ -546,8 +541,10 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 			Throwable ex = eventException.getCause();
 			if (!(event instanceof ServerExceptionEvent))
 			{ // Don't cause an endless loop
-				String msg = "Could not pass event " + event.getEventName() + " to " + registration.getPlugin().getDescription().getFullName();
-				callEvent(new ServerExceptionEvent(new ServerEventException(msg, ex, registration.getPlugin(), registration.getListener(), event)));
+				String msg = "Could not pass event " + event.getEventName() + " to "
+						+ registration.getPlugin().getDescription().getFullName();
+				callEvent(new ServerExceptionEvent(new ServerEventException(msg, ex, registration.getPlugin(),
+						registration.getListener(), event)));
 			}
 			if (ex instanceof RuntimeException r)
 			{
@@ -559,7 +556,6 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 			}
 		}
 	}
-
 
 	@Override
 	public void enablePlugin(@NotNull Plugin plugin)
@@ -594,8 +590,7 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 		case "aliases":
 			if (value instanceof List<?>)
 			{
-				command.setAliases(
-						((List<?>) value).stream().map(Object::toString).toList());
+				command.setAliases(((List<?>) value).stream().map(Object::toString).toList());
 			}
 			else if (value != null)
 			{
@@ -620,7 +615,8 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 			command.setUsage((String) value);
 			break;
 		default:
-			throw new UnsupportedOperationException("Unknown section " + name + " with value '" + value + "'. Are you sure this is allowed here? (Reference guide: https://docs.papermc.io/paper/dev/plugin-yml#commands)");
+			throw new UnsupportedOperationException("Unknown section " + name + " with value '" + value
+					+ "'. Are you sure this is allowed here? (Reference guide: https://docs.papermc.io/paper/dev/plugin-yml#commands)");
 		}
 	}
 
@@ -691,7 +687,8 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 		try
 		{
 			JarFile jarFile = new JarFile(file);
-			PluginDescriptionFile descriptionFile = new PluginDescriptionFile(jarFile.getInputStream(jarFile.getEntry("plugin.yml")));
+			PluginDescriptionFile descriptionFile = new PluginDescriptionFile(
+					jarFile.getInputStream(jarFile.getEntry("plugin.yml")));
 			MockBukkitConfiguredPluginClassLoader classLoader = createClassLoader(descriptionFile);
 			classLoader.setJarFile(jarFile);
 
@@ -700,8 +697,8 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 			registerLoadedPlugin(plugin);
 			return plugin;
 		}
-		catch (IOException | InvalidDescriptionException | ClassNotFoundException | NoSuchMethodException |
-			   InstantiationException | IllegalAccessException | InvocationTargetException e)
+		catch (IOException | InvalidDescriptionException | ClassNotFoundException | NoSuchMethodException
+				| InstantiationException | IllegalAccessException | InvocationTargetException e)
 		{
 			throw new RuntimeException(e);
 		}
@@ -748,7 +745,8 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 			throw new IllegalPluginAccessException("Plugin attempted to register " + listener + " while not enabled");
 		}
 		addListener(listener, plugin);
-		for (Map.Entry<Class<? extends Event>, Set<RegisteredListener>> entry : plugin.getPluginLoader().createRegisteredListeners(listener, plugin).entrySet())
+		for (Map.Entry<Class<? extends Event>, Set<RegisteredListener>> entry : plugin.getPluginLoader()
+				.createRegisteredListeners(listener, plugin).entrySet())
 		{
 			getEventListeners(getRegistrationClass(entry.getKey())).registerAll(entry.getValue());
 		}
@@ -780,7 +778,8 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 		{
 			for (Listener l : listListener)
 			{
-				for (Map.Entry<Class<? extends Event>, Set<RegisteredListener>> entry : plugin.getPluginLoader().createRegisteredListeners(l, plugin).entrySet())
+				for (Map.Entry<Class<? extends Event>, Set<RegisteredListener>> entry : plugin.getPluginLoader()
+						.createRegisteredListeners(l, plugin).entrySet())
 				{
 					getEventListeners(getRegistrationClass(entry.getKey())).unregister(plugin);
 				}
@@ -790,15 +789,16 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	}
 
 	@Override
-	public void registerEvent(@NotNull Class<? extends Event> event, @NotNull Listener listener, @NotNull EventPriority priority,
-							  @NotNull EventExecutor executor, @NotNull Plugin plugin)
+	public void registerEvent(@NotNull Class<? extends Event> event, @NotNull Listener listener,
+			@NotNull EventPriority priority, @NotNull EventExecutor executor, @NotNull Plugin plugin)
 	{
 		registerEvent(event, listener, priority, executor, plugin, false);
 	}
 
 	@Override
-	public void registerEvent(@NotNull Class<? extends Event> event, @NotNull Listener listener, @NotNull EventPriority priority,
-							  @NotNull EventExecutor executor, @NotNull Plugin plugin, boolean ignoreCancelled)
+	public void registerEvent(@NotNull Class<? extends Event> event, @NotNull Listener listener,
+			@NotNull EventPriority priority, @NotNull EventExecutor executor, @NotNull Plugin plugin,
+			boolean ignoreCancelled)
 	{
 		Preconditions.checkNotNull(listener, "Listener cannot be null");
 		Preconditions.checkNotNull(listener, "Listener cannot be null");
@@ -810,7 +810,8 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 			throw new IllegalPluginAccessException("Plugin attempted to register " + event + " while not enabled");
 		}
 		addListener(listener, plugin);
-		getEventListeners(event).register(new RegisteredListener(listener, executor, priority, plugin, ignoreCancelled));
+		getEventListeners(event)
+				.register(new RegisteredListener(listener, executor, priority, plugin, ignoreCancelled));
 	}
 
 	private HandlerList getEventListeners(@NotNull Class<? extends Event> type)
@@ -838,15 +839,15 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 		}
 		catch (NoSuchMethodException e)
 		{
-			if (clazz.getSuperclass() != null
-					&& !clazz.getSuperclass().equals(Event.class)
+			if (clazz.getSuperclass() != null && !clazz.getSuperclass().equals(Event.class)
 					&& Event.class.isAssignableFrom(clazz.getSuperclass()))
 			{
 				return getRegistrationClass(clazz.getSuperclass().asSubclass(Event.class));
 			}
 			else
 			{
-				throw new IllegalPluginAccessException("Unable to find handler list for event " + clazz.getName() + ". Static getHandlerList method required!");
+				throw new IllegalPluginAccessException("Unable to find handler list for event " + clazz.getName()
+						+ ". Static getHandlerList method required!");
 			}
 		}
 	}
@@ -871,10 +872,10 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 		server.getMessenger().unregisterIncomingPluginChannel(plugin);
 		server.getMessenger().unregisterOutgoingPluginChannel(plugin);
 		// todo: implement chunk tickets
-//		for (World world : server.getWorlds())
-//		{
-//			world.removePluginChunkTickets(plugin);
-//		}
+		// for (World world : server.getWorlds())
+		// {
+		// world.removePluginChunkTickets(plugin);
+		// }
 	}
 
 	/**

@@ -160,12 +160,15 @@ public class CampfireMock extends TileStateMock implements Campfire
 		return this.cookingDisabled[index];
 	}
 
-	// TODO: Implement a 'cookTick' method to simulate one server tick worth of cooking items. This currently isn't possible as there's no default recipes to change the item types once fully cooked.
+	// TODO: Implement a 'cookTick' method to simulate one server tick worth of
+	// cooking items. This currently isn't possible as there's no default recipes to
+	// change the item types once fully cooked.
 
 	private static void checkSlot(int index)
 	{
 		int maxSlots = MAX_SLOTS - 1;
-		Validate.isTrue(index >= 0 && index <= maxSlots, "Slot index must be between 0 and " + maxSlots + " (inclusive)");
+		Validate.isTrue(index >= 0 && index <= maxSlots,
+				"Slot index must be between 0 and " + maxSlots + " (inclusive)");
 	}
 
 }

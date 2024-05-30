@@ -56,7 +56,8 @@ public class ItemEntityMock extends EntityMock implements Item
 	public void setItemStack(@NotNull ItemStack stack)
 	{
 		Preconditions.checkNotNull(stack, "Item cannot be null");
-		// "stack" is actually nullable here, but it seems like Spigot also throws an Exception
+		// "stack" is actually nullable here, but it seems like Spigot also throws an
+		// Exception
 		// in that case anyway. Besides a "null" Item does not really make sense anyway.
 		this.item = stack.clone();
 	}

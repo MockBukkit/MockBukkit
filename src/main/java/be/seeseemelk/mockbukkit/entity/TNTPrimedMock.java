@@ -71,7 +71,7 @@ public class TNTPrimedMock extends EntityMock implements TNTPrimed
 	@Override
 	public void setBlockData(@NotNull BlockData blockData)
 	{
-		//TODO Auto-generated method stub
+		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 
 	}
@@ -79,7 +79,7 @@ public class TNTPrimedMock extends EntityMock implements TNTPrimed
 	@Override
 	public @NotNull BlockData getBlockData()
 	{
-		//TODO Auto-generated method stub
+		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 

@@ -103,7 +103,8 @@ public class EndermanMock extends MonsterMock implements Enderman
 		if (alive)
 		{
 			Vector vector = new Vector(this.getLocation().x() - entity.getLocation().x(),
-					(this.getLocation().y() + 1.45) - entity.getLocation().y(), this.getLocation().z() - entity.getLocation().z());
+					(this.getLocation().y() + 1.45) - entity.getLocation().y(),
+					this.getLocation().z() - entity.getLocation().z());
 
 			vector = vector.normalize();
 			double x = this.getLocation().x() + (random.nextDouble() - 0.5D) * 8.0D - vector.getX() * 16.0D;

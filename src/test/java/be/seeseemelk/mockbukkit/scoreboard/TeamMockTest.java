@@ -105,7 +105,8 @@ class TeamMockTest
 	{
 		assertEquals(ChatColor.RESET, team.getColor());
 		assertFalse(team.hasColor());
-		assertThrows(IllegalStateException.class, () -> team.color(), "An exception should be thrown when the ChatColor is a format.");
+		assertThrows(IllegalStateException.class, () -> team.color(),
+				"An exception should be thrown when the ChatColor is a format.");
 	}
 
 	@Test
@@ -214,9 +215,7 @@ class TeamMockTest
 	void removeEntities()
 	{
 		Set<Entity> players = Set.of(playerA, playerB);
-		Set<String> entries = players.stream()
-				.map(Entity::getName)
-				.collect(Collectors.toSet());
+		Set<String> entries = players.stream().map(Entity::getName).collect(Collectors.toSet());
 		team.addEntities(players);
 		assertEquals(entries, team.getEntries());
 		assertTrue(team.removeEntities(players));

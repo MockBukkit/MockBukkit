@@ -137,9 +137,8 @@ class PluginManagerMockTest
 		Player player = server.addPlayer();
 		BlockBreakEvent eventToFire = new BlockBreakEvent(null, player);
 		pluginManager.callEvent(eventToFire);
-		pluginManager.assertEventFired(event ->
-				event instanceof BlockBreakEvent && ((BlockBreakEvent) event).getPlayer().equals(player)
-		);
+		pluginManager.assertEventFired(
+				event -> event instanceof BlockBreakEvent && ((BlockBreakEvent) event).getPlayer().equals(player));
 	}
 
 	@Test
@@ -162,7 +161,6 @@ class PluginManagerMockTest
 		assertTrue(event.isCancelled());
 		assertTrue(plugin.ignoredCancelledEvent);
 	}
-
 
 	@Test
 	void assertEventFired_EventWasFired_DoesNotAssert()
@@ -277,8 +275,7 @@ class PluginManagerMockTest
 		{
 			@Override
 			public void run()
-			{
-			}
+			{}
 		};
 		runnable.runTaskTimer(plugin, 1, 1);
 
@@ -304,8 +301,7 @@ class PluginManagerMockTest
 	{
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
 		server.getMessenger().registerOutgoingPluginChannel(plugin, "BungeeCord");
-		server.getMessenger().registerIncomingPluginChannel(plugin, "BungeeCord", (channel, player, message) ->
-		{
+		server.getMessenger().registerIncomingPluginChannel(plugin, "BungeeCord", (channel, player, message) -> {
 		});
 		assertTrue(server.getMessenger().isOutgoingChannelRegistered(plugin, "BungeeCord"));
 		assertTrue(server.getMessenger().isIncomingChannelRegistered(plugin, "BungeeCord"));
@@ -359,7 +355,8 @@ class PluginManagerMockTest
 				throw new IllegalStateException();
 			}
 		}, MockBukkit.createMockPlugin());
-		assertThrowsExactly(IllegalStateException.class, () -> pluginManager.callEvent(new BlockBreakEvent(null, null)));
+		assertThrowsExactly(IllegalStateException.class,
+				() -> pluginManager.callEvent(new BlockBreakEvent(null, null)));
 	}
 
 	@Test
@@ -373,7 +370,8 @@ class PluginManagerMockTest
 				throw new Exception();
 			}
 		}, MockBukkit.createMockPlugin());
-		assertThrowsExactly(EventHandlerException.class, () -> pluginManager.callEvent(new BlockBreakEvent(null, null)));
+		assertThrowsExactly(EventHandlerException.class,
+				() -> pluginManager.callEvent(new BlockBreakEvent(null, null)));
 	}
 
 	@ParameterizedTest
@@ -386,7 +384,8 @@ class PluginManagerMockTest
 		PluginDescriptionFile sillyName = new PluginDescriptionFile("Name", "1.0.0", TestPlugin.class.getName());
 		nameField.set(sillyName, name);
 
-		assertThrows(RuntimeException.class, () -> pluginManager.loadPlugin(TestPlugin.class, sillyName, new Object[0]));
+		assertThrows(RuntimeException.class,
+				() -> pluginManager.loadPlugin(TestPlugin.class, sillyName, new Object[0]));
 	}
 
 	@Test

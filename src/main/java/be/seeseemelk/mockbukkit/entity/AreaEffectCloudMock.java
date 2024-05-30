@@ -147,7 +147,7 @@ public class AreaEffectCloudMock extends EntityMock implements AreaEffectCloud
 	public <T> void setParticle(@NotNull Particle particle, @Nullable T data)
 	{
 		Preconditions.checkNotNull(particle, "Particle cannot be null");
-		//We ignore the data for now since we don't have a way to process it
+		// We ignore the data for now since we don't have a way to process it
 		this.particle = particle;
 	}
 
@@ -167,14 +167,14 @@ public class AreaEffectCloudMock extends EntityMock implements AreaEffectCloud
 	@Override
 	public void setBasePotionType(@NotNull PotionType type)
 	{
-		//TODO Auto-generated method stub
+		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public @NotNull PotionType getBasePotionType()
 	{
-		//TODO Auto-generated method stub
+		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
@@ -201,10 +201,8 @@ public class AreaEffectCloudMock extends EntityMock implements AreaEffectCloud
 	@Override
 	public boolean addCustomEffect(@NotNull PotionEffect effect, boolean overwrite)
 	{
-		PotionEffect existingEffect = this.customEffects.stream()
-				.filter(e -> e.getType().equals(effect.getType()))
-				.findFirst()
-				.orElse(null);
+		PotionEffect existingEffect = this.customEffects.stream().filter(e -> e.getType().equals(effect.getType()))
+				.findFirst().orElse(null);
 
 		if (existingEffect != null)
 		{
@@ -228,9 +226,7 @@ public class AreaEffectCloudMock extends EntityMock implements AreaEffectCloud
 	@Override
 	public boolean removeCustomEffect(@NotNull PotionEffectType type)
 	{
-		PotionEffect existingEffect = this.customEffects.stream()
-				.filter(e -> e.getType().equals(type))
-				.findFirst()
+		PotionEffect existingEffect = this.customEffects.stream().filter(e -> e.getType().equals(type)).findFirst()
 				.orElse(null);
 
 		if (existingEffect != null)

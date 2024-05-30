@@ -7,8 +7,7 @@ import java.util.List;
 
 public enum InternalTagRegistry
 {
-	BLOCKS(TagRegistry.BLOCKS),
-	ITEMS(TagRegistry.ITEMS);
+	BLOCKS(TagRegistry.BLOCKS), ITEMS(TagRegistry.ITEMS);
 
 	private final TagRegistry tagRegistry;
 	private final ArrayList<InternalTag<?>> relatedTags;

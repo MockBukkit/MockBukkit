@@ -19,8 +19,8 @@ public class MockIpBanEntry implements BanEntry<InetAddress>
 	private Date created;
 	private Date expires;
 
-	public MockIpBanEntry
-			(@NotNull String target, @Nullable String reason, @Nullable Date expires, @Nullable String source)
+	public MockIpBanEntry(@NotNull String target, @Nullable String reason, @Nullable Date expires,
+			@Nullable String source)
 	{
 		this.target = target;
 		this.source = source;

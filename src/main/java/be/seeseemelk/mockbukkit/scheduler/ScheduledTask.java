@@ -55,7 +55,8 @@ public class ScheduledTask implements BukkitTask, BukkitWorker
 	 * @param scheduledTick The tick the task is scheduled to run at.
 	 * @param consumer      The consumer to run.
 	 */
-	public ScheduledTask(int id, Plugin plugin, boolean isSync, long scheduledTick, @NotNull Consumer<? super BukkitTask> consumer)
+	public ScheduledTask(int id, Plugin plugin, boolean isSync, long scheduledTick,
+			@NotNull Consumer<? super BukkitTask> consumer)
 	{
 		this(id, plugin, isSync, scheduledTick, null, consumer);
 		Preconditions.checkNotNull(consumer, "Consumer cannot be null");
@@ -71,7 +72,8 @@ public class ScheduledTask implements BukkitTask, BukkitWorker
 	 * @param runnable      The runnable to run.
 	 * @param consumer      The consumer to run.
 	 */
-	private ScheduledTask(int id, Plugin plugin, boolean isSync, long scheduledTick, @Nullable Runnable runnable, @Nullable Consumer<? super BukkitTask> consumer)
+	private ScheduledTask(int id, Plugin plugin, boolean isSync, long scheduledTick, @Nullable Runnable runnable,
+			@Nullable Consumer<? super BukkitTask> consumer)
 	{
 		this.id = id;
 		this.plugin = plugin;
@@ -81,7 +83,6 @@ public class ScheduledTask implements BukkitTask, BukkitWorker
 		this.consumer = consumer;
 		this.running = false;
 	}
-
 
 	/**
 	 * @return Whether the task is running.
@@ -102,7 +103,6 @@ public class ScheduledTask implements BukkitTask, BukkitWorker
 	{
 		this.running = running;
 	}
-
 
 	/**
 	 * Get the tick at which the task is scheduled to run at.

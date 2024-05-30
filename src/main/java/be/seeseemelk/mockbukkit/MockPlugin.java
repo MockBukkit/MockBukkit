@@ -17,8 +17,7 @@ public class MockPlugin extends JavaPlugin
 	 * CraftBukkit constructor.
 	 */
 	public MockPlugin()
-	{
-	}
+	{}
 
 	/**
 	 * MockBukkit constructor.
@@ -28,7 +27,8 @@ public class MockPlugin extends JavaPlugin
 	 * @param dataFolder  The plugins data folder.
 	 * @param file        The plugins file.
 	 */
-	protected MockPlugin(@NotNull JavaPluginLoader loader, @NotNull PluginDescriptionFile description, @NotNull File dataFolder, @NotNull File file)
+	protected MockPlugin(@NotNull JavaPluginLoader loader, @NotNull PluginDescriptionFile description,
+			@NotNull File dataFolder, @NotNull File file)
 	{
 		super(loader, description, dataFolder, file);
 	}

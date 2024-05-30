@@ -17,7 +17,6 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-
 class BookMetaMockTest
 {
 
@@ -355,8 +354,10 @@ class BookMetaMockTest
 		assertEquals(pages, meta.getPages());
 
 		pages.set(0, "Dummy");
-		assertNotSame(pages, meta.getPages()); // testing that the `pages`' array modifications is not reflected in the book.
-		assertNotEquals(pages, meta.getPages()); // testing that the `pages`' array modifications is not reflected in the book.
+		assertNotSame(pages, meta.getPages()); // testing that the `pages`' array modifications is not reflected in the
+												// book.
+		assertNotEquals(pages, meta.getPages()); // testing that the `pages`' array modifications is not reflected in
+													// the book.
 	}
 
 }

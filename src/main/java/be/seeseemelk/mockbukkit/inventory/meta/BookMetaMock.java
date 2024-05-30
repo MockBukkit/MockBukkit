@@ -260,7 +260,7 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 
 	@Override
 	@Deprecated(since = "1.16")
-	public void addPage(String @NotNull ... pages)
+	public void addPage(String @NotNull... pages)
 	{
 
 		for (String page1 : pages)

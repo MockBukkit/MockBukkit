@@ -63,7 +63,8 @@ import java.util.function.BooleanSupplier;
 public class MockUnsafeValues implements UnsafeValues
 {
 
-	private static final List<String> COMPATIBLE_API_VERSIONS = Arrays.asList("1.13", "1.14", "1.15", "1.16", "1.17", "1.18", "1.19", "1.20");
+	private static final List<String> COMPATIBLE_API_VERSIONS = Arrays.asList("1.13", "1.14", "1.15", "1.16", "1.17",
+			"1.18", "1.19", "1.20");
 
 	private String minimumApiVersion = "none";
 
@@ -109,7 +110,8 @@ public class MockUnsafeValues implements UnsafeValues
 	}
 
 	@Override
-	public Component resolveWithContext(Component component, CommandSender context, Entity scoreboardSubject, boolean bypassPermissions) throws IOException
+	public Component resolveWithContext(Component component, CommandSender context, Entity scoreboardSubject,
+			boolean bypassPermissions) throws IOException
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -121,7 +123,6 @@ public class MockUnsafeValues implements UnsafeValues
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
 
 	@Override
 	public Material toLegacy(Material material)
@@ -152,7 +153,8 @@ public class MockUnsafeValues implements UnsafeValues
 	@Override
 	public Material fromLegacy(MaterialData materialData, boolean itemPriority)
 	{
-		// Paper will blindly call #getItemType even if materialData is null, so we might as well enforce that it isn't.
+		// Paper will blindly call #getItemType even if materialData is null, so we
+		// might as well enforce that it isn't.
 		Preconditions.checkNotNull(materialData, "materialData cannot be null");
 		Material material = materialData.getItemType();
 		if (material == null || !material.isLegacy())
@@ -213,7 +215,8 @@ public class MockUnsafeValues implements UnsafeValues
 
 			if (pluginIndex < COMPATIBLE_API_VERSIONS.indexOf(minimumApiVersion))
 			{
-				throw new InvalidPluginException("Plugin API version " + pdf.getAPIVersion() + " is lower than the minimum allowed version.");
+				throw new InvalidPluginException(
+						"Plugin API version " + pdf.getAPIVersion() + " is lower than the minimum allowed version.");
 			}
 		}
 	}
@@ -380,13 +383,16 @@ public class MockUnsafeValues implements UnsafeValues
 
 	private String handleTranslateItemEdgeCases(Material material)
 	{
-		// edge cases: WHEAT and NETHER_WART are blocks, but still use the "item" prefix (therefore this check has to be done BEFORE the isBlock check below)
+		// edge cases: WHEAT and NETHER_WART are blocks, but still use the "item" prefix
+		// (therefore this check has to be done BEFORE the isBlock check below)
 		if (material == Material.WHEAT || material == Material.NETHER_WART)
 		{
 			return formatTranslatable("item", material);
 		}
-		// edge case: If a translation key from an item is requested from anything that is also a block, the block translation key is always returned
-		// e.g: Material#STONE is a block (but also an obtainable item in the inventory). However, the translation key is always "block.minecraft.stone".
+		// edge case: If a translation key from an item is requested from anything that
+		// is also a block, the block translation key is always returned
+		// e.g: Material#STONE is a block (but also an obtainable item in the
+		// inventory). However, the translation key is always "block.minecraft.stone".
 		if (material.isBlock())
 		{
 			return formatTranslatable("block", material);
@@ -395,18 +401,22 @@ public class MockUnsafeValues implements UnsafeValues
 		return null;
 	}
 
-	private <T extends Keyed & Translatable> String formatTranslatable(String prefix, T translatable, boolean fromItemStack)
+	private <T extends Keyed & Translatable> String formatTranslatable(String prefix, T translatable,
+			boolean fromItemStack)
 	{
-		// enforcing Translatable is not necessary, but translating only makes sense when the object is really translatable by design.
+		// enforcing Translatable is not necessary, but translating only makes sense
+		// when the object is really translatable by design.
 		String value = translatable.key().value();
 		if (translatable instanceof Material material)
 		{
 			// replace wall_hanging string check with Tag check (when implemented)
-			if (value.contains("wall_hanging") || Tag.WALL_SIGNS.isTagged(material) || value.endsWith("wall_banner") || value.endsWith("wall_torch") || value.endsWith("wall_skull") || value.endsWith("wall_head"))
+			if (value.contains("wall_hanging") || Tag.WALL_SIGNS.isTagged(material) || value.endsWith("wall_banner")
+					|| value.endsWith("wall_torch") || value.endsWith("wall_skull") || value.endsWith("wall_head"))
 			{
 				value = value.replace("wall_", "");
 			}
-			final Set<Material> emptyEffects = Set.of(Material.POTION, Material.SPLASH_POTION, Material.TIPPED_ARROW, Material.LINGERING_POTION);
+			final Set<Material> emptyEffects = Set.of(Material.POTION, Material.SPLASH_POTION, Material.TIPPED_ARROW,
+					Material.LINGERING_POTION);
 			if (fromItemStack && emptyEffects.contains(material))
 			{
 				value += ".effect.empty";
@@ -480,7 +490,8 @@ public class MockUnsafeValues implements UnsafeValues
 	}
 
 	@Override
-	public @NotNull Multimap<Attribute, AttributeModifier> getItemAttributes(@NotNull Material material, @NotNull EquipmentSlot equipmentSlot)
+	public @NotNull Multimap<Attribute, AttributeModifier> getItemAttributes(@NotNull Material material,
+			@NotNull EquipmentSlot equipmentSlot)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -544,15 +555,14 @@ public class MockUnsafeValues implements UnsafeValues
 
 	@Override
 	public LifecycleEventManager<Plugin> createPluginLifecycleEventManager(JavaPlugin javaPlugin,
-																		   BooleanSupplier booleanSupplier)
+			BooleanSupplier booleanSupplier)
 	{
 		return new MockLifecycleEventManager();
 	}
 
 	@Override
 	public @NotNull List<Component> computeTooltipLines(@NotNull ItemStack itemStack,
-														@NotNull TooltipContext tooltipContext,
-														@Nullable Player player)
+			@NotNull TooltipContext tooltipContext, @Nullable Player player)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -564,6 +574,5 @@ public class MockUnsafeValues implements UnsafeValues
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
 
 }

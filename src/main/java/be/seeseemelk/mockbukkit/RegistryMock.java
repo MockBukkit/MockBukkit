@@ -47,7 +47,6 @@ import java.util.stream.Stream;
 public class RegistryMock<T extends Keyed> implements Registry<T>
 {
 
-
 	/**
 	 * These classes have registries that are an exception to the others, as they are wrappers to minecraft internals
 	 */
@@ -158,15 +157,11 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 			return new RegistryMock<>(tClass);
 		}
 
-		return Stream.of(Registry.class.getDeclaredFields())
-				.filter(a -> Registry.class.isAssignableFrom(a.getType()))
-				.filter(a -> Modifier.isPublic(a.getModifiers()))
-				.filter(a -> Modifier.isStatic(a.getModifiers()))
-				.filter(a -> genericTypeMatches(a, tClass))
-				.map(RegistryMock::getValue)
-				.filter(Objects::nonNull)
-				.findAny()
-				.orElseThrow(() -> new UnimplementedOperationException("Could not find registry for " + tClass.getSimpleName()));
+		return Stream.of(Registry.class.getDeclaredFields()).filter(a -> Registry.class.isAssignableFrom(a.getType()))
+				.filter(a -> Modifier.isPublic(a.getModifiers())).filter(a -> Modifier.isStatic(a.getModifiers()))
+				.filter(a -> genericTypeMatches(a, tClass)).map(RegistryMock::getValue).filter(Objects::nonNull)
+				.findAny().orElseThrow(() -> new UnimplementedOperationException(
+						"Could not find registry for " + tClass.getSimpleName()));
 	}
 
 	private static boolean genericTypeMatches(Field a, Class<?> clazz)
@@ -186,15 +181,15 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		}
 		catch (IllegalAccessException e)
 		{
-			throw new ReflectionAccessException("Could not access field " + a.getDeclaringClass().getSimpleName() + "." + a.getName());
+			throw new ReflectionAccessException(
+					"Could not access field " + a.getDeclaringClass().getSimpleName() + "." + a.getName());
 		}
 	}
 
 	private static List<Class<? extends Keyed>> getOutlierKeyedClasses()
 	{
-		return List.of(Structure.class, PotionEffectType.class,
-				StructureType.class, TrimMaterial.class, TrimPattern.class,
-				MusicInstrument.class, GameEvent.class, Enchantment.class, DamageType.class);
+		return List.of(Structure.class, PotionEffectType.class, StructureType.class, TrimMaterial.class,
+				TrimPattern.class, MusicInstrument.class, GameEvent.class, Enchantment.class, DamageType.class);
 	}
 
 	@Override

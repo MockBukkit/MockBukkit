@@ -166,8 +166,8 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	{
 		double distance = location.distance(expectedLocation);
 		assertEquals(expectedLocation.getWorld(), location.getWorld());
-		assertTrue(distance <= maximumDistance, String.format("Distance was <%.3f> but should be less than or equal to <%.3f>", distance,
-				maximumDistance));
+		assertTrue(distance <= maximumDistance, String
+				.format("Distance was <%.3f> but should be less than or equal to <%.3f>", distance, maximumDistance));
 	}
 
 	/**
@@ -236,7 +236,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public @NotNull Set<Player> getTrackedPlayers()
 	{
-		//TODO Auto-generated method stub
+		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
@@ -334,7 +334,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 
 	@Override
 	@SuppressWarnings("UnstableApiUsage")
-	public boolean teleport(@NotNull Location location, @NotNull TeleportCause cause, TeleportFlag @NotNull ... flags)
+	public boolean teleport(@NotNull Location location, @NotNull TeleportCause cause, TeleportFlag @NotNull... flags)
 	{
 		Preconditions.checkNotNull(location, "Location cannot be null"); // The world can be null if it's not a player
 		location.checkFinite();
@@ -343,7 +343,8 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		boolean dismount = !flagSet.contains(TeleportFlag.EntityState.RETAIN_VEHICLE);
 		boolean ignorePassengers = flagSet.contains(TeleportFlag.EntityState.RETAIN_PASSENGERS);
 
-		if (flagSet.contains(TeleportFlag.EntityState.RETAIN_PASSENGERS) && this.hasPassengers() && location.getWorld().equals(this.getWorld()))
+		if (flagSet.contains(TeleportFlag.EntityState.RETAIN_PASSENGERS) && this.hasPassengers()
+				&& location.getWorld().equals(this.getWorld()))
 		{
 			return false;
 		}
@@ -360,8 +361,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		{
 			// Don't allow teleporting between worlds while keeping passengers
 			// and if remaining on vehicle.
-			if ((ignorePassengers && hasPassengers())
-					|| (!dismount && isInsideVehicle()))
+			if ((ignorePassengers && hasPassengers()) || (!dismount && isInsideVehicle()))
 			{
 				return false;
 			}
@@ -375,7 +375,8 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		if (event.callEvent())
 		{
 			// There is actually no non-null check in the CraftBukkit implementation
-			Preconditions.checkNotNull(event.getTo(), "The location where the entity moved to in the event cannot be null");
+			Preconditions.checkNotNull(event.getTo(),
+					"The location where the entity moved to in the event cannot be null");
 			teleportWithoutEvent(event.getTo(), cause);
 			return true;
 		}
@@ -466,11 +467,12 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	public void sendMessage(@Nullable UUID sender, @NotNull String message)
 	{
 		Preconditions.checkNotNull(message, "Message cannot be null");
-		sendMessage(sender == null ? Identity.nil() : Identity.identity(sender), LegacyComponentSerializer.legacySection().deserialize(message), MessageType.SYSTEM);
+		sendMessage(sender == null ? Identity.nil() : Identity.identity(sender),
+				LegacyComponentSerializer.legacySection().deserialize(message), MessageType.SYSTEM);
 	}
 
 	@Override
-	public void sendMessage(UUID sender, String @NotNull ... messages)
+	public void sendMessage(UUID sender, String @NotNull... messages)
 	{
 		for (String message : messages)
 		{
@@ -478,7 +480,8 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		}
 	}
 
-	public void sendMessage(final @NotNull Identity source, final @NotNull Component message, final @NotNull MessageType type)
+	public void sendMessage(final @NotNull Identity source, final @NotNull Component message,
+			final @NotNull MessageType type)
 	{
 		Preconditions.checkNotNull(source, "Source cannot be null");
 		Preconditions.checkNotNull(message, "Message cannot be null");
@@ -643,11 +646,10 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	{
 		AsyncCatcher.catchOp("getNearbyEntities");
 		List<Entity> nearbyEntities = new ArrayList<>();
-		getWorld().getEntities().forEach(entity ->
-		{
+		getWorld().getEntities().forEach(entity -> {
 			Vector distance = entity.getLocation().clone().subtract(getLocation()).toVector();
-			if (Math.abs(distance.getX()) <= x && Math.abs(distance.getY()) <= y
-					&& Math.abs(distance.getZ()) <= z && entity != this)
+			if (Math.abs(distance.getX()) <= x && Math.abs(distance.getY()) <= y && Math.abs(distance.getZ()) <= z
+					&& entity != this)
 				nearbyEntities.add(entity);
 		});
 		return nearbyEntities;
@@ -706,17 +708,16 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public boolean isFreezeTickingLocked()
 	{
-		//TODO Auto-generated method stub
+		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public void lockFreezeTicks(boolean locked)
 	{
-		//TODO Auto-generated method stub
+		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
-
 
 	@Override
 	public int getFreezeTicks()
@@ -817,7 +818,8 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 			return false;
 		}
 
-		// Go down into the passenger stack to see if it is already a passenger further down.
+		// Go down into the passenger stack to see if it is already a passenger further
+		// down.
 		// This prevents circular entity riding.
 		for (Entity current = this.getVehicle(); current != null; current = current.getVehicle())
 		{
@@ -1088,7 +1090,8 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public @NotNull CompletableFuture<Boolean> teleportAsync(@NotNull Location loc, PlayerTeleportEvent.@NotNull TeleportCause cause, @NotNull TeleportFlag @NotNull ... teleportFlags)
+	public @NotNull CompletableFuture<Boolean> teleportAsync(@NotNull Location loc,
+			PlayerTeleportEvent.@NotNull TeleportCause cause, @NotNull TeleportFlag @NotNull... teleportFlags)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

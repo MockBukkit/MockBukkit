@@ -88,10 +88,8 @@ public class BeaconMock extends TileStateMock implements Beacon
 		{
 			throw new IllegalStateException("Cannot get entities in range of a beacon that is not placed");
 		}
-		return getWorld().getLivingEntities().stream()
-				.filter(Player.class::isInstance)
-				.filter(p -> p.getLocation().distance(getLocation()) < getEffectRange())
-				.toList();
+		return getWorld().getLivingEntities().stream().filter(Player.class::isInstance)
+				.filter(p -> p.getLocation().distance(getLocation()) < getEffectRange()).toList();
 	}
 
 	/**
@@ -228,7 +226,9 @@ public class BeaconMock extends TileStateMock implements Beacon
 			{
 				for (int z = getZ() - yOffset; z <= getZ() + yOffset; ++z)
 				{
-					if (!Bukkit.getTag(Tag.REGISTRY_BLOCKS, NamespacedKey.minecraft("beacon_base_blocks"), Material.class).isTagged(getWorld().getBlockAt(x, y, z).getType()))
+					if (!Bukkit
+							.getTag(Tag.REGISTRY_BLOCKS, NamespacedKey.minecraft("beacon_base_blocks"), Material.class)
+							.isTagged(getWorld().getBlockAt(x, y, z).getType()))
 					{
 						return level;
 					}
@@ -269,7 +269,8 @@ public class BeaconMock extends TileStateMock implements Beacon
 	 */
 	private boolean hasSecondaryEffect()
 	{
-		return this.getTier() >= 4 && this.primaryEffect != null && !this.primaryEffect.equals(this.secondaryEffect) && this.secondaryEffect != null;
+		return this.getTier() >= 4 && this.primaryEffect != null && !this.primaryEffect.equals(this.secondaryEffect)
+				&& this.secondaryEffect != null;
 	}
 
 }

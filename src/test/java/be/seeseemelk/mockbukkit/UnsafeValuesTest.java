@@ -89,8 +89,7 @@ class UnsafeValuesTest
 	@Test
 	void checkSupported_noSpecifiedVersion()
 	{
-		assertDoesNotThrow(() ->
-		{
+		assertDoesNotThrow(() -> {
 			PluginDescriptionFile pluginDescriptionFile = new PluginDescriptionFile("VersionTest", "1.0", "not.exists");
 			mockUnsafeValues.checkSupported(pluginDescriptionFile);
 		});
@@ -99,8 +98,7 @@ class UnsafeValuesTest
 	@Test
 	void minimumApiVersion_GreaterThanCurrentVersion()
 	{
-		assertThrows(InvalidPluginException.class, () ->
-		{
+		assertThrows(InvalidPluginException.class, () -> {
 			mockUnsafeValues.setMinimumApiVersion("1.15");
 			checkVersion("1.13");
 		});
@@ -172,7 +170,8 @@ class UnsafeValuesTest
 
 	@ParameterizedTest
 	@MethodSource("materialAndBlockTranslationKeyProvider")
-	void testMaterialThatIsItemAndBlockTranslationKey(String expectedBlockKey, String expectedItemKey, Material material)
+	void testMaterialThatIsItemAndBlockTranslationKey(String expectedBlockKey, String expectedItemKey,
+			Material material)
 	{
 		assertEquals(expectedBlockKey, mockUnsafeValues.getBlockTranslationKey(material));
 		assertEquals(expectedItemKey, mockUnsafeValues.getItemTranslationKey(material));
@@ -180,12 +179,10 @@ class UnsafeValuesTest
 
 	static Stream<Arguments> materialAndBlockTranslationKeyProvider()
 	{
-		return Stream.of(
-				Arguments.of("block.minecraft.stone", "block.minecraft.stone", Material.STONE),
+		return Stream.of(Arguments.of("block.minecraft.stone", "block.minecraft.stone", Material.STONE),
 				Arguments.of("block.minecraft.dirt", "block.minecraft.dirt", Material.DIRT),
 				Arguments.of("item.minecraft.wheat", "item.minecraft.wheat", Material.WHEAT),
-				Arguments.of("item.minecraft.nether_wart", "item.minecraft.nether_wart", Material.NETHER_WART)
-		);
+				Arguments.of("item.minecraft.nether_wart", "item.minecraft.nether_wart", Material.NETHER_WART));
 	}
 
 	@ParameterizedTest
@@ -197,8 +194,7 @@ class UnsafeValuesTest
 
 	static Stream<Arguments> wallMaterialTranslationKeyProvider()
 	{
-		return Stream.of(
-				Arguments.of("block.minecraft.acacia_sign", Material.ACACIA_SIGN),
+		return Stream.of(Arguments.of("block.minecraft.acacia_sign", Material.ACACIA_SIGN),
 				Arguments.of("block.minecraft.acacia_sign", Material.ACACIA_WALL_SIGN),
 				Arguments.of("block.minecraft.acacia_hanging_sign", Material.ACACIA_HANGING_SIGN),
 				Arguments.of("block.minecraft.acacia_hanging_sign", Material.ACACIA_WALL_HANGING_SIGN),
@@ -209,8 +205,7 @@ class UnsafeValuesTest
 				Arguments.of("block.minecraft.skeleton_skull", Material.SKELETON_SKULL),
 				Arguments.of("block.minecraft.skeleton_skull", Material.SKELETON_WALL_SKULL),
 				Arguments.of("block.minecraft.creeper_head", Material.CREEPER_HEAD),
-				Arguments.of("block.minecraft.creeper_head", Material.CREEPER_WALL_HEAD)
-		);
+				Arguments.of("block.minecraft.creeper_head", Material.CREEPER_WALL_HEAD));
 	}
 
 	@Test
@@ -229,17 +224,16 @@ class UnsafeValuesTest
 
 	static Stream<Arguments> itemStackTranslationKeyProvider()
 	{
-		return Stream.of(
-				Arguments.of("item.minecraft.saddle", new ItemStack(Material.SADDLE)),
+		return Stream.of(Arguments.of("item.minecraft.saddle", new ItemStack(Material.SADDLE)),
 				Arguments.of("block.minecraft.stone", new ItemStack(Material.STONE)),
 				Arguments.of("item.minecraft.wheat", new ItemStack(Material.WHEAT)),
-				Arguments.of("item.minecraft.nether_wart", new ItemStack(Material.NETHER_WART))
-		);
+				Arguments.of("item.minecraft.nether_wart", new ItemStack(Material.NETHER_WART)));
 	}
 
 	@ParameterizedTest
 	@MethodSource("itemStackEmptyEffectTranslationKeyProvider")
-	void testItemStackEmptyEffectTranslationKey(String expectedMaterialKey, Material material, String expectedItemStackKey, ItemStack itemStack)
+	void testItemStackEmptyEffectTranslationKey(String expectedMaterialKey, Material material,
+			String expectedItemStackKey, ItemStack itemStack)
 	{
 		assertEquals(expectedMaterialKey, material.getItemTranslationKey());
 		assertEquals(expectedItemStackKey, itemStack.translationKey());
@@ -248,11 +242,14 @@ class UnsafeValuesTest
 	static Stream<Arguments> itemStackEmptyEffectTranslationKeyProvider()
 	{
 		return Stream.of(
-				Arguments.of("item.minecraft.potion", Material.POTION, "item.minecraft.potion.effect.empty", new ItemStack(Material.POTION)),
-				Arguments.of("item.minecraft.splash_potion", Material.SPLASH_POTION, "item.minecraft.splash_potion.effect.empty", new ItemStack(Material.SPLASH_POTION)),
-				Arguments.of("item.minecraft.tipped_arrow", Material.TIPPED_ARROW, "item.minecraft.tipped_arrow.effect.empty", new ItemStack(Material.TIPPED_ARROW)),
-				Arguments.of("item.minecraft.lingering_potion", Material.LINGERING_POTION, "item.minecraft.lingering_potion.effect.empty", new ItemStack(Material.LINGERING_POTION))
-		);
+				Arguments.of("item.minecraft.potion", Material.POTION, "item.minecraft.potion.effect.empty",
+						new ItemStack(Material.POTION)),
+				Arguments.of("item.minecraft.splash_potion", Material.SPLASH_POTION,
+						"item.minecraft.splash_potion.effect.empty", new ItemStack(Material.SPLASH_POTION)),
+				Arguments.of("item.minecraft.tipped_arrow", Material.TIPPED_ARROW,
+						"item.minecraft.tipped_arrow.effect.empty", new ItemStack(Material.TIPPED_ARROW)),
+				Arguments.of("item.minecraft.lingering_potion", Material.LINGERING_POTION,
+						"item.minecraft.lingering_potion.effect.empty", new ItemStack(Material.LINGERING_POTION)));
 	}
 
 }

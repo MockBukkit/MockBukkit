@@ -123,7 +123,8 @@ public class TropicalFishBucketMetaMock extends ItemMetaMock implements Tropical
 	{
 		if (!(obj instanceof TropicalFishBucketMeta meta))
 			return false;
-		return super.equals(obj) && patternColor == meta.getPatternColor() && bodyColor == meta.getBodyColor() && pattern == meta.getPattern();
+		return super.equals(obj) && patternColor == meta.getPatternColor() && bodyColor == meta.getBodyColor()
+				&& pattern == meta.getPattern();
 	}
 
 	@Override

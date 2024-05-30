@@ -48,7 +48,8 @@ class BlastFurnaceMockTest
 	@Test
 	void constructor_Block_NotBlastFurnace_ThrowsException()
 	{
-		assertThrowsExactly(IllegalArgumentException.class, () -> new BlastFurnaceMock(new BlockMock(Material.FURNACE)));
+		assertThrowsExactly(IllegalArgumentException.class,
+				() -> new BlastFurnaceMock(new BlockMock(Material.FURNACE)));
 	}
 
 	@Test

@@ -83,7 +83,7 @@ public class FireworkMetaMock extends ItemMetaMock implements FireworkMeta
 	}
 
 	@Override
-	public void addEffects(@NotNull FireworkEffect @NotNull ... effects)
+	public void addEffects(@NotNull FireworkEffect @NotNull... effects)
 	{
 		Preconditions.checkNotNull(effects, "effects must never be null");
 

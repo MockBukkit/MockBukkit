@@ -72,7 +72,8 @@ public class TestPlugin extends JavaPlugin implements Listener
 	}
 
 	@Override
-	public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String @NotNull [] args)
+	public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command,
+			@NotNull String alias, @NotNull String @NotNull [] args)
 	{
 		if (args.length == 1)
 		{
@@ -121,12 +122,12 @@ public class TestPlugin extends JavaPlugin implements Listener
 				barrier.await();
 			}
 			catch (InterruptedException | BrokenBarrierException e)
-			{
-			}
+			{}
 		}
 	}
 
-	public void createCustomClass() throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException
+	public void createCustomClass()
+			throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException
 	{
 		ConfiguredPluginClassLoader cpcl = (ConfiguredPluginClassLoader) getClassLoader();
 		MockCustomConfiguredPluginClassLoader ccl = new MockCustomConfiguredPluginClassLoader(cpcl);

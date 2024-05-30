@@ -28,12 +28,7 @@ class MockBukkitProfileBanEntryTest
 	void setUp()
 	{
 		player = server.addPlayer();
-		entry = new MockBukkitProfileBanEntry(
-				new PlayerProfileMock(player),
-				"source",
-				null,
-				"reason"
-		);
+		entry = new MockBukkitProfileBanEntry(new PlayerProfileMock(player), "source", null, "reason");
 	}
 
 	@Test
@@ -59,8 +54,7 @@ class MockBukkitProfileBanEntryTest
 	@Test
 	void testSetCreated_Null()
 	{
-		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
-		{
+		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () -> {
 			entry.setCreated(null);
 		});
 

@@ -56,8 +56,7 @@ class FoliaAsyncSchedulerTest
 	@Test
 	void runNow_Null_Plugin_ThrowsException()
 	{
-		assertThrows(NullPointerException.class, () -> scheduler.runNow(null, task ->
-		{
+		assertThrows(NullPointerException.class, () -> scheduler.runNow(null, task -> {
 		}));
 	}
 
@@ -86,7 +85,8 @@ class FoliaAsyncSchedulerTest
 		CompletableFuture<Boolean> future = new CompletableFuture<>();
 		future.completeOnTimeout(false, 2, TimeUnit.SECONDS);
 		MockPlugin mockPlugin = MockBukkit.createMockPlugin();
-		scheduler.runDelayed(mockPlugin, task -> future.complete(!server.isPrimaryThread()), 100, TimeUnit.MILLISECONDS);
+		scheduler.runDelayed(mockPlugin, task -> future.complete(!server.isPrimaryThread()), 100,
+				TimeUnit.MILLISECONDS);
 		bukkitScheduler.performTicks(2);
 		assertTrue(future.join());
 	}
@@ -100,8 +100,7 @@ class FoliaAsyncSchedulerTest
 	@Test
 	void runDelayed_NullTimeUnit_ThrowsExceptions()
 	{
-		assertThrows(NullPointerException.class, () -> scheduler.runDelayed(null, (task) ->
-		{
+		assertThrows(NullPointerException.class, () -> scheduler.runDelayed(null, (task) -> {
 		}, 1, null));
 	}
 
@@ -127,8 +126,7 @@ class FoliaAsyncSchedulerTest
 	@Test
 	void runAtFixedRate_NullPlugin_ThrowsException()
 	{
-		assertThrows(NullPointerException.class, () -> scheduler.runAtFixedRate(null, (task) ->
-		{
+		assertThrows(NullPointerException.class, () -> scheduler.runAtFixedRate(null, (task) -> {
 		}, 1, 1, TimeUnit.SECONDS));
 	}
 
@@ -136,8 +134,7 @@ class FoliaAsyncSchedulerTest
 	void runAtFixedRate_NullTimeUnit_ThrowsExceptions()
 	{
 		MockPlugin mockPlugin = MockBukkit.createMockPlugin();
-		assertThrows(NullPointerException.class, () -> scheduler.runAtFixedRate(mockPlugin, (task) ->
-		{
+		assertThrows(NullPointerException.class, () -> scheduler.runAtFixedRate(mockPlugin, (task) -> {
 		}, 1, 1, null));
 	}
 
@@ -145,14 +142,16 @@ class FoliaAsyncSchedulerTest
 	void runAtFixedRate_NullTask_ThrowsExceptions()
 	{
 		MockPlugin mockPlugin = MockBukkit.createMockPlugin();
-		assertThrows(NullPointerException.class, () -> scheduler.runAtFixedRate(mockPlugin, null, 1, 1, TimeUnit.SECONDS));
+		assertThrows(NullPointerException.class,
+				() -> scheduler.runAtFixedRate(mockPlugin, null, 1, 1, TimeUnit.SECONDS));
 	}
 
 	@Test
 	void runAtFixedRate_RunsRepeatedly() throws InterruptedException
 	{
 		CountDownLatch latch = new CountDownLatch(3);
-		scheduler.runAtFixedRate(MockBukkit.createMockPlugin(), (task) -> latch.countDown(), 50, 50, TimeUnit.MILLISECONDS);
+		scheduler.runAtFixedRate(MockBukkit.createMockPlugin(), (task) -> latch.countDown(), 50, 50,
+				TimeUnit.MILLISECONDS);
 		bukkitScheduler.performTicks(3);
 		assertTrue(latch.await(1, TimeUnit.SECONDS));
 	}
@@ -162,7 +161,8 @@ class FoliaAsyncSchedulerTest
 	{
 		CompletableFuture<Boolean> future = new CompletableFuture<>();
 		future.completeOnTimeout(false, 1, TimeUnit.SECONDS);
-		scheduler.runAtFixedRate(MockBukkit.createMockPlugin(), (task) -> future.complete(!server.isPrimaryThread()), 50, 50, TimeUnit.MILLISECONDS);
+		scheduler.runAtFixedRate(MockBukkit.createMockPlugin(), (task) -> future.complete(!server.isPrimaryThread()),
+				50, 50, TimeUnit.MILLISECONDS);
 		bukkitScheduler.performTicks(1);
 		assertTrue(future.join());
 	}

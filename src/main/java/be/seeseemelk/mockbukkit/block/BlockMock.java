@@ -208,7 +208,8 @@ public class BlockMock implements Block
 	 */
 	public void setLightFromBlocks(byte lightFromBlocks)
 	{
-		Preconditions.checkArgument(lightFromBlocks >= 0 && lightFromBlocks <= 15, "Light level should be between 0 and 15.");
+		Preconditions.checkArgument(lightFromBlocks >= 0 && lightFromBlocks <= 15,
+				"Light level should be between 0 and 15.");
 
 		this.lightFromBlocks = lightFromBlocks;
 	}
@@ -295,7 +296,8 @@ public class BlockMock implements Block
 
 		for (BlockFace face : BlockFace.values())
 		{
-			if ((this.getX() + face.getModX() == block.getX()) && (this.getY() + face.getModY() == block.getY()) && (this.getZ() + face.getModZ() == block.getZ()))
+			if ((this.getX() + face.getModX() == block.getX()) && (this.getY() + face.getModY() == block.getY())
+					&& (this.getZ() + face.getModZ() == block.getZ()))
 			{
 				return face;
 			}
@@ -408,7 +410,6 @@ public class BlockMock implements Block
 		throw new UnimplementedOperationException();
 	}
 
-
 	@Override
 	public boolean isSolid()
 	{
@@ -441,9 +442,7 @@ public class BlockMock implements Block
 	@Override
 	public boolean isLiquid()
 	{
-		return material == Material.LAVA
-				|| material == Material.WATER
-				|| material == Material.BUBBLE_COLUMN;
+		return material == Material.LAVA || material == Material.WATER || material == Material.BUBBLE_COLUMN;
 	}
 
 	@Override
@@ -618,7 +617,8 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public RayTraceResult rayTrace(@NotNull Location start, @NotNull Vector direction, double maxDistance, @NotNull FluidCollisionMode fluidCollisionMode)
+	public RayTraceResult rayTrace(@NotNull Location start, @NotNull Vector direction, double maxDistance,
+			@NotNull FluidCollisionMode fluidCollisionMode)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

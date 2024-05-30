@@ -39,38 +39,45 @@ public class ScoreboardMock implements Scoreboard
 
 	@Override
 	@Deprecated(since = "1.13")
-	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull String criteria) throws IllegalArgumentException
+	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull String criteria)
+			throws IllegalArgumentException
 	{
 		return registerNewObjective(name, criteria, name, RenderType.INTEGER);
 	}
 
 	@Override
-	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull String criteria, @Nullable Component displayName) throws IllegalArgumentException
+	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull String criteria,
+			@Nullable Component displayName) throws IllegalArgumentException
 	{
 		return registerNewObjective(name, criteria, displayName, RenderType.INTEGER);
 	}
 
 	@Override
-	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull String criteria, @Nullable Component displayName, @NotNull RenderType renderType) throws IllegalArgumentException
+	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull String criteria,
+			@Nullable Component displayName, @NotNull RenderType renderType) throws IllegalArgumentException
 	{
 		return registerNewObjective(name, Criteria.create(criteria), displayName, renderType);
 	}
 
 	@Override
-	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull Criteria criteria, @Nullable Component displayName) throws IllegalArgumentException
+	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull Criteria criteria,
+			@Nullable Component displayName) throws IllegalArgumentException
 	{
 		return registerNewObjective(name, criteria, displayName, RenderType.INTEGER);
 	}
 
 	@Override
-	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull Criteria criteria, @Nullable Component displayName, @NotNull RenderType renderType) throws IllegalArgumentException
+	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull Criteria criteria,
+			@Nullable Component displayName, @NotNull RenderType renderType) throws IllegalArgumentException
 	{
 		Preconditions.checkNotNull(name, "Objective name cannot be null");
 		Preconditions.checkNotNull(criteria, "Criteria cannot be null");
 		Preconditions.checkNotNull(displayName, "Display name cannot be null");
 		Preconditions.checkNotNull(renderType, "RenderType cannot be null");
-		Preconditions.checkArgument(name.length() <= Short.MAX_VALUE, "The name '" + name + "' is longer than the limit of 32767 characters");
-		Preconditions.checkArgument(!this.objectives.containsKey(name), "An objective of name '" + name + "' already exists");
+		Preconditions.checkArgument(name.length() <= Short.MAX_VALUE,
+				"The name '" + name + "' is longer than the limit of 32767 characters");
+		Preconditions.checkArgument(!this.objectives.containsKey(name),
+				"An objective of name '" + name + "' already exists");
 		ObjectiveMock objective = new ObjectiveMock(this, name, displayName, criteria, renderType);
 		this.objectives.put(name, objective);
 		return objective;
@@ -78,28 +85,30 @@ public class ScoreboardMock implements Scoreboard
 
 	@Override
 	@Deprecated(since = "1.16")
-	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull String criteria, @NotNull String displayName)
-			throws IllegalArgumentException
+	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull String criteria,
+			@NotNull String displayName) throws IllegalArgumentException
 	{
 		return registerNewObjective(name, criteria, displayName, RenderType.INTEGER);
 	}
 
 	@Override
 	@Deprecated(since = "1.16")
-	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull String criteria, @NotNull String displayName, @NotNull RenderType renderType)
-			throws IllegalArgumentException
+	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull String criteria,
+			@NotNull String displayName, @NotNull RenderType renderType) throws IllegalArgumentException
 	{
 		return registerNewObjective(name, criteria, legacySection().deserialize(displayName), renderType);
 	}
 
 	@Override
-	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull Criteria criteria, @NotNull String displayName) throws IllegalArgumentException
+	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull Criteria criteria,
+			@NotNull String displayName) throws IllegalArgumentException
 	{
 		return registerNewObjective(name, criteria, displayName, RenderType.INTEGER);
 	}
 
 	@Override
-	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull Criteria criteria, @NotNull String displayName, @NotNull RenderType renderType) throws IllegalArgumentException
+	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull Criteria criteria,
+			@NotNull String displayName, @NotNull RenderType renderType) throws IllegalArgumentException
 	{
 		return registerNewObjective(name, criteria, legacySection().deserialize(displayName), renderType);
 	}
@@ -123,8 +132,7 @@ public class ScoreboardMock implements Scoreboard
 	public @NotNull Set<Objective> getObjectivesByCriteria(@NotNull Criteria criteria) throws IllegalArgumentException
 	{
 		Preconditions.checkNotNull(criteria, "Criteria cannot be null");
-		return objectives.values().stream()
-				.filter(objective -> objective.getTrackedCriteria().equals(criteria))
+		return objectives.values().stream().filter(objective -> objective.getTrackedCriteria().equals(criteria))
 				.collect(Collectors.toSet());
 	}
 

@@ -28,9 +28,12 @@ public class PlayerTexturesMock implements PlayerTextures
 	private URL cape;
 
 	// Dirty: Indicates a change that requires a rebuild of the property.
-	// This also indicates an invalidation of any previously present textures data that is specific to official
-	// GameProfiles, such as the property signature, timestamp, profileId, playerName, etc.: Any modifications by
-	// plugins that affect the textures property immediately invalidate all attributes that are specific to official
+	// This also indicates an invalidation of any previously present textures data
+	// that is specific to official
+	// GameProfiles, such as the property signature, timestamp, profileId,
+	// playerName, etc.: Any modifications by
+	// plugins that affect the textures property immediately invalidate all
+	// attributes that are specific to official
 	// GameProfiles (even if these modifications are later reverted).
 	private boolean dirty = false;
 
@@ -117,7 +120,8 @@ public class PlayerTexturesMock implements PlayerTextures
 	@Override
 	public boolean isSigned()
 	{
-		if (dirty) return false;
+		if (dirty)
+			return false;
 		ProfileProperty property = getProperty();
 		return property != null;
 	}
@@ -138,8 +142,10 @@ public class PlayerTexturesMock implements PlayerTextures
 	@Override
 	public boolean equals(Object obj)
 	{
-		if (this == obj) return true;
-		if (!(obj instanceof PlayerTextures)) return false;
+		if (this == obj)
+			return true;
+		if (!(obj instanceof PlayerTextures))
+			return false;
 
 		PlayerTexturesMock other = (PlayerTexturesMock) obj;
 		ProfileProperty property = getProperty();

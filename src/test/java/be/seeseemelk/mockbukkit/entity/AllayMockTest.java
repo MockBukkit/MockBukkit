@@ -6,7 +6,6 @@ import be.seeseemelk.mockbukkit.WorldMock;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Allay;
-import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.AfterEach;
@@ -65,8 +64,7 @@ class AllayMockTest
 		ItemStack item = new ItemStack(Material.DIAMOND, 5);
 
 		allayMock.simulateItemPickup(new ItemStack(Material.DIAMOND, 63));
-		Assertions.assertThrows(IllegalStateException.class,
-				() -> allayMock.simulateItemPickup(item));
+		Assertions.assertThrows(IllegalStateException.class, () -> allayMock.simulateItemPickup(item));
 
 	}
 
@@ -76,8 +74,7 @@ class AllayMockTest
 		allayMock.simulatePlayerInteract(Material.DIAMOND);
 		ItemStack item = new ItemStack(Material.IRON_INGOT, 1);
 
-		Assertions.assertThrows(IllegalArgumentException.class,
-				() -> allayMock.simulateItemPickup(item));
+		Assertions.assertThrows(IllegalArgumentException.class, () -> allayMock.simulateItemPickup(item));
 	}
 
 	@Test
@@ -100,8 +97,7 @@ class AllayMockTest
 	{
 		allayMock.simulatePlayerInteract(Material.DIAMOND);
 
-		Assertions.assertThrows(AssertionFailedError.class,
-				() -> allayMock.assertCurrentItem(Material.IRON_INGOT));
+		Assertions.assertThrows(AssertionFailedError.class, () -> allayMock.assertCurrentItem(Material.IRON_INGOT));
 	}
 
 	@Test
@@ -114,7 +110,7 @@ class AllayMockTest
 	@Test
 	void testCanDuplicateDefault()
 	{
-        assertTrue(allayMock.canDuplicate());
+		assertTrue(allayMock.canDuplicate());
 	}
 
 	@Test

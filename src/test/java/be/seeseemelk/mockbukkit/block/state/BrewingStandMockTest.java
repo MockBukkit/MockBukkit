@@ -60,7 +60,8 @@ class BrewingStandMockTest
 	@Test
 	void constructor_Block_NotBrewingStand_ThrowsException()
 	{
-		assertThrowsExactly(IllegalArgumentException.class, () -> new BrewingStandMock(new BlockMock(Material.BEDROCK)));
+		assertThrowsExactly(IllegalArgumentException.class,
+				() -> new BrewingStandMock(new BlockMock(Material.BEDROCK)));
 	}
 
 	@Test

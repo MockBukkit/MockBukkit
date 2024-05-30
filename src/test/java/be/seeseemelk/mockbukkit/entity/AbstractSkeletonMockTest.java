@@ -107,7 +107,6 @@ class AbstractSkeletonMockTest
 		assertThrows(IllegalArgumentException.class, () -> skeleton.assertAttacked(player, 1.5f));
 	}
 
-
 	@Test
 	void testAssertAttackThrowsWithWrongCharge()
 	{
@@ -133,6 +132,5 @@ class AbstractSkeletonMockTest
 		skeleton.rangedAttack(player, 0.5f);
 		assertThrows(AssertionFailedError.class, () -> skeleton.assertAgressiveAttack(player, 0.5f));
 	}
-
 
 }

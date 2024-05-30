@@ -29,7 +29,6 @@ public class DisplayMock extends EntityMock implements Display
 	private int color = -1;
 	private Brightness brightness = null;
 
-
 	/**
 	 * Constructs a new EntityMock on the provided {@link ServerMock} with a specified {@link UUID}.
 	 *
@@ -101,7 +100,8 @@ public class DisplayMock extends EntityMock implements Display
 	@Override
 	public void setTeleportDuration(int duration)
 	{
-		Preconditions.checkArgument(duration >= 0 && duration <= 59, "duration (%s) cannot be lower than 0 or higher than 59", duration);
+		Preconditions.checkArgument(duration >= 0 && duration <= 59,
+				"duration (%s) cannot be lower than 0 or higher than 59", duration);
 		this.teleportDuration = duration;
 	}
 

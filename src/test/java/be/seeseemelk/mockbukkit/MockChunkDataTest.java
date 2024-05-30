@@ -125,8 +125,7 @@ class MockChunkDataTest
 	@Test
 	void setRegion_NullMaterial_ThrowsException()
 	{
-		assertThrowsExactly(NullPointerException.class,
-				() -> chunkData.setRegion(0, 0, 0, 1, 1, 1, (Material) null));
+		assertThrowsExactly(NullPointerException.class, () -> chunkData.setRegion(0, 0, 0, 1, 1, 1, (Material) null));
 	}
 
 	@Test

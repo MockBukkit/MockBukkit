@@ -51,7 +51,8 @@ class AttributeInstanceMockTest
 	void addModifier_ModifierAdded()
 	{
 		AttributeInstanceMock attribute = new AttributeInstanceMock(Attribute.GENERIC_FLYING_SPEED, 5.0);
-		AttributeModifier modifier = new AttributeModifier("test_attribute", 1.0, AttributeModifier.Operation.ADD_NUMBER);
+		AttributeModifier modifier = new AttributeModifier("test_attribute", 1.0,
+				AttributeModifier.Operation.ADD_NUMBER);
 
 		attribute.addModifier(modifier);
 
@@ -63,7 +64,8 @@ class AttributeInstanceMockTest
 	void removeModifier_ModifierRemoved()
 	{
 		AttributeInstanceMock attribute = new AttributeInstanceMock(Attribute.GENERIC_FLYING_SPEED, 5.0);
-		AttributeModifier modifier = new AttributeModifier("test_attribute", 1.0, AttributeModifier.Operation.ADD_NUMBER);
+		AttributeModifier modifier = new AttributeModifier("test_attribute", 1.0,
+				AttributeModifier.Operation.ADD_NUMBER);
 		attribute.addModifier(modifier);
 
 		attribute.removeModifier(modifier);
@@ -75,8 +77,10 @@ class AttributeInstanceMockTest
 	void removeModifier_CorrectModifierRemoved()
 	{
 		AttributeInstanceMock attribute = new AttributeInstanceMock(Attribute.GENERIC_FLYING_SPEED, 5.0);
-		AttributeModifier modifier1 = new AttributeModifier("test_attribute", 1.0, AttributeModifier.Operation.ADD_NUMBER);
-		AttributeModifier modifier2 = new AttributeModifier("test_attribute_2", 2.0, AttributeModifier.Operation.ADD_NUMBER);
+		AttributeModifier modifier1 = new AttributeModifier("test_attribute", 1.0,
+				AttributeModifier.Operation.ADD_NUMBER);
+		AttributeModifier modifier2 = new AttributeModifier("test_attribute_2", 2.0,
+				AttributeModifier.Operation.ADD_NUMBER);
 		attribute.addModifier(modifier1);
 		attribute.addModifier(modifier2);
 

@@ -136,7 +136,7 @@ class PlayerTexturesMockTest
 		PlayerTexturesMock otherPlayerTexturesMock = new PlayerTexturesMock(profile);
 		otherPlayerTexturesMock.setSkin(new URL("https://github.com/skin"));
 
-        Assertions.assertEquals(playerTexturesMock.hashCode(), otherPlayerTexturesMock.hashCode());
+		Assertions.assertEquals(playerTexturesMock.hashCode(), otherPlayerTexturesMock.hashCode());
 	}
 
 	@Test

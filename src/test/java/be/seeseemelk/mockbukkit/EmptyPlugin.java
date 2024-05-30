@@ -18,7 +18,8 @@ public class EmptyPlugin extends JavaPlugin
 		super();
 	}
 
-	public EmptyPlugin(@NotNull JavaPluginLoader loader, @NotNull PluginDescriptionFile description, @NotNull File dataFolder, @NotNull File file)
+	public EmptyPlugin(@NotNull JavaPluginLoader loader, @NotNull PluginDescriptionFile description,
+			@NotNull File dataFolder, @NotNull File file)
 	{
 		super(loader, description, dataFolder, file);
 	}

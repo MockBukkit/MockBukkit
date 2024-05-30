@@ -26,8 +26,8 @@ public class CriteriaMock implements Criteria
 		this.name = name;
 		this.readOnly = switch (name)
 		{
-			case "health", "food", "air", "armor", "xp", "level" -> true;
-			default -> false;
+		case "health", "food", "air", "armor", "xp", "level" -> true;
+		default -> false;
 		};
 		this.defaultRenderType = "health".equals(name) ? RenderType.HEARTS : RenderType.INTEGER;
 	}
@@ -53,8 +53,10 @@ public class CriteriaMock implements Criteria
 	@Override
 	public boolean equals(Object o)
 	{
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
 		CriteriaMock that = (CriteriaMock) o;
 		return this.name.equals(that.name);
 	}

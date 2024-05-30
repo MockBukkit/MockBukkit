@@ -256,7 +256,7 @@ class ChunkTest
 		assertFalse(chunk.contains(Biome.BADLANDS));
 	}
 
-  @Test
+	@Test
 	void setSlimeChunk()
 	{
 		ChunkMock chunk = world.getChunkAt(0, 0);

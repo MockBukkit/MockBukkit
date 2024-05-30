@@ -62,14 +62,13 @@ public class ExplosiveMinecartMock extends MinecartMock implements ExplosiveMine
 	@Override
 	public void explode(double power)
 	{
-		Preconditions.checkArgument(0 <= power && power <= 5,
-				"Power must be in range [0, 5] (got %s)", power);
+		Preconditions.checkArgument(0 <= power && power <= 5, "Power must be in range [0, 5] (got %s)", power);
 
 		double d1 = Math.sqrt(power);
 
 		ThreadLocalRandom random = ThreadLocalRandom.current();
-		server.getPluginManager().callEvent(new ExplosionPrimeEvent(this,
-				(float) (4.0D + random.nextDouble() * 1.5D * d1), false));
+		server.getPluginManager()
+				.callEvent(new ExplosionPrimeEvent(this, (float) (4.0D + random.nextDouble() * 1.5D * d1), false));
 
 		this.remove();
 	}

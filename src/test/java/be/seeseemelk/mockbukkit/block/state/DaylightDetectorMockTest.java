@@ -48,7 +48,8 @@ class DaylightDetectorMockTest
 	@Test
 	void constructor_Block_WrongType_ThrowsException()
 	{
-		assertThrowsExactly(IllegalArgumentException.class, () -> new DaylightDetectorMock(new BlockMock(Material.BEDROCK)));
+		assertThrowsExactly(IllegalArgumentException.class,
+				() -> new DaylightDetectorMock(new BlockMock(Material.BEDROCK)));
 	}
 
 	@Test

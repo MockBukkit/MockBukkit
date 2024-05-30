@@ -138,7 +138,8 @@ public class TeamMock implements Team
 	public void setDisplayName(@NotNull String displayName)
 	{
 		Preconditions.checkNotNull(displayName, "Display name cannot be null");
-		Preconditions.checkArgument(ChatColor.stripColor(displayName).length() <= 128, "Display name is longer than the limit of 128 characters");
+		Preconditions.checkArgument(ChatColor.stripColor(displayName).length() <= 128,
+				"Display name is longer than the limit of 128 characters");
 		checkRegistered();
 		this.displayName = LegacyComponentSerializer.legacySection().deserialize(displayName);
 	}
@@ -154,7 +155,8 @@ public class TeamMock implements Team
 	public void setPrefix(@NotNull String prefix)
 	{
 		Preconditions.checkNotNull(prefix, "Prefix cannot be null");
-		Preconditions.checkArgument(ChatColor.stripColor(prefix).length() <= 64, "Prefix is longer than the limit of 64 characters");
+		Preconditions.checkArgument(ChatColor.stripColor(prefix).length() <= 64,
+				"Prefix is longer than the limit of 64 characters");
 		checkRegistered();
 		this.prefix = LegacyComponentSerializer.legacySection().deserialize(prefix);
 	}
@@ -170,7 +172,8 @@ public class TeamMock implements Team
 	public void setSuffix(@NotNull String suffix)
 	{
 		Preconditions.checkNotNull(suffix, "Suffix cannot be null");
-		Preconditions.checkArgument(ChatColor.stripColor(suffix).length() <= 64, "Suffix is longer than the limit of 64 characters");
+		Preconditions.checkArgument(ChatColor.stripColor(suffix).length() <= 64,
+				"Suffix is longer than the limit of 64 characters");
 		checkRegistered();
 		this.suffix = LegacyComponentSerializer.legacySection().deserialize(suffix);
 	}
@@ -230,11 +233,11 @@ public class TeamMock implements Team
 		OptionStatus s = options.get(Option.NAME_TAG_VISIBILITY);
 		return switch (s)
 		{
-			case NEVER -> NameTagVisibility.NEVER;
-			case ALWAYS -> NameTagVisibility.ALWAYS;
-			case FOR_OTHER_TEAMS -> NameTagVisibility.HIDE_FOR_OTHER_TEAMS;
-			case FOR_OWN_TEAM -> NameTagVisibility.HIDE_FOR_OWN_TEAM;
-			default -> throw new IllegalArgumentException("Option not compatible");
+		case NEVER -> NameTagVisibility.NEVER;
+		case ALWAYS -> NameTagVisibility.ALWAYS;
+		case FOR_OTHER_TEAMS -> NameTagVisibility.HIDE_FOR_OTHER_TEAMS;
+		case FOR_OWN_TEAM -> NameTagVisibility.HIDE_FOR_OWN_TEAM;
+		default -> throw new IllegalArgumentException("Option not compatible");
 		};
 	}
 
@@ -272,7 +275,8 @@ public class TeamMock implements Team
 			if (s != null)
 			{
 				OfflinePlayer player = MockBukkit.getMock().getOfflinePlayer(s);
-				if (player != null) players.add(player);
+				if (player != null)
+					players.add(player);
 			}
 		}
 		return players;
@@ -351,14 +355,16 @@ public class TeamMock implements Team
 	}
 
 	@Override
-	public boolean removeEntities(@NotNull Collection<Entity> entities) throws IllegalStateException, IllegalArgumentException
+	public boolean removeEntities(@NotNull Collection<Entity> entities)
+			throws IllegalStateException, IllegalArgumentException
 	{
 		Preconditions.checkNotNull(entities, "Entities cannot be null");
 		return removeEntries(entities.stream().map(entity -> ((EntityMock) entity).getScoreboardEntry()).toList());
 	}
 
 	@Override
-	public boolean removeEntries(@NotNull Collection<String> entries) throws IllegalStateException, IllegalArgumentException
+	public boolean removeEntries(@NotNull Collection<String> entries)
+			throws IllegalStateException, IllegalArgumentException
 	{
 		Preconditions.checkNotNull(entries, "Entries cannot be null");
 		checkRegistered();

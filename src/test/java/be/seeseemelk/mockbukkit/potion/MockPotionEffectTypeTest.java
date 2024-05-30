@@ -36,7 +36,8 @@ class MockPotionEffectTypeTest
 	@Test
 	void constructorValues()
 	{
-		MockPotionEffectType effect = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
+		MockPotionEffectType effect = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 1, "Speed", false,
+				Color.fromRGB(8171462));
 		assertEquals(NamespacedKey.minecraft("speed"), effect.getKey());
 		assertEquals(1, effect.getId());
 		assertEquals("Speed", effect.getName());
@@ -48,7 +49,8 @@ class MockPotionEffectTypeTest
 	@Test
 	void addAttributeModifier_Adds()
 	{
-		MockPotionEffectType effect = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
+		MockPotionEffectType effect = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 1, "Speed", false,
+				Color.fromRGB(8171462));
 		AttributeModifier modifier = new AttributeModifier("mod", 1, AttributeModifier.Operation.ADD_NUMBER);
 		effect.addAttributeModifier(Attribute.GENERIC_ARMOR, modifier);
 
@@ -59,7 +61,8 @@ class MockPotionEffectTypeTest
 	@Test
 	void getEffectAttributes_Immutable()
 	{
-		MockPotionEffectType effect = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
+		MockPotionEffectType effect = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 1, "Speed", false,
+				Color.fromRGB(8171462));
 
 		assertInstanceOf(ImmutableMap.class, effect.getEffectAttributes());
 	}
@@ -67,8 +70,10 @@ class MockPotionEffectTypeTest
 	@Test
 	void getAttributeModifierAmount()
 	{
-		MockPotionEffectType effect = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
-		effect.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier("mod", 5, AttributeModifier.Operation.ADD_NUMBER));
+		MockPotionEffectType effect = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 1, "Speed", false,
+				Color.fromRGB(8171462));
+		effect.addAttributeModifier(Attribute.GENERIC_ARMOR,
+				new AttributeModifier("mod", 5, AttributeModifier.Operation.ADD_NUMBER));
 
 		assertEquals(15, effect.getAttributeModifierAmount(Attribute.GENERIC_ARMOR, 2));
 	}
@@ -76,54 +81,66 @@ class MockPotionEffectTypeTest
 	@Test
 	void getAttributeModifierAmount_NegativeAmplifier_ThrowsException()
 	{
-		MockPotionEffectType effect = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
-		effect.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier("mod", 5, AttributeModifier.Operation.ADD_NUMBER));
+		MockPotionEffectType effect = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 1, "Speed", false,
+				Color.fromRGB(8171462));
+		effect.addAttributeModifier(Attribute.GENERIC_ARMOR,
+				new AttributeModifier("mod", 5, AttributeModifier.Operation.ADD_NUMBER));
 
-		assertThrowsExactly(IllegalArgumentException.class, () -> effect.getAttributeModifierAmount(Attribute.GENERIC_ARMOR, -1));
+		assertThrowsExactly(IllegalArgumentException.class,
+				() -> effect.getAttributeModifierAmount(Attribute.GENERIC_ARMOR, -1));
 	}
 
 	@Test
 	void getAttributeModifierAmount_NonExistentAttribute_ThrowsException()
 	{
-		MockPotionEffectType effect = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
+		MockPotionEffectType effect = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 1, "Speed", false,
+				Color.fromRGB(8171462));
 
-		assertThrowsExactly(IllegalArgumentException.class, () -> effect.getAttributeModifierAmount(Attribute.GENERIC_ARMOR, 2));
+		assertThrowsExactly(IllegalArgumentException.class,
+				() -> effect.getAttributeModifierAmount(Attribute.GENERIC_ARMOR, 2));
 	}
 
 	@Test
 	void testGetDurationModifier()
 	{
-		MockPotionEffectType effect = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
+		MockPotionEffectType effect = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 1, "Speed", false,
+				Color.fromRGB(8171462));
 		assertEquals(1.0, effect.getDurationModifier());
 	}
 
 	@Test
 	void testHashcode()
 	{
-		MockPotionEffectType effect = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
+		MockPotionEffectType effect = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 1, "Speed", false,
+				Color.fromRGB(8171462));
 		assertEquals(1, effect.hashCode());
 	}
 
 	@Test
 	void testEquals()
 	{
-		MockPotionEffectType effect = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
-		MockPotionEffectType effect2 = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
+		MockPotionEffectType effect = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 1, "Speed", false,
+				Color.fromRGB(8171462));
+		MockPotionEffectType effect2 = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 1, "Speed", false,
+				Color.fromRGB(8171462));
 		assertEquals(effect, effect2);
 	}
 
 	@Test
 	void testEquals_DifferentId()
 	{
-		MockPotionEffectType effect = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
-		MockPotionEffectType effect2 = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 2, "Speed", false, Color.fromRGB(8171462));
+		MockPotionEffectType effect = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 1, "Speed", false,
+				Color.fromRGB(8171462));
+		MockPotionEffectType effect2 = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 2, "Speed", false,
+				Color.fromRGB(8171462));
 		assertNotEquals(effect, effect2);
 	}
 
 	@Test
 	void testEquals_DifferentType()
 	{
-		MockPotionEffectType effect = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
+		MockPotionEffectType effect = new MockPotionEffectType(NamespacedKey.minecraft("speed"), 1, "Speed", false,
+				Color.fromRGB(8171462));
 		assertNotEquals(effect, new Object());
 	}
 

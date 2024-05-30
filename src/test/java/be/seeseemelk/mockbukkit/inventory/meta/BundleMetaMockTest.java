@@ -84,8 +84,7 @@ class BundleMetaMockTest
 	@Test
 	void setItems_NullItem_ThrowsException()
 	{
-		assertThrowsExactly(IllegalArgumentException.class, () ->
-		{
+		assertThrowsExactly(IllegalArgumentException.class, () -> {
 			meta.setItems(Arrays.asList(new ItemStack(Material.STONE), null, new ItemStack(Material.DIRT)));
 		});
 	}
@@ -93,9 +92,9 @@ class BundleMetaMockTest
 	@Test
 	void setItems_AirItem_ThrowsException()
 	{
-		assertThrowsExactly(IllegalArgumentException.class, () ->
-		{
-			meta.setItems(Arrays.asList(new ItemStack(Material.STONE), new ItemStack(Material.AIR), new ItemStack(Material.DIRT)));
+		assertThrowsExactly(IllegalArgumentException.class, () -> {
+			meta.setItems(Arrays.asList(new ItemStack(Material.STONE), new ItemStack(Material.AIR),
+					new ItemStack(Material.DIRT)));
 		});
 	}
 

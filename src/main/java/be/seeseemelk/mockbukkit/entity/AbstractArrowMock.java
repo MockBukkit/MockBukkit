@@ -3,18 +3,14 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
-import io.papermc.paper.entity.TeleportFlag;
-import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.AbstractArrow;
-import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
-import java.util.concurrent.CompletableFuture;
 
 public class AbstractArrowMock extends AbstractProjectileMock implements AbstractArrow
 {
@@ -49,7 +45,8 @@ public class AbstractArrowMock extends AbstractProjectileMock implements Abstrac
 	@Override
 	public void setKnockbackStrength(int knockbackStrength)
 	{
-		Preconditions.checkArgument(knockbackStrength >= 0, "Knockback value (%s) cannot be negative", knockbackStrength);
+		Preconditions.checkArgument(knockbackStrength >= 0, "Knockback value (%s) cannot be negative",
+				knockbackStrength);
 		this.knockbackStrength = knockbackStrength;
 	}
 
@@ -79,7 +76,8 @@ public class AbstractArrowMock extends AbstractProjectileMock implements Abstrac
 	@Override
 	public void setPierceLevel(int pierceLevel)
 	{
-		Preconditions.checkArgument(0 <= pierceLevel && pierceLevel <= Byte.MAX_VALUE, "Pierce level (%s) out of range, expected 0 < level < 127", pierceLevel);
+		Preconditions.checkArgument(0 <= pierceLevel && pierceLevel <= Byte.MAX_VALUE,
+				"Pierce level (%s) out of range, expected 0 < level < 127", pierceLevel);
 		this.pierceLevel = pierceLevel;
 	}
 

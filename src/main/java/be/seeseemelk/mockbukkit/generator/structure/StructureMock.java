@@ -1,6 +1,5 @@
 package be.seeseemelk.mockbukkit.generator.structure;
 
-
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonObject;
 import org.bukkit.NamespacedKey;
@@ -35,7 +34,8 @@ public class StructureMock extends Structure
 	{
 		Preconditions.checkNotNull(data);
 		this.key = NamespacedKey.fromString(data.get("key").getAsString());
-		this.type = Registry.STRUCTURE_TYPE.get(Preconditions.checkNotNull(NamespacedKey.fromString(data.get("type").getAsString())));
+		this.type = Registry.STRUCTURE_TYPE
+				.get(Preconditions.checkNotNull(NamespacedKey.fromString(data.get("type").getAsString())));
 	}
 
 	@ApiStatus.Internal
@@ -45,7 +45,8 @@ public class StructureMock extends Structure
 		Preconditions.checkArgument(data.has("key"), "Missing json key");
 		Preconditions.checkArgument(data.has("type"), "Missing json key");
 		NamespacedKey key = NamespacedKey.fromString(data.get("key").getAsString());
-		StructureType type = Registry.STRUCTURE_TYPE.get(Preconditions.checkNotNull(NamespacedKey.fromString(data.get("type").getAsString())));
+		StructureType type = Registry.STRUCTURE_TYPE
+				.get(Preconditions.checkNotNull(NamespacedKey.fromString(data.get("type").getAsString())));
 		return new StructureMock(key, type);
 	}
 

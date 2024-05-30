@@ -16,7 +16,8 @@ public class SecondTestPlugin extends JavaPlugin implements Listener
 		super();
 	}
 
-	protected SecondTestPlugin(@NotNull JavaPluginLoader loader, @NotNull PluginDescriptionFile description, @NotNull File dataFolder, @NotNull File file)
+	protected SecondTestPlugin(@NotNull JavaPluginLoader loader, @NotNull PluginDescriptionFile description,
+			@NotNull File dataFolder, @NotNull File file)
 	{
 		super(loader, description, dataFolder, file);
 	}

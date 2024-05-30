@@ -100,7 +100,8 @@ public class WolfMock extends TameableAnimalMock implements Wolf
 
 	private float calculateNonAngryTailAngle()
 	{
-		return this.isTamed() ? (float) ((0.55F - (this.getMaxHealth() - this.getHealth()) * 0.02F) * 3.1415927F) : 0.62831855F;
+		return this.isTamed() ? (float) ((0.55F - (this.getMaxHealth() - this.getHealth()) * 0.02F) * 3.1415927F)
+				: 0.62831855F;
 	}
 
 }

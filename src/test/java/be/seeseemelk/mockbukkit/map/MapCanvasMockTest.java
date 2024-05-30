@@ -55,8 +55,7 @@ class MapCanvasMockTest
 	@Test
 	void setPixel_SetsPixel()
 	{
-		MapCanvasMock.executeForAllPixels((x, y) ->
-		{
+		MapCanvasMock.executeForAllPixels((x, y) -> {
 			byte b = (byte) ThreadLocalRandom.current().nextInt(Byte.MAX_VALUE);
 			canvas.setPixel(x, y, b);
 			assertEquals(b, canvas.getPixel(x, y));

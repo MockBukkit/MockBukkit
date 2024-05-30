@@ -34,7 +34,6 @@ public class MockPotionEffectType extends PotionEffectType
 	private final NamespacedKey key;
 	private final Category category;
 
-
 	/**
 	 * @param key      The namespaced key representing this effect
 	 * @param id       The magic number representing this effect
@@ -43,7 +42,8 @@ public class MockPotionEffectType extends PotionEffectType
 	 * @param color    The color of the effect
 	 * @param category The category of the effect
 	 */
-	public MockPotionEffectType(@NotNull NamespacedKey key, int id, @NotNull String name, boolean instant, @NotNull Color color, @NotNull Category category)
+	public MockPotionEffectType(@NotNull NamespacedKey key, int id, @NotNull String name, boolean instant,
+			@NotNull Color color, @NotNull Category category)
 	{
 		super();
 
@@ -77,13 +77,9 @@ public class MockPotionEffectType extends PotionEffectType
 	@Deprecated(forRemoval = true)
 	public MockPotionEffectType(JsonObject data)
 	{
-		this(NamespacedKey.fromString(data.get("key").getAsString()),
-				data.get("id").getAsInt(),
-				data.get("name").getAsString(),
-				data.get("instant").getAsBoolean(),
-				Color.fromRGB(data.get("rgb").getAsInt()),
-				Category.valueOf(data.get("category").getAsString())
-		);
+		this(NamespacedKey.fromString(data.get("key").getAsString()), data.get("id").getAsInt(),
+				data.get("name").getAsString(), data.get("instant").getAsBoolean(),
+				Color.fromRGB(data.get("rgb").getAsInt()), Category.valueOf(data.get("category").getAsString()));
 	}
 
 	@Deprecated
@@ -137,7 +133,8 @@ public class MockPotionEffectType extends PotionEffectType
 	{
 		if (obj instanceof PotionEffectType)
 		{
-			// It would make sense to compare the NamespacedKey here but Spigot stil compares ids
+			// It would make sense to compare the NamespacedKey here but Spigot stil
+			// compares ids
 			return id == ((PotionEffectType) obj).getId();
 		}
 
@@ -171,7 +168,8 @@ public class MockPotionEffectType extends PotionEffectType
 	public double getAttributeModifierAmount(@NotNull Attribute attribute, int effectAmplifier)
 	{
 		Preconditions.checkArgument(effectAmplifier >= 0, "effectAmplifier must be greater than or equal to 0");
-		Preconditions.checkArgument(attributeModifiers.containsKey(attribute), attribute + " is not present on " + this.getKey());
+		Preconditions.checkArgument(attributeModifiers.containsKey(attribute),
+				attribute + " is not present on " + this.getKey());
 		return getAttributeModifierValue(effectAmplifier, attributeModifiers.get(attribute));
 	}
 

@@ -43,9 +43,10 @@ public class ObjectiveMock implements Objective
 	 * @param renderType  The render type of the objective.
 	 */
 	public ObjectiveMock(@NotNull ScoreboardMock scoreboard, @NotNull String name, @Nullable Component displayName,
-						 @NotNull Criteria criteria, @NotNull RenderType renderType)
+			@NotNull Criteria criteria, @NotNull RenderType renderType)
 	{
-		Preconditions.checkNotNull(scoreboard, "When registering an Objective to the Scoreboard the scoreboard cannot be null.");
+		Preconditions.checkNotNull(scoreboard,
+				"When registering an Objective to the Scoreboard the scoreboard cannot be null.");
 		Preconditions.checkNotNull(name, "The name cannot be null");
 		Preconditions.checkNotNull(criteria, "The criteria cannot be null");
 
@@ -102,7 +103,8 @@ public class ObjectiveMock implements Objective
 	public void setDisplayName(@NotNull String displayName) throws IllegalStateException, IllegalArgumentException
 	{
 		Preconditions.checkNotNull(displayName, "The display name cannot be null");
-		Preconditions.checkArgument(displayName.length() <= 128, "The display name cannot be longer than 128 characters");
+		Preconditions.checkArgument(displayName.length() <= 128,
+				"The display name cannot be longer than 128 characters");
 
 		validate();
 		this.displayName = LegacyComponentSerializer.legacySection().deserialize(displayName);
@@ -179,7 +181,8 @@ public class ObjectiveMock implements Objective
 
 	@Override
 	@Deprecated(since = "1.7.10")
-	public @NotNull ScoreMock getScore(@NotNull OfflinePlayer player) throws IllegalArgumentException, IllegalStateException
+	public @NotNull ScoreMock getScore(@NotNull OfflinePlayer player)
+			throws IllegalArgumentException, IllegalStateException
 	{
 		Preconditions.checkNotNull(player, "The player cannot be null");
 		validate();

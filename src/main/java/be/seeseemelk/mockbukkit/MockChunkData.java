@@ -127,7 +127,8 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 		checkCoords(x, y, z);
 
 		BlockData data = blocks.get(new Coordinate(x, y, z));
-		// shortcut to return air directly instead of creating air block data then unpacking material
+		// shortcut to return air directly instead of creating air block data then
+		// unpacking material
 		return data == null ? Material.AIR : data.getMaterial();
 	}
 
@@ -165,7 +166,8 @@ public class MockChunkData implements ChunkGenerator.ChunkData
 	 */
 	private void checkCoords(int x, int y, int z)
 	{
-		Preconditions.checkArgument(x == (x & 0xf) && y >= this.minHeight && y < this.maxHeight && z == (z & 0xf), "Coordinates are out-of-bounds");
+		Preconditions.checkArgument(x == (x & 0xf) && y >= this.minHeight && y < this.maxHeight && z == (z & 0xf),
+				"Coordinates are out-of-bounds");
 	}
 
 }

@@ -55,7 +55,8 @@ public class FishHookMock extends ProjectileMock implements FishHook
 	@Override
 	public void setMinWaitTime(int minWaitTime)
 	{
-		Preconditions.checkArgument(minWaitTime >= 0 && minWaitTime <= this.getMaxWaitTime(), "The minimum wait time should be between 0 and the maximum wait time.");
+		Preconditions.checkArgument(minWaitTime >= 0 && minWaitTime <= this.getMaxWaitTime(),
+				"The minimum wait time should be between 0 and the maximum wait time.");
 		this.minWaitTime = minWaitTime;
 	}
 
@@ -68,7 +69,8 @@ public class FishHookMock extends ProjectileMock implements FishHook
 	@Override
 	public void setMaxWaitTime(int maxWaitTime)
 	{
-		Preconditions.checkArgument(maxWaitTime >= 0 && maxWaitTime >= this.getMinWaitTime(), "The maximum wait time should be higher than or equal to 0 and the minimum wait time.");
+		Preconditions.checkArgument(maxWaitTime >= 0 && maxWaitTime >= this.getMinWaitTime(),
+				"The maximum wait time should be higher than or equal to 0 and the minimum wait time.");
 		this.maxWaitTime = maxWaitTime;
 	}
 
@@ -88,7 +90,8 @@ public class FishHookMock extends ProjectileMock implements FishHook
 	@Override
 	public void setMinLureTime(int minLureTime)
 	{
-		Preconditions.checkArgument(minLureTime >= 0 && minLureTime <= this.getMaxLureTime(), "The minimum lure time should be between 0 and the maximum lure time.");
+		Preconditions.checkArgument(minLureTime >= 0 && minLureTime <= this.getMaxLureTime(),
+				"The minimum lure time should be between 0 and the maximum lure time.");
 		this.minLureTime = minLureTime;
 	}
 
@@ -101,7 +104,8 @@ public class FishHookMock extends ProjectileMock implements FishHook
 	@Override
 	public void setMaxLureTime(int maxLureTime)
 	{
-		Preconditions.checkArgument(maxLureTime >= 0 && maxLureTime >= this.getMinLureTime(), "The maximum lure time should be higher than or equal to 0 and the minimum lure time.");
+		Preconditions.checkArgument(maxLureTime >= 0 && maxLureTime >= this.getMinLureTime(),
+				"The maximum lure time should be higher than or equal to 0 and the minimum lure time.");
 		this.maxLureTime = maxLureTime;
 	}
 
@@ -121,7 +125,8 @@ public class FishHookMock extends ProjectileMock implements FishHook
 	@Override
 	public void setMinLureAngle(float minLureAngle)
 	{
-		Preconditions.checkArgument(minLureAngle >= 0 && minLureAngle <= this.getMaxLureAngle(), "The minimum lure angle should be between 0 and the maximum lure angle.");
+		Preconditions.checkArgument(minLureAngle >= 0 && minLureAngle <= this.getMaxLureAngle(),
+				"The minimum lure angle should be between 0 and the maximum lure angle.");
 		this.minLureAngle = minLureAngle;
 	}
 
@@ -134,8 +139,7 @@ public class FishHookMock extends ProjectileMock implements FishHook
 	@Override
 	public void setMaxLureAngle(float maxLureAngle)
 	{
-		Preconditions.checkArgument(
-				maxLureAngle >= 0 && maxLureAngle >= this.getMinLureAngle() && maxLureAngle <= 360,
+		Preconditions.checkArgument(maxLureAngle >= 0 && maxLureAngle >= this.getMinLureAngle() && maxLureAngle <= 360,
 				"The maximum lure angle should be higher than or equal to 0 and the minimum lure angle but also less than or equal to 360.");
 		this.maxLureAngle = maxLureAngle;
 	}
@@ -213,7 +217,8 @@ public class FishHookMock extends ProjectileMock implements FishHook
 		{
 			Location shooterLoc = shooter.getLocation();
 			Location hookLoc = this.getLocation();
-			Vector velocity = new Vector(shooterLoc.getX() - hookLoc.getX(), shooterLoc.getY() - hookLoc.getY(), shooterLoc.getZ() - hookLoc.getZ()).multiply(0.1);
+			Vector velocity = new Vector(shooterLoc.getX() - hookLoc.getX(), shooterLoc.getY() - hookLoc.getY(),
+					shooterLoc.getZ() - hookLoc.getZ()).multiply(0.1);
 			hookedEntity.setVelocity(hookedEntity.getVelocity().add(velocity));
 		}
 		return true;

@@ -63,7 +63,8 @@ public class BlockDataMock implements BlockData
 	 */
 	protected void checkType(@NotNull Material material, @NotNull Material... expected)
 	{
-		Preconditions.checkArgument(Arrays.stream(expected).anyMatch(m -> material == m), "Cannot create a " + getClass().getSimpleName() + " from " + material);
+		Preconditions.checkArgument(Arrays.stream(expected).anyMatch(m -> material == m),
+				"Cannot create a " + getClass().getSimpleName() + " from " + material);
 	}
 
 	/**
@@ -74,7 +75,8 @@ public class BlockDataMock implements BlockData
 	 */
 	protected void checkType(@NotNull Material material, @NotNull Tag<Material> expected)
 	{
-		Preconditions.checkArgument(expected.isTagged(material), "Cannot create a " + getClass().getSimpleName() + " from " + material);
+		Preconditions.checkArgument(expected.isTagged(material),
+				"Cannot create a " + getClass().getSimpleName() + " from " + material);
 	}
 
 	/**
@@ -95,7 +97,9 @@ public class BlockDataMock implements BlockData
 	 */
 	protected void checkProperty(String property)
 	{
-		Preconditions.checkState(BlockDataMockRegistry.getInstance().isValidStateForBlockWithMaterial(getMaterial(), property), property + " is not a valid property for " + getMaterial().getKey());
+		Preconditions.checkState(
+				BlockDataMockRegistry.getInstance().isValidStateForBlockWithMaterial(getMaterial(), property),
+				property + " is not a valid property for " + getMaterial().getKey());
 	}
 	// endregion
 
@@ -157,18 +161,21 @@ public class BlockDataMock implements BlockData
 	{
 		StringBuilder stateString = new StringBuilder(getMaterial().getKey() + "[");
 
-		List<String> keysToShow = new ArrayList<>(hideUnspecified ? data.keySet() : BlockDataMockRegistry.getInstance().getBlockData(type).keySet());
+		List<String> keysToShow = new ArrayList<>(
+				hideUnspecified ? data.keySet() : BlockDataMockRegistry.getInstance().getBlockData(type).keySet());
 		Collections.sort(keysToShow);
 
 		boolean isFirst = true;
 		for (String key : keysToShow)
 		{
-			if (!isFirst) stateString.append(',');
+			if (!isFirst)
+				stateString.append(',');
 
 			Object value = data.get(key);
 			Object defaultValue = BlockDataMockRegistry.getInstance().getDefault(type, key);
 
-			if (hideUnspecified && value == defaultValue) continue;
+			if (hideUnspecified && value == defaultValue)
+				continue;
 
 			stateString.append(key).append("=").append((value == null ? defaultValue : value).toString().toLowerCase());
 
@@ -344,7 +351,8 @@ public class BlockDataMock implements BlockData
 	@Override
 	public boolean equals(Object obj)
 	{
-		return obj instanceof BlockDataMock mock && this.getMaterial() == mock.getMaterial() && this.data.equals(mock.data);
+		return obj instanceof BlockDataMock mock && this.getMaterial() == mock.getMaterial()
+				&& this.data.equals(mock.data);
 	}
 
 	@Override
@@ -388,9 +396,9 @@ public class BlockDataMock implements BlockData
 		// Special cases
 		return switch (material)
 		{
-			case AMETHYST_CLUSTER -> new AmethystClusterMock(material);
-			case LEVER -> new SwitchMock(material);
-			default -> new BlockDataMock(material);
+		case AMETHYST_CLUSTER -> new AmethystClusterMock(material);
+		case LEVER -> new SwitchMock(material);
+		default -> new BlockDataMock(material);
 		};
 	}
 

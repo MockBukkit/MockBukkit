@@ -73,10 +73,9 @@ class SheepMockTest
 
 		sheep.shear();
 
-		soundListener.assertSoundHeard(Sound.ENTITY_SHEEP_SHEAR, (experience) ->
-				experience.getLocation().equals(sheep.getLocation())
-						&& experience.getCategory() == SoundCategory.PLAYERS
-						&& experience.getPitch() == 1.0F
+		soundListener.assertSoundHeard(Sound.ENTITY_SHEEP_SHEAR,
+				(experience) -> experience.getLocation().equals(sheep.getLocation())
+						&& experience.getCategory() == SoundCategory.PLAYERS && experience.getPitch() == 1.0F
 						&& experience.getVolume() == 1.0F);
 	}
 
