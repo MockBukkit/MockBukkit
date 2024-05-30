@@ -14,6 +14,7 @@ import org.jetbrains.annotations.Unmodifiable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -65,11 +66,17 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	public boolean equals(Object obj)
 	{
 		if (this == obj)
+		{
 			return true;
+		}
 		if (!super.equals(obj))
+		{
 			return false;
+		}
 		if (!(obj instanceof BookMetaMock other))
+		{
 			return false;
+		}
 		return Objects.equals(author, other.author) && Objects.equals(pages, other.pages)
 				&& Objects.equals(title, other.title) && Objects.equals(generation, other.generation);
 	}
@@ -224,9 +231,13 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 		{
 			String newText;
 			if (text != null)
+			{
 				newText = text.length() > 32767 ? text.substring(0, 32767) : text;
+			}
 			else
+			{
 				newText = "";
+			}
 			this.pages.set(page - 1, newText);
 		}
 	}
@@ -315,6 +326,57 @@ public class BookMetaMock extends ItemMetaMock implements BookMeta
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
+	}
+
+	/**
+	 * Required method for Bukkit deserialization.
+	 *
+	 * @param args A serialized BookMetaMock object in a Map&lt;String, Object&gt; format.
+	 * @return A new instance of the BookMetaMock class.
+	 */
+	@SuppressWarnings("unchecked")
+	public static @NotNull BookMetaMock deserialize(@NotNull Map<String, Object> args)
+	{
+		BookMetaMock serialMock = new BookMetaMock();
+		serialMock.deserializeInternal(args);
+		serialMock.title = (String) args.get("title");
+		serialMock.author = (String) args.get("author");
+		serialMock.pages = (List<String>) args.get("pages");
+		serialMock.generation = (Generation) args.get("generation");
+
+		return serialMock;
+	}
+
+	/**
+	 * Serializes the properties of an BookMetaMock to a HashMap.
+	 * Unimplemented properties are not present in the map.
+	 *
+	 * @return A HashMap of String, Object pairs representing the BookMetaMock.
+	 */
+	@Override
+	public @NotNull Map<String, Object> serialize()
+	{
+		final Map<String, Object> serialized = super.serialize();
+		if (this.title != null)
+		{
+			serialized.put("title", this.title);
+		}
+		if (this.author != null)
+		{
+			serialized.put("author", this.author);
+		}
+		serialized.put("pages", this.pages);
+		if (this.generation != null)
+		{
+			serialized.put("generation", this.generation);
+		}
+		return serialized;
+	}
+
+	@Override
+	protected String getTypeName()
+	{
+		return "BOOK";
 	}
 
 }

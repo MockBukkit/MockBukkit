@@ -16,6 +16,8 @@ import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.enchantments.Enchantment;
@@ -28,6 +30,7 @@ import org.bukkit.inventory.meta.Repairable;
 import org.bukkit.inventory.meta.components.FoodComponent;
 import org.bukkit.inventory.meta.tags.CustomItemTagContainer;
 import org.bukkit.persistence.PersistentDataContainer;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -125,7 +128,9 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	static boolean checkConflictingEnchants(@Nullable Map<Enchantment, Integer> enchantments, @NotNull Enchantment ench)
 	{
 		if (enchantments == null || enchantments.isEmpty())
+		{
 			return false;
+		}
 
 		Iterator<Enchantment> var2 = enchantments.keySet().iterator();
 
@@ -133,7 +138,9 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		do
 		{
 			if (!var2.hasNext())
+			{
 				return false;
+			}
 			enchant = var2.next();
 		}
 		while (!enchant.conflictsWith(ench));
@@ -192,9 +199,13 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	private boolean isLoreEquals(@NotNull ItemMeta meta)
 	{
 		if (lore == null)
+		{
 			return !meta.hasLore();
+		}
 		else if (!meta.hasLore())
+		{
 			return false;
+		}
 
 		List<Component> otherLore = meta.lore();
 		if (lore.size() == otherLore.size())
@@ -202,7 +213,9 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 			for (int i = 0; i < lore.size(); i++)
 			{
 				if (!GsonComponentSerializer.gson().deserialize(lore.get(i)).equals(otherLore.get(i)))
+				{
 					return false;
+				}
 			}
 			return true;
 		}
@@ -222,9 +235,13 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		if (displayName != null)
 		{
 			if (meta.hasDisplayName())
+			{
 				return GsonComponentSerializer.gson().deserialize(displayName).equals(meta.displayName());
+			}
 			else
+			{
 				return false;
+			}
 		}
 		else
 		{
@@ -423,7 +440,9 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		for (int i = 0; i < this.lore.size(); i++)
 		{
 			if (GsonComponentSerializer.gson().deserialize(this.lore.get(i)).equals(lines.get(i)))
+			{
 				continue;
+			}
 			throw new AssertionError(String.format("Line %d should be '%s' but was '%s'", i, lines.get(i), this.lore.get(i)));
 		}
 	}
@@ -483,7 +502,15 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 			map.put("custom-model-data", this.customModelData);
 		}
 
-		map.put("enchants", this.enchants);
+		if (this.enchants != null)
+		{
+			map.put("enchants", this.enchants.entrySet().stream()
+					.collect(Collectors.toMap(entry -> entry.getKey().getKey().value(), Map.Entry::getValue)));
+		}
+		else
+		{
+			map.put("enchants", new HashMap<String, Integer>());
+		}
 
 		if (hasAttributeModifiers())
 		{
@@ -503,6 +530,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		*/
 
 		map.put("PublicBukkitValues", this.persistentDataContainer.serialize());
+		map.put("meta-type", getTypeName());
 
 		// Return map
 		return map;
@@ -514,27 +542,43 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	 * @param args A serialized ItemMetaMock object in a Map&lt;String, Object&gt; format.
 	 * @return A new instance of the ItemMetaMock class.
 	 */
-	@SuppressWarnings("unchecked")
 	public static @NotNull ItemMetaMock deserialize(@NotNull Map<String, Object> args)
 	{
 		ItemMetaMock serialMock = new ItemMetaMock();
 
-		serialMock.displayName = (String) args.get("display-name");
-		serialMock.lore = (List<String>) args.get("lore");
-		serialMock.localizedName = (String) args.get("loc-name");
-		serialMock.enchants = (Map<Enchantment, Integer>) args.get("enchants");
-		serialMock.hideFlags = (Set<ItemFlag>) args.get("ItemFlags");
-		serialMock.unbreakable = (boolean) args.get("Unbreakable");
-		serialMock.setAttributeModifiers((Multimap<Attribute, AttributeModifier>) args.get("AttributeModifiers"));
-		// customTagContainer is also unimplemented in mock.
-		serialMock.customModelData = (Integer) args.get("custom-model-data");
-		Map<String, Object> map = (Map<String, Object>) args.get("PublicBukkitValues");
-		serialMock.persistentDataContainer = PersistentDataContainerMock.deserialize(map);
-		serialMock.damage = (int) args.get("Damage");
-		serialMock.repairCost = (int) args.get("repair-cost");
-		serialMock.destroyableKeys = (Set<Namespaced>) args.get("destroyable-keys");
-		serialMock.placeableKeys = (Set<Namespaced>) args.get("placeable-keys");
+		serialMock.deserializeInternal(args);
 		return serialMock;
+	}
+
+	@SuppressWarnings("unchecked")
+	@ApiStatus.Internal
+	protected void deserializeInternal(@NotNull Map<String, Object> args)
+	{
+		displayName = (String) args.get("display-name");
+		lore = (List<String>) args.get("lore");
+		localizedName = (String) args.get("loc-name");
+
+		enchants = new HashMap<>();
+		for (Map.Entry<String, Integer> entry : ((Map<String, Integer>) args.get("enchants")).entrySet())
+		{
+			Enchantment enchantment = Registry.ENCHANTMENT.get(NamespacedKey.minecraft(entry.getKey()));
+			if (enchantment != null)
+			{
+				enchants.put(enchantment, entry.getValue());
+			}
+		}
+
+		hideFlags = (Set<ItemFlag>) args.get("ItemFlags");
+		unbreakable = (boolean) args.get("Unbreakable");
+		setAttributeModifiers((Multimap<Attribute, AttributeModifier>) args.get("AttributeModifiers"));
+		// customTagContainer is also unimplemented in mock.
+		customModelData = (Integer) args.get("custom-model-data");
+		Map<String, Object> map = (Map<String, Object>) args.get("PublicBukkitValues");
+		persistentDataContainer = PersistentDataContainerMock.deserialize(map);
+		damage = (int) args.get("Damage");
+		repairCost = (int) args.get("repair-cost");
+		destroyableKeys = (Set<Namespaced>) args.get("destroyable-keys");
+		placeableKeys = (Set<Namespaced>) args.get("placeable-keys");
 	}
 
 	@Override
@@ -1047,6 +1091,11 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		//TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 
+	}
+	@ApiStatus.Internal
+	protected String getTypeName()
+	{
+		return "UNSPECIFIC";
 	}
 
 	@Override
