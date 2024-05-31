@@ -37,6 +37,7 @@ import org.bukkit.entity.memory.MemoryKey;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.entity.EntityToggleSwimEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.EntityEquipment;
@@ -1279,6 +1280,12 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	public float getSidewaysMovement()
 	{
 		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void heal(double amount, @NotNull EntityRegainHealthEvent.RegainReason regainReason)
+	{
 		throw new UnimplementedOperationException();
 	}
 
