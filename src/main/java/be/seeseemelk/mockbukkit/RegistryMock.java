@@ -157,7 +157,12 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 			{
 				JsonObject structureJSONObject = structureJSONElement.getAsJsonObject();
 				T tObject = constructor.apply(structureJSONObject);
-				keyedMap.put(tObject.getKey(), tObject);
+				/*
+				 * putIfAbsent fixes the edge case scenario when the constructor initializes class loading of the keyed object,
+				 * which during initialization will trigger this exact method, therefore creating duplicate instances of
+				 * each keyed object.
+				 */
+				keyedMap.putIfAbsent(tObject.getKey(), tObject);
 			}
 		}
 	}
