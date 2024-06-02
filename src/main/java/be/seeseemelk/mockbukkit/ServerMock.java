@@ -43,6 +43,7 @@ import be.seeseemelk.mockbukkit.scheduler.paper.FoliaAsyncScheduler;
 import be.seeseemelk.mockbukkit.scoreboard.CriteriaMock;
 import be.seeseemelk.mockbukkit.scoreboard.ScoreboardManagerMock;
 import be.seeseemelk.mockbukkit.services.ServicesManagerMock;
+import be.seeseemelk.mockbukkit.structure.StructureManagerMock;
 import be.seeseemelk.mockbukkit.tags.TagRegistry;
 import be.seeseemelk.mockbukkit.tags.TagWrapperMock;
 import be.seeseemelk.mockbukkit.tags.TagsMock;
@@ -205,6 +206,7 @@ public class ServerMock extends Server.Spigot implements Server
 
 	private final @NotNull ServerConfiguration serverConfiguration = new ServerConfiguration();
 	private final Map<Class<?>, Registry<?>> registry = new HashMap<>();
+	private StructureManager structureManager = new StructureManagerMock();
 
 	/**
 	 * Constructs a new ServerMock and sets it up.
@@ -2192,13 +2194,10 @@ public class ServerMock extends Server.Spigot implements Server
 		throw new UnimplementedOperationException();
 	}
 
-	@NotNull
 	@Override
-	public StructureManager getStructureManager()
+	public @NotNull StructureManager getStructureManager()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		return this.structureManager;
 	}
 
 	@Override
