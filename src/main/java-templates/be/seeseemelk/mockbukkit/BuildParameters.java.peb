@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit;
 
-class BuildParameters
+public class BuildParameters
 {
-	static final String PAPER_API_FULL_VERSION = "{{ paperApiFullVersion }}";
+	public static final String PAPER_API_FULL_VERSION = "{{ paperApiFullVersion }}";
+	public static final long BUILD_TIME = Long.parseLong("{{ buildTime }}");
 }

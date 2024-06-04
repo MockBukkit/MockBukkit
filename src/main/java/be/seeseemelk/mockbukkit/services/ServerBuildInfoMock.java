@@ -61,7 +61,7 @@ public class ServerBuildInfoMock implements ServerBuildInfo
 	@Override
 	public @NotNull Instant buildTime()
 	{
-		return Instant.now();
+		return Instant.ofEpochMilli(BuildParameters.BUILD_TIME);
 	}
 
 	@Override

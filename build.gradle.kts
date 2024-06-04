@@ -98,6 +98,7 @@ sourceSets {
 		blossom {
 			javaSources {
 				property("paperApiFullVersion", project.property("paper.api.full-version").toString())
+				property("buildTime", System.currentTimeMillis().toString())
 			}
 		}
 	}
