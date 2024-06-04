@@ -8,11 +8,11 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.time.temporal.ChronoUnit;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ServerBuildInfoMockTest
@@ -20,6 +20,12 @@ class ServerBuildInfoMockTest
 
 	private ServerBuildInfo buildInfo;
 	private static final Key MOCKBUKKIT_BRAND_ID = Key.key("mockbukkit", "mockbukkit");
+
+	private static final String VERSION_RE = "\\d+\\.\\d+\\.\\d+";
+	private static final String BUILD_NUMBER_RE = "((DEV)|(\\d+))";
+	private static final String BUILD_TIME_RE = "\\d+-\\d+-\\d+T\\d+:\\d+:\\d+Z";
+	private static final String BRANCH_RE = ".*";
+	private static final String COMMIT_RE = "[0-9a-f]+";
 
 	@BeforeEach
 	void setUp()
@@ -51,20 +57,42 @@ class ServerBuildInfoMockTest
 		assertEquals("MockBukkit", buildInfo.brandName());
 	}
 
+	@Test
+	void minecraftVersionName()
+	{
+		assertTrue(VERSION_RE.matches(buildInfo.minecraftVersionName()), "Invalid version name: " + buildInfo.minecraftVersionName());
+	}
+
+	@Test
+	void minecraftVersionId()
+	{
+		assertTrue(VERSION_RE.matches(buildInfo.minecraftVersionId()), "Invalid version id: " + buildInfo.minecraftVersionId());
+	}
+
+	@Test
+	void gitBranch()
+	{
+		assertFalse(buildInfo.gitBranch().get().isEmpty()));
+	}
+
+	@Test
+	void gitCommit()
+	{
+		assertTrue(COMMIT_RE.matches(buildInfo.gitCommit().get()), "Invalid commit id: " + buildInfo.gitCommit());
+	}
+
 	@ParameterizedTest
 	@MethodSource("expectedVersionInfo")
-	void asString(ServerBuildInfo.StringRepresentation representation, String expected)
+	void asString(ServerBuildInfo.StringRepresentation representation, Pattern allowed)
 	{
-		assertEquals(expected, buildInfo.asString(representation));
+		String buildInfoString = buildInfo.asString(representation);
+		assertTrue(allowed.matcher(buildInfoString).matches(), "Pattern miss match for: " + buildInfoString);
 	}
 
 	static Stream<Arguments> expectedVersionInfo()
 	{
-		ServerBuildInfo buildInfo = ServerBuildInfo.buildInfo();
-		String versionSimple = String.format("%s-DEV", buildInfo.minecraftVersionId());
-		String versionFull = String.format("%s-DEV (%s)", buildInfo.minecraftVersionId(), buildInfo.buildTime().truncatedTo(ChronoUnit.SECONDS));
-		return Stream.of(Arguments.of(ServerBuildInfo.StringRepresentation.VERSION_SIMPLE, versionSimple),
-				Arguments.of(ServerBuildInfo.StringRepresentation.VERSION_FULL, versionFull));
+		return Stream.of(Arguments.of(ServerBuildInfo.StringRepresentation.VERSION_SIMPLE, Pattern.compile(VERSION_RE + "-" + BUILD_NUMBER_RE + "-" + COMMIT_RE)),
+				Arguments.of(ServerBuildInfo.StringRepresentation.VERSION_FULL, Pattern.compile(VERSION_RE + "-" + BUILD_NUMBER_RE + "-" + BRANCH_RE + "@" + COMMIT_RE + " \\(" + BUILD_TIME_RE + "\\)")));
 	}
 
 }

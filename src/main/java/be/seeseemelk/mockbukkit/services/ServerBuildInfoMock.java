@@ -91,7 +91,6 @@ public class ServerBuildInfoMock implements ServerBuildInfo
 		{
 			sb.append(BUILD_DEV);
 		}
-		sb.append(BUILD_DEV);
 		final boolean hasGitBranch = this.gitBranch().isPresent();
 		final boolean hasGitCommit = this.gitCommit().isPresent();
 		if (hasGitBranch || hasGitCommit)
