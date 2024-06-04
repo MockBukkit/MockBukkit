@@ -92,8 +92,8 @@ public class EnchantmentMock extends Enchantment
 		this.startLevel = data.get("startLevel").getAsInt();
 		this.name = data.get("name").getAsString();
 		this.displayNames = getDisplayNames(data.get("displayNames").getAsJsonArray(), this.maxLevel);
-		this.minModifiedCosts = getMinModifiedCosts(data.get("minModifiedCosts").getAsJsonArray(), this.maxLevel);
-		this.maxModifiedCosts = getMaxModifiedCosts(data.get("maxModifiedCosts").getAsJsonArray(), this.maxLevel);
+		this.minModifiedCosts = getModifiedCosts(data.get("minModifiedCosts").getAsJsonArray(), this.maxLevel);
+		this.maxModifiedCosts = getModifiedCosts(data.get("maxModifiedCosts").getAsJsonArray(), this.maxLevel);
 		this.tradeable = data.get("tradeable").getAsBoolean();
 		this.discoverable = data.get("discoverable").getAsBoolean();
 		this.conflicts = getConflicts(data.get("conflicts").getAsJsonArray());
@@ -211,7 +211,7 @@ public class EnchantmentMock extends Enchantment
 	}
 
 	@Override
-	@Deprecated(forRemoval = true)
+	@Deprecated(forRemoval = true, since = "1.20.5")
 	public @NotNull EnchantmentTarget getItemTarget()
 	{
 		throw new UnsupportedOperationException("Method no longer applicable. Use Tags instead.");
@@ -307,8 +307,8 @@ public class EnchantmentMock extends Enchantment
 		int startLevel = data.get("startLevel").getAsInt();
 		String name = data.get("name").getAsString();
 		Component[] displayNames = getDisplayNames(data.get("displayNames").getAsJsonArray(), maxLevel);
-		int[] minModifiedCosts = getMinModifiedCosts(data.get("minModifiedCosts").getAsJsonArray(), maxLevel);
-		int[] maxModifiedCosts = getMaxModifiedCosts(data.get("maxModifiedCosts").getAsJsonArray(), maxLevel);
+		int[] minModifiedCosts = getModifiedCosts(data.get("minModifiedCosts").getAsJsonArray(), maxLevel);
+		int[] maxModifiedCosts = getModifiedCosts(data.get("maxModifiedCosts").getAsJsonArray(), maxLevel);
 		boolean tradeable = data.get("tradeable").getAsBoolean();
 		boolean discoverable = data.get("discoverable").getAsBoolean();
 		Set<NamespacedKey> conflicts = getConflicts(data.get("conflicts").getAsJsonArray());
@@ -339,7 +339,7 @@ public class EnchantmentMock extends Enchantment
 		return output;
 	}
 
-	private static int[] getMinModifiedCosts(JsonArray minModifiedCosts, int maxLevel)
+	private static int[] getModifiedCosts(JsonArray minModifiedCosts, int maxLevel)
 	{
 		int[] output = new int[maxLevel];
 		for (JsonElement element : minModifiedCosts)
@@ -347,18 +347,6 @@ public class EnchantmentMock extends Enchantment
 			JsonObject minModifiedCost = element.getAsJsonObject();
 			int level = minModifiedCost.get(LEVEL).getAsInt();
 			output[level - 1] = minModifiedCost.get(COST).getAsInt();
-		}
-		return output;
-	}
-
-	private static int[] getMaxModifiedCosts(JsonArray maxModifiedCosts, int maxLevel)
-	{
-		int[] output = new int[maxLevel];
-		for (JsonElement element : maxModifiedCosts)
-		{
-			JsonObject maxModifiedCost = element.getAsJsonObject();
-			int level = maxModifiedCost.get(LEVEL).getAsInt();
-			output[level - 1] = maxModifiedCost.get(COST).getAsInt();
 		}
 		return output;
 	}
