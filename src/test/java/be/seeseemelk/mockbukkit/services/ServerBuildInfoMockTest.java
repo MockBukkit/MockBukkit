@@ -60,25 +60,25 @@ class ServerBuildInfoMockTest
 	@Test
 	void minecraftVersionName()
 	{
-		assertTrue(VERSION_RE.matches(buildInfo.minecraftVersionName()), "Invalid version name: " + buildInfo.minecraftVersionName());
+		assertTrue(buildInfo.minecraftVersionName().matches(VERSION_RE), "Invalid version name: " + buildInfo.minecraftVersionName());
 	}
 
 	@Test
 	void minecraftVersionId()
 	{
-		assertTrue(VERSION_RE.matches(buildInfo.minecraftVersionId()), "Invalid version id: " + buildInfo.minecraftVersionId());
+		assertTrue(buildInfo.minecraftVersionId().matches(VERSION_RE), "Invalid version id: " + buildInfo.minecraftVersionId());
 	}
 
 	@Test
 	void gitBranch()
 	{
-		assertFalse(buildInfo.gitBranch().get().isEmpty()));
+		assertFalse(buildInfo.gitBranch().get().isEmpty());
 	}
 
 	@Test
 	void gitCommit()
 	{
-		assertTrue(COMMIT_RE.matches(buildInfo.gitCommit().get()), "Invalid commit id: " + buildInfo.gitCommit());
+		assertTrue(buildInfo.gitCommit().get().matches(COMMIT_RE), "Invalid commit id: " + buildInfo.gitCommit().get());
 	}
 
 	@ParameterizedTest
