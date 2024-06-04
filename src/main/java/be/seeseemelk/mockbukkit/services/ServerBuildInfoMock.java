@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.services;
 
+import be.seeseemelk.mockbukkit.BuildParameters;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import io.papermc.paper.ServerBuildInfo;
 import net.kyori.adventure.key.Key;
@@ -19,22 +20,7 @@ public class ServerBuildInfoMock implements ServerBuildInfo
 {
 
 	private static final Key BRAND_MOCKBUKKIT_ID = Key.key("mockbukkit:mockbukkit");
-	private final String minecraftVersion;
 	private static final String BUILD_DEV = "DEV";
-
-	public ServerBuildInfoMock()
-	{
-		try (InputStream inputStream = MockBukkit.class.getResourceAsStream("/version_info.properties"))
-		{
-			Properties properties = new Properties();
-			properties.load(inputStream);
-			this.minecraftVersion = properties.getProperty("minecraft.version");
-		}
-		catch (IOException e)
-		{
-			throw new RuntimeException(e);
-		}
-	}
 
 	@Override
 	public @NotNull Key brandId()
@@ -57,13 +43,13 @@ public class ServerBuildInfoMock implements ServerBuildInfo
 	@Override
 	public @NotNull String minecraftVersionId()
 	{
-		return this.minecraftVersion;
+		return minecraftVersionName();
 	}
 
 	@Override
 	public @NotNull String minecraftVersionName()
 	{
-		return this.minecraftVersion;
+		return BuildParameters.PAPER_API_FULL_VERSION.split("-")[0];
 	}
 
 	@Override
