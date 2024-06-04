@@ -12,8 +12,6 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.naming.Name;
-
 public class BlockTypeMock implements BlockType
 {
 
@@ -33,7 +31,7 @@ public class BlockTypeMock implements BlockType
 
 	public BlockTypeMock(NamespacedKey key, boolean itemType, boolean solid, boolean flammable, boolean burnable,
 						 boolean occluding, boolean gravity, float hardness, float blastResistance, float slipperiness,
-						 boolean air, boolean interactable , String translationKey)
+						 boolean air, boolean interactable, String translationKey)
 	{
 		this.key = key;
 		this.itemType = itemType;
@@ -67,7 +65,7 @@ public class BlockTypeMock implements BlockType
 		boolean interactable = jsonObject.get("interactable").getAsBoolean();
 		String translationKey = jsonObject.get("translationKey").getAsString();
 		return new BlockTypeMock(key, itemType, solid, flammable, burnable, occluding, gravity, hardness, blastResistance, slipperiness, air, interactable, translationKey);
- 	}
+	}
 
 	@NotNull
 	@Override
@@ -150,7 +148,8 @@ public class BlockTypeMock implements BlockType
 	}
 
 	@Override
-	public boolean hasCollision() {
+	public boolean hasCollision()
+	{
 		throw new UnimplementedOperationException();
 	}
 
@@ -202,6 +201,7 @@ public class BlockTypeMock implements BlockType
 	{
 		return translationKey;
 	}
+
 	@Override
 	public @NotNull String translationKey()
 	{

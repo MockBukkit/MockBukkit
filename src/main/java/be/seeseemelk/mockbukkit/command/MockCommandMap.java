@@ -2,7 +2,6 @@ package be.seeseemelk.mockbukkit.command;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import com.google.common.base.Preconditions;
-import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandMap;
 import org.bukkit.command.SimpleCommandMap;
@@ -23,7 +22,7 @@ public class MockCommandMap extends SimpleCommandMap implements CommandMap
 	@ApiStatus.Internal
 	public MockCommandMap(@NotNull final ServerMock server, Map<String, Command> backing)
 	{
-		super(server,backing);
+		super(server, backing);
 		Preconditions.checkNotNull(server, "server cannot be null");
 	}
 

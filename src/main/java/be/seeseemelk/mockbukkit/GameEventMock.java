@@ -3,7 +3,6 @@ package be.seeseemelk.mockbukkit;
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonObject;
 import org.bukkit.GameEvent;
-import org.bukkit.Keyed;
 import org.bukkit.NamespacedKey;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;

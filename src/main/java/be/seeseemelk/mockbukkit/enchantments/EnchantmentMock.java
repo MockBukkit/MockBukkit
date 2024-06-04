@@ -85,7 +85,8 @@ public class EnchantmentMock extends Enchantment
 	@Deprecated(forRemoval = true)
 	public EnchantmentMock(JsonObject data)
 	{
-		this.key = NamespacedKey.fromString(data.get("key").getAsString());this.treasure = data.get("treasure").getAsBoolean();
+		this.key = NamespacedKey.fromString(data.get("key").getAsString());
+		this.treasure = data.get("treasure").getAsBoolean();
 		this.cursed = data.get("cursed").getAsBoolean();
 		this.maxLevel = data.get("maxLevel").getAsInt();
 		this.startLevel = data.get("startLevel").getAsInt();

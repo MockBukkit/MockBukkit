@@ -20,7 +20,8 @@ public interface MessageTarget
 	 *
 	 * @return The next message sent to the target.
 	 */
-	@Nullable Component nextComponentMessage();
+	@Nullable
+	Component nextComponentMessage();
 
 	/**
 	 * Returns the next message that was sent to the target.

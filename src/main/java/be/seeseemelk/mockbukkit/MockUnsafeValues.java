@@ -477,14 +477,14 @@ public class MockUnsafeValues implements UnsafeValues
 	@ApiStatus.Internal
 	public String get(Class<?> aClass, String s)
 	{
-			// TODO Auto-generated method stub
-			throw new UnimplementedOperationException();
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
 	public <B extends org.bukkit.Keyed> B get(Registry<B> registry, NamespacedKey namespacedKey)
 	{
-			return registry.get(namespacedKey);
+		return registry.get(namespacedKey);
 	}
 
 	@Override
