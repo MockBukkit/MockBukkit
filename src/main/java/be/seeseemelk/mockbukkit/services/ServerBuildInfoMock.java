@@ -1,19 +1,14 @@
 package be.seeseemelk.mockbukkit.services;
 
 import be.seeseemelk.mockbukkit.BuildParameters;
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import io.papermc.paper.ServerBuildInfo;
 import net.kyori.adventure.key.Key;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 import java.util.OptionalInt;
-import java.util.Properties;
 
 // We're the only impl
 @SuppressWarnings("NonExtendableApiUsage")
@@ -56,7 +51,7 @@ public class ServerBuildInfoMock implements ServerBuildInfo
 	@Override
 	public @NotNull OptionalInt buildNumber()
 	{
-		return OptionalInt.empty();
+		return BuildParameters.BUILD_NUMBER_STRING.isEmpty() ? OptionalInt.empty() : OptionalInt.of(Integer.parseInt(BuildParameters.BUILD_NUMBER_STRING));
 	}
 
 	@Override

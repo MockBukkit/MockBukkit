@@ -100,7 +100,13 @@ sourceSets {
 				property("paperApiFullVersion", project.property("paper.api.full-version").toString())
 				property("buildTime", System.currentTimeMillis().toString())
 				property("branch", run("git", "rev-parse", "--abbrev-ref", "HEAD"))
-				property("commit", run("git", "rev-parse","HEAD"))
+				property("commit", run("git", "rev-parse", "HEAD"))
+				val buildNumber = System.getenv("GITHUB_RUN_NUMBER")
+				if (buildNumber != null) {
+					property("buildNumber", buildNumber)
+				} else {
+					property("buildNumber", "")
+				}
 			}
 		}
 	}

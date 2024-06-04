@@ -6,4 +6,6 @@ public class BuildParameters
 	public static final long BUILD_TIME = Long.parseLong("{{ buildTime }}");
 	public static final String BRANCH = "{{ branch }}";
 	public static final String COMMIT = "{{ commit }}";
+	public static final String BUILD_NUMBER_STRING = "{{ buildNumber }}";
+
 }
