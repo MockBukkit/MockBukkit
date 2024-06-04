@@ -2,6 +2,7 @@ package be.seeseemelk.mockbukkit.services;
 
 import be.seeseemelk.mockbukkit.BuildParameters;
 import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import io.papermc.paper.ServerBuildInfo;
 import net.kyori.adventure.key.Key;
 import org.jetbrains.annotations.NotNull;
@@ -67,13 +68,13 @@ public class ServerBuildInfoMock implements ServerBuildInfo
 	@Override
 	public @NotNull Optional<String> gitBranch()
 	{
-		return Optional.empty();
+		return Optional.of(BuildParameters.BRANCH);
 	}
 
 	@Override
 	public @NotNull Optional<String> gitCommit()
 	{
-		return Optional.empty();
+		return Optional.of(BuildParameters.COMMIT);
 	}
 
 	@Override
@@ -90,6 +91,7 @@ public class ServerBuildInfoMock implements ServerBuildInfo
 		{
 			sb.append(BUILD_DEV);
 		}
+		sb.append(BUILD_DEV);
 		final boolean hasGitBranch = this.gitBranch().isPresent();
 		final boolean hasGitCommit = this.gitCommit().isPresent();
 		if (hasGitBranch || hasGitCommit)

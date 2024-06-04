@@ -53,7 +53,7 @@ class ServerBuildInfoMockTest
 
 	@ParameterizedTest
 	@MethodSource("expectedVersionInfo")
-	void asString_notNull(ServerBuildInfo.StringRepresentation representation, String expected)
+	void asString(ServerBuildInfo.StringRepresentation representation, String expected)
 	{
 		assertEquals(expected, buildInfo.asString(representation));
 	}
