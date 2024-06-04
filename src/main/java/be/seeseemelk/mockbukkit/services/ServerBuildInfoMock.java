@@ -13,6 +13,8 @@ import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.Properties;
 
+// We're the only impl
+@SuppressWarnings("NonExtendableApiUsage")
 public class ServerBuildInfoMock implements ServerBuildInfo
 {
 
