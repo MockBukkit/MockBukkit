@@ -1,0 +1,30 @@
+{
+    "replace": false,
+    "values": [
+        "minecraft:wooden_axe",
+        "minecraft:stone_axe",
+        "minecraft:diamond_axe",
+        "minecraft:stone_pickaxe",
+        "minecraft:stone_hoe",
+        "minecraft:stone_shovel",
+        "minecraft:golden_shovel",
+        "minecraft:iron_shovel",
+        "minecraft:iron_axe",
+        "minecraft:shears",
+        "minecraft:iron_hoe",
+        "minecraft:netherite_pickaxe",
+        "minecraft:iron_pickaxe",
+        "minecraft:diamond_hoe",
+        "minecraft:wooden_shovel",
+        "minecraft:diamond_pickaxe",
+        "minecraft:diamond_shovel",
+        "minecraft:wooden_pickaxe",
+        "minecraft:golden_hoe",
+        "minecraft:wooden_hoe",
+        "minecraft:netherite_shovel",
+        "minecraft:netherite_hoe",
+        "minecraft:golden_pickaxe",
+        "minecraft:netherite_axe",
+        "minecraft:golden_axe"
+    ]
+}

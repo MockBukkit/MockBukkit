@@ -25,8 +25,8 @@ import java.util.Objects;
 public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 {
 
+	private @NotNull PotionData basePotionData = new PotionData(PotionType.AWKWARD);
 	private @NotNull List<PotionEffect> effects = new ArrayList<>();
-	private @NotNull PotionData basePotionData = new PotionData(PotionType.UNCRAFTABLE);
 	private @Nullable Color color;
 
 	/**
@@ -196,15 +196,13 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	}
 
 	@Override
-	@Deprecated(since = "1.20")
-	public void setBasePotionData(@NotNull PotionData data)
+	public void setBasePotionData(@Nullable PotionData data)
 	{
 		this.basePotionData = new PotionData(data.getType(), data.isExtended(), data.isUpgraded());
 	}
 
 	@Override
-	@Deprecated(since = "1.20")
-	public @NotNull PotionData getBasePotionData()
+	public @Nullable PotionData getBasePotionData()
 	{
 		return new PotionData(basePotionData.getType(), basePotionData.isExtended(), basePotionData.isUpgraded());
 	}
@@ -218,6 +216,13 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 
 	@Override
 	public @NotNull PotionType getBasePotionType()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean hasBasePotionType()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

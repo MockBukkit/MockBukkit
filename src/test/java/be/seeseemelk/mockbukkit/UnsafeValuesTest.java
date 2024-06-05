@@ -126,7 +126,7 @@ class UnsafeValuesTest
 			meta.setDisplayName("Test");
 			meta.setLore(List.of("Test1", "Test2"));
 			meta.setUnbreakable(true);
-			meta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
+			meta.addEnchant(Enchantment.SHARPNESS, 1, true);
 			final PersistentDataContainer persistentDataContainer = meta.getPersistentDataContainer();
 			persistentDataContainer.set(new NamespacedKey("test", "test"), PersistentDataType.STRING, "test");
 		});
@@ -153,7 +153,7 @@ class UnsafeValuesTest
 			}
 			if (meta instanceof EnchantmentStorageMeta storageMeta)
 			{
-				storageMeta.addStoredEnchant(Enchantment.DAMAGE_ALL, 1, true);
+				storageMeta.addStoredEnchant(Enchantment.SHARPNESS, 1, true);
 			}
 		});
 	}

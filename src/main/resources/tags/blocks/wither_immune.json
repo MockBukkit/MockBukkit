@@ -1,18 +1,18 @@
 {
     "replace": false,
     "values": [
-        "minecraft:bedrock",
-        "minecraft:light",
-        "minecraft:end_portal",
-        "minecraft:moving_piston",
+        "minecraft:barrier",
         "minecraft:structure_block",
+        "minecraft:command_block",
+        "minecraft:moving_piston",
+        "minecraft:end_portal",
+        "minecraft:jigsaw",
+        "minecraft:repeating_command_block",
+        "minecraft:light",
+        "minecraft:chain_command_block",
+        "minecraft:bedrock",
         "minecraft:reinforced_deepslate",
         "minecraft:end_portal_frame",
-        "minecraft:barrier",
-        "minecraft:end_gateway",
-        "minecraft:repeating_command_block",
-        "minecraft:chain_command_block",
-        "minecraft:jigsaw",
-        "minecraft:command_block"
+        "minecraft:end_gateway"
     ]
 }

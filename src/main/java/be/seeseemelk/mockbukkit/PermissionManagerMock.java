@@ -9,7 +9,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
@@ -20,10 +19,10 @@ import java.util.WeakHashMap;
 public class PermissionManagerMock implements PermissionManager
 {
 
-	private Map<String, Permission> permissions = new HashMap<>();
-	private Map<Boolean, Set<Permission>> defaultPermissions = new HashMap<>();
-	private Map<String, Map<Permissible, Boolean>> permissionSubscriptions = new HashMap<>();
-	private Map<Boolean, Map<Permissible, Boolean>> defaultSubscriptions = new HashMap<>();
+	private final Map<String, Permission> permissions = new HashMap<>();
+	private final Map<Boolean, Set<Permission>> defaultPermissions = new HashMap<>();
+	private final Map<String, Map<Permissible, Boolean>> permissionSubscriptions = new HashMap<>();
+	private final Map<Boolean, Map<Permissible, Boolean>> defaultSubscriptions = new HashMap<>();
 
 	protected PermissionManagerMock()
 	{
@@ -48,7 +47,7 @@ public class PermissionManagerMock implements PermissionManager
 	{
 		Preconditions.checkNotNull(perm, "Permission cannot be null");
 		String name = perm.getName().toLowerCase(Locale.ENGLISH);
-		Preconditions.checkArgument(!this.permissions.containsKey(name),"The permission " + name + " is already defined!");
+		Preconditions.checkArgument(!this.permissions.containsKey(name), "The permission " + name + " is already defined!");
 		this.permissions.put(name, perm);
 		this.calculatePermissionDefault(perm);
 		if (dirtyPermissibles)

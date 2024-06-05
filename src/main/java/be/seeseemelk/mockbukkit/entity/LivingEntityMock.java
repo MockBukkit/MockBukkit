@@ -37,6 +37,7 @@ import org.bukkit.entity.memory.MemoryKey;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.entity.EntityToggleSwimEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.EntityEquipment;
@@ -161,7 +162,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 
 		this.health = 0;
 
-		EntityDeathEvent event = new EntityDeathEvent(this, new ArrayList<>(), 0);
+		EntityDeathEvent event = new EntityDeathEvent(this, DamageSource.builder(DamageType.GENERIC).build(), new ArrayList<>());
 		Bukkit.getPluginManager().callEvent(event);
 
 		this.alive = false;
@@ -1282,5 +1283,10 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 		throw new UnimplementedOperationException();
 	}
 
+	@Override
+	public void heal(double amount, @NotNull EntityRegainHealthEvent.RegainReason regainReason)
+	{
+		throw new UnimplementedOperationException();
+	}
 
 }

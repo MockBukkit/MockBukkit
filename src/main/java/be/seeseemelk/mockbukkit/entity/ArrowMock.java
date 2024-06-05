@@ -30,14 +30,16 @@ public class ArrowMock extends AbstractArrowMock implements Arrow
 	}
 
 	@Override
-	public void setBasePotionData(@NotNull PotionData data)
+	public void setBasePotionData(@Nullable PotionData data)
 	{
+		//TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public @NotNull PotionData getBasePotionData()
+	public @Nullable PotionData getBasePotionData()
 	{
+		//TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 

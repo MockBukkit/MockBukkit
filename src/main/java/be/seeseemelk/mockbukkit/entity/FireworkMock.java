@@ -53,7 +53,7 @@ public class FireworkMock extends ProjectileMock implements Firework
 	@Override
 	public @NotNull EntityType getType()
 	{
-		return EntityType.FIREWORK;
+		return EntityType.FIREWORK_ROCKET;
 	}
 
 	@Override

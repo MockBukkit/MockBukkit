@@ -360,7 +360,7 @@ public class MockBukkit
 	 * Creates a mock instance of a {@link JavaPlugin} implementation and gives you a chance to name the plugin. This plugin offers no functionality, but it does
 	 * allow a plugin that might enable and disable other plugins to be tested.
 	 *
-	 * @param pluginName A name of a new plugin.
+	 * @param pluginName    A name of a new plugin.
 	 * @param pluginVersion The version of the new plugin.
 	 * @return An instance of a mock plugin.
 	 */

@@ -2,7 +2,6 @@ package be.seeseemelk.mockbukkit;
 
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import be.seeseemelk.mockbukkit.block.data.BlockDataMock;
-import be.seeseemelk.mockbukkit.block.data.WallSignMock;
 import be.seeseemelk.mockbukkit.block.state.BlockStateMock;
 import be.seeseemelk.mockbukkit.entity.AllayMock;
 import be.seeseemelk.mockbukkit.entity.AreaEffectCloudMock;
@@ -77,6 +76,7 @@ import be.seeseemelk.mockbukkit.entity.SpiderMock;
 import be.seeseemelk.mockbukkit.entity.SquidMock;
 import be.seeseemelk.mockbukkit.entity.StorageMinecartMock;
 import be.seeseemelk.mockbukkit.entity.StrayMock;
+import be.seeseemelk.mockbukkit.entity.TNTPrimedMock;
 import be.seeseemelk.mockbukkit.entity.TadpoleMock;
 import be.seeseemelk.mockbukkit.entity.ThrownExpBottleMock;
 import be.seeseemelk.mockbukkit.entity.TropicalFishMock;
@@ -103,7 +103,6 @@ import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
-import org.bukkit.block.data.type.WallSign;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -1044,7 +1043,7 @@ class WorldMockTest
 	void spawn_Firework_CorrectEvent()
 	{
 		WorldMock world = new WorldMock();
-		world.spawnEntity(new Location(world, 0, 5, 0), EntityType.FIREWORK);
+		world.spawnEntity(new Location(world, 0, 5, 0), EntityType.FIREWORK_ROCKET);
 		server.getPluginManager().assertEventFired(ProjectileLaunchEvent.class, (e) -> !e.isCancelled());
 	}
 
@@ -1052,7 +1051,7 @@ class WorldMockTest
 	void spawn_Item_ThrowsException()
 	{
 		WorldMock world = new WorldMock();
-		assertThrowsExactly(IllegalArgumentException.class, () -> world.spawnEntity(new Location(world, 0, 5, 0), EntityType.DROPPED_ITEM));
+		assertThrowsExactly(IllegalArgumentException.class, () -> world.spawnEntity(new Location(world, 0, 5, 0), EntityType.ITEM));
 	}
 
 	@Test
@@ -1265,7 +1264,7 @@ class WorldMockTest
 				Arguments.of(EntityType.SALMON, SalmonMock.class),
 				Arguments.of(EntityType.COD, CodMock.class),
 				Arguments.of(EntityType.TADPOLE, TadpoleMock.class),
-				Arguments.of(EntityType.MUSHROOM_COW, MushroomCowMock.class),
+				Arguments.of(EntityType.MOOSHROOM, MushroomCowMock.class),
 				Arguments.of(EntityType.GHAST, GhastMock.class),
 				Arguments.of(EntityType.FOX, FoxMock.class),
 				Arguments.of(EntityType.FROG, FrogMock.class),
@@ -1293,21 +1292,21 @@ class WorldMockTest
 				Arguments.of(EntityType.HORSE, HorseMock.class),
 				Arguments.of(EntityType.ARMOR_STAND, ArmorStandMock.class),
 				Arguments.of(EntityType.ZOMBIE, ZombieMock.class),
-				Arguments.of(EntityType.FIREWORK, FireworkMock.class),
+				Arguments.of(EntityType.FIREWORK_ROCKET, FireworkMock.class),
 				Arguments.of(EntityType.EXPERIENCE_ORB, ExperienceOrbMock.class),
-				Arguments.of(EntityType.MINECART_FURNACE, PoweredMinecartMock.class),
+				Arguments.of(EntityType.FURNACE_MINECART, PoweredMinecartMock.class),
 				Arguments.of(EntityType.CAMEL, CamelMock.class),
-				Arguments.of(EntityType.MINECART_COMMAND, CommandMinecartMock.class),
-				Arguments.of(EntityType.MINECART_TNT, ExplosiveMinecartMock.class),
-				Arguments.of(EntityType.MINECART_HOPPER, HopperMinecartMock.class),
-				Arguments.of(EntityType.MINECART_MOB_SPAWNER, SpawnerMinecartMock.class),
+				Arguments.of(EntityType.COMMAND_BLOCK_MINECART, CommandMinecartMock.class),
+				Arguments.of(EntityType.TNT_MINECART, ExplosiveMinecartMock.class),
+				Arguments.of(EntityType.HOPPER_MINECART, HopperMinecartMock.class),
+				Arguments.of(EntityType.SPAWNER_MINECART, SpawnerMinecartMock.class),
 				Arguments.of(EntityType.MINECART, RideableMinecartMock.class),
-				Arguments.of(EntityType.MINECART_CHEST, StorageMinecartMock.class),
+				Arguments.of(EntityType.CHEST_MINECART, StorageMinecartMock.class),
 				Arguments.of(EntityType.AREA_EFFECT_CLOUD, AreaEffectCloudMock.class),
 				Arguments.of(EntityType.BOAT, BoatMock.class),
 				Arguments.of(EntityType.CHEST_BOAT, ChestBoatMock.class),
 				Arguments.of(EntityType.ENDER_PEARL, EnderPearlMock.class),
-				Arguments.of(EntityType.FISHING_HOOK, FishHookMock.class),
+				Arguments.of(EntityType.FISHING_BOBBER, FishHookMock.class),
 				Arguments.of(EntityType.PANDA, PandaMock.class),
 				Arguments.of(EntityType.RABBIT, RabbitMock.class),
 				Arguments.of(EntityType.OCELOT, OcelotMock.class),
@@ -1320,11 +1319,10 @@ class WorldMockTest
 				Arguments.of(EntityType.MAGMA_CUBE, MagmaCubeMock.class),
 				Arguments.of(EntityType.ENDERMITE, EndermiteMock.class),
 				Arguments.of(EntityType.SILVERFISH, SilverfishMock.class),
-				Arguments.of(EntityType.THROWN_EXP_BOTTLE, ThrownExpBottleMock.class),
+				Arguments.of(EntityType.EXPERIENCE_BOTTLE, ThrownExpBottleMock.class),
 				Arguments.of(EntityType.SNOWBALL, SnowballMock.class),
 				Arguments.of(EntityType.TURTLE, TurtleMock.class),
-				Arguments.of(EntityType.THROWN_EXP_BOTTLE, ThrownExpBottleMock.class),
-				Arguments.of(EntityType.LEASH_HITCH, LeashHitchMock.class),
+				Arguments.of(EntityType.LEASH_KNOT, LeashHitchMock.class),
 				Arguments.of(EntityType.ZOMBIFIED_PIGLIN, PigZombieMock.class),
 				Arguments.of(EntityType.BLOCK_DISPLAY, BlockDisplayMock.class),
 				Arguments.of(EntityType.ITEM_DISPLAY, ItemDisplayMock.class),
@@ -1904,7 +1902,7 @@ class WorldMockTest
 	void testGetKeepSpawnInMemoryDefault()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);
-        assertTrue(world.getKeepSpawnInMemory());
+		assertTrue(world.getKeepSpawnInMemory());
 	}
 
 	@Test
@@ -2276,7 +2274,7 @@ class WorldMockTest
 		assertTrue(world.isFixedTime());
 	}
 
-  @Test
+	@Test
 	void testGetEntity()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);

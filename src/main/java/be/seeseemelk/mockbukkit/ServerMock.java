@@ -55,6 +55,7 @@ import com.google.common.base.Preconditions;
 import io.papermc.paper.ban.BanListType;
 import io.papermc.paper.datapack.DatapackManager;
 import io.papermc.paper.math.Position;
+import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.threadedregions.scheduler.AsyncScheduler;
 import io.papermc.paper.threadedregions.scheduler.GlobalRegionScheduler;
 import io.papermc.paper.threadedregions.scheduler.RegionScheduler;
@@ -98,6 +99,7 @@ import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityFactory;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.SpawnCategory;
@@ -187,7 +189,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private final FoliaAsyncScheduler foliaAsyncScheduler = new FoliaAsyncScheduler(scheduler);
 	private final ServicesManagerMock servicesManager = new ServicesManagerMock();
 	private final MockPlayerList playerList = new MockPlayerList();
-	private final MockCommandMap commandMap = new MockCommandMap(this);
+	private final MockCommandMap commandMap = new MockCommandMap(this, new HashMap<>());
 	private final HelpMapMock helpMap = new HelpMapMock();
 	private final StandardMessenger messenger = new StandardMessenger();
 	private final Map<Integer, MapViewMock> mapViews = new HashMap<>();
@@ -204,7 +206,6 @@ public class ServerMock extends Server.Spigot implements Server
 	private final @NotNull Set<OfflinePlayer> whitelistedPlayers = new LinkedHashSet<>();
 
 	private final @NotNull ServerConfiguration serverConfiguration = new ServerConfiguration();
-	private final Map<Class<?>, Registry<?>> registry = new HashMap<>();
 
 	/**
 	 * Constructs a new ServerMock and sets it up.
@@ -2205,11 +2206,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@SuppressWarnings("unchecked")
 	public @Nullable <T extends Keyed> Registry<T> getRegistry(@NotNull Class<T> tClass)
 	{
-		if (!registry.containsKey(tClass))
-		{
-			registry.put(tClass, RegistryMock.createRegistry(tClass));
-		}
-		return (Registry<T>) registry.get(tClass);
+		return RegistryAccess.registryAccess().getRegistry(tClass);
 	}
 
 	@Override
@@ -2572,6 +2569,20 @@ public class ServerMock extends Server.Spigot implements Server
 		{
 			throw new RuntimeException(e);
 		}
+	}
+
+	@Override
+	public boolean isAcceptingTransfers()
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull EntityFactory getEntityFactory()
+	{
+		//TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

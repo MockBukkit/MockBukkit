@@ -56,7 +56,7 @@ class ThrownExpBottleMockTest
 	@Test
 	void testGetType()
 	{
-		assertEquals(EntityType.THROWN_EXP_BOTTLE, bottle.getType());
+		assertEquals(EntityType.EXPERIENCE_BOTTLE, bottle.getType());
 	}
 
 }

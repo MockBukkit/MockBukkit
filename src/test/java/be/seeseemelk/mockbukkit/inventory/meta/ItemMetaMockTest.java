@@ -2,9 +2,9 @@ package be.seeseemelk.mockbukkit.inventory.meta;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.MockPlugin;
-import com.destroystokyo.paper.Namespaced;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
+import net.kyori.adventure.key.Namespaced;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
@@ -34,6 +34,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -67,22 +68,12 @@ class ItemMetaMockTest
 		meta.setLore(List.of("lore"));
 		meta.setUnbreakable(true);
 		meta.addItemFlags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES);
-		meta.setPlaceableKeys(List.of(
-				Material.DIAMOND_SWORD.getKey(),
-				Material.DIAMOND_AXE.getKey()
-		));
-		meta.setDestroyableKeys(List.of(
-				Material.ACACIA_BOAT.getKey(),
-				Material.BLACK_WOOL.getKey()
-		));
 		ItemMetaMock meta2 = new ItemMetaMock(meta);
 		meta2.setLore(List.of("lore"));
 		assertEquals(meta2, meta);
 		assertEquals(meta, meta2);
 		assertEquals(meta.hashCode(), meta2.hashCode());
 		assertEquals(meta.getItemFlags(), meta2.getItemFlags());
-		assertEquals(meta.getPlaceableKeys(), meta2.getPlaceableKeys());
-		assertEquals(meta.getDestroyableKeys(), meta2.getDestroyableKeys());
 	}
 
 	@Test
@@ -214,8 +205,8 @@ class ItemMetaMockTest
 	void equals_EnchantsSame_True()
 	{
 		ItemMetaMock meta2 = new ItemMetaMock();
-		meta.addEnchant(Enchantment.DURABILITY, 5, true);
-		meta2.addEnchant(Enchantment.DURABILITY, 5, true);
+		meta.addEnchant(Enchantment.UNBREAKING, 5, true);
+		meta2.addEnchant(Enchantment.UNBREAKING, 5, true);
 		assertEquals(meta, meta2);
 		assertEquals(meta2, meta);
 	}
@@ -224,9 +215,9 @@ class ItemMetaMockTest
 	void equals_EnchantsDifferent_False()
 	{
 		ItemMetaMock meta2 = new ItemMetaMock();
-		meta.addEnchant(Enchantment.DURABILITY, 5, true);
-		meta2.addEnchant(Enchantment.DURABILITY, 5, true);
-		meta2.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
+		meta.addEnchant(Enchantment.UNBREAKING, 5, true);
+		meta2.addEnchant(Enchantment.UNBREAKING, 5, true);
+		meta2.addEnchant(Enchantment.SHARPNESS, 1, true);
 		assertNotEquals(meta, meta2);
 		assertNotEquals(meta2, meta);
 	}
@@ -235,8 +226,8 @@ class ItemMetaMockTest
 	void equals_EnchantsDifferentLevel_False()
 	{
 		ItemMetaMock meta2 = new ItemMetaMock();
-		meta.addEnchant(Enchantment.DURABILITY, 5, true);
-		meta2.addEnchant(Enchantment.DURABILITY, 10, true);
+		meta.addEnchant(Enchantment.UNBREAKING, 5, true);
+		meta2.addEnchant(Enchantment.UNBREAKING, 10, true);
 		assertNotEquals(meta, meta2);
 		assertNotEquals(meta2, meta);
 	}
@@ -245,7 +236,7 @@ class ItemMetaMockTest
 	void equals_EnchantsOneEmpty_False()
 	{
 		ItemMetaMock meta2 = new ItemMetaMock();
-		meta.addEnchant(Enchantment.DURABILITY, 5, true);
+		meta.addEnchant(Enchantment.UNBREAKING, 5, true);
 		assertNotEquals(meta, meta2);
 		assertNotEquals(meta2, meta);
 	}
@@ -377,39 +368,6 @@ class ItemMetaMockTest
 	}
 
 	@Test
-	void clone_WithPlaceableKeys_ClonedExactly()
-	{
-		meta.setPlaceableKeys(Set.of(
-				Material.STONE.getKey(),
-				Material.DIRT.getKey(),
-				Material.SHORT_GRASS.getKey()
-		));
-		ItemMetaMock cloned = meta.clone();
-		assertEquals(meta, cloned);
-		assertEquals(meta.hashCode(), cloned.hashCode());
-
-		Set<Namespaced> clonedKeys = cloned.getPlaceableKeys();
-		assertEquals(3, clonedKeys.size());
-	}
-
-	@Test
-	void clone_WithDestroyableKeys_ClonedExactly()
-	{
-		meta.setDestroyableKeys(Set.of(
-				Material.STONE.getKey(),
-				Material.DIRT.getKey(),
-				Material.SHORT_GRASS.getKey(),
-				Material.GRANITE.getKey()
-		));
-		ItemMetaMock cloned = meta.clone();
-		assertEquals(meta, cloned);
-		assertEquals(meta.hashCode(), cloned.hashCode());
-
-		Set<Namespaced> clonedKeys = cloned.getDestroyableKeys();
-		assertEquals(4, clonedKeys.size());
-	}
-
-	@Test
 	void hasLore_NoLore_False()
 	{
 		assertFalse(meta.hasLore());
@@ -464,7 +422,7 @@ class ItemMetaMockTest
 	void hasEnchants()
 	{
 		assertFalse(meta.hasEnchants());
-		meta.addEnchant(Enchantment.DURABILITY, 1, true);
+		meta.addEnchant(Enchantment.UNBREAKING, 1, true);
 		assertTrue(meta.hasEnchants());
 	}
 
@@ -479,46 +437,46 @@ class ItemMetaMockTest
 	@Test
 	void getEnchantLevel()
 	{
-		assertEquals(0, meta.getEnchantLevel(Enchantment.DURABILITY));
-		meta.addEnchant(Enchantment.DURABILITY, 50, true);
-		assertEquals(50, meta.getEnchantLevel(Enchantment.DURABILITY));
+		assertEquals(0, meta.getEnchantLevel(Enchantment.UNBREAKING));
+		meta.addEnchant(Enchantment.UNBREAKING, 50, true);
+		assertEquals(50, meta.getEnchantLevel(Enchantment.UNBREAKING));
 	}
 
 	@Test
 	void getEnchants()
 	{
-		meta.addEnchant(Enchantment.DURABILITY, 3, true);
+		meta.addEnchant(Enchantment.UNBREAKING, 3, true);
 
 		Map<Enchantment, Integer> actual = meta.getEnchants();
 		assertEquals(1, actual.size());
-		assertEquals(3, actual.get(Enchantment.DURABILITY));
+		assertEquals(3, actual.get(Enchantment.UNBREAKING));
 	}
 
 	@Test
 	void removeEnchant_NotExisting()
 	{
-		assertFalse(meta.removeEnchant(Enchantment.DAMAGE_ALL));
+		assertFalse(meta.removeEnchant(Enchantment.SHARPNESS));
 	}
 
 	@Test
 	void removeEnchant()
 	{
-		meta.addEnchant(Enchantment.DAMAGE_ALL, 5, true);
-		assertTrue(meta.removeEnchant(Enchantment.DAMAGE_ALL));
+		meta.addEnchant(Enchantment.SHARPNESS, 5, true);
+		assertTrue(meta.removeEnchant(Enchantment.SHARPNESS));
 	}
 
 	@Test
 	void addEnchant_IgnoreLevel()
 	{
-		assertTrue(meta.addEnchant(Enchantment.DURABILITY, 100, true));
-		assertTrue(meta.hasEnchant(Enchantment.DURABILITY));
+		assertTrue(meta.addEnchant(Enchantment.UNBREAKING, 100, true));
+		assertTrue(meta.hasEnchant(Enchantment.UNBREAKING));
 	}
 
 	@Test
 	void addEnchant_AlreadyExist()
 	{
-		meta.addEnchant(Enchantment.DURABILITY, 100, true);
-		assertFalse(meta.addEnchant(Enchantment.DURABILITY, 100, true));
+		meta.addEnchant(Enchantment.UNBREAKING, 100, true);
+		assertFalse(meta.addEnchant(Enchantment.UNBREAKING, 100, true));
 	}
 
 	@Test
@@ -560,203 +518,6 @@ class ItemMetaMockTest
 	{
 		meta.setLore(Arrays.asList("Hello", "world"));
 		assertThrows(AssertionError.class, () -> meta.assertLore("Something", "else"));
-	}
-
-	@Test
-	void testDestroyableKeysSet()
-	{
-		Set<Namespaced> expectedKeys = Set.of(
-				Material.CAKE.getKey(),
-				Material.CHEST.getKey(),
-				Material.ACACIA_SLAB.getKey()
-		);
-		meta.setDestroyableKeys(expectedKeys);
-		assertEquals(expectedKeys, meta.getDestroyableKeys());
-	}
-
-	@Test
-	void testPlaceableKeys()
-	{
-		Set<Namespaced> expectedKeys = Set.of(
-				Material.ACACIA_PRESSURE_PLATE.getKey(),
-				Material.BLACK_WOOL.getKey(),
-				Material.CRIMSON_NYLIUM.getKey()
-		);
-		meta.setPlaceableKeys(expectedKeys);
-		assertEquals(expectedKeys, meta.getPlaceableKeys());
-	}
-
-	@Test
-	void testGetCanPlaceOn()
-	{
-		Set<Namespaced> expectedKeys = Set.of(
-				Material.ACACIA_PRESSURE_PLATE.getKey(),
-				Material.BLACK_WOOL.getKey(),
-				Material.CRIMSON_NYLIUM.getKey()
-		);
-		meta.setPlaceableKeys(expectedKeys);
-
-		for (Material material : meta.getCanPlaceOn())
-		{
-			assertTrue(expectedKeys.contains(material.getKey()));
-		}
-	}
-
-	@Test
-	void testSetCanPlaceOn()
-	{
-		Set<Material> expectedKeys = Set.of(
-				Material.ACACIA_PRESSURE_PLATE,
-				Material.BLACK_WOOL,
-				Material.CRIMSON_NYLIUM
-		);
-		meta.setCanPlaceOn(expectedKeys);
-
-		for (Material material : meta.getCanPlaceOn())
-		{
-			assertTrue(expectedKeys.contains(material));
-		}
-	}
-
-	@Test
-	void testSetCanPlaceOn_NullThrows()
-	{
-		assertThrows(IllegalArgumentException.class, () -> meta.setCanPlaceOn(null));
-	}
-
-	@Test
-	void testSetCanPlaceOn_LegacyKey_Throws()
-	{
-		Set<Material> input = Set.of(
-				Material.LEGACY_AIR
-		);
-
-		assertThrows(IllegalArgumentException.class, () -> meta.setCanPlaceOn(input));
-	}
-
-	@Test
-	void testGetCanPlaceON_NonBukkitKey_Skipped()
-	{
-		meta.setPlaceableKeys(List.of(
-				Material.ACACIA_PRESSURE_PLATE.getKey(),
-				Material.BLACK_WOOL.getKey(),
-				Material.CRIMSON_NYLIUM.getKey(),
-				Material.ACACIA_BOAT.getKey(),
-				new Namespaced()
-				{
-					@Override
-					public @NotNull String getNamespace()
-					{
-						return "minecraft";
-					}
-
-					@Override
-					public @NotNull String getKey()
-					{
-						return "test";
-					}
-				}
-		));
-
-		Set<Material> expectedKeys = Set.of(
-				Material.ACACIA_PRESSURE_PLATE,
-				Material.BLACK_WOOL,
-				Material.CRIMSON_NYLIUM,
-				Material.ACACIA_BOAT
-		);
-		for (Material material : meta.getCanPlaceOn())
-		{
-			assertTrue(expectedKeys.contains(material));
-		}
-
-		assertEquals(4, meta.getCanPlaceOn().size());
-	}
-
-
-	@Test
-	void testGetCanDestroy()
-	{
-		Set<Namespaced> expectedKeys = Set.of(
-				Material.ACACIA_PRESSURE_PLATE.getKey(),
-				Material.BLACK_WOOL.getKey(),
-				Material.CRIMSON_NYLIUM.getKey()
-		);
-		meta.setDestroyableKeys(expectedKeys);
-
-		for (Material material : meta.getCanDestroy())
-		{
-			assertTrue(expectedKeys.contains(material.getKey()));
-		}
-	}
-
-	@Test
-	void testSetCanDestroy()
-	{
-		Set<Material> expectedKeys = Set.of(
-				Material.ACACIA_PRESSURE_PLATE,
-				Material.BLACK_WOOL,
-				Material.CRIMSON_NYLIUM
-		);
-		meta.setCanDestroy(expectedKeys);
-
-		for (Material material : meta.getCanDestroy())
-		{
-			assertTrue(expectedKeys.contains(material));
-		}
-	}
-
-	@Test
-	void testSetCanDestroy_NullThrows()
-	{
-		assertThrows(IllegalArgumentException.class, () -> meta.setCanDestroy(null));
-	}
-
-	@Test
-	void testSetCanDestroy_LegacyKey_Throws()
-	{
-		Set<Material> input = Set.of(
-				Material.LEGACY_AIR
-		);
-
-		assertThrows(IllegalArgumentException.class, () -> meta.setCanDestroy(input));
-	}
-
-	@Test
-	void testGetCanDestroy_NonBukkitKey_Skipped()
-	{
-		meta.setDestroyableKeys(List.of(
-				Material.ACACIA_PRESSURE_PLATE.getKey(),
-				Material.BLACK_WOOL.getKey(),
-				Material.CRIMSON_NYLIUM.getKey(),
-				Material.ACACIA_BOAT.getKey(),
-				new Namespaced()
-				{
-					@Override
-					public @NotNull String getNamespace()
-					{
-						return "minecraft";
-					}
-
-					@Override
-					public @NotNull String getKey()
-					{
-						return "test";
-					}
-				}
-		));
-
-		Set<Material> expectedKeys = Set.of(
-				Material.ACACIA_PRESSURE_PLATE,
-				Material.BLACK_WOOL,
-				Material.CRIMSON_NYLIUM,
-				Material.ACACIA_BOAT
-		);
-		for (Material material : meta.getCanDestroy())
-		{
-			assertTrue(expectedKeys.contains(material));
-		}
-
-		assertEquals(4, meta.getCanDestroy().size());
 	}
 
 	@Test
@@ -834,17 +595,6 @@ class ItemMetaMockTest
 		meta.setDamage(5);
 		meta.setRepairCost(3);
 
-		Set<Namespaced> expectedPlaceableKeys = Set.of(
-				Material.STONE.getKey(),
-				Material.ACACIA_BOAT.getKey()
-		);
-		meta.setPlaceableKeys(expectedPlaceableKeys);
-
-		Set<Namespaced> expectedDestroyableKeys = Set.of(
-				Material.BEEHIVE.getKey()
-		);
-		meta.setDestroyableKeys(expectedDestroyableKeys);
-
 		Map<String, Object> actual = meta.serialize();
 
 		// Perform tests
@@ -853,8 +603,6 @@ class ItemMetaMockTest
 		assertEquals(true, actual.get("Unbreakable"));
 		assertEquals(5, actual.get("Damage"));
 		assertEquals(3, actual.get("repair-cost"));
-		assertEquals(expectedPlaceableKeys, actual.get("placeable-keys"));
-		assertEquals(expectedDestroyableKeys, actual.get("destroyable-keys"));
 	}
 
 	@Test
@@ -1103,6 +851,59 @@ class ItemMetaMockTest
 		ItemMetaMock meta = new ItemMetaMock();
 
 		assertThrowsExactly(NullPointerException.class, () -> meta.removeAttributeModifier(Attribute.GENERIC_ARMOR, null));
+	}
+
+	@Test
+	void testHasMaxDamageDefault()
+	{
+		assertFalse(meta.hasMaxDamage());
+	}
+
+	@Test
+	void testGetMaxDamageDefault()
+	{
+		assertThrows(IllegalStateException.class, () -> meta.getMaxDamage());
+	}
+
+	@Test
+	void testSetMaxDamage()
+	{
+		meta.setMaxDamage(Integer.valueOf(1));
+		assertEquals(1, meta.getMaxDamage());
+	}
+
+	@Test
+	void testSetMaxDamage_Null()
+	{
+		assertDoesNotThrow(() -> meta.setMaxDamage(null));
+		assertFalse(meta.hasMaxDamage());
+		assertThrows(IllegalStateException.class, () -> meta.getMaxDamage());
+	}
+
+	@Test
+	void testIsHideToolTipDefault()
+	{
+		assertFalse(meta.isHideTooltip());
+	}
+
+	@Test
+	void testSetHideToolTip()
+	{
+		meta.setHideTooltip(true);
+		assertTrue(meta.isHideTooltip());
+	}
+
+	@Test
+	void testIsFireResistantDefault()
+	{
+		assertFalse(meta.isFireResistant());
+	}
+
+	@Test
+	void testSetFireResistant()
+	{
+		meta.setFireResistant(true);
+		assertTrue(meta.isFireResistant());
 	}
 
 }

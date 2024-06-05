@@ -91,7 +91,7 @@ public class BlockDataMock implements BlockData
 	/**
 	 * Ensures the provided material/state combination is valid for minecraft.
 	 *
-	 * @param property    The state to test.
+	 * @param property The state to test.
 	 */
 	protected void checkProperty(String property)
 	{

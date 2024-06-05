@@ -1,5 +1,6 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
@@ -45,6 +46,13 @@ public class LeatherArmorMetaMock extends ItemMetaMock implements LeatherArmorMe
 		LeatherArmorMetaMock mock = (LeatherArmorMetaMock) super.clone();
 		mock.setColor(color);
 		return mock;
+	}
+
+	@Override
+	public boolean isDyed()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override

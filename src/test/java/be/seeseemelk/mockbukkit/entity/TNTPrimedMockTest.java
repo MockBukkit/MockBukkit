@@ -35,7 +35,7 @@ class TNTPrimedMockTest
 	@Test
 	void testGetType()
 	{
-		assertEquals(EntityType.PRIMED_TNT, tntPrimed.getType());
+		assertEquals(EntityType.TNT, tntPrimed.getType());
 	}
 
 	@Test

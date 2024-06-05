@@ -26,6 +26,7 @@ import java.util.List;
  */
 public class SignMock extends TileStateMock implements Sign
 {
+
 	private final SignSideMock front;
 	private final SignSideMock back;
 
@@ -168,7 +169,7 @@ public class SignMock extends TileStateMock implements Sign
 		{
 			case FRONT -> front;
 			case BACK -> back;
-        };
+		};
 	}
 
 	@Override
@@ -198,18 +199,21 @@ public class SignMock extends TileStateMock implements Sign
 		return new SignMock(this);
 	}
 
-	private static class SignSideMock implements SignSide {
+	private static class SignSideMock implements SignSide
+	{
 
 		private final Component[] lines;
 		private boolean glowing = false;
 		private DyeColor color = DyeColor.BLACK;
 
-		private SignSideMock() {
+		private SignSideMock()
+		{
 			this.lines = new Component[4];
 			Arrays.fill(lines, Component.empty());
 		}
 
-		private SignSideMock(SignSide signSide) {
+		private SignSideMock(SignSide signSide)
+		{
 			this.lines = signSide.lines().toArray(new Component[0]);
 			this.glowing = signSide.isGlowingText();
 			this.color = signSide.getColor();
@@ -261,9 +265,12 @@ public class SignMock extends TileStateMock implements Sign
 		{
 			if (index < 0 || index >= lines.length)
 				throw new IndexOutOfBoundsException("Index out of bounds: " + index);
-			if (line == null) {
+			if (line == null)
+			{
 				lines[index] = Component.empty();
-			} else {
+			}
+			else
+			{
 				lines[index] = LegacyComponentSerializer.legacySection().deserialize(line);
 			}
 		}
@@ -292,5 +299,7 @@ public class SignMock extends TileStateMock implements Sign
 			Preconditions.checkNotNull(color, "Color cannot be null!");
 			this.color = color;
 		}
+
 	}
+
 }

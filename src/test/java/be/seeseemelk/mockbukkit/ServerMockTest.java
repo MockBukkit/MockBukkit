@@ -636,17 +636,6 @@ class ServerMockTest
 	}
 
 	@Test
-	void testDefaultPotionEffects()
-	{
-		assertEquals(33, PotionEffectType.values().length);
-
-		for (PotionEffectType type : PotionEffectType.values())
-		{
-			assertNotNull(type);
-		}
-	}
-
-	@Test
 	void testSetSpawnRadius()
 	{
 		server.setSpawnRadius(51);

@@ -14,7 +14,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public class BukkitObjectInputStreamMock extends ObjectInputStream {
+public class BukkitObjectInputStreamMock extends ObjectInputStream
+{
 
 	public BukkitObjectInputStreamMock(InputStream in) throws IOException
 	{
@@ -57,10 +58,13 @@ public class BukkitObjectInputStreamMock extends ObjectInputStream {
 					serializedMeta.put(entry.getKey(), resolveObject(entry.getValue()));
 				ItemMeta meta = (ItemMeta) method.invoke(null, serializedMeta);
 				itemStack.setItemMeta(meta);
-			} catch (ReflectiveOperationException e) {
+			}
+			catch (ReflectiveOperationException e)
+			{
 				Logger.getLogger("BukkitObjectInputStreamMock").log(Level.WARNING, "Failed to deserialize ItemMeta for " + aClass.getName(), e);
 			}
 		}
 		return itemStack;
 	}
+
 }

@@ -1,10 +1,8 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
-import org.bukkit.DyeColor;
 import org.bukkit.block.banner.Pattern;
 import org.bukkit.inventory.meta.BannerMeta;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +16,6 @@ import java.util.Map;
 public class BannerMetaMock extends ItemMetaMock implements BannerMeta
 {
 
-	private @Nullable DyeColor baseColor;
 	private List<Pattern> patterns;
 
 	/**
@@ -40,20 +37,7 @@ public class BannerMetaMock extends ItemMetaMock implements BannerMeta
 	{
 		super(meta);
 
-		this.baseColor = meta.getBaseColor();
 		this.patterns = new ArrayList<>(meta.getPatterns());
-	}
-
-	@Override
-	public @Nullable DyeColor getBaseColor()
-	{
-		return this.baseColor;
-	}
-
-	@Override
-	public void setBaseColor(@Nullable DyeColor color)
-	{
-		this.baseColor = color;
 	}
 
 	@Override
@@ -103,7 +87,6 @@ public class BannerMetaMock extends ItemMetaMock implements BannerMeta
 	{
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((baseColor == null) ? 0 : baseColor.hashCode());
 		result = prime * result + (this.patterns.hashCode());
 		return result;
 	}
@@ -115,7 +98,7 @@ public class BannerMetaMock extends ItemMetaMock implements BannerMeta
 		{
 			return false;
 		}
-		return super.equals(obj) && this.baseColor == meta.getBaseColor() && this.patterns.equals(meta.getPatterns());
+		return super.equals(obj) && this.patterns.equals(meta.getPatterns());
 	}
 
 	@Override
@@ -123,7 +106,6 @@ public class BannerMetaMock extends ItemMetaMock implements BannerMeta
 	{
 		BannerMetaMock clone = (BannerMetaMock) super.clone();
 
-		clone.baseColor = this.baseColor;
 		clone.patterns = new ArrayList<>(this.patterns);
 
 		return clone;
@@ -140,7 +122,6 @@ public class BannerMetaMock extends ItemMetaMock implements BannerMeta
 	{
 		BannerMetaMock serialMock = new BannerMetaMock();
 		serialMock.deserializeInternal(args);
-		serialMock.setBaseColor((DyeColor) args.get("base-color"));
 		serialMock.setPatterns(((List<Map<String, Object>>) args.get("patterns")).stream().map(Pattern::new).toList());
 		return serialMock;
 	}
@@ -155,7 +136,6 @@ public class BannerMetaMock extends ItemMetaMock implements BannerMeta
 	public @NotNull Map<String, Object> serialize()
 	{
 		final Map<String, Object> serialized = super.serialize();
-		serialized.put("base-color", this.baseColor);
 		serialized.put("patterns", this.patterns.stream().map(Pattern::serialize).toList());
 		return serialized;
 	}

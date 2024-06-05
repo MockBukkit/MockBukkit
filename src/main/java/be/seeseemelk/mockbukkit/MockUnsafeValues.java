@@ -8,7 +8,6 @@ import be.seeseemelk.mockbukkit.util.io.BukkitObjectOutputStreamMock;
 import com.destroystokyo.paper.util.VersionFetcher;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Multimap;
-import io.papermc.paper.inventory.ItemRarity;
 import io.papermc.paper.inventory.tooltip.TooltipContext;
 import io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager;
 import net.kyori.adventure.key.Keyed;
@@ -24,6 +23,7 @@ import org.bukkit.FeatureFlag;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.RegionAccessor;
+import org.bukkit.Registry;
 import org.bukkit.Statistic;
 import org.bukkit.Tag;
 import org.bukkit.UnsafeValues;
@@ -49,6 +49,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionType;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -473,6 +474,20 @@ public class MockUnsafeValues implements UnsafeValues
 	}
 
 	@Override
+	@ApiStatus.Internal
+	public String get(Class<?> aClass, String s)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public <B extends org.bukkit.Keyed> B get(Registry<B> registry, NamespacedKey namespacedKey)
+	{
+		return registry.get(namespacedKey);
+	}
+
+	@Override
 	public int nextEntityId()
 	{
 		// TODO Auto-generated method stub
@@ -486,28 +501,7 @@ public class MockUnsafeValues implements UnsafeValues
 	}
 
 	@Override
-	public ItemRarity getItemRarity(Material material)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public ItemRarity getItemStackRarity(ItemStack itemStack)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public boolean isValidRepairItemStack(@NotNull ItemStack itemToBeRepaired, @NotNull ItemStack repairMaterial)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull Multimap<Attribute, AttributeModifier> getItemAttributes(@NotNull Material material, @NotNull EquipmentSlot equipmentSlot)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
@@ -529,13 +523,6 @@ public class MockUnsafeValues implements UnsafeValues
 
 	@Override
 	public @NotNull Attributable getDefaultEntityAttributes(@NotNull NamespacedKey entityKey)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean isCollidable(@NotNull Material material)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

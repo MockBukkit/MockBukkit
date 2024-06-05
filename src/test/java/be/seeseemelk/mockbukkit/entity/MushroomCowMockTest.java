@@ -75,7 +75,7 @@ class MushroomCowMockTest
 	@Test
 	void testGetType()
 	{
-		assertEquals(EntityType.MUSHROOM_COW, mushroom.getType());
+		assertEquals(EntityType.MOOSHROOM, mushroom.getType());
 	}
 
 	@Test

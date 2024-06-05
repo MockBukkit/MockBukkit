@@ -1,16 +1,16 @@
 {
     "replace": false,
     "values": [
-        "minecraft:birch_trapdoor",
-        "minecraft:spruce_trapdoor",
-        "minecraft:bamboo_trapdoor",
-        "minecraft:oak_trapdoor",
-        "minecraft:jungle_trapdoor",
         "minecraft:mangrove_trapdoor",
-        "minecraft:dark_oak_trapdoor",
         "minecraft:cherry_trapdoor",
-        "minecraft:warped_trapdoor",
         "minecraft:acacia_trapdoor",
+        "minecraft:oak_trapdoor",
+        "minecraft:bamboo_trapdoor",
+        "minecraft:warped_trapdoor",
+        "minecraft:dark_oak_trapdoor",
+        "minecraft:spruce_trapdoor",
+        "minecraft:birch_trapdoor",
+        "minecraft:jungle_trapdoor",
         "minecraft:crimson_trapdoor"
     ]
 }

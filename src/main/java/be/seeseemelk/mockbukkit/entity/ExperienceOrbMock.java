@@ -63,6 +63,18 @@ public class ExperienceOrbMock extends EntityMock implements ExperienceOrb
 	}
 
 	@Override
+	public int getCount()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setCount(int i)
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @Nullable UUID getTriggerEntityId()
 	{
 		// TODO Auto-generated method stub

@@ -43,7 +43,7 @@ public class ItemEntityMock extends EntityMock implements Item
 	@Override
 	public @NotNull EntityType getType()
 	{
-		return EntityType.DROPPED_ITEM;
+		return EntityType.ITEM;
 	}
 
 	@Override

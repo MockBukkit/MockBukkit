@@ -1,0 +1,199 @@
+{
+  "values": [
+    {
+      "key": "minecraft:ocean"
+    },
+    {
+      "key": "minecraft:plains"
+    },
+    {
+      "key": "minecraft:desert"
+    },
+    {
+      "key": "minecraft:windswept_hills"
+    },
+    {
+      "key": "minecraft:forest"
+    },
+    {
+      "key": "minecraft:taiga"
+    },
+    {
+      "key": "minecraft:swamp"
+    },
+    {
+      "key": "minecraft:mangrove_swamp"
+    },
+    {
+      "key": "minecraft:river"
+    },
+    {
+      "key": "minecraft:nether_wastes"
+    },
+    {
+      "key": "minecraft:the_end"
+    },
+    {
+      "key": "minecraft:frozen_ocean"
+    },
+    {
+      "key": "minecraft:frozen_river"
+    },
+    {
+      "key": "minecraft:snowy_plains"
+    },
+    {
+      "key": "minecraft:mushroom_fields"
+    },
+    {
+      "key": "minecraft:beach"
+    },
+    {
+      "key": "minecraft:jungle"
+    },
+    {
+      "key": "minecraft:sparse_jungle"
+    },
+    {
+      "key": "minecraft:deep_ocean"
+    },
+    {
+      "key": "minecraft:stony_shore"
+    },
+    {
+      "key": "minecraft:snowy_beach"
+    },
+    {
+      "key": "minecraft:birch_forest"
+    },
+    {
+      "key": "minecraft:dark_forest"
+    },
+    {
+      "key": "minecraft:snowy_taiga"
+    },
+    {
+      "key": "minecraft:old_growth_pine_taiga"
+    },
+    {
+      "key": "minecraft:windswept_forest"
+    },
+    {
+      "key": "minecraft:savanna"
+    },
+    {
+      "key": "minecraft:savanna_plateau"
+    },
+    {
+      "key": "minecraft:badlands"
+    },
+    {
+      "key": "minecraft:wooded_badlands"
+    },
+    {
+      "key": "minecraft:small_end_islands"
+    },
+    {
+      "key": "minecraft:end_midlands"
+    },
+    {
+      "key": "minecraft:end_highlands"
+    },
+    {
+      "key": "minecraft:end_barrens"
+    },
+    {
+      "key": "minecraft:warm_ocean"
+    },
+    {
+      "key": "minecraft:lukewarm_ocean"
+    },
+    {
+      "key": "minecraft:cold_ocean"
+    },
+    {
+      "key": "minecraft:deep_lukewarm_ocean"
+    },
+    {
+      "key": "minecraft:deep_cold_ocean"
+    },
+    {
+      "key": "minecraft:deep_frozen_ocean"
+    },
+    {
+      "key": "minecraft:the_void"
+    },
+    {
+      "key": "minecraft:sunflower_plains"
+    },
+    {
+      "key": "minecraft:windswept_gravelly_hills"
+    },
+    {
+      "key": "minecraft:flower_forest"
+    },
+    {
+      "key": "minecraft:ice_spikes"
+    },
+    {
+      "key": "minecraft:old_growth_birch_forest"
+    },
+    {
+      "key": "minecraft:old_growth_spruce_taiga"
+    },
+    {
+      "key": "minecraft:windswept_savanna"
+    },
+    {
+      "key": "minecraft:eroded_badlands"
+    },
+    {
+      "key": "minecraft:bamboo_jungle"
+    },
+    {
+      "key": "minecraft:soul_sand_valley"
+    },
+    {
+      "key": "minecraft:crimson_forest"
+    },
+    {
+      "key": "minecraft:warped_forest"
+    },
+    {
+      "key": "minecraft:basalt_deltas"
+    },
+    {
+      "key": "minecraft:dripstone_caves"
+    },
+    {
+      "key": "minecraft:lush_caves"
+    },
+    {
+      "key": "minecraft:deep_dark"
+    },
+    {
+      "key": "minecraft:meadow"
+    },
+    {
+      "key": "minecraft:grove"
+    },
+    {
+      "key": "minecraft:snowy_slopes"
+    },
+    {
+      "key": "minecraft:frozen_peaks"
+    },
+    {
+      "key": "minecraft:jagged_peaks"
+    },
+    {
+      "key": "minecraft:stony_peaks"
+    },
+    {
+      "key": "minecraft:cherry_grove"
+    },
+    {
+      "key": "minecraft:custom"
+    }
+  ]
+}

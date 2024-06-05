@@ -3,7 +3,6 @@ package be.seeseemelk.mockbukkit.inventory.meta;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import org.bukkit.Color;
 import org.bukkit.inventory.meta.PotionMeta;
-import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
@@ -142,18 +141,6 @@ class PotionMetaMockTest
 		meta.setColor(null);
 		assertFalse(meta.hasColor());
 		assertNull(meta.getColor());
-	}
-
-	@Test
-	void testPotionData()
-	{
-		PotionMeta meta = new PotionMetaMock();
-		assertNotNull(meta.getBasePotionData());
-		assertEquals(PotionType.UNCRAFTABLE, meta.getBasePotionData().getType());
-
-		PotionData data = new PotionData(PotionType.INSTANT_HEAL, false, true);
-		meta.setBasePotionData(data);
-		assertEquals(data, meta.getBasePotionData());
 	}
 
 	@Test

@@ -7,7 +7,9 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.minecart.StorageMinecart;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.loot.LootTable;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
@@ -49,11 +51,18 @@ public class StorageMinecartMock extends LootableMinecart implements StorageMine
 	@Override
 	public @NotNull EntityType getType()
 	{
-		return EntityType.MINECART_CHEST;
+		return EntityType.CHEST_MINECART;
 	}
 
 	@Override
 	public boolean canPlayerLoot(@NotNull UUID player)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setLootTable(@Nullable LootTable lootTable, long l)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

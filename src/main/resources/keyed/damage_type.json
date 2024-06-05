@@ -218,6 +218,13 @@
       "exhaustion": 0.1
     },
     {
+      "key": "minecraft:spit",
+      "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
+      "sound": "minecraft:entity.player.hurt",
+      "deathMessageType": "DEFAULT",
+      "exhaustion": 0.1
+    },
+    {
       "key": "minecraft:fireworks",
       "damageScaling": "WHEN_CAUSED_BY_LIVING_NON_PLAYER",
       "sound": "minecraft:entity.player.hurt",

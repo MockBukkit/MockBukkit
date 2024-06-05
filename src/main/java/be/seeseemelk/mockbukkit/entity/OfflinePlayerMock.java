@@ -37,7 +37,7 @@ public class OfflinePlayerMock implements OfflinePlayer
 
 	private final @NotNull UUID uuid;
 	private final @Nullable String name;
-	private @Nullable Location respawnLocation = null;
+	private final @Nullable Location respawnLocation = null;
 
 	/**
 	 * Constructs a new {@link OfflinePlayerMock} on the provided {@link ServerMock} with a specified {@link UUID} and name.

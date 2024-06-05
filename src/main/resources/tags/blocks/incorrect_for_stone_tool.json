@@ -1,0 +1,22 @@
+{
+    "replace": false,
+    "values": [
+        "minecraft:deepslate_redstone_ore",
+        "minecraft:netherite_block",
+        "minecraft:emerald_ore",
+        "minecraft:raw_gold_block",
+        "minecraft:emerald_block",
+        "minecraft:crying_obsidian",
+        "minecraft:deepslate_emerald_ore",
+        "minecraft:ancient_debris",
+        "minecraft:obsidian",
+        "minecraft:gold_ore",
+        "minecraft:gold_block",
+        "minecraft:redstone_ore",
+        "minecraft:respawn_anchor",
+        "minecraft:diamond_ore",
+        "minecraft:diamond_block",
+        "minecraft:deepslate_gold_ore",
+        "minecraft:deepslate_diamond_ore"
+    ]
+}

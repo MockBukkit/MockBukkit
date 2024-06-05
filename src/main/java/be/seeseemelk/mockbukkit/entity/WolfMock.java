@@ -1,6 +1,7 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
+import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import org.bukkit.DyeColor;
 import org.bukkit.entity.EntityType;
@@ -90,6 +91,21 @@ public class WolfMock extends TameableAnimalMock implements Wolf
 	public void setInterested(boolean interested)
 	{
 		this.interested = interested;
+	}
+
+	@NotNull
+	@Override
+	public Variant getVariant()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setVariant(@NotNull Wolf.Variant variant)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
