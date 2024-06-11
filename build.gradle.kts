@@ -1,5 +1,7 @@
 plugins {
 	id("java")
+	id("io.papermc.paperweight.userdev") version "1.7.1"
+	id("xyz.jpenilla.run-paper") version "2.3.0"
 }
 
 group = "org.mockbukkit"
@@ -11,6 +13,7 @@ repositories {
 }
 
 dependencies {
+	paperweight.paperDevBundle("1.20.6-R0.1-SNAPSHOT")
 	implementation("io.papermc.paper:paper-api:1.20.6-R0.1-SNAPSHOT")
 }
 

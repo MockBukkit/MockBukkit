@@ -21,3 +21,6 @@ metaminer.iml
 # Gradle
 .gradle
 build
+
+# Paper server
+run

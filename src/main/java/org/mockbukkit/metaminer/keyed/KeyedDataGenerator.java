@@ -1,29 +1,30 @@
-package org.mockbukkit.metaminer;
+package org.mockbukkit.metaminer.keyed;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+import io.papermc.paper.registry.RegistryKey;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
-import org.bukkit.GameEvent;
 import org.bukkit.Keyed;
-import org.bukkit.MusicInstrument;
+import org.bukkit.block.BlockType;
 import org.bukkit.damage.DamageType;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.generator.structure.Structure;
-import org.bukkit.generator.structure.StructureType;
+import org.bukkit.inventory.ItemType;
 import org.bukkit.inventory.meta.trim.TrimMaterial;
 import org.bukkit.inventory.meta.trim.TrimPattern;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
+import org.mockbukkit.metaminer.DataGenerator;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.lang.reflect.Field;
-import java.util.List;
+import java.util.Map;
 
 public class KeyedDataGenerator implements DataGenerator
 {
@@ -43,13 +44,13 @@ public class KeyedDataGenerator implements DataGenerator
 			throw new IOException("Could not make directory: " + this.dataFolder);
 		}
 
-		List<Class<? extends Keyed>> keyedClasses = List.of(Structure.class,
-				StructureType.class, TrimMaterial.class, TrimPattern.class,
-				MusicInstrument.class, GameEvent.class, Enchantment.class,
-				PotionEffectType.class, DamageType.class);
-		for (Class<? extends Keyed> tClass : keyedClasses)
+		for (Map.Entry<RegistryKey<?>, Class<?>> entry : KeyedClassTracker.CLASS_REGISTRY_KEY_RELATION.entrySet())
 		{
+
 			JsonArray array = new JsonArray();
+			Class<?> tClass = entry.getValue();
+			RegistryKey<?> key = entry.getKey();
+
 			for (Field field : tClass.getDeclaredFields())
 			{
 				JsonObject jsonObject = new JsonObject();
@@ -84,14 +85,27 @@ public class KeyedDataGenerator implements DataGenerator
 						{
 							addTrimMaterialProperties(jsonObject, trimMaterial);
 						}
+						if (keyedObject instanceof ItemType itemType)
+						{
+							addItemTypeProperties(jsonObject, itemType);
+						}
+						if (keyedObject instanceof BlockType blockType)
+						{
+							addBlockTypeProperties(jsonObject, blockType);
+						}
 						array.add(jsonObject);
 					}
 				}
-				catch (NullPointerException | IllegalAccessException ignored)
+				catch (NullPointerException | IllegalAccessException | IllegalArgumentException ignored)
 				{
 				}
 			}
-			File destinationFile = new File(dataFolder, tClass.getSimpleName().toLowerCase() + ".json");
+			File destinationFile = new File(dataFolder, key.key().value() + ".json");
+			File destinationFolder = destinationFile.getParentFile();
+			if (!destinationFolder.exists() && !destinationFolder.mkdirs())
+			{
+				throw new IOException("Could not create directories: " + destinationFolder);
+			}
 			JsonObject rootObject = new JsonObject();
 			rootObject.add("values", array);
 			if (!destinationFile.exists() && !destinationFile.createNewFile())
@@ -104,6 +118,33 @@ public class KeyedDataGenerator implements DataGenerator
 				gson.toJson(rootObject, writer);
 			}
 		}
+	}
+
+	private void addBlockTypeProperties(JsonObject jsonObject, BlockType blockType)
+	{
+		jsonObject.add("itemType", new JsonPrimitive(blockType.hasItemType()));
+		jsonObject.add("solid", new JsonPrimitive(blockType.isSolid()));
+		jsonObject.add("flammable", new JsonPrimitive(blockType.isFlammable()));
+		jsonObject.add("burnable", new JsonPrimitive(blockType.isBurnable()));
+		jsonObject.add("occluding", new JsonPrimitive(blockType.isOccluding()));
+		jsonObject.add("gravity", new JsonPrimitive(blockType.hasGravity()));
+		jsonObject.add("interactable", new JsonPrimitive(blockType.isInteractable()));
+		jsonObject.add("hardness", new JsonPrimitive(blockType.getHardness()));
+		jsonObject.add("slipperiness", new JsonPrimitive(blockType.getSlipperiness()));
+		jsonObject.add("blastResistance", new JsonPrimitive(blockType.getBlastResistance()));
+		jsonObject.add("air", new JsonPrimitive(blockType.isAir()));
+		jsonObject.add("translationKey", new JsonPrimitive(blockType.getTranslationKey()));
+	}
+
+	private void addItemTypeProperties(JsonObject jsonObject, ItemType itemType)
+	{
+		jsonObject.add("maxStackSize", new JsonPrimitive(itemType.getMaxStackSize()));
+		jsonObject.add("maxDurability", new JsonPrimitive(itemType.getMaxDurability()));
+		jsonObject.add("edible", new JsonPrimitive(itemType.isEdible()));
+		jsonObject.add("record", new JsonPrimitive(itemType.isRecord()));
+		jsonObject.add("fuel", new JsonPrimitive(itemType.isFuel()));
+		jsonObject.add("blockType", new JsonPrimitive(itemType.hasBlockType()));
+		jsonObject.add("translationKey", new JsonPrimitive(itemType.getTranslationKey()));
 	}
 
 	private void addTrimMaterialProperties(JsonObject jsonObject, TrimMaterial trimMaterial)
