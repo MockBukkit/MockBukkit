@@ -18,6 +18,8 @@ import java.util.UUID;
 public class ArrowMock extends AbstractArrowMock implements Arrow
 {
 
+	private PotionType potionType;
+
 	/**
 	 * Constructs a new {@link ArrowMock} on the provided {@link ServerMock} with a specified {@link UUID}.
 	 *
@@ -32,27 +34,25 @@ public class ArrowMock extends AbstractArrowMock implements Arrow
 	@Override
 	public void setBasePotionData(@Nullable PotionData data)
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.potionType = data == null ? null : data.getType();
 	}
 
 	@Override
 	public @Nullable PotionData getBasePotionData()
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.potionType == null ? null : new PotionData(this.potionType);
 	}
 
 	@Override
-	public void setBasePotionType(@NotNull PotionType type)
+	public void setBasePotionType(@Nullable PotionType type)
 	{
-		throw new UnimplementedOperationException();
+		this.potionType = type;
 	}
 
 	@Override
-	public @NotNull PotionType getBasePotionType()
+	public @Nullable PotionType getBasePotionType()
 	{
-		throw new UnimplementedOperationException();
+		return this.potionType;
 	}
 
 	@Override

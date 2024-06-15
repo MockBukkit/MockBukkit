@@ -1,7 +1,6 @@
 package be.seeseemelk.mockbukkit.entity;
 
 import be.seeseemelk.mockbukkit.ServerMock;
-import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.google.common.base.Preconditions;
 import org.bukkit.Color;
 import org.bukkit.Particle;
@@ -29,7 +28,7 @@ public class AreaEffectCloudMock extends EntityMock implements AreaEffectCloud
 	private float radius = 3.0f;
 	private float radiusOnUse = 0.0f;
 	private float radiusPerTick = 0.0f;
-	private PotionData basePotionData = new PotionData(PotionType.AWKWARD);
+	private PotionType potionType;
 	private Particle particle = Particle.ENTITY_EFFECT;
 	private final List<PotionEffect> customEffects = new ArrayList<>();
 	private int color = 0;
@@ -154,41 +153,31 @@ public class AreaEffectCloudMock extends EntityMock implements AreaEffectCloud
 	@Override
 	public void setBasePotionData(@Nullable PotionData data)
 	{
-		this.basePotionData = data;
+		this.potionType = data == null ? null : data.getType();
 	}
 
 	@Override
 	public @Nullable PotionData getBasePotionData()
 	{
-		return this.basePotionData;
+		return this.potionType == null ? null : new PotionData(this.potionType);
 	}
 
 	@Override
 	public void setBasePotionType(@Nullable PotionType type)
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.potionType = type;
 	}
 
 	@Override
 	public @Nullable PotionType getBasePotionType()
 	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return potionType;
 	}
 
 	@Override
 	public boolean hasCustomEffects()
 	{
-		PotionEffectType effectType = this.basePotionData.getType().getEffectType();
-		if (effectType != null)
-		{
-			return customEffects.stream().anyMatch(effect -> !effect.getType().equals(effectType));
-		}
-		else
-		{
-			return !this.customEffects.isEmpty();
-		}
+		return !this.customEffects.isEmpty();
 	}
 
 	@Override

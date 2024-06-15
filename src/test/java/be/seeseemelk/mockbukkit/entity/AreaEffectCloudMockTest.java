@@ -3,6 +3,7 @@ package be.seeseemelk.mockbukkit.entity;
 import be.seeseemelk.mockbukkit.MockBukkitExtension;
 import be.seeseemelk.mockbukkit.MockBukkitInject;
 import be.seeseemelk.mockbukkit.ServerMock;
+
 import org.bukkit.Color;
 import org.bukkit.Particle;
 import org.bukkit.entity.AreaEffectCloud;
@@ -334,4 +335,15 @@ class AreaEffectCloudMockTest
 		assertEquals(uuid, areaEffectCloud.getOwnerUniqueId());
 	}
 
+	@Test
+	void testBasePotionType()
+	{
+		assertNull(areaEffectCloud.getBasePotionType());
+
+		areaEffectCloud.setBasePotionType(PotionType.HEALING);
+		assertEquals(PotionType.HEALING, areaEffectCloud.getBasePotionType());
+
+		areaEffectCloud.setBasePotionType(null);
+		assertNull(areaEffectCloud.getBasePotionType());
+	}
 }
