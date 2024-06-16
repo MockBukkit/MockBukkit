@@ -16,6 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.exception.PluginLoadException;
+import org.mockbukkit.mockbukkit.exception.UnmockException;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -54,7 +55,7 @@ public class MockBukkit
 		}
 		catch (NoSuchFieldException | IllegalArgumentException | IllegalAccessException e)
 		{
-			throw new RuntimeException(e);
+			throw new UnmockException(e);
 		}
 	}
 
