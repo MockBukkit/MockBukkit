@@ -906,6 +906,21 @@ public class WorldMock implements World
 	}
 
 	@Override
+	public @NotNull Collection<Player> getPlayersSeeingChunk(@NotNull Chunk chunk)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+
+	}
+
+	@Override
+	public @NotNull Collection<Player> getPlayersSeeingChunk(int i, int i1)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull Item dropItem(@NotNull Location loc, @NotNull ItemStack item)
 	{
 		return dropItem(loc, item, null);

@@ -149,6 +149,13 @@ public class AbstractArrowMock extends AbstractProjectileMock implements Abstrac
 	}
 
 	@Override
+	public void setItemStack(@NotNull ItemStack itemStack)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public void setLifetimeTicks(int ticks)
 	{
 		this.lifetime = ticks;
