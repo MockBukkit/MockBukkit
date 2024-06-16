@@ -147,7 +147,7 @@ public class MushroomCowMock extends CowMock implements MushroomCow
 	@Override
 	public @NotNull EntityType getType()
 	{
-		return EntityType.MUSHROOM_COW;
+		return EntityType.MOOSHROOM;
 	}
 
 	@Override

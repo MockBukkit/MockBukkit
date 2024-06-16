@@ -1,0 +1,19 @@
+{
+  "values": [
+    {
+      "key": "minecraft:empty"
+    },
+    {
+      "key": "minecraft:water"
+    },
+    {
+      "key": "minecraft:flowing_water"
+    },
+    {
+      "key": "minecraft:lava"
+    },
+    {
+      "key": "minecraft:flowing_lava"
+    }
+  ]
+}

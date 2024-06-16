@@ -136,7 +136,7 @@ class LivingEntityMockTest
 	@Test
 	void testPotionEffects()
 	{
-		PotionEffect effect = new PotionEffect(PotionEffectType.CONFUSION, 3, 1);
+		PotionEffect effect = new PotionEffect(PotionEffectType.NAUSEA, 3, 1);
 		assertTrue(livingEntity.addPotionEffect(effect));
 
 		assertTrue(livingEntity.hasPotionEffect(effect.getType()));
@@ -153,7 +153,7 @@ class LivingEntityMockTest
 	@Test
 	void clearPotionEffects()
 	{
-		PotionEffect effect = new PotionEffect(PotionEffectType.CONFUSION, 5, 1);
+		PotionEffect effect = new PotionEffect(PotionEffectType.NAUSEA, 5, 1);
 		livingEntity.addPotionEffect(effect);
 		assertTrue(livingEntity.clearActivePotionEffects());
 	}
@@ -161,7 +161,7 @@ class LivingEntityMockTest
 	@Test
 	void testInstantEffect()
 	{
-		PotionEffect instant = new PotionEffect(PotionEffectType.HEAL, 0, 1);
+		PotionEffect instant = new PotionEffect(PotionEffectType.INSTANT_HEALTH, 0, 1);
 		assertTrue(livingEntity.addPotionEffect(instant));
 		assertFalse(livingEntity.hasPotionEffect(instant.getType()));
 	}

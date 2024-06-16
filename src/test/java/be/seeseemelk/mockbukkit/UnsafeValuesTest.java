@@ -1,9 +1,23 @@
 package be.seeseemelk.mockbukkit;
 
+import org.bukkit.Bukkit;
+import org.bukkit.DyeColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.WorldCreator;
+import org.bukkit.block.banner.PatternType;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.BannerMeta;
+import org.bukkit.inventory.meta.BundleMeta;
+import org.bukkit.inventory.meta.CompassMeta;
+import org.bukkit.inventory.meta.CrossbowMeta;
+import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.material.MaterialData;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.InvalidDescriptionException;
 import org.bukkit.plugin.InvalidPluginException;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -13,8 +27,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
@@ -29,6 +47,7 @@ class UnsafeValuesTest
 {
 
 	private static final String PLUGIN_INFO_FORMAT = "name: VersionTest\nversion: 1.0\nmain: not.exists\napi-version: %s";
+	private static final Logger log = LoggerFactory.getLogger(UnsafeValuesTest.class);
 
 	private ServerMock server;
 	private MockUnsafeValues mockUnsafeValues;
@@ -37,6 +56,7 @@ class UnsafeValuesTest
 	void setUp()
 	{
 		server = MockBukkit.mock();
+		WorldCreator.name("world").createWorld();
 		mockUnsafeValues = server.getUnsafe();
 	}
 
@@ -72,6 +92,70 @@ class UnsafeValuesTest
 		}
 
 		assertTrue(mockUnsafeValues.isSupportedApiVersion(currentVersion));
+	}
+
+	private static ItemStack[] provideTestItems()
+	{
+		List<ItemStack> items = new ArrayList<>();
+		for (Material material : Material.values())
+		{
+			if (material.isLegacy() || material.isAir())
+			{
+				continue;
+			}
+			ItemStack item = new ItemStack(material);
+			items.add(item);
+		}
+		return items.toArray(ItemStack[]::new);
+	}
+
+	@ParameterizedTest
+	@MethodSource("provideTestItems")
+	void serializeItemTest(ItemStack expected)
+	{
+		populateItemMeta(expected);
+		byte[] serialized = mockUnsafeValues.serializeItem(expected);
+		ItemStack actual = mockUnsafeValues.deserializeItem(serialized);
+		assertEquals(expected, actual, "ItemStacks are not equal, metas: \n" + expected.getItemMeta() + "\n" + actual.getItemMeta());
+	}
+
+	private void populateItemMeta(ItemStack item)
+	{
+		item.editMeta(meta ->
+		{
+			meta.setDisplayName("Test");
+			meta.setLore(List.of("Test1", "Test2"));
+			meta.setUnbreakable(true);
+			meta.addEnchant(Enchantment.SHARPNESS, 1, true);
+			final PersistentDataContainer persistentDataContainer = meta.getPersistentDataContainer();
+			persistentDataContainer.set(new NamespacedKey("test", "test"), PersistentDataType.STRING, "test");
+		});
+		item.editMeta(meta ->
+		{
+			if (meta instanceof BundleMeta bundleMeta)
+			{
+				bundleMeta.addItem(item.clone());
+			}
+			if (meta instanceof BannerMeta bannerMeta)
+			{
+				bannerMeta.addPattern(new org.bukkit.block.banner.Pattern(DyeColor.BLACK, PatternType.BASE));
+			}
+			if (meta instanceof CompassMeta compassMeta)
+			{
+				compassMeta.setLodestone(new Location(Bukkit.getWorlds().get(0), 1, 2, 3));
+				compassMeta.setLodestoneTracked(true);
+			}
+			if (meta instanceof CrossbowMeta crossbowMeta)
+			{
+				ItemStack arrow = new ItemStack(Material.ARROW);
+				arrow.editMeta(itemMeta -> {});
+				crossbowMeta.addChargedProjectile(arrow);
+			}
+			if (meta instanceof EnchantmentStorageMeta storageMeta)
+			{
+				storageMeta.addStoredEnchant(Enchantment.SHARPNESS, 1, true);
+			}
+		});
 	}
 
 	@Test

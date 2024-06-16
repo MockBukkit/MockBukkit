@@ -1,12 +1,12 @@
 {
     "replace": false,
     "values": [
-        "minecraft:pufferfish",
+        "minecraft:salmon",
         "minecraft:cod",
-        "minecraft:squid",
+        "minecraft:pufferfish",
         "minecraft:tadpole",
+        "minecraft:squid",
         "minecraft:glow_squid",
-        "minecraft:tropical_fish",
-        "minecraft:salmon"
+        "minecraft:tropical_fish"
     ]
 }

@@ -8,6 +8,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Mock implementation of an {@link FireworkMeta}.
@@ -149,6 +150,43 @@ public class FireworkMetaMock extends ItemMetaMock implements FireworkMeta
 		}
 
 		this.power = power;
+	}
+
+	/**
+	 * Required method for Bukkit deserialization.
+	 *
+	 * @param args A serialized FireworkMetaMock object in a Map&lt;String, Object&gt; format.
+	 * @return A new instance of the FireworkMetaMock class.
+	 */
+	@SuppressWarnings("unchecked")
+	public static @NotNull FireworkMetaMock deserialize(@NotNull Map<String, Object> args)
+	{
+		FireworkMetaMock serialMock = new FireworkMetaMock();
+		serialMock.deserializeInternal(args);
+		serialMock.addEffects(((List<?>) args.get("effects")).stream()
+				.map(e -> (FireworkEffect) FireworkEffect.deserialize((Map<String, Object>) e))
+				.toList());
+		return serialMock;
+	}
+
+	/**
+	 * Serializes the properties of an FireworkMetaMock to a HashMap.
+	 * Unimplemented properties are not present in the map.
+	 *
+	 * @return A HashMap of String, Object pairs representing the FireworkMetaMock.
+	 */
+	@Override
+	public @NotNull Map<String, Object> serialize()
+	{
+		final Map<String, Object> serialized = super.serialize();
+		serialized.put("effects", effects.stream().map(FireworkEffect::serialize).toList());
+		return serialized;
+	}
+
+	@Override
+	protected String getTypeName()
+	{
+		return "FIREWORK";
 	}
 
 }

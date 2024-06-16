@@ -6,9 +6,13 @@ import be.seeseemelk.mockbukkit.WorldMock;
 import org.bukkit.entity.EntityType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
+import java.util.Locale;
+
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class EntityDataRegistryTest
@@ -36,6 +40,16 @@ class EntityDataRegistryTest
 	{
 		EntityData data = EntityDataRegistry.loadEntityData(type);
 		assertNotNull(data);
+	}
+
+	@Test
+	void locale_independent()
+	{
+		Locale previousLocale = Locale.getDefault();
+		Locale.setDefault(Locale.forLanguageTag("tr"));
+		EntityData data = EntityDataRegistry.loadEntityData(EntityType.DOLPHIN);
+		assertDoesNotThrow(() -> data.getHeight(EntitySubType.DEFAULT, EntityState.DEFAULT));
+		Locale.setDefault(previousLocale);
 	}
 
 }

@@ -865,13 +865,13 @@ class PlayerMockTest
 		Location loc = new Location(player.getWorld(), 400, 80, 400);
 		loc.getBlock().setType(Material.LIGHT_BLUE_BED);
 
-		assertNull(player.getBedSpawnLocation());
+		assertNull(player.getRespawnLocation());
 
-		player.setBedSpawnLocation(loc);
-		assertEquals(loc, player.getBedSpawnLocation());
+		player.setRespawnLocation(loc);
+		assertEquals(loc, player.getRespawnLocation());
 
-		player.setBedSpawnLocation(null);
-		assertNull(player.getBedSpawnLocation());
+		player.setRespawnLocation(null);
+		assertNull(player.getRespawnLocation());
 	}
 
 	@Test
@@ -886,6 +886,20 @@ class PlayerMockTest
 		// Force the Bed Spawn Location
 		player.setBedSpawnLocation(loc, true);
 		assertEquals(loc, player.getBedSpawnLocation());
+	}
+
+	@Test
+	void testRespawnLocationForce()
+	{
+		Location loc = new Location(player.getWorld(), 400, 80, 400);
+
+		// Location is not actually a Bed and it should fail
+		player.setRespawnLocation(loc);
+		assertNull(player.getRespawnLocation());
+
+		// Force the Bed Spawn Location
+		player.setRespawnLocation(loc, true);
+		assertEquals(loc, player.getRespawnLocation());
 	}
 
 	@Test
@@ -1583,7 +1597,7 @@ class PlayerMockTest
 	@Test
 	void testPlayerSpawnParticle_Correct_DataType()
 	{
-		player.spawnParticle(Particle.ITEM_CRACK, player.getLocation(), 1, new ItemStack(Material.STONE));
+		player.spawnParticle(Particle.ITEM, player.getLocation(), 1, new ItemStack(Material.STONE));
 	}
 
 	@Test
@@ -1593,7 +1607,7 @@ class PlayerMockTest
 		Object wrongObj = new Object();
 		assertThrows(IllegalArgumentException.class, () ->
 		{
-			player.spawnParticle(Particle.ITEM_CRACK, loc, 1, wrongObj);
+			player.spawnParticle(Particle.ITEM, loc, 1, wrongObj);
 		});
 	}
 

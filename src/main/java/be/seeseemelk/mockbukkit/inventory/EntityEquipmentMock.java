@@ -35,6 +35,7 @@ public class EntityEquipmentMock implements EntityEquipment
 	private @NotNull ItemStack chestPlate = new ItemStack(Material.AIR);
 	private @NotNull ItemStack leggings = new ItemStack(Material.AIR);
 	private @NotNull ItemStack boots = new ItemStack(Material.AIR);
+	private @NotNull ItemStack bodyItem = new ItemStack(Material.AIR);
 
 	/**
 	 * Constructs a new {@link EntityEquipmentMock} for the given holder.
@@ -66,7 +67,14 @@ public class EntityEquipmentMock implements EntityEquipment
 		case FEET -> setBoots(item, silent);
 		case HAND -> setItemInMainHand(item, silent);
 		case OFF_HAND -> setItemInOffHand(item, silent);
+		case BODY -> setItemInBody(item, silent);
 		}
+	}
+
+	private void setItemInBody(ItemStack item, boolean silent)
+	{
+		this.bodyItem = nonNullClone(item);
+		// Sounds are not implemented here
 	}
 
 	@Override
@@ -81,7 +89,13 @@ public class EntityEquipmentMock implements EntityEquipment
 			case HEAD -> getHelmet();
 			case LEGS -> getLeggings();
 			case OFF_HAND -> getItemInOffHand();
+			case BODY -> getItemInBody();
 		};
+	}
+
+	private ItemStack getItemInBody()
+	{
+		return this.bodyItem.clone();
 	}
 
 	@Override

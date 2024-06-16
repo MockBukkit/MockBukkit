@@ -42,14 +42,14 @@ class ItemEntityMockTest
 	{
 		Location location = new Location(world, 300, 100, 300);
 
-		assertThrows(IllegalArgumentException.class, () -> world.spawnEntity(location, EntityType.DROPPED_ITEM));
+		assertThrows(IllegalArgumentException.class, () -> world.spawnEntity(location, EntityType.ITEM));
 	}
 
 	@Test
 	void testEntityType()
 	{
 		Item item = new ItemEntityMock(server, UUID.randomUUID(), new ItemStack(Material.STONE));
-		assertEquals(EntityType.DROPPED_ITEM, item.getType());
+		assertEquals(EntityType.ITEM, item.getType());
 	}
 
 	@Test

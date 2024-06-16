@@ -9,6 +9,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Mock implementation of a {@link BundleMeta}.
@@ -91,7 +92,9 @@ public class BundleMetaMock extends ItemMetaMock implements BundleMeta
 	public boolean equals(Object obj)
 	{
 		if (!(obj instanceof BundleMeta meta))
+		{
 			return false;
+		}
 		return super.equals(obj) && this.getItems().equals(meta.getItems());
 	}
 
@@ -101,6 +104,41 @@ public class BundleMetaMock extends ItemMetaMock implements BundleMeta
 		BundleMetaMock clone = (BundleMetaMock) super.clone();
 		clone.items = new ArrayList<>(this.items);
 		return clone;
+	}
+
+	/**
+	 * Required method for Bukkit deserialization.
+	 *
+	 * @param args A serialized BundleMetaMock object in a Map&lt;String, Object&gt; format.
+	 * @return A new instance of the BundleMetaMock class.
+	 */
+	@SuppressWarnings("unchecked")
+	public static @NotNull BundleMetaMock deserialize(@NotNull Map<String, Object> args)
+	{
+		BundleMetaMock serialMock = new BundleMetaMock();
+		serialMock.deserializeInternal(args);
+		serialMock.items = args.get("items") == null ? new ArrayList<>() : (List<ItemStack>) args.get("items");
+		return serialMock;
+	}
+
+	/**
+	 * Serializes the properties of an BundleMetaMock to a HashMap.
+	 * Unimplemented properties are not present in the map.
+	 *
+	 * @return A HashMap of String, Object pairs representing the BundleMetaMock.
+	 */
+	@Override
+	public @NotNull Map<String, Object> serialize()
+	{
+		final Map<String, Object> serialized = super.serialize();
+		serialized.put("items", this.items);
+		return serialized;
+	}
+
+	@Override
+	protected String getTypeName()
+	{
+		return "BUNDLE";
 	}
 
 }

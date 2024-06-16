@@ -177,7 +177,7 @@ class FishHookMockTest
 	@Test
 	void getType()
 	{
-		assertEquals(EntityType.FISHING_HOOK, hook.getType());
+		assertEquals(EntityType.FISHING_BOBBER, hook.getType());
 	}
 
 	@Test

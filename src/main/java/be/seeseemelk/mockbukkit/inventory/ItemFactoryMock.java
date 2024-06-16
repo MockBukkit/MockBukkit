@@ -208,8 +208,7 @@ public class ItemFactoryMock implements ItemFactory
 	@Override
 	public @NotNull ItemStack ensureServerConversions(@NotNull ItemStack item)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return item;
 	}
 
 	@Override

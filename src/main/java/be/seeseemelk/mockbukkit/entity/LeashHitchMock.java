@@ -26,7 +26,7 @@ public class LeashHitchMock extends HangingMock implements LeashHitch
 	@Override
 	public @NotNull EntityType getType()
 	{
-		return EntityType.LEASH_HITCH;
+		return EntityType.LEASH_KNOT;
 	}
 
 	@Override

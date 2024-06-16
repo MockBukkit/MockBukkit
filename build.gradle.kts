@@ -27,9 +27,9 @@ dependencies {
 	implementation("org.junit.jupiter:junit-jupiter:5.10.2")
 
 	// General utilities for the project
-	implementation("net.kyori:adventure-platform-bungeecord:4.3.2")
+	implementation("net.kyori:adventure-platform-bungeecord:4.3.3")
 	implementation("org.jetbrains:annotations:24.1.0")
-	implementation("net.bytebuddy:byte-buddy:1.14.14")
+	implementation("net.bytebuddy:byte-buddy:1.14.17")
 
 	// LibraryLoader dependencies
 	implementation("org.apache.maven:maven-resolver-provider:3.8.5")
@@ -98,6 +98,15 @@ sourceSets {
 		blossom {
 			javaSources {
 				property("paperApiFullVersion", project.property("paper.api.full-version").toString())
+				property("buildTime", System.currentTimeMillis().toString())
+				property("branch", run("git", "rev-parse", "--abbrev-ref", "HEAD"))
+				property("commit", run("git", "rev-parse", "HEAD"))
+				val buildNumber = System.getenv("GITHUB_RUN_NUMBER")
+				if (buildNumber != null) {
+					property("buildNumber", buildNumber)
+				} else {
+					property("buildNumber", "")
+				}
 			}
 		}
 	}
@@ -172,14 +181,14 @@ fun isFork(): Boolean {
 }
 
 fun isAction(): Boolean {
-	return System.getenv("CI") != null
+	return System.getenv("GITHUB_ACTIONS") == "true" && System.getenv("GITHUB_REPOSITORY") == "MockBukkit/MockBukkit"
 }
 
 fun getFullVersion(): String {
-	return if (!isAction()) {
-		"dev-${run("git", "rev-parse", "--verify", "--short", "HEAD")}"
-	} else {
+	return if (isAction()) {
 		property("mockbukkit.version") as String
+	} else {
+		"dev-${run("git", "rev-parse", "--verify", "--short", "HEAD")}"
 	}
 }
 

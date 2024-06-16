@@ -1,10 +1,10 @@
 {
     "replace": false,
     "values": [
-        "minecraft:pitcher_plant",
-        "minecraft:lilac",
-        "minecraft:sunflower",
         "minecraft:rose_bush",
-        "minecraft:peony"
+        "minecraft:sunflower",
+        "minecraft:lilac",
+        "minecraft:peony",
+        "minecraft:pitcher_plant"
     ]
 }

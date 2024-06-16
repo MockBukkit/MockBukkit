@@ -65,7 +65,7 @@ class HopperMinecartMockTest
 	@Test
 	void testGetEntityType()
 	{
-		assertEquals(EntityType.MINECART_HOPPER, minecart.getType());
+		assertEquals(EntityType.HOPPER_MINECART, minecart.getType());
 	}
 
 	@Test

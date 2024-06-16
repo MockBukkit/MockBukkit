@@ -1,13 +1,12 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
-import org.bukkit.DyeColor;
 import org.bukkit.block.banner.Pattern;
 import org.bukkit.inventory.meta.BannerMeta;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Mock implementation of an {@link BannerMeta}.
@@ -17,7 +16,6 @@ import java.util.List;
 public class BannerMetaMock extends ItemMetaMock implements BannerMeta
 {
 
-	private @Nullable DyeColor baseColor;
 	private List<Pattern> patterns;
 
 	/**
@@ -39,20 +37,7 @@ public class BannerMetaMock extends ItemMetaMock implements BannerMeta
 	{
 		super(meta);
 
-		this.baseColor = meta.getBaseColor();
 		this.patterns = new ArrayList<>(meta.getPatterns());
-	}
-
-	@Override
-	public @Nullable DyeColor getBaseColor()
-	{
-		return this.baseColor;
-	}
-
-	@Override
-	public void setBaseColor(@Nullable DyeColor color)
-	{
-		this.baseColor = color;
 	}
 
 	@Override
@@ -102,7 +87,6 @@ public class BannerMetaMock extends ItemMetaMock implements BannerMeta
 	{
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((baseColor == null) ? 0 : baseColor.hashCode());
 		result = prime * result + (this.patterns.hashCode());
 		return result;
 	}
@@ -111,8 +95,10 @@ public class BannerMetaMock extends ItemMetaMock implements BannerMeta
 	public boolean equals(Object obj)
 	{
 		if (!(obj instanceof BannerMeta meta))
+		{
 			return false;
-		return super.equals(obj) && this.baseColor == meta.getBaseColor() && this.patterns.equals(meta.getPatterns());
+		}
+		return super.equals(obj) && this.patterns.equals(meta.getPatterns());
 	}
 
 	@Override
@@ -120,10 +106,44 @@ public class BannerMetaMock extends ItemMetaMock implements BannerMeta
 	{
 		BannerMetaMock clone = (BannerMetaMock) super.clone();
 
-		clone.baseColor = this.baseColor;
 		clone.patterns = new ArrayList<>(this.patterns);
 
 		return clone;
+	}
+
+	/**
+	 * Required method for Bukkit deserialization.
+	 *
+	 * @param args A serialized BannerMetaMock object in a Map&lt;String, Object&gt; format.
+	 * @return A new instance of the BannerMetaMock class.
+	 */
+	@SuppressWarnings("unchecked")
+	public static @NotNull BannerMetaMock deserialize(@NotNull Map<String, Object> args)
+	{
+		BannerMetaMock serialMock = new BannerMetaMock();
+		serialMock.deserializeInternal(args);
+		serialMock.setPatterns(((List<Map<String, Object>>) args.get("patterns")).stream().map(Pattern::new).toList());
+		return serialMock;
+	}
+
+	/**
+	 * Serializes the properties of an BannerMetaMock to a HashMap.
+	 * Unimplemented properties are not present in the map.
+	 *
+	 * @return A HashMap of String, Object pairs representing the BannerMetaMock.
+	 */
+	@Override
+	public @NotNull Map<String, Object> serialize()
+	{
+		final Map<String, Object> serialized = super.serialize();
+		serialized.put("patterns", this.patterns.stream().map(Pattern::serialize).toList());
+		return serialized;
+	}
+
+	@Override
+	protected String getTypeName()
+	{
+		return "BANNER";
 	}
 
 }

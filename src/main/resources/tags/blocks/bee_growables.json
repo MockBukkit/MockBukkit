@@ -1,16 +1,16 @@
 {
     "replace": false,
     "values": [
+        "minecraft:sweet_berry_bush",
+        "minecraft:cave_vines",
+        "minecraft:pitcher_crop",
+        "minecraft:carrots",
+        "minecraft:pumpkin_stem",
         "minecraft:torchflower_crop",
         "minecraft:beetroots",
+        "minecraft:melon_stem",
         "minecraft:cave_vines_plant",
         "minecraft:potatoes",
-        "minecraft:wheat",
-        "minecraft:pumpkin_stem",
-        "minecraft:melon_stem",
-        "minecraft:pitcher_crop",
-        "minecraft:cave_vines",
-        "minecraft:carrots",
-        "minecraft:sweet_berry_bush"
+        "minecraft:wheat"
     ]
 }

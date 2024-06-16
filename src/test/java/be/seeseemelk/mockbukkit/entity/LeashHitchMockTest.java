@@ -32,7 +32,7 @@ class LeashHitchMockTest
 	@Test
 	void testGetType()
 	{
-		assertEquals(EntityType.LEASH_HITCH,leashHitch.getType());
+		assertEquals(EntityType.LEASH_KNOT,leashHitch.getType());
 	}
 
 	@Test

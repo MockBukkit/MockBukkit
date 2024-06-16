@@ -206,7 +206,7 @@ class CreatureSpawnerMockTest
 	{
 		spawner.setSpawnedItem(new ItemStack(Material.STONE));
 
-		assertEquals(EntityType.DROPPED_ITEM, spawner.getSpawnedType());
+		assertEquals(EntityType.ITEM, spawner.getSpawnedType());
 	}
 
 	@Test

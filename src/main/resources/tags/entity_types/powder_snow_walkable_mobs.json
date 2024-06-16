@@ -1,9 +1,9 @@
 {
     "replace": false,
     "values": [
+        "minecraft:silverfish",
         "minecraft:endermite",
-        "minecraft:rabbit",
         "minecraft:fox",
-        "minecraft:silverfish"
+        "minecraft:rabbit"
     ]
 }

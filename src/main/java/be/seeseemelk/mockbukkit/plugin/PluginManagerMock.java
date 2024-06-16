@@ -8,7 +8,6 @@ import be.seeseemelk.mockbukkit.scheduler.BukkitSchedulerMock;
 import com.destroystokyo.paper.event.server.ServerExceptionEvent;
 import com.destroystokyo.paper.exception.ServerEventException;
 import com.google.common.base.Preconditions;
-import com.google.common.collect.ImmutableSet;
 import io.papermc.paper.plugin.PermissionManager;
 import io.papermc.paper.plugin.configuration.PluginMeta;
 import org.bukkit.command.PluginCommand;
@@ -20,9 +19,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.server.PluginEnableEvent;
-import org.bukkit.permissions.Permissible;
-import org.bukkit.permissions.Permission;
-import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.EventExecutor;
 import org.bukkit.plugin.IllegalPluginAccessException;
 import org.bukkit.plugin.InvalidDescriptionException;
@@ -54,21 +50,17 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
-import java.util.WeakHashMap;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.jar.JarFile;
 import java.util.logging.Level;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.fail;
@@ -86,9 +78,6 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	private final List<PluginCommand> commands = new ArrayList<>();
 	private final List<Event> events = new ArrayList<>();
 	private File parentTemporaryDirectory;
-	private final Map<String, Permission> permissions = new HashMap<>();
-	private final Map<Permissible, Set<String>> permissionSubscriptions = new HashMap<>();
-	private final Map<Boolean, Map<Permissible, Boolean>> defaultPermissionSubscriptions = new HashMap<>();
 	private final @NotNull Map<String, List<Listener>> listeners = new HashMap<>();
 
 	/**
@@ -718,6 +707,13 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 	}
 
 	@Override
+	public @NotNull Plugin[] loadPlugins(@NotNull File[] files)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public void disablePlugins()
 	{
 		for (Plugin plugin : plugins)
@@ -878,144 +874,6 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 //		{
 //			world.removePluginChunkTickets(plugin);
 //		}
-	}
-
-	@Override
-	public Permission getPermission(@NotNull String name)
-	{
-		Preconditions.checkNotNull(name, "Name cannot be null");
-		return permissions.get(name.toLowerCase(Locale.ENGLISH));
-	}
-
-	@Override
-	public void addPermission(@NotNull Permission perm)
-	{
-		Preconditions.checkNotNull(perm, "Permission cannot be null");
-		permissions.put(perm.getName().toLowerCase(Locale.ENGLISH), perm);
-	}
-
-	@Override
-	public void removePermission(@NotNull Permission perm)
-	{
-		Preconditions.checkNotNull(perm, "Permission cannot be null");
-		permissions.remove(perm.getName().toLowerCase(Locale.ENGLISH));
-	}
-
-	@Override
-	public void removePermission(@NotNull String name)
-	{
-		Preconditions.checkNotNull(name, "Name cannot be null");
-		permissions.remove(name.toLowerCase(Locale.ENGLISH));
-	}
-
-	@Override
-	public @NotNull Set<Permission> getDefaultPermissions(boolean op)
-	{
-		return this.permissions.values()
-				.stream()
-				.filter(perm -> perm.getDefault() == PermissionDefault.TRUE || op && perm.getDefault() == PermissionDefault.OP)
-				.collect(Collectors.toSet());
-	}
-
-	@Override
-	public void recalculatePermissionDefaults(@NotNull Permission perm)
-	{
-
-	}
-
-	/**
-	 * Gets a set of permissions that a {@link Permissible} is subscribed to.
-	 *
-	 * @param permissible The {@link Permissible} to check.
-	 * @return A {@link Set} of permissions the permissible is subscribed to. Is the {@link Permissible} isn't
-	 * subscribed to any, returns an empty set.
-	 */
-	private Set<String> getPermissionSubscriptions(@NotNull Permissible permissible)
-	{
-		Preconditions.checkNotNull(permissible, "Permissible cannot be null");
-		if (permissionSubscriptions.containsKey(permissible))
-		{
-			return permissionSubscriptions.get(permissible);
-		}
-		else
-		{
-			Set<String> subscriptions = new HashSet<>();
-			permissionSubscriptions.put(permissible, subscriptions);
-			return subscriptions;
-		}
-	}
-
-	@Override
-	public void subscribeToPermission(@NotNull String permission, @NotNull Permissible permissible)
-	{
-		Preconditions.checkNotNull(permission, "Permission cannot be null");
-		Preconditions.checkNotNull(permissible, "Permissible cannot be null");
-		getPermissionSubscriptions(permissible).add(permission);
-	}
-
-	@Override
-	public void unsubscribeFromPermission(@NotNull String permission, @NotNull Permissible permissible)
-	{
-		Preconditions.checkNotNull(permission, "Permission cannot be null");
-		Preconditions.checkNotNull(permissible, "Permissible cannot be null");
-		getPermissionSubscriptions(permissible).remove(permission);
-	}
-
-	@Override
-	public @NotNull Set<Permissible> getPermissionSubscriptions(@NotNull String permission)
-	{
-		Preconditions.checkNotNull(permission, "Permission cannot be null");
-		Set<Permissible> subscriptions = new HashSet<>();
-		for (Entry<Permissible, Set<String>> entry : permissionSubscriptions.entrySet())
-		{
-			Set<String> perms = entry.getValue();
-			Permissible permissible = entry.getKey();
-			if (perms.contains(permission))
-			{
-				subscriptions.add(permissible);
-			}
-		}
-		return subscriptions;
-	}
-
-	@Override
-	public void subscribeToDefaultPerms(boolean op, @NotNull Permissible permissible)
-	{
-		Preconditions.checkNotNull(permissible, "Permissible cannot be null");
-		Map<Permissible, Boolean> map = this.defaultPermissionSubscriptions.computeIfAbsent(op, k -> new WeakHashMap<>());
-		map.put(permissible, true);
-	}
-
-	@Override
-	public void unsubscribeFromDefaultPerms(boolean op, @NotNull Permissible permissible)
-	{
-		Preconditions.checkNotNull(permissible, "Permissible cannot be null");
-		Map<Permissible, Boolean> map = this.defaultPermissionSubscriptions.get(op);
-
-		if (map == null)
-		{
-			return;
-		}
-
-		map.remove(permissible);
-		if (map.isEmpty())
-		{
-			this.defaultPermissionSubscriptions.remove(op);
-		}
-	}
-
-	@Override
-	public @NotNull Set<Permissible> getDefaultPermSubscriptions(boolean op)
-	{
-		Map<Permissible, Boolean> map = this.defaultPermissionSubscriptions.get(op);
-
-		return map == null ? ImmutableSet.of() : ImmutableSet.copyOf(map.keySet());
-	}
-
-	@Override
-	public @NotNull Set<Permission> getPermissions()
-	{
-		return Set.copyOf(permissions.values());
 	}
 
 	/**

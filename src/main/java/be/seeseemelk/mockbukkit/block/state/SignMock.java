@@ -16,7 +16,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -27,9 +27,8 @@ import java.util.List;
 public class SignMock extends TileStateMock implements Sign
 {
 
-	private final String[] lines = { "", "", "", "" };
-	private @NotNull DyeColor color = DyeColor.BLACK;
-	private boolean glowing = false;
+	private final SignSideMock front;
+	private final SignSideMock back;
 
 	/**
 	 * Constructs a new {@link SignMock} for the provided {@link Material}.
@@ -41,6 +40,8 @@ public class SignMock extends TileStateMock implements Sign
 	{
 		super(material);
 		checkType(material, Tag.SIGNS);
+		this.front = new SignSideMock();
+		this.back = new SignSideMock();
 	}
 
 	/**
@@ -53,6 +54,8 @@ public class SignMock extends TileStateMock implements Sign
 	{
 		super(block);
 		checkType(block, Tag.SIGNS);
+		this.front = new SignSideMock();
+		this.back = new SignSideMock();
 	}
 
 	/**
@@ -63,39 +66,26 @@ public class SignMock extends TileStateMock implements Sign
 	protected SignMock(@NotNull SignMock state)
 	{
 		super(state);
-
-		for (int i = 0; i < 4; i++)
-		{
-			this.lines[i] = state.getLine(i);
-		}
-		this.color = state.getColor();
-		this.glowing = state.isGlowingText();
+		this.front = new SignSideMock(state.front);
+		this.back = new SignSideMock(state.back);
 	}
 
 	@Override
 	public @NotNull List<Component> lines()
 	{
-		List<Component> components = new ArrayList<>();
-
-		for (String line : this.lines)
-		{
-			components.add(LegacyComponentSerializer.legacySection().deserialize(line));
-		}
-
-		return components;
+		return front.lines();
 	}
 
 	@Override
 	public @NotNull Component line(int index) throws IndexOutOfBoundsException
 	{
-		return LegacyComponentSerializer.legacySection().deserialize(getLine(index));
+		return front.line(index);
 	}
 
 	@Override
 	public void line(int index, @NotNull Component line) throws IndexOutOfBoundsException
 	{
-		Preconditions.checkNotNull(line, "Line cannot be null!");
-		this.lines[index] = LegacyComponentSerializer.legacySection().serialize(line);
+		front.line(index, line);
 	}
 
 	@Override
@@ -103,28 +93,21 @@ public class SignMock extends TileStateMock implements Sign
 	@Deprecated(since = "1.16")
 	public String @NotNull [] getLines()
 	{
-		String[] text = new String[4];
-
-		for (int i = 0; i < 4; i++)
-		{
-			text[i] = getLine(i);
-		}
-
-		return text;
+		return front.getLines();
 	}
 
 	@Override
 	@Deprecated(since = "1.16")
 	public @NotNull String getLine(int index) throws IndexOutOfBoundsException
 	{
-		return this.lines[index];
+		return front.getLine(index);
 	}
 
 	@Override
 	@Deprecated(since = "1.16")
-	public void setLine(int index, @NotNull String line) throws IndexOutOfBoundsException
+	public void setLine(int index, String line) throws IndexOutOfBoundsException
 	{
-		this.lines[index] = line != null ? line : "";
+		front.setLine(index, line);
 	}
 
 	@Override
@@ -144,26 +127,25 @@ public class SignMock extends TileStateMock implements Sign
 	@Override
 	public boolean isGlowingText()
 	{
-		return this.glowing;
+		return front.isGlowingText();
 	}
 
 	@Override
 	public void setGlowingText(boolean glowing)
 	{
-		this.glowing = glowing;
+		front.setGlowingText(glowing);
 	}
 
 	@Override
 	public @NotNull DyeColor getColor()
 	{
-		return this.color;
+		return front.getColor();
 	}
 
 	@Override
 	public void setColor(@NotNull DyeColor color)
 	{
-		Preconditions.checkNotNull(color, "Color can not be null!");
-		this.color = color;
+		front.setColor(color);
 	}
 
 	@Override
@@ -183,8 +165,11 @@ public class SignMock extends TileStateMock implements Sign
 	@Override
 	public @NotNull SignSide getSide(@NotNull Side side)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return switch (side)
+		{
+			case FRONT -> front;
+			case BACK -> back;
+		};
 	}
 
 	@Override
@@ -212,6 +197,109 @@ public class SignMock extends TileStateMock implements Sign
 	public @NotNull BlockState getSnapshot()
 	{
 		return new SignMock(this);
+	}
+
+	private static class SignSideMock implements SignSide
+	{
+
+		private final Component[] lines;
+		private boolean glowing = false;
+		private DyeColor color = DyeColor.BLACK;
+
+		private SignSideMock()
+		{
+			this.lines = new Component[4];
+			Arrays.fill(lines, Component.empty());
+		}
+
+		private SignSideMock(SignSide signSide)
+		{
+			this.lines = signSide.lines().toArray(new Component[0]);
+			this.glowing = signSide.isGlowingText();
+			this.color = signSide.getColor();
+		}
+
+		@Override
+		public @NotNull List<Component> lines()
+		{
+			return List.of(lines);
+		}
+
+		@Override
+		public @NotNull Component line(int index) throws IndexOutOfBoundsException
+		{
+			if (index < 0 || index >= lines.length)
+				throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+			return lines[index];
+		}
+
+		@Override
+		public void line(int index, @NotNull Component line) throws IndexOutOfBoundsException
+		{
+			Preconditions.checkNotNull(line, "Line cannot be null!");
+			if (index < 0 || index >= lines.length)
+				throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+			lines[index] = line;
+		}
+
+		@Override
+		public @NotNull String[] getLines()
+		{
+			return Arrays.stream(lines)
+					.map(LegacyComponentSerializer.legacySection()::serialize)
+					.toArray(String[]::new);
+		}
+
+		@Override
+		public @NotNull String getLine(int index) throws IndexOutOfBoundsException
+		{
+			if (index < 0 || index >= lines.length)
+				throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+			return LegacyComponentSerializer.legacySection().serialize(lines[index]);
+		}
+
+		// Please note: NullableProblems is suppressed because the method signature requires a non-null String but
+		// the implementation allows null values to be set.
+		@Override
+		public void setLine(int index, @SuppressWarnings("NullableProblems") String line) throws IndexOutOfBoundsException
+		{
+			if (index < 0 || index >= lines.length)
+				throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+			if (line == null)
+			{
+				lines[index] = Component.empty();
+			}
+			else
+			{
+				lines[index] = LegacyComponentSerializer.legacySection().deserialize(line);
+			}
+		}
+
+		@Override
+		public boolean isGlowingText()
+		{
+			return glowing;
+		}
+
+		@Override
+		public void setGlowingText(boolean glowing)
+		{
+			this.glowing = glowing;
+		}
+
+		@Override
+		public @NotNull DyeColor getColor()
+		{
+			return color;
+		}
+
+		@Override
+		public void setColor(@NotNull DyeColor color)
+		{
+			Preconditions.checkNotNull(color, "Color cannot be null!");
+			this.color = color;
+		}
+
 	}
 
 }

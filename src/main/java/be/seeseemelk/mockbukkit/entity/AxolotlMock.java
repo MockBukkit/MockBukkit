@@ -89,7 +89,7 @@ public class AxolotlMock extends AnimalsMock implements Axolotl
 	public boolean isBreedItem(@NotNull ItemStack stack)
 	{
 		Preconditions.checkNotNull(stack, "ItemStack cannot be null");
-		return Tag.AXOLOTL_TEMPT_ITEMS.isTagged(stack.getType());
+		return Tag.ITEMS_AXOLOTL_FOOD.isTagged(stack.getType());
 	}
 
 	@Override

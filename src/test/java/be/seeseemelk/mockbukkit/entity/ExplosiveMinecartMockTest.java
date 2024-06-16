@@ -36,7 +36,7 @@ class ExplosiveMinecartMockTest
 	@Test
 	void testGetType()
 	{
-		assertEquals(EntityType.MINECART_TNT, minecart.getType());
+		assertEquals(EntityType.TNT_MINECART, minecart.getType());
 	}
 
 	@Test

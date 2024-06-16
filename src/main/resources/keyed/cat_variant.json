@@ -1,0 +1,37 @@
+{
+  "values": [
+    {
+      "key": "minecraft:tabby"
+    },
+    {
+      "key": "minecraft:black"
+    },
+    {
+      "key": "minecraft:red"
+    },
+    {
+      "key": "minecraft:siamese"
+    },
+    {
+      "key": "minecraft:british_shorthair"
+    },
+    {
+      "key": "minecraft:calico"
+    },
+    {
+      "key": "minecraft:persian"
+    },
+    {
+      "key": "minecraft:ragdoll"
+    },
+    {
+      "key": "minecraft:white"
+    },
+    {
+      "key": "minecraft:jellie"
+    },
+    {
+      "key": "minecraft:all_black"
+    }
+  ]
+}

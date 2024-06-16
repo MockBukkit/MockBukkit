@@ -37,7 +37,7 @@ class SpawnerMinecartMockTest
 	@Test
 	void testGetType()
 	{
-		assertEquals(minecart.getType(), EntityType.MINECART_MOB_SPAWNER);
+		assertEquals(minecart.getType(), EntityType.SPAWNER_MINECART);
 	}
 
 }

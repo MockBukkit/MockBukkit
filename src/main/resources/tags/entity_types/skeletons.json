@@ -3,7 +3,7 @@
     "values": [
         "minecraft:skeleton_horse",
         "minecraft:skeleton",
-        "minecraft:stray",
-        "minecraft:wither_skeleton"
+        "minecraft:wither_skeleton",
+        "minecraft:stray"
     ]
 }

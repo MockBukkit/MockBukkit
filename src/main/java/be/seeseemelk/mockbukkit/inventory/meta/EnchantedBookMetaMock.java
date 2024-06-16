@@ -1,6 +1,8 @@
 package be.seeseemelk.mockbukkit.inventory.meta;
 
 import com.google.common.collect.ImmutableMap;
+import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.jetbrains.annotations.NotNull;
@@ -133,6 +135,57 @@ public class EnchantedBookMetaMock extends ItemMetaMock implements EnchantmentSt
 	public boolean removeStoredEnchant(@NotNull Enchantment ench) throws IllegalArgumentException
 	{
 		return storedEnchantments.remove(ench) != null;
+	}
+
+	/**
+	 * Required method for Bukkit deserialization.
+	 *
+	 * @param args A serialized EnchantedBookMetaMock object in a Map&lt;String, Object&gt; format.
+	 * @return A new instance of the EnchantedBookMetaMock class.
+	 */
+	public static @NotNull EnchantedBookMetaMock deserialize(@NotNull Map<String, Object> args)
+	{
+		EnchantedBookMetaMock serialMock = new EnchantedBookMetaMock();
+		serialMock.deserializeInternal(args);
+		if (args.containsKey("stored-enchantments"))
+		{
+			//noinspection unchecked
+			serialMock.storedEnchantments = ((Map<String, Integer>) args.get("stored-enchantments")).entrySet().stream()
+					.collect(ImmutableMap.toImmutableMap(entry -> getEnchantment(entry.getKey()), Map.Entry::getValue));
+		}
+		return serialMock;
+	}
+
+	/**
+	 * Serializes the properties of an EnchantedBookMetaMock to a HashMap.
+	 * Unimplemented properties are not present in the map.
+	 *
+	 * @return A HashMap of String, Object pairs representing the EnchantedBookMetaMock.
+	 */
+	@Override
+	public @NotNull Map<String, Object> serialize()
+	{
+		final Map<String, Object> serialized = super.serialize();
+		serialized.put("stored-enchantments", this.storedEnchantments.entrySet().stream()
+				.collect(ImmutableMap.toImmutableMap(entry -> getEnchantmentKey(entry.getKey()), Map.Entry::getValue)));
+		return serialized;
+	}
+
+	private static String getEnchantmentKey(Enchantment enchantment)
+	{
+		return enchantment.getKey().getKey();
+	}
+
+	private static Enchantment getEnchantment(String key)
+	{
+		NamespacedKey namespacedKey = NamespacedKey.minecraft(key);
+		return Registry.ENCHANTMENT.get(namespacedKey);
+	}
+
+	@Override
+	protected String getTypeName()
+	{
+		return "ENCHANTED";
 	}
 
 }

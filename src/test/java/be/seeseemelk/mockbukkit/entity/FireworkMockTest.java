@@ -48,7 +48,7 @@ class FireworkMockTest
 	void testEntitySpawning()
 	{
 		Location location = new Location(world, 100, 100, 100);
-		Firework firework = (Firework) world.spawnEntity(location, EntityType.FIREWORK);
+		Firework firework = (Firework) world.spawnEntity(location, EntityType.FIREWORK_ROCKET);
 
 		// Does our Firework exist in the correct World?
 		assertTrue(world.getEntities().contains(firework));
@@ -64,7 +64,7 @@ class FireworkMockTest
 	void testEntityType()
 	{
 		Firework firework = new FireworkMock(server, UUID.randomUUID());
-		assertEquals(EntityType.FIREWORK, firework.getType());
+		assertEquals(EntityType.FIREWORK_ROCKET, firework.getType());
 	}
 
 	@Test

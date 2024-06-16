@@ -7,6 +7,8 @@ import org.bukkit.inventory.meta.SpawnEggMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Map;
+
 /**
  * Mock implementation of an {@link SpawnEggMeta}.
  *
@@ -89,6 +91,25 @@ public class SpawnEggMetaMock extends ItemMetaMock implements SpawnEggMeta
 	public @NotNull SpawnEggMetaMock clone()
 	{
 		return (SpawnEggMetaMock) super.clone();
+	}
+
+	/**
+	 * Required method for Bukkit deserialization.
+	 *
+	 * @param args A serialized SpawnEggMetaMock object in a Map&lt;String, Object&gt; format.
+	 * @return A new instance of the SpawnEggMetaMock class.
+	 */
+	public static @NotNull SpawnEggMetaMock deserialize(@NotNull Map<String, Object> args)
+	{
+		SpawnEggMetaMock serialMock = new SpawnEggMetaMock();
+		serialMock.deserializeInternal(args);
+		return serialMock;
+	}
+
+	@Override
+	protected String getTypeName()
+	{
+		return "SPAWN_EGG";
 	}
 
 }

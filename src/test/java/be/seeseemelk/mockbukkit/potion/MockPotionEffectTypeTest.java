@@ -10,6 +10,11 @@ import org.bukkit.potion.PotionEffectType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.Arrays;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -131,6 +136,19 @@ class MockPotionEffectTypeTest
 	void getCategoryNotNull()
 	{
 		assertNotNull(PotionEffectType.ABSORPTION.getEffectCategory());
+	}
+
+
+	@ParameterizedTest
+	@MethodSource("getPotionEffectTypes")
+	void testDefaultPotionEffects(PotionEffectType potionEffectType)
+	{
+		assertNotNull(potionEffectType);
+	}
+
+	static Stream<PotionEffectType> getPotionEffectTypes()
+	{
+		return Arrays.stream(PotionEffectType.values());
 	}
 
 }

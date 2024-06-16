@@ -328,6 +328,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 			case LEGS -> getLeggings();
 			case CHEST -> getChestplate();
 			case HEAD -> getHelmet();
+			case BODY -> throw new UnimplementedOperationException();
 		};
 	}
 

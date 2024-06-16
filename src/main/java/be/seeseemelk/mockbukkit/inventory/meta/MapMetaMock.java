@@ -7,6 +7,7 @@ import org.bukkit.map.MapView;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -167,7 +168,9 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 	public boolean equals(Object obj)
 	{
 		if (!(obj instanceof MapMeta meta))
+		{
 			return false;
+		}
 		if (!super.equals(obj) ||
 				((this.hasMapId() || meta.hasMapId()) && !Objects.equals(this.mapId, meta.getMapId())) ||
 				!Objects.equals(this.mapView, meta.getMapView()) ||
@@ -185,6 +188,59 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 		clone.mapView = this.mapView;
 		clone.scaling = this.scaling;
 		return clone;
+	}
+
+	/**
+	 * Required method for Bukkit deserialization.
+	 *
+	 * @param args A serialized MapMetaMock object in a Map&lt;String, Object&gt; format.
+	 * @return A new instance of the MapMetaMock class.
+	 */
+	public static @NotNull MapMetaMock deserialize(@NotNull Map<String, Object> args)
+	{
+		MapMetaMock serialMock = new MapMetaMock();
+		serialMock.deserializeInternal(args);
+		serialMock.mapId = (Integer) args.get("map-id");
+		serialMock.mapView = (MapView) args.get("map-view");
+		if (args.containsKey("color"))
+		{
+			serialMock.color = Color.fromARGB((int) args.get("color"));
+		}
+		serialMock.scaling = (byte) args.get("scaling");
+		return serialMock;
+	}
+
+	/**
+	 * Serializes the properties of an MapMetaMock to a HashMap.
+	 * Unimplemented properties are not present in the map.
+	 *
+	 * @return A HashMap of String, Object pairs representing the MapMetaMock.
+	 */
+	@Override
+	public @NotNull Map<String, Object> serialize()
+	{
+		final Map<String, Object> serialized = super.serialize();
+		if (this.mapId != null)
+		{
+			serialized.put("map-id", this.mapId);
+		}
+		if (this.mapView != null)
+		{
+			serialized.put("map-view", this.mapView);
+		}
+		if (this.color != null)
+		{
+			serialized.put("color", this.color.asARGB());
+		}
+		serialized.put("scaling", this.scaling);
+
+		return serialized;
+	}
+
+	@Override
+	protected String getTypeName()
+	{
+		return "MAP";
 	}
 
 }

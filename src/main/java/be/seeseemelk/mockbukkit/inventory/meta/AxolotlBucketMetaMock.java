@@ -4,6 +4,8 @@ import org.bukkit.entity.Axolotl;
 import org.bukkit.inventory.meta.AxolotlBucketMeta;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Map;
+
 /**
  * Mock implementation of an {@link AxolotlBucketMeta}.
  *
@@ -69,7 +71,9 @@ public class AxolotlBucketMetaMock extends ItemMetaMock implements AxolotlBucket
 	public boolean equals(Object obj)
 	{
 		if (!(obj instanceof AxolotlBucketMeta meta))
+		{
 			return false;
+		}
 		return super.equals(obj) && this.variant == meta.getVariant();
 	}
 
@@ -81,6 +85,40 @@ public class AxolotlBucketMetaMock extends ItemMetaMock implements AxolotlBucket
 		clone.variant = this.variant;
 
 		return clone;
+	}
+
+	/**
+	 * Required method for Bukkit deserialization.
+	 *
+	 * @param args A serialized AxolotlBucketMetaMock object in a Map&lt;String, Object&gt; format.
+	 * @return A new instance of the AxolotlBucketMetaMock class.
+	 */
+	public static @NotNull AxolotlBucketMetaMock deserialize(@NotNull Map<String, Object> args)
+	{
+		AxolotlBucketMetaMock serialMock = new AxolotlBucketMetaMock();
+		serialMock.deserializeInternal(args);
+		serialMock.variant = (Axolotl.Variant) args.get("variant");
+		return serialMock;
+	}
+
+	/**
+	 * Serializes the properties of an AxolotlBucketMetaMock to a HashMap.
+	 * Unimplemented properties are not present in the map.
+	 *
+	 * @return A HashMap of String, Object pairs representing the AxolotlBucketMetaMock.
+	 */
+	@Override
+	public @NotNull Map<String, Object> serialize()
+	{
+		final Map<String, Object> serialized = super.serialize();
+		serialized.put("variant", this.variant);
+		return serialized;
+	}
+
+	@Override
+	protected String getTypeName()
+	{
+		return "AXOLOTL_BUCKET";
 	}
 
 }

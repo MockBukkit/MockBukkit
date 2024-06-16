@@ -1,0 +1,70 @@
+{
+  "values": [
+    {
+      "key": "minecraft:generic.max_health"
+    },
+    {
+      "key": "minecraft:generic.follow_range"
+    },
+    {
+      "key": "minecraft:generic.knockback_resistance"
+    },
+    {
+      "key": "minecraft:generic.movement_speed"
+    },
+    {
+      "key": "minecraft:generic.flying_speed"
+    },
+    {
+      "key": "minecraft:generic.attack_damage"
+    },
+    {
+      "key": "minecraft:generic.attack_knockback"
+    },
+    {
+      "key": "minecraft:generic.attack_speed"
+    },
+    {
+      "key": "minecraft:generic.armor"
+    },
+    {
+      "key": "minecraft:generic.armor_toughness"
+    },
+    {
+      "key": "minecraft:generic.fall_damage_multiplier"
+    },
+    {
+      "key": "minecraft:generic.luck"
+    },
+    {
+      "key": "minecraft:generic.max_absorption"
+    },
+    {
+      "key": "minecraft:generic.safe_fall_distance"
+    },
+    {
+      "key": "minecraft:generic.scale"
+    },
+    {
+      "key": "minecraft:generic.step_height"
+    },
+    {
+      "key": "minecraft:generic.gravity"
+    },
+    {
+      "key": "minecraft:generic.jump_strength"
+    },
+    {
+      "key": "minecraft:player.block_interaction_range"
+    },
+    {
+      "key": "minecraft:player.entity_interaction_range"
+    },
+    {
+      "key": "minecraft:player.block_break_speed"
+    },
+    {
+      "key": "minecraft:zombie.spawn_reinforcements"
+    }
+  ]
+}

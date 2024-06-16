@@ -29,8 +29,8 @@ public class AreaEffectCloudMock extends EntityMock implements AreaEffectCloud
 	private float radius = 3.0f;
 	private float radiusOnUse = 0.0f;
 	private float radiusPerTick = 0.0f;
-	private Particle particle = Particle.SPELL_MOB;
-	private PotionData basePotionData = new PotionData(PotionType.UNCRAFTABLE);
+	private PotionData basePotionData = new PotionData(PotionType.AWKWARD);
+	private Particle particle = Particle.ENTITY_EFFECT;
 	private final List<PotionEffect> customEffects = new ArrayList<>();
 	private int color = 0;
 	private ProjectileSource source = null;
@@ -152,27 +152,26 @@ public class AreaEffectCloudMock extends EntityMock implements AreaEffectCloud
 	}
 
 	@Override
-	public void setBasePotionData(@NotNull PotionData data)
+	public void setBasePotionData(@Nullable PotionData data)
 	{
-		Preconditions.checkNotNull(data, "PotionData cannot be null");
 		this.basePotionData = data;
 	}
 
 	@Override
-	public @NotNull PotionData getBasePotionData()
+	public @Nullable PotionData getBasePotionData()
 	{
 		return this.basePotionData;
 	}
 
 	@Override
-	public void setBasePotionType(@NotNull PotionType type)
+	public void setBasePotionType(@Nullable PotionType type)
 	{
 		//TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
 	@Override
-	public @NotNull PotionType getBasePotionType()
+	public @Nullable PotionType getBasePotionType()
 	{
 		//TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
