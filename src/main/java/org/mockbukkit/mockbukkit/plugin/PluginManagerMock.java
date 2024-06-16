@@ -4,6 +4,7 @@ import org.mockbukkit.mockbukkit.PermissionManagerMock;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.exception.EventHandlerException;
+import org.mockbukkit.mockbukkit.exception.PluginLoadException;
 import org.mockbukkit.mockbukkit.scheduler.BukkitSchedulerMock;
 import com.destroystokyo.paper.event.server.ServerExceptionEvent;
 import com.destroystokyo.paper.exception.ServerEventException;
@@ -407,7 +408,7 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 		}
 		catch (ReflectiveOperationException | IOException e)
 		{
-			throw new RuntimeException("Failed to instantiate plugin", e);
+			throw new PluginLoadException("Failed to instantiate plugin", e);
 		}
 	}
 
@@ -416,11 +417,11 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 		String name = description.getName();
 		if (name.equalsIgnoreCase("bukkit") || name.equalsIgnoreCase("minecraft") || name.equalsIgnoreCase("mojang"))
 		{
-			throw new RuntimeException("Restricted Name");
+			throw new PluginLoadException("Restricted Name");
 		}
 		if (!VALID_PLUGIN_NAMES.matcher(name).matches())
 		{
-			throw new RuntimeException("Invalid name. Must match " + VALID_PLUGIN_NAMES.pattern());
+			throw new PluginLoadException("Invalid name. Must match " + VALID_PLUGIN_NAMES.pattern());
 		}
 		File dataFolder = createTemporaryDirectory(name + "-" + description.getVersion());
 		File pluginFile = createTemporaryPluginFile(name + "-" + description.getVersion());
@@ -458,7 +459,7 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 		}
 		catch (IOException | InvalidDescriptionException e)
 		{
-			throw new RuntimeException(e);
+			throw new PluginLoadException(e);
 		}
 	}
 
@@ -709,7 +710,7 @@ public class PluginManagerMock extends PermissionManagerMock implements PluginMa
 		catch (IOException | InvalidDescriptionException | ClassNotFoundException | NoSuchMethodException |
 			   InstantiationException | IllegalAccessException | InvocationTargetException e)
 		{
-			throw new RuntimeException(e);
+			throw new PluginLoadException(e);
 		}
 	}
 
