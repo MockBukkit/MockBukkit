@@ -11,6 +11,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import org.bukkit.generator.structure.GeneratedStructure;
 import org.bukkit.generator.structure.Structure;
 import org.bukkit.persistence.PersistentDataContainer;
@@ -326,6 +327,13 @@ public class ChunkMock implements Chunk
 	@Override
 	public @NotNull Collection<GeneratedStructure> getStructures(@NotNull Structure structure)
 	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Collection<Player> getPlayersSeeingChunk()
+	{
+		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 

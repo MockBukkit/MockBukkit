@@ -46,6 +46,20 @@ public class FireballMock extends ProjectileMock implements Fireball
 	}
 
 	@Override
+	public void setAcceleration(@NotNull Vector vector)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Vector getAcceleration()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public void setPower(@NotNull Vector power)
 	{
 		// TODO Auto-generated method stub

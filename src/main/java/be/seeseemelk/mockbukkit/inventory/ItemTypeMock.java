@@ -134,6 +134,20 @@ public class ItemTypeMock implements ItemType
 	}
 
 	@Override
+	public boolean isCompostable()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public float getCompostChance()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @Nullable ItemType getCraftingRemainingItem()
 	{
 		throw new UnimplementedOperationException();

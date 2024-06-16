@@ -11,6 +11,7 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.potion.PotionEffectTypeCategory;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
@@ -123,6 +124,13 @@ public class MockPotionEffectType extends PotionEffectType
 	public boolean isInstant()
 	{
 		return instant;
+	}
+
+	@Override
+	public @NotNull PotionEffectTypeCategory getCategory()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
 	}
 
 	@Override
