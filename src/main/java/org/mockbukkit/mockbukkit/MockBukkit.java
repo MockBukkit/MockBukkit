@@ -15,6 +15,7 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mockbukkit.mockbukkit.exception.PluginLoadException;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -146,7 +147,7 @@ public class MockBukkit
 			// We *really* don't want to bother users with this error.
 			// It's only supposed to be used during unit tests, so if
 			// it fails it'll fail your test anyway.
-			throw new RuntimeException(e);
+			throw new PluginLoadException(e);
 		}
 	}
 
@@ -226,7 +227,7 @@ public class MockBukkit
 		}
 		catch (InvalidDescriptionException e)
 		{
-			throw new RuntimeException(e);
+			throw new PluginLoadException(e);
 		}
 	}
 
@@ -248,7 +249,7 @@ public class MockBukkit
 		}
 		catch (IOException e)
 		{
-			throw new RuntimeException(e);
+			throw new PluginLoadException(e);
 		}
 	}
 
@@ -377,7 +378,7 @@ public class MockBukkit
 		}
 		catch (IOException | InvalidConfigurationException e)
 		{
-			throw new RuntimeException(e);
+			throw new PluginLoadException(e);
 		}
 		instance.getConfig().setDefaults(yamlConfig);
 		mock.getPluginManager().enablePlugin(instance);
