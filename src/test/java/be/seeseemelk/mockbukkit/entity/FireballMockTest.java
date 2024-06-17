@@ -79,4 +79,44 @@ class FireballMockTest
 		assertTrue(fireball.isIncendiary());
 	}
 
+	@Test
+	void testGetAccelerationDefault()
+	{
+		assertEquals(new Vector(), fireball.getAcceleration());
+	}
+
+	@Test
+	void testSetAcceleration()
+	{
+		Vector direction = new Vector(1, 2, 3);
+		fireball.setAcceleration(direction);
+		assertEquals(direction, fireball.getAcceleration());
+	}
+
+	@Test
+	void testSetAccelerationNullThrowsException()
+	{
+		assertThrows(IllegalArgumentException.class, () -> fireball.setAcceleration(null));
+	}
+
+	@Test
+	void testGetPowerDefault()
+	{
+		assertEquals(new Vector(), fireball.getPower());
+	}
+
+	@Test
+	void testSetPower()
+	{
+		Vector direction = new Vector(1, 2, 3);
+		fireball.setPower(direction);
+		assertEquals(direction, fireball.getPower());
+	}
+
+	@Test
+	void testSetPowerNullThrowsException()
+	{
+		assertThrows(IllegalArgumentException.class, () -> fireball.setPower(null));
+	}
+
 }
