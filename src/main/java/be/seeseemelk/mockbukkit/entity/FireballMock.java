@@ -20,6 +20,7 @@ public class FireballMock extends ProjectileMock implements Fireball
 	private boolean isIncendiary;
 	private @NotNull Vector direction = new Vector();
 	private float blastYield = 1.0f;
+	private @NotNull Vector acceleration = new Vector();
 
 	/**
 	 * Constructs a new {@link FireballMock} on the provided {@link ServerMock} with a specified {@link UUID}.
@@ -46,31 +47,30 @@ public class FireballMock extends ProjectileMock implements Fireball
 	}
 
 	@Override
-	public void setAcceleration(@NotNull Vector vector)
+	public void setAcceleration(@NotNull Vector acceleration)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(acceleration != null, "Vector acceleration cannot be null");
+		this.acceleration = acceleration;
 	}
 
 	@Override
 	public @NotNull Vector getAcceleration()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.acceleration;
 	}
 
 	@Override
+	@Deprecated(since = "1.20.6")
 	public void setPower(@NotNull Vector power)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.setAcceleration(power);
 	}
 
 	@Override
+	@Deprecated(since = "1.20.6")
 	public @NotNull Vector getPower()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return this.getAcceleration();
 	}
 
 	@Override
