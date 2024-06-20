@@ -5,7 +5,7 @@ import org.hamcrest.TypeSafeMatcher;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.command.MessageTarget;
 
-public class MessageTargetReceivedAnyMessage extends TypeSafeMatcher<MessageTarget>
+public class MessageTargetReceivedAnyMessageMatcher extends TypeSafeMatcher<MessageTarget>
 {
 
 	private String nextMessage = null;
@@ -33,9 +33,9 @@ public class MessageTargetReceivedAnyMessage extends TypeSafeMatcher<MessageTarg
 	 *
 	 * @return A matcher which matches with any target that has received a message
 	 */
-	public static @NotNull MessageTargetReceivedAnyMessage hasReceivedAny()
+	public static @NotNull MessageTargetReceivedAnyMessageMatcher hasReceivedAny()
 	{
-		return new MessageTargetReceivedAnyMessage();
+		return new MessageTargetReceivedAnyMessageMatcher();
 	}
 
 }
