@@ -10,10 +10,10 @@ import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import org.mockbukkit.testutils.matcher.AbstractMatcherTest;
 
-import static org.mockbukkit.mockbukkit.matcher.command.MessageTargetReceivedAnyMessage.hasReceivedAny;
+import static org.mockbukkit.mockbukkit.matcher.command.MessageTargetReceivedAnyMessageMatcher.hasReceivedAny;
 
 @ExtendWith(MockBukkitExtension.class)
-class MessageTargetReceivedAnyMessageTest extends AbstractMatcherTest
+class MessageTargetReceivedAnyMessageMatcherTest extends AbstractMatcherTest
 {
 
 	@MockBukkitInject
