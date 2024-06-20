@@ -111,6 +111,7 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 		if (meta instanceof Damageable d)
 		{
 			this.damage = d.getDamage();
+			this.maxDamage = d.hasMaxDamage() ? d.getMaxDamage() : null;
 		}
 		if (meta instanceof Repairable r)
 		{
