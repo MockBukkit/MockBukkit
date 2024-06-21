@@ -68,12 +68,14 @@ class ItemMetaMockTest
 		meta.setLore(List.of("lore"));
 		meta.setUnbreakable(true);
 		meta.addItemFlags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES);
+		meta.setMaxDamage(512);
 		ItemMetaMock meta2 = new ItemMetaMock(meta);
 		meta2.setLore(List.of("lore"));
 		assertEquals(meta2, meta);
 		assertEquals(meta, meta2);
 		assertEquals(meta.hashCode(), meta2.hashCode());
 		assertEquals(meta.getItemFlags(), meta2.getItemFlags());
+		assertEquals(meta.getMaxDamage(), meta2.getMaxDamage());
 	}
 
 	@Test
