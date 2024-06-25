@@ -79,6 +79,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Registry;
 import org.bukkit.Server;
+import org.bukkit.ServerLinks;
 import org.bukkit.ServerTickManager;
 import org.bukkit.StructureType;
 import org.bukkit.Tag;
@@ -1851,6 +1852,13 @@ public class ServerMock extends Server.Spigot implements Server
 	}
 
 	@Override
+	public @NotNull ServerLinks getServerLinks()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @Nullable Component shutdownMessage()
 	{
 		return this.serverConfiguration.getShutdownMessage();
@@ -1961,15 +1969,6 @@ public class ServerMock extends Server.Spigot implements Server
 	{
 		Preconditions.checkNotNull(world, "World cannot be null");
 		return new MockChunkData(world);
-	}
-
-	@Override
-
-	@Deprecated(forRemoval = true)
-	public @NotNull ChunkData createVanillaChunkData(@NotNull World world, int x, int z)
-	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override

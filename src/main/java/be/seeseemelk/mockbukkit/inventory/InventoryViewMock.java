@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Mock implementation of an {@link InventoryView}.
  */
-public abstract class InventoryViewMock extends InventoryView
+public abstract class InventoryViewMock implements InventoryView
 {
 
 	private Inventory topInventory;

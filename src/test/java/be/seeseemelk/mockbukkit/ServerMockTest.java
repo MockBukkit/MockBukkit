@@ -33,7 +33,6 @@ import com.destroystokyo.paper.event.server.WhitelistToggleEvent;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import com.google.common.net.InetAddresses;
-import io.papermc.paper.world.structure.ConfiguredStructure;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Art;
@@ -1473,17 +1472,6 @@ class ServerMockTest
 		assertNotNull(registry);
 		if (clazz != KeyedBossBar.class)
 			assertTrue(registry.iterator().hasNext());
-	}
-
-	@ValueSource(classes = {
-			ConfiguredStructure.class
-	})
-	@ParameterizedTest
-	void getRegistry_InvalidType_Throws(Class<? extends Keyed> clazz)
-	{
-		Registry<? extends Keyed> registry = Bukkit.getRegistry(clazz);
-		assertNotNull(registry);
-		assertThrows(UnimplementedOperationException.class, () -> registry.iterator());
 	}
 
 	@Test

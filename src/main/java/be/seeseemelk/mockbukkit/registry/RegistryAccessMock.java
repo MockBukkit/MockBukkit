@@ -10,10 +10,10 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;
-import io.papermc.paper.world.structure.ConfiguredStructure;
 import org.bukkit.Keyed;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
+import org.bukkit.structure.Structure;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -39,12 +39,9 @@ public class RegistryAccessMock implements RegistryAccess
 
 
 	@Override
+	@Deprecated(forRemoval = true,since = "1.20.6")
 	public @Nullable <T extends Keyed> Registry<T> getRegistry(@NotNull Class<T> type)
 	{
-		if (type == ConfiguredStructure.class)
-		{
-			return createConfiguredStructureRegistry();
-		}
 		RegistryKey<T> registryKey = determineRegistryKeyFromClass(type);
 		if (registryKey == null)
 		{
@@ -164,31 +161,6 @@ public class RegistryAccessMock implements RegistryAccess
 			}
 		}
 		return output;
-	}
-
-	private static <T extends Keyed> Registry<T> createConfiguredStructureRegistry()
-	{
-		return new Registry<>()
-		{
-			@Override
-			public @Nullable T get(@NotNull NamespacedKey key)
-			{
-				throw new UnimplementedOperationException("Registry for type ConfiguredStructure not implemented");
-			}
-
-			@Override
-			public @NotNull Stream<T> stream()
-			{
-				throw new UnimplementedOperationException("Registry for type ConfiguredStructure not implemented");
-			}
-
-			@NotNull
-			@Override
-			public Iterator<T> iterator()
-			{
-				throw new UnimplementedOperationException("Registry for type ConfiguredStructure not implemented");
-			}
-		};
 	}
 
 	private static <T extends Keyed> Registry<T> findSimpleRegistry(Class<T> tClass)
