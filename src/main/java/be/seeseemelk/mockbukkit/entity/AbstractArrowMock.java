@@ -143,6 +143,20 @@ public class AbstractArrowMock extends AbstractProjectileMock implements Abstrac
 	}
 
 	@Override
+	public @Nullable ItemStack getWeapon()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setWeapon(@NotNull ItemStack item)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public @NotNull ItemStack getItemStack()
 	{
 		throw new UnimplementedOperationException();

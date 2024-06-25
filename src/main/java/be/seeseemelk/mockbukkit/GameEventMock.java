@@ -45,4 +45,18 @@ public class GameEventMock extends GameEvent
 		return new GameEventMock(key);
 	}
 
+	@Override
+	public int getRange()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public int getVibrationLevel()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
 }

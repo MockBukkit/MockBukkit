@@ -10,6 +10,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Multimap;
 import io.papermc.paper.inventory.tooltip.TooltipContext;
 import io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager;
+import io.papermc.paper.registry.tag.TagKey;
 import net.kyori.adventure.key.Keyed;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.flattener.ComponentFlattener;
@@ -567,6 +568,20 @@ public class MockUnsafeValues implements UnsafeValues
 	public @NotNull List<Component> computeTooltipLines(@NotNull ItemStack itemStack,
 														@NotNull TooltipContext tooltipContext,
 														@Nullable Player player)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public <A extends org.bukkit.Keyed, M> io.papermc.paper.registry.tag.@Nullable Tag<A> getTag(@NotNull TagKey<A> tagKey)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public ItemStack createEmptyStack()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

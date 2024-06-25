@@ -2232,36 +2232,6 @@ class WorldMockTest
 	}
 
 	@Test
-	void testDoesRespawnAnchorWork()
-	{
-		WorldMock world = new WorldMock(Material.DIRT, 3);
-		world.setEnvironment(World.Environment.NETHER);
-		assertTrue(world.doesRespawnAnchorWork());
-	}
-
-	@Test
-	void testDoesRespawnAnchorWorkFalse()
-	{
-		WorldMock world = new WorldMock(Material.DIRT, 3);
-		assertFalse(world.doesRespawnAnchorWork());
-		world.setEnvironment(World.Environment.THE_END);
-		assertFalse(world.doesRespawnAnchorWork());
-	}
-
-	@Test
-	void testIsUltrawarm()
-	{
-		WorldMock world = new WorldMock(Material.DIRT, 3);
-		world.setEnvironment(World.Environment.NETHER);
-		assertTrue(world.isUltrawarm());
-
-		world.setEnvironment(World.Environment.NORMAL);
-		assertFalse(world.isUltrawarm());
-		world.setEnvironment(World.Environment.THE_END);
-		assertFalse(world.isUltrawarm());
-	}
-
-	@Test
 	void testIsFixedTime()
 	{
 		WorldMock world = new WorldMock(Material.DIRT, 3);

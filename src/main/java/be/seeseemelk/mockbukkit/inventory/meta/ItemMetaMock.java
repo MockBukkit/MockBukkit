@@ -28,6 +28,7 @@ import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.Repairable;
 import org.bukkit.inventory.meta.components.FoodComponent;
+import org.bukkit.inventory.meta.components.JukeboxPlayableComponent;
 import org.bukkit.inventory.meta.components.ToolComponent;
 import org.bukkit.inventory.meta.tags.CustomItemTagContainer;
 import org.bukkit.persistence.PersistentDataContainer;
@@ -728,6 +729,20 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 	}
 
 	@Override
+	public boolean hasDamageValue()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void resetDamage()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
 	public boolean hasRepairCost()
 	{
 		return repairCost > 0;
@@ -1125,6 +1140,27 @@ public class ItemMetaMock implements ItemMeta, Damageable, Repairable
 
 	@Override
 	public void setTool(@Nullable ToolComponent toolComponent)
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public boolean hasJukeboxPlayable()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull JukeboxPlayableComponent getJukeboxPlayable()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public void setJukeboxPlayable(@Nullable JukeboxPlayableComponent jukeboxPlayable)
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();

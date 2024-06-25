@@ -6,7 +6,7 @@ Contributing Code to MockBukkit
 To get started contributing to MockBukkit, you will need a few things.
 
 - [Git](https://git-scm.com/downloads)
-- [Java 17 or newer](https://adoptium.net/).
+- [Java 21 or newer](https://adoptium.net/).
 
 ## :wrench: Setting up the project
 

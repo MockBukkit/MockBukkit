@@ -92,7 +92,6 @@ import be.seeseemelk.mockbukkit.entity.ZombieMock;
 import be.seeseemelk.mockbukkit.generator.BiomeProviderMock;
 import be.seeseemelk.mockbukkit.metadata.MetadataTable;
 import be.seeseemelk.mockbukkit.persistence.PersistentDataContainerMock;
-import com.destroystokyo.paper.HeightmapType;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import io.papermc.paper.block.fluid.FluidData;
@@ -782,14 +781,6 @@ public class WorldMock implements World
 	public @NotNull Block getHighestBlockAt(Location location)
 	{
 		return getHighestBlockAt(location, HeightMap.MOTION_BLOCKING);
-	}
-
-	@Override
-	@Deprecated(forRemoval = true, since = "1.15")
-	@ApiStatus.ScheduledForRemoval(inVersion = "1.21")
-	public int getHighestBlockYAt(int x, int z, @NotNull HeightmapType heightmap) throws UnsupportedOperationException
-	{
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -2640,53 +2631,10 @@ public class WorldMock implements World
 	}
 
 	@Override
-	@Deprecated(forRemoval = true)
-	@ApiStatus.ScheduledForRemoval(inVersion = "1.21")
-	public boolean isUltrawarm()
-	{
-		return this.isUltraWarm();
-	}
-
-	@Override
 	public double getCoordinateScale()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	@Deprecated(forRemoval = true)
-	@ApiStatus.ScheduledForRemoval(inVersion = "1.21")
-	public boolean hasSkylight()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	@Deprecated(forRemoval = true)
-	@ApiStatus.ScheduledForRemoval(inVersion = "1.21")
-	public boolean hasBedrockCeiling()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	@Deprecated(forRemoval = true)
-	@ApiStatus.ScheduledForRemoval(inVersion = "1.21")
-	public boolean doesBedWork()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	@Deprecated(forRemoval = true)
-	@ApiStatus.ScheduledForRemoval(inVersion = "1.21")
-	public boolean doesRespawnAnchorWork()
-	{
-		return isRespawnAnchorWorks();
 	}
 
 	@Override
