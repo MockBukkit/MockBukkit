@@ -2,6 +2,9 @@ package be.seeseemelk.mockbukkit;
 
 import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.InvalidConfigurationException;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.InvalidDescriptionException;
 import org.bukkit.plugin.InvalidPluginException;
@@ -9,13 +12,17 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 
@@ -25,7 +32,9 @@ import java.util.logging.Level;
 public class MockBukkit
 {
 
+	private static final Logger log = LoggerFactory.getLogger(MockBukkit.class);
 	private static @Nullable ServerMock mock = null;
+	private static final String BUKKIT_PLUGIN_SUPERCLASS = "org.bukkit.plugin.java.JavaPlugin";
 
 	private MockBukkit()
 	{
@@ -180,14 +189,7 @@ public class MockBukkit
 		ensureMocking();
 		PluginManagerMock pluginManager = mock.getPluginManager();
 		JavaPlugin instance = pluginManager.loadPlugin(plugin, parameters);
-		List<Permission> permissionList = instance.getDescription().getPermissions();
-		List<Permission> permissionsToLoad = new ArrayList<>();
-		permissionList.stream().filter(permission -> pluginManager.getPermission(permission.getName()) == null)
-				.forEach(permissionsToLoad::add);
-
-		pluginManager.addPermissions(permissionsToLoad);
-		pluginManager.enablePlugin(instance);
-		return plugin.cast(instance);
+		return processFinalLoad(plugin, instance, pluginManager);
 	}
 
 	/**
@@ -265,6 +267,117 @@ public class MockBukkit
 	public static <T extends JavaPlugin> @NotNull T loadWith(@NotNull Class<T> plugin, String descriptionFileName, Object... parameters)
 	{
 		return loadWith(plugin, ClassLoader.getSystemResourceAsStream(descriptionFileName), parameters);
+	}
+
+	/**
+	 * Loads and enables the Plugin with a specified Config File. It receives the {@code config.yml} as a InputStream
+	 * to load.
+	 *
+	 * @param <T>        The plugin's main class to load.
+	 * @param plugin     The plugin to load for mocking.
+	 * @param configStream The {@code InputStream} of the {@code config.yml} file to load.
+	 * @param parameters Extra parameters to pass on to the plugin constructor.
+	 * @return An instance of the plugin's main class.
+	 * @apiNote The File name can't be the same as the one the plugin loads by default
+	 */
+	public static <T extends JavaPlugin> @NotNull T loadWithConfig(
+			@NotNull Class<T> plugin,
+			InputStream configStream,
+			Object... parameters
+	)
+	{
+		FileConfiguration config = new YamlConfiguration();
+		try
+		{
+			config.load(new InputStreamReader(configStream));
+		}
+		catch (IOException | InvalidConfigurationException e)
+		{
+			throw new RuntimeException("Couldn't read config input stream",e);
+		}
+		return loadWithConfig(plugin, config, parameters);
+	}
+
+
+	/**
+	 * Loads and enables the Plugin with a specified Config File. It receives the {@code config.yml} to use as File
+	 * to load.
+	 *
+	 * @param <T>        The plugin's main class to load.
+	 * @param plugin     The plugin to load for mocking.
+	 * @param configFile The File of the {@code config.yml} file to load.
+	 * @param parameters Extra parameters to pass on to the plugin constructor.
+	 * @return An instance of the plugin's main class.
+	 * @apiNote The File name can't be the same as the one the plugin loads by default
+	 */
+	public static <T extends JavaPlugin> @NotNull T loadWithConfig(
+			@NotNull Class<T> plugin,
+			File configFile,
+			Object... parameters
+	)
+	{
+		FileConfiguration config = YamlConfiguration.loadConfiguration(configFile);
+		return loadWithConfig(plugin, config, parameters);
+	}
+
+	/**
+	 * Loads and enables the Plugin with a specified Config. It receives the {@code FileConfiguration} to load.
+	 *
+	 * @param <T>               The plugin's main class to load.
+	 * @param plugin            The plugin to load for mocking.
+	 * @param fileConfiguration The {@code FileConfiguration} to load.
+	 * @param parameters        Extra parameters to pass on to the plugin constructor.
+	 * @return An instance of the plugin's main class.
+	 * @apiNote The File name can't be the same as the one the plugin loads by default
+	 */
+	public static <T extends JavaPlugin> @NotNull T loadWithConfig(
+			@NotNull Class<T> plugin,
+			FileConfiguration fileConfiguration,
+			Object... parameters
+	)
+	{
+		ensureMocking();
+		PluginManagerMock pluginManager = mock.getPluginManager();
+		JavaPlugin instance = pluginManager.loadPlugin(plugin, parameters);
+
+		try
+		{
+			if (!instance.
+					getClass()
+					.getSuperclass()
+					.getSuperclass()
+					.getName()
+					.equals(BUKKIT_PLUGIN_SUPERCLASS))
+			{
+				throw new IllegalStateException("Invalid plugin superclass");
+			}
+			Field configField = instance
+					.getClass()
+					.getSuperclass()
+					.getSuperclass()
+					.getDeclaredField("newConfig");
+			configField.setAccessible(true);
+			configField.set(instance, fileConfiguration);
+		}
+		catch (NoSuchFieldException | IllegalAccessException e)
+		{
+			//TODO Replace with PluginLoadException once #1025 is merged
+			throw new RuntimeException("Can't load config", e);
+		}
+
+		return processFinalLoad(plugin, instance, pluginManager);
+	}
+
+	private static <T extends JavaPlugin> @NotNull T processFinalLoad(@NotNull Class<T> plugin, JavaPlugin instance, PluginManagerMock pluginManager)
+	{
+		List<Permission> permissionList = instance.getDescription().getPermissions();
+		List<Permission> permissionsToLoad = new ArrayList<>();
+		permissionList.stream().filter(permission -> pluginManager.getPermission(permission.getName()) == null)
+				.forEach(permissionsToLoad::add);
+
+		pluginManager.addPermissions(permissionsToLoad);
+		pluginManager.enablePlugin(instance);
+		return plugin.cast(instance);
 	}
 
 	/*public static <T extends JavaPlugin> T loadWith(Class<T> plugin, File configFile, Object... parameters)
