@@ -36,7 +36,7 @@ public class MockInternalPotionData implements PotionType.InternalPotionData
 		try
 		{
 			JsonObject data = loadData(namespacedKey);
-			tempPotionEffects = getPotionEffectFromData(data);
+			tempPotionEffects = getPotionEffectsFromData(data);
 		}
 		catch (IOException e)
 		{
@@ -104,23 +104,32 @@ public class MockInternalPotionData implements PotionType.InternalPotionData
 		return maxLevel;
 	}
 
-	private List<PotionEffect> getPotionEffectFromData(JsonObject data)
+	// TODO probably not the right solution to make this public static, but where should this utility method be located?
+
+	/**
+	 * Internal, do not use!
+	 */
+	public static PotionEffect getPotionEffectFromData(JsonElement potionEffectData)
 	{
-		List<PotionEffect> potionEffectsList = new ArrayList<>();
-		for (JsonElement potionEffectData : data.get("effects").getAsJsonArray())
-		{
-			JsonObject potionEffectDataObject = potionEffectData.getAsJsonObject();
-			NamespacedKey potionEffectTypeKey = Preconditions.checkNotNull(NamespacedKey.fromString(potionEffectDataObject.get("type").getAsString()));
-			PotionEffectType potionEffectType = Registry.POTION_EFFECT_TYPE.get(potionEffectTypeKey);
-			int duration = potionEffectDataObject.get("duration").getAsInt();
-			int amplifier = potionEffectDataObject.get("amplifier").getAsInt();
-			boolean ambient = potionEffectDataObject.get("ambient").getAsBoolean();
-			boolean particles = potionEffectDataObject.get("particles").getAsBoolean();
-			boolean icon = potionEffectDataObject.get("icon").getAsBoolean();
-			PotionEffect potionEffect = new PotionEffect(potionEffectType, duration, amplifier, ambient, particles, icon);
-			potionEffectsList.add(potionEffect);
-		}
-		return potionEffectsList;
+		JsonObject potionEffectDataObj = potionEffectData.getAsJsonObject();
+		NamespacedKey potionEffectTypeKey = Preconditions.checkNotNull(NamespacedKey.fromString(potionEffectDataObj.get("type").getAsString()));
+		PotionEffectType potionEffectType = Registry.POTION_EFFECT_TYPE.get(potionEffectTypeKey);
+		int duration = potionEffectDataObj.get("duration").getAsInt();
+		int amplifier = potionEffectDataObj.get("amplifier").getAsInt();
+		boolean ambient = potionEffectDataObj.get("ambient").getAsBoolean();
+		boolean particles = potionEffectDataObj.get("particles").getAsBoolean();
+		boolean icon = potionEffectDataObj.get("icon").getAsBoolean();
+		return new PotionEffect(potionEffectType, duration, amplifier, ambient, particles, icon);
+	}
+
+	/**
+	 * Internal, do not use!
+	 */
+	public static List<PotionEffect> getPotionEffectsFromData(JsonObject data)
+	{
+		return data.get("effects").getAsJsonArray().asList().stream()
+				.map(MockInternalPotionData::getPotionEffectFromData)
+				.toList();
 	}
 
 }

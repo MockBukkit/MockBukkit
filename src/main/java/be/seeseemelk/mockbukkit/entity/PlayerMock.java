@@ -300,11 +300,19 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 	}
 
 	/**
-	 * Simulates a Player consuming an Edible Item
+	 * Simulates a Player consuming an Edible Item. Some edibles inflict status effects on the consumer with a certain
+	 * probability.
 	 *
-	 * @param consumable The Item to consume
+	 * @param consumable          The Item to consume
+	 * @param inflictPotionEffect A flag determining whether potion effects that don't have a probability of 1 are
+	 *                            inflicted on the consumer. For example, consuming {@link Material#CHICKEN} has a 0.3
+	 *                            chance to inflict the hunger effect. If this flag is true, then the hunger effect will
+	 *                            be inflicted. Otherwise, it won't be inflicted. This does not prevent effects from
+	 *                            being inflicted that have a probability of 1. These will be inflicted regardless. The
+	 *                            flag is ignored if the edible does not inflict any potion effects.
+	 * @see PlayerMock#simulateConsumeItem(ItemStack)
 	 */
-	public void simulateConsumeItem(@NotNull ItemStack consumable)
+	public void simulateConsumeItem(@NotNull ItemStack consumable, boolean inflictPotionEffect)
 	{
 		Preconditions.checkNotNull(consumable, "Consumed Item can't be null");
 		Preconditions.checkArgument(consumable.getType().isEdible(), "Item is not Consumable");
@@ -345,21 +353,26 @@ public class PlayerMock extends HumanEntityMock implements Player, SoundReceiver
 			FoodConsumption foodConsumption = FoodConsumption.getFor(consumable.getType());
 			for (FoodConsumption.FoodEffect foodEffect : foodConsumption.foodEffects())
 			{
-				// TODO: how to handle foodEffect with probability?
-				EntityPotionEffectEvent entityPotionEffectEvent = new EntityPotionEffectEvent(this, null, foodEffect.potionEffect(), EntityPotionEffectEvent.Cause.FOOD, EntityPotionEffectEvent.Action.ADDED, false);
-				// TODO: this event does not check existing potion effects to determine the correct oldEffect, newEffect and action
-				// adding a PotionEffectType that is already on the entity should cause a "change" event, not an "add" event
-				Bukkit.getPluginManager().callEvent(entityPotionEffectEvent);
-
-				if(!event.isCancelled()) {
+				if (foodEffect.probability() == 1 || inflictPotionEffect)
+				{
 					addPotionEffect(foodEffect.potionEffect());
 				}
-
-
 			}
 		}
 
 		consumedItems.add(consumable);
+	}
+
+	/**
+	 * Simulates a Player consuming an Edible Item. If the edible inflicts status effects, these will be applied
+	 * regardless of their probability.
+	 *
+	 * @param consumable The Item to consume
+	 * @see PlayerMock#simulateConsumeItem(ItemStack, boolean)
+	 */
+	public void simulateConsumeItem(@NotNull ItemStack consumable)
+	{
+		simulateConsumeItem(consumable, true);
 	}
 
 	/**
