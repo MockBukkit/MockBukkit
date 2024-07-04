@@ -40,8 +40,9 @@ class SchedulerOverdueTasksMatcherTest extends AbstractMatcherTest
 				taskStarted.countDown();
 				tasksSaved.await();
 			}
-			catch (InterruptedException e)
+			catch (InterruptedException ignored)
 			{
+				// Code will end after reaching this point, therefore no-op
 			}
 		});
 		taskStarted.await();
